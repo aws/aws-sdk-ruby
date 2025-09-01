@@ -1,0 +1,32 @@
+module Aws::MediaLive
+  module Errors
+    class BadGatewayException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GatewayTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnprocessableEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def validation_errors: () -> Array[Types::ValidationError]?
+    end
+  end
+end

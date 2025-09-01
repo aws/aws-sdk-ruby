@@ -1,0 +1,5 @@
+  module Aws
+    module CloudControl
+      VERSION: String
+    end
+  end

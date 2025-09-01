@@ -1,0 +1,970 @@
+module Aws::CloudTrail
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudTrail::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsResponse]
+    end
+    def add_tags: (
+      ?resource_id: String,
+      ?tags_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _CancelQueryResponse
+      include Smithy::Client::_Response[Types::CancelQueryResponse]
+      def query_id: () -> String?
+      def query_status: () -> String?
+      def event_data_store_owner_account_id: () -> String?
+    end
+    def cancel_query: (
+      ?event_data_store: String,
+      ?query_id: String,
+      ?event_data_store_owner_account_id: String
+    ) -> _CancelQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelQueryResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def channel_arn: () -> String?
+      def name: () -> String?
+      def source: () -> String?
+      def destinations: () -> Array[Types::Destination]?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_channel: (
+      ?name: String,
+      ?source: String,
+      ?destinations: Array[
+        {
+          type: String,
+          location: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateDashboardResponse
+      include Smithy::Client::_Response[Types::CreateDashboardResponse]
+      def dashboard_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def widgets: () -> Array[Types::Widget]?
+      def tags_list: () -> Array[Types::Tag]?
+      def refresh_schedule: () -> Types::RefreshSchedule?
+      def termination_protection_enabled: () -> bool?
+    end
+    def create_dashboard: (
+      ?name: String,
+      ?refresh_schedule: {
+        frequency: {
+          unit: String,
+          value: Integer
+        },
+        status: String,
+        time_of_day: String
+      },
+      ?tags_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?termination_protection_enabled: bool,
+      ?widgets: Array[
+        {
+          query_statement: String,
+          query_parameters: Array[String],
+          view_properties: Hash[String, String]
+        }
+      ]
+    ) -> _CreateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDashboardResponse
+
+    interface _CreateEventDataStoreResponse
+      include Smithy::Client::_Response[Types::CreateEventDataStoreResponse]
+      def event_data_store_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+      def multi_region_enabled: () -> bool?
+      def organization_enabled: () -> bool?
+      def retention_period: () -> Integer?
+      def termination_protection_enabled: () -> bool?
+      def tags_list: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def kms_key_id: () -> String?
+      def billing_mode: () -> String?
+    end
+    def create_event_data_store: (
+      ?name: String,
+      ?advanced_event_selectors: Array[
+        {
+          name: String,
+          field_selectors: Array[
+            {
+              field: String,
+              equals: Array[String],
+              starts_with: untyped,
+              ends_with: untyped,
+              not_equals: untyped,
+              not_starts_with: untyped,
+              not_ends_with: untyped
+            }
+          ]
+        }
+      ],
+      ?multi_region_enabled: bool,
+      ?organization_enabled: bool,
+      ?retention_period: Integer,
+      ?termination_protection_enabled: bool,
+      ?tags_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?kms_key_id: String,
+      ?start_ingestion: bool,
+      ?billing_mode: String
+    ) -> _CreateEventDataStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventDataStoreResponse
+
+    interface _CreateTrailResponse
+      include Smithy::Client::_Response[Types::CreateTrailResponse]
+      def name: () -> String?
+      def s3_bucket_name: () -> String?
+      def s3_key_prefix: () -> String?
+      def sns_topic_name: () -> String?
+      def sns_topic_arn: () -> String?
+      def include_global_service_events: () -> bool?
+      def is_multi_region_trail: () -> bool?
+      def trail_arn: () -> String?
+      def log_file_validation_enabled: () -> bool?
+      def cloud_watch_logs_log_group_arn: () -> String?
+      def cloud_watch_logs_role_arn: () -> String?
+      def kms_key_id: () -> String?
+      def is_organization_trail: () -> bool?
+    end
+    def create_trail: (
+      ?name: String,
+      ?s3_bucket_name: String,
+      ?s3_key_prefix: String,
+      ?sns_topic_name: String,
+      ?include_global_service_events: bool,
+      ?is_multi_region_trail: bool,
+      ?enable_log_file_validation: bool,
+      ?cloud_watch_logs_log_group_arn: String,
+      ?cloud_watch_logs_role_arn: String,
+      ?kms_key_id: String,
+      ?is_organization_trail: bool,
+      ?tags_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrailResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Types::DeleteChannelResponse]
+    end
+    def delete_channel: (
+      ?channel: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeleteDashboardResponse
+      include Smithy::Client::_Response[Types::DeleteDashboardResponse]
+    end
+    def delete_dashboard: (
+      ?dashboard_id: String
+    ) -> _DeleteDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDashboardResponse
+
+    interface _DeleteEventDataStoreResponse
+      include Smithy::Client::_Response[Types::DeleteEventDataStoreResponse]
+    end
+    def delete_event_data_store: (
+      ?event_data_store: String
+    ) -> _DeleteEventDataStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventDataStoreResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteTrailResponse
+      include Smithy::Client::_Response[Types::DeleteTrailResponse]
+    end
+    def delete_trail: (
+      ?name: String
+    ) -> _DeleteTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrailResponse
+
+    interface _DeregisterOrganizationDelegatedAdminResponse
+      include Smithy::Client::_Response[Types::DeregisterOrganizationDelegatedAdminResponse]
+    end
+    def deregister_organization_delegated_admin: (
+      ?delegated_admin_account_id: String
+    ) -> _DeregisterOrganizationDelegatedAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterOrganizationDelegatedAdminResponse
+
+    interface _DescribeQueryResponse
+      include Smithy::Client::_Response[Types::DescribeQueryResponse]
+      def query_id: () -> String?
+      def query_string: () -> String?
+      def query_status: () -> String?
+      def query_statistics: () -> Types::QueryStatisticsForDescribeQuery?
+      def error_message: () -> String?
+      def delivery_s3_uri: () -> String?
+      def delivery_status: () -> String?
+      def prompt: () -> String?
+      def event_data_store_owner_account_id: () -> String?
+    end
+    def describe_query: (
+      ?event_data_store: String,
+      ?query_id: String,
+      ?query_alias: String,
+      ?refresh_id: String,
+      ?event_data_store_owner_account_id: String
+    ) -> _DescribeQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueryResponse
+
+    interface _DescribeTrailsResponse
+      include Smithy::Client::_Response[Types::DescribeTrailsResponse]
+      def trail_list: () -> Array[Types::Trail]?
+    end
+    def describe_trails: (
+      ?trail_name_list: Array[String],
+      ?include_shadow_trails: bool
+    ) -> _DescribeTrailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrailsResponse
+
+    interface _DisableFederationResponse
+      include Smithy::Client::_Response[Types::DisableFederationResponse]
+      def event_data_store_arn: () -> String?
+      def federation_status: () -> String?
+    end
+    def disable_federation: (
+      ?event_data_store: String
+    ) -> _DisableFederationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableFederationResponse
+
+    interface _EnableFederationResponse
+      include Smithy::Client::_Response[Types::EnableFederationResponse]
+      def event_data_store_arn: () -> String?
+      def federation_status: () -> String?
+      def federation_role_arn: () -> String?
+    end
+    def enable_federation: (
+      ?event_data_store: String,
+      ?federation_role_arn: String
+    ) -> _EnableFederationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableFederationResponse
+
+    interface _GenerateQueryResponse
+      include Smithy::Client::_Response[Types::GenerateQueryResponse]
+      def query_statement: () -> String?
+      def query_alias: () -> String?
+      def event_data_store_owner_account_id: () -> String?
+    end
+    def generate_query: (
+      ?event_data_stores: Array[String],
+      ?prompt: String
+    ) -> _GenerateQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateQueryResponse
+
+    interface _GetChannelResponse
+      include Smithy::Client::_Response[Types::GetChannelResponse]
+      def channel_arn: () -> String?
+      def name: () -> String?
+      def source: () -> String?
+      def source_config: () -> Types::SourceConfig?
+      def destinations: () -> Array[Types::Destination]?
+      def ingestion_status: () -> Types::IngestionStatus?
+    end
+    def get_channel: (
+      ?channel: String
+    ) -> _GetChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelResponse
+
+    interface _GetDashboardResponse
+      include Smithy::Client::_Response[Types::GetDashboardResponse]
+      def dashboard_arn: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def widgets: () -> Array[Types::Widget]?
+      def refresh_schedule: () -> Types::RefreshSchedule?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def last_refresh_id: () -> String?
+      def last_refresh_failure_reason: () -> String?
+      def termination_protection_enabled: () -> bool?
+    end
+    def get_dashboard: (
+      ?dashboard_id: String
+    ) -> _GetDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDashboardResponse
+
+    interface _GetEventConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEventConfigurationResponse]
+      def event_data_store_arn: () -> String?
+      def max_event_size: () -> String?
+      def context_key_selectors: () -> Array[Types::ContextKeySelector]?
+    end
+    def get_event_configuration: (
+      ?event_data_store: String
+    ) -> _GetEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventConfigurationResponse
+
+    interface _GetEventDataStoreResponse
+      include Smithy::Client::_Response[Types::GetEventDataStoreResponse]
+      def event_data_store_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+      def multi_region_enabled: () -> bool?
+      def organization_enabled: () -> bool?
+      def retention_period: () -> Integer?
+      def termination_protection_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def kms_key_id: () -> String?
+      def billing_mode: () -> String?
+      def federation_status: () -> String?
+      def federation_role_arn: () -> String?
+      def partition_keys: () -> Array[Types::PartitionKey]?
+    end
+    def get_event_data_store: (
+      ?event_data_store: String
+    ) -> _GetEventDataStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventDataStoreResponse
+
+    interface _GetEventSelectorsResponse
+      include Smithy::Client::_Response[Types::GetEventSelectorsResponse]
+      def trail_arn: () -> String?
+      def event_selectors: () -> Array[Types::EventSelector]?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+    end
+    def get_event_selectors: (
+      ?trail_name: String
+    ) -> _GetEventSelectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventSelectorsResponse
+
+    interface _GetImportResponse
+      include Smithy::Client::_Response[Types::GetImportResponse]
+      def import_id: () -> String?
+      def destinations: () -> Array[String]?
+      def import_source: () -> Types::ImportSource?
+      def start_event_time: () -> Time?
+      def end_event_time: () -> Time?
+      def import_status: () -> String?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def import_statistics: () -> Types::ImportStatistics?
+    end
+    def get_import: (
+      ?import_id: String
+    ) -> _GetImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportResponse
+
+    interface _GetInsightSelectorsResponse
+      include Smithy::Client::_Response[Types::GetInsightSelectorsResponse]
+      def trail_arn: () -> String?
+      def insight_selectors: () -> Array[Types::InsightSelector]?
+      def event_data_store_arn: () -> String?
+      def insights_destination: () -> String?
+    end
+    def get_insight_selectors: (
+      ?trail_name: String,
+      ?event_data_store: String
+    ) -> _GetInsightSelectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightSelectorsResponse
+
+    interface _GetQueryResultsResponse
+      include Smithy::Client::_Response[Types::GetQueryResultsResponse]
+      def query_status: () -> String?
+      def query_statistics: () -> Types::QueryStatistics?
+      def query_result_rows: () -> Array[Array[Hash[String, String]]]?
+      def next_token: () -> String?
+      def error_message: () -> String?
+    end
+    def get_query_results: (
+      ?event_data_store: String,
+      ?query_id: String,
+      ?next_token: String,
+      ?max_query_results: Integer,
+      ?event_data_store_owner_account_id: String
+    ) -> _GetQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResultsResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def resource_policy: () -> String?
+      def delegated_admin_resource_policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetTrailResponse
+      include Smithy::Client::_Response[Types::GetTrailResponse]
+      def trail: () -> Types::Trail?
+    end
+    def get_trail: (
+      ?name: String
+    ) -> _GetTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrailResponse
+
+    interface _GetTrailStatusResponse
+      include Smithy::Client::_Response[Types::GetTrailStatusResponse]
+      def is_logging: () -> bool?
+      def latest_delivery_error: () -> String?
+      def latest_notification_error: () -> String?
+      def latest_delivery_time: () -> Time?
+      def latest_notification_time: () -> Time?
+      def start_logging_time: () -> Time?
+      def stop_logging_time: () -> Time?
+      def latest_cloud_watch_logs_delivery_error: () -> String?
+      def latest_cloud_watch_logs_delivery_time: () -> Time?
+      def latest_digest_delivery_time: () -> Time?
+      def latest_digest_delivery_error: () -> String?
+      def latest_delivery_attempt_time: () -> String?
+      def latest_notification_attempt_time: () -> String?
+      def latest_notification_attempt_succeeded: () -> String?
+      def latest_delivery_attempt_succeeded: () -> String?
+      def time_logging_started: () -> String?
+      def time_logging_stopped: () -> String?
+    end
+    def get_trail_status: (
+      ?name: String
+    ) -> _GetTrailStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrailStatusResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def channels: () -> Array[Types::Channel]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListDashboardsResponse
+      include Smithy::Client::_Response[Types::ListDashboardsResponse]
+      def dashboards: () -> Array[Types::DashboardDetail]?
+      def next_token: () -> String?
+    end
+    def list_dashboards: (
+      ?name_prefix: String,
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDashboardsResponse
+
+    interface _ListEventDataStoresResponse
+      include Smithy::Client::_Response[Types::ListEventDataStoresResponse]
+      def event_data_stores: () -> Array[Types::EventDataStore]?
+      def next_token: () -> String?
+    end
+    def list_event_data_stores: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventDataStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventDataStoresResponse
+
+    interface _ListImportFailuresResponse
+      include Smithy::Client::_Response[Types::ListImportFailuresResponse]
+      def failures: () -> Array[Types::ImportFailureListItem]?
+      def next_token: () -> String?
+    end
+    def list_import_failures: (
+      ?import_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListImportFailuresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportFailuresResponse
+
+    interface _ListImportsResponse
+      include Smithy::Client::_Response[Types::ListImportsResponse]
+      def imports: () -> Array[Types::ImportsListItem]?
+      def next_token: () -> String?
+    end
+    def list_imports: (
+      ?max_results: Integer,
+      ?destination: String,
+      ?import_status: String,
+      ?next_token: String
+    ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
+
+    interface _ListInsightsMetricDataResponse
+      include Smithy::Client::_Response[Types::ListInsightsMetricDataResponse]
+      def event_source: () -> String?
+      def event_name: () -> String?
+      def insight_type: () -> String?
+      def error_code: () -> String?
+      def timestamps: () -> Array[Time]?
+      def values: () -> Array[Float]?
+      def next_token: () -> String?
+    end
+    def list_insights_metric_data: (
+      ?event_source: String,
+      ?event_name: String,
+      ?insight_type: String,
+      ?error_code: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?data_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInsightsMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInsightsMetricDataResponse
+
+    interface _ListPublicKeysResponse
+      include Smithy::Client::_Response[Types::ListPublicKeysResponse]
+      def public_key_list: () -> Array[Types::PublicKey]?
+      def next_token: () -> String?
+    end
+    def list_public_keys: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String
+    ) -> _ListPublicKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPublicKeysResponse
+
+    interface _ListQueriesResponse
+      include Smithy::Client::_Response[Types::ListQueriesResponse]
+      def queries: () -> Array[Types::Query]?
+      def next_token: () -> String?
+    end
+    def list_queries: (
+      ?event_data_store: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?query_status: String
+    ) -> _ListQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueriesResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def resource_tag_list: () -> Array[Types::ResourceTag]?
+      def next_token: () -> String?
+    end
+    def list_tags: (
+      ?resource_id_list: Array[String],
+      ?next_token: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListTrailsResponse
+      include Smithy::Client::_Response[Types::ListTrailsResponse]
+      def trails: () -> Array[Types::TrailInfo]?
+      def next_token: () -> String?
+    end
+    def list_trails: (
+      ?next_token: String
+    ) -> _ListTrailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrailsResponse
+
+    interface _LookupEventsResponse
+      include Smithy::Client::_Response[Types::LookupEventsResponse]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def lookup_events: (
+      ?lookup_attributes: Array[
+        {
+          attribute_key: String,
+          attribute_value: String
+        }
+      ],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?event_category: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _LookupEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LookupEventsResponse
+
+    interface _PutEventConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEventConfigurationResponse]
+      def event_data_store_arn: () -> String?
+      def max_event_size: () -> String?
+      def context_key_selectors: () -> Array[Types::ContextKeySelector]?
+    end
+    def put_event_configuration: (
+      ?event_data_store: String,
+      ?max_event_size: String,
+      ?context_key_selectors: Array[
+        {
+          type: String,
+          equals: Array[String]
+        }
+      ]
+    ) -> _PutEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventConfigurationResponse
+
+    interface _PutEventSelectorsResponse
+      include Smithy::Client::_Response[Types::PutEventSelectorsResponse]
+      def trail_arn: () -> String?
+      def event_selectors: () -> Array[Types::EventSelector]?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+    end
+    def put_event_selectors: (
+      ?trail_name: String,
+      ?event_selectors: Array[
+        {
+          read_write_type: String,
+          include_management_events: bool,
+          data_resources: Array[
+            {
+              type: String,
+              values: Array[String]
+            }
+          ],
+          exclude_management_event_sources: Array[String]
+        }
+      ],
+      ?advanced_event_selectors: Array[
+        {
+          name: String,
+          field_selectors: Array[
+            {
+              field: String,
+              equals: Array[String],
+              starts_with: untyped,
+              ends_with: untyped,
+              not_equals: untyped,
+              not_starts_with: untyped,
+              not_ends_with: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _PutEventSelectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventSelectorsResponse
+
+    interface _PutInsightSelectorsResponse
+      include Smithy::Client::_Response[Types::PutInsightSelectorsResponse]
+      def trail_arn: () -> String?
+      def insight_selectors: () -> Array[Types::InsightSelector]?
+      def event_data_store_arn: () -> String?
+      def insights_destination: () -> String?
+    end
+    def put_insight_selectors: (
+      ?trail_name: String,
+      ?insight_selectors: Array[
+        {
+          insight_type: String
+        }
+      ],
+      ?event_data_store: String,
+      ?insights_destination: String
+    ) -> _PutInsightSelectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInsightSelectorsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def resource_policy: () -> String?
+      def delegated_admin_resource_policy: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?resource_policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterOrganizationDelegatedAdminResponse
+      include Smithy::Client::_Response[Types::RegisterOrganizationDelegatedAdminResponse]
+    end
+    def register_organization_delegated_admin: (
+      ?member_account_id: String
+    ) -> _RegisterOrganizationDelegatedAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOrganizationDelegatedAdminResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Types::RemoveTagsResponse]
+    end
+    def remove_tags: (
+      ?resource_id: String,
+      ?tags_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _RestoreEventDataStoreResponse
+      include Smithy::Client::_Response[Types::RestoreEventDataStoreResponse]
+      def event_data_store_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+      def multi_region_enabled: () -> bool?
+      def organization_enabled: () -> bool?
+      def retention_period: () -> Integer?
+      def termination_protection_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def kms_key_id: () -> String?
+      def billing_mode: () -> String?
+    end
+    def restore_event_data_store: (
+      ?event_data_store: String
+    ) -> _RestoreEventDataStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreEventDataStoreResponse
+
+    interface _SearchSampleQueriesResponse
+      include Smithy::Client::_Response[Types::SearchSampleQueriesResponse]
+      def search_results: () -> Array[Types::SearchSampleQueriesSearchResult]?
+      def next_token: () -> String?
+    end
+    def search_sample_queries: (
+      ?search_phrase: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchSampleQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSampleQueriesResponse
+
+    interface _StartDashboardRefreshResponse
+      include Smithy::Client::_Response[Types::StartDashboardRefreshResponse]
+      def refresh_id: () -> String?
+    end
+    def start_dashboard_refresh: (
+      ?dashboard_id: String,
+      ?query_parameter_values: Hash[String, String]
+    ) -> _StartDashboardRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDashboardRefreshResponse
+
+    interface _StartEventDataStoreIngestionResponse
+      include Smithy::Client::_Response[Types::StartEventDataStoreIngestionResponse]
+    end
+    def start_event_data_store_ingestion: (
+      ?event_data_store: String
+    ) -> _StartEventDataStoreIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEventDataStoreIngestionResponse
+
+    interface _StartImportResponse
+      include Smithy::Client::_Response[Types::StartImportResponse]
+      def import_id: () -> String?
+      def destinations: () -> Array[String]?
+      def import_source: () -> Types::ImportSource?
+      def start_event_time: () -> Time?
+      def end_event_time: () -> Time?
+      def import_status: () -> String?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+    end
+    def start_import: (
+      ?destinations: Array[String],
+      ?import_source: {
+        s3: {
+          s3_location_uri: String,
+          s3_bucket_region: untyped,
+          s3_bucket_access_role_arn: untyped
+        }
+      },
+      ?start_event_time: Time,
+      ?end_event_time: Time,
+      ?import_id: String
+    ) -> _StartImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportResponse
+
+    interface _StartLoggingResponse
+      include Smithy::Client::_Response[Types::StartLoggingResponse]
+    end
+    def start_logging: (
+      ?name: String
+    ) -> _StartLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLoggingResponse
+
+    interface _StartQueryResponse
+      include Smithy::Client::_Response[Types::StartQueryResponse]
+      def query_id: () -> String?
+      def event_data_store_owner_account_id: () -> String?
+    end
+    def start_query: (
+      ?query_statement: String,
+      ?delivery_s3_uri: String,
+      ?query_alias: String,
+      ?query_parameters: Array[String],
+      ?event_data_store_owner_account_id: String
+    ) -> _StartQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryResponse
+
+    interface _StopEventDataStoreIngestionResponse
+      include Smithy::Client::_Response[Types::StopEventDataStoreIngestionResponse]
+    end
+    def stop_event_data_store_ingestion: (
+      ?event_data_store: String
+    ) -> _StopEventDataStoreIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEventDataStoreIngestionResponse
+
+    interface _StopImportResponse
+      include Smithy::Client::_Response[Types::StopImportResponse]
+      def import_id: () -> String?
+      def import_source: () -> Types::ImportSource?
+      def destinations: () -> Array[String]?
+      def import_status: () -> String?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def start_event_time: () -> Time?
+      def end_event_time: () -> Time?
+      def import_statistics: () -> Types::ImportStatistics?
+    end
+    def stop_import: (
+      ?import_id: String
+    ) -> _StopImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopImportResponse
+
+    interface _StopLoggingResponse
+      include Smithy::Client::_Response[Types::StopLoggingResponse]
+    end
+    def stop_logging: (
+      ?name: String
+    ) -> _StopLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopLoggingResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def channel_arn: () -> String?
+      def name: () -> String?
+      def source: () -> String?
+      def destinations: () -> Array[Types::Destination]?
+    end
+    def update_channel: (
+      ?channel: String,
+      ?destinations: Array[
+        {
+          type: String,
+          location: String
+        }
+      ],
+      ?name: String
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateDashboardResponse
+      include Smithy::Client::_Response[Types::UpdateDashboardResponse]
+      def dashboard_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def widgets: () -> Array[Types::Widget]?
+      def refresh_schedule: () -> Types::RefreshSchedule?
+      def termination_protection_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+    end
+    def update_dashboard: (
+      ?dashboard_id: String,
+      ?widgets: Array[
+        {
+          query_statement: String,
+          query_parameters: Array[String],
+          view_properties: Hash[String, String]
+        }
+      ],
+      ?refresh_schedule: {
+        frequency: {
+          unit: String,
+          value: Integer
+        },
+        status: String,
+        time_of_day: String
+      },
+      ?termination_protection_enabled: bool
+    ) -> _UpdateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDashboardResponse
+
+    interface _UpdateEventDataStoreResponse
+      include Smithy::Client::_Response[Types::UpdateEventDataStoreResponse]
+      def event_data_store_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def advanced_event_selectors: () -> Array[Types::AdvancedEventSelector]?
+      def multi_region_enabled: () -> bool?
+      def organization_enabled: () -> bool?
+      def retention_period: () -> Integer?
+      def termination_protection_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+      def updated_timestamp: () -> Time?
+      def kms_key_id: () -> String?
+      def billing_mode: () -> String?
+      def federation_status: () -> String?
+      def federation_role_arn: () -> String?
+    end
+    def update_event_data_store: (
+      ?event_data_store: String,
+      ?name: String,
+      ?advanced_event_selectors: Array[
+        {
+          name: String,
+          field_selectors: Array[
+            {
+              field: String,
+              equals: Array[String],
+              starts_with: untyped,
+              ends_with: untyped,
+              not_equals: untyped,
+              not_starts_with: untyped,
+              not_ends_with: untyped
+            }
+          ]
+        }
+      ],
+      ?multi_region_enabled: bool,
+      ?organization_enabled: bool,
+      ?retention_period: Integer,
+      ?termination_protection_enabled: bool,
+      ?kms_key_id: String,
+      ?billing_mode: String
+    ) -> _UpdateEventDataStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventDataStoreResponse
+
+    interface _UpdateTrailResponse
+      include Smithy::Client::_Response[Types::UpdateTrailResponse]
+      def name: () -> String?
+      def s3_bucket_name: () -> String?
+      def s3_key_prefix: () -> String?
+      def sns_topic_name: () -> String?
+      def sns_topic_arn: () -> String?
+      def include_global_service_events: () -> bool?
+      def is_multi_region_trail: () -> bool?
+      def trail_arn: () -> String?
+      def log_file_validation_enabled: () -> bool?
+      def cloud_watch_logs_log_group_arn: () -> String?
+      def cloud_watch_logs_role_arn: () -> String?
+      def kms_key_id: () -> String?
+      def is_organization_trail: () -> bool?
+    end
+    def update_trail: (
+      ?name: String,
+      ?s3_bucket_name: String,
+      ?s3_key_prefix: String,
+      ?sns_topic_name: String,
+      ?include_global_service_events: bool,
+      ?is_multi_region_trail: bool,
+      ?enable_log_file_validation: bool,
+      ?cloud_watch_logs_log_group_arn: String,
+      ?cloud_watch_logs_role_arn: String,
+      ?kms_key_id: String,
+      ?is_organization_trail: bool
+    ) -> _UpdateTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrailResponse
+  end
+end

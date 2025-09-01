@@ -1,0 +1,124 @@
+module Aws::KinesisVideoMedia
+  module Types
+
+    class ClientLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectionLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetMediaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?start_selector: Types::StartSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor start_selector: Types::StartSelector?
+    end
+
+    class GetMediaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor payload: String?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndpointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_selector_type: String,
+        ?after_fragment_number: String,
+        ?start_timestamp: Time,
+        ?continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_selector_type: String?
+      attr_accessor after_fragment_number: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor continuation_token: String?
+    end
+
+    module StartSelectorType
+      FRAGMENT_NUMBER: String
+      SERVER_TIMESTAMP: String
+      PRODUCER_TIMESTAMP: String
+      NOW: String
+      EARLIEST: String
+      CONTINUATION_TOKEN: String
+    end
+  end
+end

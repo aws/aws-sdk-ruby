@@ -1,0 +1,5 @@
+  module Aws
+    module Synthetics
+      VERSION: String
+    end
+  end

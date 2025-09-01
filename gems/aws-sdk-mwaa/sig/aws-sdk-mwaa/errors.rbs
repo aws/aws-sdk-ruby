@@ -1,0 +1,24 @@
+module Aws::MWAA
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RestApiClientException < Smithy::Client::ServiceError
+      def rest_api_status_code: () -> Integer?
+      def rest_api_response: () -> Smithy::Schema::document?
+    end
+    class RestApiServerException < Smithy::Client::ServiceError
+      def rest_api_status_code: () -> Integer?
+      def rest_api_response: () -> Smithy::Schema::document?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

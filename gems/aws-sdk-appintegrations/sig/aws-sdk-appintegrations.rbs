@@ -1,0 +1,5 @@
+  module Aws
+    module AppIntegrations
+      VERSION: String
+    end
+  end

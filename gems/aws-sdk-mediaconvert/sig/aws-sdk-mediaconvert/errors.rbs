@@ -1,0 +1,22 @@
+module Aws::MediaConvert
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

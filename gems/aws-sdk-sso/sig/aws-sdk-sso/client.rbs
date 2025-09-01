@@ -1,0 +1,89 @@
+module Aws::SSO
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSO::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetRoleCredentialsResponse
+      include Smithy::Client::_Response[Types::GetRoleCredentialsResponse]
+      def role_credentials: () -> Types::RoleCredentials?
+    end
+    def get_role_credentials: (
+      ?role_name: String,
+      ?account_id: String,
+      ?access_token: String
+    ) -> _GetRoleCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRoleCredentialsResponse
+
+    interface _ListAccountRolesResponse
+      include Smithy::Client::_Response[Types::ListAccountRolesResponse]
+      def next_token: () -> String?
+      def role_list: () -> Array[Types::RoleInfo]?
+    end
+    def list_account_roles: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?access_token: String,
+      ?account_id: String
+    ) -> _ListAccountRolesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountRolesResponse
+
+    interface _ListAccountsResponse
+      include Smithy::Client::_Response[Types::ListAccountsResponse]
+      def next_token: () -> String?
+      def account_list: () -> Array[Types::AccountInfo]?
+    end
+    def list_accounts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?access_token: String
+    ) -> _ListAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsResponse
+
+    interface _LogoutResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def logout: (
+      ?access_token: String
+    ) -> _LogoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LogoutResponse
+  end
+end

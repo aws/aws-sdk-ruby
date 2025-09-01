@@ -1,0 +1,1240 @@
+module Aws::MPA
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ActionCompletionStrategy
+      AUTO_COMPLETION_UPON_APPROVAL: String
+    end
+
+    class ApprovalStrategy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?mof_n: Types::MofNApprovalStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mof_n: Types::MofNApprovalStrategy?
+
+      class MofN < ApprovalStrategy
+      end
+      class Unknown < ApprovalStrategy
+      end
+    end
+
+    class ApprovalStrategyResponse
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?mof_n: Types::MofNApprovalStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mof_n: Types::MofNApprovalStrategy?
+
+      class MofN < ApprovalStrategyResponse
+      end
+      class Unknown < ApprovalStrategyResponse
+      end
+    end
+
+    class ApprovalTeamRequestApprover
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_identity_id: String,
+        ?primary_identity_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_identity_id: String?
+      attr_accessor primary_identity_source_arn: String?
+    end
+
+    module ApprovalTeamStatus
+      ACTIVE: String
+      INACTIVE: String
+      DELETING: String
+      PENDING: String
+    end
+
+    module ApprovalTeamStatusCode
+      VALIDATING: String
+      PENDING_ACTIVATION: String
+      FAILED_VALIDATION: String
+      FAILED_ACTIVATION: String
+      UPDATE_PENDING_APPROVAL: String
+      UPDATE_PENDING_ACTIVATION: String
+      UPDATE_FAILED_APPROVAL: String
+      UPDATE_FAILED_ACTIVATION: String
+      UPDATE_FAILED_VALIDATION: String
+      DELETE_PENDING_APPROVAL: String
+      DELETE_FAILED_APPROVAL: String
+      DELETE_FAILED_VALIDATION: String
+    end
+
+    class CancelSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+    end
+
+    class CancelSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateApprovalTeamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?approval_strategy: Types::ApprovalStrategy,
+        ?approvers: Array[Types::ApprovalTeamRequestApprover],
+        ?description: String,
+        ?policies: Array[Types::PolicyReference],
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor approval_strategy: Types::ApprovalStrategy?
+      attr_accessor approvers: Array[Types::ApprovalTeamRequestApprover]?
+      attr_accessor description: String?
+      attr_accessor policies: Array[Types::PolicyReference]?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateApprovalTeamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+    end
+
+    class CreateIdentitySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_parameters: Types::IdentitySourceParameters,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_parameters: Types::IdentitySourceParameters?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIdentitySourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_type: String,
+        ?identity_source_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_type: String?
+      attr_accessor identity_source_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class DeleteIdentitySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_arn: String?
+    end
+
+    class DeleteInactiveApprovalTeamVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version_id: String?
+    end
+
+    class DeleteInactiveApprovalTeamVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    module FilterField
+      ACTION_NAME: String
+      APPROVAL_TEAM_NAME: String
+      VOTING_TIME: String
+      VOTE: String
+      SESSION_STATUS: String
+      INITIATION_TIME: String
+    end
+
+    class GetApprovalTeamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetApprovalTeamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?approval_strategy: Types::ApprovalStrategyResponse,
+        ?number_of_approvers: Integer,
+        ?approvers: Array[Types::GetApprovalTeamResponseApprover],
+        ?arn: String,
+        ?description: String,
+        ?name: String,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+        ?update_session_arn: String,
+        ?version_id: String,
+        ?policies: Array[Types::PolicyReference],
+        ?last_update_time: Time,
+        ?pending_update: Types::PendingUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse?
+      attr_accessor number_of_approvers: Integer?
+      attr_accessor approvers: Array[Types::GetApprovalTeamResponseApprover]?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor update_session_arn: String?
+      attr_accessor version_id: String?
+      attr_accessor policies: Array[Types::PolicyReference]?
+      attr_accessor last_update_time: Time?
+      attr_accessor pending_update: Types::PendingUpdate?
+    end
+
+    class GetApprovalTeamResponseApprover
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approver_id: String,
+        ?response_time: Time,
+        ?primary_identity_id: String,
+        ?primary_identity_source_arn: String,
+        ?primary_identity_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approver_id: String?
+      attr_accessor response_time: Time?
+      attr_accessor primary_identity_id: String?
+      attr_accessor primary_identity_source_arn: String?
+      attr_accessor primary_identity_status: String?
+    end
+
+    class GetIdentitySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_arn: String?
+    end
+
+    class GetIdentitySourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_type: String,
+        ?identity_source_parameters: Types::IdentitySourceParametersForGet,
+        ?identity_source_arn: String,
+        ?creation_time: Time,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_type: String?
+      attr_accessor identity_source_parameters: Types::IdentitySourceParametersForGet?
+      attr_accessor identity_source_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+    end
+
+    class GetPolicyVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_version_arn: String?
+    end
+
+    class GetPolicyVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_version: Types::PolicyVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_version: Types::PolicyVersion?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_name: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_type: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_type: String,
+        ?policy_version_arn: String,
+        ?policy_name: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_type: String?
+      attr_accessor policy_version_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+        ?approval_team_arn: String,
+        ?approval_team_name: String,
+        ?protected_resource_arn: String,
+        ?approval_strategy: Types::ApprovalStrategyResponse,
+        ?number_of_approvers: Integer,
+        ?initiation_time: Time,
+        ?expiration_time: Time,
+        ?completion_time: Time,
+        ?description: String,
+        ?metadata: Hash[String, String],
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+        ?execution_status: String,
+        ?action_name: String,
+        ?requester_service_principal: String,
+        ?requester_principal_arn: String,
+        ?requester_account_id: String,
+        ?requester_region: String,
+        ?requester_comment: String,
+        ?action_completion_strategy: String,
+        ?approver_responses: Array[Types::GetSessionResponseApproverResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+      attr_accessor approval_team_arn: String?
+      attr_accessor approval_team_name: String?
+      attr_accessor protected_resource_arn: String?
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse?
+      attr_accessor number_of_approvers: Integer?
+      attr_accessor initiation_time: Time?
+      attr_accessor expiration_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor description: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor execution_status: String?
+      attr_accessor action_name: String?
+      attr_accessor requester_service_principal: String?
+      attr_accessor requester_principal_arn: String?
+      attr_accessor requester_account_id: String?
+      attr_accessor requester_region: String?
+      attr_accessor requester_comment: String?
+      attr_accessor action_completion_strategy: String?
+      attr_accessor approver_responses: Array[Types::GetSessionResponseApproverResponse]?
+    end
+
+    class GetSessionResponseApproverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approver_id: String,
+        ?identity_source_arn: String,
+        ?identity_id: String,
+        ?response: String,
+        ?response_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approver_id: String?
+      attr_accessor identity_source_arn: String?
+      attr_accessor identity_id: String?
+      attr_accessor response: String?
+      attr_accessor response_time: Time?
+    end
+
+    class IamIdentityCenter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor region: String?
+    end
+
+    class IamIdentityCenterForGet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?approval_portal_url: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor approval_portal_url: String?
+      attr_accessor region: String?
+    end
+
+    class IamIdentityCenterForList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?approval_portal_url: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor approval_portal_url: String?
+      attr_accessor region: String?
+    end
+
+    class IdentitySourceForList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source_type: String,
+        ?identity_source_parameters: Types::IdentitySourceParametersForList,
+        ?identity_source_arn: String,
+        ?creation_time: Time,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source_type: String?
+      attr_accessor identity_source_parameters: Types::IdentitySourceParametersForList?
+      attr_accessor identity_source_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+    end
+
+    class IdentitySourceParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_identity_center: Types::IamIdentityCenter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_identity_center: Types::IamIdentityCenter?
+    end
+
+    class IdentitySourceParametersForGet
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iam_identity_center: Types::IamIdentityCenterForGet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_identity_center: Types::IamIdentityCenterForGet?
+
+      class IamIdentityCenter < IdentitySourceParametersForGet
+      end
+      class Unknown < IdentitySourceParametersForGet
+      end
+    end
+
+    class IdentitySourceParametersForList
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iam_identity_center: Types::IamIdentityCenterForList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_identity_center: Types::IamIdentityCenterForList?
+
+      class IamIdentityCenter < IdentitySourceParametersForList
+      end
+      class Unknown < IdentitySourceParametersForList
+      end
+    end
+
+    module IdentitySourceStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      ERROR: String
+    end
+
+    module IdentitySourceStatusCode
+      ACCESS_DENIED: String
+      DELETION_FAILED: String
+      IDC_INSTANCE_NOT_FOUND: String
+      IDC_INSTANCE_NOT_VALID: String
+    end
+
+    module IdentitySourceType
+      IAM_IDENTITY_CENTER: String
+    end
+
+    module IdentityStatus
+      PENDING: String
+      ACCEPTED: String
+      REJECTED: String
+      INVALID: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApprovalTeamsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApprovalTeamsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?approval_teams: Array[Types::ListApprovalTeamsResponseApprovalTeam],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor approval_teams: Array[Types::ListApprovalTeamsResponseApprovalTeam]?
+    end
+
+    class ListApprovalTeamsResponseApprovalTeam
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?approval_strategy: Types::ApprovalStrategyResponse,
+        ?number_of_approvers: Integer,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse?
+      attr_accessor number_of_approvers: Integer?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+    end
+
+    class ListIdentitySourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentitySourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?identity_sources: Array[Types::IdentitySourceForList],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor identity_sources: Array[Types::IdentitySourceForList]?
+    end
+
+    class ListPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policies: Array[Types::Policy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policies: Array[Types::Policy]?
+    end
+
+    class ListPolicyVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor policy_arn: String?
+    end
+
+    class ListPolicyVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policy_versions: Array[Types::PolicyVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policy_versions: Array[Types::PolicyVersionSummary]?
+    end
+
+    class ListResourcePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcePoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_policies: Array[Types::ListResourcePoliciesResponseResourcePolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_policies: Array[Types::ListResourcePoliciesResponseResourcePolicy]?
+    end
+
+    class ListResourcePoliciesResponseResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?policy_type: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor policy_type: String?
+      attr_accessor policy_name: String?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_team_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_team_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sessions: Array[Types::ListSessionsResponseSession],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sessions: Array[Types::ListSessionsResponseSession]?
+    end
+
+    class ListSessionsResponseSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+        ?approval_team_name: String,
+        ?approval_team_arn: String,
+        ?initiation_time: Time,
+        ?expiration_time: Time,
+        ?completion_time: Time,
+        ?description: String,
+        ?action_name: String,
+        ?protected_resource_arn: String,
+        ?requester_service_principal: String,
+        ?requester_principal_arn: String,
+        ?requester_region: String,
+        ?requester_account_id: String,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+        ?action_completion_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+      attr_accessor approval_team_name: String?
+      attr_accessor approval_team_arn: String?
+      attr_accessor initiation_time: Time?
+      attr_accessor expiration_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor description: String?
+      attr_accessor action_name: String?
+      attr_accessor protected_resource_arn: String?
+      attr_accessor requester_service_principal: String?
+      attr_accessor requester_principal_arn: String?
+      attr_accessor requester_region: String?
+      attr_accessor requester_account_id: String?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor action_completion_strategy: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MofNApprovalStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_approvals_required: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_approvals_required: Integer?
+    end
+
+    module Operator
+      EQUALS: String
+      NOT_EQUALS: String
+      GREATER_THAN: String
+      LESS_THAN: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      LESS_THAN_OR_EQUAL_TO: String
+      CONTAINS: String
+      DOES_NOT_CONTAIN: String
+      BETWEEN: String
+    end
+
+    class PendingUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?description: String,
+        ?approval_strategy: Types::ApprovalStrategyResponse,
+        ?number_of_approvers: Integer,
+        ?status: String,
+        ?status_code: String,
+        ?status_message: String,
+        ?approvers: Array[Types::GetApprovalTeamResponseApprover],
+        ?update_initiation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor description: String?
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse?
+      attr_accessor number_of_approvers: Integer?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor approvers: Array[Types::GetApprovalTeamResponseApprover]?
+      attr_accessor update_initiation_time: Time?
+    end
+
+    class Policy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?default_version: Integer,
+        ?policy_type: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor default_version: Integer?
+      attr_accessor policy_type: String?
+      attr_accessor name: String?
+    end
+
+    class PolicyReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+    end
+
+    module PolicyStatus
+      ATTACHABLE: String
+      DEPRECATED: String
+    end
+
+    module PolicyType
+      AWS_MANAGED: String
+      AWS_RAM: String
+    end
+
+    class PolicyVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?policy_arn: String,
+        ?version_id: Integer,
+        ?policy_type: String,
+        ?is_default: bool,
+        ?name: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor policy_arn: String?
+      attr_accessor version_id: Integer?
+      attr_accessor policy_type: String?
+      attr_accessor is_default: bool?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor document: String?
+    end
+
+    class PolicyVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?policy_arn: String,
+        ?version_id: Integer,
+        ?policy_type: String,
+        ?is_default: bool,
+        ?name: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor policy_arn: String?
+      attr_accessor version_id: Integer?
+      attr_accessor policy_type: String?
+      attr_accessor is_default: bool?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SessionExecutionStatus
+      EXECUTED: String
+      FAILED: String
+      PENDING: String
+    end
+
+    module SessionResponse
+      APPROVED: String
+      REJECTED: String
+      NO_RESPONSE: String
+    end
+
+    module SessionStatus
+      PENDING: String
+      CANCELLED: String
+      APPROVED: String
+      FAILED: String
+      CREATING: String
+    end
+
+    module SessionStatusCode
+      REJECTED: String
+      EXPIRED: String
+      CONFIGURATION_CHANGED: String
+    end
+
+    class StartActiveApprovalTeamDeletionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending_window_days: Integer,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending_window_days: Integer?
+      attr_accessor arn: String?
+    end
+
+    class StartActiveApprovalTeamDeletionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_completion_time: Time,
+        ?deletion_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_completion_time: Time?
+      attr_accessor deletion_start_time: Time?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApprovalTeamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_strategy: Types::ApprovalStrategy,
+        ?approvers: Array[Types::ApprovalTeamRequestApprover],
+        ?description: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_strategy: Types::ApprovalStrategy?
+      attr_accessor approvers: Array[Types::ApprovalTeamRequestApprover]?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+    end
+
+    class UpdateApprovalTeamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

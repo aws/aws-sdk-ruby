@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+require 'aws-sdk-core'
+require 'smithy-json'
+require 'smithy-client'
+
+
+Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
+Aws.const_set('BedrockAgentCoreControl', Module.new) unless Aws.const_defined?('BedrockAgentCoreControl')
+
+# @title Amazon Bedrock Agent Core Control Plane Fronting Layer
+# <note> <p>Amazon Bedrock AgentCore is in preview release and is subject to change.</p> </note> <p>Amazon Bedrock Agent Core Control is a service that enables you to manage memory resources for your Amazon Bedrock agents.</p> <p>Use this API to create, retrieve, update, and delete memory resources and their associated memory strategies. Memory resources enable your agents to store and retrieve information from conversations and interactions.</p>
+module Aws::BedrockAgentCoreControl
+  VERSION = '2.0.0.pre0'
+end
+
+require_relative 'aws-sdk-bedrockagentcorecontrol/types'
+require_relative 'aws-sdk-bedrockagentcorecontrol/paginators'
+require_relative 'aws-sdk-bedrockagentcorecontrol/schema'
+require_relative 'aws-sdk-bedrockagentcorecontrol/auth_parameters'
+require_relative 'aws-sdk-bedrockagentcorecontrol/auth_resolver'
+require_relative 'aws-sdk-bedrockagentcorecontrol/client'
+require_relative 'aws-sdk-bedrockagentcorecontrol/customizations'
+require_relative 'aws-sdk-bedrockagentcorecontrol/errors'
+require_relative 'aws-sdk-bedrockagentcorecontrol/endpoint_parameters'
+require_relative 'aws-sdk-bedrockagentcorecontrol/endpoint_provider'
+require_relative 'aws-sdk-bedrockagentcorecontrol/waiters'

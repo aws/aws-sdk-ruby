@@ -1,0 +1,323 @@
+module Aws::Translate
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Translate::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateParallelDataResponse
+      include Smithy::Client::_Response[Types::CreateParallelDataResponse]
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def create_parallel_data: (
+      ?name: String,
+      ?description: String,
+      ?parallel_data_config: {
+        s3_uri: String,
+        format: String
+      },
+      ?encryption_key: {
+        type: String,
+        id: String
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateParallelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParallelDataResponse
+
+    interface _DeleteParallelDataResponse
+      include Smithy::Client::_Response[Types::DeleteParallelDataResponse]
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def delete_parallel_data: (
+      ?name: String
+    ) -> _DeleteParallelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteParallelDataResponse
+
+    interface _DeleteTerminologyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_terminology: (
+      ?name: String
+    ) -> _DeleteTerminologyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTerminologyResponse
+
+    interface _DescribeTextTranslationJobResponse
+      include Smithy::Client::_Response[Types::DescribeTextTranslationJobResponse]
+      def text_translation_job_properties: () -> Types::TextTranslationJobProperties?
+    end
+    def describe_text_translation_job: (
+      ?job_id: String
+    ) -> _DescribeTextTranslationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTextTranslationJobResponse
+
+    interface _GetParallelDataResponse
+      include Smithy::Client::_Response[Types::GetParallelDataResponse]
+      def parallel_data_properties: () -> Types::ParallelDataProperties?
+      def data_location: () -> Types::ParallelDataDataLocation?
+      def auxiliary_data_location: () -> Types::ParallelDataDataLocation?
+      def latest_update_attempt_auxiliary_data_location: () -> Types::ParallelDataDataLocation?
+    end
+    def get_parallel_data: (
+      ?name: String
+    ) -> _GetParallelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParallelDataResponse
+
+    interface _GetTerminologyResponse
+      include Smithy::Client::_Response[Types::GetTerminologyResponse]
+      def terminology_properties: () -> Types::TerminologyProperties?
+      def terminology_data_location: () -> Types::TerminologyDataLocation?
+      def auxiliary_data_location: () -> Types::TerminologyDataLocation?
+    end
+    def get_terminology: (
+      ?name: String,
+      ?terminology_data_format: String
+    ) -> _GetTerminologyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTerminologyResponse
+
+    interface _ImportTerminologyResponse
+      include Smithy::Client::_Response[Types::ImportTerminologyResponse]
+      def terminology_properties: () -> Types::TerminologyProperties?
+      def auxiliary_data_location: () -> Types::TerminologyDataLocation?
+    end
+    def import_terminology: (
+      ?name: String,
+      ?merge_strategy: String,
+      ?description: String,
+      ?terminology_data: {
+        file: String,
+        format: String,
+        directionality: String
+      },
+      ?encryption_key: {
+        type: String,
+        id: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportTerminologyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportTerminologyResponse
+
+    interface _ListLanguagesResponse
+      include Smithy::Client::_Response[Types::ListLanguagesResponse]
+      def languages: () -> Array[Types::Language]?
+      def display_language_code: () -> String?
+      def next_token: () -> String?
+    end
+    def list_languages: (
+      ?display_language_code: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLanguagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLanguagesResponse
+
+    interface _ListParallelDataResponse
+      include Smithy::Client::_Response[Types::ListParallelDataResponse]
+      def parallel_data_properties_list: () -> Array[Types::ParallelDataProperties]?
+      def next_token: () -> String?
+    end
+    def list_parallel_data: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListParallelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListParallelDataResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTerminologiesResponse
+      include Smithy::Client::_Response[Types::ListTerminologiesResponse]
+      def terminology_properties_list: () -> Array[Types::TerminologyProperties]?
+      def next_token: () -> String?
+    end
+    def list_terminologies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTerminologiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTerminologiesResponse
+
+    interface _ListTextTranslationJobsResponse
+      include Smithy::Client::_Response[Types::ListTextTranslationJobsResponse]
+      def text_translation_job_properties_list: () -> Array[Types::TextTranslationJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_text_translation_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submitted_before_time: Time,
+        submitted_after_time: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTextTranslationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTextTranslationJobsResponse
+
+    interface _StartTextTranslationJobResponse
+      include Smithy::Client::_Response[Types::StartTextTranslationJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def start_text_translation_job: (
+      ?job_name: String,
+      ?input_data_config: {
+        s3_uri: String,
+        content_type: String
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        encryption_key: {
+          type: String,
+          id: String
+        }
+      },
+      ?data_access_role_arn: String,
+      ?source_language_code: String,
+      ?target_language_codes: Array[String],
+      ?terminology_names: Array[String],
+      ?parallel_data_names: Array[String],
+      ?client_token: String,
+      ?settings: {
+        formality: String,
+        profanity: String,
+        brevity: String
+      }
+    ) -> _StartTextTranslationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTextTranslationJobResponse
+
+    interface _StopTextTranslationJobResponse
+      include Smithy::Client::_Response[Types::StopTextTranslationJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_text_translation_job: (
+      ?job_id: String
+    ) -> _StopTextTranslationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTextTranslationJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TranslateDocumentResponse
+      include Smithy::Client::_Response[Types::TranslateDocumentResponse]
+      def translated_document: () -> Types::TranslatedDocument?
+      def source_language_code: () -> String?
+      def target_language_code: () -> String?
+      def applied_terminologies: () -> Array[Types::AppliedTerminology]?
+      def applied_settings: () -> Types::TranslationSettings?
+    end
+    def translate_document: (
+      ?document: {
+        content: String,
+        content_type: String
+      },
+      ?terminology_names: Array[String],
+      ?source_language_code: String,
+      ?target_language_code: String,
+      ?settings: {
+        formality: String,
+        profanity: String,
+        brevity: String
+      }
+    ) -> _TranslateDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TranslateDocumentResponse
+
+    interface _TranslateTextResponse
+      include Smithy::Client::_Response[Types::TranslateTextResponse]
+      def translated_text: () -> String?
+      def source_language_code: () -> String?
+      def target_language_code: () -> String?
+      def applied_terminologies: () -> Array[Types::AppliedTerminology]?
+      def applied_settings: () -> Types::TranslationSettings?
+    end
+    def translate_text: (
+      ?text: String,
+      ?terminology_names: Array[String],
+      ?source_language_code: String,
+      ?target_language_code: String,
+      ?settings: {
+        formality: String,
+        profanity: String,
+        brevity: String
+      }
+    ) -> _TranslateTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TranslateTextResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateParallelDataResponse
+      include Smithy::Client::_Response[Types::UpdateParallelDataResponse]
+      def name: () -> String?
+      def status: () -> String?
+      def latest_update_attempt_status: () -> String?
+      def latest_update_attempt_at: () -> Time?
+    end
+    def update_parallel_data: (
+      ?name: String,
+      ?description: String,
+      ?parallel_data_config: {
+        s3_uri: String,
+        format: String
+      },
+      ?client_token: String
+    ) -> _UpdateParallelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateParallelDataResponse
+  end
+end

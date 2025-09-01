@@ -1,0 +1,44 @@
+module Aws::MediaConnect
+  module Errors
+    class AddFlowOutputs420Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class CreateBridge420Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreateFlow420Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreateGateway420Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GrantFlowEntitlements420Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+  end
+end

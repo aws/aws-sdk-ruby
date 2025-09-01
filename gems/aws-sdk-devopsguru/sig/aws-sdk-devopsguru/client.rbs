@@ -1,0 +1,523 @@
+module Aws::DevOpsGuru
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DevOpsGuru::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddNotificationChannelResponse
+      include Smithy::Client::_Response[Types::AddNotificationChannelResponse]
+      def id: () -> String?
+    end
+    def add_notification_channel: (
+      ?config: {
+        sns: {
+          topic_arn: String
+        },
+        filters: {
+          severities: Array[String],
+          message_types: Array[String]
+        }
+      }
+    ) -> _AddNotificationChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddNotificationChannelResponse
+
+    interface _DeleteInsightResponse
+      include Smithy::Client::_Response[Types::DeleteInsightResponse]
+    end
+    def delete_insight: (
+      ?id: String
+    ) -> _DeleteInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInsightResponse
+
+    interface _DescribeAccountHealthResponse
+      include Smithy::Client::_Response[Types::DescribeAccountHealthResponse]
+      def open_reactive_insights: () -> Integer?
+      def open_proactive_insights: () -> Integer?
+      def metrics_analyzed: () -> Integer?
+      def resource_hours: () -> Integer?
+      def analyzed_resource_count: () -> Integer?
+    end
+    def describe_account_health: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountHealthResponse
+
+    interface _DescribeAccountOverviewResponse
+      include Smithy::Client::_Response[Types::DescribeAccountOverviewResponse]
+      def reactive_insights: () -> Integer?
+      def proactive_insights: () -> Integer?
+      def mean_time_to_recover_in_milliseconds: () -> Integer?
+    end
+    def describe_account_overview: (
+      ?from_time: Time,
+      ?to_time: Time
+    ) -> _DescribeAccountOverviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountOverviewResponse
+
+    interface _DescribeAnomalyResponse
+      include Smithy::Client::_Response[Types::DescribeAnomalyResponse]
+      def proactive_anomaly: () -> Types::ProactiveAnomaly?
+      def reactive_anomaly: () -> Types::ReactiveAnomaly?
+    end
+    def describe_anomaly: (
+      ?id: String,
+      ?account_id: String
+    ) -> _DescribeAnomalyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnomalyResponse
+
+    interface _DescribeEventSourcesConfigResponse
+      include Smithy::Client::_Response[Types::DescribeEventSourcesConfigResponse]
+      def event_sources: () -> Types::EventSourcesConfig?
+    end
+    def describe_event_sources_config: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventSourcesConfigResponse
+
+    interface _DescribeFeedbackResponse
+      include Smithy::Client::_Response[Types::DescribeFeedbackResponse]
+      def insight_feedback: () -> Types::InsightFeedback?
+    end
+    def describe_feedback: (
+      ?insight_id: String
+    ) -> _DescribeFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFeedbackResponse
+
+    interface _DescribeInsightResponse
+      include Smithy::Client::_Response[Types::DescribeInsightResponse]
+      def proactive_insight: () -> Types::ProactiveInsight?
+      def reactive_insight: () -> Types::ReactiveInsight?
+    end
+    def describe_insight: (
+      ?id: String,
+      ?account_id: String
+    ) -> _DescribeInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightResponse
+
+    interface _DescribeOrganizationHealthResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationHealthResponse]
+      def open_reactive_insights: () -> Integer?
+      def open_proactive_insights: () -> Integer?
+      def metrics_analyzed: () -> Integer?
+      def resource_hours: () -> Integer?
+    end
+    def describe_organization_health: (
+      ?account_ids: Array[String],
+      ?organizational_unit_ids: Array[String]
+    ) -> _DescribeOrganizationHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationHealthResponse
+
+    interface _DescribeOrganizationOverviewResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationOverviewResponse]
+      def reactive_insights: () -> Integer?
+      def proactive_insights: () -> Integer?
+    end
+    def describe_organization_overview: (
+      ?from_time: Time,
+      ?to_time: Time,
+      ?account_ids: Array[String],
+      ?organizational_unit_ids: Array[String]
+    ) -> _DescribeOrganizationOverviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationOverviewResponse
+
+    interface _DescribeOrganizationResourceCollectionHealthResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationResourceCollectionHealthResponse]
+      def cloud_formation: () -> Array[Types::CloudFormationHealth]?
+      def service: () -> Array[Types::ServiceHealth]?
+      def account: () -> Array[Types::AccountHealth]?
+      def next_token: () -> String?
+      def tags: () -> Array[Types::TagHealth]?
+    end
+    def describe_organization_resource_collection_health: (
+      ?organization_resource_collection_type: String,
+      ?account_ids: Array[String],
+      ?organizational_unit_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeOrganizationResourceCollectionHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationResourceCollectionHealthResponse
+
+    interface _DescribeResourceCollectionHealthResponse
+      include Smithy::Client::_Response[Types::DescribeResourceCollectionHealthResponse]
+      def cloud_formation: () -> Array[Types::CloudFormationHealth]?
+      def service: () -> Array[Types::ServiceHealth]?
+      def next_token: () -> String?
+      def tags: () -> Array[Types::TagHealth]?
+    end
+    def describe_resource_collection_health: (
+      ?resource_collection_type: String,
+      ?next_token: String
+    ) -> _DescribeResourceCollectionHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceCollectionHealthResponse
+
+    interface _DescribeServiceIntegrationResponse
+      include Smithy::Client::_Response[Types::DescribeServiceIntegrationResponse]
+      def service_integration: () -> Types::ServiceIntegrationConfig?
+    end
+    def describe_service_integration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceIntegrationResponse
+
+    interface _GetCostEstimationResponse
+      include Smithy::Client::_Response[Types::GetCostEstimationResponse]
+      def resource_collection: () -> Types::CostEstimationResourceCollectionFilter?
+      def status: () -> String?
+      def costs: () -> Array[Types::ServiceResourceCost]?
+      def time_range: () -> Types::CostEstimationTimeRange?
+      def total_cost: () -> Float?
+      def next_token: () -> String?
+    end
+    def get_cost_estimation: (
+      ?next_token: String
+    ) -> _GetCostEstimationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostEstimationResponse
+
+    interface _GetResourceCollectionResponse
+      include Smithy::Client::_Response[Types::GetResourceCollectionResponse]
+      def resource_collection: () -> Types::ResourceCollectionFilter?
+      def next_token: () -> String?
+    end
+    def get_resource_collection: (
+      ?resource_collection_type: String,
+      ?next_token: String
+    ) -> _GetResourceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceCollectionResponse
+
+    interface _ListAnomaliesForInsightResponse
+      include Smithy::Client::_Response[Types::ListAnomaliesForInsightResponse]
+      def proactive_anomalies: () -> Array[Types::ProactiveAnomalySummary]?
+      def reactive_anomalies: () -> Array[Types::ReactiveAnomalySummary]?
+      def next_token: () -> String?
+    end
+    def list_anomalies_for_insight: (
+      ?insight_id: String,
+      ?start_time_range: {
+        from_time: Time,
+        to_time: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String,
+      ?filters: {
+        service_collection: {
+          service_names: Array[String]
+        }
+      }
+    ) -> _ListAnomaliesForInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomaliesForInsightResponse
+
+    interface _ListAnomalousLogGroupsResponse
+      include Smithy::Client::_Response[Types::ListAnomalousLogGroupsResponse]
+      def insight_id: () -> String?
+      def anomalous_log_groups: () -> Array[Types::AnomalousLogGroup]?
+      def next_token: () -> String?
+    end
+    def list_anomalous_log_groups: (
+      ?insight_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalousLogGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalousLogGroupsResponse
+
+    interface _ListEventsResponse
+      include Smithy::Client::_Response[Types::ListEventsResponse]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def list_events: (
+      ?filters: {
+        insight_id: String,
+        event_time_range: {
+          from_time: Time,
+          to_time: untyped
+        },
+        event_class: String,
+        event_source: String,
+        data_source: String,
+        resource_collection: {
+          cloud_formation: {
+            stack_names: Array[String]
+          },
+          tags: Array[
+            {
+              app_boundary_key: String,
+              tag_values: Array[String]
+            }
+          ]
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventsResponse
+
+    interface _ListInsightsResponse
+      include Smithy::Client::_Response[Types::ListInsightsResponse]
+      def proactive_insights: () -> Array[Types::ProactiveInsightSummary]?
+      def reactive_insights: () -> Array[Types::ReactiveInsightSummary]?
+      def next_token: () -> String?
+    end
+    def list_insights: (
+      ?status_filter: {
+        ongoing: {
+          type: String
+        },
+        closed: {
+          type: untyped,
+          end_time_range: {
+            from_time: Time,
+            to_time: untyped
+          }
+        },
+        any: {
+          type: untyped,
+          start_time_range: {
+            from_time: untyped,
+            to_time: untyped
+          }
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInsightsResponse
+
+    interface _ListMonitoredResourcesResponse
+      include Smithy::Client::_Response[Types::ListMonitoredResourcesResponse]
+      def monitored_resource_identifiers: () -> Array[Types::MonitoredResourceIdentifier]?
+      def next_token: () -> String?
+    end
+    def list_monitored_resources: (
+      ?filters: {
+        resource_permission: String,
+        resource_type_filters: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMonitoredResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMonitoredResourcesResponse
+
+    interface _ListNotificationChannelsResponse
+      include Smithy::Client::_Response[Types::ListNotificationChannelsResponse]
+      def channels: () -> Array[Types::NotificationChannel]?
+      def next_token: () -> String?
+    end
+    def list_notification_channels: (
+      ?next_token: String
+    ) -> _ListNotificationChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationChannelsResponse
+
+    interface _ListOrganizationInsightsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationInsightsResponse]
+      def proactive_insights: () -> Array[Types::ProactiveOrganizationInsightSummary]?
+      def reactive_insights: () -> Array[Types::ReactiveOrganizationInsightSummary]?
+      def next_token: () -> String?
+    end
+    def list_organization_insights: (
+      ?status_filter: {
+        ongoing: {
+          type: String
+        },
+        closed: {
+          type: untyped,
+          end_time_range: {
+            from_time: Time,
+            to_time: untyped
+          }
+        },
+        any: {
+          type: untyped,
+          start_time_range: {
+            from_time: untyped,
+            to_time: untyped
+          }
+        }
+      },
+      ?max_results: Integer,
+      ?account_ids: Array[String],
+      ?organizational_unit_ids: Array[String],
+      ?next_token: String
+    ) -> _ListOrganizationInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationInsightsResponse
+
+    interface _ListRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsResponse]
+      def recommendations: () -> Array[Types::Recommendation]?
+      def next_token: () -> String?
+    end
+    def list_recommendations: (
+      ?insight_id: String,
+      ?next_token: String,
+      ?locale: String,
+      ?account_id: String
+    ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
+
+    interface _PutFeedbackResponse
+      include Smithy::Client::_Response[Types::PutFeedbackResponse]
+    end
+    def put_feedback: (
+      ?insight_feedback: {
+        id: String,
+        feedback: String
+      }
+    ) -> _PutFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFeedbackResponse
+
+    interface _RemoveNotificationChannelResponse
+      include Smithy::Client::_Response[Types::RemoveNotificationChannelResponse]
+    end
+    def remove_notification_channel: (
+      ?id: String
+    ) -> _RemoveNotificationChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveNotificationChannelResponse
+
+    interface _SearchInsightsResponse
+      include Smithy::Client::_Response[Types::SearchInsightsResponse]
+      def proactive_insights: () -> Array[Types::ProactiveInsightSummary]?
+      def reactive_insights: () -> Array[Types::ReactiveInsightSummary]?
+      def next_token: () -> String?
+    end
+    def search_insights: (
+      ?start_time_range: {
+        from_time: Time,
+        to_time: untyped
+      },
+      ?filters: {
+        severities: Array[String],
+        statuses: Array[String],
+        resource_collection: {
+          cloud_formation: {
+            stack_names: Array[String]
+          },
+          tags: Array[
+            {
+              app_boundary_key: String,
+              tag_values: Array[String]
+            }
+          ]
+        },
+        service_collection: {
+          service_names: Array[String]
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _SearchInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchInsightsResponse
+
+    interface _SearchOrganizationInsightsResponse
+      include Smithy::Client::_Response[Types::SearchOrganizationInsightsResponse]
+      def proactive_insights: () -> Array[Types::ProactiveInsightSummary]?
+      def reactive_insights: () -> Array[Types::ReactiveInsightSummary]?
+      def next_token: () -> String?
+    end
+    def search_organization_insights: (
+      ?account_ids: Array[String],
+      ?start_time_range: {
+        from_time: Time,
+        to_time: untyped
+      },
+      ?filters: {
+        severities: Array[String],
+        statuses: Array[String],
+        resource_collection: {
+          cloud_formation: {
+            stack_names: Array[String]
+          },
+          tags: Array[
+            {
+              app_boundary_key: String,
+              tag_values: Array[String]
+            }
+          ]
+        },
+        service_collection: {
+          service_names: Array[String]
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _SearchOrganizationInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchOrganizationInsightsResponse
+
+    interface _StartCostEstimationResponse
+      include Smithy::Client::_Response[Types::StartCostEstimationResponse]
+    end
+    def start_cost_estimation: (
+      ?resource_collection: {
+        cloud_formation: {
+          stack_names: Array[String]
+        },
+        tags: Array[
+          {
+            app_boundary_key: String,
+            tag_values: Array[String]
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _StartCostEstimationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCostEstimationResponse
+
+    interface _UpdateEventSourcesConfigResponse
+      include Smithy::Client::_Response[Types::UpdateEventSourcesConfigResponse]
+    end
+    def update_event_sources_config: (
+      ?event_sources: {
+        amazon_code_guru_profiler: {
+          status: String
+        }
+      }
+    ) -> _UpdateEventSourcesConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventSourcesConfigResponse
+
+    interface _UpdateResourceCollectionResponse
+      include Smithy::Client::_Response[Types::UpdateResourceCollectionResponse]
+    end
+    def update_resource_collection: (
+      ?action: String,
+      ?resource_collection: {
+        cloud_formation: {
+          stack_names: Array[String]
+        },
+        tags: Array[
+          {
+            app_boundary_key: String,
+            tag_values: Array[String]
+          }
+        ]
+      }
+    ) -> _UpdateResourceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceCollectionResponse
+
+    interface _UpdateServiceIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateServiceIntegrationResponse]
+    end
+    def update_service_integration: (
+      ?service_integration: {
+        ops_center: {
+          opt_in_status: String
+        },
+        logs_anomaly_detection: {
+          opt_in_status: untyped
+        },
+        kms_server_side_encryption: {
+          kms_key_id: String,
+          opt_in_status: untyped,
+          type: String
+        }
+      }
+    ) -> _UpdateServiceIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceIntegrationResponse
+  end
+end

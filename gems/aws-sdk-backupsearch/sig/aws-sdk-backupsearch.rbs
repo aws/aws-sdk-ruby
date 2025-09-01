@@ -1,0 +1,5 @@
+  module Aws
+    module BackupSearch
+      VERSION: String
+    end
+  end

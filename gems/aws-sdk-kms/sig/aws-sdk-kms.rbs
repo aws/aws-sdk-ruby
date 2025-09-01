@@ -1,0 +1,5 @@
+  module Aws
+    module KMS
+      VERSION: String
+    end
+  end

@@ -1,0 +1,7 @@
+module Aws::MediaTailor
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

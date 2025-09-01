@@ -1,0 +1,1507 @@
+module Aws::CostOptimizationHub
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountEnrollmentStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?status: String,
+        ?last_updated_timestamp: Time,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor created_timestamp: Time?
+    end
+
+    module ActionType
+      RIGHTSIZE: String
+      STOP: String
+      UPGRADE: String
+      PURCHASE_SAVINGS_PLANS: String
+      PURCHASE_RESERVED_INSTANCES: String
+      MIGRATE_TO_GRAVITON: String
+      DELETE: String
+      SCALE_IN: String
+    end
+
+    module AllocationStrategy
+      PRIORITIZED: String
+      LOWEST_PRICE: String
+    end
+
+    class AuroraDbClusterStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AuroraDbClusterStorageConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AuroraDbClusterStorageConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class AuroraDbClusterStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+    end
+
+    class BlockStoragePerformanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iops: Float,
+        ?throughput: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iops: Float?
+      attr_accessor throughput: Float?
+    end
+
+    class ComputeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu: Float,
+        ?memory_size_in_mb: Integer,
+        ?architecture: String,
+        ?platform: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu: Float?
+      attr_accessor memory_size_in_mb: Integer?
+      attr_accessor architecture: String?
+      attr_accessor platform: String?
+    end
+
+    class ComputeSavingsPlans
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::ComputeSavingsPlansConfiguration,
+        ?cost_calculation: Types::SavingsPlansCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::ComputeSavingsPlansConfiguration?
+      attr_accessor cost_calculation: Types::SavingsPlansCostCalculation?
+    end
+
+    class ComputeSavingsPlansConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?term: String,
+        ?payment_option: String,
+        ?hourly_commitment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor hourly_commitment: String?
+    end
+
+    class DbInstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_class: String?
+    end
+
+    class DynamoDbReservedCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::DynamoDbReservedCapacityConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::DynamoDbReservedCapacityConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class DynamoDbReservedCapacityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?number_of_capacity_units_to_purchase: String,
+        ?capacity_units: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor number_of_capacity_units_to_purchase: String?
+      attr_accessor capacity_units: String?
+    end
+
+    class EbsVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::EbsVolumeConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::EbsVolumeConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class EbsVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage: Types::StorageConfiguration,
+        ?performance: Types::BlockStoragePerformanceConfiguration,
+        ?attachment_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage: Types::StorageConfiguration?
+      attr_accessor performance: Types::BlockStoragePerformanceConfiguration?
+      attr_accessor attachment_state: String?
+    end
+
+    class Ec2AutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::Ec2AutoScalingGroupConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::Ec2AutoScalingGroupConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class Ec2AutoScalingGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::InstanceConfiguration,
+        ?mixed_instances: Array[Types::MixedInstanceConfiguration],
+        ?type: String,
+        ?allocation_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::InstanceConfiguration?
+      attr_accessor mixed_instances: Array[Types::MixedInstanceConfiguration]?
+      attr_accessor type: String?
+      attr_accessor allocation_strategy: String?
+    end
+
+    module Ec2AutoScalingGroupType
+      SINGLE_INSTANCE_TYPE: String
+      MIXED_INSTANCE_TYPES: String
+    end
+
+    class Ec2Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::Ec2InstanceConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::Ec2InstanceConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class Ec2InstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::InstanceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::InstanceConfiguration?
+    end
+
+    class Ec2InstanceSavingsPlans
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::Ec2InstanceSavingsPlansConfiguration,
+        ?cost_calculation: Types::SavingsPlansCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::Ec2InstanceSavingsPlansConfiguration?
+      attr_accessor cost_calculation: Types::SavingsPlansCostCalculation?
+    end
+
+    class Ec2InstanceSavingsPlansConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?term: String,
+        ?payment_option: String,
+        ?hourly_commitment: String,
+        ?instance_family: String,
+        ?savings_plans_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor hourly_commitment: String?
+      attr_accessor instance_family: String?
+      attr_accessor savings_plans_region: String?
+    end
+
+    class Ec2ReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::Ec2ReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::Ec2ReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class Ec2ReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?offering_class: String,
+        ?instance_family: String,
+        ?instance_type: String,
+        ?current_generation: String,
+        ?platform: String,
+        ?tenancy: String,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor offering_class: String?
+      attr_accessor instance_family: String?
+      attr_accessor instance_type: String?
+      attr_accessor current_generation: String?
+      attr_accessor platform: String?
+      attr_accessor tenancy: String?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    class EcsService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::EcsServiceConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::EcsServiceConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class EcsServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute: Types::ComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute: Types::ComputeConfiguration?
+    end
+
+    class ElastiCacheReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::ElastiCacheReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::ElastiCacheReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class ElastiCacheReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?instance_family: String,
+        ?instance_type: String,
+        ?current_generation: String,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor instance_family: String?
+      attr_accessor instance_type: String?
+      attr_accessor current_generation: String?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    module EnrollmentStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class EstimatedDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_discount: Float,
+        ?reserved_instances_discount: Float,
+        ?other_discount: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_discount: Float?
+      attr_accessor reserved_instances_discount: Float?
+      attr_accessor other_discount: Float?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restart_needed: bool,
+        ?rollback_possible: bool,
+        ?implementation_efforts: Array[String],
+        ?account_ids: Array[String],
+        ?regions: Array[String],
+        ?resource_types: Array[String],
+        ?action_types: Array[String],
+        ?tags: Array[Types::Tag],
+        ?resource_ids: Array[String],
+        ?resource_arns: Array[String],
+        ?recommendation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restart_needed: bool?
+      attr_accessor rollback_possible: bool?
+      attr_accessor implementation_efforts: Array[String]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor action_types: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor resource_ids: Array[String]?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor recommendation_ids: Array[String]?
+    end
+
+    class GetPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: String,
+        ?member_account_discount_visibility: String,
+        ?preferred_commitment: Types::PreferredCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: String?
+      attr_accessor member_account_discount_visibility: String?
+      attr_accessor preferred_commitment: Types::PreferredCommitment?
+    end
+
+    class GetRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+    end
+
+    class GetRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?account_id: String,
+        ?currency_code: String,
+        ?recommendation_lookback_period_in_days: Integer,
+        ?cost_calculation_lookback_period_in_days: Integer,
+        ?estimated_savings_percentage: Float,
+        ?estimated_savings_over_cost_calculation_lookback_period: Float,
+        ?current_resource_type: String,
+        ?recommended_resource_type: String,
+        ?region: String,
+        ?source: String,
+        ?last_refresh_timestamp: Time,
+        ?estimated_monthly_savings: Float,
+        ?estimated_monthly_cost: Float,
+        ?implementation_effort: String,
+        ?restart_needed: bool,
+        ?action_type: String,
+        ?rollback_possible: bool,
+        ?current_resource_details: Types::ResourceDetails,
+        ?recommended_resource_details: Types::ResourceDetails,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor currency_code: String?
+      attr_accessor recommendation_lookback_period_in_days: Integer?
+      attr_accessor cost_calculation_lookback_period_in_days: Integer?
+      attr_accessor estimated_savings_percentage: Float?
+      attr_accessor estimated_savings_over_cost_calculation_lookback_period: Float?
+      attr_accessor current_resource_type: String?
+      attr_accessor recommended_resource_type: String?
+      attr_accessor region: String?
+      attr_accessor source: String?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor estimated_monthly_savings: Float?
+      attr_accessor estimated_monthly_cost: Float?
+      attr_accessor implementation_effort: String?
+      attr_accessor restart_needed: bool?
+      attr_accessor action_type: String?
+      attr_accessor rollback_possible: bool?
+      attr_accessor current_resource_details: Types::ResourceDetails?
+      attr_accessor recommended_resource_details: Types::ResourceDetails?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ImplementationEffort
+      VERY_LOW: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      VERY_HIGH: String
+    end
+
+    class InstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaFunction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::LambdaFunctionConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::LambdaFunctionConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class LambdaFunctionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute: Types::ComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute: Types::ComputeConfiguration?
+    end
+
+    class ListEnrollmentStatusesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_organization_info: bool,
+        ?account_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_organization_info: bool?
+      attr_accessor account_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnrollmentStatusesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AccountEnrollmentStatus],
+        ?include_member_accounts: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AccountEnrollmentStatus]?
+      attr_accessor include_member_accounts: bool?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::Filter,
+        ?group_by: String,
+        ?max_results: Integer,
+        ?metrics: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::Filter?
+      attr_accessor group_by: String?
+      attr_accessor max_results: Integer?
+      attr_accessor metrics: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_total_deduped_savings: Float,
+        ?items: Array[Types::RecommendationSummary],
+        ?group_by: String,
+        ?currency_code: String,
+        ?metrics: Types::SummaryMetricsResult,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_total_deduped_savings: Float?
+      attr_accessor items: Array[Types::RecommendationSummary]?
+      attr_accessor group_by: String?
+      attr_accessor currency_code: String?
+      attr_accessor metrics: Types::SummaryMetricsResult?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::Filter,
+        ?order_by: Types::OrderBy,
+        ?include_all_recommendations: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::Filter?
+      attr_accessor order_by: Types::OrderBy?
+      attr_accessor include_all_recommendations: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Recommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Recommendation]?
+      attr_accessor next_token: String?
+    end
+
+    module MemberAccountDiscountVisibility
+      ALL: String
+      NONE: String
+    end
+
+    class MemoryDbReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::MemoryDbReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::MemoryDbReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class MemoryDbReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?instance_type: String,
+        ?instance_family: String,
+        ?size_flex_eligible: bool,
+        ?current_generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor instance_type: String?
+      attr_accessor instance_family: String?
+      attr_accessor size_flex_eligible: bool?
+      attr_accessor current_generation: String?
+    end
+
+    class MixedInstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class OpenSearchReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::OpenSearchReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::OpenSearchReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class OpenSearchReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?instance_type: String,
+        ?current_generation: String,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor instance_type: String?
+      attr_accessor current_generation: String?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    module Order
+      ASC: String
+      DESC: String
+    end
+
+    class OrderBy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension: String?
+      attr_accessor order: String?
+    end
+
+    module PaymentOption
+      ALL_UPFRONT: String
+      PARTIAL_UPFRONT: String
+      NO_UPFRONT: String
+    end
+
+    class PreferredCommitment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?term: String,
+        ?payment_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+    end
+
+    class RdsDbInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::RdsDbInstanceConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::RdsDbInstanceConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class RdsDbInstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::DbInstanceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::DbInstanceConfiguration?
+    end
+
+    class RdsDbInstanceStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::RdsDbInstanceStorageConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::RdsDbInstanceStorageConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class RdsDbInstanceStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?allocated_storage_in_gb: Float,
+        ?iops: Float,
+        ?storage_throughput: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor allocated_storage_in_gb: Float?
+      attr_accessor iops: Float?
+      attr_accessor storage_throughput: Float?
+    end
+
+    class RdsReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::RdsReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::RdsReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class RdsReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?instance_family: String,
+        ?instance_type: String,
+        ?size_flex_eligible: bool,
+        ?current_generation: String,
+        ?license_model: String,
+        ?database_edition: String,
+        ?database_engine: String,
+        ?deployment_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor instance_family: String?
+      attr_accessor instance_type: String?
+      attr_accessor size_flex_eligible: bool?
+      attr_accessor current_generation: String?
+      attr_accessor license_model: String?
+      attr_accessor database_edition: String?
+      attr_accessor database_engine: String?
+      attr_accessor deployment_option: String?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?current_resource_type: String,
+        ?recommended_resource_type: String,
+        ?estimated_monthly_savings: Float,
+        ?estimated_savings_percentage: Float,
+        ?estimated_monthly_cost: Float,
+        ?currency_code: String,
+        ?implementation_effort: String,
+        ?restart_needed: bool,
+        ?action_type: String,
+        ?rollback_possible: bool,
+        ?current_resource_summary: String,
+        ?recommended_resource_summary: String,
+        ?last_refresh_timestamp: Time,
+        ?recommendation_lookback_period_in_days: Integer,
+        ?source: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor current_resource_type: String?
+      attr_accessor recommended_resource_type: String?
+      attr_accessor estimated_monthly_savings: Float?
+      attr_accessor estimated_savings_percentage: Float?
+      attr_accessor estimated_monthly_cost: Float?
+      attr_accessor currency_code: String?
+      attr_accessor implementation_effort: String?
+      attr_accessor restart_needed: bool?
+      attr_accessor action_type: String?
+      attr_accessor rollback_possible: bool?
+      attr_accessor current_resource_summary: String?
+      attr_accessor recommended_resource_summary: String?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor recommendation_lookback_period_in_days: Integer?
+      attr_accessor source: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class RecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?estimated_monthly_savings: Float,
+        ?recommendation_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor estimated_monthly_savings: Float?
+      attr_accessor recommendation_count: Integer?
+    end
+
+    class RedshiftReservedInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::RedshiftReservedInstancesConfiguration,
+        ?cost_calculation: Types::ReservedInstancesCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::RedshiftReservedInstancesConfiguration?
+      attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation?
+    end
+
+    class RedshiftReservedInstancesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?service: String,
+        ?term: String,
+        ?payment_option: String,
+        ?reserved_instances_region: String,
+        ?upfront_cost: String,
+        ?monthly_recurring_cost: String,
+        ?normalized_units_to_purchase: String,
+        ?number_of_instances_to_purchase: String,
+        ?instance_family: String,
+        ?instance_type: String,
+        ?size_flex_eligible: bool,
+        ?current_generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor service: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor reserved_instances_region: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor monthly_recurring_cost: String?
+      attr_accessor normalized_units_to_purchase: String?
+      attr_accessor number_of_instances_to_purchase: String?
+      attr_accessor instance_family: String?
+      attr_accessor instance_type: String?
+      attr_accessor size_flex_eligible: bool?
+      attr_accessor current_generation: String?
+    end
+
+    class ReservedInstancesCostCalculation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing: Types::ReservedInstancesPricing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing: Types::ReservedInstancesPricing?
+    end
+
+    class ReservedInstancesPricing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_on_demand_cost: Float,
+        ?monthly_reservation_eligible_cost: Float,
+        ?savings_percentage: Float,
+        ?estimated_monthly_amortized_reservation_cost: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_on_demand_cost: Float?
+      attr_accessor monthly_reservation_eligible_cost: Float?
+      attr_accessor savings_percentage: Float?
+      attr_accessor estimated_monthly_amortized_reservation_cost: Float?
+    end
+
+    class ResourceCostCalculation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usages: Array[Types::Usage],
+        ?pricing: Types::ResourcePricing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usages: Array[Types::Usage]?
+      attr_accessor pricing: Types::ResourcePricing?
+    end
+
+    class ResourceDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?lambda_function: Types::LambdaFunction,
+        ?ecs_service: Types::EcsService,
+        ?ec2_instance: Types::Ec2Instance,
+        ?ebs_volume: Types::EbsVolume,
+        ?ec2_auto_scaling_group: Types::Ec2AutoScalingGroup,
+        ?ec2_reserved_instances: Types::Ec2ReservedInstances,
+        ?rds_reserved_instances: Types::RdsReservedInstances,
+        ?elasti_cache_reserved_instances: Types::ElastiCacheReservedInstances,
+        ?open_search_reserved_instances: Types::OpenSearchReservedInstances,
+        ?redshift_reserved_instances: Types::RedshiftReservedInstances,
+        ?ec2_instance_savings_plans: Types::Ec2InstanceSavingsPlans,
+        ?compute_savings_plans: Types::ComputeSavingsPlans,
+        ?sage_maker_savings_plans: Types::SageMakerSavingsPlans,
+        ?rds_db_instance: Types::RdsDbInstance,
+        ?rds_db_instance_storage: Types::RdsDbInstanceStorage,
+        ?aurora_db_cluster_storage: Types::AuroraDbClusterStorage,
+        ?dynamo_db_reserved_capacity: Types::DynamoDbReservedCapacity,
+        ?memory_db_reserved_instances: Types::MemoryDbReservedInstances,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_function: Types::LambdaFunction?
+      attr_accessor ecs_service: Types::EcsService?
+      attr_accessor ec2_instance: Types::Ec2Instance?
+      attr_accessor ebs_volume: Types::EbsVolume?
+      attr_accessor ec2_auto_scaling_group: Types::Ec2AutoScalingGroup?
+      attr_accessor ec2_reserved_instances: Types::Ec2ReservedInstances?
+      attr_accessor rds_reserved_instances: Types::RdsReservedInstances?
+      attr_accessor elasti_cache_reserved_instances: Types::ElastiCacheReservedInstances?
+      attr_accessor open_search_reserved_instances: Types::OpenSearchReservedInstances?
+      attr_accessor redshift_reserved_instances: Types::RedshiftReservedInstances?
+      attr_accessor ec2_instance_savings_plans: Types::Ec2InstanceSavingsPlans?
+      attr_accessor compute_savings_plans: Types::ComputeSavingsPlans?
+      attr_accessor sage_maker_savings_plans: Types::SageMakerSavingsPlans?
+      attr_accessor rds_db_instance: Types::RdsDbInstance?
+      attr_accessor rds_db_instance_storage: Types::RdsDbInstanceStorage?
+      attr_accessor aurora_db_cluster_storage: Types::AuroraDbClusterStorage?
+      attr_accessor dynamo_db_reserved_capacity: Types::DynamoDbReservedCapacity?
+      attr_accessor memory_db_reserved_instances: Types::MemoryDbReservedInstances?
+
+      class LambdaFunction < ResourceDetails
+      end
+      class EcsService < ResourceDetails
+      end
+      class Ec2Instance < ResourceDetails
+      end
+      class EbsVolume < ResourceDetails
+      end
+      class Ec2AutoScalingGroup < ResourceDetails
+      end
+      class Ec2ReservedInstances < ResourceDetails
+      end
+      class RdsReservedInstances < ResourceDetails
+      end
+      class ElastiCacheReservedInstances < ResourceDetails
+      end
+      class OpenSearchReservedInstances < ResourceDetails
+      end
+      class RedshiftReservedInstances < ResourceDetails
+      end
+      class Ec2InstanceSavingsPlans < ResourceDetails
+      end
+      class ComputeSavingsPlans < ResourceDetails
+      end
+      class SageMakerSavingsPlans < ResourceDetails
+      end
+      class RdsDbInstance < ResourceDetails
+      end
+      class RdsDbInstanceStorage < ResourceDetails
+      end
+      class AuroraDbClusterStorage < ResourceDetails
+      end
+      class DynamoDbReservedCapacity < ResourceDetails
+      end
+      class MemoryDbReservedInstances < ResourceDetails
+      end
+      class Unknown < ResourceDetails
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ResourcePricing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_cost_before_discounts: Float,
+        ?estimated_net_unused_amortized_commitments: Float,
+        ?estimated_discounts: Types::EstimatedDiscounts,
+        ?estimated_cost_after_discounts: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_cost_before_discounts: Float?
+      attr_accessor estimated_net_unused_amortized_commitments: Float?
+      attr_accessor estimated_discounts: Types::EstimatedDiscounts?
+      attr_accessor estimated_cost_after_discounts: Float?
+    end
+
+    module ResourceType
+      EC2_INSTANCE: String
+      LAMBDA_FUNCTION: String
+      EBS_VOLUME: String
+      ECS_SERVICE: String
+      EC2_AUTO_SCALING_GROUP: String
+      EC2_INSTANCE_SAVINGS_PLANS: String
+      COMPUTE_SAVINGS_PLANS: String
+      SAGE_MAKER_SAVINGS_PLANS: String
+      EC2_RESERVED_INSTANCES: String
+      RDS_RESERVED_INSTANCES: String
+      OPEN_SEARCH_RESERVED_INSTANCES: String
+      REDSHIFT_RESERVED_INSTANCES: String
+      ELASTI_CACHE_RESERVED_INSTANCES: String
+      RDS_DB_INSTANCE_STORAGE: String
+      RDS_DB_INSTANCE: String
+      AURORA_DB_CLUSTER_STORAGE: String
+      DYNAMO_DB_RESERVED_CAPACITY: String
+      MEMORY_DB_RESERVED_INSTANCES: String
+    end
+
+    class SageMakerSavingsPlans
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::SageMakerSavingsPlansConfiguration,
+        ?cost_calculation: Types::SavingsPlansCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::SageMakerSavingsPlansConfiguration?
+      attr_accessor cost_calculation: Types::SavingsPlansCostCalculation?
+    end
+
+    class SageMakerSavingsPlansConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?term: String,
+        ?payment_option: String,
+        ?hourly_commitment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor term: String?
+      attr_accessor payment_option: String?
+      attr_accessor hourly_commitment: String?
+    end
+
+    module SavingsEstimationMode
+      BEFORE_DISCOUNTS: String
+      AFTER_DISCOUNTS: String
+    end
+
+    class SavingsPlansCostCalculation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing: Types::SavingsPlansPricing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing: Types::SavingsPlansPricing?
+    end
+
+    class SavingsPlansPricing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_savings_plans_eligible_cost: Float,
+        ?estimated_monthly_commitment: Float,
+        ?savings_percentage: Float,
+        ?estimated_on_demand_cost: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_savings_plans_eligible_cost: Float?
+      attr_accessor estimated_monthly_commitment: Float?
+      attr_accessor savings_percentage: Float?
+      attr_accessor estimated_on_demand_cost: Float?
+    end
+
+    module Source
+      COMPUTE_OPTIMIZER: String
+      COST_EXPLORER: String
+    end
+
+    class StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?size_in_gb: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor size_in_gb: Float?
+    end
+
+    module SummaryMetrics
+      SAVINGS_PERCENTAGE: String
+    end
+
+    class SummaryMetricsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_percentage: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module Term
+      ONE_YEAR: String
+      THREE_YEARS: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateEnrollmentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class UpdateEnrollmentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class UpdatePreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: String,
+        ?member_account_discount_visibility: String,
+        ?preferred_commitment: Types::PreferredCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: String?
+      attr_accessor member_account_discount_visibility: String?
+      attr_accessor preferred_commitment: Types::PreferredCommitment?
+    end
+
+    class UpdatePreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: String,
+        ?member_account_discount_visibility: String,
+        ?preferred_commitment: Types::PreferredCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: String?
+      attr_accessor member_account_discount_visibility: String?
+      attr_accessor preferred_commitment: Types::PreferredCommitment?
+    end
+
+    class Usage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_type: String,
+        ?usage_amount: Float,
+        ?operation: String,
+        ?product_code: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_type: String?
+      attr_accessor usage_amount: Float?
+      attr_accessor operation: String?
+      attr_accessor product_code: String?
+      attr_accessor unit: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionDetail]?
+    end
+
+    class ValidationExceptionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

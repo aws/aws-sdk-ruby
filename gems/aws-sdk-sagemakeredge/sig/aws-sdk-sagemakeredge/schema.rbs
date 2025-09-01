@@ -1,0 +1,46 @@
+module Aws::SagemakerEdge
+  module Schema
+    include Smithy::Schema::Shapes
+
+    CacheTTLSeconds: StringShape
+    Checksum: StructureShape
+    ChecksumString: StringShape
+    ChecksumType: EnumShape
+    Definition: StructureShape
+    Definitions: ListShape
+    DeploymentModel: StructureShape
+    DeploymentModels: ListShape
+    DeploymentResult: StructureShape
+    DeploymentStatus: EnumShape
+    DeploymentType: EnumShape
+    DeviceFleetName: StringShape
+    DeviceName: StringShape
+    DeviceRegistration: StringShape
+    Dimension: StringShape
+    EdgeDeployment: StructureShape
+    EdgeDeployments: ListShape
+    EdgeMetric: StructureShape
+    EdgeMetrics: ListShape
+    EntityName: StringShape
+    ErrorMessage: StringShape
+    FailureHandlingPolicy: EnumShape
+    GetDeploymentsRequest: StructureShape
+    GetDeploymentsResult: StructureShape
+    GetDeviceRegistrationRequest: StructureShape
+    GetDeviceRegistrationResult: StructureShape
+    InternalServiceException: StructureShape
+    Metric: StringShape
+    Model: StructureShape
+    ModelName: StringShape
+    ModelState: EnumShape
+    Models: ListShape
+    S3Uri: StringShape
+    SendHeartbeatRequest: StructureShape
+    String: StringShape
+    Timestamp: TimestampShape
+    Value: FloatShape
+    Version: StringShape
+
+    AmazonSageMakerEdge: ServiceShape
+  end
+end

@@ -1,0 +1,1028 @@
+module Aws::FraudDetector
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::FraudDetector::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCreateVariableResponse
+      include Smithy::Client::_Response[Types::BatchCreateVariableResult]
+      def errors: () -> Array[Types::BatchCreateVariableError]?
+    end
+    def batch_create_variable: (
+      ?variable_entries: Array[
+        {
+          name: String,
+          data_type: untyped,
+          data_source: untyped,
+          default_value: untyped,
+          description: untyped,
+          variable_type: untyped
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _BatchCreateVariableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateVariableResponse
+
+    interface _BatchGetVariableResponse
+      include Smithy::Client::_Response[Types::BatchGetVariableResult]
+      def variables: () -> Array[Types::Variable]?
+      def errors: () -> Array[Types::BatchGetVariableError]?
+    end
+    def batch_get_variable: (
+      ?names: Array[String]
+    ) -> _BatchGetVariableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetVariableResponse
+
+    interface _CancelBatchImportJobResponse
+      include Smithy::Client::_Response[Types::CancelBatchImportJobResult]
+    end
+    def cancel_batch_import_job: (
+      ?job_id: String
+    ) -> _CancelBatchImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelBatchImportJobResponse
+
+    interface _CancelBatchPredictionJobResponse
+      include Smithy::Client::_Response[Types::CancelBatchPredictionJobResult]
+    end
+    def cancel_batch_prediction_job: (
+      ?job_id: String
+    ) -> _CancelBatchPredictionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelBatchPredictionJobResponse
+
+    interface _CreateBatchImportJobResponse
+      include Smithy::Client::_Response[Types::CreateBatchImportJobResult]
+    end
+    def create_batch_import_job: (
+      ?job_id: String,
+      ?input_path: String,
+      ?output_path: String,
+      ?event_type_name: String,
+      ?iam_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBatchImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchImportJobResponse
+
+    interface _CreateBatchPredictionJobResponse
+      include Smithy::Client::_Response[Types::CreateBatchPredictionJobResult]
+    end
+    def create_batch_prediction_job: (
+      ?job_id: String,
+      ?input_path: String,
+      ?output_path: String,
+      ?event_type_name: String,
+      ?detector_name: String,
+      ?detector_version: String,
+      ?iam_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBatchPredictionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchPredictionJobResponse
+
+    interface _CreateDetectorVersionResponse
+      include Smithy::Client::_Response[Types::CreateDetectorVersionResult]
+      def detector_id: () -> String?
+      def detector_version_id: () -> String?
+      def status: () -> String?
+    end
+    def create_detector_version: (
+      ?detector_id: String,
+      ?description: String,
+      ?external_model_endpoints: Array[String],
+      ?rules: Array[
+        {
+          detector_id: String,
+          rule_id: untyped,
+          rule_version: String
+        }
+      ],
+      ?model_versions: Array[
+        {
+          model_id: String,
+          model_type: String,
+          model_version_number: String,
+          arn: String
+        }
+      ],
+      ?rule_execution_mode: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDetectorVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDetectorVersionResponse
+
+    interface _CreateListResponse
+      include Smithy::Client::_Response[Types::CreateListResult]
+    end
+    def create_list: (
+      ?name: String,
+      ?elements: Array[String],
+      ?variable_type: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListResponse
+
+    interface _CreateModelResponse
+      include Smithy::Client::_Response[Types::CreateModelResult]
+    end
+    def create_model: (
+      ?model_id: String,
+      ?model_type: String,
+      ?description: String,
+      ?event_type_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelResponse
+
+    interface _CreateModelVersionResponse
+      include Smithy::Client::_Response[Types::CreateModelVersionResult]
+      def model_id: () -> String?
+      def model_type: () -> String?
+      def model_version_number: () -> String?
+      def status: () -> String?
+    end
+    def create_model_version: (
+      ?model_id: String,
+      ?model_type: String,
+      ?training_data_source: String,
+      ?training_data_schema: {
+        model_variables: Array[String],
+        label_schema: {
+          label_mapper: Hash[String,
+            Array[String]
+          ],
+          unlabeled_events_treatment: String
+        }
+      },
+      ?external_events_detail: {
+        data_location: String,
+        data_access_role_arn: String
+      },
+      ?ingested_events_detail: {
+        ingested_events_time_window: {
+          start_time: String,
+          end_time: untyped
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelVersionResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleResult]
+      def rule: () -> Types::Rule?
+    end
+    def create_rule: (
+      ?rule_id: String,
+      ?detector_id: String,
+      ?description: String,
+      ?expression: String,
+      ?language: String,
+      ?outcomes: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateVariableResponse
+      include Smithy::Client::_Response[Types::CreateVariableResult]
+    end
+    def create_variable: (
+      ?name: String,
+      ?data_type: String,
+      ?data_source: String,
+      ?default_value: String,
+      ?description: String,
+      ?variable_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVariableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVariableResponse
+
+    interface _DeleteBatchImportJobResponse
+      include Smithy::Client::_Response[Types::DeleteBatchImportJobResult]
+    end
+    def delete_batch_import_job: (
+      ?job_id: String
+    ) -> _DeleteBatchImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBatchImportJobResponse
+
+    interface _DeleteBatchPredictionJobResponse
+      include Smithy::Client::_Response[Types::DeleteBatchPredictionJobResult]
+    end
+    def delete_batch_prediction_job: (
+      ?job_id: String
+    ) -> _DeleteBatchPredictionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBatchPredictionJobResponse
+
+    interface _DeleteDetectorResponse
+      include Smithy::Client::_Response[Types::DeleteDetectorResult]
+    end
+    def delete_detector: (
+      ?detector_id: String
+    ) -> _DeleteDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDetectorResponse
+
+    interface _DeleteDetectorVersionResponse
+      include Smithy::Client::_Response[Types::DeleteDetectorVersionResult]
+    end
+    def delete_detector_version: (
+      ?detector_id: String,
+      ?detector_version_id: String
+    ) -> _DeleteDetectorVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDetectorVersionResponse
+
+    interface _DeleteEntityTypeResponse
+      include Smithy::Client::_Response[Types::DeleteEntityTypeResult]
+    end
+    def delete_entity_type: (
+      ?name: String
+    ) -> _DeleteEntityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEntityTypeResponse
+
+    interface _DeleteEventResponse
+      include Smithy::Client::_Response[Types::DeleteEventResult]
+    end
+    def delete_event: (
+      ?event_id: String,
+      ?event_type_name: String,
+      ?delete_audit_history: bool
+    ) -> _DeleteEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventResponse
+
+    interface _DeleteEventTypeResponse
+      include Smithy::Client::_Response[Types::DeleteEventTypeResult]
+    end
+    def delete_event_type: (
+      ?name: String
+    ) -> _DeleteEventTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventTypeResponse
+
+    interface _DeleteEventsByEventTypeResponse
+      include Smithy::Client::_Response[Types::DeleteEventsByEventTypeResult]
+      def event_type_name: () -> String?
+      def events_deletion_status: () -> String?
+    end
+    def delete_events_by_event_type: (
+      ?event_type_name: String
+    ) -> _DeleteEventsByEventTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventsByEventTypeResponse
+
+    interface _DeleteExternalModelResponse
+      include Smithy::Client::_Response[Types::DeleteExternalModelResult]
+    end
+    def delete_external_model: (
+      ?model_endpoint: String
+    ) -> _DeleteExternalModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExternalModelResponse
+
+    interface _DeleteLabelResponse
+      include Smithy::Client::_Response[Types::DeleteLabelResult]
+    end
+    def delete_label: (
+      ?name: String
+    ) -> _DeleteLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLabelResponse
+
+    interface _DeleteListResponse
+      include Smithy::Client::_Response[Types::DeleteListResult]
+    end
+    def delete_list: (
+      ?name: String
+    ) -> _DeleteListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListResponse
+
+    interface _DeleteModelResponse
+      include Smithy::Client::_Response[Types::DeleteModelResult]
+    end
+    def delete_model: (
+      ?model_id: String,
+      ?model_type: String
+    ) -> _DeleteModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelResponse
+
+    interface _DeleteModelVersionResponse
+      include Smithy::Client::_Response[Types::DeleteModelVersionResult]
+    end
+    def delete_model_version: (
+      ?model_id: String,
+      ?model_type: String,
+      ?model_version_number: String
+    ) -> _DeleteModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelVersionResponse
+
+    interface _DeleteOutcomeResponse
+      include Smithy::Client::_Response[Types::DeleteOutcomeResult]
+    end
+    def delete_outcome: (
+      ?name: String
+    ) -> _DeleteOutcomeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutcomeResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleResult]
+    end
+    def delete_rule: (
+      ?rule: {
+        detector_id: String,
+        rule_id: untyped,
+        rule_version: String
+      }
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteVariableResponse
+      include Smithy::Client::_Response[Types::DeleteVariableResult]
+    end
+    def delete_variable: (
+      ?name: String
+    ) -> _DeleteVariableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVariableResponse
+
+    interface _DescribeDetectorResponse
+      include Smithy::Client::_Response[Types::DescribeDetectorResult]
+      def detector_id: () -> String?
+      def detector_version_summaries: () -> Array[Types::DetectorVersionSummary]?
+      def next_token: () -> String?
+      def arn: () -> String?
+    end
+    def describe_detector: (
+      ?detector_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDetectorResponse
+
+    interface _DescribeModelVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeModelVersionsResult]
+      def model_version_details: () -> Array[Types::ModelVersionDetail]?
+      def next_token: () -> String?
+    end
+    def describe_model_versions: (
+      ?model_id: String,
+      ?model_version_number: String,
+      ?model_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeModelVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeModelVersionsResponse
+
+    interface _GetBatchImportJobsResponse
+      include Smithy::Client::_Response[Types::GetBatchImportJobsResult]
+      def batch_imports: () -> Array[Types::BatchImport]?
+      def next_token: () -> String?
+    end
+    def get_batch_import_jobs: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetBatchImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchImportJobsResponse
+
+    interface _GetBatchPredictionJobsResponse
+      include Smithy::Client::_Response[Types::GetBatchPredictionJobsResult]
+      def batch_predictions: () -> Array[Types::BatchPrediction]?
+      def next_token: () -> String?
+    end
+    def get_batch_prediction_jobs: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetBatchPredictionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchPredictionJobsResponse
+
+    interface _GetDeleteEventsByEventTypeStatusResponse
+      include Smithy::Client::_Response[Types::GetDeleteEventsByEventTypeStatusResult]
+      def event_type_name: () -> String?
+      def events_deletion_status: () -> String?
+    end
+    def get_delete_events_by_event_type_status: (
+      ?event_type_name: String
+    ) -> _GetDeleteEventsByEventTypeStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeleteEventsByEventTypeStatusResponse
+
+    interface _GetDetectorVersionResponse
+      include Smithy::Client::_Response[Types::GetDetectorVersionResult]
+      def detector_id: () -> String?
+      def detector_version_id: () -> String?
+      def description: () -> String?
+      def external_model_endpoints: () -> Array[String]?
+      def model_versions: () -> Array[Types::ModelVersion]?
+      def rules: () -> Array[Types::Rule]?
+      def status: () -> String?
+      def last_updated_time: () -> String?
+      def created_time: () -> String?
+      def rule_execution_mode: () -> String?
+      def arn: () -> String?
+    end
+    def get_detector_version: (
+      ?detector_id: String,
+      ?detector_version_id: String
+    ) -> _GetDetectorVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDetectorVersionResponse
+
+    interface _GetDetectorsResponse
+      include Smithy::Client::_Response[Types::GetDetectorsResult]
+      def detectors: () -> Array[Types::Detector]?
+      def next_token: () -> String?
+    end
+    def get_detectors: (
+      ?detector_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDetectorsResponse
+
+    interface _GetEntityTypesResponse
+      include Smithy::Client::_Response[Types::GetEntityTypesResult]
+      def entity_types: () -> Array[Types::EntityType]?
+      def next_token: () -> String?
+    end
+    def get_entity_types: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEntityTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEntityTypesResponse
+
+    interface _GetEventResponse
+      include Smithy::Client::_Response[Types::GetEventResult]
+      def event: () -> Types::Event?
+    end
+    def get_event: (
+      ?event_id: String,
+      ?event_type_name: String
+    ) -> _GetEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventResponse
+
+    interface _GetEventPredictionResponse
+      include Smithy::Client::_Response[Types::GetEventPredictionResult]
+      def model_scores: () -> Array[Types::ModelScores]?
+      def rule_results: () -> Array[Types::RuleResult]?
+      def external_model_outputs: () -> Array[Types::ExternalModelOutputs]?
+    end
+    def get_event_prediction: (
+      ?detector_id: String,
+      ?detector_version_id: String,
+      ?event_id: String,
+      ?event_type_name: String,
+      ?entities: Array[
+        {
+          entity_type: String,
+          entity_id: String
+        }
+      ],
+      ?event_timestamp: String,
+      ?event_variables: Hash[String, String],
+      ?external_model_endpoint_data_blobs: Hash[String,
+        {
+          byte_buffer: String,
+          content_type: String
+        }
+      ]
+    ) -> _GetEventPredictionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventPredictionResponse
+
+    interface _GetEventPredictionMetadataResponse
+      include Smithy::Client::_Response[Types::GetEventPredictionMetadataResult]
+      def event_id: () -> String?
+      def event_type_name: () -> String?
+      def entity_id: () -> String?
+      def entity_type: () -> String?
+      def event_timestamp: () -> String?
+      def detector_id: () -> String?
+      def detector_version_id: () -> String?
+      def detector_version_status: () -> String?
+      def event_variables: () -> Array[Types::EventVariableSummary]?
+      def rules: () -> Array[Types::EvaluatedRule]?
+      def rule_execution_mode: () -> String?
+      def outcomes: () -> Array[String]?
+      def evaluated_model_versions: () -> Array[Types::EvaluatedModelVersion]?
+      def evaluated_external_models: () -> Array[Types::EvaluatedExternalModel]?
+      def prediction_timestamp: () -> String?
+    end
+    def get_event_prediction_metadata: (
+      ?event_id: String,
+      ?event_type_name: String,
+      ?detector_id: String,
+      ?detector_version_id: String,
+      ?prediction_timestamp: String
+    ) -> _GetEventPredictionMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventPredictionMetadataResponse
+
+    interface _GetEventTypesResponse
+      include Smithy::Client::_Response[Types::GetEventTypesResult]
+      def event_types: () -> Array[Types::EventType]?
+      def next_token: () -> String?
+    end
+    def get_event_types: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEventTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventTypesResponse
+
+    interface _GetExternalModelsResponse
+      include Smithy::Client::_Response[Types::GetExternalModelsResult]
+      def external_models: () -> Array[Types::ExternalModel]?
+      def next_token: () -> String?
+    end
+    def get_external_models: (
+      ?model_endpoint: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetExternalModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExternalModelsResponse
+
+    interface _GetKMSEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::GetKMSEncryptionKeyResult]
+      def kms_key: () -> Types::KMSKey?
+    end
+    def get_kms_encryption_key: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKMSEncryptionKeyResponse
+
+    interface _GetLabelsResponse
+      include Smithy::Client::_Response[Types::GetLabelsResult]
+      def labels: () -> Array[Types::Label]?
+      def next_token: () -> String?
+    end
+    def get_labels: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLabelsResponse
+
+    interface _GetListElementsResponse
+      include Smithy::Client::_Response[Types::GetListElementsResult]
+      def elements: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def get_list_elements: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetListElementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetListElementsResponse
+
+    interface _GetListsMetadataResponse
+      include Smithy::Client::_Response[Types::GetListsMetadataResult]
+      def lists: () -> Array[Types::AllowDenyList]?
+      def next_token: () -> String?
+    end
+    def get_lists_metadata: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetListsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetListsMetadataResponse
+
+    interface _GetModelVersionResponse
+      include Smithy::Client::_Response[Types::GetModelVersionResult]
+      def model_id: () -> String?
+      def model_type: () -> String?
+      def model_version_number: () -> String?
+      def training_data_source: () -> String?
+      def training_data_schema: () -> Types::TrainingDataSchema?
+      def external_events_detail: () -> Types::ExternalEventsDetail?
+      def ingested_events_detail: () -> Types::IngestedEventsDetail?
+      def status: () -> String?
+      def arn: () -> String?
+    end
+    def get_model_version: (
+      ?model_id: String,
+      ?model_type: String,
+      ?model_version_number: String
+    ) -> _GetModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelVersionResponse
+
+    interface _GetModelsResponse
+      include Smithy::Client::_Response[Types::GetModelsResult]
+      def next_token: () -> String?
+      def models: () -> Array[Types::Model]?
+    end
+    def get_models: (
+      ?model_id: String,
+      ?model_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelsResponse
+
+    interface _GetOutcomesResponse
+      include Smithy::Client::_Response[Types::GetOutcomesResult]
+      def outcomes: () -> Array[Types::Outcome]?
+      def next_token: () -> String?
+    end
+    def get_outcomes: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetOutcomesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutcomesResponse
+
+    interface _GetRulesResponse
+      include Smithy::Client::_Response[Types::GetRulesResult]
+      def rule_details: () -> Array[Types::RuleDetail]?
+      def next_token: () -> String?
+    end
+    def get_rules: (
+      ?rule_id: String,
+      ?detector_id: String,
+      ?rule_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRulesResponse
+
+    interface _GetVariablesResponse
+      include Smithy::Client::_Response[Types::GetVariablesResult]
+      def variables: () -> Array[Types::Variable]?
+      def next_token: () -> String?
+    end
+    def get_variables: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetVariablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVariablesResponse
+
+    interface _ListEventPredictionsResponse
+      include Smithy::Client::_Response[Types::ListEventPredictionsResult]
+      def event_prediction_summaries: () -> Array[Types::EventPredictionSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_predictions: (
+      ?event_id: {
+        value: String
+      },
+      ?event_type: {
+        value: String
+      },
+      ?detector_id: {
+        value: String
+      },
+      ?detector_version_id: {
+        value: String
+      },
+      ?prediction_time_range: {
+        start_time: String,
+        end_time: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventPredictionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventPredictionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutDetectorResponse
+      include Smithy::Client::_Response[Types::PutDetectorResult]
+    end
+    def put_detector: (
+      ?detector_id: String,
+      ?description: String,
+      ?event_type_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDetectorResponse
+
+    interface _PutEntityTypeResponse
+      include Smithy::Client::_Response[Types::PutEntityTypeResult]
+    end
+    def put_entity_type: (
+      ?name: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutEntityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEntityTypeResponse
+
+    interface _PutEventTypeResponse
+      include Smithy::Client::_Response[Types::PutEventTypeResult]
+    end
+    def put_event_type: (
+      ?name: String,
+      ?description: String,
+      ?event_variables: Array[String],
+      ?labels: Array[String],
+      ?entity_types: Array[String],
+      ?event_ingestion: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?event_orchestration: {
+        event_bridge_enabled: bool
+      }
+    ) -> _PutEventTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventTypeResponse
+
+    interface _PutExternalModelResponse
+      include Smithy::Client::_Response[Types::PutExternalModelResult]
+    end
+    def put_external_model: (
+      ?model_endpoint: String,
+      ?model_source: String,
+      ?invoke_model_endpoint_role_arn: String,
+      ?input_configuration: {
+        event_type_name: String,
+        format: String,
+        use_event_variables: bool,
+        json_input_template: String,
+        csv_input_template: untyped
+      },
+      ?output_configuration: {
+        format: String,
+        json_key_to_variable_map: Hash[String, String],
+        csv_index_to_variable_map: Hash[String, String]
+      },
+      ?model_endpoint_status: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutExternalModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutExternalModelResponse
+
+    interface _PutKMSEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::PutKMSEncryptionKeyResult]
+    end
+    def put_kms_encryption_key: (
+      ?kms_encryption_key_arn: String
+    ) -> _PutKMSEncryptionKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutKMSEncryptionKeyResponse
+
+    interface _PutLabelResponse
+      include Smithy::Client::_Response[Types::PutLabelResult]
+    end
+    def put_label: (
+      ?name: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLabelResponse
+
+    interface _PutOutcomeResponse
+      include Smithy::Client::_Response[Types::PutOutcomeResult]
+    end
+    def put_outcome: (
+      ?name: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutOutcomeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOutcomeResponse
+
+    interface _SendEventResponse
+      include Smithy::Client::_Response[Types::SendEventResult]
+    end
+    def send_event: (
+      ?event_id: String,
+      ?event_type_name: String,
+      ?event_timestamp: String,
+      ?event_variables: Hash[String, String],
+      ?assigned_label: String,
+      ?label_timestamp: String,
+      ?entities: Array[
+        {
+          entity_type: String,
+          entity_id: String
+        }
+      ]
+    ) -> _SendEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendEventResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDetectorVersionResponse
+      include Smithy::Client::_Response[Types::UpdateDetectorVersionResult]
+    end
+    def update_detector_version: (
+      ?detector_id: String,
+      ?detector_version_id: String,
+      ?external_model_endpoints: Array[String],
+      ?rules: Array[
+        {
+          detector_id: String,
+          rule_id: untyped,
+          rule_version: String
+        }
+      ],
+      ?description: String,
+      ?model_versions: Array[
+        {
+          model_id: String,
+          model_type: String,
+          model_version_number: String,
+          arn: String
+        }
+      ],
+      ?rule_execution_mode: String
+    ) -> _UpdateDetectorVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDetectorVersionResponse
+
+    interface _UpdateDetectorVersionMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateDetectorVersionMetadataResult]
+    end
+    def update_detector_version_metadata: (
+      ?detector_id: String,
+      ?detector_version_id: String,
+      ?description: String
+    ) -> _UpdateDetectorVersionMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDetectorVersionMetadataResponse
+
+    interface _UpdateDetectorVersionStatusResponse
+      include Smithy::Client::_Response[Types::UpdateDetectorVersionStatusResult]
+    end
+    def update_detector_version_status: (
+      ?detector_id: String,
+      ?detector_version_id: String,
+      ?status: String
+    ) -> _UpdateDetectorVersionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDetectorVersionStatusResponse
+
+    interface _UpdateEventLabelResponse
+      include Smithy::Client::_Response[Types::UpdateEventLabelResult]
+    end
+    def update_event_label: (
+      ?event_id: String,
+      ?event_type_name: String,
+      ?assigned_label: String,
+      ?label_timestamp: String
+    ) -> _UpdateEventLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventLabelResponse
+
+    interface _UpdateListResponse
+      include Smithy::Client::_Response[Types::UpdateListResult]
+    end
+    def update_list: (
+      ?name: String,
+      ?elements: Array[String],
+      ?description: String,
+      ?update_mode: String,
+      ?variable_type: String
+    ) -> _UpdateListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateListResponse
+
+    interface _UpdateModelResponse
+      include Smithy::Client::_Response[Types::UpdateModelResult]
+    end
+    def update_model: (
+      ?model_id: String,
+      ?model_type: String,
+      ?description: String
+    ) -> _UpdateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelResponse
+
+    interface _UpdateModelVersionResponse
+      include Smithy::Client::_Response[Types::UpdateModelVersionResult]
+      def model_id: () -> String?
+      def model_type: () -> String?
+      def model_version_number: () -> String?
+      def status: () -> String?
+    end
+    def update_model_version: (
+      ?model_id: String,
+      ?model_type: String,
+      ?major_version_number: String,
+      ?external_events_detail: {
+        data_location: String,
+        data_access_role_arn: String
+      },
+      ?ingested_events_detail: {
+        ingested_events_time_window: {
+          start_time: String,
+          end_time: untyped
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelVersionResponse
+
+    interface _UpdateModelVersionStatusResponse
+      include Smithy::Client::_Response[Types::UpdateModelVersionStatusResult]
+    end
+    def update_model_version_status: (
+      ?model_id: String,
+      ?model_type: String,
+      ?model_version_number: String,
+      ?status: String
+    ) -> _UpdateModelVersionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelVersionStatusResponse
+
+    interface _UpdateRuleMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateRuleMetadataResult]
+    end
+    def update_rule_metadata: (
+      ?rule: {
+        detector_id: String,
+        rule_id: untyped,
+        rule_version: String
+      },
+      ?description: String
+    ) -> _UpdateRuleMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleMetadataResponse
+
+    interface _UpdateRuleVersionResponse
+      include Smithy::Client::_Response[Types::UpdateRuleVersionResult]
+      def rule: () -> Types::Rule?
+    end
+    def update_rule_version: (
+      ?rule: {
+        detector_id: String,
+        rule_id: untyped,
+        rule_version: String
+      },
+      ?description: String,
+      ?expression: String,
+      ?language: String,
+      ?outcomes: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateRuleVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleVersionResponse
+
+    interface _UpdateVariableResponse
+      include Smithy::Client::_Response[Types::UpdateVariableResult]
+    end
+    def update_variable: (
+      ?name: String,
+      ?default_value: String,
+      ?description: String,
+      ?variable_type: String
+    ) -> _UpdateVariableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVariableResponse
+  end
+end

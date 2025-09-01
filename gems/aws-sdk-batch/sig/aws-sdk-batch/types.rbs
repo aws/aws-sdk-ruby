@@ -1,0 +1,3446 @@
+module Aws::Batch
+  module Types
+
+    module ArrayJobDependency
+      N_TO_N: String
+      SEQUENTIAL: String
+    end
+
+    class ArrayProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size: Integer?
+    end
+
+    class ArrayPropertiesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_summary: Hash[String, Integer],
+        ?size: Integer,
+        ?index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_summary: Hash[String, Integer]?
+      attr_accessor size: Integer?
+      attr_accessor index: Integer?
+    end
+
+    class ArrayPropertiesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size: Integer,
+        ?index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size: Integer?
+      attr_accessor index: Integer?
+    end
+
+    module AssignPublicIp
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AttemptContainerDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_instance_arn: String,
+        ?task_arn: String,
+        ?exit_code: Integer,
+        ?reason: String,
+        ?log_stream_name: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_instance_arn: String?
+      attr_accessor task_arn: String?
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    class AttemptDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container: Types::AttemptContainerDetail,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?status_reason: String,
+        ?task_properties: Array[Types::AttemptEcsTaskDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container: Types::AttemptContainerDetail?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor status_reason: String?
+      attr_accessor task_properties: Array[Types::AttemptEcsTaskDetails]?
+    end
+
+    class AttemptEcsTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_instance_arn: String,
+        ?task_arn: String,
+        ?containers: Array[Types::AttemptTaskContainerDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_instance_arn: String?
+      attr_accessor task_arn: String?
+      attr_accessor containers: Array[Types::AttemptTaskContainerDetails]?
+    end
+
+    class AttemptTaskContainerDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exit_code: Integer,
+        ?name: String,
+        ?reason: String,
+        ?log_stream_name: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exit_code: Integer?
+      attr_accessor name: String?
+      attr_accessor reason: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    module CEState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module CEStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      VALID: String
+      INVALID: String
+    end
+
+    module CEType
+      MANAGED: String
+      UNMANAGED: String
+    end
+
+    module CRAllocationStrategy
+      BEST_FIT: String
+      BEST_FIT_PROGRESSIVE: String
+      SPOT_CAPACITY_OPTIMIZED: String
+      SPOT_PRICE_CAPACITY_OPTIMIZED: String
+    end
+
+    module CRType
+      EC2: String
+      SPOT: String
+      FARGATE: String
+      FARGATE_SPOT: String
+    end
+
+    module CRUpdateAllocationStrategy
+      BEST_FIT_PROGRESSIVE: String
+      SPOT_CAPACITY_OPTIMIZED: String
+      SPOT_PRICE_CAPACITY_OPTIMIZED: String
+    end
+
+    class CancelJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor reason: String?
+    end
+
+    class CancelJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CapacityLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_capacity: Integer,
+        ?capacity_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_capacity: Integer?
+      attr_accessor capacity_unit: String?
+    end
+
+    class ClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ComputeEnvironmentDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment_name: String,
+        ?compute_environment_arn: String,
+        ?unmanagedv_cpus: Integer,
+        ?ecs_cluster_arn: String,
+        ?tags: Hash[String, String],
+        ?type: String,
+        ?state: String,
+        ?status: String,
+        ?status_reason: String,
+        ?compute_resources: Types::ComputeResource,
+        ?service_role: String,
+        ?update_policy: Types::UpdatePolicy,
+        ?eks_configuration: Types::EksConfiguration,
+        ?container_orchestration_type: String,
+        ?uuid: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment_name: String?
+      attr_accessor compute_environment_arn: String?
+      attr_accessor unmanagedv_cpus: Integer?
+      attr_accessor ecs_cluster_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor compute_resources: Types::ComputeResource?
+      attr_accessor service_role: String?
+      attr_accessor update_policy: Types::UpdatePolicy?
+      attr_accessor eks_configuration: Types::EksConfiguration?
+      attr_accessor container_orchestration_type: String?
+      attr_accessor uuid: String?
+      attr_accessor context: String?
+    end
+
+    class ComputeEnvironmentOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order: Integer,
+        ?compute_environment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order: Integer?
+      attr_accessor compute_environment: String?
+    end
+
+    class ComputeResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?allocation_strategy: String,
+        ?minv_cpus: Integer,
+        ?maxv_cpus: Integer,
+        ?desiredv_cpus: Integer,
+        ?instance_types: Array[String],
+        ?image_id: String,
+        ?subnets: Array[String],
+        ?security_group_ids: Array[String],
+        ?ec2_key_pair: String,
+        ?instance_role: String,
+        ?tags: Hash[String, String],
+        ?placement_group: String,
+        ?bid_percentage: Integer,
+        ?spot_iam_fleet_role: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?ec2_configuration: Array[Types::Ec2Configuration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor allocation_strategy: String?
+      attr_accessor minv_cpus: Integer?
+      attr_accessor maxv_cpus: Integer?
+      attr_accessor desiredv_cpus: Integer?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor image_id: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ec2_key_pair: String?
+      attr_accessor instance_role: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor placement_group: String?
+      attr_accessor bid_percentage: Integer?
+      attr_accessor spot_iam_fleet_role: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor ec2_configuration: Array[Types::Ec2Configuration]?
+    end
+
+    class ComputeResourceUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minv_cpus: Integer,
+        ?maxv_cpus: Integer,
+        ?desiredv_cpus: Integer,
+        ?subnets: Array[String],
+        ?security_group_ids: Array[String],
+        ?allocation_strategy: String,
+        ?instance_types: Array[String],
+        ?ec2_key_pair: String,
+        ?instance_role: String,
+        ?tags: Hash[String, String],
+        ?placement_group: String,
+        ?bid_percentage: Integer,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?ec2_configuration: Array[Types::Ec2Configuration],
+        ?update_to_latest_image_version: bool,
+        ?type: String,
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minv_cpus: Integer?
+      attr_accessor maxv_cpus: Integer?
+      attr_accessor desiredv_cpus: Integer?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor allocation_strategy: String?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor ec2_key_pair: String?
+      attr_accessor instance_role: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor placement_group: String?
+      attr_accessor bid_percentage: Integer?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor ec2_configuration: Array[Types::Ec2Configuration]?
+      attr_accessor update_to_latest_image_version: bool?
+      attr_accessor type: String?
+      attr_accessor image_id: String?
+    end
+
+    class ConsumableResourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_list: Array[Types::ConsumableResourceRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_list: Array[Types::ConsumableResourceRequirement]?
+    end
+
+    class ConsumableResourceRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource: String,
+        ?quantity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource: String?
+      attr_accessor quantity: Integer?
+    end
+
+    class ConsumableResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_arn: String,
+        ?consumable_resource_name: String,
+        ?total_quantity: Integer,
+        ?in_use_quantity: Integer,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_arn: String?
+      attr_accessor consumable_resource_name: String?
+      attr_accessor total_quantity: Integer?
+      attr_accessor in_use_quantity: Integer?
+      attr_accessor resource_type: String?
+    end
+
+    class ContainerDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: String,
+        ?vcpus: Integer,
+        ?memory: Integer,
+        ?command: Array[String],
+        ?job_role_arn: String,
+        ?execution_role_arn: String,
+        ?volumes: Array[Types::Volume],
+        ?environment: Array[Types::KeyValuePair],
+        ?mount_points: Array[Types::MountPoint],
+        ?readonly_root_filesystem: bool,
+        ?ulimits: Array[Types::Ulimit],
+        ?privileged: bool,
+        ?user: String,
+        ?exit_code: Integer,
+        ?reason: String,
+        ?container_instance_arn: String,
+        ?task_arn: String,
+        ?log_stream_name: String,
+        ?instance_type: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?resource_requirements: Array[Types::ResourceRequirement],
+        ?linux_parameters: Types::LinuxParameters,
+        ?log_configuration: Types::LogConfiguration,
+        ?secrets: Array[Types::Secret],
+        ?network_configuration: Types::NetworkConfiguration,
+        ?fargate_platform_configuration: Types::FargatePlatformConfiguration,
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?runtime_platform: Types::RuntimePlatform,
+        ?repository_credentials: Types::RepositoryCredentials,
+        ?enable_execute_command: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: String?
+      attr_accessor vcpus: Integer?
+      attr_accessor memory: Integer?
+      attr_accessor command: Array[String]?
+      attr_accessor job_role_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor volumes: Array[Types::Volume]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor mount_points: Array[Types::MountPoint]?
+      attr_accessor readonly_root_filesystem: bool?
+      attr_accessor ulimits: Array[Types::Ulimit]?
+      attr_accessor privileged: bool?
+      attr_accessor user: String?
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+      attr_accessor container_instance_arn: String?
+      attr_accessor task_arn: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor instance_type: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+      attr_accessor linux_parameters: Types::LinuxParameters?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor secrets: Array[Types::Secret]?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor runtime_platform: Types::RuntimePlatform?
+      attr_accessor repository_credentials: Types::RepositoryCredentials?
+      attr_accessor enable_execute_command: bool?
+    end
+
+    class ContainerOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcpus: Integer,
+        ?memory: Integer,
+        ?command: Array[String],
+        ?instance_type: String,
+        ?environment: Array[Types::KeyValuePair],
+        ?resource_requirements: Array[Types::ResourceRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcpus: Integer?
+      attr_accessor memory: Integer?
+      attr_accessor command: Array[String]?
+      attr_accessor instance_type: String?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+    end
+
+    class ContainerProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: String,
+        ?vcpus: Integer,
+        ?memory: Integer,
+        ?command: Array[String],
+        ?job_role_arn: String,
+        ?execution_role_arn: String,
+        ?volumes: Array[Types::Volume],
+        ?environment: Array[Types::KeyValuePair],
+        ?mount_points: Array[Types::MountPoint],
+        ?readonly_root_filesystem: bool,
+        ?privileged: bool,
+        ?ulimits: Array[Types::Ulimit],
+        ?user: String,
+        ?instance_type: String,
+        ?resource_requirements: Array[Types::ResourceRequirement],
+        ?linux_parameters: Types::LinuxParameters,
+        ?log_configuration: Types::LogConfiguration,
+        ?secrets: Array[Types::Secret],
+        ?network_configuration: Types::NetworkConfiguration,
+        ?fargate_platform_configuration: Types::FargatePlatformConfiguration,
+        ?enable_execute_command: bool,
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?runtime_platform: Types::RuntimePlatform,
+        ?repository_credentials: Types::RepositoryCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: String?
+      attr_accessor vcpus: Integer?
+      attr_accessor memory: Integer?
+      attr_accessor command: Array[String]?
+      attr_accessor job_role_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor volumes: Array[Types::Volume]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor mount_points: Array[Types::MountPoint]?
+      attr_accessor readonly_root_filesystem: bool?
+      attr_accessor privileged: bool?
+      attr_accessor ulimits: Array[Types::Ulimit]?
+      attr_accessor user: String?
+      attr_accessor instance_type: String?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+      attr_accessor linux_parameters: Types::LinuxParameters?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor secrets: Array[Types::Secret]?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor runtime_platform: Types::RuntimePlatform?
+      attr_accessor repository_credentials: Types::RepositoryCredentials?
+    end
+
+    class ContainerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exit_code: Integer,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+    end
+
+    class CreateComputeEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment_name: String,
+        ?type: String,
+        ?state: String,
+        ?unmanagedv_cpus: Integer,
+        ?compute_resources: Types::ComputeResource,
+        ?service_role: String,
+        ?tags: Hash[String, String],
+        ?eks_configuration: Types::EksConfiguration,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment_name: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor unmanagedv_cpus: Integer?
+      attr_accessor compute_resources: Types::ComputeResource?
+      attr_accessor service_role: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor eks_configuration: Types::EksConfiguration?
+      attr_accessor context: String?
+    end
+
+    class CreateComputeEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment_name: String,
+        ?compute_environment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment_name: String?
+      attr_accessor compute_environment_arn: String?
+    end
+
+    class CreateConsumableResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_name: String,
+        ?total_quantity: Integer,
+        ?resource_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_name: String?
+      attr_accessor total_quantity: Integer?
+      attr_accessor resource_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConsumableResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_name: String,
+        ?consumable_resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_name: String?
+      attr_accessor consumable_resource_arn: String?
+    end
+
+    class CreateJobQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue_name: String,
+        ?state: String,
+        ?scheduling_policy_arn: String,
+        ?priority: Integer,
+        ?compute_environment_order: Array[Types::ComputeEnvironmentOrder],
+        ?service_environment_order: Array[Types::ServiceEnvironmentOrder],
+        ?job_queue_type: String,
+        ?tags: Hash[String, String],
+        ?job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue_name: String?
+      attr_accessor state: String?
+      attr_accessor scheduling_policy_arn: String?
+      attr_accessor priority: Integer?
+      attr_accessor compute_environment_order: Array[Types::ComputeEnvironmentOrder]?
+      attr_accessor service_environment_order: Array[Types::ServiceEnvironmentOrder]?
+      attr_accessor job_queue_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction]?
+    end
+
+    class CreateJobQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue_name: String,
+        ?job_queue_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue_name: String?
+      attr_accessor job_queue_arn: String?
+    end
+
+    class CreateSchedulingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fairshare_policy: Types::FairsharePolicy,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fairshare_policy: Types::FairsharePolicy?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSchedulingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateServiceEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment_name: String,
+        ?service_environment_type: String,
+        ?state: String,
+        ?capacity_limits: Array[Types::CapacityLimit],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment_name: String?
+      attr_accessor service_environment_type: String?
+      attr_accessor state: String?
+      attr_accessor capacity_limits: Array[Types::CapacityLimit]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateServiceEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment_name: String,
+        ?service_environment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment_name: String?
+      attr_accessor service_environment_arn: String?
+    end
+
+    class DeleteComputeEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment: String?
+    end
+
+    class DeleteComputeEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConsumableResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource: String?
+    end
+
+    class DeleteConsumableResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteJobQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+    end
+
+    class DeleteJobQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSchedulingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteSchedulingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment: String?
+    end
+
+    class DeleteServiceEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterJobDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definition: String?
+    end
+
+    class DeregisterJobDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeComputeEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environments: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environments: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeComputeEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environments: Array[Types::ComputeEnvironmentDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environments: Array[Types::ComputeEnvironmentDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConsumableResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource: String?
+    end
+
+    class DescribeConsumableResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_name: String,
+        ?consumable_resource_arn: String,
+        ?total_quantity: Integer,
+        ?in_use_quantity: Integer,
+        ?available_quantity: Integer,
+        ?resource_type: String,
+        ?created_at: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_name: String?
+      attr_accessor consumable_resource_arn: String?
+      attr_accessor total_quantity: Integer?
+      attr_accessor in_use_quantity: Integer?
+      attr_accessor available_quantity: Integer?
+      attr_accessor resource_type: String?
+      attr_accessor created_at: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeJobDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definitions: Array[String],
+        ?max_results: Integer,
+        ?job_definition_name: String,
+        ?status: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definitions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor job_definition_name: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definitions: Array[Types::JobDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definitions: Array[Types::JobDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queues: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queues: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobQueuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queues: Array[Types::JobQueueDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queues: Array[Types::JobQueueDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[String]?
+    end
+
+    class DescribeJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobDetail]?
+    end
+
+    class DescribeSchedulingPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class DescribeSchedulingPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduling_policies: Array[Types::SchedulingPolicyDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduling_policies: Array[Types::SchedulingPolicyDetail]?
+    end
+
+    class DescribeServiceEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environments: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environments: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeServiceEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environments: Array[Types::ServiceEnvironmentDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environments: Array[Types::ServiceEnvironmentDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeServiceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeServiceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempts: Array[Types::ServiceJobAttemptDetail],
+        ?created_at: Integer,
+        ?is_terminated: bool,
+        ?job_arn: String,
+        ?job_id: String,
+        ?job_name: String,
+        ?job_queue: String,
+        ?latest_attempt: Types::LatestServiceJobAttempt,
+        ?retry_strategy: Types::ServiceJobRetryStrategy,
+        ?scheduling_priority: Integer,
+        ?service_request_payload: String,
+        ?service_job_type: String,
+        ?share_identifier: String,
+        ?started_at: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?stopped_at: Integer,
+        ?tags: Hash[String, String],
+        ?timeout_config: Types::ServiceJobTimeout,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempts: Array[Types::ServiceJobAttemptDetail]?
+      attr_accessor created_at: Integer?
+      attr_accessor is_terminated: bool?
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_queue: String?
+      attr_accessor latest_attempt: Types::LatestServiceJobAttempt?
+      attr_accessor retry_strategy: Types::ServiceJobRetryStrategy?
+      attr_accessor scheduling_priority: Integer?
+      attr_accessor service_request_payload: String?
+      attr_accessor service_job_type: String?
+      attr_accessor share_identifier: String?
+      attr_accessor started_at: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor stopped_at: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor timeout_config: Types::ServiceJobTimeout?
+    end
+
+    class Device
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_path: String,
+        ?container_path: String,
+        ?permissions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_path: String?
+      attr_accessor container_path: String?
+      attr_accessor permissions: Array[String]?
+    end
+
+    module DeviceCgroupPermission
+      READ: String
+      WRITE: String
+      MKNOD: String
+    end
+
+    class EFSAuthorizationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_id: String,
+        ?iam: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_id: String?
+      attr_accessor iam: String?
+    end
+
+    module EFSAuthorizationConfigIAM
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module EFSTransitEncryption
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EFSVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?root_directory: String,
+        ?transit_encryption: String,
+        ?transit_encryption_port: Integer,
+        ?authorization_config: Types::EFSAuthorizationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor root_directory: String?
+      attr_accessor transit_encryption: String?
+      attr_accessor transit_encryption_port: Integer?
+      attr_accessor authorization_config: Types::EFSAuthorizationConfig?
+    end
+
+    class Ec2Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_type: String,
+        ?image_id_override: String,
+        ?image_kubernetes_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_type: String?
+      attr_accessor image_id_override: String?
+      attr_accessor image_kubernetes_version: String?
+    end
+
+    class EcsProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_properties: Array[Types::EcsTaskProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_properties: Array[Types::EcsTaskProperties]?
+    end
+
+    class EcsPropertiesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_properties: Array[Types::EcsTaskDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_properties: Array[Types::EcsTaskDetails]?
+    end
+
+    class EcsPropertiesOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_properties: Array[Types::TaskPropertiesOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_properties: Array[Types::TaskPropertiesOverride]?
+    end
+
+    class EcsTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::TaskContainerDetails],
+        ?container_instance_arn: String,
+        ?task_arn: String,
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?execution_role_arn: String,
+        ?platform_version: String,
+        ?ipc_mode: String,
+        ?task_role_arn: String,
+        ?pid_mode: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?runtime_platform: Types::RuntimePlatform,
+        ?volumes: Array[Types::Volume],
+        ?enable_execute_command: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::TaskContainerDetails]?
+      attr_accessor container_instance_arn: String?
+      attr_accessor task_arn: String?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor execution_role_arn: String?
+      attr_accessor platform_version: String?
+      attr_accessor ipc_mode: String?
+      attr_accessor task_role_arn: String?
+      attr_accessor pid_mode: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor runtime_platform: Types::RuntimePlatform?
+      attr_accessor volumes: Array[Types::Volume]?
+      attr_accessor enable_execute_command: bool?
+    end
+
+    class EcsTaskProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::TaskContainerProperties],
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?execution_role_arn: String,
+        ?platform_version: String,
+        ?ipc_mode: String,
+        ?task_role_arn: String,
+        ?pid_mode: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?runtime_platform: Types::RuntimePlatform,
+        ?volumes: Array[Types::Volume],
+        ?enable_execute_command: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::TaskContainerProperties]?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor execution_role_arn: String?
+      attr_accessor platform_version: String?
+      attr_accessor ipc_mode: String?
+      attr_accessor task_role_arn: String?
+      attr_accessor pid_mode: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor runtime_platform: Types::RuntimePlatform?
+      attr_accessor volumes: Array[Types::Volume]?
+      attr_accessor enable_execute_command: bool?
+    end
+
+    class EksAttemptContainerDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?container_id: String,
+        ?exit_code: Integer,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor container_id: String?
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+    end
+
+    class EksAttemptDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::EksAttemptContainerDetail],
+        ?init_containers: Array[Types::EksAttemptContainerDetail],
+        ?eks_cluster_arn: String,
+        ?pod_name: String,
+        ?pod_namespace: String,
+        ?node_name: String,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::EksAttemptContainerDetail]?
+      attr_accessor init_containers: Array[Types::EksAttemptContainerDetail]?
+      attr_accessor eks_cluster_arn: String?
+      attr_accessor pod_name: String?
+      attr_accessor pod_namespace: String?
+      attr_accessor node_name: String?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor status_reason: String?
+    end
+
+    class EksConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eks_cluster_arn: String,
+        ?kubernetes_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks_cluster_arn: String?
+      attr_accessor kubernetes_namespace: String?
+    end
+
+    class EksContainer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image: String,
+        ?image_pull_policy: String,
+        ?command: Array[String],
+        ?args: Array[String],
+        ?env: Array[Types::EksContainerEnvironmentVariable],
+        ?resources: Types::EksContainerResourceRequirements,
+        ?volume_mounts: Array[Types::EksContainerVolumeMount],
+        ?security_context: Types::EksContainerSecurityContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image: String?
+      attr_accessor image_pull_policy: String?
+      attr_accessor command: Array[String]?
+      attr_accessor args: Array[String]?
+      attr_accessor env: Array[Types::EksContainerEnvironmentVariable]?
+      attr_accessor resources: Types::EksContainerResourceRequirements?
+      attr_accessor volume_mounts: Array[Types::EksContainerVolumeMount]?
+      attr_accessor security_context: Types::EksContainerSecurityContext?
+    end
+
+    class EksContainerDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image: String,
+        ?image_pull_policy: String,
+        ?command: Array[String],
+        ?args: Array[String],
+        ?env: Array[Types::EksContainerEnvironmentVariable],
+        ?resources: Types::EksContainerResourceRequirements,
+        ?exit_code: Integer,
+        ?reason: String,
+        ?volume_mounts: Array[Types::EksContainerVolumeMount],
+        ?security_context: Types::EksContainerSecurityContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image: String?
+      attr_accessor image_pull_policy: String?
+      attr_accessor command: Array[String]?
+      attr_accessor args: Array[String]?
+      attr_accessor env: Array[Types::EksContainerEnvironmentVariable]?
+      attr_accessor resources: Types::EksContainerResourceRequirements?
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+      attr_accessor volume_mounts: Array[Types::EksContainerVolumeMount]?
+      attr_accessor security_context: Types::EksContainerSecurityContext?
+    end
+
+    class EksContainerEnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class EksContainerOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image: String,
+        ?command: Array[String],
+        ?args: Array[String],
+        ?env: Array[Types::EksContainerEnvironmentVariable],
+        ?resources: Types::EksContainerResourceRequirements,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image: String?
+      attr_accessor command: Array[String]?
+      attr_accessor args: Array[String]?
+      attr_accessor env: Array[Types::EksContainerEnvironmentVariable]?
+      attr_accessor resources: Types::EksContainerResourceRequirements?
+    end
+
+    class EksContainerResourceRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits: Hash[String, String],
+        ?requests: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits: Hash[String, String]?
+      attr_accessor requests: Hash[String, String]?
+    end
+
+    class EksContainerSecurityContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_as_user: Integer,
+        ?run_as_group: Integer,
+        ?privileged: bool,
+        ?allow_privilege_escalation: bool,
+        ?read_only_root_filesystem: bool,
+        ?run_as_non_root: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_as_user: Integer?
+      attr_accessor run_as_group: Integer?
+      attr_accessor privileged: bool?
+      attr_accessor allow_privilege_escalation: bool?
+      attr_accessor read_only_root_filesystem: bool?
+      attr_accessor run_as_non_root: bool?
+    end
+
+    class EksContainerVolumeMount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?mount_path: String,
+        ?sub_path: String,
+        ?read_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor mount_path: String?
+      attr_accessor sub_path: String?
+      attr_accessor read_only: bool?
+    end
+
+    class EksEmptyDir
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medium: String,
+        ?size_limit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medium: String?
+      attr_accessor size_limit: String?
+    end
+
+    class EksHostPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+    end
+
+    class EksMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?labels: Hash[String, String],
+        ?annotations: Hash[String, String],
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor annotations: Hash[String, String]?
+      attr_accessor namespace: String?
+    end
+
+    class EksPersistentVolumeClaim
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?claim_name: String,
+        ?read_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor claim_name: String?
+      attr_accessor read_only: bool?
+    end
+
+    class EksPodProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account_name: String,
+        ?host_network: bool,
+        ?dns_policy: String,
+        ?image_pull_secrets: Array[Types::ImagePullSecret],
+        ?containers: Array[Types::EksContainer],
+        ?init_containers: Array[Types::EksContainer],
+        ?volumes: Array[Types::EksVolume],
+        ?metadata: Types::EksMetadata,
+        ?share_process_namespace: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account_name: String?
+      attr_accessor host_network: bool?
+      attr_accessor dns_policy: String?
+      attr_accessor image_pull_secrets: Array[Types::ImagePullSecret]?
+      attr_accessor containers: Array[Types::EksContainer]?
+      attr_accessor init_containers: Array[Types::EksContainer]?
+      attr_accessor volumes: Array[Types::EksVolume]?
+      attr_accessor metadata: Types::EksMetadata?
+      attr_accessor share_process_namespace: bool?
+    end
+
+    class EksPodPropertiesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account_name: String,
+        ?host_network: bool,
+        ?dns_policy: String,
+        ?image_pull_secrets: Array[Types::ImagePullSecret],
+        ?containers: Array[Types::EksContainerDetail],
+        ?init_containers: Array[Types::EksContainerDetail],
+        ?volumes: Array[Types::EksVolume],
+        ?pod_name: String,
+        ?node_name: String,
+        ?metadata: Types::EksMetadata,
+        ?share_process_namespace: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account_name: String?
+      attr_accessor host_network: bool?
+      attr_accessor dns_policy: String?
+      attr_accessor image_pull_secrets: Array[Types::ImagePullSecret]?
+      attr_accessor containers: Array[Types::EksContainerDetail]?
+      attr_accessor init_containers: Array[Types::EksContainerDetail]?
+      attr_accessor volumes: Array[Types::EksVolume]?
+      attr_accessor pod_name: String?
+      attr_accessor node_name: String?
+      attr_accessor metadata: Types::EksMetadata?
+      attr_accessor share_process_namespace: bool?
+    end
+
+    class EksPodPropertiesOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::EksContainerOverride],
+        ?init_containers: Array[Types::EksContainerOverride],
+        ?metadata: Types::EksMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::EksContainerOverride]?
+      attr_accessor init_containers: Array[Types::EksContainerOverride]?
+      attr_accessor metadata: Types::EksMetadata?
+    end
+
+    class EksProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_properties: Types::EksPodProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_properties: Types::EksPodProperties?
+    end
+
+    class EksPropertiesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_properties: Types::EksPodPropertiesDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_properties: Types::EksPodPropertiesDetail?
+    end
+
+    class EksPropertiesOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_properties: Types::EksPodPropertiesOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_properties: Types::EksPodPropertiesOverride?
+    end
+
+    class EksSecret
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+        ?optional: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+      attr_accessor optional: bool?
+    end
+
+    class EksVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?host_path: Types::EksHostPath,
+        ?empty_dir: Types::EksEmptyDir,
+        ?secret: Types::EksSecret,
+        ?persistent_volume_claim: Types::EksPersistentVolumeClaim,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor host_path: Types::EksHostPath?
+      attr_accessor empty_dir: Types::EksEmptyDir?
+      attr_accessor secret: Types::EksSecret?
+      attr_accessor persistent_volume_claim: Types::EksPersistentVolumeClaim?
+    end
+
+    class EphemeralStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_in_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_in_gi_b: Integer?
+    end
+
+    class EvaluateOnExit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_status_reason: String,
+        ?on_reason: String,
+        ?on_exit_code: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_status_reason: String?
+      attr_accessor on_reason: String?
+      attr_accessor on_exit_code: String?
+      attr_accessor action: String?
+    end
+
+    class FairsharePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_decay_seconds: Integer,
+        ?compute_reservation: Integer,
+        ?share_distribution: Array[Types::ShareAttributes],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_decay_seconds: Integer?
+      attr_accessor compute_reservation: Integer?
+      attr_accessor share_distribution: Array[Types::ShareAttributes]?
+    end
+
+    class FargatePlatformConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_version: String?
+    end
+
+    class FirelensConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?options: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor options: Hash[String, String]?
+    end
+
+    module FirelensConfigurationType
+      FLUENTD: String
+      FLUENTBIT: String
+    end
+
+    class FrontOfQueueDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::FrontOfQueueJobSummary],
+        ?last_updated_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::FrontOfQueueJobSummary]?
+      attr_accessor last_updated_at: Integer?
+    end
+
+    class FrontOfQueueJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?earliest_time_at_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor earliest_time_at_position: Integer?
+    end
+
+    class GetJobQueueSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+    end
+
+    class GetJobQueueSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?front_of_queue: Types::FrontOfQueueDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor front_of_queue: Types::FrontOfQueueDetail?
+    end
+
+    class Host
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_path: String?
+    end
+
+    class ImagePullSecret
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module JQState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module JQStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      VALID: String
+      INVALID: String
+    end
+
+    class JobDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definition_name: String,
+        ?job_definition_arn: String,
+        ?revision: Integer,
+        ?status: String,
+        ?type: String,
+        ?scheduling_priority: Integer,
+        ?parameters: Hash[String, String],
+        ?retry_strategy: Types::RetryStrategy,
+        ?container_properties: Types::ContainerProperties,
+        ?timeout: Types::JobTimeout,
+        ?node_properties: Types::NodeProperties,
+        ?tags: Hash[String, String],
+        ?propagate_tags: bool,
+        ?platform_capabilities: Array[String],
+        ?ecs_properties: Types::EcsProperties,
+        ?eks_properties: Types::EksProperties,
+        ?container_orchestration_type: String,
+        ?consumable_resource_properties: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definition_name: String?
+      attr_accessor job_definition_arn: String?
+      attr_accessor revision: Integer?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor scheduling_priority: Integer?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor retry_strategy: Types::RetryStrategy?
+      attr_accessor container_properties: Types::ContainerProperties?
+      attr_accessor timeout: Types::JobTimeout?
+      attr_accessor node_properties: Types::NodeProperties?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor propagate_tags: bool?
+      attr_accessor platform_capabilities: Array[String]?
+      attr_accessor ecs_properties: Types::EcsProperties?
+      attr_accessor eks_properties: Types::EksProperties?
+      attr_accessor container_orchestration_type: String?
+      attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties?
+    end
+
+    module JobDefinitionType
+      Container: String
+      Multinode: String
+    end
+
+    class JobDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor type: String?
+    end
+
+    class JobDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_id: String,
+        ?job_queue: String,
+        ?status: String,
+        ?share_identifier: String,
+        ?scheduling_priority: Integer,
+        ?attempts: Array[Types::AttemptDetail],
+        ?status_reason: String,
+        ?created_at: Integer,
+        ?retry_strategy: Types::RetryStrategy,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?depends_on: Array[Types::JobDependency],
+        ?job_definition: String,
+        ?parameters: Hash[String, String],
+        ?container: Types::ContainerDetail,
+        ?node_details: Types::NodeDetails,
+        ?node_properties: Types::NodeProperties,
+        ?array_properties: Types::ArrayPropertiesDetail,
+        ?timeout: Types::JobTimeout,
+        ?tags: Hash[String, String],
+        ?propagate_tags: bool,
+        ?platform_capabilities: Array[String],
+        ?eks_properties: Types::EksPropertiesDetail,
+        ?eks_attempts: Array[Types::EksAttemptDetail],
+        ?ecs_properties: Types::EcsPropertiesDetail,
+        ?is_cancelled: bool,
+        ?is_terminated: bool,
+        ?consumable_resource_properties: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_queue: String?
+      attr_accessor status: String?
+      attr_accessor share_identifier: String?
+      attr_accessor scheduling_priority: Integer?
+      attr_accessor attempts: Array[Types::AttemptDetail]?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Integer?
+      attr_accessor retry_strategy: Types::RetryStrategy?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor depends_on: Array[Types::JobDependency]?
+      attr_accessor job_definition: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor container: Types::ContainerDetail?
+      attr_accessor node_details: Types::NodeDetails?
+      attr_accessor node_properties: Types::NodeProperties?
+      attr_accessor array_properties: Types::ArrayPropertiesDetail?
+      attr_accessor timeout: Types::JobTimeout?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor propagate_tags: bool?
+      attr_accessor platform_capabilities: Array[String]?
+      attr_accessor eks_properties: Types::EksPropertiesDetail?
+      attr_accessor eks_attempts: Array[Types::EksAttemptDetail]?
+      attr_accessor ecs_properties: Types::EcsPropertiesDetail?
+      attr_accessor is_cancelled: bool?
+      attr_accessor is_terminated: bool?
+      attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties?
+    end
+
+    class JobQueueDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue_name: String,
+        ?job_queue_arn: String,
+        ?state: String,
+        ?scheduling_policy_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?priority: Integer,
+        ?compute_environment_order: Array[Types::ComputeEnvironmentOrder],
+        ?service_environment_order: Array[Types::ServiceEnvironmentOrder],
+        ?job_queue_type: String,
+        ?tags: Hash[String, String],
+        ?job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue_name: String?
+      attr_accessor job_queue_arn: String?
+      attr_accessor state: String?
+      attr_accessor scheduling_policy_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor priority: Integer?
+      attr_accessor compute_environment_order: Array[Types::ComputeEnvironmentOrder]?
+      attr_accessor service_environment_order: Array[Types::ServiceEnvironmentOrder]?
+      attr_accessor job_queue_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction]?
+    end
+
+    module JobQueueType
+      EKS: String
+      ECS: String
+      ECS_FARGATE: String
+      SAGEMAKER_TRAINING: String
+    end
+
+    class JobStateTimeLimitAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?state: String,
+        ?max_time_seconds: Integer,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor state: String?
+      attr_accessor max_time_seconds: Integer?
+      attr_accessor action: String?
+    end
+
+    module JobStateTimeLimitActionsAction
+      CANCEL: String
+      TERMINATE: String
+    end
+
+    module JobStateTimeLimitActionsState
+      RUNNABLE: String
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      PENDING: String
+      RUNNABLE: String
+      STARTING: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_id: String,
+        ?job_name: String,
+        ?created_at: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?container: Types::ContainerSummary,
+        ?array_properties: Types::ArrayPropertiesSummary,
+        ?node_properties: Types::NodePropertiesSummary,
+        ?job_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor created_at: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor container: Types::ContainerSummary?
+      attr_accessor array_properties: Types::ArrayPropertiesSummary?
+      attr_accessor node_properties: Types::NodePropertiesSummary?
+      attr_accessor job_definition: String?
+    end
+
+    class JobTimeout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempt_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempt_duration_seconds: Integer?
+    end
+
+    class KeyValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class KeyValuesPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class LatestServiceJobAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_resource_id: Types::ServiceResourceId,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_resource_id: Types::ServiceResourceId?
+    end
+
+    class LaunchTemplateSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template_id: String,
+        ?launch_template_name: String,
+        ?version: String,
+        ?overrides: Array[Types::LaunchTemplateSpecificationOverride],
+        ?userdata_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template_id: String?
+      attr_accessor launch_template_name: String?
+      attr_accessor version: String?
+      attr_accessor overrides: Array[Types::LaunchTemplateSpecificationOverride]?
+      attr_accessor userdata_type: String?
+    end
+
+    class LaunchTemplateSpecificationOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template_id: String,
+        ?launch_template_name: String,
+        ?version: String,
+        ?target_instance_types: Array[String],
+        ?userdata_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template_id: String?
+      attr_accessor launch_template_name: String?
+      attr_accessor version: String?
+      attr_accessor target_instance_types: Array[String]?
+      attr_accessor userdata_type: String?
+    end
+
+    class LinuxParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::Device],
+        ?init_process_enabled: bool,
+        ?shared_memory_size: Integer,
+        ?tmpfs: Array[Types::Tmpfs],
+        ?max_swap: Integer,
+        ?swappiness: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::Device]?
+      attr_accessor init_process_enabled: bool?
+      attr_accessor shared_memory_size: Integer?
+      attr_accessor tmpfs: Array[Types::Tmpfs]?
+      attr_accessor max_swap: Integer?
+      attr_accessor swappiness: Integer?
+    end
+
+    class ListConsumableResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::KeyValuesPair],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::KeyValuesPair]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConsumableResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resources: Array[Types::ConsumableResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resources: Array[Types::ConsumableResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsByConsumableResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource: String,
+        ?filters: Array[Types::KeyValuesPair],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource: String?
+      attr_accessor filters: Array[Types::KeyValuesPair]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsByConsumableResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::ListJobsByConsumableResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::ListJobsByConsumableResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsByConsumableResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_queue_arn: String,
+        ?job_name: String,
+        ?job_definition_arn: String,
+        ?share_identifier: String,
+        ?job_status: String,
+        ?quantity: Integer,
+        ?status_reason: String,
+        ?started_at: Integer,
+        ?created_at: Integer,
+        ?consumable_resource_properties: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_queue_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_definition_arn: String?
+      attr_accessor share_identifier: String?
+      attr_accessor job_status: String?
+      attr_accessor quantity: Integer?
+      attr_accessor status_reason: String?
+      attr_accessor started_at: Integer?
+      attr_accessor created_at: Integer?
+      attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties?
+    end
+
+    class ListJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+        ?array_job_id: String,
+        ?multi_node_job_id: String,
+        ?job_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::KeyValuesPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+      attr_accessor array_job_id: String?
+      attr_accessor multi_node_job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::KeyValuesPair]?
+    end
+
+    class ListJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary_list: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary_list: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchedulingPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchedulingPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduling_policies: Array[Types::SchedulingPolicyListingDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduling_policies: Array[Types::SchedulingPolicyListingDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+        ?job_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::KeyValuesPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+      attr_accessor job_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::KeyValuesPair]?
+    end
+
+    class ListServiceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary_list: Array[Types::ServiceJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary_list: Array[Types::ServiceJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_driver: String,
+        ?options: Hash[String, String],
+        ?secret_options: Array[Types::Secret],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_driver: String?
+      attr_accessor options: Hash[String, String]?
+      attr_accessor secret_options: Array[Types::Secret]?
+    end
+
+    module LogDriver
+      JSON_FILE: String
+      SYSLOG: String
+      JOURNALD: String
+      GELF: String
+      FLUENTD: String
+      AWSLOGS: String
+      SPLUNK: String
+      AWSFIRELENS: String
+    end
+
+    class MountPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_path: String,
+        ?read_only: bool,
+        ?source_volume: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_path: String?
+      attr_accessor read_only: bool?
+      attr_accessor source_volume: String?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assign_public_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assign_public_ip: String?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?ipv6_address: String,
+        ?private_ipv4_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor private_ipv4_address: String?
+    end
+
+    class NodeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_index: Integer,
+        ?is_main_node: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_index: Integer?
+      attr_accessor is_main_node: bool?
+    end
+
+    class NodeOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_nodes: Integer,
+        ?node_property_overrides: Array[Types::NodePropertyOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_nodes: Integer?
+      attr_accessor node_property_overrides: Array[Types::NodePropertyOverride]?
+    end
+
+    class NodeProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_nodes: Integer,
+        ?main_node: Integer,
+        ?node_range_properties: Array[Types::NodeRangeProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_nodes: Integer?
+      attr_accessor main_node: Integer?
+      attr_accessor node_range_properties: Array[Types::NodeRangeProperty]?
+    end
+
+    class NodePropertiesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_main_node: bool,
+        ?num_nodes: Integer,
+        ?node_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_main_node: bool?
+      attr_accessor num_nodes: Integer?
+      attr_accessor node_index: Integer?
+    end
+
+    class NodePropertyOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_nodes: String,
+        ?container_overrides: Types::ContainerOverrides,
+        ?ecs_properties_override: Types::EcsPropertiesOverride,
+        ?instance_types: Array[String],
+        ?eks_properties_override: Types::EksPropertiesOverride,
+        ?consumable_resource_properties_override: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_nodes: String?
+      attr_accessor container_overrides: Types::ContainerOverrides?
+      attr_accessor ecs_properties_override: Types::EcsPropertiesOverride?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor eks_properties_override: Types::EksPropertiesOverride?
+      attr_accessor consumable_resource_properties_override: Types::ConsumableResourceProperties?
+    end
+
+    class NodeRangeProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_nodes: String,
+        ?container: Types::ContainerProperties,
+        ?instance_types: Array[String],
+        ?ecs_properties: Types::EcsProperties,
+        ?eks_properties: Types::EksProperties,
+        ?consumable_resource_properties: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_nodes: String?
+      attr_accessor container: Types::ContainerProperties?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor ecs_properties: Types::EcsProperties?
+      attr_accessor eks_properties: Types::EksProperties?
+      attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties?
+    end
+
+    module OrchestrationType
+      ECS: String
+      EKS: String
+    end
+
+    module PlatformCapability
+      EC2: String
+      FARGATE: String
+    end
+
+    class RegisterJobDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definition_name: String,
+        ?type: String,
+        ?parameters: Hash[String, String],
+        ?scheduling_priority: Integer,
+        ?container_properties: Types::ContainerProperties,
+        ?node_properties: Types::NodeProperties,
+        ?retry_strategy: Types::RetryStrategy,
+        ?propagate_tags: bool,
+        ?timeout: Types::JobTimeout,
+        ?tags: Hash[String, String],
+        ?platform_capabilities: Array[String],
+        ?eks_properties: Types::EksProperties,
+        ?ecs_properties: Types::EcsProperties,
+        ?consumable_resource_properties: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definition_name: String?
+      attr_accessor type: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor scheduling_priority: Integer?
+      attr_accessor container_properties: Types::ContainerProperties?
+      attr_accessor node_properties: Types::NodeProperties?
+      attr_accessor retry_strategy: Types::RetryStrategy?
+      attr_accessor propagate_tags: bool?
+      attr_accessor timeout: Types::JobTimeout?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor platform_capabilities: Array[String]?
+      attr_accessor eks_properties: Types::EksProperties?
+      attr_accessor ecs_properties: Types::EcsProperties?
+      attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties?
+    end
+
+    class RegisterJobDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definition_name: String,
+        ?job_definition_arn: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definition_name: String?
+      attr_accessor job_definition_arn: String?
+      attr_accessor revision: Integer?
+    end
+
+    class RepositoryCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials_parameter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials_parameter: String?
+    end
+
+    class ResourceRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module ResourceType
+      GPU: String
+      VCPU: String
+      MEMORY: String
+    end
+
+    module RetryAction
+      RETRY: String
+      EXIT: String
+    end
+
+    class RetryStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempts: Integer,
+        ?evaluate_on_exit: Array[Types::EvaluateOnExit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempts: Integer?
+      attr_accessor evaluate_on_exit: Array[Types::EvaluateOnExit]?
+    end
+
+    class RuntimePlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operating_system_family: String,
+        ?cpu_architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operating_system_family: String?
+      attr_accessor cpu_architecture: String?
+    end
+
+    class SchedulingPolicyDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?fairshare_policy: Types::FairsharePolicy,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor fairshare_policy: Types::FairsharePolicy?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class SchedulingPolicyListingDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class Secret
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value_from: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value_from: String?
+    end
+
+    class ServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceEnvironmentDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment_name: String,
+        ?service_environment_arn: String,
+        ?service_environment_type: String,
+        ?state: String,
+        ?status: String,
+        ?capacity_limits: Array[Types::CapacityLimit],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment_name: String?
+      attr_accessor service_environment_arn: String?
+      attr_accessor service_environment_type: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor capacity_limits: Array[Types::CapacityLimit]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ServiceEnvironmentOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order: Integer,
+        ?service_environment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order: Integer?
+      attr_accessor service_environment: String?
+    end
+
+    module ServiceEnvironmentState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ServiceEnvironmentStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      VALID: String
+      INVALID: String
+    end
+
+    module ServiceEnvironmentType
+      SAGEMAKER_TRAINING: String
+    end
+
+    class ServiceJobAttemptDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_resource_id: Types::ServiceResourceId,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_resource_id: Types::ServiceResourceId?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor status_reason: String?
+    end
+
+    class ServiceJobEvaluateOnExit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?on_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor on_status_reason: String?
+    end
+
+    module ServiceJobRetryAction
+      RETRY: String
+      EXIT: String
+    end
+
+    class ServiceJobRetryStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempts: Integer,
+        ?evaluate_on_exit: Array[Types::ServiceJobEvaluateOnExit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempts: Integer?
+      attr_accessor evaluate_on_exit: Array[Types::ServiceJobEvaluateOnExit]?
+    end
+
+    module ServiceJobStatus
+      SUBMITTED: String
+      PENDING: String
+      RUNNABLE: String
+      SCHEDULED: String
+      STARTING: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class ServiceJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_attempt: Types::LatestServiceJobAttempt,
+        ?created_at: Integer,
+        ?job_arn: String,
+        ?job_id: String,
+        ?job_name: String,
+        ?service_job_type: String,
+        ?share_identifier: String,
+        ?status: String,
+        ?status_reason: String,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_attempt: Types::LatestServiceJobAttempt?
+      attr_accessor created_at: Integer?
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor service_job_type: String?
+      attr_accessor share_identifier: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+    end
+
+    class ServiceJobTimeout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempt_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempt_duration_seconds: Integer?
+    end
+
+    module ServiceJobType
+      SAGEMAKER_TRAINING: String
+    end
+
+    class ServiceResourceId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module ServiceResourceIdName
+      SAGEMAKER_TRAINING_JOB_ARN: String
+    end
+
+    class ShareAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_identifier: String,
+        ?weight_factor: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_identifier: String?
+      attr_accessor weight_factor: Float?
+    end
+
+    class SubmitJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_queue: String,
+        ?share_identifier: String,
+        ?scheduling_priority_override: Integer,
+        ?array_properties: Types::ArrayProperties,
+        ?depends_on: Array[Types::JobDependency],
+        ?job_definition: String,
+        ?parameters: Hash[String, String],
+        ?container_overrides: Types::ContainerOverrides,
+        ?node_overrides: Types::NodeOverrides,
+        ?retry_strategy: Types::RetryStrategy,
+        ?propagate_tags: bool,
+        ?timeout: Types::JobTimeout,
+        ?tags: Hash[String, String],
+        ?eks_properties_override: Types::EksPropertiesOverride,
+        ?ecs_properties_override: Types::EcsPropertiesOverride,
+        ?consumable_resource_properties_override: Types::ConsumableResourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_queue: String?
+      attr_accessor share_identifier: String?
+      attr_accessor scheduling_priority_override: Integer?
+      attr_accessor array_properties: Types::ArrayProperties?
+      attr_accessor depends_on: Array[Types::JobDependency]?
+      attr_accessor job_definition: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor container_overrides: Types::ContainerOverrides?
+      attr_accessor node_overrides: Types::NodeOverrides?
+      attr_accessor retry_strategy: Types::RetryStrategy?
+      attr_accessor propagate_tags: bool?
+      attr_accessor timeout: Types::JobTimeout?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor eks_properties_override: Types::EksPropertiesOverride?
+      attr_accessor ecs_properties_override: Types::EcsPropertiesOverride?
+      attr_accessor consumable_resource_properties_override: Types::ConsumableResourceProperties?
+    end
+
+    class SubmitJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class SubmitServiceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_queue: String,
+        ?retry_strategy: Types::ServiceJobRetryStrategy,
+        ?scheduling_priority: Integer,
+        ?service_request_payload: String,
+        ?service_job_type: String,
+        ?share_identifier: String,
+        ?timeout_config: Types::ServiceJobTimeout,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_queue: String?
+      attr_accessor retry_strategy: Types::ServiceJobRetryStrategy?
+      attr_accessor scheduling_priority: Integer?
+      attr_accessor service_request_payload: String?
+      attr_accessor service_job_type: String?
+      attr_accessor share_identifier: String?
+      attr_accessor timeout_config: Types::ServiceJobTimeout?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class SubmitServiceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskContainerDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor condition: String?
+    end
+
+    class TaskContainerDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?depends_on: Array[Types::TaskContainerDependency],
+        ?environment: Array[Types::KeyValuePair],
+        ?essential: bool,
+        ?firelens_configuration: Types::FirelensConfiguration,
+        ?image: String,
+        ?linux_parameters: Types::LinuxParameters,
+        ?log_configuration: Types::LogConfiguration,
+        ?mount_points: Array[Types::MountPoint],
+        ?name: String,
+        ?privileged: bool,
+        ?readonly_root_filesystem: bool,
+        ?repository_credentials: Types::RepositoryCredentials,
+        ?resource_requirements: Array[Types::ResourceRequirement],
+        ?secrets: Array[Types::Secret],
+        ?ulimits: Array[Types::Ulimit],
+        ?user: String,
+        ?exit_code: Integer,
+        ?reason: String,
+        ?log_stream_name: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor depends_on: Array[Types::TaskContainerDependency]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor essential: bool?
+      attr_accessor firelens_configuration: Types::FirelensConfiguration?
+      attr_accessor image: String?
+      attr_accessor linux_parameters: Types::LinuxParameters?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor mount_points: Array[Types::MountPoint]?
+      attr_accessor name: String?
+      attr_accessor privileged: bool?
+      attr_accessor readonly_root_filesystem: bool?
+      attr_accessor repository_credentials: Types::RepositoryCredentials?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+      attr_accessor secrets: Array[Types::Secret]?
+      attr_accessor ulimits: Array[Types::Ulimit]?
+      attr_accessor user: String?
+      attr_accessor exit_code: Integer?
+      attr_accessor reason: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    class TaskContainerOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?environment: Array[Types::KeyValuePair],
+        ?name: String,
+        ?resource_requirements: Array[Types::ResourceRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor name: String?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+    end
+
+    class TaskContainerProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?depends_on: Array[Types::TaskContainerDependency],
+        ?environment: Array[Types::KeyValuePair],
+        ?essential: bool,
+        ?firelens_configuration: Types::FirelensConfiguration,
+        ?image: String,
+        ?linux_parameters: Types::LinuxParameters,
+        ?log_configuration: Types::LogConfiguration,
+        ?mount_points: Array[Types::MountPoint],
+        ?name: String,
+        ?privileged: bool,
+        ?readonly_root_filesystem: bool,
+        ?repository_credentials: Types::RepositoryCredentials,
+        ?resource_requirements: Array[Types::ResourceRequirement],
+        ?secrets: Array[Types::Secret],
+        ?ulimits: Array[Types::Ulimit],
+        ?user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor depends_on: Array[Types::TaskContainerDependency]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor essential: bool?
+      attr_accessor firelens_configuration: Types::FirelensConfiguration?
+      attr_accessor image: String?
+      attr_accessor linux_parameters: Types::LinuxParameters?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor mount_points: Array[Types::MountPoint]?
+      attr_accessor name: String?
+      attr_accessor privileged: bool?
+      attr_accessor readonly_root_filesystem: bool?
+      attr_accessor repository_credentials: Types::RepositoryCredentials?
+      attr_accessor resource_requirements: Array[Types::ResourceRequirement]?
+      attr_accessor secrets: Array[Types::Secret]?
+      attr_accessor ulimits: Array[Types::Ulimit]?
+      attr_accessor user: String?
+    end
+
+    class TaskPropertiesOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::TaskContainerOverrides],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::TaskContainerOverrides]?
+    end
+
+    class TerminateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor reason: String?
+    end
+
+    class TerminateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TerminateServiceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor reason: String?
+    end
+
+    class TerminateServiceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tmpfs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_path: String,
+        ?size: Integer,
+        ?mount_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_path: String?
+      attr_accessor size: Integer?
+      attr_accessor mount_options: Array[String]?
+    end
+
+    class Ulimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hard_limit: Integer,
+        ?name: String,
+        ?soft_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hard_limit: Integer?
+      attr_accessor name: String?
+      attr_accessor soft_limit: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateComputeEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment: String,
+        ?state: String,
+        ?unmanagedv_cpus: Integer,
+        ?compute_resources: Types::ComputeResourceUpdate,
+        ?service_role: String,
+        ?update_policy: Types::UpdatePolicy,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment: String?
+      attr_accessor state: String?
+      attr_accessor unmanagedv_cpus: Integer?
+      attr_accessor compute_resources: Types::ComputeResourceUpdate?
+      attr_accessor service_role: String?
+      attr_accessor update_policy: Types::UpdatePolicy?
+      attr_accessor context: String?
+    end
+
+    class UpdateComputeEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_environment_name: String,
+        ?compute_environment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_environment_name: String?
+      attr_accessor compute_environment_arn: String?
+    end
+
+    class UpdateConsumableResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource: String,
+        ?operation: String,
+        ?quantity: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource: String?
+      attr_accessor operation: String?
+      attr_accessor quantity: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateConsumableResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumable_resource_name: String,
+        ?consumable_resource_arn: String,
+        ?total_quantity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumable_resource_name: String?
+      attr_accessor consumable_resource_arn: String?
+      attr_accessor total_quantity: Integer?
+    end
+
+    class UpdateJobQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+        ?state: String,
+        ?scheduling_policy_arn: String,
+        ?priority: Integer,
+        ?compute_environment_order: Array[Types::ComputeEnvironmentOrder],
+        ?service_environment_order: Array[Types::ServiceEnvironmentOrder],
+        ?job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+      attr_accessor state: String?
+      attr_accessor scheduling_policy_arn: String?
+      attr_accessor priority: Integer?
+      attr_accessor compute_environment_order: Array[Types::ComputeEnvironmentOrder]?
+      attr_accessor service_environment_order: Array[Types::ServiceEnvironmentOrder]?
+      attr_accessor job_state_time_limit_actions: Array[Types::JobStateTimeLimitAction]?
+    end
+
+    class UpdateJobQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue_name: String,
+        ?job_queue_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue_name: String?
+      attr_accessor job_queue_arn: String?
+    end
+
+    class UpdatePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminate_jobs_on_update: bool,
+        ?job_execution_timeout_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminate_jobs_on_update: bool?
+      attr_accessor job_execution_timeout_minutes: Integer?
+    end
+
+    class UpdateSchedulingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?fairshare_policy: Types::FairsharePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor fairshare_policy: Types::FairsharePolicy?
+    end
+
+    class UpdateSchedulingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServiceEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment: String,
+        ?state: String,
+        ?capacity_limits: Array[Types::CapacityLimit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment: String?
+      attr_accessor state: String?
+      attr_accessor capacity_limits: Array[Types::CapacityLimit]?
+    end
+
+    class UpdateServiceEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_environment_name: String,
+        ?service_environment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_environment_name: String?
+      attr_accessor service_environment_arn: String?
+    end
+
+    module UserdataType
+      EKS_BOOTSTRAP_SH: String
+      EKS_NODEADM: String
+    end
+
+    class Volume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: Types::Host,
+        ?name: String,
+        ?efs_volume_configuration: Types::EFSVolumeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: Types::Host?
+      attr_accessor name: String?
+      attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration?
+    end
+  end
+end

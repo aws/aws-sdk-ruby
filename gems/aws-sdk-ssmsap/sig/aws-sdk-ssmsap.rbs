@@ -1,0 +1,5 @@
+  module Aws
+    module SsmSap
+      VERSION: String
+    end
+  end

@@ -1,0 +1,26 @@
+module Aws::KinesisVideoMedia
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ClientLimitExceededException: StructureShape
+    ConnectionLimitExceededException: StructureShape
+    ContentType: StringShape
+    ContinuationToken: StringShape
+    ErrorMessage: StringShape
+    FragmentNumberString: StringShape
+    GetMediaInput: StructureShape
+    GetMediaOutput: StructureShape
+    InvalidArgumentException: StructureShape
+    InvalidEndpointException: StructureShape
+    NotAuthorizedException: StructureShape
+    Payload: BlobShape
+    ResourceARN: StringShape
+    ResourceNotFoundException: StructureShape
+    StartSelector: StructureShape
+    StartSelectorType: EnumShape
+    StreamName: StringShape
+    Timestamp: TimestampShape
+
+    AWSAcuityInletService: ServiceShape
+  end
+end

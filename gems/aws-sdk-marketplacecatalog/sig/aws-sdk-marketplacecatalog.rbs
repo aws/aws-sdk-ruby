@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceCatalog
+      VERSION: String
+    end
+  end

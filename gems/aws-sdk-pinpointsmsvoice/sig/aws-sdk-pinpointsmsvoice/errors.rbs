@@ -1,0 +1,22 @@
+module Aws::PinpointSMSVoice
+  module Errors
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

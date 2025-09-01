@@ -1,0 +1,5 @@
+  module Aws
+    module DLM
+      VERSION: String
+    end
+  end

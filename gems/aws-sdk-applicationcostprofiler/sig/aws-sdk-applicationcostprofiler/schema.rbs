@@ -1,0 +1,42 @@
+module Aws::ApplicationCostProfiler
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    DeleteReportDefinitionRequest: StructureShape
+    DeleteReportDefinitionResult: StructureShape
+    ErrorMessage: StringShape
+    Format: EnumShape
+    GetReportDefinitionRequest: StructureShape
+    GetReportDefinitionResult: StructureShape
+    ImportApplicationUsageRequest: StructureShape
+    ImportApplicationUsageResult: StructureShape
+    ImportId: StringShape
+    Integer: IntegerShape
+    InternalServerException: StructureShape
+    ListReportDefinitionsRequest: StructureShape
+    ListReportDefinitionsResult: StructureShape
+    PutReportDefinitionRequest: StructureShape
+    PutReportDefinitionResult: StructureShape
+    ReportDefinition: StructureShape
+    ReportDefinitionList: ListShape
+    ReportDescription: StringShape
+    ReportFrequency: EnumShape
+    ReportId: StringShape
+    S3Bucket: StringShape
+    S3BucketRegion: EnumShape
+    S3Key: StringShape
+    S3Location: StructureShape
+    S3Prefix: StringShape
+    ServiceQuotaExceededException: StructureShape
+    SourceS3Location: StructureShape
+    ThrottlingException: StructureShape
+    Timestamp: TimestampShape
+    Token: StringShape
+    UpdateReportDefinitionRequest: StructureShape
+    UpdateReportDefinitionResult: StructureShape
+    ValidationException: StructureShape
+
+    AWSApplicationCostProfiler: ServiceShape
+  end
+end

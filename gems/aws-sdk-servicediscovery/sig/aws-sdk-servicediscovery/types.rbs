@@ -1,0 +1,1575 @@
+module Aws::ServiceDiscovery
+  module Types
+
+    class CreateHttpNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creator_request_id: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateHttpNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class CreatePrivateDnsNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creator_request_id: String,
+        ?description: String,
+        ?vpc: String,
+        ?tags: Array[Types::Tag],
+        ?properties: Types::PrivateDnsNamespaceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor description: String?
+      attr_accessor vpc: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor properties: Types::PrivateDnsNamespaceProperties?
+    end
+
+    class CreatePrivateDnsNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class CreatePublicDnsNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creator_request_id: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?properties: Types::PublicDnsNamespaceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor properties: Types::PublicDnsNamespaceProperties?
+    end
+
+    class CreatePublicDnsNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class CreateServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?namespace_id: String,
+        ?creator_request_id: String,
+        ?description: String,
+        ?dns_config: Types::DnsConfig,
+        ?health_check_config: Types::HealthCheckConfig,
+        ?health_check_custom_config: Types::HealthCheckCustomConfig,
+        ?tags: Array[Types::Tag],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor namespace_id: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor description: String?
+      attr_accessor dns_config: Types::DnsConfig?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor type: String?
+    end
+
+    class CreateServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class CustomHealthNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CustomHealthStatus
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    class DeleteNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DeleteServiceAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor attributes: Array[String]?
+    end
+
+    class DeleteServiceAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor instance_id: String?
+    end
+
+    class DeregisterInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DiscoverInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?service_name: String,
+        ?max_results: Integer,
+        ?query_parameters: Hash[String, String],
+        ?optional_parameters: Hash[String, String],
+        ?health_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor service_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor query_parameters: Hash[String, String]?
+      attr_accessor optional_parameters: Hash[String, String]?
+      attr_accessor health_status: String?
+    end
+
+    class DiscoverInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::HttpInstanceSummary],
+        ?instances_revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::HttpInstanceSummary]?
+      attr_accessor instances_revision: Integer?
+    end
+
+    class DiscoverInstancesRevisionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor service_name: String?
+    end
+
+    class DiscoverInstancesRevisionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances_revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances_revision: Integer?
+    end
+
+    class DnsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_id: String,
+        ?routing_policy: String,
+        ?dns_records: Array[Types::DnsRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_id: String?
+      attr_accessor routing_policy: String?
+      attr_accessor dns_records: Array[Types::DnsRecord]?
+    end
+
+    class DnsConfigChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_records: Array[Types::DnsRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_records: Array[Types::DnsRecord]?
+    end
+
+    class DnsProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?soa: Types::SOA,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor soa: Types::SOA?
+    end
+
+    class DnsRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor ttl: Integer?
+    end
+
+    class DuplicateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?duplicate_operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor duplicate_operation_id: String?
+    end
+
+    module FilterCondition
+      EQ: String
+      IN: String
+      BETWEEN: String
+      BEGINS_WITH: String
+    end
+
+    class GetInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor instance_id: String?
+    end
+
+    class GetInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+    end
+
+    class GetInstancesHealthStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?instances: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor instances: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetInstancesHealthStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class GetOperationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class GetOperationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation: Types::Operation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation: Types::Operation?
+    end
+
+    class GetServiceAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+    end
+
+    class GetServiceAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_attributes: Types::ServiceAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_attributes: Types::ServiceAttributes?
+    end
+
+    class GetServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class HealthCheckConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?resource_path: String,
+        ?failure_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor resource_path: String?
+      attr_accessor failure_threshold: Integer?
+    end
+
+    class HealthCheckCustomConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_threshold: Integer?
+    end
+
+    module HealthCheckType
+      HTTP: String
+      HTTPS: String
+      TCP: String
+    end
+
+    module HealthStatus
+      HEALTHY: String
+      UNHEALTHY: String
+      UNKNOWN: String
+    end
+
+    module HealthStatusFilter
+      HEALTHY: String
+      UNHEALTHY: String
+      ALL: String
+      HEALTHY_OR_ELSE_ALL: String
+    end
+
+    class HttpInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace_name: String,
+        ?service_name: String,
+        ?health_status: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace_name: String?
+      attr_accessor service_name: String?
+      attr_accessor health_status: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class HttpNamespaceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+    end
+
+    class HttpProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_name: String?
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?creator_request_id: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class InstanceNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class InvalidInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::InstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::InstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNamespacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::NamespaceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::NamespaceFilter]?
+    end
+
+    class ListNamespacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespaces: Array[Types::NamespaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespaces: Array[Types::NamespaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::OperationFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::OperationFilter]?
+    end
+
+    class ListOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::OperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::OperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::ServiceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::ServiceFilter]?
+    end
+
+    class ListServicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::ServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::ServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Namespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?service_count: Integer,
+        ?properties: Types::NamespaceProperties,
+        ?create_date: Time,
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor service_count: Integer?
+      attr_accessor properties: Types::NamespaceProperties?
+      attr_accessor create_date: Time?
+      attr_accessor creator_request_id: String?
+    end
+
+    class NamespaceAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?creator_request_id: String,
+        ?namespace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor namespace_id: String?
+    end
+
+    class NamespaceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    module NamespaceFilterName
+      TYPE: String
+      NAME: String
+      HTTP_NAME: String
+    end
+
+    class NamespaceNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NamespaceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_properties: Types::DnsProperties,
+        ?http_properties: Types::HttpProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_properties: Types::DnsProperties?
+      attr_accessor http_properties: Types::HttpProperties?
+    end
+
+    class NamespaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?service_count: Integer,
+        ?properties: Types::NamespaceProperties,
+        ?create_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor service_count: Integer?
+      attr_accessor properties: Types::NamespaceProperties?
+      attr_accessor create_date: Time?
+    end
+
+    module NamespaceType
+      DNS_PUBLIC: String
+      DNS_PRIVATE: String
+      HTTP: String
+    end
+
+    class Operation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?create_date: Time,
+        ?update_date: Time,
+        ?targets: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor create_date: Time?
+      attr_accessor update_date: Time?
+      attr_accessor targets: Hash[String, String]?
+    end
+
+    class OperationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    module OperationFilterName
+      NAMESPACE_ID: String
+      SERVICE_ID: String
+      STATUS: String
+      TYPE: String
+      UPDATE_DATE: String
+    end
+
+    class OperationNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OperationStatus
+      SUBMITTED: String
+      PENDING: String
+      SUCCESS: String
+      FAIL: String
+    end
+
+    class OperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+    end
+
+    module OperationTargetType
+      NAMESPACE: String
+      SERVICE: String
+      INSTANCE: String
+    end
+
+    module OperationType
+      CREATE_NAMESPACE: String
+      DELETE_NAMESPACE: String
+      UPDATE_NAMESPACE: String
+      UPDATE_SERVICE: String
+      REGISTER_INSTANCE: String
+      DEREGISTER_INSTANCE: String
+    end
+
+    class PrivateDnsNamespaceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?properties: Types::PrivateDnsNamespacePropertiesChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor properties: Types::PrivateDnsNamespacePropertiesChange?
+    end
+
+    class PrivateDnsNamespaceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_properties: Types::PrivateDnsPropertiesMutable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_properties: Types::PrivateDnsPropertiesMutable?
+    end
+
+    class PrivateDnsNamespacePropertiesChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_properties: Types::PrivateDnsPropertiesMutableChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_properties: Types::PrivateDnsPropertiesMutableChange?
+    end
+
+    class PrivateDnsPropertiesMutable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?soa: Types::SOA,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor soa: Types::SOA?
+    end
+
+    class PrivateDnsPropertiesMutableChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?soa: Types::SOAChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor soa: Types::SOAChange?
+    end
+
+    class PublicDnsNamespaceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?properties: Types::PublicDnsNamespacePropertiesChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor properties: Types::PublicDnsNamespacePropertiesChange?
+    end
+
+    class PublicDnsNamespaceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_properties: Types::PublicDnsPropertiesMutable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_properties: Types::PublicDnsPropertiesMutable?
+    end
+
+    class PublicDnsNamespacePropertiesChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_properties: Types::PublicDnsPropertiesMutableChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_properties: Types::PublicDnsPropertiesMutableChange?
+    end
+
+    class PublicDnsPropertiesMutable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?soa: Types::SOA,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor soa: Types::SOA?
+    end
+
+    class PublicDnsPropertiesMutableChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?soa: Types::SOAChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor soa: Types::SOAChange?
+    end
+
+    module RecordType
+      SRV: String
+      A: String
+      AAAA: String
+      CNAME: String
+    end
+
+    class RegisterInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?instance_id: String,
+        ?creator_request_id: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class RegisterInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class RequestLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RoutingPolicy
+      MULTIVALUE: String
+      WEIGHTED: String
+    end
+
+    class SOA
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttl: Integer?
+    end
+
+    class SOAChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttl: Integer?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?namespace_id: String,
+        ?description: String,
+        ?instance_count: Integer,
+        ?dns_config: Types::DnsConfig,
+        ?type: String,
+        ?health_check_config: Types::HealthCheckConfig,
+        ?health_check_custom_config: Types::HealthCheckCustomConfig,
+        ?create_date: Time,
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor namespace_id: String?
+      attr_accessor description: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor dns_config: Types::DnsConfig?
+      attr_accessor type: String?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig?
+      attr_accessor create_date: Time?
+      attr_accessor creator_request_id: String?
+    end
+
+    class ServiceAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?creator_request_id: String,
+        ?service_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor service_id: String?
+    end
+
+    class ServiceAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class ServiceAttributesLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?dns_config: Types::DnsConfigChange,
+        ?health_check_config: Types::HealthCheckConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor dns_config: Types::DnsConfigChange?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+    end
+
+    class ServiceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    module ServiceFilterName
+      NAMESPACE_ID: String
+    end
+
+    class ServiceNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?instance_count: Integer,
+        ?dns_config: Types::DnsConfig,
+        ?health_check_config: Types::HealthCheckConfig,
+        ?health_check_custom_config: Types::HealthCheckCustomConfig,
+        ?create_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor dns_config: Types::DnsConfig?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig?
+      attr_accessor create_date: Time?
+    end
+
+    module ServiceType
+      HTTP: String
+      DNS_HTTP: String
+      DNS: String
+    end
+
+    module ServiceTypeOption
+      HTTP: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateHttpNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?updater_request_id: String,
+        ?namespace: Types::HttpNamespaceChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor updater_request_id: String?
+      attr_accessor namespace: Types::HttpNamespaceChange?
+    end
+
+    class UpdateHttpNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateInstanceCustomHealthStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?instance_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdatePrivateDnsNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?updater_request_id: String,
+        ?namespace: Types::PrivateDnsNamespaceChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor updater_request_id: String?
+      attr_accessor namespace: Types::PrivateDnsNamespaceChange?
+    end
+
+    class UpdatePrivateDnsNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdatePublicDnsNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?updater_request_id: String,
+        ?namespace: Types::PublicDnsNamespaceChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor updater_request_id: String?
+      attr_accessor namespace: Types::PublicDnsNamespaceChange?
+    end
+
+    class UpdatePublicDnsNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateServiceAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class UpdateServiceAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?service: Types::ServiceChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor service: Types::ServiceChange?
+    end
+
+    class UpdateServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+  end
+end

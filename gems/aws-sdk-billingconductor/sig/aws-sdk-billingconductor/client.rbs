@@ -1,0 +1,535 @@
+module Aws::Billingconductor
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Billingconductor::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAccountsResponse
+      include Smithy::Client::_Response[Types::AssociateAccountsOperationOutput]
+      def arn: () -> String?
+    end
+    def associate_accounts: (
+      ?arn: String,
+      ?account_ids: Array[String]
+    ) -> _AssociateAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAccountsResponse
+
+    interface _AssociatePricingRulesResponse
+      include Smithy::Client::_Response[Types::AssociatePricingRulesOperationOutput]
+      def arn: () -> String?
+    end
+    def associate_pricing_rules: (
+      ?arn: String,
+      ?pricing_rule_arns: Array[String]
+    ) -> _AssociatePricingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePricingRulesResponse
+
+    interface _BatchAssociateResourcesToCustomLineItemResponse
+      include Smithy::Client::_Response[Types::BatchAssociateResourcesToCustomLineItemOperationOutput]
+      def successfully_associated_resources: () -> Array[Types::AssociateResourceResponseElement]?
+      def failed_associated_resources: () -> Array[Types::AssociateResourceResponseElement]?
+    end
+    def batch_associate_resources_to_custom_line_item: (
+      ?target_arn: String,
+      ?resource_arns: Array[String],
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      }
+    ) -> _BatchAssociateResourcesToCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateResourcesToCustomLineItemResponse
+
+    interface _BatchDisassociateResourcesFromCustomLineItemResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateResourcesFromCustomLineItemOperationOutput]
+      def successfully_disassociated_resources: () -> Array[Types::DisassociateResourceResponseElement]?
+      def failed_disassociated_resources: () -> Array[Types::DisassociateResourceResponseElement]?
+    end
+    def batch_disassociate_resources_from_custom_line_item: (
+      ?target_arn: String,
+      ?resource_arns: Array[String],
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      }
+    ) -> _BatchDisassociateResourcesFromCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateResourcesFromCustomLineItemResponse
+
+    interface _CreateBillingGroupResponse
+      include Smithy::Client::_Response[Types::CreateBillingGroupOperationOutput]
+      def arn: () -> String?
+    end
+    def create_billing_group: (
+      ?client_token: String,
+      ?name: String,
+      ?account_grouping: {
+        linked_account_ids: Array[String],
+        auto_associate: bool
+      },
+      ?computation_preference: {
+        pricing_plan_arn: String
+      },
+      ?primary_account_id: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateBillingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBillingGroupResponse
+
+    interface _CreateCustomLineItemResponse
+      include Smithy::Client::_Response[Types::CreateCustomLineItemOperationOutput]
+      def arn: () -> String?
+    end
+    def create_custom_line_item: (
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?billing_group_arn: String,
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      },
+      ?tags: Hash[String, String],
+      ?charge_details: {
+        flat: {
+          charge_value: Float
+        },
+        percentage: {
+          percentage_value: Float,
+          associated_values: Array[String]
+        },
+        type: String,
+        line_item_filters: Array[
+          {
+            attribute: String,
+            match_option: String,
+            values: Array[String]
+          }
+        ]
+      },
+      ?account_id: String
+    ) -> _CreateCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomLineItemResponse
+
+    interface _CreatePricingPlanResponse
+      include Smithy::Client::_Response[Types::CreatePricingPlanOperationOutput]
+      def arn: () -> String?
+    end
+    def create_pricing_plan: (
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?pricing_rule_arns: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreatePricingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePricingPlanResponse
+
+    interface _CreatePricingRuleResponse
+      include Smithy::Client::_Response[Types::CreatePricingRuleOperationOutput]
+      def arn: () -> String?
+    end
+    def create_pricing_rule: (
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?scope: String,
+      ?type: String,
+      ?modifier_percentage: Float,
+      ?service: String,
+      ?tags: Hash[String, String],
+      ?billing_entity: String,
+      ?tiering: {
+        free_tier: {
+          activated: bool
+        }
+      },
+      ?usage_type: String,
+      ?operation: String
+    ) -> _CreatePricingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePricingRuleResponse
+
+    interface _DeleteBillingGroupResponse
+      include Smithy::Client::_Response[Types::DeleteBillingGroupOperationOutput]
+      def arn: () -> String?
+    end
+    def delete_billing_group: (
+      ?arn: String
+    ) -> _DeleteBillingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBillingGroupResponse
+
+    interface _DeleteCustomLineItemResponse
+      include Smithy::Client::_Response[Types::DeleteCustomLineItemOperationOutput]
+      def arn: () -> String?
+    end
+    def delete_custom_line_item: (
+      ?arn: String,
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      }
+    ) -> _DeleteCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomLineItemResponse
+
+    interface _DeletePricingPlanResponse
+      include Smithy::Client::_Response[Types::DeletePricingPlanOperationOutput]
+      def arn: () -> String?
+    end
+    def delete_pricing_plan: (
+      ?arn: String
+    ) -> _DeletePricingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePricingPlanResponse
+
+    interface _DeletePricingRuleResponse
+      include Smithy::Client::_Response[Types::DeletePricingRuleOperationOutput]
+      def arn: () -> String?
+    end
+    def delete_pricing_rule: (
+      ?arn: String
+    ) -> _DeletePricingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePricingRuleResponse
+
+    interface _DisassociateAccountsResponse
+      include Smithy::Client::_Response[Types::DisassociateAccountsOperationOutput]
+      def arn: () -> String?
+    end
+    def disassociate_accounts: (
+      ?arn: String,
+      ?account_ids: Array[String]
+    ) -> _DisassociateAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAccountsResponse
+
+    interface _DisassociatePricingRulesResponse
+      include Smithy::Client::_Response[Types::DisassociatePricingRulesOperationOutput]
+      def arn: () -> String?
+    end
+    def disassociate_pricing_rules: (
+      ?arn: String,
+      ?pricing_rule_arns: Array[String]
+    ) -> _DisassociatePricingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePricingRulesResponse
+
+    interface _GetBillingGroupCostReportResponse
+      include Smithy::Client::_Response[Types::GetBillingGroupCostReportOutput]
+      def billing_group_cost_report_results: () -> Array[Types::BillingGroupCostReportResultElement]?
+      def next_token: () -> String?
+    end
+    def get_billing_group_cost_report: (
+      ?arn: String,
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      },
+      ?group_by: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetBillingGroupCostReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingGroupCostReportResponse
+
+    interface _ListAccountAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAccountAssociationsOperationOutput]
+      def linked_accounts: () -> Array[Types::AccountAssociationsListElement]?
+      def next_token: () -> String?
+    end
+    def list_account_associations: (
+      ?billing_period: String,
+      ?filters: {
+        association: String,
+        account_id: String,
+        account_ids: Array[String]
+      },
+      ?next_token: String
+    ) -> _ListAccountAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountAssociationsResponse
+
+    interface _ListBillingGroupCostReportsResponse
+      include Smithy::Client::_Response[Types::ListBillingGroupCostReportsOperationOutput]
+      def billing_group_cost_reports: () -> Array[Types::BillingGroupCostReportElement]?
+      def next_token: () -> String?
+    end
+    def list_billing_group_cost_reports: (
+      ?billing_period: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        billing_group_arns: Array[String]
+      }
+    ) -> _ListBillingGroupCostReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingGroupCostReportsResponse
+
+    interface _ListBillingGroupsResponse
+      include Smithy::Client::_Response[Types::ListBillingGroupsOperationOutput]
+      def billing_groups: () -> Array[Types::BillingGroupListElement]?
+      def next_token: () -> String?
+    end
+    def list_billing_groups: (
+      ?billing_period: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        arns: Array[String],
+        pricing_plan: String,
+        statuses: Array[String],
+        auto_associate: bool
+      }
+    ) -> _ListBillingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingGroupsResponse
+
+    interface _ListCustomLineItemVersionsResponse
+      include Smithy::Client::_Response[Types::ListCustomLineItemVersionsOperationOutput]
+      def custom_line_item_versions: () -> Array[Types::CustomLineItemVersionListElement]?
+      def next_token: () -> String?
+    end
+    def list_custom_line_item_versions: (
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        billing_period_range: {
+          start_billing_period: String,
+          end_billing_period: untyped
+        }
+      }
+    ) -> _ListCustomLineItemVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomLineItemVersionsResponse
+
+    interface _ListCustomLineItemsResponse
+      include Smithy::Client::_Response[Types::ListCustomLineItemsOperationOutput]
+      def custom_line_items: () -> Array[Types::CustomLineItemListElement]?
+      def next_token: () -> String?
+    end
+    def list_custom_line_items: (
+      ?billing_period: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        names: Array[String],
+        billing_groups: Array[String],
+        arns: Array[String],
+        account_ids: Array[String]
+      }
+    ) -> _ListCustomLineItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomLineItemsResponse
+
+    interface _ListPricingPlansResponse
+      include Smithy::Client::_Response[Types::ListPricingPlansOperationOutput]
+      def billing_period: () -> String?
+      def pricing_plans: () -> Array[Types::PricingPlanListElement]?
+      def next_token: () -> String?
+    end
+    def list_pricing_plans: (
+      ?billing_period: String,
+      ?filters: {
+        arns: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPricingPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPricingPlansResponse
+
+    interface _ListPricingPlansAssociatedWithPricingRuleResponse
+      include Smithy::Client::_Response[Types::ListPricingPlansAssociatedWithPricingRuleOperationOutput]
+      def billing_period: () -> String?
+      def pricing_rule_arn: () -> String?
+      def pricing_plan_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_pricing_plans_associated_with_pricing_rule: (
+      ?billing_period: String,
+      ?pricing_rule_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPricingPlansAssociatedWithPricingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPricingPlansAssociatedWithPricingRuleResponse
+
+    interface _ListPricingRulesResponse
+      include Smithy::Client::_Response[Types::ListPricingRulesOperationOutput]
+      def billing_period: () -> String?
+      def pricing_rules: () -> Array[Types::PricingRuleListElement]?
+      def next_token: () -> String?
+    end
+    def list_pricing_rules: (
+      ?billing_period: String,
+      ?filters: {
+        arns: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPricingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPricingRulesResponse
+
+    interface _ListPricingRulesAssociatedToPricingPlanResponse
+      include Smithy::Client::_Response[Types::ListPricingRulesAssociatedToPricingPlanOperationOutput]
+      def billing_period: () -> String?
+      def pricing_plan_arn: () -> String?
+      def pricing_rule_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_pricing_rules_associated_to_pricing_plan: (
+      ?billing_period: String,
+      ?pricing_plan_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPricingRulesAssociatedToPricingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPricingRulesAssociatedToPricingPlanResponse
+
+    interface _ListResourcesAssociatedToCustomLineItemResponse
+      include Smithy::Client::_Response[Types::ListResourcesAssociatedToCustomLineItemOperationOutput]
+      def arn: () -> String?
+      def associated_resources: () -> Array[Types::ListResourcesAssociatedToCustomLineItemResponseElement]?
+      def next_token: () -> String?
+    end
+    def list_resources_associated_to_custom_line_item: (
+      ?billing_period: String,
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        relationship: String
+      }
+    ) -> _ListResourcesAssociatedToCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesAssociatedToCustomLineItemResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBillingGroupResponse
+      include Smithy::Client::_Response[Types::UpdateBillingGroupOperationOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def primary_account_id: () -> String?
+      def pricing_plan_arn: () -> String?
+      def size: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def account_grouping: () -> Types::UpdateBillingGroupAccountGrouping?
+    end
+    def update_billing_group: (
+      ?arn: String,
+      ?name: String,
+      ?status: String,
+      ?computation_preference: {
+        pricing_plan_arn: String
+      },
+      ?description: String,
+      ?account_grouping: {
+        auto_associate: bool
+      }
+    ) -> _UpdateBillingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingGroupResponse
+
+    interface _UpdateCustomLineItemResponse
+      include Smithy::Client::_Response[Types::UpdateCustomLineItemOperationOutput]
+      def arn: () -> String?
+      def billing_group_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_details: () -> Types::ListCustomLineItemChargeDetails?
+      def last_modified_time: () -> Integer?
+      def association_size: () -> Integer?
+    end
+    def update_custom_line_item: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?charge_details: {
+        flat: {
+          charge_value: Float
+        },
+        percentage: {
+          percentage_value: Float
+        },
+        line_item_filters: Array[
+          {
+            attribute: String,
+            match_option: String,
+            values: Array[String]
+          }
+        ]
+      },
+      ?billing_period_range: {
+        inclusive_start_billing_period: String,
+        exclusive_end_billing_period: untyped
+      }
+    ) -> _UpdateCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomLineItemResponse
+
+    interface _UpdatePricingPlanResponse
+      include Smithy::Client::_Response[Types::UpdatePricingPlanOperationOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def size: () -> Integer?
+      def last_modified_time: () -> Integer?
+    end
+    def update_pricing_plan: (
+      ?arn: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdatePricingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePricingPlanResponse
+
+    interface _UpdatePricingRuleResponse
+      include Smithy::Client::_Response[Types::UpdatePricingRuleOperationOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def scope: () -> String?
+      def type: () -> String?
+      def modifier_percentage: () -> Float?
+      def service: () -> String?
+      def associated_pricing_plan_count: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def billing_entity: () -> String?
+      def tiering: () -> Types::UpdateTieringInput?
+      def usage_type: () -> String?
+      def operation: () -> String?
+    end
+    def update_pricing_rule: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?modifier_percentage: Float,
+      ?tiering: {
+        free_tier: {
+          activated: bool
+        }
+      }
+    ) -> _UpdatePricingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePricingRuleResponse
+  end
+end

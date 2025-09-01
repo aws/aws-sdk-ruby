@@ -1,0 +1,16 @@
+module Aws::KinesisVideoWebRTCStorage
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

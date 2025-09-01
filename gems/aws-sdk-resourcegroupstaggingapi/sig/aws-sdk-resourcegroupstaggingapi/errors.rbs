@@ -1,0 +1,22 @@
+module Aws::ResourceGroupsTaggingAPI
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConstraintViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PaginationTokenExpiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

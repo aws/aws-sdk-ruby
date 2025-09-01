@@ -1,0 +1,52 @@
+module Aws::ACM
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDomainValidationOptionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

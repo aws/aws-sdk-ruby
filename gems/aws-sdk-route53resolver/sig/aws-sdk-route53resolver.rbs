@@ -1,0 +1,5 @@
+  module Aws
+    module Route53Resolver
+      VERSION: String
+    end
+  end

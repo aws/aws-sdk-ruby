@@ -1,0 +1,49 @@
+module Aws::FreeTier
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccountId: StringShape
+    AccountPlanStatus: EnumShape
+    AccountPlanType: EnumShape
+    Activities: ListShape
+    ActivityId: StringShape
+    ActivityReward: UnionShape
+    ActivityStatus: EnumShape
+    ActivitySummary: StructureShape
+    CurrencyCode: EnumShape
+    Dimension: EnumShape
+    DimensionValues: StructureShape
+    Expression: StructureShape
+    Expressions: ListShape
+    FilterActivityStatuses: ListShape
+    FreeTierUsage: StructureShape
+    FreeTierUsages: ListShape
+    GenericDouble: FloatShape
+    GenericString: StringShape
+    GetAccountActivityRequest: StructureShape
+    GetAccountActivityResponse: StructureShape
+    GetAccountPlanStateRequest: StructureShape
+    GetAccountPlanStateResponse: StructureShape
+    GetFreeTierUsageRequest: StructureShape
+    GetFreeTierUsageResponse: StructureShape
+    InternalServerException: StructureShape
+    LanguageCode: EnumShape
+    ListAccountActivitiesRequest: StructureShape
+    ListAccountActivitiesResponse: StructureShape
+    MatchOption: EnumShape
+    MatchOptions: ListShape
+    MaxResults: IntegerShape
+    MonetaryAmount: StructureShape
+    NextPageToken: StringShape
+    ResourceNotFoundException: StructureShape
+    ThrottlingException: StructureShape
+    UpgradeAccountPlanRequest: StructureShape
+    UpgradeAccountPlanResponse: StructureShape
+    ValidationException: StructureShape
+    Value: StringShape
+    Values: ListShape
+
+    AWSFreeTierService: ServiceShape
+  end
+end

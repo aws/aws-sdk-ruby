@@ -1,0 +1,5 @@
+module Aws::Batch
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

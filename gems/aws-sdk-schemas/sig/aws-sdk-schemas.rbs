@@ -1,0 +1,5 @@
+  module Aws
+    module Schemas
+      VERSION: String
+    end
+  end

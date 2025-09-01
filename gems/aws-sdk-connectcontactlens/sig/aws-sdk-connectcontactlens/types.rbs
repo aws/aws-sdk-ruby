@@ -1,0 +1,224 @@
+module Aws::ConnectContactLens
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Categories
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matched_categories: Array[String],
+        ?matched_details: Hash[String, Types::CategoryDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matched_categories: Array[String]?
+      attr_accessor matched_details: Hash[String, Types::CategoryDetails]?
+    end
+
+    class CategoryDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?points_of_interest: Array[Types::PointOfInterest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor points_of_interest: Array[Types::PointOfInterest]?
+    end
+
+    class CharacterOffsets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_char: Integer,
+        ?end_offset_char: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_char: Integer?
+      attr_accessor end_offset_char: Integer?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IssueDetected
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?character_offsets: Types::CharacterOffsets,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor character_offsets: Types::CharacterOffsets?
+    end
+
+    class ListRealtimeContactAnalysisSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?contact_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor contact_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRealtimeContactAnalysisSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segments: Array[Types::RealtimeContactAnalysisSegment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segments: Array[Types::RealtimeContactAnalysisSegment]?
+      attr_accessor next_token: String?
+    end
+
+    class PointOfInterest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+    end
+
+    class PostContactSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?status: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor status: String?
+      attr_accessor failure_code: String?
+    end
+
+    module PostContactSummaryFailureCode
+      QUOTA_EXCEEDED: String
+      INSUFFICIENT_CONVERSATION_CONTENT: String
+      FAILED_SAFETY_GUIDELINES: String
+      INVALID_ANALYSIS_CONFIGURATION: String
+      INTERNAL_ERROR: String
+    end
+
+    module PostContactSummaryStatus
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class RealtimeContactAnalysisSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: Types::Transcript,
+        ?categories: Types::Categories,
+        ?post_contact_summary: Types::PostContactSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: Types::Transcript?
+      attr_accessor categories: Types::Categories?
+      attr_accessor post_contact_summary: Types::PostContactSummary?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SentimentValue
+      POSITIVE: String
+      NEUTRAL: String
+      NEGATIVE: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Transcript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?participant_id: String,
+        ?participant_role: String,
+        ?content: String,
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+        ?sentiment: String,
+        ?issues_detected: Array[Types::IssueDetected],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor participant_id: String?
+      attr_accessor participant_role: String?
+      attr_accessor content: String?
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+      attr_accessor sentiment: String?
+      attr_accessor issues_detected: Array[Types::IssueDetected]?
+    end
+  end
+end

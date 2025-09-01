@@ -1,0 +1,864 @@
+module Aws::WorkSpacesThinClient
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApplyTimeOf
+      UTC: String
+      DEVICE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?desktop_arn: String,
+        ?desktop_endpoint: String,
+        ?software_set_update_schedule: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?software_set_update_mode: String,
+        ?desired_software_set_id: String,
+        ?kms_key_arn: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?device_creation_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor desktop_arn: String?
+      attr_accessor desktop_endpoint: String?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor software_set_update_mode: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor device_creation_tags: Hash[String, String]?
+    end
+
+    class CreateEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::EnvironmentSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::EnvironmentSummary?
+    end
+
+    module DayOfWeek
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
+      SUNDAY: String
+    end
+
+    class DeleteDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?target_device_status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor target_device_status: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeregisterDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DesktopType
+      WORKSPACES: String
+      APPSTREAM: String
+      WORKSPACES_WEB: String
+    end
+
+    class Device
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?serial_number: String,
+        ?name: String,
+        ?model: String,
+        ?environment_id: String,
+        ?status: String,
+        ?current_software_set_id: String,
+        ?current_software_set_version: String,
+        ?desired_software_set_id: String,
+        ?pending_software_set_id: String,
+        ?pending_software_set_version: String,
+        ?software_set_update_schedule: String,
+        ?software_set_compliance_status: String,
+        ?software_set_update_status: String,
+        ?last_connected_at: Time,
+        ?last_posture_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?arn: String,
+        ?kms_key_arn: String,
+        ?last_user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor serial_number: String?
+      attr_accessor name: String?
+      attr_accessor model: String?
+      attr_accessor environment_id: String?
+      attr_accessor status: String?
+      attr_accessor current_software_set_id: String?
+      attr_accessor current_software_set_version: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor pending_software_set_id: String?
+      attr_accessor pending_software_set_version: String?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor software_set_compliance_status: String?
+      attr_accessor software_set_update_status: String?
+      attr_accessor last_connected_at: Time?
+      attr_accessor last_posture_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor last_user_id: String?
+    end
+
+    module DeviceSoftwareSetComplianceStatus
+      NONE: String
+      COMPLIANT: String
+      NOT_COMPLIANT: String
+    end
+
+    module DeviceStatus
+      REGISTERED: String
+      DEREGISTERING: String
+      DEREGISTERED: String
+      ARCHIVED: String
+    end
+
+    class DeviceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?serial_number: String,
+        ?name: String,
+        ?model: String,
+        ?environment_id: String,
+        ?status: String,
+        ?current_software_set_id: String,
+        ?desired_software_set_id: String,
+        ?pending_software_set_id: String,
+        ?software_set_update_schedule: String,
+        ?last_connected_at: Time,
+        ?last_posture_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?arn: String,
+        ?last_user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor serial_number: String?
+      attr_accessor name: String?
+      attr_accessor model: String?
+      attr_accessor environment_id: String?
+      attr_accessor status: String?
+      attr_accessor current_software_set_id: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor pending_software_set_id: String?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor last_connected_at: Time?
+      attr_accessor last_posture_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor last_user_id: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?desktop_arn: String,
+        ?desktop_endpoint: String,
+        ?desktop_type: String,
+        ?activation_code: String,
+        ?registered_devices_count: Integer,
+        ?software_set_update_schedule: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?software_set_update_mode: String,
+        ?desired_software_set_id: String,
+        ?pending_software_set_id: String,
+        ?pending_software_set_version: String,
+        ?software_set_compliance_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?arn: String,
+        ?kms_key_arn: String,
+        ?device_creation_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor desktop_arn: String?
+      attr_accessor desktop_endpoint: String?
+      attr_accessor desktop_type: String?
+      attr_accessor activation_code: String?
+      attr_accessor registered_devices_count: Integer?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor software_set_update_mode: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor pending_software_set_id: String?
+      attr_accessor pending_software_set_version: String?
+      attr_accessor software_set_compliance_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor device_creation_tags: Hash[String, String]?
+    end
+
+    module EnvironmentSoftwareSetComplianceStatus
+      NO_REGISTERED_DEVICES: String
+      COMPLIANT: String
+      NOT_COMPLIANT: String
+    end
+
+    class EnvironmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?desktop_arn: String,
+        ?desktop_endpoint: String,
+        ?desktop_type: String,
+        ?activation_code: String,
+        ?software_set_update_schedule: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?software_set_update_mode: String,
+        ?desired_software_set_id: String,
+        ?pending_software_set_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor desktop_arn: String?
+      attr_accessor desktop_endpoint: String?
+      attr_accessor desktop_type: String?
+      attr_accessor activation_code: String?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor software_set_update_mode: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor pending_software_set_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor arn: String?
+    end
+
+    class GetDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: Types::Device,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: Types::Device?
+    end
+
+    class GetEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class GetSoftwareSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetSoftwareSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?software_set: Types::SoftwareSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor software_set: Types::SoftwareSet?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListDevicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDevicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::DeviceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::DeviceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::EnvironmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::EnvironmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSoftwareSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSoftwareSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?software_sets: Array[Types::SoftwareSetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor software_sets: Array[Types::SoftwareSetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MaintenanceWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?start_time_hour: Integer,
+        ?start_time_minute: Integer,
+        ?end_time_hour: Integer,
+        ?end_time_minute: Integer,
+        ?days_of_the_week: Array[String],
+        ?apply_time_of: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor start_time_hour: Integer?
+      attr_accessor start_time_minute: Integer?
+      attr_accessor end_time_hour: Integer?
+      attr_accessor end_time_minute: Integer?
+      attr_accessor days_of_the_week: Array[String]?
+      attr_accessor apply_time_of: String?
+    end
+
+    module MaintenanceWindowType
+      SYSTEM: String
+      CUSTOM: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class Software
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class SoftwareSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: String,
+        ?released_at: Time,
+        ?supported_until: Time,
+        ?validation_status: String,
+        ?software: Array[Types::Software],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: String?
+      attr_accessor released_at: Time?
+      attr_accessor supported_until: Time?
+      attr_accessor validation_status: String?
+      attr_accessor software: Array[Types::Software]?
+      attr_accessor arn: String?
+    end
+
+    class SoftwareSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: String,
+        ?released_at: Time,
+        ?supported_until: Time,
+        ?validation_status: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: String?
+      attr_accessor released_at: Time?
+      attr_accessor supported_until: Time?
+      attr_accessor validation_status: String?
+      attr_accessor arn: String?
+    end
+
+    module SoftwareSetUpdateMode
+      USE_LATEST: String
+      USE_DESIRED: String
+    end
+
+    module SoftwareSetUpdateSchedule
+      USE_MAINTENANCE_WINDOW: String
+      APPLY_IMMEDIATELY: String
+    end
+
+    module SoftwareSetUpdateStatus
+      AVAILABLE: String
+      IN_PROGRESS: String
+      UP_TO_DATE: String
+    end
+
+    module SoftwareSetValidationStatus
+      VALIDATED: String
+      NOT_VALIDATED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetDeviceStatus
+      DEREGISTERED: String
+      ARCHIVED: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?desired_software_set_id: String,
+        ?software_set_update_schedule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor software_set_update_schedule: String?
+    end
+
+    class UpdateDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: Types::DeviceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: Types::DeviceSummary?
+    end
+
+    class UpdateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?desktop_arn: String,
+        ?desktop_endpoint: String,
+        ?software_set_update_schedule: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?software_set_update_mode: String,
+        ?desired_software_set_id: String,
+        ?device_creation_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor desktop_arn: String?
+      attr_accessor desktop_endpoint: String?
+      attr_accessor software_set_update_schedule: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor software_set_update_mode: String?
+      attr_accessor desired_software_set_id: String?
+      attr_accessor device_creation_tags: Hash[String, String]?
+    end
+
+    class UpdateEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::EnvironmentSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::EnvironmentSummary?
+    end
+
+    class UpdateSoftwareSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?validation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor validation_status: String?
+    end
+
+    class UpdateSoftwareSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

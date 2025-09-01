@@ -1,0 +1,5 @@
+module Aws::QBusiness
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module CognitoSync
+      VERSION: String
+    end
+  end

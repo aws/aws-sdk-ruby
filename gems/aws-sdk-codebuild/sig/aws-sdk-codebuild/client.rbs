@@ -1,0 +1,1355 @@
+module Aws::CodeBuild
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeBuild::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchDeleteBuildsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteBuildsOutput]
+      def builds_deleted: () -> Array[String]?
+      def builds_not_deleted: () -> Array[Types::BuildNotDeleted]?
+    end
+    def batch_delete_builds: (
+      ?ids: Array[String]
+    ) -> _BatchDeleteBuildsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteBuildsResponse
+
+    interface _BatchGetBuildBatchesResponse
+      include Smithy::Client::_Response[Types::BatchGetBuildBatchesOutput]
+      def build_batches: () -> Array[Types::BuildBatch]?
+      def build_batches_not_found: () -> Array[String]?
+    end
+    def batch_get_build_batches: (
+      ?ids: Array[String]
+    ) -> _BatchGetBuildBatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetBuildBatchesResponse
+
+    interface _BatchGetBuildsResponse
+      include Smithy::Client::_Response[Types::BatchGetBuildsOutput]
+      def builds: () -> Array[Types::Build]?
+      def builds_not_found: () -> Array[String]?
+    end
+    def batch_get_builds: (
+      ?ids: Array[String]
+    ) -> _BatchGetBuildsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetBuildsResponse
+
+    interface _BatchGetCommandExecutionsResponse
+      include Smithy::Client::_Response[Types::BatchGetCommandExecutionsOutput]
+      def command_executions: () -> Array[Types::CommandExecution]?
+      def command_executions_not_found: () -> Array[String]?
+    end
+    def batch_get_command_executions: (
+      ?sandbox_id: String,
+      ?command_execution_ids: Array[String]
+    ) -> _BatchGetCommandExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCommandExecutionsResponse
+
+    interface _BatchGetFleetsResponse
+      include Smithy::Client::_Response[Types::BatchGetFleetsOutput]
+      def fleets: () -> Array[Types::Fleet]?
+      def fleets_not_found: () -> Array[String]?
+    end
+    def batch_get_fleets: (
+      ?names: Array[String]
+    ) -> _BatchGetFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFleetsResponse
+
+    interface _BatchGetProjectsResponse
+      include Smithy::Client::_Response[Types::BatchGetProjectsOutput]
+      def projects: () -> Array[Types::Project]?
+      def projects_not_found: () -> Array[String]?
+    end
+    def batch_get_projects: (
+      ?names: Array[String]
+    ) -> _BatchGetProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetProjectsResponse
+
+    interface _BatchGetReportGroupsResponse
+      include Smithy::Client::_Response[Types::BatchGetReportGroupsOutput]
+      def report_groups: () -> Array[Types::ReportGroup]?
+      def report_groups_not_found: () -> Array[String]?
+    end
+    def batch_get_report_groups: (
+      ?report_group_arns: Array[String]
+    ) -> _BatchGetReportGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetReportGroupsResponse
+
+    interface _BatchGetReportsResponse
+      include Smithy::Client::_Response[Types::BatchGetReportsOutput]
+      def reports: () -> Array[Types::Report]?
+      def reports_not_found: () -> Array[String]?
+    end
+    def batch_get_reports: (
+      ?report_arns: Array[String]
+    ) -> _BatchGetReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetReportsResponse
+
+    interface _BatchGetSandboxesResponse
+      include Smithy::Client::_Response[Types::BatchGetSandboxesOutput]
+      def sandboxes: () -> Array[Types::Sandbox]?
+      def sandboxes_not_found: () -> Array[String]?
+    end
+    def batch_get_sandboxes: (
+      ?ids: Array[String]
+    ) -> _BatchGetSandboxesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSandboxesResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetOutput]
+      def fleet: () -> Types::Fleet?
+    end
+    def create_fleet: (
+      ?name: String,
+      ?base_capacity: Integer,
+      ?environment_type: String,
+      ?compute_type: String,
+      ?compute_configuration: {
+        v_cpu: Integer,
+        memory: untyped,
+        disk: untyped,
+        machine_type: String,
+        instance_type: String
+      },
+      ?scaling_configuration: {
+        scaling_type: String,
+        target_tracking_scaling_configs: Array[
+          {
+            metric_type: String,
+            target_value: Float
+          }
+        ],
+        max_capacity: Integer
+      },
+      ?overflow_behavior: String,
+      ?vpc_config: {
+        vpc_id: String,
+        subnets: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?proxy_configuration: {
+        default_behavior: String,
+        ordered_proxy_rules: Array[
+          {
+            type: String,
+            effect: String,
+            entities: Array[String]
+          }
+        ]
+      },
+      ?image_id: String,
+      ?fleet_service_role: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectOutput]
+      def project: () -> Types::Project?
+    end
+    def create_project: (
+      ?name: String,
+      ?description: String,
+      ?source: {
+        type: String,
+        location: String,
+        git_clone_depth: Integer,
+        git_submodules_config: {
+          fetch_submodules: bool
+        },
+        buildspec: untyped,
+        auth: {
+          type: String,
+          resource: untyped
+        },
+        report_build_status: untyped,
+        build_status_config: {
+          context: untyped,
+          target_url: untyped
+        },
+        insecure_ssl: untyped,
+        source_identifier: untyped
+      },
+      ?secondary_sources: Array[
+        {
+          type: String,
+          location: String,
+          git_clone_depth: Integer,
+          git_submodules_config: {
+            fetch_submodules: bool
+          },
+          buildspec: untyped,
+          auth: {
+            type: String,
+            resource: untyped
+          },
+          report_build_status: untyped,
+          build_status_config: {
+            context: untyped,
+            target_url: untyped
+          },
+          insecure_ssl: untyped,
+          source_identifier: untyped
+        }
+      ],
+      ?source_version: String,
+      ?secondary_source_versions: Array[
+        {
+          source_identifier: String,
+          source_version: untyped
+        }
+      ],
+      ?artifacts: {
+        type: String,
+        location: String,
+        path: untyped,
+        namespace_type: String,
+        name: untyped,
+        packaging: String,
+        override_artifact_name: bool,
+        encryption_disabled: untyped,
+        artifact_identifier: untyped,
+        bucket_owner_access: String
+      },
+      ?secondary_artifacts: Array[
+        {
+          type: String,
+          location: String,
+          path: untyped,
+          namespace_type: String,
+          name: untyped,
+          packaging: String,
+          override_artifact_name: bool,
+          encryption_disabled: untyped,
+          artifact_identifier: untyped,
+          bucket_owner_access: String
+        }
+      ],
+      ?cache: {
+        type: String,
+        location: String,
+        modes: Array[String],
+        cache_namespace: untyped
+      },
+      ?environment: {
+        type: String,
+        image: String,
+        compute_type: String,
+        compute_configuration: {
+          v_cpu: Integer,
+          memory: untyped,
+          disk: untyped,
+          machine_type: String,
+          instance_type: untyped
+        },
+        fleet: {
+          fleet_arn: String
+        },
+        environment_variables: Array[
+          {
+            name: untyped,
+            value: untyped,
+            type: String
+          }
+        ],
+        privileged_mode: bool,
+        certificate: untyped,
+        registry_credential: {
+          credential: untyped,
+          credential_provider: String
+        },
+        image_pull_credentials_type: String,
+        docker_server: {
+          compute_type: untyped,
+          security_group_ids: Array[String],
+          status: {
+            status: untyped,
+            message: untyped
+          }
+        }
+      },
+      ?service_role: String,
+      ?timeout_in_minutes: Integer,
+      ?queued_timeout_in_minutes: Integer,
+      ?encryption_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?vpc_config: {
+        vpc_id: String,
+        subnets: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?badge_enabled: bool,
+      ?logs_config: {
+        cloud_watch_logs: {
+          status: String,
+          group_name: String,
+          stream_name: untyped
+        },
+        s3_logs: {
+          status: untyped,
+          location: untyped,
+          encryption_disabled: bool,
+          bucket_owner_access: String
+        }
+      },
+      ?file_system_locations: Array[
+        {
+          type: String,
+          location: String,
+          mount_point: untyped,
+          identifier: untyped,
+          mount_options: untyped
+        }
+      ],
+      ?build_batch_config: {
+        service_role: String,
+        combine_artifacts: bool,
+        restrictions: {
+          maximum_builds_allowed: Integer,
+          compute_types_allowed: Array[String],
+          fleets_allowed: Array[String]
+        },
+        timeout_in_mins: untyped,
+        batch_report_mode: String
+      },
+      ?concurrent_build_limit: Integer,
+      ?auto_retry_limit: Integer
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _CreateReportGroupResponse
+      include Smithy::Client::_Response[Types::CreateReportGroupOutput]
+      def report_group: () -> Types::ReportGroup?
+    end
+    def create_report_group: (
+      ?name: String,
+      ?type: String,
+      ?export_config: {
+        export_config_type: String,
+        s3_destination: {
+          bucket: String,
+          bucket_owner: String,
+          path: untyped,
+          packaging: String,
+          encryption_key: untyped,
+          encryption_disabled: bool
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateReportGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReportGroupResponse
+
+    interface _CreateWebhookResponse
+      include Smithy::Client::_Response[Types::CreateWebhookOutput]
+      def webhook: () -> Types::Webhook?
+    end
+    def create_webhook: (
+      ?project_name: String,
+      ?branch_filter: String,
+      ?filter_groups: Array[
+        Array[
+          {
+            type: String,
+            pattern: String,
+            exclude_matched_pattern: bool
+          }
+        ]
+      ],
+      ?build_type: String,
+      ?manual_creation: bool,
+      ?scope_configuration: {
+        name: String,
+        domain: untyped,
+        scope: String
+      },
+      ?pull_request_build_policy: {
+        requires_comment_approval: String,
+        approver_roles: Array[String]
+      }
+    ) -> _CreateWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebhookResponse
+
+    interface _DeleteBuildBatchResponse
+      include Smithy::Client::_Response[Types::DeleteBuildBatchOutput]
+      def status_code: () -> String?
+      def builds_deleted: () -> Array[String]?
+      def builds_not_deleted: () -> Array[Types::BuildNotDeleted]?
+    end
+    def delete_build_batch: (
+      ?id: String
+    ) -> _DeleteBuildBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBuildBatchResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Types::DeleteFleetOutput]
+    end
+    def delete_fleet: (
+      ?arn: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectOutput]
+    end
+    def delete_project: (
+      ?name: String
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteReportResponse
+      include Smithy::Client::_Response[Types::DeleteReportOutput]
+    end
+    def delete_report: (
+      ?arn: String
+    ) -> _DeleteReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReportResponse
+
+    interface _DeleteReportGroupResponse
+      include Smithy::Client::_Response[Types::DeleteReportGroupOutput]
+    end
+    def delete_report_group: (
+      ?arn: String,
+      ?delete_reports: bool
+    ) -> _DeleteReportGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReportGroupResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyOutput]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteSourceCredentialsResponse
+      include Smithy::Client::_Response[Types::DeleteSourceCredentialsOutput]
+      def arn: () -> String?
+    end
+    def delete_source_credentials: (
+      ?arn: String
+    ) -> _DeleteSourceCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSourceCredentialsResponse
+
+    interface _DeleteWebhookResponse
+      include Smithy::Client::_Response[Types::DeleteWebhookOutput]
+    end
+    def delete_webhook: (
+      ?project_name: String
+    ) -> _DeleteWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebhookResponse
+
+    interface _DescribeCodeCoveragesResponse
+      include Smithy::Client::_Response[Types::DescribeCodeCoveragesOutput]
+      def next_token: () -> String?
+      def code_coverages: () -> Array[Types::CodeCoverage]?
+    end
+    def describe_code_coverages: (
+      ?report_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?sort_by: String,
+      ?min_line_coverage_percentage: Float,
+      ?max_line_coverage_percentage: Float
+    ) -> _DescribeCodeCoveragesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCodeCoveragesResponse
+
+    interface _DescribeTestCasesResponse
+      include Smithy::Client::_Response[Types::DescribeTestCasesOutput]
+      def next_token: () -> String?
+      def test_cases: () -> Array[Types::TestCase]?
+    end
+    def describe_test_cases: (
+      ?report_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        status: String,
+        keyword: untyped
+      }
+    ) -> _DescribeTestCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestCasesResponse
+
+    interface _GetReportGroupTrendResponse
+      include Smithy::Client::_Response[Types::GetReportGroupTrendOutput]
+      def stats: () -> Types::ReportGroupTrendStats?
+      def raw_data: () -> Array[Types::ReportWithRawData]?
+    end
+    def get_report_group_trend: (
+      ?report_group_arn: String,
+      ?num_of_reports: Integer,
+      ?trend_field: String
+    ) -> _GetReportGroupTrendResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReportGroupTrendResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ImportSourceCredentialsResponse
+      include Smithy::Client::_Response[Types::ImportSourceCredentialsOutput]
+      def arn: () -> String?
+    end
+    def import_source_credentials: (
+      ?username: String,
+      ?token: String,
+      ?server_type: String,
+      ?auth_type: String,
+      ?should_overwrite: bool
+    ) -> _ImportSourceCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportSourceCredentialsResponse
+
+    interface _InvalidateProjectCacheResponse
+      include Smithy::Client::_Response[Types::InvalidateProjectCacheOutput]
+    end
+    def invalidate_project_cache: (
+      ?project_name: String
+    ) -> _InvalidateProjectCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvalidateProjectCacheResponse
+
+    interface _ListBuildBatchesResponse
+      include Smithy::Client::_Response[Types::ListBuildBatchesOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_build_batches: (
+      ?filter: {
+        status: String
+      },
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListBuildBatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuildBatchesResponse
+
+    interface _ListBuildBatchesForProjectResponse
+      include Smithy::Client::_Response[Types::ListBuildBatchesForProjectOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_build_batches_for_project: (
+      ?project_name: String,
+      ?filter: {
+        status: String
+      },
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListBuildBatchesForProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuildBatchesForProjectResponse
+
+    interface _ListBuildsResponse
+      include Smithy::Client::_Response[Types::ListBuildsOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_builds: (
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListBuildsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuildsResponse
+
+    interface _ListBuildsForProjectResponse
+      include Smithy::Client::_Response[Types::ListBuildsForProjectOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_builds_for_project: (
+      ?project_name: String,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListBuildsForProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuildsForProjectResponse
+
+    interface _ListCommandExecutionsForSandboxResponse
+      include Smithy::Client::_Response[Types::ListCommandExecutionsForSandboxOutput]
+      def command_executions: () -> Array[Types::CommandExecution]?
+      def next_token: () -> String?
+    end
+    def list_command_executions_for_sandbox: (
+      ?sandbox_id: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListCommandExecutionsForSandboxResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommandExecutionsForSandboxResponse
+
+    interface _ListCuratedEnvironmentImagesResponse
+      include Smithy::Client::_Response[Types::ListCuratedEnvironmentImagesOutput]
+      def platforms: () -> Array[Types::EnvironmentPlatform]?
+    end
+    def list_curated_environment_images: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCuratedEnvironmentImagesResponse
+
+    interface _ListFleetsResponse
+      include Smithy::Client::_Response[Types::ListFleetsOutput]
+      def next_token: () -> String?
+      def fleets: () -> Array[String]?
+    end
+    def list_fleets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?sort_by: String
+    ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
+
+    interface _ListProjectsResponse
+      include Smithy::Client::_Response[Types::ListProjectsOutput]
+      def next_token: () -> String?
+      def projects: () -> Array[String]?
+    end
+    def list_projects: (
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
+
+    interface _ListReportGroupsResponse
+      include Smithy::Client::_Response[Types::ListReportGroupsOutput]
+      def next_token: () -> String?
+      def report_groups: () -> Array[String]?
+    end
+    def list_report_groups: (
+      ?sort_order: String,
+      ?sort_by: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReportGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportGroupsResponse
+
+    interface _ListReportsResponse
+      include Smithy::Client::_Response[Types::ListReportsOutput]
+      def next_token: () -> String?
+      def reports: () -> Array[String]?
+    end
+    def list_reports: (
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        status: String
+      }
+    ) -> _ListReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportsResponse
+
+    interface _ListReportsForReportGroupResponse
+      include Smithy::Client::_Response[Types::ListReportsForReportGroupOutput]
+      def next_token: () -> String?
+      def reports: () -> Array[String]?
+    end
+    def list_reports_for_report_group: (
+      ?report_group_arn: String,
+      ?next_token: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?filter: {
+        status: String
+      }
+    ) -> _ListReportsForReportGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportsForReportGroupResponse
+
+    interface _ListSandboxesResponse
+      include Smithy::Client::_Response[Types::ListSandboxesOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_sandboxes: (
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListSandboxesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSandboxesResponse
+
+    interface _ListSandboxesForProjectResponse
+      include Smithy::Client::_Response[Types::ListSandboxesForProjectOutput]
+      def ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_sandboxes_for_project: (
+      ?project_name: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListSandboxesForProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSandboxesForProjectResponse
+
+    interface _ListSharedProjectsResponse
+      include Smithy::Client::_Response[Types::ListSharedProjectsOutput]
+      def next_token: () -> String?
+      def projects: () -> Array[String]?
+    end
+    def list_shared_projects: (
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSharedProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSharedProjectsResponse
+
+    interface _ListSharedReportGroupsResponse
+      include Smithy::Client::_Response[Types::ListSharedReportGroupsOutput]
+      def next_token: () -> String?
+      def report_groups: () -> Array[String]?
+    end
+    def list_shared_report_groups: (
+      ?sort_order: String,
+      ?sort_by: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSharedReportGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSharedReportGroupsResponse
+
+    interface _ListSourceCredentialsResponse
+      include Smithy::Client::_Response[Types::ListSourceCredentialsOutput]
+      def source_credentials_infos: () -> Array[Types::SourceCredentialsInfo]?
+    end
+    def list_source_credentials: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceCredentialsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyOutput]
+      def resource_arn: () -> String?
+    end
+    def put_resource_policy: (
+      ?policy: String,
+      ?resource_arn: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RetryBuildResponse
+      include Smithy::Client::_Response[Types::RetryBuildOutput]
+      def build: () -> Types::Build?
+    end
+    def retry_build: (
+      ?id: String,
+      ?idempotency_token: String
+    ) -> _RetryBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryBuildResponse
+
+    interface _RetryBuildBatchResponse
+      include Smithy::Client::_Response[Types::RetryBuildBatchOutput]
+      def build_batch: () -> Types::BuildBatch?
+    end
+    def retry_build_batch: (
+      ?id: String,
+      ?idempotency_token: String,
+      ?retry_type: String
+    ) -> _RetryBuildBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryBuildBatchResponse
+
+    interface _StartBuildResponse
+      include Smithy::Client::_Response[Types::StartBuildOutput]
+      def build: () -> Types::Build?
+    end
+    def start_build: (
+      ?project_name: String,
+      ?secondary_sources_override: Array[
+        {
+          type: String,
+          location: String,
+          git_clone_depth: Integer,
+          git_submodules_config: {
+            fetch_submodules: bool
+          },
+          buildspec: untyped,
+          auth: {
+            type: String,
+            resource: untyped
+          },
+          report_build_status: untyped,
+          build_status_config: {
+            context: untyped,
+            target_url: untyped
+          },
+          insecure_ssl: untyped,
+          source_identifier: untyped
+        }
+      ],
+      ?secondary_sources_version_override: Array[
+        {
+          source_identifier: String,
+          source_version: untyped
+        }
+      ],
+      ?source_version: String,
+      ?artifacts_override: {
+        type: String,
+        location: String,
+        path: untyped,
+        namespace_type: String,
+        name: untyped,
+        packaging: String,
+        override_artifact_name: bool,
+        encryption_disabled: untyped,
+        artifact_identifier: untyped,
+        bucket_owner_access: String
+      },
+      ?secondary_artifacts_override: Array[
+        {
+          type: String,
+          location: String,
+          path: untyped,
+          namespace_type: String,
+          name: untyped,
+          packaging: String,
+          override_artifact_name: bool,
+          encryption_disabled: untyped,
+          artifact_identifier: untyped,
+          bucket_owner_access: String
+        }
+      ],
+      ?environment_variables_override: Array[
+        {
+          name: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?source_type_override: String,
+      ?source_location_override: String,
+      ?source_auth_override: {
+        type: String,
+        resource: String
+      },
+      ?git_clone_depth_override: Integer,
+      ?git_submodules_config_override: {
+        fetch_submodules: bool
+      },
+      ?buildspec_override: String,
+      ?insecure_ssl_override: bool,
+      ?report_build_status_override: bool,
+      ?build_status_config_override: {
+        context: String,
+        target_url: untyped
+      },
+      ?environment_type_override: String,
+      ?image_override: String,
+      ?compute_type_override: String,
+      ?certificate_override: String,
+      ?cache_override: {
+        type: String,
+        location: String,
+        modes: Array[String],
+        cache_namespace: untyped
+      },
+      ?service_role_override: String,
+      ?privileged_mode_override: bool,
+      ?timeout_in_minutes_override: Integer,
+      ?queued_timeout_in_minutes_override: Integer,
+      ?encryption_key_override: String,
+      ?idempotency_token: String,
+      ?logs_config_override: {
+        cloud_watch_logs: {
+          status: String,
+          group_name: String,
+          stream_name: untyped
+        },
+        s3_logs: {
+          status: untyped,
+          location: untyped,
+          encryption_disabled: bool,
+          bucket_owner_access: String
+        }
+      },
+      ?registry_credential_override: {
+        credential: String,
+        credential_provider: String
+      },
+      ?image_pull_credentials_type_override: String,
+      ?debug_session_enabled: bool,
+      ?fleet_override: {
+        fleet_arn: String
+      },
+      ?auto_retry_limit_override: Integer
+    ) -> _StartBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBuildResponse
+
+    interface _StartBuildBatchResponse
+      include Smithy::Client::_Response[Types::StartBuildBatchOutput]
+      def build_batch: () -> Types::BuildBatch?
+    end
+    def start_build_batch: (
+      ?project_name: String,
+      ?secondary_sources_override: Array[
+        {
+          type: String,
+          location: String,
+          git_clone_depth: Integer,
+          git_submodules_config: {
+            fetch_submodules: bool
+          },
+          buildspec: untyped,
+          auth: {
+            type: String,
+            resource: untyped
+          },
+          report_build_status: untyped,
+          build_status_config: {
+            context: untyped,
+            target_url: untyped
+          },
+          insecure_ssl: untyped,
+          source_identifier: untyped
+        }
+      ],
+      ?secondary_sources_version_override: Array[
+        {
+          source_identifier: String,
+          source_version: untyped
+        }
+      ],
+      ?source_version: String,
+      ?artifacts_override: {
+        type: String,
+        location: String,
+        path: untyped,
+        namespace_type: String,
+        name: untyped,
+        packaging: String,
+        override_artifact_name: bool,
+        encryption_disabled: untyped,
+        artifact_identifier: untyped,
+        bucket_owner_access: String
+      },
+      ?secondary_artifacts_override: Array[
+        {
+          type: String,
+          location: String,
+          path: untyped,
+          namespace_type: String,
+          name: untyped,
+          packaging: String,
+          override_artifact_name: bool,
+          encryption_disabled: untyped,
+          artifact_identifier: untyped,
+          bucket_owner_access: String
+        }
+      ],
+      ?environment_variables_override: Array[
+        {
+          name: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?source_type_override: String,
+      ?source_location_override: String,
+      ?source_auth_override: {
+        type: String,
+        resource: String
+      },
+      ?git_clone_depth_override: Integer,
+      ?git_submodules_config_override: {
+        fetch_submodules: bool
+      },
+      ?buildspec_override: String,
+      ?insecure_ssl_override: bool,
+      ?report_build_batch_status_override: bool,
+      ?environment_type_override: String,
+      ?image_override: String,
+      ?compute_type_override: String,
+      ?certificate_override: String,
+      ?cache_override: {
+        type: String,
+        location: String,
+        modes: Array[String],
+        cache_namespace: untyped
+      },
+      ?service_role_override: String,
+      ?privileged_mode_override: bool,
+      ?build_timeout_in_minutes_override: Integer,
+      ?queued_timeout_in_minutes_override: Integer,
+      ?encryption_key_override: String,
+      ?idempotency_token: String,
+      ?logs_config_override: {
+        cloud_watch_logs: {
+          status: String,
+          group_name: String,
+          stream_name: untyped
+        },
+        s3_logs: {
+          status: untyped,
+          location: untyped,
+          encryption_disabled: bool,
+          bucket_owner_access: String
+        }
+      },
+      ?registry_credential_override: {
+        credential: String,
+        credential_provider: String
+      },
+      ?image_pull_credentials_type_override: String,
+      ?build_batch_config_override: {
+        service_role: String,
+        combine_artifacts: bool,
+        restrictions: {
+          maximum_builds_allowed: Integer,
+          compute_types_allowed: Array[String],
+          fleets_allowed: Array[String]
+        },
+        timeout_in_mins: untyped,
+        batch_report_mode: String
+      },
+      ?debug_session_enabled: bool
+    ) -> _StartBuildBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBuildBatchResponse
+
+    interface _StartCommandExecutionResponse
+      include Smithy::Client::_Response[Types::StartCommandExecutionOutput]
+      def command_execution: () -> Types::CommandExecution?
+    end
+    def start_command_execution: (
+      ?sandbox_id: String,
+      ?command: String,
+      ?type: String
+    ) -> _StartCommandExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCommandExecutionResponse
+
+    interface _StartSandboxResponse
+      include Smithy::Client::_Response[Types::StartSandboxOutput]
+      def sandbox: () -> Types::Sandbox?
+    end
+    def start_sandbox: (
+      ?project_name: String,
+      ?idempotency_token: String
+    ) -> _StartSandboxResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSandboxResponse
+
+    interface _StartSandboxConnectionResponse
+      include Smithy::Client::_Response[Types::StartSandboxConnectionOutput]
+      def ssm_session: () -> Types::SSMSession?
+    end
+    def start_sandbox_connection: (
+      ?sandbox_id: String
+    ) -> _StartSandboxConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSandboxConnectionResponse
+
+    interface _StopBuildResponse
+      include Smithy::Client::_Response[Types::StopBuildOutput]
+      def build: () -> Types::Build?
+    end
+    def stop_build: (
+      ?id: String
+    ) -> _StopBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBuildResponse
+
+    interface _StopBuildBatchResponse
+      include Smithy::Client::_Response[Types::StopBuildBatchOutput]
+      def build_batch: () -> Types::BuildBatch?
+    end
+    def stop_build_batch: (
+      ?id: String
+    ) -> _StopBuildBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBuildBatchResponse
+
+    interface _StopSandboxResponse
+      include Smithy::Client::_Response[Types::StopSandboxOutput]
+      def sandbox: () -> Types::Sandbox?
+    end
+    def stop_sandbox: (
+      ?id: String
+    ) -> _StopSandboxResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSandboxResponse
+
+    interface _UpdateFleetResponse
+      include Smithy::Client::_Response[Types::UpdateFleetOutput]
+      def fleet: () -> Types::Fleet?
+    end
+    def update_fleet: (
+      ?arn: String,
+      ?base_capacity: Integer,
+      ?environment_type: String,
+      ?compute_type: String,
+      ?compute_configuration: {
+        v_cpu: Integer,
+        memory: untyped,
+        disk: untyped,
+        machine_type: String,
+        instance_type: String
+      },
+      ?scaling_configuration: {
+        scaling_type: String,
+        target_tracking_scaling_configs: Array[
+          {
+            metric_type: String,
+            target_value: Float
+          }
+        ],
+        max_capacity: Integer
+      },
+      ?overflow_behavior: String,
+      ?vpc_config: {
+        vpc_id: String,
+        subnets: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?proxy_configuration: {
+        default_behavior: String,
+        ordered_proxy_rules: Array[
+          {
+            type: String,
+            effect: String,
+            entities: Array[String]
+          }
+        ]
+      },
+      ?image_id: String,
+      ?fleet_service_role: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetResponse
+
+    interface _UpdateProjectResponse
+      include Smithy::Client::_Response[Types::UpdateProjectOutput]
+      def project: () -> Types::Project?
+    end
+    def update_project: (
+      ?name: String,
+      ?description: String,
+      ?source: {
+        type: String,
+        location: String,
+        git_clone_depth: Integer,
+        git_submodules_config: {
+          fetch_submodules: bool
+        },
+        buildspec: untyped,
+        auth: {
+          type: String,
+          resource: untyped
+        },
+        report_build_status: untyped,
+        build_status_config: {
+          context: untyped,
+          target_url: untyped
+        },
+        insecure_ssl: untyped,
+        source_identifier: untyped
+      },
+      ?secondary_sources: Array[
+        {
+          type: String,
+          location: String,
+          git_clone_depth: Integer,
+          git_submodules_config: {
+            fetch_submodules: bool
+          },
+          buildspec: untyped,
+          auth: {
+            type: String,
+            resource: untyped
+          },
+          report_build_status: untyped,
+          build_status_config: {
+            context: untyped,
+            target_url: untyped
+          },
+          insecure_ssl: untyped,
+          source_identifier: untyped
+        }
+      ],
+      ?source_version: String,
+      ?secondary_source_versions: Array[
+        {
+          source_identifier: String,
+          source_version: untyped
+        }
+      ],
+      ?artifacts: {
+        type: String,
+        location: String,
+        path: untyped,
+        namespace_type: String,
+        name: untyped,
+        packaging: String,
+        override_artifact_name: bool,
+        encryption_disabled: untyped,
+        artifact_identifier: untyped,
+        bucket_owner_access: String
+      },
+      ?secondary_artifacts: Array[
+        {
+          type: String,
+          location: String,
+          path: untyped,
+          namespace_type: String,
+          name: untyped,
+          packaging: String,
+          override_artifact_name: bool,
+          encryption_disabled: untyped,
+          artifact_identifier: untyped,
+          bucket_owner_access: String
+        }
+      ],
+      ?cache: {
+        type: String,
+        location: String,
+        modes: Array[String],
+        cache_namespace: untyped
+      },
+      ?environment: {
+        type: String,
+        image: String,
+        compute_type: String,
+        compute_configuration: {
+          v_cpu: Integer,
+          memory: untyped,
+          disk: untyped,
+          machine_type: String,
+          instance_type: untyped
+        },
+        fleet: {
+          fleet_arn: String
+        },
+        environment_variables: Array[
+          {
+            name: untyped,
+            value: untyped,
+            type: String
+          }
+        ],
+        privileged_mode: bool,
+        certificate: untyped,
+        registry_credential: {
+          credential: untyped,
+          credential_provider: String
+        },
+        image_pull_credentials_type: String,
+        docker_server: {
+          compute_type: untyped,
+          security_group_ids: Array[String],
+          status: {
+            status: untyped,
+            message: untyped
+          }
+        }
+      },
+      ?service_role: String,
+      ?timeout_in_minutes: Integer,
+      ?queued_timeout_in_minutes: Integer,
+      ?encryption_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?vpc_config: {
+        vpc_id: String,
+        subnets: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?badge_enabled: bool,
+      ?logs_config: {
+        cloud_watch_logs: {
+          status: String,
+          group_name: String,
+          stream_name: untyped
+        },
+        s3_logs: {
+          status: untyped,
+          location: untyped,
+          encryption_disabled: bool,
+          bucket_owner_access: String
+        }
+      },
+      ?file_system_locations: Array[
+        {
+          type: String,
+          location: String,
+          mount_point: untyped,
+          identifier: untyped,
+          mount_options: untyped
+        }
+      ],
+      ?build_batch_config: {
+        service_role: String,
+        combine_artifacts: bool,
+        restrictions: {
+          maximum_builds_allowed: Integer,
+          compute_types_allowed: Array[String],
+          fleets_allowed: Array[String]
+        },
+        timeout_in_mins: untyped,
+        batch_report_mode: String
+      },
+      ?concurrent_build_limit: Integer,
+      ?auto_retry_limit: Integer
+    ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+
+    interface _UpdateProjectVisibilityResponse
+      include Smithy::Client::_Response[Types::UpdateProjectVisibilityOutput]
+      def project_arn: () -> String?
+      def public_project_alias: () -> String?
+      def project_visibility: () -> String?
+    end
+    def update_project_visibility: (
+      ?project_arn: String,
+      ?project_visibility: String,
+      ?resource_access_role: String
+    ) -> _UpdateProjectVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectVisibilityResponse
+
+    interface _UpdateReportGroupResponse
+      include Smithy::Client::_Response[Types::UpdateReportGroupOutput]
+      def report_group: () -> Types::ReportGroup?
+    end
+    def update_report_group: (
+      ?arn: String,
+      ?export_config: {
+        export_config_type: String,
+        s3_destination: {
+          bucket: String,
+          bucket_owner: String,
+          path: untyped,
+          packaging: String,
+          encryption_key: untyped,
+          encryption_disabled: bool
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateReportGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReportGroupResponse
+
+    interface _UpdateWebhookResponse
+      include Smithy::Client::_Response[Types::UpdateWebhookOutput]
+      def webhook: () -> Types::Webhook?
+    end
+    def update_webhook: (
+      ?project_name: String,
+      ?branch_filter: String,
+      ?rotate_secret: bool,
+      ?filter_groups: Array[
+        Array[
+          {
+            type: String,
+            pattern: String,
+            exclude_matched_pattern: bool
+          }
+        ]
+      ],
+      ?build_type: String,
+      ?pull_request_build_policy: {
+        requires_comment_approval: String,
+        approver_roles: Array[String]
+      }
+    ) -> _UpdateWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebhookResponse
+  end
+end

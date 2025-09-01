@@ -1,0 +1,318 @@
+module Aws::Signer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Signer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddProfilePermissionResponse
+      include Smithy::Client::_Response[Types::AddProfilePermissionResponse]
+      def revision_id: () -> String?
+    end
+    def add_profile_permission: (
+      ?profile_name: String,
+      ?profile_version: String,
+      ?action: String,
+      ?principal: String,
+      ?revision_id: String,
+      ?statement_id: String
+    ) -> _AddProfilePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddProfilePermissionResponse
+
+    interface _CancelSigningProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_signing_profile: (
+      ?profile_name: String
+    ) -> _CancelSigningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSigningProfileResponse
+
+    interface _DescribeSigningJobResponse
+      include Smithy::Client::_Response[Types::DescribeSigningJobResponse]
+      def job_id: () -> String?
+      def source: () -> Types::Source?
+      def signing_material: () -> Types::SigningMaterial?
+      def platform_id: () -> String?
+      def platform_display_name: () -> String?
+      def profile_name: () -> String?
+      def profile_version: () -> String?
+      def overrides: () -> Types::SigningPlatformOverrides?
+      def signing_parameters: () -> Hash[String, String]?
+      def created_at: () -> Time?
+      def completed_at: () -> Time?
+      def signature_expires_at: () -> Time?
+      def requested_by: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def revocation_record: () -> Types::SigningJobRevocationRecord?
+      def signed_object: () -> Types::SignedObject?
+      def job_owner: () -> String?
+      def job_invoker: () -> String?
+    end
+    def describe_signing_job: (
+      ?job_id: String
+    ) -> _DescribeSigningJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSigningJobResponse
+
+    interface _GetRevocationStatusResponse
+      include Smithy::Client::_Response[Types::GetRevocationStatusResponse]
+      def revoked_entities: () -> Array[String]?
+    end
+    def get_revocation_status: (
+      ?signature_timestamp: Time,
+      ?platform_id: String,
+      ?profile_version_arn: String,
+      ?job_arn: String,
+      ?certificate_hashes: Array[String]
+    ) -> _GetRevocationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevocationStatusResponse
+
+    interface _GetSigningPlatformResponse
+      include Smithy::Client::_Response[Types::GetSigningPlatformResponse]
+      def platform_id: () -> String?
+      def display_name: () -> String?
+      def partner: () -> String?
+      def target: () -> String?
+      def category: () -> String?
+      def signing_configuration: () -> Types::SigningConfiguration?
+      def signing_image_format: () -> Types::SigningImageFormat?
+      def max_size_in_mb: () -> Integer?
+      def revocation_supported: () -> bool?
+    end
+    def get_signing_platform: (
+      ?platform_id: String
+    ) -> _GetSigningPlatformResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSigningPlatformResponse
+
+    interface _GetSigningProfileResponse
+      include Smithy::Client::_Response[Types::GetSigningProfileResponse]
+      def profile_name: () -> String?
+      def profile_version: () -> String?
+      def profile_version_arn: () -> String?
+      def revocation_record: () -> Types::SigningProfileRevocationRecord?
+      def signing_material: () -> Types::SigningMaterial?
+      def platform_id: () -> String?
+      def platform_display_name: () -> String?
+      def signature_validity_period: () -> Types::SignatureValidityPeriod?
+      def overrides: () -> Types::SigningPlatformOverrides?
+      def signing_parameters: () -> Hash[String, String]?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_signing_profile: (
+      ?profile_name: String,
+      ?profile_owner: String
+    ) -> _GetSigningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSigningProfileResponse
+
+    interface _ListProfilePermissionsResponse
+      include Smithy::Client::_Response[Types::ListProfilePermissionsResponse]
+      def revision_id: () -> String?
+      def policy_size_bytes: () -> Integer?
+      def permissions: () -> Array[Types::Permission]?
+      def next_token: () -> String?
+    end
+    def list_profile_permissions: (
+      ?profile_name: String,
+      ?next_token: String
+    ) -> _ListProfilePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilePermissionsResponse
+
+    interface _ListSigningJobsResponse
+      include Smithy::Client::_Response[Types::ListSigningJobsResponse]
+      def jobs: () -> Array[Types::SigningJob]?
+      def next_token: () -> String?
+    end
+    def list_signing_jobs: (
+      ?status: String,
+      ?platform_id: String,
+      ?requested_by: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?is_revoked: bool,
+      ?signature_expires_before: Time,
+      ?signature_expires_after: Time,
+      ?job_invoker: String
+    ) -> _ListSigningJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSigningJobsResponse
+
+    interface _ListSigningPlatformsResponse
+      include Smithy::Client::_Response[Types::ListSigningPlatformsResponse]
+      def platforms: () -> Array[Types::SigningPlatform]?
+      def next_token: () -> String?
+    end
+    def list_signing_platforms: (
+      ?category: String,
+      ?partner: String,
+      ?target: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSigningPlatformsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSigningPlatformsResponse
+
+    interface _ListSigningProfilesResponse
+      include Smithy::Client::_Response[Types::ListSigningProfilesResponse]
+      def profiles: () -> Array[Types::SigningProfile]?
+      def next_token: () -> String?
+    end
+    def list_signing_profiles: (
+      ?include_canceled: bool,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?platform_id: String,
+      ?statuses: Array[String]
+    ) -> _ListSigningProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSigningProfilesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutSigningProfileResponse
+      include Smithy::Client::_Response[Types::PutSigningProfileResponse]
+      def arn: () -> String?
+      def profile_version: () -> String?
+      def profile_version_arn: () -> String?
+    end
+    def put_signing_profile: (
+      ?profile_name: String,
+      ?signing_material: {
+        certificate_arn: String
+      },
+      ?signature_validity_period: {
+        value: Integer,
+        type: String
+      },
+      ?platform_id: String,
+      ?overrides: {
+        signing_configuration: {
+          encryption_algorithm: String,
+          hash_algorithm: String
+        },
+        signing_image_format: String
+      },
+      ?signing_parameters: Hash[String, String],
+      ?tags: Hash[String, String]
+    ) -> _PutSigningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSigningProfileResponse
+
+    interface _RemoveProfilePermissionResponse
+      include Smithy::Client::_Response[Types::RemoveProfilePermissionResponse]
+      def revision_id: () -> String?
+    end
+    def remove_profile_permission: (
+      ?profile_name: String,
+      ?revision_id: String,
+      ?statement_id: String
+    ) -> _RemoveProfilePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveProfilePermissionResponse
+
+    interface _RevokeSignatureResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_signature: (
+      ?job_id: String,
+      ?job_owner: String,
+      ?reason: String
+    ) -> _RevokeSignatureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeSignatureResponse
+
+    interface _RevokeSigningProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_signing_profile: (
+      ?profile_name: String,
+      ?profile_version: String,
+      ?reason: String,
+      ?effective_time: Time
+    ) -> _RevokeSigningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeSigningProfileResponse
+
+    interface _SignPayloadResponse
+      include Smithy::Client::_Response[Types::SignPayloadResponse]
+      def job_id: () -> String?
+      def job_owner: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def signature: () -> String?
+    end
+    def sign_payload: (
+      ?profile_name: String,
+      ?profile_owner: String,
+      ?payload: String,
+      ?payload_format: String
+    ) -> _SignPayloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignPayloadResponse
+
+    interface _StartSigningJobResponse
+      include Smithy::Client::_Response[Types::StartSigningJobResponse]
+      def job_id: () -> String?
+      def job_owner: () -> String?
+    end
+    def start_signing_job: (
+      ?source: {
+        s3: {
+          bucket_name: String,
+          key: String,
+          version: String
+        }
+      },
+      ?destination: {
+        s3: {
+          bucket_name: String,
+          prefix: String
+        }
+      },
+      ?profile_name: String,
+      ?client_request_token: String,
+      ?profile_owner: String
+    ) -> _StartSigningJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSigningJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

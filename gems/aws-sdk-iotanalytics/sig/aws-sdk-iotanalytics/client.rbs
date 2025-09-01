@@ -1,0 +1,836 @@
+module Aws::IoTAnalytics
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTAnalytics::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchPutMessageResponse
+      include Smithy::Client::_Response[Types::BatchPutMessageResponse]
+      def batch_put_message_error_entries: () -> Array[Types::BatchPutMessageErrorEntry]?
+    end
+    def batch_put_message: (
+      ?channel_name: String,
+      ?messages: Array[
+        {
+          message_id: String,
+          payload: String
+        }
+      ]
+    ) -> _BatchPutMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutMessageResponse
+
+    interface _CancelPipelineReprocessingResponse
+      include Smithy::Client::_Response[Types::CancelPipelineReprocessingResponse]
+    end
+    def cancel_pipeline_reprocessing: (
+      ?pipeline_name: String,
+      ?reprocessing_id: String
+    ) -> _CancelPipelineReprocessingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelPipelineReprocessingResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def channel_name: () -> String?
+      def channel_arn: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+    end
+    def create_channel: (
+      ?channel_name: String,
+      ?channel_storage: {
+        service_managed_s3: {
+        },
+        customer_managed_s3: {
+          bucket: String,
+          key_prefix: String,
+          role_arn: String
+        }
+      },
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+    end
+    def create_dataset: (
+      ?dataset_name: String,
+      ?actions: Array[
+        {
+          action_name: String,
+          query_action: {
+            sql_query: String,
+            filters: Array[
+              {
+                delta_time: {
+                  offset_seconds: Integer,
+                  time_expression: String
+                }
+              }
+            ]
+          },
+          container_action: {
+            image: String,
+            execution_role_arn: String,
+            resource_configuration: {
+              compute_type: String,
+              volume_size_in_gb: Integer
+            },
+            variables: Array[
+              {
+                name: String,
+                string_value: String,
+                double_value: Float,
+                dataset_content_version_value: {
+                  dataset_name: String
+                },
+                output_file_uri_value: {
+                  file_name: String
+                }
+              }
+            ]
+          }
+        }
+      ],
+      ?triggers: Array[
+        {
+          schedule: {
+            expression: String
+          },
+          dataset: {
+            name: String
+          }
+        }
+      ],
+      ?content_delivery_rules: Array[
+        {
+          entry_name: String,
+          destination: {
+            iot_events_destination_configuration: {
+              input_name: String,
+              role_arn: String
+            },
+            s3_destination_configuration: {
+              bucket: String,
+              key: String,
+              glue_configuration: {
+                table_name: String,
+                database_name: String
+              },
+              role_arn: untyped
+            }
+          }
+        }
+      ],
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      },
+      ?versioning_configuration: {
+        unlimited: bool,
+        max_versions: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?late_data_rules: Array[
+        {
+          rule_name: String,
+          rule_configuration: {
+            delta_time_session_window_configuration: {
+              timeout_in_minutes: Integer
+            }
+          }
+        }
+      ]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDatasetContentResponse
+      include Smithy::Client::_Response[Types::CreateDatasetContentResponse]
+      def version_id: () -> String?
+    end
+    def create_dataset_content: (
+      ?dataset_name: String,
+      ?version_id: String
+    ) -> _CreateDatasetContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetContentResponse
+
+    interface _CreateDatastoreResponse
+      include Smithy::Client::_Response[Types::CreateDatastoreResponse]
+      def datastore_name: () -> String?
+      def datastore_arn: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+    end
+    def create_datastore: (
+      ?datastore_name: String,
+      ?datastore_storage: {
+        service_managed_s3: {
+        },
+        customer_managed_s3: {
+          bucket: String,
+          key_prefix: String,
+          role_arn: String
+        },
+        iot_site_wise_multi_layer_storage: {
+          customer_managed_s3_storage: {
+            bucket: untyped,
+            key_prefix: untyped
+          }
+        }
+      },
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_format_configuration: {
+        json_configuration: {
+        },
+        parquet_configuration: {
+          schema_definition: {
+            columns: Array[
+              {
+                name: String,
+                type: String
+              }
+            ]
+          }
+        }
+      },
+      ?datastore_partitions: {
+        partitions: Array[
+          {
+            attribute_partition: {
+              attribute_name: String
+            },
+            timestamp_partition: {
+              attribute_name: untyped,
+              timestamp_format: String
+            }
+          }
+        ]
+      }
+    ) -> _CreateDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatastoreResponse
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineResponse]
+      def pipeline_name: () -> String?
+      def pipeline_arn: () -> String?
+    end
+    def create_pipeline: (
+      ?pipeline_name: String,
+      ?pipeline_activities: Array[
+        {
+          channel: {
+            name: String,
+            channel_name: String,
+            next: untyped
+          },
+          lambda: {
+            name: untyped,
+            lambda_name: String,
+            batch_size: Integer,
+            next: untyped
+          },
+          datastore: {
+            name: untyped,
+            datastore_name: String
+          },
+          add_attributes: {
+            name: untyped,
+            attributes: Hash[String, String],
+            next: untyped
+          },
+          remove_attributes: {
+            name: untyped,
+            attributes: Array[String],
+            next: untyped
+          },
+          select_attributes: {
+            name: untyped,
+            attributes: untyped,
+            next: untyped
+          },
+          filter: {
+            name: untyped,
+            filter: String,
+            next: untyped
+          },
+          math: {
+            name: untyped,
+            attribute: String,
+            math: String,
+            next: untyped
+          },
+          device_registry_enrich: {
+            name: untyped,
+            attribute: untyped,
+            thing_name: untyped,
+            role_arn: String,
+            next: untyped
+          },
+          device_shadow_enrich: {
+            name: untyped,
+            attribute: untyped,
+            thing_name: untyped,
+            role_arn: untyped,
+            next: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel: (
+      ?channel_name: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset: (
+      ?dataset_name: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteDatasetContentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset_content: (
+      ?dataset_name: String,
+      ?version_id: String
+    ) -> _DeleteDatasetContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetContentResponse
+
+    interface _DeleteDatastoreResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_datastore: (
+      ?datastore_name: String
+    ) -> _DeleteDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatastoreResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_pipeline: (
+      ?pipeline_name: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _DescribeChannelResponse
+      include Smithy::Client::_Response[Types::DescribeChannelResponse]
+      def channel: () -> Types::Channel?
+      def statistics: () -> Types::ChannelStatistics?
+    end
+    def describe_channel: (
+      ?channel_name: String,
+      ?include_statistics: bool
+    ) -> _DescribeChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset: () -> Types::Dataset?
+    end
+    def describe_dataset: (
+      ?dataset_name: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDatastoreResponse
+      include Smithy::Client::_Response[Types::DescribeDatastoreResponse]
+      def datastore: () -> Types::Datastore?
+      def statistics: () -> Types::DatastoreStatistics?
+    end
+    def describe_datastore: (
+      ?datastore_name: String,
+      ?include_statistics: bool
+    ) -> _DescribeDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatastoreResponse
+
+    interface _DescribeLoggingOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeLoggingOptionsResponse]
+      def logging_options: () -> Types::LoggingOptions?
+    end
+    def describe_logging_options: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingOptionsResponse
+
+    interface _DescribePipelineResponse
+      include Smithy::Client::_Response[Types::DescribePipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def describe_pipeline: (
+      ?pipeline_name: String
+    ) -> _DescribePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePipelineResponse
+
+    interface _GetDatasetContentResponse
+      include Smithy::Client::_Response[Types::GetDatasetContentResponse]
+      def entries: () -> Array[Types::DatasetEntry]?
+      def timestamp: () -> Time?
+      def status: () -> Types::DatasetContentStatus?
+    end
+    def get_dataset_content: (
+      ?dataset_name: String,
+      ?version_id: String
+    ) -> _GetDatasetContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatasetContentResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def channel_summaries: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListDatasetContentsResponse
+      include Smithy::Client::_Response[Types::ListDatasetContentsResponse]
+      def dataset_content_summaries: () -> Array[Types::DatasetContentSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_contents: (
+      ?dataset_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?scheduled_on_or_after: Time,
+      ?scheduled_before: Time
+    ) -> _ListDatasetContentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetContentsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def dataset_summaries: () -> Array[Types::DatasetSummary]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListDatastoresResponse
+      include Smithy::Client::_Response[Types::ListDatastoresResponse]
+      def datastore_summaries: () -> Array[Types::DatastoreSummary]?
+      def next_token: () -> String?
+    end
+    def list_datastores: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatastoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatastoresResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesResponse]
+      def pipeline_summaries: () -> Array[Types::PipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_pipelines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutLoggingOptionsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_logging_options: (
+      ?logging_options: {
+        role_arn: String,
+        level: String,
+        enabled: bool
+      }
+    ) -> _PutLoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingOptionsResponse
+
+    interface _RunPipelineActivityResponse
+      include Smithy::Client::_Response[Types::RunPipelineActivityResponse]
+      def payloads: () -> Array[String]?
+      def log_result: () -> String?
+    end
+    def run_pipeline_activity: (
+      ?pipeline_activity: {
+        channel: {
+          name: String,
+          channel_name: String,
+          next: untyped
+        },
+        lambda: {
+          name: untyped,
+          lambda_name: String,
+          batch_size: Integer,
+          next: untyped
+        },
+        datastore: {
+          name: untyped,
+          datastore_name: String
+        },
+        add_attributes: {
+          name: untyped,
+          attributes: Hash[String, String],
+          next: untyped
+        },
+        remove_attributes: {
+          name: untyped,
+          attributes: Array[String],
+          next: untyped
+        },
+        select_attributes: {
+          name: untyped,
+          attributes: untyped,
+          next: untyped
+        },
+        filter: {
+          name: untyped,
+          filter: String,
+          next: untyped
+        },
+        math: {
+          name: untyped,
+          attribute: String,
+          math: String,
+          next: untyped
+        },
+        device_registry_enrich: {
+          name: untyped,
+          attribute: untyped,
+          thing_name: untyped,
+          role_arn: String,
+          next: untyped
+        },
+        device_shadow_enrich: {
+          name: untyped,
+          attribute: untyped,
+          thing_name: untyped,
+          role_arn: untyped,
+          next: untyped
+        }
+      },
+      ?payloads: Array[String]
+    ) -> _RunPipelineActivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunPipelineActivityResponse
+
+    interface _SampleChannelDataResponse
+      include Smithy::Client::_Response[Types::SampleChannelDataResponse]
+      def payloads: () -> Array[String]?
+    end
+    def sample_channel_data: (
+      ?channel_name: String,
+      ?max_messages: Integer,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _SampleChannelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SampleChannelDataResponse
+
+    interface _StartPipelineReprocessingResponse
+      include Smithy::Client::_Response[Types::StartPipelineReprocessingResponse]
+      def reprocessing_id: () -> String?
+    end
+    def start_pipeline_reprocessing: (
+      ?pipeline_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?channel_messages: {
+        s3_paths: Array[String]
+      }
+    ) -> _StartPipelineReprocessingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipelineReprocessingResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_channel: (
+      ?channel_name: String,
+      ?channel_storage: {
+        service_managed_s3: {
+        },
+        customer_managed_s3: {
+          bucket: String,
+          key_prefix: String,
+          role_arn: String
+        }
+      },
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      }
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_dataset: (
+      ?dataset_name: String,
+      ?actions: Array[
+        {
+          action_name: String,
+          query_action: {
+            sql_query: String,
+            filters: Array[
+              {
+                delta_time: {
+                  offset_seconds: Integer,
+                  time_expression: String
+                }
+              }
+            ]
+          },
+          container_action: {
+            image: String,
+            execution_role_arn: String,
+            resource_configuration: {
+              compute_type: String,
+              volume_size_in_gb: Integer
+            },
+            variables: Array[
+              {
+                name: String,
+                string_value: String,
+                double_value: Float,
+                dataset_content_version_value: {
+                  dataset_name: String
+                },
+                output_file_uri_value: {
+                  file_name: String
+                }
+              }
+            ]
+          }
+        }
+      ],
+      ?triggers: Array[
+        {
+          schedule: {
+            expression: String
+          },
+          dataset: {
+            name: String
+          }
+        }
+      ],
+      ?content_delivery_rules: Array[
+        {
+          entry_name: String,
+          destination: {
+            iot_events_destination_configuration: {
+              input_name: String,
+              role_arn: String
+            },
+            s3_destination_configuration: {
+              bucket: String,
+              key: String,
+              glue_configuration: {
+                table_name: String,
+                database_name: String
+              },
+              role_arn: untyped
+            }
+          }
+        }
+      ],
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      },
+      ?versioning_configuration: {
+        unlimited: bool,
+        max_versions: Integer
+      },
+      ?late_data_rules: Array[
+        {
+          rule_name: String,
+          rule_configuration: {
+            delta_time_session_window_configuration: {
+              timeout_in_minutes: Integer
+            }
+          }
+        }
+      ]
+    ) -> _UpdateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetResponse
+
+    interface _UpdateDatastoreResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_datastore: (
+      ?datastore_name: String,
+      ?retention_period: {
+        unlimited: bool,
+        number_of_days: Integer
+      },
+      ?datastore_storage: {
+        service_managed_s3: {
+        },
+        customer_managed_s3: {
+          bucket: String,
+          key_prefix: String,
+          role_arn: String
+        },
+        iot_site_wise_multi_layer_storage: {
+          customer_managed_s3_storage: {
+            bucket: untyped,
+            key_prefix: untyped
+          }
+        }
+      },
+      ?file_format_configuration: {
+        json_configuration: {
+        },
+        parquet_configuration: {
+          schema_definition: {
+            columns: Array[
+              {
+                name: String,
+                type: String
+              }
+            ]
+          }
+        }
+      }
+    ) -> _UpdateDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatastoreResponse
+
+    interface _UpdatePipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_pipeline: (
+      ?pipeline_name: String,
+      ?pipeline_activities: Array[
+        {
+          channel: {
+            name: String,
+            channel_name: String,
+            next: untyped
+          },
+          lambda: {
+            name: untyped,
+            lambda_name: String,
+            batch_size: Integer,
+            next: untyped
+          },
+          datastore: {
+            name: untyped,
+            datastore_name: String
+          },
+          add_attributes: {
+            name: untyped,
+            attributes: Hash[String, String],
+            next: untyped
+          },
+          remove_attributes: {
+            name: untyped,
+            attributes: Array[String],
+            next: untyped
+          },
+          select_attributes: {
+            name: untyped,
+            attributes: untyped,
+            next: untyped
+          },
+          filter: {
+            name: untyped,
+            filter: String,
+            next: untyped
+          },
+          math: {
+            name: untyped,
+            attribute: String,
+            math: String,
+            next: untyped
+          },
+          device_registry_enrich: {
+            name: untyped,
+            attribute: untyped,
+            thing_name: untyped,
+            role_arn: String,
+            next: untyped
+          },
+          device_shadow_enrich: {
+            name: untyped,
+            attribute: untyped,
+            thing_name: untyped,
+            role_arn: untyped,
+            next: untyped
+          }
+        }
+      ]
+    ) -> _UpdatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineResponse
+  end
+end

@@ -1,0 +1,822 @@
+module Aws::TrustedAdvisor
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountRecommendationLifecycleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?account_recommendation_arn: String,
+        ?lifecycle_stage: String,
+        ?updated_on_behalf_of: String,
+        ?updated_on_behalf_of_job_title: String,
+        ?update_reason: String,
+        ?update_reason_code: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor account_recommendation_arn: String?
+      attr_accessor lifecycle_stage: String?
+      attr_accessor updated_on_behalf_of: String?
+      attr_accessor updated_on_behalf_of_job_title: String?
+      attr_accessor update_reason: String?
+      attr_accessor update_reason_code: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class BatchUpdateRecommendationResourceExclusionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_resource_exclusions: Array[Types::RecommendationResourceExclusion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_resource_exclusions: Array[Types::RecommendationResourceExclusion]?
+    end
+
+    class BatchUpdateRecommendationResourceExclusionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_update_recommendation_resource_exclusion_errors: Array[Types::UpdateRecommendationResourceExclusionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_update_recommendation_resource_exclusion_errors: Array[Types::UpdateRecommendationResourceExclusionError]?
+    end
+
+    class CheckSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?pillars: Array[String],
+        ?aws_services: Array[String],
+        ?source: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor source: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ExclusionStatus
+      EXCLUDED: String
+      INCLUDED: String
+    end
+
+    class GetOrganizationRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_recommendation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_recommendation_identifier: String?
+    end
+
+    class GetOrganizationRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_recommendation: Types::OrganizationRecommendation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_recommendation: Types::OrganizationRecommendation?
+    end
+
+    class GetRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_identifier: String?
+    end
+
+    class GetRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation: Types::Recommendation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation: Types::Recommendation?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?pillar: String,
+        ?aws_service: String,
+        ?source: String,
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor pillar: String?
+      attr_accessor aws_service: String?
+      attr_accessor source: String?
+      attr_accessor language: String?
+    end
+
+    class ListChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?check_summaries: Array[Types::CheckSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor check_summaries: Array[Types::CheckSummary]?
+    end
+
+    class ListOrganizationRecommendationAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?organization_recommendation_identifier: String,
+        ?affected_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor organization_recommendation_identifier: String?
+      attr_accessor affected_account_id: String?
+    end
+
+    class ListOrganizationRecommendationAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?account_recommendation_lifecycle_summaries: Array[Types::AccountRecommendationLifecycleSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor account_recommendation_lifecycle_summaries: Array[Types::AccountRecommendationLifecycleSummary]?
+    end
+
+    class ListOrganizationRecommendationResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?exclusion_status: String,
+        ?region_code: String,
+        ?organization_recommendation_identifier: String,
+        ?affected_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor exclusion_status: String?
+      attr_accessor region_code: String?
+      attr_accessor organization_recommendation_identifier: String?
+      attr_accessor affected_account_id: String?
+    end
+
+    class ListOrganizationRecommendationResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?organization_recommendation_resource_summaries: Array[Types::OrganizationRecommendationResourceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor organization_recommendation_resource_summaries: Array[Types::OrganizationRecommendationResourceSummary]?
+    end
+
+    class ListOrganizationRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?type: String,
+        ?status: String,
+        ?pillar: String,
+        ?aws_service: String,
+        ?source: String,
+        ?check_identifier: String,
+        ?after_last_updated_at: Time,
+        ?before_last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor pillar: String?
+      attr_accessor aws_service: String?
+      attr_accessor source: String?
+      attr_accessor check_identifier: String?
+      attr_accessor after_last_updated_at: Time?
+      attr_accessor before_last_updated_at: Time?
+    end
+
+    class ListOrganizationRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?organization_recommendation_summaries: Array[Types::OrganizationRecommendationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor organization_recommendation_summaries: Array[Types::OrganizationRecommendationSummary]?
+    end
+
+    class ListRecommendationResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?exclusion_status: String,
+        ?region_code: String,
+        ?recommendation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor exclusion_status: String?
+      attr_accessor region_code: String?
+      attr_accessor recommendation_identifier: String?
+    end
+
+    class ListRecommendationResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_resource_summaries: Array[Types::RecommendationResourceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_resource_summaries: Array[Types::RecommendationResourceSummary]?
+    end
+
+    class ListRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?type: String,
+        ?status: String,
+        ?pillar: String,
+        ?aws_service: String,
+        ?source: String,
+        ?check_identifier: String,
+        ?after_last_updated_at: Time,
+        ?before_last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor pillar: String?
+      attr_accessor aws_service: String?
+      attr_accessor source: String?
+      attr_accessor check_identifier: String?
+      attr_accessor after_last_updated_at: Time?
+      attr_accessor before_last_updated_at: Time?
+    end
+
+    class ListRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_summaries: Array[Types::RecommendationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_summaries: Array[Types::RecommendationSummary]?
+    end
+
+    class OrganizationRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?check_arn: String,
+        ?status: String,
+        ?lifecycle_stage: String,
+        ?pillars: Array[String],
+        ?source: String,
+        ?aws_services: Array[String],
+        ?name: String,
+        ?resources_aggregates: Types::RecommendationResourcesAggregates,
+        ?pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?arn: String,
+        ?description: String,
+        ?created_by: String,
+        ?updated_on_behalf_of: String,
+        ?updated_on_behalf_of_job_title: String,
+        ?update_reason: String,
+        ?update_reason_code: String,
+        ?resolved_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor check_arn: String?
+      attr_accessor status: String?
+      attr_accessor lifecycle_stage: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor source: String?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor name: String?
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates?
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor created_by: String?
+      attr_accessor updated_on_behalf_of: String?
+      attr_accessor updated_on_behalf_of_job_title: String?
+      attr_accessor update_reason: String?
+      attr_accessor update_reason_code: String?
+      attr_accessor resolved_at: Time?
+    end
+
+    class OrganizationRecommendationResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?aws_resource_id: String,
+        ?region_code: String,
+        ?status: String,
+        ?metadata: Hash[String, String],
+        ?last_updated_at: Time,
+        ?exclusion_status: String,
+        ?account_id: String,
+        ?recommendation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor aws_resource_id: String?
+      attr_accessor region_code: String?
+      attr_accessor status: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor last_updated_at: Time?
+      attr_accessor exclusion_status: String?
+      attr_accessor account_id: String?
+      attr_accessor recommendation_arn: String?
+    end
+
+    class OrganizationRecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?check_arn: String,
+        ?status: String,
+        ?lifecycle_stage: String,
+        ?pillars: Array[String],
+        ?source: String,
+        ?aws_services: Array[String],
+        ?name: String,
+        ?resources_aggregates: Types::RecommendationResourcesAggregates,
+        ?pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor check_arn: String?
+      attr_accessor status: String?
+      attr_accessor lifecycle_stage: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor source: String?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor name: String?
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates?
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor arn: String?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?check_arn: String,
+        ?status: String,
+        ?lifecycle_stage: String,
+        ?pillars: Array[String],
+        ?source: String,
+        ?aws_services: Array[String],
+        ?name: String,
+        ?resources_aggregates: Types::RecommendationResourcesAggregates,
+        ?pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?arn: String,
+        ?description: String,
+        ?created_by: String,
+        ?updated_on_behalf_of: String,
+        ?updated_on_behalf_of_job_title: String,
+        ?update_reason: String,
+        ?update_reason_code: String,
+        ?resolved_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor check_arn: String?
+      attr_accessor status: String?
+      attr_accessor lifecycle_stage: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor source: String?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor name: String?
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates?
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor created_by: String?
+      attr_accessor updated_on_behalf_of: String?
+      attr_accessor updated_on_behalf_of_job_title: String?
+      attr_accessor update_reason: String?
+      attr_accessor update_reason_code: String?
+      attr_accessor resolved_at: Time?
+    end
+
+    class RecommendationCostOptimizingAggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_monthly_savings: Float,
+        ?estimated_percent_monthly_savings: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_monthly_savings: Float?
+      attr_accessor estimated_percent_monthly_savings: Float?
+    end
+
+    module RecommendationLanguage
+      ENGLISH: String
+      JAPANESE: String
+      CHINESE: String
+      FRENCH: String
+      GERMAN: String
+      KOREAN: String
+      TRADITIONAL_CHINESE: String
+      ITALIAN: String
+      SPANISH: String
+      BRAZILIAN_PORTUGUESE: String
+      BAHASA_INDONESIA: String
+    end
+
+    module RecommendationLifecycleStage
+      IN_PROGRESS: String
+      PENDING_RESPONSE: String
+      DISMISSED: String
+      RESOLVED: String
+    end
+
+    module RecommendationPillar
+      COST_OPTIMIZING: String
+      PERFORMANCE: String
+      SECURITY: String
+      SERVICE_LIMITS: String
+      FAULT_TOLERANCE: String
+      OPERATIONAL_EXCELLENCE: String
+    end
+
+    class RecommendationPillarSpecificAggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_optimizing: Types::RecommendationCostOptimizingAggregates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_optimizing: Types::RecommendationCostOptimizingAggregates?
+    end
+
+    class RecommendationResourceExclusion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?is_excluded: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor is_excluded: bool?
+    end
+
+    class RecommendationResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?aws_resource_id: String,
+        ?region_code: String,
+        ?status: String,
+        ?metadata: Hash[String, String],
+        ?last_updated_at: Time,
+        ?exclusion_status: String,
+        ?recommendation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor aws_resource_id: String?
+      attr_accessor region_code: String?
+      attr_accessor status: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor last_updated_at: Time?
+      attr_accessor exclusion_status: String?
+      attr_accessor recommendation_arn: String?
+    end
+
+    class RecommendationResourcesAggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ok_count: Integer,
+        ?warning_count: Integer,
+        ?error_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ok_count: Integer?
+      attr_accessor warning_count: Integer?
+      attr_accessor error_count: Integer?
+    end
+
+    module RecommendationSource
+      AWS_CONFIG: String
+      COMPUTE_OPTIMIZER: String
+      COST_EXPLORER: String
+      LSE: String
+      MANUAL: String
+      PSE: String
+      RDS: String
+      RESILIENCE: String
+      RESILIENCE_HUB: String
+      SECURITY_HUB: String
+      STIR: String
+      TA_CHECK: String
+      WELL_ARCHITECTED: String
+    end
+
+    module RecommendationStatus
+      OK: String
+      WARNING: String
+      ERROR: String
+    end
+
+    class RecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?check_arn: String,
+        ?status: String,
+        ?lifecycle_stage: String,
+        ?pillars: Array[String],
+        ?source: String,
+        ?aws_services: Array[String],
+        ?name: String,
+        ?resources_aggregates: Types::RecommendationResourcesAggregates,
+        ?pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor check_arn: String?
+      attr_accessor status: String?
+      attr_accessor lifecycle_stage: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor source: String?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor name: String?
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates?
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor arn: String?
+    end
+
+    module RecommendationType
+      STANDARD: String
+      PRIORITY: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceStatus
+      OK: String
+      WARNING: String
+      ERROR: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateOrganizationRecommendationLifecycleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_stage: String,
+        ?update_reason: String,
+        ?update_reason_code: String,
+        ?organization_recommendation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_stage: String?
+      attr_accessor update_reason: String?
+      attr_accessor update_reason_code: String?
+      attr_accessor organization_recommendation_identifier: String?
+    end
+
+    class UpdateRecommendationLifecycleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_stage: String,
+        ?update_reason: String,
+        ?update_reason_code: String,
+        ?recommendation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_stage: String?
+      attr_accessor update_reason: String?
+      attr_accessor update_reason_code: String?
+      attr_accessor recommendation_identifier: String?
+    end
+
+    module UpdateRecommendationLifecycleStage
+      PENDING_RESPONSE: String
+      IN_PROGRESS: String
+      DISMISSED: String
+      RESOLVED: String
+    end
+
+    module UpdateRecommendationLifecycleStageReasonCode
+      NON_CRITICAL_ACCOUNT: String
+      TEMPORARY_ACCOUNT: String
+      VALID_BUSINESS_CASE: String
+      OTHER_METHODS_AVAILABLE: String
+      LOW_PRIORITY: String
+      NOT_APPLICABLE: String
+      OTHER: String
+    end
+
+    class UpdateRecommendationResourceExclusionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

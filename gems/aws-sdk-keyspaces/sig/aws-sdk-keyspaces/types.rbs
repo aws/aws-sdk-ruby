@@ -1,0 +1,1048 @@
+module Aws::Keyspaces
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AutoScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration?
+    end
+
+    class AutoScalingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_disabled: bool,
+        ?minimum_units: Integer,
+        ?maximum_units: Integer,
+        ?scaling_policy: Types::AutoScalingPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_disabled: bool?
+      attr_accessor minimum_units: Integer?
+      attr_accessor maximum_units: Integer?
+      attr_accessor scaling_policy: Types::AutoScalingPolicy?
+    end
+
+    class AutoScalingSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?write_capacity_auto_scaling: Types::AutoScalingSettings,
+        ?read_capacity_auto_scaling: Types::AutoScalingSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor write_capacity_auto_scaling: Types::AutoScalingSettings?
+      attr_accessor read_capacity_auto_scaling: Types::AutoScalingSettings?
+    end
+
+    class CapacitySpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?throughput_mode: String,
+        ?read_capacity_units: Integer,
+        ?write_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor throughput_mode: String?
+      attr_accessor read_capacity_units: Integer?
+      attr_accessor write_capacity_units: Integer?
+    end
+
+    class CapacitySpecificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?throughput_mode: String,
+        ?read_capacity_units: Integer,
+        ?write_capacity_units: Integer,
+        ?last_update_to_pay_per_request_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor throughput_mode: String?
+      attr_accessor read_capacity_units: Integer?
+      attr_accessor write_capacity_units: Integer?
+      attr_accessor last_update_to_pay_per_request_timestamp: Time?
+    end
+
+    class CdcSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?view_type: String,
+        ?tags: Array[Types::Tag],
+        ?propagate_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor view_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor propagate_tags: String?
+    end
+
+    class CdcSpecificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?view_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor view_type: String?
+    end
+
+    class ClientSideTimestamps
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ClusteringKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?order_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor order_by: String?
+    end
+
+    class ColumnDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class Comment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateKeyspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?tags: Array[Types::Tag],
+        ?replication_specification: Types::ReplicationSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor replication_specification: Types::ReplicationSpecification?
+    end
+
+    class CreateKeyspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class CreateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?schema_definition: Types::SchemaDefinition,
+        ?comment: Types::Comment,
+        ?capacity_specification: Types::CapacitySpecification,
+        ?encryption_specification: Types::EncryptionSpecification,
+        ?point_in_time_recovery: Types::PointInTimeRecovery,
+        ?ttl: Types::TimeToLive,
+        ?default_time_to_live: Integer,
+        ?tags: Array[Types::Tag],
+        ?client_side_timestamps: Types::ClientSideTimestamps,
+        ?auto_scaling_specification: Types::AutoScalingSpecification,
+        ?replica_specifications: Array[Types::ReplicaSpecification],
+        ?cdc_specification: Types::CdcSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor schema_definition: Types::SchemaDefinition?
+      attr_accessor comment: Types::Comment?
+      attr_accessor capacity_specification: Types::CapacitySpecification?
+      attr_accessor encryption_specification: Types::EncryptionSpecification?
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecovery?
+      attr_accessor ttl: Types::TimeToLive?
+      attr_accessor default_time_to_live: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps?
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
+      attr_accessor replica_specifications: Array[Types::ReplicaSpecification]?
+      attr_accessor cdc_specification: Types::CdcSpecification?
+    end
+
+    class CreateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class CreateTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?type_name: String,
+        ?field_definitions: Array[Types::FieldDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor type_name: String?
+      attr_accessor field_definitions: Array[Types::FieldDefinition]?
+    end
+
+    class CreateTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_arn: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_arn: String?
+      attr_accessor type_name: String?
+    end
+
+    class DeleteKeyspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+    end
+
+    class DeleteKeyspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class DeleteTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor type_name: String?
+    end
+
+    class DeleteTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_arn: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_arn: String?
+      attr_accessor type_name: String?
+    end
+
+    class EncryptionSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class FieldDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class GetKeyspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+    end
+
+    class GetKeyspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?resource_arn: String,
+        ?replication_strategy: String,
+        ?replication_regions: Array[String],
+        ?replication_group_statuses: Array[Types::ReplicationGroupStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor replication_strategy: String?
+      attr_accessor replication_regions: Array[String]?
+      attr_accessor replication_group_statuses: Array[Types::ReplicationGroupStatus]?
+    end
+
+    class GetTableAutoScalingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class GetTableAutoScalingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?resource_arn: String,
+        ?auto_scaling_specification: Types::AutoScalingSpecification,
+        ?replica_specifications: Array[Types::ReplicaAutoScalingSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
+      attr_accessor replica_specifications: Array[Types::ReplicaAutoScalingSpecification]?
+    end
+
+    class GetTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class GetTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?resource_arn: String,
+        ?creation_timestamp: Time,
+        ?status: String,
+        ?schema_definition: Types::SchemaDefinition,
+        ?capacity_specification: Types::CapacitySpecificationSummary,
+        ?encryption_specification: Types::EncryptionSpecification,
+        ?point_in_time_recovery: Types::PointInTimeRecoverySummary,
+        ?ttl: Types::TimeToLive,
+        ?default_time_to_live: Integer,
+        ?comment: Types::Comment,
+        ?client_side_timestamps: Types::ClientSideTimestamps,
+        ?replica_specifications: Array[Types::ReplicaSpecificationSummary],
+        ?latest_stream_arn: String,
+        ?cdc_specification: Types::CdcSpecificationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor schema_definition: Types::SchemaDefinition?
+      attr_accessor capacity_specification: Types::CapacitySpecificationSummary?
+      attr_accessor encryption_specification: Types::EncryptionSpecification?
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecoverySummary?
+      attr_accessor ttl: Types::TimeToLive?
+      attr_accessor default_time_to_live: Integer?
+      attr_accessor comment: Types::Comment?
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps?
+      attr_accessor replica_specifications: Array[Types::ReplicaSpecificationSummary]?
+      attr_accessor latest_stream_arn: String?
+      attr_accessor cdc_specification: Types::CdcSpecificationSummary?
+    end
+
+    class GetTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor type_name: String?
+    end
+
+    class GetTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?type_name: String,
+        ?field_definitions: Array[Types::FieldDefinition],
+        ?last_modified_timestamp: Time,
+        ?status: String,
+        ?direct_referring_tables: Array[String],
+        ?direct_parent_types: Array[String],
+        ?max_nesting_depth: Integer,
+        ?keyspace_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor type_name: String?
+      attr_accessor field_definitions: Array[Types::FieldDefinition]?
+      attr_accessor last_modified_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor direct_referring_tables: Array[String]?
+      attr_accessor direct_parent_types: Array[String]?
+      attr_accessor max_nesting_depth: Integer?
+      attr_accessor keyspace_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeyspaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?resource_arn: String,
+        ?replication_strategy: String,
+        ?replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor replication_strategy: String?
+      attr_accessor replication_regions: Array[String]?
+    end
+
+    class ListKeyspacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListKeyspacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?keyspaces: Array[Types::KeyspaceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor keyspaces: Array[Types::KeyspaceSummary]?
+    end
+
+    class ListTablesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?keyspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor keyspace_name: String?
+    end
+
+    class ListTablesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tables: Array[Types::TableSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tables: Array[Types::TableSummary]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?keyspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor keyspace_name: String?
+    end
+
+    class ListTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor types: Array[String]?
+    end
+
+    class PartitionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class PointInTimeRecovery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class PointInTimeRecoverySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?earliest_restorable_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor earliest_restorable_timestamp: Time?
+    end
+
+    class ReplicaAutoScalingSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?auto_scaling_specification: Types::AutoScalingSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
+    end
+
+    class ReplicaSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?read_capacity_units: Integer,
+        ?read_capacity_auto_scaling: Types::AutoScalingSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor read_capacity_units: Integer?
+      attr_accessor read_capacity_auto_scaling: Types::AutoScalingSettings?
+    end
+
+    class ReplicaSpecificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?status: String,
+        ?capacity_specification: Types::CapacitySpecificationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor status: String?
+      attr_accessor capacity_specification: Types::CapacitySpecificationSummary?
+    end
+
+    class ReplicationGroupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?keyspace_status: String,
+        ?tables_replication_progress: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor keyspace_status: String?
+      attr_accessor tables_replication_progress: String?
+    end
+
+    class ReplicationSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_strategy: String,
+        ?region_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_strategy: String?
+      attr_accessor region_list: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class RestoreTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_keyspace_name: String,
+        ?source_table_name: String,
+        ?target_keyspace_name: String,
+        ?target_table_name: String,
+        ?restore_timestamp: Time,
+        ?capacity_specification_override: Types::CapacitySpecification,
+        ?encryption_specification_override: Types::EncryptionSpecification,
+        ?point_in_time_recovery_override: Types::PointInTimeRecovery,
+        ?tags_override: Array[Types::Tag],
+        ?auto_scaling_specification: Types::AutoScalingSpecification,
+        ?replica_specifications: Array[Types::ReplicaSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_keyspace_name: String?
+      attr_accessor source_table_name: String?
+      attr_accessor target_keyspace_name: String?
+      attr_accessor target_table_name: String?
+      attr_accessor restore_timestamp: Time?
+      attr_accessor capacity_specification_override: Types::CapacitySpecification?
+      attr_accessor encryption_specification_override: Types::EncryptionSpecification?
+      attr_accessor point_in_time_recovery_override: Types::PointInTimeRecovery?
+      attr_accessor tags_override: Array[Types::Tag]?
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
+      attr_accessor replica_specifications: Array[Types::ReplicaSpecification]?
+    end
+
+    class RestoreTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restored_table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restored_table_arn: String?
+    end
+
+    class SchemaDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_columns: Array[Types::ColumnDefinition],
+        ?partition_keys: Array[Types::PartitionKey],
+        ?clustering_keys: Array[Types::ClusteringKey],
+        ?static_columns: Array[Types::StaticColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_columns: Array[Types::ColumnDefinition]?
+      attr_accessor partition_keys: Array[Types::PartitionKey]?
+      attr_accessor clustering_keys: Array[Types::ClusteringKey]?
+      attr_accessor static_columns: Array[Types::StaticColumn]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StaticColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class TableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetTrackingScalingPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disable_scale_in: bool,
+        ?scale_in_cooldown: Integer,
+        ?scale_out_cooldown: Integer,
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disable_scale_in: bool?
+      attr_accessor scale_in_cooldown: Integer?
+      attr_accessor scale_out_cooldown: Integer?
+      attr_accessor target_value: Float?
+    end
+
+    class TimeToLive
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateKeyspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?replication_specification: Types::ReplicationSpecification,
+        ?client_side_timestamps: Types::ClientSideTimestamps,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor replication_specification: Types::ReplicationSpecification?
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps?
+    end
+
+    class UpdateKeyspaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class UpdateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?add_columns: Array[Types::ColumnDefinition],
+        ?capacity_specification: Types::CapacitySpecification,
+        ?encryption_specification: Types::EncryptionSpecification,
+        ?point_in_time_recovery: Types::PointInTimeRecovery,
+        ?ttl: Types::TimeToLive,
+        ?default_time_to_live: Integer,
+        ?client_side_timestamps: Types::ClientSideTimestamps,
+        ?auto_scaling_specification: Types::AutoScalingSpecification,
+        ?replica_specifications: Array[Types::ReplicaSpecification],
+        ?cdc_specification: Types::CdcSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor add_columns: Array[Types::ColumnDefinition]?
+      attr_accessor capacity_specification: Types::CapacitySpecification?
+      attr_accessor encryption_specification: Types::EncryptionSpecification?
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecovery?
+      attr_accessor ttl: Types::TimeToLive?
+      attr_accessor default_time_to_live: Integer?
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps?
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
+      attr_accessor replica_specifications: Array[Types::ReplicaSpecification]?
+      attr_accessor cdc_specification: Types::CdcSpecification?
+    end
+
+    class UpdateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

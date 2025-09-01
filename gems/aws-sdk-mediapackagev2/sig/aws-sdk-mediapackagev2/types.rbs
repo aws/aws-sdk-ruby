@@ -1,0 +1,2239 @@
+module Aws::MediaPackageV2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AdMarkerDash
+      BINARY: String
+      XML: String
+    end
+
+    module AdMarkerHls
+      DATERANGE: String
+    end
+
+    class CancelHarvestJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?harvest_job_name: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor harvest_job_name: String?
+      attr_accessor e_tag: String?
+    end
+
+    class CancelHarvestJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CdnAuthConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cdn_identifier_secret_arns: Array[String],
+        ?secrets_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cdn_identifier_secret_arns: Array[String]?
+      attr_accessor secrets_role_arn: String?
+    end
+
+    class ChannelGroupListConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+    end
+
+    class ChannelListConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?input_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor input_type: String?
+    end
+
+    module CmafEncryptionMethod
+      CENC: String
+      CBCS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?conflict_exception_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor conflict_exception_type: String?
+    end
+
+    module ConflictExceptionType
+      RESOURCE_IN_USE: String
+      RESOURCE_ALREADY_EXISTS: String
+      IDEMPOTENT_PARAMETER_MISMATCH: String
+      CONFLICTING_OPERATION: String
+    end
+
+    module ContainerType
+      TS: String
+      CMAF: String
+      ISM: String
+    end
+
+    class CreateChannelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?client_token: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateChannelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?arn: String,
+        ?egress_domain: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?e_tag: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor arn: String?
+      attr_accessor egress_domain: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor e_tag: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?client_token: String,
+        ?input_type: String,
+        ?description: String,
+        ?input_switch_configuration: Types::InputSwitchConfiguration,
+        ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor client_token: String?
+      attr_accessor input_type: String?
+      attr_accessor description: String?
+      attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
+      attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?ingest_endpoints: Array[Types::IngestEndpoint],
+        ?input_type: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+        ?input_switch_configuration: Types::InputSwitchConfiguration,
+        ?output_header_configuration: Types::OutputHeaderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor ingest_endpoints: Array[Types::IngestEndpoint]?
+      attr_accessor input_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
+      attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+    end
+
+    class CreateDashManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?manifest_window_seconds: Integer,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?min_update_period_seconds: Integer,
+        ?min_buffer_time_seconds: Integer,
+        ?suggested_presentation_delay_seconds: Integer,
+        ?segment_template_format: String,
+        ?period_triggers: Array[String],
+        ?scte_dash: Types::ScteDash,
+        ?drm_signaling: String,
+        ?utc_timing: Types::DashUtcTiming,
+        ?profiles: Array[String],
+        ?base_urls: Array[Types::DashBaseUrl],
+        ?program_information: Types::DashProgramInformation,
+        ?dvb_settings: Types::DashDvbSettings,
+        ?compactness: String,
+        ?subtitle_configuration: Types::DashSubtitleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor min_update_period_seconds: Integer?
+      attr_accessor min_buffer_time_seconds: Integer?
+      attr_accessor suggested_presentation_delay_seconds: Integer?
+      attr_accessor segment_template_format: String?
+      attr_accessor period_triggers: Array[String]?
+      attr_accessor scte_dash: Types::ScteDash?
+      attr_accessor drm_signaling: String?
+      attr_accessor utc_timing: Types::DashUtcTiming?
+      attr_accessor profiles: Array[String]?
+      attr_accessor base_urls: Array[Types::DashBaseUrl]?
+      attr_accessor program_information: Types::DashProgramInformation?
+      attr_accessor dvb_settings: Types::DashDvbSettings?
+      attr_accessor compactness: String?
+      attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration?
+    end
+
+    class CreateHarvestJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?description: String,
+        ?harvested_manifests: Types::HarvestedManifests,
+        ?schedule_configuration: Types::HarvesterScheduleConfiguration,
+        ?destination: Types::Destination,
+        ?client_token: String,
+        ?harvest_job_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor harvested_manifests: Types::HarvestedManifests?
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration?
+      attr_accessor destination: Types::Destination?
+      attr_accessor client_token: String?
+      attr_accessor harvest_job_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateHarvestJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?destination: Types::Destination,
+        ?harvest_job_name: String,
+        ?harvested_manifests: Types::HarvestedManifests,
+        ?description: String,
+        ?schedule_configuration: Types::HarvesterScheduleConfiguration,
+        ?arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?error_message: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor destination: Types::Destination?
+      attr_accessor harvest_job_name: String?
+      attr_accessor harvested_manifests: Types::HarvestedManifests?
+      attr_accessor description: String?
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?child_manifest_name: String,
+        ?scte_hls: Types::ScteHls,
+        ?start_tag: Types::StartTag,
+        ?manifest_window_seconds: Integer,
+        ?program_date_time_interval_seconds: Integer,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?url_encode_child_manifest: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor scte_hls: Types::ScteHls?
+      attr_accessor start_tag: Types::StartTag?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor program_date_time_interval_seconds: Integer?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor url_encode_child_manifest: bool?
+    end
+
+    class CreateLowLatencyHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?child_manifest_name: String,
+        ?scte_hls: Types::ScteHls,
+        ?start_tag: Types::StartTag,
+        ?manifest_window_seconds: Integer,
+        ?program_date_time_interval_seconds: Integer,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?url_encode_child_manifest: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor scte_hls: Types::ScteHls?
+      attr_accessor start_tag: Types::StartTag?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor program_date_time_interval_seconds: Integer?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor url_encode_child_manifest: bool?
+    end
+
+    class CreateMssManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?manifest_window_seconds: Integer,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?manifest_layout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor manifest_layout: String?
+    end
+
+    class CreateOriginEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?segment: Types::Segment,
+        ?client_token: String,
+        ?description: String,
+        ?startover_window_seconds: Integer,
+        ?hls_manifests: Array[Types::CreateHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::CreateLowLatencyHlsManifestConfiguration],
+        ?dash_manifests: Array[Types::CreateDashManifestConfiguration],
+        ?mss_manifests: Array[Types::CreateMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor segment: Types::Segment?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor startover_window_seconds: Integer?
+      attr_accessor hls_manifests: Array[Types::CreateHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::CreateLowLatencyHlsManifestConfiguration]?
+      attr_accessor dash_manifests: Array[Types::CreateDashManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::CreateMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateOriginEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?segment: Types::Segment,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?startover_window_seconds: Integer,
+        ?hls_manifests: Array[Types::GetHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration],
+        ?dash_manifests: Array[Types::GetDashManifestConfiguration],
+        ?mss_manifests: Array[Types::GetMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor segment: Types::Segment?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor startover_window_seconds: Integer?
+      attr_accessor hls_manifests: Array[Types::GetHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DashBaseUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?service_location: String,
+        ?dvb_priority: Integer,
+        ?dvb_weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor service_location: String?
+      attr_accessor dvb_priority: Integer?
+      attr_accessor dvb_weight: Integer?
+    end
+
+    module DashCompactness
+      STANDARD: String
+      NONE: String
+    end
+
+    module DashDrmSignaling
+      INDIVIDUAL: String
+      REFERENCED: String
+    end
+
+    class DashDvbFontDownload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?mime_type: String,
+        ?font_family: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor mime_type: String?
+      attr_accessor font_family: String?
+    end
+
+    class DashDvbMetricsReporting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reporting_url: String,
+        ?probability: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reporting_url: String?
+      attr_accessor probability: Integer?
+    end
+
+    class DashDvbSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?font_download: Types::DashDvbFontDownload,
+        ?error_metrics: Array[Types::DashDvbMetricsReporting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor font_download: Types::DashDvbFontDownload?
+      attr_accessor error_metrics: Array[Types::DashDvbMetricsReporting]?
+    end
+
+    module DashPeriodTrigger
+      AVAILS: String
+      DRM_KEY_ROTATION: String
+      SOURCE_CHANGES: String
+      SOURCE_DISRUPTIONS: String
+      NONE: String
+    end
+
+    module DashProfile
+      DVB_DASH: String
+    end
+
+    class DashProgramInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?source: String,
+        ?copyright: String,
+        ?language_code: String,
+        ?more_information_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor source: String?
+      attr_accessor copyright: String?
+      attr_accessor language_code: String?
+      attr_accessor more_information_url: String?
+    end
+
+    module DashSegmentTemplateFormat
+      NUMBER_WITH_TIMELINE: String
+    end
+
+    class DashSubtitleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttml_configuration: Types::DashTtmlConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttml_configuration: Types::DashTtmlConfiguration?
+    end
+
+    class DashTtmlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttml_profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttml_profile: String?
+    end
+
+    module DashTtmlProfile
+      IMSC_1: String
+      EBU_TT_D_101: String
+    end
+
+    class DashUtcTiming
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timing_mode: String,
+        ?timing_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timing_mode: String?
+      attr_accessor timing_source: String?
+    end
+
+    module DashUtcTimingMode
+      HTTP_HEAD: String
+      HTTP_ISO: String
+      HTTP_XSDATE: String
+      UTC_DIRECT: String
+    end
+
+    class DeleteChannelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+    end
+
+    class DeleteChannelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteChannelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+    end
+
+    class DeleteChannelPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+    end
+
+    class DeleteChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOriginEndpointPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+    end
+
+    class DeleteOriginEndpointPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOriginEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+    end
+
+    class DeleteOriginEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_destination: Types::S3DestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_destination: Types::S3DestinationConfig?
+    end
+
+    module DrmSystem
+      CLEAR_KEY_AES_128: String
+      FAIRPLAY: String
+      PLAYREADY: String
+      WIDEVINE: String
+      IRDETO: String
+    end
+
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constant_initialization_vector: String,
+        ?encryption_method: Types::EncryptionMethod,
+        ?key_rotation_interval_seconds: Integer,
+        ?cmaf_exclude_segment_drm_metadata: bool,
+        ?speke_key_provider: Types::SpekeKeyProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constant_initialization_vector: String?
+      attr_accessor encryption_method: Types::EncryptionMethod?
+      attr_accessor key_rotation_interval_seconds: Integer?
+      attr_accessor cmaf_exclude_segment_drm_metadata: bool?
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider?
+    end
+
+    class EncryptionContractConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preset_speke20_audio: String,
+        ?preset_speke20_video: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preset_speke20_audio: String?
+      attr_accessor preset_speke20_video: String?
+    end
+
+    class EncryptionMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ts_encryption_method: String,
+        ?cmaf_encryption_method: String,
+        ?ism_encryption_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ts_encryption_method: String?
+      attr_accessor cmaf_encryption_method: String?
+      attr_accessor ism_encryption_method: String?
+    end
+
+    module EndpointErrorCondition
+      STALE_MANIFEST: String
+      INCOMPLETE_MANIFEST: String
+      MISSING_DRM_KEY: String
+      SLATE_INPUT: String
+    end
+
+    class FilterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_filter: String,
+        ?start: Time,
+        ?end: Time,
+        ?time_delay_seconds: Integer,
+        ?clip_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_filter: String?
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+      attr_accessor time_delay_seconds: Integer?
+      attr_accessor clip_start_time: Time?
+    end
+
+    class ForceEndpointErrorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_error_conditions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_error_conditions: Array[String]?
+    end
+
+    class GetChannelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+    end
+
+    class GetChannelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?arn: String,
+        ?egress_domain: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor arn: String?
+      attr_accessor egress_domain: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetChannelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+    end
+
+    class GetChannelPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor policy: String?
+    end
+
+    class GetChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+    end
+
+    class GetChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?reset_at: Time,
+        ?description: String,
+        ?ingest_endpoints: Array[Types::IngestEndpoint],
+        ?input_type: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+        ?input_switch_configuration: Types::InputSwitchConfiguration,
+        ?output_header_configuration: Types::OutputHeaderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor reset_at: Time?
+      attr_accessor description: String?
+      attr_accessor ingest_endpoints: Array[Types::IngestEndpoint]?
+      attr_accessor input_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
+      attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+    end
+
+    class GetDashManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+        ?manifest_window_seconds: Integer,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?min_update_period_seconds: Integer,
+        ?min_buffer_time_seconds: Integer,
+        ?suggested_presentation_delay_seconds: Integer,
+        ?segment_template_format: String,
+        ?period_triggers: Array[String],
+        ?scte_dash: Types::ScteDash,
+        ?drm_signaling: String,
+        ?utc_timing: Types::DashUtcTiming,
+        ?profiles: Array[String],
+        ?base_urls: Array[Types::DashBaseUrl],
+        ?program_information: Types::DashProgramInformation,
+        ?dvb_settings: Types::DashDvbSettings,
+        ?compactness: String,
+        ?subtitle_configuration: Types::DashSubtitleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor min_update_period_seconds: Integer?
+      attr_accessor min_buffer_time_seconds: Integer?
+      attr_accessor suggested_presentation_delay_seconds: Integer?
+      attr_accessor segment_template_format: String?
+      attr_accessor period_triggers: Array[String]?
+      attr_accessor scte_dash: Types::ScteDash?
+      attr_accessor drm_signaling: String?
+      attr_accessor utc_timing: Types::DashUtcTiming?
+      attr_accessor profiles: Array[String]?
+      attr_accessor base_urls: Array[Types::DashBaseUrl]?
+      attr_accessor program_information: Types::DashProgramInformation?
+      attr_accessor dvb_settings: Types::DashDvbSettings?
+      attr_accessor compactness: String?
+      attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration?
+    end
+
+    class GetHarvestJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?harvest_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor harvest_job_name: String?
+    end
+
+    class GetHarvestJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?destination: Types::Destination,
+        ?harvest_job_name: String,
+        ?harvested_manifests: Types::HarvestedManifests,
+        ?description: String,
+        ?schedule_configuration: Types::HarvesterScheduleConfiguration,
+        ?arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?error_message: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor destination: Types::Destination?
+      attr_accessor harvest_job_name: String?
+      attr_accessor harvested_manifests: Types::HarvestedManifests?
+      attr_accessor description: String?
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+        ?child_manifest_name: String,
+        ?manifest_window_seconds: Integer,
+        ?program_date_time_interval_seconds: Integer,
+        ?scte_hls: Types::ScteHls,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?start_tag: Types::StartTag,
+        ?url_encode_child_manifest: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor program_date_time_interval_seconds: Integer?
+      attr_accessor scte_hls: Types::ScteHls?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor start_tag: Types::StartTag?
+      attr_accessor url_encode_child_manifest: bool?
+    end
+
+    class GetLowLatencyHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+        ?child_manifest_name: String,
+        ?manifest_window_seconds: Integer,
+        ?program_date_time_interval_seconds: Integer,
+        ?scte_hls: Types::ScteHls,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?start_tag: Types::StartTag,
+        ?url_encode_child_manifest: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor program_date_time_interval_seconds: Integer?
+      attr_accessor scte_hls: Types::ScteHls?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor start_tag: Types::StartTag?
+      attr_accessor url_encode_child_manifest: bool?
+    end
+
+    class GetMssManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?manifest_window_seconds: Integer,
+        ?manifest_layout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor manifest_layout: String?
+    end
+
+    class GetOriginEndpointPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+    end
+
+    class GetOriginEndpointPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?policy: String,
+        ?cdn_auth_configuration: Types::CdnAuthConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor policy: String?
+      attr_accessor cdn_auth_configuration: Types::CdnAuthConfiguration?
+    end
+
+    class GetOriginEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+    end
+
+    class GetOriginEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?segment: Types::Segment,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?reset_at: Time,
+        ?description: String,
+        ?startover_window_seconds: Integer,
+        ?hls_manifests: Array[Types::GetHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration],
+        ?dash_manifests: Array[Types::GetDashManifestConfiguration],
+        ?mss_manifests: Array[Types::GetMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor segment: Types::Segment?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor reset_at: Time?
+      attr_accessor description: String?
+      attr_accessor startover_window_seconds: Integer?
+      attr_accessor hls_manifests: Array[Types::GetHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class HarvestJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?destination: Types::Destination,
+        ?harvest_job_name: String,
+        ?harvested_manifests: Types::HarvestedManifests,
+        ?description: String,
+        ?schedule_configuration: Types::HarvesterScheduleConfiguration,
+        ?arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?error_message: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor destination: Types::Destination?
+      attr_accessor harvest_job_name: String?
+      attr_accessor harvested_manifests: Types::HarvestedManifests?
+      attr_accessor description: String?
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor e_tag: String?
+    end
+
+    module HarvestJobStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      CANCELLED: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class HarvestedDashManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+    end
+
+    class HarvestedHlsManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+    end
+
+    class HarvestedLowLatencyHlsManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+    end
+
+    class HarvestedManifests
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hls_manifests: Array[Types::HarvestedHlsManifest],
+        ?dash_manifests: Array[Types::HarvestedDashManifest],
+        ?low_latency_hls_manifests: Array[Types::HarvestedLowLatencyHlsManifest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hls_manifests: Array[Types::HarvestedHlsManifest]?
+      attr_accessor dash_manifests: Array[Types::HarvestedDashManifest]?
+      attr_accessor low_latency_hls_manifests: Array[Types::HarvestedLowLatencyHlsManifest]?
+    end
+
+    class HarvesterScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class IngestEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor url: String?
+    end
+
+    class InputSwitchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mqcs_input_switching: bool,
+        ?preferred_input: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mqcs_input_switching: bool?
+      attr_accessor preferred_input: Integer?
+    end
+
+    module InputType
+      HLS: String
+      CMAF: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IsmEncryptionMethod
+      CENC: String
+    end
+
+    class ListChannelGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ChannelGroupListConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ChannelGroupListConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ChannelListConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ChannelListConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDashManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+    end
+
+    class ListHarvestJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListHarvestJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::HarvestJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::HarvestJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?child_manifest_name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor url: String?
+    end
+
+    class ListLowLatencyHlsManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?child_manifest_name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor child_manifest_name: String?
+      attr_accessor url: String?
+    end
+
+    class ListMssManifestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor url: String?
+    end
+
+    class ListOriginEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOriginEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::OriginEndpointListConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::OriginEndpointListConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MssManifestLayout
+      FULL: String
+      COMPACT: String
+    end
+
+    class OriginEndpointListConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?hls_manifests: Array[Types::ListHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::ListLowLatencyHlsManifestConfiguration],
+        ?dash_manifests: Array[Types::ListDashManifestConfiguration],
+        ?mss_manifests: Array[Types::ListMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor hls_manifests: Array[Types::ListHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::ListLowLatencyHlsManifestConfiguration]?
+      attr_accessor dash_manifests: Array[Types::ListDashManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::ListMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+    end
+
+    class OutputHeaderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publish_mqcs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publish_mqcs: bool?
+    end
+
+    module PresetSpeke20Audio
+      PRESET_AUDIO_1: String
+      PRESET_AUDIO_2: String
+      PRESET_AUDIO_3: String
+      SHARED: String
+      UNENCRYPTED: String
+    end
+
+    module PresetSpeke20Video
+      PRESET_VIDEO_1: String
+      PRESET_VIDEO_2: String
+      PRESET_VIDEO_3: String
+      PRESET_VIDEO_4: String
+      PRESET_VIDEO_5: String
+      PRESET_VIDEO_6: String
+      PRESET_VIDEO_7: String
+      PRESET_VIDEO_8: String
+      SHARED: String
+      UNENCRYPTED: String
+    end
+
+    class PutChannelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor policy: String?
+    end
+
+    class PutChannelPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutOriginEndpointPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?policy: String,
+        ?cdn_auth_configuration: Types::CdnAuthConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor policy: String?
+      attr_accessor cdn_auth_configuration: Types::CdnAuthConfiguration?
+    end
+
+    class PutOriginEndpointPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResetChannelStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+    end
+
+    class ResetChannelStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?arn: String,
+        ?reset_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor arn: String?
+      attr_accessor reset_at: Time?
+    end
+
+    class ResetOriginEndpointStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+    end
+
+    class ResetOriginEndpointStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?arn: String,
+        ?reset_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor arn: String?
+      attr_accessor reset_at: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type_not_found: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type_not_found: String?
+    end
+
+    module ResourceTypeNotFound
+      CHANNEL_GROUP: String
+      CHANNEL: String
+      ORIGIN_ENDPOINT: String
+      HARVEST_JOB: String
+    end
+
+    class S3DestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?destination_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor destination_path: String?
+    end
+
+    class Scte
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scte_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scte_filter: Array[String]?
+    end
+
+    class ScteDash
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_marker_dash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_marker_dash: String?
+    end
+
+    module ScteFilter
+      SPLICE_INSERT: String
+      BREAK: String
+      PROVIDER_ADVERTISEMENT: String
+      DISTRIBUTOR_ADVERTISEMENT: String
+      PROVIDER_PLACEMENT_OPPORTUNITY: String
+      DISTRIBUTOR_PLACEMENT_OPPORTUNITY: String
+      PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY: String
+      DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY: String
+      PROGRAM: String
+    end
+
+    class ScteHls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_marker_hls: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_marker_hls: String?
+    end
+
+    class Segment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_duration_seconds: Integer,
+        ?segment_name: String,
+        ?ts_use_audio_rendition_group: bool,
+        ?include_iframe_only_streams: bool,
+        ?ts_include_dvb_subtitles: bool,
+        ?scte: Types::Scte,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_duration_seconds: Integer?
+      attr_accessor segment_name: String?
+      attr_accessor ts_use_audio_rendition_group: bool?
+      attr_accessor include_iframe_only_streams: bool?
+      attr_accessor ts_include_dvb_subtitles: bool?
+      attr_accessor scte: Types::Scte?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SpekeKeyProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_contract_configuration: Types::EncryptionContractConfiguration,
+        ?resource_id: String,
+        ?drm_systems: Array[String],
+        ?role_arn: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration?
+      attr_accessor resource_id: String?
+      attr_accessor drm_systems: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor url: String?
+    end
+
+    class StartTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_offset: Float,
+        ?precise: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_offset: Float?
+      attr_accessor precise: bool?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TsEncryptionMethod
+      AES_128: String
+      SAMPLE_AES: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateChannelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?e_tag: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor e_tag: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateChannelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?arn: String,
+        ?egress_domain: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor arn: String?
+      attr_accessor egress_domain: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?e_tag: String,
+        ?description: String,
+        ?input_switch_configuration: Types::InputSwitchConfiguration,
+        ?output_header_configuration: Types::OutputHeaderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor e_tag: String?
+      attr_accessor description: String?
+      attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
+      attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+    end
+
+    class UpdateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?ingest_endpoints: Array[Types::IngestEndpoint],
+        ?input_type: String,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+        ?input_switch_configuration: Types::InputSwitchConfiguration,
+        ?output_header_configuration: Types::OutputHeaderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor ingest_endpoints: Array[Types::IngestEndpoint]?
+      attr_accessor input_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
+      attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+    end
+
+    class UpdateOriginEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?segment: Types::Segment,
+        ?description: String,
+        ?startover_window_seconds: Integer,
+        ?hls_manifests: Array[Types::CreateHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::CreateLowLatencyHlsManifestConfiguration],
+        ?dash_manifests: Array[Types::CreateDashManifestConfiguration],
+        ?mss_manifests: Array[Types::CreateMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor segment: Types::Segment?
+      attr_accessor description: String?
+      attr_accessor startover_window_seconds: Integer?
+      attr_accessor hls_manifests: Array[Types::CreateHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::CreateLowLatencyHlsManifestConfiguration]?
+      attr_accessor dash_manifests: Array[Types::CreateDashManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::CreateMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor e_tag: String?
+    end
+
+    class UpdateOriginEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_group_name: String,
+        ?channel_name: String,
+        ?origin_endpoint_name: String,
+        ?container_type: String,
+        ?segment: Types::Segment,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?description: String,
+        ?startover_window_seconds: Integer,
+        ?hls_manifests: Array[Types::GetHlsManifestConfiguration],
+        ?low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration],
+        ?mss_manifests: Array[Types::GetMssManifestConfiguration],
+        ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?e_tag: String,
+        ?tags: Hash[String, String],
+        ?dash_manifests: Array[Types::GetDashManifestConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_group_name: String?
+      attr_accessor channel_name: String?
+      attr_accessor origin_endpoint_name: String?
+      attr_accessor container_type: String?
+      attr_accessor segment: Types::Segment?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor description: String?
+      attr_accessor startover_window_seconds: Integer?
+      attr_accessor hls_manifests: Array[Types::GetHlsManifestConfiguration]?
+      attr_accessor low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor e_tag: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?validation_exception_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor validation_exception_type: String?
+    end
+
+    module ValidationExceptionType
+      CONTAINER_TYPE_IMMUTABLE: String
+      INVALID_PAGINATION_TOKEN: String
+      INVALID_PAGINATION_MAX_RESULTS: String
+      INVALID_POLICY: String
+      INVALID_ROLE_ARN: String
+      MANIFEST_NAME_COLLISION: String
+      ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH: String
+      CENC_IV_INCOMPATIBLE: String
+      ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE: String
+      ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE: String
+      ENCRYPTION_CONTRACT_UNENCRYPTED: String
+      ENCRYPTION_CONTRACT_SHARED: String
+      NUM_MANIFESTS_LOW: String
+      NUM_MANIFESTS_HIGH: String
+      MANIFEST_DRM_SYSTEMS_INCOMPATIBLE: String
+      DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE: String
+      ROLE_ARN_NOT_ASSUMABLE: String
+      ROLE_ARN_LENGTH_OUT_OF_RANGE: String
+      ROLE_ARN_INVALID_FORMAT: String
+      URL_INVALID: String
+      URL_SCHEME: String
+      URL_USER_INFO: String
+      URL_PORT: String
+      URL_UNKNOWN_HOST: String
+      URL_LOCAL_ADDRESS: String
+      URL_LOOPBACK_ADDRESS: String
+      URL_LINK_LOCAL_ADDRESS: String
+      URL_MULTICAST_ADDRESS: String
+      MEMBER_INVALID: String
+      MEMBER_MISSING: String
+      MEMBER_MIN_VALUE: String
+      MEMBER_MAX_VALUE: String
+      MEMBER_MIN_LENGTH: String
+      MEMBER_MAX_LENGTH: String
+      MEMBER_INVALID_ENUM_VALUE: String
+      MEMBER_DOES_NOT_MATCH_PATTERN: String
+      INVALID_MANIFEST_FILTER: String
+      INVALID_TIME_DELAY_SECONDS: String
+      END_TIME_EARLIER_THAN_START_TIME: String
+      TS_CONTAINER_TYPE_WITH_DASH_MANIFEST: String
+      DIRECT_MODE_WITH_TIMING_SOURCE: String
+      NONE_MODE_WITH_TIMING_SOURCE: String
+      TIMING_SOURCE_MISSING: String
+      UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION: String
+      PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES: String
+      DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS: String
+      ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION: String
+      SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY: String
+      HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION: String
+      HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT: String
+      TOO_MANY_IN_PROGRESS_HARVEST_JOBS: String
+      HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION: String
+      INVALID_HARVEST_JOB_DURATION: String
+      HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE: String
+      HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION: String
+      HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED: String
+      CLIP_START_TIME_WITH_START_OR_END: String
+      START_TAG_TIME_OFFSET_INVALID: String
+      INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION: String
+      DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE: String
+      INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION: String
+      INCOMPATIBLE_XML_ENCODING: String
+      CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE: String
+      ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING: String
+      ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION: String
+      ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION: String
+      TS_CONTAINER_TYPE_WITH_MSS_MANIFEST: String
+      CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST: String
+      ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST: String
+      ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST: String
+      ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST: String
+      ISM_CONTAINER_TYPE_WITH_SCTE: String
+      ISM_CONTAINER_WITH_KEY_ROTATION: String
+      BATCH_GET_SECRET_VALUE_DENIED: String
+      GET_SECRET_VALUE_DENIED: String
+      DESCRIBE_SECRET_DENIED: String
+      INVALID_SECRET_FORMAT: String
+      SECRET_IS_NOT_ONE_KEY_VALUE_PAIR: String
+      INVALID_SECRET_KEY: String
+      INVALID_SECRET_VALUE: String
+      SECRET_ARN_RESOURCE_NOT_FOUND: String
+      DECRYPT_SECRET_FAILED: String
+      TOO_MANY_SECRETS: String
+      DUPLICATED_SECRET: String
+      MALFORMED_SECRET_ARN: String
+      SECRET_FROM_DIFFERENT_ACCOUNT: String
+      SECRET_FROM_DIFFERENT_REGION: String
+      INVALID_SECRET: String
+    end
+  end
+end

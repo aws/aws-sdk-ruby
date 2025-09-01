@@ -1,0 +1,158 @@
+module Aws::PcaConnectorScep
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PcaConnectorScep::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateChallengeResponse
+      include Smithy::Client::_Response[Types::CreateChallengeResponse]
+      def challenge: () -> Types::Challenge?
+    end
+    def create_challenge: (
+      ?connector_arn: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateChallengeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChallengeResponse
+
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorResponse]
+      def connector_arn: () -> String?
+    end
+    def create_connector: (
+      ?certificate_authority_arn: String,
+      ?mobile_device_management: {
+        intune: {
+          azure_application_id: String,
+          domain: String
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
+    interface _DeleteChallengeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_challenge: (
+      ?challenge_arn: String
+    ) -> _DeleteChallengeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChallengeResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector: (
+      ?connector_arn: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
+    interface _GetChallengeMetadataResponse
+      include Smithy::Client::_Response[Types::GetChallengeMetadataResponse]
+      def challenge_metadata: () -> Types::ChallengeMetadata?
+    end
+    def get_challenge_metadata: (
+      ?challenge_arn: String
+    ) -> _GetChallengeMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChallengeMetadataResponse
+
+    interface _GetChallengePasswordResponse
+      include Smithy::Client::_Response[Types::GetChallengePasswordResponse]
+      def password: () -> String?
+    end
+    def get_challenge_password: (
+      ?challenge_arn: String
+    ) -> _GetChallengePasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChallengePasswordResponse
+
+    interface _GetConnectorResponse
+      include Smithy::Client::_Response[Types::GetConnectorResponse]
+      def connector: () -> Types::Connector?
+    end
+    def get_connector: (
+      ?connector_arn: String
+    ) -> _GetConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorResponse
+
+    interface _ListChallengeMetadataResponse
+      include Smithy::Client::_Response[Types::ListChallengeMetadataResponse]
+      def challenges: () -> Array[Types::ChallengeMetadataSummary]?
+      def next_token: () -> String?
+    end
+    def list_challenge_metadata: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?connector_arn: String
+    ) -> _ListChallengeMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChallengeMetadataResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def connectors: () -> Array[Types::ConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

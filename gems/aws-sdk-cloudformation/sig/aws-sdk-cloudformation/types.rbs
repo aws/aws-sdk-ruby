@@ -1,0 +1,5142 @@
+module Aws::CloudFormation
+  module Types
+
+    module AccountFilterType
+      NONE: String
+      INTERSECTION: String
+      DIFFERENCE: String
+      UNION: String
+    end
+
+    class AccountGateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    module AccountGateStatus
+      SUCCEEDED: String
+      FAILED: String
+      SKIPPED: String
+    end
+
+    class AccountLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Integer?
+    end
+
+    class ActivateOrganizationsAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ActivateOrganizationsAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ActivateTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?public_type_arn: String,
+        ?publisher_id: String,
+        ?type_name: String,
+        ?type_name_alias: String,
+        ?auto_update: bool,
+        ?logging_config: Types::LoggingConfig,
+        ?execution_role_arn: String,
+        ?version_bump: String,
+        ?major_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor public_type_arn: String?
+      attr_accessor publisher_id: String?
+      attr_accessor type_name: String?
+      attr_accessor type_name_alias: String?
+      attr_accessor auto_update: bool?
+      attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor version_bump: String?
+      attr_accessor major_version: Integer?
+    end
+
+    class ActivateTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AttributeChangeType
+      Add: String
+      Remove: String
+      Modify: String
+    end
+
+    class AutoDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?retain_stacks_on_account_removal: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor retain_stacks_on_account_removal: bool?
+    end
+
+    class BatchDescribeTypeConfigurationsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?type_configuration_identifier: Types::TypeConfigurationIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor type_configuration_identifier: Types::TypeConfigurationIdentifier?
+    end
+
+    class BatchDescribeTypeConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_configuration_identifiers: Array[Types::TypeConfigurationIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_configuration_identifiers: Array[Types::TypeConfigurationIdentifier]?
+    end
+
+    class BatchDescribeTypeConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDescribeTypeConfigurationsError],
+        ?unprocessed_type_configurations: Array[Types::TypeConfigurationIdentifier],
+        ?type_configurations: Array[Types::TypeConfigurationDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDescribeTypeConfigurationsError]?
+      attr_accessor unprocessed_type_configurations: Array[Types::TypeConfigurationIdentifier]?
+      attr_accessor type_configurations: Array[Types::TypeConfigurationDetails]?
+    end
+
+    class CFNRegistryException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CallAs
+      SELF: String
+      DELEGATED_ADMIN: String
+    end
+
+    class CancelUpdateStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    module Capability
+      CAPABILITY_IAM: String
+      CAPABILITY_NAMED_IAM: String
+      CAPABILITY_AUTO_EXPAND: String
+    end
+
+    module Category
+      REGISTERED: String
+      ACTIVATED: String
+      THIRD_PARTY: String
+      AWS_TYPES: String
+    end
+
+    class Change
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?hook_invocation_count: Integer,
+        ?resource_change: Types::ResourceChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor hook_invocation_count: Integer?
+      attr_accessor resource_change: Types::ResourceChange?
+    end
+
+    module ChangeAction
+      Add: String
+      Modify: String
+      Remove: String
+      Import: String
+      Dynamic: String
+    end
+
+    class ChangeSetHook
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_point: String,
+        ?failure_mode: String,
+        ?type_name: String,
+        ?type_version_id: String,
+        ?type_configuration_version_id: String,
+        ?target_details: Types::ChangeSetHookTargetDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_point: String?
+      attr_accessor failure_mode: String?
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor type_configuration_version_id: String?
+      attr_accessor target_details: Types::ChangeSetHookTargetDetails?
+    end
+
+    class ChangeSetHookResourceTargetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_resource_id: String,
+        ?resource_type: String,
+        ?resource_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_action: String?
+    end
+
+    class ChangeSetHookTargetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type: String,
+        ?resource_target_details: Types::ChangeSetHookResourceTargetDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type: String?
+      attr_accessor resource_target_details: Types::ChangeSetHookResourceTargetDetails?
+    end
+
+    module ChangeSetHooksStatus
+      PLANNING: String
+      PLANNED: String
+      UNAVAILABLE: String
+    end
+
+    class ChangeSetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ChangeSetStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      DELETE_PENDING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_COMPLETE: String
+      DELETE_FAILED: String
+      FAILED: String
+    end
+
+    class ChangeSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?stack_name: String,
+        ?change_set_id: String,
+        ?change_set_name: String,
+        ?execution_status: String,
+        ?status: String,
+        ?status_reason: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?include_nested_stacks: bool,
+        ?parent_change_set_id: String,
+        ?root_change_set_id: String,
+        ?import_existing_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_name: String?
+      attr_accessor execution_status: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor include_nested_stacks: bool?
+      attr_accessor parent_change_set_id: String?
+      attr_accessor root_change_set_id: String?
+      attr_accessor import_existing_resources: bool?
+    end
+
+    module ChangeSetType
+      CREATE: String
+      UPDATE: String
+      IMPORT: String
+    end
+
+    module ChangeSource
+      ResourceReference: String
+      ParameterReference: String
+      ResourceAttribute: String
+      DirectModification: String
+      Automatic: String
+    end
+
+    module ChangeType
+      Resource: String
+    end
+
+    module ConcurrencyMode
+      STRICT_FAILURE_TOLERANCE: String
+      SOFT_FAILURE_TOLERANCE: String
+    end
+
+    class ConcurrentResourcesLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContinueUpdateRollbackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?role_arn: String,
+        ?resources_to_skip: Array[String],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor resources_to_skip: Array[String]?
+      attr_accessor client_request_token: String?
+    end
+
+    class ContinueUpdateRollbackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateChangeSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?template_body: String,
+        ?template_url: String,
+        ?use_previous_template: bool,
+        ?parameters: Array[Types::Parameter],
+        ?capabilities: Array[String],
+        ?resource_types: Array[String],
+        ?role_arn: String,
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?notification_ar_ns: Array[String],
+        ?tags: Array[Types::Tag],
+        ?change_set_name: String,
+        ?client_token: String,
+        ?description: String,
+        ?change_set_type: String,
+        ?resources_to_import: Array[Types::ResourceToImport],
+        ?include_nested_stacks: bool,
+        ?on_stack_failure: String,
+        ?import_existing_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor use_previous_template: bool?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor notification_ar_ns: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor change_set_name: String?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor change_set_type: String?
+      attr_accessor resources_to_import: Array[Types::ResourceToImport]?
+      attr_accessor include_nested_stacks: bool?
+      attr_accessor on_stack_failure: String?
+      attr_accessor import_existing_resources: bool?
+    end
+
+    class CreateChangeSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor stack_id: String?
+    end
+
+    class CreateGeneratedTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::ResourceDefinition],
+        ?generated_template_name: String,
+        ?stack_name: String,
+        ?template_configuration: Types::TemplateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::ResourceDefinition]?
+      attr_accessor generated_template_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor template_configuration: Types::TemplateConfiguration?
+    end
+
+    class CreateGeneratedTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_id: String?
+    end
+
+    class CreateStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?template_body: String,
+        ?template_url: String,
+        ?parameters: Array[Types::Parameter],
+        ?disable_rollback: bool,
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?timeout_in_minutes: Integer,
+        ?notification_ar_ns: Array[String],
+        ?capabilities: Array[String],
+        ?resource_types: Array[String],
+        ?role_arn: String,
+        ?on_failure: String,
+        ?stack_policy_body: String,
+        ?stack_policy_url: String,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+        ?enable_termination_protection: bool,
+        ?retain_except_on_create: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor disable_rollback: bool?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor notification_ar_ns: Array[String]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor on_failure: String?
+      attr_accessor stack_policy_body: String?
+      attr_accessor stack_policy_url: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+      attr_accessor enable_termination_protection: bool?
+      attr_accessor retain_except_on_create: bool?
+    end
+
+    class CreateStackInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?accounts: Array[String],
+        ?deployment_targets: Types::DeploymentTargets,
+        ?regions: Array[String],
+        ?parameter_overrides: Array[Types::Parameter],
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor accounts: Array[String]?
+      attr_accessor deployment_targets: Types::DeploymentTargets?
+      attr_accessor regions: Array[String]?
+      attr_accessor parameter_overrides: Array[Types::Parameter]?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class CreateStackInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class CreateStackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+    end
+
+    class CreateStackRefactorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?enable_stack_creation: bool,
+        ?resource_mappings: Array[Types::ResourceMapping],
+        ?stack_definitions: Array[Types::StackDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor enable_stack_creation: bool?
+      attr_accessor resource_mappings: Array[Types::ResourceMapping]?
+      attr_accessor stack_definitions: Array[Types::StackDefinition]?
+    end
+
+    class CreateStackRefactorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_id: String?
+    end
+
+    class CreateStackSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?description: String,
+        ?template_body: String,
+        ?template_url: String,
+        ?stack_id: String,
+        ?parameters: Array[Types::Parameter],
+        ?capabilities: Array[String],
+        ?tags: Array[Types::Tag],
+        ?administration_role_arn: String,
+        ?execution_role_name: String,
+        ?permission_model: String,
+        ?auto_deployment: Types::AutoDeployment,
+        ?call_as: String,
+        ?client_request_token: String,
+        ?managed_execution: Types::ManagedExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor description: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor stack_id: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor administration_role_arn: String?
+      attr_accessor execution_role_name: String?
+      attr_accessor permission_model: String?
+      attr_accessor auto_deployment: Types::AutoDeployment?
+      attr_accessor call_as: String?
+      attr_accessor client_request_token: String?
+      attr_accessor managed_execution: Types::ManagedExecution?
+    end
+
+    class CreateStackSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_id: String?
+    end
+
+    class CreatedButModifiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeactivateOrganizationsAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeactivateOrganizationsAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeactivateTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type: String?
+      attr_accessor arn: String?
+    end
+
+    class DeactivateTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteChangeSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_name: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_name: String?
+      attr_accessor stack_name: String?
+    end
+
+    class DeleteChangeSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGeneratedTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_name: String?
+    end
+
+    class DeleteStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?retain_resources: Array[String],
+        ?role_arn: String,
+        ?client_request_token: String,
+        ?deletion_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor retain_resources: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor client_request_token: String?
+      attr_accessor deletion_mode: String?
+    end
+
+    class DeleteStackInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?accounts: Array[String],
+        ?deployment_targets: Types::DeploymentTargets,
+        ?regions: Array[String],
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?retain_stacks: bool,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor accounts: Array[String]?
+      attr_accessor deployment_targets: Types::DeploymentTargets?
+      attr_accessor regions: Array[String]?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor retain_stacks: bool?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class DeleteStackInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DeleteStackSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor call_as: String?
+    end
+
+    class DeleteStackSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DeletionMode
+      STANDARD: String
+      FORCE_DELETE_STACK: String
+    end
+
+    class DeploymentTargets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?accounts_url: String,
+        ?organizational_unit_ids: Array[String],
+        ?account_filter_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor accounts_url: String?
+      attr_accessor organizational_unit_ids: Array[String]?
+      attr_accessor account_filter_type: String?
+    end
+
+    module DeprecatedStatus
+      LIVE: String
+      DEPRECATED: String
+    end
+
+    class DeregisterTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?type_name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor version_id: String?
+    end
+
+    class DeregisterTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountLimitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAccountLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_limits: Array[Types::AccountLimit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_limits: Array[Types::AccountLimit]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeChangeSetHooksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_name: String,
+        ?stack_name: String,
+        ?next_token: String,
+        ?logical_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+      attr_accessor logical_resource_id: String?
+    end
+
+    class DescribeChangeSetHooksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_id: String,
+        ?change_set_name: String,
+        ?hooks: Array[Types::ChangeSetHook],
+        ?status: String,
+        ?next_token: String,
+        ?stack_id: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_name: String?
+      attr_accessor hooks: Array[Types::ChangeSetHook]?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor stack_id: String?
+      attr_accessor stack_name: String?
+    end
+
+    class DescribeChangeSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_name: String,
+        ?stack_name: String,
+        ?next_token: String,
+        ?include_property_values: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+      attr_accessor include_property_values: bool?
+    end
+
+    class DescribeChangeSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_name: String,
+        ?change_set_id: String,
+        ?stack_id: String,
+        ?stack_name: String,
+        ?description: String,
+        ?parameters: Array[Types::Parameter],
+        ?creation_time: Time,
+        ?execution_status: String,
+        ?status: String,
+        ?status_reason: String,
+        ?notification_ar_ns: Array[String],
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?capabilities: Array[String],
+        ?tags: Array[Types::Tag],
+        ?changes: Array[Types::Change],
+        ?next_token: String,
+        ?include_nested_stacks: bool,
+        ?parent_change_set_id: String,
+        ?root_change_set_id: String,
+        ?on_stack_failure: String,
+        ?import_existing_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_name: String?
+      attr_accessor change_set_id: String?
+      attr_accessor stack_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor creation_time: Time?
+      attr_accessor execution_status: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor notification_ar_ns: Array[String]?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor changes: Array[Types::Change]?
+      attr_accessor next_token: String?
+      attr_accessor include_nested_stacks: bool?
+      attr_accessor parent_change_set_id: String?
+      attr_accessor root_change_set_id: String?
+      attr_accessor on_stack_failure: String?
+      attr_accessor import_existing_resources: bool?
+    end
+
+    class DescribeGeneratedTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_name: String?
+    end
+
+    class DescribeGeneratedTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_id: String,
+        ?generated_template_name: String,
+        ?resources: Array[Types::ResourceDetail],
+        ?status: String,
+        ?status_reason: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?progress: Types::TemplateProgress,
+        ?stack_id: String,
+        ?template_configuration: Types::TemplateConfiguration,
+        ?total_warnings: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_id: String?
+      attr_accessor generated_template_name: String?
+      attr_accessor resources: Array[Types::ResourceDetail]?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor progress: Types::TemplateProgress?
+      attr_accessor stack_id: String?
+      attr_accessor template_configuration: Types::TemplateConfiguration?
+      attr_accessor total_warnings: Integer?
+    end
+
+    class DescribeOrganizationsAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_as: String?
+    end
+
+    class DescribeOrganizationsAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DescribePublisherInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publisher_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publisher_id: String?
+    end
+
+    class DescribePublisherOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publisher_id: String,
+        ?publisher_status: String,
+        ?identity_provider: String,
+        ?publisher_profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publisher_id: String?
+      attr_accessor publisher_status: String?
+      attr_accessor identity_provider: String?
+      attr_accessor publisher_profile: String?
+    end
+
+    class DescribeResourceScanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+    end
+
+    class DescribeResourceScanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?percentage_completed: Float,
+        ?resource_types: Array[String],
+        ?resources_scanned: Integer,
+        ?resources_read: Integer,
+        ?scan_filters: Array[Types::ScanFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor percentage_completed: Float?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor resources_scanned: Integer?
+      attr_accessor resources_read: Integer?
+      attr_accessor scan_filters: Array[Types::ScanFilter]?
+    end
+
+    class DescribeStackDriftDetectionStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_drift_detection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_drift_detection_id: String?
+    end
+
+    class DescribeStackDriftDetectionStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?stack_drift_detection_id: String,
+        ?stack_drift_status: String,
+        ?detection_status: String,
+        ?detection_status_reason: String,
+        ?drifted_stack_resource_count: Integer,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor stack_drift_detection_id: String?
+      attr_accessor stack_drift_status: String?
+      attr_accessor detection_status: String?
+      attr_accessor detection_status_reason: String?
+      attr_accessor drifted_stack_resource_count: Integer?
+      attr_accessor timestamp: Time?
+    end
+
+    class DescribeStackEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStackEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_events: Array[Types::StackEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_events: Array[Types::StackEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStackInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?stack_instance_account: String,
+        ?stack_instance_region: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor stack_instance_account: String?
+      attr_accessor stack_instance_region: String?
+      attr_accessor call_as: String?
+    end
+
+    class DescribeStackInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_instance: Types::StackInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_instance: Types::StackInstance?
+    end
+
+    class DescribeStackRefactorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_id: String?
+    end
+
+    class DescribeStackRefactorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?stack_refactor_id: String,
+        ?stack_ids: Array[String],
+        ?execution_status: String,
+        ?execution_status_reason: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor stack_refactor_id: String?
+      attr_accessor stack_ids: Array[String]?
+      attr_accessor execution_status: String?
+      attr_accessor execution_status_reason: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class DescribeStackResourceDriftsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?stack_resource_drift_status_filters: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor stack_resource_drift_status_filters: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeStackResourceDriftsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_drifts: Array[Types::StackResourceDrift],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_drifts: Array[Types::StackResourceDrift]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStackResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+    end
+
+    class DescribeStackResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_detail: Types::StackResourceDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_detail: Types::StackResourceDetail?
+    end
+
+    class DescribeStackResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+    end
+
+    class DescribeStackResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resources: Array[Types::StackResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resources: Array[Types::StackResource]?
+    end
+
+    class DescribeStackSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor call_as: String?
+    end
+
+    class DescribeStackSetOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class DescribeStackSetOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_operation: Types::StackSetOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_operation: Types::StackSetOperation?
+    end
+
+    class DescribeStackSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set: Types::StackSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set: Types::StackSet?
+    end
+
+    class DescribeStacksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStacksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stacks: Array[Types::Stack],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stacks: Array[Types::Stack]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?arn: String,
+        ?version_id: String,
+        ?publisher_id: String,
+        ?public_version_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor arn: String?
+      attr_accessor version_id: String?
+      attr_accessor publisher_id: String?
+      attr_accessor public_version_number: String?
+    end
+
+    class DescribeTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?type_name: String,
+        ?default_version_id: String,
+        ?is_default_version: bool,
+        ?type_tests_status: String,
+        ?type_tests_status_description: String,
+        ?description: String,
+        ?schema: String,
+        ?provisioning_type: String,
+        ?deprecated_status: String,
+        ?logging_config: Types::LoggingConfig,
+        ?required_activated_types: Array[Types::RequiredActivatedType],
+        ?execution_role_arn: String,
+        ?visibility: String,
+        ?source_url: String,
+        ?documentation_url: String,
+        ?last_updated: Time,
+        ?time_created: Time,
+        ?configuration_schema: String,
+        ?publisher_id: String,
+        ?original_type_name: String,
+        ?original_type_arn: String,
+        ?public_version_number: String,
+        ?latest_public_version: String,
+        ?is_activated: bool,
+        ?auto_update: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor default_version_id: String?
+      attr_accessor is_default_version: bool?
+      attr_accessor type_tests_status: String?
+      attr_accessor type_tests_status_description: String?
+      attr_accessor description: String?
+      attr_accessor schema: String?
+      attr_accessor provisioning_type: String?
+      attr_accessor deprecated_status: String?
+      attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor required_activated_types: Array[Types::RequiredActivatedType]?
+      attr_accessor execution_role_arn: String?
+      attr_accessor visibility: String?
+      attr_accessor source_url: String?
+      attr_accessor documentation_url: String?
+      attr_accessor last_updated: Time?
+      attr_accessor time_created: Time?
+      attr_accessor configuration_schema: String?
+      attr_accessor publisher_id: String?
+      attr_accessor original_type_name: String?
+      attr_accessor original_type_arn: String?
+      attr_accessor public_version_number: String?
+      attr_accessor latest_public_version: String?
+      attr_accessor is_activated: bool?
+      attr_accessor auto_update: bool?
+    end
+
+    class DescribeTypeRegistrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_token: String?
+    end
+
+    class DescribeTypeRegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_status: String,
+        ?description: String,
+        ?type_arn: String,
+        ?type_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_status: String?
+      attr_accessor description: String?
+      attr_accessor type_arn: String?
+      attr_accessor type_version_arn: String?
+    end
+
+    module DetailedStatus
+      CONFIGURATION_COMPLETE: String
+      VALIDATION_FAILED: String
+    end
+
+    class DetectStackDriftInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_ids: Array[String]?
+    end
+
+    class DetectStackDriftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_drift_detection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_drift_detection_id: String?
+    end
+
+    class DetectStackResourceDriftInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+    end
+
+    class DetectStackResourceDriftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_drift: Types::StackResourceDrift,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_drift: Types::StackResourceDrift?
+    end
+
+    class DetectStackSetDriftInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class DetectStackSetDriftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    module DifferenceType
+      ADD: String
+      REMOVE: String
+      NOT_EQUAL: String
+    end
+
+    class EstimateTemplateCostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_body: String,
+        ?template_url: String,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class EstimateTemplateCostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    module EvaluationType
+      Static: String
+      Dynamic: String
+    end
+
+    class ExecuteChangeSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_name: String,
+        ?stack_name: String,
+        ?client_request_token: String,
+        ?disable_rollback: bool,
+        ?retain_except_on_create: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor disable_rollback: bool?
+      attr_accessor retain_except_on_create: bool?
+    end
+
+    class ExecuteChangeSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ExecuteStackRefactorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_id: String?
+    end
+
+    module ExecutionStatus
+      UNAVAILABLE: String
+      AVAILABLE: String
+      EXECUTE_IN_PROGRESS: String
+      EXECUTE_COMPLETE: String
+      EXECUTE_FAILED: String
+      OBSOLETE: String
+    end
+
+    class Export
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exporting_stack_id: String,
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exporting_stack_id: String?
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module GeneratedTemplateDeletionPolicy
+      DELETE: String
+      RETAIN: String
+    end
+
+    class GeneratedTemplateNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module GeneratedTemplateResourceStatus
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETE: String
+    end
+
+    module GeneratedTemplateStatus
+      CREATE_PENDING: String
+      UPDATE_PENDING: String
+      DELETE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      UPDATE_IN_PROGRESS: String
+      DELETE_IN_PROGRESS: String
+      FAILED: String
+      COMPLETE: String
+    end
+
+    module GeneratedTemplateUpdateReplacePolicy
+      DELETE: String
+      RETAIN: String
+    end
+
+    class GetGeneratedTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?generated_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor generated_template_name: String?
+    end
+
+    class GetGeneratedTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?template_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor template_body: String?
+    end
+
+    class GetStackPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+    end
+
+    class GetStackPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_policy_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_policy_body: String?
+    end
+
+    class GetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?change_set_name: String,
+        ?template_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor change_set_name: String?
+      attr_accessor template_stage: String?
+    end
+
+    class GetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_body: String,
+        ?stages_available: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_body: String?
+      attr_accessor stages_available: Array[String]?
+    end
+
+    class GetTemplateSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_body: String,
+        ?template_url: String,
+        ?stack_name: String,
+        ?stack_set_name: String,
+        ?call_as: String,
+        ?template_summary_config: Types::TemplateSummaryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor stack_name: String?
+      attr_accessor stack_set_name: String?
+      attr_accessor call_as: String?
+      attr_accessor template_summary_config: Types::TemplateSummaryConfig?
+    end
+
+    class GetTemplateSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::ParameterDeclaration],
+        ?description: String,
+        ?capabilities: Array[String],
+        ?capabilities_reason: String,
+        ?resource_types: Array[String],
+        ?version: String,
+        ?metadata: String,
+        ?declared_transforms: Array[String],
+        ?resource_identifier_summaries: Array[Types::ResourceIdentifierSummary],
+        ?warnings: Types::Warnings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::ParameterDeclaration]?
+      attr_accessor description: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capabilities_reason: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor version: String?
+      attr_accessor metadata: String?
+      attr_accessor declared_transforms: Array[String]?
+      attr_accessor resource_identifier_summaries: Array[Types::ResourceIdentifierSummary]?
+      attr_accessor warnings: Types::Warnings?
+    end
+
+    module HandlerErrorCode
+      NotUpdatable: String
+      InvalidRequest: String
+      AccessDenied: String
+      InvalidCredentials: String
+      AlreadyExists: String
+      NotFound: String
+      ResourceConflict: String
+      Throttling: String
+      ServiceLimitExceeded: String
+      ServiceTimeout: String
+      GeneralServiceException: String
+      ServiceInternalError: String
+      NetworkFailure: String
+      InternalFailure: String
+      InvalidTypeConfiguration: String
+      HandlerInternalFailure: String
+      NonCompliant: String
+      Unknown: String
+      UnsupportedTarget: String
+    end
+
+    module HookFailureMode
+      FAIL: String
+      WARN: String
+    end
+
+    module HookInvocationPoint
+      PRE_PROVISION: String
+    end
+
+    class HookResultNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HookResultSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_point: String,
+        ?failure_mode: String,
+        ?type_name: String,
+        ?type_version_id: String,
+        ?type_configuration_version_id: String,
+        ?status: String,
+        ?hook_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_point: String?
+      attr_accessor failure_mode: String?
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor type_configuration_version_id: String?
+      attr_accessor status: String?
+      attr_accessor hook_status_reason: String?
+    end
+
+    module HookStatus
+      HOOK_IN_PROGRESS: String
+      HOOK_COMPLETE_SUCCEEDED: String
+      HOOK_COMPLETE_FAILED: String
+      HOOK_FAILED: String
+    end
+
+    module HookTargetType
+      RESOURCE: String
+    end
+
+    module IdentityProvider
+      AWS_Marketplace: String
+      GitHub: String
+      Bitbucket: String
+    end
+
+    class ImportStacksToStackSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?stack_ids: Array[String],
+        ?stack_ids_url: String,
+        ?organizational_unit_ids: Array[String],
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor stack_ids: Array[String]?
+      attr_accessor stack_ids_url: String?
+      attr_accessor organizational_unit_ids: Array[String]?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class ImportStacksToStackSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class InsufficientCapabilitiesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidChangeSetStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateTransitionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChangeSetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListChangeSetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::ChangeSetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::ChangeSetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exports: Array[Types::Export],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exports: Array[Types::Export]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGeneratedTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGeneratedTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::TemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::TemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHookResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type: String,
+        ?target_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type: String?
+      attr_accessor target_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListHookResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type: String,
+        ?target_id: String,
+        ?hook_results: Array[Types::HookResultSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type: String?
+      attr_accessor target_id: String?
+      attr_accessor hook_results: Array[Types::HookResultSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListHookResultsTargetType
+      CHANGE_SET: String
+      STACK: String
+      RESOURCE: String
+      CLOUD_CONTROL: String
+    end
+
+    class ListImportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?imports: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor imports: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceScanRelatedResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+        ?resources: Array[Types::ScannedResourceIdentifier],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+      attr_accessor resources: Array[Types::ScannedResourceIdentifier]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourceScanRelatedResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_resources: Array[Types::ScannedResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_resources: Array[Types::ScannedResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceScanResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+        ?resource_identifier: String,
+        ?resource_type_prefix: String,
+        ?tag_key: String,
+        ?tag_value: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type_prefix: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourceScanResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::ScannedResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::ScannedResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceScansInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?scan_type_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor scan_type_filter: String?
+    end
+
+    class ListResourceScansOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_summaries: Array[Types::ResourceScanSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_summaries: Array[Types::ResourceScanSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackInstanceResourceDriftsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?stack_instance_resource_drift_statuses: Array[String],
+        ?stack_instance_account: String,
+        ?stack_instance_region: String,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor stack_instance_resource_drift_statuses: Array[String]?
+      attr_accessor stack_instance_account: String?
+      attr_accessor stack_instance_region: String?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class ListStackInstanceResourceDriftsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackInstanceResourceDriftsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackInstanceResourceDriftsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::StackInstanceFilter],
+        ?stack_instance_account: String,
+        ?stack_instance_region: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::StackInstanceFilter]?
+      attr_accessor stack_instance_account: String?
+      attr_accessor stack_instance_region: String?
+      attr_accessor call_as: String?
+    end
+
+    class ListStackInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackInstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackInstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackRefactorActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStackRefactorActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_actions: Array[Types::StackRefactorAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_actions: Array[Types::StackRefactorAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackRefactorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_status_filter: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_status_filter: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStackRefactorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_summaries: Array[Types::StackRefactorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_summaries: Array[Types::StackRefactorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_summaries: Array[Types::StackResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_summaries: Array[Types::StackResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackSetAutoDeploymentTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor call_as: String?
+    end
+
+    class ListStackSetAutoDeploymentTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackSetAutoDeploymentTargetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackSetAutoDeploymentTargetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackSetOperationResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?operation_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?call_as: String,
+        ?filters: Array[Types::OperationResultFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor operation_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor call_as: String?
+      attr_accessor filters: Array[Types::OperationResultFilter]?
+    end
+
+    class ListStackSetOperationResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackSetOperationResultSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackSetOperationResultSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackSetOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor call_as: String?
+    end
+
+    class ListStackSetOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackSetOperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackSetOperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStackSetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor call_as: String?
+    end
+
+    class ListStackSetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StackSetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StackSetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStacksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?stack_status_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor stack_status_filter: Array[String]?
+    end
+
+    class ListStacksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_summaries: Array[Types::StackSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_summaries: Array[Types::StackSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypeRegistrationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?type_arn: String,
+        ?registration_status_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor type_arn: String?
+      attr_accessor registration_status_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypeRegistrationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_token_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_token_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypeVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?deprecated_status: String,
+        ?publisher_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor deprecated_status: String?
+      attr_accessor publisher_id: String?
+    end
+
+    class ListTypeVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_version_summaries: Array[Types::TypeVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_version_summaries: Array[Types::TypeVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?visibility: String,
+        ?provisioning_type: String,
+        ?deprecated_status: String,
+        ?type: String,
+        ?filters: Types::TypeFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor visibility: String?
+      attr_accessor provisioning_type: String?
+      attr_accessor deprecated_status: String?
+      attr_accessor type: String?
+      attr_accessor filters: Types::TypeFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_summaries: Array[Types::TypeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_summaries: Array[Types::TypeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_role_arn: String,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_role_arn: String?
+      attr_accessor log_group_name: String?
+    end
+
+    class ManagedExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active: bool?
+    end
+
+    class ModuleInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_hierarchy: String,
+        ?logical_id_hierarchy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_hierarchy: String?
+      attr_accessor logical_id_hierarchy: String?
+    end
+
+    class NameAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OnFailure
+      DO_NOTHING: String
+      ROLLBACK: String
+      DELETE: String
+    end
+
+    module OnStackFailure
+      DO_NOTHING: String
+      ROLLBACK: String
+      DELETE: String
+    end
+
+    class OperationIdAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OperationInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OperationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OperationResultFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: String?
+    end
+
+    module OperationResultFilterName
+      OPERATION_RESULT_STATUS: String
+    end
+
+    module OperationStatus
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class OperationStatusCheckFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OrganizationStatus
+      ENABLED: String
+      DISABLED: String
+      DISABLED_PERMANENTLY: String
+    end
+
+    class Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_key: String,
+        ?output_value: String,
+        ?description: String,
+        ?export_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_key: String?
+      attr_accessor output_value: String?
+      attr_accessor description: String?
+      attr_accessor export_name: String?
+    end
+
+    class Parameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_key: String,
+        ?parameter_value: String,
+        ?use_previous_value: bool,
+        ?resolved_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_key: String?
+      attr_accessor parameter_value: String?
+      attr_accessor use_previous_value: bool?
+      attr_accessor resolved_value: String?
+    end
+
+    class ParameterConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_values: Array[String]?
+    end
+
+    class ParameterDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_key: String,
+        ?default_value: String,
+        ?parameter_type: String,
+        ?no_echo: bool,
+        ?description: String,
+        ?parameter_constraints: Types::ParameterConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_key: String?
+      attr_accessor default_value: String?
+      attr_accessor parameter_type: String?
+      attr_accessor no_echo: bool?
+      attr_accessor description: String?
+      attr_accessor parameter_constraints: Types::ParameterConstraints?
+    end
+
+    module PermissionModels
+      SERVICE_MANAGED: String
+      SELF_MANAGED: String
+    end
+
+    class PhysicalResourceIdContextKeyValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module PolicyAction
+      Delete: String
+      Retain: String
+      Snapshot: String
+      ReplaceAndDelete: String
+      ReplaceAndRetain: String
+      ReplaceAndSnapshot: String
+    end
+
+    class PropertyDifference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property_path: String,
+        ?expected_value: String,
+        ?actual_value: String,
+        ?difference_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_path: String?
+      attr_accessor expected_value: String?
+      attr_accessor actual_value: String?
+      attr_accessor difference_type: String?
+    end
+
+    module ProvisioningType
+      NON_PROVISIONABLE: String
+      IMMUTABLE: String
+      FULLY_MUTABLE: String
+    end
+
+    class PublishTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?arn: String,
+        ?type_name: String,
+        ?public_version_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor arn: String?
+      attr_accessor type_name: String?
+      attr_accessor public_version_number: String?
+    end
+
+    class PublishTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_type_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_type_arn: String?
+    end
+
+    module PublisherStatus
+      VERIFIED: String
+      UNVERIFIED: String
+    end
+
+    class RecordHandlerProgressInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bearer_token: String,
+        ?operation_status: String,
+        ?current_operation_status: String,
+        ?status_message: String,
+        ?error_code: String,
+        ?resource_model: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bearer_token: String?
+      attr_accessor operation_status: String?
+      attr_accessor current_operation_status: String?
+      attr_accessor status_message: String?
+      attr_accessor error_code: String?
+      attr_accessor resource_model: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class RecordHandlerProgressOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RegionConcurrencyType
+      SEQUENTIAL: String
+      PARALLEL: String
+    end
+
+    class RegisterPublisherInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_terms_and_conditions: bool,
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_terms_and_conditions: bool?
+      attr_accessor connection_arn: String?
+    end
+
+    class RegisterPublisherOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publisher_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publisher_id: String?
+    end
+
+    class RegisterTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?schema_handler_package: String,
+        ?logging_config: Types::LoggingConfig,
+        ?execution_role_arn: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor schema_handler_package: String?
+      attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class RegisterTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_token: String?
+    end
+
+    module RegistrationStatus
+      COMPLETE: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    module RegistryType
+      RESOURCE: String
+      MODULE: String
+      HOOK: String
+    end
+
+    module Replacement
+      True: String
+      False: String
+      Conditional: String
+    end
+
+    class RequiredActivatedType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name_alias: String,
+        ?original_type_name: String,
+        ?publisher_id: String,
+        ?supported_major_versions: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name_alias: String?
+      attr_accessor original_type_name: String?
+      attr_accessor publisher_id: String?
+      attr_accessor supported_major_versions: Array[Integer]?
+    end
+
+    module RequiresRecreation
+      Never: String
+      Conditionally: String
+      Always: String
+    end
+
+    module ResourceAttribute
+      Properties: String
+      Metadata: String
+      CreationPolicy: String
+      UpdatePolicy: String
+      DeletionPolicy: String
+      UpdateReplacePolicy: String
+      Tags: String
+    end
+
+    class ResourceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_action: String,
+        ?action: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?replacement: String,
+        ?scope: Array[String],
+        ?details: Array[Types::ResourceChangeDetail],
+        ?change_set_id: String,
+        ?module_info: Types::ModuleInfo,
+        ?before_context: String,
+        ?after_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_action: String?
+      attr_accessor action: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor replacement: String?
+      attr_accessor scope: Array[String]?
+      attr_accessor details: Array[Types::ResourceChangeDetail]?
+      attr_accessor change_set_id: String?
+      attr_accessor module_info: Types::ModuleInfo?
+      attr_accessor before_context: String?
+      attr_accessor after_context: String?
+    end
+
+    class ResourceChangeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::ResourceTargetDefinition,
+        ?evaluation: String,
+        ?change_source: String,
+        ?causing_entity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::ResourceTargetDefinition?
+      attr_accessor evaluation: String?
+      attr_accessor change_source: String?
+      attr_accessor causing_entity: String?
+    end
+
+    class ResourceDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?logical_resource_id: String,
+        ?resource_identifier: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor resource_identifier: Hash[String, String]?
+    end
+
+    class ResourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?logical_resource_id: String,
+        ?resource_identifier: Hash[String, String],
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?warnings: Array[Types::WarningDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor resource_identifier: Hash[String, String]?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor warnings: Array[Types::WarningDetail]?
+    end
+
+    class ResourceIdentifierSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?logical_resource_ids: Array[String],
+        ?resource_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor logical_resource_ids: Array[String]?
+      attr_accessor resource_identifiers: Array[String]?
+    end
+
+    class ResourceLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+    end
+
+    class ResourceMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::ResourceLocation,
+        ?destination: Types::ResourceLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::ResourceLocation?
+      attr_accessor destination: Types::ResourceLocation?
+    end
+
+    class ResourceScanInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceScanLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceScanNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceScanStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETE: String
+      EXPIRED: String
+    end
+
+    class ResourceScanSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?percentage_completed: Float,
+        ?scan_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor percentage_completed: Float?
+      attr_accessor scan_type: String?
+    end
+
+    module ResourceSignalStatus
+      SUCCESS: String
+      FAILURE: String
+    end
+
+    module ResourceStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      CREATE_COMPLETE: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+      DELETE_COMPLETE: String
+      DELETE_SKIPPED: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+      UPDATE_COMPLETE: String
+      IMPORT_FAILED: String
+      IMPORT_COMPLETE: String
+      IMPORT_IN_PROGRESS: String
+      IMPORT_ROLLBACK_IN_PROGRESS: String
+      IMPORT_ROLLBACK_FAILED: String
+      IMPORT_ROLLBACK_COMPLETE: String
+      EXPORT_FAILED: String
+      EXPORT_COMPLETE: String
+      EXPORT_IN_PROGRESS: String
+      EXPORT_ROLLBACK_IN_PROGRESS: String
+      EXPORT_ROLLBACK_FAILED: String
+      EXPORT_ROLLBACK_COMPLETE: String
+      UPDATE_ROLLBACK_IN_PROGRESS: String
+      UPDATE_ROLLBACK_COMPLETE: String
+      UPDATE_ROLLBACK_FAILED: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_COMPLETE: String
+      ROLLBACK_FAILED: String
+    end
+
+    class ResourceTargetDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?name: String,
+        ?requires_recreation: String,
+        ?path: String,
+        ?before_value: String,
+        ?after_value: String,
+        ?attribute_change_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor name: String?
+      attr_accessor requires_recreation: String?
+      attr_accessor path: String?
+      attr_accessor before_value: String?
+      attr_accessor after_value: String?
+      attr_accessor attribute_change_type: String?
+    end
+
+    class ResourceToImport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?logical_resource_id: String,
+        ?resource_identifier: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor resource_identifier: Hash[String, String]?
+    end
+
+    class RollbackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rollback_triggers: Array[Types::RollbackTrigger],
+        ?monitoring_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rollback_triggers: Array[Types::RollbackTrigger]?
+      attr_accessor monitoring_time_in_minutes: Integer?
+    end
+
+    class RollbackStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?role_arn: String,
+        ?client_request_token: String,
+        ?retain_except_on_create: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_request_token: String?
+      attr_accessor retain_except_on_create: bool?
+    end
+
+    class RollbackStackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+    end
+
+    class RollbackTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class ScanFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+    end
+
+    module ScanType
+      FULL: String
+      PARTIAL: String
+    end
+
+    class ScannedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_identifier: Hash[String, String],
+        ?managed_by_stack: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: Hash[String, String]?
+      attr_accessor managed_by_stack: bool?
+    end
+
+    class ScannedResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_identifier: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: Hash[String, String]?
+    end
+
+    class SetStackPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?stack_policy_body: String,
+        ?stack_policy_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor stack_policy_body: String?
+      attr_accessor stack_policy_url: String?
+    end
+
+    class SetTypeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_arn: String,
+        ?configuration: String,
+        ?configuration_alias: String,
+        ?type_name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_arn: String?
+      attr_accessor configuration: String?
+      attr_accessor configuration_alias: String?
+      attr_accessor type_name: String?
+      attr_accessor type: String?
+    end
+
+    class SetTypeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_arn: String?
+    end
+
+    class SetTypeDefaultVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?type_name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor version_id: String?
+    end
+
+    class SetTypeDefaultVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SignalResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?logical_resource_id: String,
+        ?unique_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor unique_id: String?
+      attr_accessor status: String?
+    end
+
+    class Stack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?stack_name: String,
+        ?change_set_id: String,
+        ?description: String,
+        ?parameters: Array[Types::Parameter],
+        ?creation_time: Time,
+        ?deletion_time: Time,
+        ?last_updated_time: Time,
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?stack_status: String,
+        ?stack_status_reason: String,
+        ?disable_rollback: bool,
+        ?notification_ar_ns: Array[String],
+        ?timeout_in_minutes: Integer,
+        ?capabilities: Array[String],
+        ?outputs: Array[Types::Output],
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?enable_termination_protection: bool,
+        ?parent_id: String,
+        ?root_id: String,
+        ?drift_information: Types::StackDriftInformation,
+        ?retain_except_on_create: bool,
+        ?deletion_mode: String,
+        ?detailed_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor change_set_id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor creation_time: Time?
+      attr_accessor deletion_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor stack_status: String?
+      attr_accessor stack_status_reason: String?
+      attr_accessor disable_rollback: bool?
+      attr_accessor notification_ar_ns: Array[String]?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor outputs: Array[Types::Output]?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor enable_termination_protection: bool?
+      attr_accessor parent_id: String?
+      attr_accessor root_id: String?
+      attr_accessor drift_information: Types::StackDriftInformation?
+      attr_accessor retain_except_on_create: bool?
+      attr_accessor deletion_mode: String?
+      attr_accessor detailed_status: String?
+    end
+
+    class StackDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?template_body: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+    end
+
+    module StackDriftDetectionStatus
+      DETECTION_IN_PROGRESS: String
+      DETECTION_FAILED: String
+      DETECTION_COMPLETE: String
+    end
+
+    class StackDriftInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_drift_status: String,
+        ?last_check_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_drift_status: String?
+      attr_accessor last_check_timestamp: Time?
+    end
+
+    class StackDriftInformationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_drift_status: String,
+        ?last_check_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_drift_status: String?
+      attr_accessor last_check_timestamp: Time?
+    end
+
+    module StackDriftStatus
+      DRIFTED: String
+      IN_SYNC: String
+      UNKNOWN: String
+      NOT_CHECKED: String
+    end
+
+    class StackEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?event_id: String,
+        ?stack_name: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?timestamp: Time,
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?resource_properties: String,
+        ?client_request_token: String,
+        ?hook_type: String,
+        ?hook_status: String,
+        ?hook_status_reason: String,
+        ?hook_invocation_point: String,
+        ?hook_failure_mode: String,
+        ?detailed_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor event_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor timestamp: Time?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor resource_properties: String?
+      attr_accessor client_request_token: String?
+      attr_accessor hook_type: String?
+      attr_accessor hook_status: String?
+      attr_accessor hook_status_reason: String?
+      attr_accessor hook_invocation_point: String?
+      attr_accessor hook_failure_mode: String?
+      attr_accessor detailed_status: String?
+    end
+
+    class StackInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_id: String,
+        ?region: String,
+        ?account: String,
+        ?stack_id: String,
+        ?parameter_overrides: Array[Types::Parameter],
+        ?status: String,
+        ?stack_instance_status: Types::StackInstanceComprehensiveStatus,
+        ?status_reason: String,
+        ?organizational_unit_id: String,
+        ?drift_status: String,
+        ?last_drift_check_timestamp: Time,
+        ?last_operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_id: String?
+      attr_accessor region: String?
+      attr_accessor account: String?
+      attr_accessor stack_id: String?
+      attr_accessor parameter_overrides: Array[Types::Parameter]?
+      attr_accessor status: String?
+      attr_accessor stack_instance_status: Types::StackInstanceComprehensiveStatus?
+      attr_accessor status_reason: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor drift_status: String?
+      attr_accessor last_drift_check_timestamp: Time?
+      attr_accessor last_operation_id: String?
+    end
+
+    class StackInstanceComprehensiveStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detailed_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detailed_status: String?
+    end
+
+    module StackInstanceDetailedStatus
+      PENDING: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLED: String
+      INOPERABLE: String
+      SKIPPED_SUSPENDED_ACCOUNT: String
+      FAILED_IMPORT: String
+    end
+
+    class StackInstanceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: String?
+    end
+
+    module StackInstanceFilterName
+      DETAILED_STATUS: String
+      LAST_OPERATION_ID: String
+      DRIFT_STATUS: String
+    end
+
+    class StackInstanceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StackInstanceResourceDriftsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?physical_resource_id_context: Array[Types::PhysicalResourceIdContextKeyValuePair],
+        ?resource_type: String,
+        ?property_differences: Array[Types::PropertyDifference],
+        ?stack_resource_drift_status: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor physical_resource_id_context: Array[Types::PhysicalResourceIdContextKeyValuePair]?
+      attr_accessor resource_type: String?
+      attr_accessor property_differences: Array[Types::PropertyDifference]?
+      attr_accessor stack_resource_drift_status: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module StackInstanceStatus
+      CURRENT: String
+      OUTDATED: String
+      INOPERABLE: String
+    end
+
+    class StackInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_id: String,
+        ?region: String,
+        ?account: String,
+        ?stack_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?stack_instance_status: Types::StackInstanceComprehensiveStatus,
+        ?organizational_unit_id: String,
+        ?drift_status: String,
+        ?last_drift_check_timestamp: Time,
+        ?last_operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_id: String?
+      attr_accessor region: String?
+      attr_accessor account: String?
+      attr_accessor stack_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor stack_instance_status: Types::StackInstanceComprehensiveStatus?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor drift_status: String?
+      attr_accessor last_drift_check_timestamp: Time?
+      attr_accessor last_operation_id: String?
+    end
+
+    class StackNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StackRefactorAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?entity: String,
+        ?physical_resource_id: String,
+        ?resource_identifier: String,
+        ?description: String,
+        ?detection: String,
+        ?detection_reason: String,
+        ?tag_resources: Array[Types::Tag],
+        ?untag_resources: Array[String],
+        ?resource_mapping: Types::ResourceMapping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor entity: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor description: String?
+      attr_accessor detection: String?
+      attr_accessor detection_reason: String?
+      attr_accessor tag_resources: Array[Types::Tag]?
+      attr_accessor untag_resources: Array[String]?
+      attr_accessor resource_mapping: Types::ResourceMapping?
+    end
+
+    module StackRefactorActionEntity
+      RESOURCE: String
+      STACK: String
+    end
+
+    module StackRefactorActionType
+      MOVE: String
+      CREATE: String
+    end
+
+    module StackRefactorDetection
+      AUTO: String
+      MANUAL: String
+    end
+
+    module StackRefactorExecutionStatus
+      UNAVAILABLE: String
+      AVAILABLE: String
+      OBSOLETE: String
+      EXECUTE_IN_PROGRESS: String
+      EXECUTE_COMPLETE: String
+      EXECUTE_FAILED: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_COMPLETE: String
+      ROLLBACK_FAILED: String
+    end
+
+    class StackRefactorNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StackRefactorStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      DELETE_COMPLETE: String
+      DELETE_FAILED: String
+    end
+
+    class StackRefactorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_refactor_id: String,
+        ?description: String,
+        ?execution_status: String,
+        ?execution_status_reason: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_refactor_id: String?
+      attr_accessor description: String?
+      attr_accessor execution_status: String?
+      attr_accessor execution_status_reason: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class StackResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?stack_id: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?timestamp: Time,
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?description: String,
+        ?drift_information: Types::StackResourceDriftInformation,
+        ?module_info: Types::ModuleInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor stack_id: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor timestamp: Time?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor description: String?
+      attr_accessor drift_information: Types::StackResourceDriftInformation?
+      attr_accessor module_info: Types::ModuleInfo?
+    end
+
+    class StackResourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?stack_id: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?last_updated_timestamp: Time,
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?description: String,
+        ?metadata: String,
+        ?drift_information: Types::StackResourceDriftInformation,
+        ?module_info: Types::ModuleInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor stack_id: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor description: String?
+      attr_accessor metadata: String?
+      attr_accessor drift_information: Types::StackResourceDriftInformation?
+      attr_accessor module_info: Types::ModuleInfo?
+    end
+
+    class StackResourceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?physical_resource_id_context: Array[Types::PhysicalResourceIdContextKeyValuePair],
+        ?resource_type: String,
+        ?expected_properties: String,
+        ?actual_properties: String,
+        ?property_differences: Array[Types::PropertyDifference],
+        ?stack_resource_drift_status: String,
+        ?timestamp: Time,
+        ?module_info: Types::ModuleInfo,
+        ?drift_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor physical_resource_id_context: Array[Types::PhysicalResourceIdContextKeyValuePair]?
+      attr_accessor resource_type: String?
+      attr_accessor expected_properties: String?
+      attr_accessor actual_properties: String?
+      attr_accessor property_differences: Array[Types::PropertyDifference]?
+      attr_accessor stack_resource_drift_status: String?
+      attr_accessor timestamp: Time?
+      attr_accessor module_info: Types::ModuleInfo?
+      attr_accessor drift_status_reason: String?
+    end
+
+    class StackResourceDriftInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_drift_status: String,
+        ?last_check_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_drift_status: String?
+      attr_accessor last_check_timestamp: Time?
+    end
+
+    class StackResourceDriftInformationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_resource_drift_status: String,
+        ?last_check_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_resource_drift_status: String?
+      attr_accessor last_check_timestamp: Time?
+    end
+
+    module StackResourceDriftStatus
+      IN_SYNC: String
+      MODIFIED: String
+      DELETED: String
+      NOT_CHECKED: String
+      UNKNOWN: String
+    end
+
+    class StackResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?last_updated_timestamp: Time,
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?drift_information: Types::StackResourceDriftInformationSummary,
+        ?module_info: Types::ModuleInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor drift_information: Types::StackResourceDriftInformationSummary?
+      attr_accessor module_info: Types::ModuleInfo?
+    end
+
+    class StackSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?stack_set_id: String,
+        ?description: String,
+        ?status: String,
+        ?template_body: String,
+        ?parameters: Array[Types::Parameter],
+        ?capabilities: Array[String],
+        ?tags: Array[Types::Tag],
+        ?stack_set_arn: String,
+        ?administration_role_arn: String,
+        ?execution_role_name: String,
+        ?stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails,
+        ?auto_deployment: Types::AutoDeployment,
+        ?permission_model: String,
+        ?organizational_unit_ids: Array[String],
+        ?managed_execution: Types::ManagedExecution,
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor stack_set_id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor template_body: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor stack_set_arn: String?
+      attr_accessor administration_role_arn: String?
+      attr_accessor execution_role_name: String?
+      attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails?
+      attr_accessor auto_deployment: Types::AutoDeployment?
+      attr_accessor permission_model: String?
+      attr_accessor organizational_unit_ids: Array[String]?
+      attr_accessor managed_execution: Types::ManagedExecution?
+      attr_accessor regions: Array[String]?
+    end
+
+    class StackSetAutoDeploymentTargetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+      attr_accessor regions: Array[String]?
+    end
+
+    class StackSetDriftDetectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?drift_status: String,
+        ?drift_detection_status: String,
+        ?last_drift_check_timestamp: Time,
+        ?total_stack_instances_count: Integer,
+        ?drifted_stack_instances_count: Integer,
+        ?in_sync_stack_instances_count: Integer,
+        ?in_progress_stack_instances_count: Integer,
+        ?failed_stack_instances_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor drift_status: String?
+      attr_accessor drift_detection_status: String?
+      attr_accessor last_drift_check_timestamp: Time?
+      attr_accessor total_stack_instances_count: Integer?
+      attr_accessor drifted_stack_instances_count: Integer?
+      attr_accessor in_sync_stack_instances_count: Integer?
+      attr_accessor in_progress_stack_instances_count: Integer?
+      attr_accessor failed_stack_instances_count: Integer?
+    end
+
+    module StackSetDriftDetectionStatus
+      COMPLETED: String
+      FAILED: String
+      PARTIAL_SUCCESS: String
+      IN_PROGRESS: String
+      STOPPED: String
+    end
+
+    module StackSetDriftStatus
+      DRIFTED: String
+      IN_SYNC: String
+      NOT_CHECKED: String
+    end
+
+    class StackSetNotEmptyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StackSetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StackSetOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?stack_set_id: String,
+        ?action: String,
+        ?status: String,
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?retain_stacks: bool,
+        ?administration_role_arn: String,
+        ?execution_role_name: String,
+        ?creation_timestamp: Time,
+        ?end_timestamp: Time,
+        ?deployment_targets: Types::DeploymentTargets,
+        ?stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails,
+        ?status_reason: String,
+        ?status_details: Types::StackSetOperationStatusDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor stack_set_id: String?
+      attr_accessor action: String?
+      attr_accessor status: String?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor retain_stacks: bool?
+      attr_accessor administration_role_arn: String?
+      attr_accessor execution_role_name: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor deployment_targets: Types::DeploymentTargets?
+      attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails?
+      attr_accessor status_reason: String?
+      attr_accessor status_details: Types::StackSetOperationStatusDetails?
+    end
+
+    module StackSetOperationAction
+      CREATE: String
+      UPDATE: String
+      DELETE: String
+      DETECT_DRIFT: String
+    end
+
+    class StackSetOperationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_concurrency_type: String,
+        ?region_order: Array[String],
+        ?failure_tolerance_count: Integer,
+        ?failure_tolerance_percentage: Integer,
+        ?max_concurrent_count: Integer,
+        ?max_concurrent_percentage: Integer,
+        ?concurrency_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_concurrency_type: String?
+      attr_accessor region_order: Array[String]?
+      attr_accessor failure_tolerance_count: Integer?
+      attr_accessor failure_tolerance_percentage: Integer?
+      attr_accessor max_concurrent_count: Integer?
+      attr_accessor max_concurrent_percentage: Integer?
+      attr_accessor concurrency_mode: String?
+    end
+
+    module StackSetOperationResultStatus
+      PENDING: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class StackSetOperationResultSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: String,
+        ?region: String,
+        ?status: String,
+        ?status_reason: String,
+        ?account_gate_result: Types::AccountGateResult,
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: String?
+      attr_accessor region: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor account_gate_result: Types::AccountGateResult?
+      attr_accessor organizational_unit_id: String?
+    end
+
+    module StackSetOperationStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      STOPPING: String
+      STOPPED: String
+      QUEUED: String
+    end
+
+    class StackSetOperationStatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_stack_instances_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_stack_instances_count: Integer?
+    end
+
+    class StackSetOperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?action: String,
+        ?status: String,
+        ?creation_timestamp: Time,
+        ?end_timestamp: Time,
+        ?status_reason: String,
+        ?status_details: Types::StackSetOperationStatusDetails,
+        ?operation_preferences: Types::StackSetOperationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor action: String?
+      attr_accessor status: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor status_reason: String?
+      attr_accessor status_details: Types::StackSetOperationStatusDetails?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+    end
+
+    module StackSetStatus
+      ACTIVE: String
+      DELETED: String
+    end
+
+    class StackSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?stack_set_id: String,
+        ?description: String,
+        ?status: String,
+        ?auto_deployment: Types::AutoDeployment,
+        ?permission_model: String,
+        ?drift_status: String,
+        ?last_drift_check_timestamp: Time,
+        ?managed_execution: Types::ManagedExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor stack_set_id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor auto_deployment: Types::AutoDeployment?
+      attr_accessor permission_model: String?
+      attr_accessor drift_status: String?
+      attr_accessor last_drift_check_timestamp: Time?
+      attr_accessor managed_execution: Types::ManagedExecution?
+    end
+
+    module StackStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      CREATE_COMPLETE: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_FAILED: String
+      ROLLBACK_COMPLETE: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+      DELETE_COMPLETE: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_COMPLETE_CLEANUP_IN_PROGRESS: String
+      UPDATE_COMPLETE: String
+      UPDATE_FAILED: String
+      UPDATE_ROLLBACK_IN_PROGRESS: String
+      UPDATE_ROLLBACK_FAILED: String
+      UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS: String
+      UPDATE_ROLLBACK_COMPLETE: String
+      REVIEW_IN_PROGRESS: String
+      IMPORT_IN_PROGRESS: String
+      IMPORT_COMPLETE: String
+      IMPORT_ROLLBACK_IN_PROGRESS: String
+      IMPORT_ROLLBACK_FAILED: String
+      IMPORT_ROLLBACK_COMPLETE: String
+    end
+
+    class StackSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+        ?stack_name: String,
+        ?template_description: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?deletion_time: Time,
+        ?stack_status: String,
+        ?stack_status_reason: String,
+        ?parent_id: String,
+        ?root_id: String,
+        ?drift_information: Types::StackDriftInformationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor template_description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor deletion_time: Time?
+      attr_accessor stack_status: String?
+      attr_accessor stack_status_reason: String?
+      attr_accessor parent_id: String?
+      attr_accessor root_id: String?
+      attr_accessor drift_information: Types::StackDriftInformationSummary?
+    end
+
+    class StaleRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartResourceScanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?scan_filters: Array[Types::ScanFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor scan_filters: Array[Types::ScanFilter]?
+    end
+
+    class StartResourceScanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_scan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_scan_id: String?
+    end
+
+    class StopStackSetOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class StopStackSetOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TemplateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_policy: String,
+        ?update_replace_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_policy: String?
+      attr_accessor update_replace_policy: String?
+    end
+
+    module TemplateFormat
+      JSON: String
+      YAML: String
+    end
+
+    class TemplateParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_key: String,
+        ?default_value: String,
+        ?no_echo: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_key: String?
+      attr_accessor default_value: String?
+      attr_accessor no_echo: bool?
+      attr_accessor description: String?
+    end
+
+    class TemplateProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources_succeeded: Integer,
+        ?resources_failed: Integer,
+        ?resources_processing: Integer,
+        ?resources_pending: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources_succeeded: Integer?
+      attr_accessor resources_failed: Integer?
+      attr_accessor resources_processing: Integer?
+      attr_accessor resources_pending: Integer?
+    end
+
+    module TemplateStage
+      Original: String
+      Processed: String
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_id: String,
+        ?generated_template_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?number_of_resources: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_id: String?
+      attr_accessor generated_template_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor number_of_resources: Integer?
+    end
+
+    class TemplateSummaryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?treat_unrecognized_resource_types_as_warnings: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor treat_unrecognized_resource_types_as_warnings: bool?
+    end
+
+    class TestTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?type_name: String,
+        ?version_id: String,
+        ?log_delivery_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor version_id: String?
+      attr_accessor log_delivery_bucket: String?
+    end
+
+    class TestTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_version_arn: String?
+    end
+
+    module ThirdPartyType
+      RESOURCE: String
+      MODULE: String
+      HOOK: String
+    end
+
+    class TokenAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?alias: String,
+        ?configuration: String,
+        ?last_updated: Time,
+        ?type_arn: String,
+        ?type_name: String,
+        ?is_default_configuration: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor alias: String?
+      attr_accessor configuration: String?
+      attr_accessor last_updated: Time?
+      attr_accessor type_arn: String?
+      attr_accessor type_name: String?
+      attr_accessor is_default_configuration: bool?
+    end
+
+    class TypeConfigurationIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_arn: String,
+        ?type_configuration_alias: String,
+        ?type_configuration_arn: String,
+        ?type: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_arn: String?
+      attr_accessor type_configuration_alias: String?
+      attr_accessor type_configuration_arn: String?
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+    end
+
+    class TypeConfigurationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?publisher_id: String,
+        ?type_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor publisher_id: String?
+      attr_accessor type_name_prefix: String?
+    end
+
+    class TypeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?default_version_id: String,
+        ?type_arn: String,
+        ?last_updated: Time,
+        ?description: String,
+        ?publisher_id: String,
+        ?original_type_name: String,
+        ?public_version_number: String,
+        ?latest_public_version: String,
+        ?publisher_identity: String,
+        ?publisher_name: String,
+        ?is_activated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor default_version_id: String?
+      attr_accessor type_arn: String?
+      attr_accessor last_updated: Time?
+      attr_accessor description: String?
+      attr_accessor publisher_id: String?
+      attr_accessor original_type_name: String?
+      attr_accessor public_version_number: String?
+      attr_accessor latest_public_version: String?
+      attr_accessor publisher_identity: String?
+      attr_accessor publisher_name: String?
+      attr_accessor is_activated: bool?
+    end
+
+    module TypeTestsStatus
+      PASSED: String
+      FAILED: String
+      IN_PROGRESS: String
+      NOT_TESTED: String
+    end
+
+    class TypeVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?type_name: String,
+        ?version_id: String,
+        ?is_default_version: bool,
+        ?arn: String,
+        ?time_created: Time,
+        ?description: String,
+        ?public_version_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor type_name: String?
+      attr_accessor version_id: String?
+      attr_accessor is_default_version: bool?
+      attr_accessor arn: String?
+      attr_accessor time_created: Time?
+      attr_accessor description: String?
+      attr_accessor public_version_number: String?
+    end
+
+    class UpdateGeneratedTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_name: String,
+        ?new_generated_template_name: String,
+        ?add_resources: Array[Types::ResourceDefinition],
+        ?remove_resources: Array[String],
+        ?refresh_all_resources: bool,
+        ?template_configuration: Types::TemplateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_name: String?
+      attr_accessor new_generated_template_name: String?
+      attr_accessor add_resources: Array[Types::ResourceDefinition]?
+      attr_accessor remove_resources: Array[String]?
+      attr_accessor refresh_all_resources: bool?
+      attr_accessor template_configuration: Types::TemplateConfiguration?
+    end
+
+    class UpdateGeneratedTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_template_id: String?
+    end
+
+    class UpdateStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?template_body: String,
+        ?template_url: String,
+        ?use_previous_template: bool,
+        ?stack_policy_during_update_body: String,
+        ?stack_policy_during_update_url: String,
+        ?parameters: Array[Types::Parameter],
+        ?capabilities: Array[String],
+        ?resource_types: Array[String],
+        ?role_arn: String,
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?stack_policy_body: String,
+        ?stack_policy_url: String,
+        ?notification_ar_ns: Array[String],
+        ?tags: Array[Types::Tag],
+        ?disable_rollback: bool,
+        ?client_request_token: String,
+        ?retain_except_on_create: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor use_previous_template: bool?
+      attr_accessor stack_policy_during_update_body: String?
+      attr_accessor stack_policy_during_update_url: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor stack_policy_body: String?
+      attr_accessor stack_policy_url: String?
+      attr_accessor notification_ar_ns: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor disable_rollback: bool?
+      attr_accessor client_request_token: String?
+      attr_accessor retain_except_on_create: bool?
+    end
+
+    class UpdateStackInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?accounts: Array[String],
+        ?deployment_targets: Types::DeploymentTargets,
+        ?regions: Array[String],
+        ?parameter_overrides: Array[Types::Parameter],
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?operation_id: String,
+        ?call_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor accounts: Array[String]?
+      attr_accessor deployment_targets: Types::DeploymentTargets?
+      attr_accessor regions: Array[String]?
+      attr_accessor parameter_overrides: Array[Types::Parameter]?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor operation_id: String?
+      attr_accessor call_as: String?
+    end
+
+    class UpdateStackInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateStackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+    end
+
+    class UpdateStackSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_name: String,
+        ?description: String,
+        ?template_body: String,
+        ?template_url: String,
+        ?use_previous_template: bool,
+        ?parameters: Array[Types::Parameter],
+        ?capabilities: Array[String],
+        ?tags: Array[Types::Tag],
+        ?operation_preferences: Types::StackSetOperationPreferences,
+        ?administration_role_arn: String,
+        ?execution_role_name: String,
+        ?deployment_targets: Types::DeploymentTargets,
+        ?permission_model: String,
+        ?auto_deployment: Types::AutoDeployment,
+        ?operation_id: String,
+        ?accounts: Array[String],
+        ?regions: Array[String],
+        ?call_as: String,
+        ?managed_execution: Types::ManagedExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_name: String?
+      attr_accessor description: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+      attr_accessor use_previous_template: bool?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences?
+      attr_accessor administration_role_arn: String?
+      attr_accessor execution_role_name: String?
+      attr_accessor deployment_targets: Types::DeploymentTargets?
+      attr_accessor permission_model: String?
+      attr_accessor auto_deployment: Types::AutoDeployment?
+      attr_accessor operation_id: String?
+      attr_accessor accounts: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor call_as: String?
+      attr_accessor managed_execution: Types::ManagedExecution?
+    end
+
+    class UpdateStackSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateTerminationProtectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_termination_protection: bool,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_termination_protection: bool?
+      attr_accessor stack_name: String?
+    end
+
+    class UpdateTerminationProtectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_id: String?
+    end
+
+    class ValidateTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_body: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+    end
+
+    class ValidateTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::TemplateParameter],
+        ?description: String,
+        ?capabilities: Array[String],
+        ?capabilities_reason: String,
+        ?declared_transforms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::TemplateParameter]?
+      attr_accessor description: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capabilities_reason: String?
+      attr_accessor declared_transforms: Array[String]?
+    end
+
+    module VersionBump
+      MAJOR: String
+      MINOR: String
+    end
+
+    module Visibility
+      PUBLIC: String
+      PRIVATE: String
+    end
+
+    class WarningDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?properties: Array[Types::WarningProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor properties: Array[Types::WarningProperty]?
+    end
+
+    class WarningProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property_path: String,
+        ?required: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_path: String?
+      attr_accessor required: bool?
+      attr_accessor description: String?
+    end
+
+    module WarningType
+      MUTUALLY_EXCLUSIVE_PROPERTIES: String
+      UNSUPPORTED_PROPERTIES: String
+      MUTUALLY_EXCLUSIVE_TYPES: String
+      EXCLUDED_PROPERTIES: String
+    end
+
+    class Warnings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unrecognized_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unrecognized_resource_types: Array[String]?
+    end
+  end
+end

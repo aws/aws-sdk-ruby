@@ -1,0 +1,329 @@
+module Aws::MPA
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MPA::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelSessionResponse
+      include Smithy::Client::_Response[Types::CancelSessionResponse]
+    end
+    def cancel_session: (
+      ?session_arn: String
+    ) -> _CancelSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSessionResponse
+
+    interface _CreateApprovalTeamResponse
+      include Smithy::Client::_Response[Types::CreateApprovalTeamResponse]
+      def creation_time: () -> Time?
+      def arn: () -> String?
+      def name: () -> String?
+      def version_id: () -> String?
+    end
+    def create_approval_team: (
+      ?client_token: String,
+      ?approval_strategy: {
+        mof_n: {
+          min_approvals_required: Integer
+        }
+      },
+      ?approvers: Array[
+        {
+          primary_identity_id: String,
+          primary_identity_source_arn: String
+        }
+      ],
+      ?description: String,
+      ?policies: Array[
+        {
+          policy_arn: String
+        }
+      ],
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApprovalTeamResponse
+
+    interface _CreateIdentitySourceResponse
+      include Smithy::Client::_Response[Types::CreateIdentitySourceResponse]
+      def identity_source_type: () -> String?
+      def identity_source_arn: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_identity_source: (
+      ?identity_source_parameters: {
+        iam_identity_center: {
+          instance_arn: String,
+          region: String
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentitySourceResponse
+
+    interface _DeleteIdentitySourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_identity_source: (
+      ?identity_source_arn: String
+    ) -> _DeleteIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentitySourceResponse
+
+    interface _DeleteInactiveApprovalTeamVersionResponse
+      include Smithy::Client::_Response[Types::DeleteInactiveApprovalTeamVersionResponse]
+    end
+    def delete_inactive_approval_team_version: (
+      ?arn: String,
+      ?version_id: String
+    ) -> _DeleteInactiveApprovalTeamVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInactiveApprovalTeamVersionResponse
+
+    interface _GetApprovalTeamResponse
+      include Smithy::Client::_Response[Types::GetApprovalTeamResponse]
+      def creation_time: () -> Time?
+      def approval_strategy: () -> Types::ApprovalStrategyResponse?
+      def number_of_approvers: () -> Integer?
+      def approvers: () -> Array[Types::GetApprovalTeamResponseApprover]?
+      def arn: () -> String?
+      def description: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def status_code: () -> String?
+      def status_message: () -> String?
+      def update_session_arn: () -> String?
+      def version_id: () -> String?
+      def policies: () -> Array[Types::PolicyReference]?
+      def last_update_time: () -> Time?
+      def pending_update: () -> Types::PendingUpdate?
+    end
+    def get_approval_team: (
+      ?arn: String
+    ) -> _GetApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApprovalTeamResponse
+
+    interface _GetIdentitySourceResponse
+      include Smithy::Client::_Response[Types::GetIdentitySourceResponse]
+      def identity_source_type: () -> String?
+      def identity_source_parameters: () -> Types::IdentitySourceParametersForGet?
+      def identity_source_arn: () -> String?
+      def creation_time: () -> Time?
+      def status: () -> String?
+      def status_code: () -> String?
+      def status_message: () -> String?
+    end
+    def get_identity_source: (
+      ?identity_source_arn: String
+    ) -> _GetIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentitySourceResponse
+
+    interface _GetPolicyVersionResponse
+      include Smithy::Client::_Response[Types::GetPolicyVersionResponse]
+      def policy_version: () -> Types::PolicyVersion?
+    end
+    def get_policy_version: (
+      ?policy_version_arn: String
+    ) -> _GetPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyVersionResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy_type: () -> String?
+      def policy_version_arn: () -> String?
+      def policy_name: () -> String?
+      def policy_document: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String,
+      ?policy_name: String,
+      ?policy_type: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session_arn: () -> String?
+      def approval_team_arn: () -> String?
+      def approval_team_name: () -> String?
+      def protected_resource_arn: () -> String?
+      def approval_strategy: () -> Types::ApprovalStrategyResponse?
+      def number_of_approvers: () -> Integer?
+      def initiation_time: () -> Time?
+      def expiration_time: () -> Time?
+      def completion_time: () -> Time?
+      def description: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def status: () -> String?
+      def status_code: () -> String?
+      def status_message: () -> String?
+      def execution_status: () -> String?
+      def action_name: () -> String?
+      def requester_service_principal: () -> String?
+      def requester_principal_arn: () -> String?
+      def requester_account_id: () -> String?
+      def requester_region: () -> String?
+      def requester_comment: () -> String?
+      def action_completion_strategy: () -> String?
+      def approver_responses: () -> Array[Types::GetSessionResponseApproverResponse]?
+    end
+    def get_session: (
+      ?session_arn: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _ListApprovalTeamsResponse
+      include Smithy::Client::_Response[Types::ListApprovalTeamsResponse]
+      def next_token: () -> String?
+      def approval_teams: () -> Array[Types::ListApprovalTeamsResponseApprovalTeam]?
+    end
+    def list_approval_teams: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApprovalTeamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApprovalTeamsResponse
+
+    interface _ListIdentitySourcesResponse
+      include Smithy::Client::_Response[Types::ListIdentitySourcesResponse]
+      def next_token: () -> String?
+      def identity_sources: () -> Array[Types::IdentitySourceForList]?
+    end
+    def list_identity_sources: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIdentitySourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentitySourcesResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def next_token: () -> String?
+      def policies: () -> Array[Types::Policy]?
+    end
+    def list_policies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicyVersionsResponse
+      include Smithy::Client::_Response[Types::ListPolicyVersionsResponse]
+      def next_token: () -> String?
+      def policy_versions: () -> Array[Types::PolicyVersionSummary]?
+    end
+    def list_policy_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?policy_arn: String
+    ) -> _ListPolicyVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyVersionsResponse
+
+    interface _ListResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::ListResourcePoliciesResponse]
+      def next_token: () -> String?
+      def resource_policies: () -> Array[Types::ListResourcePoliciesResponseResourcePolicy]?
+    end
+    def list_resource_policies: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcePoliciesResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def next_token: () -> String?
+      def sessions: () -> Array[Types::ListSessionsResponseSession]?
+    end
+    def list_sessions: (
+      ?approval_team_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          field_name: String,
+          operator: String,
+          value: String
+        }
+      ]
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartActiveApprovalTeamDeletionResponse
+      include Smithy::Client::_Response[Types::StartActiveApprovalTeamDeletionResponse]
+      def deletion_completion_time: () -> Time?
+      def deletion_start_time: () -> Time?
+    end
+    def start_active_approval_team_deletion: (
+      ?pending_window_days: Integer,
+      ?arn: String
+    ) -> _StartActiveApprovalTeamDeletionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartActiveApprovalTeamDeletionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApprovalTeamResponse
+      include Smithy::Client::_Response[Types::UpdateApprovalTeamResponse]
+      def version_id: () -> String?
+    end
+    def update_approval_team: (
+      ?approval_strategy: {
+        mof_n: {
+          min_approvals_required: Integer
+        }
+      },
+      ?approvers: Array[
+        {
+          primary_identity_id: String,
+          primary_identity_source_arn: String
+        }
+      ],
+      ?description: String,
+      ?arn: String
+    ) -> _UpdateApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalTeamResponse
+  end
+end

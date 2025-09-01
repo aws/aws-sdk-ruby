@@ -1,0 +1,5143 @@
+module Aws::Kendra
+  module Types
+
+    class AccessControlConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class AccessControlListConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_path: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AclConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_groups_column_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_groups_column_name: String?
+    end
+
+    class AdditionalResultAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value_type: String,
+        ?value: Types::AdditionalResultAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value_type: String?
+      attr_accessor value: Types::AdditionalResultAttributeValue?
+    end
+
+    class AdditionalResultAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_with_highlights_value: Types::TextWithHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_with_highlights_value: Types::TextWithHighlights?
+    end
+
+    module AdditionalResultAttributeValueType
+      TEXT_WITH_HIGHLIGHTS_VALUE: String
+    end
+
+    class AlfrescoConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_url: String,
+        ?site_id: String,
+        ?secret_arn: String,
+        ?ssl_certificate_s3_path: Types::S3Path,
+        ?crawl_system_folders: bool,
+        ?crawl_comments: bool,
+        ?entity_filter: Array[String],
+        ?document_library_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?blog_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?wiki_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_url: String?
+      attr_accessor site_id: String?
+      attr_accessor secret_arn: String?
+      attr_accessor ssl_certificate_s3_path: Types::S3Path?
+      attr_accessor crawl_system_folders: bool?
+      attr_accessor crawl_comments: bool?
+      attr_accessor entity_filter: Array[String]?
+      attr_accessor document_library_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor blog_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor wiki_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+    end
+
+    module AlfrescoEntity
+      wiki: String
+      blog: String
+      documentLibrary: String
+    end
+
+    class AssociateEntitiesToExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?entity_list: Array[Types::EntityConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor entity_list: Array[Types::EntityConfiguration]?
+    end
+
+    class AssociateEntitiesToExperienceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entity_list: Array[Types::FailedEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entity_list: Array[Types::FailedEntity]?
+    end
+
+    class AssociatePersonasToEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?personas: Array[Types::EntityPersonaConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor personas: Array[Types::EntityPersonaConfiguration]?
+    end
+
+    class AssociatePersonasToEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entity_list: Array[Types::FailedEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entity_list: Array[Types::FailedEntity]?
+    end
+
+    class AttributeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and_all_filters: Array[Types::AttributeFilter],
+        ?or_all_filters: Array[Types::AttributeFilter],
+        ?not_filter: Types::AttributeFilter,
+        ?equals_to: Types::DocumentAttribute,
+        ?contains_all: Types::DocumentAttribute,
+        ?contains_any: Types::DocumentAttribute,
+        ?greater_than: Types::DocumentAttribute,
+        ?greater_than_or_equals: Types::DocumentAttribute,
+        ?less_than: Types::DocumentAttribute,
+        ?less_than_or_equals: Types::DocumentAttribute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_all_filters: Array[Types::AttributeFilter]?
+      attr_accessor or_all_filters: Array[Types::AttributeFilter]?
+      attr_accessor not_filter: Types::AttributeFilter?
+      attr_accessor equals_to: Types::DocumentAttribute?
+      attr_accessor contains_all: Types::DocumentAttribute?
+      attr_accessor contains_any: Types::DocumentAttribute?
+      attr_accessor greater_than: Types::DocumentAttribute?
+      attr_accessor greater_than_or_equals: Types::DocumentAttribute?
+      attr_accessor less_than: Types::DocumentAttribute?
+      attr_accessor less_than_or_equals: Types::DocumentAttribute?
+    end
+
+    class AttributeSuggestionsDescribeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suggestable_config_list: Array[Types::SuggestableConfig],
+        ?attribute_suggestions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suggestable_config_list: Array[Types::SuggestableConfig]?
+      attr_accessor attribute_suggestions_mode: String?
+    end
+
+    class AttributeSuggestionsGetConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suggestion_attributes: Array[String],
+        ?additional_response_attributes: Array[String],
+        ?attribute_filter: Types::AttributeFilter,
+        ?user_context: Types::UserContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suggestion_attributes: Array[String]?
+      attr_accessor additional_response_attributes: Array[String]?
+      attr_accessor attribute_filter: Types::AttributeFilter?
+      attr_accessor user_context: Types::UserContext?
+    end
+
+    module AttributeSuggestionsMode
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class AttributeSuggestionsUpdateConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suggestable_config_list: Array[Types::SuggestableConfig],
+        ?attribute_suggestions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suggestable_config_list: Array[Types::SuggestableConfig]?
+      attr_accessor attribute_suggestions_mode: String?
+    end
+
+    class AuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?basic_authentication: Array[Types::BasicAuthenticationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor basic_authentication: Array[Types::BasicAuthenticationConfiguration]?
+    end
+
+    class BasicAuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: String,
+        ?port: Integer,
+        ?credentials: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: String?
+      attr_accessor port: Integer?
+      attr_accessor credentials: String?
+    end
+
+    class BatchDeleteDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?document_id_list: Array[String],
+        ?data_source_sync_job_metric_target: Types::DataSourceSyncJobMetricTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor document_id_list: Array[String]?
+      attr_accessor data_source_sync_job_metric_target: Types::DataSourceSyncJobMetricTarget?
+    end
+
+    class BatchDeleteDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_documents: Array[Types::BatchDeleteDocumentResponseFailedDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_documents: Array[Types::BatchDeleteDocumentResponseFailedDocument]?
+    end
+
+    class BatchDeleteDocumentResponseFailedDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_source_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchDeleteFeaturedResultsSetError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchDeleteFeaturedResultsSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?featured_results_set_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor featured_results_set_ids: Array[String]?
+    end
+
+    class BatchDeleteFeaturedResultsSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteFeaturedResultsSetError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteFeaturedResultsSetError]?
+    end
+
+    class BatchGetDocumentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?document_info_list: Array[Types::DocumentInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor document_info_list: Array[Types::DocumentInfo]?
+    end
+
+    class BatchGetDocumentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchGetDocumentStatusResponseError],
+        ?document_status_list: Array[Types::Status],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchGetDocumentStatusResponseError]?
+      attr_accessor document_status_list: Array[Types::Status]?
+    end
+
+    class BatchGetDocumentStatusResponseError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?data_source_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchPutDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?role_arn: String,
+        ?documents: Array[Types::Document],
+        ?custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor documents: Array[Types::Document]?
+      attr_accessor custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration?
+    end
+
+    class BatchPutDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_documents: Array[Types::BatchPutDocumentResponseFailedDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_documents: Array[Types::BatchPutDocumentResponseFailedDocument]?
+    end
+
+    class BatchPutDocumentResponseFailedDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_source_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BoxConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enterprise_id: String,
+        ?secret_arn: String,
+        ?use_change_log: bool,
+        ?crawl_comments: bool,
+        ?crawl_tasks: bool,
+        ?crawl_web_links: bool,
+        ?file_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?task_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?comment_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?web_link_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enterprise_id: String?
+      attr_accessor secret_arn: String?
+      attr_accessor use_change_log: bool?
+      attr_accessor crawl_comments: bool?
+      attr_accessor crawl_tasks: bool?
+      attr_accessor crawl_web_links: bool?
+      attr_accessor file_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor task_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor comment_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor web_link_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+    end
+
+    class CapacityUnitsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_capacity_units: Integer,
+        ?query_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_capacity_units: Integer?
+      attr_accessor query_capacity_units: Integer?
+    end
+
+    class ClearQuerySuggestionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+    end
+
+    class ClickFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?click_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor click_time: Time?
+    end
+
+    class CollapseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute_key: String,
+        ?sorting_configurations: Array[Types::SortingConfiguration],
+        ?missing_attribute_key_strategy: String,
+        ?expand: bool,
+        ?expand_configuration: Types::ExpandConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute_key: String?
+      attr_accessor sorting_configurations: Array[Types::SortingConfiguration]?
+      attr_accessor missing_attribute_key_strategy: String?
+      attr_accessor expand: bool?
+      attr_accessor expand_configuration: Types::ExpandConfiguration?
+    end
+
+    class CollapsedResultDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute: Types::DocumentAttribute,
+        ?expanded_results: Array[Types::ExpandedResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute: Types::DocumentAttribute?
+      attr_accessor expanded_results: Array[Types::ExpandedResultItem]?
+    end
+
+    class ColumnConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id_column_name: String,
+        ?document_data_column_name: String,
+        ?document_title_column_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?change_detecting_columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id_column_name: String?
+      attr_accessor document_data_column_name: String?
+      attr_accessor document_title_column_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor change_detecting_columns: Array[String]?
+    end
+
+    module ConditionOperator
+      GreaterThan: String
+      GreaterThanOrEquals: String
+      LessThan: String
+      LessThanOrEquals: String
+      Equals: String
+      NotEquals: String
+      Contains: String
+      NotContains: String
+      Exists: String
+      NotExists: String
+      BeginsWith: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictingItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_text: String,
+        ?set_name: String,
+        ?set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text: String?
+      attr_accessor set_name: String?
+      attr_accessor set_id: String?
+    end
+
+    class ConfluenceAttachmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawl_attachments: bool,
+        ?attachment_field_mappings: Array[Types::ConfluenceAttachmentToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawl_attachments: bool?
+      attr_accessor attachment_field_mappings: Array[Types::ConfluenceAttachmentToIndexFieldMapping]?
+    end
+
+    module ConfluenceAttachmentFieldName
+      AUTHOR: String
+      CONTENT_TYPE: String
+      CREATED_DATE: String
+      DISPLAY_URL: String
+      FILE_SIZE: String
+      ITEM_TYPE: String
+      PARENT_ID: String
+      SPACE_KEY: String
+      SPACE_NAME: String
+      URL: String
+      VERSION: String
+    end
+
+    class ConfluenceAttachmentToIndexFieldMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_field_name: String,
+        ?date_field_format: String,
+        ?index_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_field_name: String?
+      attr_accessor date_field_format: String?
+      attr_accessor index_field_name: String?
+    end
+
+    module ConfluenceAuthenticationType
+      HTTP_BASIC: String
+      PAT: String
+    end
+
+    class ConfluenceBlogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blog_field_mappings: Array[Types::ConfluenceBlogToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blog_field_mappings: Array[Types::ConfluenceBlogToIndexFieldMapping]?
+    end
+
+    module ConfluenceBlogFieldName
+      AUTHOR: String
+      DISPLAY_URL: String
+      ITEM_TYPE: String
+      LABELS: String
+      PUBLISH_DATE: String
+      SPACE_KEY: String
+      SPACE_NAME: String
+      URL: String
+      VERSION: String
+    end
+
+    class ConfluenceBlogToIndexFieldMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_field_name: String,
+        ?date_field_format: String,
+        ?index_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_field_name: String?
+      attr_accessor date_field_format: String?
+      attr_accessor index_field_name: String?
+    end
+
+    class ConfluenceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_url: String,
+        ?secret_arn: String,
+        ?version: String,
+        ?space_configuration: Types::ConfluenceSpaceConfiguration,
+        ?page_configuration: Types::ConfluencePageConfiguration,
+        ?blog_configuration: Types::ConfluenceBlogConfiguration,
+        ?attachment_configuration: Types::ConfluenceAttachmentConfiguration,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_url: String?
+      attr_accessor secret_arn: String?
+      attr_accessor version: String?
+      attr_accessor space_configuration: Types::ConfluenceSpaceConfiguration?
+      attr_accessor page_configuration: Types::ConfluencePageConfiguration?
+      attr_accessor blog_configuration: Types::ConfluenceBlogConfiguration?
+      attr_accessor attachment_configuration: Types::ConfluenceAttachmentConfiguration?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor authentication_type: String?
+    end
+
+    class ConfluencePageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_field_mappings: Array[Types::ConfluencePageToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_field_mappings: Array[Types::ConfluencePageToIndexFieldMapping]?
+    end
+
+    module ConfluencePageFieldName
+      AUTHOR: String
+      CONTENT_STATUS: String
+      CREATED_DATE: String
+      DISPLAY_URL: String
+      ITEM_TYPE: String
+      LABELS: String
+      MODIFIED_DATE: String
+      PARENT_ID: String
+      SPACE_KEY: String
+      SPACE_NAME: String
+      URL: String
+      VERSION: String
+    end
+
+    class ConfluencePageToIndexFieldMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_field_name: String,
+        ?date_field_format: String,
+        ?index_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_field_name: String?
+      attr_accessor date_field_format: String?
+      attr_accessor index_field_name: String?
+    end
+
+    class ConfluenceSpaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawl_personal_spaces: bool,
+        ?crawl_archived_spaces: bool,
+        ?include_spaces: Array[String],
+        ?exclude_spaces: Array[String],
+        ?space_field_mappings: Array[Types::ConfluenceSpaceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawl_personal_spaces: bool?
+      attr_accessor crawl_archived_spaces: bool?
+      attr_accessor include_spaces: Array[String]?
+      attr_accessor exclude_spaces: Array[String]?
+      attr_accessor space_field_mappings: Array[Types::ConfluenceSpaceToIndexFieldMapping]?
+    end
+
+    module ConfluenceSpaceFieldName
+      DISPLAY_URL: String
+      ITEM_TYPE: String
+      SPACE_KEY: String
+      URL: String
+    end
+
+    class ConfluenceSpaceToIndexFieldMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_field_name: String,
+        ?date_field_format: String,
+        ?index_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_field_name: String?
+      attr_accessor date_field_format: String?
+      attr_accessor index_field_name: String?
+    end
+
+    module ConfluenceVersion
+      CLOUD: String
+      SERVER: String
+    end
+
+    class ConnectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_host: String,
+        ?database_port: Integer,
+        ?database_name: String,
+        ?table_name: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_host: String?
+      attr_accessor database_port: Integer?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor secret_arn: String?
+    end
+
+    class ContentSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_ids: Array[String],
+        ?faq_ids: Array[String],
+        ?direct_put_content: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_ids: Array[String]?
+      attr_accessor faq_ids: Array[String]?
+      attr_accessor direct_put_content: bool?
+    end
+
+    module ContentType
+      PDF: String
+      HTML: String
+      MS_WORD: String
+      PLAIN_TEXT: String
+      PPT: String
+      RTF: String
+      XML: String
+      XSLT: String
+      MS_EXCEL: String
+      CSV: String
+      JSON: String
+      MD: String
+    end
+
+    class Correction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?term: String,
+        ?corrected_term: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor term: String?
+      attr_accessor corrected_term: String?
+    end
+
+    class CreateAccessControlConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?access_control_list: Array[Types::Principal],
+        ?hierarchical_access_control_list: Array[Types::HierarchicalPrincipal],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor access_control_list: Array[Types::Principal]?
+      attr_accessor hierarchical_access_control_list: Array[Types::HierarchicalPrincipal]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAccessControlConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?index_id: String,
+        ?type: String,
+        ?configuration: Types::DataSourceConfiguration,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?description: String,
+        ?schedule: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+        ?language_code: String,
+        ?custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor index_id: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::DataSourceConfiguration?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor description: String?
+      attr_accessor schedule: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+      attr_accessor language_code: String?
+      attr_accessor custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration?
+    end
+
+    class CreateDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?index_id: String,
+        ?role_arn: String,
+        ?configuration: Types::ExperienceConfiguration,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor index_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor configuration: Types::ExperienceConfiguration?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateExperienceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateFaqRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?s3_path: Types::S3Path,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?file_format: String,
+        ?client_token: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor s3_path: Types::S3Path?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_format: String?
+      attr_accessor client_token: String?
+      attr_accessor language_code: String?
+    end
+
+    class CreateFaqResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateFeaturedResultsSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?featured_results_set_name: String,
+        ?description: String,
+        ?client_token: String,
+        ?status: String,
+        ?query_texts: Array[String],
+        ?featured_documents: Array[Types::FeaturedDocument],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor featured_results_set_name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor status: String?
+      attr_accessor query_texts: Array[String]?
+      attr_accessor featured_documents: Array[Types::FeaturedDocument]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateFeaturedResultsSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set: Types::FeaturedResultsSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set: Types::FeaturedResultsSet?
+    end
+
+    class CreateIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?edition: String,
+        ?role_arn: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?description: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?user_token_configurations: Array[Types::UserTokenConfiguration],
+        ?user_context_policy: String,
+        ?user_group_resolution_configuration: Types::UserGroupResolutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor edition: String?
+      attr_accessor role_arn: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor user_token_configurations: Array[Types::UserTokenConfiguration]?
+      attr_accessor user_context_policy: String?
+      attr_accessor user_group_resolution_configuration: Types::UserGroupResolutionConfiguration?
+    end
+
+    class CreateIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateQuerySuggestionsBlockListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?source_s3_path: Types::S3Path,
+        ?client_token: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_s3_path: Types::S3Path?
+      attr_accessor client_token: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateQuerySuggestionsBlockListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CreateThesaurusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?source_s3_path: Types::S3Path,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor source_s3_path: Types::S3Path?
+      attr_accessor client_token: String?
+    end
+
+    class CreateThesaurusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CustomDocumentEnrichmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_configurations: Array[Types::InlineCustomDocumentEnrichmentConfiguration],
+        ?pre_extraction_hook_configuration: Types::HookConfiguration,
+        ?post_extraction_hook_configuration: Types::HookConfiguration,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_configurations: Array[Types::InlineCustomDocumentEnrichmentConfiguration]?
+      attr_accessor pre_extraction_hook_configuration: Types::HookConfiguration?
+      attr_accessor post_extraction_hook_configuration: Types::HookConfiguration?
+      attr_accessor role_arn: String?
+    end
+
+    class DataSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::S3DataSourceConfiguration,
+        ?share_point_configuration: Types::SharePointConfiguration,
+        ?database_configuration: Types::DatabaseConfiguration,
+        ?salesforce_configuration: Types::SalesforceConfiguration,
+        ?one_drive_configuration: Types::OneDriveConfiguration,
+        ?service_now_configuration: Types::ServiceNowConfiguration,
+        ?confluence_configuration: Types::ConfluenceConfiguration,
+        ?google_drive_configuration: Types::GoogleDriveConfiguration,
+        ?web_crawler_configuration: Types::WebCrawlerConfiguration,
+        ?work_docs_configuration: Types::WorkDocsConfiguration,
+        ?fsx_configuration: Types::FsxConfiguration,
+        ?slack_configuration: Types::SlackConfiguration,
+        ?box_configuration: Types::BoxConfiguration,
+        ?quip_configuration: Types::QuipConfiguration,
+        ?jira_configuration: Types::JiraConfiguration,
+        ?git_hub_configuration: Types::GitHubConfiguration,
+        ?alfresco_configuration: Types::AlfrescoConfiguration,
+        ?template_configuration: Types::TemplateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3DataSourceConfiguration?
+      attr_accessor share_point_configuration: Types::SharePointConfiguration?
+      attr_accessor database_configuration: Types::DatabaseConfiguration?
+      attr_accessor salesforce_configuration: Types::SalesforceConfiguration?
+      attr_accessor one_drive_configuration: Types::OneDriveConfiguration?
+      attr_accessor service_now_configuration: Types::ServiceNowConfiguration?
+      attr_accessor confluence_configuration: Types::ConfluenceConfiguration?
+      attr_accessor google_drive_configuration: Types::GoogleDriveConfiguration?
+      attr_accessor web_crawler_configuration: Types::WebCrawlerConfiguration?
+      attr_accessor work_docs_configuration: Types::WorkDocsConfiguration?
+      attr_accessor fsx_configuration: Types::FsxConfiguration?
+      attr_accessor slack_configuration: Types::SlackConfiguration?
+      attr_accessor box_configuration: Types::BoxConfiguration?
+      attr_accessor quip_configuration: Types::QuipConfiguration?
+      attr_accessor jira_configuration: Types::JiraConfiguration?
+      attr_accessor git_hub_configuration: Types::GitHubConfiguration?
+      attr_accessor alfresco_configuration: Types::AlfrescoConfiguration?
+      attr_accessor template_configuration: Types::TemplateConfiguration?
+    end
+
+    class DataSourceGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?data_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor data_source_id: String?
+    end
+
+    module DataSourceStatus
+      CREATING: String
+      DELETING: String
+      FAILED: String
+      UPDATING: String
+      ACTIVE: String
+    end
+
+    class DataSourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor language_code: String?
+    end
+
+    class DataSourceSyncJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?data_source_error_code: String,
+        ?metrics: Types::DataSourceSyncJobMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor data_source_error_code: String?
+      attr_accessor metrics: Types::DataSourceSyncJobMetrics?
+    end
+
+    class DataSourceSyncJobMetricTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_id: String,
+        ?data_source_sync_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_id: String?
+      attr_accessor data_source_sync_job_id: String?
+    end
+
+    class DataSourceSyncJobMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?documents_added: String,
+        ?documents_modified: String,
+        ?documents_deleted: String,
+        ?documents_failed: String,
+        ?documents_scanned: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor documents_added: String?
+      attr_accessor documents_modified: String?
+      attr_accessor documents_deleted: String?
+      attr_accessor documents_failed: String?
+      attr_accessor documents_scanned: String?
+    end
+
+    module DataSourceSyncJobStatus
+      FAILED: String
+      SUCCEEDED: String
+      SYNCING: String
+      INCOMPLETE: String
+      STOPPING: String
+      ABORTED: String
+      SYNCING_INDEXING: String
+    end
+
+    class DataSourceToIndexFieldMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_field_name: String,
+        ?date_field_format: String,
+        ?index_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_field_name: String?
+      attr_accessor date_field_format: String?
+      attr_accessor index_field_name: String?
+    end
+
+    module DataSourceType
+      S3: String
+      SHAREPOINT: String
+      DATABASE: String
+      SALESFORCE: String
+      ONEDRIVE: String
+      SERVICENOW: String
+      CUSTOM: String
+      CONFLUENCE: String
+      GOOGLEDRIVE: String
+      WEBCRAWLER: String
+      WORKDOCS: String
+      FSX: String
+      SLACK: String
+      BOX: String
+      QUIP: String
+      JIRA: String
+      GITHUB: String
+      ALFRESCO: String
+      TEMPLATE: String
+    end
+
+    class DataSourceVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class DatabaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_engine_type: String,
+        ?connection_configuration: Types::ConnectionConfiguration,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?column_configuration: Types::ColumnConfiguration,
+        ?acl_configuration: Types::AclConfiguration,
+        ?sql_configuration: Types::SqlConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_engine_type: String?
+      attr_accessor connection_configuration: Types::ConnectionConfiguration?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor column_configuration: Types::ColumnConfiguration?
+      attr_accessor acl_configuration: Types::AclConfiguration?
+      attr_accessor sql_configuration: Types::SqlConfiguration?
+    end
+
+    module DatabaseEngineType
+      RDS_AURORA_MYSQL: String
+      RDS_AURORA_POSTGRESQL: String
+      RDS_MYSQL: String
+      RDS_POSTGRESQL: String
+    end
+
+    class DeleteAccessControlConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteAccessControlConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DeleteExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DeleteExperienceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFaqRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DeleteIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeletePrincipalMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?data_source_id: String,
+        ?group_id: String,
+        ?ordering_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor group_id: String?
+      attr_accessor ordering_id: Integer?
+    end
+
+    class DeleteQuerySuggestionsBlockListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteThesaurusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DescribeAccessControlConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeAccessControlConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?error_message: String,
+        ?access_control_list: Array[Types::Principal],
+        ?hierarchical_access_control_list: Array[Types::HierarchicalPrincipal],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor error_message: String?
+      attr_accessor access_control_list: Array[Types::Principal]?
+      attr_accessor hierarchical_access_control_list: Array[Types::HierarchicalPrincipal]?
+    end
+
+    class DescribeDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DescribeDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::DataSourceConfiguration,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?description: String,
+        ?status: String,
+        ?schedule: String,
+        ?role_arn: String,
+        ?error_message: String,
+        ?language_code: String,
+        ?custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::DataSourceConfiguration?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor schedule: String?
+      attr_accessor role_arn: String?
+      attr_accessor error_message: String?
+      attr_accessor language_code: String?
+      attr_accessor custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration?
+    end
+
+    class DescribeExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DescribeExperienceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?name: String,
+        ?endpoints: Array[Types::ExperienceEndpoint],
+        ?configuration: Types::ExperienceConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?description: String,
+        ?status: String,
+        ?role_arn: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor endpoints: Array[Types::ExperienceEndpoint]?
+      attr_accessor configuration: Types::ExperienceConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor role_arn: String?
+      attr_accessor error_message: String?
+    end
+
+    class DescribeFaqRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DescribeFaqResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?s3_path: Types::S3Path,
+        ?status: String,
+        ?role_arn: String,
+        ?error_message: String,
+        ?file_format: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor s3_path: Types::S3Path?
+      attr_accessor status: String?
+      attr_accessor role_arn: String?
+      attr_accessor error_message: String?
+      attr_accessor file_format: String?
+      attr_accessor language_code: String?
+    end
+
+    class DescribeFeaturedResultsSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?featured_results_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor featured_results_set_id: String?
+    end
+
+    class DescribeFeaturedResultsSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set_id: String,
+        ?featured_results_set_name: String,
+        ?description: String,
+        ?status: String,
+        ?query_texts: Array[String],
+        ?featured_documents_with_metadata: Array[Types::FeaturedDocumentWithMetadata],
+        ?featured_documents_missing: Array[Types::FeaturedDocumentMissing],
+        ?last_updated_timestamp: Integer,
+        ?creation_timestamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set_id: String?
+      attr_accessor featured_results_set_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor query_texts: Array[String]?
+      attr_accessor featured_documents_with_metadata: Array[Types::FeaturedDocumentWithMetadata]?
+      attr_accessor featured_documents_missing: Array[Types::FeaturedDocumentMissing]?
+      attr_accessor last_updated_timestamp: Integer?
+      attr_accessor creation_timestamp: Integer?
+    end
+
+    class DescribeIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?edition: String,
+        ?role_arn: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?status: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?document_metadata_configurations: Array[Types::DocumentMetadataConfiguration],
+        ?index_statistics: Types::IndexStatistics,
+        ?error_message: String,
+        ?capacity_units: Types::CapacityUnitsConfiguration,
+        ?user_token_configurations: Array[Types::UserTokenConfiguration],
+        ?user_context_policy: String,
+        ?user_group_resolution_configuration: Types::UserGroupResolutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor edition: String?
+      attr_accessor role_arn: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor document_metadata_configurations: Array[Types::DocumentMetadataConfiguration]?
+      attr_accessor index_statistics: Types::IndexStatistics?
+      attr_accessor error_message: String?
+      attr_accessor capacity_units: Types::CapacityUnitsConfiguration?
+      attr_accessor user_token_configurations: Array[Types::UserTokenConfiguration]?
+      attr_accessor user_context_policy: String?
+      attr_accessor user_group_resolution_configuration: Types::UserGroupResolutionConfiguration?
+    end
+
+    class DescribePrincipalMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?data_source_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class DescribePrincipalMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?data_source_id: String,
+        ?group_id: String,
+        ?group_ordering_id_summaries: Array[Types::GroupOrderingIdSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_ordering_id_summaries: Array[Types::GroupOrderingIdSummary]?
+    end
+
+    class DescribeQuerySuggestionsBlockListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeQuerySuggestionsBlockListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?error_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?source_s3_path: Types::S3Path,
+        ?item_count: Integer,
+        ?file_size_bytes: Integer,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor source_s3_path: Types::S3Path?
+      attr_accessor item_count: Integer?
+      attr_accessor file_size_bytes: Integer?
+      attr_accessor role_arn: String?
+    end
+
+    class DescribeQuerySuggestionsConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+    end
+
+    class DescribeQuerySuggestionsConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?status: String,
+        ?query_log_look_back_window_in_days: Integer,
+        ?include_queries_without_user_information: bool,
+        ?minimum_number_of_querying_users: Integer,
+        ?minimum_query_count: Integer,
+        ?last_suggestions_build_time: Time,
+        ?last_clear_time: Time,
+        ?total_suggestions_count: Integer,
+        ?attribute_suggestions_config: Types::AttributeSuggestionsDescribeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor status: String?
+      attr_accessor query_log_look_back_window_in_days: Integer?
+      attr_accessor include_queries_without_user_information: bool?
+      attr_accessor minimum_number_of_querying_users: Integer?
+      attr_accessor minimum_query_count: Integer?
+      attr_accessor last_suggestions_build_time: Time?
+      attr_accessor last_clear_time: Time?
+      attr_accessor total_suggestions_count: Integer?
+      attr_accessor attribute_suggestions_config: Types::AttributeSuggestionsDescribeConfig?
+    end
+
+    class DescribeThesaurusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class DescribeThesaurusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?error_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?role_arn: String,
+        ?source_s3_path: Types::S3Path,
+        ?file_size_bytes: Integer,
+        ?term_count: Integer,
+        ?synonym_rule_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor role_arn: String?
+      attr_accessor source_s3_path: Types::S3Path?
+      attr_accessor file_size_bytes: Integer?
+      attr_accessor term_count: Integer?
+      attr_accessor synonym_rule_count: Integer?
+    end
+
+    class DisassociateEntitiesFromExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?entity_list: Array[Types::EntityConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor entity_list: Array[Types::EntityConfiguration]?
+    end
+
+    class DisassociateEntitiesFromExperienceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entity_list: Array[Types::FailedEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entity_list: Array[Types::FailedEntity]?
+    end
+
+    class DisassociatePersonasFromEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?entity_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor entity_ids: Array[String]?
+    end
+
+    class DisassociatePersonasFromEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entity_list: Array[Types::FailedEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entity_list: Array[Types::FailedEntity]?
+    end
+
+    class Document
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?blob: String,
+        ?s3_path: Types::S3Path,
+        ?attributes: Array[Types::DocumentAttribute],
+        ?access_control_list: Array[Types::Principal],
+        ?hierarchical_access_control_list: Array[Types::HierarchicalPrincipal],
+        ?content_type: String,
+        ?access_control_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor blob: String?
+      attr_accessor s3_path: Types::S3Path?
+      attr_accessor attributes: Array[Types::DocumentAttribute]?
+      attr_accessor access_control_list: Array[Types::Principal]?
+      attr_accessor hierarchical_access_control_list: Array[Types::HierarchicalPrincipal]?
+      attr_accessor content_type: String?
+      attr_accessor access_control_configuration_id: String?
+    end
+
+    class DocumentAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Types::DocumentAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Types::DocumentAttributeValue?
+    end
+
+    class DocumentAttributeCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_document_attribute_key: String,
+        ?operator: String,
+        ?condition_on_value: Types::DocumentAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_document_attribute_key: String?
+      attr_accessor operator: String?
+      attr_accessor condition_on_value: Types::DocumentAttributeValue?
+    end
+
+    class DocumentAttributeTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_document_attribute_key: String,
+        ?target_document_attribute_value_deletion: bool,
+        ?target_document_attribute_value: Types::DocumentAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_document_attribute_key: String?
+      attr_accessor target_document_attribute_value_deletion: bool?
+      attr_accessor target_document_attribute_value: Types::DocumentAttributeValue?
+    end
+
+    class DocumentAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+        ?string_list_value: Array[String],
+        ?long_value: Integer,
+        ?date_value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor string_list_value: Array[String]?
+      attr_accessor long_value: Integer?
+      attr_accessor date_value: Time?
+    end
+
+    class DocumentAttributeValueCountPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute_value: Types::DocumentAttributeValue,
+        ?count: Integer,
+        ?facet_results: Array[Types::FacetResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute_value: Types::DocumentAttributeValue?
+      attr_accessor count: Integer?
+      attr_accessor facet_results: Array[Types::FacetResult]?
+    end
+
+    module DocumentAttributeValueType
+      STRING_VALUE: String
+      STRING_LIST_VALUE: String
+      LONG_VALUE: String
+      DATE_VALUE: String
+    end
+
+    class DocumentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?attributes: Array[Types::DocumentAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor attributes: Array[Types::DocumentAttribute]?
+    end
+
+    class DocumentMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?relevance: Types::Relevance,
+        ?search: Types::Search,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor relevance: Types::Relevance?
+      attr_accessor search: Types::Search?
+    end
+
+    class DocumentRelevanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?relevance: Types::Relevance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor relevance: Types::Relevance?
+    end
+
+    module DocumentStatus
+      NOT_FOUND: String
+      PROCESSING: String
+      INDEXED: String
+      UPDATED: String
+      FAILED: String
+      UPDATE_FAILED: String
+    end
+
+    class DocumentsMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_prefix: String?
+    end
+
+    module EndpointType
+      HOME: String
+    end
+
+    class EntityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor entity_type: String?
+    end
+
+    class EntityDisplayData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?group_name: String,
+        ?identified_user_name: String,
+        ?first_name: String,
+        ?last_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor group_name: String?
+      attr_accessor identified_user_name: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+    end
+
+    class EntityPersonaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?persona: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor persona: String?
+    end
+
+    module EntityType
+      USER: String
+      GROUP: String
+    end
+
+    module ErrorCode
+      INTERNAL_ERROR: String
+      INVALID_REQUEST: String
+    end
+
+    class ExpandConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_result_items_to_expand: Integer,
+        ?max_expanded_results_per_item: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_result_items_to_expand: Integer?
+      attr_accessor max_expanded_results_per_item: Integer?
+    end
+
+    class ExpandedResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?document_id: String,
+        ?document_title: Types::TextWithHighlights,
+        ?document_excerpt: Types::TextWithHighlights,
+        ?document_uri: String,
+        ?document_attributes: Array[Types::DocumentAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor document_id: String?
+      attr_accessor document_title: Types::TextWithHighlights?
+      attr_accessor document_excerpt: Types::TextWithHighlights?
+      attr_accessor document_uri: String?
+      attr_accessor document_attributes: Array[Types::DocumentAttribute]?
+    end
+
+    class ExperienceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_source_configuration: Types::ContentSourceConfiguration,
+        ?user_identity_configuration: Types::UserIdentityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_source_configuration: Types::ContentSourceConfiguration?
+      attr_accessor user_identity_configuration: Types::UserIdentityConfiguration?
+    end
+
+    class ExperienceEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_type: String,
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_type: String?
+      attr_accessor endpoint: String?
+    end
+
+    class ExperienceEntitiesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?entity_type: String,
+        ?display_data: Types::EntityDisplayData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor entity_type: String?
+      attr_accessor display_data: Types::EntityDisplayData?
+    end
+
+    module ExperienceStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class ExperiencesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?created_at: Time,
+        ?status: String,
+        ?endpoints: Array[Types::ExperienceEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor endpoints: Array[Types::ExperienceEndpoint]?
+    end
+
+    class Facet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute_key: String,
+        ?facets: Array[Types::Facet],
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute_key: String?
+      attr_accessor facets: Array[Types::Facet]?
+      attr_accessor max_results: Integer?
+    end
+
+    class FacetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute_key: String,
+        ?document_attribute_value_type: String,
+        ?document_attribute_value_count_pairs: Array[Types::DocumentAttributeValueCountPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute_key: String?
+      attr_accessor document_attribute_value_type: String?
+      attr_accessor document_attribute_value_count_pairs: Array[Types::DocumentAttributeValueCountPair]?
+    end
+
+    class FailedEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor error_message: String?
+    end
+
+    module FaqFileFormat
+      CSV: String
+      CSV_WITH_HEADER: String
+      JSON: String
+    end
+
+    class FaqStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexed_question_answers_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexed_question_answers_count: Integer?
+    end
+
+    module FaqStatus
+      CREATING: String
+      UPDATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class FaqSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?file_format: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor file_format: String?
+      attr_accessor language_code: String?
+    end
+
+    class FeaturedDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class FeaturedDocumentMissing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class FeaturedDocumentWithMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor uri: String?
+    end
+
+    class FeaturedResultsConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?conflicting_items: Array[Types::ConflictingItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor conflicting_items: Array[Types::ConflictingItem]?
+    end
+
+    class FeaturedResultsItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?additional_attributes: Array[Types::AdditionalResultAttribute],
+        ?document_id: String,
+        ?document_title: Types::TextWithHighlights,
+        ?document_excerpt: Types::TextWithHighlights,
+        ?document_uri: String,
+        ?document_attributes: Array[Types::DocumentAttribute],
+        ?feedback_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor additional_attributes: Array[Types::AdditionalResultAttribute]?
+      attr_accessor document_id: String?
+      attr_accessor document_title: Types::TextWithHighlights?
+      attr_accessor document_excerpt: Types::TextWithHighlights?
+      attr_accessor document_uri: String?
+      attr_accessor document_attributes: Array[Types::DocumentAttribute]?
+      attr_accessor feedback_token: String?
+    end
+
+    class FeaturedResultsSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set_id: String,
+        ?featured_results_set_name: String,
+        ?description: String,
+        ?status: String,
+        ?query_texts: Array[String],
+        ?featured_documents: Array[Types::FeaturedDocument],
+        ?last_updated_timestamp: Integer,
+        ?creation_timestamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set_id: String?
+      attr_accessor featured_results_set_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor query_texts: Array[String]?
+      attr_accessor featured_documents: Array[Types::FeaturedDocument]?
+      attr_accessor last_updated_timestamp: Integer?
+      attr_accessor creation_timestamp: Integer?
+    end
+
+    module FeaturedResultsSetStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class FeaturedResultsSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set_id: String,
+        ?featured_results_set_name: String,
+        ?status: String,
+        ?last_updated_timestamp: Integer,
+        ?creation_timestamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set_id: String?
+      attr_accessor featured_results_set_name: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_timestamp: Integer?
+      attr_accessor creation_timestamp: Integer?
+    end
+
+    class FsxConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?file_system_type: String,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?secret_arn: String,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor file_system_type: String?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor secret_arn: String?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    module FsxFileSystemType
+      WINDOWS: String
+    end
+
+    class GetQuerySuggestionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?query_text: String,
+        ?max_suggestions_count: Integer,
+        ?suggestion_types: Array[String],
+        ?attribute_suggestions_config: Types::AttributeSuggestionsGetConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor query_text: String?
+      attr_accessor max_suggestions_count: Integer?
+      attr_accessor suggestion_types: Array[String]?
+      attr_accessor attribute_suggestions_config: Types::AttributeSuggestionsGetConfig?
+    end
+
+    class GetQuerySuggestionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_suggestions_id: String,
+        ?suggestions: Array[Types::Suggestion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_suggestions_id: String?
+      attr_accessor suggestions: Array[Types::Suggestion]?
+    end
+
+    class GetSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?interval: String,
+        ?metric_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor interval: String?
+      attr_accessor metric_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetSnapshotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snap_shot_time_filter: Types::TimeRange,
+        ?snapshots_data_header: Array[String],
+        ?snapshots_data: Array[Array[String]],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snap_shot_time_filter: Types::TimeRange?
+      attr_accessor snapshots_data_header: Array[String]?
+      attr_accessor snapshots_data: Array[Array[String]]?
+      attr_accessor next_token: String?
+    end
+
+    class GitHubConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?saa_s_configuration: Types::SaaSConfiguration,
+        ?on_premise_configuration: Types::OnPremiseConfiguration,
+        ?type: String,
+        ?secret_arn: String,
+        ?use_change_log: bool,
+        ?git_hub_document_crawl_properties: Types::GitHubDocumentCrawlProperties,
+        ?repository_filter: Array[String],
+        ?inclusion_folder_name_patterns: Array[String],
+        ?inclusion_file_type_patterns: Array[String],
+        ?inclusion_file_name_patterns: Array[String],
+        ?exclusion_folder_name_patterns: Array[String],
+        ?exclusion_file_type_patterns: Array[String],
+        ?exclusion_file_name_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?git_hub_repository_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_commit_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_issue_document_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_issue_comment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_issue_attachment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_pull_request_comment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_pull_request_document_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?git_hub_pull_request_document_attachment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor saa_s_configuration: Types::SaaSConfiguration?
+      attr_accessor on_premise_configuration: Types::OnPremiseConfiguration?
+      attr_accessor type: String?
+      attr_accessor secret_arn: String?
+      attr_accessor use_change_log: bool?
+      attr_accessor git_hub_document_crawl_properties: Types::GitHubDocumentCrawlProperties?
+      attr_accessor repository_filter: Array[String]?
+      attr_accessor inclusion_folder_name_patterns: Array[String]?
+      attr_accessor inclusion_file_type_patterns: Array[String]?
+      attr_accessor inclusion_file_name_patterns: Array[String]?
+      attr_accessor exclusion_folder_name_patterns: Array[String]?
+      attr_accessor exclusion_file_type_patterns: Array[String]?
+      attr_accessor exclusion_file_name_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor git_hub_repository_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_commit_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_issue_document_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_issue_comment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_issue_attachment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_pull_request_comment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_pull_request_document_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor git_hub_pull_request_document_attachment_configuration_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    class GitHubDocumentCrawlProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawl_repository_documents: bool,
+        ?crawl_issue: bool,
+        ?crawl_issue_comment: bool,
+        ?crawl_issue_comment_attachment: bool,
+        ?crawl_pull_request: bool,
+        ?crawl_pull_request_comment: bool,
+        ?crawl_pull_request_comment_attachment: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawl_repository_documents: bool?
+      attr_accessor crawl_issue: bool?
+      attr_accessor crawl_issue_comment: bool?
+      attr_accessor crawl_issue_comment_attachment: bool?
+      attr_accessor crawl_pull_request: bool?
+      attr_accessor crawl_pull_request_comment: bool?
+      attr_accessor crawl_pull_request_comment_attachment: bool?
+    end
+
+    class GoogleDriveConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?exclude_mime_types: Array[String],
+        ?exclude_user_accounts: Array[String],
+        ?exclude_shared_drives: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor exclude_mime_types: Array[String]?
+      attr_accessor exclude_user_accounts: Array[String]?
+      attr_accessor exclude_shared_drives: Array[String]?
+    end
+
+    class GroupMembers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_groups: Array[Types::MemberGroup],
+        ?member_users: Array[Types::MemberUser],
+        ?s3_pathfor_group_members: Types::S3Path,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_groups: Array[Types::MemberGroup]?
+      attr_accessor member_users: Array[Types::MemberUser]?
+      attr_accessor s3_pathfor_group_members: Types::S3Path?
+    end
+
+    class GroupOrderingIdSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_updated_at: Time,
+        ?received_at: Time,
+        ?ordering_id: Integer,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor received_at: Time?
+      attr_accessor ordering_id: Integer?
+      attr_accessor failure_reason: String?
+    end
+
+    class GroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?ordering_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor ordering_id: Integer?
+    end
+
+    class HierarchicalPrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_list: Array[Types::Principal],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_list: Array[Types::Principal]?
+    end
+
+    class Highlight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?top_answer: bool,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor top_answer: bool?
+      attr_accessor type: String?
+    end
+
+    module HighlightType
+      STANDARD: String
+      THESAURUS_SYNONYM: String
+    end
+
+    class HookConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_condition: Types::DocumentAttributeCondition,
+        ?lambda_arn: String,
+        ?s3_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_condition: Types::DocumentAttributeCondition?
+      attr_accessor lambda_arn: String?
+      attr_accessor s3_bucket: String?
+    end
+
+    class IndexConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?edition: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor edition: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    module IndexEdition
+      DEVELOPER_EDITION: String
+      ENTERPRISE_EDITION: String
+      GEN_AI_ENTERPRISE_EDITION: String
+    end
+
+    class IndexStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?faq_statistics: Types::FaqStatistics,
+        ?text_document_statistics: Types::TextDocumentStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor faq_statistics: Types::FaqStatistics?
+      attr_accessor text_document_statistics: Types::TextDocumentStatistics?
+    end
+
+    module IndexStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+      UPDATING: String
+      SYSTEM_UPDATING: String
+    end
+
+    class InlineCustomDocumentEnrichmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition: Types::DocumentAttributeCondition,
+        ?target: Types::DocumentAttributeTarget,
+        ?document_content_deletion: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition: Types::DocumentAttributeCondition?
+      attr_accessor target: Types::DocumentAttributeTarget?
+      attr_accessor document_content_deletion: bool?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Interval
+      THIS_MONTH: String
+      THIS_WEEK: String
+      ONE_WEEK_AGO: String
+      TWO_WEEKS_AGO: String
+      ONE_MONTH_AGO: String
+      TWO_MONTHS_AGO: String
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IssueSubEntity
+      COMMENTS: String
+      ATTACHMENTS: String
+      WORKLOGS: String
+    end
+
+    class JiraConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jira_account_url: String,
+        ?secret_arn: String,
+        ?use_change_log: bool,
+        ?project: Array[String],
+        ?issue_type: Array[String],
+        ?status: Array[String],
+        ?issue_sub_entity_filter: Array[String],
+        ?attachment_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?comment_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?issue_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?project_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?work_log_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jira_account_url: String?
+      attr_accessor secret_arn: String?
+      attr_accessor use_change_log: bool?
+      attr_accessor project: Array[String]?
+      attr_accessor issue_type: Array[String]?
+      attr_accessor status: Array[String]?
+      attr_accessor issue_sub_entity_filter: Array[String]?
+      attr_accessor attachment_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor comment_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor issue_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor project_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor work_log_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+    end
+
+    class JsonTokenTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name_attribute_field: String,
+        ?group_attribute_field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name_attribute_field: String?
+      attr_accessor group_attribute_field: String?
+    end
+
+    class JwtTokenTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_location: String,
+        ?url: String,
+        ?secret_manager_arn: String,
+        ?user_name_attribute_field: String,
+        ?group_attribute_field: String,
+        ?issuer: String,
+        ?claim_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_location: String?
+      attr_accessor url: String?
+      attr_accessor secret_manager_arn: String?
+      attr_accessor user_name_attribute_field: String?
+      attr_accessor group_attribute_field: String?
+      attr_accessor issuer: String?
+      attr_accessor claim_regex: String?
+    end
+
+    module KeyLocation
+      URL: String
+      SECRET_MANAGER: String
+    end
+
+    class ListAccessControlConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccessControlConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?access_control_configurations: Array[Types::AccessControlConfigurationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor access_control_configurations: Array[Types::AccessControlConfigurationSummary]?
+    end
+
+    class ListDataSourceSyncJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?start_time_filter: Types::TimeRange,
+        ?status_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor start_time_filter: Types::TimeRange?
+      attr_accessor status_filter: String?
+    end
+
+    class ListDataSourceSyncJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?history: Array[Types::DataSourceSyncJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor history: Array[Types::DataSourceSyncJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_items: Array[Types::DataSourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_items: Array[Types::DataSourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntityPersonasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEntityPersonasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_items: Array[Types::PersonasSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_items: Array[Types::PersonasSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperienceEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperienceEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_items: Array[Types::ExperienceEntitiesSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_items: Array[Types::ExperienceEntitiesSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperiencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListExperiencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_items: Array[Types::ExperiencesSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_items: Array[Types::ExperiencesSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFaqsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFaqsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?faq_summary_items: Array[Types::FaqSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor faq_summary_items: Array[Types::FaqSummary]?
+    end
+
+    class ListFeaturedResultsSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFeaturedResultsSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set_summary_items: Array[Types::FeaturedResultsSetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set_summary_items: Array[Types::FeaturedResultsSetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsOlderThanOrderingIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?data_source_id: String,
+        ?ordering_id: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor ordering_id: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupsOlderThanOrderingIdResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups_summaries: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups_summaries: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIndicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_configuration_summary_items: Array[Types::IndexConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_configuration_summary_items: Array[Types::IndexConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQuerySuggestionsBlockListsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQuerySuggestionsBlockListsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_list_summary_items: Array[Types::QuerySuggestionsBlockListSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_list_summary_items: Array[Types::QuerySuggestionsBlockListSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListThesauriRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListThesauriResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?thesaurus_summary_items: Array[Types::ThesaurusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor thesaurus_summary_items: Array[Types::ThesaurusSummary]?
+    end
+
+    class MemberGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?data_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor data_source_id: String?
+    end
+
+    class MemberUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    module MetricType
+      QUERIES_BY_COUNT: String
+      QUERIES_BY_ZERO_CLICK_RATE: String
+      QUERIES_BY_ZERO_RESULT_RATE: String
+      DOCS_BY_CLICK_COUNT: String
+      AGG_QUERY_DOC_METRICS: String
+      TREND_QUERY_DOC_METRICS: String
+    end
+
+    module MissingAttributeKeyStrategy
+      IGNORE: String
+      COLLAPSE: String
+      EXPAND: String
+    end
+
+    module Mode
+      ENABLED: String
+      LEARN_ONLY: String
+    end
+
+    class OnPremiseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_url: String,
+        ?organization_name: String,
+        ?ssl_certificate_s3_path: Types::S3Path,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_url: String?
+      attr_accessor organization_name: String?
+      attr_accessor ssl_certificate_s3_path: Types::S3Path?
+    end
+
+    class OneDriveConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_domain: String,
+        ?secret_arn: String,
+        ?one_drive_users: Types::OneDriveUsers,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?disable_local_groups: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_domain: String?
+      attr_accessor secret_arn: String?
+      attr_accessor one_drive_users: Types::OneDriveUsers?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor disable_local_groups: bool?
+    end
+
+    class OneDriveUsers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?one_drive_user_list: Array[String],
+        ?one_drive_user_s3_path: Types::S3Path,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor one_drive_user_list: Array[String]?
+      attr_accessor one_drive_user_s3_path: Types::S3Path?
+    end
+
+    module Order
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    module Persona
+      OWNER: String
+      VIEWER: String
+    end
+
+    class PersonasSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?persona: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor persona: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class Principal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?access: String,
+        ?data_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor access: String?
+      attr_accessor data_source_id: String?
+    end
+
+    module PrincipalMappingStatus
+      FAILED: String
+      SUCCEEDED: String
+      PROCESSING: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module PrincipalType
+      USER: String
+      GROUP: String
+    end
+
+    class ProxyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: String,
+        ?port: Integer,
+        ?credentials: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: String?
+      attr_accessor port: Integer?
+      attr_accessor credentials: String?
+    end
+
+    class PutPrincipalMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?data_source_id: String,
+        ?group_id: String,
+        ?group_members: Types::GroupMembers,
+        ?ordering_id: Integer,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_members: Types::GroupMembers?
+      attr_accessor ordering_id: Integer?
+      attr_accessor role_arn: String?
+    end
+
+    module QueryIdentifiersEnclosingOption
+      DOUBLE_QUOTES: String
+      NONE: String
+    end
+
+    class QueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?query_text: String,
+        ?attribute_filter: Types::AttributeFilter,
+        ?facets: Array[Types::Facet],
+        ?requested_document_attributes: Array[String],
+        ?query_result_type_filter: String,
+        ?document_relevance_override_configurations: Array[Types::DocumentRelevanceConfiguration],
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?sorting_configuration: Types::SortingConfiguration,
+        ?sorting_configurations: Array[Types::SortingConfiguration],
+        ?user_context: Types::UserContext,
+        ?visitor_id: String,
+        ?spell_correction_configuration: Types::SpellCorrectionConfiguration,
+        ?collapse_configuration: Types::CollapseConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor query_text: String?
+      attr_accessor attribute_filter: Types::AttributeFilter?
+      attr_accessor facets: Array[Types::Facet]?
+      attr_accessor requested_document_attributes: Array[String]?
+      attr_accessor query_result_type_filter: String?
+      attr_accessor document_relevance_override_configurations: Array[Types::DocumentRelevanceConfiguration]?
+      attr_accessor page_number: Integer?
+      attr_accessor page_size: Integer?
+      attr_accessor sorting_configuration: Types::SortingConfiguration?
+      attr_accessor sorting_configurations: Array[Types::SortingConfiguration]?
+      attr_accessor user_context: Types::UserContext?
+      attr_accessor visitor_id: String?
+      attr_accessor spell_correction_configuration: Types::SpellCorrectionConfiguration?
+      attr_accessor collapse_configuration: Types::CollapseConfiguration?
+    end
+
+    class QueryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?result_items: Array[Types::QueryResultItem],
+        ?facet_results: Array[Types::FacetResult],
+        ?total_number_of_results: Integer,
+        ?warnings: Array[Types::Warning],
+        ?spell_corrected_queries: Array[Types::SpellCorrectedQuery],
+        ?featured_results_items: Array[Types::FeaturedResultsItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor result_items: Array[Types::QueryResultItem]?
+      attr_accessor facet_results: Array[Types::FacetResult]?
+      attr_accessor total_number_of_results: Integer?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor spell_corrected_queries: Array[Types::SpellCorrectedQuery]?
+      attr_accessor featured_results_items: Array[Types::FeaturedResultsItem]?
+    end
+
+    module QueryResultFormat
+      TABLE: String
+      TEXT: String
+    end
+
+    class QueryResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?format: String,
+        ?additional_attributes: Array[Types::AdditionalResultAttribute],
+        ?document_id: String,
+        ?document_title: Types::TextWithHighlights,
+        ?document_excerpt: Types::TextWithHighlights,
+        ?document_uri: String,
+        ?document_attributes: Array[Types::DocumentAttribute],
+        ?score_attributes: Types::ScoreAttributes,
+        ?feedback_token: String,
+        ?table_excerpt: Types::TableExcerpt,
+        ?collapsed_result_detail: Types::CollapsedResultDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor format: String?
+      attr_accessor additional_attributes: Array[Types::AdditionalResultAttribute]?
+      attr_accessor document_id: String?
+      attr_accessor document_title: Types::TextWithHighlights?
+      attr_accessor document_excerpt: Types::TextWithHighlights?
+      attr_accessor document_uri: String?
+      attr_accessor document_attributes: Array[Types::DocumentAttribute]?
+      attr_accessor score_attributes: Types::ScoreAttributes?
+      attr_accessor feedback_token: String?
+      attr_accessor table_excerpt: Types::TableExcerpt?
+      attr_accessor collapsed_result_detail: Types::CollapsedResultDetail?
+    end
+
+    module QueryResultType
+      DOCUMENT: String
+      QUESTION_ANSWER: String
+      ANSWER: String
+    end
+
+    module QuerySuggestionsBlockListStatus
+      ACTIVE: String
+      CREATING: String
+      DELETING: String
+      UPDATING: String
+      ACTIVE_BUT_UPDATE_FAILED: String
+      FAILED: String
+    end
+
+    class QuerySuggestionsBlockListSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?item_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor item_count: Integer?
+    end
+
+    module QuerySuggestionsStatus
+      ACTIVE: String
+      UPDATING: String
+    end
+
+    class QuipConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?secret_arn: String,
+        ?crawl_file_comments: bool,
+        ?crawl_chat_rooms: bool,
+        ?crawl_attachments: bool,
+        ?folder_ids: Array[String],
+        ?thread_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?message_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?attachment_field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor secret_arn: String?
+      attr_accessor crawl_file_comments: bool?
+      attr_accessor crawl_chat_rooms: bool?
+      attr_accessor crawl_attachments: bool?
+      attr_accessor folder_ids: Array[String]?
+      attr_accessor thread_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor message_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor attachment_field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+    end
+
+    module ReadAccessType
+      ALLOW: String
+      DENY: String
+    end
+
+    class Relevance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?freshness: bool,
+        ?importance: Integer,
+        ?duration: String,
+        ?rank_order: String,
+        ?value_importance_map: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor freshness: bool?
+      attr_accessor importance: Integer?
+      attr_accessor duration: String?
+      attr_accessor rank_order: String?
+      attr_accessor value_importance_map: Hash[String, Integer]?
+    end
+
+    class RelevanceFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?relevance_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor relevance_value: String?
+    end
+
+    module RelevanceType
+      RELEVANT: String
+      NOT_RELEVANT: String
+    end
+
+    class ResourceAlreadyExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetrieveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?query_text: String,
+        ?attribute_filter: Types::AttributeFilter,
+        ?requested_document_attributes: Array[String],
+        ?document_relevance_override_configurations: Array[Types::DocumentRelevanceConfiguration],
+        ?page_number: Integer,
+        ?page_size: Integer,
+        ?user_context: Types::UserContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor query_text: String?
+      attr_accessor attribute_filter: Types::AttributeFilter?
+      attr_accessor requested_document_attributes: Array[String]?
+      attr_accessor document_relevance_override_configurations: Array[Types::DocumentRelevanceConfiguration]?
+      attr_accessor page_number: Integer?
+      attr_accessor page_size: Integer?
+      attr_accessor user_context: Types::UserContext?
+    end
+
+    class RetrieveResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?result_items: Array[Types::RetrieveResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor result_items: Array[Types::RetrieveResultItem]?
+    end
+
+    class RetrieveResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?document_id: String,
+        ?document_title: String,
+        ?content: String,
+        ?document_uri: String,
+        ?document_attributes: Array[Types::DocumentAttribute],
+        ?score_attributes: Types::ScoreAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor document_id: String?
+      attr_accessor document_title: String?
+      attr_accessor content: String?
+      attr_accessor document_uri: String?
+      attr_accessor document_attributes: Array[Types::DocumentAttribute]?
+      attr_accessor score_attributes: Types::ScoreAttributes?
+    end
+
+    class S3DataSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?inclusion_prefixes: Array[String],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?documents_metadata_configuration: Types::DocumentsMetadataConfiguration,
+        ?access_control_list_configuration: Types::AccessControlListConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor inclusion_prefixes: Array[String]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor documents_metadata_configuration: Types::DocumentsMetadataConfiguration?
+      attr_accessor access_control_list_configuration: Types::AccessControlListConfiguration?
+    end
+
+    class S3Path
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class SaaSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_name: String,
+        ?host_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_name: String?
+      attr_accessor host_url: String?
+    end
+
+    class SalesforceChatterFeedConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?include_filter_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor include_filter_types: Array[String]?
+    end
+
+    module SalesforceChatterFeedIncludeFilterType
+      ACTIVE_USER: String
+      STANDARD_USER: String
+    end
+
+    class SalesforceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_url: String,
+        ?secret_arn: String,
+        ?standard_object_configurations: Array[Types::SalesforceStandardObjectConfiguration],
+        ?knowledge_article_configuration: Types::SalesforceKnowledgeArticleConfiguration,
+        ?chatter_feed_configuration: Types::SalesforceChatterFeedConfiguration,
+        ?crawl_attachments: bool,
+        ?standard_object_attachment_configuration: Types::SalesforceStandardObjectAttachmentConfiguration,
+        ?include_attachment_file_patterns: Array[String],
+        ?exclude_attachment_file_patterns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_url: String?
+      attr_accessor secret_arn: String?
+      attr_accessor standard_object_configurations: Array[Types::SalesforceStandardObjectConfiguration]?
+      attr_accessor knowledge_article_configuration: Types::SalesforceKnowledgeArticleConfiguration?
+      attr_accessor chatter_feed_configuration: Types::SalesforceChatterFeedConfiguration?
+      attr_accessor crawl_attachments: bool?
+      attr_accessor standard_object_attachment_configuration: Types::SalesforceStandardObjectAttachmentConfiguration?
+      attr_accessor include_attachment_file_patterns: Array[String]?
+      attr_accessor exclude_attachment_file_patterns: Array[String]?
+    end
+
+    class SalesforceCustomKnowledgeArticleTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    class SalesforceKnowledgeArticleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?included_states: Array[String],
+        ?standard_knowledge_article_type_configuration: Types::SalesforceStandardKnowledgeArticleTypeConfiguration,
+        ?custom_knowledge_article_type_configurations: Array[Types::SalesforceCustomKnowledgeArticleTypeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor included_states: Array[String]?
+      attr_accessor standard_knowledge_article_type_configuration: Types::SalesforceStandardKnowledgeArticleTypeConfiguration?
+      attr_accessor custom_knowledge_article_type_configurations: Array[Types::SalesforceCustomKnowledgeArticleTypeConfiguration]?
+    end
+
+    module SalesforceKnowledgeArticleState
+      DRAFT: String
+      PUBLISHED: String
+      ARCHIVED: String
+    end
+
+    class SalesforceStandardKnowledgeArticleTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    class SalesforceStandardObjectAttachmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    class SalesforceStandardObjectConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    module SalesforceStandardObjectName
+      ACCOUNT: String
+      CAMPAIGN: String
+      CASE: String
+      CONTACT: String
+      CONTRACT: String
+      DOCUMENT: String
+      GROUP: String
+      IDEA: String
+      LEAD: String
+      OPPORTUNITY: String
+      PARTNER: String
+      PRICEBOOK: String
+      PRODUCT: String
+      PROFILE: String
+      SOLUTION: String
+      TASK: String
+      USER: String
+    end
+
+    class ScoreAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score_confidence: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score_confidence: String?
+    end
+
+    module ScoreConfidence
+      VERY_HIGH: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      NOT_AVAILABLE: String
+    end
+
+    class Search
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?facetable: bool,
+        ?searchable: bool,
+        ?displayable: bool,
+        ?sortable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor facetable: bool?
+      attr_accessor searchable: bool?
+      attr_accessor displayable: bool?
+      attr_accessor sortable: bool?
+    end
+
+    class SeedUrlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seed_urls: Array[String],
+        ?web_crawler_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seed_urls: Array[String]?
+      attr_accessor web_crawler_mode: String?
+    end
+
+    class ServerSideEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+    end
+
+    module ServiceNowAuthenticationType
+      HTTP_BASIC: String
+      OAUTH2: String
+    end
+
+    module ServiceNowBuildVersionType
+      LONDON: String
+      OTHERS: String
+    end
+
+    class ServiceNowConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_url: String,
+        ?secret_arn: String,
+        ?service_now_build_version: String,
+        ?knowledge_article_configuration: Types::ServiceNowKnowledgeArticleConfiguration,
+        ?service_catalog_configuration: Types::ServiceNowServiceCatalogConfiguration,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_url: String?
+      attr_accessor secret_arn: String?
+      attr_accessor service_now_build_version: String?
+      attr_accessor knowledge_article_configuration: Types::ServiceNowKnowledgeArticleConfiguration?
+      attr_accessor service_catalog_configuration: Types::ServiceNowServiceCatalogConfiguration?
+      attr_accessor authentication_type: String?
+    end
+
+    class ServiceNowKnowledgeArticleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawl_attachments: bool,
+        ?include_attachment_file_patterns: Array[String],
+        ?exclude_attachment_file_patterns: Array[String],
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?filter_query: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawl_attachments: bool?
+      attr_accessor include_attachment_file_patterns: Array[String]?
+      attr_accessor exclude_attachment_file_patterns: Array[String]?
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor filter_query: String?
+    end
+
+    class ServiceNowServiceCatalogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawl_attachments: bool,
+        ?include_attachment_file_patterns: Array[String],
+        ?exclude_attachment_file_patterns: Array[String],
+        ?document_data_field_name: String,
+        ?document_title_field_name: String,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawl_attachments: bool?
+      attr_accessor include_attachment_file_patterns: Array[String]?
+      attr_accessor exclude_attachment_file_patterns: Array[String]?
+      attr_accessor document_data_field_name: String?
+      attr_accessor document_title_field_name: String?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SharePointConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_point_version: String,
+        ?urls: Array[String],
+        ?secret_arn: String,
+        ?crawl_attachments: bool,
+        ?use_change_log: bool,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+        ?document_title_field_name: String,
+        ?disable_local_groups: bool,
+        ?ssl_certificate_s3_path: Types::S3Path,
+        ?authentication_type: String,
+        ?proxy_configuration: Types::ProxyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_point_version: String?
+      attr_accessor urls: Array[String]?
+      attr_accessor secret_arn: String?
+      attr_accessor crawl_attachments: bool?
+      attr_accessor use_change_log: bool?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+      attr_accessor document_title_field_name: String?
+      attr_accessor disable_local_groups: bool?
+      attr_accessor ssl_certificate_s3_path: Types::S3Path?
+      attr_accessor authentication_type: String?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+    end
+
+    module SharePointOnlineAuthenticationType
+      HTTP_BASIC: String
+      OAUTH2: String
+    end
+
+    module SharePointVersion
+      SHAREPOINT_2013: String
+      SHAREPOINT_2016: String
+      SHAREPOINT_ONLINE: String
+      SHAREPOINT_2019: String
+    end
+
+    class SiteMapsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_maps: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_maps: Array[String]?
+    end
+
+    class SlackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?secret_arn: String,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?slack_entity_list: Array[String],
+        ?use_change_log: bool,
+        ?crawl_bot_message: bool,
+        ?exclude_archived: bool,
+        ?since_crawl_date: String,
+        ?look_back_period: Integer,
+        ?private_channel_filter: Array[String],
+        ?public_channel_filter: Array[String],
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor secret_arn: String?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor slack_entity_list: Array[String]?
+      attr_accessor use_change_log: bool?
+      attr_accessor crawl_bot_message: bool?
+      attr_accessor exclude_archived: bool?
+      attr_accessor since_crawl_date: String?
+      attr_accessor look_back_period: Integer?
+      attr_accessor private_channel_filter: Array[String]?
+      attr_accessor public_channel_filter: Array[String]?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+
+    module SlackEntity
+      PUBLIC_CHANNEL: String
+      PRIVATE_CHANNEL: String
+      GROUP_MESSAGE: String
+      DIRECT_MESSAGE: String
+    end
+
+    module SortOrder
+      DESC: String
+      ASC: String
+    end
+
+    class SortingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_attribute_key: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_attribute_key: String?
+      attr_accessor sort_order: String?
+    end
+
+    class SourceDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?suggestion_attributes: Array[String],
+        ?additional_attributes: Array[Types::DocumentAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor suggestion_attributes: Array[String]?
+      attr_accessor additional_attributes: Array[Types::DocumentAttribute]?
+    end
+
+    class SpellCorrectedQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suggested_query_text: String,
+        ?corrections: Array[Types::Correction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suggested_query_text: String?
+      attr_accessor corrections: Array[Types::Correction]?
+    end
+
+    class SpellCorrectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_query_spell_check_suggestions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_query_spell_check_suggestions: bool?
+    end
+
+    class SqlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_identifiers_enclosing_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_identifiers_enclosing_option: String?
+    end
+
+    class StartDataSourceSyncJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class StartDataSourceSyncJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+    end
+
+    class Status
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?document_status: String,
+        ?failure_code: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor document_status: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class StopDataSourceSyncJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?index_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor index_id: String?
+    end
+
+    class SubmitFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?query_id: String,
+        ?click_feedback_items: Array[Types::ClickFeedback],
+        ?relevance_feedback_items: Array[Types::RelevanceFeedback],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor query_id: String?
+      attr_accessor click_feedback_items: Array[Types::ClickFeedback]?
+      attr_accessor relevance_feedback_items: Array[Types::RelevanceFeedback]?
+    end
+
+    class SuggestableConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?suggestable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor suggestable: bool?
+    end
+
+    class Suggestion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?value: Types::SuggestionValue,
+        ?source_documents: Array[Types::SourceDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor value: Types::SuggestionValue?
+      attr_accessor source_documents: Array[Types::SourceDocument]?
+    end
+
+    class SuggestionHighlight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+    end
+
+    class SuggestionTextWithHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?highlights: Array[Types::SuggestionHighlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor highlights: Array[Types::SuggestionHighlight]?
+    end
+
+    module SuggestionType
+      QUERY: String
+      DOCUMENT_ATTRIBUTES: String
+    end
+
+    class SuggestionValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: Types::SuggestionTextWithHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::SuggestionTextWithHighlights?
+    end
+
+    class TableCell
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?top_answer: bool,
+        ?highlighted: bool,
+        ?header: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor top_answer: bool?
+      attr_accessor highlighted: bool?
+      attr_accessor header: bool?
+    end
+
+    class TableExcerpt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rows: Array[Types::TableRow],
+        ?total_number_of_rows: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rows: Array[Types::TableRow]?
+      attr_accessor total_number_of_rows: Integer?
+    end
+
+    class TableRow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[Types::TableCell],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[Types::TableCell]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template: Smithy::Schema::document?
+    end
+
+    class TextDocumentStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexed_text_documents_count: Integer,
+        ?indexed_text_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexed_text_documents_count: Integer?
+      attr_accessor indexed_text_bytes: Integer?
+    end
+
+    class TextWithHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?highlights: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor highlights: Array[Types::Highlight]?
+    end
+
+    module ThesaurusStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      UPDATING: String
+      ACTIVE_BUT_UPDATE_FAILED: String
+      FAILED: String
+    end
+
+    class ThesaurusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module Type
+      SAAS: String
+      ON_PREMISE: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccessControlConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?access_control_list: Array[Types::Principal],
+        ?hierarchical_access_control_list: Array[Types::HierarchicalPrincipal],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor access_control_list: Array[Types::Principal]?
+      attr_accessor hierarchical_access_control_list: Array[Types::HierarchicalPrincipal]?
+    end
+
+    class UpdateAccessControlConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?index_id: String,
+        ?configuration: Types::DataSourceConfiguration,
+        ?vpc_configuration: Types::DataSourceVpcConfiguration,
+        ?description: String,
+        ?schedule: String,
+        ?role_arn: String,
+        ?language_code: String,
+        ?custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor index_id: String?
+      attr_accessor configuration: Types::DataSourceConfiguration?
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration?
+      attr_accessor description: String?
+      attr_accessor schedule: String?
+      attr_accessor role_arn: String?
+      attr_accessor language_code: String?
+      attr_accessor custom_document_enrichment_configuration: Types::CustomDocumentEnrichmentConfiguration?
+    end
+
+    class UpdateExperienceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?index_id: String,
+        ?role_arn: String,
+        ?configuration: Types::ExperienceConfiguration,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor index_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor configuration: Types::ExperienceConfiguration?
+      attr_accessor description: String?
+    end
+
+    class UpdateFeaturedResultsSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?featured_results_set_id: String,
+        ?featured_results_set_name: String,
+        ?description: String,
+        ?status: String,
+        ?query_texts: Array[String],
+        ?featured_documents: Array[Types::FeaturedDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor featured_results_set_id: String?
+      attr_accessor featured_results_set_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor query_texts: Array[String]?
+      attr_accessor featured_documents: Array[Types::FeaturedDocument]?
+    end
+
+    class UpdateFeaturedResultsSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_results_set: Types::FeaturedResultsSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_results_set: Types::FeaturedResultsSet?
+    end
+
+    class UpdateIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?role_arn: String,
+        ?description: String,
+        ?document_metadata_configuration_updates: Array[Types::DocumentMetadataConfiguration],
+        ?capacity_units: Types::CapacityUnitsConfiguration,
+        ?user_token_configurations: Array[Types::UserTokenConfiguration],
+        ?user_context_policy: String,
+        ?user_group_resolution_configuration: Types::UserGroupResolutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor document_metadata_configuration_updates: Array[Types::DocumentMetadataConfiguration]?
+      attr_accessor capacity_units: Types::CapacityUnitsConfiguration?
+      attr_accessor user_token_configurations: Array[Types::UserTokenConfiguration]?
+      attr_accessor user_context_policy: String?
+      attr_accessor user_group_resolution_configuration: Types::UserGroupResolutionConfiguration?
+    end
+
+    class UpdateQuerySuggestionsBlockListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?source_s3_path: Types::S3Path,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_s3_path: Types::S3Path?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateQuerySuggestionsConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_id: String,
+        ?mode: String,
+        ?query_log_look_back_window_in_days: Integer,
+        ?include_queries_without_user_information: bool,
+        ?minimum_number_of_querying_users: Integer,
+        ?minimum_query_count: Integer,
+        ?attribute_suggestions_config: Types::AttributeSuggestionsUpdateConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_id: String?
+      attr_accessor mode: String?
+      attr_accessor query_log_look_back_window_in_days: Integer?
+      attr_accessor include_queries_without_user_information: bool?
+      attr_accessor minimum_number_of_querying_users: Integer?
+      attr_accessor minimum_query_count: Integer?
+      attr_accessor attribute_suggestions_config: Types::AttributeSuggestionsUpdateConfig?
+    end
+
+    class UpdateThesaurusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?index_id: String,
+        ?description: String,
+        ?role_arn: String,
+        ?source_s3_path: Types::S3Path,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor index_id: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor source_s3_path: Types::S3Path?
+    end
+
+    class Urls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seed_url_configuration: Types::SeedUrlConfiguration,
+        ?site_maps_configuration: Types::SiteMapsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seed_url_configuration: Types::SeedUrlConfiguration?
+      attr_accessor site_maps_configuration: Types::SiteMapsConfiguration?
+    end
+
+    class UserContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?user_id: String,
+        ?groups: Array[String],
+        ?data_source_groups: Array[Types::DataSourceGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor user_id: String?
+      attr_accessor groups: Array[String]?
+      attr_accessor data_source_groups: Array[Types::DataSourceGroup]?
+    end
+
+    module UserContextPolicy
+      ATTRIBUTE_FILTER: String
+      USER_TOKEN: String
+    end
+
+    class UserGroupResolutionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_resolution_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_resolution_mode: String?
+    end
+
+    module UserGroupResolutionMode
+      AWS_SSO: String
+      NONE: String
+    end
+
+    class UserIdentityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_attribute_name: String?
+    end
+
+    class UserTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jwt_token_type_configuration: Types::JwtTokenTypeConfiguration,
+        ?json_token_type_configuration: Types::JsonTokenTypeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jwt_token_type_configuration: Types::JwtTokenTypeConfiguration?
+      attr_accessor json_token_type_configuration: Types::JsonTokenTypeConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Warning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module WarningCode
+      QUERY_LANGUAGE_INVALID_SYNTAX: String
+    end
+
+    class WebCrawlerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?urls: Types::Urls,
+        ?crawl_depth: Integer,
+        ?max_links_per_page: Integer,
+        ?max_content_size_per_page_in_mega_bytes: Float,
+        ?max_urls_per_minute_crawl_rate: Integer,
+        ?url_inclusion_patterns: Array[String],
+        ?url_exclusion_patterns: Array[String],
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?authentication_configuration: Types::AuthenticationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor urls: Types::Urls?
+      attr_accessor crawl_depth: Integer?
+      attr_accessor max_links_per_page: Integer?
+      attr_accessor max_content_size_per_page_in_mega_bytes: Float?
+      attr_accessor max_urls_per_minute_crawl_rate: Integer?
+      attr_accessor url_inclusion_patterns: Array[String]?
+      attr_accessor url_exclusion_patterns: Array[String]?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration?
+    end
+
+    module WebCrawlerMode
+      HOST_ONLY: String
+      SUBDOMAINS: String
+      EVERYTHING: String
+    end
+
+    class WorkDocsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?crawl_comments: bool,
+        ?use_change_log: bool,
+        ?inclusion_patterns: Array[String],
+        ?exclusion_patterns: Array[String],
+        ?field_mappings: Array[Types::DataSourceToIndexFieldMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor crawl_comments: bool?
+      attr_accessor use_change_log: bool?
+      attr_accessor inclusion_patterns: Array[String]?
+      attr_accessor exclusion_patterns: Array[String]?
+      attr_accessor field_mappings: Array[Types::DataSourceToIndexFieldMapping]?
+    end
+  end
+end

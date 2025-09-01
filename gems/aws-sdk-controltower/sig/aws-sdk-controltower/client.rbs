@@ -1,0 +1,350 @@
+module Aws::ControlTower
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ControlTower::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateLandingZoneResponse
+      include Smithy::Client::_Response[Types::CreateLandingZoneOutput]
+      def arn: () -> String?
+      def operation_identifier: () -> String?
+    end
+    def create_landing_zone: (
+      ?version: String,
+      ?manifest: Smithy::Schema::document,
+      ?tags: Hash[String, String]
+    ) -> _CreateLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLandingZoneResponse
+
+    interface _DeleteLandingZoneResponse
+      include Smithy::Client::_Response[Types::DeleteLandingZoneOutput]
+      def operation_identifier: () -> String?
+    end
+    def delete_landing_zone: (
+      ?landing_zone_identifier: String
+    ) -> _DeleteLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLandingZoneResponse
+
+    interface _DisableBaselineResponse
+      include Smithy::Client::_Response[Types::DisableBaselineOutput]
+      def operation_identifier: () -> String?
+    end
+    def disable_baseline: (
+      ?enabled_baseline_identifier: String
+    ) -> _DisableBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableBaselineResponse
+
+    interface _DisableControlResponse
+      include Smithy::Client::_Response[Types::DisableControlOutput]
+      def operation_identifier: () -> String?
+    end
+    def disable_control: (
+      ?control_identifier: String,
+      ?target_identifier: String
+    ) -> _DisableControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableControlResponse
+
+    interface _EnableBaselineResponse
+      include Smithy::Client::_Response[Types::EnableBaselineOutput]
+      def operation_identifier: () -> String?
+      def arn: () -> String?
+    end
+    def enable_baseline: (
+      ?baseline_version: String,
+      ?parameters: Array[
+        {
+          key: String,
+          value: Smithy::Schema::document
+        }
+      ],
+      ?baseline_identifier: String,
+      ?target_identifier: String,
+      ?tags: Hash[String, String]
+    ) -> _EnableBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableBaselineResponse
+
+    interface _EnableControlResponse
+      include Smithy::Client::_Response[Types::EnableControlOutput]
+      def operation_identifier: () -> String?
+      def arn: () -> String?
+    end
+    def enable_control: (
+      ?control_identifier: String,
+      ?target_identifier: String,
+      ?tags: Hash[String, String],
+      ?parameters: Array[
+        {
+          key: String,
+          value: Smithy::Schema::document
+        }
+      ]
+    ) -> _EnableControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableControlResponse
+
+    interface _GetBaselineResponse
+      include Smithy::Client::_Response[Types::GetBaselineOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def get_baseline: (
+      ?baseline_identifier: String
+    ) -> _GetBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBaselineResponse
+
+    interface _GetBaselineOperationResponse
+      include Smithy::Client::_Response[Types::GetBaselineOperationOutput]
+      def baseline_operation: () -> Types::BaselineOperation?
+    end
+    def get_baseline_operation: (
+      ?operation_identifier: String
+    ) -> _GetBaselineOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBaselineOperationResponse
+
+    interface _GetControlOperationResponse
+      include Smithy::Client::_Response[Types::GetControlOperationOutput]
+      def control_operation: () -> Types::ControlOperation?
+    end
+    def get_control_operation: (
+      ?operation_identifier: String
+    ) -> _GetControlOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetControlOperationResponse
+
+    interface _GetEnabledBaselineResponse
+      include Smithy::Client::_Response[Types::GetEnabledBaselineOutput]
+      def enabled_baseline_details: () -> Types::EnabledBaselineDetails?
+    end
+    def get_enabled_baseline: (
+      ?enabled_baseline_identifier: String
+    ) -> _GetEnabledBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnabledBaselineResponse
+
+    interface _GetEnabledControlResponse
+      include Smithy::Client::_Response[Types::GetEnabledControlOutput]
+      def enabled_control_details: () -> Types::EnabledControlDetails?
+    end
+    def get_enabled_control: (
+      ?enabled_control_identifier: String
+    ) -> _GetEnabledControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnabledControlResponse
+
+    interface _GetLandingZoneResponse
+      include Smithy::Client::_Response[Types::GetLandingZoneOutput]
+      def landing_zone: () -> Types::LandingZoneDetail?
+    end
+    def get_landing_zone: (
+      ?landing_zone_identifier: String
+    ) -> _GetLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLandingZoneResponse
+
+    interface _GetLandingZoneOperationResponse
+      include Smithy::Client::_Response[Types::GetLandingZoneOperationOutput]
+      def operation_details: () -> Types::LandingZoneOperationDetail?
+    end
+    def get_landing_zone_operation: (
+      ?operation_identifier: String
+    ) -> _GetLandingZoneOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLandingZoneOperationResponse
+
+    interface _ListBaselinesResponse
+      include Smithy::Client::_Response[Types::ListBaselinesOutput]
+      def baselines: () -> Array[Types::BaselineSummary]?
+      def next_token: () -> String?
+    end
+    def list_baselines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBaselinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBaselinesResponse
+
+    interface _ListControlOperationsResponse
+      include Smithy::Client::_Response[Types::ListControlOperationsOutput]
+      def control_operations: () -> Array[Types::ControlOperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_control_operations: (
+      ?filter: {
+        control_identifiers: Array[String],
+        target_identifiers: Array[String],
+        enabled_control_identifiers: Array[String],
+        statuses: Array[String],
+        control_operation_types: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListControlOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlOperationsResponse
+
+    interface _ListEnabledBaselinesResponse
+      include Smithy::Client::_Response[Types::ListEnabledBaselinesOutput]
+      def enabled_baselines: () -> Array[Types::EnabledBaselineSummary]?
+      def next_token: () -> String?
+    end
+    def list_enabled_baselines: (
+      ?filter: {
+        target_identifiers: Array[String],
+        baseline_identifiers: Array[String],
+        parent_identifiers: Array[String],
+        statuses: Array[String],
+        inheritance_drift_statuses: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_children: bool
+    ) -> _ListEnabledBaselinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnabledBaselinesResponse
+
+    interface _ListEnabledControlsResponse
+      include Smithy::Client::_Response[Types::ListEnabledControlsOutput]
+      def enabled_controls: () -> Array[Types::EnabledControlSummary]?
+      def next_token: () -> String?
+    end
+    def list_enabled_controls: (
+      ?target_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        control_identifiers: Array[String],
+        statuses: Array[String],
+        drift_statuses: Array[String]
+      }
+    ) -> _ListEnabledControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnabledControlsResponse
+
+    interface _ListLandingZoneOperationsResponse
+      include Smithy::Client::_Response[Types::ListLandingZoneOperationsOutput]
+      def landing_zone_operations: () -> Array[Types::LandingZoneOperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_landing_zone_operations: (
+      ?filter: {
+        types: Array[String],
+        statuses: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLandingZoneOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLandingZoneOperationsResponse
+
+    interface _ListLandingZonesResponse
+      include Smithy::Client::_Response[Types::ListLandingZonesOutput]
+      def landing_zones: () -> Array[Types::LandingZoneSummary]?
+      def next_token: () -> String?
+    end
+    def list_landing_zones: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLandingZonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLandingZonesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ResetEnabledBaselineResponse
+      include Smithy::Client::_Response[Types::ResetEnabledBaselineOutput]
+      def operation_identifier: () -> String?
+    end
+    def reset_enabled_baseline: (
+      ?enabled_baseline_identifier: String
+    ) -> _ResetEnabledBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetEnabledBaselineResponse
+
+    interface _ResetEnabledControlResponse
+      include Smithy::Client::_Response[Types::ResetEnabledControlOutput]
+      def operation_identifier: () -> String?
+    end
+    def reset_enabled_control: (
+      ?enabled_control_identifier: String
+    ) -> _ResetEnabledControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetEnabledControlResponse
+
+    interface _ResetLandingZoneResponse
+      include Smithy::Client::_Response[Types::ResetLandingZoneOutput]
+      def operation_identifier: () -> String?
+    end
+    def reset_landing_zone: (
+      ?landing_zone_identifier: String
+    ) -> _ResetLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetLandingZoneResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEnabledBaselineResponse
+      include Smithy::Client::_Response[Types::UpdateEnabledBaselineOutput]
+      def operation_identifier: () -> String?
+    end
+    def update_enabled_baseline: (
+      ?baseline_version: String,
+      ?parameters: Array[
+        {
+          key: String,
+          value: Smithy::Schema::document
+        }
+      ],
+      ?enabled_baseline_identifier: String
+    ) -> _UpdateEnabledBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnabledBaselineResponse
+
+    interface _UpdateEnabledControlResponse
+      include Smithy::Client::_Response[Types::UpdateEnabledControlOutput]
+      def operation_identifier: () -> String?
+    end
+    def update_enabled_control: (
+      ?parameters: Array[
+        {
+          key: String,
+          value: Smithy::Schema::document
+        }
+      ],
+      ?enabled_control_identifier: String
+    ) -> _UpdateEnabledControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnabledControlResponse
+
+    interface _UpdateLandingZoneResponse
+      include Smithy::Client::_Response[Types::UpdateLandingZoneOutput]
+      def operation_identifier: () -> String?
+    end
+    def update_landing_zone: (
+      ?version: String,
+      ?manifest: Smithy::Schema::document,
+      ?landing_zone_identifier: String
+    ) -> _UpdateLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLandingZoneResponse
+  end
+end

@@ -1,0 +1,284 @@
+module Aws::ConnectCampaigns
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ConnectCampaigns::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCampaignResponse
+      include Smithy::Client::_Response[Types::CreateCampaignOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_campaign: (
+      ?name: String,
+      ?connect_instance_id: String,
+      ?dialer_config: {
+        progressive_dialer_config: {
+          bandwidth_allocation: Float,
+          dialing_capacity: Float
+        },
+        predictive_dialer_config: {
+          bandwidth_allocation: untyped,
+          dialing_capacity: untyped
+        },
+        agentless_dialer_config: {
+          dialing_capacity: untyped
+        }
+      },
+      ?outbound_call_config: {
+        connect_contact_flow_id: String,
+        connect_source_phone_number: String,
+        connect_queue_id: String,
+        answer_machine_detection_config: {
+          enable_answer_machine_detection: bool,
+          await_answer_machine_prompt: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCampaignResponse
+
+    interface _DeleteCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_campaign: (
+      ?id: String
+    ) -> _DeleteCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignResponse
+
+    interface _DeleteConnectInstanceConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connect_instance_config: (
+      ?connect_instance_id: String
+    ) -> _DeleteConnectInstanceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectInstanceConfigResponse
+
+    interface _DeleteInstanceOnboardingJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_instance_onboarding_job: (
+      ?connect_instance_id: String
+    ) -> _DeleteInstanceOnboardingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceOnboardingJobResponse
+
+    interface _DescribeCampaignResponse
+      include Smithy::Client::_Response[Types::DescribeCampaignOutput]
+      def campaign: () -> Types::Campaign?
+    end
+    def describe_campaign: (
+      ?id: String
+    ) -> _DescribeCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCampaignResponse
+
+    interface _GetCampaignStateResponse
+      include Smithy::Client::_Response[Types::GetCampaignStateOutput]
+      def state: () -> String?
+    end
+    def get_campaign_state: (
+      ?id: String
+    ) -> _GetCampaignStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignStateResponse
+
+    interface _GetCampaignStateBatchResponse
+      include Smithy::Client::_Response[Types::GetCampaignStateBatchOutput]
+      def successful_requests: () -> Array[Types::SuccessfulCampaignStateResponse]?
+      def failed_requests: () -> Array[Types::FailedCampaignStateResponse]?
+    end
+    def get_campaign_state_batch: (
+      ?campaign_ids: Array[String]
+    ) -> _GetCampaignStateBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignStateBatchResponse
+
+    interface _GetConnectInstanceConfigResponse
+      include Smithy::Client::_Response[Types::GetConnectInstanceConfigOutput]
+      def connect_instance_config: () -> Types::InstanceConfig?
+    end
+    def get_connect_instance_config: (
+      ?connect_instance_id: String
+    ) -> _GetConnectInstanceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectInstanceConfigResponse
+
+    interface _GetInstanceOnboardingJobStatusResponse
+      include Smithy::Client::_Response[Types::GetInstanceOnboardingJobStatusOutput]
+      def connect_instance_onboarding_job_status: () -> Types::InstanceOnboardingJobStatus?
+    end
+    def get_instance_onboarding_job_status: (
+      ?connect_instance_id: String
+    ) -> _GetInstanceOnboardingJobStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceOnboardingJobStatusResponse
+
+    interface _ListCampaignsResponse
+      include Smithy::Client::_Response[Types::ListCampaignsOutput]
+      def next_token: () -> String?
+      def campaign_summary_list: () -> Array[Types::CampaignSummary]?
+    end
+    def list_campaigns: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        instance_id_filter: {
+          value: String,
+          operator: String
+        }
+      }
+    ) -> _ListCampaignsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCampaignsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PauseCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def pause_campaign: (
+      ?id: String
+    ) -> _PauseCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PauseCampaignResponse
+
+    interface _PutDialRequestBatchResponse
+      include Smithy::Client::_Response[Types::PutDialRequestBatchOutput]
+      def successful_requests: () -> Array[Types::SuccessfulRequest]?
+      def failed_requests: () -> Array[Types::FailedRequest]?
+    end
+    def put_dial_request_batch: (
+      ?id: String,
+      ?dial_requests: Array[
+        {
+          client_token: String,
+          phone_number: String,
+          expiration_time: Time,
+          attributes: Hash[String, String]
+        }
+      ]
+    ) -> _PutDialRequestBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDialRequestBatchResponse
+
+    interface _ResumeCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def resume_campaign: (
+      ?id: String
+    ) -> _ResumeCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeCampaignResponse
+
+    interface _StartCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_campaign: (
+      ?id: String
+    ) -> _StartCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCampaignResponse
+
+    interface _StartInstanceOnboardingJobResponse
+      include Smithy::Client::_Response[Types::StartInstanceOnboardingJobOutput]
+      def connect_instance_onboarding_job_status: () -> Types::InstanceOnboardingJobStatus?
+    end
+    def start_instance_onboarding_job: (
+      ?connect_instance_id: String,
+      ?encryption_config: {
+        enabled: bool,
+        encryption_type: String,
+        key_arn: String
+      }
+    ) -> _StartInstanceOnboardingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInstanceOnboardingJobResponse
+
+    interface _StopCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_campaign: (
+      ?id: String
+    ) -> _StopCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCampaignResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCampaignDialerConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_campaign_dialer_config: (
+      ?id: String,
+      ?dialer_config: {
+        progressive_dialer_config: {
+          bandwidth_allocation: Float,
+          dialing_capacity: Float
+        },
+        predictive_dialer_config: {
+          bandwidth_allocation: untyped,
+          dialing_capacity: untyped
+        },
+        agentless_dialer_config: {
+          dialing_capacity: untyped
+        }
+      }
+    ) -> _UpdateCampaignDialerConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignDialerConfigResponse
+
+    interface _UpdateCampaignNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_campaign_name: (
+      ?id: String,
+      ?name: String
+    ) -> _UpdateCampaignNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignNameResponse
+
+    interface _UpdateCampaignOutboundCallConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_campaign_outbound_call_config: (
+      ?id: String,
+      ?connect_contact_flow_id: String,
+      ?connect_source_phone_number: String,
+      ?answer_machine_detection_config: {
+        enable_answer_machine_detection: bool,
+        await_answer_machine_prompt: untyped
+      }
+    ) -> _UpdateCampaignOutboundCallConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignOutboundCallConfigResponse
+  end
+end

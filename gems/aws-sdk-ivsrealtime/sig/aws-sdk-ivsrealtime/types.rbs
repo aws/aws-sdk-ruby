@@ -1,0 +1,2008 @@
+module Aws::IVSRealTime
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class AutoParticipantRecordingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configuration_arn: String,
+        ?media_types: Array[String],
+        ?thumbnail_configuration: Types::ParticipantThumbnailConfiguration,
+        ?recording_reconnect_window_seconds: Integer,
+        ?hls_configuration: Types::ParticipantRecordingHlsConfiguration,
+        ?record_participant_replicas: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configuration_arn: String?
+      attr_accessor media_types: Array[String]?
+      attr_accessor thumbnail_configuration: Types::ParticipantThumbnailConfiguration?
+      attr_accessor recording_reconnect_window_seconds: Integer?
+      attr_accessor hls_configuration: Types::ParticipantRecordingHlsConfiguration?
+      attr_accessor record_participant_replicas: bool?
+    end
+
+    class ChannelDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?encoder_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor encoder_configuration_arn: String?
+    end
+
+    class Composition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stage_arn: String,
+        ?state: String,
+        ?layout: Types::LayoutConfiguration,
+        ?destinations: Array[Types::Destination],
+        ?tags: Hash[String, String],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stage_arn: String?
+      attr_accessor state: String?
+      attr_accessor layout: Types::LayoutConfiguration?
+      attr_accessor destinations: Array[Types::Destination]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class CompositionRecordingHlsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_segment_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_segment_duration_seconds: Integer?
+    end
+
+    class CompositionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stage_arn: String,
+        ?destinations: Array[Types::DestinationSummary],
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stage_arn: String?
+      attr_accessor destinations: Array[Types::DestinationSummary]?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class CompositionThumbnailConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_interval_seconds: Integer,
+        ?storage: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_interval_seconds: Integer?
+      attr_accessor storage: Array[String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class CreateEncoderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?video: Types::Video,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor video: Types::Video?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEncoderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoder_configuration: Types::EncoderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoder_configuration: Types::EncoderConfiguration?
+    end
+
+    class CreateIngestConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stage_arn: String,
+        ?user_id: String,
+        ?attributes: Hash[String, String],
+        ?ingest_protocol: String,
+        ?insecure_ingest: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stage_arn: String?
+      attr_accessor user_id: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor ingest_protocol: String?
+      attr_accessor insecure_ingest: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIngestConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingest_configuration: Types::IngestConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingest_configuration: Types::IngestConfiguration?
+    end
+
+    class CreateParticipantTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?duration: Integer,
+        ?user_id: String,
+        ?attributes: Hash[String, String],
+        ?capabilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor duration: Integer?
+      attr_accessor user_id: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor capabilities: Array[String]?
+    end
+
+    class CreateParticipantTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant_token: Types::ParticipantToken,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant_token: Types::ParticipantToken?
+    end
+
+    class CreateStageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?participant_token_configurations: Array[Types::ParticipantTokenConfiguration],
+        ?tags: Hash[String, String],
+        ?auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor participant_token_configurations: Array[Types::ParticipantTokenConfiguration]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration?
+    end
+
+    class CreateStageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: Types::Stage,
+        ?participant_tokens: Array[Types::ParticipantToken],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: Types::Stage?
+      attr_accessor participant_tokens: Array[Types::ParticipantToken]?
+    end
+
+    class CreateStorageConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?s3: Types::S3StorageConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor s3: Types::S3StorageConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateStorageConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configuration: Types::StorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configuration: Types::StorageConfiguration?
+    end
+
+    class DeleteEncoderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteEncoderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIngestConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor force: bool?
+    end
+
+    class DeleteIngestConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePublicKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteStageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStorageConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteStorageConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?configuration: Types::DestinationConfiguration,
+        ?detail: Types::DestinationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor configuration: Types::DestinationConfiguration?
+      attr_accessor detail: Types::DestinationDetail?
+    end
+
+    class DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?channel: Types::ChannelDestinationConfiguration,
+        ?s3: Types::S3DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor channel: Types::ChannelDestinationConfiguration?
+      attr_accessor s3: Types::S3DestinationConfiguration?
+    end
+
+    class DestinationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Detail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Detail?
+    end
+
+    class DestinationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class DisconnectParticipantInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?participant_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DisconnectParticipantOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EncoderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?video: Types::Video,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor video: Types::Video?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class EncoderConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?participant_id: String,
+        ?event_time: Time,
+        ?remote_participant_id: String,
+        ?error_code: String,
+        ?destination_stage_arn: String,
+        ?destination_session_id: String,
+        ?replica: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor participant_id: String?
+      attr_accessor event_time: Time?
+      attr_accessor remote_participant_id: String?
+      attr_accessor error_code: String?
+      attr_accessor destination_stage_arn: String?
+      attr_accessor destination_session_id: String?
+      attr_accessor replica: bool?
+    end
+
+    module EventErrorCode
+      INSUFFICIENT_CAPABILITIES: String
+      QUOTA_EXCEEDED: String
+      PUBLISHER_NOT_FOUND: String
+      BITRATE_EXCEEDED: String
+      RESOLUTION_EXCEEDED: String
+      STREAM_DURATION_EXCEEDED: String
+      INVALID_AUDIO_CODEC: String
+      INVALID_VIDEO_CODEC: String
+      INVALID_PROTOCOL: String
+      INVALID_STREAM_KEY: String
+      REUSE_OF_STREAM_KEY: String
+      B_FRAME_PRESENT: String
+      INVALID_INPUT: String
+      INTERNAL_SERVER_EXCEPTION: String
+    end
+
+    class GetCompositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetCompositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composition: Types::Composition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composition: Types::Composition?
+    end
+
+    class GetEncoderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetEncoderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoder_configuration: Types::EncoderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoder_configuration: Types::EncoderConfiguration?
+    end
+
+    class GetIngestConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetIngestConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingest_configuration: Types::IngestConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingest_configuration: Types::IngestConfiguration?
+    end
+
+    class GetParticipantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?session_id: String,
+        ?participant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor participant_id: String?
+    end
+
+    class GetParticipantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant: Types::Participant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant: Types::Participant?
+    end
+
+    class GetPublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPublicKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_key: Types::PublicKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_key: Types::PublicKey?
+    end
+
+    class GetStageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetStageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: Types::Stage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: Types::Stage?
+    end
+
+    class GetStageSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetStageSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_session: Types::StageSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_session: Types::StageSession?
+    end
+
+    class GetStorageConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetStorageConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configuration: Types::StorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configuration: Types::StorageConfiguration?
+    end
+
+    class GridConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_participant_attribute: String,
+        ?omit_stopped_video: bool,
+        ?video_aspect_ratio: String,
+        ?video_fill_mode: String,
+        ?grid_gap: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_participant_attribute: String?
+      attr_accessor omit_stopped_video: bool?
+      attr_accessor video_aspect_ratio: String?
+      attr_accessor video_fill_mode: String?
+      attr_accessor grid_gap: Integer?
+    end
+
+    class ImportPublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_key_material: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_key_material: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ImportPublicKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_key: Types::PublicKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_key: Types::PublicKey?
+    end
+
+    class IngestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?ingest_protocol: String,
+        ?stream_key: String,
+        ?stage_arn: String,
+        ?participant_id: String,
+        ?state: String,
+        ?user_id: String,
+        ?attributes: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor ingest_protocol: String?
+      attr_accessor stream_key: String?
+      attr_accessor stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor state: String?
+      attr_accessor user_id: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class IngestConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?ingest_protocol: String,
+        ?stage_arn: String,
+        ?participant_id: String,
+        ?state: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor ingest_protocol: String?
+      attr_accessor stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor state: String?
+      attr_accessor user_id: String?
+    end
+
+    module IngestProtocol
+      RTMP: String
+      RTMPS: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class LayoutConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grid: Types::GridConfiguration,
+        ?pip: Types::PipConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grid: Types::GridConfiguration?
+      attr_accessor pip: Types::PipConfiguration?
+    end
+
+    class ListCompositionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_by_stage_arn: String,
+        ?filter_by_encoder_configuration_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_by_stage_arn: String?
+      attr_accessor filter_by_encoder_configuration_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCompositionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compositions: Array[Types::CompositionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compositions: Array[Types::CompositionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEncoderConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEncoderConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoder_configurations: Array[Types::EncoderConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoder_configurations: Array[Types::EncoderConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngestConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_by_stage_arn: String,
+        ?filter_by_state: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_by_stage_arn: String?
+      attr_accessor filter_by_state: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIngestConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingest_configurations: Array[Types::IngestConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingest_configurations: Array[Types::IngestConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListParticipantEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?session_id: String,
+        ?participant_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor participant_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListParticipantEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_token: String?
+    end
+
+    class ListParticipantReplicasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_stage_arn: String,
+        ?participant_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListParticipantReplicasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replicas: Array[Types::ParticipantReplica],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replicas: Array[Types::ParticipantReplica]?
+      attr_accessor next_token: String?
+    end
+
+    class ListParticipantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?session_id: String,
+        ?filter_by_user_id: String,
+        ?filter_by_published: bool,
+        ?filter_by_state: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter_by_recording_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor filter_by_user_id: String?
+      attr_accessor filter_by_published: bool?
+      attr_accessor filter_by_state: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter_by_recording_state: String?
+    end
+
+    class ListParticipantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participants: Array[Types::ParticipantSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participants: Array[Types::ParticipantSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPublicKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPublicKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_keys: Array[Types::PublicKeySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_keys: Array[Types::PublicKeySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStageSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStageSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_sessions: Array[Types::StageSessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_sessions: Array[Types::StageSessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Array[Types::StageSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Array[Types::StageSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStorageConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStorageConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configurations: Array[Types::StorageConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configurations: Array[Types::StorageConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Participant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant_id: String,
+        ?user_id: String,
+        ?state: String,
+        ?first_join_time: Time,
+        ?attributes: Hash[String, String],
+        ?published: bool,
+        ?isp_name: String,
+        ?os_name: String,
+        ?os_version: String,
+        ?browser_name: String,
+        ?browser_version: String,
+        ?sdk_version: String,
+        ?recording_s3_bucket_name: String,
+        ?recording_s3_prefix: String,
+        ?recording_state: String,
+        ?protocol: String,
+        ?replication_type: String,
+        ?replication_state: String,
+        ?source_stage_arn: String,
+        ?source_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant_id: String?
+      attr_accessor user_id: String?
+      attr_accessor state: String?
+      attr_accessor first_join_time: Time?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor published: bool?
+      attr_accessor isp_name: String?
+      attr_accessor os_name: String?
+      attr_accessor os_version: String?
+      attr_accessor browser_name: String?
+      attr_accessor browser_version: String?
+      attr_accessor sdk_version: String?
+      attr_accessor recording_s3_bucket_name: String?
+      attr_accessor recording_s3_prefix: String?
+      attr_accessor recording_state: String?
+      attr_accessor protocol: String?
+      attr_accessor replication_type: String?
+      attr_accessor replication_state: String?
+      attr_accessor source_stage_arn: String?
+      attr_accessor source_session_id: String?
+    end
+
+    module ParticipantProtocol
+      UNKNOWN: String
+      WHIP: String
+      RTMP: String
+      RTMPS: String
+    end
+
+    class ParticipantRecordingHlsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_segment_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_segment_duration_seconds: Integer?
+    end
+
+    module ParticipantRecordingMediaType
+      AUDIO_VIDEO: String
+      AUDIO_ONLY: String
+      NONE: String
+    end
+
+    class ParticipantReplica
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_stage_arn: String,
+        ?participant_id: String,
+        ?source_session_id: String,
+        ?destination_stage_arn: String,
+        ?destination_session_id: String,
+        ?replication_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor source_session_id: String?
+      attr_accessor destination_stage_arn: String?
+      attr_accessor destination_session_id: String?
+      attr_accessor replication_state: String?
+    end
+
+    class ParticipantSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant_id: String,
+        ?user_id: String,
+        ?state: String,
+        ?first_join_time: Time,
+        ?published: bool,
+        ?recording_state: String,
+        ?replication_type: String,
+        ?replication_state: String,
+        ?source_stage_arn: String,
+        ?source_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant_id: String?
+      attr_accessor user_id: String?
+      attr_accessor state: String?
+      attr_accessor first_join_time: Time?
+      attr_accessor published: bool?
+      attr_accessor recording_state: String?
+      attr_accessor replication_type: String?
+      attr_accessor replication_state: String?
+      attr_accessor source_stage_arn: String?
+      attr_accessor source_session_id: String?
+    end
+
+    class ParticipantThumbnailConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_interval_seconds: Integer,
+        ?storage: Array[String],
+        ?recording_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_interval_seconds: Integer?
+      attr_accessor storage: Array[String]?
+      attr_accessor recording_mode: String?
+    end
+
+    class ParticipantToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant_id: String,
+        ?token: String,
+        ?user_id: String,
+        ?attributes: Hash[String, String],
+        ?duration: Integer,
+        ?capabilities: Array[String],
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant_id: String?
+      attr_accessor token: String?
+      attr_accessor user_id: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor duration: Integer?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor expiration_time: Time?
+    end
+
+    class ParticipantTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?user_id: String,
+        ?attributes: Hash[String, String],
+        ?capabilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor user_id: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor capabilities: Array[String]?
+    end
+
+    class PendingVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    module PipBehavior
+      STATIC: String
+      DYNAMIC: String
+    end
+
+    class PipConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featured_participant_attribute: String,
+        ?omit_stopped_video: bool,
+        ?video_fill_mode: String,
+        ?grid_gap: Integer,
+        ?pip_participant_attribute: String,
+        ?pip_behavior: String,
+        ?pip_offset: Integer,
+        ?pip_position: String,
+        ?pip_width: Integer,
+        ?pip_height: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featured_participant_attribute: String?
+      attr_accessor omit_stopped_video: bool?
+      attr_accessor video_fill_mode: String?
+      attr_accessor grid_gap: Integer?
+      attr_accessor pip_participant_attribute: String?
+      attr_accessor pip_behavior: String?
+      attr_accessor pip_offset: Integer?
+      attr_accessor pip_position: String?
+      attr_accessor pip_width: Integer?
+      attr_accessor pip_height: Integer?
+    end
+
+    module PipPosition
+      TOP_LEFT: String
+      TOP_RIGHT: String
+      BOTTOM_LEFT: String
+      BOTTOM_RIGHT: String
+    end
+
+    class PublicKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?public_key_material: String,
+        ?fingerprint: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor public_key_material: String?
+      attr_accessor fingerprint: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PublicKeySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RecordingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hls_configuration: Types::CompositionRecordingHlsConfiguration,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hls_configuration: Types::CompositionRecordingHlsConfiguration?
+      attr_accessor format: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configuration_arn: String,
+        ?encoder_configuration_arns: Array[String],
+        ?recording_configuration: Types::RecordingConfiguration,
+        ?thumbnail_configurations: Array[Types::CompositionThumbnailConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configuration_arn: String?
+      attr_accessor encoder_configuration_arns: Array[String]?
+      attr_accessor recording_configuration: Types::RecordingConfiguration?
+      attr_accessor thumbnail_configurations: Array[Types::CompositionThumbnailConfiguration]?
+    end
+
+    class S3Detail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_prefix: String?
+    end
+
+    class S3StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class Stage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?active_session_id: String,
+        ?tags: Hash[String, String],
+        ?auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration,
+        ?endpoints: Types::StageEndpoints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor active_session_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration?
+      attr_accessor endpoints: Types::StageEndpoints?
+    end
+
+    class StageEndpoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: String,
+        ?whip: String,
+        ?rtmp: String,
+        ?rtmps: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: String?
+      attr_accessor whip: String?
+      attr_accessor rtmp: String?
+      attr_accessor rtmps: String?
+    end
+
+    class StageSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class StageSessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class StageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?active_session_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor active_session_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartCompositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_arn: String,
+        ?idempotency_token: String,
+        ?layout: Types::LayoutConfiguration,
+        ?destinations: Array[Types::DestinationConfiguration],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_arn: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor layout: Types::LayoutConfiguration?
+      attr_accessor destinations: Array[Types::DestinationConfiguration]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartCompositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composition: Types::Composition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composition: Types::Composition?
+    end
+
+    class StartParticipantReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_stage_arn: String,
+        ?destination_stage_arn: String,
+        ?participant_id: String,
+        ?reconnect_window_seconds: Integer,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_stage_arn: String?
+      attr_accessor destination_stage_arn: String?
+      attr_accessor participant_id: String?
+      attr_accessor reconnect_window_seconds: Integer?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class StartParticipantReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+    end
+
+    class StopCompositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StopCompositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopParticipantReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_stage_arn: String,
+        ?destination_stage_arn: String,
+        ?participant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_stage_arn: String?
+      attr_accessor destination_stage_arn: String?
+      attr_accessor participant_id: String?
+    end
+
+    class StopParticipantReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+    end
+
+    class StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?s3: Types::S3StorageConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor s3: Types::S3StorageConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StorageConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?s3: Types::S3StorageConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor s3: Types::S3StorageConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ThumbnailRecordingMode
+      INTERVAL: String
+      DISABLED: String
+    end
+
+    module ThumbnailStorageType
+      SEQUENTIAL: String
+      LATEST: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIngestConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stage_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stage_arn: String?
+    end
+
+    class UpdateIngestConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingest_configuration: Types::IngestConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingest_configuration: Types::IngestConfiguration?
+    end
+
+    class UpdateStageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration?
+    end
+
+    class UpdateStageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: Types::Stage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: Types::Stage?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class Video
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?width: Integer,
+        ?height: Integer,
+        ?framerate: Float,
+        ?bitrate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+      attr_accessor framerate: Float?
+      attr_accessor bitrate: Integer?
+    end
+
+    module VideoAspectRatio
+      AUTO: String
+      VIDEO: String
+      SQUARE: String
+      PORTRAIT: String
+    end
+
+    module VideoFillMode
+      FILL: String
+      COVER: String
+      CONTAIN: String
+    end
+  end
+end

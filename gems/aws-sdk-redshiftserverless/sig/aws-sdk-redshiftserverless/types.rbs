@@ -1,0 +1,2498 @@
+module Aws::RedshiftServerless
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class Association
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_domain_certificate_arn: String,
+        ?custom_domain_certificate_expiry_time: Time,
+        ?custom_domain_name: String,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_domain_certificate_arn: String?
+      attr_accessor custom_domain_certificate_expiry_time: Time?
+      attr_accessor custom_domain_name: String?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ConfigParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_key: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_key: String?
+      attr_accessor parameter_value: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConvertRecoveryPointToSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_id: String,
+        ?snapshot_name: String,
+        ?retention_period: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_id: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor retention_period: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ConvertRecoveryPointToSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class CreateCustomDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+        ?custom_domain_name: String,
+        ?custom_domain_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+    end
+
+    class CreateCustomDomainAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_domain_name: String,
+        ?workgroup_name: String,
+        ?custom_domain_certificate_arn: String,
+        ?custom_domain_certificate_expiry_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_domain_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+      attr_accessor custom_domain_certificate_expiry_time: Time?
+    end
+
+    class CreateEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?subnet_ids: Array[String],
+        ?workgroup_name: String,
+        ?vpc_security_group_ids: Array[String],
+        ?owner_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor workgroup_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor owner_account: String?
+    end
+
+    class CreateEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::EndpointAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::EndpointAccess?
+    end
+
+    class CreateNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?admin_username: String,
+        ?admin_user_password: String,
+        ?db_name: String,
+        ?kms_key_id: String,
+        ?default_iam_role_arn: String,
+        ?iam_roles: Array[String],
+        ?log_exports: Array[String],
+        ?tags: Array[Types::Tag],
+        ?manage_admin_password: bool,
+        ?admin_password_secret_kms_key_id: String,
+        ?redshift_idc_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor admin_username: String?
+      attr_accessor admin_user_password: String?
+      attr_accessor db_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor default_iam_role_arn: String?
+      attr_accessor iam_roles: Array[String]?
+      attr_accessor log_exports: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor manage_admin_password: bool?
+      attr_accessor admin_password_secret_kms_key_id: String?
+      attr_accessor redshift_idc_application_arn: String?
+    end
+
+    class CreateNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class CreateReservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Integer,
+        ?offering_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Integer?
+      attr_accessor offering_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateReservationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation: Types::Reservation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation: Types::Reservation?
+    end
+
+    class CreateScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?target_action: Types::TargetAction,
+        ?schedule: Types::Schedule,
+        ?role_arn: String,
+        ?namespace_name: String,
+        ?enabled: bool,
+        ?scheduled_action_description: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor target_action: Types::TargetAction?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor role_arn: String?
+      attr_accessor namespace_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor scheduled_action_description: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class CreateScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action: Types::ScheduledActionResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action: Types::ScheduledActionResponse?
+    end
+
+    class CreateSnapshotCopyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?destination_region: String,
+        ?snapshot_retention_period: Integer,
+        ?destination_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor destination_region: String?
+      attr_accessor snapshot_retention_period: Integer?
+      attr_accessor destination_kms_key_id: String?
+    end
+
+    class CreateSnapshotCopyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration: Types::SnapshotCopyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration?
+    end
+
+    class CreateSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?snapshot_name: String,
+        ?retention_period: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor retention_period: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class CreateSnapshotScheduleActionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?snapshot_name_prefix: String,
+        ?retention_period: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor snapshot_name_prefix: String?
+      attr_accessor retention_period: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateUsageLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?usage_type: String,
+        ?amount: Integer,
+        ?period: String,
+        ?breach_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor usage_type: String?
+      attr_accessor amount: Integer?
+      attr_accessor period: String?
+      attr_accessor breach_action: String?
+    end
+
+    class CreateUsageLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit: Types::UsageLimit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit: Types::UsageLimit?
+    end
+
+    class CreateWorkgroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+        ?namespace_name: String,
+        ?base_capacity: Integer,
+        ?enhanced_vpc_routing: bool,
+        ?config_parameters: Array[Types::ConfigParameter],
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?tags: Array[Types::Tag],
+        ?port: Integer,
+        ?max_capacity: Integer,
+        ?price_performance_target: Types::PerformanceTarget,
+        ?ip_address_type: String,
+        ?track_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+      attr_accessor namespace_name: String?
+      attr_accessor base_capacity: Integer?
+      attr_accessor enhanced_vpc_routing: bool?
+      attr_accessor config_parameters: Array[Types::ConfigParameter]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor port: Integer?
+      attr_accessor max_capacity: Integer?
+      attr_accessor price_performance_target: Types::PerformanceTarget?
+      attr_accessor ip_address_type: String?
+      attr_accessor track_name: String?
+    end
+
+    class CreateWorkgroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup: Types::Workgroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup: Types::Workgroup?
+    end
+
+    class DeleteCustomDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+        ?custom_domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_name: String?
+    end
+
+    class DeleteCustomDomainAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+    end
+
+    class DeleteEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::EndpointAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::EndpointAccess?
+    end
+
+    class DeleteNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?final_snapshot_name: String,
+        ?final_snapshot_retention_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor final_snapshot_name: String?
+      attr_accessor final_snapshot_retention_period: Integer?
+    end
+
+    class DeleteNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+    end
+
+    class DeleteScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action: Types::ScheduledActionResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action: Types::ScheduledActionResponse?
+    end
+
+    class DeleteSnapshotCopyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration_id: String?
+    end
+
+    class DeleteSnapshotCopyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration: Types::SnapshotCopyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration?
+    end
+
+    class DeleteSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+    end
+
+    class DeleteSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class DeleteUsageLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit_id: String?
+    end
+
+    class DeleteUsageLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit: Types::UsageLimit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit: Types::UsageLimit?
+    end
+
+    class DeleteWorkgroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+    end
+
+    class DeleteWorkgroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup: Types::Workgroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup: Types::Workgroup?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?port: Integer,
+        ?vpc_endpoints: Array[Types::VpcEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor port: Integer?
+      attr_accessor vpc_endpoints: Array[Types::VpcEndpoint]?
+    end
+
+    class EndpointAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?endpoint_status: String,
+        ?workgroup_name: String,
+        ?endpoint_create_time: Time,
+        ?port: Integer,
+        ?address: String,
+        ?subnet_ids: Array[String],
+        ?vpc_security_groups: Array[Types::VpcSecurityGroupMembership],
+        ?vpc_endpoint: Types::VpcEndpoint,
+        ?endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor endpoint_status: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor endpoint_create_time: Time?
+      attr_accessor port: Integer?
+      attr_accessor address: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_security_groups: Array[Types::VpcSecurityGroupMembership]?
+      attr_accessor vpc_endpoint: Types::VpcEndpoint?
+      attr_accessor endpoint_arn: String?
+    end
+
+    class GetCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_name: String,
+        ?duration_seconds: Integer,
+        ?workgroup_name: String,
+        ?custom_domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_name: String?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_name: String?
+    end
+
+    class GetCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_user: String,
+        ?db_password: String,
+        ?expiration: Time,
+        ?next_refresh_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_user: String?
+      attr_accessor db_password: String?
+      attr_accessor expiration: Time?
+      attr_accessor next_refresh_time: Time?
+    end
+
+    class GetCustomDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_domain_name: String,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_domain_name: String?
+      attr_accessor workgroup_name: String?
+    end
+
+    class GetCustomDomainAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_domain_name: String,
+        ?workgroup_name: String,
+        ?custom_domain_certificate_arn: String,
+        ?custom_domain_certificate_expiry_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_domain_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+      attr_accessor custom_domain_certificate_expiry_time: Time?
+    end
+
+    class GetEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+    end
+
+    class GetEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::EndpointAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::EndpointAccess?
+    end
+
+    class GetNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+    end
+
+    class GetNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class GetRecoveryPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_id: String?
+    end
+
+    class GetRecoveryPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point: Types::RecoveryPoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point: Types::RecoveryPoint?
+    end
+
+    class GetReservationOfferingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_id: String?
+    end
+
+    class GetReservationOfferingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_offering: Types::ReservationOffering,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_offering: Types::ReservationOffering?
+    end
+
+    class GetReservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_id: String?
+    end
+
+    class GetReservationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation: Types::Reservation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation: Types::Reservation?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+    end
+
+    class GetScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+    end
+
+    class GetScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action: Types::ScheduledActionResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action: Types::ScheduledActionResponse?
+    end
+
+    class GetSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+        ?owner_account: String,
+        ?snapshot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+      attr_accessor owner_account: String?
+      attr_accessor snapshot_arn: String?
+    end
+
+    class GetSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class GetTableRestoreStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_restore_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_restore_request_id: String?
+    end
+
+    class GetTableRestoreStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_restore_status: Types::TableRestoreStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_restore_status: Types::TableRestoreStatus?
+    end
+
+    class GetTrackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?track_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor track_name: String?
+    end
+
+    class GetTrackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?track: Types::ServerlessTrack,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor track: Types::ServerlessTrack?
+    end
+
+    class GetUsageLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit_id: String?
+    end
+
+    class GetUsageLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit: Types::UsageLimit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit: Types::UsageLimit?
+    end
+
+    class GetWorkgroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+    end
+
+    class GetWorkgroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup: Types::Workgroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup: Types::Workgroup?
+    end
+
+    class InsufficientCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPaginationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Ipv6CidrBlockNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCustomDomainAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?custom_domain_name: String,
+        ?custom_domain_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor custom_domain_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+    end
+
+    class ListCustomDomainAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?associations: Array[Types::Association],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor associations: Array[Types::Association]?
+    end
+
+    class ListEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workgroup_name: String,
+        ?vpc_id: String,
+        ?owner_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workgroup_name: String?
+      attr_accessor vpc_id: String?
+      attr_accessor owner_account: String?
+    end
+
+    class ListEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?endpoints: Array[Types::EndpointAccess],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor endpoints: Array[Types::EndpointAccess]?
+    end
+
+    class ListManagedWorkgroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListManagedWorkgroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_workgroups: Array[Types::ManagedWorkgroupListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_workgroups: Array[Types::ManagedWorkgroupListItem]?
+    end
+
+    class ListNamespacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListNamespacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?namespaces: Array[Types::Namespace],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor namespaces: Array[Types::Namespace]?
+    end
+
+    class ListRecoveryPointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?namespace_name: String,
+        ?namespace_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor namespace_name: String?
+      attr_accessor namespace_arn: String?
+    end
+
+    class ListRecoveryPointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_points: Array[Types::RecoveryPoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_points: Array[Types::RecoveryPoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReservationOfferingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReservationOfferingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_offerings_list: Array[Types::ReservationOffering],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_offerings_list: Array[Types::ReservationOffering]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReservationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReservationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservations_list: Array[Types::Reservation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservations_list: Array[Types::Reservation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor namespace_name: String?
+    end
+
+    class ListScheduledActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?scheduled_actions: Array[Types::ScheduledActionAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor scheduled_actions: Array[Types::ScheduledActionAssociation]?
+    end
+
+    class ListSnapshotCopyConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSnapshotCopyConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshot_copy_configurations: Array[Types::SnapshotCopyConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshot_copy_configurations: Array[Types::SnapshotCopyConfiguration]?
+    end
+
+    class ListSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?namespace_name: String,
+        ?namespace_arn: String,
+        ?owner_account: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor namespace_name: String?
+      attr_accessor namespace_arn: String?
+      attr_accessor owner_account: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ListSnapshotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::Snapshot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::Snapshot]?
+    end
+
+    class ListTableRestoreStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?namespace_name: String,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ListTableRestoreStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?table_restore_statuses: Array[Types::TableRestoreStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor table_restore_statuses: Array[Types::TableRestoreStatus]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTracksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTracksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracks: Array[Types::ServerlessTrack],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracks: Array[Types::ServerlessTrack]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsageLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?usage_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor usage_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUsageLimitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limits: Array[Types::UsageLimit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limits: Array[Types::UsageLimit]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkgroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?owner_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor owner_account: String?
+    end
+
+    class ListWorkgroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workgroups: Array[Types::Workgroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workgroups: Array[Types::Workgroup]?
+    end
+
+    class ManagedWorkgroupListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_workgroup_name: String,
+        ?managed_workgroup_id: String,
+        ?source_arn: String,
+        ?status: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_workgroup_name: String?
+      attr_accessor managed_workgroup_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+    end
+
+    module ManagedWorkgroupStatus
+      CREATING: String
+      DELETING: String
+      MODIFYING: String
+      AVAILABLE: String
+      NOT_AVAILABLE: String
+    end
+
+    class Namespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_arn: String,
+        ?namespace_id: String,
+        ?namespace_name: String,
+        ?admin_username: String,
+        ?db_name: String,
+        ?kms_key_id: String,
+        ?default_iam_role_arn: String,
+        ?iam_roles: Array[String],
+        ?log_exports: Array[String],
+        ?status: String,
+        ?creation_date: Time,
+        ?admin_password_secret_arn: String,
+        ?admin_password_secret_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_arn: String?
+      attr_accessor namespace_id: String?
+      attr_accessor namespace_name: String?
+      attr_accessor admin_username: String?
+      attr_accessor db_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor default_iam_role_arn: String?
+      attr_accessor iam_roles: Array[String]?
+      attr_accessor log_exports: Array[String]?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor admin_password_secret_arn: String?
+      attr_accessor admin_password_secret_kms_key_id: String?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_id: String,
+        ?subnet_id: String,
+        ?private_ip_address: String,
+        ?availability_zone: String,
+        ?ipv6_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor availability_zone: String?
+      attr_accessor ipv6_address: String?
+    end
+
+    class PerformanceTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor level: Integer?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+    end
+
+    class RecoveryPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_id: String,
+        ?recovery_point_create_time: Time,
+        ?total_size_in_mega_bytes: Float,
+        ?namespace_name: String,
+        ?workgroup_name: String,
+        ?namespace_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_id: String?
+      attr_accessor recovery_point_create_time: Time?
+      attr_accessor total_size_in_mega_bytes: Float?
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor namespace_arn: String?
+    end
+
+    class Reservation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_id: String,
+        ?reservation_arn: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?capacity: Integer,
+        ?offering: Types::ReservationOffering,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_id: String?
+      attr_accessor reservation_arn: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor capacity: Integer?
+      attr_accessor offering: Types::ReservationOffering?
+      attr_accessor status: String?
+    end
+
+    class ReservationOffering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_id: String,
+        ?duration: Integer,
+        ?upfront_charge: Float,
+        ?hourly_charge: Float,
+        ?currency_code: String,
+        ?offering_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_id: String?
+      attr_accessor duration: Integer?
+      attr_accessor upfront_charge: Float?
+      attr_accessor hourly_charge: Float?
+      attr_accessor currency_code: String?
+      attr_accessor offering_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class RestoreFromRecoveryPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_id: String,
+        ?namespace_name: String,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_id: String?
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+    end
+
+    class RestoreFromRecoveryPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_id: String,
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_id: String?
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class RestoreFromSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?workgroup_name: String,
+        ?snapshot_name: String,
+        ?snapshot_arn: String,
+        ?owner_account: String,
+        ?manage_admin_password: bool,
+        ?admin_password_secret_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor snapshot_arn: String?
+      attr_accessor owner_account: String?
+      attr_accessor manage_admin_password: bool?
+      attr_accessor admin_password_secret_kms_key_id: String?
+    end
+
+    class RestoreFromSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+        ?owner_account: String,
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+      attr_accessor owner_account: String?
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class RestoreTableFromRecoveryPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?workgroup_name: String,
+        ?recovery_point_id: String,
+        ?source_database_name: String,
+        ?source_schema_name: String,
+        ?source_table_name: String,
+        ?target_database_name: String,
+        ?target_schema_name: String,
+        ?new_table_name: String,
+        ?activate_case_sensitive_identifier: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor recovery_point_id: String?
+      attr_accessor source_database_name: String?
+      attr_accessor source_schema_name: String?
+      attr_accessor source_table_name: String?
+      attr_accessor target_database_name: String?
+      attr_accessor target_schema_name: String?
+      attr_accessor new_table_name: String?
+      attr_accessor activate_case_sensitive_identifier: bool?
+    end
+
+    class RestoreTableFromRecoveryPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_restore_status: Types::TableRestoreStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_restore_status: Types::TableRestoreStatus?
+    end
+
+    class RestoreTableFromSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?workgroup_name: String,
+        ?snapshot_name: String,
+        ?source_database_name: String,
+        ?source_schema_name: String,
+        ?source_table_name: String,
+        ?target_database_name: String,
+        ?target_schema_name: String,
+        ?new_table_name: String,
+        ?activate_case_sensitive_identifier: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor source_database_name: String?
+      attr_accessor source_schema_name: String?
+      attr_accessor source_table_name: String?
+      attr_accessor target_database_name: String?
+      attr_accessor target_schema_name: String?
+      attr_accessor new_table_name: String?
+      attr_accessor activate_case_sensitive_identifier: bool?
+    end
+
+    class RestoreTableFromSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_restore_status: Types::TableRestoreStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_restore_status: Types::TableRestoreStatus?
+    end
+
+    class Schedule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?at: Time,
+        ?cron: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor at: Time?
+      attr_accessor cron: String?
+
+      class At < Schedule
+      end
+      class Cron < Schedule
+      end
+      class Unknown < Schedule
+      end
+    end
+
+    class ScheduledActionAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?scheduled_action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor scheduled_action_name: String?
+    end
+
+    class ScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?schedule: Types::Schedule,
+        ?scheduled_action_description: String,
+        ?next_invocations: Array[Time],
+        ?role_arn: String,
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?target_action: Types::TargetAction,
+        ?namespace_name: String,
+        ?scheduled_action_uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor scheduled_action_description: String?
+      attr_accessor next_invocations: Array[Time]?
+      attr_accessor role_arn: String?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor target_action: Types::TargetAction?
+      attr_accessor namespace_name: String?
+      attr_accessor scheduled_action_uuid: String?
+    end
+
+    class ServerlessTrack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?track_name: String,
+        ?workgroup_version: String,
+        ?update_targets: Array[Types::UpdateTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor track_name: String?
+      attr_accessor workgroup_version: String?
+      attr_accessor update_targets: Array[Types::UpdateTarget]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Snapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?namespace_arn: String,
+        ?snapshot_name: String,
+        ?snapshot_create_time: Time,
+        ?admin_username: String,
+        ?status: String,
+        ?kms_key_id: String,
+        ?owner_account: String,
+        ?total_backup_size_in_mega_bytes: Float,
+        ?actual_incremental_backup_size_in_mega_bytes: Float,
+        ?backup_progress_in_mega_bytes: Float,
+        ?current_backup_rate_in_mega_bytes_per_second: Float,
+        ?estimated_seconds_to_completion: Integer,
+        ?elapsed_time_in_seconds: Integer,
+        ?snapshot_retention_period: Integer,
+        ?snapshot_remaining_days: Integer,
+        ?snapshot_retention_start_time: Time,
+        ?snapshot_arn: String,
+        ?accounts_with_restore_access: Array[String],
+        ?accounts_with_provisioned_restore_access: Array[String],
+        ?admin_password_secret_arn: String,
+        ?admin_password_secret_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor namespace_arn: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor admin_username: String?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor total_backup_size_in_mega_bytes: Float?
+      attr_accessor actual_incremental_backup_size_in_mega_bytes: Float?
+      attr_accessor backup_progress_in_mega_bytes: Float?
+      attr_accessor current_backup_rate_in_mega_bytes_per_second: Float?
+      attr_accessor estimated_seconds_to_completion: Integer?
+      attr_accessor elapsed_time_in_seconds: Integer?
+      attr_accessor snapshot_retention_period: Integer?
+      attr_accessor snapshot_remaining_days: Integer?
+      attr_accessor snapshot_retention_start_time: Time?
+      attr_accessor snapshot_arn: String?
+      attr_accessor accounts_with_restore_access: Array[String]?
+      attr_accessor accounts_with_provisioned_restore_access: Array[String]?
+      attr_accessor admin_password_secret_arn: String?
+      attr_accessor admin_password_secret_kms_key_id: String?
+    end
+
+    class SnapshotCopyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration_id: String,
+        ?snapshot_copy_configuration_arn: String,
+        ?namespace_name: String,
+        ?destination_region: String,
+        ?snapshot_retention_period: Integer,
+        ?destination_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration_id: String?
+      attr_accessor snapshot_copy_configuration_arn: String?
+      attr_accessor namespace_name: String?
+      attr_accessor destination_region: String?
+      attr_accessor snapshot_retention_period: Integer?
+      attr_accessor destination_kms_key_id: String?
+    end
+
+    class TableRestoreStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_restore_request_id: String,
+        ?status: String,
+        ?message: String,
+        ?request_time: Time,
+        ?namespace_name: String,
+        ?workgroup_name: String,
+        ?snapshot_name: String,
+        ?progress_in_mega_bytes: Integer,
+        ?total_data_in_mega_bytes: Integer,
+        ?source_database_name: String,
+        ?source_schema_name: String,
+        ?source_table_name: String,
+        ?target_database_name: String,
+        ?target_schema_name: String,
+        ?new_table_name: String,
+        ?recovery_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_restore_request_id: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor request_time: Time?
+      attr_accessor namespace_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor progress_in_mega_bytes: Integer?
+      attr_accessor total_data_in_mega_bytes: Integer?
+      attr_accessor source_database_name: String?
+      attr_accessor source_schema_name: String?
+      attr_accessor source_table_name: String?
+      attr_accessor target_database_name: String?
+      attr_accessor target_schema_name: String?
+      attr_accessor new_table_name: String?
+      attr_accessor recovery_point_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?create_snapshot: Types::CreateSnapshotScheduleActionParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_snapshot: Types::CreateSnapshotScheduleActionParameters?
+
+      class CreateSnapshot < TargetAction
+      end
+      class Unknown < TargetAction
+      end
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCustomDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+        ?custom_domain_name: String,
+        ?custom_domain_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+    end
+
+    class UpdateCustomDomainAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_domain_name: String,
+        ?workgroup_name: String,
+        ?custom_domain_certificate_arn: String,
+        ?custom_domain_certificate_expiry_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_domain_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+      attr_accessor custom_domain_certificate_expiry_time: Time?
+    end
+
+    class UpdateEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?vpc_security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+    end
+
+    class UpdateEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::EndpointAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::EndpointAccess?
+    end
+
+    class UpdateNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?admin_user_password: String,
+        ?admin_username: String,
+        ?kms_key_id: String,
+        ?default_iam_role_arn: String,
+        ?iam_roles: Array[String],
+        ?log_exports: Array[String],
+        ?manage_admin_password: bool,
+        ?admin_password_secret_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor admin_user_password: String?
+      attr_accessor admin_username: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor default_iam_role_arn: String?
+      attr_accessor iam_roles: Array[String]?
+      attr_accessor log_exports: Array[String]?
+      attr_accessor manage_admin_password: bool?
+      attr_accessor admin_password_secret_kms_key_id: String?
+    end
+
+    class UpdateNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::Namespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::Namespace?
+    end
+
+    class UpdateScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?target_action: Types::TargetAction,
+        ?schedule: Types::Schedule,
+        ?role_arn: String,
+        ?enabled: bool,
+        ?scheduled_action_description: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor target_action: Types::TargetAction?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor role_arn: String?
+      attr_accessor enabled: bool?
+      attr_accessor scheduled_action_description: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class UpdateScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action: Types::ScheduledActionResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action: Types::ScheduledActionResponse?
+    end
+
+    class UpdateSnapshotCopyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration_id: String,
+        ?snapshot_retention_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration_id: String?
+      attr_accessor snapshot_retention_period: Integer?
+    end
+
+    class UpdateSnapshotCopyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_copy_configuration: Types::SnapshotCopyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration?
+    end
+
+    class UpdateSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+        ?retention_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+      attr_accessor retention_period: Integer?
+    end
+
+    class UpdateSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class UpdateTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?track_name: String,
+        ?workgroup_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor track_name: String?
+      attr_accessor workgroup_version: String?
+    end
+
+    class UpdateUsageLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit_id: String,
+        ?amount: Integer,
+        ?breach_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit_id: String?
+      attr_accessor amount: Integer?
+      attr_accessor breach_action: String?
+    end
+
+    class UpdateUsageLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit: Types::UsageLimit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit: Types::UsageLimit?
+    end
+
+    class UpdateWorkgroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_name: String,
+        ?base_capacity: Integer,
+        ?enhanced_vpc_routing: bool,
+        ?config_parameters: Array[Types::ConfigParameter],
+        ?publicly_accessible: bool,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?port: Integer,
+        ?max_capacity: Integer,
+        ?ip_address_type: String,
+        ?price_performance_target: Types::PerformanceTarget,
+        ?track_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_name: String?
+      attr_accessor base_capacity: Integer?
+      attr_accessor enhanced_vpc_routing: bool?
+      attr_accessor config_parameters: Array[Types::ConfigParameter]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor port: Integer?
+      attr_accessor max_capacity: Integer?
+      attr_accessor ip_address_type: String?
+      attr_accessor price_performance_target: Types::PerformanceTarget?
+      attr_accessor track_name: String?
+    end
+
+    class UpdateWorkgroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup: Types::Workgroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup: Types::Workgroup?
+    end
+
+    class UsageLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_limit_id: String,
+        ?usage_limit_arn: String,
+        ?resource_arn: String,
+        ?usage_type: String,
+        ?amount: Integer,
+        ?period: String,
+        ?breach_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_limit_id: String?
+      attr_accessor usage_limit_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor usage_type: String?
+      attr_accessor amount: Integer?
+      attr_accessor period: String?
+      attr_accessor breach_action: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VpcEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_id: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    class VpcSecurityGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_security_group_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_security_group_id: String?
+      attr_accessor status: String?
+    end
+
+    class Workgroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_id: String,
+        ?workgroup_arn: String,
+        ?workgroup_name: String,
+        ?namespace_name: String,
+        ?base_capacity: Integer,
+        ?enhanced_vpc_routing: bool,
+        ?config_parameters: Array[Types::ConfigParameter],
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?endpoint: Types::Endpoint,
+        ?publicly_accessible: bool,
+        ?creation_date: Time,
+        ?port: Integer,
+        ?custom_domain_name: String,
+        ?custom_domain_certificate_arn: String,
+        ?custom_domain_certificate_expiry_time: Time,
+        ?workgroup_version: String,
+        ?patch_version: String,
+        ?max_capacity: Integer,
+        ?cross_account_vpcs: Array[String],
+        ?ip_address_type: String,
+        ?price_performance_target: Types::PerformanceTarget,
+        ?track_name: String,
+        ?pending_track_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_id: String?
+      attr_accessor workgroup_arn: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor namespace_name: String?
+      attr_accessor base_capacity: Integer?
+      attr_accessor enhanced_vpc_routing: bool?
+      attr_accessor config_parameters: Array[Types::ConfigParameter]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor endpoint: Types::Endpoint?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor creation_date: Time?
+      attr_accessor port: Integer?
+      attr_accessor custom_domain_name: String?
+      attr_accessor custom_domain_certificate_arn: String?
+      attr_accessor custom_domain_certificate_expiry_time: Time?
+      attr_accessor workgroup_version: String?
+      attr_accessor patch_version: String?
+      attr_accessor max_capacity: Integer?
+      attr_accessor cross_account_vpcs: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor price_performance_target: Types::PerformanceTarget?
+      attr_accessor track_name: String?
+      attr_accessor pending_track_name: String?
+    end
+  end
+end

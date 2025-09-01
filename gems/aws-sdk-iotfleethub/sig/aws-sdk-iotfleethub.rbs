@@ -1,0 +1,5 @@
+  module Aws
+    module IoTFleetHub
+      VERSION: String
+    end
+  end

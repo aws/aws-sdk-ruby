@@ -1,0 +1,5 @@
+  module Aws
+    module DocDB
+      VERSION: String
+    end
+  end

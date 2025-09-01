@@ -1,0 +1,4078 @@
+module Aws::ServiceCatalog
+  module Types
+
+    class AcceptPortfolioShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?portfolio_share_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor portfolio_share_type: String?
+    end
+
+    class AcceptPortfolioShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AccessLevelFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module AccessLevelFilterKey
+      ACCOUNT: String
+      ROLE: String
+      USER: String
+    end
+
+    module AccessStatus
+      ENABLED: String
+      UNDER_CHANGE: String
+      DISABLED: String
+    end
+
+    class AssociateBudgetWithResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_name: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_name: String?
+      attr_accessor resource_id: String?
+    end
+
+    class AssociateBudgetWithResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociatePrincipalWithPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?principal_arn: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor principal_arn: String?
+      attr_accessor principal_type: String?
+    end
+
+    class AssociatePrincipalWithPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateProductWithPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?portfolio_id: String,
+        ?source_portfolio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor source_portfolio_id: String?
+    end
+
+    class AssociateProductWithPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateServiceActionWithProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?service_action_id: String,
+        ?accept_language: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor service_action_id: String?
+      attr_accessor accept_language: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class AssociateServiceActionWithProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateTagOptionWithResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_option_id: String?
+    end
+
+    class AssociateTagOptionWithResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchAssociateServiceActionWithProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_associations: Array[Types::ServiceActionAssociation],
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_associations: Array[Types::ServiceActionAssociation]?
+      attr_accessor accept_language: String?
+    end
+
+    class BatchAssociateServiceActionWithProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_service_action_associations: Array[Types::FailedServiceActionAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_service_action_associations: Array[Types::FailedServiceActionAssociation]?
+    end
+
+    class BatchDisassociateServiceActionFromProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_associations: Array[Types::ServiceActionAssociation],
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_associations: Array[Types::ServiceActionAssociation]?
+      attr_accessor accept_language: String?
+    end
+
+    class BatchDisassociateServiceActionFromProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_service_action_associations: Array[Types::FailedServiceActionAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_service_action_associations: Array[Types::FailedServiceActionAssociation]?
+    end
+
+    class BudgetDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_name: String?
+    end
+
+    module ChangeAction
+      ADD: String
+      MODIFY: String
+      REMOVE: String
+    end
+
+    class CloudWatchDashboard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CodeStarParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?repository: String,
+        ?branch: String,
+        ?artifact_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor repository: String?
+      attr_accessor branch: String?
+      attr_accessor artifact_path: String?
+    end
+
+    class ConstraintDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint_id: String,
+        ?type: String,
+        ?description: String,
+        ?owner: String,
+        ?product_id: String,
+        ?portfolio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint_id: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor owner: String?
+      attr_accessor product_id: String?
+      attr_accessor portfolio_id: String?
+    end
+
+    class ConstraintSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor description: String?
+    end
+
+    module CopyOption
+      CopyTags: String
+    end
+
+    class CopyProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?source_product_arn: String,
+        ?target_product_id: String,
+        ?target_product_name: String,
+        ?source_provisioning_artifact_identifiers: Array[Hash[String, String]],
+        ?copy_options: Array[String],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor source_product_arn: String?
+      attr_accessor target_product_id: String?
+      attr_accessor target_product_name: String?
+      attr_accessor source_provisioning_artifact_identifiers: Array[Hash[String, String]]?
+      attr_accessor copy_options: Array[String]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CopyProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_product_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_product_token: String?
+    end
+
+    module CopyProductStatus
+      SUCCEEDED: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class CreateConstraintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?product_id: String,
+        ?parameters: String,
+        ?type: String,
+        ?description: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor product_id: String?
+      attr_accessor parameters: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateConstraintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint_detail: Types::ConstraintDetail,
+        ?constraint_parameters: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint_detail: Types::ConstraintDetail?
+      attr_accessor constraint_parameters: String?
+      attr_accessor status: String?
+    end
+
+    class CreatePortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?display_name: String,
+        ?description: String,
+        ?provider_name: String,
+        ?tags: Array[Types::Tag],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor provider_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreatePortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_detail: Types::PortfolioDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_detail: Types::PortfolioDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePortfolioShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?account_id: String,
+        ?organization_node: Types::OrganizationNode,
+        ?share_tag_options: bool,
+        ?share_principals: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor account_id: String?
+      attr_accessor organization_node: Types::OrganizationNode?
+      attr_accessor share_tag_options: bool?
+      attr_accessor share_principals: bool?
+    end
+
+    class CreatePortfolioShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_share_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_share_token: String?
+    end
+
+    class CreateProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?name: String,
+        ?owner: String,
+        ?description: String,
+        ?distributor: String,
+        ?support_description: String,
+        ?support_email: String,
+        ?support_url: String,
+        ?product_type: String,
+        ?tags: Array[Types::Tag],
+        ?provisioning_artifact_parameters: Types::ProvisioningArtifactProperties,
+        ?idempotency_token: String,
+        ?source_connection: Types::SourceConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor description: String?
+      attr_accessor distributor: String?
+      attr_accessor support_description: String?
+      attr_accessor support_email: String?
+      attr_accessor support_url: String?
+      attr_accessor product_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provisioning_artifact_parameters: Types::ProvisioningArtifactProperties?
+      attr_accessor idempotency_token: String?
+      attr_accessor source_connection: Types::SourceConnection?
+    end
+
+    class CreateProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_detail: Types::ProductViewDetail,
+        ?provisioning_artifact_detail: Types::ProvisioningArtifactDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_detail: Types::ProductViewDetail?
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProvisionedProductPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?plan_name: String,
+        ?plan_type: String,
+        ?notification_arns: Array[String],
+        ?path_id: String,
+        ?product_id: String,
+        ?provisioned_product_name: String,
+        ?provisioning_artifact_id: String,
+        ?provisioning_parameters: Array[Types::UpdateProvisioningParameter],
+        ?idempotency_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor plan_name: String?
+      attr_accessor plan_type: String?
+      attr_accessor notification_arns: Array[String]?
+      attr_accessor path_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioning_parameters: Array[Types::UpdateProvisioningParameter]?
+      attr_accessor idempotency_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProvisionedProductPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_name: String,
+        ?plan_id: String,
+        ?provision_product_id: String,
+        ?provisioned_product_name: String,
+        ?provisioning_artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_name: String?
+      attr_accessor plan_id: String?
+      attr_accessor provision_product_id: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+    end
+
+    class CreateProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?parameters: Types::ProvisioningArtifactProperties,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor parameters: Types::ProvisioningArtifactProperties?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_detail: Types::ProvisioningArtifactDetail,
+        ?info: Hash[String, String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail?
+      attr_accessor info: Hash[String, String]?
+      attr_accessor status: String?
+    end
+
+    class CreateServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?definition_type: String,
+        ?definition: Hash[String, String],
+        ?description: String,
+        ?accept_language: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor definition_type: String?
+      attr_accessor definition: Hash[String, String]?
+      attr_accessor description: String?
+      attr_accessor accept_language: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_detail: Types::ServiceActionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_detail: Types::ServiceActionDetail?
+    end
+
+    class CreateTagOptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class CreateTagOptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_option_detail: Types::TagOptionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_option_detail: Types::TagOptionDetail?
+    end
+
+    class DeleteConstraintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteConstraintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DeletePortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePortfolioShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?account_id: String,
+        ?organization_node: Types::OrganizationNode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor account_id: String?
+      attr_accessor organization_node: Types::OrganizationNode?
+    end
+
+    class DeletePortfolioShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_share_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_share_token: String?
+    end
+
+    class DeleteProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProvisionedProductPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?plan_id: String,
+        ?ignore_errors: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor plan_id: String?
+      attr_accessor ignore_errors: bool?
+    end
+
+    class DeleteProvisionedProductPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+    end
+
+    class DeleteProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?accept_language: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor accept_language: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class DeleteServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTagOptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteTagOptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeConstraintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeConstraintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint_detail: Types::ConstraintDetail,
+        ?constraint_parameters: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint_detail: Types::ConstraintDetail?
+      attr_accessor constraint_parameters: String?
+      attr_accessor status: String?
+    end
+
+    class DescribeCopyProductStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?copy_product_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor copy_product_token: String?
+    end
+
+    class DescribeCopyProductStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_product_status: String,
+        ?target_product_id: String,
+        ?status_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_product_status: String?
+      attr_accessor target_product_id: String?
+      attr_accessor status_detail: String?
+    end
+
+    class DescribePortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DescribePortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_detail: Types::PortfolioDetail,
+        ?tags: Array[Types::Tag],
+        ?tag_options: Array[Types::TagOptionDetail],
+        ?budgets: Array[Types::BudgetDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_detail: Types::PortfolioDetail?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor tag_options: Array[Types::TagOptionDetail]?
+      attr_accessor budgets: Array[Types::BudgetDetail]?
+    end
+
+    class DescribePortfolioShareStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_share_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_share_token: String?
+    end
+
+    class DescribePortfolioShareStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_share_token: String,
+        ?portfolio_id: String,
+        ?organization_node_value: String,
+        ?status: String,
+        ?share_details: Types::ShareDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_share_token: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor organization_node_value: String?
+      attr_accessor status: String?
+      attr_accessor share_details: Types::ShareDetails?
+    end
+
+    module DescribePortfolioShareType
+      ACCOUNT: String
+      ORGANIZATION: String
+      ORGANIZATIONAL_UNIT: String
+      ORGANIZATION_MEMBER_ACCOUNT: String
+    end
+
+    class DescribePortfolioSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_id: String,
+        ?type: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_id: String?
+      attr_accessor type: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribePortfolioSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?portfolio_share_details: Array[Types::PortfolioShareDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor portfolio_share_details: Array[Types::PortfolioShareDetail]?
+    end
+
+    class DescribeProductAsAdminInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?name: String,
+        ?source_portfolio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor source_portfolio_id: String?
+    end
+
+    class DescribeProductAsAdminOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_detail: Types::ProductViewDetail,
+        ?provisioning_artifact_summaries: Array[Types::ProvisioningArtifactSummary],
+        ?tags: Array[Types::Tag],
+        ?tag_options: Array[Types::TagOptionDetail],
+        ?budgets: Array[Types::BudgetDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_detail: Types::ProductViewDetail?
+      attr_accessor provisioning_artifact_summaries: Array[Types::ProvisioningArtifactSummary]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor tag_options: Array[Types::TagOptionDetail]?
+      attr_accessor budgets: Array[Types::BudgetDetail]?
+    end
+
+    class DescribeProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class DescribeProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_summary: Types::ProductViewSummary,
+        ?provisioning_artifacts: Array[Types::ProvisioningArtifact],
+        ?budgets: Array[Types::BudgetDetail],
+        ?launch_paths: Array[Types::LaunchPath],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_summary: Types::ProductViewSummary?
+      attr_accessor provisioning_artifacts: Array[Types::ProvisioningArtifact]?
+      attr_accessor budgets: Array[Types::BudgetDetail]?
+      attr_accessor launch_paths: Array[Types::LaunchPath]?
+    end
+
+    class DescribeProductViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeProductViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_summary: Types::ProductViewSummary,
+        ?provisioning_artifacts: Array[Types::ProvisioningArtifact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_summary: Types::ProductViewSummary?
+      attr_accessor provisioning_artifacts: Array[Types::ProvisioningArtifact]?
+    end
+
+    class DescribeProvisionedProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class DescribeProvisionedProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_detail: Types::ProvisionedProductDetail,
+        ?cloud_watch_dashboards: Array[Types::CloudWatchDashboard],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_detail: Types::ProvisionedProductDetail?
+      attr_accessor cloud_watch_dashboards: Array[Types::CloudWatchDashboard]?
+    end
+
+    class DescribeProvisionedProductPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?plan_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor plan_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class DescribeProvisionedProductPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_plan_details: Types::ProvisionedProductPlanDetails,
+        ?resource_changes: Array[Types::ResourceChange],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_plan_details: Types::ProvisionedProductPlanDetails?
+      attr_accessor resource_changes: Array[Types::ResourceChange]?
+      attr_accessor next_page_token: String?
+    end
+
+    class DescribeProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provisioning_artifact_id: String,
+        ?product_id: String,
+        ?provisioning_artifact_name: String,
+        ?product_name: String,
+        ?verbose: bool,
+        ?include_provisioning_artifact_parameters: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_name: String?
+      attr_accessor product_name: String?
+      attr_accessor verbose: bool?
+      attr_accessor include_provisioning_artifact_parameters: bool?
+    end
+
+    class DescribeProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_detail: Types::ProvisioningArtifactDetail,
+        ?info: Hash[String, String],
+        ?status: String,
+        ?provisioning_artifact_parameters: Array[Types::ProvisioningArtifactParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail?
+      attr_accessor info: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor provisioning_artifact_parameters: Array[Types::ProvisioningArtifactParameter]?
+    end
+
+    class DescribeProvisioningParametersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?provisioning_artifact_id: String,
+        ?provisioning_artifact_name: String,
+        ?path_id: String,
+        ?path_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioning_artifact_name: String?
+      attr_accessor path_id: String?
+      attr_accessor path_name: String?
+    end
+
+    class DescribeProvisioningParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_parameters: Array[Types::ProvisioningArtifactParameter],
+        ?constraint_summaries: Array[Types::ConstraintSummary],
+        ?usage_instructions: Array[Types::UsageInstruction],
+        ?tag_options: Array[Types::TagOptionSummary],
+        ?provisioning_artifact_preferences: Types::ProvisioningArtifactPreferences,
+        ?provisioning_artifact_outputs: Array[Types::ProvisioningArtifactOutput],
+        ?provisioning_artifact_output_keys: Array[Types::ProvisioningArtifactOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_parameters: Array[Types::ProvisioningArtifactParameter]?
+      attr_accessor constraint_summaries: Array[Types::ConstraintSummary]?
+      attr_accessor usage_instructions: Array[Types::UsageInstruction]?
+      attr_accessor tag_options: Array[Types::TagOptionSummary]?
+      attr_accessor provisioning_artifact_preferences: Types::ProvisioningArtifactPreferences?
+      attr_accessor provisioning_artifact_outputs: Array[Types::ProvisioningArtifactOutput]?
+      attr_accessor provisioning_artifact_output_keys: Array[Types::ProvisioningArtifactOutput]?
+    end
+
+    class DescribeRecordInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeRecordOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+        ?record_outputs: Array[Types::RecordOutput],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+      attr_accessor record_outputs: Array[Types::RecordOutput]?
+      attr_accessor next_page_token: String?
+    end
+
+    class DescribeServiceActionExecutionParametersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_id: String,
+        ?service_action_id: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_id: String?
+      attr_accessor service_action_id: String?
+      attr_accessor accept_language: String?
+    end
+
+    class DescribeServiceActionExecutionParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_parameters: Array[Types::ExecutionParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_parameters: Array[Types::ExecutionParameter]?
+    end
+
+    class DescribeServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor accept_language: String?
+    end
+
+    class DescribeServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_detail: Types::ServiceActionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_detail: Types::ServiceActionDetail?
+    end
+
+    class DescribeTagOptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeTagOptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_option_detail: Types::TagOptionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_option_detail: Types::TagOptionDetail?
+    end
+
+    class DisableAWSOrganizationsAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableAWSOrganizationsAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateBudgetFromResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_name: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_name: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DisassociateBudgetFromResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociatePrincipalFromPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?principal_arn: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor principal_arn: String?
+      attr_accessor principal_type: String?
+    end
+
+    class DisassociatePrincipalFromPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateProductFromPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?portfolio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor portfolio_id: String?
+    end
+
+    class DisassociateProductFromPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateServiceActionFromProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?service_action_id: String,
+        ?accept_language: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor service_action_id: String?
+      attr_accessor accept_language: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class DisassociateServiceActionFromProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateTagOptionFromResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_option_id: String?
+    end
+
+    class DisassociateTagOptionFromResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DuplicateResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EnableAWSOrganizationsAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableAWSOrganizationsAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EngineWorkflowResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unique_tag: Types::UniqueTagResourceIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unique_tag: Types::UniqueTagResourceIdentifier?
+    end
+
+    module EngineWorkflowStatus
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module EvaluationType
+      STATIC: String
+      DYNAMIC: String
+    end
+
+    class ExecuteProvisionedProductPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?plan_id: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor plan_id: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class ExecuteProvisionedProductPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class ExecuteProvisionedProductServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_id: String,
+        ?service_action_id: String,
+        ?execute_token: String,
+        ?accept_language: String,
+        ?parameters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_id: String?
+      attr_accessor service_action_id: String?
+      attr_accessor execute_token: String?
+      attr_accessor accept_language: String?
+      attr_accessor parameters: Hash[String, Array[String]]?
+    end
+
+    class ExecuteProvisionedProductServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class ExecutionParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?default_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor default_values: Array[String]?
+    end
+
+    class FailedServiceActionAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_id: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class GetAWSOrganizationsAccessStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAWSOrganizationsAccessStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_status: String?
+    end
+
+    class GetProvisionedProductOutputsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provisioned_product_id: String,
+        ?provisioned_product_name: String,
+        ?output_keys: Array[String],
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor output_keys: Array[String]?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class GetProvisionedProductOutputsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outputs: Array[Types::RecordOutput],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outputs: Array[Types::RecordOutput]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ImportAsProvisionedProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?provisioned_product_name: String,
+        ?physical_id: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor physical_id: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class ImportAsProvisionedProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class InvalidParametersException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastSync
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_sync_time: Time,
+        ?last_sync_status: String,
+        ?last_sync_status_message: String,
+        ?last_successful_sync_time: Time,
+        ?last_successful_sync_provisioning_artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_sync_time: Time?
+      attr_accessor last_sync_status: String?
+      attr_accessor last_sync_status_message: String?
+      attr_accessor last_successful_sync_time: Time?
+      attr_accessor last_successful_sync_provisioning_artifact_id: String?
+    end
+
+    module LastSyncStatus
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class LaunchPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class LaunchPathSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?constraint_summaries: Array[Types::ConstraintSummary],
+        ?tags: Array[Types::Tag],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor constraint_summaries: Array[Types::ConstraintSummary]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor name: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAcceptedPortfolioSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?page_token: String,
+        ?page_size: Integer,
+        ?portfolio_share_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor portfolio_share_type: String?
+    end
+
+    class ListAcceptedPortfolioSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_details: Array[Types::PortfolioDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_details: Array[Types::PortfolioDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListBudgetsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?resource_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor resource_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListBudgetsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budgets: Array[Types::BudgetDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budgets: Array[Types::BudgetDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListConstraintsForPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?product_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor product_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListConstraintsForPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint_details: Array[Types::ConstraintDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint_details: Array[Types::ConstraintDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListLaunchPathsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListLaunchPathsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_path_summaries: Array[Types::LaunchPathSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_path_summaries: Array[Types::LaunchPathSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListOrganizationPortfolioAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?organization_node_type: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor organization_node_type: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListOrganizationPortfolioAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_nodes: Array[Types::OrganizationNode],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_nodes: Array[Types::OrganizationNode]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPortfolioAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?organization_parent_id: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor organization_parent_id: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListPortfolioAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPortfoliosForProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListPortfoliosForProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_details: Array[Types::PortfolioDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_details: Array[Types::PortfolioDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPortfoliosInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListPortfoliosOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_details: Array[Types::PortfolioDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_details: Array[Types::PortfolioDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPrincipalsForPortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListPrincipalsForPortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principals: Array[Types::Principal],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principals: Array[Types::Principal]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListProvisionedProductPlansInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provision_product_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+        ?access_level_filter: Types::AccessLevelFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provision_product_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+      attr_accessor access_level_filter: Types::AccessLevelFilter?
+    end
+
+    class ListProvisionedProductPlansOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_plans: Array[Types::ProvisionedProductPlanSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_plans: Array[Types::ProvisionedProductPlanSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListProvisioningArtifactsForServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+      attr_accessor accept_language: String?
+    end
+
+    class ListProvisioningArtifactsForServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_views: Array[Types::ProvisioningArtifactView],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_views: Array[Types::ProvisioningArtifactView]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListProvisioningArtifactsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+    end
+
+    class ListProvisioningArtifactsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_details: Array[Types::ProvisioningArtifactDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_details: Array[Types::ProvisioningArtifactDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListRecordHistoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?access_level_filter: Types::AccessLevelFilter,
+        ?search_filter: Types::ListRecordHistorySearchFilter,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor access_level_filter: Types::AccessLevelFilter?
+      attr_accessor search_filter: Types::ListRecordHistorySearchFilter?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListRecordHistoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_details: Array[Types::RecordDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_details: Array[Types::RecordDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListRecordHistorySearchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ListResourcesForTagOptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_option_id: String,
+        ?resource_type: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_option_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListResourcesForTagOptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_details: Array[Types::ResourceDetail],
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_details: Array[Types::ResourceDetail]?
+      attr_accessor page_token: String?
+    end
+
+    class ListServiceActionsForProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?page_size: Integer,
+        ?page_token: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+      attr_accessor accept_language: String?
+    end
+
+    class ListServiceActionsForProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_summaries: Array[Types::ServiceActionSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_summaries: Array[Types::ServiceActionSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListServiceActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListServiceActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_summaries: Array[Types::ServiceActionSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_summaries: Array[Types::ServiceActionSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListStackInstancesForProvisionedProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provisioned_product_id: String,
+        ?page_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListStackInstancesForProvisionedProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_instances: Array[Types::StackInstance],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_instances: Array[Types::StackInstance]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListTagOptionsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor active: bool?
+    end
+
+    class ListTagOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListTagOptionsFilters,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListTagOptionsFilters?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ListTagOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_option_details: Array[Types::TagOptionDetail],
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_option_details: Array[Types::TagOptionDetail]?
+      attr_accessor page_token: String?
+    end
+
+    class NotifyProvisionProductEngineWorkflowResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_token: String,
+        ?record_id: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?resource_identifier: Types::EngineWorkflowResourceIdentifier,
+        ?outputs: Array[Types::RecordOutput],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_token: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor resource_identifier: Types::EngineWorkflowResourceIdentifier?
+      attr_accessor outputs: Array[Types::RecordOutput]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class NotifyProvisionProductEngineWorkflowResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NotifyTerminateProvisionedProductEngineWorkflowResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_token: String,
+        ?record_id: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_token: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class NotifyTerminateProvisionedProductEngineWorkflowResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NotifyUpdateProvisionedProductEngineWorkflowResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_token: String,
+        ?record_id: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?outputs: Array[Types::RecordOutput],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_token: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor outputs: Array[Types::RecordOutput]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class NotifyUpdateProvisionedProductEngineWorkflowResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class OperationNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module OrganizationNodeType
+      ORGANIZATION: String
+      ORGANIZATIONAL_UNIT: String
+      ACCOUNT: String
+    end
+
+    class ParameterConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_values: Array[String],
+        ?allowed_pattern: String,
+        ?constraint_description: String,
+        ?max_length: String,
+        ?min_length: String,
+        ?max_value: String,
+        ?min_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor allowed_pattern: String?
+      attr_accessor constraint_description: String?
+      attr_accessor max_length: String?
+      attr_accessor min_length: String?
+      attr_accessor max_value: String?
+      attr_accessor min_value: String?
+    end
+
+    class PortfolioDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?display_name: String,
+        ?description: String,
+        ?created_time: Time,
+        ?provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+      attr_accessor provider_name: String?
+    end
+
+    class PortfolioShareDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id: String,
+        ?type: String,
+        ?accepted: bool,
+        ?share_tag_options: bool,
+        ?share_principals: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id: String?
+      attr_accessor type: String?
+      attr_accessor accepted: bool?
+      attr_accessor share_tag_options: bool?
+      attr_accessor share_principals: bool?
+    end
+
+    module PortfolioShareType
+      IMPORTED: String
+      AWS_SERVICECATALOG: String
+      AWS_ORGANIZATIONS: String
+    end
+
+    class Principal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+      attr_accessor principal_type: String?
+    end
+
+    module PrincipalType
+      IAM: String
+      IAM_PATTERN: String
+    end
+
+    module ProductSource
+      ACCOUNT: String
+    end
+
+    module ProductType
+      CLOUD_FORMATION_TEMPLATE: String
+      MARKETPLACE: String
+      TERRAFORM_OPEN_SOURCE: String
+      TERRAFORM_CLOUD: String
+      EXTERNAL: String
+    end
+
+    class ProductViewAggregationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?approximate_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor approximate_count: Integer?
+    end
+
+    class ProductViewDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_summary: Types::ProductViewSummary,
+        ?status: String,
+        ?product_arn: String,
+        ?created_time: Time,
+        ?source_connection: Types::SourceConnectionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_summary: Types::ProductViewSummary?
+      attr_accessor status: String?
+      attr_accessor product_arn: String?
+      attr_accessor created_time: Time?
+      attr_accessor source_connection: Types::SourceConnectionDetail?
+    end
+
+    module ProductViewFilterBy
+      FullTextSearch: String
+      Owner: String
+      ProductType: String
+      SourceProductId: String
+    end
+
+    module ProductViewSortBy
+      Title: String
+      VersionCount: String
+      CreationDate: String
+    end
+
+    class ProductViewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?product_id: String,
+        ?name: String,
+        ?owner: String,
+        ?short_description: String,
+        ?type: String,
+        ?distributor: String,
+        ?has_default_path: bool,
+        ?support_email: String,
+        ?support_description: String,
+        ?support_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor product_id: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor short_description: String?
+      attr_accessor type: String?
+      attr_accessor distributor: String?
+      attr_accessor has_default_path: bool?
+      attr_accessor support_email: String?
+      attr_accessor support_description: String?
+      attr_accessor support_url: String?
+    end
+
+    module PropertyKey
+      Owner: String
+      LaunchRole: String
+    end
+
+    class ProvisionProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?provisioning_artifact_id: String,
+        ?provisioning_artifact_name: String,
+        ?path_id: String,
+        ?path_name: String,
+        ?provisioned_product_name: String,
+        ?provisioning_parameters: Array[Types::ProvisioningParameter],
+        ?provisioning_preferences: Types::ProvisioningPreferences,
+        ?tags: Array[Types::Tag],
+        ?notification_arns: Array[String],
+        ?provision_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioning_artifact_name: String?
+      attr_accessor path_id: String?
+      attr_accessor path_name: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor provisioning_parameters: Array[Types::ProvisioningParameter]?
+      attr_accessor provisioning_preferences: Types::ProvisioningPreferences?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor notification_arns: Array[String]?
+      attr_accessor provision_token: String?
+    end
+
+    class ProvisionProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class ProvisionedProductAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?type: String,
+        ?id: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_time: Time,
+        ?idempotency_token: String,
+        ?last_record_id: String,
+        ?last_provisioning_record_id: String,
+        ?last_successful_provisioning_record_id: String,
+        ?tags: Array[Types::Tag],
+        ?physical_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?provisioning_artifact_id: String,
+        ?provisioning_artifact_name: String,
+        ?user_arn: String,
+        ?user_arn_session: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_time: Time?
+      attr_accessor idempotency_token: String?
+      attr_accessor last_record_id: String?
+      attr_accessor last_provisioning_record_id: String?
+      attr_accessor last_successful_provisioning_record_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor physical_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioning_artifact_name: String?
+      attr_accessor user_arn: String?
+      attr_accessor user_arn_session: String?
+    end
+
+    class ProvisionedProductDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?type: String,
+        ?id: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_time: Time,
+        ?idempotency_token: String,
+        ?last_record_id: String,
+        ?last_provisioning_record_id: String,
+        ?last_successful_provisioning_record_id: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?launch_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_time: Time?
+      attr_accessor idempotency_token: String?
+      attr_accessor last_record_id: String?
+      attr_accessor last_provisioning_record_id: String?
+      attr_accessor last_successful_provisioning_record_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor launch_role_arn: String?
+    end
+
+    class ProvisionedProductPlanDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_time: Time,
+        ?path_id: String,
+        ?product_id: String,
+        ?plan_name: String,
+        ?plan_id: String,
+        ?provision_product_id: String,
+        ?provision_product_name: String,
+        ?plan_type: String,
+        ?provisioning_artifact_id: String,
+        ?status: String,
+        ?updated_time: Time,
+        ?notification_arns: Array[String],
+        ?provisioning_parameters: Array[Types::UpdateProvisioningParameter],
+        ?tags: Array[Types::Tag],
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_time: Time?
+      attr_accessor path_id: String?
+      attr_accessor product_id: String?
+      attr_accessor plan_name: String?
+      attr_accessor plan_id: String?
+      attr_accessor provision_product_id: String?
+      attr_accessor provision_product_name: String?
+      attr_accessor plan_type: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor status: String?
+      attr_accessor updated_time: Time?
+      attr_accessor notification_arns: Array[String]?
+      attr_accessor provisioning_parameters: Array[Types::UpdateProvisioningParameter]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor status_message: String?
+    end
+
+    module ProvisionedProductPlanStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_SUCCESS: String
+      CREATE_FAILED: String
+      EXECUTE_IN_PROGRESS: String
+      EXECUTE_SUCCESS: String
+      EXECUTE_FAILED: String
+    end
+
+    class ProvisionedProductPlanSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_name: String,
+        ?plan_id: String,
+        ?provision_product_id: String,
+        ?provision_product_name: String,
+        ?plan_type: String,
+        ?provisioning_artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_name: String?
+      attr_accessor plan_id: String?
+      attr_accessor provision_product_id: String?
+      attr_accessor provision_product_name: String?
+      attr_accessor plan_type: String?
+      attr_accessor provisioning_artifact_id: String?
+    end
+
+    module ProvisionedProductPlanType
+      CLOUDFORMATION: String
+    end
+
+    module ProvisionedProductStatus
+      AVAILABLE: String
+      UNDER_CHANGE: String
+      TAINTED: String
+      ERROR: String
+      PLAN_IN_PROGRESS: String
+    end
+
+    module ProvisionedProductViewFilterBy
+      SearchQuery: String
+    end
+
+    class ProvisioningArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?created_time: Time,
+        ?guidance: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+      attr_accessor guidance: String?
+    end
+
+    class ProvisioningArtifactDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?created_time: Time,
+        ?active: bool,
+        ?guidance: String,
+        ?source_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor created_time: Time?
+      attr_accessor active: bool?
+      attr_accessor guidance: String?
+      attr_accessor source_revision: String?
+    end
+
+    module ProvisioningArtifactGuidance
+      DEFAULT: String
+      DEPRECATED: String
+    end
+
+    class ProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor description: String?
+    end
+
+    class ProvisioningArtifactParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_key: String,
+        ?default_value: String,
+        ?parameter_type: String,
+        ?is_no_echo: bool,
+        ?description: String,
+        ?parameter_constraints: Types::ParameterConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_key: String?
+      attr_accessor default_value: String?
+      attr_accessor parameter_type: String?
+      attr_accessor is_no_echo: bool?
+      attr_accessor description: String?
+      attr_accessor parameter_constraints: Types::ParameterConstraints?
+    end
+
+    class ProvisioningArtifactPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_accounts: Array[String],
+        ?stack_set_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_accounts: Array[String]?
+      attr_accessor stack_set_regions: Array[String]?
+    end
+
+    class ProvisioningArtifactProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?info: Hash[String, String],
+        ?type: String,
+        ?disable_template_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor info: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor disable_template_validation: bool?
+    end
+
+    module ProvisioningArtifactPropertyName
+      Id: String
+    end
+
+    class ProvisioningArtifactSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?created_time: Time,
+        ?provisioning_artifact_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+      attr_accessor provisioning_artifact_metadata: Hash[String, String]?
+    end
+
+    module ProvisioningArtifactType
+      CLOUD_FORMATION_TEMPLATE: String
+      MARKETPLACE_AMI: String
+      MARKETPLACE_CAR: String
+      TERRAFORM_OPEN_SOURCE: String
+      TERRAFORM_CLOUD: String
+      EXTERNAL: String
+    end
+
+    class ProvisioningArtifactView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_summary: Types::ProductViewSummary,
+        ?provisioning_artifact: Types::ProvisioningArtifact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_summary: Types::ProductViewSummary?
+      attr_accessor provisioning_artifact: Types::ProvisioningArtifact?
+    end
+
+    class ProvisioningParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ProvisioningPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_accounts: Array[String],
+        ?stack_set_regions: Array[String],
+        ?stack_set_failure_tolerance_count: Integer,
+        ?stack_set_failure_tolerance_percentage: Integer,
+        ?stack_set_max_concurrency_count: Integer,
+        ?stack_set_max_concurrency_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_accounts: Array[String]?
+      attr_accessor stack_set_regions: Array[String]?
+      attr_accessor stack_set_failure_tolerance_count: Integer?
+      attr_accessor stack_set_failure_tolerance_percentage: Integer?
+      attr_accessor stack_set_max_concurrency_count: Integer?
+      attr_accessor stack_set_max_concurrency_percentage: Integer?
+    end
+
+    class RecordDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_id: String,
+        ?provisioned_product_name: String,
+        ?status: String,
+        ?created_time: Time,
+        ?updated_time: Time,
+        ?provisioned_product_type: String,
+        ?record_type: String,
+        ?provisioned_product_id: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?path_id: String,
+        ?record_errors: Array[Types::RecordError],
+        ?record_tags: Array[Types::RecordTag],
+        ?launch_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_id: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor updated_time: Time?
+      attr_accessor provisioned_product_type: String?
+      attr_accessor record_type: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor path_id: String?
+      attr_accessor record_errors: Array[Types::RecordError]?
+      attr_accessor record_tags: Array[Types::RecordTag]?
+      attr_accessor launch_role_arn: String?
+    end
+
+    class RecordError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor description: String?
+    end
+
+    class RecordOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_key: String,
+        ?output_value: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_key: String?
+      attr_accessor output_value: String?
+      attr_accessor description: String?
+    end
+
+    module RecordStatus
+      CREATED: String
+      IN_PROGRESS: String
+      IN_PROGRESS_IN_ERROR: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class RecordTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class RejectPortfolioShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?portfolio_share_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor portfolio_share_type: String?
+    end
+
+    class RejectPortfolioShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Replacement
+      TRUE: String
+      FALSE: String
+      CONDITIONAL: String
+    end
+
+    module RequiresRecreation
+      NEVER: String
+      CONDITIONALLY: String
+      ALWAYS: String
+    end
+
+    module ResourceAttribute
+      PROPERTIES: String
+      METADATA: String
+      CREATIONPOLICY: String
+      UPDATEPOLICY: String
+      DELETIONPOLICY: String
+      TAGS: String
+    end
+
+    class ResourceChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?replacement: String,
+        ?scope: Array[String],
+        ?details: Array[Types::ResourceChangeDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor replacement: String?
+      attr_accessor scope: Array[String]?
+      attr_accessor details: Array[Types::ResourceChangeDetail]?
+    end
+
+    class ResourceChangeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::ResourceTargetDefinition,
+        ?evaluation: String,
+        ?causing_entity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::ResourceTargetDefinition?
+      attr_accessor evaluation: String?
+      attr_accessor causing_entity: String?
+    end
+
+    class ResourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceTargetDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?name: String,
+        ?requires_recreation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor name: String?
+      attr_accessor requires_recreation: String?
+    end
+
+    class ScanProvisionedProductsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?access_level_filter: Types::AccessLevelFilter,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor access_level_filter: Types::AccessLevelFilter?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class ScanProvisionedProductsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_products: Array[Types::ProvisionedProductDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_products: Array[Types::ProvisionedProductDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class SearchProductsAsAdminInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?filters: Hash[String, Array[String]],
+        ?sort_by: String,
+        ?sort_order: String,
+        ?page_token: String,
+        ?page_size: Integer,
+        ?product_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor page_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor product_source: String?
+    end
+
+    class SearchProductsAsAdminOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_details: Array[Types::ProductViewDetail],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_details: Array[Types::ProductViewDetail]?
+      attr_accessor next_page_token: String?
+    end
+
+    class SearchProductsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?filters: Hash[String, Array[String]],
+        ?page_size: Integer,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor page_size: Integer?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor page_token: String?
+    end
+
+    class SearchProductsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_summaries: Array[Types::ProductViewSummary],
+        ?product_view_aggregations: Hash[String, Array[Types::ProductViewAggregationValue]],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_summaries: Array[Types::ProductViewSummary]?
+      attr_accessor product_view_aggregations: Hash[String, Array[Types::ProductViewAggregationValue]]?
+      attr_accessor next_page_token: String?
+    end
+
+    class SearchProvisionedProductsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?access_level_filter: Types::AccessLevelFilter,
+        ?filters: Hash[String, Array[String]],
+        ?sort_by: String,
+        ?sort_order: String,
+        ?page_size: Integer,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor access_level_filter: Types::AccessLevelFilter?
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor page_size: Integer?
+      attr_accessor page_token: String?
+    end
+
+    class SearchProvisionedProductsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_products: Array[Types::ProvisionedProductAttribute],
+        ?total_results_count: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_products: Array[Types::ProvisionedProductAttribute]?
+      attr_accessor total_results_count: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class ServiceActionAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_id: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_id: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+    end
+
+    module ServiceActionAssociationErrorCode
+      DuplicateResourceException: String
+      InternalFailure: String
+      LimitExceededException: String
+      ResourceNotFoundException: String
+      ThrottlingException: String
+      InvalidParameterException: String
+    end
+
+    module ServiceActionDefinitionKey
+      Name: String
+      Version: String
+      AssumeRole: String
+      Parameters: String
+    end
+
+    module ServiceActionDefinitionType
+      SsmAutomation: String
+    end
+
+    class ServiceActionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_summary: Types::ServiceActionSummary,
+        ?definition: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_summary: Types::ServiceActionSummary?
+      attr_accessor definition: Hash[String, String]?
+    end
+
+    class ServiceActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?definition_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor definition_type: String?
+    end
+
+    class ShareDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_shares: Array[String],
+        ?share_errors: Array[Types::ShareError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_shares: Array[String]?
+      attr_accessor share_errors: Array[Types::ShareError]?
+    end
+
+    class ShareError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?message: String,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor message: String?
+      attr_accessor error: String?
+    end
+
+    module ShareStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      ERROR: String
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class SourceConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?connection_parameters: Types::SourceConnectionParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor connection_parameters: Types::SourceConnectionParameters?
+    end
+
+    class SourceConnectionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?connection_parameters: Types::SourceConnectionParameters,
+        ?last_sync: Types::LastSync,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor connection_parameters: Types::SourceConnectionParameters?
+      attr_accessor last_sync: Types::LastSync?
+    end
+
+    class SourceConnectionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_star: Types::CodeStarParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_star: Types::CodeStarParameters?
+    end
+
+    module SourceType
+      CODESTAR: String
+    end
+
+    class StackInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: String,
+        ?region: String,
+        ?stack_instance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: String?
+      attr_accessor region: String?
+      attr_accessor stack_instance_status: String?
+    end
+
+    module StackInstanceStatus
+      CURRENT: String
+      OUTDATED: String
+      INOPERABLE: String
+    end
+
+    module StackSetOperationType
+      CREATE: String
+      UPDATE: String
+      DELETE: String
+    end
+
+    module Status
+      AVAILABLE: String
+      CREATING: String
+      FAILED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagOptionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?active: bool,
+        ?id: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor active: bool?
+      attr_accessor id: String?
+      attr_accessor owner: String?
+    end
+
+    class TagOptionNotMigratedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagOptionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class TerminateProvisionedProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_name: String,
+        ?provisioned_product_id: String,
+        ?terminate_token: String,
+        ?ignore_errors: bool,
+        ?accept_language: String,
+        ?retain_physical_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_name: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor terminate_token: String?
+      attr_accessor ignore_errors: bool?
+      attr_accessor accept_language: String?
+      attr_accessor retain_physical_resources: bool?
+    end
+
+    class TerminateProvisionedProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class UniqueTagResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class UpdateConstraintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?description: String,
+        ?parameters: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: String?
+    end
+
+    class UpdateConstraintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint_detail: Types::ConstraintDetail,
+        ?constraint_parameters: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint_detail: Types::ConstraintDetail?
+      attr_accessor constraint_parameters: String?
+      attr_accessor status: String?
+    end
+
+    class UpdatePortfolioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?display_name: String,
+        ?description: String,
+        ?provider_name: String,
+        ?add_tags: Array[Types::Tag],
+        ?remove_tags: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor provider_name: String?
+      attr_accessor add_tags: Array[Types::Tag]?
+      attr_accessor remove_tags: Array[String]?
+    end
+
+    class UpdatePortfolioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_detail: Types::PortfolioDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_detail: Types::PortfolioDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdatePortfolioShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?portfolio_id: String,
+        ?account_id: String,
+        ?organization_node: Types::OrganizationNode,
+        ?share_tag_options: bool,
+        ?share_principals: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor portfolio_id: String?
+      attr_accessor account_id: String?
+      attr_accessor organization_node: Types::OrganizationNode?
+      attr_accessor share_tag_options: bool?
+      attr_accessor share_principals: bool?
+    end
+
+    class UpdatePortfolioShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portfolio_share_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portfolio_share_token: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?id: String,
+        ?name: String,
+        ?owner: String,
+        ?description: String,
+        ?distributor: String,
+        ?support_description: String,
+        ?support_email: String,
+        ?support_url: String,
+        ?add_tags: Array[Types::Tag],
+        ?remove_tags: Array[String],
+        ?source_connection: Types::SourceConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor description: String?
+      attr_accessor distributor: String?
+      attr_accessor support_description: String?
+      attr_accessor support_email: String?
+      attr_accessor support_url: String?
+      attr_accessor add_tags: Array[Types::Tag]?
+      attr_accessor remove_tags: Array[String]?
+      attr_accessor source_connection: Types::SourceConnection?
+    end
+
+    class UpdateProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_view_detail: Types::ProductViewDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_view_detail: Types::ProductViewDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateProvisionedProductInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provisioned_product_name: String,
+        ?provisioned_product_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?provisioning_artifact_id: String,
+        ?provisioning_artifact_name: String,
+        ?path_id: String,
+        ?path_name: String,
+        ?provisioning_parameters: Array[Types::UpdateProvisioningParameter],
+        ?provisioning_preferences: Types::UpdateProvisioningPreferences,
+        ?tags: Array[Types::Tag],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provisioned_product_name: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor provisioning_artifact_name: String?
+      attr_accessor path_id: String?
+      attr_accessor path_name: String?
+      attr_accessor provisioning_parameters: Array[Types::UpdateProvisioningParameter]?
+      attr_accessor provisioning_preferences: Types::UpdateProvisioningPreferences?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProvisionedProductOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_detail: Types::RecordDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_detail: Types::RecordDetail?
+    end
+
+    class UpdateProvisionedProductPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?provisioned_product_id: String,
+        ?provisioned_product_properties: Hash[String, String],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor provisioned_product_id: String?
+      attr_accessor provisioned_product_properties: Hash[String, String]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class UpdateProvisionedProductPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_product_id: String,
+        ?provisioned_product_properties: Hash[String, String],
+        ?record_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_product_id: String?
+      attr_accessor provisioned_product_properties: Hash[String, String]?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateProvisioningArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept_language: String,
+        ?product_id: String,
+        ?provisioning_artifact_id: String,
+        ?name: String,
+        ?description: String,
+        ?active: bool,
+        ?guidance: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept_language: String?
+      attr_accessor product_id: String?
+      attr_accessor provisioning_artifact_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor active: bool?
+      attr_accessor guidance: String?
+    end
+
+    class UpdateProvisioningArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_artifact_detail: Types::ProvisioningArtifactDetail,
+        ?info: Hash[String, String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail?
+      attr_accessor info: Hash[String, String]?
+      attr_accessor status: String?
+    end
+
+    class UpdateProvisioningParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?use_previous_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor use_previous_value: bool?
+    end
+
+    class UpdateProvisioningPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_set_accounts: Array[String],
+        ?stack_set_regions: Array[String],
+        ?stack_set_failure_tolerance_count: Integer,
+        ?stack_set_failure_tolerance_percentage: Integer,
+        ?stack_set_max_concurrency_count: Integer,
+        ?stack_set_max_concurrency_percentage: Integer,
+        ?stack_set_operation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_set_accounts: Array[String]?
+      attr_accessor stack_set_regions: Array[String]?
+      attr_accessor stack_set_failure_tolerance_count: Integer?
+      attr_accessor stack_set_failure_tolerance_percentage: Integer?
+      attr_accessor stack_set_max_concurrency_count: Integer?
+      attr_accessor stack_set_max_concurrency_percentage: Integer?
+      attr_accessor stack_set_operation_type: String?
+    end
+
+    class UpdateServiceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?definition: Hash[String, String],
+        ?description: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor definition: Hash[String, String]?
+      attr_accessor description: String?
+      attr_accessor accept_language: String?
+    end
+
+    class UpdateServiceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_action_detail: Types::ServiceActionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_action_detail: Types::ServiceActionDetail?
+    end
+
+    class UpdateTagOptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?value: String,
+        ?active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor value: String?
+      attr_accessor active: bool?
+    end
+
+    class UpdateTagOptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_option_detail: Types::TagOptionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_option_detail: Types::TagOptionDetail?
+    end
+
+    class UsageInstruction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+  end
+end

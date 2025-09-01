@@ -1,0 +1,3677 @@
+module Aws::CodeBuild
+  module Types
+
+    class AccountLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountSuspendedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ArtifactNamespace
+      NONE: String
+      BUILD_ID: String
+    end
+
+    module ArtifactPackaging
+      NONE: String
+      ZIP: String
+    end
+
+    module ArtifactsType
+      CODEPIPELINE: String
+      S3: String
+      NO_ARTIFACTS: String
+    end
+
+    module AuthType
+      OAUTH: String
+      BASIC_AUTH: String
+      PERSONAL_ACCESS_TOKEN: String
+      CODECONNECTIONS: String
+      SECRETS_MANAGER: String
+    end
+
+    class AutoRetryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_retry_limit: Integer,
+        ?auto_retry_number: Integer,
+        ?next_auto_retry: String,
+        ?previous_auto_retry: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_retry_limit: Integer?
+      attr_accessor auto_retry_number: Integer?
+      attr_accessor next_auto_retry: String?
+      attr_accessor previous_auto_retry: String?
+    end
+
+    class BatchDeleteBuildsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchDeleteBuildsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?builds_deleted: Array[String],
+        ?builds_not_deleted: Array[Types::BuildNotDeleted],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor builds_deleted: Array[String]?
+      attr_accessor builds_not_deleted: Array[Types::BuildNotDeleted]?
+    end
+
+    class BatchGetBuildBatchesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchGetBuildBatchesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_batches: Array[Types::BuildBatch],
+        ?build_batches_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_batches: Array[Types::BuildBatch]?
+      attr_accessor build_batches_not_found: Array[String]?
+    end
+
+    class BatchGetBuildsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchGetBuildsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?builds: Array[Types::Build],
+        ?builds_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor builds: Array[Types::Build]?
+      attr_accessor builds_not_found: Array[String]?
+    end
+
+    class BatchGetCommandExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox_id: String,
+        ?command_execution_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox_id: String?
+      attr_accessor command_execution_ids: Array[String]?
+    end
+
+    class BatchGetCommandExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command_executions: Array[Types::CommandExecution],
+        ?command_executions_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command_executions: Array[Types::CommandExecution]?
+      attr_accessor command_executions_not_found: Array[String]?
+    end
+
+    class BatchGetFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+    end
+
+    class BatchGetFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleets: Array[Types::Fleet],
+        ?fleets_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleets: Array[Types::Fleet]?
+      attr_accessor fleets_not_found: Array[String]?
+    end
+
+    class BatchGetProjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+    end
+
+    class BatchGetProjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?projects: Array[Types::Project],
+        ?projects_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor projects: Array[Types::Project]?
+      attr_accessor projects_not_found: Array[String]?
+    end
+
+    class BatchGetReportGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_group_arns: Array[String]?
+    end
+
+    class BatchGetReportGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_groups: Array[Types::ReportGroup],
+        ?report_groups_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_groups: Array[Types::ReportGroup]?
+      attr_accessor report_groups_not_found: Array[String]?
+    end
+
+    class BatchGetReportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_arns: Array[String]?
+    end
+
+    class BatchGetReportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reports: Array[Types::Report],
+        ?reports_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reports: Array[Types::Report]?
+      attr_accessor reports_not_found: Array[String]?
+    end
+
+    class BatchGetSandboxesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchGetSandboxesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandboxes: Array[Types::Sandbox],
+        ?sandboxes_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandboxes: Array[Types::Sandbox]?
+      attr_accessor sandboxes_not_found: Array[String]?
+    end
+
+    module BatchReportModeType
+      REPORT_INDIVIDUAL_BUILDS: String
+      REPORT_AGGREGATED_BATCH: String
+    end
+
+    class BatchRestrictions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_builds_allowed: Integer,
+        ?compute_types_allowed: Array[String],
+        ?fleets_allowed: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_builds_allowed: Integer?
+      attr_accessor compute_types_allowed: Array[String]?
+      attr_accessor fleets_allowed: Array[String]?
+    end
+
+    module BucketOwnerAccess
+      NONE: String
+      READ_ONLY: String
+      FULL: String
+    end
+
+    class Build
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?build_number: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?current_phase: String,
+        ?build_status: String,
+        ?source_version: String,
+        ?resolved_source_version: String,
+        ?project_name: String,
+        ?phases: Array[Types::BuildPhase],
+        ?source: Types::ProjectSource,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?artifacts: Types::BuildArtifacts,
+        ?secondary_artifacts: Array[Types::BuildArtifacts],
+        ?cache: Types::ProjectCache,
+        ?environment: Types::ProjectEnvironment,
+        ?service_role: String,
+        ?logs: Types::LogsLocation,
+        ?timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?build_complete: bool,
+        ?initiator: String,
+        ?vpc_config: Types::VpcConfig,
+        ?network_interface: Types::NetworkInterface,
+        ?encryption_key: String,
+        ?exported_environment_variables: Array[Types::ExportedEnvironmentVariable],
+        ?report_arns: Array[String],
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?debug_session: Types::DebugSession,
+        ?build_batch_arn: String,
+        ?auto_retry_config: Types::AutoRetryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor build_number: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor current_phase: String?
+      attr_accessor build_status: String?
+      attr_accessor source_version: String?
+      attr_accessor resolved_source_version: String?
+      attr_accessor project_name: String?
+      attr_accessor phases: Array[Types::BuildPhase]?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor artifacts: Types::BuildArtifacts?
+      attr_accessor secondary_artifacts: Array[Types::BuildArtifacts]?
+      attr_accessor cache: Types::ProjectCache?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor service_role: String?
+      attr_accessor logs: Types::LogsLocation?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor build_complete: bool?
+      attr_accessor initiator: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor network_interface: Types::NetworkInterface?
+      attr_accessor encryption_key: String?
+      attr_accessor exported_environment_variables: Array[Types::ExportedEnvironmentVariable]?
+      attr_accessor report_arns: Array[String]?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor debug_session: Types::DebugSession?
+      attr_accessor build_batch_arn: String?
+      attr_accessor auto_retry_config: Types::AutoRetryConfig?
+    end
+
+    class BuildArtifacts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?sha256sum: String,
+        ?md5sum: String,
+        ?override_artifact_name: bool,
+        ?encryption_disabled: bool,
+        ?artifact_identifier: String,
+        ?bucket_owner_access: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor sha256sum: String?
+      attr_accessor md5sum: String?
+      attr_accessor override_artifact_name: bool?
+      attr_accessor encryption_disabled: bool?
+      attr_accessor artifact_identifier: String?
+      attr_accessor bucket_owner_access: String?
+    end
+
+    class BuildBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?current_phase: String,
+        ?build_batch_status: String,
+        ?source_version: String,
+        ?resolved_source_version: String,
+        ?project_name: String,
+        ?phases: Array[Types::BuildBatchPhase],
+        ?source: Types::ProjectSource,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?artifacts: Types::BuildArtifacts,
+        ?secondary_artifacts: Array[Types::BuildArtifacts],
+        ?cache: Types::ProjectCache,
+        ?environment: Types::ProjectEnvironment,
+        ?service_role: String,
+        ?log_config: Types::LogsConfig,
+        ?build_timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?complete: bool,
+        ?initiator: String,
+        ?vpc_config: Types::VpcConfig,
+        ?encryption_key: String,
+        ?build_batch_number: Integer,
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?build_batch_config: Types::ProjectBuildBatchConfig,
+        ?build_groups: Array[Types::BuildGroup],
+        ?debug_session_enabled: bool,
+        ?report_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor current_phase: String?
+      attr_accessor build_batch_status: String?
+      attr_accessor source_version: String?
+      attr_accessor resolved_source_version: String?
+      attr_accessor project_name: String?
+      attr_accessor phases: Array[Types::BuildBatchPhase]?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor artifacts: Types::BuildArtifacts?
+      attr_accessor secondary_artifacts: Array[Types::BuildArtifacts]?
+      attr_accessor cache: Types::ProjectCache?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::LogsConfig?
+      attr_accessor build_timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor complete: bool?
+      attr_accessor initiator: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor encryption_key: String?
+      attr_accessor build_batch_number: Integer?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig?
+      attr_accessor build_groups: Array[Types::BuildGroup]?
+      attr_accessor debug_session_enabled: bool?
+      attr_accessor report_arns: Array[String]?
+    end
+
+    class BuildBatchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class BuildBatchPhase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phase_type: String,
+        ?phase_status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?duration_in_seconds: Integer,
+        ?contexts: Array[Types::PhaseContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phase_type: String?
+      attr_accessor phase_status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor contexts: Array[Types::PhaseContext]?
+    end
+
+    module BuildBatchPhaseType
+      SUBMITTED: String
+      DOWNLOAD_BATCHSPEC: String
+      IN_PROGRESS: String
+      COMBINE_ARTIFACTS: String
+      SUCCEEDED: String
+      FAILED: String
+      STOPPED: String
+    end
+
+    class BuildGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?depends_on: Array[String],
+        ?ignore_failure: bool,
+        ?current_build_summary: Types::BuildSummary,
+        ?prior_build_summary_list: Array[Types::BuildSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor depends_on: Array[String]?
+      attr_accessor ignore_failure: bool?
+      attr_accessor current_build_summary: Types::BuildSummary?
+      attr_accessor prior_build_summary_list: Array[Types::BuildSummary]?
+    end
+
+    class BuildNotDeleted
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status_code: String?
+    end
+
+    class BuildPhase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phase_type: String,
+        ?phase_status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?duration_in_seconds: Integer,
+        ?contexts: Array[Types::PhaseContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phase_type: String?
+      attr_accessor phase_status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor contexts: Array[Types::PhaseContext]?
+    end
+
+    module BuildPhaseType
+      SUBMITTED: String
+      QUEUED: String
+      PROVISIONING: String
+      DOWNLOAD_SOURCE: String
+      INSTALL: String
+      PRE_BUILD: String
+      BUILD: String
+      POST_BUILD: String
+      UPLOAD_ARTIFACTS: String
+      FINALIZING: String
+      COMPLETED: String
+    end
+
+    class BuildStatusConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context: String,
+        ?target_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context: String?
+      attr_accessor target_url: String?
+    end
+
+    class BuildSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?requested_on: Time,
+        ?build_status: String,
+        ?primary_artifact: Types::ResolvedArtifact,
+        ?secondary_artifacts: Array[Types::ResolvedArtifact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor requested_on: Time?
+      attr_accessor build_status: String?
+      attr_accessor primary_artifact: Types::ResolvedArtifact?
+      attr_accessor secondary_artifacts: Array[Types::ResolvedArtifact]?
+    end
+
+    module CacheMode
+      LOCAL_DOCKER_LAYER_CACHE: String
+      LOCAL_SOURCE_CACHE: String
+      LOCAL_CUSTOM_CACHE: String
+    end
+
+    module CacheType
+      NO_CACHE: String
+      S3: String
+      LOCAL: String
+    end
+
+    class CloudWatchLogsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?group_name: String,
+        ?stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor group_name: String?
+      attr_accessor stream_name: String?
+    end
+
+    class CodeCoverage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?report_arn: String,
+        ?file_path: String,
+        ?line_coverage_percentage: Float,
+        ?lines_covered: Integer,
+        ?lines_missed: Integer,
+        ?branch_coverage_percentage: Float,
+        ?branches_covered: Integer,
+        ?branches_missed: Integer,
+        ?expired: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor report_arn: String?
+      attr_accessor file_path: String?
+      attr_accessor line_coverage_percentage: Float?
+      attr_accessor lines_covered: Integer?
+      attr_accessor lines_missed: Integer?
+      attr_accessor branch_coverage_percentage: Float?
+      attr_accessor branches_covered: Integer?
+      attr_accessor branches_missed: Integer?
+      attr_accessor expired: Time?
+    end
+
+    class CodeCoverageReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_coverage_percentage: Float,
+        ?lines_covered: Integer,
+        ?lines_missed: Integer,
+        ?branch_coverage_percentage: Float,
+        ?branches_covered: Integer,
+        ?branches_missed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_coverage_percentage: Float?
+      attr_accessor lines_covered: Integer?
+      attr_accessor lines_missed: Integer?
+      attr_accessor branch_coverage_percentage: Float?
+      attr_accessor branches_covered: Integer?
+      attr_accessor branches_missed: Integer?
+    end
+
+    class CommandExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sandbox_id: String,
+        ?submit_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?command: String,
+        ?type: String,
+        ?exit_code: String,
+        ?standard_output_content: String,
+        ?standard_err_content: String,
+        ?logs: Types::LogsLocation,
+        ?sandbox_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sandbox_id: String?
+      attr_accessor submit_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor command: String?
+      attr_accessor type: String?
+      attr_accessor exit_code: String?
+      attr_accessor standard_output_content: String?
+      attr_accessor standard_err_content: String?
+      attr_accessor logs: Types::LogsLocation?
+      attr_accessor sandbox_arn: String?
+    end
+
+    module CommandType
+      SHELL: String
+    end
+
+    class ComputeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu: Integer,
+        ?memory: Integer,
+        ?disk: Integer,
+        ?machine_type: String,
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu: Integer?
+      attr_accessor memory: Integer?
+      attr_accessor disk: Integer?
+      attr_accessor machine_type: String?
+      attr_accessor instance_type: String?
+    end
+
+    module ComputeType
+      BUILD_GENERAL1_SMALL: String
+      BUILD_GENERAL1_MEDIUM: String
+      BUILD_GENERAL1_LARGE: String
+      BUILD_GENERAL1_XLARGE: String
+      BUILD_GENERAL1_2XLARGE: String
+      BUILD_LAMBDA_1GB: String
+      BUILD_LAMBDA_2GB: String
+      BUILD_LAMBDA_4GB: String
+      BUILD_LAMBDA_8GB: String
+      BUILD_LAMBDA_10GB: String
+      ATTRIBUTE_BASED_COMPUTE: String
+      CUSTOM_INSTANCE_TYPE: String
+    end
+
+    class CreateFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?base_capacity: Integer,
+        ?environment_type: String,
+        ?compute_type: String,
+        ?compute_configuration: Types::ComputeConfiguration,
+        ?scaling_configuration: Types::ScalingConfigurationInput,
+        ?overflow_behavior: String,
+        ?vpc_config: Types::VpcConfig,
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?image_id: String,
+        ?fleet_service_role: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor base_capacity: Integer?
+      attr_accessor environment_type: String?
+      attr_accessor compute_type: String?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor scaling_configuration: Types::ScalingConfigurationInput?
+      attr_accessor overflow_behavior: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor image_id: String?
+      attr_accessor fleet_service_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet: Types::Fleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet: Types::Fleet?
+    end
+
+    class CreateProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?source: Types::ProjectSource,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?source_version: String,
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?artifacts: Types::ProjectArtifacts,
+        ?secondary_artifacts: Array[Types::ProjectArtifacts],
+        ?cache: Types::ProjectCache,
+        ?environment: Types::ProjectEnvironment,
+        ?service_role: String,
+        ?timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?encryption_key: String,
+        ?tags: Array[Types::Tag],
+        ?vpc_config: Types::VpcConfig,
+        ?badge_enabled: bool,
+        ?logs_config: Types::LogsConfig,
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?build_batch_config: Types::ProjectBuildBatchConfig,
+        ?concurrent_build_limit: Integer,
+        ?auto_retry_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor source_version: String?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor artifacts: Types::ProjectArtifacts?
+      attr_accessor secondary_artifacts: Array[Types::ProjectArtifacts]?
+      attr_accessor cache: Types::ProjectCache?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor service_role: String?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor encryption_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor badge_enabled: bool?
+      attr_accessor logs_config: Types::LogsConfig?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig?
+      attr_accessor concurrent_build_limit: Integer?
+      attr_accessor auto_retry_limit: Integer?
+    end
+
+    class CreateProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project: Types::Project,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project: Types::Project?
+    end
+
+    class CreateReportGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?export_config: Types::ReportExportConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor export_config: Types::ReportExportConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateReportGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_group: Types::ReportGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_group: Types::ReportGroup?
+    end
+
+    class CreateWebhookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?branch_filter: String,
+        ?filter_groups: Array[Array[Types::WebhookFilter]],
+        ?build_type: String,
+        ?manual_creation: bool,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?pull_request_build_policy: Types::PullRequestBuildPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor branch_filter: String?
+      attr_accessor filter_groups: Array[Array[Types::WebhookFilter]]?
+      attr_accessor build_type: String?
+      attr_accessor manual_creation: bool?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor pull_request_build_policy: Types::PullRequestBuildPolicy?
+    end
+
+    class CreateWebhookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    module CredentialProviderType
+      SECRETS_MANAGER: String
+    end
+
+    class DebugSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_enabled: bool,
+        ?session_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_enabled: bool?
+      attr_accessor session_target: String?
+    end
+
+    class DeleteBuildBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteBuildBatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?builds_deleted: Array[String],
+        ?builds_not_deleted: Array[Types::BuildNotDeleted],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor builds_deleted: Array[String]?
+      attr_accessor builds_not_deleted: Array[Types::BuildNotDeleted]?
+    end
+
+    class DeleteFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReportGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?delete_reports: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor delete_reports: bool?
+    end
+
+    class DeleteReportGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSourceCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteSourceCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteWebhookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+    end
+
+    class DeleteWebhookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeCodeCoveragesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?sort_by: String,
+        ?min_line_coverage_percentage: Float,
+        ?max_line_coverage_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor min_line_coverage_percentage: Float?
+      attr_accessor max_line_coverage_percentage: Float?
+    end
+
+    class DescribeCodeCoveragesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?code_coverages: Array[Types::CodeCoverage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor code_coverages: Array[Types::CodeCoverage]?
+    end
+
+    class DescribeTestCasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::TestCaseFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::TestCaseFilter?
+    end
+
+    class DescribeTestCasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?test_cases: Array[Types::TestCase],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor test_cases: Array[Types::TestCase]?
+    end
+
+    class DockerServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_type: String,
+        ?security_group_ids: Array[String],
+        ?status: Types::DockerServerStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_type: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor status: Types::DockerServerStatus?
+    end
+
+    class DockerServerStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    class EnvironmentImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor versions: Array[String]?
+    end
+
+    class EnvironmentLanguage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?images: Array[Types::EnvironmentImage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor images: Array[Types::EnvironmentImage]?
+    end
+
+    class EnvironmentPlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform: String,
+        ?languages: Array[Types::EnvironmentLanguage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform: String?
+      attr_accessor languages: Array[Types::EnvironmentLanguage]?
+    end
+
+    module EnvironmentType
+      WINDOWS_CONTAINER: String
+      LINUX_CONTAINER: String
+      LINUX_GPU_CONTAINER: String
+      ARM_CONTAINER: String
+      WINDOWS_SERVER_2019_CONTAINER: String
+      WINDOWS_SERVER_2022_CONTAINER: String
+      LINUX_LAMBDA_CONTAINER: String
+      ARM_LAMBDA_CONTAINER: String
+      LINUX_EC2: String
+      ARM_EC2: String
+      WINDOWS_EC2: String
+      MAC_ARM: String
+    end
+
+    class EnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module EnvironmentVariableType
+      PLAINTEXT: String
+      PARAMETER_STORE: String
+      SECRETS_MANAGER: String
+    end
+
+    class ExportedEnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module FileSystemType
+      EFS: String
+    end
+
+    class Fleet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?created: Time,
+        ?last_modified: Time,
+        ?status: Types::FleetStatus,
+        ?base_capacity: Integer,
+        ?environment_type: String,
+        ?compute_type: String,
+        ?compute_configuration: Types::ComputeConfiguration,
+        ?scaling_configuration: Types::ScalingConfigurationOutput,
+        ?overflow_behavior: String,
+        ?vpc_config: Types::VpcConfig,
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?image_id: String,
+        ?fleet_service_role: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor created: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor status: Types::FleetStatus?
+      attr_accessor base_capacity: Integer?
+      attr_accessor environment_type: String?
+      attr_accessor compute_type: String?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor scaling_configuration: Types::ScalingConfigurationOutput?
+      attr_accessor overflow_behavior: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor image_id: String?
+      attr_accessor fleet_service_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module FleetContextCode
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+      ACTION_REQUIRED: String
+      PENDING_DELETION: String
+      INSUFFICIENT_CAPACITY: String
+    end
+
+    module FleetOverflowBehavior
+      QUEUE: String
+      ON_DEMAND: String
+    end
+
+    class FleetProxyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?effect: String,
+        ?entities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor effect: String?
+      attr_accessor entities: Array[String]?
+    end
+
+    module FleetProxyRuleBehavior
+      ALLOW_ALL: String
+      DENY_ALL: String
+    end
+
+    module FleetProxyRuleEffectType
+      ALLOW: String
+      DENY: String
+    end
+
+    module FleetProxyRuleType
+      DOMAIN: String
+      IP: String
+    end
+
+    module FleetScalingMetricType
+      FLEET_UTILIZATION_RATE: String
+    end
+
+    module FleetScalingType
+      TARGET_TRACKING_SCALING: String
+    end
+
+    module FleetSortByType
+      NAME: String
+      CREATED_TIME: String
+      LAST_MODIFIED_TIME: String
+    end
+
+    class FleetStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?context: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor context: String?
+      attr_accessor message: String?
+    end
+
+    module FleetStatusCode
+      CREATING: String
+      UPDATING: String
+      ROTATING: String
+      PENDING_DELETION: String
+      DELETING: String
+      CREATE_FAILED: String
+      UPDATE_ROLLBACK_FAILED: String
+      ACTIVE: String
+    end
+
+    class GetReportGroupTrendInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_group_arn: String,
+        ?num_of_reports: Integer,
+        ?trend_field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_group_arn: String?
+      attr_accessor num_of_reports: Integer?
+      attr_accessor trend_field: String?
+    end
+
+    class GetReportGroupTrendOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stats: Types::ReportGroupTrendStats,
+        ?raw_data: Array[Types::ReportWithRawData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stats: Types::ReportGroupTrendStats?
+      attr_accessor raw_data: Array[Types::ReportWithRawData]?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GitSubmodulesConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fetch_submodules: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fetch_submodules: bool?
+    end
+
+    module ImagePullCredentialsType
+      CODEBUILD: String
+      SERVICE_ROLE: String
+    end
+
+    class ImportSourceCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?token: String,
+        ?server_type: String,
+        ?auth_type: String,
+        ?should_overwrite: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor token: String?
+      attr_accessor server_type: String?
+      attr_accessor auth_type: String?
+      attr_accessor should_overwrite: bool?
+    end
+
+    class ImportSourceCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidateProjectCacheInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+    end
+
+    class InvalidateProjectCacheOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module LanguageType
+      JAVA: String
+      PYTHON: String
+      NODE_JS: String
+      RUBY: String
+      GOLANG: String
+      DOCKER: String
+      ANDROID: String
+      DOTNET: String
+      BASE: String
+      PHP: String
+    end
+
+    class ListBuildBatchesForProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?filter: Types::BuildBatchFilter,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor filter: Types::BuildBatchFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildBatchesForProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildBatchesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::BuildBatchFilter,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::BuildBatchFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildBatchesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsForProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsForProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCommandExecutionsForSandboxInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox_id: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCommandExecutionsForSandboxOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command_executions: Array[Types::CommandExecution],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command_executions: Array[Types::CommandExecution]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCuratedEnvironmentImagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ListCuratedEnvironmentImagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platforms: Array[Types::EnvironmentPlatform],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platforms: Array[Types::EnvironmentPlatform]?
+    end
+
+    class ListFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    class ListFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?fleets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor fleets: Array[String]?
+    end
+
+    class ListProjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListProjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?projects: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor projects: Array[String]?
+    end
+
+    class ListReportGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReportGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?report_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor report_groups: Array[String]?
+    end
+
+    class ListReportsForReportGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_group_arn: String,
+        ?next_token: String,
+        ?sort_order: String,
+        ?max_results: Integer,
+        ?filter: Types::ReportFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor sort_order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::ReportFilter?
+    end
+
+    class ListReportsForReportGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reports: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reports: Array[String]?
+    end
+
+    class ListReportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::ReportFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::ReportFilter?
+    end
+
+    class ListReportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reports: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reports: Array[String]?
+    end
+
+    class ListSandboxesForProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListSandboxesForProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSandboxesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListSandboxesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSharedProjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSharedProjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?projects: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor projects: Array[String]?
+    end
+
+    class ListSharedReportGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSharedReportGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?report_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor report_groups: Array[String]?
+    end
+
+    class ListSourceCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ListSourceCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_credentials_infos: Array[Types::SourceCredentialsInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_credentials_infos: Array[Types::SourceCredentialsInfo]?
+    end
+
+    class LogsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogsConfig,
+        ?s3_logs: Types::S3LogsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsConfig?
+      attr_accessor s3_logs: Types::S3LogsConfig?
+    end
+
+    module LogsConfigStatusType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class LogsLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?stream_name: String,
+        ?deep_link: String,
+        ?s3_deep_link: String,
+        ?cloud_watch_logs_arn: String,
+        ?s3_logs_arn: String,
+        ?cloud_watch_logs: Types::CloudWatchLogsConfig,
+        ?s3_logs: Types::S3LogsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor stream_name: String?
+      attr_accessor deep_link: String?
+      attr_accessor s3_deep_link: String?
+      attr_accessor cloud_watch_logs_arn: String?
+      attr_accessor s3_logs_arn: String?
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsConfig?
+      attr_accessor s3_logs: Types::S3LogsConfig?
+    end
+
+    module MachineType
+      GENERAL: String
+      NVME: String
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_id: String,
+        ?network_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_id: String?
+      attr_accessor network_interface_id: String?
+    end
+
+    class OAuthProviderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PhaseContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor message: String?
+    end
+
+    module PlatformType
+      DEBIAN: String
+      AMAZON_LINUX: String
+      UBUNTU: String
+      WINDOWS_SERVER: String
+    end
+
+    class Project
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?source: Types::ProjectSource,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?source_version: String,
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?artifacts: Types::ProjectArtifacts,
+        ?secondary_artifacts: Array[Types::ProjectArtifacts],
+        ?cache: Types::ProjectCache,
+        ?environment: Types::ProjectEnvironment,
+        ?service_role: String,
+        ?timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?encryption_key: String,
+        ?tags: Array[Types::Tag],
+        ?created: Time,
+        ?last_modified: Time,
+        ?webhook: Types::Webhook,
+        ?vpc_config: Types::VpcConfig,
+        ?badge: Types::ProjectBadge,
+        ?logs_config: Types::LogsConfig,
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?build_batch_config: Types::ProjectBuildBatchConfig,
+        ?concurrent_build_limit: Integer,
+        ?project_visibility: String,
+        ?public_project_alias: String,
+        ?resource_access_role: String,
+        ?auto_retry_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor source_version: String?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor artifacts: Types::ProjectArtifacts?
+      attr_accessor secondary_artifacts: Array[Types::ProjectArtifacts]?
+      attr_accessor cache: Types::ProjectCache?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor service_role: String?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor encryption_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor webhook: Types::Webhook?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor badge: Types::ProjectBadge?
+      attr_accessor logs_config: Types::LogsConfig?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig?
+      attr_accessor concurrent_build_limit: Integer?
+      attr_accessor project_visibility: String?
+      attr_accessor public_project_alias: String?
+      attr_accessor resource_access_role: String?
+      attr_accessor auto_retry_limit: Integer?
+    end
+
+    class ProjectArtifacts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?path: String,
+        ?namespace_type: String,
+        ?name: String,
+        ?packaging: String,
+        ?override_artifact_name: bool,
+        ?encryption_disabled: bool,
+        ?artifact_identifier: String,
+        ?bucket_owner_access: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor path: String?
+      attr_accessor namespace_type: String?
+      attr_accessor name: String?
+      attr_accessor packaging: String?
+      attr_accessor override_artifact_name: bool?
+      attr_accessor encryption_disabled: bool?
+      attr_accessor artifact_identifier: String?
+      attr_accessor bucket_owner_access: String?
+    end
+
+    class ProjectBadge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?badge_enabled: bool,
+        ?badge_request_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor badge_enabled: bool?
+      attr_accessor badge_request_url: String?
+    end
+
+    class ProjectBuildBatchConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_role: String,
+        ?combine_artifacts: bool,
+        ?restrictions: Types::BatchRestrictions,
+        ?timeout_in_mins: Integer,
+        ?batch_report_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_role: String?
+      attr_accessor combine_artifacts: bool?
+      attr_accessor restrictions: Types::BatchRestrictions?
+      attr_accessor timeout_in_mins: Integer?
+      attr_accessor batch_report_mode: String?
+    end
+
+    class ProjectCache
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?modes: Array[String],
+        ?cache_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor modes: Array[String]?
+      attr_accessor cache_namespace: String?
+    end
+
+    class ProjectEnvironment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?image: String,
+        ?compute_type: String,
+        ?compute_configuration: Types::ComputeConfiguration,
+        ?fleet: Types::ProjectFleet,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?privileged_mode: bool,
+        ?certificate: String,
+        ?registry_credential: Types::RegistryCredential,
+        ?image_pull_credentials_type: String,
+        ?docker_server: Types::DockerServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor image: String?
+      attr_accessor compute_type: String?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor fleet: Types::ProjectFleet?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor privileged_mode: bool?
+      attr_accessor certificate: String?
+      attr_accessor registry_credential: Types::RegistryCredential?
+      attr_accessor image_pull_credentials_type: String?
+      attr_accessor docker_server: Types::DockerServer?
+    end
+
+    class ProjectFileSystemLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?mount_point: String,
+        ?identifier: String,
+        ?mount_options: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor mount_point: String?
+      attr_accessor identifier: String?
+      attr_accessor mount_options: String?
+    end
+
+    class ProjectFleet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_arn: String?
+    end
+
+    module ProjectSortByType
+      NAME: String
+      CREATED_TIME: String
+      LAST_MODIFIED_TIME: String
+    end
+
+    class ProjectSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?git_clone_depth: Integer,
+        ?git_submodules_config: Types::GitSubmodulesConfig,
+        ?buildspec: String,
+        ?auth: Types::SourceAuth,
+        ?report_build_status: bool,
+        ?build_status_config: Types::BuildStatusConfig,
+        ?insecure_ssl: bool,
+        ?source_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor git_clone_depth: Integer?
+      attr_accessor git_submodules_config: Types::GitSubmodulesConfig?
+      attr_accessor buildspec: String?
+      attr_accessor auth: Types::SourceAuth?
+      attr_accessor report_build_status: bool?
+      attr_accessor build_status_config: Types::BuildStatusConfig?
+      attr_accessor insecure_ssl: bool?
+      attr_accessor source_identifier: String?
+    end
+
+    class ProjectSourceVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_identifier: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_identifier: String?
+      attr_accessor source_version: String?
+    end
+
+    module ProjectVisibilityType
+      PUBLIC_READ: String
+      PRIVATE: String
+    end
+
+    class ProxyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_behavior: String,
+        ?ordered_proxy_rules: Array[Types::FleetProxyRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_behavior: String?
+      attr_accessor ordered_proxy_rules: Array[Types::FleetProxyRule]?
+    end
+
+    module PullRequestBuildApproverRole
+      GITHUB_READ: String
+      GITHUB_TRIAGE: String
+      GITHUB_WRITE: String
+      GITHUB_MAINTAIN: String
+      GITHUB_ADMIN: String
+      GITLAB_GUEST: String
+      GITLAB_PLANNER: String
+      GITLAB_REPORTER: String
+      GITLAB_DEVELOPER: String
+      GITLAB_MAINTAINER: String
+      GITLAB_OWNER: String
+      BITBUCKET_READ: String
+      BITBUCKET_WRITE: String
+      BITBUCKET_ADMIN: String
+    end
+
+    module PullRequestBuildCommentApproval
+      DISABLED: String
+      ALL_PULL_REQUESTS: String
+      FORK_PULL_REQUESTS: String
+    end
+
+    class PullRequestBuildPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requires_comment_approval: String,
+        ?approver_roles: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requires_comment_approval: String?
+      attr_accessor approver_roles: Array[String]?
+    end
+
+    class PutResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class PutResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class RegistryCredential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credential: String,
+        ?credential_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credential: String?
+      attr_accessor credential_provider: String?
+    end
+
+    class Report
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?name: String,
+        ?report_group_arn: String,
+        ?execution_id: String,
+        ?status: String,
+        ?created: Time,
+        ?expired: Time,
+        ?export_config: Types::ReportExportConfig,
+        ?truncated: bool,
+        ?test_summary: Types::TestReportSummary,
+        ?code_coverage_summary: Types::CodeCoverageReportSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor report_group_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor status: String?
+      attr_accessor created: Time?
+      attr_accessor expired: Time?
+      attr_accessor export_config: Types::ReportExportConfig?
+      attr_accessor truncated: bool?
+      attr_accessor test_summary: Types::TestReportSummary?
+      attr_accessor code_coverage_summary: Types::CodeCoverageReportSummary?
+    end
+
+    module ReportCodeCoverageSortByType
+      LINE_COVERAGE_PERCENTAGE: String
+      FILE_PATH: String
+    end
+
+    class ReportExportConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_config_type: String,
+        ?s3_destination: Types::S3ReportExportConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_config_type: String?
+      attr_accessor s3_destination: Types::S3ReportExportConfig?
+    end
+
+    module ReportExportConfigType
+      S3: String
+      NO_EXPORT: String
+    end
+
+    class ReportFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ReportGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?export_config: Types::ReportExportConfig,
+        ?created: Time,
+        ?last_modified: Time,
+        ?tags: Array[Types::Tag],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor export_config: Types::ReportExportConfig?
+      attr_accessor created: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor status: String?
+    end
+
+    module ReportGroupSortByType
+      NAME: String
+      CREATED_TIME: String
+      LAST_MODIFIED_TIME: String
+    end
+
+    module ReportGroupStatusType
+      ACTIVE: String
+      DELETING: String
+    end
+
+    module ReportGroupTrendFieldType
+      PASS_RATE: String
+      DURATION: String
+      TOTAL: String
+      LINE_COVERAGE: String
+      LINES_COVERED: String
+      LINES_MISSED: String
+      BRANCH_COVERAGE: String
+      BRANCHES_COVERED: String
+      BRANCHES_MISSED: String
+    end
+
+    class ReportGroupTrendStats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?average: String,
+        ?max: String,
+        ?min: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor average: String?
+      attr_accessor max: String?
+      attr_accessor min: String?
+    end
+
+    module ReportPackagingType
+      ZIP: String
+      NONE: String
+    end
+
+    module ReportStatusType
+      GENERATING: String
+      SUCCEEDED: String
+      FAILED: String
+      INCOMPLETE: String
+      DELETING: String
+    end
+
+    module ReportType
+      TEST: String
+      CODE_COVERAGE: String
+    end
+
+    class ReportWithRawData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_arn: String,
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_arn: String?
+      attr_accessor data: String?
+    end
+
+    class ResolvedArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor identifier: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryBuildBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?idempotency_token: String,
+        ?retry_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor retry_type: String?
+    end
+
+    class RetryBuildBatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_batch: Types::BuildBatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_batch: Types::BuildBatch?
+    end
+
+    module RetryBuildBatchType
+      RETRY_ALL_BUILDS: String
+      RETRY_FAILED_BUILDS: String
+    end
+
+    class RetryBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class RetryBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+    end
+
+    class S3LogsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?location: String,
+        ?encryption_disabled: bool,
+        ?bucket_owner_access: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor location: String?
+      attr_accessor encryption_disabled: bool?
+      attr_accessor bucket_owner_access: String?
+    end
+
+    class S3ReportExportConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?bucket_owner: String,
+        ?path: String,
+        ?packaging: String,
+        ?encryption_key: String,
+        ?encryption_disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor bucket_owner: String?
+      attr_accessor path: String?
+      attr_accessor packaging: String?
+      attr_accessor encryption_key: String?
+      attr_accessor encryption_disabled: bool?
+    end
+
+    class SSMSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?token_value: String,
+        ?stream_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor token_value: String?
+      attr_accessor stream_url: String?
+    end
+
+    class Sandbox
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?project_name: String,
+        ?request_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?source: Types::ProjectSource,
+        ?source_version: String,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?environment: Types::ProjectEnvironment,
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?vpc_config: Types::VpcConfig,
+        ?log_config: Types::LogsConfig,
+        ?encryption_key: String,
+        ?service_role: String,
+        ?current_session: Types::SandboxSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor project_name: String?
+      attr_accessor request_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor source_version: String?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor log_config: Types::LogsConfig?
+      attr_accessor encryption_key: String?
+      attr_accessor service_role: String?
+      attr_accessor current_session: Types::SandboxSession?
+    end
+
+    class SandboxSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?current_phase: String,
+        ?phases: Array[Types::SandboxSessionPhase],
+        ?resolved_source_version: String,
+        ?logs: Types::LogsLocation,
+        ?network_interface: Types::NetworkInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor current_phase: String?
+      attr_accessor phases: Array[Types::SandboxSessionPhase]?
+      attr_accessor resolved_source_version: String?
+      attr_accessor logs: Types::LogsLocation?
+      attr_accessor network_interface: Types::NetworkInterface?
+    end
+
+    class SandboxSessionPhase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phase_type: String,
+        ?phase_status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?duration_in_seconds: Integer,
+        ?contexts: Array[Types::PhaseContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phase_type: String?
+      attr_accessor phase_status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor contexts: Array[Types::PhaseContext]?
+    end
+
+    class ScalingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_type: String,
+        ?target_tracking_scaling_configs: Array[Types::TargetTrackingScalingConfiguration],
+        ?max_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_type: String?
+      attr_accessor target_tracking_scaling_configs: Array[Types::TargetTrackingScalingConfiguration]?
+      attr_accessor max_capacity: Integer?
+    end
+
+    class ScalingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_type: String,
+        ?target_tracking_scaling_configs: Array[Types::TargetTrackingScalingConfiguration],
+        ?max_capacity: Integer,
+        ?desired_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_type: String?
+      attr_accessor target_tracking_scaling_configs: Array[Types::TargetTrackingScalingConfiguration]?
+      attr_accessor max_capacity: Integer?
+      attr_accessor desired_capacity: Integer?
+    end
+
+    class ScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?domain: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor domain: String?
+      attr_accessor scope: String?
+    end
+
+    module ServerType
+      GITHUB: String
+      BITBUCKET: String
+      GITHUB_ENTERPRISE: String
+      GITLAB: String
+      GITLAB_SELF_MANAGED: String
+    end
+
+    module SharedResourceSortByType
+      ARN: String
+      MODIFIED_TIME: String
+    end
+
+    module SortOrderType
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class SourceAuth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor resource: String?
+    end
+
+    module SourceAuthType
+      OAUTH: String
+      CODECONNECTIONS: String
+      SECRETS_MANAGER: String
+    end
+
+    class SourceCredentialsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?server_type: String,
+        ?auth_type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor server_type: String?
+      attr_accessor auth_type: String?
+      attr_accessor resource: String?
+    end
+
+    module SourceType
+      CODECOMMIT: String
+      CODEPIPELINE: String
+      GITHUB: String
+      GITLAB: String
+      GITLAB_SELF_MANAGED: String
+      S3: String
+      BITBUCKET: String
+      GITHUB_ENTERPRISE: String
+      NO_SOURCE: String
+    end
+
+    class StartBuildBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?secondary_sources_override: Array[Types::ProjectSource],
+        ?secondary_sources_version_override: Array[Types::ProjectSourceVersion],
+        ?source_version: String,
+        ?artifacts_override: Types::ProjectArtifacts,
+        ?secondary_artifacts_override: Array[Types::ProjectArtifacts],
+        ?environment_variables_override: Array[Types::EnvironmentVariable],
+        ?source_type_override: String,
+        ?source_location_override: String,
+        ?source_auth_override: Types::SourceAuth,
+        ?git_clone_depth_override: Integer,
+        ?git_submodules_config_override: Types::GitSubmodulesConfig,
+        ?buildspec_override: String,
+        ?insecure_ssl_override: bool,
+        ?report_build_batch_status_override: bool,
+        ?environment_type_override: String,
+        ?image_override: String,
+        ?compute_type_override: String,
+        ?certificate_override: String,
+        ?cache_override: Types::ProjectCache,
+        ?service_role_override: String,
+        ?privileged_mode_override: bool,
+        ?build_timeout_in_minutes_override: Integer,
+        ?queued_timeout_in_minutes_override: Integer,
+        ?encryption_key_override: String,
+        ?idempotency_token: String,
+        ?logs_config_override: Types::LogsConfig,
+        ?registry_credential_override: Types::RegistryCredential,
+        ?image_pull_credentials_type_override: String,
+        ?build_batch_config_override: Types::ProjectBuildBatchConfig,
+        ?debug_session_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor secondary_sources_override: Array[Types::ProjectSource]?
+      attr_accessor secondary_sources_version_override: Array[Types::ProjectSourceVersion]?
+      attr_accessor source_version: String?
+      attr_accessor artifacts_override: Types::ProjectArtifacts?
+      attr_accessor secondary_artifacts_override: Array[Types::ProjectArtifacts]?
+      attr_accessor environment_variables_override: Array[Types::EnvironmentVariable]?
+      attr_accessor source_type_override: String?
+      attr_accessor source_location_override: String?
+      attr_accessor source_auth_override: Types::SourceAuth?
+      attr_accessor git_clone_depth_override: Integer?
+      attr_accessor git_submodules_config_override: Types::GitSubmodulesConfig?
+      attr_accessor buildspec_override: String?
+      attr_accessor insecure_ssl_override: bool?
+      attr_accessor report_build_batch_status_override: bool?
+      attr_accessor environment_type_override: String?
+      attr_accessor image_override: String?
+      attr_accessor compute_type_override: String?
+      attr_accessor certificate_override: String?
+      attr_accessor cache_override: Types::ProjectCache?
+      attr_accessor service_role_override: String?
+      attr_accessor privileged_mode_override: bool?
+      attr_accessor build_timeout_in_minutes_override: Integer?
+      attr_accessor queued_timeout_in_minutes_override: Integer?
+      attr_accessor encryption_key_override: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor logs_config_override: Types::LogsConfig?
+      attr_accessor registry_credential_override: Types::RegistryCredential?
+      attr_accessor image_pull_credentials_type_override: String?
+      attr_accessor build_batch_config_override: Types::ProjectBuildBatchConfig?
+      attr_accessor debug_session_enabled: bool?
+    end
+
+    class StartBuildBatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_batch: Types::BuildBatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_batch: Types::BuildBatch?
+    end
+
+    class StartBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?secondary_sources_override: Array[Types::ProjectSource],
+        ?secondary_sources_version_override: Array[Types::ProjectSourceVersion],
+        ?source_version: String,
+        ?artifacts_override: Types::ProjectArtifacts,
+        ?secondary_artifacts_override: Array[Types::ProjectArtifacts],
+        ?environment_variables_override: Array[Types::EnvironmentVariable],
+        ?source_type_override: String,
+        ?source_location_override: String,
+        ?source_auth_override: Types::SourceAuth,
+        ?git_clone_depth_override: Integer,
+        ?git_submodules_config_override: Types::GitSubmodulesConfig,
+        ?buildspec_override: String,
+        ?insecure_ssl_override: bool,
+        ?report_build_status_override: bool,
+        ?build_status_config_override: Types::BuildStatusConfig,
+        ?environment_type_override: String,
+        ?image_override: String,
+        ?compute_type_override: String,
+        ?certificate_override: String,
+        ?cache_override: Types::ProjectCache,
+        ?service_role_override: String,
+        ?privileged_mode_override: bool,
+        ?timeout_in_minutes_override: Integer,
+        ?queued_timeout_in_minutes_override: Integer,
+        ?encryption_key_override: String,
+        ?idempotency_token: String,
+        ?logs_config_override: Types::LogsConfig,
+        ?registry_credential_override: Types::RegistryCredential,
+        ?image_pull_credentials_type_override: String,
+        ?debug_session_enabled: bool,
+        ?fleet_override: Types::ProjectFleet,
+        ?auto_retry_limit_override: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor secondary_sources_override: Array[Types::ProjectSource]?
+      attr_accessor secondary_sources_version_override: Array[Types::ProjectSourceVersion]?
+      attr_accessor source_version: String?
+      attr_accessor artifacts_override: Types::ProjectArtifacts?
+      attr_accessor secondary_artifacts_override: Array[Types::ProjectArtifacts]?
+      attr_accessor environment_variables_override: Array[Types::EnvironmentVariable]?
+      attr_accessor source_type_override: String?
+      attr_accessor source_location_override: String?
+      attr_accessor source_auth_override: Types::SourceAuth?
+      attr_accessor git_clone_depth_override: Integer?
+      attr_accessor git_submodules_config_override: Types::GitSubmodulesConfig?
+      attr_accessor buildspec_override: String?
+      attr_accessor insecure_ssl_override: bool?
+      attr_accessor report_build_status_override: bool?
+      attr_accessor build_status_config_override: Types::BuildStatusConfig?
+      attr_accessor environment_type_override: String?
+      attr_accessor image_override: String?
+      attr_accessor compute_type_override: String?
+      attr_accessor certificate_override: String?
+      attr_accessor cache_override: Types::ProjectCache?
+      attr_accessor service_role_override: String?
+      attr_accessor privileged_mode_override: bool?
+      attr_accessor timeout_in_minutes_override: Integer?
+      attr_accessor queued_timeout_in_minutes_override: Integer?
+      attr_accessor encryption_key_override: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor logs_config_override: Types::LogsConfig?
+      attr_accessor registry_credential_override: Types::RegistryCredential?
+      attr_accessor image_pull_credentials_type_override: String?
+      attr_accessor debug_session_enabled: bool?
+      attr_accessor fleet_override: Types::ProjectFleet?
+      attr_accessor auto_retry_limit_override: Integer?
+    end
+
+    class StartBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+    end
+
+    class StartCommandExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox_id: String,
+        ?command: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox_id: String?
+      attr_accessor command: String?
+      attr_accessor type: String?
+    end
+
+    class StartCommandExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command_execution: Types::CommandExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command_execution: Types::CommandExecution?
+    end
+
+    class StartSandboxConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox_id: String?
+    end
+
+    class StartSandboxConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_session: Types::SSMSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_session: Types::SSMSession?
+    end
+
+    class StartSandboxInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class StartSandboxOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox: Types::Sandbox,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox: Types::Sandbox?
+    end
+
+    module StatusType
+      SUCCEEDED: String
+      FAILED: String
+      FAULT: String
+      TIMED_OUT: String
+      IN_PROGRESS: String
+      STOPPED: String
+    end
+
+    class StopBuildBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopBuildBatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_batch: Types::BuildBatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_batch: Types::BuildBatch?
+    end
+
+    class StopBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+    end
+
+    class StopSandboxInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopSandboxOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sandbox: Types::Sandbox,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sandbox: Types::Sandbox?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TargetTrackingScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_type: String,
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_type: String?
+      attr_accessor target_value: Float?
+    end
+
+    class TestCase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_arn: String,
+        ?test_raw_data_path: String,
+        ?prefix: String,
+        ?name: String,
+        ?status: String,
+        ?duration_in_nano_seconds: Integer,
+        ?message: String,
+        ?expired: Time,
+        ?test_suite_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_arn: String?
+      attr_accessor test_raw_data_path: String?
+      attr_accessor prefix: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor duration_in_nano_seconds: Integer?
+      attr_accessor message: String?
+      attr_accessor expired: Time?
+      attr_accessor test_suite_name: String?
+    end
+
+    class TestCaseFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?keyword: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor keyword: String?
+    end
+
+    class TestReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Integer,
+        ?status_counts: Hash[String, Integer],
+        ?duration_in_nano_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Integer?
+      attr_accessor status_counts: Hash[String, Integer]?
+      attr_accessor duration_in_nano_seconds: Integer?
+    end
+
+    class UpdateFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?base_capacity: Integer,
+        ?environment_type: String,
+        ?compute_type: String,
+        ?compute_configuration: Types::ComputeConfiguration,
+        ?scaling_configuration: Types::ScalingConfigurationInput,
+        ?overflow_behavior: String,
+        ?vpc_config: Types::VpcConfig,
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?image_id: String,
+        ?fleet_service_role: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor base_capacity: Integer?
+      attr_accessor environment_type: String?
+      attr_accessor compute_type: String?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor scaling_configuration: Types::ScalingConfigurationInput?
+      attr_accessor overflow_behavior: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor image_id: String?
+      attr_accessor fleet_service_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet: Types::Fleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet: Types::Fleet?
+    end
+
+    class UpdateProjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?source: Types::ProjectSource,
+        ?secondary_sources: Array[Types::ProjectSource],
+        ?source_version: String,
+        ?secondary_source_versions: Array[Types::ProjectSourceVersion],
+        ?artifacts: Types::ProjectArtifacts,
+        ?secondary_artifacts: Array[Types::ProjectArtifacts],
+        ?cache: Types::ProjectCache,
+        ?environment: Types::ProjectEnvironment,
+        ?service_role: String,
+        ?timeout_in_minutes: Integer,
+        ?queued_timeout_in_minutes: Integer,
+        ?encryption_key: String,
+        ?tags: Array[Types::Tag],
+        ?vpc_config: Types::VpcConfig,
+        ?badge_enabled: bool,
+        ?logs_config: Types::LogsConfig,
+        ?file_system_locations: Array[Types::ProjectFileSystemLocation],
+        ?build_batch_config: Types::ProjectBuildBatchConfig,
+        ?concurrent_build_limit: Integer,
+        ?auto_retry_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source: Types::ProjectSource?
+      attr_accessor secondary_sources: Array[Types::ProjectSource]?
+      attr_accessor source_version: String?
+      attr_accessor secondary_source_versions: Array[Types::ProjectSourceVersion]?
+      attr_accessor artifacts: Types::ProjectArtifacts?
+      attr_accessor secondary_artifacts: Array[Types::ProjectArtifacts]?
+      attr_accessor cache: Types::ProjectCache?
+      attr_accessor environment: Types::ProjectEnvironment?
+      attr_accessor service_role: String?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor queued_timeout_in_minutes: Integer?
+      attr_accessor encryption_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor badge_enabled: bool?
+      attr_accessor logs_config: Types::LogsConfig?
+      attr_accessor file_system_locations: Array[Types::ProjectFileSystemLocation]?
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig?
+      attr_accessor concurrent_build_limit: Integer?
+      attr_accessor auto_retry_limit: Integer?
+    end
+
+    class UpdateProjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project: Types::Project,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project: Types::Project?
+    end
+
+    class UpdateProjectVisibilityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_visibility: String,
+        ?resource_access_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_visibility: String?
+      attr_accessor resource_access_role: String?
+    end
+
+    class UpdateProjectVisibilityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?public_project_alias: String,
+        ?project_visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor public_project_alias: String?
+      attr_accessor project_visibility: String?
+    end
+
+    class UpdateReportGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?export_config: Types::ReportExportConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor export_config: Types::ReportExportConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateReportGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_group: Types::ReportGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_group: Types::ReportGroup?
+    end
+
+    class UpdateWebhookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?branch_filter: String,
+        ?rotate_secret: bool,
+        ?filter_groups: Array[Array[Types::WebhookFilter]],
+        ?build_type: String,
+        ?pull_request_build_policy: Types::PullRequestBuildPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor branch_filter: String?
+      attr_accessor rotate_secret: bool?
+      attr_accessor filter_groups: Array[Array[Types::WebhookFilter]]?
+      attr_accessor build_type: String?
+      attr_accessor pull_request_build_policy: Types::PullRequestBuildPolicy?
+    end
+
+    class UpdateWebhookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnets: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class Webhook
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?payload_url: String,
+        ?secret: String,
+        ?branch_filter: String,
+        ?filter_groups: Array[Array[Types::WebhookFilter]],
+        ?build_type: String,
+        ?manual_creation: bool,
+        ?last_modified_secret: Time,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?status: String,
+        ?status_message: String,
+        ?pull_request_build_policy: Types::PullRequestBuildPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor payload_url: String?
+      attr_accessor secret: String?
+      attr_accessor branch_filter: String?
+      attr_accessor filter_groups: Array[Array[Types::WebhookFilter]]?
+      attr_accessor build_type: String?
+      attr_accessor manual_creation: bool?
+      attr_accessor last_modified_secret: Time?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor pull_request_build_policy: Types::PullRequestBuildPolicy?
+    end
+
+    module WebhookBuildType
+      BUILD: String
+      BUILD_BATCH: String
+      RUNNER_BUILDKITE_BUILD: String
+    end
+
+    class WebhookFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?pattern: String,
+        ?exclude_matched_pattern: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor pattern: String?
+      attr_accessor exclude_matched_pattern: bool?
+    end
+
+    module WebhookFilterType
+      EVENT: String
+      BASE_REF: String
+      HEAD_REF: String
+      ACTOR_ACCOUNT_ID: String
+      FILE_PATH: String
+      COMMIT_MESSAGE: String
+      WORKFLOW_NAME: String
+      TAG_NAME: String
+      RELEASE_NAME: String
+      REPOSITORY_NAME: String
+      ORGANIZATION_NAME: String
+    end
+
+    module WebhookScopeType
+      GITHUB_ORGANIZATION: String
+      GITHUB_GLOBAL: String
+      GITLAB_GROUP: String
+    end
+
+    module WebhookStatus
+      CREATING: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETING: String
+    end
+  end
+end

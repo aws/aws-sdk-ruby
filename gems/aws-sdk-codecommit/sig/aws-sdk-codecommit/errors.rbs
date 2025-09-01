@@ -1,0 +1,571 @@
+module Aws::CodeCommit
+  module Errors
+    class ActorDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleNameAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleTemplateContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleTemplateDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleTemplateInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleTemplateNameAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalRuleTemplateNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalStateRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AuthorDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BeforeCommitIdAndAfterCommitIdAreSameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BlobIdDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BlobIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BranchDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BranchNameExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BranchNameIsTagNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BranchNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotDeleteApprovalRuleFromTemplateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotModifyApprovalRuleFromTemplateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientRequestTokenRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentContentSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentDeletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommentNotCreatedByCallerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitIdDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitIdsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitIdsListRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitMessageLengthExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CommitRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentReferenceUpdateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DefaultBranchCannotBeDeletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryNameConflictsWithFileNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionIntegrityChecksFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyInvalidIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyInvalidUsageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionKeyUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileContentAndSourceFileSpecifiedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileContentSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileEntryRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileModeRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileNameConflictsWithDirectoryNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FilePathConflictsWithSubmodulePathException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FolderContentSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FolderDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotencyParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidActorArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalRuleContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalRuleNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalRuleTemplateContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalRuleTemplateDescriptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalRuleTemplateNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAuthorArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBlobIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBranchNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidClientRequestTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCommentIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCommitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCommitIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConflictDetailLevelException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConflictResolutionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConflictResolutionStrategyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidContinuationTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeletionParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDescriptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDestinationCommitSpecifierException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEmailException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFileLocationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFileModeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFilePositionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMaxConflictFilesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMaxMergeHunksException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMaxResultsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMergeOptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOrderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOverrideStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParentCommitIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPathException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPullRequestEventTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPullRequestIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPullRequestStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPullRequestStatusUpdateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReactionUserArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReactionValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReferenceNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRelativeFileVersionEnumException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReplacementContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReplacementTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryDescriptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerBranchNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerCustomDataException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerDestinationArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerEventsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRepositoryTriggerRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRevisionIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRuleContentSha256Exception < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSortByException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSourceCommitSpecifierException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSystemTagUsageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagKeysListException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagsMapException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetBranchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTitleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ManualMergeRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumBranchesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumConflictResolutionEntriesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumFileContentToLoadExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumFileEntriesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumItemsToCompareExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumNumberOfApprovalsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumOpenPullRequestsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumRepositoryNamesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumRepositoryTriggersExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumRuleTemplatesAssociatedWithRepositoryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MergeOptionRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MultipleConflictResolutionEntriesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MultipleRepositoriesInPullRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NameLengthExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoChangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NumberOfRuleTemplatesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NumberOfRulesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OverrideAlreadySetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OverrideStatusRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParentCommitDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParentCommitIdOutdatedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParentCommitIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PathDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PathRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestAlreadyClosedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestApprovalRulesNotSatisfiedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestCannotBeApprovedByAuthorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullRequestStatusRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PutFileEntryConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReactionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReactionValueRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReferenceDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReferenceNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReferenceTypeNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplacementContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplacementTypeRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNameExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNamesRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNotAssociatedWithPullRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryTriggerBranchNameListRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryTriggerDestinationArnRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryTriggerEventsListRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryTriggerNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryTriggersListRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceArnRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RestrictedSourceFileException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevisionIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevisionNotCurrentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SameFileContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SamePathRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceAndDestinationAreSameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceFileOrContentRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagKeysListRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagsMapRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetsRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TipOfSourceReferenceIsDifferentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TipsDivergenceExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TitleRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

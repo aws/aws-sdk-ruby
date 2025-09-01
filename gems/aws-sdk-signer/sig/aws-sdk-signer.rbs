@@ -1,0 +1,5 @@
+  module Aws
+    module Signer
+      VERSION: String
+    end
+  end

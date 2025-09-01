@@ -1,0 +1,44 @@
+module Aws::PersonalizeEvents
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Action: StructureShape
+    ActionId: StringShape
+    ActionImpression: ListShape
+    ActionInteraction: StructureShape
+    ActionInteractionsList: ListShape
+    ActionList: ListShape
+    Arn: StringShape
+    Date: TimestampShape
+    ErrorMessage: StringShape
+    Event: StructureShape
+    EventAttributionSource: StringShape
+    EventList: ListShape
+    FloatType: FloatShape
+    Impression: ListShape
+    InvalidInputException: StructureShape
+    Item: StructureShape
+    ItemId: StringShape
+    ItemList: ListShape
+    MetricAttribution: StructureShape
+    PutActionInteractionsRequest: StructureShape
+    PutActionsRequest: StructureShape
+    PutEventsRequest: StructureShape
+    PutItemsRequest: StructureShape
+    PutUsersRequest: StructureShape
+    RecommendationId: StringShape
+    ResourceInUseException: StructureShape
+    ResourceNotFoundException: StructureShape
+    StringType: StringShape
+    SynthesizedJsonActionInteractionProperties: StringShape
+    SynthesizedJsonActionProperties: StringShape
+    SynthesizedJsonEventPropertiesJSON: StringShape
+    SynthesizedJsonItemProperties: StringShape
+    SynthesizedJsonUserProperties: StringShape
+    User: StructureShape
+    UserId: StringShape
+    UserList: ListShape
+
+    AmazonPersonalizeEvents: ServiceShape
+  end
+end

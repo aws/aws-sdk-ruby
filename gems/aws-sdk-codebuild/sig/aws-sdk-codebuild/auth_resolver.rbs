@@ -1,0 +1,5 @@
+module Aws::CodeBuild
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

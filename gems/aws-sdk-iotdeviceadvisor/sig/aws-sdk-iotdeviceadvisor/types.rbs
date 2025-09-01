@@ -1,0 +1,678 @@
+module Aws::IotDeviceAdvisor
+  module Types
+
+    module AuthenticationMethod
+      X509ClientCertificate: String
+      SignatureVersion4: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateSuiteDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_configuration: Types::SuiteDefinitionConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSuiteDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_arn: String,
+        ?suite_definition_name: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_arn: String?
+      attr_accessor suite_definition_name: String?
+      attr_accessor created_at: Time?
+    end
+
+    class DeleteSuiteDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+    end
+
+    class DeleteSuiteDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeviceUnderTest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_arn: String,
+        ?certificate_arn: String,
+        ?device_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_arn: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor device_role_arn: String?
+    end
+
+    class GetEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_arn: String,
+        ?certificate_arn: String,
+        ?device_role_arn: String,
+        ?authentication_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_arn: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor device_role_arn: String?
+      attr_accessor authentication_method: String?
+    end
+
+    class GetEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+    end
+
+    class GetSuiteDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_version: String?
+    end
+
+    class GetSuiteDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_arn: String,
+        ?suite_definition_version: String,
+        ?latest_version: String,
+        ?suite_definition_configuration: Types::SuiteDefinitionConfiguration,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_arn: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor latest_version: String?
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSuiteRunReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_run_id: String?
+    end
+
+    class GetSuiteRunReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_report_download_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_report_download_url: String?
+    end
+
+    class GetSuiteRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_run_id: String?
+    end
+
+    class GetSuiteRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_version: String,
+        ?suite_run_id: String,
+        ?suite_run_arn: String,
+        ?suite_run_configuration: Types::SuiteRunConfiguration,
+        ?test_result: Types::TestResult,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?error_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor suite_run_id: String?
+      attr_accessor suite_run_arn: String?
+      attr_accessor suite_run_configuration: Types::SuiteRunConfiguration?
+      attr_accessor test_result: Types::TestResult?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor error_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?group_name: String,
+        ?tests: Array[Types::TestCaseRun],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor group_name: String?
+      attr_accessor tests: Array[Types::TestCaseRun]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListSuiteDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSuiteDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_information_list: Array[Types::SuiteDefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_information_list: Array[Types::SuiteDefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSuiteRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_version: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSuiteRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_runs_list: Array[Types::SuiteRunInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_runs_list: Array[Types::SuiteRunInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module Protocol
+      MqttV3_1_1: String
+      MqttV5: String
+      MqttV3_1_1_OverWebSocket: String
+      MqttV5_OverWebSocket: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartSuiteRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_version: String,
+        ?suite_run_configuration: Types::SuiteRunConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor suite_run_configuration: Types::SuiteRunConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartSuiteRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_run_id: String,
+        ?suite_run_arn: String,
+        ?created_at: Time,
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_run_id: String?
+      attr_accessor suite_run_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor endpoint: String?
+    end
+
+    module Status
+      PASS: String
+      FAIL: String
+      CANCELED: String
+      PENDING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+      PASS_WITH_WARNINGS: String
+      ERROR: String
+    end
+
+    class StopSuiteRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_run_id: String?
+    end
+
+    class StopSuiteRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SuiteDefinitionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_name: String,
+        ?devices: Array[Types::DeviceUnderTest],
+        ?intended_for_qualification: bool,
+        ?is_long_duration_test: bool,
+        ?root_group: String,
+        ?device_permission_role_arn: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_name: String?
+      attr_accessor devices: Array[Types::DeviceUnderTest]?
+      attr_accessor intended_for_qualification: bool?
+      attr_accessor is_long_duration_test: bool?
+      attr_accessor root_group: String?
+      attr_accessor device_permission_role_arn: String?
+      attr_accessor protocol: String?
+    end
+
+    class SuiteDefinitionInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_name: String,
+        ?default_devices: Array[Types::DeviceUnderTest],
+        ?intended_for_qualification: bool,
+        ?is_long_duration_test: bool,
+        ?protocol: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_name: String?
+      attr_accessor default_devices: Array[Types::DeviceUnderTest]?
+      attr_accessor intended_for_qualification: bool?
+      attr_accessor is_long_duration_test: bool?
+      attr_accessor protocol: String?
+      attr_accessor created_at: Time?
+    end
+
+    class SuiteRunConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_device: Types::DeviceUnderTest,
+        ?selected_test_list: Array[String],
+        ?parallel_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_device: Types::DeviceUnderTest?
+      attr_accessor selected_test_list: Array[String]?
+      attr_accessor parallel_run: bool?
+    end
+
+    class SuiteRunInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_version: String,
+        ?suite_definition_name: String,
+        ?suite_run_id: String,
+        ?created_at: Time,
+        ?started_at: Time,
+        ?end_at: Time,
+        ?status: String,
+        ?passed: Integer,
+        ?failed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor suite_definition_name: String?
+      attr_accessor suite_run_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor end_at: Time?
+      attr_accessor status: String?
+      attr_accessor passed: Integer?
+      attr_accessor failed: Integer?
+    end
+
+    module SuiteRunStatus
+      PASS: String
+      FAIL: String
+      CANCELED: String
+      PENDING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+      PASS_WITH_WARNINGS: String
+      ERROR: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TestCaseRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_case_run_id: String,
+        ?test_case_definition_id: String,
+        ?test_case_definition_name: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?log_url: String,
+        ?warnings: String,
+        ?failure: String,
+        ?test_scenarios: Array[Types::TestCaseScenario],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_case_run_id: String?
+      attr_accessor test_case_definition_id: String?
+      attr_accessor test_case_definition_name: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor log_url: String?
+      attr_accessor warnings: String?
+      attr_accessor failure: String?
+      attr_accessor test_scenarios: Array[Types::TestCaseScenario]?
+    end
+
+    class TestCaseScenario
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_case_scenario_id: String,
+        ?test_case_scenario_type: String,
+        ?status: String,
+        ?failure: String,
+        ?system_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_case_scenario_id: String?
+      attr_accessor test_case_scenario_type: String?
+      attr_accessor status: String?
+      attr_accessor failure: String?
+      attr_accessor system_message: String?
+    end
+
+    module TestCaseScenarioStatus
+      PASS: String
+      FAIL: String
+      CANCELED: String
+      PENDING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+      PASS_WITH_WARNINGS: String
+      ERROR: String
+    end
+
+    module TestCaseScenarioType
+      Advanced: String
+      Basic: String
+    end
+
+    class TestResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupResult]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSuiteDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_configuration: Types::SuiteDefinitionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration?
+    end
+
+    class UpdateSuiteDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suite_definition_id: String,
+        ?suite_definition_arn: String,
+        ?suite_definition_name: String,
+        ?suite_definition_version: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suite_definition_id: String?
+      attr_accessor suite_definition_arn: String?
+      attr_accessor suite_definition_name: String?
+      attr_accessor suite_definition_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

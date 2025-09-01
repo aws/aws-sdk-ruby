@@ -1,0 +1,1413 @@
+module Aws::Glacier
+  module Types
+
+    class AbortMultipartUploadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor upload_id: String?
+    end
+
+    class AbortVaultLockInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    module ActionCode
+      ArchiveRetrieval: String
+      InventoryRetrieval: String
+      Select: String
+    end
+
+    class AddTagsToVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CSVInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_header_info: String,
+        ?comments: String,
+        ?quote_escape_character: String,
+        ?record_delimiter: String,
+        ?field_delimiter: String,
+        ?quote_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_header_info: String?
+      attr_accessor comments: String?
+      attr_accessor quote_escape_character: String?
+      attr_accessor record_delimiter: String?
+      attr_accessor field_delimiter: String?
+      attr_accessor quote_character: String?
+    end
+
+    class CSVOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_fields: String,
+        ?quote_escape_character: String,
+        ?record_delimiter: String,
+        ?field_delimiter: String,
+        ?quote_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_fields: String?
+      attr_accessor quote_escape_character: String?
+      attr_accessor record_delimiter: String?
+      attr_accessor field_delimiter: String?
+      attr_accessor quote_character: String?
+    end
+
+    module CannedACL
+      Private: String
+      PublicRead: String
+      PublicReadWrite: String
+      AwsExecRead: String
+      AuthenticatedRead: String
+      BucketOwnerRead: String
+      BucketOwnerFullControl: String
+    end
+
+    class CompleteMultipartUploadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?upload_id: String,
+        ?archive_size: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor archive_size: String?
+      attr_accessor checksum: String?
+    end
+
+    class CompleteMultipartUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?checksum: String,
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor checksum: String?
+      attr_accessor archive_id: String?
+    end
+
+    class CompleteVaultLockInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?lock_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor lock_id: String?
+    end
+
+    class CreateVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class CreateVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    class DataRetrievalPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::DataRetrievalRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::DataRetrievalRule]?
+    end
+
+    class DataRetrievalRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?strategy: String,
+        ?bytes_per_hour: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor strategy: String?
+      attr_accessor bytes_per_hour: Integer?
+    end
+
+    class DeleteArchiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor archive_id: String?
+    end
+
+    class DeleteVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class DeleteVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class DeleteVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class DescribeJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_description: String,
+        ?action: String,
+        ?archive_id: String,
+        ?vault_arn: String,
+        ?creation_date: String,
+        ?completed: bool,
+        ?status_code: String,
+        ?status_message: String,
+        ?archive_size_in_bytes: Integer,
+        ?inventory_size_in_bytes: Integer,
+        ?sns_topic: String,
+        ?completion_date: String,
+        ?sha256_tree_hash: String,
+        ?archive_sha256_tree_hash: String,
+        ?retrieval_byte_range: String,
+        ?tier: String,
+        ?inventory_retrieval_parameters: Types::InventoryRetrievalJobDescription,
+        ?job_output_path: String,
+        ?select_parameters: Types::SelectParameters,
+        ?output_location: Types::OutputLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_description: String?
+      attr_accessor action: String?
+      attr_accessor archive_id: String?
+      attr_accessor vault_arn: String?
+      attr_accessor creation_date: String?
+      attr_accessor completed: bool?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor archive_size_in_bytes: Integer?
+      attr_accessor inventory_size_in_bytes: Integer?
+      attr_accessor sns_topic: String?
+      attr_accessor completion_date: String?
+      attr_accessor sha256_tree_hash: String?
+      attr_accessor archive_sha256_tree_hash: String?
+      attr_accessor retrieval_byte_range: String?
+      attr_accessor tier: String?
+      attr_accessor inventory_retrieval_parameters: Types::InventoryRetrievalJobDescription?
+      attr_accessor job_output_path: String?
+      attr_accessor select_parameters: Types::SelectParameters?
+      attr_accessor output_location: Types::OutputLocation?
+    end
+
+    class DescribeVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class DescribeVaultOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_arn: String,
+        ?vault_name: String,
+        ?creation_date: String,
+        ?last_inventory_date: String,
+        ?number_of_archives: Integer,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_arn: String?
+      attr_accessor vault_name: String?
+      attr_accessor creation_date: String?
+      attr_accessor last_inventory_date: String?
+      attr_accessor number_of_archives: Integer?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    class DescribeVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_arn: String,
+        ?vault_name: String,
+        ?creation_date: String,
+        ?last_inventory_date: String,
+        ?number_of_archives: Integer,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_arn: String?
+      attr_accessor vault_name: String?
+      attr_accessor creation_date: String?
+      attr_accessor last_inventory_date: String?
+      attr_accessor number_of_archives: Integer?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_id: String,
+        ?kms_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_context: String?
+    end
+
+    module EncryptionType
+      KMS: String
+      S3: String
+    end
+
+    module ExpressionType
+      SQL: String
+    end
+
+    module FileHeaderInfo
+      Use: String
+      Ignore: String
+      None: String
+    end
+
+    class GetDataRetrievalPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetDataRetrievalPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::DataRetrievalPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::DataRetrievalPolicy?
+    end
+
+    class GetJobOutputInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?job_id: String,
+        ?range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor job_id: String?
+      attr_accessor range: String?
+    end
+
+    class GetJobOutputOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?checksum: String,
+        ?status: Integer,
+        ?content_range: String,
+        ?accept_ranges: String,
+        ?content_type: String,
+        ?archive_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor checksum: String?
+      attr_accessor status: Integer?
+      attr_accessor content_range: String?
+      attr_accessor accept_ranges: String?
+      attr_accessor content_type: String?
+      attr_accessor archive_description: String?
+    end
+
+    class GetVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class GetVaultAccessPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::VaultAccessPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::VaultAccessPolicy?
+    end
+
+    class GetVaultLockInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class GetVaultLockOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?state: String,
+        ?expiration_date: String,
+        ?creation_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor state: String?
+      attr_accessor expiration_date: String?
+      attr_accessor creation_date: String?
+    end
+
+    class GetVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class GetVaultNotificationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_notification_config: Types::VaultNotificationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_notification_config: Types::VaultNotificationConfig?
+    end
+
+    class GlacierJobDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_description: String,
+        ?action: String,
+        ?archive_id: String,
+        ?vault_arn: String,
+        ?creation_date: String,
+        ?completed: bool,
+        ?status_code: String,
+        ?status_message: String,
+        ?archive_size_in_bytes: Integer,
+        ?inventory_size_in_bytes: Integer,
+        ?sns_topic: String,
+        ?completion_date: String,
+        ?sha256_tree_hash: String,
+        ?archive_sha256_tree_hash: String,
+        ?retrieval_byte_range: String,
+        ?tier: String,
+        ?inventory_retrieval_parameters: Types::InventoryRetrievalJobDescription,
+        ?job_output_path: String,
+        ?select_parameters: Types::SelectParameters,
+        ?output_location: Types::OutputLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_description: String?
+      attr_accessor action: String?
+      attr_accessor archive_id: String?
+      attr_accessor vault_arn: String?
+      attr_accessor creation_date: String?
+      attr_accessor completed: bool?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor archive_size_in_bytes: Integer?
+      attr_accessor inventory_size_in_bytes: Integer?
+      attr_accessor sns_topic: String?
+      attr_accessor completion_date: String?
+      attr_accessor sha256_tree_hash: String?
+      attr_accessor archive_sha256_tree_hash: String?
+      attr_accessor retrieval_byte_range: String?
+      attr_accessor tier: String?
+      attr_accessor inventory_retrieval_parameters: Types::InventoryRetrievalJobDescription?
+      attr_accessor job_output_path: String?
+      attr_accessor select_parameters: Types::SelectParameters?
+      attr_accessor output_location: Types::OutputLocation?
+    end
+
+    class Grant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grantee: Types::Grantee,
+        ?permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grantee: Types::Grantee?
+      attr_accessor permission: String?
+    end
+
+    class Grantee
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?display_name: String,
+        ?uri: String,
+        ?id: String,
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor display_name: String?
+      attr_accessor uri: String?
+      attr_accessor id: String?
+      attr_accessor email_address: String?
+    end
+
+    class InitiateJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?job_parameters: Types::JobParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor job_parameters: Types::JobParameters?
+    end
+
+    class InitiateJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?job_id: String,
+        ?job_output_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor job_id: String?
+      attr_accessor job_output_path: String?
+    end
+
+    class InitiateMultipartUploadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?archive_description: String,
+        ?part_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor archive_description: String?
+      attr_accessor part_size: String?
+    end
+
+    class InitiateMultipartUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor upload_id: String?
+    end
+
+    class InitiateVaultLockInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?policy: Types::VaultLockPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor policy: Types::VaultLockPolicy?
+    end
+
+    class InitiateVaultLockOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lock_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lock_id: String?
+    end
+
+    class InputSerialization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::CSVInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::CSVInput?
+    end
+
+    class InsufficientCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class InventoryRetrievalJobDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?start_date: String,
+        ?end_date: String,
+        ?limit: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+      attr_accessor limit: String?
+      attr_accessor marker: String?
+    end
+
+    class InventoryRetrievalJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: String,
+        ?end_date: String,
+        ?limit: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+      attr_accessor limit: String?
+      attr_accessor marker: String?
+    end
+
+    class JobParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?type: String,
+        ?archive_id: String,
+        ?description: String,
+        ?sns_topic: String,
+        ?retrieval_byte_range: String,
+        ?tier: String,
+        ?inventory_retrieval_parameters: Types::InventoryRetrievalJobInput,
+        ?select_parameters: Types::SelectParameters,
+        ?output_location: Types::OutputLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor type: String?
+      attr_accessor archive_id: String?
+      attr_accessor description: String?
+      attr_accessor sns_topic: String?
+      attr_accessor retrieval_byte_range: String?
+      attr_accessor tier: String?
+      attr_accessor inventory_retrieval_parameters: Types::InventoryRetrievalJobInput?
+      attr_accessor select_parameters: Types::SelectParameters?
+      attr_accessor output_location: Types::OutputLocation?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ListJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?limit: Integer,
+        ?marker: String,
+        ?statuscode: String,
+        ?completed: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+      attr_accessor statuscode: String?
+      attr_accessor completed: String?
+    end
+
+    class ListJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_list: Array[Types::GlacierJobDescription],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_list: Array[Types::GlacierJobDescription]?
+      attr_accessor marker: String?
+    end
+
+    class ListMultipartUploadsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListMultipartUploadsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uploads_list: Array[Types::UploadListElement],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uploads_list: Array[Types::UploadListElement]?
+      attr_accessor marker: String?
+    end
+
+    class ListPartsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?upload_id: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListPartsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multipart_upload_id: String,
+        ?vault_arn: String,
+        ?archive_description: String,
+        ?part_size_in_bytes: Integer,
+        ?creation_date: String,
+        ?parts: Array[Types::PartListElement],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multipart_upload_id: String?
+      attr_accessor vault_arn: String?
+      attr_accessor archive_description: String?
+      attr_accessor part_size_in_bytes: Integer?
+      attr_accessor creation_date: String?
+      attr_accessor parts: Array[Types::PartListElement]?
+      attr_accessor marker: String?
+    end
+
+    class ListProvisionedCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ListProvisionedCapacityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_capacity_list: Array[Types::ProvisionedCapacityDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_capacity_list: Array[Types::ProvisionedCapacityDescription]?
+    end
+
+    class ListTagsForVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+    end
+
+    class ListTagsForVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVaultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListVaultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_list: Array[Types::DescribeVaultOutput],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_list: Array[Types::DescribeVaultOutput]?
+      attr_accessor marker: String?
+    end
+
+    class MissingParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class OutputLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Location?
+    end
+
+    class OutputSerialization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::CSVOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::CSVOutput?
+    end
+
+    class PartListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?range_in_bytes: String,
+        ?sha256_tree_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor range_in_bytes: String?
+      attr_accessor sha256_tree_hash: String?
+    end
+
+    module Permission
+      FULL_CONTROL: String
+      WRITE: String
+      WRITE_ACP: String
+      READ: String
+      READ_ACP: String
+    end
+
+    class PolicyEnforcedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ProvisionedCapacityDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_id: String,
+        ?start_date: String,
+        ?expiration_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_id: String?
+      attr_accessor start_date: String?
+      attr_accessor expiration_date: String?
+    end
+
+    class PurchaseProvisionedCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class PurchaseProvisionedCapacityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_id: String?
+    end
+
+    module QuoteFields
+      Always: String
+      AsNeeded: String
+    end
+
+    class RemoveTagsFromVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RequestTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+        ?encryption: Types::Encryption,
+        ?canned_acl: String,
+        ?access_control_list: Array[Types::Grant],
+        ?tagging: Hash[String, String],
+        ?user_metadata: Hash[String, String],
+        ?storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor canned_acl: String?
+      attr_accessor access_control_list: Array[Types::Grant]?
+      attr_accessor tagging: Hash[String, String]?
+      attr_accessor user_metadata: Hash[String, String]?
+      attr_accessor storage_class: String?
+    end
+
+    class SelectParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_serialization: Types::InputSerialization,
+        ?expression_type: String,
+        ?expression: String,
+        ?output_serialization: Types::OutputSerialization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_serialization: Types::InputSerialization?
+      attr_accessor expression_type: String?
+      attr_accessor expression: String?
+      attr_accessor output_serialization: Types::OutputSerialization?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class SetDataRetrievalPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?policy: Types::DataRetrievalPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor policy: Types::DataRetrievalPolicy?
+    end
+
+    class SetVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?policy: Types::VaultAccessPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor policy: Types::VaultAccessPolicy?
+    end
+
+    class SetVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?vault_notification_config: Types::VaultNotificationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor vault_notification_config: Types::VaultNotificationConfig?
+    end
+
+    module StatusCode
+      InProgress: String
+      Succeeded: String
+      Failed: String
+    end
+
+    module StorageClass
+      Standard: String
+      ReducedRedundancy: String
+      StandardInfrequentAccess: String
+    end
+
+    module Type
+      AmazonCustomerByEmail: String
+      CanonicalUser: String
+      Group: String
+    end
+
+    class UploadArchiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_name: String,
+        ?account_id: String,
+        ?archive_description: String,
+        ?checksum: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_name: String?
+      attr_accessor account_id: String?
+      attr_accessor archive_description: String?
+      attr_accessor checksum: String?
+      attr_accessor body: String?
+    end
+
+    class UploadArchiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?checksum: String,
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor checksum: String?
+      attr_accessor archive_id: String?
+    end
+
+    class UploadListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multipart_upload_id: String,
+        ?vault_arn: String,
+        ?archive_description: String,
+        ?part_size_in_bytes: Integer,
+        ?creation_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multipart_upload_id: String?
+      attr_accessor vault_arn: String?
+      attr_accessor archive_description: String?
+      attr_accessor part_size_in_bytes: Integer?
+      attr_accessor creation_date: String?
+    end
+
+    class UploadMultipartPartInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?vault_name: String,
+        ?upload_id: String,
+        ?checksum: String,
+        ?range: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor vault_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor checksum: String?
+      attr_accessor range: String?
+      attr_accessor body: String?
+    end
+
+    class UploadMultipartPartOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checksum: String?
+    end
+
+    class VaultAccessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class VaultLockPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class VaultNotificationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns_topic: String,
+        ?events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns_topic: String?
+      attr_accessor events: Array[String]?
+    end
+  end
+end

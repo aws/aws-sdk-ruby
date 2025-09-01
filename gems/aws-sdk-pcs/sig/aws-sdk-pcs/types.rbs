@@ -1,0 +1,1121 @@
+module Aws::PCS
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Accounting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?default_purge_time_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor default_purge_time_in_days: Integer?
+    end
+
+    module AccountingMode
+      STANDARD: String
+      NONE: String
+    end
+
+    class AccountingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?default_purge_time_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor default_purge_time_in_days: Integer?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?scheduler: Types::Scheduler,
+        ?size: String,
+        ?slurm_configuration: Types::ClusterSlurmConfiguration,
+        ?networking: Types::Networking,
+        ?endpoints: Array[Types::Endpoint],
+        ?error_info: Array[Types::ErrorInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor scheduler: Types::Scheduler?
+      attr_accessor size: String?
+      attr_accessor slurm_configuration: Types::ClusterSlurmConfiguration?
+      attr_accessor networking: Types::Networking?
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor error_info: Array[Types::ErrorInfo]?
+    end
+
+    class ClusterSlurmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?auth_key: Types::SlurmAuthKey,
+        ?accounting: Types::Accounting,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor auth_key: Types::SlurmAuthKey?
+      attr_accessor accounting: Types::Accounting?
+    end
+
+    class ClusterSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?accounting: Types::AccountingRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor accounting: Types::AccountingRequest?
+    end
+
+    module ClusterStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+      UPDATE_FAILED: String
+      SUSPENDING: String
+      SUSPENDED: String
+    end
+
+    class ClusterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+    end
+
+    class ComputeNodeGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?cluster_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?ami_id: String,
+        ?subnet_ids: Array[String],
+        ?purchase_option: String,
+        ?custom_launch_template: Types::CustomLaunchTemplate,
+        ?iam_instance_profile_arn: String,
+        ?scaling_configuration: Types::ScalingConfiguration,
+        ?instance_configs: Array[Types::InstanceConfig],
+        ?spot_options: Types::SpotOptions,
+        ?slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration,
+        ?error_info: Array[Types::ErrorInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor cluster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor ami_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor purchase_option: String?
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate?
+      attr_accessor iam_instance_profile_arn: String?
+      attr_accessor scaling_configuration: Types::ScalingConfiguration?
+      attr_accessor instance_configs: Array[Types::InstanceConfig]?
+      attr_accessor spot_options: Types::SpotOptions?
+      attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration?
+      attr_accessor error_info: Array[Types::ErrorInfo]?
+    end
+
+    class ComputeNodeGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_group_id: String?
+    end
+
+    class ComputeNodeGroupSlurmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+    end
+
+    class ComputeNodeGroupSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+    end
+
+    module ComputeNodeGroupStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+      UPDATE_FAILED: String
+      DELETED: String
+      SUSPENDING: String
+      SUSPENDED: String
+    end
+
+    class ComputeNodeGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?cluster_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor cluster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?scheduler: Types::SchedulerRequest,
+        ?size: String,
+        ?networking: Types::NetworkingRequest,
+        ?slurm_configuration: Types::ClusterSlurmConfigurationRequest,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor scheduler: Types::SchedulerRequest?
+      attr_accessor size: String?
+      attr_accessor networking: Types::NetworkingRequest?
+      attr_accessor slurm_configuration: Types::ClusterSlurmConfigurationRequest?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateComputeNodeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?compute_node_group_name: String,
+        ?ami_id: String,
+        ?subnet_ids: Array[String],
+        ?purchase_option: String,
+        ?custom_launch_template: Types::CustomLaunchTemplate,
+        ?iam_instance_profile_arn: String,
+        ?scaling_configuration: Types::ScalingConfigurationRequest,
+        ?instance_configs: Array[Types::InstanceConfig],
+        ?spot_options: Types::SpotOptions,
+        ?slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor compute_node_group_name: String?
+      attr_accessor ami_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor purchase_option: String?
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate?
+      attr_accessor iam_instance_profile_arn: String?
+      attr_accessor scaling_configuration: Types::ScalingConfigurationRequest?
+      attr_accessor instance_configs: Array[Types::InstanceConfig]?
+      attr_accessor spot_options: Types::SpotOptions?
+      attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateComputeNodeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_group: Types::ComputeNodeGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_group: Types::ComputeNodeGroup?
+    end
+
+    class CreateQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?queue_name: String,
+        ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor queue_name: String?
+      attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: Types::Queue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: Types::Queue?
+    end
+
+    class CustomLaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteComputeNodeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?compute_node_group_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor compute_node_group_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteComputeNodeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?queue_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor queue_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?private_ip_address: String,
+        ?public_ip_address: String,
+        ?ipv6_address: String,
+        ?port: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor public_ip_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor port: String?
+    end
+
+    module EndpointType
+      SLURMCTLD: String
+      SLURMDBD: String
+    end
+
+    class ErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+    end
+
+    class GetClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class GetComputeNodeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?compute_node_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor compute_node_group_identifier: String?
+    end
+
+    class GetComputeNodeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_group: Types::ComputeNodeGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_group: Types::ComputeNodeGroup?
+    end
+
+    class GetQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?queue_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor queue_identifier: String?
+    end
+
+    class GetQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: Types::Queue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: Types::Queue?
+    end
+
+    class InstanceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListClustersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[Types::ClusterSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[Types::ClusterSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComputeNodeGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComputeNodeGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_groups: Array[Types::ComputeNodeGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_groups: Array[Types::ComputeNodeGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queues: Array[Types::QueueSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queues: Array[Types::QueueSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module NetworkType
+      IPV4: String
+      IPV6: String
+    end
+
+    class Networking
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor network_type: String?
+    end
+
+    class NetworkingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor network_type: String?
+    end
+
+    module PurchaseOption
+      ONDEMAND: String
+      SPOT: String
+    end
+
+    class Queue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?cluster_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?error_info: Array[Types::ErrorInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor cluster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor error_info: Array[Types::ErrorInfo]?
+    end
+
+    module QueueStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+      UPDATE_FAILED: String
+      SUSPENDING: String
+      SUSPENDED: String
+    end
+
+    class QueueSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?cluster_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor cluster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+    end
+
+    class RegisterComputeNodeGroupInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?bootstrap_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor bootstrap_id: String?
+    end
+
+    class RegisterComputeNodeGroupInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_id: String,
+        ?shared_secret: String,
+        ?endpoints: Array[Types::Endpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_id: String?
+      attr_accessor shared_secret: String?
+      attr_accessor endpoints: Array[Types::Endpoint]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_instance_count: Integer,
+        ?max_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_instance_count: Integer?
+      attr_accessor max_instance_count: Integer?
+    end
+
+    class ScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_instance_count: Integer,
+        ?max_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_instance_count: Integer?
+      attr_accessor max_instance_count: Integer?
+    end
+
+    class Scheduler
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor version: String?
+    end
+
+    class SchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor version: String?
+    end
+
+    module SchedulerType
+      SLURM: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+    end
+
+    module Size
+      SMALL: String
+      MEDIUM: String
+      LARGE: String
+    end
+
+    class SlurmAuthKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?secret_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor secret_version: String?
+    end
+
+    class SlurmCustomSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
+    module SpotAllocationStrategy
+      LOWEST_PRICE: String
+      CAPACITY_OPTIMIZED: String
+      PRICE_CAPACITY_OPTIMIZED: String
+    end
+
+    class SpotOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocation_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocation_strategy: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateComputeNodeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?compute_node_group_identifier: String,
+        ?ami_id: String,
+        ?subnet_ids: Array[String],
+        ?custom_launch_template: Types::CustomLaunchTemplate,
+        ?purchase_option: String,
+        ?spot_options: Types::SpotOptions,
+        ?scaling_configuration: Types::ScalingConfigurationRequest,
+        ?iam_instance_profile_arn: String,
+        ?slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor compute_node_group_identifier: String?
+      attr_accessor ami_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate?
+      attr_accessor purchase_option: String?
+      attr_accessor spot_options: Types::SpotOptions?
+      attr_accessor scaling_configuration: Types::ScalingConfigurationRequest?
+      attr_accessor iam_instance_profile_arn: String?
+      attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateComputeNodeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_group: Types::ComputeNodeGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_group: Types::ComputeNodeGroup?
+    end
+
+    class UpdateComputeNodeGroupSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+    end
+
+    class UpdateQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?queue_identifier: String,
+        ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor queue_identifier: String?
+      attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: Types::Queue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: Types::Queue?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

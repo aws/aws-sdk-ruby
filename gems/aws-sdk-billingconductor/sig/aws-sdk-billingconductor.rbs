@@ -1,0 +1,5 @@
+  module Aws
+    module Billingconductor
+      VERSION: String
+    end
+  end

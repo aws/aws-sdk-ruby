@@ -1,0 +1,878 @@
+module Aws::ResourceExplorer2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateDefaultViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class AssociateDefaultViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class BatchGetViewError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchGetViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arns: Array[String]?
+    end
+
+    class BatchGetViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?views: Array[Types::View],
+        ?errors: Array[Types::BatchGetViewError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor views: Array[Types::View]?
+      attr_accessor errors: Array[Types::BatchGetViewError]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateIndexOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIndexOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?state: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?view_name: String,
+        ?included_properties: Array[Types::IncludedProperty],
+        ?scope: String,
+        ?filters: Types::SearchFilter,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor view_name: String?
+      attr_accessor included_properties: Array[Types::IncludedProperty]?
+      attr_accessor scope: String?
+      attr_accessor filters: Types::SearchFilter?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view: Types::View,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view: Types::View?
+    end
+
+    class DeleteIndexOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteIndexOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?state: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class DeleteViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class DeleteViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class GetAccountLevelServiceConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?org_configuration: Types::OrgConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor org_configuration: Types::OrgConfiguration?
+    end
+
+    class GetDefaultViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class GetIndexOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?state: String,
+        ?replicating_from: Array[String],
+        ?replicating_to: Array[String],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor replicating_from: Array[String]?
+      attr_accessor replicating_to: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetManagedViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_view_arn: String?
+    end
+
+    class GetManagedViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_view: Types::ManagedView,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_view: Types::ManagedView?
+    end
+
+    class GetViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+    end
+
+    class GetViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view: Types::View,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view: Types::View?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class IncludedProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class Index
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListIndexesForMembersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id_list: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id_list: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndexesForMembersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexes: Array[Types::MemberIndex],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexes: Array[Types::MemberIndex]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndexesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?regions: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndexesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexes: Array[Types::Index],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexes: Array[Types::Index]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedViewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor service_principal: String?
+    end
+
+    class ListManagedViewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_views: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_views: Array[String]?
+    end
+
+    class ListResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::SearchFilter,
+        ?max_results: Integer,
+        ?view_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::SearchFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor view_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?next_token: String,
+        ?view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor next_token: String?
+      attr_accessor view_arn: String?
+    end
+
+    class ListSupportedResourceTypesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSupportedResourceTypesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[Types::SupportedResourceType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[Types::SupportedResourceType]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListViewsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListViewsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?views: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor views: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_view_arn: String,
+        ?managed_view_name: String,
+        ?trusted_service: String,
+        ?last_updated_at: Time,
+        ?owner: String,
+        ?scope: String,
+        ?included_properties: Array[Types::IncludedProperty],
+        ?filters: Types::SearchFilter,
+        ?resource_policy: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_view_arn: String?
+      attr_accessor managed_view_name: String?
+      attr_accessor trusted_service: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor owner: String?
+      attr_accessor scope: String?
+      attr_accessor included_properties: Array[Types::IncludedProperty]?
+      attr_accessor filters: Types::SearchFilter?
+      attr_accessor resource_policy: String?
+      attr_accessor version: String?
+    end
+
+    class MemberIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?region: String,
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class OrgConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_service_access_status: String,
+        ?service_linked_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_service_access_status: String?
+      attr_accessor service_linked_role: String?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?owning_account_id: String,
+        ?region: String,
+        ?resource_type: String,
+        ?service: String,
+        ?last_reported_at: Time,
+        ?properties: Array[Types::ResourceProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor owning_account_id: String?
+      attr_accessor region: String?
+      attr_accessor resource_type: String?
+      attr_accessor service: String?
+      attr_accessor last_reported_at: Time?
+      attr_accessor properties: Array[Types::ResourceProperty]?
+    end
+
+    class ResourceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_resources: Integer,
+        ?complete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_resources: Integer?
+      attr_accessor complete: bool?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?last_reported_at: Time,
+        ?data: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor last_reported_at: Time?
+      attr_accessor data: Smithy::Schema::document?
+    end
+
+    class SearchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_string: String?
+    end
+
+    class SearchOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?max_results: Integer,
+        ?view_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor max_results: Integer?
+      attr_accessor view_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class SearchOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?next_token: String,
+        ?view_arn: String,
+        ?count: Types::ResourceCount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor next_token: String?
+      attr_accessor view_arn: String?
+      attr_accessor count: Types::ResourceCount?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class SupportedResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor resource_type: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIndexTypeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class UpdateIndexTypeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?state: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class UpdateViewOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+        ?included_properties: Array[Types::IncludedProperty],
+        ?filters: Types::SearchFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+      attr_accessor included_properties: Array[Types::IncludedProperty]?
+      attr_accessor filters: Types::SearchFilter?
+    end
+
+    class UpdateViewOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view: Types::View,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view: Types::View?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?validation_issue: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor validation_issue: String?
+    end
+
+    class View
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_arn: String,
+        ?owner: String,
+        ?last_updated_at: Time,
+        ?scope: String,
+        ?included_properties: Array[Types::IncludedProperty],
+        ?filters: Types::SearchFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_arn: String?
+      attr_accessor owner: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor scope: String?
+      attr_accessor included_properties: Array[Types::IncludedProperty]?
+      attr_accessor filters: Types::SearchFilter?
+    end
+  end
+end

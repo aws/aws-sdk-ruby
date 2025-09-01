@@ -1,0 +1,3286 @@
+module Aws::NetworkFirewall
+  module Types
+
+    class AZSyncState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+    end
+
+    class AcceptNetworkFirewallTransitGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+    end
+
+    class AcceptNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+        ?transit_gateway_attachment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+      attr_accessor transit_gateway_attachment_status: String?
+    end
+
+    class ActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publish_metric_action: Types::PublishMetricAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publish_metric_action: Types::PublishMetricAction?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_definition: String?
+    end
+
+    class AnalysisReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report_id: String,
+        ?analysis_type: String,
+        ?report_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor report_time: Time?
+      attr_accessor status: String?
+    end
+
+    class AnalysisResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identified_rule_ids: Array[String],
+        ?identified_type: String,
+        ?analysis_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identified_rule_ids: Array[String]?
+      attr_accessor identified_type: String?
+      attr_accessor analysis_detail: String?
+    end
+
+    class AnalysisTypeReportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?first_accessed: Time,
+        ?last_accessed: Time,
+        ?domain: String,
+        ?hits: Types::Hits,
+        ?unique_sources: Types::UniqueSources,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor first_accessed: Time?
+      attr_accessor last_accessed: Time?
+      attr_accessor domain: String?
+      attr_accessor hits: Types::Hits?
+      attr_accessor unique_sources: Types::UniqueSources?
+    end
+
+    class AssociateAvailabilityZonesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+    end
+
+    class AssociateAvailabilityZonesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+      attr_accessor update_token: String?
+    end
+
+    class AssociateFirewallPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?firewall_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_policy_arn: String?
+    end
+
+    class AssociateFirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?firewall_policy_arn: String,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor update_token: String?
+    end
+
+    class AssociateSubnetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+    end
+
+    class AssociateSubnetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor update_token: String?
+    end
+
+    class Attachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_id: String,
+        ?endpoint_id: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_id: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module AttachmentStatus
+      CREATING: String
+      DELETING: String
+      FAILED: String
+      ERROR: String
+      SCALING: String
+      READY: String
+    end
+
+    class AvailabilityZoneMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+    end
+
+    class AvailabilityZoneMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address_type: String?
+    end
+
+    class CIDRSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_cidr_count: Integer,
+        ?utilized_cidr_count: Integer,
+        ?ip_set_references: Hash[String, Types::IPSetMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_cidr_count: Integer?
+      attr_accessor utilized_cidr_count: Integer?
+      attr_accessor ip_set_references: Hash[String, Types::IPSetMetadata]?
+    end
+
+    class CapacityUsageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cid_rs: Types::CIDRSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cid_rs: Types::CIDRSummary?
+    end
+
+    class CheckCertificateRevocationStatusActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revoked_status_action: String,
+        ?unknown_status_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revoked_status_action: String?
+      attr_accessor unknown_status_action: String?
+    end
+
+    module ConfigurationSyncState
+      PENDING: String
+      IN_SYNC: String
+      CAPACITY_CONSTRAINED: String
+    end
+
+    class CreateFirewallPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_policy_name: String,
+        ?firewall_policy: Types::FirewallPolicy,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?dry_run: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_policy_name: String?
+      attr_accessor firewall_policy: Types::FirewallPolicy?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor dry_run: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateFirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_policy_response: Types::FirewallPolicyResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse?
+    end
+
+    class CreateFirewallRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_policy_arn: String,
+        ?vpc_id: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?delete_protection: bool,
+        ?subnet_change_protection: bool,
+        ?firewall_policy_change_protection: bool,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?enabled_analysis_types: Array[String],
+        ?transit_gateway_id: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+        ?availability_zone_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor delete_protection: bool?
+      attr_accessor subnet_change_protection: bool?
+      attr_accessor firewall_policy_change_protection: bool?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor enabled_analysis_types: Array[String]?
+      attr_accessor transit_gateway_id: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+      attr_accessor availability_zone_change_protection: bool?
+    end
+
+    class CreateFirewallResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall: Types::Firewall,
+        ?firewall_status: Types::FirewallStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall: Types::Firewall?
+      attr_accessor firewall_status: Types::FirewallStatus?
+    end
+
+    class CreateRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?rule_group: Types::RuleGroup,
+        ?rules: String,
+        ?type: String,
+        ?description: String,
+        ?capacity: Integer,
+        ?tags: Array[Types::Tag],
+        ?dry_run: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?source_metadata: Types::SourceMetadata,
+        ?analyze_rule_group: bool,
+        ?summary_configuration: Types::SummaryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group: Types::RuleGroup?
+      attr_accessor rules: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor capacity: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor dry_run: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor source_metadata: Types::SourceMetadata?
+      attr_accessor analyze_rule_group: bool?
+      attr_accessor summary_configuration: Types::SummaryConfiguration?
+    end
+
+    class CreateRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?rule_group_response: Types::RuleGroupResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor rule_group_response: Types::RuleGroupResponse?
+    end
+
+    class CreateTLSInspectionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_name: String,
+        ?tls_inspection_configuration: Types::TLSInspectionConfiguration,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_name: String?
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateTLSInspectionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse?
+    end
+
+    class CreateVpcEndpointAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?vpc_id: String,
+        ?subnet_mapping: Types::SubnetMapping,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_mapping: Types::SubnetMapping?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVpcEndpointAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association: Types::VpcEndpointAssociation,
+        ?vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation?
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus?
+    end
+
+    class CustomAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_name: String,
+        ?action_definition: Types::ActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_name: String?
+      attr_accessor action_definition: Types::ActionDefinition?
+    end
+
+    class DeleteFirewallPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_policy_name: String,
+        ?firewall_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_policy_name: String?
+      attr_accessor firewall_policy_arn: String?
+    end
+
+    class DeleteFirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_policy_response: Types::FirewallPolicyResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse?
+    end
+
+    class DeleteFirewallRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+    end
+
+    class DeleteFirewallResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall: Types::Firewall,
+        ?firewall_status: Types::FirewallStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall: Types::Firewall?
+      attr_accessor firewall_status: Types::FirewallStatus?
+    end
+
+    class DeleteNetworkFirewallTransitGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+    end
+
+    class DeleteNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+        ?transit_gateway_attachment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+      attr_accessor transit_gateway_attachment_status: String?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?rule_group_arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group_arn: String?
+      attr_accessor type: String?
+    end
+
+    class DeleteRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_response: Types::RuleGroupResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_response: Types::RuleGroupResponse?
+    end
+
+    class DeleteTLSInspectionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_arn: String,
+        ?tls_inspection_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_arn: String?
+      attr_accessor tls_inspection_configuration_name: String?
+    end
+
+    class DeleteTLSInspectionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse?
+    end
+
+    class DeleteVpcEndpointAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association_arn: String?
+    end
+
+    class DeleteVpcEndpointAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association: Types::VpcEndpointAssociation,
+        ?vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation?
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus?
+    end
+
+    class DescribeFirewallMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+    end
+
+    class DescribeFirewallMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_policy_arn: String,
+        ?description: String,
+        ?status: String,
+        ?supported_availability_zones: Hash[String, Types::AvailabilityZoneMetadata],
+        ?transit_gateway_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor supported_availability_zones: Hash[String, Types::AvailabilityZoneMetadata]?
+      attr_accessor transit_gateway_attachment_id: String?
+    end
+
+    class DescribeFirewallPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_policy_name: String,
+        ?firewall_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_policy_name: String?
+      attr_accessor firewall_policy_arn: String?
+    end
+
+    class DescribeFirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_policy_response: Types::FirewallPolicyResponse,
+        ?firewall_policy: Types::FirewallPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse?
+      attr_accessor firewall_policy: Types::FirewallPolicy?
+    end
+
+    class DescribeFirewallRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+    end
+
+    class DescribeFirewallResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall: Types::Firewall,
+        ?firewall_status: Types::FirewallStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall: Types::Firewall?
+      attr_accessor firewall_status: Types::FirewallStatus?
+    end
+
+    class DescribeFlowOperationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?flow_operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor flow_operation_id: String?
+    end
+
+    class DescribeFlowOperationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?flow_operation_id: String,
+        ?flow_operation_type: String,
+        ?flow_operation_status: String,
+        ?status_message: String,
+        ?flow_request_timestamp: Time,
+        ?flow_operation: Types::FlowOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor flow_operation_id: String?
+      attr_accessor flow_operation_type: String?
+      attr_accessor flow_operation_status: String?
+      attr_accessor status_message: String?
+      attr_accessor flow_request_timestamp: Time?
+      attr_accessor flow_operation: Types::FlowOperation?
+    end
+
+    class DescribeLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+    end
+
+    class DescribeLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?enable_monitoring_dashboard: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor enable_monitoring_dashboard: bool?
+    end
+
+    class DescribeResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class DescribeRuleGroupMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?rule_group_arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group_arn: String?
+      attr_accessor type: String?
+    end
+
+    class DescribeRuleGroupMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_arn: String,
+        ?rule_group_name: String,
+        ?description: String,
+        ?type: String,
+        ?capacity: Integer,
+        ?stateful_rule_options: Types::StatefulRuleOptions,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_arn: String?
+      attr_accessor rule_group_name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor capacity: Integer?
+      attr_accessor stateful_rule_options: Types::StatefulRuleOptions?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DescribeRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?rule_group_arn: String,
+        ?type: String,
+        ?analyze_rule_group: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group_arn: String?
+      attr_accessor type: String?
+      attr_accessor analyze_rule_group: bool?
+    end
+
+    class DescribeRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?rule_group: Types::RuleGroup,
+        ?rule_group_response: Types::RuleGroupResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor rule_group: Types::RuleGroup?
+      attr_accessor rule_group_response: Types::RuleGroupResponse?
+    end
+
+    class DescribeRuleGroupSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?rule_group_arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group_arn: String?
+      attr_accessor type: String?
+    end
+
+    class DescribeRuleGroupSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_name: String,
+        ?description: String,
+        ?summary: Types::Summary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_name: String?
+      attr_accessor description: String?
+      attr_accessor summary: Types::Summary?
+    end
+
+    class DescribeTLSInspectionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_arn: String,
+        ?tls_inspection_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_arn: String?
+      attr_accessor tls_inspection_configuration_name: String?
+    end
+
+    class DescribeTLSInspectionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?tls_inspection_configuration: Types::TLSInspectionConfiguration,
+        ?tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration?
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse?
+    end
+
+    class DescribeVpcEndpointAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association_arn: String?
+    end
+
+    class DescribeVpcEndpointAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association: Types::VpcEndpointAssociation,
+        ?vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation?
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus?
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class DisassociateAvailabilityZonesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+    end
+
+    class DisassociateAvailabilityZonesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+      attr_accessor update_token: String?
+    end
+
+    class DisassociateSubnetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class DisassociateSubnetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor update_token: String?
+    end
+
+    module EnabledAnalysisType
+      TLS_SNI: String
+      HTTP_HOST: String
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor type: String?
+    end
+
+    module EncryptionType
+      CUSTOMER_KMS: String
+      AWS_OWNED_KMS_KEY: String
+    end
+
+    class Firewall
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+        ?firewall_policy_arn: String,
+        ?vpc_id: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?delete_protection: bool,
+        ?subnet_change_protection: bool,
+        ?firewall_policy_change_protection: bool,
+        ?description: String,
+        ?firewall_id: String,
+        ?tags: Array[Types::Tag],
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?number_of_associations: Integer,
+        ?enabled_analysis_types: Array[String],
+        ?transit_gateway_id: String,
+        ?transit_gateway_owner_account_id: String,
+        ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
+        ?availability_zone_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor delete_protection: bool?
+      attr_accessor subnet_change_protection: bool?
+      attr_accessor firewall_policy_change_protection: bool?
+      attr_accessor description: String?
+      attr_accessor firewall_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor number_of_associations: Integer?
+      attr_accessor enabled_analysis_types: Array[String]?
+      attr_accessor transit_gateway_id: String?
+      attr_accessor transit_gateway_owner_account_id: String?
+      attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
+      attr_accessor availability_zone_change_protection: bool?
+    end
+
+    class FirewallMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+        ?transit_gateway_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor transit_gateway_attachment_id: String?
+    end
+
+    class FirewallPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stateless_rule_group_references: Array[Types::StatelessRuleGroupReference],
+        ?stateless_default_actions: Array[String],
+        ?stateless_fragment_default_actions: Array[String],
+        ?stateless_custom_actions: Array[Types::CustomAction],
+        ?stateful_rule_group_references: Array[Types::StatefulRuleGroupReference],
+        ?stateful_default_actions: Array[String],
+        ?stateful_engine_options: Types::StatefulEngineOptions,
+        ?tls_inspection_configuration_arn: String,
+        ?policy_variables: Types::PolicyVariables,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stateless_rule_group_references: Array[Types::StatelessRuleGroupReference]?
+      attr_accessor stateless_default_actions: Array[String]?
+      attr_accessor stateless_fragment_default_actions: Array[String]?
+      attr_accessor stateless_custom_actions: Array[Types::CustomAction]?
+      attr_accessor stateful_rule_group_references: Array[Types::StatefulRuleGroupReference]?
+      attr_accessor stateful_default_actions: Array[String]?
+      attr_accessor stateful_engine_options: Types::StatefulEngineOptions?
+      attr_accessor tls_inspection_configuration_arn: String?
+      attr_accessor policy_variables: Types::PolicyVariables?
+    end
+
+    class FirewallPolicyMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class FirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_policy_name: String,
+        ?firewall_policy_arn: String,
+        ?firewall_policy_id: String,
+        ?description: String,
+        ?firewall_policy_status: String,
+        ?tags: Array[Types::Tag],
+        ?consumed_stateless_rule_capacity: Integer,
+        ?consumed_stateful_rule_capacity: Integer,
+        ?number_of_associations: Integer,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_policy_name: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor firewall_policy_id: String?
+      attr_accessor description: String?
+      attr_accessor firewall_policy_status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor consumed_stateless_rule_capacity: Integer?
+      attr_accessor consumed_stateful_rule_capacity: Integer?
+      attr_accessor number_of_associations: Integer?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class FirewallStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?configuration_sync_state_summary: String,
+        ?sync_states: Hash[String, Types::SyncState],
+        ?capacity_usage_summary: Types::CapacityUsageSummary,
+        ?transit_gateway_attachment_sync_state: Types::TransitGatewayAttachmentSyncState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor configuration_sync_state_summary: String?
+      attr_accessor sync_states: Hash[String, Types::SyncState]?
+      attr_accessor capacity_usage_summary: Types::CapacityUsageSummary?
+      attr_accessor transit_gateway_attachment_sync_state: Types::TransitGatewayAttachmentSyncState?
+    end
+
+    module FirewallStatusValue
+      PROVISIONING: String
+      DELETING: String
+      READY: String
+    end
+
+    class Flow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_address: Types::Address,
+        ?destination_address: Types::Address,
+        ?source_port: String,
+        ?destination_port: String,
+        ?protocol: String,
+        ?age: Integer,
+        ?packet_count: Integer,
+        ?byte_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_address: Types::Address?
+      attr_accessor destination_address: Types::Address?
+      attr_accessor source_port: String?
+      attr_accessor destination_port: String?
+      attr_accessor protocol: String?
+      attr_accessor age: Integer?
+      attr_accessor packet_count: Integer?
+      attr_accessor byte_count: Integer?
+    end
+
+    class FlowFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_address: Types::Address,
+        ?destination_address: Types::Address,
+        ?source_port: String,
+        ?destination_port: String,
+        ?protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_address: Types::Address?
+      attr_accessor destination_address: Types::Address?
+      attr_accessor source_port: String?
+      attr_accessor destination_port: String?
+      attr_accessor protocols: Array[String]?
+    end
+
+    class FlowOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_flow_age_in_seconds: Integer,
+        ?flow_filters: Array[Types::FlowFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_flow_age_in_seconds: Integer?
+      attr_accessor flow_filters: Array[Types::FlowFilter]?
+    end
+
+    class FlowOperationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_operation_id: String,
+        ?flow_operation_type: String,
+        ?flow_request_timestamp: Time,
+        ?flow_operation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_operation_id: String?
+      attr_accessor flow_operation_type: String?
+      attr_accessor flow_request_timestamp: Time?
+      attr_accessor flow_operation_status: String?
+    end
+
+    module FlowOperationStatus
+      COMPLETED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED_WITH_ERRORS: String
+    end
+
+    module FlowOperationType
+      FLOW_FLUSH: String
+      FLOW_CAPTURE: String
+    end
+
+    class FlowTimeouts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tcp_idle_timeout_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tcp_idle_timeout_seconds: Integer?
+    end
+
+    module GeneratedRulesType
+      ALLOWLIST: String
+      DENYLIST: String
+    end
+
+    class GetAnalysisReportResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?analysis_report_id: String,
+        ?firewall_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor analysis_report_id: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAnalysisReportResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?report_time: Time,
+        ?analysis_type: String,
+        ?next_token: String,
+        ?analysis_report_results: Array[Types::AnalysisTypeReportResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor report_time: Time?
+      attr_accessor analysis_type: String?
+      attr_accessor next_token: String?
+      attr_accessor analysis_report_results: Array[Types::AnalysisTypeReportResult]?
+    end
+
+    class Header
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?source: String,
+        ?source_port: String,
+        ?direction: String,
+        ?destination: String,
+        ?destination_port: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor source: String?
+      attr_accessor source_port: String?
+      attr_accessor direction: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: String?
+    end
+
+    class Hits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+    end
+
+    module IPAddressType
+      DUALSTACK: String
+      IPV4: String
+      IPV6: String
+    end
+
+    class IPSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Array[String]?
+    end
+
+    class IPSetMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolved_cidr_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolved_cidr_count: Integer?
+    end
+
+    class IPSetReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_arn: String?
+    end
+
+    module IdentifiedType
+      STATELESS_RULE_FORWARDING_ASYMMETRICALLY: String
+      STATELESS_RULE_CONTAINS_TCP_FLAGS: String
+    end
+
+    class InsufficientCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourcePolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAnalysisReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAnalysisReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_reports: Array[Types::AnalysisReport],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_reports: Array[Types::AnalysisReport]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFirewallPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFirewallPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?firewall_policies: Array[Types::FirewallPolicyMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor firewall_policies: Array[Types::FirewallPolicyMetadata]?
+    end
+
+    class ListFirewallsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?vpc_ids: Array[String],
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor vpc_ids: Array[String]?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFirewallsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?firewalls: Array[Types::FirewallMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor firewalls: Array[Types::FirewallMetadata]?
+    end
+
+    class ListFlowOperationResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?flow_operation_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?availability_zone: String,
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor flow_operation_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+    end
+
+    class ListFlowOperationResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?flow_operation_id: String,
+        ?flow_operation_status: String,
+        ?status_message: String,
+        ?flow_request_timestamp: Time,
+        ?flows: Array[Types::Flow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor flow_operation_id: String?
+      attr_accessor flow_operation_status: String?
+      attr_accessor status_message: String?
+      attr_accessor flow_request_timestamp: Time?
+      attr_accessor flows: Array[Types::Flow]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFlowOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?flow_operation_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor flow_operation_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFlowOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_operations: Array[Types::FlowOperationMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_operations: Array[Types::FlowOperationMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?scope: String,
+        ?managed_type: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor scope: String?
+      attr_accessor managed_type: String?
+      attr_accessor type: String?
+    end
+
+    class ListRuleGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?rule_groups: Array[Types::RuleGroupMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor rule_groups: Array[Types::RuleGroupMetadata]?
+    end
+
+    class ListTLSInspectionConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTLSInspectionConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tls_inspection_configurations: Array[Types::TLSInspectionConfigurationMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tls_inspection_configurations: Array[Types::TLSInspectionConfigurationMetadata]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListVpcEndpointAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?firewall_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor firewall_arn: String?
+    end
+
+    class ListVpcEndpointAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?vpc_endpoint_associations: Array[Types::VpcEndpointAssociationMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor vpc_endpoint_associations: Array[Types::VpcEndpointAssociationMetadata]?
+    end
+
+    class LogDestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?log_destination_type: String,
+        ?log_destination: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor log_destination_type: String?
+      attr_accessor log_destination: Hash[String, String]?
+    end
+
+    class LogDestinationPermissionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LogDestinationType
+      S3: String
+      CLOUDWATCH_LOGS: String
+      KINESIS_DATA_FIREHOSE: String
+    end
+
+    module LogType
+      ALERT: String
+      FLOW: String
+      TLS: String
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_destination_configs: Array[Types::LogDestinationConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_destination_configs: Array[Types::LogDestinationConfig]?
+    end
+
+    class MatchAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::Address],
+        ?destinations: Array[Types::Address],
+        ?source_ports: Array[Types::PortRange],
+        ?destination_ports: Array[Types::PortRange],
+        ?protocols: Array[Integer],
+        ?tcp_flags: Array[Types::TCPFlagField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::Address]?
+      attr_accessor destinations: Array[Types::Address]?
+      attr_accessor source_ports: Array[Types::PortRange]?
+      attr_accessor destination_ports: Array[Types::PortRange]?
+      attr_accessor protocols: Array[Integer]?
+      attr_accessor tcp_flags: Array[Types::TCPFlagField]?
+    end
+
+    module OverrideAction
+      DROP_TO_ALERT: String
+    end
+
+    class PerObjectStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_status: String,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_status: String?
+      attr_accessor update_token: String?
+    end
+
+    module PerObjectSyncStatus
+      PENDING: String
+      IN_SYNC: String
+      CAPACITY_CONSTRAINED: String
+    end
+
+    class PolicyVariables
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_variables: Hash[String, Types::IPSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_variables: Hash[String, Types::IPSet]?
+    end
+
+    class PortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+    end
+
+    class PortSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Array[String]?
+    end
+
+    class PublishMetricAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Array[Types::Dimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Array[Types::Dimension]?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReferenceSets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_set_references: Hash[String, Types::IPSetReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_set_references: Hash[String, Types::IPSetReference]?
+    end
+
+    class RejectNetworkFirewallTransitGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+    end
+
+    class RejectNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_id: String,
+        ?transit_gateway_attachment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_id: String?
+      attr_accessor transit_gateway_attachment_status: String?
+    end
+
+    module ResourceManagedStatus
+      MANAGED: String
+      ACCOUNT: String
+    end
+
+    module ResourceManagedType
+      AWS_MANAGED_THREAT_SIGNATURES: String
+      AWS_MANAGED_DOMAIN_LISTS: String
+      ACTIVE_THREAT_DEFENSE: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceOwnerCheckException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceStatus
+      ACTIVE: String
+      DELETING: String
+      ERROR: String
+    end
+
+    module RevocationCheckAction
+      PASS: String
+      DROP: String
+      REJECT: String
+    end
+
+    class RuleDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_attributes: Types::MatchAttributes,
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_attributes: Types::MatchAttributes?
+      attr_accessor actions: Array[String]?
+    end
+
+    class RuleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_variables: Types::RuleVariables,
+        ?reference_sets: Types::ReferenceSets,
+        ?rules_source: Types::RulesSource,
+        ?stateful_rule_options: Types::StatefulRuleOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_variables: Types::RuleVariables?
+      attr_accessor reference_sets: Types::ReferenceSets?
+      attr_accessor rules_source: Types::RulesSource?
+      attr_accessor stateful_rule_options: Types::StatefulRuleOptions?
+    end
+
+    class RuleGroupMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class RuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group_arn: String,
+        ?rule_group_name: String,
+        ?rule_group_id: String,
+        ?description: String,
+        ?type: String,
+        ?capacity: Integer,
+        ?rule_group_status: String,
+        ?tags: Array[Types::Tag],
+        ?consumed_capacity: Integer,
+        ?number_of_associations: Integer,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?source_metadata: Types::SourceMetadata,
+        ?sns_topic: String,
+        ?last_modified_time: Time,
+        ?analysis_results: Array[Types::AnalysisResult],
+        ?summary_configuration: Types::SummaryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group_arn: String?
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group_id: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor capacity: Integer?
+      attr_accessor rule_group_status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor consumed_capacity: Integer?
+      attr_accessor number_of_associations: Integer?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor source_metadata: Types::SourceMetadata?
+      attr_accessor sns_topic: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor analysis_results: Array[Types::AnalysisResult]?
+      attr_accessor summary_configuration: Types::SummaryConfiguration?
+    end
+
+    module RuleGroupType
+      STATELESS: String
+      STATEFUL: String
+    end
+
+    class RuleOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyword: String,
+        ?settings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyword: String?
+      attr_accessor settings: Array[String]?
+    end
+
+    module RuleOrder
+      DEFAULT_ACTION_ORDER: String
+      STRICT_ORDER: String
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?msg: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor msg: String?
+      attr_accessor metadata: String?
+    end
+
+    class RuleVariables
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_sets: Hash[String, Types::IPSet],
+        ?port_sets: Hash[String, Types::PortSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_sets: Hash[String, Types::IPSet]?
+      attr_accessor port_sets: Hash[String, Types::PortSet]?
+    end
+
+    class RulesSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules_string: String,
+        ?rules_source_list: Types::RulesSourceList,
+        ?stateful_rules: Array[Types::StatefulRule],
+        ?stateless_rules_and_custom_actions: Types::StatelessRulesAndCustomActions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules_string: String?
+      attr_accessor rules_source_list: Types::RulesSourceList?
+      attr_accessor stateful_rules: Array[Types::StatefulRule]?
+      attr_accessor stateless_rules_and_custom_actions: Types::StatelessRulesAndCustomActions?
+    end
+
+    class RulesSourceList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?targets: Array[String],
+        ?target_types: Array[String],
+        ?generated_rules_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor targets: Array[String]?
+      attr_accessor target_types: Array[String]?
+      attr_accessor generated_rules_type: String?
+    end
+
+    class ServerCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ServerCertificateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_certificates: Array[Types::ServerCertificate],
+        ?scopes: Array[Types::ServerCertificateScope],
+        ?certificate_authority_arn: String,
+        ?check_certificate_revocation_status: Types::CheckCertificateRevocationStatusActions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_certificates: Array[Types::ServerCertificate]?
+      attr_accessor scopes: Array[Types::ServerCertificateScope]?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor check_certificate_revocation_status: Types::CheckCertificateRevocationStatusActions?
+    end
+
+    class ServerCertificateScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::Address],
+        ?destinations: Array[Types::Address],
+        ?source_ports: Array[Types::PortRange],
+        ?destination_ports: Array[Types::PortRange],
+        ?protocols: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::Address]?
+      attr_accessor destinations: Array[Types::Address]?
+      attr_accessor source_ports: Array[Types::PortRange]?
+      attr_accessor destination_ports: Array[Types::PortRange]?
+      attr_accessor protocols: Array[Integer]?
+    end
+
+    class SourceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?source_update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor source_update_token: String?
+    end
+
+    class StartAnalysisReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_name: String,
+        ?firewall_arn: String,
+        ?analysis_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor analysis_type: String?
+    end
+
+    class StartAnalysisReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report_id: String?
+    end
+
+    class StartFlowCaptureRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?minimum_flow_age_in_seconds: Integer,
+        ?flow_filters: Array[Types::FlowFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor minimum_flow_age_in_seconds: Integer?
+      attr_accessor flow_filters: Array[Types::FlowFilter]?
+    end
+
+    class StartFlowCaptureResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?flow_operation_id: String,
+        ?flow_operation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor flow_operation_id: String?
+      attr_accessor flow_operation_status: String?
+    end
+
+    class StartFlowFlushRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?availability_zone: String,
+        ?vpc_endpoint_association_arn: String,
+        ?vpc_endpoint_id: String,
+        ?minimum_flow_age_in_seconds: Integer,
+        ?flow_filters: Array[Types::FlowFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor minimum_flow_age_in_seconds: Integer?
+      attr_accessor flow_filters: Array[Types::FlowFilter]?
+    end
+
+    class StartFlowFlushResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?flow_operation_id: String,
+        ?flow_operation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor flow_operation_id: String?
+      attr_accessor flow_operation_status: String?
+    end
+
+    module StatefulAction
+      PASS: String
+      DROP: String
+      ALERT: String
+      REJECT: String
+    end
+
+    class StatefulEngineOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_order: String,
+        ?stream_exception_policy: String,
+        ?flow_timeouts: Types::FlowTimeouts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_order: String?
+      attr_accessor stream_exception_policy: String?
+      attr_accessor flow_timeouts: Types::FlowTimeouts?
+    end
+
+    class StatefulRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?header: Types::Header,
+        ?rule_options: Array[Types::RuleOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor header: Types::Header?
+      attr_accessor rule_options: Array[Types::RuleOption]?
+    end
+
+    module StatefulRuleDirection
+      FORWARD: String
+      ANY: String
+    end
+
+    class StatefulRuleGroupOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class StatefulRuleGroupReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?priority: Integer,
+        ?override: Types::StatefulRuleGroupOverride,
+        ?deep_threat_inspection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor priority: Integer?
+      attr_accessor override: Types::StatefulRuleGroupOverride?
+      attr_accessor deep_threat_inspection: bool?
+    end
+
+    class StatefulRuleOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_order: String?
+    end
+
+    module StatefulRuleProtocol
+      ANY: String
+      TCP: String
+      UDP: String
+      ICMP: String
+      HTTP: String
+      FTP: String
+      TLS: String
+      SMB: String
+      DNS: String
+      DCERPC: String
+      SSH: String
+      SMTP: String
+      IMAP: String
+      MSN: String
+      KRB5: String
+      IKEV2: String
+      TFTP: String
+      NTP: String
+      DHCP: String
+      HTTP2: String
+      QUIC: String
+    end
+
+    class StatelessRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_definition: Types::RuleDefinition,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_definition: Types::RuleDefinition?
+      attr_accessor priority: Integer?
+    end
+
+    class StatelessRuleGroupReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor priority: Integer?
+    end
+
+    class StatelessRulesAndCustomActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stateless_rules: Array[Types::StatelessRule],
+        ?custom_actions: Array[Types::CustomAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stateless_rules: Array[Types::StatelessRule]?
+      attr_accessor custom_actions: Array[Types::CustomAction]?
+    end
+
+    module StreamExceptionPolicy
+      DROP: String
+      CONTINUE: String
+      REJECT: String
+    end
+
+    class SubnetMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_id: String,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_id: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class Summary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_summaries: Array[Types::RuleSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_summaries: Array[Types::RuleSummary]?
+    end
+
+    class SummaryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_options: Array[String]?
+    end
+
+    module SummaryRuleOption
+      SID: String
+      MSG: String
+      METADATA: String
+    end
+
+    class SyncState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?config: Hash[String, Types::PerObjectStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor config: Hash[String, Types::PerObjectStatus]?
+    end
+
+    module TCPFlag
+      FIN: String
+      SYN: String
+      RST: String
+      PSH: String
+      ACK: String
+      URG: String
+      ECE: String
+      CWR: String
+    end
+
+    class TCPFlagField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flags: Array[String],
+        ?masks: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flags: Array[String]?
+      attr_accessor masks: Array[String]?
+    end
+
+    class TLSInspectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_certificate_configurations: Array[Types::ServerCertificateConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_certificate_configurations: Array[Types::ServerCertificateConfiguration]?
+    end
+
+    class TLSInspectionConfigurationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class TLSInspectionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_arn: String,
+        ?tls_inspection_configuration_name: String,
+        ?tls_inspection_configuration_id: String,
+        ?tls_inspection_configuration_status: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?last_modified_time: Time,
+        ?number_of_associations: Integer,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?certificates: Array[Types::TlsCertificateData],
+        ?certificate_authority: Types::TlsCertificateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_arn: String?
+      attr_accessor tls_inspection_configuration_name: String?
+      attr_accessor tls_inspection_configuration_id: String?
+      attr_accessor tls_inspection_configuration_status: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor number_of_associations: Integer?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor certificates: Array[Types::TlsCertificateData]?
+      attr_accessor certificate_authority: Types::TlsCertificateData?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetType
+      TLS_SNI: String
+      HTTP_HOST: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TlsCertificateData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?certificate_serial: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor certificate_serial: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module TransitGatewayAttachmentStatus
+      CREATING: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      ERROR: String
+      READY: String
+      PENDING_ACCEPTANCE: String
+      REJECTING: String
+      REJECTED: String
+    end
+
+    class TransitGatewayAttachmentSyncState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?transit_gateway_attachment_status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor transit_gateway_attachment_status: String?
+      attr_accessor status_message: String?
+    end
+
+    class UniqueSources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAvailabilityZoneChangeProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_change_protection: bool?
+    end
+
+    class UpdateAvailabilityZoneChangeProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?availability_zone_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor availability_zone_change_protection: bool?
+    end
+
+    class UpdateFirewallAnalysisSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_analysis_types: Array[String],
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_analysis_types: Array[String]?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateFirewallAnalysisSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_analysis_types: Array[String],
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_analysis_types: Array[String]?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateFirewallDeleteProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?delete_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor delete_protection: bool?
+    end
+
+    class UpdateFirewallDeleteProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?delete_protection: bool,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor delete_protection: bool?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateFirewallDescriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateFirewallDescriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?description: String,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor description: String?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateFirewallEncryptionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateFirewallEncryptionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?update_token: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor update_token: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateFirewallPolicyChangeProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?firewall_policy_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_policy_change_protection: bool?
+    end
+
+    class UpdateFirewallPolicyChangeProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?firewall_policy_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor firewall_policy_change_protection: bool?
+    end
+
+    class UpdateFirewallPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_policy_arn: String,
+        ?firewall_policy_name: String,
+        ?firewall_policy: Types::FirewallPolicy,
+        ?description: String,
+        ?dry_run: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_policy_arn: String?
+      attr_accessor firewall_policy_name: String?
+      attr_accessor firewall_policy: Types::FirewallPolicy?
+      attr_accessor description: String?
+      attr_accessor dry_run: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateFirewallPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_policy_response: Types::FirewallPolicyResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse?
+    end
+
+    class UpdateLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?enable_monitoring_dashboard: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor enable_monitoring_dashboard: bool?
+    end
+
+    class UpdateLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?enable_monitoring_dashboard: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor enable_monitoring_dashboard: bool?
+    end
+
+    class UpdateRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?rule_group_arn: String,
+        ?rule_group_name: String,
+        ?rule_group: Types::RuleGroup,
+        ?rules: String,
+        ?type: String,
+        ?description: String,
+        ?dry_run: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?source_metadata: Types::SourceMetadata,
+        ?analyze_rule_group: bool,
+        ?summary_configuration: Types::SummaryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor rule_group_arn: String?
+      attr_accessor rule_group_name: String?
+      attr_accessor rule_group: Types::RuleGroup?
+      attr_accessor rules: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor dry_run: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor source_metadata: Types::SourceMetadata?
+      attr_accessor analyze_rule_group: bool?
+      attr_accessor summary_configuration: Types::SummaryConfiguration?
+    end
+
+    class UpdateRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?rule_group_response: Types::RuleGroupResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor rule_group_response: Types::RuleGroupResponse?
+    end
+
+    class UpdateSubnetChangeProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_change_protection: bool?
+    end
+
+    class UpdateSubnetChangeProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?subnet_change_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor subnet_change_protection: bool?
+    end
+
+    class UpdateTLSInspectionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_inspection_configuration_arn: String,
+        ?tls_inspection_configuration_name: String,
+        ?tls_inspection_configuration: Types::TLSInspectionConfiguration,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_inspection_configuration_arn: String?
+      attr_accessor tls_inspection_configuration_name: String?
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateTLSInspectionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_token: String,
+        ?tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_token: String?
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse?
+    end
+
+    class VpcEndpointAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association_id: String,
+        ?vpc_endpoint_association_arn: String,
+        ?firewall_arn: String,
+        ?vpc_id: String,
+        ?subnet_mapping: Types::SubnetMapping,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association_id: String?
+      attr_accessor vpc_endpoint_association_arn: String?
+      attr_accessor firewall_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_mapping: Types::SubnetMapping?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class VpcEndpointAssociationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_association_arn: String?
+    end
+
+    class VpcEndpointAssociationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?association_sync_state: Hash[String, Types::AZSyncState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor association_sync_state: Hash[String, Types::AZSyncState]?
+    end
+  end
+end

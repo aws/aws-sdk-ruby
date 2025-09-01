@@ -1,0 +1,28 @@
+module Aws::AppConfig
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def details: () -> Types::BadRequestDetails?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PayloadTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def measure: () -> String?
+      def limit: () -> Float?
+      def size: () -> Float?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

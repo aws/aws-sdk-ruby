@@ -1,0 +1,29 @@
+module Aws::AppConfigData
+  module Schema
+    include Smithy::Schema::Shapes
+
+    BadRequestDetails: UnionShape
+    BadRequestException: StructureShape
+    BadRequestReason: StringShape
+    GetLatestConfigurationInput: StructureShape
+    GetLatestConfigurationOutput: StructureShape
+    Identifier: StringShape
+    Integer: IntegerShape
+    InternalServerException: StructureShape
+    InvalidParameterDetail: StructureShape
+    InvalidParameterMap: MapShape
+    InvalidParameterProblem: StringShape
+    OptionalPollSeconds: IntegerShape
+    ResourceNotFoundException: StructureShape
+    ResourceType: StringShape
+    SensitiveBlob: BlobShape
+    StartConfigurationSessionInput: StructureShape
+    StartConfigurationSessionOutput: StructureShape
+    String: StringShape
+    StringMap: MapShape
+    ThrottlingException: StructureShape
+    Token: StringShape
+
+    AppConfigData: ServiceShape
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module ServerlessApplicationRepository
+      VERSION: String
+    end
+  end

@@ -1,0 +1,5 @@
+  module Aws
+    module PinpointSMSVoice
+      VERSION: String
+    end
+  end

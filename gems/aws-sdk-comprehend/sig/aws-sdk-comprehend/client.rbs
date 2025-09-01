@@ -1,0 +1,1381 @@
+module Aws::Comprehend
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Comprehend::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchDetectDominantLanguageResponse
+      include Smithy::Client::_Response[Types::BatchDetectDominantLanguageResponse]
+      def result_list: () -> Array[Types::BatchDetectDominantLanguageItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_dominant_language: (
+      ?text_list: Array[String]
+    ) -> _BatchDetectDominantLanguageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectDominantLanguageResponse
+
+    interface _BatchDetectEntitiesResponse
+      include Smithy::Client::_Response[Types::BatchDetectEntitiesResponse]
+      def result_list: () -> Array[Types::BatchDetectEntitiesItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_entities: (
+      ?text_list: Array[String],
+      ?language_code: String
+    ) -> _BatchDetectEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectEntitiesResponse
+
+    interface _BatchDetectKeyPhrasesResponse
+      include Smithy::Client::_Response[Types::BatchDetectKeyPhrasesResponse]
+      def result_list: () -> Array[Types::BatchDetectKeyPhrasesItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_key_phrases: (
+      ?text_list: Array[String],
+      ?language_code: String
+    ) -> _BatchDetectKeyPhrasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectKeyPhrasesResponse
+
+    interface _BatchDetectSentimentResponse
+      include Smithy::Client::_Response[Types::BatchDetectSentimentResponse]
+      def result_list: () -> Array[Types::BatchDetectSentimentItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_sentiment: (
+      ?text_list: Array[String],
+      ?language_code: String
+    ) -> _BatchDetectSentimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectSentimentResponse
+
+    interface _BatchDetectSyntaxResponse
+      include Smithy::Client::_Response[Types::BatchDetectSyntaxResponse]
+      def result_list: () -> Array[Types::BatchDetectSyntaxItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_syntax: (
+      ?text_list: Array[String],
+      ?language_code: String
+    ) -> _BatchDetectSyntaxResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectSyntaxResponse
+
+    interface _BatchDetectTargetedSentimentResponse
+      include Smithy::Client::_Response[Types::BatchDetectTargetedSentimentResponse]
+      def result_list: () -> Array[Types::BatchDetectTargetedSentimentItemResult]?
+      def error_list: () -> Array[Types::BatchItemError]?
+    end
+    def batch_detect_targeted_sentiment: (
+      ?text_list: Array[String],
+      ?language_code: String
+    ) -> _BatchDetectTargetedSentimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDetectTargetedSentimentResponse
+
+    interface _ClassifyDocumentResponse
+      include Smithy::Client::_Response[Types::ClassifyDocumentResponse]
+      def classes: () -> Array[Types::DocumentClass]?
+      def labels: () -> Array[Types::DocumentLabel]?
+      def document_metadata: () -> Types::DocumentMetadata?
+      def document_type: () -> Array[Types::DocumentTypeListItem]?
+      def errors: () -> Array[Types::ErrorsListItem]?
+      def warnings: () -> Array[Types::WarningsListItem]?
+    end
+    def classify_document: (
+      ?text: String,
+      ?endpoint_arn: String,
+      ?bytes: String,
+      ?document_reader_config: {
+        document_read_action: String,
+        document_read_mode: String,
+        feature_types: Array[String]
+      }
+    ) -> _ClassifyDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ClassifyDocumentResponse
+
+    interface _ContainsPiiEntitiesResponse
+      include Smithy::Client::_Response[Types::ContainsPiiEntitiesResponse]
+      def labels: () -> Array[Types::EntityLabel]?
+    end
+    def contains_pii_entities: (
+      ?text: String,
+      ?language_code: String
+    ) -> _ContainsPiiEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ContainsPiiEntitiesResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_arn: () -> String?
+    end
+    def create_dataset: (
+      ?flywheel_arn: String,
+      ?dataset_name: String,
+      ?dataset_type: String,
+      ?description: String,
+      ?input_data_config: {
+        augmented_manifests: Array[
+          {
+            attribute_names: Array[String],
+            s3_uri: String,
+            annotation_data_s3_uri: untyped,
+            source_documents_s3_uri: untyped,
+            document_type: String
+          }
+        ],
+        data_format: String,
+        document_classifier_input_data_config: {
+          s3_uri: untyped,
+          label_delimiter: String
+        },
+        entity_recognizer_input_data_config: {
+          annotations: {
+            s3_uri: untyped
+          },
+          documents: {
+            s3_uri: untyped,
+            input_format: String
+          },
+          entity_list: {
+            s3_uri: untyped
+          }
+        }
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDocumentClassifierResponse
+      include Smithy::Client::_Response[Types::CreateDocumentClassifierResponse]
+      def document_classifier_arn: () -> String?
+    end
+    def create_document_classifier: (
+      ?document_classifier_name: String,
+      ?version_name: String,
+      ?data_access_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?input_data_config: {
+        data_format: String,
+        s3_uri: String,
+        test_s3_uri: untyped,
+        label_delimiter: String,
+        augmented_manifests: Array[
+          {
+            s3_uri: untyped,
+            split: String,
+            attribute_names: Array[String],
+            annotation_data_s3_uri: untyped,
+            source_documents_s3_uri: untyped,
+            document_type: String
+          }
+        ],
+        document_type: String,
+        documents: {
+          s3_uri: untyped,
+          test_s3_uri: untyped
+        },
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String,
+        flywheel_stats_s3_prefix: untyped
+      },
+      ?client_request_token: String,
+      ?language_code: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?mode: String,
+      ?model_kms_key_id: String,
+      ?model_policy: String
+    ) -> _CreateDocumentClassifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDocumentClassifierResponse
+
+    interface _CreateEndpointResponse
+      include Smithy::Client::_Response[Types::CreateEndpointResponse]
+      def endpoint_arn: () -> String?
+      def model_arn: () -> String?
+    end
+    def create_endpoint: (
+      ?endpoint_name: String,
+      ?model_arn: String,
+      ?desired_inference_units: Integer,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?data_access_role_arn: String,
+      ?flywheel_arn: String
+    ) -> _CreateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointResponse
+
+    interface _CreateEntityRecognizerResponse
+      include Smithy::Client::_Response[Types::CreateEntityRecognizerResponse]
+      def entity_recognizer_arn: () -> String?
+    end
+    def create_entity_recognizer: (
+      ?recognizer_name: String,
+      ?version_name: String,
+      ?data_access_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?input_data_config: {
+        data_format: String,
+        entity_types: Array[
+          {
+            type: String
+          }
+        ],
+        documents: {
+          s3_uri: String,
+          test_s3_uri: untyped,
+          input_format: String
+        },
+        annotations: {
+          s3_uri: untyped,
+          test_s3_uri: untyped
+        },
+        entity_list: {
+          s3_uri: untyped
+        },
+        augmented_manifests: Array[
+          {
+            s3_uri: untyped,
+            split: String,
+            attribute_names: Array[String],
+            annotation_data_s3_uri: untyped,
+            source_documents_s3_uri: untyped,
+            document_type: String
+          }
+        ]
+      },
+      ?client_request_token: String,
+      ?language_code: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?model_kms_key_id: String,
+      ?model_policy: String
+    ) -> _CreateEntityRecognizerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEntityRecognizerResponse
+
+    interface _CreateFlywheelResponse
+      include Smithy::Client::_Response[Types::CreateFlywheelResponse]
+      def flywheel_arn: () -> String?
+      def active_model_arn: () -> String?
+    end
+    def create_flywheel: (
+      ?flywheel_name: String,
+      ?active_model_arn: String,
+      ?data_access_role_arn: String,
+      ?task_config: {
+        language_code: String,
+        document_classification_config: {
+          mode: String,
+          labels: Array[String]
+        },
+        entity_recognition_config: {
+          entity_types: Array[
+            {
+              type: String
+            }
+          ]
+        }
+      },
+      ?model_type: String,
+      ?data_lake_s3_uri: String,
+      ?data_security_config: {
+        model_kms_key_id: String,
+        volume_kms_key_id: untyped,
+        data_lake_kms_key_id: untyped,
+        vpc_config: {
+          security_group_ids: Array[String],
+          subnets: Array[String]
+        }
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFlywheelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlywheelResponse
+
+    interface _DeleteDocumentClassifierResponse
+      include Smithy::Client::_Response[Types::DeleteDocumentClassifierResponse]
+    end
+    def delete_document_classifier: (
+      ?document_classifier_arn: String
+    ) -> _DeleteDocumentClassifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDocumentClassifierResponse
+
+    interface _DeleteEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteEndpointResponse]
+    end
+    def delete_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DeleteEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointResponse
+
+    interface _DeleteEntityRecognizerResponse
+      include Smithy::Client::_Response[Types::DeleteEntityRecognizerResponse]
+    end
+    def delete_entity_recognizer: (
+      ?entity_recognizer_arn: String
+    ) -> _DeleteEntityRecognizerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEntityRecognizerResponse
+
+    interface _DeleteFlywheelResponse
+      include Smithy::Client::_Response[Types::DeleteFlywheelResponse]
+    end
+    def delete_flywheel: (
+      ?flywheel_arn: String
+    ) -> _DeleteFlywheelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlywheelResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?policy_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset_properties: () -> Types::DatasetProperties?
+    end
+    def describe_dataset: (
+      ?dataset_arn: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDocumentClassificationJobResponse
+      include Smithy::Client::_Response[Types::DescribeDocumentClassificationJobResponse]
+      def document_classification_job_properties: () -> Types::DocumentClassificationJobProperties?
+    end
+    def describe_document_classification_job: (
+      ?job_id: String
+    ) -> _DescribeDocumentClassificationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDocumentClassificationJobResponse
+
+    interface _DescribeDocumentClassifierResponse
+      include Smithy::Client::_Response[Types::DescribeDocumentClassifierResponse]
+      def document_classifier_properties: () -> Types::DocumentClassifierProperties?
+    end
+    def describe_document_classifier: (
+      ?document_classifier_arn: String
+    ) -> _DescribeDocumentClassifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDocumentClassifierResponse
+
+    interface _DescribeDominantLanguageDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeDominantLanguageDetectionJobResponse]
+      def dominant_language_detection_job_properties: () -> Types::DominantLanguageDetectionJobProperties?
+    end
+    def describe_dominant_language_detection_job: (
+      ?job_id: String
+    ) -> _DescribeDominantLanguageDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDominantLanguageDetectionJobResponse
+
+    interface _DescribeEndpointResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointResponse]
+      def endpoint_properties: () -> Types::EndpointProperties?
+    end
+    def describe_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DescribeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointResponse
+
+    interface _DescribeEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeEntitiesDetectionJobResponse]
+      def entities_detection_job_properties: () -> Types::EntitiesDetectionJobProperties?
+    end
+    def describe_entities_detection_job: (
+      ?job_id: String
+    ) -> _DescribeEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEntitiesDetectionJobResponse
+
+    interface _DescribeEntityRecognizerResponse
+      include Smithy::Client::_Response[Types::DescribeEntityRecognizerResponse]
+      def entity_recognizer_properties: () -> Types::EntityRecognizerProperties?
+    end
+    def describe_entity_recognizer: (
+      ?entity_recognizer_arn: String
+    ) -> _DescribeEntityRecognizerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEntityRecognizerResponse
+
+    interface _DescribeEventsDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeEventsDetectionJobResponse]
+      def events_detection_job_properties: () -> Types::EventsDetectionJobProperties?
+    end
+    def describe_events_detection_job: (
+      ?job_id: String
+    ) -> _DescribeEventsDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventsDetectionJobResponse
+
+    interface _DescribeFlywheelResponse
+      include Smithy::Client::_Response[Types::DescribeFlywheelResponse]
+      def flywheel_properties: () -> Types::FlywheelProperties?
+    end
+    def describe_flywheel: (
+      ?flywheel_arn: String
+    ) -> _DescribeFlywheelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlywheelResponse
+
+    interface _DescribeFlywheelIterationResponse
+      include Smithy::Client::_Response[Types::DescribeFlywheelIterationResponse]
+      def flywheel_iteration_properties: () -> Types::FlywheelIterationProperties?
+    end
+    def describe_flywheel_iteration: (
+      ?flywheel_arn: String,
+      ?flywheel_iteration_id: String
+    ) -> _DescribeFlywheelIterationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlywheelIterationResponse
+
+    interface _DescribeKeyPhrasesDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeKeyPhrasesDetectionJobResponse]
+      def key_phrases_detection_job_properties: () -> Types::KeyPhrasesDetectionJobProperties?
+    end
+    def describe_key_phrases_detection_job: (
+      ?job_id: String
+    ) -> _DescribeKeyPhrasesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeyPhrasesDetectionJobResponse
+
+    interface _DescribePiiEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribePiiEntitiesDetectionJobResponse]
+      def pii_entities_detection_job_properties: () -> Types::PiiEntitiesDetectionJobProperties?
+    end
+    def describe_pii_entities_detection_job: (
+      ?job_id: String
+    ) -> _DescribePiiEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePiiEntitiesDetectionJobResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def resource_policy: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def policy_revision_id: () -> String?
+    end
+    def describe_resource_policy: (
+      ?resource_arn: String
+    ) -> _DescribeResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
+
+    interface _DescribeSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeSentimentDetectionJobResponse]
+      def sentiment_detection_job_properties: () -> Types::SentimentDetectionJobProperties?
+    end
+    def describe_sentiment_detection_job: (
+      ?job_id: String
+    ) -> _DescribeSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSentimentDetectionJobResponse
+
+    interface _DescribeTargetedSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeTargetedSentimentDetectionJobResponse]
+      def targeted_sentiment_detection_job_properties: () -> Types::TargetedSentimentDetectionJobProperties?
+    end
+    def describe_targeted_sentiment_detection_job: (
+      ?job_id: String
+    ) -> _DescribeTargetedSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTargetedSentimentDetectionJobResponse
+
+    interface _DescribeTopicsDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribeTopicsDetectionJobResponse]
+      def topics_detection_job_properties: () -> Types::TopicsDetectionJobProperties?
+    end
+    def describe_topics_detection_job: (
+      ?job_id: String
+    ) -> _DescribeTopicsDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTopicsDetectionJobResponse
+
+    interface _DetectDominantLanguageResponse
+      include Smithy::Client::_Response[Types::DetectDominantLanguageResponse]
+      def languages: () -> Array[Types::DominantLanguage]?
+    end
+    def detect_dominant_language: (
+      ?text: String
+    ) -> _DetectDominantLanguageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectDominantLanguageResponse
+
+    interface _DetectEntitiesResponse
+      include Smithy::Client::_Response[Types::DetectEntitiesResponse]
+      def entities: () -> Array[Types::Entity]?
+      def document_metadata: () -> Types::DocumentMetadata?
+      def document_type: () -> Array[Types::DocumentTypeListItem]?
+      def blocks: () -> Array[Types::Block]?
+      def errors: () -> Array[Types::ErrorsListItem]?
+    end
+    def detect_entities: (
+      ?text: String,
+      ?language_code: String,
+      ?endpoint_arn: String,
+      ?bytes: String,
+      ?document_reader_config: {
+        document_read_action: String,
+        document_read_mode: String,
+        feature_types: Array[String]
+      }
+    ) -> _DetectEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectEntitiesResponse
+
+    interface _DetectKeyPhrasesResponse
+      include Smithy::Client::_Response[Types::DetectKeyPhrasesResponse]
+      def key_phrases: () -> Array[Types::KeyPhrase]?
+    end
+    def detect_key_phrases: (
+      ?text: String,
+      ?language_code: String
+    ) -> _DetectKeyPhrasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectKeyPhrasesResponse
+
+    interface _DetectPiiEntitiesResponse
+      include Smithy::Client::_Response[Types::DetectPiiEntitiesResponse]
+      def entities: () -> Array[Types::PiiEntity]?
+    end
+    def detect_pii_entities: (
+      ?text: String,
+      ?language_code: String
+    ) -> _DetectPiiEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectPiiEntitiesResponse
+
+    interface _DetectSentimentResponse
+      include Smithy::Client::_Response[Types::DetectSentimentResponse]
+      def sentiment: () -> String?
+      def sentiment_score: () -> Types::SentimentScore?
+    end
+    def detect_sentiment: (
+      ?text: String,
+      ?language_code: String
+    ) -> _DetectSentimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectSentimentResponse
+
+    interface _DetectSyntaxResponse
+      include Smithy::Client::_Response[Types::DetectSyntaxResponse]
+      def syntax_tokens: () -> Array[Types::SyntaxToken]?
+    end
+    def detect_syntax: (
+      ?text: String,
+      ?language_code: String
+    ) -> _DetectSyntaxResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectSyntaxResponse
+
+    interface _DetectTargetedSentimentResponse
+      include Smithy::Client::_Response[Types::DetectTargetedSentimentResponse]
+      def entities: () -> Array[Types::TargetedSentimentEntity]?
+    end
+    def detect_targeted_sentiment: (
+      ?text: String,
+      ?language_code: String
+    ) -> _DetectTargetedSentimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectTargetedSentimentResponse
+
+    interface _DetectToxicContentResponse
+      include Smithy::Client::_Response[Types::DetectToxicContentResponse]
+      def result_list: () -> Array[Types::ToxicLabels]?
+    end
+    def detect_toxic_content: (
+      ?text_segments: Array[
+        {
+          text: String
+        }
+      ],
+      ?language_code: String
+    ) -> _DetectToxicContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectToxicContentResponse
+
+    interface _ImportModelResponse
+      include Smithy::Client::_Response[Types::ImportModelResponse]
+      def model_arn: () -> String?
+    end
+    def import_model: (
+      ?source_model_arn: String,
+      ?model_name: String,
+      ?version_name: String,
+      ?model_kms_key_id: String,
+      ?data_access_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportModelResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def dataset_properties_list: () -> Array[Types::DatasetProperties]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?flywheel_arn: String,
+      ?filter: {
+        status: String,
+        dataset_type: String,
+        creation_time_after: Time,
+        creation_time_before: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListDocumentClassificationJobsResponse
+      include Smithy::Client::_Response[Types::ListDocumentClassificationJobsResponse]
+      def document_classification_job_properties_list: () -> Array[Types::DocumentClassificationJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_document_classification_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDocumentClassificationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentClassificationJobsResponse
+
+    interface _ListDocumentClassifierSummariesResponse
+      include Smithy::Client::_Response[Types::ListDocumentClassifierSummariesResponse]
+      def document_classifier_summaries_list: () -> Array[Types::DocumentClassifierSummary]?
+      def next_token: () -> String?
+    end
+    def list_document_classifier_summaries: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDocumentClassifierSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentClassifierSummariesResponse
+
+    interface _ListDocumentClassifiersResponse
+      include Smithy::Client::_Response[Types::ListDocumentClassifiersResponse]
+      def document_classifier_properties_list: () -> Array[Types::DocumentClassifierProperties]?
+      def next_token: () -> String?
+    end
+    def list_document_classifiers: (
+      ?filter: {
+        status: String,
+        document_classifier_name: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDocumentClassifiersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentClassifiersResponse
+
+    interface _ListDominantLanguageDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListDominantLanguageDetectionJobsResponse]
+      def dominant_language_detection_job_properties_list: () -> Array[Types::DominantLanguageDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_dominant_language_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDominantLanguageDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDominantLanguageDetectionJobsResponse
+
+    interface _ListEndpointsResponse
+      include Smithy::Client::_Response[Types::ListEndpointsResponse]
+      def endpoint_properties_list: () -> Array[Types::EndpointProperties]?
+      def next_token: () -> String?
+    end
+    def list_endpoints: (
+      ?filter: {
+        model_arn: String,
+        status: String,
+        creation_time_before: Time,
+        creation_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEndpointsResponse
+
+    interface _ListEntitiesDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListEntitiesDetectionJobsResponse]
+      def entities_detection_job_properties_list: () -> Array[Types::EntitiesDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_entities_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntitiesDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitiesDetectionJobsResponse
+
+    interface _ListEntityRecognizerSummariesResponse
+      include Smithy::Client::_Response[Types::ListEntityRecognizerSummariesResponse]
+      def entity_recognizer_summaries_list: () -> Array[Types::EntityRecognizerSummary]?
+      def next_token: () -> String?
+    end
+    def list_entity_recognizer_summaries: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntityRecognizerSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntityRecognizerSummariesResponse
+
+    interface _ListEntityRecognizersResponse
+      include Smithy::Client::_Response[Types::ListEntityRecognizersResponse]
+      def entity_recognizer_properties_list: () -> Array[Types::EntityRecognizerProperties]?
+      def next_token: () -> String?
+    end
+    def list_entity_recognizers: (
+      ?filter: {
+        status: String,
+        recognizer_name: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntityRecognizersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntityRecognizersResponse
+
+    interface _ListEventsDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListEventsDetectionJobsResponse]
+      def events_detection_job_properties_list: () -> Array[Types::EventsDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_events_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventsDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventsDetectionJobsResponse
+
+    interface _ListFlywheelIterationHistoryResponse
+      include Smithy::Client::_Response[Types::ListFlywheelIterationHistoryResponse]
+      def flywheel_iteration_properties_list: () -> Array[Types::FlywheelIterationProperties]?
+      def next_token: () -> String?
+    end
+    def list_flywheel_iteration_history: (
+      ?flywheel_arn: String,
+      ?filter: {
+        creation_time_after: Time,
+        creation_time_before: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFlywheelIterationHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlywheelIterationHistoryResponse
+
+    interface _ListFlywheelsResponse
+      include Smithy::Client::_Response[Types::ListFlywheelsResponse]
+      def flywheel_summary_list: () -> Array[Types::FlywheelSummary]?
+      def next_token: () -> String?
+    end
+    def list_flywheels: (
+      ?filter: {
+        status: String,
+        creation_time_after: Time,
+        creation_time_before: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFlywheelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlywheelsResponse
+
+    interface _ListKeyPhrasesDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListKeyPhrasesDetectionJobsResponse]
+      def key_phrases_detection_job_properties_list: () -> Array[Types::KeyPhrasesDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_key_phrases_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKeyPhrasesDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyPhrasesDetectionJobsResponse
+
+    interface _ListPiiEntitiesDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListPiiEntitiesDetectionJobsResponse]
+      def pii_entities_detection_job_properties_list: () -> Array[Types::PiiEntitiesDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_pii_entities_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPiiEntitiesDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPiiEntitiesDetectionJobsResponse
+
+    interface _ListSentimentDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListSentimentDetectionJobsResponse]
+      def sentiment_detection_job_properties_list: () -> Array[Types::SentimentDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_sentiment_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSentimentDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSentimentDetectionJobsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetedSentimentDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListTargetedSentimentDetectionJobsResponse]
+      def targeted_sentiment_detection_job_properties_list: () -> Array[Types::TargetedSentimentDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_targeted_sentiment_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTargetedSentimentDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetedSentimentDetectionJobsResponse
+
+    interface _ListTopicsDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListTopicsDetectionJobsResponse]
+      def topics_detection_job_properties_list: () -> Array[Types::TopicsDetectionJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_topics_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTopicsDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTopicsDetectionJobsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy_revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?resource_policy: String,
+      ?policy_revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _StartDocumentClassificationJobResponse
+      include Smithy::Client::_Response[Types::StartDocumentClassificationJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+      def document_classifier_arn: () -> String?
+    end
+    def start_document_classification_job: (
+      ?job_name: String,
+      ?document_classifier_arn: String,
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?flywheel_arn: String
+    ) -> _StartDocumentClassificationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDocumentClassificationJobResponse
+
+    interface _StartDominantLanguageDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartDominantLanguageDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_dominant_language_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartDominantLanguageDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDominantLanguageDetectionJobResponse
+
+    interface _StartEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartEntitiesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+      def entity_recognizer_arn: () -> String?
+    end
+    def start_entities_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?entity_recognizer_arn: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?flywheel_arn: String
+    ) -> _StartEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEntitiesDetectionJobResponse
+
+    interface _StartEventsDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartEventsDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_events_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?target_event_types: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartEventsDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEventsDetectionJobResponse
+
+    interface _StartFlywheelIterationResponse
+      include Smithy::Client::_Response[Types::StartFlywheelIterationResponse]
+      def flywheel_arn: () -> String?
+      def flywheel_iteration_id: () -> String?
+    end
+    def start_flywheel_iteration: (
+      ?flywheel_arn: String,
+      ?client_request_token: String
+    ) -> _StartFlywheelIterationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlywheelIterationResponse
+
+    interface _StartKeyPhrasesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartKeyPhrasesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_key_phrases_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartKeyPhrasesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartKeyPhrasesDetectionJobResponse
+
+    interface _StartPiiEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartPiiEntitiesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_pii_entities_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?mode: String,
+      ?redaction_config: {
+        pii_entity_types: Array[String],
+        mask_mode: String,
+        mask_character: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartPiiEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPiiEntitiesDetectionJobResponse
+
+    interface _StartSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartSentimentDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_sentiment_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSentimentDetectionJobResponse
+
+    interface _StartTargetedSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartTargetedSentimentDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_targeted_sentiment_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?language_code: String,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartTargetedSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTargetedSentimentDetectionJobResponse
+
+    interface _StartTopicsDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartTopicsDetectionJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+    end
+    def start_topics_detection_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        input_format: String,
+        document_reader_config: {
+          document_read_action: String,
+          document_read_mode: String,
+          feature_types: Array[String]
+        }
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?number_of_topics: Integer,
+      ?client_request_token: String,
+      ?volume_kms_key_id: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartTopicsDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTopicsDetectionJobResponse
+
+    interface _StopDominantLanguageDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopDominantLanguageDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_dominant_language_detection_job: (
+      ?job_id: String
+    ) -> _StopDominantLanguageDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDominantLanguageDetectionJobResponse
+
+    interface _StopEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopEntitiesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_entities_detection_job: (
+      ?job_id: String
+    ) -> _StopEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEntitiesDetectionJobResponse
+
+    interface _StopEventsDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopEventsDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_events_detection_job: (
+      ?job_id: String
+    ) -> _StopEventsDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEventsDetectionJobResponse
+
+    interface _StopKeyPhrasesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopKeyPhrasesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_key_phrases_detection_job: (
+      ?job_id: String
+    ) -> _StopKeyPhrasesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopKeyPhrasesDetectionJobResponse
+
+    interface _StopPiiEntitiesDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopPiiEntitiesDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_pii_entities_detection_job: (
+      ?job_id: String
+    ) -> _StopPiiEntitiesDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPiiEntitiesDetectionJobResponse
+
+    interface _StopSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopSentimentDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_sentiment_detection_job: (
+      ?job_id: String
+    ) -> _StopSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSentimentDetectionJobResponse
+
+    interface _StopTargetedSentimentDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopTargetedSentimentDetectionJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def stop_targeted_sentiment_detection_job: (
+      ?job_id: String
+    ) -> _StopTargetedSentimentDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTargetedSentimentDetectionJobResponse
+
+    interface _StopTrainingDocumentClassifierResponse
+      include Smithy::Client::_Response[Types::StopTrainingDocumentClassifierResponse]
+    end
+    def stop_training_document_classifier: (
+      ?document_classifier_arn: String
+    ) -> _StopTrainingDocumentClassifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTrainingDocumentClassifierResponse
+
+    interface _StopTrainingEntityRecognizerResponse
+      include Smithy::Client::_Response[Types::StopTrainingEntityRecognizerResponse]
+    end
+    def stop_training_entity_recognizer: (
+      ?entity_recognizer_arn: String
+    ) -> _StopTrainingEntityRecognizerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTrainingEntityRecognizerResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointResponse]
+      def desired_model_arn: () -> String?
+    end
+    def update_endpoint: (
+      ?endpoint_arn: String,
+      ?desired_model_arn: String,
+      ?desired_inference_units: Integer,
+      ?desired_data_access_role_arn: String,
+      ?flywheel_arn: String
+    ) -> _UpdateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointResponse
+
+    interface _UpdateFlywheelResponse
+      include Smithy::Client::_Response[Types::UpdateFlywheelResponse]
+      def flywheel_properties: () -> Types::FlywheelProperties?
+    end
+    def update_flywheel: (
+      ?flywheel_arn: String,
+      ?active_model_arn: String,
+      ?data_access_role_arn: String,
+      ?data_security_config: {
+        model_kms_key_id: String,
+        volume_kms_key_id: untyped,
+        vpc_config: {
+          security_group_ids: Array[String],
+          subnets: Array[String]
+        }
+      }
+    ) -> _UpdateFlywheelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlywheelResponse
+  end
+end

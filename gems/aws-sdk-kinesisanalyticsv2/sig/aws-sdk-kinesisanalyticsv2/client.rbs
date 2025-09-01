@@ -1,0 +1,864 @@
+module Aws::KinesisAnalyticsV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KinesisAnalyticsV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddApplicationCloudWatchLoggingOptionResponse
+      include Smithy::Client::_Response[Types::AddApplicationCloudWatchLoggingOptionResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def cloud_watch_logging_option_descriptions: () -> Array[Types::CloudWatchLoggingOptionDescription]?
+      def operation_id: () -> String?
+    end
+    def add_application_cloud_watch_logging_option: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?cloud_watch_logging_option: {
+        log_stream_arn: String
+      },
+      ?conditional_token: String
+    ) -> _AddApplicationCloudWatchLoggingOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationCloudWatchLoggingOptionResponse
+
+    interface _AddApplicationInputResponse
+      include Smithy::Client::_Response[Types::AddApplicationInputResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def input_descriptions: () -> Array[Types::InputDescription]?
+    end
+    def add_application_input: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?input: {
+        name_prefix: String,
+        input_processing_configuration: {
+          input_lambda_processor: {
+            resource_arn: String
+          }
+        },
+        kinesis_streams_input: {
+          resource_arn: untyped
+        },
+        kinesis_firehose_input: {
+          resource_arn: untyped
+        },
+        input_parallelism: {
+          count: Integer
+        },
+        input_schema: {
+          record_format: {
+            record_format_type: String,
+            mapping_parameters: {
+              json_mapping_parameters: {
+                record_row_path: String
+              },
+              csv_mapping_parameters: {
+                record_row_delimiter: String,
+                record_column_delimiter: String
+              }
+            }
+          },
+          record_encoding: String,
+          record_columns: Array[
+            {
+              name: String,
+              mapping: String,
+              sql_type: String
+            }
+          ]
+        }
+      }
+    ) -> _AddApplicationInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationInputResponse
+
+    interface _AddApplicationInputProcessingConfigurationResponse
+      include Smithy::Client::_Response[Types::AddApplicationInputProcessingConfigurationResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def input_id: () -> String?
+      def input_processing_configuration_description: () -> Types::InputProcessingConfigurationDescription?
+    end
+    def add_application_input_processing_configuration: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?input_id: String,
+      ?input_processing_configuration: {
+        input_lambda_processor: {
+          resource_arn: String
+        }
+      }
+    ) -> _AddApplicationInputProcessingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationInputProcessingConfigurationResponse
+
+    interface _AddApplicationOutputResponse
+      include Smithy::Client::_Response[Types::AddApplicationOutputResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def output_descriptions: () -> Array[Types::OutputDescription]?
+    end
+    def add_application_output: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?output: {
+        name: String,
+        kinesis_streams_output: {
+          resource_arn: String
+        },
+        kinesis_firehose_output: {
+          resource_arn: untyped
+        },
+        lambda_output: {
+          resource_arn: untyped
+        },
+        destination_schema: {
+          record_format_type: String
+        }
+      }
+    ) -> _AddApplicationOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationOutputResponse
+
+    interface _AddApplicationReferenceDataSourceResponse
+      include Smithy::Client::_Response[Types::AddApplicationReferenceDataSourceResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def reference_data_source_descriptions: () -> Array[Types::ReferenceDataSourceDescription]?
+    end
+    def add_application_reference_data_source: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?reference_data_source: {
+        table_name: String,
+        s3_reference_data_source: {
+          bucket_arn: String,
+          file_key: String
+        },
+        reference_schema: {
+          record_format: {
+            record_format_type: String,
+            mapping_parameters: {
+              json_mapping_parameters: {
+                record_row_path: String
+              },
+              csv_mapping_parameters: {
+                record_row_delimiter: String,
+                record_column_delimiter: String
+              }
+            }
+          },
+          record_encoding: String,
+          record_columns: Array[
+            {
+              name: String,
+              mapping: String,
+              sql_type: String
+            }
+          ]
+        }
+      }
+    ) -> _AddApplicationReferenceDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationReferenceDataSourceResponse
+
+    interface _AddApplicationVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::AddApplicationVpcConfigurationResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def vpc_configuration_description: () -> Types::VpcConfigurationDescription?
+      def operation_id: () -> String?
+    end
+    def add_application_vpc_configuration: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?vpc_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?conditional_token: String
+    ) -> _AddApplicationVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddApplicationVpcConfigurationResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def application_detail: () -> Types::ApplicationDetail?
+    end
+    def create_application: (
+      ?application_name: String,
+      ?application_description: String,
+      ?runtime_environment: String,
+      ?service_execution_role: String,
+      ?application_configuration: {
+        sql_application_configuration: {
+          inputs: Array[
+            {
+              name_prefix: String,
+              input_processing_configuration: {
+                input_lambda_processor: {
+                  resource_arn: String
+                }
+              },
+              kinesis_streams_input: {
+                resource_arn: untyped
+              },
+              kinesis_firehose_input: {
+                resource_arn: untyped
+              },
+              input_parallelism: {
+                count: Integer
+              },
+              input_schema: {
+                record_format: {
+                  record_format_type: String,
+                  mapping_parameters: {
+                    json_mapping_parameters: {
+                      record_row_path: String
+                    },
+                    csv_mapping_parameters: {
+                      record_row_delimiter: String,
+                      record_column_delimiter: String
+                    }
+                  }
+                },
+                record_encoding: String,
+                record_columns: Array[
+                  {
+                    name: String,
+                    mapping: String,
+                    sql_type: String
+                  }
+                ]
+              }
+            }
+          ],
+          outputs: Array[
+            {
+              name: untyped,
+              kinesis_streams_output: {
+                resource_arn: untyped
+              },
+              kinesis_firehose_output: {
+                resource_arn: untyped
+              },
+              lambda_output: {
+                resource_arn: untyped
+              },
+              destination_schema: {
+                record_format_type: untyped
+              }
+            }
+          ],
+          reference_data_sources: Array[
+            {
+              table_name: String,
+              s3_reference_data_source: {
+                bucket_arn: String,
+                file_key: String
+              },
+              reference_schema: untyped
+            }
+          ]
+        },
+        flink_application_configuration: {
+          checkpoint_configuration: {
+            configuration_type: String,
+            checkpointing_enabled: bool,
+            checkpoint_interval: Integer,
+            min_pause_between_checkpoints: Integer
+          },
+          monitoring_configuration: {
+            configuration_type: untyped,
+            metrics_level: String,
+            log_level: String
+          },
+          parallelism_configuration: {
+            configuration_type: untyped,
+            parallelism: Integer,
+            parallelism_per_kpu: Integer,
+            auto_scaling_enabled: untyped
+          }
+        },
+        environment_properties: {
+          property_groups: Array[
+            {
+              property_group_id: String,
+              property_map: Hash[String, String]
+            }
+          ]
+        },
+        application_code_configuration: {
+          code_content: {
+            text_content: String,
+            zip_file_content: String,
+            s3_content_location: {
+              bucket_arn: untyped,
+              file_key: untyped,
+              object_version: String
+            }
+          },
+          code_content_type: String
+        },
+        application_snapshot_configuration: {
+          snapshots_enabled: untyped
+        },
+        application_system_rollback_configuration: {
+          rollback_enabled: untyped
+        },
+        vpc_configurations: Array[
+          {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String]
+          }
+        ],
+        zeppelin_application_configuration: {
+          monitoring_configuration: {
+            log_level: untyped
+          },
+          catalog_configuration: {
+            glue_data_catalog_configuration: {
+              database_arn: String
+            }
+          },
+          deploy_as_application_configuration: {
+            s3_content_location: {
+              bucket_arn: untyped,
+              base_path: String
+            }
+          },
+          custom_artifacts_configuration: Array[
+            {
+              artifact_type: String,
+              s3_content_location: untyped,
+              maven_reference: {
+                group_id: String,
+                artifact_id: String,
+                version: String
+              }
+            }
+          ]
+        }
+      },
+      ?cloud_watch_logging_options: Array[
+        {
+          log_stream_arn: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?application_mode: String
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateApplicationPresignedUrlResponse
+      include Smithy::Client::_Response[Types::CreateApplicationPresignedUrlResponse]
+      def authorized_url: () -> String?
+    end
+    def create_application_presigned_url: (
+      ?application_name: String,
+      ?url_type: String,
+      ?session_expiration_duration_in_seconds: Integer
+    ) -> _CreateApplicationPresignedUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationPresignedUrlResponse
+
+    interface _CreateApplicationSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateApplicationSnapshotResponse]
+    end
+    def create_application_snapshot: (
+      ?application_name: String,
+      ?snapshot_name: String
+    ) -> _CreateApplicationSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationSnapshotResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?application_name: String,
+      ?create_timestamp: Time
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteApplicationCloudWatchLoggingOptionResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationCloudWatchLoggingOptionResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def cloud_watch_logging_option_descriptions: () -> Array[Types::CloudWatchLoggingOptionDescription]?
+      def operation_id: () -> String?
+    end
+    def delete_application_cloud_watch_logging_option: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?cloud_watch_logging_option_id: String,
+      ?conditional_token: String
+    ) -> _DeleteApplicationCloudWatchLoggingOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationCloudWatchLoggingOptionResponse
+
+    interface _DeleteApplicationInputProcessingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationInputProcessingConfigurationResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+    end
+    def delete_application_input_processing_configuration: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?input_id: String
+    ) -> _DeleteApplicationInputProcessingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationInputProcessingConfigurationResponse
+
+    interface _DeleteApplicationOutputResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationOutputResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+    end
+    def delete_application_output: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?output_id: String
+    ) -> _DeleteApplicationOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationOutputResponse
+
+    interface _DeleteApplicationReferenceDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationReferenceDataSourceResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+    end
+    def delete_application_reference_data_source: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?reference_id: String
+    ) -> _DeleteApplicationReferenceDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationReferenceDataSourceResponse
+
+    interface _DeleteApplicationSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationSnapshotResponse]
+    end
+    def delete_application_snapshot: (
+      ?application_name: String,
+      ?snapshot_name: String,
+      ?snapshot_creation_timestamp: Time
+    ) -> _DeleteApplicationSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationSnapshotResponse
+
+    interface _DeleteApplicationVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationVpcConfigurationResponse]
+      def application_arn: () -> String?
+      def application_version_id: () -> Integer?
+      def operation_id: () -> String?
+    end
+    def delete_application_vpc_configuration: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?vpc_configuration_id: String,
+      ?conditional_token: String
+    ) -> _DeleteApplicationVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationVpcConfigurationResponse
+
+    interface _DescribeApplicationResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationResponse]
+      def application_detail: () -> Types::ApplicationDetail?
+    end
+    def describe_application: (
+      ?application_name: String,
+      ?include_additional_details: bool
+    ) -> _DescribeApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationResponse
+
+    interface _DescribeApplicationOperationResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationOperationResponse]
+      def application_operation_info_details: () -> Types::ApplicationOperationInfoDetails?
+    end
+    def describe_application_operation: (
+      ?application_name: String,
+      ?operation_id: String
+    ) -> _DescribeApplicationOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationOperationResponse
+
+    interface _DescribeApplicationSnapshotResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationSnapshotResponse]
+      def snapshot_details: () -> Types::SnapshotDetails?
+    end
+    def describe_application_snapshot: (
+      ?application_name: String,
+      ?snapshot_name: String
+    ) -> _DescribeApplicationSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationSnapshotResponse
+
+    interface _DescribeApplicationVersionResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationVersionResponse]
+      def application_version_detail: () -> Types::ApplicationDetail?
+    end
+    def describe_application_version: (
+      ?application_name: String,
+      ?application_version_id: Integer
+    ) -> _DescribeApplicationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationVersionResponse
+
+    interface _DiscoverInputSchemaResponse
+      include Smithy::Client::_Response[Types::DiscoverInputSchemaResponse]
+      def input_schema: () -> Types::SourceSchema?
+      def parsed_input_records: () -> Array[Array[String]]?
+      def processed_input_records: () -> Array[String]?
+      def raw_input_records: () -> Array[String]?
+    end
+    def discover_input_schema: (
+      ?resource_arn: String,
+      ?service_execution_role: String,
+      ?input_starting_position_configuration: {
+        input_starting_position: String
+      },
+      ?s3_configuration: {
+        bucket_arn: String,
+        file_key: String
+      },
+      ?input_processing_configuration: {
+        input_lambda_processor: {
+          resource_arn: String
+        }
+      }
+    ) -> _DiscoverInputSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscoverInputSchemaResponse
+
+    interface _ListApplicationOperationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationOperationsResponse]
+      def application_operation_info_list: () -> Array[Types::ApplicationOperationInfo]?
+      def next_token: () -> String?
+    end
+    def list_application_operations: (
+      ?application_name: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?operation: String,
+      ?operation_status: String
+    ) -> _ListApplicationOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationOperationsResponse
+
+    interface _ListApplicationSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListApplicationSnapshotsResponse]
+      def snapshot_summaries: () -> Array[Types::SnapshotDetails]?
+      def next_token: () -> String?
+    end
+    def list_application_snapshots: (
+      ?application_name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListApplicationSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationSnapshotsResponse
+
+    interface _ListApplicationVersionsResponse
+      include Smithy::Client::_Response[Types::ListApplicationVersionsResponse]
+      def application_version_summaries: () -> Array[Types::ApplicationVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_application_versions: (
+      ?application_name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListApplicationVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationVersionsResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def application_summaries: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RollbackApplicationResponse
+      include Smithy::Client::_Response[Types::RollbackApplicationResponse]
+      def application_detail: () -> Types::ApplicationDetail?
+      def operation_id: () -> String?
+    end
+    def rollback_application: (
+      ?application_name: String,
+      ?current_application_version_id: Integer
+    ) -> _RollbackApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackApplicationResponse
+
+    interface _StartApplicationResponse
+      include Smithy::Client::_Response[Types::StartApplicationResponse]
+      def operation_id: () -> String?
+    end
+    def start_application: (
+      ?application_name: String,
+      ?run_configuration: {
+        flink_run_configuration: {
+          allow_non_restored_state: bool
+        },
+        sql_run_configurations: Array[
+          {
+            input_id: String,
+            input_starting_position_configuration: {
+              input_starting_position: String
+            }
+          }
+        ],
+        application_restore_configuration: {
+          application_restore_type: String,
+          snapshot_name: String
+        }
+      }
+    ) -> _StartApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationResponse
+
+    interface _StopApplicationResponse
+      include Smithy::Client::_Response[Types::StopApplicationResponse]
+      def operation_id: () -> String?
+    end
+    def stop_application: (
+      ?application_name: String,
+      ?force: bool
+    ) -> _StopApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopApplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+      def application_detail: () -> Types::ApplicationDetail?
+      def operation_id: () -> String?
+    end
+    def update_application: (
+      ?application_name: String,
+      ?current_application_version_id: Integer,
+      ?application_configuration_update: {
+        sql_application_configuration_update: {
+          input_updates: Array[
+            {
+              input_id: String,
+              name_prefix_update: String,
+              input_processing_configuration_update: {
+                input_lambda_processor_update: {
+                  resource_arn_update: String
+                }
+              },
+              kinesis_streams_input_update: {
+                resource_arn_update: untyped
+              },
+              kinesis_firehose_input_update: {
+                resource_arn_update: untyped
+              },
+              input_schema_update: {
+                record_format_update: {
+                  record_format_type: String,
+                  mapping_parameters: {
+                    json_mapping_parameters: {
+                      record_row_path: String
+                    },
+                    csv_mapping_parameters: {
+                      record_row_delimiter: String,
+                      record_column_delimiter: String
+                    }
+                  }
+                },
+                record_encoding_update: String,
+                record_column_updates: Array[
+                  {
+                    name: String,
+                    mapping: String,
+                    sql_type: String
+                  }
+                ]
+              },
+              input_parallelism_update: {
+                count_update: Integer
+              }
+            }
+          ],
+          output_updates: Array[
+            {
+              output_id: untyped,
+              name_update: untyped,
+              kinesis_streams_output_update: {
+                resource_arn_update: untyped
+              },
+              kinesis_firehose_output_update: {
+                resource_arn_update: untyped
+              },
+              lambda_output_update: {
+                resource_arn_update: untyped
+              },
+              destination_schema_update: {
+                record_format_type: untyped
+              }
+            }
+          ],
+          reference_data_source_updates: Array[
+            {
+              reference_id: untyped,
+              table_name_update: String,
+              s3_reference_data_source_update: {
+                bucket_arn_update: String,
+                file_key_update: String
+              },
+              reference_schema_update: {
+                record_format: untyped,
+                record_encoding: untyped,
+                record_columns: untyped
+              }
+            }
+          ]
+        },
+        application_code_configuration_update: {
+          code_content_type_update: String,
+          code_content_update: {
+            text_content_update: String,
+            zip_file_content_update: String,
+            s3_content_location_update: {
+              bucket_arn_update: untyped,
+              file_key_update: untyped,
+              object_version_update: String
+            }
+          }
+        },
+        flink_application_configuration_update: {
+          checkpoint_configuration_update: {
+            configuration_type_update: String,
+            checkpointing_enabled_update: bool,
+            checkpoint_interval_update: Integer,
+            min_pause_between_checkpoints_update: Integer
+          },
+          monitoring_configuration_update: {
+            configuration_type_update: untyped,
+            metrics_level_update: String,
+            log_level_update: String
+          },
+          parallelism_configuration_update: {
+            configuration_type_update: untyped,
+            parallelism_update: Integer,
+            parallelism_per_kpu_update: Integer,
+            auto_scaling_enabled_update: untyped
+          }
+        },
+        environment_property_updates: {
+          property_groups: Array[
+            {
+              property_group_id: untyped,
+              property_map: Hash[String, String]
+            }
+          ]
+        },
+        application_snapshot_configuration_update: {
+          snapshots_enabled_update: untyped
+        },
+        application_system_rollback_configuration_update: {
+          rollback_enabled_update: untyped
+        },
+        vpc_configuration_updates: Array[
+          {
+            vpc_configuration_id: untyped,
+            subnet_id_updates: Array[String],
+            security_group_id_updates: Array[String]
+          }
+        ],
+        zeppelin_application_configuration_update: {
+          monitoring_configuration_update: {
+            log_level_update: untyped
+          },
+          catalog_configuration_update: {
+            glue_data_catalog_configuration_update: {
+              database_arn_update: String
+            }
+          },
+          deploy_as_application_configuration_update: {
+            s3_content_location_update: {
+              bucket_arn_update: untyped,
+              base_path_update: String
+            }
+          },
+          custom_artifacts_configuration_update: Array[
+            {
+              artifact_type: String,
+              s3_content_location: {
+                bucket_arn: untyped,
+                file_key: untyped,
+                object_version: untyped
+              },
+              maven_reference: {
+                group_id: String,
+                artifact_id: String,
+                version: String
+              }
+            }
+          ]
+        }
+      },
+      ?service_execution_role_update: String,
+      ?run_configuration_update: {
+        flink_run_configuration: {
+          allow_non_restored_state: bool
+        },
+        application_restore_configuration: {
+          application_restore_type: String,
+          snapshot_name: String
+        }
+      },
+      ?cloud_watch_logging_option_updates: Array[
+        {
+          cloud_watch_logging_option_id: String,
+          log_stream_arn_update: String
+        }
+      ],
+      ?conditional_token: String,
+      ?runtime_environment_update: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateApplicationMaintenanceConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationMaintenanceConfigurationResponse]
+      def application_arn: () -> String?
+      def application_maintenance_configuration_description: () -> Types::ApplicationMaintenanceConfigurationDescription?
+    end
+    def update_application_maintenance_configuration: (
+      ?application_name: String,
+      ?application_maintenance_configuration_update: {
+        application_maintenance_window_start_time_update: String
+      }
+    ) -> _UpdateApplicationMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationMaintenanceConfigurationResponse
+  end
+end

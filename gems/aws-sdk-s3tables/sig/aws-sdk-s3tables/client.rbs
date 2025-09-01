@@ -1,0 +1,414 @@
+module Aws::S3Tables
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::S3Tables::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateNamespaceResponse]
+      def table_bucket_arn: () -> String?
+      def namespace: () -> Array[String]?
+    end
+    def create_namespace: (
+      ?table_bucket_arn: String,
+      ?namespace: Array[String]
+    ) -> _CreateNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNamespaceResponse
+
+    interface _CreateTableResponse
+      include Smithy::Client::_Response[Types::CreateTableResponse]
+      def table_arn: () -> String?
+      def version_token: () -> String?
+    end
+    def create_table: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?format: String,
+      ?metadata: {
+        iceberg: {
+          schema: {
+            fields: Array[
+              {
+                name: String,
+                type: untyped,
+                required: bool
+              }
+            ]
+          }
+        }
+      },
+      ?encryption_configuration: {
+        sse_algorithm: String,
+        kms_key_arn: String
+      }
+    ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
+
+    interface _CreateTableBucketResponse
+      include Smithy::Client::_Response[Types::CreateTableBucketResponse]
+      def arn: () -> String?
+    end
+    def create_table_bucket: (
+      ?name: String,
+      ?encryption_configuration: {
+        sse_algorithm: String,
+        kms_key_arn: String
+      }
+    ) -> _CreateTableBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableBucketResponse
+
+    interface _DeleteNamespaceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_namespace: (
+      ?table_bucket_arn: String,
+      ?namespace: String
+    ) -> _DeleteNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNamespaceResponse
+
+    interface _DeleteTableResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?version_token: String
+    ) -> _DeleteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableResponse
+
+    interface _DeleteTableBucketResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_bucket: (
+      ?table_bucket_arn: String
+    ) -> _DeleteTableBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketResponse
+
+    interface _DeleteTableBucketEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_bucket_encryption: (
+      ?table_bucket_arn: String
+    ) -> _DeleteTableBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketEncryptionResponse
+
+    interface _DeleteTableBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_bucket_policy: (
+      ?table_bucket_arn: String
+    ) -> _DeleteTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketPolicyResponse
+
+    interface _DeleteTablePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_policy: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _DeleteTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTablePolicyResponse
+
+    interface _GetNamespaceResponse
+      include Smithy::Client::_Response[Types::GetNamespaceResponse]
+      def namespace: () -> Array[String]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def owner_account_id: () -> String?
+      def namespace_id: () -> String?
+      def table_bucket_id: () -> String?
+    end
+    def get_namespace: (
+      ?table_bucket_arn: String,
+      ?namespace: String
+    ) -> _GetNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNamespaceResponse
+
+    interface _GetTableResponse
+      include Smithy::Client::_Response[Types::GetTableResponse]
+      def name: () -> String?
+      def type: () -> String?
+      def table_arn: () -> String?
+      def namespace: () -> Array[String]?
+      def namespace_id: () -> String?
+      def version_token: () -> String?
+      def metadata_location: () -> String?
+      def warehouse_location: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def managed_by_service: () -> String?
+      def modified_at: () -> Time?
+      def modified_by: () -> String?
+      def owner_account_id: () -> String?
+      def format: () -> String?
+      def table_bucket_id: () -> String?
+    end
+    def get_table: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?table_arn: String
+    ) -> _GetTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableResponse
+
+    interface _GetTableBucketResponse
+      include Smithy::Client::_Response[Types::GetTableBucketResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def owner_account_id: () -> String?
+      def created_at: () -> Time?
+      def table_bucket_id: () -> String?
+      def type: () -> String?
+    end
+    def get_table_bucket: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketResponse
+
+    interface _GetTableBucketEncryptionResponse
+      include Smithy::Client::_Response[Types::GetTableBucketEncryptionResponse]
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+    end
+    def get_table_bucket_encryption: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketEncryptionResponse
+
+    interface _GetTableBucketMaintenanceConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTableBucketMaintenanceConfigurationResponse]
+      def table_bucket_arn: () -> String?
+      def configuration: () -> Hash[String, Types::TableBucketMaintenanceConfigurationValue]?
+    end
+    def get_table_bucket_maintenance_configuration: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketMaintenanceConfigurationResponse
+
+    interface _GetTableBucketPolicyResponse
+      include Smithy::Client::_Response[Types::GetTableBucketPolicyResponse]
+      def resource_policy: () -> String?
+    end
+    def get_table_bucket_policy: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketPolicyResponse
+
+    interface _GetTableEncryptionResponse
+      include Smithy::Client::_Response[Types::GetTableEncryptionResponse]
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+    end
+    def get_table_encryption: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTableEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableEncryptionResponse
+
+    interface _GetTableMaintenanceConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTableMaintenanceConfigurationResponse]
+      def table_arn: () -> String?
+      def configuration: () -> Hash[String, Types::TableMaintenanceConfigurationValue]?
+    end
+    def get_table_maintenance_configuration: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTableMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableMaintenanceConfigurationResponse
+
+    interface _GetTableMaintenanceJobStatusResponse
+      include Smithy::Client::_Response[Types::GetTableMaintenanceJobStatusResponse]
+      def table_arn: () -> String?
+      def status: () -> Hash[String, Types::TableMaintenanceJobStatusValue]?
+    end
+    def get_table_maintenance_job_status: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTableMaintenanceJobStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableMaintenanceJobStatusResponse
+
+    interface _GetTableMetadataLocationResponse
+      include Smithy::Client::_Response[Types::GetTableMetadataLocationResponse]
+      def version_token: () -> String?
+      def metadata_location: () -> String?
+      def warehouse_location: () -> String?
+    end
+    def get_table_metadata_location: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTableMetadataLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableMetadataLocationResponse
+
+    interface _GetTablePolicyResponse
+      include Smithy::Client::_Response[Types::GetTablePolicyResponse]
+      def resource_policy: () -> String?
+    end
+    def get_table_policy: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTablePolicyResponse
+
+    interface _ListNamespacesResponse
+      include Smithy::Client::_Response[Types::ListNamespacesResponse]
+      def namespaces: () -> Array[Types::NamespaceSummary]?
+      def continuation_token: () -> String?
+    end
+    def list_namespaces: (
+      ?table_bucket_arn: String,
+      ?prefix: String,
+      ?continuation_token: String,
+      ?max_namespaces: Integer
+    ) -> _ListNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNamespacesResponse
+
+    interface _ListTableBucketsResponse
+      include Smithy::Client::_Response[Types::ListTableBucketsResponse]
+      def table_buckets: () -> Array[Types::TableBucketSummary]?
+      def continuation_token: () -> String?
+    end
+    def list_table_buckets: (
+      ?prefix: String,
+      ?continuation_token: String,
+      ?max_buckets: Integer,
+      ?type: String
+    ) -> _ListTableBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTableBucketsResponse
+
+    interface _ListTablesResponse
+      include Smithy::Client::_Response[Types::ListTablesResponse]
+      def tables: () -> Array[Types::TableSummary]?
+      def continuation_token: () -> String?
+    end
+    def list_tables: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?prefix: String,
+      ?continuation_token: String,
+      ?max_tables: Integer
+    ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
+
+    interface _PutTableBucketEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_bucket_encryption: (
+      ?table_bucket_arn: String,
+      ?encryption_configuration: {
+        sse_algorithm: String,
+        kms_key_arn: String
+      }
+    ) -> _PutTableBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketEncryptionResponse
+
+    interface _PutTableBucketMaintenanceConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_bucket_maintenance_configuration: (
+      ?table_bucket_arn: String,
+      ?type: String,
+      ?value: {
+        status: String,
+        settings: {
+          iceberg_unreferenced_file_removal: {
+            unreferenced_days: Integer,
+            non_current_days: untyped
+          }
+        }
+      }
+    ) -> _PutTableBucketMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketMaintenanceConfigurationResponse
+
+    interface _PutTableBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_bucket_policy: (
+      ?table_bucket_arn: String,
+      ?resource_policy: String
+    ) -> _PutTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketPolicyResponse
+
+    interface _PutTableMaintenanceConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_maintenance_configuration: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?type: String,
+      ?value: {
+        status: String,
+        settings: {
+          iceberg_compaction: {
+            target_file_size_mb: Integer,
+            strategy: String
+          },
+          iceberg_snapshot_management: {
+            min_snapshots_to_keep: untyped,
+            max_snapshot_age_hours: untyped
+          }
+        }
+      }
+    ) -> _PutTableMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableMaintenanceConfigurationResponse
+
+    interface _PutTablePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_policy: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?resource_policy: String
+    ) -> _PutTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTablePolicyResponse
+
+    interface _RenameTableResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def rename_table: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?new_namespace_name: String,
+      ?new_name: String,
+      ?version_token: String
+    ) -> _RenameTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenameTableResponse
+
+    interface _UpdateTableMetadataLocationResponse
+      include Smithy::Client::_Response[Types::UpdateTableMetadataLocationResponse]
+      def name: () -> String?
+      def table_arn: () -> String?
+      def namespace: () -> Array[String]?
+      def version_token: () -> String?
+      def metadata_location: () -> String?
+    end
+    def update_table_metadata_location: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String,
+      ?version_token: String,
+      ?metadata_location: String
+    ) -> _UpdateTableMetadataLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableMetadataLocationResponse
+  end
+end

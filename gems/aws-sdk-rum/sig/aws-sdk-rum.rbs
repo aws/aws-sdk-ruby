@@ -1,0 +1,5 @@
+  module Aws
+    module RUM
+      VERSION: String
+    end
+  end

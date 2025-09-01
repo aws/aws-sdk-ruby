@@ -1,0 +1,5 @@
+  module Aws
+    module ConnectCampaigns
+      VERSION: String
+    end
+  end

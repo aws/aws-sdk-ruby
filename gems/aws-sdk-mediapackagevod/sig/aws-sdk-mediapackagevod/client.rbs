@@ -1,0 +1,388 @@
+module Aws::MediaPackageVod
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MediaPackageVod::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ConfigureLogsResponse
+      include Smithy::Client::_Response[Types::ConfigureLogsResponse]
+      def arn: () -> String?
+      def authorization: () -> Types::Authorization?
+      def created_at: () -> String?
+      def domain_name: () -> String?
+      def egress_access_logs: () -> Types::EgressAccessLogs?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def configure_logs: (
+      ?egress_access_logs: {
+        log_group_name: String
+      },
+      ?id: String
+    ) -> _ConfigureLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfigureLogsResponse
+
+    interface _CreateAssetResponse
+      include Smithy::Client::_Response[Types::CreateAssetResponse]
+      def arn: () -> String?
+      def created_at: () -> String?
+      def egress_endpoints: () -> Array[Types::EgressEndpoint]?
+      def id: () -> String?
+      def packaging_group_id: () -> String?
+      def resource_id: () -> String?
+      def source_arn: () -> String?
+      def source_role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_asset: (
+      ?id: String,
+      ?packaging_group_id: String,
+      ?resource_id: String,
+      ?source_arn: String,
+      ?source_role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetResponse
+
+    interface _CreatePackagingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreatePackagingConfigurationResponse]
+      def arn: () -> String?
+      def cmaf_package: () -> Types::CmafPackage?
+      def created_at: () -> String?
+      def dash_package: () -> Types::DashPackage?
+      def hls_package: () -> Types::HlsPackage?
+      def id: () -> String?
+      def mss_package: () -> Types::MssPackage?
+      def packaging_group_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_packaging_configuration: (
+      ?cmaf_package: {
+        encryption: {
+          constant_initialization_vector: String,
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            role_arn: untyped,
+            system_ids: Array[String],
+            url: untyped
+          }
+        },
+        hls_manifests: Array[
+          {
+            ad_markers: String,
+            include_iframe_only_stream: bool,
+            manifest_name: untyped,
+            program_date_time_interval_seconds: Integer,
+            repeat_ext_x_key: untyped,
+            stream_selection: {
+              max_video_bits_per_second: untyped,
+              min_video_bits_per_second: untyped,
+              stream_order: String
+            }
+          }
+        ],
+        include_encoder_configuration_in_segments: untyped,
+        segment_duration_seconds: untyped
+      },
+      ?dash_package: {
+        dash_manifests: Array[
+          {
+            manifest_layout: String,
+            manifest_name: String,
+            min_buffer_time_seconds: Integer,
+            profile: String,
+            scte_markers_source: String,
+            stream_selection: {
+              max_video_bits_per_second: untyped,
+              min_video_bits_per_second: untyped,
+              stream_order: String
+            }
+          }
+        ],
+        encryption: {
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            role_arn: untyped,
+            system_ids: Array[String],
+            url: untyped
+          }
+        },
+        include_encoder_configuration_in_segments: bool,
+        include_iframe_only_stream: untyped,
+        period_triggers: Array[String],
+        segment_duration_seconds: untyped,
+        segment_template_format: String
+      },
+      ?hls_package: {
+        encryption: {
+          constant_initialization_vector: String,
+          encryption_method: String,
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            role_arn: untyped,
+            system_ids: Array[String],
+            url: untyped
+          }
+        },
+        hls_manifests: Array[
+          {
+            ad_markers: String,
+            include_iframe_only_stream: bool,
+            manifest_name: untyped,
+            program_date_time_interval_seconds: Integer,
+            repeat_ext_x_key: untyped,
+            stream_selection: {
+              max_video_bits_per_second: untyped,
+              min_video_bits_per_second: untyped,
+              stream_order: String
+            }
+          }
+        ],
+        include_dvb_subtitles: untyped,
+        segment_duration_seconds: untyped,
+        use_audio_rendition_group: untyped
+      },
+      ?id: String,
+      ?mss_package: {
+        encryption: {
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            role_arn: String,
+            system_ids: Array[String],
+            url: untyped
+          }
+        },
+        mss_manifests: Array[
+          {
+            manifest_name: untyped,
+            stream_selection: {
+              max_video_bits_per_second: Integer,
+              min_video_bits_per_second: untyped,
+              stream_order: String
+            }
+          }
+        ],
+        segment_duration_seconds: untyped
+      },
+      ?packaging_group_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePackagingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackagingConfigurationResponse
+
+    interface _CreatePackagingGroupResponse
+      include Smithy::Client::_Response[Types::CreatePackagingGroupResponse]
+      def arn: () -> String?
+      def authorization: () -> Types::Authorization?
+      def created_at: () -> String?
+      def domain_name: () -> String?
+      def egress_access_logs: () -> Types::EgressAccessLogs?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_packaging_group: (
+      ?authorization: {
+        cdn_identifier_secret: String,
+        secrets_role_arn: untyped
+      },
+      ?egress_access_logs: {
+        log_group_name: String
+      },
+      ?id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePackagingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackagingGroupResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Types::DeleteAssetResponse]
+    end
+    def delete_asset: (
+      ?id: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeletePackagingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeletePackagingConfigurationResponse]
+    end
+    def delete_packaging_configuration: (
+      ?id: String
+    ) -> _DeletePackagingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackagingConfigurationResponse
+
+    interface _DeletePackagingGroupResponse
+      include Smithy::Client::_Response[Types::DeletePackagingGroupResponse]
+    end
+    def delete_packaging_group: (
+      ?id: String
+    ) -> _DeletePackagingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackagingGroupResponse
+
+    interface _DescribeAssetResponse
+      include Smithy::Client::_Response[Types::DescribeAssetResponse]
+      def arn: () -> String?
+      def created_at: () -> String?
+      def egress_endpoints: () -> Array[Types::EgressEndpoint]?
+      def id: () -> String?
+      def packaging_group_id: () -> String?
+      def resource_id: () -> String?
+      def source_arn: () -> String?
+      def source_role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_asset: (
+      ?id: String
+    ) -> _DescribeAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetResponse
+
+    interface _DescribePackagingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribePackagingConfigurationResponse]
+      def arn: () -> String?
+      def cmaf_package: () -> Types::CmafPackage?
+      def created_at: () -> String?
+      def dash_package: () -> Types::DashPackage?
+      def hls_package: () -> Types::HlsPackage?
+      def id: () -> String?
+      def mss_package: () -> Types::MssPackage?
+      def packaging_group_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_packaging_configuration: (
+      ?id: String
+    ) -> _DescribePackagingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackagingConfigurationResponse
+
+    interface _DescribePackagingGroupResponse
+      include Smithy::Client::_Response[Types::DescribePackagingGroupResponse]
+      def approximate_asset_count: () -> Integer?
+      def arn: () -> String?
+      def authorization: () -> Types::Authorization?
+      def created_at: () -> String?
+      def domain_name: () -> String?
+      def egress_access_logs: () -> Types::EgressAccessLogs?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_packaging_group: (
+      ?id: String
+    ) -> _DescribePackagingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackagingGroupResponse
+
+    interface _ListAssetsResponse
+      include Smithy::Client::_Response[Types::ListAssetsResponse]
+      def assets: () -> Array[Types::AssetShallow]?
+      def next_token: () -> String?
+    end
+    def list_assets: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?packaging_group_id: String
+    ) -> _ListAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsResponse
+
+    interface _ListPackagingConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListPackagingConfigurationsResponse]
+      def next_token: () -> String?
+      def packaging_configurations: () -> Array[Types::PackagingConfiguration]?
+    end
+    def list_packaging_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?packaging_group_id: String
+    ) -> _ListPackagingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagingConfigurationsResponse
+
+    interface _ListPackagingGroupsResponse
+      include Smithy::Client::_Response[Types::ListPackagingGroupsResponse]
+      def next_token: () -> String?
+      def packaging_groups: () -> Array[Types::PackagingGroup]?
+    end
+    def list_packaging_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPackagingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagingGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdatePackagingGroupResponse
+      include Smithy::Client::_Response[Types::UpdatePackagingGroupResponse]
+      def approximate_asset_count: () -> Integer?
+      def arn: () -> String?
+      def authorization: () -> Types::Authorization?
+      def created_at: () -> String?
+      def domain_name: () -> String?
+      def egress_access_logs: () -> Types::EgressAccessLogs?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_packaging_group: (
+      ?authorization: {
+        cdn_identifier_secret: String,
+        secrets_role_arn: untyped
+      },
+      ?id: String
+    ) -> _UpdatePackagingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackagingGroupResponse
+  end
+end

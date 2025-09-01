@@ -1,0 +1,427 @@
+module Aws::SSM
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AssociatedInstances < Smithy::Client::ServiceError
+    end
+    class AssociationAlreadyExists < Smithy::Client::ServiceError
+    end
+    class AssociationDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AssociationExecutionDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AssociationLimitExceeded < Smithy::Client::ServiceError
+    end
+    class AssociationVersionLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationDefinitionNotApprovedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationDefinitionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationDefinitionVersionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationExecutionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationExecutionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AutomationStepNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ComplianceTypeCountLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomSchemaCountLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DocumentAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DocumentLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DocumentPermissionLimit < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DocumentVersionLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateDocumentContent < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateDocumentVersionName < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateInstanceId < Smithy::Client::ServiceError
+    end
+    class FeatureNotAvailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HierarchyLevelLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HierarchyTypeMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatch < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatiblePolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidActivation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidActivationId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAggregatorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAllowedPatternException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAssociationVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAutomationExecutionParametersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAutomationSignalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAutomationStatusUpdateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCommandId < Smithy::Client::ServiceError
+    end
+    class InvalidDeleteInventoryParametersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeletionIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocument < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocumentContent < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocumentOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocumentSchemaVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocumentType < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDocumentVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFilter < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFilterKey < Smithy::Client::ServiceError
+    end
+    class InvalidFilterOption < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFilterValue < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstanceId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstanceInformationFilterValue < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstancePropertyFilterValue < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInventoryGroupException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInventoryItemContextException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInventoryRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidItemContentException < Smithy::Client::ServiceError
+      def type_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidKeyId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNotificationConfig < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOutputFolder < Smithy::Client::ServiceError
+    end
+    class InvalidOutputLocation < Smithy::Client::ServiceError
+    end
+    class InvalidParameters < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPermissionType < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPluginName < Smithy::Client::ServiceError
+    end
+    class InvalidPolicyAttributeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPolicyTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceId < Smithy::Client::ServiceError
+    end
+    class InvalidResourceType < Smithy::Client::ServiceError
+    end
+    class InvalidResultAttributeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRole < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSchedule < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTag < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTarget < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetMaps < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTypeNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUpdate < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvocationDoesNotExist < Smithy::Client::ServiceError
+    end
+    class ItemContentMismatchException < Smithy::Client::ServiceError
+      def type_name: () -> String?
+      def message: () -> String?
+    end
+    class ItemSizeLimitExceededException < Smithy::Client::ServiceError
+      def type_name: () -> String?
+      def message: () -> String?
+    end
+    class MalformedResourcePolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxDocumentSizeExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsItemAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsItemAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def ops_item_id: () -> String?
+    end
+    class OpsItemConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsItemInvalidParameterException < Smithy::Client::ServiceError
+      def parameter_names: () -> Array[String]?
+      def message: () -> String?
+    end
+    class OpsItemLimitExceededException < Smithy::Client::ServiceError
+      def resource_types: () -> Array[String]?
+      def limit: () -> Integer?
+      def limit_type: () -> String?
+      def message: () -> String?
+    end
+    class OpsItemNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsItemRelatedItemAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_uri: () -> String?
+      def ops_item_id: () -> String?
+    end
+    class OpsItemRelatedItemAssociationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataInvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataKeyLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpsMetadataTooManyUpdatesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterMaxVersionLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterPatternMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterVersionLabelLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterVersionNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PoliciesLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceDataSyncAlreadyExistsException < Smithy::Client::ServiceError
+      def sync_name: () -> String?
+    end
+    class ResourceDataSyncConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceDataSyncCountExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceDataSyncInvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceDataSyncNotFoundException < Smithy::Client::ServiceError
+      def sync_name: () -> String?
+      def sync_type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourcePolicyConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourcePolicyInvalidParameterException < Smithy::Client::ServiceError
+      def parameter_names: () -> Array[String]?
+      def message: () -> String?
+    end
+    class ResourcePolicyLimitExceededException < Smithy::Client::ServiceError
+      def limit: () -> Integer?
+      def limit_type: () -> String?
+      def message: () -> String?
+    end
+    class ResourcePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+    end
+    class ServiceSettingNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StatusUnchanged < Smithy::Client::ServiceError
+    end
+    class SubTypeCountLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetNotConnected < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+    end
+    class TooManyTagsError < Smithy::Client::ServiceError
+    end
+    class TooManyUpdates < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TotalSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedCalendarException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedFeatureRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedInventoryItemContextException < Smithy::Client::ServiceError
+      def type_name: () -> String?
+      def message: () -> String?
+    end
+    class UnsupportedInventorySchemaVersionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperatingSystem < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedParameterType < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedPlatformType < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason_code: () -> String?
+    end
+  end
+end

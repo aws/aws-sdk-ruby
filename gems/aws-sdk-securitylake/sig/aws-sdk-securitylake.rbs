@@ -1,0 +1,5 @@
+  module Aws
+    module SecurityLake
+      VERSION: String
+    end
+  end

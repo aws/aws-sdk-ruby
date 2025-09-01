@@ -1,0 +1,805 @@
+module Aws::DLM
+  module Types
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?cross_region_copy: Array[Types::CrossRegionCopyAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor cross_region_copy: Array[Types::CrossRegionCopyAction]?
+    end
+
+    class ArchiveRetainRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_archive_tier: Types::RetentionArchiveTier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_archive_tier: Types::RetentionArchiveTier?
+    end
+
+    class ArchiveRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retain_rule: Types::ArchiveRetainRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retain_rule: Types::ArchiveRetainRule?
+    end
+
+    class CreateLifecyclePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_role_arn: String,
+        ?description: String,
+        ?state: String,
+        ?policy_details: Types::PolicyDetails,
+        ?tags: Hash[String, String],
+        ?default_policy: String,
+        ?create_interval: Integer,
+        ?retain_interval: Integer,
+        ?copy_tags: bool,
+        ?extend_deletion: bool,
+        ?cross_region_copy_targets: Array[Types::CrossRegionCopyTarget],
+        ?exclusions: Types::Exclusions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor policy_details: Types::PolicyDetails?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor default_policy: String?
+      attr_accessor create_interval: Integer?
+      attr_accessor retain_interval: Integer?
+      attr_accessor copy_tags: bool?
+      attr_accessor extend_deletion: bool?
+      attr_accessor cross_region_copy_targets: Array[Types::CrossRegionCopyTarget]?
+      attr_accessor exclusions: Types::Exclusions?
+    end
+
+    class CreateLifecyclePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class CreateRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?interval: Integer,
+        ?interval_unit: String,
+        ?times: Array[String],
+        ?cron_expression: String,
+        ?scripts: Array[Types::Script],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+      attr_accessor times: Array[String]?
+      attr_accessor cron_expression: String?
+      attr_accessor scripts: Array[Types::Script]?
+    end
+
+    class CrossRegionCopyAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?retain_rule: Types::CrossRegionCopyRetainRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor retain_rule: Types::CrossRegionCopyRetainRule?
+    end
+
+    class CrossRegionCopyDeprecateRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval: Integer,
+        ?interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+    end
+
+    class CrossRegionCopyRetainRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval: Integer,
+        ?interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+    end
+
+    class CrossRegionCopyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_region: String,
+        ?target: String,
+        ?encrypted: bool,
+        ?cmk_arn: String,
+        ?copy_tags: bool,
+        ?retain_rule: Types::CrossRegionCopyRetainRule,
+        ?deprecate_rule: Types::CrossRegionCopyDeprecateRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_region: String?
+      attr_accessor target: String?
+      attr_accessor encrypted: bool?
+      attr_accessor cmk_arn: String?
+      attr_accessor copy_tags: bool?
+      attr_accessor retain_rule: Types::CrossRegionCopyRetainRule?
+      attr_accessor deprecate_rule: Types::CrossRegionCopyDeprecateRule?
+    end
+
+    class CrossRegionCopyTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_region: String?
+    end
+
+    module DefaultPoliciesTypeValues
+      VOLUME: String
+      INSTANCE: String
+      ALL: String
+    end
+
+    module DefaultPolicyTypeValues
+      VOLUME: String
+      INSTANCE: String
+    end
+
+    class DeleteLifecyclePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class DeleteLifecyclePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeprecateRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?interval: Integer,
+        ?interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encrypted: bool,
+        ?cmk_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encrypted: bool?
+      attr_accessor cmk_arn: String?
+    end
+
+    class EventParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?snapshot_owner: Array[String],
+        ?description_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor snapshot_owner: Array[String]?
+      attr_accessor description_regex: String?
+    end
+
+    class EventSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Types::EventParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Types::EventParameters?
+    end
+
+    module EventSourceValues
+      MANAGED_CWE: String
+    end
+
+    module EventTypeValues
+      SHARE_SNAPSHOT: String
+    end
+
+    class Exclusions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclude_boot_volumes: bool,
+        ?exclude_volume_types: Array[String],
+        ?exclude_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclude_boot_volumes: bool?
+      attr_accessor exclude_volume_types: Array[String]?
+      attr_accessor exclude_tags: Array[Types::Tag]?
+    end
+
+    module ExecutionHandlerServiceValues
+      AWS_SYSTEMS_MANAGER: String
+    end
+
+    class FastRestoreRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?interval: Integer,
+        ?interval_unit: String,
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class GetLifecyclePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_ids: Array[String],
+        ?state: String,
+        ?resource_types: Array[String],
+        ?target_tags: Array[String],
+        ?tags_to_add: Array[String],
+        ?default_policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_ids: Array[String]?
+      attr_accessor state: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor target_tags: Array[String]?
+      attr_accessor tags_to_add: Array[String]?
+      attr_accessor default_policy_type: String?
+    end
+
+    class GetLifecyclePoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Array[Types::LifecyclePolicySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Array[Types::LifecyclePolicySummary]?
+    end
+
+    class GetLifecyclePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class GetLifecyclePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::LifecyclePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::LifecyclePolicy?
+    end
+
+    module GettablePolicyStateValues
+      ENABLED: String
+      DISABLED: String
+      ERROR: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module IntervalUnitValues
+      HOURS: String
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?required_parameters: Array[String],
+        ?mutually_exclusive_parameters: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor required_parameters: Array[String]?
+      attr_accessor mutually_exclusive_parameters: Array[String]?
+    end
+
+    class LifecyclePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?description: String,
+        ?state: String,
+        ?status_message: String,
+        ?execution_role_arn: String,
+        ?date_created: Time,
+        ?date_modified: Time,
+        ?policy_details: Types::PolicyDetails,
+        ?tags: Hash[String, String],
+        ?policy_arn: String,
+        ?default_policy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+      attr_accessor policy_details: Types::PolicyDetails?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor policy_arn: String?
+      attr_accessor default_policy: bool?
+    end
+
+    class LifecyclePolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?description: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?policy_type: String,
+        ?default_policy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor policy_type: String?
+      attr_accessor default_policy: bool?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module LocationValues
+      CLOUD: String
+      OUTPOST_LOCAL: String
+      LOCAL_ZONE: String
+    end
+
+    class Parameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclude_boot_volume: bool,
+        ?no_reboot: bool,
+        ?exclude_data_volume_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclude_boot_volume: bool?
+      attr_accessor no_reboot: bool?
+      attr_accessor exclude_data_volume_tags: Array[Types::Tag]?
+    end
+
+    class PolicyDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type: String,
+        ?resource_types: Array[String],
+        ?resource_locations: Array[String],
+        ?target_tags: Array[Types::Tag],
+        ?schedules: Array[Types::Schedule],
+        ?parameters: Types::Parameters,
+        ?event_source: Types::EventSource,
+        ?actions: Array[Types::Action],
+        ?policy_language: String,
+        ?resource_type: String,
+        ?create_interval: Integer,
+        ?retain_interval: Integer,
+        ?copy_tags: bool,
+        ?cross_region_copy_targets: Array[Types::CrossRegionCopyTarget],
+        ?extend_deletion: bool,
+        ?exclusions: Types::Exclusions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor resource_locations: Array[String]?
+      attr_accessor target_tags: Array[Types::Tag]?
+      attr_accessor schedules: Array[Types::Schedule]?
+      attr_accessor parameters: Types::Parameters?
+      attr_accessor event_source: Types::EventSource?
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor policy_language: String?
+      attr_accessor resource_type: String?
+      attr_accessor create_interval: Integer?
+      attr_accessor retain_interval: Integer?
+      attr_accessor copy_tags: bool?
+      attr_accessor cross_region_copy_targets: Array[Types::CrossRegionCopyTarget]?
+      attr_accessor extend_deletion: bool?
+      attr_accessor exclusions: Types::Exclusions?
+    end
+
+    module PolicyLanguageValues
+      SIMPLIFIED: String
+      STANDARD: String
+    end
+
+    module PolicyTypeValues
+      EBS_SNAPSHOT_MANAGEMENT: String
+      IMAGE_MANAGEMENT: String
+      EVENT_BASED_POLICY: String
+    end
+
+    module ResourceLocationValues
+      CLOUD: String
+      OUTPOST: String
+      LOCAL_ZONE: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_type: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    module ResourceTypeValues
+      VOLUME: String
+      INSTANCE: String
+    end
+
+    class RetainRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?interval: Integer,
+        ?interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+    end
+
+    class RetentionArchiveTier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?interval: Integer,
+        ?interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor interval: Integer?
+      attr_accessor interval_unit: String?
+    end
+
+    module RetentionIntervalUnitValues
+      DAYS: String
+      WEEKS: String
+      MONTHS: String
+      YEARS: String
+    end
+
+    class Schedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?copy_tags: bool,
+        ?tags_to_add: Array[Types::Tag],
+        ?variable_tags: Array[Types::Tag],
+        ?create_rule: Types::CreateRule,
+        ?retain_rule: Types::RetainRule,
+        ?fast_restore_rule: Types::FastRestoreRule,
+        ?cross_region_copy_rules: Array[Types::CrossRegionCopyRule],
+        ?share_rules: Array[Types::ShareRule],
+        ?deprecate_rule: Types::DeprecateRule,
+        ?archive_rule: Types::ArchiveRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor copy_tags: bool?
+      attr_accessor tags_to_add: Array[Types::Tag]?
+      attr_accessor variable_tags: Array[Types::Tag]?
+      attr_accessor create_rule: Types::CreateRule?
+      attr_accessor retain_rule: Types::RetainRule?
+      attr_accessor fast_restore_rule: Types::FastRestoreRule?
+      attr_accessor cross_region_copy_rules: Array[Types::CrossRegionCopyRule]?
+      attr_accessor share_rules: Array[Types::ShareRule]?
+      attr_accessor deprecate_rule: Types::DeprecateRule?
+      attr_accessor archive_rule: Types::ArchiveRule?
+    end
+
+    class Script
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Array[String],
+        ?execution_handler_service: String,
+        ?execution_handler: String,
+        ?execute_operation_on_script_failure: bool,
+        ?execution_timeout: Integer,
+        ?maximum_retry_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Array[String]?
+      attr_accessor execution_handler_service: String?
+      attr_accessor execution_handler: String?
+      attr_accessor execute_operation_on_script_failure: bool?
+      attr_accessor execution_timeout: Integer?
+      attr_accessor maximum_retry_count: Integer?
+    end
+
+    module SettablePolicyStateValues
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ShareRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_accounts: Array[String],
+        ?unshare_interval: Integer,
+        ?unshare_interval_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_accounts: Array[String]?
+      attr_accessor unshare_interval: Integer?
+      attr_accessor unshare_interval_unit: String?
+    end
+
+    module StageValues
+      PRE: String
+      POST: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLifecyclePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?execution_role_arn: String,
+        ?state: String,
+        ?description: String,
+        ?policy_details: Types::PolicyDetails,
+        ?create_interval: Integer,
+        ?retain_interval: Integer,
+        ?copy_tags: bool,
+        ?extend_deletion: bool,
+        ?cross_region_copy_targets: Array[Types::CrossRegionCopyTarget],
+        ?exclusions: Types::Exclusions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor description: String?
+      attr_accessor policy_details: Types::PolicyDetails?
+      attr_accessor create_interval: Integer?
+      attr_accessor retain_interval: Integer?
+      attr_accessor copy_tags: bool?
+      attr_accessor extend_deletion: bool?
+      attr_accessor cross_region_copy_targets: Array[Types::CrossRegionCopyTarget]?
+      attr_accessor exclusions: Types::Exclusions?
+    end
+
+    class UpdateLifecyclePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

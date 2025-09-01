@@ -1,0 +1,876 @@
+module Aws::DirectoryService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DirectoryService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptSharedDirectoryResponse
+      include Smithy::Client::_Response[Types::AcceptSharedDirectoryResult]
+      def shared_directory: () -> Types::SharedDirectory?
+    end
+    def accept_shared_directory: (
+      ?shared_directory_id: String
+    ) -> _AcceptSharedDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptSharedDirectoryResponse
+
+    interface _AddIpRoutesResponse
+      include Smithy::Client::_Response[Types::AddIpRoutesResult]
+    end
+    def add_ip_routes: (
+      ?directory_id: String,
+      ?ip_routes: Array[
+        {
+          cidr_ip: String,
+          description: String
+        }
+      ],
+      ?update_security_group_for_directory_controllers: bool
+    ) -> _AddIpRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddIpRoutesResponse
+
+    interface _AddRegionResponse
+      include Smithy::Client::_Response[Types::AddRegionResult]
+    end
+    def add_region: (
+      ?directory_id: String,
+      ?region_name: String,
+      ?vpc_settings: {
+        vpc_id: String,
+        subnet_ids: Array[String]
+      }
+    ) -> _AddRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddRegionResponse
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddTagsToResourceResult]
+    end
+    def add_tags_to_resource: (
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _CancelSchemaExtensionResponse
+      include Smithy::Client::_Response[Types::CancelSchemaExtensionResult]
+    end
+    def cancel_schema_extension: (
+      ?directory_id: String,
+      ?schema_extension_id: String
+    ) -> _CancelSchemaExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSchemaExtensionResponse
+
+    interface _ConnectDirectoryResponse
+      include Smithy::Client::_Response[Types::ConnectDirectoryResult]
+      def directory_id: () -> String?
+    end
+    def connect_directory: (
+      ?name: String,
+      ?short_name: String,
+      ?password: String,
+      ?description: String,
+      ?size: String,
+      ?connect_settings: {
+        vpc_id: String,
+        subnet_ids: Array[String],
+        customer_dns_ips: Array[String],
+        customer_user_name: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ConnectDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConnectDirectoryResponse
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Response[Types::CreateAliasResult]
+      def directory_id: () -> String?
+      def alias: () -> String?
+    end
+    def create_alias: (
+      ?directory_id: String,
+      ?alias: String
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateComputerResponse
+      include Smithy::Client::_Response[Types::CreateComputerResult]
+      def computer: () -> Types::Computer?
+    end
+    def create_computer: (
+      ?directory_id: String,
+      ?computer_name: String,
+      ?password: String,
+      ?organizational_unit_distinguished_name: String,
+      ?computer_attributes: Array[
+        {
+          name: String,
+          value: String
+        }
+      ]
+    ) -> _CreateComputerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComputerResponse
+
+    interface _CreateConditionalForwarderResponse
+      include Smithy::Client::_Response[Types::CreateConditionalForwarderResult]
+    end
+    def create_conditional_forwarder: (
+      ?directory_id: String,
+      ?remote_domain_name: String,
+      ?dns_ip_addrs: Array[String]
+    ) -> _CreateConditionalForwarderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConditionalForwarderResponse
+
+    interface _CreateDirectoryResponse
+      include Smithy::Client::_Response[Types::CreateDirectoryResult]
+      def directory_id: () -> String?
+    end
+    def create_directory: (
+      ?name: String,
+      ?short_name: String,
+      ?password: String,
+      ?description: String,
+      ?size: String,
+      ?vpc_settings: {
+        vpc_id: String,
+        subnet_ids: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectoryResponse
+
+    interface _CreateHybridADResponse
+      include Smithy::Client::_Response[Types::CreateHybridADResult]
+      def directory_id: () -> String?
+    end
+    def create_hybrid_ad: (
+      ?secret_arn: String,
+      ?assessment_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateHybridADResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHybridADResponse
+
+    interface _CreateLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateLogSubscriptionResult]
+    end
+    def create_log_subscription: (
+      ?directory_id: String,
+      ?log_group_name: String
+    ) -> _CreateLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogSubscriptionResponse
+
+    interface _CreateMicrosoftADResponse
+      include Smithy::Client::_Response[Types::CreateMicrosoftADResult]
+      def directory_id: () -> String?
+    end
+    def create_microsoft_ad: (
+      ?name: String,
+      ?short_name: String,
+      ?password: String,
+      ?description: String,
+      ?vpc_settings: {
+        vpc_id: String,
+        subnet_ids: Array[String]
+      },
+      ?edition: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMicrosoftADResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrosoftADResponse
+
+    interface _CreateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotResult]
+      def snapshot_id: () -> String?
+    end
+    def create_snapshot: (
+      ?directory_id: String,
+      ?name: String
+    ) -> _CreateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotResponse
+
+    interface _CreateTrustResponse
+      include Smithy::Client::_Response[Types::CreateTrustResult]
+      def trust_id: () -> String?
+    end
+    def create_trust: (
+      ?directory_id: String,
+      ?remote_domain_name: String,
+      ?trust_password: String,
+      ?trust_direction: String,
+      ?trust_type: String,
+      ?conditional_forwarder_ip_addrs: Array[String],
+      ?selective_auth: String
+    ) -> _CreateTrustResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustResponse
+
+    interface _DeleteADAssessmentResponse
+      include Smithy::Client::_Response[Types::DeleteADAssessmentResult]
+      def assessment_id: () -> String?
+    end
+    def delete_ad_assessment: (
+      ?assessment_id: String
+    ) -> _DeleteADAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteADAssessmentResponse
+
+    interface _DeleteConditionalForwarderResponse
+      include Smithy::Client::_Response[Types::DeleteConditionalForwarderResult]
+    end
+    def delete_conditional_forwarder: (
+      ?directory_id: String,
+      ?remote_domain_name: String
+    ) -> _DeleteConditionalForwarderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConditionalForwarderResponse
+
+    interface _DeleteDirectoryResponse
+      include Smithy::Client::_Response[Types::DeleteDirectoryResult]
+      def directory_id: () -> String?
+    end
+    def delete_directory: (
+      ?directory_id: String
+    ) -> _DeleteDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectoryResponse
+
+    interface _DeleteLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteLogSubscriptionResult]
+    end
+    def delete_log_subscription: (
+      ?directory_id: String
+    ) -> _DeleteLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogSubscriptionResponse
+
+    interface _DeleteSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotResult]
+      def snapshot_id: () -> String?
+    end
+    def delete_snapshot: (
+      ?snapshot_id: String
+    ) -> _DeleteSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotResponse
+
+    interface _DeleteTrustResponse
+      include Smithy::Client::_Response[Types::DeleteTrustResult]
+      def trust_id: () -> String?
+    end
+    def delete_trust: (
+      ?trust_id: String,
+      ?delete_associated_conditional_forwarder: bool
+    ) -> _DeleteTrustResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrustResponse
+
+    interface _DeregisterCertificateResponse
+      include Smithy::Client::_Response[Types::DeregisterCertificateResult]
+    end
+    def deregister_certificate: (
+      ?directory_id: String,
+      ?certificate_id: String
+    ) -> _DeregisterCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterCertificateResponse
+
+    interface _DeregisterEventTopicResponse
+      include Smithy::Client::_Response[Types::DeregisterEventTopicResult]
+    end
+    def deregister_event_topic: (
+      ?directory_id: String,
+      ?topic_name: String
+    ) -> _DeregisterEventTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterEventTopicResponse
+
+    interface _DescribeADAssessmentResponse
+      include Smithy::Client::_Response[Types::DescribeADAssessmentResult]
+      def assessment: () -> Types::Assessment?
+      def assessment_reports: () -> Array[Types::AssessmentReport]?
+    end
+    def describe_ad_assessment: (
+      ?assessment_id: String
+    ) -> _DescribeADAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeADAssessmentResponse
+
+    interface _DescribeCertificateResponse
+      include Smithy::Client::_Response[Types::DescribeCertificateResult]
+      def certificate: () -> Types::Certificate?
+    end
+    def describe_certificate: (
+      ?directory_id: String,
+      ?certificate_id: String
+    ) -> _DescribeCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificateResponse
+
+    interface _DescribeClientAuthenticationSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeClientAuthenticationSettingsResult]
+      def client_authentication_settings_info: () -> Array[Types::ClientAuthenticationSettingInfo]?
+      def next_token: () -> String?
+    end
+    def describe_client_authentication_settings: (
+      ?directory_id: String,
+      ?type: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeClientAuthenticationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClientAuthenticationSettingsResponse
+
+    interface _DescribeConditionalForwardersResponse
+      include Smithy::Client::_Response[Types::DescribeConditionalForwardersResult]
+      def conditional_forwarders: () -> Array[Types::ConditionalForwarder]?
+    end
+    def describe_conditional_forwarders: (
+      ?directory_id: String,
+      ?remote_domain_names: Array[String]
+    ) -> _DescribeConditionalForwardersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConditionalForwardersResponse
+
+    interface _DescribeDirectoriesResponse
+      include Smithy::Client::_Response[Types::DescribeDirectoriesResult]
+      def directory_descriptions: () -> Array[Types::DirectoryDescription]?
+      def next_token: () -> String?
+    end
+    def describe_directories: (
+      ?directory_ids: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDirectoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectoriesResponse
+
+    interface _DescribeDirectoryDataAccessResponse
+      include Smithy::Client::_Response[Types::DescribeDirectoryDataAccessResult]
+      def data_access_status: () -> String?
+    end
+    def describe_directory_data_access: (
+      ?directory_id: String
+    ) -> _DescribeDirectoryDataAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectoryDataAccessResponse
+
+    interface _DescribeDomainControllersResponse
+      include Smithy::Client::_Response[Types::DescribeDomainControllersResult]
+      def domain_controllers: () -> Array[Types::DomainController]?
+      def next_token: () -> String?
+    end
+    def describe_domain_controllers: (
+      ?directory_id: String,
+      ?domain_controller_ids: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDomainControllersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainControllersResponse
+
+    interface _DescribeEventTopicsResponse
+      include Smithy::Client::_Response[Types::DescribeEventTopicsResult]
+      def event_topics: () -> Array[Types::EventTopic]?
+    end
+    def describe_event_topics: (
+      ?directory_id: String,
+      ?topic_names: Array[String]
+    ) -> _DescribeEventTopicsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventTopicsResponse
+
+    interface _DescribeHybridADUpdateResponse
+      include Smithy::Client::_Response[Types::DescribeHybridADUpdateResult]
+      def update_activities: () -> Types::HybridUpdateActivities?
+      def next_token: () -> String?
+    end
+    def describe_hybrid_ad_update: (
+      ?directory_id: String,
+      ?update_type: String,
+      ?next_token: String
+    ) -> _DescribeHybridADUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHybridADUpdateResponse
+
+    interface _DescribeLDAPSSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeLDAPSSettingsResult]
+      def ldaps_settings_info: () -> Array[Types::LDAPSSettingInfo]?
+      def next_token: () -> String?
+    end
+    def describe_ldaps_settings: (
+      ?directory_id: String,
+      ?type: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeLDAPSSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLDAPSSettingsResponse
+
+    interface _DescribeRegionsResponse
+      include Smithy::Client::_Response[Types::DescribeRegionsResult]
+      def regions_description: () -> Array[Types::RegionDescription]?
+      def next_token: () -> String?
+    end
+    def describe_regions: (
+      ?directory_id: String,
+      ?region_name: String,
+      ?next_token: String
+    ) -> _DescribeRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegionsResponse
+
+    interface _DescribeSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeSettingsResult]
+      def directory_id: () -> String?
+      def setting_entries: () -> Array[Types::SettingEntry]?
+      def next_token: () -> String?
+    end
+    def describe_settings: (
+      ?directory_id: String,
+      ?status: String,
+      ?next_token: String
+    ) -> _DescribeSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSettingsResponse
+
+    interface _DescribeSharedDirectoriesResponse
+      include Smithy::Client::_Response[Types::DescribeSharedDirectoriesResult]
+      def shared_directories: () -> Array[Types::SharedDirectory]?
+      def next_token: () -> String?
+    end
+    def describe_shared_directories: (
+      ?owner_directory_id: String,
+      ?shared_directory_ids: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeSharedDirectoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSharedDirectoriesResponse
+
+    interface _DescribeSnapshotsResponse
+      include Smithy::Client::_Response[Types::DescribeSnapshotsResult]
+      def snapshots: () -> Array[Types::Snapshot]?
+      def next_token: () -> String?
+    end
+    def describe_snapshots: (
+      ?directory_id: String,
+      ?snapshot_ids: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSnapshotsResponse
+
+    interface _DescribeTrustsResponse
+      include Smithy::Client::_Response[Types::DescribeTrustsResult]
+      def trusts: () -> Array[Types::Trust]?
+      def next_token: () -> String?
+    end
+    def describe_trusts: (
+      ?directory_id: String,
+      ?trust_ids: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeTrustsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustsResponse
+
+    interface _DescribeUpdateDirectoryResponse
+      include Smithy::Client::_Response[Types::DescribeUpdateDirectoryResult]
+      def update_activities: () -> Array[Types::UpdateInfoEntry]?
+      def next_token: () -> String?
+    end
+    def describe_update_directory: (
+      ?directory_id: String,
+      ?update_type: String,
+      ?region_name: String,
+      ?next_token: String
+    ) -> _DescribeUpdateDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUpdateDirectoryResponse
+
+    interface _DisableClientAuthenticationResponse
+      include Smithy::Client::_Response[Types::DisableClientAuthenticationResult]
+    end
+    def disable_client_authentication: (
+      ?directory_id: String,
+      ?type: String
+    ) -> _DisableClientAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableClientAuthenticationResponse
+
+    interface _DisableDirectoryDataAccessResponse
+      include Smithy::Client::_Response[Types::DisableDirectoryDataAccessResult]
+    end
+    def disable_directory_data_access: (
+      ?directory_id: String
+    ) -> _DisableDirectoryDataAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDirectoryDataAccessResponse
+
+    interface _DisableLDAPSResponse
+      include Smithy::Client::_Response[Types::DisableLDAPSResult]
+    end
+    def disable_ldaps: (
+      ?directory_id: String,
+      ?type: String
+    ) -> _DisableLDAPSResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableLDAPSResponse
+
+    interface _DisableRadiusResponse
+      include Smithy::Client::_Response[Types::DisableRadiusResult]
+    end
+    def disable_radius: (
+      ?directory_id: String
+    ) -> _DisableRadiusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableRadiusResponse
+
+    interface _DisableSsoResponse
+      include Smithy::Client::_Response[Types::DisableSsoResult]
+    end
+    def disable_sso: (
+      ?directory_id: String,
+      ?user_name: String,
+      ?password: String
+    ) -> _DisableSsoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableSsoResponse
+
+    interface _EnableClientAuthenticationResponse
+      include Smithy::Client::_Response[Types::EnableClientAuthenticationResult]
+    end
+    def enable_client_authentication: (
+      ?directory_id: String,
+      ?type: String
+    ) -> _EnableClientAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableClientAuthenticationResponse
+
+    interface _EnableDirectoryDataAccessResponse
+      include Smithy::Client::_Response[Types::EnableDirectoryDataAccessResult]
+    end
+    def enable_directory_data_access: (
+      ?directory_id: String
+    ) -> _EnableDirectoryDataAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDirectoryDataAccessResponse
+
+    interface _EnableLDAPSResponse
+      include Smithy::Client::_Response[Types::EnableLDAPSResult]
+    end
+    def enable_ldaps: (
+      ?directory_id: String,
+      ?type: String
+    ) -> _EnableLDAPSResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableLDAPSResponse
+
+    interface _EnableRadiusResponse
+      include Smithy::Client::_Response[Types::EnableRadiusResult]
+    end
+    def enable_radius: (
+      ?directory_id: String,
+      ?radius_settings: {
+        radius_servers: Array[String],
+        radius_port: Integer,
+        radius_timeout: Integer,
+        radius_retries: Integer,
+        shared_secret: String,
+        authentication_protocol: String,
+        display_label: String,
+        use_same_username: bool
+      }
+    ) -> _EnableRadiusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableRadiusResponse
+
+    interface _EnableSsoResponse
+      include Smithy::Client::_Response[Types::EnableSsoResult]
+    end
+    def enable_sso: (
+      ?directory_id: String,
+      ?user_name: String,
+      ?password: String
+    ) -> _EnableSsoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSsoResponse
+
+    interface _GetDirectoryLimitsResponse
+      include Smithy::Client::_Response[Types::GetDirectoryLimitsResult]
+      def directory_limits: () -> Types::DirectoryLimits?
+    end
+    def get_directory_limits: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDirectoryLimitsResponse
+
+    interface _GetSnapshotLimitsResponse
+      include Smithy::Client::_Response[Types::GetSnapshotLimitsResult]
+      def snapshot_limits: () -> Types::SnapshotLimits?
+    end
+    def get_snapshot_limits: (
+      ?directory_id: String
+    ) -> _GetSnapshotLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSnapshotLimitsResponse
+
+    interface _ListADAssessmentsResponse
+      include Smithy::Client::_Response[Types::ListADAssessmentsResult]
+      def assessments: () -> Array[Types::AssessmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_ad_assessments: (
+      ?directory_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListADAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListADAssessmentsResponse
+
+    interface _ListCertificatesResponse
+      include Smithy::Client::_Response[Types::ListCertificatesResult]
+      def next_token: () -> String?
+      def certificates_info: () -> Array[Types::CertificateInfo]?
+    end
+    def list_certificates: (
+      ?directory_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCertificatesResponse
+
+    interface _ListIpRoutesResponse
+      include Smithy::Client::_Response[Types::ListIpRoutesResult]
+      def ip_routes_info: () -> Array[Types::IpRouteInfo]?
+      def next_token: () -> String?
+    end
+    def list_ip_routes: (
+      ?directory_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListIpRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIpRoutesResponse
+
+    interface _ListLogSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListLogSubscriptionsResult]
+      def log_subscriptions: () -> Array[Types::LogSubscription]?
+      def next_token: () -> String?
+    end
+    def list_log_subscriptions: (
+      ?directory_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListLogSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogSubscriptionsResponse
+
+    interface _ListSchemaExtensionsResponse
+      include Smithy::Client::_Response[Types::ListSchemaExtensionsResult]
+      def schema_extensions_info: () -> Array[Types::SchemaExtensionInfo]?
+      def next_token: () -> String?
+    end
+    def list_schema_extensions: (
+      ?directory_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListSchemaExtensionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemaExtensionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_id: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterCertificateResponse
+      include Smithy::Client::_Response[Types::RegisterCertificateResult]
+      def certificate_id: () -> String?
+    end
+    def register_certificate: (
+      ?directory_id: String,
+      ?certificate_data: String,
+      ?type: String,
+      ?client_cert_auth_settings: {
+        ocsp_url: String
+      }
+    ) -> _RegisterCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterCertificateResponse
+
+    interface _RegisterEventTopicResponse
+      include Smithy::Client::_Response[Types::RegisterEventTopicResult]
+    end
+    def register_event_topic: (
+      ?directory_id: String,
+      ?topic_name: String
+    ) -> _RegisterEventTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterEventTopicResponse
+
+    interface _RejectSharedDirectoryResponse
+      include Smithy::Client::_Response[Types::RejectSharedDirectoryResult]
+      def shared_directory_id: () -> String?
+    end
+    def reject_shared_directory: (
+      ?shared_directory_id: String
+    ) -> _RejectSharedDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectSharedDirectoryResponse
+
+    interface _RemoveIpRoutesResponse
+      include Smithy::Client::_Response[Types::RemoveIpRoutesResult]
+    end
+    def remove_ip_routes: (
+      ?directory_id: String,
+      ?cidr_ips: Array[String]
+    ) -> _RemoveIpRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveIpRoutesResponse
+
+    interface _RemoveRegionResponse
+      include Smithy::Client::_Response[Types::RemoveRegionResult]
+    end
+    def remove_region: (
+      ?directory_id: String
+    ) -> _RemoveRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveRegionResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveTagsFromResourceResult]
+    end
+    def remove_tags_from_resource: (
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+
+    interface _ResetUserPasswordResponse
+      include Smithy::Client::_Response[Types::ResetUserPasswordResult]
+    end
+    def reset_user_password: (
+      ?directory_id: String,
+      ?user_name: String,
+      ?new_password: String
+    ) -> _ResetUserPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetUserPasswordResponse
+
+    interface _RestoreFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreFromSnapshotResult]
+    end
+    def restore_from_snapshot: (
+      ?snapshot_id: String
+    ) -> _RestoreFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromSnapshotResponse
+
+    interface _ShareDirectoryResponse
+      include Smithy::Client::_Response[Types::ShareDirectoryResult]
+      def shared_directory_id: () -> String?
+    end
+    def share_directory: (
+      ?directory_id: String,
+      ?share_notes: String,
+      ?share_target: {
+        id: String,
+        type: String
+      },
+      ?share_method: String
+    ) -> _ShareDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ShareDirectoryResponse
+
+    interface _StartADAssessmentResponse
+      include Smithy::Client::_Response[Types::StartADAssessmentResult]
+      def assessment_id: () -> String?
+    end
+    def start_ad_assessment: (
+      ?assessment_configuration: {
+        customer_dns_ips: Array[String],
+        dns_name: String,
+        vpc_settings: {
+          vpc_id: String,
+          subnet_ids: Array[String]
+        },
+        instance_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?directory_id: String
+    ) -> _StartADAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartADAssessmentResponse
+
+    interface _StartSchemaExtensionResponse
+      include Smithy::Client::_Response[Types::StartSchemaExtensionResult]
+      def schema_extension_id: () -> String?
+    end
+    def start_schema_extension: (
+      ?directory_id: String,
+      ?create_snapshot_before_schema_extension: bool,
+      ?ldif_content: String,
+      ?description: String
+    ) -> _StartSchemaExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSchemaExtensionResponse
+
+    interface _UnshareDirectoryResponse
+      include Smithy::Client::_Response[Types::UnshareDirectoryResult]
+      def shared_directory_id: () -> String?
+    end
+    def unshare_directory: (
+      ?directory_id: String,
+      ?unshare_target: {
+        id: String,
+        type: String
+      }
+    ) -> _UnshareDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnshareDirectoryResponse
+
+    interface _UpdateConditionalForwarderResponse
+      include Smithy::Client::_Response[Types::UpdateConditionalForwarderResult]
+    end
+    def update_conditional_forwarder: (
+      ?directory_id: String,
+      ?remote_domain_name: String,
+      ?dns_ip_addrs: Array[String]
+    ) -> _UpdateConditionalForwarderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConditionalForwarderResponse
+
+    interface _UpdateDirectorySetupResponse
+      include Smithy::Client::_Response[Types::UpdateDirectorySetupResult]
+    end
+    def update_directory_setup: (
+      ?directory_id: String,
+      ?update_type: String,
+      ?os_update_settings: {
+        os_version: String
+      },
+      ?create_snapshot_before_update: bool
+    ) -> _UpdateDirectorySetupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectorySetupResponse
+
+    interface _UpdateHybridADResponse
+      include Smithy::Client::_Response[Types::UpdateHybridADResult]
+      def directory_id: () -> String?
+      def assessment_id: () -> String?
+    end
+    def update_hybrid_ad: (
+      ?directory_id: String,
+      ?hybrid_administrator_account_update: {
+        secret_arn: String
+      },
+      ?self_managed_instances_settings: {
+        customer_dns_ips: Array[String],
+        instance_ids: Array[String]
+      }
+    ) -> _UpdateHybridADResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHybridADResponse
+
+    interface _UpdateNumberOfDomainControllersResponse
+      include Smithy::Client::_Response[Types::UpdateNumberOfDomainControllersResult]
+    end
+    def update_number_of_domain_controllers: (
+      ?directory_id: String,
+      ?desired_number: Integer
+    ) -> _UpdateNumberOfDomainControllersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNumberOfDomainControllersResponse
+
+    interface _UpdateRadiusResponse
+      include Smithy::Client::_Response[Types::UpdateRadiusResult]
+    end
+    def update_radius: (
+      ?directory_id: String,
+      ?radius_settings: {
+        radius_servers: Array[String],
+        radius_port: Integer,
+        radius_timeout: Integer,
+        radius_retries: Integer,
+        shared_secret: String,
+        authentication_protocol: String,
+        display_label: String,
+        use_same_username: bool
+      }
+    ) -> _UpdateRadiusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRadiusResponse
+
+    interface _UpdateSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateSettingsResult]
+      def directory_id: () -> String?
+    end
+    def update_settings: (
+      ?directory_id: String,
+      ?settings: Array[
+        {
+          name: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSettingsResponse
+
+    interface _UpdateTrustResponse
+      include Smithy::Client::_Response[Types::UpdateTrustResult]
+      def request_id: () -> String?
+      def trust_id: () -> String?
+    end
+    def update_trust: (
+      ?trust_id: String,
+      ?selective_auth: String
+    ) -> _UpdateTrustResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrustResponse
+
+    interface _VerifyTrustResponse
+      include Smithy::Client::_Response[Types::VerifyTrustResult]
+      def trust_id: () -> String?
+    end
+    def verify_trust: (
+      ?trust_id: String
+    ) -> _VerifyTrustResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyTrustResponse
+  end
+end

@@ -1,0 +1,182 @@
+module Aws::AIOps
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AIOps::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateInvestigationGroupResponse
+      include Smithy::Client::_Response[Types::CreateInvestigationGroupOutput]
+      def arn: () -> String?
+    end
+    def create_investigation_group: (
+      ?name: String,
+      ?role_arn: String,
+      ?encryption_configuration: {
+        type: String,
+        kms_key_id: String
+      },
+      ?retention_in_days: Integer,
+      ?tags: Hash[String, String],
+      ?tag_key_boundaries: Array[String],
+      ?chatbot_notification_channel: Hash[String,
+        Array[String]
+      ],
+      ?is_cloud_trail_event_history_enabled: bool,
+      ?cross_account_configurations: Array[
+        {
+          source_role_arn: String
+        }
+      ]
+    ) -> _CreateInvestigationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvestigationGroupResponse
+
+    interface _DeleteInvestigationGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_investigation_group: (
+      ?identifier: String
+    ) -> _DeleteInvestigationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInvestigationGroupResponse
+
+    interface _DeleteInvestigationGroupPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteInvestigationGroupPolicyOutput]
+    end
+    def delete_investigation_group_policy: (
+      ?identifier: String
+    ) -> _DeleteInvestigationGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInvestigationGroupPolicyResponse
+
+    interface _GetInvestigationGroupResponse
+      include Smithy::Client::_Response[Types::GetInvestigationGroupResponse]
+      def created_by: () -> String?
+      def created_at: () -> Integer?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Integer?
+      def name: () -> String?
+      def arn: () -> String?
+      def role_arn: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def retention_in_days: () -> Integer?
+      def chatbot_notification_channel: () -> Hash[String, Array[String]]?
+      def tag_key_boundaries: () -> Array[String]?
+      def is_cloud_trail_event_history_enabled: () -> bool?
+      def cross_account_configurations: () -> Array[Types::CrossAccountConfiguration]?
+    end
+    def get_investigation_group: (
+      ?identifier: String
+    ) -> _GetInvestigationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvestigationGroupResponse
+
+    interface _GetInvestigationGroupPolicyResponse
+      include Smithy::Client::_Response[Types::GetInvestigationGroupPolicyResponse]
+      def investigation_group_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_investigation_group_policy: (
+      ?identifier: String
+    ) -> _GetInvestigationGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvestigationGroupPolicyResponse
+
+    interface _ListInvestigationGroupsResponse
+      include Smithy::Client::_Response[Types::ListInvestigationGroupsOutput]
+      def next_token: () -> String?
+      def investigation_groups: () -> Array[Types::ListInvestigationGroupsModel]?
+    end
+    def list_investigation_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInvestigationGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvestigationGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutInvestigationGroupPolicyResponse
+      include Smithy::Client::_Response[Types::PutInvestigationGroupPolicyResponse]
+      def investigation_group_arn: () -> String?
+    end
+    def put_investigation_group_policy: (
+      ?identifier: String,
+      ?policy: String
+    ) -> _PutInvestigationGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInvestigationGroupPolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateInvestigationGroupResponse
+      include Smithy::Client::_Response[Types::UpdateInvestigationGroupOutput]
+    end
+    def update_investigation_group: (
+      ?identifier: String,
+      ?role_arn: String,
+      ?encryption_configuration: {
+        type: String,
+        kms_key_id: String
+      },
+      ?tag_key_boundaries: Array[String],
+      ?chatbot_notification_channel: Hash[String,
+        Array[String]
+      ],
+      ?is_cloud_trail_event_history_enabled: bool,
+      ?cross_account_configurations: Array[
+        {
+          source_role_arn: String
+        }
+      ]
+    ) -> _UpdateInvestigationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInvestigationGroupResponse
+  end
+end

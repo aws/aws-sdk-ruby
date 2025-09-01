@@ -1,0 +1,49 @@
+module Aws::PinpointSMSVoice
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AlreadyExistsException: StructureShape
+    BadRequestException: StructureShape
+    Boolean: BooleanShape
+    CallInstructionsMessageType: StructureShape
+    CloudWatchLogsDestination: StructureShape
+    ConfigurationSets: ListShape
+    CreateConfigurationSetEventDestinationRequest: StructureShape
+    CreateConfigurationSetEventDestinationResponse: StructureShape
+    CreateConfigurationSetRequest: StructureShape
+    CreateConfigurationSetResponse: StructureShape
+    DeleteConfigurationSetEventDestinationRequest: StructureShape
+    DeleteConfigurationSetEventDestinationResponse: StructureShape
+    DeleteConfigurationSetRequest: StructureShape
+    DeleteConfigurationSetResponse: StructureShape
+    EventDestination: StructureShape
+    EventDestinationDefinition: StructureShape
+    EventDestinations: ListShape
+    EventType: EnumShape
+    EventTypes: ListShape
+    GetConfigurationSetEventDestinationsRequest: StructureShape
+    GetConfigurationSetEventDestinationsResponse: StructureShape
+    InternalServiceErrorException: StructureShape
+    KinesisFirehoseDestination: StructureShape
+    LimitExceededException: StructureShape
+    ListConfigurationSetsRequest: StructureShape
+    ListConfigurationSetsResponse: StructureShape
+    NextTokenString: StringShape
+    NonEmptyString: StringShape
+    NotFoundException: StructureShape
+    PlainTextMessageType: StructureShape
+    SSMLMessageType: StructureShape
+    SendVoiceMessageRequest: StructureShape
+    SendVoiceMessageResponse: StructureShape
+    SnsDestination: StructureShape
+    String: StringShape
+    TooManyRequestsException: StructureShape
+    UpdateConfigurationSetEventDestinationRequest: StructureShape
+    UpdateConfigurationSetEventDestinationResponse: StructureShape
+    VoiceMessageContent: StructureShape
+    WordCharactersWithDelimiters: StringShape
+    String: StringShape
+
+    PinpointSMSVoice: ServiceShape
+  end
+end

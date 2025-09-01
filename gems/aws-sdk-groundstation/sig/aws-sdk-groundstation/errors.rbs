@@ -1,0 +1,19 @@
+module Aws::GroundStation
+  module Errors
+    class DependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def parameter_name: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def parameter_name: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def parameter_name: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

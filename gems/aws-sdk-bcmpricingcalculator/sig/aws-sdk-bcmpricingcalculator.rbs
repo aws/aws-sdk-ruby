@@ -1,0 +1,5 @@
+  module Aws
+    module BCMPricingCalculator
+      VERSION: String
+    end
+  end

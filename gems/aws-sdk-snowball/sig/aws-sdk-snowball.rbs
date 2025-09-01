@@ -1,0 +1,5 @@
+  module Aws
+    module Snowball
+      VERSION: String
+    end
+  end

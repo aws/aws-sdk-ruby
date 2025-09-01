@@ -1,0 +1,5 @@
+  module Aws
+    module Panorama
+      VERSION: String
+    end
+  end

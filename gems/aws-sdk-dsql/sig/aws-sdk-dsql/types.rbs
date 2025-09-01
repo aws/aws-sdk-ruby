@@ -1,0 +1,436 @@
+module Aws::DSQL
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ClusterStatus
+      CREATING: String
+      ACTIVE: String
+      IDLE: String
+      INACTIVE: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      PENDING_SETUP: String
+      PENDING_DELETE: String
+    end
+
+    class ClusterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection_enabled: bool,
+        ?kms_encryption_key: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?multi_region_properties: Types::MultiRegionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor kms_encryption_key: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor multi_region_properties: Types::MultiRegionProperties?
+    end
+
+    class CreateClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?multi_region_properties: Types::MultiRegionProperties,
+        ?encryption_details: Types::EncryptionDetails,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor multi_region_properties: Types::MultiRegionProperties?
+      attr_accessor encryption_details: Types::EncryptionDetails?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class DeleteClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?arn: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class EncryptionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_arn: String,
+        ?encryption_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_status: String?
+    end
+
+    module EncryptionStatus
+      ENABLED: String
+      UPDATING: String
+      KMS_KEY_INACCESSIBLE: String
+      ENABLING: String
+    end
+
+    module EncryptionType
+      AWS_OWNED_KMS_KEY: String
+      CUSTOMER_MANAGED_KMS_KEY: String
+    end
+
+    class GetClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?deletion_protection_enabled: bool,
+        ?multi_region_properties: Types::MultiRegionProperties,
+        ?tags: Hash[String, String],
+        ?encryption_details: Types::EncryptionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor multi_region_properties: Types::MultiRegionProperties?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor encryption_details: Types::EncryptionDetails?
+    end
+
+    class GetVpcEndpointServiceNameInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetVpcEndpointServiceNameOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListClustersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?clusters: Array[Types::ClusterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor clusters: Array[Types::ClusterSummary]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MultiRegionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?witness_region: String,
+        ?clusters: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor witness_region: String?
+      attr_accessor clusters: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?deletion_protection_enabled: bool,
+        ?kms_encryption_key: String,
+        ?client_token: String,
+        ?multi_region_properties: Types::MultiRegionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor kms_encryption_key: String?
+      attr_accessor client_token: String?
+      attr_accessor multi_region_properties: Types::MultiRegionProperties?
+    end
+
+    class UpdateClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?arn: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      DELETION_PROTECTION_ENABLED: String
+      OTHER: String
+    end
+  end
+end

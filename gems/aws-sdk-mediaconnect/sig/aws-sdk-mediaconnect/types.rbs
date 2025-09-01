@@ -1,0 +1,3393 @@
+module Aws::MediaConnect
+  module Types
+
+    class AddBridgeFlowSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_vpc_interface_attachment: Types::VpcInterfaceAttachment,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment?
+      attr_accessor name: String?
+    end
+
+    class AddBridgeNetworkOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?name: String,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor name: String?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor ttl: Integer?
+    end
+
+    class AddBridgeNetworkSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multicast_ip: String,
+        ?multicast_source_settings: Types::MulticastSourceSettings,
+        ?name: String,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multicast_ip: String?
+      attr_accessor multicast_source_settings: Types::MulticastSourceSettings?
+      attr_accessor name: String?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class AddBridgeOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_output: Types::AddBridgeNetworkOutputRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_output: Types::AddBridgeNetworkOutputRequest?
+    end
+
+    class AddBridgeOutputsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?outputs: Array[Types::AddBridgeOutputRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor outputs: Array[Types::AddBridgeOutputRequest]?
+    end
+
+    class AddBridgeOutputsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?outputs: Array[Types::BridgeOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor outputs: Array[Types::BridgeOutput]?
+    end
+
+    class AddBridgeSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_source: Types::AddBridgeFlowSourceRequest,
+        ?network_source: Types::AddBridgeNetworkSourceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_source: Types::AddBridgeFlowSourceRequest?
+      attr_accessor network_source: Types::AddBridgeNetworkSourceRequest?
+    end
+
+    class AddBridgeSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?sources: Array[Types::AddBridgeSourceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor sources: Array[Types::AddBridgeSourceRequest]?
+    end
+
+    class AddBridgeSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?sources: Array[Types::BridgeSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor sources: Array[Types::BridgeSource]?
+    end
+
+    class AddEgressGatewayBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_bitrate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_bitrate: Integer?
+    end
+
+    class AddFlowMediaStreamsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?media_streams: Array[Types::AddMediaStreamRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor media_streams: Array[Types::AddMediaStreamRequest]?
+    end
+
+    class AddFlowMediaStreamsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?media_streams: Array[Types::MediaStream],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor media_streams: Array[Types::MediaStream]?
+    end
+
+    class AddFlowOutputs420Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddFlowOutputsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?outputs: Array[Types::AddOutputRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor outputs: Array[Types::AddOutputRequest]?
+    end
+
+    class AddFlowOutputsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?outputs: Array[Types::Output],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor outputs: Array[Types::Output]?
+    end
+
+    class AddFlowSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?sources: Array[Types::SetSourceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor sources: Array[Types::SetSourceRequest]?
+    end
+
+    class AddFlowSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?sources: Array[Types::Source],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor sources: Array[Types::Source]?
+    end
+
+    class AddFlowVpcInterfacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?vpc_interfaces: Array[Types::VpcInterfaceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor vpc_interfaces: Array[Types::VpcInterfaceRequest]?
+    end
+
+    class AddFlowVpcInterfacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?vpc_interfaces: Array[Types::VpcInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor vpc_interfaces: Array[Types::VpcInterface]?
+    end
+
+    class AddIngressGatewayBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_bitrate: Integer,
+        ?max_outputs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_outputs: Integer?
+    end
+
+    class AddMaintenance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maintenance_day: String,
+        ?maintenance_start_hour: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maintenance_day: String?
+      attr_accessor maintenance_start_hour: String?
+    end
+
+    class AddMediaStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Types::MediaStreamAttributesRequest,
+        ?clock_rate: Integer,
+        ?description: String,
+        ?media_stream_id: Integer,
+        ?media_stream_name: String,
+        ?media_stream_type: String,
+        ?video_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Types::MediaStreamAttributesRequest?
+      attr_accessor clock_rate: Integer?
+      attr_accessor description: String?
+      attr_accessor media_stream_id: Integer?
+      attr_accessor media_stream_name: String?
+      attr_accessor media_stream_type: String?
+      attr_accessor video_format: String?
+    end
+
+    class AddOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_allow_list: Array[String],
+        ?description: String,
+        ?destination: String,
+        ?encryption: Types::Encryption,
+        ?max_latency: Integer,
+        ?media_stream_output_configurations: Array[Types::MediaStreamOutputConfigurationRequest],
+        ?min_latency: Integer,
+        ?name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?remote_id: String,
+        ?sender_control_port: Integer,
+        ?smoothing_latency: Integer,
+        ?stream_id: String,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+        ?output_status: String,
+        ?ndi_speed_hq_quality: Integer,
+        ?ndi_program_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_allow_list: Array[String]?
+      attr_accessor description: String?
+      attr_accessor destination: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor max_latency: Integer?
+      attr_accessor media_stream_output_configurations: Array[Types::MediaStreamOutputConfigurationRequest]?
+      attr_accessor min_latency: Integer?
+      attr_accessor name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor remote_id: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor smoothing_latency: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+      attr_accessor output_status: String?
+      attr_accessor ndi_speed_hq_quality: Integer?
+      attr_accessor ndi_program_name: String?
+    end
+
+    module Algorithm
+      aes128: String
+      aes192: String
+      aes256: String
+    end
+
+    class AudioMonitoringSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?silent_audio: Types::SilentAudio,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor silent_audio: Types::SilentAudio?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlackFrames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class Bridge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?bridge_messages: Array[Types::MessageDetail],
+        ?bridge_state: String,
+        ?egress_gateway_bridge: Types::EgressGatewayBridge,
+        ?ingress_gateway_bridge: Types::IngressGatewayBridge,
+        ?name: String,
+        ?outputs: Array[Types::BridgeOutput],
+        ?placement_arn: String,
+        ?source_failover_config: Types::FailoverConfig,
+        ?sources: Array[Types::BridgeSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor bridge_messages: Array[Types::MessageDetail]?
+      attr_accessor bridge_state: String?
+      attr_accessor egress_gateway_bridge: Types::EgressGatewayBridge?
+      attr_accessor ingress_gateway_bridge: Types::IngressGatewayBridge?
+      attr_accessor name: String?
+      attr_accessor outputs: Array[Types::BridgeOutput]?
+      attr_accessor placement_arn: String?
+      attr_accessor source_failover_config: Types::FailoverConfig?
+      attr_accessor sources: Array[Types::BridgeSource]?
+    end
+
+    class BridgeFlowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_source_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_source_arn: String?
+      attr_accessor name: String?
+    end
+
+    class BridgeFlowSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_vpc_interface_attachment: Types::VpcInterfaceAttachment,
+        ?name: String,
+        ?output_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment?
+      attr_accessor name: String?
+      attr_accessor output_arn: String?
+    end
+
+    class BridgeNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?name: String,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor name: String?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor ttl: Integer?
+    end
+
+    class BridgeNetworkSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multicast_ip: String,
+        ?multicast_source_settings: Types::MulticastSourceSettings,
+        ?name: String,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multicast_ip: String?
+      attr_accessor multicast_source_settings: Types::MulticastSourceSettings?
+      attr_accessor name: String?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class BridgeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_output: Types::BridgeFlowOutput,
+        ?network_output: Types::BridgeNetworkOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_output: Types::BridgeFlowOutput?
+      attr_accessor network_output: Types::BridgeNetworkOutput?
+    end
+
+    module BridgePlacement
+      AVAILABLE: String
+      LOCKED: String
+    end
+
+    class BridgeSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_source: Types::BridgeFlowSource,
+        ?network_source: Types::BridgeNetworkSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_source: Types::BridgeFlowSource?
+      attr_accessor network_source: Types::BridgeNetworkSource?
+    end
+
+    module BridgeState
+      CREATING: String
+      STANDBY: String
+      STARTING: String
+      DEPLOYING: String
+      ACTIVE: String
+      STOPPING: String
+      DELETING: String
+      DELETED: String
+      START_FAILED: String
+      START_PENDING: String
+      STOP_FAILED: String
+      UPDATING: String
+    end
+
+    module Colorimetry
+      BT601: String
+      BT709: String
+      BT2020: String
+      BT2100: String
+      ST2065_1: String
+      ST2065_3: String
+      XYZ: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectionStatus
+      CONNECTED: String
+      DISCONNECTED: String
+    end
+
+    module ContentQualityAnalysisState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class CreateBridge420Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_gateway_bridge: Types::AddEgressGatewayBridgeRequest,
+        ?ingress_gateway_bridge: Types::AddIngressGatewayBridgeRequest,
+        ?name: String,
+        ?outputs: Array[Types::AddBridgeOutputRequest],
+        ?placement_arn: String,
+        ?source_failover_config: Types::FailoverConfig,
+        ?sources: Array[Types::AddBridgeSourceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_gateway_bridge: Types::AddEgressGatewayBridgeRequest?
+      attr_accessor ingress_gateway_bridge: Types::AddIngressGatewayBridgeRequest?
+      attr_accessor name: String?
+      attr_accessor outputs: Array[Types::AddBridgeOutputRequest]?
+      attr_accessor placement_arn: String?
+      attr_accessor source_failover_config: Types::FailoverConfig?
+      attr_accessor sources: Array[Types::AddBridgeSourceRequest]?
+    end
+
+    class CreateBridgeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge: Types::Bridge,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge: Types::Bridge?
+    end
+
+    class CreateFlow420Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?entitlements: Array[Types::GrantEntitlementRequest],
+        ?media_streams: Array[Types::AddMediaStreamRequest],
+        ?name: String,
+        ?outputs: Array[Types::AddOutputRequest],
+        ?source: Types::SetSourceRequest,
+        ?source_failover_config: Types::FailoverConfig,
+        ?sources: Array[Types::SetSourceRequest],
+        ?vpc_interfaces: Array[Types::VpcInterfaceRequest],
+        ?maintenance: Types::AddMaintenance,
+        ?source_monitoring_config: Types::MonitoringConfig,
+        ?flow_size: String,
+        ?ndi_config: Types::NdiConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor entitlements: Array[Types::GrantEntitlementRequest]?
+      attr_accessor media_streams: Array[Types::AddMediaStreamRequest]?
+      attr_accessor name: String?
+      attr_accessor outputs: Array[Types::AddOutputRequest]?
+      attr_accessor source: Types::SetSourceRequest?
+      attr_accessor source_failover_config: Types::FailoverConfig?
+      attr_accessor sources: Array[Types::SetSourceRequest]?
+      attr_accessor vpc_interfaces: Array[Types::VpcInterfaceRequest]?
+      attr_accessor maintenance: Types::AddMaintenance?
+      attr_accessor source_monitoring_config: Types::MonitoringConfig?
+      attr_accessor flow_size: String?
+      attr_accessor ndi_config: Types::NdiConfig?
+    end
+
+    class CreateFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow: Types::Flow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow: Types::Flow?
+    end
+
+    class CreateGateway420Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_cidr_blocks: Array[String],
+        ?name: String,
+        ?networks: Array[Types::GatewayNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_cidr_blocks: Array[String]?
+      attr_accessor name: String?
+      attr_accessor networks: Array[Types::GatewayNetwork]?
+    end
+
+    class CreateGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway: Types::Gateway,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway: Types::Gateway?
+    end
+
+    class DeleteBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+    end
+
+    class DeleteBridgeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+    end
+
+    class DeleteFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class DeleteFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeregisterGatewayInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?force: bool,
+        ?gateway_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor force: bool?
+      attr_accessor gateway_instance_arn: String?
+    end
+
+    class DeregisterGatewayInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_instance_arn: String,
+        ?instance_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_instance_arn: String?
+      attr_accessor instance_state: String?
+    end
+
+    class DescribeBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+    end
+
+    class DescribeBridgeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge: Types::Bridge,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge: Types::Bridge?
+    end
+
+    class DescribeFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class DescribeFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow: Types::Flow,
+        ?messages: Types::Messages,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow: Types::Flow?
+      attr_accessor messages: Types::Messages?
+    end
+
+    class DescribeFlowSourceMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class DescribeFlowSourceMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?messages: Array[Types::MessageDetail],
+        ?timestamp: Time,
+        ?transport_media_info: Types::TransportMediaInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor messages: Array[Types::MessageDetail]?
+      attr_accessor timestamp: Time?
+      attr_accessor transport_media_info: Types::TransportMediaInfo?
+    end
+
+    class DescribeFlowSourceThumbnailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class DescribeFlowSourceThumbnailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thumbnail_details: Types::ThumbnailDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thumbnail_details: Types::ThumbnailDetails?
+    end
+
+    class DescribeGatewayInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_instance_arn: String?
+    end
+
+    class DescribeGatewayInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_instance: Types::GatewayInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_instance: Types::GatewayInstance?
+    end
+
+    class DescribeGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway: Types::Gateway,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway: Types::Gateway?
+    end
+
+    class DescribeOfferingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_arn: String?
+    end
+
+    class DescribeOfferingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering: Types::Offering,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering: Types::Offering?
+    end
+
+    class DescribeReservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_arn: String?
+    end
+
+    class DescribeReservationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation: Types::Reservation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation: Types::Reservation?
+    end
+
+    module DesiredState
+      ACTIVE: String
+      STANDBY: String
+      DELETED: String
+    end
+
+    class DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_ip: String,
+        ?destination_port: Integer,
+        ?interface: Types::Interface,
+        ?outbound_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_ip: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor interface: Types::Interface?
+      attr_accessor outbound_ip: String?
+    end
+
+    class DestinationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_ip: String,
+        ?destination_port: Integer,
+        ?interface: Types::InterfaceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_ip: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor interface: Types::InterfaceRequest?
+    end
+
+    module DurationUnits
+      MONTHS: String
+    end
+
+    class EgressGatewayBridge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?max_bitrate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor max_bitrate: Integer?
+    end
+
+    module EncoderProfile
+      main: String
+      high: String
+    end
+
+    module EncodingName
+      jxsv: String
+      raw: String
+      smpte291: String
+      pcm: String
+    end
+
+    class EncodingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compression_factor: Float,
+        ?encoder_profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compression_factor: Float?
+      attr_accessor encoder_profile: String?
+    end
+
+    class EncodingParametersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compression_factor: Float,
+        ?encoder_profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compression_factor: Float?
+      attr_accessor encoder_profile: String?
+    end
+
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?constant_initialization_vector: String,
+        ?device_id: String,
+        ?key_type: String,
+        ?region: String,
+        ?resource_id: String,
+        ?role_arn: String,
+        ?secret_arn: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor constant_initialization_vector: String?
+      attr_accessor device_id: String?
+      attr_accessor key_type: String?
+      attr_accessor region: String?
+      attr_accessor resource_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor url: String?
+    end
+
+    class Entitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_transfer_subscriber_fee_percent: Integer,
+        ?description: String,
+        ?encryption: Types::Encryption,
+        ?entitlement_arn: String,
+        ?entitlement_status: String,
+        ?name: String,
+        ?subscribers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_transfer_subscriber_fee_percent: Integer?
+      attr_accessor description: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor entitlement_arn: String?
+      attr_accessor entitlement_status: String?
+      attr_accessor name: String?
+      attr_accessor subscribers: Array[String]?
+    end
+
+    module EntitlementStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class FailoverConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failover_mode: String,
+        ?recovery_window: Integer,
+        ?source_priority: Types::SourcePriority,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failover_mode: String?
+      attr_accessor recovery_window: Integer?
+      attr_accessor source_priority: Types::SourcePriority?
+      attr_accessor state: String?
+    end
+
+    module FailoverMode
+      MERGE: String
+      FAILOVER: String
+    end
+
+    class Flow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?description: String,
+        ?egress_ip: String,
+        ?entitlements: Array[Types::Entitlement],
+        ?flow_arn: String,
+        ?media_streams: Array[Types::MediaStream],
+        ?name: String,
+        ?outputs: Array[Types::Output],
+        ?source: Types::Source,
+        ?source_failover_config: Types::FailoverConfig,
+        ?sources: Array[Types::Source],
+        ?status: String,
+        ?vpc_interfaces: Array[Types::VpcInterface],
+        ?maintenance: Types::Maintenance,
+        ?source_monitoring_config: Types::MonitoringConfig,
+        ?flow_size: String,
+        ?ndi_config: Types::NdiConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor description: String?
+      attr_accessor egress_ip: String?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor flow_arn: String?
+      attr_accessor media_streams: Array[Types::MediaStream]?
+      attr_accessor name: String?
+      attr_accessor outputs: Array[Types::Output]?
+      attr_accessor source: Types::Source?
+      attr_accessor source_failover_config: Types::FailoverConfig?
+      attr_accessor sources: Array[Types::Source]?
+      attr_accessor status: String?
+      attr_accessor vpc_interfaces: Array[Types::VpcInterface]?
+      attr_accessor maintenance: Types::Maintenance?
+      attr_accessor source_monitoring_config: Types::MonitoringConfig?
+      attr_accessor flow_size: String?
+      attr_accessor ndi_config: Types::NdiConfig?
+    end
+
+    module FlowSize
+      MEDIUM: String
+      LARGE: String
+    end
+
+    class Fmtp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_order: String,
+        ?colorimetry: String,
+        ?exact_framerate: String,
+        ?par: String,
+        ?range: String,
+        ?scan_mode: String,
+        ?tcs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_order: String?
+      attr_accessor colorimetry: String?
+      attr_accessor exact_framerate: String?
+      attr_accessor par: String?
+      attr_accessor range: String?
+      attr_accessor scan_mode: String?
+      attr_accessor tcs: String?
+    end
+
+    class FmtpRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_order: String,
+        ?colorimetry: String,
+        ?exact_framerate: String,
+        ?par: String,
+        ?range: String,
+        ?scan_mode: String,
+        ?tcs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_order: String?
+      attr_accessor colorimetry: String?
+      attr_accessor exact_framerate: String?
+      attr_accessor par: String?
+      attr_accessor range: String?
+      attr_accessor scan_mode: String?
+      attr_accessor tcs: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FrameResolution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frame_height: Integer,
+        ?frame_width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frame_height: Integer?
+      attr_accessor frame_width: Integer?
+    end
+
+    class FrozenFrames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class Gateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_cidr_blocks: Array[String],
+        ?gateway_arn: String,
+        ?gateway_messages: Array[Types::MessageDetail],
+        ?gateway_state: String,
+        ?name: String,
+        ?networks: Array[Types::GatewayNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_cidr_blocks: Array[String]?
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_messages: Array[Types::MessageDetail]?
+      attr_accessor gateway_state: String?
+      attr_accessor name: String?
+      attr_accessor networks: Array[Types::GatewayNetwork]?
+    end
+
+    class GatewayBridgeSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+    end
+
+    class GatewayInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_placement: String,
+        ?connection_status: String,
+        ?gateway_arn: String,
+        ?gateway_instance_arn: String,
+        ?instance_id: String,
+        ?instance_messages: Array[Types::MessageDetail],
+        ?instance_state: String,
+        ?running_bridge_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_placement: String?
+      attr_accessor connection_status: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_instance_arn: String?
+      attr_accessor instance_id: String?
+      attr_accessor instance_messages: Array[Types::MessageDetail]?
+      attr_accessor instance_state: String?
+      attr_accessor running_bridge_count: Integer?
+    end
+
+    class GatewayNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_block: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_block: String?
+      attr_accessor name: String?
+    end
+
+    module GatewayState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      ERROR: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class GrantEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_transfer_subscriber_fee_percent: Integer,
+        ?description: String,
+        ?encryption: Types::Encryption,
+        ?entitlement_status: String,
+        ?name: String,
+        ?subscribers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_transfer_subscriber_fee_percent: Integer?
+      attr_accessor description: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor entitlement_status: String?
+      attr_accessor name: String?
+      attr_accessor subscribers: Array[String]?
+    end
+
+    class GrantFlowEntitlements420Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GrantFlowEntitlementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::GrantEntitlementRequest],
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::GrantEntitlementRequest]?
+      attr_accessor flow_arn: String?
+    end
+
+    class GrantFlowEntitlementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::Entitlement],
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor flow_arn: String?
+    end
+
+    class IngressGatewayBridge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?max_bitrate: Integer,
+        ?max_outputs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_outputs: Integer?
+    end
+
+    class InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_ip: String,
+        ?input_port: Integer,
+        ?interface: Types::Interface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_ip: String?
+      attr_accessor input_port: Integer?
+      attr_accessor interface: Types::Interface?
+    end
+
+    class InputConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_port: Integer,
+        ?interface: Types::InterfaceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_port: Integer?
+      attr_accessor interface: Types::InterfaceRequest?
+    end
+
+    module InstanceState
+      REGISTERING: String
+      ACTIVE: String
+      DEREGISTERING: String
+      DEREGISTERED: String
+      REGISTRATION_ERROR: String
+      DEREGISTRATION_ERROR: String
+    end
+
+    class Interface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class InterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module KeyType
+      speke: String
+      static_key: String
+      srt_password: String
+    end
+
+    class ListBridgesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBridgesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridges: Array[Types::ListedBridge],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridges: Array[Types::ListedBridge]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntitlementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntitlementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::ListedEntitlement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::ListedEntitlement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFlowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFlowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flows: Array[Types::ListedFlow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flows: Array[Types::ListedFlow]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewayInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewayInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::ListedGatewayInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::ListedGatewayInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateways: Array[Types::ListedGateway],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateways: Array[Types::ListedGateway]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOfferingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOfferingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?offerings: Array[Types::Offering],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor offerings: Array[Types::Offering]?
+    end
+
+    class ListReservationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReservationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reservations: Array[Types::Reservation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reservations: Array[Types::Reservation]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListedBridge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?bridge_state: String,
+        ?bridge_type: String,
+        ?name: String,
+        ?placement_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor bridge_state: String?
+      attr_accessor bridge_type: String?
+      attr_accessor name: String?
+      attr_accessor placement_arn: String?
+    end
+
+    class ListedEntitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_transfer_subscriber_fee_percent: Integer,
+        ?entitlement_arn: String,
+        ?entitlement_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_transfer_subscriber_fee_percent: Integer?
+      attr_accessor entitlement_arn: String?
+      attr_accessor entitlement_name: String?
+    end
+
+    class ListedFlow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?description: String,
+        ?flow_arn: String,
+        ?name: String,
+        ?source_type: String,
+        ?status: String,
+        ?maintenance: Types::Maintenance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor description: String?
+      attr_accessor flow_arn: String?
+      attr_accessor name: String?
+      attr_accessor source_type: String?
+      attr_accessor status: String?
+      attr_accessor maintenance: Types::Maintenance?
+    end
+
+    class ListedGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_state: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_state: String?
+      attr_accessor name: String?
+    end
+
+    class ListedGatewayInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_instance_arn: String,
+        ?instance_id: String,
+        ?instance_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_instance_arn: String?
+      attr_accessor instance_id: String?
+      attr_accessor instance_state: String?
+    end
+
+    class Maintenance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maintenance_day: String,
+        ?maintenance_deadline: String,
+        ?maintenance_scheduled_date: String,
+        ?maintenance_start_hour: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maintenance_day: String?
+      attr_accessor maintenance_deadline: String?
+      attr_accessor maintenance_scheduled_date: String?
+      attr_accessor maintenance_start_hour: String?
+    end
+
+    module MaintenanceDay
+      Monday: String
+      Tuesday: String
+      Wednesday: String
+      Thursday: String
+      Friday: String
+      Saturday: String
+      Sunday: String
+    end
+
+    class MediaStream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Types::MediaStreamAttributes,
+        ?clock_rate: Integer,
+        ?description: String,
+        ?fmt: Integer,
+        ?media_stream_id: Integer,
+        ?media_stream_name: String,
+        ?media_stream_type: String,
+        ?video_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Types::MediaStreamAttributes?
+      attr_accessor clock_rate: Integer?
+      attr_accessor description: String?
+      attr_accessor fmt: Integer?
+      attr_accessor media_stream_id: Integer?
+      attr_accessor media_stream_name: String?
+      attr_accessor media_stream_type: String?
+      attr_accessor video_format: String?
+    end
+
+    class MediaStreamAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fmtp: Types::Fmtp,
+        ?lang: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fmtp: Types::Fmtp?
+      attr_accessor lang: String?
+    end
+
+    class MediaStreamAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fmtp: Types::FmtpRequest,
+        ?lang: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fmtp: Types::FmtpRequest?
+      attr_accessor lang: String?
+    end
+
+    class MediaStreamOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_configurations: Array[Types::DestinationConfiguration],
+        ?encoding_name: String,
+        ?encoding_parameters: Types::EncodingParameters,
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_configurations: Array[Types::DestinationConfiguration]?
+      attr_accessor encoding_name: String?
+      attr_accessor encoding_parameters: Types::EncodingParameters?
+      attr_accessor media_stream_name: String?
+    end
+
+    class MediaStreamOutputConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_configurations: Array[Types::DestinationConfigurationRequest],
+        ?encoding_name: String,
+        ?encoding_parameters: Types::EncodingParametersRequest,
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_configurations: Array[Types::DestinationConfigurationRequest]?
+      attr_accessor encoding_name: String?
+      attr_accessor encoding_parameters: Types::EncodingParametersRequest?
+      attr_accessor media_stream_name: String?
+    end
+
+    class MediaStreamSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoding_name: String,
+        ?input_configurations: Array[Types::InputConfiguration],
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoding_name: String?
+      attr_accessor input_configurations: Array[Types::InputConfiguration]?
+      attr_accessor media_stream_name: String?
+    end
+
+    class MediaStreamSourceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoding_name: String,
+        ?input_configurations: Array[Types::InputConfigurationRequest],
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoding_name: String?
+      attr_accessor input_configurations: Array[Types::InputConfigurationRequest]?
+      attr_accessor media_stream_name: String?
+    end
+
+    module MediaStreamType
+      video: String
+      audio: String
+      ancillary_data: String
+    end
+
+    class MessageDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class Messages
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[String]?
+    end
+
+    class MonitoringConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thumbnail_state: String,
+        ?audio_monitoring_settings: Array[Types::AudioMonitoringSetting],
+        ?content_quality_analysis_state: String,
+        ?video_monitoring_settings: Array[Types::VideoMonitoringSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thumbnail_state: String?
+      attr_accessor audio_monitoring_settings: Array[Types::AudioMonitoringSetting]?
+      attr_accessor content_quality_analysis_state: String?
+      attr_accessor video_monitoring_settings: Array[Types::VideoMonitoringSetting]?
+    end
+
+    class MulticastSourceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multicast_source_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multicast_source_ip: String?
+    end
+
+    class NdiConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ndi_state: String,
+        ?machine_name: String,
+        ?ndi_discovery_servers: Array[Types::NdiDiscoveryServerConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ndi_state: String?
+      attr_accessor machine_name: String?
+      attr_accessor ndi_discovery_servers: Array[Types::NdiDiscoveryServerConfig]?
+    end
+
+    class NdiDiscoveryServerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discovery_server_address: String,
+        ?discovery_server_port: Integer,
+        ?vpc_interface_adapter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discovery_server_address: String?
+      attr_accessor discovery_server_port: Integer?
+      attr_accessor vpc_interface_adapter: String?
+    end
+
+    module NdiState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module NetworkInterfaceType
+      ena: String
+      efa: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Offering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?duration: Integer,
+        ?duration_units: String,
+        ?offering_arn: String,
+        ?offering_description: String,
+        ?price_per_unit: String,
+        ?price_units: String,
+        ?resource_specification: Types::ResourceSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor duration: Integer?
+      attr_accessor duration_units: String?
+      attr_accessor offering_arn: String?
+      attr_accessor offering_description: String?
+      attr_accessor price_per_unit: String?
+      attr_accessor price_units: String?
+      attr_accessor resource_specification: Types::ResourceSpecification?
+    end
+
+    class Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_transfer_subscriber_fee_percent: Integer,
+        ?description: String,
+        ?destination: String,
+        ?encryption: Types::Encryption,
+        ?entitlement_arn: String,
+        ?listener_address: String,
+        ?media_live_input_arn: String,
+        ?media_stream_output_configurations: Array[Types::MediaStreamOutputConfiguration],
+        ?name: String,
+        ?output_arn: String,
+        ?port: Integer,
+        ?transport: Types::Transport,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+        ?bridge_arn: String,
+        ?bridge_ports: Array[Integer],
+        ?output_status: String,
+        ?peer_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_transfer_subscriber_fee_percent: Integer?
+      attr_accessor description: String?
+      attr_accessor destination: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor entitlement_arn: String?
+      attr_accessor listener_address: String?
+      attr_accessor media_live_input_arn: String?
+      attr_accessor media_stream_output_configurations: Array[Types::MediaStreamOutputConfiguration]?
+      attr_accessor name: String?
+      attr_accessor output_arn: String?
+      attr_accessor port: Integer?
+      attr_accessor transport: Types::Transport?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+      attr_accessor bridge_arn: String?
+      attr_accessor bridge_ports: Array[Integer]?
+      attr_accessor output_status: String?
+      attr_accessor peer_ip_address: String?
+    end
+
+    module OutputStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module PriceUnits
+      HOURLY: String
+    end
+
+    module Protocol
+      zixi_push: String
+      rtp_fec: String
+      rtp: String
+      zixi_pull: String
+      rist: String
+      st2110_jpegxs: String
+      cdi: String
+      srt_listener: String
+      srt_caller: String
+      fujitsu_qos: String
+      udp: String
+      ndi_speed_hq: String
+    end
+
+    class PurchaseOfferingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_arn: String,
+        ?reservation_name: String,
+        ?start: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_arn: String?
+      attr_accessor reservation_name: String?
+      attr_accessor start: String?
+    end
+
+    class PurchaseOfferingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation: Types::Reservation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation: Types::Reservation?
+    end
+
+    module Range
+      NARROW: String
+      FULL: String
+      FULLPROTECT: String
+    end
+
+    class RemoveBridgeOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?output_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor output_name: String?
+    end
+
+    class RemoveBridgeOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?output_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor output_name: String?
+    end
+
+    class RemoveBridgeSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor source_name: String?
+    end
+
+    class RemoveBridgeSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor source_name: String?
+    end
+
+    class RemoveFlowMediaStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor media_stream_name: String?
+    end
+
+    class RemoveFlowMediaStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?media_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor media_stream_name: String?
+    end
+
+    class RemoveFlowOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?output_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor output_arn: String?
+    end
+
+    class RemoveFlowOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?output_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor output_arn: String?
+    end
+
+    class RemoveFlowSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor source_arn: String?
+    end
+
+    class RemoveFlowSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor source_arn: String?
+    end
+
+    class RemoveFlowVpcInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?vpc_interface_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor vpc_interface_name: String?
+    end
+
+    class RemoveFlowVpcInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?non_deleted_network_interface_ids: Array[String],
+        ?vpc_interface_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor non_deleted_network_interface_ids: Array[String]?
+      attr_accessor vpc_interface_name: String?
+    end
+
+    class Reservation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?duration: Integer,
+        ?duration_units: String,
+        ?end: String,
+        ?offering_arn: String,
+        ?offering_description: String,
+        ?price_per_unit: String,
+        ?price_units: String,
+        ?reservation_arn: String,
+        ?reservation_name: String,
+        ?reservation_state: String,
+        ?resource_specification: Types::ResourceSpecification,
+        ?start: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor duration: Integer?
+      attr_accessor duration_units: String?
+      attr_accessor end: String?
+      attr_accessor offering_arn: String?
+      attr_accessor offering_description: String?
+      attr_accessor price_per_unit: String?
+      attr_accessor price_units: String?
+      attr_accessor reservation_arn: String?
+      attr_accessor reservation_name: String?
+      attr_accessor reservation_state: String?
+      attr_accessor resource_specification: Types::ResourceSpecification?
+      attr_accessor start: String?
+    end
+
+    module ReservationState
+      ACTIVE: String
+      EXPIRED: String
+      PROCESSING: String
+      CANCELED: String
+    end
+
+    class ResourceSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_bitrate: Integer,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_bitrate: Integer?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      Mbps_Outbound_Bandwidth: String
+    end
+
+    class RevokeFlowEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement_arn: String,
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement_arn: String?
+      attr_accessor flow_arn: String?
+    end
+
+    class RevokeFlowEntitlementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement_arn: String,
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement_arn: String?
+      attr_accessor flow_arn: String?
+    end
+
+    module ScanMode
+      progressive: String
+      interlace: String
+      progressive_segmented_frame: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetGatewayBridgeSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+    end
+
+    class SetSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decryption: Types::Encryption,
+        ?description: String,
+        ?entitlement_arn: String,
+        ?ingest_port: Integer,
+        ?max_bitrate: Integer,
+        ?max_latency: Integer,
+        ?max_sync_buffer: Integer,
+        ?media_stream_source_configurations: Array[Types::MediaStreamSourceConfigurationRequest],
+        ?min_latency: Integer,
+        ?name: String,
+        ?protocol: String,
+        ?sender_control_port: Integer,
+        ?sender_ip_address: String,
+        ?source_listener_address: String,
+        ?source_listener_port: Integer,
+        ?stream_id: String,
+        ?vpc_interface_name: String,
+        ?whitelist_cidr: String,
+        ?gateway_bridge_source: Types::SetGatewayBridgeSourceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decryption: Types::Encryption?
+      attr_accessor description: String?
+      attr_accessor entitlement_arn: String?
+      attr_accessor ingest_port: Integer?
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_latency: Integer?
+      attr_accessor max_sync_buffer: Integer?
+      attr_accessor media_stream_source_configurations: Array[Types::MediaStreamSourceConfigurationRequest]?
+      attr_accessor min_latency: Integer?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor sender_ip_address: String?
+      attr_accessor source_listener_address: String?
+      attr_accessor source_listener_port: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor vpc_interface_name: String?
+      attr_accessor whitelist_cidr: String?
+      attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest?
+    end
+
+    class SilentAudio
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_transfer_subscriber_fee_percent: Integer,
+        ?decryption: Types::Encryption,
+        ?description: String,
+        ?entitlement_arn: String,
+        ?ingest_ip: String,
+        ?ingest_port: Integer,
+        ?media_stream_source_configurations: Array[Types::MediaStreamSourceConfiguration],
+        ?name: String,
+        ?sender_control_port: Integer,
+        ?sender_ip_address: String,
+        ?source_arn: String,
+        ?transport: Types::Transport,
+        ?vpc_interface_name: String,
+        ?whitelist_cidr: String,
+        ?gateway_bridge_source: Types::GatewayBridgeSource,
+        ?peer_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_transfer_subscriber_fee_percent: Integer?
+      attr_accessor decryption: Types::Encryption?
+      attr_accessor description: String?
+      attr_accessor entitlement_arn: String?
+      attr_accessor ingest_ip: String?
+      attr_accessor ingest_port: Integer?
+      attr_accessor media_stream_source_configurations: Array[Types::MediaStreamSourceConfiguration]?
+      attr_accessor name: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor sender_ip_address: String?
+      attr_accessor source_arn: String?
+      attr_accessor transport: Types::Transport?
+      attr_accessor vpc_interface_name: String?
+      attr_accessor whitelist_cidr: String?
+      attr_accessor gateway_bridge_source: Types::GatewayBridgeSource?
+      attr_accessor peer_ip_address: String?
+    end
+
+    class SourcePriority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_source: String?
+    end
+
+    module SourceType
+      OWNED: String
+      ENTITLED: String
+    end
+
+    class StartFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class StartFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor status: String?
+    end
+
+    module State
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module Status
+      STANDBY: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      STARTING: String
+      STOPPING: String
+      ERROR: String
+    end
+
+    class StopFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+    end
+
+    class StopFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor status: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module Tcs
+      SDR: String
+      PQ: String
+      HLG: String
+      LINEAR: String
+      BT2100LINPQ: String
+      BT2100LINHLG: String
+      ST2065_1: String
+      ST428_1: String
+      DENSITY: String
+    end
+
+    class ThumbnailDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?thumbnail: String,
+        ?thumbnail_messages: Array[Types::MessageDetail],
+        ?timecode: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor thumbnail: String?
+      attr_accessor thumbnail_messages: Array[Types::MessageDetail]?
+      attr_accessor timecode: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module ThumbnailState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Transport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_allow_list: Array[String],
+        ?max_bitrate: Integer,
+        ?max_latency: Integer,
+        ?max_sync_buffer: Integer,
+        ?min_latency: Integer,
+        ?protocol: String,
+        ?remote_id: String,
+        ?sender_control_port: Integer,
+        ?sender_ip_address: String,
+        ?smoothing_latency: Integer,
+        ?source_listener_address: String,
+        ?source_listener_port: Integer,
+        ?stream_id: String,
+        ?ndi_speed_hq_quality: Integer,
+        ?ndi_program_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_allow_list: Array[String]?
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_latency: Integer?
+      attr_accessor max_sync_buffer: Integer?
+      attr_accessor min_latency: Integer?
+      attr_accessor protocol: String?
+      attr_accessor remote_id: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor sender_ip_address: String?
+      attr_accessor smoothing_latency: Integer?
+      attr_accessor source_listener_address: String?
+      attr_accessor source_listener_port: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor ndi_speed_hq_quality: Integer?
+      attr_accessor ndi_program_name: String?
+    end
+
+    class TransportMediaInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?programs: Array[Types::TransportStreamProgram],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor programs: Array[Types::TransportStreamProgram]?
+    end
+
+    class TransportStream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Integer,
+        ?codec: String,
+        ?frame_rate: String,
+        ?frame_resolution: Types::FrameResolution,
+        ?pid: Integer,
+        ?sample_rate: Integer,
+        ?sample_size: Integer,
+        ?stream_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Integer?
+      attr_accessor codec: String?
+      attr_accessor frame_rate: String?
+      attr_accessor frame_resolution: Types::FrameResolution?
+      attr_accessor pid: Integer?
+      attr_accessor sample_rate: Integer?
+      attr_accessor sample_size: Integer?
+      attr_accessor stream_type: String?
+    end
+
+    class TransportStreamProgram
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pcr_pid: Integer,
+        ?program_name: String,
+        ?program_number: Integer,
+        ?program_pid: Integer,
+        ?streams: Array[Types::TransportStream],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pcr_pid: Integer?
+      attr_accessor program_name: String?
+      attr_accessor program_number: Integer?
+      attr_accessor program_pid: Integer?
+      attr_accessor streams: Array[Types::TransportStream]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateBridgeFlowSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_vpc_interface_attachment: Types::VpcInterfaceAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment?
+    end
+
+    class UpdateBridgeNetworkOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor ttl: Integer?
+    end
+
+    class UpdateBridgeNetworkSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multicast_ip: String,
+        ?multicast_source_settings: Types::MulticastSourceSettings,
+        ?network_name: String,
+        ?port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multicast_ip: String?
+      attr_accessor multicast_source_settings: Types::MulticastSourceSettings?
+      attr_accessor network_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class UpdateBridgeOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?network_output: Types::UpdateBridgeNetworkOutputRequest,
+        ?output_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor network_output: Types::UpdateBridgeNetworkOutputRequest?
+      attr_accessor output_name: String?
+    end
+
+    class UpdateBridgeOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?output: Types::BridgeOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor output: Types::BridgeOutput?
+    end
+
+    class UpdateBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?egress_gateway_bridge: Types::UpdateEgressGatewayBridgeRequest,
+        ?ingress_gateway_bridge: Types::UpdateIngressGatewayBridgeRequest,
+        ?source_failover_config: Types::UpdateFailoverConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor egress_gateway_bridge: Types::UpdateEgressGatewayBridgeRequest?
+      attr_accessor ingress_gateway_bridge: Types::UpdateIngressGatewayBridgeRequest?
+      attr_accessor source_failover_config: Types::UpdateFailoverConfig?
+    end
+
+    class UpdateBridgeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge: Types::Bridge,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge: Types::Bridge?
+    end
+
+    class UpdateBridgeSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?flow_source: Types::UpdateBridgeFlowSourceRequest,
+        ?network_source: Types::UpdateBridgeNetworkSourceRequest,
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor flow_source: Types::UpdateBridgeFlowSourceRequest?
+      attr_accessor network_source: Types::UpdateBridgeNetworkSourceRequest?
+      attr_accessor source_name: String?
+    end
+
+    class UpdateBridgeSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?source: Types::BridgeSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor source: Types::BridgeSource?
+    end
+
+    class UpdateBridgeStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?desired_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor desired_state: String?
+    end
+
+    class UpdateBridgeStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?desired_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor desired_state: String?
+    end
+
+    class UpdateEgressGatewayBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_bitrate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_bitrate: Integer?
+    end
+
+    class UpdateEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?constant_initialization_vector: String,
+        ?device_id: String,
+        ?key_type: String,
+        ?region: String,
+        ?resource_id: String,
+        ?role_arn: String,
+        ?secret_arn: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor constant_initialization_vector: String?
+      attr_accessor device_id: String?
+      attr_accessor key_type: String?
+      attr_accessor region: String?
+      attr_accessor resource_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor url: String?
+    end
+
+    class UpdateFailoverConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failover_mode: String,
+        ?recovery_window: Integer,
+        ?source_priority: Types::SourcePriority,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failover_mode: String?
+      attr_accessor recovery_window: Integer?
+      attr_accessor source_priority: Types::SourcePriority?
+      attr_accessor state: String?
+    end
+
+    class UpdateFlowEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?encryption: Types::UpdateEncryption,
+        ?entitlement_arn: String,
+        ?entitlement_status: String,
+        ?flow_arn: String,
+        ?subscribers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor encryption: Types::UpdateEncryption?
+      attr_accessor entitlement_arn: String?
+      attr_accessor entitlement_status: String?
+      attr_accessor flow_arn: String?
+      attr_accessor subscribers: Array[String]?
+    end
+
+    class UpdateFlowEntitlementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement: Types::Entitlement,
+        ?flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement: Types::Entitlement?
+      attr_accessor flow_arn: String?
+    end
+
+    class UpdateFlowMediaStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Types::MediaStreamAttributesRequest,
+        ?clock_rate: Integer,
+        ?description: String,
+        ?flow_arn: String,
+        ?media_stream_name: String,
+        ?media_stream_type: String,
+        ?video_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Types::MediaStreamAttributesRequest?
+      attr_accessor clock_rate: Integer?
+      attr_accessor description: String?
+      attr_accessor flow_arn: String?
+      attr_accessor media_stream_name: String?
+      attr_accessor media_stream_type: String?
+      attr_accessor video_format: String?
+    end
+
+    class UpdateFlowMediaStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?media_stream: Types::MediaStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor media_stream: Types::MediaStream?
+    end
+
+    class UpdateFlowOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_allow_list: Array[String],
+        ?description: String,
+        ?destination: String,
+        ?encryption: Types::UpdateEncryption,
+        ?flow_arn: String,
+        ?max_latency: Integer,
+        ?media_stream_output_configurations: Array[Types::MediaStreamOutputConfigurationRequest],
+        ?min_latency: Integer,
+        ?output_arn: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?remote_id: String,
+        ?sender_control_port: Integer,
+        ?sender_ip_address: String,
+        ?smoothing_latency: Integer,
+        ?stream_id: String,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+        ?output_status: String,
+        ?ndi_program_name: String,
+        ?ndi_speed_hq_quality: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_allow_list: Array[String]?
+      attr_accessor description: String?
+      attr_accessor destination: String?
+      attr_accessor encryption: Types::UpdateEncryption?
+      attr_accessor flow_arn: String?
+      attr_accessor max_latency: Integer?
+      attr_accessor media_stream_output_configurations: Array[Types::MediaStreamOutputConfigurationRequest]?
+      attr_accessor min_latency: Integer?
+      attr_accessor output_arn: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor remote_id: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor sender_ip_address: String?
+      attr_accessor smoothing_latency: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+      attr_accessor output_status: String?
+      attr_accessor ndi_program_name: String?
+      attr_accessor ndi_speed_hq_quality: Integer?
+    end
+
+    class UpdateFlowOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?output: Types::Output,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor output: Types::Output?
+    end
+
+    class UpdateFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?source_failover_config: Types::UpdateFailoverConfig,
+        ?maintenance: Types::UpdateMaintenance,
+        ?source_monitoring_config: Types::MonitoringConfig,
+        ?ndi_config: Types::NdiConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor source_failover_config: Types::UpdateFailoverConfig?
+      attr_accessor maintenance: Types::UpdateMaintenance?
+      attr_accessor source_monitoring_config: Types::MonitoringConfig?
+      attr_accessor ndi_config: Types::NdiConfig?
+    end
+
+    class UpdateFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow: Types::Flow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow: Types::Flow?
+    end
+
+    class UpdateFlowSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decryption: Types::UpdateEncryption,
+        ?description: String,
+        ?entitlement_arn: String,
+        ?flow_arn: String,
+        ?ingest_port: Integer,
+        ?max_bitrate: Integer,
+        ?max_latency: Integer,
+        ?max_sync_buffer: Integer,
+        ?media_stream_source_configurations: Array[Types::MediaStreamSourceConfigurationRequest],
+        ?min_latency: Integer,
+        ?protocol: String,
+        ?sender_control_port: Integer,
+        ?sender_ip_address: String,
+        ?source_arn: String,
+        ?source_listener_address: String,
+        ?source_listener_port: Integer,
+        ?stream_id: String,
+        ?vpc_interface_name: String,
+        ?whitelist_cidr: String,
+        ?gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decryption: Types::UpdateEncryption?
+      attr_accessor description: String?
+      attr_accessor entitlement_arn: String?
+      attr_accessor flow_arn: String?
+      attr_accessor ingest_port: Integer?
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_latency: Integer?
+      attr_accessor max_sync_buffer: Integer?
+      attr_accessor media_stream_source_configurations: Array[Types::MediaStreamSourceConfigurationRequest]?
+      attr_accessor min_latency: Integer?
+      attr_accessor protocol: String?
+      attr_accessor sender_control_port: Integer?
+      attr_accessor sender_ip_address: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_listener_address: String?
+      attr_accessor source_listener_port: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor vpc_interface_name: String?
+      attr_accessor whitelist_cidr: String?
+      attr_accessor gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest?
+    end
+
+    class UpdateFlowSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?source: Types::Source,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor source: Types::Source?
+    end
+
+    class UpdateGatewayBridgeSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_arn: String,
+        ?vpc_interface_attachment: Types::VpcInterfaceAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_arn: String?
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment?
+    end
+
+    class UpdateGatewayInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_placement: String,
+        ?gateway_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_placement: String?
+      attr_accessor gateway_instance_arn: String?
+    end
+
+    class UpdateGatewayInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bridge_placement: String,
+        ?gateway_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bridge_placement: String?
+      attr_accessor gateway_instance_arn: String?
+    end
+
+    class UpdateIngressGatewayBridgeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_bitrate: Integer,
+        ?max_outputs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_bitrate: Integer?
+      attr_accessor max_outputs: Integer?
+    end
+
+    class UpdateMaintenance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maintenance_day: String,
+        ?maintenance_scheduled_date: String,
+        ?maintenance_start_hour: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maintenance_day: String?
+      attr_accessor maintenance_scheduled_date: String?
+      attr_accessor maintenance_start_hour: String?
+    end
+
+    class VideoMonitoringSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?black_frames: Types::BlackFrames,
+        ?frozen_frames: Types::FrozenFrames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor black_frames: Types::BlackFrames?
+      attr_accessor frozen_frames: Types::FrozenFrames?
+    end
+
+    class VpcInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?network_interface_ids: Array[String],
+        ?network_interface_type: String,
+        ?role_arn: String,
+        ?security_group_ids: Array[String],
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor network_interface_ids: Array[String]?
+      attr_accessor network_interface_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_id: String?
+    end
+
+    class VpcInterfaceAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_interface_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_interface_name: String?
+    end
+
+    class VpcInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?network_interface_type: String,
+        ?role_arn: String,
+        ?security_group_ids: Array[String],
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor network_interface_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_id: String?
+    end
+  end
+end

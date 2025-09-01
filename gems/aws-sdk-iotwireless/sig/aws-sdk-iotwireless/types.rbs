@@ -1,0 +1,5454 @@
+module Aws::IoTWireless
+  module Types
+
+    class AbpV10X
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_addr: String,
+        ?session_keys: Types::SessionKeysAbpV1_0_x,
+        ?f_cnt_start: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_addr: String?
+      attr_accessor session_keys: Types::SessionKeysAbpV1_0_x?
+      attr_accessor f_cnt_start: Integer?
+    end
+
+    class AbpV11
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_addr: String,
+        ?session_keys: Types::SessionKeysAbpV1_1,
+        ?f_cnt_start: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_addr: String?
+      attr_accessor session_keys: Types::SessionKeysAbpV1_1?
+      attr_accessor f_cnt_start: Integer?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Accuracy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal_accuracy: Float,
+        ?vertical_accuracy: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal_accuracy: Float?
+      attr_accessor vertical_accuracy: Float?
+    end
+
+    module AggregationPeriod
+      OneHour: String
+      OneDay: String
+      OneWeek: String
+    end
+
+    class ApplicationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_port: Integer,
+        ?type: String,
+        ?destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_port: Integer?
+      attr_accessor type: String?
+      attr_accessor destination_name: String?
+    end
+
+    module ApplicationConfigType
+      SemtechGeoLocation: String
+    end
+
+    class AssociateAwsAccountWithPartnerAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkAccountInfo,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkAccountInfo?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AssociateAwsAccountWithPartnerAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkAccountInfo,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkAccountInfo?
+      attr_accessor arn: String?
+    end
+
+    class AssociateMulticastGroupWithFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?multicast_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor multicast_group_id: String?
+    end
+
+    class AssociateMulticastGroupWithFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateWirelessDeviceWithFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?wireless_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor wireless_device_id: String?
+    end
+
+    class AssociateWirelessDeviceWithFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateWirelessDeviceWithMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?wireless_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor wireless_device_id: String?
+    end
+
+    class AssociateWirelessDeviceWithMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateWirelessDeviceWithThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor thing_arn: String?
+    end
+
+    class AssociateWirelessDeviceWithThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateWirelessGatewayWithCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?iot_certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor iot_certificate_id: String?
+    end
+
+    class AssociateWirelessGatewayWithCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_certificate_id: String?
+    end
+
+    class AssociateWirelessGatewayWithThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor thing_arn: String?
+    end
+
+    class AssociateWirelessGatewayWithThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module BatteryLevel
+      NORMAL: String
+      LOW: String
+      CRITICAL: String
+    end
+
+    class Beaconing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_rate: Integer,
+        ?frequencies: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_rate: Integer?
+      attr_accessor frequencies: Array[Integer]?
+    end
+
+    class CancelMulticastGroupSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CancelMulticastGroupSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CdmaLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pn_offset: Integer,
+        ?cdma_channel: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pn_offset: Integer?
+      attr_accessor cdma_channel: Integer?
+    end
+
+    class CdmaNmrObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pn_offset: Integer,
+        ?cdma_channel: Integer,
+        ?pilot_power: Integer,
+        ?base_station_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pn_offset: Integer?
+      attr_accessor cdma_channel: Integer?
+      attr_accessor pilot_power: Integer?
+      attr_accessor base_station_id: Integer?
+    end
+
+    class CdmaObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_id: Integer,
+        ?network_id: Integer,
+        ?base_station_id: Integer,
+        ?registration_zone: Integer,
+        ?cdma_local_id: Types::CdmaLocalId,
+        ?pilot_power: Integer,
+        ?base_lat: Float,
+        ?base_lng: Float,
+        ?cdma_nmr: Array[Types::CdmaNmrObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_id: Integer?
+      attr_accessor network_id: Integer?
+      attr_accessor base_station_id: Integer?
+      attr_accessor registration_zone: Integer?
+      attr_accessor cdma_local_id: Types::CdmaLocalId?
+      attr_accessor pilot_power: Integer?
+      attr_accessor base_lat: Float?
+      attr_accessor base_lng: Float?
+      attr_accessor cdma_nmr: Array[Types::CdmaNmrObj]?
+    end
+
+    class CellTowers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gsm: Array[Types::GsmObj],
+        ?wcdma: Array[Types::WcdmaObj],
+        ?tdscdma: Array[Types::TdscdmaObj],
+        ?lte: Array[Types::LteObj],
+        ?cdma: Array[Types::CdmaObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gsm: Array[Types::GsmObj]?
+      attr_accessor wcdma: Array[Types::WcdmaObj]?
+      attr_accessor tdscdma: Array[Types::TdscdmaObj]?
+      attr_accessor lte: Array[Types::LteObj]?
+      attr_accessor cdma: Array[Types::CdmaObj]?
+    end
+
+    class CertificateList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_alg: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_alg: String?
+      attr_accessor value: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ConnectionStatus
+      CONNECTED: String
+      DISCONNECTED: String
+    end
+
+    class ConnectionStatusEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANConnectionStatusEventNotificationConfigurations,
+        ?wireless_gateway_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANConnectionStatusEventNotificationConfigurations?
+      attr_accessor wireless_gateway_id_event_topic: String?
+    end
+
+    class ConnectionStatusResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANConnectionStatusResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANConnectionStatusResourceTypeEventConfiguration?
+    end
+
+    class CreateDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?expression_type: String,
+        ?expression: String,
+        ?description: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor expression_type: String?
+      attr_accessor expression: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateDeviceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?lo_ra_wan: Types::LoRaWANDeviceProfile,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+        ?sidewalk: Types::SidewalkCreateDeviceProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceProfile?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+      attr_accessor sidewalk: Types::SidewalkCreateDeviceProfile?
+    end
+
+    class CreateDeviceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?client_request_token: String,
+        ?lo_ra_wan: Types::LoRaWANFuotaTask,
+        ?firmware_update_image: String,
+        ?firmware_update_role: String,
+        ?tags: Array[Types::Tag],
+        ?redundancy_percent: Integer,
+        ?fragment_size_bytes: Integer,
+        ?fragment_interval_ms: Integer,
+        ?descriptor: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_request_token: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTask?
+      attr_accessor firmware_update_image: String?
+      attr_accessor firmware_update_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor redundancy_percent: Integer?
+      attr_accessor fragment_size_bytes: Integer?
+      attr_accessor fragment_interval_ms: Integer?
+      attr_accessor descriptor: String?
+    end
+
+    class CreateFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?client_request_token: String,
+        ?lo_ra_wan: Types::LoRaWANMulticast,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_request_token: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticast?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateNetworkAnalyzerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?trace_content: Types::TraceContent,
+        ?wireless_devices: Array[String],
+        ?wireless_gateways: Array[String],
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+        ?multicast_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor trace_content: Types::TraceContent?
+      attr_accessor wireless_devices: Array[String]?
+      attr_accessor wireless_gateways: Array[String]?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+      attr_accessor multicast_groups: Array[String]?
+    end
+
+    class CreateNetworkAnalyzerConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateServiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?lo_ra_wan: Types::LoRaWANServiceProfile,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANServiceProfile?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateServiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?description: String,
+        ?destination_name: String,
+        ?client_request_token: String,
+        ?lo_ra_wan: Types::LoRaWANDevice,
+        ?tags: Array[Types::Tag],
+        ?positioning: String,
+        ?sidewalk: Types::SidewalkCreateWirelessDevice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor destination_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANDevice?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor positioning: String?
+      attr_accessor sidewalk: Types::SidewalkCreateWirelessDevice?
+    end
+
+    class CreateWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateWirelessGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANGateway,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateWirelessGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateWirelessGatewayTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_create_tasks: bool,
+        ?name: String,
+        ?update: Types::UpdateWirelessGatewayTaskCreate,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_create_tasks: bool?
+      attr_accessor name: String?
+      attr_accessor update: Types::UpdateWirelessGatewayTaskCreate?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWirelessGatewayTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateWirelessGatewayTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?wireless_gateway_task_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor wireless_gateway_task_definition_id: String?
+    end
+
+    class CreateWirelessGatewayTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_gateway_task_definition_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_gateway_task_definition_id: String?
+      attr_accessor status: String?
+    end
+
+    class DakCertificateMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+        ?max_allowed_signature: Integer,
+        ?factory_support: bool,
+        ?ap_id: String,
+        ?device_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+      attr_accessor max_allowed_signature: Integer?
+      attr_accessor factory_support: bool?
+      attr_accessor ap_id: String?
+      attr_accessor device_type_id: String?
+    end
+
+    class DeleteDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDeviceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteDeviceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNetworkAnalyzerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_name: String?
+    end
+
+    class DeleteNetworkAnalyzerConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueuedMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message_id: String,
+        ?wireless_device_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message_id: String?
+      attr_accessor wireless_device_type: String?
+    end
+
+    class DeleteQueuedMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteServiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWirelessGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWirelessGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWirelessGatewayTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWirelessGatewayTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWirelessGatewayTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWirelessGatewayTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?wireless_device_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor wireless_device_type: String?
+    end
+
+    class DeregisterWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Destinations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?expression_type: String,
+        ?expression: String,
+        ?description: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor expression_type: String?
+      attr_accessor expression: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+    end
+
+    class DeviceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+    end
+
+    module DeviceProfileType
+      Sidewalk: String
+      LoRaWAN: String
+    end
+
+    class DeviceRegistrationStateEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkEventNotificationConfigurations,
+        ?wireless_device_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations?
+      attr_accessor wireless_device_id_event_topic: String?
+    end
+
+    class DeviceRegistrationStateResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration?
+    end
+
+    module DeviceState
+      PROVISIONED: String
+      REGISTEREDNOTSEEN: String
+      REGISTEREDREACHABLE: String
+      REGISTEREDUNREACHABLE: String
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module DimensionName
+      DeviceId: String
+      GatewayId: String
+    end
+
+    class DisassociateAwsAccountFromPartnerAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner_account_id: String,
+        ?partner_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_account_id: String?
+      attr_accessor partner_type: String?
+    end
+
+    class DisassociateAwsAccountFromPartnerAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMulticastGroupFromFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?multicast_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor multicast_group_id: String?
+    end
+
+    class DisassociateMulticastGroupFromFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWirelessDeviceFromFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?wireless_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor wireless_device_id: String?
+    end
+
+    class DisassociateWirelessDeviceFromFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWirelessDeviceFromMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?wireless_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor wireless_device_id: String?
+    end
+
+    class DisassociateWirelessDeviceFromMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWirelessDeviceFromThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DisassociateWirelessDeviceFromThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWirelessGatewayFromCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DisassociateWirelessGatewayFromCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWirelessGatewayFromThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DisassociateWirelessGatewayFromThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DlClass
+      ClassB: String
+      ClassC: String
+    end
+
+    module DownlinkMode
+      SEQUENTIAL: String
+      CONCURRENT: String
+      USING_UPLINK_GATEWAY: String
+    end
+
+    class DownlinkQueueMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?transmit_mode: Integer,
+        ?received_at: String,
+        ?lo_ra_wan: Types::LoRaWANSendDataToDevice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor transmit_mode: Integer?
+      attr_accessor received_at: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANSendDataToDevice?
+    end
+
+    module Event
+      DISCOVERED: String
+      LOST: String
+      ACK: String
+      NACK: String
+      PASSTHROUGH: String
+    end
+
+    class EventConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?identifier_type: String,
+        ?partner_type: String,
+        ?events: Types::EventNotificationItemConfigurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor identifier_type: String?
+      attr_accessor partner_type: String?
+      attr_accessor events: Types::EventNotificationItemConfigurations?
+    end
+
+    class EventNotificationItemConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_registration_state: Types::DeviceRegistrationStateEventConfiguration,
+        ?proximity: Types::ProximityEventConfiguration,
+        ?join: Types::JoinEventConfiguration,
+        ?connection_status: Types::ConnectionStatusEventConfiguration,
+        ?message_delivery_status: Types::MessageDeliveryStatusEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration?
+      attr_accessor proximity: Types::ProximityEventConfiguration?
+      attr_accessor join: Types::JoinEventConfiguration?
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration?
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration?
+    end
+
+    module EventNotificationPartnerType
+      Sidewalk: String
+    end
+
+    module EventNotificationResourceType
+      SidewalkAccount: String
+      WirelessDevice: String
+      WirelessGateway: String
+    end
+
+    module EventNotificationTopicStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    module ExpressionType
+      RuleName: String
+      MqttTopic: String
+    end
+
+    class FPorts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fuota: Integer,
+        ?multicast: Integer,
+        ?clock_sync: Integer,
+        ?positioning: Types::Positioning,
+        ?applications: Array[Types::ApplicationConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fuota: Integer?
+      attr_accessor multicast: Integer?
+      attr_accessor clock_sync: Integer?
+      attr_accessor positioning: Types::Positioning?
+      attr_accessor applications: Array[Types::ApplicationConfig]?
+    end
+
+    module FuotaDeviceStatus
+      Initial: String
+      Package_Not_Supported: String
+      FragAlgo_unsupported: String
+      Not_enough_memory: String
+      FragIndex_unsupported: String
+      Wrong_descriptor: String
+      SessionCnt_replay: String
+      MissingFrag: String
+      MemoryError: String
+      MICError: String
+      Successful: String
+      Device_exist_in_conflict_fuota_task: String
+    end
+
+    class FuotaTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    module FuotaTaskEvent
+      Fuota: String
+    end
+
+    class FuotaTaskEventLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor log_level: String?
+    end
+
+    class FuotaTaskLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?log_level: String,
+        ?events: Array[Types::FuotaTaskEventLogOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor log_level: String?
+      attr_accessor events: Array[Types::FuotaTaskEventLogOption]?
+    end
+
+    module FuotaTaskStatus
+      Pending: String
+      FuotaSession_Waiting: String
+      In_FuotaSession: String
+      FuotaDone: String
+      Delete_Waiting: String
+    end
+
+    module FuotaTaskType
+      LoRaWAN: String
+    end
+
+    class GatewayListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?downlink_frequency: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor downlink_frequency: Integer?
+    end
+
+    class GetDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?expression: String,
+        ?expression_type: String,
+        ?description: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor expression: String?
+      attr_accessor expression_type: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+    end
+
+    class GetDeviceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetDeviceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?lo_ra_wan: Types::LoRaWANDeviceProfile,
+        ?sidewalk: Types::SidewalkGetDeviceProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceProfile?
+      attr_accessor sidewalk: Types::SidewalkGetDeviceProfile?
+    end
+
+    class GetEventConfigurationByResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetEventConfigurationByResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration,
+        ?proximity: Types::ProximityResourceTypeEventConfiguration,
+        ?join: Types::JoinResourceTypeEventConfiguration,
+        ?connection_status: Types::ConnectionStatusResourceTypeEventConfiguration,
+        ?message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration?
+      attr_accessor proximity: Types::ProximityResourceTypeEventConfiguration?
+      attr_accessor join: Types::JoinResourceTypeEventConfiguration?
+      attr_accessor connection_status: Types::ConnectionStatusResourceTypeEventConfiguration?
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration?
+    end
+
+    class GetFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANFuotaTaskGetInfo,
+        ?firmware_update_image: String,
+        ?firmware_update_role: String,
+        ?created_at: Time,
+        ?redundancy_percent: Integer,
+        ?fragment_size_bytes: Integer,
+        ?fragment_interval_ms: Integer,
+        ?descriptor: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTaskGetInfo?
+      attr_accessor firmware_update_image: String?
+      attr_accessor firmware_update_role: String?
+      attr_accessor created_at: Time?
+      attr_accessor redundancy_percent: Integer?
+      attr_accessor fragment_size_bytes: Integer?
+      attr_accessor fragment_interval_ms: Integer?
+      attr_accessor descriptor: String?
+    end
+
+    class GetLogLevelsByResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetLogLevelsByResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_log_level: String,
+        ?wireless_gateway_log_options: Array[Types::WirelessGatewayLogOption],
+        ?wireless_device_log_options: Array[Types::WirelessDeviceLogOption],
+        ?fuota_task_log_options: Array[Types::FuotaTaskLogOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_log_level: String?
+      attr_accessor wireless_gateway_log_options: Array[Types::WirelessGatewayLogOption]?
+      attr_accessor wireless_device_log_options: Array[Types::WirelessDeviceLogOption]?
+      attr_accessor fuota_task_log_options: Array[Types::FuotaTaskLogOption]?
+    end
+
+    class GetMetricConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetMetricConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_metric: Types::SummaryMetricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration?
+    end
+
+    class GetMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_metric_queries: Array[Types::SummaryMetricQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_metric_queries: Array[Types::SummaryMetricQuery]?
+    end
+
+    class GetMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_metric_query_results: Array[Types::SummaryMetricQueryResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_metric_query_results: Array[Types::SummaryMetricQueryResult]?
+    end
+
+    class GetMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?lo_ra_wan: Types::LoRaWANMulticastGet,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastGet?
+      attr_accessor created_at: Time?
+    end
+
+    class GetMulticastGroupSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetMulticastGroupSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANMulticastSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastSession?
+    end
+
+    class GetNetworkAnalyzerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_name: String?
+    end
+
+    class GetNetworkAnalyzerConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_content: Types::TraceContent,
+        ?wireless_devices: Array[String],
+        ?wireless_gateways: Array[String],
+        ?description: String,
+        ?arn: String,
+        ?name: String,
+        ?multicast_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_content: Types::TraceContent?
+      attr_accessor wireless_devices: Array[String]?
+      attr_accessor wireless_gateways: Array[String]?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor multicast_groups: Array[String]?
+    end
+
+    class GetPartnerAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner_account_id: String,
+        ?partner_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_account_id: String?
+      attr_accessor partner_type: String?
+    end
+
+    class GetPartnerAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkAccountInfoWithFingerprint,
+        ?account_linked: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkAccountInfoWithFingerprint?
+      attr_accessor account_linked: bool?
+    end
+
+    class GetPositionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+    end
+
+    class GetPositionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solvers: Types::PositionSolverDetails,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solvers: Types::PositionSolverDetails?
+      attr_accessor destination: String?
+    end
+
+    class GetPositionEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wi_fi_access_points: Array[Types::WiFiAccessPoint],
+        ?cell_towers: Types::CellTowers,
+        ?ip: Types::Ip,
+        ?gnss: Types::Gnss,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wi_fi_access_points: Array[Types::WiFiAccessPoint]?
+      attr_accessor cell_towers: Types::CellTowers?
+      attr_accessor ip: Types::Ip?
+      attr_accessor gnss: Types::Gnss?
+      attr_accessor timestamp: Time?
+    end
+
+    class GetPositionEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geo_json_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geo_json_payload: String?
+    end
+
+    class GetPositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+    end
+
+    class GetPositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?accuracy: Types::Accuracy,
+        ?solver_type: String,
+        ?solver_provider: String,
+        ?solver_version: String,
+        ?timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::Accuracy?
+      attr_accessor solver_type: String?
+      attr_accessor solver_provider: String?
+      attr_accessor solver_version: String?
+      attr_accessor timestamp: String?
+    end
+
+    class GetResourceEventConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?identifier_type: String,
+        ?partner_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor identifier_type: String?
+      attr_accessor partner_type: String?
+    end
+
+    class GetResourceEventConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_registration_state: Types::DeviceRegistrationStateEventConfiguration,
+        ?proximity: Types::ProximityEventConfiguration,
+        ?join: Types::JoinEventConfiguration,
+        ?connection_status: Types::ConnectionStatusEventConfiguration,
+        ?message_delivery_status: Types::MessageDeliveryStatusEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration?
+      attr_accessor proximity: Types::ProximityEventConfiguration?
+      attr_accessor join: Types::JoinEventConfiguration?
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration?
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration?
+    end
+
+    class GetResourceLogLevelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+    end
+
+    class GetResourceLogLevelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_level: String?
+    end
+
+    class GetResourcePositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+    end
+
+    class GetResourcePositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geo_json_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geo_json_payload: String?
+    end
+
+    class GetServiceEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+    end
+
+    class GetServiceEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?service_endpoint: String,
+        ?server_trust: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor service_endpoint: String?
+      attr_accessor server_trust: String?
+    end
+
+    class GetServiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetServiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?lo_ra_wan: Types::LoRaWANGetServiceProfileInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANGetServiceProfileInfo?
+    end
+
+    class GetWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?destination_name: String,
+        ?sidewalk: Types::SidewalkGetStartImportInfo,
+        ?creation_time: Time,
+        ?status: String,
+        ?status_reason: String,
+        ?initialized_imported_device_count: Integer,
+        ?pending_imported_device_count: Integer,
+        ?onboarded_imported_device_count: Integer,
+        ?failed_imported_device_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor destination_name: String?
+      attr_accessor sidewalk: Types::SidewalkGetStartImportInfo?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor initialized_imported_device_count: Integer?
+      attr_accessor pending_imported_device_count: Integer?
+      attr_accessor onboarded_imported_device_count: Integer?
+      attr_accessor failed_imported_device_count: Integer?
+    end
+
+    class GetWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?identifier_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor identifier_type: String?
+    end
+
+    class GetWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?description: String,
+        ?destination_name: String,
+        ?id: String,
+        ?arn: String,
+        ?thing_name: String,
+        ?thing_arn: String,
+        ?lo_ra_wan: Types::LoRaWANDevice,
+        ?sidewalk: Types::SidewalkDevice,
+        ?positioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor destination_name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor thing_name: String?
+      attr_accessor thing_arn: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANDevice?
+      attr_accessor sidewalk: Types::SidewalkDevice?
+      attr_accessor positioning: String?
+    end
+
+    class GetWirelessDeviceStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_device_id: String?
+    end
+
+    class GetWirelessDeviceStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_device_id: String,
+        ?last_uplink_received_at: String,
+        ?lo_ra_wan: Types::LoRaWANDeviceMetadata,
+        ?sidewalk: Types::SidewalkDeviceMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_device_id: String?
+      attr_accessor last_uplink_received_at: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceMetadata?
+      attr_accessor sidewalk: Types::SidewalkDeviceMetadata?
+    end
+
+    class GetWirelessGatewayCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWirelessGatewayCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_certificate_id: String,
+        ?lo_ra_wan_network_server_certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_certificate_id: String?
+      attr_accessor lo_ra_wan_network_server_certificate_id: String?
+    end
+
+    class GetWirelessGatewayFirmwareInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWirelessGatewayFirmwareInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANGatewayCurrentVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANGatewayCurrentVersion?
+    end
+
+    class GetWirelessGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?identifier_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor identifier_type: String?
+    end
+
+    class GetWirelessGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANGateway,
+        ?arn: String,
+        ?thing_name: String,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway?
+      attr_accessor arn: String?
+      attr_accessor thing_name: String?
+      attr_accessor thing_arn: String?
+    end
+
+    class GetWirelessGatewayStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_gateway_id: String?
+    end
+
+    class GetWirelessGatewayStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_gateway_id: String,
+        ?last_uplink_received_at: String,
+        ?connection_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_gateway_id: String?
+      attr_accessor last_uplink_received_at: String?
+      attr_accessor connection_status: String?
+    end
+
+    class GetWirelessGatewayTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWirelessGatewayTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_create_tasks: bool,
+        ?name: String,
+        ?update: Types::UpdateWirelessGatewayTaskCreate,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_create_tasks: bool?
+      attr_accessor name: String?
+      attr_accessor update: Types::UpdateWirelessGatewayTaskCreate?
+      attr_accessor arn: String?
+    end
+
+    class GetWirelessGatewayTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWirelessGatewayTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_gateway_id: String,
+        ?wireless_gateway_task_definition_id: String,
+        ?last_uplink_received_at: String,
+        ?task_created_at: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_gateway_id: String?
+      attr_accessor wireless_gateway_task_definition_id: String?
+      attr_accessor last_uplink_received_at: String?
+      attr_accessor task_created_at: String?
+      attr_accessor status: String?
+    end
+
+    class GlobalIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lac: Integer,
+        ?geran_cid: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lac: Integer?
+      attr_accessor geran_cid: Integer?
+    end
+
+    class Gnss
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+        ?capture_time: Float,
+        ?capture_time_accuracy: Float,
+        ?assist_position: Array[Float],
+        ?assist_altitude: Float,
+        ?use2_d_solver: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+      attr_accessor capture_time: Float?
+      attr_accessor capture_time_accuracy: Float?
+      attr_accessor assist_position: Array[Float]?
+      attr_accessor assist_altitude: Float?
+      attr_accessor use2_d_solver: bool?
+    end
+
+    class GsmLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bsic: Integer,
+        ?bcch: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bsic: Integer?
+      attr_accessor bcch: Integer?
+    end
+
+    class GsmNmrObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bsic: Integer,
+        ?bcch: Integer,
+        ?rx_level: Integer,
+        ?global_identity: Types::GlobalIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bsic: Integer?
+      attr_accessor bcch: Integer?
+      attr_accessor rx_level: Integer?
+      attr_accessor global_identity: Types::GlobalIdentity?
+    end
+
+    class GsmObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcc: Integer,
+        ?mnc: Integer,
+        ?lac: Integer,
+        ?geran_cid: Integer,
+        ?gsm_local_id: Types::GsmLocalId,
+        ?gsm_timing_advance: Integer,
+        ?rx_level: Integer,
+        ?gsm_nmr: Array[Types::GsmNmrObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcc: Integer?
+      attr_accessor mnc: Integer?
+      attr_accessor lac: Integer?
+      attr_accessor geran_cid: Integer?
+      attr_accessor gsm_local_id: Types::GsmLocalId?
+      attr_accessor gsm_timing_advance: Integer?
+      attr_accessor rx_level: Integer?
+      attr_accessor gsm_nmr: Array[Types::GsmNmrObj]?
+    end
+
+    module IdentifierType
+      PartnerAccountId: String
+      DevEui: String
+      GatewayEui: String
+      WirelessDeviceId: String
+      WirelessGatewayId: String
+    end
+
+    module ImportTaskStatus
+      INITIALIZING: String
+      INITIALIZED: String
+      PENDING: String
+      COMPLETE: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class ImportedSidewalkDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk_manufacturing_sn: String,
+        ?onboarding_status: String,
+        ?onboarding_status_reason: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk_manufacturing_sn: String?
+      attr_accessor onboarding_status: String?
+      attr_accessor onboarding_status_reason: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    class ImportedWirelessDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::ImportedSidewalkDevice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::ImportedSidewalkDevice?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Ip
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+    end
+
+    class JoinEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANJoinEventNotificationConfigurations,
+        ?wireless_device_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANJoinEventNotificationConfigurations?
+      attr_accessor wireless_device_id_event_topic: String?
+    end
+
+    class JoinResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANJoinResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANJoinResourceTypeEventConfiguration?
+    end
+
+    class ListDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?destination_list: Array[Types::Destinations],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor destination_list: Array[Types::Destinations]?
+    end
+
+    class ListDeviceProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?device_profile_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor device_profile_type: String?
+    end
+
+    class ListDeviceProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?device_profile_list: Array[Types::DeviceProfile],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor device_profile_list: Array[Types::DeviceProfile]?
+    end
+
+    class ListDevicesForWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListDevicesForWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?destination_name: String,
+        ?imported_wireless_device_list: Array[Types::ImportedWirelessDevice],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor destination_name: String?
+      attr_accessor imported_wireless_device_list: Array[Types::ImportedWirelessDevice]?
+    end
+
+    class ListEventConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?event_configurations_list: Array[Types::EventConfigurationItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor event_configurations_list: Array[Types::EventConfigurationItem]?
+    end
+
+    class ListFuotaTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFuotaTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?fuota_task_list: Array[Types::FuotaTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor fuota_task_list: Array[Types::FuotaTask]?
+    end
+
+    class ListMulticastGroupsByFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMulticastGroupsByFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?multicast_group_list: Array[Types::MulticastGroupByFuotaTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor multicast_group_list: Array[Types::MulticastGroupByFuotaTask]?
+    end
+
+    class ListMulticastGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMulticastGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?multicast_group_list: Array[Types::MulticastGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor multicast_group_list: Array[Types::MulticastGroup]?
+    end
+
+    class ListNetworkAnalyzerConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkAnalyzerConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?network_analyzer_configuration_list: Array[Types::NetworkAnalyzerConfigurations],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor network_analyzer_configuration_list: Array[Types::NetworkAnalyzerConfigurations]?
+    end
+
+    class ListPartnerAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPartnerAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sidewalk: Array[Types::SidewalkAccountInfoWithFingerprint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sidewalk: Array[Types::SidewalkAccountInfoWithFingerprint]?
+    end
+
+    class ListPositionConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPositionConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position_configuration_list: Array[Types::PositionConfigurationItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position_configuration_list: Array[Types::PositionConfigurationItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueuedMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?wireless_device_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor wireless_device_type: String?
+    end
+
+    class ListQueuedMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?downlink_queue_messages_list: Array[Types::DownlinkQueueMessage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor downlink_queue_messages_list: Array[Types::DownlinkQueueMessage]?
+    end
+
+    class ListServiceProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServiceProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?service_profile_list: Array[Types::ServiceProfile],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor service_profile_list: Array[Types::ServiceProfile]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWirelessDeviceImportTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWirelessDeviceImportTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?wireless_device_import_task_list: Array[Types::WirelessDeviceImportTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor wireless_device_import_task_list: Array[Types::WirelessDeviceImportTask]?
+    end
+
+    class ListWirelessDevicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?destination_name: String,
+        ?device_profile_id: String,
+        ?service_profile_id: String,
+        ?wireless_device_type: String,
+        ?fuota_task_id: String,
+        ?multicast_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor destination_name: String?
+      attr_accessor device_profile_id: String?
+      attr_accessor service_profile_id: String?
+      attr_accessor wireless_device_type: String?
+      attr_accessor fuota_task_id: String?
+      attr_accessor multicast_group_id: String?
+    end
+
+    class ListWirelessDevicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?wireless_device_list: Array[Types::WirelessDeviceStatistics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor wireless_device_list: Array[Types::WirelessDeviceStatistics]?
+    end
+
+    class ListWirelessGatewayTaskDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?task_definition_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor task_definition_type: String?
+    end
+
+    class ListWirelessGatewayTaskDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?task_definitions: Array[Types::UpdateWirelessGatewayTaskEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor task_definitions: Array[Types::UpdateWirelessGatewayTaskEntry]?
+    end
+
+    class ListWirelessGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWirelessGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?wireless_gateway_list: Array[Types::WirelessGatewayStatistics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor wireless_gateway_list: Array[Types::WirelessGatewayStatistics]?
+    end
+
+    class LoRaWANConnectionStatusEventNotificationConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_eui_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_eui_event_topic: String?
+    end
+
+    class LoRaWANConnectionStatusResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_gateway_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_gateway_event_topic: String?
+    end
+
+    class LoRaWANDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_eui: String,
+        ?device_profile_id: String,
+        ?service_profile_id: String,
+        ?otaa_v1_1: Types::OtaaV1_1,
+        ?otaa_v1_0_x: Types::OtaaV1_0_x,
+        ?abp_v1_1: Types::AbpV1_1,
+        ?abp_v1_0_x: Types::AbpV1_0_x,
+        ?f_ports: Types::FPorts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_eui: String?
+      attr_accessor device_profile_id: String?
+      attr_accessor service_profile_id: String?
+      attr_accessor otaa_v1_1: Types::OtaaV1_1?
+      attr_accessor otaa_v1_0_x: Types::OtaaV1_0_x?
+      attr_accessor abp_v1_1: Types::AbpV1_1?
+      attr_accessor abp_v1_0_x: Types::AbpV1_0_x?
+      attr_accessor f_ports: Types::FPorts?
+    end
+
+    class LoRaWANDeviceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_eui: String,
+        ?f_port: Integer,
+        ?data_rate: Integer,
+        ?frequency: Integer,
+        ?timestamp: String,
+        ?gateways: Array[Types::LoRaWANGatewayMetadata],
+        ?public_gateways: Array[Types::LoRaWANPublicGatewayMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_eui: String?
+      attr_accessor f_port: Integer?
+      attr_accessor data_rate: Integer?
+      attr_accessor frequency: Integer?
+      attr_accessor timestamp: String?
+      attr_accessor gateways: Array[Types::LoRaWANGatewayMetadata]?
+      attr_accessor public_gateways: Array[Types::LoRaWANPublicGatewayMetadata]?
+    end
+
+    class LoRaWANDeviceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supports_class_b: bool,
+        ?class_b_timeout: Integer,
+        ?ping_slot_period: Integer,
+        ?ping_slot_dr: Integer,
+        ?ping_slot_freq: Integer,
+        ?supports_class_c: bool,
+        ?class_c_timeout: Integer,
+        ?mac_version: String,
+        ?reg_params_revision: String,
+        ?rx_delay1: Integer,
+        ?rx_dr_offset1: Integer,
+        ?rx_data_rate2: Integer,
+        ?rx_freq2: Integer,
+        ?factory_preset_freqs_list: Array[Integer],
+        ?max_eirp: Integer,
+        ?max_duty_cycle: Integer,
+        ?rf_region: String,
+        ?supports_join: bool,
+        ?supports32_bit_f_cnt: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supports_class_b: bool?
+      attr_accessor class_b_timeout: Integer?
+      attr_accessor ping_slot_period: Integer?
+      attr_accessor ping_slot_dr: Integer?
+      attr_accessor ping_slot_freq: Integer?
+      attr_accessor supports_class_c: bool?
+      attr_accessor class_c_timeout: Integer?
+      attr_accessor mac_version: String?
+      attr_accessor reg_params_revision: String?
+      attr_accessor rx_delay1: Integer?
+      attr_accessor rx_dr_offset1: Integer?
+      attr_accessor rx_data_rate2: Integer?
+      attr_accessor rx_freq2: Integer?
+      attr_accessor factory_preset_freqs_list: Array[Integer]?
+      attr_accessor max_eirp: Integer?
+      attr_accessor max_duty_cycle: Integer?
+      attr_accessor rf_region: String?
+      attr_accessor supports_join: bool?
+      attr_accessor supports32_bit_f_cnt: bool?
+    end
+
+    class LoRaWANFuotaTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rf_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rf_region: String?
+    end
+
+    class LoRaWANFuotaTaskGetInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rf_region: String,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rf_region: String?
+      attr_accessor start_time: Time?
+    end
+
+    class LoRaWANGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_eui: String,
+        ?rf_region: String,
+        ?join_eui_filters: Array[Array[String]],
+        ?net_id_filters: Array[String],
+        ?sub_bands: Array[Integer],
+        ?beaconing: Types::Beaconing,
+        ?max_eirp: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_eui: String?
+      attr_accessor rf_region: String?
+      attr_accessor join_eui_filters: Array[Array[String]]?
+      attr_accessor net_id_filters: Array[String]?
+      attr_accessor sub_bands: Array[Integer]?
+      attr_accessor beaconing: Types::Beaconing?
+      attr_accessor max_eirp: Float?
+    end
+
+    class LoRaWANGatewayCurrentVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_version: Types::LoRaWANGatewayVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_version: Types::LoRaWANGatewayVersion?
+    end
+
+    class LoRaWANGatewayMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_eui: String,
+        ?snr: Float,
+        ?rssi: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_eui: String?
+      attr_accessor snr: Float?
+      attr_accessor rssi: Float?
+    end
+
+    class LoRaWANGatewayVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_version: String,
+        ?model: String,
+        ?station: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_version: String?
+      attr_accessor model: String?
+      attr_accessor station: String?
+    end
+
+    class LoRaWANGetServiceProfileInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ul_rate: Integer,
+        ?ul_bucket_size: Integer,
+        ?ul_rate_policy: String,
+        ?dl_rate: Integer,
+        ?dl_bucket_size: Integer,
+        ?dl_rate_policy: String,
+        ?add_gw_metadata: bool,
+        ?dev_status_req_freq: Integer,
+        ?report_dev_status_battery: bool,
+        ?report_dev_status_margin: bool,
+        ?dr_min: Integer,
+        ?dr_max: Integer,
+        ?channel_mask: String,
+        ?pr_allowed: bool,
+        ?hr_allowed: bool,
+        ?ra_allowed: bool,
+        ?nwk_geo_loc: bool,
+        ?target_per: Integer,
+        ?min_gw_diversity: Integer,
+        ?tx_power_index_min: Integer,
+        ?tx_power_index_max: Integer,
+        ?nb_trans_min: Integer,
+        ?nb_trans_max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ul_rate: Integer?
+      attr_accessor ul_bucket_size: Integer?
+      attr_accessor ul_rate_policy: String?
+      attr_accessor dl_rate: Integer?
+      attr_accessor dl_bucket_size: Integer?
+      attr_accessor dl_rate_policy: String?
+      attr_accessor add_gw_metadata: bool?
+      attr_accessor dev_status_req_freq: Integer?
+      attr_accessor report_dev_status_battery: bool?
+      attr_accessor report_dev_status_margin: bool?
+      attr_accessor dr_min: Integer?
+      attr_accessor dr_max: Integer?
+      attr_accessor channel_mask: String?
+      attr_accessor pr_allowed: bool?
+      attr_accessor hr_allowed: bool?
+      attr_accessor ra_allowed: bool?
+      attr_accessor nwk_geo_loc: bool?
+      attr_accessor target_per: Integer?
+      attr_accessor min_gw_diversity: Integer?
+      attr_accessor tx_power_index_min: Integer?
+      attr_accessor tx_power_index_max: Integer?
+      attr_accessor nb_trans_min: Integer?
+      attr_accessor nb_trans_max: Integer?
+    end
+
+    class LoRaWANJoinEventNotificationConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_eui_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_eui_event_topic: String?
+    end
+
+    class LoRaWANJoinResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_device_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_device_event_topic: String?
+    end
+
+    class LoRaWANListDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dev_eui: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dev_eui: String?
+    end
+
+    class LoRaWANMulticast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rf_region: String,
+        ?dl_class: String,
+        ?participating_gateways: Types::ParticipatingGatewaysMulticast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rf_region: String?
+      attr_accessor dl_class: String?
+      attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast?
+    end
+
+    class LoRaWANMulticastGet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rf_region: String,
+        ?dl_class: String,
+        ?number_of_devices_requested: Integer,
+        ?number_of_devices_in_group: Integer,
+        ?participating_gateways: Types::ParticipatingGatewaysMulticast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rf_region: String?
+      attr_accessor dl_class: String?
+      attr_accessor number_of_devices_requested: Integer?
+      attr_accessor number_of_devices_in_group: Integer?
+      attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast?
+    end
+
+    class LoRaWANMulticastMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_port: Integer?
+    end
+
+    class LoRaWANMulticastSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dl_dr: Integer,
+        ?dl_freq: Integer,
+        ?session_start_time: Time,
+        ?session_timeout: Integer,
+        ?ping_slot_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dl_dr: Integer?
+      attr_accessor dl_freq: Integer?
+      attr_accessor session_start_time: Time?
+      attr_accessor session_timeout: Integer?
+      attr_accessor ping_slot_period: Integer?
+    end
+
+    class LoRaWANPublicGatewayMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_net_id: String,
+        ?id: String,
+        ?rssi: Float,
+        ?snr: Float,
+        ?rf_region: String,
+        ?dl_allowed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_net_id: String?
+      attr_accessor id: String?
+      attr_accessor rssi: Float?
+      attr_accessor snr: Float?
+      attr_accessor rf_region: String?
+      attr_accessor dl_allowed: bool?
+    end
+
+    class LoRaWANSendDataToDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_port: Integer,
+        ?participating_gateways: Types::ParticipatingGateways,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_port: Integer?
+      attr_accessor participating_gateways: Types::ParticipatingGateways?
+    end
+
+    class LoRaWANServiceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_gw_metadata: bool,
+        ?dr_min: Integer,
+        ?dr_max: Integer,
+        ?pr_allowed: bool,
+        ?ra_allowed: bool,
+        ?tx_power_index_min: Integer,
+        ?tx_power_index_max: Integer,
+        ?nb_trans_min: Integer,
+        ?nb_trans_max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_gw_metadata: bool?
+      attr_accessor dr_min: Integer?
+      attr_accessor dr_max: Integer?
+      attr_accessor pr_allowed: bool?
+      attr_accessor ra_allowed: bool?
+      attr_accessor tx_power_index_min: Integer?
+      attr_accessor tx_power_index_max: Integer?
+      attr_accessor nb_trans_min: Integer?
+      attr_accessor nb_trans_max: Integer?
+    end
+
+    class LoRaWANStartFuotaTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+    end
+
+    class LoRaWANUpdateDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_profile_id: String,
+        ?service_profile_id: String,
+        ?abp_v1_1: Types::UpdateAbpV1_1,
+        ?abp_v1_0_x: Types::UpdateAbpV1_0_x,
+        ?f_ports: Types::UpdateFPorts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_profile_id: String?
+      attr_accessor service_profile_id: String?
+      attr_accessor abp_v1_1: Types::UpdateAbpV1_1?
+      attr_accessor abp_v1_0_x: Types::UpdateAbpV1_0_x?
+      attr_accessor f_ports: Types::UpdateFPorts?
+    end
+
+    class LoRaWANUpdateGatewayTaskCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_signature: String,
+        ?sig_key_crc: Integer,
+        ?current_version: Types::LoRaWANGatewayVersion,
+        ?update_version: Types::LoRaWANGatewayVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_signature: String?
+      attr_accessor sig_key_crc: Integer?
+      attr_accessor current_version: Types::LoRaWANGatewayVersion?
+      attr_accessor update_version: Types::LoRaWANGatewayVersion?
+    end
+
+    class LoRaWANUpdateGatewayTaskEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_version: Types::LoRaWANGatewayVersion,
+        ?update_version: Types::LoRaWANGatewayVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_version: Types::LoRaWANGatewayVersion?
+      attr_accessor update_version: Types::LoRaWANGatewayVersion?
+    end
+
+    module LogLevel
+      INFO: String
+      ERROR: String
+      DISABLED: String
+    end
+
+    class LteLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pci: Integer,
+        ?earfcn: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pci: Integer?
+      attr_accessor earfcn: Integer?
+    end
+
+    class LteNmrObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pci: Integer,
+        ?earfcn: Integer,
+        ?eutran_cid: Integer,
+        ?rsrp: Integer,
+        ?rsrq: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pci: Integer?
+      attr_accessor earfcn: Integer?
+      attr_accessor eutran_cid: Integer?
+      attr_accessor rsrp: Integer?
+      attr_accessor rsrq: Float?
+    end
+
+    class LteObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcc: Integer,
+        ?mnc: Integer,
+        ?eutran_cid: Integer,
+        ?tac: Integer,
+        ?lte_local_id: Types::LteLocalId,
+        ?lte_timing_advance: Integer,
+        ?rsrp: Integer,
+        ?rsrq: Float,
+        ?nr_capable: bool,
+        ?lte_nmr: Array[Types::LteNmrObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcc: Integer?
+      attr_accessor mnc: Integer?
+      attr_accessor eutran_cid: Integer?
+      attr_accessor tac: Integer?
+      attr_accessor lte_local_id: Types::LteLocalId?
+      attr_accessor lte_timing_advance: Integer?
+      attr_accessor rsrp: Integer?
+      attr_accessor rsrq: Float?
+      attr_accessor nr_capable: bool?
+      attr_accessor lte_nmr: Array[Types::LteNmrObj]?
+    end
+
+    class MessageDeliveryStatusEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkEventNotificationConfigurations,
+        ?wireless_device_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations?
+      attr_accessor wireless_device_id_event_topic: String?
+    end
+
+    class MessageDeliveryStatusResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration?
+    end
+
+    module MessageType
+      CUSTOM_COMMAND_ID_NOTIFY: String
+      CUSTOM_COMMAND_ID_GET: String
+      CUSTOM_COMMAND_ID_SET: String
+      CUSTOM_COMMAND_ID_RESP: String
+    end
+
+    module MetricName
+      DeviceRSSI: String
+      DeviceSNR: String
+      DeviceRoamingRSSI: String
+      DeviceRoamingSNR: String
+      DeviceUplinkCount: String
+      DeviceDownlinkCount: String
+      DeviceUplinkLostCount: String
+      DeviceUplinkLostRate: String
+      DeviceJoinRequestCount: String
+      DeviceJoinAcceptCount: String
+      DeviceRoamingUplinkCount: String
+      DeviceRoamingDownlinkCount: String
+      GatewayUpTime: String
+      GatewayDownTime: String
+      GatewayRSSI: String
+      GatewaySNR: String
+      GatewayUplinkCount: String
+      GatewayDownlinkCount: String
+      GatewayJoinRequestCount: String
+      GatewayJoinAcceptCount: String
+      AwsAccountUplinkCount: String
+      AwsAccountDownlinkCount: String
+      AwsAccountUplinkLostCount: String
+      AwsAccountUplinkLostRate: String
+      AwsAccountJoinRequestCount: String
+      AwsAccountJoinAcceptCount: String
+      AwsAccountRoamingUplinkCount: String
+      AwsAccountRoamingDownlinkCount: String
+      AwsAccountDeviceCount: String
+      AwsAccountGatewayCount: String
+      AwsAccountActiveDeviceCount: String
+      AwsAccountActiveGatewayCount: String
+    end
+
+    module MetricQueryStatus
+      Succeeded: String
+      Failed: String
+    end
+
+    class MetricQueryValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+        ?sum: Float,
+        ?avg: Float,
+        ?std: Float,
+        ?p90: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor sum: Float?
+      attr_accessor avg: Float?
+      attr_accessor std: Float?
+      attr_accessor p90: Float?
+    end
+
+    module MulticastFrameInfo
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class MulticastGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class MulticastGroupByFuotaTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class MulticastWirelessMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANMulticastMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastMetadata?
+    end
+
+    class NetworkAnalyzerConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    module OnboardStatus
+      INITIALIZED: String
+      PENDING: String
+      ONBOARDED: String
+      FAILED: String
+    end
+
+    class OtaaV10X
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_key: String,
+        ?app_eui: String,
+        ?join_eui: String,
+        ?gen_app_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_key: String?
+      attr_accessor app_eui: String?
+      attr_accessor join_eui: String?
+      attr_accessor gen_app_key: String?
+    end
+
+    class OtaaV11
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_key: String,
+        ?nwk_key: String,
+        ?join_eui: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_key: String?
+      attr_accessor nwk_key: String?
+      attr_accessor join_eui: String?
+    end
+
+    class ParticipatingGateways
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?downlink_mode: String,
+        ?gateway_list: Array[Types::GatewayListItem],
+        ?transmission_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor downlink_mode: String?
+      attr_accessor gateway_list: Array[Types::GatewayListItem]?
+      attr_accessor transmission_interval: Integer?
+    end
+
+    class ParticipatingGatewaysMulticast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_list: Array[String],
+        ?transmission_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_list: Array[String]?
+      attr_accessor transmission_interval: Integer?
+    end
+
+    module PartnerType
+      Sidewalk: String
+    end
+
+    module PositionConfigurationFec
+      ROSE: String
+      NONE: String
+    end
+
+    class PositionConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?solvers: Types::PositionSolverDetails,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor solvers: Types::PositionSolverDetails?
+      attr_accessor destination: String?
+    end
+
+    module PositionConfigurationStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    module PositionResourceType
+      WirelessDevice: String
+      WirelessGateway: String
+    end
+
+    class PositionSolverConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?semtech_gnss: Types::SemtechGnssConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor semtech_gnss: Types::SemtechGnssConfiguration?
+    end
+
+    class PositionSolverDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?semtech_gnss: Types::SemtechGnssDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor semtech_gnss: Types::SemtechGnssDetail?
+    end
+
+    module PositionSolverProvider
+      SEMTECH: String
+    end
+
+    module PositionSolverType
+      GNSS: String
+    end
+
+    class Positioning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clock_sync: Integer,
+        ?stream: Integer,
+        ?gnss: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clock_sync: Integer?
+      attr_accessor stream: Integer?
+      attr_accessor gnss: Integer?
+    end
+
+    module PositioningConfigStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class ProximityEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkEventNotificationConfigurations,
+        ?wireless_device_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations?
+      attr_accessor wireless_device_id_event_topic: String?
+    end
+
+    class ProximityResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration?
+    end
+
+    class PutPositionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?solvers: Types::PositionSolverConfigurations,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor solvers: Types::PositionSolverConfigurations?
+      attr_accessor destination: String?
+    end
+
+    class PutPositionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutResourceLogLevelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor log_level: String?
+    end
+
+    class PutResourceLogLevelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResetAllResourceLogLevelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResetAllResourceLogLevelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResetResourceLogLevelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResetResourceLogLevelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class SemtechGnssConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?fec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor fec: String?
+    end
+
+    class SemtechGnssDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?type: String,
+        ?status: String,
+        ?fec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor fec: String?
+    end
+
+    class SendDataToMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?payload_data: String,
+        ?wireless_metadata: Types::MulticastWirelessMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor payload_data: String?
+      attr_accessor wireless_metadata: Types::MulticastWirelessMetadata?
+    end
+
+    class SendDataToMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendDataToWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?transmit_mode: Integer,
+        ?payload_data: String,
+        ?wireless_metadata: Types::WirelessMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor transmit_mode: Integer?
+      attr_accessor payload_data: String?
+      attr_accessor wireless_metadata: Types::WirelessMetadata?
+    end
+
+    class SendDataToWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class ServiceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+    end
+
+    class SessionKeysAbpV10X
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nwk_s_key: String,
+        ?app_s_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nwk_s_key: String?
+      attr_accessor app_s_key: String?
+    end
+
+    class SessionKeysAbpV11
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_nwk_s_int_key: String,
+        ?s_nwk_s_int_key: String,
+        ?nwk_s_enc_key: String,
+        ?app_s_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_nwk_s_int_key: String?
+      attr_accessor s_nwk_s_int_key: String?
+      attr_accessor nwk_s_enc_key: String?
+      attr_accessor app_s_key: String?
+    end
+
+    class SidewalkAccountInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_id: String,
+        ?app_server_private_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_id: String?
+      attr_accessor app_server_private_key: String?
+    end
+
+    class SidewalkAccountInfoWithFingerprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_id: String,
+        ?fingerprint: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_id: String?
+      attr_accessor fingerprint: String?
+      attr_accessor arn: String?
+    end
+
+    class SidewalkCreateDeviceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SidewalkCreateWirelessDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_profile_id: String?
+    end
+
+    class SidewalkDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_id: String,
+        ?sidewalk_id: String,
+        ?sidewalk_manufacturing_sn: String,
+        ?device_certificates: Array[Types::CertificateList],
+        ?private_keys: Array[Types::CertificateList],
+        ?device_profile_id: String,
+        ?certificate_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_id: String?
+      attr_accessor sidewalk_id: String?
+      attr_accessor sidewalk_manufacturing_sn: String?
+      attr_accessor device_certificates: Array[Types::CertificateList]?
+      attr_accessor private_keys: Array[Types::CertificateList]?
+      attr_accessor device_profile_id: String?
+      attr_accessor certificate_id: String?
+      attr_accessor status: String?
+    end
+
+    class SidewalkDeviceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rssi: Integer,
+        ?battery_level: String,
+        ?event: String,
+        ?device_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rssi: Integer?
+      attr_accessor battery_level: String?
+      attr_accessor event: String?
+      attr_accessor device_state: String?
+    end
+
+    class SidewalkEventNotificationConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_id_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_id_event_topic: String?
+    end
+
+    class SidewalkGetDeviceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_server_public_key: String,
+        ?qualification_status: bool,
+        ?dak_certificate_metadata: Array[Types::DakCertificateMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_server_public_key: String?
+      attr_accessor qualification_status: bool?
+      attr_accessor dak_certificate_metadata: Array[Types::DakCertificateMetadata]?
+    end
+
+    class SidewalkGetStartImportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_creation_file_list: Array[String],
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_creation_file_list: Array[String]?
+      attr_accessor role: String?
+    end
+
+    class SidewalkListDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_id: String,
+        ?sidewalk_id: String,
+        ?sidewalk_manufacturing_sn: String,
+        ?device_certificates: Array[Types::CertificateList],
+        ?device_profile_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_id: String?
+      attr_accessor sidewalk_id: String?
+      attr_accessor sidewalk_manufacturing_sn: String?
+      attr_accessor device_certificates: Array[Types::CertificateList]?
+      attr_accessor device_profile_id: String?
+      attr_accessor status: String?
+    end
+
+    class SidewalkResourceTypeEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_device_event_topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_device_event_topic: String?
+    end
+
+    class SidewalkSendDataToDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seq: Integer,
+        ?message_type: String,
+        ?ack_mode_retry_duration_secs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seq: Integer?
+      attr_accessor message_type: String?
+      attr_accessor ack_mode_retry_duration_secs: Integer?
+    end
+
+    class SidewalkSingleStartImportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk_manufacturing_sn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk_manufacturing_sn: String?
+    end
+
+    class SidewalkStartImportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_creation_file: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_creation_file: String?
+      attr_accessor role: String?
+    end
+
+    class SidewalkUpdateAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_server_private_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_server_private_key: String?
+    end
+
+    class SidewalkUpdateImportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_creation_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_creation_file: String?
+    end
+
+    module SigningAlg
+      Ed25519: String
+      P256r1: String
+    end
+
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?query_string: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor query_string: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?query_string: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor query_string: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?lo_ra_wan: Types::LoRaWANStartFuotaTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANStartFuotaTask?
+    end
+
+    class StartFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartMulticastGroupSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?lo_ra_wan: Types::LoRaWANMulticastSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastSession?
+    end
+
+    class StartMulticastGroupSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartSingleWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?client_request_token: String,
+        ?device_name: String,
+        ?tags: Array[Types::Tag],
+        ?sidewalk: Types::SidewalkSingleStartImportInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor device_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sidewalk: Types::SidewalkSingleStartImportInfo?
+    end
+
+    class StartSingleWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class StartWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?sidewalk: Types::SidewalkStartImportInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sidewalk: Types::SidewalkStartImportInfo?
+    end
+
+    class StartWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class SummaryMetricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module SummaryMetricConfigurationStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class SummaryMetricQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?metric_name: String,
+        ?dimensions: Array[Types::Dimension],
+        ?aggregation_period: String,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor metric_name: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+      attr_accessor aggregation_period: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    class SummaryMetricQueryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?query_status: String,
+        ?error: String,
+        ?metric_name: String,
+        ?dimensions: Array[Types::Dimension],
+        ?aggregation_period: String,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?timestamps: Array[Time],
+        ?values: Array[Types::MetricQueryValue],
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor query_status: String?
+      attr_accessor error: String?
+      attr_accessor metric_name: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+      attr_accessor aggregation_period: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Types::MetricQueryValue]?
+      attr_accessor unit: String?
+    end
+
+    module SupportedRfRegion
+      EU868: String
+      US915: String
+      AU915: String
+      AS923_1: String
+      AS923_2: String
+      AS923_3: String
+      AS923_4: String
+      EU433: String
+      CN470: String
+      CN779: String
+      RU864: String
+      KR920: String
+      IN865: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TdscdmaLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uarfcn: Integer,
+        ?cell_params: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uarfcn: Integer?
+      attr_accessor cell_params: Integer?
+    end
+
+    class TdscdmaNmrObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uarfcn: Integer,
+        ?cell_params: Integer,
+        ?utran_cid: Integer,
+        ?rscp: Integer,
+        ?path_loss: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uarfcn: Integer?
+      attr_accessor cell_params: Integer?
+      attr_accessor utran_cid: Integer?
+      attr_accessor rscp: Integer?
+      attr_accessor path_loss: Integer?
+    end
+
+    class TdscdmaObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcc: Integer,
+        ?mnc: Integer,
+        ?lac: Integer,
+        ?utran_cid: Integer,
+        ?tdscdma_local_id: Types::TdscdmaLocalId,
+        ?tdscdma_timing_advance: Integer,
+        ?rscp: Integer,
+        ?path_loss: Integer,
+        ?tdscdma_nmr: Array[Types::TdscdmaNmrObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcc: Integer?
+      attr_accessor mnc: Integer?
+      attr_accessor lac: Integer?
+      attr_accessor utran_cid: Integer?
+      attr_accessor tdscdma_local_id: Types::TdscdmaLocalId?
+      attr_accessor tdscdma_timing_advance: Integer?
+      attr_accessor rscp: Integer?
+      attr_accessor path_loss: Integer?
+      attr_accessor tdscdma_nmr: Array[Types::TdscdmaNmrObj]?
+    end
+
+    class TestWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class TestWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class TraceContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_device_frame_info: String,
+        ?log_level: String,
+        ?multicast_frame_info: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_device_frame_info: String?
+      attr_accessor log_level: String?
+      attr_accessor multicast_frame_info: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAbpV10X
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_cnt_start: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_cnt_start: Integer?
+    end
+
+    class UpdateAbpV11
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f_cnt_start: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f_cnt_start: Integer?
+    end
+
+    class UpdateDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?expression_type: String,
+        ?expression: String,
+        ?description: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor expression_type: String?
+      attr_accessor expression: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventConfigurationByResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration,
+        ?proximity: Types::ProximityResourceTypeEventConfiguration,
+        ?join: Types::JoinResourceTypeEventConfiguration,
+        ?connection_status: Types::ConnectionStatusResourceTypeEventConfiguration,
+        ?message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration?
+      attr_accessor proximity: Types::ProximityResourceTypeEventConfiguration?
+      attr_accessor join: Types::JoinResourceTypeEventConfiguration?
+      attr_accessor connection_status: Types::ConnectionStatusResourceTypeEventConfiguration?
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration?
+    end
+
+    class UpdateEventConfigurationByResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFPorts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?positioning: Types::Positioning,
+        ?applications: Array[Types::ApplicationConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor positioning: Types::Positioning?
+      attr_accessor applications: Array[Types::ApplicationConfig]?
+    end
+
+    class UpdateFuotaTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANFuotaTask,
+        ?firmware_update_image: String,
+        ?firmware_update_role: String,
+        ?redundancy_percent: Integer,
+        ?fragment_size_bytes: Integer,
+        ?fragment_interval_ms: Integer,
+        ?descriptor: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTask?
+      attr_accessor firmware_update_image: String?
+      attr_accessor firmware_update_role: String?
+      attr_accessor redundancy_percent: Integer?
+      attr_accessor fragment_size_bytes: Integer?
+      attr_accessor fragment_interval_ms: Integer?
+      attr_accessor descriptor: String?
+    end
+
+    class UpdateFuotaTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLogLevelsByResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_log_level: String,
+        ?fuota_task_log_options: Array[Types::FuotaTaskLogOption],
+        ?wireless_device_log_options: Array[Types::WirelessDeviceLogOption],
+        ?wireless_gateway_log_options: Array[Types::WirelessGatewayLogOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_log_level: String?
+      attr_accessor fuota_task_log_options: Array[Types::FuotaTaskLogOption]?
+      attr_accessor wireless_device_log_options: Array[Types::WirelessDeviceLogOption]?
+      attr_accessor wireless_gateway_log_options: Array[Types::WirelessGatewayLogOption]?
+    end
+
+    class UpdateLogLevelsByResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMetricConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_metric: Types::SummaryMetricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration?
+    end
+
+    class UpdateMetricConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMulticastGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANMulticast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticast?
+    end
+
+    class UpdateMulticastGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNetworkAnalyzerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_name: String,
+        ?trace_content: Types::TraceContent,
+        ?wireless_devices_to_add: Array[String],
+        ?wireless_devices_to_remove: Array[String],
+        ?wireless_gateways_to_add: Array[String],
+        ?wireless_gateways_to_remove: Array[String],
+        ?description: String,
+        ?multicast_groups_to_add: Array[String],
+        ?multicast_groups_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_name: String?
+      attr_accessor trace_content: Types::TraceContent?
+      attr_accessor wireless_devices_to_add: Array[String]?
+      attr_accessor wireless_devices_to_remove: Array[String]?
+      attr_accessor wireless_gateways_to_add: Array[String]?
+      attr_accessor wireless_gateways_to_remove: Array[String]?
+      attr_accessor description: String?
+      attr_accessor multicast_groups_to_add: Array[String]?
+      attr_accessor multicast_groups_to_remove: Array[String]?
+    end
+
+    class UpdateNetworkAnalyzerConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePartnerAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sidewalk: Types::SidewalkUpdateAccount,
+        ?partner_account_id: String,
+        ?partner_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sidewalk: Types::SidewalkUpdateAccount?
+      attr_accessor partner_account_id: String?
+      attr_accessor partner_type: String?
+    end
+
+    class UpdatePartnerAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor position: Array[Float]?
+    end
+
+    class UpdatePositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourceEventConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?identifier_type: String,
+        ?partner_type: String,
+        ?device_registration_state: Types::DeviceRegistrationStateEventConfiguration,
+        ?proximity: Types::ProximityEventConfiguration,
+        ?join: Types::JoinEventConfiguration,
+        ?connection_status: Types::ConnectionStatusEventConfiguration,
+        ?message_delivery_status: Types::MessageDeliveryStatusEventConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor identifier_type: String?
+      attr_accessor partner_type: String?
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration?
+      attr_accessor proximity: Types::ProximityEventConfiguration?
+      attr_accessor join: Types::JoinEventConfiguration?
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration?
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration?
+    end
+
+    class UpdateResourceEventConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourcePositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?geo_json_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor geo_json_payload: String?
+    end
+
+    class UpdateResourcePositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWirelessDeviceImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sidewalk: Types::SidewalkUpdateImportInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sidewalk: Types::SidewalkUpdateImportInfo?
+    end
+
+    class UpdateWirelessDeviceImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWirelessDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?destination_name: String,
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANUpdateDevice,
+        ?positioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor destination_name: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateDevice?
+      attr_accessor positioning: String?
+    end
+
+    class UpdateWirelessDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWirelessGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?join_eui_filters: Array[Array[String]],
+        ?net_id_filters: Array[String],
+        ?max_eirp: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor join_eui_filters: Array[Array[String]]?
+      attr_accessor net_id_filters: Array[String]?
+      attr_accessor max_eirp: Float?
+    end
+
+    class UpdateWirelessGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWirelessGatewayTaskCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_data_source: String,
+        ?update_data_role: String,
+        ?lo_ra_wan: Types::LoRaWANUpdateGatewayTaskCreate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_data_source: String?
+      attr_accessor update_data_role: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateGatewayTaskCreate?
+    end
+
+    class UpdateWirelessGatewayTaskEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?lo_ra_wan: Types::LoRaWANUpdateGatewayTaskEntry,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateGatewayTaskEntry?
+      attr_accessor arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WcdmaLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uarfcndl: Integer,
+        ?psc: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uarfcndl: Integer?
+      attr_accessor psc: Integer?
+    end
+
+    class WcdmaNmrObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uarfcndl: Integer,
+        ?psc: Integer,
+        ?utran_cid: Integer,
+        ?rscp: Integer,
+        ?path_loss: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uarfcndl: Integer?
+      attr_accessor psc: Integer?
+      attr_accessor utran_cid: Integer?
+      attr_accessor rscp: Integer?
+      attr_accessor path_loss: Integer?
+    end
+
+    class WcdmaObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcc: Integer,
+        ?mnc: Integer,
+        ?lac: Integer,
+        ?utran_cid: Integer,
+        ?wcdma_local_id: Types::WcdmaLocalId,
+        ?rscp: Integer,
+        ?path_loss: Integer,
+        ?wcdma_nmr: Array[Types::WcdmaNmrObj],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcc: Integer?
+      attr_accessor mnc: Integer?
+      attr_accessor lac: Integer?
+      attr_accessor utran_cid: Integer?
+      attr_accessor wcdma_local_id: Types::WcdmaLocalId?
+      attr_accessor rscp: Integer?
+      attr_accessor path_loss: Integer?
+      attr_accessor wcdma_nmr: Array[Types::WcdmaNmrObj]?
+    end
+
+    class WiFiAccessPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mac_address: String,
+        ?rss: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mac_address: String?
+      attr_accessor rss: Integer?
+    end
+
+    module WirelessDeviceEvent
+      Join: String
+      Rejoin: String
+      Uplink_Data: String
+      Downlink_Data: String
+      Registration: String
+    end
+
+    class WirelessDeviceEventLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor log_level: String?
+    end
+
+    module WirelessDeviceFrameInfo
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module WirelessDeviceIdType
+      WirelessDeviceId: String
+      DevEui: String
+      ThingName: String
+      SidewalkManufacturingSn: String
+    end
+
+    class WirelessDeviceImportTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?destination_name: String,
+        ?sidewalk: Types::SidewalkGetStartImportInfo,
+        ?creation_time: Time,
+        ?status: String,
+        ?status_reason: String,
+        ?initialized_imported_device_count: Integer,
+        ?pending_imported_device_count: Integer,
+        ?onboarded_imported_device_count: Integer,
+        ?failed_imported_device_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor destination_name: String?
+      attr_accessor sidewalk: Types::SidewalkGetStartImportInfo?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor initialized_imported_device_count: Integer?
+      attr_accessor pending_imported_device_count: Integer?
+      attr_accessor onboarded_imported_device_count: Integer?
+      attr_accessor failed_imported_device_count: Integer?
+    end
+
+    class WirelessDeviceLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?log_level: String,
+        ?events: Array[Types::WirelessDeviceEventLogOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor log_level: String?
+      attr_accessor events: Array[Types::WirelessDeviceEventLogOption]?
+    end
+
+    module WirelessDeviceSidewalkStatus
+      PROVISIONED: String
+      REGISTERED: String
+      ACTIVATED: String
+      UNKNOWN: String
+    end
+
+    class WirelessDeviceStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?type: String,
+        ?name: String,
+        ?destination_name: String,
+        ?last_uplink_received_at: String,
+        ?lo_ra_wan: Types::LoRaWANListDevice,
+        ?sidewalk: Types::SidewalkListDevice,
+        ?fuota_device_status: String,
+        ?multicast_device_status: String,
+        ?mc_group_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor destination_name: String?
+      attr_accessor last_uplink_received_at: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANListDevice?
+      attr_accessor sidewalk: Types::SidewalkListDevice?
+      attr_accessor fuota_device_status: String?
+      attr_accessor multicast_device_status: String?
+      attr_accessor mc_group_id: Integer?
+    end
+
+    module WirelessDeviceType
+      Sidewalk: String
+      LoRaWAN: String
+    end
+
+    module WirelessGatewayEvent
+      CUPS_Request: String
+      Certificate: String
+    end
+
+    class WirelessGatewayEventLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor log_level: String?
+    end
+
+    module WirelessGatewayIdType
+      GatewayEui: String
+      WirelessGatewayId: String
+      ThingName: String
+    end
+
+    class WirelessGatewayLogOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?log_level: String,
+        ?events: Array[Types::WirelessGatewayEventLogOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor log_level: String?
+      attr_accessor events: Array[Types::WirelessGatewayEventLogOption]?
+    end
+
+    module WirelessGatewayServiceType
+      CUPS: String
+      LNS: String
+    end
+
+    class WirelessGatewayStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?lo_ra_wan: Types::LoRaWANGateway,
+        ?last_uplink_received_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway?
+      attr_accessor last_uplink_received_at: String?
+    end
+
+    module WirelessGatewayTaskDefinitionType
+      UPDATE: String
+    end
+
+    module WirelessGatewayTaskStatus
+      PENDING: String
+      IN_PROGRESS: String
+      FIRST_RETRY: String
+      SECOND_RETRY: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module WirelessGatewayType
+      LoRaWAN: String
+    end
+
+    class WirelessMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lo_ra_wan: Types::LoRaWANSendDataToDevice,
+        ?sidewalk: Types::SidewalkSendDataToDevice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lo_ra_wan: Types::LoRaWANSendDataToDevice?
+      attr_accessor sidewalk: Types::SidewalkSendDataToDevice?
+    end
+  end
+end

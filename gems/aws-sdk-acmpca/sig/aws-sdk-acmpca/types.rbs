@@ -1,0 +1,1248 @@
+module Aws::ACMPCA
+  module Types
+
+    class ASN1Subject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?organization: String,
+        ?organizational_unit: String,
+        ?distinguished_name_qualifier: String,
+        ?state: String,
+        ?common_name: String,
+        ?serial_number: String,
+        ?locality: String,
+        ?title: String,
+        ?surname: String,
+        ?given_name: String,
+        ?initials: String,
+        ?pseudonym: String,
+        ?generation_qualifier: String,
+        ?custom_attributes: Array[Types::CustomAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor organization: String?
+      attr_accessor organizational_unit: String?
+      attr_accessor distinguished_name_qualifier: String?
+      attr_accessor state: String?
+      attr_accessor common_name: String?
+      attr_accessor serial_number: String?
+      attr_accessor locality: String?
+      attr_accessor title: String?
+      attr_accessor surname: String?
+      attr_accessor given_name: String?
+      attr_accessor initials: String?
+      attr_accessor pseudonym: String?
+      attr_accessor generation_qualifier: String?
+      attr_accessor custom_attributes: Array[Types::CustomAttribute]?
+    end
+
+    class AccessDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_method: Types::AccessMethod,
+        ?access_location: Types::GeneralName,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_method: Types::AccessMethod?
+      attr_accessor access_location: Types::GeneralName?
+    end
+
+    class AccessMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_object_identifier: String,
+        ?access_method_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_object_identifier: String?
+      attr_accessor access_method_type: String?
+    end
+
+    module AccessMethodType
+      CA_REPOSITORY: String
+      RESOURCE_PKI_MANIFEST: String
+      RESOURCE_PKI_NOTIFY: String
+    end
+
+    module ActionType
+      IssueCertificate: String
+      GetCertificate: String
+      ListPermissions: String
+    end
+
+    class ApiPassthrough
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extensions: Types::Extensions,
+        ?subject: Types::ASN1Subject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extensions: Types::Extensions?
+      attr_accessor subject: Types::ASN1Subject?
+    end
+
+    module AuditReportResponseFormat
+      JSON: String
+      CSV: String
+    end
+
+    module AuditReportStatus
+      CREATING: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class CertificateAuthority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?owner_account: String,
+        ?created_at: Time,
+        ?last_state_change_at: Time,
+        ?type: String,
+        ?serial: String,
+        ?status: String,
+        ?not_before: Time,
+        ?not_after: Time,
+        ?failure_reason: String,
+        ?certificate_authority_configuration: Types::CertificateAuthorityConfiguration,
+        ?revocation_configuration: Types::RevocationConfiguration,
+        ?restorable_until: Time,
+        ?key_storage_security_standard: String,
+        ?usage_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor owner_account: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_state_change_at: Time?
+      attr_accessor type: String?
+      attr_accessor serial: String?
+      attr_accessor status: String?
+      attr_accessor not_before: Time?
+      attr_accessor not_after: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor certificate_authority_configuration: Types::CertificateAuthorityConfiguration?
+      attr_accessor revocation_configuration: Types::RevocationConfiguration?
+      attr_accessor restorable_until: Time?
+      attr_accessor key_storage_security_standard: String?
+      attr_accessor usage_mode: String?
+    end
+
+    class CertificateAuthorityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_algorithm: String,
+        ?signing_algorithm: String,
+        ?subject: Types::ASN1Subject,
+        ?csr_extensions: Types::CsrExtensions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_algorithm: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor subject: Types::ASN1Subject?
+      attr_accessor csr_extensions: Types::CsrExtensions?
+    end
+
+    module CertificateAuthorityStatus
+      CREATING: String
+      PENDING_CERTIFICATE: String
+      ACTIVE: String
+      DELETED: String
+      DISABLED: String
+      EXPIRED: String
+      FAILED: String
+    end
+
+    module CertificateAuthorityType
+      ROOT: String
+      SUBORDINATE: String
+    end
+
+    module CertificateAuthorityUsageMode
+      GENERAL_PURPOSE: String
+      SHORT_LIVED_CERTIFICATE: String
+    end
+
+    class CertificateMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCertificateAuthorityAuditReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?s3_bucket_name: String,
+        ?audit_report_response_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor audit_report_response_format: String?
+    end
+
+    class CreateCertificateAuthorityAuditReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_report_id: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_report_id: String?
+      attr_accessor s3_key: String?
+    end
+
+    class CreateCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_configuration: Types::CertificateAuthorityConfiguration,
+        ?revocation_configuration: Types::RevocationConfiguration,
+        ?certificate_authority_type: String,
+        ?idempotency_token: String,
+        ?key_storage_security_standard: String,
+        ?tags: Array[Types::Tag],
+        ?usage_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_configuration: Types::CertificateAuthorityConfiguration?
+      attr_accessor revocation_configuration: Types::RevocationConfiguration?
+      attr_accessor certificate_authority_type: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor key_storage_security_standard: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor usage_mode: String?
+    end
+
+    class CreateCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class CreatePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?principal: String,
+        ?source_account: String,
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor principal: String?
+      attr_accessor source_account: String?
+      attr_accessor actions: Array[String]?
+    end
+
+    class CrlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?expiration_in_days: Integer,
+        ?custom_cname: String,
+        ?s3_bucket_name: String,
+        ?s3_object_acl: String,
+        ?crl_distribution_point_extension_configuration: Types::CrlDistributionPointExtensionConfiguration,
+        ?crl_type: String,
+        ?custom_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor expiration_in_days: Integer?
+      attr_accessor custom_cname: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_object_acl: String?
+      attr_accessor crl_distribution_point_extension_configuration: Types::CrlDistributionPointExtensionConfiguration?
+      attr_accessor crl_type: String?
+      attr_accessor custom_path: String?
+    end
+
+    class CrlDistributionPointExtensionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?omit_extension: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor omit_extension: bool?
+    end
+
+    module CrlType
+      COMPLETE: String
+      PARTITIONED: String
+    end
+
+    class CsrExtensions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_usage: Types::KeyUsage,
+        ?subject_information_access: Array[Types::AccessDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_usage: Types::KeyUsage?
+      attr_accessor subject_information_access: Array[Types::AccessDescription]?
+    end
+
+    class CustomAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+      attr_accessor value: String?
+    end
+
+    class CustomExtension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+        ?value: String,
+        ?critical: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+      attr_accessor value: String?
+      attr_accessor critical: bool?
+    end
+
+    class DeleteCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?permanent_deletion_time_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor permanent_deletion_time_in_days: Integer?
+    end
+
+    class DeletePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?principal: String,
+        ?source_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor principal: String?
+      attr_accessor source_account: String?
+    end
+
+    class DeletePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeCertificateAuthorityAuditReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?audit_report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor audit_report_id: String?
+    end
+
+    class DescribeCertificateAuthorityAuditReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_report_status: String,
+        ?s3_bucket_name: String,
+        ?s3_key: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_report_status: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_key: String?
+      attr_accessor created_at: Time?
+    end
+
+    class DescribeCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class DescribeCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority: Types::CertificateAuthority,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+    end
+
+    class EdiPartyName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?party_name: String,
+        ?name_assigner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor party_name: String?
+      attr_accessor name_assigner: String?
+    end
+
+    class ExtendedKeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extended_key_usage_type: String,
+        ?extended_key_usage_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extended_key_usage_type: String?
+      attr_accessor extended_key_usage_object_identifier: String?
+    end
+
+    module ExtendedKeyUsageType
+      SERVER_AUTH: String
+      CLIENT_AUTH: String
+      CODE_SIGNING: String
+      EMAIL_PROTECTION: String
+      TIME_STAMPING: String
+      OCSP_SIGNING: String
+      SMART_CARD_LOGIN: String
+      DOCUMENT_SIGNING: String
+      CERTIFICATE_TRANSPARENCY: String
+    end
+
+    class Extensions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_policies: Array[Types::PolicyInformation],
+        ?extended_key_usage: Array[Types::ExtendedKeyUsage],
+        ?key_usage: Types::KeyUsage,
+        ?subject_alternative_names: Array[Types::GeneralName],
+        ?custom_extensions: Array[Types::CustomExtension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_policies: Array[Types::PolicyInformation]?
+      attr_accessor extended_key_usage: Array[Types::ExtendedKeyUsage]?
+      attr_accessor key_usage: Types::KeyUsage?
+      attr_accessor subject_alternative_names: Array[Types::GeneralName]?
+      attr_accessor custom_extensions: Array[Types::CustomExtension]?
+    end
+
+    module FailureReason
+      REQUEST_TIMED_OUT: String
+      UNSUPPORTED_ALGORITHM: String
+      OTHER: String
+    end
+
+    class GeneralName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?other_name: Types::OtherName,
+        ?rfc822_name: String,
+        ?dns_name: String,
+        ?directory_name: Types::ASN1Subject,
+        ?edi_party_name: Types::EdiPartyName,
+        ?uniform_resource_identifier: String,
+        ?ip_address: String,
+        ?registered_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor other_name: Types::OtherName?
+      attr_accessor rfc822_name: String?
+      attr_accessor dns_name: String?
+      attr_accessor directory_name: Types::ASN1Subject?
+      attr_accessor edi_party_name: Types::EdiPartyName?
+      attr_accessor uniform_resource_identifier: String?
+      attr_accessor ip_address: String?
+      attr_accessor registered_id: String?
+    end
+
+    class GetCertificateAuthorityCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class GetCertificateAuthorityCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+    end
+
+    class GetCertificateAuthorityCsrRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class GetCertificateAuthorityCsrResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csr: String?
+    end
+
+    class GetCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor certificate_arn: String?
+    end
+
+    class GetCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+    end
+
+    class GetPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class ImportCertificateAuthorityCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?certificate: String,
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+    end
+
+    class InvalidArgsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IssueCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_passthrough: Types::ApiPassthrough,
+        ?certificate_authority_arn: String,
+        ?csr: String,
+        ?signing_algorithm: String,
+        ?template_arn: String,
+        ?validity: Types::Validity,
+        ?validity_not_before: Types::Validity,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_passthrough: Types::ApiPassthrough?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor csr: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor template_arn: String?
+      attr_accessor validity: Types::Validity?
+      attr_accessor validity_not_before: Types::Validity?
+      attr_accessor idempotency_token: String?
+    end
+
+    class IssueCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    module KeyAlgorithm
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      EC_prime256v1: String
+      EC_secp384r1: String
+      EC_secp521r1: String
+      SM2: String
+    end
+
+    module KeyStorageSecurityStandard
+      FIPS_140_2_LEVEL_2_OR_HIGHER: String
+      FIPS_140_2_LEVEL_3_OR_HIGHER: String
+      CCPC_LEVEL_1_OR_HIGHER: String
+    end
+
+    class KeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?digital_signature: bool,
+        ?non_repudiation: bool,
+        ?key_encipherment: bool,
+        ?data_encipherment: bool,
+        ?key_agreement: bool,
+        ?key_cert_sign: bool,
+        ?crl_sign: bool,
+        ?encipher_only: bool,
+        ?decipher_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor digital_signature: bool?
+      attr_accessor non_repudiation: bool?
+      attr_accessor key_encipherment: bool?
+      attr_accessor data_encipherment: bool?
+      attr_accessor key_agreement: bool?
+      attr_accessor key_cert_sign: bool?
+      attr_accessor crl_sign: bool?
+      attr_accessor encipher_only: bool?
+      attr_accessor decipher_only: bool?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCertificateAuthoritiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_owner: String?
+    end
+
+    class ListCertificateAuthoritiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?certificate_authorities: Array[Types::CertificateAuthority],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor certificate_authorities: Array[Types::CertificateAuthority]?
+    end
+
+    class ListPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class ListPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?permissions: Array[Types::Permission],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor permissions: Array[Types::Permission]?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LockoutPreventedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MalformedCSRException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MalformedCertificateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OcspConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?ocsp_custom_cname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor ocsp_custom_cname: String?
+    end
+
+    class OtherName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_id: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_id: String?
+      attr_accessor value: String?
+    end
+
+    class Permission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?created_at: Time,
+        ?principal: String,
+        ?source_account: String,
+        ?actions: Array[String],
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor principal: String?
+      attr_accessor source_account: String?
+      attr_accessor actions: Array[String]?
+      attr_accessor policy: String?
+    end
+
+    class PermissionAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cert_policy_id: String,
+        ?policy_qualifiers: Array[Types::PolicyQualifierInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cert_policy_id: String?
+      attr_accessor policy_qualifiers: Array[Types::PolicyQualifierInfo]?
+    end
+
+    module PolicyQualifierId
+      CPS: String
+    end
+
+    class PolicyQualifierInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_qualifier_id: String,
+        ?qualifier: Types::Qualifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_qualifier_id: String?
+      attr_accessor qualifier: Types::Qualifier?
+    end
+
+    class PutPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class Qualifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cps_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cps_uri: String?
+    end
+
+    class RequestAlreadyProcessedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RequestFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RequestInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceOwner
+      SELF: String
+      OTHER_ACCOUNTS: String
+    end
+
+    class RestoreCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    class RevocationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_configuration: Types::CrlConfiguration,
+        ?ocsp_configuration: Types::OcspConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_configuration: Types::CrlConfiguration?
+      attr_accessor ocsp_configuration: Types::OcspConfiguration?
+    end
+
+    module RevocationReason
+      UNSPECIFIED: String
+      KEY_COMPROMISE: String
+      CERTIFICATE_AUTHORITY_COMPROMISE: String
+      AFFILIATION_CHANGED: String
+      SUPERSEDED: String
+      CESSATION_OF_OPERATION: String
+      PRIVILEGE_WITHDRAWN: String
+      A_A_COMPROMISE: String
+    end
+
+    class RevokeCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?certificate_serial: String,
+        ?revocation_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor certificate_serial: String?
+      attr_accessor revocation_reason: String?
+    end
+
+    module S3ObjectAcl
+      PUBLIC_READ: String
+      BUCKET_OWNER_FULL_CONTROL: String
+    end
+
+    module SigningAlgorithm
+      SHA256WITHECDSA: String
+      SHA384WITHECDSA: String
+      SHA512WITHECDSA: String
+      SHA256WITHRSA: String
+      SHA384WITHRSA: String
+      SHA512WITHRSA: String
+      SM3WITHSM2: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?revocation_configuration: Types::RevocationConfiguration,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor revocation_configuration: Types::RevocationConfiguration?
+      attr_accessor status: String?
+    end
+
+    class Validity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor type: String?
+    end
+
+    module ValidityPeriodType
+      END_DATE: String
+      ABSOLUTE: String
+      DAYS: String
+      MONTHS: String
+      YEARS: String
+    end
+  end
+end

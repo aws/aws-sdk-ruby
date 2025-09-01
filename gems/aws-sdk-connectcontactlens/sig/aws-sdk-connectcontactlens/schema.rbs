@@ -1,0 +1,44 @@
+module Aws::ConnectContactLens
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Categories: StructureShape
+    CategoryDetails: StructureShape
+    CategoryName: StringShape
+    CharacterOffset: IntegerShape
+    CharacterOffsets: StructureShape
+    ContactId: StringShape
+    InstanceId: StringShape
+    InternalServiceException: StructureShape
+    InvalidRequestException: StructureShape
+    IssueDetected: StructureShape
+    IssuesDetected: ListShape
+    ListRealtimeContactAnalysisSegmentsRequest: StructureShape
+    ListRealtimeContactAnalysisSegmentsResponse: StructureShape
+    MatchedCategories: ListShape
+    MatchedDetails: MapShape
+    MaxResults: IntegerShape
+    Message: StringShape
+    NextToken: StringShape
+    OffsetMillis: IntegerShape
+    ParticipantId: StringShape
+    ParticipantRole: StringShape
+    PointOfInterest: StructureShape
+    PointsOfInterest: ListShape
+    PostContactSummary: StructureShape
+    PostContactSummaryContent: StringShape
+    PostContactSummaryFailureCode: EnumShape
+    PostContactSummaryStatus: EnumShape
+    RealtimeContactAnalysisSegment: StructureShape
+    RealtimeContactAnalysisSegments: ListShape
+    ResourceNotFoundException: StructureShape
+    SentimentValue: EnumShape
+    ThrottlingException: StructureShape
+    Transcript: StructureShape
+    TranscriptContent: StringShape
+    TranscriptId: StringShape
+
+    AmazonConnectContactLens: ServiceShape
+  end
+end

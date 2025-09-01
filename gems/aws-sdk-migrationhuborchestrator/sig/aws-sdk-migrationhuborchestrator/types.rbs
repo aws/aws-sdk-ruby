@@ -1,0 +1,1545 @@
+module Aws::MigrationHubOrchestrator
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_description: String,
+        ?template_source: Types::TemplateSource,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor template_source: Types::TemplateSource?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?template_id: String,
+        ?application_configuration_id: String,
+        ?input_parameters: Hash[String, Types::StepInput],
+        ?step_targets: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor template_id: String?
+      attr_accessor application_configuration_id: String?
+      attr_accessor input_parameters: Hash[String, Types::StepInput]?
+      attr_accessor step_targets: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?template_id: String,
+        ?ads_application_configuration_id: String,
+        ?workflow_inputs: Hash[String, Types::StepInput],
+        ?step_targets: Array[String],
+        ?status: String,
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor template_id: String?
+      attr_accessor ads_application_configuration_id: String?
+      attr_accessor workflow_inputs: Hash[String, Types::StepInput]?
+      attr_accessor step_targets: Array[String]?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkflowStepGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?name: String,
+        ?description: String,
+        ?next: Array[String],
+        ?previous: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor next: Array[String]?
+      attr_accessor previous: Array[String]?
+    end
+
+    class CreateWorkflowStepGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?tools: Array[Types::Tool],
+        ?next: Array[String],
+        ?previous: Array[String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor next: Array[String]?
+      attr_accessor previous: Array[String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateWorkflowStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?step_action_type: String,
+        ?description: String,
+        ?workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration,
+        ?step_target: Array[String],
+        ?outputs: Array[Types::WorkflowStepOutput],
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor step_action_type: String?
+      attr_accessor description: String?
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration?
+      attr_accessor step_target: Array[String]?
+      attr_accessor outputs: Array[Types::WorkflowStepOutput]?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class CreateWorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteWorkflowStepGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteWorkflowStepGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkflowStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+    end
+
+    class DeleteWorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?template_arn: String,
+        ?name: String,
+        ?description: String,
+        ?inputs: Array[Types::TemplateInput],
+        ?tools: Array[Types::Tool],
+        ?creation_time: Time,
+        ?owner: String,
+        ?status: String,
+        ?status_message: String,
+        ?template_class: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor template_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor inputs: Array[Types::TemplateInput]?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor creation_time: Time?
+      attr_accessor owner: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor template_class: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetTemplateStepGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor id: String?
+    end
+
+    class GetTemplateStepGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?tools: Array[Types::Tool],
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class GetTemplateStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?template_id: String,
+        ?step_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor template_id: String?
+      attr_accessor step_group_id: String?
+    end
+
+    class GetTemplateStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?template_id: String,
+        ?name: String,
+        ?description: String,
+        ?step_action_type: String,
+        ?creation_time: String,
+        ?previous: Array[String],
+        ?next: Array[String],
+        ?outputs: Array[Types::StepOutput],
+        ?step_automation_configuration: Types::StepAutomationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor template_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor step_action_type: String?
+      attr_accessor creation_time: String?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+      attr_accessor outputs: Array[Types::StepOutput]?
+      attr_accessor step_automation_configuration: Types::StepAutomationConfiguration?
+    end
+
+    class GetWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?template_id: String,
+        ?ads_application_configuration_id: String,
+        ?ads_application_name: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?last_start_time: Time,
+        ?last_stop_time: Time,
+        ?last_modified_time: Time,
+        ?end_time: Time,
+        ?tools: Array[Types::Tool],
+        ?total_steps: Integer,
+        ?completed_steps: Integer,
+        ?workflow_inputs: Hash[String, Types::StepInput],
+        ?tags: Hash[String, String],
+        ?workflow_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor template_id: String?
+      attr_accessor ads_application_configuration_id: String?
+      attr_accessor ads_application_name: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_start_time: Time?
+      attr_accessor last_stop_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor total_steps: Integer?
+      attr_accessor completed_steps: Integer?
+      attr_accessor workflow_inputs: Hash[String, Types::StepInput]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor workflow_bucket: String?
+    end
+
+    class GetWorkflowStepGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor workflow_id: String?
+    end
+
+    class GetWorkflowStepGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?workflow_id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?owner: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?end_time: Time,
+        ?tools: Array[Types::Tool],
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor owner: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class GetWorkflowStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?step_group_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor id: String?
+    end
+
+    class GetWorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?step_id: String,
+        ?description: String,
+        ?step_action_type: String,
+        ?owner: String,
+        ?workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration,
+        ?step_target: Array[String],
+        ?outputs: Array[Types::WorkflowStepOutput],
+        ?previous: Array[String],
+        ?next: Array[String],
+        ?status: String,
+        ?status_message: String,
+        ?script_output_location: String,
+        ?creation_time: Time,
+        ?last_start_time: Time,
+        ?end_time: Time,
+        ?no_of_srv_completed: Integer,
+        ?no_of_srv_failed: Integer,
+        ?total_no_of_srv: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor step_id: String?
+      attr_accessor description: String?
+      attr_accessor step_action_type: String?
+      attr_accessor owner: String?
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration?
+      attr_accessor step_target: Array[String]?
+      attr_accessor outputs: Array[Types::WorkflowStepOutput]?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor script_output_location: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor no_of_srv_completed: Integer?
+      attr_accessor no_of_srv_failed: Integer?
+      attr_accessor total_no_of_srv: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListPluginsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPluginsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?plugins: Array[Types::PluginSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor plugins: Array[Types::PluginSummary]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTemplateStepGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor template_id: String?
+    end
+
+    class ListTemplateStepGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?template_step_group_summary: Array[Types::TemplateStepGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor template_step_group_summary: Array[Types::TemplateStepGroupSummary]?
+    end
+
+    class ListTemplateStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?template_id: String,
+        ?step_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor template_id: String?
+      attr_accessor step_group_id: String?
+    end
+
+    class ListTemplateStepsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?template_step_summary_list: Array[Types::TemplateStepSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor template_step_summary_list: Array[Types::TemplateStepSummary]?
+    end
+
+    class ListTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name: String?
+    end
+
+    class ListTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?template_summary: Array[Types::TemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor template_summary: Array[Types::TemplateSummary]?
+    end
+
+    class ListWorkflowStepGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workflow_id: String?
+    end
+
+    class ListWorkflowStepGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workflow_step_groups_summary: Array[Types::WorkflowStepGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workflow_step_groups_summary: Array[Types::WorkflowStepGroupSummary]?
+    end
+
+    class ListWorkflowStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workflow_id: String,
+        ?step_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workflow_id: String?
+      attr_accessor step_group_id: String?
+    end
+
+    class ListWorkflowStepsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workflow_steps_summary: Array[Types::WorkflowStepSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workflow_steps_summary: Array[Types::WorkflowStepSummary]?
+    end
+
+    class ListWorkflowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?template_id: String,
+        ?ads_application_configuration_name: String,
+        ?status: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor template_id: String?
+      attr_accessor ads_application_configuration_name: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+    end
+
+    class ListWorkflowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?migration_workflow_summary: Array[Types::MigrationWorkflowSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor migration_workflow_summary: Array[Types::MigrationWorkflowSummary]?
+    end
+
+    class MigrationWorkflowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?template_id: String,
+        ?ads_application_configuration_name: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?end_time: Time,
+        ?status_message: String,
+        ?completed_steps: Integer,
+        ?total_steps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor template_id: String?
+      attr_accessor ads_application_configuration_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor completed_steps: Integer?
+      attr_accessor total_steps: Integer?
+    end
+
+    class PlatformCommand
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linux: String,
+        ?windows: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linux: String?
+      attr_accessor windows: String?
+    end
+
+    class PlatformScriptKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linux: String,
+        ?windows: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linux: String?
+      attr_accessor windows: String?
+    end
+
+    class PluginSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plugin_id: String,
+        ?hostname: String,
+        ?status: String,
+        ?ip_address: String,
+        ?version: String,
+        ?registered_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plugin_id: String?
+      attr_accessor hostname: String?
+      attr_accessor status: String?
+      attr_accessor ip_address: String?
+      attr_accessor version: String?
+      attr_accessor registered_time: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryWorkflowStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?step_group_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor id: String?
+    end
+
+    class RetryWorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+    end
+
+    class StartWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StartWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?last_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor last_start_time: Time?
+    end
+
+    class StepAutomationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_location_s3_bucket: String,
+        ?script_location_s3_key: Types::PlatformScriptKey,
+        ?command: Types::PlatformCommand,
+        ?run_environment: String,
+        ?target_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_location_s3_bucket: String?
+      attr_accessor script_location_s3_key: Types::PlatformScriptKey?
+      attr_accessor command: Types::PlatformCommand?
+      attr_accessor run_environment: String?
+      attr_accessor target_type: String?
+    end
+
+    class StepInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?integer_value: Integer,
+        ?string_value: String,
+        ?list_of_strings_value: Array[String],
+        ?map_of_string_value: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_value: Integer?
+      attr_accessor string_value: String?
+      attr_accessor list_of_strings_value: Array[String]?
+      attr_accessor map_of_string_value: Hash[String, String]?
+
+      class IntegerValue < StepInput
+      end
+      class StringValue < StepInput
+      end
+      class ListOfStringsValue < StepInput
+      end
+      class MapOfStringValue < StepInput
+      end
+      class Unknown < StepInput
+      end
+    end
+
+    class StepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor required: bool?
+    end
+
+    class StopWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?last_stop_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor last_stop_time: Time?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?data_type: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor data_type: String?
+      attr_accessor required: bool?
+    end
+
+    class TemplateSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+
+      class WorkflowId < TemplateSource
+      end
+      class Unknown < TemplateSource
+      end
+    end
+
+    class TemplateStepGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class TemplateStepSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?template_id: String,
+        ?name: String,
+        ?step_action_type: String,
+        ?target_type: String,
+        ?owner: String,
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor template_id: String?
+      attr_accessor name: String?
+      attr_accessor step_action_type: String?
+      attr_accessor target_type: String?
+      attr_accessor owner: String?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?input_parameters: Hash[String, Types::StepInput],
+        ?step_targets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor input_parameters: Hash[String, Types::StepInput]?
+      attr_accessor step_targets: Array[String]?
+    end
+
+    class UpdateWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?template_id: String,
+        ?ads_application_configuration_id: String,
+        ?workflow_inputs: Hash[String, Types::StepInput],
+        ?step_targets: Array[String],
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor template_id: String?
+      attr_accessor ads_application_configuration_id: String?
+      attr_accessor workflow_inputs: Hash[String, Types::StepInput]?
+      attr_accessor step_targets: Array[String]?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateWorkflowStepGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?next: Array[String],
+        ?previous: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor next: Array[String]?
+      attr_accessor previous: Array[String]?
+    end
+
+    class UpdateWorkflowStepGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?tools: Array[Types::Tool],
+        ?next: Array[String],
+        ?previous: Array[String],
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor tools: Array[Types::Tool]?
+      attr_accessor next: Array[String]?
+      attr_accessor previous: Array[String]?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class UpdateWorkflowStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?name: String,
+        ?description: String,
+        ?step_action_type: String,
+        ?workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration,
+        ?step_target: Array[String],
+        ?outputs: Array[Types::WorkflowStepOutput],
+        ?previous: Array[String],
+        ?next: Array[String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor step_action_type: String?
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration?
+      attr_accessor step_target: Array[String]?
+      attr_accessor outputs: Array[Types::WorkflowStepOutput]?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+      attr_accessor status: String?
+    end
+
+    class UpdateWorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?step_group_id: String,
+        ?workflow_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor step_group_id: String?
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WorkflowStepAutomationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_location_s3_bucket: String,
+        ?script_location_s3_key: Types::PlatformScriptKey,
+        ?command: Types::PlatformCommand,
+        ?run_environment: String,
+        ?target_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_location_s3_bucket: String?
+      attr_accessor script_location_s3_key: Types::PlatformScriptKey?
+      attr_accessor command: Types::PlatformCommand?
+      attr_accessor run_environment: String?
+      attr_accessor target_type: String?
+    end
+
+    class WorkflowStepGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owner: String,
+        ?status: String,
+        ?previous: Array[String],
+        ?next: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor status: String?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+    end
+
+    class WorkflowStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?required: bool,
+        ?value: Types::WorkflowStepOutputUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor required: bool?
+      attr_accessor value: Types::WorkflowStepOutputUnion?
+    end
+
+    class WorkflowStepOutputUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?integer_value: Integer,
+        ?string_value: String,
+        ?list_of_string_value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_value: Integer?
+      attr_accessor string_value: String?
+      attr_accessor list_of_string_value: Array[String]?
+
+      class IntegerValue < WorkflowStepOutputUnion
+      end
+      class StringValue < WorkflowStepOutputUnion
+      end
+      class ListOfStringValue < WorkflowStepOutputUnion
+      end
+      class Unknown < WorkflowStepOutputUnion
+      end
+    end
+
+    class WorkflowStepSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?name: String,
+        ?step_action_type: String,
+        ?owner: String,
+        ?previous: Array[String],
+        ?next: Array[String],
+        ?status: String,
+        ?status_message: String,
+        ?no_of_srv_completed: Integer,
+        ?no_of_srv_failed: Integer,
+        ?total_no_of_srv: Integer,
+        ?description: String,
+        ?script_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor name: String?
+      attr_accessor step_action_type: String?
+      attr_accessor owner: String?
+      attr_accessor previous: Array[String]?
+      attr_accessor next: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor no_of_srv_completed: Integer?
+      attr_accessor no_of_srv_failed: Integer?
+      attr_accessor total_no_of_srv: Integer?
+      attr_accessor description: String?
+      attr_accessor script_location: String?
+    end
+  end
+end

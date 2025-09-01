@@ -1,0 +1,28 @@
+module Aws::ComprehendMedical
+  module Errors
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEncodingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TextSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

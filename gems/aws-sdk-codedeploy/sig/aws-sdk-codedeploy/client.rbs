@@ -1,0 +1,875 @@
+module Aws::CodeDeploy
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeDeploy::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsToOnPremisesInstancesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags_to_on_premises_instances: (
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?instance_names: Array[String]
+    ) -> _AddTagsToOnPremisesInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToOnPremisesInstancesResponse
+
+    interface _BatchGetApplicationRevisionsResponse
+      include Smithy::Client::_Response[Types::BatchGetApplicationRevisionsOutput]
+      def application_name: () -> String?
+      def error_message: () -> String?
+      def revisions: () -> Array[Types::RevisionInfo]?
+    end
+    def batch_get_application_revisions: (
+      ?application_name: String,
+      ?revisions: Array[
+        {
+          revision_type: String,
+          s3_location: {
+            bucket: String,
+            key: String,
+            bundle_type: String,
+            version: String,
+            e_tag: String
+          },
+          git_hub_location: {
+            repository: String,
+            commit_id: String
+          },
+          string: {
+            content: String,
+            sha256: String
+          },
+          app_spec_content: {
+            content: untyped,
+            sha256: untyped
+          }
+        }
+      ]
+    ) -> _BatchGetApplicationRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetApplicationRevisionsResponse
+
+    interface _BatchGetApplicationsResponse
+      include Smithy::Client::_Response[Types::BatchGetApplicationsOutput]
+      def applications_info: () -> Array[Types::ApplicationInfo]?
+    end
+    def batch_get_applications: (
+      ?application_names: Array[String]
+    ) -> _BatchGetApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetApplicationsResponse
+
+    interface _BatchGetDeploymentGroupsResponse
+      include Smithy::Client::_Response[Types::BatchGetDeploymentGroupsOutput]
+      def deployment_groups_info: () -> Array[Types::DeploymentGroupInfo]?
+      def error_message: () -> String?
+    end
+    def batch_get_deployment_groups: (
+      ?application_name: String,
+      ?deployment_group_names: Array[String]
+    ) -> _BatchGetDeploymentGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDeploymentGroupsResponse
+
+    interface _BatchGetDeploymentInstancesResponse
+      include Smithy::Client::_Response[Types::BatchGetDeploymentInstancesOutput]
+      def instances_summary: () -> Array[Types::InstanceSummary]?
+      def error_message: () -> String?
+    end
+    def batch_get_deployment_instances: (
+      ?deployment_id: String,
+      ?instance_ids: Array[String]
+    ) -> _BatchGetDeploymentInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDeploymentInstancesResponse
+
+    interface _BatchGetDeploymentTargetsResponse
+      include Smithy::Client::_Response[Types::BatchGetDeploymentTargetsOutput]
+      def deployment_targets: () -> Array[Types::DeploymentTarget]?
+    end
+    def batch_get_deployment_targets: (
+      ?deployment_id: String,
+      ?target_ids: Array[String]
+    ) -> _BatchGetDeploymentTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDeploymentTargetsResponse
+
+    interface _BatchGetDeploymentsResponse
+      include Smithy::Client::_Response[Types::BatchGetDeploymentsOutput]
+      def deployments_info: () -> Array[Types::DeploymentInfo]?
+    end
+    def batch_get_deployments: (
+      ?deployment_ids: Array[String]
+    ) -> _BatchGetDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDeploymentsResponse
+
+    interface _BatchGetOnPremisesInstancesResponse
+      include Smithy::Client::_Response[Types::BatchGetOnPremisesInstancesOutput]
+      def instance_infos: () -> Array[Types::InstanceInfo]?
+    end
+    def batch_get_on_premises_instances: (
+      ?instance_names: Array[String]
+    ) -> _BatchGetOnPremisesInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetOnPremisesInstancesResponse
+
+    interface _ContinueDeploymentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def continue_deployment: (
+      ?deployment_id: String,
+      ?deployment_wait_type: String
+    ) -> _ContinueDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ContinueDeploymentResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def application_id: () -> String?
+    end
+    def create_application: (
+      ?application_name: String,
+      ?compute_platform: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentOutput]
+      def deployment_id: () -> String?
+    end
+    def create_deployment: (
+      ?application_name: String,
+      ?deployment_group_name: String,
+      ?revision: {
+        revision_type: String,
+        s3_location: {
+          bucket: String,
+          key: String,
+          bundle_type: String,
+          version: String,
+          e_tag: String
+        },
+        git_hub_location: {
+          repository: String,
+          commit_id: String
+        },
+        string: {
+          content: String,
+          sha256: String
+        },
+        app_spec_content: {
+          content: untyped,
+          sha256: untyped
+        }
+      },
+      ?deployment_config_name: String,
+      ?description: String,
+      ?ignore_application_stop_failures: bool,
+      ?target_instances: {
+        tag_filters: Array[
+          {
+            key: String,
+            value: String,
+            type: String
+          }
+        ],
+        auto_scaling_groups: Array[String],
+        ec2_tag_set: {
+          ec2_tag_set_list: Array[
+            Array[
+              {
+                key: untyped,
+                value: untyped,
+                type: untyped
+              }
+            ]
+          ]
+        }
+      },
+      ?auto_rollback_configuration: {
+        enabled: bool,
+        events: Array[String]
+      },
+      ?update_outdated_instances_only: bool,
+      ?file_exists_behavior: String,
+      ?override_alarm_configuration: {
+        enabled: bool,
+        ignore_poll_alarm_failure: untyped,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _CreateDeploymentConfigResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentConfigOutput]
+      def deployment_config_id: () -> String?
+    end
+    def create_deployment_config: (
+      ?deployment_config_name: String,
+      ?minimum_healthy_hosts: {
+        type: String,
+        value: Integer
+      },
+      ?traffic_routing_config: {
+        type: String,
+        time_based_canary: {
+          canary_percentage: Integer,
+          canary_interval: Integer
+        },
+        time_based_linear: {
+          linear_percentage: untyped,
+          linear_interval: untyped
+        }
+      },
+      ?compute_platform: String,
+      ?zonal_config: {
+        first_zone_monitor_duration_in_seconds: Integer,
+        monitor_duration_in_seconds: untyped,
+        minimum_healthy_hosts_per_zone: {
+          type: String,
+          value: Integer
+        }
+      }
+    ) -> _CreateDeploymentConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentConfigResponse
+
+    interface _CreateDeploymentGroupResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentGroupOutput]
+      def deployment_group_id: () -> String?
+    end
+    def create_deployment_group: (
+      ?application_name: String,
+      ?deployment_group_name: String,
+      ?deployment_config_name: String,
+      ?ec2_tag_filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?on_premises_instance_tag_filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?auto_scaling_groups: Array[String],
+      ?service_role_arn: String,
+      ?trigger_configurations: Array[
+        {
+          trigger_name: String,
+          trigger_target_arn: String,
+          trigger_events: Array[String]
+        }
+      ],
+      ?alarm_configuration: {
+        enabled: bool,
+        ignore_poll_alarm_failure: untyped,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      },
+      ?auto_rollback_configuration: {
+        enabled: bool,
+        events: Array[String]
+      },
+      ?outdated_instances_strategy: String,
+      ?deployment_style: {
+        deployment_type: String,
+        deployment_option: String
+      },
+      ?blue_green_deployment_configuration: {
+        terminate_blue_instances_on_deployment_success: {
+          action: String,
+          termination_wait_time_in_minutes: Integer
+        },
+        deployment_ready_option: {
+          action_on_timeout: String,
+          wait_time_in_minutes: untyped
+        },
+        green_fleet_provisioning_option: {
+          action: String
+        }
+      },
+      ?load_balancer_info: {
+        elb_info_list: Array[
+          {
+            name: String
+          }
+        ],
+        target_group_info_list: Array[
+          {
+            name: String
+          }
+        ],
+        target_group_pair_info_list: Array[
+          {
+            target_groups: untyped,
+            prod_traffic_route: {
+              listener_arns: Array[String]
+            },
+            test_traffic_route: untyped
+          }
+        ]
+      },
+      ?ec2_tag_set: {
+        ec2_tag_set_list: Array[
+          Array[
+            {
+              key: String,
+              value: String,
+              type: String
+            }
+          ]
+        ]
+      },
+      ?ecs_services: Array[
+        {
+          service_name: String,
+          cluster_name: String
+        }
+      ],
+      ?on_premises_tag_set: {
+        on_premises_tag_set_list: Array[
+          Array[
+            {
+              key: String,
+              value: String,
+              type: String
+            }
+          ]
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?termination_hook_enabled: bool
+    ) -> _CreateDeploymentGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentGroupResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_application: (
+      ?application_name: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteDeploymentConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_deployment_config: (
+      ?deployment_config_name: String
+    ) -> _DeleteDeploymentConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentConfigResponse
+
+    interface _DeleteDeploymentGroupResponse
+      include Smithy::Client::_Response[Types::DeleteDeploymentGroupOutput]
+      def hooks_not_cleaned_up: () -> Array[Types::AutoScalingGroup]?
+    end
+    def delete_deployment_group: (
+      ?application_name: String,
+      ?deployment_group_name: String
+    ) -> _DeleteDeploymentGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentGroupResponse
+
+    interface _DeleteGitHubAccountTokenResponse
+      include Smithy::Client::_Response[Types::DeleteGitHubAccountTokenOutput]
+      def token_name: () -> String?
+    end
+    def delete_git_hub_account_token: (
+      ?token_name: String
+    ) -> _DeleteGitHubAccountTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGitHubAccountTokenResponse
+
+    interface _DeleteResourcesByExternalIdResponse
+      include Smithy::Client::_Response[Types::DeleteResourcesByExternalIdOutput]
+    end
+    def delete_resources_by_external_id: (
+      ?external_id: String
+    ) -> _DeleteResourcesByExternalIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcesByExternalIdResponse
+
+    interface _DeregisterOnPremisesInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_on_premises_instance: (
+      ?instance_name: String
+    ) -> _DeregisterOnPremisesInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterOnPremisesInstanceResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOutput]
+      def application: () -> Types::ApplicationInfo?
+    end
+    def get_application: (
+      ?application_name: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetApplicationRevisionResponse
+      include Smithy::Client::_Response[Types::GetApplicationRevisionOutput]
+      def application_name: () -> String?
+      def revision: () -> Types::RevisionLocation?
+      def revision_info: () -> Types::GenericRevisionInfo?
+    end
+    def get_application_revision: (
+      ?application_name: String,
+      ?revision: {
+        revision_type: String,
+        s3_location: {
+          bucket: String,
+          key: String,
+          bundle_type: String,
+          version: String,
+          e_tag: String
+        },
+        git_hub_location: {
+          repository: String,
+          commit_id: String
+        },
+        string: {
+          content: String,
+          sha256: String
+        },
+        app_spec_content: {
+          content: untyped,
+          sha256: untyped
+        }
+      }
+    ) -> _GetApplicationRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationRevisionResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentOutput]
+      def deployment_info: () -> Types::DeploymentInfo?
+    end
+    def get_deployment: (
+      ?deployment_id: String
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetDeploymentConfigResponse
+      include Smithy::Client::_Response[Types::GetDeploymentConfigOutput]
+      def deployment_config_info: () -> Types::DeploymentConfigInfo?
+    end
+    def get_deployment_config: (
+      ?deployment_config_name: String
+    ) -> _GetDeploymentConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentConfigResponse
+
+    interface _GetDeploymentGroupResponse
+      include Smithy::Client::_Response[Types::GetDeploymentGroupOutput]
+      def deployment_group_info: () -> Types::DeploymentGroupInfo?
+    end
+    def get_deployment_group: (
+      ?application_name: String,
+      ?deployment_group_name: String
+    ) -> _GetDeploymentGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentGroupResponse
+
+    interface _GetDeploymentInstanceResponse
+      include Smithy::Client::_Response[Types::GetDeploymentInstanceOutput]
+      def instance_summary: () -> Types::InstanceSummary?
+    end
+    def get_deployment_instance: (
+      ?deployment_id: String,
+      ?instance_id: String
+    ) -> _GetDeploymentInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentInstanceResponse
+
+    interface _GetDeploymentTargetResponse
+      include Smithy::Client::_Response[Types::GetDeploymentTargetOutput]
+      def deployment_target: () -> Types::DeploymentTarget?
+    end
+    def get_deployment_target: (
+      ?deployment_id: String,
+      ?target_id: String
+    ) -> _GetDeploymentTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentTargetResponse
+
+    interface _GetOnPremisesInstanceResponse
+      include Smithy::Client::_Response[Types::GetOnPremisesInstanceOutput]
+      def instance_info: () -> Types::InstanceInfo?
+    end
+    def get_on_premises_instance: (
+      ?instance_name: String
+    ) -> _GetOnPremisesInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOnPremisesInstanceResponse
+
+    interface _ListApplicationRevisionsResponse
+      include Smithy::Client::_Response[Types::ListApplicationRevisionsOutput]
+      def revisions: () -> Array[Types::RevisionLocation]?
+      def next_token: () -> String?
+    end
+    def list_application_revisions: (
+      ?application_name: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?s3_bucket: String,
+      ?s3_key_prefix: String,
+      ?deployed: String,
+      ?next_token: String
+    ) -> _ListApplicationRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationRevisionsResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOutput]
+      def applications: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListDeploymentConfigsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentConfigsOutput]
+      def deployment_configs_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_deployment_configs: (
+      ?next_token: String
+    ) -> _ListDeploymentConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentConfigsResponse
+
+    interface _ListDeploymentGroupsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentGroupsOutput]
+      def application_name: () -> String?
+      def deployment_groups: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_deployment_groups: (
+      ?application_name: String,
+      ?next_token: String
+    ) -> _ListDeploymentGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentGroupsResponse
+
+    interface _ListDeploymentInstancesResponse
+      include Smithy::Client::_Response[Types::ListDeploymentInstancesOutput]
+      def instances_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_deployment_instances: (
+      ?deployment_id: String,
+      ?next_token: String,
+      ?instance_status_filter: Array[String],
+      ?instance_type_filter: Array[String]
+    ) -> _ListDeploymentInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentInstancesResponse
+
+    interface _ListDeploymentTargetsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentTargetsOutput]
+      def target_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_deployment_targets: (
+      ?deployment_id: String,
+      ?next_token: String,
+      ?target_filters: Hash[String,
+        Array[String]
+      ]
+    ) -> _ListDeploymentTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentTargetsResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsOutput]
+      def deployments: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_deployments: (
+      ?application_name: String,
+      ?deployment_group_name: String,
+      ?external_id: String,
+      ?include_only_statuses: Array[String],
+      ?create_time_range: {
+        start: Time,
+        end: untyped
+      },
+      ?next_token: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListGitHubAccountTokenNamesResponse
+      include Smithy::Client::_Response[Types::ListGitHubAccountTokenNamesOutput]
+      def token_name_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_git_hub_account_token_names: (
+      ?next_token: String
+    ) -> _ListGitHubAccountTokenNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGitHubAccountTokenNamesResponse
+
+    interface _ListOnPremisesInstancesResponse
+      include Smithy::Client::_Response[Types::ListOnPremisesInstancesOutput]
+      def instance_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_on_premises_instances: (
+      ?registration_status: String,
+      ?tag_filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?next_token: String
+    ) -> _ListOnPremisesInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOnPremisesInstancesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutLifecycleEventHookExecutionStatusResponse
+      include Smithy::Client::_Response[Types::PutLifecycleEventHookExecutionStatusOutput]
+      def lifecycle_event_hook_execution_id: () -> String?
+    end
+    def put_lifecycle_event_hook_execution_status: (
+      ?deployment_id: String,
+      ?lifecycle_event_hook_execution_id: String,
+      ?status: String
+    ) -> _PutLifecycleEventHookExecutionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLifecycleEventHookExecutionStatusResponse
+
+    interface _RegisterApplicationRevisionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_application_revision: (
+      ?application_name: String,
+      ?description: String,
+      ?revision: {
+        revision_type: String,
+        s3_location: {
+          bucket: String,
+          key: String,
+          bundle_type: String,
+          version: String,
+          e_tag: String
+        },
+        git_hub_location: {
+          repository: String,
+          commit_id: String
+        },
+        string: {
+          content: String,
+          sha256: String
+        },
+        app_spec_content: {
+          content: untyped,
+          sha256: untyped
+        }
+      }
+    ) -> _RegisterApplicationRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterApplicationRevisionResponse
+
+    interface _RegisterOnPremisesInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_on_premises_instance: (
+      ?instance_name: String,
+      ?iam_session_arn: String,
+      ?iam_user_arn: String
+    ) -> _RegisterOnPremisesInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOnPremisesInstanceResponse
+
+    interface _RemoveTagsFromOnPremisesInstancesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags_from_on_premises_instances: (
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?instance_names: Array[String]
+    ) -> _RemoveTagsFromOnPremisesInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromOnPremisesInstancesResponse
+
+    interface _SkipWaitTimeForInstanceTerminationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def skip_wait_time_for_instance_termination: (
+      ?deployment_id: String
+    ) -> _SkipWaitTimeForInstanceTerminationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SkipWaitTimeForInstanceTerminationResponse
+
+    interface _StopDeploymentResponse
+      include Smithy::Client::_Response[Types::StopDeploymentOutput]
+      def status: () -> String?
+      def status_message: () -> String?
+    end
+    def stop_deployment: (
+      ?deployment_id: String,
+      ?auto_rollback_enabled: bool
+    ) -> _StopDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDeploymentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_application: (
+      ?application_name: String,
+      ?new_application_name: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateDeploymentGroupResponse
+      include Smithy::Client::_Response[Types::UpdateDeploymentGroupOutput]
+      def hooks_not_cleaned_up: () -> Array[Types::AutoScalingGroup]?
+    end
+    def update_deployment_group: (
+      ?application_name: String,
+      ?current_deployment_group_name: String,
+      ?new_deployment_group_name: String,
+      ?deployment_config_name: String,
+      ?ec2_tag_filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?on_premises_instance_tag_filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?auto_scaling_groups: Array[String],
+      ?service_role_arn: String,
+      ?trigger_configurations: Array[
+        {
+          trigger_name: String,
+          trigger_target_arn: String,
+          trigger_events: Array[String]
+        }
+      ],
+      ?alarm_configuration: {
+        enabled: bool,
+        ignore_poll_alarm_failure: untyped,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      },
+      ?auto_rollback_configuration: {
+        enabled: bool,
+        events: Array[String]
+      },
+      ?outdated_instances_strategy: String,
+      ?deployment_style: {
+        deployment_type: String,
+        deployment_option: String
+      },
+      ?blue_green_deployment_configuration: {
+        terminate_blue_instances_on_deployment_success: {
+          action: String,
+          termination_wait_time_in_minutes: Integer
+        },
+        deployment_ready_option: {
+          action_on_timeout: String,
+          wait_time_in_minutes: untyped
+        },
+        green_fleet_provisioning_option: {
+          action: String
+        }
+      },
+      ?load_balancer_info: {
+        elb_info_list: Array[
+          {
+            name: String
+          }
+        ],
+        target_group_info_list: Array[
+          {
+            name: String
+          }
+        ],
+        target_group_pair_info_list: Array[
+          {
+            target_groups: untyped,
+            prod_traffic_route: {
+              listener_arns: Array[String]
+            },
+            test_traffic_route: untyped
+          }
+        ]
+      },
+      ?ec2_tag_set: {
+        ec2_tag_set_list: Array[
+          Array[
+            {
+              key: String,
+              value: String,
+              type: String
+            }
+          ]
+        ]
+      },
+      ?ecs_services: Array[
+        {
+          service_name: String,
+          cluster_name: String
+        }
+      ],
+      ?on_premises_tag_set: {
+        on_premises_tag_set_list: Array[
+          Array[
+            {
+              key: String,
+              value: String,
+              type: String
+            }
+          ]
+        ]
+      },
+      ?termination_hook_enabled: bool
+    ) -> _UpdateDeploymentGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeploymentGroupResponse
+  end
+end

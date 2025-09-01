@@ -1,0 +1,412 @@
+module Aws::DynamoDBStreams
+  module Types
+
+    class AttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s: String,
+        ?n: String,
+        ?b: String,
+        ?ss: Array[String],
+        ?ns: Array[String],
+        ?bs: Array[String],
+        ?m: Hash[String, Types::AttributeValue],
+        ?l: Array[Types::AttributeValue],
+        ?null: bool,
+        ?bool: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s: String?
+      attr_accessor n: String?
+      attr_accessor b: String?
+      attr_accessor ss: Array[String]?
+      attr_accessor ns: Array[String]?
+      attr_accessor bs: Array[String]?
+      attr_accessor m: Hash[String, Types::AttributeValue]?
+      attr_accessor l: Array[Types::AttributeValue]?
+      attr_accessor null: bool?
+      attr_accessor bool: bool?
+
+      class S < AttributeValue
+      end
+      class N < AttributeValue
+      end
+      class B < AttributeValue
+      end
+      class SS < AttributeValue
+      end
+      class NS < AttributeValue
+      end
+      class BS < AttributeValue
+      end
+      class M < AttributeValue
+      end
+      class L < AttributeValue
+      end
+      class NULL < AttributeValue
+      end
+      class BOOL < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    class DescribeStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?limit: Integer,
+        ?exclusive_start_shard_id: String,
+        ?shard_filter: Types::ShardFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor exclusive_start_shard_id: String?
+      attr_accessor shard_filter: Types::ShardFilter?
+    end
+
+    class DescribeStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_description: Types::StreamDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_description: Types::StreamDescription?
+    end
+
+    class ExpiredIteratorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetRecordsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_iterator: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_iterator: String?
+      attr_accessor limit: Integer?
+    end
+
+    class GetRecordsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::Record],
+        ?next_shard_iterator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::Record]?
+      attr_accessor next_shard_iterator: String?
+    end
+
+    class GetShardIteratorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?shard_id: String,
+        ?shard_iterator_type: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor shard_id: String?
+      attr_accessor shard_iterator_type: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class GetShardIteratorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_iterator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_iterator: String?
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id: String?
+      attr_accessor type: String?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeySchemaElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor key_type: String?
+    end
+
+    module KeyType
+      HASH: String
+      RANGE: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?limit: Integer,
+        ?exclusive_start_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor exclusive_start_stream_arn: String?
+    end
+
+    class ListStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::Stream],
+        ?last_evaluated_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::Stream]?
+      attr_accessor last_evaluated_stream_arn: String?
+    end
+
+    module OperationType
+      INSERT: String
+      MODIFY: String
+      REMOVE: String
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_name: String,
+        ?event_version: String,
+        ?event_source: String,
+        ?aws_region: String,
+        ?dynamodb: Types::StreamRecord,
+        ?user_identity: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_name: String?
+      attr_accessor event_version: String?
+      attr_accessor event_source: String?
+      attr_accessor aws_region: String?
+      attr_accessor dynamodb: Types::StreamRecord?
+      attr_accessor user_identity: Types::Identity?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SequenceNumberRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starting_sequence_number: String,
+        ?ending_sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starting_sequence_number: String?
+      attr_accessor ending_sequence_number: String?
+    end
+
+    class Shard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_id: String,
+        ?sequence_number_range: Types::SequenceNumberRange,
+        ?parent_shard_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_id: String?
+      attr_accessor sequence_number_range: Types::SequenceNumberRange?
+      attr_accessor parent_shard_id: String?
+    end
+
+    class ShardFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?shard_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor shard_id: String?
+    end
+
+    module ShardFilterType
+      CHILD_SHARDS: String
+    end
+
+    module ShardIteratorType
+      TRIM_HORIZON: String
+      LATEST: String
+      AT_SEQUENCE_NUMBER: String
+      AFTER_SEQUENCE_NUMBER: String
+    end
+
+    class Stream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?table_name: String,
+        ?stream_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor table_name: String?
+      attr_accessor stream_label: String?
+    end
+
+    class StreamDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_label: String,
+        ?stream_status: String,
+        ?stream_view_type: String,
+        ?creation_request_date_time: Time,
+        ?table_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?shards: Array[Types::Shard],
+        ?last_evaluated_shard_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_label: String?
+      attr_accessor stream_status: String?
+      attr_accessor stream_view_type: String?
+      attr_accessor creation_request_date_time: Time?
+      attr_accessor table_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor shards: Array[Types::Shard]?
+      attr_accessor last_evaluated_shard_id: String?
+    end
+
+    class StreamRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_creation_date_time: Time,
+        ?keys: Hash[String, Types::AttributeValue],
+        ?new_image: Hash[String, Types::AttributeValue],
+        ?old_image: Hash[String, Types::AttributeValue],
+        ?sequence_number: String,
+        ?size_bytes: Integer,
+        ?stream_view_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_creation_date_time: Time?
+      attr_accessor keys: Hash[String, Types::AttributeValue]?
+      attr_accessor new_image: Hash[String, Types::AttributeValue]?
+      attr_accessor old_image: Hash[String, Types::AttributeValue]?
+      attr_accessor sequence_number: String?
+      attr_accessor size_bytes: Integer?
+      attr_accessor stream_view_type: String?
+    end
+
+    module StreamStatus
+      ENABLING: String
+      ENABLED: String
+      DISABLING: String
+      DISABLED: String
+    end
+
+    module StreamViewType
+      NEW_IMAGE: String
+      OLD_IMAGE: String
+      NEW_AND_OLD_IMAGES: String
+      KEYS_ONLY: String
+    end
+
+    class TrimmedDataAccessException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Invoicing
+      VERSION: String
+    end
+  end

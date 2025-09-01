@@ -1,0 +1,13 @@
+module Aws::ApiGatewayManagementApi
+  module Errors
+    class ForbiddenException < Smithy::Client::ServiceError
+    end
+    class GoneException < Smithy::Client::ServiceError
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+    end
+    class PayloadTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

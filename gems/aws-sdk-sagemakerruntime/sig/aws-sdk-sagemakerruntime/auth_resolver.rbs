@@ -1,0 +1,5 @@
+module Aws::SageMakerRuntime
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

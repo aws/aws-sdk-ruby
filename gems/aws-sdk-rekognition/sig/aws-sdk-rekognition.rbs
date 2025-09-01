@@ -1,0 +1,5 @@
+  module Aws
+    module Rekognition
+      VERSION: String
+    end
+  end

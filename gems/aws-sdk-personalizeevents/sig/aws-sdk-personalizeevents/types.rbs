@@ -1,0 +1,210 @@
+module Aws::PersonalizeEvents
+  module Types
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor properties: String?
+    end
+
+    class ActionInteraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?user_id: String,
+        ?session_id: String,
+        ?timestamp: Time,
+        ?event_type: String,
+        ?event_id: String,
+        ?recommendation_id: String,
+        ?impression: Array[String],
+        ?properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor user_id: String?
+      attr_accessor session_id: String?
+      attr_accessor timestamp: Time?
+      attr_accessor event_type: String?
+      attr_accessor event_id: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor impression: Array[String]?
+      attr_accessor properties: String?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type: String,
+        ?event_value: Float,
+        ?item_id: String,
+        ?properties: String,
+        ?sent_at: Time,
+        ?recommendation_id: String,
+        ?impression: Array[String],
+        ?metric_attribution: Types::MetricAttribution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type: String?
+      attr_accessor event_value: Float?
+      attr_accessor item_id: String?
+      attr_accessor properties: String?
+      attr_accessor sent_at: Time?
+      attr_accessor recommendation_id: String?
+      attr_accessor impression: Array[String]?
+      attr_accessor metric_attribution: Types::MetricAttribution?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_id: String,
+        ?properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_id: String?
+      attr_accessor properties: String?
+    end
+
+    class MetricAttribution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_attribution_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_attribution_source: String?
+    end
+
+    class PutActionInteractionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking_id: String,
+        ?action_interactions: Array[Types::ActionInteraction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking_id: String?
+      attr_accessor action_interactions: Array[Types::ActionInteraction]?
+    end
+
+    class PutActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?actions: Array[Types::Action],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor actions: Array[Types::Action]?
+    end
+
+    class PutEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking_id: String,
+        ?user_id: String,
+        ?session_id: String,
+        ?event_list: Array[Types::Event],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking_id: String?
+      attr_accessor user_id: String?
+      attr_accessor session_id: String?
+      attr_accessor event_list: Array[Types::Event]?
+    end
+
+    class PutItemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?items: Array[Types::Item],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor items: Array[Types::Item]?
+    end
+
+    class PutUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?users: Array[Types::User],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor users: Array[Types::User]?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor properties: String?
+    end
+  end
+end

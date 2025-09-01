@@ -1,0 +1,560 @@
+module Aws::Neptunedata
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Neptunedata::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelGremlinQueryResponse
+      include Smithy::Client::_Response[Types::CancelGremlinQueryOutput]
+      def status: () -> String?
+    end
+    def cancel_gremlin_query: (
+      ?query_id: String
+    ) -> _CancelGremlinQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelGremlinQueryResponse
+
+    interface _CancelLoaderJobResponse
+      include Smithy::Client::_Response[Types::CancelLoaderJobOutput]
+      def status: () -> String?
+    end
+    def cancel_loader_job: (
+      ?load_id: String
+    ) -> _CancelLoaderJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelLoaderJobResponse
+
+    interface _CancelMLDataProcessingJobResponse
+      include Smithy::Client::_Response[Types::CancelMLDataProcessingJobOutput]
+      def status: () -> String?
+    end
+    def cancel_ml_data_processing_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String,
+      ?clean: bool
+    ) -> _CancelMLDataProcessingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMLDataProcessingJobResponse
+
+    interface _CancelMLModelTrainingJobResponse
+      include Smithy::Client::_Response[Types::CancelMLModelTrainingJobOutput]
+      def status: () -> String?
+    end
+    def cancel_ml_model_training_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String,
+      ?clean: bool
+    ) -> _CancelMLModelTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMLModelTrainingJobResponse
+
+    interface _CancelMLModelTransformJobResponse
+      include Smithy::Client::_Response[Types::CancelMLModelTransformJobOutput]
+      def status: () -> String?
+    end
+    def cancel_ml_model_transform_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String,
+      ?clean: bool
+    ) -> _CancelMLModelTransformJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMLModelTransformJobResponse
+
+    interface _CancelOpenCypherQueryResponse
+      include Smithy::Client::_Response[Types::CancelOpenCypherQueryOutput]
+      def status: () -> String?
+      def payload: () -> bool?
+    end
+    def cancel_open_cypher_query: (
+      ?query_id: String,
+      ?silent: bool
+    ) -> _CancelOpenCypherQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelOpenCypherQueryResponse
+
+    interface _CreateMLEndpointResponse
+      include Smithy::Client::_Response[Types::CreateMLEndpointOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def creation_time_in_millis: () -> Integer?
+    end
+    def create_ml_endpoint: (
+      ?id: String,
+      ?ml_model_training_job_id: String,
+      ?ml_model_transform_job_id: String,
+      ?update: bool,
+      ?neptune_iam_role_arn: String,
+      ?model_name: String,
+      ?instance_type: String,
+      ?instance_count: Integer,
+      ?volume_encryption_kms_key: String
+    ) -> _CreateMLEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMLEndpointResponse
+
+    interface _DeleteMLEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteMLEndpointOutput]
+      def status: () -> String?
+    end
+    def delete_ml_endpoint: (
+      ?id: String,
+      ?neptune_iam_role_arn: String,
+      ?clean: bool
+    ) -> _DeleteMLEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMLEndpointResponse
+
+    interface _DeletePropertygraphStatisticsResponse
+      include Smithy::Client::_Response[Types::DeletePropertygraphStatisticsOutput]
+      def status_code: () -> Integer?
+      def status: () -> String?
+      def payload: () -> Types::DeleteStatisticsValueMap?
+    end
+    def delete_propertygraph_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePropertygraphStatisticsResponse
+
+    interface _DeleteSparqlStatisticsResponse
+      include Smithy::Client::_Response[Types::DeleteSparqlStatisticsOutput]
+      def status_code: () -> Integer?
+      def status: () -> String?
+      def payload: () -> Types::DeleteStatisticsValueMap?
+    end
+    def delete_sparql_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSparqlStatisticsResponse
+
+    interface _ExecuteFastResetResponse
+      include Smithy::Client::_Response[Types::ExecuteFastResetOutput]
+      def status: () -> String?
+      def payload: () -> Types::FastResetToken?
+    end
+    def execute_fast_reset: (
+      ?action: String,
+      ?token: String
+    ) -> _ExecuteFastResetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteFastResetResponse
+
+    interface _ExecuteGremlinExplainQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteGremlinExplainQueryOutput]
+      def output: () -> String?
+    end
+    def execute_gremlin_explain_query: (
+      ?gremlin_query: String
+    ) -> _ExecuteGremlinExplainQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteGremlinExplainQueryResponse
+
+    interface _ExecuteGremlinProfileQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteGremlinProfileQueryOutput]
+      def output: () -> String?
+    end
+    def execute_gremlin_profile_query: (
+      ?gremlin_query: String,
+      ?results: bool,
+      ?chop: Integer,
+      ?serializer: String,
+      ?index_ops: bool
+    ) -> _ExecuteGremlinProfileQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteGremlinProfileQueryResponse
+
+    interface _ExecuteGremlinQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteGremlinQueryOutput]
+      def request_id: () -> String?
+      def status: () -> Types::GremlinQueryStatusAttributes?
+      def result: () -> Smithy::Schema::document?
+      def meta: () -> Smithy::Schema::document?
+    end
+    def execute_gremlin_query: (
+      ?gremlin_query: String,
+      ?serializer: String
+    ) -> _ExecuteGremlinQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteGremlinQueryResponse
+
+    interface _ExecuteOpenCypherExplainQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteOpenCypherExplainQueryOutput]
+      def results: () -> String?
+    end
+    def execute_open_cypher_explain_query: (
+      ?open_cypher_query: String,
+      ?parameters: String,
+      ?explain_mode: String
+    ) -> _ExecuteOpenCypherExplainQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteOpenCypherExplainQueryResponse
+
+    interface _ExecuteOpenCypherQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteOpenCypherQueryOutput]
+      def results: () -> Smithy::Schema::document?
+    end
+    def execute_open_cypher_query: (
+      ?open_cypher_query: String,
+      ?parameters: String
+    ) -> _ExecuteOpenCypherQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteOpenCypherQueryResponse
+
+    interface _GetEngineStatusResponse
+      include Smithy::Client::_Response[Types::GetEngineStatusOutput]
+      def status: () -> String?
+      def start_time: () -> String?
+      def db_engine_version: () -> String?
+      def role: () -> String?
+      def dfe_query_engine: () -> String?
+      def gremlin: () -> Types::QueryLanguageVersion?
+      def sparql: () -> Types::QueryLanguageVersion?
+      def opencypher: () -> Types::QueryLanguageVersion?
+      def lab_mode: () -> Hash[String, String]?
+      def rolling_back_trx_count: () -> Integer?
+      def rolling_back_trx_earliest_start_time: () -> String?
+      def features: () -> Hash[String, Smithy::Schema::document]?
+      def settings: () -> Hash[String, String]?
+    end
+    def get_engine_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEngineStatusResponse
+
+    interface _GetGremlinQueryStatusResponse
+      include Smithy::Client::_Response[Types::GetGremlinQueryStatusOutput]
+      def query_id: () -> String?
+      def query_string: () -> String?
+      def query_eval_stats: () -> Types::QueryEvalStats?
+    end
+    def get_gremlin_query_status: (
+      ?query_id: String
+    ) -> _GetGremlinQueryStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGremlinQueryStatusResponse
+
+    interface _GetLoaderJobStatusResponse
+      include Smithy::Client::_Response[Types::GetLoaderJobStatusOutput]
+      def status: () -> String?
+      def payload: () -> Smithy::Schema::document?
+    end
+    def get_loader_job_status: (
+      ?load_id: String,
+      ?details: bool,
+      ?errors: bool,
+      ?page: Integer,
+      ?errors_per_page: Integer
+    ) -> _GetLoaderJobStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoaderJobStatusResponse
+
+    interface _GetMLDataProcessingJobResponse
+      include Smithy::Client::_Response[Types::GetMLDataProcessingJobOutput]
+      def status: () -> String?
+      def id: () -> String?
+      def processing_job: () -> Types::MlResourceDefinition?
+    end
+    def get_ml_data_processing_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String
+    ) -> _GetMLDataProcessingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLDataProcessingJobResponse
+
+    interface _GetMLEndpointResponse
+      include Smithy::Client::_Response[Types::GetMLEndpointOutput]
+      def status: () -> String?
+      def id: () -> String?
+      def endpoint: () -> Types::MlResourceDefinition?
+      def endpoint_config: () -> Types::MlConfigDefinition?
+    end
+    def get_ml_endpoint: (
+      ?id: String,
+      ?neptune_iam_role_arn: String
+    ) -> _GetMLEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLEndpointResponse
+
+    interface _GetMLModelTrainingJobResponse
+      include Smithy::Client::_Response[Types::GetMLModelTrainingJobOutput]
+      def status: () -> String?
+      def id: () -> String?
+      def processing_job: () -> Types::MlResourceDefinition?
+      def hpo_job: () -> Types::MlResourceDefinition?
+      def model_transform_job: () -> Types::MlResourceDefinition?
+      def ml_models: () -> Array[Types::MlConfigDefinition]?
+    end
+    def get_ml_model_training_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String
+    ) -> _GetMLModelTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLModelTrainingJobResponse
+
+    interface _GetMLModelTransformJobResponse
+      include Smithy::Client::_Response[Types::GetMLModelTransformJobOutput]
+      def status: () -> String?
+      def id: () -> String?
+      def base_processing_job: () -> Types::MlResourceDefinition?
+      def remote_model_transform_job: () -> Types::MlResourceDefinition?
+      def models: () -> Array[Types::MlConfigDefinition]?
+    end
+    def get_ml_model_transform_job: (
+      ?id: String,
+      ?neptune_iam_role_arn: String
+    ) -> _GetMLModelTransformJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLModelTransformJobResponse
+
+    interface _GetOpenCypherQueryStatusResponse
+      include Smithy::Client::_Response[Types::GetOpenCypherQueryStatusOutput]
+      def query_id: () -> String?
+      def query_string: () -> String?
+      def query_eval_stats: () -> Types::QueryEvalStats?
+    end
+    def get_open_cypher_query_status: (
+      ?query_id: String
+    ) -> _GetOpenCypherQueryStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpenCypherQueryStatusResponse
+
+    interface _GetPropertygraphStatisticsResponse
+      include Smithy::Client::_Response[Types::GetPropertygraphStatisticsOutput]
+      def status: () -> String?
+      def payload: () -> Types::Statistics?
+    end
+    def get_propertygraph_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPropertygraphStatisticsResponse
+
+    interface _GetPropertygraphStreamResponse
+      include Smithy::Client::_Response[Types::GetPropertygraphStreamOutput]
+      def last_event_id: () -> Hash[String, String]?
+      def last_trx_timestamp_in_millis: () -> Integer?
+      def format: () -> String?
+      def records: () -> Array[Types::PropertygraphRecord]?
+      def total_records: () -> Integer?
+    end
+    def get_propertygraph_stream: (
+      ?limit: Integer,
+      ?iterator_type: String,
+      ?commit_num: Integer,
+      ?op_num: Integer,
+      ?encoding: String
+    ) -> _GetPropertygraphStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPropertygraphStreamResponse
+
+    interface _GetPropertygraphSummaryResponse
+      include Smithy::Client::_Response[Types::GetPropertygraphSummaryOutput]
+      def status_code: () -> Integer?
+      def payload: () -> Types::PropertygraphSummaryValueMap?
+    end
+    def get_propertygraph_summary: (
+      ?mode: String
+    ) -> _GetPropertygraphSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPropertygraphSummaryResponse
+
+    interface _GetRDFGraphSummaryResponse
+      include Smithy::Client::_Response[Types::GetRDFGraphSummaryOutput]
+      def status_code: () -> Integer?
+      def payload: () -> Types::RDFGraphSummaryValueMap?
+    end
+    def get_rdf_graph_summary: (
+      ?mode: String
+    ) -> _GetRDFGraphSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRDFGraphSummaryResponse
+
+    interface _GetSparqlStatisticsResponse
+      include Smithy::Client::_Response[Types::GetSparqlStatisticsOutput]
+      def status: () -> String?
+      def payload: () -> Types::Statistics?
+    end
+    def get_sparql_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSparqlStatisticsResponse
+
+    interface _GetSparqlStreamResponse
+      include Smithy::Client::_Response[Types::GetSparqlStreamOutput]
+      def last_event_id: () -> Hash[String, String]?
+      def last_trx_timestamp_in_millis: () -> Integer?
+      def format: () -> String?
+      def records: () -> Array[Types::SparqlRecord]?
+      def total_records: () -> Integer?
+    end
+    def get_sparql_stream: (
+      ?limit: Integer,
+      ?iterator_type: String,
+      ?commit_num: Integer,
+      ?op_num: Integer,
+      ?encoding: String
+    ) -> _GetSparqlStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSparqlStreamResponse
+
+    interface _ListGremlinQueriesResponse
+      include Smithy::Client::_Response[Types::ListGremlinQueriesOutput]
+      def accepted_query_count: () -> Integer?
+      def running_query_count: () -> Integer?
+      def queries: () -> Array[Types::GremlinQueryStatus]?
+    end
+    def list_gremlin_queries: (
+      ?include_waiting: bool
+    ) -> _ListGremlinQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGremlinQueriesResponse
+
+    interface _ListLoaderJobsResponse
+      include Smithy::Client::_Response[Types::ListLoaderJobsOutput]
+      def status: () -> String?
+      def payload: () -> Types::LoaderIdResult?
+    end
+    def list_loader_jobs: (
+      ?limit: Integer,
+      ?include_queued_loads: bool
+    ) -> _ListLoaderJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLoaderJobsResponse
+
+    interface _ListMLDataProcessingJobsResponse
+      include Smithy::Client::_Response[Types::ListMLDataProcessingJobsOutput]
+      def ids: () -> Array[String]?
+    end
+    def list_ml_data_processing_jobs: (
+      ?max_items: Integer,
+      ?neptune_iam_role_arn: String
+    ) -> _ListMLDataProcessingJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLDataProcessingJobsResponse
+
+    interface _ListMLEndpointsResponse
+      include Smithy::Client::_Response[Types::ListMLEndpointsOutput]
+      def ids: () -> Array[String]?
+    end
+    def list_ml_endpoints: (
+      ?max_items: Integer,
+      ?neptune_iam_role_arn: String
+    ) -> _ListMLEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLEndpointsResponse
+
+    interface _ListMLModelTrainingJobsResponse
+      include Smithy::Client::_Response[Types::ListMLModelTrainingJobsOutput]
+      def ids: () -> Array[String]?
+    end
+    def list_ml_model_training_jobs: (
+      ?max_items: Integer,
+      ?neptune_iam_role_arn: String
+    ) -> _ListMLModelTrainingJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLModelTrainingJobsResponse
+
+    interface _ListMLModelTransformJobsResponse
+      include Smithy::Client::_Response[Types::ListMLModelTransformJobsOutput]
+      def ids: () -> Array[String]?
+    end
+    def list_ml_model_transform_jobs: (
+      ?max_items: Integer,
+      ?neptune_iam_role_arn: String
+    ) -> _ListMLModelTransformJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLModelTransformJobsResponse
+
+    interface _ListOpenCypherQueriesResponse
+      include Smithy::Client::_Response[Types::ListOpenCypherQueriesOutput]
+      def accepted_query_count: () -> Integer?
+      def running_query_count: () -> Integer?
+      def queries: () -> Array[Types::GremlinQueryStatus]?
+    end
+    def list_open_cypher_queries: (
+      ?include_waiting: bool
+    ) -> _ListOpenCypherQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpenCypherQueriesResponse
+
+    interface _ManagePropertygraphStatisticsResponse
+      include Smithy::Client::_Response[Types::ManagePropertygraphStatisticsOutput]
+      def status: () -> String?
+      def payload: () -> Types::RefreshStatisticsIdMap?
+    end
+    def manage_propertygraph_statistics: (
+      ?mode: String
+    ) -> _ManagePropertygraphStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ManagePropertygraphStatisticsResponse
+
+    interface _ManageSparqlStatisticsResponse
+      include Smithy::Client::_Response[Types::ManageSparqlStatisticsOutput]
+      def status: () -> String?
+      def payload: () -> Types::RefreshStatisticsIdMap?
+    end
+    def manage_sparql_statistics: (
+      ?mode: String
+    ) -> _ManageSparqlStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ManageSparqlStatisticsResponse
+
+    interface _StartLoaderJobResponse
+      include Smithy::Client::_Response[Types::StartLoaderJobOutput]
+      def status: () -> String?
+      def payload: () -> Hash[String, String]?
+    end
+    def start_loader_job: (
+      ?source: String,
+      ?format: String,
+      ?s3_bucket_region: String,
+      ?iam_role_arn: String,
+      ?mode: String,
+      ?fail_on_error: bool,
+      ?parallelism: String,
+      ?parser_configuration: Hash[String, String],
+      ?update_single_cardinality_properties: bool,
+      ?queue_request: bool,
+      ?dependencies: Array[String],
+      ?user_provided_edge_ids: bool
+    ) -> _StartLoaderJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLoaderJobResponse
+
+    interface _StartMLDataProcessingJobResponse
+      include Smithy::Client::_Response[Types::StartMLDataProcessingJobOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def creation_time_in_millis: () -> Integer?
+    end
+    def start_ml_data_processing_job: (
+      ?id: String,
+      ?previous_data_processing_job_id: String,
+      ?input_data_s3_location: String,
+      ?processed_data_s3_location: String,
+      ?sagemaker_iam_role_arn: String,
+      ?neptune_iam_role_arn: String,
+      ?processing_instance_type: String,
+      ?processing_instance_volume_size_in_gb: Integer,
+      ?processing_time_out_in_seconds: Integer,
+      ?model_type: String,
+      ?config_file_name: String,
+      ?subnets: Array[String],
+      ?security_group_ids: Array[String],
+      ?volume_encryption_kms_key: String,
+      ?s3_output_encryption_kms_key: String
+    ) -> _StartMLDataProcessingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMLDataProcessingJobResponse
+
+    interface _StartMLModelTrainingJobResponse
+      include Smithy::Client::_Response[Types::StartMLModelTrainingJobOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def creation_time_in_millis: () -> Integer?
+    end
+    def start_ml_model_training_job: (
+      ?id: String,
+      ?previous_model_training_job_id: String,
+      ?data_processing_job_id: String,
+      ?train_model_s3_location: String,
+      ?sagemaker_iam_role_arn: String,
+      ?neptune_iam_role_arn: String,
+      ?base_processing_instance_type: String,
+      ?training_instance_type: String,
+      ?training_instance_volume_size_in_gb: Integer,
+      ?training_time_out_in_seconds: Integer,
+      ?max_hpo_number_of_training_jobs: Integer,
+      ?max_hpo_parallel_training_jobs: Integer,
+      ?subnets: Array[String],
+      ?security_group_ids: Array[String],
+      ?volume_encryption_kms_key: String,
+      ?s3_output_encryption_kms_key: String,
+      ?enable_managed_spot_training: bool,
+      ?custom_model_training_parameters: {
+        source_s3_directory_path: String,
+        training_entry_point_script: untyped,
+        transform_entry_point_script: untyped
+      }
+    ) -> _StartMLModelTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMLModelTrainingJobResponse
+
+    interface _StartMLModelTransformJobResponse
+      include Smithy::Client::_Response[Types::StartMLModelTransformJobOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def creation_time_in_millis: () -> Integer?
+    end
+    def start_ml_model_transform_job: (
+      ?id: String,
+      ?data_processing_job_id: String,
+      ?ml_model_training_job_id: String,
+      ?training_job_name: String,
+      ?model_transform_output_s3_location: String,
+      ?sagemaker_iam_role_arn: String,
+      ?neptune_iam_role_arn: String,
+      ?custom_model_transform_parameters: {
+        source_s3_directory_path: String,
+        transform_entry_point_script: untyped
+      },
+      ?base_processing_instance_type: String,
+      ?base_processing_instance_volume_size_in_gb: Integer,
+      ?subnets: Array[String],
+      ?security_group_ids: Array[String],
+      ?volume_encryption_kms_key: String,
+      ?s3_output_encryption_kms_key: String
+    ) -> _StartMLModelTransformJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMLModelTransformJobResponse
+  end
+end

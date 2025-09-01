@@ -1,0 +1,5 @@
+  module Aws
+    module Redshift
+      VERSION: String
+    end
+  end

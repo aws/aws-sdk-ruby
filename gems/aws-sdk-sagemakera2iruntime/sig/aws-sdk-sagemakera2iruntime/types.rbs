@@ -1,0 +1,278 @@
+module Aws::SageMakerA2IRuntime
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContentClassifier
+      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION: String
+      FREE_OF_ADULT_CONTENT: String
+    end
+
+    class DeleteHumanLoopRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+    end
+
+    class DeleteHumanLoopResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeHumanLoopRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+    end
+
+    class DescribeHumanLoopResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?failure_reason: String,
+        ?failure_code: String,
+        ?human_loop_status: String,
+        ?human_loop_name: String,
+        ?human_loop_arn: String,
+        ?flow_definition_arn: String,
+        ?human_loop_output: Types::HumanLoopOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor failure_code: String?
+      attr_accessor human_loop_status: String?
+      attr_accessor human_loop_name: String?
+      attr_accessor human_loop_arn: String?
+      attr_accessor flow_definition_arn: String?
+      attr_accessor human_loop_output: Types::HumanLoopOutput?
+    end
+
+    class HumanLoopDataAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_classifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_classifiers: Array[String]?
+    end
+
+    class HumanLoopInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_content: String?
+    end
+
+    class HumanLoopOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_s3_uri: String?
+    end
+
+    module HumanLoopStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+      STOPPED: String
+      STOPPING: String
+    end
+
+    class HumanLoopSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+        ?human_loop_status: String,
+        ?creation_time: Time,
+        ?failure_reason: String,
+        ?flow_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+      attr_accessor human_loop_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor flow_definition_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListHumanLoopsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time_after: Time,
+        ?creation_time_before: Time,
+        ?flow_definition_arn: String,
+        ?sort_order: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time_after: Time?
+      attr_accessor creation_time_before: Time?
+      attr_accessor flow_definition_arn: String?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListHumanLoopsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_summaries: Array[Types::HumanLoopSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_summaries: Array[Types::HumanLoopSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartHumanLoopRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+        ?flow_definition_arn: String,
+        ?human_loop_input: Types::HumanLoopInput,
+        ?data_attributes: Types::HumanLoopDataAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+      attr_accessor flow_definition_arn: String?
+      attr_accessor human_loop_input: Types::HumanLoopInput?
+      attr_accessor data_attributes: Types::HumanLoopDataAttributes?
+    end
+
+    class StartHumanLoopResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_arn: String?
+    end
+
+    class StopHumanLoopRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+    end
+
+    class StopHumanLoopResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

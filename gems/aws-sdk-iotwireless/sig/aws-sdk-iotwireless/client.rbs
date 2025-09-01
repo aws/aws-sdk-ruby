@@ -1,0 +1,1715 @@
+module Aws::IoTWireless
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTWireless::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAwsAccountWithPartnerAccountResponse
+      include Smithy::Client::_Response[Types::AssociateAwsAccountWithPartnerAccountResponse]
+      def sidewalk: () -> Types::SidewalkAccountInfo?
+      def arn: () -> String?
+    end
+    def associate_aws_account_with_partner_account: (
+      ?sidewalk: {
+        amazon_id: String,
+        app_server_private_key: String
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AssociateAwsAccountWithPartnerAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAwsAccountWithPartnerAccountResponse
+
+    interface _AssociateMulticastGroupWithFuotaTaskResponse
+      include Smithy::Client::_Response[Types::AssociateMulticastGroupWithFuotaTaskResponse]
+    end
+    def associate_multicast_group_with_fuota_task: (
+      ?id: String,
+      ?multicast_group_id: String
+    ) -> _AssociateMulticastGroupWithFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMulticastGroupWithFuotaTaskResponse
+
+    interface _AssociateWirelessDeviceWithFuotaTaskResponse
+      include Smithy::Client::_Response[Types::AssociateWirelessDeviceWithFuotaTaskResponse]
+    end
+    def associate_wireless_device_with_fuota_task: (
+      ?id: String,
+      ?wireless_device_id: String
+    ) -> _AssociateWirelessDeviceWithFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWirelessDeviceWithFuotaTaskResponse
+
+    interface _AssociateWirelessDeviceWithMulticastGroupResponse
+      include Smithy::Client::_Response[Types::AssociateWirelessDeviceWithMulticastGroupResponse]
+    end
+    def associate_wireless_device_with_multicast_group: (
+      ?id: String,
+      ?wireless_device_id: String
+    ) -> _AssociateWirelessDeviceWithMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWirelessDeviceWithMulticastGroupResponse
+
+    interface _AssociateWirelessDeviceWithThingResponse
+      include Smithy::Client::_Response[Types::AssociateWirelessDeviceWithThingResponse]
+    end
+    def associate_wireless_device_with_thing: (
+      ?id: String,
+      ?thing_arn: String
+    ) -> _AssociateWirelessDeviceWithThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWirelessDeviceWithThingResponse
+
+    interface _AssociateWirelessGatewayWithCertificateResponse
+      include Smithy::Client::_Response[Types::AssociateWirelessGatewayWithCertificateResponse]
+      def iot_certificate_id: () -> String?
+    end
+    def associate_wireless_gateway_with_certificate: (
+      ?id: String,
+      ?iot_certificate_id: String
+    ) -> _AssociateWirelessGatewayWithCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWirelessGatewayWithCertificateResponse
+
+    interface _AssociateWirelessGatewayWithThingResponse
+      include Smithy::Client::_Response[Types::AssociateWirelessGatewayWithThingResponse]
+    end
+    def associate_wireless_gateway_with_thing: (
+      ?id: String,
+      ?thing_arn: String
+    ) -> _AssociateWirelessGatewayWithThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWirelessGatewayWithThingResponse
+
+    interface _CancelMulticastGroupSessionResponse
+      include Smithy::Client::_Response[Types::CancelMulticastGroupSessionResponse]
+    end
+    def cancel_multicast_group_session: (
+      ?id: String
+    ) -> _CancelMulticastGroupSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMulticastGroupSessionResponse
+
+    interface _CreateDestinationResponse
+      include Smithy::Client::_Response[Types::CreateDestinationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def create_destination: (
+      ?name: String,
+      ?expression_type: String,
+      ?expression: String,
+      ?description: String,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDestinationResponse
+
+    interface _CreateDeviceProfileResponse
+      include Smithy::Client::_Response[Types::CreateDeviceProfileResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_device_profile: (
+      ?name: String,
+      ?lo_ra_wan: {
+        supports_class_b: bool,
+        class_b_timeout: Integer,
+        ping_slot_period: Integer,
+        ping_slot_dr: Integer,
+        ping_slot_freq: Integer,
+        supports_class_c: bool,
+        class_c_timeout: Integer,
+        mac_version: String,
+        reg_params_revision: String,
+        rx_delay1: Integer,
+        rx_dr_offset1: Integer,
+        rx_data_rate2: Integer,
+        rx_freq2: Integer,
+        factory_preset_freqs_list: Array[Integer],
+        max_eirp: Integer,
+        max_duty_cycle: Integer,
+        rf_region: String,
+        supports_join: bool,
+        supports32_bit_f_cnt: bool
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String,
+      ?sidewalk: {
+      }
+    ) -> _CreateDeviceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeviceProfileResponse
+
+    interface _CreateFuotaTaskResponse
+      include Smithy::Client::_Response[Types::CreateFuotaTaskResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_fuota_task: (
+      ?name: String,
+      ?description: String,
+      ?client_request_token: String,
+      ?lo_ra_wan: {
+        rf_region: String
+      },
+      ?firmware_update_image: String,
+      ?firmware_update_role: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?redundancy_percent: Integer,
+      ?fragment_size_bytes: Integer,
+      ?fragment_interval_ms: Integer,
+      ?descriptor: String
+    ) -> _CreateFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFuotaTaskResponse
+
+    interface _CreateMulticastGroupResponse
+      include Smithy::Client::_Response[Types::CreateMulticastGroupResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_multicast_group: (
+      ?name: String,
+      ?description: String,
+      ?client_request_token: String,
+      ?lo_ra_wan: {
+        rf_region: String,
+        dl_class: String,
+        participating_gateways: {
+          gateway_list: Array[String],
+          transmission_interval: Integer
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMulticastGroupResponse
+
+    interface _CreateNetworkAnalyzerConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateNetworkAnalyzerConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def create_network_analyzer_configuration: (
+      ?name: String,
+      ?trace_content: {
+        wireless_device_frame_info: String,
+        log_level: String,
+        multicast_frame_info: String
+      },
+      ?wireless_devices: Array[String],
+      ?wireless_gateways: Array[String],
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String,
+      ?multicast_groups: Array[String]
+    ) -> _CreateNetworkAnalyzerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkAnalyzerConfigurationResponse
+
+    interface _CreateServiceProfileResponse
+      include Smithy::Client::_Response[Types::CreateServiceProfileResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_service_profile: (
+      ?name: String,
+      ?lo_ra_wan: {
+        add_gw_metadata: bool,
+        dr_min: Integer,
+        dr_max: Integer,
+        pr_allowed: bool,
+        ra_allowed: bool,
+        tx_power_index_min: Integer,
+        tx_power_index_max: Integer,
+        nb_trans_min: Integer,
+        nb_trans_max: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateServiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceProfileResponse
+
+    interface _CreateWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::CreateWirelessDeviceResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_wireless_device: (
+      ?type: String,
+      ?name: String,
+      ?description: String,
+      ?destination_name: String,
+      ?client_request_token: String,
+      ?lo_ra_wan: {
+        dev_eui: String,
+        device_profile_id: String,
+        service_profile_id: String,
+        otaa_v1_1: {
+          app_key: String,
+          nwk_key: String,
+          join_eui: String
+        },
+        otaa_v1_0_x: {
+          app_key: untyped,
+          app_eui: String,
+          join_eui: untyped,
+          gen_app_key: String
+        },
+        abp_v1_1: {
+          dev_addr: String,
+          session_keys: {
+            f_nwk_s_int_key: String,
+            s_nwk_s_int_key: String,
+            nwk_s_enc_key: String,
+            app_s_key: String
+          },
+          f_cnt_start: Integer
+        },
+        abp_v1_0_x: {
+          dev_addr: untyped,
+          session_keys: {
+            nwk_s_key: String,
+            app_s_key: untyped
+          },
+          f_cnt_start: untyped
+        },
+        f_ports: {
+          fuota: Integer,
+          multicast: untyped,
+          clock_sync: untyped,
+          positioning: {
+            clock_sync: untyped,
+            stream: untyped,
+            gnss: untyped
+          },
+          applications: Array[
+            {
+              f_port: untyped,
+              type: String,
+              destination_name: String
+            }
+          ]
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?positioning: String,
+      ?sidewalk: {
+        device_profile_id: String
+      }
+    ) -> _CreateWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWirelessDeviceResponse
+
+    interface _CreateWirelessGatewayResponse
+      include Smithy::Client::_Response[Types::CreateWirelessGatewayResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_wireless_gateway: (
+      ?name: String,
+      ?description: String,
+      ?lo_ra_wan: {
+        gateway_eui: String,
+        rf_region: String,
+        join_eui_filters: Array[
+          Array[String]
+        ],
+        net_id_filters: Array[String],
+        sub_bands: Array[Integer],
+        beaconing: {
+          data_rate: Integer,
+          frequencies: Array[Integer]
+        },
+        max_eirp: Float
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateWirelessGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWirelessGatewayResponse
+
+    interface _CreateWirelessGatewayTaskResponse
+      include Smithy::Client::_Response[Types::CreateWirelessGatewayTaskResponse]
+      def wireless_gateway_task_definition_id: () -> String?
+      def status: () -> String?
+    end
+    def create_wireless_gateway_task: (
+      ?id: String,
+      ?wireless_gateway_task_definition_id: String
+    ) -> _CreateWirelessGatewayTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWirelessGatewayTaskResponse
+
+    interface _CreateWirelessGatewayTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateWirelessGatewayTaskDefinitionResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_wireless_gateway_task_definition: (
+      ?auto_create_tasks: bool,
+      ?name: String,
+      ?update: {
+        update_data_source: String,
+        update_data_role: untyped,
+        lo_ra_wan: {
+          update_signature: String,
+          sig_key_crc: Integer,
+          current_version: {
+            package_version: String,
+            model: String,
+            station: String
+          },
+          update_version: untyped
+        }
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWirelessGatewayTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWirelessGatewayTaskDefinitionResponse
+
+    interface _DeleteDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteDestinationResponse]
+    end
+    def delete_destination: (
+      ?name: String
+    ) -> _DeleteDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDestinationResponse
+
+    interface _DeleteDeviceProfileResponse
+      include Smithy::Client::_Response[Types::DeleteDeviceProfileResponse]
+    end
+    def delete_device_profile: (
+      ?id: String
+    ) -> _DeleteDeviceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeviceProfileResponse
+
+    interface _DeleteFuotaTaskResponse
+      include Smithy::Client::_Response[Types::DeleteFuotaTaskResponse]
+    end
+    def delete_fuota_task: (
+      ?id: String
+    ) -> _DeleteFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFuotaTaskResponse
+
+    interface _DeleteMulticastGroupResponse
+      include Smithy::Client::_Response[Types::DeleteMulticastGroupResponse]
+    end
+    def delete_multicast_group: (
+      ?id: String
+    ) -> _DeleteMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMulticastGroupResponse
+
+    interface _DeleteNetworkAnalyzerConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkAnalyzerConfigurationResponse]
+    end
+    def delete_network_analyzer_configuration: (
+      ?configuration_name: String
+    ) -> _DeleteNetworkAnalyzerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkAnalyzerConfigurationResponse
+
+    interface _DeleteQueuedMessagesResponse
+      include Smithy::Client::_Response[Types::DeleteQueuedMessagesResponse]
+    end
+    def delete_queued_messages: (
+      ?id: String,
+      ?message_id: String,
+      ?wireless_device_type: String
+    ) -> _DeleteQueuedMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueuedMessagesResponse
+
+    interface _DeleteServiceProfileResponse
+      include Smithy::Client::_Response[Types::DeleteServiceProfileResponse]
+    end
+    def delete_service_profile: (
+      ?id: String
+    ) -> _DeleteServiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceProfileResponse
+
+    interface _DeleteWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::DeleteWirelessDeviceResponse]
+    end
+    def delete_wireless_device: (
+      ?id: String
+    ) -> _DeleteWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWirelessDeviceResponse
+
+    interface _DeleteWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::DeleteWirelessDeviceImportTaskResponse]
+    end
+    def delete_wireless_device_import_task: (
+      ?id: String
+    ) -> _DeleteWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWirelessDeviceImportTaskResponse
+
+    interface _DeleteWirelessGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteWirelessGatewayResponse]
+    end
+    def delete_wireless_gateway: (
+      ?id: String
+    ) -> _DeleteWirelessGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWirelessGatewayResponse
+
+    interface _DeleteWirelessGatewayTaskResponse
+      include Smithy::Client::_Response[Types::DeleteWirelessGatewayTaskResponse]
+    end
+    def delete_wireless_gateway_task: (
+      ?id: String
+    ) -> _DeleteWirelessGatewayTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWirelessGatewayTaskResponse
+
+    interface _DeleteWirelessGatewayTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteWirelessGatewayTaskDefinitionResponse]
+    end
+    def delete_wireless_gateway_task_definition: (
+      ?id: String
+    ) -> _DeleteWirelessGatewayTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWirelessGatewayTaskDefinitionResponse
+
+    interface _DeregisterWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::DeregisterWirelessDeviceResponse]
+    end
+    def deregister_wireless_device: (
+      ?identifier: String,
+      ?wireless_device_type: String
+    ) -> _DeregisterWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterWirelessDeviceResponse
+
+    interface _DisassociateAwsAccountFromPartnerAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateAwsAccountFromPartnerAccountResponse]
+    end
+    def disassociate_aws_account_from_partner_account: (
+      ?partner_account_id: String,
+      ?partner_type: String
+    ) -> _DisassociateAwsAccountFromPartnerAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAwsAccountFromPartnerAccountResponse
+
+    interface _DisassociateMulticastGroupFromFuotaTaskResponse
+      include Smithy::Client::_Response[Types::DisassociateMulticastGroupFromFuotaTaskResponse]
+    end
+    def disassociate_multicast_group_from_fuota_task: (
+      ?id: String,
+      ?multicast_group_id: String
+    ) -> _DisassociateMulticastGroupFromFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMulticastGroupFromFuotaTaskResponse
+
+    interface _DisassociateWirelessDeviceFromFuotaTaskResponse
+      include Smithy::Client::_Response[Types::DisassociateWirelessDeviceFromFuotaTaskResponse]
+    end
+    def disassociate_wireless_device_from_fuota_task: (
+      ?id: String,
+      ?wireless_device_id: String
+    ) -> _DisassociateWirelessDeviceFromFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWirelessDeviceFromFuotaTaskResponse
+
+    interface _DisassociateWirelessDeviceFromMulticastGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateWirelessDeviceFromMulticastGroupResponse]
+    end
+    def disassociate_wireless_device_from_multicast_group: (
+      ?id: String,
+      ?wireless_device_id: String
+    ) -> _DisassociateWirelessDeviceFromMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWirelessDeviceFromMulticastGroupResponse
+
+    interface _DisassociateWirelessDeviceFromThingResponse
+      include Smithy::Client::_Response[Types::DisassociateWirelessDeviceFromThingResponse]
+    end
+    def disassociate_wireless_device_from_thing: (
+      ?id: String
+    ) -> _DisassociateWirelessDeviceFromThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWirelessDeviceFromThingResponse
+
+    interface _DisassociateWirelessGatewayFromCertificateResponse
+      include Smithy::Client::_Response[Types::DisassociateWirelessGatewayFromCertificateResponse]
+    end
+    def disassociate_wireless_gateway_from_certificate: (
+      ?id: String
+    ) -> _DisassociateWirelessGatewayFromCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWirelessGatewayFromCertificateResponse
+
+    interface _DisassociateWirelessGatewayFromThingResponse
+      include Smithy::Client::_Response[Types::DisassociateWirelessGatewayFromThingResponse]
+    end
+    def disassociate_wireless_gateway_from_thing: (
+      ?id: String
+    ) -> _DisassociateWirelessGatewayFromThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWirelessGatewayFromThingResponse
+
+    interface _GetDestinationResponse
+      include Smithy::Client::_Response[Types::GetDestinationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def expression: () -> String?
+      def expression_type: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+    end
+    def get_destination: (
+      ?name: String
+    ) -> _GetDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDestinationResponse
+
+    interface _GetDeviceProfileResponse
+      include Smithy::Client::_Response[Types::GetDeviceProfileResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANDeviceProfile?
+      def sidewalk: () -> Types::SidewalkGetDeviceProfile?
+    end
+    def get_device_profile: (
+      ?id: String
+    ) -> _GetDeviceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceProfileResponse
+
+    interface _GetEventConfigurationByResourceTypesResponse
+      include Smithy::Client::_Response[Types::GetEventConfigurationByResourceTypesResponse]
+      def device_registration_state: () -> Types::DeviceRegistrationStateResourceTypeEventConfiguration?
+      def proximity: () -> Types::ProximityResourceTypeEventConfiguration?
+      def join: () -> Types::JoinResourceTypeEventConfiguration?
+      def connection_status: () -> Types::ConnectionStatusResourceTypeEventConfiguration?
+      def message_delivery_status: () -> Types::MessageDeliveryStatusResourceTypeEventConfiguration?
+    end
+    def get_event_configuration_by_resource_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventConfigurationByResourceTypesResponse
+
+    interface _GetFuotaTaskResponse
+      include Smithy::Client::_Response[Types::GetFuotaTaskResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANFuotaTaskGetInfo?
+      def firmware_update_image: () -> String?
+      def firmware_update_role: () -> String?
+      def created_at: () -> Time?
+      def redundancy_percent: () -> Integer?
+      def fragment_size_bytes: () -> Integer?
+      def fragment_interval_ms: () -> Integer?
+      def descriptor: () -> String?
+    end
+    def get_fuota_task: (
+      ?id: String
+    ) -> _GetFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFuotaTaskResponse
+
+    interface _GetLogLevelsByResourceTypesResponse
+      include Smithy::Client::_Response[Types::GetLogLevelsByResourceTypesResponse]
+      def default_log_level: () -> String?
+      def wireless_gateway_log_options: () -> Array[Types::WirelessGatewayLogOption]?
+      def wireless_device_log_options: () -> Array[Types::WirelessDeviceLogOption]?
+      def fuota_task_log_options: () -> Array[Types::FuotaTaskLogOption]?
+    end
+    def get_log_levels_by_resource_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogLevelsByResourceTypesResponse
+
+    interface _GetMetricConfigurationResponse
+      include Smithy::Client::_Response[Types::GetMetricConfigurationResponse]
+      def summary_metric: () -> Types::SummaryMetricConfiguration?
+    end
+    def get_metric_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricConfigurationResponse
+
+    interface _GetMetricsResponse
+      include Smithy::Client::_Response[Types::GetMetricsResponse]
+      def summary_metric_query_results: () -> Array[Types::SummaryMetricQueryResult]?
+    end
+    def get_metrics: (
+      ?summary_metric_queries: Array[
+        {
+          query_id: String,
+          metric_name: String,
+          dimensions: Array[
+            {
+              name: String,
+              value: String
+            }
+          ],
+          aggregation_period: String,
+          start_timestamp: Time,
+          end_timestamp: Time
+        }
+      ]
+    ) -> _GetMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricsResponse
+
+    interface _GetMulticastGroupResponse
+      include Smithy::Client::_Response[Types::GetMulticastGroupResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANMulticastGet?
+      def created_at: () -> Time?
+    end
+    def get_multicast_group: (
+      ?id: String
+    ) -> _GetMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMulticastGroupResponse
+
+    interface _GetMulticastGroupSessionResponse
+      include Smithy::Client::_Response[Types::GetMulticastGroupSessionResponse]
+      def lo_ra_wan: () -> Types::LoRaWANMulticastSession?
+    end
+    def get_multicast_group_session: (
+      ?id: String
+    ) -> _GetMulticastGroupSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMulticastGroupSessionResponse
+
+    interface _GetNetworkAnalyzerConfigurationResponse
+      include Smithy::Client::_Response[Types::GetNetworkAnalyzerConfigurationResponse]
+      def trace_content: () -> Types::TraceContent?
+      def wireless_devices: () -> Array[String]?
+      def wireless_gateways: () -> Array[String]?
+      def description: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def multicast_groups: () -> Array[String]?
+    end
+    def get_network_analyzer_configuration: (
+      ?configuration_name: String
+    ) -> _GetNetworkAnalyzerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkAnalyzerConfigurationResponse
+
+    interface _GetPartnerAccountResponse
+      include Smithy::Client::_Response[Types::GetPartnerAccountResponse]
+      def sidewalk: () -> Types::SidewalkAccountInfoWithFingerprint?
+      def account_linked: () -> bool?
+    end
+    def get_partner_account: (
+      ?partner_account_id: String,
+      ?partner_type: String
+    ) -> _GetPartnerAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPartnerAccountResponse
+
+    interface _GetPositionResponse
+      include Smithy::Client::_Response[Types::GetPositionResponse]
+      def position: () -> Array[Float]?
+      def accuracy: () -> Types::Accuracy?
+      def solver_type: () -> String?
+      def solver_provider: () -> String?
+      def solver_version: () -> String?
+      def timestamp: () -> String?
+    end
+    def get_position: (
+      ?resource_identifier: String,
+      ?resource_type: String
+    ) -> _GetPositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPositionResponse
+
+    interface _GetPositionConfigurationResponse
+      include Smithy::Client::_Response[Types::GetPositionConfigurationResponse]
+      def solvers: () -> Types::PositionSolverDetails?
+      def destination: () -> String?
+    end
+    def get_position_configuration: (
+      ?resource_identifier: String,
+      ?resource_type: String
+    ) -> _GetPositionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPositionConfigurationResponse
+
+    interface _GetPositionEstimateResponse
+      include Smithy::Client::_Response[Types::GetPositionEstimateResponse]
+      def geo_json_payload: () -> String?
+    end
+    def get_position_estimate: (
+      ?wi_fi_access_points: Array[
+        {
+          mac_address: String,
+          rss: Integer
+        }
+      ],
+      ?cell_towers: {
+        gsm: Array[
+          {
+            mcc: Integer,
+            mnc: Integer,
+            lac: Integer,
+            geran_cid: Integer,
+            gsm_local_id: {
+              bsic: Integer,
+              bcch: Integer
+            },
+            gsm_timing_advance: Integer,
+            rx_level: Integer,
+            gsm_nmr: Array[
+              {
+                bsic: untyped,
+                bcch: untyped,
+                rx_level: untyped,
+                global_identity: {
+                  lac: untyped,
+                  geran_cid: untyped
+                }
+              }
+            ]
+          }
+        ],
+        wcdma: Array[
+          {
+            mcc: untyped,
+            mnc: untyped,
+            lac: untyped,
+            utran_cid: Integer,
+            wcdma_local_id: {
+              uarfcndl: Integer,
+              psc: Integer
+            },
+            rscp: Integer,
+            path_loss: Integer,
+            wcdma_nmr: Array[
+              {
+                uarfcndl: untyped,
+                psc: untyped,
+                utran_cid: untyped,
+                rscp: untyped,
+                path_loss: untyped
+              }
+            ]
+          }
+        ],
+        tdscdma: Array[
+          {
+            mcc: untyped,
+            mnc: untyped,
+            lac: untyped,
+            utran_cid: untyped,
+            tdscdma_local_id: {
+              uarfcn: Integer,
+              cell_params: Integer
+            },
+            tdscdma_timing_advance: Integer,
+            rscp: untyped,
+            path_loss: untyped,
+            tdscdma_nmr: Array[
+              {
+                uarfcn: untyped,
+                cell_params: untyped,
+                utran_cid: untyped,
+                rscp: untyped,
+                path_loss: untyped
+              }
+            ]
+          }
+        ],
+        lte: Array[
+          {
+            mcc: untyped,
+            mnc: untyped,
+            eutran_cid: Integer,
+            tac: Integer,
+            lte_local_id: {
+              pci: Integer,
+              earfcn: Integer
+            },
+            lte_timing_advance: Integer,
+            rsrp: Integer,
+            rsrq: Float,
+            nr_capable: bool,
+            lte_nmr: Array[
+              {
+                pci: untyped,
+                earfcn: untyped,
+                eutran_cid: untyped,
+                rsrp: untyped,
+                rsrq: untyped
+              }
+            ]
+          }
+        ],
+        cdma: Array[
+          {
+            system_id: Integer,
+            network_id: Integer,
+            base_station_id: Integer,
+            registration_zone: Integer,
+            cdma_local_id: {
+              pn_offset: Integer,
+              cdma_channel: Integer
+            },
+            pilot_power: Integer,
+            base_lat: Float,
+            base_lng: Float,
+            cdma_nmr: Array[
+              {
+                pn_offset: untyped,
+                cdma_channel: untyped,
+                pilot_power: untyped,
+                base_station_id: untyped
+              }
+            ]
+          }
+        ]
+      },
+      ?ip: {
+        ip_address: String
+      },
+      ?gnss: {
+        payload: String,
+        capture_time: Float,
+        capture_time_accuracy: Float,
+        assist_position: Array[Float],
+        assist_altitude: Float,
+        use2_d_solver: bool
+      },
+      ?timestamp: Time
+    ) -> _GetPositionEstimateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPositionEstimateResponse
+
+    interface _GetResourceEventConfigurationResponse
+      include Smithy::Client::_Response[Types::GetResourceEventConfigurationResponse]
+      def device_registration_state: () -> Types::DeviceRegistrationStateEventConfiguration?
+      def proximity: () -> Types::ProximityEventConfiguration?
+      def join: () -> Types::JoinEventConfiguration?
+      def connection_status: () -> Types::ConnectionStatusEventConfiguration?
+      def message_delivery_status: () -> Types::MessageDeliveryStatusEventConfiguration?
+    end
+    def get_resource_event_configuration: (
+      ?identifier: String,
+      ?identifier_type: String,
+      ?partner_type: String
+    ) -> _GetResourceEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceEventConfigurationResponse
+
+    interface _GetResourceLogLevelResponse
+      include Smithy::Client::_Response[Types::GetResourceLogLevelResponse]
+      def log_level: () -> String?
+    end
+    def get_resource_log_level: (
+      ?resource_identifier: String,
+      ?resource_type: String
+    ) -> _GetResourceLogLevelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceLogLevelResponse
+
+    interface _GetResourcePositionResponse
+      include Smithy::Client::_Response[Types::GetResourcePositionResponse]
+      def geo_json_payload: () -> String?
+    end
+    def get_resource_position: (
+      ?resource_identifier: String,
+      ?resource_type: String
+    ) -> _GetResourcePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePositionResponse
+
+    interface _GetServiceEndpointResponse
+      include Smithy::Client::_Response[Types::GetServiceEndpointResponse]
+      def service_type: () -> String?
+      def service_endpoint: () -> String?
+      def server_trust: () -> String?
+    end
+    def get_service_endpoint: (
+      ?service_type: String
+    ) -> _GetServiceEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceEndpointResponse
+
+    interface _GetServiceProfileResponse
+      include Smithy::Client::_Response[Types::GetServiceProfileResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANGetServiceProfileInfo?
+    end
+    def get_service_profile: (
+      ?id: String
+    ) -> _GetServiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceProfileResponse
+
+    interface _GetWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::GetWirelessDeviceResponse]
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def destination_name: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def thing_name: () -> String?
+      def thing_arn: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANDevice?
+      def sidewalk: () -> Types::SidewalkDevice?
+      def positioning: () -> String?
+    end
+    def get_wireless_device: (
+      ?identifier: String,
+      ?identifier_type: String
+    ) -> _GetWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessDeviceResponse
+
+    interface _GetWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::GetWirelessDeviceImportTaskResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def destination_name: () -> String?
+      def sidewalk: () -> Types::SidewalkGetStartImportInfo?
+      def creation_time: () -> Time?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def initialized_imported_device_count: () -> Integer?
+      def pending_imported_device_count: () -> Integer?
+      def onboarded_imported_device_count: () -> Integer?
+      def failed_imported_device_count: () -> Integer?
+    end
+    def get_wireless_device_import_task: (
+      ?id: String
+    ) -> _GetWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessDeviceImportTaskResponse
+
+    interface _GetWirelessDeviceStatisticsResponse
+      include Smithy::Client::_Response[Types::GetWirelessDeviceStatisticsResponse]
+      def wireless_device_id: () -> String?
+      def last_uplink_received_at: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANDeviceMetadata?
+      def sidewalk: () -> Types::SidewalkDeviceMetadata?
+    end
+    def get_wireless_device_statistics: (
+      ?wireless_device_id: String
+    ) -> _GetWirelessDeviceStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessDeviceStatisticsResponse
+
+    interface _GetWirelessGatewayResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayResponse]
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def lo_ra_wan: () -> Types::LoRaWANGateway?
+      def arn: () -> String?
+      def thing_name: () -> String?
+      def thing_arn: () -> String?
+    end
+    def get_wireless_gateway: (
+      ?identifier: String,
+      ?identifier_type: String
+    ) -> _GetWirelessGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayResponse
+
+    interface _GetWirelessGatewayCertificateResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayCertificateResponse]
+      def iot_certificate_id: () -> String?
+      def lo_ra_wan_network_server_certificate_id: () -> String?
+    end
+    def get_wireless_gateway_certificate: (
+      ?id: String
+    ) -> _GetWirelessGatewayCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayCertificateResponse
+
+    interface _GetWirelessGatewayFirmwareInformationResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayFirmwareInformationResponse]
+      def lo_ra_wan: () -> Types::LoRaWANGatewayCurrentVersion?
+    end
+    def get_wireless_gateway_firmware_information: (
+      ?id: String
+    ) -> _GetWirelessGatewayFirmwareInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayFirmwareInformationResponse
+
+    interface _GetWirelessGatewayStatisticsResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayStatisticsResponse]
+      def wireless_gateway_id: () -> String?
+      def last_uplink_received_at: () -> String?
+      def connection_status: () -> String?
+    end
+    def get_wireless_gateway_statistics: (
+      ?wireless_gateway_id: String
+    ) -> _GetWirelessGatewayStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayStatisticsResponse
+
+    interface _GetWirelessGatewayTaskResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayTaskResponse]
+      def wireless_gateway_id: () -> String?
+      def wireless_gateway_task_definition_id: () -> String?
+      def last_uplink_received_at: () -> String?
+      def task_created_at: () -> String?
+      def status: () -> String?
+    end
+    def get_wireless_gateway_task: (
+      ?id: String
+    ) -> _GetWirelessGatewayTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayTaskResponse
+
+    interface _GetWirelessGatewayTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::GetWirelessGatewayTaskDefinitionResponse]
+      def auto_create_tasks: () -> bool?
+      def name: () -> String?
+      def update: () -> Types::UpdateWirelessGatewayTaskCreate?
+      def arn: () -> String?
+    end
+    def get_wireless_gateway_task_definition: (
+      ?id: String
+    ) -> _GetWirelessGatewayTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWirelessGatewayTaskDefinitionResponse
+
+    interface _ListDestinationsResponse
+      include Smithy::Client::_Response[Types::ListDestinationsResponse]
+      def next_token: () -> String?
+      def destination_list: () -> Array[Types::Destinations]?
+    end
+    def list_destinations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDestinationsResponse
+
+    interface _ListDeviceProfilesResponse
+      include Smithy::Client::_Response[Types::ListDeviceProfilesResponse]
+      def next_token: () -> String?
+      def device_profile_list: () -> Array[Types::DeviceProfile]?
+    end
+    def list_device_profiles: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?device_profile_type: String
+    ) -> _ListDeviceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceProfilesResponse
+
+    interface _ListDevicesForWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::ListDevicesForWirelessDeviceImportTaskResponse]
+      def next_token: () -> String?
+      def destination_name: () -> String?
+      def imported_wireless_device_list: () -> Array[Types::ImportedWirelessDevice]?
+    end
+    def list_devices_for_wireless_device_import_task: (
+      ?id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListDevicesForWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesForWirelessDeviceImportTaskResponse
+
+    interface _ListEventConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListEventConfigurationsResponse]
+      def next_token: () -> String?
+      def event_configurations_list: () -> Array[Types::EventConfigurationItem]?
+    end
+    def list_event_configurations: (
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEventConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventConfigurationsResponse
+
+    interface _ListFuotaTasksResponse
+      include Smithy::Client::_Response[Types::ListFuotaTasksResponse]
+      def next_token: () -> String?
+      def fuota_task_list: () -> Array[Types::FuotaTask]?
+    end
+    def list_fuota_tasks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFuotaTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFuotaTasksResponse
+
+    interface _ListMulticastGroupsResponse
+      include Smithy::Client::_Response[Types::ListMulticastGroupsResponse]
+      def next_token: () -> String?
+      def multicast_group_list: () -> Array[Types::MulticastGroup]?
+    end
+    def list_multicast_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMulticastGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMulticastGroupsResponse
+
+    interface _ListMulticastGroupsByFuotaTaskResponse
+      include Smithy::Client::_Response[Types::ListMulticastGroupsByFuotaTaskResponse]
+      def next_token: () -> String?
+      def multicast_group_list: () -> Array[Types::MulticastGroupByFuotaTask]?
+    end
+    def list_multicast_groups_by_fuota_task: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMulticastGroupsByFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMulticastGroupsByFuotaTaskResponse
+
+    interface _ListNetworkAnalyzerConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListNetworkAnalyzerConfigurationsResponse]
+      def next_token: () -> String?
+      def network_analyzer_configuration_list: () -> Array[Types::NetworkAnalyzerConfigurations]?
+    end
+    def list_network_analyzer_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkAnalyzerConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkAnalyzerConfigurationsResponse
+
+    interface _ListPartnerAccountsResponse
+      include Smithy::Client::_Response[Types::ListPartnerAccountsResponse]
+      def next_token: () -> String?
+      def sidewalk: () -> Array[Types::SidewalkAccountInfoWithFingerprint]?
+    end
+    def list_partner_accounts: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPartnerAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartnerAccountsResponse
+
+    interface _ListPositionConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListPositionConfigurationsResponse]
+      def position_configuration_list: () -> Array[Types::PositionConfigurationItem]?
+      def next_token: () -> String?
+    end
+    def list_position_configurations: (
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPositionConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPositionConfigurationsResponse
+
+    interface _ListQueuedMessagesResponse
+      include Smithy::Client::_Response[Types::ListQueuedMessagesResponse]
+      def next_token: () -> String?
+      def downlink_queue_messages_list: () -> Array[Types::DownlinkQueueMessage]?
+    end
+    def list_queued_messages: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?wireless_device_type: String
+    ) -> _ListQueuedMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuedMessagesResponse
+
+    interface _ListServiceProfilesResponse
+      include Smithy::Client::_Response[Types::ListServiceProfilesResponse]
+      def next_token: () -> String?
+      def service_profile_list: () -> Array[Types::ServiceProfile]?
+    end
+    def list_service_profiles: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServiceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceProfilesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWirelessDeviceImportTasksResponse
+      include Smithy::Client::_Response[Types::ListWirelessDeviceImportTasksResponse]
+      def next_token: () -> String?
+      def wireless_device_import_task_list: () -> Array[Types::WirelessDeviceImportTask]?
+    end
+    def list_wireless_device_import_tasks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWirelessDeviceImportTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWirelessDeviceImportTasksResponse
+
+    interface _ListWirelessDevicesResponse
+      include Smithy::Client::_Response[Types::ListWirelessDevicesResponse]
+      def next_token: () -> String?
+      def wireless_device_list: () -> Array[Types::WirelessDeviceStatistics]?
+    end
+    def list_wireless_devices: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?destination_name: String,
+      ?device_profile_id: String,
+      ?service_profile_id: String,
+      ?wireless_device_type: String,
+      ?fuota_task_id: String,
+      ?multicast_group_id: String
+    ) -> _ListWirelessDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWirelessDevicesResponse
+
+    interface _ListWirelessGatewayTaskDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListWirelessGatewayTaskDefinitionsResponse]
+      def next_token: () -> String?
+      def task_definitions: () -> Array[Types::UpdateWirelessGatewayTaskEntry]?
+    end
+    def list_wireless_gateway_task_definitions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?task_definition_type: String
+    ) -> _ListWirelessGatewayTaskDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWirelessGatewayTaskDefinitionsResponse
+
+    interface _ListWirelessGatewaysResponse
+      include Smithy::Client::_Response[Types::ListWirelessGatewaysResponse]
+      def next_token: () -> String?
+      def wireless_gateway_list: () -> Array[Types::WirelessGatewayStatistics]?
+    end
+    def list_wireless_gateways: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWirelessGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWirelessGatewaysResponse
+
+    interface _PutPositionConfigurationResponse
+      include Smithy::Client::_Response[Types::PutPositionConfigurationResponse]
+    end
+    def put_position_configuration: (
+      ?resource_identifier: String,
+      ?resource_type: String,
+      ?solvers: {
+        semtech_gnss: {
+          status: String,
+          fec: String
+        }
+      },
+      ?destination: String
+    ) -> _PutPositionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPositionConfigurationResponse
+
+    interface _PutResourceLogLevelResponse
+      include Smithy::Client::_Response[Types::PutResourceLogLevelResponse]
+    end
+    def put_resource_log_level: (
+      ?resource_identifier: String,
+      ?resource_type: String,
+      ?log_level: String
+    ) -> _PutResourceLogLevelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourceLogLevelResponse
+
+    interface _ResetAllResourceLogLevelsResponse
+      include Smithy::Client::_Response[Types::ResetAllResourceLogLevelsResponse]
+    end
+    def reset_all_resource_log_levels: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetAllResourceLogLevelsResponse
+
+    interface _ResetResourceLogLevelResponse
+      include Smithy::Client::_Response[Types::ResetResourceLogLevelResponse]
+    end
+    def reset_resource_log_level: (
+      ?resource_identifier: String,
+      ?resource_type: String
+    ) -> _ResetResourceLogLevelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetResourceLogLevelResponse
+
+    interface _SendDataToMulticastGroupResponse
+      include Smithy::Client::_Response[Types::SendDataToMulticastGroupResponse]
+      def message_id: () -> String?
+    end
+    def send_data_to_multicast_group: (
+      ?id: String,
+      ?payload_data: String,
+      ?wireless_metadata: {
+        lo_ra_wan: {
+          f_port: Integer
+        }
+      }
+    ) -> _SendDataToMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDataToMulticastGroupResponse
+
+    interface _SendDataToWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::SendDataToWirelessDeviceResponse]
+      def message_id: () -> String?
+    end
+    def send_data_to_wireless_device: (
+      ?id: String,
+      ?transmit_mode: Integer,
+      ?payload_data: String,
+      ?wireless_metadata: {
+        lo_ra_wan: {
+          f_port: Integer,
+          participating_gateways: {
+            downlink_mode: String,
+            gateway_list: Array[
+              {
+                gateway_id: String,
+                downlink_frequency: Integer
+              }
+            ],
+            transmission_interval: Integer
+          }
+        },
+        sidewalk: {
+          seq: Integer,
+          message_type: String,
+          ack_mode_retry_duration_secs: Integer
+        }
+      }
+    ) -> _SendDataToWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDataToWirelessDeviceResponse
+
+    interface _StartBulkAssociateWirelessDeviceWithMulticastGroupResponse
+      include Smithy::Client::_Response[Types::StartBulkAssociateWirelessDeviceWithMulticastGroupResponse]
+    end
+    def start_bulk_associate_wireless_device_with_multicast_group: (
+      ?id: String,
+      ?query_string: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartBulkAssociateWirelessDeviceWithMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBulkAssociateWirelessDeviceWithMulticastGroupResponse
+
+    interface _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse
+      include Smithy::Client::_Response[Types::StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse]
+    end
+    def start_bulk_disassociate_wireless_device_from_multicast_group: (
+      ?id: String,
+      ?query_string: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse
+
+    interface _StartFuotaTaskResponse
+      include Smithy::Client::_Response[Types::StartFuotaTaskResponse]
+    end
+    def start_fuota_task: (
+      ?id: String,
+      ?lo_ra_wan: {
+        start_time: Time
+      }
+    ) -> _StartFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFuotaTaskResponse
+
+    interface _StartMulticastGroupSessionResponse
+      include Smithy::Client::_Response[Types::StartMulticastGroupSessionResponse]
+    end
+    def start_multicast_group_session: (
+      ?id: String,
+      ?lo_ra_wan: {
+        dl_dr: Integer,
+        dl_freq: Integer,
+        session_start_time: Time,
+        session_timeout: Integer,
+        ping_slot_period: Integer
+      }
+    ) -> _StartMulticastGroupSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMulticastGroupSessionResponse
+
+    interface _StartSingleWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::StartSingleWirelessDeviceImportTaskResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def start_single_wireless_device_import_task: (
+      ?destination_name: String,
+      ?client_request_token: String,
+      ?device_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?sidewalk: {
+        sidewalk_manufacturing_sn: String
+      }
+    ) -> _StartSingleWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSingleWirelessDeviceImportTaskResponse
+
+    interface _StartWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::StartWirelessDeviceImportTaskResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def start_wireless_device_import_task: (
+      ?destination_name: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?sidewalk: {
+        device_creation_file: String,
+        role: String
+      }
+    ) -> _StartWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWirelessDeviceImportTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::TestWirelessDeviceResponse]
+      def result: () -> String?
+    end
+    def test_wireless_device: (
+      ?id: String
+    ) -> _TestWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestWirelessDeviceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateDestinationResponse]
+    end
+    def update_destination: (
+      ?name: String,
+      ?expression_type: String,
+      ?expression: String,
+      ?description: String,
+      ?role_arn: String
+    ) -> _UpdateDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDestinationResponse
+
+    interface _UpdateEventConfigurationByResourceTypesResponse
+      include Smithy::Client::_Response[Types::UpdateEventConfigurationByResourceTypesResponse]
+    end
+    def update_event_configuration_by_resource_types: (
+      ?device_registration_state: {
+        sidewalk: {
+          wireless_device_event_topic: String
+        }
+      },
+      ?proximity: {
+        sidewalk: {
+          wireless_device_event_topic: String
+        }
+      },
+      ?join: {
+        lo_ra_wan: {
+          wireless_device_event_topic: String
+        }
+      },
+      ?connection_status: {
+        lo_ra_wan: {
+          wireless_gateway_event_topic: String
+        }
+      },
+      ?message_delivery_status: {
+        sidewalk: {
+          wireless_device_event_topic: String
+        }
+      }
+    ) -> _UpdateEventConfigurationByResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventConfigurationByResourceTypesResponse
+
+    interface _UpdateFuotaTaskResponse
+      include Smithy::Client::_Response[Types::UpdateFuotaTaskResponse]
+    end
+    def update_fuota_task: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?lo_ra_wan: {
+        rf_region: String
+      },
+      ?firmware_update_image: String,
+      ?firmware_update_role: String,
+      ?redundancy_percent: Integer,
+      ?fragment_size_bytes: Integer,
+      ?fragment_interval_ms: Integer,
+      ?descriptor: String
+    ) -> _UpdateFuotaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFuotaTaskResponse
+
+    interface _UpdateLogLevelsByResourceTypesResponse
+      include Smithy::Client::_Response[Types::UpdateLogLevelsByResourceTypesResponse]
+    end
+    def update_log_levels_by_resource_types: (
+      ?default_log_level: String,
+      ?fuota_task_log_options: Array[
+        {
+          type: String,
+          log_level: String,
+          events: Array[
+            {
+              event: String,
+              log_level: untyped
+            }
+          ]
+        }
+      ],
+      ?wireless_device_log_options: Array[
+        {
+          type: String,
+          log_level: String,
+          events: Array[
+            {
+              event: String,
+              log_level: untyped
+            }
+          ]
+        }
+      ],
+      ?wireless_gateway_log_options: Array[
+        {
+          type: String,
+          log_level: String,
+          events: Array[
+            {
+              event: String,
+              log_level: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateLogLevelsByResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLogLevelsByResourceTypesResponse
+
+    interface _UpdateMetricConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateMetricConfigurationResponse]
+    end
+    def update_metric_configuration: (
+      ?summary_metric: {
+        status: String
+      }
+    ) -> _UpdateMetricConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMetricConfigurationResponse
+
+    interface _UpdateMulticastGroupResponse
+      include Smithy::Client::_Response[Types::UpdateMulticastGroupResponse]
+    end
+    def update_multicast_group: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?lo_ra_wan: {
+        rf_region: String,
+        dl_class: String,
+        participating_gateways: {
+          gateway_list: Array[String],
+          transmission_interval: Integer
+        }
+      }
+    ) -> _UpdateMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMulticastGroupResponse
+
+    interface _UpdateNetworkAnalyzerConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkAnalyzerConfigurationResponse]
+    end
+    def update_network_analyzer_configuration: (
+      ?configuration_name: String,
+      ?trace_content: {
+        wireless_device_frame_info: String,
+        log_level: String,
+        multicast_frame_info: String
+      },
+      ?wireless_devices_to_add: Array[String],
+      ?wireless_devices_to_remove: Array[String],
+      ?wireless_gateways_to_add: Array[String],
+      ?wireless_gateways_to_remove: Array[String],
+      ?description: String,
+      ?multicast_groups_to_add: Array[String],
+      ?multicast_groups_to_remove: Array[String]
+    ) -> _UpdateNetworkAnalyzerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkAnalyzerConfigurationResponse
+
+    interface _UpdatePartnerAccountResponse
+      include Smithy::Client::_Response[Types::UpdatePartnerAccountResponse]
+    end
+    def update_partner_account: (
+      ?sidewalk: {
+        app_server_private_key: String
+      },
+      ?partner_account_id: String,
+      ?partner_type: String
+    ) -> _UpdatePartnerAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePartnerAccountResponse
+
+    interface _UpdatePositionResponse
+      include Smithy::Client::_Response[Types::UpdatePositionResponse]
+    end
+    def update_position: (
+      ?resource_identifier: String,
+      ?resource_type: String,
+      ?position: Array[Float]
+    ) -> _UpdatePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePositionResponse
+
+    interface _UpdateResourceEventConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateResourceEventConfigurationResponse]
+    end
+    def update_resource_event_configuration: (
+      ?identifier: String,
+      ?identifier_type: String,
+      ?partner_type: String,
+      ?device_registration_state: {
+        sidewalk: {
+          amazon_id_event_topic: String
+        },
+        wireless_device_id_event_topic: untyped
+      },
+      ?proximity: {
+        sidewalk: {
+          amazon_id_event_topic: String
+        },
+        wireless_device_id_event_topic: untyped
+      },
+      ?join: {
+        lo_ra_wan: {
+          dev_eui_event_topic: String
+        },
+        wireless_device_id_event_topic: untyped
+      },
+      ?connection_status: {
+        lo_ra_wan: {
+          gateway_eui_event_topic: String
+        },
+        wireless_gateway_id_event_topic: untyped
+      },
+      ?message_delivery_status: {
+        sidewalk: {
+          amazon_id_event_topic: String
+        },
+        wireless_device_id_event_topic: untyped
+      }
+    ) -> _UpdateResourceEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceEventConfigurationResponse
+
+    interface _UpdateResourcePositionResponse
+      include Smithy::Client::_Response[Types::UpdateResourcePositionResponse]
+    end
+    def update_resource_position: (
+      ?resource_identifier: String,
+      ?resource_type: String,
+      ?geo_json_payload: String
+    ) -> _UpdateResourcePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourcePositionResponse
+
+    interface _UpdateWirelessDeviceResponse
+      include Smithy::Client::_Response[Types::UpdateWirelessDeviceResponse]
+    end
+    def update_wireless_device: (
+      ?id: String,
+      ?destination_name: String,
+      ?name: String,
+      ?description: String,
+      ?lo_ra_wan: {
+        device_profile_id: String,
+        service_profile_id: String,
+        abp_v1_1: {
+          f_cnt_start: Integer
+        },
+        abp_v1_0_x: {
+          f_cnt_start: untyped
+        },
+        f_ports: {
+          positioning: {
+            clock_sync: Integer,
+            stream: untyped,
+            gnss: untyped
+          },
+          applications: Array[
+            {
+              f_port: untyped,
+              type: String,
+              destination_name: String
+            }
+          ]
+        }
+      },
+      ?positioning: String
+    ) -> _UpdateWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWirelessDeviceResponse
+
+    interface _UpdateWirelessDeviceImportTaskResponse
+      include Smithy::Client::_Response[Types::UpdateWirelessDeviceImportTaskResponse]
+    end
+    def update_wireless_device_import_task: (
+      ?id: String,
+      ?sidewalk: {
+        device_creation_file: String
+      }
+    ) -> _UpdateWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWirelessDeviceImportTaskResponse
+
+    interface _UpdateWirelessGatewayResponse
+      include Smithy::Client::_Response[Types::UpdateWirelessGatewayResponse]
+    end
+    def update_wireless_gateway: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?join_eui_filters: Array[
+        Array[String]
+      ],
+      ?net_id_filters: Array[String],
+      ?max_eirp: Float
+    ) -> _UpdateWirelessGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWirelessGatewayResponse
+  end
+end

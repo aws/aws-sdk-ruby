@@ -1,0 +1,373 @@
+module Aws::ComprehendMedical
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ComprehendMedical::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DescribeEntitiesDetectionV2JobResponse
+      include Smithy::Client::_Response[Types::DescribeEntitiesDetectionV2JobResponse]
+      def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties?
+    end
+    def describe_entities_detection_v2_job: (
+      ?job_id: String
+    ) -> _DescribeEntitiesDetectionV2JobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEntitiesDetectionV2JobResponse
+
+    interface _DescribeICD10CMInferenceJobResponse
+      include Smithy::Client::_Response[Types::DescribeICD10CMInferenceJobResponse]
+      def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties?
+    end
+    def describe_icd10_cm_inference_job: (
+      ?job_id: String
+    ) -> _DescribeICD10CMInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeICD10CMInferenceJobResponse
+
+    interface _DescribePHIDetectionJobResponse
+      include Smithy::Client::_Response[Types::DescribePHIDetectionJobResponse]
+      def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties?
+    end
+    def describe_phi_detection_job: (
+      ?job_id: String
+    ) -> _DescribePHIDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePHIDetectionJobResponse
+
+    interface _DescribeRxNormInferenceJobResponse
+      include Smithy::Client::_Response[Types::DescribeRxNormInferenceJobResponse]
+      def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties?
+    end
+    def describe_rx_norm_inference_job: (
+      ?job_id: String
+    ) -> _DescribeRxNormInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRxNormInferenceJobResponse
+
+    interface _DescribeSNOMEDCTInferenceJobResponse
+      include Smithy::Client::_Response[Types::DescribeSNOMEDCTInferenceJobResponse]
+      def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties?
+    end
+    def describe_snomedct_inference_job: (
+      ?job_id: String
+    ) -> _DescribeSNOMEDCTInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSNOMEDCTInferenceJobResponse
+
+    interface _DetectEntitiesResponse
+      include Smithy::Client::_Response[Types::DetectEntitiesResponse]
+      def entities: () -> Array[Types::Entity]?
+      def unmapped_attributes: () -> Array[Types::UnmappedAttribute]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+    end
+    def detect_entities: (
+      ?text: String
+    ) -> _DetectEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectEntitiesResponse
+
+    interface _DetectEntitiesV2Response
+      include Smithy::Client::_Response[Types::DetectEntitiesV2Response]
+      def entities: () -> Array[Types::Entity]?
+      def unmapped_attributes: () -> Array[Types::UnmappedAttribute]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+    end
+    def detect_entities_v2: (
+      ?text: String
+    ) -> _DetectEntitiesV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectEntitiesV2Response
+
+    interface _DetectPHIResponse
+      include Smithy::Client::_Response[Types::DetectPHIResponse]
+      def entities: () -> Array[Types::Entity]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+    end
+    def detect_phi: (
+      ?text: String
+    ) -> _DetectPHIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectPHIResponse
+
+    interface _InferICD10CMResponse
+      include Smithy::Client::_Response[Types::InferICD10CMResponse]
+      def entities: () -> Array[Types::ICD10CMEntity]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+    end
+    def infer_icd10_cm: (
+      ?text: String
+    ) -> _InferICD10CMResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InferICD10CMResponse
+
+    interface _InferRxNormResponse
+      include Smithy::Client::_Response[Types::InferRxNormResponse]
+      def entities: () -> Array[Types::RxNormEntity]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+    end
+    def infer_rx_norm: (
+      ?text: String
+    ) -> _InferRxNormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InferRxNormResponse
+
+    interface _InferSNOMEDCTResponse
+      include Smithy::Client::_Response[Types::InferSNOMEDCTResponse]
+      def entities: () -> Array[Types::SNOMEDCTEntity]?
+      def pagination_token: () -> String?
+      def model_version: () -> String?
+      def snomedct_details: () -> Types::SNOMEDCTDetails?
+      def characters: () -> Types::Characters?
+    end
+    def infer_snomedct: (
+      ?text: String
+    ) -> _InferSNOMEDCTResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InferSNOMEDCTResponse
+
+    interface _ListEntitiesDetectionV2JobsResponse
+      include Smithy::Client::_Response[Types::ListEntitiesDetectionV2JobsResponse]
+      def comprehend_medical_async_job_properties_list: () -> Array[Types::ComprehendMedicalAsyncJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_entities_detection_v2_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntitiesDetectionV2JobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitiesDetectionV2JobsResponse
+
+    interface _ListICD10CMInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListICD10CMInferenceJobsResponse]
+      def comprehend_medical_async_job_properties_list: () -> Array[Types::ComprehendMedicalAsyncJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_icd10_cm_inference_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListICD10CMInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListICD10CMInferenceJobsResponse
+
+    interface _ListPHIDetectionJobsResponse
+      include Smithy::Client::_Response[Types::ListPHIDetectionJobsResponse]
+      def comprehend_medical_async_job_properties_list: () -> Array[Types::ComprehendMedicalAsyncJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_phi_detection_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPHIDetectionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPHIDetectionJobsResponse
+
+    interface _ListRxNormInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListRxNormInferenceJobsResponse]
+      def comprehend_medical_async_job_properties_list: () -> Array[Types::ComprehendMedicalAsyncJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_rx_norm_inference_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRxNormInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRxNormInferenceJobsResponse
+
+    interface _ListSNOMEDCTInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListSNOMEDCTInferenceJobsResponse]
+      def comprehend_medical_async_job_properties_list: () -> Array[Types::ComprehendMedicalAsyncJobProperties]?
+      def next_token: () -> String?
+    end
+    def list_snomedct_inference_jobs: (
+      ?filter: {
+        job_name: String,
+        job_status: String,
+        submit_time_before: Time,
+        submit_time_after: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSNOMEDCTInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSNOMEDCTInferenceJobsResponse
+
+    interface _StartEntitiesDetectionV2JobResponse
+      include Smithy::Client::_Response[Types::StartEntitiesDetectionV2JobResponse]
+      def job_id: () -> String?
+    end
+    def start_entities_detection_v2_job: (
+      ?input_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?output_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?kms_key: String,
+      ?language_code: String
+    ) -> _StartEntitiesDetectionV2JobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEntitiesDetectionV2JobResponse
+
+    interface _StartICD10CMInferenceJobResponse
+      include Smithy::Client::_Response[Types::StartICD10CMInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def start_icd10_cm_inference_job: (
+      ?input_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?output_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?kms_key: String,
+      ?language_code: String
+    ) -> _StartICD10CMInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartICD10CMInferenceJobResponse
+
+    interface _StartPHIDetectionJobResponse
+      include Smithy::Client::_Response[Types::StartPHIDetectionJobResponse]
+      def job_id: () -> String?
+    end
+    def start_phi_detection_job: (
+      ?input_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?output_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?kms_key: String,
+      ?language_code: String
+    ) -> _StartPHIDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPHIDetectionJobResponse
+
+    interface _StartRxNormInferenceJobResponse
+      include Smithy::Client::_Response[Types::StartRxNormInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def start_rx_norm_inference_job: (
+      ?input_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?output_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?kms_key: String,
+      ?language_code: String
+    ) -> _StartRxNormInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRxNormInferenceJobResponse
+
+    interface _StartSNOMEDCTInferenceJobResponse
+      include Smithy::Client::_Response[Types::StartSNOMEDCTInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def start_snomedct_inference_job: (
+      ?input_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?output_data_config: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?data_access_role_arn: String,
+      ?job_name: String,
+      ?client_request_token: String,
+      ?kms_key: String,
+      ?language_code: String
+    ) -> _StartSNOMEDCTInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSNOMEDCTInferenceJobResponse
+
+    interface _StopEntitiesDetectionV2JobResponse
+      include Smithy::Client::_Response[Types::StopEntitiesDetectionV2JobResponse]
+      def job_id: () -> String?
+    end
+    def stop_entities_detection_v2_job: (
+      ?job_id: String
+    ) -> _StopEntitiesDetectionV2JobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEntitiesDetectionV2JobResponse
+
+    interface _StopICD10CMInferenceJobResponse
+      include Smithy::Client::_Response[Types::StopICD10CMInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def stop_icd10_cm_inference_job: (
+      ?job_id: String
+    ) -> _StopICD10CMInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopICD10CMInferenceJobResponse
+
+    interface _StopPHIDetectionJobResponse
+      include Smithy::Client::_Response[Types::StopPHIDetectionJobResponse]
+      def job_id: () -> String?
+    end
+    def stop_phi_detection_job: (
+      ?job_id: String
+    ) -> _StopPHIDetectionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPHIDetectionJobResponse
+
+    interface _StopRxNormInferenceJobResponse
+      include Smithy::Client::_Response[Types::StopRxNormInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def stop_rx_norm_inference_job: (
+      ?job_id: String
+    ) -> _StopRxNormInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRxNormInferenceJobResponse
+
+    interface _StopSNOMEDCTInferenceJobResponse
+      include Smithy::Client::_Response[Types::StopSNOMEDCTInferenceJobResponse]
+      def job_id: () -> String?
+    end
+    def stop_snomedct_inference_job: (
+      ?job_id: String
+    ) -> _StopSNOMEDCTInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSNOMEDCTInferenceJobResponse
+  end
+end

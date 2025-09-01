@@ -1,0 +1,5 @@
+module Aws::APIGateway
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

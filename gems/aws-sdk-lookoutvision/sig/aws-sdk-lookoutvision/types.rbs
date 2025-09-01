@@ -1,0 +1,1196 @@
+module Aws::LookoutVision
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Anomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?pixel_anomaly: Types::PixelAnomaly,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor pixel_anomaly: Types::PixelAnomaly?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+        ?dataset_source: Types::DatasetSource,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor dataset_source: Types::DatasetSource?
+      attr_accessor client_token: String?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_metadata: Types::DatasetMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_metadata: Types::DatasetMetadata?
+    end
+
+    class CreateModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?description: String,
+        ?client_token: String,
+        ?output_config: Types::OutputConfig,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_metadata: Types::ModelMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_metadata: Types::ModelMetadata?
+    end
+
+    class CreateProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_metadata: Types::ProjectMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_metadata: Types::ProjectMetadata?
+    end
+
+    class DatasetDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+        ?creation_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?status: String,
+        ?status_message: String,
+        ?image_stats: Types::DatasetImageStats,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor image_stats: Types::DatasetImageStats?
+    end
+
+    class DatasetGroundTruthManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::InputS3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::InputS3Object?
+    end
+
+    class DatasetImageStats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Integer,
+        ?labeled: Integer,
+        ?normal: Integer,
+        ?anomaly: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Integer?
+      attr_accessor labeled: Integer?
+      attr_accessor normal: Integer?
+      attr_accessor anomaly: Integer?
+    end
+
+    class DatasetMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_type: String,
+        ?creation_timestamp: Time,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_type: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class DatasetSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ground_truth_manifest: Types::DatasetGroundTruthManifest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ground_truth_manifest: Types::DatasetGroundTruthManifest?
+    end
+
+    module DatasetStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_COMPLETE: String
+      UPDATE_FAILED_ROLLBACK_IN_PROGRESS: String
+      UPDATE_FAILED_ROLLBACK_COMPLETE: String
+      DELETE_IN_PROGRESS: String
+      DELETE_COMPLETE: String
+      DELETE_FAILED: String
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+    end
+
+    class DeleteProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_description: Types::DatasetDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_description: Types::DatasetDescription?
+    end
+
+    class DescribeModelPackagingJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor job_name: String?
+    end
+
+    class DescribeModelPackagingJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_packaging_description: Types::ModelPackagingDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_packaging_description: Types::ModelPackagingDescription?
+    end
+
+    class DescribeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+    end
+
+    class DescribeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_description: Types::ModelDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_description: Types::ModelDescription?
+    end
+
+    class DescribeProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+    end
+
+    class DescribeProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_description: Types::ProjectDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_description: Types::ProjectDescription?
+    end
+
+    class DetectAnomaliesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+        ?body: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+    end
+
+    class DetectAnomaliesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detect_anomaly_result: Types::DetectAnomalyResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detect_anomaly_result: Types::DetectAnomalyResult?
+    end
+
+    class DetectAnomalyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::ImageSource,
+        ?is_anomalous: bool,
+        ?confidence: Float,
+        ?anomalies: Array[Types::Anomaly],
+        ?anomaly_mask: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::ImageSource?
+      attr_accessor is_anomalous: bool?
+      attr_accessor confidence: Float?
+      attr_accessor anomalies: Array[Types::Anomaly]?
+      attr_accessor anomaly_mask: String?
+    end
+
+    class GreengrassConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compiler_options: String,
+        ?target_device: String,
+        ?target_platform: Types::TargetPlatform,
+        ?s3_output_location: Types::S3Location,
+        ?component_name: String,
+        ?component_version: String,
+        ?component_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compiler_options: String?
+      attr_accessor target_device: String?
+      attr_accessor target_platform: Types::TargetPlatform?
+      attr_accessor s3_output_location: Types::S3Location?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor component_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class GreengrassOutputDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_version_arn: String,
+        ?component_name: String,
+        ?component_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_version_arn: String?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+    end
+
+    class ImageSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class InputS3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListDatasetEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+        ?labeled: bool,
+        ?anomaly_class: String,
+        ?before_creation_date: Time,
+        ?after_creation_date: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?source_ref_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor labeled: bool?
+      attr_accessor anomaly_class: String?
+      attr_accessor before_creation_date: Time?
+      attr_accessor after_creation_date: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor source_ref_contains: String?
+    end
+
+    class ListDatasetEntriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_entries: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_entries: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListModelPackagingJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListModelPackagingJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_packaging_jobs: Array[Types::ModelPackagingJobMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_packaging_jobs: Array[Types::ModelPackagingJobMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?models: Array[Types::ModelMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor models: Array[Types::ModelMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProjectsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?projects: Array[Types::ProjectMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor projects: Array[Types::ProjectMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ModelDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_version: String,
+        ?model_arn: String,
+        ?creation_timestamp: Time,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?performance: Types::ModelPerformance,
+        ?output_config: Types::OutputConfig,
+        ?evaluation_manifest: Types::OutputS3Object,
+        ?evaluation_result: Types::OutputS3Object,
+        ?evaluation_end_timestamp: Time,
+        ?kms_key_id: String,
+        ?min_inference_units: Integer,
+        ?max_inference_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_version: String?
+      attr_accessor model_arn: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor performance: Types::ModelPerformance?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor evaluation_manifest: Types::OutputS3Object?
+      attr_accessor evaluation_result: Types::OutputS3Object?
+      attr_accessor evaluation_end_timestamp: Time?
+      attr_accessor kms_key_id: String?
+      attr_accessor min_inference_units: Integer?
+      attr_accessor max_inference_units: Integer?
+    end
+
+    module ModelHostingStatus
+      STARTING_HOSTING: String
+      HOSTED: String
+      HOSTING_FAILED: String
+      STOPPING_HOSTING: String
+      SYSTEM_UPDATING: String
+    end
+
+    class ModelMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_timestamp: Time,
+        ?model_version: String,
+        ?model_arn: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?performance: Types::ModelPerformance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_timestamp: Time?
+      attr_accessor model_version: String?
+      attr_accessor model_arn: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor performance: Types::ModelPerformance?
+    end
+
+    class ModelPackagingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?greengrass: Types::GreengrassConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor greengrass: Types::GreengrassConfiguration?
+    end
+
+    class ModelPackagingDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?project_name: String,
+        ?model_version: String,
+        ?model_packaging_configuration: Types::ModelPackagingConfiguration,
+        ?model_packaging_job_description: String,
+        ?model_packaging_method: String,
+        ?model_packaging_output_details: Types::ModelPackagingOutputDetails,
+        ?status: String,
+        ?status_message: String,
+        ?creation_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor model_packaging_configuration: Types::ModelPackagingConfiguration?
+      attr_accessor model_packaging_job_description: String?
+      attr_accessor model_packaging_method: String?
+      attr_accessor model_packaging_output_details: Types::ModelPackagingOutputDetails?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class ModelPackagingJobMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?project_name: String,
+        ?model_version: String,
+        ?model_packaging_job_description: String,
+        ?model_packaging_method: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor model_packaging_job_description: String?
+      attr_accessor model_packaging_method: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    module ModelPackagingJobStatus
+      CREATED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class ModelPackagingOutputDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?greengrass: Types::GreengrassOutputDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor greengrass: Types::GreengrassOutputDetails?
+    end
+
+    class ModelPerformance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f1_score: Float,
+        ?recall: Float,
+        ?precision: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f1_score: Float?
+      attr_accessor recall: Float?
+      attr_accessor precision: Float?
+    end
+
+    module ModelStatus
+      TRAINING: String
+      TRAINED: String
+      TRAINING_FAILED: String
+      STARTING_HOSTING: String
+      HOSTED: String
+      HOSTING_FAILED: String
+      STOPPING_HOSTING: String
+      SYSTEM_UPDATING: String
+      DELETING: String
+    end
+
+    class OutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: Types::S3Location?
+    end
+
+    class OutputS3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class PixelAnomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_percentage_area: Float,
+        ?color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_percentage_area: Float?
+      attr_accessor color: String?
+    end
+
+    class ProjectDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_name: String,
+        ?creation_timestamp: Time,
+        ?datasets: Array[Types::DatasetMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_name: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor datasets: Array[Types::DatasetMetadata]?
+    end
+
+    class ProjectMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_name: String,
+        ?creation_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_name: String?
+      attr_accessor creation_timestamp: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      PROJECT: String
+      DATASET: String
+      MODEL: String
+      TRIAL: String
+      MODEL_PACKAGE_JOB: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class StartModelPackagingJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+        ?job_name: String,
+        ?configuration: Types::ModelPackagingConfiguration,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor job_name: String?
+      attr_accessor configuration: Types::ModelPackagingConfiguration?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartModelPackagingJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+    end
+
+    class StartModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+        ?min_inference_units: Integer,
+        ?client_token: String,
+        ?max_inference_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor min_inference_units: Integer?
+      attr_accessor client_token: String?
+      attr_accessor max_inference_units: Integer?
+    end
+
+    class StartModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class StopModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?model_version: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor model_version: String?
+      attr_accessor client_token: String?
+    end
+
+    class StopModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetDevice
+      JETSON_XAVIER: String
+    end
+
+    class TargetPlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os: String,
+        ?arch: String,
+        ?accelerator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os: String?
+      attr_accessor arch: String?
+      attr_accessor accelerator: String?
+    end
+
+    module TargetPlatformAccelerator
+      NVIDIA: String
+    end
+
+    module TargetPlatformArch
+      ARM64: String
+      X86_64: String
+    end
+
+    module TargetPlatformOs
+      LINUX: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDatasetEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?dataset_type: String,
+        ?changes: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor changes: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDatasetEntriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

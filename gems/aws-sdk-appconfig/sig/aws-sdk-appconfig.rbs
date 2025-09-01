@@ -1,0 +1,5 @@
+  module Aws
+    module AppConfig
+      VERSION: String
+    end
+  end

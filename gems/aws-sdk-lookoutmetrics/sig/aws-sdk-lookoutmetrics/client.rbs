@@ -1,0 +1,612 @@
+module Aws::LookoutMetrics
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LookoutMetrics::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::ActivateAnomalyDetectorResponse]
+    end
+    def activate_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _ActivateAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateAnomalyDetectorResponse
+
+    interface _BackTestAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::BackTestAnomalyDetectorResponse]
+    end
+    def back_test_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _BackTestAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BackTestAnomalyDetectorResponse
+
+    interface _CreateAlertResponse
+      include Smithy::Client::_Response[Types::CreateAlertResponse]
+      def alert_arn: () -> String?
+    end
+    def create_alert: (
+      ?alert_name: String,
+      ?alert_sensitivity_threshold: Integer,
+      ?alert_description: String,
+      ?anomaly_detector_arn: String,
+      ?action: {
+        sns_configuration: {
+          role_arn: String,
+          sns_topic_arn: untyped,
+          sns_format: String
+        },
+        lambda_configuration: {
+          role_arn: untyped,
+          lambda_arn: untyped
+        }
+      },
+      ?tags: Hash[String, String],
+      ?alert_filters: {
+        metric_list: Array[String],
+        dimension_filter_list: Array[
+          {
+            dimension_name: String,
+            dimension_value_list: Array[String]
+          }
+        ]
+      }
+    ) -> _CreateAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAlertResponse
+
+    interface _CreateAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::CreateAnomalyDetectorResponse]
+      def anomaly_detector_arn: () -> String?
+    end
+    def create_anomaly_detector: (
+      ?anomaly_detector_name: String,
+      ?anomaly_detector_description: String,
+      ?anomaly_detector_config: {
+        anomaly_detector_frequency: String
+      },
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnomalyDetectorResponse
+
+    interface _CreateMetricSetResponse
+      include Smithy::Client::_Response[Types::CreateMetricSetResponse]
+      def metric_set_arn: () -> String?
+    end
+    def create_metric_set: (
+      ?anomaly_detector_arn: String,
+      ?metric_set_name: String,
+      ?metric_set_description: String,
+      ?metric_list: Array[
+        {
+          metric_name: String,
+          aggregation_function: String,
+          namespace: String
+        }
+      ],
+      ?offset: Integer,
+      ?timestamp_column: {
+        column_name: String,
+        column_format: String
+      },
+      ?dimension_list: Array[String],
+      ?metric_set_frequency: String,
+      ?metric_source: {
+        s3_source_config: {
+          role_arn: String,
+          templated_path_list: Array[String],
+          historical_data_path_list: Array[String],
+          file_format_descriptor: {
+            csv_format_descriptor: {
+              file_compression: String,
+              charset: String,
+              contains_header: bool,
+              delimiter: String,
+              header_list: Array[String],
+              quote_symbol: String
+            },
+            json_format_descriptor: {
+              file_compression: String,
+              charset: untyped
+            }
+          }
+        },
+        app_flow_config: {
+          role_arn: untyped,
+          flow_name: String
+        },
+        cloud_watch_config: {
+          role_arn: untyped,
+          back_test_configuration: {
+            run_back_test_mode: untyped
+          }
+        },
+        rds_source_config: {
+          db_instance_identifier: String,
+          database_host: String,
+          database_port: Integer,
+          secret_manager_arn: String,
+          database_name: String,
+          table_name: String,
+          role_arn: untyped,
+          vpc_configuration: {
+            subnet_id_list: Array[String],
+            security_group_id_list: Array[String]
+          }
+        },
+        redshift_source_config: {
+          cluster_identifier: String,
+          database_host: untyped,
+          database_port: untyped,
+          secret_manager_arn: untyped,
+          database_name: String,
+          table_name: untyped,
+          role_arn: untyped,
+          vpc_configuration: untyped
+        },
+        athena_source_config: {
+          role_arn: untyped,
+          database_name: String,
+          data_catalog: String,
+          table_name: String,
+          work_group_name: String,
+          s3_results_path: String,
+          back_test_configuration: untyped
+        }
+      },
+      ?timezone: String,
+      ?tags: Hash[String, String],
+      ?dimension_filter_list: Array[
+        {
+          name: String,
+          filter_list: Array[
+            {
+              dimension_value: String,
+              filter_operation: String
+            }
+          ]
+        }
+      ]
+    ) -> _CreateMetricSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMetricSetResponse
+
+    interface _DeactivateAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::DeactivateAnomalyDetectorResponse]
+    end
+    def deactivate_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _DeactivateAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateAnomalyDetectorResponse
+
+    interface _DeleteAlertResponse
+      include Smithy::Client::_Response[Types::DeleteAlertResponse]
+    end
+    def delete_alert: (
+      ?alert_arn: String
+    ) -> _DeleteAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlertResponse
+
+    interface _DeleteAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::DeleteAnomalyDetectorResponse]
+    end
+    def delete_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _DeleteAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnomalyDetectorResponse
+
+    interface _DescribeAlertResponse
+      include Smithy::Client::_Response[Types::DescribeAlertResponse]
+      def alert: () -> Types::Alert?
+    end
+    def describe_alert: (
+      ?alert_arn: String
+    ) -> _DescribeAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlertResponse
+
+    interface _DescribeAnomalyDetectionExecutionsResponse
+      include Smithy::Client::_Response[Types::DescribeAnomalyDetectionExecutionsResponse]
+      def execution_list: () -> Array[Types::ExecutionStatus]?
+      def next_token: () -> String?
+    end
+    def describe_anomaly_detection_executions: (
+      ?anomaly_detector_arn: String,
+      ?timestamp: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAnomalyDetectionExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnomalyDetectionExecutionsResponse
+
+    interface _DescribeAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::DescribeAnomalyDetectorResponse]
+      def anomaly_detector_arn: () -> String?
+      def anomaly_detector_name: () -> String?
+      def anomaly_detector_description: () -> String?
+      def anomaly_detector_config: () -> Types::AnomalyDetectorConfigSummary?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def status: () -> String?
+      def failure_reason: () -> String?
+      def kms_key_arn: () -> String?
+      def failure_type: () -> String?
+    end
+    def describe_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _DescribeAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnomalyDetectorResponse
+
+    interface _DescribeMetricSetResponse
+      include Smithy::Client::_Response[Types::DescribeMetricSetResponse]
+      def metric_set_arn: () -> String?
+      def anomaly_detector_arn: () -> String?
+      def metric_set_name: () -> String?
+      def metric_set_description: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def offset: () -> Integer?
+      def metric_list: () -> Array[Types::Metric]?
+      def timestamp_column: () -> Types::TimestampColumn?
+      def dimension_list: () -> Array[String]?
+      def metric_set_frequency: () -> String?
+      def timezone: () -> String?
+      def metric_source: () -> Types::MetricSource?
+      def dimension_filter_list: () -> Array[Types::MetricSetDimensionFilter]?
+    end
+    def describe_metric_set: (
+      ?metric_set_arn: String
+    ) -> _DescribeMetricSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricSetResponse
+
+    interface _DetectMetricSetConfigResponse
+      include Smithy::Client::_Response[Types::DetectMetricSetConfigResponse]
+      def detected_metric_set_config: () -> Types::DetectedMetricSetConfig?
+    end
+    def detect_metric_set_config: (
+      ?anomaly_detector_arn: String,
+      ?auto_detection_metric_source: {
+        s3_source_config: {
+          templated_path_list: Array[String],
+          historical_data_path_list: Array[String]
+        }
+      }
+    ) -> _DetectMetricSetConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectMetricSetConfigResponse
+
+    interface _GetAnomalyGroupResponse
+      include Smithy::Client::_Response[Types::GetAnomalyGroupResponse]
+      def anomaly_group: () -> Types::AnomalyGroup?
+    end
+    def get_anomaly_group: (
+      ?anomaly_group_id: String,
+      ?anomaly_detector_arn: String
+    ) -> _GetAnomalyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnomalyGroupResponse
+
+    interface _GetDataQualityMetricsResponse
+      include Smithy::Client::_Response[Types::GetDataQualityMetricsResponse]
+      def anomaly_detector_data_quality_metric_list: () -> Array[Types::AnomalyDetectorDataQualityMetric]?
+    end
+    def get_data_quality_metrics: (
+      ?anomaly_detector_arn: String,
+      ?metric_set_arn: String
+    ) -> _GetDataQualityMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataQualityMetricsResponse
+
+    interface _GetFeedbackResponse
+      include Smithy::Client::_Response[Types::GetFeedbackResponse]
+      def anomaly_group_time_series_feedback: () -> Array[Types::TimeSeriesFeedback]?
+      def next_token: () -> String?
+    end
+    def get_feedback: (
+      ?anomaly_detector_arn: String,
+      ?anomaly_group_time_series_feedback: {
+        anomaly_group_id: String,
+        time_series_id: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFeedbackResponse
+
+    interface _GetSampleDataResponse
+      include Smithy::Client::_Response[Types::GetSampleDataResponse]
+      def header_values: () -> Array[String]?
+      def sample_rows: () -> Array[Array[String]]?
+    end
+    def get_sample_data: (
+      ?s3_source_config: {
+        role_arn: String,
+        templated_path_list: Array[String],
+        historical_data_path_list: Array[String],
+        file_format_descriptor: {
+          csv_format_descriptor: {
+            file_compression: String,
+            charset: String,
+            contains_header: bool,
+            delimiter: String,
+            header_list: Array[String],
+            quote_symbol: String
+          },
+          json_format_descriptor: {
+            file_compression: String,
+            charset: untyped
+          }
+        }
+      }
+    ) -> _GetSampleDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSampleDataResponse
+
+    interface _ListAlertsResponse
+      include Smithy::Client::_Response[Types::ListAlertsResponse]
+      def alert_summary_list: () -> Array[Types::AlertSummary]?
+      def next_token: () -> String?
+    end
+    def list_alerts: (
+      ?anomaly_detector_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAlertsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAlertsResponse
+
+    interface _ListAnomalyDetectorsResponse
+      include Smithy::Client::_Response[Types::ListAnomalyDetectorsResponse]
+      def anomaly_detector_summary_list: () -> Array[Types::AnomalyDetectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_anomaly_detectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalyDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalyDetectorsResponse
+
+    interface _ListAnomalyGroupRelatedMetricsResponse
+      include Smithy::Client::_Response[Types::ListAnomalyGroupRelatedMetricsResponse]
+      def inter_metric_impact_list: () -> Array[Types::InterMetricImpactDetails]?
+      def next_token: () -> String?
+    end
+    def list_anomaly_group_related_metrics: (
+      ?anomaly_detector_arn: String,
+      ?anomaly_group_id: String,
+      ?relationship_type_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalyGroupRelatedMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalyGroupRelatedMetricsResponse
+
+    interface _ListAnomalyGroupSummariesResponse
+      include Smithy::Client::_Response[Types::ListAnomalyGroupSummariesResponse]
+      def anomaly_group_summary_list: () -> Array[Types::AnomalyGroupSummary]?
+      def anomaly_group_statistics: () -> Types::AnomalyGroupStatistics?
+      def next_token: () -> String?
+    end
+    def list_anomaly_group_summaries: (
+      ?anomaly_detector_arn: String,
+      ?sensitivity_threshold: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalyGroupSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalyGroupSummariesResponse
+
+    interface _ListAnomalyGroupTimeSeriesResponse
+      include Smithy::Client::_Response[Types::ListAnomalyGroupTimeSeriesResponse]
+      def anomaly_group_id: () -> String?
+      def metric_name: () -> String?
+      def timestamp_list: () -> Array[String]?
+      def next_token: () -> String?
+      def time_series_list: () -> Array[Types::TimeSeries]?
+    end
+    def list_anomaly_group_time_series: (
+      ?anomaly_detector_arn: String,
+      ?anomaly_group_id: String,
+      ?metric_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalyGroupTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalyGroupTimeSeriesResponse
+
+    interface _ListMetricSetsResponse
+      include Smithy::Client::_Response[Types::ListMetricSetsResponse]
+      def metric_set_summary_list: () -> Array[Types::MetricSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_metric_sets: (
+      ?anomaly_detector_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMetricSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricSetsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutFeedbackResponse
+      include Smithy::Client::_Response[Types::PutFeedbackResponse]
+    end
+    def put_feedback: (
+      ?anomaly_detector_arn: String,
+      ?anomaly_group_time_series_feedback: {
+        anomaly_group_id: String,
+        time_series_id: String,
+        is_anomaly: bool
+      }
+    ) -> _PutFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFeedbackResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAlertResponse
+      include Smithy::Client::_Response[Types::UpdateAlertResponse]
+      def alert_arn: () -> String?
+    end
+    def update_alert: (
+      ?alert_arn: String,
+      ?alert_description: String,
+      ?alert_sensitivity_threshold: Integer,
+      ?action: {
+        sns_configuration: {
+          role_arn: String,
+          sns_topic_arn: untyped,
+          sns_format: String
+        },
+        lambda_configuration: {
+          role_arn: untyped,
+          lambda_arn: untyped
+        }
+      },
+      ?alert_filters: {
+        metric_list: Array[String],
+        dimension_filter_list: Array[
+          {
+            dimension_name: String,
+            dimension_value_list: Array[String]
+          }
+        ]
+      }
+    ) -> _UpdateAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAlertResponse
+
+    interface _UpdateAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::UpdateAnomalyDetectorResponse]
+      def anomaly_detector_arn: () -> String?
+    end
+    def update_anomaly_detector: (
+      ?anomaly_detector_arn: String,
+      ?kms_key_arn: String,
+      ?anomaly_detector_description: String,
+      ?anomaly_detector_config: {
+        anomaly_detector_frequency: String
+      }
+    ) -> _UpdateAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnomalyDetectorResponse
+
+    interface _UpdateMetricSetResponse
+      include Smithy::Client::_Response[Types::UpdateMetricSetResponse]
+      def metric_set_arn: () -> String?
+    end
+    def update_metric_set: (
+      ?metric_set_arn: String,
+      ?metric_set_description: String,
+      ?metric_list: Array[
+        {
+          metric_name: String,
+          aggregation_function: String,
+          namespace: String
+        }
+      ],
+      ?offset: Integer,
+      ?timestamp_column: {
+        column_name: String,
+        column_format: String
+      },
+      ?dimension_list: Array[String],
+      ?metric_set_frequency: String,
+      ?metric_source: {
+        s3_source_config: {
+          role_arn: String,
+          templated_path_list: Array[String],
+          historical_data_path_list: Array[String],
+          file_format_descriptor: {
+            csv_format_descriptor: {
+              file_compression: String,
+              charset: String,
+              contains_header: bool,
+              delimiter: String,
+              header_list: Array[String],
+              quote_symbol: String
+            },
+            json_format_descriptor: {
+              file_compression: String,
+              charset: untyped
+            }
+          }
+        },
+        app_flow_config: {
+          role_arn: untyped,
+          flow_name: String
+        },
+        cloud_watch_config: {
+          role_arn: untyped,
+          back_test_configuration: {
+            run_back_test_mode: untyped
+          }
+        },
+        rds_source_config: {
+          db_instance_identifier: String,
+          database_host: String,
+          database_port: Integer,
+          secret_manager_arn: String,
+          database_name: String,
+          table_name: String,
+          role_arn: untyped,
+          vpc_configuration: {
+            subnet_id_list: Array[String],
+            security_group_id_list: Array[String]
+          }
+        },
+        redshift_source_config: {
+          cluster_identifier: String,
+          database_host: untyped,
+          database_port: untyped,
+          secret_manager_arn: untyped,
+          database_name: String,
+          table_name: untyped,
+          role_arn: untyped,
+          vpc_configuration: untyped
+        },
+        athena_source_config: {
+          role_arn: untyped,
+          database_name: String,
+          data_catalog: String,
+          table_name: String,
+          work_group_name: String,
+          s3_results_path: String,
+          back_test_configuration: untyped
+        }
+      },
+      ?dimension_filter_list: Array[
+        {
+          name: String,
+          filter_list: Array[
+            {
+              dimension_value: String,
+              filter_operation: String
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateMetricSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMetricSetResponse
+  end
+end

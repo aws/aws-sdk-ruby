@@ -1,0 +1,24 @@
+module Aws::QLDBSession
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class CapacityExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSessionException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OccConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RateExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

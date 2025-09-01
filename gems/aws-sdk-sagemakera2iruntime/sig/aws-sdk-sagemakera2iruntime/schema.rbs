@@ -1,0 +1,42 @@
+module Aws::SageMakerA2IRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ConflictException: StructureShape
+    ContentClassifier: EnumShape
+    ContentClassifiers: ListShape
+    DeleteHumanLoopRequest: StructureShape
+    DeleteHumanLoopResponse: StructureShape
+    DescribeHumanLoopRequest: StructureShape
+    DescribeHumanLoopResponse: StructureShape
+    FailureReason: StringShape
+    FlowDefinitionArn: StringShape
+    HumanLoopArn: StringShape
+    HumanLoopDataAttributes: StructureShape
+    HumanLoopInput: StructureShape
+    HumanLoopName: StringShape
+    HumanLoopOutput: StructureShape
+    HumanLoopStatus: EnumShape
+    HumanLoopSummaries: ListShape
+    HumanLoopSummary: StructureShape
+    InputContent: StringShape
+    InternalServerException: StructureShape
+    ListHumanLoopsRequest: StructureShape
+    ListHumanLoopsResponse: StructureShape
+    MaxResults: IntegerShape
+    NextToken: StringShape
+    ResourceNotFoundException: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    SortOrder: EnumShape
+    StartHumanLoopRequest: StructureShape
+    StartHumanLoopResponse: StructureShape
+    StopHumanLoopRequest: StructureShape
+    StopHumanLoopResponse: StructureShape
+    String: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: TimestampShape
+    ValidationException: StructureShape
+
+    AmazonSageMakerA2IRuntime: ServiceShape
+  end
+end

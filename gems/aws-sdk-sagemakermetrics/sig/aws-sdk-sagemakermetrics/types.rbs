@@ -1,0 +1,155 @@
+module Aws::SageMakerMetrics
+  module Types
+
+    class BatchGetMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_queries: Array[Types::MetricQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_queries: Array[Types::MetricQuery]?
+    end
+
+    class BatchGetMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_query_results: Array[Types::MetricQueryResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_query_results: Array[Types::MetricQueryResult]?
+    end
+
+    class BatchPutMetricsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?metric_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor metric_index: Integer?
+    end
+
+    class BatchPutMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trial_component_name: String,
+        ?metric_data: Array[Types::RawMetricData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trial_component_name: String?
+      attr_accessor metric_data: Array[Types::RawMetricData]?
+    end
+
+    class BatchPutMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchPutMetricsError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchPutMetricsError]?
+    end
+
+    class MetricQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?resource_arn: String,
+        ?metric_stat: String,
+        ?period: String,
+        ?x_axis_type: String,
+        ?start: Integer,
+        ?end: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor metric_stat: String?
+      attr_accessor period: String?
+      attr_accessor x_axis_type: String?
+      attr_accessor start: Integer?
+      attr_accessor end: Integer?
+    end
+
+    class MetricQueryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?message: String,
+        ?x_axis_values: Array[Integer],
+        ?metric_values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor x_axis_values: Array[Integer]?
+      attr_accessor metric_values: Array[Float]?
+    end
+
+    module MetricQueryResultStatus
+      COMPLETE: String
+      TRUNCATED: String
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+    end
+
+    module MetricStatistic
+      MIN: String
+      MAX: String
+      AVG: String
+      COUNT: String
+      STD_DEV: String
+      LAST: String
+    end
+
+    module Period
+      ONE_MINUTE: String
+      FIVE_MINUTE: String
+      ONE_HOUR: String
+      ITERATION_NUMBER: String
+    end
+
+    module PutMetricsErrorCode
+      METRIC_LIMIT_EXCEEDED: String
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+      CONFLICT_ERROR: String
+    end
+
+    class RawMetricData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?timestamp: Time,
+        ?step: Integer,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor step: Integer?
+      attr_accessor value: Float?
+    end
+
+    module XAxisType
+      ITERATION_NUMBER: String
+      TIMESTAMP: String
+    end
+  end
+end

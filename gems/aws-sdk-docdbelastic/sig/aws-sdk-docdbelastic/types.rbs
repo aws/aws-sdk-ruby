@@ -1,0 +1,781 @@
+module Aws::DocDBElastic
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplyPendingMaintenanceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?apply_action: String,
+        ?opt_in_type: String,
+        ?apply_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor apply_action: String?
+      attr_accessor opt_in_type: String?
+      attr_accessor apply_on: String?
+    end
+
+    class ApplyPendingMaintenanceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?cluster_arn: String,
+        ?status: String,
+        ?cluster_endpoint: String,
+        ?create_time: String,
+        ?admin_user_name: String,
+        ?auth_type: String,
+        ?shard_capacity: Integer,
+        ?shard_count: Integer,
+        ?vpc_security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?preferred_maintenance_window: String,
+        ?kms_key_id: String,
+        ?shards: Array[Types::Shard],
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
+        ?shard_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor create_time: String?
+      attr_accessor admin_user_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor shard_capacity: Integer?
+      attr_accessor shard_count: Integer?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor shards: Array[Types::Shard]?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor shard_instance_count: Integer?
+    end
+
+    class ClusterInList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?cluster_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+    end
+
+    class ClusterSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?snapshot_name: String,
+        ?snapshot_arn: String,
+        ?snapshot_creation_time: String,
+        ?cluster_arn: String,
+        ?cluster_creation_time: String,
+        ?status: String,
+        ?vpc_security_group_ids: Array[String],
+        ?admin_user_name: String,
+        ?kms_key_id: String,
+        ?snapshot_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor snapshot_name: String?
+      attr_accessor snapshot_arn: String?
+      attr_accessor snapshot_creation_time: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor cluster_creation_time: String?
+      attr_accessor status: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor admin_user_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor snapshot_type: String?
+    end
+
+    class ClusterSnapshotInList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+        ?snapshot_arn: String,
+        ?cluster_arn: String,
+        ?status: String,
+        ?snapshot_creation_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+      attr_accessor snapshot_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor snapshot_creation_time: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CopyClusterSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+        ?target_snapshot_name: String,
+        ?kms_key_id: String,
+        ?copy_tags: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+      attr_accessor target_snapshot_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor copy_tags: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CopyClusterSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::ClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::ClusterSnapshot?
+    end
+
+    class CreateClusterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?auth_type: String,
+        ?admin_user_name: String,
+        ?admin_user_password: String,
+        ?shard_capacity: Integer,
+        ?shard_count: Integer,
+        ?vpc_security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?kms_key_id: String,
+        ?client_token: String,
+        ?preferred_maintenance_window: String,
+        ?tags: Hash[String, String],
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
+        ?shard_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor admin_user_name: String?
+      attr_accessor admin_user_password: String?
+      attr_accessor shard_capacity: Integer?
+      attr_accessor shard_count: Integer?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor kms_key_id: String?
+      attr_accessor client_token: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor shard_instance_count: Integer?
+    end
+
+    class CreateClusterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateClusterSnapshotOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?snapshot_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateClusterSnapshotOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::ClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::ClusterSnapshot?
+    end
+
+    class DeleteClusterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class DeleteClusterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DeleteClusterSnapshotOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+    end
+
+    class DeleteClusterSnapshotOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::ClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::ClusterSnapshot?
+    end
+
+    class GetClusterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class GetClusterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class GetClusterSnapshotOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+    end
+
+    class GetClusterSnapshotOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::ClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::ClusterSnapshot?
+    end
+
+    class GetPendingMaintenanceActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetPendingMaintenanceActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListClusterSnapshotsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?snapshot_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor snapshot_type: String?
+    end
+
+    class ListClusterSnapshotsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshots: Array[Types::ClusterSnapshotInList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshots: Array[Types::ClusterSnapshotInList]?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListClustersOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[Types::ClusterInList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[Types::ClusterInList]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPendingMaintenanceActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPendingMaintenanceActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_pending_maintenance_actions: Array[Types::ResourcePendingMaintenanceAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_pending_maintenance_actions: Array[Types::ResourcePendingMaintenanceAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PendingMaintenanceActionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?auto_applied_after_date: String,
+        ?forced_apply_date: String,
+        ?opt_in_status: String,
+        ?current_apply_date: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor auto_applied_after_date: String?
+      attr_accessor forced_apply_date: String?
+      attr_accessor opt_in_status: String?
+      attr_accessor current_apply_date: String?
+      attr_accessor description: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourcePendingMaintenanceAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?pending_maintenance_action_details: Array[Types::PendingMaintenanceActionDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor pending_maintenance_action_details: Array[Types::PendingMaintenanceActionDetails]?
+    end
+
+    class RestoreClusterFromSnapshotOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?snapshot_arn: String,
+        ?vpc_security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+        ?shard_capacity: Integer,
+        ?shard_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor snapshot_arn: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor shard_capacity: Integer?
+      attr_accessor shard_instance_count: Integer?
+    end
+
+    class RestoreClusterFromSnapshotOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Shard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_id: String,
+        ?create_time: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_id: String?
+      attr_accessor create_time: String?
+      attr_accessor status: String?
+    end
+
+    class StartClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class StartClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class StopClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class StopClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateClusterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?auth_type: String,
+        ?shard_capacity: Integer,
+        ?shard_count: Integer,
+        ?vpc_security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?admin_user_password: String,
+        ?client_token: String,
+        ?preferred_maintenance_window: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
+        ?shard_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor auth_type: String?
+      attr_accessor shard_capacity: Integer?
+      attr_accessor shard_count: Integer?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor admin_user_password: String?
+      attr_accessor client_token: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor shard_instance_count: Integer?
+    end
+
+    class UpdateClusterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

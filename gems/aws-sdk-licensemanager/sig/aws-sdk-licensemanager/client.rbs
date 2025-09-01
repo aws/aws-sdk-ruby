@@ -1,0 +1,871 @@
+module Aws::LicenseManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LicenseManager::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptGrantResponse
+      include Smithy::Client::_Response[Types::AcceptGrantResponse]
+      def grant_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def accept_grant: (
+      ?grant_arn: String
+    ) -> _AcceptGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptGrantResponse
+
+    interface _CheckInLicenseResponse
+      include Smithy::Client::_Response[Types::CheckInLicenseResponse]
+    end
+    def check_in_license: (
+      ?license_consumption_token: String,
+      ?beneficiary: String
+    ) -> _CheckInLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckInLicenseResponse
+
+    interface _CheckoutBorrowLicenseResponse
+      include Smithy::Client::_Response[Types::CheckoutBorrowLicenseResponse]
+      def license_arn: () -> String?
+      def license_consumption_token: () -> String?
+      def entitlements_allowed: () -> Array[Types::EntitlementData]?
+      def node_id: () -> String?
+      def signed_token: () -> String?
+      def issued_at: () -> String?
+      def expiration: () -> String?
+      def checkout_metadata: () -> Array[Types::Metadata]?
+    end
+    def checkout_borrow_license: (
+      ?license_arn: String,
+      ?entitlements: Array[
+        {
+          name: String,
+          value: untyped,
+          unit: String
+        }
+      ],
+      ?digital_signature_method: String,
+      ?node_id: String,
+      ?checkout_metadata: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _CheckoutBorrowLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckoutBorrowLicenseResponse
+
+    interface _CheckoutLicenseResponse
+      include Smithy::Client::_Response[Types::CheckoutLicenseResponse]
+      def checkout_type: () -> String?
+      def license_consumption_token: () -> String?
+      def entitlements_allowed: () -> Array[Types::EntitlementData]?
+      def signed_token: () -> String?
+      def node_id: () -> String?
+      def issued_at: () -> String?
+      def expiration: () -> String?
+      def license_arn: () -> String?
+    end
+    def checkout_license: (
+      ?product_sku: String,
+      ?checkout_type: String,
+      ?key_fingerprint: String,
+      ?entitlements: Array[
+        {
+          name: String,
+          value: untyped,
+          unit: String
+        }
+      ],
+      ?client_token: String,
+      ?beneficiary: String,
+      ?node_id: String
+    ) -> _CheckoutLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckoutLicenseResponse
+
+    interface _CreateGrantResponse
+      include Smithy::Client::_Response[Types::CreateGrantResponse]
+      def grant_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def create_grant: (
+      ?client_token: String,
+      ?grant_name: String,
+      ?license_arn: String,
+      ?principals: Array[String],
+      ?home_region: String,
+      ?allowed_operations: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGrantResponse
+
+    interface _CreateGrantVersionResponse
+      include Smithy::Client::_Response[Types::CreateGrantVersionResponse]
+      def grant_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def create_grant_version: (
+      ?client_token: String,
+      ?grant_arn: String,
+      ?grant_name: String,
+      ?allowed_operations: Array[String],
+      ?status: String,
+      ?status_reason: String,
+      ?source_version: String,
+      ?options: {
+        activation_override_behavior: String
+      }
+    ) -> _CreateGrantVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGrantVersionResponse
+
+    interface _CreateLicenseResponse
+      include Smithy::Client::_Response[Types::CreateLicenseResponse]
+      def license_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def create_license: (
+      ?license_name: String,
+      ?product_name: String,
+      ?product_sku: String,
+      ?issuer: {
+        name: String,
+        sign_key: untyped
+      },
+      ?home_region: String,
+      ?validity: {
+        begin: String,
+        end: untyped
+      },
+      ?entitlements: Array[
+        {
+          name: String,
+          value: untyped,
+          max_count: Integer,
+          overage: bool,
+          unit: String,
+          allow_check_in: untyped
+        }
+      ],
+      ?beneficiary: String,
+      ?consumption_configuration: {
+        renew_type: String,
+        provisional_configuration: {
+          max_time_to_live_in_minutes: Integer
+        },
+        borrow_configuration: {
+          allow_early_check_in: bool,
+          max_time_to_live_in_minutes: untyped
+        }
+      },
+      ?license_metadata: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseResponse
+
+    interface _CreateLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateLicenseConfigurationResponse]
+      def license_configuration_arn: () -> String?
+    end
+    def create_license_configuration: (
+      ?name: String,
+      ?description: String,
+      ?license_counting_type: String,
+      ?license_count: Integer,
+      ?license_count_hard_limit: bool,
+      ?license_rules: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?disassociate_when_not_found: bool,
+      ?product_information_list: Array[
+        {
+          resource_type: String,
+          product_information_filter_list: Array[
+            {
+              product_information_filter_name: untyped,
+              product_information_filter_value: Array[String],
+              product_information_filter_comparator: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseConfigurationResponse
+
+    interface _CreateLicenseConversionTaskForResourceResponse
+      include Smithy::Client::_Response[Types::CreateLicenseConversionTaskForResourceResponse]
+      def license_conversion_task_id: () -> String?
+    end
+    def create_license_conversion_task_for_resource: (
+      ?resource_arn: String,
+      ?source_license_context: {
+        usage_operation: String,
+        product_codes: Array[
+          {
+            product_code_id: String,
+            product_code_type: String
+          }
+        ]
+      },
+      ?destination_license_context: {
+        usage_operation: String,
+        product_codes: Array[
+          {
+            product_code_id: String,
+            product_code_type: String
+          }
+        ]
+      }
+    ) -> _CreateLicenseConversionTaskForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseConversionTaskForResourceResponse
+
+    interface _CreateLicenseManagerReportGeneratorResponse
+      include Smithy::Client::_Response[Types::CreateLicenseManagerReportGeneratorResponse]
+      def license_manager_report_generator_arn: () -> String?
+    end
+    def create_license_manager_report_generator: (
+      ?report_generator_name: String,
+      ?type: Array[String],
+      ?report_context: {
+        license_configuration_arns: Array[String]
+      },
+      ?report_frequency: {
+        value: Integer,
+        period: String
+      },
+      ?client_token: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateLicenseManagerReportGeneratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseManagerReportGeneratorResponse
+
+    interface _CreateLicenseVersionResponse
+      include Smithy::Client::_Response[Types::CreateLicenseVersionResponse]
+      def license_arn: () -> String?
+      def version: () -> String?
+      def status: () -> String?
+    end
+    def create_license_version: (
+      ?license_arn: String,
+      ?license_name: String,
+      ?product_name: String,
+      ?issuer: {
+        name: String,
+        sign_key: untyped
+      },
+      ?home_region: String,
+      ?validity: {
+        begin: String,
+        end: untyped
+      },
+      ?license_metadata: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?entitlements: Array[
+        {
+          name: String,
+          value: untyped,
+          max_count: Integer,
+          overage: bool,
+          unit: String,
+          allow_check_in: untyped
+        }
+      ],
+      ?consumption_configuration: {
+        renew_type: String,
+        provisional_configuration: {
+          max_time_to_live_in_minutes: Integer
+        },
+        borrow_configuration: {
+          allow_early_check_in: bool,
+          max_time_to_live_in_minutes: untyped
+        }
+      },
+      ?status: String,
+      ?client_token: String,
+      ?source_version: String
+    ) -> _CreateLicenseVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseVersionResponse
+
+    interface _CreateTokenResponse
+      include Smithy::Client::_Response[Types::CreateTokenResponse]
+      def token_id: () -> String?
+      def token_type: () -> String?
+      def token: () -> String?
+    end
+    def create_token: (
+      ?license_arn: String,
+      ?role_arns: Array[String],
+      ?expiration_in_days: Integer,
+      ?token_properties: Array[String],
+      ?client_token: String
+    ) -> _CreateTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTokenResponse
+
+    interface _DeleteGrantResponse
+      include Smithy::Client::_Response[Types::DeleteGrantResponse]
+      def grant_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def delete_grant: (
+      ?grant_arn: String,
+      ?status_reason: String,
+      ?version: String
+    ) -> _DeleteGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGrantResponse
+
+    interface _DeleteLicenseResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseResponse]
+      def status: () -> String?
+      def deletion_date: () -> String?
+    end
+    def delete_license: (
+      ?license_arn: String,
+      ?source_version: String
+    ) -> _DeleteLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseResponse
+
+    interface _DeleteLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseConfigurationResponse]
+    end
+    def delete_license_configuration: (
+      ?license_configuration_arn: String
+    ) -> _DeleteLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseConfigurationResponse
+
+    interface _DeleteLicenseManagerReportGeneratorResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseManagerReportGeneratorResponse]
+    end
+    def delete_license_manager_report_generator: (
+      ?license_manager_report_generator_arn: String
+    ) -> _DeleteLicenseManagerReportGeneratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseManagerReportGeneratorResponse
+
+    interface _DeleteTokenResponse
+      include Smithy::Client::_Response[Types::DeleteTokenResponse]
+    end
+    def delete_token: (
+      ?token_id: String
+    ) -> _DeleteTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTokenResponse
+
+    interface _ExtendLicenseConsumptionResponse
+      include Smithy::Client::_Response[Types::ExtendLicenseConsumptionResponse]
+      def license_consumption_token: () -> String?
+      def expiration: () -> String?
+    end
+    def extend_license_consumption: (
+      ?license_consumption_token: String,
+      ?dry_run: bool
+    ) -> _ExtendLicenseConsumptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExtendLicenseConsumptionResponse
+
+    interface _GetAccessTokenResponse
+      include Smithy::Client::_Response[Types::GetAccessTokenResponse]
+      def access_token: () -> String?
+    end
+    def get_access_token: (
+      ?token: String,
+      ?token_properties: Array[String]
+    ) -> _GetAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessTokenResponse
+
+    interface _GetGrantResponse
+      include Smithy::Client::_Response[Types::GetGrantResponse]
+      def grant: () -> Types::Grant?
+    end
+    def get_grant: (
+      ?grant_arn: String,
+      ?version: String
+    ) -> _GetGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGrantResponse
+
+    interface _GetLicenseResponse
+      include Smithy::Client::_Response[Types::GetLicenseResponse]
+      def license: () -> Types::License?
+    end
+    def get_license: (
+      ?license_arn: String,
+      ?version: String
+    ) -> _GetLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseResponse
+
+    interface _GetLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLicenseConfigurationResponse]
+      def license_configuration_id: () -> String?
+      def license_configuration_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def license_counting_type: () -> String?
+      def license_rules: () -> Array[String]?
+      def license_count: () -> Integer?
+      def license_count_hard_limit: () -> bool?
+      def consumed_licenses: () -> Integer?
+      def status: () -> String?
+      def owner_account_id: () -> String?
+      def consumed_license_summary_list: () -> Array[Types::ConsumedLicenseSummary]?
+      def managed_resource_summary_list: () -> Array[Types::ManagedResourceSummary]?
+      def tags: () -> Array[Types::Tag]?
+      def product_information_list: () -> Array[Types::ProductInformation]?
+      def automated_discovery_information: () -> Types::AutomatedDiscoveryInformation?
+      def disassociate_when_not_found: () -> bool?
+    end
+    def get_license_configuration: (
+      ?license_configuration_arn: String
+    ) -> _GetLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseConfigurationResponse
+
+    interface _GetLicenseConversionTaskResponse
+      include Smithy::Client::_Response[Types::GetLicenseConversionTaskResponse]
+      def license_conversion_task_id: () -> String?
+      def resource_arn: () -> String?
+      def source_license_context: () -> Types::LicenseConversionContext?
+      def destination_license_context: () -> Types::LicenseConversionContext?
+      def status_message: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def license_conversion_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def get_license_conversion_task: (
+      ?license_conversion_task_id: String
+    ) -> _GetLicenseConversionTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseConversionTaskResponse
+
+    interface _GetLicenseManagerReportGeneratorResponse
+      include Smithy::Client::_Response[Types::GetLicenseManagerReportGeneratorResponse]
+      def report_generator: () -> Types::ReportGenerator?
+    end
+    def get_license_manager_report_generator: (
+      ?license_manager_report_generator_arn: String
+    ) -> _GetLicenseManagerReportGeneratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseManagerReportGeneratorResponse
+
+    interface _GetLicenseUsageResponse
+      include Smithy::Client::_Response[Types::GetLicenseUsageResponse]
+      def license_usage: () -> Types::LicenseUsage?
+    end
+    def get_license_usage: (
+      ?license_arn: String
+    ) -> _GetLicenseUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseUsageResponse
+
+    interface _GetServiceSettingsResponse
+      include Smithy::Client::_Response[Types::GetServiceSettingsResponse]
+      def s3_bucket_arn: () -> String?
+      def sns_topic_arn: () -> String?
+      def organization_configuration: () -> Types::OrganizationConfiguration?
+      def enable_cross_accounts_discovery: () -> bool?
+      def license_manager_resource_share_arn: () -> String?
+    end
+    def get_service_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSettingsResponse
+
+    interface _ListAssociationsForLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::ListAssociationsForLicenseConfigurationResponse]
+      def license_configuration_associations: () -> Array[Types::LicenseConfigurationAssociation]?
+      def next_token: () -> String?
+    end
+    def list_associations_for_license_configuration: (
+      ?license_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociationsForLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationsForLicenseConfigurationResponse
+
+    interface _ListDistributedGrantsResponse
+      include Smithy::Client::_Response[Types::ListDistributedGrantsResponse]
+      def grants: () -> Array[Types::Grant]?
+      def next_token: () -> String?
+    end
+    def list_distributed_grants: (
+      ?grant_arns: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDistributedGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributedGrantsResponse
+
+    interface _ListFailuresForLicenseConfigurationOperationsResponse
+      include Smithy::Client::_Response[Types::ListFailuresForLicenseConfigurationOperationsResponse]
+      def license_operation_failure_list: () -> Array[Types::LicenseOperationFailure]?
+      def next_token: () -> String?
+    end
+    def list_failures_for_license_configuration_operations: (
+      ?license_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFailuresForLicenseConfigurationOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFailuresForLicenseConfigurationOperationsResponse
+
+    interface _ListLicenseConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListLicenseConfigurationsResponse]
+      def license_configurations: () -> Array[Types::LicenseConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_license_configurations: (
+      ?license_configuration_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListLicenseConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseConfigurationsResponse
+
+    interface _ListLicenseConversionTasksResponse
+      include Smithy::Client::_Response[Types::ListLicenseConversionTasksResponse]
+      def license_conversion_tasks: () -> Array[Types::LicenseConversionTask]?
+      def next_token: () -> String?
+    end
+    def list_license_conversion_tasks: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListLicenseConversionTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseConversionTasksResponse
+
+    interface _ListLicenseManagerReportGeneratorsResponse
+      include Smithy::Client::_Response[Types::ListLicenseManagerReportGeneratorsResponse]
+      def report_generators: () -> Array[Types::ReportGenerator]?
+      def next_token: () -> String?
+    end
+    def list_license_manager_report_generators: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLicenseManagerReportGeneratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseManagerReportGeneratorsResponse
+
+    interface _ListLicenseSpecificationsForResourceResponse
+      include Smithy::Client::_Response[Types::ListLicenseSpecificationsForResourceResponse]
+      def license_specifications: () -> Array[Types::LicenseSpecification]?
+      def next_token: () -> String?
+    end
+    def list_license_specifications_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLicenseSpecificationsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseSpecificationsForResourceResponse
+
+    interface _ListLicenseVersionsResponse
+      include Smithy::Client::_Response[Types::ListLicenseVersionsResponse]
+      def licenses: () -> Array[Types::License]?
+      def next_token: () -> String?
+    end
+    def list_license_versions: (
+      ?license_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLicenseVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseVersionsResponse
+
+    interface _ListLicensesResponse
+      include Smithy::Client::_Response[Types::ListLicensesResponse]
+      def licenses: () -> Array[Types::License]?
+      def next_token: () -> String?
+    end
+    def list_licenses: (
+      ?license_arns: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLicensesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicensesResponse
+
+    interface _ListReceivedGrantsResponse
+      include Smithy::Client::_Response[Types::ListReceivedGrantsResponse]
+      def grants: () -> Array[Types::Grant]?
+      def next_token: () -> String?
+    end
+    def list_received_grants: (
+      ?grant_arns: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReceivedGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceivedGrantsResponse
+
+    interface _ListReceivedGrantsForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListReceivedGrantsForOrganizationResponse]
+      def grants: () -> Array[Types::Grant]?
+      def next_token: () -> String?
+    end
+    def list_received_grants_for_organization: (
+      ?license_arn: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReceivedGrantsForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceivedGrantsForOrganizationResponse
+
+    interface _ListReceivedLicensesResponse
+      include Smithy::Client::_Response[Types::ListReceivedLicensesResponse]
+      def licenses: () -> Array[Types::GrantedLicense]?
+      def next_token: () -> String?
+    end
+    def list_received_licenses: (
+      ?license_arns: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReceivedLicensesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceivedLicensesResponse
+
+    interface _ListReceivedLicensesForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListReceivedLicensesForOrganizationResponse]
+      def licenses: () -> Array[Types::GrantedLicense]?
+      def next_token: () -> String?
+    end
+    def list_received_licenses_for_organization: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReceivedLicensesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceivedLicensesForOrganizationResponse
+
+    interface _ListResourceInventoryResponse
+      include Smithy::Client::_Response[Types::ListResourceInventoryResponse]
+      def resource_inventory_list: () -> Array[Types::ResourceInventory]?
+      def next_token: () -> String?
+    end
+    def list_resource_inventory: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          condition: String,
+          value: untyped
+        }
+      ]
+    ) -> _ListResourceInventoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceInventoryResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTokensResponse
+      include Smithy::Client::_Response[Types::ListTokensResponse]
+      def tokens: () -> Array[Types::TokenData]?
+      def next_token: () -> String?
+    end
+    def list_tokens: (
+      ?token_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTokensResponse
+
+    interface _ListUsageForLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::ListUsageForLicenseConfigurationResponse]
+      def license_configuration_usage_list: () -> Array[Types::LicenseConfigurationUsage]?
+      def next_token: () -> String?
+    end
+    def list_usage_for_license_configuration: (
+      ?license_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListUsageForLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsageForLicenseConfigurationResponse
+
+    interface _RejectGrantResponse
+      include Smithy::Client::_Response[Types::RejectGrantResponse]
+      def grant_arn: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+    end
+    def reject_grant: (
+      ?grant_arn: String
+    ) -> _RejectGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectGrantResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateLicenseConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLicenseConfigurationResponse]
+    end
+    def update_license_configuration: (
+      ?license_configuration_arn: String,
+      ?license_configuration_status: String,
+      ?license_rules: Array[String],
+      ?license_count: Integer,
+      ?license_count_hard_limit: bool,
+      ?name: String,
+      ?description: String,
+      ?product_information_list: Array[
+        {
+          resource_type: String,
+          product_information_filter_list: Array[
+            {
+              product_information_filter_name: untyped,
+              product_information_filter_value: Array[String],
+              product_information_filter_comparator: untyped
+            }
+          ]
+        }
+      ],
+      ?disassociate_when_not_found: bool
+    ) -> _UpdateLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseConfigurationResponse
+
+    interface _UpdateLicenseManagerReportGeneratorResponse
+      include Smithy::Client::_Response[Types::UpdateLicenseManagerReportGeneratorResponse]
+    end
+    def update_license_manager_report_generator: (
+      ?license_manager_report_generator_arn: String,
+      ?report_generator_name: String,
+      ?type: Array[String],
+      ?report_context: {
+        license_configuration_arns: Array[String]
+      },
+      ?report_frequency: {
+        value: Integer,
+        period: String
+      },
+      ?client_token: String,
+      ?description: String
+    ) -> _UpdateLicenseManagerReportGeneratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseManagerReportGeneratorResponse
+
+    interface _UpdateLicenseSpecificationsForResourceResponse
+      include Smithy::Client::_Response[Types::UpdateLicenseSpecificationsForResourceResponse]
+    end
+    def update_license_specifications_for_resource: (
+      ?resource_arn: String,
+      ?add_license_specifications: Array[
+        {
+          license_configuration_arn: String,
+          ami_association_scope: untyped
+        }
+      ],
+      ?remove_license_specifications: Array[
+        {
+          license_configuration_arn: String,
+          ami_association_scope: untyped
+        }
+      ]
+    ) -> _UpdateLicenseSpecificationsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseSpecificationsForResourceResponse
+
+    interface _UpdateServiceSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateServiceSettingsResponse]
+    end
+    def update_service_settings: (
+      ?s3_bucket_arn: String,
+      ?sns_topic_arn: String,
+      ?organization_configuration: {
+        enable_integration: bool
+      },
+      ?enable_cross_accounts_discovery: bool
+    ) -> _UpdateServiceSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSettingsResponse
+  end
+end

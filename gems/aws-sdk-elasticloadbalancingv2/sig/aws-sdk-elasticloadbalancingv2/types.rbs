@@ -1,0 +1,2991 @@
+module Aws::ElasticLoadBalancingV2
+  module Types
+
+    class ALPNPolicyNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?target_group_arn: String,
+        ?authenticate_oidc_config: Types::AuthenticateOidcActionConfig,
+        ?authenticate_cognito_config: Types::AuthenticateCognitoActionConfig,
+        ?order: Integer,
+        ?redirect_config: Types::RedirectActionConfig,
+        ?fixed_response_config: Types::FixedResponseActionConfig,
+        ?forward_config: Types::ForwardActionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor target_group_arn: String?
+      attr_accessor authenticate_oidc_config: Types::AuthenticateOidcActionConfig?
+      attr_accessor authenticate_cognito_config: Types::AuthenticateCognitoActionConfig?
+      attr_accessor order: Integer?
+      attr_accessor redirect_config: Types::RedirectActionConfig?
+      attr_accessor fixed_response_config: Types::FixedResponseActionConfig?
+      attr_accessor forward_config: Types::ForwardActionConfig?
+    end
+
+    module ActionTypeEnum
+      FORWARD: String
+      AUTHENTICATE_OIDC: String
+      AUTHENTICATE_COGNITO: String
+      REDIRECT: String
+      FIXED_RESPONSE: String
+    end
+
+    class AddListenerCertificatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?certificates: Array[Types::Certificate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor certificates: Array[Types::Certificate]?
+    end
+
+    class AddListenerCertificatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificates: Array[Types::Certificate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificates: Array[Types::Certificate]?
+    end
+
+    class AddTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddTrustStoreRevocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_contents: Array[Types::RevocationContent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_contents: Array[Types::RevocationContent]?
+    end
+
+    class AddTrustStoreRevocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_revocations: Array[Types::TrustStoreRevocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_revocations: Array[Types::TrustStoreRevocation]?
+    end
+
+    class AdministrativeOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?reason: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor reason: String?
+      attr_accessor description: String?
+    end
+
+    module AdvertiseTrustStoreCaNamesEnum
+      on: String
+      off: String
+    end
+
+    class AllocationIdNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AnomalyDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?mitigation_in_effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor mitigation_in_effect: String?
+    end
+
+    module AnomalyResultEnum
+      ANOMALOUS: String
+      NORMAL: String
+    end
+
+    module AuthenticateCognitoActionConditionalBehaviorEnum
+      DENY: String
+      ALLOW: String
+      AUTHENTICATE: String
+    end
+
+    class AuthenticateCognitoActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_arn: String,
+        ?user_pool_client_id: String,
+        ?user_pool_domain: String,
+        ?session_cookie_name: String,
+        ?scope: String,
+        ?session_timeout: Integer,
+        ?authentication_request_extra_params: Hash[String, String],
+        ?on_unauthenticated_request: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_arn: String?
+      attr_accessor user_pool_client_id: String?
+      attr_accessor user_pool_domain: String?
+      attr_accessor session_cookie_name: String?
+      attr_accessor scope: String?
+      attr_accessor session_timeout: Integer?
+      attr_accessor authentication_request_extra_params: Hash[String, String]?
+      attr_accessor on_unauthenticated_request: String?
+    end
+
+    module AuthenticateOidcActionConditionalBehaviorEnum
+      DENY: String
+      ALLOW: String
+      AUTHENTICATE: String
+    end
+
+    class AuthenticateOidcActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?authorization_endpoint: String,
+        ?token_endpoint: String,
+        ?user_info_endpoint: String,
+        ?client_id: String,
+        ?client_secret: String,
+        ?session_cookie_name: String,
+        ?scope: String,
+        ?session_timeout: Integer,
+        ?authentication_request_extra_params: Hash[String, String],
+        ?on_unauthenticated_request: String,
+        ?use_existing_client_secret: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor authorization_endpoint: String?
+      attr_accessor token_endpoint: String?
+      attr_accessor user_info_endpoint: String?
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor session_cookie_name: String?
+      attr_accessor scope: String?
+      attr_accessor session_timeout: Integer?
+      attr_accessor authentication_request_extra_params: Hash[String, String]?
+      attr_accessor on_unauthenticated_request: String?
+      attr_accessor use_existing_client_secret: bool?
+    end
+
+    class AvailabilityZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zone_name: String,
+        ?subnet_id: String,
+        ?outpost_id: String,
+        ?load_balancer_addresses: Array[Types::LoadBalancerAddress],
+        ?source_nat_ipv6_prefixes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zone_name: String?
+      attr_accessor subnet_id: String?
+      attr_accessor outpost_id: String?
+      attr_accessor load_balancer_addresses: Array[Types::LoadBalancerAddress]?
+      attr_accessor source_nat_ipv6_prefixes: Array[String]?
+    end
+
+    class AvailabilityZoneNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CaCertificatesBundleNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CapacityDecreaseRequestsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CapacityReservationPendingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CapacityReservationStateEnum
+      PROVISIONED: String
+      PENDING: String
+      REBALANCING: String
+      FAILED: String
+    end
+
+    class CapacityReservationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor reason: String?
+    end
+
+    class CapacityUnitsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?is_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor is_default: bool?
+    end
+
+    class CertificateNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Cipher
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+    end
+
+    class CreateListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?ssl_policy: String,
+        ?certificates: Array[Types::Certificate],
+        ?default_actions: Array[Types::Action],
+        ?alpn_policy: Array[String],
+        ?tags: Array[Types::Tag],
+        ?mutual_authentication: Types::MutualAuthenticationAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor ssl_policy: String?
+      attr_accessor certificates: Array[Types::Certificate]?
+      attr_accessor default_actions: Array[Types::Action]?
+      attr_accessor alpn_policy: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes?
+    end
+
+    class CreateListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::Listener],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::Listener]?
+    end
+
+    class CreateLoadBalancerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?subnets: Array[String],
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?security_groups: Array[String],
+        ?scheme: String,
+        ?tags: Array[Types::Tag],
+        ?type: String,
+        ?ip_address_type: String,
+        ?customer_owned_ipv4_pool: String,
+        ?enable_prefix_for_ipv6_source_nat: String,
+        ?ipam_pools: Types::IpamPools,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor scheme: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor type: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor customer_owned_ipv4_pool: String?
+      attr_accessor enable_prefix_for_ipv6_source_nat: String?
+      attr_accessor ipam_pools: Types::IpamPools?
+    end
+
+    class CreateLoadBalancerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancers: Array[Types::LoadBalancer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancers: Array[Types::LoadBalancer]?
+    end
+
+    class CreateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?conditions: Array[Types::RuleCondition],
+        ?priority: Integer,
+        ?actions: Array[Types::Action],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor conditions: Array[Types::RuleCondition]?
+      attr_accessor priority: Integer?
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class CreateTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?protocol: String,
+        ?protocol_version: String,
+        ?port: Integer,
+        ?vpc_id: String,
+        ?health_check_protocol: String,
+        ?health_check_port: String,
+        ?health_check_enabled: bool,
+        ?health_check_path: String,
+        ?health_check_interval_seconds: Integer,
+        ?health_check_timeout_seconds: Integer,
+        ?healthy_threshold_count: Integer,
+        ?unhealthy_threshold_count: Integer,
+        ?matcher: Types::Matcher,
+        ?target_type: String,
+        ?tags: Array[Types::Tag],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor protocol_version: String?
+      attr_accessor port: Integer?
+      attr_accessor vpc_id: String?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_port: String?
+      attr_accessor health_check_enabled: bool?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor health_check_timeout_seconds: Integer?
+      attr_accessor healthy_threshold_count: Integer?
+      attr_accessor unhealthy_threshold_count: Integer?
+      attr_accessor matcher: Types::Matcher?
+      attr_accessor target_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class CreateTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::TargetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::TargetGroup]?
+    end
+
+    class CreateTrustStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?ca_certificates_bundle_s3_bucket: String,
+        ?ca_certificates_bundle_s3_key: String,
+        ?ca_certificates_bundle_s3_object_version: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor ca_certificates_bundle_s3_bucket: String?
+      attr_accessor ca_certificates_bundle_s3_key: String?
+      attr_accessor ca_certificates_bundle_s3_object_version: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTrustStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_stores: Array[Types::TrustStore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_stores: Array[Types::TrustStore]?
+    end
+
+    class DeleteAssociationSameAccountException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DeleteListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLoadBalancerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+    end
+
+    class DeleteLoadBalancerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class DeleteRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSharedTrustStoreAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteSharedTrustStoreAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+    end
+
+    class DeleteTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrustStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class DeleteTrustStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?targets: Array[Types::TargetDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor targets: Array[Types::TargetDescription]?
+    end
+
+    class DeregisterTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountLimitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeAccountLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits: Array[Types::Limit],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits: Array[Types::Limit]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+    end
+
+    class DescribeCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_modified_time: Time,
+        ?decrease_requests_remaining: Integer,
+        ?minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity,
+        ?capacity_reservation_state: Array[Types::ZonalCapacityReservationState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_modified_time: Time?
+      attr_accessor decrease_requests_remaining: Integer?
+      attr_accessor minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity?
+      attr_accessor capacity_reservation_state: Array[Types::ZonalCapacityReservationState]?
+    end
+
+    class DescribeListenerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DescribeListenerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::ListenerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::ListenerAttribute]?
+    end
+
+    class DescribeListenerCertificatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeListenerCertificatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificates: Array[Types::Certificate],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificates: Array[Types::Certificate]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeListenersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?listener_arns: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor listener_arns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeListenersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::Listener],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::Listener]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeLoadBalancerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+    end
+
+    class DescribeLoadBalancerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::LoadBalancerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::LoadBalancerAttribute]?
+    end
+
+    class DescribeLoadBalancersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arns: Array[String],
+        ?names: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arns: Array[String]?
+      attr_accessor names: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeLoadBalancersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancers: Array[Types::LoadBalancer],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancers: Array[Types::LoadBalancer]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?rule_arns: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor rule_arns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeSSLPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+        ?load_balancer_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+      attr_accessor load_balancer_type: String?
+    end
+
+    class DescribeSSLPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssl_policies: Array[Types::SslPolicy],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssl_policies: Array[Types::SslPolicy]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+    end
+
+    class DescribeTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_descriptions: Array[Types::TagDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_descriptions: Array[Types::TagDescription]?
+    end
+
+    class DescribeTargetGroupAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+    end
+
+    class DescribeTargetGroupAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::TargetGroupAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::TargetGroupAttribute]?
+    end
+
+    class DescribeTargetGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?target_group_arns: Array[String],
+        ?names: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor target_group_arns: Array[String]?
+      attr_accessor names: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeTargetGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::TargetGroup],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::TargetGroup]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeTargetHealthInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?targets: Array[Types::TargetDescription],
+        ?include: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor targets: Array[Types::TargetDescription]?
+      attr_accessor include: Array[String]?
+    end
+
+    module DescribeTargetHealthInputIncludeEnum
+      ANOMALY: String
+      ALL: String
+    end
+
+    class DescribeTargetHealthOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_health_descriptions: Array[Types::TargetHealthDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_health_descriptions: Array[Types::TargetHealthDescription]?
+    end
+
+    class DescribeTrustStoreAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeTrustStoreAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_associations: Array[Types::TrustStoreAssociation],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_associations: Array[Types::TrustStoreAssociation]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeTrustStoreRevocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_id: Integer,
+        ?revocation_type: String,
+        ?number_of_revoked_entries: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_id: Integer?
+      attr_accessor revocation_type: String?
+      attr_accessor number_of_revoked_entries: Integer?
+    end
+
+    class DescribeTrustStoreRevocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_ids: Array[Integer],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_ids: Array[Integer]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeTrustStoreRevocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_revocations: Array[Types::DescribeTrustStoreRevocation],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_revocations: Array[Types::DescribeTrustStoreRevocation]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeTrustStoresInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arns: Array[String],
+        ?names: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arns: Array[String]?
+      attr_accessor names: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeTrustStoresOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_stores: Array[Types::TrustStore],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_stores: Array[Types::TrustStore]?
+      attr_accessor next_marker: String?
+    end
+
+    class DuplicateListenerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateLoadBalancerNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateTagKeysException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateTargetGroupNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateTrustStoreNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EnablePrefixForIpv6SourceNatEnum
+      ON: String
+      OFF: String
+    end
+
+    module EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
+      on: String
+      off: String
+    end
+
+    class FixedResponseActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_body: String,
+        ?status_code: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_body: String?
+      attr_accessor status_code: String?
+      attr_accessor content_type: String?
+    end
+
+    class ForwardActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::TargetGroupTuple],
+        ?target_group_stickiness_config: Types::TargetGroupStickinessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::TargetGroupTuple]?
+      attr_accessor target_group_stickiness_config: Types::TargetGroupStickinessConfig?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetTrustStoreCaCertificatesBundleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class GetTrustStoreCaCertificatesBundleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    class GetTrustStoreRevocationContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_id: Integer?
+    end
+
+    class GetTrustStoreRevocationContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    class HealthUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostHeaderConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class HttpHeaderConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_header_name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_header_name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class HttpRequestMethodConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class IncompatibleProtocolsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCaCertificatesBundleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConfigurationRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLoadBalancerActionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRevocationContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSchemeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSecurityGroupException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSubnetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUALSTACK: String
+      DUALSTACK_WITHOUT_PUBLIC_IPV4: String
+    end
+
+    class IpamPools
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv4_ipam_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv4_ipam_pool_id: String?
+    end
+
+    class Limit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max: String?
+    end
+
+    class Listener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?load_balancer_arn: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?certificates: Array[Types::Certificate],
+        ?ssl_policy: String,
+        ?default_actions: Array[Types::Action],
+        ?alpn_policy: Array[String],
+        ?mutual_authentication: Types::MutualAuthenticationAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor load_balancer_arn: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor certificates: Array[Types::Certificate]?
+      attr_accessor ssl_policy: String?
+      attr_accessor default_actions: Array[Types::Action]?
+      attr_accessor alpn_policy: Array[String]?
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes?
+    end
+
+    class ListenerAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ListenerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LoadBalancer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?dns_name: String,
+        ?canonical_hosted_zone_id: String,
+        ?created_time: Time,
+        ?load_balancer_name: String,
+        ?scheme: String,
+        ?vpc_id: String,
+        ?state: Types::LoadBalancerState,
+        ?type: String,
+        ?availability_zones: Array[Types::AvailabilityZone],
+        ?security_groups: Array[String],
+        ?ip_address_type: String,
+        ?customer_owned_ipv4_pool: String,
+        ?enforce_security_group_inbound_rules_on_private_link_traffic: String,
+        ?enable_prefix_for_ipv6_source_nat: String,
+        ?ipam_pools: Types::IpamPools,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor dns_name: String?
+      attr_accessor canonical_hosted_zone_id: String?
+      attr_accessor created_time: Time?
+      attr_accessor load_balancer_name: String?
+      attr_accessor scheme: String?
+      attr_accessor vpc_id: String?
+      attr_accessor state: Types::LoadBalancerState?
+      attr_accessor type: String?
+      attr_accessor availability_zones: Array[Types::AvailabilityZone]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor customer_owned_ipv4_pool: String?
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: String?
+      attr_accessor enable_prefix_for_ipv6_source_nat: String?
+      attr_accessor ipam_pools: Types::IpamPools?
+    end
+
+    class LoadBalancerAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?allocation_id: String,
+        ?private_i_pv4_address: String,
+        ?i_pv6_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor allocation_id: String?
+      attr_accessor private_i_pv4_address: String?
+      attr_accessor i_pv6_address: String?
+    end
+
+    class LoadBalancerAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class LoadBalancerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LoadBalancerSchemeEnum
+      INTERNET_FACING: String
+      INTERNAL: String
+    end
+
+    class LoadBalancerState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor reason: String?
+    end
+
+    module LoadBalancerStateEnum
+      ACTIVE: String
+      PROVISIONING: String
+      ACTIVE_IMPAIRED: String
+      FAILED: String
+    end
+
+    module LoadBalancerTypeEnum
+      APPLICATION: String
+      NETWORK: String
+      GATEWAY: String
+    end
+
+    class Matcher
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_code: String,
+        ?grpc_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_code: String?
+      attr_accessor grpc_code: String?
+    end
+
+    class MinimumLoadBalancerCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_units: Integer?
+    end
+
+    module MitigationInEffectEnum
+      YES: String
+      NO: String
+    end
+
+    class ModifyCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity,
+        ?reset_capacity_reservation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity?
+      attr_accessor reset_capacity_reservation: bool?
+    end
+
+    class ModifyCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_modified_time: Time,
+        ?decrease_requests_remaining: Integer,
+        ?minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity,
+        ?capacity_reservation_state: Array[Types::ZonalCapacityReservationState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_modified_time: Time?
+      attr_accessor decrease_requests_remaining: Integer?
+      attr_accessor minimum_load_balancer_capacity: Types::MinimumLoadBalancerCapacity?
+      attr_accessor capacity_reservation_state: Array[Types::ZonalCapacityReservationState]?
+    end
+
+    class ModifyIpPoolsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?ipam_pools: Types::IpamPools,
+        ?remove_ipam_pools: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor ipam_pools: Types::IpamPools?
+      attr_accessor remove_ipam_pools: Array[String]?
+    end
+
+    class ModifyIpPoolsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipam_pools: Types::IpamPools,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipam_pools: Types::IpamPools?
+    end
+
+    class ModifyListenerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?attributes: Array[Types::ListenerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor attributes: Array[Types::ListenerAttribute]?
+    end
+
+    class ModifyListenerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::ListenerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::ListenerAttribute]?
+    end
+
+    class ModifyListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?ssl_policy: String,
+        ?certificates: Array[Types::Certificate],
+        ?default_actions: Array[Types::Action],
+        ?alpn_policy: Array[String],
+        ?mutual_authentication: Types::MutualAuthenticationAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor ssl_policy: String?
+      attr_accessor certificates: Array[Types::Certificate]?
+      attr_accessor default_actions: Array[Types::Action]?
+      attr_accessor alpn_policy: Array[String]?
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes?
+    end
+
+    class ModifyListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::Listener],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::Listener]?
+    end
+
+    class ModifyLoadBalancerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?attributes: Array[Types::LoadBalancerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor attributes: Array[Types::LoadBalancerAttribute]?
+    end
+
+    class ModifyLoadBalancerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::LoadBalancerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::LoadBalancerAttribute]?
+    end
+
+    class ModifyRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?conditions: Array[Types::RuleCondition],
+        ?actions: Array[Types::Action],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor conditions: Array[Types::RuleCondition]?
+      attr_accessor actions: Array[Types::Action]?
+    end
+
+    class ModifyRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class ModifyTargetGroupAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?attributes: Array[Types::TargetGroupAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor attributes: Array[Types::TargetGroupAttribute]?
+    end
+
+    class ModifyTargetGroupAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::TargetGroupAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::TargetGroupAttribute]?
+    end
+
+    class ModifyTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?health_check_protocol: String,
+        ?health_check_port: String,
+        ?health_check_path: String,
+        ?health_check_enabled: bool,
+        ?health_check_interval_seconds: Integer,
+        ?health_check_timeout_seconds: Integer,
+        ?healthy_threshold_count: Integer,
+        ?unhealthy_threshold_count: Integer,
+        ?matcher: Types::Matcher,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_port: String?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_enabled: bool?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor health_check_timeout_seconds: Integer?
+      attr_accessor healthy_threshold_count: Integer?
+      attr_accessor unhealthy_threshold_count: Integer?
+      attr_accessor matcher: Types::Matcher?
+    end
+
+    class ModifyTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::TargetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::TargetGroup]?
+    end
+
+    class ModifyTrustStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?ca_certificates_bundle_s3_bucket: String,
+        ?ca_certificates_bundle_s3_key: String,
+        ?ca_certificates_bundle_s3_object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor ca_certificates_bundle_s3_bucket: String?
+      attr_accessor ca_certificates_bundle_s3_key: String?
+      attr_accessor ca_certificates_bundle_s3_object_version: String?
+    end
+
+    class ModifyTrustStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_stores: Array[Types::TrustStore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_stores: Array[Types::TrustStore]?
+    end
+
+    class MutualAuthenticationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?trust_store_arn: String,
+        ?ignore_client_certificate_expiry: bool,
+        ?trust_store_association_status: String,
+        ?advertise_trust_store_ca_names: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor trust_store_arn: String?
+      attr_accessor ignore_client_certificate_expiry: bool?
+      attr_accessor trust_store_association_status: String?
+      attr_accessor advertise_trust_store_ca_names: String?
+    end
+
+    class OperationNotPermittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PathPatternConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class PriorRequestNotCompleteException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PriorityInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ProtocolEnum
+      HTTP: String
+      HTTPS: String
+      TCP: String
+      TLS: String
+      UDP: String
+      TCP_UDP: String
+      GENEVE: String
+    end
+
+    class QueryStringConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[Types::QueryStringKeyValuePair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[Types::QueryStringKeyValuePair]?
+    end
+
+    class QueryStringKeyValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class RedirectActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?port: String,
+        ?host: String,
+        ?path: String,
+        ?query: String,
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor port: String?
+      attr_accessor host: String?
+      attr_accessor path: String?
+      attr_accessor query: String?
+      attr_accessor status_code: String?
+    end
+
+    module RedirectActionStatusCodeEnum
+      HTTP_301: String
+      HTTP_302: String
+    end
+
+    class RegisterTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?targets: Array[Types::TargetDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor targets: Array[Types::TargetDescription]?
+    end
+
+    class RegisterTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RemoveIpamPoolEnum
+      ipv4: String
+    end
+
+    class RemoveListenerCertificatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?certificates: Array[Types::Certificate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor certificates: Array[Types::Certificate]?
+    end
+
+    class RemoveListenerCertificatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveTrustStoreRevocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_ids: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_ids: Array[Integer]?
+    end
+
+    class RemoveTrustStoreRevocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevocationContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_object_version: String,
+        ?revocation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_object_version: String?
+      attr_accessor revocation_type: String?
+    end
+
+    class RevocationContentNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevocationIdNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RevocationType
+      CRL: String
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?priority: String,
+        ?conditions: Array[Types::RuleCondition],
+        ?actions: Array[Types::Action],
+        ?is_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor priority: String?
+      attr_accessor conditions: Array[Types::RuleCondition]?
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor is_default: bool?
+    end
+
+    class RuleCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?values: Array[String],
+        ?host_header_config: Types::HostHeaderConditionConfig,
+        ?path_pattern_config: Types::PathPatternConditionConfig,
+        ?http_header_config: Types::HttpHeaderConditionConfig,
+        ?query_string_config: Types::QueryStringConditionConfig,
+        ?http_request_method_config: Types::HttpRequestMethodConditionConfig,
+        ?source_ip_config: Types::SourceIpConditionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor values: Array[String]?
+      attr_accessor host_header_config: Types::HostHeaderConditionConfig?
+      attr_accessor path_pattern_config: Types::PathPatternConditionConfig?
+      attr_accessor http_header_config: Types::HttpHeaderConditionConfig?
+      attr_accessor query_string_config: Types::QueryStringConditionConfig?
+      attr_accessor http_request_method_config: Types::HttpRequestMethodConditionConfig?
+      attr_accessor source_ip_config: Types::SourceIpConditionConfig?
+    end
+
+    class RuleNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RulePriorityPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor priority: Integer?
+    end
+
+    class SSLPolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetIpAddressTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class SetIpAddressTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address_type: String?
+    end
+
+    class SetRulePrioritiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_priorities: Array[Types::RulePriorityPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_priorities: Array[Types::RulePriorityPair]?
+    end
+
+    class SetRulePrioritiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class SetSecurityGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?security_groups: Array[String],
+        ?enforce_security_group_inbound_rules_on_private_link_traffic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: String?
+    end
+
+    class SetSecurityGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?enforce_security_group_inbound_rules_on_private_link_traffic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: String?
+    end
+
+    class SetSubnetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_arn: String,
+        ?subnets: Array[String],
+        ?subnet_mappings: Array[Types::SubnetMapping],
+        ?ip_address_type: String,
+        ?enable_prefix_for_ipv6_source_nat: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_arn: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
+      attr_accessor ip_address_type: String?
+      attr_accessor enable_prefix_for_ipv6_source_nat: String?
+    end
+
+    class SetSubnetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[Types::AvailabilityZone],
+        ?ip_address_type: String,
+        ?enable_prefix_for_ipv6_source_nat: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[Types::AvailabilityZone]?
+      attr_accessor ip_address_type: String?
+      attr_accessor enable_prefix_for_ipv6_source_nat: String?
+    end
+
+    class SourceIpConditionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class SslPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssl_protocols: Array[String],
+        ?ciphers: Array[Types::Cipher],
+        ?name: String,
+        ?supported_load_balancer_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssl_protocols: Array[String]?
+      attr_accessor ciphers: Array[Types::Cipher]?
+      attr_accessor name: String?
+      attr_accessor supported_load_balancer_types: Array[String]?
+    end
+
+    class SubnetMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_id: String,
+        ?allocation_id: String,
+        ?private_i_pv4_address: String,
+        ?i_pv6_address: String,
+        ?source_nat_ipv6_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_id: String?
+      attr_accessor allocation_id: String?
+      attr_accessor private_i_pv4_address: String?
+      attr_accessor i_pv6_address: String?
+      attr_accessor source_nat_ipv6_prefix: String?
+    end
+
+    class SubnetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module TargetAdministrativeOverrideReasonEnum
+      INTERNAL_ERROR: String
+      NO_OVERRIDE_ENGAGED: String
+      ZONAL_SHIFT_ENGAGED: String
+      ZONAL_SHIFT_DELEGATED_TO_DNS: String
+    end
+
+    module TargetAdministrativeOverrideStateEnum
+      UNKNOWN: String
+      NO_OVERRIDE: String
+      ZONAL_SHIFT_ACTIVE: String
+      ZONAL_SHIFT_DELEGATED_TO_DNS: String
+    end
+
+    class TargetDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?port: Integer,
+        ?availability_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor port: Integer?
+      attr_accessor availability_zone: String?
+    end
+
+    class TargetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?target_group_name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?vpc_id: String,
+        ?health_check_protocol: String,
+        ?health_check_port: String,
+        ?health_check_enabled: bool,
+        ?health_check_interval_seconds: Integer,
+        ?health_check_timeout_seconds: Integer,
+        ?healthy_threshold_count: Integer,
+        ?unhealthy_threshold_count: Integer,
+        ?health_check_path: String,
+        ?matcher: Types::Matcher,
+        ?load_balancer_arns: Array[String],
+        ?target_type: String,
+        ?protocol_version: String,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor target_group_name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor vpc_id: String?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_port: String?
+      attr_accessor health_check_enabled: bool?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor health_check_timeout_seconds: Integer?
+      attr_accessor healthy_threshold_count: Integer?
+      attr_accessor unhealthy_threshold_count: Integer?
+      attr_accessor health_check_path: String?
+      attr_accessor matcher: Types::Matcher?
+      attr_accessor load_balancer_arns: Array[String]?
+      attr_accessor target_type: String?
+      attr_accessor protocol_version: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class TargetGroupAssociationLimitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TargetGroupAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module TargetGroupIpAddressTypeEnum
+      IPV4: String
+      IPV6: String
+    end
+
+    class TargetGroupNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TargetGroupStickinessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class TargetGroupTuple
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor weight: Integer?
+    end
+
+    class TargetHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?reason: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor reason: String?
+      attr_accessor description: String?
+    end
+
+    class TargetHealthDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::TargetDescription,
+        ?health_check_port: String,
+        ?target_health: Types::TargetHealth,
+        ?anomaly_detection: Types::AnomalyDetection,
+        ?administrative_override: Types::AdministrativeOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::TargetDescription?
+      attr_accessor health_check_port: String?
+      attr_accessor target_health: Types::TargetHealth?
+      attr_accessor anomaly_detection: Types::AnomalyDetection?
+      attr_accessor administrative_override: Types::AdministrativeOverride?
+    end
+
+    module TargetHealthReasonEnum
+      REGISTRATION_IN_PROGRESS: String
+      INITIAL_HEALTH_CHECKING: String
+      RESPONSE_CODE_MISMATCH: String
+      TIMEOUT: String
+      FAILED_HEALTH_CHECKS: String
+      NOT_REGISTERED: String
+      NOT_IN_USE: String
+      DEREGISTRATION_IN_PROGRESS: String
+      INVALID_STATE: String
+      IP_UNUSABLE: String
+      HEALTH_CHECK_DISABLED: String
+      INTERNAL_ERROR: String
+    end
+
+    module TargetHealthStateEnum
+      INITIAL: String
+      HEALTHY: String
+      UNHEALTHY: String
+      UNHEALTHY_DRAINING: String
+      UNUSED: String
+      DRAINING: String
+      UNAVAILABLE: String
+    end
+
+    module TargetTypeEnum
+      INSTANCE: String
+      IP: String
+      LAMBDA: String
+      ALB: String
+    end
+
+    class TooManyActionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyCertificatesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyListenersException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyLoadBalancersException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyRegistrationsForTargetIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyRulesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTargetGroupsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTargetsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTrustStoreRevocationEntriesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTrustStoresException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyUniqueTargetGroupsPerLoadBalancerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?trust_store_arn: String,
+        ?status: String,
+        ?number_of_ca_certificates: Integer,
+        ?total_revoked_entries: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor trust_store_arn: String?
+      attr_accessor status: String?
+      attr_accessor number_of_ca_certificates: Integer?
+      attr_accessor total_revoked_entries: Integer?
+    end
+
+    class TrustStoreAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class TrustStoreAssociationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TrustStoreAssociationStatusEnum
+      ACTIVE: String
+      REMOVED: String
+    end
+
+    class TrustStoreInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustStoreNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustStoreNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustStoreRevocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?revocation_id: Integer,
+        ?revocation_type: String,
+        ?number_of_revoked_entries: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor revocation_id: Integer?
+      attr_accessor revocation_type: String?
+      attr_accessor number_of_revoked_entries: Integer?
+    end
+
+    module TrustStoreStatus
+      ACTIVE: String
+      CREATING: String
+    end
+
+    class UnsupportedProtocolException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ZonalCapacityReservationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: Types::CapacityReservationStatus,
+        ?availability_zone: String,
+        ?effective_capacity_units: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: Types::CapacityReservationStatus?
+      attr_accessor availability_zone: String?
+      attr_accessor effective_capacity_units: Float?
+    end
+  end
+end

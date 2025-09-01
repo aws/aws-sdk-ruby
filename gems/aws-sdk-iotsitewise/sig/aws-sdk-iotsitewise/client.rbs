@@ -1,0 +1,2029 @@
+module Aws::IoTSiteWise
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTSiteWise::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAssetsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_assets: (
+      ?asset_id: String,
+      ?hierarchy_id: String,
+      ?child_asset_id: String,
+      ?client_token: String
+    ) -> _AssociateAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAssetsResponse
+
+    interface _AssociateTimeSeriesToAssetPropertyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_time_series_to_asset_property: (
+      ?alias: String,
+      ?asset_id: String,
+      ?property_id: String,
+      ?client_token: String
+    ) -> _AssociateTimeSeriesToAssetPropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTimeSeriesToAssetPropertyResponse
+
+    interface _BatchAssociateProjectAssetsResponse
+      include Smithy::Client::_Response[Types::BatchAssociateProjectAssetsResponse]
+      def errors: () -> Array[Types::AssetErrorDetails]?
+    end
+    def batch_associate_project_assets: (
+      ?project_id: String,
+      ?asset_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchAssociateProjectAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateProjectAssetsResponse
+
+    interface _BatchDisassociateProjectAssetsResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateProjectAssetsResponse]
+      def errors: () -> Array[Types::AssetErrorDetails]?
+    end
+    def batch_disassociate_project_assets: (
+      ?project_id: String,
+      ?asset_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchDisassociateProjectAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateProjectAssetsResponse
+
+    interface _BatchGetAssetPropertyAggregatesResponse
+      include Smithy::Client::_Response[Types::BatchGetAssetPropertyAggregatesResponse]
+      def error_entries: () -> Array[Types::BatchGetAssetPropertyAggregatesErrorEntry]?
+      def success_entries: () -> Array[Types::BatchGetAssetPropertyAggregatesSuccessEntry]?
+      def skipped_entries: () -> Array[Types::BatchGetAssetPropertyAggregatesSkippedEntry]?
+      def next_token: () -> String?
+    end
+    def batch_get_asset_property_aggregates: (
+      ?entries: Array[
+        {
+          entry_id: String,
+          asset_id: String,
+          property_id: untyped,
+          property_alias: String,
+          aggregate_types: Array[String],
+          resolution: String,
+          start_date: Time,
+          end_date: untyped,
+          qualities: Array[String],
+          time_ordering: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _BatchGetAssetPropertyAggregatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAssetPropertyAggregatesResponse
+
+    interface _BatchGetAssetPropertyValueResponse
+      include Smithy::Client::_Response[Types::BatchGetAssetPropertyValueResponse]
+      def error_entries: () -> Array[Types::BatchGetAssetPropertyValueErrorEntry]?
+      def success_entries: () -> Array[Types::BatchGetAssetPropertyValueSuccessEntry]?
+      def skipped_entries: () -> Array[Types::BatchGetAssetPropertyValueSkippedEntry]?
+      def next_token: () -> String?
+    end
+    def batch_get_asset_property_value: (
+      ?entries: Array[
+        {
+          entry_id: String,
+          asset_id: String,
+          property_id: untyped,
+          property_alias: String
+        }
+      ],
+      ?next_token: String
+    ) -> _BatchGetAssetPropertyValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAssetPropertyValueResponse
+
+    interface _BatchGetAssetPropertyValueHistoryResponse
+      include Smithy::Client::_Response[Types::BatchGetAssetPropertyValueHistoryResponse]
+      def error_entries: () -> Array[Types::BatchGetAssetPropertyValueHistoryErrorEntry]?
+      def success_entries: () -> Array[Types::BatchGetAssetPropertyValueHistorySuccessEntry]?
+      def skipped_entries: () -> Array[Types::BatchGetAssetPropertyValueHistorySkippedEntry]?
+      def next_token: () -> String?
+    end
+    def batch_get_asset_property_value_history: (
+      ?entries: Array[
+        {
+          entry_id: String,
+          asset_id: String,
+          property_id: untyped,
+          property_alias: String,
+          start_date: Time,
+          end_date: untyped,
+          qualities: Array[String],
+          time_ordering: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _BatchGetAssetPropertyValueHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAssetPropertyValueHistoryResponse
+
+    interface _BatchPutAssetPropertyValueResponse
+      include Smithy::Client::_Response[Types::BatchPutAssetPropertyValueResponse]
+      def error_entries: () -> Array[Types::BatchPutAssetPropertyErrorEntry]?
+    end
+    def batch_put_asset_property_value: (
+      ?enable_partial_entry_processing: bool,
+      ?entries: Array[
+        {
+          entry_id: String,
+          asset_id: String,
+          property_id: untyped,
+          property_alias: String,
+          property_values: Array[
+            {
+              value: {
+                string_value: String,
+                integer_value: Integer,
+                double_value: Float,
+                boolean_value: bool,
+                null_value: {
+                  value_type: String
+                }
+              },
+              timestamp: {
+                time_in_seconds: Integer,
+                offset_in_nanos: Integer
+              },
+              quality: String
+            }
+          ]
+        }
+      ]
+    ) -> _BatchPutAssetPropertyValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutAssetPropertyValueResponse
+
+    interface _CreateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::CreateAccessPolicyResponse]
+      def access_policy_id: () -> String?
+      def access_policy_arn: () -> String?
+    end
+    def create_access_policy: (
+      ?access_policy_identity: {
+        user: {
+          id: String
+        },
+        group: {
+          id: untyped
+        },
+        iam_user: {
+          arn: String
+        },
+        iam_role: {
+          arn: untyped
+        }
+      },
+      ?access_policy_resource: {
+        portal: {
+          id: String
+        },
+        project: {
+          id: untyped
+        }
+      },
+      ?access_policy_permission: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPolicyResponse
+
+    interface _CreateAssetResponse
+      include Smithy::Client::_Response[Types::CreateAssetResponse]
+      def asset_id: () -> String?
+      def asset_arn: () -> String?
+      def asset_status: () -> Types::AssetStatus?
+    end
+    def create_asset: (
+      ?asset_name: String,
+      ?asset_model_id: String,
+      ?asset_id: String,
+      ?asset_external_id: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?asset_description: String
+    ) -> _CreateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetResponse
+
+    interface _CreateAssetModelResponse
+      include Smithy::Client::_Response[Types::CreateAssetModelResponse]
+      def asset_model_id: () -> String?
+      def asset_model_arn: () -> String?
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def create_asset_model: (
+      ?asset_model_name: String,
+      ?asset_model_type: String,
+      ?asset_model_id: String,
+      ?asset_model_external_id: String,
+      ?asset_model_description: String,
+      ?asset_model_properties: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          data_type: String,
+          data_type_spec: untyped,
+          unit: String,
+          type: {
+            attribute: {
+              default_value: String
+            },
+            measurement: {
+              processing_config: {
+                forwarding_config: {
+                  state: String
+                }
+              }
+            },
+            transform: {
+              expression: String,
+              variables: Array[
+                {
+                  name: String,
+                  value: {
+                    property_id: String,
+                    hierarchy_id: untyped,
+                    property_path: Array[
+                      {
+                        id: untyped,
+                        name: untyped
+                      }
+                    ]
+                  }
+                }
+              ],
+              processing_config: {
+                compute_location: String,
+                forwarding_config: untyped
+              }
+            },
+            metric: {
+              expression: untyped,
+              variables: untyped,
+              window: {
+                tumbling: {
+                  interval: String,
+                  offset: String
+                }
+              },
+              processing_config: {
+                compute_location: untyped
+              }
+            }
+          }
+        }
+      ],
+      ?asset_model_hierarchies: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          child_asset_model_id: String
+        }
+      ],
+      ?asset_model_composite_models: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          description: String,
+          type: untyped,
+          properties: Array[
+            {
+              id: untyped,
+              external_id: untyped,
+              name: untyped,
+              data_type: String,
+              data_type_spec: untyped,
+              unit: String,
+              type: {
+                attribute: {
+                  default_value: String
+                },
+                measurement: {
+                  processing_config: {
+                    forwarding_config: {
+                      state: String
+                    }
+                  }
+                },
+                transform: {
+                  expression: String,
+                  variables: Array[
+                    {
+                      name: String,
+                      value: {
+                        property_id: String,
+                        hierarchy_id: untyped,
+                        property_path: Array[
+                          {
+                            id: untyped,
+                            name: untyped
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  processing_config: {
+                    compute_location: String,
+                    forwarding_config: untyped
+                  }
+                },
+                metric: {
+                  expression: untyped,
+                  variables: untyped,
+                  window: {
+                    tumbling: {
+                      interval: String,
+                      offset: String
+                    }
+                  },
+                  processing_config: {
+                    compute_location: untyped
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAssetModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetModelResponse
+
+    interface _CreateAssetModelCompositeModelResponse
+      include Smithy::Client::_Response[Types::CreateAssetModelCompositeModelResponse]
+      def asset_model_composite_model_id: () -> String?
+      def asset_model_composite_model_path: () -> Array[Types::AssetModelCompositeModelPathSegment]?
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def create_asset_model_composite_model: (
+      ?asset_model_id: String,
+      ?asset_model_composite_model_external_id: String,
+      ?parent_asset_model_composite_model_id: String,
+      ?asset_model_composite_model_id: String,
+      ?asset_model_composite_model_description: String,
+      ?asset_model_composite_model_name: String,
+      ?asset_model_composite_model_type: String,
+      ?client_token: String,
+      ?composed_asset_model_id: String,
+      ?asset_model_composite_model_properties: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          data_type: String,
+          data_type_spec: untyped,
+          unit: String,
+          type: {
+            attribute: {
+              default_value: String
+            },
+            measurement: {
+              processing_config: {
+                forwarding_config: {
+                  state: String
+                }
+              }
+            },
+            transform: {
+              expression: String,
+              variables: Array[
+                {
+                  name: String,
+                  value: {
+                    property_id: String,
+                    hierarchy_id: untyped,
+                    property_path: Array[
+                      {
+                        id: untyped,
+                        name: untyped
+                      }
+                    ]
+                  }
+                }
+              ],
+              processing_config: {
+                compute_location: String,
+                forwarding_config: untyped
+              }
+            },
+            metric: {
+              expression: untyped,
+              variables: untyped,
+              window: {
+                tumbling: {
+                  interval: String,
+                  offset: String
+                }
+              },
+              processing_config: {
+                compute_location: untyped
+              }
+            }
+          }
+        }
+      ],
+      ?if_match: String,
+      ?if_none_match: String,
+      ?match_for_version_type: String
+    ) -> _CreateAssetModelCompositeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetModelCompositeModelResponse
+
+    interface _CreateBulkImportJobResponse
+      include Smithy::Client::_Response[Types::CreateBulkImportJobResponse]
+      def job_id: () -> String?
+      def job_name: () -> String?
+      def job_status: () -> String?
+    end
+    def create_bulk_import_job: (
+      ?job_name: String,
+      ?job_role_arn: String,
+      ?files: Array[
+        {
+          bucket: String,
+          key: String,
+          version_id: untyped
+        }
+      ],
+      ?error_report_location: {
+        bucket: String,
+        prefix: String
+      },
+      ?job_configuration: {
+        file_format: {
+          csv: {
+            column_names: Array[String]
+          },
+          parquet: {
+          }
+        }
+      },
+      ?adaptive_ingestion: bool,
+      ?delete_files_after_import: bool
+    ) -> _CreateBulkImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBulkImportJobResponse
+
+    interface _CreateComputationModelResponse
+      include Smithy::Client::_Response[Types::CreateComputationModelResponse]
+      def computation_model_id: () -> String?
+      def computation_model_arn: () -> String?
+      def computation_model_status: () -> Types::ComputationModelStatus?
+    end
+    def create_computation_model: (
+      ?computation_model_name: String,
+      ?computation_model_description: String,
+      ?computation_model_configuration: {
+        anomaly_detection: {
+          input_properties: String,
+          result_property: String
+        }
+      },
+      ?computation_model_data_binding: Hash[String,
+        {
+          asset_model_property: {
+            asset_model_id: String,
+            property_id: untyped
+          },
+          asset_property: {
+            asset_id: untyped,
+            property_id: untyped
+          },
+          list: Array[
+            {
+              asset_model_property: untyped,
+              asset_property: untyped,
+              list: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateComputationModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComputationModelResponse
+
+    interface _CreateDashboardResponse
+      include Smithy::Client::_Response[Types::CreateDashboardResponse]
+      def dashboard_id: () -> String?
+      def dashboard_arn: () -> String?
+    end
+    def create_dashboard: (
+      ?project_id: String,
+      ?dashboard_name: String,
+      ?dashboard_description: String,
+      ?dashboard_definition: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDashboardResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_arn: () -> String?
+      def dataset_status: () -> Types::DatasetStatus?
+    end
+    def create_dataset: (
+      ?dataset_id: String,
+      ?dataset_name: String,
+      ?dataset_description: String,
+      ?dataset_source: {
+        source_type: String,
+        source_format: String,
+        source_detail: {
+          kendra: {
+            knowledge_base_arn: String,
+            role_arn: untyped
+          }
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateGatewayResponse
+      include Smithy::Client::_Response[Types::CreateGatewayResponse]
+      def gateway_id: () -> String?
+      def gateway_arn: () -> String?
+    end
+    def create_gateway: (
+      ?gateway_name: String,
+      ?gateway_platform: {
+        greengrass: {
+          group_arn: String
+        },
+        greengrass_v2: {
+          core_device_thing_name: String,
+          core_device_operating_system: String
+        },
+        siemens_ie: {
+          iot_core_thing_name: String
+        }
+      },
+      ?gateway_version: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _CreatePortalResponse
+      include Smithy::Client::_Response[Types::CreatePortalResponse]
+      def portal_id: () -> String?
+      def portal_arn: () -> String?
+      def portal_start_url: () -> String?
+      def portal_status: () -> Types::PortalStatus?
+      def sso_application_id: () -> String?
+    end
+    def create_portal: (
+      ?portal_name: String,
+      ?portal_description: String,
+      ?portal_contact_email: String,
+      ?client_token: String,
+      ?portal_logo_image_file: {
+        data: String,
+        type: String
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?portal_auth_mode: String,
+      ?notification_sender_email: String,
+      ?alarms: {
+        alarm_role_arn: String,
+        notification_lambda_arn: String
+      },
+      ?portal_type: String,
+      ?portal_type_configuration: Hash[String,
+        {
+          portal_tools: Array[String]
+        }
+      ]
+    ) -> _CreatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortalResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectResponse]
+      def project_id: () -> String?
+      def project_arn: () -> String?
+    end
+    def create_project: (
+      ?portal_id: String,
+      ?project_name: String,
+      ?project_description: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _DeleteAccessPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteAccessPolicyResponse]
+    end
+    def delete_access_policy: (
+      ?access_policy_id: String,
+      ?client_token: String
+    ) -> _DeleteAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPolicyResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Types::DeleteAssetResponse]
+      def asset_status: () -> Types::AssetStatus?
+    end
+    def delete_asset: (
+      ?asset_id: String,
+      ?client_token: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeleteAssetModelResponse
+      include Smithy::Client::_Response[Types::DeleteAssetModelResponse]
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def delete_asset_model: (
+      ?asset_model_id: String,
+      ?client_token: String,
+      ?if_match: String,
+      ?if_none_match: String,
+      ?match_for_version_type: String
+    ) -> _DeleteAssetModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetModelResponse
+
+    interface _DeleteAssetModelCompositeModelResponse
+      include Smithy::Client::_Response[Types::DeleteAssetModelCompositeModelResponse]
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def delete_asset_model_composite_model: (
+      ?asset_model_id: String,
+      ?asset_model_composite_model_id: String,
+      ?client_token: String,
+      ?if_match: String,
+      ?if_none_match: String,
+      ?match_for_version_type: String
+    ) -> _DeleteAssetModelCompositeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetModelCompositeModelResponse
+
+    interface _DeleteAssetModelInterfaceRelationshipResponse
+      include Smithy::Client::_Response[Types::DeleteAssetModelInterfaceRelationshipResponse]
+      def asset_model_id: () -> String?
+      def interface_asset_model_id: () -> String?
+      def asset_model_arn: () -> String?
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def delete_asset_model_interface_relationship: (
+      ?asset_model_id: String,
+      ?interface_asset_model_id: String,
+      ?client_token: String
+    ) -> _DeleteAssetModelInterfaceRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetModelInterfaceRelationshipResponse
+
+    interface _DeleteComputationModelResponse
+      include Smithy::Client::_Response[Types::DeleteComputationModelResponse]
+      def computation_model_status: () -> Types::ComputationModelStatus?
+    end
+    def delete_computation_model: (
+      ?computation_model_id: String,
+      ?client_token: String
+    ) -> _DeleteComputationModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComputationModelResponse
+
+    interface _DeleteDashboardResponse
+      include Smithy::Client::_Response[Types::DeleteDashboardResponse]
+    end
+    def delete_dashboard: (
+      ?dashboard_id: String,
+      ?client_token: String
+    ) -> _DeleteDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDashboardResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Types::DeleteDatasetResponse]
+      def dataset_status: () -> Types::DatasetStatus?
+    end
+    def delete_dataset: (
+      ?dataset_id: String,
+      ?client_token: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteGatewayResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_gateway: (
+      ?gateway_id: String
+    ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeletePortalResponse
+      include Smithy::Client::_Response[Types::DeletePortalResponse]
+      def portal_status: () -> Types::PortalStatus?
+    end
+    def delete_portal: (
+      ?portal_id: String,
+      ?client_token: String
+    ) -> _DeletePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortalResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectResponse]
+    end
+    def delete_project: (
+      ?project_id: String,
+      ?client_token: String
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteTimeSeriesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_time_series: (
+      ?alias: String,
+      ?asset_id: String,
+      ?property_id: String,
+      ?client_token: String
+    ) -> _DeleteTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTimeSeriesResponse
+
+    interface _DescribeAccessPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeAccessPolicyResponse]
+      def access_policy_id: () -> String?
+      def access_policy_arn: () -> String?
+      def access_policy_identity: () -> Types::Identity?
+      def access_policy_resource: () -> Types::Resource?
+      def access_policy_permission: () -> String?
+      def access_policy_creation_date: () -> Time?
+      def access_policy_last_update_date: () -> Time?
+    end
+    def describe_access_policy: (
+      ?access_policy_id: String
+    ) -> _DescribeAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccessPolicyResponse
+
+    interface _DescribeActionResponse
+      include Smithy::Client::_Response[Types::DescribeActionResponse]
+      def action_id: () -> String?
+      def target_resource: () -> Types::TargetResource?
+      def action_definition_id: () -> String?
+      def action_payload: () -> Types::ActionPayload?
+      def execution_time: () -> Time?
+      def resolve_to: () -> Types::ResolveTo?
+    end
+    def describe_action: (
+      ?action_id: String
+    ) -> _DescribeActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActionResponse
+
+    interface _DescribeAssetResponse
+      include Smithy::Client::_Response[Types::DescribeAssetResponse]
+      def asset_id: () -> String?
+      def asset_external_id: () -> String?
+      def asset_arn: () -> String?
+      def asset_name: () -> String?
+      def asset_model_id: () -> String?
+      def asset_properties: () -> Array[Types::AssetProperty]?
+      def asset_hierarchies: () -> Array[Types::AssetHierarchy]?
+      def asset_composite_models: () -> Array[Types::AssetCompositeModel]?
+      def asset_creation_date: () -> Time?
+      def asset_last_update_date: () -> Time?
+      def asset_status: () -> Types::AssetStatus?
+      def asset_description: () -> String?
+      def asset_composite_model_summaries: () -> Array[Types::AssetCompositeModelSummary]?
+    end
+    def describe_asset: (
+      ?asset_id: String,
+      ?exclude_properties: bool
+    ) -> _DescribeAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetResponse
+
+    interface _DescribeAssetCompositeModelResponse
+      include Smithy::Client::_Response[Types::DescribeAssetCompositeModelResponse]
+      def asset_id: () -> String?
+      def asset_composite_model_id: () -> String?
+      def asset_composite_model_external_id: () -> String?
+      def asset_composite_model_path: () -> Array[Types::AssetCompositeModelPathSegment]?
+      def asset_composite_model_name: () -> String?
+      def asset_composite_model_description: () -> String?
+      def asset_composite_model_type: () -> String?
+      def asset_composite_model_properties: () -> Array[Types::AssetProperty]?
+      def asset_composite_model_summaries: () -> Array[Types::AssetCompositeModelSummary]?
+      def action_definitions: () -> Array[Types::ActionDefinition]?
+    end
+    def describe_asset_composite_model: (
+      ?asset_id: String,
+      ?asset_composite_model_id: String
+    ) -> _DescribeAssetCompositeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetCompositeModelResponse
+
+    interface _DescribeAssetModelResponse
+      include Smithy::Client::_Response[Types::DescribeAssetModelResponse]
+      def asset_model_id: () -> String?
+      def asset_model_external_id: () -> String?
+      def asset_model_arn: () -> String?
+      def asset_model_name: () -> String?
+      def asset_model_type: () -> String?
+      def asset_model_description: () -> String?
+      def asset_model_properties: () -> Array[Types::AssetModelProperty]?
+      def asset_model_hierarchies: () -> Array[Types::AssetModelHierarchy]?
+      def asset_model_composite_models: () -> Array[Types::AssetModelCompositeModel]?
+      def asset_model_composite_model_summaries: () -> Array[Types::AssetModelCompositeModelSummary]?
+      def asset_model_creation_date: () -> Time?
+      def asset_model_last_update_date: () -> Time?
+      def asset_model_status: () -> Types::AssetModelStatus?
+      def asset_model_version: () -> String?
+      def interface_details: () -> Array[Types::InterfaceRelationship]?
+      def e_tag: () -> String?
+    end
+    def describe_asset_model: (
+      ?asset_model_id: String,
+      ?exclude_properties: bool,
+      ?asset_model_version: String
+    ) -> _DescribeAssetModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetModelResponse
+
+    interface _DescribeAssetModelCompositeModelResponse
+      include Smithy::Client::_Response[Types::DescribeAssetModelCompositeModelResponse]
+      def asset_model_id: () -> String?
+      def asset_model_composite_model_id: () -> String?
+      def asset_model_composite_model_external_id: () -> String?
+      def asset_model_composite_model_path: () -> Array[Types::AssetModelCompositeModelPathSegment]?
+      def asset_model_composite_model_name: () -> String?
+      def asset_model_composite_model_description: () -> String?
+      def asset_model_composite_model_type: () -> String?
+      def asset_model_composite_model_properties: () -> Array[Types::AssetModelProperty]?
+      def composition_details: () -> Types::CompositionDetails?
+      def asset_model_composite_model_summaries: () -> Array[Types::AssetModelCompositeModelSummary]?
+      def action_definitions: () -> Array[Types::ActionDefinition]?
+    end
+    def describe_asset_model_composite_model: (
+      ?asset_model_id: String,
+      ?asset_model_composite_model_id: String,
+      ?asset_model_version: String
+    ) -> _DescribeAssetModelCompositeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetModelCompositeModelResponse
+
+    interface _DescribeAssetModelInterfaceRelationshipResponse
+      include Smithy::Client::_Response[Types::DescribeAssetModelInterfaceRelationshipResponse]
+      def asset_model_id: () -> String?
+      def interface_asset_model_id: () -> String?
+      def property_mappings: () -> Array[Types::PropertyMapping]?
+      def hierarchy_mappings: () -> Array[Types::HierarchyMapping]?
+    end
+    def describe_asset_model_interface_relationship: (
+      ?asset_model_id: String,
+      ?interface_asset_model_id: String
+    ) -> _DescribeAssetModelInterfaceRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetModelInterfaceRelationshipResponse
+
+    interface _DescribeAssetPropertyResponse
+      include Smithy::Client::_Response[Types::DescribeAssetPropertyResponse]
+      def asset_id: () -> String?
+      def asset_external_id: () -> String?
+      def asset_name: () -> String?
+      def asset_model_id: () -> String?
+      def asset_property: () -> Types::Property?
+      def composite_model: () -> Types::CompositeModelProperty?
+    end
+    def describe_asset_property: (
+      ?asset_id: String,
+      ?property_id: String
+    ) -> _DescribeAssetPropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssetPropertyResponse
+
+    interface _DescribeBulkImportJobResponse
+      include Smithy::Client::_Response[Types::DescribeBulkImportJobResponse]
+      def job_id: () -> String?
+      def job_name: () -> String?
+      def job_status: () -> String?
+      def job_role_arn: () -> String?
+      def files: () -> Array[Types::File]?
+      def error_report_location: () -> Types::ErrorReportLocation?
+      def job_configuration: () -> Types::JobConfiguration?
+      def job_creation_date: () -> Time?
+      def job_last_update_date: () -> Time?
+      def adaptive_ingestion: () -> bool?
+      def delete_files_after_import: () -> bool?
+    end
+    def describe_bulk_import_job: (
+      ?job_id: String
+    ) -> _DescribeBulkImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBulkImportJobResponse
+
+    interface _DescribeComputationModelResponse
+      include Smithy::Client::_Response[Types::DescribeComputationModelResponse]
+      def computation_model_id: () -> String?
+      def computation_model_arn: () -> String?
+      def computation_model_name: () -> String?
+      def computation_model_description: () -> String?
+      def computation_model_configuration: () -> Types::ComputationModelConfiguration?
+      def computation_model_data_binding: () -> Hash[String, Types::ComputationModelDataBindingValue]?
+      def computation_model_creation_date: () -> Time?
+      def computation_model_last_update_date: () -> Time?
+      def computation_model_status: () -> Types::ComputationModelStatus?
+      def computation_model_version: () -> String?
+      def action_definitions: () -> Array[Types::ActionDefinition]?
+    end
+    def describe_computation_model: (
+      ?computation_model_id: String
+    ) -> _DescribeComputationModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComputationModelResponse
+
+    interface _DescribeComputationModelExecutionSummaryResponse
+      include Smithy::Client::_Response[Types::DescribeComputationModelExecutionSummaryResponse]
+      def computation_model_id: () -> String?
+      def resolve_to: () -> Types::ResolveTo?
+      def computation_model_execution_summary: () -> Hash[String, String]?
+    end
+    def describe_computation_model_execution_summary: (
+      ?computation_model_id: String,
+      ?resolve_to_resource_type: String,
+      ?resolve_to_resource_id: String
+    ) -> _DescribeComputationModelExecutionSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComputationModelExecutionSummaryResponse
+
+    interface _DescribeDashboardResponse
+      include Smithy::Client::_Response[Types::DescribeDashboardResponse]
+      def dashboard_id: () -> String?
+      def dashboard_arn: () -> String?
+      def dashboard_name: () -> String?
+      def project_id: () -> String?
+      def dashboard_description: () -> String?
+      def dashboard_definition: () -> String?
+      def dashboard_creation_date: () -> Time?
+      def dashboard_last_update_date: () -> Time?
+    end
+    def describe_dashboard: (
+      ?dashboard_id: String
+    ) -> _DescribeDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDashboardResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_arn: () -> String?
+      def dataset_name: () -> String?
+      def dataset_description: () -> String?
+      def dataset_source: () -> Types::DatasetSource?
+      def dataset_status: () -> Types::DatasetStatus?
+      def dataset_creation_date: () -> Time?
+      def dataset_last_update_date: () -> Time?
+      def dataset_version: () -> String?
+    end
+    def describe_dataset: (
+      ?dataset_id: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDefaultEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeDefaultEncryptionConfigurationResponse]
+      def encryption_type: () -> String?
+      def kms_key_arn: () -> String?
+      def configuration_status: () -> Types::ConfigurationStatus?
+    end
+    def describe_default_encryption_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDefaultEncryptionConfigurationResponse
+
+    interface _DescribeExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeExecutionResponse]
+      def execution_id: () -> String?
+      def action_type: () -> String?
+      def target_resource: () -> Types::TargetResource?
+      def target_resource_version: () -> String?
+      def resolve_to: () -> Types::ResolveTo?
+      def execution_start_time: () -> Time?
+      def execution_end_time: () -> Time?
+      def execution_status: () -> Types::ExecutionStatus?
+      def execution_result: () -> Hash[String, String]?
+      def execution_details: () -> Hash[String, String]?
+      def execution_entity_version: () -> String?
+    end
+    def describe_execution: (
+      ?execution_id: String
+    ) -> _DescribeExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExecutionResponse
+
+    interface _DescribeGatewayResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayResponse]
+      def gateway_id: () -> String?
+      def gateway_name: () -> String?
+      def gateway_arn: () -> String?
+      def gateway_platform: () -> Types::GatewayPlatform?
+      def gateway_version: () -> String?
+      def gateway_capability_summaries: () -> Array[Types::GatewayCapabilitySummary]?
+      def creation_date: () -> Time?
+      def last_update_date: () -> Time?
+    end
+    def describe_gateway: (
+      ?gateway_id: String
+    ) -> _DescribeGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayResponse
+
+    interface _DescribeGatewayCapabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayCapabilityConfigurationResponse]
+      def gateway_id: () -> String?
+      def capability_namespace: () -> String?
+      def capability_configuration: () -> String?
+      def capability_sync_status: () -> String?
+    end
+    def describe_gateway_capability_configuration: (
+      ?gateway_id: String,
+      ?capability_namespace: String
+    ) -> _DescribeGatewayCapabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayCapabilityConfigurationResponse
+
+    interface _DescribeLoggingOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeLoggingOptionsResponse]
+      def logging_options: () -> Types::LoggingOptions?
+    end
+    def describe_logging_options: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingOptionsResponse
+
+    interface _DescribePortalResponse
+      include Smithy::Client::_Response[Types::DescribePortalResponse]
+      def portal_id: () -> String?
+      def portal_arn: () -> String?
+      def portal_name: () -> String?
+      def portal_description: () -> String?
+      def portal_client_id: () -> String?
+      def portal_start_url: () -> String?
+      def portal_contact_email: () -> String?
+      def portal_status: () -> Types::PortalStatus?
+      def portal_creation_date: () -> Time?
+      def portal_last_update_date: () -> Time?
+      def portal_logo_image_location: () -> Types::ImageLocation?
+      def role_arn: () -> String?
+      def portal_auth_mode: () -> String?
+      def notification_sender_email: () -> String?
+      def alarms: () -> Types::Alarms?
+      def portal_type: () -> String?
+      def portal_type_configuration: () -> Hash[String, Types::PortalTypeEntry]?
+    end
+    def describe_portal: (
+      ?portal_id: String
+    ) -> _DescribePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePortalResponse
+
+    interface _DescribeProjectResponse
+      include Smithy::Client::_Response[Types::DescribeProjectResponse]
+      def project_id: () -> String?
+      def project_arn: () -> String?
+      def project_name: () -> String?
+      def portal_id: () -> String?
+      def project_description: () -> String?
+      def project_creation_date: () -> Time?
+      def project_last_update_date: () -> Time?
+    end
+    def describe_project: (
+      ?project_id: String
+    ) -> _DescribeProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProjectResponse
+
+    interface _DescribeStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeStorageConfigurationResponse]
+      def storage_type: () -> String?
+      def multi_layer_storage: () -> Types::MultiLayerStorage?
+      def disassociated_data_storage: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def configuration_status: () -> Types::ConfigurationStatus?
+      def last_update_date: () -> Time?
+      def warm_tier: () -> String?
+      def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod?
+      def disallow_ingest_null_na_n: () -> bool?
+    end
+    def describe_storage_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStorageConfigurationResponse
+
+    interface _DescribeTimeSeriesResponse
+      include Smithy::Client::_Response[Types::DescribeTimeSeriesResponse]
+      def asset_id: () -> String?
+      def property_id: () -> String?
+      def alias: () -> String?
+      def time_series_id: () -> String?
+      def data_type: () -> String?
+      def data_type_spec: () -> String?
+      def time_series_creation_date: () -> Time?
+      def time_series_last_update_date: () -> Time?
+      def time_series_arn: () -> String?
+    end
+    def describe_time_series: (
+      ?alias: String,
+      ?asset_id: String,
+      ?property_id: String
+    ) -> _DescribeTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTimeSeriesResponse
+
+    interface _DisassociateAssetsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_assets: (
+      ?asset_id: String,
+      ?hierarchy_id: String,
+      ?child_asset_id: String,
+      ?client_token: String
+    ) -> _DisassociateAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAssetsResponse
+
+    interface _DisassociateTimeSeriesFromAssetPropertyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_time_series_from_asset_property: (
+      ?alias: String,
+      ?asset_id: String,
+      ?property_id: String,
+      ?client_token: String
+    ) -> _DisassociateTimeSeriesFromAssetPropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTimeSeriesFromAssetPropertyResponse
+
+    interface _ExecuteActionResponse
+      include Smithy::Client::_Response[Types::ExecuteActionResponse]
+      def action_id: () -> String?
+    end
+    def execute_action: (
+      ?target_resource: {
+        asset_id: String,
+        computation_model_id: untyped
+      },
+      ?action_definition_id: String,
+      ?action_payload: {
+        string_value: String
+      },
+      ?client_token: String,
+      ?resolve_to: {
+        asset_id: String
+      }
+    ) -> _ExecuteActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteActionResponse
+
+    interface _ExecuteQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteQueryResponse]
+      def columns: () -> Array[Types::ColumnInfo]?
+      def rows: () -> Array[Types::Row]?
+      def next_token: () -> String?
+    end
+    def execute_query: (
+      ?query_statement: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?client_token: String
+    ) -> _ExecuteQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteQueryResponse
+
+    interface _GetAssetPropertyAggregatesResponse
+      include Smithy::Client::_Response[Types::GetAssetPropertyAggregatesResponse]
+      def aggregated_values: () -> Array[Types::AggregatedValue]?
+      def next_token: () -> String?
+    end
+    def get_asset_property_aggregates: (
+      ?asset_id: String,
+      ?property_id: String,
+      ?property_alias: String,
+      ?aggregate_types: Array[String],
+      ?resolution: String,
+      ?qualities: Array[String],
+      ?start_date: Time,
+      ?end_date: Time,
+      ?time_ordering: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetAssetPropertyAggregatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetPropertyAggregatesResponse
+
+    interface _GetAssetPropertyValueResponse
+      include Smithy::Client::_Response[Types::GetAssetPropertyValueResponse]
+      def property_value: () -> Types::AssetPropertyValue?
+    end
+    def get_asset_property_value: (
+      ?asset_id: String,
+      ?property_id: String,
+      ?property_alias: String
+    ) -> _GetAssetPropertyValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetPropertyValueResponse
+
+    interface _GetAssetPropertyValueHistoryResponse
+      include Smithy::Client::_Response[Types::GetAssetPropertyValueHistoryResponse]
+      def asset_property_value_history: () -> Array[Types::AssetPropertyValue]?
+      def next_token: () -> String?
+    end
+    def get_asset_property_value_history: (
+      ?asset_id: String,
+      ?property_id: String,
+      ?property_alias: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?qualities: Array[String],
+      ?time_ordering: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetAssetPropertyValueHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetPropertyValueHistoryResponse
+
+    interface _GetInterpolatedAssetPropertyValuesResponse
+      include Smithy::Client::_Response[Types::GetInterpolatedAssetPropertyValuesResponse]
+      def interpolated_asset_property_values: () -> Array[Types::InterpolatedAssetPropertyValue]?
+      def next_token: () -> String?
+    end
+    def get_interpolated_asset_property_values: (
+      ?asset_id: String,
+      ?property_id: String,
+      ?property_alias: String,
+      ?start_time_in_seconds: Integer,
+      ?start_time_offset_in_nanos: Integer,
+      ?end_time_in_seconds: Integer,
+      ?end_time_offset_in_nanos: Integer,
+      ?quality: String,
+      ?interval_in_seconds: Integer,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?type: String,
+      ?interval_window_in_seconds: Integer
+    ) -> _GetInterpolatedAssetPropertyValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInterpolatedAssetPropertyValuesResponse
+
+    interface _InvokeAssistantResponse
+      include Smithy::Client::_Response[Types::InvokeAssistantResponse]
+      def body: () -> Types::ResponseStream?
+      def conversation_id: () -> String?
+    end
+    def invoke_assistant: (
+      ?conversation_id: String,
+      ?message: String,
+      ?enable_trace: bool
+    ) -> _InvokeAssistantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAssistantResponse
+
+    interface _ListAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAccessPoliciesResponse]
+      def access_policy_summaries: () -> Array[Types::AccessPolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_access_policies: (
+      ?identity_type: String,
+      ?identity_id: String,
+      ?resource_type: String,
+      ?resource_id: String,
+      ?iam_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPoliciesResponse
+
+    interface _ListActionsResponse
+      include Smithy::Client::_Response[Types::ListActionsResponse]
+      def action_summaries: () -> Array[Types::ActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_actions: (
+      ?target_resource_type: String,
+      ?target_resource_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resolve_to_resource_type: String,
+      ?resolve_to_resource_id: String
+    ) -> _ListActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionsResponse
+
+    interface _ListAssetModelCompositeModelsResponse
+      include Smithy::Client::_Response[Types::ListAssetModelCompositeModelsResponse]
+      def asset_model_composite_model_summaries: () -> Array[Types::AssetModelCompositeModelSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_model_composite_models: (
+      ?asset_model_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?asset_model_version: String
+    ) -> _ListAssetModelCompositeModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetModelCompositeModelsResponse
+
+    interface _ListAssetModelPropertiesResponse
+      include Smithy::Client::_Response[Types::ListAssetModelPropertiesResponse]
+      def asset_model_property_summaries: () -> Array[Types::AssetModelPropertySummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_model_properties: (
+      ?asset_model_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: String,
+      ?asset_model_version: String
+    ) -> _ListAssetModelPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetModelPropertiesResponse
+
+    interface _ListAssetModelsResponse
+      include Smithy::Client::_Response[Types::ListAssetModelsResponse]
+      def asset_model_summaries: () -> Array[Types::AssetModelSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_models: (
+      ?asset_model_types: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?asset_model_version: String
+    ) -> _ListAssetModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetModelsResponse
+
+    interface _ListAssetPropertiesResponse
+      include Smithy::Client::_Response[Types::ListAssetPropertiesResponse]
+      def asset_property_summaries: () -> Array[Types::AssetPropertySummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_properties: (
+      ?asset_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: String
+    ) -> _ListAssetPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetPropertiesResponse
+
+    interface _ListAssetRelationshipsResponse
+      include Smithy::Client::_Response[Types::ListAssetRelationshipsResponse]
+      def asset_relationship_summaries: () -> Array[Types::AssetRelationshipSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_relationships: (
+      ?asset_id: String,
+      ?traversal_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetRelationshipsResponse
+
+    interface _ListAssetsResponse
+      include Smithy::Client::_Response[Types::ListAssetsResponse]
+      def asset_summaries: () -> Array[Types::AssetSummary]?
+      def next_token: () -> String?
+    end
+    def list_assets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?asset_model_id: String,
+      ?filter: String
+    ) -> _ListAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsResponse
+
+    interface _ListAssociatedAssetsResponse
+      include Smithy::Client::_Response[Types::ListAssociatedAssetsResponse]
+      def asset_summaries: () -> Array[Types::AssociatedAssetsSummary]?
+      def next_token: () -> String?
+    end
+    def list_associated_assets: (
+      ?asset_id: String,
+      ?hierarchy_id: String,
+      ?traversal_direction: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssociatedAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedAssetsResponse
+
+    interface _ListBulkImportJobsResponse
+      include Smithy::Client::_Response[Types::ListBulkImportJobsResponse]
+      def job_summaries: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_bulk_import_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: String
+    ) -> _ListBulkImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBulkImportJobsResponse
+
+    interface _ListCompositionRelationshipsResponse
+      include Smithy::Client::_Response[Types::ListCompositionRelationshipsResponse]
+      def composition_relationship_summaries: () -> Array[Types::CompositionRelationshipSummary]?
+      def next_token: () -> String?
+    end
+    def list_composition_relationships: (
+      ?asset_model_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCompositionRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCompositionRelationshipsResponse
+
+    interface _ListComputationModelDataBindingUsagesResponse
+      include Smithy::Client::_Response[Types::ListComputationModelDataBindingUsagesResponse]
+      def data_binding_usage_summaries: () -> Array[Types::ComputationModelDataBindingUsageSummary]?
+      def next_token: () -> String?
+    end
+    def list_computation_model_data_binding_usages: (
+      ?data_binding_value_filter: {
+        asset: {
+          asset_id: String
+        },
+        asset_model: {
+          asset_model_id: untyped
+        },
+        asset_property: {
+          asset_id: untyped,
+          property_id: untyped
+        },
+        asset_model_property: {
+          asset_model_id: untyped,
+          property_id: untyped
+        }
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComputationModelDataBindingUsagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComputationModelDataBindingUsagesResponse
+
+    interface _ListComputationModelResolveToResourcesResponse
+      include Smithy::Client::_Response[Types::ListComputationModelResolveToResourcesResponse]
+      def computation_model_resolve_to_resource_summaries: () -> Array[Types::ComputationModelResolveToResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_computation_model_resolve_to_resources: (
+      ?computation_model_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComputationModelResolveToResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComputationModelResolveToResourcesResponse
+
+    interface _ListComputationModelsResponse
+      include Smithy::Client::_Response[Types::ListComputationModelsResponse]
+      def computation_model_summaries: () -> Array[Types::ComputationModelSummary]?
+      def next_token: () -> String?
+    end
+    def list_computation_models: (
+      ?computation_model_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComputationModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComputationModelsResponse
+
+    interface _ListDashboardsResponse
+      include Smithy::Client::_Response[Types::ListDashboardsResponse]
+      def dashboard_summaries: () -> Array[Types::DashboardSummary]?
+      def next_token: () -> String?
+    end
+    def list_dashboards: (
+      ?project_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDashboardsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def dataset_summaries: () -> Array[Types::DatasetSummary]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?source_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListExecutionsResponse
+      include Smithy::Client::_Response[Types::ListExecutionsResponse]
+      def execution_summaries: () -> Array[Types::ExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_executions: (
+      ?target_resource_type: String,
+      ?target_resource_id: String,
+      ?resolve_to_resource_type: String,
+      ?resolve_to_resource_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?action_type: String
+    ) -> _ListExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutionsResponse
+
+    interface _ListGatewaysResponse
+      include Smithy::Client::_Response[Types::ListGatewaysResponse]
+      def gateway_summaries: () -> Array[Types::GatewaySummary]?
+      def next_token: () -> String?
+    end
+    def list_gateways: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
+
+    interface _ListInterfaceRelationshipsResponse
+      include Smithy::Client::_Response[Types::ListInterfaceRelationshipsResponse]
+      def interface_relationship_summaries: () -> Array[Types::InterfaceRelationshipSummary]?
+      def next_token: () -> String?
+    end
+    def list_interface_relationships: (
+      ?interface_asset_model_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInterfaceRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInterfaceRelationshipsResponse
+
+    interface _ListPortalsResponse
+      include Smithy::Client::_Response[Types::ListPortalsResponse]
+      def portal_summaries: () -> Array[Types::PortalSummary]?
+      def next_token: () -> String?
+    end
+    def list_portals: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPortalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortalsResponse
+
+    interface _ListProjectAssetsResponse
+      include Smithy::Client::_Response[Types::ListProjectAssetsResponse]
+      def asset_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_project_assets: (
+      ?project_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectAssetsResponse
+
+    interface _ListProjectsResponse
+      include Smithy::Client::_Response[Types::ListProjectsResponse]
+      def project_summaries: () -> Array[Types::ProjectSummary]?
+      def next_token: () -> String?
+    end
+    def list_projects: (
+      ?portal_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTimeSeriesResponse
+      include Smithy::Client::_Response[Types::ListTimeSeriesResponse]
+      def time_series_summaries: () -> Array[Types::TimeSeriesSummary]?
+      def next_token: () -> String?
+    end
+    def list_time_series: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?asset_id: String,
+      ?alias_prefix: String,
+      ?time_series_type: String
+    ) -> _ListTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTimeSeriesResponse
+
+    interface _PutAssetModelInterfaceRelationshipResponse
+      include Smithy::Client::_Response[Types::PutAssetModelInterfaceRelationshipResponse]
+      def asset_model_id: () -> String?
+      def interface_asset_model_id: () -> String?
+      def asset_model_arn: () -> String?
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def put_asset_model_interface_relationship: (
+      ?asset_model_id: String,
+      ?interface_asset_model_id: String,
+      ?property_mapping_configuration: {
+        match_by_property_name: bool,
+        create_missing_property: bool,
+        overrides: Array[
+          {
+            asset_model_property_id: String,
+            interface_asset_model_property_id: untyped
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _PutAssetModelInterfaceRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAssetModelInterfaceRelationshipResponse
+
+    interface _PutDefaultEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::PutDefaultEncryptionConfigurationResponse]
+      def encryption_type: () -> String?
+      def kms_key_arn: () -> String?
+      def configuration_status: () -> Types::ConfigurationStatus?
+    end
+    def put_default_encryption_configuration: (
+      ?encryption_type: String,
+      ?kms_key_id: String
+    ) -> _PutDefaultEncryptionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDefaultEncryptionConfigurationResponse
+
+    interface _PutLoggingOptionsResponse
+      include Smithy::Client::_Response[Types::PutLoggingOptionsResponse]
+    end
+    def put_logging_options: (
+      ?logging_options: {
+        level: String
+      }
+    ) -> _PutLoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingOptionsResponse
+
+    interface _PutStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::PutStorageConfigurationResponse]
+      def storage_type: () -> String?
+      def multi_layer_storage: () -> Types::MultiLayerStorage?
+      def disassociated_data_storage: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def configuration_status: () -> Types::ConfigurationStatus?
+      def warm_tier: () -> String?
+      def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod?
+      def disallow_ingest_null_na_n: () -> bool?
+    end
+    def put_storage_configuration: (
+      ?storage_type: String,
+      ?multi_layer_storage: {
+        customer_managed_s3_storage: {
+          s3_resource_arn: String,
+          role_arn: untyped
+        }
+      },
+      ?disassociated_data_storage: String,
+      ?retention_period: {
+        number_of_days: Integer,
+        unlimited: bool
+      },
+      ?warm_tier: String,
+      ?warm_tier_retention_period: {
+        number_of_days: Integer,
+        unlimited: bool
+      },
+      ?disallow_ingest_null_na_n: bool
+    ) -> _PutStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStorageConfigurationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateAccessPolicyResponse]
+    end
+    def update_access_policy: (
+      ?access_policy_id: String,
+      ?access_policy_identity: {
+        user: {
+          id: String
+        },
+        group: {
+          id: untyped
+        },
+        iam_user: {
+          arn: String
+        },
+        iam_role: {
+          arn: untyped
+        }
+      },
+      ?access_policy_resource: {
+        portal: {
+          id: String
+        },
+        project: {
+          id: untyped
+        }
+      },
+      ?access_policy_permission: String,
+      ?client_token: String
+    ) -> _UpdateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessPolicyResponse
+
+    interface _UpdateAssetResponse
+      include Smithy::Client::_Response[Types::UpdateAssetResponse]
+      def asset_status: () -> Types::AssetStatus?
+    end
+    def update_asset: (
+      ?asset_id: String,
+      ?asset_external_id: String,
+      ?asset_name: String,
+      ?client_token: String,
+      ?asset_description: String
+    ) -> _UpdateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetResponse
+
+    interface _UpdateAssetModelResponse
+      include Smithy::Client::_Response[Types::UpdateAssetModelResponse]
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def update_asset_model: (
+      ?asset_model_id: String,
+      ?asset_model_external_id: String,
+      ?asset_model_name: String,
+      ?asset_model_description: String,
+      ?asset_model_properties: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          data_type: String,
+          data_type_spec: untyped,
+          unit: String,
+          type: {
+            attribute: {
+              default_value: String
+            },
+            measurement: {
+              processing_config: {
+                forwarding_config: {
+                  state: String
+                }
+              }
+            },
+            transform: {
+              expression: String,
+              variables: Array[
+                {
+                  name: String,
+                  value: {
+                    property_id: String,
+                    hierarchy_id: untyped,
+                    property_path: Array[
+                      {
+                        id: String,
+                        name: untyped
+                      }
+                    ]
+                  }
+                }
+              ],
+              processing_config: {
+                compute_location: String,
+                forwarding_config: untyped
+              }
+            },
+            metric: {
+              expression: untyped,
+              variables: untyped,
+              window: {
+                tumbling: {
+                  interval: String,
+                  offset: String
+                }
+              },
+              processing_config: {
+                compute_location: untyped
+              }
+            }
+          },
+          path: untyped
+        }
+      ],
+      ?asset_model_hierarchies: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          child_asset_model_id: untyped
+        }
+      ],
+      ?asset_model_composite_models: Array[
+        {
+          name: String,
+          description: String,
+          type: untyped,
+          properties: Array[
+            {
+              id: String,
+              external_id: String,
+              name: untyped,
+              data_type: String,
+              data_type_spec: untyped,
+              unit: String,
+              type: {
+                attribute: {
+                  default_value: String
+                },
+                measurement: {
+                  processing_config: {
+                    forwarding_config: {
+                      state: String
+                    }
+                  }
+                },
+                transform: {
+                  expression: String,
+                  variables: Array[
+                    {
+                      name: String,
+                      value: {
+                        property_id: String,
+                        hierarchy_id: untyped,
+                        property_path: Array[
+                          {
+                            id: String,
+                            name: untyped
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  processing_config: {
+                    compute_location: String,
+                    forwarding_config: untyped
+                  }
+                },
+                metric: {
+                  expression: untyped,
+                  variables: untyped,
+                  window: {
+                    tumbling: {
+                      interval: String,
+                      offset: String
+                    }
+                  },
+                  processing_config: {
+                    compute_location: untyped
+                  }
+                }
+              },
+              path: untyped
+            }
+          ],
+          id: untyped,
+          external_id: untyped
+        }
+      ],
+      ?client_token: String,
+      ?if_match: String,
+      ?if_none_match: String,
+      ?match_for_version_type: String
+    ) -> _UpdateAssetModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetModelResponse
+
+    interface _UpdateAssetModelCompositeModelResponse
+      include Smithy::Client::_Response[Types::UpdateAssetModelCompositeModelResponse]
+      def asset_model_composite_model_path: () -> Array[Types::AssetModelCompositeModelPathSegment]?
+      def asset_model_status: () -> Types::AssetModelStatus?
+    end
+    def update_asset_model_composite_model: (
+      ?asset_model_id: String,
+      ?asset_model_composite_model_id: String,
+      ?asset_model_composite_model_external_id: String,
+      ?asset_model_composite_model_description: String,
+      ?asset_model_composite_model_name: String,
+      ?client_token: String,
+      ?asset_model_composite_model_properties: Array[
+        {
+          id: String,
+          external_id: String,
+          name: String,
+          data_type: String,
+          data_type_spec: untyped,
+          unit: String,
+          type: {
+            attribute: {
+              default_value: String
+            },
+            measurement: {
+              processing_config: {
+                forwarding_config: {
+                  state: String
+                }
+              }
+            },
+            transform: {
+              expression: String,
+              variables: Array[
+                {
+                  name: String,
+                  value: {
+                    property_id: String,
+                    hierarchy_id: untyped,
+                    property_path: Array[
+                      {
+                        id: String,
+                        name: untyped
+                      }
+                    ]
+                  }
+                }
+              ],
+              processing_config: {
+                compute_location: String,
+                forwarding_config: untyped
+              }
+            },
+            metric: {
+              expression: untyped,
+              variables: untyped,
+              window: {
+                tumbling: {
+                  interval: String,
+                  offset: String
+                }
+              },
+              processing_config: {
+                compute_location: untyped
+              }
+            }
+          },
+          path: untyped
+        }
+      ],
+      ?if_match: String,
+      ?if_none_match: String,
+      ?match_for_version_type: String
+    ) -> _UpdateAssetModelCompositeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetModelCompositeModelResponse
+
+    interface _UpdateAssetPropertyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_asset_property: (
+      ?asset_id: String,
+      ?property_id: String,
+      ?property_alias: String,
+      ?property_notification_state: String,
+      ?client_token: String,
+      ?property_unit: String
+    ) -> _UpdateAssetPropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetPropertyResponse
+
+    interface _UpdateComputationModelResponse
+      include Smithy::Client::_Response[Types::UpdateComputationModelResponse]
+      def computation_model_status: () -> Types::ComputationModelStatus?
+    end
+    def update_computation_model: (
+      ?computation_model_id: String,
+      ?computation_model_name: String,
+      ?computation_model_description: String,
+      ?computation_model_configuration: {
+        anomaly_detection: {
+          input_properties: String,
+          result_property: String
+        }
+      },
+      ?computation_model_data_binding: Hash[String,
+        {
+          asset_model_property: {
+            asset_model_id: String,
+            property_id: untyped
+          },
+          asset_property: {
+            asset_id: untyped,
+            property_id: untyped
+          },
+          list: Array[
+            {
+              asset_model_property: untyped,
+              asset_property: untyped,
+              list: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateComputationModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComputationModelResponse
+
+    interface _UpdateDashboardResponse
+      include Smithy::Client::_Response[Types::UpdateDashboardResponse]
+    end
+    def update_dashboard: (
+      ?dashboard_id: String,
+      ?dashboard_name: String,
+      ?dashboard_description: String,
+      ?dashboard_definition: String,
+      ?client_token: String
+    ) -> _UpdateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDashboardResponse
+
+    interface _UpdateDatasetResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_arn: () -> String?
+      def dataset_status: () -> Types::DatasetStatus?
+    end
+    def update_dataset: (
+      ?dataset_id: String,
+      ?dataset_name: String,
+      ?dataset_description: String,
+      ?dataset_source: {
+        source_type: String,
+        source_format: String,
+        source_detail: {
+          kendra: {
+            knowledge_base_arn: String,
+            role_arn: untyped
+          }
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetResponse
+
+    interface _UpdateGatewayResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_gateway: (
+      ?gateway_id: String,
+      ?gateway_name: String
+    ) -> _UpdateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayResponse
+
+    interface _UpdateGatewayCapabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayCapabilityConfigurationResponse]
+      def capability_namespace: () -> String?
+      def capability_sync_status: () -> String?
+    end
+    def update_gateway_capability_configuration: (
+      ?gateway_id: String,
+      ?capability_namespace: String,
+      ?capability_configuration: String
+    ) -> _UpdateGatewayCapabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayCapabilityConfigurationResponse
+
+    interface _UpdatePortalResponse
+      include Smithy::Client::_Response[Types::UpdatePortalResponse]
+      def portal_status: () -> Types::PortalStatus?
+    end
+    def update_portal: (
+      ?portal_id: String,
+      ?portal_name: String,
+      ?portal_description: String,
+      ?portal_contact_email: String,
+      ?portal_logo_image: {
+        id: String,
+        file: {
+          data: String,
+          type: String
+        }
+      },
+      ?role_arn: String,
+      ?client_token: String,
+      ?notification_sender_email: String,
+      ?alarms: {
+        alarm_role_arn: String,
+        notification_lambda_arn: String
+      },
+      ?portal_type: String,
+      ?portal_type_configuration: Hash[String,
+        {
+          portal_tools: Array[String]
+        }
+      ]
+    ) -> _UpdatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortalResponse
+
+    interface _UpdateProjectResponse
+      include Smithy::Client::_Response[Types::UpdateProjectResponse]
+    end
+    def update_project: (
+      ?project_id: String,
+      ?project_name: String,
+      ?project_description: String,
+      ?client_token: String
+    ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+  end
+end

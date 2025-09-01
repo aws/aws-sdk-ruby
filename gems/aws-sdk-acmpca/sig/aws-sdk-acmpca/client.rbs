@@ -1,0 +1,466 @@
+module Aws::ACMPCA
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ACMPCA::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::CreateCertificateAuthorityResponse]
+      def certificate_authority_arn: () -> String?
+    end
+    def create_certificate_authority: (
+      ?certificate_authority_configuration: {
+        key_algorithm: String,
+        signing_algorithm: String,
+        subject: {
+          country: String,
+          organization: String,
+          organizational_unit: untyped,
+          distinguished_name_qualifier: String,
+          state: String,
+          common_name: untyped,
+          serial_number: untyped,
+          locality: untyped,
+          title: untyped,
+          surname: String,
+          given_name: String,
+          initials: String,
+          pseudonym: untyped,
+          generation_qualifier: String,
+          custom_attributes: Array[
+            {
+              object_identifier: String,
+              value: String
+            }
+          ]
+        },
+        csr_extensions: {
+          key_usage: {
+            digital_signature: bool,
+            non_repudiation: untyped,
+            key_encipherment: untyped,
+            data_encipherment: untyped,
+            key_agreement: untyped,
+            key_cert_sign: untyped,
+            crl_sign: untyped,
+            encipher_only: untyped,
+            decipher_only: untyped
+          },
+          subject_information_access: Array[
+            {
+              access_method: {
+                custom_object_identifier: untyped,
+                access_method_type: String
+              },
+              access_location: {
+                other_name: {
+                  type_id: untyped,
+                  value: String
+                },
+                rfc822_name: untyped,
+                dns_name: String,
+                directory_name: untyped,
+                edi_party_name: {
+                  party_name: untyped,
+                  name_assigner: untyped
+                },
+                uniform_resource_identifier: untyped,
+                ip_address: String,
+                registered_id: untyped
+              }
+            }
+          ]
+        }
+      },
+      ?revocation_configuration: {
+        crl_configuration: {
+          enabled: bool,
+          expiration_in_days: Integer,
+          custom_cname: String,
+          s3_bucket_name: String,
+          s3_object_acl: String,
+          crl_distribution_point_extension_configuration: {
+            omit_extension: untyped
+          },
+          crl_type: String,
+          custom_path: String
+        },
+        ocsp_configuration: {
+          enabled: untyped,
+          ocsp_custom_cname: untyped
+        }
+      },
+      ?certificate_authority_type: String,
+      ?idempotency_token: String,
+      ?key_storage_security_standard: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?usage_mode: String
+    ) -> _CreateCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCertificateAuthorityResponse
+
+    interface _CreateCertificateAuthorityAuditReportResponse
+      include Smithy::Client::_Response[Types::CreateCertificateAuthorityAuditReportResponse]
+      def audit_report_id: () -> String?
+      def s3_key: () -> String?
+    end
+    def create_certificate_authority_audit_report: (
+      ?certificate_authority_arn: String,
+      ?s3_bucket_name: String,
+      ?audit_report_response_format: String
+    ) -> _CreateCertificateAuthorityAuditReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCertificateAuthorityAuditReportResponse
+
+    interface _CreatePermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_permission: (
+      ?certificate_authority_arn: String,
+      ?principal: String,
+      ?source_account: String,
+      ?actions: Array[String]
+    ) -> _CreatePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePermissionResponse
+
+    interface _DeleteCertificateAuthorityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_certificate_authority: (
+      ?certificate_authority_arn: String,
+      ?permanent_deletion_time_in_days: Integer
+    ) -> _DeleteCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateAuthorityResponse
+
+    interface _DeletePermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_permission: (
+      ?certificate_authority_arn: String,
+      ?principal: String,
+      ?source_account: String
+    ) -> _DeletePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?resource_arn: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DescribeCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::DescribeCertificateAuthorityResponse]
+      def certificate_authority: () -> Types::CertificateAuthority?
+    end
+    def describe_certificate_authority: (
+      ?certificate_authority_arn: String
+    ) -> _DescribeCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificateAuthorityResponse
+
+    interface _DescribeCertificateAuthorityAuditReportResponse
+      include Smithy::Client::_Response[Types::DescribeCertificateAuthorityAuditReportResponse]
+      def audit_report_status: () -> String?
+      def s3_bucket_name: () -> String?
+      def s3_key: () -> String?
+      def created_at: () -> Time?
+    end
+    def describe_certificate_authority_audit_report: (
+      ?certificate_authority_arn: String,
+      ?audit_report_id: String
+    ) -> _DescribeCertificateAuthorityAuditReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificateAuthorityAuditReportResponse
+
+    interface _GetCertificateResponse
+      include Smithy::Client::_Response[Types::GetCertificateResponse]
+      def certificate: () -> String?
+      def certificate_chain: () -> String?
+    end
+    def get_certificate: (
+      ?certificate_authority_arn: String,
+      ?certificate_arn: String
+    ) -> _GetCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCertificateResponse
+
+    interface _GetCertificateAuthorityCertificateResponse
+      include Smithy::Client::_Response[Types::GetCertificateAuthorityCertificateResponse]
+      def certificate: () -> String?
+      def certificate_chain: () -> String?
+    end
+    def get_certificate_authority_certificate: (
+      ?certificate_authority_arn: String
+    ) -> _GetCertificateAuthorityCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCertificateAuthorityCertificateResponse
+
+    interface _GetCertificateAuthorityCsrResponse
+      include Smithy::Client::_Response[Types::GetCertificateAuthorityCsrResponse]
+      def csr: () -> String?
+    end
+    def get_certificate_authority_csr: (
+      ?certificate_authority_arn: String
+    ) -> _GetCertificateAuthorityCsrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCertificateAuthorityCsrResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy: () -> String?
+    end
+    def get_policy: (
+      ?resource_arn: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _ImportCertificateAuthorityCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def import_certificate_authority_certificate: (
+      ?certificate_authority_arn: String,
+      ?certificate: String,
+      ?certificate_chain: String
+    ) -> _ImportCertificateAuthorityCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCertificateAuthorityCertificateResponse
+
+    interface _IssueCertificateResponse
+      include Smithy::Client::_Response[Types::IssueCertificateResponse]
+      def certificate_arn: () -> String?
+    end
+    def issue_certificate: (
+      ?api_passthrough: {
+        extensions: {
+          certificate_policies: Array[
+            {
+              cert_policy_id: String,
+              policy_qualifiers: Array[
+                {
+                  policy_qualifier_id: String,
+                  qualifier: {
+                    cps_uri: String
+                  }
+                }
+              ]
+            }
+          ],
+          extended_key_usage: Array[
+            {
+              extended_key_usage_type: String,
+              extended_key_usage_object_identifier: untyped
+            }
+          ],
+          key_usage: {
+            digital_signature: bool,
+            non_repudiation: untyped,
+            key_encipherment: untyped,
+            data_encipherment: untyped,
+            key_agreement: untyped,
+            key_cert_sign: untyped,
+            crl_sign: untyped,
+            encipher_only: untyped,
+            decipher_only: untyped
+          },
+          subject_alternative_names: Array[
+            {
+              other_name: {
+                type_id: untyped,
+                value: untyped
+              },
+              rfc822_name: untyped,
+              dns_name: String,
+              directory_name: {
+                country: String,
+                organization: String,
+                organizational_unit: untyped,
+                distinguished_name_qualifier: String,
+                state: String,
+                common_name: untyped,
+                serial_number: untyped,
+                locality: untyped,
+                title: untyped,
+                surname: String,
+                given_name: String,
+                initials: String,
+                pseudonym: untyped,
+                generation_qualifier: String,
+                custom_attributes: Array[
+                  {
+                    object_identifier: untyped,
+                    value: String
+                  }
+                ]
+              },
+              edi_party_name: {
+                party_name: untyped,
+                name_assigner: untyped
+              },
+              uniform_resource_identifier: untyped,
+              ip_address: String,
+              registered_id: untyped
+            }
+          ],
+          custom_extensions: Array[
+            {
+              object_identifier: untyped,
+              value: String,
+              critical: untyped
+            }
+          ]
+        },
+        subject: untyped
+      },
+      ?certificate_authority_arn: String,
+      ?csr: String,
+      ?signing_algorithm: String,
+      ?template_arn: String,
+      ?validity: {
+        value: Integer,
+        type: String
+      },
+      ?validity_not_before: {
+        value: Integer,
+        type: String
+      },
+      ?idempotency_token: String
+    ) -> _IssueCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IssueCertificateResponse
+
+    interface _ListCertificateAuthoritiesResponse
+      include Smithy::Client::_Response[Types::ListCertificateAuthoritiesResponse]
+      def next_token: () -> String?
+      def certificate_authorities: () -> Array[Types::CertificateAuthority]?
+    end
+    def list_certificate_authorities: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_owner: String
+    ) -> _ListCertificateAuthoritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCertificateAuthoritiesResponse
+
+    interface _ListPermissionsResponse
+      include Smithy::Client::_Response[Types::ListPermissionsResponse]
+      def next_token: () -> String?
+      def permissions: () -> Array[Types::Permission]?
+    end
+    def list_permissions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?certificate_authority_arn: String
+    ) -> _ListPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def next_token: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?certificate_authority_arn: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _PutPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPolicyResponse
+
+    interface _RestoreCertificateAuthorityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def restore_certificate_authority: (
+      ?certificate_authority_arn: String
+    ) -> _RestoreCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreCertificateAuthorityResponse
+
+    interface _RevokeCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_certificate: (
+      ?certificate_authority_arn: String,
+      ?certificate_serial: String,
+      ?revocation_reason: String
+    ) -> _RevokeCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeCertificateResponse
+
+    interface _TagCertificateAuthorityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_certificate_authority: (
+      ?certificate_authority_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagCertificateAuthorityResponse
+
+    interface _UntagCertificateAuthorityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_certificate_authority: (
+      ?certificate_authority_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UntagCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagCertificateAuthorityResponse
+
+    interface _UpdateCertificateAuthorityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_certificate_authority: (
+      ?certificate_authority_arn: String,
+      ?revocation_configuration: {
+        crl_configuration: {
+          enabled: bool,
+          expiration_in_days: Integer,
+          custom_cname: String,
+          s3_bucket_name: String,
+          s3_object_acl: String,
+          crl_distribution_point_extension_configuration: {
+            omit_extension: untyped
+          },
+          crl_type: String,
+          custom_path: String
+        },
+        ocsp_configuration: {
+          enabled: untyped,
+          ocsp_custom_cname: untyped
+        }
+      },
+      ?status: String
+    ) -> _UpdateCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCertificateAuthorityResponse
+  end
+end

@@ -1,0 +1,13 @@
+module Aws::NotificationsContacts
+  class EndpointParameters
+    def initialize: (
+      use_fips: bool,
+      ?endpoint: String,
+      ?region: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor use_fips: bool
+    attr_accessor endpoint: String?
+    attr_accessor region: String?
+  end
+end

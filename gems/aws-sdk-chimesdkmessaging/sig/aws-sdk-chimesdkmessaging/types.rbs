@@ -1,0 +1,2154 @@
+module Aws::ChimeSDKMessaging
+  module Types
+
+    module AllowNotifications
+      ALL: String
+      NONE: String
+      FILTERED: String
+    end
+
+    class AppInstanceUserMembershipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?read_marker_timestamp: Time,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor read_marker_timestamp: Time?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class AssociateChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_flow_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_flow_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchChannelMemberships
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invited_by: Types::Identity,
+        ?type: String,
+        ?members: Array[Types::Identity],
+        ?channel_arn: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invited_by: Types::Identity?
+      attr_accessor type: String?
+      attr_accessor members: Array[Types::Identity]?
+      attr_accessor channel_arn: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class BatchCreateChannelMembershipError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_arn: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_arn: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchCreateChannelMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?type: String,
+        ?member_arns: Array[String],
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor type: String?
+      attr_accessor member_arns: Array[String]?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class BatchCreateChannelMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_channel_memberships: Types::BatchChannelMemberships,
+        ?errors: Array[Types::BatchCreateChannelMembershipError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_channel_memberships: Types::BatchChannelMemberships?
+      attr_accessor errors: Array[Types::BatchCreateChannelMembershipError]?
+    end
+
+    class Channel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?channel_arn: String,
+        ?mode: String,
+        ?privacy: String,
+        ?metadata: String,
+        ?created_by: Types::Identity,
+        ?created_timestamp: Time,
+        ?last_message_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?channel_flow_arn: String,
+        ?elastic_channel_configuration: Types::ElasticChannelConfiguration,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor mode: String?
+      attr_accessor privacy: String?
+      attr_accessor metadata: String?
+      attr_accessor created_by: Types::Identity?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_message_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor channel_flow_arn: String?
+      attr_accessor elastic_channel_configuration: Types::ElasticChannelConfiguration?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class ChannelAssociatedWithFlowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?channel_arn: String,
+        ?mode: String,
+        ?privacy: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor mode: String?
+      attr_accessor privacy: String?
+      attr_accessor metadata: String?
+    end
+
+    class ChannelBan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member: Types::Identity,
+        ?channel_arn: String,
+        ?created_timestamp: Time,
+        ?created_by: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::Identity?
+      attr_accessor channel_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor created_by: Types::Identity?
+    end
+
+    class ChannelBanSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::Identity?
+    end
+
+    class ChannelFlow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+        ?processors: Array[Types::Processor],
+        ?name: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+      attr_accessor processors: Array[Types::Processor]?
+      attr_accessor name: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class ChannelFlowCallbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+        ?channel_arn: String,
+        ?delete_resource: bool,
+        ?channel_message: Types::ChannelMessageCallback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+      attr_accessor channel_arn: String?
+      attr_accessor delete_resource: bool?
+      attr_accessor channel_message: Types::ChannelMessageCallback?
+    end
+
+    class ChannelFlowCallbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?callback_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor callback_id: String?
+    end
+
+    class ChannelFlowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+        ?name: String,
+        ?processors: Array[Types::Processor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+      attr_accessor name: String?
+      attr_accessor processors: Array[Types::Processor]?
+    end
+
+    class ChannelMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invited_by: Types::Identity,
+        ?type: String,
+        ?member: Types::Identity,
+        ?channel_arn: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invited_by: Types::Identity?
+      attr_accessor type: String?
+      attr_accessor member: Types::Identity?
+      attr_accessor channel_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ChannelMembershipForAppInstanceUserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_summary: Types::ChannelSummary,
+        ?app_instance_user_membership_summary: Types::AppInstanceUserMembershipSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_summary: Types::ChannelSummary?
+      attr_accessor app_instance_user_membership_summary: Types::AppInstanceUserMembershipSummary?
+    end
+
+    class ChannelMembershipPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?push_notifications: Types::PushNotificationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor push_notifications: Types::PushNotificationPreferences?
+    end
+
+    class ChannelMembershipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::Identity?
+    end
+
+    module ChannelMembershipType
+      DEFAULT: String
+      HIDDEN: String
+    end
+
+    class ChannelMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?content: String,
+        ?metadata: String,
+        ?type: String,
+        ?created_timestamp: Time,
+        ?last_edited_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?sender: Types::Identity,
+        ?redacted: bool,
+        ?persistence: String,
+        ?status: Types::ChannelMessageStatusStructure,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?sub_channel_id: String,
+        ?content_type: String,
+        ?target: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor content: String?
+      attr_accessor metadata: String?
+      attr_accessor type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_edited_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor sender: Types::Identity?
+      attr_accessor redacted: bool?
+      attr_accessor persistence: String?
+      attr_accessor status: Types::ChannelMessageStatusStructure?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor sub_channel_id: String?
+      attr_accessor content_type: String?
+      attr_accessor target: Array[Types::Target]?
+    end
+
+    class ChannelMessageCallback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?content: String,
+        ?metadata: String,
+        ?push_notification: Types::PushNotificationConfiguration,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?sub_channel_id: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor content: String?
+      attr_accessor metadata: String?
+      attr_accessor push_notification: Types::PushNotificationConfiguration?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor sub_channel_id: String?
+      attr_accessor content_type: String?
+    end
+
+    module ChannelMessagePersistenceType
+      PERSISTENT: String
+      NON_PERSISTENT: String
+    end
+
+    module ChannelMessageStatus
+      SENT: String
+      PENDING: String
+      FAILED: String
+      DENIED: String
+    end
+
+    class ChannelMessageStatusStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor detail: String?
+    end
+
+    class ChannelMessageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?content: String,
+        ?metadata: String,
+        ?type: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?last_edited_timestamp: Time,
+        ?sender: Types::Identity,
+        ?redacted: bool,
+        ?status: Types::ChannelMessageStatusStructure,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?content_type: String,
+        ?target: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor content: String?
+      attr_accessor metadata: String?
+      attr_accessor type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor last_edited_timestamp: Time?
+      attr_accessor sender: Types::Identity?
+      attr_accessor redacted: bool?
+      attr_accessor status: Types::ChannelMessageStatusStructure?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor content_type: String?
+      attr_accessor target: Array[Types::Target]?
+    end
+
+    module ChannelMessageType
+      STANDARD: String
+      CONTROL: String
+    end
+
+    module ChannelMode
+      UNRESTRICTED: String
+      RESTRICTED: String
+    end
+
+    class ChannelModeratedByAppInstanceUserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_summary: Types::ChannelSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_summary: Types::ChannelSummary?
+    end
+
+    class ChannelModerator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?moderator: Types::Identity,
+        ?channel_arn: String,
+        ?created_timestamp: Time,
+        ?created_by: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor moderator: Types::Identity?
+      attr_accessor channel_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor created_by: Types::Identity?
+    end
+
+    class ChannelModeratorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?moderator: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor moderator: Types::Identity?
+    end
+
+    module ChannelPrivacy
+      PUBLIC: String
+      PRIVATE: String
+    end
+
+    class ChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?channel_arn: String,
+        ?mode: String,
+        ?privacy: String,
+        ?metadata: String,
+        ?last_message_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor mode: String?
+      attr_accessor privacy: String?
+      attr_accessor metadata: String?
+      attr_accessor last_message_timestamp: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateChannelBanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class CreateChannelBanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member: Types::Identity?
+    end
+
+    class CreateChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?processors: Array[Types::Processor],
+        ?name: String,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor processors: Array[Types::Processor]?
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateChannelFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+    end
+
+    class CreateChannelMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?type: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor type: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class CreateChannelMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member: Types::Identity,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member: Types::Identity?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class CreateChannelModeratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_moderator_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_moderator_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class CreateChannelModeratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_moderator: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_moderator: Types::Identity?
+    end
+
+    class CreateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?name: String,
+        ?mode: String,
+        ?privacy: String,
+        ?metadata: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?chime_bearer: String,
+        ?channel_id: String,
+        ?member_arns: Array[String],
+        ?moderator_arns: Array[String],
+        ?elastic_channel_configuration: Types::ElasticChannelConfiguration,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor mode: String?
+      attr_accessor privacy: String?
+      attr_accessor metadata: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor chime_bearer: String?
+      attr_accessor channel_id: String?
+      attr_accessor member_arns: Array[String]?
+      attr_accessor moderator_arns: Array[String]?
+      attr_accessor elastic_channel_configuration: Types::ElasticChannelConfiguration?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class CreateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class DeleteChannelBanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DeleteChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+    end
+
+    class DeleteChannelMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class DeleteChannelMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class DeleteChannelModeratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_moderator_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_moderator_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DeleteChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DeleteMessagingStreamingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class DescribeChannelBanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DescribeChannelBanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_ban: Types::ChannelBan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_ban: Types::ChannelBan?
+    end
+
+    class DescribeChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+    end
+
+    class DescribeChannelFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow: Types::ChannelFlow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow: Types::ChannelFlow?
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?app_instance_user_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_membership: Types::ChannelMembershipForAppInstanceUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_membership: Types::ChannelMembershipForAppInstanceUserSummary?
+    end
+
+    class DescribeChannelMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class DescribeChannelMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_membership: Types::ChannelMembership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_membership: Types::ChannelMembership?
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?app_instance_user_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Types::ChannelModeratedByAppInstanceUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Types::ChannelModeratedByAppInstanceUserSummary?
+    end
+
+    class DescribeChannelModeratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_moderator_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_moderator_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DescribeChannelModeratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_moderator: Types::ChannelModerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_moderator: Types::ChannelModerator?
+    end
+
+    class DescribeChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class DescribeChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Types::Channel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Types::Channel?
+    end
+
+    class DisassociateChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_flow_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_flow_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ElasticChannelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_sub_channels: Integer,
+        ?target_memberships_per_sub_channel: Integer,
+        ?minimum_membership_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_sub_channels: Integer?
+      attr_accessor target_memberships_per_sub_channel: Integer?
+      attr_accessor minimum_membership_percentage: Integer?
+    end
+
+    module ErrorCode
+      BadRequest: String
+      Conflict: String
+      Forbidden: String
+      NotFound: String
+      PreconditionFailed: String
+      ResourceLimitExceeded: String
+      ServiceFailure: String
+      AccessDenied: String
+      ServiceUnavailable: String
+      Throttled: String
+      Throttling: String
+      Unauthorized: String
+      Unprocessable: String
+      VoiceConnectorGroupAssociationsExist: String
+      PhoneNumberAssociationsExist: String
+    end
+
+    module ExpirationCriterion
+      CREATED_TIMESTAMP: String
+      LAST_MESSAGE_TIMESTAMP: String
+    end
+
+    class ExpirationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration_days: Integer,
+        ?expiration_criterion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration_days: Integer?
+      attr_accessor expiration_criterion: String?
+    end
+
+    module FallbackAction
+      CONTINUE: String
+      ABORT: String
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetChannelMembershipPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class GetChannelMembershipPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member: Types::Identity,
+        ?preferences: Types::ChannelMembershipPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member: Types::Identity?
+      attr_accessor preferences: Types::ChannelMembershipPreferences?
+    end
+
+    class GetChannelMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class GetChannelMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_message: Types::ChannelMessage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_message: Types::ChannelMessage?
+    end
+
+    class GetChannelMessageStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class GetChannelMessageStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::ChannelMessageStatusStructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::ChannelMessageStatusStructure?
+    end
+
+    class GetMessagingSessionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetMessagingSessionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::MessagingSessionEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::MessagingSessionEndpoint?
+    end
+
+    class GetMessagingStreamingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class GetMessagingStreamingConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_configurations: Array[Types::StreamingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_configurations: Array[Types::StreamingConfiguration]?
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    module InvocationType
+      ASYNC: String
+    end
+
+    class LambdaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?invocation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor invocation_type: String?
+    end
+
+    class ListChannelBansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ListChannelBansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?next_token: String,
+        ?channel_bans: Array[Types::ChannelBanSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor channel_bans: Array[Types::ChannelBanSummary]?
+    end
+
+    class ListChannelFlowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelFlowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flows: Array[Types::ChannelFlowSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flows: Array[Types::ChannelFlowSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelMembershipsForAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ListChannelMembershipsForAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_memberships: Array[Types::ChannelMembershipForAppInstanceUserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_memberships: Array[Types::ChannelMembershipForAppInstanceUserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ListChannelMembershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_memberships: Array[Types::ChannelMembershipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_memberships: Array[Types::ChannelMembershipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?sort_order: String,
+        ?not_before: Time,
+        ?not_after: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor sort_order: String?
+      attr_accessor not_before: Time?
+      attr_accessor not_after: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ListChannelMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?next_token: String,
+        ?channel_messages: Array[Types::ChannelMessageSummary],
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor channel_messages: Array[Types::ChannelMessageSummary]?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ListChannelModeratorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ListChannelModeratorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?next_token: String,
+        ?channel_moderators: Array[Types::ChannelModeratorSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor channel_moderators: Array[Types::ChannelModeratorSummary]?
+    end
+
+    class ListChannelsAssociatedWithChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsAssociatedWithChannelFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelAssociatedWithFlowSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelAssociatedWithFlowSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsModeratedByAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ListChannelsModeratedByAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelModeratedByAppInstanceUserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelModeratedByAppInstanceUserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?privacy: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor privacy: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class ListChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?chime_bearer: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?sub_channels: Array[Types::SubChannelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor sub_channels: Array[Types::SubChannelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MessageAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_values: Array[String]?
+    end
+
+    module MessagingDataType
+      Channel: String
+      ChannelMessage: String
+    end
+
+    class MessagingSessionEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class Processor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::ProcessorConfiguration,
+        ?execution_order: Integer,
+        ?fallback_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::ProcessorConfiguration?
+      attr_accessor execution_order: Integer?
+      attr_accessor fallback_action: String?
+    end
+
+    class ProcessorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda: Types::LambdaConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda: Types::LambdaConfiguration?
+    end
+
+    class PushNotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?body: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor body: String?
+      attr_accessor type: String?
+    end
+
+    class PushNotificationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_notifications: String,
+        ?filter_rule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_notifications: String?
+      attr_accessor filter_rule: String?
+    end
+
+    module PushNotificationType
+      DEFAULT: String
+      VOIP: String
+    end
+
+    class PutChannelExpirationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?chime_bearer: String,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class PutChannelExpirationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class PutChannelMembershipPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member_arn: String,
+        ?chime_bearer: String,
+        ?preferences: Types::ChannelMembershipPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member_arn: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor preferences: Types::ChannelMembershipPreferences?
+    end
+
+    class PutChannelMembershipPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?member: Types::Identity,
+        ?preferences: Types::ChannelMembershipPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor member: Types::Identity?
+      attr_accessor preferences: Types::ChannelMembershipPreferences?
+    end
+
+    class PutMessagingStreamingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?streaming_configurations: Array[Types::StreamingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor streaming_configurations: Array[Types::StreamingConfiguration]?
+    end
+
+    class PutMessagingStreamingConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_configurations: Array[Types::StreamingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_configurations: Array[Types::StreamingConfiguration]?
+    end
+
+    class RedactChannelMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class RedactChannelMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class SearchChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chime_bearer: String,
+        ?fields: Array[Types::SearchField],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chime_bearer: String?
+      attr_accessor fields: Array[Types::SearchField]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    module SearchFieldKey
+      MEMBERS: String
+    end
+
+    module SearchFieldOperator
+      EQUALS: String
+      INCLUDES: String
+    end
+
+    class SendChannelMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?content: String,
+        ?type: String,
+        ?persistence: String,
+        ?metadata: String,
+        ?client_request_token: String,
+        ?chime_bearer: String,
+        ?push_notification: Types::PushNotificationConfiguration,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?sub_channel_id: String,
+        ?content_type: String,
+        ?target: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor content: String?
+      attr_accessor type: String?
+      attr_accessor persistence: String?
+      attr_accessor metadata: String?
+      attr_accessor client_request_token: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor push_notification: Types::PushNotificationConfiguration?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor sub_channel_id: String?
+      attr_accessor content_type: String?
+      attr_accessor target: Array[Types::Target]?
+    end
+
+    class SendChannelMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?status: Types::ChannelMessageStatusStructure,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor status: Types::ChannelMessageStatusStructure?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StreamingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class SubChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sub_channel_id: String,
+        ?membership_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sub_channel_id: String?
+      attr_accessor membership_count: Integer?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_arn: String?
+    end
+
+    class ThrottledClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateChannelFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+        ?processors: Array[Types::Processor],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+      attr_accessor processors: Array[Types::Processor]?
+      attr_accessor name: String?
+    end
+
+    class UpdateChannelFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_flow_arn: String?
+    end
+
+    class UpdateChannelMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?content: String,
+        ?metadata: String,
+        ?chime_bearer: String,
+        ?sub_channel_id: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor content: String?
+      attr_accessor metadata: String?
+      attr_accessor chime_bearer: String?
+      attr_accessor sub_channel_id: String?
+      attr_accessor content_type: String?
+    end
+
+    class UpdateChannelMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?message_id: String,
+        ?status: Types::ChannelMessageStatusStructure,
+        ?sub_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor message_id: String?
+      attr_accessor status: Types::ChannelMessageStatusStructure?
+      attr_accessor sub_channel_id: String?
+    end
+
+    class UpdateChannelReadMarkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class UpdateChannelReadMarkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class UpdateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?name: String,
+        ?mode: String,
+        ?metadata: String,
+        ?chime_bearer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor name: String?
+      attr_accessor mode: String?
+      attr_accessor metadata: String?
+      attr_accessor chime_bearer: String?
+    end
+
+    class UpdateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+  end
+end

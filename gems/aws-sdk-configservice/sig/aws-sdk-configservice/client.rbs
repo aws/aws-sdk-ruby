@@ -1,0 +1,1357 @@
+module Aws::ConfigService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ConfigService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateResourceTypesResponse
+      include Smithy::Client::_Response[Types::AssociateResourceTypesResponse]
+      def configuration_recorder: () -> Types::ConfigurationRecorder?
+    end
+    def associate_resource_types: (
+      ?configuration_recorder_arn: String,
+      ?resource_types: Array[String]
+    ) -> _AssociateResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceTypesResponse
+
+    interface _BatchGetAggregateResourceConfigResponse
+      include Smithy::Client::_Response[Types::BatchGetAggregateResourceConfigResponse]
+      def base_configuration_items: () -> Array[Types::BaseConfigurationItem]?
+      def unprocessed_resource_identifiers: () -> Array[Types::AggregateResourceIdentifier]?
+    end
+    def batch_get_aggregate_resource_config: (
+      ?configuration_aggregator_name: String,
+      ?resource_identifiers: Array[
+        {
+          source_account_id: String,
+          source_region: String,
+          resource_id: String,
+          resource_type: String,
+          resource_name: String
+        }
+      ]
+    ) -> _BatchGetAggregateResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAggregateResourceConfigResponse
+
+    interface _BatchGetResourceConfigResponse
+      include Smithy::Client::_Response[Types::BatchGetResourceConfigResponse]
+      def base_configuration_items: () -> Array[Types::BaseConfigurationItem]?
+      def unprocessed_resource_keys: () -> Array[Types::ResourceKey]?
+    end
+    def batch_get_resource_config: (
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ]
+    ) -> _BatchGetResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetResourceConfigResponse
+
+    interface _DeleteAggregationAuthorizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_aggregation_authorization: (
+      ?authorized_account_id: String,
+      ?authorized_aws_region: String
+    ) -> _DeleteAggregationAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAggregationAuthorizationResponse
+
+    interface _DeleteConfigRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_config_rule: (
+      ?config_rule_name: String
+    ) -> _DeleteConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigRuleResponse
+
+    interface _DeleteConfigurationAggregatorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configuration_aggregator: (
+      ?configuration_aggregator_name: String
+    ) -> _DeleteConfigurationAggregatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationAggregatorResponse
+
+    interface _DeleteConfigurationRecorderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configuration_recorder: (
+      ?configuration_recorder_name: String
+    ) -> _DeleteConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationRecorderResponse
+
+    interface _DeleteConformancePackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_conformance_pack: (
+      ?conformance_pack_name: String
+    ) -> _DeleteConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConformancePackResponse
+
+    interface _DeleteDeliveryChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_delivery_channel: (
+      ?delivery_channel_name: String
+    ) -> _DeleteDeliveryChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliveryChannelResponse
+
+    interface _DeleteEvaluationResultsResponse
+      include Smithy::Client::_Response[Types::DeleteEvaluationResultsResponse]
+    end
+    def delete_evaluation_results: (
+      ?config_rule_name: String
+    ) -> _DeleteEvaluationResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEvaluationResultsResponse
+
+    interface _DeleteOrganizationConfigRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_organization_config_rule: (
+      ?organization_config_rule_name: String
+    ) -> _DeleteOrganizationConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOrganizationConfigRuleResponse
+
+    interface _DeleteOrganizationConformancePackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_organization_conformance_pack: (
+      ?organization_conformance_pack_name: String
+    ) -> _DeleteOrganizationConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOrganizationConformancePackResponse
+
+    interface _DeletePendingAggregationRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_pending_aggregation_request: (
+      ?requester_account_id: String,
+      ?requester_aws_region: String
+    ) -> _DeletePendingAggregationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePendingAggregationRequestResponse
+
+    interface _DeleteRemediationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteRemediationConfigurationResponse]
+    end
+    def delete_remediation_configuration: (
+      ?config_rule_name: String,
+      ?resource_type: String
+    ) -> _DeleteRemediationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRemediationConfigurationResponse
+
+    interface _DeleteRemediationExceptionsResponse
+      include Smithy::Client::_Response[Types::DeleteRemediationExceptionsResponse]
+      def failed_batches: () -> Array[Types::FailedDeleteRemediationExceptionsBatch]?
+    end
+    def delete_remediation_exceptions: (
+      ?config_rule_name: String,
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ]
+    ) -> _DeleteRemediationExceptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRemediationExceptionsResponse
+
+    interface _DeleteResourceConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_config: (
+      ?resource_type: String,
+      ?resource_id: String
+    ) -> _DeleteResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceConfigResponse
+
+    interface _DeleteRetentionConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_retention_configuration: (
+      ?retention_configuration_name: String
+    ) -> _DeleteRetentionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetentionConfigurationResponse
+
+    interface _DeleteServiceLinkedConfigurationRecorderResponse
+      include Smithy::Client::_Response[Types::DeleteServiceLinkedConfigurationRecorderResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def delete_service_linked_configuration_recorder: (
+      ?service_principal: String
+    ) -> _DeleteServiceLinkedConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceLinkedConfigurationRecorderResponse
+
+    interface _DeleteStoredQueryResponse
+      include Smithy::Client::_Response[Types::DeleteStoredQueryResponse]
+    end
+    def delete_stored_query: (
+      ?query_name: String
+    ) -> _DeleteStoredQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStoredQueryResponse
+
+    interface _DeliverConfigSnapshotResponse
+      include Smithy::Client::_Response[Types::DeliverConfigSnapshotResponse]
+      def config_snapshot_id: () -> String?
+    end
+    def deliver_config_snapshot: (
+      ?delivery_channel_name: String
+    ) -> _DeliverConfigSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeliverConfigSnapshotResponse
+
+    interface _DescribeAggregateComplianceByConfigRulesResponse
+      include Smithy::Client::_Response[Types::DescribeAggregateComplianceByConfigRulesResponse]
+      def aggregate_compliance_by_config_rules: () -> Array[Types::AggregateComplianceByConfigRule]?
+      def next_token: () -> String?
+    end
+    def describe_aggregate_compliance_by_config_rules: (
+      ?configuration_aggregator_name: String,
+      ?filters: {
+        config_rule_name: String,
+        compliance_type: String,
+        account_id: String,
+        aws_region: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeAggregateComplianceByConfigRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAggregateComplianceByConfigRulesResponse
+
+    interface _DescribeAggregateComplianceByConformancePacksResponse
+      include Smithy::Client::_Response[Types::DescribeAggregateComplianceByConformancePacksResponse]
+      def aggregate_compliance_by_conformance_packs: () -> Array[Types::AggregateComplianceByConformancePack]?
+      def next_token: () -> String?
+    end
+    def describe_aggregate_compliance_by_conformance_packs: (
+      ?configuration_aggregator_name: String,
+      ?filters: {
+        conformance_pack_name: String,
+        compliance_type: String,
+        account_id: String,
+        aws_region: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeAggregateComplianceByConformancePacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAggregateComplianceByConformancePacksResponse
+
+    interface _DescribeAggregationAuthorizationsResponse
+      include Smithy::Client::_Response[Types::DescribeAggregationAuthorizationsResponse]
+      def aggregation_authorizations: () -> Array[Types::AggregationAuthorization]?
+      def next_token: () -> String?
+    end
+    def describe_aggregation_authorizations: (
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeAggregationAuthorizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAggregationAuthorizationsResponse
+
+    interface _DescribeComplianceByConfigRuleResponse
+      include Smithy::Client::_Response[Types::DescribeComplianceByConfigRuleResponse]
+      def compliance_by_config_rules: () -> Array[Types::ComplianceByConfigRule]?
+      def next_token: () -> String?
+    end
+    def describe_compliance_by_config_rule: (
+      ?config_rule_names: Array[String],
+      ?compliance_types: Array[String],
+      ?next_token: String
+    ) -> _DescribeComplianceByConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComplianceByConfigRuleResponse
+
+    interface _DescribeComplianceByResourceResponse
+      include Smithy::Client::_Response[Types::DescribeComplianceByResourceResponse]
+      def compliance_by_resources: () -> Array[Types::ComplianceByResource]?
+      def next_token: () -> String?
+    end
+    def describe_compliance_by_resource: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?compliance_types: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeComplianceByResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComplianceByResourceResponse
+
+    interface _DescribeConfigRuleEvaluationStatusResponse
+      include Smithy::Client::_Response[Types::DescribeConfigRuleEvaluationStatusResponse]
+      def config_rules_evaluation_status: () -> Array[Types::ConfigRuleEvaluationStatus]?
+      def next_token: () -> String?
+    end
+    def describe_config_rule_evaluation_status: (
+      ?config_rule_names: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeConfigRuleEvaluationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigRuleEvaluationStatusResponse
+
+    interface _DescribeConfigRulesResponse
+      include Smithy::Client::_Response[Types::DescribeConfigRulesResponse]
+      def config_rules: () -> Array[Types::ConfigRule]?
+      def next_token: () -> String?
+    end
+    def describe_config_rules: (
+      ?config_rule_names: Array[String],
+      ?next_token: String,
+      ?filters: {
+        evaluation_mode: String
+      }
+    ) -> _DescribeConfigRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigRulesResponse
+
+    interface _DescribeConfigurationAggregatorSourcesStatusResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationAggregatorSourcesStatusResponse]
+      def aggregated_source_status_list: () -> Array[Types::AggregatedSourceStatus]?
+      def next_token: () -> String?
+    end
+    def describe_configuration_aggregator_sources_status: (
+      ?configuration_aggregator_name: String,
+      ?update_status: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeConfigurationAggregatorSourcesStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationAggregatorSourcesStatusResponse
+
+    interface _DescribeConfigurationAggregatorsResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationAggregatorsResponse]
+      def configuration_aggregators: () -> Array[Types::ConfigurationAggregator]?
+      def next_token: () -> String?
+    end
+    def describe_configuration_aggregators: (
+      ?configuration_aggregator_names: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeConfigurationAggregatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationAggregatorsResponse
+
+    interface _DescribeConfigurationRecorderStatusResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationRecorderStatusResponse]
+      def configuration_recorders_status: () -> Array[Types::ConfigurationRecorderStatus]?
+    end
+    def describe_configuration_recorder_status: (
+      ?configuration_recorder_names: Array[String],
+      ?service_principal: String,
+      ?arn: String
+    ) -> _DescribeConfigurationRecorderStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationRecorderStatusResponse
+
+    interface _DescribeConfigurationRecordersResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationRecordersResponse]
+      def configuration_recorders: () -> Array[Types::ConfigurationRecorder]?
+    end
+    def describe_configuration_recorders: (
+      ?configuration_recorder_names: Array[String],
+      ?service_principal: String,
+      ?arn: String
+    ) -> _DescribeConfigurationRecordersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationRecordersResponse
+
+    interface _DescribeConformancePackComplianceResponse
+      include Smithy::Client::_Response[Types::DescribeConformancePackComplianceResponse]
+      def conformance_pack_name: () -> String?
+      def conformance_pack_rule_compliance_list: () -> Array[Types::ConformancePackRuleCompliance]?
+      def next_token: () -> String?
+    end
+    def describe_conformance_pack_compliance: (
+      ?conformance_pack_name: String,
+      ?filters: {
+        config_rule_names: Array[String],
+        compliance_type: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeConformancePackComplianceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConformancePackComplianceResponse
+
+    interface _DescribeConformancePackStatusResponse
+      include Smithy::Client::_Response[Types::DescribeConformancePackStatusResponse]
+      def conformance_pack_status_details: () -> Array[Types::ConformancePackStatusDetail]?
+      def next_token: () -> String?
+    end
+    def describe_conformance_pack_status: (
+      ?conformance_pack_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeConformancePackStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConformancePackStatusResponse
+
+    interface _DescribeConformancePacksResponse
+      include Smithy::Client::_Response[Types::DescribeConformancePacksResponse]
+      def conformance_pack_details: () -> Array[Types::ConformancePackDetail]?
+      def next_token: () -> String?
+    end
+    def describe_conformance_packs: (
+      ?conformance_pack_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeConformancePacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConformancePacksResponse
+
+    interface _DescribeDeliveryChannelStatusResponse
+      include Smithy::Client::_Response[Types::DescribeDeliveryChannelStatusResponse]
+      def delivery_channels_status: () -> Array[Types::DeliveryChannelStatus]?
+    end
+    def describe_delivery_channel_status: (
+      ?delivery_channel_names: Array[String]
+    ) -> _DescribeDeliveryChannelStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliveryChannelStatusResponse
+
+    interface _DescribeDeliveryChannelsResponse
+      include Smithy::Client::_Response[Types::DescribeDeliveryChannelsResponse]
+      def delivery_channels: () -> Array[Types::DeliveryChannel]?
+    end
+    def describe_delivery_channels: (
+      ?delivery_channel_names: Array[String]
+    ) -> _DescribeDeliveryChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliveryChannelsResponse
+
+    interface _DescribeOrganizationConfigRuleStatusesResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigRuleStatusesResponse]
+      def organization_config_rule_statuses: () -> Array[Types::OrganizationConfigRuleStatus]?
+      def next_token: () -> String?
+    end
+    def describe_organization_config_rule_statuses: (
+      ?organization_config_rule_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeOrganizationConfigRuleStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigRuleStatusesResponse
+
+    interface _DescribeOrganizationConfigRulesResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigRulesResponse]
+      def organization_config_rules: () -> Array[Types::OrganizationConfigRule]?
+      def next_token: () -> String?
+    end
+    def describe_organization_config_rules: (
+      ?organization_config_rule_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeOrganizationConfigRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigRulesResponse
+
+    interface _DescribeOrganizationConformancePackStatusesResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConformancePackStatusesResponse]
+      def organization_conformance_pack_statuses: () -> Array[Types::OrganizationConformancePackStatus]?
+      def next_token: () -> String?
+    end
+    def describe_organization_conformance_pack_statuses: (
+      ?organization_conformance_pack_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeOrganizationConformancePackStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConformancePackStatusesResponse
+
+    interface _DescribeOrganizationConformancePacksResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConformancePacksResponse]
+      def organization_conformance_packs: () -> Array[Types::OrganizationConformancePack]?
+      def next_token: () -> String?
+    end
+    def describe_organization_conformance_packs: (
+      ?organization_conformance_pack_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeOrganizationConformancePacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConformancePacksResponse
+
+    interface _DescribePendingAggregationRequestsResponse
+      include Smithy::Client::_Response[Types::DescribePendingAggregationRequestsResponse]
+      def pending_aggregation_requests: () -> Array[Types::PendingAggregationRequest]?
+      def next_token: () -> String?
+    end
+    def describe_pending_aggregation_requests: (
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribePendingAggregationRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePendingAggregationRequestsResponse
+
+    interface _DescribeRemediationConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeRemediationConfigurationsResponse]
+      def remediation_configurations: () -> Array[Types::RemediationConfiguration]?
+    end
+    def describe_remediation_configurations: (
+      ?config_rule_names: Array[String]
+    ) -> _DescribeRemediationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRemediationConfigurationsResponse
+
+    interface _DescribeRemediationExceptionsResponse
+      include Smithy::Client::_Response[Types::DescribeRemediationExceptionsResponse]
+      def remediation_exceptions: () -> Array[Types::RemediationException]?
+      def next_token: () -> String?
+    end
+    def describe_remediation_exceptions: (
+      ?config_rule_name: String,
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeRemediationExceptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRemediationExceptionsResponse
+
+    interface _DescribeRemediationExecutionStatusResponse
+      include Smithy::Client::_Response[Types::DescribeRemediationExecutionStatusResponse]
+      def remediation_execution_statuses: () -> Array[Types::RemediationExecutionStatus]?
+      def next_token: () -> String?
+    end
+    def describe_remediation_execution_status: (
+      ?config_rule_name: String,
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeRemediationExecutionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRemediationExecutionStatusResponse
+
+    interface _DescribeRetentionConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeRetentionConfigurationsResponse]
+      def retention_configurations: () -> Array[Types::RetentionConfiguration]?
+      def next_token: () -> String?
+    end
+    def describe_retention_configurations: (
+      ?retention_configuration_names: Array[String],
+      ?next_token: String
+    ) -> _DescribeRetentionConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRetentionConfigurationsResponse
+
+    interface _DisassociateResourceTypesResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceTypesResponse]
+      def configuration_recorder: () -> Types::ConfigurationRecorder?
+    end
+    def disassociate_resource_types: (
+      ?configuration_recorder_arn: String,
+      ?resource_types: Array[String]
+    ) -> _DisassociateResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceTypesResponse
+
+    interface _GetAggregateComplianceDetailsByConfigRuleResponse
+      include Smithy::Client::_Response[Types::GetAggregateComplianceDetailsByConfigRuleResponse]
+      def aggregate_evaluation_results: () -> Array[Types::AggregateEvaluationResult]?
+      def next_token: () -> String?
+    end
+    def get_aggregate_compliance_details_by_config_rule: (
+      ?configuration_aggregator_name: String,
+      ?config_rule_name: String,
+      ?account_id: String,
+      ?aws_region: String,
+      ?compliance_type: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetAggregateComplianceDetailsByConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAggregateComplianceDetailsByConfigRuleResponse
+
+    interface _GetAggregateConfigRuleComplianceSummaryResponse
+      include Smithy::Client::_Response[Types::GetAggregateConfigRuleComplianceSummaryResponse]
+      def group_by_key: () -> String?
+      def aggregate_compliance_counts: () -> Array[Types::AggregateComplianceCount]?
+      def next_token: () -> String?
+    end
+    def get_aggregate_config_rule_compliance_summary: (
+      ?configuration_aggregator_name: String,
+      ?filters: {
+        account_id: String,
+        aws_region: String
+      },
+      ?group_by_key: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetAggregateConfigRuleComplianceSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAggregateConfigRuleComplianceSummaryResponse
+
+    interface _GetAggregateConformancePackComplianceSummaryResponse
+      include Smithy::Client::_Response[Types::GetAggregateConformancePackComplianceSummaryResponse]
+      def aggregate_conformance_pack_compliance_summaries: () -> Array[Types::AggregateConformancePackComplianceSummary]?
+      def group_by_key: () -> String?
+      def next_token: () -> String?
+    end
+    def get_aggregate_conformance_pack_compliance_summary: (
+      ?configuration_aggregator_name: String,
+      ?filters: {
+        account_id: String,
+        aws_region: String
+      },
+      ?group_by_key: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetAggregateConformancePackComplianceSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAggregateConformancePackComplianceSummaryResponse
+
+    interface _GetAggregateDiscoveredResourceCountsResponse
+      include Smithy::Client::_Response[Types::GetAggregateDiscoveredResourceCountsResponse]
+      def total_discovered_resources: () -> Integer?
+      def group_by_key: () -> String?
+      def grouped_resource_counts: () -> Array[Types::GroupedResourceCount]?
+      def next_token: () -> String?
+    end
+    def get_aggregate_discovered_resource_counts: (
+      ?configuration_aggregator_name: String,
+      ?filters: {
+        resource_type: String,
+        account_id: String,
+        region: String
+      },
+      ?group_by_key: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetAggregateDiscoveredResourceCountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAggregateDiscoveredResourceCountsResponse
+
+    interface _GetAggregateResourceConfigResponse
+      include Smithy::Client::_Response[Types::GetAggregateResourceConfigResponse]
+      def configuration_item: () -> Types::ConfigurationItem?
+    end
+    def get_aggregate_resource_config: (
+      ?configuration_aggregator_name: String,
+      ?resource_identifier: {
+        source_account_id: String,
+        source_region: String,
+        resource_id: String,
+        resource_type: String,
+        resource_name: String
+      }
+    ) -> _GetAggregateResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAggregateResourceConfigResponse
+
+    interface _GetComplianceDetailsByConfigRuleResponse
+      include Smithy::Client::_Response[Types::GetComplianceDetailsByConfigRuleResponse]
+      def evaluation_results: () -> Array[Types::EvaluationResult]?
+      def next_token: () -> String?
+    end
+    def get_compliance_details_by_config_rule: (
+      ?config_rule_name: String,
+      ?compliance_types: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetComplianceDetailsByConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceDetailsByConfigRuleResponse
+
+    interface _GetComplianceDetailsByResourceResponse
+      include Smithy::Client::_Response[Types::GetComplianceDetailsByResourceResponse]
+      def evaluation_results: () -> Array[Types::EvaluationResult]?
+      def next_token: () -> String?
+    end
+    def get_compliance_details_by_resource: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?compliance_types: Array[String],
+      ?next_token: String,
+      ?resource_evaluation_id: String
+    ) -> _GetComplianceDetailsByResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceDetailsByResourceResponse
+
+    interface _GetComplianceSummaryByConfigRuleResponse
+      include Smithy::Client::_Response[Types::GetComplianceSummaryByConfigRuleResponse]
+      def compliance_summary: () -> Types::ComplianceSummary?
+    end
+    def get_compliance_summary_by_config_rule: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceSummaryByConfigRuleResponse
+
+    interface _GetComplianceSummaryByResourceTypeResponse
+      include Smithy::Client::_Response[Types::GetComplianceSummaryByResourceTypeResponse]
+      def compliance_summaries_by_resource_type: () -> Array[Types::ComplianceSummaryByResourceType]?
+    end
+    def get_compliance_summary_by_resource_type: (
+      ?resource_types: Array[String]
+    ) -> _GetComplianceSummaryByResourceTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceSummaryByResourceTypeResponse
+
+    interface _GetConformancePackComplianceDetailsResponse
+      include Smithy::Client::_Response[Types::GetConformancePackComplianceDetailsResponse]
+      def conformance_pack_name: () -> String?
+      def conformance_pack_rule_evaluation_results: () -> Array[Types::ConformancePackEvaluationResult]?
+      def next_token: () -> String?
+    end
+    def get_conformance_pack_compliance_details: (
+      ?conformance_pack_name: String,
+      ?filters: {
+        config_rule_names: Array[String],
+        compliance_type: String,
+        resource_type: String,
+        resource_ids: Array[String]
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetConformancePackComplianceDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConformancePackComplianceDetailsResponse
+
+    interface _GetConformancePackComplianceSummaryResponse
+      include Smithy::Client::_Response[Types::GetConformancePackComplianceSummaryResponse]
+      def conformance_pack_compliance_summary_list: () -> Array[Types::ConformancePackComplianceSummary]?
+      def next_token: () -> String?
+    end
+    def get_conformance_pack_compliance_summary: (
+      ?conformance_pack_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetConformancePackComplianceSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConformancePackComplianceSummaryResponse
+
+    interface _GetCustomRulePolicyResponse
+      include Smithy::Client::_Response[Types::GetCustomRulePolicyResponse]
+      def policy_text: () -> String?
+    end
+    def get_custom_rule_policy: (
+      ?config_rule_name: String
+    ) -> _GetCustomRulePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomRulePolicyResponse
+
+    interface _GetDiscoveredResourceCountsResponse
+      include Smithy::Client::_Response[Types::GetDiscoveredResourceCountsResponse]
+      def total_discovered_resources: () -> Integer?
+      def resource_counts: () -> Array[Types::ResourceCount]?
+      def next_token: () -> String?
+    end
+    def get_discovered_resource_counts: (
+      ?resource_types: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetDiscoveredResourceCountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDiscoveredResourceCountsResponse
+
+    interface _GetOrganizationConfigRuleDetailedStatusResponse
+      include Smithy::Client::_Response[Types::GetOrganizationConfigRuleDetailedStatusResponse]
+      def organization_config_rule_detailed_status: () -> Array[Types::MemberAccountStatus]?
+      def next_token: () -> String?
+    end
+    def get_organization_config_rule_detailed_status: (
+      ?organization_config_rule_name: String,
+      ?filters: {
+        account_id: String,
+        member_account_rule_status: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetOrganizationConfigRuleDetailedStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationConfigRuleDetailedStatusResponse
+
+    interface _GetOrganizationConformancePackDetailedStatusResponse
+      include Smithy::Client::_Response[Types::GetOrganizationConformancePackDetailedStatusResponse]
+      def organization_conformance_pack_detailed_statuses: () -> Array[Types::OrganizationConformancePackDetailedStatus]?
+      def next_token: () -> String?
+    end
+    def get_organization_conformance_pack_detailed_status: (
+      ?organization_conformance_pack_name: String,
+      ?filters: {
+        account_id: String,
+        status: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetOrganizationConformancePackDetailedStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationConformancePackDetailedStatusResponse
+
+    interface _GetOrganizationCustomRulePolicyResponse
+      include Smithy::Client::_Response[Types::GetOrganizationCustomRulePolicyResponse]
+      def policy_text: () -> String?
+    end
+    def get_organization_custom_rule_policy: (
+      ?organization_config_rule_name: String
+    ) -> _GetOrganizationCustomRulePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationCustomRulePolicyResponse
+
+    interface _GetResourceConfigHistoryResponse
+      include Smithy::Client::_Response[Types::GetResourceConfigHistoryResponse]
+      def configuration_items: () -> Array[Types::ConfigurationItem]?
+      def next_token: () -> String?
+    end
+    def get_resource_config_history: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?later_time: Time,
+      ?earlier_time: Time,
+      ?chronological_order: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _GetResourceConfigHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceConfigHistoryResponse
+
+    interface _GetResourceEvaluationSummaryResponse
+      include Smithy::Client::_Response[Types::GetResourceEvaluationSummaryResponse]
+      def resource_evaluation_id: () -> String?
+      def evaluation_mode: () -> String?
+      def evaluation_status: () -> Types::EvaluationStatus?
+      def evaluation_start_timestamp: () -> Time?
+      def compliance: () -> String?
+      def evaluation_context: () -> Types::EvaluationContext?
+      def resource_details: () -> Types::ResourceDetails?
+    end
+    def get_resource_evaluation_summary: (
+      ?resource_evaluation_id: String
+    ) -> _GetResourceEvaluationSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceEvaluationSummaryResponse
+
+    interface _GetStoredQueryResponse
+      include Smithy::Client::_Response[Types::GetStoredQueryResponse]
+      def stored_query: () -> Types::StoredQuery?
+    end
+    def get_stored_query: (
+      ?query_name: String
+    ) -> _GetStoredQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStoredQueryResponse
+
+    interface _ListAggregateDiscoveredResourcesResponse
+      include Smithy::Client::_Response[Types::ListAggregateDiscoveredResourcesResponse]
+      def resource_identifiers: () -> Array[Types::AggregateResourceIdentifier]?
+      def next_token: () -> String?
+    end
+    def list_aggregate_discovered_resources: (
+      ?configuration_aggregator_name: String,
+      ?resource_type: String,
+      ?filters: {
+        account_id: String,
+        resource_id: String,
+        resource_name: String,
+        region: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListAggregateDiscoveredResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAggregateDiscoveredResourcesResponse
+
+    interface _ListConfigurationRecordersResponse
+      include Smithy::Client::_Response[Types::ListConfigurationRecordersResponse]
+      def configuration_recorder_summaries: () -> Array[Types::ConfigurationRecorderSummary]?
+      def next_token: () -> String?
+    end
+    def list_configuration_recorders: (
+      ?filters: Array[
+        {
+          filter_name: String,
+          filter_value: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationRecordersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationRecordersResponse
+
+    interface _ListConformancePackComplianceScoresResponse
+      include Smithy::Client::_Response[Types::ListConformancePackComplianceScoresResponse]
+      def next_token: () -> String?
+      def conformance_pack_compliance_scores: () -> Array[Types::ConformancePackComplianceScore]?
+    end
+    def list_conformance_pack_compliance_scores: (
+      ?filters: {
+        conformance_pack_names: Array[String]
+      },
+      ?sort_order: String,
+      ?sort_by: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListConformancePackComplianceScoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConformancePackComplianceScoresResponse
+
+    interface _ListDiscoveredResourcesResponse
+      include Smithy::Client::_Response[Types::ListDiscoveredResourcesResponse]
+      def resource_identifiers: () -> Array[Types::ResourceIdentifier]?
+      def next_token: () -> String?
+    end
+    def list_discovered_resources: (
+      ?resource_type: String,
+      ?resource_ids: Array[String],
+      ?resource_name: String,
+      ?limit: Integer,
+      ?include_deleted_resources: bool,
+      ?next_token: String
+    ) -> _ListDiscoveredResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoveredResourcesResponse
+
+    interface _ListResourceEvaluationsResponse
+      include Smithy::Client::_Response[Types::ListResourceEvaluationsResponse]
+      def resource_evaluations: () -> Array[Types::ResourceEvaluation]?
+      def next_token: () -> String?
+    end
+    def list_resource_evaluations: (
+      ?filters: {
+        evaluation_mode: String,
+        time_window: {
+          start_time: Time,
+          end_time: untyped
+        },
+        evaluation_context_identifier: String
+      },
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListResourceEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceEvaluationsResponse
+
+    interface _ListStoredQueriesResponse
+      include Smithy::Client::_Response[Types::ListStoredQueriesResponse]
+      def stored_query_metadata: () -> Array[Types::StoredQueryMetadata]?
+      def next_token: () -> String?
+    end
+    def list_stored_queries: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStoredQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStoredQueriesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutAggregationAuthorizationResponse
+      include Smithy::Client::_Response[Types::PutAggregationAuthorizationResponse]
+      def aggregation_authorization: () -> Types::AggregationAuthorization?
+    end
+    def put_aggregation_authorization: (
+      ?authorized_account_id: String,
+      ?authorized_aws_region: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutAggregationAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAggregationAuthorizationResponse
+
+    interface _PutConfigRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_config_rule: (
+      ?config_rule: {
+        config_rule_name: String,
+        config_rule_arn: String,
+        config_rule_id: String,
+        description: String,
+        scope: {
+          compliance_resource_types: Array[String],
+          tag_key: String,
+          tag_value: untyped,
+          compliance_resource_id: String
+        },
+        source: {
+          owner: String,
+          source_identifier: untyped,
+          source_details: Array[
+            {
+              event_source: String,
+              message_type: String,
+              maximum_execution_frequency: String
+            }
+          ],
+          custom_policy_details: {
+            policy_runtime: String,
+            policy_text: String,
+            enable_debug_log_delivery: bool
+          }
+        },
+        input_parameters: String,
+        maximum_execution_frequency: untyped,
+        config_rule_state: String,
+        created_by: untyped,
+        evaluation_modes: Array[
+          {
+            mode: String
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigRuleResponse
+
+    interface _PutConfigurationAggregatorResponse
+      include Smithy::Client::_Response[Types::PutConfigurationAggregatorResponse]
+      def configuration_aggregator: () -> Types::ConfigurationAggregator?
+    end
+    def put_configuration_aggregator: (
+      ?configuration_aggregator_name: String,
+      ?account_aggregation_sources: Array[
+        {
+          account_ids: Array[String],
+          all_aws_regions: bool,
+          aws_regions: Array[String]
+        }
+      ],
+      ?organization_aggregation_source: {
+        role_arn: String,
+        aws_regions: Array[String],
+        all_aws_regions: bool
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?aggregator_filters: {
+        resource_type: {
+          type: String,
+          value: Array[String]
+        },
+        service_principal: {
+          type: untyped,
+          value: Array[String]
+        }
+      }
+    ) -> _PutConfigurationAggregatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigurationAggregatorResponse
+
+    interface _PutConfigurationRecorderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_configuration_recorder: (
+      ?configuration_recorder: {
+        arn: String,
+        name: String,
+        role_arn: String,
+        recording_group: {
+          all_supported: bool,
+          include_global_resource_types: bool,
+          resource_types: Array[String],
+          exclusion_by_resource_types: {
+            resource_types: untyped
+          },
+          recording_strategy: {
+            use_only: String
+          }
+        },
+        recording_mode: {
+          recording_frequency: String,
+          recording_mode_overrides: Array[
+            {
+              description: String,
+              resource_types: Array[String],
+              recording_frequency: untyped
+            }
+          ]
+        },
+        recording_scope: String,
+        service_principal: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigurationRecorderResponse
+
+    interface _PutConformancePackResponse
+      include Smithy::Client::_Response[Types::PutConformancePackResponse]
+      def conformance_pack_arn: () -> String?
+    end
+    def put_conformance_pack: (
+      ?conformance_pack_name: String,
+      ?template_s3_uri: String,
+      ?template_body: String,
+      ?delivery_s3_bucket: String,
+      ?delivery_s3_key_prefix: String,
+      ?conformance_pack_input_parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: String
+        }
+      ],
+      ?template_ssm_document_details: {
+        document_name: String,
+        document_version: String
+      }
+    ) -> _PutConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConformancePackResponse
+
+    interface _PutDeliveryChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_delivery_channel: (
+      ?delivery_channel: {
+        name: String,
+        s3_bucket_name: String,
+        s3_key_prefix: untyped,
+        s3_kms_key_arn: untyped,
+        sns_topic_arn: untyped,
+        config_snapshot_delivery_properties: {
+          delivery_frequency: String
+        }
+      }
+    ) -> _PutDeliveryChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliveryChannelResponse
+
+    interface _PutEvaluationsResponse
+      include Smithy::Client::_Response[Types::PutEvaluationsResponse]
+      def failed_evaluations: () -> Array[Types::Evaluation]?
+    end
+    def put_evaluations: (
+      ?evaluations: Array[
+        {
+          compliance_resource_type: String,
+          compliance_resource_id: String,
+          compliance_type: String,
+          annotation: untyped,
+          ordering_timestamp: Time
+        }
+      ],
+      ?result_token: String,
+      ?test_mode: bool
+    ) -> _PutEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEvaluationsResponse
+
+    interface _PutExternalEvaluationResponse
+      include Smithy::Client::_Response[Types::PutExternalEvaluationResponse]
+    end
+    def put_external_evaluation: (
+      ?config_rule_name: String,
+      ?external_evaluation: {
+        compliance_resource_type: String,
+        compliance_resource_id: String,
+        compliance_type: String,
+        annotation: untyped,
+        ordering_timestamp: Time
+      }
+    ) -> _PutExternalEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutExternalEvaluationResponse
+
+    interface _PutOrganizationConfigRuleResponse
+      include Smithy::Client::_Response[Types::PutOrganizationConfigRuleResponse]
+      def organization_config_rule_arn: () -> String?
+    end
+    def put_organization_config_rule: (
+      ?organization_config_rule_name: String,
+      ?organization_managed_rule_metadata: {
+        description: String,
+        rule_identifier: String,
+        input_parameters: String,
+        maximum_execution_frequency: String,
+        resource_types_scope: Array[String],
+        resource_id_scope: String,
+        tag_key_scope: String,
+        tag_value_scope: untyped
+      },
+      ?organization_custom_rule_metadata: {
+        description: String,
+        lambda_function_arn: String,
+        organization_config_rule_trigger_types: Array[String],
+        input_parameters: String,
+        maximum_execution_frequency: String,
+        resource_types_scope: Array[String],
+        resource_id_scope: String,
+        tag_key_scope: String,
+        tag_value_scope: untyped
+      },
+      ?excluded_accounts: Array[String],
+      ?organization_custom_policy_rule_metadata: {
+        description: String,
+        organization_config_rule_trigger_types: Array[String],
+        input_parameters: String,
+        maximum_execution_frequency: String,
+        resource_types_scope: Array[String],
+        resource_id_scope: String,
+        tag_key_scope: String,
+        tag_value_scope: String,
+        policy_runtime: String,
+        policy_text: String,
+        debug_log_delivery_accounts: Array[String]
+      }
+    ) -> _PutOrganizationConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOrganizationConfigRuleResponse
+
+    interface _PutOrganizationConformancePackResponse
+      include Smithy::Client::_Response[Types::PutOrganizationConformancePackResponse]
+      def organization_conformance_pack_arn: () -> String?
+    end
+    def put_organization_conformance_pack: (
+      ?organization_conformance_pack_name: String,
+      ?template_s3_uri: String,
+      ?template_body: String,
+      ?delivery_s3_bucket: String,
+      ?delivery_s3_key_prefix: String,
+      ?conformance_pack_input_parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: String
+        }
+      ],
+      ?excluded_accounts: Array[String]
+    ) -> _PutOrganizationConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOrganizationConformancePackResponse
+
+    interface _PutRemediationConfigurationsResponse
+      include Smithy::Client::_Response[Types::PutRemediationConfigurationsResponse]
+      def failed_batches: () -> Array[Types::FailedRemediationBatch]?
+    end
+    def put_remediation_configurations: (
+      ?remediation_configurations: Array[
+        {
+          config_rule_name: String,
+          target_type: String,
+          target_id: String,
+          target_version: String,
+          parameters: Hash[String,
+            {
+              resource_value: {
+                value: String
+              },
+              static_value: {
+                values: Array[String]
+              }
+            }
+          ],
+          resource_type: untyped,
+          automatic: bool,
+          execution_controls: {
+            ssm_controls: {
+              concurrent_execution_rate_percentage: Integer,
+              error_percentage: untyped
+            }
+          },
+          maximum_automatic_attempts: Integer,
+          retry_attempt_seconds: Integer,
+          arn: String,
+          created_by_service: untyped
+        }
+      ]
+    ) -> _PutRemediationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRemediationConfigurationsResponse
+
+    interface _PutRemediationExceptionsResponse
+      include Smithy::Client::_Response[Types::PutRemediationExceptionsResponse]
+      def failed_batches: () -> Array[Types::FailedRemediationExceptionBatch]?
+    end
+    def put_remediation_exceptions: (
+      ?config_rule_name: String,
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ],
+      ?message: String,
+      ?expiration_time: Time
+    ) -> _PutRemediationExceptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRemediationExceptionsResponse
+
+    interface _PutResourceConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_resource_config: (
+      ?resource_type: String,
+      ?schema_version_id: String,
+      ?resource_id: String,
+      ?resource_name: String,
+      ?configuration: String,
+      ?tags: Hash[String, String]
+    ) -> _PutResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourceConfigResponse
+
+    interface _PutRetentionConfigurationResponse
+      include Smithy::Client::_Response[Types::PutRetentionConfigurationResponse]
+      def retention_configuration: () -> Types::RetentionConfiguration?
+    end
+    def put_retention_configuration: (
+      ?retention_period_in_days: Integer
+    ) -> _PutRetentionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRetentionConfigurationResponse
+
+    interface _PutServiceLinkedConfigurationRecorderResponse
+      include Smithy::Client::_Response[Types::PutServiceLinkedConfigurationRecorderResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def put_service_linked_configuration_recorder: (
+      ?service_principal: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutServiceLinkedConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutServiceLinkedConfigurationRecorderResponse
+
+    interface _PutStoredQueryResponse
+      include Smithy::Client::_Response[Types::PutStoredQueryResponse]
+      def query_arn: () -> String?
+    end
+    def put_stored_query: (
+      ?stored_query: {
+        query_id: String,
+        query_arn: String,
+        query_name: String,
+        description: String,
+        expression: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutStoredQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStoredQueryResponse
+
+    interface _SelectAggregateResourceConfigResponse
+      include Smithy::Client::_Response[Types::SelectAggregateResourceConfigResponse]
+      def results: () -> Array[String]?
+      def query_info: () -> Types::QueryInfo?
+      def next_token: () -> String?
+    end
+    def select_aggregate_resource_config: (
+      ?expression: String,
+      ?configuration_aggregator_name: String,
+      ?limit: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SelectAggregateResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SelectAggregateResourceConfigResponse
+
+    interface _SelectResourceConfigResponse
+      include Smithy::Client::_Response[Types::SelectResourceConfigResponse]
+      def results: () -> Array[String]?
+      def query_info: () -> Types::QueryInfo?
+      def next_token: () -> String?
+    end
+    def select_resource_config: (
+      ?expression: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _SelectResourceConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SelectResourceConfigResponse
+
+    interface _StartConfigRulesEvaluationResponse
+      include Smithy::Client::_Response[Types::StartConfigRulesEvaluationResponse]
+    end
+    def start_config_rules_evaluation: (
+      ?config_rule_names: Array[String]
+    ) -> _StartConfigRulesEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConfigRulesEvaluationResponse
+
+    interface _StartConfigurationRecorderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_configuration_recorder: (
+      ?configuration_recorder_name: String
+    ) -> _StartConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConfigurationRecorderResponse
+
+    interface _StartRemediationExecutionResponse
+      include Smithy::Client::_Response[Types::StartRemediationExecutionResponse]
+      def failure_message: () -> String?
+      def failed_items: () -> Array[Types::ResourceKey]?
+    end
+    def start_remediation_execution: (
+      ?config_rule_name: String,
+      ?resource_keys: Array[
+        {
+          resource_type: String,
+          resource_id: String
+        }
+      ]
+    ) -> _StartRemediationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRemediationExecutionResponse
+
+    interface _StartResourceEvaluationResponse
+      include Smithy::Client::_Response[Types::StartResourceEvaluationResponse]
+      def resource_evaluation_id: () -> String?
+    end
+    def start_resource_evaluation: (
+      ?resource_details: {
+        resource_id: String,
+        resource_type: String,
+        resource_configuration: String,
+        resource_configuration_schema_type: String
+      },
+      ?evaluation_context: {
+        evaluation_context_identifier: String
+      },
+      ?evaluation_mode: String,
+      ?evaluation_timeout: Integer,
+      ?client_token: String
+    ) -> _StartResourceEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartResourceEvaluationResponse
+
+    interface _StopConfigurationRecorderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_configuration_recorder: (
+      ?configuration_recorder_name: String
+    ) -> _StopConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopConfigurationRecorderResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

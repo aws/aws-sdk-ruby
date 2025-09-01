@@ -1,0 +1,1421 @@
+module Aws::CloudFormation
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudFormation::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::ActivateOrganizationsAccessOutput]
+    end
+    def activate_organizations_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateOrganizationsAccessResponse
+
+    interface _ActivateTypeResponse
+      include Smithy::Client::_Response[Types::ActivateTypeOutput]
+      def arn: () -> String?
+    end
+    def activate_type: (
+      ?type: String,
+      ?public_type_arn: String,
+      ?publisher_id: String,
+      ?type_name: String,
+      ?type_name_alias: String,
+      ?auto_update: bool,
+      ?logging_config: {
+        log_role_arn: String,
+        log_group_name: String
+      },
+      ?execution_role_arn: String,
+      ?version_bump: String,
+      ?major_version: Integer
+    ) -> _ActivateTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateTypeResponse
+
+    interface _BatchDescribeTypeConfigurationsResponse
+      include Smithy::Client::_Response[Types::BatchDescribeTypeConfigurationsOutput]
+      def errors: () -> Array[Types::BatchDescribeTypeConfigurationsError]?
+      def unprocessed_type_configurations: () -> Array[Types::TypeConfigurationIdentifier]?
+      def type_configurations: () -> Array[Types::TypeConfigurationDetails]?
+    end
+    def batch_describe_type_configurations: (
+      ?type_configuration_identifiers: Array[
+        {
+          type_arn: String,
+          type_configuration_alias: String,
+          type_configuration_arn: String,
+          type: String,
+          type_name: String
+        }
+      ]
+    ) -> _BatchDescribeTypeConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDescribeTypeConfigurationsResponse
+
+    interface _CancelUpdateStackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_update_stack: (
+      ?stack_name: String,
+      ?client_request_token: String
+    ) -> _CancelUpdateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelUpdateStackResponse
+
+    interface _ContinueUpdateRollbackResponse
+      include Smithy::Client::_Response[Types::ContinueUpdateRollbackOutput]
+    end
+    def continue_update_rollback: (
+      ?stack_name: String,
+      ?role_arn: String,
+      ?resources_to_skip: Array[String],
+      ?client_request_token: String
+    ) -> _ContinueUpdateRollbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ContinueUpdateRollbackResponse
+
+    interface _CreateChangeSetResponse
+      include Smithy::Client::_Response[Types::CreateChangeSetOutput]
+      def id: () -> String?
+      def stack_id: () -> String?
+    end
+    def create_change_set: (
+      ?stack_name: String,
+      ?template_body: String,
+      ?template_url: String,
+      ?use_previous_template: bool,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?capabilities: Array[String],
+      ?resource_types: Array[String],
+      ?role_arn: String,
+      ?rollback_configuration: {
+        rollback_triggers: Array[
+          {
+            arn: String,
+            type: String
+          }
+        ],
+        monitoring_time_in_minutes: Integer
+      },
+      ?notification_ar_ns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?change_set_name: String,
+      ?client_token: String,
+      ?description: String,
+      ?change_set_type: String,
+      ?resources_to_import: Array[
+        {
+          resource_type: String,
+          logical_resource_id: String,
+          resource_identifier: Hash[String, String]
+        }
+      ],
+      ?include_nested_stacks: bool,
+      ?on_stack_failure: String,
+      ?import_existing_resources: bool
+    ) -> _CreateChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChangeSetResponse
+
+    interface _CreateGeneratedTemplateResponse
+      include Smithy::Client::_Response[Types::CreateGeneratedTemplateOutput]
+      def generated_template_id: () -> String?
+    end
+    def create_generated_template: (
+      ?resources: Array[
+        {
+          resource_type: String,
+          logical_resource_id: String,
+          resource_identifier: Hash[String, String]
+        }
+      ],
+      ?generated_template_name: String,
+      ?stack_name: String,
+      ?template_configuration: {
+        deletion_policy: String,
+        update_replace_policy: String
+      }
+    ) -> _CreateGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGeneratedTemplateResponse
+
+    interface _CreateStackResponse
+      include Smithy::Client::_Response[Types::CreateStackOutput]
+      def stack_id: () -> String?
+    end
+    def create_stack: (
+      ?stack_name: String,
+      ?template_body: String,
+      ?template_url: String,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?disable_rollback: bool,
+      ?rollback_configuration: {
+        rollback_triggers: Array[
+          {
+            arn: String,
+            type: String
+          }
+        ],
+        monitoring_time_in_minutes: Integer
+      },
+      ?timeout_in_minutes: Integer,
+      ?notification_ar_ns: Array[String],
+      ?capabilities: Array[String],
+      ?resource_types: Array[String],
+      ?role_arn: String,
+      ?on_failure: String,
+      ?stack_policy_body: String,
+      ?stack_policy_url: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String,
+      ?enable_termination_protection: bool,
+      ?retain_except_on_create: bool
+    ) -> _CreateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackResponse
+
+    interface _CreateStackInstancesResponse
+      include Smithy::Client::_Response[Types::CreateStackInstancesOutput]
+      def operation_id: () -> String?
+    end
+    def create_stack_instances: (
+      ?stack_set_name: String,
+      ?accounts: Array[String],
+      ?deployment_targets: {
+        accounts: Array[String],
+        accounts_url: String,
+        organizational_unit_ids: Array[String],
+        account_filter_type: String
+      },
+      ?regions: Array[String],
+      ?parameter_overrides: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _CreateStackInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackInstancesResponse
+
+    interface _CreateStackRefactorResponse
+      include Smithy::Client::_Response[Types::CreateStackRefactorOutput]
+      def stack_refactor_id: () -> String?
+    end
+    def create_stack_refactor: (
+      ?description: String,
+      ?enable_stack_creation: bool,
+      ?resource_mappings: Array[
+        {
+          source: {
+            stack_name: String,
+            logical_resource_id: String
+          },
+          destination: untyped
+        }
+      ],
+      ?stack_definitions: Array[
+        {
+          stack_name: String,
+          template_body: String,
+          template_url: String
+        }
+      ]
+    ) -> _CreateStackRefactorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackRefactorResponse
+
+    interface _CreateStackSetResponse
+      include Smithy::Client::_Response[Types::CreateStackSetOutput]
+      def stack_set_id: () -> String?
+    end
+    def create_stack_set: (
+      ?stack_set_name: String,
+      ?description: String,
+      ?template_body: String,
+      ?template_url: String,
+      ?stack_id: String,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?capabilities: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?administration_role_arn: String,
+      ?execution_role_name: String,
+      ?permission_model: String,
+      ?auto_deployment: {
+        enabled: bool,
+        retain_stacks_on_account_removal: bool
+      },
+      ?call_as: String,
+      ?client_request_token: String,
+      ?managed_execution: {
+        active: bool
+      }
+    ) -> _CreateStackSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackSetResponse
+
+    interface _DeactivateOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::DeactivateOrganizationsAccessOutput]
+    end
+    def deactivate_organizations_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateOrganizationsAccessResponse
+
+    interface _DeactivateTypeResponse
+      include Smithy::Client::_Response[Types::DeactivateTypeOutput]
+    end
+    def deactivate_type: (
+      ?type_name: String,
+      ?type: String,
+      ?arn: String
+    ) -> _DeactivateTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateTypeResponse
+
+    interface _DeleteChangeSetResponse
+      include Smithy::Client::_Response[Types::DeleteChangeSetOutput]
+    end
+    def delete_change_set: (
+      ?change_set_name: String,
+      ?stack_name: String
+    ) -> _DeleteChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChangeSetResponse
+
+    interface _DeleteGeneratedTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_generated_template: (
+      ?generated_template_name: String
+    ) -> _DeleteGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGeneratedTemplateResponse
+
+    interface _DeleteStackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_stack: (
+      ?stack_name: String,
+      ?retain_resources: Array[String],
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?deletion_mode: String
+    ) -> _DeleteStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStackResponse
+
+    interface _DeleteStackInstancesResponse
+      include Smithy::Client::_Response[Types::DeleteStackInstancesOutput]
+      def operation_id: () -> String?
+    end
+    def delete_stack_instances: (
+      ?stack_set_name: String,
+      ?accounts: Array[String],
+      ?deployment_targets: {
+        accounts: Array[String],
+        accounts_url: String,
+        organizational_unit_ids: Array[String],
+        account_filter_type: String
+      },
+      ?regions: Array[String],
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?retain_stacks: bool,
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _DeleteStackInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStackInstancesResponse
+
+    interface _DeleteStackSetResponse
+      include Smithy::Client::_Response[Types::DeleteStackSetOutput]
+    end
+    def delete_stack_set: (
+      ?stack_set_name: String,
+      ?call_as: String
+    ) -> _DeleteStackSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStackSetResponse
+
+    interface _DeregisterTypeResponse
+      include Smithy::Client::_Response[Types::DeregisterTypeOutput]
+    end
+    def deregister_type: (
+      ?arn: String,
+      ?type: String,
+      ?type_name: String,
+      ?version_id: String
+    ) -> _DeregisterTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTypeResponse
+
+    interface _DescribeAccountLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountLimitsOutput]
+      def account_limits: () -> Array[Types::AccountLimit]?
+      def next_token: () -> String?
+    end
+    def describe_account_limits: (
+      ?next_token: String
+    ) -> _DescribeAccountLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountLimitsResponse
+
+    interface _DescribeChangeSetResponse
+      include Smithy::Client::_Response[Types::DescribeChangeSetOutput]
+      def change_set_name: () -> String?
+      def change_set_id: () -> String?
+      def stack_id: () -> String?
+      def stack_name: () -> String?
+      def description: () -> String?
+      def parameters: () -> Array[Types::Parameter]?
+      def creation_time: () -> Time?
+      def execution_status: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def notification_ar_ns: () -> Array[String]?
+      def rollback_configuration: () -> Types::RollbackConfiguration?
+      def capabilities: () -> Array[String]?
+      def tags: () -> Array[Types::Tag]?
+      def changes: () -> Array[Types::Change]?
+      def next_token: () -> String?
+      def include_nested_stacks: () -> bool?
+      def parent_change_set_id: () -> String?
+      def root_change_set_id: () -> String?
+      def on_stack_failure: () -> String?
+      def import_existing_resources: () -> bool?
+    end
+    def describe_change_set: (
+      ?change_set_name: String,
+      ?stack_name: String,
+      ?next_token: String,
+      ?include_property_values: bool
+    ) -> _DescribeChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChangeSetResponse
+
+    interface _DescribeChangeSetHooksResponse
+      include Smithy::Client::_Response[Types::DescribeChangeSetHooksOutput]
+      def change_set_id: () -> String?
+      def change_set_name: () -> String?
+      def hooks: () -> Array[Types::ChangeSetHook]?
+      def status: () -> String?
+      def next_token: () -> String?
+      def stack_id: () -> String?
+      def stack_name: () -> String?
+    end
+    def describe_change_set_hooks: (
+      ?change_set_name: String,
+      ?stack_name: String,
+      ?next_token: String,
+      ?logical_resource_id: String
+    ) -> _DescribeChangeSetHooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChangeSetHooksResponse
+
+    interface _DescribeGeneratedTemplateResponse
+      include Smithy::Client::_Response[Types::DescribeGeneratedTemplateOutput]
+      def generated_template_id: () -> String?
+      def generated_template_name: () -> String?
+      def resources: () -> Array[Types::ResourceDetail]?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def creation_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def progress: () -> Types::TemplateProgress?
+      def stack_id: () -> String?
+      def template_configuration: () -> Types::TemplateConfiguration?
+      def total_warnings: () -> Integer?
+    end
+    def describe_generated_template: (
+      ?generated_template_name: String
+    ) -> _DescribeGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGeneratedTemplateResponse
+
+    interface _DescribeOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationsAccessOutput]
+      def status: () -> String?
+    end
+    def describe_organizations_access: (
+      ?call_as: String
+    ) -> _DescribeOrganizationsAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationsAccessResponse
+
+    interface _DescribePublisherResponse
+      include Smithy::Client::_Response[Types::DescribePublisherOutput]
+      def publisher_id: () -> String?
+      def publisher_status: () -> String?
+      def identity_provider: () -> String?
+      def publisher_profile: () -> String?
+    end
+    def describe_publisher: (
+      ?publisher_id: String
+    ) -> _DescribePublisherResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePublisherResponse
+
+    interface _DescribeResourceScanResponse
+      include Smithy::Client::_Response[Types::DescribeResourceScanOutput]
+      def resource_scan_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def percentage_completed: () -> Float?
+      def resource_types: () -> Array[String]?
+      def resources_scanned: () -> Integer?
+      def resources_read: () -> Integer?
+      def scan_filters: () -> Array[Types::ScanFilter]?
+    end
+    def describe_resource_scan: (
+      ?resource_scan_id: String
+    ) -> _DescribeResourceScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceScanResponse
+
+    interface _DescribeStackDriftDetectionStatusResponse
+      include Smithy::Client::_Response[Types::DescribeStackDriftDetectionStatusOutput]
+      def stack_id: () -> String?
+      def stack_drift_detection_id: () -> String?
+      def stack_drift_status: () -> String?
+      def detection_status: () -> String?
+      def detection_status_reason: () -> String?
+      def drifted_stack_resource_count: () -> Integer?
+      def timestamp: () -> Time?
+    end
+    def describe_stack_drift_detection_status: (
+      ?stack_drift_detection_id: String
+    ) -> _DescribeStackDriftDetectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackDriftDetectionStatusResponse
+
+    interface _DescribeStackEventsResponse
+      include Smithy::Client::_Response[Types::DescribeStackEventsOutput]
+      def stack_events: () -> Array[Types::StackEvent]?
+      def next_token: () -> String?
+    end
+    def describe_stack_events: (
+      ?stack_name: String,
+      ?next_token: String
+    ) -> _DescribeStackEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackEventsResponse
+
+    interface _DescribeStackInstanceResponse
+      include Smithy::Client::_Response[Types::DescribeStackInstanceOutput]
+      def stack_instance: () -> Types::StackInstance?
+    end
+    def describe_stack_instance: (
+      ?stack_set_name: String,
+      ?stack_instance_account: String,
+      ?stack_instance_region: String,
+      ?call_as: String
+    ) -> _DescribeStackInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackInstanceResponse
+
+    interface _DescribeStackRefactorResponse
+      include Smithy::Client::_Response[Types::DescribeStackRefactorOutput]
+      def description: () -> String?
+      def stack_refactor_id: () -> String?
+      def stack_ids: () -> Array[String]?
+      def execution_status: () -> String?
+      def execution_status_reason: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def describe_stack_refactor: (
+      ?stack_refactor_id: String
+    ) -> _DescribeStackRefactorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackRefactorResponse
+
+    interface _DescribeStackResourceResponse
+      include Smithy::Client::_Response[Types::DescribeStackResourceOutput]
+      def stack_resource_detail: () -> Types::StackResourceDetail?
+    end
+    def describe_stack_resource: (
+      ?stack_name: String,
+      ?logical_resource_id: String
+    ) -> _DescribeStackResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackResourceResponse
+
+    interface _DescribeStackResourceDriftsResponse
+      include Smithy::Client::_Response[Types::DescribeStackResourceDriftsOutput]
+      def stack_resource_drifts: () -> Array[Types::StackResourceDrift]?
+      def next_token: () -> String?
+    end
+    def describe_stack_resource_drifts: (
+      ?stack_name: String,
+      ?stack_resource_drift_status_filters: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeStackResourceDriftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackResourceDriftsResponse
+
+    interface _DescribeStackResourcesResponse
+      include Smithy::Client::_Response[Types::DescribeStackResourcesOutput]
+      def stack_resources: () -> Array[Types::StackResource]?
+    end
+    def describe_stack_resources: (
+      ?stack_name: String,
+      ?logical_resource_id: String,
+      ?physical_resource_id: String
+    ) -> _DescribeStackResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackResourcesResponse
+
+    interface _DescribeStackSetResponse
+      include Smithy::Client::_Response[Types::DescribeStackSetOutput]
+      def stack_set: () -> Types::StackSet?
+    end
+    def describe_stack_set: (
+      ?stack_set_name: String,
+      ?call_as: String
+    ) -> _DescribeStackSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackSetResponse
+
+    interface _DescribeStackSetOperationResponse
+      include Smithy::Client::_Response[Types::DescribeStackSetOperationOutput]
+      def stack_set_operation: () -> Types::StackSetOperation?
+    end
+    def describe_stack_set_operation: (
+      ?stack_set_name: String,
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _DescribeStackSetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStackSetOperationResponse
+
+    interface _DescribeStacksResponse
+      include Smithy::Client::_Response[Types::DescribeStacksOutput]
+      def stacks: () -> Array[Types::Stack]?
+      def next_token: () -> String?
+    end
+    def describe_stacks: (
+      ?stack_name: String,
+      ?next_token: String
+    ) -> _DescribeStacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStacksResponse
+
+    interface _DescribeTypeResponse
+      include Smithy::Client::_Response[Types::DescribeTypeOutput]
+      def arn: () -> String?
+      def type: () -> String?
+      def type_name: () -> String?
+      def default_version_id: () -> String?
+      def is_default_version: () -> bool?
+      def type_tests_status: () -> String?
+      def type_tests_status_description: () -> String?
+      def description: () -> String?
+      def schema: () -> String?
+      def provisioning_type: () -> String?
+      def deprecated_status: () -> String?
+      def logging_config: () -> Types::LoggingConfig?
+      def required_activated_types: () -> Array[Types::RequiredActivatedType]?
+      def execution_role_arn: () -> String?
+      def visibility: () -> String?
+      def source_url: () -> String?
+      def documentation_url: () -> String?
+      def last_updated: () -> Time?
+      def time_created: () -> Time?
+      def configuration_schema: () -> String?
+      def publisher_id: () -> String?
+      def original_type_name: () -> String?
+      def original_type_arn: () -> String?
+      def public_version_number: () -> String?
+      def latest_public_version: () -> String?
+      def is_activated: () -> bool?
+      def auto_update: () -> bool?
+    end
+    def describe_type: (
+      ?type: String,
+      ?type_name: String,
+      ?arn: String,
+      ?version_id: String,
+      ?publisher_id: String,
+      ?public_version_number: String
+    ) -> _DescribeTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTypeResponse
+
+    interface _DescribeTypeRegistrationResponse
+      include Smithy::Client::_Response[Types::DescribeTypeRegistrationOutput]
+      def progress_status: () -> String?
+      def description: () -> String?
+      def type_arn: () -> String?
+      def type_version_arn: () -> String?
+    end
+    def describe_type_registration: (
+      ?registration_token: String
+    ) -> _DescribeTypeRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTypeRegistrationResponse
+
+    interface _DetectStackDriftResponse
+      include Smithy::Client::_Response[Types::DetectStackDriftOutput]
+      def stack_drift_detection_id: () -> String?
+    end
+    def detect_stack_drift: (
+      ?stack_name: String,
+      ?logical_resource_ids: Array[String]
+    ) -> _DetectStackDriftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectStackDriftResponse
+
+    interface _DetectStackResourceDriftResponse
+      include Smithy::Client::_Response[Types::DetectStackResourceDriftOutput]
+      def stack_resource_drift: () -> Types::StackResourceDrift?
+    end
+    def detect_stack_resource_drift: (
+      ?stack_name: String,
+      ?logical_resource_id: String
+    ) -> _DetectStackResourceDriftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectStackResourceDriftResponse
+
+    interface _DetectStackSetDriftResponse
+      include Smithy::Client::_Response[Types::DetectStackSetDriftOutput]
+      def operation_id: () -> String?
+    end
+    def detect_stack_set_drift: (
+      ?stack_set_name: String,
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _DetectStackSetDriftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectStackSetDriftResponse
+
+    interface _EstimateTemplateCostResponse
+      include Smithy::Client::_Response[Types::EstimateTemplateCostOutput]
+      def url: () -> String?
+    end
+    def estimate_template_cost: (
+      ?template_body: String,
+      ?template_url: String,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ]
+    ) -> _EstimateTemplateCostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EstimateTemplateCostResponse
+
+    interface _ExecuteChangeSetResponse
+      include Smithy::Client::_Response[Types::ExecuteChangeSetOutput]
+    end
+    def execute_change_set: (
+      ?change_set_name: String,
+      ?stack_name: String,
+      ?client_request_token: String,
+      ?disable_rollback: bool,
+      ?retain_except_on_create: bool
+    ) -> _ExecuteChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteChangeSetResponse
+
+    interface _ExecuteStackRefactorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def execute_stack_refactor: (
+      ?stack_refactor_id: String
+    ) -> _ExecuteStackRefactorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteStackRefactorResponse
+
+    interface _GetGeneratedTemplateResponse
+      include Smithy::Client::_Response[Types::GetGeneratedTemplateOutput]
+      def status: () -> String?
+      def template_body: () -> String?
+    end
+    def get_generated_template: (
+      ?format: String,
+      ?generated_template_name: String
+    ) -> _GetGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeneratedTemplateResponse
+
+    interface _GetStackPolicyResponse
+      include Smithy::Client::_Response[Types::GetStackPolicyOutput]
+      def stack_policy_body: () -> String?
+    end
+    def get_stack_policy: (
+      ?stack_name: String
+    ) -> _GetStackPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStackPolicyResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateOutput]
+      def template_body: () -> String?
+      def stages_available: () -> Array[String]?
+    end
+    def get_template: (
+      ?stack_name: String,
+      ?change_set_name: String,
+      ?template_stage: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _GetTemplateSummaryResponse
+      include Smithy::Client::_Response[Types::GetTemplateSummaryOutput]
+      def parameters: () -> Array[Types::ParameterDeclaration]?
+      def description: () -> String?
+      def capabilities: () -> Array[String]?
+      def capabilities_reason: () -> String?
+      def resource_types: () -> Array[String]?
+      def version: () -> String?
+      def metadata: () -> String?
+      def declared_transforms: () -> Array[String]?
+      def resource_identifier_summaries: () -> Array[Types::ResourceIdentifierSummary]?
+      def warnings: () -> Types::Warnings?
+    end
+    def get_template_summary: (
+      ?template_body: String,
+      ?template_url: String,
+      ?stack_name: String,
+      ?stack_set_name: String,
+      ?call_as: String,
+      ?template_summary_config: {
+        treat_unrecognized_resource_types_as_warnings: bool
+      }
+    ) -> _GetTemplateSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateSummaryResponse
+
+    interface _ImportStacksToStackSetResponse
+      include Smithy::Client::_Response[Types::ImportStacksToStackSetOutput]
+      def operation_id: () -> String?
+    end
+    def import_stacks_to_stack_set: (
+      ?stack_set_name: String,
+      ?stack_ids: Array[String],
+      ?stack_ids_url: String,
+      ?organizational_unit_ids: Array[String],
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _ImportStacksToStackSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportStacksToStackSetResponse
+
+    interface _ListChangeSetsResponse
+      include Smithy::Client::_Response[Types::ListChangeSetsOutput]
+      def summaries: () -> Array[Types::ChangeSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_change_sets: (
+      ?stack_name: String,
+      ?next_token: String
+    ) -> _ListChangeSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChangeSetsResponse
+
+    interface _ListExportsResponse
+      include Smithy::Client::_Response[Types::ListExportsOutput]
+      def exports: () -> Array[Types::Export]?
+      def next_token: () -> String?
+    end
+    def list_exports: (
+      ?next_token: String
+    ) -> _ListExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportsResponse
+
+    interface _ListGeneratedTemplatesResponse
+      include Smithy::Client::_Response[Types::ListGeneratedTemplatesOutput]
+      def summaries: () -> Array[Types::TemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_generated_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGeneratedTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeneratedTemplatesResponse
+
+    interface _ListHookResultsResponse
+      include Smithy::Client::_Response[Types::ListHookResultsOutput]
+      def target_type: () -> String?
+      def target_id: () -> String?
+      def hook_results: () -> Array[Types::HookResultSummary]?
+      def next_token: () -> String?
+    end
+    def list_hook_results: (
+      ?target_type: String,
+      ?target_id: String,
+      ?next_token: String
+    ) -> _ListHookResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHookResultsResponse
+
+    interface _ListImportsResponse
+      include Smithy::Client::_Response[Types::ListImportsOutput]
+      def imports: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_imports: (
+      ?export_name: String,
+      ?next_token: String
+    ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
+
+    interface _ListResourceScanRelatedResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourceScanRelatedResourcesOutput]
+      def related_resources: () -> Array[Types::ScannedResource]?
+      def next_token: () -> String?
+    end
+    def list_resource_scan_related_resources: (
+      ?resource_scan_id: String,
+      ?resources: Array[
+        {
+          resource_type: String,
+          resource_identifier: Hash[String, String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceScanRelatedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceScanRelatedResourcesResponse
+
+    interface _ListResourceScanResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourceScanResourcesOutput]
+      def resources: () -> Array[Types::ScannedResource]?
+      def next_token: () -> String?
+    end
+    def list_resource_scan_resources: (
+      ?resource_scan_id: String,
+      ?resource_identifier: String,
+      ?resource_type_prefix: String,
+      ?tag_key: String,
+      ?tag_value: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceScanResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceScanResourcesResponse
+
+    interface _ListResourceScansResponse
+      include Smithy::Client::_Response[Types::ListResourceScansOutput]
+      def resource_scan_summaries: () -> Array[Types::ResourceScanSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_scans: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?scan_type_filter: String
+    ) -> _ListResourceScansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceScansResponse
+
+    interface _ListStackInstanceResourceDriftsResponse
+      include Smithy::Client::_Response[Types::ListStackInstanceResourceDriftsOutput]
+      def summaries: () -> Array[Types::StackInstanceResourceDriftsSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_instance_resource_drifts: (
+      ?stack_set_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?stack_instance_resource_drift_statuses: Array[String],
+      ?stack_instance_account: String,
+      ?stack_instance_region: String,
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _ListStackInstanceResourceDriftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackInstanceResourceDriftsResponse
+
+    interface _ListStackInstancesResponse
+      include Smithy::Client::_Response[Types::ListStackInstancesOutput]
+      def summaries: () -> Array[Types::StackInstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_instances: (
+      ?stack_set_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: String
+        }
+      ],
+      ?stack_instance_account: String,
+      ?stack_instance_region: String,
+      ?call_as: String
+    ) -> _ListStackInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackInstancesResponse
+
+    interface _ListStackRefactorActionsResponse
+      include Smithy::Client::_Response[Types::ListStackRefactorActionsOutput]
+      def stack_refactor_actions: () -> Array[Types::StackRefactorAction]?
+      def next_token: () -> String?
+    end
+    def list_stack_refactor_actions: (
+      ?stack_refactor_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStackRefactorActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackRefactorActionsResponse
+
+    interface _ListStackRefactorsResponse
+      include Smithy::Client::_Response[Types::ListStackRefactorsOutput]
+      def stack_refactor_summaries: () -> Array[Types::StackRefactorSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_refactors: (
+      ?execution_status_filter: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStackRefactorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackRefactorsResponse
+
+    interface _ListStackResourcesResponse
+      include Smithy::Client::_Response[Types::ListStackResourcesOutput]
+      def stack_resource_summaries: () -> Array[Types::StackResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_resources: (
+      ?stack_name: String,
+      ?next_token: String
+    ) -> _ListStackResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackResourcesResponse
+
+    interface _ListStackSetAutoDeploymentTargetsResponse
+      include Smithy::Client::_Response[Types::ListStackSetAutoDeploymentTargetsOutput]
+      def summaries: () -> Array[Types::StackSetAutoDeploymentTargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_set_auto_deployment_targets: (
+      ?stack_set_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?call_as: String
+    ) -> _ListStackSetAutoDeploymentTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackSetAutoDeploymentTargetsResponse
+
+    interface _ListStackSetOperationResultsResponse
+      include Smithy::Client::_Response[Types::ListStackSetOperationResultsOutput]
+      def summaries: () -> Array[Types::StackSetOperationResultSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_set_operation_results: (
+      ?stack_set_name: String,
+      ?operation_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?call_as: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: String
+        }
+      ]
+    ) -> _ListStackSetOperationResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackSetOperationResultsResponse
+
+    interface _ListStackSetOperationsResponse
+      include Smithy::Client::_Response[Types::ListStackSetOperationsOutput]
+      def summaries: () -> Array[Types::StackSetOperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_set_operations: (
+      ?stack_set_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?call_as: String
+    ) -> _ListStackSetOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackSetOperationsResponse
+
+    interface _ListStackSetsResponse
+      include Smithy::Client::_Response[Types::ListStackSetsOutput]
+      def summaries: () -> Array[Types::StackSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_stack_sets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String,
+      ?call_as: String
+    ) -> _ListStackSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackSetsResponse
+
+    interface _ListStacksResponse
+      include Smithy::Client::_Response[Types::ListStacksOutput]
+      def stack_summaries: () -> Array[Types::StackSummary]?
+      def next_token: () -> String?
+    end
+    def list_stacks: (
+      ?next_token: String,
+      ?stack_status_filter: Array[String]
+    ) -> _ListStacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStacksResponse
+
+    interface _ListTypeRegistrationsResponse
+      include Smithy::Client::_Response[Types::ListTypeRegistrationsOutput]
+      def registration_token_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_type_registrations: (
+      ?type: String,
+      ?type_name: String,
+      ?type_arn: String,
+      ?registration_status_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTypeRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypeRegistrationsResponse
+
+    interface _ListTypeVersionsResponse
+      include Smithy::Client::_Response[Types::ListTypeVersionsOutput]
+      def type_version_summaries: () -> Array[Types::TypeVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_type_versions: (
+      ?type: String,
+      ?type_name: String,
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?deprecated_status: String,
+      ?publisher_id: String
+    ) -> _ListTypeVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypeVersionsResponse
+
+    interface _ListTypesResponse
+      include Smithy::Client::_Response[Types::ListTypesOutput]
+      def type_summaries: () -> Array[Types::TypeSummary]?
+      def next_token: () -> String?
+    end
+    def list_types: (
+      ?visibility: String,
+      ?provisioning_type: String,
+      ?deprecated_status: String,
+      ?type: String,
+      ?filters: {
+        category: String,
+        publisher_id: String,
+        type_name_prefix: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypesResponse
+
+    interface _PublishTypeResponse
+      include Smithy::Client::_Response[Types::PublishTypeOutput]
+      def public_type_arn: () -> String?
+    end
+    def publish_type: (
+      ?type: String,
+      ?arn: String,
+      ?type_name: String,
+      ?public_version_number: String
+    ) -> _PublishTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishTypeResponse
+
+    interface _RecordHandlerProgressResponse
+      include Smithy::Client::_Response[Types::RecordHandlerProgressOutput]
+    end
+    def record_handler_progress: (
+      ?bearer_token: String,
+      ?operation_status: String,
+      ?current_operation_status: String,
+      ?status_message: String,
+      ?error_code: String,
+      ?resource_model: String,
+      ?client_request_token: String
+    ) -> _RecordHandlerProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecordHandlerProgressResponse
+
+    interface _RegisterPublisherResponse
+      include Smithy::Client::_Response[Types::RegisterPublisherOutput]
+      def publisher_id: () -> String?
+    end
+    def register_publisher: (
+      ?accept_terms_and_conditions: bool,
+      ?connection_arn: String
+    ) -> _RegisterPublisherResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterPublisherResponse
+
+    interface _RegisterTypeResponse
+      include Smithy::Client::_Response[Types::RegisterTypeOutput]
+      def registration_token: () -> String?
+    end
+    def register_type: (
+      ?type: String,
+      ?type_name: String,
+      ?schema_handler_package: String,
+      ?logging_config: {
+        log_role_arn: String,
+        log_group_name: String
+      },
+      ?execution_role_arn: String,
+      ?client_request_token: String
+    ) -> _RegisterTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTypeResponse
+
+    interface _RollbackStackResponse
+      include Smithy::Client::_Response[Types::RollbackStackOutput]
+      def stack_id: () -> String?
+    end
+    def rollback_stack: (
+      ?stack_name: String,
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?retain_except_on_create: bool
+    ) -> _RollbackStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackStackResponse
+
+    interface _SetStackPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_stack_policy: (
+      ?stack_name: String,
+      ?stack_policy_body: String,
+      ?stack_policy_url: String
+    ) -> _SetStackPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetStackPolicyResponse
+
+    interface _SetTypeConfigurationResponse
+      include Smithy::Client::_Response[Types::SetTypeConfigurationOutput]
+      def configuration_arn: () -> String?
+    end
+    def set_type_configuration: (
+      ?type_arn: String,
+      ?configuration: String,
+      ?configuration_alias: String,
+      ?type_name: String,
+      ?type: String
+    ) -> _SetTypeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTypeConfigurationResponse
+
+    interface _SetTypeDefaultVersionResponse
+      include Smithy::Client::_Response[Types::SetTypeDefaultVersionOutput]
+    end
+    def set_type_default_version: (
+      ?arn: String,
+      ?type: String,
+      ?type_name: String,
+      ?version_id: String
+    ) -> _SetTypeDefaultVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTypeDefaultVersionResponse
+
+    interface _SignalResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def signal_resource: (
+      ?stack_name: String,
+      ?logical_resource_id: String,
+      ?unique_id: String,
+      ?status: String
+    ) -> _SignalResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignalResourceResponse
+
+    interface _StartResourceScanResponse
+      include Smithy::Client::_Response[Types::StartResourceScanOutput]
+      def resource_scan_id: () -> String?
+    end
+    def start_resource_scan: (
+      ?client_request_token: String,
+      ?scan_filters: Array[
+        {
+          types: Array[String]
+        }
+      ]
+    ) -> _StartResourceScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartResourceScanResponse
+
+    interface _StopStackSetOperationResponse
+      include Smithy::Client::_Response[Types::StopStackSetOperationOutput]
+    end
+    def stop_stack_set_operation: (
+      ?stack_set_name: String,
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _StopStackSetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopStackSetOperationResponse
+
+    interface _TestTypeResponse
+      include Smithy::Client::_Response[Types::TestTypeOutput]
+      def type_version_arn: () -> String?
+    end
+    def test_type: (
+      ?arn: String,
+      ?type: String,
+      ?type_name: String,
+      ?version_id: String,
+      ?log_delivery_bucket: String
+    ) -> _TestTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestTypeResponse
+
+    interface _UpdateGeneratedTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateGeneratedTemplateOutput]
+      def generated_template_id: () -> String?
+    end
+    def update_generated_template: (
+      ?generated_template_name: String,
+      ?new_generated_template_name: String,
+      ?add_resources: Array[
+        {
+          resource_type: String,
+          logical_resource_id: String,
+          resource_identifier: Hash[String, String]
+        }
+      ],
+      ?remove_resources: Array[String],
+      ?refresh_all_resources: bool,
+      ?template_configuration: {
+        deletion_policy: String,
+        update_replace_policy: String
+      }
+    ) -> _UpdateGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGeneratedTemplateResponse
+
+    interface _UpdateStackResponse
+      include Smithy::Client::_Response[Types::UpdateStackOutput]
+      def stack_id: () -> String?
+    end
+    def update_stack: (
+      ?stack_name: String,
+      ?template_body: String,
+      ?template_url: String,
+      ?use_previous_template: bool,
+      ?stack_policy_during_update_body: String,
+      ?stack_policy_during_update_url: String,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?capabilities: Array[String],
+      ?resource_types: Array[String],
+      ?role_arn: String,
+      ?rollback_configuration: {
+        rollback_triggers: Array[
+          {
+            arn: String,
+            type: String
+          }
+        ],
+        monitoring_time_in_minutes: Integer
+      },
+      ?stack_policy_body: String,
+      ?stack_policy_url: String,
+      ?notification_ar_ns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?disable_rollback: bool,
+      ?client_request_token: String,
+      ?retain_except_on_create: bool
+    ) -> _UpdateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackResponse
+
+    interface _UpdateStackInstancesResponse
+      include Smithy::Client::_Response[Types::UpdateStackInstancesOutput]
+      def operation_id: () -> String?
+    end
+    def update_stack_instances: (
+      ?stack_set_name: String,
+      ?accounts: Array[String],
+      ?deployment_targets: {
+        accounts: Array[String],
+        accounts_url: String,
+        organizational_unit_ids: Array[String],
+        account_filter_type: String
+      },
+      ?regions: Array[String],
+      ?parameter_overrides: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?operation_id: String,
+      ?call_as: String
+    ) -> _UpdateStackInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackInstancesResponse
+
+    interface _UpdateStackSetResponse
+      include Smithy::Client::_Response[Types::UpdateStackSetOutput]
+      def operation_id: () -> String?
+    end
+    def update_stack_set: (
+      ?stack_set_name: String,
+      ?description: String,
+      ?template_body: String,
+      ?template_url: String,
+      ?use_previous_template: bool,
+      ?parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String,
+          use_previous_value: bool,
+          resolved_value: untyped
+        }
+      ],
+      ?capabilities: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?operation_preferences: {
+        region_concurrency_type: String,
+        region_order: Array[String],
+        failure_tolerance_count: Integer,
+        failure_tolerance_percentage: Integer,
+        max_concurrent_count: Integer,
+        max_concurrent_percentage: Integer,
+        concurrency_mode: String
+      },
+      ?administration_role_arn: String,
+      ?execution_role_name: String,
+      ?deployment_targets: {
+        accounts: Array[String],
+        accounts_url: String,
+        organizational_unit_ids: Array[String],
+        account_filter_type: String
+      },
+      ?permission_model: String,
+      ?auto_deployment: {
+        enabled: bool,
+        retain_stacks_on_account_removal: bool
+      },
+      ?operation_id: String,
+      ?accounts: Array[String],
+      ?regions: Array[String],
+      ?call_as: String,
+      ?managed_execution: {
+        active: bool
+      }
+    ) -> _UpdateStackSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackSetResponse
+
+    interface _UpdateTerminationProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateTerminationProtectionOutput]
+      def stack_id: () -> String?
+    end
+    def update_termination_protection: (
+      ?enable_termination_protection: bool,
+      ?stack_name: String
+    ) -> _UpdateTerminationProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTerminationProtectionResponse
+
+    interface _ValidateTemplateResponse
+      include Smithy::Client::_Response[Types::ValidateTemplateOutput]
+      def parameters: () -> Array[Types::TemplateParameter]?
+      def description: () -> String?
+      def capabilities: () -> Array[String]?
+      def capabilities_reason: () -> String?
+      def declared_transforms: () -> Array[String]?
+    end
+    def validate_template: (
+      ?template_body: String,
+      ?template_url: String
+    ) -> _ValidateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateTemplateResponse
+  end
+end

@@ -1,0 +1,431 @@
+module Aws::EBS
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      UNAUTHORIZED_ACCOUNT: String
+      DEPENDENCY_ACCESS_DENIED: String
+    end
+
+    class Block
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_index: Integer,
+        ?block_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_index: Integer?
+      attr_accessor block_token: String?
+    end
+
+    class ChangedBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_index: Integer,
+        ?first_block_token: String,
+        ?second_block_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_index: Integer?
+      attr_accessor first_block_token: String?
+      attr_accessor second_block_token: String?
+    end
+
+    module ChecksumAggregationMethod
+      CHECKSUM_AGGREGATION_LINEAR: String
+    end
+
+    module ChecksumAlgorithm
+      CHECKSUM_ALGORITHM_SHA256: String
+    end
+
+    class CompleteSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?changed_blocks_count: Integer,
+        ?checksum: String,
+        ?checksum_algorithm: String,
+        ?checksum_aggregation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor changed_blocks_count: Integer?
+      attr_accessor checksum: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_aggregation_method: String?
+    end
+
+    class CompleteSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ConcurrentLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetSnapshotBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?block_index: Integer,
+        ?block_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor block_index: Integer?
+      attr_accessor block_token: String?
+    end
+
+    class GetSnapshotBlockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_length: Integer,
+        ?block_data: String,
+        ?checksum: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_length: Integer?
+      attr_accessor block_data: String?
+      attr_accessor checksum: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChangedBlocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_snapshot_id: String,
+        ?second_snapshot_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?starting_block_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_snapshot_id: String?
+      attr_accessor second_snapshot_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor starting_block_index: Integer?
+    end
+
+    class ListChangedBlocksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changed_blocks: Array[Types::ChangedBlock],
+        ?expiry_time: Time,
+        ?volume_size: Integer,
+        ?block_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changed_blocks: Array[Types::ChangedBlock]?
+      attr_accessor expiry_time: Time?
+      attr_accessor volume_size: Integer?
+      attr_accessor block_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSnapshotBlocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?starting_block_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor starting_block_index: Integer?
+    end
+
+    class ListSnapshotBlocksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blocks: Array[Types::Block],
+        ?expiry_time: Time,
+        ?volume_size: Integer,
+        ?block_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blocks: Array[Types::Block]?
+      attr_accessor expiry_time: Time?
+      attr_accessor volume_size: Integer?
+      attr_accessor block_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class PutSnapshotBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?block_index: Integer,
+        ?block_data: String,
+        ?data_length: Integer,
+        ?progress: Integer,
+        ?checksum: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor block_index: Integer?
+      attr_accessor block_data: String?
+      attr_accessor data_length: Integer?
+      attr_accessor progress: Integer?
+      attr_accessor checksum: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class PutSnapshotBlockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checksum: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checksum: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class RequestThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module RequestThrottledExceptionReason
+      ACCOUNT_THROTTLED: String
+      DEPENDENCY_REQUEST_THROTTLED: String
+      RESOURCE_LEVEL_THROTTLE: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      SNAPSHOT_NOT_FOUND: String
+      GRANT_NOT_FOUND: String
+      DEPENDENCY_RESOURCE_NOT_FOUND: String
+      IMAGE_NOT_FOUND: String
+    end
+
+    module SSEType
+      SSE_EBS: String
+      SSE_KMS: String
+      NONE: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ServiceQuotaExceededExceptionReason
+      DEPENDENCY_SERVICE_QUOTA_EXCEEDED: String
+    end
+
+    class StartSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_size: Integer,
+        ?parent_snapshot_id: String,
+        ?tags: Array[Types::Tag],
+        ?description: String,
+        ?client_token: String,
+        ?encrypted: bool,
+        ?kms_key_arn: String,
+        ?timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_size: Integer?
+      attr_accessor parent_snapshot_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor encrypted: bool?
+      attr_accessor kms_key_arn: String?
+      attr_accessor timeout: Integer?
+    end
+
+    class StartSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?snapshot_id: String,
+        ?owner_id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?volume_size: Integer,
+        ?block_size: Integer,
+        ?tags: Array[Types::Tag],
+        ?parent_snapshot_id: String,
+        ?kms_key_arn: String,
+        ?sse_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor snapshot_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor volume_size: Integer?
+      attr_accessor block_size: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor parent_snapshot_id: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor sse_type: String?
+    end
+
+    module Status
+      COMPLETED: String
+      PENDING: String
+      ERROR: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      INVALID_CUSTOMER_KEY: String
+      INVALID_PAGE_TOKEN: String
+      INVALID_BLOCK_TOKEN: String
+      INVALID_GRANT_TOKEN: String
+      INVALID_SNAPSHOT_ID: String
+      UNRELATED_SNAPSHOTS: String
+      INVALID_BLOCK: String
+      INVALID_CONTENT_ENCODING: String
+      INVALID_TAG: String
+      INVALID_DEPENDENCY_REQUEST: String
+      INVALID_PARAMETER_VALUE: String
+      INVALID_VOLUME_SIZE: String
+      CONFLICTING_BLOCK_UPDATE: String
+      INVALID_IMAGE_ID: String
+      WRITE_REQUEST_TIMEOUT: String
+    end
+  end
+end

@@ -1,0 +1,1103 @@
+module Aws::S3Tables
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: Array[String]?
+    end
+
+    class CreateNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: Array[String]?
+    end
+
+    class CreateTableBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateTableBucketResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?format: String,
+        ?metadata: Types::TableMetadata,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor metadata: Types::TableMetadata?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?version_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor version_token: String?
+    end
+
+    class DeleteNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+    end
+
+    class DeleteTableBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class DeleteTableBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class DeleteTableBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class DeleteTablePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?version_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor version_token: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_algorithm: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_algorithm: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+    end
+
+    class GetNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Array[String],
+        ?created_at: Time,
+        ?created_by: String,
+        ?owner_account_id: String,
+        ?namespace_id: String,
+        ?table_bucket_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor namespace_id: String?
+      attr_accessor table_bucket_id: String?
+    end
+
+    class GetTableBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketEncryptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class GetTableBucketMaintenanceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketMaintenanceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?configuration: Hash[String, Types::TableBucketMaintenanceConfigurationValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor configuration: Hash[String, Types::TableBucketMaintenanceConfigurationValue]?
+    end
+
+    class GetTableBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: String?
+    end
+
+    class GetTableBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?owner_account_id: String,
+        ?created_at: Time,
+        ?table_bucket_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor table_bucket_id: String?
+      attr_accessor type: String?
+    end
+
+    class GetTableEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTableEncryptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class GetTableMaintenanceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTableMaintenanceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?configuration: Hash[String, Types::TableMaintenanceConfigurationValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor configuration: Hash[String, Types::TableMaintenanceConfigurationValue]?
+    end
+
+    class GetTableMaintenanceJobStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTableMaintenanceJobStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?status: Hash[String, Types::TableMaintenanceJobStatusValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor status: Hash[String, Types::TableMaintenanceJobStatusValue]?
+    end
+
+    class GetTableMetadataLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTableMetadataLocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_token: String,
+        ?metadata_location: String,
+        ?warehouse_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_token: String?
+      attr_accessor metadata_location: String?
+      attr_accessor warehouse_location: String?
+    end
+
+    class GetTablePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTablePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: String?
+    end
+
+    class GetTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor table_arn: String?
+    end
+
+    class GetTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?table_arn: String,
+        ?namespace: Array[String],
+        ?namespace_id: String,
+        ?version_token: String,
+        ?metadata_location: String,
+        ?warehouse_location: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?managed_by_service: String,
+        ?modified_at: Time,
+        ?modified_by: String,
+        ?owner_account_id: String,
+        ?format: String,
+        ?table_bucket_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor table_arn: String?
+      attr_accessor namespace: Array[String]?
+      attr_accessor namespace_id: String?
+      attr_accessor version_token: String?
+      attr_accessor metadata_location: String?
+      attr_accessor warehouse_location: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor managed_by_service: String?
+      attr_accessor modified_at: Time?
+      attr_accessor modified_by: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor format: String?
+      attr_accessor table_bucket_id: String?
+    end
+
+    class IcebergCompactionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_file_size_mb: Integer,
+        ?strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_file_size_mb: Integer?
+      attr_accessor strategy: String?
+    end
+
+    module IcebergCompactionStrategy
+      AUTO: String
+      BINPACK: String
+      SORT: String
+      ZORDER: String
+    end
+
+    class IcebergMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: Types::IcebergSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: Types::IcebergSchema?
+    end
+
+    class IcebergSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::SchemaField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::SchemaField]?
+    end
+
+    class IcebergSnapshotManagementSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_snapshots_to_keep: Integer,
+        ?max_snapshot_age_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_snapshots_to_keep: Integer?
+      attr_accessor max_snapshot_age_hours: Integer?
+    end
+
+    class IcebergUnreferencedFileRemovalSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unreferenced_days: Integer,
+        ?non_current_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unreferenced_days: Integer?
+      attr_accessor non_current_days: Integer?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobStatus
+      NOT_YET_RUN: String
+      SUCCESSFUL: String
+      FAILED: String
+      DISABLED: String
+    end
+
+    class ListNamespacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?prefix: String,
+        ?continuation_token: String,
+        ?max_namespaces: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor continuation_token: String?
+      attr_accessor max_namespaces: Integer?
+    end
+
+    class ListNamespacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespaces: Array[Types::NamespaceSummary],
+        ?continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespaces: Array[Types::NamespaceSummary]?
+      attr_accessor continuation_token: String?
+    end
+
+    class ListTableBucketsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?continuation_token: String,
+        ?max_buckets: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor continuation_token: String?
+      attr_accessor max_buckets: Integer?
+      attr_accessor type: String?
+    end
+
+    class ListTableBucketsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_buckets: Array[Types::TableBucketSummary],
+        ?continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_buckets: Array[Types::TableBucketSummary]?
+      attr_accessor continuation_token: String?
+    end
+
+    class ListTablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?prefix: String,
+        ?continuation_token: String,
+        ?max_tables: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor prefix: String?
+      attr_accessor continuation_token: String?
+      attr_accessor max_tables: Integer?
+    end
+
+    class ListTablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tables: Array[Types::TableSummary],
+        ?continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tables: Array[Types::TableSummary]?
+      attr_accessor continuation_token: String?
+    end
+
+    module MaintenanceStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class NamespaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Array[String],
+        ?created_at: Time,
+        ?created_by: String,
+        ?owner_account_id: String,
+        ?namespace_id: String,
+        ?table_bucket_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor namespace_id: String?
+      attr_accessor table_bucket_id: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OpenTableFormat
+      ICEBERG: String
+    end
+
+    class PutTableBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class PutTableBucketMaintenanceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?type: String,
+        ?value: Types::TableBucketMaintenanceConfigurationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor type: String?
+      attr_accessor value: Types::TableBucketMaintenanceConfigurationValue?
+    end
+
+    class PutTableBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor resource_policy: String?
+    end
+
+    class PutTableMaintenanceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?type: String,
+        ?value: Types::TableMaintenanceConfigurationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor value: Types::TableMaintenanceConfigurationValue?
+    end
+
+    class PutTablePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor resource_policy: String?
+    end
+
+    class RenameTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?new_namespace_name: String,
+        ?new_name: String,
+        ?version_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor new_namespace_name: String?
+      attr_accessor new_name: String?
+      attr_accessor version_token: String?
+    end
+
+    module SSEAlgorithm
+      AES256: String
+      AWS_KMS: String
+    end
+
+    class SchemaField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor required: bool?
+    end
+
+    class TableBucketMaintenanceConfigurationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?settings: Types::TableBucketMaintenanceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor settings: Types::TableBucketMaintenanceSettings?
+    end
+
+    class TableBucketMaintenanceSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iceberg_unreferenced_file_removal: Types::IcebergUnreferencedFileRemovalSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iceberg_unreferenced_file_removal: Types::IcebergUnreferencedFileRemovalSettings?
+
+      class IcebergUnreferencedFileRemoval < TableBucketMaintenanceSettings
+      end
+      class Unknown < TableBucketMaintenanceSettings
+      end
+    end
+
+    module TableBucketMaintenanceType
+      ICEBERG_UNREFERENCED_FILE_REMOVAL: String
+    end
+
+    class TableBucketSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?owner_account_id: String,
+        ?created_at: Time,
+        ?table_bucket_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor table_bucket_id: String?
+      attr_accessor type: String?
+    end
+
+    module TableBucketType
+      CUSTOMER: String
+      AWS: String
+    end
+
+    class TableMaintenanceConfigurationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?settings: Types::TableMaintenanceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor settings: Types::TableMaintenanceSettings?
+    end
+
+    class TableMaintenanceJobStatusValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_run_timestamp: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_run_timestamp: Time?
+      attr_accessor failure_message: String?
+    end
+
+    module TableMaintenanceJobType
+      ICEBERG_COMPACTION: String
+      ICEBERG_SNAPSHOT_MANAGEMENT: String
+      ICEBERG_UNREFERENCED_FILE_REMOVAL: String
+    end
+
+    class TableMaintenanceSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iceberg_compaction: Types::IcebergCompactionSettings,
+        ?iceberg_snapshot_management: Types::IcebergSnapshotManagementSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iceberg_compaction: Types::IcebergCompactionSettings?
+      attr_accessor iceberg_snapshot_management: Types::IcebergSnapshotManagementSettings?
+
+      class IcebergCompaction < TableMaintenanceSettings
+      end
+      class IcebergSnapshotManagement < TableMaintenanceSettings
+      end
+      class Unknown < TableMaintenanceSettings
+      end
+    end
+
+    module TableMaintenanceType
+      ICEBERG_COMPACTION: String
+      ICEBERG_SNAPSHOT_MANAGEMENT: String
+    end
+
+    class TableMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iceberg: Types::IcebergMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iceberg: Types::IcebergMetadata?
+
+      class Iceberg < TableMetadata
+      end
+      class Unknown < TableMetadata
+      end
+    end
+
+    class TableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Array[String],
+        ?name: String,
+        ?type: String,
+        ?table_arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?namespace_id: String,
+        ?table_bucket_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Array[String]?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor table_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor namespace_id: String?
+      attr_accessor table_bucket_id: String?
+    end
+
+    module TableType
+      CUSTOMER: String
+      AWS: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateTableMetadataLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+        ?version_token: String,
+        ?metadata_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor version_token: String?
+      attr_accessor metadata_location: String?
+    end
+
+    class UpdateTableMetadataLocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?table_arn: String,
+        ?namespace: Array[String],
+        ?version_token: String,
+        ?metadata_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor table_arn: String?
+      attr_accessor namespace: Array[String]?
+      attr_accessor version_token: String?
+      attr_accessor metadata_location: String?
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module Aws::DirectConnect
+  module Errors
+    class DirectConnectClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectConnectServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateTagKeysException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

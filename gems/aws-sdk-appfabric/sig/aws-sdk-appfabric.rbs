@@ -1,0 +1,5 @@
+  module Aws
+    module AppFabric
+      VERSION: String
+    end
+  end

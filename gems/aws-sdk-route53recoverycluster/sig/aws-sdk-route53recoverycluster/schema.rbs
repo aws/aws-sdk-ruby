@@ -1,0 +1,41 @@
+module Aws::Route53RecoveryCluster
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Arn: StringShape
+    Arns: ListShape
+    ConflictException: StructureShape
+    ControlPanelName: StringShape
+    EndpointTemporarilyUnavailableException: StructureShape
+    GetRoutingControlStateRequest: StructureShape
+    GetRoutingControlStateResponse: StructureShape
+    InternalServerException: StructureShape
+    ListRoutingControlsRequest: StructureShape
+    ListRoutingControlsResponse: StructureShape
+    MaxResults: IntegerShape
+    Owner: StringShape
+    PageToken: StringShape
+    ResourceNotFoundException: StructureShape
+    RetryAfterSeconds: IntegerShape
+    RoutingControl: StructureShape
+    RoutingControlName: StringShape
+    RoutingControlState: EnumShape
+    RoutingControls: ListShape
+    ServiceLimitExceededException: StructureShape
+    String: StringShape
+    ThrottlingException: StructureShape
+    UpdateRoutingControlStateEntries: ListShape
+    UpdateRoutingControlStateEntry: StructureShape
+    UpdateRoutingControlStateRequest: StructureShape
+    UpdateRoutingControlStateResponse: StructureShape
+    UpdateRoutingControlStatesRequest: StructureShape
+    UpdateRoutingControlStatesResponse: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: EnumShape
+
+    ToggleCustomerAPI: ServiceShape
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module SagemakerEdge
+      VERSION: String
+    end
+  end

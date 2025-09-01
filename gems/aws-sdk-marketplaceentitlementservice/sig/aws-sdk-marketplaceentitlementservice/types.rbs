@@ -1,0 +1,111 @@
+module Aws::MarketplaceEntitlementService
+  module Types
+
+    class Entitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code: String,
+        ?dimension: String,
+        ?customer_identifier: String,
+        ?customer_aws_account_id: String,
+        ?value: Types::EntitlementValue,
+        ?expiration_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code: String?
+      attr_accessor dimension: String?
+      attr_accessor customer_identifier: String?
+      attr_accessor customer_aws_account_id: String?
+      attr_accessor value: Types::EntitlementValue?
+      attr_accessor expiration_date: Time?
+    end
+
+    class EntitlementValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integer_value: Integer,
+        ?double_value: Float,
+        ?boolean_value: bool,
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_value: Integer?
+      attr_accessor double_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor string_value: String?
+    end
+
+    module GetEntitlementFilterName
+      CUSTOMER_IDENTIFIER: String
+      DIMENSION: String
+      CUSTOMER_AWS_ACCOUNT_ID: String
+    end
+
+    class GetEntitlementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code: String,
+        ?filter: Hash[String, Array[String]],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code: String?
+      attr_accessor filter: Hash[String, Array[String]]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetEntitlementsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::Entitlement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

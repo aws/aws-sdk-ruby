@@ -1,0 +1,1760 @@
+module Aws::AppRunner
+  module Types
+
+    class AssociateCustomDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?domain_name: String,
+        ?enable_www_subdomain: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor enable_www_subdomain: bool?
+    end
+
+    class AssociateCustomDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_target: String,
+        ?service_arn: String,
+        ?custom_domain: Types::CustomDomain,
+        ?vpc_dns_targets: Array[Types::VpcDNSTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_target: String?
+      attr_accessor service_arn: String?
+      attr_accessor custom_domain: Types::CustomDomain?
+      attr_accessor vpc_dns_targets: Array[Types::VpcDNSTarget]?
+    end
+
+    class AuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor access_role_arn: String?
+    end
+
+    class AutoScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+        ?auto_scaling_configuration_name: String,
+        ?auto_scaling_configuration_revision: Integer,
+        ?latest: bool,
+        ?status: String,
+        ?max_concurrency: Integer,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?created_at: Time,
+        ?deleted_at: Time,
+        ?has_associated_service: bool,
+        ?is_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor auto_scaling_configuration_name: String?
+      attr_accessor auto_scaling_configuration_revision: Integer?
+      attr_accessor latest: bool?
+      attr_accessor status: String?
+      attr_accessor max_concurrency: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor deleted_at: Time?
+      attr_accessor has_associated_service: bool?
+      attr_accessor is_default: bool?
+    end
+
+    module AutoScalingConfigurationStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class AutoScalingConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+        ?auto_scaling_configuration_name: String,
+        ?auto_scaling_configuration_revision: Integer,
+        ?status: String,
+        ?created_at: Time,
+        ?has_associated_service: bool,
+        ?is_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor auto_scaling_configuration_name: String?
+      attr_accessor auto_scaling_configuration_revision: Integer?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor has_associated_service: bool?
+      attr_accessor is_default: bool?
+    end
+
+    class CertificateValidationRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?value: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor value: String?
+      attr_accessor status: String?
+    end
+
+    module CertificateValidationRecordStatus
+      PENDING_VALIDATION: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class CodeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_source: String,
+        ?code_configuration_values: Types::CodeConfigurationValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_source: String?
+      attr_accessor code_configuration_values: Types::CodeConfigurationValues?
+    end
+
+    class CodeConfigurationValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime: String,
+        ?build_command: String,
+        ?start_command: String,
+        ?port: String,
+        ?runtime_environment_variables: Hash[String, String],
+        ?runtime_environment_secrets: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime: String?
+      attr_accessor build_command: String?
+      attr_accessor start_command: String?
+      attr_accessor port: String?
+      attr_accessor runtime_environment_variables: Hash[String, String]?
+      attr_accessor runtime_environment_secrets: Hash[String, String]?
+    end
+
+    class CodeRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_url: String,
+        ?source_code_version: Types::SourceCodeVersion,
+        ?code_configuration: Types::CodeConfiguration,
+        ?source_directory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_url: String?
+      attr_accessor source_code_version: Types::SourceCodeVersion?
+      attr_accessor code_configuration: Types::CodeConfiguration?
+      attr_accessor source_directory: String?
+    end
+
+    module ConfigurationSource
+      REPOSITORY: String
+      API: String
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_name: String,
+        ?connection_arn: String,
+        ?provider_type: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor provider_type: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    module ConnectionStatus
+      PENDING_HANDSHAKE: String
+      AVAILABLE: String
+      ERROR: String
+      DELETED: String
+    end
+
+    class ConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_name: String,
+        ?connection_arn: String,
+        ?provider_type: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor provider_type: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateAutoScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_name: String,
+        ?max_concurrency: Integer,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_name: String?
+      attr_accessor max_concurrency: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAutoScalingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration: Types::AutoScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration?
+    end
+
+    class CreateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_name: String,
+        ?provider_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_name: String?
+      attr_accessor provider_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class CreateObservabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_name: String,
+        ?trace_configuration: Types::TraceConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_name: String?
+      attr_accessor trace_configuration: Types::TraceConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateObservabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration: Types::ObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration?
+    end
+
+    class CreateServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?instance_configuration: Types::InstanceConfiguration,
+        ?tags: Array[Types::Tag],
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?health_check_configuration: Types::HealthCheckConfiguration,
+        ?auto_scaling_configuration_arn: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?observability_configuration: Types::ServiceObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor instance_configuration: Types::InstanceConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration?
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration?
+    end
+
+    class CreateServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor operation_id: String?
+    end
+
+    class CreateVpcConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector_name: String,
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector_name: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVpcConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector: Types::VpcConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector: Types::VpcConnector?
+    end
+
+    class CreateVpcIngressConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?vpc_ingress_connection_name: String,
+        ?ingress_vpc_configuration: Types::IngressVpcConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor vpc_ingress_connection_name: String?
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVpcIngressConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection: Types::VpcIngressConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection?
+    end
+
+    class CustomDomain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?enable_www_subdomain: bool,
+        ?certificate_validation_records: Array[Types::CertificateValidationRecord],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor enable_www_subdomain: bool?
+      attr_accessor certificate_validation_records: Array[Types::CertificateValidationRecord]?
+      attr_accessor status: String?
+    end
+
+    module CustomDomainAssociationStatus
+      CREATING: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETING: String
+      DELETE_FAILED: String
+      PENDING_CERTIFICATE_DNS_VALIDATION: String
+      BINDING_CERTIFICATE: String
+    end
+
+    class DeleteAutoScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+        ?delete_all_revisions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor delete_all_revisions: bool?
+    end
+
+    class DeleteAutoScalingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration: Types::AutoScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration?
+    end
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+    end
+
+    class DeleteConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class DeleteObservabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_arn: String?
+    end
+
+    class DeleteObservabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration: Types::ObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration?
+    end
+
+    class DeleteServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class DeleteServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor operation_id: String?
+    end
+
+    class DeleteVpcConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector_arn: String?
+    end
+
+    class DeleteVpcConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector: Types::VpcConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector: Types::VpcConnector?
+    end
+
+    class DeleteVpcIngressConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+    end
+
+    class DeleteVpcIngressConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection: Types::VpcIngressConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection?
+    end
+
+    class DescribeAutoScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+    end
+
+    class DescribeAutoScalingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration: Types::AutoScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration?
+    end
+
+    class DescribeCustomDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeCustomDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_target: String,
+        ?service_arn: String,
+        ?custom_domains: Array[Types::CustomDomain],
+        ?vpc_dns_targets: Array[Types::VpcDNSTarget],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_target: String?
+      attr_accessor service_arn: String?
+      attr_accessor custom_domains: Array[Types::CustomDomain]?
+      attr_accessor vpc_dns_targets: Array[Types::VpcDNSTarget]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeObservabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_arn: String?
+    end
+
+    class DescribeObservabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration: Types::ObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration?
+    end
+
+    class DescribeServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class DescribeServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class DescribeVpcConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector_arn: String?
+    end
+
+    class DescribeVpcConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector: Types::VpcConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector: Types::VpcConnector?
+    end
+
+    class DescribeVpcIngressConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+    end
+
+    class DescribeVpcIngressConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection: Types::VpcIngressConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection?
+    end
+
+    class DisassociateCustomDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DisassociateCustomDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_target: String,
+        ?service_arn: String,
+        ?custom_domain: Types::CustomDomain,
+        ?vpc_dns_targets: Array[Types::VpcDNSTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_target: String?
+      attr_accessor service_arn: String?
+      attr_accessor custom_domain: Types::CustomDomain?
+      attr_accessor vpc_dns_targets: Array[Types::VpcDNSTarget]?
+    end
+
+    class EgressConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_type: String,
+        ?vpc_connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_type: String?
+      attr_accessor vpc_connector_arn: String?
+    end
+
+    module EgressType
+      DEFAULT: String
+      VPC: String
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key: String?
+    end
+
+    class HealthCheckConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?path: String,
+        ?interval: Integer,
+        ?timeout: Integer,
+        ?healthy_threshold: Integer,
+        ?unhealthy_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor path: String?
+      attr_accessor interval: Integer?
+      attr_accessor timeout: Integer?
+      attr_accessor healthy_threshold: Integer?
+      attr_accessor unhealthy_threshold: Integer?
+    end
+
+    module HealthCheckProtocol
+      TCP: String
+      HTTP: String
+    end
+
+    class ImageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_environment_variables: Hash[String, String],
+        ?start_command: String,
+        ?port: String,
+        ?runtime_environment_secrets: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_environment_variables: Hash[String, String]?
+      attr_accessor start_command: String?
+      attr_accessor port: String?
+      attr_accessor runtime_environment_secrets: Hash[String, String]?
+    end
+
+    class ImageRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_configuration: Types::ImageConfiguration,
+        ?image_repository_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_configuration: Types::ImageConfiguration?
+      attr_accessor image_repository_type: String?
+    end
+
+    module ImageRepositoryType
+      ECR: String
+      ECR_PUBLIC: String
+    end
+
+    class IngressConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_publicly_accessible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_publicly_accessible: bool?
+    end
+
+    class IngressVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class InstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu: String,
+        ?memory: String,
+        ?instance_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor instance_role_arn: String?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUAL_STACK: String
+    end
+
+    class ListAutoScalingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_name: String,
+        ?latest_only: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_name: String?
+      attr_accessor latest_only: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutoScalingConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_summary_list: Array[Types::AutoScalingConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_summary_list: Array[Types::AutoScalingConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_summary_list: Array[Types::ConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_summary_list: Array[Types::ConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObservabilityConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_name: String,
+        ?latest_only: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_name: String?
+      attr_accessor latest_only: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListObservabilityConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_summary_list: Array[Types::ObservabilityConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_summary_list: Array[Types::ObservabilityConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_summary_list: Array[Types::OperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_summary_list: Array[Types::OperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesForAutoScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesForAutoScalingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_summary_list: Array[Types::ServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_summary_list: Array[Types::ServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListVpcConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connectors: Array[Types::VpcConnector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connectors: Array[Types::VpcConnector]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcIngressConnectionsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class ListVpcIngressConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ListVpcIngressConnectionsFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ListVpcIngressConnectionsFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcIngressConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_summary_list: Array[Types::VpcIngressConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_summary_list: Array[Types::VpcIngressConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_configuration: Types::EgressConfiguration,
+        ?ingress_configuration: Types::IngressConfiguration,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_configuration: Types::EgressConfiguration?
+      attr_accessor ingress_configuration: Types::IngressConfiguration?
+      attr_accessor ip_address_type: String?
+    end
+
+    class ObservabilityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_arn: String,
+        ?observability_configuration_name: String,
+        ?trace_configuration: Types::TraceConfiguration,
+        ?observability_configuration_revision: Integer,
+        ?latest: bool,
+        ?status: String,
+        ?created_at: Time,
+        ?deleted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_arn: String?
+      attr_accessor observability_configuration_name: String?
+      attr_accessor trace_configuration: Types::TraceConfiguration?
+      attr_accessor observability_configuration_revision: Integer?
+      attr_accessor latest: bool?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor deleted_at: Time?
+    end
+
+    module ObservabilityConfigurationStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class ObservabilityConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_configuration_arn: String,
+        ?observability_configuration_name: String,
+        ?observability_configuration_revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_configuration_arn: String?
+      attr_accessor observability_configuration_name: String?
+      attr_accessor observability_configuration_revision: Integer?
+    end
+
+    module OperationStatus
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_FAILED: String
+      ROLLBACK_SUCCEEDED: String
+    end
+
+    class OperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?target_arn: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor target_arn: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module OperationType
+      START_DEPLOYMENT: String
+      CREATE_SERVICE: String
+      PAUSE_SERVICE: String
+      RESUME_SERVICE: String
+      DELETE_SERVICE: String
+      UPDATE_SERVICE: String
+    end
+
+    class PauseServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class PauseServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor operation_id: String?
+    end
+
+    module ProviderType
+      GITHUB: String
+      BITBUCKET: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResumeServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class ResumeServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor operation_id: String?
+    end
+
+    module Runtime
+      PYTHON_3: String
+      NODEJS_12: String
+      NODEJS_14: String
+      CORRETTO_8: String
+      CORRETTO_11: String
+      NODEJS_16: String
+      GO_1: String
+      DOTNET_6: String
+      PHP_81: String
+      RUBY_31: String
+      PYTHON_311: String
+      NODEJS_18: String
+      NODEJS_22: String
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_id: String,
+        ?service_arn: String,
+        ?service_url: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?deleted_at: Time,
+        ?status: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?instance_configuration: Types::InstanceConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?health_check_configuration: Types::HealthCheckConfiguration,
+        ?auto_scaling_configuration_summary: Types::AutoScalingConfigurationSummary,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?observability_configuration: Types::ServiceObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_id: String?
+      attr_accessor service_arn: String?
+      attr_accessor service_url: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor deleted_at: Time?
+      attr_accessor status: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor instance_configuration: Types::InstanceConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration?
+      attr_accessor auto_scaling_configuration_summary: Types::AutoScalingConfigurationSummary?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration?
+    end
+
+    class ServiceObservabilityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observability_enabled: bool,
+        ?observability_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observability_enabled: bool?
+      attr_accessor observability_configuration_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ServiceStatus
+      CREATE_FAILED: String
+      RUNNING: String
+      DELETED: String
+      DELETE_FAILED: String
+      PAUSED: String
+      OPERATION_IN_PROGRESS: String
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_id: String,
+        ?service_arn: String,
+        ?service_url: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_id: String?
+      attr_accessor service_arn: String?
+      attr_accessor service_url: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class SourceCodeVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module SourceCodeVersionType
+      BRANCH: String
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_repository: Types::CodeRepository,
+        ?image_repository: Types::ImageRepository,
+        ?auto_deployments_enabled: bool,
+        ?authentication_configuration: Types::AuthenticationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_repository: Types::CodeRepository?
+      attr_accessor image_repository: Types::ImageRepository?
+      attr_accessor auto_deployments_enabled: bool?
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration?
+    end
+
+    class StartDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class StartDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TraceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor: String?
+    end
+
+    module TracingVendor
+      AWSXRAY: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDefaultAutoScalingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration_arn: String?
+    end
+
+    class UpdateDefaultAutoScalingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_configuration: Types::AutoScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration?
+    end
+
+    class UpdateServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?instance_configuration: Types::InstanceConfiguration,
+        ?auto_scaling_configuration_arn: String,
+        ?health_check_configuration: Types::HealthCheckConfiguration,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?observability_configuration: Types::ServiceObservabilityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor instance_configuration: Types::InstanceConfiguration?
+      attr_accessor auto_scaling_configuration_arn: String?
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration?
+    end
+
+    class UpdateServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateVpcIngressConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+        ?ingress_vpc_configuration: Types::IngressVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration?
+    end
+
+    class UpdateVpcIngressConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection: Types::VpcIngressConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection?
+    end
+
+    class VpcConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_connector_name: String,
+        ?vpc_connector_arn: String,
+        ?vpc_connector_revision: Integer,
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+        ?status: String,
+        ?created_at: Time,
+        ?deleted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_connector_name: String?
+      attr_accessor vpc_connector_arn: String?
+      attr_accessor vpc_connector_revision: Integer?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor deleted_at: Time?
+    end
+
+    module VpcConnectorStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class VpcDNSTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+        ?vpc_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class VpcIngressConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+        ?vpc_ingress_connection_name: String,
+        ?service_arn: String,
+        ?status: String,
+        ?account_id: String,
+        ?domain_name: String,
+        ?ingress_vpc_configuration: Types::IngressVpcConfiguration,
+        ?created_at: Time,
+        ?deleted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+      attr_accessor vpc_ingress_connection_name: String?
+      attr_accessor service_arn: String?
+      attr_accessor status: String?
+      attr_accessor account_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor deleted_at: Time?
+    end
+
+    module VpcIngressConnectionStatus
+      AVAILABLE: String
+      PENDING_CREATION: String
+      PENDING_UPDATE: String
+      PENDING_DELETION: String
+      FAILED_CREATION: String
+      FAILED_UPDATE: String
+      FAILED_DELETION: String
+      DELETED: String
+    end
+
+    class VpcIngressConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_ingress_connection_arn: String,
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_ingress_connection_arn: String?
+      attr_accessor service_arn: String?
+    end
+  end
+end

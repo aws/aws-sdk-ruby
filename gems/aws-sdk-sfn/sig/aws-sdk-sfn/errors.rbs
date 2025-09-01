@@ -1,0 +1,107 @@
+module Aws::SFN
+  module Errors
+    class ActivityAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActivityDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActivityLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActivityWorkerLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExecutionAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExecutionDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExecutionLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExecutionNotRedrivable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArn < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDefinition < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEncryptionConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidExecutionInput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLoggingConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidName < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOutput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTracingConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsInvalidStateException < Smithy::Client::ServiceError
+      def kms_key_state: () -> String?
+      def message: () -> String?
+    end
+    class KmsThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingRequiredParameter < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StateMachineAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StateMachineDeleting < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StateMachineDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StateMachineLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StateMachineTypeNotSupported < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaskDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaskTimedOut < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTags < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+  end
+end

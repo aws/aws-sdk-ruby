@@ -1,0 +1,749 @@
+module Aws::ConnectCases
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ConnectCases::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetCaseRuleResponse
+      include Smithy::Client::_Response[Types::BatchGetCaseRuleResponse]
+      def case_rules: () -> Array[Types::GetCaseRuleResponse]?
+      def errors: () -> Array[Types::CaseRuleError]?
+    end
+    def batch_get_case_rule: (
+      ?domain_id: String,
+      ?case_rules: Array[
+        {
+          id: String
+        }
+      ]
+    ) -> _BatchGetCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCaseRuleResponse
+
+    interface _BatchGetFieldResponse
+      include Smithy::Client::_Response[Types::BatchGetFieldOutput]
+      def fields: () -> Array[Types::GetFieldResponse]?
+      def errors: () -> Array[Types::FieldError]?
+    end
+    def batch_get_field: (
+      ?domain_id: String,
+      ?fields: Array[
+        {
+          id: String
+        }
+      ]
+    ) -> _BatchGetFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFieldResponse
+
+    interface _BatchPutFieldOptionsResponse
+      include Smithy::Client::_Response[Types::BatchPutFieldOptionsOutput]
+      def errors: () -> Array[Types::FieldOptionError]?
+    end
+    def batch_put_field_options: (
+      ?domain_id: String,
+      ?field_id: String,
+      ?options: Array[
+        {
+          name: String,
+          value: String,
+          active: bool
+        }
+      ]
+    ) -> _BatchPutFieldOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutFieldOptionsResponse
+
+    interface _CreateCaseResponse
+      include Smithy::Client::_Response[Types::CreateCaseOutput]
+      def case_id: () -> String?
+      def case_arn: () -> String?
+    end
+    def create_case: (
+      ?domain_id: String,
+      ?template_id: String,
+      ?fields: Array[
+        {
+          id: String,
+          value: {
+            string_value: String,
+            double_value: Float,
+            boolean_value: bool,
+            empty_value: {
+            },
+            user_arn_value: untyped
+          }
+        }
+      ],
+      ?client_token: String,
+      ?performed_by: {
+        user_arn: String,
+        custom_entity: String
+      }
+    ) -> _CreateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseResponse
+
+    interface _CreateCaseRuleResponse
+      include Smithy::Client::_Response[Types::CreateCaseRuleResponse]
+      def case_rule_id: () -> String?
+      def case_rule_arn: () -> String?
+    end
+    def create_case_rule: (
+      ?domain_id: String,
+      ?name: String,
+      ?description: String,
+      ?rule: {
+        required: {
+          default_value: bool,
+          conditions: Array[
+            {
+              equal_to: {
+                operand_one: {
+                  field_id: String
+                },
+                operand_two: {
+                  string_value: String,
+                  boolean_value: untyped,
+                  double_value: Float,
+                  empty_value: {
+                  }
+                },
+                result: untyped
+              },
+              not_equal_to: untyped
+            }
+          ]
+        }
+      }
+    ) -> _CreateCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseRuleResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainOutput]
+      def domain_id: () -> String?
+      def domain_arn: () -> String?
+      def domain_status: () -> String?
+    end
+    def create_domain: (
+      ?name: String
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateFieldResponse
+      include Smithy::Client::_Response[Types::CreateFieldOutput]
+      def field_id: () -> String?
+      def field_arn: () -> String?
+    end
+    def create_field: (
+      ?domain_id: String,
+      ?name: String,
+      ?type: String,
+      ?description: String
+    ) -> _CreateFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFieldResponse
+
+    interface _CreateLayoutResponse
+      include Smithy::Client::_Response[Types::CreateLayoutOutput]
+      def layout_id: () -> String?
+      def layout_arn: () -> String?
+    end
+    def create_layout: (
+      ?domain_id: String,
+      ?name: String,
+      ?content: {
+        basic: {
+          top_panel: {
+            sections: Array[
+              {
+                field_group: {
+                  name: String,
+                  fields: Array[
+                    {
+                      id: String
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          more_info: untyped
+        }
+      }
+    ) -> _CreateLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLayoutResponse
+
+    interface _CreateRelatedItemResponse
+      include Smithy::Client::_Response[Types::CreateRelatedItemOutput]
+      def related_item_id: () -> String?
+      def related_item_arn: () -> String?
+    end
+    def create_related_item: (
+      ?domain_id: String,
+      ?case_id: String,
+      ?type: String,
+      ?content: {
+        contact: {
+          contact_arn: String
+        },
+        comment: {
+          body: String,
+          content_type: String
+        },
+        file: {
+          file_arn: String
+        },
+        sla: {
+          sla_input_configuration: {
+            name: String,
+            type: String,
+            field_id: String,
+            target_field_values: Array[
+              {
+                string_value: String,
+                double_value: Float,
+                boolean_value: bool,
+                empty_value: {
+                },
+                user_arn_value: untyped
+              }
+            ],
+            target_sla_minutes: Integer
+          }
+        }
+      },
+      ?performed_by: {
+        user_arn: String,
+        custom_entity: String
+      }
+    ) -> _CreateRelatedItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelatedItemResponse
+
+    interface _CreateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTemplateOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+    end
+    def create_template: (
+      ?domain_id: String,
+      ?name: String,
+      ?description: String,
+      ?layout_configuration: {
+        default_layout: String
+      },
+      ?required_fields: Array[
+        {
+          field_id: String
+        }
+      ],
+      ?status: String,
+      ?rules: Array[
+        {
+          case_rule_id: String,
+          field_id: String
+        }
+      ]
+    ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
+
+    interface _DeleteCaseResponse
+      include Smithy::Client::_Response[Types::DeleteCaseResponse]
+    end
+    def delete_case: (
+      ?domain_id: String,
+      ?case_id: String
+    ) -> _DeleteCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCaseResponse
+
+    interface _DeleteCaseRuleResponse
+      include Smithy::Client::_Response[Types::DeleteCaseRuleResponse]
+    end
+    def delete_case_rule: (
+      ?domain_id: String,
+      ?case_rule_id: String
+    ) -> _DeleteCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCaseRuleResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainOutput]
+    end
+    def delete_domain: (
+      ?domain_id: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteFieldResponse
+      include Smithy::Client::_Response[Types::DeleteFieldResponse]
+    end
+    def delete_field: (
+      ?domain_id: String,
+      ?field_id: String
+    ) -> _DeleteFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFieldResponse
+
+    interface _DeleteLayoutResponse
+      include Smithy::Client::_Response[Types::DeleteLayoutResponse]
+    end
+    def delete_layout: (
+      ?domain_id: String,
+      ?layout_id: String
+    ) -> _DeleteLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLayoutResponse
+
+    interface _DeleteRelatedItemResponse
+      include Smithy::Client::_Response[Types::DeleteRelatedItemResponse]
+    end
+    def delete_related_item: (
+      ?domain_id: String,
+      ?case_id: String,
+      ?related_item_id: String
+    ) -> _DeleteRelatedItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRelatedItemResponse
+
+    interface _DeleteTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteTemplateResponse]
+    end
+    def delete_template: (
+      ?domain_id: String,
+      ?template_id: String
+    ) -> _DeleteTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateResponse
+
+    interface _GetCaseResponse
+      include Smithy::Client::_Response[Types::GetCaseOutput]
+      def fields: () -> Array[Types::FieldValue]?
+      def template_id: () -> String?
+      def next_token: () -> String?
+      def tags: () -> Hash[String, String?]?
+    end
+    def get_case: (
+      ?case_id: String,
+      ?domain_id: String,
+      ?fields: Array[
+        {
+          id: String
+        }
+      ],
+      ?next_token: String
+    ) -> _GetCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseResponse
+
+    interface _GetCaseAuditEventsResponse
+      include Smithy::Client::_Response[Types::GetCaseAuditEventsResponse]
+      def next_token: () -> String?
+      def audit_events: () -> Array[Types::AuditEvent?]?
+    end
+    def get_case_audit_events: (
+      ?case_id: String,
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetCaseAuditEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseAuditEventsResponse
+
+    interface _GetCaseEventConfigurationResponse
+      include Smithy::Client::_Response[Types::GetCaseEventConfigurationOutput]
+      def event_bridge: () -> Types::EventBridgeConfiguration?
+    end
+    def get_case_event_configuration: (
+      ?domain_id: String
+    ) -> _GetCaseEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseEventConfigurationResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainOutput]
+      def domain_id: () -> String?
+      def domain_arn: () -> String?
+      def name: () -> String?
+      def created_time: () -> Time?
+      def domain_status: () -> String?
+      def tags: () -> Hash[String, String?]?
+    end
+    def get_domain: (
+      ?domain_id: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetLayoutResponse
+      include Smithy::Client::_Response[Types::GetLayoutOutput]
+      def layout_id: () -> String?
+      def layout_arn: () -> String?
+      def name: () -> String?
+      def content: () -> Types::LayoutContent?
+      def tags: () -> Hash[String, String?]?
+      def deleted: () -> bool?
+      def created_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def get_layout: (
+      ?domain_id: String,
+      ?layout_id: String
+    ) -> _GetLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayoutResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def layout_configuration: () -> Types::LayoutConfiguration?
+      def required_fields: () -> Array[Types::RequiredField]?
+      def tags: () -> Hash[String, String?]?
+      def status: () -> String?
+      def deleted: () -> bool?
+      def created_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def rules: () -> Array[Types::TemplateRule]?
+    end
+    def get_template: (
+      ?domain_id: String,
+      ?template_id: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _ListCaseRulesResponse
+      include Smithy::Client::_Response[Types::ListCaseRulesResponse]
+      def case_rules: () -> Array[Types::CaseRuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_case_rules: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCaseRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCaseRulesResponse
+
+    interface _ListCasesForContactResponse
+      include Smithy::Client::_Response[Types::ListCasesForContactOutput]
+      def cases: () -> Array[Types::CaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_cases_for_contact: (
+      ?domain_id: String,
+      ?contact_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCasesForContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCasesForContactResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def domains: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListFieldOptionsResponse
+      include Smithy::Client::_Response[Types::ListFieldOptionsOutput]
+      def options: () -> Array[Types::FieldOption]?
+      def next_token: () -> String?
+    end
+    def list_field_options: (
+      ?domain_id: String,
+      ?field_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?values: Array[String]
+    ) -> _ListFieldOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFieldOptionsResponse
+
+    interface _ListFieldsResponse
+      include Smithy::Client::_Response[Types::ListFieldsOutput]
+      def fields: () -> Array[Types::FieldSummary]?
+      def next_token: () -> String?
+    end
+    def list_fields: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFieldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFieldsResponse
+
+    interface _ListLayoutsResponse
+      include Smithy::Client::_Response[Types::ListLayoutsOutput]
+      def layouts: () -> Array[Types::LayoutSummary]?
+      def next_token: () -> String?
+    end
+    def list_layouts: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLayoutsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayoutsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String?]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesOutput]
+      def templates: () -> Array[Types::TemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_templates: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: Array[String]
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _PutCaseEventConfigurationResponse
+      include Smithy::Client::_Response[Types::PutCaseEventConfigurationOutput]
+    end
+    def put_case_event_configuration: (
+      ?domain_id: String,
+      ?event_bridge: {
+        enabled: bool,
+        included_data: {
+          case_data: {
+            fields: Array[
+              {
+                id: String
+              }
+            ]
+          },
+          related_item_data: {
+            include_content: untyped
+          }
+        }
+      }
+    ) -> _PutCaseEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCaseEventConfigurationResponse
+
+    interface _SearchCasesResponse
+      include Smithy::Client::_Response[Types::SearchCasesOutput]
+      def next_token: () -> String?
+      def cases: () -> Array[Types::SearchCasesResponseItem?]?
+    end
+    def search_cases: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?search_term: String,
+      ?filter: {
+        field: {
+          equal_to: {
+            id: String,
+            value: {
+              string_value: String,
+              double_value: Float,
+              boolean_value: bool,
+              empty_value: {
+              },
+              user_arn_value: untyped
+            }
+          },
+          contains: untyped,
+          greater_than: untyped,
+          greater_than_or_equal_to: untyped,
+          less_than: untyped,
+          less_than_or_equal_to: untyped
+        },
+        not: untyped,
+        and_all: Array[
+          {
+            field: untyped,
+            not: untyped,
+            and_all: untyped,
+            or_all: untyped
+          }
+        ],
+        or_all: untyped
+      },
+      ?sorts: Array[
+        {
+          field_id: String,
+          sort_order: String
+        }
+      ],
+      ?fields: Array[
+        {
+          id: String
+        }
+      ]
+    ) -> _SearchCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchCasesResponse
+
+    interface _SearchRelatedItemsResponse
+      include Smithy::Client::_Response[Types::SearchRelatedItemsOutput]
+      def next_token: () -> String?
+      def related_items: () -> Array[Types::SearchRelatedItemsResponseItem?]?
+    end
+    def search_related_items: (
+      ?domain_id: String,
+      ?case_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          contact: {
+            channel: Array[String],
+            contact_arn: String
+          },
+          comment: {
+          },
+          file: {
+            file_arn: String
+          },
+          sla: {
+            name: String,
+            status: String
+          }
+        }
+      ]
+    ) -> _SearchRelatedItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRelatedItemsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Hash[String, String?]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCaseResponse
+      include Smithy::Client::_Response[Types::UpdateCaseOutput]
+    end
+    def update_case: (
+      ?domain_id: String,
+      ?case_id: String,
+      ?fields: Array[
+        {
+          id: String,
+          value: {
+            string_value: String,
+            double_value: Float,
+            boolean_value: bool,
+            empty_value: {
+            },
+            user_arn_value: untyped
+          }
+        }
+      ],
+      ?performed_by: {
+        user_arn: String,
+        custom_entity: String
+      }
+    ) -> _UpdateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseResponse
+
+    interface _UpdateCaseRuleResponse
+      include Smithy::Client::_Response[Types::UpdateCaseRuleResponse]
+    end
+    def update_case_rule: (
+      ?domain_id: String,
+      ?case_rule_id: String,
+      ?name: String,
+      ?description: String,
+      ?rule: {
+        required: {
+          default_value: bool,
+          conditions: Array[
+            {
+              equal_to: {
+                operand_one: {
+                  field_id: String
+                },
+                operand_two: {
+                  string_value: String,
+                  boolean_value: untyped,
+                  double_value: Float,
+                  empty_value: {
+                  }
+                },
+                result: untyped
+              },
+              not_equal_to: untyped
+            }
+          ]
+        }
+      }
+    ) -> _UpdateCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseRuleResponse
+
+    interface _UpdateFieldResponse
+      include Smithy::Client::_Response[Types::UpdateFieldOutput]
+    end
+    def update_field: (
+      ?domain_id: String,
+      ?field_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFieldResponse
+
+    interface _UpdateLayoutResponse
+      include Smithy::Client::_Response[Types::UpdateLayoutOutput]
+    end
+    def update_layout: (
+      ?domain_id: String,
+      ?layout_id: String,
+      ?name: String,
+      ?content: {
+        basic: {
+          top_panel: {
+            sections: Array[
+              {
+                field_group: {
+                  name: String,
+                  fields: Array[
+                    {
+                      id: String
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          more_info: untyped
+        }
+      }
+    ) -> _UpdateLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLayoutResponse
+
+    interface _UpdateTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateOutput]
+    end
+    def update_template: (
+      ?domain_id: String,
+      ?template_id: String,
+      ?name: String,
+      ?description: String,
+      ?layout_configuration: {
+        default_layout: String
+      },
+      ?required_fields: Array[
+        {
+          field_id: String
+        }
+      ],
+      ?status: String,
+      ?rules: Array[
+        {
+          case_rule_id: String,
+          field_id: String
+        }
+      ]
+    ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse
+  end
+end

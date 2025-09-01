@@ -1,0 +1,5 @@
+  module Aws
+    module GameLift
+      VERSION: String
+    end
+  end

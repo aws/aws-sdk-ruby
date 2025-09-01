@@ -1,0 +1,1121 @@
+module Aws::TimestreamWrite
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BatchLoadDataFormat
+      CSV: String
+    end
+
+    class BatchLoadProgressReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records_processed: Integer,
+        ?records_ingested: Integer,
+        ?parse_failures: Integer,
+        ?record_ingestion_failures: Integer,
+        ?file_failures: Integer,
+        ?bytes_metered: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records_processed: Integer?
+      attr_accessor records_ingested: Integer?
+      attr_accessor parse_failures: Integer?
+      attr_accessor record_ingestion_failures: Integer?
+      attr_accessor file_failures: Integer?
+      attr_accessor bytes_metered: Integer?
+    end
+
+    module BatchLoadStatus
+      CREATED: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+      PROGRESS_STOPPED: String
+      PENDING_RESUME: String
+    end
+
+    class BatchLoadTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_status: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?resumable_until: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_status: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor resumable_until: Time?
+    end
+
+    class BatchLoadTaskDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?error_message: String,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+        ?progress_report: Types::BatchLoadProgressReport,
+        ?report_configuration: Types::ReportConfiguration,
+        ?data_model_configuration: Types::DataModelConfiguration,
+        ?target_database_name: String,
+        ?target_table_name: String,
+        ?task_status: String,
+        ?record_version: Integer,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?resumable_until: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor error_message: String?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+      attr_accessor progress_report: Types::BatchLoadProgressReport?
+      attr_accessor report_configuration: Types::ReportConfiguration?
+      attr_accessor data_model_configuration: Types::DataModelConfiguration?
+      attr_accessor target_database_name: String?
+      attr_accessor target_table_name: String?
+      attr_accessor task_status: String?
+      attr_accessor record_version: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor resumable_until: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateBatchLoadTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?data_model_configuration: Types::DataModelConfiguration,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+        ?report_configuration: Types::ReportConfiguration,
+        ?target_database_name: String,
+        ?target_table_name: String,
+        ?record_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor data_model_configuration: Types::DataModelConfiguration?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+      attr_accessor report_configuration: Types::ReportConfiguration?
+      attr_accessor target_database_name: String?
+      attr_accessor target_table_name: String?
+      attr_accessor record_version: Integer?
+    end
+
+    class CreateBatchLoadTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class CreateDatabaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatabaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::Database,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::Database?
+    end
+
+    class CreateTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?retention_properties: Types::RetentionProperties,
+        ?tags: Array[Types::Tag],
+        ?magnetic_store_write_properties: Types::MagneticStoreWriteProperties,
+        ?schema: Types::Schema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor retention_properties: Types::RetentionProperties?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties?
+      attr_accessor schema: Types::Schema?
+    end
+
+    class CreateTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::Table,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::Table?
+    end
+
+    class CsvConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_separator: String,
+        ?escape_char: String,
+        ?quote_char: String,
+        ?null_value: String,
+        ?trim_white_space: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_separator: String?
+      attr_accessor escape_char: String?
+      attr_accessor quote_char: String?
+      attr_accessor null_value: String?
+      attr_accessor trim_white_space: bool?
+    end
+
+    class DataModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_column: String,
+        ?time_unit: String,
+        ?dimension_mappings: Array[Types::DimensionMapping],
+        ?multi_measure_mappings: Types::MultiMeasureMappings,
+        ?mixed_measure_mappings: Array[Types::MixedMeasureMapping],
+        ?measure_name_column: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_column: String?
+      attr_accessor time_unit: String?
+      attr_accessor dimension_mappings: Array[Types::DimensionMapping]?
+      attr_accessor multi_measure_mappings: Types::MultiMeasureMappings?
+      attr_accessor mixed_measure_mappings: Array[Types::MixedMeasureMapping]?
+      attr_accessor measure_name_column: String?
+    end
+
+    class DataModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_model: Types::DataModel,
+        ?data_model_s3_configuration: Types::DataModelS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_model: Types::DataModel?
+      attr_accessor data_model_s3_configuration: Types::DataModelS3Configuration?
+    end
+
+    class DataModelS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key: String?
+    end
+
+    class DataSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_s3_configuration: Types::DataSourceS3Configuration,
+        ?csv_configuration: Types::CsvConfiguration,
+        ?data_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_s3_configuration: Types::DataSourceS3Configuration?
+      attr_accessor csv_configuration: Types::CsvConfiguration?
+      attr_accessor data_format: String?
+    end
+
+    class DataSourceS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key_prefix: String?
+    end
+
+    class Database
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?database_name: String,
+        ?table_count: Integer,
+        ?kms_key_id: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor database_name: String?
+      attr_accessor table_count: Integer?
+      attr_accessor kms_key_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class DeleteDatabaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+    end
+
+    class DeleteTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class DescribeBatchLoadTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class DescribeBatchLoadTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_load_task_description: Types::BatchLoadTaskDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_load_task_description: Types::BatchLoadTaskDescription?
+    end
+
+    class DescribeDatabaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+    end
+
+    class DescribeDatabaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::Database,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::Database?
+    end
+
+    class DescribeEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+    end
+
+    class DescribeTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class DescribeTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::Table,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::Table?
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?dimension_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor dimension_value_type: String?
+    end
+
+    class DimensionMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_column: String,
+        ?destination_column: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_column: String?
+      attr_accessor destination_column: String?
+    end
+
+    module DimensionValueType
+      VARCHAR: String
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?cache_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor cache_period_in_minutes: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndpointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListBatchLoadTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?task_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor task_status: String?
+    end
+
+    class ListBatchLoadTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?batch_load_tasks: Array[Types::BatchLoadTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor batch_load_tasks: Array[Types::BatchLoadTask]?
+    end
+
+    class ListDatabasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatabasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?databases: Array[Types::Database],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor databases: Array[Types::Database]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tables: Array[Types::Table],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tables: Array[Types::Table]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MagneticStoreRejectedDataLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::S3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3Configuration?
+    end
+
+    class MagneticStoreWriteProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_magnetic_store_writes: bool,
+        ?magnetic_store_rejected_data_location: Types::MagneticStoreRejectedDataLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_magnetic_store_writes: bool?
+      attr_accessor magnetic_store_rejected_data_location: Types::MagneticStoreRejectedDataLocation?
+    end
+
+    class MeasureValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module MeasureValueType
+      DOUBLE: String
+      BIGINT: String
+      VARCHAR: String
+      BOOLEAN: String
+      TIMESTAMP: String
+      MULTI: String
+    end
+
+    class MixedMeasureMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?measure_name: String,
+        ?source_column: String,
+        ?target_measure_name: String,
+        ?measure_value_type: String,
+        ?multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor measure_name: String?
+      attr_accessor source_column: String?
+      attr_accessor target_measure_name: String?
+      attr_accessor measure_value_type: String?
+      attr_accessor multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping]?
+    end
+
+    class MultiMeasureAttributeMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_column: String,
+        ?target_multi_measure_attribute_name: String,
+        ?measure_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_column: String?
+      attr_accessor target_multi_measure_attribute_name: String?
+      attr_accessor measure_value_type: String?
+    end
+
+    class MultiMeasureMappings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_multi_measure_name: String,
+        ?multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_multi_measure_name: String?
+      attr_accessor multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping]?
+    end
+
+    class PartitionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?enforcement_in_record: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor enforcement_in_record: String?
+    end
+
+    module PartitionKeyEnforcementLevel
+      REQUIRED: String
+      OPTIONAL: String
+    end
+
+    module PartitionKeyType
+      DIMENSION: String
+      MEASURE: String
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Array[Types::Dimension],
+        ?measure_name: String,
+        ?measure_value: String,
+        ?measure_value_type: String,
+        ?time: String,
+        ?time_unit: String,
+        ?version: Integer,
+        ?measure_values: Array[Types::MeasureValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Array[Types::Dimension]?
+      attr_accessor measure_name: String?
+      attr_accessor measure_value: String?
+      attr_accessor measure_value_type: String?
+      attr_accessor time: String?
+      attr_accessor time_unit: String?
+      attr_accessor version: Integer?
+      attr_accessor measure_values: Array[Types::MeasureValue]?
+    end
+
+    class RecordsIngested
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Integer,
+        ?memory_store: Integer,
+        ?magnetic_store: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Integer?
+      attr_accessor memory_store: Integer?
+      attr_accessor magnetic_store: Integer?
+    end
+
+    class RejectedRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_index: Integer,
+        ?reason: String,
+        ?existing_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_index: Integer?
+      attr_accessor reason: String?
+      attr_accessor existing_version: Integer?
+    end
+
+    class RejectedRecordsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?rejected_records: Array[Types::RejectedRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor rejected_records: Array[Types::RejectedRecord]?
+    end
+
+    class ReportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_s3_configuration: Types::ReportS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_s3_configuration: Types::ReportS3Configuration?
+    end
+
+    class ReportS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key_prefix: String,
+        ?encryption_option: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key_prefix: String?
+      attr_accessor encryption_option: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResumeBatchLoadTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class ResumeBatchLoadTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RetentionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory_store_retention_period_in_hours: Integer,
+        ?magnetic_store_retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory_store_retention_period_in_hours: Integer?
+      attr_accessor magnetic_store_retention_period_in_days: Integer?
+    end
+
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key_prefix: String,
+        ?encryption_option: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key_prefix: String?
+      attr_accessor encryption_option: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    module S3EncryptionOption
+      SSE_S3: String
+      SSE_KMS: String
+    end
+
+    module ScalarMeasureValueType
+      DOUBLE: String
+      BIGINT: String
+      BOOLEAN: String
+      VARCHAR: String
+      TIMESTAMP: String
+    end
+
+    class Schema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composite_partition_key: Array[Types::PartitionKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composite_partition_key: Array[Types::PartitionKey]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Table
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?table_name: String,
+        ?database_name: String,
+        ?table_status: String,
+        ?retention_properties: Types::RetentionProperties,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?magnetic_store_write_properties: Types::MagneticStoreWriteProperties,
+        ?schema: Types::Schema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor table_name: String?
+      attr_accessor database_name: String?
+      attr_accessor table_status: String?
+      attr_accessor retention_properties: Types::RetentionProperties?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties?
+      attr_accessor schema: Types::Schema?
+    end
+
+    module TableStatus
+      ACTIVE: String
+      DELETING: String
+      RESTORING: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TimeUnit
+      MILLISECONDS: String
+      SECONDS: String
+      MICROSECONDS: String
+      NANOSECONDS: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDatabaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class UpdateDatabaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::Database,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::Database?
+    end
+
+    class UpdateTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?retention_properties: Types::RetentionProperties,
+        ?magnetic_store_write_properties: Types::MagneticStoreWriteProperties,
+        ?schema: Types::Schema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor retention_properties: Types::RetentionProperties?
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties?
+      attr_accessor schema: Types::Schema?
+    end
+
+    class UpdateTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::Table,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::Table?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WriteRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?common_attributes: Types::Record,
+        ?records: Array[Types::Record],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor common_attributes: Types::Record?
+      attr_accessor records: Array[Types::Record]?
+    end
+
+    class WriteRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records_ingested: Types::RecordsIngested,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records_ingested: Types::RecordsIngested?
+    end
+  end
+end

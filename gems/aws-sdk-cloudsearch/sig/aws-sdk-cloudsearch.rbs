@@ -1,0 +1,5 @@
+  module Aws
+    module CloudSearch
+      VERSION: String
+    end
+  end

@@ -1,0 +1,28 @@
+module Aws::Mq
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def error_attribute: () -> String?
+      def message: () -> String?
+    end
+  end
+end

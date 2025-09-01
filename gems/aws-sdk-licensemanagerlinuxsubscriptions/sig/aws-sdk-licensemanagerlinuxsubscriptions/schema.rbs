@@ -1,0 +1,59 @@
+module Aws::LicenseManagerLinuxSubscriptions
+  module Schema
+    include Smithy::Schema::Shapes
+
+    BoxInteger: IntegerShape
+    BoxLong: IntegerShape
+    DeregisterSubscriptionProviderRequest: StructureShape
+    DeregisterSubscriptionProviderResponse: StructureShape
+    Filter: StructureShape
+    FilterList: ListShape
+    GetRegisteredSubscriptionProviderRequest: StructureShape
+    GetRegisteredSubscriptionProviderResponse: StructureShape
+    GetServiceSettingsInput: StructureShape
+    GetServiceSettingsOutput: StructureShape
+    Instance: StructureShape
+    InstanceList: ListShape
+    InternalServerException: StructureShape
+    LinuxSubscriptionsDiscovery: StringShape
+    LinuxSubscriptionsDiscoverySettings: StructureShape
+    ListLinuxSubscriptionInstancesInput: StructureShape
+    ListLinuxSubscriptionInstancesOutput: StructureShape
+    ListLinuxSubscriptionsInput: StructureShape
+    ListLinuxSubscriptionsOutput: StructureShape
+    ListRegisteredSubscriptionProvidersRequest: StructureShape
+    ListRegisteredSubscriptionProvidersResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    Operator: StringShape
+    OrganizationIntegration: StringShape
+    ProductCodeList: ListShape
+    RegisterSubscriptionProviderRequest: StructureShape
+    RegisterSubscriptionProviderResponse: StructureShape
+    RegisteredSubscriptionProvider: StructureShape
+    RegisteredSubscriptionProviderList: ListShape
+    ResourceNotFoundException: StructureShape
+    SecretArn: StringShape
+    Status: StringShape
+    StringList: ListShape
+    StringMap: MapShape
+    Subscription: StructureShape
+    SubscriptionList: ListShape
+    SubscriptionProviderArn: StringShape
+    SubscriptionProviderSource: StringShape
+    SubscriptionProviderSourceList: ListShape
+    SubscriptionProviderStatus: StringShape
+    TagKeyList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    Tags: MapShape
+    ThrottlingException: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateServiceSettingsInput: StructureShape
+    UpdateServiceSettingsOutput: StructureShape
+    ValidationException: StructureShape
+
+    LicenseManagerLinuxSubscriptions: ServiceShape
+  end
+end

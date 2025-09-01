@@ -1,0 +1,5 @@
+  module Aws
+    module CodeCatalyst
+      VERSION: String
+    end
+  end

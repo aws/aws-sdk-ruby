@@ -1,0 +1,4809 @@
+module Aws::Omics
+  module Types
+
+    class AbortMultipartReadSetUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+    end
+
+    class AbortMultipartReadSetUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AcceptShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+    end
+
+    class AcceptShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivateReadSetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ActivateReadSetJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class ActivateReadSetSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_set_id: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_set_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class AnnotationImportItemDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor job_status: String?
+    end
+
+    class AnnotationImportItemSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class AnnotationImportJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?destination_name: String,
+        ?version_name: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?completion_time: Time,
+        ?run_left_normalization: bool,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor destination_name: String?
+      attr_accessor version_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class AnnotationStoreItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?store_arn: String,
+        ?name: String,
+        ?store_format: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?status_message: String,
+        ?store_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor store_arn: String?
+      attr_accessor name: String?
+      attr_accessor store_format: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor store_size_bytes: Integer?
+    end
+
+    class AnnotationStoreVersionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?store_id: String,
+        ?id: String,
+        ?status: String,
+        ?version_arn: String,
+        ?name: String,
+        ?version_name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?status_message: String,
+        ?version_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor store_id: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor version_arn: String?
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor version_size_bytes: Integer?
+    end
+
+    class BatchDeleteReadSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?sequence_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor sequence_store_id: String?
+    end
+
+    class BatchDeleteReadSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::ReadSetBatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::ReadSetBatchError]?
+    end
+
+    class CancelAnnotationImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelAnnotationImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CancelVariantImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelVariantImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CompleteMultipartReadSetUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+        ?parts: Array[Types::CompleteReadSetUploadPartListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor parts: Array[Types::CompleteReadSetUploadPartListItem]?
+    end
+
+    class CompleteMultipartReadSetUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_set_id: String?
+    end
+
+    class CompleteReadSetUploadPartListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?part_number: Integer,
+        ?part_source: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor part_number: Integer?
+      attr_accessor part_source: String?
+      attr_accessor checksum: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateAnnotationStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference: Types::ReferenceItem,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?version_name: String,
+        ?sse_config: Types::SseConfig,
+        ?store_format: String,
+        ?store_options: Types::StoreOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor version_name: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor store_format: String?
+      attr_accessor store_options: Types::StoreOptions?
+    end
+
+    class CreateAnnotationStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?store_format: String,
+        ?store_options: Types::StoreOptions,
+        ?status: String,
+        ?name: String,
+        ?version_name: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor store_format: String?
+      attr_accessor store_options: Types::StoreOptions?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateAnnotationStoreVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_name: String,
+        ?description: String,
+        ?version_options: Types::VersionOptions,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor version_options: Types::VersionOptions?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAnnotationStoreVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version_name: String,
+        ?store_id: String,
+        ?version_options: Types::VersionOptions,
+        ?name: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version_name: String?
+      attr_accessor store_id: String?
+      attr_accessor version_options: Types::VersionOptions?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateMultipartReadSetUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?client_token: String,
+        ?source_file_type: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?generated_from: String,
+        ?reference_arn: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor client_token: String?
+      attr_accessor source_file_type: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor reference_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMultipartReadSetUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+        ?source_file_type: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?generated_from: String,
+        ?reference_arn: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor source_file_type: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor reference_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateReferenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateReferenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateRunCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_behavior: String,
+        ?cache_s3_location: String,
+        ?description: String,
+        ?name: String,
+        ?request_id: String,
+        ?tags: Hash[String, String],
+        ?cache_bucket_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_behavior: String?
+      attr_accessor cache_s3_location: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor request_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor cache_bucket_owner_id: String?
+    end
+
+    class CreateRunCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRunGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_cpus: Integer,
+        ?max_runs: Integer,
+        ?max_duration: Integer,
+        ?tags: Hash[String, String],
+        ?request_id: String,
+        ?max_gpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_cpus: Integer?
+      attr_accessor max_runs: Integer?
+      attr_accessor max_duration: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor request_id: String?
+      attr_accessor max_gpus: Integer?
+    end
+
+    class CreateRunGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSequenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?fallback_location: String,
+        ?e_tag_algorithm_family: String,
+        ?propagated_set_level_tags: Array[String],
+        ?s3_access_config: Types::S3AccessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor fallback_location: String?
+      attr_accessor e_tag_algorithm_family: String?
+      attr_accessor propagated_set_level_tags: Array[String]?
+      attr_accessor s3_access_config: Types::S3AccessConfig?
+    end
+
+    class CreateSequenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?fallback_location: String,
+        ?e_tag_algorithm_family: String,
+        ?status: String,
+        ?status_message: String,
+        ?propagated_set_level_tags: Array[String],
+        ?s3_access: Types::SequenceStoreS3Access,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor fallback_location: String?
+      attr_accessor e_tag_algorithm_family: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor propagated_set_level_tags: Array[String]?
+      attr_accessor s3_access: Types::SequenceStoreS3Access?
+    end
+
+    class CreateShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?principal_subscriber: String,
+        ?share_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor principal_subscriber: String?
+      attr_accessor share_name: String?
+    end
+
+    class CreateShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?status: String,
+        ?share_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor status: String?
+      attr_accessor share_name: String?
+    end
+
+    class CreateVariantStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference: Types::ReferenceItem,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?sse_config: Types::SseConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor sse_config: Types::SseConfig?
+    end
+
+    class CreateVariantStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?name: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?engine: String,
+        ?definition_zip: String,
+        ?definition_uri: String,
+        ?main: String,
+        ?parameter_template: Hash[String, Types::WorkflowParameter],
+        ?storage_capacity: Integer,
+        ?tags: Hash[String, String],
+        ?request_id: String,
+        ?accelerators: String,
+        ?storage_type: String,
+        ?readme_markdown: String,
+        ?parameter_template_path: String,
+        ?readme_path: String,
+        ?definition_repository: Types::DefinitionRepository,
+        ?workflow_bucket_owner_id: String,
+        ?readme_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor engine: String?
+      attr_accessor definition_zip: String?
+      attr_accessor definition_uri: String?
+      attr_accessor main: String?
+      attr_accessor parameter_template: Hash[String, Types::WorkflowParameter]?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor request_id: String?
+      attr_accessor accelerators: String?
+      attr_accessor storage_type: String?
+      attr_accessor readme_markdown: String?
+      attr_accessor parameter_template_path: String?
+      attr_accessor readme_path: String?
+      attr_accessor definition_repository: Types::DefinitionRepository?
+      attr_accessor workflow_bucket_owner_id: String?
+      attr_accessor readme_uri: String?
+    end
+
+    class CreateWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor uuid: String?
+    end
+
+    class CreateWorkflowVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?version_name: String,
+        ?definition_zip: String,
+        ?definition_uri: String,
+        ?accelerators: String,
+        ?description: String,
+        ?engine: String,
+        ?main: String,
+        ?parameter_template: Hash[String, Types::WorkflowParameter],
+        ?request_id: String,
+        ?storage_type: String,
+        ?storage_capacity: Integer,
+        ?tags: Hash[String, String],
+        ?workflow_bucket_owner_id: String,
+        ?readme_markdown: String,
+        ?parameter_template_path: String,
+        ?readme_path: String,
+        ?definition_repository: Types::DefinitionRepository,
+        ?readme_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor definition_zip: String?
+      attr_accessor definition_uri: String?
+      attr_accessor accelerators: String?
+      attr_accessor description: String?
+      attr_accessor engine: String?
+      attr_accessor main: String?
+      attr_accessor parameter_template: Hash[String, Types::WorkflowParameter]?
+      attr_accessor request_id: String?
+      attr_accessor storage_type: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor workflow_bucket_owner_id: String?
+      attr_accessor readme_markdown: String?
+      attr_accessor parameter_template_path: String?
+      attr_accessor readme_path: String?
+      attr_accessor definition_repository: Types::DefinitionRepository?
+      attr_accessor readme_uri: String?
+    end
+
+    class CreateWorkflowVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?workflow_id: String,
+        ?version_name: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor uuid: String?
+    end
+
+    class DefinitionRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?full_repository_id: String,
+        ?source_reference: Types::SourceReference,
+        ?exclude_file_patterns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor full_repository_id: String?
+      attr_accessor source_reference: Types::SourceReference?
+      attr_accessor exclude_file_patterns: Array[String]?
+    end
+
+    class DefinitionRepositoryDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?full_repository_id: String,
+        ?source_reference: Types::SourceReference,
+        ?provider_type: String,
+        ?provider_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor full_repository_id: String?
+      attr_accessor source_reference: Types::SourceReference?
+      attr_accessor provider_type: String?
+      attr_accessor provider_endpoint: String?
+    end
+
+    class DeleteAnnotationStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor force: bool?
+    end
+
+    class DeleteAnnotationStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteAnnotationStoreVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?versions: Array[String],
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor versions: Array[String]?
+      attr_accessor force: bool?
+    end
+
+    class DeleteAnnotationStoreVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::VersionDeleteError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::VersionDeleteError]?
+    end
+
+    class DeleteReferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+    end
+
+    class DeleteReferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReferenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteReferenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRunCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteRunGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteS3AccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_arn: String?
+    end
+
+    class DeleteS3AccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSequenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteSequenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+    end
+
+    class DeleteShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteVariantStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor force: bool?
+    end
+
+    class DeleteVariantStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteWorkflowVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+    end
+
+    class ETag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?source1: String,
+        ?source2: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor source1: String?
+      attr_accessor source2: String?
+    end
+
+    class ExportReadSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_set_id: String?
+    end
+
+    class ExportReadSetDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ExportReadSetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ExportReadSetJobDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?destination: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor destination: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class FileInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_parts: Integer,
+        ?part_size: Integer,
+        ?content_length: Integer,
+        ?s3_access: Types::ReadSetS3Access,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_parts: Integer?
+      attr_accessor part_size: Integer?
+      attr_accessor content_length: Integer?
+      attr_accessor s3_access: Types::ReadSetS3Access?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?status: Array[String],
+        ?type: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor status: Array[String]?
+      attr_accessor type: Array[String]?
+    end
+
+    class FormatOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tsv_options: Types::TsvOptions,
+        ?vcf_options: Types::VcfOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tsv_options: Types::TsvOptions?
+      attr_accessor vcf_options: Types::VcfOptions?
+
+      class TsvOptions < FormatOptions
+      end
+      class VcfOptions < FormatOptions
+      end
+      class Unknown < FormatOptions
+      end
+    end
+
+    class GetAnnotationImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetAnnotationImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?destination_name: String,
+        ?version_name: String,
+        ?role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?completion_time: Time,
+        ?items: Array[Types::AnnotationImportItemDetail],
+        ?run_left_normalization: bool,
+        ?format_options: Types::FormatOptions,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor destination_name: String?
+      attr_accessor version_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor items: Array[Types::AnnotationImportItemDetail]?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor format_options: Types::FormatOptions?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class GetAnnotationStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetAnnotationStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?store_arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?tags: Hash[String, String],
+        ?store_options: Types::StoreOptions,
+        ?store_format: String,
+        ?status_message: String,
+        ?store_size_bytes: Integer,
+        ?num_versions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor store_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor store_options: Types::StoreOptions?
+      attr_accessor store_format: String?
+      attr_accessor status_message: String?
+      attr_accessor store_size_bytes: Integer?
+      attr_accessor num_versions: Integer?
+    end
+
+    class GetAnnotationStoreVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+    end
+
+    class GetAnnotationStoreVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?store_id: String,
+        ?id: String,
+        ?status: String,
+        ?version_arn: String,
+        ?name: String,
+        ?version_name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?tags: Hash[String, String],
+        ?version_options: Types::VersionOptions,
+        ?status_message: String,
+        ?version_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor store_id: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor version_arn: String?
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor version_options: Types::VersionOptions?
+      attr_accessor status_message: String?
+      attr_accessor version_size_bytes: Integer?
+    end
+
+    class GetReadSetActivationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+    end
+
+    class GetReadSetActivationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?sources: Array[Types::ActivateReadSetSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor sources: Array[Types::ActivateReadSetSourceItem]?
+    end
+
+    class GetReadSetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor id: String?
+    end
+
+    class GetReadSetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?destination: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?read_sets: Array[Types::ExportReadSetDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor destination: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor read_sets: Array[Types::ExportReadSetDetail]?
+    end
+
+    class GetReadSetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+    end
+
+    class GetReadSetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?sources: Array[Types::ImportReadSetSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor sources: Array[Types::ImportReadSetSourceItem]?
+    end
+
+    class GetReadSetMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+    end
+
+    class GetReadSetMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?sequence_store_id: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?file_type: String,
+        ?creation_time: Time,
+        ?sequence_information: Types::SequenceInformation,
+        ?reference_arn: String,
+        ?files: Types::ReadSetFiles,
+        ?status_message: String,
+        ?creation_type: String,
+        ?etag: Types::ETag,
+        ?creation_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor file_type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor sequence_information: Types::SequenceInformation?
+      attr_accessor reference_arn: String?
+      attr_accessor files: Types::ReadSetFiles?
+      attr_accessor status_message: String?
+      attr_accessor creation_type: String?
+      attr_accessor etag: Types::ETag?
+      attr_accessor creation_job_id: String?
+    end
+
+    class GetReadSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?file: String,
+        ?part_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor file: String?
+      attr_accessor part_number: Integer?
+    end
+
+    class GetReadSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class GetReferenceImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+    end
+
+    class GetReferenceImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?sources: Array[Types::ImportReferenceSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor sources: Array[Types::ImportReferenceSourceItem]?
+    end
+
+    class GetReferenceMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+    end
+
+    class GetReferenceMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?reference_store_id: String,
+        ?md5: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?files: Types::ReferenceFiles,
+        ?creation_type: String,
+        ?creation_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor md5: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor files: Types::ReferenceFiles?
+      attr_accessor creation_type: String?
+      attr_accessor creation_job_id: String?
+    end
+
+    class GetReferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+        ?range: String,
+        ?part_number: Integer,
+        ?file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor range: String?
+      attr_accessor part_number: Integer?
+      attr_accessor file: String?
+    end
+
+    class GetReferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class GetReferenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetReferenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+    end
+
+    class GetRunCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetRunCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cache_behavior: String,
+        ?cache_bucket_owner_id: String,
+        ?cache_s3_uri: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cache_behavior: String?
+      attr_accessor cache_bucket_owner_id: String?
+      attr_accessor cache_s3_uri: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetRunGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetRunGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?max_cpus: Integer,
+        ?max_runs: Integer,
+        ?max_duration: Integer,
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+        ?max_gpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor max_cpus: Integer?
+      attr_accessor max_runs: Integer?
+      attr_accessor max_duration: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor max_gpus: Integer?
+    end
+
+    class GetRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?export: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor export: Array[String]?
+    end
+
+    class GetRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?cache_id: String,
+        ?cache_behavior: String,
+        ?engine_version: String,
+        ?status: String,
+        ?workflow_id: String,
+        ?workflow_type: String,
+        ?run_id: String,
+        ?role_arn: String,
+        ?name: String,
+        ?run_group_id: String,
+        ?priority: Integer,
+        ?definition: String,
+        ?digest: String,
+        ?parameters: Smithy::Schema::document,
+        ?storage_capacity: Integer,
+        ?output_uri: String,
+        ?log_level: String,
+        ?resource_digests: Hash[String, String],
+        ?started_by: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?stop_time: Time,
+        ?status_message: String,
+        ?tags: Hash[String, String],
+        ?accelerators: String,
+        ?retention_mode: String,
+        ?failure_reason: String,
+        ?log_location: Types::RunLogLocation,
+        ?uuid: String,
+        ?run_output_uri: String,
+        ?storage_type: String,
+        ?workflow_owner_id: String,
+        ?workflow_version_name: String,
+        ?workflow_uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor cache_id: String?
+      attr_accessor cache_behavior: String?
+      attr_accessor engine_version: String?
+      attr_accessor status: String?
+      attr_accessor workflow_id: String?
+      attr_accessor workflow_type: String?
+      attr_accessor run_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor name: String?
+      attr_accessor run_group_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor definition: String?
+      attr_accessor digest: String?
+      attr_accessor parameters: Smithy::Schema::document?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor output_uri: String?
+      attr_accessor log_level: String?
+      attr_accessor resource_digests: Hash[String, String]?
+      attr_accessor started_by: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor accelerators: String?
+      attr_accessor retention_mode: String?
+      attr_accessor failure_reason: String?
+      attr_accessor log_location: Types::RunLogLocation?
+      attr_accessor uuid: String?
+      attr_accessor run_output_uri: String?
+      attr_accessor storage_type: String?
+      attr_accessor workflow_owner_id: String?
+      attr_accessor workflow_version_name: String?
+      attr_accessor workflow_uuid: String?
+    end
+
+    class GetRunTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+    end
+
+    class GetRunTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status: String,
+        ?name: String,
+        ?cpus: Integer,
+        ?cache_hit: bool,
+        ?cache_s3_uri: String,
+        ?memory: Integer,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?stop_time: Time,
+        ?status_message: String,
+        ?log_stream: String,
+        ?gpus: Integer,
+        ?instance_type: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor cpus: Integer?
+      attr_accessor cache_hit: bool?
+      attr_accessor cache_s3_uri: String?
+      attr_accessor memory: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor log_stream: String?
+      attr_accessor gpus: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetS3AccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_arn: String?
+    end
+
+    class GetS3AccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_arn: String,
+        ?store_id: String,
+        ?store_type: String,
+        ?update_time: Time,
+        ?s3_access_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_arn: String?
+      attr_accessor store_id: String?
+      attr_accessor store_type: String?
+      attr_accessor update_time: Time?
+      attr_accessor s3_access_policy: String?
+    end
+
+    class GetSequenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetSequenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?fallback_location: String,
+        ?s3_access: Types::SequenceStoreS3Access,
+        ?e_tag_algorithm_family: String,
+        ?status: String,
+        ?status_message: String,
+        ?propagated_set_level_tags: Array[String],
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor fallback_location: String?
+      attr_accessor s3_access: Types::SequenceStoreS3Access?
+      attr_accessor e_tag_algorithm_family: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor propagated_set_level_tags: Array[String]?
+      attr_accessor update_time: Time?
+    end
+
+    class GetShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+    end
+
+    class GetShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share: Types::ShareDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share: Types::ShareDetails?
+    end
+
+    class GetVariantImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetVariantImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?destination_name: String,
+        ?role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?completion_time: Time,
+        ?items: Array[Types::VariantImportItemDetail],
+        ?run_left_normalization: bool,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor destination_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor items: Array[Types::VariantImportItemDetail]?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class GetVariantStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetVariantStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?store_arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?tags: Hash[String, String],
+        ?status_message: String,
+        ?store_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor store_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor status_message: String?
+      attr_accessor store_size_bytes: Integer?
+    end
+
+    class GetWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?export: Array[String],
+        ?workflow_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor export: Array[String]?
+      attr_accessor workflow_owner_id: String?
+    end
+
+    class GetWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?type: String,
+        ?name: String,
+        ?description: String,
+        ?engine: String,
+        ?definition: String,
+        ?main: String,
+        ?digest: String,
+        ?parameter_template: Hash[String, Types::WorkflowParameter],
+        ?storage_capacity: Integer,
+        ?creation_time: Time,
+        ?status_message: String,
+        ?tags: Hash[String, String],
+        ?metadata: Hash[String, String],
+        ?accelerators: String,
+        ?storage_type: String,
+        ?uuid: String,
+        ?readme: String,
+        ?definition_repository_details: Types::DefinitionRepositoryDetails,
+        ?readme_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor engine: String?
+      attr_accessor definition: String?
+      attr_accessor main: String?
+      attr_accessor digest: String?
+      attr_accessor parameter_template: Hash[String, Types::WorkflowParameter]?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor accelerators: String?
+      attr_accessor storage_type: String?
+      attr_accessor uuid: String?
+      attr_accessor readme: String?
+      attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails?
+      attr_accessor readme_path: String?
+    end
+
+    class GetWorkflowVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?version_name: String,
+        ?type: String,
+        ?export: Array[String],
+        ?workflow_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor type: String?
+      attr_accessor export: Array[String]?
+      attr_accessor workflow_owner_id: String?
+    end
+
+    class GetWorkflowVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?workflow_id: String,
+        ?version_name: String,
+        ?accelerators: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?definition: String,
+        ?digest: String,
+        ?engine: String,
+        ?main: String,
+        ?metadata: Hash[String, String],
+        ?parameter_template: Hash[String, Types::WorkflowParameter],
+        ?status: String,
+        ?status_message: String,
+        ?storage_type: String,
+        ?storage_capacity: Integer,
+        ?type: String,
+        ?tags: Hash[String, String],
+        ?uuid: String,
+        ?workflow_bucket_owner_id: String,
+        ?readme: String,
+        ?definition_repository_details: Types::DefinitionRepositoryDetails,
+        ?readme_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor accelerators: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor definition: String?
+      attr_accessor digest: String?
+      attr_accessor engine: String?
+      attr_accessor main: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameter_template: Hash[String, Types::WorkflowParameter]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor storage_type: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor uuid: String?
+      attr_accessor workflow_bucket_owner_id: String?
+      attr_accessor readme: String?
+      attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails?
+      attr_accessor readme_path: String?
+    end
+
+    class ImportReadSetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ImportReadSetJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class ImportReadSetSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_files: Types::SourceFiles,
+        ?source_file_type: String,
+        ?status: String,
+        ?status_message: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?generated_from: String,
+        ?reference_arn: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?read_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_files: Types::SourceFiles?
+      attr_accessor source_file_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor reference_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor read_set_id: String?
+    end
+
+    class ImportReferenceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ImportReferenceJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class ImportReferenceSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_file: String,
+        ?status: String,
+        ?status_message: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?reference_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_file: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor reference_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAnnotationImportJobsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?store_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor store_name: String?
+    end
+
+    class ListAnnotationImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?ids: Array[String],
+        ?next_token: String,
+        ?filter: Types::ListAnnotationImportJobsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListAnnotationImportJobsFilter?
+    end
+
+    class ListAnnotationImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_import_jobs: Array[Types::AnnotationImportJobItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_import_jobs: Array[Types::AnnotationImportJobItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnnotationStoreVersionsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ListAnnotationStoreVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ListAnnotationStoreVersionsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListAnnotationStoreVersionsFilter?
+    end
+
+    class ListAnnotationStoreVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_store_versions: Array[Types::AnnotationStoreVersionItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_store_versions: Array[Types::AnnotationStoreVersionItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnnotationStoresFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ListAnnotationStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ListAnnotationStoresFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListAnnotationStoresFilter?
+    end
+
+    class ListAnnotationStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_stores: Array[Types::AnnotationStoreItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_stores: Array[Types::AnnotationStoreItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMultipartReadSetUploadsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMultipartReadSetUploadsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?uploads: Array[Types::MultipartReadSetUploadListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor uploads: Array[Types::MultipartReadSetUploadListItem]?
+    end
+
+    class ListReadSetActivationJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ActivateReadSetFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ActivateReadSetFilter?
+    end
+
+    class ListReadSetActivationJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?activation_jobs: Array[Types::ActivateReadSetJobItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor activation_jobs: Array[Types::ActivateReadSetJobItem]?
+    end
+
+    class ListReadSetExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ExportReadSetFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ExportReadSetFilter?
+    end
+
+    class ListReadSetExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?export_jobs: Array[Types::ExportReadSetJobDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor export_jobs: Array[Types::ExportReadSetJobDetail]?
+    end
+
+    class ListReadSetImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sequence_store_id: String,
+        ?filter: Types::ImportReadSetFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor filter: Types::ImportReadSetFilter?
+    end
+
+    class ListReadSetImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?import_jobs: Array[Types::ImportReadSetJobItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor import_jobs: Array[Types::ImportReadSetJobItem]?
+    end
+
+    class ListReadSetUploadPartsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+        ?part_source: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ReadSetUploadPartListFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor part_source: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ReadSetUploadPartListFilter?
+    end
+
+    class ListReadSetUploadPartsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?parts: Array[Types::ReadSetUploadPartListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor parts: Array[Types::ReadSetUploadPartListItem]?
+    end
+
+    class ListReadSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ReadSetFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ReadSetFilter?
+    end
+
+    class ListReadSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?read_sets: Array[Types::ReadSetListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor read_sets: Array[Types::ReadSetListItem]?
+    end
+
+    class ListReferenceImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?reference_store_id: String,
+        ?filter: Types::ImportReferenceFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor filter: Types::ImportReferenceFilter?
+    end
+
+    class ListReferenceImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?import_jobs: Array[Types::ImportReferenceJobItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor import_jobs: Array[Types::ImportReferenceJobItem]?
+    end
+
+    class ListReferenceStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ReferenceStoreFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ReferenceStoreFilter?
+    end
+
+    class ListReferenceStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reference_stores: Array[Types::ReferenceStoreDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reference_stores: Array[Types::ReferenceStoreDetail]?
+    end
+
+    class ListReferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_store_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ReferenceFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_store_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ReferenceFilter?
+    end
+
+    class ListReferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?references: Array[Types::ReferenceListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor references: Array[Types::ReferenceListItem]?
+    end
+
+    class ListRunCachesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?starting_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor starting_token: String?
+    end
+
+    class ListRunCachesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RunCacheListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RunCacheListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRunGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?starting_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor starting_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRunGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RunGroupListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RunGroupListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRunTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?starting_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor starting_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRunTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::TaskListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::TaskListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?run_group_id: String,
+        ?starting_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor run_group_id: String?
+      attr_accessor starting_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RunListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RunListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSequenceStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::SequenceStoreFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::SequenceStoreFilter?
+    end
+
+    class ListSequenceStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sequence_stores: Array[Types::SequenceStoreDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sequence_stores: Array[Types::SequenceStoreDetail]?
+    end
+
+    class ListSharesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_owner: String,
+        ?filter: Types::Filter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_owner: String?
+      attr_accessor filter: Types::Filter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSharesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shares: Array[Types::ShareDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shares: Array[Types::ShareDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVariantImportJobsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?store_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor store_name: String?
+    end
+
+    class ListVariantImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?ids: Array[String],
+        ?next_token: String,
+        ?filter: Types::ListVariantImportJobsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListVariantImportJobsFilter?
+    end
+
+    class ListVariantImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variant_import_jobs: Array[Types::VariantImportJobItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variant_import_jobs: Array[Types::VariantImportJobItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVariantStoresFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ListVariantStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?ids: Array[String],
+        ?next_token: String,
+        ?filter: Types::ListVariantStoresFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListVariantStoresFilter?
+    end
+
+    class ListVariantStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variant_stores: Array[Types::VariantStoreItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variant_stores: Array[Types::VariantStoreItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?type: String,
+        ?workflow_owner_id: String,
+        ?starting_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor type: String?
+      attr_accessor workflow_owner_id: String?
+      attr_accessor starting_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkflowVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::WorkflowVersionListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::WorkflowVersionListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?starting_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor starting_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkflowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::WorkflowListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::WorkflowListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class MultipartReadSetUploadListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+        ?source_file_type: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?generated_from: String,
+        ?reference_arn: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor source_file_type: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor reference_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class NotSupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutS3AccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_arn: String,
+        ?s3_access_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_arn: String?
+      attr_accessor s3_access_policy: String?
+    end
+
+    class PutS3AccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_arn: String,
+        ?store_id: String,
+        ?store_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_arn: String?
+      attr_accessor store_id: String?
+      attr_accessor store_type: String?
+    end
+
+    class RangeNotSatisfiableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReadOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sep: String,
+        ?encoding: String,
+        ?quote: String,
+        ?quote_all: bool,
+        ?escape: String,
+        ?escape_quotes: bool,
+        ?comment: String,
+        ?header: bool,
+        ?line_sep: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sep: String?
+      attr_accessor encoding: String?
+      attr_accessor quote: String?
+      attr_accessor quote_all: bool?
+      attr_accessor escape: String?
+      attr_accessor escape_quotes: bool?
+      attr_accessor comment: String?
+      attr_accessor header: bool?
+      attr_accessor line_sep: String?
+    end
+
+    class ReadSetBatchError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ReadSetFiles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source1: Types::FileInformation,
+        ?source2: Types::FileInformation,
+        ?index: Types::FileInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source1: Types::FileInformation?
+      attr_accessor source2: Types::FileInformation?
+      attr_accessor index: Types::FileInformation?
+    end
+
+    class ReadSetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?reference_arn: String,
+        ?created_after: Time,
+        ?created_before: Time,
+        ?sample_id: String,
+        ?subject_id: String,
+        ?generated_from: String,
+        ?creation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor reference_arn: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor sample_id: String?
+      attr_accessor subject_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor creation_type: String?
+    end
+
+    class ReadSetListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?sequence_store_id: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?reference_arn: String,
+        ?file_type: String,
+        ?sequence_information: Types::SequenceInformation,
+        ?creation_time: Time,
+        ?status_message: String,
+        ?creation_type: String,
+        ?etag: Types::ETag,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor reference_arn: String?
+      attr_accessor file_type: String?
+      attr_accessor sequence_information: Types::SequenceInformation?
+      attr_accessor creation_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor creation_type: String?
+      attr_accessor etag: Types::ETag?
+    end
+
+    class ReadSetS3Access
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class ReadSetUploadPartListFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ReadSetUploadPartListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?part_number: Integer,
+        ?part_size: Integer,
+        ?part_source: String,
+        ?checksum: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor part_number: Integer?
+      attr_accessor part_size: Integer?
+      attr_accessor part_source: String?
+      attr_accessor checksum: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class ReferenceFiles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::FileInformation,
+        ?index: Types::FileInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::FileInformation?
+      attr_accessor index: Types::FileInformation?
+    end
+
+    class ReferenceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?md5: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor md5: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ReferenceItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?reference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_arn: String?
+
+      class ReferenceArn < ReferenceItem
+      end
+      class Unknown < ReferenceItem
+      end
+    end
+
+    class ReferenceListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?reference_store_id: String,
+        ?md5: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor md5: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ReferenceStoreDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+    end
+
+    class ReferenceStoreFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class RequestTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RunCacheListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cache_behavior: String,
+        ?cache_s3_uri: String,
+        ?creation_time: Time,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cache_behavior: String?
+      attr_accessor cache_s3_uri: String?
+      attr_accessor creation_time: Time?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class RunGroupListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?max_cpus: Integer,
+        ?max_runs: Integer,
+        ?max_duration: Integer,
+        ?creation_time: Time,
+        ?max_gpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor max_cpus: Integer?
+      attr_accessor max_runs: Integer?
+      attr_accessor max_duration: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor max_gpus: Integer?
+    end
+
+    class RunListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?workflow_id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?storage_capacity: Integer,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?stop_time: Time,
+        ?storage_type: String,
+        ?workflow_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor workflow_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+      attr_accessor storage_type: String?
+      attr_accessor workflow_version_name: String?
+    end
+
+    class RunLogLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_log_stream: String,
+        ?run_log_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_log_stream: String?
+      attr_accessor run_log_stream: String?
+    end
+
+    class S3AccessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log_location: String?
+    end
+
+    class SequenceInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_read_count: Integer,
+        ?total_base_count: Integer,
+        ?generated_from: String,
+        ?alignment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_read_count: Integer?
+      attr_accessor total_base_count: Integer?
+      attr_accessor generated_from: String?
+      attr_accessor alignment: String?
+    end
+
+    class SequenceStoreDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?fallback_location: String,
+        ?e_tag_algorithm_family: String,
+        ?status: String,
+        ?status_message: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor fallback_location: String?
+      attr_accessor e_tag_algorithm_family: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor update_time: Time?
+    end
+
+    class SequenceStoreFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?created_after: Time,
+        ?created_before: Time,
+        ?status: String,
+        ?updated_after: Time,
+        ?updated_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor status: String?
+      attr_accessor updated_after: Time?
+      attr_accessor updated_before: Time?
+    end
+
+    class SequenceStoreS3Access
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?s3_access_point_arn: String,
+        ?access_log_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor s3_access_point_arn: String?
+      attr_accessor access_log_location: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ShareDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?principal_subscriber: String,
+        ?owner_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?share_name: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor principal_subscriber: String?
+      attr_accessor owner_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor share_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class SourceFiles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source1: String,
+        ?source2: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source1: String?
+      attr_accessor source2: String?
+    end
+
+    class SourceReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class SseConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor key_arn: String?
+    end
+
+    class StartAnnotationImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?role_arn: String,
+        ?items: Array[Types::AnnotationImportItemSource],
+        ?version_name: String,
+        ?format_options: Types::FormatOptions,
+        ?run_left_normalization: bool,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor items: Array[Types::AnnotationImportItemSource]?
+      attr_accessor version_name: String?
+      attr_accessor format_options: Types::FormatOptions?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class StartAnnotationImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartReadSetActivationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?client_token: String,
+        ?sources: Array[Types::StartReadSetActivationJobSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[Types::StartReadSetActivationJobSourceItem]?
+    end
+
+    class StartReadSetActivationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class StartReadSetActivationJobSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_set_id: String?
+    end
+
+    class StartReadSetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?destination: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?sources: Array[Types::ExportReadSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor destination: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[Types::ExportReadSet]?
+    end
+
+    class StartReadSetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?destination: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor destination: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class StartReadSetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?sources: Array[Types::StartReadSetImportJobSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[Types::StartReadSetImportJobSourceItem]?
+    end
+
+    class StartReadSetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sequence_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sequence_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class StartReadSetImportJobSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_files: Types::SourceFiles,
+        ?source_file_type: String,
+        ?subject_id: String,
+        ?sample_id: String,
+        ?generated_from: String,
+        ?reference_arn: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_files: Types::SourceFiles?
+      attr_accessor source_file_type: String?
+      attr_accessor subject_id: String?
+      attr_accessor sample_id: String?
+      attr_accessor generated_from: String?
+      attr_accessor reference_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartReferenceImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_store_id: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?sources: Array[Types::StartReferenceImportJobSourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[Types::StartReferenceImportJobSourceItem]?
+    end
+
+    class StartReferenceImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference_store_id: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference_store_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class StartReferenceImportJobSourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_file: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_file: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?workflow_type: String,
+        ?run_id: String,
+        ?role_arn: String,
+        ?name: String,
+        ?cache_id: String,
+        ?cache_behavior: String,
+        ?run_group_id: String,
+        ?priority: Integer,
+        ?parameters: Smithy::Schema::document,
+        ?storage_capacity: Integer,
+        ?output_uri: String,
+        ?log_level: String,
+        ?tags: Hash[String, String],
+        ?request_id: String,
+        ?retention_mode: String,
+        ?storage_type: String,
+        ?workflow_owner_id: String,
+        ?workflow_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor workflow_type: String?
+      attr_accessor run_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor name: String?
+      attr_accessor cache_id: String?
+      attr_accessor cache_behavior: String?
+      attr_accessor run_group_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor parameters: Smithy::Schema::document?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor output_uri: String?
+      attr_accessor log_level: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor request_id: String?
+      attr_accessor retention_mode: String?
+      attr_accessor storage_type: String?
+      attr_accessor workflow_owner_id: String?
+      attr_accessor workflow_version_name: String?
+    end
+
+    class StartRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?uuid: String,
+        ?run_output_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor uuid: String?
+      attr_accessor run_output_uri: String?
+    end
+
+    class StartVariantImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?role_arn: String,
+        ?items: Array[Types::VariantImportItemSource],
+        ?run_left_normalization: bool,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor items: Array[Types::VariantImportItemSource]?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class StartVariantImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StoreOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tsv_store_options: Types::TsvStoreOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tsv_store_options: Types::TsvStoreOptions?
+
+      class TsvStoreOptions < StoreOptions
+      end
+      class Unknown < StoreOptions
+      end
+    end
+
+    module StoreType
+      SEQUENCE_STORE: String
+      REFERENCE_STORE: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status: String,
+        ?name: String,
+        ?cpus: Integer,
+        ?cache_hit: bool,
+        ?cache_s3_uri: String,
+        ?memory: Integer,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?stop_time: Time,
+        ?gpus: Integer,
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor cpus: Integer?
+      attr_accessor cache_hit: bool?
+      attr_accessor cache_s3_uri: String?
+      attr_accessor memory: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+      attr_accessor gpus: Integer?
+      attr_accessor instance_type: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TsvOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_options: Types::ReadOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_options: Types::ReadOptions?
+    end
+
+    class TsvStoreOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_type: String,
+        ?format_to_header: Hash[String, String],
+        ?schema: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_type: String?
+      attr_accessor format_to_header: Hash[String, String]?
+      attr_accessor schema: Array[Hash[String, String]]?
+    end
+
+    class TsvVersionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_type: String,
+        ?format_to_header: Hash[String, String],
+        ?schema: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_type: String?
+      attr_accessor format_to_header: Hash[String, String]?
+      attr_accessor schema: Array[Hash[String, String]]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAnnotationStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateAnnotationStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?store_options: Types::StoreOptions,
+        ?store_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor store_options: Types::StoreOptions?
+      attr_accessor store_format: String?
+    end
+
+    class UpdateAnnotationStoreVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateAnnotationStoreVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?store_id: String,
+        ?id: String,
+        ?status: String,
+        ?name: String,
+        ?version_name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor store_id: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateRunCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_behavior: String,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_behavior: String?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateRunGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?max_cpus: Integer,
+        ?max_runs: Integer,
+        ?max_duration: Integer,
+        ?max_gpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor max_cpus: Integer?
+      attr_accessor max_runs: Integer?
+      attr_accessor max_duration: Integer?
+      attr_accessor max_gpus: Integer?
+    end
+
+    class UpdateSequenceStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+        ?fallback_location: String,
+        ?propagated_set_level_tags: Array[String],
+        ?s3_access_config: Types::S3AccessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor fallback_location: String?
+      attr_accessor propagated_set_level_tags: Array[String]?
+      attr_accessor s3_access_config: Types::S3AccessConfig?
+    end
+
+    class UpdateSequenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?propagated_set_level_tags: Array[String],
+        ?status: String,
+        ?status_message: String,
+        ?fallback_location: String,
+        ?s3_access: Types::SequenceStoreS3Access,
+        ?e_tag_algorithm_family: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor propagated_set_level_tags: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor fallback_location: String?
+      attr_accessor s3_access: Types::SequenceStoreS3Access?
+      attr_accessor e_tag_algorithm_family: String?
+    end
+
+    class UpdateVariantStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateVariantStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?storage_type: String,
+        ?storage_capacity: Integer,
+        ?readme_markdown: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor storage_type: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor readme_markdown: String?
+    end
+
+    class UpdateWorkflowVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?version_name: String,
+        ?description: String,
+        ?storage_type: String,
+        ?storage_capacity: Integer,
+        ?readme_markdown: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor storage_type: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor readme_markdown: String?
+    end
+
+    class UploadReadSetPartRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence_store_id: String,
+        ?upload_id: String,
+        ?part_source: String,
+        ?part_number: Integer,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence_store_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor part_source: String?
+      attr_accessor part_number: Integer?
+      attr_accessor payload: String?
+    end
+
+    class UploadReadSetPartResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checksum: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VariantImportItemDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?job_status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor job_status: String?
+      attr_accessor status_message: String?
+    end
+
+    class VariantImportItemSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class VariantImportJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?destination_name: String,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?completion_time: Time,
+        ?run_left_normalization: bool,
+        ?annotation_fields: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor destination_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor run_left_normalization: bool?
+      attr_accessor annotation_fields: Hash[String, String]?
+    end
+
+    class VariantStoreItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?reference: Types::ReferenceItem,
+        ?status: String,
+        ?store_arn: String,
+        ?name: String,
+        ?description: String,
+        ?sse_config: Types::SseConfig,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?status_message: String,
+        ?store_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor reference: Types::ReferenceItem?
+      attr_accessor status: String?
+      attr_accessor store_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sse_config: Types::SseConfig?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor store_size_bytes: Integer?
+    end
+
+    class VcfOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ignore_qual_field: bool,
+        ?ignore_filter_field: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ignore_qual_field: bool?
+      attr_accessor ignore_filter_field: bool?
+    end
+
+    class VersionDeleteError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_name: String?
+      attr_accessor message: String?
+    end
+
+    class VersionOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tsv_version_options: Types::TsvVersionOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tsv_version_options: Types::TsvVersionOptions?
+
+      class TsvVersionOptions < VersionOptions
+      end
+      class Unknown < VersionOptions
+      end
+    end
+
+    class WorkflowListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?type: String,
+        ?digest: String,
+        ?creation_time: Time,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor digest: String?
+      attr_accessor creation_time: Time?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class WorkflowParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?optional: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor optional: bool?
+    end
+
+    class WorkflowVersionListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?workflow_id: String,
+        ?version_name: String,
+        ?description: String,
+        ?status: String,
+        ?type: String,
+        ?digest: String,
+        ?creation_time: Time,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor workflow_id: String?
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor digest: String?
+      attr_accessor creation_time: Time?
+      attr_accessor metadata: Hash[String, String]?
+    end
+  end
+end

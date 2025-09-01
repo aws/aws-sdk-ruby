@@ -1,0 +1,1765 @@
+module Aws::Amplify
+  module Types
+
+    class App
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+        ?repository: String,
+        ?platform: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?compute_role_arn: String,
+        ?iam_service_role_arn: String,
+        ?environment_variables: Hash[String, String],
+        ?default_domain: String,
+        ?enable_branch_auto_build: bool,
+        ?enable_branch_auto_deletion: bool,
+        ?enable_basic_auth: bool,
+        ?basic_auth_credentials: String,
+        ?custom_rules: Array[Types::CustomRule],
+        ?production_branch: Types::ProductionBranch,
+        ?build_spec: String,
+        ?custom_headers: String,
+        ?enable_auto_branch_creation: bool,
+        ?auto_branch_creation_patterns: Array[String],
+        ?auto_branch_creation_config: Types::AutoBranchCreationConfig,
+        ?repository_clone_method: String,
+        ?cache_config: Types::CacheConfig,
+        ?webhook_create_time: Time,
+        ?waf_configuration: Types::WafConfiguration,
+        ?job_config: Types::JobConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+      attr_accessor repository: String?
+      attr_accessor platform: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor compute_role_arn: String?
+      attr_accessor iam_service_role_arn: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor default_domain: String?
+      attr_accessor enable_branch_auto_build: bool?
+      attr_accessor enable_branch_auto_deletion: bool?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor custom_rules: Array[Types::CustomRule]?
+      attr_accessor production_branch: Types::ProductionBranch?
+      attr_accessor build_spec: String?
+      attr_accessor custom_headers: String?
+      attr_accessor enable_auto_branch_creation: bool?
+      attr_accessor auto_branch_creation_patterns: Array[String]?
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig?
+      attr_accessor repository_clone_method: String?
+      attr_accessor cache_config: Types::CacheConfig?
+      attr_accessor webhook_create_time: Time?
+      attr_accessor waf_configuration: Types::WafConfiguration?
+      attr_accessor job_config: Types::JobConfig?
+    end
+
+    class Artifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_file_name: String,
+        ?artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_file_name: String?
+      attr_accessor artifact_id: String?
+    end
+
+    class AutoBranchCreationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: String,
+        ?framework: String,
+        ?enable_auto_build: bool,
+        ?environment_variables: Hash[String, String],
+        ?basic_auth_credentials: String,
+        ?enable_basic_auth: bool,
+        ?enable_performance_mode: bool,
+        ?build_spec: String,
+        ?enable_pull_request_preview: bool,
+        ?pull_request_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: String?
+      attr_accessor framework: String?
+      attr_accessor enable_auto_build: bool?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor enable_performance_mode: bool?
+      attr_accessor build_spec: String?
+      attr_accessor enable_pull_request_preview: bool?
+      attr_accessor pull_request_environment_name: String?
+    end
+
+    class Backend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_arn: String?
+    end
+
+    class BackendEnvironment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_environment_arn: String,
+        ?environment_name: String,
+        ?stack_name: String,
+        ?deployment_artifacts: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_environment_arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor deployment_artifacts: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Branch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch_arn: String,
+        ?branch_name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?stage: String,
+        ?display_name: String,
+        ?enable_notification: bool,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?environment_variables: Hash[String, String],
+        ?enable_auto_build: bool,
+        ?enable_skew_protection: bool,
+        ?custom_domains: Array[String],
+        ?framework: String,
+        ?active_job_id: String,
+        ?total_number_of_jobs: String,
+        ?enable_basic_auth: bool,
+        ?enable_performance_mode: bool,
+        ?thumbnail_url: String,
+        ?basic_auth_credentials: String,
+        ?build_spec: String,
+        ?ttl: String,
+        ?associated_resources: Array[String],
+        ?enable_pull_request_preview: bool,
+        ?pull_request_environment_name: String,
+        ?destination_branch: String,
+        ?source_branch: String,
+        ?backend_environment_arn: String,
+        ?backend: Types::Backend,
+        ?compute_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch_arn: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor stage: String?
+      attr_accessor display_name: String?
+      attr_accessor enable_notification: bool?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor enable_auto_build: bool?
+      attr_accessor enable_skew_protection: bool?
+      attr_accessor custom_domains: Array[String]?
+      attr_accessor framework: String?
+      attr_accessor active_job_id: String?
+      attr_accessor total_number_of_jobs: String?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor enable_performance_mode: bool?
+      attr_accessor thumbnail_url: String?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor build_spec: String?
+      attr_accessor ttl: String?
+      attr_accessor associated_resources: Array[String]?
+      attr_accessor enable_pull_request_preview: bool?
+      attr_accessor pull_request_environment_name: String?
+      attr_accessor destination_branch: String?
+      attr_accessor source_branch: String?
+      attr_accessor backend_environment_arn: String?
+      attr_accessor backend: Types::Backend?
+      attr_accessor compute_role_arn: String?
+    end
+
+    module BuildComputeType
+      STANDARD_8GB: String
+      LARGE_16GB: String
+      XLARGE_72GB: String
+    end
+
+    class CacheConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module CacheConfigType
+      AMPLIFY_MANAGED: String
+      AMPLIFY_MANAGED_NO_COOKIES: String
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?custom_certificate_arn: String,
+        ?certificate_verification_dns_record: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor custom_certificate_arn: String?
+      attr_accessor certificate_verification_dns_record: String?
+    end
+
+    class CertificateSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?custom_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor custom_certificate_arn: String?
+    end
+
+    module CertificateType
+      AMPLIFY_MANAGED: String
+      CUSTOM: String
+    end
+
+    class CreateAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?repository: String,
+        ?platform: String,
+        ?compute_role_arn: String,
+        ?iam_service_role_arn: String,
+        ?oauth_token: String,
+        ?access_token: String,
+        ?environment_variables: Hash[String, String],
+        ?enable_branch_auto_build: bool,
+        ?enable_branch_auto_deletion: bool,
+        ?enable_basic_auth: bool,
+        ?basic_auth_credentials: String,
+        ?custom_rules: Array[Types::CustomRule],
+        ?tags: Hash[String, String],
+        ?build_spec: String,
+        ?custom_headers: String,
+        ?enable_auto_branch_creation: bool,
+        ?auto_branch_creation_patterns: Array[String],
+        ?auto_branch_creation_config: Types::AutoBranchCreationConfig,
+        ?job_config: Types::JobConfig,
+        ?cache_config: Types::CacheConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor repository: String?
+      attr_accessor platform: String?
+      attr_accessor compute_role_arn: String?
+      attr_accessor iam_service_role_arn: String?
+      attr_accessor oauth_token: String?
+      attr_accessor access_token: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor enable_branch_auto_build: bool?
+      attr_accessor enable_branch_auto_deletion: bool?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor custom_rules: Array[Types::CustomRule]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor build_spec: String?
+      attr_accessor custom_headers: String?
+      attr_accessor enable_auto_branch_creation: bool?
+      attr_accessor auto_branch_creation_patterns: Array[String]?
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig?
+      attr_accessor job_config: Types::JobConfig?
+      attr_accessor cache_config: Types::CacheConfig?
+    end
+
+    class CreateAppResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class CreateBackendEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?stack_name: String,
+        ?deployment_artifacts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor stack_name: String?
+      attr_accessor deployment_artifacts: String?
+    end
+
+    class CreateBackendEnvironmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_environment: Types::BackendEnvironment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_environment: Types::BackendEnvironment?
+    end
+
+    class CreateBranchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?description: String,
+        ?stage: String,
+        ?framework: String,
+        ?enable_notification: bool,
+        ?enable_auto_build: bool,
+        ?enable_skew_protection: bool,
+        ?environment_variables: Hash[String, String],
+        ?basic_auth_credentials: String,
+        ?enable_basic_auth: bool,
+        ?enable_performance_mode: bool,
+        ?tags: Hash[String, String],
+        ?build_spec: String,
+        ?ttl: String,
+        ?display_name: String,
+        ?enable_pull_request_preview: bool,
+        ?pull_request_environment_name: String,
+        ?backend_environment_arn: String,
+        ?backend: Types::Backend,
+        ?compute_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+      attr_accessor stage: String?
+      attr_accessor framework: String?
+      attr_accessor enable_notification: bool?
+      attr_accessor enable_auto_build: bool?
+      attr_accessor enable_skew_protection: bool?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor enable_performance_mode: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor build_spec: String?
+      attr_accessor ttl: String?
+      attr_accessor display_name: String?
+      attr_accessor enable_pull_request_preview: bool?
+      attr_accessor pull_request_environment_name: String?
+      attr_accessor backend_environment_arn: String?
+      attr_accessor backend: Types::Backend?
+      attr_accessor compute_role_arn: String?
+    end
+
+    class CreateBranchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: Types::Branch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::Branch?
+    end
+
+    class CreateDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?file_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor file_map: Hash[String, String]?
+    end
+
+    class CreateDeploymentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?file_upload_urls: Hash[String, String],
+        ?zip_upload_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor file_upload_urls: Hash[String, String]?
+      attr_accessor zip_upload_url: String?
+    end
+
+    class CreateDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?domain_name: String,
+        ?enable_auto_sub_domain: bool,
+        ?sub_domain_settings: Array[Types::SubDomainSetting],
+        ?auto_sub_domain_creation_patterns: Array[String],
+        ?auto_sub_domain_iam_role: String,
+        ?certificate_settings: Types::CertificateSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor enable_auto_sub_domain: bool?
+      attr_accessor sub_domain_settings: Array[Types::SubDomainSetting]?
+      attr_accessor auto_sub_domain_creation_patterns: Array[String]?
+      attr_accessor auto_sub_domain_iam_role: String?
+      attr_accessor certificate_settings: Types::CertificateSettings?
+    end
+
+    class CreateDomainAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_association: Types::DomainAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_association: Types::DomainAssociation?
+    end
+
+    class CreateWebhookRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+    end
+
+    class CreateWebhookResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    class CustomRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?target: String,
+        ?status: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor status: String?
+      attr_accessor condition: String?
+    end
+
+    class DeleteAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+    end
+
+    class DeleteAppResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class DeleteBackendEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class DeleteBackendEnvironmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_environment: Types::BackendEnvironment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_environment: Types::BackendEnvironment?
+    end
+
+    class DeleteBranchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+    end
+
+    class DeleteBranchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: Types::Branch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::Branch?
+    end
+
+    class DeleteDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DeleteDomainAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_association: Types::DomainAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_association: Types::DomainAssociation?
+    end
+
+    class DeleteJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class DeleteJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary: Types::JobSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary: Types::JobSummary?
+    end
+
+    class DeleteWebhookRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_id: String?
+    end
+
+    class DeleteWebhookResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    class DependentServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DomainAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_association_arn: String,
+        ?domain_name: String,
+        ?enable_auto_sub_domain: bool,
+        ?auto_sub_domain_creation_patterns: Array[String],
+        ?auto_sub_domain_iam_role: String,
+        ?domain_status: String,
+        ?update_status: String,
+        ?status_reason: String,
+        ?certificate_verification_dns_record: String,
+        ?sub_domains: Array[Types::SubDomain],
+        ?certificate: Types::Certificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_association_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor enable_auto_sub_domain: bool?
+      attr_accessor auto_sub_domain_creation_patterns: Array[String]?
+      attr_accessor auto_sub_domain_iam_role: String?
+      attr_accessor domain_status: String?
+      attr_accessor update_status: String?
+      attr_accessor status_reason: String?
+      attr_accessor certificate_verification_dns_record: String?
+      attr_accessor sub_domains: Array[Types::SubDomain]?
+      attr_accessor certificate: Types::Certificate?
+    end
+
+    module DomainStatus
+      PENDING_VERIFICATION: String
+      IN_PROGRESS: String
+      AVAILABLE: String
+      IMPORTING_CUSTOM_CERTIFICATE: String
+      PENDING_DEPLOYMENT: String
+      AWAITING_APP_CNAME: String
+      FAILED: String
+      CREATING: String
+      REQUESTING_CERTIFICATE: String
+      UPDATING: String
+    end
+
+    class GenerateAccessLogsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?domain_name: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor domain_name: String?
+      attr_accessor app_id: String?
+    end
+
+    class GenerateAccessLogsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_url: String?
+    end
+
+    class GetAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+    end
+
+    class GetAppResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class GetArtifactUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_id: String?
+    end
+
+    class GetArtifactUrlResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_id: String,
+        ?artifact_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_id: String?
+      attr_accessor artifact_url: String?
+    end
+
+    class GetBackendEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class GetBackendEnvironmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_environment: Types::BackendEnvironment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_environment: Types::BackendEnvironment?
+    end
+
+    class GetBranchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+    end
+
+    class GetBranchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: Types::Branch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::Branch?
+    end
+
+    class GetDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class GetDomainAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_association: Types::DomainAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_association: Types::DomainAssociation?
+    end
+
+    class GetJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class GetWebhookRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_id: String?
+    end
+
+    class GetWebhookResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::JobSummary,
+        ?steps: Array[Types::Step],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::JobSummary?
+      attr_accessor steps: Array[Types::Step]?
+    end
+
+    class JobConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_compute_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_compute_type: String?
+    end
+
+    module JobStatus
+      CREATED: String
+      PENDING: String
+      PROVISIONING: String
+      RUNNING: String
+      FAILED: String
+      SUCCEED: String
+      CANCELLING: String
+      CANCELLED: String
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_id: String,
+        ?commit_id: String,
+        ?commit_message: String,
+        ?commit_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?end_time: Time,
+        ?job_type: String,
+        ?source_url: String,
+        ?source_url_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor commit_id: String?
+      attr_accessor commit_message: String?
+      attr_accessor commit_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor end_time: Time?
+      attr_accessor job_type: String?
+      attr_accessor source_url: String?
+      attr_accessor source_url_type: String?
+    end
+
+    module JobType
+      RELEASE: String
+      RETRY: String
+      MANUAL: String
+      WEB_HOOK: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAppsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apps: Array[Types::App],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apps: Array[Types::App]?
+      attr_accessor next_token: String?
+    end
+
+    class ListArtifactsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListArtifactsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifacts: Array[Types::Artifact],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifacts: Array[Types::Artifact]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackendEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBackendEnvironmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_environments: Array[Types::BackendEnvironment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_environments: Array[Types::BackendEnvironment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBranchesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBranchesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branches: Array[Types::Branch],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branches: Array[Types::Branch]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDomainAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_associations: Array[Types::DomainAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_associations: Array[Types::DomainAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListJobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListWebhooksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWebhooksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhooks: Array[Types::Webhook],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhooks: Array[Types::Webhook]?
+      attr_accessor next_token: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Platform
+      WEB: String
+      WEB_DYNAMIC: String
+      WEB_COMPUTE: String
+    end
+
+    class ProductionBranch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_deploy_time: Time,
+        ?status: String,
+        ?thumbnail_url: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_deploy_time: Time?
+      attr_accessor status: String?
+      attr_accessor thumbnail_url: String?
+      attr_accessor branch_name: String?
+    end
+
+    module RepositoryCloneMethod
+      SSH: String
+      TOKEN: String
+      SIGV4: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module SourceUrlType
+      ZIP: String
+      BUCKET_PREFIX: String
+    end
+
+    module Stage
+      PRODUCTION: String
+      BETA: String
+      DEVELOPMENT: String
+      EXPERIMENTAL: String
+      PULL_REQUEST: String
+    end
+
+    class StartDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+        ?source_url: String,
+        ?source_url_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+      attr_accessor source_url: String?
+      attr_accessor source_url_type: String?
+    end
+
+    class StartDeploymentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary: Types::JobSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary: Types::JobSummary?
+    end
+
+    class StartJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+        ?job_type: String,
+        ?job_reason: String,
+        ?commit_id: String,
+        ?commit_message: String,
+        ?commit_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_type: String?
+      attr_accessor job_reason: String?
+      attr_accessor commit_id: String?
+      attr_accessor commit_message: String?
+      attr_accessor commit_time: Time?
+    end
+
+    class StartJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary: Types::JobSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary: Types::JobSummary?
+    end
+
+    class Step
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_name: String,
+        ?start_time: Time,
+        ?status: String,
+        ?end_time: Time,
+        ?log_url: String,
+        ?artifacts_url: String,
+        ?test_artifacts_url: String,
+        ?test_config_url: String,
+        ?screenshots: Hash[String, String],
+        ?status_reason: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor end_time: Time?
+      attr_accessor log_url: String?
+      attr_accessor artifacts_url: String?
+      attr_accessor test_artifacts_url: String?
+      attr_accessor test_config_url: String?
+      attr_accessor screenshots: Hash[String, String]?
+      attr_accessor status_reason: String?
+      attr_accessor context: String?
+    end
+
+    class StopJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class StopJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summary: Types::JobSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summary: Types::JobSummary?
+    end
+
+    class SubDomain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sub_domain_setting: Types::SubDomainSetting,
+        ?verified: bool,
+        ?dns_record: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sub_domain_setting: Types::SubDomainSetting?
+      attr_accessor verified: bool?
+      attr_accessor dns_record: String?
+    end
+
+    class SubDomainSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor branch_name: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?name: String,
+        ?description: String,
+        ?platform: String,
+        ?compute_role_arn: String,
+        ?iam_service_role_arn: String,
+        ?environment_variables: Hash[String, String],
+        ?enable_branch_auto_build: bool,
+        ?enable_branch_auto_deletion: bool,
+        ?enable_basic_auth: bool,
+        ?basic_auth_credentials: String,
+        ?custom_rules: Array[Types::CustomRule],
+        ?build_spec: String,
+        ?custom_headers: String,
+        ?enable_auto_branch_creation: bool,
+        ?auto_branch_creation_patterns: Array[String],
+        ?auto_branch_creation_config: Types::AutoBranchCreationConfig,
+        ?repository: String,
+        ?oauth_token: String,
+        ?access_token: String,
+        ?job_config: Types::JobConfig,
+        ?cache_config: Types::CacheConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor platform: String?
+      attr_accessor compute_role_arn: String?
+      attr_accessor iam_service_role_arn: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor enable_branch_auto_build: bool?
+      attr_accessor enable_branch_auto_deletion: bool?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor custom_rules: Array[Types::CustomRule]?
+      attr_accessor build_spec: String?
+      attr_accessor custom_headers: String?
+      attr_accessor enable_auto_branch_creation: bool?
+      attr_accessor auto_branch_creation_patterns: Array[String]?
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig?
+      attr_accessor repository: String?
+      attr_accessor oauth_token: String?
+      attr_accessor access_token: String?
+      attr_accessor job_config: Types::JobConfig?
+      attr_accessor cache_config: Types::CacheConfig?
+    end
+
+    class UpdateAppResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class UpdateBranchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?branch_name: String,
+        ?description: String,
+        ?framework: String,
+        ?stage: String,
+        ?enable_notification: bool,
+        ?enable_auto_build: bool,
+        ?enable_skew_protection: bool,
+        ?environment_variables: Hash[String, String],
+        ?basic_auth_credentials: String,
+        ?enable_basic_auth: bool,
+        ?enable_performance_mode: bool,
+        ?build_spec: String,
+        ?ttl: String,
+        ?display_name: String,
+        ?enable_pull_request_preview: bool,
+        ?pull_request_environment_name: String,
+        ?backend_environment_arn: String,
+        ?backend: Types::Backend,
+        ?compute_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+      attr_accessor framework: String?
+      attr_accessor stage: String?
+      attr_accessor enable_notification: bool?
+      attr_accessor enable_auto_build: bool?
+      attr_accessor enable_skew_protection: bool?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor basic_auth_credentials: String?
+      attr_accessor enable_basic_auth: bool?
+      attr_accessor enable_performance_mode: bool?
+      attr_accessor build_spec: String?
+      attr_accessor ttl: String?
+      attr_accessor display_name: String?
+      attr_accessor enable_pull_request_preview: bool?
+      attr_accessor pull_request_environment_name: String?
+      attr_accessor backend_environment_arn: String?
+      attr_accessor backend: Types::Backend?
+      attr_accessor compute_role_arn: String?
+    end
+
+    class UpdateBranchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: Types::Branch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::Branch?
+    end
+
+    class UpdateDomainAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?domain_name: String,
+        ?enable_auto_sub_domain: bool,
+        ?sub_domain_settings: Array[Types::SubDomainSetting],
+        ?auto_sub_domain_creation_patterns: Array[String],
+        ?auto_sub_domain_iam_role: String,
+        ?certificate_settings: Types::CertificateSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor enable_auto_sub_domain: bool?
+      attr_accessor sub_domain_settings: Array[Types::SubDomainSetting]?
+      attr_accessor auto_sub_domain_creation_patterns: Array[String]?
+      attr_accessor auto_sub_domain_iam_role: String?
+      attr_accessor certificate_settings: Types::CertificateSettings?
+    end
+
+    class UpdateDomainAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_association: Types::DomainAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_association: Types::DomainAssociation?
+    end
+
+    module UpdateStatus
+      REQUESTING_CERTIFICATE: String
+      PENDING_VERIFICATION: String
+      IMPORTING_CUSTOM_CERTIFICATE: String
+      PENDING_DEPLOYMENT: String
+      AWAITING_APP_CNAME: String
+      UPDATE_COMPLETE: String
+      UPDATE_FAILED: String
+    end
+
+    class UpdateWebhookRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_id: String,
+        ?branch_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateWebhookResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::Webhook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::Webhook?
+    end
+
+    class WafConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?waf_status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor waf_status: String?
+      attr_accessor status_reason: String?
+    end
+
+    module WafStatus
+      ASSOCIATING: String
+      ASSOCIATION_FAILED: String
+      ASSOCIATION_SUCCESS: String
+      DISASSOCIATING: String
+      DISASSOCIATION_FAILED: String
+    end
+
+    class Webhook
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_arn: String,
+        ?webhook_id: String,
+        ?webhook_url: String,
+        ?app_id: String,
+        ?branch_name: String,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_arn: String?
+      attr_accessor webhook_id: String?
+      attr_accessor webhook_url: String?
+      attr_accessor app_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+  end
+end

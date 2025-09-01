@@ -1,0 +1,1444 @@
+module Aws::KafkaConnect
+  module Types
+
+    class ApacheKafkaCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_servers: String,
+        ?vpc: Types::Vpc,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_servers: String?
+      attr_accessor vpc: Types::Vpc?
+    end
+
+    class ApacheKafkaClusterDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_servers: String,
+        ?vpc: Types::VpcDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_servers: String?
+      attr_accessor vpc: Types::VpcDescription?
+    end
+
+    class AutoScaling
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_worker_count: Integer,
+        ?mcu_count: Integer,
+        ?min_worker_count: Integer,
+        ?scale_in_policy: Types::ScaleInPolicy,
+        ?scale_out_policy: Types::ScaleOutPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_worker_count: Integer?
+      attr_accessor mcu_count: Integer?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor scale_in_policy: Types::ScaleInPolicy?
+      attr_accessor scale_out_policy: Types::ScaleOutPolicy?
+    end
+
+    class AutoScalingDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_worker_count: Integer,
+        ?mcu_count: Integer,
+        ?min_worker_count: Integer,
+        ?scale_in_policy: Types::ScaleInPolicyDescription,
+        ?scale_out_policy: Types::ScaleOutPolicyDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_worker_count: Integer?
+      attr_accessor mcu_count: Integer?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor scale_in_policy: Types::ScaleInPolicyDescription?
+      attr_accessor scale_out_policy: Types::ScaleOutPolicyDescription?
+    end
+
+    class AutoScalingUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_worker_count: Integer,
+        ?mcu_count: Integer,
+        ?min_worker_count: Integer,
+        ?scale_in_policy: Types::ScaleInPolicyUpdate,
+        ?scale_out_policy: Types::ScaleOutPolicyUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_worker_count: Integer?
+      attr_accessor mcu_count: Integer?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor scale_in_policy: Types::ScaleInPolicyUpdate?
+      attr_accessor scale_out_policy: Types::ScaleOutPolicyUpdate?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Capacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling: Types::AutoScaling,
+        ?provisioned_capacity: Types::ProvisionedCapacity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling: Types::AutoScaling?
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacity?
+    end
+
+    class CapacityDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling: Types::AutoScalingDescription,
+        ?provisioned_capacity: Types::ProvisionedCapacityDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling: Types::AutoScalingDescription?
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityDescription?
+    end
+
+    class CapacityUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling: Types::AutoScalingUpdate,
+        ?provisioned_capacity: Types::ProvisionedCapacityUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling: Types::AutoScalingUpdate?
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityUpdate?
+    end
+
+    class CloudWatchLogsLogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group: String?
+    end
+
+    class CloudWatchLogsLogDeliveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectorOperationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_type: String,
+        ?step_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_type: String?
+      attr_accessor step_state: String?
+    end
+
+    class ConnectorOperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_operation_arn: String,
+        ?connector_operation_type: String,
+        ?connector_operation_state: String,
+        ?creation_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_operation_arn: String?
+      attr_accessor connector_operation_type: String?
+      attr_accessor connector_operation_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Types::CapacityDescription,
+        ?connector_arn: String,
+        ?connector_description: String,
+        ?connector_name: String,
+        ?connector_state: String,
+        ?creation_time: Time,
+        ?current_version: String,
+        ?kafka_cluster: Types::KafkaClusterDescription,
+        ?kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription,
+        ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription,
+        ?kafka_connect_version: String,
+        ?log_delivery: Types::LogDeliveryDescription,
+        ?plugins: Array[Types::PluginDescription],
+        ?service_execution_role_arn: String,
+        ?worker_configuration: Types::WorkerConfigurationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Types::CapacityDescription?
+      attr_accessor connector_arn: String?
+      attr_accessor connector_description: String?
+      attr_accessor connector_name: String?
+      attr_accessor connector_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor current_version: String?
+      attr_accessor kafka_cluster: Types::KafkaClusterDescription?
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription?
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription?
+      attr_accessor kafka_connect_version: String?
+      attr_accessor log_delivery: Types::LogDeliveryDescription?
+      attr_accessor plugins: Array[Types::PluginDescription]?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription?
+    end
+
+    class CreateConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_name: String,
+        ?connector_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_name: String?
+      attr_accessor connector_state: String?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Types::Capacity,
+        ?connector_configuration: Hash[String, String],
+        ?connector_description: String,
+        ?connector_name: String,
+        ?kafka_cluster: Types::KafkaCluster,
+        ?kafka_cluster_client_authentication: Types::KafkaClusterClientAuthentication,
+        ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit,
+        ?kafka_connect_version: String,
+        ?log_delivery: Types::LogDelivery,
+        ?plugins: Array[Types::Plugin],
+        ?service_execution_role_arn: String,
+        ?worker_configuration: Types::WorkerConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Types::Capacity?
+      attr_accessor connector_configuration: Hash[String, String]?
+      attr_accessor connector_description: String?
+      attr_accessor connector_name: String?
+      attr_accessor kafka_cluster: Types::KafkaCluster?
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthentication?
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit?
+      attr_accessor kafka_connect_version: String?
+      attr_accessor log_delivery: Types::LogDelivery?
+      attr_accessor plugins: Array[Types::Plugin]?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor worker_configuration: Types::WorkerConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCustomPluginOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+        ?custom_plugin_state: String,
+        ?name: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor custom_plugin_state: String?
+      attr_accessor name: String?
+      attr_accessor revision: Integer?
+    end
+
+    class CreateCustomPluginRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?description: String,
+        ?location: Types::CustomPluginLocation,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor description: String?
+      attr_accessor location: Types::CustomPluginLocation?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkerConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?latest_revision: Types::WorkerConfigurationRevisionSummary,
+        ?name: String,
+        ?worker_configuration_arn: String,
+        ?worker_configuration_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionSummary?
+      attr_accessor name: String?
+      attr_accessor worker_configuration_arn: String?
+      attr_accessor worker_configuration_state: String?
+    end
+
+    class CreateWorkerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?name: String,
+        ?properties_file_content: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor properties_file_content: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CustomPlugin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor revision: Integer?
+    end
+
+    class CustomPluginDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor revision: Integer?
+    end
+
+    class CustomPluginFileDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_md5: String,
+        ?file_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_md5: String?
+      attr_accessor file_size: Integer?
+    end
+
+    class CustomPluginLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: Types::S3Location?
+    end
+
+    class CustomPluginLocationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: Types::S3LocationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: Types::S3LocationDescription?
+    end
+
+    class CustomPluginRevisionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?file_description: Types::CustomPluginFileDescription,
+        ?location: Types::CustomPluginLocationDescription,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor file_description: Types::CustomPluginFileDescription?
+      attr_accessor location: Types::CustomPluginLocationDescription?
+      attr_accessor revision: Integer?
+    end
+
+    class CustomPluginSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?custom_plugin_arn: String,
+        ?custom_plugin_state: String,
+        ?description: String,
+        ?latest_revision: Types::CustomPluginRevisionSummary,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor custom_plugin_state: String?
+      attr_accessor description: String?
+      attr_accessor latest_revision: Types::CustomPluginRevisionSummary?
+      attr_accessor name: String?
+    end
+
+    class DeleteConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_state: String?
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?current_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor current_version: String?
+    end
+
+    class DeleteCustomPluginOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+        ?custom_plugin_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor custom_plugin_state: String?
+    end
+
+    class DeleteCustomPluginRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+    end
+
+    class DeleteWorkerConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_configuration_arn: String,
+        ?worker_configuration_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_configuration_arn: String?
+      attr_accessor worker_configuration_state: String?
+    end
+
+    class DeleteWorkerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_configuration_arn: String?
+    end
+
+    class DescribeConnectorOperationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_operation_arn: String?
+    end
+
+    class DescribeConnectorOperationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_operation_arn: String,
+        ?connector_operation_state: String,
+        ?connector_operation_type: String,
+        ?operation_steps: Array[Types::ConnectorOperationStep],
+        ?origin_worker_setting: Types::WorkerSetting,
+        ?origin_connector_configuration: Hash[String, String],
+        ?target_worker_setting: Types::WorkerSetting,
+        ?target_connector_configuration: Hash[String, String],
+        ?error_info: Types::StateDescription,
+        ?creation_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_operation_arn: String?
+      attr_accessor connector_operation_state: String?
+      attr_accessor connector_operation_type: String?
+      attr_accessor operation_steps: Array[Types::ConnectorOperationStep]?
+      attr_accessor origin_worker_setting: Types::WorkerSetting?
+      attr_accessor origin_connector_configuration: Hash[String, String]?
+      attr_accessor target_worker_setting: Types::WorkerSetting?
+      attr_accessor target_connector_configuration: Hash[String, String]?
+      attr_accessor error_info: Types::StateDescription?
+      attr_accessor creation_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class DescribeConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Types::CapacityDescription,
+        ?connector_arn: String,
+        ?connector_configuration: Hash[String, String],
+        ?connector_description: String,
+        ?connector_name: String,
+        ?connector_state: String,
+        ?creation_time: Time,
+        ?current_version: String,
+        ?kafka_cluster: Types::KafkaClusterDescription,
+        ?kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription,
+        ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription,
+        ?kafka_connect_version: String,
+        ?log_delivery: Types::LogDeliveryDescription,
+        ?plugins: Array[Types::PluginDescription],
+        ?service_execution_role_arn: String,
+        ?worker_configuration: Types::WorkerConfigurationDescription,
+        ?state_description: Types::StateDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Types::CapacityDescription?
+      attr_accessor connector_arn: String?
+      attr_accessor connector_configuration: Hash[String, String]?
+      attr_accessor connector_description: String?
+      attr_accessor connector_name: String?
+      attr_accessor connector_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor current_version: String?
+      attr_accessor kafka_cluster: Types::KafkaClusterDescription?
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription?
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription?
+      attr_accessor kafka_connect_version: String?
+      attr_accessor log_delivery: Types::LogDeliveryDescription?
+      attr_accessor plugins: Array[Types::PluginDescription]?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription?
+      attr_accessor state_description: Types::StateDescription?
+    end
+
+    class DescribeConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class DescribeCustomPluginOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?custom_plugin_arn: String,
+        ?custom_plugin_state: String,
+        ?description: String,
+        ?latest_revision: Types::CustomPluginRevisionSummary,
+        ?name: String,
+        ?state_description: Types::StateDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor custom_plugin_arn: String?
+      attr_accessor custom_plugin_state: String?
+      attr_accessor description: String?
+      attr_accessor latest_revision: Types::CustomPluginRevisionSummary?
+      attr_accessor name: String?
+      attr_accessor state_description: Types::StateDescription?
+    end
+
+    class DescribeCustomPluginRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin_arn: String?
+    end
+
+    class DescribeWorkerConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?description: String,
+        ?latest_revision: Types::WorkerConfigurationRevisionDescription,
+        ?name: String,
+        ?worker_configuration_arn: String,
+        ?worker_configuration_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionDescription?
+      attr_accessor name: String?
+      attr_accessor worker_configuration_arn: String?
+      attr_accessor worker_configuration_state: String?
+    end
+
+    class DescribeWorkerConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_configuration_arn: String?
+    end
+
+    class FirehoseLogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream: String?
+      attr_accessor enabled: bool?
+    end
+
+    class FirehoseLogDeliveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream: String?
+      attr_accessor enabled: bool?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KafkaCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apache_kafka_cluster: Types::ApacheKafkaCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaCluster?
+    end
+
+    class KafkaClusterClientAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+    end
+
+    class KafkaClusterClientAuthenticationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+    end
+
+    class KafkaClusterDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apache_kafka_cluster: Types::ApacheKafkaClusterDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaClusterDescription?
+    end
+
+    class KafkaClusterEncryptionInTransit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+    end
+
+    class KafkaClusterEncryptionInTransitDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+    end
+
+    class ListConnectorOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_operations: Array[Types::ConnectorOperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_operations: Array[Types::ConnectorOperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectors: Array[Types::ConnectorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectors: Array[Types::ConnectorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_name_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_name_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomPluginsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugins: Array[Types::CustomPluginSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugins: Array[Types::CustomPluginSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomPluginsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name_prefix: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListWorkerConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?worker_configurations: Array[Types::WorkerConfigurationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor worker_configurations: Array[Types::WorkerConfigurationSummary]?
+    end
+
+    class ListWorkerConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name_prefix: String?
+    end
+
+    class LogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_log_delivery: Types::WorkerLogDelivery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_log_delivery: Types::WorkerLogDelivery?
+    end
+
+    class LogDeliveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_log_delivery: Types::WorkerLogDeliveryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_log_delivery: Types::WorkerLogDeliveryDescription?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Plugin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin: Types::CustomPlugin,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin: Types::CustomPlugin?
+    end
+
+    class PluginDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_plugin: Types::CustomPluginDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_plugin: Types::CustomPluginDescription?
+    end
+
+    class ProvisionedCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcu_count: Integer,
+        ?worker_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcu_count: Integer?
+      attr_accessor worker_count: Integer?
+    end
+
+    class ProvisionedCapacityDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcu_count: Integer,
+        ?worker_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcu_count: Integer?
+      attr_accessor worker_count: Integer?
+    end
+
+    class ProvisionedCapacityUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcu_count: Integer,
+        ?worker_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcu_count: Integer?
+      attr_accessor worker_count: Integer?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?file_key: String,
+        ?object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor file_key: String?
+      attr_accessor object_version: String?
+    end
+
+    class S3LocationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?file_key: String,
+        ?object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor file_key: String?
+      attr_accessor object_version: String?
+    end
+
+    class S3LogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?enabled: bool,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor enabled: bool?
+      attr_accessor prefix: String?
+    end
+
+    class S3LogDeliveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?enabled: bool,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor enabled: bool?
+      attr_accessor prefix: String?
+    end
+
+    class ScaleInPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ScaleInPolicyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ScaleInPolicyUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ScaleOutPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ScaleOutPolicyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ScaleOutPolicyUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization_percentage: Integer?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_state: String,
+        ?connector_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_state: String?
+      attr_accessor connector_operation_arn: String?
+    end
+
+    class UpdateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Types::CapacityUpdate,
+        ?connector_configuration: Hash[String, String],
+        ?connector_arn: String,
+        ?current_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Types::CapacityUpdate?
+      attr_accessor connector_configuration: Hash[String, String]?
+      attr_accessor connector_arn: String?
+      attr_accessor current_version: String?
+    end
+
+    class Vpc
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+      attr_accessor subnets: Array[String]?
+    end
+
+    class VpcDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+      attr_accessor subnets: Array[String]?
+    end
+
+    class WorkerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision: Integer,
+        ?worker_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision: Integer?
+      attr_accessor worker_configuration_arn: String?
+    end
+
+    class WorkerConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision: Integer,
+        ?worker_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision: Integer?
+      attr_accessor worker_configuration_arn: String?
+    end
+
+    class WorkerConfigurationRevisionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?description: String,
+        ?properties_file_content: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor properties_file_content: String?
+      attr_accessor revision: Integer?
+    end
+
+    class WorkerConfigurationRevisionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?description: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor revision: Integer?
+    end
+
+    class WorkerConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?description: String,
+        ?latest_revision: Types::WorkerConfigurationRevisionSummary,
+        ?name: String,
+        ?worker_configuration_arn: String,
+        ?worker_configuration_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionSummary?
+      attr_accessor name: String?
+      attr_accessor worker_configuration_arn: String?
+      attr_accessor worker_configuration_state: String?
+    end
+
+    class WorkerLogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogsLogDelivery,
+        ?firehose: Types::FirehoseLogDelivery,
+        ?s3: Types::S3LogDelivery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDelivery?
+      attr_accessor firehose: Types::FirehoseLogDelivery?
+      attr_accessor s3: Types::S3LogDelivery?
+    end
+
+    class WorkerLogDeliveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogsLogDeliveryDescription,
+        ?firehose: Types::FirehoseLogDeliveryDescription,
+        ?s3: Types::S3LogDeliveryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDeliveryDescription?
+      attr_accessor firehose: Types::FirehoseLogDeliveryDescription?
+      attr_accessor s3: Types::S3LogDeliveryDescription?
+    end
+
+    class WorkerSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Types::CapacityDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Types::CapacityDescription?
+    end
+  end
+end

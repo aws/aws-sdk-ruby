@@ -1,0 +1,5 @@
+module Aws::MarketplaceCommerceAnalytics
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

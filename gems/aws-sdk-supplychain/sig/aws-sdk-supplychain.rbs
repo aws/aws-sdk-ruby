@@ -1,0 +1,5 @@
+  module Aws
+    module SupplyChain
+      VERSION: String
+    end
+  end

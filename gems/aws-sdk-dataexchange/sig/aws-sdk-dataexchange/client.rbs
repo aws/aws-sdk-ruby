@@ -1,0 +1,742 @@
+module Aws::DataExchange
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DataExchange::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptDataGrantResponse
+      include Smithy::Client::_Response[Types::AcceptDataGrantResponse]
+      def name: () -> String?
+      def sender_principal: () -> String?
+      def receiver_principal: () -> String?
+      def description: () -> String?
+      def acceptance_state: () -> String?
+      def accepted_at: () -> Time?
+      def ends_at: () -> Time?
+      def grant_distribution_scope: () -> String?
+      def data_set_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def accept_data_grant: (
+      ?data_grant_arn: String
+    ) -> _AcceptDataGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptDataGrantResponse
+
+    interface _CancelJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_job: (
+      ?job_id: String
+    ) -> _CancelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobResponse
+
+    interface _CreateDataGrantResponse
+      include Smithy::Client::_Response[Types::CreateDataGrantResponse]
+      def name: () -> String?
+      def sender_principal: () -> String?
+      def receiver_principal: () -> String?
+      def description: () -> String?
+      def acceptance_state: () -> String?
+      def accepted_at: () -> Time?
+      def ends_at: () -> Time?
+      def grant_distribution_scope: () -> String?
+      def data_set_id: () -> String?
+      def source_data_set_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_data_grant: (
+      ?name: String,
+      ?grant_distribution_scope: String,
+      ?receiver_principal: String,
+      ?source_data_set_id: String,
+      ?ends_at: Time,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDataGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataGrantResponse
+
+    interface _CreateDataSetResponse
+      include Smithy::Client::_Response[Types::CreateDataSetOutput]
+      def arn: () -> String?
+      def asset_type: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def origin: () -> String?
+      def origin_details: () -> Types::OriginDetails?
+      def source_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def create_data_set: (
+      ?asset_type: String,
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSetResponse
+
+    interface _CreateEventActionResponse
+      include Smithy::Client::_Response[Types::CreateEventActionOutput]
+      def action: () -> Types::Action?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def event: () -> Types::Event?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def create_event_action: (
+      ?action: {
+        export_revision_to_s3: {
+          encryption: {
+            kms_key_arn: String,
+            type: String
+          },
+          revision_destination: {
+            bucket: untyped,
+            key_pattern: untyped
+          }
+        }
+      },
+      ?event: {
+        revision_published: {
+          data_set_id: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateEventActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventActionResponse
+
+    interface _CreateJobResponse
+      include Smithy::Client::_Response[Types::CreateJobOutput]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def details: () -> Types::ResponseDetails?
+      def errors: () -> Array[Types::JobError]?
+      def id: () -> String?
+      def state: () -> String?
+      def type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_job: (
+      ?details: {
+        export_asset_to_signed_url: {
+          asset_id: String,
+          data_set_id: untyped,
+          revision_id: untyped
+        },
+        export_assets_to_s3: {
+          asset_destinations: Array[
+            {
+              asset_id: untyped,
+              bucket: String,
+              key: untyped
+            }
+          ],
+          data_set_id: untyped,
+          encryption: {
+            kms_key_arn: untyped,
+            type: String
+          },
+          revision_id: untyped
+        },
+        export_revisions_to_s3: {
+          data_set_id: untyped,
+          encryption: untyped,
+          revision_destinations: Array[
+            {
+              bucket: untyped,
+              key_pattern: untyped,
+              revision_id: untyped
+            }
+          ]
+        },
+        import_asset_from_signed_url: {
+          asset_name: String,
+          data_set_id: untyped,
+          md5_hash: String,
+          revision_id: untyped
+        },
+        import_assets_from_s3: {
+          asset_sources: Array[
+            {
+              bucket: untyped,
+              key: untyped
+            }
+          ],
+          data_set_id: untyped,
+          revision_id: untyped
+        },
+        import_assets_from_redshift_data_shares: {
+          asset_sources: Array[
+            {
+              data_share_arn: untyped
+            }
+          ],
+          data_set_id: untyped,
+          revision_id: untyped
+        },
+        import_asset_from_api_gateway_api: {
+          api_description: String,
+          api_id: untyped,
+          api_key: untyped,
+          api_name: untyped,
+          api_specification_md5_hash: untyped,
+          data_set_id: untyped,
+          protocol_type: String,
+          revision_id: untyped,
+          stage: untyped
+        },
+        create_s3_data_access_from_s3_bucket: {
+          asset_source: {
+            bucket: untyped,
+            key_prefixes: Array[String],
+            keys: untyped,
+            kms_keys_to_grant: Array[
+              {
+                kms_key_arn: String
+              }
+            ]
+          },
+          data_set_id: untyped,
+          revision_id: untyped
+        },
+        import_assets_from_lake_formation_tag_policy: {
+          catalog_id: String,
+          database: {
+            expression: Array[
+              {
+                tag_key: String,
+                tag_values: Array[String]
+              }
+            ],
+            permissions: Array[String]
+          },
+          table: {
+            expression: untyped,
+            permissions: Array[String]
+          },
+          role_arn: String,
+          data_set_id: untyped,
+          revision_id: untyped
+        }
+      },
+      ?type: String
+    ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
+
+    interface _CreateRevisionResponse
+      include Smithy::Client::_Response[Types::CreateRevisionOutput]
+      def arn: () -> String?
+      def comment: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def finalized: () -> bool?
+      def id: () -> String?
+      def source_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+      def revocation_comment: () -> String?
+      def revoked: () -> bool?
+      def revoked_at: () -> Time?
+    end
+    def create_revision: (
+      ?comment: String,
+      ?data_set_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRevisionResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_asset: (
+      ?asset_id: String,
+      ?data_set_id: String,
+      ?revision_id: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeleteDataGrantResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_data_grant: (
+      ?data_grant_id: String
+    ) -> _DeleteDataGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataGrantResponse
+
+    interface _DeleteDataSetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_data_set: (
+      ?data_set_id: String
+    ) -> _DeleteDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSetResponse
+
+    interface _DeleteEventActionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_action: (
+      ?event_action_id: String
+    ) -> _DeleteEventActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventActionResponse
+
+    interface _DeleteRevisionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_revision: (
+      ?data_set_id: String,
+      ?revision_id: String
+    ) -> _DeleteRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRevisionResponse
+
+    interface _GetAssetResponse
+      include Smithy::Client::_Response[Types::GetAssetOutput]
+      def arn: () -> String?
+      def asset_details: () -> Types::AssetDetails?
+      def asset_type: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def revision_id: () -> String?
+      def source_id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_asset: (
+      ?asset_id: String,
+      ?data_set_id: String,
+      ?revision_id: String
+    ) -> _GetAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetResponse
+
+    interface _GetDataGrantResponse
+      include Smithy::Client::_Response[Types::GetDataGrantResponse]
+      def name: () -> String?
+      def sender_principal: () -> String?
+      def receiver_principal: () -> String?
+      def description: () -> String?
+      def acceptance_state: () -> String?
+      def accepted_at: () -> Time?
+      def ends_at: () -> Time?
+      def grant_distribution_scope: () -> String?
+      def data_set_id: () -> String?
+      def source_data_set_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_data_grant: (
+      ?data_grant_id: String
+    ) -> _GetDataGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataGrantResponse
+
+    interface _GetDataSetResponse
+      include Smithy::Client::_Response[Types::GetDataSetOutput]
+      def arn: () -> String?
+      def asset_type: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def origin: () -> String?
+      def origin_details: () -> Types::OriginDetails?
+      def source_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def get_data_set: (
+      ?data_set_id: String
+    ) -> _GetDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSetResponse
+
+    interface _GetEventActionResponse
+      include Smithy::Client::_Response[Types::GetEventActionOutput]
+      def action: () -> Types::Action?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def event: () -> Types::Event?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def get_event_action: (
+      ?event_action_id: String
+    ) -> _GetEventActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventActionResponse
+
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::GetJobOutput]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def details: () -> Types::ResponseDetails?
+      def errors: () -> Array[Types::JobError]?
+      def id: () -> String?
+      def state: () -> String?
+      def type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_job: (
+      ?job_id: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
+    interface _GetReceivedDataGrantResponse
+      include Smithy::Client::_Response[Types::GetReceivedDataGrantResponse]
+      def name: () -> String?
+      def sender_principal: () -> String?
+      def receiver_principal: () -> String?
+      def description: () -> String?
+      def acceptance_state: () -> String?
+      def accepted_at: () -> Time?
+      def ends_at: () -> Time?
+      def grant_distribution_scope: () -> String?
+      def data_set_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_received_data_grant: (
+      ?data_grant_arn: String
+    ) -> _GetReceivedDataGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReceivedDataGrantResponse
+
+    interface _GetRevisionResponse
+      include Smithy::Client::_Response[Types::GetRevisionOutput]
+      def arn: () -> String?
+      def comment: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def finalized: () -> bool?
+      def id: () -> String?
+      def source_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+      def revocation_comment: () -> String?
+      def revoked: () -> bool?
+      def revoked_at: () -> Time?
+    end
+    def get_revision: (
+      ?data_set_id: String,
+      ?revision_id: String
+    ) -> _GetRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevisionResponse
+
+    interface _ListDataGrantsResponse
+      include Smithy::Client::_Response[Types::ListDataGrantsResponse]
+      def data_grant_summaries: () -> Array[Types::DataGrantSummaryEntry]?
+      def next_token: () -> String?
+    end
+    def list_data_grants: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataGrantsResponse
+
+    interface _ListDataSetRevisionsResponse
+      include Smithy::Client::_Response[Types::ListDataSetRevisionsOutput]
+      def next_token: () -> String?
+      def revisions: () -> Array[Types::RevisionEntry]?
+    end
+    def list_data_set_revisions: (
+      ?data_set_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataSetRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSetRevisionsResponse
+
+    interface _ListDataSetsResponse
+      include Smithy::Client::_Response[Types::ListDataSetsOutput]
+      def data_sets: () -> Array[Types::DataSetEntry]?
+      def next_token: () -> String?
+    end
+    def list_data_sets: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?origin: String
+    ) -> _ListDataSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSetsResponse
+
+    interface _ListEventActionsResponse
+      include Smithy::Client::_Response[Types::ListEventActionsOutput]
+      def event_actions: () -> Array[Types::EventActionEntry]?
+      def next_token: () -> String?
+    end
+    def list_event_actions: (
+      ?event_source_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEventActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventActionsResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsOutput]
+      def jobs: () -> Array[Types::JobEntry]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?data_set_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?revision_id: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListReceivedDataGrantsResponse
+      include Smithy::Client::_Response[Types::ListReceivedDataGrantsResponse]
+      def data_grant_summaries: () -> Array[Types::ReceivedDataGrantSummariesEntry]?
+      def next_token: () -> String?
+    end
+    def list_received_data_grants: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?acceptance_state: Array[String]
+    ) -> _ListReceivedDataGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceivedDataGrantsResponse
+
+    interface _ListRevisionAssetsResponse
+      include Smithy::Client::_Response[Types::ListRevisionAssetsOutput]
+      def assets: () -> Array[Types::AssetEntry]?
+      def next_token: () -> String?
+    end
+    def list_revision_assets: (
+      ?data_set_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?revision_id: String
+    ) -> _ListRevisionAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRevisionAssetsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RevokeRevisionResponse
+      include Smithy::Client::_Response[Types::RevokeRevisionOutput]
+      def arn: () -> String?
+      def comment: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def finalized: () -> bool?
+      def id: () -> String?
+      def source_id: () -> String?
+      def updated_at: () -> Time?
+      def revocation_comment: () -> String?
+      def revoked: () -> bool?
+      def revoked_at: () -> Time?
+    end
+    def revoke_revision: (
+      ?data_set_id: String,
+      ?revision_id: String,
+      ?revocation_comment: String
+    ) -> _RevokeRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeRevisionResponse
+
+    interface _SendApiAssetResponse
+      include Smithy::Client::_Response[Types::SendApiAssetOutput]
+      def body: () -> String?
+      def response_headers: () -> Hash[String, String]?
+    end
+    def send_api_asset: (
+      ?body: String,
+      ?query_string_parameters: Hash[String, String],
+      ?asset_id: String,
+      ?data_set_id: String,
+      ?request_headers: Hash[String, String],
+      ?method: String,
+      ?path: String,
+      ?revision_id: String
+    ) -> _SendApiAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendApiAssetResponse
+
+    interface _SendDataSetNotificationResponse
+      include Smithy::Client::_Response[Types::SendDataSetNotificationResponse]
+    end
+    def send_data_set_notification: (
+      ?scope: {
+        lake_formation_tag_policies: Array[
+          {
+            database: String,
+            table: untyped
+          }
+        ],
+        redshift_data_shares: Array[
+          {
+            arn: untyped,
+            database: untyped,
+            function: untyped,
+            table: untyped,
+            schema: untyped,
+            view: untyped
+          }
+        ],
+        s3_data_accesses: Array[
+          {
+            key_prefixes: Array[String],
+            keys: untyped
+          }
+        ]
+      },
+      ?client_token: String,
+      ?comment: String,
+      ?data_set_id: String,
+      ?details: {
+        data_update: {
+          data_updated_at: Time
+        },
+        deprecation: {
+          deprecation_at: untyped
+        },
+        schema_change: {
+          changes: Array[
+            {
+              name: String,
+              type: String,
+              description: untyped
+            }
+          ],
+          schema_change_at: untyped
+        }
+      },
+      ?type: String
+    ) -> _SendDataSetNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDataSetNotificationResponse
+
+    interface _StartJobResponse
+      include Smithy::Client::_Response[Types::StartJobOutput]
+    end
+    def start_job: (
+      ?job_id: String
+    ) -> _StartJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAssetResponse
+      include Smithy::Client::_Response[Types::UpdateAssetOutput]
+      def arn: () -> String?
+      def asset_details: () -> Types::AssetDetails?
+      def asset_type: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def revision_id: () -> String?
+      def source_id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_asset: (
+      ?asset_id: String,
+      ?data_set_id: String,
+      ?name: String,
+      ?revision_id: String
+    ) -> _UpdateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetResponse
+
+    interface _UpdateDataSetResponse
+      include Smithy::Client::_Response[Types::UpdateDataSetOutput]
+      def arn: () -> String?
+      def asset_type: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def origin: () -> String?
+      def origin_details: () -> Types::OriginDetails?
+      def source_id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_data_set: (
+      ?data_set_id: String,
+      ?description: String,
+      ?name: String
+    ) -> _UpdateDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSetResponse
+
+    interface _UpdateEventActionResponse
+      include Smithy::Client::_Response[Types::UpdateEventActionOutput]
+      def action: () -> Types::Action?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def event: () -> Types::Event?
+      def id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_event_action: (
+      ?action: {
+        export_revision_to_s3: {
+          encryption: {
+            kms_key_arn: String,
+            type: String
+          },
+          revision_destination: {
+            bucket: untyped,
+            key_pattern: untyped
+          }
+        }
+      },
+      ?event_action_id: String
+    ) -> _UpdateEventActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventActionResponse
+
+    interface _UpdateRevisionResponse
+      include Smithy::Client::_Response[Types::UpdateRevisionOutput]
+      def arn: () -> String?
+      def comment: () -> String?
+      def created_at: () -> Time?
+      def data_set_id: () -> String?
+      def finalized: () -> bool?
+      def id: () -> String?
+      def source_id: () -> String?
+      def updated_at: () -> Time?
+      def revocation_comment: () -> String?
+      def revoked: () -> bool?
+      def revoked_at: () -> Time?
+    end
+    def update_revision: (
+      ?comment: String,
+      ?data_set_id: String,
+      ?finalized: bool,
+      ?revision_id: String
+    ) -> _UpdateRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRevisionResponse
+  end
+end

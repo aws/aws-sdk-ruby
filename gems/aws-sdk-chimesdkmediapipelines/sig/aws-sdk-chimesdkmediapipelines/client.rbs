@@ -1,0 +1,766 @@
+module Aws::ChimeSDKMediaPipelines
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ChimeSDKMediaPipelines::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateMediaCapturePipelineResponse
+      include Smithy::Client::_Response[Types::CreateMediaCapturePipelineResponse]
+      def media_capture_pipeline: () -> Types::MediaCapturePipeline?
+    end
+    def create_media_capture_pipeline: (
+      ?source_type: String,
+      ?source_arn: String,
+      ?sink_type: String,
+      ?sink_arn: String,
+      ?client_request_token: String,
+      ?chime_sdk_meeting_configuration: {
+        source_configuration: {
+          selected_video_streams: {
+            attendee_ids: Array[String],
+            external_user_ids: Array[String]
+          }
+        },
+        artifacts_configuration: {
+          audio: {
+            mux_type: String
+          },
+          video: {
+            state: String,
+            mux_type: String
+          },
+          content: {
+            state: untyped,
+            mux_type: String
+          },
+          composited_video: {
+            layout: String,
+            resolution: String,
+            grid_view_configuration: {
+              content_share_layout: String,
+              presenter_only_configuration: {
+                presenter_position: String
+              },
+              active_speaker_only_configuration: {
+                active_speaker_position: String
+              },
+              horizontal_layout_configuration: {
+                tile_order: String,
+                tile_position: String,
+                tile_count: Integer,
+                tile_aspect_ratio: String
+              },
+              vertical_layout_configuration: {
+                tile_order: untyped,
+                tile_position: String,
+                tile_count: untyped,
+                tile_aspect_ratio: untyped
+              },
+              video_attribute: {
+                corner_radius: Integer,
+                border_color: String,
+                highlight_color: String,
+                border_thickness: Integer
+              },
+              canvas_orientation: String
+            }
+          }
+        }
+      },
+      ?sse_aws_key_management_params: {
+        aws_kms_key_id: String,
+        aws_kms_encryption_context: untyped
+      },
+      ?sink_iam_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMediaCapturePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaCapturePipelineResponse
+
+    interface _CreateMediaConcatenationPipelineResponse
+      include Smithy::Client::_Response[Types::CreateMediaConcatenationPipelineResponse]
+      def media_concatenation_pipeline: () -> Types::MediaConcatenationPipeline?
+    end
+    def create_media_concatenation_pipeline: (
+      ?sources: Array[
+        {
+          type: String,
+          media_capture_pipeline_source_configuration: {
+            media_pipeline_arn: String,
+            chime_sdk_meeting_configuration: {
+              artifacts_configuration: {
+                audio: {
+                  state: String
+                },
+                video: {
+                  state: String
+                },
+                content: {
+                  state: untyped
+                },
+                data_channel: {
+                  state: untyped
+                },
+                transcription_messages: {
+                  state: untyped
+                },
+                meeting_events: {
+                  state: untyped
+                },
+                composited_video: {
+                  state: untyped
+                }
+              }
+            }
+          }
+        }
+      ],
+      ?sinks: Array[
+        {
+          type: String,
+          s3_bucket_sink_configuration: {
+            destination: String
+          }
+        }
+      ],
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMediaConcatenationPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaConcatenationPipelineResponse
+
+    interface _CreateMediaInsightsPipelineResponse
+      include Smithy::Client::_Response[Types::CreateMediaInsightsPipelineResponse]
+      def media_insights_pipeline: () -> Types::MediaInsightsPipeline?
+    end
+    def create_media_insights_pipeline: (
+      ?media_insights_pipeline_configuration_arn: String,
+      ?kinesis_video_stream_source_runtime_configuration: {
+        streams: Array[
+          {
+            stream_arn: String,
+            fragment_number: String,
+            stream_channel_definition: {
+              number_of_channels: Integer,
+              channel_definitions: Array[
+                {
+                  channel_id: Integer,
+                  participant_role: String
+                }
+              ]
+            }
+          }
+        ],
+        media_encoding: String,
+        media_sample_rate: Integer
+      },
+      ?media_insights_runtime_metadata: Hash[String, String],
+      ?kinesis_video_stream_recording_source_runtime_configuration: {
+        streams: Array[
+          {
+            stream_arn: String
+          }
+        ],
+        fragment_selector: {
+          fragment_selector_type: String,
+          timestamp_range: {
+            start_timestamp: Time,
+            end_timestamp: untyped
+          }
+        }
+      },
+      ?s3_recording_sink_runtime_configuration: {
+        destination: String,
+        recording_file_format: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateMediaInsightsPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaInsightsPipelineResponse
+
+    interface _CreateMediaInsightsPipelineConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateMediaInsightsPipelineConfigurationResponse]
+      def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration?
+    end
+    def create_media_insights_pipeline_configuration: (
+      ?media_insights_pipeline_configuration_name: String,
+      ?resource_access_role_arn: String,
+      ?real_time_alert_configuration: {
+        disabled: bool,
+        rules: Array[
+          {
+            type: String,
+            keyword_match_configuration: {
+              rule_name: String,
+              keywords: Array[String],
+              negate: untyped
+            },
+            sentiment_configuration: {
+              rule_name: untyped,
+              sentiment_type: String,
+              time_period: Integer
+            },
+            issue_detection_configuration: {
+              rule_name: untyped
+            }
+          }
+        ]
+      },
+      ?elements: Array[
+        {
+          type: String,
+          amazon_transcribe_call_analytics_processor_configuration: {
+            language_code: String,
+            vocabulary_name: String,
+            vocabulary_filter_name: String,
+            vocabulary_filter_method: String,
+            language_model_name: String,
+            enable_partial_results_stabilization: bool,
+            partial_results_stability: String,
+            content_identification_type: String,
+            content_redaction_type: untyped,
+            pii_entity_types: String,
+            filter_partial_results: untyped,
+            post_call_analytics_settings: {
+              output_location: String,
+              data_access_role_arn: untyped,
+              content_redaction_output: String,
+              output_encryption_kms_key_id: untyped
+            },
+            call_analytics_stream_categories: Array[String]
+          },
+          amazon_transcribe_processor_configuration: {
+            language_code: untyped,
+            vocabulary_name: untyped,
+            vocabulary_filter_name: untyped,
+            vocabulary_filter_method: untyped,
+            show_speaker_label: untyped,
+            enable_partial_results_stabilization: untyped,
+            partial_results_stability: untyped,
+            content_identification_type: untyped,
+            content_redaction_type: untyped,
+            pii_entity_types: untyped,
+            language_model_name: untyped,
+            filter_partial_results: untyped,
+            identify_language: untyped,
+            identify_multiple_languages: untyped,
+            language_options: String,
+            preferred_language: untyped,
+            vocabulary_names: String,
+            vocabulary_filter_names: String
+          },
+          kinesis_data_stream_sink_configuration: {
+            insights_target: String
+          },
+          s3_recording_sink_configuration: {
+            destination: untyped,
+            recording_file_format: String
+          },
+          voice_analytics_processor_configuration: {
+            speaker_search_status: String,
+            voice_tone_analysis_status: untyped
+          },
+          lambda_function_sink_configuration: {
+            insights_target: untyped
+          },
+          sqs_queue_sink_configuration: {
+            insights_target: untyped
+          },
+          sns_topic_sink_configuration: {
+            insights_target: untyped
+          },
+          voice_enhancement_sink_configuration: {
+            disabled: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateMediaInsightsPipelineConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaInsightsPipelineConfigurationResponse
+
+    interface _CreateMediaLiveConnectorPipelineResponse
+      include Smithy::Client::_Response[Types::CreateMediaLiveConnectorPipelineResponse]
+      def media_live_connector_pipeline: () -> Types::MediaLiveConnectorPipeline?
+    end
+    def create_media_live_connector_pipeline: (
+      ?sources: Array[
+        {
+          source_type: String,
+          chime_sdk_meeting_live_connector_configuration: {
+            arn: String,
+            mux_type: String,
+            composited_video: {
+              layout: String,
+              resolution: String,
+              grid_view_configuration: {
+                content_share_layout: String,
+                presenter_only_configuration: {
+                  presenter_position: String
+                },
+                active_speaker_only_configuration: {
+                  active_speaker_position: String
+                },
+                horizontal_layout_configuration: {
+                  tile_order: String,
+                  tile_position: String,
+                  tile_count: Integer,
+                  tile_aspect_ratio: String
+                },
+                vertical_layout_configuration: {
+                  tile_order: untyped,
+                  tile_position: String,
+                  tile_count: untyped,
+                  tile_aspect_ratio: untyped
+                },
+                video_attribute: {
+                  corner_radius: Integer,
+                  border_color: String,
+                  highlight_color: String,
+                  border_thickness: Integer
+                },
+                canvas_orientation: String
+              }
+            },
+            source_configuration: {
+              selected_video_streams: {
+                attendee_ids: Array[String],
+                external_user_ids: Array[String]
+              }
+            }
+          }
+        }
+      ],
+      ?sinks: Array[
+        {
+          sink_type: String,
+          rtmp_configuration: {
+            url: String,
+            audio_channels: String,
+            audio_sample_rate: String
+          }
+        }
+      ],
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMediaLiveConnectorPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaLiveConnectorPipelineResponse
+
+    interface _CreateMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Client::_Response[Types::CreateMediaPipelineKinesisVideoStreamPoolResponse]
+      def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration?
+    end
+    def create_media_pipeline_kinesis_video_stream_pool: (
+      ?stream_configuration: {
+        region: String,
+        data_retention_in_hours: Integer
+      },
+      ?pool_name: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMediaPipelineKinesisVideoStreamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaPipelineKinesisVideoStreamPoolResponse
+
+    interface _CreateMediaStreamPipelineResponse
+      include Smithy::Client::_Response[Types::CreateMediaStreamPipelineResponse]
+      def media_stream_pipeline: () -> Types::MediaStreamPipeline?
+    end
+    def create_media_stream_pipeline: (
+      ?sources: Array[
+        {
+          source_type: String,
+          source_arn: String
+        }
+      ],
+      ?sinks: Array[
+        {
+          sink_arn: String,
+          sink_type: String,
+          reserved_stream_capacity: Integer,
+          media_stream_type: String
+        }
+      ],
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMediaStreamPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMediaStreamPipelineResponse
+
+    interface _DeleteMediaCapturePipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_media_capture_pipeline: (
+      ?media_pipeline_id: String
+    ) -> _DeleteMediaCapturePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMediaCapturePipelineResponse
+
+    interface _DeleteMediaInsightsPipelineConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_media_insights_pipeline_configuration: (
+      ?identifier: String
+    ) -> _DeleteMediaInsightsPipelineConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMediaInsightsPipelineConfigurationResponse
+
+    interface _DeleteMediaPipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_media_pipeline: (
+      ?media_pipeline_id: String
+    ) -> _DeleteMediaPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMediaPipelineResponse
+
+    interface _DeleteMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_media_pipeline_kinesis_video_stream_pool: (
+      ?identifier: String
+    ) -> _DeleteMediaPipelineKinesisVideoStreamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMediaPipelineKinesisVideoStreamPoolResponse
+
+    interface _GetMediaCapturePipelineResponse
+      include Smithy::Client::_Response[Types::GetMediaCapturePipelineResponse]
+      def media_capture_pipeline: () -> Types::MediaCapturePipeline?
+    end
+    def get_media_capture_pipeline: (
+      ?media_pipeline_id: String
+    ) -> _GetMediaCapturePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaCapturePipelineResponse
+
+    interface _GetMediaInsightsPipelineConfigurationResponse
+      include Smithy::Client::_Response[Types::GetMediaInsightsPipelineConfigurationResponse]
+      def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration?
+    end
+    def get_media_insights_pipeline_configuration: (
+      ?identifier: String
+    ) -> _GetMediaInsightsPipelineConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaInsightsPipelineConfigurationResponse
+
+    interface _GetMediaPipelineResponse
+      include Smithy::Client::_Response[Types::GetMediaPipelineResponse]
+      def media_pipeline: () -> Types::MediaPipeline?
+    end
+    def get_media_pipeline: (
+      ?media_pipeline_id: String
+    ) -> _GetMediaPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaPipelineResponse
+
+    interface _GetMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Client::_Response[Types::GetMediaPipelineKinesisVideoStreamPoolResponse]
+      def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration?
+    end
+    def get_media_pipeline_kinesis_video_stream_pool: (
+      ?identifier: String
+    ) -> _GetMediaPipelineKinesisVideoStreamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaPipelineKinesisVideoStreamPoolResponse
+
+    interface _GetSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Types::GetSpeakerSearchTaskResponse]
+      def speaker_search_task: () -> Types::SpeakerSearchTask?
+    end
+    def get_speaker_search_task: (
+      ?identifier: String,
+      ?speaker_search_task_id: String
+    ) -> _GetSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpeakerSearchTaskResponse
+
+    interface _GetVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Types::GetVoiceToneAnalysisTaskResponse]
+      def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask?
+    end
+    def get_voice_tone_analysis_task: (
+      ?identifier: String,
+      ?voice_tone_analysis_task_id: String
+    ) -> _GetVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceToneAnalysisTaskResponse
+
+    interface _ListMediaCapturePipelinesResponse
+      include Smithy::Client::_Response[Types::ListMediaCapturePipelinesResponse]
+      def media_capture_pipelines: () -> Array[Types::MediaCapturePipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_media_capture_pipelines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMediaCapturePipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMediaCapturePipelinesResponse
+
+    interface _ListMediaInsightsPipelineConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListMediaInsightsPipelineConfigurationsResponse]
+      def media_insights_pipeline_configurations: () -> Array[Types::MediaInsightsPipelineConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_media_insights_pipeline_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMediaInsightsPipelineConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMediaInsightsPipelineConfigurationsResponse
+
+    interface _ListMediaPipelineKinesisVideoStreamPoolsResponse
+      include Smithy::Client::_Response[Types::ListMediaPipelineKinesisVideoStreamPoolsResponse]
+      def kinesis_video_stream_pools: () -> Array[Types::KinesisVideoStreamPoolSummary]?
+      def next_token: () -> String?
+    end
+    def list_media_pipeline_kinesis_video_stream_pools: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMediaPipelineKinesisVideoStreamPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMediaPipelineKinesisVideoStreamPoolsResponse
+
+    interface _ListMediaPipelinesResponse
+      include Smithy::Client::_Response[Types::ListMediaPipelinesResponse]
+      def media_pipelines: () -> Array[Types::MediaPipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_media_pipelines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMediaPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMediaPipelinesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Types::StartSpeakerSearchTaskResponse]
+      def speaker_search_task: () -> Types::SpeakerSearchTask?
+    end
+    def start_speaker_search_task: (
+      ?identifier: String,
+      ?voice_profile_domain_arn: String,
+      ?kinesis_video_stream_source_task_configuration: {
+        stream_arn: String,
+        channel_id: Integer,
+        fragment_number: String
+      },
+      ?client_request_token: String
+    ) -> _StartSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSpeakerSearchTaskResponse
+
+    interface _StartVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Types::StartVoiceToneAnalysisTaskResponse]
+      def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask?
+    end
+    def start_voice_tone_analysis_task: (
+      ?identifier: String,
+      ?language_code: String,
+      ?kinesis_video_stream_source_task_configuration: {
+        stream_arn: String,
+        channel_id: Integer,
+        fragment_number: String
+      },
+      ?client_request_token: String
+    ) -> _StartVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVoiceToneAnalysisTaskResponse
+
+    interface _StopSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_speaker_search_task: (
+      ?identifier: String,
+      ?speaker_search_task_id: String
+    ) -> _StopSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSpeakerSearchTaskResponse
+
+    interface _StopVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_voice_tone_analysis_task: (
+      ?identifier: String,
+      ?voice_tone_analysis_task_id: String
+    ) -> _StopVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopVoiceToneAnalysisTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMediaInsightsPipelineConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateMediaInsightsPipelineConfigurationResponse]
+      def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration?
+    end
+    def update_media_insights_pipeline_configuration: (
+      ?identifier: String,
+      ?resource_access_role_arn: String,
+      ?real_time_alert_configuration: {
+        disabled: bool,
+        rules: Array[
+          {
+            type: String,
+            keyword_match_configuration: {
+              rule_name: String,
+              keywords: Array[String],
+              negate: untyped
+            },
+            sentiment_configuration: {
+              rule_name: untyped,
+              sentiment_type: String,
+              time_period: Integer
+            },
+            issue_detection_configuration: {
+              rule_name: untyped
+            }
+          }
+        ]
+      },
+      ?elements: Array[
+        {
+          type: String,
+          amazon_transcribe_call_analytics_processor_configuration: {
+            language_code: String,
+            vocabulary_name: String,
+            vocabulary_filter_name: String,
+            vocabulary_filter_method: String,
+            language_model_name: String,
+            enable_partial_results_stabilization: bool,
+            partial_results_stability: String,
+            content_identification_type: String,
+            content_redaction_type: untyped,
+            pii_entity_types: String,
+            filter_partial_results: untyped,
+            post_call_analytics_settings: {
+              output_location: String,
+              data_access_role_arn: untyped,
+              content_redaction_output: String,
+              output_encryption_kms_key_id: untyped
+            },
+            call_analytics_stream_categories: Array[String]
+          },
+          amazon_transcribe_processor_configuration: {
+            language_code: untyped,
+            vocabulary_name: untyped,
+            vocabulary_filter_name: untyped,
+            vocabulary_filter_method: untyped,
+            show_speaker_label: untyped,
+            enable_partial_results_stabilization: untyped,
+            partial_results_stability: untyped,
+            content_identification_type: untyped,
+            content_redaction_type: untyped,
+            pii_entity_types: untyped,
+            language_model_name: untyped,
+            filter_partial_results: untyped,
+            identify_language: untyped,
+            identify_multiple_languages: untyped,
+            language_options: String,
+            preferred_language: untyped,
+            vocabulary_names: String,
+            vocabulary_filter_names: String
+          },
+          kinesis_data_stream_sink_configuration: {
+            insights_target: String
+          },
+          s3_recording_sink_configuration: {
+            destination: untyped,
+            recording_file_format: String
+          },
+          voice_analytics_processor_configuration: {
+            speaker_search_status: String,
+            voice_tone_analysis_status: untyped
+          },
+          lambda_function_sink_configuration: {
+            insights_target: untyped
+          },
+          sqs_queue_sink_configuration: {
+            insights_target: untyped
+          },
+          sns_topic_sink_configuration: {
+            insights_target: untyped
+          },
+          voice_enhancement_sink_configuration: {
+            disabled: untyped
+          }
+        }
+      ]
+    ) -> _UpdateMediaInsightsPipelineConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMediaInsightsPipelineConfigurationResponse
+
+    interface _UpdateMediaInsightsPipelineStatusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_media_insights_pipeline_status: (
+      ?identifier: String,
+      ?update_status: String
+    ) -> _UpdateMediaInsightsPipelineStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMediaInsightsPipelineStatusResponse
+
+    interface _UpdateMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Client::_Response[Types::UpdateMediaPipelineKinesisVideoStreamPoolResponse]
+      def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration?
+    end
+    def update_media_pipeline_kinesis_video_stream_pool: (
+      ?identifier: String,
+      ?stream_configuration: {
+        data_retention_in_hours: Integer
+      }
+    ) -> _UpdateMediaPipelineKinesisVideoStreamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMediaPipelineKinesisVideoStreamPoolResponse
+  end
+end

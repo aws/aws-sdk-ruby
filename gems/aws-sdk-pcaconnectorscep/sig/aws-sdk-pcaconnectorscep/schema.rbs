@@ -1,0 +1,61 @@
+module Aws::PcaConnectorScep
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AzureApplicationId: StringShape
+    AzureDomain: StringShape
+    BadRequestException: StructureShape
+    CertificateAuthorityArn: StringShape
+    Challenge: StructureShape
+    ChallengeArn: StringShape
+    ChallengeMetadata: StructureShape
+    ChallengeMetadataList: ListShape
+    ChallengeMetadataSummary: StructureShape
+    ClientToken: StringShape
+    ConflictException: StructureShape
+    Connector: StructureShape
+    ConnectorArn: StringShape
+    ConnectorList: ListShape
+    ConnectorStatus: EnumShape
+    ConnectorStatusReason: EnumShape
+    ConnectorSummary: StructureShape
+    ConnectorType: EnumShape
+    CreateChallengeRequest: StructureShape
+    CreateChallengeResponse: StructureShape
+    CreateConnectorRequest: StructureShape
+    CreateConnectorResponse: StructureShape
+    DeleteChallengeRequest: StructureShape
+    DeleteConnectorRequest: StructureShape
+    GetChallengeMetadataRequest: StructureShape
+    GetChallengeMetadataResponse: StructureShape
+    GetChallengePasswordRequest: StructureShape
+    GetChallengePasswordResponse: StructureShape
+    GetConnectorRequest: StructureShape
+    GetConnectorResponse: StructureShape
+    InternalServerException: StructureShape
+    IntuneConfiguration: StructureShape
+    ListChallengeMetadataRequest: StructureShape
+    ListChallengeMetadataResponse: StructureShape
+    ListConnectorsRequest: StructureShape
+    ListConnectorsResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    MaxResults: IntegerShape
+    MobileDeviceManagement: UnionShape
+    NextToken: StringShape
+    OpenIdConfiguration: StructureShape
+    ResourceNotFoundException: StructureShape
+    SensitiveString: StringShape
+    ServiceQuotaExceededException: StructureShape
+    TagKeyList: ListShape
+    TagResourceRequest: StructureShape
+    Tags: MapShape
+    ThrottlingException: StructureShape
+    UntagResourceRequest: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionReason: EnumShape
+
+    PcaConnectorScep: ServiceShape
+  end
+end

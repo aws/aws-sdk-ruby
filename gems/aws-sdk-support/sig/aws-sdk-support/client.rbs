@@ -1,0 +1,218 @@
+module Aws::Support
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Support::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddAttachmentsToSetResponse
+      include Smithy::Client::_Response[Types::AddAttachmentsToSetResponse]
+      def attachment_set_id: () -> String?
+      def expiry_time: () -> String?
+    end
+    def add_attachments_to_set: (
+      ?attachment_set_id: String,
+      ?attachments: Array[
+        {
+          file_name: String,
+          data: String
+        }
+      ]
+    ) -> _AddAttachmentsToSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddAttachmentsToSetResponse
+
+    interface _AddCommunicationToCaseResponse
+      include Smithy::Client::_Response[Types::AddCommunicationToCaseResponse]
+      def result: () -> bool?
+    end
+    def add_communication_to_case: (
+      ?case_id: String,
+      ?communication_body: String,
+      ?cc_email_addresses: Array[String],
+      ?attachment_set_id: String
+    ) -> _AddCommunicationToCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCommunicationToCaseResponse
+
+    interface _CreateCaseResponse
+      include Smithy::Client::_Response[Types::CreateCaseResponse]
+      def case_id: () -> String?
+    end
+    def create_case: (
+      ?subject: String,
+      ?service_code: String,
+      ?severity_code: String,
+      ?category_code: String,
+      ?communication_body: String,
+      ?cc_email_addresses: Array[String],
+      ?language: String,
+      ?issue_type: String,
+      ?attachment_set_id: String
+    ) -> _CreateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseResponse
+
+    interface _DescribeAttachmentResponse
+      include Smithy::Client::_Response[Types::DescribeAttachmentResponse]
+      def attachment: () -> Types::Attachment?
+    end
+    def describe_attachment: (
+      ?attachment_id: String
+    ) -> _DescribeAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttachmentResponse
+
+    interface _DescribeCasesResponse
+      include Smithy::Client::_Response[Types::DescribeCasesResponse]
+      def cases: () -> Array[Types::CaseDetails]?
+      def next_token: () -> String?
+    end
+    def describe_cases: (
+      ?case_id_list: Array[String],
+      ?display_id: String,
+      ?after_time: String,
+      ?before_time: String,
+      ?include_resolved_cases: bool,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?language: String,
+      ?include_communications: bool
+    ) -> _DescribeCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCasesResponse
+
+    interface _DescribeCommunicationsResponse
+      include Smithy::Client::_Response[Types::DescribeCommunicationsResponse]
+      def communications: () -> Array[Types::Communication]?
+      def next_token: () -> String?
+    end
+    def describe_communications: (
+      ?case_id: String,
+      ?before_time: String,
+      ?after_time: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeCommunicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCommunicationsResponse
+
+    interface _DescribeCreateCaseOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeCreateCaseOptionsResponse]
+      def language_availability: () -> String?
+      def communication_types: () -> Array[Types::CommunicationTypeOptions]?
+    end
+    def describe_create_case_options: (
+      ?issue_type: String,
+      ?service_code: String,
+      ?language: String,
+      ?category_code: String
+    ) -> _DescribeCreateCaseOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCreateCaseOptionsResponse
+
+    interface _DescribeServicesResponse
+      include Smithy::Client::_Response[Types::DescribeServicesResponse]
+      def services: () -> Array[Types::Service]?
+    end
+    def describe_services: (
+      ?service_code_list: Array[String],
+      ?language: String
+    ) -> _DescribeServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServicesResponse
+
+    interface _DescribeSeverityLevelsResponse
+      include Smithy::Client::_Response[Types::DescribeSeverityLevelsResponse]
+      def severity_levels: () -> Array[Types::SeverityLevel]?
+    end
+    def describe_severity_levels: (
+      ?language: String
+    ) -> _DescribeSeverityLevelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSeverityLevelsResponse
+
+    interface _DescribeSupportedLanguagesResponse
+      include Smithy::Client::_Response[Types::DescribeSupportedLanguagesResponse]
+      def supported_languages: () -> Array[Types::SupportedLanguage]?
+    end
+    def describe_supported_languages: (
+      ?issue_type: String,
+      ?service_code: String,
+      ?category_code: String
+    ) -> _DescribeSupportedLanguagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSupportedLanguagesResponse
+
+    interface _DescribeTrustedAdvisorCheckRefreshStatusesResponse
+      include Smithy::Client::_Response[Types::DescribeTrustedAdvisorCheckRefreshStatusesResponse]
+      def statuses: () -> Array[Types::TrustedAdvisorCheckRefreshStatus]?
+    end
+    def describe_trusted_advisor_check_refresh_statuses: (
+      ?check_ids: Array[String?]
+    ) -> _DescribeTrustedAdvisorCheckRefreshStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustedAdvisorCheckRefreshStatusesResponse
+
+    interface _DescribeTrustedAdvisorCheckResultResponse
+      include Smithy::Client::_Response[Types::DescribeTrustedAdvisorCheckResultResponse]
+      def result: () -> Types::TrustedAdvisorCheckResult?
+    end
+    def describe_trusted_advisor_check_result: (
+      ?check_id: String,
+      ?language: String
+    ) -> _DescribeTrustedAdvisorCheckResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustedAdvisorCheckResultResponse
+
+    interface _DescribeTrustedAdvisorCheckSummariesResponse
+      include Smithy::Client::_Response[Types::DescribeTrustedAdvisorCheckSummariesResponse]
+      def summaries: () -> Array[Types::TrustedAdvisorCheckSummary]?
+    end
+    def describe_trusted_advisor_check_summaries: (
+      ?check_ids: Array[String?]
+    ) -> _DescribeTrustedAdvisorCheckSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustedAdvisorCheckSummariesResponse
+
+    interface _DescribeTrustedAdvisorChecksResponse
+      include Smithy::Client::_Response[Types::DescribeTrustedAdvisorChecksResponse]
+      def checks: () -> Array[Types::TrustedAdvisorCheckDescription]?
+    end
+    def describe_trusted_advisor_checks: (
+      ?language: String
+    ) -> _DescribeTrustedAdvisorChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustedAdvisorChecksResponse
+
+    interface _RefreshTrustedAdvisorCheckResponse
+      include Smithy::Client::_Response[Types::RefreshTrustedAdvisorCheckResponse]
+      def status: () -> Types::TrustedAdvisorCheckRefreshStatus?
+    end
+    def refresh_trusted_advisor_check: (
+      ?check_id: String
+    ) -> _RefreshTrustedAdvisorCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RefreshTrustedAdvisorCheckResponse
+
+    interface _ResolveCaseResponse
+      include Smithy::Client::_Response[Types::ResolveCaseResponse]
+      def initial_case_status: () -> String?
+      def final_case_status: () -> String?
+    end
+    def resolve_case: (
+      ?case_id: String
+    ) -> _ResolveCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveCaseResponse
+  end
+end

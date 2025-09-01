@@ -1,0 +1,126 @@
+module Aws::CodePipeline
+  module Errors
+    class ActionExecutionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActionTypeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApprovalAlreadyCompletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentPipelineExecutionsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConditionNotOverridableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicatedStopRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidActionDeclarationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApprovalTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBlockerDeclarationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidClientTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidJobException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidJobStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNonceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStageDeclarationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStructureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidWebhookAuthenticationParametersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidWebhookFilterPatternException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class JobNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotLatestPipelineExecutionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OutputVariablesSizeExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineExecutionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineExecutionNotStoppableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineExecutionOutdatedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineNameInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineVersionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StageNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StageNotRetryableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToRollbackStageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebhookNotFoundException < Smithy::Client::ServiceError
+    end
+  end
+end

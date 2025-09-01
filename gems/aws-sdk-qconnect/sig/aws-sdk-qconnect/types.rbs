@@ -1,0 +1,5600 @@
+module Aws::QConnect
+  module Types
+
+    class AIAgentConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?manual_search_ai_agent_configuration: Types::ManualSearchAIAgentConfiguration,
+        ?answer_recommendation_ai_agent_configuration: Types::AnswerRecommendationAIAgentConfiguration,
+        ?self_service_ai_agent_configuration: Types::SelfServiceAIAgentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manual_search_ai_agent_configuration: Types::ManualSearchAIAgentConfiguration?
+      attr_accessor answer_recommendation_ai_agent_configuration: Types::AnswerRecommendationAIAgentConfiguration?
+      attr_accessor self_service_ai_agent_configuration: Types::SelfServiceAIAgentConfiguration?
+
+      class ManualSearchAIAgentConfiguration < AIAgentConfiguration
+      end
+      class AnswerRecommendationAIAgentConfiguration < AIAgentConfiguration
+      end
+      class SelfServiceAIAgentConfiguration < AIAgentConfiguration
+      end
+      class Unknown < AIAgentConfiguration
+      end
+    end
+
+    class AIAgentConfigurationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent_id: String?
+    end
+
+    class AIAgentData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_agent_id: String,
+        ?ai_agent_arn: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::AIAgentConfiguration,
+        ?modified_time: Time,
+        ?description: String,
+        ?visibility_status: String,
+        ?tags: Hash[String, String],
+        ?origin: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor ai_agent_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::AIAgentConfiguration?
+      attr_accessor modified_time: Time?
+      attr_accessor description: String?
+      attr_accessor visibility_status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor origin: String?
+      attr_accessor status: String?
+    end
+
+    class AIAgentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_agent_id: String,
+        ?type: String,
+        ?ai_agent_arn: String,
+        ?modified_time: Time,
+        ?visibility_status: String,
+        ?configuration: Types::AIAgentConfiguration,
+        ?origin: String,
+        ?description: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor type: String?
+      attr_accessor ai_agent_arn: String?
+      attr_accessor modified_time: Time?
+      attr_accessor visibility_status: String?
+      attr_accessor configuration: Types::AIAgentConfiguration?
+      attr_accessor origin: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AIAgentVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent_summary: Types::AIAgentSummary,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent_summary: Types::AIAgentSummary?
+      attr_accessor version_number: Integer?
+    end
+
+    class AIGuardrailContentPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters_config: Array[Types::GuardrailContentFilterConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters_config: Array[Types::GuardrailContentFilterConfig]?
+    end
+
+    class AIGuardrailContextualGroundingPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters_config: Array[Types::GuardrailContextualGroundingFilterConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters_config: Array[Types::GuardrailContextualGroundingFilterConfig]?
+    end
+
+    class AIGuardrailData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_guardrail_arn: String,
+        ?ai_guardrail_id: String,
+        ?name: String,
+        ?visibility_status: String,
+        ?blocked_input_messaging: String,
+        ?blocked_outputs_messaging: String,
+        ?description: String,
+        ?topic_policy_config: Types::AIGuardrailTopicPolicyConfig,
+        ?content_policy_config: Types::AIGuardrailContentPolicyConfig,
+        ?word_policy_config: Types::AIGuardrailWordPolicyConfig,
+        ?sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig,
+        ?contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig,
+        ?tags: Hash[String, String],
+        ?status: String,
+        ?modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_guardrail_arn: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor name: String?
+      attr_accessor visibility_status: String?
+      attr_accessor blocked_input_messaging: String?
+      attr_accessor blocked_outputs_messaging: String?
+      attr_accessor description: String?
+      attr_accessor topic_policy_config: Types::AIGuardrailTopicPolicyConfig?
+      attr_accessor content_policy_config: Types::AIGuardrailContentPolicyConfig?
+      attr_accessor word_policy_config: Types::AIGuardrailWordPolicyConfig?
+      attr_accessor sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig?
+      attr_accessor contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor modified_time: Time?
+    end
+
+    class AIGuardrailSensitiveInformationPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pii_entities_config: Array[Types::GuardrailPiiEntityConfig],
+        ?regexes_config: Array[Types::GuardrailRegexConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pii_entities_config: Array[Types::GuardrailPiiEntityConfig]?
+      attr_accessor regexes_config: Array[Types::GuardrailRegexConfig]?
+    end
+
+    class AIGuardrailSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_guardrail_id: String,
+        ?ai_guardrail_arn: String,
+        ?modified_time: Time,
+        ?visibility_status: String,
+        ?description: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor ai_guardrail_arn: String?
+      attr_accessor modified_time: Time?
+      attr_accessor visibility_status: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AIGuardrailTopicPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topics_config: Array[Types::GuardrailTopicConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topics_config: Array[Types::GuardrailTopicConfig]?
+    end
+
+    class AIGuardrailVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail_summary: Types::AIGuardrailSummary,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail_summary: Types::AIGuardrailSummary?
+      attr_accessor version_number: Integer?
+    end
+
+    class AIGuardrailWordPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?words_config: Array[Types::GuardrailWordConfig],
+        ?managed_word_lists_config: Array[Types::GuardrailManagedWordsConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor words_config: Array[Types::GuardrailWordConfig]?
+      attr_accessor managed_word_lists_config: Array[Types::GuardrailManagedWordsConfig]?
+    end
+
+    class AIPromptData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_prompt_id: String,
+        ?ai_prompt_arn: String,
+        ?name: String,
+        ?type: String,
+        ?template_type: String,
+        ?model_id: String,
+        ?api_format: String,
+        ?template_configuration: Types::AIPromptTemplateConfiguration,
+        ?modified_time: Time,
+        ?description: String,
+        ?visibility_status: String,
+        ?tags: Hash[String, String],
+        ?origin: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor ai_prompt_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor template_type: String?
+      attr_accessor model_id: String?
+      attr_accessor api_format: String?
+      attr_accessor template_configuration: Types::AIPromptTemplateConfiguration?
+      attr_accessor modified_time: Time?
+      attr_accessor description: String?
+      attr_accessor visibility_status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor origin: String?
+      attr_accessor status: String?
+    end
+
+    class AIPromptSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?ai_prompt_id: String,
+        ?type: String,
+        ?ai_prompt_arn: String,
+        ?modified_time: Time,
+        ?template_type: String,
+        ?model_id: String,
+        ?api_format: String,
+        ?visibility_status: String,
+        ?origin: String,
+        ?description: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor type: String?
+      attr_accessor ai_prompt_arn: String?
+      attr_accessor modified_time: Time?
+      attr_accessor template_type: String?
+      attr_accessor model_id: String?
+      attr_accessor api_format: String?
+      attr_accessor visibility_status: String?
+      attr_accessor origin: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AIPromptTemplateConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text_full_ai_prompt_edit_template_configuration: Types::TextFullAIPromptEditTemplateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_full_ai_prompt_edit_template_configuration: Types::TextFullAIPromptEditTemplateConfiguration?
+
+      class TextFullAIPromptEditTemplateConfiguration < AIPromptTemplateConfiguration
+      end
+      class Unknown < AIPromptTemplateConfiguration
+      end
+    end
+
+    class AIPromptVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt_summary: Types::AIPromptSummary,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt_summary: Types::AIPromptSummary?
+      attr_accessor version_number: Integer?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivateMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class ActivateMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class AgentAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_name: String,
+        ?last_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+    end
+
+    class AmazonConnectGuideAssociationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_id: String?
+    end
+
+    class AnswerRecommendationAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_labeling_generation_ai_prompt_id: String,
+        ?query_reformulation_ai_prompt_id: String,
+        ?answer_generation_ai_prompt_id: String,
+        ?answer_generation_ai_guardrail_id: String,
+        ?association_configurations: Array[Types::AssociationConfiguration],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_labeling_generation_ai_prompt_id: String?
+      attr_accessor query_reformulation_ai_prompt_id: String?
+      attr_accessor answer_generation_ai_prompt_id: String?
+      attr_accessor answer_generation_ai_guardrail_id: String?
+      attr_accessor association_configurations: Array[Types::AssociationConfiguration]?
+      attr_accessor locale: String?
+    end
+
+    class AppIntegrationsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_integration_arn: String,
+        ?object_fields: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_integration_arn: String?
+      attr_accessor object_fields: Array[String]?
+    end
+
+    class AssistantAssociationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association_id: String,
+        ?assistant_association_arn: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?association_type: String,
+        ?association_data: Types::AssistantAssociationOutputData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association_id: String?
+      attr_accessor assistant_association_arn: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor association_type: String?
+      attr_accessor association_data: Types::AssistantAssociationOutputData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AssistantAssociationInputData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+
+      class KnowledgeBaseId < AssistantAssociationInputData
+      end
+      class Unknown < AssistantAssociationInputData
+      end
+    end
+
+    class AssistantAssociationOutputData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?knowledge_base_association: Types::KnowledgeBaseAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_association: Types::KnowledgeBaseAssociationData?
+
+      class KnowledgeBaseAssociation < AssistantAssociationOutputData
+      end
+      class Unknown < AssistantAssociationOutputData
+      end
+    end
+
+    class AssistantAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association_id: String,
+        ?assistant_association_arn: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?association_type: String,
+        ?association_data: Types::AssistantAssociationOutputData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association_id: String?
+      attr_accessor assistant_association_arn: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor association_type: String?
+      attr_accessor association_data: Types::AssistantAssociationOutputData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AssistantCapabilityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class AssistantData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?integration_configuration: Types::AssistantIntegrationConfiguration,
+        ?capability_configuration: Types::AssistantCapabilityConfiguration,
+        ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration?
+      attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration?
+      attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+    end
+
+    class AssistantIntegrationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_integration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_integration_arn: String?
+    end
+
+    class AssistantSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?integration_configuration: Types::AssistantIntegrationConfiguration,
+        ?capability_configuration: Types::AssistantCapabilityConfiguration,
+        ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration?
+      attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration?
+      attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+    end
+
+    class AssociationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?association_type: String,
+        ?association_configuration_data: Types::AssociationConfigurationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor association_type: String?
+      attr_accessor association_configuration_data: Types::AssociationConfigurationData?
+    end
+
+    class AssociationConfigurationData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?knowledge_base_association_configuration_data: Types::KnowledgeBaseAssociationConfigurationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_association_configuration_data: Types::KnowledgeBaseAssociationConfigurationData?
+
+      class KnowledgeBaseAssociationConfigurationData < AssociationConfigurationData
+      end
+      class Unknown < AssociationConfigurationData
+      end
+    end
+
+    class BedrockFoundationModelConfigurationForParsing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?parsing_prompt: Types::ParsingPrompt,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor parsing_prompt: Types::ParsingPrompt?
+    end
+
+    class ChunkingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chunking_strategy: String,
+        ?fixed_size_chunking_configuration: Types::FixedSizeChunkingConfiguration,
+        ?hierarchical_chunking_configuration: Types::HierarchicalChunkingConfiguration,
+        ?semantic_chunking_configuration: Types::SemanticChunkingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chunking_strategy: String?
+      attr_accessor fixed_size_chunking_configuration: Types::FixedSizeChunkingConfiguration?
+      attr_accessor hierarchical_chunking_configuration: Types::HierarchicalChunkingConfiguration?
+      attr_accessor semantic_chunking_configuration: Types::SemanticChunkingConfiguration?
+    end
+
+    class CitationSpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_inclusive: Integer,
+        ?end_offset_exclusive: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_inclusive: Integer?
+      attr_accessor end_offset_exclusive: Integer?
+    end
+
+    class Configuration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?connect_configuration: Types::ConnectConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_configuration: Types::ConnectConfiguration?
+
+      class ConnectConfiguration < Configuration
+      end
+      class Unknown < Configuration
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class ContentAssociationContents
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?amazon_connect_guide_association: Types::AmazonConnectGuideAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_connect_guide_association: Types::AmazonConnectGuideAssociationData?
+
+      class AmazonConnectGuideAssociation < ContentAssociationContents
+      end
+      class Unknown < ContentAssociationContents
+      end
+    end
+
+    class ContentAssociationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?knowledge_base_arn: String,
+        ?content_id: String,
+        ?content_arn: String,
+        ?content_association_id: String,
+        ?content_association_arn: String,
+        ?association_type: String,
+        ?association_data: Types::ContentAssociationContents,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor content_id: String?
+      attr_accessor content_arn: String?
+      attr_accessor content_association_id: String?
+      attr_accessor content_association_arn: String?
+      attr_accessor association_type: String?
+      attr_accessor association_data: Types::ContentAssociationContents?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ContentAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?knowledge_base_arn: String,
+        ?content_id: String,
+        ?content_arn: String,
+        ?content_association_id: String,
+        ?content_association_arn: String,
+        ?association_type: String,
+        ?association_data: Types::ContentAssociationContents,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor content_id: String?
+      attr_accessor content_arn: String?
+      attr_accessor content_association_id: String?
+      attr_accessor content_association_arn: String?
+      attr_accessor association_type: String?
+      attr_accessor association_data: Types::ContentAssociationContents?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ContentData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_arn: String,
+        ?content_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?revision_id: String,
+        ?title: String,
+        ?content_type: String,
+        ?status: String,
+        ?metadata: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?link_out_uri: String,
+        ?url: String,
+        ?url_expiry: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_arn: String?
+      attr_accessor content_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor title: String?
+      attr_accessor content_type: String?
+      attr_accessor status: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor link_out_uri: String?
+      attr_accessor url: String?
+      attr_accessor url_expiry: Time?
+    end
+
+    class ContentDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_data: Types::TextData,
+        ?ranking_data: Types::RankingData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_data: Types::TextData?
+      attr_accessor ranking_data: Types::RankingData?
+    end
+
+    class ContentFeedbackData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?generative_content_feedback_data: Types::GenerativeContentFeedbackData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generative_content_feedback_data: Types::GenerativeContentFeedbackData?
+
+      class GenerativeContentFeedbackData < ContentFeedbackData
+      end
+      class Unknown < ContentFeedbackData
+      end
+    end
+
+    class ContentReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?content_arn: String,
+        ?content_id: String,
+        ?source_url: String,
+        ?reference_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_arn: String?
+      attr_accessor content_id: String?
+      attr_accessor source_url: String?
+      attr_accessor reference_type: String?
+    end
+
+    class ContentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_arn: String,
+        ?content_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?revision_id: String,
+        ?title: String,
+        ?content_type: String,
+        ?status: String,
+        ?metadata: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_arn: String?
+      attr_accessor content_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor title: String?
+      attr_accessor content_type: String?
+      attr_accessor status: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ConversationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?self_service_conversation_history: Array[Types::SelfServiceConversationHistory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_service_conversation_history: Array[Types::SelfServiceConversationHistory]?
+    end
+
+    class ConversationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class CreateAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::AIAgentConfiguration,
+        ?visibility_status: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::AIAgentConfiguration?
+      attr_accessor visibility_status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class CreateAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent: Types::AIAgentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent: Types::AIAgentData?
+    end
+
+    class CreateAIAgentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+        ?modified_time: Time,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor modified_time: Time?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAIAgentVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent: Types::AIAgentData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent: Types::AIAgentData?
+      attr_accessor version_number: Integer?
+    end
+
+    class CreateAIGuardrailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?name: String,
+        ?blocked_input_messaging: String,
+        ?blocked_outputs_messaging: String,
+        ?visibility_status: String,
+        ?description: String,
+        ?topic_policy_config: Types::AIGuardrailTopicPolicyConfig,
+        ?content_policy_config: Types::AIGuardrailContentPolicyConfig,
+        ?word_policy_config: Types::AIGuardrailWordPolicyConfig,
+        ?sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig,
+        ?contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor name: String?
+      attr_accessor blocked_input_messaging: String?
+      attr_accessor blocked_outputs_messaging: String?
+      attr_accessor visibility_status: String?
+      attr_accessor description: String?
+      attr_accessor topic_policy_config: Types::AIGuardrailTopicPolicyConfig?
+      attr_accessor content_policy_config: Types::AIGuardrailContentPolicyConfig?
+      attr_accessor word_policy_config: Types::AIGuardrailWordPolicyConfig?
+      attr_accessor sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig?
+      attr_accessor contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAIGuardrailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail: Types::AIGuardrailData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail: Types::AIGuardrailData?
+    end
+
+    class CreateAIGuardrailVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+        ?modified_time: Time,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor modified_time: Time?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAIGuardrailVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail: Types::AIGuardrailData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail: Types::AIGuardrailData?
+      attr_accessor version_number: Integer?
+    end
+
+    class CreateAIPromptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?name: String,
+        ?type: String,
+        ?template_configuration: Types::AIPromptTemplateConfiguration,
+        ?visibility_status: String,
+        ?template_type: String,
+        ?model_id: String,
+        ?api_format: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor template_configuration: Types::AIPromptTemplateConfiguration?
+      attr_accessor visibility_status: String?
+      attr_accessor template_type: String?
+      attr_accessor model_id: String?
+      attr_accessor api_format: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class CreateAIPromptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt: Types::AIPromptData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt: Types::AIPromptData?
+    end
+
+    class CreateAIPromptVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+        ?modified_time: Time,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor modified_time: Time?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAIPromptVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt: Types::AIPromptData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt: Types::AIPromptData?
+      attr_accessor version_number: Integer?
+    end
+
+    class CreateAssistantAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?association_type: String,
+        ?association: Types::AssistantAssociationInputData,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor association_type: String?
+      attr_accessor association: Types::AssistantAssociationInputData?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAssistantAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association: Types::AssistantAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association: Types::AssistantAssociationData?
+    end
+
+    class CreateAssistantInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+    end
+
+    class CreateAssistantOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant: Types::AssistantData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant: Types::AssistantData?
+    end
+
+    class CreateContentAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?knowledge_base_id: String,
+        ?content_id: String,
+        ?association_type: String,
+        ?association: Types::ContentAssociationContents,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+      attr_accessor association_type: String?
+      attr_accessor association: Types::ContentAssociationContents?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateContentAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_association: Types::ContentAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_association: Types::ContentAssociationData?
+    end
+
+    class CreateContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?title: String,
+        ?override_link_out_uri: String,
+        ?metadata: Hash[String, String],
+        ?upload_id: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor title: String?
+      attr_accessor override_link_out_uri: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor upload_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::ContentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::ContentData?
+    end
+
+    class CreateKnowledgeBaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?knowledge_base_type: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?rendering_configuration: Types::RenderingConfiguration,
+        ?vector_ingestion_configuration: Types::VectorIngestionConfiguration,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor knowledge_base_type: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor rendering_configuration: Types::RenderingConfiguration?
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateKnowledgeBaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base: Types::KnowledgeBaseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base: Types::KnowledgeBaseData?
+    end
+
+    class CreateMessageTemplateAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?content_disposition: String,
+        ?name: String,
+        ?body: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor content_disposition: String?
+      attr_accessor name: String?
+      attr_accessor body: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateMessageTemplateAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::MessageTemplateAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::MessageTemplateAttachment?
+    end
+
+    class CreateMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?content: Types::MessageTemplateContentProvider,
+        ?description: String,
+        ?channel_subtype: String,
+        ?language: String,
+        ?default_attributes: Types::MessageTemplateAttributes,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::MessageTemplateContentProvider?
+      attr_accessor description: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor language: String?
+      attr_accessor default_attributes: Types::MessageTemplateAttributes?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template: Types::MessageTemplateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template: Types::MessageTemplateData?
+    end
+
+    class CreateMessageTemplateVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?message_template_content_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor message_template_content_sha256: String?
+    end
+
+    class CreateMessageTemplateVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template: Types::ExtendedMessageTemplateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template: Types::ExtendedMessageTemplateData?
+    end
+
+    class CreateQuickResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?content: Types::QuickResponseDataProvider,
+        ?content_type: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?description: String,
+        ?shortcut_key: String,
+        ?is_active: bool,
+        ?channels: Array[String],
+        ?language: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::QuickResponseDataProvider?
+      attr_accessor content_type: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor description: String?
+      attr_accessor shortcut_key: String?
+      attr_accessor is_active: bool?
+      attr_accessor channels: Array[String]?
+      attr_accessor language: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQuickResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response: Types::QuickResponseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response: Types::QuickResponseData?
+    end
+
+    class CreateSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?tag_filter: Types::TagFilter,
+        ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+    end
+
+    class CreateSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::SessionData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::SessionData?
+    end
+
+    class CustomerProfileAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_arn: String,
+        ?first_name: String,
+        ?middle_name: String,
+        ?last_name: String,
+        ?account_number: String,
+        ?email_address: String,
+        ?phone_number: String,
+        ?additional_information: String,
+        ?party_type: String,
+        ?business_name: String,
+        ?birth_date: String,
+        ?gender: String,
+        ?mobile_phone_number: String,
+        ?home_phone_number: String,
+        ?business_phone_number: String,
+        ?business_email_address: String,
+        ?address1: String,
+        ?address2: String,
+        ?address3: String,
+        ?address4: String,
+        ?city: String,
+        ?county: String,
+        ?country: String,
+        ?postal_code: String,
+        ?province: String,
+        ?state: String,
+        ?shipping_address1: String,
+        ?shipping_address2: String,
+        ?shipping_address3: String,
+        ?shipping_address4: String,
+        ?shipping_city: String,
+        ?shipping_county: String,
+        ?shipping_country: String,
+        ?shipping_postal_code: String,
+        ?shipping_province: String,
+        ?shipping_state: String,
+        ?mailing_address1: String,
+        ?mailing_address2: String,
+        ?mailing_address3: String,
+        ?mailing_address4: String,
+        ?mailing_city: String,
+        ?mailing_county: String,
+        ?mailing_country: String,
+        ?mailing_postal_code: String,
+        ?mailing_province: String,
+        ?mailing_state: String,
+        ?billing_address1: String,
+        ?billing_address2: String,
+        ?billing_address3: String,
+        ?billing_address4: String,
+        ?billing_city: String,
+        ?billing_county: String,
+        ?billing_country: String,
+        ?billing_postal_code: String,
+        ?billing_province: String,
+        ?billing_state: String,
+        ?custom: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor first_name: String?
+      attr_accessor middle_name: String?
+      attr_accessor last_name: String?
+      attr_accessor account_number: String?
+      attr_accessor email_address: String?
+      attr_accessor phone_number: String?
+      attr_accessor additional_information: String?
+      attr_accessor party_type: String?
+      attr_accessor business_name: String?
+      attr_accessor birth_date: String?
+      attr_accessor gender: String?
+      attr_accessor mobile_phone_number: String?
+      attr_accessor home_phone_number: String?
+      attr_accessor business_phone_number: String?
+      attr_accessor business_email_address: String?
+      attr_accessor address1: String?
+      attr_accessor address2: String?
+      attr_accessor address3: String?
+      attr_accessor address4: String?
+      attr_accessor city: String?
+      attr_accessor county: String?
+      attr_accessor country: String?
+      attr_accessor postal_code: String?
+      attr_accessor province: String?
+      attr_accessor state: String?
+      attr_accessor shipping_address1: String?
+      attr_accessor shipping_address2: String?
+      attr_accessor shipping_address3: String?
+      attr_accessor shipping_address4: String?
+      attr_accessor shipping_city: String?
+      attr_accessor shipping_county: String?
+      attr_accessor shipping_country: String?
+      attr_accessor shipping_postal_code: String?
+      attr_accessor shipping_province: String?
+      attr_accessor shipping_state: String?
+      attr_accessor mailing_address1: String?
+      attr_accessor mailing_address2: String?
+      attr_accessor mailing_address3: String?
+      attr_accessor mailing_address4: String?
+      attr_accessor mailing_city: String?
+      attr_accessor mailing_county: String?
+      attr_accessor mailing_country: String?
+      attr_accessor mailing_postal_code: String?
+      attr_accessor mailing_province: String?
+      attr_accessor mailing_state: String?
+      attr_accessor billing_address1: String?
+      attr_accessor billing_address2: String?
+      attr_accessor billing_address3: String?
+      attr_accessor billing_address4: String?
+      attr_accessor billing_city: String?
+      attr_accessor billing_county: String?
+      attr_accessor billing_country: String?
+      attr_accessor billing_postal_code: String?
+      attr_accessor billing_province: String?
+      attr_accessor billing_state: String?
+      attr_accessor custom: Hash[String, String]?
+    end
+
+    class DataDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content_data: Types::ContentDataDetails,
+        ?generative_data: Types::GenerativeDataDetails,
+        ?intent_detected_data: Types::IntentDetectedDataDetails,
+        ?source_content_data: Types::SourceContentDataDetails,
+        ?generative_chunk_data: Types::GenerativeChunkDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_data: Types::ContentDataDetails?
+      attr_accessor generative_data: Types::GenerativeDataDetails?
+      attr_accessor intent_detected_data: Types::IntentDetectedDataDetails?
+      attr_accessor source_content_data: Types::SourceContentDataDetails?
+      attr_accessor generative_chunk_data: Types::GenerativeChunkDataDetails?
+
+      class ContentData < DataDetails
+      end
+      class GenerativeData < DataDetails
+      end
+      class IntentDetectedData < DataDetails
+      end
+      class SourceContentData < DataDetails
+      end
+      class GenerativeChunkData < DataDetails
+      end
+      class Unknown < DataDetails
+      end
+    end
+
+    class DataReference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content_reference: Types::ContentReference,
+        ?generative_reference: Types::GenerativeReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_reference: Types::ContentReference?
+      attr_accessor generative_reference: Types::GenerativeReference?
+
+      class ContentReference < DataReference
+      end
+      class GenerativeReference < DataReference
+      end
+      class Unknown < DataReference
+      end
+    end
+
+    class DataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference: Types::DataReference,
+        ?details: Types::DataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference: Types::DataReference?
+      attr_accessor details: Types::DataDetails?
+    end
+
+    class DeactivateMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeactivateMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+    end
+
+    class DeleteAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAIAgentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteAIAgentVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAIGuardrailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+    end
+
+    class DeleteAIGuardrailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAIGuardrailVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteAIGuardrailVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAIPromptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+    end
+
+    class DeleteAIPromptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAIPromptVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteAIPromptVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAssistantAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association_id: String,
+        ?assistant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association_id: String?
+      attr_accessor assistant_id: String?
+    end
+
+    class DeleteAssistantAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAssistantInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+    end
+
+    class DeleteAssistantOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContentAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?content_id: String,
+        ?content_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+      attr_accessor content_association_id: String?
+    end
+
+    class DeleteContentAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?content_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+    end
+
+    class DeleteContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?import_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor import_job_id: String?
+    end
+
+    class DeleteImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteKnowledgeBaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class DeleteKnowledgeBaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMessageTemplateAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor attachment_id: String?
+    end
+
+    class DeleteMessageTemplateAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+    end
+
+    class DeleteMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQuickResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?quick_response_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor quick_response_id: String?
+    end
+
+    class DeleteQuickResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Document
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_reference: Types::ContentReference,
+        ?title: Types::DocumentText,
+        ?excerpt: Types::DocumentText,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_reference: Types::ContentReference?
+      attr_accessor title: Types::DocumentText?
+      attr_accessor excerpt: Types::DocumentText?
+    end
+
+    class DocumentText
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?highlights: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor highlights: Array[Types::Highlight]?
+    end
+
+    class EmailHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class EmailMessageTemplateContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: String,
+        ?body: Types::EmailMessageTemplateContentBody,
+        ?headers: Array[Types::EmailHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: String?
+      attr_accessor body: Types::EmailMessageTemplateContentBody?
+      attr_accessor headers: Array[Types::EmailHeader]?
+    end
+
+    class EmailMessageTemplateContentBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plain_text: Types::MessageTemplateBodyContentProvider,
+        ?html: Types::MessageTemplateBodyContentProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plain_text: Types::MessageTemplateBodyContentProvider?
+      attr_accessor html: Types::MessageTemplateBodyContentProvider?
+    end
+
+    class ExtendedMessageTemplateData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?channel_subtype: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?last_modified_by: String,
+        ?content: Types::MessageTemplateContentProvider,
+        ?description: String,
+        ?language: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?default_attributes: Types::MessageTemplateAttributes,
+        ?attribute_types: Array[String],
+        ?attachments: Array[Types::MessageTemplateAttachment],
+        ?is_active: bool,
+        ?version_number: Integer,
+        ?message_template_content_sha256: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor content: Types::MessageTemplateContentProvider?
+      attr_accessor description: String?
+      attr_accessor language: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor default_attributes: Types::MessageTemplateAttributes?
+      attr_accessor attribute_types: Array[String]?
+      attr_accessor attachments: Array[Types::MessageTemplateAttachment]?
+      attr_accessor is_active: bool?
+      attr_accessor version_number: Integer?
+      attr_accessor message_template_content_sha256: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ExternalSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?configuration: Types::Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor configuration: Types::Configuration?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    class FixedSizeChunkingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_tokens: Integer,
+        ?overlap_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_tokens: Integer?
+      attr_accessor overlap_percentage: Integer?
+    end
+
+    class GenerativeChunkDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion: String,
+        ?references: Array[Types::DataSummary],
+        ?next_chunk_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion: String?
+      attr_accessor references: Array[Types::DataSummary]?
+      attr_accessor next_chunk_token: String?
+    end
+
+    class GenerativeContentFeedbackData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relevance: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relevance: String?
+    end
+
+    class GenerativeDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion: String,
+        ?references: Array[Types::DataSummary],
+        ?ranking_data: Types::RankingData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion: String?
+      attr_accessor references: Array[Types::DataSummary]?
+      attr_accessor ranking_data: Types::RankingData?
+    end
+
+    class GenerativeReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?generation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor generation_id: String?
+    end
+
+    class GetAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+    end
+
+    class GetAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent: Types::AIAgentData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent: Types::AIAgentData?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetAIGuardrailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+    end
+
+    class GetAIGuardrailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail: Types::AIGuardrailData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail: Types::AIGuardrailData?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetAIPromptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+    end
+
+    class GetAIPromptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt: Types::AIPromptData,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt: Types::AIPromptData?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetAssistantAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association_id: String,
+        ?assistant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association_id: String?
+      attr_accessor assistant_id: String?
+    end
+
+    class GetAssistantAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association: Types::AssistantAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association: Types::AssistantAssociationData?
+    end
+
+    class GetAssistantInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+    end
+
+    class GetAssistantOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant: Types::AssistantData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant: Types::AssistantData?
+    end
+
+    class GetContentAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?content_id: String,
+        ?content_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+      attr_accessor content_association_id: String?
+    end
+
+    class GetContentAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_association: Types::ContentAssociationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_association: Types::ContentAssociationData?
+    end
+
+    class GetContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_id: String,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_id: String?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::ContentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::ContentData?
+    end
+
+    class GetContentSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_id: String,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_id: String?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetContentSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_summary: Types::ContentSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_summary: Types::ContentSummary?
+    end
+
+    class GetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_id: String,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_id: String?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job: Types::ImportJobData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job: Types::ImportJobData?
+    end
+
+    class GetKnowledgeBaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetKnowledgeBaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base: Types::KnowledgeBaseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base: Types::KnowledgeBaseData?
+    end
+
+    class GetMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_id: String,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template: Types::ExtendedMessageTemplateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template: Types::ExtendedMessageTemplateData?
+    end
+
+    class GetNextMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?next_message_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor next_message_token: String?
+    end
+
+    class GetNextMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?response: Types::MessageOutput,
+        ?request_message_id: String,
+        ?conversation_state: Types::ConversationState,
+        ?next_message_token: String,
+        ?conversation_session_data: Array[Types::RuntimeSessionData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor response: Types::MessageOutput?
+      attr_accessor request_message_id: String?
+      attr_accessor conversation_state: Types::ConversationState?
+      attr_accessor next_message_token: String?
+      attr_accessor conversation_session_data: Array[Types::RuntimeSessionData]?
+    end
+
+    class GetQuickResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response_id: String,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response_id: String?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class GetQuickResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response: Types::QuickResponseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response: Types::QuickResponseData?
+    end
+
+    class GetRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?max_results: Integer,
+        ?wait_time_seconds: Integer,
+        ?next_chunk_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor wait_time_seconds: Integer?
+      attr_accessor next_chunk_token: String?
+    end
+
+    class GetRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendations: Array[Types::RecommendationData],
+        ?triggers: Array[Types::RecommendationTrigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendations: Array[Types::RecommendationData]?
+      attr_accessor triggers: Array[Types::RecommendationTrigger]?
+    end
+
+    class GetSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::SessionData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::SessionData?
+    end
+
+    class GroupingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?criteria: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criteria: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GuardrailContentFilterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?input_strength: String,
+        ?output_strength: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor input_strength: String?
+      attr_accessor output_strength: String?
+    end
+
+    class GuardrailContextualGroundingFilterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor threshold: Float?
+    end
+
+    class GuardrailManagedWordsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class GuardrailPiiEntityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor action: String?
+    end
+
+    class GuardrailRegexConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?pattern: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor pattern: String?
+      attr_accessor action: String?
+    end
+
+    class GuardrailTopicConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?definition: String,
+        ?examples: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor definition: String?
+      attr_accessor examples: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class GuardrailWordConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class HierarchicalChunkingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level_configurations: Array[Types::HierarchicalChunkingLevelConfiguration],
+        ?overlap_tokens: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level_configurations: Array[Types::HierarchicalChunkingLevelConfiguration]?
+      attr_accessor overlap_tokens: Integer?
+    end
+
+    class HierarchicalChunkingLevelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_tokens: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_tokens: Integer?
+    end
+
+    class Highlight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_inclusive: Integer,
+        ?end_offset_exclusive: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_inclusive: Integer?
+      attr_accessor end_offset_exclusive: Integer?
+    end
+
+    class ImportJobData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_id: String,
+        ?knowledge_base_id: String,
+        ?upload_id: String,
+        ?knowledge_base_arn: String,
+        ?import_job_type: String,
+        ?status: String,
+        ?url: String,
+        ?failed_record_report: String,
+        ?url_expiry: Time,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?metadata: Hash[String, String],
+        ?external_source_configuration: Types::ExternalSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_id: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor import_job_type: String?
+      attr_accessor status: String?
+      attr_accessor url: String?
+      attr_accessor failed_record_report: String?
+      attr_accessor url_expiry: Time?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration?
+    end
+
+    class ImportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_id: String,
+        ?knowledge_base_id: String,
+        ?upload_id: String,
+        ?knowledge_base_arn: String,
+        ?import_job_type: String,
+        ?status: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?metadata: Hash[String, String],
+        ?external_source_configuration: Types::ExternalSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_id: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor upload_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor import_job_type: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration?
+    end
+
+    class IntentDetectedDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent: String,
+        ?intent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent: String?
+      attr_accessor intent_id: String?
+    end
+
+    class IntentInputData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_id: String?
+    end
+
+    class KnowledgeBaseAssociationConfigurationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_tag_filter: Types::TagFilter,
+        ?max_results: Integer,
+        ?override_knowledge_base_search_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_tag_filter: Types::TagFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor override_knowledge_base_search_type: String?
+    end
+
+    class KnowledgeBaseAssociationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?knowledge_base_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor knowledge_base_arn: String?
+    end
+
+    class KnowledgeBaseData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?knowledge_base_arn: String,
+        ?name: String,
+        ?knowledge_base_type: String,
+        ?status: String,
+        ?last_content_modification_time: Time,
+        ?vector_ingestion_configuration: Types::VectorIngestionConfiguration,
+        ?source_configuration: Types::SourceConfiguration,
+        ?rendering_configuration: Types::RenderingConfiguration,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?ingestion_status: String,
+        ?ingestion_failure_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor name: String?
+      attr_accessor knowledge_base_type: String?
+      attr_accessor status: String?
+      attr_accessor last_content_modification_time: Time?
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor rendering_configuration: Types::RenderingConfiguration?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ingestion_status: String?
+      attr_accessor ingestion_failure_reasons: Array[String]?
+    end
+
+    class KnowledgeBaseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?knowledge_base_arn: String,
+        ?name: String,
+        ?knowledge_base_type: String,
+        ?status: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?vector_ingestion_configuration: Types::VectorIngestionConfiguration,
+        ?rendering_configuration: Types::RenderingConfiguration,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor name: String?
+      attr_accessor knowledge_base_type: String?
+      attr_accessor status: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration?
+      attr_accessor rendering_configuration: Types::RenderingConfiguration?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListAIAgentVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor origin: String?
+    end
+
+    class ListAIAgentVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent_version_summaries: Array[Types::AIAgentVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent_version_summaries: Array[Types::AIAgentVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAIAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor origin: String?
+    end
+
+    class ListAIAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent_summaries: Array[Types::AIAgentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent_summaries: Array[Types::AIAgentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAIGuardrailVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAIGuardrailVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail_version_summaries: Array[Types::AIGuardrailVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail_version_summaries: Array[Types::AIGuardrailVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAIGuardrailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAIGuardrailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail_summaries: Array[Types::AIGuardrailSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail_summaries: Array[Types::AIGuardrailSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAIPromptVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor origin: String?
+    end
+
+    class ListAIPromptVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt_version_summaries: Array[Types::AIPromptVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt_version_summaries: Array[Types::AIPromptVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAIPromptsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor origin: String?
+    end
+
+    class ListAIPromptsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt_summaries: Array[Types::AIPromptSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt_summaries: Array[Types::AIPromptSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssistantAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assistant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assistant_id: String?
+    end
+
+    class ListAssistantAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_association_summaries: Array[Types::AssistantAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_association_summaries: Array[Types::AssistantAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssistantsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssistantsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_summaries: Array[Types::AssistantSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_summaries: Array[Types::AssistantSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContentAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+        ?content_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+    end
+
+    class ListContentAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_association_summaries: Array[Types::ContentAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_association_summaries: Array[Types::ContentAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class ListContentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_summaries: Array[Types::ContentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_summaries: Array[Types::ContentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class ListImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_summaries: Array[Types::ImportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_summaries: Array[Types::ImportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListKnowledgeBasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListKnowledgeBasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_summaries: Array[Types::KnowledgeBaseSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_summaries: Array[Types::KnowledgeBaseSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMessageTemplateVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMessageTemplateVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_version_summaries: Array[Types::MessageTemplateVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_version_summaries: Array[Types::MessageTemplateVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMessageTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class ListMessageTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_summaries: Array[Types::MessageTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_summaries: Array[Types::MessageTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::MessageOutput],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::MessageOutput]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQuickResponsesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class ListQuickResponsesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response_summaries: Array[Types::QuickResponseSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response_summaries: Array[Types::QuickResponseSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ManagedSourceConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?web_crawler_configuration: Types::WebCrawlerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_crawler_configuration: Types::WebCrawlerConfiguration?
+
+      class WebCrawlerConfiguration < ManagedSourceConfiguration
+      end
+      class Unknown < ManagedSourceConfiguration
+      end
+    end
+
+    class ManualSearchAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?answer_generation_ai_prompt_id: String,
+        ?answer_generation_ai_guardrail_id: String,
+        ?association_configurations: Array[Types::AssociationConfiguration],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor answer_generation_ai_prompt_id: String?
+      attr_accessor answer_generation_ai_guardrail_id: String?
+      attr_accessor association_configurations: Array[Types::AssociationConfiguration]?
+      attr_accessor locale: String?
+    end
+
+    class MessageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generate_filler_message: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generate_filler_message: bool?
+    end
+
+    class MessageData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: Types::TextMessage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::TextMessage?
+
+      class Text < MessageData
+      end
+      class Unknown < MessageData
+      end
+    end
+
+    class MessageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::MessageData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::MessageData?
+    end
+
+    class MessageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::MessageData,
+        ?message_id: String,
+        ?participant: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::MessageData?
+      attr_accessor message_id: String?
+      attr_accessor participant: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class MessageTemplateAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_disposition: String,
+        ?name: String,
+        ?uploaded_time: Time,
+        ?url: String,
+        ?url_expiry: Time,
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_disposition: String?
+      attr_accessor name: String?
+      attr_accessor uploaded_time: Time?
+      attr_accessor url: String?
+      attr_accessor url_expiry: Time?
+      attr_accessor attachment_id: String?
+    end
+
+    class MessageTemplateAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_attributes: Types::SystemAttributes,
+        ?agent_attributes: Types::AgentAttributes,
+        ?customer_profile_attributes: Types::CustomerProfileAttributes,
+        ?custom_attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_attributes: Types::SystemAttributes?
+      attr_accessor agent_attributes: Types::AgentAttributes?
+      attr_accessor customer_profile_attributes: Types::CustomerProfileAttributes?
+      attr_accessor custom_attributes: Hash[String, String]?
+    end
+
+    class MessageTemplateBodyContentProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+
+      class Content < MessageTemplateBodyContentProvider
+      end
+      class Unknown < MessageTemplateBodyContentProvider
+      end
+    end
+
+    class MessageTemplateContentProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?email: Types::EmailMessageTemplateContent,
+        ?sms: Types::SMSMessageTemplateContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: Types::EmailMessageTemplateContent?
+      attr_accessor sms: Types::SMSMessageTemplateContent?
+
+      class Email < MessageTemplateContentProvider
+      end
+      class Sms < MessageTemplateContentProvider
+      end
+      class Unknown < MessageTemplateContentProvider
+      end
+    end
+
+    class MessageTemplateData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?channel_subtype: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?last_modified_by: String,
+        ?content: Types::MessageTemplateContentProvider,
+        ?description: String,
+        ?language: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?default_attributes: Types::MessageTemplateAttributes,
+        ?attribute_types: Array[String],
+        ?message_template_content_sha256: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor content: Types::MessageTemplateContentProvider?
+      attr_accessor description: String?
+      attr_accessor language: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor default_attributes: Types::MessageTemplateAttributes?
+      attr_accessor attribute_types: Array[String]?
+      attr_accessor message_template_content_sha256: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MessageTemplateFilterField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+        ?include_no_existence: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+      attr_accessor include_no_existence: bool?
+    end
+
+    class MessageTemplateOrderField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor order: String?
+    end
+
+    class MessageTemplateQueryField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+        ?allow_fuzziness: bool,
+        ?priority: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+      attr_accessor allow_fuzziness: bool?
+      attr_accessor priority: String?
+    end
+
+    class MessageTemplateSearchExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::MessageTemplateQueryField],
+        ?filters: Array[Types::MessageTemplateFilterField],
+        ?order_on_field: Types::MessageTemplateOrderField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::MessageTemplateQueryField]?
+      attr_accessor filters: Array[Types::MessageTemplateFilterField]?
+      attr_accessor order_on_field: Types::MessageTemplateOrderField?
+    end
+
+    class MessageTemplateSearchResultData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?channel_subtype: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?last_modified_by: String,
+        ?is_active: bool,
+        ?version_number: Integer,
+        ?description: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?language: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor is_active: bool?
+      attr_accessor version_number: Integer?
+      attr_accessor description: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor language: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MessageTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?channel_subtype: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?last_modified_by: String,
+        ?active_version_number: Integer,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor active_version_number: Integer?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MessageTemplateVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template_arn: String,
+        ?message_template_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?channel_subtype: String,
+        ?is_active: bool,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template_arn: String?
+      attr_accessor message_template_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor channel_subtype: String?
+      attr_accessor is_active: bool?
+      attr_accessor version_number: Integer?
+    end
+
+    class NotifyRecommendationsReceivedError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor message: String?
+    end
+
+    class NotifyRecommendationsReceivedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?recommendation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor recommendation_ids: Array[String]?
+    end
+
+    class NotifyRecommendationsReceivedOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_ids: Array[String],
+        ?errors: Array[Types::NotifyRecommendationsReceivedError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_ids: Array[String]?
+      attr_accessor errors: Array[Types::NotifyRecommendationsReceivedError]?
+    end
+
+    class OrCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?and_conditions: Array[Types::TagCondition],
+        ?tag_condition: Types::TagCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_conditions: Array[Types::TagCondition]?
+      attr_accessor tag_condition: Types::TagCondition?
+
+      class AndConditions < OrCondition
+      end
+      class TagCondition < OrCondition
+      end
+      class Unknown < OrCondition
+      end
+    end
+
+    class ParsingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parsing_strategy: String,
+        ?bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfigurationForParsing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parsing_strategy: String?
+      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfigurationForParsing?
+    end
+
+    class ParsingPrompt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parsing_prompt_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parsing_prompt_text: String?
+    end
+
+    class PreconditionFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?content_feedback: Types::ContentFeedbackData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor content_feedback: Types::ContentFeedbackData?
+    end
+
+    class PutFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?assistant_arn: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?content_feedback: Types::ContentFeedbackData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor content_feedback: Types::ContentFeedbackData?
+    end
+
+    class QueryAssistantInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?query_text: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?session_id: String,
+        ?query_condition: Array[Types::QueryCondition],
+        ?query_input_data: Types::QueryInputData,
+        ?override_knowledge_base_search_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor query_text: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor session_id: String?
+      attr_accessor query_condition: Array[Types::QueryCondition]?
+      attr_accessor query_input_data: Types::QueryInputData?
+      attr_accessor override_knowledge_base_search_type: String?
+    end
+
+    class QueryAssistantOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::ResultData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::ResultData]?
+      attr_accessor next_token: String?
+    end
+
+    class QueryCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?single: Types::QueryConditionItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor single: Types::QueryConditionItem?
+
+      class Single < QueryCondition
+      end
+      class Unknown < QueryCondition
+      end
+    end
+
+    class QueryConditionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?comparator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor comparator: String?
+      attr_accessor value: String?
+    end
+
+    class QueryInputData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?query_text_input_data: Types::QueryTextInputData,
+        ?intent_input_data: Types::IntentInputData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text_input_data: Types::QueryTextInputData?
+      attr_accessor intent_input_data: Types::IntentInputData?
+
+      class QueryTextInputData < QueryInputData
+      end
+      class IntentInputData < QueryInputData
+      end
+      class Unknown < QueryInputData
+      end
+    end
+
+    class QueryRecommendationTriggerData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class QueryTextInputData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class QuickResponseContentProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+
+      class Content < QuickResponseContentProvider
+      end
+      class Unknown < QuickResponseContentProvider
+      end
+    end
+
+    class QuickResponseContents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plain_text: Types::QuickResponseContentProvider,
+        ?markdown: Types::QuickResponseContentProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plain_text: Types::QuickResponseContentProvider?
+      attr_accessor markdown: Types::QuickResponseContentProvider?
+    end
+
+    class QuickResponseData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response_arn: String,
+        ?quick_response_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?content_type: String,
+        ?status: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?contents: Types::QuickResponseContents,
+        ?description: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?shortcut_key: String,
+        ?last_modified_by: String,
+        ?is_active: bool,
+        ?channels: Array[String],
+        ?language: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response_arn: String?
+      attr_accessor quick_response_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor content_type: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor contents: Types::QuickResponseContents?
+      attr_accessor description: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor shortcut_key: String?
+      attr_accessor last_modified_by: String?
+      attr_accessor is_active: bool?
+      attr_accessor channels: Array[String]?
+      attr_accessor language: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class QuickResponseDataProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+
+      class Content < QuickResponseDataProvider
+      end
+      class Unknown < QuickResponseDataProvider
+      end
+    end
+
+    class QuickResponseFilterField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+        ?include_no_existence: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+      attr_accessor include_no_existence: bool?
+    end
+
+    class QuickResponseOrderField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor order: String?
+    end
+
+    class QuickResponseQueryField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+        ?allow_fuzziness: bool,
+        ?priority: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+      attr_accessor allow_fuzziness: bool?
+      attr_accessor priority: String?
+    end
+
+    class QuickResponseSearchExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::QuickResponseQueryField],
+        ?filters: Array[Types::QuickResponseFilterField],
+        ?order_on_field: Types::QuickResponseOrderField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::QuickResponseQueryField]?
+      attr_accessor filters: Array[Types::QuickResponseFilterField]?
+      attr_accessor order_on_field: Types::QuickResponseOrderField?
+    end
+
+    class QuickResponseSearchResultData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response_arn: String,
+        ?quick_response_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?content_type: String,
+        ?status: String,
+        ?contents: Types::QuickResponseContents,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?is_active: bool,
+        ?description: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?shortcut_key: String,
+        ?last_modified_by: String,
+        ?channels: Array[String],
+        ?language: String,
+        ?attributes_not_interpolated: Array[String],
+        ?attributes_interpolated: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response_arn: String?
+      attr_accessor quick_response_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor content_type: String?
+      attr_accessor status: String?
+      attr_accessor contents: Types::QuickResponseContents?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor is_active: bool?
+      attr_accessor description: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor shortcut_key: String?
+      attr_accessor last_modified_by: String?
+      attr_accessor channels: Array[String]?
+      attr_accessor language: String?
+      attr_accessor attributes_not_interpolated: Array[String]?
+      attr_accessor attributes_interpolated: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class QuickResponseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response_arn: String,
+        ?quick_response_id: String,
+        ?knowledge_base_arn: String,
+        ?knowledge_base_id: String,
+        ?name: String,
+        ?content_type: String,
+        ?status: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?description: String,
+        ?last_modified_by: String,
+        ?is_active: bool,
+        ?channels: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response_arn: String?
+      attr_accessor quick_response_id: String?
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor name: String?
+      attr_accessor content_type: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor description: String?
+      attr_accessor last_modified_by: String?
+      attr_accessor is_active: bool?
+      attr_accessor channels: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RankingData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relevance_score: Float,
+        ?relevance_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relevance_score: Float?
+      attr_accessor relevance_level: String?
+    end
+
+    class RecommendationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?document: Types::Document,
+        ?relevance_score: Float,
+        ?relevance_level: String,
+        ?type: String,
+        ?data: Types::DataSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor document: Types::Document?
+      attr_accessor relevance_score: Float?
+      attr_accessor relevance_level: String?
+      attr_accessor type: String?
+      attr_accessor data: Types::DataSummary?
+    end
+
+    class RecommendationTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?source: String,
+        ?data: Types::RecommendationTriggerData,
+        ?recommendation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor source: String?
+      attr_accessor data: Types::RecommendationTriggerData?
+      attr_accessor recommendation_ids: Array[String]?
+    end
+
+    class RecommendationTriggerData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?query: Types::QueryRecommendationTriggerData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: Types::QueryRecommendationTriggerData?
+
+      class Query < RecommendationTriggerData
+      end
+      class Unknown < RecommendationTriggerData
+      end
+    end
+
+    class RemoveAssistantAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_type: String?
+    end
+
+    class RemoveAssistantAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveKnowledgeBaseTemplateUriInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+    end
+
+    class RemoveKnowledgeBaseTemplateUriOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RenderMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?attributes: Types::MessageTemplateAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor attributes: Types::MessageTemplateAttributes?
+    end
+
+    class RenderMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::MessageTemplateContentProvider,
+        ?attributes_not_interpolated: Array[String],
+        ?attachments: Array[Types::MessageTemplateAttachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::MessageTemplateContentProvider?
+      attr_accessor attributes_not_interpolated: Array[String]?
+      attr_accessor attachments: Array[Types::MessageTemplateAttachment]?
+    end
+
+    class RenderingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_uri: String?
+    end
+
+    class RequestTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResultData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?document: Types::Document,
+        ?relevance_score: Float,
+        ?data: Types::DataSummary,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor document: Types::Document?
+      attr_accessor relevance_score: Float?
+      attr_accessor data: Types::DataSummary?
+      attr_accessor type: String?
+    end
+
+    class RuntimeSessionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Types::RuntimeSessionDataValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Types::RuntimeSessionDataValue?
+    end
+
+    class RuntimeSessionDataValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+
+      class StringValue < RuntimeSessionDataValue
+      end
+      class Unknown < RuntimeSessionDataValue
+      end
+    end
+
+    class SMSMessageTemplateContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: Types::SMSMessageTemplateContentBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: Types::SMSMessageTemplateContentBody?
+    end
+
+    class SMSMessageTemplateContentBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plain_text: Types::MessageTemplateBodyContentProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plain_text: Types::MessageTemplateBodyContentProvider?
+    end
+
+    class SearchContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?knowledge_base_id: String,
+        ?search_expression: Types::SearchExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor knowledge_base_id: String?
+      attr_accessor search_expression: Types::SearchExpression?
+    end
+
+    class SearchContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_summaries: Array[Types::ContentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_summaries: Array[Types::ContentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class SearchMessageTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?search_expression: Types::MessageTemplateSearchExpression,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor search_expression: Types::MessageTemplateSearchExpression?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchMessageTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::MessageTemplateSearchResultData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::MessageTemplateSearchResultData]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchQuickResponsesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?search_expression: Types::QuickResponseSearchExpression,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor search_expression: Types::QuickResponseSearchExpression?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SearchQuickResponsesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::QuickResponseSearchResultData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::QuickResponseSearchResultData]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assistant_id: String,
+        ?search_expression: Types::SearchExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assistant_id: String?
+      attr_accessor search_expression: Types::SearchExpression?
+    end
+
+    class SearchSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_summaries: Array[Types::SessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_summaries: Array[Types::SessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SeedUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class SelfServiceAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?self_service_pre_processing_ai_prompt_id: String,
+        ?self_service_answer_generation_ai_prompt_id: String,
+        ?self_service_ai_guardrail_id: String,
+        ?association_configurations: Array[Types::AssociationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_service_pre_processing_ai_prompt_id: String?
+      attr_accessor self_service_answer_generation_ai_prompt_id: String?
+      attr_accessor self_service_ai_guardrail_id: String?
+      attr_accessor association_configurations: Array[Types::AssociationConfiguration]?
+    end
+
+    class SelfServiceConversationHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?turn_number: Integer,
+        ?input_transcript: String,
+        ?bot_response: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor turn_number: Integer?
+      attr_accessor input_transcript: String?
+      attr_accessor bot_response: String?
+    end
+
+    class SemanticChunkingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_tokens: Integer,
+        ?buffer_size: Integer,
+        ?breakpoint_percentile_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_tokens: Integer?
+      attr_accessor buffer_size: Integer?
+      attr_accessor breakpoint_percentile_threshold: Integer?
+    end
+
+    class SendMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?type: String,
+        ?message: Types::MessageInput,
+        ?conversation_context: Types::ConversationContext,
+        ?configuration: Types::MessageConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor type: String?
+      attr_accessor message: Types::MessageInput?
+      attr_accessor conversation_context: Types::ConversationContext?
+      attr_accessor configuration: Types::MessageConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class SendMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_message_id: String,
+        ?configuration: Types::MessageConfiguration,
+        ?next_message_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_message_id: String?
+      attr_accessor configuration: Types::MessageConfiguration?
+      attr_accessor next_message_token: String?
+    end
+
+    class ServerSideEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SessionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+        ?session_id: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?integration_configuration: Types::SessionIntegrationConfiguration,
+        ?tag_filter: Types::TagFilter,
+        ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor integration_configuration: Types::SessionIntegrationConfiguration?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+      attr_accessor origin: String?
+    end
+
+    class SessionIntegrationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_integration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_integration_arn: String?
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+        ?assistant_id: String,
+        ?assistant_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+      attr_accessor assistant_id: String?
+      attr_accessor assistant_arn: String?
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?app_integrations: Types::AppIntegrationsConfiguration,
+        ?managed_source_configuration: Types::ManagedSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_integrations: Types::AppIntegrationsConfiguration?
+      attr_accessor managed_source_configuration: Types::ManagedSourceConfiguration?
+
+      class AppIntegrations < SourceConfiguration
+      end
+      class ManagedSourceConfiguration < SourceConfiguration
+      end
+      class Unknown < SourceConfiguration
+      end
+    end
+
+    class SourceContentDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?text_data: Types::TextData,
+        ?ranking_data: Types::RankingData,
+        ?citation_span: Types::CitationSpan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor text_data: Types::TextData?
+      attr_accessor ranking_data: Types::RankingData?
+      attr_accessor citation_span: Types::CitationSpan?
+    end
+
+    class StartContentUploadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?content_type: String,
+        ?presigned_url_time_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_type: String?
+      attr_accessor presigned_url_time_to_live: Integer?
+    end
+
+    class StartContentUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?url: String,
+        ?url_expiry: Time,
+        ?headers_to_include: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor url: String?
+      attr_accessor url_expiry: Time?
+      attr_accessor headers_to_include: Hash[String, String]?
+    end
+
+    class StartImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?import_job_type: String,
+        ?upload_id: String,
+        ?client_token: String,
+        ?metadata: Hash[String, String],
+        ?external_source_configuration: Types::ExternalSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor import_job_type: String?
+      attr_accessor upload_id: String?
+      attr_accessor client_token: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration?
+    end
+
+    class StartImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job: Types::ImportJobData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job: Types::ImportJobData?
+    end
+
+    class SystemAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?customer_endpoint: Types::SystemEndpointAttributes,
+        ?system_endpoint: Types::SystemEndpointAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor customer_endpoint: Types::SystemEndpointAttributes?
+      attr_accessor system_endpoint: Types::SystemEndpointAttributes?
+    end
+
+    class SystemEndpointAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+    end
+
+    class TagCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tag_condition: Types::TagCondition,
+        ?and_conditions: Array[Types::TagCondition],
+        ?or_conditions: Array[Types::OrCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_condition: Types::TagCondition?
+      attr_accessor and_conditions: Array[Types::TagCondition]?
+      attr_accessor or_conditions: Array[Types::OrCondition]?
+
+      class TagCondition < TagFilter
+      end
+      class AndConditions < TagFilter
+      end
+      class OrConditions < TagFilter
+      end
+      class Unknown < TagFilter
+      end
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Types::DocumentText,
+        ?excerpt: Types::DocumentText,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Types::DocumentText?
+      attr_accessor excerpt: Types::DocumentText?
+    end
+
+    class TextFullAIPromptEditTemplateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class TextMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?ai_agent_id: String,
+        ?visibility_status: String,
+        ?configuration: Types::AIAgentConfiguration,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_id: String?
+      attr_accessor visibility_status: String?
+      attr_accessor configuration: Types::AIAgentConfiguration?
+      attr_accessor description: String?
+    end
+
+    class UpdateAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_agent: Types::AIAgentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_agent: Types::AIAgentData?
+    end
+
+    class UpdateAIGuardrailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?ai_guardrail_id: String,
+        ?visibility_status: String,
+        ?blocked_input_messaging: String,
+        ?blocked_outputs_messaging: String,
+        ?description: String,
+        ?topic_policy_config: Types::AIGuardrailTopicPolicyConfig,
+        ?content_policy_config: Types::AIGuardrailContentPolicyConfig,
+        ?word_policy_config: Types::AIGuardrailWordPolicyConfig,
+        ?sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig,
+        ?contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor ai_guardrail_id: String?
+      attr_accessor visibility_status: String?
+      attr_accessor blocked_input_messaging: String?
+      attr_accessor blocked_outputs_messaging: String?
+      attr_accessor description: String?
+      attr_accessor topic_policy_config: Types::AIGuardrailTopicPolicyConfig?
+      attr_accessor content_policy_config: Types::AIGuardrailContentPolicyConfig?
+      attr_accessor word_policy_config: Types::AIGuardrailWordPolicyConfig?
+      attr_accessor sensitive_information_policy_config: Types::AIGuardrailSensitiveInformationPolicyConfig?
+      attr_accessor contextual_grounding_policy_config: Types::AIGuardrailContextualGroundingPolicyConfig?
+    end
+
+    class UpdateAIGuardrailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_guardrail: Types::AIGuardrailData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_guardrail: Types::AIGuardrailData?
+    end
+
+    class UpdateAIPromptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?assistant_id: String,
+        ?ai_prompt_id: String,
+        ?visibility_status: String,
+        ?template_configuration: Types::AIPromptTemplateConfiguration,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor assistant_id: String?
+      attr_accessor ai_prompt_id: String?
+      attr_accessor visibility_status: String?
+      attr_accessor template_configuration: Types::AIPromptTemplateConfiguration?
+      attr_accessor description: String?
+    end
+
+    class UpdateAIPromptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_prompt: Types::AIPromptData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_prompt: Types::AIPromptData?
+    end
+
+    class UpdateAssistantAIAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?ai_agent_type: String,
+        ?configuration: Types::AIAgentConfigurationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor ai_agent_type: String?
+      attr_accessor configuration: Types::AIAgentConfigurationData?
+    end
+
+    class UpdateAssistantAIAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant: Types::AssistantData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant: Types::AssistantData?
+    end
+
+    class UpdateContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?content_id: String,
+        ?revision_id: String,
+        ?title: String,
+        ?override_link_out_uri: String,
+        ?remove_override_link_out_uri: bool,
+        ?metadata: Hash[String, String],
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor content_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor title: String?
+      attr_accessor override_link_out_uri: String?
+      attr_accessor remove_override_link_out_uri: bool?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor upload_id: String?
+    end
+
+    class UpdateContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::ContentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::ContentData?
+    end
+
+    class UpdateKnowledgeBaseTemplateUriInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?template_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor template_uri: String?
+    end
+
+    class UpdateKnowledgeBaseTemplateUriOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base: Types::KnowledgeBaseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base: Types::KnowledgeBaseData?
+    end
+
+    class UpdateMessageTemplateMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?name: String,
+        ?description: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+    end
+
+    class UpdateMessageTemplateMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template: Types::MessageTemplateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template: Types::MessageTemplateData?
+    end
+
+    class UpdateMessageTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?message_template_id: String,
+        ?content: Types::MessageTemplateContentProvider,
+        ?language: String,
+        ?default_attributes: Types::MessageTemplateAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor message_template_id: String?
+      attr_accessor content: Types::MessageTemplateContentProvider?
+      attr_accessor language: String?
+      attr_accessor default_attributes: Types::MessageTemplateAttributes?
+    end
+
+    class UpdateMessageTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_template: Types::MessageTemplateData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_template: Types::MessageTemplateData?
+    end
+
+    class UpdateQuickResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?quick_response_id: String,
+        ?name: String,
+        ?content: Types::QuickResponseDataProvider,
+        ?content_type: String,
+        ?grouping_configuration: Types::GroupingConfiguration,
+        ?remove_grouping_configuration: bool,
+        ?description: String,
+        ?remove_description: bool,
+        ?shortcut_key: String,
+        ?remove_shortcut_key: bool,
+        ?is_active: bool,
+        ?channels: Array[String],
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor quick_response_id: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::QuickResponseDataProvider?
+      attr_accessor content_type: String?
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
+      attr_accessor remove_grouping_configuration: bool?
+      attr_accessor description: String?
+      attr_accessor remove_description: bool?
+      attr_accessor shortcut_key: String?
+      attr_accessor remove_shortcut_key: bool?
+      attr_accessor is_active: bool?
+      attr_accessor channels: Array[String]?
+      attr_accessor language: String?
+    end
+
+    class UpdateQuickResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_response: Types::QuickResponseData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_response: Types::QuickResponseData?
+    end
+
+    class UpdateSessionDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?namespace: String,
+        ?data: Array[Types::RuntimeSessionData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor namespace: String?
+      attr_accessor data: Array[Types::RuntimeSessionData]?
+    end
+
+    class UpdateSessionDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_arn: String,
+        ?session_id: String,
+        ?namespace: String,
+        ?data: Array[Types::RuntimeSessionData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor namespace: String?
+      attr_accessor data: Array[Types::RuntimeSessionData]?
+    end
+
+    class UpdateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assistant_id: String,
+        ?session_id: String,
+        ?description: String,
+        ?tag_filter: Types::TagFilter,
+        ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assistant_id: String?
+      attr_accessor session_id: String?
+      attr_accessor description: String?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+    end
+
+    class UpdateSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::SessionData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::SessionData?
+    end
+
+    class UrlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seed_urls: Array[Types::SeedUrl],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seed_urls: Array[Types::SeedUrl]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VectorIngestionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chunking_configuration: Types::ChunkingConfiguration,
+        ?parsing_configuration: Types::ParsingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chunking_configuration: Types::ChunkingConfiguration?
+      attr_accessor parsing_configuration: Types::ParsingConfiguration?
+    end
+
+    class WebCrawlerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url_configuration: Types::UrlConfiguration,
+        ?crawler_limits: Types::WebCrawlerLimits,
+        ?inclusion_filters: Array[String],
+        ?exclusion_filters: Array[String],
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url_configuration: Types::UrlConfiguration?
+      attr_accessor crawler_limits: Types::WebCrawlerLimits?
+      attr_accessor inclusion_filters: Array[String]?
+      attr_accessor exclusion_filters: Array[String]?
+      attr_accessor scope: String?
+    end
+
+    class WebCrawlerLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rate_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rate_limit: Integer?
+    end
+  end
+end

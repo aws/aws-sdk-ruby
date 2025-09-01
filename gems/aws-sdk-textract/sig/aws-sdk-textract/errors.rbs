@@ -1,0 +1,79 @@
+module Aws::Textract
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class BadDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class DocumentTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class HumanLoopQuotaExceededException < Smithy::Client::ServiceError
+      def resource_type: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InvalidJobIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InvalidKMSKeyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InvalidS3ObjectException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ProvisionedThroughputExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class UnsupportedDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+  end
+end

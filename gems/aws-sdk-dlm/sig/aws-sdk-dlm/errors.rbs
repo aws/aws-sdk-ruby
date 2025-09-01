@@ -1,0 +1,25 @@
+module Aws::DLM
+  module Errors
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+      def required_parameters: () -> Array[String]?
+      def mutually_exclusive_parameters: () -> Array[String]?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+      def resource_type: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+      def resource_type: () -> String?
+      def resource_ids: () -> Array[String]?
+    end
+  end
+end

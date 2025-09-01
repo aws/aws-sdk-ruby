@@ -1,0 +1,865 @@
+module Aws::LicenseManagerUserSubscriptions
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActiveDirectoryIdentityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?active_directory_settings: Types::ActiveDirectorySettings,
+        ?active_directory_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor active_directory_settings: Types::ActiveDirectorySettings?
+      attr_accessor active_directory_type: String?
+    end
+
+    class ActiveDirectorySettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?domain_ipv4_list: Array[String],
+        ?domain_credentials_provider: Types::CredentialsProvider,
+        ?domain_network_settings: Types::DomainNetworkSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor domain_ipv4_list: Array[String]?
+      attr_accessor domain_credentials_provider: Types::CredentialsProvider?
+      attr_accessor domain_network_settings: Types::DomainNetworkSettings?
+    end
+
+    class AssociateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?instance_id: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?domain: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor instance_id: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor domain: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AssociateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_user_summary: Types::InstanceUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_user_summary: Types::InstanceUserSummary?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateLicenseServerEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?license_server_settings: Types::LicenseServerSettings,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor license_server_settings: Types::LicenseServerSettings?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLicenseServerEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?license_server_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor license_server_endpoint_arn: String?
+    end
+
+    class CredentialsProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?secrets_manager_credentials_provider: Types::SecretsManagerCredentialsProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secrets_manager_credentials_provider: Types::SecretsManagerCredentialsProvider?
+
+      class SecretsManagerCredentialsProvider < CredentialsProvider
+      end
+      class Unknown < CredentialsProvider
+      end
+    end
+
+    class DeleteLicenseServerEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_server_endpoint_arn: String,
+        ?server_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_server_endpoint_arn: String?
+      attr_accessor server_type: String?
+    end
+
+    class DeleteLicenseServerEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_server_endpoint: Types::LicenseServerEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_server_endpoint: Types::LicenseServerEndpoint?
+    end
+
+    class DeregisterIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+        ?product: String,
+        ?identity_provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor product: String?
+      attr_accessor identity_provider_arn: String?
+    end
+
+    class DeregisterIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_summary: Types::IdentityProviderSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary?
+    end
+
+    class DisassociateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?instance_id: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?instance_user_arn: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor instance_id: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor instance_user_arn: String?
+      attr_accessor domain: String?
+    end
+
+    class DisassociateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_user_summary: Types::InstanceUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_user_summary: Types::InstanceUserSummary?
+    end
+
+    class DomainNetworkSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?operation: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor operation: String?
+      attr_accessor value: String?
+    end
+
+    class IdentityProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?active_directory_identity_provider: Types::ActiveDirectoryIdentityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_identity_provider: Types::ActiveDirectoryIdentityProvider?
+
+      class ActiveDirectoryIdentityProvider < IdentityProvider
+      end
+      class Unknown < IdentityProvider
+      end
+    end
+
+    class IdentityProviderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+        ?settings: Types::Settings,
+        ?product: String,
+        ?status: String,
+        ?identity_provider_arn: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor settings: Types::Settings?
+      attr_accessor product: String?
+      attr_accessor status: String?
+      attr_accessor identity_provider_arn: String?
+      attr_accessor failure_message: String?
+    end
+
+    class InstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?status: String,
+        ?products: Array[String],
+        ?last_status_check_date: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor status: String?
+      attr_accessor products: Array[String]?
+      attr_accessor last_status_check_date: String?
+      attr_accessor status_message: String?
+    end
+
+    class InstanceUserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?instance_id: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?status: String,
+        ?instance_user_arn: String,
+        ?status_message: String,
+        ?domain: String,
+        ?association_date: String,
+        ?disassociation_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor instance_id: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor status: String?
+      attr_accessor instance_user_arn: String?
+      attr_accessor status_message: String?
+      attr_accessor domain: String?
+      attr_accessor association_date: String?
+      attr_accessor disassociation_date: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LicenseServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioning_status: String,
+        ?health_status: String,
+        ?ipv4_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioning_status: String?
+      attr_accessor health_status: String?
+      attr_accessor ipv4_address: String?
+    end
+
+    class LicenseServerEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?server_type: String,
+        ?server_endpoint: Types::ServerEndpoint,
+        ?status_message: String,
+        ?license_server_endpoint_id: String,
+        ?license_server_endpoint_arn: String,
+        ?license_server_endpoint_provisioning_status: String,
+        ?license_servers: Array[Types::LicenseServer],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor server_type: String?
+      attr_accessor server_endpoint: Types::ServerEndpoint?
+      attr_accessor status_message: String?
+      attr_accessor license_server_endpoint_id: String?
+      attr_accessor license_server_endpoint_arn: String?
+      attr_accessor license_server_endpoint_provisioning_status: String?
+      attr_accessor license_servers: Array[Types::LicenseServer]?
+      attr_accessor creation_time: Time?
+    end
+
+    class LicenseServerSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_type: String,
+        ?server_settings: Types::ServerSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_type: String?
+      attr_accessor server_settings: Types::ServerSettings?
+    end
+
+    class ListIdentityProvidersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityProvidersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_summaries: Array[Types::IdentityProviderSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_summaries: Array[Types::IdentityProviderSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_summaries: Array[Types::InstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_summaries: Array[Types::InstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseServerEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseServerEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_server_endpoints: Array[Types::LicenseServerEndpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_server_endpoints: Array[Types::LicenseServerEndpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProductSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProductSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_user_summaries: Array[Types::ProductUserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_user_summaries: Array[Types::ProductUserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListUserAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_user_summaries: Array[Types::InstanceUserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_user_summaries: Array[Types::InstanceUserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ProductUserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?product: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?status: String,
+        ?product_user_arn: String,
+        ?status_message: String,
+        ?domain: String,
+        ?subscription_start_date: String,
+        ?subscription_end_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor product: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor status: String?
+      attr_accessor product_user_arn: String?
+      attr_accessor status_message: String?
+      attr_accessor domain: String?
+      attr_accessor subscription_start_date: String?
+      attr_accessor subscription_end_date: String?
+    end
+
+    class RdsSalSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rds_sal_credentials_provider: Types::CredentialsProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rds_sal_credentials_provider: Types::CredentialsProvider?
+    end
+
+    class RegisterIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+        ?product: String,
+        ?settings: Types::Settings,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor product: String?
+      attr_accessor settings: Types::Settings?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_summary: Types::IdentityProviderSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SecretsManagerCredentialsProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class ServerEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+    end
+
+    class ServerSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rds_sal_settings: Types::RdsSalSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rds_sal_settings: Types::RdsSalSettings?
+
+      class RdsSalSettings < ServerSettings
+      end
+      class Unknown < ServerSettings
+      end
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Settings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_group_id: String?
+    end
+
+    class StartProductSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?product: String,
+        ?domain: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor product: String?
+      attr_accessor domain: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartProductSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_user_summary: Types::ProductUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_user_summary: Types::ProductUserSummary?
+    end
+
+    class StopProductSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?identity_provider: Types::IdentityProvider,
+        ?product: String,
+        ?product_user_arn: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor product: String?
+      attr_accessor product_user_arn: String?
+      attr_accessor domain: String?
+    end
+
+    class StopProductSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_user_summary: Types::ProductUserSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_user_summary: Types::ProductUserSummary?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIdentityProviderSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+        ?product: String,
+        ?identity_provider_arn: String,
+        ?update_settings: Types::UpdateSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+      attr_accessor product: String?
+      attr_accessor identity_provider_arn: String?
+      attr_accessor update_settings: Types::UpdateSettings?
+    end
+
+    class UpdateIdentityProviderSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_summary: Types::IdentityProviderSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary?
+    end
+
+    class UpdateSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_subnets: Array[String],
+        ?remove_subnets: Array[String],
+        ?security_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_subnets: Array[String]?
+      attr_accessor remove_subnets: Array[String]?
+      attr_accessor security_group_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

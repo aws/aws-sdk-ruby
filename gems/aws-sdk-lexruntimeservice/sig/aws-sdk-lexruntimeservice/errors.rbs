@@ -1,0 +1,38 @@
+module Aws::LexRuntimeService
+  module Errors
+    class BadGatewayException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DependencyFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def retry_after_seconds: () -> String?
+      def message: () -> String?
+    end
+    class LoopDetectedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAcceptableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedMediaTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,148 @@
+module Aws::KMS
+  module Errors
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmClusterInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmClusterInvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmClusterNotActiveException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmClusterNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmClusterNotRelatedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomKeyStoreHasCMKsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomKeyStoreInvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomKeyStoreNameInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomKeyStoreNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DependencyTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DryRunOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredImportTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncorrectKeyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncorrectKeyMaterialException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncorrectTrustAnchorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAliasNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCiphertextException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGrantIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGrantTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidImportTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKeyUsageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMarkerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidMacException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidSignatureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeyUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksKeyAlreadyInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksKeyInvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksKeyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyIncorrectAuthenticationCredentialException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyInvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyInvalidResponseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyUriEndpointInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyUriInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyUriUnreachableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyVpcEndpointServiceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyVpcEndpointServiceInvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class XksProxyVpcEndpointServiceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module Aws::SageMakerFeatureStoreRuntime
+  module Errors
+    class AccessForbidden < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

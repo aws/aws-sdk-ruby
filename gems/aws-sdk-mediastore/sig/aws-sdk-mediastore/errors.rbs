@@ -1,0 +1,22 @@
+module Aws::MediaStore
+  module Errors
+    class ContainerInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContainerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CorsPolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

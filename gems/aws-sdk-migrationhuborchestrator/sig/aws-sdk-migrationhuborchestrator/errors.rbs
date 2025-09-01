@@ -1,0 +1,25 @@
+module Aws::MigrationHubOrchestrator
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+  end
+end

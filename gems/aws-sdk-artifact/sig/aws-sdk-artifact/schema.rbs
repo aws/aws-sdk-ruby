@@ -1,0 +1,55 @@
+module Aws::Artifact
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AcceptanceType: EnumShape
+    AccessDeniedException: StructureShape
+    AccountSettings: StructureShape
+    AgreementTerms: ListShape
+    AgreementType: EnumShape
+    ConflictException: StructureShape
+    CustomerAgreementIdAttribute: StringShape
+    CustomerAgreementList: ListShape
+    CustomerAgreementState: EnumShape
+    CustomerAgreementSummary: StructureShape
+    GetAccountSettingsRequest: StructureShape
+    GetAccountSettingsResponse: StructureShape
+    GetReportMetadataRequest: StructureShape
+    GetReportMetadataResponse: StructureShape
+    GetReportRequest: StructureShape
+    GetReportResponse: StructureShape
+    GetTermForReportRequest: StructureShape
+    GetTermForReportResponse: StructureShape
+    InternalServerException: StructureShape
+    ListCustomerAgreementsRequest: StructureShape
+    ListCustomerAgreementsResponse: StructureShape
+    ListReportsRequest: StructureShape
+    ListReportsResponse: StructureShape
+    LongStringAttribute: StringShape
+    MaxResultsAttribute: IntegerShape
+    NextTokenAttribute: StringShape
+    NotificationSubscriptionStatus: EnumShape
+    PublishedState: EnumShape
+    PutAccountSettingsRequest: StructureShape
+    PutAccountSettingsResponse: StructureShape
+    ReportDetail: StructureShape
+    ReportId: StringShape
+    ReportSummary: StructureShape
+    ReportsList: ListShape
+    ResourceNotFoundException: StructureShape
+    SequenceNumberAttribute: IntegerShape
+    ServiceQuotaExceededException: StructureShape
+    ShortStringAttribute: StringShape
+    StatusMessage: StringShape
+    ThrottlingException: StructureShape
+    TimestampAttribute: TimestampShape
+    UploadState: EnumShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: StringShape
+    VersionAttribute: IntegerShape
+
+    Artifact: ServiceShape
+  end
+end

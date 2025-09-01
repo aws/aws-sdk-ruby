@@ -1,0 +1,5 @@
+  module Aws
+    module SSOAdmin
+      VERSION: String
+    end
+  end

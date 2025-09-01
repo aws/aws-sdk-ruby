@@ -1,0 +1,1465 @@
+module Aws::ApplicationDiscoveryService
+  module Types
+
+    class AgentConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?operation_succeeded: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor operation_succeeded: bool?
+      attr_accessor description: String?
+    end
+
+    class AgentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?host_name: String,
+        ?agent_network_info_list: Array[Types::AgentNetworkInfo],
+        ?connector_id: String,
+        ?version: String,
+        ?health: String,
+        ?last_health_ping_time: String,
+        ?collection_status: String,
+        ?agent_type: String,
+        ?registered_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor host_name: String?
+      attr_accessor agent_network_info_list: Array[Types::AgentNetworkInfo]?
+      attr_accessor connector_id: String?
+      attr_accessor version: String?
+      attr_accessor health: String?
+      attr_accessor last_health_ping_time: String?
+      attr_accessor collection_status: String?
+      attr_accessor agent_type: String?
+      attr_accessor registered_time: String?
+    end
+
+    class AgentNetworkInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?mac_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor mac_address: String?
+    end
+
+    module AgentStatus
+      HEALTHY: String
+      UNHEALTHY: String
+      RUNNING: String
+      UNKNOWN: String
+      BLACKLISTED: String
+      SHUTDOWN: String
+    end
+
+    class AssociateConfigurationItemsToApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_configuration_id: String,
+        ?configuration_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_configuration_id: String?
+      attr_accessor configuration_ids: Array[String]?
+    end
+
+    class AssociateConfigurationItemsToApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AuthorizationErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchDeleteAgentError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    class BatchDeleteAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_agents: Array[Types::DeleteAgent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_agents: Array[Types::DeleteAgent]?
+    end
+
+    class BatchDeleteAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteAgentError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteAgentError]?
+    end
+
+    class BatchDeleteConfigurationTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?configuration_type: String,
+        ?requested_configurations: Array[String],
+        ?deleted_configurations: Array[String],
+        ?failed_configurations: Array[Types::FailedConfiguration],
+        ?deletion_warnings: Array[Types::DeletionWarning],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor configuration_type: String?
+      attr_accessor requested_configurations: Array[String]?
+      attr_accessor deleted_configurations: Array[String]?
+      attr_accessor failed_configurations: Array[Types::FailedConfiguration]?
+      attr_accessor deletion_warnings: Array[Types::DeletionWarning]?
+    end
+
+    module BatchDeleteConfigurationTaskStatus
+      INITIALIZING: String
+      VALIDATING: String
+      DELETING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class BatchDeleteImportDataError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_task_id: String,
+        ?error_code: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_task_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_description: String?
+    end
+
+    module BatchDeleteImportDataErrorCode
+      NOT_FOUND: String
+      INTERNAL_SERVER_ERROR: String
+      OVER_LIMIT: String
+    end
+
+    class BatchDeleteImportDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_task_ids: Array[String],
+        ?delete_history: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_task_ids: Array[String]?
+      attr_accessor delete_history: bool?
+    end
+
+    class BatchDeleteImportDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteImportDataError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteImportDataError]?
+    end
+
+    module ConfigurationItemType
+      SERVER: String
+      PROCESS: String
+      CONNECTIONS: String
+      APPLICATION: String
+    end
+
+    class ConfigurationTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_type: String,
+        ?configuration_id: String,
+        ?key: String,
+        ?value: String,
+        ?time_of_creation: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_type: String?
+      attr_accessor configuration_id: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor time_of_creation: Time?
+    end
+
+    class ConflictErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContinuousExportDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?status: String,
+        ?status_detail: String,
+        ?s3_bucket: String,
+        ?start_time: Time,
+        ?stop_time: Time,
+        ?data_source: String,
+        ?schema_storage_config: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor status: String?
+      attr_accessor status_detail: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+      attr_accessor data_source: String?
+      attr_accessor schema_storage_config: Hash[String, String]?
+    end
+
+    module ContinuousExportStatus
+      START_IN_PROGRESS: String
+      START_FAILED: String
+      ACTIVE: String
+      ERROR: String
+      STOP_IN_PROGRESS: String
+      STOP_FAILED: String
+      INACTIVE: String
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?wave: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor wave: String?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+    end
+
+    class CreateTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CustomerAgentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_agents: Integer,
+        ?healthy_agents: Integer,
+        ?black_listed_agents: Integer,
+        ?shutdown_agents: Integer,
+        ?unhealthy_agents: Integer,
+        ?total_agents: Integer,
+        ?unknown_agents: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_agents: Integer?
+      attr_accessor healthy_agents: Integer?
+      attr_accessor black_listed_agents: Integer?
+      attr_accessor shutdown_agents: Integer?
+      attr_accessor unhealthy_agents: Integer?
+      attr_accessor total_agents: Integer?
+      attr_accessor unknown_agents: Integer?
+    end
+
+    class CustomerAgentlessCollectorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_agentless_collectors: Integer,
+        ?healthy_agentless_collectors: Integer,
+        ?deny_listed_agentless_collectors: Integer,
+        ?shutdown_agentless_collectors: Integer,
+        ?unhealthy_agentless_collectors: Integer,
+        ?total_agentless_collectors: Integer,
+        ?unknown_agentless_collectors: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_agentless_collectors: Integer?
+      attr_accessor healthy_agentless_collectors: Integer?
+      attr_accessor deny_listed_agentless_collectors: Integer?
+      attr_accessor shutdown_agentless_collectors: Integer?
+      attr_accessor unhealthy_agentless_collectors: Integer?
+      attr_accessor total_agentless_collectors: Integer?
+      attr_accessor unknown_agentless_collectors: Integer?
+    end
+
+    class CustomerConnectorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_connectors: Integer,
+        ?healthy_connectors: Integer,
+        ?black_listed_connectors: Integer,
+        ?shutdown_connectors: Integer,
+        ?unhealthy_connectors: Integer,
+        ?total_connectors: Integer,
+        ?unknown_connectors: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_connectors: Integer?
+      attr_accessor healthy_connectors: Integer?
+      attr_accessor black_listed_connectors: Integer?
+      attr_accessor shutdown_connectors: Integer?
+      attr_accessor unhealthy_connectors: Integer?
+      attr_accessor total_connectors: Integer?
+      attr_accessor unknown_connectors: Integer?
+    end
+
+    class CustomerMeCollectorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_me_collectors: Integer,
+        ?healthy_me_collectors: Integer,
+        ?deny_listed_me_collectors: Integer,
+        ?shutdown_me_collectors: Integer,
+        ?unhealthy_me_collectors: Integer,
+        ?total_me_collectors: Integer,
+        ?unknown_me_collectors: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_me_collectors: Integer?
+      attr_accessor healthy_me_collectors: Integer?
+      attr_accessor deny_listed_me_collectors: Integer?
+      attr_accessor shutdown_me_collectors: Integer?
+      attr_accessor unhealthy_me_collectors: Integer?
+      attr_accessor total_me_collectors: Integer?
+      attr_accessor unknown_me_collectors: Integer?
+    end
+
+    module DataSource
+      AGENT: String
+    end
+
+    class DeleteAgent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor force: bool?
+    end
+
+    module DeleteAgentErrorCode
+      NOT_FOUND: String
+      INTERNAL_SERVER_ERROR: String
+      AGENT_IN_USE: String
+    end
+
+    class DeleteApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_ids: Array[String]?
+    end
+
+    class DeleteApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DeleteTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DeletionConfigurationItemType
+      SERVER: String
+    end
+
+    class DeletionWarning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?warning_code: Integer,
+        ?warning_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor warning_code: Integer?
+      attr_accessor warning_text: String?
+    end
+
+    class DescribeAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agents_info: Array[Types::AgentInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agents_info: Array[Types::AgentInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBatchDeleteConfigurationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class DescribeBatchDeleteConfigurationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task: Types::BatchDeleteConfigurationTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task: Types::BatchDeleteConfigurationTask?
+    end
+
+    class DescribeConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_ids: Array[String]?
+    end
+
+    class DescribeConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Hash[String, String]]?
+    end
+
+    class DescribeContinuousExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeContinuousExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?descriptions: Array[Types::ContinuousExportDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor descriptions: Array[Types::ContinuousExportDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeExportConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeExportConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exports_info: Array[Types::ExportInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exports_info: Array[Types::ExportInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeExportTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_ids: Array[String],
+        ?filters: Array[Types::ExportFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_ids: Array[String]?
+      attr_accessor filters: Array[Types::ExportFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeExportTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exports_info: Array[Types::ExportInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exports_info: Array[Types::ExportInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::ImportTaskFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::ImportTaskFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tasks: Array[Types::ImportTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tasks: Array[Types::ImportTask]?
+    end
+
+    class DescribeTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::TagFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::TagFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::ConfigurationTag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::ConfigurationTag]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateConfigurationItemsFromApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_configuration_id: String,
+        ?configuration_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_configuration_id: String?
+      attr_accessor configuration_ids: Array[String]?
+    end
+
+    class DisassociateConfigurationItemsFromApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Ec2RecommendationsExportPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?cpu_performance_metric_basis: Types::UsageMetricBasis,
+        ?ram_performance_metric_basis: Types::UsageMetricBasis,
+        ?tenancy: String,
+        ?excluded_instance_types: Array[String],
+        ?preferred_region: String,
+        ?reserved_instance_options: Types::ReservedInstanceOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor cpu_performance_metric_basis: Types::UsageMetricBasis?
+      attr_accessor ram_performance_metric_basis: Types::UsageMetricBasis?
+      attr_accessor tenancy: String?
+      attr_accessor excluded_instance_types: Array[String]?
+      attr_accessor preferred_region: String?
+      attr_accessor reserved_instance_options: Types::ReservedInstanceOptions?
+    end
+
+    class ExportConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    module ExportDataFormat
+      CSV: String
+    end
+
+    class ExportFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    class ExportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?export_status: String,
+        ?status_message: String,
+        ?configurations_download_url: String,
+        ?export_request_time: Time,
+        ?is_truncated: bool,
+        ?requested_start_time: Time,
+        ?requested_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor export_status: String?
+      attr_accessor status_message: String?
+      attr_accessor configurations_download_url: String?
+      attr_accessor export_request_time: Time?
+      attr_accessor is_truncated: bool?
+      attr_accessor requested_start_time: Time?
+      attr_accessor requested_end_time: Time?
+    end
+
+    class ExportPreferences
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ec2_recommendations_preferences: Types::Ec2RecommendationsExportPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_recommendations_preferences: Types::Ec2RecommendationsExportPreferences?
+
+      class Ec2RecommendationsPreferences < ExportPreferences
+      end
+      class Unknown < ExportPreferences
+      end
+    end
+
+    module ExportStatus
+      FAILED: String
+      SUCCEEDED: String
+      IN_PROGRESS: String
+    end
+
+    class FailedConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?error_status_code: Integer,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor error_status_code: Integer?
+      attr_accessor error_message: String?
+    end
+
+    module FileClassification
+      MODELIZEIT_EXPORT: String
+      RVTOOLS_EXPORT: String
+      VMWARE_NSX_EXPORT: String
+      IMPORT_TEMPLATE: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    class GetDiscoverySummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDiscoverySummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?servers: Integer,
+        ?applications: Integer,
+        ?servers_mapped_to_applications: Integer,
+        ?servers_mappedto_tags: Integer,
+        ?agent_summary: Types::CustomerAgentInfo,
+        ?connector_summary: Types::CustomerConnectorInfo,
+        ?me_collector_summary: Types::CustomerMeCollectorInfo,
+        ?agentless_collector_summary: Types::CustomerAgentlessCollectorInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor servers: Integer?
+      attr_accessor applications: Integer?
+      attr_accessor servers_mapped_to_applications: Integer?
+      attr_accessor servers_mappedto_tags: Integer?
+      attr_accessor agent_summary: Types::CustomerAgentInfo?
+      attr_accessor connector_summary: Types::CustomerConnectorInfo?
+      attr_accessor me_collector_summary: Types::CustomerMeCollectorInfo?
+      attr_accessor agentless_collector_summary: Types::CustomerAgentlessCollectorInfo?
+    end
+
+    class HomeRegionNotSetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ImportStatus
+      IMPORT_IN_PROGRESS: String
+      IMPORT_COMPLETE: String
+      IMPORT_COMPLETE_WITH_ERRORS: String
+      IMPORT_FAILED: String
+      IMPORT_FAILED_SERVER_LIMIT_EXCEEDED: String
+      IMPORT_FAILED_RECORD_LIMIT_EXCEEDED: String
+      IMPORT_FAILED_UNSUPPORTED_FILE_TYPE: String
+      DELETE_IN_PROGRESS: String
+      DELETE_COMPLETE: String
+      DELETE_FAILED: String
+      DELETE_FAILED_LIMIT_EXCEEDED: String
+      INTERNAL_ERROR: String
+    end
+
+    class ImportTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_task_id: String,
+        ?client_request_token: String,
+        ?name: String,
+        ?import_url: String,
+        ?status: String,
+        ?import_request_time: Time,
+        ?import_completion_time: Time,
+        ?import_deleted_time: Time,
+        ?file_classification: String,
+        ?server_import_success: Integer,
+        ?server_import_failure: Integer,
+        ?application_import_success: Integer,
+        ?application_import_failure: Integer,
+        ?errors_and_failed_entries_zip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_task_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor import_url: String?
+      attr_accessor status: String?
+      attr_accessor import_request_time: Time?
+      attr_accessor import_completion_time: Time?
+      attr_accessor import_deleted_time: Time?
+      attr_accessor file_classification: String?
+      attr_accessor server_import_success: Integer?
+      attr_accessor server_import_failure: Integer?
+      attr_accessor application_import_success: Integer?
+      attr_accessor application_import_failure: Integer?
+      attr_accessor errors_and_failed_entries_zip: String?
+    end
+
+    class ImportTaskFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ImportTaskFilterName
+      IMPORT_TASK_ID: String
+      STATUS: String
+      NAME: String
+      FILE_CLASSIFICATION: String
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_type: String,
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?order_by: Array[Types::OrderByElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_type: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor order_by: Array[Types::OrderByElement]?
+    end
+
+    class ListConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Hash[String, String]],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Hash[String, String]]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServerNeighborsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?port_information_needed: bool,
+        ?neighbor_configuration_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor port_information_needed: bool?
+      attr_accessor neighbor_configuration_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServerNeighborsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?neighbors: Array[Types::NeighborConnectionDetail],
+        ?next_token: String,
+        ?known_dependency_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor neighbors: Array[Types::NeighborConnectionDetail]?
+      attr_accessor next_token: String?
+      attr_accessor known_dependency_count: Integer?
+    end
+
+    class NeighborConnectionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?destination_server_id: String,
+        ?destination_port: Integer,
+        ?transport_protocol: String,
+        ?connections_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor destination_server_id: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor transport_protocol: String?
+      attr_accessor connections_count: Integer?
+    end
+
+    module OfferingClass
+      STANDARD: String
+      CONVERTIBLE: String
+    end
+
+    class OperationNotPermittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrderByElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor sort_order: String?
+    end
+
+    module PurchasingOption
+      ALL_UPFRONT: String
+      PARTIAL_UPFRONT: String
+      NO_UPFRONT: String
+    end
+
+    class ReservedInstanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?purchasing_option: String,
+        ?offering_class: String,
+        ?term_length: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor purchasing_option: String?
+      attr_accessor offering_class: String?
+      attr_accessor term_length: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerInternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartBatchDeleteConfigurationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_type: String,
+        ?configuration_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_type: String?
+      attr_accessor configuration_ids: Array[String]?
+    end
+
+    class StartBatchDeleteConfigurationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class StartContinuousExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartContinuousExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?s3_bucket: String,
+        ?start_time: Time,
+        ?data_source: String,
+        ?schema_storage_config: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor start_time: Time?
+      attr_accessor data_source: String?
+      attr_accessor schema_storage_config: Hash[String, String]?
+    end
+
+    class StartDataCollectionByAgentIdsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_ids: Array[String]?
+    end
+
+    class StartDataCollectionByAgentIdsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agents_configuration_status: Array[Types::AgentConfigurationStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agents_configuration_status: Array[Types::AgentConfigurationStatus]?
+    end
+
+    class StartExportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_data_format: Array[String],
+        ?filters: Array[Types::ExportFilter],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?preferences: Types::ExportPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_data_format: Array[String]?
+      attr_accessor filters: Array[Types::ExportFilter]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor preferences: Types::ExportPreferences?
+    end
+
+    class StartExportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    class StartImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+        ?import_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor import_url: String?
+    end
+
+    class StartImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task: Types::ImportTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task: Types::ImportTask?
+    end
+
+    class StopContinuousExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    class StopContinuousExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?stop_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+    end
+
+    class StopDataCollectionByAgentIdsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_ids: Array[String]?
+    end
+
+    class StopDataCollectionByAgentIdsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agents_configuration_status: Array[Types::AgentConfigurationStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agents_configuration_status: Array[Types::AgentConfigurationStatus]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module Tenancy
+      DEDICATED: String
+      SHARED: String
+    end
+
+    module TermLength
+      ONE_YEAR: String
+      THREE_YEAR: String
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?name: String,
+        ?description: String,
+        ?wave: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor wave: String?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UsageMetricBasis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?percentage_adjust: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor percentage_adjust: Float?
+    end
+
+    module OrderString
+      ASC: String
+      DESC: String
+    end
+  end
+end

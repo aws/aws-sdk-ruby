@@ -1,0 +1,25 @@
+module Aws::AmplifyUIBuilder
+  module Errors
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

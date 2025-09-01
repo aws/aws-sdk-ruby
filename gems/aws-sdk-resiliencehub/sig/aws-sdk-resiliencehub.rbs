@@ -1,0 +1,5 @@
+  module Aws
+    module Resiliencehub
+      VERSION: String
+    end
+  end

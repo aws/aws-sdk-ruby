@@ -1,0 +1,995 @@
+module Aws::CodeGuruProfiler
+  module Types
+
+    class AddNotificationChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?channels: Array[Types::Channel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor channels: Array[Types::Channel]?
+    end
+
+    class AddNotificationChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+    end
+
+    class AgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?should_profile: bool,
+        ?period_in_seconds: Integer,
+        ?agent_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor should_profile: bool?
+      attr_accessor period_in_seconds: Integer?
+      attr_accessor agent_parameters: Hash[String, String]?
+    end
+
+    class AgentOrchestrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_enabled: bool?
+    end
+
+    class AggregatedProfileTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor period: String?
+    end
+
+    class Anomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::Metric,
+        ?reason: String,
+        ?instances: Array[Types::AnomalyInstance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::Metric?
+      attr_accessor reason: String?
+      attr_accessor instances: Array[Types::AnomalyInstance]?
+    end
+
+    class AnomalyInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?user_feedback: Types::UserFeedback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor user_feedback: Types::UserFeedback?
+    end
+
+    class BatchGetFrameMetricDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?period: String,
+        ?target_resolution: String,
+        ?frame_metrics: Array[Types::FrameMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor period: String?
+      attr_accessor target_resolution: String?
+      attr_accessor frame_metrics: Array[Types::FrameMetric]?
+    end
+
+    class BatchGetFrameMetricDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?resolution: String,
+        ?end_times: Array[Types::TimestampStructure],
+        ?unprocessed_end_times: Hash[String, Array[Types::TimestampStructure]],
+        ?frame_metric_data: Array[Types::FrameMetricDatum],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor resolution: String?
+      attr_accessor end_times: Array[Types::TimestampStructure]?
+      attr_accessor unprocessed_end_times: Hash[String, Array[Types::TimestampStructure]]?
+      attr_accessor frame_metric_data: Array[Types::FrameMetricDatum]?
+    end
+
+    class Channel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?uri: String,
+        ?event_publishers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor uri: String?
+      attr_accessor event_publishers: Array[String]?
+    end
+
+    class ConfigureAgentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?fleet_instance_id: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor fleet_instance_id: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class ConfigureAgentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AgentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AgentConfiguration?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateProfilingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?compute_platform: String,
+        ?client_token: String,
+        ?agent_orchestration_config: Types::AgentOrchestrationConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor compute_platform: String?
+      attr_accessor client_token: String?
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProfilingGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group: Types::ProfilingGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group: Types::ProfilingGroupDescription?
+    end
+
+    class DeleteProfilingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+    end
+
+    class DeleteProfilingGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeProfilingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+    end
+
+    class DescribeProfilingGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group: Types::ProfilingGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group: Types::ProfilingGroupDescription?
+    end
+
+    class FindingsReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profiling_group_name: String,
+        ?profile_start_time: Time,
+        ?profile_end_time: Time,
+        ?total_number_of_findings: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profiling_group_name: String?
+      attr_accessor profile_start_time: Time?
+      attr_accessor profile_end_time: Time?
+      attr_accessor total_number_of_findings: Integer?
+    end
+
+    class FrameMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frame_name: String,
+        ?type: String,
+        ?thread_states: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frame_name: String?
+      attr_accessor type: String?
+      attr_accessor thread_states: Array[String]?
+    end
+
+    class FrameMetricDatum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frame_metric: Types::FrameMetric,
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frame_metric: Types::FrameMetric?
+      attr_accessor values: Array[Float]?
+    end
+
+    class GetFindingsReportAccountSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?daily_reports_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor daily_reports_only: bool?
+    end
+
+    class GetFindingsReportAccountSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_summaries: Array[Types::FindingsReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_summaries: Array[Types::FindingsReportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNotificationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+    end
+
+    class GetNotificationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+    end
+
+    class GetPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+    end
+
+    class GetPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?start_time: Time,
+        ?period: String,
+        ?end_time: Time,
+        ?max_depth: Integer,
+        ?accept: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor period: String?
+      attr_accessor end_time: Time?
+      attr_accessor max_depth: Integer?
+      attr_accessor accept: String?
+    end
+
+    class GetProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: String,
+        ?content_type: String,
+        ?content_encoding: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: String?
+      attr_accessor content_type: String?
+      attr_accessor content_encoding: String?
+    end
+
+    class GetRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor locale: String?
+    end
+
+    class GetRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?profile_start_time: Time,
+        ?profile_end_time: Time,
+        ?recommendations: Array[Types::Recommendation],
+        ?anomalies: Array[Types::Anomaly],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor profile_start_time: Time?
+      attr_accessor profile_end_time: Time?
+      attr_accessor recommendations: Array[Types::Recommendation]?
+      attr_accessor anomalies: Array[Types::Anomaly]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListFindingsReportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?daily_reports_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor daily_reports_only: bool?
+    end
+
+    class ListFindingsReportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?findings_report_summaries: Array[Types::FindingsReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings_report_summaries: Array[Types::FindingsReportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileTimesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?period: String,
+        ?order_by: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor period: String?
+      attr_accessor order_by: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileTimesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_times: Array[Types::ProfileTime],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_times: Array[Types::ProfileTime]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilingGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?include_description: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor include_description: bool?
+    end
+
+    class ListProfilingGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_names: Array[String],
+        ?profiling_groups: Array[Types::ProfilingGroupDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_names: Array[String]?
+      attr_accessor profiling_groups: Array[Types::ProfilingGroupDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Match
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_frames_index: Integer,
+        ?frame_address: String,
+        ?threshold_breach_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_frames_index: Integer?
+      attr_accessor frame_address: String?
+      attr_accessor threshold_breach_value: Float?
+    end
+
+    class Metric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frame_name: String,
+        ?type: String,
+        ?thread_states: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frame_name: String?
+      attr_accessor type: String?
+      attr_accessor thread_states: Array[String]?
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::Channel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::Channel]?
+    end
+
+    class Pattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?resolution_steps: String,
+        ?target_frames: Array[Array[String]],
+        ?threshold_percent: Float,
+        ?counters_to_aggregate: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor resolution_steps: String?
+      attr_accessor target_frames: Array[Array[String]]?
+      attr_accessor threshold_percent: Float?
+      attr_accessor counters_to_aggregate: Array[String]?
+    end
+
+    class PostAgentProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?agent_profile: String,
+        ?profile_token: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor agent_profile: String?
+      attr_accessor profile_token: String?
+      attr_accessor content_type: String?
+    end
+
+    class PostAgentProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ProfileTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+    end
+
+    class ProfilingGroupDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?agent_orchestration_config: Types::AgentOrchestrationConfig,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?profiling_status: Types::ProfilingStatus,
+        ?compute_platform: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor profiling_status: Types::ProfilingStatus?
+      attr_accessor compute_platform: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ProfilingStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_agent_profile_reported_at: Time,
+        ?latest_aggregated_profile: Types::AggregatedProfileTime,
+        ?latest_agent_orchestrated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_agent_profile_reported_at: Time?
+      attr_accessor latest_aggregated_profile: Types::AggregatedProfileTime?
+      attr_accessor latest_agent_orchestrated_at: Time?
+    end
+
+    class PutPermissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?action_group: String,
+        ?principals: Array[String],
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor action_group: String?
+      attr_accessor principals: Array[String]?
+      attr_accessor revision_id: String?
+    end
+
+    class PutPermissionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_matches_count: Integer,
+        ?all_matches_sum: Float,
+        ?pattern: Types::Pattern,
+        ?top_matches: Array[Types::Match],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_matches_count: Integer?
+      attr_accessor all_matches_sum: Float?
+      attr_accessor pattern: Types::Pattern?
+      attr_accessor top_matches: Array[Types::Match]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class RemoveNotificationChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor channel_id: String?
+    end
+
+    class RemoveNotificationChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+    end
+
+    class RemovePermissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?action_group: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor action_group: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RemovePermissionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubmitFeedbackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?anomaly_instance_id: String,
+        ?type: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor anomaly_instance_id: String?
+      attr_accessor type: String?
+      attr_accessor comment: String?
+    end
+
+    class SubmitFeedbackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimestampStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Time?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateProfilingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group_name: String,
+        ?agent_orchestration_config: Types::AgentOrchestrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group_name: String?
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig?
+    end
+
+    class UpdateProfilingGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiling_group: Types::ProfilingGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiling_group: Types::ProfilingGroupDescription?
+    end
+
+    class UserFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

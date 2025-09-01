@@ -1,0 +1,281 @@
+module Aws::TranscribeStreaming
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::TranscribeStreaming::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetMedicalScribeStreamResponse
+      include Smithy::Client::_Response[Types::GetMedicalScribeStreamResponse]
+      def medical_scribe_stream_details: () -> Types::MedicalScribeStreamDetails?
+    end
+    def get_medical_scribe_stream: (
+      ?session_id: String
+    ) -> _GetMedicalScribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMedicalScribeStreamResponse
+
+    interface _StartCallAnalyticsStreamTranscriptionResponse
+      include Smithy::Client::_Response[Types::StartCallAnalyticsStreamTranscriptionResponse]
+      def request_id: () -> String?
+      def language_code: () -> String?
+      def media_sample_rate_hertz: () -> Integer?
+      def media_encoding: () -> String?
+      def vocabulary_name: () -> String?
+      def session_id: () -> String?
+      def call_analytics_transcript_result_stream: () -> Types::CallAnalyticsTranscriptResultStream?
+      def vocabulary_filter_name: () -> String?
+      def vocabulary_filter_method: () -> String?
+      def language_model_name: () -> String?
+      def enable_partial_results_stabilization: () -> bool?
+      def partial_results_stability: () -> String?
+      def content_identification_type: () -> String?
+      def content_redaction_type: () -> String?
+      def pii_entity_types: () -> String?
+    end
+    def start_call_analytics_stream_transcription: (
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_encoding: String,
+      ?vocabulary_name: String,
+      ?session_id: String,
+      ?audio_stream: {
+        audio_event: {
+          audio_chunk: String
+        },
+        configuration_event: {
+          channel_definitions: Array[
+            {
+              channel_id: Integer,
+              participant_role: String
+            }
+          ],
+          post_call_analytics_settings: {
+            output_location: String,
+            data_access_role_arn: untyped,
+            content_redaction_output: String,
+            output_encryption_kms_key_id: untyped
+          }
+        }
+      },
+      ?vocabulary_filter_name: String,
+      ?vocabulary_filter_method: String,
+      ?language_model_name: String,
+      ?enable_partial_results_stabilization: bool,
+      ?partial_results_stability: String,
+      ?content_identification_type: String,
+      ?content_redaction_type: String,
+      ?pii_entity_types: String
+    ) -> _StartCallAnalyticsStreamTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCallAnalyticsStreamTranscriptionResponse
+
+    interface _StartMedicalScribeStreamResponse
+      include Smithy::Client::_Response[Types::StartMedicalScribeStreamResponse]
+      def session_id: () -> String?
+      def request_id: () -> String?
+      def language_code: () -> String?
+      def media_sample_rate_hertz: () -> Integer?
+      def media_encoding: () -> String?
+      def result_stream: () -> Types::MedicalScribeResultStream?
+    end
+    def start_medical_scribe_stream: (
+      ?session_id: String,
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_encoding: String,
+      ?input_stream: {
+        audio_event: {
+          audio_chunk: String
+        },
+        session_control_event: {
+          type: String
+        },
+        configuration_event: {
+          vocabulary_name: String,
+          vocabulary_filter_name: String,
+          vocabulary_filter_method: String,
+          resource_access_role_arn: String,
+          channel_definitions: Array[
+            {
+              channel_id: Integer,
+              participant_role: String
+            }
+          ],
+          encryption_settings: {
+            kms_encryption_context: Hash[String, String],
+            kms_key_id: String
+          },
+          post_stream_analytics_settings: {
+            clinical_note_generation_settings: {
+              output_bucket_name: String,
+              note_template: String
+            }
+          },
+          medical_scribe_context: {
+            patient_context: {
+              pronouns: String
+            }
+          }
+        }
+      }
+    ) -> _StartMedicalScribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMedicalScribeStreamResponse
+
+    interface _StartMedicalStreamTranscriptionResponse
+      include Smithy::Client::_Response[Types::StartMedicalStreamTranscriptionResponse]
+      def request_id: () -> String?
+      def language_code: () -> String?
+      def media_sample_rate_hertz: () -> Integer?
+      def media_encoding: () -> String?
+      def vocabulary_name: () -> String?
+      def specialty: () -> String?
+      def type: () -> String?
+      def show_speaker_label: () -> bool?
+      def session_id: () -> String?
+      def transcript_result_stream: () -> Types::MedicalTranscriptResultStream?
+      def enable_channel_identification: () -> bool?
+      def number_of_channels: () -> Integer?
+      def content_identification_type: () -> String?
+    end
+    def start_medical_stream_transcription: (
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_encoding: String,
+      ?vocabulary_name: String,
+      ?specialty: String,
+      ?type: String,
+      ?show_speaker_label: bool,
+      ?session_id: String,
+      ?audio_stream: {
+        audio_event: {
+          audio_chunk: String
+        },
+        configuration_event: {
+          channel_definitions: Array[
+            {
+              channel_id: Integer,
+              participant_role: String
+            }
+          ],
+          post_call_analytics_settings: {
+            output_location: String,
+            data_access_role_arn: untyped,
+            content_redaction_output: String,
+            output_encryption_kms_key_id: untyped
+          }
+        }
+      },
+      ?enable_channel_identification: bool,
+      ?number_of_channels: Integer,
+      ?content_identification_type: String
+    ) -> _StartMedicalStreamTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMedicalStreamTranscriptionResponse
+
+    interface _StartStreamTranscriptionResponse
+      include Smithy::Client::_Response[Types::StartStreamTranscriptionResponse]
+      def request_id: () -> String?
+      def language_code: () -> String?
+      def media_sample_rate_hertz: () -> Integer?
+      def media_encoding: () -> String?
+      def vocabulary_name: () -> String?
+      def session_id: () -> String?
+      def transcript_result_stream: () -> Types::TranscriptResultStream?
+      def vocabulary_filter_name: () -> String?
+      def vocabulary_filter_method: () -> String?
+      def show_speaker_label: () -> bool?
+      def enable_channel_identification: () -> bool?
+      def number_of_channels: () -> Integer?
+      def enable_partial_results_stabilization: () -> bool?
+      def partial_results_stability: () -> String?
+      def content_identification_type: () -> String?
+      def content_redaction_type: () -> String?
+      def pii_entity_types: () -> String?
+      def language_model_name: () -> String?
+      def identify_language: () -> bool?
+      def language_options: () -> String?
+      def preferred_language: () -> String?
+      def identify_multiple_languages: () -> bool?
+      def vocabulary_names: () -> String?
+      def vocabulary_filter_names: () -> String?
+    end
+    def start_stream_transcription: (
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_encoding: String,
+      ?vocabulary_name: String,
+      ?session_id: String,
+      ?audio_stream: {
+        audio_event: {
+          audio_chunk: String
+        },
+        configuration_event: {
+          channel_definitions: Array[
+            {
+              channel_id: Integer,
+              participant_role: String
+            }
+          ],
+          post_call_analytics_settings: {
+            output_location: String,
+            data_access_role_arn: untyped,
+            content_redaction_output: String,
+            output_encryption_kms_key_id: untyped
+          }
+        }
+      },
+      ?vocabulary_filter_name: String,
+      ?vocabulary_filter_method: String,
+      ?show_speaker_label: bool,
+      ?enable_channel_identification: bool,
+      ?number_of_channels: Integer,
+      ?enable_partial_results_stabilization: bool,
+      ?partial_results_stability: String,
+      ?content_identification_type: String,
+      ?content_redaction_type: String,
+      ?pii_entity_types: String,
+      ?language_model_name: String,
+      ?identify_language: bool,
+      ?language_options: String,
+      ?preferred_language: String,
+      ?identify_multiple_languages: bool,
+      ?vocabulary_names: String,
+      ?vocabulary_filter_names: String
+    ) -> _StartStreamTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamTranscriptionResponse
+  end
+end

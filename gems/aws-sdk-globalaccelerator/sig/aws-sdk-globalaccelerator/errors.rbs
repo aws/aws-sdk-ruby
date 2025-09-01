@@ -1,0 +1,64 @@
+module Aws::GlobalAccelerator
+  module Errors
+    class AcceleratorNotDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AcceleratorNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AssociatedEndpointGroupFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AssociatedListenerFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ByoipCidrNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EndpointAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EndpointGroupAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EndpointGroupNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EndpointNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncorrectCidrStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPortRangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListenerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransactionInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

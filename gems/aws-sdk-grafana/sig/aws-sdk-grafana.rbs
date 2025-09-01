@@ -1,0 +1,5 @@
+  module Aws
+    module Grafana
+      VERSION: String
+    end
+  end

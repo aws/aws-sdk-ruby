@@ -1,0 +1,3735 @@
+module Aws::StorageGateway
+  module Types
+
+    class ActivateGatewayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_key: String,
+        ?gateway_name: String,
+        ?gateway_timezone: String,
+        ?gateway_region: String,
+        ?gateway_type: String,
+        ?tape_drive_type: String,
+        ?medium_changer_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_key: String?
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_timezone: String?
+      attr_accessor gateway_region: String?
+      attr_accessor gateway_type: String?
+      attr_accessor tape_drive_type: String?
+      attr_accessor medium_changer_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ActivateGatewayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    module ActiveDirectoryStatus
+      ACCESS_DENIED: String
+      DETACHED: String
+      JOINED: String
+      JOINING: String
+      NETWORK_ERROR: String
+      TIMEOUT: String
+      UNKNOWN_ERROR: String
+      INSUFFICIENT_PERMISSIONS: String
+    end
+
+    class AddCacheInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+    end
+
+    class AddCacheOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class AddTagsToResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsToResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class AddUploadBufferInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+    end
+
+    class AddUploadBufferOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class AddWorkingStorageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+    end
+
+    class AddWorkingStorageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class AssignTapePoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?pool_id: String,
+        ?bypass_governance_retention: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor bypass_governance_retention: bool?
+    end
+
+    class AssignTapePoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class AssociateFileSystemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?password: String,
+        ?client_token: String,
+        ?gateway_arn: String,
+        ?location_arn: String,
+        ?tags: Array[Types::Tag],
+        ?audit_destination_arn: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?endpoint_network_configuration: Types::EndpointNetworkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+      attr_accessor client_token: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor location_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor endpoint_network_configuration: Types::EndpointNetworkConfiguration?
+    end
+
+    class AssociateFileSystemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+    end
+
+    class AttachVolumeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?target_name: String,
+        ?volume_arn: String,
+        ?network_interface_id: String,
+        ?disk_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor target_name: String?
+      attr_accessor volume_arn: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor disk_id: String?
+    end
+
+    class AttachVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor target_arn: String?
+    end
+
+    class AutomaticTapeCreationPolicyInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_tape_creation_rules: Array[Types::AutomaticTapeCreationRule],
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_tape_creation_rules: Array[Types::AutomaticTapeCreationRule]?
+      attr_accessor gateway_arn: String?
+    end
+
+    class AutomaticTapeCreationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_barcode_prefix: String,
+        ?pool_id: String,
+        ?tape_size_in_bytes: Integer,
+        ?minimum_num_tapes: Integer,
+        ?worm: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_barcode_prefix: String?
+      attr_accessor pool_id: String?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor minimum_num_tapes: Integer?
+      attr_accessor worm: bool?
+    end
+
+    module AutomaticUpdatePolicy
+      ALL_VERSIONS: String
+      EMERGENCY_VERSIONS_ONLY: String
+    end
+
+    module AvailabilityMonitorTestStatus
+      COMPLETE: String
+      FAILED: String
+      PENDING: String
+    end
+
+    class BandwidthRateLimitInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_hour_of_day: Integer,
+        ?start_minute_of_hour: Integer,
+        ?end_hour_of_day: Integer,
+        ?end_minute_of_hour: Integer,
+        ?days_of_week: Array[Integer],
+        ?average_upload_rate_limit_in_bits_per_sec: Integer,
+        ?average_download_rate_limit_in_bits_per_sec: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_hour_of_day: Integer?
+      attr_accessor start_minute_of_hour: Integer?
+      attr_accessor end_hour_of_day: Integer?
+      attr_accessor end_minute_of_hour: Integer?
+      attr_accessor days_of_week: Array[Integer]?
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: Integer?
+      attr_accessor average_download_rate_limit_in_bits_per_sec: Integer?
+    end
+
+    class CacheAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_stale_timeout_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_stale_timeout_in_seconds: Integer?
+    end
+
+    class CacheReportFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module CacheReportFilterName
+      UploadState: String
+      UploadFailureReason: String
+    end
+
+    class CacheReportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+        ?cache_report_status: String,
+        ?report_completion_percent: Integer,
+        ?end_time: Time,
+        ?role: String,
+        ?file_share_arn: String,
+        ?location_arn: String,
+        ?start_time: Time,
+        ?inclusion_filters: Array[Types::CacheReportFilter],
+        ?exclusion_filters: Array[Types::CacheReportFilter],
+        ?report_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+      attr_accessor cache_report_status: String?
+      attr_accessor report_completion_percent: Integer?
+      attr_accessor end_time: Time?
+      attr_accessor role: String?
+      attr_accessor file_share_arn: String?
+      attr_accessor location_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor inclusion_filters: Array[Types::CacheReportFilter]?
+      attr_accessor exclusion_filters: Array[Types::CacheReportFilter]?
+      attr_accessor report_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module CacheReportStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      CANCELED: String
+      FAILED: String
+      ERROR: String
+    end
+
+    class CachediSCSIVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?volume_id: String,
+        ?volume_type: String,
+        ?volume_status: String,
+        ?volume_attachment_status: String,
+        ?volume_size_in_bytes: Integer,
+        ?volume_progress: Float,
+        ?source_snapshot_id: String,
+        ?volumei_scsi_attributes: Types::VolumeiSCSIAttributes,
+        ?created_date: Time,
+        ?volume_used_in_bytes: Integer,
+        ?kms_key: String,
+        ?target_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor volume_id: String?
+      attr_accessor volume_type: String?
+      attr_accessor volume_status: String?
+      attr_accessor volume_attachment_status: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor volume_progress: Float?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor volumei_scsi_attributes: Types::VolumeiSCSIAttributes?
+      attr_accessor created_date: Time?
+      attr_accessor volume_used_in_bytes: Integer?
+      attr_accessor kms_key: String?
+      attr_accessor target_name: String?
+    end
+
+    class CancelArchivalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_arn: String?
+    end
+
+    class CancelArchivalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class CancelCacheReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class CancelCacheReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class CancelRetrievalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_arn: String?
+    end
+
+    class CancelRetrievalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    module CaseSensitivity
+      ClientSpecified: String
+      CaseSensitive: String
+    end
+
+    class ChapInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?secret_to_authenticate_initiator: String,
+        ?initiator_name: String,
+        ?secret_to_authenticate_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor secret_to_authenticate_initiator: String?
+      attr_accessor initiator_name: String?
+      attr_accessor secret_to_authenticate_target: String?
+    end
+
+    class CreateCachediSCSIVolumeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?volume_size_in_bytes: Integer,
+        ?snapshot_id: String,
+        ?target_name: String,
+        ?source_volume_arn: String,
+        ?network_interface_id: String,
+        ?client_token: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor snapshot_id: String?
+      attr_accessor target_name: String?
+      attr_accessor source_volume_arn: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCachediSCSIVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor target_arn: String?
+    end
+
+    class CreateNFSFileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?nfs_file_share_defaults: Types::NFSFileShareDefaults,
+        ?gateway_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?role: String,
+        ?location_arn: String,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?client_list: Array[String],
+        ?squash: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?tags: Array[Types::Tag],
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?vpc_endpoint_dns_name: String,
+        ?bucket_region: String,
+        ?audit_destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults?
+      attr_accessor gateway_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor role: String?
+      attr_accessor location_arn: String?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor client_list: Array[String]?
+      attr_accessor squash: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor vpc_endpoint_dns_name: String?
+      attr_accessor bucket_region: String?
+      attr_accessor audit_destination_arn: String?
+    end
+
+    class CreateNFSFileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class CreateSMBFileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?role: String,
+        ?location_arn: String,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?smbacl_enabled: bool,
+        ?access_based_enumeration: bool,
+        ?admin_user_list: Array[String],
+        ?valid_user_list: Array[String],
+        ?invalid_user_list: Array[String],
+        ?audit_destination_arn: String,
+        ?authentication: String,
+        ?case_sensitivity: String,
+        ?tags: Array[Types::Tag],
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?vpc_endpoint_dns_name: String,
+        ?bucket_region: String,
+        ?oplocks_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor role: String?
+      attr_accessor location_arn: String?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor smbacl_enabled: bool?
+      attr_accessor access_based_enumeration: bool?
+      attr_accessor admin_user_list: Array[String]?
+      attr_accessor valid_user_list: Array[String]?
+      attr_accessor invalid_user_list: Array[String]?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor authentication: String?
+      attr_accessor case_sensitivity: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor vpc_endpoint_dns_name: String?
+      attr_accessor bucket_region: String?
+      attr_accessor oplocks_enabled: bool?
+    end
+
+    class CreateSMBFileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class CreateSnapshotFromVolumeRecoveryPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?snapshot_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor snapshot_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSnapshotFromVolumeRecoveryPointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?volume_arn: String,
+        ?volume_recovery_point_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor volume_arn: String?
+      attr_accessor volume_recovery_point_time: String?
+    end
+
+    class CreateSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?snapshot_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor snapshot_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor snapshot_id: String?
+    end
+
+    class CreateStorediSCSIVolumeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_id: String,
+        ?snapshot_id: String,
+        ?preserve_existing_data: bool,
+        ?target_name: String,
+        ?network_interface_id: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_id: String?
+      attr_accessor snapshot_id: String?
+      attr_accessor preserve_existing_data: bool?
+      attr_accessor target_name: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateStorediSCSIVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?volume_size_in_bytes: Integer,
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor target_arn: String?
+    end
+
+    class CreateTapePoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?storage_class: String,
+        ?retention_lock_type: String,
+        ?retention_lock_time_in_days: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor storage_class: String?
+      attr_accessor retention_lock_type: String?
+      attr_accessor retention_lock_time_in_days: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTapePoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+    end
+
+    class CreateTapeWithBarcodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_size_in_bytes: Integer,
+        ?tape_barcode: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?pool_id: String,
+        ?worm: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor tape_barcode: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor pool_id: String?
+      attr_accessor worm: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTapeWithBarcodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class CreateTapesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_size_in_bytes: Integer,
+        ?client_token: String,
+        ?num_tapes_to_create: Integer,
+        ?tape_barcode_prefix: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?pool_id: String,
+        ?worm: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor client_token: String?
+      attr_accessor num_tapes_to_create: Integer?
+      attr_accessor tape_barcode_prefix: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor pool_id: String?
+      attr_accessor worm: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTapesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_ar_ns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_ar_ns: Array[String]?
+    end
+
+    class DeleteAutomaticTapeCreationPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteAutomaticTapeCreationPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteBandwidthRateLimitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?bandwidth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor bandwidth_type: String?
+    end
+
+    class DeleteBandwidthRateLimitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteCacheReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class DeleteCacheReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class DeleteChapCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?initiator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor initiator_name: String?
+    end
+
+    class DeleteChapCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?initiator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor initiator_name: String?
+    end
+
+    class DeleteFileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteFileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class DeleteGatewayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteGatewayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteSnapshotScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DeleteSnapshotScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DeleteTapeArchiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?bypass_governance_retention: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor bypass_governance_retention: bool?
+    end
+
+    class DeleteTapeArchiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class DeleteTapeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_arn: String,
+        ?bypass_governance_retention: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_arn: String?
+      attr_accessor bypass_governance_retention: bool?
+    end
+
+    class DeleteTapeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class DeleteTapePoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+    end
+
+    class DeleteTapePoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+    end
+
+    class DeleteVolumeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DeleteVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DescribeAvailabilityMonitorTestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeAvailabilityMonitorTestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?status: String,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+    end
+
+    class DescribeBandwidthRateLimitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeBandwidthRateLimitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?average_upload_rate_limit_in_bits_per_sec: Integer,
+        ?average_download_rate_limit_in_bits_per_sec: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: Integer?
+      attr_accessor average_download_rate_limit_in_bits_per_sec: Integer?
+    end
+
+    class DescribeBandwidthRateLimitScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeBandwidthRateLimitScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval]?
+    end
+
+    class DescribeCacheInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeCacheOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+        ?cache_allocated_in_bytes: Integer,
+        ?cache_used_percentage: Float,
+        ?cache_dirty_percentage: Float,
+        ?cache_hit_percentage: Float,
+        ?cache_miss_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+      attr_accessor cache_allocated_in_bytes: Integer?
+      attr_accessor cache_used_percentage: Float?
+      attr_accessor cache_dirty_percentage: Float?
+      attr_accessor cache_hit_percentage: Float?
+      attr_accessor cache_miss_percentage: Float?
+    end
+
+    class DescribeCacheReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class DescribeCacheReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_info: Types::CacheReportInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_info: Types::CacheReportInfo?
+    end
+
+    class DescribeCachediSCSIVolumesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_ar_ns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_ar_ns: Array[String]?
+    end
+
+    class DescribeCachediSCSIVolumesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cachedi_scsi_volumes: Array[Types::CachediSCSIVolume],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cachedi_scsi_volumes: Array[Types::CachediSCSIVolume]?
+    end
+
+    class DescribeChapCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+    end
+
+    class DescribeChapCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chap_credentials: Array[Types::ChapInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chap_credentials: Array[Types::ChapInfo]?
+    end
+
+    class DescribeFileSystemAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn_list: Array[String]?
+    end
+
+    class DescribeFileSystemAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_info_list: Array[Types::FileSystemAssociationInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_info_list: Array[Types::FileSystemAssociationInfo]?
+    end
+
+    class DescribeGatewayInformationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeGatewayInformationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_id: String,
+        ?gateway_name: String,
+        ?gateway_timezone: String,
+        ?gateway_state: String,
+        ?gateway_network_interfaces: Array[Types::NetworkInterface],
+        ?gateway_type: String,
+        ?next_update_availability_date: String,
+        ?last_software_update: String,
+        ?ec2_instance_id: String,
+        ?ec2_instance_region: String,
+        ?tags: Array[Types::Tag],
+        ?vpc_endpoint: String,
+        ?cloud_watch_log_group_arn: String,
+        ?host_environment: String,
+        ?endpoint_type: String,
+        ?software_updates_end_date: String,
+        ?deprecation_date: String,
+        ?gateway_capacity: String,
+        ?supported_gateway_capacities: Array[String],
+        ?host_environment_id: String,
+        ?software_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_timezone: String?
+      attr_accessor gateway_state: String?
+      attr_accessor gateway_network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor gateway_type: String?
+      attr_accessor next_update_availability_date: String?
+      attr_accessor last_software_update: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor ec2_instance_region: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor vpc_endpoint: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor host_environment: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor software_updates_end_date: String?
+      attr_accessor deprecation_date: String?
+      attr_accessor gateway_capacity: String?
+      attr_accessor supported_gateway_capacities: Array[String]?
+      attr_accessor host_environment_id: String?
+      attr_accessor software_version: String?
+    end
+
+    class DescribeMaintenanceStartTimeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeMaintenanceStartTimeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?hour_of_day: Integer,
+        ?minute_of_hour: Integer,
+        ?day_of_week: Integer,
+        ?day_of_month: Integer,
+        ?timezone: String,
+        ?software_update_preferences: Types::SoftwareUpdatePreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor hour_of_day: Integer?
+      attr_accessor minute_of_hour: Integer?
+      attr_accessor day_of_week: Integer?
+      attr_accessor day_of_month: Integer?
+      attr_accessor timezone: String?
+      attr_accessor software_update_preferences: Types::SoftwareUpdatePreferences?
+    end
+
+    class DescribeNFSFileSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn_list: Array[String]?
+    end
+
+    class DescribeNFSFileSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nfs_file_share_info_list: Array[Types::NFSFileShareInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nfs_file_share_info_list: Array[Types::NFSFileShareInfo]?
+    end
+
+    class DescribeSMBFileSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn_list: Array[String]?
+    end
+
+    class DescribeSMBFileSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?smb_file_share_info_list: Array[Types::SMBFileShareInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor smb_file_share_info_list: Array[Types::SMBFileShareInfo]?
+    end
+
+    class DescribeSMBSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeSMBSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?domain_name: String,
+        ?active_directory_status: String,
+        ?smb_guest_password_set: bool,
+        ?smb_security_strategy: String,
+        ?file_shares_visible: bool,
+        ?smb_local_groups: Types::SMBLocalGroups,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor active_directory_status: String?
+      attr_accessor smb_guest_password_set: bool?
+      attr_accessor smb_security_strategy: String?
+      attr_accessor file_shares_visible: bool?
+      attr_accessor smb_local_groups: Types::SMBLocalGroups?
+    end
+
+    class DescribeSnapshotScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DescribeSnapshotScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?start_at: Integer,
+        ?recurrence_in_hours: Integer,
+        ?description: String,
+        ?timezone: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor start_at: Integer?
+      attr_accessor recurrence_in_hours: Integer?
+      attr_accessor description: String?
+      attr_accessor timezone: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DescribeStorediSCSIVolumesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_ar_ns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_ar_ns: Array[String]?
+    end
+
+    class DescribeStorediSCSIVolumesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storedi_scsi_volumes: Array[Types::StorediSCSIVolume],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storedi_scsi_volumes: Array[Types::StorediSCSIVolume]?
+    end
+
+    class DescribeTapeArchivesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_ar_ns: Array[String],
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_ar_ns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeTapeArchivesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_archives: Array[Types::TapeArchive],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_archives: Array[Types::TapeArchive]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeTapeRecoveryPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeTapeRecoveryPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_recovery_point_infos: Array[Types::TapeRecoveryPointInfo],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_recovery_point_infos: Array[Types::TapeRecoveryPointInfo]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeTapesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?tape_ar_ns: Array[String],
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor tape_ar_ns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeTapesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tapes: Array[Types::Tape],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tapes: Array[Types::Tape]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUploadBufferInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeUploadBufferOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+        ?upload_buffer_used_in_bytes: Integer,
+        ?upload_buffer_allocated_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+      attr_accessor upload_buffer_used_in_bytes: Integer?
+      attr_accessor upload_buffer_allocated_in_bytes: Integer?
+    end
+
+    class DescribeVTLDevicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?vtl_device_ar_ns: Array[String],
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor vtl_device_ar_ns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeVTLDevicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?vtl_devices: Array[Types::VTLDevice],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor vtl_devices: Array[Types::VTLDevice]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeWorkingStorageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DescribeWorkingStorageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disk_ids: Array[String],
+        ?working_storage_used_in_bytes: Integer,
+        ?working_storage_allocated_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disk_ids: Array[String]?
+      attr_accessor working_storage_used_in_bytes: Integer?
+      attr_accessor working_storage_allocated_in_bytes: Integer?
+    end
+
+    class DetachVolumeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?force_detach: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor force_detach: bool?
+    end
+
+    class DetachVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class DeviceiSCSIAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?network_interface_id: String,
+        ?network_interface_port: Integer,
+        ?chap_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor network_interface_port: Integer?
+      attr_accessor chap_enabled: bool?
+    end
+
+    class DisableGatewayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DisableGatewayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DisassociateFileSystemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DisassociateFileSystemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+    end
+
+    class Disk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disk_id: String,
+        ?disk_path: String,
+        ?disk_node: String,
+        ?disk_status: String,
+        ?disk_size_in_bytes: Integer,
+        ?disk_allocation_type: String,
+        ?disk_allocation_resource: String,
+        ?disk_attribute_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disk_id: String?
+      attr_accessor disk_path: String?
+      attr_accessor disk_node: String?
+      attr_accessor disk_status: String?
+      attr_accessor disk_size_in_bytes: Integer?
+      attr_accessor disk_allocation_type: String?
+      attr_accessor disk_allocation_resource: String?
+      attr_accessor disk_attribute_list: Array[String]?
+    end
+
+    module EncryptionType
+      SseS3: String
+      SseKms: String
+      DsseKms: String
+    end
+
+    class EndpointNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_addresses: Array[String]?
+    end
+
+    module ErrorCode
+      ActivationKeyExpired: String
+      ActivationKeyInvalid: String
+      ActivationKeyNotFound: String
+      GatewayInternalError: String
+      GatewayNotConnected: String
+      GatewayNotFound: String
+      GatewayProxyNetworkConnectionBusy: String
+      AuthenticationFailure: String
+      BandwidthThrottleScheduleNotFound: String
+      Blocked: String
+      CannotExportSnapshot: String
+      ChapCredentialNotFound: String
+      DiskAlreadyAllocated: String
+      DiskDoesNotExist: String
+      DiskSizeGreaterThanVolumeMaxSize: String
+      DiskSizeLessThanVolumeSize: String
+      DiskSizeNotGigAligned: String
+      DuplicateCertificateInfo: String
+      DuplicateSchedule: String
+      EndpointNotFound: String
+      IAMNotSupported: String
+      InitiatorInvalid: String
+      InitiatorNotFound: String
+      InternalError: String
+      InvalidGateway: String
+      InvalidEndpoint: String
+      InvalidParameters: String
+      InvalidSchedule: String
+      LocalStorageLimitExceeded: String
+      LunAlreadyAllocated_: String
+      LunInvalid: String
+      JoinDomainInProgress: String
+      MaximumContentLengthExceeded: String
+      MaximumTapeCartridgeCountExceeded: String
+      MaximumVolumeCountExceeded: String
+      NetworkConfigurationChanged: String
+      NoDisksAvailable: String
+      NotImplemented: String
+      NotSupported: String
+      OperationAborted: String
+      OutdatedGateway: String
+      ParametersNotImplemented: String
+      RegionInvalid: String
+      RequestTimeout: String
+      ServiceUnavailable: String
+      SnapshotDeleted: String
+      SnapshotIdInvalid: String
+      SnapshotInProgress: String
+      SnapshotNotFound: String
+      SnapshotScheduleNotFound: String
+      StagingAreaFull: String
+      StorageFailure: String
+      TapeCartridgeNotFound: String
+      TargetAlreadyExists: String
+      TargetInvalid: String
+      TargetNotFound: String
+      UnauthorizedOperation: String
+      VolumeAlreadyExists: String
+      VolumeIdInvalid: String
+      VolumeInUse: String
+      VolumeNotFound: String
+      VolumeNotReady: String
+    end
+
+    class EvictFilesFailingUploadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?force_remove: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor force_remove: bool?
+    end
+
+    class EvictFilesFailingUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_id: String?
+    end
+
+    class FileShareInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_type: String,
+        ?file_share_arn: String,
+        ?file_share_id: String,
+        ?file_share_status: String,
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_type: String?
+      attr_accessor file_share_arn: String?
+      attr_accessor file_share_id: String?
+      attr_accessor file_share_status: String?
+      attr_accessor gateway_arn: String?
+    end
+
+    module FileShareType
+      NFS: String
+      SMB: String
+    end
+
+    class FileSystemAssociationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+        ?location_arn: String,
+        ?file_system_association_status: String,
+        ?audit_destination_arn: String,
+        ?gateway_arn: String,
+        ?tags: Array[Types::Tag],
+        ?cache_attributes: Types::CacheAttributes,
+        ?endpoint_network_configuration: Types::EndpointNetworkConfiguration,
+        ?file_system_association_status_details: Array[Types::FileSystemAssociationStatusDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+      attr_accessor location_arn: String?
+      attr_accessor file_system_association_status: String?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor endpoint_network_configuration: Types::EndpointNetworkConfiguration?
+      attr_accessor file_system_association_status_details: Array[Types::FileSystemAssociationStatusDetail]?
+    end
+
+    class FileSystemAssociationStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+    end
+
+    class FileSystemAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_id: String,
+        ?file_system_association_arn: String,
+        ?file_system_association_status: String,
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_id: String?
+      attr_accessor file_system_association_arn: String?
+      attr_accessor file_system_association_status: String?
+      attr_accessor gateway_arn: String?
+    end
+
+    module GatewayCapacity
+      Small: String
+      Medium: String
+      Large: String
+    end
+
+    class GatewayInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?gateway_arn: String,
+        ?gateway_type: String,
+        ?gateway_operational_state: String,
+        ?gateway_name: String,
+        ?ec2_instance_id: String,
+        ?ec2_instance_region: String,
+        ?host_environment: String,
+        ?host_environment_id: String,
+        ?deprecation_date: String,
+        ?software_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_type: String?
+      attr_accessor gateway_operational_state: String?
+      attr_accessor gateway_name: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor ec2_instance_region: String?
+      attr_accessor host_environment: String?
+      attr_accessor host_environment_id: String?
+      attr_accessor deprecation_date: String?
+      attr_accessor software_version: String?
+    end
+
+    module HostEnvironment
+      VMWARE: String
+      HYPER_V: String
+      EC2: String
+      KVM: String
+      OTHER: String
+      SNOWBALL: String
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error: Types::StorageGatewayError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error: Types::StorageGatewayError?
+    end
+
+    class InvalidGatewayRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error: Types::StorageGatewayError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error: Types::StorageGatewayError?
+    end
+
+    class JoinDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?domain_name: String,
+        ?organizational_unit: String,
+        ?domain_controllers: Array[String],
+        ?timeout_in_seconds: Integer,
+        ?user_name: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor organizational_unit: String?
+      attr_accessor domain_controllers: Array[String]?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+    end
+
+    class JoinDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?active_directory_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor active_directory_status: String?
+    end
+
+    class ListAutomaticTapeCreationPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ListAutomaticTapeCreationPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_tape_creation_policy_infos: Array[Types::AutomaticTapeCreationPolicyInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_tape_creation_policy_infos: Array[Types::AutomaticTapeCreationPolicyInfo]?
+    end
+
+    class ListCacheReportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+    end
+
+    class ListCacheReportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_list: Array[Types::CacheReportInfo],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_list: Array[Types::CacheReportInfo]?
+      attr_accessor marker: String?
+    end
+
+    class ListFileSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListFileSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?next_marker: String,
+        ?file_share_info_list: Array[Types::FileShareInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor next_marker: String?
+      attr_accessor file_share_info_list: Array[Types::FileShareInfo]?
+    end
+
+    class ListFileSystemAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListFileSystemAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?next_marker: String,
+        ?file_system_association_summary_list: Array[Types::FileSystemAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor next_marker: String?
+      attr_accessor file_system_association_summary_list: Array[Types::FileSystemAssociationSummary]?
+    end
+
+    class ListGatewaysInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListGatewaysOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateways: Array[Types::GatewayInfo],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateways: Array[Types::GatewayInfo]?
+      attr_accessor marker: String?
+    end
+
+    class ListLocalDisksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ListLocalDisksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?disks: Array[Types::Disk],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor disks: Array[Types::Disk]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?marker: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor marker: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTapePoolsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_ar_ns: Array[String],
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_ar_ns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTapePoolsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_infos: Array[Types::PoolInfo],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_infos: Array[Types::PoolInfo]?
+      attr_accessor marker: String?
+    end
+
+    class ListTapesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_ar_ns: Array[String],
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_ar_ns: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTapesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_infos: Array[Types::TapeInfo],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_infos: Array[Types::TapeInfo]?
+      attr_accessor marker: String?
+    end
+
+    class ListVolumeInitiatorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class ListVolumeInitiatorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initiators: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initiators: Array[String]?
+    end
+
+    class ListVolumeRecoveryPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ListVolumeRecoveryPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?volume_recovery_point_infos: Array[Types::VolumeRecoveryPointInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor volume_recovery_point_infos: Array[Types::VolumeRecoveryPointInfo]?
+    end
+
+    class ListVolumesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListVolumesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?marker: String,
+        ?volume_infos: Array[Types::VolumeInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor marker: String?
+      attr_accessor volume_infos: Array[Types::VolumeInfo]?
+    end
+
+    class NFSFileShareDefaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_mode: String,
+        ?directory_mode: String,
+        ?group_id: Integer,
+        ?owner_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_mode: String?
+      attr_accessor directory_mode: String?
+      attr_accessor group_id: Integer?
+      attr_accessor owner_id: Integer?
+    end
+
+    class NFSFileShareInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nfs_file_share_defaults: Types::NFSFileShareDefaults,
+        ?file_share_arn: String,
+        ?file_share_id: String,
+        ?file_share_status: String,
+        ?gateway_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?path: String,
+        ?role: String,
+        ?location_arn: String,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?client_list: Array[String],
+        ?squash: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?tags: Array[Types::Tag],
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?vpc_endpoint_dns_name: String,
+        ?bucket_region: String,
+        ?audit_destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults?
+      attr_accessor file_share_arn: String?
+      attr_accessor file_share_id: String?
+      attr_accessor file_share_status: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor path: String?
+      attr_accessor role: String?
+      attr_accessor location_arn: String?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor client_list: Array[String]?
+      attr_accessor squash: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor vpc_endpoint_dns_name: String?
+      attr_accessor bucket_region: String?
+      attr_accessor audit_destination_arn: String?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv4_address: String,
+        ?mac_address: String,
+        ?ipv6_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv4_address: String?
+      attr_accessor mac_address: String?
+      attr_accessor ipv6_address: String?
+    end
+
+    class NotifyWhenUploadedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class NotifyWhenUploadedOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?notification_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor notification_id: String?
+    end
+
+    module ObjectACL
+      private: String
+      public_read: String
+      public_read_write: String
+      authenticated_read: String
+      bucket_owner_read: String
+      bucket_owner_full_control: String
+      aws_exec_read: String
+    end
+
+    class PoolInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_name: String,
+        ?storage_class: String,
+        ?retention_lock_type: String,
+        ?retention_lock_time_in_days: Integer,
+        ?pool_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_name: String?
+      attr_accessor storage_class: String?
+      attr_accessor retention_lock_type: String?
+      attr_accessor retention_lock_time_in_days: Integer?
+      attr_accessor pool_status: String?
+    end
+
+    module PoolStatus
+      ACTIVE: String
+      DELETED: String
+    end
+
+    class RefreshCacheInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?folder_list: Array[String],
+        ?recursive: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor folder_list: Array[String]?
+      attr_accessor recursive: bool?
+    end
+
+    class RefreshCacheOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?notification_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor notification_id: String?
+    end
+
+    class RemoveTagsFromResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsFromResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ResetCacheInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ResetCacheOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    module RetentionLockType
+      COMPLIANCE: String
+      GOVERNANCE: String
+      NONE: String
+    end
+
+    class RetrieveTapeArchiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor gateway_arn: String?
+    end
+
+    class RetrieveTapeArchiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class RetrieveTapeRecoveryPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor gateway_arn: String?
+    end
+
+    class RetrieveTapeRecoveryPointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+    end
+
+    class SMBFileShareInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?file_share_id: String,
+        ?file_share_status: String,
+        ?gateway_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?path: String,
+        ?role: String,
+        ?location_arn: String,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?smbacl_enabled: bool,
+        ?access_based_enumeration: bool,
+        ?admin_user_list: Array[String],
+        ?valid_user_list: Array[String],
+        ?invalid_user_list: Array[String],
+        ?audit_destination_arn: String,
+        ?authentication: String,
+        ?case_sensitivity: String,
+        ?tags: Array[Types::Tag],
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?vpc_endpoint_dns_name: String,
+        ?bucket_region: String,
+        ?oplocks_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor file_share_id: String?
+      attr_accessor file_share_status: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor path: String?
+      attr_accessor role: String?
+      attr_accessor location_arn: String?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor smbacl_enabled: bool?
+      attr_accessor access_based_enumeration: bool?
+      attr_accessor admin_user_list: Array[String]?
+      attr_accessor valid_user_list: Array[String]?
+      attr_accessor invalid_user_list: Array[String]?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor authentication: String?
+      attr_accessor case_sensitivity: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor vpc_endpoint_dns_name: String?
+      attr_accessor bucket_region: String?
+      attr_accessor oplocks_enabled: bool?
+    end
+
+    class SMBLocalGroups
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_admins: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_admins: Array[String]?
+    end
+
+    module SMBSecurityStrategy
+      ClientSpecified: String
+      MandatorySigning: String
+      MandatoryEncryption: String
+      MandatoryEncryptionNoAes128: String
+    end
+
+    class ServiceUnavailableError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error: Types::StorageGatewayError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error: Types::StorageGatewayError?
+    end
+
+    class SetLocalConsolePasswordInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?local_console_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor local_console_password: String?
+    end
+
+    class SetLocalConsolePasswordOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class SetSMBGuestPasswordInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor password: String?
+    end
+
+    class SetSMBGuestPasswordOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ShutdownGatewayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ShutdownGatewayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class SoftwareUpdatePreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_update_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_update_policy: String?
+    end
+
+    class StartAvailabilityMonitorTestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class StartAvailabilityMonitorTestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class StartCacheReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?role: String,
+        ?location_arn: String,
+        ?bucket_region: String,
+        ?vpc_endpoint_dns_name: String,
+        ?inclusion_filters: Array[Types::CacheReportFilter],
+        ?exclusion_filters: Array[Types::CacheReportFilter],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor role: String?
+      attr_accessor location_arn: String?
+      attr_accessor bucket_region: String?
+      attr_accessor vpc_endpoint_dns_name: String?
+      attr_accessor inclusion_filters: Array[Types::CacheReportFilter]?
+      attr_accessor exclusion_filters: Array[Types::CacheReportFilter]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartCacheReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_report_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_report_arn: String?
+    end
+
+    class StartGatewayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class StartGatewayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class StorageGatewayError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_details: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_details: Hash[String, String]?
+    end
+
+    class StorediSCSIVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?volume_id: String,
+        ?volume_type: String,
+        ?volume_status: String,
+        ?volume_attachment_status: String,
+        ?volume_size_in_bytes: Integer,
+        ?volume_progress: Float,
+        ?volume_disk_id: String,
+        ?source_snapshot_id: String,
+        ?preserved_existing_data: bool,
+        ?volumei_scsi_attributes: Types::VolumeiSCSIAttributes,
+        ?created_date: Time,
+        ?volume_used_in_bytes: Integer,
+        ?kms_key: String,
+        ?target_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor volume_id: String?
+      attr_accessor volume_type: String?
+      attr_accessor volume_status: String?
+      attr_accessor volume_attachment_status: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor volume_progress: Float?
+      attr_accessor volume_disk_id: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor preserved_existing_data: bool?
+      attr_accessor volumei_scsi_attributes: Types::VolumeiSCSIAttributes?
+      attr_accessor created_date: Time?
+      attr_accessor volume_used_in_bytes: Integer?
+      attr_accessor kms_key: String?
+      attr_accessor target_name: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class Tape
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?tape_barcode: String,
+        ?tape_created_date: Time,
+        ?tape_size_in_bytes: Integer,
+        ?tape_status: String,
+        ?vtl_device: String,
+        ?progress: Float,
+        ?tape_used_in_bytes: Integer,
+        ?kms_key: String,
+        ?pool_id: String,
+        ?worm: bool,
+        ?retention_start_date: Time,
+        ?pool_entry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor tape_barcode: String?
+      attr_accessor tape_created_date: Time?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor tape_status: String?
+      attr_accessor vtl_device: String?
+      attr_accessor progress: Float?
+      attr_accessor tape_used_in_bytes: Integer?
+      attr_accessor kms_key: String?
+      attr_accessor pool_id: String?
+      attr_accessor worm: bool?
+      attr_accessor retention_start_date: Time?
+      attr_accessor pool_entry_date: Time?
+    end
+
+    class TapeArchive
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?tape_barcode: String,
+        ?tape_created_date: Time,
+        ?tape_size_in_bytes: Integer,
+        ?completion_time: Time,
+        ?retrieved_to: String,
+        ?tape_status: String,
+        ?tape_used_in_bytes: Integer,
+        ?kms_key: String,
+        ?pool_id: String,
+        ?worm: bool,
+        ?retention_start_date: Time,
+        ?pool_entry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor tape_barcode: String?
+      attr_accessor tape_created_date: Time?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor completion_time: Time?
+      attr_accessor retrieved_to: String?
+      attr_accessor tape_status: String?
+      attr_accessor tape_used_in_bytes: Integer?
+      attr_accessor kms_key: String?
+      attr_accessor pool_id: String?
+      attr_accessor worm: bool?
+      attr_accessor retention_start_date: Time?
+      attr_accessor pool_entry_date: Time?
+    end
+
+    class TapeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?tape_barcode: String,
+        ?tape_size_in_bytes: Integer,
+        ?tape_status: String,
+        ?gateway_arn: String,
+        ?pool_id: String,
+        ?retention_start_date: Time,
+        ?pool_entry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor tape_barcode: String?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor tape_status: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor retention_start_date: Time?
+      attr_accessor pool_entry_date: Time?
+    end
+
+    class TapeRecoveryPointInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tape_arn: String,
+        ?tape_recovery_point_time: Time,
+        ?tape_size_in_bytes: Integer,
+        ?tape_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tape_arn: String?
+      attr_accessor tape_recovery_point_time: Time?
+      attr_accessor tape_size_in_bytes: Integer?
+      attr_accessor tape_status: String?
+    end
+
+    module TapeStorageClass
+      DEEP_ARCHIVE: String
+      GLACIER: String
+    end
+
+    class UpdateAutomaticTapeCreationPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_tape_creation_rules: Array[Types::AutomaticTapeCreationRule],
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_tape_creation_rules: Array[Types::AutomaticTapeCreationRule]?
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateAutomaticTapeCreationPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateBandwidthRateLimitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?average_upload_rate_limit_in_bits_per_sec: Integer,
+        ?average_download_rate_limit_in_bits_per_sec: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: Integer?
+      attr_accessor average_download_rate_limit_in_bits_per_sec: Integer?
+    end
+
+    class UpdateBandwidthRateLimitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateBandwidthRateLimitScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval]?
+    end
+
+    class UpdateBandwidthRateLimitScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateChapCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?secret_to_authenticate_initiator: String,
+        ?initiator_name: String,
+        ?secret_to_authenticate_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor secret_to_authenticate_initiator: String?
+      attr_accessor initiator_name: String?
+      attr_accessor secret_to_authenticate_target: String?
+    end
+
+    class UpdateChapCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?initiator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor initiator_name: String?
+    end
+
+    class UpdateFileSystemAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+        ?user_name: String,
+        ?password: String,
+        ?audit_destination_arn: String,
+        ?cache_attributes: Types::CacheAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+    end
+
+    class UpdateFileSystemAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_association_arn: String?
+    end
+
+    class UpdateGatewayInformationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_name: String,
+        ?gateway_timezone: String,
+        ?cloud_watch_log_group_arn: String,
+        ?gateway_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_timezone: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor gateway_capacity: String?
+    end
+
+    class UpdateGatewayInformationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_name: String?
+    end
+
+    class UpdateGatewaySoftwareNowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateGatewaySoftwareNowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateMaintenanceStartTimeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?hour_of_day: Integer,
+        ?minute_of_hour: Integer,
+        ?day_of_week: Integer,
+        ?day_of_month: Integer,
+        ?software_update_preferences: Types::SoftwareUpdatePreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor hour_of_day: Integer?
+      attr_accessor minute_of_hour: Integer?
+      attr_accessor day_of_week: Integer?
+      attr_accessor day_of_month: Integer?
+      attr_accessor software_update_preferences: Types::SoftwareUpdatePreferences?
+    end
+
+    class UpdateMaintenanceStartTimeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateNFSFileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?nfs_file_share_defaults: Types::NFSFileShareDefaults,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?client_list: Array[String],
+        ?squash: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?audit_destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor client_list: Array[String]?
+      attr_accessor squash: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor audit_destination_arn: String?
+    end
+
+    class UpdateNFSFileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class UpdateSMBFileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+        ?encryption_type: String,
+        ?kms_encrypted: bool,
+        ?kms_key: String,
+        ?default_storage_class: String,
+        ?object_acl: String,
+        ?read_only: bool,
+        ?guess_mime_type_enabled: bool,
+        ?requester_pays: bool,
+        ?smbacl_enabled: bool,
+        ?access_based_enumeration: bool,
+        ?admin_user_list: Array[String],
+        ?valid_user_list: Array[String],
+        ?invalid_user_list: Array[String],
+        ?audit_destination_arn: String,
+        ?case_sensitivity: String,
+        ?file_share_name: String,
+        ?cache_attributes: Types::CacheAttributes,
+        ?notification_policy: String,
+        ?oplocks_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+      attr_accessor encryption_type: String?
+      attr_accessor kms_encrypted: bool?
+      attr_accessor kms_key: String?
+      attr_accessor default_storage_class: String?
+      attr_accessor object_acl: String?
+      attr_accessor read_only: bool?
+      attr_accessor guess_mime_type_enabled: bool?
+      attr_accessor requester_pays: bool?
+      attr_accessor smbacl_enabled: bool?
+      attr_accessor access_based_enumeration: bool?
+      attr_accessor admin_user_list: Array[String]?
+      attr_accessor valid_user_list: Array[String]?
+      attr_accessor invalid_user_list: Array[String]?
+      attr_accessor audit_destination_arn: String?
+      attr_accessor case_sensitivity: String?
+      attr_accessor file_share_name: String?
+      attr_accessor cache_attributes: Types::CacheAttributes?
+      attr_accessor notification_policy: String?
+      attr_accessor oplocks_enabled: bool?
+    end
+
+    class UpdateSMBFileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_share_arn: String?
+    end
+
+    class UpdateSMBFileShareVisibilityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?file_shares_visible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor file_shares_visible: bool?
+    end
+
+    class UpdateSMBFileShareVisibilityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateSMBLocalGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?smb_local_groups: Types::SMBLocalGroups,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor smb_local_groups: Types::SMBLocalGroups?
+    end
+
+    class UpdateSMBLocalGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateSMBSecurityStrategyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?smb_security_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor smb_security_strategy: String?
+    end
+
+    class UpdateSMBSecurityStrategyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateSnapshotScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?start_at: Integer,
+        ?recurrence_in_hours: Integer,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor start_at: Integer?
+      attr_accessor recurrence_in_hours: Integer?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateSnapshotScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+    end
+
+    class UpdateVTLDeviceTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vtl_device_arn: String,
+        ?device_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vtl_device_arn: String?
+      attr_accessor device_type: String?
+    end
+
+    class UpdateVTLDeviceTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vtl_device_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vtl_device_arn: String?
+    end
+
+    class VTLDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vtl_device_arn: String,
+        ?vtl_device_type: String,
+        ?vtl_device_vendor: String,
+        ?vtl_device_product_identifier: String,
+        ?devicei_scsi_attributes: Types::DeviceiSCSIAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vtl_device_arn: String?
+      attr_accessor vtl_device_type: String?
+      attr_accessor vtl_device_vendor: String?
+      attr_accessor vtl_device_product_identifier: String?
+      attr_accessor devicei_scsi_attributes: Types::DeviceiSCSIAttributes?
+    end
+
+    class VolumeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?volume_id: String,
+        ?gateway_arn: String,
+        ?gateway_id: String,
+        ?volume_type: String,
+        ?volume_size_in_bytes: Integer,
+        ?volume_attachment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor volume_id: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_id: String?
+      attr_accessor volume_type: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor volume_attachment_status: String?
+    end
+
+    class VolumeRecoveryPointInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?volume_size_in_bytes: Integer,
+        ?volume_usage_in_bytes: Integer,
+        ?volume_recovery_point_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor volume_size_in_bytes: Integer?
+      attr_accessor volume_usage_in_bytes: Integer?
+      attr_accessor volume_recovery_point_time: String?
+    end
+
+    class VolumeiSCSIAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?network_interface_id: String,
+        ?network_interface_port: Integer,
+        ?lun_number: Integer,
+        ?chap_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor network_interface_port: Integer?
+      attr_accessor lun_number: Integer?
+      attr_accessor chap_enabled: bool?
+    end
+  end
+end

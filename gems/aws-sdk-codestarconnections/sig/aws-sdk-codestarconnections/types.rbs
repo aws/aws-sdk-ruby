@@ -1,0 +1,1240 @@
+module Aws::CodeStarconnections
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BlockerStatus
+      ACTIVE: String
+      RESOLVED: String
+    end
+
+    module BlockerType
+      AUTOMATED: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConditionalCheckFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_name: String,
+        ?connection_arn: String,
+        ?provider_type: String,
+        ?owner_account_id: String,
+        ?connection_status: String,
+        ?host_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor provider_type: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor connection_status: String?
+      attr_accessor host_arn: String?
+    end
+
+    module ConnectionStatus
+      PENDING: String
+      AVAILABLE: String
+      ERROR: String
+    end
+
+    class CreateConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_type: String,
+        ?connection_name: String,
+        ?tags: Array[Types::Tag],
+        ?host_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_type: String?
+      attr_accessor connection_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor host_arn: String?
+    end
+
+    class CreateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateHostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_type: String,
+        ?provider_endpoint: String,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_type: String?
+      attr_accessor provider_endpoint: String?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateHostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRepositoryLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?owner_id: String,
+        ?repository_name: String,
+        ?encryption_key_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor owner_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRepositoryLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_info: Types::RepositoryLinkInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo?
+    end
+
+    class CreateSyncConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?config_file: String,
+        ?repository_link_id: String,
+        ?resource_name: String,
+        ?role_arn: String,
+        ?sync_type: String,
+        ?publish_deployment_status: String,
+        ?trigger_resource_update_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor config_file: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor sync_type: String?
+      attr_accessor publish_deployment_status: String?
+      attr_accessor trigger_resource_update_on: String?
+    end
+
+    class CreateSyncConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_configuration: Types::SyncConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_configuration: Types::SyncConfiguration?
+    end
+
+    class DeleteConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+    end
+
+    class DeleteConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteHostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_arn: String?
+    end
+
+    class DeleteHostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRepositoryLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_id: String?
+    end
+
+    class DeleteRepositoryLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSyncConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class DeleteSyncConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+    end
+
+    class GetConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class GetHostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_arn: String?
+    end
+
+    class GetHostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?provider_type: String,
+        ?provider_endpoint: String,
+        ?vpc_configuration: Types::VpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor provider_type: String?
+      attr_accessor provider_endpoint: String?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+    end
+
+    class GetRepositoryLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_id: String?
+    end
+
+    class GetRepositoryLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_info: Types::RepositoryLinkInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo?
+    end
+
+    class GetRepositorySyncStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?repository_link_id: String,
+        ?sync_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor sync_type: String?
+    end
+
+    class GetRepositorySyncStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_sync: Types::RepositorySyncAttempt,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_sync: Types::RepositorySyncAttempt?
+    end
+
+    class GetResourceSyncStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?sync_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor sync_type: String?
+    end
+
+    class GetResourceSyncStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: Types::Revision,
+        ?latest_successful_sync: Types::ResourceSyncAttempt,
+        ?latest_sync: Types::ResourceSyncAttempt,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: Types::Revision?
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt?
+      attr_accessor latest_sync: Types::ResourceSyncAttempt?
+    end
+
+    class GetSyncBlockerSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GetSyncBlockerSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_blocker_summary: Types::SyncBlockerSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_blocker_summary: Types::SyncBlockerSummary?
+    end
+
+    class GetSyncConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GetSyncConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_configuration: Types::SyncConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_configuration: Types::SyncConfiguration?
+    end
+
+    class Host
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?host_arn: String,
+        ?provider_type: String,
+        ?provider_endpoint: String,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor host_arn: String?
+      attr_accessor provider_type: String?
+      attr_accessor provider_endpoint: String?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListConnectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_type_filter: String,
+        ?host_arn_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_type_filter: String?
+      attr_accessor host_arn_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::Connection],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosts: Array[Types::Host],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosts: Array[Types::Host]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoryLinksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoryLinksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_links: Array[Types::RepositoryLinkInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_links: Array[Types::RepositoryLinkInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositorySyncDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_id: String,
+        ?sync_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_id: String?
+      attr_accessor sync_type: String?
+    end
+
+    class ListRepositorySyncDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_sync_definitions: Array[Types::RepositorySyncDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_sync_definitions: Array[Types::RepositorySyncDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSyncConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?repository_link_id: String,
+        ?sync_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor sync_type: String?
+    end
+
+    class ListSyncConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_configurations: Array[Types::SyncConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_configurations: Array[Types::SyncConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ProviderType
+      BITBUCKET: String
+      GITHUB: String
+      GITHUB_ENTERPRISE_SERVER: String
+      GITLAB: String
+      GITLAB_SELF_MANAGED: String
+    end
+
+    module PublishDeploymentStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class RepositoryLinkInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?encryption_key_arn: String,
+        ?owner_id: String,
+        ?provider_type: String,
+        ?repository_link_arn: String,
+        ?repository_link_id: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor owner_id: String?
+      attr_accessor provider_type: String?
+      attr_accessor repository_link_arn: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor repository_name: String?
+    end
+
+    class RepositorySyncAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?started_at: Time,
+        ?status: String,
+        ?events: Array[Types::RepositorySyncEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor events: Array[Types::RepositorySyncEvent]?
+    end
+
+    class RepositorySyncDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?directory: String,
+        ?parent: String,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor directory: String?
+      attr_accessor parent: String?
+      attr_accessor target: String?
+    end
+
+    class RepositorySyncEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?external_id: String,
+        ?time: Time,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor external_id: String?
+      attr_accessor time: Time?
+      attr_accessor type: String?
+    end
+
+    module RepositorySyncStatus
+      FAILED: String
+      INITIATED: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      QUEUED: String
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceSyncAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::ResourceSyncEvent],
+        ?initial_revision: Types::Revision,
+        ?started_at: Time,
+        ?status: String,
+        ?target_revision: Types::Revision,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::ResourceSyncEvent]?
+      attr_accessor initial_revision: Types::Revision?
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor target_revision: Types::Revision?
+      attr_accessor target: String?
+    end
+
+    class ResourceSyncEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?external_id: String,
+        ?time: Time,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor external_id: String?
+      attr_accessor time: Time?
+      attr_accessor type: String?
+    end
+
+    module ResourceSyncStatus
+      FAILED: String
+      INITIATED: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+    end
+
+    class ResourceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryLatestCommitFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Revision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?directory: String,
+        ?owner_id: String,
+        ?repository_name: String,
+        ?provider_type: String,
+        ?sha: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor directory: String?
+      attr_accessor owner_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor provider_type: String?
+      attr_accessor sha: String?
+    end
+
+    class SyncBlocker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?created_reason: String,
+        ?created_at: Time,
+        ?contexts: Array[Types::SyncBlockerContext],
+        ?resolved_reason: String,
+        ?resolved_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor created_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor contexts: Array[Types::SyncBlockerContext]?
+      attr_accessor resolved_reason: String?
+      attr_accessor resolved_at: Time?
+    end
+
+    class SyncBlockerContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class SyncBlockerDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SyncBlockerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?parent_resource_name: String,
+        ?latest_blockers: Array[Types::SyncBlocker],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor parent_resource_name: String?
+      attr_accessor latest_blockers: Array[Types::SyncBlocker]?
+    end
+
+    class SyncConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?config_file: String,
+        ?owner_id: String,
+        ?provider_type: String,
+        ?repository_link_id: String,
+        ?repository_name: String,
+        ?resource_name: String,
+        ?role_arn: String,
+        ?sync_type: String,
+        ?publish_deployment_status: String,
+        ?trigger_resource_update_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor config_file: String?
+      attr_accessor owner_id: String?
+      attr_accessor provider_type: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor resource_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor sync_type: String?
+      attr_accessor publish_deployment_status: String?
+      attr_accessor trigger_resource_update_on: String?
+    end
+
+    class SyncConfigurationStillExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SyncConfigurationType
+      CFN_STACK_SYNC: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TriggerResourceUpdateOn
+      ANY_CHANGE: String
+      FILE_CHANGE: String
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedProviderTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateHostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_arn: String,
+        ?provider_endpoint: String,
+        ?vpc_configuration: Types::VpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_arn: String?
+      attr_accessor provider_endpoint: String?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+    end
+
+    class UpdateHostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateOutOfSyncException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateRepositoryLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+        ?encryption_key_arn: String,
+        ?repository_link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor repository_link_id: String?
+    end
+
+    class UpdateRepositoryLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_link_info: Types::RepositoryLinkInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo?
+    end
+
+    class UpdateSyncBlockerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sync_type: String,
+        ?resource_name: String,
+        ?resolved_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sync_type: String?
+      attr_accessor resource_name: String?
+      attr_accessor resolved_reason: String?
+    end
+
+    class UpdateSyncBlockerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?parent_resource_name: String,
+        ?sync_blocker: Types::SyncBlocker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor parent_resource_name: String?
+      attr_accessor sync_blocker: Types::SyncBlocker?
+    end
+
+    class UpdateSyncConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: String,
+        ?config_file: String,
+        ?repository_link_id: String,
+        ?resource_name: String,
+        ?role_arn: String,
+        ?sync_type: String,
+        ?publish_deployment_status: String,
+        ?trigger_resource_update_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: String?
+      attr_accessor config_file: String?
+      attr_accessor repository_link_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor sync_type: String?
+      attr_accessor publish_deployment_status: String?
+      attr_accessor trigger_resource_update_on: String?
+    end
+
+    class UpdateSyncConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sync_configuration: Types::SyncConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sync_configuration: Types::SyncConfiguration?
+    end
+
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tls_certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tls_certificate: String?
+    end
+  end
+end

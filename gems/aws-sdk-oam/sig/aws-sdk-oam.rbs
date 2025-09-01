@@ -1,0 +1,5 @@
+  module Aws
+    module OAM
+      VERSION: String
+    end
+  end

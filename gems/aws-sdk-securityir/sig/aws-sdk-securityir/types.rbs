@@ -1,0 +1,1156 @@
+module Aws::SecurityIR
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AwsRegion
+      AF_SOUTH_1: String
+      AP_EAST_1: String
+      AP_EAST_2: String
+      AP_NORTHEAST_1: String
+      AP_NORTHEAST_2: String
+      AP_NORTHEAST_3: String
+      AP_SOUTH_1: String
+      AP_SOUTH_2: String
+      AP_SOUTHEAST_1: String
+      AP_SOUTHEAST_2: String
+      AP_SOUTHEAST_3: String
+      AP_SOUTHEAST_4: String
+      AP_SOUTHEAST_5: String
+      AP_SOUTHEAST_7: String
+      CA_CENTRAL_1: String
+      CA_WEST_1: String
+      CN_NORTH_1: String
+      CN_NORTHWEST_1: String
+      EU_CENTRAL_1: String
+      EU_CENTRAL_2: String
+      EU_NORTH_1: String
+      EU_SOUTH_1: String
+      EU_SOUTH_2: String
+      EU_WEST_1: String
+      EU_WEST_2: String
+      EU_WEST_3: String
+      IL_CENTRAL_1: String
+      ME_CENTRAL_1: String
+      ME_SOUTH_1: String
+      MX_CENTRAL_1: String
+      SA_EAST_1: String
+      US_EAST_1: String
+      US_EAST_2: String
+      US_WEST_1: String
+      US_WEST_2: String
+    end
+
+    class BatchGetMemberAccountDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class BatchGetMemberAccountDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::GetMembershipAccountDetailItem],
+        ?errors: Array[Types::GetMembershipAccountDetailError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::GetMembershipAccountDetailItem]?
+      attr_accessor errors: Array[Types::GetMembershipAccountDetailError]?
+    end
+
+    class CancelMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+    end
+
+    class CancelMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+    end
+
+    class CaseAttachmentAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?file_name: String,
+        ?attachment_status: String,
+        ?creator: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor file_name: String?
+      attr_accessor attachment_status: String?
+      attr_accessor creator: String?
+      attr_accessor created_date: Time?
+    end
+
+    module CaseAttachmentStatus
+      VERIFIED: String
+      FAILED: String
+      PENDING: String
+    end
+
+    class CaseEditItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_timestamp: Time,
+        ?principal: String,
+        ?action: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_timestamp: Time?
+      attr_accessor principal: String?
+      attr_accessor action: String?
+      attr_accessor message: String?
+    end
+
+    module CaseStatus
+      SUBMITTED: String
+      ACKNOWLEDGED: String
+      DETECTION_AND_ANALYSIS: String
+      CONTAINMENT_ERADICATION_AND_RECOVERY: String
+      POST_INCIDENT_ACTIVITIES: String
+      READY_TO_CLOSE: String
+      CLOSED: String
+    end
+
+    class CloseCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class CloseCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_status: String,
+        ?closed_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_status: String?
+      attr_accessor closed_date: Time?
+    end
+
+    module ClosureCode
+      INVESTIGATION_COMPLETED: String
+      NOT_RESOLVED: String
+      FALSE_POSITIVE: String
+      DUPLICATE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateCaseCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?client_token: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor client_token: String?
+      attr_accessor body: String?
+    end
+
+    class CreateCaseCommentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+    end
+
+    class CreateCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?resolver_type: String,
+        ?title: String,
+        ?description: String,
+        ?engagement_type: String,
+        ?reported_incident_start_date: Time,
+        ?impacted_accounts: Array[String],
+        ?watchers: Array[Types::Watcher],
+        ?threat_actor_ip_addresses: Array[Types::ThreatActorIp],
+        ?impacted_services: Array[String],
+        ?impacted_aws_regions: Array[Types::ImpactedAwsRegion],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor resolver_type: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor engagement_type: String?
+      attr_accessor reported_incident_start_date: Time?
+      attr_accessor impacted_accounts: Array[String]?
+      attr_accessor watchers: Array[Types::Watcher]?
+      attr_accessor threat_actor_ip_addresses: Array[Types::ThreatActorIp]?
+      attr_accessor impacted_services: Array[String]?
+      attr_accessor impacted_aws_regions: Array[Types::ImpactedAwsRegion]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class CreateMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?membership_name: String,
+        ?incident_response_team: Array[Types::IncidentResponder],
+        ?opt_in_features: Array[Types::OptInFeature],
+        ?tags: Hash[String, String],
+        ?cover_entire_organization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor membership_name: String?
+      attr_accessor incident_response_team: Array[Types::IncidentResponder]?
+      attr_accessor opt_in_features: Array[Types::OptInFeature]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor cover_entire_organization: bool?
+    end
+
+    class CreateMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+    end
+
+    module CustomerType
+      STANDALONE: String
+      ORGANIZATION: String
+    end
+
+    module EngagementType
+      SECURITY_INCIDENT: String
+      INVESTIGATION: String
+    end
+
+    class GetCaseAttachmentDownloadUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor attachment_id: String?
+    end
+
+    class GetCaseAttachmentDownloadUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_presigned_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_presigned_url: String?
+    end
+
+    class GetCaseAttachmentUploadUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?file_name: String,
+        ?content_length: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor file_name: String?
+      attr_accessor content_length: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class GetCaseAttachmentUploadUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_presigned_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_presigned_url: String?
+    end
+
+    class GetCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class GetCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?case_arn: String,
+        ?description: String,
+        ?case_status: String,
+        ?engagement_type: String,
+        ?reported_incident_start_date: Time,
+        ?actual_incident_start_date: Time,
+        ?impacted_aws_regions: Array[Types::ImpactedAwsRegion],
+        ?threat_actor_ip_addresses: Array[Types::ThreatActorIp],
+        ?pending_action: String,
+        ?impacted_accounts: Array[String],
+        ?watchers: Array[Types::Watcher],
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?closure_code: String,
+        ?resolver_type: String,
+        ?impacted_services: Array[String],
+        ?case_attachments: Array[Types::CaseAttachmentAttributes],
+        ?closed_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor case_arn: String?
+      attr_accessor description: String?
+      attr_accessor case_status: String?
+      attr_accessor engagement_type: String?
+      attr_accessor reported_incident_start_date: Time?
+      attr_accessor actual_incident_start_date: Time?
+      attr_accessor impacted_aws_regions: Array[Types::ImpactedAwsRegion]?
+      attr_accessor threat_actor_ip_addresses: Array[Types::ThreatActorIp]?
+      attr_accessor pending_action: String?
+      attr_accessor impacted_accounts: Array[String]?
+      attr_accessor watchers: Array[Types::Watcher]?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor closure_code: String?
+      attr_accessor resolver_type: String?
+      attr_accessor impacted_services: Array[String]?
+      attr_accessor case_attachments: Array[Types::CaseAttachmentAttributes]?
+      attr_accessor closed_date: Time?
+    end
+
+    class GetMembershipAccountDetailError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    class GetMembershipAccountDetailItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?relationship_status: String,
+        ?relationship_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor relationship_status: String?
+      attr_accessor relationship_type: String?
+    end
+
+    class GetMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+    end
+
+    class GetMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?membership_name: String,
+        ?membership_arn: String,
+        ?membership_status: String,
+        ?membership_activation_timestamp: Time,
+        ?membership_deactivation_timestamp: Time,
+        ?customer_type: String,
+        ?number_of_accounts_covered: Integer,
+        ?incident_response_team: Array[Types::IncidentResponder],
+        ?opt_in_features: Array[Types::OptInFeature],
+        ?membership_accounts_configurations: Types::MembershipAccountsConfigurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor membership_name: String?
+      attr_accessor membership_arn: String?
+      attr_accessor membership_status: String?
+      attr_accessor membership_activation_timestamp: Time?
+      attr_accessor membership_deactivation_timestamp: Time?
+      attr_accessor customer_type: String?
+      attr_accessor number_of_accounts_covered: Integer?
+      attr_accessor incident_response_team: Array[Types::IncidentResponder]?
+      attr_accessor opt_in_features: Array[Types::OptInFeature]?
+      attr_accessor membership_accounts_configurations: Types::MembershipAccountsConfigurations?
+    end
+
+    class ImpactedAwsRegion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+    end
+
+    class IncidentResponder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?job_title: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor job_title: String?
+      attr_accessor email: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class InvalidTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCaseEditsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor case_id: String?
+    end
+
+    class ListCaseEditsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::CaseEditItem],
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::CaseEditItem]?
+      attr_accessor total: Integer?
+    end
+
+    class ListCasesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?last_updated_date: Time,
+        ?title: String,
+        ?case_arn: String,
+        ?engagement_type: String,
+        ?case_status: String,
+        ?created_date: Time,
+        ?closed_date: Time,
+        ?resolver_type: String,
+        ?pending_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor title: String?
+      attr_accessor case_arn: String?
+      attr_accessor engagement_type: String?
+      attr_accessor case_status: String?
+      attr_accessor created_date: Time?
+      attr_accessor closed_date: Time?
+      attr_accessor resolver_type: String?
+      attr_accessor pending_action: String?
+    end
+
+    class ListCasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ListCasesItem],
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ListCasesItem]?
+      attr_accessor total: Integer?
+    end
+
+    class ListCommentsItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?creator: String,
+        ?last_updated_by: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor creator: String?
+      attr_accessor last_updated_by: String?
+      attr_accessor body: String?
+    end
+
+    class ListCommentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor case_id: String?
+    end
+
+    class ListCommentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ListCommentsItem],
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ListCommentsItem]?
+      attr_accessor total: Integer?
+    end
+
+    class ListMembershipItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?membership_arn: String,
+        ?membership_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor membership_arn: String?
+      attr_accessor membership_status: String?
+    end
+
+    class ListMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMembershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ListMembershipItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ListMembershipItem]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MembershipAccountRelationshipStatus
+      ASSOCIATED: String
+      DISASSOCIATED: String
+      UNASSOCIATED: String
+    end
+
+    module MembershipAccountRelationshipType
+      ORGANIZATION: String
+      UNRELATED: String
+    end
+
+    class MembershipAccountsConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cover_entire_organization: bool,
+        ?organizational_units: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cover_entire_organization: bool?
+      attr_accessor organizational_units: Array[String]?
+    end
+
+    class MembershipAccountsConfigurationsUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cover_entire_organization: bool,
+        ?organizational_units_to_add: Array[String],
+        ?organizational_units_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cover_entire_organization: bool?
+      attr_accessor organizational_units_to_add: Array[String]?
+      attr_accessor organizational_units_to_remove: Array[String]?
+    end
+
+    module MembershipStatus
+      ACTIVE: String
+      CANCELLED: String
+      TERMINATED: String
+    end
+
+    class OptInFeature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_name: String,
+        ?is_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_name: String?
+      attr_accessor is_enabled: bool?
+    end
+
+    module OptInFeatureName
+      TRIAGE: String
+    end
+
+    module PendingAction
+      CUSTOMER: String
+      NONE: String
+    end
+
+    module ResolverType
+      AWS: String
+      SELF: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SecurityIncidentResponseNotActiveException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SelfManagedCaseStatus
+      SUBMITTED: String
+      DETECTION_AND_ANALYSIS: String
+      CONTAINMENT_ERADICATION_AND_RECOVERY: String
+      POST_INCIDENT_ACTIVITIES: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThreatActorIp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?user_agent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor user_agent: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCaseCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?comment_id: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor comment_id: String?
+      attr_accessor body: String?
+    end
+
+    class UpdateCaseCommentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor body: String?
+    end
+
+    class UpdateCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?title: String,
+        ?description: String,
+        ?reported_incident_start_date: Time,
+        ?actual_incident_start_date: Time,
+        ?engagement_type: String,
+        ?watchers_to_add: Array[Types::Watcher],
+        ?watchers_to_delete: Array[Types::Watcher],
+        ?threat_actor_ip_addresses_to_add: Array[Types::ThreatActorIp],
+        ?threat_actor_ip_addresses_to_delete: Array[Types::ThreatActorIp],
+        ?impacted_services_to_add: Array[String],
+        ?impacted_services_to_delete: Array[String],
+        ?impacted_aws_regions_to_add: Array[Types::ImpactedAwsRegion],
+        ?impacted_aws_regions_to_delete: Array[Types::ImpactedAwsRegion],
+        ?impacted_accounts_to_add: Array[String],
+        ?impacted_accounts_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor reported_incident_start_date: Time?
+      attr_accessor actual_incident_start_date: Time?
+      attr_accessor engagement_type: String?
+      attr_accessor watchers_to_add: Array[Types::Watcher]?
+      attr_accessor watchers_to_delete: Array[Types::Watcher]?
+      attr_accessor threat_actor_ip_addresses_to_add: Array[Types::ThreatActorIp]?
+      attr_accessor threat_actor_ip_addresses_to_delete: Array[Types::ThreatActorIp]?
+      attr_accessor impacted_services_to_add: Array[String]?
+      attr_accessor impacted_services_to_delete: Array[String]?
+      attr_accessor impacted_aws_regions_to_add: Array[Types::ImpactedAwsRegion]?
+      attr_accessor impacted_aws_regions_to_delete: Array[Types::ImpactedAwsRegion]?
+      attr_accessor impacted_accounts_to_add: Array[String]?
+      attr_accessor impacted_accounts_to_delete: Array[String]?
+    end
+
+    class UpdateCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCaseStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?case_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor case_status: String?
+    end
+
+    class UpdateCaseStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_status: String?
+    end
+
+    class UpdateMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?membership_name: String,
+        ?incident_response_team: Array[Types::IncidentResponder],
+        ?opt_in_features: Array[Types::OptInFeature],
+        ?membership_accounts_configurations_update: Types::MembershipAccountsConfigurationsUpdate,
+        ?undo_membership_cancellation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor membership_name: String?
+      attr_accessor incident_response_team: Array[Types::IncidentResponder]?
+      attr_accessor opt_in_features: Array[Types::OptInFeature]?
+      attr_accessor membership_accounts_configurations_update: Types::MembershipAccountsConfigurationsUpdate?
+      attr_accessor undo_membership_cancellation: bool?
+    end
+
+    class UpdateMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResolverTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?resolver_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor resolver_type: String?
+    end
+
+    class UpdateResolverTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?case_status: String,
+        ?resolver_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor case_status: String?
+      attr_accessor resolver_type: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class Watcher
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?name: String,
+        ?job_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor job_title: String?
+    end
+  end
+end

@@ -1,0 +1,100 @@
+module Aws::Chatbot
+  module Errors
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreateChimeWebhookConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreateSlackChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreateTeamsChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteChimeWebhookConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteMicrosoftTeamsUserIdentityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteSlackChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteSlackUserIdentityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteSlackWorkspaceAuthorizationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteTeamsChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteTeamsConfiguredTeamException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescribeChimeWebhookConfigurationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescribeSlackChannelConfigurationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescribeSlackUserIdentitiesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescribeSlackWorkspacesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GetAccountPreferencesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GetTeamsChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListMicrosoftTeamsConfiguredTeamsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListMicrosoftTeamsUserIdentitiesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListTeamsChannelConfigurationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateAccountPreferencesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateChimeWebhookConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateSlackChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateTeamsChannelConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

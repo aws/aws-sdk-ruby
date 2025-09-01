@@ -1,0 +1,91 @@
+module Aws::QuickSight
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ConcurrentUpdatingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class CustomerManagedKeyUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DomainNotWhitelistedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class IdentityTypeNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def request_id: () -> String?
+    end
+    class PreconditionNotMetException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class QuickSightUserNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ResourceExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def request_id: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def request_id: () -> String?
+    end
+    class ResourceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def request_id: () -> String?
+    end
+    class SessionLifetimeInMinutesInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnsupportedPricingPlanException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnsupportedUserEditionException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+  end
+end

@@ -1,0 +1,1357 @@
+module Aws::VoiceID
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateFraudsterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?fraudster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor fraudster_id: String?
+    end
+
+    class AssociateFraudsterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraudster: Types::Fraudster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraudster: Types::Fraudster?
+    end
+
+    class AuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acceptance_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acceptance_threshold: Integer?
+    end
+
+    class AuthenticationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_result_id: String,
+        ?audio_aggregation_started_at: Time,
+        ?audio_aggregation_ended_at: Time,
+        ?customer_speaker_id: String,
+        ?generated_speaker_id: String,
+        ?decision: String,
+        ?score: Integer,
+        ?configuration: Types::AuthenticationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_result_id: String?
+      attr_accessor audio_aggregation_started_at: Time?
+      attr_accessor audio_aggregation_ended_at: Time?
+      attr_accessor customer_speaker_id: String?
+      attr_accessor generated_speaker_id: String?
+      attr_accessor decision: String?
+      attr_accessor score: Integer?
+      attr_accessor configuration: Types::AuthenticationConfiguration?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?conflict_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor conflict_type: String?
+    end
+
+    class CreateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::Domain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::Domain?
+    end
+
+    class CreateWatchlistInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateWatchlistOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?watchlist: Types::Watchlist,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor watchlist: Types::Watchlist?
+    end
+
+    class DeleteDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class DeleteFraudsterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?fraudster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor fraudster_id: String?
+    end
+
+    class DeleteSpeakerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?speaker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor speaker_id: String?
+    end
+
+    class DeleteWatchlistInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+    end
+
+    class DescribeDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class DescribeDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::Domain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::Domain?
+    end
+
+    class DescribeFraudsterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?fraudster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor fraudster_id: String?
+    end
+
+    class DescribeFraudsterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraudster: Types::Fraudster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraudster: Types::Fraudster?
+    end
+
+    class DescribeFraudsterRegistrationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeFraudsterRegistrationJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::FraudsterRegistrationJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::FraudsterRegistrationJob?
+    end
+
+    class DescribeSpeakerEnrollmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeSpeakerEnrollmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::SpeakerEnrollmentJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::SpeakerEnrollmentJob?
+    end
+
+    class DescribeSpeakerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?speaker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor speaker_id: String?
+    end
+
+    class DescribeSpeakerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker: Types::Speaker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker: Types::Speaker?
+    end
+
+    class DescribeWatchlistInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+    end
+
+    class DescribeWatchlistOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?watchlist: Types::Watchlist,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor watchlist: Types::Watchlist?
+    end
+
+    class DisassociateFraudsterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?fraudster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor fraudster_id: String?
+    end
+
+    class DisassociateFraudsterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraudster: Types::Fraudster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraudster: Types::Fraudster?
+    end
+
+    class Domain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?domain_status: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails,
+        ?watchlist_details: Types::WatchlistDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain_status: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails?
+      attr_accessor watchlist_details: Types::WatchlistDetails?
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?domain_status: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails,
+        ?watchlist_details: Types::WatchlistDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain_status: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails?
+      attr_accessor watchlist_details: Types::WatchlistDetails?
+    end
+
+    class EnrollmentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?existing_enrollment_action: String,
+        ?fraud_detection_config: Types::EnrollmentJobFraudDetectionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor existing_enrollment_action: String?
+      attr_accessor fraud_detection_config: Types::EnrollmentJobFraudDetectionConfig?
+    end
+
+    class EnrollmentJobFraudDetectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraud_detection_action: String,
+        ?risk_threshold: Integer,
+        ?watchlist_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraud_detection_action: String?
+      attr_accessor risk_threshold: Integer?
+      attr_accessor watchlist_ids: Array[String]?
+    end
+
+    class EvaluateSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?session_name_or_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor session_name_or_id: String?
+    end
+
+    class EvaluateSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?session_id: String,
+        ?session_name: String,
+        ?streaming_status: String,
+        ?authentication_result: Types::AuthenticationResult,
+        ?fraud_detection_result: Types::FraudDetectionResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor session_id: String?
+      attr_accessor session_name: String?
+      attr_accessor streaming_status: String?
+      attr_accessor authentication_result: Types::AuthenticationResult?
+      attr_accessor fraud_detection_result: Types::FraudDetectionResult?
+    end
+
+    class FailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+      attr_accessor message: String?
+    end
+
+    class FraudDetectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?risk_threshold: Integer,
+        ?watchlist_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor risk_threshold: Integer?
+      attr_accessor watchlist_id: String?
+    end
+
+    class FraudDetectionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraud_detection_result_id: String,
+        ?audio_aggregation_started_at: Time,
+        ?audio_aggregation_ended_at: Time,
+        ?configuration: Types::FraudDetectionConfiguration,
+        ?decision: String,
+        ?reasons: Array[String],
+        ?risk_details: Types::FraudRiskDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraud_detection_result_id: String?
+      attr_accessor audio_aggregation_started_at: Time?
+      attr_accessor audio_aggregation_ended_at: Time?
+      attr_accessor configuration: Types::FraudDetectionConfiguration?
+      attr_accessor decision: String?
+      attr_accessor reasons: Array[String]?
+      attr_accessor risk_details: Types::FraudRiskDetails?
+    end
+
+    class FraudRiskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?known_fraudster_risk: Types::KnownFraudsterRisk,
+        ?voice_spoofing_risk: Types::VoiceSpoofingRisk,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor known_fraudster_risk: Types::KnownFraudsterRisk?
+      attr_accessor voice_spoofing_risk: Types::VoiceSpoofingRisk?
+    end
+
+    class Fraudster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?generated_fraudster_id: String,
+        ?created_at: Time,
+        ?watchlist_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor generated_fraudster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor watchlist_ids: Array[String]?
+    end
+
+    class FraudsterRegistrationJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_id: String,
+        ?job_status: String,
+        ?domain_id: String,
+        ?data_access_role_arn: String,
+        ?registration_config: Types::RegistrationConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?failure_details: Types::FailureDetails,
+        ?job_progress: Types::JobProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor domain_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor registration_config: Types::RegistrationConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor job_progress: Types::JobProgress?
+    end
+
+    class FraudsterRegistrationJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_id: String,
+        ?job_status: String,
+        ?domain_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?failure_details: Types::FailureDetails,
+        ?job_progress: Types::JobProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor domain_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor job_progress: Types::JobProgress?
+    end
+
+    class FraudsterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?generated_fraudster_id: String,
+        ?created_at: Time,
+        ?watchlist_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor generated_fraudster_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor watchlist_ids: Array[String]?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percent_complete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percent_complete: Integer?
+    end
+
+    class KnownFraudsterRisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?risk_score: Integer,
+        ?generated_fraudster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor risk_score: Integer?
+      attr_accessor generated_fraudster_id: String?
+    end
+
+    class ListDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_summaries: Array[Types::DomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_summaries: Array[Types::DomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFraudsterRegistrationJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?job_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor job_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFraudsterRegistrationJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::FraudsterRegistrationJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::FraudsterRegistrationJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFraudstersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFraudstersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fraudster_summaries: Array[Types::FraudsterSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fraudster_summaries: Array[Types::FraudsterSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpeakerEnrollmentJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?job_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor job_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpeakerEnrollmentJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::SpeakerEnrollmentJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::SpeakerEnrollmentJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpeakersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpeakersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_summaries: Array[Types::SpeakerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_summaries: Array[Types::SpeakerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWatchlistsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWatchlistsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?watchlist_summaries: Array[Types::WatchlistSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor watchlist_summaries: Array[Types::WatchlistSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class OptOutSpeakerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?speaker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor speaker_id: String?
+    end
+
+    class OptOutSpeakerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker: Types::Speaker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker: Types::Speaker?
+    end
+
+    class OutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class RegistrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duplicate_registration_action: String,
+        ?fraudster_similarity_threshold: Integer,
+        ?watchlist_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duplicate_registration_action: String?
+      attr_accessor fraudster_similarity_threshold: Integer?
+      attr_accessor watchlist_ids: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServerSideEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+    end
+
+    class ServerSideEncryptionUpdateDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?old_kms_key_id: String,
+        ?update_status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor old_kms_key_id: String?
+      attr_accessor update_status: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Speaker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?customer_speaker_id: String,
+        ?generated_speaker_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?last_accessed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor customer_speaker_id: String?
+      attr_accessor generated_speaker_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor last_accessed_at: Time?
+    end
+
+    class SpeakerEnrollmentJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_id: String,
+        ?job_status: String,
+        ?domain_id: String,
+        ?data_access_role_arn: String,
+        ?enrollment_config: Types::EnrollmentConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?failure_details: Types::FailureDetails,
+        ?job_progress: Types::JobProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor domain_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor enrollment_config: Types::EnrollmentConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor job_progress: Types::JobProgress?
+    end
+
+    class SpeakerEnrollmentJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_id: String,
+        ?job_status: String,
+        ?domain_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?failure_details: Types::FailureDetails,
+        ?job_progress: Types::JobProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor domain_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor job_progress: Types::JobProgress?
+    end
+
+    class SpeakerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?customer_speaker_id: String,
+        ?generated_speaker_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?last_accessed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor customer_speaker_id: String?
+      attr_accessor generated_speaker_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor last_accessed_at: Time?
+    end
+
+    class StartFraudsterRegistrationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?job_name: String,
+        ?domain_id: String,
+        ?data_access_role_arn: String,
+        ?registration_config: Types::RegistrationConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor job_name: String?
+      attr_accessor domain_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor registration_config: Types::RegistrationConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+    end
+
+    class StartFraudsterRegistrationJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::FraudsterRegistrationJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::FraudsterRegistrationJob?
+    end
+
+    class StartSpeakerEnrollmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?job_name: String,
+        ?domain_id: String,
+        ?data_access_role_arn: String,
+        ?enrollment_config: Types::EnrollmentConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor job_name: String?
+      attr_accessor domain_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor enrollment_config: Types::EnrollmentConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+    end
+
+    class StartSpeakerEnrollmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::SpeakerEnrollmentJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::SpeakerEnrollmentJob?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?description: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+    end
+
+    class UpdateDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::Domain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::Domain?
+    end
+
+    class UpdateWatchlistInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateWatchlistOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?watchlist: Types::Watchlist,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor watchlist: Types::Watchlist?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VoiceSpoofingRisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?risk_score: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor risk_score: Integer?
+    end
+
+    class Watchlist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?name: String,
+        ?description: String,
+        ?default_watchlist: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor default_watchlist: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class WatchlistDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_watchlist_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_watchlist_id: String?
+    end
+
+    class WatchlistSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?watchlist_id: String,
+        ?name: String,
+        ?description: String,
+        ?default_watchlist: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor watchlist_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor default_watchlist: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+  end
+end

@@ -1,0 +1,1603 @@
+module Aws::SageMakerGeospatial
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AreaOfInterest
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?area_of_interest_geometry: Types::AreaOfInterestGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor area_of_interest_geometry: Types::AreaOfInterestGeometry?
+
+      class AreaOfInterestGeometry < AreaOfInterest
+      end
+      class Unknown < AreaOfInterest
+      end
+    end
+
+    class AreaOfInterestGeometry
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?polygon_geometry: Types::PolygonGeometryInput,
+        ?multi_polygon_geometry: Types::MultiPolygonGeometryInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polygon_geometry: Types::PolygonGeometryInput?
+      attr_accessor multi_polygon_geometry: Types::MultiPolygonGeometryInput?
+
+      class PolygonGeometry < AreaOfInterestGeometry
+      end
+      class MultiPolygonGeometry < AreaOfInterestGeometry
+      end
+      class Unknown < AreaOfInterestGeometry
+      end
+    end
+
+    class AssetValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?href: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor href: String?
+    end
+
+    class BandMathConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_indices: Array[String],
+        ?custom_indices: Types::CustomIndicesInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_indices: Array[String]?
+      attr_accessor custom_indices: Types::CustomIndicesInput?
+    end
+
+    class CloudMaskingConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CloudRemovalConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_name: String,
+        ?interpolation_value: String,
+        ?target_bands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_name: String?
+      attr_accessor interpolation_value: String?
+      attr_accessor target_bands: Array[String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class CustomIndicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::Operation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::Operation]?
+    end
+
+    class DeleteEarthObservationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteEarthObservationJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVectorEnrichmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteVectorEnrichmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EarthObservationJobErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EoCloudCoverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound: Float,
+        ?upper_bound: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound: Float?
+      attr_accessor upper_bound: Float?
+    end
+
+    class ExportEarthObservationJobOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?client_token: String,
+        ?execution_role_arn: String,
+        ?output_config: Types::OutputConfigInput,
+        ?export_source_images: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor output_config: Types::OutputConfigInput?
+      attr_accessor export_source_images: bool?
+    end
+
+    class ExportEarthObservationJobOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?export_status: String,
+        ?execution_role_arn: String,
+        ?output_config: Types::OutputConfigInput,
+        ?export_source_images: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor export_status: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor output_config: Types::OutputConfigInput?
+      attr_accessor export_source_images: bool?
+    end
+
+    class ExportErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_results: Types::ExportErrorDetailsOutput,
+        ?export_source_images: Types::ExportErrorDetailsOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_results: Types::ExportErrorDetailsOutput?
+      attr_accessor export_source_images: Types::ExportErrorDetailsOutput?
+    end
+
+    class ExportErrorDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ExportS3DataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ExportVectorEnrichmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?client_token: String,
+        ?execution_role_arn: String,
+        ?output_config: Types::ExportVectorEnrichmentJobOutputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor output_config: Types::ExportVectorEnrichmentJobOutputConfig?
+    end
+
+    class ExportVectorEnrichmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?execution_role_arn: String,
+        ?export_status: String,
+        ?output_config: Types::ExportVectorEnrichmentJobOutputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor execution_role_arn: String?
+      attr_accessor export_status: String?
+      attr_accessor output_config: Types::ExportVectorEnrichmentJobOutputConfig?
+    end
+
+    class ExportVectorEnrichmentJobOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data: Types::VectorEnrichmentJobS3Data,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data: Types::VectorEnrichmentJobS3Data?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?minimum: Float,
+        ?maximum: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor minimum: Float?
+      attr_accessor maximum: Float?
+    end
+
+    class GeoMosaicConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_name: String,
+        ?target_bands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_name: String?
+      attr_accessor target_bands: Array[String]?
+    end
+
+    class Geometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?coordinates: Array[Array[Array[Float]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor coordinates: Array[Array[Array[Float]]]?
+    end
+
+    class GetEarthObservationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetEarthObservationJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?kms_key_id: String,
+        ?input_config: Types::InputConfigOutput,
+        ?job_config: Types::JobConfigInput,
+        ?output_bands: Array[Types::OutputBand],
+        ?execution_role_arn: String,
+        ?error_details: Types::EarthObservationJobErrorDetails,
+        ?export_status: String,
+        ?export_error_details: Types::ExportErrorDetails,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::InputConfigOutput?
+      attr_accessor job_config: Types::JobConfigInput?
+      attr_accessor output_bands: Array[Types::OutputBand]?
+      attr_accessor execution_role_arn: String?
+      attr_accessor error_details: Types::EarthObservationJobErrorDetails?
+      attr_accessor export_status: String?
+      attr_accessor export_error_details: Types::ExportErrorDetails?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetRasterDataCollectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRasterDataCollectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?type: String,
+        ?description: String,
+        ?description_page_url: String,
+        ?supported_filters: Array[Types::Filter],
+        ?image_source_bands: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor description_page_url: String?
+      attr_accessor supported_filters: Array[Types::Filter]?
+      attr_accessor image_source_bands: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetTileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?x: Integer,
+        ?y: Integer,
+        ?z: Integer,
+        ?image_assets: Array[String],
+        ?target: String,
+        ?arn: String,
+        ?image_mask: bool,
+        ?output_format: String,
+        ?time_range_filter: String,
+        ?property_filters: String,
+        ?output_data_type: String,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x: Integer?
+      attr_accessor y: Integer?
+      attr_accessor z: Integer?
+      attr_accessor image_assets: Array[String]?
+      attr_accessor target: String?
+      attr_accessor arn: String?
+      attr_accessor image_mask: bool?
+      attr_accessor output_format: String?
+      attr_accessor time_range_filter: String?
+      attr_accessor property_filters: String?
+      attr_accessor output_data_type: String?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class GetTileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?binary_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor binary_file: String?
+    end
+
+    class GetVectorEnrichmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetVectorEnrichmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?name: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?kms_key_id: String,
+        ?input_config: Types::VectorEnrichmentJobInputConfig,
+        ?job_config: Types::VectorEnrichmentJobConfig,
+        ?execution_role_arn: String,
+        ?error_details: Types::VectorEnrichmentJobErrorDetails,
+        ?export_status: String,
+        ?export_error_details: Types::VectorEnrichmentJobExportErrorDetails,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig?
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor error_details: Types::VectorEnrichmentJobErrorDetails?
+      attr_accessor export_status: String?
+      attr_accessor export_error_details: Types::VectorEnrichmentJobExportErrorDetails?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InputConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?previous_earth_observation_job_arn: String,
+        ?raster_data_collection_query: Types::RasterDataCollectionQueryInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor previous_earth_observation_job_arn: String?
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryInput?
+    end
+
+    class InputConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?previous_earth_observation_job_arn: String,
+        ?raster_data_collection_query: Types::RasterDataCollectionQueryOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor previous_earth_observation_job_arn: String?
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryOutput?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ItemSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?geometry: Types::Geometry,
+        ?assets: Hash[String, Types::AssetValue],
+        ?date_time: Time,
+        ?properties: Types::Properties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor geometry: Types::Geometry?
+      attr_accessor assets: Hash[String, Types::AssetValue]?
+      attr_accessor date_time: Time?
+      attr_accessor properties: Types::Properties?
+    end
+
+    class JobConfigInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?band_math_config: Types::BandMathConfigInput,
+        ?resampling_config: Types::ResamplingConfigInput,
+        ?temporal_statistics_config: Types::TemporalStatisticsConfigInput,
+        ?cloud_removal_config: Types::CloudRemovalConfigInput,
+        ?zonal_statistics_config: Types::ZonalStatisticsConfigInput,
+        ?geo_mosaic_config: Types::GeoMosaicConfigInput,
+        ?stack_config: Types::StackConfigInput,
+        ?cloud_masking_config: Types::CloudMaskingConfigInput,
+        ?land_cover_segmentation_config: Types::LandCoverSegmentationConfigInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor band_math_config: Types::BandMathConfigInput?
+      attr_accessor resampling_config: Types::ResamplingConfigInput?
+      attr_accessor temporal_statistics_config: Types::TemporalStatisticsConfigInput?
+      attr_accessor cloud_removal_config: Types::CloudRemovalConfigInput?
+      attr_accessor zonal_statistics_config: Types::ZonalStatisticsConfigInput?
+      attr_accessor geo_mosaic_config: Types::GeoMosaicConfigInput?
+      attr_accessor stack_config: Types::StackConfigInput?
+      attr_accessor cloud_masking_config: Types::CloudMaskingConfigInput?
+      attr_accessor land_cover_segmentation_config: Types::LandCoverSegmentationConfigInput?
+
+      class BandMathConfig < JobConfigInput
+      end
+      class ResamplingConfig < JobConfigInput
+      end
+      class TemporalStatisticsConfig < JobConfigInput
+      end
+      class CloudRemovalConfig < JobConfigInput
+      end
+      class ZonalStatisticsConfig < JobConfigInput
+      end
+      class GeoMosaicConfig < JobConfigInput
+      end
+      class StackConfig < JobConfigInput
+      end
+      class CloudMaskingConfig < JobConfigInput
+      end
+      class LandCoverSegmentationConfig < JobConfigInput
+      end
+      class Unknown < JobConfigInput
+      end
+    end
+
+    class LandCoverSegmentationConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class LandsatCloudCoverLandInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound: Float,
+        ?upper_bound: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound: Float?
+      attr_accessor upper_bound: Float?
+    end
+
+    class ListEarthObservationJobOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?operation_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor operation_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListEarthObservationJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_equals: String,
+        ?sort_order: String,
+        ?sort_by: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_equals: String?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEarthObservationJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?earth_observation_job_summaries: Array[Types::ListEarthObservationJobOutputConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor earth_observation_job_summaries: Array[Types::ListEarthObservationJobOutputConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRasterDataCollectionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRasterDataCollectionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?raster_data_collection_summaries: Array[Types::RasterDataCollectionMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor raster_data_collection_summaries: Array[Types::RasterDataCollectionMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVectorEnrichmentJobOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVectorEnrichmentJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_equals: String,
+        ?sort_order: String,
+        ?sort_by: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_equals: String?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVectorEnrichmentJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_enrichment_job_summaries: Array[Types::ListVectorEnrichmentJobOutputConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_enrichment_job_summaries: Array[Types::ListVectorEnrichmentJobOutputConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class MapMatchingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_attribute_name: String,
+        ?y_attribute_name: String,
+        ?x_attribute_name: String,
+        ?timestamp_attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_attribute_name: String?
+      attr_accessor y_attribute_name: String?
+      attr_accessor x_attribute_name: String?
+      attr_accessor timestamp_attribute_name: String?
+    end
+
+    class MultiPolygonGeometryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coordinates: Array[Array[Array[Array[Float]]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coordinates: Array[Array[Array[Array[Float]]]]?
+    end
+
+    class Operation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?equation: String,
+        ?output_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor equation: String?
+      attr_accessor output_type: String?
+    end
+
+    class OutputBand
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?band_name: String,
+        ?output_data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor band_name: String?
+      attr_accessor output_data_type: String?
+    end
+
+    class OutputConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data: Types::ExportS3DataInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data: Types::ExportS3DataInput?
+    end
+
+    class OutputResolutionResamplingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_defined: Types::UserDefined,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_defined: Types::UserDefined?
+    end
+
+    class OutputResolutionStackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined: String,
+        ?user_defined: Types::UserDefined,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined: String?
+      attr_accessor user_defined: Types::UserDefined?
+    end
+
+    class PlatformInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor comparison_operator: String?
+    end
+
+    class PolygonGeometryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coordinates: Array[Array[Array[Float]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coordinates: Array[Array[Array[Float]]]?
+    end
+
+    class Properties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eo_cloud_cover: Float,
+        ?view_off_nadir: Float,
+        ?view_sun_azimuth: Float,
+        ?view_sun_elevation: Float,
+        ?platform: String,
+        ?landsat_cloud_cover_land: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eo_cloud_cover: Float?
+      attr_accessor view_off_nadir: Float?
+      attr_accessor view_sun_azimuth: Float?
+      attr_accessor view_sun_elevation: Float?
+      attr_accessor platform: String?
+      attr_accessor landsat_cloud_cover_land: Float?
+    end
+
+    class Property
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?eo_cloud_cover: Types::EoCloudCoverInput,
+        ?view_off_nadir: Types::ViewOffNadirInput,
+        ?view_sun_azimuth: Types::ViewSunAzimuthInput,
+        ?view_sun_elevation: Types::ViewSunElevationInput,
+        ?platform: Types::PlatformInput,
+        ?landsat_cloud_cover_land: Types::LandsatCloudCoverLandInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eo_cloud_cover: Types::EoCloudCoverInput?
+      attr_accessor view_off_nadir: Types::ViewOffNadirInput?
+      attr_accessor view_sun_azimuth: Types::ViewSunAzimuthInput?
+      attr_accessor view_sun_elevation: Types::ViewSunElevationInput?
+      attr_accessor platform: Types::PlatformInput?
+      attr_accessor landsat_cloud_cover_land: Types::LandsatCloudCoverLandInput?
+
+      class EoCloudCover < Property
+      end
+      class ViewOffNadir < Property
+      end
+      class ViewSunAzimuth < Property
+      end
+      class ViewSunElevation < Property
+      end
+      class Platform < Property
+      end
+      class LandsatCloudCoverLand < Property
+      end
+      class Unknown < Property
+      end
+    end
+
+    class PropertyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property: Types::Property,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property: Types::Property?
+    end
+
+    class PropertyFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?properties: Array[Types::PropertyFilter],
+        ?logical_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor properties: Array[Types::PropertyFilter]?
+      attr_accessor logical_operator: String?
+    end
+
+    class RasterDataCollectionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?type: String,
+        ?description: String,
+        ?description_page_url: String,
+        ?supported_filters: Array[Types::Filter],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor description_page_url: String?
+      attr_accessor supported_filters: Array[Types::Filter]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RasterDataCollectionQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?raster_data_collection_arn: String,
+        ?time_range_filter: Types::TimeRangeFilterInput,
+        ?area_of_interest: Types::AreaOfInterest,
+        ?property_filters: Types::PropertyFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor raster_data_collection_arn: String?
+      attr_accessor time_range_filter: Types::TimeRangeFilterInput?
+      attr_accessor area_of_interest: Types::AreaOfInterest?
+      attr_accessor property_filters: Types::PropertyFilters?
+    end
+
+    class RasterDataCollectionQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?raster_data_collection_arn: String,
+        ?raster_data_collection_name: String,
+        ?time_range_filter: Types::TimeRangeFilterOutput,
+        ?area_of_interest: Types::AreaOfInterest,
+        ?property_filters: Types::PropertyFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor raster_data_collection_arn: String?
+      attr_accessor raster_data_collection_name: String?
+      attr_accessor time_range_filter: Types::TimeRangeFilterOutput?
+      attr_accessor area_of_interest: Types::AreaOfInterest?
+      attr_accessor property_filters: Types::PropertyFilters?
+    end
+
+    class RasterDataCollectionQueryWithBandFilterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range_filter: Types::TimeRangeFilterInput,
+        ?area_of_interest: Types::AreaOfInterest,
+        ?property_filters: Types::PropertyFilters,
+        ?band_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range_filter: Types::TimeRangeFilterInput?
+      attr_accessor area_of_interest: Types::AreaOfInterest?
+      attr_accessor property_filters: Types::PropertyFilters?
+      attr_accessor band_filter: Array[String]?
+    end
+
+    class ResamplingConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_resolution: Types::OutputResolutionResamplingInput,
+        ?algorithm_name: String,
+        ?target_bands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_resolution: Types::OutputResolutionResamplingInput?
+      attr_accessor algorithm_name: String?
+      attr_accessor target_bands: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ReverseGeocodingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?y_attribute_name: String,
+        ?x_attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor y_attribute_name: String?
+      attr_accessor x_attribute_name: String?
+    end
+
+    class SearchRasterDataCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?raster_data_collection_query: Types::RasterDataCollectionQueryWithBandFilterInput,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryWithBandFilterInput?
+      attr_accessor next_token: String?
+    end
+
+    class SearchRasterDataCollectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_result_count: Integer,
+        ?next_token: String,
+        ?items: Array[Types::ItemSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_result_count: Integer?
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ItemSource]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class StackConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_resolution: Types::OutputResolutionStackInput,
+        ?target_bands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_resolution: Types::OutputResolutionStackInput?
+      attr_accessor target_bands: Array[String]?
+    end
+
+    class StartEarthObservationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?kms_key_id: String,
+        ?input_config: Types::InputConfigInput,
+        ?job_config: Types::JobConfigInput,
+        ?execution_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::InputConfigInput?
+      attr_accessor job_config: Types::JobConfigInput?
+      attr_accessor execution_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartEarthObservationJobOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?kms_key_id: String,
+        ?input_config: Types::InputConfigOutput,
+        ?job_config: Types::JobConfigInput,
+        ?execution_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::InputConfigOutput?
+      attr_accessor job_config: Types::JobConfigInput?
+      attr_accessor execution_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartVectorEnrichmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?kms_key_id: String,
+        ?input_config: Types::VectorEnrichmentJobInputConfig,
+        ?job_config: Types::VectorEnrichmentJobConfig,
+        ?execution_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig?
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartVectorEnrichmentJobOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?type: String,
+        ?creation_time: Time,
+        ?duration_in_seconds: Integer,
+        ?status: String,
+        ?kms_key_id: String,
+        ?input_config: Types::VectorEnrichmentJobInputConfig,
+        ?job_config: Types::VectorEnrichmentJobConfig,
+        ?execution_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig?
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StopEarthObservationJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StopEarthObservationJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopVectorEnrichmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StopVectorEnrichmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemporalStatisticsConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_by: String,
+        ?statistics: Array[String],
+        ?target_bands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_by: String?
+      attr_accessor statistics: Array[String]?
+      attr_accessor target_bands: Array[String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class TimeRangeFilterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class TimeRangeFilterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UserDefined
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class VectorEnrichmentJobConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?reverse_geocoding_config: Types::ReverseGeocodingConfig,
+        ?map_matching_config: Types::MapMatchingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reverse_geocoding_config: Types::ReverseGeocodingConfig?
+      attr_accessor map_matching_config: Types::MapMatchingConfig?
+
+      class ReverseGeocodingConfig < VectorEnrichmentJobConfig
+      end
+      class MapMatchingConfig < VectorEnrichmentJobConfig
+      end
+      class Unknown < VectorEnrichmentJobConfig
+      end
+    end
+
+    class VectorEnrichmentJobDataSourceConfigInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_data: Types::VectorEnrichmentJobS3Data,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data: Types::VectorEnrichmentJobS3Data?
+
+      class S3Data < VectorEnrichmentJobDataSourceConfigInput
+      end
+      class Unknown < VectorEnrichmentJobDataSourceConfigInput
+      end
+    end
+
+    class VectorEnrichmentJobErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_type: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_type: String?
+      attr_accessor error_message: String?
+    end
+
+    class VectorEnrichmentJobExportErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class VectorEnrichmentJobInputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_type: String,
+        ?data_source_config: Types::VectorEnrichmentJobDataSourceConfigInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_type: String?
+      attr_accessor data_source_config: Types::VectorEnrichmentJobDataSourceConfigInput?
+    end
+
+    class VectorEnrichmentJobS3Data
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ViewOffNadirInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound: Float,
+        ?upper_bound: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound: Float?
+      attr_accessor upper_bound: Float?
+    end
+
+    class ViewSunAzimuthInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound: Float,
+        ?upper_bound: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound: Float?
+      attr_accessor upper_bound: Float?
+    end
+
+    class ViewSunElevationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound: Float,
+        ?upper_bound: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound: Float?
+      attr_accessor upper_bound: Float?
+    end
+
+    class ZonalStatisticsConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zone_s3_path: String,
+        ?statistics: Array[String],
+        ?target_bands: Array[String],
+        ?zone_s3_path_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zone_s3_path: String?
+      attr_accessor statistics: Array[String]?
+      attr_accessor target_bands: Array[String]?
+      attr_accessor zone_s3_path_kms_key_id: String?
+    end
+  end
+end

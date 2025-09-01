@@ -1,0 +1,587 @@
+module Aws::NeptuneGraph
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NeptuneGraph::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelExportTaskResponse
+      include Smithy::Client::_Response[Types::CancelExportTaskOutput]
+      def graph_id: () -> String?
+      def role_arn: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def format: () -> String?
+      def destination: () -> String?
+      def kms_key_identifier: () -> String?
+      def parquet_type: () -> String?
+      def status_reason: () -> String?
+    end
+    def cancel_export_task: (
+      ?task_identifier: String
+    ) -> _CancelExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelExportTaskResponse
+
+    interface _CancelImportTaskResponse
+      include Smithy::Client::_Response[Types::CancelImportTaskOutput]
+      def graph_id: () -> String?
+      def task_id: () -> String?
+      def source: () -> String?
+      def format: () -> String?
+      def parquet_type: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+    end
+    def cancel_import_task: (
+      ?task_identifier: String
+    ) -> _CancelImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelImportTaskResponse
+
+    interface _CancelQueryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_query: (
+      ?graph_identifier: String,
+      ?query_id: String
+    ) -> _CancelQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelQueryResponse
+
+    interface _CreateGraphResponse
+      include Smithy::Client::_Response[Types::CreateGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def create_graph: (
+      ?graph_name: String,
+      ?tags: Hash[String, String],
+      ?public_connectivity: bool,
+      ?kms_key_identifier: String,
+      ?vector_search_configuration: {
+        dimension: Integer
+      },
+      ?replica_count: Integer,
+      ?deletion_protection: bool,
+      ?provisioned_memory: Integer
+    ) -> _CreateGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGraphResponse
+
+    interface _CreateGraphSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateGraphSnapshotOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def source_graph_id: () -> String?
+      def snapshot_create_time: () -> Time?
+      def status: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def create_graph_snapshot: (
+      ?graph_identifier: String,
+      ?snapshot_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateGraphSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGraphSnapshotResponse
+
+    interface _CreateGraphUsingImportTaskResponse
+      include Smithy::Client::_Response[Types::CreateGraphUsingImportTaskOutput]
+      def graph_id: () -> String?
+      def task_id: () -> String?
+      def source: () -> String?
+      def format: () -> String?
+      def parquet_type: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def import_options: () -> Types::ImportOptions?
+    end
+    def create_graph_using_import_task: (
+      ?graph_name: String,
+      ?tags: Hash[String, String],
+      ?public_connectivity: bool,
+      ?kms_key_identifier: String,
+      ?vector_search_configuration: {
+        dimension: Integer
+      },
+      ?replica_count: Integer,
+      ?deletion_protection: bool,
+      ?import_options: {
+        neptune: {
+          s3_export_path: String,
+          s3_export_kms_key_id: untyped,
+          preserve_default_vertex_labels: bool,
+          preserve_edge_ids: untyped
+        }
+      },
+      ?max_provisioned_memory: Integer,
+      ?min_provisioned_memory: Integer,
+      ?fail_on_error: bool,
+      ?source: String,
+      ?format: String,
+      ?parquet_type: String,
+      ?blank_node_handling: String,
+      ?role_arn: String
+    ) -> _CreateGraphUsingImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGraphUsingImportTaskResponse
+
+    interface _CreatePrivateGraphEndpointResponse
+      include Smithy::Client::_Response[Types::CreatePrivateGraphEndpointOutput]
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def status: () -> String?
+      def vpc_endpoint_id: () -> String?
+    end
+    def create_private_graph_endpoint: (
+      ?graph_identifier: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?vpc_security_group_ids: Array[String]
+    ) -> _CreatePrivateGraphEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateGraphEndpointResponse
+
+    interface _DeleteGraphResponse
+      include Smithy::Client::_Response[Types::DeleteGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def delete_graph: (
+      ?graph_identifier: String,
+      ?skip_snapshot: bool
+    ) -> _DeleteGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGraphResponse
+
+    interface _DeleteGraphSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteGraphSnapshotOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def source_graph_id: () -> String?
+      def snapshot_create_time: () -> Time?
+      def status: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def delete_graph_snapshot: (
+      ?snapshot_identifier: String
+    ) -> _DeleteGraphSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGraphSnapshotResponse
+
+    interface _DeletePrivateGraphEndpointResponse
+      include Smithy::Client::_Response[Types::DeletePrivateGraphEndpointOutput]
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def status: () -> String?
+      def vpc_endpoint_id: () -> String?
+    end
+    def delete_private_graph_endpoint: (
+      ?graph_identifier: String,
+      ?vpc_id: String
+    ) -> _DeletePrivateGraphEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrivateGraphEndpointResponse
+
+    interface _ExecuteQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteQueryOutput]
+      def payload: () -> String?
+    end
+    def execute_query: (
+      ?graph_identifier: String,
+      ?query_string: String,
+      ?language: String,
+      ?parameters: Hash[String, Smithy::Schema::document],
+      ?plan_cache: String,
+      ?explain_mode: String,
+      ?query_timeout_milliseconds: Integer
+    ) -> _ExecuteQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteQueryResponse
+
+    interface _GetExportTaskResponse
+      include Smithy::Client::_Response[Types::GetExportTaskOutput]
+      def graph_id: () -> String?
+      def role_arn: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def format: () -> String?
+      def destination: () -> String?
+      def kms_key_identifier: () -> String?
+      def parquet_type: () -> String?
+      def status_reason: () -> String?
+      def export_task_details: () -> Types::ExportTaskDetails?
+      def export_filter: () -> Types::ExportFilter?
+    end
+    def get_export_task: (
+      ?task_identifier: String
+    ) -> _GetExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportTaskResponse
+
+    interface _GetGraphResponse
+      include Smithy::Client::_Response[Types::GetGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def get_graph: (
+      ?graph_identifier: String
+    ) -> _GetGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGraphResponse
+
+    interface _GetGraphSnapshotResponse
+      include Smithy::Client::_Response[Types::GetGraphSnapshotOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def source_graph_id: () -> String?
+      def snapshot_create_time: () -> Time?
+      def status: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def get_graph_snapshot: (
+      ?snapshot_identifier: String
+    ) -> _GetGraphSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGraphSnapshotResponse
+
+    interface _GetGraphSummaryResponse
+      include Smithy::Client::_Response[Types::GetGraphSummaryOutput]
+      def version: () -> String?
+      def last_statistics_computation_time: () -> Time?
+      def graph_summary: () -> Types::GraphDataSummary?
+    end
+    def get_graph_summary: (
+      ?graph_identifier: String,
+      ?mode: String
+    ) -> _GetGraphSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGraphSummaryResponse
+
+    interface _GetImportTaskResponse
+      include Smithy::Client::_Response[Types::GetImportTaskOutput]
+      def graph_id: () -> String?
+      def task_id: () -> String?
+      def source: () -> String?
+      def format: () -> String?
+      def parquet_type: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def import_options: () -> Types::ImportOptions?
+      def import_task_details: () -> Types::ImportTaskDetails?
+      def attempt_number: () -> Integer?
+      def status_reason: () -> String?
+    end
+    def get_import_task: (
+      ?task_identifier: String
+    ) -> _GetImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportTaskResponse
+
+    interface _GetPrivateGraphEndpointResponse
+      include Smithy::Client::_Response[Types::GetPrivateGraphEndpointOutput]
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def status: () -> String?
+      def vpc_endpoint_id: () -> String?
+    end
+    def get_private_graph_endpoint: (
+      ?graph_identifier: String,
+      ?vpc_id: String
+    ) -> _GetPrivateGraphEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrivateGraphEndpointResponse
+
+    interface _GetQueryResponse
+      include Smithy::Client::_Response[Types::GetQueryOutput]
+      def id: () -> String?
+      def query_string: () -> String?
+      def waited: () -> Integer?
+      def elapsed: () -> Integer?
+      def state: () -> String?
+    end
+    def get_query: (
+      ?graph_identifier: String,
+      ?query_id: String
+    ) -> _GetQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResponse
+
+    interface _ListExportTasksResponse
+      include Smithy::Client::_Response[Types::ListExportTasksOutput]
+      def tasks: () -> Array[Types::ExportTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_export_tasks: (
+      ?graph_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListExportTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportTasksResponse
+
+    interface _ListGraphSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListGraphSnapshotsOutput]
+      def graph_snapshots: () -> Array[Types::GraphSnapshotSummary]?
+      def next_token: () -> String?
+    end
+    def list_graph_snapshots: (
+      ?graph_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGraphSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGraphSnapshotsResponse
+
+    interface _ListGraphsResponse
+      include Smithy::Client::_Response[Types::ListGraphsOutput]
+      def graphs: () -> Array[Types::GraphSummary]?
+      def next_token: () -> String?
+    end
+    def list_graphs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGraphsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGraphsResponse
+
+    interface _ListImportTasksResponse
+      include Smithy::Client::_Response[Types::ListImportTasksOutput]
+      def tasks: () -> Array[Types::ImportTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_import_tasks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListImportTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportTasksResponse
+
+    interface _ListPrivateGraphEndpointsResponse
+      include Smithy::Client::_Response[Types::ListPrivateGraphEndpointsOutput]
+      def private_graph_endpoints: () -> Array[Types::PrivateGraphEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_private_graph_endpoints: (
+      ?graph_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPrivateGraphEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivateGraphEndpointsResponse
+
+    interface _ListQueriesResponse
+      include Smithy::Client::_Response[Types::ListQueriesOutput]
+      def queries: () -> Array[Types::QuerySummary]?
+    end
+    def list_queries: (
+      ?graph_identifier: String,
+      ?max_results: Integer,
+      ?state: String
+    ) -> _ListQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueriesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ResetGraphResponse
+      include Smithy::Client::_Response[Types::ResetGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def reset_graph: (
+      ?graph_identifier: String,
+      ?skip_snapshot: bool
+    ) -> _ResetGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetGraphResponse
+
+    interface _RestoreGraphFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreGraphFromSnapshotOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def restore_graph_from_snapshot: (
+      ?snapshot_identifier: String,
+      ?graph_name: String,
+      ?provisioned_memory: Integer,
+      ?deletion_protection: bool,
+      ?tags: Hash[String, String],
+      ?replica_count: Integer,
+      ?public_connectivity: bool
+    ) -> _RestoreGraphFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreGraphFromSnapshotResponse
+
+    interface _StartExportTaskResponse
+      include Smithy::Client::_Response[Types::StartExportTaskOutput]
+      def graph_id: () -> String?
+      def role_arn: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def format: () -> String?
+      def destination: () -> String?
+      def kms_key_identifier: () -> String?
+      def parquet_type: () -> String?
+      def status_reason: () -> String?
+      def export_filter: () -> Types::ExportFilter?
+    end
+    def start_export_task: (
+      ?graph_identifier: String,
+      ?role_arn: String,
+      ?format: String,
+      ?destination: String,
+      ?kms_key_identifier: String,
+      ?parquet_type: String,
+      ?export_filter: {
+        vertex_filter: Hash[String,
+          {
+            properties: Hash[String,
+              {
+                output_type: String,
+                source_property_name: String,
+                multi_value_handling: String
+              }
+            ]
+          }
+        ],
+        edge_filter: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _StartExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExportTaskResponse
+
+    interface _StartImportTaskResponse
+      include Smithy::Client::_Response[Types::StartImportTaskOutput]
+      def graph_id: () -> String?
+      def task_id: () -> String?
+      def source: () -> String?
+      def format: () -> String?
+      def parquet_type: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def import_options: () -> Types::ImportOptions?
+    end
+    def start_import_task: (
+      ?import_options: {
+        neptune: {
+          s3_export_path: String,
+          s3_export_kms_key_id: untyped,
+          preserve_default_vertex_labels: bool,
+          preserve_edge_ids: untyped
+        }
+      },
+      ?fail_on_error: bool,
+      ?source: String,
+      ?format: String,
+      ?parquet_type: String,
+      ?blank_node_handling: String,
+      ?graph_identifier: String,
+      ?role_arn: String
+    ) -> _StartImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGraphResponse
+      include Smithy::Client::_Response[Types::UpdateGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def update_graph: (
+      ?graph_identifier: String,
+      ?public_connectivity: bool,
+      ?provisioned_memory: Integer,
+      ?deletion_protection: bool
+    ) -> _UpdateGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGraphResponse
+  end
+end

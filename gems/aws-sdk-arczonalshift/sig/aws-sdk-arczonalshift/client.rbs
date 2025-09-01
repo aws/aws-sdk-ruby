@@ -1,0 +1,257 @@
+module Aws::ARCZonalShift
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ARCZonalShift::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelPracticeRunResponse
+      include Smithy::Client::_Response[Types::CancelPracticeRunResponse]
+      def zonal_shift_id: () -> String?
+      def resource_identifier: () -> String?
+      def away_from: () -> String?
+      def expiry_time: () -> Time?
+      def start_time: () -> Time?
+      def status: () -> String?
+      def comment: () -> String?
+    end
+    def cancel_practice_run: (
+      ?zonal_shift_id: String
+    ) -> _CancelPracticeRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelPracticeRunResponse
+
+    interface _CancelZonalShiftResponse
+      include Smithy::Client::_Response[Types::CancelZonalShiftOutput]
+      def zonal_shift_id: () -> String?
+      def resource_identifier: () -> String?
+      def away_from: () -> String?
+      def expiry_time: () -> Time?
+      def start_time: () -> Time?
+      def status: () -> String?
+      def comment: () -> String?
+    end
+    def cancel_zonal_shift: (
+      ?zonal_shift_id: String
+    ) -> _CancelZonalShiftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelZonalShiftResponse
+
+    interface _CreatePracticeRunConfigurationResponse
+      include Smithy::Client::_Response[Types::CreatePracticeRunConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def zonal_autoshift_status: () -> String?
+      def practice_run_configuration: () -> Types::PracticeRunConfiguration?
+    end
+    def create_practice_run_configuration: (
+      ?resource_identifier: String,
+      ?blocked_windows: Array[String],
+      ?blocked_dates: Array[String],
+      ?blocking_alarms: Array[
+        {
+          type: String,
+          alarm_identifier: String
+        }
+      ],
+      ?outcome_alarms: Array[
+        {
+          type: String,
+          alarm_identifier: String
+        }
+      ]
+    ) -> _CreatePracticeRunConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePracticeRunConfigurationResponse
+
+    interface _DeletePracticeRunConfigurationResponse
+      include Smithy::Client::_Response[Types::DeletePracticeRunConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def zonal_autoshift_status: () -> String?
+    end
+    def delete_practice_run_configuration: (
+      ?resource_identifier: String
+    ) -> _DeletePracticeRunConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePracticeRunConfigurationResponse
+
+    interface _GetAutoshiftObserverNotificationStatusResponse
+      include Smithy::Client::_Response[Types::GetAutoshiftObserverNotificationStatusResponse]
+      def status: () -> String?
+    end
+    def get_autoshift_observer_notification_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoshiftObserverNotificationStatusResponse
+
+    interface _GetManagedResourceResponse
+      include Smithy::Client::_Response[Types::GetManagedResourceResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def applied_weights: () -> Hash[String, Float]?
+      def zonal_shifts: () -> Array[Types::ZonalShiftInResource]?
+      def autoshifts: () -> Array[Types::AutoshiftInResource]?
+      def practice_run_configuration: () -> Types::PracticeRunConfiguration?
+      def zonal_autoshift_status: () -> String?
+    end
+    def get_managed_resource: (
+      ?resource_identifier: String
+    ) -> _GetManagedResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedResourceResponse
+
+    interface _ListAutoshiftsResponse
+      include Smithy::Client::_Response[Types::ListAutoshiftsResponse]
+      def items: () -> Array[Types::AutoshiftSummary]?
+      def next_token: () -> String?
+    end
+    def list_autoshifts: (
+      ?next_token: String,
+      ?status: String,
+      ?max_results: Integer
+    ) -> _ListAutoshiftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutoshiftsResponse
+
+    interface _ListManagedResourcesResponse
+      include Smithy::Client::_Response[Types::ListManagedResourcesResponse]
+      def items: () -> Array[Types::ManagedResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_managed_resources: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedResourcesResponse
+
+    interface _ListZonalShiftsResponse
+      include Smithy::Client::_Response[Types::ListZonalShiftsResponse]
+      def items: () -> Array[Types::ZonalShiftSummary]?
+      def next_token: () -> String?
+    end
+    def list_zonal_shifts: (
+      ?next_token: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?resource_identifier: String
+    ) -> _ListZonalShiftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListZonalShiftsResponse
+
+    interface _StartPracticeRunResponse
+      include Smithy::Client::_Response[Types::StartPracticeRunResponse]
+      def zonal_shift_id: () -> String?
+      def resource_identifier: () -> String?
+      def away_from: () -> String?
+      def expiry_time: () -> Time?
+      def start_time: () -> Time?
+      def status: () -> String?
+      def comment: () -> String?
+    end
+    def start_practice_run: (
+      ?resource_identifier: String,
+      ?away_from: String,
+      ?comment: String
+    ) -> _StartPracticeRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPracticeRunResponse
+
+    interface _StartZonalShiftResponse
+      include Smithy::Client::_Response[Types::StartZonalShiftOutput]
+      def zonal_shift_id: () -> String?
+      def resource_identifier: () -> String?
+      def away_from: () -> String?
+      def expiry_time: () -> Time?
+      def start_time: () -> Time?
+      def status: () -> String?
+      def comment: () -> String?
+    end
+    def start_zonal_shift: (
+      ?resource_identifier: String,
+      ?away_from: String,
+      ?expires_in: String,
+      ?comment: String
+    ) -> _StartZonalShiftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartZonalShiftResponse
+
+    interface _UpdateAutoshiftObserverNotificationStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAutoshiftObserverNotificationStatusResponse]
+      def status: () -> String?
+    end
+    def update_autoshift_observer_notification_status: (
+      ?status: String
+    ) -> _UpdateAutoshiftObserverNotificationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutoshiftObserverNotificationStatusResponse
+
+    interface _UpdatePracticeRunConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdatePracticeRunConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def zonal_autoshift_status: () -> String?
+      def practice_run_configuration: () -> Types::PracticeRunConfiguration?
+    end
+    def update_practice_run_configuration: (
+      ?resource_identifier: String,
+      ?blocked_windows: Array[String],
+      ?blocked_dates: Array[String],
+      ?blocking_alarms: Array[
+        {
+          type: String,
+          alarm_identifier: String
+        }
+      ],
+      ?outcome_alarms: Array[
+        {
+          type: String,
+          alarm_identifier: String
+        }
+      ]
+    ) -> _UpdatePracticeRunConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePracticeRunConfigurationResponse
+
+    interface _UpdateZonalAutoshiftConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateZonalAutoshiftConfigurationResponse]
+      def resource_identifier: () -> String?
+      def zonal_autoshift_status: () -> String?
+    end
+    def update_zonal_autoshift_configuration: (
+      ?resource_identifier: String,
+      ?zonal_autoshift_status: String
+    ) -> _UpdateZonalAutoshiftConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateZonalAutoshiftConfigurationResponse
+
+    interface _UpdateZonalShiftResponse
+      include Smithy::Client::_Response[Types::UpdateZonalShiftOutput]
+      def zonal_shift_id: () -> String?
+      def resource_identifier: () -> String?
+      def away_from: () -> String?
+      def expiry_time: () -> Time?
+      def start_time: () -> Time?
+      def status: () -> String?
+      def comment: () -> String?
+    end
+    def update_zonal_shift: (
+      ?zonal_shift_id: String,
+      ?comment: String,
+      ?expires_in: String
+    ) -> _UpdateZonalShiftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateZonalShiftResponse
+  end
+end

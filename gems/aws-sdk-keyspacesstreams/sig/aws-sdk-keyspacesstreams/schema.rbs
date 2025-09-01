@@ -1,0 +1,55 @@
+module Aws::KeyspacesStreams
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Date: TimestampShape
+    GetRecordsInput: StructureShape
+    GetRecordsOutput: StructureShape
+    GetShardIteratorInput: StructureShape
+    GetShardIteratorOutput: StructureShape
+    GetStreamInput: StructureShape
+    GetStreamOutput: StructureShape
+    InternalServerException: StructureShape
+    KeyspaceName: StringShape
+    KeyspacesCell: StructureShape
+    KeyspacesCellList: ListShape
+    KeyspacesCellMap: ListShape
+    KeyspacesCellMapDefinition: StructureShape
+    KeyspacesCellValue: UnionShape
+    KeyspacesCells: MapShape
+    KeyspacesKeysMap: MapShape
+    KeyspacesMetadata: StructureShape
+    KeyspacesRow: StructureShape
+    KeyspacesUdtMap: MapShape
+    ListStreamsInput: StructureShape
+    ListStreamsOutput: StructureShape
+    OriginType: EnumShape
+    Record: StructureShape
+    RecordList: ListShape
+    ResourceNotFoundException: StructureShape
+    SequenceNumber: StringShape
+    SequenceNumberRange: StructureShape
+    Shard: StructureShape
+    ShardDescriptionList: ListShape
+    ShardFilter: StructureShape
+    ShardFilterType: EnumShape
+    ShardId: StringShape
+    ShardIdList: ListShape
+    ShardIdToken: StringShape
+    ShardIterator: StringShape
+    ShardIteratorType: EnumShape
+    Stream: StructureShape
+    StreamArn: StringShape
+    StreamArnToken: StringShape
+    StreamList: ListShape
+    StreamStatus: EnumShape
+    StreamViewType: EnumShape
+    TableName: StringShape
+    ThrottlingException: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionType: EnumShape
+
+    KeyspacesStreams: ServiceShape
+  end
+end

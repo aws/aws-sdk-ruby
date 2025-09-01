@@ -1,0 +1,5 @@
+  module Aws
+    module LexModelBuildingService
+      VERSION: String
+    end
+  end

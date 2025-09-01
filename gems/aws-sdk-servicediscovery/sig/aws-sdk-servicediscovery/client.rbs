@@ -1,0 +1,449 @@
+module Aws::ServiceDiscovery
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ServiceDiscovery::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateHttpNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateHttpNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def create_http_namespace: (
+      ?name: String,
+      ?creator_request_id: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateHttpNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHttpNamespaceResponse
+
+    interface _CreatePrivateDnsNamespaceResponse
+      include Smithy::Client::_Response[Types::CreatePrivateDnsNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def create_private_dns_namespace: (
+      ?name: String,
+      ?creator_request_id: String,
+      ?description: String,
+      ?vpc: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?properties: {
+        dns_properties: {
+          soa: {
+            ttl: Integer
+          }
+        }
+      }
+    ) -> _CreatePrivateDnsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateDnsNamespaceResponse
+
+    interface _CreatePublicDnsNamespaceResponse
+      include Smithy::Client::_Response[Types::CreatePublicDnsNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def create_public_dns_namespace: (
+      ?name: String,
+      ?creator_request_id: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?properties: {
+        dns_properties: {
+          soa: {
+            ttl: Integer
+          }
+        }
+      }
+    ) -> _CreatePublicDnsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePublicDnsNamespaceResponse
+
+    interface _CreateServiceResponse
+      include Smithy::Client::_Response[Types::CreateServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def create_service: (
+      ?name: String,
+      ?namespace_id: String,
+      ?creator_request_id: String,
+      ?description: String,
+      ?dns_config: {
+        namespace_id: String,
+        routing_policy: String,
+        dns_records: Array[
+          {
+            type: String,
+            ttl: Integer
+          }
+        ]
+      },
+      ?health_check_config: {
+        type: String,
+        resource_path: String,
+        failure_threshold: Integer
+      },
+      ?health_check_custom_config: {
+        failure_threshold: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?type: String
+    ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
+
+    interface _DeleteNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def delete_namespace: (
+      ?id: String
+    ) -> _DeleteNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNamespaceResponse
+
+    interface _DeleteServiceResponse
+      include Smithy::Client::_Response[Types::DeleteServiceResponse]
+    end
+    def delete_service: (
+      ?id: String
+    ) -> _DeleteServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceResponse
+
+    interface _DeleteServiceAttributesResponse
+      include Smithy::Client::_Response[Types::DeleteServiceAttributesResponse]
+    end
+    def delete_service_attributes: (
+      ?service_id: String,
+      ?attributes: Array[String]
+    ) -> _DeleteServiceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceAttributesResponse
+
+    interface _DeregisterInstanceResponse
+      include Smithy::Client::_Response[Types::DeregisterInstanceResponse]
+      def operation_id: () -> String?
+    end
+    def deregister_instance: (
+      ?service_id: String,
+      ?instance_id: String
+    ) -> _DeregisterInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterInstanceResponse
+
+    interface _DiscoverInstancesResponse
+      include Smithy::Client::_Response[Types::DiscoverInstancesResponse]
+      def instances: () -> Array[Types::HttpInstanceSummary]?
+      def instances_revision: () -> Integer?
+    end
+    def discover_instances: (
+      ?namespace_name: String,
+      ?service_name: String,
+      ?max_results: Integer,
+      ?query_parameters: Hash[String, String],
+      ?optional_parameters: Hash[String, String],
+      ?health_status: String
+    ) -> _DiscoverInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscoverInstancesResponse
+
+    interface _DiscoverInstancesRevisionResponse
+      include Smithy::Client::_Response[Types::DiscoverInstancesRevisionResponse]
+      def instances_revision: () -> Integer?
+    end
+    def discover_instances_revision: (
+      ?namespace_name: String,
+      ?service_name: String
+    ) -> _DiscoverInstancesRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscoverInstancesRevisionResponse
+
+    interface _GetInstanceResponse
+      include Smithy::Client::_Response[Types::GetInstanceResponse]
+      def instance: () -> Types::Instance?
+    end
+    def get_instance: (
+      ?service_id: String,
+      ?instance_id: String
+    ) -> _GetInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceResponse
+
+    interface _GetInstancesHealthStatusResponse
+      include Smithy::Client::_Response[Types::GetInstancesHealthStatusResponse]
+      def status: () -> Hash[String, String]?
+      def next_token: () -> String?
+    end
+    def get_instances_health_status: (
+      ?service_id: String,
+      ?instances: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetInstancesHealthStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstancesHealthStatusResponse
+
+    interface _GetNamespaceResponse
+      include Smithy::Client::_Response[Types::GetNamespaceResponse]
+      def namespace: () -> Types::Namespace?
+    end
+    def get_namespace: (
+      ?id: String
+    ) -> _GetNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNamespaceResponse
+
+    interface _GetOperationResponse
+      include Smithy::Client::_Response[Types::GetOperationResponse]
+      def operation: () -> Types::Operation?
+    end
+    def get_operation: (
+      ?operation_id: String
+    ) -> _GetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationResponse
+
+    interface _GetServiceResponse
+      include Smithy::Client::_Response[Types::GetServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def get_service: (
+      ?id: String
+    ) -> _GetServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceResponse
+
+    interface _GetServiceAttributesResponse
+      include Smithy::Client::_Response[Types::GetServiceAttributesResponse]
+      def service_attributes: () -> Types::ServiceAttributes?
+    end
+    def get_service_attributes: (
+      ?service_id: String
+    ) -> _GetServiceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceAttributesResponse
+
+    interface _ListInstancesResponse
+      include Smithy::Client::_Response[Types::ListInstancesResponse]
+      def instances: () -> Array[Types::InstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_instances: (
+      ?service_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstancesResponse
+
+    interface _ListNamespacesResponse
+      include Smithy::Client::_Response[Types::ListNamespacesResponse]
+      def namespaces: () -> Array[Types::NamespaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_namespaces: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          condition: String
+        }
+      ]
+    ) -> _ListNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNamespacesResponse
+
+    interface _ListOperationsResponse
+      include Smithy::Client::_Response[Types::ListOperationsResponse]
+      def operations: () -> Array[Types::OperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_operations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          condition: String
+        }
+      ]
+    ) -> _ListOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationsResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesResponse]
+      def services: () -> Array[Types::ServiceSummary]?
+      def next_token: () -> String?
+    end
+    def list_services: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          condition: String
+        }
+      ]
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterInstanceResponse
+      include Smithy::Client::_Response[Types::RegisterInstanceResponse]
+      def operation_id: () -> String?
+    end
+    def register_instance: (
+      ?service_id: String,
+      ?instance_id: String,
+      ?creator_request_id: String,
+      ?attributes: Hash[String, String]
+    ) -> _RegisterInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterInstanceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateHttpNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdateHttpNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def update_http_namespace: (
+      ?id: String,
+      ?updater_request_id: String,
+      ?namespace: {
+        description: String
+      }
+    ) -> _UpdateHttpNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHttpNamespaceResponse
+
+    interface _UpdateInstanceCustomHealthStatusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_instance_custom_health_status: (
+      ?service_id: String,
+      ?instance_id: String,
+      ?status: String
+    ) -> _UpdateInstanceCustomHealthStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceCustomHealthStatusResponse
+
+    interface _UpdatePrivateDnsNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdatePrivateDnsNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def update_private_dns_namespace: (
+      ?id: String,
+      ?updater_request_id: String,
+      ?namespace: {
+        description: String,
+        properties: {
+          dns_properties: {
+            soa: {
+              ttl: Integer
+            }
+          }
+        }
+      }
+    ) -> _UpdatePrivateDnsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrivateDnsNamespaceResponse
+
+    interface _UpdatePublicDnsNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdatePublicDnsNamespaceResponse]
+      def operation_id: () -> String?
+    end
+    def update_public_dns_namespace: (
+      ?id: String,
+      ?updater_request_id: String,
+      ?namespace: {
+        description: String,
+        properties: {
+          dns_properties: {
+            soa: {
+              ttl: Integer
+            }
+          }
+        }
+      }
+    ) -> _UpdatePublicDnsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePublicDnsNamespaceResponse
+
+    interface _UpdateServiceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceResponse]
+      def operation_id: () -> String?
+    end
+    def update_service: (
+      ?id: String,
+      ?service: {
+        description: String,
+        dns_config: {
+          dns_records: Array[
+            {
+              type: String,
+              ttl: Integer
+            }
+          ]
+        },
+        health_check_config: {
+          type: String,
+          resource_path: String,
+          failure_threshold: Integer
+        }
+      }
+    ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
+
+    interface _UpdateServiceAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateServiceAttributesResponse]
+    end
+    def update_service_attributes: (
+      ?service_id: String,
+      ?attributes: Hash[String, String]
+    ) -> _UpdateServiceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceAttributesResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Rbin
+      VERSION: String
+    end
+  end

@@ -1,0 +1,373 @@
+module Aws::Grafana
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Grafana::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateLicenseResponse
+      include Smithy::Client::_Response[Types::AssociateLicenseOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def associate_license: (
+      ?workspace_id: String,
+      ?license_type: String,
+      ?grafana_token: String
+    ) -> _AssociateLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLicenseResponse
+
+    interface _CreateWorkspaceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def create_workspace: (
+      ?account_access_type: String,
+      ?client_token: String,
+      ?organization_role_name: String,
+      ?permission_type: String,
+      ?stack_set_name: String,
+      ?workspace_data_sources: Array[String],
+      ?workspace_description: String,
+      ?workspace_name: String,
+      ?workspace_notification_destinations: Array[String],
+      ?workspace_organizational_units: Array[String],
+      ?workspace_role_arn: String,
+      ?authentication_providers: Array[String],
+      ?tags: Hash[String, String],
+      ?vpc_configuration: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String]
+      },
+      ?configuration: String,
+      ?network_access_control: {
+        prefix_list_ids: Array[String],
+        vpce_ids: Array[String]
+      },
+      ?grafana_version: String
+    ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
+
+    interface _CreateWorkspaceApiKeyResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceApiKeyOutput]
+      def key_name: () -> String?
+      def key: () -> String?
+      def workspace_id: () -> String?
+    end
+    def create_workspace_api_key: (
+      ?key_name: String,
+      ?key_role: String,
+      ?seconds_to_live: Integer,
+      ?workspace_id: String
+    ) -> _CreateWorkspaceApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceApiKeyResponse
+
+    interface _CreateWorkspaceServiceAccountResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceServiceAccountResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def grafana_role: () -> String?
+      def workspace_id: () -> String?
+    end
+    def create_workspace_service_account: (
+      ?name: String,
+      ?grafana_role: String,
+      ?workspace_id: String
+    ) -> _CreateWorkspaceServiceAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceServiceAccountResponse
+
+    interface _CreateWorkspaceServiceAccountTokenResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceServiceAccountTokenResponse]
+      def service_account_token: () -> Types::ServiceAccountTokenSummaryWithKey?
+      def service_account_id: () -> String?
+      def workspace_id: () -> String?
+    end
+    def create_workspace_service_account_token: (
+      ?name: String,
+      ?seconds_to_live: Integer,
+      ?service_account_id: String,
+      ?workspace_id: String
+    ) -> _CreateWorkspaceServiceAccountTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceServiceAccountTokenResponse
+
+    interface _DeleteWorkspaceResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def delete_workspace: (
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceResponse
+
+    interface _DeleteWorkspaceApiKeyResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceApiKeyOutput]
+      def key_name: () -> String?
+      def workspace_id: () -> String?
+    end
+    def delete_workspace_api_key: (
+      ?key_name: String,
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceApiKeyResponse
+
+    interface _DeleteWorkspaceServiceAccountResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceServiceAccountResponse]
+      def service_account_id: () -> String?
+      def workspace_id: () -> String?
+    end
+    def delete_workspace_service_account: (
+      ?service_account_id: String,
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceServiceAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceServiceAccountResponse
+
+    interface _DeleteWorkspaceServiceAccountTokenResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceServiceAccountTokenResponse]
+      def token_id: () -> String?
+      def service_account_id: () -> String?
+      def workspace_id: () -> String?
+    end
+    def delete_workspace_service_account_token: (
+      ?token_id: String,
+      ?service_account_id: String,
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceServiceAccountTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceServiceAccountTokenResponse
+
+    interface _DescribeWorkspaceResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def describe_workspace: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceResponse
+
+    interface _DescribeWorkspaceAuthenticationResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceAuthenticationOutput]
+      def authentication: () -> Types::AuthenticationDescription?
+    end
+    def describe_workspace_authentication: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceAuthenticationResponse
+
+    interface _DescribeWorkspaceConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceConfigurationOutput]
+      def configuration: () -> String?
+      def grafana_version: () -> String?
+    end
+    def describe_workspace_configuration: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceConfigurationResponse
+
+    interface _DisassociateLicenseResponse
+      include Smithy::Client::_Response[Types::DisassociateLicenseOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def disassociate_license: (
+      ?workspace_id: String,
+      ?license_type: String
+    ) -> _DisassociateLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLicenseResponse
+
+    interface _ListPermissionsResponse
+      include Smithy::Client::_Response[Types::ListPermissionsOutput]
+      def next_token: () -> String?
+      def permissions: () -> Array[Types::PermissionEntry]?
+    end
+    def list_permissions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?user_type: String,
+      ?user_id: String,
+      ?group_id: String,
+      ?workspace_id: String
+    ) -> _ListPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVersionsResponse
+      include Smithy::Client::_Response[Types::ListVersionsResponse]
+      def next_token: () -> String?
+      def grafana_versions: () -> Array[String]?
+    end
+    def list_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?workspace_id: String
+    ) -> _ListVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVersionsResponse
+
+    interface _ListWorkspaceServiceAccountTokensResponse
+      include Smithy::Client::_Response[Types::ListWorkspaceServiceAccountTokensResponse]
+      def next_token: () -> String?
+      def service_account_tokens: () -> Array[Types::ServiceAccountTokenSummary]?
+      def service_account_id: () -> String?
+      def workspace_id: () -> String?
+    end
+    def list_workspace_service_account_tokens: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?service_account_id: String,
+      ?workspace_id: String
+    ) -> _ListWorkspaceServiceAccountTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspaceServiceAccountTokensResponse
+
+    interface _ListWorkspaceServiceAccountsResponse
+      include Smithy::Client::_Response[Types::ListWorkspaceServiceAccountsResponse]
+      def next_token: () -> String?
+      def service_accounts: () -> Array[Types::ServiceAccountSummary]?
+      def workspace_id: () -> String?
+    end
+    def list_workspace_service_accounts: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?workspace_id: String
+    ) -> _ListWorkspaceServiceAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspaceServiceAccountsResponse
+
+    interface _ListWorkspacesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacesOutput]
+      def workspaces: () -> Array[Types::WorkspaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_workspaces: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdatePermissionsResponse
+      include Smithy::Client::_Response[Types::UpdatePermissionsOutput]
+      def errors: () -> Array[Types::UpdateError]?
+    end
+    def update_permissions: (
+      ?update_instruction_batch: Array[
+        {
+          action: String,
+          role: String,
+          users: Array[
+            {
+              id: String,
+              type: String
+            }
+          ]
+        }
+      ],
+      ?workspace_id: String
+    ) -> _UpdatePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePermissionsResponse
+
+    interface _UpdateWorkspaceResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def update_workspace: (
+      ?account_access_type: String,
+      ?organization_role_name: String,
+      ?permission_type: String,
+      ?stack_set_name: String,
+      ?workspace_data_sources: Array[String],
+      ?workspace_description: String,
+      ?workspace_id: String,
+      ?workspace_name: String,
+      ?workspace_notification_destinations: Array[String],
+      ?workspace_organizational_units: Array[String],
+      ?workspace_role_arn: String,
+      ?vpc_configuration: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String]
+      },
+      ?remove_vpc_configuration: bool,
+      ?network_access_control: {
+        prefix_list_ids: Array[String],
+        vpce_ids: Array[String]
+      },
+      ?remove_network_access_configuration: bool
+    ) -> _UpdateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceResponse
+
+    interface _UpdateWorkspaceAuthenticationResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceAuthenticationOutput]
+      def authentication: () -> Types::AuthenticationDescription?
+    end
+    def update_workspace_authentication: (
+      ?workspace_id: String,
+      ?authentication_providers: Array[String],
+      ?saml_configuration: {
+        idp_metadata: {
+          url: String,
+          xml: String
+        },
+        assertion_attributes: {
+          name: String,
+          login: untyped,
+          email: untyped,
+          groups: untyped,
+          role: untyped,
+          org: untyped
+        },
+        role_values: {
+          editor: Array[String],
+          admin: untyped
+        },
+        allowed_organizations: Array[String],
+        login_validity_duration: Integer
+      }
+    ) -> _UpdateWorkspaceAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceAuthenticationResponse
+
+    interface _UpdateWorkspaceConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceConfigurationOutput]
+    end
+    def update_workspace_configuration: (
+      ?configuration: String,
+      ?workspace_id: String,
+      ?grafana_version: String
+    ) -> _UpdateWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceConfigurationResponse
+  end
+end

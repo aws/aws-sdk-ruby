@@ -1,0 +1,46 @@
+module Aws::AppStream
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntitlementAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntitlementNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleImageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAccountStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRoleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotAvailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

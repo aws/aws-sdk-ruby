@@ -1,0 +1,76 @@
+module Aws::MarketplaceReporting
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetBuyerDashboardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_identifier: String,
+        ?embedding_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_identifier: String?
+      attr_accessor embedding_domains: Array[String]?
+    end
+
+    class GetBuyerDashboardOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?embed_url: String,
+        ?dashboard_identifier: String,
+        ?embedding_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor embed_url: String?
+      attr_accessor dashboard_identifier: String?
+      attr_accessor embedding_domains: Array[String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,49 @@
+module Aws::SupportApp
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccountType: StringShape
+    ConflictException: StructureShape
+    CreateSlackChannelConfigurationInput: StructureShape
+    CreateSlackChannelConfigurationOutput: StructureShape
+    DeleteAccountAliasInput: StructureShape
+    DeleteAccountAliasOutput: StructureShape
+    DeleteSlackChannelConfigurationInput: StructureShape
+    DeleteSlackChannelConfigurationOutput: StructureShape
+    DeleteSlackWorkspaceConfigurationInput: StructureShape
+    DeleteSlackWorkspaceConfigurationOutput: StructureShape
+    GetAccountAliasInput: StructureShape
+    GetAccountAliasOutput: StructureShape
+    InternalServerException: StructureShape
+    ListSlackChannelConfigurationsInput: StructureShape
+    ListSlackChannelConfigurationsOutput: StructureShape
+    ListSlackWorkspaceConfigurationsInput: StructureShape
+    ListSlackWorkspaceConfigurationsOutput: StructureShape
+    NotificationSeverityLevel: StringShape
+    PutAccountAliasInput: StructureShape
+    PutAccountAliasOutput: StructureShape
+    RegisterSlackWorkspaceForOrganizationInput: StructureShape
+    RegisterSlackWorkspaceForOrganizationOutput: StructureShape
+    ResourceNotFoundException: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    SlackChannelConfiguration: StructureShape
+    SlackWorkspaceConfiguration: StructureShape
+    SlackWorkspaceConfigurationList: ListShape
+    UpdateSlackChannelConfigurationInput: StructureShape
+    UpdateSlackChannelConfigurationOutput: StructureShape
+    ValidationException: StructureShape
+    AwsAccountAlias: StringShape
+    BooleanValue: BooleanShape
+    ChannelId: StringShape
+    ChannelName: StringShape
+    ErrorMessage: StringShape
+    PaginationToken: StringShape
+    RoleArn: StringShape
+    SlackChannelConfigurationList: ListShape
+    TeamId: StringShape
+    TeamName: StringShape
+
+    SupportApp: ServiceShape
+  end
+end

@@ -1,0 +1,204 @@
+module Aws::MigrationHubConfig
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateHomeRegionControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_region: String,
+        ?target: Types::Target,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_region: String?
+      attr_accessor target: Types::Target?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateHomeRegionControlResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_region_control: Types::HomeRegionControl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_region_control: Types::HomeRegionControl?
+    end
+
+    class DeleteHomeRegionControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_id: String?
+    end
+
+    class DeleteHomeRegionControlResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeHomeRegionControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_id: String,
+        ?home_region: String,
+        ?target: Types::Target,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_id: String?
+      attr_accessor home_region: String?
+      attr_accessor target: Types::Target?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeHomeRegionControlsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_region_controls: Array[Types::HomeRegionControl],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_region_controls: Array[Types::HomeRegionControl]?
+      attr_accessor next_token: String?
+    end
+
+    class DryRunOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetHomeRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetHomeRegionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_region: String?
+    end
+
+    class HomeRegionControl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_id: String,
+        ?home_region: String,
+        ?target: Types::Target,
+        ?requested_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_id: String?
+      attr_accessor home_region: String?
+      attr_accessor target: Types::Target?
+      attr_accessor requested_time: Time?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+    end
+
+    module TargetType
+      ACCOUNT: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+  end
+end

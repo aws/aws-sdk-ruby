@@ -1,0 +1,5 @@
+  module Aws
+    module SageMakerRuntime
+      VERSION: String
+    end
+  end

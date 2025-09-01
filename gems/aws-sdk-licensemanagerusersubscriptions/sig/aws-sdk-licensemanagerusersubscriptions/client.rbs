@@ -1,0 +1,433 @@
+module Aws::LicenseManagerUserSubscriptions
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LicenseManagerUserSubscriptions::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateUserResponse
+      include Smithy::Client::_Response[Types::AssociateUserResponse]
+      def instance_user_summary: () -> Types::InstanceUserSummary?
+    end
+    def associate_user: (
+      ?username: String,
+      ?instance_id: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?domain: String,
+      ?tags: Hash[String, String]
+    ) -> _AssociateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserResponse
+
+    interface _CreateLicenseServerEndpointResponse
+      include Smithy::Client::_Response[Types::CreateLicenseServerEndpointResponse]
+      def identity_provider_arn: () -> String?
+      def license_server_endpoint_arn: () -> String?
+    end
+    def create_license_server_endpoint: (
+      ?identity_provider_arn: String,
+      ?license_server_settings: {
+        server_type: String,
+        server_settings: {
+          rds_sal_settings: {
+            rds_sal_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: String
+              }
+            }
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateLicenseServerEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseServerEndpointResponse
+
+    interface _DeleteLicenseServerEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseServerEndpointResponse]
+      def license_server_endpoint: () -> Types::LicenseServerEndpoint?
+    end
+    def delete_license_server_endpoint: (
+      ?license_server_endpoint_arn: String,
+      ?server_type: String
+    ) -> _DeleteLicenseServerEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseServerEndpointResponse
+
+    interface _DeregisterIdentityProviderResponse
+      include Smithy::Client::_Response[Types::DeregisterIdentityProviderResponse]
+      def identity_provider_summary: () -> Types::IdentityProviderSummary?
+    end
+    def deregister_identity_provider: (
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?product: String,
+      ?identity_provider_arn: String
+    ) -> _DeregisterIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterIdentityProviderResponse
+
+    interface _DisassociateUserResponse
+      include Smithy::Client::_Response[Types::DisassociateUserResponse]
+      def instance_user_summary: () -> Types::InstanceUserSummary?
+    end
+    def disassociate_user: (
+      ?username: String,
+      ?instance_id: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?instance_user_arn: String,
+      ?domain: String
+    ) -> _DisassociateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserResponse
+
+    interface _ListIdentityProvidersResponse
+      include Smithy::Client::_Response[Types::ListIdentityProvidersResponse]
+      def identity_provider_summaries: () -> Array[Types::IdentityProviderSummary]?
+      def next_token: () -> String?
+    end
+    def list_identity_providers: (
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          attribute: String,
+          operation: untyped,
+          value: untyped
+        }
+      ],
+      ?next_token: String
+    ) -> _ListIdentityProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityProvidersResponse
+
+    interface _ListInstancesResponse
+      include Smithy::Client::_Response[Types::ListInstancesResponse]
+      def instance_summaries: () -> Array[Types::InstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_instances: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          attribute: String,
+          operation: untyped,
+          value: untyped
+        }
+      ]
+    ) -> _ListInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstancesResponse
+
+    interface _ListLicenseServerEndpointsResponse
+      include Smithy::Client::_Response[Types::ListLicenseServerEndpointsResponse]
+      def license_server_endpoints: () -> Array[Types::LicenseServerEndpoint]?
+      def next_token: () -> String?
+    end
+    def list_license_server_endpoints: (
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          attribute: String,
+          operation: untyped,
+          value: untyped
+        }
+      ],
+      ?next_token: String
+    ) -> _ListLicenseServerEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseServerEndpointsResponse
+
+    interface _ListProductSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListProductSubscriptionsResponse]
+      def product_user_summaries: () -> Array[Types::ProductUserSummary]?
+      def next_token: () -> String?
+    end
+    def list_product_subscriptions: (
+      ?product: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          attribute: String,
+          operation: untyped,
+          value: untyped
+        }
+      ],
+      ?next_token: String
+    ) -> _ListProductSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProductSubscriptionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUserAssociationsResponse
+      include Smithy::Client::_Response[Types::ListUserAssociationsResponse]
+      def instance_user_summaries: () -> Array[Types::InstanceUserSummary]?
+      def next_token: () -> String?
+    end
+    def list_user_associations: (
+      ?instance_id: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          attribute: String,
+          operation: untyped,
+          value: untyped
+        }
+      ],
+      ?next_token: String
+    ) -> _ListUserAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserAssociationsResponse
+
+    interface _RegisterIdentityProviderResponse
+      include Smithy::Client::_Response[Types::RegisterIdentityProviderResponse]
+      def identity_provider_summary: () -> Types::IdentityProviderSummary?
+    end
+    def register_identity_provider: (
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?product: String,
+      ?settings: {
+        subnets: Array[String],
+        security_group_id: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _RegisterIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterIdentityProviderResponse
+
+    interface _StartProductSubscriptionResponse
+      include Smithy::Client::_Response[Types::StartProductSubscriptionResponse]
+      def product_user_summary: () -> Types::ProductUserSummary?
+    end
+    def start_product_subscription: (
+      ?username: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?product: String,
+      ?domain: String,
+      ?tags: Hash[String, String]
+    ) -> _StartProductSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProductSubscriptionResponse
+
+    interface _StopProductSubscriptionResponse
+      include Smithy::Client::_Response[Types::StopProductSubscriptionResponse]
+      def product_user_summary: () -> Types::ProductUserSummary?
+    end
+    def stop_product_subscription: (
+      ?username: String,
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?product: String,
+      ?product_user_arn: String,
+      ?domain: String
+    ) -> _StopProductSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopProductSubscriptionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIdentityProviderSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateIdentityProviderSettingsResponse]
+      def identity_provider_summary: () -> Types::IdentityProviderSummary?
+    end
+    def update_identity_provider_settings: (
+      ?identity_provider: {
+        active_directory_identity_provider: {
+          directory_id: String,
+          active_directory_settings: {
+            domain_name: String,
+            domain_ipv4_list: Array[String],
+            domain_credentials_provider: {
+              secrets_manager_credentials_provider: {
+                secret_id: untyped
+              }
+            },
+            domain_network_settings: {
+              subnets: Array[String]
+            }
+          },
+          active_directory_type: String
+        }
+      },
+      ?product: String,
+      ?identity_provider_arn: String,
+      ?update_settings: {
+        add_subnets: Array[String],
+        remove_subnets: untyped,
+        security_group_id: String
+      }
+    ) -> _UpdateIdentityProviderSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentityProviderSettingsResponse
+  end
+end

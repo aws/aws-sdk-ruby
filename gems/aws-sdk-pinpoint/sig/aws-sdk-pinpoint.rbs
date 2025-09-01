@@ -1,0 +1,5 @@
+  module Aws
+    module Pinpoint
+      VERSION: String
+    end
+  end

@@ -1,0 +1,949 @@
+module Aws::ChimeSDKMeetings
+  module Types
+
+    class Attendee
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_user_id: String,
+        ?attendee_id: String,
+        ?join_token: String,
+        ?capabilities: Types::AttendeeCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_user_id: String?
+      attr_accessor attendee_id: String?
+      attr_accessor join_token: String?
+      attr_accessor capabilities: Types::AttendeeCapabilities?
+    end
+
+    class AttendeeCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio: String,
+        ?video: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio: String?
+      attr_accessor video: String?
+      attr_accessor content: String?
+    end
+
+    class AttendeeFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_count: Integer?
+    end
+
+    class AttendeeIdItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee_id: String?
+    end
+
+    class AudioFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?echo_reduction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor echo_reduction: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class BatchCreateAttendeeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?attendees: Array[Types::CreateAttendeeRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor attendees: Array[Types::CreateAttendeeRequestItem]?
+    end
+
+    class BatchCreateAttendeeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendees: Array[Types::Attendee],
+        ?errors: Array[Types::CreateAttendeeError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendees: Array[Types::Attendee]?
+      attr_accessor errors: Array[Types::CreateAttendeeError]?
+    end
+
+    class BatchUpdateAttendeeCapabilitiesExceptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?excluded_attendee_ids: Array[Types::AttendeeIdItem],
+        ?capabilities: Types::AttendeeCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor excluded_attendee_ids: Array[Types::AttendeeIdItem]?
+      attr_accessor capabilities: Types::AttendeeCapabilities?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class ContentFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_resolution: String?
+    end
+
+    module ContentResolution
+      NONE: String
+      FHD: String
+      UHD: String
+    end
+
+    class CreateAttendeeError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_user_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_user_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class CreateAttendeeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?external_user_id: String,
+        ?capabilities: Types::AttendeeCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor external_user_id: String?
+      attr_accessor capabilities: Types::AttendeeCapabilities?
+    end
+
+    class CreateAttendeeRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_user_id: String,
+        ?capabilities: Types::AttendeeCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_user_id: String?
+      attr_accessor capabilities: Types::AttendeeCapabilities?
+    end
+
+    class CreateAttendeeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee: Types::Attendee,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee: Types::Attendee?
+    end
+
+    class CreateMeetingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?media_region: String,
+        ?meeting_host_id: String,
+        ?external_meeting_id: String,
+        ?notifications_configuration: Types::NotificationsConfiguration,
+        ?meeting_features: Types::MeetingFeaturesConfiguration,
+        ?primary_meeting_id: String,
+        ?tenant_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor media_region: String?
+      attr_accessor meeting_host_id: String?
+      attr_accessor external_meeting_id: String?
+      attr_accessor notifications_configuration: Types::NotificationsConfiguration?
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration?
+      attr_accessor primary_meeting_id: String?
+      attr_accessor tenant_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMeetingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting: Types::Meeting,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting: Types::Meeting?
+    end
+
+    class CreateMeetingWithAttendeesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?media_region: String,
+        ?meeting_host_id: String,
+        ?external_meeting_id: String,
+        ?meeting_features: Types::MeetingFeaturesConfiguration,
+        ?notifications_configuration: Types::NotificationsConfiguration,
+        ?attendees: Array[Types::CreateAttendeeRequestItem],
+        ?primary_meeting_id: String,
+        ?tenant_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor media_region: String?
+      attr_accessor meeting_host_id: String?
+      attr_accessor external_meeting_id: String?
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration?
+      attr_accessor notifications_configuration: Types::NotificationsConfiguration?
+      attr_accessor attendees: Array[Types::CreateAttendeeRequestItem]?
+      attr_accessor primary_meeting_id: String?
+      attr_accessor tenant_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMeetingWithAttendeesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting: Types::Meeting,
+        ?attendees: Array[Types::Attendee],
+        ?errors: Array[Types::CreateAttendeeError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting: Types::Meeting?
+      attr_accessor attendees: Array[Types::Attendee]?
+      attr_accessor errors: Array[Types::CreateAttendeeError]?
+    end
+
+    class DeleteAttendeeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?attendee_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor attendee_id: String?
+    end
+
+    class DeleteMeetingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+    end
+
+    class EngineTranscribeMedicalSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?specialty: String,
+        ?type: String,
+        ?vocabulary_name: String,
+        ?region: String,
+        ?content_identification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor specialty: String?
+      attr_accessor type: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor region: String?
+      attr_accessor content_identification_type: String?
+    end
+
+    class EngineTranscribeSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?vocabulary_filter_method: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_name: String,
+        ?region: String,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+        ?language_model_name: String,
+        ?identify_language: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor region: String?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+      attr_accessor language_model_name: String?
+      attr_accessor identify_language: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class GetAttendeeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?attendee_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor attendee_id: String?
+    end
+
+    class GetAttendeeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee: Types::Attendee,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee: Types::Attendee?
+    end
+
+    class GetMeetingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+    end
+
+    class GetMeetingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting: Types::Meeting,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting: Types::Meeting?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class ListAttendeesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAttendeesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendees: Array[Types::Attendee],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendees: Array[Types::Attendee]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module MediaCapabilities
+      SEND_RECEIVE: String
+      SEND: String
+      RECEIVE: String
+      NONE: String
+    end
+
+    class MediaPlacement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_host_url: String,
+        ?audio_fallback_url: String,
+        ?signaling_url: String,
+        ?turn_control_url: String,
+        ?screen_data_url: String,
+        ?screen_viewing_url: String,
+        ?screen_sharing_url: String,
+        ?event_ingestion_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_host_url: String?
+      attr_accessor audio_fallback_url: String?
+      attr_accessor signaling_url: String?
+      attr_accessor turn_control_url: String?
+      attr_accessor screen_data_url: String?
+      attr_accessor screen_viewing_url: String?
+      attr_accessor screen_sharing_url: String?
+      attr_accessor event_ingestion_url: String?
+    end
+
+    class Meeting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?meeting_host_id: String,
+        ?external_meeting_id: String,
+        ?media_region: String,
+        ?media_placement: Types::MediaPlacement,
+        ?meeting_features: Types::MeetingFeaturesConfiguration,
+        ?primary_meeting_id: String,
+        ?tenant_ids: Array[String],
+        ?meeting_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor meeting_host_id: String?
+      attr_accessor external_meeting_id: String?
+      attr_accessor media_region: String?
+      attr_accessor media_placement: Types::MediaPlacement?
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration?
+      attr_accessor primary_meeting_id: String?
+      attr_accessor tenant_ids: Array[String]?
+      attr_accessor meeting_arn: String?
+    end
+
+    module MeetingFeatureStatus
+      AVAILABLE: String
+      UNAVAILABLE: String
+    end
+
+    class MeetingFeaturesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio: Types::AudioFeatures,
+        ?video: Types::VideoFeatures,
+        ?content: Types::ContentFeatures,
+        ?attendee: Types::AttendeeFeatures,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio: Types::AudioFeatures?
+      attr_accessor video: Types::VideoFeatures?
+      attr_accessor content: Types::ContentFeatures?
+      attr_accessor attendee: Types::AttendeeFeatures?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class NotificationsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_function_arn: String,
+        ?sns_topic_arn: String,
+        ?sqs_queue_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_function_arn: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor sqs_queue_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+        ?retry_after_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+      attr_accessor retry_after_seconds: String?
+    end
+
+    class StartMeetingTranscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?transcription_configuration: Types::TranscriptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor transcription_configuration: Types::TranscriptionConfiguration?
+    end
+
+    class StopMeetingTranscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+      attr_accessor resource_name: String?
+    end
+
+    module TranscribeContentIdentificationType
+      PII: String
+    end
+
+    module TranscribeContentRedactionType
+      PII: String
+    end
+
+    module TranscribeLanguageCode
+      EN_US: String
+      EN_GB: String
+      ES_US: String
+      FR_CA: String
+      FR_FR: String
+      EN_AU: String
+      IT_IT: String
+      DE_DE: String
+      PT_BR: String
+      JA_JP: String
+      KO_KR: String
+      ZH_CN: String
+      TH_TH: String
+      HI_IN: String
+    end
+
+    module TranscribeMedicalContentIdentificationType
+      PHI: String
+    end
+
+    module TranscribeMedicalLanguageCode
+      EN_US: String
+    end
+
+    module TranscribeMedicalRegion
+      US_EAST_1: String
+      US_EAST_2: String
+      US_WEST_2: String
+      AP_SOUTHEAST_2: String
+      CA_CENTRAL_1: String
+      EU_WEST_1: String
+      AUTO: String
+    end
+
+    module TranscribeMedicalSpecialty
+      PRIMARYCARE: String
+      CARDIOLOGY: String
+      NEUROLOGY: String
+      ONCOLOGY: String
+      RADIOLOGY: String
+      UROLOGY: String
+    end
+
+    module TranscribeMedicalType
+      CONVERSATION: String
+      DICTATION: String
+    end
+
+    module TranscribePartialResultsStability
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    module TranscribeRegion
+      US_EAST_2: String
+      US_EAST_1: String
+      US_WEST_2: String
+      AP_NORTHEAST_2: String
+      AP_SOUTHEAST_2: String
+      AP_NORTHEAST_1: String
+      CA_CENTRAL_1: String
+      EU_CENTRAL_1: String
+      EU_WEST_1: String
+      EU_WEST_2: String
+      SA_EAST_1: String
+      AUTO: String
+      US_GOV_WEST_1: String
+    end
+
+    module TranscribeVocabularyFilterMethod
+      REMOVE: String
+      MASK: String
+      TAG: String
+    end
+
+    class TranscriptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_transcribe_settings: Types::EngineTranscribeSettings,
+        ?engine_transcribe_medical_settings: Types::EngineTranscribeMedicalSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_transcribe_settings: Types::EngineTranscribeSettings?
+      attr_accessor engine_transcribe_medical_settings: Types::EngineTranscribeMedicalSettings?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class UnprocessableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAttendeeCapabilitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?attendee_id: String,
+        ?capabilities: Types::AttendeeCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor attendee_id: String?
+      attr_accessor capabilities: Types::AttendeeCapabilities?
+    end
+
+    class UpdateAttendeeCapabilitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee: Types::Attendee,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee: Types::Attendee?
+    end
+
+    class VideoFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_resolution: String?
+    end
+
+    module VideoResolution
+      NONE: String
+      HD: String
+      FHD: String
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Glue
+      VERSION: String
+    end
+  end

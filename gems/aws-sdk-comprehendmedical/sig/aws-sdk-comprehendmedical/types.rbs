@@ -1,0 +1,1442 @@
+module Aws::ComprehendMedical
+  module Types
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?score: Float,
+        ?relationship_score: Float,
+        ?relationship_type: String,
+        ?id: Integer,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?text: String,
+        ?category: String,
+        ?traits: Array[Types::Trait],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor relationship_score: Float?
+      attr_accessor relationship_type: String?
+      attr_accessor id: Integer?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor text: String?
+      attr_accessor category: String?
+      attr_accessor traits: Array[Types::Trait]?
+    end
+
+    module AttributeName
+      SIGN: String
+      SYMPTOM: String
+      DIAGNOSIS: String
+      NEGATION: String
+      PERTAINS_TO_FAMILY: String
+      HYPOTHETICAL: String
+      LOW_CONFIDENCE: String
+      PAST_HISTORY: String
+      FUTURE: String
+    end
+
+    class Characters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?original_text_characters: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor original_text_characters: Integer?
+    end
+
+    class ComprehendMedicalAsyncJobFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_status: String,
+        ?submit_time_before: Time,
+        ?submit_time_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submit_time_before: Time?
+      attr_accessor submit_time_after: Time?
+    end
+
+    class ComprehendMedicalAsyncJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?message: String,
+        ?submit_time: Time,
+        ?end_time: Time,
+        ?expiration_time: Time,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?language_code: String,
+        ?data_access_role_arn: String,
+        ?manifest_file_path: String,
+        ?kms_key: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor message: String?
+      attr_accessor submit_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor expiration_time: Time?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor language_code: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor manifest_file_path: String?
+      attr_accessor kms_key: String?
+      attr_accessor model_version: String?
+    end
+
+    class DescribeEntitiesDetectionV2JobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeEntitiesDetectionV2JobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties?
+    end
+
+    class DescribeICD10CMInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeICD10CMInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties?
+    end
+
+    class DescribePHIDetectionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribePHIDetectionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties?
+    end
+
+    class DescribeRxNormInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeRxNormInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties?
+    end
+
+    class DescribeSNOMEDCTInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeSNOMEDCTInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties?
+    end
+
+    class DetectEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class DetectEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Entity],
+        ?unmapped_attributes: Array[Types::UnmappedAttribute],
+        ?pagination_token: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Entity]?
+      attr_accessor unmapped_attributes: Array[Types::UnmappedAttribute]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+    end
+
+    class DetectEntitiesV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class DetectEntitiesV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Entity],
+        ?unmapped_attributes: Array[Types::UnmappedAttribute],
+        ?pagination_token: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Entity]?
+      attr_accessor unmapped_attributes: Array[Types::UnmappedAttribute]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+    end
+
+    class DetectPHIRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class DetectPHIResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Entity],
+        ?pagination_token: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Entity]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Integer,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?score: Float,
+        ?text: String,
+        ?category: String,
+        ?type: String,
+        ?traits: Array[Types::Trait],
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Integer?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor score: Float?
+      attr_accessor text: String?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor traits: Array[Types::Trait]?
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    module EntitySubType
+      NAME: String
+      DX_NAME: String
+      DOSAGE: String
+      ROUTE_OR_MODE: String
+      FORM: String
+      FREQUENCY: String
+      DURATION: String
+      GENERIC_NAME: String
+      BRAND_NAME: String
+      STRENGTH: String
+      RATE: String
+      ACUITY: String
+      TEST_NAME: String
+      TEST_VALUE: String
+      TEST_UNITS: String
+      TEST_UNIT: String
+      PROCEDURE_NAME: String
+      TREATMENT_NAME: String
+      DATE: String
+      AGE: String
+      CONTACT_POINT: String
+      PHONE_OR_FAX: String
+      EMAIL: String
+      IDENTIFIER: String
+      ID: String
+      URL: String
+      ADDRESS: String
+      PROFESSION: String
+      SYSTEM_ORGAN_SITE: String
+      DIRECTION: String
+      QUALITY: String
+      QUANTITY: String
+      TIME_EXPRESSION: String
+      TIME_TO_MEDICATION_NAME: String
+      TIME_TO_DX_NAME: String
+      TIME_TO_TEST_NAME: String
+      TIME_TO_PROCEDURE_NAME: String
+      TIME_TO_TREATMENT_NAME: String
+      AMOUNT: String
+      GENDER: String
+      RACE_ETHNICITY: String
+      ALLERGIES: String
+      TOBACCO_USE: String
+      ALCOHOL_CONSUMPTION: String
+      REC_DRUG_USE: String
+    end
+
+    module EntityType
+      MEDICATION: String
+      MEDICAL_CONDITION: String
+      PROTECTED_HEALTH_INFORMATION: String
+      TEST_TREATMENT_PROCEDURE: String
+      ANATOMY: String
+      TIME_EXPRESSION: String
+      BEHAVIORAL_ENVIRONMENTAL_SOCIAL: String
+    end
+
+    class ICD10CMAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?score: Float,
+        ?relationship_score: Float,
+        ?id: Integer,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?text: String,
+        ?traits: Array[Types::ICD10CMTrait],
+        ?category: String,
+        ?relationship_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor relationship_score: Float?
+      attr_accessor id: Integer?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor text: String?
+      attr_accessor traits: Array[Types::ICD10CMTrait]?
+      attr_accessor category: String?
+      attr_accessor relationship_type: String?
+    end
+
+    module ICD10CMAttributeType
+      ACUITY: String
+      DIRECTION: String
+      SYSTEM_ORGAN_SITE: String
+      QUALITY: String
+      QUANTITY: String
+      TIME_TO_DX_NAME: String
+      TIME_EXPRESSION: String
+    end
+
+    class ICD10CMConcept
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?code: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor code: String?
+      attr_accessor score: Float?
+    end
+
+    class ICD10CMEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Integer,
+        ?text: String,
+        ?category: String,
+        ?type: String,
+        ?score: Float,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?attributes: Array[Types::ICD10CMAttribute],
+        ?traits: Array[Types::ICD10CMTrait],
+        ?icd10_cm_concepts: Array[Types::ICD10CMConcept],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Integer?
+      attr_accessor text: String?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor attributes: Array[Types::ICD10CMAttribute]?
+      attr_accessor traits: Array[Types::ICD10CMTrait]?
+      attr_accessor icd10_cm_concepts: Array[Types::ICD10CMConcept]?
+    end
+
+    module ICD10CMEntityCategory
+      MEDICAL_CONDITION: String
+    end
+
+    module ICD10CMEntityType
+      DX_NAME: String
+      TIME_EXPRESSION: String
+    end
+
+    module ICD10CMRelationshipType
+      OVERLAP: String
+      SYSTEM_ORGAN_SITE: String
+      QUALITY: String
+    end
+
+    class ICD10CMTrait
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor score: Float?
+    end
+
+    module ICD10CMTraitName
+      NEGATION: String
+      DIAGNOSIS: String
+      SIGN: String
+      SYMPTOM: String
+      PERTAINS_TO_FAMILY: String
+      HYPOTHETICAL: String
+      LOW_CONFIDENCE: String
+    end
+
+    class InferICD10CMRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class InferICD10CMResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::ICD10CMEntity],
+        ?pagination_token: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::ICD10CMEntity]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+    end
+
+    class InferRxNormRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class InferRxNormResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::RxNormEntity],
+        ?pagination_token: String,
+        ?model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::RxNormEntity]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+    end
+
+    class InferSNOMEDCTRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class InferSNOMEDCTResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::SNOMEDCTEntity],
+        ?pagination_token: String,
+        ?model_version: String,
+        ?snomedct_details: Types::SNOMEDCTDetails,
+        ?characters: Types::Characters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::SNOMEDCTEntity]?
+      attr_accessor pagination_token: String?
+      attr_accessor model_version: String?
+      attr_accessor snomedct_details: Types::SNOMEDCTDetails?
+      attr_accessor characters: Types::Characters?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEncodingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      PARTIAL_SUCCESS: String
+      FAILED: String
+      STOP_REQUESTED: String
+      STOPPED: String
+    end
+
+    module LanguageCode
+      EN: String
+    end
+
+    class ListEntitiesDetectionV2JobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ComprehendMedicalAsyncJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEntitiesDetectionV2JobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListICD10CMInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ComprehendMedicalAsyncJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListICD10CMInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPHIDetectionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ComprehendMedicalAsyncJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPHIDetectionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRxNormInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ComprehendMedicalAsyncJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRxNormInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSNOMEDCTInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ComprehendMedicalAsyncJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSNOMEDCTInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comprehend_medical_async_job_properties_list: Array[Types::ComprehendMedicalAsyncJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class OutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+    end
+
+    module RelationshipType
+      EVERY: String
+      WITH_DOSAGE: String
+      ADMINISTERED_VIA: String
+      FOR: String
+      NEGATIVE: String
+      OVERLAP: String
+      DOSAGE: String
+      ROUTE_OR_MODE: String
+      FORM: String
+      FREQUENCY: String
+      DURATION: String
+      STRENGTH: String
+      RATE: String
+      ACUITY: String
+      TEST_VALUE: String
+      TEST_UNITS: String
+      TEST_UNIT: String
+      DIRECTION: String
+      SYSTEM_ORGAN_SITE: String
+      AMOUNT: String
+      USAGE: String
+      QUALITY: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RxNormAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?score: Float,
+        ?relationship_score: Float,
+        ?id: Integer,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?text: String,
+        ?traits: Array[Types::RxNormTrait],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor relationship_score: Float?
+      attr_accessor id: Integer?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor text: String?
+      attr_accessor traits: Array[Types::RxNormTrait]?
+    end
+
+    module RxNormAttributeType
+      DOSAGE: String
+      DURATION: String
+      FORM: String
+      FREQUENCY: String
+      RATE: String
+      ROUTE_OR_MODE: String
+      STRENGTH: String
+    end
+
+    class RxNormConcept
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?code: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor code: String?
+      attr_accessor score: Float?
+    end
+
+    class RxNormEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Integer,
+        ?text: String,
+        ?category: String,
+        ?type: String,
+        ?score: Float,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?attributes: Array[Types::RxNormAttribute],
+        ?traits: Array[Types::RxNormTrait],
+        ?rx_norm_concepts: Array[Types::RxNormConcept],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Integer?
+      attr_accessor text: String?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor attributes: Array[Types::RxNormAttribute]?
+      attr_accessor traits: Array[Types::RxNormTrait]?
+      attr_accessor rx_norm_concepts: Array[Types::RxNormConcept]?
+    end
+
+    module RxNormEntityCategory
+      MEDICATION: String
+    end
+
+    module RxNormEntityType
+      BRAND_NAME: String
+      GENERIC_NAME: String
+    end
+
+    class RxNormTrait
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor score: Float?
+    end
+
+    module RxNormTraitName
+      NEGATION: String
+      PAST_HISTORY: String
+    end
+
+    class SNOMEDCTAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?type: String,
+        ?score: Float,
+        ?relationship_score: Float,
+        ?relationship_type: String,
+        ?id: Integer,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?text: String,
+        ?traits: Array[Types::SNOMEDCTTrait],
+        ?snomedct_concepts: Array[Types::SNOMEDCTConcept],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor relationship_score: Float?
+      attr_accessor relationship_type: String?
+      attr_accessor id: Integer?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor text: String?
+      attr_accessor traits: Array[Types::SNOMEDCTTrait]?
+      attr_accessor snomedct_concepts: Array[Types::SNOMEDCTConcept]?
+    end
+
+    module SNOMEDCTAttributeType
+      ACUITY: String
+      QUALITY: String
+      DIRECTION: String
+      SYSTEM_ORGAN_SITE: String
+      TEST_VALUE: String
+      TEST_UNIT: String
+    end
+
+    class SNOMEDCTConcept
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?code: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor code: String?
+      attr_accessor score: Float?
+    end
+
+    class SNOMEDCTDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edition: String,
+        ?language: String,
+        ?version_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edition: String?
+      attr_accessor language: String?
+      attr_accessor version_date: String?
+    end
+
+    class SNOMEDCTEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Integer,
+        ?text: String,
+        ?category: String,
+        ?type: String,
+        ?score: Float,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?attributes: Array[Types::SNOMEDCTAttribute],
+        ?traits: Array[Types::SNOMEDCTTrait],
+        ?snomedct_concepts: Array[Types::SNOMEDCTConcept],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Integer?
+      attr_accessor text: String?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor score: Float?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor attributes: Array[Types::SNOMEDCTAttribute]?
+      attr_accessor traits: Array[Types::SNOMEDCTTrait]?
+      attr_accessor snomedct_concepts: Array[Types::SNOMEDCTConcept]?
+    end
+
+    module SNOMEDCTEntityCategory
+      MEDICAL_CONDITION: String
+      ANATOMY: String
+      TEST_TREATMENT_PROCEDURE: String
+    end
+
+    module SNOMEDCTEntityType
+      DX_NAME: String
+      TEST_NAME: String
+      PROCEDURE_NAME: String
+      TREATMENT_NAME: String
+    end
+
+    module SNOMEDCTRelationshipType
+      ACUITY: String
+      QUALITY: String
+      TEST_VALUE: String
+      TEST_UNITS: String
+      DIRECTION: String
+      SYSTEM_ORGAN_SITE: String
+      TEST_UNIT: String
+    end
+
+    class SNOMEDCTTrait
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor score: Float?
+    end
+
+    module SNOMEDCTTraitName
+      NEGATION: String
+      DIAGNOSIS: String
+      SIGN: String
+      SYMPTOM: String
+      PERTAINS_TO_FAMILY: String
+      HYPOTHETICAL: String
+      LOW_CONFIDENCE: String
+      PAST_HISTORY: String
+      FUTURE: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartEntitiesDetectionV2JobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?job_name: String,
+        ?client_request_token: String,
+        ?kms_key: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor kms_key: String?
+      attr_accessor language_code: String?
+    end
+
+    class StartEntitiesDetectionV2JobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartICD10CMInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?job_name: String,
+        ?client_request_token: String,
+        ?kms_key: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor kms_key: String?
+      attr_accessor language_code: String?
+    end
+
+    class StartICD10CMInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartPHIDetectionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?job_name: String,
+        ?client_request_token: String,
+        ?kms_key: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor kms_key: String?
+      attr_accessor language_code: String?
+    end
+
+    class StartPHIDetectionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartRxNormInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?job_name: String,
+        ?client_request_token: String,
+        ?kms_key: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor kms_key: String?
+      attr_accessor language_code: String?
+    end
+
+    class StartRxNormInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartSNOMEDCTInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?job_name: String,
+        ?client_request_token: String,
+        ?kms_key: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor kms_key: String?
+      attr_accessor language_code: String?
+    end
+
+    class StartSNOMEDCTInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopEntitiesDetectionV2JobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopEntitiesDetectionV2JobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopICD10CMInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopICD10CMInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopPHIDetectionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopPHIDetectionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopRxNormInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopRxNormInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopSNOMEDCTInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopSNOMEDCTInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class TextSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Trait
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor score: Float?
+    end
+
+    class UnmappedAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?attribute: Types::Attribute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor attribute: Types::Attribute?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

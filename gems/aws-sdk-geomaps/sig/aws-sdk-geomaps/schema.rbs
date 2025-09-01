@@ -1,0 +1,41 @@
+module Aws::GeoMaps
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ApiKey: StringShape
+    ColorScheme: StringShape
+    CompactOverlay: StringShape
+    CountryCode: StringShape
+    DistanceMeters: IntegerShape
+    GeoJsonOverlay: StringShape
+    GetGlyphsRequest: StructureShape
+    GetGlyphsResponse: StructureShape
+    GetSpritesRequest: StructureShape
+    GetSpritesResponse: StructureShape
+    GetStaticMapRequest: StructureShape
+    GetStaticMapResponse: StructureShape
+    GetStyleDescriptorRequest: StructureShape
+    GetStyleDescriptorResponse: StructureShape
+    GetTileRequest: StructureShape
+    GetTileResponse: StructureShape
+    InternalServerException: StructureShape
+    LabelSize: StringShape
+    LanguageTag: StringShape
+    MapFeatureMode: StringShape
+    MapStyle: StringShape
+    PositionListString: StringShape
+    PositionString: StringShape
+    ScaleBarUnit: StringShape
+    StaticMapStyle: StringShape
+    ThrottlingException: StructureShape
+    Tileset: StringShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: StringShape
+    Variant: StringShape
+
+    MapsService: ServiceShape
+  end
+end

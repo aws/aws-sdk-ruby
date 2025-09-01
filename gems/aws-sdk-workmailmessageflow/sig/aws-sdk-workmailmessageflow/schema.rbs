@@ -1,0 +1,24 @@
+module Aws::WorkMailMessageFlow
+  module Schema
+    include Smithy::Schema::Shapes
+
+    GetRawMessageContentRequest: StructureShape
+    GetRawMessageContentResponse: StructureShape
+    InvalidContentLocation: StructureShape
+    MessageFrozen: StructureShape
+    MessageRejected: StructureShape
+    PutRawMessageContentRequest: StructureShape
+    PutRawMessageContentResponse: StructureShape
+    RawMessageContent: StructureShape
+    ResourceNotFoundException: StructureShape
+    S3Reference: StructureShape
+    ErrorMessage: StringShape
+    MessageContentBlob: BlobShape
+    MessageIdType: StringShape
+    S3BucketIdType: StringShape
+    S3KeyIdType: StringShape
+    S3VersionType: StringShape
+
+    GiraffeMessageInTransitService: ServiceShape
+  end
+end

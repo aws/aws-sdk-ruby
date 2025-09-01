@@ -1,0 +1,649 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+require_relative '../spec_helper'
+
+module Aws::Amplify
+  describe EndpointProvider do
+    subject { EndpointProvider.new }
+
+    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-northeast-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-northeast-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-northeast-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-northeast-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-south-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-south-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-southeast-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-southeast-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ap-southeast-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ap-southeast-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.ca-central-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-central-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-central-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-north-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-north-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-south-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-south-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-west-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-west-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.eu-west-3.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eu-west-3", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.me-south-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "me-south-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.sa-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "sa-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-east-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"error" => "DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"error" => "DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://amplify.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For custom endpoint with fips enabled and dualstack disabled" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, endpoint: "https://example.com"})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "For custom endpoint with fips disabled and dualstack enabled" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, endpoint: "https://example.com"})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+
+    context "Missing region" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Missing Region"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+    end
+  end
+end

@@ -1,0 +1,459 @@
+module Aws::DLM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DLM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::CreateLifecyclePolicyResponse]
+      def policy_id: () -> String?
+    end
+    def create_lifecycle_policy: (
+      ?execution_role_arn: String,
+      ?description: String,
+      ?state: String,
+      ?policy_details: {
+        policy_type: String,
+        resource_types: Array[String],
+        resource_locations: Array[String],
+        target_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        schedules: Array[
+          {
+            name: String,
+            copy_tags: bool,
+            tags_to_add: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ],
+            variable_tags: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ],
+            create_rule: {
+              location: String,
+              interval: Integer,
+              interval_unit: String,
+              times: Array[String],
+              cron_expression: String,
+              scripts: Array[
+                {
+                  stages: Array[String],
+                  execution_handler_service: String,
+                  execution_handler: String,
+                  execute_operation_on_script_failure: bool,
+                  execution_timeout: Integer,
+                  maximum_retry_count: Integer
+                }
+              ]
+            },
+            retain_rule: {
+              count: Integer,
+              interval: Integer,
+              interval_unit: String
+            },
+            fast_restore_rule: {
+              count: Integer,
+              interval: untyped,
+              interval_unit: untyped,
+              availability_zones: Array[String]
+            },
+            cross_region_copy_rules: Array[
+              {
+                target_region: String,
+                target: String,
+                encrypted: bool,
+                cmk_arn: String,
+                copy_tags: bool,
+                retain_rule: {
+                  interval: untyped,
+                  interval_unit: untyped
+                },
+                deprecate_rule: {
+                  interval: untyped,
+                  interval_unit: untyped
+                }
+              }
+            ],
+            share_rules: Array[
+              {
+                target_accounts: Array[String],
+                unshare_interval: untyped,
+                unshare_interval_unit: untyped
+              }
+            ],
+            deprecate_rule: {
+              count: untyped,
+              interval: untyped,
+              interval_unit: untyped
+            },
+            archive_rule: {
+              retain_rule: {
+                retention_archive_tier: {
+                  count: untyped,
+                  interval: untyped,
+                  interval_unit: untyped
+                }
+              }
+            }
+          }
+        ],
+        parameters: {
+          exclude_boot_volume: bool,
+          no_reboot: bool,
+          exclude_data_volume_tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        },
+        event_source: {
+          type: String,
+          parameters: {
+            event_type: String,
+            snapshot_owner: Array[String],
+            description_regex: String
+          }
+        },
+        actions: Array[
+          {
+            name: String,
+            cross_region_copy: Array[
+              {
+                target: untyped,
+                encryption_configuration: {
+                  encrypted: untyped,
+                  cmk_arn: untyped
+                },
+                retain_rule: untyped
+              }
+            ]
+          }
+        ],
+        policy_language: String,
+        resource_type: String,
+        create_interval: Integer,
+        retain_interval: Integer,
+        copy_tags: untyped,
+        cross_region_copy_targets: Array[
+          {
+            target_region: untyped
+          }
+        ],
+        extend_deletion: bool,
+        exclusions: {
+          exclude_boot_volumes: bool,
+          exclude_volume_types: Array[String],
+          exclude_tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      },
+      ?tags: Hash[String, String],
+      ?default_policy: String,
+      ?create_interval: Integer,
+      ?retain_interval: Integer,
+      ?copy_tags: bool,
+      ?extend_deletion: bool,
+      ?cross_region_copy_targets: Array[
+        {
+          target_region: String
+        }
+      ],
+      ?exclusions: {
+        exclude_boot_volumes: bool,
+        exclude_volume_types: Array[String],
+        exclude_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ]
+      }
+    ) -> _CreateLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLifecyclePolicyResponse
+
+    interface _DeleteLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteLifecyclePolicyResponse]
+    end
+    def delete_lifecycle_policy: (
+      ?policy_id: String
+    ) -> _DeleteLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLifecyclePolicyResponse
+
+    interface _GetLifecyclePoliciesResponse
+      include Smithy::Client::_Response[Types::GetLifecyclePoliciesResponse]
+      def policies: () -> Array[Types::LifecyclePolicySummary]?
+    end
+    def get_lifecycle_policies: (
+      ?policy_ids: Array[String],
+      ?state: String,
+      ?resource_types: Array[String],
+      ?target_tags: Array[String],
+      ?tags_to_add: Array[String],
+      ?default_policy_type: String
+    ) -> _GetLifecyclePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLifecyclePoliciesResponse
+
+    interface _GetLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::GetLifecyclePolicyResponse]
+      def policy: () -> Types::LifecyclePolicy?
+    end
+    def get_lifecycle_policy: (
+      ?policy_id: String
+    ) -> _GetLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLifecyclePolicyResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::UpdateLifecyclePolicyResponse]
+    end
+    def update_lifecycle_policy: (
+      ?policy_id: String,
+      ?execution_role_arn: String,
+      ?state: String,
+      ?description: String,
+      ?policy_details: {
+        policy_type: String,
+        resource_types: Array[String],
+        resource_locations: Array[String],
+        target_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        schedules: Array[
+          {
+            name: String,
+            copy_tags: bool,
+            tags_to_add: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ],
+            variable_tags: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ],
+            create_rule: {
+              location: String,
+              interval: Integer,
+              interval_unit: String,
+              times: Array[String],
+              cron_expression: String,
+              scripts: Array[
+                {
+                  stages: Array[String],
+                  execution_handler_service: String,
+                  execution_handler: String,
+                  execute_operation_on_script_failure: bool,
+                  execution_timeout: Integer,
+                  maximum_retry_count: Integer
+                }
+              ]
+            },
+            retain_rule: {
+              count: Integer,
+              interval: Integer,
+              interval_unit: String
+            },
+            fast_restore_rule: {
+              count: Integer,
+              interval: untyped,
+              interval_unit: untyped,
+              availability_zones: Array[String]
+            },
+            cross_region_copy_rules: Array[
+              {
+                target_region: String,
+                target: String,
+                encrypted: bool,
+                cmk_arn: String,
+                copy_tags: bool,
+                retain_rule: {
+                  interval: untyped,
+                  interval_unit: untyped
+                },
+                deprecate_rule: {
+                  interval: untyped,
+                  interval_unit: untyped
+                }
+              }
+            ],
+            share_rules: Array[
+              {
+                target_accounts: Array[String],
+                unshare_interval: untyped,
+                unshare_interval_unit: untyped
+              }
+            ],
+            deprecate_rule: {
+              count: untyped,
+              interval: untyped,
+              interval_unit: untyped
+            },
+            archive_rule: {
+              retain_rule: {
+                retention_archive_tier: {
+                  count: untyped,
+                  interval: untyped,
+                  interval_unit: untyped
+                }
+              }
+            }
+          }
+        ],
+        parameters: {
+          exclude_boot_volume: bool,
+          no_reboot: bool,
+          exclude_data_volume_tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        },
+        event_source: {
+          type: String,
+          parameters: {
+            event_type: String,
+            snapshot_owner: Array[String],
+            description_regex: String
+          }
+        },
+        actions: Array[
+          {
+            name: String,
+            cross_region_copy: Array[
+              {
+                target: untyped,
+                encryption_configuration: {
+                  encrypted: untyped,
+                  cmk_arn: untyped
+                },
+                retain_rule: untyped
+              }
+            ]
+          }
+        ],
+        policy_language: String,
+        resource_type: String,
+        create_interval: Integer,
+        retain_interval: Integer,
+        copy_tags: untyped,
+        cross_region_copy_targets: Array[
+          {
+            target_region: untyped
+          }
+        ],
+        extend_deletion: bool,
+        exclusions: {
+          exclude_boot_volumes: bool,
+          exclude_volume_types: Array[String],
+          exclude_tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      },
+      ?create_interval: Integer,
+      ?retain_interval: Integer,
+      ?copy_tags: bool,
+      ?extend_deletion: bool,
+      ?cross_region_copy_targets: Array[
+        {
+          target_region: String
+        }
+      ],
+      ?exclusions: {
+        exclude_boot_volumes: bool,
+        exclude_volume_types: Array[String],
+        exclude_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ]
+      }
+    ) -> _UpdateLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLifecyclePolicyResponse
+  end
+end

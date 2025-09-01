@@ -1,0 +1,82 @@
+module Aws::WorkDocs
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictingOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomMetadataLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeactivatingLastSystemUserException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class DocumentLockedForCommentsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DraftUploadOutOfSyncException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityNotExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def entity_ids: () -> Array[String]?
+    end
+    class FailedDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalUserStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCommentOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPasswordException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ProhibitedStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestedEntityTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyCheckedOutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StorageLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StorageLimitWillExceedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyLabelsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManySubscriptionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class UnauthorizedResourceAccessException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

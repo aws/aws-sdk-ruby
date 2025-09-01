@@ -1,0 +1,5 @@
+module Aws::TaxSettings
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

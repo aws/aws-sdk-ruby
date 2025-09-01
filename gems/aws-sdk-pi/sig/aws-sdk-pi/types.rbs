@@ -1,0 +1,810 @@
+module Aws::PI
+  module Types
+
+    module AcceptLanguage
+      EN_US: String
+    end
+
+    class AnalysisReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report_id: String,
+        ?identifier: String,
+        ?service_type: String,
+        ?create_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?insights: Array[Types::Insight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report_id: String?
+      attr_accessor identifier: String?
+      attr_accessor service_type: String?
+      attr_accessor create_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor insights: Array[Types::Insight]?
+    end
+
+    class AnalysisReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report_id: String,
+        ?create_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module AnalysisStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module ContextType
+      CAUSAL: String
+      CONTEXTUAL: String
+    end
+
+    class CreatePerformanceAnalysisReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePerformanceAnalysisReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report_id: String?
+    end
+
+    class Data
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?performance_insights_metric: Types::PerformanceInsightsMetric,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor performance_insights_metric: Types::PerformanceInsightsMetric?
+    end
+
+    class DataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor value: Float?
+    end
+
+    class DeletePerformanceAnalysisReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?analysis_report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor analysis_report_id: String?
+    end
+
+    class DeletePerformanceAnalysisReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeDimensionKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metric: String,
+        ?period_in_seconds: Integer,
+        ?group_by: Types::DimensionGroup,
+        ?additional_metrics: Array[String],
+        ?partition_by: Types::DimensionGroup,
+        ?filter: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metric: String?
+      attr_accessor period_in_seconds: Integer?
+      attr_accessor group_by: Types::DimensionGroup?
+      attr_accessor additional_metrics: Array[String]?
+      attr_accessor partition_by: Types::DimensionGroup?
+      attr_accessor filter: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDimensionKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aligned_start_time: Time,
+        ?aligned_end_time: Time,
+        ?partition_keys: Array[Types::ResponsePartitionKey],
+        ?keys: Array[Types::DimensionKeyDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aligned_start_time: Time?
+      attr_accessor aligned_end_time: Time?
+      attr_accessor partition_keys: Array[Types::ResponsePartitionKey]?
+      attr_accessor keys: Array[Types::DimensionKeyDescription]?
+      attr_accessor next_token: String?
+    end
+
+    module DetailStatus
+      AVAILABLE: String
+      PROCESSING: String
+      UNAVAILABLE: String
+    end
+
+    class DimensionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DimensionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?dimensions: Array[String],
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor dimensions: Array[String]?
+      attr_accessor limit: Integer?
+    end
+
+    class DimensionGroupDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?dimensions: Array[Types::DimensionDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor dimensions: Array[Types::DimensionDetail]?
+    end
+
+    class DimensionKeyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Hash[String, String],
+        ?total: Float,
+        ?additional_metrics: Hash[String, Float],
+        ?partitions: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor total: Float?
+      attr_accessor additional_metrics: Hash[String, Float]?
+      attr_accessor partitions: Array[Float]?
+    end
+
+    class DimensionKeyDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?dimension: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor dimension: String?
+      attr_accessor status: String?
+    end
+
+    class FeatureMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module FeatureStatus
+      ENABLED: String
+      DISABLED: String
+      UNSUPPORTED: String
+      ENABLED_PENDING_REBOOT: String
+      DISABLED_PENDING_REBOOT: String
+      UNKNOWN: String
+    end
+
+    module FineGrainedAction
+      DESCRIBE_DIMENSION_KEYS: String
+      GET_DIMENSION_KEY_DETAILS: String
+      GET_RESOURCE_METRICS: String
+    end
+
+    class GetDimensionKeyDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?group: String,
+        ?group_identifier: String,
+        ?requested_dimensions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor group: String?
+      attr_accessor group_identifier: String?
+      attr_accessor requested_dimensions: Array[String]?
+    end
+
+    class GetDimensionKeyDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Array[Types::DimensionKeyDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Array[Types::DimensionKeyDetail]?
+    end
+
+    class GetPerformanceAnalysisReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?analysis_report_id: String,
+        ?text_format: String,
+        ?accept_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor analysis_report_id: String?
+      attr_accessor text_format: String?
+      attr_accessor accept_language: String?
+    end
+
+    class GetPerformanceAnalysisReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_report: Types::AnalysisReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_report: Types::AnalysisReport?
+    end
+
+    class GetResourceMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetResourceMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?features: Hash[String, Types::FeatureMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor features: Hash[String, Types::FeatureMetadata]?
+    end
+
+    class GetResourceMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?metric_queries: Array[Types::MetricQuery],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?period_in_seconds: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?period_alignment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor metric_queries: Array[Types::MetricQuery]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor period_in_seconds: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor period_alignment: String?
+    end
+
+    class GetResourceMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aligned_start_time: Time,
+        ?aligned_end_time: Time,
+        ?identifier: String,
+        ?metric_list: Array[Types::MetricKeyDataPoints],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aligned_start_time: Time?
+      attr_accessor aligned_end_time: Time?
+      attr_accessor identifier: String?
+      attr_accessor metric_list: Array[Types::MetricKeyDataPoints]?
+      attr_accessor next_token: String?
+    end
+
+    class Insight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?insight_type: String,
+        ?context: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?severity: String,
+        ?supporting_insights: Array[Types::Insight],
+        ?description: String,
+        ?recommendations: Array[Types::Recommendation],
+        ?insight_data: Array[Types::Data],
+        ?baseline_data: Array[Types::Data],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor insight_type: String?
+      attr_accessor context: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor severity: String?
+      attr_accessor supporting_insights: Array[Types::Insight]?
+      attr_accessor description: String?
+      attr_accessor recommendations: Array[Types::Recommendation]?
+      attr_accessor insight_data: Array[Types::Data]?
+      attr_accessor baseline_data: Array[Types::Data]?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAvailableResourceDimensionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?metrics: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?authorized_actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor metrics: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor authorized_actions: Array[String]?
+    end
+
+    class ListAvailableResourceDimensionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_dimensions: Array[Types::MetricDimensionGroups],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_dimensions: Array[Types::MetricDimensionGroups]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAvailableResourceMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?metric_types: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor metric_types: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAvailableResourceMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[Types::ResponseResourceMetric],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[Types::ResponseResourceMetric]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPerformanceAnalysisReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_tags: bool?
+    end
+
+    class ListPerformanceAnalysisReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_reports: Array[Types::AnalysisReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_reports: Array[Types::AnalysisReportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MetricDimensionGroups
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?groups: Array[Types::DimensionGroupDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor groups: Array[Types::DimensionGroupDetail]?
+    end
+
+    class MetricKeyDataPoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::ResponseResourceMetricKey,
+        ?data_points: Array[Types::DataPoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::ResponseResourceMetricKey?
+      attr_accessor data_points: Array[Types::DataPoint]?
+    end
+
+    class MetricQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?group_by: Types::DimensionGroup,
+        ?filter: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor group_by: Types::DimensionGroup?
+      attr_accessor filter: Hash[String, String]?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PerformanceInsightsMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?display_name: String,
+        ?dimensions: Hash[String, String],
+        ?filter: Hash[String, String],
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor display_name: String?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor filter: Hash[String, String]?
+      attr_accessor value: Float?
+    end
+
+    module PeriodAlignment
+      END_TIME: String
+      START_TIME: String
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?recommendation_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor recommendation_description: String?
+    end
+
+    class ResponsePartitionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Hash[String, String]?
+    end
+
+    class ResponseResourceMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?description: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor description: String?
+      attr_accessor unit: String?
+    end
+
+    class ResponseResourceMetricKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?dimensions: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor dimensions: Hash[String, String]?
+    end
+
+    module ServiceType
+      RDS: String
+      DOCDB: String
+    end
+
+    module Severity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TextFormat
+      PLAIN_TEXT: String
+      MARKDOWN: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

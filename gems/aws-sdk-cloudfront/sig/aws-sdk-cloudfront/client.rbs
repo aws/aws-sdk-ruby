@@ -1,0 +1,2874 @@
+module Aws::CloudFront
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudFront::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_alias: (
+      ?target_distribution_id: String,
+      ?alias: String
+    ) -> _AssociateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAliasResponse
+
+    interface _AssociateDistributionTenantWebACLResponse
+      include Smithy::Client::_Response[Types::AssociateDistributionTenantWebACLResult]
+      def id: () -> String?
+      def web_acl_arn: () -> String?
+      def e_tag: () -> String?
+    end
+    def associate_distribution_tenant_web_acl: (
+      ?id: String,
+      ?web_acl_arn: String,
+      ?if_match: String
+    ) -> _AssociateDistributionTenantWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDistributionTenantWebACLResponse
+
+    interface _AssociateDistributionWebACLResponse
+      include Smithy::Client::_Response[Types::AssociateDistributionWebACLResult]
+      def id: () -> String?
+      def web_acl_arn: () -> String?
+      def e_tag: () -> String?
+    end
+    def associate_distribution_web_acl: (
+      ?id: String,
+      ?web_acl_arn: String,
+      ?if_match: String
+    ) -> _AssociateDistributionWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDistributionWebACLResponse
+
+    interface _CopyDistributionResponse
+      include Smithy::Client::_Response[Types::CopyDistributionResult]
+      def distribution: () -> Types::Distribution?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def copy_distribution: (
+      ?primary_distribution_id: String,
+      ?staging: bool,
+      ?if_match: String,
+      ?caller_reference: String,
+      ?enabled: bool
+    ) -> _CopyDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDistributionResponse
+
+    interface _CreateAnycastIpListResponse
+      include Smithy::Client::_Response[Types::CreateAnycastIpListResult]
+      def anycast_ip_list: () -> Types::AnycastIpList?
+      def e_tag: () -> String?
+    end
+    def create_anycast_ip_list: (
+      ?name: String,
+      ?ip_count: Integer,
+      ?tags: {
+        items: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _CreateAnycastIpListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnycastIpListResponse
+
+    interface _CreateCachePolicyResponse
+      include Smithy::Client::_Response[Types::CreateCachePolicyResult]
+      def cache_policy: () -> Types::CachePolicy?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_cache_policy: (
+      ?cache_policy_config: {
+        comment: String,
+        name: untyped,
+        default_ttl: Integer,
+        max_ttl: untyped,
+        min_ttl: untyped,
+        parameters_in_cache_key_and_forwarded_to_origin: {
+          enable_accept_encoding_gzip: bool,
+          enable_accept_encoding_brotli: untyped,
+          headers_config: {
+            header_behavior: String,
+            headers: {
+              quantity: Integer,
+              items: Array[String]
+            }
+          },
+          cookies_config: {
+            cookie_behavior: String,
+            cookies: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          },
+          query_strings_config: {
+            query_string_behavior: String,
+            query_strings: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          }
+        }
+      }
+    ) -> _CreateCachePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCachePolicyResponse
+
+    interface _CreateCloudFrontOriginAccessIdentityResponse
+      include Smithy::Client::_Response[Types::CreateCloudFrontOriginAccessIdentityResult]
+      def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_cloud_front_origin_access_identity: (
+      ?cloud_front_origin_access_identity_config: {
+        caller_reference: String,
+        comment: untyped
+      }
+    ) -> _CreateCloudFrontOriginAccessIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudFrontOriginAccessIdentityResponse
+
+    interface _CreateConnectionGroupResponse
+      include Smithy::Client::_Response[Types::CreateConnectionGroupResult]
+      def connection_group: () -> Types::ConnectionGroup?
+      def e_tag: () -> String?
+    end
+    def create_connection_group: (
+      ?name: String,
+      ?ipv6_enabled: bool,
+      ?tags: {
+        items: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?anycast_ip_list_id: String,
+      ?enabled: bool
+    ) -> _CreateConnectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionGroupResponse
+
+    interface _CreateContinuousDeploymentPolicyResponse
+      include Smithy::Client::_Response[Types::CreateContinuousDeploymentPolicyResult]
+      def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_continuous_deployment_policy: (
+      ?continuous_deployment_policy_config: {
+        staging_distribution_dns_names: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        enabled: bool,
+        traffic_config: {
+          single_weight_config: {
+            weight: Float,
+            session_stickiness_config: {
+              idle_ttl: untyped,
+              maximum_ttl: untyped
+            }
+          },
+          single_header_config: {
+            header: String,
+            value: untyped
+          },
+          type: String
+        }
+      }
+    ) -> _CreateContinuousDeploymentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContinuousDeploymentPolicyResponse
+
+    interface _CreateDistributionResponse
+      include Smithy::Client::_Response[Types::CreateDistributionResult]
+      def distribution: () -> Types::Distribution?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_distribution: (
+      ?distribution_config: {
+        caller_reference: String,
+        aliases: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        default_root_object: untyped,
+        origins: {
+          quantity: untyped,
+          items: Array[
+            {
+              id: untyped,
+              domain_name: untyped,
+              origin_path: untyped,
+              custom_headers: {
+                quantity: untyped,
+                items: Array[
+                  {
+                    header_name: untyped,
+                    header_value: String
+                  }
+                ]
+              },
+              s3_origin_config: {
+                origin_access_identity: untyped,
+                origin_read_timeout: untyped
+              },
+              custom_origin_config: {
+                http_port: untyped,
+                https_port: untyped,
+                origin_protocol_policy: String,
+                origin_ssl_protocols: {
+                  quantity: untyped,
+                  items: Array[String]
+                },
+                origin_read_timeout: untyped,
+                origin_keepalive_timeout: untyped
+              },
+              vpc_origin_config: {
+                vpc_origin_id: untyped,
+                origin_read_timeout: untyped,
+                origin_keepalive_timeout: untyped
+              },
+              connection_attempts: untyped,
+              connection_timeout: untyped,
+              response_completion_timeout: untyped,
+              origin_shield: {
+                enabled: bool,
+                origin_shield_region: String
+              },
+              origin_access_control_id: untyped
+            }
+          ]
+        },
+        origin_groups: {
+          quantity: untyped,
+          items: Array[
+            {
+              id: untyped,
+              failover_criteria: {
+                status_codes: {
+                  quantity: untyped,
+                  items: Array[Integer]
+                }
+              },
+              members: {
+                quantity: untyped,
+                items: Array[
+                  {
+                    origin_id: untyped
+                  }
+                ]
+              },
+              selection_criteria: String
+            }
+          ]
+        },
+        default_cache_behavior: {
+          target_origin_id: untyped,
+          trusted_signers: {
+            enabled: untyped,
+            quantity: untyped,
+            items: Array[String]
+          },
+          trusted_key_groups: {
+            enabled: untyped,
+            quantity: untyped,
+            items: Array[String]
+          },
+          viewer_protocol_policy: String,
+          allowed_methods: {
+            quantity: untyped,
+            items: Array[String],
+            cached_methods: {
+              quantity: untyped,
+              items: untyped
+            }
+          },
+          smooth_streaming: untyped,
+          compress: untyped,
+          lambda_function_associations: {
+            quantity: untyped,
+            items: Array[
+              {
+                lambda_function_arn: String,
+                event_type: String,
+                include_body: untyped
+              }
+            ]
+          },
+          function_associations: {
+            quantity: untyped,
+            items: Array[
+              {
+                function_arn: String,
+                event_type: untyped
+              }
+            ]
+          },
+          field_level_encryption_id: untyped,
+          realtime_log_config_arn: untyped,
+          cache_policy_id: untyped,
+          origin_request_policy_id: untyped,
+          response_headers_policy_id: untyped,
+          grpc_config: {
+            enabled: untyped
+          },
+          forwarded_values: {
+            query_string: untyped,
+            cookies: {
+              forward: String,
+              whitelisted_names: {
+                quantity: untyped,
+                items: Array[String]
+              }
+            },
+            headers: {
+              quantity: untyped,
+              items: Array[String]
+            },
+            query_string_cache_keys: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          },
+          min_ttl: Integer,
+          default_ttl: untyped,
+          max_ttl: untyped
+        },
+        cache_behaviors: {
+          quantity: untyped,
+          items: Array[
+            {
+              path_pattern: untyped,
+              target_origin_id: untyped,
+              trusted_signers: untyped,
+              trusted_key_groups: untyped,
+              viewer_protocol_policy: untyped,
+              allowed_methods: untyped,
+              smooth_streaming: untyped,
+              compress: untyped,
+              lambda_function_associations: untyped,
+              function_associations: untyped,
+              field_level_encryption_id: untyped,
+              realtime_log_config_arn: untyped,
+              cache_policy_id: untyped,
+              origin_request_policy_id: untyped,
+              response_headers_policy_id: untyped,
+              grpc_config: untyped,
+              forwarded_values: untyped,
+              min_ttl: untyped,
+              default_ttl: untyped,
+              max_ttl: untyped
+            }
+          ]
+        },
+        custom_error_responses: {
+          quantity: untyped,
+          items: Array[
+            {
+              error_code: untyped,
+              response_page_path: untyped,
+              response_code: untyped,
+              error_caching_min_ttl: untyped
+            }
+          ]
+        },
+        comment: String,
+        logging: {
+          enabled: untyped,
+          include_cookies: untyped,
+          bucket: untyped,
+          prefix: untyped
+        },
+        price_class: String,
+        enabled: untyped,
+        viewer_certificate: {
+          cloud_front_default_certificate: untyped,
+          iam_certificate_id: String,
+          acm_certificate_arn: untyped,
+          ssl_support_method: String,
+          minimum_protocol_version: String,
+          certificate: untyped,
+          certificate_source: String
+        },
+        restrictions: {
+          geo_restriction: {
+            restriction_type: String,
+            quantity: untyped,
+            items: Array[String]
+          }
+        },
+        web_acl_id: untyped,
+        http_version: String,
+        is_ipv6_enabled: untyped,
+        continuous_deployment_policy_id: untyped,
+        staging: untyped,
+        anycast_ip_list_id: untyped,
+        tenant_config: {
+          parameter_definitions: Array[
+            {
+              name: String,
+              definition: {
+                string_schema: {
+                  comment: untyped,
+                  default_value: String,
+                  required: untyped
+                }
+              }
+            }
+          ]
+        },
+        connection_mode: String
+      }
+    ) -> _CreateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionResponse
+
+    interface _CreateDistributionTenantResponse
+      include Smithy::Client::_Response[Types::CreateDistributionTenantResult]
+      def distribution_tenant: () -> Types::DistributionTenant?
+      def e_tag: () -> String?
+    end
+    def create_distribution_tenant: (
+      ?distribution_id: String,
+      ?name: String,
+      ?domains: Array[
+        {
+          domain: String
+        }
+      ],
+      ?tags: {
+        items: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?customizations: {
+        web_acl: {
+          action: String,
+          arn: String
+        },
+        certificate: {
+          arn: untyped
+        },
+        geo_restrictions: {
+          restriction_type: String,
+          locations: Array[String]
+        }
+      },
+      ?parameters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?connection_group_id: String,
+      ?managed_certificate_request: {
+        validation_token_host: String,
+        primary_domain_name: String,
+        certificate_transparency_logging_preference: String
+      },
+      ?enabled: bool
+    ) -> _CreateDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionTenantResponse
+
+    interface _CreateDistributionWithTagsResponse
+      include Smithy::Client::_Response[Types::CreateDistributionWithTagsResult]
+      def distribution: () -> Types::Distribution?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_distribution_with_tags: (
+      ?distribution_config_with_tags: {
+        distribution_config: {
+          caller_reference: String,
+          aliases: {
+            quantity: Integer,
+            items: Array[String]
+          },
+          default_root_object: untyped,
+          origins: {
+            quantity: untyped,
+            items: Array[
+              {
+                id: untyped,
+                domain_name: untyped,
+                origin_path: untyped,
+                custom_headers: {
+                  quantity: untyped,
+                  items: Array[
+                    {
+                      header_name: untyped,
+                      header_value: String
+                    }
+                  ]
+                },
+                s3_origin_config: {
+                  origin_access_identity: untyped,
+                  origin_read_timeout: untyped
+                },
+                custom_origin_config: {
+                  http_port: untyped,
+                  https_port: untyped,
+                  origin_protocol_policy: String,
+                  origin_ssl_protocols: {
+                    quantity: untyped,
+                    items: Array[String]
+                  },
+                  origin_read_timeout: untyped,
+                  origin_keepalive_timeout: untyped
+                },
+                vpc_origin_config: {
+                  vpc_origin_id: untyped,
+                  origin_read_timeout: untyped,
+                  origin_keepalive_timeout: untyped
+                },
+                connection_attempts: untyped,
+                connection_timeout: untyped,
+                response_completion_timeout: untyped,
+                origin_shield: {
+                  enabled: bool,
+                  origin_shield_region: String
+                },
+                origin_access_control_id: untyped
+              }
+            ]
+          },
+          origin_groups: {
+            quantity: untyped,
+            items: Array[
+              {
+                id: untyped,
+                failover_criteria: {
+                  status_codes: {
+                    quantity: untyped,
+                    items: Array[Integer]
+                  }
+                },
+                members: {
+                  quantity: untyped,
+                  items: Array[
+                    {
+                      origin_id: untyped
+                    }
+                  ]
+                },
+                selection_criteria: String
+              }
+            ]
+          },
+          default_cache_behavior: {
+            target_origin_id: untyped,
+            trusted_signers: {
+              enabled: untyped,
+              quantity: untyped,
+              items: Array[String]
+            },
+            trusted_key_groups: {
+              enabled: untyped,
+              quantity: untyped,
+              items: Array[String]
+            },
+            viewer_protocol_policy: String,
+            allowed_methods: {
+              quantity: untyped,
+              items: Array[String],
+              cached_methods: {
+                quantity: untyped,
+                items: untyped
+              }
+            },
+            smooth_streaming: untyped,
+            compress: untyped,
+            lambda_function_associations: {
+              quantity: untyped,
+              items: Array[
+                {
+                  lambda_function_arn: String,
+                  event_type: String,
+                  include_body: untyped
+                }
+              ]
+            },
+            function_associations: {
+              quantity: untyped,
+              items: Array[
+                {
+                  function_arn: String,
+                  event_type: untyped
+                }
+              ]
+            },
+            field_level_encryption_id: untyped,
+            realtime_log_config_arn: untyped,
+            cache_policy_id: untyped,
+            origin_request_policy_id: untyped,
+            response_headers_policy_id: untyped,
+            grpc_config: {
+              enabled: untyped
+            },
+            forwarded_values: {
+              query_string: untyped,
+              cookies: {
+                forward: String,
+                whitelisted_names: {
+                  quantity: untyped,
+                  items: Array[String]
+                }
+              },
+              headers: {
+                quantity: untyped,
+                items: Array[String]
+              },
+              query_string_cache_keys: {
+                quantity: untyped,
+                items: Array[String]
+              }
+            },
+            min_ttl: Integer,
+            default_ttl: untyped,
+            max_ttl: untyped
+          },
+          cache_behaviors: {
+            quantity: untyped,
+            items: Array[
+              {
+                path_pattern: untyped,
+                target_origin_id: untyped,
+                trusted_signers: untyped,
+                trusted_key_groups: untyped,
+                viewer_protocol_policy: untyped,
+                allowed_methods: untyped,
+                smooth_streaming: untyped,
+                compress: untyped,
+                lambda_function_associations: untyped,
+                function_associations: untyped,
+                field_level_encryption_id: untyped,
+                realtime_log_config_arn: untyped,
+                cache_policy_id: untyped,
+                origin_request_policy_id: untyped,
+                response_headers_policy_id: untyped,
+                grpc_config: untyped,
+                forwarded_values: untyped,
+                min_ttl: untyped,
+                default_ttl: untyped,
+                max_ttl: untyped
+              }
+            ]
+          },
+          custom_error_responses: {
+            quantity: untyped,
+            items: Array[
+              {
+                error_code: untyped,
+                response_page_path: untyped,
+                response_code: untyped,
+                error_caching_min_ttl: untyped
+              }
+            ]
+          },
+          comment: String,
+          logging: {
+            enabled: untyped,
+            include_cookies: untyped,
+            bucket: untyped,
+            prefix: untyped
+          },
+          price_class: String,
+          enabled: untyped,
+          viewer_certificate: {
+            cloud_front_default_certificate: untyped,
+            iam_certificate_id: String,
+            acm_certificate_arn: untyped,
+            ssl_support_method: String,
+            minimum_protocol_version: String,
+            certificate: untyped,
+            certificate_source: String
+          },
+          restrictions: {
+            geo_restriction: {
+              restriction_type: String,
+              quantity: untyped,
+              items: Array[String]
+            }
+          },
+          web_acl_id: untyped,
+          http_version: String,
+          is_ipv6_enabled: untyped,
+          continuous_deployment_policy_id: untyped,
+          staging: untyped,
+          anycast_ip_list_id: untyped,
+          tenant_config: {
+            parameter_definitions: Array[
+              {
+                name: String,
+                definition: {
+                  string_schema: {
+                    comment: untyped,
+                    default_value: String,
+                    required: untyped
+                  }
+                }
+              }
+            ]
+          },
+          connection_mode: String
+        },
+        tags: {
+          items: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      }
+    ) -> _CreateDistributionWithTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionWithTagsResponse
+
+    interface _CreateFieldLevelEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::CreateFieldLevelEncryptionConfigResult]
+      def field_level_encryption: () -> Types::FieldLevelEncryption?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_field_level_encryption_config: (
+      ?field_level_encryption_config: {
+        caller_reference: String,
+        comment: untyped,
+        query_arg_profile_config: {
+          forward_when_query_arg_profile_is_unknown: bool,
+          query_arg_profiles: {
+            quantity: Integer,
+            items: Array[
+              {
+                query_arg: untyped,
+                profile_id: untyped
+              }
+            ]
+          }
+        },
+        content_type_profile_config: {
+          forward_when_content_type_is_unknown: untyped,
+          content_type_profiles: {
+            quantity: untyped,
+            items: Array[
+              {
+                format: String,
+                profile_id: untyped,
+                content_type: untyped
+              }
+            ]
+          }
+        }
+      }
+    ) -> _CreateFieldLevelEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFieldLevelEncryptionConfigResponse
+
+    interface _CreateFieldLevelEncryptionProfileResponse
+      include Smithy::Client::_Response[Types::CreateFieldLevelEncryptionProfileResult]
+      def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_field_level_encryption_profile: (
+      ?field_level_encryption_profile_config: {
+        name: String,
+        caller_reference: untyped,
+        comment: untyped,
+        encryption_entities: {
+          quantity: Integer,
+          items: Array[
+            {
+              public_key_id: untyped,
+              provider_id: untyped,
+              field_patterns: {
+                quantity: untyped,
+                items: Array[String]
+              }
+            }
+          ]
+        }
+      }
+    ) -> _CreateFieldLevelEncryptionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFieldLevelEncryptionProfileResponse
+
+    interface _CreateFunctionResponse
+      include Smithy::Client::_Response[Types::CreateFunctionResult]
+      def function_summary: () -> Types::FunctionSummary?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_function: (
+      ?name: String,
+      ?function_config: {
+        comment: String,
+        runtime: String,
+        key_value_store_associations: {
+          quantity: Integer,
+          items: Array[
+            {
+              key_value_store_arn: String
+            }
+          ]
+        }
+      },
+      ?function_code: String
+    ) -> _CreateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionResponse
+
+    interface _CreateInvalidationResponse
+      include Smithy::Client::_Response[Types::CreateInvalidationResult]
+      def location: () -> String?
+      def invalidation: () -> Types::Invalidation?
+    end
+    def create_invalidation: (
+      ?distribution_id: String,
+      ?invalidation_batch: {
+        paths: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        caller_reference: String
+      }
+    ) -> _CreateInvalidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvalidationResponse
+
+    interface _CreateInvalidationForDistributionTenantResponse
+      include Smithy::Client::_Response[Types::CreateInvalidationForDistributionTenantResult]
+      def location: () -> String?
+      def invalidation: () -> Types::Invalidation?
+    end
+    def create_invalidation_for_distribution_tenant: (
+      ?id: String,
+      ?invalidation_batch: {
+        paths: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        caller_reference: String
+      }
+    ) -> _CreateInvalidationForDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvalidationForDistributionTenantResponse
+
+    interface _CreateKeyGroupResponse
+      include Smithy::Client::_Response[Types::CreateKeyGroupResult]
+      def key_group: () -> Types::KeyGroup?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_key_group: (
+      ?key_group_config: {
+        name: String,
+        items: Array[String],
+        comment: untyped
+      }
+    ) -> _CreateKeyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyGroupResponse
+
+    interface _CreateKeyValueStoreResponse
+      include Smithy::Client::_Response[Types::CreateKeyValueStoreResult]
+      def key_value_store: () -> Types::KeyValueStore?
+      def e_tag: () -> String?
+      def location: () -> String?
+    end
+    def create_key_value_store: (
+      ?name: String,
+      ?comment: String,
+      ?import_source: {
+        source_type: String,
+        source_arn: String
+      }
+    ) -> _CreateKeyValueStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyValueStoreResponse
+
+    interface _CreateMonitoringSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateMonitoringSubscriptionResult]
+      def monitoring_subscription: () -> Types::MonitoringSubscription?
+    end
+    def create_monitoring_subscription: (
+      ?distribution_id: String,
+      ?monitoring_subscription: {
+        realtime_metrics_subscription_config: {
+          realtime_metrics_subscription_status: String
+        }
+      }
+    ) -> _CreateMonitoringSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMonitoringSubscriptionResponse
+
+    interface _CreateOriginAccessControlResponse
+      include Smithy::Client::_Response[Types::CreateOriginAccessControlResult]
+      def origin_access_control: () -> Types::OriginAccessControl?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_origin_access_control: (
+      ?origin_access_control_config: {
+        name: String,
+        description: untyped,
+        signing_protocol: String,
+        signing_behavior: String,
+        origin_access_control_origin_type: String
+      }
+    ) -> _CreateOriginAccessControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOriginAccessControlResponse
+
+    interface _CreateOriginRequestPolicyResponse
+      include Smithy::Client::_Response[Types::CreateOriginRequestPolicyResult]
+      def origin_request_policy: () -> Types::OriginRequestPolicy?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_origin_request_policy: (
+      ?origin_request_policy_config: {
+        comment: String,
+        name: untyped,
+        headers_config: {
+          header_behavior: String,
+          headers: {
+            quantity: Integer,
+            items: Array[String]
+          }
+        },
+        cookies_config: {
+          cookie_behavior: String,
+          cookies: {
+            quantity: untyped,
+            items: Array[String]
+          }
+        },
+        query_strings_config: {
+          query_string_behavior: String,
+          query_strings: {
+            quantity: untyped,
+            items: Array[String]
+          }
+        }
+      }
+    ) -> _CreateOriginRequestPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOriginRequestPolicyResponse
+
+    interface _CreatePublicKeyResponse
+      include Smithy::Client::_Response[Types::CreatePublicKeyResult]
+      def public_key: () -> Types::PublicKey?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_public_key: (
+      ?public_key_config: {
+        caller_reference: String,
+        name: untyped,
+        encoded_key: untyped,
+        comment: untyped
+      }
+    ) -> _CreatePublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePublicKeyResponse
+
+    interface _CreateRealtimeLogConfigResponse
+      include Smithy::Client::_Response[Types::CreateRealtimeLogConfigResult]
+      def realtime_log_config: () -> Types::RealtimeLogConfig?
+    end
+    def create_realtime_log_config: (
+      ?end_points: Array[
+        {
+          stream_type: String,
+          kinesis_stream_config: {
+            role_arn: untyped,
+            stream_arn: untyped
+          }
+        }
+      ],
+      ?fields: Array[String],
+      ?name: String,
+      ?sampling_rate: Integer
+    ) -> _CreateRealtimeLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRealtimeLogConfigResponse
+
+    interface _CreateResponseHeadersPolicyResponse
+      include Smithy::Client::_Response[Types::CreateResponseHeadersPolicyResult]
+      def response_headers_policy: () -> Types::ResponseHeadersPolicy?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_response_headers_policy: (
+      ?response_headers_policy_config: {
+        comment: String,
+        name: untyped,
+        cors_config: {
+          access_control_allow_origins: {
+            quantity: Integer,
+            items: Array[String]
+          },
+          access_control_allow_headers: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_allow_methods: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_allow_credentials: bool,
+          access_control_expose_headers: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_max_age_sec: untyped,
+          origin_override: untyped
+        },
+        security_headers_config: {
+          xss_protection: {
+            override: untyped,
+            protection: untyped,
+            mode_block: untyped,
+            report_uri: untyped
+          },
+          frame_options: {
+            override: untyped,
+            frame_option: String
+          },
+          referrer_policy: {
+            override: untyped,
+            referrer_policy: String
+          },
+          content_security_policy: {
+            override: untyped,
+            content_security_policy: untyped
+          },
+          content_type_options: {
+            override: untyped
+          },
+          strict_transport_security: {
+            override: untyped,
+            include_subdomains: untyped,
+            preload: untyped,
+            access_control_max_age_sec: untyped
+          }
+        },
+        server_timing_headers_config: {
+          enabled: untyped,
+          sampling_rate: Float
+        },
+        custom_headers_config: {
+          quantity: untyped,
+          items: Array[
+            {
+              header: untyped,
+              value: untyped,
+              override: untyped
+            }
+          ]
+        },
+        remove_headers_config: {
+          quantity: untyped,
+          items: Array[
+            {
+              header: untyped
+            }
+          ]
+        }
+      }
+    ) -> _CreateResponseHeadersPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResponseHeadersPolicyResponse
+
+    interface _CreateStreamingDistributionResponse
+      include Smithy::Client::_Response[Types::CreateStreamingDistributionResult]
+      def streaming_distribution: () -> Types::StreamingDistribution?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_streaming_distribution: (
+      ?streaming_distribution_config: {
+        caller_reference: String,
+        s3_origin: {
+          domain_name: untyped,
+          origin_access_identity: untyped
+        },
+        aliases: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        comment: untyped,
+        logging: {
+          enabled: bool,
+          bucket: untyped,
+          prefix: untyped
+        },
+        trusted_signers: {
+          enabled: untyped,
+          quantity: untyped,
+          items: Array[String]
+        },
+        price_class: String,
+        enabled: untyped
+      }
+    ) -> _CreateStreamingDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamingDistributionResponse
+
+    interface _CreateStreamingDistributionWithTagsResponse
+      include Smithy::Client::_Response[Types::CreateStreamingDistributionWithTagsResult]
+      def streaming_distribution: () -> Types::StreamingDistribution?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_streaming_distribution_with_tags: (
+      ?streaming_distribution_config_with_tags: {
+        streaming_distribution_config: {
+          caller_reference: String,
+          s3_origin: {
+            domain_name: untyped,
+            origin_access_identity: untyped
+          },
+          aliases: {
+            quantity: Integer,
+            items: Array[String]
+          },
+          comment: untyped,
+          logging: {
+            enabled: bool,
+            bucket: untyped,
+            prefix: untyped
+          },
+          trusted_signers: {
+            enabled: untyped,
+            quantity: untyped,
+            items: Array[String]
+          },
+          price_class: String,
+          enabled: untyped
+        },
+        tags: {
+          items: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      }
+    ) -> _CreateStreamingDistributionWithTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamingDistributionWithTagsResponse
+
+    interface _CreateVpcOriginResponse
+      include Smithy::Client::_Response[Types::CreateVpcOriginResult]
+      def vpc_origin: () -> Types::VpcOrigin?
+      def location: () -> String?
+      def e_tag: () -> String?
+    end
+    def create_vpc_origin: (
+      ?vpc_origin_endpoint_config: {
+        name: String,
+        arn: untyped,
+        http_port: Integer,
+        https_port: untyped,
+        origin_protocol_policy: String,
+        origin_ssl_protocols: {
+          quantity: untyped,
+          items: Array[String]
+        }
+      },
+      ?tags: {
+        items: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _CreateVpcOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcOriginResponse
+
+    interface _DeleteAnycastIpListResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_anycast_ip_list: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteAnycastIpListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnycastIpListResponse
+
+    interface _DeleteCachePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cache_policy: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteCachePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCachePolicyResponse
+
+    interface _DeleteCloudFrontOriginAccessIdentityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cloud_front_origin_access_identity: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteCloudFrontOriginAccessIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudFrontOriginAccessIdentityResponse
+
+    interface _DeleteConnectionGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connection_group: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteConnectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionGroupResponse
+
+    interface _DeleteContinuousDeploymentPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_continuous_deployment_policy: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteContinuousDeploymentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContinuousDeploymentPolicyResponse
+
+    interface _DeleteDistributionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_distribution: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDistributionResponse
+
+    interface _DeleteDistributionTenantResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_distribution_tenant: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDistributionTenantResponse
+
+    interface _DeleteFieldLevelEncryptionConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_field_level_encryption_config: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteFieldLevelEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFieldLevelEncryptionConfigResponse
+
+    interface _DeleteFieldLevelEncryptionProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_field_level_encryption_profile: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteFieldLevelEncryptionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFieldLevelEncryptionProfileResponse
+
+    interface _DeleteFunctionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function: (
+      ?name: String,
+      ?if_match: String
+    ) -> _DeleteFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionResponse
+
+    interface _DeleteKeyGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_key_group: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteKeyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyGroupResponse
+
+    interface _DeleteKeyValueStoreResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_key_value_store: (
+      ?name: String,
+      ?if_match: String
+    ) -> _DeleteKeyValueStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyValueStoreResponse
+
+    interface _DeleteMonitoringSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteMonitoringSubscriptionResult]
+    end
+    def delete_monitoring_subscription: (
+      ?distribution_id: String
+    ) -> _DeleteMonitoringSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMonitoringSubscriptionResponse
+
+    interface _DeleteOriginAccessControlResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_origin_access_control: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteOriginAccessControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOriginAccessControlResponse
+
+    interface _DeleteOriginRequestPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_origin_request_policy: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteOriginRequestPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOriginRequestPolicyResponse
+
+    interface _DeletePublicKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_public_key: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeletePublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublicKeyResponse
+
+    interface _DeleteRealtimeLogConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_realtime_log_config: (
+      ?name: String,
+      ?arn: String
+    ) -> _DeleteRealtimeLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRealtimeLogConfigResponse
+
+    interface _DeleteResponseHeadersPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_response_headers_policy: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteResponseHeadersPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResponseHeadersPolicyResponse
+
+    interface _DeleteStreamingDistributionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_streaming_distribution: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteStreamingDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamingDistributionResponse
+
+    interface _DeleteVpcOriginResponse
+      include Smithy::Client::_Response[Types::DeleteVpcOriginResult]
+      def vpc_origin: () -> Types::VpcOrigin?
+      def e_tag: () -> String?
+    end
+    def delete_vpc_origin: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DeleteVpcOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcOriginResponse
+
+    interface _DescribeFunctionResponse
+      include Smithy::Client::_Response[Types::DescribeFunctionResult]
+      def function_summary: () -> Types::FunctionSummary?
+      def e_tag: () -> String?
+    end
+    def describe_function: (
+      ?name: String,
+      ?stage: String
+    ) -> _DescribeFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFunctionResponse
+
+    interface _DescribeKeyValueStoreResponse
+      include Smithy::Client::_Response[Types::DescribeKeyValueStoreResult]
+      def key_value_store: () -> Types::KeyValueStore?
+      def e_tag: () -> String?
+    end
+    def describe_key_value_store: (
+      ?name: String
+    ) -> _DescribeKeyValueStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeyValueStoreResponse
+
+    interface _DisassociateDistributionTenantWebACLResponse
+      include Smithy::Client::_Response[Types::DisassociateDistributionTenantWebACLResult]
+      def id: () -> String?
+      def e_tag: () -> String?
+    end
+    def disassociate_distribution_tenant_web_acl: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DisassociateDistributionTenantWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDistributionTenantWebACLResponse
+
+    interface _DisassociateDistributionWebACLResponse
+      include Smithy::Client::_Response[Types::DisassociateDistributionWebACLResult]
+      def id: () -> String?
+      def e_tag: () -> String?
+    end
+    def disassociate_distribution_web_acl: (
+      ?id: String,
+      ?if_match: String
+    ) -> _DisassociateDistributionWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDistributionWebACLResponse
+
+    interface _GetAnycastIpListResponse
+      include Smithy::Client::_Response[Types::GetAnycastIpListResult]
+      def anycast_ip_list: () -> Types::AnycastIpList?
+      def e_tag: () -> String?
+    end
+    def get_anycast_ip_list: (
+      ?id: String
+    ) -> _GetAnycastIpListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnycastIpListResponse
+
+    interface _GetCachePolicyResponse
+      include Smithy::Client::_Response[Types::GetCachePolicyResult]
+      def cache_policy: () -> Types::CachePolicy?
+      def e_tag: () -> String?
+    end
+    def get_cache_policy: (
+      ?id: String
+    ) -> _GetCachePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCachePolicyResponse
+
+    interface _GetCachePolicyConfigResponse
+      include Smithy::Client::_Response[Types::GetCachePolicyConfigResult]
+      def cache_policy_config: () -> Types::CachePolicyConfig?
+      def e_tag: () -> String?
+    end
+    def get_cache_policy_config: (
+      ?id: String
+    ) -> _GetCachePolicyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCachePolicyConfigResponse
+
+    interface _GetCloudFrontOriginAccessIdentityResponse
+      include Smithy::Client::_Response[Types::GetCloudFrontOriginAccessIdentityResult]
+      def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity?
+      def e_tag: () -> String?
+    end
+    def get_cloud_front_origin_access_identity: (
+      ?id: String
+    ) -> _GetCloudFrontOriginAccessIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudFrontOriginAccessIdentityResponse
+
+    interface _GetCloudFrontOriginAccessIdentityConfigResponse
+      include Smithy::Client::_Response[Types::GetCloudFrontOriginAccessIdentityConfigResult]
+      def cloud_front_origin_access_identity_config: () -> Types::CloudFrontOriginAccessIdentityConfig?
+      def e_tag: () -> String?
+    end
+    def get_cloud_front_origin_access_identity_config: (
+      ?id: String
+    ) -> _GetCloudFrontOriginAccessIdentityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudFrontOriginAccessIdentityConfigResponse
+
+    interface _GetConnectionGroupResponse
+      include Smithy::Client::_Response[Types::GetConnectionGroupResult]
+      def connection_group: () -> Types::ConnectionGroup?
+      def e_tag: () -> String?
+    end
+    def get_connection_group: (
+      ?identifier: String
+    ) -> _GetConnectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionGroupResponse
+
+    interface _GetConnectionGroupByRoutingEndpointResponse
+      include Smithy::Client::_Response[Types::GetConnectionGroupByRoutingEndpointResult]
+      def connection_group: () -> Types::ConnectionGroup?
+      def e_tag: () -> String?
+    end
+    def get_connection_group_by_routing_endpoint: (
+      ?routing_endpoint: String
+    ) -> _GetConnectionGroupByRoutingEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionGroupByRoutingEndpointResponse
+
+    interface _GetContinuousDeploymentPolicyResponse
+      include Smithy::Client::_Response[Types::GetContinuousDeploymentPolicyResult]
+      def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy?
+      def e_tag: () -> String?
+    end
+    def get_continuous_deployment_policy: (
+      ?id: String
+    ) -> _GetContinuousDeploymentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContinuousDeploymentPolicyResponse
+
+    interface _GetContinuousDeploymentPolicyConfigResponse
+      include Smithy::Client::_Response[Types::GetContinuousDeploymentPolicyConfigResult]
+      def continuous_deployment_policy_config: () -> Types::ContinuousDeploymentPolicyConfig?
+      def e_tag: () -> String?
+    end
+    def get_continuous_deployment_policy_config: (
+      ?id: String
+    ) -> _GetContinuousDeploymentPolicyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContinuousDeploymentPolicyConfigResponse
+
+    interface _GetDistributionResponse
+      include Smithy::Client::_Response[Types::GetDistributionResult]
+      def distribution: () -> Types::Distribution?
+      def e_tag: () -> String?
+    end
+    def get_distribution: (
+      ?id: String
+    ) -> _GetDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionResponse
+
+    interface _GetDistributionConfigResponse
+      include Smithy::Client::_Response[Types::GetDistributionConfigResult]
+      def distribution_config: () -> Types::DistributionConfig?
+      def e_tag: () -> String?
+    end
+    def get_distribution_config: (
+      ?id: String
+    ) -> _GetDistributionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionConfigResponse
+
+    interface _GetDistributionTenantResponse
+      include Smithy::Client::_Response[Types::GetDistributionTenantResult]
+      def distribution_tenant: () -> Types::DistributionTenant?
+      def e_tag: () -> String?
+    end
+    def get_distribution_tenant: (
+      ?identifier: String
+    ) -> _GetDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionTenantResponse
+
+    interface _GetDistributionTenantByDomainResponse
+      include Smithy::Client::_Response[Types::GetDistributionTenantByDomainResult]
+      def distribution_tenant: () -> Types::DistributionTenant?
+      def e_tag: () -> String?
+    end
+    def get_distribution_tenant_by_domain: (
+      ?domain: String
+    ) -> _GetDistributionTenantByDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionTenantByDomainResponse
+
+    interface _GetFieldLevelEncryptionResponse
+      include Smithy::Client::_Response[Types::GetFieldLevelEncryptionResult]
+      def field_level_encryption: () -> Types::FieldLevelEncryption?
+      def e_tag: () -> String?
+    end
+    def get_field_level_encryption: (
+      ?id: String
+    ) -> _GetFieldLevelEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFieldLevelEncryptionResponse
+
+    interface _GetFieldLevelEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::GetFieldLevelEncryptionConfigResult]
+      def field_level_encryption_config: () -> Types::FieldLevelEncryptionConfig?
+      def e_tag: () -> String?
+    end
+    def get_field_level_encryption_config: (
+      ?id: String
+    ) -> _GetFieldLevelEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFieldLevelEncryptionConfigResponse
+
+    interface _GetFieldLevelEncryptionProfileResponse
+      include Smithy::Client::_Response[Types::GetFieldLevelEncryptionProfileResult]
+      def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile?
+      def e_tag: () -> String?
+    end
+    def get_field_level_encryption_profile: (
+      ?id: String
+    ) -> _GetFieldLevelEncryptionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFieldLevelEncryptionProfileResponse
+
+    interface _GetFieldLevelEncryptionProfileConfigResponse
+      include Smithy::Client::_Response[Types::GetFieldLevelEncryptionProfileConfigResult]
+      def field_level_encryption_profile_config: () -> Types::FieldLevelEncryptionProfileConfig?
+      def e_tag: () -> String?
+    end
+    def get_field_level_encryption_profile_config: (
+      ?id: String
+    ) -> _GetFieldLevelEncryptionProfileConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFieldLevelEncryptionProfileConfigResponse
+
+    interface _GetFunctionResponse
+      include Smithy::Client::_Response[Types::GetFunctionResult]
+      def function_code: () -> String?
+      def e_tag: () -> String?
+      def content_type: () -> String?
+    end
+    def get_function: (
+      ?name: String,
+      ?stage: String
+    ) -> _GetFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionResponse
+
+    interface _GetInvalidationResponse
+      include Smithy::Client::_Response[Types::GetInvalidationResult]
+      def invalidation: () -> Types::Invalidation?
+    end
+    def get_invalidation: (
+      ?distribution_id: String,
+      ?id: String
+    ) -> _GetInvalidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvalidationResponse
+
+    interface _GetInvalidationForDistributionTenantResponse
+      include Smithy::Client::_Response[Types::GetInvalidationForDistributionTenantResult]
+      def invalidation: () -> Types::Invalidation?
+    end
+    def get_invalidation_for_distribution_tenant: (
+      ?distribution_tenant_id: String,
+      ?id: String
+    ) -> _GetInvalidationForDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvalidationForDistributionTenantResponse
+
+    interface _GetKeyGroupResponse
+      include Smithy::Client::_Response[Types::GetKeyGroupResult]
+      def key_group: () -> Types::KeyGroup?
+      def e_tag: () -> String?
+    end
+    def get_key_group: (
+      ?id: String
+    ) -> _GetKeyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyGroupResponse
+
+    interface _GetKeyGroupConfigResponse
+      include Smithy::Client::_Response[Types::GetKeyGroupConfigResult]
+      def key_group_config: () -> Types::KeyGroupConfig?
+      def e_tag: () -> String?
+    end
+    def get_key_group_config: (
+      ?id: String
+    ) -> _GetKeyGroupConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyGroupConfigResponse
+
+    interface _GetManagedCertificateDetailsResponse
+      include Smithy::Client::_Response[Types::GetManagedCertificateDetailsResult]
+      def managed_certificate_details: () -> Types::ManagedCertificateDetails?
+    end
+    def get_managed_certificate_details: (
+      ?identifier: String
+    ) -> _GetManagedCertificateDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedCertificateDetailsResponse
+
+    interface _GetMonitoringSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetMonitoringSubscriptionResult]
+      def monitoring_subscription: () -> Types::MonitoringSubscription?
+    end
+    def get_monitoring_subscription: (
+      ?distribution_id: String
+    ) -> _GetMonitoringSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMonitoringSubscriptionResponse
+
+    interface _GetOriginAccessControlResponse
+      include Smithy::Client::_Response[Types::GetOriginAccessControlResult]
+      def origin_access_control: () -> Types::OriginAccessControl?
+      def e_tag: () -> String?
+    end
+    def get_origin_access_control: (
+      ?id: String
+    ) -> _GetOriginAccessControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginAccessControlResponse
+
+    interface _GetOriginAccessControlConfigResponse
+      include Smithy::Client::_Response[Types::GetOriginAccessControlConfigResult]
+      def origin_access_control_config: () -> Types::OriginAccessControlConfig?
+      def e_tag: () -> String?
+    end
+    def get_origin_access_control_config: (
+      ?id: String
+    ) -> _GetOriginAccessControlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginAccessControlConfigResponse
+
+    interface _GetOriginRequestPolicyResponse
+      include Smithy::Client::_Response[Types::GetOriginRequestPolicyResult]
+      def origin_request_policy: () -> Types::OriginRequestPolicy?
+      def e_tag: () -> String?
+    end
+    def get_origin_request_policy: (
+      ?id: String
+    ) -> _GetOriginRequestPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginRequestPolicyResponse
+
+    interface _GetOriginRequestPolicyConfigResponse
+      include Smithy::Client::_Response[Types::GetOriginRequestPolicyConfigResult]
+      def origin_request_policy_config: () -> Types::OriginRequestPolicyConfig?
+      def e_tag: () -> String?
+    end
+    def get_origin_request_policy_config: (
+      ?id: String
+    ) -> _GetOriginRequestPolicyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginRequestPolicyConfigResponse
+
+    interface _GetPublicKeyResponse
+      include Smithy::Client::_Response[Types::GetPublicKeyResult]
+      def public_key: () -> Types::PublicKey?
+      def e_tag: () -> String?
+    end
+    def get_public_key: (
+      ?id: String
+    ) -> _GetPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyResponse
+
+    interface _GetPublicKeyConfigResponse
+      include Smithy::Client::_Response[Types::GetPublicKeyConfigResult]
+      def public_key_config: () -> Types::PublicKeyConfig?
+      def e_tag: () -> String?
+    end
+    def get_public_key_config: (
+      ?id: String
+    ) -> _GetPublicKeyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyConfigResponse
+
+    interface _GetRealtimeLogConfigResponse
+      include Smithy::Client::_Response[Types::GetRealtimeLogConfigResult]
+      def realtime_log_config: () -> Types::RealtimeLogConfig?
+    end
+    def get_realtime_log_config: (
+      ?name: String,
+      ?arn: String
+    ) -> _GetRealtimeLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRealtimeLogConfigResponse
+
+    interface _GetResponseHeadersPolicyResponse
+      include Smithy::Client::_Response[Types::GetResponseHeadersPolicyResult]
+      def response_headers_policy: () -> Types::ResponseHeadersPolicy?
+      def e_tag: () -> String?
+    end
+    def get_response_headers_policy: (
+      ?id: String
+    ) -> _GetResponseHeadersPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResponseHeadersPolicyResponse
+
+    interface _GetResponseHeadersPolicyConfigResponse
+      include Smithy::Client::_Response[Types::GetResponseHeadersPolicyConfigResult]
+      def response_headers_policy_config: () -> Types::ResponseHeadersPolicyConfig?
+      def e_tag: () -> String?
+    end
+    def get_response_headers_policy_config: (
+      ?id: String
+    ) -> _GetResponseHeadersPolicyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResponseHeadersPolicyConfigResponse
+
+    interface _GetStreamingDistributionResponse
+      include Smithy::Client::_Response[Types::GetStreamingDistributionResult]
+      def streaming_distribution: () -> Types::StreamingDistribution?
+      def e_tag: () -> String?
+    end
+    def get_streaming_distribution: (
+      ?id: String
+    ) -> _GetStreamingDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamingDistributionResponse
+
+    interface _GetStreamingDistributionConfigResponse
+      include Smithy::Client::_Response[Types::GetStreamingDistributionConfigResult]
+      def streaming_distribution_config: () -> Types::StreamingDistributionConfig?
+      def e_tag: () -> String?
+    end
+    def get_streaming_distribution_config: (
+      ?id: String
+    ) -> _GetStreamingDistributionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamingDistributionConfigResponse
+
+    interface _GetVpcOriginResponse
+      include Smithy::Client::_Response[Types::GetVpcOriginResult]
+      def vpc_origin: () -> Types::VpcOrigin?
+      def e_tag: () -> String?
+    end
+    def get_vpc_origin: (
+      ?id: String
+    ) -> _GetVpcOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVpcOriginResponse
+
+    interface _ListAnycastIpListsResponse
+      include Smithy::Client::_Response[Types::ListAnycastIpListsResult]
+      def anycast_ip_lists: () -> Types::AnycastIpListCollection?
+    end
+    def list_anycast_ip_lists: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAnycastIpListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnycastIpListsResponse
+
+    interface _ListCachePoliciesResponse
+      include Smithy::Client::_Response[Types::ListCachePoliciesResult]
+      def cache_policy_list: () -> Types::CachePolicyList?
+    end
+    def list_cache_policies: (
+      ?type: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListCachePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCachePoliciesResponse
+
+    interface _ListCloudFrontOriginAccessIdentitiesResponse
+      include Smithy::Client::_Response[Types::ListCloudFrontOriginAccessIdentitiesResult]
+      def cloud_front_origin_access_identity_list: () -> Types::CloudFrontOriginAccessIdentityList?
+    end
+    def list_cloud_front_origin_access_identities: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListCloudFrontOriginAccessIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudFrontOriginAccessIdentitiesResponse
+
+    interface _ListConflictingAliasesResponse
+      include Smithy::Client::_Response[Types::ListConflictingAliasesResult]
+      def conflicting_aliases_list: () -> Types::ConflictingAliasesList?
+    end
+    def list_conflicting_aliases: (
+      ?distribution_id: String,
+      ?alias: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListConflictingAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConflictingAliasesResponse
+
+    interface _ListConnectionGroupsResponse
+      include Smithy::Client::_Response[Types::ListConnectionGroupsResult]
+      def next_marker: () -> String?
+      def connection_groups: () -> Array[Types::ConnectionGroupSummary]?
+    end
+    def list_connection_groups: (
+      ?association_filter: {
+        anycast_ip_list_id: String
+      },
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListConnectionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionGroupsResponse
+
+    interface _ListContinuousDeploymentPoliciesResponse
+      include Smithy::Client::_Response[Types::ListContinuousDeploymentPoliciesResult]
+      def continuous_deployment_policy_list: () -> Types::ContinuousDeploymentPolicyList?
+    end
+    def list_continuous_deployment_policies: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListContinuousDeploymentPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContinuousDeploymentPoliciesResponse
+
+    interface _ListDistributionTenantsResponse
+      include Smithy::Client::_Response[Types::ListDistributionTenantsResult]
+      def next_marker: () -> String?
+      def distribution_tenant_list: () -> Array[Types::DistributionTenantSummary]?
+    end
+    def list_distribution_tenants: (
+      ?association_filter: {
+        distribution_id: String,
+        connection_group_id: untyped
+      },
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDistributionTenantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionTenantsResponse
+
+    interface _ListDistributionTenantsByCustomizationResponse
+      include Smithy::Client::_Response[Types::ListDistributionTenantsByCustomizationResult]
+      def next_marker: () -> String?
+      def distribution_tenant_list: () -> Array[Types::DistributionTenantSummary]?
+    end
+    def list_distribution_tenants_by_customization: (
+      ?web_acl_arn: String,
+      ?certificate_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDistributionTenantsByCustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionTenantsByCustomizationResponse
+
+    interface _ListDistributionsResponse
+      include Smithy::Client::_Response[Types::ListDistributionsResult]
+      def distribution_list: () -> Types::DistributionList?
+    end
+    def list_distributions: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDistributionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsResponse
+
+    interface _ListDistributionsByAnycastIpListIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByAnycastIpListIdResult]
+      def distribution_list: () -> Types::DistributionList?
+    end
+    def list_distributions_by_anycast_ip_list_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?anycast_ip_list_id: String
+    ) -> _ListDistributionsByAnycastIpListIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByAnycastIpListIdResponse
+
+    interface _ListDistributionsByCachePolicyIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByCachePolicyIdResult]
+      def distribution_id_list: () -> Types::DistributionIdList?
+    end
+    def list_distributions_by_cache_policy_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?cache_policy_id: String
+    ) -> _ListDistributionsByCachePolicyIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByCachePolicyIdResponse
+
+    interface _ListDistributionsByConnectionModeResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByConnectionModeResult]
+      def distribution_list: () -> Types::DistributionList?
+    end
+    def list_distributions_by_connection_mode: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?connection_mode: String
+    ) -> _ListDistributionsByConnectionModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByConnectionModeResponse
+
+    interface _ListDistributionsByKeyGroupResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByKeyGroupResult]
+      def distribution_id_list: () -> Types::DistributionIdList?
+    end
+    def list_distributions_by_key_group: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?key_group_id: String
+    ) -> _ListDistributionsByKeyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByKeyGroupResponse
+
+    interface _ListDistributionsByOriginRequestPolicyIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByOriginRequestPolicyIdResult]
+      def distribution_id_list: () -> Types::DistributionIdList?
+    end
+    def list_distributions_by_origin_request_policy_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?origin_request_policy_id: String
+    ) -> _ListDistributionsByOriginRequestPolicyIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByOriginRequestPolicyIdResponse
+
+    interface _ListDistributionsByRealtimeLogConfigResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByRealtimeLogConfigResult]
+      def distribution_list: () -> Types::DistributionList?
+    end
+    def list_distributions_by_realtime_log_config: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?realtime_log_config_name: String,
+      ?realtime_log_config_arn: String
+    ) -> _ListDistributionsByRealtimeLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByRealtimeLogConfigResponse
+
+    interface _ListDistributionsByResponseHeadersPolicyIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByResponseHeadersPolicyIdResult]
+      def distribution_id_list: () -> Types::DistributionIdList?
+    end
+    def list_distributions_by_response_headers_policy_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?response_headers_policy_id: String
+    ) -> _ListDistributionsByResponseHeadersPolicyIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByResponseHeadersPolicyIdResponse
+
+    interface _ListDistributionsByVpcOriginIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByVpcOriginIdResult]
+      def distribution_id_list: () -> Types::DistributionIdList?
+    end
+    def list_distributions_by_vpc_origin_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?vpc_origin_id: String
+    ) -> _ListDistributionsByVpcOriginIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByVpcOriginIdResponse
+
+    interface _ListDistributionsByWebACLIdResponse
+      include Smithy::Client::_Response[Types::ListDistributionsByWebACLIdResult]
+      def distribution_list: () -> Types::DistributionList?
+    end
+    def list_distributions_by_web_acl_id: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?web_acl_id: String
+    ) -> _ListDistributionsByWebACLIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDistributionsByWebACLIdResponse
+
+    interface _ListDomainConflictsResponse
+      include Smithy::Client::_Response[Types::ListDomainConflictsResult]
+      def domain_conflicts: () -> Array[Types::DomainConflict]?
+      def next_marker: () -> String?
+    end
+    def list_domain_conflicts: (
+      ?domain: String,
+      ?domain_control_validation_resource: {
+        distribution_id: String,
+        distribution_tenant_id: untyped
+      },
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _ListDomainConflictsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainConflictsResponse
+
+    interface _ListFieldLevelEncryptionConfigsResponse
+      include Smithy::Client::_Response[Types::ListFieldLevelEncryptionConfigsResult]
+      def field_level_encryption_list: () -> Types::FieldLevelEncryptionList?
+    end
+    def list_field_level_encryption_configs: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFieldLevelEncryptionConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFieldLevelEncryptionConfigsResponse
+
+    interface _ListFieldLevelEncryptionProfilesResponse
+      include Smithy::Client::_Response[Types::ListFieldLevelEncryptionProfilesResult]
+      def field_level_encryption_profile_list: () -> Types::FieldLevelEncryptionProfileList?
+    end
+    def list_field_level_encryption_profiles: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFieldLevelEncryptionProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFieldLevelEncryptionProfilesResponse
+
+    interface _ListFunctionsResponse
+      include Smithy::Client::_Response[Types::ListFunctionsResult]
+      def function_list: () -> Types::FunctionList?
+    end
+    def list_functions: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?stage: String
+    ) -> _ListFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsResponse
+
+    interface _ListInvalidationsResponse
+      include Smithy::Client::_Response[Types::ListInvalidationsResult]
+      def invalidation_list: () -> Types::InvalidationList?
+    end
+    def list_invalidations: (
+      ?distribution_id: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListInvalidationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvalidationsResponse
+
+    interface _ListInvalidationsForDistributionTenantResponse
+      include Smithy::Client::_Response[Types::ListInvalidationsForDistributionTenantResult]
+      def invalidation_list: () -> Types::InvalidationList?
+    end
+    def list_invalidations_for_distribution_tenant: (
+      ?id: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListInvalidationsForDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvalidationsForDistributionTenantResponse
+
+    interface _ListKeyGroupsResponse
+      include Smithy::Client::_Response[Types::ListKeyGroupsResult]
+      def key_group_list: () -> Types::KeyGroupList?
+    end
+    def list_key_groups: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListKeyGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyGroupsResponse
+
+    interface _ListKeyValueStoresResponse
+      include Smithy::Client::_Response[Types::ListKeyValueStoresResult]
+      def key_value_store_list: () -> Types::KeyValueStoreList?
+    end
+    def list_key_value_stores: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?status: String
+    ) -> _ListKeyValueStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyValueStoresResponse
+
+    interface _ListOriginAccessControlsResponse
+      include Smithy::Client::_Response[Types::ListOriginAccessControlsResult]
+      def origin_access_control_list: () -> Types::OriginAccessControlList?
+    end
+    def list_origin_access_controls: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListOriginAccessControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOriginAccessControlsResponse
+
+    interface _ListOriginRequestPoliciesResponse
+      include Smithy::Client::_Response[Types::ListOriginRequestPoliciesResult]
+      def origin_request_policy_list: () -> Types::OriginRequestPolicyList?
+    end
+    def list_origin_request_policies: (
+      ?type: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListOriginRequestPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOriginRequestPoliciesResponse
+
+    interface _ListPublicKeysResponse
+      include Smithy::Client::_Response[Types::ListPublicKeysResult]
+      def public_key_list: () -> Types::PublicKeyList?
+    end
+    def list_public_keys: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListPublicKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPublicKeysResponse
+
+    interface _ListRealtimeLogConfigsResponse
+      include Smithy::Client::_Response[Types::ListRealtimeLogConfigsResult]
+      def realtime_log_configs: () -> Types::RealtimeLogConfigs?
+    end
+    def list_realtime_log_configs: (
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _ListRealtimeLogConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRealtimeLogConfigsResponse
+
+    interface _ListResponseHeadersPoliciesResponse
+      include Smithy::Client::_Response[Types::ListResponseHeadersPoliciesResult]
+      def response_headers_policy_list: () -> Types::ResponseHeadersPolicyList?
+    end
+    def list_response_headers_policies: (
+      ?type: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListResponseHeadersPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResponseHeadersPoliciesResponse
+
+    interface _ListStreamingDistributionsResponse
+      include Smithy::Client::_Response[Types::ListStreamingDistributionsResult]
+      def streaming_distribution_list: () -> Types::StreamingDistributionList?
+    end
+    def list_streaming_distributions: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListStreamingDistributionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamingDistributionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Types::Tags?
+    end
+    def list_tags_for_resource: (
+      ?resource: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVpcOriginsResponse
+      include Smithy::Client::_Response[Types::ListVpcOriginsResult]
+      def vpc_origin_list: () -> Types::VpcOriginList?
+    end
+    def list_vpc_origins: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListVpcOriginsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcOriginsResponse
+
+    interface _PublishFunctionResponse
+      include Smithy::Client::_Response[Types::PublishFunctionResult]
+      def function_summary: () -> Types::FunctionSummary?
+    end
+    def publish_function: (
+      ?name: String,
+      ?if_match: String
+    ) -> _PublishFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishFunctionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource: String,
+      ?tags: {
+        items: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestFunctionResponse
+      include Smithy::Client::_Response[Types::TestFunctionResult]
+      def test_result: () -> Types::TestResult?
+    end
+    def test_function: (
+      ?name: String,
+      ?if_match: String,
+      ?stage: String,
+      ?event_object: String
+    ) -> _TestFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestFunctionResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource: String,
+      ?tag_keys: {
+        items: Array[String]
+      }
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCachePolicyResponse
+      include Smithy::Client::_Response[Types::UpdateCachePolicyResult]
+      def cache_policy: () -> Types::CachePolicy?
+      def e_tag: () -> String?
+    end
+    def update_cache_policy: (
+      ?cache_policy_config: {
+        comment: String,
+        name: untyped,
+        default_ttl: Integer,
+        max_ttl: untyped,
+        min_ttl: untyped,
+        parameters_in_cache_key_and_forwarded_to_origin: {
+          enable_accept_encoding_gzip: bool,
+          enable_accept_encoding_brotli: untyped,
+          headers_config: {
+            header_behavior: String,
+            headers: {
+              quantity: Integer,
+              items: Array[String]
+            }
+          },
+          cookies_config: {
+            cookie_behavior: String,
+            cookies: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          },
+          query_strings_config: {
+            query_string_behavior: String,
+            query_strings: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          }
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateCachePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCachePolicyResponse
+
+    interface _UpdateCloudFrontOriginAccessIdentityResponse
+      include Smithy::Client::_Response[Types::UpdateCloudFrontOriginAccessIdentityResult]
+      def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity?
+      def e_tag: () -> String?
+    end
+    def update_cloud_front_origin_access_identity: (
+      ?cloud_front_origin_access_identity_config: {
+        caller_reference: String,
+        comment: untyped
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateCloudFrontOriginAccessIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudFrontOriginAccessIdentityResponse
+
+    interface _UpdateConnectionGroupResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionGroupResult]
+      def connection_group: () -> Types::ConnectionGroup?
+      def e_tag: () -> String?
+    end
+    def update_connection_group: (
+      ?id: String,
+      ?ipv6_enabled: bool,
+      ?if_match: String,
+      ?anycast_ip_list_id: String,
+      ?enabled: bool
+    ) -> _UpdateConnectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionGroupResponse
+
+    interface _UpdateContinuousDeploymentPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateContinuousDeploymentPolicyResult]
+      def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy?
+      def e_tag: () -> String?
+    end
+    def update_continuous_deployment_policy: (
+      ?continuous_deployment_policy_config: {
+        staging_distribution_dns_names: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        enabled: bool,
+        traffic_config: {
+          single_weight_config: {
+            weight: Float,
+            session_stickiness_config: {
+              idle_ttl: untyped,
+              maximum_ttl: untyped
+            }
+          },
+          single_header_config: {
+            header: String,
+            value: untyped
+          },
+          type: String
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateContinuousDeploymentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContinuousDeploymentPolicyResponse
+
+    interface _UpdateDistributionResponse
+      include Smithy::Client::_Response[Types::UpdateDistributionResult]
+      def distribution: () -> Types::Distribution?
+      def e_tag: () -> String?
+    end
+    def update_distribution: (
+      ?distribution_config: {
+        caller_reference: String,
+        aliases: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        default_root_object: untyped,
+        origins: {
+          quantity: untyped,
+          items: Array[
+            {
+              id: untyped,
+              domain_name: untyped,
+              origin_path: untyped,
+              custom_headers: {
+                quantity: untyped,
+                items: Array[
+                  {
+                    header_name: untyped,
+                    header_value: String
+                  }
+                ]
+              },
+              s3_origin_config: {
+                origin_access_identity: untyped,
+                origin_read_timeout: untyped
+              },
+              custom_origin_config: {
+                http_port: untyped,
+                https_port: untyped,
+                origin_protocol_policy: String,
+                origin_ssl_protocols: {
+                  quantity: untyped,
+                  items: Array[String]
+                },
+                origin_read_timeout: untyped,
+                origin_keepalive_timeout: untyped
+              },
+              vpc_origin_config: {
+                vpc_origin_id: untyped,
+                origin_read_timeout: untyped,
+                origin_keepalive_timeout: untyped
+              },
+              connection_attempts: untyped,
+              connection_timeout: untyped,
+              response_completion_timeout: untyped,
+              origin_shield: {
+                enabled: bool,
+                origin_shield_region: String
+              },
+              origin_access_control_id: untyped
+            }
+          ]
+        },
+        origin_groups: {
+          quantity: untyped,
+          items: Array[
+            {
+              id: untyped,
+              failover_criteria: {
+                status_codes: {
+                  quantity: untyped,
+                  items: Array[Integer]
+                }
+              },
+              members: {
+                quantity: untyped,
+                items: Array[
+                  {
+                    origin_id: untyped
+                  }
+                ]
+              },
+              selection_criteria: String
+            }
+          ]
+        },
+        default_cache_behavior: {
+          target_origin_id: untyped,
+          trusted_signers: {
+            enabled: untyped,
+            quantity: untyped,
+            items: Array[String]
+          },
+          trusted_key_groups: {
+            enabled: untyped,
+            quantity: untyped,
+            items: Array[String]
+          },
+          viewer_protocol_policy: String,
+          allowed_methods: {
+            quantity: untyped,
+            items: Array[String],
+            cached_methods: {
+              quantity: untyped,
+              items: untyped
+            }
+          },
+          smooth_streaming: untyped,
+          compress: untyped,
+          lambda_function_associations: {
+            quantity: untyped,
+            items: Array[
+              {
+                lambda_function_arn: String,
+                event_type: String,
+                include_body: untyped
+              }
+            ]
+          },
+          function_associations: {
+            quantity: untyped,
+            items: Array[
+              {
+                function_arn: String,
+                event_type: untyped
+              }
+            ]
+          },
+          field_level_encryption_id: untyped,
+          realtime_log_config_arn: untyped,
+          cache_policy_id: untyped,
+          origin_request_policy_id: untyped,
+          response_headers_policy_id: untyped,
+          grpc_config: {
+            enabled: untyped
+          },
+          forwarded_values: {
+            query_string: untyped,
+            cookies: {
+              forward: String,
+              whitelisted_names: {
+                quantity: untyped,
+                items: Array[String]
+              }
+            },
+            headers: {
+              quantity: untyped,
+              items: Array[String]
+            },
+            query_string_cache_keys: {
+              quantity: untyped,
+              items: Array[String]
+            }
+          },
+          min_ttl: Integer,
+          default_ttl: untyped,
+          max_ttl: untyped
+        },
+        cache_behaviors: {
+          quantity: untyped,
+          items: Array[
+            {
+              path_pattern: untyped,
+              target_origin_id: untyped,
+              trusted_signers: untyped,
+              trusted_key_groups: untyped,
+              viewer_protocol_policy: untyped,
+              allowed_methods: untyped,
+              smooth_streaming: untyped,
+              compress: untyped,
+              lambda_function_associations: untyped,
+              function_associations: untyped,
+              field_level_encryption_id: untyped,
+              realtime_log_config_arn: untyped,
+              cache_policy_id: untyped,
+              origin_request_policy_id: untyped,
+              response_headers_policy_id: untyped,
+              grpc_config: untyped,
+              forwarded_values: untyped,
+              min_ttl: untyped,
+              default_ttl: untyped,
+              max_ttl: untyped
+            }
+          ]
+        },
+        custom_error_responses: {
+          quantity: untyped,
+          items: Array[
+            {
+              error_code: untyped,
+              response_page_path: untyped,
+              response_code: untyped,
+              error_caching_min_ttl: untyped
+            }
+          ]
+        },
+        comment: String,
+        logging: {
+          enabled: untyped,
+          include_cookies: untyped,
+          bucket: untyped,
+          prefix: untyped
+        },
+        price_class: String,
+        enabled: untyped,
+        viewer_certificate: {
+          cloud_front_default_certificate: untyped,
+          iam_certificate_id: String,
+          acm_certificate_arn: untyped,
+          ssl_support_method: String,
+          minimum_protocol_version: String,
+          certificate: untyped,
+          certificate_source: String
+        },
+        restrictions: {
+          geo_restriction: {
+            restriction_type: String,
+            quantity: untyped,
+            items: Array[String]
+          }
+        },
+        web_acl_id: untyped,
+        http_version: String,
+        is_ipv6_enabled: untyped,
+        continuous_deployment_policy_id: untyped,
+        staging: untyped,
+        anycast_ip_list_id: untyped,
+        tenant_config: {
+          parameter_definitions: Array[
+            {
+              name: String,
+              definition: {
+                string_schema: {
+                  comment: untyped,
+                  default_value: String,
+                  required: untyped
+                }
+              }
+            }
+          ]
+        },
+        connection_mode: String
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionResponse
+
+    interface _UpdateDistributionTenantResponse
+      include Smithy::Client::_Response[Types::UpdateDistributionTenantResult]
+      def distribution_tenant: () -> Types::DistributionTenant?
+      def e_tag: () -> String?
+    end
+    def update_distribution_tenant: (
+      ?id: String,
+      ?distribution_id: String,
+      ?domains: Array[
+        {
+          domain: String
+        }
+      ],
+      ?customizations: {
+        web_acl: {
+          action: String,
+          arn: String
+        },
+        certificate: {
+          arn: untyped
+        },
+        geo_restrictions: {
+          restriction_type: String,
+          locations: Array[String]
+        }
+      },
+      ?parameters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?connection_group_id: String,
+      ?if_match: String,
+      ?managed_certificate_request: {
+        validation_token_host: String,
+        primary_domain_name: String,
+        certificate_transparency_logging_preference: String
+      },
+      ?enabled: bool
+    ) -> _UpdateDistributionTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionTenantResponse
+
+    interface _UpdateDistributionWithStagingConfigResponse
+      include Smithy::Client::_Response[Types::UpdateDistributionWithStagingConfigResult]
+      def distribution: () -> Types::Distribution?
+      def e_tag: () -> String?
+    end
+    def update_distribution_with_staging_config: (
+      ?id: String,
+      ?staging_distribution_id: String,
+      ?if_match: String
+    ) -> _UpdateDistributionWithStagingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionWithStagingConfigResponse
+
+    interface _UpdateDomainAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateDomainAssociationResult]
+      def domain: () -> String?
+      def resource_id: () -> String?
+      def e_tag: () -> String?
+    end
+    def update_domain_association: (
+      ?domain: String,
+      ?target_resource: {
+        distribution_id: String,
+        distribution_tenant_id: untyped
+      },
+      ?if_match: String
+    ) -> _UpdateDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainAssociationResponse
+
+    interface _UpdateFieldLevelEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::UpdateFieldLevelEncryptionConfigResult]
+      def field_level_encryption: () -> Types::FieldLevelEncryption?
+      def e_tag: () -> String?
+    end
+    def update_field_level_encryption_config: (
+      ?field_level_encryption_config: {
+        caller_reference: String,
+        comment: untyped,
+        query_arg_profile_config: {
+          forward_when_query_arg_profile_is_unknown: bool,
+          query_arg_profiles: {
+            quantity: Integer,
+            items: Array[
+              {
+                query_arg: untyped,
+                profile_id: untyped
+              }
+            ]
+          }
+        },
+        content_type_profile_config: {
+          forward_when_content_type_is_unknown: untyped,
+          content_type_profiles: {
+            quantity: untyped,
+            items: Array[
+              {
+                format: String,
+                profile_id: untyped,
+                content_type: untyped
+              }
+            ]
+          }
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateFieldLevelEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFieldLevelEncryptionConfigResponse
+
+    interface _UpdateFieldLevelEncryptionProfileResponse
+      include Smithy::Client::_Response[Types::UpdateFieldLevelEncryptionProfileResult]
+      def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile?
+      def e_tag: () -> String?
+    end
+    def update_field_level_encryption_profile: (
+      ?field_level_encryption_profile_config: {
+        name: String,
+        caller_reference: untyped,
+        comment: untyped,
+        encryption_entities: {
+          quantity: Integer,
+          items: Array[
+            {
+              public_key_id: untyped,
+              provider_id: untyped,
+              field_patterns: {
+                quantity: untyped,
+                items: Array[String]
+              }
+            }
+          ]
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateFieldLevelEncryptionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFieldLevelEncryptionProfileResponse
+
+    interface _UpdateFunctionResponse
+      include Smithy::Client::_Response[Types::UpdateFunctionResult]
+      def function_summary: () -> Types::FunctionSummary?
+      def e_tag: () -> String?
+    end
+    def update_function: (
+      ?name: String,
+      ?if_match: String,
+      ?function_config: {
+        comment: String,
+        runtime: String,
+        key_value_store_associations: {
+          quantity: Integer,
+          items: Array[
+            {
+              key_value_store_arn: String
+            }
+          ]
+        }
+      },
+      ?function_code: String
+    ) -> _UpdateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionResponse
+
+    interface _UpdateKeyGroupResponse
+      include Smithy::Client::_Response[Types::UpdateKeyGroupResult]
+      def key_group: () -> Types::KeyGroup?
+      def e_tag: () -> String?
+    end
+    def update_key_group: (
+      ?key_group_config: {
+        name: String,
+        items: Array[String],
+        comment: untyped
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateKeyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyGroupResponse
+
+    interface _UpdateKeyValueStoreResponse
+      include Smithy::Client::_Response[Types::UpdateKeyValueStoreResult]
+      def key_value_store: () -> Types::KeyValueStore?
+      def e_tag: () -> String?
+    end
+    def update_key_value_store: (
+      ?name: String,
+      ?comment: String,
+      ?if_match: String
+    ) -> _UpdateKeyValueStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyValueStoreResponse
+
+    interface _UpdateOriginAccessControlResponse
+      include Smithy::Client::_Response[Types::UpdateOriginAccessControlResult]
+      def origin_access_control: () -> Types::OriginAccessControl?
+      def e_tag: () -> String?
+    end
+    def update_origin_access_control: (
+      ?origin_access_control_config: {
+        name: String,
+        description: untyped,
+        signing_protocol: String,
+        signing_behavior: String,
+        origin_access_control_origin_type: String
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateOriginAccessControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOriginAccessControlResponse
+
+    interface _UpdateOriginRequestPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateOriginRequestPolicyResult]
+      def origin_request_policy: () -> Types::OriginRequestPolicy?
+      def e_tag: () -> String?
+    end
+    def update_origin_request_policy: (
+      ?origin_request_policy_config: {
+        comment: String,
+        name: untyped,
+        headers_config: {
+          header_behavior: String,
+          headers: {
+            quantity: Integer,
+            items: Array[String]
+          }
+        },
+        cookies_config: {
+          cookie_behavior: String,
+          cookies: {
+            quantity: untyped,
+            items: Array[String]
+          }
+        },
+        query_strings_config: {
+          query_string_behavior: String,
+          query_strings: {
+            quantity: untyped,
+            items: Array[String]
+          }
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateOriginRequestPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOriginRequestPolicyResponse
+
+    interface _UpdatePublicKeyResponse
+      include Smithy::Client::_Response[Types::UpdatePublicKeyResult]
+      def public_key: () -> Types::PublicKey?
+      def e_tag: () -> String?
+    end
+    def update_public_key: (
+      ?public_key_config: {
+        caller_reference: String,
+        name: untyped,
+        encoded_key: untyped,
+        comment: untyped
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdatePublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePublicKeyResponse
+
+    interface _UpdateRealtimeLogConfigResponse
+      include Smithy::Client::_Response[Types::UpdateRealtimeLogConfigResult]
+      def realtime_log_config: () -> Types::RealtimeLogConfig?
+    end
+    def update_realtime_log_config: (
+      ?end_points: Array[
+        {
+          stream_type: String,
+          kinesis_stream_config: {
+            role_arn: untyped,
+            stream_arn: untyped
+          }
+        }
+      ],
+      ?fields: Array[String],
+      ?name: String,
+      ?arn: String,
+      ?sampling_rate: Integer
+    ) -> _UpdateRealtimeLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRealtimeLogConfigResponse
+
+    interface _UpdateResponseHeadersPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateResponseHeadersPolicyResult]
+      def response_headers_policy: () -> Types::ResponseHeadersPolicy?
+      def e_tag: () -> String?
+    end
+    def update_response_headers_policy: (
+      ?response_headers_policy_config: {
+        comment: String,
+        name: untyped,
+        cors_config: {
+          access_control_allow_origins: {
+            quantity: Integer,
+            items: Array[String]
+          },
+          access_control_allow_headers: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_allow_methods: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_allow_credentials: bool,
+          access_control_expose_headers: {
+            quantity: untyped,
+            items: Array[String]
+          },
+          access_control_max_age_sec: untyped,
+          origin_override: untyped
+        },
+        security_headers_config: {
+          xss_protection: {
+            override: untyped,
+            protection: untyped,
+            mode_block: untyped,
+            report_uri: untyped
+          },
+          frame_options: {
+            override: untyped,
+            frame_option: String
+          },
+          referrer_policy: {
+            override: untyped,
+            referrer_policy: String
+          },
+          content_security_policy: {
+            override: untyped,
+            content_security_policy: untyped
+          },
+          content_type_options: {
+            override: untyped
+          },
+          strict_transport_security: {
+            override: untyped,
+            include_subdomains: untyped,
+            preload: untyped,
+            access_control_max_age_sec: untyped
+          }
+        },
+        server_timing_headers_config: {
+          enabled: untyped,
+          sampling_rate: Float
+        },
+        custom_headers_config: {
+          quantity: untyped,
+          items: Array[
+            {
+              header: untyped,
+              value: untyped,
+              override: untyped
+            }
+          ]
+        },
+        remove_headers_config: {
+          quantity: untyped,
+          items: Array[
+            {
+              header: untyped
+            }
+          ]
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateResponseHeadersPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResponseHeadersPolicyResponse
+
+    interface _UpdateStreamingDistributionResponse
+      include Smithy::Client::_Response[Types::UpdateStreamingDistributionResult]
+      def streaming_distribution: () -> Types::StreamingDistribution?
+      def e_tag: () -> String?
+    end
+    def update_streaming_distribution: (
+      ?streaming_distribution_config: {
+        caller_reference: String,
+        s3_origin: {
+          domain_name: untyped,
+          origin_access_identity: untyped
+        },
+        aliases: {
+          quantity: Integer,
+          items: Array[String]
+        },
+        comment: untyped,
+        logging: {
+          enabled: bool,
+          bucket: untyped,
+          prefix: untyped
+        },
+        trusted_signers: {
+          enabled: untyped,
+          quantity: untyped,
+          items: Array[String]
+        },
+        price_class: String,
+        enabled: untyped
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateStreamingDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamingDistributionResponse
+
+    interface _UpdateVpcOriginResponse
+      include Smithy::Client::_Response[Types::UpdateVpcOriginResult]
+      def vpc_origin: () -> Types::VpcOrigin?
+      def e_tag: () -> String?
+    end
+    def update_vpc_origin: (
+      ?vpc_origin_endpoint_config: {
+        name: String,
+        arn: untyped,
+        http_port: Integer,
+        https_port: untyped,
+        origin_protocol_policy: String,
+        origin_ssl_protocols: {
+          quantity: untyped,
+          items: Array[String]
+        }
+      },
+      ?id: String,
+      ?if_match: String
+    ) -> _UpdateVpcOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcOriginResponse
+
+    interface _VerifyDnsConfigurationResponse
+      include Smithy::Client::_Response[Types::VerifyDnsConfigurationResult]
+      def dns_configuration_list: () -> Array[Types::DnsConfiguration]?
+    end
+    def verify_dns_configuration: (
+      ?domain: String,
+      ?identifier: String
+    ) -> _VerifyDnsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyDnsConfigurationResponse
+  end
+end

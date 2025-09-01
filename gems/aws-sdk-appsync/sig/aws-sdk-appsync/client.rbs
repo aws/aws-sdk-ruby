@@ -1,0 +1,1187 @@
+module Aws::AppSync
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppSync::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateApiResponse
+      include Smithy::Client::_Response[Types::AssociateApiResponse]
+      def api_association: () -> Types::ApiAssociation?
+    end
+    def associate_api: (
+      ?domain_name: String,
+      ?api_id: String
+    ) -> _AssociateApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApiResponse
+
+    interface _AssociateMergedGraphqlApiResponse
+      include Smithy::Client::_Response[Types::AssociateMergedGraphqlApiResponse]
+      def source_api_association: () -> Types::SourceApiAssociation?
+    end
+    def associate_merged_graphql_api: (
+      ?source_api_identifier: String,
+      ?merged_api_identifier: String,
+      ?description: String,
+      ?source_api_association_config: {
+        merge_type: String
+      }
+    ) -> _AssociateMergedGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMergedGraphqlApiResponse
+
+    interface _AssociateSourceGraphqlApiResponse
+      include Smithy::Client::_Response[Types::AssociateSourceGraphqlApiResponse]
+      def source_api_association: () -> Types::SourceApiAssociation?
+    end
+    def associate_source_graphql_api: (
+      ?merged_api_identifier: String,
+      ?source_api_identifier: String,
+      ?description: String,
+      ?source_api_association_config: {
+        merge_type: String
+      }
+    ) -> _AssociateSourceGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceGraphqlApiResponse
+
+    interface _CreateApiResponse
+      include Smithy::Client::_Response[Types::CreateApiResponse]
+      def api: () -> Types::Api?
+    end
+    def create_api: (
+      ?name: String,
+      ?owner_contact: String,
+      ?tags: Hash[String, String],
+      ?event_config: {
+        auth_providers: Array[
+          {
+            auth_type: String,
+            cognito_config: {
+              user_pool_id: String,
+              aws_region: untyped,
+              app_id_client_regex: untyped
+            },
+            open_id_connect_config: {
+              issuer: untyped,
+              client_id: untyped,
+              iat_ttl: Integer,
+              auth_ttl: untyped
+            },
+            lambda_authorizer_config: {
+              authorizer_result_ttl_in_seconds: Integer,
+              authorizer_uri: untyped,
+              identity_validation_expression: untyped
+            }
+          }
+        ],
+        connection_auth_modes: Array[
+          {
+            auth_type: untyped
+          }
+        ],
+        default_publish_auth_modes: untyped,
+        default_subscribe_auth_modes: untyped,
+        log_config: {
+          log_level: String,
+          cloud_watch_logs_role_arn: untyped
+        }
+      }
+    ) -> _CreateApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiResponse
+
+    interface _CreateApiCacheResponse
+      include Smithy::Client::_Response[Types::CreateApiCacheResponse]
+      def api_cache: () -> Types::ApiCache?
+    end
+    def create_api_cache: (
+      ?api_id: String,
+      ?ttl: Integer,
+      ?transit_encryption_enabled: bool,
+      ?at_rest_encryption_enabled: bool,
+      ?api_caching_behavior: String,
+      ?type: String,
+      ?health_metrics_config: String
+    ) -> _CreateApiCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiCacheResponse
+
+    interface _CreateApiKeyResponse
+      include Smithy::Client::_Response[Types::CreateApiKeyResponse]
+      def api_key: () -> Types::ApiKey?
+    end
+    def create_api_key: (
+      ?api_id: String,
+      ?description: String,
+      ?expires: Integer
+    ) -> _CreateApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiKeyResponse
+
+    interface _CreateChannelNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateChannelNamespaceResponse]
+      def channel_namespace: () -> Types::ChannelNamespace?
+    end
+    def create_channel_namespace: (
+      ?api_id: String,
+      ?name: String,
+      ?subscribe_auth_modes: Array[
+        {
+          auth_type: String
+        }
+      ],
+      ?publish_auth_modes: Array[
+        {
+          auth_type: String
+        }
+      ],
+      ?code_handlers: String,
+      ?tags: Hash[String, String],
+      ?handler_configs: {
+        on_publish: {
+          behavior: String,
+          integration: {
+            data_source_name: String,
+            lambda_config: {
+              invoke_type: String
+            }
+          }
+        },
+        on_subscribe: untyped
+      }
+    ) -> _CreateChannelNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelNamespaceResponse
+
+    interface _CreateDataSourceResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def create_data_source: (
+      ?api_id: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?service_role_arn: String,
+      ?dynamodb_config: {
+        table_name: String,
+        aws_region: untyped,
+        use_caller_credentials: bool,
+        delta_sync_config: {
+          base_table_ttl: Integer,
+          delta_sync_table_name: untyped,
+          delta_sync_table_ttl: untyped
+        },
+        versioned: untyped
+      },
+      ?lambda_config: {
+        lambda_function_arn: String
+      },
+      ?elasticsearch_config: {
+        endpoint: String,
+        aws_region: untyped
+      },
+      ?open_search_service_config: {
+        endpoint: String,
+        aws_region: untyped
+      },
+      ?http_config: {
+        endpoint: String,
+        authorization_config: {
+          authorization_type: String,
+          aws_iam_config: {
+            signing_region: untyped,
+            signing_service_name: untyped
+          }
+        }
+      },
+      ?relational_database_config: {
+        relational_database_source_type: String,
+        rds_http_endpoint_config: {
+          aws_region: String,
+          db_cluster_identifier: untyped,
+          database_name: untyped,
+          schema: untyped,
+          aws_secret_store_arn: untyped
+        }
+      },
+      ?event_bridge_config: {
+        event_bus_arn: String
+      },
+      ?metrics_config: String
+    ) -> _CreateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceResponse
+
+    interface _CreateDomainNameResponse
+      include Smithy::Client::_Response[Types::CreateDomainNameResponse]
+      def domain_name_config: () -> Types::DomainNameConfig?
+    end
+    def create_domain_name: (
+      ?domain_name: String,
+      ?certificate_arn: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDomainNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainNameResponse
+
+    interface _CreateFunctionResponse
+      include Smithy::Client::_Response[Types::CreateFunctionResponse]
+      def function_configuration: () -> Types::FunctionConfiguration?
+    end
+    def create_function: (
+      ?api_id: String,
+      ?name: String,
+      ?description: String,
+      ?data_source_name: String,
+      ?request_mapping_template: String,
+      ?response_mapping_template: String,
+      ?function_version: String,
+      ?sync_config: {
+        conflict_handler: String,
+        conflict_detection: String,
+        lambda_conflict_handler_config: {
+          lambda_conflict_handler_arn: String
+        }
+      },
+      ?max_batch_size: Integer,
+      ?runtime: {
+        name: String,
+        runtime_version: String
+      },
+      ?code: String
+    ) -> _CreateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionResponse
+
+    interface _CreateGraphqlApiResponse
+      include Smithy::Client::_Response[Types::CreateGraphqlApiResponse]
+      def graphql_api: () -> Types::GraphqlApi?
+    end
+    def create_graphql_api: (
+      ?name: String,
+      ?log_config: {
+        field_log_level: String,
+        cloud_watch_logs_role_arn: String,
+        exclude_verbose_content: bool
+      },
+      ?authentication_type: String,
+      ?user_pool_config: {
+        user_pool_id: String,
+        aws_region: untyped,
+        default_action: String,
+        app_id_client_regex: untyped
+      },
+      ?open_id_connect_config: {
+        issuer: String,
+        client_id: untyped,
+        iat_ttl: Integer,
+        auth_ttl: untyped
+      },
+      ?tags: Hash[String, String],
+      ?additional_authentication_providers: Array[
+        {
+          authentication_type: String,
+          open_id_connect_config: {
+            issuer: String,
+            client_id: untyped,
+            iat_ttl: Integer,
+            auth_ttl: untyped
+          },
+          user_pool_config: {
+            user_pool_id: untyped,
+            aws_region: untyped,
+            app_id_client_regex: untyped
+          },
+          lambda_authorizer_config: {
+            authorizer_result_ttl_in_seconds: Integer,
+            authorizer_uri: untyped,
+            identity_validation_expression: untyped
+          }
+        }
+      ],
+      ?xray_enabled: bool,
+      ?lambda_authorizer_config: {
+        authorizer_result_ttl_in_seconds: Integer,
+        authorizer_uri: String,
+        identity_validation_expression: untyped
+      },
+      ?api_type: String,
+      ?merged_api_execution_role_arn: String,
+      ?visibility: String,
+      ?owner_contact: String,
+      ?introspection_config: String,
+      ?query_depth_limit: Integer,
+      ?resolver_count_limit: Integer,
+      ?enhanced_metrics_config: {
+        resolver_level_metrics_behavior: String,
+        data_source_level_metrics_behavior: String,
+        operation_level_metrics_config: String
+      }
+    ) -> _CreateGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGraphqlApiResponse
+
+    interface _CreateResolverResponse
+      include Smithy::Client::_Response[Types::CreateResolverResponse]
+      def resolver: () -> Types::Resolver?
+    end
+    def create_resolver: (
+      ?api_id: String,
+      ?type_name: String,
+      ?field_name: String,
+      ?data_source_name: String,
+      ?request_mapping_template: String,
+      ?response_mapping_template: String,
+      ?kind: String,
+      ?pipeline_config: {
+        functions: Array[String]
+      },
+      ?sync_config: {
+        conflict_handler: String,
+        conflict_detection: String,
+        lambda_conflict_handler_config: {
+          lambda_conflict_handler_arn: String
+        }
+      },
+      ?caching_config: {
+        ttl: Integer,
+        caching_keys: Array[String]
+      },
+      ?max_batch_size: Integer,
+      ?runtime: {
+        name: String,
+        runtime_version: String
+      },
+      ?code: String,
+      ?metrics_config: String
+    ) -> _CreateResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResolverResponse
+
+    interface _CreateTypeResponse
+      include Smithy::Client::_Response[Types::CreateTypeResponse]
+      def type: () -> Types::Type?
+    end
+    def create_type: (
+      ?api_id: String,
+      ?definition: String,
+      ?format: String
+    ) -> _CreateTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTypeResponse
+
+    interface _DeleteApiResponse
+      include Smithy::Client::_Response[Types::DeleteApiResponse]
+    end
+    def delete_api: (
+      ?api_id: String
+    ) -> _DeleteApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApiResponse
+
+    interface _DeleteApiCacheResponse
+      include Smithy::Client::_Response[Types::DeleteApiCacheResponse]
+    end
+    def delete_api_cache: (
+      ?api_id: String
+    ) -> _DeleteApiCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApiCacheResponse
+
+    interface _DeleteApiKeyResponse
+      include Smithy::Client::_Response[Types::DeleteApiKeyResponse]
+    end
+    def delete_api_key: (
+      ?api_id: String,
+      ?id: String
+    ) -> _DeleteApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApiKeyResponse
+
+    interface _DeleteChannelNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteChannelNamespaceResponse]
+    end
+    def delete_channel_namespace: (
+      ?api_id: String,
+      ?name: String
+    ) -> _DeleteChannelNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelNamespaceResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceResponse]
+    end
+    def delete_data_source: (
+      ?api_id: String,
+      ?name: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteDomainNameResponse
+      include Smithy::Client::_Response[Types::DeleteDomainNameResponse]
+    end
+    def delete_domain_name: (
+      ?domain_name: String
+    ) -> _DeleteDomainNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainNameResponse
+
+    interface _DeleteFunctionResponse
+      include Smithy::Client::_Response[Types::DeleteFunctionResponse]
+    end
+    def delete_function: (
+      ?api_id: String,
+      ?function_id: String
+    ) -> _DeleteFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionResponse
+
+    interface _DeleteGraphqlApiResponse
+      include Smithy::Client::_Response[Types::DeleteGraphqlApiResponse]
+    end
+    def delete_graphql_api: (
+      ?api_id: String
+    ) -> _DeleteGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGraphqlApiResponse
+
+    interface _DeleteResolverResponse
+      include Smithy::Client::_Response[Types::DeleteResolverResponse]
+    end
+    def delete_resolver: (
+      ?api_id: String,
+      ?type_name: String,
+      ?field_name: String
+    ) -> _DeleteResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResolverResponse
+
+    interface _DeleteTypeResponse
+      include Smithy::Client::_Response[Types::DeleteTypeResponse]
+    end
+    def delete_type: (
+      ?api_id: String,
+      ?type_name: String
+    ) -> _DeleteTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTypeResponse
+
+    interface _DisassociateApiResponse
+      include Smithy::Client::_Response[Types::DisassociateApiResponse]
+    end
+    def disassociate_api: (
+      ?domain_name: String
+    ) -> _DisassociateApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApiResponse
+
+    interface _DisassociateMergedGraphqlApiResponse
+      include Smithy::Client::_Response[Types::DisassociateMergedGraphqlApiResponse]
+      def source_api_association_status: () -> String?
+    end
+    def disassociate_merged_graphql_api: (
+      ?source_api_identifier: String,
+      ?association_id: String
+    ) -> _DisassociateMergedGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMergedGraphqlApiResponse
+
+    interface _DisassociateSourceGraphqlApiResponse
+      include Smithy::Client::_Response[Types::DisassociateSourceGraphqlApiResponse]
+      def source_api_association_status: () -> String?
+    end
+    def disassociate_source_graphql_api: (
+      ?merged_api_identifier: String,
+      ?association_id: String
+    ) -> _DisassociateSourceGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceGraphqlApiResponse
+
+    interface _EvaluateCodeResponse
+      include Smithy::Client::_Response[Types::EvaluateCodeResponse]
+      def evaluation_result: () -> String?
+      def error: () -> Types::EvaluateCodeErrorDetail?
+      def logs: () -> Array[String]?
+      def stash: () -> String?
+      def out_errors: () -> String?
+    end
+    def evaluate_code: (
+      ?runtime: {
+        name: String,
+        runtime_version: String
+      },
+      ?code: String,
+      ?context: String,
+      ?function: String
+    ) -> _EvaluateCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateCodeResponse
+
+    interface _EvaluateMappingTemplateResponse
+      include Smithy::Client::_Response[Types::EvaluateMappingTemplateResponse]
+      def evaluation_result: () -> String?
+      def error: () -> Types::ErrorDetail?
+      def logs: () -> Array[String]?
+      def stash: () -> String?
+      def out_errors: () -> String?
+    end
+    def evaluate_mapping_template: (
+      ?template: String,
+      ?context: String
+    ) -> _EvaluateMappingTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateMappingTemplateResponse
+
+    interface _FlushApiCacheResponse
+      include Smithy::Client::_Response[Types::FlushApiCacheResponse]
+    end
+    def flush_api_cache: (
+      ?api_id: String
+    ) -> _FlushApiCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FlushApiCacheResponse
+
+    interface _GetApiResponse
+      include Smithy::Client::_Response[Types::GetApiResponse]
+      def api: () -> Types::Api?
+    end
+    def get_api: (
+      ?api_id: String
+    ) -> _GetApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApiResponse
+
+    interface _GetApiAssociationResponse
+      include Smithy::Client::_Response[Types::GetApiAssociationResponse]
+      def api_association: () -> Types::ApiAssociation?
+    end
+    def get_api_association: (
+      ?domain_name: String
+    ) -> _GetApiAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApiAssociationResponse
+
+    interface _GetApiCacheResponse
+      include Smithy::Client::_Response[Types::GetApiCacheResponse]
+      def api_cache: () -> Types::ApiCache?
+    end
+    def get_api_cache: (
+      ?api_id: String
+    ) -> _GetApiCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApiCacheResponse
+
+    interface _GetChannelNamespaceResponse
+      include Smithy::Client::_Response[Types::GetChannelNamespaceResponse]
+      def channel_namespace: () -> Types::ChannelNamespace?
+    end
+    def get_channel_namespace: (
+      ?api_id: String,
+      ?name: String
+    ) -> _GetChannelNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelNamespaceResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def get_data_source: (
+      ?api_id: String,
+      ?name: String
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetDataSourceIntrospectionResponse
+      include Smithy::Client::_Response[Types::GetDataSourceIntrospectionResponse]
+      def introspection_id: () -> String?
+      def introspection_status: () -> String?
+      def introspection_status_detail: () -> String?
+      def introspection_result: () -> Types::DataSourceIntrospectionResult?
+    end
+    def get_data_source_introspection: (
+      ?introspection_id: String,
+      ?include_models_sdl: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetDataSourceIntrospectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceIntrospectionResponse
+
+    interface _GetDomainNameResponse
+      include Smithy::Client::_Response[Types::GetDomainNameResponse]
+      def domain_name_config: () -> Types::DomainNameConfig?
+    end
+    def get_domain_name: (
+      ?domain_name: String
+    ) -> _GetDomainNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainNameResponse
+
+    interface _GetFunctionResponse
+      include Smithy::Client::_Response[Types::GetFunctionResponse]
+      def function_configuration: () -> Types::FunctionConfiguration?
+    end
+    def get_function: (
+      ?api_id: String,
+      ?function_id: String
+    ) -> _GetFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionResponse
+
+    interface _GetGraphqlApiResponse
+      include Smithy::Client::_Response[Types::GetGraphqlApiResponse]
+      def graphql_api: () -> Types::GraphqlApi?
+    end
+    def get_graphql_api: (
+      ?api_id: String
+    ) -> _GetGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGraphqlApiResponse
+
+    interface _GetGraphqlApiEnvironmentVariablesResponse
+      include Smithy::Client::_Response[Types::GetGraphqlApiEnvironmentVariablesResponse]
+      def environment_variables: () -> Hash[String, String]?
+    end
+    def get_graphql_api_environment_variables: (
+      ?api_id: String
+    ) -> _GetGraphqlApiEnvironmentVariablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGraphqlApiEnvironmentVariablesResponse
+
+    interface _GetIntrospectionSchemaResponse
+      include Smithy::Client::_Response[Types::GetIntrospectionSchemaResponse]
+      def schema: () -> String?
+    end
+    def get_introspection_schema: (
+      ?api_id: String,
+      ?format: String,
+      ?include_directives: bool
+    ) -> _GetIntrospectionSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntrospectionSchemaResponse
+
+    interface _GetResolverResponse
+      include Smithy::Client::_Response[Types::GetResolverResponse]
+      def resolver: () -> Types::Resolver?
+    end
+    def get_resolver: (
+      ?api_id: String,
+      ?type_name: String,
+      ?field_name: String
+    ) -> _GetResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverResponse
+
+    interface _GetSchemaCreationStatusResponse
+      include Smithy::Client::_Response[Types::GetSchemaCreationStatusResponse]
+      def status: () -> String?
+      def details: () -> String?
+    end
+    def get_schema_creation_status: (
+      ?api_id: String
+    ) -> _GetSchemaCreationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaCreationStatusResponse
+
+    interface _GetSourceApiAssociationResponse
+      include Smithy::Client::_Response[Types::GetSourceApiAssociationResponse]
+      def source_api_association: () -> Types::SourceApiAssociation?
+    end
+    def get_source_api_association: (
+      ?merged_api_identifier: String,
+      ?association_id: String
+    ) -> _GetSourceApiAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSourceApiAssociationResponse
+
+    interface _GetTypeResponse
+      include Smithy::Client::_Response[Types::GetTypeResponse]
+      def type: () -> Types::Type?
+    end
+    def get_type: (
+      ?api_id: String,
+      ?type_name: String,
+      ?format: String
+    ) -> _GetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTypeResponse
+
+    interface _ListApiKeysResponse
+      include Smithy::Client::_Response[Types::ListApiKeysResponse]
+      def api_keys: () -> Array[Types::ApiKey]?
+      def next_token: () -> String?
+    end
+    def list_api_keys: (
+      ?api_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApiKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApiKeysResponse
+
+    interface _ListApisResponse
+      include Smithy::Client::_Response[Types::ListApisResponse]
+      def apis: () -> Array[Types::Api]?
+      def next_token: () -> String?
+    end
+    def list_apis: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApisResponse
+
+    interface _ListChannelNamespacesResponse
+      include Smithy::Client::_Response[Types::ListChannelNamespacesResponse]
+      def channel_namespaces: () -> Array[Types::ChannelNamespace]?
+      def next_token: () -> String?
+    end
+    def list_channel_namespaces: (
+      ?api_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChannelNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelNamespacesResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesResponse]
+      def data_sources: () -> Array[Types::DataSource]?
+      def next_token: () -> String?
+    end
+    def list_data_sources: (
+      ?api_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListDomainNamesResponse
+      include Smithy::Client::_Response[Types::ListDomainNamesResponse]
+      def domain_name_configs: () -> Array[Types::DomainNameConfig]?
+      def next_token: () -> String?
+    end
+    def list_domain_names: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainNamesResponse
+
+    interface _ListFunctionsResponse
+      include Smithy::Client::_Response[Types::ListFunctionsResponse]
+      def functions: () -> Array[Types::FunctionConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_functions: (
+      ?api_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsResponse
+
+    interface _ListGraphqlApisResponse
+      include Smithy::Client::_Response[Types::ListGraphqlApisResponse]
+      def graphql_apis: () -> Array[Types::GraphqlApi]?
+      def next_token: () -> String?
+    end
+    def list_graphql_apis: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?api_type: String,
+      ?owner: String
+    ) -> _ListGraphqlApisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGraphqlApisResponse
+
+    interface _ListResolversResponse
+      include Smithy::Client::_Response[Types::ListResolversResponse]
+      def resolvers: () -> Array[Types::Resolver]?
+      def next_token: () -> String?
+    end
+    def list_resolvers: (
+      ?api_id: String,
+      ?type_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResolversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolversResponse
+
+    interface _ListResolversByFunctionResponse
+      include Smithy::Client::_Response[Types::ListResolversByFunctionResponse]
+      def resolvers: () -> Array[Types::Resolver]?
+      def next_token: () -> String?
+    end
+    def list_resolvers_by_function: (
+      ?api_id: String,
+      ?function_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResolversByFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolversByFunctionResponse
+
+    interface _ListSourceApiAssociationsResponse
+      include Smithy::Client::_Response[Types::ListSourceApiAssociationsResponse]
+      def source_api_association_summaries: () -> Array[Types::SourceApiAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_source_api_associations: (
+      ?api_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSourceApiAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceApiAssociationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTypesResponse
+      include Smithy::Client::_Response[Types::ListTypesResponse]
+      def types: () -> Array[Types::Type]?
+      def next_token: () -> String?
+    end
+    def list_types: (
+      ?api_id: String,
+      ?format: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypesResponse
+
+    interface _ListTypesByAssociationResponse
+      include Smithy::Client::_Response[Types::ListTypesByAssociationResponse]
+      def types: () -> Array[Types::Type]?
+      def next_token: () -> String?
+    end
+    def list_types_by_association: (
+      ?merged_api_identifier: String,
+      ?association_id: String,
+      ?format: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTypesByAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypesByAssociationResponse
+
+    interface _PutGraphqlApiEnvironmentVariablesResponse
+      include Smithy::Client::_Response[Types::PutGraphqlApiEnvironmentVariablesResponse]
+      def environment_variables: () -> Hash[String, String]?
+    end
+    def put_graphql_api_environment_variables: (
+      ?api_id: String,
+      ?environment_variables: Hash[String, String]
+    ) -> _PutGraphqlApiEnvironmentVariablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGraphqlApiEnvironmentVariablesResponse
+
+    interface _StartDataSourceIntrospectionResponse
+      include Smithy::Client::_Response[Types::StartDataSourceIntrospectionResponse]
+      def introspection_id: () -> String?
+      def introspection_status: () -> String?
+      def introspection_status_detail: () -> String?
+    end
+    def start_data_source_introspection: (
+      ?rds_data_api_config: {
+        resource_arn: String,
+        secret_arn: String,
+        database_name: String
+      }
+    ) -> _StartDataSourceIntrospectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataSourceIntrospectionResponse
+
+    interface _StartSchemaCreationResponse
+      include Smithy::Client::_Response[Types::StartSchemaCreationResponse]
+      def status: () -> String?
+    end
+    def start_schema_creation: (
+      ?api_id: String,
+      ?definition: String
+    ) -> _StartSchemaCreationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSchemaCreationResponse
+
+    interface _StartSchemaMergeResponse
+      include Smithy::Client::_Response[Types::StartSchemaMergeResponse]
+      def source_api_association_status: () -> String?
+    end
+    def start_schema_merge: (
+      ?association_id: String,
+      ?merged_api_identifier: String
+    ) -> _StartSchemaMergeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSchemaMergeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApiResponse
+      include Smithy::Client::_Response[Types::UpdateApiResponse]
+      def api: () -> Types::Api?
+    end
+    def update_api: (
+      ?api_id: String,
+      ?name: String,
+      ?owner_contact: String,
+      ?event_config: {
+        auth_providers: Array[
+          {
+            auth_type: String,
+            cognito_config: {
+              user_pool_id: String,
+              aws_region: untyped,
+              app_id_client_regex: untyped
+            },
+            open_id_connect_config: {
+              issuer: untyped,
+              client_id: untyped,
+              iat_ttl: Integer,
+              auth_ttl: untyped
+            },
+            lambda_authorizer_config: {
+              authorizer_result_ttl_in_seconds: Integer,
+              authorizer_uri: untyped,
+              identity_validation_expression: untyped
+            }
+          }
+        ],
+        connection_auth_modes: Array[
+          {
+            auth_type: untyped
+          }
+        ],
+        default_publish_auth_modes: untyped,
+        default_subscribe_auth_modes: untyped,
+        log_config: {
+          log_level: String,
+          cloud_watch_logs_role_arn: untyped
+        }
+      }
+    ) -> _UpdateApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiResponse
+
+    interface _UpdateApiCacheResponse
+      include Smithy::Client::_Response[Types::UpdateApiCacheResponse]
+      def api_cache: () -> Types::ApiCache?
+    end
+    def update_api_cache: (
+      ?api_id: String,
+      ?ttl: Integer,
+      ?api_caching_behavior: String,
+      ?type: String,
+      ?health_metrics_config: String
+    ) -> _UpdateApiCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiCacheResponse
+
+    interface _UpdateApiKeyResponse
+      include Smithy::Client::_Response[Types::UpdateApiKeyResponse]
+      def api_key: () -> Types::ApiKey?
+    end
+    def update_api_key: (
+      ?api_id: String,
+      ?id: String,
+      ?description: String,
+      ?expires: Integer
+    ) -> _UpdateApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiKeyResponse
+
+    interface _UpdateChannelNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdateChannelNamespaceResponse]
+      def channel_namespace: () -> Types::ChannelNamespace?
+    end
+    def update_channel_namespace: (
+      ?api_id: String,
+      ?name: String,
+      ?subscribe_auth_modes: Array[
+        {
+          auth_type: String
+        }
+      ],
+      ?publish_auth_modes: Array[
+        {
+          auth_type: String
+        }
+      ],
+      ?code_handlers: String,
+      ?handler_configs: {
+        on_publish: {
+          behavior: String,
+          integration: {
+            data_source_name: String,
+            lambda_config: {
+              invoke_type: String
+            }
+          }
+        },
+        on_subscribe: untyped
+      }
+    ) -> _UpdateChannelNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelNamespaceResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def update_data_source: (
+      ?api_id: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?service_role_arn: String,
+      ?dynamodb_config: {
+        table_name: String,
+        aws_region: untyped,
+        use_caller_credentials: bool,
+        delta_sync_config: {
+          base_table_ttl: Integer,
+          delta_sync_table_name: untyped,
+          delta_sync_table_ttl: untyped
+        },
+        versioned: untyped
+      },
+      ?lambda_config: {
+        lambda_function_arn: String
+      },
+      ?elasticsearch_config: {
+        endpoint: String,
+        aws_region: untyped
+      },
+      ?open_search_service_config: {
+        endpoint: String,
+        aws_region: untyped
+      },
+      ?http_config: {
+        endpoint: String,
+        authorization_config: {
+          authorization_type: String,
+          aws_iam_config: {
+            signing_region: untyped,
+            signing_service_name: untyped
+          }
+        }
+      },
+      ?relational_database_config: {
+        relational_database_source_type: String,
+        rds_http_endpoint_config: {
+          aws_region: String,
+          db_cluster_identifier: untyped,
+          database_name: untyped,
+          schema: untyped,
+          aws_secret_store_arn: untyped
+        }
+      },
+      ?event_bridge_config: {
+        event_bus_arn: String
+      },
+      ?metrics_config: String
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateDomainNameResponse
+      include Smithy::Client::_Response[Types::UpdateDomainNameResponse]
+      def domain_name_config: () -> Types::DomainNameConfig?
+    end
+    def update_domain_name: (
+      ?domain_name: String,
+      ?description: String
+    ) -> _UpdateDomainNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainNameResponse
+
+    interface _UpdateFunctionResponse
+      include Smithy::Client::_Response[Types::UpdateFunctionResponse]
+      def function_configuration: () -> Types::FunctionConfiguration?
+    end
+    def update_function: (
+      ?api_id: String,
+      ?name: String,
+      ?description: String,
+      ?function_id: String,
+      ?data_source_name: String,
+      ?request_mapping_template: String,
+      ?response_mapping_template: String,
+      ?function_version: String,
+      ?sync_config: {
+        conflict_handler: String,
+        conflict_detection: String,
+        lambda_conflict_handler_config: {
+          lambda_conflict_handler_arn: String
+        }
+      },
+      ?max_batch_size: Integer,
+      ?runtime: {
+        name: String,
+        runtime_version: String
+      },
+      ?code: String
+    ) -> _UpdateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionResponse
+
+    interface _UpdateGraphqlApiResponse
+      include Smithy::Client::_Response[Types::UpdateGraphqlApiResponse]
+      def graphql_api: () -> Types::GraphqlApi?
+    end
+    def update_graphql_api: (
+      ?api_id: String,
+      ?name: String,
+      ?log_config: {
+        field_log_level: String,
+        cloud_watch_logs_role_arn: String,
+        exclude_verbose_content: bool
+      },
+      ?authentication_type: String,
+      ?user_pool_config: {
+        user_pool_id: String,
+        aws_region: untyped,
+        default_action: String,
+        app_id_client_regex: untyped
+      },
+      ?open_id_connect_config: {
+        issuer: String,
+        client_id: untyped,
+        iat_ttl: Integer,
+        auth_ttl: untyped
+      },
+      ?additional_authentication_providers: Array[
+        {
+          authentication_type: String,
+          open_id_connect_config: {
+            issuer: String,
+            client_id: untyped,
+            iat_ttl: Integer,
+            auth_ttl: untyped
+          },
+          user_pool_config: {
+            user_pool_id: untyped,
+            aws_region: untyped,
+            app_id_client_regex: untyped
+          },
+          lambda_authorizer_config: {
+            authorizer_result_ttl_in_seconds: Integer,
+            authorizer_uri: untyped,
+            identity_validation_expression: untyped
+          }
+        }
+      ],
+      ?xray_enabled: bool,
+      ?lambda_authorizer_config: {
+        authorizer_result_ttl_in_seconds: Integer,
+        authorizer_uri: String,
+        identity_validation_expression: untyped
+      },
+      ?merged_api_execution_role_arn: String,
+      ?owner_contact: String,
+      ?introspection_config: String,
+      ?query_depth_limit: Integer,
+      ?resolver_count_limit: Integer,
+      ?enhanced_metrics_config: {
+        resolver_level_metrics_behavior: String,
+        data_source_level_metrics_behavior: String,
+        operation_level_metrics_config: String
+      }
+    ) -> _UpdateGraphqlApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGraphqlApiResponse
+
+    interface _UpdateResolverResponse
+      include Smithy::Client::_Response[Types::UpdateResolverResponse]
+      def resolver: () -> Types::Resolver?
+    end
+    def update_resolver: (
+      ?api_id: String,
+      ?type_name: String,
+      ?field_name: String,
+      ?data_source_name: String,
+      ?request_mapping_template: String,
+      ?response_mapping_template: String,
+      ?kind: String,
+      ?pipeline_config: {
+        functions: Array[String]
+      },
+      ?sync_config: {
+        conflict_handler: String,
+        conflict_detection: String,
+        lambda_conflict_handler_config: {
+          lambda_conflict_handler_arn: String
+        }
+      },
+      ?caching_config: {
+        ttl: Integer,
+        caching_keys: Array[String]
+      },
+      ?max_batch_size: Integer,
+      ?runtime: {
+        name: String,
+        runtime_version: String
+      },
+      ?code: String,
+      ?metrics_config: String
+    ) -> _UpdateResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverResponse
+
+    interface _UpdateSourceApiAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateSourceApiAssociationResponse]
+      def source_api_association: () -> Types::SourceApiAssociation?
+    end
+    def update_source_api_association: (
+      ?association_id: String,
+      ?merged_api_identifier: String,
+      ?description: String,
+      ?source_api_association_config: {
+        merge_type: String
+      }
+    ) -> _UpdateSourceApiAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSourceApiAssociationResponse
+
+    interface _UpdateTypeResponse
+      include Smithy::Client::_Response[Types::UpdateTypeResponse]
+      def type: () -> Types::Type?
+    end
+    def update_type: (
+      ?api_id: String,
+      ?type_name: String,
+      ?definition: String,
+      ?format: String
+    ) -> _UpdateTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTypeResponse
+  end
+end

@@ -1,0 +1,433 @@
+module Aws::Route53RecoveryReadiness
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53RecoveryReadiness::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCellResponse
+      include Smithy::Client::_Response[Types::CreateCellResponse]
+      def cell_arn: () -> String?
+      def cell_name: () -> String?
+      def cells: () -> Array[String]?
+      def parent_readiness_scopes: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_cell: (
+      ?cell_name: String,
+      ?cells: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateCellResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCellResponse
+
+    interface _CreateCrossAccountAuthorizationResponse
+      include Smithy::Client::_Response[Types::CreateCrossAccountAuthorizationResponse]
+      def cross_account_authorization: () -> String?
+    end
+    def create_cross_account_authorization: (
+      ?cross_account_authorization: String
+    ) -> _CreateCrossAccountAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCrossAccountAuthorizationResponse
+
+    interface _CreateReadinessCheckResponse
+      include Smithy::Client::_Response[Types::CreateReadinessCheckResponse]
+      def readiness_check_arn: () -> String?
+      def readiness_check_name: () -> String?
+      def resource_set: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_readiness_check: (
+      ?readiness_check_name: String,
+      ?resource_set_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateReadinessCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReadinessCheckResponse
+
+    interface _CreateRecoveryGroupResponse
+      include Smithy::Client::_Response[Types::CreateRecoveryGroupResponse]
+      def cells: () -> Array[String]?
+      def recovery_group_arn: () -> String?
+      def recovery_group_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_recovery_group: (
+      ?cells: Array[String],
+      ?recovery_group_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRecoveryGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecoveryGroupResponse
+
+    interface _CreateResourceSetResponse
+      include Smithy::Client::_Response[Types::CreateResourceSetResponse]
+      def resource_set_arn: () -> String?
+      def resource_set_name: () -> String?
+      def resource_set_type: () -> String?
+      def resources: () -> Array[Types::Resource]?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_resource_set: (
+      ?resource_set_name: String,
+      ?resource_set_type: String,
+      ?resources: Array[
+        {
+          component_id: String,
+          dns_target_resource: {
+            domain_name: untyped,
+            hosted_zone_arn: untyped,
+            record_set_id: untyped,
+            record_type: untyped,
+            target_resource: {
+              nlb_resource: {
+                arn: untyped
+              },
+              r53_resource: {
+                domain_name: untyped,
+                record_set_id: untyped
+              }
+            }
+          },
+          readiness_scopes: Array[String],
+          resource_arn: untyped
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceSetResponse
+
+    interface _DeleteCellResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cell: (
+      ?cell_name: String
+    ) -> _DeleteCellResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCellResponse
+
+    interface _DeleteCrossAccountAuthorizationResponse
+      include Smithy::Client::_Response[Types::DeleteCrossAccountAuthorizationResponse]
+    end
+    def delete_cross_account_authorization: (
+      ?cross_account_authorization: String
+    ) -> _DeleteCrossAccountAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCrossAccountAuthorizationResponse
+
+    interface _DeleteReadinessCheckResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_readiness_check: (
+      ?readiness_check_name: String
+    ) -> _DeleteReadinessCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReadinessCheckResponse
+
+    interface _DeleteRecoveryGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_recovery_group: (
+      ?recovery_group_name: String
+    ) -> _DeleteRecoveryGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryGroupResponse
+
+    interface _DeleteResourceSetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_set: (
+      ?resource_set_name: String
+    ) -> _DeleteResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceSetResponse
+
+    interface _GetArchitectureRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetArchitectureRecommendationsResponse]
+      def last_audit_timestamp: () -> Time?
+      def next_token: () -> String?
+      def recommendations: () -> Array[Types::Recommendation]?
+    end
+    def get_architecture_recommendations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?recovery_group_name: String
+    ) -> _GetArchitectureRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchitectureRecommendationsResponse
+
+    interface _GetCellResponse
+      include Smithy::Client::_Response[Types::GetCellResponse]
+      def cell_arn: () -> String?
+      def cell_name: () -> String?
+      def cells: () -> Array[String]?
+      def parent_readiness_scopes: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_cell: (
+      ?cell_name: String
+    ) -> _GetCellResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCellResponse
+
+    interface _GetCellReadinessSummaryResponse
+      include Smithy::Client::_Response[Types::GetCellReadinessSummaryResponse]
+      def next_token: () -> String?
+      def readiness: () -> String?
+      def readiness_checks: () -> Array[Types::ReadinessCheckSummary]?
+    end
+    def get_cell_readiness_summary: (
+      ?cell_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetCellReadinessSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCellReadinessSummaryResponse
+
+    interface _GetReadinessCheckResponse
+      include Smithy::Client::_Response[Types::GetReadinessCheckResponse]
+      def readiness_check_arn: () -> String?
+      def readiness_check_name: () -> String?
+      def resource_set: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_readiness_check: (
+      ?readiness_check_name: String
+    ) -> _GetReadinessCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadinessCheckResponse
+
+    interface _GetReadinessCheckResourceStatusResponse
+      include Smithy::Client::_Response[Types::GetReadinessCheckResourceStatusResponse]
+      def next_token: () -> String?
+      def readiness: () -> String?
+      def rules: () -> Array[Types::RuleResult]?
+    end
+    def get_readiness_check_resource_status: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?readiness_check_name: String,
+      ?resource_identifier: String
+    ) -> _GetReadinessCheckResourceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadinessCheckResourceStatusResponse
+
+    interface _GetReadinessCheckStatusResponse
+      include Smithy::Client::_Response[Types::GetReadinessCheckStatusResponse]
+      def messages: () -> Array[Types::Message]?
+      def next_token: () -> String?
+      def readiness: () -> String?
+      def resources: () -> Array[Types::ResourceResult]?
+    end
+    def get_readiness_check_status: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?readiness_check_name: String
+    ) -> _GetReadinessCheckStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadinessCheckStatusResponse
+
+    interface _GetRecoveryGroupResponse
+      include Smithy::Client::_Response[Types::GetRecoveryGroupResponse]
+      def cells: () -> Array[String]?
+      def recovery_group_arn: () -> String?
+      def recovery_group_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_recovery_group: (
+      ?recovery_group_name: String
+    ) -> _GetRecoveryGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryGroupResponse
+
+    interface _GetRecoveryGroupReadinessSummaryResponse
+      include Smithy::Client::_Response[Types::GetRecoveryGroupReadinessSummaryResponse]
+      def next_token: () -> String?
+      def readiness: () -> String?
+      def readiness_checks: () -> Array[Types::ReadinessCheckSummary]?
+    end
+    def get_recovery_group_readiness_summary: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?recovery_group_name: String
+    ) -> _GetRecoveryGroupReadinessSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryGroupReadinessSummaryResponse
+
+    interface _GetResourceSetResponse
+      include Smithy::Client::_Response[Types::GetResourceSetResponse]
+      def resource_set_arn: () -> String?
+      def resource_set_name: () -> String?
+      def resource_set_type: () -> String?
+      def resources: () -> Array[Types::Resource]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_resource_set: (
+      ?resource_set_name: String
+    ) -> _GetResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSetResponse
+
+    interface _ListCellsResponse
+      include Smithy::Client::_Response[Types::ListCellsResponse]
+      def cells: () -> Array[Types::CellOutput]?
+      def next_token: () -> String?
+    end
+    def list_cells: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCellsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCellsResponse
+
+    interface _ListCrossAccountAuthorizationsResponse
+      include Smithy::Client::_Response[Types::ListCrossAccountAuthorizationsResponse]
+      def cross_account_authorizations: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_cross_account_authorizations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCrossAccountAuthorizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCrossAccountAuthorizationsResponse
+
+    interface _ListReadinessChecksResponse
+      include Smithy::Client::_Response[Types::ListReadinessChecksResponse]
+      def next_token: () -> String?
+      def readiness_checks: () -> Array[Types::ReadinessCheckOutput]?
+    end
+    def list_readiness_checks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReadinessChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadinessChecksResponse
+
+    interface _ListRecoveryGroupsResponse
+      include Smithy::Client::_Response[Types::ListRecoveryGroupsResponse]
+      def next_token: () -> String?
+      def recovery_groups: () -> Array[Types::RecoveryGroupOutput]?
+    end
+    def list_recovery_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecoveryGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryGroupsResponse
+
+    interface _ListResourceSetsResponse
+      include Smithy::Client::_Response[Types::ListResourceSetsResponse]
+      def next_token: () -> String?
+      def resource_sets: () -> Array[Types::ResourceSetOutput]?
+    end
+    def list_resource_sets: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSetsResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesResponse]
+      def next_token: () -> String?
+      def rules: () -> Array[Types::ListRulesOutput]?
+    end
+    def list_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_type: String
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListTagsForResourcesResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourcesResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resources: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourcesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCellResponse
+      include Smithy::Client::_Response[Types::UpdateCellResponse]
+      def cell_arn: () -> String?
+      def cell_name: () -> String?
+      def cells: () -> Array[String]?
+      def parent_readiness_scopes: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_cell: (
+      ?cell_name: String,
+      ?cells: Array[String]
+    ) -> _UpdateCellResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCellResponse
+
+    interface _UpdateReadinessCheckResponse
+      include Smithy::Client::_Response[Types::UpdateReadinessCheckResponse]
+      def readiness_check_arn: () -> String?
+      def readiness_check_name: () -> String?
+      def resource_set: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_readiness_check: (
+      ?readiness_check_name: String,
+      ?resource_set_name: String
+    ) -> _UpdateReadinessCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReadinessCheckResponse
+
+    interface _UpdateRecoveryGroupResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryGroupResponse]
+      def cells: () -> Array[String]?
+      def recovery_group_arn: () -> String?
+      def recovery_group_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_recovery_group: (
+      ?cells: Array[String],
+      ?recovery_group_name: String
+    ) -> _UpdateRecoveryGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryGroupResponse
+
+    interface _UpdateResourceSetResponse
+      include Smithy::Client::_Response[Types::UpdateResourceSetResponse]
+      def resource_set_arn: () -> String?
+      def resource_set_name: () -> String?
+      def resource_set_type: () -> String?
+      def resources: () -> Array[Types::Resource]?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_resource_set: (
+      ?resource_set_name: String,
+      ?resource_set_type: String,
+      ?resources: Array[
+        {
+          component_id: String,
+          dns_target_resource: {
+            domain_name: untyped,
+            hosted_zone_arn: untyped,
+            record_set_id: untyped,
+            record_type: untyped,
+            target_resource: {
+              nlb_resource: {
+                arn: untyped
+              },
+              r53_resource: {
+                domain_name: untyped,
+                record_set_id: untyped
+              }
+            }
+          },
+          readiness_scopes: Array[String],
+          resource_arn: untyped
+        }
+      ]
+    ) -> _UpdateResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceSetResponse
+  end
+end

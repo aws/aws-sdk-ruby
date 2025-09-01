@@ -1,0 +1,3633 @@
+module Aws::WellArchitected
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountJiraConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_management_status: String,
+        ?issue_management_type: String,
+        ?jira_project_key: String,
+        ?integration_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_management_status: String?
+      attr_accessor issue_management_type: String?
+      attr_accessor jira_project_key: String?
+      attr_accessor integration_status: String?
+    end
+
+    class AccountJiraConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_status: String,
+        ?issue_management_status: String,
+        ?issue_management_type: String,
+        ?subdomain: String,
+        ?jira_project_key: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_status: String?
+      attr_accessor issue_management_status: String?
+      attr_accessor issue_management_type: String?
+      attr_accessor subdomain: String?
+      attr_accessor jira_project_key: String?
+      attr_accessor status_message: String?
+    end
+
+    module AccountJiraIssueManagementStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module AdditionalResourceType
+      HELPFUL_RESOURCE: String
+      IMPROVEMENT_PLAN: String
+    end
+
+    class AdditionalResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?content: Array[Types::ChoiceContent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor content: Array[Types::ChoiceContent]?
+    end
+
+    class Answer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?pillar_id: String,
+        ?question_title: String,
+        ?question_description: String,
+        ?improvement_plan_url: String,
+        ?helpful_resource_url: String,
+        ?helpful_resource_display_text: String,
+        ?choices: Array[Types::Choice],
+        ?selected_choices: Array[String],
+        ?choice_answers: Array[Types::ChoiceAnswer],
+        ?is_applicable: bool,
+        ?risk: String,
+        ?notes: String,
+        ?reason: String,
+        ?jira_configuration: Types::JiraConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_title: String?
+      attr_accessor question_description: String?
+      attr_accessor improvement_plan_url: String?
+      attr_accessor helpful_resource_url: String?
+      attr_accessor helpful_resource_display_text: String?
+      attr_accessor choices: Array[Types::Choice]?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_answers: Array[Types::ChoiceAnswer]?
+      attr_accessor is_applicable: bool?
+      attr_accessor risk: String?
+      attr_accessor notes: String?
+      attr_accessor reason: String?
+      attr_accessor jira_configuration: Types::JiraConfiguration?
+    end
+
+    module AnswerReason
+      OUT_OF_SCOPE: String
+      BUSINESS_PRIORITIES: String
+      ARCHITECTURE_CONSTRAINTS: String
+      OTHER: String
+      NONE: String
+    end
+
+    class AnswerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?pillar_id: String,
+        ?question_title: String,
+        ?choices: Array[Types::Choice],
+        ?selected_choices: Array[String],
+        ?choice_answer_summaries: Array[Types::ChoiceAnswerSummary],
+        ?is_applicable: bool,
+        ?risk: String,
+        ?reason: String,
+        ?question_type: String,
+        ?jira_configuration: Types::JiraConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_title: String?
+      attr_accessor choices: Array[Types::Choice]?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_answer_summaries: Array[Types::ChoiceAnswerSummary]?
+      attr_accessor is_applicable: bool?
+      attr_accessor risk: String?
+      attr_accessor reason: String?
+      attr_accessor question_type: String?
+      attr_accessor jira_configuration: Types::JiraConfiguration?
+    end
+
+    class AssociateLensesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_aliases: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_aliases: Array[String]?
+    end
+
+    class AssociateProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?profile_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor profile_arns: Array[String]?
+    end
+
+    class BestPractice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?choice_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor choice_title: String?
+    end
+
+    class CheckDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?provider: String,
+        ?lens_arn: String,
+        ?pillar_id: String,
+        ?question_id: String,
+        ?choice_id: String,
+        ?status: String,
+        ?account_id: String,
+        ?flagged_resources: Integer,
+        ?reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider: String?
+      attr_accessor lens_arn: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_id: String?
+      attr_accessor choice_id: String?
+      attr_accessor status: String?
+      attr_accessor account_id: String?
+      attr_accessor flagged_resources: Integer?
+      attr_accessor reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module CheckFailureReason
+      ASSUME_ROLE_ERROR: String
+      ACCESS_DENIED: String
+      UNKNOWN_ERROR: String
+      PREMIUM_SUPPORT_REQUIRED: String
+    end
+
+    module CheckProvider
+      TRUSTED_ADVISOR: String
+    end
+
+    module CheckStatus
+      OKAY: String
+      WARNING: String
+      ERROR: String
+      NOT_AVAILABLE: String
+      FETCH_FAILED: String
+    end
+
+    class CheckSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?provider: String,
+        ?description: String,
+        ?updated_at: Time,
+        ?lens_arn: String,
+        ?pillar_id: String,
+        ?question_id: String,
+        ?choice_id: String,
+        ?status: String,
+        ?account_summary: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor provider: String?
+      attr_accessor description: String?
+      attr_accessor updated_at: Time?
+      attr_accessor lens_arn: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_id: String?
+      attr_accessor choice_id: String?
+      attr_accessor status: String?
+      attr_accessor account_summary: Hash[String, Integer]?
+    end
+
+    class Choice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?title: String,
+        ?description: String,
+        ?helpful_resource: Types::ChoiceContent,
+        ?improvement_plan: Types::ChoiceContent,
+        ?additional_resources: Array[Types::AdditionalResources],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor helpful_resource: Types::ChoiceContent?
+      attr_accessor improvement_plan: Types::ChoiceContent?
+      attr_accessor additional_resources: Array[Types::AdditionalResources]?
+    end
+
+    class ChoiceAnswer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?status: String,
+        ?reason: String,
+        ?notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor status: String?
+      attr_accessor reason: String?
+      attr_accessor notes: String?
+    end
+
+    class ChoiceAnswerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class ChoiceContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_text: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_text: String?
+      attr_accessor url: String?
+    end
+
+    class ChoiceImprovementPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?display_text: String,
+        ?improvement_plan_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor display_text: String?
+      attr_accessor improvement_plan_url: String?
+    end
+
+    module ChoiceReason
+      OUT_OF_SCOPE: String
+      BUSINESS_PRIORITIES: String
+      ARCHITECTURE_CONSTRAINTS: String
+      OTHER: String
+      NONE: String
+    end
+
+    module ChoiceStatus
+      SELECTED: String
+      NOT_APPLICABLE: String
+      UNSELECTED: String
+    end
+
+    class ChoiceUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+        ?notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+      attr_accessor notes: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConsolidatedReportMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_type: String,
+        ?risk_counts: Hash[String, Integer],
+        ?workload_id: String,
+        ?workload_name: String,
+        ?workload_arn: String,
+        ?updated_at: Time,
+        ?lenses: Array[Types::LensMetric],
+        ?lenses_applied_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_type: String?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor workload_id: String?
+      attr_accessor workload_name: String?
+      attr_accessor workload_arn: String?
+      attr_accessor updated_at: Time?
+      attr_accessor lenses: Array[Types::LensMetric]?
+      attr_accessor lenses_applied_count: Integer?
+    end
+
+    class CreateLensShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?shared_with: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor shared_with: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateLensShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+    end
+
+    class CreateLensVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_version: String,
+        ?is_major_version: bool,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_version: String?
+      attr_accessor is_major_version: bool?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateLensVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_arn: String,
+        ?lens_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_arn: String?
+      attr_accessor lens_version: String?
+    end
+
+    class CreateMilestoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateMilestoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+    end
+
+    class CreateProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_description: String,
+        ?profile_questions: Array[Types::ProfileQuestionUpdate],
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_description: String?
+      attr_accessor profile_questions: Array[Types::ProfileQuestionUpdate]?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_version: String?
+    end
+
+    class CreateProfileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?shared_with: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor shared_with: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateProfileShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor profile_arn: String?
+    end
+
+    class CreateReviewTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?description: String,
+        ?lenses: Array[String],
+        ?notes: String,
+        ?tags: Hash[String, String],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor lenses: Array[String]?
+      attr_accessor notes: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateReviewTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+    end
+
+    class CreateTemplateShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?shared_with: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor shared_with: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateTemplateShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor share_id: String?
+    end
+
+    class CreateWorkloadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?description: String,
+        ?environment: String,
+        ?account_ids: Array[String],
+        ?aws_regions: Array[String],
+        ?non_aws_regions: Array[String],
+        ?pillar_priorities: Array[String],
+        ?architectural_design: String,
+        ?review_owner: String,
+        ?industry_type: String,
+        ?industry: String,
+        ?lenses: Array[String],
+        ?notes: String,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+        ?discovery_config: Types::WorkloadDiscoveryConfig,
+        ?applications: Array[String],
+        ?profile_arns: Array[String],
+        ?review_template_arns: Array[String],
+        ?jira_configuration: Types::WorkloadJiraConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor description: String?
+      attr_accessor environment: String?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor aws_regions: Array[String]?
+      attr_accessor non_aws_regions: Array[String]?
+      attr_accessor pillar_priorities: Array[String]?
+      attr_accessor architectural_design: String?
+      attr_accessor review_owner: String?
+      attr_accessor industry_type: String?
+      attr_accessor industry: String?
+      attr_accessor lenses: Array[String]?
+      attr_accessor notes: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig?
+      attr_accessor applications: Array[String]?
+      attr_accessor profile_arns: Array[String]?
+      attr_accessor review_template_arns: Array[String]?
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationInput?
+    end
+
+    class CreateWorkloadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_arn: String?
+    end
+
+    class CreateWorkloadShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?shared_with: String,
+        ?permission_type: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor shared_with: String?
+      attr_accessor permission_type: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateWorkloadShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?share_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor share_id: String?
+    end
+
+    module DefinitionType
+      WORKLOAD_METADATA: String
+      APP_REGISTRY: String
+    end
+
+    class DeleteLensInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?client_request_token: String,
+        ?lens_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor client_request_token: String?
+      attr_accessor lens_status: String?
+    end
+
+    class DeleteLensShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?lens_alias: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteProfileShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?profile_arn: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteReviewTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteTemplateShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?template_arn: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteWorkloadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteWorkloadShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?workload_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor workload_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    module DifferenceStatus
+      UPDATED: String
+      NEW: String
+      DELETED: String
+    end
+
+    class DisassociateLensesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_aliases: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_aliases: Array[String]?
+    end
+
+    class DisassociateProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?profile_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor profile_arns: Array[String]?
+    end
+
+    module DiscoveryIntegrationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ExportLensInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_version: String?
+    end
+
+    class ExportLensOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_json: String?
+    end
+
+    class GetAnswerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?question_id: String,
+        ?milestone_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor question_id: String?
+      attr_accessor milestone_number: Integer?
+    end
+
+    class GetAnswerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?answer: Types::Answer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor answer: Types::Answer?
+    end
+
+    class GetConsolidatedReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?include_shared_resources: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor include_shared_resources: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetConsolidatedReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[Types::ConsolidatedReportMetric],
+        ?next_token: String,
+        ?base64_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[Types::ConsolidatedReportMetric]?
+      attr_accessor next_token: String?
+      attr_accessor base64_string: String?
+    end
+
+    class GetGlobalSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_sharing_status: String,
+        ?discovery_integration_status: String,
+        ?jira_configuration: Types::AccountJiraConfigurationOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_sharing_status: String?
+      attr_accessor discovery_integration_status: String?
+      attr_accessor jira_configuration: Types::AccountJiraConfigurationOutput?
+    end
+
+    class GetLensInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_version: String?
+    end
+
+    class GetLensOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens: Types::Lens,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens: Types::Lens?
+    end
+
+    class GetLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?milestone_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor milestone_number: Integer?
+    end
+
+    class GetLensReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_review: Types::LensReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_review: Types::LensReview?
+    end
+
+    class GetLensReviewReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?milestone_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor milestone_number: Integer?
+    end
+
+    class GetLensReviewReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_review_report: Types::LensReviewReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_review_report: Types::LensReviewReport?
+    end
+
+    class GetLensVersionDifferenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?base_lens_version: String,
+        ?target_lens_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor base_lens_version: String?
+      attr_accessor target_lens_version: String?
+    end
+
+    class GetLensVersionDifferenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?base_lens_version: String,
+        ?target_lens_version: String,
+        ?latest_lens_version: String,
+        ?version_differences: Types::VersionDifferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor base_lens_version: String?
+      attr_accessor target_lens_version: String?
+      attr_accessor latest_lens_version: String?
+      attr_accessor version_differences: Types::VersionDifferences?
+    end
+
+    class GetMilestoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+    end
+
+    class GetMilestoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone: Types::Milestone,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone: Types::Milestone?
+    end
+
+    class GetProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_version: String?
+    end
+
+    class GetProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::Profile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::Profile?
+    end
+
+    class GetProfileTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetProfileTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_template: Types::ProfileTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_template: Types::ProfileTemplate?
+    end
+
+    class GetReviewTemplateAnswerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?question_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor question_id: String?
+    end
+
+    class GetReviewTemplateAnswerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?answer: Types::ReviewTemplateAnswer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor answer: Types::ReviewTemplateAnswer?
+    end
+
+    class GetReviewTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+    end
+
+    class GetReviewTemplateLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+    end
+
+    class GetReviewTemplateLensReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_review: Types::ReviewTemplateLensReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_review: Types::ReviewTemplateLensReview?
+    end
+
+    class GetReviewTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?review_template: Types::ReviewTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor review_template: Types::ReviewTemplate?
+    end
+
+    class GetWorkloadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+    end
+
+    class GetWorkloadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload: Types::Workload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload: Types::Workload?
+    end
+
+    class ImportLensInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?json_string: String,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor json_string: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ImportLensOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_arn: String?
+      attr_accessor status: String?
+    end
+
+    module ImportLensStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      ERROR: String
+    end
+
+    class ImprovementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?pillar_id: String,
+        ?question_title: String,
+        ?risk: String,
+        ?improvement_plan_url: String,
+        ?improvement_plans: Array[Types::ChoiceImprovementPlan],
+        ?jira_configuration: Types::JiraConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_title: String?
+      attr_accessor risk: String?
+      attr_accessor improvement_plan_url: String?
+      attr_accessor improvement_plans: Array[Types::ChoiceImprovementPlan]?
+      attr_accessor jira_configuration: Types::JiraConfiguration?
+    end
+
+    module IntegratingService
+      JIRA: String
+    end
+
+    module IntegrationStatus
+      CONFIGURED: String
+      NOT_CONFIGURED: String
+    end
+
+    module IntegrationStatusInput
+      NOT_CONFIGURED: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IssueManagementType
+      AUTO: String
+      MANUAL: String
+    end
+
+    class JiraConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jira_issue_url: String,
+        ?last_synced_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jira_issue_url: String?
+      attr_accessor last_synced_time: Time?
+    end
+
+    class JiraSelectedQuestionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selected_pillars: Array[Types::SelectedPillar],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selected_pillars: Array[Types::SelectedPillar]?
+    end
+
+    class Lens
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_arn: String,
+        ?lens_version: String,
+        ?name: String,
+        ?description: String,
+        ?owner: String,
+        ?share_invitation_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_arn: String?
+      attr_accessor lens_version: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor owner: String?
+      attr_accessor share_invitation_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LensMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_arn: String,
+        ?pillars: Array[Types::PillarMetric],
+        ?risk_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_arn: String?
+      attr_accessor pillars: Array[Types::PillarMetric]?
+      attr_accessor risk_counts: Hash[String, Integer]?
+    end
+
+    class LensReview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?lens_version: String,
+        ?lens_name: String,
+        ?lens_status: String,
+        ?pillar_review_summaries: Array[Types::PillarReviewSummary],
+        ?jira_configuration: Types::JiraSelectedQuestionConfiguration,
+        ?updated_at: Time,
+        ?notes: String,
+        ?risk_counts: Hash[String, Integer],
+        ?next_token: String,
+        ?profiles: Array[Types::WorkloadProfile],
+        ?prioritized_risk_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor lens_version: String?
+      attr_accessor lens_name: String?
+      attr_accessor lens_status: String?
+      attr_accessor pillar_review_summaries: Array[Types::PillarReviewSummary]?
+      attr_accessor jira_configuration: Types::JiraSelectedQuestionConfiguration?
+      attr_accessor updated_at: Time?
+      attr_accessor notes: String?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor next_token: String?
+      attr_accessor profiles: Array[Types::WorkloadProfile]?
+      attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+    end
+
+    class LensReviewReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?base64_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor base64_string: String?
+    end
+
+    class LensReviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?lens_version: String,
+        ?lens_name: String,
+        ?lens_status: String,
+        ?updated_at: Time,
+        ?risk_counts: Hash[String, Integer],
+        ?profiles: Array[Types::WorkloadProfile],
+        ?prioritized_risk_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor lens_version: String?
+      attr_accessor lens_name: String?
+      attr_accessor lens_status: String?
+      attr_accessor updated_at: Time?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor profiles: Array[Types::WorkloadProfile]?
+      attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+    end
+
+    class LensShareSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?shared_with: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor shared_with: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module LensStatus
+      CURRENT: String
+      NOT_CURRENT: String
+      DEPRECATED: String
+      DELETED: String
+      UNSHARED: String
+    end
+
+    module LensStatusType
+      ALL: String
+      DRAFT: String
+      PUBLISHED: String
+    end
+
+    class LensSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_arn: String,
+        ?lens_alias: String,
+        ?lens_name: String,
+        ?lens_type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?lens_version: String,
+        ?owner: String,
+        ?lens_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_name: String?
+      attr_accessor lens_type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor lens_version: String?
+      attr_accessor owner: String?
+      attr_accessor lens_status: String?
+    end
+
+    module LensType
+      AWS_OFFICIAL: String
+      CUSTOM_SHARED: String
+      CUSTOM_SELF: String
+    end
+
+    class LensUpgradeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_name: String,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?current_lens_version: String,
+        ?latest_lens_version: String,
+        ?resource_arn: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_name: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor current_lens_version: String?
+      attr_accessor latest_lens_version: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ListAnswersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?pillar_id: String,
+        ?milestone_number: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?question_priority: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor pillar_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor question_priority: String?
+    end
+
+    class ListAnswersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?answer_summaries: Array[Types::AnswerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor answer_summaries: Array[Types::AnswerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCheckDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?lens_arn: String,
+        ?pillar_id: String,
+        ?question_id: String,
+        ?choice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor lens_arn: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_id: String?
+      attr_accessor choice_id: String?
+    end
+
+    class ListCheckDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_details: Array[Types::CheckDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_details: Array[Types::CheckDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCheckSummariesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?lens_arn: String,
+        ?pillar_id: String,
+        ?question_id: String,
+        ?choice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor lens_arn: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_id: String?
+      attr_accessor choice_id: String?
+    end
+
+    class ListCheckSummariesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_summaries: Array[Types::CheckSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_summaries: Array[Types::CheckSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLensReviewImprovementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?pillar_id: String,
+        ?milestone_number: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?question_priority: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor pillar_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor question_priority: String?
+    end
+
+    class ListLensReviewImprovementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?improvement_summaries: Array[Types::ImprovementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor improvement_summaries: Array[Types::ImprovementSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLensReviewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLensReviewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_number: Integer,
+        ?lens_review_summaries: Array[Types::LensReviewSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_number: Integer?
+      attr_accessor lens_review_summaries: Array[Types::LensReviewSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLensSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?shared_with_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor shared_with_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListLensSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_share_summaries: Array[Types::LensShareSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_share_summaries: Array[Types::LensShareSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLensesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?lens_type: String,
+        ?lens_status: String,
+        ?lens_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor lens_type: String?
+      attr_accessor lens_status: String?
+      attr_accessor lens_name: String?
+    end
+
+    class ListLensesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_summaries: Array[Types::LensSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_summaries: Array[Types::LensSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMilestonesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMilestonesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?milestone_summaries: Array[Types::MilestoneSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor milestone_summaries: Array[Types::MilestoneSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListNotificationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_summaries: Array[Types::NotificationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_summaries: Array[Types::NotificationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProfileNotificationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_summaries: Array[Types::ProfileNotificationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_summaries: Array[Types::ProfileNotificationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?shared_with_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor shared_with_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListProfileSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_share_summaries: Array[Types::ProfileShareSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_share_summaries: Array[Types::ProfileShareSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name_prefix: String,
+        ?profile_owner_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name_prefix: String?
+      attr_accessor profile_owner_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProfilesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_summaries: Array[Types::ProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_summaries: Array[Types::ProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReviewTemplateAnswersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?pillar_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor pillar_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReviewTemplateAnswersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?answer_summaries: Array[Types::ReviewTemplateAnswerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor answer_summaries: Array[Types::ReviewTemplateAnswerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReviewTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReviewTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?review_templates: Array[Types::ReviewTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor review_templates: Array[Types::ReviewTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListShareInvitationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name_prefix: String,
+        ?lens_name_prefix: String,
+        ?share_resource_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?profile_name_prefix: String,
+        ?template_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name_prefix: String?
+      attr_accessor lens_name_prefix: String?
+      attr_accessor share_resource_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor profile_name_prefix: String?
+      attr_accessor template_name_prefix: String?
+    end
+
+    class ListShareInvitationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_invitation_summaries: Array[Types::ShareInvitationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_invitation_summaries: Array[Types::ShareInvitationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTemplateSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?shared_with_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor shared_with_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListTemplateSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?template_share_summaries: Array[Types::TemplateShareSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor template_share_summaries: Array[Types::TemplateShareSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?shared_with_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor shared_with_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListWorkloadSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_share_summaries: Array[Types::WorkloadShareSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_share_summaries: Array[Types::WorkloadShareSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkloadsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_summaries: Array[Types::WorkloadSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_summaries: Array[Types::WorkloadSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module MetricType
+      WORKLOAD: String
+    end
+
+    class Milestone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?milestone_number: Integer,
+        ?milestone_name: String,
+        ?recorded_at: Time,
+        ?workload: Types::Workload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor milestone_number: Integer?
+      attr_accessor milestone_name: String?
+      attr_accessor recorded_at: Time?
+      attr_accessor workload: Types::Workload?
+    end
+
+    class MilestoneSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?milestone_number: Integer,
+        ?milestone_name: String,
+        ?recorded_at: Time,
+        ?workload_summary: Types::WorkloadSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor milestone_number: Integer?
+      attr_accessor milestone_name: String?
+      attr_accessor recorded_at: Time?
+      attr_accessor workload_summary: Types::WorkloadSummary?
+    end
+
+    class NotificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?lens_upgrade_summary: Types::LensUpgradeSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor lens_upgrade_summary: Types::LensUpgradeSummary?
+    end
+
+    module NotificationType
+      LENS_VERSION_UPGRADED: String
+      LENS_VERSION_DEPRECATED: String
+    end
+
+    module OrganizationSharingStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module PermissionType
+      READONLY: String
+      CONTRIBUTOR: String
+    end
+
+    class PillarDifference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_id: String,
+        ?pillar_name: String,
+        ?difference_status: String,
+        ?question_differences: Array[Types::QuestionDifference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_id: String?
+      attr_accessor pillar_name: String?
+      attr_accessor difference_status: String?
+      attr_accessor question_differences: Array[Types::QuestionDifference]?
+    end
+
+    class PillarMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_id: String,
+        ?risk_counts: Hash[String, Integer],
+        ?questions: Array[Types::QuestionMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_id: String?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor questions: Array[Types::QuestionMetric]?
+    end
+
+    class PillarReviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_id: String,
+        ?pillar_name: String,
+        ?notes: String,
+        ?risk_counts: Hash[String, Integer],
+        ?prioritized_risk_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_id: String?
+      attr_accessor pillar_name: String?
+      attr_accessor notes: String?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+    end
+
+    class Profile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_version: String,
+        ?profile_name: String,
+        ?profile_description: String,
+        ?profile_questions: Array[Types::ProfileQuestion],
+        ?owner: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?share_invitation_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_version: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_description: String?
+      attr_accessor profile_questions: Array[Types::ProfileQuestion]?
+      attr_accessor owner: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor share_invitation_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ProfileChoice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?choice_title: String,
+        ?choice_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor choice_title: String?
+      attr_accessor choice_description: String?
+    end
+
+    class ProfileNotificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_profile_version: String,
+        ?latest_profile_version: String,
+        ?type: String,
+        ?profile_arn: String,
+        ?profile_name: String,
+        ?workload_id: String,
+        ?workload_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_profile_version: String?
+      attr_accessor latest_profile_version: String?
+      attr_accessor type: String?
+      attr_accessor profile_arn: String?
+      attr_accessor profile_name: String?
+      attr_accessor workload_id: String?
+      attr_accessor workload_name: String?
+    end
+
+    module ProfileNotificationType
+      PROFILE_ANSWERS_UPDATED: String
+      PROFILE_DELETED: String
+    end
+
+    module ProfileOwnerType
+      SELF: String
+      SHARED: String
+    end
+
+    class ProfileQuestion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?question_title: String,
+        ?question_description: String,
+        ?question_choices: Array[Types::ProfileChoice],
+        ?selected_choice_ids: Array[String],
+        ?min_selected_choices: Integer,
+        ?max_selected_choices: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor question_title: String?
+      attr_accessor question_description: String?
+      attr_accessor question_choices: Array[Types::ProfileChoice]?
+      attr_accessor selected_choice_ids: Array[String]?
+      attr_accessor min_selected_choices: Integer?
+      attr_accessor max_selected_choices: Integer?
+    end
+
+    class ProfileQuestionUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?selected_choice_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor selected_choice_ids: Array[String]?
+    end
+
+    class ProfileShareSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?shared_with: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor shared_with: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_version: String,
+        ?profile_name: String,
+        ?profile_description: String,
+        ?owner: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_version: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_description: String?
+      attr_accessor owner: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ProfileTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_questions: Array[Types::ProfileTemplateQuestion],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_questions: Array[Types::ProfileTemplateQuestion]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ProfileTemplateChoice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?choice_id: String,
+        ?choice_title: String,
+        ?choice_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor choice_id: String?
+      attr_accessor choice_title: String?
+      attr_accessor choice_description: String?
+    end
+
+    class ProfileTemplateQuestion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?question_title: String,
+        ?question_description: String,
+        ?question_choices: Array[Types::ProfileTemplateChoice],
+        ?min_selected_choices: Integer,
+        ?max_selected_choices: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor question_title: String?
+      attr_accessor question_description: String?
+      attr_accessor question_choices: Array[Types::ProfileTemplateChoice]?
+      attr_accessor min_selected_choices: Integer?
+      attr_accessor max_selected_choices: Integer?
+    end
+
+    module Question
+      UNANSWERED: String
+      ANSWERED: String
+    end
+
+    class QuestionDifference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?question_title: String,
+        ?difference_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor question_title: String?
+      attr_accessor difference_status: String?
+    end
+
+    class QuestionMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?risk: String,
+        ?best_practices: Array[Types::BestPractice],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor risk: String?
+      attr_accessor best_practices: Array[Types::BestPractice]?
+    end
+
+    module QuestionPriority
+      PRIORITIZED: String
+      NONE: String
+    end
+
+    module QuestionType
+      PRIORITIZED: String
+      NON_PRIORITIZED: String
+    end
+
+    module ReportFormat
+      PDF: String
+      JSON: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ReviewTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?lenses: Array[String],
+        ?notes: String,
+        ?question_counts: Hash[String, Integer],
+        ?owner: String,
+        ?updated_at: Time,
+        ?template_arn: String,
+        ?template_name: String,
+        ?tags: Hash[String, String],
+        ?update_status: String,
+        ?share_invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor lenses: Array[String]?
+      attr_accessor notes: String?
+      attr_accessor question_counts: Hash[String, Integer]?
+      attr_accessor owner: String?
+      attr_accessor updated_at: Time?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor update_status: String?
+      attr_accessor share_invitation_id: String?
+    end
+
+    class ReviewTemplateAnswer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?pillar_id: String,
+        ?question_title: String,
+        ?question_description: String,
+        ?improvement_plan_url: String,
+        ?helpful_resource_url: String,
+        ?helpful_resource_display_text: String,
+        ?choices: Array[Types::Choice],
+        ?selected_choices: Array[String],
+        ?choice_answers: Array[Types::ChoiceAnswer],
+        ?is_applicable: bool,
+        ?answer_status: String,
+        ?notes: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_title: String?
+      attr_accessor question_description: String?
+      attr_accessor improvement_plan_url: String?
+      attr_accessor helpful_resource_url: String?
+      attr_accessor helpful_resource_display_text: String?
+      attr_accessor choices: Array[Types::Choice]?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_answers: Array[Types::ChoiceAnswer]?
+      attr_accessor is_applicable: bool?
+      attr_accessor answer_status: String?
+      attr_accessor notes: String?
+      attr_accessor reason: String?
+    end
+
+    module ReviewTemplateAnswerStatus
+      UNANSWERED: String
+      ANSWERED: String
+    end
+
+    class ReviewTemplateAnswerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?question_id: String,
+        ?pillar_id: String,
+        ?question_title: String,
+        ?choices: Array[Types::Choice],
+        ?selected_choices: Array[String],
+        ?choice_answer_summaries: Array[Types::ChoiceAnswerSummary],
+        ?is_applicable: bool,
+        ?answer_status: String,
+        ?reason: String,
+        ?question_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor question_id: String?
+      attr_accessor pillar_id: String?
+      attr_accessor question_title: String?
+      attr_accessor choices: Array[Types::Choice]?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_answer_summaries: Array[Types::ChoiceAnswerSummary]?
+      attr_accessor is_applicable: bool?
+      attr_accessor answer_status: String?
+      attr_accessor reason: String?
+      attr_accessor question_type: String?
+    end
+
+    class ReviewTemplateLensReview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?lens_version: String,
+        ?lens_name: String,
+        ?lens_status: String,
+        ?pillar_review_summaries: Array[Types::ReviewTemplatePillarReviewSummary],
+        ?updated_at: Time,
+        ?notes: String,
+        ?question_counts: Hash[String, Integer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor lens_version: String?
+      attr_accessor lens_name: String?
+      attr_accessor lens_status: String?
+      attr_accessor pillar_review_summaries: Array[Types::ReviewTemplatePillarReviewSummary]?
+      attr_accessor updated_at: Time?
+      attr_accessor notes: String?
+      attr_accessor question_counts: Hash[String, Integer]?
+      attr_accessor next_token: String?
+    end
+
+    class ReviewTemplatePillarReviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_id: String,
+        ?pillar_name: String,
+        ?notes: String,
+        ?question_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_id: String?
+      attr_accessor pillar_name: String?
+      attr_accessor notes: String?
+      attr_accessor question_counts: Hash[String, Integer]?
+    end
+
+    class ReviewTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?lenses: Array[String],
+        ?owner: String,
+        ?updated_at: Time,
+        ?template_arn: String,
+        ?template_name: String,
+        ?update_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor lenses: Array[String]?
+      attr_accessor owner: String?
+      attr_accessor updated_at: Time?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor update_status: String?
+    end
+
+    module ReviewTemplateUpdateStatus
+      CURRENT: String
+      LENS_NOT_CURRENT: String
+    end
+
+    module Risk
+      UNANSWERED: String
+      HIGH: String
+      MEDIUM: String
+      NONE: String
+      NOT_APPLICABLE: String
+    end
+
+    class SelectedPillar
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_id: String,
+        ?selected_question_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_id: String?
+      attr_accessor selected_question_ids: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class ShareInvitation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_invitation_id: String,
+        ?share_resource_type: String,
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?profile_arn: String,
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_invitation_id: String?
+      attr_accessor share_resource_type: String?
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor profile_arn: String?
+      attr_accessor template_arn: String?
+    end
+
+    module ShareInvitationAction
+      ACCEPT: String
+      REJECT: String
+    end
+
+    class ShareInvitationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_invitation_id: String,
+        ?shared_by: String,
+        ?shared_with: String,
+        ?permission_type: String,
+        ?share_resource_type: String,
+        ?workload_name: String,
+        ?workload_id: String,
+        ?lens_name: String,
+        ?lens_arn: String,
+        ?profile_name: String,
+        ?profile_arn: String,
+        ?template_name: String,
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_invitation_id: String?
+      attr_accessor shared_by: String?
+      attr_accessor shared_with: String?
+      attr_accessor permission_type: String?
+      attr_accessor share_resource_type: String?
+      attr_accessor workload_name: String?
+      attr_accessor workload_id: String?
+      attr_accessor lens_name: String?
+      attr_accessor lens_arn: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_arn: String?
+    end
+
+    module ShareResourceType
+      WORKLOAD: String
+      LENS: String
+      PROFILE: String
+      TEMPLATE: String
+    end
+
+    module ShareStatus
+      ACCEPTED: String
+      REJECTED: String
+      PENDING: String
+      REVOKED: String
+      EXPIRED: String
+      ASSOCIATING: String
+      ASSOCIATED: String
+      FAILED: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateShareSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?shared_with: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor shared_with: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    module TrustedAdvisorIntegrationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAnswerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?question_id: String,
+        ?selected_choices: Array[String],
+        ?choice_updates: Hash[String, Types::ChoiceUpdate],
+        ?notes: String,
+        ?is_applicable: bool,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor question_id: String?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_updates: Hash[String, Types::ChoiceUpdate]?
+      attr_accessor notes: String?
+      attr_accessor is_applicable: bool?
+      attr_accessor reason: String?
+    end
+
+    class UpdateAnswerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?lens_arn: String,
+        ?answer: Types::Answer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_arn: String?
+      attr_accessor answer: Types::Answer?
+    end
+
+    class UpdateGlobalSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_sharing_status: String,
+        ?discovery_integration_status: String,
+        ?jira_configuration: Types::AccountJiraConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_sharing_status: String?
+      attr_accessor discovery_integration_status: String?
+      attr_accessor jira_configuration: Types::AccountJiraConfigurationInput?
+    end
+
+    class UpdateIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?client_request_token: String,
+        ?integrating_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor integrating_service: String?
+    end
+
+    class UpdateLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?lens_notes: String,
+        ?pillar_notes: Hash[String, String],
+        ?jira_configuration: Types::JiraSelectedQuestionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_notes: String?
+      attr_accessor pillar_notes: Hash[String, String]?
+      attr_accessor jira_configuration: Types::JiraSelectedQuestionConfiguration?
+    end
+
+    class UpdateLensReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_review: Types::LensReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_review: Types::LensReview?
+    end
+
+    class UpdateProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_description: String,
+        ?profile_questions: Array[Types::ProfileQuestionUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_description: String?
+      attr_accessor profile_questions: Array[Types::ProfileQuestionUpdate]?
+    end
+
+    class UpdateProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::Profile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::Profile?
+    end
+
+    class UpdateReviewTemplateAnswerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?question_id: String,
+        ?selected_choices: Array[String],
+        ?choice_updates: Hash[String, Types::ChoiceUpdate],
+        ?notes: String,
+        ?is_applicable: bool,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor question_id: String?
+      attr_accessor selected_choices: Array[String]?
+      attr_accessor choice_updates: Hash[String, Types::ChoiceUpdate]?
+      attr_accessor notes: String?
+      attr_accessor is_applicable: bool?
+      attr_accessor reason: String?
+    end
+
+    class UpdateReviewTemplateAnswerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?answer: Types::ReviewTemplateAnswer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor answer: Types::ReviewTemplateAnswer?
+    end
+
+    class UpdateReviewTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?template_name: String,
+        ?description: String,
+        ?notes: String,
+        ?lenses_to_associate: Array[String],
+        ?lenses_to_disassociate: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor notes: String?
+      attr_accessor lenses_to_associate: Array[String]?
+      attr_accessor lenses_to_disassociate: Array[String]?
+    end
+
+    class UpdateReviewTemplateLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?lens_notes: String,
+        ?pillar_notes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor lens_notes: String?
+      attr_accessor pillar_notes: Hash[String, String]?
+    end
+
+    class UpdateReviewTemplateLensReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_review: Types::ReviewTemplateLensReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_review: Types::ReviewTemplateLensReview?
+    end
+
+    class UpdateReviewTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?review_template: Types::ReviewTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor review_template: Types::ReviewTemplate?
+    end
+
+    class UpdateShareInvitationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_invitation_id: String,
+        ?share_invitation_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_invitation_id: String?
+      attr_accessor share_invitation_action: String?
+    end
+
+    class UpdateShareInvitationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_invitation: Types::ShareInvitation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_invitation: Types::ShareInvitation?
+    end
+
+    class UpdateWorkloadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_name: String,
+        ?description: String,
+        ?environment: String,
+        ?account_ids: Array[String],
+        ?aws_regions: Array[String],
+        ?non_aws_regions: Array[String],
+        ?pillar_priorities: Array[String],
+        ?architectural_design: String,
+        ?review_owner: String,
+        ?is_review_owner_update_acknowledged: bool,
+        ?industry_type: String,
+        ?industry: String,
+        ?notes: String,
+        ?improvement_status: String,
+        ?discovery_config: Types::WorkloadDiscoveryConfig,
+        ?applications: Array[String],
+        ?jira_configuration: Types::WorkloadJiraConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_name: String?
+      attr_accessor description: String?
+      attr_accessor environment: String?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor aws_regions: Array[String]?
+      attr_accessor non_aws_regions: Array[String]?
+      attr_accessor pillar_priorities: Array[String]?
+      attr_accessor architectural_design: String?
+      attr_accessor review_owner: String?
+      attr_accessor is_review_owner_update_acknowledged: bool?
+      attr_accessor industry_type: String?
+      attr_accessor industry: String?
+      attr_accessor notes: String?
+      attr_accessor improvement_status: String?
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig?
+      attr_accessor applications: Array[String]?
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationInput?
+    end
+
+    class UpdateWorkloadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload: Types::Workload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload: Types::Workload?
+    end
+
+    class UpdateWorkloadShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?workload_id: String,
+        ?permission_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor workload_id: String?
+      attr_accessor permission_type: String?
+    end
+
+    class UpdateWorkloadShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_share: Types::WorkloadShare,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_share: Types::WorkloadShare?
+    end
+
+    class UpgradeLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?lens_alias: String,
+        ?milestone_name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor lens_alias: String?
+      attr_accessor milestone_name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpgradeProfileVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?profile_arn: String,
+        ?milestone_name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor milestone_name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpgradeReviewTemplateLensReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?lens_alias: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor lens_alias: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class VersionDifferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar_differences: Array[Types::PillarDifference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar_differences: Array[Types::PillarDifference]?
+    end
+
+    class Workload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_arn: String,
+        ?workload_name: String,
+        ?description: String,
+        ?environment: String,
+        ?updated_at: Time,
+        ?account_ids: Array[String],
+        ?aws_regions: Array[String],
+        ?non_aws_regions: Array[String],
+        ?architectural_design: String,
+        ?review_owner: String,
+        ?review_restriction_date: Time,
+        ?is_review_owner_update_acknowledged: bool,
+        ?industry_type: String,
+        ?industry: String,
+        ?notes: String,
+        ?improvement_status: String,
+        ?risk_counts: Hash[String, Integer],
+        ?pillar_priorities: Array[String],
+        ?lenses: Array[String],
+        ?owner: String,
+        ?share_invitation_id: String,
+        ?tags: Hash[String, String],
+        ?discovery_config: Types::WorkloadDiscoveryConfig,
+        ?applications: Array[String],
+        ?profiles: Array[Types::WorkloadProfile],
+        ?prioritized_risk_counts: Hash[String, Integer],
+        ?jira_configuration: Types::WorkloadJiraConfigurationOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_arn: String?
+      attr_accessor workload_name: String?
+      attr_accessor description: String?
+      attr_accessor environment: String?
+      attr_accessor updated_at: Time?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor aws_regions: Array[String]?
+      attr_accessor non_aws_regions: Array[String]?
+      attr_accessor architectural_design: String?
+      attr_accessor review_owner: String?
+      attr_accessor review_restriction_date: Time?
+      attr_accessor is_review_owner_update_acknowledged: bool?
+      attr_accessor industry_type: String?
+      attr_accessor industry: String?
+      attr_accessor notes: String?
+      attr_accessor improvement_status: String?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor pillar_priorities: Array[String]?
+      attr_accessor lenses: Array[String]?
+      attr_accessor owner: String?
+      attr_accessor share_invitation_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig?
+      attr_accessor applications: Array[String]?
+      attr_accessor profiles: Array[Types::WorkloadProfile]?
+      attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationOutput?
+    end
+
+    class WorkloadDiscoveryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_advisor_integration_status: String,
+        ?workload_resource_definition: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_advisor_integration_status: String?
+      attr_accessor workload_resource_definition: Array[String]?
+    end
+
+    module WorkloadEnvironment
+      PRODUCTION: String
+      PREPRODUCTION: String
+    end
+
+    module WorkloadImprovementStatus
+      NOT_APPLICABLE: String
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      RISK_ACKNOWLEDGED: String
+    end
+
+    module WorkloadIssueManagementStatus
+      ENABLED: String
+      DISABLED: String
+      INHERIT: String
+    end
+
+    class WorkloadJiraConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_management_status: String,
+        ?issue_management_type: String,
+        ?jira_project_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_management_status: String?
+      attr_accessor issue_management_type: String?
+      attr_accessor jira_project_key: String?
+    end
+
+    class WorkloadJiraConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_management_status: String,
+        ?issue_management_type: String,
+        ?jira_project_key: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_management_status: String?
+      attr_accessor issue_management_type: String?
+      attr_accessor jira_project_key: String?
+      attr_accessor status_message: String?
+    end
+
+    class WorkloadProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?profile_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor profile_version: String?
+    end
+
+    class WorkloadShare
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?shared_by: String,
+        ?shared_with: String,
+        ?permission_type: String,
+        ?status: String,
+        ?workload_name: String,
+        ?workload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor shared_by: String?
+      attr_accessor shared_with: String?
+      attr_accessor permission_type: String?
+      attr_accessor status: String?
+      attr_accessor workload_name: String?
+      attr_accessor workload_id: String?
+    end
+
+    class WorkloadShareSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_id: String,
+        ?shared_with: String,
+        ?permission_type: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_id: String?
+      attr_accessor shared_with: String?
+      attr_accessor permission_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class WorkloadSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_arn: String,
+        ?workload_name: String,
+        ?owner: String,
+        ?updated_at: Time,
+        ?lenses: Array[String],
+        ?risk_counts: Hash[String, Integer],
+        ?improvement_status: String,
+        ?profiles: Array[Types::WorkloadProfile],
+        ?prioritized_risk_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_arn: String?
+      attr_accessor workload_name: String?
+      attr_accessor owner: String?
+      attr_accessor updated_at: Time?
+      attr_accessor lenses: Array[String]?
+      attr_accessor risk_counts: Hash[String, Integer]?
+      attr_accessor improvement_status: String?
+      attr_accessor profiles: Array[Types::WorkloadProfile]?
+      attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module AppStream
+      VERSION: String
+    end
+  end

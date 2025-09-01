@@ -1,0 +1,1363 @@
+module Aws::EMRcontainers
+  module Types
+
+    module AllowAWSToRetainLogs
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AuthorizationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lake_formation_configuration: Types::LakeFormationConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CancelJobRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class CancelJobRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?certificate_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor certificate_data: String?
+    end
+
+    module CertificateProviderType
+      PEM: String
+    end
+
+    class CloudWatchMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_stream_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name_prefix: String?
+    end
+
+    class Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?classification: String,
+        ?properties: Hash[String, String],
+        ?configurations: Array[Types::Configuration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor classification: String?
+      attr_accessor properties: Hash[String, String]?
+      attr_accessor configurations: Array[Types::Configuration]?
+    end
+
+    class ConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_configuration: Array[Types::Configuration],
+        ?monitoring_configuration: Types::MonitoringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_configuration: Array[Types::Configuration]?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+    end
+
+    class ContainerInfo
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?eks_info: Types::EksInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks_info: Types::EksInfo?
+
+      class EksInfo < ContainerInfo
+      end
+      class Unknown < ContainerInfo
+      end
+    end
+
+    class ContainerLogRotationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_size: String,
+        ?max_files_to_keep: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_size: String?
+      attr_accessor max_files_to_keep: Integer?
+    end
+
+    class ContainerProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+        ?info: Types::ContainerInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor info: Types::ContainerInfo?
+    end
+
+    module ContainerProviderType
+      EKS: String
+    end
+
+    class CreateJobTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?job_template_data: Types::JobTemplateData,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor job_template_data: Types::JobTemplateData?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateJobTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateManagedEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?virtual_cluster_id: String,
+        ?type: String,
+        ?release_label: String,
+        ?execution_role_arn: String,
+        ?certificate_arn: String,
+        ?configuration_overrides: Types::ConfigurationOverrides,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor type: String?
+      attr_accessor release_label: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateManagedEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class CreateSecurityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?security_configuration_data: Types::SecurityConfigurationData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor security_configuration_data: Types::SecurityConfigurationData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSecurityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateVirtualClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?container_provider: Types::ContainerProvider,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?security_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor container_provider: Types::ContainerProvider?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor security_configuration_id: String?
+    end
+
+    class CreateVirtualClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class Credentials
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+
+      class Token < Credentials
+      end
+      class Unknown < Credentials
+      end
+    end
+
+    class DeleteJobTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteJobTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteManagedEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class DeleteManagedEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class DeleteVirtualClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteVirtualClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeJobRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class DescribeJobRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_run: Types::JobRun,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_run: Types::JobRun?
+    end
+
+    class DescribeJobTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeJobTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_template: Types::JobTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_template: Types::JobTemplate?
+    end
+
+    class DescribeManagedEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class DescribeManagedEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: Types::Endpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: Types::Endpoint?
+    end
+
+    class DescribeSecurityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeSecurityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_configuration: Types::SecurityConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_configuration: Types::SecurityConfiguration?
+    end
+
+    class DescribeVirtualClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeVirtualClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_cluster: Types::VirtualCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_cluster: Types::VirtualCluster?
+    end
+
+    class EKSRequestThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EksInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?in_transit_encryption_configuration: Types::InTransitEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor in_transit_encryption_configuration: Types::InTransitEncryptionConfiguration?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?virtual_cluster_id: String,
+        ?type: String,
+        ?state: String,
+        ?release_label: String,
+        ?execution_role_arn: String,
+        ?certificate_arn: String,
+        ?certificate_authority: Types::Certificate,
+        ?configuration_overrides: Types::ConfigurationOverrides,
+        ?server_url: String,
+        ?created_at: Time,
+        ?security_group: String,
+        ?subnet_ids: Array[String],
+        ?state_details: String,
+        ?failure_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor release_label: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor certificate_authority: Types::Certificate?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
+      attr_accessor server_url: String?
+      attr_accessor created_at: Time?
+      attr_accessor security_group: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor state_details: String?
+      attr_accessor failure_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module EndpointState
+      CREATING: String
+      ACTIVE: String
+      TERMINATING: String
+      TERMINATED: String
+      TERMINATED_WITH_ERRORS: String
+    end
+
+    module FailureReason
+      INTERNAL_ERROR: String
+      USER_ERROR: String
+      VALIDATION_ERROR: String
+      CLUSTER_UNAVAILABLE: String
+    end
+
+    class GetManagedEndpointSessionCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_identifier: String,
+        ?virtual_cluster_identifier: String,
+        ?execution_role_arn: String,
+        ?credential_type: String,
+        ?duration_in_seconds: Integer,
+        ?log_context: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_identifier: String?
+      attr_accessor virtual_cluster_identifier: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor credential_type: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor log_context: String?
+      attr_accessor client_token: String?
+    end
+
+    class GetManagedEndpointSessionCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?credentials: Types::Credentials,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor expires_at: Time?
+    end
+
+    class InTransitEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_certificate_configuration: Types::TLSCertificateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_certificate_configuration: Types::TLSCertificateConfiguration?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobDriver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spark_submit_job_driver: Types::SparkSubmitJobDriver,
+        ?spark_sql_job_driver: Types::SparkSqlJobDriver,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spark_submit_job_driver: Types::SparkSubmitJobDriver?
+      attr_accessor spark_sql_job_driver: Types::SparkSqlJobDriver?
+    end
+
+    class JobRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?virtual_cluster_id: String,
+        ?arn: String,
+        ?state: String,
+        ?client_token: String,
+        ?execution_role_arn: String,
+        ?release_label: String,
+        ?configuration_overrides: Types::ConfigurationOverrides,
+        ?job_driver: Types::JobDriver,
+        ?created_at: Time,
+        ?created_by: String,
+        ?finished_at: Time,
+        ?state_details: String,
+        ?failure_reason: String,
+        ?tags: Hash[String, String],
+        ?retry_policy_configuration: Types::RetryPolicyConfiguration,
+        ?retry_policy_execution: Types::RetryPolicyExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor release_label: String?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
+      attr_accessor job_driver: Types::JobDriver?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor finished_at: Time?
+      attr_accessor state_details: String?
+      attr_accessor failure_reason: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor retry_policy_configuration: Types::RetryPolicyConfiguration?
+      attr_accessor retry_policy_execution: Types::RetryPolicyExecution?
+    end
+
+    module JobRunState
+      PENDING: String
+      SUBMITTED: String
+      RUNNING: String
+      FAILED: String
+      CANCELLED: String
+      CANCEL_PENDING: String
+      COMPLETED: String
+    end
+
+    class JobTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?tags: Hash[String, String],
+        ?job_template_data: Types::JobTemplateData,
+        ?kms_key_arn: String,
+        ?decryption_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_template_data: Types::JobTemplateData?
+      attr_accessor kms_key_arn: String?
+      attr_accessor decryption_error: String?
+    end
+
+    class JobTemplateData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_role_arn: String,
+        ?release_label: String,
+        ?configuration_overrides: Types::ParametricConfigurationOverrides,
+        ?job_driver: Types::JobDriver,
+        ?parameter_configuration: Hash[String, Types::TemplateParameterConfiguration],
+        ?job_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_role_arn: String?
+      attr_accessor release_label: String?
+      attr_accessor configuration_overrides: Types::ParametricConfigurationOverrides?
+      attr_accessor job_driver: Types::JobDriver?
+      attr_accessor parameter_configuration: Hash[String, Types::TemplateParameterConfiguration]?
+      attr_accessor job_tags: Hash[String, String]?
+    end
+
+    class LakeFormationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_session_tag_value: String,
+        ?secure_namespace_info: Types::SecureNamespaceInfo,
+        ?query_engine_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_session_tag_value: String?
+      attr_accessor secure_namespace_info: Types::SecureNamespaceInfo?
+      attr_accessor query_engine_role_arn: String?
+    end
+
+    class ListJobRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_cluster_id: String,
+        ?created_before: Time,
+        ?created_after: Time,
+        ?name: String,
+        ?states: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor created_before: Time?
+      attr_accessor created_after: Time?
+      attr_accessor name: String?
+      attr_accessor states: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_runs: Array[Types::JobRun],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_runs: Array[Types::JobRun]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates: Array[Types::JobTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates: Array[Types::JobTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_cluster_id: String,
+        ?created_before: Time,
+        ?created_after: Time,
+        ?types: Array[String],
+        ?states: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor created_before: Time?
+      attr_accessor created_after: Time?
+      attr_accessor types: Array[String]?
+      attr_accessor states: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_configurations: Array[Types::SecurityConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_configurations: Array[Types::SecurityConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVirtualClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_provider_id: String,
+        ?container_provider_type: String,
+        ?created_after: Time,
+        ?created_before: Time,
+        ?states: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?eks_access_entry_integrated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_provider_id: String?
+      attr_accessor container_provider_type: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor states: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor eks_access_entry_integrated: bool?
+    end
+
+    class ListVirtualClustersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_clusters: Array[Types::VirtualCluster],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_clusters: Array[Types::VirtualCluster]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_aws_to_retain_logs: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_aws_to_retain_logs: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_logs: Types::ManagedLogs,
+        ?persistent_app_ui: String,
+        ?cloud_watch_monitoring_configuration: Types::CloudWatchMonitoringConfiguration,
+        ?s3_monitoring_configuration: Types::S3MonitoringConfiguration,
+        ?container_log_rotation_configuration: Types::ContainerLogRotationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_logs: Types::ManagedLogs?
+      attr_accessor persistent_app_ui: String?
+      attr_accessor cloud_watch_monitoring_configuration: Types::CloudWatchMonitoringConfiguration?
+      attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration?
+      attr_accessor container_log_rotation_configuration: Types::ContainerLogRotationConfiguration?
+    end
+
+    class ParametricCloudWatchMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_stream_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name_prefix: String?
+    end
+
+    class ParametricConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_configuration: Array[Types::Configuration],
+        ?monitoring_configuration: Types::ParametricMonitoringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_configuration: Array[Types::Configuration]?
+      attr_accessor monitoring_configuration: Types::ParametricMonitoringConfiguration?
+    end
+
+    class ParametricMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui: String,
+        ?cloud_watch_monitoring_configuration: Types::ParametricCloudWatchMonitoringConfiguration,
+        ?s3_monitoring_configuration: Types::ParametricS3MonitoringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui: String?
+      attr_accessor cloud_watch_monitoring_configuration: Types::ParametricCloudWatchMonitoringConfiguration?
+      attr_accessor s3_monitoring_configuration: Types::ParametricS3MonitoringConfiguration?
+    end
+
+    class ParametricS3MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_uri: String?
+    end
+
+    module PersistentAppUI
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class RequestThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_attempts: Integer?
+    end
+
+    class RetryPolicyExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_attempt_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_attempt_count: Integer?
+    end
+
+    class S3MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_uri: String?
+    end
+
+    class SecureNamespaceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor namespace: String?
+    end
+
+    class SecurityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?security_configuration_data: Types::SecurityConfigurationData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor security_configuration_data: Types::SecurityConfigurationData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class SecurityConfigurationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_configuration: Types::AuthorizationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_configuration: Types::AuthorizationConfiguration?
+    end
+
+    class SparkSqlJobDriver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point: String,
+        ?spark_sql_parameters: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point: String?
+      attr_accessor spark_sql_parameters: String?
+    end
+
+    class SparkSubmitJobDriver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point: String,
+        ?entry_point_arguments: Array[String],
+        ?spark_submit_parameters: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point: String?
+      attr_accessor entry_point_arguments: Array[String]?
+      attr_accessor spark_submit_parameters: String?
+    end
+
+    class StartJobRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?virtual_cluster_id: String,
+        ?client_token: String,
+        ?execution_role_arn: String,
+        ?release_label: String,
+        ?job_driver: Types::JobDriver,
+        ?configuration_overrides: Types::ConfigurationOverrides,
+        ?tags: Hash[String, String],
+        ?job_template_id: String,
+        ?job_template_parameters: Hash[String, String],
+        ?retry_policy_configuration: Types::RetryPolicyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor virtual_cluster_id: String?
+      attr_accessor client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor release_label: String?
+      attr_accessor job_driver: Types::JobDriver?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_template_id: String?
+      attr_accessor job_template_parameters: Hash[String, String]?
+      attr_accessor retry_policy_configuration: Types::RetryPolicyConfiguration?
+    end
+
+    class StartJobRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?virtual_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor virtual_cluster_id: String?
+    end
+
+    class TLSCertificateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_provider_type: String,
+        ?public_certificate_secret_arn: String,
+        ?private_certificate_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_provider_type: String?
+      attr_accessor public_certificate_secret_arn: String?
+      attr_accessor private_certificate_secret_arn: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateParameterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor default_value: String?
+    end
+
+    module TemplateParameterDataType
+      NUMBER: String
+      STRING: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VirtualCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?state: String,
+        ?container_provider: Types::ContainerProvider,
+        ?created_at: Time,
+        ?tags: Hash[String, String],
+        ?security_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor container_provider: Types::ContainerProvider?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor security_configuration_id: String?
+    end
+
+    module VirtualClusterState
+      RUNNING: String
+      TERMINATING: String
+      TERMINATED: String
+      ARRESTED: String
+    end
+  end
+end

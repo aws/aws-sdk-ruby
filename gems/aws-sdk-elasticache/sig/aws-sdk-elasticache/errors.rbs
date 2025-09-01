@@ -1,0 +1,232 @@
+module Aws::ElastiCache
+  module Errors
+    class APICallRateForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AuthorizationAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AuthorizationNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheClusterAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheClusterNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheParameterGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheParameterGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSecurityGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSecurityGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSecurityGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSubnetGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSubnetGroupInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSubnetGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CacheSubnetQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterQuotaForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DefaultUserAssociatedToUserGroupFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DefaultUserRequired < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateUserNameFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalReplicationGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalReplicationGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientCacheClusterCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidARNFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCacheClusterStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCacheParameterGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCacheSecurityGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCredentialsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGlobalReplicationGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKMSKeyFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidReplicationGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidServerlessCacheSnapshotStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidServerlessCacheStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSnapshotStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnet < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUserGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUserStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidVPCNetworkStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoOperationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeGroupsPerReplicationGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeQuotaForClusterExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeQuotaForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicationGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicationGroupAlreadyUnderMigrationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicationGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicationGroupNotUnderMigrationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReservedCacheNodeAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReservedCacheNodeNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReservedCacheNodeQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReservedCacheNodesOfferingNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheQuotaForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheSnapshotAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheSnapshotNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerlessCacheSnapshotQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceLinkedRoleNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUpdateNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SnapshotAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SnapshotFeatureNotSupportedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SnapshotNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SnapshotQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetNotAllowedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagQuotaPerResourceExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TestFailoverNotAvailableFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

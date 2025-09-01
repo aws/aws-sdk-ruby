@@ -1,0 +1,1214 @@
+module Aws::Appflow
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Appflow::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelFlowExecutionsResponse
+      include Smithy::Client::_Response[Types::CancelFlowExecutionsResponse]
+      def invalid_executions: () -> Array[String]?
+    end
+    def cancel_flow_executions: (
+      ?flow_name: String,
+      ?execution_ids: Array[String]
+    ) -> _CancelFlowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelFlowExecutionsResponse
+
+    interface _CreateConnectorProfileResponse
+      include Smithy::Client::_Response[Types::CreateConnectorProfileResponse]
+      def connector_profile_arn: () -> String?
+    end
+    def create_connector_profile: (
+      ?connector_profile_name: String,
+      ?kms_arn: String,
+      ?connector_type: String,
+      ?connector_label: String,
+      ?connection_mode: String,
+      ?connector_profile_config: {
+        connector_profile_properties: {
+          amplitude: {
+          },
+          datadog: {
+            instance_url: String
+          },
+          dynatrace: {
+            instance_url: untyped
+          },
+          google_analytics: {
+          },
+          honeycode: {
+          },
+          infor_nexus: {
+            instance_url: untyped
+          },
+          marketo: {
+            instance_url: untyped
+          },
+          redshift: {
+            database_url: String,
+            bucket_name: String,
+            bucket_prefix: String,
+            role_arn: String,
+            data_api_role_arn: String,
+            is_redshift_serverless: bool,
+            cluster_identifier: String,
+            workgroup_name: String,
+            database_name: String
+          },
+          salesforce: {
+            instance_url: untyped,
+            is_sandbox_environment: untyped,
+            use_private_link_for_metadata_and_authorization: untyped
+          },
+          service_now: {
+            instance_url: untyped
+          },
+          singular: {
+          },
+          slack: {
+            instance_url: untyped
+          },
+          snowflake: {
+            warehouse: String,
+            stage: String,
+            bucket_name: untyped,
+            bucket_prefix: untyped,
+            private_link_service_name: String,
+            account_name: String,
+            region: String
+          },
+          trendmicro: {
+          },
+          veeva: {
+            instance_url: untyped
+          },
+          zendesk: {
+            instance_url: untyped
+          },
+          sapo_data: {
+            application_host_url: String,
+            application_service_path: String,
+            port_number: Integer,
+            client_number: String,
+            logon_language: String,
+            private_link_service_name: untyped,
+            o_auth_properties: {
+              token_url: String,
+              auth_code_url: String,
+              o_auth_scopes: Array[String]
+            },
+            disable_sso: untyped
+          },
+          custom_connector: {
+            profile_properties: Hash[String, String],
+            o_auth2_properties: {
+              token_url: untyped,
+              o_auth2_grant_type: String,
+              token_url_custom_properties: Hash[String, String]
+            }
+          },
+          pardot: {
+            instance_url: untyped,
+            is_sandbox_environment: untyped,
+            business_unit_id: String
+          }
+        },
+        connector_profile_credentials: {
+          amplitude: {
+            api_key: String,
+            secret_key: String
+          },
+          datadog: {
+            api_key: untyped,
+            application_key: String
+          },
+          dynatrace: {
+            api_token: String
+          },
+          google_analytics: {
+            client_id: String,
+            client_secret: String,
+            access_token: String,
+            refresh_token: String,
+            o_auth_request: {
+              auth_code: String,
+              redirect_uri: String
+            }
+          },
+          honeycode: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped
+          },
+          infor_nexus: {
+            access_key_id: String,
+            user_id: String,
+            secret_access_key: String,
+            datakey: untyped
+          },
+          marketo: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          redshift: {
+            username: String,
+            password: String
+          },
+          salesforce: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped,
+            client_credentials_arn: String,
+            o_auth2_grant_type: untyped,
+            jwt_token: String
+          },
+          service_now: {
+            username: untyped,
+            password: untyped,
+            o_auth2_credentials: {
+              client_id: untyped,
+              client_secret: untyped,
+              access_token: untyped,
+              refresh_token: untyped,
+              o_auth_request: untyped
+            }
+          },
+          singular: {
+            api_key: untyped
+          },
+          slack: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          snowflake: {
+            username: untyped,
+            password: untyped
+          },
+          trendmicro: {
+            api_secret_key: String
+          },
+          veeva: {
+            username: untyped,
+            password: untyped
+          },
+          zendesk: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          sapo_data: {
+            basic_auth_credentials: {
+              username: untyped,
+              password: untyped
+            },
+            o_auth_credentials: {
+              client_id: untyped,
+              client_secret: untyped,
+              access_token: untyped,
+              refresh_token: untyped,
+              o_auth_request: untyped
+            }
+          },
+          custom_connector: {
+            authentication_type: String,
+            basic: untyped,
+            oauth2: untyped,
+            api_key: {
+              api_key: untyped,
+              api_secret_key: untyped
+            },
+            custom: {
+              custom_authentication_type: String,
+              credentials_map: Hash[String, String]
+            }
+          },
+          pardot: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped,
+            client_credentials_arn: untyped
+          }
+        }
+      },
+      ?client_token: String
+    ) -> _CreateConnectorProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorProfileResponse
+
+    interface _CreateFlowResponse
+      include Smithy::Client::_Response[Types::CreateFlowResponse]
+      def flow_arn: () -> String?
+      def flow_status: () -> String?
+    end
+    def create_flow: (
+      ?flow_name: String,
+      ?description: String,
+      ?kms_arn: String,
+      ?trigger_config: {
+        trigger_type: String,
+        trigger_properties: {
+          scheduled: {
+            schedule_expression: String,
+            data_pull_mode: String,
+            schedule_start_time: Time,
+            schedule_end_time: untyped,
+            timezone: String,
+            schedule_offset: Integer,
+            first_execution_from: untyped,
+            flow_error_deactivation_threshold: Integer
+          }
+        }
+      },
+      ?source_flow_config: {
+        connector_type: String,
+        api_version: String,
+        connector_profile_name: String,
+        source_connector_properties: {
+          amplitude: {
+            object: String
+          },
+          datadog: {
+            object: untyped
+          },
+          dynatrace: {
+            object: untyped
+          },
+          google_analytics: {
+            object: untyped
+          },
+          infor_nexus: {
+            object: untyped
+          },
+          marketo: {
+            object: untyped
+          },
+          s3: {
+            bucket_name: String,
+            bucket_prefix: String,
+            s3_input_format_config: {
+              s3_input_file_type: String
+            }
+          },
+          salesforce: {
+            object: untyped,
+            enable_dynamic_field_update: bool,
+            include_deleted_records: untyped,
+            data_transfer_api: String
+          },
+          service_now: {
+            object: untyped
+          },
+          singular: {
+            object: untyped
+          },
+          slack: {
+            object: untyped
+          },
+          trendmicro: {
+            object: untyped
+          },
+          veeva: {
+            object: untyped,
+            document_type: String,
+            include_source_files: untyped,
+            include_renditions: untyped,
+            include_all_versions: untyped
+          },
+          zendesk: {
+            object: untyped
+          },
+          sapo_data: {
+            object_path: untyped,
+            parallelism_config: {
+              max_parallelism: Integer
+            },
+            pagination_config: {
+              max_page_size: Integer
+            }
+          },
+          custom_connector: {
+            entity_name: String,
+            custom_properties: Hash[String, String],
+            data_transfer_api: {
+              name: String,
+              type: String
+            }
+          },
+          pardot: {
+            object: untyped
+          }
+        },
+        incremental_pull_config: {
+          datetime_type_field_name: String
+        }
+      },
+      ?destination_flow_config_list: Array[
+        {
+          connector_type: String,
+          api_version: String,
+          connector_profile_name: String,
+          destination_connector_properties: {
+            redshift: {
+              object: String,
+              intermediate_bucket_name: String,
+              bucket_prefix: String,
+              error_handling_config: {
+                fail_on_first_destination_error: bool,
+                bucket_prefix: untyped,
+                bucket_name: untyped
+              }
+            },
+            s3: {
+              bucket_name: untyped,
+              bucket_prefix: untyped,
+              s3_output_format_config: {
+                file_type: String,
+                prefix_config: {
+                  prefix_type: String,
+                  prefix_format: String,
+                  path_prefix_hierarchy: Array[String]
+                },
+                aggregation_config: {
+                  aggregation_type: String,
+                  target_file_size: Integer
+                },
+                preserve_source_data_typing: bool
+              }
+            },
+            salesforce: {
+              object: untyped,
+              id_field_names: Array[String],
+              error_handling_config: untyped,
+              write_operation_type: String,
+              data_transfer_api: String
+            },
+            snowflake: {
+              object: untyped,
+              intermediate_bucket_name: untyped,
+              bucket_prefix: untyped,
+              error_handling_config: untyped
+            },
+            event_bridge: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            lookout_metrics: {
+            },
+            upsolver: {
+              bucket_name: String,
+              bucket_prefix: untyped,
+              s3_output_format_config: {
+                file_type: untyped,
+                prefix_config: untyped,
+                aggregation_config: untyped
+              }
+            },
+            honeycode: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            customer_profiles: {
+              domain_name: String,
+              object_type_name: String
+            },
+            zendesk: {
+              object: untyped,
+              id_field_names: untyped,
+              error_handling_config: untyped,
+              write_operation_type: untyped
+            },
+            marketo: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            custom_connector: {
+              entity_name: String,
+              error_handling_config: untyped,
+              write_operation_type: untyped,
+              id_field_names: untyped,
+              custom_properties: Hash[String, String]
+            },
+            sapo_data: {
+              object_path: untyped,
+              success_response_handling_config: {
+                bucket_prefix: untyped,
+                bucket_name: untyped
+              },
+              id_field_names: untyped,
+              error_handling_config: untyped,
+              write_operation_type: untyped
+            }
+          }
+        }
+      ],
+      ?tasks: Array[
+        {
+          source_fields: Array[String],
+          connector_operator: {
+            amplitude: String,
+            datadog: String,
+            dynatrace: String,
+            google_analytics: String,
+            infor_nexus: String,
+            marketo: String,
+            s3: String,
+            salesforce: String,
+            service_now: String,
+            singular: String,
+            slack: String,
+            trendmicro: String,
+            veeva: String,
+            zendesk: String,
+            sapo_data: String,
+            custom_connector: String,
+            pardot: String
+          },
+          destination_field: String,
+          task_type: String,
+          task_properties: Hash[String, String]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?metadata_catalog_config: {
+        glue_data_catalog: {
+          role_arn: String,
+          database_name: String,
+          table_prefix: String
+        }
+      },
+      ?client_token: String
+    ) -> _CreateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowResponse
+
+    interface _DeleteConnectorProfileResponse
+      include Smithy::Client::_Response[Types::DeleteConnectorProfileResponse]
+    end
+    def delete_connector_profile: (
+      ?connector_profile_name: String,
+      ?force_delete: bool
+    ) -> _DeleteConnectorProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorProfileResponse
+
+    interface _DeleteFlowResponse
+      include Smithy::Client::_Response[Types::DeleteFlowResponse]
+    end
+    def delete_flow: (
+      ?flow_name: String,
+      ?force_delete: bool
+    ) -> _DeleteFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowResponse
+
+    interface _DescribeConnectorResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorResponse]
+      def connector_configuration: () -> Types::ConnectorConfiguration?
+    end
+    def describe_connector: (
+      ?connector_type: String,
+      ?connector_label: String
+    ) -> _DescribeConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorResponse
+
+    interface _DescribeConnectorEntityResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorEntityResponse]
+      def connector_entity_fields: () -> Array[Types::ConnectorEntityField]?
+    end
+    def describe_connector_entity: (
+      ?connector_entity_name: String,
+      ?connector_type: String,
+      ?connector_profile_name: String,
+      ?api_version: String
+    ) -> _DescribeConnectorEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorEntityResponse
+
+    interface _DescribeConnectorProfilesResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorProfilesResponse]
+      def connector_profile_details: () -> Array[Types::ConnectorProfile]?
+      def next_token: () -> String?
+    end
+    def describe_connector_profiles: (
+      ?connector_profile_names: Array[String],
+      ?connector_type: String,
+      ?connector_label: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeConnectorProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorProfilesResponse
+
+    interface _DescribeConnectorsResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorsResponse]
+      def connector_configurations: () -> Hash[String, Types::ConnectorConfiguration]?
+      def connectors: () -> Array[Types::ConnectorDetail]?
+      def next_token: () -> String?
+    end
+    def describe_connectors: (
+      ?connector_types: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorsResponse
+
+    interface _DescribeFlowResponse
+      include Smithy::Client::_Response[Types::DescribeFlowResponse]
+      def flow_arn: () -> String?
+      def description: () -> String?
+      def flow_name: () -> String?
+      def kms_arn: () -> String?
+      def flow_status: () -> String?
+      def flow_status_message: () -> String?
+      def source_flow_config: () -> Types::SourceFlowConfig?
+      def destination_flow_config_list: () -> Array[Types::DestinationFlowConfig]?
+      def last_run_execution_details: () -> Types::ExecutionDetails?
+      def trigger_config: () -> Types::TriggerConfig?
+      def tasks: () -> Array[Types::Task]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def created_by: () -> String?
+      def last_updated_by: () -> String?
+      def tags: () -> Hash[String, String]?
+      def metadata_catalog_config: () -> Types::MetadataCatalogConfig?
+      def last_run_metadata_catalog_details: () -> Array[Types::MetadataCatalogDetail]?
+      def schema_version: () -> Integer?
+    end
+    def describe_flow: (
+      ?flow_name: String
+    ) -> _DescribeFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowResponse
+
+    interface _DescribeFlowExecutionRecordsResponse
+      include Smithy::Client::_Response[Types::DescribeFlowExecutionRecordsResponse]
+      def flow_executions: () -> Array[Types::ExecutionRecord]?
+      def next_token: () -> String?
+    end
+    def describe_flow_execution_records: (
+      ?flow_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeFlowExecutionRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowExecutionRecordsResponse
+
+    interface _ListConnectorEntitiesResponse
+      include Smithy::Client::_Response[Types::ListConnectorEntitiesResponse]
+      def connector_entity_map: () -> Hash[String, Array[Types::ConnectorEntity]]?
+      def next_token: () -> String?
+    end
+    def list_connector_entities: (
+      ?connector_profile_name: String,
+      ?connector_type: String,
+      ?entities_path: String,
+      ?api_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorEntitiesResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def connectors: () -> Array[Types::ConnectorDetail]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListFlowsResponse
+      include Smithy::Client::_Response[Types::ListFlowsResponse]
+      def flows: () -> Array[Types::FlowDefinition]?
+      def next_token: () -> String?
+    end
+    def list_flows: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterConnectorResponse
+      include Smithy::Client::_Response[Types::RegisterConnectorResponse]
+      def connector_arn: () -> String?
+    end
+    def register_connector: (
+      ?connector_label: String,
+      ?description: String,
+      ?connector_provisioning_type: String,
+      ?connector_provisioning_config: {
+        lambda: {
+          lambda_arn: String
+        }
+      },
+      ?client_token: String
+    ) -> _RegisterConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterConnectorResponse
+
+    interface _ResetConnectorMetadataCacheResponse
+      include Smithy::Client::_Response[Types::ResetConnectorMetadataCacheResponse]
+    end
+    def reset_connector_metadata_cache: (
+      ?connector_profile_name: String,
+      ?connector_type: String,
+      ?connector_entity_name: String,
+      ?entities_path: String,
+      ?api_version: String
+    ) -> _ResetConnectorMetadataCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetConnectorMetadataCacheResponse
+
+    interface _StartFlowResponse
+      include Smithy::Client::_Response[Types::StartFlowResponse]
+      def flow_arn: () -> String?
+      def flow_status: () -> String?
+      def execution_id: () -> String?
+    end
+    def start_flow: (
+      ?flow_name: String,
+      ?client_token: String
+    ) -> _StartFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlowResponse
+
+    interface _StopFlowResponse
+      include Smithy::Client::_Response[Types::StopFlowResponse]
+      def flow_arn: () -> String?
+      def flow_status: () -> String?
+    end
+    def stop_flow: (
+      ?flow_name: String
+    ) -> _StopFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFlowResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UnregisterConnectorResponse
+      include Smithy::Client::_Response[Types::UnregisterConnectorResponse]
+    end
+    def unregister_connector: (
+      ?connector_label: String,
+      ?force_delete: bool
+    ) -> _UnregisterConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnregisterConnectorResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectorProfileResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorProfileResponse]
+      def connector_profile_arn: () -> String?
+    end
+    def update_connector_profile: (
+      ?connector_profile_name: String,
+      ?connection_mode: String,
+      ?connector_profile_config: {
+        connector_profile_properties: {
+          amplitude: {
+          },
+          datadog: {
+            instance_url: String
+          },
+          dynatrace: {
+            instance_url: untyped
+          },
+          google_analytics: {
+          },
+          honeycode: {
+          },
+          infor_nexus: {
+            instance_url: untyped
+          },
+          marketo: {
+            instance_url: untyped
+          },
+          redshift: {
+            database_url: String,
+            bucket_name: String,
+            bucket_prefix: String,
+            role_arn: String,
+            data_api_role_arn: String,
+            is_redshift_serverless: bool,
+            cluster_identifier: String,
+            workgroup_name: String,
+            database_name: String
+          },
+          salesforce: {
+            instance_url: untyped,
+            is_sandbox_environment: untyped,
+            use_private_link_for_metadata_and_authorization: untyped
+          },
+          service_now: {
+            instance_url: untyped
+          },
+          singular: {
+          },
+          slack: {
+            instance_url: untyped
+          },
+          snowflake: {
+            warehouse: String,
+            stage: String,
+            bucket_name: untyped,
+            bucket_prefix: untyped,
+            private_link_service_name: String,
+            account_name: String,
+            region: String
+          },
+          trendmicro: {
+          },
+          veeva: {
+            instance_url: untyped
+          },
+          zendesk: {
+            instance_url: untyped
+          },
+          sapo_data: {
+            application_host_url: String,
+            application_service_path: String,
+            port_number: Integer,
+            client_number: String,
+            logon_language: String,
+            private_link_service_name: untyped,
+            o_auth_properties: {
+              token_url: String,
+              auth_code_url: String,
+              o_auth_scopes: Array[String]
+            },
+            disable_sso: untyped
+          },
+          custom_connector: {
+            profile_properties: Hash[String, String],
+            o_auth2_properties: {
+              token_url: untyped,
+              o_auth2_grant_type: String,
+              token_url_custom_properties: Hash[String, String]
+            }
+          },
+          pardot: {
+            instance_url: untyped,
+            is_sandbox_environment: untyped,
+            business_unit_id: String
+          }
+        },
+        connector_profile_credentials: {
+          amplitude: {
+            api_key: String,
+            secret_key: String
+          },
+          datadog: {
+            api_key: untyped,
+            application_key: String
+          },
+          dynatrace: {
+            api_token: String
+          },
+          google_analytics: {
+            client_id: String,
+            client_secret: String,
+            access_token: String,
+            refresh_token: String,
+            o_auth_request: {
+              auth_code: String,
+              redirect_uri: String
+            }
+          },
+          honeycode: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped
+          },
+          infor_nexus: {
+            access_key_id: String,
+            user_id: String,
+            secret_access_key: String,
+            datakey: untyped
+          },
+          marketo: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          redshift: {
+            username: String,
+            password: String
+          },
+          salesforce: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped,
+            client_credentials_arn: String,
+            o_auth2_grant_type: untyped,
+            jwt_token: String
+          },
+          service_now: {
+            username: untyped,
+            password: untyped,
+            o_auth2_credentials: {
+              client_id: untyped,
+              client_secret: untyped,
+              access_token: untyped,
+              refresh_token: untyped,
+              o_auth_request: untyped
+            }
+          },
+          singular: {
+            api_key: untyped
+          },
+          slack: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          snowflake: {
+            username: untyped,
+            password: untyped
+          },
+          trendmicro: {
+            api_secret_key: String
+          },
+          veeva: {
+            username: untyped,
+            password: untyped
+          },
+          zendesk: {
+            client_id: untyped,
+            client_secret: untyped,
+            access_token: untyped,
+            o_auth_request: untyped
+          },
+          sapo_data: {
+            basic_auth_credentials: {
+              username: untyped,
+              password: untyped
+            },
+            o_auth_credentials: {
+              client_id: untyped,
+              client_secret: untyped,
+              access_token: untyped,
+              refresh_token: untyped,
+              o_auth_request: untyped
+            }
+          },
+          custom_connector: {
+            authentication_type: String,
+            basic: untyped,
+            oauth2: untyped,
+            api_key: {
+              api_key: untyped,
+              api_secret_key: untyped
+            },
+            custom: {
+              custom_authentication_type: String,
+              credentials_map: Hash[String, String]
+            }
+          },
+          pardot: {
+            access_token: untyped,
+            refresh_token: untyped,
+            o_auth_request: untyped,
+            client_credentials_arn: untyped
+          }
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateConnectorProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorProfileResponse
+
+    interface _UpdateConnectorRegistrationResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorRegistrationResponse]
+      def connector_arn: () -> String?
+    end
+    def update_connector_registration: (
+      ?connector_label: String,
+      ?description: String,
+      ?connector_provisioning_config: {
+        lambda: {
+          lambda_arn: String
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateConnectorRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorRegistrationResponse
+
+    interface _UpdateFlowResponse
+      include Smithy::Client::_Response[Types::UpdateFlowResponse]
+      def flow_status: () -> String?
+    end
+    def update_flow: (
+      ?flow_name: String,
+      ?description: String,
+      ?trigger_config: {
+        trigger_type: String,
+        trigger_properties: {
+          scheduled: {
+            schedule_expression: String,
+            data_pull_mode: String,
+            schedule_start_time: Time,
+            schedule_end_time: untyped,
+            timezone: String,
+            schedule_offset: Integer,
+            first_execution_from: untyped,
+            flow_error_deactivation_threshold: Integer
+          }
+        }
+      },
+      ?source_flow_config: {
+        connector_type: String,
+        api_version: String,
+        connector_profile_name: String,
+        source_connector_properties: {
+          amplitude: {
+            object: String
+          },
+          datadog: {
+            object: untyped
+          },
+          dynatrace: {
+            object: untyped
+          },
+          google_analytics: {
+            object: untyped
+          },
+          infor_nexus: {
+            object: untyped
+          },
+          marketo: {
+            object: untyped
+          },
+          s3: {
+            bucket_name: String,
+            bucket_prefix: String,
+            s3_input_format_config: {
+              s3_input_file_type: String
+            }
+          },
+          salesforce: {
+            object: untyped,
+            enable_dynamic_field_update: bool,
+            include_deleted_records: untyped,
+            data_transfer_api: String
+          },
+          service_now: {
+            object: untyped
+          },
+          singular: {
+            object: untyped
+          },
+          slack: {
+            object: untyped
+          },
+          trendmicro: {
+            object: untyped
+          },
+          veeva: {
+            object: untyped,
+            document_type: String,
+            include_source_files: untyped,
+            include_renditions: untyped,
+            include_all_versions: untyped
+          },
+          zendesk: {
+            object: untyped
+          },
+          sapo_data: {
+            object_path: untyped,
+            parallelism_config: {
+              max_parallelism: Integer
+            },
+            pagination_config: {
+              max_page_size: Integer
+            }
+          },
+          custom_connector: {
+            entity_name: String,
+            custom_properties: Hash[String, String],
+            data_transfer_api: {
+              name: String,
+              type: String
+            }
+          },
+          pardot: {
+            object: untyped
+          }
+        },
+        incremental_pull_config: {
+          datetime_type_field_name: String
+        }
+      },
+      ?destination_flow_config_list: Array[
+        {
+          connector_type: String,
+          api_version: String,
+          connector_profile_name: String,
+          destination_connector_properties: {
+            redshift: {
+              object: String,
+              intermediate_bucket_name: String,
+              bucket_prefix: String,
+              error_handling_config: {
+                fail_on_first_destination_error: bool,
+                bucket_prefix: untyped,
+                bucket_name: untyped
+              }
+            },
+            s3: {
+              bucket_name: untyped,
+              bucket_prefix: untyped,
+              s3_output_format_config: {
+                file_type: String,
+                prefix_config: {
+                  prefix_type: String,
+                  prefix_format: String,
+                  path_prefix_hierarchy: Array[String]
+                },
+                aggregation_config: {
+                  aggregation_type: String,
+                  target_file_size: Integer
+                },
+                preserve_source_data_typing: bool
+              }
+            },
+            salesforce: {
+              object: untyped,
+              id_field_names: Array[String],
+              error_handling_config: untyped,
+              write_operation_type: String,
+              data_transfer_api: String
+            },
+            snowflake: {
+              object: untyped,
+              intermediate_bucket_name: untyped,
+              bucket_prefix: untyped,
+              error_handling_config: untyped
+            },
+            event_bridge: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            lookout_metrics: {
+            },
+            upsolver: {
+              bucket_name: String,
+              bucket_prefix: untyped,
+              s3_output_format_config: {
+                file_type: untyped,
+                prefix_config: untyped,
+                aggregation_config: untyped
+              }
+            },
+            honeycode: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            customer_profiles: {
+              domain_name: String,
+              object_type_name: String
+            },
+            zendesk: {
+              object: untyped,
+              id_field_names: untyped,
+              error_handling_config: untyped,
+              write_operation_type: untyped
+            },
+            marketo: {
+              object: untyped,
+              error_handling_config: untyped
+            },
+            custom_connector: {
+              entity_name: String,
+              error_handling_config: untyped,
+              write_operation_type: untyped,
+              id_field_names: untyped,
+              custom_properties: Hash[String, String]
+            },
+            sapo_data: {
+              object_path: untyped,
+              success_response_handling_config: {
+                bucket_prefix: untyped,
+                bucket_name: untyped
+              },
+              id_field_names: untyped,
+              error_handling_config: untyped,
+              write_operation_type: untyped
+            }
+          }
+        }
+      ],
+      ?tasks: Array[
+        {
+          source_fields: Array[String],
+          connector_operator: {
+            amplitude: String,
+            datadog: String,
+            dynatrace: String,
+            google_analytics: String,
+            infor_nexus: String,
+            marketo: String,
+            s3: String,
+            salesforce: String,
+            service_now: String,
+            singular: String,
+            slack: String,
+            trendmicro: String,
+            veeva: String,
+            zendesk: String,
+            sapo_data: String,
+            custom_connector: String,
+            pardot: String
+          },
+          destination_field: String,
+          task_type: String,
+          task_properties: Hash[String, String]
+        }
+      ],
+      ?metadata_catalog_config: {
+        glue_data_catalog: {
+          role_arn: String,
+          database_name: String,
+          table_prefix: String
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowResponse
+  end
+end

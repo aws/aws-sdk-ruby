@@ -1,0 +1,380 @@
+module Aws::AppFabric
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppFabric::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetUserAccessTasksResponse
+      include Smithy::Client::_Response[Types::BatchGetUserAccessTasksResponse]
+      def user_access_results_list: () -> Array[Types::UserAccessResultItem]?
+    end
+    def batch_get_user_access_tasks: (
+      ?app_bundle_identifier: String,
+      ?task_id_list: Array[String]
+    ) -> _BatchGetUserAccessTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetUserAccessTasksResponse
+
+    interface _ConnectAppAuthorizationResponse
+      include Smithy::Client::_Response[Types::ConnectAppAuthorizationResponse]
+      def app_authorization_summary: () -> Types::AppAuthorizationSummary?
+    end
+    def connect_app_authorization: (
+      ?app_bundle_identifier: String,
+      ?app_authorization_identifier: String,
+      ?auth_request: {
+        redirect_uri: String,
+        code: String
+      }
+    ) -> _ConnectAppAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConnectAppAuthorizationResponse
+
+    interface _CreateAppAuthorizationResponse
+      include Smithy::Client::_Response[Types::CreateAppAuthorizationResponse]
+      def app_authorization: () -> Types::AppAuthorization?
+    end
+    def create_app_authorization: (
+      ?app_bundle_identifier: String,
+      ?app: String,
+      ?credential: {
+        oauth2_credential: {
+          client_id: String,
+          client_secret: String
+        },
+        api_key_credential: {
+          api_key: untyped
+        }
+      },
+      ?tenant: {
+        tenant_identifier: String,
+        tenant_display_name: String
+      },
+      ?auth_type: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAppAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppAuthorizationResponse
+
+    interface _CreateAppBundleResponse
+      include Smithy::Client::_Response[Types::CreateAppBundleResponse]
+      def app_bundle: () -> Types::AppBundle?
+    end
+    def create_app_bundle: (
+      ?client_token: String,
+      ?customer_managed_key_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAppBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppBundleResponse
+
+    interface _CreateIngestionResponse
+      include Smithy::Client::_Response[Types::CreateIngestionResponse]
+      def ingestion: () -> Types::Ingestion?
+    end
+    def create_ingestion: (
+      ?app_bundle_identifier: String,
+      ?app: String,
+      ?tenant_id: String,
+      ?ingestion_type: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIngestionResponse
+
+    interface _CreateIngestionDestinationResponse
+      include Smithy::Client::_Response[Types::CreateIngestionDestinationResponse]
+      def ingestion_destination: () -> Types::IngestionDestination?
+    end
+    def create_ingestion_destination: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String,
+      ?processing_configuration: {
+        audit_log: {
+          schema: String,
+          format: String
+        }
+      },
+      ?destination_configuration: {
+        audit_log: {
+          destination: {
+            s3_bucket: {
+              bucket_name: String,
+              prefix: String
+            },
+            firehose_stream: {
+              stream_name: String
+            }
+          }
+        }
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIngestionDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIngestionDestinationResponse
+
+    interface _DeleteAppAuthorizationResponse
+      include Smithy::Client::_Response[Types::DeleteAppAuthorizationResponse]
+    end
+    def delete_app_authorization: (
+      ?app_bundle_identifier: String,
+      ?app_authorization_identifier: String
+    ) -> _DeleteAppAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppAuthorizationResponse
+
+    interface _DeleteAppBundleResponse
+      include Smithy::Client::_Response[Types::DeleteAppBundleResponse]
+    end
+    def delete_app_bundle: (
+      ?app_bundle_identifier: String
+    ) -> _DeleteAppBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppBundleResponse
+
+    interface _DeleteIngestionResponse
+      include Smithy::Client::_Response[Types::DeleteIngestionResponse]
+    end
+    def delete_ingestion: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String
+    ) -> _DeleteIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIngestionResponse
+
+    interface _DeleteIngestionDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteIngestionDestinationResponse]
+    end
+    def delete_ingestion_destination: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String,
+      ?ingestion_destination_identifier: String
+    ) -> _DeleteIngestionDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIngestionDestinationResponse
+
+    interface _GetAppAuthorizationResponse
+      include Smithy::Client::_Response[Types::GetAppAuthorizationResponse]
+      def app_authorization: () -> Types::AppAuthorization?
+    end
+    def get_app_authorization: (
+      ?app_bundle_identifier: String,
+      ?app_authorization_identifier: String
+    ) -> _GetAppAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppAuthorizationResponse
+
+    interface _GetAppBundleResponse
+      include Smithy::Client::_Response[Types::GetAppBundleResponse]
+      def app_bundle: () -> Types::AppBundle?
+    end
+    def get_app_bundle: (
+      ?app_bundle_identifier: String
+    ) -> _GetAppBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppBundleResponse
+
+    interface _GetIngestionResponse
+      include Smithy::Client::_Response[Types::GetIngestionResponse]
+      def ingestion: () -> Types::Ingestion?
+    end
+    def get_ingestion: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String
+    ) -> _GetIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngestionResponse
+
+    interface _GetIngestionDestinationResponse
+      include Smithy::Client::_Response[Types::GetIngestionDestinationResponse]
+      def ingestion_destination: () -> Types::IngestionDestination?
+    end
+    def get_ingestion_destination: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String,
+      ?ingestion_destination_identifier: String
+    ) -> _GetIngestionDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngestionDestinationResponse
+
+    interface _ListAppAuthorizationsResponse
+      include Smithy::Client::_Response[Types::ListAppAuthorizationsResponse]
+      def app_authorization_summary_list: () -> Array[Types::AppAuthorizationSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_authorizations: (
+      ?app_bundle_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppAuthorizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppAuthorizationsResponse
+
+    interface _ListAppBundlesResponse
+      include Smithy::Client::_Response[Types::ListAppBundlesResponse]
+      def app_bundle_summary_list: () -> Array[Types::AppBundleSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_bundles: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppBundlesResponse
+
+    interface _ListIngestionDestinationsResponse
+      include Smithy::Client::_Response[Types::ListIngestionDestinationsResponse]
+      def ingestion_destinations: () -> Array[Types::IngestionDestinationSummary]?
+      def next_token: () -> String?
+    end
+    def list_ingestion_destinations: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIngestionDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIngestionDestinationsResponse
+
+    interface _ListIngestionsResponse
+      include Smithy::Client::_Response[Types::ListIngestionsResponse]
+      def ingestions: () -> Array[Types::IngestionSummary]?
+      def next_token: () -> String?
+    end
+    def list_ingestions: (
+      ?app_bundle_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIngestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIngestionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartIngestionResponse
+      include Smithy::Client::_Response[Types::StartIngestionResponse]
+    end
+    def start_ingestion: (
+      ?ingestion_identifier: String,
+      ?app_bundle_identifier: String
+    ) -> _StartIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartIngestionResponse
+
+    interface _StartUserAccessTasksResponse
+      include Smithy::Client::_Response[Types::StartUserAccessTasksResponse]
+      def user_access_tasks_list: () -> Array[Types::UserAccessTaskItem]?
+    end
+    def start_user_access_tasks: (
+      ?app_bundle_identifier: String,
+      ?email: String
+    ) -> _StartUserAccessTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartUserAccessTasksResponse
+
+    interface _StopIngestionResponse
+      include Smithy::Client::_Response[Types::StopIngestionResponse]
+    end
+    def stop_ingestion: (
+      ?ingestion_identifier: String,
+      ?app_bundle_identifier: String
+    ) -> _StopIngestionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopIngestionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppAuthorizationResponse
+      include Smithy::Client::_Response[Types::UpdateAppAuthorizationResponse]
+      def app_authorization: () -> Types::AppAuthorization?
+    end
+    def update_app_authorization: (
+      ?app_bundle_identifier: String,
+      ?app_authorization_identifier: String,
+      ?credential: {
+        oauth2_credential: {
+          client_id: String,
+          client_secret: String
+        },
+        api_key_credential: {
+          api_key: untyped
+        }
+      },
+      ?tenant: {
+        tenant_identifier: String,
+        tenant_display_name: String
+      }
+    ) -> _UpdateAppAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppAuthorizationResponse
+
+    interface _UpdateIngestionDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateIngestionDestinationResponse]
+      def ingestion_destination: () -> Types::IngestionDestination?
+    end
+    def update_ingestion_destination: (
+      ?app_bundle_identifier: String,
+      ?ingestion_identifier: String,
+      ?ingestion_destination_identifier: String,
+      ?destination_configuration: {
+        audit_log: {
+          destination: {
+            s3_bucket: {
+              bucket_name: String,
+              prefix: String
+            },
+            firehose_stream: {
+              stream_name: String
+            }
+          }
+        }
+      }
+    ) -> _UpdateIngestionDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIngestionDestinationResponse
+  end
+end

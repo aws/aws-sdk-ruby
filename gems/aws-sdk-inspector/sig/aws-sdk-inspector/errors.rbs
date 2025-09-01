@@ -1,0 +1,56 @@
+module Aws::Inspector
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def can_retry: () -> bool?
+    end
+    class AgentsAlreadyRunningAssessmentException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def agents: () -> Array[Types::AgentAlreadyRunningAssessment]?
+      def agents_truncated: () -> bool?
+      def can_retry: () -> bool?
+    end
+    class AssessmentRunInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def assessment_run_arns: () -> Array[String]?
+      def assessment_run_arns_truncated: () -> bool?
+      def can_retry: () -> bool?
+    end
+    class InternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def can_retry: () -> bool?
+    end
+    class InvalidCrossAccountRoleException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def can_retry: () -> bool?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def can_retry: () -> bool?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def can_retry: () -> bool?
+    end
+    class NoSuchEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def can_retry: () -> bool?
+    end
+    class PreviewGenerationInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceTemporarilyUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def can_retry: () -> bool?
+    end
+    class UnsupportedFeatureException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def can_retry: () -> bool?
+    end
+  end
+end

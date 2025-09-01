@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceAgreement
+      VERSION: String
+    end
+  end

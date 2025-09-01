@@ -1,0 +1,5 @@
+  module Aws
+    module Health
+      VERSION: String
+    end
+  end

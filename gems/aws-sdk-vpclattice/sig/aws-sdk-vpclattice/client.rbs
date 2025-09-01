@@ -1,0 +1,1191 @@
+module Aws::VPCLattice
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::VPCLattice::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchUpdateRuleResponse
+      include Smithy::Client::_Response[Types::BatchUpdateRuleOutput]
+      def successful: () -> Array[Types::RuleUpdateSuccess]?
+      def unsuccessful: () -> Array[Types::RuleUpdateFailure]?
+    end
+    def batch_update_rule: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?rules: Array[
+        {
+          rule_identifier: String,
+          match: {
+            http_match: {
+              method: String,
+              path_match: {
+                match: {
+                  exact: String,
+                  prefix: String
+                },
+                case_sensitive: bool
+              },
+              header_matches: Array[
+                {
+                  name: String,
+                  match: {
+                    exact: String,
+                    prefix: String,
+                    contains: String
+                  },
+                  case_sensitive: untyped
+                }
+              ]
+            }
+          },
+          priority: Integer,
+          action: {
+            forward: {
+              target_groups: Array[
+                {
+                  target_group_identifier: String,
+                  weight: Integer
+                }
+              ]
+            },
+            fixed_response: {
+              status_code: Integer
+            }
+          }
+        }
+      ]
+    ) -> _BatchUpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateRuleResponse
+
+    interface _CreateAccessLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateAccessLogSubscriptionOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+      def service_network_log_type: () -> String?
+      def destination_arn: () -> String?
+    end
+    def create_access_log_subscription: (
+      ?client_token: String,
+      ?resource_identifier: String,
+      ?destination_arn: String,
+      ?service_network_log_type: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAccessLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessLogSubscriptionResponse
+
+    interface _CreateListenerResponse
+      include Smithy::Client::_Response[Types::CreateListenerOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def protocol: () -> String?
+      def port: () -> Integer?
+      def service_arn: () -> String?
+      def service_id: () -> String?
+      def default_action: () -> Types::RuleAction?
+    end
+    def create_listener: (
+      ?service_identifier: String,
+      ?name: String,
+      ?protocol: String,
+      ?port: Integer,
+      ?default_action: {
+        forward: {
+          target_groups: Array[
+            {
+              target_group_identifier: String,
+              weight: Integer
+            }
+          ]
+        },
+        fixed_response: {
+          status_code: Integer
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListenerResponse
+
+    interface _CreateResourceConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateResourceConfigurationResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def resource_gateway_id: () -> String?
+      def resource_configuration_group_id: () -> String?
+      def type: () -> String?
+      def port_ranges: () -> Array[String]?
+      def protocol: () -> String?
+      def status: () -> String?
+      def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition?
+      def allow_association_to_shareable_service_network: () -> bool?
+      def created_at: () -> Time?
+      def failure_reason: () -> String?
+    end
+    def create_resource_configuration: (
+      ?name: String,
+      ?type: String,
+      ?port_ranges: Array[String],
+      ?protocol: String,
+      ?resource_gateway_identifier: String,
+      ?resource_configuration_group_identifier: String,
+      ?resource_configuration_definition: {
+        dns_resource: {
+          domain_name: String,
+          ip_address_type: String
+        },
+        ip_resource: {
+          ip_address: String
+        },
+        arn_resource: {
+          arn: String
+        }
+      },
+      ?allow_association_to_shareable_service_network: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceConfigurationResponse
+
+    interface _CreateResourceGatewayResponse
+      include Smithy::Client::_Response[Types::CreateResourceGatewayResponse]
+      def name: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def vpc_identifier: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def security_group_ids: () -> Array[String]?
+      def ip_address_type: () -> String?
+    end
+    def create_resource_gateway: (
+      ?client_token: String,
+      ?name: String,
+      ?vpc_identifier: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?ip_address_type: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceGatewayResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def match: () -> Types::RuleMatch?
+      def priority: () -> Integer?
+      def action: () -> Types::RuleAction?
+    end
+    def create_rule: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?name: String,
+      ?match: {
+        http_match: {
+          method: String,
+          path_match: {
+            match: {
+              exact: String,
+              prefix: String
+            },
+            case_sensitive: bool
+          },
+          header_matches: Array[
+            {
+              name: String,
+              match: {
+                exact: String,
+                prefix: String,
+                contains: String
+              },
+              case_sensitive: untyped
+            }
+          ]
+        }
+      },
+      ?priority: Integer,
+      ?action: {
+        forward: {
+          target_groups: Array[
+            {
+              target_group_identifier: String,
+              weight: Integer
+            }
+          ]
+        },
+        fixed_response: {
+          status_code: Integer
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateServiceResponse
+      include Smithy::Client::_Response[Types::CreateServiceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def custom_domain_name: () -> String?
+      def certificate_arn: () -> String?
+      def status: () -> String?
+      def auth_type: () -> String?
+      def dns_entry: () -> Types::DnsEntry?
+    end
+    def create_service: (
+      ?client_token: String,
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?custom_domain_name: String,
+      ?certificate_arn: String,
+      ?auth_type: String
+    ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
+
+    interface _CreateServiceNetworkResponse
+      include Smithy::Client::_Response[Types::CreateServiceNetworkOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def sharing_config: () -> Types::SharingConfig?
+      def auth_type: () -> String?
+    end
+    def create_service_network: (
+      ?client_token: String,
+      ?name: String,
+      ?auth_type: String,
+      ?tags: Hash[String, String],
+      ?sharing_config: {
+        enabled: bool
+      }
+    ) -> _CreateServiceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkResponse
+
+    interface _CreateServiceNetworkResourceAssociationResponse
+      include Smithy::Client::_Response[Types::CreateServiceNetworkResourceAssociationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_by: () -> String?
+    end
+    def create_service_network_resource_association: (
+      ?client_token: String,
+      ?resource_configuration_identifier: String,
+      ?service_network_identifier: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateServiceNetworkResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkResourceAssociationResponse
+
+    interface _CreateServiceNetworkServiceAssociationResponse
+      include Smithy::Client::_Response[Types::CreateServiceNetworkServiceAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+      def created_by: () -> String?
+      def custom_domain_name: () -> String?
+      def dns_entry: () -> Types::DnsEntry?
+    end
+    def create_service_network_service_association: (
+      ?client_token: String,
+      ?service_identifier: String,
+      ?service_network_identifier: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateServiceNetworkServiceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkServiceAssociationResponse
+
+    interface _CreateServiceNetworkVpcAssociationResponse
+      include Smithy::Client::_Response[Types::CreateServiceNetworkVpcAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+      def created_by: () -> String?
+      def security_group_ids: () -> Array[String]?
+    end
+    def create_service_network_vpc_association: (
+      ?client_token: String,
+      ?service_network_identifier: String,
+      ?vpc_identifier: String,
+      ?security_group_ids: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkVpcAssociationResponse
+
+    interface _CreateTargetGroupResponse
+      include Smithy::Client::_Response[Types::CreateTargetGroupOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def config: () -> Types::TargetGroupConfig?
+      def status: () -> String?
+    end
+    def create_target_group: (
+      ?name: String,
+      ?type: String,
+      ?config: {
+        port: Integer,
+        protocol: String,
+        protocol_version: String,
+        ip_address_type: String,
+        vpc_identifier: String,
+        health_check: {
+          enabled: bool,
+          protocol: untyped,
+          protocol_version: String,
+          port: Integer,
+          path: String,
+          health_check_interval_seconds: Integer,
+          health_check_timeout_seconds: Integer,
+          healthy_threshold_count: Integer,
+          unhealthy_threshold_count: Integer,
+          matcher: {
+            http_code: String
+          }
+        },
+        lambda_event_structure_version: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTargetGroupResponse
+
+    interface _DeleteAccessLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteAccessLogSubscriptionOutput]
+    end
+    def delete_access_log_subscription: (
+      ?access_log_subscription_identifier: String
+    ) -> _DeleteAccessLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessLogSubscriptionResponse
+
+    interface _DeleteAuthPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteAuthPolicyOutput]
+    end
+    def delete_auth_policy: (
+      ?resource_identifier: String
+    ) -> _DeleteAuthPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAuthPolicyResponse
+
+    interface _DeleteListenerResponse
+      include Smithy::Client::_Response[Types::DeleteListenerOutput]
+    end
+    def delete_listener: (
+      ?service_identifier: String,
+      ?listener_identifier: String
+    ) -> _DeleteListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListenerResponse
+
+    interface _DeleteResourceConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteResourceConfigurationResponse]
+    end
+    def delete_resource_configuration: (
+      ?resource_configuration_identifier: String
+    ) -> _DeleteResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceConfigurationResponse
+
+    interface _DeleteResourceEndpointAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteResourceEndpointAssociationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def resource_configuration_id: () -> String?
+      def resource_configuration_arn: () -> String?
+      def vpc_endpoint_id: () -> String?
+    end
+    def delete_resource_endpoint_association: (
+      ?resource_endpoint_association_identifier: String
+    ) -> _DeleteResourceEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceEndpointAssociationResponse
+
+    interface _DeleteResourceGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteResourceGatewayResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def delete_resource_gateway: (
+      ?resource_gateway_identifier: String
+    ) -> _DeleteResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceGatewayResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyOutput]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleOutput]
+    end
+    def delete_rule: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?rule_identifier: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteServiceResponse
+      include Smithy::Client::_Response[Types::DeleteServiceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def delete_service: (
+      ?service_identifier: String
+    ) -> _DeleteServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceResponse
+
+    interface _DeleteServiceNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteServiceNetworkOutput]
+    end
+    def delete_service_network: (
+      ?service_network_identifier: String
+    ) -> _DeleteServiceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceNetworkResponse
+
+    interface _DeleteServiceNetworkResourceAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteServiceNetworkResourceAssociationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_service_network_resource_association: (
+      ?service_network_resource_association_identifier: String
+    ) -> _DeleteServiceNetworkResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceNetworkResourceAssociationResponse
+
+    interface _DeleteServiceNetworkServiceAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteServiceNetworkServiceAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+    end
+    def delete_service_network_service_association: (
+      ?service_network_service_association_identifier: String
+    ) -> _DeleteServiceNetworkServiceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceNetworkServiceAssociationResponse
+
+    interface _DeleteServiceNetworkVpcAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteServiceNetworkVpcAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+    end
+    def delete_service_network_vpc_association: (
+      ?service_network_vpc_association_identifier: String
+    ) -> _DeleteServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceNetworkVpcAssociationResponse
+
+    interface _DeleteTargetGroupResponse
+      include Smithy::Client::_Response[Types::DeleteTargetGroupOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_target_group: (
+      ?target_group_identifier: String
+    ) -> _DeleteTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTargetGroupResponse
+
+    interface _DeregisterTargetsResponse
+      include Smithy::Client::_Response[Types::DeregisterTargetsOutput]
+      def successful: () -> Array[Types::Target]?
+      def unsuccessful: () -> Array[Types::TargetFailure]?
+    end
+    def deregister_targets: (
+      ?target_group_identifier: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer
+        }
+      ]
+    ) -> _DeregisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTargetsResponse
+
+    interface _GetAccessLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetAccessLogSubscriptionOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+      def destination_arn: () -> String?
+      def service_network_log_type: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_access_log_subscription: (
+      ?access_log_subscription_identifier: String
+    ) -> _GetAccessLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessLogSubscriptionResponse
+
+    interface _GetAuthPolicyResponse
+      include Smithy::Client::_Response[Types::GetAuthPolicyOutput]
+      def policy: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_auth_policy: (
+      ?resource_identifier: String
+    ) -> _GetAuthPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAuthPolicyResponse
+
+    interface _GetListenerResponse
+      include Smithy::Client::_Response[Types::GetListenerOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def protocol: () -> String?
+      def port: () -> Integer?
+      def service_arn: () -> String?
+      def service_id: () -> String?
+      def default_action: () -> Types::RuleAction?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_listener: (
+      ?service_identifier: String,
+      ?listener_identifier: String
+    ) -> _GetListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetListenerResponse
+
+    interface _GetResourceConfigurationResponse
+      include Smithy::Client::_Response[Types::GetResourceConfigurationResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def resource_gateway_id: () -> String?
+      def resource_configuration_group_id: () -> String?
+      def type: () -> String?
+      def allow_association_to_shareable_service_network: () -> bool?
+      def port_ranges: () -> Array[String]?
+      def protocol: () -> String?
+      def custom_domain_name: () -> String?
+      def status: () -> String?
+      def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition?
+      def created_at: () -> Time?
+      def amazon_managed: () -> bool?
+      def failure_reason: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def get_resource_configuration: (
+      ?resource_configuration_identifier: String
+    ) -> _GetResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceConfigurationResponse
+
+    interface _GetResourceGatewayResponse
+      include Smithy::Client::_Response[Types::GetResourceGatewayResponse]
+      def name: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def security_group_ids: () -> Array[String]?
+      def ip_address_type: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_resource_gateway: (
+      ?resource_gateway_identifier: String
+    ) -> _GetResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceGatewayResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetRuleResponse
+      include Smithy::Client::_Response[Types::GetRuleOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def is_default: () -> bool?
+      def match: () -> Types::RuleMatch?
+      def priority: () -> Integer?
+      def action: () -> Types::RuleAction?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_rule: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?rule_identifier: String
+    ) -> _GetRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleResponse
+
+    interface _GetServiceResponse
+      include Smithy::Client::_Response[Types::GetServiceOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def dns_entry: () -> Types::DnsEntry?
+      def custom_domain_name: () -> String?
+      def certificate_arn: () -> String?
+      def status: () -> String?
+      def auth_type: () -> String?
+      def failure_code: () -> String?
+      def failure_message: () -> String?
+    end
+    def get_service: (
+      ?service_identifier: String
+    ) -> _GetServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceResponse
+
+    interface _GetServiceNetworkResponse
+      include Smithy::Client::_Response[Types::GetServiceNetworkOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def arn: () -> String?
+      def auth_type: () -> String?
+      def sharing_config: () -> Types::SharingConfig?
+      def number_of_associated_vp_cs: () -> Integer?
+      def number_of_associated_services: () -> Integer?
+    end
+    def get_service_network: (
+      ?service_network_identifier: String
+    ) -> _GetServiceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceNetworkResponse
+
+    interface _GetServiceNetworkResourceAssociationResponse
+      include Smithy::Client::_Response[Types::GetServiceNetworkResourceAssociationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def resource_configuration_id: () -> String?
+      def resource_configuration_arn: () -> String?
+      def resource_configuration_name: () -> String?
+      def service_network_id: () -> String?
+      def service_network_arn: () -> String?
+      def service_network_name: () -> String?
+      def failure_reason: () -> String?
+      def failure_code: () -> String?
+      def last_updated_at: () -> Time?
+      def private_dns_entry: () -> Types::DnsEntry?
+      def dns_entry: () -> Types::DnsEntry?
+      def is_managed_association: () -> bool?
+    end
+    def get_service_network_resource_association: (
+      ?service_network_resource_association_identifier: String
+    ) -> _GetServiceNetworkResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceNetworkResourceAssociationResponse
+
+    interface _GetServiceNetworkServiceAssociationResponse
+      include Smithy::Client::_Response[Types::GetServiceNetworkServiceAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def service_id: () -> String?
+      def service_name: () -> String?
+      def service_arn: () -> String?
+      def service_network_id: () -> String?
+      def service_network_name: () -> String?
+      def service_network_arn: () -> String?
+      def dns_entry: () -> Types::DnsEntry?
+      def custom_domain_name: () -> String?
+      def failure_message: () -> String?
+      def failure_code: () -> String?
+    end
+    def get_service_network_service_association: (
+      ?service_network_service_association_identifier: String
+    ) -> _GetServiceNetworkServiceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceNetworkServiceAssociationResponse
+
+    interface _GetServiceNetworkVpcAssociationResponse
+      include Smithy::Client::_Response[Types::GetServiceNetworkVpcAssociationOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def arn: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def service_network_id: () -> String?
+      def service_network_name: () -> String?
+      def service_network_arn: () -> String?
+      def vpc_id: () -> String?
+      def security_group_ids: () -> Array[String]?
+      def failure_message: () -> String?
+      def failure_code: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def get_service_network_vpc_association: (
+      ?service_network_vpc_association_identifier: String
+    ) -> _GetServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceNetworkVpcAssociationResponse
+
+    interface _GetTargetGroupResponse
+      include Smithy::Client::_Response[Types::GetTargetGroupOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def config: () -> Types::TargetGroupConfig?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def service_arns: () -> Array[String]?
+      def failure_message: () -> String?
+      def failure_code: () -> String?
+    end
+    def get_target_group: (
+      ?target_group_identifier: String
+    ) -> _GetTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTargetGroupResponse
+
+    interface _ListAccessLogSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListAccessLogSubscriptionsOutput]
+      def items: () -> Array[Types::AccessLogSubscriptionSummary]?
+      def next_token: () -> String?
+    end
+    def list_access_log_subscriptions: (
+      ?resource_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccessLogSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessLogSubscriptionsResponse
+
+    interface _ListListenersResponse
+      include Smithy::Client::_Response[Types::ListListenersOutput]
+      def items: () -> Array[Types::ListenerSummary]?
+      def next_token: () -> String?
+    end
+    def list_listeners: (
+      ?service_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListListenersResponse
+
+    interface _ListResourceConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListResourceConfigurationsResponse]
+      def items: () -> Array[Types::ResourceConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_configurations: (
+      ?resource_gateway_identifier: String,
+      ?resource_configuration_group_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceConfigurationsResponse
+
+    interface _ListResourceEndpointAssociationsResponse
+      include Smithy::Client::_Response[Types::ListResourceEndpointAssociationsResponse]
+      def items: () -> Array[Types::ResourceEndpointAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_endpoint_associations: (
+      ?resource_configuration_identifier: String,
+      ?resource_endpoint_association_identifier: String,
+      ?vpc_endpoint_id: String,
+      ?vpc_endpoint_owner: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceEndpointAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceEndpointAssociationsResponse
+
+    interface _ListResourceGatewaysResponse
+      include Smithy::Client::_Response[Types::ListResourceGatewaysResponse]
+      def items: () -> Array[Types::ResourceGatewaySummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_gateways: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceGatewaysResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesOutput]
+      def items: () -> Array[Types::RuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_rules: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListServiceNetworkResourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListServiceNetworkResourceAssociationsResponse]
+      def items: () -> Array[Types::ServiceNetworkResourceAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_network_resource_associations: (
+      ?service_network_identifier: String,
+      ?resource_configuration_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceNetworkResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworkResourceAssociationsResponse
+
+    interface _ListServiceNetworkServiceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListServiceNetworkServiceAssociationsOutput]
+      def items: () -> Array[Types::ServiceNetworkServiceAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_network_service_associations: (
+      ?service_network_identifier: String,
+      ?service_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceNetworkServiceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworkServiceAssociationsResponse
+
+    interface _ListServiceNetworkVpcAssociationsResponse
+      include Smithy::Client::_Response[Types::ListServiceNetworkVpcAssociationsOutput]
+      def items: () -> Array[Types::ServiceNetworkVpcAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_network_vpc_associations: (
+      ?service_network_identifier: String,
+      ?vpc_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceNetworkVpcAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworkVpcAssociationsResponse
+
+    interface _ListServiceNetworkVpcEndpointAssociationsResponse
+      include Smithy::Client::_Response[Types::ListServiceNetworkVpcEndpointAssociationsResponse]
+      def items: () -> Array[Types::ServiceNetworkEndpointAssociation]?
+      def next_token: () -> String?
+    end
+    def list_service_network_vpc_endpoint_associations: (
+      ?service_network_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceNetworkVpcEndpointAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworkVpcEndpointAssociationsResponse
+
+    interface _ListServiceNetworksResponse
+      include Smithy::Client::_Response[Types::ListServiceNetworksOutput]
+      def items: () -> Array[Types::ServiceNetworkSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_networks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworksResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesOutput]
+      def items: () -> Array[Types::ServiceSummary]?
+      def next_token: () -> String?
+    end
+    def list_services: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetGroupsResponse
+      include Smithy::Client::_Response[Types::ListTargetGroupsOutput]
+      def items: () -> Array[Types::TargetGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_target_groups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?vpc_identifier: String,
+      ?target_group_type: String
+    ) -> _ListTargetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetGroupsResponse
+
+    interface _ListTargetsResponse
+      include Smithy::Client::_Response[Types::ListTargetsOutput]
+      def items: () -> Array[Types::TargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_targets: (
+      ?target_group_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer
+        }
+      ]
+    ) -> _ListTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetsResponse
+
+    interface _PutAuthPolicyResponse
+      include Smithy::Client::_Response[Types::PutAuthPolicyOutput]
+      def policy: () -> String?
+      def state: () -> String?
+    end
+    def put_auth_policy: (
+      ?resource_identifier: String,
+      ?policy: String
+    ) -> _PutAuthPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAuthPolicyResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyOutput]
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterTargetsResponse
+      include Smithy::Client::_Response[Types::RegisterTargetsOutput]
+      def successful: () -> Array[Types::Target]?
+      def unsuccessful: () -> Array[Types::TargetFailure]?
+    end
+    def register_targets: (
+      ?target_group_identifier: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer
+        }
+      ]
+    ) -> _RegisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTargetsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessLogSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateAccessLogSubscriptionOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+      def destination_arn: () -> String?
+    end
+    def update_access_log_subscription: (
+      ?access_log_subscription_identifier: String,
+      ?destination_arn: String
+    ) -> _UpdateAccessLogSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessLogSubscriptionResponse
+
+    interface _UpdateListenerResponse
+      include Smithy::Client::_Response[Types::UpdateListenerOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def protocol: () -> String?
+      def port: () -> Integer?
+      def service_arn: () -> String?
+      def service_id: () -> String?
+      def default_action: () -> Types::RuleAction?
+    end
+    def update_listener: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?default_action: {
+        forward: {
+          target_groups: Array[
+            {
+              target_group_identifier: String,
+              weight: Integer
+            }
+          ]
+        },
+        fixed_response: {
+          status_code: Integer
+        }
+      }
+    ) -> _UpdateListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateListenerResponse
+
+    interface _UpdateResourceConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateResourceConfigurationResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def resource_gateway_id: () -> String?
+      def resource_configuration_group_id: () -> String?
+      def type: () -> String?
+      def port_ranges: () -> Array[String]?
+      def allow_association_to_shareable_service_network: () -> bool?
+      def protocol: () -> String?
+      def status: () -> String?
+      def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition?
+    end
+    def update_resource_configuration: (
+      ?resource_configuration_identifier: String,
+      ?resource_configuration_definition: {
+        dns_resource: {
+          domain_name: String,
+          ip_address_type: String
+        },
+        ip_resource: {
+          ip_address: String
+        },
+        arn_resource: {
+          arn: String
+        }
+      },
+      ?allow_association_to_shareable_service_network: bool,
+      ?port_ranges: Array[String]
+    ) -> _UpdateResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceConfigurationResponse
+
+    interface _UpdateResourceGatewayResponse
+      include Smithy::Client::_Response[Types::UpdateResourceGatewayResponse]
+      def name: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def security_group_ids: () -> Array[String]?
+      def ip_address_type: () -> String?
+    end
+    def update_resource_gateway: (
+      ?resource_gateway_identifier: String,
+      ?security_group_ids: Array[String]
+    ) -> _UpdateResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceGatewayResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRuleOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def is_default: () -> bool?
+      def match: () -> Types::RuleMatch?
+      def priority: () -> Integer?
+      def action: () -> Types::RuleAction?
+    end
+    def update_rule: (
+      ?service_identifier: String,
+      ?listener_identifier: String,
+      ?rule_identifier: String,
+      ?match: {
+        http_match: {
+          method: String,
+          path_match: {
+            match: {
+              exact: String,
+              prefix: String
+            },
+            case_sensitive: bool
+          },
+          header_matches: Array[
+            {
+              name: String,
+              match: {
+                exact: String,
+                prefix: String,
+                contains: String
+              },
+              case_sensitive: untyped
+            }
+          ]
+        }
+      },
+      ?priority: Integer,
+      ?action: {
+        forward: {
+          target_groups: Array[
+            {
+              target_group_identifier: String,
+              weight: Integer
+            }
+          ]
+        },
+        fixed_response: {
+          status_code: Integer
+        }
+      }
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+
+    interface _UpdateServiceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def custom_domain_name: () -> String?
+      def certificate_arn: () -> String?
+      def auth_type: () -> String?
+    end
+    def update_service: (
+      ?service_identifier: String,
+      ?certificate_arn: String,
+      ?auth_type: String
+    ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
+
+    interface _UpdateServiceNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateServiceNetworkOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def auth_type: () -> String?
+    end
+    def update_service_network: (
+      ?service_network_identifier: String,
+      ?auth_type: String
+    ) -> _UpdateServiceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceNetworkResponse
+
+    interface _UpdateServiceNetworkVpcAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateServiceNetworkVpcAssociationOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_by: () -> String?
+      def security_group_ids: () -> Array[String]?
+    end
+    def update_service_network_vpc_association: (
+      ?service_network_vpc_association_identifier: String,
+      ?security_group_ids: Array[String]
+    ) -> _UpdateServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceNetworkVpcAssociationResponse
+
+    interface _UpdateTargetGroupResponse
+      include Smithy::Client::_Response[Types::UpdateTargetGroupOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def config: () -> Types::TargetGroupConfig?
+      def status: () -> String?
+    end
+    def update_target_group: (
+      ?target_group_identifier: String,
+      ?health_check: {
+        enabled: bool,
+        protocol: String,
+        protocol_version: String,
+        port: Integer,
+        path: String,
+        health_check_interval_seconds: Integer,
+        health_check_timeout_seconds: Integer,
+        healthy_threshold_count: Integer,
+        unhealthy_threshold_count: Integer,
+        matcher: {
+          http_code: String
+        }
+      }
+    ) -> _UpdateTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTargetGroupResponse
+  end
+end

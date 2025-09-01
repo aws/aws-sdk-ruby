@@ -1,0 +1,460 @@
+module Aws::Artifact
+  module Types
+
+    module AcceptanceType
+      PASSTHROUGH: String
+      EXPLICIT: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_subscription_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_subscription_status: String?
+    end
+
+    module AgreementType
+      CUSTOM: String
+      DEFAULT: String
+      MODIFIED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module CustomerAgreementState
+      ACTIVE: String
+      CUSTOMER_TERMINATED: String
+      AWS_TERMINATED: String
+    end
+
+    class CustomerAgreementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?agreement_arn: String,
+        ?aws_account_id: String,
+        ?organization_arn: String,
+        ?effective_start: Time,
+        ?effective_end: Time,
+        ?state: String,
+        ?description: String,
+        ?acceptance_terms: Array[String],
+        ?terminate_terms: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor agreement_arn: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor organization_arn: String?
+      attr_accessor effective_start: Time?
+      attr_accessor effective_end: Time?
+      attr_accessor state: String?
+      attr_accessor description: String?
+      attr_accessor acceptance_terms: Array[String]?
+      attr_accessor terminate_terms: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class GetAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class GetReportMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_version: Integer?
+    end
+
+    class GetReportMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_details: Types::ReportDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_details: Types::ReportDetail?
+    end
+
+    class GetReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_version: Integer,
+        ?term_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_version: Integer?
+      attr_accessor term_token: String?
+    end
+
+    class GetReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_presigned_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_presigned_url: String?
+    end
+
+    class GetTermForReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_version: Integer?
+    end
+
+    class GetTermForReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_presigned_url: String,
+        ?term_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_presigned_url: String?
+      attr_accessor term_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListCustomerAgreementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomerAgreementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_agreements: Array[Types::CustomerAgreementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_agreements: Array[Types::CustomerAgreementSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reports: Array[Types::ReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reports: Array[Types::ReportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module NotificationSubscriptionStatus
+      SUBSCRIBED: String
+      NOT_SUBSCRIBED: String
+    end
+
+    module PublishedState
+      PUBLISHED: String
+      UNPUBLISHED: String
+    end
+
+    class PutAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_subscription_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_subscription_status: String?
+    end
+
+    class PutAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class ReportDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?period_start: Time,
+        ?period_end: Time,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?deleted_at: Time,
+        ?state: String,
+        ?arn: String,
+        ?series: String,
+        ?category: String,
+        ?company_name: String,
+        ?product_name: String,
+        ?term_arn: String,
+        ?version: Integer,
+        ?acceptance_type: String,
+        ?sequence_number: Integer,
+        ?upload_state: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor period_start: Time?
+      attr_accessor period_end: Time?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor deleted_at: Time?
+      attr_accessor state: String?
+      attr_accessor arn: String?
+      attr_accessor series: String?
+      attr_accessor category: String?
+      attr_accessor company_name: String?
+      attr_accessor product_name: String?
+      attr_accessor term_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor acceptance_type: String?
+      attr_accessor sequence_number: Integer?
+      attr_accessor upload_state: String?
+      attr_accessor status_message: String?
+    end
+
+    class ReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?state: String,
+        ?arn: String,
+        ?version: Integer,
+        ?upload_state: String,
+        ?description: String,
+        ?period_start: Time,
+        ?period_end: Time,
+        ?series: String,
+        ?category: String,
+        ?company_name: String,
+        ?product_name: String,
+        ?status_message: String,
+        ?acceptance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor upload_state: String?
+      attr_accessor description: String?
+      attr_accessor period_start: Time?
+      attr_accessor period_end: Time?
+      attr_accessor series: String?
+      attr_accessor category: String?
+      attr_accessor company_name: String?
+      attr_accessor product_name: String?
+      attr_accessor status_message: String?
+      attr_accessor acceptance_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module UploadState
+      PROCESSING: String
+      COMPLETE: String
+      FAILED: String
+      FAULT: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

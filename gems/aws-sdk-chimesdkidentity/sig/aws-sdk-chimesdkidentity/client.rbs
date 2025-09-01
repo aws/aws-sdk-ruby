@@ -1,0 +1,399 @@
+module Aws::ChimeSDKIdentity
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ChimeSDKIdentity::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAppInstanceResponse
+      include Smithy::Client::_Response[Types::CreateAppInstanceResponse]
+      def app_instance_arn: () -> String?
+    end
+    def create_app_instance: (
+      ?name: String,
+      ?metadata: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAppInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppInstanceResponse
+
+    interface _CreateAppInstanceAdminResponse
+      include Smithy::Client::_Response[Types::CreateAppInstanceAdminResponse]
+      def app_instance_admin: () -> Types::Identity?
+      def app_instance_arn: () -> String?
+    end
+    def create_app_instance_admin: (
+      ?app_instance_admin_arn: String,
+      ?app_instance_arn: String
+    ) -> _CreateAppInstanceAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppInstanceAdminResponse
+
+    interface _CreateAppInstanceBotResponse
+      include Smithy::Client::_Response[Types::CreateAppInstanceBotResponse]
+      def app_instance_bot_arn: () -> String?
+    end
+    def create_app_instance_bot: (
+      ?app_instance_arn: String,
+      ?name: String,
+      ?metadata: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?configuration: {
+        lex: {
+          responds_to: String,
+          invoked_by: {
+            standard_messages: String,
+            targeted_messages: String
+          },
+          lex_bot_alias_arn: String,
+          locale_id: String,
+          welcome_intent: String
+        }
+      }
+    ) -> _CreateAppInstanceBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppInstanceBotResponse
+
+    interface _CreateAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::CreateAppInstanceUserResponse]
+      def app_instance_user_arn: () -> String?
+    end
+    def create_app_instance_user: (
+      ?app_instance_arn: String,
+      ?app_instance_user_id: String,
+      ?name: String,
+      ?metadata: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?expiration_settings: {
+        expiration_days: Integer,
+        expiration_criterion: String
+      }
+    ) -> _CreateAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppInstanceUserResponse
+
+    interface _DeleteAppInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_app_instance: (
+      ?app_instance_arn: String
+    ) -> _DeleteAppInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppInstanceResponse
+
+    interface _DeleteAppInstanceAdminResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_app_instance_admin: (
+      ?app_instance_admin_arn: String,
+      ?app_instance_arn: String
+    ) -> _DeleteAppInstanceAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppInstanceAdminResponse
+
+    interface _DeleteAppInstanceBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_app_instance_bot: (
+      ?app_instance_bot_arn: String
+    ) -> _DeleteAppInstanceBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppInstanceBotResponse
+
+    interface _DeleteAppInstanceUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_app_instance_user: (
+      ?app_instance_user_arn: String
+    ) -> _DeleteAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppInstanceUserResponse
+
+    interface _DeregisterAppInstanceUserEndpointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_app_instance_user_endpoint: (
+      ?app_instance_user_arn: String,
+      ?endpoint_id: String
+    ) -> _DeregisterAppInstanceUserEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterAppInstanceUserEndpointResponse
+
+    interface _DescribeAppInstanceResponse
+      include Smithy::Client::_Response[Types::DescribeAppInstanceResponse]
+      def app_instance: () -> Types::AppInstance?
+    end
+    def describe_app_instance: (
+      ?app_instance_arn: String
+    ) -> _DescribeAppInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppInstanceResponse
+
+    interface _DescribeAppInstanceAdminResponse
+      include Smithy::Client::_Response[Types::DescribeAppInstanceAdminResponse]
+      def app_instance_admin: () -> Types::AppInstanceAdmin?
+    end
+    def describe_app_instance_admin: (
+      ?app_instance_admin_arn: String,
+      ?app_instance_arn: String
+    ) -> _DescribeAppInstanceAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppInstanceAdminResponse
+
+    interface _DescribeAppInstanceBotResponse
+      include Smithy::Client::_Response[Types::DescribeAppInstanceBotResponse]
+      def app_instance_bot: () -> Types::AppInstanceBot?
+    end
+    def describe_app_instance_bot: (
+      ?app_instance_bot_arn: String
+    ) -> _DescribeAppInstanceBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppInstanceBotResponse
+
+    interface _DescribeAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::DescribeAppInstanceUserResponse]
+      def app_instance_user: () -> Types::AppInstanceUser?
+    end
+    def describe_app_instance_user: (
+      ?app_instance_user_arn: String
+    ) -> _DescribeAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppInstanceUserResponse
+
+    interface _DescribeAppInstanceUserEndpointResponse
+      include Smithy::Client::_Response[Types::DescribeAppInstanceUserEndpointResponse]
+      def app_instance_user_endpoint: () -> Types::AppInstanceUserEndpoint?
+    end
+    def describe_app_instance_user_endpoint: (
+      ?app_instance_user_arn: String,
+      ?endpoint_id: String
+    ) -> _DescribeAppInstanceUserEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppInstanceUserEndpointResponse
+
+    interface _GetAppInstanceRetentionSettingsResponse
+      include Smithy::Client::_Response[Types::GetAppInstanceRetentionSettingsResponse]
+      def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings?
+      def initiate_deletion_timestamp: () -> Time?
+    end
+    def get_app_instance_retention_settings: (
+      ?app_instance_arn: String
+    ) -> _GetAppInstanceRetentionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppInstanceRetentionSettingsResponse
+
+    interface _ListAppInstanceAdminsResponse
+      include Smithy::Client::_Response[Types::ListAppInstanceAdminsResponse]
+      def app_instance_arn: () -> String?
+      def app_instance_admins: () -> Array[Types::AppInstanceAdminSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_instance_admins: (
+      ?app_instance_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppInstanceAdminsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInstanceAdminsResponse
+
+    interface _ListAppInstanceBotsResponse
+      include Smithy::Client::_Response[Types::ListAppInstanceBotsResponse]
+      def app_instance_arn: () -> String?
+      def app_instance_bots: () -> Array[Types::AppInstanceBotSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_instance_bots: (
+      ?app_instance_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppInstanceBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInstanceBotsResponse
+
+    interface _ListAppInstanceUserEndpointsResponse
+      include Smithy::Client::_Response[Types::ListAppInstanceUserEndpointsResponse]
+      def app_instance_user_endpoints: () -> Array[Types::AppInstanceUserEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_instance_user_endpoints: (
+      ?app_instance_user_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppInstanceUserEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInstanceUserEndpointsResponse
+
+    interface _ListAppInstanceUsersResponse
+      include Smithy::Client::_Response[Types::ListAppInstanceUsersResponse]
+      def app_instance_arn: () -> String?
+      def app_instance_users: () -> Array[Types::AppInstanceUserSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_instance_users: (
+      ?app_instance_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppInstanceUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInstanceUsersResponse
+
+    interface _ListAppInstancesResponse
+      include Smithy::Client::_Response[Types::ListAppInstancesResponse]
+      def app_instances: () -> Array[Types::AppInstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_instances: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInstancesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutAppInstanceRetentionSettingsResponse
+      include Smithy::Client::_Response[Types::PutAppInstanceRetentionSettingsResponse]
+      def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings?
+      def initiate_deletion_timestamp: () -> Time?
+    end
+    def put_app_instance_retention_settings: (
+      ?app_instance_arn: String,
+      ?app_instance_retention_settings: {
+        channel_retention_settings: {
+          retention_days: Integer
+        }
+      }
+    ) -> _PutAppInstanceRetentionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppInstanceRetentionSettingsResponse
+
+    interface _PutAppInstanceUserExpirationSettingsResponse
+      include Smithy::Client::_Response[Types::PutAppInstanceUserExpirationSettingsResponse]
+      def app_instance_user_arn: () -> String?
+      def expiration_settings: () -> Types::ExpirationSettings?
+    end
+    def put_app_instance_user_expiration_settings: (
+      ?app_instance_user_arn: String,
+      ?expiration_settings: {
+        expiration_days: Integer,
+        expiration_criterion: String
+      }
+    ) -> _PutAppInstanceUserExpirationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppInstanceUserExpirationSettingsResponse
+
+    interface _RegisterAppInstanceUserEndpointResponse
+      include Smithy::Client::_Response[Types::RegisterAppInstanceUserEndpointResponse]
+      def app_instance_user_arn: () -> String?
+      def endpoint_id: () -> String?
+    end
+    def register_app_instance_user_endpoint: (
+      ?app_instance_user_arn: String,
+      ?name: String,
+      ?type: String,
+      ?resource_arn: String,
+      ?endpoint_attributes: {
+        device_token: String,
+        voip_device_token: untyped
+      },
+      ?client_request_token: String,
+      ?allow_messages: String
+    ) -> _RegisterAppInstanceUserEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAppInstanceUserEndpointResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateAppInstanceResponse]
+      def app_instance_arn: () -> String?
+    end
+    def update_app_instance: (
+      ?app_instance_arn: String,
+      ?name: String,
+      ?metadata: String
+    ) -> _UpdateAppInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppInstanceResponse
+
+    interface _UpdateAppInstanceBotResponse
+      include Smithy::Client::_Response[Types::UpdateAppInstanceBotResponse]
+      def app_instance_bot_arn: () -> String?
+    end
+    def update_app_instance_bot: (
+      ?app_instance_bot_arn: String,
+      ?name: String,
+      ?metadata: String,
+      ?configuration: {
+        lex: {
+          responds_to: String,
+          invoked_by: {
+            standard_messages: String,
+            targeted_messages: String
+          },
+          lex_bot_alias_arn: String,
+          locale_id: String,
+          welcome_intent: String
+        }
+      }
+    ) -> _UpdateAppInstanceBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppInstanceBotResponse
+
+    interface _UpdateAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::UpdateAppInstanceUserResponse]
+      def app_instance_user_arn: () -> String?
+    end
+    def update_app_instance_user: (
+      ?app_instance_user_arn: String,
+      ?name: String,
+      ?metadata: String
+    ) -> _UpdateAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppInstanceUserResponse
+
+    interface _UpdateAppInstanceUserEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateAppInstanceUserEndpointResponse]
+      def app_instance_user_arn: () -> String?
+      def endpoint_id: () -> String?
+    end
+    def update_app_instance_user_endpoint: (
+      ?app_instance_user_arn: String,
+      ?endpoint_id: String,
+      ?name: String,
+      ?allow_messages: String
+    ) -> _UpdateAppInstanceUserEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppInstanceUserEndpointResponse
+  end
+end

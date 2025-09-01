@@ -1,0 +1,5 @@
+  module Aws
+    module SnowDeviceManagement
+      VERSION: String
+    end
+  end

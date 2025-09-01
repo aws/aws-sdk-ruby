@@ -1,0 +1,1477 @@
+module Aws::SNS
+  module Types
+
+    class AddPermissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?label: String,
+        ?aws_account_id: Array[String],
+        ?action_name: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor label: String?
+      attr_accessor aws_account_id: Array[String]?
+      attr_accessor action_name: Array[String]?
+    end
+
+    class AuthorizationErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchEntryIdsNotDistinctException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchRequestTooLongException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchResultErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?code: String,
+        ?message: String,
+        ?sender_fault: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor sender_fault: bool?
+    end
+
+    class CheckIfPhoneNumberIsOptedOutInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+    end
+
+    class CheckIfPhoneNumberIsOptedOutResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_opted_out: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_opted_out: bool?
+    end
+
+    class ConcurrentAccessException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConfirmSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?token: String,
+        ?authenticate_on_unsubscribe: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor token: String?
+      attr_accessor authenticate_on_unsubscribe: String?
+    end
+
+    class ConfirmSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class CreateEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+    end
+
+    class CreatePlatformApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?platform: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor platform: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class CreatePlatformApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+    end
+
+    class CreatePlatformEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+        ?token: String,
+        ?custom_user_data: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+      attr_accessor token: String?
+      attr_accessor custom_user_data: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class CreateSMSSandboxPhoneNumberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+      attr_accessor language_code: String?
+    end
+
+    class CreateSMSSandboxPhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateTopicInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attributes: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?data_protection_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor data_protection_policy: String?
+    end
+
+    class CreateTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class DeleteEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+    end
+
+    class DeletePlatformApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+    end
+
+    class DeleteSMSSandboxPhoneNumberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+    end
+
+    class DeleteSMSSandboxPhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTopicInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class EmptyBatchRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class EndpointDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FilterPolicyLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetDataProtectionPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetDataProtectionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_policy: String?
+    end
+
+    class GetEndpointAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+    end
+
+    class GetEndpointAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class GetPlatformApplicationAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+    end
+
+    class GetPlatformApplicationAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class GetSMSAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[String]?
+    end
+
+    class GetSMSAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class GetSMSSandboxAccountStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetSMSSandboxAccountStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_in_sandbox: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_in_sandbox: bool?
+    end
+
+    class GetSubscriptionAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class GetSubscriptionAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class GetTopicAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class GetTopicAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBatchEntryIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSecurityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSOptInRequired
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LanguageCodeString
+      en_US: String
+      en_GB: String
+      es_419: String
+      es_ES: String
+      de_DE: String
+      fr_CA: String
+      fr_FR: String
+      it_IT: String
+      jp_JP: String
+      pt_BR: String
+      kr_KR: String
+      zh_CN: String
+      zh_TW: String
+    end
+
+    class ListEndpointsByPlatformApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListEndpointsByPlatformApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOriginationNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOriginationNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?phone_numbers: Array[Types::PhoneNumberInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor phone_numbers: Array[Types::PhoneNumberInformation]?
+    end
+
+    class ListPhoneNumbersOptedOutInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumbersOptedOutResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_numbers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_numbers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlatformApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListPlatformApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_applications: Array[Types::PlatformApplication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_applications: Array[Types::PlatformApplication]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSMSSandboxPhoneNumbersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSMSSandboxPhoneNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_numbers: Array[Types::SMSSandboxPhoneNumber],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_numbers: Array[Types::SMSSandboxPhoneNumber]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsByTopicInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsByTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::Subscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::Subscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTopicsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListTopicsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topics: Array[Types::Topic],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topics: Array[Types::Topic]?
+      attr_accessor next_token: String?
+    end
+
+    class MessageAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?string_value: String,
+        ?binary_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module NumberCapability
+      SMS: String
+      MMS: String
+      VOICE: String
+    end
+
+    class OptInPhoneNumberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+    end
+
+    class OptInPhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class OptedOutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PhoneNumberInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?phone_number: String,
+        ?status: String,
+        ?iso2_country_code: String,
+        ?route_type: String,
+        ?number_capabilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+      attr_accessor iso2_country_code: String?
+      attr_accessor route_type: String?
+      attr_accessor number_capabilities: Array[String]?
+    end
+
+    class PlatformApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class PlatformApplicationDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PublishBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?publish_batch_request_entries: Array[Types::PublishBatchRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor publish_batch_request_entries: Array[Types::PublishBatchRequestEntry]?
+    end
+
+    class PublishBatchRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message: String,
+        ?subject: String,
+        ?message_structure: String,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?message_deduplication_id: String,
+        ?message_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message: String?
+      attr_accessor subject: String?
+      attr_accessor message_structure: String?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor message_group_id: String?
+    end
+
+    class PublishBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::PublishBatchResultEntry],
+        ?failed: Array[Types::BatchResultErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::PublishBatchResultEntry]?
+      attr_accessor failed: Array[Types::BatchResultErrorEntry]?
+    end
+
+    class PublishBatchResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message_id: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message_id: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class PublishInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?target_arn: String,
+        ?phone_number: String,
+        ?message: String,
+        ?subject: String,
+        ?message_structure: String,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?message_deduplication_id: String,
+        ?message_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor phone_number: String?
+      attr_accessor message: String?
+      attr_accessor subject: String?
+      attr_accessor message_structure: String?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor message_group_id: String?
+    end
+
+    class PublishResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class PutDataProtectionPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?data_protection_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor data_protection_policy: String?
+    end
+
+    class RemovePermissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor label: String?
+    end
+
+    class ReplayLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RouteType
+      Transactional: String
+      Promotional: String
+      Premium: String
+    end
+
+    class SMSSandboxPhoneNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+    end
+
+    module SMSSandboxPhoneNumberVerificationStatus
+      Pending: String
+      Verified: String
+    end
+
+    class SetEndpointAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SetPlatformApplicationAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_application_arn: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_application_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SetSMSAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SetSMSAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SetSubscriptionAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+        ?attribute_name: String,
+        ?attribute_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+    end
+
+    class SetTopicAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?attribute_name: String,
+        ?attribute_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+    end
+
+    class StaleTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubscribeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?protocol: String,
+        ?endpoint: String,
+        ?attributes: Hash[String, String],
+        ?return_subscription_arn: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor protocol: String?
+      attr_accessor endpoint: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor return_subscription_arn: bool?
+    end
+
+    class SubscribeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+        ?owner: String,
+        ?protocol: String,
+        ?endpoint: String,
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+      attr_accessor owner: String?
+      attr_accessor protocol: String?
+      attr_accessor endpoint: String?
+      attr_accessor topic_arn: String?
+    end
+
+    class SubscriptionLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyEntriesInBatchRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Topic
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class TopicLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsubscribeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UserErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VerificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor status: String?
+    end
+
+    class VerifySMSSandboxPhoneNumberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+        ?one_time_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+      attr_accessor one_time_password: String?
+    end
+
+    class VerifySMSSandboxPhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

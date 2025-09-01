@@ -1,0 +1,442 @@
+module Aws::Tnb
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Tnb::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelSolNetworkOperationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_sol_network_operation: (
+      ?ns_lcm_op_occ_id: String
+    ) -> _CancelSolNetworkOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSolNetworkOperationResponse
+
+    interface _CreateSolFunctionPackageResponse
+      include Smithy::Client::_Response[Types::CreateSolFunctionPackageOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def onboarding_state: () -> String?
+      def operational_state: () -> String?
+      def usage_state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_sol_function_package: (
+      ?tags: Hash[String, String]
+    ) -> _CreateSolFunctionPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSolFunctionPackageResponse
+
+    interface _CreateSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Types::CreateSolNetworkInstanceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def nsd_info_id: () -> String?
+      def ns_instance_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_sol_network_instance: (
+      ?nsd_info_id: String,
+      ?ns_name: String,
+      ?ns_description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSolNetworkInstanceResponse
+
+    interface _CreateSolNetworkPackageResponse
+      include Smithy::Client::_Response[Types::CreateSolNetworkPackageOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def nsd_onboarding_state: () -> String?
+      def nsd_operational_state: () -> String?
+      def nsd_usage_state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_sol_network_package: (
+      ?tags: Hash[String, String]
+    ) -> _CreateSolNetworkPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSolNetworkPackageResponse
+
+    interface _DeleteSolFunctionPackageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_sol_function_package: (
+      ?vnf_pkg_id: String
+    ) -> _DeleteSolFunctionPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSolFunctionPackageResponse
+
+    interface _DeleteSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_sol_network_instance: (
+      ?ns_instance_id: String
+    ) -> _DeleteSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSolNetworkInstanceResponse
+
+    interface _DeleteSolNetworkPackageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_sol_network_package: (
+      ?nsd_info_id: String
+    ) -> _DeleteSolNetworkPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSolNetworkPackageResponse
+
+    interface _GetSolFunctionInstanceResponse
+      include Smithy::Client::_Response[Types::GetSolFunctionInstanceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def ns_instance_id: () -> String?
+      def vnf_pkg_id: () -> String?
+      def vnfd_id: () -> String?
+      def vnf_provider: () -> String?
+      def vnf_product_name: () -> String?
+      def vnfd_version: () -> String?
+      def instantiation_state: () -> String?
+      def instantiated_vnf_info: () -> Types::GetSolVnfInfo?
+      def metadata: () -> Types::GetSolFunctionInstanceMetadata?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_sol_function_instance: (
+      ?vnf_instance_id: String
+    ) -> _GetSolFunctionInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolFunctionInstanceResponse
+
+    interface _GetSolFunctionPackageResponse
+      include Smithy::Client::_Response[Types::GetSolFunctionPackageOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def onboarding_state: () -> String?
+      def operational_state: () -> String?
+      def usage_state: () -> String?
+      def vnfd_id: () -> String?
+      def vnf_provider: () -> String?
+      def vnf_product_name: () -> String?
+      def vnfd_version: () -> String?
+      def metadata: () -> Types::GetSolFunctionPackageMetadata?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_sol_function_package: (
+      ?vnf_pkg_id: String
+    ) -> _GetSolFunctionPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolFunctionPackageResponse
+
+    interface _GetSolFunctionPackageContentResponse
+      include Smithy::Client::_Response[Types::GetSolFunctionPackageContentOutput]
+      def content_type: () -> String?
+      def package_content: () -> String?
+    end
+    def get_sol_function_package_content: (
+      ?vnf_pkg_id: String,
+      ?accept: String
+    ) -> _GetSolFunctionPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolFunctionPackageContentResponse
+
+    interface _GetSolFunctionPackageDescriptorResponse
+      include Smithy::Client::_Response[Types::GetSolFunctionPackageDescriptorOutput]
+      def content_type: () -> String?
+      def vnfd: () -> String?
+    end
+    def get_sol_function_package_descriptor: (
+      ?vnf_pkg_id: String,
+      ?accept: String
+    ) -> _GetSolFunctionPackageDescriptorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolFunctionPackageDescriptorResponse
+
+    interface _GetSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Types::GetSolNetworkInstanceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def ns_instance_name: () -> String?
+      def ns_instance_description: () -> String?
+      def nsd_id: () -> String?
+      def nsd_info_id: () -> String?
+      def ns_state: () -> String?
+      def lcm_op_info: () -> Types::LcmOperationInfo?
+      def metadata: () -> Types::GetSolNetworkInstanceMetadata?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_sol_network_instance: (
+      ?ns_instance_id: String
+    ) -> _GetSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolNetworkInstanceResponse
+
+    interface _GetSolNetworkOperationResponse
+      include Smithy::Client::_Response[Types::GetSolNetworkOperationOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def operation_state: () -> String?
+      def ns_instance_id: () -> String?
+      def lcm_operation_type: () -> String?
+      def update_type: () -> String?
+      def error: () -> Types::ProblemDetails?
+      def metadata: () -> Types::GetSolNetworkOperationMetadata?
+      def tasks: () -> Array[Types::GetSolNetworkOperationTaskDetails]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_sol_network_operation: (
+      ?ns_lcm_op_occ_id: String
+    ) -> _GetSolNetworkOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolNetworkOperationResponse
+
+    interface _GetSolNetworkPackageResponse
+      include Smithy::Client::_Response[Types::GetSolNetworkPackageOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def nsd_onboarding_state: () -> String?
+      def nsd_operational_state: () -> String?
+      def nsd_usage_state: () -> String?
+      def nsd_id: () -> String?
+      def nsd_name: () -> String?
+      def nsd_version: () -> String?
+      def vnf_pkg_ids: () -> Array[String]?
+      def metadata: () -> Types::GetSolNetworkPackageMetadata?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_sol_network_package: (
+      ?nsd_info_id: String
+    ) -> _GetSolNetworkPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolNetworkPackageResponse
+
+    interface _GetSolNetworkPackageContentResponse
+      include Smithy::Client::_Response[Types::GetSolNetworkPackageContentOutput]
+      def content_type: () -> String?
+      def nsd_content: () -> String?
+    end
+    def get_sol_network_package_content: (
+      ?nsd_info_id: String,
+      ?accept: String
+    ) -> _GetSolNetworkPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolNetworkPackageContentResponse
+
+    interface _GetSolNetworkPackageDescriptorResponse
+      include Smithy::Client::_Response[Types::GetSolNetworkPackageDescriptorOutput]
+      def content_type: () -> String?
+      def nsd: () -> String?
+    end
+    def get_sol_network_package_descriptor: (
+      ?nsd_info_id: String
+    ) -> _GetSolNetworkPackageDescriptorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolNetworkPackageDescriptorResponse
+
+    interface _InstantiateSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Types::InstantiateSolNetworkInstanceOutput]
+      def ns_lcm_op_occ_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def instantiate_sol_network_instance: (
+      ?ns_instance_id: String,
+      ?dry_run: bool,
+      ?additional_params_for_ns: Smithy::Schema::document,
+      ?tags: Hash[String, String]
+    ) -> _InstantiateSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InstantiateSolNetworkInstanceResponse
+
+    interface _ListSolFunctionInstancesResponse
+      include Smithy::Client::_Response[Types::ListSolFunctionInstancesOutput]
+      def next_token: () -> String?
+      def function_instances: () -> Array[Types::ListSolFunctionInstanceInfo]?
+    end
+    def list_sol_function_instances: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSolFunctionInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolFunctionInstancesResponse
+
+    interface _ListSolFunctionPackagesResponse
+      include Smithy::Client::_Response[Types::ListSolFunctionPackagesOutput]
+      def next_token: () -> String?
+      def function_packages: () -> Array[Types::ListSolFunctionPackageInfo]?
+    end
+    def list_sol_function_packages: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSolFunctionPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolFunctionPackagesResponse
+
+    interface _ListSolNetworkInstancesResponse
+      include Smithy::Client::_Response[Types::ListSolNetworkInstancesOutput]
+      def next_token: () -> String?
+      def network_instances: () -> Array[Types::ListSolNetworkInstanceInfo]?
+    end
+    def list_sol_network_instances: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSolNetworkInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolNetworkInstancesResponse
+
+    interface _ListSolNetworkOperationsResponse
+      include Smithy::Client::_Response[Types::ListSolNetworkOperationsOutput]
+      def next_token: () -> String?
+      def network_operations: () -> Array[Types::ListSolNetworkOperationsInfo]?
+    end
+    def list_sol_network_operations: (
+      ?ns_instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSolNetworkOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolNetworkOperationsResponse
+
+    interface _ListSolNetworkPackagesResponse
+      include Smithy::Client::_Response[Types::ListSolNetworkPackagesOutput]
+      def next_token: () -> String?
+      def network_packages: () -> Array[Types::ListSolNetworkPackageInfo]?
+    end
+    def list_sol_network_packages: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSolNetworkPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolNetworkPackagesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutSolFunctionPackageContentResponse
+      include Smithy::Client::_Response[Types::PutSolFunctionPackageContentOutput]
+      def id: () -> String?
+      def vnfd_id: () -> String?
+      def vnf_product_name: () -> String?
+      def vnf_provider: () -> String?
+      def vnfd_version: () -> String?
+      def metadata: () -> Types::PutSolFunctionPackageContentMetadata?
+    end
+    def put_sol_function_package_content: (
+      ?vnf_pkg_id: String,
+      ?content_type: String,
+      ?file: String
+    ) -> _PutSolFunctionPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSolFunctionPackageContentResponse
+
+    interface _PutSolNetworkPackageContentResponse
+      include Smithy::Client::_Response[Types::PutSolNetworkPackageContentOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def nsd_id: () -> String?
+      def nsd_name: () -> String?
+      def nsd_version: () -> String?
+      def vnf_pkg_ids: () -> Array[String]?
+      def metadata: () -> Types::PutSolNetworkPackageContentMetadata?
+    end
+    def put_sol_network_package_content: (
+      ?nsd_info_id: String,
+      ?content_type: String,
+      ?file: String
+    ) -> _PutSolNetworkPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSolNetworkPackageContentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Types::TerminateSolNetworkInstanceOutput]
+      def ns_lcm_op_occ_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def terminate_sol_network_instance: (
+      ?ns_instance_id: String,
+      ?tags: Hash[String, String]
+    ) -> _TerminateSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateSolNetworkInstanceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateSolFunctionPackageResponse
+      include Smithy::Client::_Response[Types::UpdateSolFunctionPackageOutput]
+      def operational_state: () -> String?
+    end
+    def update_sol_function_package: (
+      ?vnf_pkg_id: String,
+      ?operational_state: String
+    ) -> _UpdateSolFunctionPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSolFunctionPackageResponse
+
+    interface _UpdateSolNetworkInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateSolNetworkInstanceOutput]
+      def ns_lcm_op_occ_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_sol_network_instance: (
+      ?ns_instance_id: String,
+      ?update_type: String,
+      ?modify_vnf_info_data: {
+        vnf_instance_id: String,
+        vnf_configurable_properties: Smithy::Schema::document
+      },
+      ?update_ns: {
+        nsd_info_id: String,
+        additional_params_for_ns: Smithy::Schema::document
+      },
+      ?tags: Hash[String, String]
+    ) -> _UpdateSolNetworkInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSolNetworkInstanceResponse
+
+    interface _UpdateSolNetworkPackageResponse
+      include Smithy::Client::_Response[Types::UpdateSolNetworkPackageOutput]
+      def nsd_operational_state: () -> String?
+    end
+    def update_sol_network_package: (
+      ?nsd_info_id: String,
+      ?nsd_operational_state: String
+    ) -> _UpdateSolNetworkPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSolNetworkPackageResponse
+
+    interface _ValidateSolFunctionPackageContentResponse
+      include Smithy::Client::_Response[Types::ValidateSolFunctionPackageContentOutput]
+      def id: () -> String?
+      def vnfd_id: () -> String?
+      def vnf_product_name: () -> String?
+      def vnf_provider: () -> String?
+      def vnfd_version: () -> String?
+      def metadata: () -> Types::ValidateSolFunctionPackageContentMetadata?
+    end
+    def validate_sol_function_package_content: (
+      ?vnf_pkg_id: String,
+      ?content_type: String,
+      ?file: String
+    ) -> _ValidateSolFunctionPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateSolFunctionPackageContentResponse
+
+    interface _ValidateSolNetworkPackageContentResponse
+      include Smithy::Client::_Response[Types::ValidateSolNetworkPackageContentOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def nsd_id: () -> String?
+      def nsd_name: () -> String?
+      def nsd_version: () -> String?
+      def vnf_pkg_ids: () -> Array[String]?
+      def metadata: () -> Types::ValidateSolNetworkPackageContentMetadata?
+    end
+    def validate_sol_network_package_content: (
+      ?nsd_info_id: String,
+      ?content_type: String,
+      ?file: String
+    ) -> _ValidateSolNetworkPackageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateSolNetworkPackageContentResponse
+  end
+end

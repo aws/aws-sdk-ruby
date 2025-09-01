@@ -1,0 +1,2172 @@
+module Aws::Kendra
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Kendra::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateEntitiesToExperienceResponse
+      include Smithy::Client::_Response[Types::AssociateEntitiesToExperienceResponse]
+      def failed_entity_list: () -> Array[Types::FailedEntity]?
+    end
+    def associate_entities_to_experience: (
+      ?id: String,
+      ?index_id: String,
+      ?entity_list: Array[
+        {
+          entity_id: String,
+          entity_type: String
+        }
+      ]
+    ) -> _AssociateEntitiesToExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEntitiesToExperienceResponse
+
+    interface _AssociatePersonasToEntitiesResponse
+      include Smithy::Client::_Response[Types::AssociatePersonasToEntitiesResponse]
+      def failed_entity_list: () -> Array[Types::FailedEntity]?
+    end
+    def associate_personas_to_entities: (
+      ?id: String,
+      ?index_id: String,
+      ?personas: Array[
+        {
+          entity_id: String,
+          persona: String
+        }
+      ]
+    ) -> _AssociatePersonasToEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePersonasToEntitiesResponse
+
+    interface _BatchDeleteDocumentResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDocumentResponse]
+      def failed_documents: () -> Array[Types::BatchDeleteDocumentResponseFailedDocument]?
+    end
+    def batch_delete_document: (
+      ?index_id: String,
+      ?document_id_list: Array[String],
+      ?data_source_sync_job_metric_target: {
+        data_source_id: String,
+        data_source_sync_job_id: String
+      }
+    ) -> _BatchDeleteDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDocumentResponse
+
+    interface _BatchDeleteFeaturedResultsSetResponse
+      include Smithy::Client::_Response[Types::BatchDeleteFeaturedResultsSetResponse]
+      def errors: () -> Array[Types::BatchDeleteFeaturedResultsSetError]?
+    end
+    def batch_delete_featured_results_set: (
+      ?index_id: String,
+      ?featured_results_set_ids: Array[String]
+    ) -> _BatchDeleteFeaturedResultsSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteFeaturedResultsSetResponse
+
+    interface _BatchGetDocumentStatusResponse
+      include Smithy::Client::_Response[Types::BatchGetDocumentStatusResponse]
+      def errors: () -> Array[Types::BatchGetDocumentStatusResponseError]?
+      def document_status_list: () -> Array[Types::Status]?
+    end
+    def batch_get_document_status: (
+      ?index_id: String,
+      ?document_info_list: Array[
+        {
+          document_id: String,
+          attributes: Array[
+            {
+              key: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _BatchGetDocumentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDocumentStatusResponse
+
+    interface _BatchPutDocumentResponse
+      include Smithy::Client::_Response[Types::BatchPutDocumentResponse]
+      def failed_documents: () -> Array[Types::BatchPutDocumentResponseFailedDocument]?
+    end
+    def batch_put_document: (
+      ?index_id: String,
+      ?role_arn: String,
+      ?documents: Array[
+        {
+          id: String,
+          title: String,
+          blob: String,
+          s3_path: {
+            bucket: String,
+            key: String
+          },
+          attributes: Array[
+            {
+              key: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            }
+          ],
+          access_control_list: Array[
+            {
+              name: String,
+              type: String,
+              access: String,
+              data_source_id: String
+            }
+          ],
+          hierarchical_access_control_list: Array[
+            {
+              principal_list: untyped
+            }
+          ],
+          content_type: String,
+          access_control_configuration_id: String
+        }
+      ],
+      ?custom_document_enrichment_configuration: {
+        inline_configurations: Array[
+          {
+            condition: {
+              condition_document_attribute_key: String,
+              operator: String,
+              condition_on_value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            target: {
+              target_document_attribute_key: untyped,
+              target_document_attribute_value_deletion: bool,
+              target_document_attribute_value: untyped
+            },
+            document_content_deletion: untyped
+          }
+        ],
+        pre_extraction_hook_configuration: {
+          invocation_condition: untyped,
+          lambda_arn: String,
+          s3_bucket: String
+        },
+        post_extraction_hook_configuration: untyped,
+        role_arn: String
+      }
+    ) -> _BatchPutDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutDocumentResponse
+
+    interface _ClearQuerySuggestionsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def clear_query_suggestions: (
+      ?index_id: String
+    ) -> _ClearQuerySuggestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ClearQuerySuggestionsResponse
+
+    interface _CreateAccessControlConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateAccessControlConfigurationResponse]
+      def id: () -> String?
+    end
+    def create_access_control_configuration: (
+      ?index_id: String,
+      ?name: String,
+      ?description: String,
+      ?access_control_list: Array[
+        {
+          name: String,
+          type: String,
+          access: String,
+          data_source_id: String
+        }
+      ],
+      ?hierarchical_access_control_list: Array[
+        {
+          principal_list: Array[
+            {
+              name: String,
+              type: String,
+              access: String,
+              data_source_id: String
+            }
+          ]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateAccessControlConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessControlConfigurationResponse
+
+    interface _CreateDataSourceResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceResponse]
+      def id: () -> String?
+    end
+    def create_data_source: (
+      ?name: String,
+      ?index_id: String,
+      ?type: String,
+      ?configuration: {
+        s3_configuration: {
+          bucket_name: String,
+          inclusion_prefixes: Array[String],
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          documents_metadata_configuration: {
+            s3_prefix: String
+          },
+          access_control_list_configuration: {
+            key_path: untyped
+          }
+        },
+        share_point_configuration: {
+          share_point_version: String,
+          urls: Array[String],
+          secret_arn: String,
+          crawl_attachments: bool,
+          use_change_log: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String]
+          },
+          field_mappings: Array[
+            {
+              data_source_field_name: String,
+              date_field_format: String,
+              index_field_name: String
+            }
+          ],
+          document_title_field_name: untyped,
+          disable_local_groups: untyped,
+          ssl_certificate_s3_path: {
+            bucket: untyped,
+            key: untyped
+          },
+          authentication_type: String,
+          proxy_configuration: {
+            host: String,
+            port: Integer,
+            credentials: untyped
+          }
+        },
+        database_configuration: {
+          database_engine_type: String,
+          connection_configuration: {
+            database_host: String,
+            database_port: Integer,
+            database_name: String,
+            table_name: String,
+            secret_arn: untyped
+          },
+          vpc_configuration: untyped,
+          column_configuration: {
+            document_id_column_name: String,
+            document_data_column_name: untyped,
+            document_title_column_name: untyped,
+            field_mappings: untyped,
+            change_detecting_columns: Array[String]
+          },
+          acl_configuration: {
+            allowed_groups_column_name: untyped
+          },
+          sql_configuration: {
+            query_identifiers_enclosing_option: String
+          }
+        },
+        salesforce_configuration: {
+          server_url: String,
+          secret_arn: untyped,
+          standard_object_configurations: Array[
+            {
+              name: String,
+              document_data_field_name: untyped,
+              document_title_field_name: untyped,
+              field_mappings: untyped
+            }
+          ],
+          knowledge_article_configuration: {
+            included_states: Array[String],
+            standard_knowledge_article_type_configuration: {
+              document_data_field_name: untyped,
+              document_title_field_name: untyped,
+              field_mappings: untyped
+            },
+            custom_knowledge_article_type_configurations: Array[
+              {
+                name: String,
+                document_data_field_name: untyped,
+                document_title_field_name: untyped,
+                field_mappings: untyped
+              }
+            ]
+          },
+          chatter_feed_configuration: {
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped,
+            include_filter_types: Array[String]
+          },
+          crawl_attachments: untyped,
+          standard_object_attachment_configuration: {
+            document_title_field_name: untyped,
+            field_mappings: untyped
+          },
+          include_attachment_file_patterns: untyped,
+          exclude_attachment_file_patterns: untyped
+        },
+        one_drive_configuration: {
+          tenant_domain: String,
+          secret_arn: untyped,
+          one_drive_users: {
+            one_drive_user_list: Array[String],
+            one_drive_user_s3_path: untyped
+          },
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped,
+          disable_local_groups: untyped
+        },
+        service_now_configuration: {
+          host_url: String,
+          secret_arn: untyped,
+          service_now_build_version: String,
+          knowledge_article_configuration: {
+            crawl_attachments: untyped,
+            include_attachment_file_patterns: untyped,
+            exclude_attachment_file_patterns: untyped,
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped,
+            filter_query: String
+          },
+          service_catalog_configuration: {
+            crawl_attachments: untyped,
+            include_attachment_file_patterns: untyped,
+            exclude_attachment_file_patterns: untyped,
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped
+          },
+          authentication_type: String
+        },
+        confluence_configuration: {
+          server_url: untyped,
+          secret_arn: untyped,
+          version: String,
+          space_configuration: {
+            crawl_personal_spaces: untyped,
+            crawl_archived_spaces: untyped,
+            include_spaces: Array[String],
+            exclude_spaces: untyped,
+            space_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          page_configuration: {
+            page_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          blog_configuration: {
+            blog_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          attachment_configuration: {
+            crawl_attachments: untyped,
+            attachment_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          vpc_configuration: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          proxy_configuration: untyped,
+          authentication_type: String
+        },
+        google_drive_configuration: {
+          secret_arn: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped,
+          exclude_mime_types: Array[String],
+          exclude_user_accounts: Array[String],
+          exclude_shared_drives: Array[String]
+        },
+        web_crawler_configuration: {
+          urls: {
+            seed_url_configuration: {
+              seed_urls: Array[String],
+              web_crawler_mode: String
+            },
+            site_maps_configuration: {
+              site_maps: Array[String]
+            }
+          },
+          crawl_depth: Integer,
+          max_links_per_page: Integer,
+          max_content_size_per_page_in_mega_bytes: Float,
+          max_urls_per_minute_crawl_rate: Integer,
+          url_inclusion_patterns: untyped,
+          url_exclusion_patterns: untyped,
+          proxy_configuration: untyped,
+          authentication_configuration: {
+            basic_authentication: Array[
+              {
+                host: untyped,
+                port: untyped,
+                credentials: untyped
+              }
+            ]
+          }
+        },
+        work_docs_configuration: {
+          organization_id: String,
+          crawl_comments: untyped,
+          use_change_log: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        fsx_configuration: {
+          file_system_id: String,
+          file_system_type: String,
+          vpc_configuration: untyped,
+          secret_arn: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        slack_configuration: {
+          team_id: String,
+          secret_arn: untyped,
+          vpc_configuration: untyped,
+          slack_entity_list: Array[String],
+          use_change_log: untyped,
+          crawl_bot_message: untyped,
+          exclude_archived: untyped,
+          since_crawl_date: String,
+          look_back_period: Integer,
+          private_channel_filter: Array[String],
+          public_channel_filter: Array[String],
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        box_configuration: {
+          enterprise_id: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          crawl_comments: untyped,
+          crawl_tasks: untyped,
+          crawl_web_links: untyped,
+          file_field_mappings: untyped,
+          task_field_mappings: untyped,
+          comment_field_mappings: untyped,
+          web_link_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        quip_configuration: {
+          domain: String,
+          secret_arn: untyped,
+          crawl_file_comments: untyped,
+          crawl_chat_rooms: untyped,
+          crawl_attachments: untyped,
+          folder_ids: Array[String],
+          thread_field_mappings: untyped,
+          message_field_mappings: untyped,
+          attachment_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        jira_configuration: {
+          jira_account_url: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          project: Array[String],
+          issue_type: Array[String],
+          status: Array[String],
+          issue_sub_entity_filter: Array[String],
+          attachment_field_mappings: untyped,
+          comment_field_mappings: untyped,
+          issue_field_mappings: untyped,
+          project_field_mappings: untyped,
+          work_log_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        git_hub_configuration: {
+          saa_s_configuration: {
+            organization_name: String,
+            host_url: untyped
+          },
+          on_premise_configuration: {
+            host_url: untyped,
+            organization_name: untyped,
+            ssl_certificate_s3_path: untyped
+          },
+          type: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          git_hub_document_crawl_properties: {
+            crawl_repository_documents: untyped,
+            crawl_issue: untyped,
+            crawl_issue_comment: untyped,
+            crawl_issue_comment_attachment: untyped,
+            crawl_pull_request: untyped,
+            crawl_pull_request_comment: untyped,
+            crawl_pull_request_comment_attachment: untyped
+          },
+          repository_filter: Array[String],
+          inclusion_folder_name_patterns: Array[String],
+          inclusion_file_type_patterns: untyped,
+          inclusion_file_name_patterns: untyped,
+          exclusion_folder_name_patterns: untyped,
+          exclusion_file_type_patterns: untyped,
+          exclusion_file_name_patterns: untyped,
+          vpc_configuration: untyped,
+          git_hub_repository_configuration_field_mappings: untyped,
+          git_hub_commit_configuration_field_mappings: untyped,
+          git_hub_issue_document_configuration_field_mappings: untyped,
+          git_hub_issue_comment_configuration_field_mappings: untyped,
+          git_hub_issue_attachment_configuration_field_mappings: untyped,
+          git_hub_pull_request_comment_configuration_field_mappings: untyped,
+          git_hub_pull_request_document_configuration_field_mappings: untyped,
+          git_hub_pull_request_document_attachment_configuration_field_mappings: untyped
+        },
+        alfresco_configuration: {
+          site_url: String,
+          site_id: String,
+          secret_arn: untyped,
+          ssl_certificate_s3_path: untyped,
+          crawl_system_folders: untyped,
+          crawl_comments: untyped,
+          entity_filter: Array[String],
+          document_library_field_mappings: untyped,
+          blog_field_mappings: untyped,
+          wiki_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        template_configuration: {
+          template: Smithy::Schema::document
+        }
+      },
+      ?vpc_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?description: String,
+      ?schedule: String,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?language_code: String,
+      ?custom_document_enrichment_configuration: {
+        inline_configurations: Array[
+          {
+            condition: {
+              condition_document_attribute_key: String,
+              operator: String,
+              condition_on_value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            target: {
+              target_document_attribute_key: untyped,
+              target_document_attribute_value_deletion: bool,
+              target_document_attribute_value: untyped
+            },
+            document_content_deletion: untyped
+          }
+        ],
+        pre_extraction_hook_configuration: {
+          invocation_condition: untyped,
+          lambda_arn: String,
+          s3_bucket: String
+        },
+        post_extraction_hook_configuration: untyped,
+        role_arn: String
+      }
+    ) -> _CreateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceResponse
+
+    interface _CreateExperienceResponse
+      include Smithy::Client::_Response[Types::CreateExperienceResponse]
+      def id: () -> String?
+    end
+    def create_experience: (
+      ?name: String,
+      ?index_id: String,
+      ?role_arn: String,
+      ?configuration: {
+        content_source_configuration: {
+          data_source_ids: Array[String],
+          faq_ids: Array[String],
+          direct_put_content: bool
+        },
+        user_identity_configuration: {
+          identity_attribute_name: String
+        }
+      },
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExperienceResponse
+
+    interface _CreateFaqResponse
+      include Smithy::Client::_Response[Types::CreateFaqResponse]
+      def id: () -> String?
+    end
+    def create_faq: (
+      ?index_id: String,
+      ?name: String,
+      ?description: String,
+      ?s3_path: {
+        bucket: String,
+        key: String
+      },
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_format: String,
+      ?client_token: String,
+      ?language_code: String
+    ) -> _CreateFaqResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFaqResponse
+
+    interface _CreateFeaturedResultsSetResponse
+      include Smithy::Client::_Response[Types::CreateFeaturedResultsSetResponse]
+      def featured_results_set: () -> Types::FeaturedResultsSet?
+    end
+    def create_featured_results_set: (
+      ?index_id: String,
+      ?featured_results_set_name: String,
+      ?description: String,
+      ?client_token: String,
+      ?status: String,
+      ?query_texts: Array[String],
+      ?featured_documents: Array[
+        {
+          id: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFeaturedResultsSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFeaturedResultsSetResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexResponse]
+      def id: () -> String?
+    end
+    def create_index: (
+      ?name: String,
+      ?edition: String,
+      ?role_arn: String,
+      ?server_side_encryption_configuration: {
+        kms_key_id: String
+      },
+      ?description: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?user_token_configurations: Array[
+        {
+          jwt_token_type_configuration: {
+            key_location: String,
+            url: String,
+            secret_manager_arn: String,
+            user_name_attribute_field: String,
+            group_attribute_field: String,
+            issuer: String,
+            claim_regex: String
+          },
+          json_token_type_configuration: {
+            user_name_attribute_field: String,
+            group_attribute_field: untyped
+          }
+        }
+      ],
+      ?user_context_policy: String,
+      ?user_group_resolution_configuration: {
+        user_group_resolution_mode: String
+      }
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
+
+    interface _CreateQuerySuggestionsBlockListResponse
+      include Smithy::Client::_Response[Types::CreateQuerySuggestionsBlockListResponse]
+      def id: () -> String?
+    end
+    def create_query_suggestions_block_list: (
+      ?index_id: String,
+      ?name: String,
+      ?description: String,
+      ?source_s3_path: {
+        bucket: String,
+        key: String
+      },
+      ?client_token: String,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateQuerySuggestionsBlockListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuerySuggestionsBlockListResponse
+
+    interface _CreateThesaurusResponse
+      include Smithy::Client::_Response[Types::CreateThesaurusResponse]
+      def id: () -> String?
+    end
+    def create_thesaurus: (
+      ?index_id: String,
+      ?name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?source_s3_path: {
+        bucket: String,
+        key: String
+      },
+      ?client_token: String
+    ) -> _CreateThesaurusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThesaurusResponse
+
+    interface _DeleteAccessControlConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAccessControlConfigurationResponse]
+    end
+    def delete_access_control_configuration: (
+      ?index_id: String,
+      ?id: String
+    ) -> _DeleteAccessControlConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessControlConfigurationResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_data_source: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteExperienceResponse
+      include Smithy::Client::_Response[Types::DeleteExperienceResponse]
+    end
+    def delete_experience: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DeleteExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExperienceResponse
+
+    interface _DeleteFaqResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_faq: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DeleteFaqResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFaqResponse
+
+    interface _DeleteIndexResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_index: (
+      ?id: String
+    ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
+    interface _DeletePrincipalMappingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_principal_mapping: (
+      ?index_id: String,
+      ?data_source_id: String,
+      ?group_id: String,
+      ?ordering_id: Integer
+    ) -> _DeletePrincipalMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrincipalMappingResponse
+
+    interface _DeleteQuerySuggestionsBlockListResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_query_suggestions_block_list: (
+      ?index_id: String,
+      ?id: String
+    ) -> _DeleteQuerySuggestionsBlockListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQuerySuggestionsBlockListResponse
+
+    interface _DeleteThesaurusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_thesaurus: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DeleteThesaurusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThesaurusResponse
+
+    interface _DescribeAccessControlConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeAccessControlConfigurationResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def error_message: () -> String?
+      def access_control_list: () -> Array[Types::Principal]?
+      def hierarchical_access_control_list: () -> Array[Types::HierarchicalPrincipal]?
+    end
+    def describe_access_control_configuration: (
+      ?index_id: String,
+      ?id: String
+    ) -> _DescribeAccessControlConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccessControlConfigurationResponse
+
+    interface _DescribeDataSourceResponse
+      include Smithy::Client::_Response[Types::DescribeDataSourceResponse]
+      def id: () -> String?
+      def index_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def configuration: () -> Types::DataSourceConfiguration?
+      def vpc_configuration: () -> Types::DataSourceVpcConfiguration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def description: () -> String?
+      def status: () -> String?
+      def schedule: () -> String?
+      def role_arn: () -> String?
+      def error_message: () -> String?
+      def language_code: () -> String?
+      def custom_document_enrichment_configuration: () -> Types::CustomDocumentEnrichmentConfiguration?
+    end
+    def describe_data_source: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DescribeDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataSourceResponse
+
+    interface _DescribeExperienceResponse
+      include Smithy::Client::_Response[Types::DescribeExperienceResponse]
+      def id: () -> String?
+      def index_id: () -> String?
+      def name: () -> String?
+      def endpoints: () -> Array[Types::ExperienceEndpoint]?
+      def configuration: () -> Types::ExperienceConfiguration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def description: () -> String?
+      def status: () -> String?
+      def role_arn: () -> String?
+      def error_message: () -> String?
+    end
+    def describe_experience: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DescribeExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExperienceResponse
+
+    interface _DescribeFaqResponse
+      include Smithy::Client::_Response[Types::DescribeFaqResponse]
+      def id: () -> String?
+      def index_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def s3_path: () -> Types::S3Path?
+      def status: () -> String?
+      def role_arn: () -> String?
+      def error_message: () -> String?
+      def file_format: () -> String?
+      def language_code: () -> String?
+    end
+    def describe_faq: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DescribeFaqResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFaqResponse
+
+    interface _DescribeFeaturedResultsSetResponse
+      include Smithy::Client::_Response[Types::DescribeFeaturedResultsSetResponse]
+      def featured_results_set_id: () -> String?
+      def featured_results_set_name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def query_texts: () -> Array[String]?
+      def featured_documents_with_metadata: () -> Array[Types::FeaturedDocumentWithMetadata]?
+      def featured_documents_missing: () -> Array[Types::FeaturedDocumentMissing]?
+      def last_updated_timestamp: () -> Integer?
+      def creation_timestamp: () -> Integer?
+    end
+    def describe_featured_results_set: (
+      ?index_id: String,
+      ?featured_results_set_id: String
+    ) -> _DescribeFeaturedResultsSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFeaturedResultsSetResponse
+
+    interface _DescribeIndexResponse
+      include Smithy::Client::_Response[Types::DescribeIndexResponse]
+      def name: () -> String?
+      def id: () -> String?
+      def edition: () -> String?
+      def role_arn: () -> String?
+      def server_side_encryption_configuration: () -> Types::ServerSideEncryptionConfiguration?
+      def status: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def document_metadata_configurations: () -> Array[Types::DocumentMetadataConfiguration]?
+      def index_statistics: () -> Types::IndexStatistics?
+      def error_message: () -> String?
+      def capacity_units: () -> Types::CapacityUnitsConfiguration?
+      def user_token_configurations: () -> Array[Types::UserTokenConfiguration]?
+      def user_context_policy: () -> String?
+      def user_group_resolution_configuration: () -> Types::UserGroupResolutionConfiguration?
+    end
+    def describe_index: (
+      ?id: String
+    ) -> _DescribeIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIndexResponse
+
+    interface _DescribePrincipalMappingResponse
+      include Smithy::Client::_Response[Types::DescribePrincipalMappingResponse]
+      def index_id: () -> String?
+      def data_source_id: () -> String?
+      def group_id: () -> String?
+      def group_ordering_id_summaries: () -> Array[Types::GroupOrderingIdSummary]?
+    end
+    def describe_principal_mapping: (
+      ?index_id: String,
+      ?data_source_id: String,
+      ?group_id: String
+    ) -> _DescribePrincipalMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePrincipalMappingResponse
+
+    interface _DescribeQuerySuggestionsBlockListResponse
+      include Smithy::Client::_Response[Types::DescribeQuerySuggestionsBlockListResponse]
+      def index_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def error_message: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def source_s3_path: () -> Types::S3Path?
+      def item_count: () -> Integer?
+      def file_size_bytes: () -> Integer?
+      def role_arn: () -> String?
+    end
+    def describe_query_suggestions_block_list: (
+      ?index_id: String,
+      ?id: String
+    ) -> _DescribeQuerySuggestionsBlockListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQuerySuggestionsBlockListResponse
+
+    interface _DescribeQuerySuggestionsConfigResponse
+      include Smithy::Client::_Response[Types::DescribeQuerySuggestionsConfigResponse]
+      def mode: () -> String?
+      def status: () -> String?
+      def query_log_look_back_window_in_days: () -> Integer?
+      def include_queries_without_user_information: () -> bool?
+      def minimum_number_of_querying_users: () -> Integer?
+      def minimum_query_count: () -> Integer?
+      def last_suggestions_build_time: () -> Time?
+      def last_clear_time: () -> Time?
+      def total_suggestions_count: () -> Integer?
+      def attribute_suggestions_config: () -> Types::AttributeSuggestionsDescribeConfig?
+    end
+    def describe_query_suggestions_config: (
+      ?index_id: String
+    ) -> _DescribeQuerySuggestionsConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQuerySuggestionsConfigResponse
+
+    interface _DescribeThesaurusResponse
+      include Smithy::Client::_Response[Types::DescribeThesaurusResponse]
+      def id: () -> String?
+      def index_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def error_message: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def role_arn: () -> String?
+      def source_s3_path: () -> Types::S3Path?
+      def file_size_bytes: () -> Integer?
+      def term_count: () -> Integer?
+      def synonym_rule_count: () -> Integer?
+    end
+    def describe_thesaurus: (
+      ?id: String,
+      ?index_id: String
+    ) -> _DescribeThesaurusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeThesaurusResponse
+
+    interface _DisassociateEntitiesFromExperienceResponse
+      include Smithy::Client::_Response[Types::DisassociateEntitiesFromExperienceResponse]
+      def failed_entity_list: () -> Array[Types::FailedEntity]?
+    end
+    def disassociate_entities_from_experience: (
+      ?id: String,
+      ?index_id: String,
+      ?entity_list: Array[
+        {
+          entity_id: String,
+          entity_type: String
+        }
+      ]
+    ) -> _DisassociateEntitiesFromExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEntitiesFromExperienceResponse
+
+    interface _DisassociatePersonasFromEntitiesResponse
+      include Smithy::Client::_Response[Types::DisassociatePersonasFromEntitiesResponse]
+      def failed_entity_list: () -> Array[Types::FailedEntity]?
+    end
+    def disassociate_personas_from_entities: (
+      ?id: String,
+      ?index_id: String,
+      ?entity_ids: Array[String]
+    ) -> _DisassociatePersonasFromEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePersonasFromEntitiesResponse
+
+    interface _GetQuerySuggestionsResponse
+      include Smithy::Client::_Response[Types::GetQuerySuggestionsResponse]
+      def query_suggestions_id: () -> String?
+      def suggestions: () -> Array[Types::Suggestion]?
+    end
+    def get_query_suggestions: (
+      ?index_id: String,
+      ?query_text: String,
+      ?max_suggestions_count: Integer,
+      ?suggestion_types: Array[String],
+      ?attribute_suggestions_config: {
+        suggestion_attributes: Array[String],
+        additional_response_attributes: untyped,
+        attribute_filter: {
+          and_all_filters: Array[
+            {
+              and_all_filters: untyped,
+              or_all_filters: untyped,
+              not_filter: untyped,
+              equals_to: {
+                key: String,
+                value: {
+                  string_value: String,
+                  string_list_value: Array[String],
+                  long_value: Integer,
+                  date_value: Time
+                }
+              },
+              contains_all: untyped,
+              contains_any: untyped,
+              greater_than: untyped,
+              greater_than_or_equals: untyped,
+              less_than: untyped,
+              less_than_or_equals: untyped
+            }
+          ],
+          or_all_filters: untyped,
+          not_filter: untyped,
+          equals_to: untyped,
+          contains_all: untyped,
+          contains_any: untyped,
+          greater_than: untyped,
+          greater_than_or_equals: untyped,
+          less_than: untyped,
+          less_than_or_equals: untyped
+        },
+        user_context: {
+          token: String,
+          user_id: String,
+          groups: Array[String],
+          data_source_groups: Array[
+            {
+              group_id: untyped,
+              data_source_id: String
+            }
+          ]
+        }
+      }
+    ) -> _GetQuerySuggestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQuerySuggestionsResponse
+
+    interface _GetSnapshotsResponse
+      include Smithy::Client::_Response[Types::GetSnapshotsResponse]
+      def snap_shot_time_filter: () -> Types::TimeRange?
+      def snapshots_data_header: () -> Array[String]?
+      def snapshots_data: () -> Array[Array[String]]?
+      def next_token: () -> String?
+    end
+    def get_snapshots: (
+      ?index_id: String,
+      ?interval: String,
+      ?metric_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSnapshotsResponse
+
+    interface _ListAccessControlConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListAccessControlConfigurationsResponse]
+      def next_token: () -> String?
+      def access_control_configurations: () -> Array[Types::AccessControlConfigurationSummary]?
+    end
+    def list_access_control_configurations: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessControlConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessControlConfigurationsResponse
+
+    interface _ListDataSourceSyncJobsResponse
+      include Smithy::Client::_Response[Types::ListDataSourceSyncJobsResponse]
+      def history: () -> Array[Types::DataSourceSyncJob]?
+      def next_token: () -> String?
+    end
+    def list_data_source_sync_jobs: (
+      ?id: String,
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?start_time_filter: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?status_filter: String
+    ) -> _ListDataSourceSyncJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourceSyncJobsResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesResponse]
+      def summary_items: () -> Array[Types::DataSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_sources: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListEntityPersonasResponse
+      include Smithy::Client::_Response[Types::ListEntityPersonasResponse]
+      def summary_items: () -> Array[Types::PersonasSummary]?
+      def next_token: () -> String?
+    end
+    def list_entity_personas: (
+      ?id: String,
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntityPersonasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntityPersonasResponse
+
+    interface _ListExperienceEntitiesResponse
+      include Smithy::Client::_Response[Types::ListExperienceEntitiesResponse]
+      def summary_items: () -> Array[Types::ExperienceEntitiesSummary]?
+      def next_token: () -> String?
+    end
+    def list_experience_entities: (
+      ?id: String,
+      ?index_id: String,
+      ?next_token: String
+    ) -> _ListExperienceEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperienceEntitiesResponse
+
+    interface _ListExperiencesResponse
+      include Smithy::Client::_Response[Types::ListExperiencesResponse]
+      def summary_items: () -> Array[Types::ExperiencesSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiences: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListExperiencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperiencesResponse
+
+    interface _ListFaqsResponse
+      include Smithy::Client::_Response[Types::ListFaqsResponse]
+      def next_token: () -> String?
+      def faq_summary_items: () -> Array[Types::FaqSummary]?
+    end
+    def list_faqs: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFaqsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFaqsResponse
+
+    interface _ListFeaturedResultsSetsResponse
+      include Smithy::Client::_Response[Types::ListFeaturedResultsSetsResponse]
+      def featured_results_set_summary_items: () -> Array[Types::FeaturedResultsSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_featured_results_sets: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFeaturedResultsSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFeaturedResultsSetsResponse
+
+    interface _ListGroupsOlderThanOrderingIdResponse
+      include Smithy::Client::_Response[Types::ListGroupsOlderThanOrderingIdResponse]
+      def groups_summaries: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_groups_older_than_ordering_id: (
+      ?index_id: String,
+      ?data_source_id: String,
+      ?ordering_id: Integer,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsOlderThanOrderingIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsOlderThanOrderingIdResponse
+
+    interface _ListIndicesResponse
+      include Smithy::Client::_Response[Types::ListIndicesResponse]
+      def index_configuration_summary_items: () -> Array[Types::IndexConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_indices: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIndicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndicesResponse
+
+    interface _ListQuerySuggestionsBlockListsResponse
+      include Smithy::Client::_Response[Types::ListQuerySuggestionsBlockListsResponse]
+      def block_list_summary_items: () -> Array[Types::QuerySuggestionsBlockListSummary]?
+      def next_token: () -> String?
+    end
+    def list_query_suggestions_block_lists: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQuerySuggestionsBlockListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuerySuggestionsBlockListsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListThesauriResponse
+      include Smithy::Client::_Response[Types::ListThesauriResponse]
+      def next_token: () -> String?
+      def thesaurus_summary_items: () -> Array[Types::ThesaurusSummary]?
+    end
+    def list_thesauri: (
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListThesauriResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThesauriResponse
+
+    interface _PutPrincipalMappingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_principal_mapping: (
+      ?index_id: String,
+      ?data_source_id: String,
+      ?group_id: String,
+      ?group_members: {
+        member_groups: Array[
+          {
+            group_id: String,
+            data_source_id: String
+          }
+        ],
+        member_users: Array[
+          {
+            user_id: String
+          }
+        ],
+        s3_pathfor_group_members: {
+          bucket: String,
+          key: String
+        }
+      },
+      ?ordering_id: Integer,
+      ?role_arn: String
+    ) -> _PutPrincipalMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPrincipalMappingResponse
+
+    interface _QueryResponse
+      include Smithy::Client::_Response[Types::QueryResult]
+      def query_id: () -> String?
+      def result_items: () -> Array[Types::QueryResultItem]?
+      def facet_results: () -> Array[Types::FacetResult]?
+      def total_number_of_results: () -> Integer?
+      def warnings: () -> Array[Types::Warning]?
+      def spell_corrected_queries: () -> Array[Types::SpellCorrectedQuery]?
+      def featured_results_items: () -> Array[Types::FeaturedResultsItem]?
+    end
+    def query: (
+      ?index_id: String,
+      ?query_text: String,
+      ?attribute_filter: {
+        and_all_filters: Array[
+          {
+            and_all_filters: untyped,
+            or_all_filters: untyped,
+            not_filter: untyped,
+            equals_to: {
+              key: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            contains_all: untyped,
+            contains_any: untyped,
+            greater_than: untyped,
+            greater_than_or_equals: untyped,
+            less_than: untyped,
+            less_than_or_equals: untyped
+          }
+        ],
+        or_all_filters: untyped,
+        not_filter: untyped,
+        equals_to: untyped,
+        contains_all: untyped,
+        contains_any: untyped,
+        greater_than: untyped,
+        greater_than_or_equals: untyped,
+        less_than: untyped,
+        less_than_or_equals: untyped
+      },
+      ?facets: Array[
+        {
+          document_attribute_key: String,
+          facets: untyped,
+          max_results: Integer
+        }
+      ],
+      ?requested_document_attributes: Array[String],
+      ?query_result_type_filter: String,
+      ?document_relevance_override_configurations: Array[
+        {
+          name: String,
+          relevance: {
+            freshness: bool,
+            importance: Integer,
+            duration: String,
+            rank_order: String,
+            value_importance_map: Hash[String, Integer]
+          }
+        }
+      ],
+      ?page_number: Integer,
+      ?page_size: Integer,
+      ?sorting_configuration: {
+        document_attribute_key: String,
+        sort_order: String
+      },
+      ?sorting_configurations: Array[
+        {
+          document_attribute_key: String,
+          sort_order: String
+        }
+      ],
+      ?user_context: {
+        token: String,
+        user_id: String,
+        groups: Array[String],
+        data_source_groups: Array[
+          {
+            group_id: untyped,
+            data_source_id: String
+          }
+        ]
+      },
+      ?visitor_id: String,
+      ?spell_correction_configuration: {
+        include_query_spell_check_suggestions: bool
+      },
+      ?collapse_configuration: {
+        document_attribute_key: String,
+        sorting_configurations: Array[
+          {
+            document_attribute_key: untyped,
+            sort_order: String
+          }
+        ],
+        missing_attribute_key_strategy: String,
+        expand: bool,
+        expand_configuration: {
+          max_result_items_to_expand: Integer,
+          max_expanded_results_per_item: untyped
+        }
+      }
+    ) -> _QueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryResponse
+
+    interface _RetrieveResponse
+      include Smithy::Client::_Response[Types::RetrieveResult]
+      def query_id: () -> String?
+      def result_items: () -> Array[Types::RetrieveResultItem]?
+    end
+    def retrieve: (
+      ?index_id: String,
+      ?query_text: String,
+      ?attribute_filter: {
+        and_all_filters: Array[
+          {
+            and_all_filters: untyped,
+            or_all_filters: untyped,
+            not_filter: untyped,
+            equals_to: {
+              key: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            contains_all: untyped,
+            contains_any: untyped,
+            greater_than: untyped,
+            greater_than_or_equals: untyped,
+            less_than: untyped,
+            less_than_or_equals: untyped
+          }
+        ],
+        or_all_filters: untyped,
+        not_filter: untyped,
+        equals_to: untyped,
+        contains_all: untyped,
+        contains_any: untyped,
+        greater_than: untyped,
+        greater_than_or_equals: untyped,
+        less_than: untyped,
+        less_than_or_equals: untyped
+      },
+      ?requested_document_attributes: Array[String],
+      ?document_relevance_override_configurations: Array[
+        {
+          name: String,
+          relevance: {
+            freshness: bool,
+            importance: Integer,
+            duration: String,
+            rank_order: String,
+            value_importance_map: Hash[String, Integer]
+          }
+        }
+      ],
+      ?page_number: Integer,
+      ?page_size: Integer,
+      ?user_context: {
+        token: String,
+        user_id: String,
+        groups: Array[String],
+        data_source_groups: Array[
+          {
+            group_id: untyped,
+            data_source_id: String
+          }
+        ]
+      }
+    ) -> _RetrieveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveResponse
+
+    interface _StartDataSourceSyncJobResponse
+      include Smithy::Client::_Response[Types::StartDataSourceSyncJobResponse]
+      def execution_id: () -> String?
+    end
+    def start_data_source_sync_job: (
+      ?id: String,
+      ?index_id: String
+    ) -> _StartDataSourceSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataSourceSyncJobResponse
+
+    interface _StopDataSourceSyncJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_data_source_sync_job: (
+      ?id: String,
+      ?index_id: String
+    ) -> _StopDataSourceSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDataSourceSyncJobResponse
+
+    interface _SubmitFeedbackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def submit_feedback: (
+      ?index_id: String,
+      ?query_id: String,
+      ?click_feedback_items: Array[
+        {
+          result_id: String,
+          click_time: Time
+        }
+      ],
+      ?relevance_feedback_items: Array[
+        {
+          result_id: String,
+          relevance_value: String
+        }
+      ]
+    ) -> _SubmitFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitFeedbackResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessControlConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAccessControlConfigurationResponse]
+    end
+    def update_access_control_configuration: (
+      ?index_id: String,
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?access_control_list: Array[
+        {
+          name: String,
+          type: String,
+          access: String,
+          data_source_id: String
+        }
+      ],
+      ?hierarchical_access_control_list: Array[
+        {
+          principal_list: Array[
+            {
+              name: String,
+              type: String,
+              access: String,
+              data_source_id: String
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateAccessControlConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessControlConfigurationResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_data_source: (
+      ?id: String,
+      ?name: String,
+      ?index_id: String,
+      ?configuration: {
+        s3_configuration: {
+          bucket_name: String,
+          inclusion_prefixes: Array[String],
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          documents_metadata_configuration: {
+            s3_prefix: String
+          },
+          access_control_list_configuration: {
+            key_path: untyped
+          }
+        },
+        share_point_configuration: {
+          share_point_version: String,
+          urls: Array[String],
+          secret_arn: String,
+          crawl_attachments: bool,
+          use_change_log: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String]
+          },
+          field_mappings: Array[
+            {
+              data_source_field_name: String,
+              date_field_format: String,
+              index_field_name: String
+            }
+          ],
+          document_title_field_name: untyped,
+          disable_local_groups: untyped,
+          ssl_certificate_s3_path: {
+            bucket: untyped,
+            key: untyped
+          },
+          authentication_type: String,
+          proxy_configuration: {
+            host: String,
+            port: Integer,
+            credentials: untyped
+          }
+        },
+        database_configuration: {
+          database_engine_type: String,
+          connection_configuration: {
+            database_host: String,
+            database_port: Integer,
+            database_name: String,
+            table_name: String,
+            secret_arn: untyped
+          },
+          vpc_configuration: untyped,
+          column_configuration: {
+            document_id_column_name: String,
+            document_data_column_name: untyped,
+            document_title_column_name: untyped,
+            field_mappings: untyped,
+            change_detecting_columns: Array[String]
+          },
+          acl_configuration: {
+            allowed_groups_column_name: untyped
+          },
+          sql_configuration: {
+            query_identifiers_enclosing_option: String
+          }
+        },
+        salesforce_configuration: {
+          server_url: String,
+          secret_arn: untyped,
+          standard_object_configurations: Array[
+            {
+              name: String,
+              document_data_field_name: untyped,
+              document_title_field_name: untyped,
+              field_mappings: untyped
+            }
+          ],
+          knowledge_article_configuration: {
+            included_states: Array[String],
+            standard_knowledge_article_type_configuration: {
+              document_data_field_name: untyped,
+              document_title_field_name: untyped,
+              field_mappings: untyped
+            },
+            custom_knowledge_article_type_configurations: Array[
+              {
+                name: String,
+                document_data_field_name: untyped,
+                document_title_field_name: untyped,
+                field_mappings: untyped
+              }
+            ]
+          },
+          chatter_feed_configuration: {
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped,
+            include_filter_types: Array[String]
+          },
+          crawl_attachments: untyped,
+          standard_object_attachment_configuration: {
+            document_title_field_name: untyped,
+            field_mappings: untyped
+          },
+          include_attachment_file_patterns: untyped,
+          exclude_attachment_file_patterns: untyped
+        },
+        one_drive_configuration: {
+          tenant_domain: String,
+          secret_arn: untyped,
+          one_drive_users: {
+            one_drive_user_list: Array[String],
+            one_drive_user_s3_path: untyped
+          },
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped,
+          disable_local_groups: untyped
+        },
+        service_now_configuration: {
+          host_url: String,
+          secret_arn: untyped,
+          service_now_build_version: String,
+          knowledge_article_configuration: {
+            crawl_attachments: untyped,
+            include_attachment_file_patterns: untyped,
+            exclude_attachment_file_patterns: untyped,
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped,
+            filter_query: String
+          },
+          service_catalog_configuration: {
+            crawl_attachments: untyped,
+            include_attachment_file_patterns: untyped,
+            exclude_attachment_file_patterns: untyped,
+            document_data_field_name: untyped,
+            document_title_field_name: untyped,
+            field_mappings: untyped
+          },
+          authentication_type: String
+        },
+        confluence_configuration: {
+          server_url: untyped,
+          secret_arn: untyped,
+          version: String,
+          space_configuration: {
+            crawl_personal_spaces: untyped,
+            crawl_archived_spaces: untyped,
+            include_spaces: Array[String],
+            exclude_spaces: untyped,
+            space_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          page_configuration: {
+            page_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          blog_configuration: {
+            blog_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          attachment_configuration: {
+            crawl_attachments: untyped,
+            attachment_field_mappings: Array[
+              {
+                data_source_field_name: String,
+                date_field_format: untyped,
+                index_field_name: untyped
+              }
+            ]
+          },
+          vpc_configuration: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          proxy_configuration: untyped,
+          authentication_type: String
+        },
+        google_drive_configuration: {
+          secret_arn: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped,
+          exclude_mime_types: Array[String],
+          exclude_user_accounts: Array[String],
+          exclude_shared_drives: Array[String]
+        },
+        web_crawler_configuration: {
+          urls: {
+            seed_url_configuration: {
+              seed_urls: Array[String],
+              web_crawler_mode: String
+            },
+            site_maps_configuration: {
+              site_maps: Array[String]
+            }
+          },
+          crawl_depth: Integer,
+          max_links_per_page: Integer,
+          max_content_size_per_page_in_mega_bytes: Float,
+          max_urls_per_minute_crawl_rate: Integer,
+          url_inclusion_patterns: untyped,
+          url_exclusion_patterns: untyped,
+          proxy_configuration: untyped,
+          authentication_configuration: {
+            basic_authentication: Array[
+              {
+                host: untyped,
+                port: untyped,
+                credentials: untyped
+              }
+            ]
+          }
+        },
+        work_docs_configuration: {
+          organization_id: String,
+          crawl_comments: untyped,
+          use_change_log: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        fsx_configuration: {
+          file_system_id: String,
+          file_system_type: String,
+          vpc_configuration: untyped,
+          secret_arn: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        slack_configuration: {
+          team_id: String,
+          secret_arn: untyped,
+          vpc_configuration: untyped,
+          slack_entity_list: Array[String],
+          use_change_log: untyped,
+          crawl_bot_message: untyped,
+          exclude_archived: untyped,
+          since_crawl_date: String,
+          look_back_period: Integer,
+          private_channel_filter: Array[String],
+          public_channel_filter: Array[String],
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          field_mappings: untyped
+        },
+        box_configuration: {
+          enterprise_id: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          crawl_comments: untyped,
+          crawl_tasks: untyped,
+          crawl_web_links: untyped,
+          file_field_mappings: untyped,
+          task_field_mappings: untyped,
+          comment_field_mappings: untyped,
+          web_link_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        quip_configuration: {
+          domain: String,
+          secret_arn: untyped,
+          crawl_file_comments: untyped,
+          crawl_chat_rooms: untyped,
+          crawl_attachments: untyped,
+          folder_ids: Array[String],
+          thread_field_mappings: untyped,
+          message_field_mappings: untyped,
+          attachment_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        jira_configuration: {
+          jira_account_url: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          project: Array[String],
+          issue_type: Array[String],
+          status: Array[String],
+          issue_sub_entity_filter: Array[String],
+          attachment_field_mappings: untyped,
+          comment_field_mappings: untyped,
+          issue_field_mappings: untyped,
+          project_field_mappings: untyped,
+          work_log_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        git_hub_configuration: {
+          saa_s_configuration: {
+            organization_name: String,
+            host_url: untyped
+          },
+          on_premise_configuration: {
+            host_url: untyped,
+            organization_name: untyped,
+            ssl_certificate_s3_path: untyped
+          },
+          type: String,
+          secret_arn: untyped,
+          use_change_log: untyped,
+          git_hub_document_crawl_properties: {
+            crawl_repository_documents: untyped,
+            crawl_issue: untyped,
+            crawl_issue_comment: untyped,
+            crawl_issue_comment_attachment: untyped,
+            crawl_pull_request: untyped,
+            crawl_pull_request_comment: untyped,
+            crawl_pull_request_comment_attachment: untyped
+          },
+          repository_filter: Array[String],
+          inclusion_folder_name_patterns: Array[String],
+          inclusion_file_type_patterns: untyped,
+          inclusion_file_name_patterns: untyped,
+          exclusion_folder_name_patterns: untyped,
+          exclusion_file_type_patterns: untyped,
+          exclusion_file_name_patterns: untyped,
+          vpc_configuration: untyped,
+          git_hub_repository_configuration_field_mappings: untyped,
+          git_hub_commit_configuration_field_mappings: untyped,
+          git_hub_issue_document_configuration_field_mappings: untyped,
+          git_hub_issue_comment_configuration_field_mappings: untyped,
+          git_hub_issue_attachment_configuration_field_mappings: untyped,
+          git_hub_pull_request_comment_configuration_field_mappings: untyped,
+          git_hub_pull_request_document_configuration_field_mappings: untyped,
+          git_hub_pull_request_document_attachment_configuration_field_mappings: untyped
+        },
+        alfresco_configuration: {
+          site_url: String,
+          site_id: String,
+          secret_arn: untyped,
+          ssl_certificate_s3_path: untyped,
+          crawl_system_folders: untyped,
+          crawl_comments: untyped,
+          entity_filter: Array[String],
+          document_library_field_mappings: untyped,
+          blog_field_mappings: untyped,
+          wiki_field_mappings: untyped,
+          inclusion_patterns: untyped,
+          exclusion_patterns: untyped,
+          vpc_configuration: untyped
+        },
+        template_configuration: {
+          template: Smithy::Schema::document
+        }
+      },
+      ?vpc_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?description: String,
+      ?schedule: String,
+      ?role_arn: String,
+      ?language_code: String,
+      ?custom_document_enrichment_configuration: {
+        inline_configurations: Array[
+          {
+            condition: {
+              condition_document_attribute_key: String,
+              operator: String,
+              condition_on_value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            target: {
+              target_document_attribute_key: untyped,
+              target_document_attribute_value_deletion: bool,
+              target_document_attribute_value: untyped
+            },
+            document_content_deletion: untyped
+          }
+        ],
+        pre_extraction_hook_configuration: {
+          invocation_condition: untyped,
+          lambda_arn: String,
+          s3_bucket: String
+        },
+        post_extraction_hook_configuration: untyped,
+        role_arn: String
+      }
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateExperienceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_experience: (
+      ?id: String,
+      ?name: String,
+      ?index_id: String,
+      ?role_arn: String,
+      ?configuration: {
+        content_source_configuration: {
+          data_source_ids: Array[String],
+          faq_ids: Array[String],
+          direct_put_content: bool
+        },
+        user_identity_configuration: {
+          identity_attribute_name: String
+        }
+      },
+      ?description: String
+    ) -> _UpdateExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExperienceResponse
+
+    interface _UpdateFeaturedResultsSetResponse
+      include Smithy::Client::_Response[Types::UpdateFeaturedResultsSetResponse]
+      def featured_results_set: () -> Types::FeaturedResultsSet?
+    end
+    def update_featured_results_set: (
+      ?index_id: String,
+      ?featured_results_set_id: String,
+      ?featured_results_set_name: String,
+      ?description: String,
+      ?status: String,
+      ?query_texts: Array[String],
+      ?featured_documents: Array[
+        {
+          id: String
+        }
+      ]
+    ) -> _UpdateFeaturedResultsSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFeaturedResultsSetResponse
+
+    interface _UpdateIndexResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_index: (
+      ?id: String,
+      ?name: String,
+      ?role_arn: String,
+      ?description: String,
+      ?document_metadata_configuration_updates: Array[
+        {
+          name: String,
+          type: String,
+          relevance: {
+            freshness: bool,
+            importance: Integer,
+            duration: String,
+            rank_order: String,
+            value_importance_map: Hash[String, Integer]
+          },
+          search: {
+            facetable: bool,
+            searchable: untyped,
+            displayable: untyped,
+            sortable: untyped
+          }
+        }
+      ],
+      ?capacity_units: {
+        storage_capacity_units: Integer,
+        query_capacity_units: Integer
+      },
+      ?user_token_configurations: Array[
+        {
+          jwt_token_type_configuration: {
+            key_location: String,
+            url: String,
+            secret_manager_arn: String,
+            user_name_attribute_field: String,
+            group_attribute_field: String,
+            issuer: String,
+            claim_regex: String
+          },
+          json_token_type_configuration: {
+            user_name_attribute_field: String,
+            group_attribute_field: untyped
+          }
+        }
+      ],
+      ?user_context_policy: String,
+      ?user_group_resolution_configuration: {
+        user_group_resolution_mode: String
+      }
+    ) -> _UpdateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexResponse
+
+    interface _UpdateQuerySuggestionsBlockListResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_query_suggestions_block_list: (
+      ?index_id: String,
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?source_s3_path: {
+        bucket: String,
+        key: String
+      },
+      ?role_arn: String
+    ) -> _UpdateQuerySuggestionsBlockListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuerySuggestionsBlockListResponse
+
+    interface _UpdateQuerySuggestionsConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_query_suggestions_config: (
+      ?index_id: String,
+      ?mode: String,
+      ?query_log_look_back_window_in_days: Integer,
+      ?include_queries_without_user_information: bool,
+      ?minimum_number_of_querying_users: Integer,
+      ?minimum_query_count: Integer,
+      ?attribute_suggestions_config: {
+        suggestable_config_list: Array[
+          {
+            attribute_name: String,
+            suggestable: bool
+          }
+        ],
+        attribute_suggestions_mode: String
+      }
+    ) -> _UpdateQuerySuggestionsConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuerySuggestionsConfigResponse
+
+    interface _UpdateThesaurusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_thesaurus: (
+      ?id: String,
+      ?name: String,
+      ?index_id: String,
+      ?description: String,
+      ?role_arn: String,
+      ?source_s3_path: {
+        bucket: String,
+        key: String
+      }
+    ) -> _UpdateThesaurusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThesaurusResponse
+  end
+end

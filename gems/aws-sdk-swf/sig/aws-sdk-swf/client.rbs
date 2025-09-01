@@ -1,0 +1,685 @@
+module Aws::SWF
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SWF::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CountClosedWorkflowExecutionsResponse
+      include Smithy::Client::_Response[Types::CountClosedWorkflowExecutionsOutput]
+      def count: () -> Integer?
+      def truncated: () -> bool?
+    end
+    def count_closed_workflow_executions: (
+      ?domain: String,
+      ?start_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?close_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?execution_filter: {
+        workflow_id: String
+      },
+      ?type_filter: {
+        name: String,
+        version: String
+      },
+      ?tag_filter: {
+        tag: String
+      },
+      ?close_status_filter: {
+        status: String
+      }
+    ) -> _CountClosedWorkflowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountClosedWorkflowExecutionsResponse
+
+    interface _CountOpenWorkflowExecutionsResponse
+      include Smithy::Client::_Response[Types::CountOpenWorkflowExecutionsOutput]
+      def count: () -> Integer?
+      def truncated: () -> bool?
+    end
+    def count_open_workflow_executions: (
+      ?domain: String,
+      ?start_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?type_filter: {
+        name: String,
+        version: String
+      },
+      ?tag_filter: {
+        tag: String
+      },
+      ?execution_filter: {
+        workflow_id: String
+      }
+    ) -> _CountOpenWorkflowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountOpenWorkflowExecutionsResponse
+
+    interface _CountPendingActivityTasksResponse
+      include Smithy::Client::_Response[Types::CountPendingActivityTasksOutput]
+      def count: () -> Integer?
+      def truncated: () -> bool?
+    end
+    def count_pending_activity_tasks: (
+      ?domain: String,
+      ?task_list: {
+        name: String
+      }
+    ) -> _CountPendingActivityTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountPendingActivityTasksResponse
+
+    interface _CountPendingDecisionTasksResponse
+      include Smithy::Client::_Response[Types::CountPendingDecisionTasksOutput]
+      def count: () -> Integer?
+      def truncated: () -> bool?
+    end
+    def count_pending_decision_tasks: (
+      ?domain: String,
+      ?task_list: {
+        name: String
+      }
+    ) -> _CountPendingDecisionTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountPendingDecisionTasksResponse
+
+    interface _DeleteActivityTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_activity_type: (
+      ?domain: String,
+      ?activity_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DeleteActivityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteActivityTypeResponse
+
+    interface _DeleteWorkflowTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workflow_type: (
+      ?domain: String,
+      ?workflow_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DeleteWorkflowTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowTypeResponse
+
+    interface _DeprecateActivityTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deprecate_activity_type: (
+      ?domain: String,
+      ?activity_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DeprecateActivityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateActivityTypeResponse
+
+    interface _DeprecateDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deprecate_domain: (
+      ?name: String
+    ) -> _DeprecateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateDomainResponse
+
+    interface _DeprecateWorkflowTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deprecate_workflow_type: (
+      ?domain: String,
+      ?workflow_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DeprecateWorkflowTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateWorkflowTypeResponse
+
+    interface _DescribeActivityTypeResponse
+      include Smithy::Client::_Response[Types::DescribeActivityTypeOutput]
+      def type_info: () -> Types::ActivityTypeInfo?
+      def configuration: () -> Types::ActivityTypeConfiguration?
+    end
+    def describe_activity_type: (
+      ?domain: String,
+      ?activity_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DescribeActivityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActivityTypeResponse
+
+    interface _DescribeDomainResponse
+      include Smithy::Client::_Response[Types::DescribeDomainOutput]
+      def domain_info: () -> Types::DomainInfo?
+      def configuration: () -> Types::DomainConfiguration?
+    end
+    def describe_domain: (
+      ?name: String
+    ) -> _DescribeDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainResponse
+
+    interface _DescribeWorkflowExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeWorkflowExecutionOutput]
+      def execution_info: () -> Types::WorkflowExecutionInfo?
+      def execution_configuration: () -> Types::WorkflowExecutionConfiguration?
+      def open_counts: () -> Types::WorkflowExecutionOpenCounts?
+      def latest_activity_task_timestamp: () -> Time?
+      def latest_execution_context: () -> String?
+    end
+    def describe_workflow_execution: (
+      ?domain: String,
+      ?execution: {
+        workflow_id: String,
+        run_id: String
+      }
+    ) -> _DescribeWorkflowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkflowExecutionResponse
+
+    interface _DescribeWorkflowTypeResponse
+      include Smithy::Client::_Response[Types::DescribeWorkflowTypeOutput]
+      def type_info: () -> Types::WorkflowTypeInfo?
+      def configuration: () -> Types::WorkflowTypeConfiguration?
+    end
+    def describe_workflow_type: (
+      ?domain: String,
+      ?workflow_type: {
+        name: String,
+        version: String
+      }
+    ) -> _DescribeWorkflowTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkflowTypeResponse
+
+    interface _GetWorkflowExecutionHistoryResponse
+      include Smithy::Client::_Response[Types::GetWorkflowExecutionHistoryOutput]
+      def events: () -> Array[Types::HistoryEvent]?
+      def next_page_token: () -> String?
+    end
+    def get_workflow_execution_history: (
+      ?domain: String,
+      ?execution: {
+        workflow_id: String,
+        run_id: String
+      },
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool
+    ) -> _GetWorkflowExecutionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowExecutionHistoryResponse
+
+    interface _ListActivityTypesResponse
+      include Smithy::Client::_Response[Types::ListActivityTypesOutput]
+      def type_infos: () -> Array[Types::ActivityTypeInfo]?
+      def next_page_token: () -> String?
+    end
+    def list_activity_types: (
+      ?domain: String,
+      ?name: String,
+      ?registration_status: String,
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool
+    ) -> _ListActivityTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActivityTypesResponse
+
+    interface _ListClosedWorkflowExecutionsResponse
+      include Smithy::Client::_Response[Types::ListClosedWorkflowExecutionsOutput]
+      def execution_infos: () -> Array[Types::WorkflowExecutionInfo]?
+      def next_page_token: () -> String?
+    end
+    def list_closed_workflow_executions: (
+      ?domain: String,
+      ?start_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?close_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?execution_filter: {
+        workflow_id: String
+      },
+      ?close_status_filter: {
+        status: String
+      },
+      ?type_filter: {
+        name: String,
+        version: String
+      },
+      ?tag_filter: {
+        tag: String
+      },
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool
+    ) -> _ListClosedWorkflowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClosedWorkflowExecutionsResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def domain_infos: () -> Array[Types::DomainInfo]?
+      def next_page_token: () -> String?
+    end
+    def list_domains: (
+      ?next_page_token: String,
+      ?registration_status: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListOpenWorkflowExecutionsResponse
+      include Smithy::Client::_Response[Types::ListOpenWorkflowExecutionsOutput]
+      def execution_infos: () -> Array[Types::WorkflowExecutionInfo]?
+      def next_page_token: () -> String?
+    end
+    def list_open_workflow_executions: (
+      ?domain: String,
+      ?start_time_filter: {
+        oldest_date: Time,
+        latest_date: untyped
+      },
+      ?type_filter: {
+        name: String,
+        version: String
+      },
+      ?tag_filter: {
+        tag: String
+      },
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool,
+      ?execution_filter: {
+        workflow_id: String
+      }
+    ) -> _ListOpenWorkflowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpenWorkflowExecutionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::ResourceTag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkflowTypesResponse
+      include Smithy::Client::_Response[Types::ListWorkflowTypesOutput]
+      def type_infos: () -> Array[Types::WorkflowTypeInfo]?
+      def next_page_token: () -> String?
+    end
+    def list_workflow_types: (
+      ?domain: String,
+      ?name: String,
+      ?registration_status: String,
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool
+    ) -> _ListWorkflowTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowTypesResponse
+
+    interface _PollForActivityTaskResponse
+      include Smithy::Client::_Response[Types::PollForActivityTaskOutput]
+      def task_token: () -> String?
+      def activity_id: () -> String?
+      def started_event_id: () -> Integer?
+      def workflow_execution: () -> Types::WorkflowExecution?
+      def activity_type: () -> Types::ActivityType?
+      def input: () -> String?
+    end
+    def poll_for_activity_task: (
+      ?domain: String,
+      ?task_list: {
+        name: String
+      },
+      ?identity: String
+    ) -> _PollForActivityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PollForActivityTaskResponse
+
+    interface _PollForDecisionTaskResponse
+      include Smithy::Client::_Response[Types::PollForDecisionTaskOutput]
+      def task_token: () -> String?
+      def started_event_id: () -> Integer?
+      def workflow_execution: () -> Types::WorkflowExecution?
+      def workflow_type: () -> Types::WorkflowType?
+      def events: () -> Array[Types::HistoryEvent]?
+      def next_page_token: () -> String?
+      def previous_started_event_id: () -> Integer?
+    end
+    def poll_for_decision_task: (
+      ?domain: String,
+      ?task_list: {
+        name: String
+      },
+      ?identity: String,
+      ?next_page_token: String,
+      ?maximum_page_size: Integer,
+      ?reverse_order: bool,
+      ?start_at_previous_started_event: bool
+    ) -> _PollForDecisionTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PollForDecisionTaskResponse
+
+    interface _RecordActivityTaskHeartbeatResponse
+      include Smithy::Client::_Response[Types::RecordActivityTaskHeartbeatOutput]
+      def cancel_requested: () -> bool?
+    end
+    def record_activity_task_heartbeat: (
+      ?task_token: String,
+      ?details: String
+    ) -> _RecordActivityTaskHeartbeatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecordActivityTaskHeartbeatResponse
+
+    interface _RegisterActivityTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_activity_type: (
+      ?domain: String,
+      ?name: String,
+      ?version: String,
+      ?description: String,
+      ?default_task_start_to_close_timeout: String,
+      ?default_task_heartbeat_timeout: String,
+      ?default_task_list: {
+        name: String
+      },
+      ?default_task_priority: String,
+      ?default_task_schedule_to_start_timeout: String,
+      ?default_task_schedule_to_close_timeout: String
+    ) -> _RegisterActivityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterActivityTypeResponse
+
+    interface _RegisterDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_domain: (
+      ?name: String,
+      ?description: String,
+      ?workflow_execution_retention_period_in_days: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _RegisterDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDomainResponse
+
+    interface _RegisterWorkflowTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_workflow_type: (
+      ?domain: String,
+      ?name: String,
+      ?version: String,
+      ?description: String,
+      ?default_task_start_to_close_timeout: String,
+      ?default_execution_start_to_close_timeout: String,
+      ?default_task_list: {
+        name: String
+      },
+      ?default_task_priority: String,
+      ?default_child_policy: String,
+      ?default_lambda_role: String
+    ) -> _RegisterWorkflowTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterWorkflowTypeResponse
+
+    interface _RequestCancelWorkflowExecutionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def request_cancel_workflow_execution: (
+      ?domain: String,
+      ?workflow_id: String,
+      ?run_id: String
+    ) -> _RequestCancelWorkflowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RequestCancelWorkflowExecutionResponse
+
+    interface _RespondActivityTaskCanceledResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def respond_activity_task_canceled: (
+      ?task_token: String,
+      ?details: String
+    ) -> _RespondActivityTaskCanceledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RespondActivityTaskCanceledResponse
+
+    interface _RespondActivityTaskCompletedResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def respond_activity_task_completed: (
+      ?task_token: String,
+      ?result: String
+    ) -> _RespondActivityTaskCompletedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RespondActivityTaskCompletedResponse
+
+    interface _RespondActivityTaskFailedResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def respond_activity_task_failed: (
+      ?task_token: String,
+      ?reason: String,
+      ?details: String
+    ) -> _RespondActivityTaskFailedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RespondActivityTaskFailedResponse
+
+    interface _RespondDecisionTaskCompletedResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def respond_decision_task_completed: (
+      ?task_token: String,
+      ?decisions: Array[
+        {
+          decision_type: String,
+          schedule_activity_task_decision_attributes: {
+            activity_type: {
+              name: String,
+              version: String
+            },
+            activity_id: String,
+            control: String,
+            input: untyped,
+            schedule_to_close_timeout: String,
+            task_list: {
+              name: untyped
+            },
+            task_priority: String,
+            schedule_to_start_timeout: untyped,
+            start_to_close_timeout: untyped,
+            heartbeat_timeout: untyped
+          },
+          request_cancel_activity_task_decision_attributes: {
+            activity_id: untyped
+          },
+          complete_workflow_execution_decision_attributes: {
+            result: untyped
+          },
+          fail_workflow_execution_decision_attributes: {
+            reason: String,
+            details: untyped
+          },
+          cancel_workflow_execution_decision_attributes: {
+            details: untyped
+          },
+          continue_as_new_workflow_execution_decision_attributes: {
+            input: untyped,
+            execution_start_to_close_timeout: untyped,
+            task_list: untyped,
+            task_priority: untyped,
+            task_start_to_close_timeout: untyped,
+            child_policy: String,
+            tag_list: Array[String],
+            workflow_type_version: untyped,
+            lambda_role: String
+          },
+          record_marker_decision_attributes: {
+            marker_name: String,
+            details: untyped
+          },
+          start_timer_decision_attributes: {
+            timer_id: String,
+            control: untyped,
+            start_to_fire_timeout: String
+          },
+          cancel_timer_decision_attributes: {
+            timer_id: untyped
+          },
+          signal_external_workflow_execution_decision_attributes: {
+            workflow_id: String,
+            run_id: String,
+            signal_name: String,
+            input: untyped,
+            control: untyped
+          },
+          request_cancel_external_workflow_execution_decision_attributes: {
+            workflow_id: untyped,
+            run_id: untyped,
+            control: untyped
+          },
+          start_child_workflow_execution_decision_attributes: {
+            workflow_type: {
+              name: untyped,
+              version: untyped
+            },
+            workflow_id: untyped,
+            control: untyped,
+            input: untyped,
+            execution_start_to_close_timeout: untyped,
+            task_list: untyped,
+            task_priority: untyped,
+            task_start_to_close_timeout: untyped,
+            child_policy: untyped,
+            tag_list: untyped,
+            lambda_role: untyped
+          },
+          schedule_lambda_function_decision_attributes: {
+            id: String,
+            name: String,
+            control: untyped,
+            input: String,
+            start_to_close_timeout: untyped
+          }
+        }
+      ],
+      ?execution_context: String,
+      ?task_list: {
+        name: String
+      },
+      ?task_list_schedule_to_start_timeout: String
+    ) -> _RespondDecisionTaskCompletedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RespondDecisionTaskCompletedResponse
+
+    interface _SignalWorkflowExecutionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def signal_workflow_execution: (
+      ?domain: String,
+      ?workflow_id: String,
+      ?run_id: String,
+      ?signal_name: String,
+      ?input: String
+    ) -> _SignalWorkflowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignalWorkflowExecutionResponse
+
+    interface _StartWorkflowExecutionResponse
+      include Smithy::Client::_Response[Types::StartWorkflowExecutionOutput]
+      def run_id: () -> String?
+    end
+    def start_workflow_execution: (
+      ?domain: String,
+      ?workflow_id: String,
+      ?workflow_type: {
+        name: String,
+        version: String
+      },
+      ?task_list: {
+        name: String
+      },
+      ?task_priority: String,
+      ?input: String,
+      ?execution_start_to_close_timeout: String,
+      ?tag_list: Array[String],
+      ?task_start_to_close_timeout: String,
+      ?child_policy: String,
+      ?lambda_role: String
+    ) -> _StartWorkflowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkflowExecutionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateWorkflowExecutionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def terminate_workflow_execution: (
+      ?domain: String,
+      ?workflow_id: String,
+      ?run_id: String,
+      ?reason: String,
+      ?details: String,
+      ?child_policy: String
+    ) -> _TerminateWorkflowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateWorkflowExecutionResponse
+
+    interface _UndeprecateActivityTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def undeprecate_activity_type: (
+      ?domain: String,
+      ?activity_type: {
+        name: String,
+        version: String
+      }
+    ) -> _UndeprecateActivityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UndeprecateActivityTypeResponse
+
+    interface _UndeprecateDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def undeprecate_domain: (
+      ?name: String
+    ) -> _UndeprecateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UndeprecateDomainResponse
+
+    interface _UndeprecateWorkflowTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def undeprecate_workflow_type: (
+      ?domain: String,
+      ?workflow_type: {
+        name: String,
+        version: String
+      }
+    ) -> _UndeprecateWorkflowTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UndeprecateWorkflowTypeResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

@@ -1,0 +1,430 @@
+module Aws::BedrockDataAutomation
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BedrockDataAutomation::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBlueprintResponse
+      include Smithy::Client::_Response[Types::CreateBlueprintResponse]
+      def blueprint: () -> Types::Blueprint?
+    end
+    def create_blueprint: (
+      ?blueprint_name: String,
+      ?type: String,
+      ?blueprint_stage: String,
+      ?schema: String,
+      ?client_token: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBlueprintResponse
+
+    interface _CreateBlueprintVersionResponse
+      include Smithy::Client::_Response[Types::CreateBlueprintVersionResponse]
+      def blueprint: () -> Types::Blueprint?
+    end
+    def create_blueprint_version: (
+      ?blueprint_arn: String,
+      ?client_token: String
+    ) -> _CreateBlueprintVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBlueprintVersionResponse
+
+    interface _CreateDataAutomationProjectResponse
+      include Smithy::Client::_Response[Types::CreateDataAutomationProjectResponse]
+      def project_arn: () -> String?
+      def project_stage: () -> String?
+      def status: () -> String?
+    end
+    def create_data_automation_project: (
+      ?project_name: String,
+      ?project_description: String,
+      ?project_stage: String,
+      ?standard_output_configuration: {
+        document: {
+          extraction: {
+            granularity: {
+              types: Array[String]
+            },
+            bounding_box: {
+              state: String
+            }
+          },
+          generative_field: {
+            state: untyped
+          },
+          output_format: {
+            text_format: {
+              types: Array[String]
+            },
+            additional_file_format: {
+              state: untyped
+            }
+          }
+        },
+        image: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            },
+            bounding_box: {
+              state: untyped
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        },
+        video: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            },
+            bounding_box: {
+              state: untyped
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        },
+        audio: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        }
+      },
+      ?custom_output_configuration: {
+        blueprints: Array[
+          {
+            blueprint_arn: String,
+            blueprint_version: String,
+            blueprint_stage: String
+          }
+        ]
+      },
+      ?override_configuration: {
+        document: {
+          splitter: {
+            state: String
+          },
+          modality_processing: {
+            state: untyped
+          }
+        },
+        image: {
+          modality_processing: untyped
+        },
+        video: {
+          modality_processing: untyped
+        },
+        audio: {
+          modality_processing: untyped
+        },
+        modality_routing: {
+          jpeg: String,
+          png: untyped,
+          mp4: untyped,
+          mov: untyped
+        }
+      },
+      ?client_token: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataAutomationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataAutomationProjectResponse
+
+    interface _DeleteBlueprintResponse
+      include Smithy::Client::_Response[Types::DeleteBlueprintResponse]
+    end
+    def delete_blueprint: (
+      ?blueprint_arn: String,
+      ?blueprint_version: String
+    ) -> _DeleteBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBlueprintResponse
+
+    interface _DeleteDataAutomationProjectResponse
+      include Smithy::Client::_Response[Types::DeleteDataAutomationProjectResponse]
+      def project_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_data_automation_project: (
+      ?project_arn: String
+    ) -> _DeleteDataAutomationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataAutomationProjectResponse
+
+    interface _GetBlueprintResponse
+      include Smithy::Client::_Response[Types::GetBlueprintResponse]
+      def blueprint: () -> Types::Blueprint?
+    end
+    def get_blueprint: (
+      ?blueprint_arn: String,
+      ?blueprint_version: String,
+      ?blueprint_stage: String
+    ) -> _GetBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlueprintResponse
+
+    interface _GetDataAutomationProjectResponse
+      include Smithy::Client::_Response[Types::GetDataAutomationProjectResponse]
+      def project: () -> Types::DataAutomationProject?
+    end
+    def get_data_automation_project: (
+      ?project_arn: String,
+      ?project_stage: String
+    ) -> _GetDataAutomationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationProjectResponse
+
+    interface _ListBlueprintsResponse
+      include Smithy::Client::_Response[Types::ListBlueprintsResponse]
+      def blueprints: () -> Array[Types::BlueprintSummary]?
+      def next_token: () -> String?
+    end
+    def list_blueprints: (
+      ?blueprint_arn: String,
+      ?resource_owner: String,
+      ?blueprint_stage_filter: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?project_filter: {
+        project_arn: String,
+        project_stage: String
+      }
+    ) -> _ListBlueprintsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBlueprintsResponse
+
+    interface _ListDataAutomationProjectsResponse
+      include Smithy::Client::_Response[Types::ListDataAutomationProjectsResponse]
+      def projects: () -> Array[Types::DataAutomationProjectSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_automation_projects: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?project_stage_filter: String,
+      ?blueprint_filter: {
+        blueprint_arn: String,
+        blueprint_version: String,
+        blueprint_stage: String
+      },
+      ?resource_owner: String
+    ) -> _ListDataAutomationProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAutomationProjectsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBlueprintResponse
+      include Smithy::Client::_Response[Types::UpdateBlueprintResponse]
+      def blueprint: () -> Types::Blueprint?
+    end
+    def update_blueprint: (
+      ?blueprint_arn: String,
+      ?schema: String,
+      ?blueprint_stage: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      }
+    ) -> _UpdateBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBlueprintResponse
+
+    interface _UpdateDataAutomationProjectResponse
+      include Smithy::Client::_Response[Types::UpdateDataAutomationProjectResponse]
+      def project_arn: () -> String?
+      def project_stage: () -> String?
+      def status: () -> String?
+    end
+    def update_data_automation_project: (
+      ?project_arn: String,
+      ?project_stage: String,
+      ?project_description: String,
+      ?standard_output_configuration: {
+        document: {
+          extraction: {
+            granularity: {
+              types: Array[String]
+            },
+            bounding_box: {
+              state: String
+            }
+          },
+          generative_field: {
+            state: untyped
+          },
+          output_format: {
+            text_format: {
+              types: Array[String]
+            },
+            additional_file_format: {
+              state: untyped
+            }
+          }
+        },
+        image: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            },
+            bounding_box: {
+              state: untyped
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        },
+        video: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            },
+            bounding_box: {
+              state: untyped
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        },
+        audio: {
+          extraction: {
+            category: {
+              state: untyped,
+              types: Array[String]
+            }
+          },
+          generative_field: {
+            state: untyped,
+            types: Array[String]
+          }
+        }
+      },
+      ?custom_output_configuration: {
+        blueprints: Array[
+          {
+            blueprint_arn: String,
+            blueprint_version: String,
+            blueprint_stage: String
+          }
+        ]
+      },
+      ?override_configuration: {
+        document: {
+          splitter: {
+            state: String
+          },
+          modality_processing: {
+            state: untyped
+          }
+        },
+        image: {
+          modality_processing: untyped
+        },
+        video: {
+          modality_processing: untyped
+        },
+        audio: {
+          modality_processing: untyped
+        },
+        modality_routing: {
+          jpeg: String,
+          png: untyped,
+          mp4: untyped,
+          mov: untyped
+        }
+      },
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      }
+    ) -> _UpdateDataAutomationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataAutomationProjectResponse
+  end
+end

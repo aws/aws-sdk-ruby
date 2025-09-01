@@ -1,0 +1,16 @@
+module Aws::CloudHSM
+  module Errors
+    class CloudHsmInternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable: () -> bool?
+    end
+    class CloudHsmServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable: () -> bool?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable: () -> bool?
+    end
+  end
+end

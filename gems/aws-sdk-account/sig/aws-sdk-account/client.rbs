@@ -1,0 +1,190 @@
+module Aws::Account
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Account::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptPrimaryEmailUpdateResponse
+      include Smithy::Client::_Response[Types::AcceptPrimaryEmailUpdateResponse]
+      def status: () -> String?
+    end
+    def accept_primary_email_update: (
+      ?account_id: String,
+      ?primary_email: String,
+      ?otp: String
+    ) -> _AcceptPrimaryEmailUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptPrimaryEmailUpdateResponse
+
+    interface _DeleteAlternateContactResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alternate_contact: (
+      ?alternate_contact_type: String,
+      ?account_id: String
+    ) -> _DeleteAlternateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlternateContactResponse
+
+    interface _DisableRegionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_region: (
+      ?account_id: String,
+      ?region_name: String
+    ) -> _DisableRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableRegionResponse
+
+    interface _EnableRegionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_region: (
+      ?account_id: String,
+      ?region_name: String
+    ) -> _EnableRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableRegionResponse
+
+    interface _GetAccountInformationResponse
+      include Smithy::Client::_Response[Types::GetAccountInformationResponse]
+      def account_id: () -> String?
+      def account_name: () -> String?
+      def account_created_date: () -> Time?
+    end
+    def get_account_information: (
+      ?account_id: String
+    ) -> _GetAccountInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountInformationResponse
+
+    interface _GetAlternateContactResponse
+      include Smithy::Client::_Response[Types::GetAlternateContactResponse]
+      def alternate_contact: () -> Types::AlternateContact?
+    end
+    def get_alternate_contact: (
+      ?alternate_contact_type: String,
+      ?account_id: String
+    ) -> _GetAlternateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAlternateContactResponse
+
+    interface _GetContactInformationResponse
+      include Smithy::Client::_Response[Types::GetContactInformationResponse]
+      def contact_information: () -> Types::ContactInformation?
+    end
+    def get_contact_information: (
+      ?account_id: String
+    ) -> _GetContactInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactInformationResponse
+
+    interface _GetPrimaryEmailResponse
+      include Smithy::Client::_Response[Types::GetPrimaryEmailResponse]
+      def primary_email: () -> String?
+    end
+    def get_primary_email: (
+      ?account_id: String
+    ) -> _GetPrimaryEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrimaryEmailResponse
+
+    interface _GetRegionOptStatusResponse
+      include Smithy::Client::_Response[Types::GetRegionOptStatusResponse]
+      def region_name: () -> String?
+      def region_opt_status: () -> String?
+    end
+    def get_region_opt_status: (
+      ?account_id: String,
+      ?region_name: String
+    ) -> _GetRegionOptStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegionOptStatusResponse
+
+    interface _ListRegionsResponse
+      include Smithy::Client::_Response[Types::ListRegionsResponse]
+      def next_token: () -> String?
+      def regions: () -> Array[Types::Region]?
+    end
+    def list_regions: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?region_opt_status_contains: Array[String]
+    ) -> _ListRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegionsResponse
+
+    interface _PutAccountNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_account_name: (
+      ?account_name: String,
+      ?account_id: String
+    ) -> _PutAccountNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountNameResponse
+
+    interface _PutAlternateContactResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_alternate_contact: (
+      ?name: String,
+      ?title: String,
+      ?email_address: String,
+      ?phone_number: String,
+      ?alternate_contact_type: String,
+      ?account_id: String
+    ) -> _PutAlternateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlternateContactResponse
+
+    interface _PutContactInformationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_contact_information: (
+      ?contact_information: {
+        full_name: String,
+        address_line1: String,
+        address_line2: untyped,
+        address_line3: untyped,
+        city: String,
+        state_or_region: String,
+        district_or_county: String,
+        postal_code: String,
+        country_code: String,
+        phone_number: String,
+        company_name: String,
+        website_url: String
+      },
+      ?account_id: String
+    ) -> _PutContactInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutContactInformationResponse
+
+    interface _StartPrimaryEmailUpdateResponse
+      include Smithy::Client::_Response[Types::StartPrimaryEmailUpdateResponse]
+      def status: () -> String?
+    end
+    def start_primary_email_update: (
+      ?account_id: String,
+      ?primary_email: String
+    ) -> _StartPrimaryEmailUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPrimaryEmailUpdateResponse
+  end
+end

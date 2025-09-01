@@ -1,0 +1,48 @@
+module Aws::IoTFleetHub
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ApplicationState: EnumShape
+    ApplicationSummaries: ListShape
+    ApplicationSummary: StructureShape
+    Arn: StringShape
+    ClientRequestToken: StringShape
+    ConflictException: StructureShape
+    CreateApplicationRequest: StructureShape
+    CreateApplicationResponse: StructureShape
+    DeleteApplicationRequest: StructureShape
+    DeleteApplicationResponse: StructureShape
+    DescribeApplicationRequest: StructureShape
+    DescribeApplicationResponse: StructureShape
+    Description: StringShape
+    ErrorMessage: StringShape
+    Id: StringShape
+    InternalFailureException: StructureShape
+    InvalidRequestException: StructureShape
+    LimitExceededException: StructureShape
+    ListApplicationsRequest: StructureShape
+    ListApplicationsResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    Name: StringShape
+    NextToken: StringShape
+    ResourceArn: StringShape
+    ResourceNotFoundException: StructureShape
+    SsoClientId: StringShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagMap: MapShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: IntegerShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateApplicationRequest: StructureShape
+    UpdateApplicationResponse: StructureShape
+    Url: StringShape
+
+    AWSIoTFleetHub: ServiceShape
+  end
+end

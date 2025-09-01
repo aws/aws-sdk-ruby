@@ -1,0 +1,767 @@
+module Aws::CloudWatch
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudWatch::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteAlarmsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alarms: (
+      ?alarm_names: Array[String]
+    ) -> _DeleteAlarmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlarmsResponse
+
+    interface _DeleteAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::DeleteAnomalyDetectorOutput]
+    end
+    def delete_anomaly_detector: (
+      ?namespace: String,
+      ?metric_name: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?stat: String,
+      ?single_metric_anomaly_detector: {
+        account_id: String,
+        namespace: String,
+        metric_name: String,
+        dimensions: Array[
+          {
+            name: String,
+            value: String
+          }
+        ],
+        stat: String
+      },
+      ?metric_math_anomaly_detector: {
+        metric_data_queries: Array[
+          {
+            id: String,
+            metric_stat: {
+              metric: {
+                namespace: String,
+                metric_name: String,
+                dimensions: Array[
+                  {
+                    name: String,
+                    value: String
+                  }
+                ]
+              },
+              period: Integer,
+              stat: String,
+              unit: String
+            },
+            expression: String,
+            label: String,
+            return_data: bool,
+            period: untyped,
+            account_id: String
+          }
+        ]
+      }
+    ) -> _DeleteAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnomalyDetectorResponse
+
+    interface _DeleteDashboardsResponse
+      include Smithy::Client::_Response[Types::DeleteDashboardsOutput]
+    end
+    def delete_dashboards: (
+      ?dashboard_names: Array[String]
+    ) -> _DeleteDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDashboardsResponse
+
+    interface _DeleteInsightRulesResponse
+      include Smithy::Client::_Response[Types::DeleteInsightRulesOutput]
+      def failures: () -> Array[Types::PartialFailure]?
+    end
+    def delete_insight_rules: (
+      ?rule_names: Array[String]
+    ) -> _DeleteInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInsightRulesResponse
+
+    interface _DeleteMetricStreamResponse
+      include Smithy::Client::_Response[Types::DeleteMetricStreamOutput]
+    end
+    def delete_metric_stream: (
+      ?name: String
+    ) -> _DeleteMetricStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricStreamResponse
+
+    interface _DescribeAlarmHistoryResponse
+      include Smithy::Client::_Response[Types::DescribeAlarmHistoryOutput]
+      def alarm_history_items: () -> Array[Types::AlarmHistoryItem]?
+      def next_token: () -> String?
+    end
+    def describe_alarm_history: (
+      ?alarm_name: String,
+      ?alarm_types: Array[String],
+      ?history_item_type: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?max_records: Integer,
+      ?next_token: String,
+      ?scan_by: String
+    ) -> _DescribeAlarmHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlarmHistoryResponse
+
+    interface _DescribeAlarmsResponse
+      include Smithy::Client::_Response[Types::DescribeAlarmsOutput]
+      def composite_alarms: () -> Array[Types::CompositeAlarm]?
+      def metric_alarms: () -> Array[Types::MetricAlarm]?
+      def next_token: () -> String?
+    end
+    def describe_alarms: (
+      ?alarm_names: Array[String],
+      ?alarm_name_prefix: String,
+      ?alarm_types: Array[String],
+      ?children_of_alarm_name: String,
+      ?parents_of_alarm_name: String,
+      ?state_value: String,
+      ?action_prefix: String,
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeAlarmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlarmsResponse
+
+    interface _DescribeAlarmsForMetricResponse
+      include Smithy::Client::_Response[Types::DescribeAlarmsForMetricOutput]
+      def metric_alarms: () -> Array[Types::MetricAlarm]?
+    end
+    def describe_alarms_for_metric: (
+      ?metric_name: String,
+      ?namespace: String,
+      ?statistic: String,
+      ?extended_statistic: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?period: Integer,
+      ?unit: String
+    ) -> _DescribeAlarmsForMetricResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlarmsForMetricResponse
+
+    interface _DescribeAnomalyDetectorsResponse
+      include Smithy::Client::_Response[Types::DescribeAnomalyDetectorsOutput]
+      def anomaly_detectors: () -> Array[Types::AnomalyDetector]?
+      def next_token: () -> String?
+    end
+    def describe_anomaly_detectors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace: String,
+      ?metric_name: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?anomaly_detector_types: Array[String]
+    ) -> _DescribeAnomalyDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnomalyDetectorsResponse
+
+    interface _DescribeInsightRulesResponse
+      include Smithy::Client::_Response[Types::DescribeInsightRulesOutput]
+      def next_token: () -> String?
+      def insight_rules: () -> Array[Types::InsightRule]?
+    end
+    def describe_insight_rules: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightRulesResponse
+
+    interface _DisableAlarmActionsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_alarm_actions: (
+      ?alarm_names: Array[String]
+    ) -> _DisableAlarmActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAlarmActionsResponse
+
+    interface _DisableInsightRulesResponse
+      include Smithy::Client::_Response[Types::DisableInsightRulesOutput]
+      def failures: () -> Array[Types::PartialFailure]?
+    end
+    def disable_insight_rules: (
+      ?rule_names: Array[String]
+    ) -> _DisableInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableInsightRulesResponse
+
+    interface _EnableAlarmActionsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_alarm_actions: (
+      ?alarm_names: Array[String]
+    ) -> _EnableAlarmActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAlarmActionsResponse
+
+    interface _EnableInsightRulesResponse
+      include Smithy::Client::_Response[Types::EnableInsightRulesOutput]
+      def failures: () -> Array[Types::PartialFailure]?
+    end
+    def enable_insight_rules: (
+      ?rule_names: Array[String]
+    ) -> _EnableInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableInsightRulesResponse
+
+    interface _GetDashboardResponse
+      include Smithy::Client::_Response[Types::GetDashboardOutput]
+      def dashboard_arn: () -> String?
+      def dashboard_body: () -> String?
+      def dashboard_name: () -> String?
+    end
+    def get_dashboard: (
+      ?dashboard_name: String
+    ) -> _GetDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDashboardResponse
+
+    interface _GetInsightRuleReportResponse
+      include Smithy::Client::_Response[Types::GetInsightRuleReportOutput]
+      def key_labels: () -> Array[String]?
+      def aggregation_statistic: () -> String?
+      def aggregate_value: () -> Float?
+      def approximate_unique_count: () -> Integer?
+      def contributors: () -> Array[Types::InsightRuleContributor]?
+      def metric_datapoints: () -> Array[Types::InsightRuleMetricDatapoint]?
+    end
+    def get_insight_rule_report: (
+      ?rule_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?max_contributor_count: Integer,
+      ?metrics: Array[String],
+      ?order_by: String
+    ) -> _GetInsightRuleReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightRuleReportResponse
+
+    interface _GetMetricDataResponse
+      include Smithy::Client::_Response[Types::GetMetricDataOutput]
+      def metric_data_results: () -> Array[Types::MetricDataResult]?
+      def next_token: () -> String?
+      def messages: () -> Array[Types::MessageData]?
+    end
+    def get_metric_data: (
+      ?metric_data_queries: Array[
+        {
+          id: String,
+          metric_stat: {
+            metric: {
+              namespace: String,
+              metric_name: String,
+              dimensions: Array[
+                {
+                  name: String,
+                  value: String
+                }
+              ]
+            },
+            period: Integer,
+            stat: String,
+            unit: String
+          },
+          expression: String,
+          label: String,
+          return_data: bool,
+          period: untyped,
+          account_id: String
+        }
+      ],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?scan_by: String,
+      ?max_datapoints: Integer,
+      ?label_options: {
+        timezone: String
+      }
+    ) -> _GetMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricDataResponse
+
+    interface _GetMetricStatisticsResponse
+      include Smithy::Client::_Response[Types::GetMetricStatisticsOutput]
+      def label: () -> String?
+      def datapoints: () -> Array[Types::Datapoint]?
+    end
+    def get_metric_statistics: (
+      ?namespace: String,
+      ?metric_name: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?statistics: Array[String],
+      ?extended_statistics: Array[String],
+      ?unit: String
+    ) -> _GetMetricStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricStatisticsResponse
+
+    interface _GetMetricStreamResponse
+      include Smithy::Client::_Response[Types::GetMetricStreamOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def include_filters: () -> Array[Types::MetricStreamFilter]?
+      def exclude_filters: () -> Array[Types::MetricStreamFilter]?
+      def firehose_arn: () -> String?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def creation_date: () -> Time?
+      def last_update_date: () -> Time?
+      def output_format: () -> String?
+      def statistics_configurations: () -> Array[Types::MetricStreamStatisticsConfiguration]?
+      def include_linked_accounts_metrics: () -> bool?
+    end
+    def get_metric_stream: (
+      ?name: String
+    ) -> _GetMetricStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricStreamResponse
+
+    interface _GetMetricWidgetImageResponse
+      include Smithy::Client::_Response[Types::GetMetricWidgetImageOutput]
+      def metric_widget_image: () -> String?
+    end
+    def get_metric_widget_image: (
+      ?metric_widget: String,
+      ?output_format: String
+    ) -> _GetMetricWidgetImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricWidgetImageResponse
+
+    interface _ListDashboardsResponse
+      include Smithy::Client::_Response[Types::ListDashboardsOutput]
+      def dashboard_entries: () -> Array[Types::DashboardEntry]?
+      def next_token: () -> String?
+    end
+    def list_dashboards: (
+      ?dashboard_name_prefix: String,
+      ?next_token: String
+    ) -> _ListDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDashboardsResponse
+
+    interface _ListManagedInsightRulesResponse
+      include Smithy::Client::_Response[Types::ListManagedInsightRulesOutput]
+      def managed_rules: () -> Array[Types::ManagedRuleDescription]?
+      def next_token: () -> String?
+    end
+    def list_managed_insight_rules: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedInsightRulesResponse
+
+    interface _ListMetricStreamsResponse
+      include Smithy::Client::_Response[Types::ListMetricStreamsOutput]
+      def next_token: () -> String?
+      def entries: () -> Array[Types::MetricStreamEntry]?
+    end
+    def list_metric_streams: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMetricStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricStreamsResponse
+
+    interface _ListMetricsResponse
+      include Smithy::Client::_Response[Types::ListMetricsOutput]
+      def metrics: () -> Array[Types::Metric]?
+      def next_token: () -> String?
+      def owning_accounts: () -> Array[String]?
+    end
+    def list_metrics: (
+      ?namespace: String,
+      ?metric_name: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?recently_active: String,
+      ?include_linked_accounts: bool,
+      ?owning_account: String
+    ) -> _ListMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::PutAnomalyDetectorOutput]
+    end
+    def put_anomaly_detector: (
+      ?namespace: String,
+      ?metric_name: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?stat: String,
+      ?configuration: {
+        excluded_time_ranges: Array[
+          {
+            start_time: Time,
+            end_time: untyped
+          }
+        ],
+        metric_timezone: String
+      },
+      ?metric_characteristics: {
+        periodic_spikes: bool
+      },
+      ?single_metric_anomaly_detector: {
+        account_id: String,
+        namespace: String,
+        metric_name: String,
+        dimensions: Array[
+          {
+            name: String,
+            value: String
+          }
+        ],
+        stat: String
+      },
+      ?metric_math_anomaly_detector: {
+        metric_data_queries: Array[
+          {
+            id: String,
+            metric_stat: {
+              metric: {
+                namespace: String,
+                metric_name: String,
+                dimensions: Array[
+                  {
+                    name: String,
+                    value: String
+                  }
+                ]
+              },
+              period: Integer,
+              stat: String,
+              unit: String
+            },
+            expression: String,
+            label: String,
+            return_data: bool,
+            period: untyped,
+            account_id: String
+          }
+        ]
+      }
+    ) -> _PutAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAnomalyDetectorResponse
+
+    interface _PutCompositeAlarmResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_composite_alarm: (
+      ?actions_enabled: bool,
+      ?alarm_actions: Array[String],
+      ?alarm_description: String,
+      ?alarm_name: String,
+      ?alarm_rule: String,
+      ?insufficient_data_actions: Array[String],
+      ?ok_actions: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?actions_suppressor: String,
+      ?actions_suppressor_wait_period: Integer,
+      ?actions_suppressor_extension_period: Integer
+    ) -> _PutCompositeAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCompositeAlarmResponse
+
+    interface _PutDashboardResponse
+      include Smithy::Client::_Response[Types::PutDashboardOutput]
+      def dashboard_validation_messages: () -> Array[Types::DashboardValidationMessage]?
+    end
+    def put_dashboard: (
+      ?dashboard_name: String,
+      ?dashboard_body: String
+    ) -> _PutDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDashboardResponse
+
+    interface _PutInsightRuleResponse
+      include Smithy::Client::_Response[Types::PutInsightRuleOutput]
+    end
+    def put_insight_rule: (
+      ?rule_name: String,
+      ?rule_state: String,
+      ?rule_definition: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?apply_on_transformed_logs: bool
+    ) -> _PutInsightRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInsightRuleResponse
+
+    interface _PutManagedInsightRulesResponse
+      include Smithy::Client::_Response[Types::PutManagedInsightRulesOutput]
+      def failures: () -> Array[Types::PartialFailure]?
+    end
+    def put_managed_insight_rules: (
+      ?managed_rules: Array[
+        {
+          template_name: String,
+          resource_arn: String,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      ]
+    ) -> _PutManagedInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutManagedInsightRulesResponse
+
+    interface _PutMetricAlarmResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_metric_alarm: (
+      ?alarm_name: String,
+      ?alarm_description: String,
+      ?actions_enabled: bool,
+      ?ok_actions: Array[String],
+      ?alarm_actions: Array[String],
+      ?insufficient_data_actions: Array[String],
+      ?metric_name: String,
+      ?namespace: String,
+      ?statistic: String,
+      ?extended_statistic: String,
+      ?dimensions: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?period: Integer,
+      ?unit: String,
+      ?evaluation_periods: Integer,
+      ?datapoints_to_alarm: Integer,
+      ?threshold: Float,
+      ?comparison_operator: String,
+      ?treat_missing_data: String,
+      ?evaluate_low_sample_count_percentile: String,
+      ?metrics: Array[
+        {
+          id: String,
+          metric_stat: {
+            metric: {
+              namespace: String,
+              metric_name: String,
+              dimensions: Array[
+                {
+                  name: String,
+                  value: String
+                }
+              ]
+            },
+            period: Integer,
+            stat: String,
+            unit: String
+          },
+          expression: String,
+          label: String,
+          return_data: bool,
+          period: untyped,
+          account_id: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?threshold_metric_id: String
+    ) -> _PutMetricAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricAlarmResponse
+
+    interface _PutMetricDataResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_metric_data: (
+      ?namespace: String,
+      ?metric_data: Array[
+        {
+          metric_name: String,
+          dimensions: Array[
+            {
+              name: String,
+              value: String
+            }
+          ],
+          timestamp: Time,
+          value: Float,
+          statistic_values: {
+            sample_count: untyped,
+            sum: untyped,
+            minimum: untyped,
+            maximum: untyped
+          },
+          values: Array[Float],
+          counts: Array[Float],
+          unit: String,
+          storage_resolution: Integer
+        }
+      ],
+      ?entity_metric_data: Array[
+        {
+          entity: {
+            key_attributes: Hash[String, String],
+            attributes: Hash[String, String]
+          },
+          metric_data: Array[
+            {
+              metric_name: String,
+              dimensions: Array[
+                {
+                  name: String,
+                  value: String
+                }
+              ],
+              timestamp: Time,
+              value: Float,
+              statistic_values: {
+                sample_count: untyped,
+                sum: untyped,
+                minimum: untyped,
+                maximum: untyped
+              },
+              values: Array[Float],
+              counts: Array[Float],
+              unit: String,
+              storage_resolution: Integer
+            }
+          ]
+        }
+      ],
+      ?strict_entity_validation: bool
+    ) -> _PutMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricDataResponse
+
+    interface _PutMetricStreamResponse
+      include Smithy::Client::_Response[Types::PutMetricStreamOutput]
+      def arn: () -> String?
+    end
+    def put_metric_stream: (
+      ?name: String,
+      ?include_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ],
+      ?exclude_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ],
+      ?firehose_arn: String,
+      ?role_arn: String,
+      ?output_format: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?statistics_configurations: Array[
+        {
+          include_metrics: Array[
+            {
+              namespace: String,
+              metric_name: String
+            }
+          ],
+          additional_statistics: Array[String]
+        }
+      ],
+      ?include_linked_accounts_metrics: bool
+    ) -> _PutMetricStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricStreamResponse
+
+    interface _SetAlarmStateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_alarm_state: (
+      ?alarm_name: String,
+      ?state_value: String,
+      ?state_reason: String,
+      ?state_reason_data: String
+    ) -> _SetAlarmStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetAlarmStateResponse
+
+    interface _StartMetricStreamsResponse
+      include Smithy::Client::_Response[Types::StartMetricStreamsOutput]
+    end
+    def start_metric_streams: (
+      ?names: Array[String]
+    ) -> _StartMetricStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetricStreamsResponse
+
+    interface _StopMetricStreamsResponse
+      include Smithy::Client::_Response[Types::StopMetricStreamsOutput]
+    end
+    def stop_metric_streams: (
+      ?names: Array[String]
+    ) -> _StopMetricStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMetricStreamsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

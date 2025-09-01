@@ -1,0 +1,66 @@
+module Aws::Backup
+  module Errors
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def creator_request_id: () -> String?
+      def arn: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class DependencyFailureException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class InvalidResourceStateException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class MissingParameterValueException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def type: () -> String?
+      def context: () -> String?
+    end
+  end
+end

@@ -1,0 +1,3394 @@
+module Aws::Greengrass
+  module Types
+
+    class AssociateRoleToGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor role_arn: String?
+    end
+
+    class AssociateRoleToGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+    end
+
+    class AssociateServiceRoleToAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class AssociateServiceRoleToAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_details: Array[Types::ErrorDetail],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+      attr_accessor message: String?
+    end
+
+    class BulkDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_arn: String,
+        ?bulk_deployment_id: String,
+        ?created_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_arn: String?
+      attr_accessor bulk_deployment_id: String?
+      attr_accessor created_at: String?
+    end
+
+    class BulkDeploymentMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_input_records: Integer,
+        ?records_processed: Integer,
+        ?retry_attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_input_records: Integer?
+      attr_accessor records_processed: Integer?
+      attr_accessor retry_attempts: Integer?
+    end
+
+    class BulkDeploymentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: String,
+        ?deployment_arn: String,
+        ?deployment_id: String,
+        ?deployment_status: String,
+        ?deployment_type: String,
+        ?error_details: Array[Types::ErrorDetail],
+        ?error_message: String,
+        ?group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_type: String?
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+      attr_accessor error_message: String?
+      attr_accessor group_arn: String?
+    end
+
+    module BulkDeploymentStatus
+      Initializing: String
+      Running: String
+      Completed: String
+      Stopping: String
+      Stopped: String
+      Failed: String
+    end
+
+    module ConfigurationSyncStatus
+      InSync: String
+      OutOfSync: String
+    end
+
+    class ConnectivityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_address: String,
+        ?id: String,
+        ?metadata: String,
+        ?port_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_address: String?
+      attr_accessor id: String?
+      attr_accessor metadata: String?
+      attr_accessor port_number: Integer?
+    end
+
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?id: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor id: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class ConnectorDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectors: Array[Types::Connector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectors: Array[Types::Connector]?
+    end
+
+    class Core
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?id: String,
+        ?sync_shadow: bool,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor id: String?
+      attr_accessor sync_shadow: bool?
+      attr_accessor thing_arn: String?
+    end
+
+    class CoreDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cores: Array[Types::Core],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cores: Array[Types::Core]?
+    end
+
+    class CreateConnectorDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::ConnectorDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::ConnectorDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConnectorDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateConnectorDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?connector_definition_id: String,
+        ?connectors: Array[Types::Connector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor connector_definition_id: String?
+      attr_accessor connectors: Array[Types::Connector]?
+    end
+
+    class CreateConnectorDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateCoreDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::CoreDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::CoreDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCoreDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateCoreDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?core_definition_id: String,
+        ?cores: Array[Types::Core],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor core_definition_id: String?
+      attr_accessor cores: Array[Types::Core]?
+    end
+
+    class CreateCoreDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?deployment_id: String,
+        ?deployment_type: String,
+        ?group_id: String,
+        ?group_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_type: String?
+      attr_accessor group_id: String?
+      attr_accessor group_version_id: String?
+    end
+
+    class CreateDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_arn: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class CreateDeviceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::DeviceDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::DeviceDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDeviceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateDeviceDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?device_definition_id: String,
+        ?devices: Array[Types::Device],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor device_definition_id: String?
+      attr_accessor devices: Array[Types::Device]?
+    end
+
+    class CreateDeviceDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateFunctionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::FunctionDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::FunctionDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFunctionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateFunctionDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?default_config: Types::FunctionDefaultConfig,
+        ?function_definition_id: String,
+        ?functions: Array[Types::Function],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor default_config: Types::FunctionDefaultConfig?
+      attr_accessor function_definition_id: String?
+      attr_accessor functions: Array[Types::Function]?
+    end
+
+    class CreateFunctionDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateGroupCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor group_id: String?
+    end
+
+    class CreateGroupCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_certificate_authority_arn: String?
+    end
+
+    class CreateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::GroupVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::GroupVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateGroupVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?connector_definition_version_arn: String,
+        ?core_definition_version_arn: String,
+        ?device_definition_version_arn: String,
+        ?function_definition_version_arn: String,
+        ?group_id: String,
+        ?logger_definition_version_arn: String,
+        ?resource_definition_version_arn: String,
+        ?subscription_definition_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor connector_definition_version_arn: String?
+      attr_accessor core_definition_version_arn: String?
+      attr_accessor device_definition_version_arn: String?
+      attr_accessor function_definition_version_arn: String?
+      attr_accessor group_id: String?
+      attr_accessor logger_definition_version_arn: String?
+      attr_accessor resource_definition_version_arn: String?
+      attr_accessor subscription_definition_version_arn: String?
+    end
+
+    class CreateGroupVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateLoggerDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::LoggerDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::LoggerDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLoggerDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateLoggerDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?logger_definition_id: String,
+        ?loggers: Array[Types::Logger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor logger_definition_id: String?
+      attr_accessor loggers: Array[Types::Logger]?
+    end
+
+    class CreateLoggerDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateResourceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::ResourceDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::ResourceDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResourceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateResourceDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?resource_definition_id: String,
+        ?resources: Array[Types::Resource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor resource_definition_id: String?
+      attr_accessor resources: Array[Types::Resource]?
+    end
+
+    class CreateResourceDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class CreateSoftwareUpdateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?s3_url_signer_role: String,
+        ?software_to_update: String,
+        ?update_agent_log_level: String,
+        ?update_targets: Array[String],
+        ?update_targets_architecture: String,
+        ?update_targets_operating_system: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor s3_url_signer_role: String?
+      attr_accessor software_to_update: String?
+      attr_accessor update_agent_log_level: String?
+      attr_accessor update_targets: Array[String]?
+      attr_accessor update_targets_architecture: String?
+      attr_accessor update_targets_operating_system: String?
+    end
+
+    class CreateSoftwareUpdateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_job_arn: String,
+        ?iot_job_id: String,
+        ?platform_software_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_job_arn: String?
+      attr_accessor iot_job_id: String?
+      attr_accessor platform_software_version: String?
+    end
+
+    class CreateSubscriptionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?initial_version: Types::SubscriptionDefinitionVersion,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor initial_version: Types::SubscriptionDefinitionVersion?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSubscriptionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class CreateSubscriptionDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?subscription_definition_id: String,
+        ?subscriptions: Array[Types::Subscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor subscription_definition_id: String?
+      attr_accessor subscriptions: Array[Types::Subscription]?
+    end
+
+    class CreateSubscriptionDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class DefinitionInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteConnectorDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_id: String?
+    end
+
+    class DeleteConnectorDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCoreDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_definition_id: String?
+    end
+
+    class DeleteCoreDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDeviceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_definition_id: String?
+    end
+
+    class DeleteDeviceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFunctionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_definition_id: String?
+    end
+
+    class DeleteFunctionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class DeleteGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLoggerDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logger_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logger_definition_id: String?
+    end
+
+    class DeleteLoggerDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_definition_id: String?
+    end
+
+    class DeleteResourceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriptionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_definition_id: String?
+    end
+
+    class DeleteSubscriptionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Deployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: String,
+        ?deployment_arn: String,
+        ?deployment_id: String,
+        ?deployment_type: String,
+        ?group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_type: String?
+      attr_accessor group_arn: String?
+    end
+
+    module DeploymentType
+      NewDeployment: String
+      Redeployment: String
+      ResetDeployment: String
+      ForceResetDeployment: String
+    end
+
+    class Device
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?id: String,
+        ?sync_shadow: bool,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor id: String?
+      attr_accessor sync_shadow: bool?
+      attr_accessor thing_arn: String?
+    end
+
+    class DeviceDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::Device],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::Device]?
+    end
+
+    class DisassociateRoleFromGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class DisassociateRoleFromGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disassociated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disassociated_at: String?
+    end
+
+    class DisassociateServiceRoleFromAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateServiceRoleFromAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disassociated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disassociated_at: String?
+    end
+
+    module EncodingType
+      binary: String
+      json: String
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detailed_error_code: String,
+        ?detailed_error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detailed_error_code: String?
+      attr_accessor detailed_error_message: String?
+    end
+
+    class Function
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?function_configuration: Types::FunctionConfiguration,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor function_configuration: Types::FunctionConfiguration?
+      attr_accessor id: String?
+    end
+
+    class FunctionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoding_type: String,
+        ?environment: Types::FunctionConfigurationEnvironment,
+        ?exec_args: String,
+        ?executable: String,
+        ?memory_size: Integer,
+        ?pinned: bool,
+        ?timeout: Integer,
+        ?function_runtime_override: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoding_type: String?
+      attr_accessor environment: Types::FunctionConfigurationEnvironment?
+      attr_accessor exec_args: String?
+      attr_accessor executable: String?
+      attr_accessor memory_size: Integer?
+      attr_accessor pinned: bool?
+      attr_accessor timeout: Integer?
+      attr_accessor function_runtime_override: String?
+    end
+
+    class FunctionConfigurationEnvironment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_sysfs: bool,
+        ?execution: Types::FunctionExecutionConfig,
+        ?resource_access_policies: Array[Types::ResourceAccessPolicy],
+        ?variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_sysfs: bool?
+      attr_accessor execution: Types::FunctionExecutionConfig?
+      attr_accessor resource_access_policies: Array[Types::ResourceAccessPolicy]?
+      attr_accessor variables: Hash[String, String]?
+    end
+
+    class FunctionDefaultConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution: Types::FunctionDefaultExecutionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution: Types::FunctionDefaultExecutionConfig?
+    end
+
+    class FunctionDefaultExecutionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?isolation_mode: String,
+        ?run_as: Types::FunctionRunAsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor isolation_mode: String?
+      attr_accessor run_as: Types::FunctionRunAsConfig?
+    end
+
+    class FunctionDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_config: Types::FunctionDefaultConfig,
+        ?functions: Array[Types::Function],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_config: Types::FunctionDefaultConfig?
+      attr_accessor functions: Array[Types::Function]?
+    end
+
+    class FunctionExecutionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?isolation_mode: String,
+        ?run_as: Types::FunctionRunAsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor isolation_mode: String?
+      attr_accessor run_as: Types::FunctionRunAsConfig?
+    end
+
+    module FunctionIsolationMode
+      GreengrassContainer: String
+      NoContainer: String
+    end
+
+    class FunctionRunAsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gid: Integer,
+        ?uid: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gid: Integer?
+      attr_accessor uid: Integer?
+    end
+
+    class GetAssociatedRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class GetAssociatedRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+      attr_accessor role_arn: String?
+    end
+
+    class GetBulkDeploymentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_id: String?
+    end
+
+    class GetBulkDeploymentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_metrics: Types::BulkDeploymentMetrics,
+        ?bulk_deployment_status: String,
+        ?created_at: String,
+        ?error_details: Array[Types::ErrorDetail],
+        ?error_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_metrics: Types::BulkDeploymentMetrics?
+      attr_accessor bulk_deployment_status: String?
+      attr_accessor created_at: String?
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+      attr_accessor error_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetConnectivityInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class GetConnectivityInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity_info: Array[Types::ConnectivityInfo],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity_info: Array[Types::ConnectivityInfo]?
+      attr_accessor message: String?
+    end
+
+    class GetConnectorDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_id: String?
+    end
+
+    class GetConnectorDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetConnectorDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_id: String,
+        ?connector_definition_version_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_id: String?
+      attr_accessor connector_definition_version_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetConnectorDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::ConnectorDefinitionVersion,
+        ?id: String,
+        ?next_token: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::ConnectorDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor version: String?
+    end
+
+    class GetCoreDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_definition_id: String?
+    end
+
+    class GetCoreDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetCoreDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_definition_id: String,
+        ?core_definition_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_definition_id: String?
+      attr_accessor core_definition_version_id: String?
+    end
+
+    class GetCoreDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::CoreDefinitionVersion,
+        ?id: String,
+        ?next_token: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::CoreDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor version: String?
+    end
+
+    class GetDeploymentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class GetDeploymentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_status: String,
+        ?deployment_type: String,
+        ?error_details: Array[Types::ErrorDetail],
+        ?error_message: String,
+        ?updated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_type: String?
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+      attr_accessor error_message: String?
+      attr_accessor updated_at: String?
+    end
+
+    class GetDeviceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_definition_id: String?
+    end
+
+    class GetDeviceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDeviceDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_definition_id: String,
+        ?device_definition_version_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_definition_id: String?
+      attr_accessor device_definition_version_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetDeviceDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::DeviceDefinitionVersion,
+        ?id: String,
+        ?next_token: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::DeviceDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor version: String?
+    end
+
+    class GetFunctionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_definition_id: String?
+    end
+
+    class GetFunctionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetFunctionDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_definition_id: String,
+        ?function_definition_version_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_definition_id: String?
+      attr_accessor function_definition_version_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetFunctionDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::FunctionDefinitionVersion,
+        ?id: String,
+        ?next_token: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::FunctionDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor version: String?
+    end
+
+    class GetGroupCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class GetGroupCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_certificate_authority_arn: String,
+        ?group_certificate_authority_id: String,
+        ?pem_encoded_certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_certificate_authority_arn: String?
+      attr_accessor group_certificate_authority_id: String?
+      attr_accessor pem_encoded_certificate: String?
+    end
+
+    class GetGroupCertificateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class GetGroupCertificateConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_expiry_in_milliseconds: String,
+        ?certificate_expiry_in_milliseconds: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_expiry_in_milliseconds: String?
+      attr_accessor certificate_expiry_in_milliseconds: String?
+      attr_accessor group_id: String?
+    end
+
+    class GetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class GetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetGroupVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?group_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor group_version_id: String?
+    end
+
+    class GetGroupVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::GroupVersion,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::GroupVersion?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class GetLoggerDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logger_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logger_definition_id: String?
+    end
+
+    class GetLoggerDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetLoggerDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logger_definition_id: String,
+        ?logger_definition_version_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logger_definition_id: String?
+      attr_accessor logger_definition_version_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetLoggerDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::LoggerDefinitionVersion,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::LoggerDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class GetResourceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_definition_id: String?
+    end
+
+    class GetResourceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetResourceDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_definition_id: String,
+        ?resource_definition_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_definition_id: String?
+      attr_accessor resource_definition_version_id: String?
+    end
+
+    class GetResourceDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::ResourceDefinitionVersion,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::ResourceDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class GetServiceRoleForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetServiceRoleForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+      attr_accessor role_arn: String?
+    end
+
+    class GetSubscriptionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_definition_id: String?
+    end
+
+    class GetSubscriptionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSubscriptionDefinitionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?subscription_definition_id: String,
+        ?subscription_definition_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor subscription_definition_id: String?
+      attr_accessor subscription_definition_version_id: String?
+    end
+
+    class GetSubscriptionDefinitionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?definition: Types::SubscriptionDefinitionVersion,
+        ?id: String,
+        ?next_token: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor definition: Types::SubscriptionDefinitionVersion?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor version: String?
+    end
+
+    class GetThingRuntimeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class GetThingRuntimeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_configuration: Types::RuntimeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration?
+    end
+
+    class GroupCertificateAuthorityProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_certificate_authority_arn: String,
+        ?group_certificate_authority_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_certificate_authority_arn: String?
+      attr_accessor group_certificate_authority_id: String?
+    end
+
+    class GroupInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?last_updated_timestamp: String,
+        ?latest_version: String,
+        ?latest_version_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor last_updated_timestamp: String?
+      attr_accessor latest_version: String?
+      attr_accessor latest_version_arn: String?
+      attr_accessor name: String?
+    end
+
+    class GroupOwnerSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_add_group_owner: bool,
+        ?group_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_add_group_owner: bool?
+      attr_accessor group_owner: String?
+    end
+
+    class GroupVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_version_arn: String,
+        ?core_definition_version_arn: String,
+        ?device_definition_version_arn: String,
+        ?function_definition_version_arn: String,
+        ?logger_definition_version_arn: String,
+        ?resource_definition_version_arn: String,
+        ?subscription_definition_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_version_arn: String?
+      attr_accessor core_definition_version_arn: String?
+      attr_accessor device_definition_version_arn: String?
+      attr_accessor function_definition_version_arn: String?
+      attr_accessor logger_definition_version_arn: String?
+      attr_accessor resource_definition_version_arn: String?
+      attr_accessor subscription_definition_version_arn: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_details: Array[Types::ErrorDetail],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+      attr_accessor message: String?
+    end
+
+    class ListBulkDeploymentDetailedReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBulkDeploymentDetailedReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[Types::BulkDeploymentResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[Types::BulkDeploymentResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBulkDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBulkDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployments: Array[Types::BulkDeployment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployments: Array[Types::BulkDeployment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListConnectorDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_definition_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_definition_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListCoreDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[Types::Deployment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[Types::Deployment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeviceDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_definition_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_definition_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeviceDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListDeviceDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeviceDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFunctionDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_definition_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_definition_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListFunctionDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListFunctionDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListFunctionDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupCertificateAuthoritiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class ListGroupCertificateAuthoritiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_certificate_authorities: Array[Types::GroupCertificateAuthorityProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_certificate_authorities: Array[Types::GroupCertificateAuthorityProperties]?
+    end
+
+    class ListGroupVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLoggerDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logger_definition_id: String,
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logger_definition_id: String?
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListLoggerDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListLoggerDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListLoggerDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+        ?resource_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+      attr_accessor resource_definition_id: String?
+    end
+
+    class ListResourceDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListResourceDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionDefinitionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+        ?subscription_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+      attr_accessor subscription_definition_id: String?
+    end
+
+    class ListSubscriptionDefinitionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionInformation]?
+    end
+
+    class ListSubscriptionDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definitions: Array[Types::DefinitionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definitions: Array[Types::DefinitionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LocalDeviceResourceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_owner_setting: Types::GroupOwnerSetting,
+        ?source_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_owner_setting: Types::GroupOwnerSetting?
+      attr_accessor source_path: String?
+    end
+
+    class LocalVolumeResourceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_path: String,
+        ?group_owner_setting: Types::GroupOwnerSetting,
+        ?source_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_path: String?
+      attr_accessor group_owner_setting: Types::GroupOwnerSetting?
+      attr_accessor source_path: String?
+    end
+
+    class Logger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: String,
+        ?id: String,
+        ?level: String,
+        ?space: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: String?
+      attr_accessor id: String?
+      attr_accessor level: String?
+      attr_accessor space: Integer?
+      attr_accessor type: String?
+    end
+
+    module LoggerComponent
+      GreengrassSystem: String
+      Lambda: String
+    end
+
+    class LoggerDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loggers: Array[Types::Logger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loggers: Array[Types::Logger]?
+    end
+
+    module LoggerLevel
+      DEBUG: String
+      INFO: String
+      WARN: String
+      ERROR: String
+      FATAL: String
+    end
+
+    module LoggerType
+      FileSystem: String
+      AWSCloudWatch: String
+    end
+
+    module Permission
+      ro: String
+      rw: String
+    end
+
+    class ResetDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?force: bool,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor force: bool?
+      attr_accessor group_id: String?
+    end
+
+    class ResetDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_arn: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?resource_data_container: Types::ResourceDataContainer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor resource_data_container: Types::ResourceDataContainer?
+    end
+
+    class ResourceAccessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ResourceDataContainer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_device_resource_data: Types::LocalDeviceResourceData,
+        ?local_volume_resource_data: Types::LocalVolumeResourceData,
+        ?s3_machine_learning_model_resource_data: Types::S3MachineLearningModelResourceData,
+        ?sage_maker_machine_learning_model_resource_data: Types::SageMakerMachineLearningModelResourceData,
+        ?secrets_manager_secret_resource_data: Types::SecretsManagerSecretResourceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_device_resource_data: Types::LocalDeviceResourceData?
+      attr_accessor local_volume_resource_data: Types::LocalVolumeResourceData?
+      attr_accessor s3_machine_learning_model_resource_data: Types::S3MachineLearningModelResourceData?
+      attr_accessor sage_maker_machine_learning_model_resource_data: Types::SageMakerMachineLearningModelResourceData?
+      attr_accessor secrets_manager_secret_resource_data: Types::SecretsManagerSecretResourceData?
+    end
+
+    class ResourceDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+    end
+
+    class ResourceDownloadOwnerSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_owner: String,
+        ?group_permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_owner: String?
+      attr_accessor group_permission: String?
+    end
+
+    class RuntimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_configuration: Types::TelemetryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_configuration: Types::TelemetryConfiguration?
+    end
+
+    class S3MachineLearningModelResourceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_path: String,
+        ?owner_setting: Types::ResourceDownloadOwnerSetting,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_path: String?
+      attr_accessor owner_setting: Types::ResourceDownloadOwnerSetting?
+      attr_accessor s3_uri: String?
+    end
+
+    class SageMakerMachineLearningModelResourceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_path: String,
+        ?owner_setting: Types::ResourceDownloadOwnerSetting,
+        ?sage_maker_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_path: String?
+      attr_accessor owner_setting: Types::ResourceDownloadOwnerSetting?
+      attr_accessor sage_maker_job_arn: String?
+    end
+
+    class SecretsManagerSecretResourceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?additional_staging_labels_to_download: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor additional_staging_labels_to_download: Array[String]?
+    end
+
+    module SoftwareToUpdate
+      core: String
+      ota_agent: String
+    end
+
+    class StartBulkDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amzn_client_token: String,
+        ?execution_role_arn: String,
+        ?input_file_uri: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amzn_client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor input_file_uri: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartBulkDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_arn: String,
+        ?bulk_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_arn: String?
+      attr_accessor bulk_deployment_id: String?
+    end
+
+    class StopBulkDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_deployment_id: String?
+    end
+
+    class StopBulkDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?source: String,
+        ?subject: String,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor source: String?
+      attr_accessor subject: String?
+      attr_accessor target: String?
+    end
+
+    class SubscriptionDefinitionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::Subscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::Subscription]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module Telemetry
+      On: String
+      Off: String
+    end
+
+    class TelemetryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_sync_status: String,
+        ?telemetry: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_sync_status: String?
+      attr_accessor telemetry: String?
+    end
+
+    class TelemetryConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    module UpdateAgentLogLevel
+      NONE: String
+      TRACE: String
+      DEBUG: String
+      VERBOSE: String
+      INFO: String
+      WARN: String
+      ERROR: String
+      FATAL: String
+    end
+
+    class UpdateConnectivityInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity_info: Array[Types::ConnectivityInfo],
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity_info: Array[Types::ConnectivityInfo]?
+      attr_accessor thing_name: String?
+    end
+
+    class UpdateConnectivityInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor version: String?
+    end
+
+    class UpdateConnectorDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_definition_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_definition_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateConnectorDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCoreDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_definition_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_definition_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateCoreDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDeviceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_definition_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_definition_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateDeviceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFunctionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_definition_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_definition_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateFunctionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGroupCertificateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_expiry_in_milliseconds: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_expiry_in_milliseconds: String?
+      attr_accessor group_id: String?
+    end
+
+    class UpdateGroupCertificateConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_expiry_in_milliseconds: String,
+        ?certificate_expiry_in_milliseconds: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_expiry_in_milliseconds: String?
+      attr_accessor certificate_expiry_in_milliseconds: String?
+      attr_accessor group_id: String?
+    end
+
+    class UpdateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLoggerDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logger_definition_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logger_definition_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateLoggerDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourceDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_definition_id: String?
+    end
+
+    class UpdateResourceDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSubscriptionDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?subscription_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor subscription_definition_id: String?
+    end
+
+    class UpdateSubscriptionDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateTargetsArchitecture
+      armv6l: String
+      armv7l: String
+      x86_64: String
+      aarch64: String
+    end
+
+    module UpdateTargetsOperatingSystem
+      ubuntu: String
+      raspbian: String
+      amazon_linux: String
+      openwrt: String
+    end
+
+    class UpdateThingRuntimeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_configuration: Types::TelemetryConfigurationUpdate,
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_configuration: Types::TelemetryConfigurationUpdate?
+      attr_accessor thing_name: String?
+    end
+
+    class UpdateThingRuntimeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VersionInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_timestamp: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_timestamp: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+  end
+end

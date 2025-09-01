@@ -1,0 +1,45 @@
+module Aws::KinesisAnalyticsV2
+  module Errors
+    class CodeValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApplicationConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceProvisionedThroughputExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToDetectSchemaException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def raw_input_records: () -> Array[String]?
+      def processed_input_records: () -> Array[String]?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

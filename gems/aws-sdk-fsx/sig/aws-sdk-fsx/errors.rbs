@@ -1,0 +1,141 @@
+module Aws::FSx
+  module Errors
+    class AccessPointAlreadyOwnedByYou < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ActiveDirectoryError < Smithy::Client::ServiceError
+      def active_directory_id: () -> String?
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class BackupBeingCopied < Smithy::Client::ServiceError
+      def message: () -> String?
+      def backup_id: () -> String?
+    end
+    class BackupInProgress < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BackupNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BackupRestoring < Smithy::Client::ServiceError
+      def message: () -> String?
+      def file_system_id: () -> String?
+    end
+    class BadRequest < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataRepositoryAssociationNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataRepositoryTaskEnded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataRepositoryTaskExecuting < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataRepositoryTaskNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileCacheNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FileSystemNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleParameterError < Smithy::Client::ServiceError
+      def parameter: () -> String?
+      def message: () -> String?
+    end
+    class IncompatibleRegionForMultiAZ < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAccessPoint < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class InvalidDataRepositoryType < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDestinationKmsKey < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidExportPath < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidImportPath < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNetworkSettings < Smithy::Client::ServiceError
+      def message: () -> String?
+      def invalid_subnet_id: () -> String?
+      def invalid_security_group_id: () -> String?
+      def invalid_route_table_id: () -> String?
+    end
+    class InvalidPerUnitStorageThroughput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRegion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequest < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSourceKmsKey < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingFileCacheConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingFileSystemConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingVolumeConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotServiceResourceError < Smithy::Client::ServiceError
+      def resource_arn: () -> String?
+      def message: () -> String?
+    end
+    class ResourceDoesNotSupportTagging < Smithy::Client::ServiceError
+      def resource_arn: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFound < Smithy::Client::ServiceError
+      def resource_arn: () -> String?
+      def message: () -> String?
+    end
+    class S3AccessPointAttachmentNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceLimitExceeded < Smithy::Client::ServiceError
+      def limit: () -> String?
+      def message: () -> String?
+    end
+    class SnapshotNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceBackupUnavailable < Smithy::Client::ServiceError
+      def message: () -> String?
+      def backup_id: () -> String?
+    end
+    class StorageVirtualMachineNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyAccessPoints < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class UnsupportedOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VolumeNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

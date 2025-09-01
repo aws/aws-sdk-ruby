@@ -1,0 +1,36 @@
+module Aws::Pinpoint
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class MethodNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class PayloadTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+  end
+end

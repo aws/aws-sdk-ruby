@@ -1,0 +1,28 @@
+module Aws::ServiceCatalog
+  module Errors
+    class DuplicateResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParametersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagOptionNotMigratedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

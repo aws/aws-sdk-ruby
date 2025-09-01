@@ -1,0 +1,30 @@
+module Aws::EntityResolution
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExceedsLimitException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def quota_name: () -> String?
+      def quota_value: () -> Integer?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+      def throttling?: () -> true
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,543 @@
+module Aws::Panorama
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Panorama::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateApplicationInstanceResponse
+      include Smithy::Client::_Response[Types::CreateApplicationInstanceOutput]
+      def application_instance_id: () -> String?
+    end
+    def create_application_instance: (
+      ?name: String,
+      ?description: String,
+      ?manifest_payload: {
+        payload_data: String
+      },
+      ?manifest_overrides_payload: {
+        payload_data: String
+      },
+      ?application_instance_id_to_replace: String,
+      ?runtime_role_arn: String,
+      ?default_runtime_context_device: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationInstanceResponse
+
+    interface _CreateJobForDevicesResponse
+      include Smithy::Client::_Response[Types::CreateJobForDevicesOutput]
+      def jobs: () -> Array[Types::Job]?
+    end
+    def create_job_for_devices: (
+      ?device_ids: Array[String],
+      ?device_job_config: {
+        ota_job_config: {
+          image_version: String,
+          allow_major_version_update: bool
+        }
+      },
+      ?job_type: String
+    ) -> _CreateJobForDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobForDevicesResponse
+
+    interface _CreateNodeFromTemplateJobResponse
+      include Smithy::Client::_Response[Types::CreateNodeFromTemplateJobOutput]
+      def job_id: () -> String?
+    end
+    def create_node_from_template_job: (
+      ?template_type: String,
+      ?output_package_name: String,
+      ?output_package_version: String,
+      ?node_name: String,
+      ?node_description: String,
+      ?template_parameters: Hash[String, String],
+      ?job_tags: Array[
+        {
+          resource_type: String,
+          tags: Hash[String, String]
+        }
+      ]
+    ) -> _CreateNodeFromTemplateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodeFromTemplateJobResponse
+
+    interface _CreatePackageResponse
+      include Smithy::Client::_Response[Types::CreatePackageOutput]
+      def package_id: () -> String?
+      def arn: () -> String?
+      def storage_location: () -> Types::StorageLocation?
+    end
+    def create_package: (
+      ?package_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackageResponse
+
+    interface _CreatePackageImportJobResponse
+      include Smithy::Client::_Response[Types::CreatePackageImportJobOutput]
+      def job_id: () -> String?
+    end
+    def create_package_import_job: (
+      ?job_type: String,
+      ?input_config: {
+        package_version_input_config: {
+          s3_location: {
+            region: String,
+            bucket_name: String,
+            object_key: String
+          }
+        }
+      },
+      ?output_config: {
+        package_version_output_config: {
+          package_name: String,
+          package_version: String,
+          mark_latest: bool
+        }
+      },
+      ?client_token: String,
+      ?job_tags: Array[
+        {
+          resource_type: String,
+          tags: Hash[String, String]
+        }
+      ]
+    ) -> _CreatePackageImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackageImportJobResponse
+
+    interface _DeleteDeviceResponse
+      include Smithy::Client::_Response[Types::DeleteDeviceOutput]
+      def device_id: () -> String?
+    end
+    def delete_device: (
+      ?device_id: String
+    ) -> _DeleteDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeviceResponse
+
+    interface _DeletePackageResponse
+      include Smithy::Client::_Response[Types::DeletePackageOutput]
+    end
+    def delete_package: (
+      ?package_id: String,
+      ?force_delete: bool
+    ) -> _DeletePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageResponse
+
+    interface _DeregisterPackageVersionResponse
+      include Smithy::Client::_Response[Types::DeregisterPackageVersionOutput]
+    end
+    def deregister_package_version: (
+      ?owner_account: String,
+      ?package_id: String,
+      ?package_version: String,
+      ?patch_version: String,
+      ?updated_latest_patch_version: String
+    ) -> _DeregisterPackageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterPackageVersionResponse
+
+    interface _DescribeApplicationInstanceResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationInstanceOutput]
+      def name: () -> String?
+      def description: () -> String?
+      def default_runtime_context_device: () -> String?
+      def default_runtime_context_device_name: () -> String?
+      def application_instance_id_to_replace: () -> String?
+      def runtime_role_arn: () -> String?
+      def status: () -> String?
+      def health_status: () -> String?
+      def status_description: () -> String?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def application_instance_id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def runtime_context_states: () -> Array[Types::ReportedRuntimeContextState]?
+    end
+    def describe_application_instance: (
+      ?application_instance_id: String
+    ) -> _DescribeApplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationInstanceResponse
+
+    interface _DescribeApplicationInstanceDetailsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationInstanceDetailsOutput]
+      def name: () -> String?
+      def description: () -> String?
+      def default_runtime_context_device: () -> String?
+      def manifest_payload: () -> Types::ManifestPayload?
+      def manifest_overrides_payload: () -> Types::ManifestOverridesPayload?
+      def application_instance_id_to_replace: () -> String?
+      def created_time: () -> Time?
+      def application_instance_id: () -> String?
+    end
+    def describe_application_instance_details: (
+      ?application_instance_id: String
+    ) -> _DescribeApplicationInstanceDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationInstanceDetailsResponse
+
+    interface _DescribeDeviceResponse
+      include Smithy::Client::_Response[Types::DescribeDeviceOutput]
+      def device_id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def device_connection_status: () -> String?
+      def created_time: () -> Time?
+      def provisioning_status: () -> String?
+      def latest_software: () -> String?
+      def current_software: () -> String?
+      def serial_number: () -> String?
+      def tags: () -> Hash[String, String]?
+      def networking_configuration: () -> Types::NetworkPayload?
+      def current_networking_status: () -> Types::NetworkStatus?
+      def lease_expiration_time: () -> Time?
+      def alternate_softwares: () -> Array[Types::AlternateSoftwareMetadata]?
+      def latest_alternate_software: () -> String?
+      def brand: () -> String?
+      def latest_device_job: () -> Types::LatestDeviceJob?
+      def device_aggregated_status: () -> String?
+    end
+    def describe_device: (
+      ?device_id: String
+    ) -> _DescribeDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeviceResponse
+
+    interface _DescribeDeviceJobResponse
+      include Smithy::Client::_Response[Types::DescribeDeviceJobOutput]
+      def job_id: () -> String?
+      def device_id: () -> String?
+      def device_arn: () -> String?
+      def device_name: () -> String?
+      def device_type: () -> String?
+      def image_version: () -> String?
+      def status: () -> String?
+      def created_time: () -> Time?
+      def job_type: () -> String?
+    end
+    def describe_device_job: (
+      ?job_id: String
+    ) -> _DescribeDeviceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeviceJobResponse
+
+    interface _DescribeNodeResponse
+      include Smithy::Client::_Response[Types::DescribeNodeOutput]
+      def node_id: () -> String?
+      def name: () -> String?
+      def category: () -> String?
+      def owner_account: () -> String?
+      def package_name: () -> String?
+      def package_id: () -> String?
+      def package_arn: () -> String?
+      def package_version: () -> String?
+      def patch_version: () -> String?
+      def node_interface: () -> Types::NodeInterface?
+      def asset_name: () -> String?
+      def description: () -> String?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def describe_node: (
+      ?node_id: String,
+      ?owner_account: String
+    ) -> _DescribeNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNodeResponse
+
+    interface _DescribeNodeFromTemplateJobResponse
+      include Smithy::Client::_Response[Types::DescribeNodeFromTemplateJobOutput]
+      def job_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def output_package_name: () -> String?
+      def output_package_version: () -> String?
+      def node_name: () -> String?
+      def node_description: () -> String?
+      def template_type: () -> String?
+      def template_parameters: () -> Hash[String, String]?
+      def job_tags: () -> Array[Types::JobResourceTags]?
+    end
+    def describe_node_from_template_job: (
+      ?job_id: String
+    ) -> _DescribeNodeFromTemplateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNodeFromTemplateJobResponse
+
+    interface _DescribePackageResponse
+      include Smithy::Client::_Response[Types::DescribePackageOutput]
+      def package_id: () -> String?
+      def package_name: () -> String?
+      def arn: () -> String?
+      def storage_location: () -> Types::StorageLocation?
+      def read_access_principal_arns: () -> Array[String]?
+      def write_access_principal_arns: () -> Array[String]?
+      def created_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_package: (
+      ?package_id: String
+    ) -> _DescribePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageResponse
+
+    interface _DescribePackageImportJobResponse
+      include Smithy::Client::_Response[Types::DescribePackageImportJobOutput]
+      def job_id: () -> String?
+      def client_token: () -> String?
+      def job_type: () -> String?
+      def input_config: () -> Types::PackageImportJobInputConfig?
+      def output_config: () -> Types::PackageImportJobOutputConfig?
+      def output: () -> Types::PackageImportJobOutput?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def status: () -> String?
+      def status_message: () -> String?
+      def job_tags: () -> Array[Types::JobResourceTags]?
+    end
+    def describe_package_import_job: (
+      ?job_id: String
+    ) -> _DescribePackageImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageImportJobResponse
+
+    interface _DescribePackageVersionResponse
+      include Smithy::Client::_Response[Types::DescribePackageVersionOutput]
+      def owner_account: () -> String?
+      def package_id: () -> String?
+      def package_arn: () -> String?
+      def package_name: () -> String?
+      def package_version: () -> String?
+      def patch_version: () -> String?
+      def is_latest_patch: () -> bool?
+      def status: () -> String?
+      def status_description: () -> String?
+      def registered_time: () -> Time?
+    end
+    def describe_package_version: (
+      ?owner_account: String,
+      ?package_id: String,
+      ?package_version: String,
+      ?patch_version: String
+    ) -> _DescribePackageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageVersionResponse
+
+    interface _ListApplicationInstanceDependenciesResponse
+      include Smithy::Client::_Response[Types::ListApplicationInstanceDependenciesOutput]
+      def package_objects: () -> Array[Types::PackageObject]?
+      def next_token: () -> String?
+    end
+    def list_application_instance_dependencies: (
+      ?application_instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationInstanceDependenciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationInstanceDependenciesResponse
+
+    interface _ListApplicationInstanceNodeInstancesResponse
+      include Smithy::Client::_Response[Types::ListApplicationInstanceNodeInstancesOutput]
+      def node_instances: () -> Array[Types::NodeInstance]?
+      def next_token: () -> String?
+    end
+    def list_application_instance_node_instances: (
+      ?application_instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationInstanceNodeInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationInstanceNodeInstancesResponse
+
+    interface _ListApplicationInstancesResponse
+      include Smithy::Client::_Response[Types::ListApplicationInstancesOutput]
+      def application_instances: () -> Array[Types::ApplicationInstance]?
+      def next_token: () -> String?
+    end
+    def list_application_instances: (
+      ?device_id: String,
+      ?status_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationInstancesResponse
+
+    interface _ListDevicesResponse
+      include Smithy::Client::_Response[Types::ListDevicesOutput]
+      def devices: () -> Array[Types::Device]?
+      def next_token: () -> String?
+    end
+    def list_devices: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?name_filter: String,
+      ?device_aggregated_status_filter: String
+    ) -> _ListDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesResponse
+
+    interface _ListDevicesJobsResponse
+      include Smithy::Client::_Response[Types::ListDevicesJobsOutput]
+      def device_jobs: () -> Array[Types::DeviceJob]?
+      def next_token: () -> String?
+    end
+    def list_devices_jobs: (
+      ?device_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDevicesJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesJobsResponse
+
+    interface _ListNodeFromTemplateJobsResponse
+      include Smithy::Client::_Response[Types::ListNodeFromTemplateJobsOutput]
+      def node_from_template_jobs: () -> Array[Types::NodeFromTemplateJob]?
+      def next_token: () -> String?
+    end
+    def list_node_from_template_jobs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNodeFromTemplateJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodeFromTemplateJobsResponse
+
+    interface _ListNodesResponse
+      include Smithy::Client::_Response[Types::ListNodesOutput]
+      def nodes: () -> Array[Types::Node]?
+      def next_token: () -> String?
+    end
+    def list_nodes: (
+      ?category: String,
+      ?owner_account: String,
+      ?package_name: String,
+      ?package_version: String,
+      ?patch_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesResponse
+
+    interface _ListPackageImportJobsResponse
+      include Smithy::Client::_Response[Types::ListPackageImportJobsOutput]
+      def package_import_jobs: () -> Array[Types::PackageImportJob]?
+      def next_token: () -> String?
+    end
+    def list_package_import_jobs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPackageImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackageImportJobsResponse
+
+    interface _ListPackagesResponse
+      include Smithy::Client::_Response[Types::ListPackagesOutput]
+      def packages: () -> Array[Types::PackageListItem]?
+      def next_token: () -> String?
+    end
+    def list_packages: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ProvisionDeviceResponse
+      include Smithy::Client::_Response[Types::ProvisionDeviceOutput]
+      def device_id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def certificates: () -> String?
+      def iot_thing_name: () -> String?
+    end
+    def provision_device: (
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?networking_configuration: {
+        ethernet0: {
+          connection_type: String,
+          static_ip_connection_info: {
+            ip_address: String,
+            mask: String,
+            dns: Array[String],
+            default_gateway: String
+          }
+        },
+        ethernet1: untyped,
+        ntp: {
+          ntp_servers: Array[String]
+        }
+      }
+    ) -> _ProvisionDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ProvisionDeviceResponse
+
+    interface _RegisterPackageVersionResponse
+      include Smithy::Client::_Response[Types::RegisterPackageVersionOutput]
+    end
+    def register_package_version: (
+      ?owner_account: String,
+      ?package_id: String,
+      ?package_version: String,
+      ?patch_version: String,
+      ?mark_latest: bool
+    ) -> _RegisterPackageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterPackageVersionResponse
+
+    interface _RemoveApplicationInstanceResponse
+      include Smithy::Client::_Response[Types::RemoveApplicationInstanceOutput]
+    end
+    def remove_application_instance: (
+      ?application_instance_id: String
+    ) -> _RemoveApplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveApplicationInstanceResponse
+
+    interface _SignalApplicationInstanceNodeInstancesResponse
+      include Smithy::Client::_Response[Types::SignalApplicationInstanceNodeInstancesOutput]
+      def application_instance_id: () -> String?
+    end
+    def signal_application_instance_node_instances: (
+      ?application_instance_id: String,
+      ?node_signals: Array[
+        {
+          node_instance_id: String,
+          signal: String
+        }
+      ]
+    ) -> _SignalApplicationInstanceNodeInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignalApplicationInstanceNodeInstancesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDeviceMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateDeviceMetadataOutput]
+      def device_id: () -> String?
+    end
+    def update_device_metadata: (
+      ?device_id: String,
+      ?description: String
+    ) -> _UpdateDeviceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeviceMetadataResponse
+  end
+end

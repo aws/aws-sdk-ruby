@@ -1,0 +1,52 @@
+module Aws::Pricing
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AttributeNameList: ListShape
+    AttributeValue: StructureShape
+    AttributeValueList: ListShape
+    BoxedInteger: IntegerShape
+    CurrencyCode: StringShape
+    DescribeServicesRequest: StructureShape
+    DescribeServicesResponse: StructureShape
+    EffectiveDate: TimestampShape
+    ExpiredNextTokenException: StructureShape
+    Field: StringShape
+    FileFormat: StringShape
+    FileFormats: ListShape
+    Filter: StructureShape
+    FilterType: EnumShape
+    Filters: ListShape
+    FormatVersion: StringShape
+    GetAttributeValuesRequest: StructureShape
+    GetAttributeValuesResponse: StructureShape
+    GetPriceListFileUrlRequest: StructureShape
+    GetPriceListFileUrlResponse: StructureShape
+    GetProductsRequest: StructureShape
+    GetProductsResponse: StructureShape
+    InternalErrorException: StructureShape
+    InvalidNextTokenException: StructureShape
+    InvalidParameterException: StructureShape
+    ListPriceListsRequest: StructureShape
+    ListPriceListsResponse: StructureShape
+    MaxResults: IntegerShape
+    NotFoundException: StructureShape
+    PriceList: StructureShape
+    PriceListArn: StringShape
+    PriceListJsonItems: ListShape
+    PriceLists: ListShape
+    RegionCode: StringShape
+    ResourceNotFoundException: StructureShape
+    Service: StructureShape
+    ServiceCode: StringShape
+    ServiceList: ListShape
+    String: StringShape
+    SynthesizedJsonPriceListJsonItem: StringShape
+    ThrottlingException: StructureShape
+    Value: StringShape
+    ErrorMessage: StringShape
+
+    AWSPriceListService: ServiceShape
+  end
+end

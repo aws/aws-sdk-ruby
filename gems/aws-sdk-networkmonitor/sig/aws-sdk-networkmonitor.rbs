@@ -1,0 +1,5 @@
+  module Aws
+    module NetworkMonitor
+      VERSION: String
+    end
+  end

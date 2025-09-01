@@ -1,0 +1,5 @@
+  module Aws
+    module MediaPackageV2
+      VERSION: String
+    end
+  end

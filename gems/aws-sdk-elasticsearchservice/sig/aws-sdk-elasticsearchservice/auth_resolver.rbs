@@ -1,0 +1,5 @@
+module Aws::ElasticsearchService
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

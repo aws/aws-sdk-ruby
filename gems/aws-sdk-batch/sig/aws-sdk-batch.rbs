@@ -1,0 +1,5 @@
+  module Aws
+    module Batch
+      VERSION: String
+    end
+  end

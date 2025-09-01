@@ -1,0 +1,914 @@
+module Aws::EKS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EKS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::AssociateAccessPolicyResponse]
+      def cluster_name: () -> String?
+      def principal_arn: () -> String?
+      def associated_access_policy: () -> Types::AssociatedAccessPolicy?
+    end
+    def associate_access_policy: (
+      ?cluster_name: String,
+      ?principal_arn: String,
+      ?policy_arn: String,
+      ?access_scope: {
+        type: String,
+        namespaces: Array[String]
+      }
+    ) -> _AssociateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAccessPolicyResponse
+
+    interface _AssociateEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::AssociateEncryptionConfigResponse]
+      def update: () -> Types::Update?
+    end
+    def associate_encryption_config: (
+      ?cluster_name: String,
+      ?encryption_config: Array[
+        {
+          resources: Array[String],
+          provider: {
+            key_arn: String
+          }
+        }
+      ],
+      ?client_request_token: String
+    ) -> _AssociateEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEncryptionConfigResponse
+
+    interface _AssociateIdentityProviderConfigResponse
+      include Smithy::Client::_Response[Types::AssociateIdentityProviderConfigResponse]
+      def update: () -> Types::Update?
+      def tags: () -> Hash[String, String]?
+    end
+    def associate_identity_provider_config: (
+      ?cluster_name: String,
+      ?oidc: {
+        identity_provider_config_name: String,
+        issuer_url: untyped,
+        client_id: untyped,
+        username_claim: untyped,
+        username_prefix: untyped,
+        groups_claim: untyped,
+        groups_prefix: untyped,
+        required_claims: Hash[String, String]
+      },
+      ?tags: Hash[String, String],
+      ?client_request_token: String
+    ) -> _AssociateIdentityProviderConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateIdentityProviderConfigResponse
+
+    interface _CreateAccessEntryResponse
+      include Smithy::Client::_Response[Types::CreateAccessEntryResponse]
+      def access_entry: () -> Types::AccessEntry?
+    end
+    def create_access_entry: (
+      ?cluster_name: String,
+      ?principal_arn: String,
+      ?kubernetes_groups: Array[String],
+      ?tags: Hash[String, String],
+      ?client_request_token: String,
+      ?username: String,
+      ?type: String
+    ) -> _CreateAccessEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessEntryResponse
+
+    interface _CreateAddonResponse
+      include Smithy::Client::_Response[Types::CreateAddonResponse]
+      def addon: () -> Types::Addon?
+    end
+    def create_addon: (
+      ?cluster_name: String,
+      ?addon_name: String,
+      ?addon_version: String,
+      ?service_account_role_arn: String,
+      ?resolve_conflicts: String,
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?configuration_values: String,
+      ?pod_identity_associations: Array[
+        {
+          service_account: String,
+          role_arn: untyped
+        }
+      ]
+    ) -> _CreateAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddonResponse
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def create_cluster: (
+      ?name: String,
+      ?version: String,
+      ?role_arn: String,
+      ?resources_vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped,
+        endpoint_public_access: bool,
+        endpoint_private_access: untyped,
+        public_access_cidrs: untyped
+      },
+      ?kubernetes_network_config: {
+        service_ipv4_cidr: String,
+        ip_family: String,
+        elastic_load_balancing: {
+          enabled: bool
+        }
+      },
+      ?logging: {
+        cluster_logging: Array[
+          {
+            types: Array[String],
+            enabled: bool
+          }
+        ]
+      },
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?encryption_config: Array[
+        {
+          resources: Array[String],
+          provider: {
+            key_arn: String
+          }
+        }
+      ],
+      ?outpost_config: {
+        outpost_arns: Array[String],
+        control_plane_instance_type: String,
+        control_plane_placement: {
+          group_name: untyped
+        }
+      },
+      ?access_config: {
+        bootstrap_cluster_creator_admin_permissions: bool,
+        authentication_mode: String
+      },
+      ?bootstrap_self_managed_addons: bool,
+      ?upgrade_policy: {
+        support_type: String
+      },
+      ?zonal_shift_config: {
+        enabled: bool
+      },
+      ?remote_network_config: {
+        remote_node_networks: Array[
+          {
+            cidrs: Array[String]
+          }
+        ],
+        remote_pod_networks: Array[
+          {
+            cidrs: untyped
+          }
+        ]
+      },
+      ?compute_config: {
+        enabled: bool,
+        node_pools: Array[String],
+        node_role_arn: String
+      },
+      ?storage_config: {
+        block_storage: {
+          enabled: bool
+        }
+      },
+      ?deletion_protection: bool
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateEksAnywhereSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateEksAnywhereSubscriptionResponse]
+      def subscription: () -> Types::EksAnywhereSubscription?
+    end
+    def create_eks_anywhere_subscription: (
+      ?name: String,
+      ?term: {
+        duration: Integer,
+        unit: String
+      },
+      ?license_quantity: Integer,
+      ?license_type: String,
+      ?auto_renew: bool,
+      ?client_request_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateEksAnywhereSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEksAnywhereSubscriptionResponse
+
+    interface _CreateFargateProfileResponse
+      include Smithy::Client::_Response[Types::CreateFargateProfileResponse]
+      def fargate_profile: () -> Types::FargateProfile?
+    end
+    def create_fargate_profile: (
+      ?fargate_profile_name: String,
+      ?cluster_name: String,
+      ?pod_execution_role_arn: String,
+      ?subnets: Array[String],
+      ?selectors: Array[
+        {
+          namespace: String,
+          labels: Hash[String, String]
+        }
+      ],
+      ?client_request_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFargateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFargateProfileResponse
+
+    interface _CreateNodegroupResponse
+      include Smithy::Client::_Response[Types::CreateNodegroupResponse]
+      def nodegroup: () -> Types::Nodegroup?
+    end
+    def create_nodegroup: (
+      ?cluster_name: String,
+      ?nodegroup_name: String,
+      ?scaling_config: {
+        min_size: Integer,
+        max_size: Integer,
+        desired_size: untyped
+      },
+      ?disk_size: Integer,
+      ?subnets: Array[String],
+      ?instance_types: Array[String],
+      ?ami_type: String,
+      ?remote_access: {
+        ec2_ssh_key: String,
+        source_security_groups: Array[String]
+      },
+      ?node_role: String,
+      ?labels: Hash[String, String],
+      ?taints: Array[
+        {
+          key: String,
+          value: String,
+          effect: String
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_request_token: String,
+      ?launch_template: {
+        name: String,
+        version: untyped,
+        id: untyped
+      },
+      ?update_config: {
+        max_unavailable: Integer,
+        max_unavailable_percentage: Integer,
+        update_strategy: String
+      },
+      ?node_repair_config: {
+        enabled: bool
+      },
+      ?capacity_type: String,
+      ?version: String,
+      ?release_version: String
+    ) -> _CreateNodegroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodegroupResponse
+
+    interface _CreatePodIdentityAssociationResponse
+      include Smithy::Client::_Response[Types::CreatePodIdentityAssociationResponse]
+      def association: () -> Types::PodIdentityAssociation?
+    end
+    def create_pod_identity_association: (
+      ?cluster_name: String,
+      ?namespace: String,
+      ?service_account: String,
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?disable_session_tags: bool,
+      ?target_role_arn: String
+    ) -> _CreatePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePodIdentityAssociationResponse
+
+    interface _DeleteAccessEntryResponse
+      include Smithy::Client::_Response[Types::DeleteAccessEntryResponse]
+    end
+    def delete_access_entry: (
+      ?cluster_name: String,
+      ?principal_arn: String
+    ) -> _DeleteAccessEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessEntryResponse
+
+    interface _DeleteAddonResponse
+      include Smithy::Client::_Response[Types::DeleteAddonResponse]
+      def addon: () -> Types::Addon?
+    end
+    def delete_addon: (
+      ?cluster_name: String,
+      ?addon_name: String,
+      ?preserve: bool
+    ) -> _DeleteAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAddonResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def delete_cluster: (
+      ?name: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteEksAnywhereSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteEksAnywhereSubscriptionResponse]
+      def subscription: () -> Types::EksAnywhereSubscription?
+    end
+    def delete_eks_anywhere_subscription: (
+      ?id: String
+    ) -> _DeleteEksAnywhereSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEksAnywhereSubscriptionResponse
+
+    interface _DeleteFargateProfileResponse
+      include Smithy::Client::_Response[Types::DeleteFargateProfileResponse]
+      def fargate_profile: () -> Types::FargateProfile?
+    end
+    def delete_fargate_profile: (
+      ?cluster_name: String,
+      ?fargate_profile_name: String
+    ) -> _DeleteFargateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFargateProfileResponse
+
+    interface _DeleteNodegroupResponse
+      include Smithy::Client::_Response[Types::DeleteNodegroupResponse]
+      def nodegroup: () -> Types::Nodegroup?
+    end
+    def delete_nodegroup: (
+      ?cluster_name: String,
+      ?nodegroup_name: String
+    ) -> _DeleteNodegroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNodegroupResponse
+
+    interface _DeletePodIdentityAssociationResponse
+      include Smithy::Client::_Response[Types::DeletePodIdentityAssociationResponse]
+      def association: () -> Types::PodIdentityAssociation?
+    end
+    def delete_pod_identity_association: (
+      ?cluster_name: String,
+      ?association_id: String
+    ) -> _DeletePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePodIdentityAssociationResponse
+
+    interface _DeregisterClusterResponse
+      include Smithy::Client::_Response[Types::DeregisterClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def deregister_cluster: (
+      ?name: String
+    ) -> _DeregisterClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterClusterResponse
+
+    interface _DescribeAccessEntryResponse
+      include Smithy::Client::_Response[Types::DescribeAccessEntryResponse]
+      def access_entry: () -> Types::AccessEntry?
+    end
+    def describe_access_entry: (
+      ?cluster_name: String,
+      ?principal_arn: String
+    ) -> _DescribeAccessEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccessEntryResponse
+
+    interface _DescribeAddonResponse
+      include Smithy::Client::_Response[Types::DescribeAddonResponse]
+      def addon: () -> Types::Addon?
+    end
+    def describe_addon: (
+      ?cluster_name: String,
+      ?addon_name: String
+    ) -> _DescribeAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAddonResponse
+
+    interface _DescribeAddonConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeAddonConfigurationResponse]
+      def addon_name: () -> String?
+      def addon_version: () -> String?
+      def configuration_schema: () -> String?
+      def pod_identity_configuration: () -> Array[Types::AddonPodIdentityConfiguration]?
+    end
+    def describe_addon_configuration: (
+      ?addon_name: String,
+      ?addon_version: String
+    ) -> _DescribeAddonConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAddonConfigurationResponse
+
+    interface _DescribeAddonVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeAddonVersionsResponse]
+      def addons: () -> Array[Types::AddonInfo]?
+      def next_token: () -> String?
+    end
+    def describe_addon_versions: (
+      ?kubernetes_version: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?addon_name: String,
+      ?types: Array[String],
+      ?publishers: Array[String],
+      ?owners: Array[String]
+    ) -> _DescribeAddonVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAddonVersionsResponse
+
+    interface _DescribeClusterResponse
+      include Smithy::Client::_Response[Types::DescribeClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def describe_cluster: (
+      ?name: String
+    ) -> _DescribeClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterResponse
+
+    interface _DescribeClusterVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeClusterVersionsResponse]
+      def next_token: () -> String?
+      def cluster_versions: () -> Array[Types::ClusterVersionInformation]?
+    end
+    def describe_cluster_versions: (
+      ?cluster_type: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?default_only: bool,
+      ?include_all: bool,
+      ?cluster_versions: Array[String],
+      ?status: String,
+      ?version_status: String
+    ) -> _DescribeClusterVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterVersionsResponse
+
+    interface _DescribeEksAnywhereSubscriptionResponse
+      include Smithy::Client::_Response[Types::DescribeEksAnywhereSubscriptionResponse]
+      def subscription: () -> Types::EksAnywhereSubscription?
+    end
+    def describe_eks_anywhere_subscription: (
+      ?id: String
+    ) -> _DescribeEksAnywhereSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEksAnywhereSubscriptionResponse
+
+    interface _DescribeFargateProfileResponse
+      include Smithy::Client::_Response[Types::DescribeFargateProfileResponse]
+      def fargate_profile: () -> Types::FargateProfile?
+    end
+    def describe_fargate_profile: (
+      ?cluster_name: String,
+      ?fargate_profile_name: String
+    ) -> _DescribeFargateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFargateProfileResponse
+
+    interface _DescribeIdentityProviderConfigResponse
+      include Smithy::Client::_Response[Types::DescribeIdentityProviderConfigResponse]
+      def identity_provider_config: () -> Types::IdentityProviderConfigResponse?
+    end
+    def describe_identity_provider_config: (
+      ?cluster_name: String,
+      ?identity_provider_config: {
+        type: String,
+        name: untyped
+      }
+    ) -> _DescribeIdentityProviderConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIdentityProviderConfigResponse
+
+    interface _DescribeInsightResponse
+      include Smithy::Client::_Response[Types::DescribeInsightResponse]
+      def insight: () -> Types::Insight?
+    end
+    def describe_insight: (
+      ?cluster_name: String,
+      ?id: String
+    ) -> _DescribeInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightResponse
+
+    interface _DescribeNodegroupResponse
+      include Smithy::Client::_Response[Types::DescribeNodegroupResponse]
+      def nodegroup: () -> Types::Nodegroup?
+    end
+    def describe_nodegroup: (
+      ?cluster_name: String,
+      ?nodegroup_name: String
+    ) -> _DescribeNodegroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNodegroupResponse
+
+    interface _DescribePodIdentityAssociationResponse
+      include Smithy::Client::_Response[Types::DescribePodIdentityAssociationResponse]
+      def association: () -> Types::PodIdentityAssociation?
+    end
+    def describe_pod_identity_association: (
+      ?cluster_name: String,
+      ?association_id: String
+    ) -> _DescribePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePodIdentityAssociationResponse
+
+    interface _DescribeUpdateResponse
+      include Smithy::Client::_Response[Types::DescribeUpdateResponse]
+      def update: () -> Types::Update?
+    end
+    def describe_update: (
+      ?name: String,
+      ?update_id: String,
+      ?nodegroup_name: String,
+      ?addon_name: String
+    ) -> _DescribeUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUpdateResponse
+
+    interface _DisassociateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::DisassociateAccessPolicyResponse]
+    end
+    def disassociate_access_policy: (
+      ?cluster_name: String,
+      ?principal_arn: String,
+      ?policy_arn: String
+    ) -> _DisassociateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAccessPolicyResponse
+
+    interface _DisassociateIdentityProviderConfigResponse
+      include Smithy::Client::_Response[Types::DisassociateIdentityProviderConfigResponse]
+      def update: () -> Types::Update?
+    end
+    def disassociate_identity_provider_config: (
+      ?cluster_name: String,
+      ?identity_provider_config: {
+        type: String,
+        name: untyped
+      },
+      ?client_request_token: String
+    ) -> _DisassociateIdentityProviderConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateIdentityProviderConfigResponse
+
+    interface _ListAccessEntriesResponse
+      include Smithy::Client::_Response[Types::ListAccessEntriesResponse]
+      def access_entries: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_access_entries: (
+      ?cluster_name: String,
+      ?associated_policy_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccessEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessEntriesResponse
+
+    interface _ListAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAccessPoliciesResponse]
+      def access_policies: () -> Array[Types::AccessPolicy]?
+      def next_token: () -> String?
+    end
+    def list_access_policies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPoliciesResponse
+
+    interface _ListAddonsResponse
+      include Smithy::Client::_Response[Types::ListAddonsResponse]
+      def addons: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_addons: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAddonsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAddonsResponse
+
+    interface _ListAssociatedAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAssociatedAccessPoliciesResponse]
+      def cluster_name: () -> String?
+      def principal_arn: () -> String?
+      def next_token: () -> String?
+      def associated_access_policies: () -> Array[Types::AssociatedAccessPolicy]?
+    end
+    def list_associated_access_policies: (
+      ?cluster_name: String,
+      ?principal_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociatedAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedAccessPoliciesResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersResponse]
+      def clusters: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include: Array[String]
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListEksAnywhereSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListEksAnywhereSubscriptionsResponse]
+      def subscriptions: () -> Array[Types::EksAnywhereSubscription]?
+      def next_token: () -> String?
+    end
+    def list_eks_anywhere_subscriptions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include_status: Array[String]
+    ) -> _ListEksAnywhereSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEksAnywhereSubscriptionsResponse
+
+    interface _ListFargateProfilesResponse
+      include Smithy::Client::_Response[Types::ListFargateProfilesResponse]
+      def fargate_profile_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_fargate_profiles: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFargateProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFargateProfilesResponse
+
+    interface _ListIdentityProviderConfigsResponse
+      include Smithy::Client::_Response[Types::ListIdentityProviderConfigsResponse]
+      def identity_provider_configs: () -> Array[Types::IdentityProviderConfig]?
+      def next_token: () -> String?
+    end
+    def list_identity_provider_configs: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIdentityProviderConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityProviderConfigsResponse
+
+    interface _ListInsightsResponse
+      include Smithy::Client::_Response[Types::ListInsightsResponse]
+      def insights: () -> Array[Types::InsightSummary]?
+      def next_token: () -> String?
+    end
+    def list_insights: (
+      ?cluster_name: String,
+      ?filter: {
+        categories: Array[String],
+        kubernetes_versions: Array[String],
+        statuses: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInsightsResponse
+
+    interface _ListNodegroupsResponse
+      include Smithy::Client::_Response[Types::ListNodegroupsResponse]
+      def nodegroups: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_nodegroups: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNodegroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodegroupsResponse
+
+    interface _ListPodIdentityAssociationsResponse
+      include Smithy::Client::_Response[Types::ListPodIdentityAssociationsResponse]
+      def associations: () -> Array[Types::PodIdentityAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_pod_identity_associations: (
+      ?cluster_name: String,
+      ?namespace: String,
+      ?service_account: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPodIdentityAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPodIdentityAssociationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUpdatesResponse
+      include Smithy::Client::_Response[Types::ListUpdatesResponse]
+      def update_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_updates: (
+      ?name: String,
+      ?nodegroup_name: String,
+      ?addon_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUpdatesResponse
+
+    interface _RegisterClusterResponse
+      include Smithy::Client::_Response[Types::RegisterClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def register_cluster: (
+      ?name: String,
+      ?connector_config: {
+        role_arn: String,
+        provider: String
+      },
+      ?client_request_token: String,
+      ?tags: Hash[String, String]
+    ) -> _RegisterClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterClusterResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessEntryResponse
+      include Smithy::Client::_Response[Types::UpdateAccessEntryResponse]
+      def access_entry: () -> Types::AccessEntry?
+    end
+    def update_access_entry: (
+      ?cluster_name: String,
+      ?principal_arn: String,
+      ?kubernetes_groups: Array[String],
+      ?client_request_token: String,
+      ?username: String
+    ) -> _UpdateAccessEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessEntryResponse
+
+    interface _UpdateAddonResponse
+      include Smithy::Client::_Response[Types::UpdateAddonResponse]
+      def update: () -> Types::Update?
+    end
+    def update_addon: (
+      ?cluster_name: String,
+      ?addon_name: String,
+      ?addon_version: String,
+      ?service_account_role_arn: String,
+      ?resolve_conflicts: String,
+      ?client_request_token: String,
+      ?configuration_values: String,
+      ?pod_identity_associations: Array[
+        {
+          service_account: String,
+          role_arn: untyped
+        }
+      ]
+    ) -> _UpdateAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAddonResponse
+
+    interface _UpdateClusterConfigResponse
+      include Smithy::Client::_Response[Types::UpdateClusterConfigResponse]
+      def update: () -> Types::Update?
+    end
+    def update_cluster_config: (
+      ?name: String,
+      ?resources_vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped,
+        endpoint_public_access: bool,
+        endpoint_private_access: untyped,
+        public_access_cidrs: untyped
+      },
+      ?logging: {
+        cluster_logging: Array[
+          {
+            types: Array[String],
+            enabled: bool
+          }
+        ]
+      },
+      ?client_request_token: String,
+      ?access_config: {
+        authentication_mode: String
+      },
+      ?upgrade_policy: {
+        support_type: String
+      },
+      ?zonal_shift_config: {
+        enabled: bool
+      },
+      ?compute_config: {
+        enabled: bool,
+        node_pools: Array[String],
+        node_role_arn: String
+      },
+      ?kubernetes_network_config: {
+        service_ipv4_cidr: String,
+        ip_family: String,
+        elastic_load_balancing: {
+          enabled: bool
+        }
+      },
+      ?storage_config: {
+        block_storage: {
+          enabled: bool
+        }
+      },
+      ?remote_network_config: {
+        remote_node_networks: Array[
+          {
+            cidrs: Array[String]
+          }
+        ],
+        remote_pod_networks: Array[
+          {
+            cidrs: untyped
+          }
+        ]
+      },
+      ?deletion_protection: bool
+    ) -> _UpdateClusterConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterConfigResponse
+
+    interface _UpdateClusterVersionResponse
+      include Smithy::Client::_Response[Types::UpdateClusterVersionResponse]
+      def update: () -> Types::Update?
+    end
+    def update_cluster_version: (
+      ?name: String,
+      ?version: String,
+      ?client_request_token: String,
+      ?force: bool
+    ) -> _UpdateClusterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterVersionResponse
+
+    interface _UpdateEksAnywhereSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateEksAnywhereSubscriptionResponse]
+      def subscription: () -> Types::EksAnywhereSubscription?
+    end
+    def update_eks_anywhere_subscription: (
+      ?id: String,
+      ?auto_renew: bool,
+      ?client_request_token: String
+    ) -> _UpdateEksAnywhereSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEksAnywhereSubscriptionResponse
+
+    interface _UpdateNodegroupConfigResponse
+      include Smithy::Client::_Response[Types::UpdateNodegroupConfigResponse]
+      def update: () -> Types::Update?
+    end
+    def update_nodegroup_config: (
+      ?cluster_name: String,
+      ?nodegroup_name: String,
+      ?labels: {
+        add_or_update_labels: Hash[String, String],
+        remove_labels: Array[String]
+      },
+      ?taints: {
+        add_or_update_taints: Array[
+          {
+            key: String,
+            value: String,
+            effect: String
+          }
+        ],
+        remove_taints: untyped
+      },
+      ?scaling_config: {
+        min_size: Integer,
+        max_size: Integer,
+        desired_size: untyped
+      },
+      ?update_config: {
+        max_unavailable: Integer,
+        max_unavailable_percentage: Integer,
+        update_strategy: String
+      },
+      ?node_repair_config: {
+        enabled: bool
+      },
+      ?client_request_token: String
+    ) -> _UpdateNodegroupConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodegroupConfigResponse
+
+    interface _UpdateNodegroupVersionResponse
+      include Smithy::Client::_Response[Types::UpdateNodegroupVersionResponse]
+      def update: () -> Types::Update?
+    end
+    def update_nodegroup_version: (
+      ?cluster_name: String,
+      ?nodegroup_name: String,
+      ?version: String,
+      ?release_version: String,
+      ?launch_template: {
+        name: String,
+        version: untyped,
+        id: untyped
+      },
+      ?force: bool,
+      ?client_request_token: String
+    ) -> _UpdateNodegroupVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodegroupVersionResponse
+
+    interface _UpdatePodIdentityAssociationResponse
+      include Smithy::Client::_Response[Types::UpdatePodIdentityAssociationResponse]
+      def association: () -> Types::PodIdentityAssociation?
+    end
+    def update_pod_identity_association: (
+      ?cluster_name: String,
+      ?association_id: String,
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?disable_session_tags: bool,
+      ?target_role_arn: String
+    ) -> _UpdatePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePodIdentityAssociationResponse
+  end
+end

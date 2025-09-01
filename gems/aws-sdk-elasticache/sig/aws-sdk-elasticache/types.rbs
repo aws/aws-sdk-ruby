@@ -1,0 +1,4880 @@
+module Aws::ElastiCache
+  module Types
+
+    class APICallRateForCustomerExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AZMode
+      SINGLE_AZ: String
+      CROSS_AZ: String
+    end
+
+    class AddTagsToResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsToResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class AllowedNodeTypeModificationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_up_modifications: Array[String],
+        ?scale_down_modifications: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_up_modifications: Array[String]?
+      attr_accessor scale_down_modifications: Array[String]?
+    end
+
+    module AuthTokenUpdateStatus
+      SETTING: String
+      ROTATING: String
+    end
+
+    module AuthTokenUpdateStrategyType
+      SET: String
+      ROTATE: String
+      DELETE: String
+    end
+
+    class Authentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?password_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor password_count: Integer?
+    end
+
+    class AuthenticationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?passwords: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor passwords: Array[String]?
+    end
+
+    module AuthenticationType
+      PASSWORD: String
+      NO_PASSWORD: String
+      IAM: String
+    end
+
+    class AuthorizationAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AuthorizationNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AuthorizeCacheSecurityGroupIngressMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+        ?ec2_security_group_name: String,
+        ?ec2_security_group_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+      attr_accessor ec2_security_group_name: String?
+      attr_accessor ec2_security_group_owner_id: String?
+    end
+
+    class AuthorizeCacheSecurityGroupIngressResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group: Types::CacheSecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group: Types::CacheSecurityGroup?
+    end
+
+    module AutomaticFailoverStatus
+      ENABLED: String
+      DISABLED: String
+      ENABLING: String
+      DISABLING: String
+    end
+
+    class AvailabilityZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class BatchApplyUpdateActionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_ids: Array[String],
+        ?cache_cluster_ids: Array[String],
+        ?service_update_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_ids: Array[String]?
+      attr_accessor cache_cluster_ids: Array[String]?
+      attr_accessor service_update_name: String?
+    end
+
+    class BatchApplyUpdateActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?processed_update_actions: Array[Types::ProcessedUpdateAction],
+        ?unprocessed_update_actions: Array[Types::UnprocessedUpdateAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor processed_update_actions: Array[Types::ProcessedUpdateAction]?
+      attr_accessor unprocessed_update_actions: Array[Types::UnprocessedUpdateAction]?
+    end
+
+    class BatchStopUpdateActionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_ids: Array[String],
+        ?cache_cluster_ids: Array[String],
+        ?service_update_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_ids: Array[String]?
+      attr_accessor cache_cluster_ids: Array[String]?
+      attr_accessor service_update_name: String?
+    end
+
+    class BatchStopUpdateActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?processed_update_actions: Array[Types::ProcessedUpdateAction],
+        ?unprocessed_update_actions: Array[Types::UnprocessedUpdateAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor processed_update_actions: Array[Types::ProcessedUpdateAction]?
+      attr_accessor unprocessed_update_actions: Array[Types::UnprocessedUpdateAction]?
+    end
+
+    class CacheCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?configuration_endpoint: Types::Endpoint,
+        ?client_download_landing_page: String,
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_cluster_status: String,
+        ?num_cache_nodes: Integer,
+        ?preferred_availability_zone: String,
+        ?preferred_outpost_arn: String,
+        ?cache_cluster_create_time: Time,
+        ?preferred_maintenance_window: String,
+        ?pending_modified_values: Types::PendingModifiedValues,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?cache_security_groups: Array[Types::CacheSecurityGroupMembership],
+        ?cache_parameter_group: Types::CacheParameterGroupStatus,
+        ?cache_subnet_group_name: String,
+        ?cache_nodes: Array[Types::CacheNode],
+        ?auto_minor_version_upgrade: bool,
+        ?security_groups: Array[Types::SecurityGroupMembership],
+        ?replication_group_id: String,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?auth_token_enabled: bool,
+        ?auth_token_last_modified_date: Time,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?arn: String,
+        ?replication_group_log_delivery_enabled: bool,
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfiguration],
+        ?network_type: String,
+        ?ip_discovery: String,
+        ?transit_encryption_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor configuration_endpoint: Types::Endpoint?
+      attr_accessor client_download_landing_page: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_cluster_status: String?
+      attr_accessor num_cache_nodes: Integer?
+      attr_accessor preferred_availability_zone: String?
+      attr_accessor preferred_outpost_arn: String?
+      attr_accessor cache_cluster_create_time: Time?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor pending_modified_values: Types::PendingModifiedValues?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor cache_security_groups: Array[Types::CacheSecurityGroupMembership]?
+      attr_accessor cache_parameter_group: Types::CacheParameterGroupStatus?
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_nodes: Array[Types::CacheNode]?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor security_groups: Array[Types::SecurityGroupMembership]?
+      attr_accessor replication_group_id: String?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor auth_token_enabled: bool?
+      attr_accessor auth_token_last_modified_date: Time?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor arn: String?
+      attr_accessor replication_group_log_delivery_enabled: bool?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfiguration]?
+      attr_accessor network_type: String?
+      attr_accessor ip_discovery: String?
+      attr_accessor transit_encryption_mode: String?
+    end
+
+    class CacheClusterAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?cache_clusters: Array[Types::CacheCluster],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor cache_clusters: Array[Types::CacheCluster]?
+    end
+
+    class CacheClusterNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheEngineVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_parameter_group_family: String,
+        ?cache_engine_description: String,
+        ?cache_engine_version_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor cache_engine_description: String?
+      attr_accessor cache_engine_version_description: String?
+    end
+
+    class CacheEngineVersionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?cache_engine_versions: Array[Types::CacheEngineVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor cache_engine_versions: Array[Types::CacheEngineVersion]?
+    end
+
+    class CacheNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_node_id: String,
+        ?cache_node_status: String,
+        ?cache_node_create_time: Time,
+        ?endpoint: Types::Endpoint,
+        ?parameter_group_status: String,
+        ?source_cache_node_id: String,
+        ?customer_availability_zone: String,
+        ?customer_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_node_id: String?
+      attr_accessor cache_node_status: String?
+      attr_accessor cache_node_create_time: Time?
+      attr_accessor endpoint: Types::Endpoint?
+      attr_accessor parameter_group_status: String?
+      attr_accessor source_cache_node_id: String?
+      attr_accessor customer_availability_zone: String?
+      attr_accessor customer_outpost_arn: String?
+    end
+
+    class CacheNodeTypeSpecificParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?description: String,
+        ?source: String,
+        ?data_type: String,
+        ?allowed_values: String,
+        ?is_modifiable: bool,
+        ?minimum_engine_version: String,
+        ?cache_node_type_specific_values: Array[Types::CacheNodeTypeSpecificValue],
+        ?change_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor description: String?
+      attr_accessor source: String?
+      attr_accessor data_type: String?
+      attr_accessor allowed_values: String?
+      attr_accessor is_modifiable: bool?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor cache_node_type_specific_values: Array[Types::CacheNodeTypeSpecificValue]?
+      attr_accessor change_type: String?
+    end
+
+    class CacheNodeTypeSpecificValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_node_type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_node_type: String?
+      attr_accessor value: String?
+    end
+
+    class CacheNodeUpdateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_node_id: String,
+        ?node_update_status: String,
+        ?node_deletion_date: Time,
+        ?node_update_start_date: Time,
+        ?node_update_end_date: Time,
+        ?node_update_initiated_by: String,
+        ?node_update_initiated_date: Time,
+        ?node_update_status_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_node_id: String?
+      attr_accessor node_update_status: String?
+      attr_accessor node_deletion_date: Time?
+      attr_accessor node_update_start_date: Time?
+      attr_accessor node_update_end_date: Time?
+      attr_accessor node_update_initiated_by: String?
+      attr_accessor node_update_initiated_date: Time?
+      attr_accessor node_update_status_modified_date: Time?
+    end
+
+    class CacheParameterGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?cache_parameter_group_family: String,
+        ?description: String,
+        ?is_global: bool,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor is_global: bool?
+      attr_accessor arn: String?
+    end
+
+    class CacheParameterGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheParameterGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheParameterGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheParameterGroupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?parameter_apply_status: String,
+        ?cache_node_ids_to_reboot: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor parameter_apply_status: String?
+      attr_accessor cache_node_ids_to_reboot: Array[String]?
+    end
+
+    class CacheParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?cache_parameter_groups: Array[Types::CacheParameterGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor cache_parameter_groups: Array[Types::CacheParameterGroup]?
+    end
+
+    class CacheSecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?cache_security_group_name: String,
+        ?description: String,
+        ?ec2_security_groups: Array[Types::EC2SecurityGroup],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor cache_security_group_name: String?
+      attr_accessor description: String?
+      attr_accessor ec2_security_groups: Array[Types::EC2SecurityGroup]?
+      attr_accessor arn: String?
+    end
+
+    class CacheSecurityGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSecurityGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+      attr_accessor status: String?
+    end
+
+    class CacheSecurityGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?cache_security_groups: Array[Types::CacheSecurityGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor cache_security_groups: Array[Types::CacheSecurityGroup]?
+    end
+
+    class CacheSecurityGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSecurityGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSubnetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group_name: String,
+        ?cache_subnet_group_description: String,
+        ?vpc_id: String,
+        ?subnets: Array[Types::Subnet],
+        ?arn: String,
+        ?supported_network_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_subnet_group_description: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnets: Array[Types::Subnet]?
+      attr_accessor arn: String?
+      attr_accessor supported_network_types: Array[String]?
+    end
+
+    class CacheSubnetGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSubnetGroupInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?cache_subnet_groups: Array[Types::CacheSubnetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor cache_subnet_groups: Array[Types::CacheSubnetGroup]?
+    end
+
+    class CacheSubnetGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSubnetGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheSubnetQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CacheUsageLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_storage: Types::DataStorage,
+        ?ecpu_per_second: Types::ECPUPerSecond,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_storage: Types::DataStorage?
+      attr_accessor ecpu_per_second: Types::ECPUPerSecond?
+    end
+
+    module ChangeType
+      immediate: String
+      requires_reboot: String
+    end
+
+    class CloudWatchLogsDestinationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group: String?
+    end
+
+    module ClusterMode
+      ENABLED: String
+      DISABLED: String
+      COMPATIBLE: String
+    end
+
+    class ClusterQuotaForCustomerExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CompleteMigrationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor force: bool?
+    end
+
+    class CompleteMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class ConfigureShard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group_id: String,
+        ?new_replica_count: Integer,
+        ?preferred_availability_zones: Array[String],
+        ?preferred_outpost_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group_id: String?
+      attr_accessor new_replica_count: Integer?
+      attr_accessor preferred_availability_zones: Array[String]?
+      attr_accessor preferred_outpost_arns: Array[String]?
+    end
+
+    class CopyServerlessCacheSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_serverless_cache_snapshot_name: String,
+        ?target_serverless_cache_snapshot_name: String,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_serverless_cache_snapshot_name: String?
+      attr_accessor target_serverless_cache_snapshot_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyServerlessCacheSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot: Types::ServerlessCacheSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot?
+    end
+
+    class CopySnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_snapshot_name: String,
+        ?target_snapshot_name: String,
+        ?target_bucket: String,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_snapshot_name: String?
+      attr_accessor target_snapshot_name: String?
+      attr_accessor target_bucket: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopySnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class CreateCacheClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?replication_group_id: String,
+        ?az_mode: String,
+        ?preferred_availability_zone: String,
+        ?preferred_availability_zones: Array[String],
+        ?num_cache_nodes: Integer,
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_parameter_group_name: String,
+        ?cache_subnet_group_name: String,
+        ?cache_security_group_names: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?snapshot_arns: Array[String],
+        ?snapshot_name: String,
+        ?preferred_maintenance_window: String,
+        ?port: Integer,
+        ?notification_topic_arn: String,
+        ?auto_minor_version_upgrade: bool,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?auth_token: String,
+        ?outpost_mode: String,
+        ?preferred_outpost_arn: String,
+        ?preferred_outpost_arns: Array[String],
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest],
+        ?transit_encryption_enabled: bool,
+        ?network_type: String,
+        ?ip_discovery: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor replication_group_id: String?
+      attr_accessor az_mode: String?
+      attr_accessor preferred_availability_zone: String?
+      attr_accessor preferred_availability_zones: Array[String]?
+      attr_accessor num_cache_nodes: Integer?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_security_group_names: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor snapshot_arns: Array[String]?
+      attr_accessor snapshot_name: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor port: Integer?
+      attr_accessor notification_topic_arn: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor auth_token: String?
+      attr_accessor outpost_mode: String?
+      attr_accessor preferred_outpost_arn: String?
+      attr_accessor preferred_outpost_arns: Array[String]?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest]?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor network_type: String?
+      attr_accessor ip_discovery: String?
+    end
+
+    class CreateCacheClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster: Types::CacheCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster: Types::CacheCluster?
+    end
+
+    class CreateCacheParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?cache_parameter_group_family: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCacheParameterGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group: Types::CacheParameterGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group: Types::CacheParameterGroup?
+    end
+
+    class CreateCacheSecurityGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCacheSecurityGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group: Types::CacheSecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group: Types::CacheSecurityGroup?
+    end
+
+    class CreateCacheSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group_name: String,
+        ?cache_subnet_group_description: String,
+        ?subnet_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_subnet_group_description: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCacheSubnetGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group: Types::CacheSubnetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group: Types::CacheSubnetGroup?
+    end
+
+    class CreateGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id_suffix: String,
+        ?global_replication_group_description: String,
+        ?primary_replication_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id_suffix: String?
+      attr_accessor global_replication_group_description: String?
+      attr_accessor primary_replication_group_id: String?
+    end
+
+    class CreateGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class CreateReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?replication_group_description: String,
+        ?global_replication_group_id: String,
+        ?primary_cluster_id: String,
+        ?automatic_failover_enabled: bool,
+        ?multi_az_enabled: bool,
+        ?num_cache_clusters: Integer,
+        ?preferred_cache_cluster_a_zs: Array[String],
+        ?num_node_groups: Integer,
+        ?replicas_per_node_group: Integer,
+        ?node_group_configuration: Array[Types::NodeGroupConfiguration],
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_parameter_group_name: String,
+        ?cache_subnet_group_name: String,
+        ?cache_security_group_names: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?snapshot_arns: Array[String],
+        ?snapshot_name: String,
+        ?preferred_maintenance_window: String,
+        ?port: Integer,
+        ?notification_topic_arn: String,
+        ?auto_minor_version_upgrade: bool,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?auth_token: String,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?kms_key_id: String,
+        ?user_group_ids: Array[String],
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest],
+        ?data_tiering_enabled: bool,
+        ?network_type: String,
+        ?ip_discovery: String,
+        ?transit_encryption_mode: String,
+        ?cluster_mode: String,
+        ?serverless_cache_snapshot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_description: String?
+      attr_accessor global_replication_group_id: String?
+      attr_accessor primary_cluster_id: String?
+      attr_accessor automatic_failover_enabled: bool?
+      attr_accessor multi_az_enabled: bool?
+      attr_accessor num_cache_clusters: Integer?
+      attr_accessor preferred_cache_cluster_a_zs: Array[String]?
+      attr_accessor num_node_groups: Integer?
+      attr_accessor replicas_per_node_group: Integer?
+      attr_accessor node_group_configuration: Array[Types::NodeGroupConfiguration]?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_security_group_names: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor snapshot_arns: Array[String]?
+      attr_accessor snapshot_name: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor port: Integer?
+      attr_accessor notification_topic_arn: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor auth_token: String?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest]?
+      attr_accessor data_tiering_enabled: bool?
+      attr_accessor network_type: String?
+      attr_accessor ip_discovery: String?
+      attr_accessor transit_encryption_mode: String?
+      attr_accessor cluster_mode: String?
+      attr_accessor serverless_cache_snapshot_name: String?
+    end
+
+    class CreateReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class CreateServerlessCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?description: String,
+        ?engine: String,
+        ?major_engine_version: String,
+        ?cache_usage_limits: Types::CacheUsageLimits,
+        ?kms_key_id: String,
+        ?security_group_ids: Array[String],
+        ?snapshot_arns_to_restore: Array[String],
+        ?tags: Array[Types::Tag],
+        ?user_group_id: String,
+        ?subnet_ids: Array[String],
+        ?snapshot_retention_limit: Integer,
+        ?daily_snapshot_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor description: String?
+      attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits?
+      attr_accessor kms_key_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor snapshot_arns_to_restore: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor user_group_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor daily_snapshot_time: String?
+    end
+
+    class CreateServerlessCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache: Types::ServerlessCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache: Types::ServerlessCache?
+    end
+
+    class CreateServerlessCacheSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot_name: String,
+        ?serverless_cache_name: String,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot_name: String?
+      attr_accessor serverless_cache_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateServerlessCacheSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot: Types::ServerlessCacheSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot?
+    end
+
+    class CreateSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?cache_cluster_id: String,
+        ?snapshot_name: String,
+        ?kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class CreateUserGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?engine: String,
+        ?user_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor engine: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateUserGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?status: String,
+        ?engine: String,
+        ?user_ids: Array[String],
+        ?minimum_engine_version: String,
+        ?pending_changes: Types::UserGroupPendingChanges,
+        ?replication_groups: Array[String],
+        ?serverless_caches: Array[String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor pending_changes: Types::UserGroupPendingChanges?
+      attr_accessor replication_groups: Array[String]?
+      attr_accessor serverless_caches: Array[String]?
+      attr_accessor arn: String?
+    end
+
+    class CreateUserMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_name: String,
+        ?engine: String,
+        ?passwords: Array[String],
+        ?access_string: String,
+        ?no_password_required: bool,
+        ?tags: Array[Types::Tag],
+        ?authentication_mode: Types::AuthenticationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_name: String?
+      attr_accessor engine: String?
+      attr_accessor passwords: Array[String]?
+      attr_accessor access_string: String?
+      attr_accessor no_password_required: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor authentication_mode: Types::AuthenticationMode?
+    end
+
+    class CreateUserOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_name: String,
+        ?status: String,
+        ?engine: String,
+        ?minimum_engine_version: String,
+        ?access_string: String,
+        ?user_group_ids: Array[String],
+        ?authentication: Types::Authentication,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_name: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor access_string: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor authentication: Types::Authentication?
+      attr_accessor arn: String?
+    end
+
+    class CustomerNodeEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor port: Integer?
+    end
+
+    class DataStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum: Integer,
+        ?minimum: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum: Integer?
+      attr_accessor minimum: Integer?
+      attr_accessor unit: String?
+    end
+
+    module DataStorageUnit
+      GB: String
+    end
+
+    module DataTieringStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class DecreaseNodeGroupsInGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?node_group_count: Integer,
+        ?global_node_groups_to_remove: Array[String],
+        ?global_node_groups_to_retain: Array[String],
+        ?apply_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor node_group_count: Integer?
+      attr_accessor global_node_groups_to_remove: Array[String]?
+      attr_accessor global_node_groups_to_retain: Array[String]?
+      attr_accessor apply_immediately: bool?
+    end
+
+    class DecreaseNodeGroupsInGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class DecreaseReplicaCountMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?new_replica_count: Integer,
+        ?replica_configuration: Array[Types::ConfigureShard],
+        ?replicas_to_remove: Array[String],
+        ?apply_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor new_replica_count: Integer?
+      attr_accessor replica_configuration: Array[Types::ConfigureShard]?
+      attr_accessor replicas_to_remove: Array[String]?
+      attr_accessor apply_immediately: bool?
+    end
+
+    class DecreaseReplicaCountResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class DefaultUserAssociatedToUserGroupFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DefaultUserRequired
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteCacheClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?final_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor final_snapshot_identifier: String?
+    end
+
+    class DeleteCacheClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster: Types::CacheCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster: Types::CacheCluster?
+    end
+
+    class DeleteCacheParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+    end
+
+    class DeleteCacheSecurityGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+    end
+
+    class DeleteCacheSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group_name: String?
+    end
+
+    class DeleteGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?retain_primary_replication_group: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor retain_primary_replication_group: bool?
+    end
+
+    class DeleteGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class DeleteReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?retain_primary_cluster: bool,
+        ?final_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor retain_primary_cluster: bool?
+      attr_accessor final_snapshot_identifier: String?
+    end
+
+    class DeleteReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class DeleteServerlessCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?final_snapshot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor final_snapshot_name: String?
+    end
+
+    class DeleteServerlessCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache: Types::ServerlessCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache: Types::ServerlessCache?
+    end
+
+    class DeleteServerlessCacheSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot_name: String?
+    end
+
+    class DeleteServerlessCacheSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot: Types::ServerlessCacheSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot?
+    end
+
+    class DeleteSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+    end
+
+    class DeleteSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class DeleteUserGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+    end
+
+    class DeleteUserGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?status: String,
+        ?engine: String,
+        ?user_ids: Array[String],
+        ?minimum_engine_version: String,
+        ?pending_changes: Types::UserGroupPendingChanges,
+        ?replication_groups: Array[String],
+        ?serverless_caches: Array[String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor pending_changes: Types::UserGroupPendingChanges?
+      attr_accessor replication_groups: Array[String]?
+      attr_accessor serverless_caches: Array[String]?
+      attr_accessor arn: String?
+    end
+
+    class DeleteUserMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class DeleteUserOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_name: String,
+        ?status: String,
+        ?engine: String,
+        ?minimum_engine_version: String,
+        ?access_string: String,
+        ?user_group_ids: Array[String],
+        ?authentication: Types::Authentication,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_name: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor access_string: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor authentication: Types::Authentication?
+      attr_accessor arn: String?
+    end
+
+    class DescribeCacheClustersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?max_records: Integer,
+        ?marker: String,
+        ?show_cache_node_info: bool,
+        ?show_cache_clusters_not_in_replication_groups: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+      attr_accessor show_cache_node_info: bool?
+      attr_accessor show_cache_clusters_not_in_replication_groups: bool?
+    end
+
+    class DescribeCacheEngineVersionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_parameter_group_family: String,
+        ?max_records: Integer,
+        ?marker: String,
+        ?default_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+      attr_accessor default_only: bool?
+    end
+
+    class DescribeCacheParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCacheParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?source: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor source: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCacheParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?parameters: Array[Types::Parameter],
+        ?cache_node_type_specific_parameters: Array[Types::CacheNodeTypeSpecificParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor cache_node_type_specific_parameters: Array[Types::CacheNodeTypeSpecificParameter]?
+    end
+
+    class DescribeCacheSecurityGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCacheSubnetGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group_name: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEngineDefaultParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_family: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEngineDefaultParametersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_defaults: Types::EngineDefaults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_defaults: Types::EngineDefaults?
+    end
+
+    class DescribeEventsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_identifier: String,
+        ?source_type: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?duration: Integer,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_identifier: String?
+      attr_accessor source_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor duration: Integer?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeGlobalReplicationGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?max_records: Integer,
+        ?marker: String,
+        ?show_member_info: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+      attr_accessor show_member_info: bool?
+    end
+
+    class DescribeGlobalReplicationGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?global_replication_groups: Array[Types::GlobalReplicationGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor global_replication_groups: Array[Types::GlobalReplicationGroup]?
+    end
+
+    class DescribeReplicationGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeReservedCacheNodesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_node_id: String,
+        ?reserved_cache_nodes_offering_id: String,
+        ?cache_node_type: String,
+        ?duration: String,
+        ?product_description: String,
+        ?offering_type: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_node_id: String?
+      attr_accessor reserved_cache_nodes_offering_id: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor duration: String?
+      attr_accessor product_description: String?
+      attr_accessor offering_type: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeReservedCacheNodesOfferingsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_nodes_offering_id: String,
+        ?cache_node_type: String,
+        ?duration: String,
+        ?product_description: String,
+        ?offering_type: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_nodes_offering_id: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor duration: String?
+      attr_accessor product_description: String?
+      attr_accessor offering_type: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeServerlessCacheSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?serverless_cache_snapshot_name: String,
+        ?snapshot_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor serverless_cache_snapshot_name: String?
+      attr_accessor snapshot_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeServerlessCacheSnapshotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?serverless_cache_snapshots: Array[Types::ServerlessCacheSnapshot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor serverless_cache_snapshots: Array[Types::ServerlessCacheSnapshot]?
+    end
+
+    class DescribeServerlessCachesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeServerlessCachesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?serverless_caches: Array[Types::ServerlessCache],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor serverless_caches: Array[Types::ServerlessCache]?
+    end
+
+    class DescribeServiceUpdatesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_update_name: String,
+        ?service_update_status: Array[String],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_update_name: String?
+      attr_accessor service_update_status: Array[String]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeSnapshotsListMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?snapshots: Array[Types::Snapshot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor snapshots: Array[Types::Snapshot]?
+    end
+
+    class DescribeSnapshotsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?cache_cluster_id: String,
+        ?snapshot_name: String,
+        ?snapshot_source: String,
+        ?marker: String,
+        ?max_records: Integer,
+        ?show_node_group_config: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor snapshot_source: String?
+      attr_accessor marker: String?
+      attr_accessor max_records: Integer?
+      attr_accessor show_node_group_config: bool?
+    end
+
+    class DescribeUpdateActionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_update_name: String,
+        ?replication_group_ids: Array[String],
+        ?cache_cluster_ids: Array[String],
+        ?engine: String,
+        ?service_update_status: Array[String],
+        ?service_update_time_range: Types::TimeRangeFilter,
+        ?update_action_status: Array[String],
+        ?show_node_level_update_status: bool,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_update_name: String?
+      attr_accessor replication_group_ids: Array[String]?
+      attr_accessor cache_cluster_ids: Array[String]?
+      attr_accessor engine: String?
+      attr_accessor service_update_status: Array[String]?
+      attr_accessor service_update_time_range: Types::TimeRangeFilter?
+      attr_accessor update_action_status: Array[String]?
+      attr_accessor show_node_level_update_status: bool?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUserGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUserGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_groups: Array[Types::UserGroup],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_groups: Array[Types::UserGroup]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUsersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?user_id: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor user_id: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUsersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor marker: String?
+    end
+
+    class DestinationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_details: Types::CloudWatchLogsDestinationDetails,
+        ?kinesis_firehose_details: Types::KinesisFirehoseDestinationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_details: Types::CloudWatchLogsDestinationDetails?
+      attr_accessor kinesis_firehose_details: Types::KinesisFirehoseDestinationDetails?
+    end
+
+    module DestinationType
+      CloudWatchLogs: String
+      KinesisFirehose: String
+    end
+
+    class DisassociateGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?replication_group_id: String,
+        ?replication_group_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_region: String?
+    end
+
+    class DisassociateGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class DuplicateUserNameFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EC2SecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?ec2_security_group_name: String,
+        ?ec2_security_group_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor ec2_security_group_name: String?
+      attr_accessor ec2_security_group_owner_id: String?
+    end
+
+    class ECPUPerSecond
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum: Integer,
+        ?minimum: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum: Integer?
+      attr_accessor minimum: Integer?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor port: Integer?
+    end
+
+    class EngineDefaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_family: String,
+        ?marker: String,
+        ?parameters: Array[Types::Parameter],
+        ?cache_node_type_specific_parameters: Array[Types::CacheNodeTypeSpecificParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_family: String?
+      attr_accessor marker: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor cache_node_type_specific_parameters: Array[Types::CacheNodeTypeSpecificParameter]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_identifier: String,
+        ?source_type: String,
+        ?message: String,
+        ?date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_identifier: String?
+      attr_accessor source_type: String?
+      attr_accessor message: String?
+      attr_accessor date: Time?
+    end
+
+    class EventsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?events: Array[Types::Event],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor events: Array[Types::Event]?
+    end
+
+    class ExportServerlessCacheSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot_name: String,
+        ?s3_bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot_name: String?
+      attr_accessor s3_bucket_name: String?
+    end
+
+    class ExportServerlessCacheSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot: Types::ServerlessCacheSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot?
+    end
+
+    class FailoverGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?primary_region: String,
+        ?primary_replication_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor primary_region: String?
+      attr_accessor primary_replication_group_id: String?
+    end
+
+    class FailoverGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GlobalNodeGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_node_group_id: String,
+        ?slots: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_node_group_id: String?
+      attr_accessor slots: String?
+    end
+
+    class GlobalReplicationGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?global_replication_group_description: String,
+        ?status: String,
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?members: Array[Types::GlobalReplicationGroupMember],
+        ?cluster_enabled: bool,
+        ?global_node_groups: Array[Types::GlobalNodeGroup],
+        ?auth_token_enabled: bool,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor global_replication_group_description: String?
+      attr_accessor status: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor members: Array[Types::GlobalReplicationGroupMember]?
+      attr_accessor cluster_enabled: bool?
+      attr_accessor global_node_groups: Array[Types::GlobalNodeGroup]?
+      attr_accessor auth_token_enabled: bool?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor arn: String?
+    end
+
+    class GlobalReplicationGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GlobalReplicationGroupInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?global_replication_group_member_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor global_replication_group_member_role: String?
+    end
+
+    class GlobalReplicationGroupMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?replication_group_region: String,
+        ?role: String,
+        ?automatic_failover: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_region: String?
+      attr_accessor role: String?
+      attr_accessor automatic_failover: String?
+      attr_accessor status: String?
+    end
+
+    class GlobalReplicationGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IncreaseNodeGroupsInGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?node_group_count: Integer,
+        ?regional_configurations: Array[Types::RegionalConfiguration],
+        ?apply_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor node_group_count: Integer?
+      attr_accessor regional_configurations: Array[Types::RegionalConfiguration]?
+      attr_accessor apply_immediately: bool?
+    end
+
+    class IncreaseNodeGroupsInGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class IncreaseReplicaCountMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?new_replica_count: Integer,
+        ?replica_configuration: Array[Types::ConfigureShard],
+        ?apply_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor new_replica_count: Integer?
+      attr_accessor replica_configuration: Array[Types::ConfigureShard]?
+      attr_accessor apply_immediately: bool?
+    end
+
+    class IncreaseReplicaCountResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    module InputAuthenticationType
+      PASSWORD: String
+      NO_PASSWORD: String
+      IAM: String
+    end
+
+    class InsufficientCacheClusterCapacityFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidARNFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCacheClusterStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCacheParameterGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCacheSecurityGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCredentialsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGlobalReplicationGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKMSKeyFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReplicationGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidServerlessCacheSnapshotStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidServerlessCacheStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSnapshotStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSubnet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidUserGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidUserStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidVPCNetworkStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpDiscovery
+      IPV4: String
+      IPV6: String
+    end
+
+    class KinesisFirehoseDestinationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream: String?
+    end
+
+    class ListAllowedNodeTypeModificationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?replication_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor replication_group_id: String?
+    end
+
+    class ListTagsForResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class LogDeliveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?destination_type: String,
+        ?destination_details: Types::DestinationDetails,
+        ?log_format: String,
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor destination_type: String?
+      attr_accessor destination_details: Types::DestinationDetails?
+      attr_accessor log_format: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    class LogDeliveryConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?destination_type: String,
+        ?destination_details: Types::DestinationDetails,
+        ?log_format: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor destination_type: String?
+      attr_accessor destination_details: Types::DestinationDetails?
+      attr_accessor log_format: String?
+      attr_accessor enabled: bool?
+    end
+
+    module LogDeliveryConfigurationStatus
+      ACTIVE: String
+      ENABLING: String
+      MODIFYING: String
+      DISABLING: String
+      ERROR: String
+    end
+
+    module LogFormat
+      TEXT: String
+      JSON: String
+    end
+
+    module LogType
+      SLOW_LOG: String
+      ENGINE_LOG: String
+    end
+
+    class ModifyCacheClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?num_cache_nodes: Integer,
+        ?cache_node_ids_to_remove: Array[String],
+        ?az_mode: String,
+        ?new_availability_zones: Array[String],
+        ?cache_security_group_names: Array[String],
+        ?security_group_ids: Array[String],
+        ?preferred_maintenance_window: String,
+        ?notification_topic_arn: String,
+        ?cache_parameter_group_name: String,
+        ?notification_topic_status: String,
+        ?apply_immediately: bool,
+        ?engine: String,
+        ?engine_version: String,
+        ?auto_minor_version_upgrade: bool,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?cache_node_type: String,
+        ?auth_token: String,
+        ?auth_token_update_strategy: String,
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest],
+        ?ip_discovery: String,
+        ?scale_config: Types::ScaleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor num_cache_nodes: Integer?
+      attr_accessor cache_node_ids_to_remove: Array[String]?
+      attr_accessor az_mode: String?
+      attr_accessor new_availability_zones: Array[String]?
+      attr_accessor cache_security_group_names: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor notification_topic_arn: String?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor notification_topic_status: String?
+      attr_accessor apply_immediately: bool?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_update_strategy: String?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest]?
+      attr_accessor ip_discovery: String?
+      attr_accessor scale_config: Types::ScaleConfig?
+    end
+
+    class ModifyCacheClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster: Types::CacheCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster: Types::CacheCluster?
+    end
+
+    class ModifyCacheParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?parameter_name_values: Array[Types::ParameterNameValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor parameter_name_values: Array[Types::ParameterNameValue]?
+    end
+
+    class ModifyCacheParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+    end
+
+    class ModifyCacheSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group_name: String,
+        ?cache_subnet_group_description: String,
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor cache_subnet_group_description: String?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class ModifyCacheSubnetGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_subnet_group: Types::CacheSubnetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_subnet_group: Types::CacheSubnetGroup?
+    end
+
+    class ModifyGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?apply_immediately: bool,
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?cache_parameter_group_name: String,
+        ?global_replication_group_description: String,
+        ?automatic_failover_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor apply_immediately: bool?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor global_replication_group_description: String?
+      attr_accessor automatic_failover_enabled: bool?
+    end
+
+    class ModifyGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class ModifyReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?replication_group_description: String,
+        ?primary_cluster_id: String,
+        ?snapshotting_cluster_id: String,
+        ?automatic_failover_enabled: bool,
+        ?multi_az_enabled: bool,
+        ?node_group_id: String,
+        ?cache_security_group_names: Array[String],
+        ?security_group_ids: Array[String],
+        ?preferred_maintenance_window: String,
+        ?notification_topic_arn: String,
+        ?cache_parameter_group_name: String,
+        ?notification_topic_status: String,
+        ?apply_immediately: bool,
+        ?engine: String,
+        ?engine_version: String,
+        ?auto_minor_version_upgrade: bool,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?cache_node_type: String,
+        ?auth_token: String,
+        ?auth_token_update_strategy: String,
+        ?user_group_ids_to_add: Array[String],
+        ?user_group_ids_to_remove: Array[String],
+        ?remove_user_groups: bool,
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest],
+        ?ip_discovery: String,
+        ?transit_encryption_enabled: bool,
+        ?transit_encryption_mode: String,
+        ?cluster_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_description: String?
+      attr_accessor primary_cluster_id: String?
+      attr_accessor snapshotting_cluster_id: String?
+      attr_accessor automatic_failover_enabled: bool?
+      attr_accessor multi_az_enabled: bool?
+      attr_accessor node_group_id: String?
+      attr_accessor cache_security_group_names: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor notification_topic_arn: String?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor notification_topic_status: String?
+      attr_accessor apply_immediately: bool?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_update_strategy: String?
+      attr_accessor user_group_ids_to_add: Array[String]?
+      attr_accessor user_group_ids_to_remove: Array[String]?
+      attr_accessor remove_user_groups: bool?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfigurationRequest]?
+      attr_accessor ip_discovery: String?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor transit_encryption_mode: String?
+      attr_accessor cluster_mode: String?
+    end
+
+    class ModifyReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class ModifyReplicationGroupShardConfigurationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?node_group_count: Integer,
+        ?apply_immediately: bool,
+        ?resharding_configuration: Array[Types::ReshardingConfiguration],
+        ?node_groups_to_remove: Array[String],
+        ?node_groups_to_retain: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor node_group_count: Integer?
+      attr_accessor apply_immediately: bool?
+      attr_accessor resharding_configuration: Array[Types::ReshardingConfiguration]?
+      attr_accessor node_groups_to_remove: Array[String]?
+      attr_accessor node_groups_to_retain: Array[String]?
+    end
+
+    class ModifyReplicationGroupShardConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class ModifyServerlessCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?description: String,
+        ?cache_usage_limits: Types::CacheUsageLimits,
+        ?remove_user_group: bool,
+        ?user_group_id: String,
+        ?security_group_ids: Array[String],
+        ?snapshot_retention_limit: Integer,
+        ?daily_snapshot_time: String,
+        ?engine: String,
+        ?major_engine_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor description: String?
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits?
+      attr_accessor remove_user_group: bool?
+      attr_accessor user_group_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor daily_snapshot_time: String?
+      attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
+    end
+
+    class ModifyServerlessCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache: Types::ServerlessCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache: Types::ServerlessCache?
+    end
+
+    class ModifyUserGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?user_ids_to_add: Array[String],
+        ?user_ids_to_remove: Array[String],
+        ?engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor user_ids_to_add: Array[String]?
+      attr_accessor user_ids_to_remove: Array[String]?
+      attr_accessor engine: String?
+    end
+
+    class ModifyUserGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?status: String,
+        ?engine: String,
+        ?user_ids: Array[String],
+        ?minimum_engine_version: String,
+        ?pending_changes: Types::UserGroupPendingChanges,
+        ?replication_groups: Array[String],
+        ?serverless_caches: Array[String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor pending_changes: Types::UserGroupPendingChanges?
+      attr_accessor replication_groups: Array[String]?
+      attr_accessor serverless_caches: Array[String]?
+      attr_accessor arn: String?
+    end
+
+    class ModifyUserMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?access_string: String,
+        ?append_access_string: String,
+        ?passwords: Array[String],
+        ?no_password_required: bool,
+        ?authentication_mode: Types::AuthenticationMode,
+        ?engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor access_string: String?
+      attr_accessor append_access_string: String?
+      attr_accessor passwords: Array[String]?
+      attr_accessor no_password_required: bool?
+      attr_accessor authentication_mode: Types::AuthenticationMode?
+      attr_accessor engine: String?
+    end
+
+    class ModifyUserOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_name: String,
+        ?status: String,
+        ?engine: String,
+        ?minimum_engine_version: String,
+        ?access_string: String,
+        ?user_group_ids: Array[String],
+        ?authentication: Types::Authentication,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_name: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor access_string: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor authentication: Types::Authentication?
+      attr_accessor arn: String?
+    end
+
+    module MultiAZStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module NetworkType
+      IPV4: String
+      IPV6: String
+      DUAL_STACK: String
+    end
+
+    class NoOperationFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NodeGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group_id: String,
+        ?status: String,
+        ?primary_endpoint: Types::Endpoint,
+        ?reader_endpoint: Types::Endpoint,
+        ?slots: String,
+        ?node_group_members: Array[Types::NodeGroupMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group_id: String?
+      attr_accessor status: String?
+      attr_accessor primary_endpoint: Types::Endpoint?
+      attr_accessor reader_endpoint: Types::Endpoint?
+      attr_accessor slots: String?
+      attr_accessor node_group_members: Array[Types::NodeGroupMember]?
+    end
+
+    class NodeGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group_id: String,
+        ?slots: String,
+        ?replica_count: Integer,
+        ?primary_availability_zone: String,
+        ?replica_availability_zones: Array[String],
+        ?primary_outpost_arn: String,
+        ?replica_outpost_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group_id: String?
+      attr_accessor slots: String?
+      attr_accessor replica_count: Integer?
+      attr_accessor primary_availability_zone: String?
+      attr_accessor replica_availability_zones: Array[String]?
+      attr_accessor primary_outpost_arn: String?
+      attr_accessor replica_outpost_arns: Array[String]?
+    end
+
+    class NodeGroupMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?cache_node_id: String,
+        ?read_endpoint: Types::Endpoint,
+        ?preferred_availability_zone: String,
+        ?preferred_outpost_arn: String,
+        ?current_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor cache_node_id: String?
+      attr_accessor read_endpoint: Types::Endpoint?
+      attr_accessor preferred_availability_zone: String?
+      attr_accessor preferred_outpost_arn: String?
+      attr_accessor current_role: String?
+    end
+
+    class NodeGroupMemberUpdateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?cache_node_id: String,
+        ?node_update_status: String,
+        ?node_deletion_date: Time,
+        ?node_update_start_date: Time,
+        ?node_update_end_date: Time,
+        ?node_update_initiated_by: String,
+        ?node_update_initiated_date: Time,
+        ?node_update_status_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor cache_node_id: String?
+      attr_accessor node_update_status: String?
+      attr_accessor node_deletion_date: Time?
+      attr_accessor node_update_start_date: Time?
+      attr_accessor node_update_end_date: Time?
+      attr_accessor node_update_initiated_by: String?
+      attr_accessor node_update_initiated_date: Time?
+      attr_accessor node_update_status_modified_date: Time?
+    end
+
+    class NodeGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NodeGroupUpdateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group_id: String,
+        ?node_group_member_update_status: Array[Types::NodeGroupMemberUpdateStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group_id: String?
+      attr_accessor node_group_member_update_status: Array[Types::NodeGroupMemberUpdateStatus]?
+    end
+
+    class NodeGroupsPerReplicationGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NodeQuotaForClusterExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NodeQuotaForCustomerExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NodeSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?node_group_id: String,
+        ?cache_node_id: String,
+        ?node_group_configuration: Types::NodeGroupConfiguration,
+        ?cache_size: String,
+        ?cache_node_create_time: Time,
+        ?snapshot_create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor node_group_id: String?
+      attr_accessor cache_node_id: String?
+      attr_accessor node_group_configuration: Types::NodeGroupConfiguration?
+      attr_accessor cache_size: String?
+      attr_accessor cache_node_create_time: Time?
+      attr_accessor snapshot_create_time: Time?
+    end
+
+    module NodeUpdateInitiatedBy
+      SYSTEM: String
+      CUSTOMER: String
+    end
+
+    module NodeUpdateStatus
+      NOT_APPLIED: String
+      WAITING_TO_START: String
+      IN_PROGRESS: String
+      STOPPING: String
+      STOPPED: String
+      COMPLETE: String
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_status: String?
+    end
+
+    module OutpostMode
+      SINGLE_OUTPOST: String
+      CROSS_OUTPOST: String
+    end
+
+    class Parameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+        ?description: String,
+        ?source: String,
+        ?data_type: String,
+        ?allowed_values: String,
+        ?is_modifiable: bool,
+        ?minimum_engine_version: String,
+        ?change_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+      attr_accessor description: String?
+      attr_accessor source: String?
+      attr_accessor data_type: String?
+      attr_accessor allowed_values: String?
+      attr_accessor is_modifiable: bool?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor change_type: String?
+    end
+
+    class ParameterNameValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
+    module PendingAutomaticFailoverStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class PendingLogDeliveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?destination_type: String,
+        ?destination_details: Types::DestinationDetails,
+        ?log_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor destination_type: String?
+      attr_accessor destination_details: Types::DestinationDetails?
+      attr_accessor log_format: String?
+    end
+
+    class PendingModifiedValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_cache_nodes: Integer,
+        ?cache_node_ids_to_remove: Array[String],
+        ?engine_version: String,
+        ?cache_node_type: String,
+        ?auth_token_status: String,
+        ?log_delivery_configurations: Array[Types::PendingLogDeliveryConfiguration],
+        ?transit_encryption_enabled: bool,
+        ?transit_encryption_mode: String,
+        ?scale_config: Types::ScaleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_cache_nodes: Integer?
+      attr_accessor cache_node_ids_to_remove: Array[String]?
+      attr_accessor engine_version: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor auth_token_status: String?
+      attr_accessor log_delivery_configurations: Array[Types::PendingLogDeliveryConfiguration]?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor transit_encryption_mode: String?
+      attr_accessor scale_config: Types::ScaleConfig?
+    end
+
+    class ProcessedUpdateAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?cache_cluster_id: String,
+        ?service_update_name: String,
+        ?update_action_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor service_update_name: String?
+      attr_accessor update_action_status: String?
+    end
+
+    class PurchaseReservedCacheNodesOfferingMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_nodes_offering_id: String,
+        ?reserved_cache_node_id: String,
+        ?cache_node_count: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_nodes_offering_id: String?
+      attr_accessor reserved_cache_node_id: String?
+      attr_accessor cache_node_count: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PurchaseReservedCacheNodesOfferingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_node: Types::ReservedCacheNode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_node: Types::ReservedCacheNode?
+    end
+
+    class RebalanceSlotsInGlobalReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group_id: String,
+        ?apply_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group_id: String?
+      attr_accessor apply_immediately: bool?
+    end
+
+    class RebalanceSlotsInGlobalReplicationGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_replication_group: Types::GlobalReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup?
+    end
+
+    class RebootCacheClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster_id: String,
+        ?cache_node_ids_to_reboot: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster_id: String?
+      attr_accessor cache_node_ids_to_reboot: Array[String]?
+    end
+
+    class RebootCacheClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_cluster: Types::CacheCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_cluster: Types::CacheCluster?
+    end
+
+    class RecurringCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recurring_charge_amount: Float,
+        ?recurring_charge_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recurring_charge_amount: Float?
+      attr_accessor recurring_charge_frequency: String?
+    end
+
+    class RegionalConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?replication_group_region: String,
+        ?resharding_configuration: Array[Types::ReshardingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_region: String?
+      attr_accessor resharding_configuration: Array[Types::ReshardingConfiguration]?
+    end
+
+    class RemoveTagsFromResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsFromResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class ReplicationGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?description: String,
+        ?global_replication_group_info: Types::GlobalReplicationGroupInfo,
+        ?status: String,
+        ?pending_modified_values: Types::ReplicationGroupPendingModifiedValues,
+        ?member_clusters: Array[String],
+        ?node_groups: Array[Types::NodeGroup],
+        ?snapshotting_cluster_id: String,
+        ?automatic_failover: String,
+        ?multi_az: String,
+        ?configuration_endpoint: Types::Endpoint,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?cluster_enabled: bool,
+        ?cache_node_type: String,
+        ?auth_token_enabled: bool,
+        ?auth_token_last_modified_date: Time,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?member_clusters_outpost_arns: Array[String],
+        ?kms_key_id: String,
+        ?arn: String,
+        ?user_group_ids: Array[String],
+        ?log_delivery_configurations: Array[Types::LogDeliveryConfiguration],
+        ?replication_group_create_time: Time,
+        ?data_tiering: String,
+        ?auto_minor_version_upgrade: bool,
+        ?network_type: String,
+        ?ip_discovery: String,
+        ?transit_encryption_mode: String,
+        ?cluster_mode: String,
+        ?engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor description: String?
+      attr_accessor global_replication_group_info: Types::GlobalReplicationGroupInfo?
+      attr_accessor status: String?
+      attr_accessor pending_modified_values: Types::ReplicationGroupPendingModifiedValues?
+      attr_accessor member_clusters: Array[String]?
+      attr_accessor node_groups: Array[Types::NodeGroup]?
+      attr_accessor snapshotting_cluster_id: String?
+      attr_accessor automatic_failover: String?
+      attr_accessor multi_az: String?
+      attr_accessor configuration_endpoint: Types::Endpoint?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor cluster_enabled: bool?
+      attr_accessor cache_node_type: String?
+      attr_accessor auth_token_enabled: bool?
+      attr_accessor auth_token_last_modified_date: Time?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor member_clusters_outpost_arns: Array[String]?
+      attr_accessor kms_key_id: String?
+      attr_accessor arn: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfiguration]?
+      attr_accessor replication_group_create_time: Time?
+      attr_accessor data_tiering: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor network_type: String?
+      attr_accessor ip_discovery: String?
+      attr_accessor transit_encryption_mode: String?
+      attr_accessor cluster_mode: String?
+      attr_accessor engine: String?
+    end
+
+    class ReplicationGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicationGroupAlreadyUnderMigrationFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicationGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?replication_groups: Array[Types::ReplicationGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor replication_groups: Array[Types::ReplicationGroup]?
+    end
+
+    class ReplicationGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicationGroupNotUnderMigrationFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicationGroupPendingModifiedValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_cluster_id: String,
+        ?automatic_failover_status: String,
+        ?resharding: Types::ReshardingStatus,
+        ?auth_token_status: String,
+        ?user_groups: Types::UserGroupsUpdateStatus,
+        ?log_delivery_configurations: Array[Types::PendingLogDeliveryConfiguration],
+        ?transit_encryption_enabled: bool,
+        ?transit_encryption_mode: String,
+        ?cluster_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_cluster_id: String?
+      attr_accessor automatic_failover_status: String?
+      attr_accessor resharding: Types::ReshardingStatus?
+      attr_accessor auth_token_status: String?
+      attr_accessor user_groups: Types::UserGroupsUpdateStatus?
+      attr_accessor log_delivery_configurations: Array[Types::PendingLogDeliveryConfiguration]?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor transit_encryption_mode: String?
+      attr_accessor cluster_mode: String?
+    end
+
+    class ReservedCacheNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_node_id: String,
+        ?reserved_cache_nodes_offering_id: String,
+        ?cache_node_type: String,
+        ?start_time: Time,
+        ?duration: Integer,
+        ?fixed_price: Float,
+        ?usage_price: Float,
+        ?cache_node_count: Integer,
+        ?product_description: String,
+        ?offering_type: String,
+        ?state: String,
+        ?recurring_charges: Array[Types::RecurringCharge],
+        ?reservation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_node_id: String?
+      attr_accessor reserved_cache_nodes_offering_id: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor duration: Integer?
+      attr_accessor fixed_price: Float?
+      attr_accessor usage_price: Float?
+      attr_accessor cache_node_count: Integer?
+      attr_accessor product_description: String?
+      attr_accessor offering_type: String?
+      attr_accessor state: String?
+      attr_accessor recurring_charges: Array[Types::RecurringCharge]?
+      attr_accessor reservation_arn: String?
+    end
+
+    class ReservedCacheNodeAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReservedCacheNodeMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?reserved_cache_nodes: Array[Types::ReservedCacheNode],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor reserved_cache_nodes: Array[Types::ReservedCacheNode]?
+    end
+
+    class ReservedCacheNodeNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReservedCacheNodeQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReservedCacheNodesOffering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_cache_nodes_offering_id: String,
+        ?cache_node_type: String,
+        ?duration: Integer,
+        ?fixed_price: Float,
+        ?usage_price: Float,
+        ?product_description: String,
+        ?offering_type: String,
+        ?recurring_charges: Array[Types::RecurringCharge],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_cache_nodes_offering_id: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor duration: Integer?
+      attr_accessor fixed_price: Float?
+      attr_accessor usage_price: Float?
+      attr_accessor product_description: String?
+      attr_accessor offering_type: String?
+      attr_accessor recurring_charges: Array[Types::RecurringCharge]?
+    end
+
+    class ReservedCacheNodesOfferingMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?reserved_cache_nodes_offerings: Array[Types::ReservedCacheNodesOffering],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor reserved_cache_nodes_offerings: Array[Types::ReservedCacheNodesOffering]?
+    end
+
+    class ReservedCacheNodesOfferingNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResetCacheParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+        ?reset_all_parameters: bool,
+        ?parameter_name_values: Array[Types::ParameterNameValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor reset_all_parameters: bool?
+      attr_accessor parameter_name_values: Array[Types::ParameterNameValue]?
+    end
+
+    class ResetCacheParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_parameter_group_name: String?
+    end
+
+    class ReshardingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group_id: String,
+        ?preferred_availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group_id: String?
+      attr_accessor preferred_availability_zones: Array[String]?
+    end
+
+    class ReshardingStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slot_migration: Types::SlotMigration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slot_migration: Types::SlotMigration?
+    end
+
+    class RevokeCacheSecurityGroupIngressMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group_name: String,
+        ?ec2_security_group_name: String,
+        ?ec2_security_group_owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group_name: String?
+      attr_accessor ec2_security_group_name: String?
+      attr_accessor ec2_security_group_owner_id: String?
+    end
+
+    class RevokeCacheSecurityGroupIngressResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cache_security_group: Types::CacheSecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cache_security_group: Types::CacheSecurityGroup?
+    end
+
+    class ScaleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_percentage: Integer,
+        ?scale_interval_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_percentage: Integer?
+      attr_accessor scale_interval_minutes: Integer?
+    end
+
+    class SecurityGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_id: String?
+      attr_accessor status: String?
+    end
+
+    class ServerlessCache
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?description: String,
+        ?create_time: Time,
+        ?status: String,
+        ?engine: String,
+        ?major_engine_version: String,
+        ?full_engine_version: String,
+        ?cache_usage_limits: Types::CacheUsageLimits,
+        ?kms_key_id: String,
+        ?security_group_ids: Array[String],
+        ?endpoint: Types::Endpoint,
+        ?reader_endpoint: Types::Endpoint,
+        ?arn: String,
+        ?user_group_id: String,
+        ?subnet_ids: Array[String],
+        ?snapshot_retention_limit: Integer,
+        ?daily_snapshot_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
+      attr_accessor full_engine_version: String?
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits?
+      attr_accessor kms_key_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor endpoint: Types::Endpoint?
+      attr_accessor reader_endpoint: Types::Endpoint?
+      attr_accessor arn: String?
+      attr_accessor user_group_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor daily_snapshot_time: String?
+    end
+
+    class ServerlessCacheAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessCacheConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_name: String,
+        ?engine: String,
+        ?major_engine_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_name: String?
+      attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
+    end
+
+    class ServerlessCacheNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessCacheQuotaForCustomerExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessCacheSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_cache_snapshot_name: String,
+        ?arn: String,
+        ?kms_key_id: String,
+        ?snapshot_type: String,
+        ?status: String,
+        ?create_time: Time,
+        ?expiry_time: Time,
+        ?bytes_used_for_cache: String,
+        ?serverless_cache_configuration: Types::ServerlessCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_cache_snapshot_name: String?
+      attr_accessor arn: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor snapshot_type: String?
+      attr_accessor status: String?
+      attr_accessor create_time: Time?
+      attr_accessor expiry_time: Time?
+      attr_accessor bytes_used_for_cache: String?
+      attr_accessor serverless_cache_configuration: Types::ServerlessCacheConfiguration?
+    end
+
+    class ServerlessCacheSnapshotAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessCacheSnapshotNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessCacheSnapshotQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceLinkedRoleNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_update_name: String,
+        ?service_update_release_date: Time,
+        ?service_update_end_date: Time,
+        ?service_update_severity: String,
+        ?service_update_recommended_apply_by_date: Time,
+        ?service_update_status: String,
+        ?service_update_description: String,
+        ?service_update_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?auto_update_after_recommended_apply_by_date: bool,
+        ?estimated_update_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_update_name: String?
+      attr_accessor service_update_release_date: Time?
+      attr_accessor service_update_end_date: Time?
+      attr_accessor service_update_severity: String?
+      attr_accessor service_update_recommended_apply_by_date: Time?
+      attr_accessor service_update_status: String?
+      attr_accessor service_update_description: String?
+      attr_accessor service_update_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor auto_update_after_recommended_apply_by_date: bool?
+      attr_accessor estimated_update_time: String?
+    end
+
+    class ServiceUpdateNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ServiceUpdateSeverity
+      CRITICAL: String
+      IMPORTANT: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module ServiceUpdateStatus
+      AVAILABLE: String
+      CANCELLED: String
+      EXPIRED: String
+    end
+
+    module ServiceUpdateType
+      SECURITY_UPDATE: String
+    end
+
+    class ServiceUpdatesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?service_updates: Array[Types::ServiceUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor service_updates: Array[Types::ServiceUpdate]?
+    end
+
+    module SlaMet
+      YES: String
+      NO: String
+      NA: String
+    end
+
+    class SlotMigration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_percentage: Float?
+    end
+
+    class Snapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_name: String,
+        ?replication_group_id: String,
+        ?replication_group_description: String,
+        ?cache_cluster_id: String,
+        ?snapshot_status: String,
+        ?snapshot_source: String,
+        ?cache_node_type: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?num_cache_nodes: Integer,
+        ?preferred_availability_zone: String,
+        ?preferred_outpost_arn: String,
+        ?cache_cluster_create_time: Time,
+        ?preferred_maintenance_window: String,
+        ?topic_arn: String,
+        ?port: Integer,
+        ?cache_parameter_group_name: String,
+        ?cache_subnet_group_name: String,
+        ?vpc_id: String,
+        ?auto_minor_version_upgrade: bool,
+        ?snapshot_retention_limit: Integer,
+        ?snapshot_window: String,
+        ?num_node_groups: Integer,
+        ?automatic_failover: String,
+        ?node_snapshots: Array[Types::NodeSnapshot],
+        ?kms_key_id: String,
+        ?arn: String,
+        ?data_tiering: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_name: String?
+      attr_accessor replication_group_id: String?
+      attr_accessor replication_group_description: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor snapshot_status: String?
+      attr_accessor snapshot_source: String?
+      attr_accessor cache_node_type: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor num_cache_nodes: Integer?
+      attr_accessor preferred_availability_zone: String?
+      attr_accessor preferred_outpost_arn: String?
+      attr_accessor cache_cluster_create_time: Time?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor topic_arn: String?
+      attr_accessor port: Integer?
+      attr_accessor cache_parameter_group_name: String?
+      attr_accessor cache_subnet_group_name: String?
+      attr_accessor vpc_id: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor snapshot_retention_limit: Integer?
+      attr_accessor snapshot_window: String?
+      attr_accessor num_node_groups: Integer?
+      attr_accessor automatic_failover: String?
+      attr_accessor node_snapshots: Array[Types::NodeSnapshot]?
+      attr_accessor kms_key_id: String?
+      attr_accessor arn: String?
+      attr_accessor data_tiering: String?
+    end
+
+    class SnapshotAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnapshotFeatureNotSupportedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnapshotNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnapshotQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SourceType
+      cache_cluster: String
+      cache_parameter_group: String
+      cache_security_group: String
+      cache_subnet_group: String
+      replication_group: String
+      serverless_cache: String
+      serverless_cache_snapshot: String
+      user: String
+      user_group: String
+    end
+
+    class StartMigrationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?customer_node_endpoint_list: Array[Types::CustomerNodeEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor customer_node_endpoint_list: Array[Types::CustomerNodeEndpoint]?
+    end
+
+    class StartMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class Subnet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_identifier: String,
+        ?subnet_availability_zone: Types::AvailabilityZone,
+        ?subnet_outpost: Types::SubnetOutpost,
+        ?supported_network_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_identifier: String?
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone?
+      attr_accessor subnet_outpost: Types::SubnetOutpost?
+      attr_accessor supported_network_types: Array[String]?
+    end
+
+    class SubnetInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubnetNotAllowedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubnetOutpost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_outpost_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagQuotaPerResourceExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TestFailoverMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?node_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor node_group_id: String?
+    end
+
+    class TestFailoverNotAvailableFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TestFailoverResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class TestMigrationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?customer_node_endpoint_list: Array[Types::CustomerNodeEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor customer_node_endpoint_list: Array[Types::CustomerNodeEndpoint]?
+    end
+
+    class TestMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Types::ReplicationGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    class TimeRangeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module TransitEncryptionMode
+      PREFERRED: String
+      REQUIRED: String
+    end
+
+    class UnprocessedUpdateAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?cache_cluster_id: String,
+        ?service_update_name: String,
+        ?error_type: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor service_update_name: String?
+      attr_accessor error_type: String?
+      attr_accessor error_message: String?
+    end
+
+    class UpdateAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group_id: String,
+        ?cache_cluster_id: String,
+        ?service_update_name: String,
+        ?service_update_release_date: Time,
+        ?service_update_severity: String,
+        ?service_update_status: String,
+        ?service_update_recommended_apply_by_date: Time,
+        ?service_update_type: String,
+        ?update_action_available_date: Time,
+        ?update_action_status: String,
+        ?nodes_updated: String,
+        ?update_action_status_modified_date: Time,
+        ?sla_met: String,
+        ?node_group_update_status: Array[Types::NodeGroupUpdateStatus],
+        ?cache_node_update_status: Array[Types::CacheNodeUpdateStatus],
+        ?estimated_update_time: String,
+        ?engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group_id: String?
+      attr_accessor cache_cluster_id: String?
+      attr_accessor service_update_name: String?
+      attr_accessor service_update_release_date: Time?
+      attr_accessor service_update_severity: String?
+      attr_accessor service_update_status: String?
+      attr_accessor service_update_recommended_apply_by_date: Time?
+      attr_accessor service_update_type: String?
+      attr_accessor update_action_available_date: Time?
+      attr_accessor update_action_status: String?
+      attr_accessor nodes_updated: String?
+      attr_accessor update_action_status_modified_date: Time?
+      attr_accessor sla_met: String?
+      attr_accessor node_group_update_status: Array[Types::NodeGroupUpdateStatus]?
+      attr_accessor cache_node_update_status: Array[Types::CacheNodeUpdateStatus]?
+      attr_accessor estimated_update_time: String?
+      attr_accessor engine: String?
+    end
+
+    module UpdateActionStatus
+      NOT_APPLIED: String
+      WAITING_TO_START: String
+      IN_PROGRESS: String
+      STOPPING: String
+      STOPPED: String
+      COMPLETE: String
+      SCHEDULING: String
+      SCHEDULED: String
+      NOT_APPLICABLE: String
+    end
+
+    class UpdateActionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?update_actions: Array[Types::UpdateAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor update_actions: Array[Types::UpdateAction]?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_name: String,
+        ?status: String,
+        ?engine: String,
+        ?minimum_engine_version: String,
+        ?access_string: String,
+        ?user_group_ids: Array[String],
+        ?authentication: Types::Authentication,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_name: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor access_string: String?
+      attr_accessor user_group_ids: Array[String]?
+      attr_accessor authentication: Types::Authentication?
+      attr_accessor arn: String?
+    end
+
+    class UserAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UserGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_id: String,
+        ?status: String,
+        ?engine: String,
+        ?user_ids: Array[String],
+        ?minimum_engine_version: String,
+        ?pending_changes: Types::UserGroupPendingChanges,
+        ?replication_groups: Array[String],
+        ?serverless_caches: Array[String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_id: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor pending_changes: Types::UserGroupPendingChanges?
+      attr_accessor replication_groups: Array[String]?
+      attr_accessor serverless_caches: Array[String]?
+      attr_accessor arn: String?
+    end
+
+    class UserGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UserGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UserGroupPendingChanges
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_ids_to_remove: Array[String],
+        ?user_ids_to_add: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_ids_to_remove: Array[String]?
+      attr_accessor user_ids_to_add: Array[String]?
+    end
+
+    class UserGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UserGroupsUpdateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_group_ids_to_add: Array[String],
+        ?user_group_ids_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_group_ids_to_add: Array[String]?
+      attr_accessor user_group_ids_to_remove: Array[String]?
+    end
+
+    class UserNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UserQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

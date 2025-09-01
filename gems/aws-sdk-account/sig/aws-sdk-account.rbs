@@ -1,0 +1,5 @@
+  module Aws
+    module Account
+      VERSION: String
+    end
+  end

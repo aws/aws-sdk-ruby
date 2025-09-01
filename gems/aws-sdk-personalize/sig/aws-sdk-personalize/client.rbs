@@ -1,0 +1,969 @@
+module Aws::Personalize
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Personalize::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBatchInferenceJobResponse
+      include Smithy::Client::_Response[Types::CreateBatchInferenceJobResponse]
+      def batch_inference_job_arn: () -> String?
+    end
+    def create_batch_inference_job: (
+      ?job_name: String,
+      ?solution_version_arn: String,
+      ?filter_arn: String,
+      ?num_results: Integer,
+      ?job_input: {
+        s3_data_source: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?job_output: {
+        s3_data_destination: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?role_arn: String,
+      ?batch_inference_job_config: {
+        item_exploration_config: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ],
+      ?batch_inference_job_mode: String,
+      ?theme_generation_config: {
+        fields_for_theme_generation: {
+          item_name: String
+        }
+      }
+    ) -> _CreateBatchInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchInferenceJobResponse
+
+    interface _CreateBatchSegmentJobResponse
+      include Smithy::Client::_Response[Types::CreateBatchSegmentJobResponse]
+      def batch_segment_job_arn: () -> String?
+    end
+    def create_batch_segment_job: (
+      ?job_name: String,
+      ?solution_version_arn: String,
+      ?filter_arn: String,
+      ?num_results: Integer,
+      ?job_input: {
+        s3_data_source: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?job_output: {
+        s3_data_destination: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateBatchSegmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchSegmentJobResponse
+
+    interface _CreateCampaignResponse
+      include Smithy::Client::_Response[Types::CreateCampaignResponse]
+      def campaign_arn: () -> String?
+    end
+    def create_campaign: (
+      ?name: String,
+      ?solution_version_arn: String,
+      ?min_provisioned_tps: Integer,
+      ?campaign_config: {
+        item_exploration_config: Hash[String, String],
+        enable_metadata_with_recommendations: bool,
+        sync_with_latest_solution_version: untyped
+      },
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCampaignResponse
+
+    interface _CreateDataDeletionJobResponse
+      include Smithy::Client::_Response[Types::CreateDataDeletionJobResponse]
+      def data_deletion_job_arn: () -> String?
+    end
+    def create_data_deletion_job: (
+      ?job_name: String,
+      ?dataset_group_arn: String,
+      ?data_source: {
+        data_location: String
+      },
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateDataDeletionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataDeletionJobResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_arn: () -> String?
+    end
+    def create_dataset: (
+      ?name: String,
+      ?schema_arn: String,
+      ?dataset_group_arn: String,
+      ?dataset_type: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDatasetExportJobResponse
+      include Smithy::Client::_Response[Types::CreateDatasetExportJobResponse]
+      def dataset_export_job_arn: () -> String?
+    end
+    def create_dataset_export_job: (
+      ?job_name: String,
+      ?dataset_arn: String,
+      ?ingestion_mode: String,
+      ?role_arn: String,
+      ?job_output: {
+        s3_data_destination: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateDatasetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetExportJobResponse
+
+    interface _CreateDatasetGroupResponse
+      include Smithy::Client::_Response[Types::CreateDatasetGroupResponse]
+      def dataset_group_arn: () -> String?
+      def domain: () -> String?
+    end
+    def create_dataset_group: (
+      ?name: String,
+      ?role_arn: String,
+      ?kms_key_arn: String,
+      ?domain: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetGroupResponse
+
+    interface _CreateDatasetImportJobResponse
+      include Smithy::Client::_Response[Types::CreateDatasetImportJobResponse]
+      def dataset_import_job_arn: () -> String?
+    end
+    def create_dataset_import_job: (
+      ?job_name: String,
+      ?dataset_arn: String,
+      ?data_source: {
+        data_location: String
+      },
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ],
+      ?import_mode: String,
+      ?publish_attribution_metrics_to_s3: bool
+    ) -> _CreateDatasetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetImportJobResponse
+
+    interface _CreateEventTrackerResponse
+      include Smithy::Client::_Response[Types::CreateEventTrackerResponse]
+      def event_tracker_arn: () -> String?
+      def tracking_id: () -> String?
+    end
+    def create_event_tracker: (
+      ?name: String,
+      ?dataset_group_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateEventTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventTrackerResponse
+
+    interface _CreateFilterResponse
+      include Smithy::Client::_Response[Types::CreateFilterResponse]
+      def filter_arn: () -> String?
+    end
+    def create_filter: (
+      ?name: String,
+      ?dataset_group_arn: String,
+      ?filter_expression: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFilterResponse
+
+    interface _CreateMetricAttributionResponse
+      include Smithy::Client::_Response[Types::CreateMetricAttributionResponse]
+      def metric_attribution_arn: () -> String?
+    end
+    def create_metric_attribution: (
+      ?name: String,
+      ?dataset_group_arn: String,
+      ?metrics: Array[
+        {
+          event_type: String,
+          metric_name: String,
+          expression: String
+        }
+      ],
+      ?metrics_output_config: {
+        s3_data_destination: {
+          path: String,
+          kms_key_arn: String
+        },
+        role_arn: String
+      }
+    ) -> _CreateMetricAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMetricAttributionResponse
+
+    interface _CreateRecommenderResponse
+      include Smithy::Client::_Response[Types::CreateRecommenderResponse]
+      def recommender_arn: () -> String?
+    end
+    def create_recommender: (
+      ?name: String,
+      ?dataset_group_arn: String,
+      ?recipe_arn: String,
+      ?recommender_config: {
+        item_exploration_config: Hash[String, String],
+        min_recommendation_requests_per_second: Integer,
+        training_data_config: {
+          excluded_dataset_columns: Hash[String,
+            Array[String]
+          ]
+        },
+        enable_metadata_with_recommendations: bool
+      },
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecommenderResponse
+
+    interface _CreateSchemaResponse
+      include Smithy::Client::_Response[Types::CreateSchemaResponse]
+      def schema_arn: () -> String?
+    end
+    def create_schema: (
+      ?name: String,
+      ?schema: String,
+      ?domain: String
+    ) -> _CreateSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSchemaResponse
+
+    interface _CreateSolutionResponse
+      include Smithy::Client::_Response[Types::CreateSolutionResponse]
+      def solution_arn: () -> String?
+    end
+    def create_solution: (
+      ?name: String,
+      ?perform_hpo: bool,
+      ?perform_auto_ml: bool,
+      ?perform_auto_training: bool,
+      ?recipe_arn: String,
+      ?dataset_group_arn: String,
+      ?event_type: String,
+      ?solution_config: {
+        event_value_threshold: String,
+        hpo_config: {
+          hpo_objective: {
+            type: String,
+            metric_name: String,
+            metric_regex: String
+          },
+          hpo_resource_config: {
+            max_number_of_training_jobs: String,
+            max_parallel_training_jobs: untyped
+          },
+          algorithm_hyper_parameter_ranges: {
+            integer_hyper_parameter_ranges: Array[
+              {
+                name: String,
+                min_value: Integer,
+                max_value: Integer
+              }
+            ],
+            continuous_hyper_parameter_ranges: Array[
+              {
+                name: untyped,
+                min_value: Float,
+                max_value: Float
+              }
+            ],
+            categorical_hyper_parameter_ranges: Array[
+              {
+                name: untyped,
+                values: Array[String]
+              }
+            ]
+          }
+        },
+        algorithm_hyper_parameters: Hash[String, String],
+        feature_transformation_parameters: Hash[String, String],
+        auto_ml_config: {
+          metric_name: untyped,
+          recipe_list: Array[String]
+        },
+        events_config: {
+          event_parameters_list: Array[
+            {
+              event_type: String,
+              event_value_threshold: Float,
+              weight: Float
+            }
+          ]
+        },
+        optimization_objective: {
+          item_attribute: String,
+          objective_sensitivity: String
+        },
+        training_data_config: {
+          excluded_dataset_columns: Hash[String,
+            Array[String]
+          ]
+        },
+        auto_training_config: {
+          scheduling_expression: String
+        }
+      },
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateSolutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSolutionResponse
+
+    interface _CreateSolutionVersionResponse
+      include Smithy::Client::_Response[Types::CreateSolutionVersionResponse]
+      def solution_version_arn: () -> String?
+    end
+    def create_solution_version: (
+      ?name: String,
+      ?solution_arn: String,
+      ?training_mode: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateSolutionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSolutionVersionResponse
+
+    interface _DeleteCampaignResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_campaign: (
+      ?campaign_arn: String
+    ) -> _DeleteCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset: (
+      ?dataset_arn: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteDatasetGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset_group: (
+      ?dataset_group_arn: String
+    ) -> _DeleteDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetGroupResponse
+
+    interface _DeleteEventTrackerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_tracker: (
+      ?event_tracker_arn: String
+    ) -> _DeleteEventTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventTrackerResponse
+
+    interface _DeleteFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_filter: (
+      ?filter_arn: String
+    ) -> _DeleteFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFilterResponse
+
+    interface _DeleteMetricAttributionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_metric_attribution: (
+      ?metric_attribution_arn: String
+    ) -> _DeleteMetricAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricAttributionResponse
+
+    interface _DeleteRecommenderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_recommender: (
+      ?recommender_arn: String
+    ) -> _DeleteRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecommenderResponse
+
+    interface _DeleteSchemaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_schema: (
+      ?schema_arn: String
+    ) -> _DeleteSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchemaResponse
+
+    interface _DeleteSolutionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_solution: (
+      ?solution_arn: String
+    ) -> _DeleteSolutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSolutionResponse
+
+    interface _DescribeAlgorithmResponse
+      include Smithy::Client::_Response[Types::DescribeAlgorithmResponse]
+      def algorithm: () -> Types::Algorithm?
+    end
+    def describe_algorithm: (
+      ?algorithm_arn: String
+    ) -> _DescribeAlgorithmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlgorithmResponse
+
+    interface _DescribeBatchInferenceJobResponse
+      include Smithy::Client::_Response[Types::DescribeBatchInferenceJobResponse]
+      def batch_inference_job: () -> Types::BatchInferenceJob?
+    end
+    def describe_batch_inference_job: (
+      ?batch_inference_job_arn: String
+    ) -> _DescribeBatchInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBatchInferenceJobResponse
+
+    interface _DescribeBatchSegmentJobResponse
+      include Smithy::Client::_Response[Types::DescribeBatchSegmentJobResponse]
+      def batch_segment_job: () -> Types::BatchSegmentJob?
+    end
+    def describe_batch_segment_job: (
+      ?batch_segment_job_arn: String
+    ) -> _DescribeBatchSegmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBatchSegmentJobResponse
+
+    interface _DescribeCampaignResponse
+      include Smithy::Client::_Response[Types::DescribeCampaignResponse]
+      def campaign: () -> Types::Campaign?
+    end
+    def describe_campaign: (
+      ?campaign_arn: String
+    ) -> _DescribeCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCampaignResponse
+
+    interface _DescribeDataDeletionJobResponse
+      include Smithy::Client::_Response[Types::DescribeDataDeletionJobResponse]
+      def data_deletion_job: () -> Types::DataDeletionJob?
+    end
+    def describe_data_deletion_job: (
+      ?data_deletion_job_arn: String
+    ) -> _DescribeDataDeletionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataDeletionJobResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset: () -> Types::Dataset?
+    end
+    def describe_dataset: (
+      ?dataset_arn: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDatasetExportJobResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetExportJobResponse]
+      def dataset_export_job: () -> Types::DatasetExportJob?
+    end
+    def describe_dataset_export_job: (
+      ?dataset_export_job_arn: String
+    ) -> _DescribeDatasetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetExportJobResponse
+
+    interface _DescribeDatasetGroupResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetGroupResponse]
+      def dataset_group: () -> Types::DatasetGroup?
+    end
+    def describe_dataset_group: (
+      ?dataset_group_arn: String
+    ) -> _DescribeDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetGroupResponse
+
+    interface _DescribeDatasetImportJobResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetImportJobResponse]
+      def dataset_import_job: () -> Types::DatasetImportJob?
+    end
+    def describe_dataset_import_job: (
+      ?dataset_import_job_arn: String
+    ) -> _DescribeDatasetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetImportJobResponse
+
+    interface _DescribeEventTrackerResponse
+      include Smithy::Client::_Response[Types::DescribeEventTrackerResponse]
+      def event_tracker: () -> Types::EventTracker?
+    end
+    def describe_event_tracker: (
+      ?event_tracker_arn: String
+    ) -> _DescribeEventTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventTrackerResponse
+
+    interface _DescribeFeatureTransformationResponse
+      include Smithy::Client::_Response[Types::DescribeFeatureTransformationResponse]
+      def feature_transformation: () -> Types::FeatureTransformation?
+    end
+    def describe_feature_transformation: (
+      ?feature_transformation_arn: String
+    ) -> _DescribeFeatureTransformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFeatureTransformationResponse
+
+    interface _DescribeFilterResponse
+      include Smithy::Client::_Response[Types::DescribeFilterResponse]
+      def filter: () -> Types::Filter?
+    end
+    def describe_filter: (
+      ?filter_arn: String
+    ) -> _DescribeFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFilterResponse
+
+    interface _DescribeMetricAttributionResponse
+      include Smithy::Client::_Response[Types::DescribeMetricAttributionResponse]
+      def metric_attribution: () -> Types::MetricAttribution?
+    end
+    def describe_metric_attribution: (
+      ?metric_attribution_arn: String
+    ) -> _DescribeMetricAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricAttributionResponse
+
+    interface _DescribeRecipeResponse
+      include Smithy::Client::_Response[Types::DescribeRecipeResponse]
+      def recipe: () -> Types::Recipe?
+    end
+    def describe_recipe: (
+      ?recipe_arn: String
+    ) -> _DescribeRecipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecipeResponse
+
+    interface _DescribeRecommenderResponse
+      include Smithy::Client::_Response[Types::DescribeRecommenderResponse]
+      def recommender: () -> Types::Recommender?
+    end
+    def describe_recommender: (
+      ?recommender_arn: String
+    ) -> _DescribeRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecommenderResponse
+
+    interface _DescribeSchemaResponse
+      include Smithy::Client::_Response[Types::DescribeSchemaResponse]
+      def schema: () -> Types::DatasetSchema?
+    end
+    def describe_schema: (
+      ?schema_arn: String
+    ) -> _DescribeSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSchemaResponse
+
+    interface _DescribeSolutionResponse
+      include Smithy::Client::_Response[Types::DescribeSolutionResponse]
+      def solution: () -> Types::Solution?
+    end
+    def describe_solution: (
+      ?solution_arn: String
+    ) -> _DescribeSolutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSolutionResponse
+
+    interface _DescribeSolutionVersionResponse
+      include Smithy::Client::_Response[Types::DescribeSolutionVersionResponse]
+      def solution_version: () -> Types::SolutionVersion?
+    end
+    def describe_solution_version: (
+      ?solution_version_arn: String
+    ) -> _DescribeSolutionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSolutionVersionResponse
+
+    interface _GetSolutionMetricsResponse
+      include Smithy::Client::_Response[Types::GetSolutionMetricsResponse]
+      def solution_version_arn: () -> String?
+      def metrics: () -> Hash[String, Float]?
+    end
+    def get_solution_metrics: (
+      ?solution_version_arn: String
+    ) -> _GetSolutionMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSolutionMetricsResponse
+
+    interface _ListBatchInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListBatchInferenceJobsResponse]
+      def batch_inference_jobs: () -> Array[Types::BatchInferenceJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_batch_inference_jobs: (
+      ?solution_version_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBatchInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchInferenceJobsResponse
+
+    interface _ListBatchSegmentJobsResponse
+      include Smithy::Client::_Response[Types::ListBatchSegmentJobsResponse]
+      def batch_segment_jobs: () -> Array[Types::BatchSegmentJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_batch_segment_jobs: (
+      ?solution_version_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBatchSegmentJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchSegmentJobsResponse
+
+    interface _ListCampaignsResponse
+      include Smithy::Client::_Response[Types::ListCampaignsResponse]
+      def campaigns: () -> Array[Types::CampaignSummary]?
+      def next_token: () -> String?
+    end
+    def list_campaigns: (
+      ?solution_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCampaignsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCampaignsResponse
+
+    interface _ListDataDeletionJobsResponse
+      include Smithy::Client::_Response[Types::ListDataDeletionJobsResponse]
+      def data_deletion_jobs: () -> Array[Types::DataDeletionJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_deletion_jobs: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataDeletionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataDeletionJobsResponse
+
+    interface _ListDatasetExportJobsResponse
+      include Smithy::Client::_Response[Types::ListDatasetExportJobsResponse]
+      def dataset_export_jobs: () -> Array[Types::DatasetExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_export_jobs: (
+      ?dataset_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetExportJobsResponse
+
+    interface _ListDatasetGroupsResponse
+      include Smithy::Client::_Response[Types::ListDatasetGroupsResponse]
+      def dataset_groups: () -> Array[Types::DatasetGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetGroupsResponse
+
+    interface _ListDatasetImportJobsResponse
+      include Smithy::Client::_Response[Types::ListDatasetImportJobsResponse]
+      def dataset_import_jobs: () -> Array[Types::DatasetImportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_import_jobs: (
+      ?dataset_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetImportJobsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def datasets: () -> Array[Types::DatasetSummary]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListEventTrackersResponse
+      include Smithy::Client::_Response[Types::ListEventTrackersResponse]
+      def event_trackers: () -> Array[Types::EventTrackerSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_trackers: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventTrackersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventTrackersResponse
+
+    interface _ListFiltersResponse
+      include Smithy::Client::_Response[Types::ListFiltersResponse]
+      def filters: () -> Array[Types::FilterSummary]?
+      def next_token: () -> String?
+    end
+    def list_filters: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFiltersResponse
+
+    interface _ListMetricAttributionMetricsResponse
+      include Smithy::Client::_Response[Types::ListMetricAttributionMetricsResponse]
+      def metrics: () -> Array[Types::MetricAttribute]?
+      def next_token: () -> String?
+    end
+    def list_metric_attribution_metrics: (
+      ?metric_attribution_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMetricAttributionMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricAttributionMetricsResponse
+
+    interface _ListMetricAttributionsResponse
+      include Smithy::Client::_Response[Types::ListMetricAttributionsResponse]
+      def metric_attributions: () -> Array[Types::MetricAttributionSummary]?
+      def next_token: () -> String?
+    end
+    def list_metric_attributions: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMetricAttributionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricAttributionsResponse
+
+    interface _ListRecipesResponse
+      include Smithy::Client::_Response[Types::ListRecipesResponse]
+      def recipes: () -> Array[Types::RecipeSummary]?
+      def next_token: () -> String?
+    end
+    def list_recipes: (
+      ?recipe_provider: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain: String
+    ) -> _ListRecipesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecipesResponse
+
+    interface _ListRecommendersResponse
+      include Smithy::Client::_Response[Types::ListRecommendersResponse]
+      def recommenders: () -> Array[Types::RecommenderSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommenders: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRecommendersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendersResponse
+
+    interface _ListSchemasResponse
+      include Smithy::Client::_Response[Types::ListSchemasResponse]
+      def schemas: () -> Array[Types::DatasetSchemaSummary]?
+      def next_token: () -> String?
+    end
+    def list_schemas: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemasResponse
+
+    interface _ListSolutionVersionsResponse
+      include Smithy::Client::_Response[Types::ListSolutionVersionsResponse]
+      def solution_versions: () -> Array[Types::SolutionVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_solution_versions: (
+      ?solution_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSolutionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolutionVersionsResponse
+
+    interface _ListSolutionsResponse
+      include Smithy::Client::_Response[Types::ListSolutionsResponse]
+      def solutions: () -> Array[Types::SolutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_solutions: (
+      ?dataset_group_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSolutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolutionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartRecommenderResponse
+      include Smithy::Client::_Response[Types::StartRecommenderResponse]
+      def recommender_arn: () -> String?
+    end
+    def start_recommender: (
+      ?recommender_arn: String
+    ) -> _StartRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecommenderResponse
+
+    interface _StopRecommenderResponse
+      include Smithy::Client::_Response[Types::StopRecommenderResponse]
+      def recommender_arn: () -> String?
+    end
+    def stop_recommender: (
+      ?recommender_arn: String
+    ) -> _StopRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRecommenderResponse
+
+    interface _StopSolutionVersionCreationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_solution_version_creation: (
+      ?solution_version_arn: String
+    ) -> _StopSolutionVersionCreationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSolutionVersionCreationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCampaignResponse
+      include Smithy::Client::_Response[Types::UpdateCampaignResponse]
+      def campaign_arn: () -> String?
+    end
+    def update_campaign: (
+      ?campaign_arn: String,
+      ?solution_version_arn: String,
+      ?min_provisioned_tps: Integer,
+      ?campaign_config: {
+        item_exploration_config: Hash[String, String],
+        enable_metadata_with_recommendations: bool,
+        sync_with_latest_solution_version: untyped
+      }
+    ) -> _UpdateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignResponse
+
+    interface _UpdateDatasetResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetResponse]
+      def dataset_arn: () -> String?
+    end
+    def update_dataset: (
+      ?dataset_arn: String,
+      ?schema_arn: String
+    ) -> _UpdateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetResponse
+
+    interface _UpdateMetricAttributionResponse
+      include Smithy::Client::_Response[Types::UpdateMetricAttributionResponse]
+      def metric_attribution_arn: () -> String?
+    end
+    def update_metric_attribution: (
+      ?add_metrics: Array[
+        {
+          event_type: String,
+          metric_name: String,
+          expression: String
+        }
+      ],
+      ?remove_metrics: Array[String],
+      ?metrics_output_config: {
+        s3_data_destination: {
+          path: String,
+          kms_key_arn: String
+        },
+        role_arn: String
+      },
+      ?metric_attribution_arn: String
+    ) -> _UpdateMetricAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMetricAttributionResponse
+
+    interface _UpdateRecommenderResponse
+      include Smithy::Client::_Response[Types::UpdateRecommenderResponse]
+      def recommender_arn: () -> String?
+    end
+    def update_recommender: (
+      ?recommender_arn: String,
+      ?recommender_config: {
+        item_exploration_config: Hash[String, String],
+        min_recommendation_requests_per_second: Integer,
+        training_data_config: {
+          excluded_dataset_columns: Hash[String,
+            Array[String]
+          ]
+        },
+        enable_metadata_with_recommendations: bool
+      }
+    ) -> _UpdateRecommenderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecommenderResponse
+
+    interface _UpdateSolutionResponse
+      include Smithy::Client::_Response[Types::UpdateSolutionResponse]
+      def solution_arn: () -> String?
+    end
+    def update_solution: (
+      ?solution_arn: String,
+      ?perform_auto_training: bool,
+      ?solution_update_config: {
+        auto_training_config: {
+          scheduling_expression: String
+        },
+        events_config: {
+          event_parameters_list: Array[
+            {
+              event_type: String,
+              event_value_threshold: Float,
+              weight: Float
+            }
+          ]
+        }
+      }
+    ) -> _UpdateSolutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSolutionResponse
+  end
+end

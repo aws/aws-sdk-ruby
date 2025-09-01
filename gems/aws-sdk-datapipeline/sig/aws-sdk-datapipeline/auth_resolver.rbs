@@ -1,0 +1,5 @@
+module Aws::DataPipeline
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

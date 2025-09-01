@@ -1,0 +1,307 @@
+module Aws::Route53RecoveryControlConfig
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53RecoveryControlConfig::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def create_cluster: (
+      ?client_token: String,
+      ?cluster_name: String,
+      ?tags: Hash[String, String],
+      ?network_type: String
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateControlPanelResponse
+      include Smithy::Client::_Response[Types::CreateControlPanelResponse]
+      def control_panel: () -> Types::ControlPanel?
+    end
+    def create_control_panel: (
+      ?client_token: String,
+      ?cluster_arn: String,
+      ?control_panel_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateControlPanelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateControlPanelResponse
+
+    interface _CreateRoutingControlResponse
+      include Smithy::Client::_Response[Types::CreateRoutingControlResponse]
+      def routing_control: () -> Types::RoutingControl?
+    end
+    def create_routing_control: (
+      ?client_token: String,
+      ?cluster_arn: String,
+      ?control_panel_arn: String,
+      ?routing_control_name: String
+    ) -> _CreateRoutingControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRoutingControlResponse
+
+    interface _CreateSafetyRuleResponse
+      include Smithy::Client::_Response[Types::CreateSafetyRuleResponse]
+      def assertion_rule: () -> Types::AssertionRule?
+      def gating_rule: () -> Types::GatingRule?
+    end
+    def create_safety_rule: (
+      ?assertion_rule: {
+        asserted_controls: Array[String],
+        control_panel_arn: String,
+        name: String,
+        rule_config: {
+          inverted: bool,
+          threshold: Integer,
+          type: String
+        },
+        wait_period_ms: untyped
+      },
+      ?client_token: String,
+      ?gating_rule: {
+        control_panel_arn: String,
+        gating_controls: Array[String],
+        name: String,
+        rule_config: {
+          inverted: bool,
+          threshold: Integer,
+          type: String
+        },
+        target_controls: untyped,
+        wait_period_ms: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateSafetyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSafetyRuleResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+    end
+    def delete_cluster: (
+      ?cluster_arn: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteControlPanelResponse
+      include Smithy::Client::_Response[Types::DeleteControlPanelResponse]
+    end
+    def delete_control_panel: (
+      ?control_panel_arn: String
+    ) -> _DeleteControlPanelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteControlPanelResponse
+
+    interface _DeleteRoutingControlResponse
+      include Smithy::Client::_Response[Types::DeleteRoutingControlResponse]
+    end
+    def delete_routing_control: (
+      ?routing_control_arn: String
+    ) -> _DeleteRoutingControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRoutingControlResponse
+
+    interface _DeleteSafetyRuleResponse
+      include Smithy::Client::_Response[Types::DeleteSafetyRuleResponse]
+    end
+    def delete_safety_rule: (
+      ?safety_rule_arn: String
+    ) -> _DeleteSafetyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSafetyRuleResponse
+
+    interface _DescribeClusterResponse
+      include Smithy::Client::_Response[Types::DescribeClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def describe_cluster: (
+      ?cluster_arn: String
+    ) -> _DescribeClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterResponse
+
+    interface _DescribeControlPanelResponse
+      include Smithy::Client::_Response[Types::DescribeControlPanelResponse]
+      def control_panel: () -> Types::ControlPanel?
+    end
+    def describe_control_panel: (
+      ?control_panel_arn: String
+    ) -> _DescribeControlPanelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeControlPanelResponse
+
+    interface _DescribeRoutingControlResponse
+      include Smithy::Client::_Response[Types::DescribeRoutingControlResponse]
+      def routing_control: () -> Types::RoutingControl?
+    end
+    def describe_routing_control: (
+      ?routing_control_arn: String
+    ) -> _DescribeRoutingControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRoutingControlResponse
+
+    interface _DescribeSafetyRuleResponse
+      include Smithy::Client::_Response[Types::DescribeSafetyRuleResponse]
+      def assertion_rule: () -> Types::AssertionRule?
+      def gating_rule: () -> Types::GatingRule?
+    end
+    def describe_safety_rule: (
+      ?safety_rule_arn: String
+    ) -> _DescribeSafetyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSafetyRuleResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListAssociatedRoute53HealthChecksResponse
+      include Smithy::Client::_Response[Types::ListAssociatedRoute53HealthChecksResponse]
+      def health_check_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_associated_route53_health_checks: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?routing_control_arn: String
+    ) -> _ListAssociatedRoute53HealthChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedRoute53HealthChecksResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersResponse]
+      def clusters: () -> Array[Types::Cluster]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListControlPanelsResponse
+      include Smithy::Client::_Response[Types::ListControlPanelsResponse]
+      def control_panels: () -> Array[Types::ControlPanel]?
+      def next_token: () -> String?
+    end
+    def list_control_panels: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListControlPanelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlPanelsResponse
+
+    interface _ListRoutingControlsResponse
+      include Smithy::Client::_Response[Types::ListRoutingControlsResponse]
+      def next_token: () -> String?
+      def routing_controls: () -> Array[Types::RoutingControl]?
+    end
+    def list_routing_controls: (
+      ?control_panel_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRoutingControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutingControlsResponse
+
+    interface _ListSafetyRulesResponse
+      include Smithy::Client::_Response[Types::ListSafetyRulesResponse]
+      def next_token: () -> String?
+      def safety_rules: () -> Array[Types::Rule]?
+    end
+    def list_safety_rules: (
+      ?control_panel_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSafetyRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSafetyRulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateClusterResponse
+      include Smithy::Client::_Response[Types::UpdateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def update_cluster: (
+      ?cluster_arn: String,
+      ?network_type: String
+    ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
+
+    interface _UpdateControlPanelResponse
+      include Smithy::Client::_Response[Types::UpdateControlPanelResponse]
+      def control_panel: () -> Types::ControlPanel?
+    end
+    def update_control_panel: (
+      ?control_panel_arn: String,
+      ?control_panel_name: String
+    ) -> _UpdateControlPanelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateControlPanelResponse
+
+    interface _UpdateRoutingControlResponse
+      include Smithy::Client::_Response[Types::UpdateRoutingControlResponse]
+      def routing_control: () -> Types::RoutingControl?
+    end
+    def update_routing_control: (
+      ?routing_control_arn: String,
+      ?routing_control_name: String
+    ) -> _UpdateRoutingControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingControlResponse
+
+    interface _UpdateSafetyRuleResponse
+      include Smithy::Client::_Response[Types::UpdateSafetyRuleResponse]
+      def assertion_rule: () -> Types::AssertionRule?
+      def gating_rule: () -> Types::GatingRule?
+    end
+    def update_safety_rule: (
+      ?assertion_rule_update: {
+        name: String,
+        safety_rule_arn: String,
+        wait_period_ms: Integer
+      },
+      ?gating_rule_update: {
+        name: String,
+        safety_rule_arn: String,
+        wait_period_ms: Integer
+      }
+    ) -> _UpdateSafetyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSafetyRuleResponse
+  end
+end

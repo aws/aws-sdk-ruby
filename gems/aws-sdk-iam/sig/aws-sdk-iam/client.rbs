@@ -1,0 +1,1730 @@
+module Aws::IAM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IAM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddClientIDToOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_client_id_to_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String,
+      ?client_id: String
+    ) -> _AddClientIDToOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddClientIDToOpenIDConnectProviderResponse
+
+    interface _AddRoleToInstanceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_role_to_instance_profile: (
+      ?instance_profile_name: String,
+      ?role_name: String
+    ) -> _AddRoleToInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddRoleToInstanceProfileResponse
+
+    interface _AddUserToGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_user_to_group: (
+      ?group_name: String,
+      ?user_name: String
+    ) -> _AddUserToGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddUserToGroupResponse
+
+    interface _AttachGroupPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def attach_group_policy: (
+      ?group_name: String,
+      ?policy_arn: String
+    ) -> _AttachGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachGroupPolicyResponse
+
+    interface _AttachRolePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def attach_role_policy: (
+      ?role_name: String,
+      ?policy_arn: String
+    ) -> _AttachRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachRolePolicyResponse
+
+    interface _AttachUserPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def attach_user_policy: (
+      ?user_name: String,
+      ?policy_arn: String
+    ) -> _AttachUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachUserPolicyResponse
+
+    interface _ChangePasswordResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def change_password: (
+      ?old_password: String,
+      ?new_password: String
+    ) -> _ChangePasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangePasswordResponse
+
+    interface _CreateAccessKeyResponse
+      include Smithy::Client::_Response[Types::CreateAccessKeyResponse]
+      def access_key: () -> Types::AccessKey?
+    end
+    def create_access_key: (
+      ?user_name: String
+    ) -> _CreateAccessKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessKeyResponse
+
+    interface _CreateAccountAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_account_alias: (
+      ?account_alias: String
+    ) -> _CreateAccountAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountAliasResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
+      def group: () -> Types::Group?
+    end
+    def create_group: (
+      ?path: String,
+      ?group_name: String
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateInstanceProfileResponse
+      include Smithy::Client::_Response[Types::CreateInstanceProfileResponse]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def create_instance_profile: (
+      ?instance_profile_name: String,
+      ?path: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceProfileResponse
+
+    interface _CreateLoginProfileResponse
+      include Smithy::Client::_Response[Types::CreateLoginProfileResponse]
+      def login_profile: () -> Types::LoginProfile?
+    end
+    def create_login_profile: (
+      ?user_name: String,
+      ?password: String,
+      ?password_reset_required: bool
+    ) -> _CreateLoginProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoginProfileResponse
+
+    interface _CreateOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Types::CreateOpenIDConnectProviderResponse]
+      def open_id_connect_provider_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_open_id_connect_provider: (
+      ?url: String,
+      ?client_id_list: Array[String],
+      ?thumbprint_list: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOpenIDConnectProviderResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def create_policy: (
+      ?policy_name: String,
+      ?path: String,
+      ?policy_document: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _CreatePolicyVersionResponse
+      include Smithy::Client::_Response[Types::CreatePolicyVersionResponse]
+      def policy_version: () -> Types::PolicyVersion?
+    end
+    def create_policy_version: (
+      ?policy_arn: String,
+      ?policy_document: String,
+      ?set_as_default: bool
+    ) -> _CreatePolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyVersionResponse
+
+    interface _CreateRoleResponse
+      include Smithy::Client::_Response[Types::CreateRoleResponse]
+      def role: () -> Types::Role?
+    end
+    def create_role: (
+      ?path: String,
+      ?role_name: String,
+      ?assume_role_policy_document: String,
+      ?description: String,
+      ?max_session_duration: Integer,
+      ?permissions_boundary: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRoleResponse
+
+    interface _CreateSAMLProviderResponse
+      include Smithy::Client::_Response[Types::CreateSAMLProviderResponse]
+      def saml_provider_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_saml_provider: (
+      ?saml_metadata_document: String,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?assertion_encryption_mode: String,
+      ?add_private_key: String
+    ) -> _CreateSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSAMLProviderResponse
+
+    interface _CreateServiceLinkedRoleResponse
+      include Smithy::Client::_Response[Types::CreateServiceLinkedRoleResponse]
+      def role: () -> Types::Role?
+    end
+    def create_service_linked_role: (
+      ?aws_service_name: String,
+      ?description: String,
+      ?custom_suffix: String
+    ) -> _CreateServiceLinkedRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceLinkedRoleResponse
+
+    interface _CreateServiceSpecificCredentialResponse
+      include Smithy::Client::_Response[Types::CreateServiceSpecificCredentialResponse]
+      def service_specific_credential: () -> Types::ServiceSpecificCredential?
+    end
+    def create_service_specific_credential: (
+      ?user_name: String,
+      ?service_name: String,
+      ?credential_age_days: Integer
+    ) -> _CreateServiceSpecificCredentialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceSpecificCredentialResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user: () -> Types::User?
+    end
+    def create_user: (
+      ?path: String,
+      ?user_name: String,
+      ?permissions_boundary: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _CreateVirtualMFADeviceResponse
+      include Smithy::Client::_Response[Types::CreateVirtualMFADeviceResponse]
+      def virtual_mfa_device: () -> Types::VirtualMFADevice?
+    end
+    def create_virtual_mfa_device: (
+      ?path: String,
+      ?virtual_mfa_device_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVirtualMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualMFADeviceResponse
+
+    interface _DeactivateMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deactivate_mfa_device: (
+      ?user_name: String,
+      ?serial_number: String
+    ) -> _DeactivateMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateMFADeviceResponse
+
+    interface _DeleteAccessKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_key: (
+      ?user_name: String,
+      ?access_key_id: String
+    ) -> _DeleteAccessKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessKeyResponse
+
+    interface _DeleteAccountAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_account_alias: (
+      ?account_alias: String
+    ) -> _DeleteAccountAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountAliasResponse
+
+    interface _DeleteAccountPasswordPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_account_password_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountPasswordPolicyResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_group: (
+      ?group_name: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteGroupPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_group_policy: (
+      ?group_name: String,
+      ?policy_name: String
+    ) -> _DeleteGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupPolicyResponse
+
+    interface _DeleteInstanceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_instance_profile: (
+      ?instance_profile_name: String
+    ) -> _DeleteInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceProfileResponse
+
+    interface _DeleteLoginProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_login_profile: (
+      ?user_name: String
+    ) -> _DeleteLoginProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoginProfileResponse
+
+    interface _DeleteOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String
+    ) -> _DeleteOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOpenIDConnectProviderResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?policy_arn: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeletePolicyVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy_version: (
+      ?policy_arn: String,
+      ?version_id: String
+    ) -> _DeletePolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyVersionResponse
+
+    interface _DeleteRoleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_role: (
+      ?role_name: String
+    ) -> _DeleteRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRoleResponse
+
+    interface _DeleteRolePermissionsBoundaryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_role_permissions_boundary: (
+      ?role_name: String
+    ) -> _DeleteRolePermissionsBoundaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRolePermissionsBoundaryResponse
+
+    interface _DeleteRolePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_role_policy: (
+      ?role_name: String,
+      ?policy_name: String
+    ) -> _DeleteRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRolePolicyResponse
+
+    interface _DeleteSAMLProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_saml_provider: (
+      ?saml_provider_arn: String
+    ) -> _DeleteSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSAMLProviderResponse
+
+    interface _DeleteSSHPublicKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ssh_public_key: (
+      ?user_name: String,
+      ?ssh_public_key_id: String
+    ) -> _DeleteSSHPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSSHPublicKeyResponse
+
+    interface _DeleteServerCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_server_certificate: (
+      ?server_certificate_name: String
+    ) -> _DeleteServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServerCertificateResponse
+
+    interface _DeleteServiceLinkedRoleResponse
+      include Smithy::Client::_Response[Types::DeleteServiceLinkedRoleResponse]
+      def deletion_task_id: () -> String?
+    end
+    def delete_service_linked_role: (
+      ?role_name: String
+    ) -> _DeleteServiceLinkedRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceLinkedRoleResponse
+
+    interface _DeleteServiceSpecificCredentialResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_service_specific_credential: (
+      ?user_name: String,
+      ?service_specific_credential_id: String
+    ) -> _DeleteServiceSpecificCredentialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceSpecificCredentialResponse
+
+    interface _DeleteSigningCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_signing_certificate: (
+      ?user_name: String,
+      ?certificate_id: String
+    ) -> _DeleteSigningCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSigningCertificateResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user: (
+      ?user_name: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeleteUserPermissionsBoundaryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user_permissions_boundary: (
+      ?user_name: String
+    ) -> _DeleteUserPermissionsBoundaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPermissionsBoundaryResponse
+
+    interface _DeleteUserPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user_policy: (
+      ?user_name: String,
+      ?policy_name: String
+    ) -> _DeleteUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPolicyResponse
+
+    interface _DeleteVirtualMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_virtual_mfa_device: (
+      ?serial_number: String
+    ) -> _DeleteVirtualMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualMFADeviceResponse
+
+    interface _DetachGroupPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def detach_group_policy: (
+      ?group_name: String,
+      ?policy_arn: String
+    ) -> _DetachGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachGroupPolicyResponse
+
+    interface _DetachRolePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def detach_role_policy: (
+      ?role_name: String,
+      ?policy_arn: String
+    ) -> _DetachRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachRolePolicyResponse
+
+    interface _DetachUserPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def detach_user_policy: (
+      ?user_name: String,
+      ?policy_arn: String
+    ) -> _DetachUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachUserPolicyResponse
+
+    interface _DisableOrganizationsRootCredentialsManagementResponse
+      include Smithy::Client::_Response[Types::DisableOrganizationsRootCredentialsManagementResponse]
+      def organization_id: () -> String?
+      def enabled_features: () -> Array[String]?
+    end
+    def disable_organizations_root_credentials_management: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationsRootCredentialsManagementResponse
+
+    interface _DisableOrganizationsRootSessionsResponse
+      include Smithy::Client::_Response[Types::DisableOrganizationsRootSessionsResponse]
+      def organization_id: () -> String?
+      def enabled_features: () -> Array[String]?
+    end
+    def disable_organizations_root_sessions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationsRootSessionsResponse
+
+    interface _EnableMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_mfa_device: (
+      ?user_name: String,
+      ?serial_number: String,
+      ?authentication_code1: String,
+      ?authentication_code2: String
+    ) -> _EnableMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableMFADeviceResponse
+
+    interface _EnableOrganizationsRootCredentialsManagementResponse
+      include Smithy::Client::_Response[Types::EnableOrganizationsRootCredentialsManagementResponse]
+      def organization_id: () -> String?
+      def enabled_features: () -> Array[String]?
+    end
+    def enable_organizations_root_credentials_management: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationsRootCredentialsManagementResponse
+
+    interface _EnableOrganizationsRootSessionsResponse
+      include Smithy::Client::_Response[Types::EnableOrganizationsRootSessionsResponse]
+      def organization_id: () -> String?
+      def enabled_features: () -> Array[String]?
+    end
+    def enable_organizations_root_sessions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationsRootSessionsResponse
+
+    interface _GenerateCredentialReportResponse
+      include Smithy::Client::_Response[Types::GenerateCredentialReportResponse]
+      def state: () -> String?
+      def description: () -> String?
+    end
+    def generate_credential_report: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateCredentialReportResponse
+
+    interface _GenerateOrganizationsAccessReportResponse
+      include Smithy::Client::_Response[Types::GenerateOrganizationsAccessReportResponse]
+      def job_id: () -> String?
+    end
+    def generate_organizations_access_report: (
+      ?entity_path: String,
+      ?organizations_policy_id: String
+    ) -> _GenerateOrganizationsAccessReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateOrganizationsAccessReportResponse
+
+    interface _GenerateServiceLastAccessedDetailsResponse
+      include Smithy::Client::_Response[Types::GenerateServiceLastAccessedDetailsResponse]
+      def job_id: () -> String?
+    end
+    def generate_service_last_accessed_details: (
+      ?arn: String,
+      ?granularity: String
+    ) -> _GenerateServiceLastAccessedDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateServiceLastAccessedDetailsResponse
+
+    interface _GetAccessKeyLastUsedResponse
+      include Smithy::Client::_Response[Types::GetAccessKeyLastUsedResponse]
+      def user_name: () -> String?
+      def access_key_last_used: () -> Types::AccessKeyLastUsed?
+    end
+    def get_access_key_last_used: (
+      ?access_key_id: String
+    ) -> _GetAccessKeyLastUsedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessKeyLastUsedResponse
+
+    interface _GetAccountAuthorizationDetailsResponse
+      include Smithy::Client::_Response[Types::GetAccountAuthorizationDetailsResponse]
+      def user_detail_list: () -> Array[Types::UserDetail]?
+      def group_detail_list: () -> Array[Types::GroupDetail]?
+      def role_detail_list: () -> Array[Types::RoleDetail]?
+      def policies: () -> Array[Types::ManagedPolicyDetail]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def get_account_authorization_details: (
+      ?filter: Array[String],
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _GetAccountAuthorizationDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountAuthorizationDetailsResponse
+
+    interface _GetAccountPasswordPolicyResponse
+      include Smithy::Client::_Response[Types::GetAccountPasswordPolicyResponse]
+      def password_policy: () -> Types::PasswordPolicy?
+    end
+    def get_account_password_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountPasswordPolicyResponse
+
+    interface _GetAccountSummaryResponse
+      include Smithy::Client::_Response[Types::GetAccountSummaryResponse]
+      def summary_map: () -> Hash[String, Integer]?
+    end
+    def get_account_summary: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSummaryResponse
+
+    interface _GetContextKeysForCustomPolicyResponse
+      include Smithy::Client::_Response[Types::GetContextKeysForCustomPolicyOutput]
+      def context_key_names: () -> Array[String]?
+    end
+    def get_context_keys_for_custom_policy: (
+      ?policy_input_list: Array[String]
+    ) -> _GetContextKeysForCustomPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContextKeysForCustomPolicyResponse
+
+    interface _GetContextKeysForPrincipalPolicyResponse
+      include Smithy::Client::_Response[Types::GetContextKeysForPrincipalPolicyOutput]
+      def context_key_names: () -> Array[String]?
+    end
+    def get_context_keys_for_principal_policy: (
+      ?policy_source_arn: String,
+      ?policy_input_list: Array[String]
+    ) -> _GetContextKeysForPrincipalPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContextKeysForPrincipalPolicyResponse
+
+    interface _GetCredentialReportResponse
+      include Smithy::Client::_Response[Types::GetCredentialReportResponse]
+      def content: () -> String?
+      def report_format: () -> String?
+      def generated_time: () -> Time?
+    end
+    def get_credential_report: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCredentialReportResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResponse]
+      def group: () -> Types::Group?
+      def users: () -> Array[Types::User]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def get_group: (
+      ?group_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _GetGroupPolicyResponse
+      include Smithy::Client::_Response[Types::GetGroupPolicyResponse]
+      def group_name: () -> String?
+      def policy_name: () -> String?
+      def policy_document: () -> String?
+    end
+    def get_group_policy: (
+      ?group_name: String,
+      ?policy_name: String
+    ) -> _GetGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupPolicyResponse
+
+    interface _GetInstanceProfileResponse
+      include Smithy::Client::_Response[Types::GetInstanceProfileResponse]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def get_instance_profile: (
+      ?instance_profile_name: String
+    ) -> _GetInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceProfileResponse
+
+    interface _GetLoginProfileResponse
+      include Smithy::Client::_Response[Types::GetLoginProfileResponse]
+      def login_profile: () -> Types::LoginProfile?
+    end
+    def get_login_profile: (
+      ?user_name: String
+    ) -> _GetLoginProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoginProfileResponse
+
+    interface _GetMFADeviceResponse
+      include Smithy::Client::_Response[Types::GetMFADeviceResponse]
+      def user_name: () -> String?
+      def serial_number: () -> String?
+      def enable_date: () -> Time?
+      def certifications: () -> Hash[String, String]?
+    end
+    def get_mfa_device: (
+      ?serial_number: String,
+      ?user_name: String
+    ) -> _GetMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMFADeviceResponse
+
+    interface _GetOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Types::GetOpenIDConnectProviderResponse]
+      def url: () -> String?
+      def client_id_list: () -> Array[String]?
+      def thumbprint_list: () -> Array[String]?
+      def create_date: () -> Time?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def get_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String
+    ) -> _GetOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpenIDConnectProviderResponse
+
+    interface _GetOrganizationsAccessReportResponse
+      include Smithy::Client::_Response[Types::GetOrganizationsAccessReportResponse]
+      def job_status: () -> String?
+      def job_creation_date: () -> Time?
+      def job_completion_date: () -> Time?
+      def number_of_services_accessible: () -> Integer?
+      def number_of_services_not_accessed: () -> Integer?
+      def access_details: () -> Array[Types::AccessDetail]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+      def error_details: () -> Types::ErrorDetails?
+    end
+    def get_organizations_access_report: (
+      ?job_id: String,
+      ?max_items: Integer,
+      ?marker: String,
+      ?sort_key: String
+    ) -> _GetOrganizationsAccessReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationsAccessReportResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def get_policy: (
+      ?policy_arn: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetPolicyVersionResponse
+      include Smithy::Client::_Response[Types::GetPolicyVersionResponse]
+      def policy_version: () -> Types::PolicyVersion?
+    end
+    def get_policy_version: (
+      ?policy_arn: String,
+      ?version_id: String
+    ) -> _GetPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyVersionResponse
+
+    interface _GetRoleResponse
+      include Smithy::Client::_Response[Types::GetRoleResponse]
+      def role: () -> Types::Role?
+    end
+    def get_role: (
+      ?role_name: String
+    ) -> _GetRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRoleResponse
+
+    interface _GetRolePolicyResponse
+      include Smithy::Client::_Response[Types::GetRolePolicyResponse]
+      def role_name: () -> String?
+      def policy_name: () -> String?
+      def policy_document: () -> String?
+    end
+    def get_role_policy: (
+      ?role_name: String,
+      ?policy_name: String
+    ) -> _GetRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRolePolicyResponse
+
+    interface _GetSAMLProviderResponse
+      include Smithy::Client::_Response[Types::GetSAMLProviderResponse]
+      def saml_provider_uuid: () -> String?
+      def saml_metadata_document: () -> String?
+      def create_date: () -> Time?
+      def valid_until: () -> Time?
+      def tags: () -> Array[Types::Tag]?
+      def assertion_encryption_mode: () -> String?
+      def private_key_list: () -> Array[Types::SAMLPrivateKey]?
+    end
+    def get_saml_provider: (
+      ?saml_provider_arn: String
+    ) -> _GetSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSAMLProviderResponse
+
+    interface _GetSSHPublicKeyResponse
+      include Smithy::Client::_Response[Types::GetSSHPublicKeyResponse]
+      def ssh_public_key: () -> Types::SSHPublicKey?
+    end
+    def get_ssh_public_key: (
+      ?user_name: String,
+      ?ssh_public_key_id: String,
+      ?encoding: String
+    ) -> _GetSSHPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSSHPublicKeyResponse
+
+    interface _GetServerCertificateResponse
+      include Smithy::Client::_Response[Types::GetServerCertificateResponse]
+      def server_certificate: () -> Types::ServerCertificate?
+    end
+    def get_server_certificate: (
+      ?server_certificate_name: String
+    ) -> _GetServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServerCertificateResponse
+
+    interface _GetServiceLastAccessedDetailsResponse
+      include Smithy::Client::_Response[Types::GetServiceLastAccessedDetailsResponse]
+      def job_status: () -> String?
+      def job_type: () -> String?
+      def job_creation_date: () -> Time?
+      def services_last_accessed: () -> Array[Types::ServiceLastAccessed]?
+      def job_completion_date: () -> Time?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+      def error: () -> Types::ErrorDetails?
+    end
+    def get_service_last_accessed_details: (
+      ?job_id: String,
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _GetServiceLastAccessedDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceLastAccessedDetailsResponse
+
+    interface _GetServiceLastAccessedDetailsWithEntitiesResponse
+      include Smithy::Client::_Response[Types::GetServiceLastAccessedDetailsWithEntitiesResponse]
+      def job_status: () -> String?
+      def job_creation_date: () -> Time?
+      def job_completion_date: () -> Time?
+      def entity_details_list: () -> Array[Types::EntityDetails]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+      def error: () -> Types::ErrorDetails?
+    end
+    def get_service_last_accessed_details_with_entities: (
+      ?job_id: String,
+      ?service_namespace: String,
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _GetServiceLastAccessedDetailsWithEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceLastAccessedDetailsWithEntitiesResponse
+
+    interface _GetServiceLinkedRoleDeletionStatusResponse
+      include Smithy::Client::_Response[Types::GetServiceLinkedRoleDeletionStatusResponse]
+      def status: () -> String?
+      def reason: () -> Types::DeletionTaskFailureReasonType?
+    end
+    def get_service_linked_role_deletion_status: (
+      ?deletion_task_id: String
+    ) -> _GetServiceLinkedRoleDeletionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceLinkedRoleDeletionStatusResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def user: () -> Types::User?
+    end
+    def get_user: (
+      ?user_name: String
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetUserPolicyResponse
+      include Smithy::Client::_Response[Types::GetUserPolicyResponse]
+      def user_name: () -> String?
+      def policy_name: () -> String?
+      def policy_document: () -> String?
+    end
+    def get_user_policy: (
+      ?user_name: String,
+      ?policy_name: String
+    ) -> _GetUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserPolicyResponse
+
+    interface _ListAccessKeysResponse
+      include Smithy::Client::_Response[Types::ListAccessKeysResponse]
+      def access_key_metadata: () -> Array[Types::AccessKeyMetadata]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_access_keys: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAccessKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessKeysResponse
+
+    interface _ListAccountAliasesResponse
+      include Smithy::Client::_Response[Types::ListAccountAliasesResponse]
+      def account_aliases: () -> Array[String]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_account_aliases: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAccountAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountAliasesResponse
+
+    interface _ListAttachedGroupPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAttachedGroupPoliciesResponse]
+      def attached_policies: () -> Array[Types::AttachedPolicy]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_attached_group_policies: (
+      ?group_name: String,
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAttachedGroupPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedGroupPoliciesResponse
+
+    interface _ListAttachedRolePoliciesResponse
+      include Smithy::Client::_Response[Types::ListAttachedRolePoliciesResponse]
+      def attached_policies: () -> Array[Types::AttachedPolicy]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_attached_role_policies: (
+      ?role_name: String,
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAttachedRolePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedRolePoliciesResponse
+
+    interface _ListAttachedUserPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAttachedUserPoliciesResponse]
+      def attached_policies: () -> Array[Types::AttachedPolicy]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_attached_user_policies: (
+      ?user_name: String,
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAttachedUserPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedUserPoliciesResponse
+
+    interface _ListEntitiesForPolicyResponse
+      include Smithy::Client::_Response[Types::ListEntitiesForPolicyResponse]
+      def policy_groups: () -> Array[Types::PolicyGroup]?
+      def policy_users: () -> Array[Types::PolicyUser]?
+      def policy_roles: () -> Array[Types::PolicyRole]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_entities_for_policy: (
+      ?policy_arn: String,
+      ?entity_filter: String,
+      ?path_prefix: String,
+      ?policy_usage_filter: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListEntitiesForPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitiesForPolicyResponse
+
+    interface _ListGroupPoliciesResponse
+      include Smithy::Client::_Response[Types::ListGroupPoliciesResponse]
+      def policy_names: () -> Array[String]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_group_policies: (
+      ?group_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListGroupPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupPoliciesResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def groups: () -> Array[Types::Group]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_groups: (
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListGroupsForUserResponse
+      include Smithy::Client::_Response[Types::ListGroupsForUserResponse]
+      def groups: () -> Array[Types::Group]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_groups_for_user: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListGroupsForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsForUserResponse
+
+    interface _ListInstanceProfileTagsResponse
+      include Smithy::Client::_Response[Types::ListInstanceProfileTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_instance_profile_tags: (
+      ?instance_profile_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListInstanceProfileTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceProfileTagsResponse
+
+    interface _ListInstanceProfilesResponse
+      include Smithy::Client::_Response[Types::ListInstanceProfilesResponse]
+      def instance_profiles: () -> Array[Types::InstanceProfile]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_instance_profiles: (
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListInstanceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceProfilesResponse
+
+    interface _ListInstanceProfilesForRoleResponse
+      include Smithy::Client::_Response[Types::ListInstanceProfilesForRoleResponse]
+      def instance_profiles: () -> Array[Types::InstanceProfile]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_instance_profiles_for_role: (
+      ?role_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListInstanceProfilesForRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceProfilesForRoleResponse
+
+    interface _ListMFADeviceTagsResponse
+      include Smithy::Client::_Response[Types::ListMFADeviceTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_mfa_device_tags: (
+      ?serial_number: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListMFADeviceTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMFADeviceTagsResponse
+
+    interface _ListMFADevicesResponse
+      include Smithy::Client::_Response[Types::ListMFADevicesResponse]
+      def mfa_devices: () -> Array[Types::MFADevice]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_mfa_devices: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListMFADevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMFADevicesResponse
+
+    interface _ListOpenIDConnectProviderTagsResponse
+      include Smithy::Client::_Response[Types::ListOpenIDConnectProviderTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_open_id_connect_provider_tags: (
+      ?open_id_connect_provider_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListOpenIDConnectProviderTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpenIDConnectProviderTagsResponse
+
+    interface _ListOpenIDConnectProvidersResponse
+      include Smithy::Client::_Response[Types::ListOpenIDConnectProvidersResponse]
+      def open_id_connect_provider_list: () -> Array[Types::OpenIDConnectProviderListEntry]?
+    end
+    def list_open_id_connect_providers: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpenIDConnectProvidersResponse
+
+    interface _ListOrganizationsFeaturesResponse
+      include Smithy::Client::_Response[Types::ListOrganizationsFeaturesResponse]
+      def organization_id: () -> String?
+      def enabled_features: () -> Array[String]?
+    end
+    def list_organizations_features: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationsFeaturesResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def policies: () -> Array[Types::Policy]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_policies: (
+      ?scope: String,
+      ?only_attached: bool,
+      ?path_prefix: String,
+      ?policy_usage_filter: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPoliciesGrantingServiceAccessResponse
+      include Smithy::Client::_Response[Types::ListPoliciesGrantingServiceAccessResponse]
+      def policies_granting_service_access: () -> Array[Types::ListPoliciesGrantingServiceAccessEntry]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_policies_granting_service_access: (
+      ?marker: String,
+      ?arn: String,
+      ?service_namespaces: Array[String]
+    ) -> _ListPoliciesGrantingServiceAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesGrantingServiceAccessResponse
+
+    interface _ListPolicyTagsResponse
+      include Smithy::Client::_Response[Types::ListPolicyTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_policy_tags: (
+      ?policy_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListPolicyTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyTagsResponse
+
+    interface _ListPolicyVersionsResponse
+      include Smithy::Client::_Response[Types::ListPolicyVersionsResponse]
+      def versions: () -> Array[Types::PolicyVersion]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_policy_versions: (
+      ?policy_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListPolicyVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyVersionsResponse
+
+    interface _ListRolePoliciesResponse
+      include Smithy::Client::_Response[Types::ListRolePoliciesResponse]
+      def policy_names: () -> Array[String]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_role_policies: (
+      ?role_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListRolePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRolePoliciesResponse
+
+    interface _ListRoleTagsResponse
+      include Smithy::Client::_Response[Types::ListRoleTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_role_tags: (
+      ?role_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListRoleTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoleTagsResponse
+
+    interface _ListRolesResponse
+      include Smithy::Client::_Response[Types::ListRolesResponse]
+      def roles: () -> Array[Types::Role]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_roles: (
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListRolesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRolesResponse
+
+    interface _ListSAMLProviderTagsResponse
+      include Smithy::Client::_Response[Types::ListSAMLProviderTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_saml_provider_tags: (
+      ?saml_provider_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListSAMLProviderTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSAMLProviderTagsResponse
+
+    interface _ListSAMLProvidersResponse
+      include Smithy::Client::_Response[Types::ListSAMLProvidersResponse]
+      def saml_provider_list: () -> Array[Types::SAMLProviderListEntry]?
+    end
+    def list_saml_providers: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSAMLProvidersResponse
+
+    interface _ListSSHPublicKeysResponse
+      include Smithy::Client::_Response[Types::ListSSHPublicKeysResponse]
+      def ssh_public_keys: () -> Array[Types::SSHPublicKeyMetadata]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_ssh_public_keys: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListSSHPublicKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSSHPublicKeysResponse
+
+    interface _ListServerCertificateTagsResponse
+      include Smithy::Client::_Response[Types::ListServerCertificateTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_server_certificate_tags: (
+      ?server_certificate_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListServerCertificateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServerCertificateTagsResponse
+
+    interface _ListServerCertificatesResponse
+      include Smithy::Client::_Response[Types::ListServerCertificatesResponse]
+      def server_certificate_metadata_list: () -> Array[Types::ServerCertificateMetadata]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_server_certificates: (
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListServerCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServerCertificatesResponse
+
+    interface _ListServiceSpecificCredentialsResponse
+      include Smithy::Client::_Response[Types::ListServiceSpecificCredentialsResponse]
+      def service_specific_credentials: () -> Array[Types::ServiceSpecificCredentialMetadata]?
+      def marker: () -> String?
+      def is_truncated: () -> bool?
+    end
+    def list_service_specific_credentials: (
+      ?user_name: String,
+      ?service_name: String,
+      ?all_users: bool,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListServiceSpecificCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceSpecificCredentialsResponse
+
+    interface _ListSigningCertificatesResponse
+      include Smithy::Client::_Response[Types::ListSigningCertificatesResponse]
+      def certificates: () -> Array[Types::SigningCertificate]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_signing_certificates: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListSigningCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSigningCertificatesResponse
+
+    interface _ListUserPoliciesResponse
+      include Smithy::Client::_Response[Types::ListUserPoliciesResponse]
+      def policy_names: () -> Array[String]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_user_policies: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListUserPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoliciesResponse
+
+    interface _ListUserTagsResponse
+      include Smithy::Client::_Response[Types::ListUserTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_user_tags: (
+      ?user_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListUserTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserTagsResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::User]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_users: (
+      ?path_prefix: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _ListVirtualMFADevicesResponse
+      include Smithy::Client::_Response[Types::ListVirtualMFADevicesResponse]
+      def virtual_mfa_devices: () -> Array[Types::VirtualMFADevice]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def list_virtual_mfa_devices: (
+      ?assignment_status: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListVirtualMFADevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualMFADevicesResponse
+
+    interface _PutGroupPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_group_policy: (
+      ?group_name: String,
+      ?policy_name: String,
+      ?policy_document: String
+    ) -> _PutGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGroupPolicyResponse
+
+    interface _PutRolePermissionsBoundaryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_role_permissions_boundary: (
+      ?role_name: String,
+      ?permissions_boundary: String
+    ) -> _PutRolePermissionsBoundaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRolePermissionsBoundaryResponse
+
+    interface _PutRolePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_role_policy: (
+      ?role_name: String,
+      ?policy_name: String,
+      ?policy_document: String
+    ) -> _PutRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRolePolicyResponse
+
+    interface _PutUserPermissionsBoundaryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_user_permissions_boundary: (
+      ?user_name: String,
+      ?permissions_boundary: String
+    ) -> _PutUserPermissionsBoundaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutUserPermissionsBoundaryResponse
+
+    interface _PutUserPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_user_policy: (
+      ?user_name: String,
+      ?policy_name: String,
+      ?policy_document: String
+    ) -> _PutUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutUserPolicyResponse
+
+    interface _RemoveClientIDFromOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_client_id_from_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String,
+      ?client_id: String
+    ) -> _RemoveClientIDFromOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveClientIDFromOpenIDConnectProviderResponse
+
+    interface _RemoveRoleFromInstanceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_role_from_instance_profile: (
+      ?instance_profile_name: String,
+      ?role_name: String
+    ) -> _RemoveRoleFromInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveRoleFromInstanceProfileResponse
+
+    interface _RemoveUserFromGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_user_from_group: (
+      ?group_name: String,
+      ?user_name: String
+    ) -> _RemoveUserFromGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveUserFromGroupResponse
+
+    interface _ResetServiceSpecificCredentialResponse
+      include Smithy::Client::_Response[Types::ResetServiceSpecificCredentialResponse]
+      def service_specific_credential: () -> Types::ServiceSpecificCredential?
+    end
+    def reset_service_specific_credential: (
+      ?user_name: String,
+      ?service_specific_credential_id: String
+    ) -> _ResetServiceSpecificCredentialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetServiceSpecificCredentialResponse
+
+    interface _ResyncMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def resync_mfa_device: (
+      ?user_name: String,
+      ?serial_number: String,
+      ?authentication_code1: String,
+      ?authentication_code2: String
+    ) -> _ResyncMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResyncMFADeviceResponse
+
+    interface _SetDefaultPolicyVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_default_policy_version: (
+      ?policy_arn: String,
+      ?version_id: String
+    ) -> _SetDefaultPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDefaultPolicyVersionResponse
+
+    interface _SetSecurityTokenServicePreferencesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_security_token_service_preferences: (
+      ?global_endpoint_token_version: String
+    ) -> _SetSecurityTokenServicePreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSecurityTokenServicePreferencesResponse
+
+    interface _SimulateCustomPolicyResponse
+      include Smithy::Client::_Response[Types::SimulateCustomPolicyOutput]
+      def evaluation_results: () -> Array[Types::EvaluationResult]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def simulate_custom_policy: (
+      ?policy_input_list: Array[String],
+      ?permissions_boundary_policy_input_list: Array[String],
+      ?action_names: Array[String],
+      ?resource_arns: Array[String],
+      ?resource_policy: String,
+      ?resource_owner: String,
+      ?caller_arn: String,
+      ?context_entries: Array[
+        {
+          context_key_name: String,
+          context_key_values: Array[String],
+          context_key_type: String
+        }
+      ],
+      ?resource_handling_option: String,
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _SimulateCustomPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SimulateCustomPolicyResponse
+
+    interface _SimulatePrincipalPolicyResponse
+      include Smithy::Client::_Response[Types::SimulatePrincipalPolicyOutput]
+      def evaluation_results: () -> Array[Types::EvaluationResult]?
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+    end
+    def simulate_principal_policy: (
+      ?policy_source_arn: String,
+      ?policy_input_list: Array[String],
+      ?permissions_boundary_policy_input_list: Array[String],
+      ?action_names: Array[String],
+      ?resource_arns: Array[String],
+      ?resource_policy: String,
+      ?resource_owner: String,
+      ?caller_arn: String,
+      ?context_entries: Array[
+        {
+          context_key_name: String,
+          context_key_values: Array[String],
+          context_key_type: String
+        }
+      ],
+      ?resource_handling_option: String,
+      ?max_items: Integer,
+      ?marker: String
+    ) -> _SimulatePrincipalPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SimulatePrincipalPolicyResponse
+
+    interface _TagInstanceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_instance_profile: (
+      ?instance_profile_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagInstanceProfileResponse
+
+    interface _TagMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_mfa_device: (
+      ?serial_number: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagMFADeviceResponse
+
+    interface _TagOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagOpenIDConnectProviderResponse
+
+    interface _TagPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_policy: (
+      ?policy_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagPolicyResponse
+
+    interface _TagRoleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_role: (
+      ?role_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagRoleResponse
+
+    interface _TagSAMLProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_saml_provider: (
+      ?saml_provider_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagSAMLProviderResponse
+
+    interface _TagServerCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_server_certificate: (
+      ?server_certificate_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagServerCertificateResponse
+
+    interface _TagUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_user: (
+      ?user_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagUserResponse
+
+    interface _UntagInstanceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_instance_profile: (
+      ?instance_profile_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagInstanceProfileResponse
+
+    interface _UntagMFADeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_mfa_device: (
+      ?serial_number: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagMFADeviceResponse
+
+    interface _UntagOpenIDConnectProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_open_id_connect_provider: (
+      ?open_id_connect_provider_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagOpenIDConnectProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagOpenIDConnectProviderResponse
+
+    interface _UntagPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_policy: (
+      ?policy_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagPolicyResponse
+
+    interface _UntagRoleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_role: (
+      ?role_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagRoleResponse
+
+    interface _UntagSAMLProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_saml_provider: (
+      ?saml_provider_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagSAMLProviderResponse
+
+    interface _UntagServerCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_server_certificate: (
+      ?server_certificate_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagServerCertificateResponse
+
+    interface _UntagUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_user: (
+      ?user_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagUserResponse
+
+    interface _UpdateAccessKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_access_key: (
+      ?user_name: String,
+      ?access_key_id: String,
+      ?status: String
+    ) -> _UpdateAccessKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessKeyResponse
+
+    interface _UpdateAccountPasswordPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_account_password_policy: (
+      ?minimum_password_length: Integer,
+      ?require_symbols: bool,
+      ?require_numbers: bool,
+      ?require_uppercase_characters: bool,
+      ?require_lowercase_characters: bool,
+      ?allow_users_to_change_password: bool,
+      ?max_password_age: Integer,
+      ?password_reuse_prevention: Integer,
+      ?hard_expiry: bool
+    ) -> _UpdateAccountPasswordPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountPasswordPolicyResponse
+
+    interface _UpdateAssumeRolePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_assume_role_policy: (
+      ?role_name: String,
+      ?policy_document: String
+    ) -> _UpdateAssumeRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssumeRolePolicyResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_group: (
+      ?group_name: String,
+      ?new_path: String,
+      ?new_group_name: String
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateLoginProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_login_profile: (
+      ?user_name: String,
+      ?password: String,
+      ?password_reset_required: bool
+    ) -> _UpdateLoginProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoginProfileResponse
+
+    interface _UpdateOpenIDConnectProviderThumbprintResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_open_id_connect_provider_thumbprint: (
+      ?open_id_connect_provider_arn: String,
+      ?thumbprint_list: Array[String]
+    ) -> _UpdateOpenIDConnectProviderThumbprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOpenIDConnectProviderThumbprintResponse
+
+    interface _UpdateRoleResponse
+      include Smithy::Client::_Response[Types::UpdateRoleResponse]
+    end
+    def update_role: (
+      ?role_name: String,
+      ?description: String,
+      ?max_session_duration: Integer
+    ) -> _UpdateRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoleResponse
+
+    interface _UpdateRoleDescriptionResponse
+      include Smithy::Client::_Response[Types::UpdateRoleDescriptionResponse]
+      def role: () -> Types::Role?
+    end
+    def update_role_description: (
+      ?role_name: String,
+      ?description: String
+    ) -> _UpdateRoleDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoleDescriptionResponse
+
+    interface _UpdateSAMLProviderResponse
+      include Smithy::Client::_Response[Types::UpdateSAMLProviderResponse]
+      def saml_provider_arn: () -> String?
+    end
+    def update_saml_provider: (
+      ?saml_metadata_document: String,
+      ?saml_provider_arn: String,
+      ?assertion_encryption_mode: String,
+      ?add_private_key: String,
+      ?remove_private_key: String
+    ) -> _UpdateSAMLProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSAMLProviderResponse
+
+    interface _UpdateSSHPublicKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_ssh_public_key: (
+      ?user_name: String,
+      ?ssh_public_key_id: String,
+      ?status: String
+    ) -> _UpdateSSHPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSSHPublicKeyResponse
+
+    interface _UpdateServerCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_server_certificate: (
+      ?server_certificate_name: String,
+      ?new_path: String,
+      ?new_server_certificate_name: String
+    ) -> _UpdateServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServerCertificateResponse
+
+    interface _UpdateServiceSpecificCredentialResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_service_specific_credential: (
+      ?user_name: String,
+      ?service_specific_credential_id: String,
+      ?status: String
+    ) -> _UpdateServiceSpecificCredentialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSpecificCredentialResponse
+
+    interface _UpdateSigningCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_signing_certificate: (
+      ?user_name: String,
+      ?certificate_id: String,
+      ?status: String
+    ) -> _UpdateSigningCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSigningCertificateResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user: (
+      ?user_name: String,
+      ?new_path: String,
+      ?new_user_name: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+
+    interface _UploadSSHPublicKeyResponse
+      include Smithy::Client::_Response[Types::UploadSSHPublicKeyResponse]
+      def ssh_public_key: () -> Types::SSHPublicKey?
+    end
+    def upload_ssh_public_key: (
+      ?user_name: String,
+      ?ssh_public_key_body: String
+    ) -> _UploadSSHPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadSSHPublicKeyResponse
+
+    interface _UploadServerCertificateResponse
+      include Smithy::Client::_Response[Types::UploadServerCertificateResponse]
+      def server_certificate_metadata: () -> Types::ServerCertificateMetadata?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def upload_server_certificate: (
+      ?path: String,
+      ?server_certificate_name: String,
+      ?certificate_body: String,
+      ?private_key: String,
+      ?certificate_chain: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UploadServerCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadServerCertificateResponse
+
+    interface _UploadSigningCertificateResponse
+      include Smithy::Client::_Response[Types::UploadSigningCertificateResponse]
+      def certificate: () -> Types::SigningCertificate?
+    end
+    def upload_signing_certificate: (
+      ?user_name: String,
+      ?certificate_body: String
+    ) -> _UploadSigningCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadSigningCertificateResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module CodeGuruProfiler
+      VERSION: String
+    end
+  end

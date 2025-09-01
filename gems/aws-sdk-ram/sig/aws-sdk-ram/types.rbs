@@ -1,0 +1,1700 @@
+module Aws::RAM
+  module Types
+
+    class AcceptResourceShareInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class AcceptResourceShareInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation: Types::ResourceShareInvitation,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation: Types::ResourceShareInvitation?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateResourceSharePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?permission_arn: String,
+        ?replace: bool,
+        ?client_token: String,
+        ?permission_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor permission_arn: String?
+      attr_accessor replace: bool?
+      attr_accessor client_token: String?
+      attr_accessor permission_version: Integer?
+    end
+
+    class AssociateResourceSharePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?resource_arns: Array[String],
+        ?principals: Array[String],
+        ?client_token: String,
+        ?sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor principals: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[String]?
+    end
+
+    class AssociateResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_associations: Array[Types::ResourceShareAssociation],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_associations: Array[Types::ResourceShareAssociation]?
+      attr_accessor client_token: String?
+    end
+
+    class AssociatedPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?permission_version: String,
+        ?default_version: bool,
+        ?resource_type: String,
+        ?status: String,
+        ?feature_set: String,
+        ?last_updated_time: Time,
+        ?resource_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor permission_version: String?
+      attr_accessor default_version: bool?
+      attr_accessor resource_type: String?
+      attr_accessor status: String?
+      attr_accessor feature_set: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor resource_share_arn: String?
+    end
+
+    class CreatePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_type: String,
+        ?policy_template: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_type: String?
+      attr_accessor policy_template: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: Types::ResourceSharePermissionSummary,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: Types::ResourceSharePermissionSummary?
+      attr_accessor client_token: String?
+    end
+
+    class CreatePermissionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?policy_template: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor policy_template: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreatePermissionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: Types::ResourceSharePermissionDetail,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: Types::ResourceSharePermissionDetail?
+      attr_accessor client_token: String?
+    end
+
+    class CreateResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_arns: Array[String],
+        ?principals: Array[String],
+        ?tags: Array[Types::Tag],
+        ?allow_external_principals: bool,
+        ?client_token: String,
+        ?permission_arns: Array[String],
+        ?sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor principals: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor allow_external_principals: bool?
+      attr_accessor client_token: String?
+      attr_accessor permission_arns: Array[String]?
+      attr_accessor sources: Array[String]?
+    end
+
+    class CreateResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share: Types::ResourceShare,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share: Types::ResourceShare?
+      attr_accessor client_token: String?
+    end
+
+    class DeletePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeletePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+        ?permission_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+      attr_accessor permission_status: String?
+    end
+
+    class DeletePermissionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?permission_version: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor permission_version: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class DeletePermissionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+        ?permission_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+      attr_accessor permission_status: String?
+    end
+
+    class DeleteResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateResourceSharePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?permission_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor permission_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateResourceSharePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?resource_arns: Array[String],
+        ?principals: Array[String],
+        ?client_token: String,
+        ?sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor principals: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor sources: Array[String]?
+    end
+
+    class DisassociateResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_associations: Array[Types::ResourceShareAssociation],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_associations: Array[Types::ResourceShareAssociation]?
+      attr_accessor client_token: String?
+    end
+
+    class EnableSharingWithAwsOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableSharingWithAwsOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+    end
+
+    class GetPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?permission_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor permission_version: Integer?
+    end
+
+    class GetPermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: Types::ResourceSharePermissionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: Types::ResourceSharePermissionDetail?
+    end
+
+    class GetResourcePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?principal: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor principal: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetResourcePoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceShareAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_type: String,
+        ?resource_share_arns: Array[String],
+        ?resource_arn: String,
+        ?principal: String,
+        ?association_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_type: String?
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor resource_arn: String?
+      attr_accessor principal: String?
+      attr_accessor association_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetResourceShareAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_associations: Array[Types::ResourceShareAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_associations: Array[Types::ResourceShareAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceShareInvitationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation_arns: Array[String],
+        ?resource_share_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation_arns: Array[String]?
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetResourceShareInvitationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitations: Array[Types::ResourceShareInvitation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitations: Array[Types::ResourceShareInvitation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceSharesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arns: Array[String],
+        ?resource_share_status: String,
+        ?resource_owner: String,
+        ?name: String,
+        ?tag_filters: Array[Types::TagFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?permission_arn: String,
+        ?permission_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor resource_share_status: String?
+      attr_accessor resource_owner: String?
+      attr_accessor name: String?
+      attr_accessor tag_filters: Array[Types::TagFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor permission_arn: String?
+      attr_accessor permission_version: Integer?
+    end
+
+    class GetResourceSharesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_shares: Array[Types::ResourceShare],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_shares: Array[Types::ResourceShare]?
+      attr_accessor next_token: String?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidClientTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMaxResultsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateTransitionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListPendingInvitationResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_region_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_region_scope: String?
+    end
+
+    class ListPendingInvitationResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?permission_version: Integer,
+        ?association_status: String,
+        ?resource_type: String,
+        ?feature_set: String,
+        ?default_version: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor permission_version: Integer?
+      attr_accessor association_status: String?
+      attr_accessor resource_type: String?
+      attr_accessor feature_set: String?
+      attr_accessor default_version: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPermissionAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::AssociatedPermission],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::AssociatedPermission]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPermissionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::ResourceSharePermissionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::ResourceSharePermissionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?permission_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor permission_type: String?
+    end
+
+    class ListPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::ResourceSharePermissionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::ResourceSharePermissionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPrincipalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_owner: String,
+        ?resource_arn: String,
+        ?principals: Array[String],
+        ?resource_type: String,
+        ?resource_share_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_owner: String?
+      attr_accessor resource_arn: String?
+      attr_accessor principals: Array[String]?
+      attr_accessor resource_type: String?
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPrincipalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principals: Array[Types::Principal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principals: Array[Types::Principal]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReplacePermissionAssociationsWorkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_ids: Array[String],
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReplacePermissionAssociationsWorkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replace_permission_associations_works: Array[Types::ReplacePermissionAssociationsWork],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replace_permission_associations_works: Array[Types::ReplacePermissionAssociationsWork]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceSharePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourceSharePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::ResourceSharePermissionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::ResourceSharePermissionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_region_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_region_scope: String?
+    end
+
+    class ListResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[Types::ServiceNameAndResourceType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[Types::ServiceNameAndResourceType]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_owner: String,
+        ?principal: String,
+        ?resource_type: String,
+        ?resource_arns: Array[String],
+        ?resource_share_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_region_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_owner: String?
+      attr_accessor principal: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_region_scope: String?
+    end
+
+    class ListResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor next_token: String?
+    end
+
+    class MalformedArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MalformedPolicyTemplateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MissingRequiredParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OperationNotPermittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PermissionAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PermissionFeatureSet
+      CREATED_FROM_POLICY: String
+      PROMOTING_TO_STANDARD: String
+      STANDARD: String
+    end
+
+    class PermissionLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PermissionStatus
+      ATTACHABLE: String
+      UNATTACHABLE: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module PermissionType
+      CUSTOMER_MANAGED: String
+      AWS_MANAGED: String
+    end
+
+    module PermissionTypeFilter
+      ALL: String
+      AWS_MANAGED: String
+      CUSTOMER_MANAGED: String
+    end
+
+    class PermissionVersionsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Principal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_share_arn: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?external: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_share_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor external: bool?
+    end
+
+    class PromotePermissionCreatedFromPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+    end
+
+    class PromotePermissionCreatedFromPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: Types::ResourceSharePermissionSummary,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: Types::ResourceSharePermissionSummary?
+      attr_accessor client_token: String?
+    end
+
+    class PromoteResourceShareCreatedFromPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+    end
+
+    class PromoteResourceShareCreatedFromPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+    end
+
+    class RejectResourceShareInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class RejectResourceShareInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation: Types::ResourceShareInvitation,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation: Types::ResourceShareInvitation?
+      attr_accessor client_token: String?
+    end
+
+    class ReplacePermissionAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_permission_arn: String,
+        ?from_permission_version: Integer,
+        ?to_permission_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_permission_arn: String?
+      attr_accessor from_permission_version: Integer?
+      attr_accessor to_permission_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class ReplacePermissionAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replace_permission_associations_work: Types::ReplacePermissionAssociationsWork,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replace_permission_associations_work: Types::ReplacePermissionAssociationsWork?
+      attr_accessor client_token: String?
+    end
+
+    class ReplacePermissionAssociationsWork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?from_permission_arn: String,
+        ?from_permission_version: String,
+        ?to_permission_arn: String,
+        ?to_permission_version: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor from_permission_arn: String?
+      attr_accessor from_permission_version: String?
+      attr_accessor to_permission_arn: String?
+      attr_accessor to_permission_version: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    module ReplacePermissionAssociationsWorkStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+        ?resource_share_arn: String,
+        ?resource_group_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?resource_region_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor resource_share_arn: String?
+      attr_accessor resource_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor resource_region_scope: String?
+    end
+
+    class ResourceArnNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceOwner
+      SELF: String
+      OTHER_ACCOUNTS: String
+    end
+
+    module ResourceRegionScope
+      REGIONAL: String
+      GLOBAL: String
+    end
+
+    module ResourceRegionScopeFilter
+      ALL: String
+      REGIONAL: String
+      GLOBAL: String
+    end
+
+    class ResourceShare
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?name: String,
+        ?owning_account_id: String,
+        ?allow_external_principals: bool,
+        ?status: String,
+        ?status_message: String,
+        ?tags: Array[Types::Tag],
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?feature_set: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor name: String?
+      attr_accessor owning_account_id: String?
+      attr_accessor allow_external_principals: bool?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor feature_set: String?
+    end
+
+    class ResourceShareAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?resource_share_name: String,
+        ?associated_entity: String,
+        ?association_type: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?external: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor resource_share_name: String?
+      attr_accessor associated_entity: String?
+      attr_accessor association_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor external: bool?
+    end
+
+    module ResourceShareAssociationStatus
+      ASSOCIATING: String
+      ASSOCIATED: String
+      FAILED: String
+      DISASSOCIATING: String
+      DISASSOCIATED: String
+    end
+
+    module ResourceShareAssociationType
+      PRINCIPAL: String
+      RESOURCE: String
+    end
+
+    module ResourceShareFeatureSet
+      CREATED_FROM_POLICY: String
+      PROMOTING_TO_STANDARD: String
+      STANDARD: String
+    end
+
+    class ResourceShareInvitation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_invitation_arn: String,
+        ?resource_share_name: String,
+        ?resource_share_arn: String,
+        ?sender_account_id: String,
+        ?receiver_account_id: String,
+        ?invitation_timestamp: Time,
+        ?status: String,
+        ?resource_share_associations: Array[Types::ResourceShareAssociation],
+        ?receiver_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_invitation_arn: String?
+      attr_accessor resource_share_name: String?
+      attr_accessor resource_share_arn: String?
+      attr_accessor sender_account_id: String?
+      attr_accessor receiver_account_id: String?
+      attr_accessor invitation_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor resource_share_associations: Array[Types::ResourceShareAssociation]?
+      attr_accessor receiver_arn: String?
+    end
+
+    class ResourceShareInvitationAlreadyAcceptedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceShareInvitationAlreadyRejectedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceShareInvitationArnNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceShareInvitationExpiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceShareInvitationStatus
+      PENDING: String
+      ACCEPTED: String
+      REJECTED: String
+      EXPIRED: String
+    end
+
+    class ResourceShareLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceSharePermissionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version: String,
+        ?default_version: bool,
+        ?name: String,
+        ?resource_type: String,
+        ?permission: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?is_resource_type_default: bool,
+        ?permission_type: String,
+        ?feature_set: String,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version: String?
+      attr_accessor default_version: bool?
+      attr_accessor name: String?
+      attr_accessor resource_type: String?
+      attr_accessor permission: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor is_resource_type_default: bool?
+      attr_accessor permission_type: String?
+      attr_accessor feature_set: String?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ResourceSharePermissionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version: String,
+        ?default_version: bool,
+        ?name: String,
+        ?resource_type: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?is_resource_type_default: bool,
+        ?permission_type: String,
+        ?feature_set: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version: String?
+      attr_accessor default_version: bool?
+      attr_accessor name: String?
+      attr_accessor resource_type: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor is_resource_type_default: bool?
+      attr_accessor permission_type: String?
+      attr_accessor feature_set: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ResourceShareStatus
+      PENDING: String
+      ACTIVE: String
+      FAILED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module ResourceStatus
+      AVAILABLE: String
+      ZONAL_RESOURCE_INACCESSIBLE: String
+      LIMIT_EXCEEDED: String
+      UNAVAILABLE: String
+      PENDING: String
+    end
+
+    class ServerInternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceNameAndResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?service_name: String,
+        ?resource_region_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor service_name: String?
+      attr_accessor resource_region_scope: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetDefaultPermissionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_arn: String,
+        ?permission_version: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_arn: String?
+      attr_accessor permission_version: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class SetDefaultPermissionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return_value: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return_value: bool?
+      attr_accessor client_token: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class TagLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagPolicyViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?tags: Array[Types::Tag],
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor resource_arn: String?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnknownResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnmatchedPolicyPermissionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?tag_keys: Array[String],
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor tag_keys: Array[String]?
+      attr_accessor resource_arn: String?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?name: String,
+        ?allow_external_principals: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor name: String?
+      attr_accessor allow_external_principals: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share: Types::ResourceShare,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share: Types::ResourceShare?
+      attr_accessor client_token: String?
+    end
+  end
+end

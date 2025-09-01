@@ -1,0 +1,915 @@
+module Aws::CognitoIdentity
+  module Types
+
+    module AmbiguousRoleResolutionType
+      AUTHENTICATED_ROLE: String
+      DENY: String
+    end
+
+    class CognitoIdentityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_name: String,
+        ?client_id: String,
+        ?server_side_token_check: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_name: String?
+      attr_accessor client_id: String?
+      attr_accessor server_side_token_check: bool?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateIdentityPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_name: String,
+        ?allow_unauthenticated_identities: bool,
+        ?allow_classic_flow: bool,
+        ?supported_login_providers: Hash[String, String],
+        ?developer_provider_name: String,
+        ?open_id_connect_provider_ar_ns: Array[String],
+        ?cognito_identity_providers: Array[Types::CognitoIdentityProvider],
+        ?saml_provider_ar_ns: Array[String],
+        ?identity_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_name: String?
+      attr_accessor allow_unauthenticated_identities: bool?
+      attr_accessor allow_classic_flow: bool?
+      attr_accessor supported_login_providers: Hash[String, String]?
+      attr_accessor developer_provider_name: String?
+      attr_accessor open_id_connect_provider_ar_ns: Array[String]?
+      attr_accessor cognito_identity_providers: Array[Types::CognitoIdentityProvider]?
+      attr_accessor saml_provider_ar_ns: Array[String]?
+      attr_accessor identity_pool_tags: Hash[String, String]?
+    end
+
+    class CreateIdentityPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_pool_name: String,
+        ?allow_unauthenticated_identities: bool,
+        ?allow_classic_flow: bool,
+        ?supported_login_providers: Hash[String, String],
+        ?developer_provider_name: String,
+        ?open_id_connect_provider_ar_ns: Array[String],
+        ?cognito_identity_providers: Array[Types::CognitoIdentityProvider],
+        ?saml_provider_ar_ns: Array[String],
+        ?identity_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_pool_name: String?
+      attr_accessor allow_unauthenticated_identities: bool?
+      attr_accessor allow_classic_flow: bool?
+      attr_accessor supported_login_providers: Hash[String, String]?
+      attr_accessor developer_provider_name: String?
+      attr_accessor open_id_connect_provider_ar_ns: Array[String]?
+      attr_accessor cognito_identity_providers: Array[Types::CognitoIdentityProvider]?
+      attr_accessor saml_provider_ar_ns: Array[String]?
+      attr_accessor identity_pool_tags: Hash[String, String]?
+    end
+
+    class Credentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class DeleteIdentitiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_ids_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_ids_to_delete: Array[String]?
+    end
+
+    class DeleteIdentitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unprocessed_identity_ids: Array[Types::UnprocessedIdentityId],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unprocessed_identity_ids: Array[Types::UnprocessedIdentityId]?
+    end
+
+    class DeleteIdentityPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class DescribeIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+    end
+
+    class DescribeIdentityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?logins: Array[String],
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor logins: Array[String]?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class DescribeIdentityPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class DescribeIdentityPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_pool_name: String,
+        ?allow_unauthenticated_identities: bool,
+        ?allow_classic_flow: bool,
+        ?supported_login_providers: Hash[String, String],
+        ?developer_provider_name: String,
+        ?open_id_connect_provider_ar_ns: Array[String],
+        ?cognito_identity_providers: Array[Types::CognitoIdentityProvider],
+        ?saml_provider_ar_ns: Array[String],
+        ?identity_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_pool_name: String?
+      attr_accessor allow_unauthenticated_identities: bool?
+      attr_accessor allow_classic_flow: bool?
+      attr_accessor supported_login_providers: Hash[String, String]?
+      attr_accessor developer_provider_name: String?
+      attr_accessor open_id_connect_provider_ar_ns: Array[String]?
+      attr_accessor cognito_identity_providers: Array[Types::CognitoIdentityProvider]?
+      attr_accessor saml_provider_ar_ns: Array[String]?
+      attr_accessor identity_pool_tags: Hash[String, String]?
+    end
+
+    class DeveloperUserAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ErrorCode
+      ACCESS_DENIED: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class ExternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetCredentialsForIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?logins: Hash[String, String],
+        ?custom_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor logins: Hash[String, String]?
+      attr_accessor custom_role_arn: String?
+    end
+
+    class GetCredentialsForIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?credentials: Types::Credentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor credentials: Types::Credentials?
+    end
+
+    class GetIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?identity_pool_id: String,
+        ?logins: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor identity_pool_id: String?
+      attr_accessor logins: Hash[String, String]?
+    end
+
+    class GetIdResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+    end
+
+    class GetIdentityPoolRolesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class GetIdentityPoolRolesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?roles: Hash[String, String],
+        ?role_mappings: Hash[String, Types::RoleMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor roles: Hash[String, String]?
+      attr_accessor role_mappings: Hash[String, Types::RoleMapping]?
+    end
+
+    class GetOpenIdTokenForDeveloperIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?logins: Hash[String, String],
+        ?principal_tags: Hash[String, String],
+        ?token_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor logins: Hash[String, String]?
+      attr_accessor principal_tags: Hash[String, String]?
+      attr_accessor token_duration: Integer?
+    end
+
+    class GetOpenIdTokenForDeveloperIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor token: String?
+    end
+
+    class GetOpenIdTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?logins: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor logins: Hash[String, String]?
+    end
+
+    class GetOpenIdTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor token: String?
+    end
+
+    class GetPrincipalTagAttributeMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_provider_name: String?
+    end
+
+    class GetPrincipalTagAttributeMapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_provider_name: String,
+        ?use_defaults: bool,
+        ?principal_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor use_defaults: bool?
+      attr_accessor principal_tags: Hash[String, String]?
+    end
+
+    class IdentityDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?logins: Array[String],
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor logins: Array[String]?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class IdentityPoolShortDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_pool_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_pool_name: String?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIdentityPoolConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListIdentitiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?hide_disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor hide_disabled: bool?
+    end
+
+    class ListIdentitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identities: Array[Types::IdentityDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identities: Array[Types::IdentityDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityPoolsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityPoolsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pools: Array[Types::IdentityPoolShortDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pools: Array[Types::IdentityPoolShortDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LookupDeveloperIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?developer_user_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor developer_user_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class LookupDeveloperIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?developer_user_identifier_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor developer_user_identifier_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class MappingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?claim: String,
+        ?match_type: String,
+        ?value: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor claim: String?
+      attr_accessor match_type: String?
+      attr_accessor value: String?
+      attr_accessor role_arn: String?
+    end
+
+    module MappingRuleMatchType
+      EQUALS: String
+      CONTAINS: String
+      STARTS_WITH: String
+      NOT_EQUAL: String
+    end
+
+    class MergeDeveloperIdentitiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_user_identifier: String,
+        ?destination_user_identifier: String,
+        ?developer_provider_name: String,
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_user_identifier: String?
+      attr_accessor destination_user_identifier: String?
+      attr_accessor developer_provider_name: String?
+      attr_accessor identity_pool_id: String?
+    end
+
+    class MergeDeveloperIdentitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoleMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?ambiguous_role_resolution: String,
+        ?rules_configuration: Types::RulesConfigurationType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor ambiguous_role_resolution: String?
+      attr_accessor rules_configuration: Types::RulesConfigurationType?
+    end
+
+    module RoleMappingType
+      TOKEN: String
+      RULES: String
+    end
+
+    class RulesConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::MappingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::MappingRule]?
+    end
+
+    class SetIdentityPoolRolesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?roles: Hash[String, String],
+        ?role_mappings: Hash[String, Types::RoleMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor roles: Hash[String, String]?
+      attr_accessor role_mappings: Hash[String, Types::RoleMapping]?
+    end
+
+    class SetPrincipalTagAttributeMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_provider_name: String,
+        ?use_defaults: bool,
+        ?principal_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor use_defaults: bool?
+      attr_accessor principal_tags: Hash[String, String]?
+    end
+
+    class SetPrincipalTagAttributeMapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_provider_name: String,
+        ?use_defaults: bool,
+        ?principal_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor use_defaults: bool?
+      attr_accessor principal_tags: Hash[String, String]?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnlinkDeveloperIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?identity_pool_id: String,
+        ?developer_provider_name: String,
+        ?developer_user_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor identity_pool_id: String?
+      attr_accessor developer_provider_name: String?
+      attr_accessor developer_user_identifier: String?
+    end
+
+    class UnlinkIdentityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?logins: Hash[String, String],
+        ?logins_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor logins: Hash[String, String]?
+      attr_accessor logins_to_remove: Array[String]?
+    end
+
+    class UnprocessedIdentityId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor error_code: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIdentityPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_pool_name: String,
+        ?allow_unauthenticated_identities: bool,
+        ?allow_classic_flow: bool,
+        ?supported_login_providers: Hash[String, String],
+        ?developer_provider_name: String,
+        ?open_id_connect_provider_ar_ns: Array[String],
+        ?cognito_identity_providers: Array[Types::CognitoIdentityProvider],
+        ?saml_provider_ar_ns: Array[String],
+        ?identity_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_pool_name: String?
+      attr_accessor allow_unauthenticated_identities: bool?
+      attr_accessor allow_classic_flow: bool?
+      attr_accessor supported_login_providers: Hash[String, String]?
+      attr_accessor developer_provider_name: String?
+      attr_accessor open_id_connect_provider_ar_ns: Array[String]?
+      attr_accessor cognito_identity_providers: Array[Types::CognitoIdentityProvider]?
+      attr_accessor saml_provider_ar_ns: Array[String]?
+      attr_accessor identity_pool_tags: Hash[String, String]?
+    end
+
+    class UpdateIdentityPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_pool_name: String,
+        ?allow_unauthenticated_identities: bool,
+        ?allow_classic_flow: bool,
+        ?supported_login_providers: Hash[String, String],
+        ?developer_provider_name: String,
+        ?open_id_connect_provider_ar_ns: Array[String],
+        ?cognito_identity_providers: Array[Types::CognitoIdentityProvider],
+        ?saml_provider_ar_ns: Array[String],
+        ?identity_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_pool_name: String?
+      attr_accessor allow_unauthenticated_identities: bool?
+      attr_accessor allow_classic_flow: bool?
+      attr_accessor supported_login_providers: Hash[String, String]?
+      attr_accessor developer_provider_name: String?
+      attr_accessor open_id_connect_provider_ar_ns: Array[String]?
+      attr_accessor cognito_identity_providers: Array[Types::CognitoIdentityProvider]?
+      attr_accessor saml_provider_ar_ns: Array[String]?
+      attr_accessor identity_pool_tags: Hash[String, String]?
+    end
+  end
+end

@@ -1,0 +1,10 @@
+module Aws::IoTSecureTunneling
+  module Errors
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

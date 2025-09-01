@@ -1,0 +1,3350 @@
+module Aws::FraudDetector
+  module Types
+
+    class ATIMetricDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cr: Float,
+        ?adr: Float,
+        ?threshold: Float,
+        ?atodr: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cr: Float?
+      attr_accessor adr: Float?
+      attr_accessor threshold: Float?
+      attr_accessor atodr: Float?
+    end
+
+    class ATIModelPerformance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asi: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asi: Float?
+    end
+
+    class ATITrainingMetricsValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_points: Array[Types::ATIMetricDataPoint],
+        ?model_performance: Types::ATIModelPerformance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_points: Array[Types::ATIMetricDataPoint]?
+      attr_accessor model_performance: Types::ATIModelPerformance?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AggregatedLogOddsMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variable_names: Array[String],
+        ?aggregated_variables_importance: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variable_names: Array[String]?
+      attr_accessor aggregated_variables_importance: Float?
+    end
+
+    class AggregatedVariablesImpactExplanation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_variable_names: Array[String],
+        ?relative_impact: String,
+        ?log_odds_impact: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_variable_names: Array[String]?
+      attr_accessor relative_impact: String?
+      attr_accessor log_odds_impact: Float?
+    end
+
+    class AggregatedVariablesImportanceMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_odds_metrics: Array[Types::AggregatedLogOddsMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_odds_metrics: Array[Types::AggregatedLogOddsMetric]?
+    end
+
+    class AllowDenyList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?variable_type: String,
+        ?created_time: String,
+        ?updated_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor variable_type: String?
+      attr_accessor created_time: String?
+      attr_accessor updated_time: String?
+      attr_accessor arn: String?
+    end
+
+    module AsyncJobStatus
+      IN_PROGRESS_INITIALIZING: String
+      IN_PROGRESS: String
+      CANCEL_IN_PROGRESS: String
+      CANCELED: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class BatchCreateVariableError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchCreateVariableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variable_entries: Array[Types::VariableEntry],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variable_entries: Array[Types::VariableEntry]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class BatchCreateVariableResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchCreateVariableError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchCreateVariableError]?
+    end
+
+    class BatchGetVariableError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchGetVariableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+    end
+
+    class BatchGetVariableResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variables: Array[Types::Variable],
+        ?errors: Array[Types::BatchGetVariableError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variables: Array[Types::Variable]?
+      attr_accessor errors: Array[Types::BatchGetVariableError]?
+    end
+
+    class BatchImport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?start_time: String,
+        ?completion_time: String,
+        ?input_path: String,
+        ?output_path: String,
+        ?event_type_name: String,
+        ?iam_role_arn: String,
+        ?arn: String,
+        ?processed_records_count: Integer,
+        ?failed_records_count: Integer,
+        ?total_records_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor start_time: String?
+      attr_accessor completion_time: String?
+      attr_accessor input_path: String?
+      attr_accessor output_path: String?
+      attr_accessor event_type_name: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor arn: String?
+      attr_accessor processed_records_count: Integer?
+      attr_accessor failed_records_count: Integer?
+      attr_accessor total_records_count: Integer?
+    end
+
+    class BatchPrediction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?start_time: String,
+        ?completion_time: String,
+        ?last_heartbeat_time: String,
+        ?input_path: String,
+        ?output_path: String,
+        ?event_type_name: String,
+        ?detector_name: String,
+        ?detector_version: String,
+        ?iam_role_arn: String,
+        ?arn: String,
+        ?processed_records_count: Integer,
+        ?total_records_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor start_time: String?
+      attr_accessor completion_time: String?
+      attr_accessor last_heartbeat_time: String?
+      attr_accessor input_path: String?
+      attr_accessor output_path: String?
+      attr_accessor event_type_name: String?
+      attr_accessor detector_name: String?
+      attr_accessor detector_version: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor arn: String?
+      attr_accessor processed_records_count: Integer?
+      attr_accessor total_records_count: Integer?
+    end
+
+    class CancelBatchImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelBatchImportJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelBatchPredictionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelBatchPredictionJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateBatchImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?input_path: String,
+        ?output_path: String,
+        ?event_type_name: String,
+        ?iam_role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor input_path: String?
+      attr_accessor output_path: String?
+      attr_accessor event_type_name: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBatchImportJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateBatchPredictionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?input_path: String,
+        ?output_path: String,
+        ?event_type_name: String,
+        ?detector_name: String,
+        ?detector_version: String,
+        ?iam_role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor input_path: String?
+      attr_accessor output_path: String?
+      attr_accessor event_type_name: String?
+      attr_accessor detector_name: String?
+      attr_accessor detector_version: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBatchPredictionJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDetectorVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?description: String,
+        ?external_model_endpoints: Array[String],
+        ?rules: Array[Types::Rule],
+        ?model_versions: Array[Types::ModelVersion],
+        ?rule_execution_mode: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor description: String?
+      attr_accessor external_model_endpoints: Array[String]?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor model_versions: Array[Types::ModelVersion]?
+      attr_accessor rule_execution_mode: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDetectorVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor status: String?
+    end
+
+    class CreateListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?elements: Array[String],
+        ?variable_type: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor elements: Array[String]?
+      attr_accessor variable_type: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?description: String,
+        ?event_type_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor description: String?
+      attr_accessor event_type_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateModelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?training_data_source: String,
+        ?training_data_schema: Types::TrainingDataSchema,
+        ?external_events_detail: Types::ExternalEventsDetail,
+        ?ingested_events_detail: Types::IngestedEventsDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor training_data_source: String?
+      attr_accessor training_data_schema: Types::TrainingDataSchema?
+      attr_accessor external_events_detail: Types::ExternalEventsDetail?
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateModelVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor status: String?
+    end
+
+    class CreateRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?detector_id: String,
+        ?description: String,
+        ?expression: String,
+        ?language: String,
+        ?outcomes: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor detector_id: String?
+      attr_accessor description: String?
+      attr_accessor expression: String?
+      attr_accessor language: String?
+      attr_accessor outcomes: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::Rule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::Rule?
+    end
+
+    class CreateVariableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?data_source: String,
+        ?default_value: String,
+        ?description: String,
+        ?variable_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_source: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+      attr_accessor variable_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVariableResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DataSource
+      EVENT: String
+      MODEL_SCORE: String
+      EXTERNAL_MODEL_SCORE: String
+    end
+
+    module DataType
+      STRING: String
+      INTEGER: String
+      FLOAT: String
+      BOOLEAN: String
+      DATETIME: String
+    end
+
+    class DataValidationMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_level_messages: Array[Types::FileValidationMessage],
+        ?field_level_messages: Array[Types::FieldValidationMessage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_level_messages: Array[Types::FileValidationMessage]?
+      attr_accessor field_level_messages: Array[Types::FieldValidationMessage]?
+    end
+
+    class DeleteBatchImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DeleteBatchImportJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteBatchPredictionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DeleteBatchPredictionJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+    end
+
+    class DeleteDetectorResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDetectorVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+    end
+
+    class DeleteDetectorVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEntityTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEntityTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?delete_audit_history: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor delete_audit_history: bool?
+    end
+
+    class DeleteEventResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEventTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventsByEventTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_name: String?
+    end
+
+    class DeleteEventsByEventTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_name: String,
+        ?events_deletion_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_name: String?
+      attr_accessor events_deletion_status: String?
+    end
+
+    class DeleteExternalModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+    end
+
+    class DeleteExternalModelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteLabelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+    end
+
+    class DeleteModelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+    end
+
+    class DeleteModelVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOutcomeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteOutcomeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::Rule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::Rule?
+    end
+
+    class DeleteRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVariableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteVariableResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeDetectorResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_summaries: Array[Types::DetectorVersionSummary],
+        ?next_token: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_summaries: Array[Types::DetectorVersionSummary]?
+      attr_accessor next_token: String?
+      attr_accessor arn: String?
+    end
+
+    class DescribeModelVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_version_number: String,
+        ?model_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_version_number: String?
+      attr_accessor model_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeModelVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_version_details: Array[Types::ModelVersionDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_version_details: Array[Types::ModelVersionDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class Detector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?description: String,
+        ?event_type_name: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor description: String?
+      attr_accessor event_type_name: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    module DetectorVersionStatus
+      DRAFT: String
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class DetectorVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_version_id: String,
+        ?status: String,
+        ?description: String,
+        ?last_updated_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_version_id: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_time: String?
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+    end
+
+    class EntityType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    class EvaluatedExternalModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+        ?use_event_variables: bool,
+        ?input_variables: Hash[String, String],
+        ?output_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+      attr_accessor use_event_variables: bool?
+      attr_accessor input_variables: Hash[String, String]?
+      attr_accessor output_variables: Hash[String, String]?
+    end
+
+    class EvaluatedModelVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_version: String,
+        ?model_type: String,
+        ?evaluations: Array[Types::ModelVersionEvaluation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_version: String?
+      attr_accessor model_type: String?
+      attr_accessor evaluations: Array[Types::ModelVersionEvaluation]?
+    end
+
+    class EvaluatedRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_version: String,
+        ?expression: String,
+        ?expression_with_values: String,
+        ?outcomes: Array[String],
+        ?evaluated: bool,
+        ?matched: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_version: String?
+      attr_accessor expression: String?
+      attr_accessor expression_with_values: String?
+      attr_accessor outcomes: Array[String]?
+      attr_accessor evaluated: bool?
+      attr_accessor matched: bool?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?event_timestamp: String,
+        ?event_variables: Hash[String, String],
+        ?current_label: String,
+        ?label_timestamp: String,
+        ?entities: Array[Types::Entity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor event_timestamp: String?
+      attr_accessor event_variables: Hash[String, String]?
+      attr_accessor current_label: String?
+      attr_accessor label_timestamp: String?
+      attr_accessor entities: Array[Types::Entity]?
+    end
+
+    module EventIngestion
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EventOrchestration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge_enabled: bool?
+    end
+
+    class EventPredictionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?event_timestamp: String,
+        ?prediction_timestamp: String,
+        ?detector_id: String,
+        ?detector_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor event_timestamp: String?
+      attr_accessor prediction_timestamp: String?
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+    end
+
+    class EventType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?event_variables: Array[String],
+        ?labels: Array[String],
+        ?entity_types: Array[String],
+        ?event_ingestion: String,
+        ?ingested_event_statistics: Types::IngestedEventStatistics,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+        ?event_orchestration: Types::EventOrchestration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor event_variables: Array[String]?
+      attr_accessor labels: Array[String]?
+      attr_accessor entity_types: Array[String]?
+      attr_accessor event_ingestion: String?
+      attr_accessor ingested_event_statistics: Types::IngestedEventStatistics?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+      attr_accessor event_orchestration: Types::EventOrchestration?
+    end
+
+    class EventVariableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor source: String?
+    end
+
+    class ExternalEventsDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_location: String,
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_location: String?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    class ExternalModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+        ?model_source: String,
+        ?invoke_model_endpoint_role_arn: String,
+        ?input_configuration: Types::ModelInputConfiguration,
+        ?output_configuration: Types::ModelOutputConfiguration,
+        ?model_endpoint_status: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+      attr_accessor model_source: String?
+      attr_accessor invoke_model_endpoint_role_arn: String?
+      attr_accessor input_configuration: Types::ModelInputConfiguration?
+      attr_accessor output_configuration: Types::ModelOutputConfiguration?
+      attr_accessor model_endpoint_status: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    class ExternalModelOutputs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_model: Types::ExternalModelSummary,
+        ?outputs: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_model: Types::ExternalModelSummary?
+      attr_accessor outputs: Hash[String, String]?
+    end
+
+    class ExternalModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+        ?model_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+      attr_accessor model_source: String?
+    end
+
+    class FieldValidationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?identifier: String,
+        ?title: String,
+        ?content: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor identifier: String?
+      attr_accessor title: String?
+      attr_accessor content: String?
+      attr_accessor type: String?
+    end
+
+    class FileValidationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?content: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor content: String?
+      attr_accessor type: String?
+    end
+
+    class FilterCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class GetBatchImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetBatchImportJobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_imports: Array[Types::BatchImport],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_imports: Array[Types::BatchImport]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBatchPredictionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetBatchPredictionJobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_predictions: Array[Types::BatchPrediction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_predictions: Array[Types::BatchPrediction]?
+      attr_accessor next_token: String?
+    end
+
+    class GetDeleteEventsByEventTypeStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_name: String?
+    end
+
+    class GetDeleteEventsByEventTypeStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_name: String,
+        ?events_deletion_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_name: String?
+      attr_accessor events_deletion_status: String?
+    end
+
+    class GetDetectorVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+    end
+
+    class GetDetectorVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?description: String,
+        ?external_model_endpoints: Array[String],
+        ?model_versions: Array[Types::ModelVersion],
+        ?rules: Array[Types::Rule],
+        ?status: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?rule_execution_mode: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor description: String?
+      attr_accessor external_model_endpoints: Array[String]?
+      attr_accessor model_versions: Array[Types::ModelVersion]?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor status: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor rule_execution_mode: String?
+      attr_accessor arn: String?
+    end
+
+    class GetDetectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetDetectorsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detectors: Array[Types::Detector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detectors: Array[Types::Detector]?
+      attr_accessor next_token: String?
+    end
+
+    class GetEntityTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetEntityTypesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_types: Array[Types::EntityType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_types: Array[Types::EntityType]?
+      attr_accessor next_token: String?
+    end
+
+    class GetEventPredictionMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?prediction_timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor prediction_timestamp: String?
+    end
+
+    class GetEventPredictionMetadataResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?entity_id: String,
+        ?entity_type: String,
+        ?event_timestamp: String,
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?detector_version_status: String,
+        ?event_variables: Array[Types::EventVariableSummary],
+        ?rules: Array[Types::EvaluatedRule],
+        ?rule_execution_mode: String,
+        ?outcomes: Array[String],
+        ?evaluated_model_versions: Array[Types::EvaluatedModelVersion],
+        ?evaluated_external_models: Array[Types::EvaluatedExternalModel],
+        ?prediction_timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor entity_id: String?
+      attr_accessor entity_type: String?
+      attr_accessor event_timestamp: String?
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor detector_version_status: String?
+      attr_accessor event_variables: Array[Types::EventVariableSummary]?
+      attr_accessor rules: Array[Types::EvaluatedRule]?
+      attr_accessor rule_execution_mode: String?
+      attr_accessor outcomes: Array[String]?
+      attr_accessor evaluated_model_versions: Array[Types::EvaluatedModelVersion]?
+      attr_accessor evaluated_external_models: Array[Types::EvaluatedExternalModel]?
+      attr_accessor prediction_timestamp: String?
+    end
+
+    class GetEventPredictionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?event_id: String,
+        ?event_type_name: String,
+        ?entities: Array[Types::Entity],
+        ?event_timestamp: String,
+        ?event_variables: Hash[String, String],
+        ?external_model_endpoint_data_blobs: Hash[String, Types::ModelEndpointDataBlob],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor entities: Array[Types::Entity]?
+      attr_accessor event_timestamp: String?
+      attr_accessor event_variables: Hash[String, String]?
+      attr_accessor external_model_endpoint_data_blobs: Hash[String, Types::ModelEndpointDataBlob]?
+    end
+
+    class GetEventPredictionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_scores: Array[Types::ModelScores],
+        ?rule_results: Array[Types::RuleResult],
+        ?external_model_outputs: Array[Types::ExternalModelOutputs],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_scores: Array[Types::ModelScores]?
+      attr_accessor rule_results: Array[Types::RuleResult]?
+      attr_accessor external_model_outputs: Array[Types::ExternalModelOutputs]?
+    end
+
+    class GetEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+    end
+
+    class GetEventResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: Types::Event,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: Types::Event?
+    end
+
+    class GetEventTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetEventTypesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_types: Array[Types::EventType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_types: Array[Types::EventType]?
+      attr_accessor next_token: String?
+    end
+
+    class GetExternalModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetExternalModelsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_models: Array[Types::ExternalModel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_models: Array[Types::ExternalModel]?
+      attr_accessor next_token: String?
+    end
+
+    class GetKMSEncryptionKeyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key: Types::KMSKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key: Types::KMSKey?
+    end
+
+    class GetLabelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetLabelsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?labels: Array[Types::Label],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor labels: Array[Types::Label]?
+      attr_accessor next_token: String?
+    end
+
+    class GetListElementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetListElementsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?elements: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor elements: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetListsMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetListsMetadataResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lists: Array[Types::AllowDenyList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lists: Array[Types::AllowDenyList]?
+      attr_accessor next_token: String?
+    end
+
+    class GetModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+    end
+
+    class GetModelVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?training_data_source: String,
+        ?training_data_schema: Types::TrainingDataSchema,
+        ?external_events_detail: Types::ExternalEventsDetail,
+        ?ingested_events_detail: Types::IngestedEventsDetail,
+        ?status: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor training_data_source: String?
+      attr_accessor training_data_schema: Types::TrainingDataSchema?
+      attr_accessor external_events_detail: Types::ExternalEventsDetail?
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+    end
+
+    class GetModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetModelsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?models: Array[Types::Model],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor models: Array[Types::Model]?
+    end
+
+    class GetOutcomesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetOutcomesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outcomes: Array[Types::Outcome],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outcomes: Array[Types::Outcome]?
+      attr_accessor next_token: String?
+    end
+
+    class GetRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?detector_id: String,
+        ?rule_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor detector_id: String?
+      attr_accessor rule_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetRulesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_details: Array[Types::RuleDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_details: Array[Types::RuleDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class GetVariablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetVariablesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variables: Array[Types::Variable],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variables: Array[Types::Variable]?
+      attr_accessor next_token: String?
+    end
+
+    class IngestedEventStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_events: Integer,
+        ?event_data_size_in_bytes: Integer,
+        ?least_recent_event: String,
+        ?most_recent_event: String,
+        ?last_updated_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_events: Integer?
+      attr_accessor event_data_size_in_bytes: Integer?
+      attr_accessor least_recent_event: String?
+      attr_accessor most_recent_event: String?
+      attr_accessor last_updated_time: String?
+    end
+
+    class IngestedEventsDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingested_events_time_window: Types::IngestedEventsTimeWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingested_events_time_window: Types::IngestedEventsTimeWindow?
+    end
+
+    class IngestedEventsTimeWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?end_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_key_arn: String?
+    end
+
+    class Label
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    class LabelSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_mapper: Hash[String, Array[String]],
+        ?unlabeled_events_treatment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_mapper: Hash[String, Array[String]]?
+      attr_accessor unlabeled_events_treatment: String?
+    end
+
+    module Language
+      DETECTORPL: String
+    end
+
+    class ListEventPredictionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: Types::FilterCondition,
+        ?event_type: Types::FilterCondition,
+        ?detector_id: Types::FilterCondition,
+        ?detector_version_id: Types::FilterCondition,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: Types::FilterCondition?
+      attr_accessor event_type: Types::FilterCondition?
+      attr_accessor detector_id: Types::FilterCondition?
+      attr_accessor detector_version_id: Types::FilterCondition?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventPredictionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_prediction_summaries: Array[Types::EventPredictionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_prediction_summaries: Array[Types::EventPredictionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    module ListUpdateMode
+      REPLACE: String
+      APPEND: String
+      REMOVE: String
+    end
+
+    class LogOddsMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variable_name: String,
+        ?variable_type: String,
+        ?variable_importance: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variable_name: String?
+      attr_accessor variable_type: String?
+      attr_accessor variable_importance: Float?
+    end
+
+    class MetricDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fpr: Float,
+        ?precision: Float,
+        ?tpr: Float,
+        ?threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fpr: Float?
+      attr_accessor precision: Float?
+      attr_accessor tpr: Float?
+      attr_accessor threshold: Float?
+    end
+
+    class Model
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?description: String,
+        ?event_type_name: String,
+        ?created_time: String,
+        ?last_updated_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor description: String?
+      attr_accessor event_type_name: String?
+      attr_accessor created_time: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor arn: String?
+    end
+
+    class ModelEndpointDataBlob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byte_buffer: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byte_buffer: String?
+      attr_accessor content_type: String?
+    end
+
+    module ModelEndpointStatus
+      ASSOCIATED: String
+      DISSOCIATED: String
+    end
+
+    class ModelInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_name: String,
+        ?format: String,
+        ?use_event_variables: bool,
+        ?json_input_template: String,
+        ?csv_input_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_name: String?
+      attr_accessor format: String?
+      attr_accessor use_event_variables: bool?
+      attr_accessor json_input_template: String?
+      attr_accessor csv_input_template: String?
+    end
+
+    module ModelInputDataFormat
+      CSV: String
+      JSON: String
+    end
+
+    class ModelOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?json_key_to_variable_map: Hash[String, String],
+        ?csv_index_to_variable_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor json_key_to_variable_map: Hash[String, String]?
+      attr_accessor csv_index_to_variable_map: Hash[String, String]?
+    end
+
+    module ModelOutputDataFormat
+      CSV: String
+      JSONLINES: String
+    end
+
+    class ModelScores
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_version: Types::ModelVersion,
+        ?scores: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_version: Types::ModelVersion?
+      attr_accessor scores: Hash[String, Float]?
+    end
+
+    module ModelSource
+      SAGEMAKER: String
+    end
+
+    module ModelTypeEnum
+      ONLINE_FRAUD_INSIGHTS: String
+      TRANSACTION_FRAUD_INSIGHTS: String
+      ACCOUNT_TAKEOVER_INSIGHTS: String
+    end
+
+    class ModelVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor arn: String?
+    end
+
+    class ModelVersionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?status: String,
+        ?training_data_source: String,
+        ?training_data_schema: Types::TrainingDataSchema,
+        ?external_events_detail: Types::ExternalEventsDetail,
+        ?ingested_events_detail: Types::IngestedEventsDetail,
+        ?training_result: Types::TrainingResult,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+        ?training_result_v2: Types::TrainingResultV2,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor status: String?
+      attr_accessor training_data_source: String?
+      attr_accessor training_data_schema: Types::TrainingDataSchema?
+      attr_accessor external_events_detail: Types::ExternalEventsDetail?
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail?
+      attr_accessor training_result: Types::TrainingResult?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+      attr_accessor training_result_v2: Types::TrainingResultV2?
+    end
+
+    class ModelVersionEvaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_variable_name: String,
+        ?evaluation_score: String,
+        ?prediction_explanations: Types::PredictionExplanations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_variable_name: String?
+      attr_accessor evaluation_score: String?
+      attr_accessor prediction_explanations: Types::PredictionExplanations?
+    end
+
+    module ModelVersionStatus
+      ACTIVE: String
+      INACTIVE: String
+      TRAINING_CANCELLED: String
+    end
+
+    class OFIMetricDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fpr: Float,
+        ?precision: Float,
+        ?tpr: Float,
+        ?threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fpr: Float?
+      attr_accessor precision: Float?
+      attr_accessor tpr: Float?
+      attr_accessor threshold: Float?
+    end
+
+    class OFIModelPerformance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auc: Float,
+        ?uncertainty_range: Types::UncertaintyRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auc: Float?
+      attr_accessor uncertainty_range: Types::UncertaintyRange?
+    end
+
+    class OFITrainingMetricsValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_points: Array[Types::OFIMetricDataPoint],
+        ?model_performance: Types::OFIModelPerformance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_points: Array[Types::OFIMetricDataPoint]?
+      attr_accessor model_performance: Types::OFIModelPerformance?
+    end
+
+    class Outcome
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    class PredictionExplanations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variable_impact_explanations: Array[Types::VariableImpactExplanation],
+        ?aggregated_variables_impact_explanations: Array[Types::AggregatedVariablesImpactExplanation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variable_impact_explanations: Array[Types::VariableImpactExplanation]?
+      attr_accessor aggregated_variables_impact_explanations: Array[Types::AggregatedVariablesImpactExplanation]?
+    end
+
+    class PredictionTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?end_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+    end
+
+    class PutDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?description: String,
+        ?event_type_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor description: String?
+      attr_accessor event_type_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutDetectorResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEntityTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutEntityTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEventTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?event_variables: Array[String],
+        ?labels: Array[String],
+        ?entity_types: Array[String],
+        ?event_ingestion: String,
+        ?tags: Array[Types::Tag],
+        ?event_orchestration: Types::EventOrchestration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor event_variables: Array[String]?
+      attr_accessor labels: Array[String]?
+      attr_accessor entity_types: Array[String]?
+      attr_accessor event_ingestion: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor event_orchestration: Types::EventOrchestration?
+    end
+
+    class PutEventTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutExternalModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_endpoint: String,
+        ?model_source: String,
+        ?invoke_model_endpoint_role_arn: String,
+        ?input_configuration: Types::ModelInputConfiguration,
+        ?output_configuration: Types::ModelOutputConfiguration,
+        ?model_endpoint_status: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_endpoint: String?
+      attr_accessor model_source: String?
+      attr_accessor invoke_model_endpoint_role_arn: String?
+      attr_accessor input_configuration: Types::ModelInputConfiguration?
+      attr_accessor output_configuration: Types::ModelOutputConfiguration?
+      attr_accessor model_endpoint_status: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutExternalModelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutKMSEncryptionKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_key_arn: String?
+    end
+
+    class PutKMSEncryptionKeyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutLabelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutOutcomeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutOutcomeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?rule_id: String,
+        ?rule_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor rule_id: String?
+      attr_accessor rule_version: String?
+    end
+
+    class RuleDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?description: String,
+        ?detector_id: String,
+        ?rule_version: String,
+        ?expression: String,
+        ?language: String,
+        ?outcomes: Array[String],
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor description: String?
+      attr_accessor detector_id: String?
+      attr_accessor rule_version: String?
+      attr_accessor expression: String?
+      attr_accessor language: String?
+      attr_accessor outcomes: Array[String]?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    module RuleExecutionMode
+      ALL_MATCHED: String
+      FIRST_MATCHED: String
+    end
+
+    class RuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?outcomes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor outcomes: Array[String]?
+    end
+
+    class SendEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?event_timestamp: String,
+        ?event_variables: Hash[String, String],
+        ?assigned_label: String,
+        ?label_timestamp: String,
+        ?entities: Array[Types::Entity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor event_timestamp: String?
+      attr_accessor event_variables: Hash[String, String]?
+      attr_accessor assigned_label: String?
+      attr_accessor label_timestamp: String?
+      attr_accessor entities: Array[Types::Entity]?
+    end
+
+    class SendEventResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TFIMetricDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fpr: Float,
+        ?precision: Float,
+        ?tpr: Float,
+        ?threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fpr: Float?
+      attr_accessor precision: Float?
+      attr_accessor tpr: Float?
+      attr_accessor threshold: Float?
+    end
+
+    class TFIModelPerformance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auc: Float,
+        ?uncertainty_range: Types::UncertaintyRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auc: Float?
+      attr_accessor uncertainty_range: Types::UncertaintyRange?
+    end
+
+    class TFITrainingMetricsValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_points: Array[Types::TFIMetricDataPoint],
+        ?model_performance: Types::TFIModelPerformance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_points: Array[Types::TFIMetricDataPoint]?
+      attr_accessor model_performance: Types::TFIModelPerformance?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrainingDataSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_variables: Array[String],
+        ?label_schema: Types::LabelSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_variables: Array[String]?
+      attr_accessor label_schema: Types::LabelSchema?
+    end
+
+    module TrainingDataSourceEnum
+      EXTERNAL_EVENTS: String
+      INGESTED_EVENTS: String
+    end
+
+    class TrainingMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auc: Float,
+        ?metric_data_points: Array[Types::MetricDataPoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auc: Float?
+      attr_accessor metric_data_points: Array[Types::MetricDataPoint]?
+    end
+
+    class TrainingMetricsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ofi: Types::OFITrainingMetricsValue,
+        ?tfi: Types::TFITrainingMetricsValue,
+        ?ati: Types::ATITrainingMetricsValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ofi: Types::OFITrainingMetricsValue?
+      attr_accessor tfi: Types::TFITrainingMetricsValue?
+      attr_accessor ati: Types::ATITrainingMetricsValue?
+    end
+
+    class TrainingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_validation_metrics: Types::DataValidationMetrics,
+        ?training_metrics: Types::TrainingMetrics,
+        ?variable_importance_metrics: Types::VariableImportanceMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_validation_metrics: Types::DataValidationMetrics?
+      attr_accessor training_metrics: Types::TrainingMetrics?
+      attr_accessor variable_importance_metrics: Types::VariableImportanceMetrics?
+    end
+
+    class TrainingResultV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_validation_metrics: Types::DataValidationMetrics,
+        ?training_metrics_v2: Types::TrainingMetricsV2,
+        ?variable_importance_metrics: Types::VariableImportanceMetrics,
+        ?aggregated_variables_importance_metrics: Types::AggregatedVariablesImportanceMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_validation_metrics: Types::DataValidationMetrics?
+      attr_accessor training_metrics_v2: Types::TrainingMetricsV2?
+      attr_accessor variable_importance_metrics: Types::VariableImportanceMetrics?
+      attr_accessor aggregated_variables_importance_metrics: Types::AggregatedVariablesImportanceMetrics?
+    end
+
+    class UncertaintyRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lower_bound_value: Float,
+        ?upper_bound_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lower_bound_value: Float?
+      attr_accessor upper_bound_value: Float?
+    end
+
+    module UnlabeledEventsTreatment
+      IGNORE: String
+      FRAUD: String
+      LEGIT: String
+      AUTO: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDetectorVersionMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateDetectorVersionMetadataResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDetectorVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?external_model_endpoints: Array[String],
+        ?rules: Array[Types::Rule],
+        ?description: String,
+        ?model_versions: Array[Types::ModelVersion],
+        ?rule_execution_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor external_model_endpoints: Array[String]?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor description: String?
+      attr_accessor model_versions: Array[Types::ModelVersion]?
+      attr_accessor rule_execution_mode: String?
+    end
+
+    class UpdateDetectorVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDetectorVersionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?detector_version_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor detector_version_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateDetectorVersionStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_type_name: String,
+        ?assigned_label: String,
+        ?label_timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_type_name: String?
+      attr_accessor assigned_label: String?
+      attr_accessor label_timestamp: String?
+    end
+
+    class UpdateEventLabelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?elements: Array[String],
+        ?description: String,
+        ?update_mode: String,
+        ?variable_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor elements: Array[String]?
+      attr_accessor description: String?
+      attr_accessor update_mode: String?
+      attr_accessor variable_type: String?
+    end
+
+    class UpdateListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateModelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?major_version_number: String,
+        ?external_events_detail: Types::ExternalEventsDetail,
+        ?ingested_events_detail: Types::IngestedEventsDetail,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor major_version_number: String?
+      attr_accessor external_events_detail: Types::ExternalEventsDetail?
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateModelVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateModelVersionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_type: String,
+        ?model_version_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_type: String?
+      attr_accessor model_version_number: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateModelVersionStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRuleMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::Rule,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::Rule?
+      attr_accessor description: String?
+    end
+
+    class UpdateRuleMetadataResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRuleVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::Rule,
+        ?description: String,
+        ?expression: String,
+        ?language: String,
+        ?outcomes: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::Rule?
+      attr_accessor description: String?
+      attr_accessor expression: String?
+      attr_accessor language: String?
+      attr_accessor outcomes: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UpdateRuleVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::Rule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::Rule?
+    end
+
+    class UpdateVariableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?default_value: String,
+        ?description: String,
+        ?variable_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+      attr_accessor variable_type: String?
+    end
+
+    class UpdateVariableResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Variable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?data_source: String,
+        ?default_value: String,
+        ?description: String,
+        ?variable_type: String,
+        ?last_updated_time: String,
+        ?created_time: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_source: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+      attr_accessor variable_type: String?
+      attr_accessor last_updated_time: String?
+      attr_accessor created_time: String?
+      attr_accessor arn: String?
+    end
+
+    class VariableEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?data_source: String,
+        ?default_value: String,
+        ?description: String,
+        ?variable_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_source: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+      attr_accessor variable_type: String?
+    end
+
+    class VariableImpactExplanation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_variable_name: String,
+        ?relative_impact: String,
+        ?log_odds_impact: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_variable_name: String?
+      attr_accessor relative_impact: String?
+      attr_accessor log_odds_impact: Float?
+    end
+
+    class VariableImportanceMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_odds_metrics: Array[Types::LogOddsMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_odds_metrics: Array[Types::LogOddsMetric]?
+    end
+  end
+end

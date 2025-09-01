@@ -1,0 +1,159 @@
+module Aws::KinesisVideoArchivedMedia
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KinesisVideoArchivedMedia::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetClipResponse
+      include Smithy::Client::_Response[Types::GetClipOutput]
+      def content_type: () -> String?
+      def payload: () -> String?
+    end
+    def get_clip: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?clip_fragment_selector: {
+        fragment_selector_type: String,
+        timestamp_range: {
+          start_timestamp: Time,
+          end_timestamp: untyped
+        }
+      }
+    ) -> _GetClipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClipResponse
+
+    interface _GetDASHStreamingSessionURLResponse
+      include Smithy::Client::_Response[Types::GetDASHStreamingSessionURLOutput]
+      def dash_streaming_session_url: () -> String?
+    end
+    def get_dash_streaming_session_url: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?playback_mode: String,
+      ?display_fragment_timestamp: String,
+      ?display_fragment_number: String,
+      ?dash_fragment_selector: {
+        fragment_selector_type: String,
+        timestamp_range: {
+          start_timestamp: Time,
+          end_timestamp: untyped
+        }
+      },
+      ?expires: Integer,
+      ?max_manifest_fragment_results: Integer
+    ) -> _GetDASHStreamingSessionURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDASHStreamingSessionURLResponse
+
+    interface _GetHLSStreamingSessionURLResponse
+      include Smithy::Client::_Response[Types::GetHLSStreamingSessionURLOutput]
+      def hls_streaming_session_url: () -> String?
+    end
+    def get_hls_streaming_session_url: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?playback_mode: String,
+      ?hls_fragment_selector: {
+        fragment_selector_type: String,
+        timestamp_range: {
+          start_timestamp: Time,
+          end_timestamp: untyped
+        }
+      },
+      ?container_format: String,
+      ?discontinuity_mode: String,
+      ?display_fragment_timestamp: String,
+      ?expires: Integer,
+      ?max_media_playlist_fragment_results: Integer
+    ) -> _GetHLSStreamingSessionURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHLSStreamingSessionURLResponse
+
+    interface _GetImagesResponse
+      include Smithy::Client::_Response[Types::GetImagesOutput]
+      def images: () -> Array[Types::Image]?
+      def next_token: () -> String?
+    end
+    def get_images: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?image_selector_type: String,
+      ?start_timestamp: Time,
+      ?end_timestamp: Time,
+      ?sampling_interval: Integer,
+      ?format: String,
+      ?format_config: Hash[String, String],
+      ?width_pixels: Integer,
+      ?height_pixels: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImagesResponse
+
+    interface _GetMediaForFragmentListResponse
+      include Smithy::Client::_Response[Types::GetMediaForFragmentListOutput]
+      def content_type: () -> String?
+      def payload: () -> String?
+    end
+    def get_media_for_fragment_list: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?fragments: Array[String]
+    ) -> _GetMediaForFragmentListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaForFragmentListResponse
+
+    interface _ListFragmentsResponse
+      include Smithy::Client::_Response[Types::ListFragmentsOutput]
+      def fragments: () -> Array[Types::Fragment]?
+      def next_token: () -> String?
+    end
+    def list_fragments: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?fragment_selector: {
+        fragment_selector_type: String,
+        timestamp_range: {
+          start_timestamp: Time,
+          end_timestamp: untyped
+        }
+      }
+    ) -> _ListFragmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFragmentsResponse
+  end
+end

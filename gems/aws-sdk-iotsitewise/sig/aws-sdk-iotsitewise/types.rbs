@@ -1,0 +1,6172 @@
+module Aws::IoTSiteWise
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessPolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?identity: Types::Identity,
+        ?resource: Types::Resource,
+        ?permission: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor identity: Types::Identity?
+      attr_accessor resource: Types::Resource?
+      attr_accessor permission: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class ActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_definition_id: String,
+        ?action_name: String,
+        ?action_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_definition_id: String?
+      attr_accessor action_name: String?
+      attr_accessor action_type: String?
+    end
+
+    class ActionPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+    end
+
+    class ActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_definition_id: String,
+        ?target_resource: Types::TargetResource,
+        ?resolve_to: Types::ResolveTo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_definition_id: String?
+      attr_accessor target_resource: Types::TargetResource?
+      attr_accessor resolve_to: Types::ResolveTo?
+    end
+
+    module AggregateType
+      AVERAGE: String
+      COUNT: String
+      MAXIMUM: String
+      MINIMUM: String
+      SUM: String
+      STANDARD_DEVIATION: String
+    end
+
+    class AggregatedValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?quality: String,
+        ?value: Types::Aggregates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor quality: String?
+      attr_accessor value: Types::Aggregates?
+    end
+
+    class Aggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?average: Float,
+        ?count: Float,
+        ?maximum: Float,
+        ?minimum: Float,
+        ?sum: Float,
+        ?standard_deviation: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor average: Float?
+      attr_accessor count: Float?
+      attr_accessor maximum: Float?
+      attr_accessor minimum: Float?
+      attr_accessor sum: Float?
+      attr_accessor standard_deviation: Float?
+    end
+
+    class Alarms
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_role_arn: String,
+        ?notification_lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_role_arn: String?
+      attr_accessor notification_lambda_arn: String?
+    end
+
+    class AssetBindingValueFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+    end
+
+    class AssetCompositeModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?properties: Array[Types::AssetProperty],
+        ?id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor properties: Array[Types::AssetProperty]?
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+    end
+
+    class AssetCompositeModelPathSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class AssetCompositeModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?path: Array[Types::AssetCompositeModelPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor path: Array[Types::AssetCompositeModelPathSegment]?
+    end
+
+    module AssetErrorCode
+      INTERNAL_FAILURE: String
+    end
+
+    class AssetErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class AssetHierarchy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+    end
+
+    class AssetHierarchyInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_asset_id: String,
+        ?child_asset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_asset_id: String?
+      attr_accessor child_asset_id: String?
+    end
+
+    class AssetModelBindingValueFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+    end
+
+    class AssetModelCompositeModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?properties: Array[Types::AssetModelProperty],
+        ?id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor properties: Array[Types::AssetModelProperty]?
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+    end
+
+    class AssetModelCompositeModelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?properties: Array[Types::AssetModelPropertyDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor properties: Array[Types::AssetModelPropertyDefinition]?
+    end
+
+    class AssetModelCompositeModelPathSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class AssetModelCompositeModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?path: Array[Types::AssetModelCompositeModelPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor path: Array[Types::AssetModelCompositeModelPathSegment]?
+    end
+
+    class AssetModelHierarchy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?child_asset_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor child_asset_model_id: String?
+    end
+
+    class AssetModelHierarchyDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?child_asset_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor child_asset_model_id: String?
+    end
+
+    class AssetModelProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?unit: String,
+        ?type: Types::PropertyType,
+        ?path: Array[Types::AssetModelPropertyPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor unit: String?
+      attr_accessor type: Types::PropertyType?
+      attr_accessor path: Array[Types::AssetModelPropertyPathSegment]?
+    end
+
+    class AssetModelPropertyBindingValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class AssetModelPropertyBindingValueFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class AssetModelPropertyDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?unit: String,
+        ?type: Types::PropertyType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor unit: String?
+      attr_accessor type: Types::PropertyType?
+    end
+
+    class AssetModelPropertyPathSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class AssetModelPropertySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?unit: String,
+        ?type: Types::PropertyType,
+        ?asset_model_composite_model_id: String,
+        ?path: Array[Types::AssetModelPropertyPathSegment],
+        ?interface_summaries: Array[Types::InterfaceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor unit: String?
+      attr_accessor type: Types::PropertyType?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor path: Array[Types::AssetModelPropertyPathSegment]?
+      attr_accessor interface_summaries: Array[Types::InterfaceSummary]?
+    end
+
+    module AssetModelState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      PROPAGATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class AssetModelStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class AssetModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?arn: String,
+        ?name: String,
+        ?asset_model_type: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?status: Types::AssetModelStatus,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor asset_model_type: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor status: Types::AssetModelStatus?
+      attr_accessor version: String?
+    end
+
+    module AssetModelType
+      ASSET_MODEL: String
+      COMPONENT_MODEL: String
+      INTERFACE: String
+    end
+
+    module AssetModelVersionType
+      LATEST: String
+      ACTIVE: String
+    end
+
+    class AssetProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?alias: String,
+        ?notification: Types::PropertyNotification,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?unit: String,
+        ?path: Array[Types::AssetPropertyPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor alias: String?
+      attr_accessor notification: Types::PropertyNotification?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor unit: String?
+      attr_accessor path: Array[Types::AssetPropertyPathSegment]?
+    end
+
+    class AssetPropertyBindingValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class AssetPropertyBindingValueFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class AssetPropertyPathSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class AssetPropertySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?alias: String,
+        ?unit: String,
+        ?notification: Types::PropertyNotification,
+        ?asset_composite_model_id: String,
+        ?path: Array[Types::AssetPropertyPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor alias: String?
+      attr_accessor unit: String?
+      attr_accessor notification: Types::PropertyNotification?
+      attr_accessor asset_composite_model_id: String?
+      attr_accessor path: Array[Types::AssetPropertyPathSegment]?
+    end
+
+    class AssetPropertyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::Variant,
+        ?timestamp: Types::TimeInNanos,
+        ?quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::Variant?
+      attr_accessor timestamp: Types::TimeInNanos?
+      attr_accessor quality: String?
+    end
+
+    class AssetRelationshipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hierarchy_info: Types::AssetHierarchyInfo,
+        ?relationship_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hierarchy_info: Types::AssetHierarchyInfo?
+      attr_accessor relationship_type: String?
+    end
+
+    module AssetRelationshipType
+      HIERARCHY: String
+    end
+
+    module AssetState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class AssetStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class AssetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?arn: String,
+        ?name: String,
+        ?asset_model_id: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?status: Types::AssetStatus,
+        ?hierarchies: Array[Types::AssetHierarchy],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor status: Types::AssetStatus?
+      attr_accessor hierarchies: Array[Types::AssetHierarchy]?
+      attr_accessor description: String?
+    end
+
+    class AssociateAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?hierarchy_id: String,
+        ?child_asset_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor hierarchy_id: String?
+      attr_accessor child_asset_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateTimeSeriesToAssetPropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociatedAssetsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?arn: String,
+        ?name: String,
+        ?asset_model_id: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?status: Types::AssetStatus,
+        ?hierarchies: Array[Types::AssetHierarchy],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor status: Types::AssetStatus?
+      attr_accessor hierarchies: Array[Types::AssetHierarchy]?
+      attr_accessor description: String?
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: String?
+    end
+
+    module AuthMode
+      IAM: String
+      SSO: String
+    end
+
+    class BatchAssociateProjectAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?asset_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor asset_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchAssociateProjectAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::AssetErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::AssetErrorDetails]?
+    end
+
+    class BatchDisassociateProjectAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?asset_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor asset_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchDisassociateProjectAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::AssetErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::AssetErrorDetails]?
+    end
+
+    module BatchEntryCompletionStatus
+      SUCCESS: String
+      ERROR: String
+    end
+
+    class BatchGetAssetPropertyAggregatesEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?aggregate_types: Array[String],
+        ?resolution: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?qualities: Array[String],
+        ?time_ordering: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor aggregate_types: Array[String]?
+      attr_accessor resolution: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor qualities: Array[String]?
+      attr_accessor time_ordering: String?
+    end
+
+    module BatchGetAssetPropertyAggregatesErrorCode
+      ResourceNotFoundException: String
+      InvalidRequestException: String
+      AccessDeniedException: String
+    end
+
+    class BatchGetAssetPropertyAggregatesErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?entry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor entry_id: String?
+    end
+
+    class BatchGetAssetPropertyAggregatesErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_timestamp: Time?
+    end
+
+    class BatchGetAssetPropertyAggregatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::BatchGetAssetPropertyAggregatesEntry],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::BatchGetAssetPropertyAggregatesEntry]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchGetAssetPropertyAggregatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::BatchGetAssetPropertyAggregatesErrorEntry],
+        ?success_entries: Array[Types::BatchGetAssetPropertyAggregatesSuccessEntry],
+        ?skipped_entries: Array[Types::BatchGetAssetPropertyAggregatesSkippedEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::BatchGetAssetPropertyAggregatesErrorEntry]?
+      attr_accessor success_entries: Array[Types::BatchGetAssetPropertyAggregatesSuccessEntry]?
+      attr_accessor skipped_entries: Array[Types::BatchGetAssetPropertyAggregatesSkippedEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetAssetPropertyAggregatesSkippedEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?completion_status: String,
+        ?error_info: Types::BatchGetAssetPropertyAggregatesErrorInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor completion_status: String?
+      attr_accessor error_info: Types::BatchGetAssetPropertyAggregatesErrorInfo?
+    end
+
+    class BatchGetAssetPropertyAggregatesSuccessEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?aggregated_values: Array[Types::AggregatedValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor aggregated_values: Array[Types::AggregatedValue]?
+    end
+
+    class BatchGetAssetPropertyValueEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+    end
+
+    module BatchGetAssetPropertyValueErrorCode
+      ResourceNotFoundException: String
+      InvalidRequestException: String
+      AccessDeniedException: String
+    end
+
+    class BatchGetAssetPropertyValueErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?entry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor entry_id: String?
+    end
+
+    class BatchGetAssetPropertyValueErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_timestamp: Time?
+    end
+
+    class BatchGetAssetPropertyValueHistoryEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?qualities: Array[String],
+        ?time_ordering: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor qualities: Array[String]?
+      attr_accessor time_ordering: String?
+    end
+
+    module BatchGetAssetPropertyValueHistoryErrorCode
+      ResourceNotFoundException: String
+      InvalidRequestException: String
+      AccessDeniedException: String
+    end
+
+    class BatchGetAssetPropertyValueHistoryErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?entry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor entry_id: String?
+    end
+
+    class BatchGetAssetPropertyValueHistoryErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_timestamp: Time?
+    end
+
+    class BatchGetAssetPropertyValueHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::BatchGetAssetPropertyValueHistoryEntry],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::BatchGetAssetPropertyValueHistoryEntry]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchGetAssetPropertyValueHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::BatchGetAssetPropertyValueHistoryErrorEntry],
+        ?success_entries: Array[Types::BatchGetAssetPropertyValueHistorySuccessEntry],
+        ?skipped_entries: Array[Types::BatchGetAssetPropertyValueHistorySkippedEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::BatchGetAssetPropertyValueHistoryErrorEntry]?
+      attr_accessor success_entries: Array[Types::BatchGetAssetPropertyValueHistorySuccessEntry]?
+      attr_accessor skipped_entries: Array[Types::BatchGetAssetPropertyValueHistorySkippedEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetAssetPropertyValueHistorySkippedEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?completion_status: String,
+        ?error_info: Types::BatchGetAssetPropertyValueHistoryErrorInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor completion_status: String?
+      attr_accessor error_info: Types::BatchGetAssetPropertyValueHistoryErrorInfo?
+    end
+
+    class BatchGetAssetPropertyValueHistorySuccessEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_property_value_history: Array[Types::AssetPropertyValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_property_value_history: Array[Types::AssetPropertyValue]?
+    end
+
+    class BatchGetAssetPropertyValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::BatchGetAssetPropertyValueEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::BatchGetAssetPropertyValueEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetAssetPropertyValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::BatchGetAssetPropertyValueErrorEntry],
+        ?success_entries: Array[Types::BatchGetAssetPropertyValueSuccessEntry],
+        ?skipped_entries: Array[Types::BatchGetAssetPropertyValueSkippedEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::BatchGetAssetPropertyValueErrorEntry]?
+      attr_accessor success_entries: Array[Types::BatchGetAssetPropertyValueSuccessEntry]?
+      attr_accessor skipped_entries: Array[Types::BatchGetAssetPropertyValueSkippedEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetAssetPropertyValueSkippedEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?completion_status: String,
+        ?error_info: Types::BatchGetAssetPropertyValueErrorInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor completion_status: String?
+      attr_accessor error_info: Types::BatchGetAssetPropertyValueErrorInfo?
+    end
+
+    class BatchGetAssetPropertyValueSuccessEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_property_value: Types::AssetPropertyValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_property_value: Types::AssetPropertyValue?
+    end
+
+    class BatchPutAssetPropertyError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?timestamps: Array[Types::TimeInNanos],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor timestamps: Array[Types::TimeInNanos]?
+    end
+
+    class BatchPutAssetPropertyErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?errors: Array[Types::BatchPutAssetPropertyError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor errors: Array[Types::BatchPutAssetPropertyError]?
+    end
+
+    module BatchPutAssetPropertyValueErrorCode
+      ResourceNotFoundException: String
+      InvalidRequestException: String
+      InternalFailureException: String
+      ServiceUnavailableException: String
+      ThrottlingException: String
+      LimitExceededException: String
+      ConflictingOperationException: String
+      TimestampOutOfRangeException: String
+      AccessDeniedException: String
+    end
+
+    class BatchPutAssetPropertyValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_partial_entry_processing: bool,
+        ?entries: Array[Types::PutAssetPropertyValueEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_partial_entry_processing: bool?
+      attr_accessor entries: Array[Types::PutAssetPropertyValueEntry]?
+    end
+
+    class BatchPutAssetPropertyValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::BatchPutAssetPropertyErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::BatchPutAssetPropertyErrorEntry]?
+    end
+
+    module CapabilitySyncStatus
+      IN_SYNC: String
+      OUT_OF_SYNC: String
+      SYNC_FAILED: String
+      UNKNOWN: String
+      NOT_APPLICABLE: String
+    end
+
+    class Citation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference: Types::Reference,
+        ?content: Types::Content,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference: Types::Reference?
+      attr_accessor content: Types::Content?
+    end
+
+    class ColumnInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Types::ColumnType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Types::ColumnType?
+    end
+
+    module ColumnName
+      ALIAS: String
+      ASSET_ID: String
+      PROPERTY_ID: String
+      DATA_TYPE: String
+      TIMESTAMP_SECONDS: String
+      TIMESTAMP_NANO_OFFSET: String
+      QUALITY: String
+      VALUE: String
+    end
+
+    class ColumnType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalar_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalar_type: String?
+    end
+
+    class CompositeModelProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?asset_property: Types::Property,
+        ?id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor asset_property: Types::Property?
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+    end
+
+    class CompositionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composition_relationship: Array[Types::CompositionRelationshipItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composition_relationship: Array[Types::CompositionRelationshipItem]?
+    end
+
+    class CompositionRelationshipItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CompositionRelationshipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?asset_model_composite_model_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_type: String?
+    end
+
+    class ComputationModelAnomalyDetectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_properties: String,
+        ?result_property: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_properties: String?
+      attr_accessor result_property: String?
+    end
+
+    class ComputationModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detection: Types::ComputationModelAnomalyDetectionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detection: Types::ComputationModelAnomalyDetectionConfiguration?
+    end
+
+    class ComputationModelDataBindingUsageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_ids: Array[String],
+        ?matched_data_binding: Types::MatchedDataBinding,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_ids: Array[String]?
+      attr_accessor matched_data_binding: Types::MatchedDataBinding?
+    end
+
+    class ComputationModelDataBindingValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_property: Types::AssetModelPropertyBindingValue,
+        ?asset_property: Types::AssetPropertyBindingValue,
+        ?list: Array[Types::ComputationModelDataBindingValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_property: Types::AssetModelPropertyBindingValue?
+      attr_accessor asset_property: Types::AssetPropertyBindingValue?
+      attr_accessor list: Array[Types::ComputationModelDataBindingValue]?
+    end
+
+    class ComputationModelResolveToResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolve_to: Types::ResolveTo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolve_to: Types::ResolveTo?
+    end
+
+    module ComputationModelState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class ComputationModelStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class ComputationModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?status: Types::ComputationModelStatus,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor status: Types::ComputationModelStatus?
+      attr_accessor version: String?
+    end
+
+    module ComputationModelType
+      ANOMALY_DETECTION: String
+    end
+
+    module ComputeLocation
+      EDGE: String
+      CLOUD: String
+    end
+
+    class ConfigurationErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ConfigurationState
+      ACTIVE: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+    end
+
+    class ConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::ConfigurationErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::ConfigurationErrorDetails?
+    end
+
+    class ConflictingOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class Content
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    module CoreDeviceOperatingSystem
+      LINUX_AARCH64: String
+      LINUX_AMD64: String
+      WINDOWS_AMD64: String
+    end
+
+    class CreateAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_identity: Types::Identity,
+        ?access_policy_resource: Types::Resource,
+        ?access_policy_permission: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_identity: Types::Identity?
+      attr_accessor access_policy_resource: Types::Resource?
+      attr_accessor access_policy_permission: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_id: String,
+        ?access_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_id: String?
+      attr_accessor access_policy_arn: String?
+    end
+
+    class CreateAssetModelCompositeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_external_id: String,
+        ?parent_asset_model_composite_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?asset_model_composite_model_description: String,
+        ?asset_model_composite_model_name: String,
+        ?asset_model_composite_model_type: String,
+        ?client_token: String,
+        ?composed_asset_model_id: String,
+        ?asset_model_composite_model_properties: Array[Types::AssetModelPropertyDefinition],
+        ?if_match: String,
+        ?if_none_match: String,
+        ?match_for_version_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_external_id: String?
+      attr_accessor parent_asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_description: String?
+      attr_accessor asset_model_composite_model_name: String?
+      attr_accessor asset_model_composite_model_type: String?
+      attr_accessor client_token: String?
+      attr_accessor composed_asset_model_id: String?
+      attr_accessor asset_model_composite_model_properties: Array[Types::AssetModelPropertyDefinition]?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor match_for_version_type: String?
+    end
+
+    class CreateAssetModelCompositeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_composite_model_id: String,
+        ?asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment],
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment]?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class CreateAssetModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_name: String,
+        ?asset_model_type: String,
+        ?asset_model_id: String,
+        ?asset_model_external_id: String,
+        ?asset_model_description: String,
+        ?asset_model_properties: Array[Types::AssetModelPropertyDefinition],
+        ?asset_model_hierarchies: Array[Types::AssetModelHierarchyDefinition],
+        ?asset_model_composite_models: Array[Types::AssetModelCompositeModelDefinition],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_name: String?
+      attr_accessor asset_model_type: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_external_id: String?
+      attr_accessor asset_model_description: String?
+      attr_accessor asset_model_properties: Array[Types::AssetModelPropertyDefinition]?
+      attr_accessor asset_model_hierarchies: Array[Types::AssetModelHierarchyDefinition]?
+      attr_accessor asset_model_composite_models: Array[Types::AssetModelCompositeModelDefinition]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAssetModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_arn: String,
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_arn: String?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class CreateAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_name: String,
+        ?asset_model_id: String,
+        ?asset_id: String,
+        ?asset_external_id: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?asset_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_name: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor asset_external_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor asset_description: String?
+    end
+
+    class CreateAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_arn: String,
+        ?asset_status: Types::AssetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_arn: String?
+      attr_accessor asset_status: Types::AssetStatus?
+    end
+
+    class CreateBulkImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_role_arn: String,
+        ?files: Array[Types::File],
+        ?error_report_location: Types::ErrorReportLocation,
+        ?job_configuration: Types::JobConfiguration,
+        ?adaptive_ingestion: bool,
+        ?delete_files_after_import: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_role_arn: String?
+      attr_accessor files: Array[Types::File]?
+      attr_accessor error_report_location: Types::ErrorReportLocation?
+      attr_accessor job_configuration: Types::JobConfiguration?
+      attr_accessor adaptive_ingestion: bool?
+      attr_accessor delete_files_after_import: bool?
+    end
+
+    class CreateBulkImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+    end
+
+    class CreateComputationModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_name: String,
+        ?computation_model_description: String,
+        ?computation_model_configuration: Types::ComputationModelConfiguration,
+        ?computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_name: String?
+      attr_accessor computation_model_description: String?
+      attr_accessor computation_model_configuration: Types::ComputationModelConfiguration?
+      attr_accessor computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateComputationModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?computation_model_arn: String,
+        ?computation_model_status: Types::ComputationModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor computation_model_arn: String?
+      attr_accessor computation_model_status: Types::ComputationModelStatus?
+    end
+
+    class CreateDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?dashboard_name: String,
+        ?dashboard_description: String,
+        ?dashboard_definition: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor dashboard_name: String?
+      attr_accessor dashboard_description: String?
+      attr_accessor dashboard_definition: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_id: String,
+        ?dashboard_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_id: String?
+      attr_accessor dashboard_arn: String?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_name: String,
+        ?dataset_description: String,
+        ?dataset_source: Types::DatasetSource,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_description: String?
+      attr_accessor dataset_source: Types::DatasetSource?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_arn: String,
+        ?dataset_status: Types::DatasetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_status: Types::DatasetStatus?
+    end
+
+    class CreateGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_name: String,
+        ?gateway_platform: Types::GatewayPlatform,
+        ?gateway_version: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_platform: Types::GatewayPlatform?
+      attr_accessor gateway_version: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_arn: String?
+    end
+
+    class CreatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_name: String,
+        ?portal_description: String,
+        ?portal_contact_email: String,
+        ?client_token: String,
+        ?portal_logo_image_file: Types::ImageFile,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?portal_auth_mode: String,
+        ?notification_sender_email: String,
+        ?alarms: Types::Alarms,
+        ?portal_type: String,
+        ?portal_type_configuration: Hash[String, Types::PortalTypeEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_name: String?
+      attr_accessor portal_description: String?
+      attr_accessor portal_contact_email: String?
+      attr_accessor client_token: String?
+      attr_accessor portal_logo_image_file: Types::ImageFile?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor portal_auth_mode: String?
+      attr_accessor notification_sender_email: String?
+      attr_accessor alarms: Types::Alarms?
+      attr_accessor portal_type: String?
+      attr_accessor portal_type_configuration: Hash[String, Types::PortalTypeEntry]?
+    end
+
+    class CreatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?portal_arn: String,
+        ?portal_start_url: String,
+        ?portal_status: Types::PortalStatus,
+        ?sso_application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_start_url: String?
+      attr_accessor portal_status: Types::PortalStatus?
+      attr_accessor sso_application_id: String?
+    end
+
+    class CreateProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?project_name: String,
+        ?project_description: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor project_name: String?
+      attr_accessor project_description: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?project_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor project_arn: String?
+    end
+
+    class Csv
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_names: Array[String]?
+    end
+
+    class CustomerManagedS3Storage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class DashboardSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class DataBindingValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_property: Types::AssetModelPropertyBindingValue,
+        ?asset_property: Types::AssetPropertyBindingValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_property: Types::AssetModelPropertyBindingValue?
+      attr_accessor asset_property: Types::AssetPropertyBindingValue?
+    end
+
+    class DataBindingValueFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset: Types::AssetBindingValueFilter,
+        ?asset_model: Types::AssetModelBindingValueFilter,
+        ?asset_property: Types::AssetPropertyBindingValueFilter,
+        ?asset_model_property: Types::AssetModelPropertyBindingValueFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset: Types::AssetBindingValueFilter?
+      attr_accessor asset_model: Types::AssetModelBindingValueFilter?
+      attr_accessor asset_property: Types::AssetPropertyBindingValueFilter?
+      attr_accessor asset_model_property: Types::AssetModelPropertyBindingValueFilter?
+    end
+
+    class DataSetReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?source: Types::Source,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor source: Types::Source?
+    end
+
+    class DatasetSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_format: String,
+        ?source_detail: Types::SourceDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_format: String?
+      attr_accessor source_detail: Types::SourceDetail?
+    end
+
+    module DatasetSourceFormat
+      KNOWLEDGE_BASE: String
+    end
+
+    module DatasetSourceType
+      KENDRA: String
+    end
+
+    module DatasetState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class DatasetStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class DatasetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?status: Types::DatasetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor status: Types::DatasetStatus?
+    end
+
+    class Datum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalar_value: String,
+        ?array_value: Array[Types::Datum],
+        ?row_value: Types::Row,
+        ?null_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalar_value: String?
+      attr_accessor array_value: Array[Types::Datum]?
+      attr_accessor row_value: Types::Row?
+      attr_accessor null_value: bool?
+    end
+
+    class DeleteAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAssetModelCompositeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?client_token: String,
+        ?if_match: String,
+        ?if_none_match: String,
+        ?match_for_version_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor client_token: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor match_for_version_type: String?
+    end
+
+    class DeleteAssetModelCompositeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class DeleteAssetModelInterfaceRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAssetModelInterfaceRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+        ?asset_model_arn: String,
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor asset_model_arn: String?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class DeleteAssetModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?client_token: String,
+        ?if_match: String,
+        ?if_none_match: String,
+        ?match_for_version_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor client_token: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor match_for_version_type: String?
+    end
+
+    class DeleteAssetModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class DeleteAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_status: Types::AssetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_status: Types::AssetStatus?
+    end
+
+    class DeleteComputationModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteComputationModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_status: Types::ComputationModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_status: Types::ComputationModelStatus?
+    end
+
+    class DeleteDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_status: Types::DatasetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_status: Types::DatasetStatus?
+    end
+
+    class DeleteGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class DeletePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeletePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_status: Types::PortalStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_status: Types::PortalStatus?
+    end
+
+    class DeleteProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTimeSeriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DescribeAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_id: String?
+    end
+
+    class DescribeAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_id: String,
+        ?access_policy_arn: String,
+        ?access_policy_identity: Types::Identity,
+        ?access_policy_resource: Types::Resource,
+        ?access_policy_permission: String,
+        ?access_policy_creation_date: Time,
+        ?access_policy_last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_id: String?
+      attr_accessor access_policy_arn: String?
+      attr_accessor access_policy_identity: Types::Identity?
+      attr_accessor access_policy_resource: Types::Resource?
+      attr_accessor access_policy_permission: String?
+      attr_accessor access_policy_creation_date: Time?
+      attr_accessor access_policy_last_update_date: Time?
+    end
+
+    class DescribeActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+    end
+
+    class DescribeActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?target_resource: Types::TargetResource,
+        ?action_definition_id: String,
+        ?action_payload: Types::ActionPayload,
+        ?execution_time: Time,
+        ?resolve_to: Types::ResolveTo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor target_resource: Types::TargetResource?
+      attr_accessor action_definition_id: String?
+      attr_accessor action_payload: Types::ActionPayload?
+      attr_accessor execution_time: Time?
+      attr_accessor resolve_to: Types::ResolveTo?
+    end
+
+    class DescribeAssetCompositeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_composite_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_composite_model_id: String?
+    end
+
+    class DescribeAssetCompositeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_composite_model_id: String,
+        ?asset_composite_model_external_id: String,
+        ?asset_composite_model_path: Array[Types::AssetCompositeModelPathSegment],
+        ?asset_composite_model_name: String,
+        ?asset_composite_model_description: String,
+        ?asset_composite_model_type: String,
+        ?asset_composite_model_properties: Array[Types::AssetProperty],
+        ?asset_composite_model_summaries: Array[Types::AssetCompositeModelSummary],
+        ?action_definitions: Array[Types::ActionDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_composite_model_id: String?
+      attr_accessor asset_composite_model_external_id: String?
+      attr_accessor asset_composite_model_path: Array[Types::AssetCompositeModelPathSegment]?
+      attr_accessor asset_composite_model_name: String?
+      attr_accessor asset_composite_model_description: String?
+      attr_accessor asset_composite_model_type: String?
+      attr_accessor asset_composite_model_properties: Array[Types::AssetProperty]?
+      attr_accessor asset_composite_model_summaries: Array[Types::AssetCompositeModelSummary]?
+      attr_accessor action_definitions: Array[Types::ActionDefinition]?
+    end
+
+    class DescribeAssetModelCompositeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?asset_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_version: String?
+    end
+
+    class DescribeAssetModelCompositeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?asset_model_composite_model_external_id: String,
+        ?asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment],
+        ?asset_model_composite_model_name: String,
+        ?asset_model_composite_model_description: String,
+        ?asset_model_composite_model_type: String,
+        ?asset_model_composite_model_properties: Array[Types::AssetModelProperty],
+        ?composition_details: Types::CompositionDetails,
+        ?asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary],
+        ?action_definitions: Array[Types::ActionDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_external_id: String?
+      attr_accessor asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment]?
+      attr_accessor asset_model_composite_model_name: String?
+      attr_accessor asset_model_composite_model_description: String?
+      attr_accessor asset_model_composite_model_type: String?
+      attr_accessor asset_model_composite_model_properties: Array[Types::AssetModelProperty]?
+      attr_accessor composition_details: Types::CompositionDetails?
+      attr_accessor asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary]?
+      attr_accessor action_definitions: Array[Types::ActionDefinition]?
+    end
+
+    class DescribeAssetModelInterfaceRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+    end
+
+    class DescribeAssetModelInterfaceRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+        ?property_mappings: Array[Types::PropertyMapping],
+        ?hierarchy_mappings: Array[Types::HierarchyMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor property_mappings: Array[Types::PropertyMapping]?
+      attr_accessor hierarchy_mappings: Array[Types::HierarchyMapping]?
+    end
+
+    class DescribeAssetModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?exclude_properties: bool,
+        ?asset_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor exclude_properties: bool?
+      attr_accessor asset_model_version: String?
+    end
+
+    class DescribeAssetModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_external_id: String,
+        ?asset_model_arn: String,
+        ?asset_model_name: String,
+        ?asset_model_type: String,
+        ?asset_model_description: String,
+        ?asset_model_properties: Array[Types::AssetModelProperty],
+        ?asset_model_hierarchies: Array[Types::AssetModelHierarchy],
+        ?asset_model_composite_models: Array[Types::AssetModelCompositeModel],
+        ?asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary],
+        ?asset_model_creation_date: Time,
+        ?asset_model_last_update_date: Time,
+        ?asset_model_status: Types::AssetModelStatus,
+        ?asset_model_version: String,
+        ?interface_details: Array[Types::InterfaceRelationship],
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_external_id: String?
+      attr_accessor asset_model_arn: String?
+      attr_accessor asset_model_name: String?
+      attr_accessor asset_model_type: String?
+      attr_accessor asset_model_description: String?
+      attr_accessor asset_model_properties: Array[Types::AssetModelProperty]?
+      attr_accessor asset_model_hierarchies: Array[Types::AssetModelHierarchy]?
+      attr_accessor asset_model_composite_models: Array[Types::AssetModelCompositeModel]?
+      attr_accessor asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary]?
+      attr_accessor asset_model_creation_date: Time?
+      attr_accessor asset_model_last_update_date: Time?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+      attr_accessor asset_model_version: String?
+      attr_accessor interface_details: Array[Types::InterfaceRelationship]?
+      attr_accessor e_tag: String?
+    end
+
+    class DescribeAssetPropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class DescribeAssetPropertyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_external_id: String,
+        ?asset_name: String,
+        ?asset_model_id: String,
+        ?asset_property: Types::Property,
+        ?composite_model: Types::CompositeModelProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_external_id: String?
+      attr_accessor asset_name: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_property: Types::Property?
+      attr_accessor composite_model: Types::CompositeModelProperty?
+    end
+
+    class DescribeAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?exclude_properties: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor exclude_properties: bool?
+    end
+
+    class DescribeAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_external_id: String,
+        ?asset_arn: String,
+        ?asset_name: String,
+        ?asset_model_id: String,
+        ?asset_properties: Array[Types::AssetProperty],
+        ?asset_hierarchies: Array[Types::AssetHierarchy],
+        ?asset_composite_models: Array[Types::AssetCompositeModel],
+        ?asset_creation_date: Time,
+        ?asset_last_update_date: Time,
+        ?asset_status: Types::AssetStatus,
+        ?asset_description: String,
+        ?asset_composite_model_summaries: Array[Types::AssetCompositeModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_external_id: String?
+      attr_accessor asset_arn: String?
+      attr_accessor asset_name: String?
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_properties: Array[Types::AssetProperty]?
+      attr_accessor asset_hierarchies: Array[Types::AssetHierarchy]?
+      attr_accessor asset_composite_models: Array[Types::AssetCompositeModel]?
+      attr_accessor asset_creation_date: Time?
+      attr_accessor asset_last_update_date: Time?
+      attr_accessor asset_status: Types::AssetStatus?
+      attr_accessor asset_description: String?
+      attr_accessor asset_composite_model_summaries: Array[Types::AssetCompositeModelSummary]?
+    end
+
+    class DescribeBulkImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeBulkImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?job_role_arn: String,
+        ?files: Array[Types::File],
+        ?error_report_location: Types::ErrorReportLocation,
+        ?job_configuration: Types::JobConfiguration,
+        ?job_creation_date: Time,
+        ?job_last_update_date: Time,
+        ?adaptive_ingestion: bool,
+        ?delete_files_after_import: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor job_role_arn: String?
+      attr_accessor files: Array[Types::File]?
+      attr_accessor error_report_location: Types::ErrorReportLocation?
+      attr_accessor job_configuration: Types::JobConfiguration?
+      attr_accessor job_creation_date: Time?
+      attr_accessor job_last_update_date: Time?
+      attr_accessor adaptive_ingestion: bool?
+      attr_accessor delete_files_after_import: bool?
+    end
+
+    class DescribeComputationModelExecutionSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?resolve_to_resource_type: String,
+        ?resolve_to_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor resolve_to_resource_type: String?
+      attr_accessor resolve_to_resource_id: String?
+    end
+
+    class DescribeComputationModelExecutionSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?resolve_to: Types::ResolveTo,
+        ?computation_model_execution_summary: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor resolve_to: Types::ResolveTo?
+      attr_accessor computation_model_execution_summary: Hash[String, String]?
+    end
+
+    class DescribeComputationModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+    end
+
+    class DescribeComputationModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?computation_model_arn: String,
+        ?computation_model_name: String,
+        ?computation_model_description: String,
+        ?computation_model_configuration: Types::ComputationModelConfiguration,
+        ?computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue],
+        ?computation_model_creation_date: Time,
+        ?computation_model_last_update_date: Time,
+        ?computation_model_status: Types::ComputationModelStatus,
+        ?computation_model_version: String,
+        ?action_definitions: Array[Types::ActionDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor computation_model_arn: String?
+      attr_accessor computation_model_name: String?
+      attr_accessor computation_model_description: String?
+      attr_accessor computation_model_configuration: Types::ComputationModelConfiguration?
+      attr_accessor computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue]?
+      attr_accessor computation_model_creation_date: Time?
+      attr_accessor computation_model_last_update_date: Time?
+      attr_accessor computation_model_status: Types::ComputationModelStatus?
+      attr_accessor computation_model_version: String?
+      attr_accessor action_definitions: Array[Types::ActionDefinition]?
+    end
+
+    class DescribeDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_id: String?
+    end
+
+    class DescribeDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_id: String,
+        ?dashboard_arn: String,
+        ?dashboard_name: String,
+        ?project_id: String,
+        ?dashboard_description: String,
+        ?dashboard_definition: String,
+        ?dashboard_creation_date: Time,
+        ?dashboard_last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_id: String?
+      attr_accessor dashboard_arn: String?
+      attr_accessor dashboard_name: String?
+      attr_accessor project_id: String?
+      attr_accessor dashboard_description: String?
+      attr_accessor dashboard_definition: String?
+      attr_accessor dashboard_creation_date: Time?
+      attr_accessor dashboard_last_update_date: Time?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_arn: String,
+        ?dataset_name: String,
+        ?dataset_description: String,
+        ?dataset_source: Types::DatasetSource,
+        ?dataset_status: Types::DatasetStatus,
+        ?dataset_creation_date: Time,
+        ?dataset_last_update_date: Time,
+        ?dataset_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_description: String?
+      attr_accessor dataset_source: Types::DatasetSource?
+      attr_accessor dataset_status: Types::DatasetStatus?
+      attr_accessor dataset_creation_date: Time?
+      attr_accessor dataset_last_update_date: Time?
+      attr_accessor dataset_version: String?
+    end
+
+    class DescribeDefaultEncryptionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeDefaultEncryptionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_arn: String,
+        ?configuration_status: Types::ConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor configuration_status: Types::ConfigurationStatus?
+    end
+
+    class DescribeExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+    end
+
+    class DescribeExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?action_type: String,
+        ?target_resource: Types::TargetResource,
+        ?target_resource_version: String,
+        ?resolve_to: Types::ResolveTo,
+        ?execution_start_time: Time,
+        ?execution_end_time: Time,
+        ?execution_status: Types::ExecutionStatus,
+        ?execution_result: Hash[String, String],
+        ?execution_details: Hash[String, String],
+        ?execution_entity_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor action_type: String?
+      attr_accessor target_resource: Types::TargetResource?
+      attr_accessor target_resource_version: String?
+      attr_accessor resolve_to: Types::ResolveTo?
+      attr_accessor execution_start_time: Time?
+      attr_accessor execution_end_time: Time?
+      attr_accessor execution_status: Types::ExecutionStatus?
+      attr_accessor execution_result: Hash[String, String]?
+      attr_accessor execution_details: Hash[String, String]?
+      attr_accessor execution_entity_version: String?
+    end
+
+    class DescribeGatewayCapabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?capability_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor capability_namespace: String?
+    end
+
+    class DescribeGatewayCapabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?capability_namespace: String,
+        ?capability_configuration: String,
+        ?capability_sync_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor capability_namespace: String?
+      attr_accessor capability_configuration: String?
+      attr_accessor capability_sync_status: String?
+    end
+
+    class DescribeGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class DescribeGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?gateway_name: String,
+        ?gateway_arn: String,
+        ?gateway_platform: Types::GatewayPlatform,
+        ?gateway_version: String,
+        ?gateway_capability_summaries: Array[Types::GatewayCapabilitySummary],
+        ?creation_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_platform: Types::GatewayPlatform?
+      attr_accessor gateway_version: String?
+      attr_accessor gateway_capability_summaries: Array[Types::GatewayCapabilitySummary]?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class DescribeLoggingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeLoggingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_options: Types::LoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_options: Types::LoggingOptions?
+    end
+
+    class DescribePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+    end
+
+    class DescribePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?portal_arn: String,
+        ?portal_name: String,
+        ?portal_description: String,
+        ?portal_client_id: String,
+        ?portal_start_url: String,
+        ?portal_contact_email: String,
+        ?portal_status: Types::PortalStatus,
+        ?portal_creation_date: Time,
+        ?portal_last_update_date: Time,
+        ?portal_logo_image_location: Types::ImageLocation,
+        ?role_arn: String,
+        ?portal_auth_mode: String,
+        ?notification_sender_email: String,
+        ?alarms: Types::Alarms,
+        ?portal_type: String,
+        ?portal_type_configuration: Hash[String, Types::PortalTypeEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_name: String?
+      attr_accessor portal_description: String?
+      attr_accessor portal_client_id: String?
+      attr_accessor portal_start_url: String?
+      attr_accessor portal_contact_email: String?
+      attr_accessor portal_status: Types::PortalStatus?
+      attr_accessor portal_creation_date: Time?
+      attr_accessor portal_last_update_date: Time?
+      attr_accessor portal_logo_image_location: Types::ImageLocation?
+      attr_accessor role_arn: String?
+      attr_accessor portal_auth_mode: String?
+      attr_accessor notification_sender_email: String?
+      attr_accessor alarms: Types::Alarms?
+      attr_accessor portal_type: String?
+      attr_accessor portal_type_configuration: Hash[String, Types::PortalTypeEntry]?
+    end
+
+    class DescribeProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+    end
+
+    class DescribeProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?project_arn: String,
+        ?project_name: String,
+        ?portal_id: String,
+        ?project_description: String,
+        ?project_creation_date: Time,
+        ?project_last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor project_arn: String?
+      attr_accessor project_name: String?
+      attr_accessor portal_id: String?
+      attr_accessor project_description: String?
+      attr_accessor project_creation_date: Time?
+      attr_accessor project_last_update_date: Time?
+    end
+
+    class DescribeStorageConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeStorageConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?multi_layer_storage: Types::MultiLayerStorage,
+        ?disassociated_data_storage: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?configuration_status: Types::ConfigurationStatus,
+        ?last_update_date: Time,
+        ?warm_tier: String,
+        ?warm_tier_retention_period: Types::WarmTierRetentionPeriod,
+        ?disallow_ingest_null_na_n: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage?
+      attr_accessor disassociated_data_storage: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor configuration_status: Types::ConfigurationStatus?
+      attr_accessor last_update_date: Time?
+      attr_accessor warm_tier: String?
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod?
+      attr_accessor disallow_ingest_null_na_n: bool?
+    end
+
+    class DescribeTimeSeriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?asset_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class DescribeTimeSeriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?alias: String,
+        ?time_series_id: String,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?time_series_creation_date: Time,
+        ?time_series_last_update_date: Time,
+        ?time_series_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor alias: String?
+      attr_accessor time_series_id: String?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor time_series_creation_date: Time?
+      attr_accessor time_series_last_update_date: Time?
+      attr_accessor time_series_arn: String?
+    end
+
+    class DetailedError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module DetailedErrorCode
+      INCOMPATIBLE_COMPUTE_LOCATION: String
+      INCOMPATIBLE_FORWARDING_CONFIGURATION: String
+    end
+
+    class DisassociateAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?hierarchy_id: String,
+        ?child_asset_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor hierarchy_id: String?
+      attr_accessor child_asset_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateTimeSeriesFromAssetPropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor client_token: String?
+    end
+
+    module DisassociatedDataStorageState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module EncryptionType
+      SITEWISE_DEFAULT_ENCRYPTION: String
+      KMS_BASED_ENCRYPTION: String
+    end
+
+    module ErrorCode
+      VALIDATION_ERROR: String
+      INTERNAL_FAILURE: String
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?details: Array[Types::DetailedError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor details: Array[Types::DetailedError]?
+    end
+
+    class ErrorReportLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class ExecuteActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource: Types::TargetResource,
+        ?action_definition_id: String,
+        ?action_payload: Types::ActionPayload,
+        ?client_token: String,
+        ?resolve_to: Types::ResolveTo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource: Types::TargetResource?
+      attr_accessor action_definition_id: String?
+      attr_accessor action_payload: Types::ActionPayload?
+      attr_accessor client_token: String?
+      attr_accessor resolve_to: Types::ResolveTo?
+    end
+
+    class ExecuteActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+    end
+
+    class ExecuteQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_statement: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_statement: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class ExecuteQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[Types::ColumnInfo],
+        ?rows: Array[Types::Row],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[Types::ColumnInfo]?
+      attr_accessor rows: Array[Types::Row]?
+      attr_accessor next_token: String?
+    end
+
+    module ExecutionState
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class ExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class ExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?action_type: String,
+        ?target_resource: Types::TargetResource,
+        ?target_resource_version: String,
+        ?resolve_to: Types::ResolveTo,
+        ?execution_start_time: Time,
+        ?execution_end_time: Time,
+        ?execution_status: Types::ExecutionStatus,
+        ?execution_entity_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor action_type: String?
+      attr_accessor target_resource: Types::TargetResource?
+      attr_accessor target_resource_version: String?
+      attr_accessor resolve_to: Types::ResolveTo?
+      attr_accessor execution_start_time: Time?
+      attr_accessor execution_end_time: Time?
+      attr_accessor execution_status: Types::ExecutionStatus?
+      attr_accessor execution_entity_version: String?
+    end
+
+    class ExpressionVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Types::VariableValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Types::VariableValue?
+    end
+
+    class File
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+    end
+
+    class FileFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::Csv,
+        ?parquet: Types::Parquet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::Csv?
+      attr_accessor parquet: Types::Parquet?
+    end
+
+    class ForwardingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    module ForwardingConfigState
+      DISABLED: String
+      ENABLED: String
+    end
+
+    class GatewayCapabilitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_namespace: String,
+        ?capability_sync_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_namespace: String?
+      attr_accessor capability_sync_status: String?
+    end
+
+    class GatewayPlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?greengrass: Types::Greengrass,
+        ?greengrass_v2: Types::GreengrassV2,
+        ?siemens_ie: Types::SiemensIE,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor greengrass: Types::Greengrass?
+      attr_accessor greengrass_v2: Types::GreengrassV2?
+      attr_accessor siemens_ie: Types::SiemensIE?
+    end
+
+    class GatewaySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?gateway_name: String,
+        ?gateway_platform: Types::GatewayPlatform,
+        ?gateway_version: String,
+        ?gateway_capability_summaries: Array[Types::GatewayCapabilitySummary],
+        ?creation_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_name: String?
+      attr_accessor gateway_platform: Types::GatewayPlatform?
+      attr_accessor gateway_version: String?
+      attr_accessor gateway_capability_summaries: Array[Types::GatewayCapabilitySummary]?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class GetAssetPropertyAggregatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?aggregate_types: Array[String],
+        ?resolution: String,
+        ?qualities: Array[String],
+        ?start_date: Time,
+        ?end_date: Time,
+        ?time_ordering: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor aggregate_types: Array[String]?
+      attr_accessor resolution: String?
+      attr_accessor qualities: Array[String]?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor time_ordering: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAssetPropertyAggregatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregated_values: Array[Types::AggregatedValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregated_values: Array[Types::AggregatedValue]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAssetPropertyValueHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?qualities: Array[String],
+        ?time_ordering: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor qualities: Array[String]?
+      attr_accessor time_ordering: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAssetPropertyValueHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_property_value_history: Array[Types::AssetPropertyValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_property_value_history: Array[Types::AssetPropertyValue]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAssetPropertyValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+    end
+
+    class GetAssetPropertyValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property_value: Types::AssetPropertyValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_value: Types::AssetPropertyValue?
+    end
+
+    class GetInterpolatedAssetPropertyValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?start_time_in_seconds: Integer,
+        ?start_time_offset_in_nanos: Integer,
+        ?end_time_in_seconds: Integer,
+        ?end_time_offset_in_nanos: Integer,
+        ?quality: String,
+        ?interval_in_seconds: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?type: String,
+        ?interval_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor start_time_in_seconds: Integer?
+      attr_accessor start_time_offset_in_nanos: Integer?
+      attr_accessor end_time_in_seconds: Integer?
+      attr_accessor end_time_offset_in_nanos: Integer?
+      attr_accessor quality: String?
+      attr_accessor interval_in_seconds: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor type: String?
+      attr_accessor interval_window_in_seconds: Integer?
+    end
+
+    class GetInterpolatedAssetPropertyValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interpolated_asset_property_values: Array[Types::InterpolatedAssetPropertyValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interpolated_asset_property_values: Array[Types::InterpolatedAssetPropertyValue]?
+      attr_accessor next_token: String?
+    end
+
+    class Greengrass
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+    end
+
+    class GreengrassV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?core_device_operating_system: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor core_device_operating_system: String?
+    end
+
+    class GroupIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class HierarchyMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_hierarchy_id: String,
+        ?interface_asset_model_hierarchy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_hierarchy_id: String?
+      attr_accessor interface_asset_model_hierarchy_id: String?
+    end
+
+    class IAMRoleIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class IAMUserIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::UserIdentity,
+        ?group: Types::GroupIdentity,
+        ?iam_user: Types::IAMUserIdentity,
+        ?iam_role: Types::IAMRoleIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::UserIdentity?
+      attr_accessor group: Types::GroupIdentity?
+      attr_accessor iam_user: Types::IAMUserIdentity?
+      attr_accessor iam_role: Types::IAMRoleIdentity?
+    end
+
+    module IdentityType
+      USER: String
+      GROUP: String
+      IAM: String
+    end
+
+    class Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?file: Types::ImageFile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor file: Types::ImageFile?
+    end
+
+    class ImageFile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor type: String?
+    end
+
+    module ImageFileType
+      PNG: String
+    end
+
+    class ImageLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor url: String?
+    end
+
+    class InterfaceRelationship
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class InterfaceRelationshipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class InterfaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_asset_model_id: String,
+        ?interface_asset_model_property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor interface_asset_model_property_id: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InterpolatedAssetPropertyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Types::TimeInNanos,
+        ?value: Types::Variant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Types::TimeInNanos?
+      attr_accessor value: Types::Variant?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?citations: Array[Types::Citation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor citations: Array[Types::Citation]?
+    end
+
+    class InvokeAssistantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conversation_id: String,
+        ?message: String,
+        ?enable_trace: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conversation_id: String?
+      attr_accessor message: String?
+      attr_accessor enable_trace: bool?
+    end
+
+    class InvokeAssistantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: Types::ResponseStream,
+        ?conversation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: Types::ResponseStream?
+      attr_accessor conversation_id: String?
+    end
+
+    class JobConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_format: Types::FileFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_format: Types::FileFormat?
+    end
+
+    module JobStatus
+      PENDING: String
+      CANCELLED: String
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      COMPLETED_WITH_FAILURES: String
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class KendraSourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAccessPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_type: String,
+        ?identity_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?iam_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_type: String?
+      attr_accessor identity_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor iam_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccessPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_summaries: Array[Types::AccessPolicySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_summaries: Array[Types::AccessPolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource_type: String,
+        ?target_resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resolve_to_resource_type: String,
+        ?resolve_to_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource_type: String?
+      attr_accessor target_resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resolve_to_resource_type: String?
+      attr_accessor resolve_to_resource_id: String?
+    end
+
+    class ListActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_summaries: Array[Types::ActionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_summaries: Array[Types::ActionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetModelCompositeModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?asset_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor asset_model_version: String?
+    end
+
+    class ListAssetModelCompositeModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_composite_model_summaries: Array[Types::AssetModelCompositeModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListAssetModelPropertiesFilter
+      ALL: String
+      BASE: String
+    end
+
+    class ListAssetModelPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: String,
+        ?asset_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: String?
+      attr_accessor asset_model_version: String?
+    end
+
+    class ListAssetModelPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_property_summaries: Array[Types::AssetModelPropertySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_property_summaries: Array[Types::AssetModelPropertySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_types: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?asset_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_types: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor asset_model_version: String?
+    end
+
+    class ListAssetModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_summaries: Array[Types::AssetModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_summaries: Array[Types::AssetModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListAssetPropertiesFilter
+      ALL: String
+      BASE: String
+    end
+
+    class ListAssetPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: String?
+    end
+
+    class ListAssetPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_property_summaries: Array[Types::AssetPropertySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_property_summaries: Array[Types::AssetPropertySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?traversal_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor traversal_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssetRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_relationship_summaries: Array[Types::AssetRelationshipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_relationship_summaries: Array[Types::AssetRelationshipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListAssetsFilter
+      ALL: String
+      TOP_LEVEL: String
+    end
+
+    class ListAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?asset_model_id: String,
+        ?filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor asset_model_id: String?
+      attr_accessor filter: String?
+    end
+
+    class ListAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_summaries: Array[Types::AssetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_summaries: Array[Types::AssetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?hierarchy_id: String,
+        ?traversal_direction: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor hierarchy_id: String?
+      attr_accessor traversal_direction: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssociatedAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_summaries: Array[Types::AssociatedAssetsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_summaries: Array[Types::AssociatedAssetsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListBulkImportJobsFilter
+      ALL: String
+      PENDING: String
+      RUNNING: String
+      CANCELLED: String
+      FAILED: String
+      COMPLETED_WITH_FAILURES: String
+      COMPLETED: String
+    end
+
+    class ListBulkImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: String?
+    end
+
+    class ListBulkImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCompositionRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCompositionRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composition_relationship_summaries: Array[Types::CompositionRelationshipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composition_relationship_summaries: Array[Types::CompositionRelationshipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComputationModelDataBindingUsagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_binding_value_filter: Types::DataBindingValueFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_binding_value_filter: Types::DataBindingValueFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComputationModelDataBindingUsagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_binding_usage_summaries: Array[Types::ComputationModelDataBindingUsageSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_binding_usage_summaries: Array[Types::ComputationModelDataBindingUsageSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComputationModelResolveToResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComputationModelResolveToResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_resolve_to_resource_summaries: Array[Types::ComputationModelResolveToResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_resolve_to_resource_summaries: Array[Types::ComputationModelResolveToResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComputationModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComputationModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_summaries: Array[Types::ComputationModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_summaries: Array[Types::ComputationModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDashboardsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDashboardsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_summaries: Array[Types::DashboardSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_summaries: Array[Types::DashboardSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_summaries: Array[Types::DatasetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_summaries: Array[Types::DatasetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource_type: String,
+        ?target_resource_id: String,
+        ?resolve_to_resource_type: String,
+        ?resolve_to_resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?action_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource_type: String?
+      attr_accessor target_resource_id: String?
+      attr_accessor resolve_to_resource_type: String?
+      attr_accessor resolve_to_resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor action_type: String?
+    end
+
+    class ListExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_summaries: Array[Types::ExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_summaries: Array[Types::ExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_summaries: Array[Types::GatewaySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_summaries: Array[Types::GatewaySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInterfaceRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_asset_model_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListInterfaceRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_relationship_summaries: Array[Types::InterfaceRelationshipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_relationship_summaries: Array[Types::InterfaceRelationshipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPortalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPortalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_summaries: Array[Types::PortalSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_summaries: Array[Types::PortalSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProjectAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProjectAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProjectsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_summaries: Array[Types::ProjectSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_summaries: Array[Types::ProjectSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTimeSeriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?asset_id: String,
+        ?alias_prefix: String,
+        ?time_series_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor asset_id: String?
+      attr_accessor alias_prefix: String?
+      attr_accessor time_series_type: String?
+    end
+
+    class ListTimeSeriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_summaries: Array[Types::TimeSeriesSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_summaries: Array[Types::TimeSeriesSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListTimeSeriesType
+      ASSOCIATED: String
+      DISASSOCIATED: String
+    end
+
+    class Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    module LoggingLevel
+      ERROR: String
+      INFO: String
+      OFF: String
+    end
+
+    class LoggingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level: String?
+    end
+
+    class MatchedDataBinding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::DataBindingValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::DataBindingValue?
+    end
+
+    class Measurement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?processing_config: Types::MeasurementProcessingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor processing_config: Types::MeasurementProcessingConfig?
+    end
+
+    class MeasurementProcessingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forwarding_config: Types::ForwardingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forwarding_config: Types::ForwardingConfig?
+    end
+
+    class Metric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?variables: Array[Types::ExpressionVariable],
+        ?window: Types::MetricWindow,
+        ?processing_config: Types::MetricProcessingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor variables: Array[Types::ExpressionVariable]?
+      attr_accessor window: Types::MetricWindow?
+      attr_accessor processing_config: Types::MetricProcessingConfig?
+    end
+
+    class MetricProcessingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_location: String?
+    end
+
+    class MetricWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tumbling: Types::TumblingWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tumbling: Types::TumblingWindow?
+    end
+
+    module MonitorErrorCode
+      INTERNAL_FAILURE: String
+      VALIDATION_ERROR: String
+      LIMIT_EXCEEDED: String
+    end
+
+    class MonitorErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class MultiLayerStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_managed_s3_storage: Types::CustomerManagedS3Storage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_managed_s3_storage: Types::CustomerManagedS3Storage?
+    end
+
+    class Parquet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Permission
+      ADMINISTRATOR: String
+      VIEWER: String
+    end
+
+    class PortalResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    module PortalState
+      CREATING: String
+      PENDING: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+      FAILED: String
+    end
+
+    class PortalStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::MonitorErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::MonitorErrorDetails?
+    end
+
+    class PortalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?start_url: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+        ?role_arn: String,
+        ?status: Types::PortalStatus,
+        ?portal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor start_url: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+      attr_accessor role_arn: String?
+      attr_accessor status: Types::PortalStatus?
+      attr_accessor portal_type: String?
+    end
+
+    module PortalType
+      SITEWISE_PORTAL_V1: String
+      SITEWISE_PORTAL_V2: String
+    end
+
+    class PortalTypeEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_tools: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_tools: Array[String]?
+    end
+
+    class PreconditionFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ProjectResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ProjectSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class Property
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?external_id: String,
+        ?name: String,
+        ?alias: String,
+        ?notification: Types::PropertyNotification,
+        ?data_type: String,
+        ?unit: String,
+        ?type: Types::PropertyType,
+        ?path: Array[Types::AssetPropertyPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor external_id: String?
+      attr_accessor name: String?
+      attr_accessor alias: String?
+      attr_accessor notification: Types::PropertyNotification?
+      attr_accessor data_type: String?
+      attr_accessor unit: String?
+      attr_accessor type: Types::PropertyType?
+      attr_accessor path: Array[Types::AssetPropertyPathSegment]?
+    end
+
+    module PropertyDataType
+      STRING: String
+      INTEGER: String
+      DOUBLE: String
+      BOOLEAN: String
+      STRUCT: String
+    end
+
+    class PropertyMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_property_id: String,
+        ?interface_asset_model_property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_property_id: String?
+      attr_accessor interface_asset_model_property_id: String?
+    end
+
+    class PropertyMappingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_by_property_name: bool,
+        ?create_missing_property: bool,
+        ?overrides: Array[Types::PropertyMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_by_property_name: bool?
+      attr_accessor create_missing_property: bool?
+      attr_accessor overrides: Array[Types::PropertyMapping]?
+    end
+
+    class PropertyNotification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+      attr_accessor state: String?
+    end
+
+    module PropertyNotificationState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class PropertyType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: Types::Attribute,
+        ?measurement: Types::Measurement,
+        ?transform: Types::Transform,
+        ?metric: Types::Metric,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: Types::Attribute?
+      attr_accessor measurement: Types::Measurement?
+      attr_accessor transform: Types::Transform?
+      attr_accessor metric: Types::Metric?
+    end
+
+    class PropertyValueNullValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_type: String?
+    end
+
+    class PutAssetModelInterfaceRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+        ?property_mapping_configuration: Types::PropertyMappingConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor property_mapping_configuration: Types::PropertyMappingConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class PutAssetModelInterfaceRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?interface_asset_model_id: String,
+        ?asset_model_arn: String,
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor interface_asset_model_id: String?
+      attr_accessor asset_model_arn: String?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class PutAssetPropertyValueEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?property_values: Array[Types::AssetPropertyValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor property_values: Array[Types::AssetPropertyValue]?
+    end
+
+    class PutDefaultEncryptionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class PutDefaultEncryptionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_arn: String,
+        ?configuration_status: Types::ConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor configuration_status: Types::ConfigurationStatus?
+    end
+
+    class PutLoggingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_options: Types::LoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_options: Types::LoggingOptions?
+    end
+
+    class PutLoggingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutStorageConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?multi_layer_storage: Types::MultiLayerStorage,
+        ?disassociated_data_storage: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?warm_tier: String,
+        ?warm_tier_retention_period: Types::WarmTierRetentionPeriod,
+        ?disallow_ingest_null_na_n: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage?
+      attr_accessor disassociated_data_storage: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor warm_tier: String?
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod?
+      attr_accessor disallow_ingest_null_na_n: bool?
+    end
+
+    class PutStorageConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?multi_layer_storage: Types::MultiLayerStorage,
+        ?disassociated_data_storage: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?configuration_status: Types::ConfigurationStatus,
+        ?warm_tier: String,
+        ?warm_tier_retention_period: Types::WarmTierRetentionPeriod,
+        ?disallow_ingest_null_na_n: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage?
+      attr_accessor disassociated_data_storage: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor configuration_status: Types::ConfigurationStatus?
+      attr_accessor warm_tier: String?
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod?
+      attr_accessor disallow_ingest_null_na_n: bool?
+    end
+
+    module Quality
+      GOOD: String
+      BAD: String
+      UNCERTAIN: String
+    end
+
+    class QueryTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RawValueType
+      DOUBLE: String
+      BOOLEAN: String
+      STRING: String
+      INTEGER: String
+      UNKNOWN: String
+    end
+
+    class Reference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::DataSetReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::DataSetReference?
+    end
+
+    class ResolveTo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+    end
+
+    module ResolveToResourceType
+      ASSET: String
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal: Types::PortalResource,
+        ?project: Types::ProjectResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal: Types::PortalResource?
+      attr_accessor project: Types::ProjectResource?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      PORTAL: String
+      PROJECT: String
+    end
+
+    class ResponseStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?trace: Types::Trace,
+        ?output: Types::InvocationOutput,
+        ?access_denied_exception: Types::AccessDeniedException,
+        ?conflicting_operation_exception: Types::ConflictingOperationException,
+        ?internal_failure_exception: Types::InternalFailureException,
+        ?invalid_request_exception: Types::InvalidRequestException,
+        ?limit_exceeded_exception: Types::LimitExceededException,
+        ?resource_not_found_exception: Types::ResourceNotFoundException,
+        ?throttling_exception: Types::ThrottlingException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace: Types::Trace?
+      attr_accessor output: Types::InvocationOutput?
+      attr_accessor access_denied_exception: Types::AccessDeniedException?
+      attr_accessor conflicting_operation_exception: Types::ConflictingOperationException?
+      attr_accessor internal_failure_exception: Types::InternalFailureException?
+      attr_accessor invalid_request_exception: Types::InvalidRequestException?
+      attr_accessor limit_exceeded_exception: Types::LimitExceededException?
+      attr_accessor resource_not_found_exception: Types::ResourceNotFoundException?
+      attr_accessor throttling_exception: Types::ThrottlingException?
+
+      class Trace < ResponseStream
+      end
+      class Output < ResponseStream
+      end
+      class AccessDeniedException < ResponseStream
+      end
+      class ConflictingOperationException < ResponseStream
+      end
+      class InternalFailureException < ResponseStream
+      end
+      class InvalidRequestException < ResponseStream
+      end
+      class LimitExceededException < ResponseStream
+      end
+      class ResourceNotFoundException < ResponseStream
+      end
+      class ThrottlingException < ResponseStream
+      end
+      class Unknown < ResponseStream
+      end
+    end
+
+    class RetentionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_days: Integer,
+        ?unlimited: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_days: Integer?
+      attr_accessor unlimited: bool?
+    end
+
+    class Row
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Array[Types::Datum],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Array[Types::Datum]?
+    end
+
+    module ScalarType
+      BOOLEAN: String
+      INT: String
+      DOUBLE: String
+      TIMESTAMP: String
+      STRING: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SiemensIE
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_core_thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_core_thing_name: String?
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?location: Types::Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor location: Types::Location?
+    end
+
+    class SourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kendra: Types::KendraSourceDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kendra: Types::KendraSourceDetail?
+    end
+
+    module StorageType
+      SITEWISE_DEFAULT_STORAGE: String
+      MULTI_LAYER_STORAGE: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?computation_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor computation_model_id: String?
+    end
+
+    module TargetResourceType
+      ASSET: String
+      COMPUTATION_MODEL: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeInNanos
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_in_seconds: Integer,
+        ?offset_in_nanos: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_in_seconds: Integer?
+      attr_accessor offset_in_nanos: Integer?
+    end
+
+    module TimeOrdering
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class TimeSeriesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?alias: String,
+        ?time_series_id: String,
+        ?data_type: String,
+        ?data_type_spec: String,
+        ?time_series_creation_date: Time,
+        ?time_series_last_update_date: Time,
+        ?time_series_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor alias: String?
+      attr_accessor time_series_id: String?
+      attr_accessor data_type: String?
+      attr_accessor data_type_spec: String?
+      attr_accessor time_series_creation_date: Time?
+      attr_accessor time_series_last_update_date: Time?
+      attr_accessor time_series_arn: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class Trace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class Transform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?variables: Array[Types::ExpressionVariable],
+        ?processing_config: Types::TransformProcessingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor variables: Array[Types::ExpressionVariable]?
+      attr_accessor processing_config: Types::TransformProcessingConfig?
+    end
+
+    class TransformProcessingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_location: String,
+        ?forwarding_config: Types::ForwardingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_location: String?
+      attr_accessor forwarding_config: Types::ForwardingConfig?
+    end
+
+    module TraversalDirection
+      PARENT: String
+      CHILD: String
+    end
+
+    module TraversalType
+      PATH_TO_ROOT: String
+    end
+
+    class TumblingWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval: String,
+        ?offset: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval: String?
+      attr_accessor offset: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policy_id: String,
+        ?access_policy_identity: Types::Identity,
+        ?access_policy_resource: Types::Resource,
+        ?access_policy_permission: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policy_id: String?
+      attr_accessor access_policy_identity: Types::Identity?
+      attr_accessor access_policy_resource: Types::Resource?
+      attr_accessor access_policy_permission: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAssetModelCompositeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_composite_model_id: String,
+        ?asset_model_composite_model_external_id: String,
+        ?asset_model_composite_model_description: String,
+        ?asset_model_composite_model_name: String,
+        ?client_token: String,
+        ?asset_model_composite_model_properties: Array[Types::AssetModelProperty],
+        ?if_match: String,
+        ?if_none_match: String,
+        ?match_for_version_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_composite_model_id: String?
+      attr_accessor asset_model_composite_model_external_id: String?
+      attr_accessor asset_model_composite_model_description: String?
+      attr_accessor asset_model_composite_model_name: String?
+      attr_accessor client_token: String?
+      attr_accessor asset_model_composite_model_properties: Array[Types::AssetModelProperty]?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor match_for_version_type: String?
+    end
+
+    class UpdateAssetModelCompositeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment],
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment]?
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class UpdateAssetModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?asset_model_external_id: String,
+        ?asset_model_name: String,
+        ?asset_model_description: String,
+        ?asset_model_properties: Array[Types::AssetModelProperty],
+        ?asset_model_hierarchies: Array[Types::AssetModelHierarchy],
+        ?asset_model_composite_models: Array[Types::AssetModelCompositeModel],
+        ?client_token: String,
+        ?if_match: String,
+        ?if_none_match: String,
+        ?match_for_version_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor asset_model_external_id: String?
+      attr_accessor asset_model_name: String?
+      attr_accessor asset_model_description: String?
+      attr_accessor asset_model_properties: Array[Types::AssetModelProperty]?
+      attr_accessor asset_model_hierarchies: Array[Types::AssetModelHierarchy]?
+      attr_accessor asset_model_composite_models: Array[Types::AssetModelCompositeModel]?
+      attr_accessor client_token: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor match_for_version_type: String?
+    end
+
+    class UpdateAssetModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_status: Types::AssetModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_status: Types::AssetModelStatus?
+    end
+
+    class UpdateAssetPropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?property_notification_state: String,
+        ?client_token: String,
+        ?property_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor property_notification_state: String?
+      attr_accessor client_token: String?
+      attr_accessor property_unit: String?
+    end
+
+    class UpdateAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?asset_external_id: String,
+        ?asset_name: String,
+        ?client_token: String,
+        ?asset_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor asset_external_id: String?
+      attr_accessor asset_name: String?
+      attr_accessor client_token: String?
+      attr_accessor asset_description: String?
+    end
+
+    class UpdateAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_status: Types::AssetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_status: Types::AssetStatus?
+    end
+
+    class UpdateComputationModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_id: String,
+        ?computation_model_name: String,
+        ?computation_model_description: String,
+        ?computation_model_configuration: Types::ComputationModelConfiguration,
+        ?computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_id: String?
+      attr_accessor computation_model_name: String?
+      attr_accessor computation_model_description: String?
+      attr_accessor computation_model_configuration: Types::ComputationModelConfiguration?
+      attr_accessor computation_model_data_binding: Hash[String, Types::ComputationModelDataBindingValue]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateComputationModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computation_model_status: Types::ComputationModelStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computation_model_status: Types::ComputationModelStatus?
+    end
+
+    class UpdateDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_id: String,
+        ?dashboard_name: String,
+        ?dashboard_description: String,
+        ?dashboard_definition: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_id: String?
+      attr_accessor dashboard_name: String?
+      attr_accessor dashboard_description: String?
+      attr_accessor dashboard_definition: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_name: String,
+        ?dataset_description: String,
+        ?dataset_source: Types::DatasetSource,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_description: String?
+      attr_accessor dataset_source: Types::DatasetSource?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_arn: String,
+        ?dataset_status: Types::DatasetStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_status: Types::DatasetStatus?
+    end
+
+    class UpdateGatewayCapabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?capability_namespace: String,
+        ?capability_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor capability_namespace: String?
+      attr_accessor capability_configuration: String?
+    end
+
+    class UpdateGatewayCapabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_namespace: String,
+        ?capability_sync_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_namespace: String?
+      attr_accessor capability_sync_status: String?
+    end
+
+    class UpdateGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?gateway_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor gateway_name: String?
+    end
+
+    class UpdatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?portal_name: String,
+        ?portal_description: String,
+        ?portal_contact_email: String,
+        ?portal_logo_image: Types::Image,
+        ?role_arn: String,
+        ?client_token: String,
+        ?notification_sender_email: String,
+        ?alarms: Types::Alarms,
+        ?portal_type: String,
+        ?portal_type_configuration: Hash[String, Types::PortalTypeEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor portal_name: String?
+      attr_accessor portal_description: String?
+      attr_accessor portal_contact_email: String?
+      attr_accessor portal_logo_image: Types::Image?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor notification_sender_email: String?
+      attr_accessor alarms: Types::Alarms?
+      attr_accessor portal_type: String?
+      attr_accessor portal_type_configuration: Hash[String, Types::PortalTypeEntry]?
+    end
+
+    class UpdatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_status: Types::PortalStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_status: Types::PortalStatus?
+    end
+
+    class UpdateProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_id: String,
+        ?project_name: String,
+        ?project_description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_id: String?
+      attr_accessor project_name: String?
+      attr_accessor project_description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UserIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VariableValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property_id: String,
+        ?hierarchy_id: String,
+        ?property_path: Array[Types::AssetModelPropertyPathSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_id: String?
+      attr_accessor hierarchy_id: String?
+      attr_accessor property_path: Array[Types::AssetModelPropertyPathSegment]?
+    end
+
+    class Variant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+        ?integer_value: Integer,
+        ?double_value: Float,
+        ?boolean_value: bool,
+        ?null_value: Types::PropertyValueNullValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor integer_value: Integer?
+      attr_accessor double_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor null_value: Types::PropertyValueNullValue?
+    end
+
+    class WarmTierRetentionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_days: Integer,
+        ?unlimited: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_days: Integer?
+      attr_accessor unlimited: bool?
+    end
+
+    module WarmTierState
+      ENABLED: String
+      DISABLED: String
+    end
+  end
+end

@@ -1,0 +1,329 @@
+module Aws::DataPipeline
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DataPipeline::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivatePipelineResponse
+      include Smithy::Client::_Response[Types::ActivatePipelineOutput]
+    end
+    def activate_pipeline: (
+      ?pipeline_id: String,
+      ?parameter_values: Array[
+        {
+          id: String,
+          string_value: String
+        }
+      ],
+      ?start_timestamp: Time
+    ) -> _ActivatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivatePipelineResponse
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsOutput]
+    end
+    def add_tags: (
+      ?pipeline_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineOutput]
+      def pipeline_id: () -> String?
+    end
+    def create_pipeline: (
+      ?name: String,
+      ?unique_id: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
+
+    interface _DeactivatePipelineResponse
+      include Smithy::Client::_Response[Types::DeactivatePipelineOutput]
+    end
+    def deactivate_pipeline: (
+      ?pipeline_id: String,
+      ?cancel_active: bool
+    ) -> _DeactivatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivatePipelineResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_pipeline: (
+      ?pipeline_id: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _DescribeObjectsResponse
+      include Smithy::Client::_Response[Types::DescribeObjectsOutput]
+      def pipeline_objects: () -> Array[Types::PipelineObject]?
+      def marker: () -> String?
+      def has_more_results: () -> bool?
+    end
+    def describe_objects: (
+      ?pipeline_id: String,
+      ?object_ids: Array[String],
+      ?evaluate_expressions: bool,
+      ?marker: String
+    ) -> _DescribeObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeObjectsResponse
+
+    interface _DescribePipelinesResponse
+      include Smithy::Client::_Response[Types::DescribePipelinesOutput]
+      def pipeline_description_list: () -> Array[Types::PipelineDescription]?
+    end
+    def describe_pipelines: (
+      ?pipeline_ids: Array[String]
+    ) -> _DescribePipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePipelinesResponse
+
+    interface _EvaluateExpressionResponse
+      include Smithy::Client::_Response[Types::EvaluateExpressionOutput]
+      def evaluated_expression: () -> String?
+    end
+    def evaluate_expression: (
+      ?pipeline_id: String,
+      ?object_id: String,
+      ?expression: String
+    ) -> _EvaluateExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateExpressionResponse
+
+    interface _GetPipelineDefinitionResponse
+      include Smithy::Client::_Response[Types::GetPipelineDefinitionOutput]
+      def pipeline_objects: () -> Array[Types::PipelineObject]?
+      def parameter_objects: () -> Array[Types::ParameterObject]?
+      def parameter_values: () -> Array[Types::ParameterValue]?
+    end
+    def get_pipeline_definition: (
+      ?pipeline_id: String,
+      ?version: String
+    ) -> _GetPipelineDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineDefinitionResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesOutput]
+      def pipeline_id_list: () -> Array[Types::PipelineIdName]?
+      def marker: () -> String?
+      def has_more_results: () -> bool?
+    end
+    def list_pipelines: (
+      ?marker: String
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
+    interface _PollForTaskResponse
+      include Smithy::Client::_Response[Types::PollForTaskOutput]
+      def task_object: () -> Types::TaskObject?
+    end
+    def poll_for_task: (
+      ?worker_group: String,
+      ?hostname: String,
+      ?instance_identity: {
+        document: String,
+        signature: untyped
+      }
+    ) -> _PollForTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PollForTaskResponse
+
+    interface _PutPipelineDefinitionResponse
+      include Smithy::Client::_Response[Types::PutPipelineDefinitionOutput]
+      def validation_errors: () -> Array[Types::ValidationError]?
+      def validation_warnings: () -> Array[Types::ValidationWarning]?
+      def errored: () -> bool?
+    end
+    def put_pipeline_definition: (
+      ?pipeline_id: String,
+      ?pipeline_objects: Array[
+        {
+          id: String,
+          name: untyped,
+          fields: Array[
+            {
+              key: String,
+              string_value: String,
+              ref_value: untyped
+            }
+          ]
+        }
+      ],
+      ?parameter_objects: Array[
+        {
+          id: String,
+          attributes: Array[
+            {
+              key: String,
+              string_value: String
+            }
+          ]
+        }
+      ],
+      ?parameter_values: Array[
+        {
+          id: String,
+          string_value: String
+        }
+      ]
+    ) -> _PutPipelineDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPipelineDefinitionResponse
+
+    interface _QueryObjectsResponse
+      include Smithy::Client::_Response[Types::QueryObjectsOutput]
+      def ids: () -> Array[String]?
+      def marker: () -> String?
+      def has_more_results: () -> bool?
+    end
+    def query_objects: (
+      ?pipeline_id: String,
+      ?query: {
+        selectors: Array[
+          {
+            field_name: String,
+            operator: {
+              type: String,
+              values: Array[String]
+            }
+          }
+        ]
+      },
+      ?sphere: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _QueryObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryObjectsResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Types::RemoveTagsOutput]
+    end
+    def remove_tags: (
+      ?pipeline_id: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _ReportTaskProgressResponse
+      include Smithy::Client::_Response[Types::ReportTaskProgressOutput]
+      def canceled: () -> bool?
+    end
+    def report_task_progress: (
+      ?task_id: String,
+      ?fields: Array[
+        {
+          key: String,
+          string_value: String,
+          ref_value: untyped
+        }
+      ]
+    ) -> _ReportTaskProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReportTaskProgressResponse
+
+    interface _ReportTaskRunnerHeartbeatResponse
+      include Smithy::Client::_Response[Types::ReportTaskRunnerHeartbeatOutput]
+      def terminate: () -> bool?
+    end
+    def report_task_runner_heartbeat: (
+      ?taskrunner_id: String,
+      ?worker_group: String,
+      ?hostname: String
+    ) -> _ReportTaskRunnerHeartbeatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReportTaskRunnerHeartbeatResponse
+
+    interface _SetStatusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_status: (
+      ?pipeline_id: String,
+      ?object_ids: Array[String],
+      ?status: String
+    ) -> _SetStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetStatusResponse
+
+    interface _SetTaskStatusResponse
+      include Smithy::Client::_Response[Types::SetTaskStatusOutput]
+    end
+    def set_task_status: (
+      ?task_id: String,
+      ?task_status: String,
+      ?error_id: String,
+      ?error_message: String,
+      ?error_stack_trace: String
+    ) -> _SetTaskStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTaskStatusResponse
+
+    interface _ValidatePipelineDefinitionResponse
+      include Smithy::Client::_Response[Types::ValidatePipelineDefinitionOutput]
+      def validation_errors: () -> Array[Types::ValidationError]?
+      def validation_warnings: () -> Array[Types::ValidationWarning]?
+      def errored: () -> bool?
+    end
+    def validate_pipeline_definition: (
+      ?pipeline_id: String,
+      ?pipeline_objects: Array[
+        {
+          id: String,
+          name: untyped,
+          fields: Array[
+            {
+              key: String,
+              string_value: String,
+              ref_value: untyped
+            }
+          ]
+        }
+      ],
+      ?parameter_objects: Array[
+        {
+          id: String,
+          attributes: Array[
+            {
+              key: String,
+              string_value: String
+            }
+          ]
+        }
+      ],
+      ?parameter_values: Array[
+        {
+          id: String,
+          string_value: String
+        }
+      ]
+    ) -> _ValidatePipelineDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidatePipelineDefinitionResponse
+  end
+end

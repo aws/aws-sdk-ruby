@@ -1,0 +1,5 @@
+  module Aws
+    module Comprehend
+      VERSION: String
+    end
+  end

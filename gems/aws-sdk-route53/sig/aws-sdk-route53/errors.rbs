@@ -1,0 +1,212 @@
+module Aws::Route53
+  module Errors
+    class CidrBlockInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CidrCollectionAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CidrCollectionInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CidrCollectionVersionMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModification < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictingDomainExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictingTypes < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DNSSECNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegationSetAlreadyCreated < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegationSetAlreadyReusable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegationSetInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegationSetNotAvailable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegationSetNotReusable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HealthCheckAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HealthCheckInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HealthCheckVersionMismatch < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HostedZoneAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HostedZoneNotEmpty < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HostedZoneNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HostedZoneNotPrivate < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HostedZonePartiallyDelegated < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientCloudWatchLogsResourcePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgument < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidChangeBatch < Smithy::Client::ServiceError
+      def messages: () -> Array[String]?
+      def message: () -> String?
+    end
+    class InvalidDomainName < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKMSArn < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKeySigningKeyName < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKeySigningKeyStatus < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSigningStatus < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTrafficPolicyDocument < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidVPCId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeySigningKeyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeySigningKeyInParentDSRecord < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeySigningKeyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeySigningKeyWithActiveStatusNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LastVPCAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitsExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchChange < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchCidrCollectionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchCidrLocationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchCloudWatchLogsLogGroup < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchDelegationSet < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchGeoLocation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchHealthCheck < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchHostedZone < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchKeySigningKey < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchQueryLoggingConfig < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchTrafficPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchTrafficPolicyInstance < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PriorRequestNotComplete < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PublicZoneVPCAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueryLoggingConfigAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyHealthChecks < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyHostedZones < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyKeySigningKeys < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrafficPolicies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrafficPolicyInstances < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrafficPolicyVersionsForCurrentPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyVPCAssociationAuthorizations < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrafficPolicyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrafficPolicyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrafficPolicyInstanceAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VPCAssociationAuthorizationNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VPCAssociationNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

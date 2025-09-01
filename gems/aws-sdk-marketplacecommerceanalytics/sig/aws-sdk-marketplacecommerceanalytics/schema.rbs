@@ -1,0 +1,26 @@
+module Aws::MarketplaceCommerceAnalytics
+  module Schema
+    include Smithy::Schema::Shapes
+
+    CustomerDefinedValues: MapShape
+    DataSetPublicationDate: TimestampShape
+    DataSetRequestId: StringShape
+    DataSetType: EnumShape
+    DestinationS3BucketName: StringShape
+    DestinationS3Prefix: StringShape
+    ExceptionMessage: StringShape
+    FromDate: TimestampShape
+    GenerateDataSetRequest: StructureShape
+    GenerateDataSetResult: StructureShape
+    MarketplaceCommerceAnalyticsException: StructureShape
+    OptionalKey: StringShape
+    OptionalValue: StringShape
+    RoleNameArn: StringShape
+    SnsTopicArn: StringShape
+    StartSupportDataExportRequest: StructureShape
+    StartSupportDataExportResult: StructureShape
+    SupportDataSetType: EnumShape
+
+    MarketplaceCommerceAnalytics20150701: ServiceShape
+  end
+end

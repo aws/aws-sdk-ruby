@@ -1,0 +1,5 @@
+  module Aws
+    module SageMakerA2IRuntime
+      VERSION: String
+    end
+  end

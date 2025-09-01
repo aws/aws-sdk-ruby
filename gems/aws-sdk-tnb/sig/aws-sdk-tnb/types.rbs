@@ -1,0 +1,1632 @@
+module Aws::Tnb
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelSolNetworkOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+    end
+
+    class CreateSolFunctionPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSolFunctionPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?onboarding_state: String,
+        ?operational_state: String,
+        ?usage_state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor onboarding_state: String?
+      attr_accessor operational_state: String?
+      attr_accessor usage_state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?ns_name: String,
+        ?ns_description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor ns_name: String?
+      attr_accessor ns_description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSolNetworkInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_info_id: String,
+        ?ns_instance_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_info_id: String?
+      attr_accessor ns_instance_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSolNetworkPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSolNetworkPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_onboarding_state: String,
+        ?nsd_operational_state: String,
+        ?nsd_usage_state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_onboarding_state: String?
+      attr_accessor nsd_operational_state: String?
+      attr_accessor nsd_usage_state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteSolFunctionPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+    end
+
+    class DeleteSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+    end
+
+    class DeleteSolNetworkPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+    end
+
+    module DescriptorContentType
+      TEXT_PLAIN: String
+    end
+
+    class ErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cause: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cause: String?
+      attr_accessor details: String?
+    end
+
+    class FunctionArtifactMeta
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overrides: Array[Types::ToscaOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overrides: Array[Types::ToscaOverride]?
+    end
+
+    class GetSolFunctionInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_instance_id: String?
+    end
+
+    class GetSolFunctionInstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetSolFunctionInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?ns_instance_id: String,
+        ?vnf_pkg_id: String,
+        ?vnfd_id: String,
+        ?vnf_provider: String,
+        ?vnf_product_name: String,
+        ?vnfd_version: String,
+        ?instantiation_state: String,
+        ?instantiated_vnf_info: Types::GetSolVnfInfo,
+        ?metadata: Types::GetSolFunctionInstanceMetadata,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor ns_instance_id: String?
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor vnfd_id: String?
+      attr_accessor vnf_provider: String?
+      attr_accessor vnf_product_name: String?
+      attr_accessor vnfd_version: String?
+      attr_accessor instantiation_state: String?
+      attr_accessor instantiated_vnf_info: Types::GetSolVnfInfo?
+      attr_accessor metadata: Types::GetSolFunctionInstanceMetadata?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSolFunctionPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+        ?accept: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor accept: String?
+    end
+
+    class GetSolFunctionPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?package_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor package_content: String?
+    end
+
+    class GetSolFunctionPackageDescriptorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+        ?accept: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor accept: String?
+    end
+
+    class GetSolFunctionPackageDescriptorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?vnfd: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor vnfd: String?
+    end
+
+    class GetSolFunctionPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+    end
+
+    class GetSolFunctionPackageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnfd: Types::FunctionArtifactMeta,
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnfd: Types::FunctionArtifactMeta?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetSolFunctionPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?onboarding_state: String,
+        ?operational_state: String,
+        ?usage_state: String,
+        ?vnfd_id: String,
+        ?vnf_provider: String,
+        ?vnf_product_name: String,
+        ?vnfd_version: String,
+        ?metadata: Types::GetSolFunctionPackageMetadata,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor onboarding_state: String?
+      attr_accessor operational_state: String?
+      attr_accessor usage_state: String?
+      attr_accessor vnfd_id: String?
+      attr_accessor vnf_provider: String?
+      attr_accessor vnf_product_name: String?
+      attr_accessor vnfd_version: String?
+      attr_accessor metadata: Types::GetSolFunctionPackageMetadata?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSolInstantiatedVnfInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_state: String?
+    end
+
+    class GetSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+    end
+
+    class GetSolNetworkInstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetSolNetworkInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?ns_instance_name: String,
+        ?ns_instance_description: String,
+        ?nsd_id: String,
+        ?nsd_info_id: String,
+        ?ns_state: String,
+        ?lcm_op_info: Types::LcmOperationInfo,
+        ?metadata: Types::GetSolNetworkInstanceMetadata,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor ns_instance_name: String?
+      attr_accessor ns_instance_description: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_info_id: String?
+      attr_accessor ns_state: String?
+      attr_accessor lcm_op_info: Types::LcmOperationInfo?
+      attr_accessor metadata: Types::GetSolNetworkInstanceMetadata?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSolNetworkOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+    end
+
+    class GetSolNetworkOperationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_ns_metadata: Types::UpdateNsMetadata,
+        ?modify_vnf_info_metadata: Types::ModifyVnfInfoMetadata,
+        ?instantiate_metadata: Types::InstantiateMetadata,
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_ns_metadata: Types::UpdateNsMetadata?
+      attr_accessor modify_vnf_info_metadata: Types::ModifyVnfInfoMetadata?
+      attr_accessor instantiate_metadata: Types::InstantiateMetadata?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetSolNetworkOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?operation_state: String,
+        ?ns_instance_id: String,
+        ?lcm_operation_type: String,
+        ?update_type: String,
+        ?error: Types::ProblemDetails,
+        ?metadata: Types::GetSolNetworkOperationMetadata,
+        ?tasks: Array[Types::GetSolNetworkOperationTaskDetails],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor operation_state: String?
+      attr_accessor ns_instance_id: String?
+      attr_accessor lcm_operation_type: String?
+      attr_accessor update_type: String?
+      attr_accessor error: Types::ProblemDetails?
+      attr_accessor metadata: Types::GetSolNetworkOperationMetadata?
+      attr_accessor tasks: Array[Types::GetSolNetworkOperationTaskDetails]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSolNetworkOperationTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_name: String,
+        ?task_context: Hash[String, String],
+        ?task_error_details: Types::ErrorInfo,
+        ?task_status: String,
+        ?task_start_time: Time,
+        ?task_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_name: String?
+      attr_accessor task_context: Hash[String, String]?
+      attr_accessor task_error_details: Types::ErrorInfo?
+      attr_accessor task_status: String?
+      attr_accessor task_start_time: Time?
+      attr_accessor task_end_time: Time?
+    end
+
+    class GetSolNetworkPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?accept: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor accept: String?
+    end
+
+    class GetSolNetworkPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?nsd_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor nsd_content: String?
+    end
+
+    class GetSolNetworkPackageDescriptorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+    end
+
+    class GetSolNetworkPackageDescriptorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?nsd: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor nsd: String?
+    end
+
+    class GetSolNetworkPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+    end
+
+    class GetSolNetworkPackageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd: Types::NetworkArtifactMeta,
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd: Types::NetworkArtifactMeta?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetSolNetworkPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_onboarding_state: String,
+        ?nsd_operational_state: String,
+        ?nsd_usage_state: String,
+        ?nsd_id: String,
+        ?nsd_name: String,
+        ?nsd_version: String,
+        ?vnf_pkg_ids: Array[String],
+        ?metadata: Types::GetSolNetworkPackageMetadata,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_onboarding_state: String?
+      attr_accessor nsd_operational_state: String?
+      attr_accessor nsd_usage_state: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_name: String?
+      attr_accessor nsd_version: String?
+      attr_accessor vnf_pkg_ids: Array[String]?
+      attr_accessor metadata: Types::GetSolNetworkPackageMetadata?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSolVnfInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_state: String,
+        ?vnfc_resource_info: Array[Types::GetSolVnfcResourceInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_state: String?
+      attr_accessor vnfc_resource_info: Array[Types::GetSolVnfcResourceInfo]?
+    end
+
+    class GetSolVnfcResourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::GetSolVnfcResourceInfoMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::GetSolVnfcResourceInfoMetadata?
+    end
+
+    class GetSolVnfcResourceInfoMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_group: String,
+        ?cluster: String,
+        ?helm_chart: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_group: String?
+      attr_accessor cluster: String?
+      attr_accessor helm_chart: String?
+    end
+
+    class InstantiateMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?additional_params_for_ns: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor additional_params_for_ns: Smithy::Schema::document?
+    end
+
+    class InstantiateSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+        ?dry_run: bool,
+        ?additional_params_for_ns: Smithy::Schema::document,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+      attr_accessor dry_run: bool?
+      attr_accessor additional_params_for_ns: Smithy::Schema::document?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InstantiateSolNetworkInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LcmOperationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+    end
+
+    module LcmOperationType
+      INSTANTIATE: String
+      UPDATE: String
+      TERMINATE: String
+    end
+
+    class ListSolFunctionInstanceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?ns_instance_id: String,
+        ?vnf_pkg_id: String,
+        ?vnf_pkg_name: String,
+        ?instantiation_state: String,
+        ?instantiated_vnf_info: Types::GetSolInstantiatedVnfInfo,
+        ?metadata: Types::ListSolFunctionInstanceMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor ns_instance_id: String?
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor vnf_pkg_name: String?
+      attr_accessor instantiation_state: String?
+      attr_accessor instantiated_vnf_info: Types::GetSolInstantiatedVnfInfo?
+      attr_accessor metadata: Types::ListSolFunctionInstanceMetadata?
+    end
+
+    class ListSolFunctionInstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class ListSolFunctionInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolFunctionInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?function_instances: Array[Types::ListSolFunctionInstanceInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor function_instances: Array[Types::ListSolFunctionInstanceInfo]?
+    end
+
+    class ListSolFunctionPackageInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?onboarding_state: String,
+        ?operational_state: String,
+        ?usage_state: String,
+        ?vnfd_id: String,
+        ?vnf_provider: String,
+        ?vnf_product_name: String,
+        ?vnfd_version: String,
+        ?metadata: Types::ListSolFunctionPackageMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor onboarding_state: String?
+      attr_accessor operational_state: String?
+      attr_accessor usage_state: String?
+      attr_accessor vnfd_id: String?
+      attr_accessor vnf_provider: String?
+      attr_accessor vnf_product_name: String?
+      attr_accessor vnfd_version: String?
+      attr_accessor metadata: Types::ListSolFunctionPackageMetadata?
+    end
+
+    class ListSolFunctionPackageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class ListSolFunctionPackagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolFunctionPackagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?function_packages: Array[Types::ListSolFunctionPackageInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor function_packages: Array[Types::ListSolFunctionPackageInfo]?
+    end
+
+    class ListSolNetworkInstanceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?ns_instance_name: String,
+        ?ns_instance_description: String,
+        ?nsd_id: String,
+        ?nsd_info_id: String,
+        ?ns_state: String,
+        ?metadata: Types::ListSolNetworkInstanceMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor ns_instance_name: String?
+      attr_accessor ns_instance_description: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_info_id: String?
+      attr_accessor ns_state: String?
+      attr_accessor metadata: Types::ListSolNetworkInstanceMetadata?
+    end
+
+    class ListSolNetworkInstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class ListSolNetworkInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolNetworkInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?network_instances: Array[Types::ListSolNetworkInstanceInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor network_instances: Array[Types::ListSolNetworkInstanceInfo]?
+    end
+
+    class ListSolNetworkOperationsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?operation_state: String,
+        ?ns_instance_id: String,
+        ?lcm_operation_type: String,
+        ?update_type: String,
+        ?error: Types::ProblemDetails,
+        ?metadata: Types::ListSolNetworkOperationsMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor operation_state: String?
+      attr_accessor ns_instance_id: String?
+      attr_accessor lcm_operation_type: String?
+      attr_accessor update_type: String?
+      attr_accessor error: Types::ProblemDetails?
+      attr_accessor metadata: Types::ListSolNetworkOperationsMetadata?
+    end
+
+    class ListSolNetworkOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolNetworkOperationsMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?vnf_instance_id: String,
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor vnf_instance_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class ListSolNetworkOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?network_operations: Array[Types::ListSolNetworkOperationsInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor network_operations: Array[Types::ListSolNetworkOperationsInfo]?
+    end
+
+    class ListSolNetworkPackageInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_onboarding_state: String,
+        ?nsd_operational_state: String,
+        ?nsd_usage_state: String,
+        ?nsd_id: String,
+        ?nsd_name: String,
+        ?nsd_version: String,
+        ?nsd_designer: String,
+        ?nsd_invariant_id: String,
+        ?vnf_pkg_ids: Array[String],
+        ?metadata: Types::ListSolNetworkPackageMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_onboarding_state: String?
+      attr_accessor nsd_operational_state: String?
+      attr_accessor nsd_usage_state: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_name: String?
+      attr_accessor nsd_version: String?
+      attr_accessor nsd_designer: String?
+      attr_accessor nsd_invariant_id: String?
+      attr_accessor vnf_pkg_ids: Array[String]?
+      attr_accessor metadata: Types::ListSolNetworkPackageMetadata?
+    end
+
+    class ListSolNetworkPackageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor last_modified: Time?
+    end
+
+    class ListSolNetworkPackagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolNetworkPackagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?network_packages: Array[Types::ListSolNetworkPackageInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor network_packages: Array[Types::ListSolNetworkPackageInfo]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ModifyVnfInfoMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_instance_id: String,
+        ?vnf_configurable_properties: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_instance_id: String?
+      attr_accessor vnf_configurable_properties: Smithy::Schema::document?
+    end
+
+    class NetworkArtifactMeta
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overrides: Array[Types::ToscaOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overrides: Array[Types::ToscaOverride]?
+    end
+
+    module NsLcmOperationState
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLING: String
+      CANCELLED: String
+    end
+
+    module NsState
+      INSTANTIATED: String
+      NOT_INSTANTIATED: String
+      UPDATED: String
+      IMPAIRED: String
+      UPDATE_FAILED: String
+      STOPPED: String
+      DELETED: String
+      INSTANTIATE_IN_PROGRESS: String
+      INTENT_TO_UPDATE_IN_PROGRESS: String
+      UPDATE_IN_PROGRESS: String
+      TERMINATE_IN_PROGRESS: String
+    end
+
+    module NsdOnboardingState
+      CREATED: String
+      ONBOARDED: String
+      ERROR: String
+    end
+
+    module NsdOperationalState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module NsdUsageState
+      IN_USE: String
+      NOT_IN_USE: String
+    end
+
+    module OnboardingState
+      CREATED: String
+      ONBOARDED: String
+      ERROR: String
+    end
+
+    module OperationalState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module PackageContentType
+      APPLICATION_ZIP: String
+    end
+
+    class ProblemDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detail: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detail: String?
+      attr_accessor title: String?
+    end
+
+    class PutSolFunctionPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+        ?content_type: String,
+        ?file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor content_type: String?
+      attr_accessor file: String?
+    end
+
+    class PutSolFunctionPackageContentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnfd: Types::FunctionArtifactMeta,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnfd: Types::FunctionArtifactMeta?
+    end
+
+    class PutSolFunctionPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?vnfd_id: String,
+        ?vnf_product_name: String,
+        ?vnf_provider: String,
+        ?vnfd_version: String,
+        ?metadata: Types::PutSolFunctionPackageContentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor vnfd_id: String?
+      attr_accessor vnf_product_name: String?
+      attr_accessor vnf_provider: String?
+      attr_accessor vnfd_version: String?
+      attr_accessor metadata: Types::PutSolFunctionPackageContentMetadata?
+    end
+
+    class PutSolNetworkPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?content_type: String,
+        ?file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor content_type: String?
+      attr_accessor file: String?
+    end
+
+    class PutSolNetworkPackageContentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd: Types::NetworkArtifactMeta,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd: Types::NetworkArtifactMeta?
+    end
+
+    class PutSolNetworkPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_id: String,
+        ?nsd_name: String,
+        ?nsd_version: String,
+        ?vnf_pkg_ids: Array[String],
+        ?metadata: Types::PutSolNetworkPackageContentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_name: String?
+      attr_accessor nsd_version: String?
+      attr_accessor vnf_pkg_ids: Array[String]?
+      attr_accessor metadata: Types::PutSolNetworkPackageContentMetadata?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TaskStatus
+      SCHEDULED: String
+      STARTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      ERROR: String
+      SKIPPED: String
+      CANCELLED: String
+    end
+
+    class TerminateSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TerminateSolNetworkInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ToscaOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor default_value: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNsMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?additional_params_for_ns: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor additional_params_for_ns: Smithy::Schema::document?
+    end
+
+    class UpdateSolFunctionPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+        ?operational_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor operational_state: String?
+    end
+
+    class UpdateSolFunctionPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operational_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operational_state: String?
+    end
+
+    class UpdateSolNetworkInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_instance_id: String,
+        ?update_type: String,
+        ?modify_vnf_info_data: Types::UpdateSolNetworkModify,
+        ?update_ns: Types::UpdateSolNetworkServiceData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_instance_id: String?
+      attr_accessor update_type: String?
+      attr_accessor modify_vnf_info_data: Types::UpdateSolNetworkModify?
+      attr_accessor update_ns: Types::UpdateSolNetworkServiceData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateSolNetworkInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ns_lcm_op_occ_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ns_lcm_op_occ_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateSolNetworkModify
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_instance_id: String,
+        ?vnf_configurable_properties: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_instance_id: String?
+      attr_accessor vnf_configurable_properties: Smithy::Schema::document?
+    end
+
+    class UpdateSolNetworkPackageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?nsd_operational_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor nsd_operational_state: String?
+    end
+
+    class UpdateSolNetworkPackageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_operational_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_operational_state: String?
+    end
+
+    class UpdateSolNetworkServiceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?additional_params_for_ns: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor additional_params_for_ns: Smithy::Schema::document?
+    end
+
+    module UpdateSolNetworkType
+      MODIFY_VNF_INFORMATION: String
+      UPDATE_NS: String
+    end
+
+    module UsageState
+      IN_USE: String
+      NOT_IN_USE: String
+    end
+
+    class ValidateSolFunctionPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnf_pkg_id: String,
+        ?content_type: String,
+        ?file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnf_pkg_id: String?
+      attr_accessor content_type: String?
+      attr_accessor file: String?
+    end
+
+    class ValidateSolFunctionPackageContentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vnfd: Types::FunctionArtifactMeta,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vnfd: Types::FunctionArtifactMeta?
+    end
+
+    class ValidateSolFunctionPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?vnfd_id: String,
+        ?vnf_product_name: String,
+        ?vnf_provider: String,
+        ?vnfd_version: String,
+        ?metadata: Types::ValidateSolFunctionPackageContentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor vnfd_id: String?
+      attr_accessor vnf_product_name: String?
+      attr_accessor vnf_provider: String?
+      attr_accessor vnfd_version: String?
+      attr_accessor metadata: Types::ValidateSolFunctionPackageContentMetadata?
+    end
+
+    class ValidateSolNetworkPackageContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd_info_id: String,
+        ?content_type: String,
+        ?file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd_info_id: String?
+      attr_accessor content_type: String?
+      attr_accessor file: String?
+    end
+
+    class ValidateSolNetworkPackageContentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nsd: Types::NetworkArtifactMeta,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nsd: Types::NetworkArtifactMeta?
+    end
+
+    class ValidateSolNetworkPackageContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?nsd_id: String,
+        ?nsd_name: String,
+        ?nsd_version: String,
+        ?vnf_pkg_ids: Array[String],
+        ?metadata: Types::ValidateSolNetworkPackageContentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor nsd_id: String?
+      attr_accessor nsd_name: String?
+      attr_accessor nsd_version: String?
+      attr_accessor vnf_pkg_ids: Array[String]?
+      attr_accessor metadata: Types::ValidateSolNetworkPackageContentMetadata?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VnfInstantiationState
+      INSTANTIATED: String
+      NOT_INSTANTIATED: String
+    end
+
+    module VnfOperationalState
+      STARTED: String
+      STOPPED: String
+    end
+  end
+end

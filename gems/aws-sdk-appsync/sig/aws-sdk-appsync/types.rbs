@@ -1,0 +1,3429 @@
+module Aws::AppSync
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AdditionalAuthenticationProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+        ?open_id_connect_config: Types::OpenIDConnectConfig,
+        ?user_pool_config: Types::CognitoUserPoolConfig,
+        ?lambda_authorizer_config: Types::LambdaAuthorizerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig?
+      attr_accessor user_pool_config: Types::CognitoUserPoolConfig?
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig?
+    end
+
+    class Api
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?owner_contact: String,
+        ?tags: Hash[String, String],
+        ?dns: Hash[String, String],
+        ?api_arn: String,
+        ?created: Time,
+        ?xray_enabled: bool,
+        ?waf_web_acl_arn: String,
+        ?event_config: Types::EventConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor owner_contact: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor dns: Hash[String, String]?
+      attr_accessor api_arn: String?
+      attr_accessor created: Time?
+      attr_accessor xray_enabled: bool?
+      attr_accessor waf_web_acl_arn: String?
+      attr_accessor event_config: Types::EventConfig?
+    end
+
+    class ApiAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?api_id: String,
+        ?association_status: String,
+        ?deployment_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor api_id: String?
+      attr_accessor association_status: String?
+      attr_accessor deployment_detail: String?
+    end
+
+    class ApiCache
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttl: Integer,
+        ?api_caching_behavior: String,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?type: String,
+        ?status: String,
+        ?health_metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttl: Integer?
+      attr_accessor api_caching_behavior: String?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor health_metrics_config: String?
+    end
+
+    module ApiCacheStatus
+      AVAILABLE: String
+      CREATING: String
+      DELETING: String
+      MODIFYING: String
+      FAILED: String
+    end
+
+    module ApiCacheType
+      T2_SMALL: String
+      T2_MEDIUM: String
+      R4_LARGE: String
+      R4_XLARGE: String
+      R4_2XLARGE: String
+      R4_4XLARGE: String
+      R4_8XLARGE: String
+      SMALL: String
+      MEDIUM: String
+      LARGE: String
+      XLARGE: String
+      LARGE_2X: String
+      LARGE_4X: String
+      LARGE_8X: String
+      LARGE_12X: String
+    end
+
+    module ApiCachingBehavior
+      FULL_REQUEST_CACHING: String
+      PER_RESOLVER_CACHING: String
+      OPERATION_LEVEL_CACHING: String
+    end
+
+    class ApiKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?description: String,
+        ?expires: Integer,
+        ?deletes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor expires: Integer?
+      attr_accessor deletes: Integer?
+    end
+
+    class ApiKeyLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApiKeyValidityOutOfBoundsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApiLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AppSyncRuntime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?runtime_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor runtime_version: String?
+    end
+
+    class AssociateApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor api_id: String?
+    end
+
+    class AssociateApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_association: Types::ApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_association: Types::ApiAssociation?
+    end
+
+    class AssociateMergedGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_identifier: String,
+        ?merged_api_identifier: String,
+        ?description: String,
+        ?source_api_association_config: Types::SourceApiAssociationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_identifier: String?
+      attr_accessor merged_api_identifier: String?
+      attr_accessor description: String?
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig?
+    end
+
+    class AssociateMergedGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association: Types::SourceApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association: Types::SourceApiAssociation?
+    end
+
+    class AssociateSourceGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merged_api_identifier: String,
+        ?source_api_identifier: String,
+        ?description: String,
+        ?source_api_association_config: Types::SourceApiAssociationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merged_api_identifier: String?
+      attr_accessor source_api_identifier: String?
+      attr_accessor description: String?
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig?
+    end
+
+    class AssociateSourceGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association: Types::SourceApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association: Types::SourceApiAssociation?
+    end
+
+    module AssociationStatus
+      Processing: String
+      Failed: String
+      Success: String
+    end
+
+    class AuthMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_type: String?
+    end
+
+    class AuthProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_type: String,
+        ?cognito_config: Types::CognitoConfig,
+        ?open_id_connect_config: Types::OpenIDConnectConfig,
+        ?lambda_authorizer_config: Types::LambdaAuthorizerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_type: String?
+      attr_accessor cognito_config: Types::CognitoConfig?
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig?
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig?
+    end
+
+    module AuthenticationType
+      API_KEY: String
+      AWS_IAM: String
+      AMAZON_COGNITO_USER_POOLS: String
+      OPENID_CONNECT: String
+      AWS_LAMBDA: String
+    end
+
+    class AuthorizationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_type: String,
+        ?aws_iam_config: Types::AwsIamConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_type: String?
+      attr_accessor aws_iam_config: Types::AwsIamConfig?
+    end
+
+    module AuthorizationType
+      AWS_IAM: String
+    end
+
+    class AwsIamConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_region: String,
+        ?signing_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_region: String?
+      attr_accessor signing_service_name: String?
+    end
+
+    class BadRequestDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_errors: Array[Types::CodeError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_errors: Array[Types::CodeError]?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?detail: Types::BadRequestDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor detail: Types::BadRequestDetail?
+    end
+
+    module BadRequestReason
+      CODE_ERROR: String
+    end
+
+    module CacheHealthMetricsConfig
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class CachingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttl: Integer,
+        ?caching_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttl: Integer?
+      attr_accessor caching_keys: Array[String]?
+    end
+
+    class ChannelNamespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?subscribe_auth_modes: Array[Types::AuthMode],
+        ?publish_auth_modes: Array[Types::AuthMode],
+        ?code_handlers: String,
+        ?tags: Hash[String, String],
+        ?channel_namespace_arn: String,
+        ?created: Time,
+        ?last_modified: Time,
+        ?handler_configs: Types::HandlerConfigs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor subscribe_auth_modes: Array[Types::AuthMode]?
+      attr_accessor publish_auth_modes: Array[Types::AuthMode]?
+      attr_accessor code_handlers: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor channel_namespace_arn: String?
+      attr_accessor created: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor handler_configs: Types::HandlerConfigs?
+    end
+
+    class CodeError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_type: String,
+        ?value: String,
+        ?location: Types::CodeErrorLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_type: String?
+      attr_accessor value: String?
+      attr_accessor location: Types::CodeErrorLocation?
+    end
+
+    class CodeErrorLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line: Integer,
+        ?column: Integer,
+        ?span: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line: Integer?
+      attr_accessor column: Integer?
+      attr_accessor span: Integer?
+    end
+
+    class CognitoConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?aws_region: String,
+        ?app_id_client_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor app_id_client_regex: String?
+    end
+
+    class CognitoUserPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?aws_region: String,
+        ?app_id_client_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor app_id_client_regex: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConflictDetectionType
+      VERSION: String
+      NONE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConflictHandlerType
+      OPTIMISTIC_CONCURRENCY: String
+      LAMBDA: String
+      AUTOMERGE: String
+      NONE: String
+    end
+
+    class CreateApiCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?ttl: Integer,
+        ?transit_encryption_enabled: bool,
+        ?at_rest_encryption_enabled: bool,
+        ?api_caching_behavior: String,
+        ?type: String,
+        ?health_metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor ttl: Integer?
+      attr_accessor transit_encryption_enabled: bool?
+      attr_accessor at_rest_encryption_enabled: bool?
+      attr_accessor api_caching_behavior: String?
+      attr_accessor type: String?
+      attr_accessor health_metrics_config: String?
+    end
+
+    class CreateApiCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_cache: Types::ApiCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_cache: Types::ApiCache?
+    end
+
+    class CreateApiKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?description: String,
+        ?expires: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor description: String?
+      attr_accessor expires: Integer?
+    end
+
+    class CreateApiKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: Types::ApiKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: Types::ApiKey?
+    end
+
+    class CreateApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?owner_contact: String,
+        ?tags: Hash[String, String],
+        ?event_config: Types::EventConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor owner_contact: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor event_config: Types::EventConfig?
+    end
+
+    class CreateApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api: Types::Api,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api: Types::Api?
+    end
+
+    class CreateChannelNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?subscribe_auth_modes: Array[Types::AuthMode],
+        ?publish_auth_modes: Array[Types::AuthMode],
+        ?code_handlers: String,
+        ?tags: Hash[String, String],
+        ?handler_configs: Types::HandlerConfigs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor subscribe_auth_modes: Array[Types::AuthMode]?
+      attr_accessor publish_auth_modes: Array[Types::AuthMode]?
+      attr_accessor code_handlers: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor handler_configs: Types::HandlerConfigs?
+    end
+
+    class CreateChannelNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_namespace: Types::ChannelNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_namespace: Types::ChannelNamespace?
+    end
+
+    class CreateDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?service_role_arn: String,
+        ?dynamodb_config: Types::DynamodbDataSourceConfig,
+        ?lambda_config: Types::LambdaDataSourceConfig,
+        ?elasticsearch_config: Types::ElasticsearchDataSourceConfig,
+        ?open_search_service_config: Types::OpenSearchServiceDataSourceConfig,
+        ?http_config: Types::HttpDataSourceConfig,
+        ?relational_database_config: Types::RelationalDatabaseDataSourceConfig,
+        ?event_bridge_config: Types::EventBridgeDataSourceConfig,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor service_role_arn: String?
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig?
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig?
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig?
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig?
+      attr_accessor http_config: Types::HttpDataSourceConfig?
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig?
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig?
+      attr_accessor metrics_config: String?
+    end
+
+    class CreateDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    class CreateDomainNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?certificate_arn: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDomainNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name_config: Types::DomainNameConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name_config: Types::DomainNameConfig?
+    end
+
+    class CreateFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?description: String,
+        ?data_source_name: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?function_version: String,
+        ?sync_config: Types::SyncConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor data_source_name: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor function_version: String?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+    end
+
+    class CreateFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_configuration: Types::FunctionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_configuration: Types::FunctionConfiguration?
+    end
+
+    class CreateGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?log_config: Types::LogConfig,
+        ?authentication_type: String,
+        ?user_pool_config: Types::UserPoolConfig,
+        ?open_id_connect_config: Types::OpenIDConnectConfig,
+        ?tags: Hash[String, String],
+        ?additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider],
+        ?xray_enabled: bool,
+        ?lambda_authorizer_config: Types::LambdaAuthorizerConfig,
+        ?api_type: String,
+        ?merged_api_execution_role_arn: String,
+        ?visibility: String,
+        ?owner_contact: String,
+        ?introspection_config: String,
+        ?query_depth_limit: Integer,
+        ?resolver_count_limit: Integer,
+        ?enhanced_metrics_config: Types::EnhancedMetricsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor log_config: Types::LogConfig?
+      attr_accessor authentication_type: String?
+      attr_accessor user_pool_config: Types::UserPoolConfig?
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider]?
+      attr_accessor xray_enabled: bool?
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig?
+      attr_accessor api_type: String?
+      attr_accessor merged_api_execution_role_arn: String?
+      attr_accessor visibility: String?
+      attr_accessor owner_contact: String?
+      attr_accessor introspection_config: String?
+      attr_accessor query_depth_limit: Integer?
+      attr_accessor resolver_count_limit: Integer?
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig?
+    end
+
+    class CreateGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graphql_api: Types::GraphqlApi,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graphql_api: Types::GraphqlApi?
+    end
+
+    class CreateResolverRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?field_name: String,
+        ?data_source_name: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?kind: String,
+        ?pipeline_config: Types::PipelineConfig,
+        ?sync_config: Types::SyncConfig,
+        ?caching_config: Types::CachingConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor field_name: String?
+      attr_accessor data_source_name: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor kind: String?
+      attr_accessor pipeline_config: Types::PipelineConfig?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor caching_config: Types::CachingConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+      attr_accessor metrics_config: String?
+    end
+
+    class CreateResolverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolver: Types::Resolver,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolver: Types::Resolver?
+    end
+
+    class CreateTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?definition: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor definition: String?
+      attr_accessor format: String?
+    end
+
+    class CreateTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::Type,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::Type?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?service_role_arn: String,
+        ?dynamodb_config: Types::DynamodbDataSourceConfig,
+        ?lambda_config: Types::LambdaDataSourceConfig,
+        ?elasticsearch_config: Types::ElasticsearchDataSourceConfig,
+        ?open_search_service_config: Types::OpenSearchServiceDataSourceConfig,
+        ?http_config: Types::HttpDataSourceConfig,
+        ?relational_database_config: Types::RelationalDatabaseDataSourceConfig,
+        ?event_bridge_config: Types::EventBridgeDataSourceConfig,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor service_role_arn: String?
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig?
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig?
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig?
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig?
+      attr_accessor http_config: Types::HttpDataSourceConfig?
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig?
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig?
+      attr_accessor metrics_config: String?
+    end
+
+    class DataSourceIntrospectionModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fields: Array[Types::DataSourceIntrospectionModelField],
+        ?primary_key: Types::DataSourceIntrospectionModelIndex,
+        ?indexes: Array[Types::DataSourceIntrospectionModelIndex],
+        ?sdl: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fields: Array[Types::DataSourceIntrospectionModelField]?
+      attr_accessor primary_key: Types::DataSourceIntrospectionModelIndex?
+      attr_accessor indexes: Array[Types::DataSourceIntrospectionModelIndex]?
+      attr_accessor sdl: String?
+    end
+
+    class DataSourceIntrospectionModelField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Types::DataSourceIntrospectionModelFieldType,
+        ?length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Types::DataSourceIntrospectionModelFieldType?
+      attr_accessor length: Integer?
+    end
+
+    class DataSourceIntrospectionModelFieldType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kind: String,
+        ?name: String,
+        ?type: Types::DataSourceIntrospectionModelFieldType,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kind: String?
+      attr_accessor name: String?
+      attr_accessor type: Types::DataSourceIntrospectionModelFieldType?
+      attr_accessor values: Array[String]?
+    end
+
+    class DataSourceIntrospectionModelIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fields: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fields: Array[String]?
+    end
+
+    class DataSourceIntrospectionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?models: Array[Types::DataSourceIntrospectionModel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor models: Array[Types::DataSourceIntrospectionModel]?
+      attr_accessor next_token: String?
+    end
+
+    module DataSourceIntrospectionStatus
+      PROCESSING: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    module DataSourceLevelMetricsBehavior
+      FULL_REQUEST_DATA_SOURCE_METRICS: String
+      PER_DATA_SOURCE_METRICS: String
+    end
+
+    module DataSourceLevelMetricsConfig
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module DataSourceType
+      AWS_LAMBDA: String
+      AMAZON_DYNAMODB: String
+      AMAZON_ELASTICSEARCH: String
+      NONE: String
+      HTTP: String
+      RELATIONAL_DATABASE: String
+      AMAZON_OPENSEARCH_SERVICE: String
+      AMAZON_EVENTBRIDGE: String
+      AMAZON_BEDROCK_RUNTIME: String
+    end
+
+    module DefaultAction
+      ALLOW: String
+      DENY: String
+    end
+
+    class DeleteApiCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class DeleteApiCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApiKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteApiKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class DeleteApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteChannelNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteChannelNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDomainNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DeleteDomainNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?function_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor function_id: String?
+    end
+
+    class DeleteFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class DeleteGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResolverRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor field_name: String?
+    end
+
+    class DeleteResolverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+    end
+
+    class DeleteTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeltaSyncConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_table_ttl: Integer,
+        ?delta_sync_table_name: String,
+        ?delta_sync_table_ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_table_ttl: Integer?
+      attr_accessor delta_sync_table_name: String?
+      attr_accessor delta_sync_table_ttl: Integer?
+    end
+
+    class DisassociateApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DisassociateApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMergedGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_identifier: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_identifier: String?
+      attr_accessor association_id: String?
+    end
+
+    class DisassociateMergedGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association_status: String?
+    end
+
+    class DisassociateSourceGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merged_api_identifier: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merged_api_identifier: String?
+      attr_accessor association_id: String?
+    end
+
+    class DisassociateSourceGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association_status: String?
+    end
+
+    class DomainNameConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?description: String,
+        ?certificate_arn: String,
+        ?appsync_domain_name: String,
+        ?hosted_zone_id: String,
+        ?tags: Hash[String, String],
+        ?domain_name_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor description: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor appsync_domain_name: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor domain_name_arn: String?
+    end
+
+    class DynamodbDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?aws_region: String,
+        ?use_caller_credentials: bool,
+        ?delta_sync_config: Types::DeltaSyncConfig,
+        ?versioned: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor aws_region: String?
+      attr_accessor use_caller_credentials: bool?
+      attr_accessor delta_sync_config: Types::DeltaSyncConfig?
+      attr_accessor versioned: bool?
+    end
+
+    class ElasticsearchDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor aws_region: String?
+    end
+
+    class EnhancedMetricsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolver_level_metrics_behavior: String,
+        ?data_source_level_metrics_behavior: String,
+        ?operation_level_metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolver_level_metrics_behavior: String?
+      attr_accessor data_source_level_metrics_behavior: String?
+      attr_accessor operation_level_metrics_config: String?
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EvaluateCodeErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code_errors: Array[Types::CodeError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code_errors: Array[Types::CodeError]?
+    end
+
+    class EvaluateCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+        ?context: String,
+        ?function: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+      attr_accessor context: String?
+      attr_accessor function: String?
+    end
+
+    class EvaluateCodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_result: String,
+        ?error: Types::EvaluateCodeErrorDetail,
+        ?logs: Array[String],
+        ?stash: String,
+        ?out_errors: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_result: String?
+      attr_accessor error: Types::EvaluateCodeErrorDetail?
+      attr_accessor logs: Array[String]?
+      attr_accessor stash: String?
+      attr_accessor out_errors: String?
+    end
+
+    class EvaluateMappingTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template: String?
+      attr_accessor context: String?
+    end
+
+    class EvaluateMappingTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_result: String,
+        ?error: Types::ErrorDetail,
+        ?logs: Array[String],
+        ?stash: String,
+        ?out_errors: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_result: String?
+      attr_accessor error: Types::ErrorDetail?
+      attr_accessor logs: Array[String]?
+      attr_accessor stash: String?
+      attr_accessor out_errors: String?
+    end
+
+    class EventBridgeDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+    end
+
+    class EventConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_providers: Array[Types::AuthProvider],
+        ?connection_auth_modes: Array[Types::AuthMode],
+        ?default_publish_auth_modes: Array[Types::AuthMode],
+        ?default_subscribe_auth_modes: Array[Types::AuthMode],
+        ?log_config: Types::EventLogConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_providers: Array[Types::AuthProvider]?
+      attr_accessor connection_auth_modes: Array[Types::AuthMode]?
+      attr_accessor default_publish_auth_modes: Array[Types::AuthMode]?
+      attr_accessor default_subscribe_auth_modes: Array[Types::AuthMode]?
+      attr_accessor log_config: Types::EventLogConfig?
+    end
+
+    class EventLogConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_level: String,
+        ?cloud_watch_logs_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_level: String?
+      attr_accessor cloud_watch_logs_role_arn: String?
+    end
+
+    module EventLogLevel
+      NONE: String
+      ERROR: String
+      ALL: String
+      INFO: String
+      DEBUG: String
+    end
+
+    module FieldLogLevel
+      NONE: String
+      ERROR: String
+      ALL: String
+      INFO: String
+      DEBUG: String
+    end
+
+    class FlushApiCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class FlushApiCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class FunctionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_id: String,
+        ?function_arn: String,
+        ?name: String,
+        ?description: String,
+        ?data_source_name: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?function_version: String,
+        ?sync_config: Types::SyncConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_id: String?
+      attr_accessor function_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor data_source_name: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor function_version: String?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+    end
+
+    class GetApiAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetApiAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_association: Types::ApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_association: Types::ApiAssociation?
+    end
+
+    class GetApiCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class GetApiCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_cache: Types::ApiCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_cache: Types::ApiCache?
+    end
+
+    class GetApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class GetApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api: Types::Api,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api: Types::Api?
+    end
+
+    class GetChannelNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+    end
+
+    class GetChannelNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_namespace: Types::ChannelNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_namespace: Types::ChannelNamespace?
+    end
+
+    class GetDataSourceIntrospectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?introspection_id: String,
+        ?include_models_sdl: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor introspection_id: String?
+      attr_accessor include_models_sdl: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetDataSourceIntrospectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?introspection_id: String,
+        ?introspection_status: String,
+        ?introspection_status_detail: String,
+        ?introspection_result: Types::DataSourceIntrospectionResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor introspection_id: String?
+      attr_accessor introspection_status: String?
+      attr_accessor introspection_status_detail: String?
+      attr_accessor introspection_result: Types::DataSourceIntrospectionResult?
+    end
+
+    class GetDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    class GetDomainNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetDomainNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name_config: Types::DomainNameConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name_config: Types::DomainNameConfig?
+    end
+
+    class GetFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?function_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor function_id: String?
+    end
+
+    class GetFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_configuration: Types::FunctionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_configuration: Types::FunctionConfiguration?
+    end
+
+    class GetGraphqlApiEnvironmentVariablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class GetGraphqlApiEnvironmentVariablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_variables: Hash[String, String]?
+    end
+
+    class GetGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class GetGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graphql_api: Types::GraphqlApi,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graphql_api: Types::GraphqlApi?
+    end
+
+    class GetIntrospectionSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?format: String,
+        ?include_directives: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor format: String?
+      attr_accessor include_directives: bool?
+    end
+
+    class GetIntrospectionSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: String?
+    end
+
+    class GetResolverRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor field_name: String?
+    end
+
+    class GetResolverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolver: Types::Resolver,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolver: Types::Resolver?
+    end
+
+    class GetSchemaCreationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+    end
+
+    class GetSchemaCreationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor details: String?
+    end
+
+    class GetSourceApiAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merged_api_identifier: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merged_api_identifier: String?
+      attr_accessor association_id: String?
+    end
+
+    class GetSourceApiAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association: Types::SourceApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association: Types::SourceApiAssociation?
+    end
+
+    class GetTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor format: String?
+    end
+
+    class GetTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::Type,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::Type?
+    end
+
+    module GraphQLApiIntrospectionConfig
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module GraphQLApiType
+      GRAPHQL: String
+      MERGED: String
+    end
+
+    module GraphQLApiVisibility
+      GLOBAL: String
+      PRIVATE: String
+    end
+
+    class GraphQLSchemaException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GraphqlApi
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?api_id: String,
+        ?authentication_type: String,
+        ?log_config: Types::LogConfig,
+        ?user_pool_config: Types::UserPoolConfig,
+        ?open_id_connect_config: Types::OpenIDConnectConfig,
+        ?arn: String,
+        ?uris: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider],
+        ?xray_enabled: bool,
+        ?waf_web_acl_arn: String,
+        ?lambda_authorizer_config: Types::LambdaAuthorizerConfig,
+        ?dns: Hash[String, String],
+        ?visibility: String,
+        ?api_type: String,
+        ?merged_api_execution_role_arn: String,
+        ?owner: String,
+        ?owner_contact: String,
+        ?introspection_config: String,
+        ?query_depth_limit: Integer,
+        ?resolver_count_limit: Integer,
+        ?enhanced_metrics_config: Types::EnhancedMetricsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor api_id: String?
+      attr_accessor authentication_type: String?
+      attr_accessor log_config: Types::LogConfig?
+      attr_accessor user_pool_config: Types::UserPoolConfig?
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig?
+      attr_accessor arn: String?
+      attr_accessor uris: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider]?
+      attr_accessor xray_enabled: bool?
+      attr_accessor waf_web_acl_arn: String?
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig?
+      attr_accessor dns: Hash[String, String]?
+      attr_accessor visibility: String?
+      attr_accessor api_type: String?
+      attr_accessor merged_api_execution_role_arn: String?
+      attr_accessor owner: String?
+      attr_accessor owner_contact: String?
+      attr_accessor introspection_config: String?
+      attr_accessor query_depth_limit: Integer?
+      attr_accessor resolver_count_limit: Integer?
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig?
+    end
+
+    module HandlerBehavior
+      CODE: String
+      DIRECT: String
+    end
+
+    class HandlerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+        ?integration: Types::Integration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+      attr_accessor integration: Types::Integration?
+    end
+
+    class HandlerConfigs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_publish: Types::HandlerConfig,
+        ?on_subscribe: Types::HandlerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_publish: Types::HandlerConfig?
+      attr_accessor on_subscribe: Types::HandlerConfig?
+    end
+
+    class HttpDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?authorization_config: Types::AuthorizationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor authorization_config: Types::AuthorizationConfig?
+    end
+
+    class Integration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?lambda_config: Types::LambdaConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor lambda_config: Types::LambdaConfig?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InvokeType
+      REQUEST_RESPONSE: String
+      EVENT: String
+    end
+
+    class LambdaAuthorizerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorizer_result_ttl_in_seconds: Integer,
+        ?authorizer_uri: String,
+        ?identity_validation_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorizer_result_ttl_in_seconds: Integer?
+      attr_accessor authorizer_uri: String?
+      attr_accessor identity_validation_expression: String?
+    end
+
+    class LambdaConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoke_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoke_type: String?
+    end
+
+    class LambdaConflictHandlerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_conflict_handler_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_conflict_handler_arn: String?
+    end
+
+    class LambdaDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_function_arn: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApiKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApiKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_keys: Array[Types::ApiKey],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_keys: Array[Types::ApiKey]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apis: Array[Types::Api],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apis: Array[Types::Api]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelNamespacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListChannelNamespacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_namespaces: Array[Types::ChannelNamespace],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_namespaces: Array[Types::ChannelNamespace]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_sources: Array[Types::DataSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainNamesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDomainNamesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name_configs: Array[Types::DomainNameConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name_configs: Array[Types::DomainNameConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFunctionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFunctionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?functions: Array[Types::FunctionConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor functions: Array[Types::FunctionConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGraphqlApisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?api_type: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor api_type: String?
+      attr_accessor owner: String?
+    end
+
+    class ListGraphqlApisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graphql_apis: Array[Types::GraphqlApi],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graphql_apis: Array[Types::GraphqlApi]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResolversByFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?function_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor function_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResolversByFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolvers: Array[Types::Resolver],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolvers: Array[Types::Resolver]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResolversRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResolversResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolvers: Array[Types::Resolver],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolvers: Array[Types::Resolver]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourceApiAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSourceApiAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association_summaries: Array[Types::SourceApiAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association_summaries: Array[Types::SourceApiAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTypesByAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merged_api_identifier: String,
+        ?association_id: String,
+        ?format: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merged_api_identifier: String?
+      attr_accessor association_id: String?
+      attr_accessor format: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTypesByAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[Types::Type],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[Types::Type]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?format: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor format: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[Types::Type],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[Types::Type]?
+      attr_accessor next_token: String?
+    end
+
+    class LogConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_log_level: String,
+        ?cloud_watch_logs_role_arn: String,
+        ?exclude_verbose_content: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_log_level: String?
+      attr_accessor cloud_watch_logs_role_arn: String?
+      attr_accessor exclude_verbose_content: bool?
+    end
+
+    module MergeType
+      MANUAL_MERGE: String
+      AUTO_MERGE: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OpenIDConnectConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?client_id: String,
+        ?iat_ttl: Integer,
+        ?auth_ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor client_id: String?
+      attr_accessor iat_ttl: Integer?
+      attr_accessor auth_ttl: Integer?
+    end
+
+    class OpenSearchServiceDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor aws_region: String?
+    end
+
+    module OperationLevelMetricsConfig
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module OutputType
+      SDL: String
+      JSON: String
+    end
+
+    module Ownership
+      CURRENT_ACCOUNT: String
+      OTHER_ACCOUNTS: String
+    end
+
+    class PipelineConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?functions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor functions: Array[String]?
+    end
+
+    class PutGraphqlApiEnvironmentVariablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?environment_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor environment_variables: Hash[String, String]?
+    end
+
+    class PutGraphqlApiEnvironmentVariablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_variables: Hash[String, String]?
+    end
+
+    class RdsDataApiConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?database_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor database_name: String?
+    end
+
+    class RdsHttpEndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_region: String,
+        ?db_cluster_identifier: String,
+        ?database_name: String,
+        ?schema: String,
+        ?aws_secret_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_region: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor database_name: String?
+      attr_accessor schema: String?
+      attr_accessor aws_secret_store_arn: String?
+    end
+
+    class RelationalDatabaseDataSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relational_database_source_type: String,
+        ?rds_http_endpoint_config: Types::RdsHttpEndpointConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relational_database_source_type: String?
+      attr_accessor rds_http_endpoint_config: Types::RdsHttpEndpointConfig?
+    end
+
+    module RelationalDatabaseSourceType
+      RDS_HTTP_ENDPOINT: String
+    end
+
+    class Resolver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?field_name: String,
+        ?data_source_name: String,
+        ?resolver_arn: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?kind: String,
+        ?pipeline_config: Types::PipelineConfig,
+        ?sync_config: Types::SyncConfig,
+        ?caching_config: Types::CachingConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor field_name: String?
+      attr_accessor data_source_name: String?
+      attr_accessor resolver_arn: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor kind: String?
+      attr_accessor pipeline_config: Types::PipelineConfig?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor caching_config: Types::CachingConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+      attr_accessor metrics_config: String?
+    end
+
+    module ResolverKind
+      UNIT: String
+      PIPELINE: String
+    end
+
+    module ResolverLevelMetricsBehavior
+      FULL_REQUEST_RESOLVER_METRICS: String
+      PER_RESOLVER_METRICS: String
+    end
+
+    module ResolverLevelMetricsConfig
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module RuntimeName
+      APPSYNC_JS: String
+    end
+
+    module SchemaStatus
+      Processing: String
+      Active: String
+      Deleting: String
+      Failed: String
+      Success: String
+      NotApplicable: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceApiAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?association_arn: String,
+        ?source_api_id: String,
+        ?source_api_arn: String,
+        ?merged_api_arn: String,
+        ?merged_api_id: String,
+        ?description: String,
+        ?source_api_association_config: Types::SourceApiAssociationConfig,
+        ?source_api_association_status: String,
+        ?source_api_association_status_detail: String,
+        ?last_successful_merge_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor association_arn: String?
+      attr_accessor source_api_id: String?
+      attr_accessor source_api_arn: String?
+      attr_accessor merged_api_arn: String?
+      attr_accessor merged_api_id: String?
+      attr_accessor description: String?
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig?
+      attr_accessor source_api_association_status: String?
+      attr_accessor source_api_association_status_detail: String?
+      attr_accessor last_successful_merge_date: Time?
+    end
+
+    class SourceApiAssociationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_type: String?
+    end
+
+    module SourceApiAssociationStatus
+      MERGE_SCHEDULED: String
+      MERGE_FAILED: String
+      MERGE_SUCCESS: String
+      MERGE_IN_PROGRESS: String
+      AUTO_MERGE_SCHEDULE_FAILED: String
+      DELETION_SCHEDULED: String
+      DELETION_IN_PROGRESS: String
+      DELETION_FAILED: String
+    end
+
+    class SourceApiAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?association_arn: String,
+        ?source_api_id: String,
+        ?source_api_arn: String,
+        ?merged_api_id: String,
+        ?merged_api_arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor association_arn: String?
+      attr_accessor source_api_id: String?
+      attr_accessor source_api_arn: String?
+      attr_accessor merged_api_id: String?
+      attr_accessor merged_api_arn: String?
+      attr_accessor description: String?
+    end
+
+    class StartDataSourceIntrospectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rds_data_api_config: Types::RdsDataApiConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rds_data_api_config: Types::RdsDataApiConfig?
+    end
+
+    class StartDataSourceIntrospectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?introspection_id: String,
+        ?introspection_status: String,
+        ?introspection_status_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor introspection_id: String?
+      attr_accessor introspection_status: String?
+      attr_accessor introspection_status_detail: String?
+    end
+
+    class StartSchemaCreationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor definition: String?
+    end
+
+    class StartSchemaCreationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class StartSchemaMergeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?merged_api_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor merged_api_identifier: String?
+    end
+
+    class StartSchemaMergeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association_status: String?
+    end
+
+    class SyncConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conflict_handler: String,
+        ?conflict_detection: String,
+        ?lambda_conflict_handler_config: Types::LambdaConflictHandlerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conflict_handler: String?
+      attr_accessor conflict_detection: String?
+      attr_accessor lambda_conflict_handler_config: Types::LambdaConflictHandlerConfig?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Type
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?arn: String,
+        ?definition: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor definition: String?
+      attr_accessor format: String?
+    end
+
+    module TypeDefinitionFormat
+      SDL: String
+      JSON: String
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApiCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?ttl: Integer,
+        ?api_caching_behavior: String,
+        ?type: String,
+        ?health_metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor ttl: Integer?
+      attr_accessor api_caching_behavior: String?
+      attr_accessor type: String?
+      attr_accessor health_metrics_config: String?
+    end
+
+    class UpdateApiCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_cache: Types::ApiCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_cache: Types::ApiCache?
+    end
+
+    class UpdateApiKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?id: String,
+        ?description: String,
+        ?expires: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor expires: Integer?
+    end
+
+    class UpdateApiKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: Types::ApiKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: Types::ApiKey?
+    end
+
+    class UpdateApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?owner_contact: String,
+        ?event_config: Types::EventConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor owner_contact: String?
+      attr_accessor event_config: Types::EventConfig?
+    end
+
+    class UpdateApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api: Types::Api,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api: Types::Api?
+    end
+
+    class UpdateChannelNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?subscribe_auth_modes: Array[Types::AuthMode],
+        ?publish_auth_modes: Array[Types::AuthMode],
+        ?code_handlers: String,
+        ?handler_configs: Types::HandlerConfigs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor subscribe_auth_modes: Array[Types::AuthMode]?
+      attr_accessor publish_auth_modes: Array[Types::AuthMode]?
+      attr_accessor code_handlers: String?
+      attr_accessor handler_configs: Types::HandlerConfigs?
+    end
+
+    class UpdateChannelNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_namespace: Types::ChannelNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_namespace: Types::ChannelNamespace?
+    end
+
+    class UpdateDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?service_role_arn: String,
+        ?dynamodb_config: Types::DynamodbDataSourceConfig,
+        ?lambda_config: Types::LambdaDataSourceConfig,
+        ?elasticsearch_config: Types::ElasticsearchDataSourceConfig,
+        ?open_search_service_config: Types::OpenSearchServiceDataSourceConfig,
+        ?http_config: Types::HttpDataSourceConfig,
+        ?relational_database_config: Types::RelationalDatabaseDataSourceConfig,
+        ?event_bridge_config: Types::EventBridgeDataSourceConfig,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor service_role_arn: String?
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig?
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig?
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig?
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig?
+      attr_accessor http_config: Types::HttpDataSourceConfig?
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig?
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig?
+      attr_accessor metrics_config: String?
+    end
+
+    class UpdateDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    class UpdateDomainNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateDomainNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name_config: Types::DomainNameConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name_config: Types::DomainNameConfig?
+    end
+
+    class UpdateFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?description: String,
+        ?function_id: String,
+        ?data_source_name: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?function_version: String,
+        ?sync_config: Types::SyncConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor function_id: String?
+      attr_accessor data_source_name: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor function_version: String?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+    end
+
+    class UpdateFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_configuration: Types::FunctionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_configuration: Types::FunctionConfiguration?
+    end
+
+    class UpdateGraphqlApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?name: String,
+        ?log_config: Types::LogConfig,
+        ?authentication_type: String,
+        ?user_pool_config: Types::UserPoolConfig,
+        ?open_id_connect_config: Types::OpenIDConnectConfig,
+        ?additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider],
+        ?xray_enabled: bool,
+        ?lambda_authorizer_config: Types::LambdaAuthorizerConfig,
+        ?merged_api_execution_role_arn: String,
+        ?owner_contact: String,
+        ?introspection_config: String,
+        ?query_depth_limit: Integer,
+        ?resolver_count_limit: Integer,
+        ?enhanced_metrics_config: Types::EnhancedMetricsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor name: String?
+      attr_accessor log_config: Types::LogConfig?
+      attr_accessor authentication_type: String?
+      attr_accessor user_pool_config: Types::UserPoolConfig?
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig?
+      attr_accessor additional_authentication_providers: Array[Types::AdditionalAuthenticationProvider]?
+      attr_accessor xray_enabled: bool?
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig?
+      attr_accessor merged_api_execution_role_arn: String?
+      attr_accessor owner_contact: String?
+      attr_accessor introspection_config: String?
+      attr_accessor query_depth_limit: Integer?
+      attr_accessor resolver_count_limit: Integer?
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig?
+    end
+
+    class UpdateGraphqlApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graphql_api: Types::GraphqlApi,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graphql_api: Types::GraphqlApi?
+    end
+
+    class UpdateResolverRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?field_name: String,
+        ?data_source_name: String,
+        ?request_mapping_template: String,
+        ?response_mapping_template: String,
+        ?kind: String,
+        ?pipeline_config: Types::PipelineConfig,
+        ?sync_config: Types::SyncConfig,
+        ?caching_config: Types::CachingConfig,
+        ?max_batch_size: Integer,
+        ?runtime: Types::AppSyncRuntime,
+        ?code: String,
+        ?metrics_config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor field_name: String?
+      attr_accessor data_source_name: String?
+      attr_accessor request_mapping_template: String?
+      attr_accessor response_mapping_template: String?
+      attr_accessor kind: String?
+      attr_accessor pipeline_config: Types::PipelineConfig?
+      attr_accessor sync_config: Types::SyncConfig?
+      attr_accessor caching_config: Types::CachingConfig?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor runtime: Types::AppSyncRuntime?
+      attr_accessor code: String?
+      attr_accessor metrics_config: String?
+    end
+
+    class UpdateResolverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolver: Types::Resolver,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolver: Types::Resolver?
+    end
+
+    class UpdateSourceApiAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?merged_api_identifier: String,
+        ?description: String,
+        ?source_api_association_config: Types::SourceApiAssociationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor merged_api_identifier: String?
+      attr_accessor description: String?
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig?
+    end
+
+    class UpdateSourceApiAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_api_association: Types::SourceApiAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_api_association: Types::SourceApiAssociation?
+    end
+
+    class UpdateTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_id: String,
+        ?type_name: String,
+        ?definition: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_id: String?
+      attr_accessor type_name: String?
+      attr_accessor definition: String?
+      attr_accessor format: String?
+    end
+
+    class UpdateTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::Type,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::Type?
+    end
+
+    class UserPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?aws_region: String,
+        ?default_action: String,
+        ?app_id_client_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor default_action: String?
+      attr_accessor app_id_client_regex: String?
+    end
+  end
+end

@@ -1,0 +1,1749 @@
+module Aws::AmplifyBackend
+  module Types
+
+    module AdditionalConstraintsElement
+      REQUIRE_DIGIT: String
+      REQUIRE_LOWERCASE: String
+      REQUIRE_SYMBOL: String
+      REQUIRE_UPPERCASE: String
+    end
+
+    module AuthResources
+      USER_POOL_ONLY: String
+      IDENTITY_POOL_AND_USER_POOL: String
+    end
+
+    module AuthenticatedElement
+      READ: String
+      CREATE_AND_UPDATE: String
+      DELETE: String
+    end
+
+    class BackendAPIAppSyncAuthSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cognito_user_pool_id: String,
+        ?description: String,
+        ?expiration_time: Float,
+        ?open_id_auth_ttl: String,
+        ?open_id_client_id: String,
+        ?open_id_iat_ttl: String,
+        ?open_id_issue_url: String,
+        ?open_id_provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_user_pool_id: String?
+      attr_accessor description: String?
+      attr_accessor expiration_time: Float?
+      attr_accessor open_id_auth_ttl: String?
+      attr_accessor open_id_client_id: String?
+      attr_accessor open_id_iat_ttl: String?
+      attr_accessor open_id_issue_url: String?
+      attr_accessor open_id_provider_name: String?
+    end
+
+    class BackendAPIAuthType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?settings: Types::BackendAPIAppSyncAuthSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor settings: Types::BackendAPIAppSyncAuthSettings?
+    end
+
+    class BackendAPIConflictResolution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolution_strategy: String?
+    end
+
+    class BackendAPIResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_auth_types: Array[Types::BackendAPIAuthType],
+        ?api_name: String,
+        ?conflict_resolution: Types::BackendAPIConflictResolution,
+        ?default_auth_type: Types::BackendAPIAuthType,
+        ?service: String,
+        ?transform_schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_auth_types: Array[Types::BackendAPIAuthType]?
+      attr_accessor api_name: String?
+      attr_accessor conflict_resolution: Types::BackendAPIConflictResolution?
+      attr_accessor default_auth_type: Types::BackendAPIAuthType?
+      attr_accessor service: String?
+      attr_accessor transform_schema: String?
+    end
+
+    class BackendAuthAppleProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?key_id: String,
+        ?private_key: String,
+        ?team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor key_id: String?
+      attr_accessor private_key: String?
+      attr_accessor team_id: String?
+    end
+
+    class BackendAuthSocialProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+    end
+
+    class BackendJobRespObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?create_time: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+        ?update_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor create_time: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+      attr_accessor update_time: String?
+    end
+
+    class BackendStoragePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authenticated: Array[String],
+        ?un_authenticated: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authenticated: Array[String]?
+      attr_accessor un_authenticated: Array[String]?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloneBackendRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?target_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor target_environment_name: String?
+    end
+
+    class CloneBackendResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class CreateBackendAPIRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::BackendAPIResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::BackendAPIResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class CreateBackendAPIResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class CreateBackendAuthForgotPasswordConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_method: String,
+        ?email_settings: Types::EmailSettings,
+        ?sms_settings: Types::SmsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_method: String?
+      attr_accessor email_settings: Types::EmailSettings?
+      attr_accessor sms_settings: Types::SmsSettings?
+    end
+
+    class CreateBackendAuthIdentityPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_name: String,
+        ?unauthenticated_login: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_name: String?
+      attr_accessor unauthenticated_login: bool?
+    end
+
+    class CreateBackendAuthMFAConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mfa_mode: String,
+        ?settings: Types::Settings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mfa_mode: String?
+      attr_accessor settings: Types::Settings?
+    end
+
+    class CreateBackendAuthOAuthConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_prefix: String,
+        ?o_auth_grant_type: String,
+        ?o_auth_scopes: Array[String],
+        ?redirect_sign_in_ur_is: Array[String],
+        ?redirect_sign_out_ur_is: Array[String],
+        ?social_provider_settings: Types::SocialProviderSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_prefix: String?
+      attr_accessor o_auth_grant_type: String?
+      attr_accessor o_auth_scopes: Array[String]?
+      attr_accessor redirect_sign_in_ur_is: Array[String]?
+      attr_accessor redirect_sign_out_ur_is: Array[String]?
+      attr_accessor social_provider_settings: Types::SocialProviderSettings?
+    end
+
+    class CreateBackendAuthPasswordPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_constraints: Array[String],
+        ?minimum_length: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_constraints: Array[String]?
+      attr_accessor minimum_length: Float?
+    end
+
+    class CreateBackendAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::CreateBackendAuthResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class CreateBackendAuthResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_resources: String,
+        ?identity_pool_configs: Types::CreateBackendAuthIdentityPoolConfig,
+        ?service: String,
+        ?user_pool_configs: Types::CreateBackendAuthUserPoolConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_resources: String?
+      attr_accessor identity_pool_configs: Types::CreateBackendAuthIdentityPoolConfig?
+      attr_accessor service: String?
+      attr_accessor user_pool_configs: Types::CreateBackendAuthUserPoolConfig?
+    end
+
+    class CreateBackendAuthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class CreateBackendAuthUserPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forgot_password: Types::CreateBackendAuthForgotPasswordConfig,
+        ?mfa: Types::CreateBackendAuthMFAConfig,
+        ?o_auth: Types::CreateBackendAuthOAuthConfig,
+        ?password_policy: Types::CreateBackendAuthPasswordPolicyConfig,
+        ?required_sign_up_attributes: Array[String],
+        ?sign_in_method: String,
+        ?user_pool_name: String,
+        ?verification_message: Types::CreateBackendAuthVerificationMessageConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forgot_password: Types::CreateBackendAuthForgotPasswordConfig?
+      attr_accessor mfa: Types::CreateBackendAuthMFAConfig?
+      attr_accessor o_auth: Types::CreateBackendAuthOAuthConfig?
+      attr_accessor password_policy: Types::CreateBackendAuthPasswordPolicyConfig?
+      attr_accessor required_sign_up_attributes: Array[String]?
+      attr_accessor sign_in_method: String?
+      attr_accessor user_pool_name: String?
+      attr_accessor verification_message: Types::CreateBackendAuthVerificationMessageConfig?
+    end
+
+    class CreateBackendAuthVerificationMessageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_method: String,
+        ?email_settings: Types::EmailSettings,
+        ?sms_settings: Types::SmsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_method: String?
+      attr_accessor email_settings: Types::EmailSettings?
+      attr_accessor sms_settings: Types::SmsSettings?
+    end
+
+    class CreateBackendConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_manager_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_manager_app_id: String?
+    end
+
+    class CreateBackendConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class CreateBackendRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_name: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::ResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_name: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::ResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class CreateBackendResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class CreateBackendStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::CreateBackendStorageResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::CreateBackendStorageResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class CreateBackendStorageResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?permissions: Types::BackendStoragePermissions,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor permissions: Types::BackendStoragePermissions?
+      attr_accessor service_name: String?
+    end
+
+    class CreateBackendStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class CreateTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+    end
+
+    class CreateTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?challenge_code: String,
+        ?session_id: String,
+        ?ttl: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor challenge_code: String?
+      attr_accessor session_id: String?
+      attr_accessor ttl: String?
+    end
+
+    class DeleteBackendAPIRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::BackendAPIResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::BackendAPIResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class DeleteBackendAPIResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteBackendAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+    end
+
+    class DeleteBackendAuthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteBackendRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+    end
+
+    class DeleteBackendResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteBackendStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+      attr_accessor service_name: String?
+    end
+
+    class DeleteBackendStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class DeleteTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_success: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_success: bool?
+    end
+
+    module DeliveryMethod
+      EMAIL: String
+      SMS: String
+    end
+
+    class EmailSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_message: String,
+        ?email_subject: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_message: String?
+      attr_accessor email_subject: String?
+    end
+
+    class GatewayTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GenerateBackendAPIModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GenerateBackendAPIModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class GetBackendAPIModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendAPIModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?models: String,
+        ?status: String,
+        ?model_introspection_schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor models: String?
+      attr_accessor status: String?
+      attr_accessor model_introspection_schema: String?
+    end
+
+    class GetBackendAPIRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::BackendAPIResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::BackendAPIResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendAPIResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?resource_config: Types::BackendAPIResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor resource_config: Types::BackendAPIResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendAuthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?resource_config: Types::CreateBackendAuthResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetBackendJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?create_time: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+        ?update_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor create_time: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+      attr_accessor update_time: String?
+    end
+
+    class GetBackendRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+    end
+
+    class GetBackendResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplify_feature_flags: String,
+        ?amplify_meta_config: String,
+        ?app_id: String,
+        ?app_name: String,
+        ?backend_environment_list: Array[String],
+        ?backend_environment_name: String,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplify_feature_flags: String?
+      attr_accessor amplify_meta_config: String?
+      attr_accessor app_id: String?
+      attr_accessor app_name: String?
+      attr_accessor backend_environment_list: Array[String]?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+    end
+
+    class GetBackendStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_name: String?
+    end
+
+    class GetBackendStorageResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?imported: bool,
+        ?permissions: Types::BackendStoragePermissions,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor imported: bool?
+      attr_accessor permissions: Types::BackendStoragePermissions?
+      attr_accessor service_name: String?
+    end
+
+    class GetBackendStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::GetBackendStorageResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::GetBackendStorageResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class GetTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?challenge_code: String,
+        ?session_id: String,
+        ?ttl: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor challenge_code: String?
+      attr_accessor session_id: String?
+      attr_accessor ttl: String?
+    end
+
+    class ImportBackendAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?identity_pool_id: String,
+        ?native_client_id: String,
+        ?user_pool_id: String,
+        ?web_client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor identity_pool_id: String?
+      attr_accessor native_client_id: String?
+      attr_accessor user_pool_id: String?
+      attr_accessor web_client_id: String?
+    end
+
+    class ImportBackendAuthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class ImportBackendStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?bucket_name: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor bucket_name: String?
+      attr_accessor service_name: String?
+    end
+
+    class ImportBackendStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class ListBackendJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class ListBackendJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::BackendJobRespObj],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::BackendJobRespObj]?
+      attr_accessor next_token: String?
+    end
+
+    class ListS3BucketsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListS3BucketsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?buckets: Array[Types::S3BucketInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor buckets: Array[Types::S3BucketInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class LoginAuthConfigReqObj
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_cognito_identity_pool_id: String,
+        ?aws_cognito_region: String,
+        ?aws_user_pools_id: String,
+        ?aws_user_pools_web_client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_cognito_identity_pool_id: String?
+      attr_accessor aws_cognito_region: String?
+      attr_accessor aws_user_pools_id: String?
+      attr_accessor aws_user_pools_web_client_id: String?
+    end
+
+    module MFAMode
+      ON: String
+      OFF: String
+      OPTIONAL: String
+    end
+
+    module MfaTypesElement
+      SMS: String
+      TOTP: String
+    end
+
+    module Mode
+      API_KEY: String
+      AWS_IAM: String
+      AMAZON_COGNITO_USER_POOLS: String
+      OPENID_CONNECT: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    module OAuthGrantType
+      CODE: String
+      IMPLICIT: String
+    end
+
+    module OAuthScopesElement
+      PHONE: String
+      EMAIL: String
+      OPENID: String
+      PROFILE: String
+      AWS_COGNITO_SIGNIN_USER_ADMIN: String
+    end
+
+    class RemoveAllBackendsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?clean_amplify_app: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor clean_amplify_app: bool?
+    end
+
+    class RemoveAllBackendsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class RemoveBackendConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+    end
+
+    class RemoveBackendConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+    end
+
+    module RequiredSignUpAttributesElement
+      ADDRESS: String
+      BIRTHDATE: String
+      EMAIL: String
+      FAMILY_NAME: String
+      GENDER: String
+      GIVEN_NAME: String
+      LOCALE: String
+      MIDDLE_NAME: String
+      NAME: String
+      NICKNAME: String
+      PHONE_NUMBER: String
+      PICTURE: String
+      PREFERRED_USERNAME: String
+      PROFILE: String
+      UPDATED_AT: String
+      WEBSITE: String
+      ZONE_INFO: String
+    end
+
+    module ResolutionStrategy
+      OPTIMISTIC_CONCURRENCY: String
+      LAMBDA: String
+      AUTOMERGE: String
+      NONE: String
+    end
+
+    class ResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class S3BucketInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: String?
+      attr_accessor name: String?
+    end
+
+    module Service
+      COGNITO: String
+    end
+
+    module ServiceName
+      S3: String
+    end
+
+    class Settings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mfa_types: Array[String],
+        ?sms_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mfa_types: Array[String]?
+      attr_accessor sms_message: String?
+    end
+
+    module SignInMethod
+      EMAIL: String
+      EMAIL_AND_PHONE_NUMBER: String
+      PHONE_NUMBER: String
+      USERNAME: String
+    end
+
+    class SmsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sms_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sms_message: String?
+    end
+
+    class SocialProviderSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?facebook: Types::BackendAuthSocialProviderConfig,
+        ?google: Types::BackendAuthSocialProviderConfig,
+        ?login_with_amazon: Types::BackendAuthSocialProviderConfig,
+        ?sign_in_with_apple: Types::BackendAuthAppleProviderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor facebook: Types::BackendAuthSocialProviderConfig?
+      attr_accessor google: Types::BackendAuthSocialProviderConfig?
+      attr_accessor login_with_amazon: Types::BackendAuthSocialProviderConfig?
+      attr_accessor sign_in_with_apple: Types::BackendAuthAppleProviderConfig?
+    end
+
+    module Status
+      LATEST: String
+      STALE: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_type: String?
+      attr_accessor message: String?
+    end
+
+    module UnAuthenticatedElement
+      READ: String
+      CREATE_AND_UPDATE: String
+      DELETE: String
+    end
+
+    class UpdateBackendAPIRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::BackendAPIResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::BackendAPIResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class UpdateBackendAPIResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateBackendAuthForgotPasswordConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_method: String,
+        ?email_settings: Types::EmailSettings,
+        ?sms_settings: Types::SmsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_method: String?
+      attr_accessor email_settings: Types::EmailSettings?
+      attr_accessor sms_settings: Types::SmsSettings?
+    end
+
+    class UpdateBackendAuthIdentityPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unauthenticated_login: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unauthenticated_login: bool?
+    end
+
+    class UpdateBackendAuthMFAConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mfa_mode: String,
+        ?settings: Types::Settings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mfa_mode: String?
+      attr_accessor settings: Types::Settings?
+    end
+
+    class UpdateBackendAuthOAuthConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_prefix: String,
+        ?o_auth_grant_type: String,
+        ?o_auth_scopes: Array[String],
+        ?redirect_sign_in_ur_is: Array[String],
+        ?redirect_sign_out_ur_is: Array[String],
+        ?social_provider_settings: Types::SocialProviderSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_prefix: String?
+      attr_accessor o_auth_grant_type: String?
+      attr_accessor o_auth_scopes: Array[String]?
+      attr_accessor redirect_sign_in_ur_is: Array[String]?
+      attr_accessor redirect_sign_out_ur_is: Array[String]?
+      attr_accessor social_provider_settings: Types::SocialProviderSettings?
+    end
+
+    class UpdateBackendAuthPasswordPolicyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_constraints: Array[String],
+        ?minimum_length: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_constraints: Array[String]?
+      attr_accessor minimum_length: Float?
+    end
+
+    class UpdateBackendAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::UpdateBackendAuthResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::UpdateBackendAuthResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class UpdateBackendAuthResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_resources: String,
+        ?identity_pool_configs: Types::UpdateBackendAuthIdentityPoolConfig,
+        ?service: String,
+        ?user_pool_configs: Types::UpdateBackendAuthUserPoolConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_resources: String?
+      attr_accessor identity_pool_configs: Types::UpdateBackendAuthIdentityPoolConfig?
+      attr_accessor service: String?
+      attr_accessor user_pool_configs: Types::UpdateBackendAuthUserPoolConfig?
+    end
+
+    class UpdateBackendAuthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateBackendAuthUserPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forgot_password: Types::UpdateBackendAuthForgotPasswordConfig,
+        ?mfa: Types::UpdateBackendAuthMFAConfig,
+        ?o_auth: Types::UpdateBackendAuthOAuthConfig,
+        ?password_policy: Types::UpdateBackendAuthPasswordPolicyConfig,
+        ?verification_message: Types::UpdateBackendAuthVerificationMessageConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forgot_password: Types::UpdateBackendAuthForgotPasswordConfig?
+      attr_accessor mfa: Types::UpdateBackendAuthMFAConfig?
+      attr_accessor o_auth: Types::UpdateBackendAuthOAuthConfig?
+      attr_accessor password_policy: Types::UpdateBackendAuthPasswordPolicyConfig?
+      attr_accessor verification_message: Types::UpdateBackendAuthVerificationMessageConfig?
+    end
+
+    class UpdateBackendAuthVerificationMessageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_method: String,
+        ?email_settings: Types::EmailSettings,
+        ?sms_settings: Types::SmsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_method: String?
+      attr_accessor email_settings: Types::EmailSettings?
+      attr_accessor sms_settings: Types::SmsSettings?
+    end
+
+    class UpdateBackendConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?login_auth_config: Types::LoginAuthConfigReqObj,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj?
+    end
+
+    class UpdateBackendConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_manager_app_id: String,
+        ?error: String,
+        ?login_auth_config: Types::LoginAuthConfigReqObj,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_manager_app_id: String?
+      attr_accessor error: String?
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj?
+    end
+
+    class UpdateBackendJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateBackendJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?create_time: String,
+        ?error: String,
+        ?job_id: String,
+        ?operation: String,
+        ?status: String,
+        ?update_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor create_time: String?
+      attr_accessor error: String?
+      attr_accessor job_id: String?
+      attr_accessor operation: String?
+      attr_accessor status: String?
+      attr_accessor update_time: String?
+    end
+
+    class UpdateBackendStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?resource_config: Types::UpdateBackendStorageResourceConfig,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor resource_config: Types::UpdateBackendStorageResourceConfig?
+      attr_accessor resource_name: String?
+    end
+
+    class UpdateBackendStorageResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Types::BackendStoragePermissions,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Types::BackendStoragePermissions?
+      attr_accessor service_name: String?
+    end
+
+    class UpdateBackendStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?backend_environment_name: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor backend_environment_name: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+  end
+end

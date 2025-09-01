@@ -1,0 +1,556 @@
+module Aws::SSMQuickSetup
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConfigurationDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Hash[String, String],
+        ?type_version: String,
+        ?local_deployment_execution_role_name: String,
+        ?local_deployment_administration_role_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor type_version: String?
+      attr_accessor local_deployment_execution_role_name: String?
+      attr_accessor local_deployment_administration_role_arn: String?
+      attr_accessor id: String?
+    end
+
+    class ConfigurationDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Hash[String, String],
+        ?type_version: String,
+        ?local_deployment_execution_role_name: String,
+        ?local_deployment_administration_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor type_version: String?
+      attr_accessor local_deployment_execution_role_name: String?
+      attr_accessor local_deployment_administration_role_arn: String?
+    end
+
+    class ConfigurationDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?type_version: String,
+        ?first_class_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor type_version: String?
+      attr_accessor first_class_parameters: Hash[String, String]?
+    end
+
+    class ConfigurationManagerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+        ?description: String,
+        ?name: String,
+        ?status_summaries: Array[Types::StatusSummary],
+        ?configuration_definition_summaries: Array[Types::ConfigurationDefinitionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor status_summaries: Array[Types::StatusSummary]?
+      attr_accessor configuration_definition_summaries: Array[Types::ConfigurationDefinitionSummary]?
+    end
+
+    class ConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?manager_arn: String,
+        ?configuration_definition_id: String,
+        ?type: String,
+        ?type_version: String,
+        ?region: String,
+        ?account: String,
+        ?created_at: Time,
+        ?first_class_parameters: Hash[String, String],
+        ?status_summaries: Array[Types::StatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor manager_arn: String?
+      attr_accessor configuration_definition_id: String?
+      attr_accessor type: String?
+      attr_accessor type_version: String?
+      attr_accessor region: String?
+      attr_accessor account: String?
+      attr_accessor created_at: Time?
+      attr_accessor first_class_parameters: Hash[String, String]?
+      attr_accessor status_summaries: Array[Types::StatusSummary]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateConfigurationManagerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?configuration_definitions: Array[Types::ConfigurationDefinitionInput],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor configuration_definitions: Array[Types::ConfigurationDefinitionInput]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfigurationManagerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+    end
+
+    class DeleteConfigurationManagerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GetConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+    end
+
+    class GetConfigurationManagerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+    end
+
+    class GetConfigurationManagerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+        ?description: String,
+        ?name: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?status_summaries: Array[Types::StatusSummary],
+        ?configuration_definitions: Array[Types::ConfigurationDefinition],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status_summaries: Array[Types::StatusSummary]?
+      attr_accessor configuration_definitions: Array[Types::ConfigurationDefinition]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?manager_arn: String,
+        ?configuration_definition_id: String,
+        ?type: String,
+        ?type_version: String,
+        ?account: String,
+        ?region: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?status_summaries: Array[Types::StatusSummary],
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor manager_arn: String?
+      attr_accessor configuration_definition_id: String?
+      attr_accessor type: String?
+      attr_accessor type_version: String?
+      attr_accessor account: String?
+      attr_accessor region: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status_summaries: Array[Types::StatusSummary]?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class GetServiceSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_settings: Types::ServiceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_settings: Types::ServiceSettings?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListConfigurationManagersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starting_token: String,
+        ?max_items: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starting_token: String?
+      attr_accessor max_items: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListConfigurationManagersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_managers_list: Array[Types::ConfigurationManagerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_managers_list: Array[Types::ConfigurationManagerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starting_token: String,
+        ?max_items: Integer,
+        ?filters: Array[Types::Filter],
+        ?manager_arn: String,
+        ?configuration_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starting_token: String?
+      attr_accessor max_items: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor manager_arn: String?
+      attr_accessor configuration_definition_id: String?
+    end
+
+    class ListConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations_list: Array[Types::ConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations_list: Array[Types::ConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQuickSetupTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quick_setup_type_list: Array[Types::QuickSetupTypeOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quick_setup_type_list: Array[Types::QuickSetupTypeOutput]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::TagEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::TagEntry]?
+    end
+
+    class QuickSetupTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?latest_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor latest_version: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explorer_enabling_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explorer_enabling_role_arn: String?
+    end
+
+    module Status
+      INITIALIZING: String
+      DEPLOYING: String
+      SUCCEEDED: String
+      DELETING: String
+      STOPPING: String
+      FAILED: String
+      STOPPED: String
+      DELETE_FAILED: String
+      STOP_FAILED: String
+      NONE: String
+    end
+
+    class StatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_type: String,
+        ?status: String,
+        ?status_message: String,
+        ?last_updated_at: Time,
+        ?status_details: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor status_details: Hash[String, String]?
+    end
+
+    module StatusType
+      DEPLOYMENT: String
+      ASYNC_EXECUTIONS: String
+    end
+
+    class TagEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateConfigurationDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+        ?id: String,
+        ?type_version: String,
+        ?parameters: Hash[String, String],
+        ?local_deployment_execution_role_name: String,
+        ?local_deployment_administration_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+      attr_accessor id: String?
+      attr_accessor type_version: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor local_deployment_execution_role_name: String?
+      attr_accessor local_deployment_administration_role_arn: String?
+    end
+
+    class UpdateConfigurationManagerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manager_arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manager_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateServiceSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explorer_enabling_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explorer_enabling_role_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

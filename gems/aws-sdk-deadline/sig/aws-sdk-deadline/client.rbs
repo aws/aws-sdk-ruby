@@ -1,0 +1,1995 @@
+module Aws::Deadline
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Deadline::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateMemberToFarmResponse
+      include Smithy::Client::_Response[Types::AssociateMemberToFarmResponse]
+    end
+    def associate_member_to_farm: (
+      ?farm_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?identity_store_id: String,
+      ?membership_level: String
+    ) -> _AssociateMemberToFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToFarmResponse
+
+    interface _AssociateMemberToFleetResponse
+      include Smithy::Client::_Response[Types::AssociateMemberToFleetResponse]
+    end
+    def associate_member_to_fleet: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?identity_store_id: String,
+      ?membership_level: String
+    ) -> _AssociateMemberToFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToFleetResponse
+
+    interface _AssociateMemberToJobResponse
+      include Smithy::Client::_Response[Types::AssociateMemberToJobResponse]
+    end
+    def associate_member_to_job: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?identity_store_id: String,
+      ?membership_level: String
+    ) -> _AssociateMemberToJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToJobResponse
+
+    interface _AssociateMemberToQueueResponse
+      include Smithy::Client::_Response[Types::AssociateMemberToQueueResponse]
+    end
+    def associate_member_to_queue: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?identity_store_id: String,
+      ?membership_level: String
+    ) -> _AssociateMemberToQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToQueueResponse
+
+    interface _AssumeFleetRoleForReadResponse
+      include Smithy::Client::_Response[Types::AssumeFleetRoleForReadResponse]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def assume_fleet_role_for_read: (
+      ?farm_id: String,
+      ?fleet_id: String
+    ) -> _AssumeFleetRoleForReadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeFleetRoleForReadResponse
+
+    interface _AssumeFleetRoleForWorkerResponse
+      include Smithy::Client::_Response[Types::AssumeFleetRoleForWorkerResponse]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def assume_fleet_role_for_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String
+    ) -> _AssumeFleetRoleForWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeFleetRoleForWorkerResponse
+
+    interface _AssumeQueueRoleForReadResponse
+      include Smithy::Client::_Response[Types::AssumeQueueRoleForReadResponse]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def assume_queue_role_for_read: (
+      ?farm_id: String,
+      ?queue_id: String
+    ) -> _AssumeQueueRoleForReadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeQueueRoleForReadResponse
+
+    interface _AssumeQueueRoleForUserResponse
+      include Smithy::Client::_Response[Types::AssumeQueueRoleForUserResponse]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def assume_queue_role_for_user: (
+      ?farm_id: String,
+      ?queue_id: String
+    ) -> _AssumeQueueRoleForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeQueueRoleForUserResponse
+
+    interface _AssumeQueueRoleForWorkerResponse
+      include Smithy::Client::_Response[Types::AssumeQueueRoleForWorkerResponse]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def assume_queue_role_for_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String,
+      ?queue_id: String
+    ) -> _AssumeQueueRoleForWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeQueueRoleForWorkerResponse
+
+    interface _BatchGetJobEntityResponse
+      include Smithy::Client::_Response[Types::BatchGetJobEntityResponse]
+      def entities: () -> Array[Types::JobEntity]?
+      def errors: () -> Array[Types::GetJobEntityError]?
+    end
+    def batch_get_job_entity: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String,
+      ?identifiers: Array[
+        {
+          job_details: {
+            job_id: String
+          },
+          job_attachment_details: {
+            job_id: untyped
+          },
+          step_details: {
+            job_id: untyped,
+            step_id: String
+          },
+          environment_details: {
+            job_id: untyped,
+            environment_id: String
+          }
+        }
+      ]
+    ) -> _BatchGetJobEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetJobEntityResponse
+
+    interface _CopyJobTemplateResponse
+      include Smithy::Client::_Response[Types::CopyJobTemplateResponse]
+      def template_type: () -> String?
+    end
+    def copy_job_template: (
+      ?farm_id: String,
+      ?job_id: String,
+      ?queue_id: String,
+      ?target_s3_location: {
+        bucket_name: String,
+        key: String
+      }
+    ) -> _CopyJobTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyJobTemplateResponse
+
+    interface _CreateBudgetResponse
+      include Smithy::Client::_Response[Types::CreateBudgetResponse]
+      def budget_id: () -> String?
+    end
+    def create_budget: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?usage_tracking_resource: {
+        queue_id: String
+      },
+      ?display_name: String,
+      ?description: String,
+      ?approximate_dollar_limit: Float,
+      ?actions: Array[
+        {
+          type: String,
+          threshold_percentage: Float,
+          description: String
+        }
+      ],
+      ?schedule: {
+        fixed: {
+          start_time: Time,
+          end_time: Time
+        }
+      }
+    ) -> _CreateBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBudgetResponse
+
+    interface _CreateFarmResponse
+      include Smithy::Client::_Response[Types::CreateFarmResponse]
+      def farm_id: () -> String?
+    end
+    def create_farm: (
+      ?client_token: String,
+      ?display_name: String,
+      ?description: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFarmResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetResponse]
+      def fleet_id: () -> String?
+    end
+    def create_fleet: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?min_worker_count: Integer,
+      ?max_worker_count: Integer,
+      ?configuration: {
+        customer_managed: {
+          mode: String,
+          worker_capabilities: {
+            v_cpu_count: {
+              min: Integer,
+              max: untyped
+            },
+            memory_mi_b: {
+              min: Integer,
+              max: untyped
+            },
+            accelerator_types: Array[String],
+            accelerator_count: {
+              min: Integer,
+              max: untyped
+            },
+            accelerator_total_memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            os_family: String,
+            cpu_architecture_type: String,
+            custom_amounts: Array[
+              {
+                name: String,
+                min: Float,
+                max: untyped
+              }
+            ],
+            custom_attributes: Array[
+              {
+                name: String,
+                values: Array[String]
+              }
+            ]
+          },
+          storage_profile_id: String,
+          tag_propagation_mode: String
+        },
+        service_managed_ec2: {
+          instance_capabilities: {
+            v_cpu_count: untyped,
+            memory_mi_b: untyped,
+            os_family: String,
+            cpu_architecture_type: untyped,
+            root_ebs_volume: {
+              size_gi_b: Integer,
+              iops: Integer,
+              throughput_mi_b: Integer
+            },
+            accelerator_capabilities: {
+              selections: Array[
+                {
+                  name: String,
+                  runtime: String
+                }
+              ],
+              count: untyped
+            },
+            allowed_instance_types: Array[String],
+            excluded_instance_types: untyped,
+            custom_amounts: untyped,
+            custom_attributes: untyped
+          },
+          instance_market_options: {
+            type: String
+          },
+          vpc_configuration: {
+            resource_configuration_arns: Array[String]
+          },
+          storage_profile_id: untyped
+        }
+      },
+      ?tags: Hash[String, String],
+      ?host_configuration: {
+        script_body: String,
+        script_timeout_seconds: Integer
+      }
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateJobResponse
+      include Smithy::Client::_Response[Types::CreateJobResponse]
+      def job_id: () -> String?
+    end
+    def create_job: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?client_token: String,
+      ?template: String,
+      ?template_type: String,
+      ?priority: Integer,
+      ?parameters: Hash[String,
+        {
+          int: String,
+          float: String,
+          string: String,
+          path: String
+        }
+      ],
+      ?attachments: {
+        manifests: Array[
+          {
+            file_system_location_name: String,
+            root_path: String,
+            root_path_format: String,
+            output_relative_directories: Array[String],
+            input_manifest_path: untyped,
+            input_manifest_hash: untyped
+          }
+        ],
+        file_system: String
+      },
+      ?storage_profile_id: String,
+      ?target_task_run_status: String,
+      ?max_failed_tasks_count: Integer,
+      ?max_retries_per_task: Integer,
+      ?max_worker_count: Integer,
+      ?source_job_id: String
+    ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
+
+    interface _CreateLicenseEndpointResponse
+      include Smithy::Client::_Response[Types::CreateLicenseEndpointResponse]
+      def license_endpoint_id: () -> String?
+    end
+    def create_license_endpoint: (
+      ?client_token: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateLicenseEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseEndpointResponse
+
+    interface _CreateLimitResponse
+      include Smithy::Client::_Response[Types::CreateLimitResponse]
+      def limit_id: () -> String?
+    end
+    def create_limit: (
+      ?client_token: String,
+      ?display_name: String,
+      ?amount_requirement_name: String,
+      ?max_count: Integer,
+      ?farm_id: String,
+      ?description: String
+    ) -> _CreateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLimitResponse
+
+    interface _CreateMonitorResponse
+      include Smithy::Client::_Response[Types::CreateMonitorResponse]
+      def monitor_id: () -> String?
+      def identity_center_application_arn: () -> String?
+    end
+    def create_monitor: (
+      ?client_token: String,
+      ?display_name: String,
+      ?identity_center_instance_arn: String,
+      ?subdomain: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMonitorResponse
+
+    interface _CreateQueueResponse
+      include Smithy::Client::_Response[Types::CreateQueueResponse]
+      def queue_id: () -> String?
+    end
+    def create_queue: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?default_budget_action: String,
+      ?job_attachment_settings: {
+        s3_bucket_name: String,
+        root_prefix: String
+      },
+      ?role_arn: String,
+      ?job_run_as_user: {
+        posix: {
+          user: String,
+          group: untyped
+        },
+        windows: {
+          user: untyped,
+          password_arn: untyped
+        },
+        run_as: String
+      },
+      ?required_file_system_location_names: Array[String],
+      ?allowed_storage_profile_ids: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
+
+    interface _CreateQueueEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateQueueEnvironmentResponse]
+      def queue_environment_id: () -> String?
+    end
+    def create_queue_environment: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?priority: Integer,
+      ?template_type: String,
+      ?template: String
+    ) -> _CreateQueueEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueEnvironmentResponse
+
+    interface _CreateQueueFleetAssociationResponse
+      include Smithy::Client::_Response[Types::CreateQueueFleetAssociationResponse]
+    end
+    def create_queue_fleet_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?fleet_id: String
+    ) -> _CreateQueueFleetAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueFleetAssociationResponse
+
+    interface _CreateQueueLimitAssociationResponse
+      include Smithy::Client::_Response[Types::CreateQueueLimitAssociationResponse]
+    end
+    def create_queue_limit_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?limit_id: String
+    ) -> _CreateQueueLimitAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueLimitAssociationResponse
+
+    interface _CreateStorageProfileResponse
+      include Smithy::Client::_Response[Types::CreateStorageProfileResponse]
+      def storage_profile_id: () -> String?
+    end
+    def create_storage_profile: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?display_name: String,
+      ?os_family: String,
+      ?file_system_locations: Array[
+        {
+          name: String,
+          path: String,
+          type: String
+        }
+      ]
+    ) -> _CreateStorageProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStorageProfileResponse
+
+    interface _CreateWorkerResponse
+      include Smithy::Client::_Response[Types::CreateWorkerResponse]
+      def worker_id: () -> String?
+    end
+    def create_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?host_properties: {
+        ip_addresses: {
+          ip_v4_addresses: Array[String],
+          ip_v6_addresses: Array[String]
+        },
+        host_name: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkerResponse
+
+    interface _DeleteBudgetResponse
+      include Smithy::Client::_Response[Types::DeleteBudgetResponse]
+    end
+    def delete_budget: (
+      ?farm_id: String,
+      ?budget_id: String
+    ) -> _DeleteBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBudgetResponse
+
+    interface _DeleteFarmResponse
+      include Smithy::Client::_Response[Types::DeleteFarmResponse]
+    end
+    def delete_farm: (
+      ?farm_id: String
+    ) -> _DeleteFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFarmResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Types::DeleteFleetResponse]
+    end
+    def delete_fleet: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?fleet_id: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteLicenseEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseEndpointResponse]
+    end
+    def delete_license_endpoint: (
+      ?license_endpoint_id: String
+    ) -> _DeleteLicenseEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseEndpointResponse
+
+    interface _DeleteLimitResponse
+      include Smithy::Client::_Response[Types::DeleteLimitResponse]
+    end
+    def delete_limit: (
+      ?farm_id: String,
+      ?limit_id: String
+    ) -> _DeleteLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLimitResponse
+
+    interface _DeleteMeteredProductResponse
+      include Smithy::Client::_Response[Types::DeleteMeteredProductResponse]
+    end
+    def delete_metered_product: (
+      ?license_endpoint_id: String,
+      ?product_id: String
+    ) -> _DeleteMeteredProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMeteredProductResponse
+
+    interface _DeleteMonitorResponse
+      include Smithy::Client::_Response[Types::DeleteMonitorResponse]
+    end
+    def delete_monitor: (
+      ?monitor_id: String
+    ) -> _DeleteMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMonitorResponse
+
+    interface _DeleteQueueResponse
+      include Smithy::Client::_Response[Types::DeleteQueueResponse]
+    end
+    def delete_queue: (
+      ?farm_id: String,
+      ?queue_id: String
+    ) -> _DeleteQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueResponse
+
+    interface _DeleteQueueEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteQueueEnvironmentResponse]
+    end
+    def delete_queue_environment: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?queue_environment_id: String
+    ) -> _DeleteQueueEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueEnvironmentResponse
+
+    interface _DeleteQueueFleetAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteQueueFleetAssociationResponse]
+    end
+    def delete_queue_fleet_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?fleet_id: String
+    ) -> _DeleteQueueFleetAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueFleetAssociationResponse
+
+    interface _DeleteQueueLimitAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteQueueLimitAssociationResponse]
+    end
+    def delete_queue_limit_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?limit_id: String
+    ) -> _DeleteQueueLimitAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueLimitAssociationResponse
+
+    interface _DeleteStorageProfileResponse
+      include Smithy::Client::_Response[Types::DeleteStorageProfileResponse]
+    end
+    def delete_storage_profile: (
+      ?farm_id: String,
+      ?storage_profile_id: String
+    ) -> _DeleteStorageProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageProfileResponse
+
+    interface _DeleteWorkerResponse
+      include Smithy::Client::_Response[Types::DeleteWorkerResponse]
+    end
+    def delete_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String
+    ) -> _DeleteWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkerResponse
+
+    interface _DisassociateMemberFromFarmResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberFromFarmResponse]
+    end
+    def disassociate_member_from_farm: (
+      ?farm_id: String,
+      ?principal_id: String
+    ) -> _DisassociateMemberFromFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberFromFarmResponse
+
+    interface _DisassociateMemberFromFleetResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberFromFleetResponse]
+    end
+    def disassociate_member_from_fleet: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?principal_id: String
+    ) -> _DisassociateMemberFromFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberFromFleetResponse
+
+    interface _DisassociateMemberFromJobResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberFromJobResponse]
+    end
+    def disassociate_member_from_job: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?principal_id: String
+    ) -> _DisassociateMemberFromJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberFromJobResponse
+
+    interface _DisassociateMemberFromQueueResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberFromQueueResponse]
+    end
+    def disassociate_member_from_queue: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?principal_id: String
+    ) -> _DisassociateMemberFromQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberFromQueueResponse
+
+    interface _GetBudgetResponse
+      include Smithy::Client::_Response[Types::GetBudgetResponse]
+      def budget_id: () -> String?
+      def usage_tracking_resource: () -> Types::UsageTrackingResource?
+      def status: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def approximate_dollar_limit: () -> Float?
+      def usages: () -> Types::ConsumedUsages?
+      def actions: () -> Array[Types::ResponseBudgetAction]?
+      def schedule: () -> Types::BudgetSchedule?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_by: () -> String?
+      def updated_at: () -> Time?
+      def queue_stopped_at: () -> Time?
+    end
+    def get_budget: (
+      ?farm_id: String,
+      ?budget_id: String
+    ) -> _GetBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBudgetResponse
+
+    interface _GetFarmResponse
+      include Smithy::Client::_Response[Types::GetFarmResponse]
+      def farm_id: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def kms_key_arn: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_farm: (
+      ?farm_id: String
+    ) -> _GetFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFarmResponse
+
+    interface _GetFleetResponse
+      include Smithy::Client::_Response[Types::GetFleetResponse]
+      def fleet_id: () -> String?
+      def farm_id: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def auto_scaling_status: () -> String?
+      def target_worker_count: () -> Integer?
+      def worker_count: () -> Integer?
+      def min_worker_count: () -> Integer?
+      def max_worker_count: () -> Integer?
+      def configuration: () -> Types::FleetConfiguration?
+      def host_configuration: () -> Types::HostConfiguration?
+      def capabilities: () -> Types::FleetCapabilities?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_fleet: (
+      ?farm_id: String,
+      ?fleet_id: String
+    ) -> _GetFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFleetResponse
+
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::GetJobResponse]
+      def job_id: () -> String?
+      def name: () -> String?
+      def lifecycle_status: () -> String?
+      def lifecycle_status_message: () -> String?
+      def priority: () -> Integer?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def task_run_status: () -> String?
+      def target_task_run_status: () -> String?
+      def task_run_status_counts: () -> Hash[String, Integer]?
+      def task_failure_retry_count: () -> Integer?
+      def storage_profile_id: () -> String?
+      def max_failed_tasks_count: () -> Integer?
+      def max_retries_per_task: () -> Integer?
+      def parameters: () -> Hash[String, Types::JobParameter]?
+      def attachments: () -> Types::Attachments?
+      def description: () -> String?
+      def max_worker_count: () -> Integer?
+      def source_job_id: () -> String?
+    end
+    def get_job: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
+    interface _GetLicenseEndpointResponse
+      include Smithy::Client::_Response[Types::GetLicenseEndpointResponse]
+      def license_endpoint_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def vpc_id: () -> String?
+      def dns_name: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def security_group_ids: () -> Array[String]?
+    end
+    def get_license_endpoint: (
+      ?license_endpoint_id: String
+    ) -> _GetLicenseEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseEndpointResponse
+
+    interface _GetLimitResponse
+      include Smithy::Client::_Response[Types::GetLimitResponse]
+      def display_name: () -> String?
+      def amount_requirement_name: () -> String?
+      def max_count: () -> Integer?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def farm_id: () -> String?
+      def limit_id: () -> String?
+      def current_count: () -> Integer?
+      def description: () -> String?
+    end
+    def get_limit: (
+      ?farm_id: String,
+      ?limit_id: String
+    ) -> _GetLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLimitResponse
+
+    interface _GetMonitorResponse
+      include Smithy::Client::_Response[Types::GetMonitorResponse]
+      def monitor_id: () -> String?
+      def display_name: () -> String?
+      def subdomain: () -> String?
+      def url: () -> String?
+      def role_arn: () -> String?
+      def identity_center_instance_arn: () -> String?
+      def identity_center_application_arn: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_monitor: (
+      ?monitor_id: String
+    ) -> _GetMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMonitorResponse
+
+    interface _GetQueueResponse
+      include Smithy::Client::_Response[Types::GetQueueResponse]
+      def queue_id: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def farm_id: () -> String?
+      def status: () -> String?
+      def default_budget_action: () -> String?
+      def blocked_reason: () -> String?
+      def job_attachment_settings: () -> Types::JobAttachmentSettings?
+      def role_arn: () -> String?
+      def required_file_system_location_names: () -> Array[String]?
+      def allowed_storage_profile_ids: () -> Array[String]?
+      def job_run_as_user: () -> Types::JobRunAsUser?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_queue: (
+      ?farm_id: String,
+      ?queue_id: String
+    ) -> _GetQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueResponse
+
+    interface _GetQueueEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetQueueEnvironmentResponse]
+      def queue_environment_id: () -> String?
+      def name: () -> String?
+      def priority: () -> Integer?
+      def template_type: () -> String?
+      def template: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_queue_environment: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?queue_environment_id: String
+    ) -> _GetQueueEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueEnvironmentResponse
+
+    interface _GetQueueFleetAssociationResponse
+      include Smithy::Client::_Response[Types::GetQueueFleetAssociationResponse]
+      def queue_id: () -> String?
+      def fleet_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_queue_fleet_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?fleet_id: String
+    ) -> _GetQueueFleetAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueFleetAssociationResponse
+
+    interface _GetQueueLimitAssociationResponse
+      include Smithy::Client::_Response[Types::GetQueueLimitAssociationResponse]
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def queue_id: () -> String?
+      def limit_id: () -> String?
+      def status: () -> String?
+    end
+    def get_queue_limit_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?limit_id: String
+    ) -> _GetQueueLimitAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueLimitAssociationResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session_id: () -> String?
+      def fleet_id: () -> String?
+      def worker_id: () -> String?
+      def started_at: () -> Time?
+      def log: () -> Types::LogConfiguration?
+      def lifecycle_status: () -> String?
+      def ended_at: () -> Time?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def target_lifecycle_status: () -> String?
+      def host_properties: () -> Types::HostPropertiesResponse?
+      def worker_log: () -> Types::LogConfiguration?
+    end
+    def get_session: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionActionResponse
+      include Smithy::Client::_Response[Types::GetSessionActionResponse]
+      def session_action_id: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def worker_updated_at: () -> Time?
+      def progress_percent: () -> Float?
+      def session_id: () -> String?
+      def process_exit_code: () -> Integer?
+      def progress_message: () -> String?
+      def definition: () -> Types::SessionActionDefinition?
+      def acquired_limits: () -> Array[Types::AcquiredLimit]?
+      def manifests: () -> Array[Types::TaskRunManifestPropertiesResponse]?
+    end
+    def get_session_action: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?session_action_id: String
+    ) -> _GetSessionActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionActionResponse
+
+    interface _GetSessionsStatisticsAggregationResponse
+      include Smithy::Client::_Response[Types::GetSessionsStatisticsAggregationResponse]
+      def statistics: () -> Array[Types::Statistics]?
+      def next_token: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+    end
+    def get_sessions_statistics_aggregation: (
+      ?farm_id: String,
+      ?aggregation_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetSessionsStatisticsAggregationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionsStatisticsAggregationResponse
+
+    interface _GetStepResponse
+      include Smithy::Client::_Response[Types::GetStepResponse]
+      def step_id: () -> String?
+      def name: () -> String?
+      def lifecycle_status: () -> String?
+      def lifecycle_status_message: () -> String?
+      def task_run_status: () -> String?
+      def task_run_status_counts: () -> Hash[String, Integer]?
+      def task_failure_retry_count: () -> Integer?
+      def target_task_run_status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def dependency_counts: () -> Types::DependencyCounts?
+      def required_capabilities: () -> Types::StepRequiredCapabilities?
+      def parameter_space: () -> Types::ParameterSpace?
+      def description: () -> String?
+    end
+    def get_step: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String
+    ) -> _GetStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStepResponse
+
+    interface _GetStorageProfileResponse
+      include Smithy::Client::_Response[Types::GetStorageProfileResponse]
+      def storage_profile_id: () -> String?
+      def display_name: () -> String?
+      def os_family: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def file_system_locations: () -> Array[Types::FileSystemLocation]?
+    end
+    def get_storage_profile: (
+      ?farm_id: String,
+      ?storage_profile_id: String
+    ) -> _GetStorageProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageProfileResponse
+
+    interface _GetStorageProfileForQueueResponse
+      include Smithy::Client::_Response[Types::GetStorageProfileForQueueResponse]
+      def storage_profile_id: () -> String?
+      def display_name: () -> String?
+      def os_family: () -> String?
+      def file_system_locations: () -> Array[Types::FileSystemLocation]?
+    end
+    def get_storage_profile_for_queue: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?storage_profile_id: String
+    ) -> _GetStorageProfileForQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageProfileForQueueResponse
+
+    interface _GetTaskResponse
+      include Smithy::Client::_Response[Types::GetTaskResponse]
+      def task_id: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def run_status: () -> String?
+      def target_run_status: () -> String?
+      def failure_retry_count: () -> Integer?
+      def parameters: () -> Hash[String, Types::TaskParameterValue]?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def latest_session_action_id: () -> String?
+    end
+    def get_task: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String,
+      ?task_id: String
+    ) -> _GetTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaskResponse
+
+    interface _GetWorkerResponse
+      include Smithy::Client::_Response[Types::GetWorkerResponse]
+      def farm_id: () -> String?
+      def fleet_id: () -> String?
+      def worker_id: () -> String?
+      def host_properties: () -> Types::HostPropertiesResponse?
+      def status: () -> String?
+      def log: () -> Types::LogConfiguration?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String
+    ) -> _GetWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkerResponse
+
+    interface _ListAvailableMeteredProductsResponse
+      include Smithy::Client::_Response[Types::ListAvailableMeteredProductsResponse]
+      def metered_products: () -> Array[Types::MeteredProductSummary]?
+      def next_token: () -> String?
+    end
+    def list_available_metered_products: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAvailableMeteredProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableMeteredProductsResponse
+
+    interface _ListBudgetsResponse
+      include Smithy::Client::_Response[Types::ListBudgetsResponse]
+      def next_token: () -> String?
+      def budgets: () -> Array[Types::BudgetSummary]?
+    end
+    def list_budgets: (
+      ?next_token: String,
+      ?farm_id: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBudgetsResponse
+
+    interface _ListFarmMembersResponse
+      include Smithy::Client::_Response[Types::ListFarmMembersResponse]
+      def members: () -> Array[Types::FarmMember]?
+      def next_token: () -> String?
+    end
+    def list_farm_members: (
+      ?farm_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFarmMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFarmMembersResponse
+
+    interface _ListFarmsResponse
+      include Smithy::Client::_Response[Types::ListFarmsResponse]
+      def next_token: () -> String?
+      def farms: () -> Array[Types::FarmSummary]?
+    end
+    def list_farms: (
+      ?next_token: String,
+      ?principal_id: String,
+      ?max_results: Integer
+    ) -> _ListFarmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFarmsResponse
+
+    interface _ListFleetMembersResponse
+      include Smithy::Client::_Response[Types::ListFleetMembersResponse]
+      def members: () -> Array[Types::FleetMember]?
+      def next_token: () -> String?
+    end
+    def list_fleet_members: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFleetMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetMembersResponse
+
+    interface _ListFleetsResponse
+      include Smithy::Client::_Response[Types::ListFleetsResponse]
+      def fleets: () -> Array[Types::FleetSummary]?
+      def next_token: () -> String?
+    end
+    def list_fleets: (
+      ?farm_id: String,
+      ?principal_id: String,
+      ?display_name: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
+
+    interface _ListJobMembersResponse
+      include Smithy::Client::_Response[Types::ListJobMembersResponse]
+      def members: () -> Array[Types::JobMember]?
+      def next_token: () -> String?
+    end
+    def list_job_members: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobMembersResponse
+
+    interface _ListJobParameterDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListJobParameterDefinitionsResponse]
+      def job_parameter_definitions: () -> Array[Smithy::Schema::document]?
+      def next_token: () -> String?
+    end
+    def list_job_parameter_definitions: (
+      ?farm_id: String,
+      ?job_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobParameterDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobParameterDefinitionsResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResponse]
+      def jobs: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?farm_id: String,
+      ?principal_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListLicenseEndpointsResponse
+      include Smithy::Client::_Response[Types::ListLicenseEndpointsResponse]
+      def license_endpoints: () -> Array[Types::LicenseEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_license_endpoints: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLicenseEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseEndpointsResponse
+
+    interface _ListLimitsResponse
+      include Smithy::Client::_Response[Types::ListLimitsResponse]
+      def limits: () -> Array[Types::LimitSummary]?
+      def next_token: () -> String?
+    end
+    def list_limits: (
+      ?farm_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLimitsResponse
+
+    interface _ListMeteredProductsResponse
+      include Smithy::Client::_Response[Types::ListMeteredProductsResponse]
+      def metered_products: () -> Array[Types::MeteredProductSummary]?
+      def next_token: () -> String?
+    end
+    def list_metered_products: (
+      ?license_endpoint_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMeteredProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMeteredProductsResponse
+
+    interface _ListMonitorsResponse
+      include Smithy::Client::_Response[Types::ListMonitorsResponse]
+      def next_token: () -> String?
+      def monitors: () -> Array[Types::MonitorSummary]?
+    end
+    def list_monitors: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMonitorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMonitorsResponse
+
+    interface _ListQueueEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListQueueEnvironmentsResponse]
+      def environments: () -> Array[Types::QueueEnvironmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_queue_environments: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueEnvironmentsResponse
+
+    interface _ListQueueFleetAssociationsResponse
+      include Smithy::Client::_Response[Types::ListQueueFleetAssociationsResponse]
+      def queue_fleet_associations: () -> Array[Types::QueueFleetAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_queue_fleet_associations: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?fleet_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueFleetAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueFleetAssociationsResponse
+
+    interface _ListQueueLimitAssociationsResponse
+      include Smithy::Client::_Response[Types::ListQueueLimitAssociationsResponse]
+      def queue_limit_associations: () -> Array[Types::QueueLimitAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_queue_limit_associations: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?limit_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueLimitAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueLimitAssociationsResponse
+
+    interface _ListQueueMembersResponse
+      include Smithy::Client::_Response[Types::ListQueueMembersResponse]
+      def members: () -> Array[Types::QueueMember]?
+      def next_token: () -> String?
+    end
+    def list_queue_members: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueMembersResponse
+
+    interface _ListQueuesResponse
+      include Smithy::Client::_Response[Types::ListQueuesResponse]
+      def queues: () -> Array[Types::QueueSummary]?
+      def next_token: () -> String?
+    end
+    def list_queues: (
+      ?farm_id: String,
+      ?principal_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuesResponse
+
+    interface _ListSessionActionsResponse
+      include Smithy::Client::_Response[Types::ListSessionActionsResponse]
+      def session_actions: () -> Array[Types::SessionActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_session_actions: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?session_id: String,
+      ?task_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSessionActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionActionsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def sessions: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ListSessionsForWorkerResponse
+      include Smithy::Client::_Response[Types::ListSessionsForWorkerResponse]
+      def sessions: () -> Array[Types::WorkerSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions_for_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSessionsForWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsForWorkerResponse
+
+    interface _ListStepConsumersResponse
+      include Smithy::Client::_Response[Types::ListStepConsumersResponse]
+      def consumers: () -> Array[Types::StepConsumer]?
+      def next_token: () -> String?
+    end
+    def list_step_consumers: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStepConsumersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStepConsumersResponse
+
+    interface _ListStepDependenciesResponse
+      include Smithy::Client::_Response[Types::ListStepDependenciesResponse]
+      def dependencies: () -> Array[Types::StepDependency]?
+      def next_token: () -> String?
+    end
+    def list_step_dependencies: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStepDependenciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStepDependenciesResponse
+
+    interface _ListStepsResponse
+      include Smithy::Client::_Response[Types::ListStepsResponse]
+      def steps: () -> Array[Types::StepSummary]?
+      def next_token: () -> String?
+    end
+    def list_steps: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStepsResponse
+
+    interface _ListStorageProfilesResponse
+      include Smithy::Client::_Response[Types::ListStorageProfilesResponse]
+      def storage_profiles: () -> Array[Types::StorageProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_storage_profiles: (
+      ?farm_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStorageProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStorageProfilesResponse
+
+    interface _ListStorageProfilesForQueueResponse
+      include Smithy::Client::_Response[Types::ListStorageProfilesForQueueResponse]
+      def storage_profiles: () -> Array[Types::StorageProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_storage_profiles_for_queue: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStorageProfilesForQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStorageProfilesForQueueResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTasksResponse
+      include Smithy::Client::_Response[Types::ListTasksResponse]
+      def tasks: () -> Array[Types::TaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_tasks: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
+
+    interface _ListWorkersResponse
+      include Smithy::Client::_Response[Types::ListWorkersResponse]
+      def next_token: () -> String?
+      def workers: () -> Array[Types::WorkerSummary]?
+    end
+    def list_workers: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkersResponse
+
+    interface _PutMeteredProductResponse
+      include Smithy::Client::_Response[Types::PutMeteredProductResponse]
+    end
+    def put_metered_product: (
+      ?license_endpoint_id: String,
+      ?product_id: String
+    ) -> _PutMeteredProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMeteredProductResponse
+
+    interface _SearchJobsResponse
+      include Smithy::Client::_Response[Types::SearchJobsResponse]
+      def jobs: () -> Array[Types::JobSearchSummary]?
+      def next_item_offset: () -> Integer?
+      def total_results: () -> Integer?
+    end
+    def search_jobs: (
+      ?farm_id: String,
+      ?queue_ids: Array[String],
+      ?filter_expressions: {
+        filters: Array[
+          {
+            date_time_filter: {
+              name: String,
+              operator: String,
+              date_time: Time
+            },
+            parameter_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            search_term_filter: {
+              search_term: String,
+              match_type: String
+            },
+            string_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            group_filter: untyped
+          }
+        ],
+        operator: String
+      },
+      ?sort_expressions: Array[
+        {
+          user_jobs_first: {
+            user_identity_id: String
+          },
+          field_sort: {
+            sort_order: String,
+            name: untyped
+          },
+          parameter_sort: {
+            sort_order: untyped,
+            name: untyped
+          }
+        }
+      ],
+      ?item_offset: Integer,
+      ?page_size: Integer
+    ) -> _SearchJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchJobsResponse
+
+    interface _SearchStepsResponse
+      include Smithy::Client::_Response[Types::SearchStepsResponse]
+      def steps: () -> Array[Types::StepSearchSummary]?
+      def next_item_offset: () -> Integer?
+      def total_results: () -> Integer?
+    end
+    def search_steps: (
+      ?farm_id: String,
+      ?queue_ids: Array[String],
+      ?job_id: String,
+      ?filter_expressions: {
+        filters: Array[
+          {
+            date_time_filter: {
+              name: String,
+              operator: String,
+              date_time: Time
+            },
+            parameter_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            search_term_filter: {
+              search_term: String,
+              match_type: String
+            },
+            string_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            group_filter: untyped
+          }
+        ],
+        operator: String
+      },
+      ?sort_expressions: Array[
+        {
+          user_jobs_first: {
+            user_identity_id: String
+          },
+          field_sort: {
+            sort_order: String,
+            name: untyped
+          },
+          parameter_sort: {
+            sort_order: untyped,
+            name: untyped
+          }
+        }
+      ],
+      ?item_offset: Integer,
+      ?page_size: Integer
+    ) -> _SearchStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchStepsResponse
+
+    interface _SearchTasksResponse
+      include Smithy::Client::_Response[Types::SearchTasksResponse]
+      def tasks: () -> Array[Types::TaskSearchSummary]?
+      def next_item_offset: () -> Integer?
+      def total_results: () -> Integer?
+    end
+    def search_tasks: (
+      ?farm_id: String,
+      ?queue_ids: Array[String],
+      ?job_id: String,
+      ?filter_expressions: {
+        filters: Array[
+          {
+            date_time_filter: {
+              name: String,
+              operator: String,
+              date_time: Time
+            },
+            parameter_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            search_term_filter: {
+              search_term: String,
+              match_type: String
+            },
+            string_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            group_filter: untyped
+          }
+        ],
+        operator: String
+      },
+      ?sort_expressions: Array[
+        {
+          user_jobs_first: {
+            user_identity_id: String
+          },
+          field_sort: {
+            sort_order: String,
+            name: untyped
+          },
+          parameter_sort: {
+            sort_order: untyped,
+            name: untyped
+          }
+        }
+      ],
+      ?item_offset: Integer,
+      ?page_size: Integer
+    ) -> _SearchTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTasksResponse
+
+    interface _SearchWorkersResponse
+      include Smithy::Client::_Response[Types::SearchWorkersResponse]
+      def workers: () -> Array[Types::WorkerSearchSummary]?
+      def next_item_offset: () -> Integer?
+      def total_results: () -> Integer?
+    end
+    def search_workers: (
+      ?farm_id: String,
+      ?fleet_ids: Array[String],
+      ?filter_expressions: {
+        filters: Array[
+          {
+            date_time_filter: {
+              name: String,
+              operator: String,
+              date_time: Time
+            },
+            parameter_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            search_term_filter: {
+              search_term: String,
+              match_type: String
+            },
+            string_filter: {
+              name: untyped,
+              operator: untyped,
+              value: String
+            },
+            group_filter: untyped
+          }
+        ],
+        operator: String
+      },
+      ?sort_expressions: Array[
+        {
+          user_jobs_first: {
+            user_identity_id: String
+          },
+          field_sort: {
+            sort_order: String,
+            name: untyped
+          },
+          parameter_sort: {
+            sort_order: untyped,
+            name: untyped
+          }
+        }
+      ],
+      ?item_offset: Integer,
+      ?page_size: Integer
+    ) -> _SearchWorkersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchWorkersResponse
+
+    interface _StartSessionsStatisticsAggregationResponse
+      include Smithy::Client::_Response[Types::StartSessionsStatisticsAggregationResponse]
+      def aggregation_id: () -> String?
+    end
+    def start_sessions_statistics_aggregation: (
+      ?farm_id: String,
+      ?resource_ids: {
+        queue_ids: Array[String],
+        fleet_ids: Array[String]
+      },
+      ?start_time: Time,
+      ?end_time: Time,
+      ?timezone: String,
+      ?period: String,
+      ?group_by: Array[String],
+      ?statistics: Array[String]
+    ) -> _StartSessionsStatisticsAggregationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionsStatisticsAggregationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBudgetResponse
+      include Smithy::Client::_Response[Types::UpdateBudgetResponse]
+    end
+    def update_budget: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?budget_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?status: String,
+      ?approximate_dollar_limit: Float,
+      ?actions_to_add: Array[
+        {
+          type: String,
+          threshold_percentage: Float,
+          description: String
+        }
+      ],
+      ?actions_to_remove: Array[
+        {
+          type: String,
+          threshold_percentage: Float
+        }
+      ],
+      ?schedule: {
+        fixed: {
+          start_time: Time,
+          end_time: Time
+        }
+      }
+    ) -> _UpdateBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBudgetResponse
+
+    interface _UpdateFarmResponse
+      include Smithy::Client::_Response[Types::UpdateFarmResponse]
+    end
+    def update_farm: (
+      ?farm_id: String,
+      ?display_name: String,
+      ?description: String
+    ) -> _UpdateFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFarmResponse
+
+    interface _UpdateFleetResponse
+      include Smithy::Client::_Response[Types::UpdateFleetResponse]
+    end
+    def update_fleet: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?min_worker_count: Integer,
+      ?max_worker_count: Integer,
+      ?configuration: {
+        customer_managed: {
+          mode: String,
+          worker_capabilities: {
+            v_cpu_count: {
+              min: Integer,
+              max: untyped
+            },
+            memory_mi_b: {
+              min: Integer,
+              max: untyped
+            },
+            accelerator_types: Array[String],
+            accelerator_count: {
+              min: Integer,
+              max: untyped
+            },
+            accelerator_total_memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            os_family: String,
+            cpu_architecture_type: String,
+            custom_amounts: Array[
+              {
+                name: String,
+                min: Float,
+                max: untyped
+              }
+            ],
+            custom_attributes: Array[
+              {
+                name: String,
+                values: Array[String]
+              }
+            ]
+          },
+          storage_profile_id: String,
+          tag_propagation_mode: String
+        },
+        service_managed_ec2: {
+          instance_capabilities: {
+            v_cpu_count: untyped,
+            memory_mi_b: untyped,
+            os_family: String,
+            cpu_architecture_type: untyped,
+            root_ebs_volume: {
+              size_gi_b: Integer,
+              iops: Integer,
+              throughput_mi_b: Integer
+            },
+            accelerator_capabilities: {
+              selections: Array[
+                {
+                  name: String,
+                  runtime: String
+                }
+              ],
+              count: untyped
+            },
+            allowed_instance_types: Array[String],
+            excluded_instance_types: untyped,
+            custom_amounts: untyped,
+            custom_attributes: untyped
+          },
+          instance_market_options: {
+            type: String
+          },
+          vpc_configuration: {
+            resource_configuration_arns: Array[String]
+          },
+          storage_profile_id: untyped
+        }
+      },
+      ?host_configuration: {
+        script_body: String,
+        script_timeout_seconds: Integer
+      }
+    ) -> _UpdateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetResponse
+
+    interface _UpdateJobResponse
+      include Smithy::Client::_Response[Types::UpdateJobResponse]
+    end
+    def update_job: (
+      ?client_token: String,
+      ?target_task_run_status: String,
+      ?priority: Integer,
+      ?max_failed_tasks_count: Integer,
+      ?max_retries_per_task: Integer,
+      ?lifecycle_status: String,
+      ?max_worker_count: Integer,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String
+    ) -> _UpdateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobResponse
+
+    interface _UpdateLimitResponse
+      include Smithy::Client::_Response[Types::UpdateLimitResponse]
+    end
+    def update_limit: (
+      ?farm_id: String,
+      ?limit_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?max_count: Integer
+    ) -> _UpdateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLimitResponse
+
+    interface _UpdateMonitorResponse
+      include Smithy::Client::_Response[Types::UpdateMonitorResponse]
+    end
+    def update_monitor: (
+      ?monitor_id: String,
+      ?subdomain: String,
+      ?display_name: String,
+      ?role_arn: String
+    ) -> _UpdateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitorResponse
+
+    interface _UpdateQueueResponse
+      include Smithy::Client::_Response[Types::UpdateQueueResponse]
+    end
+    def update_queue: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?default_budget_action: String,
+      ?job_attachment_settings: {
+        s3_bucket_name: String,
+        root_prefix: String
+      },
+      ?role_arn: String,
+      ?job_run_as_user: {
+        posix: {
+          user: String,
+          group: untyped
+        },
+        windows: {
+          user: untyped,
+          password_arn: untyped
+        },
+        run_as: String
+      },
+      ?required_file_system_location_names_to_add: Array[String],
+      ?required_file_system_location_names_to_remove: Array[String],
+      ?allowed_storage_profile_ids_to_add: Array[String],
+      ?allowed_storage_profile_ids_to_remove: Array[String]
+    ) -> _UpdateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueResponse
+
+    interface _UpdateQueueEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateQueueEnvironmentResponse]
+    end
+    def update_queue_environment: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?queue_environment_id: String,
+      ?priority: Integer,
+      ?template_type: String,
+      ?template: String
+    ) -> _UpdateQueueEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueEnvironmentResponse
+
+    interface _UpdateQueueFleetAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateQueueFleetAssociationResponse]
+    end
+    def update_queue_fleet_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?fleet_id: String,
+      ?status: String
+    ) -> _UpdateQueueFleetAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueFleetAssociationResponse
+
+    interface _UpdateQueueLimitAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateQueueLimitAssociationResponse]
+    end
+    def update_queue_limit_association: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?limit_id: String,
+      ?status: String
+    ) -> _UpdateQueueLimitAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueLimitAssociationResponse
+
+    interface _UpdateSessionResponse
+      include Smithy::Client::_Response[Types::UpdateSessionResponse]
+    end
+    def update_session: (
+      ?client_token: String,
+      ?target_lifecycle_status: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?session_id: String
+    ) -> _UpdateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSessionResponse
+
+    interface _UpdateStepResponse
+      include Smithy::Client::_Response[Types::UpdateStepResponse]
+    end
+    def update_step: (
+      ?target_task_run_status: String,
+      ?client_token: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String
+    ) -> _UpdateStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStepResponse
+
+    interface _UpdateStorageProfileResponse
+      include Smithy::Client::_Response[Types::UpdateStorageProfileResponse]
+    end
+    def update_storage_profile: (
+      ?client_token: String,
+      ?farm_id: String,
+      ?storage_profile_id: String,
+      ?display_name: String,
+      ?os_family: String,
+      ?file_system_locations_to_add: Array[
+        {
+          name: String,
+          path: String,
+          type: String
+        }
+      ],
+      ?file_system_locations_to_remove: Array[
+        {
+          name: String,
+          path: String,
+          type: String
+        }
+      ]
+    ) -> _UpdateStorageProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStorageProfileResponse
+
+    interface _UpdateTaskResponse
+      include Smithy::Client::_Response[Types::UpdateTaskResponse]
+    end
+    def update_task: (
+      ?client_token: String,
+      ?target_run_status: String,
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
+      ?step_id: String,
+      ?task_id: String
+    ) -> _UpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskResponse
+
+    interface _UpdateWorkerResponse
+      include Smithy::Client::_Response[Types::UpdateWorkerResponse]
+      def log: () -> Types::LogConfiguration?
+      def host_configuration: () -> Types::HostConfiguration?
+    end
+    def update_worker: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String,
+      ?status: String,
+      ?capabilities: {
+        amounts: Array[
+          {
+            name: String,
+            value: Float
+          }
+        ],
+        attributes: Array[
+          {
+            name: String,
+            values: Array[String]
+          }
+        ]
+      },
+      ?host_properties: {
+        ip_addresses: {
+          ip_v4_addresses: Array[String],
+          ip_v6_addresses: Array[String]
+        },
+        host_name: String
+      }
+    ) -> _UpdateWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkerResponse
+
+    interface _UpdateWorkerScheduleResponse
+      include Smithy::Client::_Response[Types::UpdateWorkerScheduleResponse]
+      def assigned_sessions: () -> Hash[String, Types::AssignedSession]?
+      def cancel_session_actions: () -> Hash[String, Array[String]]?
+      def desired_worker_status: () -> String?
+      def update_interval_seconds: () -> Integer?
+    end
+    def update_worker_schedule: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?worker_id: String,
+      ?updated_session_actions: Hash[String,
+        {
+          completed_status: String,
+          process_exit_code: Integer,
+          progress_message: String,
+          started_at: Time,
+          ended_at: untyped,
+          updated_at: untyped,
+          progress_percent: Float,
+          manifests: Array[
+            {
+              output_manifest_path: String,
+              output_manifest_hash: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateWorkerScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkerScheduleResponse
+  end
+end

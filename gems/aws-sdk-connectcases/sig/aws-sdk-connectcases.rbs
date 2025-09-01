@@ -1,0 +1,5 @@
+  module Aws
+    module ConnectCases
+      VERSION: String
+    end
+  end

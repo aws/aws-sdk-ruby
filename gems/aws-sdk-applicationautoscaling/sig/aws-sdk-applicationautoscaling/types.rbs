@@ -1,0 +1,1179 @@
+module Aws::ApplicationAutoScaling
+  module Types
+
+    module AdjustmentType
+      ChangeInCapacity: String
+      PercentChangeInCapacity: String
+      ExactCapacity: String
+    end
+
+    class Alarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?alarm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor alarm_arn: String?
+    end
+
+    class CapacityForecast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+    end
+
+    class ConcurrentUpdateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CustomizedMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?namespace: String,
+        ?dimensions: Array[Types::MetricDimension],
+        ?statistic: String,
+        ?unit: String,
+        ?metrics: Array[Types::TargetTrackingMetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+      attr_accessor dimensions: Array[Types::MetricDimension]?
+      attr_accessor statistic: String?
+      attr_accessor unit: String?
+      attr_accessor metrics: Array[Types::TargetTrackingMetricDataQuery]?
+    end
+
+    class DeleteScalingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+    end
+
+    class DeleteScalingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?scheduled_action_name: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor scheduled_action_name: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+    end
+
+    class DeleteScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterScalableTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+    end
+
+    class DeregisterScalableTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeScalableTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_ids: Array[String],
+        ?scalable_dimension: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_ids: Array[String]?
+      attr_accessor scalable_dimension: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalableTargetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalable_targets: Array[Types::ScalableTarget],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalable_targets: Array[Types::ScalableTarget]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingActivitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_not_scaled_activities: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_not_scaled_activities: bool?
+    end
+
+    class DescribeScalingActivitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_activities: Array[Types::ScalingActivity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_activities: Array[Types::ScalingActivity]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_names: Array[String],
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_names: Array[String]?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_policies: Array[Types::ScalingPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_policies: Array[Types::ScalingPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScheduledActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_names: Array[String],
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_names: Array[String]?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScheduledActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_actions: Array[Types::ScheduledAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_actions: Array[Types::ScheduledAction]?
+      attr_accessor next_token: String?
+    end
+
+    class FailedResourceAccessException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetPredictiveScalingForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?policy_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor policy_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class GetPredictiveScalingForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_forecast: Array[Types::LoadForecast],
+        ?capacity_forecast: Types::CapacityForecast,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_forecast: Array[Types::LoadForecast]?
+      attr_accessor capacity_forecast: Types::CapacityForecast?
+      attr_accessor update_time: Time?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LoadForecast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+        ?metric_specification: Types::PredictiveScalingMetricSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+      attr_accessor metric_specification: Types::PredictiveScalingMetricSpecification?
+    end
+
+    module MetricAggregationType
+      Average: String
+      Minimum: String
+      Maximum: String
+    end
+
+    class MetricDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module MetricStatistic
+      Average: String
+      Minimum: String
+      Maximum: String
+      SampleCount: String
+      Sum: String
+    end
+
+    module MetricType
+      DynamoDBReadCapacityUtilization: String
+      DynamoDBWriteCapacityUtilization: String
+      ALBRequestCountPerTarget: String
+      RDSReaderAverageCPUUtilization: String
+      RDSReaderAverageDatabaseConnections: String
+      EC2SpotFleetRequestAverageCPUUtilization: String
+      EC2SpotFleetRequestAverageNetworkIn: String
+      EC2SpotFleetRequestAverageNetworkOut: String
+      SageMakerVariantInvocationsPerInstance: String
+      ECSServiceAverageCPUUtilization: String
+      ECSServiceAverageMemoryUtilization: String
+      AppStreamAverageCapacityUtilization: String
+      ComprehendInferenceUtilization: String
+      LambdaProvisionedConcurrencyUtilization: String
+      CassandraReadCapacityUtilization: String
+      CassandraWriteCapacityUtilization: String
+      KafkaBrokerStorageUtilization: String
+      ElastiCacheEngineCPUUtilization: String
+      ElastiCacheDatabaseMemoryUsagePercentage: String
+      ElastiCachePrimaryEngineCPUUtilization: String
+      ElastiCacheReplicaEngineCPUUtilization: String
+      ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage: String
+      NeptuneReaderAverageCPUUtilization: String
+      SageMakerVariantProvisionedConcurrencyUtilization: String
+      ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage: String
+      SageMakerInferenceComponentInvocationsPerCopy: String
+      WorkSpacesAverageUserSessionsCapacityUtilization: String
+      SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution: String
+      SageMakerVariantConcurrentRequestsPerModelHighResolution: String
+    end
+
+    class NotScaledReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?max_capacity: Integer,
+        ?min_capacity: Integer,
+        ?current_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor max_capacity: Integer?
+      attr_accessor min_capacity: Integer?
+      attr_accessor current_capacity: Integer?
+    end
+
+    class ObjectNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PolicyType
+      StepScaling: String
+      TargetTrackingScaling: String
+      PredictiveScaling: String
+    end
+
+    class PredefinedMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PredictiveScalingCustomizedMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_queries: Array[Types::PredictiveScalingMetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_queries: Array[Types::PredictiveScalingMetricDataQuery]?
+    end
+
+    module PredictiveScalingMaxCapacityBreachBehavior
+      HonorMaxCapacity: String
+      IncreaseMaxCapacity: String
+    end
+
+    class PredictiveScalingMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Array[Types::PredictiveScalingMetricDimension],
+        ?metric_name: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Array[Types::PredictiveScalingMetricDimension]?
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+    end
+
+    class PredictiveScalingMetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?expression: String,
+        ?metric_stat: Types::PredictiveScalingMetricStat,
+        ?label: String,
+        ?return_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor expression: String?
+      attr_accessor metric_stat: Types::PredictiveScalingMetricStat?
+      attr_accessor label: String?
+      attr_accessor return_data: bool?
+    end
+
+    class PredictiveScalingMetricDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class PredictiveScalingMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_value: Float,
+        ?predefined_metric_pair_specification: Types::PredictiveScalingPredefinedMetricPairSpecification,
+        ?predefined_scaling_metric_specification: Types::PredictiveScalingPredefinedScalingMetricSpecification,
+        ?predefined_load_metric_specification: Types::PredictiveScalingPredefinedLoadMetricSpecification,
+        ?customized_scaling_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification,
+        ?customized_load_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification,
+        ?customized_capacity_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_value: Float?
+      attr_accessor predefined_metric_pair_specification: Types::PredictiveScalingPredefinedMetricPairSpecification?
+      attr_accessor predefined_scaling_metric_specification: Types::PredictiveScalingPredefinedScalingMetricSpecification?
+      attr_accessor predefined_load_metric_specification: Types::PredictiveScalingPredefinedLoadMetricSpecification?
+      attr_accessor customized_scaling_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification?
+      attr_accessor customized_load_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification?
+      attr_accessor customized_capacity_metric_specification: Types::PredictiveScalingCustomizedMetricSpecification?
+    end
+
+    class PredictiveScalingMetricStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::PredictiveScalingMetric,
+        ?stat: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::PredictiveScalingMetric?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+    end
+
+    module PredictiveScalingMode
+      ForecastOnly: String
+      ForecastAndScale: String
+    end
+
+    class PredictiveScalingPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_specifications: Array[Types::PredictiveScalingMetricSpecification],
+        ?mode: String,
+        ?scheduling_buffer_time: Integer,
+        ?max_capacity_breach_behavior: String,
+        ?max_capacity_buffer: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_specifications: Array[Types::PredictiveScalingMetricSpecification]?
+      attr_accessor mode: String?
+      attr_accessor scheduling_buffer_time: Integer?
+      attr_accessor max_capacity_breach_behavior: String?
+      attr_accessor max_capacity_buffer: Integer?
+    end
+
+    class PredictiveScalingPredefinedLoadMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PredictiveScalingPredefinedMetricPairSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PredictiveScalingPredefinedScalingMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PutScalingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?policy_type: String,
+        ?step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration,
+        ?target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration,
+        ?predictive_scaling_policy_configuration: Types::PredictiveScalingPolicyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor policy_type: String?
+      attr_accessor step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration?
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration?
+      attr_accessor predictive_scaling_policy_configuration: Types::PredictiveScalingPolicyConfiguration?
+    end
+
+    class PutScalingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?alarms: Array[Types::Alarm],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor alarms: Array[Types::Alarm]?
+    end
+
+    class PutScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?schedule: String,
+        ?timezone: String,
+        ?scheduled_action_name: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?scalable_target_action: Types::ScalableTargetAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor schedule: String?
+      attr_accessor timezone: String?
+      attr_accessor scheduled_action_name: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor scalable_target_action: Types::ScalableTargetAction?
+    end
+
+    class PutScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterScalableTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?min_capacity: Integer,
+        ?max_capacity: Integer,
+        ?role_arn: String,
+        ?suspended_state: Types::SuspendedState,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor min_capacity: Integer?
+      attr_accessor max_capacity: Integer?
+      attr_accessor role_arn: String?
+      attr_accessor suspended_state: Types::SuspendedState?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterScalableTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalable_target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalable_target_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    module ScalableDimension
+      ECSServiceDesiredCount: String
+      EC2SpotFleetRequestTargetCapacity: String
+      EMRInstanceGroupInstanceCount: String
+      AppstreamFleetDesiredCapacity: String
+      DynamoDBTableReadCapacityUnits: String
+      DynamoDBTableWriteCapacityUnits: String
+      DynamoDBIndexReadCapacityUnits: String
+      DynamoDBIndexWriteCapacityUnits: String
+      RDSClusterReadReplicaCount: String
+      SageMakerVariantDesiredInstanceCount: String
+      CustomResourceScalableDimension: String
+      ComprehendDocClassifierEndpointInferenceUnits: String
+      ComprehendEntityRecognizerEndpointInferenceUnits: String
+      LambdaFunctionProvisionedConcurrency: String
+      CassandraTableReadCapacityUnits: String
+      CassandraTableWriteCapacityUnits: String
+      KafkaBrokerStorageVolumeSize: String
+      ElastiCacheCacheClusterNodes: String
+      ElastiCacheReplicationGroupNodeGroups: String
+      ElastiCacheReplicationGroupReplicas: String
+      NeptuneClusterReadReplicaCount: String
+      SageMakerVariantDesiredProvisionedConcurrency: String
+      SageMakerInferenceComponentDesiredCopyCount: String
+      WorkSpacesWorkSpacesPoolDesiredUserSessions: String
+    end
+
+    class ScalableTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?min_capacity: Integer,
+        ?max_capacity: Integer,
+        ?predicted_capacity: Integer,
+        ?role_arn: String,
+        ?creation_time: Time,
+        ?suspended_state: Types::SuspendedState,
+        ?scalable_target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor min_capacity: Integer?
+      attr_accessor max_capacity: Integer?
+      attr_accessor predicted_capacity: Integer?
+      attr_accessor role_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor suspended_state: Types::SuspendedState?
+      attr_accessor scalable_target_arn: String?
+    end
+
+    class ScalableTargetAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_capacity: Integer,
+        ?max_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_capacity: Integer?
+      attr_accessor max_capacity: Integer?
+    end
+
+    class ScalingActivity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?description: String,
+        ?cause: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status_code: String,
+        ?status_message: String,
+        ?details: String,
+        ?not_scaled_reasons: Array[Types::NotScaledReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor description: String?
+      attr_accessor cause: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor details: String?
+      attr_accessor not_scaled_reasons: Array[Types::NotScaledReason]?
+    end
+
+    module ScalingActivityStatusCode
+      Pending: String
+      InProgress: String
+      Successful: String
+      Overridden: String
+      Unfulfilled: String
+      Failed: String
+    end
+
+    class ScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?service_namespace: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?policy_type: String,
+        ?step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration,
+        ?target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration,
+        ?predictive_scaling_policy_configuration: Types::PredictiveScalingPolicyConfiguration,
+        ?alarms: Array[Types::Alarm],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor service_namespace: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor policy_type: String?
+      attr_accessor step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration?
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration?
+      attr_accessor predictive_scaling_policy_configuration: Types::PredictiveScalingPolicyConfiguration?
+      attr_accessor alarms: Array[Types::Alarm]?
+      attr_accessor creation_time: Time?
+    end
+
+    class ScheduledAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?scheduled_action_arn: String,
+        ?service_namespace: String,
+        ?schedule: String,
+        ?timezone: String,
+        ?resource_id: String,
+        ?scalable_dimension: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?scalable_target_action: Types::ScalableTargetAction,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor scheduled_action_arn: String?
+      attr_accessor service_namespace: String?
+      attr_accessor schedule: String?
+      attr_accessor timezone: String?
+      attr_accessor resource_id: String?
+      attr_accessor scalable_dimension: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor scalable_target_action: Types::ScalableTargetAction?
+      attr_accessor creation_time: Time?
+    end
+
+    module ServiceNamespace
+      ECS: String
+      EMR: String
+      EC2: String
+      APPSTREAM: String
+      DYNAMODB: String
+      RDS: String
+      SAGEMAKER: String
+      CUSTOM_RESOURCE: String
+      COMPREHEND: String
+      LAMBDA: String
+      CASSANDRA: String
+      KAFKA: String
+      ELASTICACHE: String
+      NEPTUNE: String
+      WORKSPACES: String
+    end
+
+    class StepAdjustment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_interval_lower_bound: Float,
+        ?metric_interval_upper_bound: Float,
+        ?scaling_adjustment: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_interval_lower_bound: Float?
+      attr_accessor metric_interval_upper_bound: Float?
+      attr_accessor scaling_adjustment: Integer?
+    end
+
+    class StepScalingPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adjustment_type: String,
+        ?step_adjustments: Array[Types::StepAdjustment],
+        ?min_adjustment_magnitude: Integer,
+        ?cooldown: Integer,
+        ?metric_aggregation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adjustment_type: String?
+      attr_accessor step_adjustments: Array[Types::StepAdjustment]?
+      attr_accessor min_adjustment_magnitude: Integer?
+      attr_accessor cooldown: Integer?
+      attr_accessor metric_aggregation_type: String?
+    end
+
+    class SuspendedState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_scaling_in_suspended: bool,
+        ?dynamic_scaling_out_suspended: bool,
+        ?scheduled_scaling_suspended: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_scaling_in_suspended: bool?
+      attr_accessor dynamic_scaling_out_suspended: bool?
+      attr_accessor scheduled_scaling_suspended: bool?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetTrackingMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Array[Types::TargetTrackingMetricDimension],
+        ?metric_name: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Array[Types::TargetTrackingMetricDimension]?
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+    end
+
+    class TargetTrackingMetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?id: String,
+        ?label: String,
+        ?metric_stat: Types::TargetTrackingMetricStat,
+        ?return_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor id: String?
+      attr_accessor label: String?
+      attr_accessor metric_stat: Types::TargetTrackingMetricStat?
+      attr_accessor return_data: bool?
+    end
+
+    class TargetTrackingMetricDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class TargetTrackingMetricStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::TargetTrackingMetric,
+        ?stat: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::TargetTrackingMetric?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+    end
+
+    class TargetTrackingScalingPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_value: Float,
+        ?predefined_metric_specification: Types::PredefinedMetricSpecification,
+        ?customized_metric_specification: Types::CustomizedMetricSpecification,
+        ?scale_out_cooldown: Integer,
+        ?scale_in_cooldown: Integer,
+        ?disable_scale_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_value: Float?
+      attr_accessor predefined_metric_specification: Types::PredefinedMetricSpecification?
+      attr_accessor customized_metric_specification: Types::CustomizedMetricSpecification?
+      attr_accessor scale_out_cooldown: Integer?
+      attr_accessor scale_in_cooldown: Integer?
+      attr_accessor disable_scale_in: bool?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

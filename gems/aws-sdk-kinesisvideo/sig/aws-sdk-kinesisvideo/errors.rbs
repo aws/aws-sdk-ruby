@@ -1,0 +1,49 @@
+module Aws::KinesisVideo
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountChannelLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountStreamLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeviceStreamLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeviceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceFormatException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoDataRetentionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StreamEdgeConfigurationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagsPerResourceExceededLimitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VersionMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

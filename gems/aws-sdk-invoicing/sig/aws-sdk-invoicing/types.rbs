@@ -1,0 +1,731 @@
+module Aws::Invoicing
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class AmountBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sub_total_amount: String,
+        ?discounts: Types::DiscountsBreakdown,
+        ?taxes: Types::TaxesBreakdown,
+        ?fees: Types::FeesBreakdown,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sub_total_amount: String?
+      attr_accessor discounts: Types::DiscountsBreakdown?
+      attr_accessor taxes: Types::TaxesBreakdown?
+      attr_accessor fees: Types::FeesBreakdown?
+    end
+
+    class BatchGetInvoiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class BatchGetInvoiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiles: Array[Types::InvoiceProfile],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiles: Array[Types::InvoiceProfile]?
+    end
+
+    class BillingPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?month: Integer,
+        ?year: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor month: Integer?
+      attr_accessor year: Integer?
+    end
+
+    class CreateInvoiceUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?invoice_receiver: String,
+        ?description: String,
+        ?tax_inheritance_disabled: bool,
+        ?rule: Types::InvoiceUnitRule,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor invoice_receiver: String?
+      attr_accessor description: String?
+      attr_accessor tax_inheritance_disabled: bool?
+      attr_accessor rule: Types::InvoiceUnitRule?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateInvoiceUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+    end
+
+    class CurrencyExchangeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_currency_code: String,
+        ?target_currency_code: String,
+        ?rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_currency_code: String?
+      attr_accessor target_currency_code: String?
+      attr_accessor rate: String?
+    end
+
+    class DateInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class DeleteInvoiceUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+    end
+
+    class DeleteInvoiceUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+    end
+
+    class DiscountsBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?breakdown: Array[Types::DiscountsBreakdownAmount],
+        ?total_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor breakdown: Array[Types::DiscountsBreakdownAmount]?
+      attr_accessor total_amount: String?
+    end
+
+    class DiscountsBreakdownAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?amount: String,
+        ?rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor amount: String?
+      attr_accessor rate: String?
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoicing_entity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoicing_entity: String?
+    end
+
+    class FeesBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?breakdown: Array[Types::FeesBreakdownAmount],
+        ?total_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor breakdown: Array[Types::FeesBreakdownAmount]?
+      attr_accessor total_amount: String?
+    end
+
+    class FeesBreakdownAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?amount: String,
+        ?rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor amount: String?
+      attr_accessor rate: String?
+    end
+
+    class Filters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?invoice_receivers: Array[String],
+        ?accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor invoice_receivers: Array[String]?
+      attr_accessor accounts: Array[String]?
+    end
+
+    class GetInvoiceUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+        ?as_of: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+      attr_accessor as_of: Time?
+    end
+
+    class GetInvoiceUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+        ?invoice_receiver: String,
+        ?name: String,
+        ?description: String,
+        ?tax_inheritance_disabled: bool,
+        ?rule: Types::InvoiceUnitRule,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+      attr_accessor invoice_receiver: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tax_inheritance_disabled: bool?
+      attr_accessor rule: Types::InvoiceUnitRule?
+      attr_accessor last_modified: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: Integer?
+      attr_accessor message: String?
+    end
+
+    class InvoiceCurrencyAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_amount: String,
+        ?total_amount_before_tax: String,
+        ?currency_code: String,
+        ?amount_breakdown: Types::AmountBreakdown,
+        ?currency_exchange_details: Types::CurrencyExchangeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_amount: String?
+      attr_accessor total_amount_before_tax: String?
+      attr_accessor currency_code: String?
+      attr_accessor amount_breakdown: Types::AmountBreakdown?
+      attr_accessor currency_exchange_details: Types::CurrencyExchangeDetails?
+    end
+
+    class InvoiceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?receiver_name: String,
+        ?receiver_address: Types::ReceiverAddress,
+        ?receiver_email: String,
+        ?issuer: String,
+        ?tax_registration_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor receiver_name: String?
+      attr_accessor receiver_address: Types::ReceiverAddress?
+      attr_accessor receiver_email: String?
+      attr_accessor issuer: String?
+      attr_accessor tax_registration_number: String?
+    end
+
+    class InvoiceSummariesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_interval: Types::DateInterval,
+        ?billing_period: Types::BillingPeriod,
+        ?invoicing_entity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_interval: Types::DateInterval?
+      attr_accessor billing_period: Types::BillingPeriod?
+      attr_accessor invoicing_entity: String?
+    end
+
+    class InvoiceSummariesSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor value: String?
+    end
+
+    class InvoiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?invoice_id: String,
+        ?issued_date: Time,
+        ?due_date: Time,
+        ?entity: Types::Entity,
+        ?billing_period: Types::BillingPeriod,
+        ?invoice_type: String,
+        ?original_invoice_id: String,
+        ?purchase_order_number: String,
+        ?base_currency_amount: Types::InvoiceCurrencyAmount,
+        ?tax_currency_amount: Types::InvoiceCurrencyAmount,
+        ?payment_currency_amount: Types::InvoiceCurrencyAmount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor invoice_id: String?
+      attr_accessor issued_date: Time?
+      attr_accessor due_date: Time?
+      attr_accessor entity: Types::Entity?
+      attr_accessor billing_period: Types::BillingPeriod?
+      attr_accessor invoice_type: String?
+      attr_accessor original_invoice_id: String?
+      attr_accessor purchase_order_number: String?
+      attr_accessor base_currency_amount: Types::InvoiceCurrencyAmount?
+      attr_accessor tax_currency_amount: Types::InvoiceCurrencyAmount?
+      attr_accessor payment_currency_amount: Types::InvoiceCurrencyAmount?
+    end
+
+    module InvoiceType
+      INVOICE: String
+      CREDIT_MEMO: String
+    end
+
+    class InvoiceUnit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+        ?invoice_receiver: String,
+        ?name: String,
+        ?description: String,
+        ?tax_inheritance_disabled: bool,
+        ?rule: Types::InvoiceUnitRule,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+      attr_accessor invoice_receiver: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tax_inheritance_disabled: bool?
+      attr_accessor rule: Types::InvoiceUnitRule?
+      attr_accessor last_modified: Time?
+    end
+
+    class InvoiceUnitRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_accounts: Array[String]?
+    end
+
+    class ListInvoiceSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selector: Types::InvoiceSummariesSelector,
+        ?filter: Types::InvoiceSummariesFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selector: Types::InvoiceSummariesSelector?
+      attr_accessor filter: Types::InvoiceSummariesFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    module ListInvoiceSummariesResourceType
+      ACCOUNT_ID: String
+      INVOICE_ID: String
+    end
+
+    class ListInvoiceSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_summaries: Array[Types::InvoiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_summaries: Array[Types::InvoiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInvoiceUnitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::Filters,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?as_of: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::Filters?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor as_of: Time?
+    end
+
+    class ListInvoiceUnitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_units: Array[Types::InvoiceUnit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_units: Array[Types::InvoiceUnit]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class ReceiverAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_line1: String,
+        ?address_line2: String,
+        ?address_line3: String,
+        ?district_or_county: String,
+        ?city: String,
+        ?state_or_region: String,
+        ?country_code: String,
+        ?company_name: String,
+        ?postal_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_line1: String?
+      attr_accessor address_line2: String?
+      attr_accessor address_line3: String?
+      attr_accessor district_or_county: String?
+      attr_accessor city: String?
+      attr_accessor state_or_region: String?
+      attr_accessor country_code: String?
+      attr_accessor company_name: String?
+      attr_accessor postal_code: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaxesBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?breakdown: Array[Types::TaxesBreakdownAmount],
+        ?total_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor breakdown: Array[Types::TaxesBreakdownAmount]?
+      attr_accessor total_amount: String?
+    end
+
+    class TaxesBreakdownAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?amount: String,
+        ?rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor amount: String?
+      attr_accessor rate: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateInvoiceUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+        ?description: String,
+        ?tax_inheritance_disabled: bool,
+        ?rule: Types::InvoiceUnitRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+      attr_accessor description: String?
+      attr_accessor tax_inheritance_disabled: bool?
+      attr_accessor rule: Types::InvoiceUnitRule?
+    end
+
+    class UpdateInvoiceUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      NON_MEMBERS_PRESENT: String
+      MAX_ACCOUNTS_EXCEEDED: String
+      MAX_INVOICE_UNITS_EXCEEDED: String
+      DUPLICATE_INVOICE_UNIT: String
+      MUTUAL_EXCLUSION_ERROR: String
+      ACCOUNT_MEMBERSHIP_ERROR: String
+      TAX_SETTINGS_ERROR: String
+      EXPIRED_NEXT_TOKEN: String
+      INVALID_NEXT_TOKEN: String
+      INVALID_INPUT: String
+      FIELD_VALIDATION_FAILED: String
+      CANNOT_PARSE: String
+      UNKNOWN_OPERATION: String
+      OTHER: String
+    end
+  end
+end

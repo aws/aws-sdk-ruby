@@ -1,0 +1,722 @@
+module Aws::AmplifyBackend
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AmplifyBackend::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CloneBackendResponse
+      include Smithy::Client::_Response[Types::CloneBackendResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def clone_backend: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?target_environment_name: String
+    ) -> _CloneBackendResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloneBackendResponse
+
+    interface _CreateBackendResponse
+      include Smithy::Client::_Response[Types::CreateBackendResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def create_backend: (
+      ?app_id: String,
+      ?app_name: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+      },
+      ?resource_name: String
+    ) -> _CreateBackendResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendResponse
+
+    interface _CreateBackendAPIResponse
+      include Smithy::Client::_Response[Types::CreateBackendAPIResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def create_backend_api: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        additional_auth_types: Array[
+          {
+            mode: String,
+            settings: {
+              cognito_user_pool_id: String,
+              description: untyped,
+              expiration_time: Float,
+              open_id_auth_ttl: untyped,
+              open_id_client_id: untyped,
+              open_id_iat_ttl: untyped,
+              open_id_issue_url: untyped,
+              open_id_provider_name: untyped
+            }
+          }
+        ],
+        api_name: untyped,
+        conflict_resolution: {
+          resolution_strategy: String
+        },
+        default_auth_type: {
+          mode: untyped,
+          settings: untyped
+        },
+        service: untyped,
+        transform_schema: untyped
+      },
+      ?resource_name: String
+    ) -> _CreateBackendAPIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendAPIResponse
+
+    interface _CreateBackendAuthResponse
+      include Smithy::Client::_Response[Types::CreateBackendAuthResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def create_backend_auth: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        auth_resources: String,
+        identity_pool_configs: {
+          identity_pool_name: String,
+          unauthenticated_login: bool
+        },
+        service: String,
+        user_pool_configs: {
+          forgot_password: {
+            delivery_method: String,
+            email_settings: {
+              email_message: untyped,
+              email_subject: untyped
+            },
+            sms_settings: {
+              sms_message: untyped
+            }
+          },
+          mfa: {
+            mfa_mode: String,
+            settings: {
+              mfa_types: Array[String],
+              sms_message: untyped
+            }
+          },
+          o_auth: {
+            domain_prefix: untyped,
+            o_auth_grant_type: String,
+            o_auth_scopes: Array[String],
+            redirect_sign_in_ur_is: Array[String],
+            redirect_sign_out_ur_is: untyped,
+            social_provider_settings: {
+              facebook: {
+                client_id: untyped,
+                client_secret: untyped
+              },
+              google: untyped,
+              login_with_amazon: untyped,
+              sign_in_with_apple: {
+                client_id: untyped,
+                key_id: untyped,
+                private_key: untyped,
+                team_id: untyped
+              }
+            }
+          },
+          password_policy: {
+            additional_constraints: Array[String],
+            minimum_length: Float
+          },
+          required_sign_up_attributes: Array[String],
+          sign_in_method: String,
+          user_pool_name: untyped,
+          verification_message: {
+            delivery_method: untyped,
+            email_settings: untyped,
+            sms_settings: untyped
+          }
+        }
+      },
+      ?resource_name: String
+    ) -> _CreateBackendAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendAuthResponse
+
+    interface _CreateBackendConfigResponse
+      include Smithy::Client::_Response[Types::CreateBackendConfigResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def create_backend_config: (
+      ?app_id: String,
+      ?backend_manager_app_id: String
+    ) -> _CreateBackendConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendConfigResponse
+
+    interface _CreateBackendStorageResponse
+      include Smithy::Client::_Response[Types::CreateBackendStorageResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def create_backend_storage: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        bucket_name: String,
+        permissions: {
+          authenticated: Array[String],
+          un_authenticated: Array[String]
+        },
+        service_name: String
+      },
+      ?resource_name: String
+    ) -> _CreateBackendStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendStorageResponse
+
+    interface _CreateTokenResponse
+      include Smithy::Client::_Response[Types::CreateTokenResponse]
+      def app_id: () -> String?
+      def challenge_code: () -> String?
+      def session_id: () -> String?
+      def ttl: () -> String?
+    end
+    def create_token: (
+      ?app_id: String
+    ) -> _CreateTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTokenResponse
+
+    interface _DeleteBackendResponse
+      include Smithy::Client::_Response[Types::DeleteBackendResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def delete_backend: (
+      ?app_id: String,
+      ?backend_environment_name: String
+    ) -> _DeleteBackendResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackendResponse
+
+    interface _DeleteBackendAPIResponse
+      include Smithy::Client::_Response[Types::DeleteBackendAPIResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def delete_backend_api: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        additional_auth_types: Array[
+          {
+            mode: String,
+            settings: {
+              cognito_user_pool_id: String,
+              description: untyped,
+              expiration_time: Float,
+              open_id_auth_ttl: untyped,
+              open_id_client_id: untyped,
+              open_id_iat_ttl: untyped,
+              open_id_issue_url: untyped,
+              open_id_provider_name: untyped
+            }
+          }
+        ],
+        api_name: untyped,
+        conflict_resolution: {
+          resolution_strategy: String
+        },
+        default_auth_type: {
+          mode: untyped,
+          settings: untyped
+        },
+        service: untyped,
+        transform_schema: untyped
+      },
+      ?resource_name: String
+    ) -> _DeleteBackendAPIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackendAPIResponse
+
+    interface _DeleteBackendAuthResponse
+      include Smithy::Client::_Response[Types::DeleteBackendAuthResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def delete_backend_auth: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String
+    ) -> _DeleteBackendAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackendAuthResponse
+
+    interface _DeleteBackendStorageResponse
+      include Smithy::Client::_Response[Types::DeleteBackendStorageResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_backend_storage: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String,
+      ?service_name: String
+    ) -> _DeleteBackendStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackendStorageResponse
+
+    interface _DeleteTokenResponse
+      include Smithy::Client::_Response[Types::DeleteTokenResponse]
+      def is_success: () -> bool?
+    end
+    def delete_token: (
+      ?app_id: String,
+      ?session_id: String
+    ) -> _DeleteTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTokenResponse
+
+    interface _GenerateBackendAPIModelsResponse
+      include Smithy::Client::_Response[Types::GenerateBackendAPIModelsResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def generate_backend_api_models: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String
+    ) -> _GenerateBackendAPIModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateBackendAPIModelsResponse
+
+    interface _GetBackendResponse
+      include Smithy::Client::_Response[Types::GetBackendResponse]
+      def amplify_feature_flags: () -> String?
+      def amplify_meta_config: () -> String?
+      def app_id: () -> String?
+      def app_name: () -> String?
+      def backend_environment_list: () -> Array[String]?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+    end
+    def get_backend: (
+      ?app_id: String,
+      ?backend_environment_name: String
+    ) -> _GetBackendResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendResponse
+
+    interface _GetBackendAPIResponse
+      include Smithy::Client::_Response[Types::GetBackendAPIResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def resource_config: () -> Types::BackendAPIResourceConfig?
+      def resource_name: () -> String?
+    end
+    def get_backend_api: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        additional_auth_types: Array[
+          {
+            mode: String,
+            settings: {
+              cognito_user_pool_id: String,
+              description: untyped,
+              expiration_time: Float,
+              open_id_auth_ttl: untyped,
+              open_id_client_id: untyped,
+              open_id_iat_ttl: untyped,
+              open_id_issue_url: untyped,
+              open_id_provider_name: untyped
+            }
+          }
+        ],
+        api_name: untyped,
+        conflict_resolution: {
+          resolution_strategy: String
+        },
+        default_auth_type: {
+          mode: untyped,
+          settings: untyped
+        },
+        service: untyped,
+        transform_schema: untyped
+      },
+      ?resource_name: String
+    ) -> _GetBackendAPIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendAPIResponse
+
+    interface _GetBackendAPIModelsResponse
+      include Smithy::Client::_Response[Types::GetBackendAPIModelsResponse]
+      def models: () -> String?
+      def status: () -> String?
+      def model_introspection_schema: () -> String?
+    end
+    def get_backend_api_models: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String
+    ) -> _GetBackendAPIModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendAPIModelsResponse
+
+    interface _GetBackendAuthResponse
+      include Smithy::Client::_Response[Types::GetBackendAuthResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def resource_config: () -> Types::CreateBackendAuthResourceConfig?
+      def resource_name: () -> String?
+    end
+    def get_backend_auth: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String
+    ) -> _GetBackendAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendAuthResponse
+
+    interface _GetBackendJobResponse
+      include Smithy::Client::_Response[Types::GetBackendJobResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def create_time: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+      def update_time: () -> String?
+    end
+    def get_backend_job: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?job_id: String
+    ) -> _GetBackendJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendJobResponse
+
+    interface _GetBackendStorageResponse
+      include Smithy::Client::_Response[Types::GetBackendStorageResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def resource_config: () -> Types::GetBackendStorageResourceConfig?
+      def resource_name: () -> String?
+    end
+    def get_backend_storage: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_name: String
+    ) -> _GetBackendStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendStorageResponse
+
+    interface _GetTokenResponse
+      include Smithy::Client::_Response[Types::GetTokenResponse]
+      def app_id: () -> String?
+      def challenge_code: () -> String?
+      def session_id: () -> String?
+      def ttl: () -> String?
+    end
+    def get_token: (
+      ?app_id: String,
+      ?session_id: String
+    ) -> _GetTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTokenResponse
+
+    interface _ImportBackendAuthResponse
+      include Smithy::Client::_Response[Types::ImportBackendAuthResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def import_backend_auth: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?identity_pool_id: String,
+      ?native_client_id: String,
+      ?user_pool_id: String,
+      ?web_client_id: String
+    ) -> _ImportBackendAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportBackendAuthResponse
+
+    interface _ImportBackendStorageResponse
+      include Smithy::Client::_Response[Types::ImportBackendStorageResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def import_backend_storage: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?bucket_name: String,
+      ?service_name: String
+    ) -> _ImportBackendStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportBackendStorageResponse
+
+    interface _ListBackendJobsResponse
+      include Smithy::Client::_Response[Types::ListBackendJobsResponse]
+      def jobs: () -> Array[Types::BackendJobRespObj]?
+      def next_token: () -> String?
+    end
+    def list_backend_jobs: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?operation: String,
+      ?status: String
+    ) -> _ListBackendJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackendJobsResponse
+
+    interface _ListS3BucketsResponse
+      include Smithy::Client::_Response[Types::ListS3BucketsResponse]
+      def buckets: () -> Array[Types::S3BucketInfo]?
+      def next_token: () -> String?
+    end
+    def list_s3_buckets: (
+      ?next_token: String
+    ) -> _ListS3BucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListS3BucketsResponse
+
+    interface _RemoveAllBackendsResponse
+      include Smithy::Client::_Response[Types::RemoveAllBackendsResponse]
+      def app_id: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def remove_all_backends: (
+      ?app_id: String,
+      ?clean_amplify_app: bool
+    ) -> _RemoveAllBackendsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAllBackendsResponse
+
+    interface _RemoveBackendConfigResponse
+      include Smithy::Client::_Response[Types::RemoveBackendConfigResponse]
+      def error: () -> String?
+    end
+    def remove_backend_config: (
+      ?app_id: String
+    ) -> _RemoveBackendConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveBackendConfigResponse
+
+    interface _UpdateBackendAPIResponse
+      include Smithy::Client::_Response[Types::UpdateBackendAPIResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def update_backend_api: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        additional_auth_types: Array[
+          {
+            mode: String,
+            settings: {
+              cognito_user_pool_id: String,
+              description: untyped,
+              expiration_time: Float,
+              open_id_auth_ttl: untyped,
+              open_id_client_id: untyped,
+              open_id_iat_ttl: untyped,
+              open_id_issue_url: untyped,
+              open_id_provider_name: untyped
+            }
+          }
+        ],
+        api_name: untyped,
+        conflict_resolution: {
+          resolution_strategy: String
+        },
+        default_auth_type: {
+          mode: untyped,
+          settings: untyped
+        },
+        service: untyped,
+        transform_schema: untyped
+      },
+      ?resource_name: String
+    ) -> _UpdateBackendAPIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackendAPIResponse
+
+    interface _UpdateBackendAuthResponse
+      include Smithy::Client::_Response[Types::UpdateBackendAuthResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+    end
+    def update_backend_auth: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        auth_resources: String,
+        identity_pool_configs: {
+          unauthenticated_login: bool
+        },
+        service: String,
+        user_pool_configs: {
+          forgot_password: {
+            delivery_method: String,
+            email_settings: {
+              email_message: String,
+              email_subject: untyped
+            },
+            sms_settings: {
+              sms_message: untyped
+            }
+          },
+          mfa: {
+            mfa_mode: String,
+            settings: {
+              mfa_types: Array[String],
+              sms_message: untyped
+            }
+          },
+          o_auth: {
+            domain_prefix: untyped,
+            o_auth_grant_type: String,
+            o_auth_scopes: Array[String],
+            redirect_sign_in_ur_is: Array[String],
+            redirect_sign_out_ur_is: untyped,
+            social_provider_settings: {
+              facebook: {
+                client_id: untyped,
+                client_secret: untyped
+              },
+              google: untyped,
+              login_with_amazon: untyped,
+              sign_in_with_apple: {
+                client_id: untyped,
+                key_id: untyped,
+                private_key: untyped,
+                team_id: untyped
+              }
+            }
+          },
+          password_policy: {
+            additional_constraints: Array[String],
+            minimum_length: Float
+          },
+          verification_message: {
+            delivery_method: untyped,
+            email_settings: untyped,
+            sms_settings: untyped
+          }
+        }
+      },
+      ?resource_name: String
+    ) -> _UpdateBackendAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackendAuthResponse
+
+    interface _UpdateBackendConfigResponse
+      include Smithy::Client::_Response[Types::UpdateBackendConfigResponse]
+      def app_id: () -> String?
+      def backend_manager_app_id: () -> String?
+      def error: () -> String?
+      def login_auth_config: () -> Types::LoginAuthConfigReqObj?
+    end
+    def update_backend_config: (
+      ?app_id: String,
+      ?login_auth_config: {
+        aws_cognito_identity_pool_id: String,
+        aws_cognito_region: untyped,
+        aws_user_pools_id: untyped,
+        aws_user_pools_web_client_id: untyped
+      }
+    ) -> _UpdateBackendConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackendConfigResponse
+
+    interface _UpdateBackendJobResponse
+      include Smithy::Client::_Response[Types::UpdateBackendJobResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def create_time: () -> String?
+      def error: () -> String?
+      def job_id: () -> String?
+      def operation: () -> String?
+      def status: () -> String?
+      def update_time: () -> String?
+    end
+    def update_backend_job: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?job_id: String,
+      ?operation: String,
+      ?status: String
+    ) -> _UpdateBackendJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackendJobResponse
+
+    interface _UpdateBackendStorageResponse
+      include Smithy::Client::_Response[Types::UpdateBackendStorageResponse]
+      def app_id: () -> String?
+      def backend_environment_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def update_backend_storage: (
+      ?app_id: String,
+      ?backend_environment_name: String,
+      ?resource_config: {
+        permissions: {
+          authenticated: Array[String],
+          un_authenticated: Array[String]
+        },
+        service_name: String
+      },
+      ?resource_name: String
+    ) -> _UpdateBackendStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackendStorageResponse
+  end
+end

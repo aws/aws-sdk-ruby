@@ -1,0 +1,43 @@
+module Aws::ConnectCampaignsV2
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+      def retryable?: () -> true
+    end
+    class InvalidCampaignStateException < Smithy::Client::ServiceError
+      def state: () -> String?
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+      def retryable?: () -> true
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def x_amz_error_type: () -> String?
+    end
+  end
+end

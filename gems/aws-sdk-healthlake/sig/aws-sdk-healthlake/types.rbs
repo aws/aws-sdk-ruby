@@ -1,0 +1,743 @@
+module Aws::HealthLake
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AuthorizationStrategy
+      SMARTV1: String
+      SMART_ON_FHIR: String
+      AWS_AUTH: String
+    end
+
+    module CmkType
+      CM_CMK: String
+      AO_CMK: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateFHIRDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_name: String,
+        ?datastore_type_version: String,
+        ?sse_configuration: Types::SseConfiguration,
+        ?preload_data_config: Types::PreloadDataConfig,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?identity_provider_configuration: Types::IdentityProviderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_name: String?
+      attr_accessor datastore_type_version: String?
+      attr_accessor sse_configuration: Types::SseConfiguration?
+      attr_accessor preload_data_config: Types::PreloadDataConfig?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
+    end
+
+    class CreateFHIRDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_arn: String,
+        ?datastore_status: String,
+        ?datastore_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor datastore_status: String?
+      attr_accessor datastore_endpoint: String?
+    end
+
+    class DatastoreFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_name: String,
+        ?datastore_status: String,
+        ?created_before: Time,
+        ?created_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_name: String?
+      attr_accessor datastore_status: String?
+      attr_accessor created_before: Time?
+      attr_accessor created_after: Time?
+    end
+
+    class DatastoreProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_arn: String,
+        ?datastore_name: String,
+        ?datastore_status: String,
+        ?created_at: Time,
+        ?datastore_type_version: String,
+        ?datastore_endpoint: String,
+        ?sse_configuration: Types::SseConfiguration,
+        ?preload_data_config: Types::PreloadDataConfig,
+        ?identity_provider_configuration: Types::IdentityProviderConfiguration,
+        ?error_cause: Types::ErrorCause,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor datastore_name: String?
+      attr_accessor datastore_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor datastore_type_version: String?
+      attr_accessor datastore_endpoint: String?
+      attr_accessor sse_configuration: Types::SseConfiguration?
+      attr_accessor preload_data_config: Types::PreloadDataConfig?
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
+      attr_accessor error_cause: Types::ErrorCause?
+    end
+
+    module DatastoreStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      DELETED: String
+      CREATE_FAILED: String
+    end
+
+    class DeleteFHIRDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+    end
+
+    class DeleteFHIRDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_arn: String,
+        ?datastore_status: String,
+        ?datastore_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor datastore_status: String?
+      attr_accessor datastore_endpoint: String?
+    end
+
+    class DescribeFHIRDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+    end
+
+    class DescribeFHIRDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_properties: Types::DatastoreProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_properties: Types::DatastoreProperties?
+    end
+
+    class DescribeFHIRExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeFHIRExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_properties: Types::ExportJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_properties: Types::ExportJobProperties?
+    end
+
+    class DescribeFHIRImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeFHIRImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_properties: Types::ImportJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_properties: Types::ImportJobProperties?
+    end
+
+    module ErrorCategory
+      RETRYABLE_ERROR: String
+      NON_RETRYABLE_ERROR: String
+    end
+
+    class ErrorCause
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+        ?error_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+      attr_accessor error_category: String?
+    end
+
+    class ExportJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?submit_time: Time,
+        ?end_time: Time,
+        ?datastore_id: String,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submit_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor datastore_id: String?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor message: String?
+    end
+
+    module FHIRVersion
+      R4: String
+    end
+
+    class IdentityProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_strategy: String,
+        ?fine_grained_authorization_enabled: bool,
+        ?metadata: String,
+        ?idp_lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_strategy: String?
+      attr_accessor fine_grained_authorization_enabled: bool?
+      attr_accessor metadata: String?
+      attr_accessor idp_lambda_arn: String?
+    end
+
+    class ImportJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?submit_time: Time,
+        ?end_time: Time,
+        ?datastore_id: String,
+        ?input_data_config: Types::InputDataConfig,
+        ?job_output_data_config: Types::OutputDataConfig,
+        ?job_progress_report: Types::JobProgressReport,
+        ?data_access_role_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submit_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor datastore_id: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor job_output_data_config: Types::OutputDataConfig?
+      attr_accessor job_progress_report: Types::JobProgressReport?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor message: String?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+
+      class S3Uri < InputDataConfig
+      end
+      class Unknown < InputDataConfig
+      end
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobProgressReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_number_of_scanned_files: Integer,
+        ?total_size_of_scanned_files_in_mb: Float,
+        ?total_number_of_imported_files: Integer,
+        ?total_number_of_resources_scanned: Integer,
+        ?total_number_of_resources_imported: Integer,
+        ?total_number_of_resources_with_customer_error: Integer,
+        ?total_number_of_files_read_with_customer_error: Integer,
+        ?throughput: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_number_of_scanned_files: Integer?
+      attr_accessor total_size_of_scanned_files_in_mb: Float?
+      attr_accessor total_number_of_imported_files: Integer?
+      attr_accessor total_number_of_resources_scanned: Integer?
+      attr_accessor total_number_of_resources_imported: Integer?
+      attr_accessor total_number_of_resources_with_customer_error: Integer?
+      attr_accessor total_number_of_files_read_with_customer_error: Integer?
+      attr_accessor throughput: Float?
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      QUEUED: String
+      IN_PROGRESS: String
+      COMPLETED_WITH_ERRORS: String
+      COMPLETED: String
+      FAILED: String
+      CANCEL_SUBMITTED: String
+      CANCEL_IN_PROGRESS: String
+      CANCEL_COMPLETED: String
+      CANCEL_FAILED: String
+    end
+
+    class KmsEncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cmk_type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cmk_type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ListFHIRDatastoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::DatastoreFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::DatastoreFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFHIRDatastoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_properties_list: Array[Types::DatastoreProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_properties_list: Array[Types::DatastoreProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFHIRExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?job_name: String,
+        ?job_status: String,
+        ?submitted_before: Time,
+        ?submitted_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submitted_before: Time?
+      attr_accessor submitted_after: Time?
+    end
+
+    class ListFHIRExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_properties_list: Array[Types::ExportJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_properties_list: Array[Types::ExportJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFHIRImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?job_name: String,
+        ?job_status: String,
+        ?submitted_before: Time,
+        ?submitted_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submitted_before: Time?
+      attr_accessor submitted_after: Time?
+    end
+
+    class ListFHIRImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_job_properties_list: Array[Types::ImportJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_job_properties_list: Array[Types::ImportJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class OutputDataConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_configuration: Types::S3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3Configuration?
+
+      class S3Configuration < OutputDataConfig
+      end
+      class Unknown < OutputDataConfig
+      end
+    end
+
+    class PreloadDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preload_data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preload_data_type: String?
+    end
+
+    module PreloadDataType
+      SYNTHEA: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class SseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_encryption_config: Types::KmsEncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_config: Types::KmsEncryptionConfig?
+    end
+
+    class StartFHIRExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?output_data_config: Types::OutputDataConfig,
+        ?datastore_id: String,
+        ?data_access_role_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor datastore_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartFHIRExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor datastore_id: String?
+    end
+
+    class StartFHIRImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?input_data_config: Types::InputDataConfig,
+        ?job_output_data_config: Types::OutputDataConfig,
+        ?datastore_id: String,
+        ?data_access_role_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor job_output_data_config: Types::OutputDataConfig?
+      attr_accessor datastore_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartFHIRImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor datastore_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

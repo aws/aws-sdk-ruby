@@ -1,0 +1,4904 @@
+module Aws::SESv2
+  module Types
+
+    class AccountDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mail_type: String,
+        ?website_url: String,
+        ?contact_language: String,
+        ?use_case_description: String,
+        ?additional_contact_email_addresses: Array[String],
+        ?review_details: Types::ReviewDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mail_type: String?
+      attr_accessor website_url: String?
+      attr_accessor contact_language: String?
+      attr_accessor use_case_description: String?
+      attr_accessor additional_contact_email_addresses: Array[String]?
+      attr_accessor review_details: Types::ReviewDetails?
+    end
+
+    class AccountSuspendedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ArchivingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_arn: String?
+    end
+
+    class Attachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?raw_content: String,
+        ?content_disposition: String,
+        ?file_name: String,
+        ?content_description: String,
+        ?content_id: String,
+        ?content_transfer_encoding: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor raw_content: String?
+      attr_accessor content_disposition: String?
+      attr_accessor file_name: String?
+      attr_accessor content_description: String?
+      attr_accessor content_id: String?
+      attr_accessor content_transfer_encoding: String?
+      attr_accessor content_type: String?
+    end
+
+    module AttachmentContentDisposition
+      ATTACHMENT: String
+      INLINE: String
+    end
+
+    module AttachmentContentTransferEncoding
+      BASE64: String
+      QUOTED_PRINTABLE: String
+      SEVEN_BIT: String
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchGetMetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?namespace: String,
+        ?metric: String,
+        ?dimensions: Hash[String, String],
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor namespace: String?
+      attr_accessor metric: String?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class BatchGetMetricDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::BatchGetMetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::BatchGetMetricDataQuery]?
+    end
+
+    class BatchGetMetricDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::MetricDataResult],
+        ?errors: Array[Types::MetricDataError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::MetricDataResult]?
+      attr_accessor errors: Array[Types::MetricDataError]?
+    end
+
+    module BehaviorOnMxFailure
+      USE_DEFAULT_VALUE: String
+      REJECT_MESSAGE: String
+    end
+
+    class BlacklistEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rbl_name: String,
+        ?listing_time: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rbl_name: String?
+      attr_accessor listing_time: Time?
+      attr_accessor description: String?
+    end
+
+    class Body
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: Types::Content,
+        ?html: Types::Content,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::Content?
+      attr_accessor html: Types::Content?
+    end
+
+    class Bounce
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounce_type: String,
+        ?bounce_sub_type: String,
+        ?diagnostic_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounce_type: String?
+      attr_accessor bounce_sub_type: String?
+      attr_accessor diagnostic_code: String?
+    end
+
+    module BounceType
+      UNDETERMINED: String
+      TRANSIENT: String
+      PERMANENT: String
+    end
+
+    class BulkEmailContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template: Types::Template,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template: Types::Template?
+    end
+
+    class BulkEmailEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::Destination,
+        ?replacement_tags: Array[Types::MessageTag],
+        ?replacement_email_content: Types::ReplacementEmailContent,
+        ?replacement_headers: Array[Types::MessageHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::Destination?
+      attr_accessor replacement_tags: Array[Types::MessageTag]?
+      attr_accessor replacement_email_content: Types::ReplacementEmailContent?
+      attr_accessor replacement_headers: Array[Types::MessageHeader]?
+    end
+
+    class BulkEmailEntryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?error: String,
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor error: String?
+      attr_accessor message_id: String?
+    end
+
+    module BulkEmailStatus
+      SUCCESS: String
+      MESSAGE_REJECTED: String
+      MAIL_FROM_DOMAIN_NOT_VERIFIED: String
+      CONFIGURATION_SET_NOT_FOUND: String
+      TEMPLATE_NOT_FOUND: String
+      ACCOUNT_SUSPENDED: String
+      ACCOUNT_THROTTLED: String
+      ACCOUNT_DAILY_QUOTA_EXCEEDED: String
+      INVALID_SENDING_POOL_NAME: String
+      ACCOUNT_SENDING_PAUSED: String
+      CONFIGURATION_SET_SENDING_PAUSED: String
+      INVALID_PARAMETER: String
+      TRANSIENT_FAILURE: String
+      FAILED: String
+    end
+
+    class CancelExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CloudWatchDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_configurations: Array[Types::CloudWatchDimensionConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_configurations: Array[Types::CloudWatchDimensionConfiguration]?
+    end
+
+    class CloudWatchDimensionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_name: String,
+        ?dimension_value_source: String,
+        ?default_dimension_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_name: String?
+      attr_accessor dimension_value_source: String?
+      attr_accessor default_dimension_value: String?
+    end
+
+    class Complaint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?complaint_sub_type: String,
+        ?complaint_feedback_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor complaint_sub_type: String?
+      attr_accessor complaint_feedback_type: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?topic_preferences: Array[Types::TopicPreference],
+        ?topic_default_preferences: Array[Types::TopicPreference],
+        ?unsubscribe_all: bool,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor topic_preferences: Array[Types::TopicPreference]?
+      attr_accessor topic_default_preferences: Array[Types::TopicPreference]?
+      attr_accessor unsubscribe_all: bool?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    module ContactLanguage
+      EN: String
+      JA: String
+    end
+
+    class ContactList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class ContactListDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?contact_list_import_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor contact_list_import_action: String?
+    end
+
+    module ContactListImportAction
+      DELETE: String
+      PUT: String
+    end
+
+    class Content
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?charset: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor charset: String?
+    end
+
+    class CreateConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+        ?event_destination: Types::EventDestinationDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+      attr_accessor event_destination: Types::EventDestinationDefinition?
+    end
+
+    class CreateConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?tracking_options: Types::TrackingOptions,
+        ?delivery_options: Types::DeliveryOptions,
+        ?reputation_options: Types::ReputationOptions,
+        ?sending_options: Types::SendingOptions,
+        ?tags: Array[Types::Tag],
+        ?suppression_options: Types::SuppressionOptions,
+        ?vdm_options: Types::VdmOptions,
+        ?archiving_options: Types::ArchivingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor tracking_options: Types::TrackingOptions?
+      attr_accessor delivery_options: Types::DeliveryOptions?
+      attr_accessor reputation_options: Types::ReputationOptions?
+      attr_accessor sending_options: Types::SendingOptions?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor suppression_options: Types::SuppressionOptions?
+      attr_accessor vdm_options: Types::VdmOptions?
+      attr_accessor archiving_options: Types::ArchivingOptions?
+    end
+
+    class CreateConfigurationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateContactListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?topics: Array[Types::Topic],
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor topics: Array[Types::Topic]?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateContactListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?email_address: String,
+        ?topic_preferences: Array[Types::TopicPreference],
+        ?unsubscribe_all: bool,
+        ?attributes_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor email_address: String?
+      attr_accessor topic_preferences: Array[Types::TopicPreference]?
+      attr_accessor unsubscribe_all: bool?
+      attr_accessor attributes_data: String?
+    end
+
+    class CreateContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateCustomVerificationEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?from_email_address: String,
+        ?template_subject: String,
+        ?template_content: String,
+        ?success_redirection_url: String,
+        ?failure_redirection_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor from_email_address: String?
+      attr_accessor template_subject: String?
+      attr_accessor template_content: String?
+      attr_accessor success_redirection_url: String?
+      attr_accessor failure_redirection_url: String?
+    end
+
+    class CreateCustomVerificationEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDedicatedIpPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?tags: Array[Types::Tag],
+        ?scaling_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor scaling_mode: String?
+    end
+
+    class CreateDedicatedIpPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDeliverabilityTestReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+        ?from_email_address: String,
+        ?content: Types::EmailContent,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+      attr_accessor from_email_address: String?
+      attr_accessor content: Types::EmailContent?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDeliverabilityTestReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?deliverability_test_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor deliverability_test_status: String?
+    end
+
+    class CreateEmailIdentityPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?policy_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy: String?
+    end
+
+    class CreateEmailIdentityPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateEmailIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?tags: Array[Types::Tag],
+        ?dkim_signing_attributes: Types::DkimSigningAttributes,
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor dkim_signing_attributes: Types::DkimSigningAttributes?
+      attr_accessor configuration_set_name: String?
+    end
+
+    class CreateEmailIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_type: String,
+        ?verified_for_sending_status: bool,
+        ?dkim_attributes: Types::DkimAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_type: String?
+      attr_accessor verified_for_sending_status: bool?
+      attr_accessor dkim_attributes: Types::DkimAttributes?
+    end
+
+    class CreateEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_content: Types::EmailTemplateContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_content: Types::EmailTemplateContent?
+    end
+
+    class CreateEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_data_source: Types::ExportDataSource,
+        ?export_destination: Types::ExportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_data_source: Types::ExportDataSource?
+      attr_accessor export_destination: Types::ExportDestination?
+    end
+
+    class CreateExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CreateImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_destination: Types::ImportDestination,
+        ?import_data_source: Types::ImportDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_destination: Types::ImportDestination?
+      attr_accessor import_data_source: Types::ImportDataSource?
+    end
+
+    class CreateImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CreateMultiRegionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?details: Types::Details,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor details: Types::Details?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMultiRegionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor endpoint_id: String?
+    end
+
+    class CreateTenantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTenantResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class CreateTenantResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateTenantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?tenant_id: String,
+        ?tenant_arn: String,
+        ?created_timestamp: Time,
+        ?tags: Array[Types::Tag],
+        ?sending_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor tenant_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sending_status: String?
+    end
+
+    class CustomVerificationEmailTemplateMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?from_email_address: String,
+        ?template_subject: String,
+        ?success_redirection_url: String,
+        ?failure_redirection_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor from_email_address: String?
+      attr_accessor template_subject: String?
+      attr_accessor success_redirection_url: String?
+      attr_accessor failure_redirection_url: String?
+    end
+
+    class DailyVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: Time,
+        ?volume_statistics: Types::VolumeStatistics,
+        ?domain_isp_placements: Array[Types::DomainIspPlacement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: Time?
+      attr_accessor volume_statistics: Types::VolumeStatistics?
+      attr_accessor domain_isp_placements: Array[Types::DomainIspPlacement]?
+    end
+
+    class DashboardAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_metrics: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_metrics: String?
+    end
+
+    class DashboardOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_metrics: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_metrics: String?
+    end
+
+    module DataFormat
+      CSV: String
+      JSON: String
+    end
+
+    class DedicatedIp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip: String,
+        ?warmup_status: String,
+        ?warmup_percentage: Integer,
+        ?pool_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip: String?
+      attr_accessor warmup_status: String?
+      attr_accessor warmup_percentage: Integer?
+      attr_accessor pool_name: String?
+    end
+
+    class DedicatedIpPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?scaling_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor scaling_mode: String?
+    end
+
+    class DeleteConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+    end
+
+    class DeleteConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DeleteConfigurationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContactListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+    end
+
+    class DeleteContactListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor email_address: String?
+    end
+
+    class DeleteContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCustomVerificationEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+    end
+
+    class DeleteCustomVerificationEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDedicatedIpPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+    end
+
+    class DeleteDedicatedIpPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEmailIdentityPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor policy_name: String?
+    end
+
+    class DeleteEmailIdentityPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEmailIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+    end
+
+    class DeleteEmailIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+    end
+
+    class DeleteEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMultiRegionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+    end
+
+    class DeleteMultiRegionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteSuppressedDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+    end
+
+    class DeleteSuppressedDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTenantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+    end
+
+    class DeleteTenantResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteTenantResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTenantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DeliverabilityDashboardAccountStatus
+      ACTIVE: String
+      PENDING_EXPIRATION: String
+      DISABLED: String
+    end
+
+    class DeliverabilityTestReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_name: String,
+        ?subject: String,
+        ?from_email_address: String,
+        ?create_date: Time,
+        ?deliverability_test_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_name: String?
+      attr_accessor subject: String?
+      attr_accessor from_email_address: String?
+      attr_accessor create_date: Time?
+      attr_accessor deliverability_test_status: String?
+    end
+
+    module DeliverabilityTestStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+    end
+
+    module DeliveryEventType
+      SEND: String
+      DELIVERY: String
+      TRANSIENT_BOUNCE: String
+      PERMANENT_BOUNCE: String
+      UNDETERMINED_BOUNCE: String
+      COMPLAINT: String
+    end
+
+    class DeliveryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls_policy: String,
+        ?sending_pool_name: String,
+        ?max_delivery_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls_policy: String?
+      attr_accessor sending_pool_name: String?
+      attr_accessor max_delivery_seconds: Integer?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?to_addresses: Array[String],
+        ?cc_addresses: Array[String],
+        ?bcc_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor to_addresses: Array[String]?
+      attr_accessor cc_addresses: Array[String]?
+      attr_accessor bcc_addresses: Array[String]?
+    end
+
+    class Details
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routes_details: Array[Types::RouteDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routes_details: Array[Types::RouteDetails]?
+    end
+
+    module DimensionValueSource
+      MESSAGE_TAG: String
+      EMAIL_HEADER: String
+      LINK_TAG: String
+    end
+
+    class DkimAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_enabled: bool,
+        ?status: String,
+        ?tokens: Array[String],
+        ?signing_attributes_origin: String,
+        ?next_signing_key_length: String,
+        ?current_signing_key_length: String,
+        ?last_key_generation_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_enabled: bool?
+      attr_accessor status: String?
+      attr_accessor tokens: Array[String]?
+      attr_accessor signing_attributes_origin: String?
+      attr_accessor next_signing_key_length: String?
+      attr_accessor current_signing_key_length: String?
+      attr_accessor last_key_generation_timestamp: Time?
+    end
+
+    class DkimSigningAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_signing_selector: String,
+        ?domain_signing_private_key: String,
+        ?next_signing_key_length: String,
+        ?domain_signing_attributes_origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_signing_selector: String?
+      attr_accessor domain_signing_private_key: String?
+      attr_accessor next_signing_key_length: String?
+      attr_accessor domain_signing_attributes_origin: String?
+    end
+
+    module DkimSigningAttributesOrigin
+      AWS_SES: String
+      EXTERNAL: String
+      AWS_SES_AF_SOUTH_1: String
+      AWS_SES_EU_NORTH_1: String
+      AWS_SES_AP_SOUTH_1: String
+      AWS_SES_EU_WEST_3: String
+      AWS_SES_EU_WEST_2: String
+      AWS_SES_EU_SOUTH_1: String
+      AWS_SES_EU_WEST_1: String
+      AWS_SES_AP_NORTHEAST_3: String
+      AWS_SES_AP_NORTHEAST_2: String
+      AWS_SES_ME_SOUTH_1: String
+      AWS_SES_AP_NORTHEAST_1: String
+      AWS_SES_IL_CENTRAL_1: String
+      AWS_SES_SA_EAST_1: String
+      AWS_SES_CA_CENTRAL_1: String
+      AWS_SES_AP_SOUTHEAST_1: String
+      AWS_SES_AP_SOUTHEAST_2: String
+      AWS_SES_AP_SOUTHEAST_3: String
+      AWS_SES_EU_CENTRAL_1: String
+      AWS_SES_US_EAST_1: String
+      AWS_SES_US_EAST_2: String
+      AWS_SES_US_WEST_1: String
+      AWS_SES_US_WEST_2: String
+      AWS_SES_ME_CENTRAL_1: String
+      AWS_SES_AP_SOUTH_2: String
+      AWS_SES_EU_CENTRAL_2: String
+    end
+
+    module DkimSigningKeyLength
+      RSA_1024_BIT: String
+      RSA_2048_BIT: String
+    end
+
+    module DkimStatus
+      PENDING: String
+      SUCCESS: String
+      FAILED: String
+      TEMPORARY_FAILURE: String
+      NOT_STARTED: String
+    end
+
+    class DomainDeliverabilityCampaign
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_id: String,
+        ?image_url: String,
+        ?subject: String,
+        ?from_address: String,
+        ?sending_ips: Array[String],
+        ?first_seen_date_time: Time,
+        ?last_seen_date_time: Time,
+        ?inbox_count: Integer,
+        ?spam_count: Integer,
+        ?read_rate: Float,
+        ?delete_rate: Float,
+        ?read_delete_rate: Float,
+        ?projected_volume: Integer,
+        ?esps: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_id: String?
+      attr_accessor image_url: String?
+      attr_accessor subject: String?
+      attr_accessor from_address: String?
+      attr_accessor sending_ips: Array[String]?
+      attr_accessor first_seen_date_time: Time?
+      attr_accessor last_seen_date_time: Time?
+      attr_accessor inbox_count: Integer?
+      attr_accessor spam_count: Integer?
+      attr_accessor read_rate: Float?
+      attr_accessor delete_rate: Float?
+      attr_accessor read_delete_rate: Float?
+      attr_accessor projected_volume: Integer?
+      attr_accessor esps: Array[String]?
+    end
+
+    class DomainDeliverabilityTrackingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?subscription_start_date: Time,
+        ?inbox_placement_tracking_option: Types::InboxPlacementTrackingOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor subscription_start_date: Time?
+      attr_accessor inbox_placement_tracking_option: Types::InboxPlacementTrackingOption?
+    end
+
+    class DomainIspPlacement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?isp_name: String,
+        ?inbox_raw_count: Integer,
+        ?spam_raw_count: Integer,
+        ?inbox_percentage: Float,
+        ?spam_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor isp_name: String?
+      attr_accessor inbox_raw_count: Integer?
+      attr_accessor spam_raw_count: Integer?
+      attr_accessor inbox_percentage: Float?
+      attr_accessor spam_percentage: Float?
+    end
+
+    class EmailContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simple: Types::Message,
+        ?raw: Types::RawMessage,
+        ?template: Types::Template,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simple: Types::Message?
+      attr_accessor raw: Types::RawMessage?
+      attr_accessor template: Types::Template?
+    end
+
+    class EmailInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?isp: String,
+        ?events: Array[Types::InsightsEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor isp: String?
+      attr_accessor events: Array[Types::InsightsEvent]?
+    end
+
+    class EmailTemplateContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: String,
+        ?text: String,
+        ?html: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: String?
+      attr_accessor text: String?
+      attr_accessor html: String?
+    end
+
+    class EmailTemplateMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    module EngagementEventType
+      OPEN: String
+      CLICK: String
+    end
+
+    class EventBridgeDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+    end
+
+    class EventDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?enabled: bool,
+        ?matching_event_types: Array[String],
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?cloud_watch_destination: Types::CloudWatchDestination,
+        ?sns_destination: Types::SnsDestination,
+        ?event_bridge_destination: Types::EventBridgeDestination,
+        ?pinpoint_destination: Types::PinpointDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor enabled: bool?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor cloud_watch_destination: Types::CloudWatchDestination?
+      attr_accessor sns_destination: Types::SnsDestination?
+      attr_accessor event_bridge_destination: Types::EventBridgeDestination?
+      attr_accessor pinpoint_destination: Types::PinpointDestination?
+    end
+
+    class EventDestinationDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?matching_event_types: Array[String],
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?cloud_watch_destination: Types::CloudWatchDestination,
+        ?sns_destination: Types::SnsDestination,
+        ?event_bridge_destination: Types::EventBridgeDestination,
+        ?pinpoint_destination: Types::PinpointDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor cloud_watch_destination: Types::CloudWatchDestination?
+      attr_accessor sns_destination: Types::SnsDestination?
+      attr_accessor event_bridge_destination: Types::EventBridgeDestination?
+      attr_accessor pinpoint_destination: Types::PinpointDestination?
+    end
+
+    class EventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounce: Types::Bounce,
+        ?complaint: Types::Complaint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounce: Types::Bounce?
+      attr_accessor complaint: Types::Complaint?
+    end
+
+    module EventType
+      SEND: String
+      REJECT: String
+      BOUNCE: String
+      COMPLAINT: String
+      DELIVERY: String
+      OPEN: String
+      CLICK: String
+      RENDERING_FAILURE: String
+      DELIVERY_DELAY: String
+      SUBSCRIPTION: String
+    end
+
+    class ExportDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_data_source: Types::MetricsDataSource,
+        ?message_insights_data_source: Types::MessageInsightsDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_data_source: Types::MetricsDataSource?
+      attr_accessor message_insights_data_source: Types::MessageInsightsDataSource?
+    end
+
+    class ExportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_format: String,
+        ?s3_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_format: String?
+      attr_accessor s3_url: String?
+    end
+
+    class ExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?export_source_type: String,
+        ?job_status: String,
+        ?created_timestamp: Time,
+        ?completed_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor export_source_type: String?
+      attr_accessor job_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+    end
+
+    class ExportMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?aggregation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor aggregation: String?
+    end
+
+    module ExportSourceType
+      METRICS_DATA: String
+      MESSAGE_INSIGHTS: String
+    end
+
+    class ExportStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?processed_records_count: Integer,
+        ?exported_records_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor processed_records_count: Integer?
+      attr_accessor exported_records_count: Integer?
+    end
+
+    class FailureInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_records_s3_url: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_records_s3_url: String?
+      attr_accessor error_message: String?
+    end
+
+    module FeatureStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class GetAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_ip_auto_warmup_enabled: bool,
+        ?enforcement_status: String,
+        ?production_access_enabled: bool,
+        ?send_quota: Types::SendQuota,
+        ?sending_enabled: bool,
+        ?suppression_attributes: Types::SuppressionAttributes,
+        ?details: Types::AccountDetails,
+        ?vdm_attributes: Types::VdmAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_ip_auto_warmup_enabled: bool?
+      attr_accessor enforcement_status: String?
+      attr_accessor production_access_enabled: bool?
+      attr_accessor send_quota: Types::SendQuota?
+      attr_accessor sending_enabled: bool?
+      attr_accessor suppression_attributes: Types::SuppressionAttributes?
+      attr_accessor details: Types::AccountDetails?
+      attr_accessor vdm_attributes: Types::VdmAttributes?
+    end
+
+    class GetBlacklistReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blacklist_item_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blacklist_item_names: Array[String]?
+    end
+
+    class GetBlacklistReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blacklist_report: Hash[String, Array[Types::BlacklistEntry]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blacklist_report: Hash[String, Array[Types::BlacklistEntry]]?
+    end
+
+    class GetConfigurationSetEventDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class GetConfigurationSetEventDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_destinations: Array[Types::EventDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_destinations: Array[Types::EventDestination]?
+    end
+
+    class GetConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class GetConfigurationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?tracking_options: Types::TrackingOptions,
+        ?delivery_options: Types::DeliveryOptions,
+        ?reputation_options: Types::ReputationOptions,
+        ?sending_options: Types::SendingOptions,
+        ?tags: Array[Types::Tag],
+        ?suppression_options: Types::SuppressionOptions,
+        ?vdm_options: Types::VdmOptions,
+        ?archiving_options: Types::ArchivingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor tracking_options: Types::TrackingOptions?
+      attr_accessor delivery_options: Types::DeliveryOptions?
+      attr_accessor reputation_options: Types::ReputationOptions?
+      attr_accessor sending_options: Types::SendingOptions?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor suppression_options: Types::SuppressionOptions?
+      attr_accessor vdm_options: Types::VdmOptions?
+      attr_accessor archiving_options: Types::ArchivingOptions?
+    end
+
+    class GetContactListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+    end
+
+    class GetContactListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?topics: Array[Types::Topic],
+        ?description: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor topics: Array[Types::Topic]?
+      attr_accessor description: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class GetContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor email_address: String?
+    end
+
+    class GetContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?email_address: String,
+        ?topic_preferences: Array[Types::TopicPreference],
+        ?topic_default_preferences: Array[Types::TopicPreference],
+        ?unsubscribe_all: bool,
+        ?attributes_data: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor email_address: String?
+      attr_accessor topic_preferences: Array[Types::TopicPreference]?
+      attr_accessor topic_default_preferences: Array[Types::TopicPreference]?
+      attr_accessor unsubscribe_all: bool?
+      attr_accessor attributes_data: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class GetCustomVerificationEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+    end
+
+    class GetCustomVerificationEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?from_email_address: String,
+        ?template_subject: String,
+        ?template_content: String,
+        ?success_redirection_url: String,
+        ?failure_redirection_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor from_email_address: String?
+      attr_accessor template_subject: String?
+      attr_accessor template_content: String?
+      attr_accessor success_redirection_url: String?
+      attr_accessor failure_redirection_url: String?
+    end
+
+    class GetDedicatedIpPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+    end
+
+    class GetDedicatedIpPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_ip_pool: Types::DedicatedIpPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_ip_pool: Types::DedicatedIpPool?
+    end
+
+    class GetDedicatedIpRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip: String?
+    end
+
+    class GetDedicatedIpResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_ip: Types::DedicatedIp,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_ip: Types::DedicatedIp?
+    end
+
+    class GetDedicatedIpsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class GetDedicatedIpsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_ips: Array[Types::DedicatedIp],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_ips: Array[Types::DedicatedIp]?
+      attr_accessor next_token: String?
+    end
+
+    class GetDeliverabilityDashboardOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDeliverabilityDashboardOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_enabled: bool,
+        ?subscription_expiry_date: Time,
+        ?account_status: String,
+        ?active_subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption],
+        ?pending_expiration_subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_enabled: bool?
+      attr_accessor subscription_expiry_date: Time?
+      attr_accessor account_status: String?
+      attr_accessor active_subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption]?
+      attr_accessor pending_expiration_subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption]?
+    end
+
+    class GetDeliverabilityTestReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    class GetDeliverabilityTestReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deliverability_test_report: Types::DeliverabilityTestReport,
+        ?overall_placement: Types::PlacementStatistics,
+        ?isp_placements: Array[Types::IspPlacement],
+        ?message: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deliverability_test_report: Types::DeliverabilityTestReport?
+      attr_accessor overall_placement: Types::PlacementStatistics?
+      attr_accessor isp_placements: Array[Types::IspPlacement]?
+      attr_accessor message: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class GetDomainDeliverabilityCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_id: String?
+    end
+
+    class GetDomainDeliverabilityCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_deliverability_campaign: Types::DomainDeliverabilityCampaign,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_deliverability_campaign: Types::DomainDeliverabilityCampaign?
+    end
+
+    class GetDomainStatisticsReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class GetDomainStatisticsReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overall_volume: Types::OverallVolume,
+        ?daily_volumes: Array[Types::DailyVolume],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overall_volume: Types::OverallVolume?
+      attr_accessor daily_volumes: Array[Types::DailyVolume]?
+    end
+
+    class GetEmailIdentityPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+    end
+
+    class GetEmailIdentityPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Hash[String, String]?
+    end
+
+    class GetEmailIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+    end
+
+    class GetEmailIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_type: String,
+        ?feedback_forwarding_status: bool,
+        ?verified_for_sending_status: bool,
+        ?dkim_attributes: Types::DkimAttributes,
+        ?mail_from_attributes: Types::MailFromAttributes,
+        ?policies: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?configuration_set_name: String,
+        ?verification_status: String,
+        ?verification_info: Types::VerificationInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_type: String?
+      attr_accessor feedback_forwarding_status: bool?
+      attr_accessor verified_for_sending_status: bool?
+      attr_accessor dkim_attributes: Types::DkimAttributes?
+      attr_accessor mail_from_attributes: Types::MailFromAttributes?
+      attr_accessor policies: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_info: Types::VerificationInfo?
+    end
+
+    class GetEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+    end
+
+    class GetEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_content: Types::EmailTemplateContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_content: Types::EmailTemplateContent?
+    end
+
+    class GetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?export_source_type: String,
+        ?job_status: String,
+        ?export_destination: Types::ExportDestination,
+        ?export_data_source: Types::ExportDataSource,
+        ?created_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?failure_info: Types::FailureInfo,
+        ?statistics: Types::ExportStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor export_source_type: String?
+      attr_accessor job_status: String?
+      attr_accessor export_destination: Types::ExportDestination?
+      attr_accessor export_data_source: Types::ExportDataSource?
+      attr_accessor created_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor failure_info: Types::FailureInfo?
+      attr_accessor statistics: Types::ExportStatistics?
+    end
+
+    class GetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?import_destination: Types::ImportDestination,
+        ?import_data_source: Types::ImportDataSource,
+        ?failure_info: Types::FailureInfo,
+        ?job_status: String,
+        ?created_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?processed_records_count: Integer,
+        ?failed_records_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor import_destination: Types::ImportDestination?
+      attr_accessor import_data_source: Types::ImportDataSource?
+      attr_accessor failure_info: Types::FailureInfo?
+      attr_accessor job_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor processed_records_count: Integer?
+      attr_accessor failed_records_count: Integer?
+    end
+
+    class GetMessageInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class GetMessageInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?from_email_address: String,
+        ?subject: String,
+        ?email_tags: Array[Types::MessageTag],
+        ?insights: Array[Types::EmailInsights],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor from_email_address: String?
+      attr_accessor subject: String?
+      attr_accessor email_tags: Array[Types::MessageTag]?
+      attr_accessor insights: Array[Types::EmailInsights]?
+    end
+
+    class GetMultiRegionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+    end
+
+    class GetMultiRegionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?endpoint_id: String,
+        ?routes: Array[Types::Route],
+        ?status: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor routes: Array[Types::Route]?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class GetReputationEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entity_reference: String,
+        ?reputation_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entity_reference: String?
+      attr_accessor reputation_entity_type: String?
+    end
+
+    class GetReputationEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entity: Types::ReputationEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entity: Types::ReputationEntity?
+    end
+
+    class GetSuppressedDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+    end
+
+    class GetSuppressedDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_destination: Types::SuppressedDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_destination: Types::SuppressedDestination?
+    end
+
+    class GetTenantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+    end
+
+    class GetTenantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant: Types::Tenant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant: Types::Tenant?
+    end
+
+    class GuardianAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optimized_shared_delivery: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optimized_shared_delivery: String?
+    end
+
+    class GuardianOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optimized_shared_delivery: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optimized_shared_delivery: String?
+    end
+
+    module HttpsPolicy
+      REQUIRE: String
+      REQUIRE_OPEN_ONLY: String
+      OPTIONAL: String
+    end
+
+    class IdentityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_type: String,
+        ?identity_name: String,
+        ?sending_enabled: bool,
+        ?verification_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_type: String?
+      attr_accessor identity_name: String?
+      attr_accessor sending_enabled: bool?
+      attr_accessor verification_status: String?
+    end
+
+    module IdentityType
+      EMAIL_ADDRESS: String
+      DOMAIN: String
+      MANAGED_DOMAIN: String
+    end
+
+    class ImportDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_url: String,
+        ?data_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_url: String?
+      attr_accessor data_format: String?
+    end
+
+    class ImportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppression_list_destination: Types::SuppressionListDestination,
+        ?contact_list_destination: Types::ContactListDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppression_list_destination: Types::SuppressionListDestination?
+      attr_accessor contact_list_destination: Types::ContactListDestination?
+    end
+
+    module ImportDestinationType
+      SUPPRESSION_LIST: String
+      CONTACT_LIST: String
+    end
+
+    class ImportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?import_destination: Types::ImportDestination,
+        ?job_status: String,
+        ?created_timestamp: Time,
+        ?processed_records_count: Integer,
+        ?failed_records_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor import_destination: Types::ImportDestination?
+      attr_accessor job_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor processed_records_count: Integer?
+      attr_accessor failed_records_count: Integer?
+    end
+
+    class InboxPlacementTrackingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global: bool,
+        ?tracked_isps: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global: bool?
+      attr_accessor tracked_isps: Array[String]?
+    end
+
+    class InsightsEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?type: String,
+        ?details: Types::EventDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor type: String?
+      attr_accessor details: Types::EventDetails?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IspPlacement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?isp_name: String,
+        ?placement_statistics: Types::PlacementStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor isp_name: String?
+      attr_accessor placement_statistics: Types::PlacementStatistics?
+    end
+
+    module JobStatus
+      CREATED: String
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class KinesisFirehoseDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?delivery_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor delivery_stream_arn: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListConfigurationSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListConfigurationSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_sets: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_sets: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContactListsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContactListsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_lists: Array[Types::ContactList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_lists: Array[Types::ContactList]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContactsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filtered_status: String,
+        ?topic_filter: Types::TopicFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filtered_status: String?
+      attr_accessor topic_filter: Types::TopicFilter?
+    end
+
+    class ListContactsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?filter: Types::ListContactsFilter,
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor filter: Types::ListContactsFilter?
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContactsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contacts: Array[Types::Contact],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contacts: Array[Types::Contact]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomVerificationEmailTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListCustomVerificationEmailTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_verification_email_templates: Array[Types::CustomVerificationEmailTemplateMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_verification_email_templates: Array[Types::CustomVerificationEmailTemplateMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDedicatedIpPoolsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListDedicatedIpPoolsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_ip_pools: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_ip_pools: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeliverabilityTestReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListDeliverabilityTestReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deliverability_test_reports: Array[Types::DeliverabilityTestReport],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deliverability_test_reports: Array[Types::DeliverabilityTestReport]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainDeliverabilityCampaignsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: Time,
+        ?end_date: Time,
+        ?subscribed_domain: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor subscribed_domain: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListDomainDeliverabilityCampaignsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_deliverability_campaigns: Array[Types::DomainDeliverabilityCampaign],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_deliverability_campaigns: Array[Types::DomainDeliverabilityCampaign]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEmailIdentitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListEmailIdentitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identities: Array[Types::IdentityInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identities: Array[Types::IdentityInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEmailTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListEmailTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates_metadata: Array[Types::EmailTemplateMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates_metadata: Array[Types::EmailTemplateMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+        ?export_source_type: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor export_source_type: String?
+      attr_accessor job_status: String?
+    end
+
+    class ListExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_jobs: Array[Types::ExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_jobs: Array[Types::ExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_destination_type: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_destination_type: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_jobs: Array[Types::ImportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_jobs: Array[Types::ImportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagementOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?topic_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor topic_name: String?
+    end
+
+    class ListMultiRegionEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListMultiRegionEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multi_region_endpoints: Array[Types::MultiRegionEndpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multi_region_endpoints: Array[Types::MultiRegionEndpoint]?
+      attr_accessor next_token: String?
+    end
+
+    module ListRecommendationsFilterKey
+      TYPE: String
+      IMPACT: String
+      STATUS: String
+      RESOURCE_ARN: String
+    end
+
+    class ListRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Hash[String, String],
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Hash[String, String]?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendations: Array[Types::Recommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendations: Array[Types::Recommendation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReputationEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Hash[String, String],
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Hash[String, String]?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListReputationEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entities: Array[Types::ReputationEntity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entities: Array[Types::ReputationEntity]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTenantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTenantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tenants: Array[Types::ResourceTenantMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tenants: Array[Types::ResourceTenantMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSuppressedDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reasons: Array[String],
+        ?start_date: Time,
+        ?end_date: Time,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reasons: Array[String]?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListSuppressedDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_destination_summaries: Array[Types::SuppressedDestinationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_destination_summaries: Array[Types::SuppressedDestinationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ListTenantResourcesFilterKey
+      RESOURCE_TYPE: String
+    end
+
+    class ListTenantResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?filter: Hash[String, String],
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor filter: Hash[String, String]?
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTenantResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_resources: Array[Types::TenantResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_resources: Array[Types::TenantResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTenantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListTenantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenants: Array[Types::TenantInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenants: Array[Types::TenantInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class MailFromAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mail_from_domain: String,
+        ?mail_from_domain_status: String,
+        ?behavior_on_mx_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mail_from_domain: String?
+      attr_accessor mail_from_domain_status: String?
+      attr_accessor behavior_on_mx_failure: String?
+    end
+
+    class MailFromDomainNotVerifiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MailFromDomainStatus
+      PENDING: String
+      SUCCESS: String
+      FAILED: String
+      TEMPORARY_FAILURE: String
+    end
+
+    module MailType
+      MARKETING: String
+      TRANSACTIONAL: String
+    end
+
+    class Message
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: Types::Content,
+        ?body: Types::Body,
+        ?headers: Array[Types::MessageHeader],
+        ?attachments: Array[Types::Attachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: Types::Content?
+      attr_accessor body: Types::Body?
+      attr_accessor headers: Array[Types::MessageHeader]?
+      attr_accessor attachments: Array[Types::Attachment]?
+    end
+
+    class MessageHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class MessageInsightsDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: Time,
+        ?end_date: Time,
+        ?include: Types::MessageInsightsFilters,
+        ?exclude: Types::MessageInsightsFilters,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor include: Types::MessageInsightsFilters?
+      attr_accessor exclude: Types::MessageInsightsFilters?
+      attr_accessor max_results: Integer?
+    end
+
+    class MessageInsightsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_email_address: Array[String],
+        ?destination: Array[String],
+        ?subject: Array[String],
+        ?isp: Array[String],
+        ?last_delivery_event: Array[String],
+        ?last_engagement_event: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_email_address: Array[String]?
+      attr_accessor destination: Array[String]?
+      attr_accessor subject: Array[String]?
+      attr_accessor isp: Array[String]?
+      attr_accessor last_delivery_event: Array[String]?
+      attr_accessor last_engagement_event: Array[String]?
+    end
+
+    class MessageRejected
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MessageTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module Metric
+      SEND: String
+      COMPLAINT: String
+      PERMANENT_BOUNCE: String
+      TRANSIENT_BOUNCE: String
+      OPEN: String
+      CLICK: String
+      DELIVERY: String
+      DELIVERY_OPEN: String
+      DELIVERY_CLICK: String
+      DELIVERY_COMPLAINT: String
+    end
+
+    module MetricAggregation
+      RATE: String
+      VOLUME: String
+    end
+
+    class MetricDataError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class MetricDataResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?timestamps: Array[Time],
+        ?values: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Integer]?
+    end
+
+    module MetricDimensionName
+      EMAIL_IDENTITY: String
+      CONFIGURATION_SET: String
+      ISP: String
+    end
+
+    module MetricNamespace
+      VDM: String
+    end
+
+    class MetricsDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Hash[String, Array[String]],
+        ?namespace: String,
+        ?metrics: Array[Types::ExportMetric],
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Hash[String, Array[String]]?
+      attr_accessor namespace: String?
+      attr_accessor metrics: Array[Types::ExportMetric]?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class MultiRegionEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?status: String,
+        ?endpoint_id: String,
+        ?regions: Array[String],
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor status: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OverallVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_statistics: Types::VolumeStatistics,
+        ?read_rate_percent: Float,
+        ?domain_isp_placements: Array[Types::DomainIspPlacement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_statistics: Types::VolumeStatistics?
+      attr_accessor read_rate_percent: Float?
+      attr_accessor domain_isp_placements: Array[Types::DomainIspPlacement]?
+    end
+
+    class PinpointDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class PlacementStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbox_percentage: Float,
+        ?spam_percentage: Float,
+        ?missing_percentage: Float,
+        ?spf_percentage: Float,
+        ?dkim_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbox_percentage: Float?
+      attr_accessor spam_percentage: Float?
+      attr_accessor missing_percentage: Float?
+      attr_accessor spf_percentage: Float?
+      attr_accessor dkim_percentage: Float?
+    end
+
+    class PutAccountDedicatedIpWarmupAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_warmup_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_warmup_enabled: bool?
+    end
+
+    class PutAccountDedicatedIpWarmupAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutAccountDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mail_type: String,
+        ?website_url: String,
+        ?contact_language: String,
+        ?use_case_description: String,
+        ?additional_contact_email_addresses: Array[String],
+        ?production_access_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mail_type: String?
+      attr_accessor website_url: String?
+      attr_accessor contact_language: String?
+      attr_accessor use_case_description: String?
+      attr_accessor additional_contact_email_addresses: Array[String]?
+      attr_accessor production_access_enabled: bool?
+    end
+
+    class PutAccountDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutAccountSendingAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sending_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sending_enabled: bool?
+    end
+
+    class PutAccountSendingAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutAccountSuppressionAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_reasons: Array[String]?
+    end
+
+    class PutAccountSuppressionAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutAccountVdmAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vdm_attributes: Types::VdmAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vdm_attributes: Types::VdmAttributes?
+    end
+
+    class PutAccountVdmAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetArchivingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?archive_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor archive_arn: String?
+    end
+
+    class PutConfigurationSetArchivingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetDeliveryOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?tls_policy: String,
+        ?sending_pool_name: String,
+        ?max_delivery_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor tls_policy: String?
+      attr_accessor sending_pool_name: String?
+      attr_accessor max_delivery_seconds: Integer?
+    end
+
+    class PutConfigurationSetDeliveryOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetReputationOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?reputation_metrics_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor reputation_metrics_enabled: bool?
+    end
+
+    class PutConfigurationSetReputationOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetSendingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?sending_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor sending_enabled: bool?
+    end
+
+    class PutConfigurationSetSendingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetSuppressionOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?suppressed_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor suppressed_reasons: Array[String]?
+    end
+
+    class PutConfigurationSetSuppressionOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetTrackingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?custom_redirect_domain: String,
+        ?https_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor custom_redirect_domain: String?
+      attr_accessor https_policy: String?
+    end
+
+    class PutConfigurationSetTrackingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutConfigurationSetVdmOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?vdm_options: Types::VdmOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor vdm_options: Types::VdmOptions?
+    end
+
+    class PutConfigurationSetVdmOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutDedicatedIpInPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip: String,
+        ?destination_pool_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip: String?
+      attr_accessor destination_pool_name: String?
+    end
+
+    class PutDedicatedIpInPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutDedicatedIpPoolScalingAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?scaling_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor scaling_mode: String?
+    end
+
+    class PutDedicatedIpPoolScalingAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutDedicatedIpWarmupAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip: String,
+        ?warmup_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip: String?
+      attr_accessor warmup_percentage: Integer?
+    end
+
+    class PutDedicatedIpWarmupAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutDeliverabilityDashboardOptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_enabled: bool,
+        ?subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_enabled: bool?
+      attr_accessor subscribed_domains: Array[Types::DomainDeliverabilityTrackingOption]?
+    end
+
+    class PutDeliverabilityDashboardOptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEmailIdentityConfigurationSetAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor configuration_set_name: String?
+    end
+
+    class PutEmailIdentityConfigurationSetAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEmailIdentityDkimAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?signing_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor signing_enabled: bool?
+    end
+
+    class PutEmailIdentityDkimAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEmailIdentityDkimSigningAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?signing_attributes_origin: String,
+        ?signing_attributes: Types::DkimSigningAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor signing_attributes_origin: String?
+      attr_accessor signing_attributes: Types::DkimSigningAttributes?
+    end
+
+    class PutEmailIdentityDkimSigningAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dkim_status: String,
+        ?dkim_tokens: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dkim_status: String?
+      attr_accessor dkim_tokens: Array[String]?
+    end
+
+    class PutEmailIdentityFeedbackAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?email_forwarding_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor email_forwarding_enabled: bool?
+    end
+
+    class PutEmailIdentityFeedbackAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEmailIdentityMailFromAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?mail_from_domain: String,
+        ?behavior_on_mx_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor mail_from_domain: String?
+      attr_accessor behavior_on_mx_failure: String?
+    end
+
+    class PutEmailIdentityMailFromAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutSuppressedDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor reason: String?
+    end
+
+    class PutSuppressedDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module QueryErrorCode
+      INTERNAL_FAILURE: String
+      ACCESS_DENIED: String
+    end
+
+    class RawMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?type: String,
+        ?description: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor impact: String?
+    end
+
+    module RecommendationImpact
+      LOW: String
+      HIGH: String
+    end
+
+    module RecommendationStatus
+      OPEN: String
+      FIXED: String
+    end
+
+    module RecommendationType
+      DKIM: String
+      DMARC: String
+      SPF: String
+      BIMI: String
+      COMPLAINT: String
+      BOUNCE: String
+      FEEDBACK_3P: String
+      IP_LISTING: String
+    end
+
+    class ReplacementEmailContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replacement_template: Types::ReplacementTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replacement_template: Types::ReplacementTemplate?
+    end
+
+    class ReplacementTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replacement_template_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replacement_template_data: String?
+    end
+
+    class ReputationEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entity_reference: String,
+        ?reputation_entity_type: String,
+        ?reputation_management_policy: String,
+        ?customer_managed_status: Types::StatusRecord,
+        ?aws_ses_managed_status: Types::StatusRecord,
+        ?sending_status_aggregate: String,
+        ?reputation_impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entity_reference: String?
+      attr_accessor reputation_entity_type: String?
+      attr_accessor reputation_management_policy: String?
+      attr_accessor customer_managed_status: Types::StatusRecord?
+      attr_accessor aws_ses_managed_status: Types::StatusRecord?
+      attr_accessor sending_status_aggregate: String?
+      attr_accessor reputation_impact: String?
+    end
+
+    module ReputationEntityFilterKey
+      ENTITY_TYPE: String
+      REPUTATION_IMPACT: String
+      STATUS: String
+      ENTITY_REFERENCE_PREFIX: String
+    end
+
+    module ReputationEntityType
+      RESOURCE: String
+    end
+
+    class ReputationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_metrics_enabled: bool,
+        ?last_fresh_start: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_metrics_enabled: bool?
+      attr_accessor last_fresh_start: Time?
+    end
+
+    class ResourceTenantMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?tenant_id: String,
+        ?resource_arn: String,
+        ?associated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor associated_timestamp: Time?
+    end
+
+    module ResourceType
+      EMAIL_IDENTITY: String
+      CONFIGURATION_SET: String
+      EMAIL_TEMPLATE: String
+    end
+
+    class ReviewDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor case_id: String?
+    end
+
+    module ReviewStatus
+      PENDING: String
+      FAILED: String
+      GRANTED: String
+      DENIED: String
+    end
+
+    class Route
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+    end
+
+    class RouteDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+    end
+
+    class SOARecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_name_server: String,
+        ?admin_email: String,
+        ?serial_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_name_server: String?
+      attr_accessor admin_email: String?
+      attr_accessor serial_number: Integer?
+    end
+
+    module ScalingMode
+      STANDARD: String
+      MANAGED: String
+    end
+
+    class SendBulkEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_email_address: String,
+        ?from_email_address_identity_arn: String,
+        ?reply_to_addresses: Array[String],
+        ?feedback_forwarding_email_address: String,
+        ?feedback_forwarding_email_address_identity_arn: String,
+        ?default_email_tags: Array[Types::MessageTag],
+        ?default_content: Types::BulkEmailContent,
+        ?bulk_email_entries: Array[Types::BulkEmailEntry],
+        ?configuration_set_name: String,
+        ?endpoint_id: String,
+        ?tenant_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_email_address: String?
+      attr_accessor from_email_address_identity_arn: String?
+      attr_accessor reply_to_addresses: Array[String]?
+      attr_accessor feedback_forwarding_email_address: String?
+      attr_accessor feedback_forwarding_email_address_identity_arn: String?
+      attr_accessor default_email_tags: Array[Types::MessageTag]?
+      attr_accessor default_content: Types::BulkEmailContent?
+      attr_accessor bulk_email_entries: Array[Types::BulkEmailEntry]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor tenant_name: String?
+    end
+
+    class SendBulkEmailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bulk_email_entry_results: Array[Types::BulkEmailEntryResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bulk_email_entry_results: Array[Types::BulkEmailEntryResult]?
+    end
+
+    class SendCustomVerificationEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?template_name: String,
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor template_name: String?
+      attr_accessor configuration_set_name: String?
+    end
+
+    class SendCustomVerificationEmailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_email_address: String,
+        ?from_email_address_identity_arn: String,
+        ?destination: Types::Destination,
+        ?reply_to_addresses: Array[String],
+        ?feedback_forwarding_email_address: String,
+        ?feedback_forwarding_email_address_identity_arn: String,
+        ?content: Types::EmailContent,
+        ?email_tags: Array[Types::MessageTag],
+        ?configuration_set_name: String,
+        ?endpoint_id: String,
+        ?tenant_name: String,
+        ?list_management_options: Types::ListManagementOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_email_address: String?
+      attr_accessor from_email_address_identity_arn: String?
+      attr_accessor destination: Types::Destination?
+      attr_accessor reply_to_addresses: Array[String]?
+      attr_accessor feedback_forwarding_email_address: String?
+      attr_accessor feedback_forwarding_email_address_identity_arn: String?
+      attr_accessor content: Types::EmailContent?
+      attr_accessor email_tags: Array[Types::MessageTag]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor tenant_name: String?
+      attr_accessor list_management_options: Types::ListManagementOptions?
+    end
+
+    class SendEmailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendQuota
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max24_hour_send: Float,
+        ?max_send_rate: Float,
+        ?sent_last24_hours: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max24_hour_send: Float?
+      attr_accessor max_send_rate: Float?
+      attr_accessor sent_last24_hours: Float?
+    end
+
+    class SendingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sending_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sending_enabled: bool?
+    end
+
+    class SendingPausedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SendingStatus
+      ENABLED: String
+      REINSTATED: String
+      DISABLED: String
+    end
+
+    class SnsDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    module Status
+      CREATING: String
+      READY: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class StatusRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?cause: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor cause: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    module SubscriptionStatus
+      OPT_IN: String
+      OPT_OUT: String
+    end
+
+    class SuppressedDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?reason: String,
+        ?last_update_time: Time,
+        ?attributes: Types::SuppressedDestinationAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor reason: String?
+      attr_accessor last_update_time: Time?
+      attr_accessor attributes: Types::SuppressedDestinationAttributes?
+    end
+
+    class SuppressedDestinationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?feedback_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor feedback_id: String?
+    end
+
+    class SuppressedDestinationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?reason: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor reason: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    class SuppressionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_reasons: Array[String]?
+    end
+
+    class SuppressionListDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppression_list_import_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppression_list_import_action: String?
+    end
+
+    module SuppressionListImportAction
+      DELETE: String
+      PUT: String
+    end
+
+    module SuppressionListReason
+      BOUNCE: String
+      COMPLAINT: String
+    end
+
+    class SuppressionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_reasons: Array[String]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Template
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_arn: String,
+        ?template_content: Types::EmailTemplateContent,
+        ?template_data: String,
+        ?headers: Array[Types::MessageHeader],
+        ?attachments: Array[Types::Attachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_content: Types::EmailTemplateContent?
+      attr_accessor template_data: String?
+      attr_accessor headers: Array[Types::MessageHeader]?
+      attr_accessor attachments: Array[Types::Attachment]?
+    end
+
+    class Tenant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?tenant_id: String,
+        ?tenant_arn: String,
+        ?created_timestamp: Time,
+        ?tags: Array[Types::Tag],
+        ?sending_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor tenant_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sending_status: String?
+    end
+
+    class TenantInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?tenant_id: String,
+        ?tenant_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor tenant_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class TenantResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class TestRenderEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_data: String?
+    end
+
+    class TestRenderEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rendered_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rendered_template: String?
+    end
+
+    module TlsPolicy
+      REQUIRE: String
+      OPTIONAL: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Topic
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?display_name: String,
+        ?description: String,
+        ?default_subscription_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor default_subscription_status: String?
+    end
+
+    class TopicFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?use_default_if_preference_unavailable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor use_default_if_preference_unavailable: bool?
+    end
+
+    class TopicPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?subscription_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor subscription_status: String?
+    end
+
+    class TrackingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_redirect_domain: String,
+        ?https_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_redirect_domain: String?
+      attr_accessor https_policy: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+        ?event_destination: Types::EventDestinationDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+      attr_accessor event_destination: Types::EventDestinationDefinition?
+    end
+
+    class UpdateConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateContactListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?topics: Array[Types::Topic],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor topics: Array[Types::Topic]?
+      attr_accessor description: String?
+    end
+
+    class UpdateContactListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_list_name: String,
+        ?email_address: String,
+        ?topic_preferences: Array[Types::TopicPreference],
+        ?unsubscribe_all: bool,
+        ?attributes_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_list_name: String?
+      attr_accessor email_address: String?
+      attr_accessor topic_preferences: Array[Types::TopicPreference]?
+      attr_accessor unsubscribe_all: bool?
+      attr_accessor attributes_data: String?
+    end
+
+    class UpdateContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCustomVerificationEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?from_email_address: String,
+        ?template_subject: String,
+        ?template_content: String,
+        ?success_redirection_url: String,
+        ?failure_redirection_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor from_email_address: String?
+      attr_accessor template_subject: String?
+      attr_accessor template_content: String?
+      attr_accessor success_redirection_url: String?
+      attr_accessor failure_redirection_url: String?
+    end
+
+    class UpdateCustomVerificationEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEmailIdentityPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?policy_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy: String?
+    end
+
+    class UpdateEmailIdentityPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEmailTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_content: Types::EmailTemplateContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_content: Types::EmailTemplateContent?
+    end
+
+    class UpdateEmailTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateReputationEntityCustomerManagedStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entity_type: String,
+        ?reputation_entity_reference: String,
+        ?sending_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entity_type: String?
+      attr_accessor reputation_entity_reference: String?
+      attr_accessor sending_status: String?
+    end
+
+    class UpdateReputationEntityCustomerManagedStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateReputationEntityPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reputation_entity_type: String,
+        ?reputation_entity_reference: String,
+        ?reputation_entity_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reputation_entity_type: String?
+      attr_accessor reputation_entity_reference: String?
+      attr_accessor reputation_entity_policy: String?
+    end
+
+    class UpdateReputationEntityPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VdmAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vdm_enabled: String,
+        ?dashboard_attributes: Types::DashboardAttributes,
+        ?guardian_attributes: Types::GuardianAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vdm_enabled: String?
+      attr_accessor dashboard_attributes: Types::DashboardAttributes?
+      attr_accessor guardian_attributes: Types::GuardianAttributes?
+    end
+
+    class VdmOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_options: Types::DashboardOptions,
+        ?guardian_options: Types::GuardianOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_options: Types::DashboardOptions?
+      attr_accessor guardian_options: Types::GuardianOptions?
+    end
+
+    module VerificationError
+      SERVICE_ERROR: String
+      DNS_SERVER_ERROR: String
+      HOST_NOT_FOUND: String
+      TYPE_NOT_FOUND: String
+      INVALID_VALUE: String
+      REPLICATION_ACCESS_DENIED: String
+      REPLICATION_PRIMARY_NOT_FOUND: String
+      REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED: String
+      REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED: String
+      REPLICATION_PRIMARY_INVALID_REGION: String
+    end
+
+    class VerificationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_checked_timestamp: Time,
+        ?last_success_timestamp: Time,
+        ?error_type: String,
+        ?soa_record: Types::SOARecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_checked_timestamp: Time?
+      attr_accessor last_success_timestamp: Time?
+      attr_accessor error_type: String?
+      attr_accessor soa_record: Types::SOARecord?
+    end
+
+    module VerificationStatus
+      PENDING: String
+      SUCCESS: String
+      FAILED: String
+      TEMPORARY_FAILURE: String
+      NOT_STARTED: String
+    end
+
+    class VolumeStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbox_raw_count: Integer,
+        ?spam_raw_count: Integer,
+        ?projected_inbox: Integer,
+        ?projected_spam: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbox_raw_count: Integer?
+      attr_accessor spam_raw_count: Integer?
+      attr_accessor projected_inbox: Integer?
+      attr_accessor projected_spam: Integer?
+    end
+
+    module WarmupStatus
+      IN_PROGRESS: String
+      DONE: String
+      NOT_APPLICABLE: String
+    end
+  end
+end

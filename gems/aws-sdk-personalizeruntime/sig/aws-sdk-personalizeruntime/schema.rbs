@@ -1,0 +1,47 @@
+module Aws::PersonalizeRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ActionID: StringShape
+    ActionList: ListShape
+    Arn: StringShape
+    AttributeName: StringShape
+    AttributeValue: StringShape
+    ColumnName: StringShape
+    ColumnNamesList: ListShape
+    ColumnValue: StringShape
+    Context: MapShape
+    DatasetType: StringShape
+    ErrorMessage: StringShape
+    FilterAttributeName: StringShape
+    FilterAttributeValue: StringShape
+    FilterValues: MapShape
+    GetActionRecommendationsRequest: StructureShape
+    GetActionRecommendationsResponse: StructureShape
+    GetPersonalizedRankingRequest: StructureShape
+    GetPersonalizedRankingResponse: StructureShape
+    GetRecommendationsRequest: StructureShape
+    GetRecommendationsResponse: StructureShape
+    InputList: ListShape
+    InvalidInputException: StructureShape
+    ItemID: StringShape
+    ItemList: ListShape
+    Metadata: MapShape
+    MetadataColumns: MapShape
+    Name: StringShape
+    NumResults: IntegerShape
+    PercentPromotedItems: IntegerShape
+    PredictedAction: StructureShape
+    PredictedItem: StructureShape
+    Promotion: StructureShape
+    PromotionList: ListShape
+    Reason: StringShape
+    ReasonList: ListShape
+    RecommendationID: StringShape
+    ResourceNotFoundException: StructureShape
+    Score: FloatShape
+    UserID: StringShape
+
+    AmazonPersonalizeRuntime: ServiceShape
+  end
+end

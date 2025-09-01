@@ -1,0 +1,3709 @@
+module Aws::ComputeOptimizer
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountEnrollmentStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    module AllocationStrategy
+      PRIORITIZED: String
+      LOWEST_PRICE: String
+    end
+
+    module AsgType
+      SINGLE_INSTANCE_TYPE: String
+      MIXED_INSTANCE_TYPE: String
+    end
+
+    module AutoScalingConfiguration
+      TARGET_TRACKING_SCALING_CPU: String
+      TARGET_TRACKING_SCALING_MEMORY: String
+    end
+
+    class AutoScalingGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_capacity: Integer,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?instance_type: String,
+        ?allocation_strategy: String,
+        ?estimated_instance_hour_reduction_percentage: Float,
+        ?type: String,
+        ?mixed_instance_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_capacity: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor allocation_strategy: String?
+      attr_accessor estimated_instance_hour_reduction_percentage: Float?
+      attr_accessor type: String?
+      attr_accessor mixed_instance_types: Array[String]?
+    end
+
+    class AutoScalingGroupEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    class AutoScalingGroupRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?auto_scaling_group_arn: String,
+        ?auto_scaling_group_name: String,
+        ?finding: String,
+        ?utilization_metrics: Array[Types::UtilizationMetric],
+        ?look_back_period_in_days: Float,
+        ?current_configuration: Types::AutoScalingGroupConfiguration,
+        ?current_instance_gpu_info: Types::GpuInfo,
+        ?recommendation_options: Array[Types::AutoScalingGroupRecommendationOption],
+        ?last_refresh_timestamp: Time,
+        ?current_performance_risk: String,
+        ?effective_recommendation_preferences: Types::EffectiveRecommendationPreferences,
+        ?inferred_workload_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor auto_scaling_group_arn: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor finding: String?
+      attr_accessor utilization_metrics: Array[Types::UtilizationMetric]?
+      attr_accessor look_back_period_in_days: Float?
+      attr_accessor current_configuration: Types::AutoScalingGroupConfiguration?
+      attr_accessor current_instance_gpu_info: Types::GpuInfo?
+      attr_accessor recommendation_options: Array[Types::AutoScalingGroupRecommendationOption]?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor current_performance_risk: String?
+      attr_accessor effective_recommendation_preferences: Types::EffectiveRecommendationPreferences?
+      attr_accessor inferred_workload_types: Array[String]?
+    end
+
+    class AutoScalingGroupRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AutoScalingGroupConfiguration,
+        ?instance_gpu_info: Types::GpuInfo,
+        ?projected_utilization_metrics: Array[Types::UtilizationMetric],
+        ?performance_risk: Float,
+        ?rank: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::AutoScalingGroupSavingsOpportunityAfterDiscounts,
+        ?migration_effort: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AutoScalingGroupConfiguration?
+      attr_accessor instance_gpu_info: Types::GpuInfo?
+      attr_accessor projected_utilization_metrics: Array[Types::UtilizationMetric]?
+      attr_accessor performance_risk: Float?
+      attr_accessor rank: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::AutoScalingGroupSavingsOpportunityAfterDiscounts?
+      attr_accessor migration_effort: String?
+    end
+
+    class AutoScalingGroupSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::AutoScalingGroupEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::AutoScalingGroupEstimatedMonthlySavings?
+    end
+
+    class ContainerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?memory_size_configuration: Types::MemorySizeConfiguration,
+        ?cpu: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor memory_size_configuration: Types::MemorySizeConfiguration?
+      attr_accessor cpu: Integer?
+    end
+
+    class ContainerRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?memory_size_configuration: Types::MemorySizeConfiguration,
+        ?cpu: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor memory_size_configuration: Types::MemorySizeConfiguration?
+      attr_accessor cpu: Integer?
+    end
+
+    module CpuVendorArchitecture
+      AWS_ARM64: String
+      CURRENT: String
+    end
+
+    module Currency
+      USD: String
+      CNY: String
+    end
+
+    module CurrentPerformanceRisk
+      VERY_LOW: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class CurrentPerformanceRiskRatings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?high: Integer,
+        ?medium: Integer,
+        ?low: Integer,
+        ?very_low: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor high: Integer?
+      attr_accessor medium: Integer?
+      attr_accessor low: Integer?
+      attr_accessor very_low: Integer?
+    end
+
+    module CustomizableMetricHeadroom
+      PERCENT_30: String
+      PERCENT_20: String
+      PERCENT_10: String
+      PERCENT_0: String
+    end
+
+    module CustomizableMetricName
+      CPU_UTILIZATION: String
+      MEMORY_UTILIZATION: String
+    end
+
+    class CustomizableMetricParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threshold: String,
+        ?headroom: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threshold: String?
+      attr_accessor headroom: String?
+    end
+
+    module CustomizableMetricThreshold
+      P90: String
+      P95: String
+      P99_5: String
+    end
+
+    class DBStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?allocated_storage: Integer,
+        ?iops: Integer,
+        ?max_allocated_storage: Integer,
+        ?storage_throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor max_allocated_storage: Integer?
+      attr_accessor storage_throughput: Integer?
+    end
+
+    class DeleteRecommendationPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?scope: Types::Scope,
+        ?recommendation_preference_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor scope: Types::Scope?
+      attr_accessor recommendation_preference_names: Array[String]?
+    end
+
+    class DeleteRecommendationPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeRecommendationExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_ids: Array[String],
+        ?filters: Array[Types::JobFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_ids: Array[String]?
+      attr_accessor filters: Array[Types::JobFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRecommendationExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_export_jobs: Array[Types::RecommendationExportJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_export_jobs: Array[Types::RecommendationExportJob]?
+      attr_accessor next_token: String?
+    end
+
+    module Dimension
+      SAVINGS_VALUE: String
+      SAVINGS_VALUE_AFTER_DISCOUNT: String
+    end
+
+    class EBSEffectiveRecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: Types::EBSSavingsEstimationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: Types::EBSSavingsEstimationMode?
+    end
+
+    class EBSEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    class EBSFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module EBSFilterName
+      FINDING: String
+    end
+
+    module EBSFinding
+      OPTIMIZED: String
+      NOT_OPTIMIZED: String
+    end
+
+    module EBSMetricName
+      VOLUME_READ_OPS_PER_SECOND: String
+      VOLUME_WRITE_OPS_PER_SECOND: String
+      VOLUME_READ_BYTES_PER_SECOND: String
+      VOLUME_WRITE_BYTES_PER_SECOND: String
+    end
+
+    class EBSSavingsEstimationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module EBSSavingsEstimationModeSource
+      PUBLIC_PRICING: String
+      COST_EXPLORER_RIGHTSIZING: String
+      COST_OPTIMIZATION_HUB: String
+    end
+
+    class EBSSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::EBSEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::EBSEstimatedMonthlySavings?
+    end
+
+    class EBSUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class ECSEffectiveRecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: Types::ECSSavingsEstimationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: Types::ECSSavingsEstimationMode?
+    end
+
+    class ECSEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    class ECSSavingsEstimationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module ECSSavingsEstimationModeSource
+      PUBLIC_PRICING: String
+      COST_EXPLORER_RIGHTSIZING: String
+      COST_OPTIMIZATION_HUB: String
+    end
+
+    class ECSSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::ECSEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::ECSEstimatedMonthlySavings?
+    end
+
+    module ECSServiceLaunchType
+      EC2: String
+      FARGATE: String
+    end
+
+    module ECSServiceMetricName
+      CPU: String
+      MEMORY: String
+    end
+
+    module ECSServiceMetricStatistic
+      MAXIMUM: String
+      AVERAGE: String
+    end
+
+    class ECSServiceProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?timestamps: Array[Time],
+        ?upper_bound_values: Array[Float],
+        ?lower_bound_values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor upper_bound_values: Array[Float]?
+      attr_accessor lower_bound_values: Array[Float]?
+    end
+
+    class ECSServiceProjectedUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?lower_bound_value: Float,
+        ?upper_bound_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor lower_bound_value: Float?
+      attr_accessor upper_bound_value: Float?
+    end
+
+    class ECSServiceRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?account_id: String,
+        ?current_service_configuration: Types::ServiceConfiguration,
+        ?utilization_metrics: Array[Types::ECSServiceUtilizationMetric],
+        ?lookback_period_in_days: Float,
+        ?launch_type: String,
+        ?last_refresh_timestamp: Time,
+        ?finding: String,
+        ?finding_reason_codes: Array[String],
+        ?service_recommendation_options: Array[Types::ECSServiceRecommendationOption],
+        ?current_performance_risk: String,
+        ?effective_recommendation_preferences: Types::ECSEffectiveRecommendationPreferences,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor current_service_configuration: Types::ServiceConfiguration?
+      attr_accessor utilization_metrics: Array[Types::ECSServiceUtilizationMetric]?
+      attr_accessor lookback_period_in_days: Float?
+      attr_accessor launch_type: String?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor finding: String?
+      attr_accessor finding_reason_codes: Array[String]?
+      attr_accessor service_recommendation_options: Array[Types::ECSServiceRecommendationOption]?
+      attr_accessor current_performance_risk: String?
+      attr_accessor effective_recommendation_preferences: Types::ECSEffectiveRecommendationPreferences?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ECSServiceRecommendationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ECSServiceRecommendationFilterName
+      FINDING: String
+      FINDING_REASON_CODE: String
+    end
+
+    module ECSServiceRecommendationFinding
+      OPTIMIZED: String
+      UNDER_PROVISIONED: String
+      OVER_PROVISIONED: String
+    end
+
+    module ECSServiceRecommendationFindingReasonCode
+      MEMORY_OVER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+      CPU_OVER_PROVISIONED: String
+      CPU_UNDER_PROVISIONED: String
+    end
+
+    class ECSServiceRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory: Integer,
+        ?cpu: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::ECSSavingsOpportunityAfterDiscounts,
+        ?projected_utilization_metrics: Array[Types::ECSServiceProjectedUtilizationMetric],
+        ?container_recommendations: Array[Types::ContainerRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory: Integer?
+      attr_accessor cpu: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::ECSSavingsOpportunityAfterDiscounts?
+      attr_accessor projected_utilization_metrics: Array[Types::ECSServiceProjectedUtilizationMetric]?
+      attr_accessor container_recommendations: Array[Types::ContainerRecommendation]?
+    end
+
+    class ECSServiceRecommendedOptionProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_cpu_units: Integer,
+        ?recommended_memory_size: Integer,
+        ?projected_metrics: Array[Types::ECSServiceProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_cpu_units: Integer?
+      attr_accessor recommended_memory_size: Integer?
+      attr_accessor projected_metrics: Array[Types::ECSServiceProjectedMetric]?
+    end
+
+    class ECSServiceUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class EffectivePreferredResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?include_list: Array[String],
+        ?effective_include_list: Array[String],
+        ?exclude_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor include_list: Array[String]?
+      attr_accessor effective_include_list: Array[String]?
+      attr_accessor exclude_list: Array[String]?
+    end
+
+    class EffectiveRecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_vendor_architectures: Array[String],
+        ?enhanced_infrastructure_metrics: String,
+        ?inferred_workload_types: String,
+        ?external_metrics_preference: Types::ExternalMetricsPreference,
+        ?look_back_period: String,
+        ?utilization_preferences: Array[Types::UtilizationPreference],
+        ?preferred_resources: Array[Types::EffectivePreferredResource],
+        ?savings_estimation_mode: Types::InstanceSavingsEstimationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_vendor_architectures: Array[String]?
+      attr_accessor enhanced_infrastructure_metrics: String?
+      attr_accessor inferred_workload_types: String?
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference?
+      attr_accessor look_back_period: String?
+      attr_accessor utilization_preferences: Array[Types::UtilizationPreference]?
+      attr_accessor preferred_resources: Array[Types::EffectivePreferredResource]?
+      attr_accessor savings_estimation_mode: Types::InstanceSavingsEstimationMode?
+    end
+
+    module EnhancedInfrastructureMetrics
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class EnrollmentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module EnrollmentFilterName
+      STATUS: String
+    end
+
+    class EstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    class ExportAutoScalingGroupRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class ExportAutoScalingGroupRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Destination?
+    end
+
+    class ExportEBSVolumeRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::EBSFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::EBSFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class ExportEBSVolumeRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportEC2InstanceRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class ExportEC2InstanceRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportECSServiceRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::ECSServiceRecommendationFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::ECSServiceRecommendationFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class ExportECSServiceRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportIdleRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::IdleRecommendationFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::IdleRecommendationFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class ExportIdleRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportLambdaFunctionRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::LambdaFunctionRecommendationFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::LambdaFunctionRecommendationFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class ExportLambdaFunctionRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportLicenseRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::LicenseRecommendationFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::LicenseRecommendationFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class ExportLicenseRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    class ExportRDSDatabaseRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?filters: Array[Types::RDSDBRecommendationFilter],
+        ?fields_to_export: Array[String],
+        ?s3_destination_config: Types::S3DestinationConfig,
+        ?file_format: String,
+        ?include_member_accounts: bool,
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::RDSDBRecommendationFilter]?
+      attr_accessor fields_to_export: Array[String]?
+      attr_accessor s3_destination_config: Types::S3DestinationConfig?
+      attr_accessor file_format: String?
+      attr_accessor include_member_accounts: bool?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class ExportRDSDatabaseRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?s3_destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor s3_destination: Types::S3Destination?
+    end
+
+    module ExportableAutoScalingGroupField
+      ACCOUNT_ID: String
+      AUTO_SCALING_GROUP_ARN: String
+      AUTO_SCALING_GROUP_NAME: String
+      FINDING: String
+      UTILIZATION_METRICS_CPU_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      CURRENT_CONFIGURATION_INSTANCE_TYPE: String
+      CURRENT_CONFIGURATION_DESIRED_CAPACITY: String
+      CURRENT_CONFIGURATION_MIN_SIZE: String
+      CURRENT_CONFIGURATION_MAX_SIZE: String
+      CURRENT_CONFIGURATION_ALLOCATION_STRATEGY: String
+      CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES: String
+      CURRENT_CONFIGURATION_TYPE: String
+      CURRENT_ON_DEMAND_PRICE: String
+      CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      CURRENT_VCPUS: String
+      CURRENT_MEMORY: String
+      CURRENT_STORAGE: String
+      CURRENT_NETWORK: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE: String
+      RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      RECOMMENDATION_OPTIONS_VCPUS: String
+      RECOMMENDATION_OPTIONS_MEMORY: String
+      RECOMMENDATION_OPTIONS_STORAGE: String
+      RECOMMENDATION_OPTIONS_NETWORK: String
+      LAST_REFRESH_TIMESTAMP: String
+      CURRENT_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD: String
+      INFERRED_WORKLOAD_TYPES: String
+      RECOMMENDATION_OPTIONS_MIGRATION_EFFORT: String
+      CURRENT_INSTANCE_GPU_INFO: String
+      RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO: String
+      UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM: String
+      UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+    end
+
+    module ExportableECSServiceField
+      ACCOUNT_ID: String
+      SERVICE_ARN: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      LAST_REFRESH_TIMESTAMP: String
+      LAUNCH_TYPE: String
+      CURRENT_PERFORMANCE_RISK: String
+      CURRENT_SERVICE_CONFIGURATION_MEMORY: String
+      CURRENT_SERVICE_CONFIGURATION_CPU: String
+      CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN: String
+      CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION: String
+      CURRENT_SERVICE_CONTAINER_CONFIGURATIONS: String
+      UTILIZATION_METRICS_CPU_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      FINDING: String
+      FINDING_REASON_CODES: String
+      RECOMMENDATION_OPTIONS_MEMORY: String
+      RECOMMENDATION_OPTIONS_CPU: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      TAGS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+    end
+
+    module ExportableIdleField
+      ACCOUNT_ID: String
+      RESOURCE_ARN: String
+      RESOURCE_ID: String
+      RESOURCE_TYPE: String
+      LAST_REFRESH_TIMESTAMP: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      SAVINGS_OPPORTUNITY: String
+      SAVINGS_OPPORTUNITY_AFTER_DISCOUNT: String
+      UTILIZATION_METRICS_CPU_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      FINDING: String
+      FINDING_DESCRIPTION: String
+      TAGS: String
+    end
+
+    module ExportableInstanceField
+      ACCOUNT_ID: String
+      INSTANCE_ARN: String
+      INSTANCE_NAME: String
+      FINDING: String
+      Finding_Reason_Codes: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      CURRENT_INSTANCE_TYPE: String
+      UTILIZATION_METRICS_CPU_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM: String
+      CURRENT_ON_DEMAND_PRICE: String
+      CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      CURRENT_VCPUS: String
+      CURRENT_MEMORY: String
+      CURRENT_STORAGE: String
+      CURRENT_NETWORK: String
+      RECOMMENDATION_OPTIONS_INSTANCE_TYPE: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES: String
+      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_VCPUS: String
+      RECOMMENDATION_OPTIONS_MEMORY: String
+      RECOMMENDATION_OPTIONS_STORAGE: String
+      RECOMMENDATION_OPTIONS_NETWORK: String
+      RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE: String
+      RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE: String
+      RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN: String
+      RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE: String
+      LAST_REFRESH_TIMESTAMP: String
+      CURRENT_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES: String
+      INFERRED_WORKLOAD_TYPES: String
+      RECOMMENDATION_OPTIONS_MIGRATION_EFFORT: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE: String
+      TAGS: String
+      INSTANCE_STATE: String
+      EXTERNAL_METRIC_STATUS_CODE: String
+      EXTERNAL_METRIC_STATUS_REASON: String
+      CURRENT_INSTANCE_GPU_INFO: String
+      RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO: String
+      UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM: String
+      UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM: String
+      IDLE: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+    end
+
+    module ExportableLambdaFunctionField
+      ACCOUNT_ID: String
+      FUNCTION_ARN: String
+      FUNCTION_VERSION: String
+      FINDING: String
+      FINDING_REASON_CODES: String
+      NUMBER_OF_INVOCATIONS: String
+      UTILIZATION_METRICS_DURATION_MAXIMUM: String
+      UTILIZATION_METRICS_DURATION_AVERAGE: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_AVERAGE: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      CURRENT_CONFIGURATION_MEMORY_SIZE: String
+      CURRENT_CONFIGURATION_TIMEOUT: String
+      CURRENT_COST_TOTAL: String
+      CURRENT_COST_AVERAGE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE: String
+      RECOMMENDATION_OPTIONS_COST_LOW: String
+      RECOMMENDATION_OPTIONS_COST_HIGH: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND: String
+      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED: String
+      LAST_REFRESH_TIMESTAMP: String
+      CURRENT_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      TAGS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+    end
+
+    module ExportableLicenseField
+      ACCOUNT_ID: String
+      RESOURCE_ARN: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      LAST_REFRESH_TIMESTAMP: String
+      LICENSE_FINDING: String
+      LICENSE_FINDING_REASON_CODES: String
+      CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES: String
+      CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE: String
+      CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM: String
+      CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME: String
+      CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION: String
+      CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL: String
+      CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION: String
+      CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE: String
+      RECOMMENDATION_OPTIONS_OPERATING_SYSTEM: String
+      RECOMMENDATION_OPTIONS_LICENSE_EDITION: String
+      RECOMMENDATION_OPTIONS_LICENSE_MODEL: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      TAGS: String
+    end
+
+    module ExportableRDSDBField
+      RESOURCE_ARN: String
+      ACCOUNT_ID: String
+      ENGINE: String
+      ENGINE_VERSION: String
+      IDLE: String
+      MULTI_AZ_DB_INSTANCE: String
+      CLUSTER_WRITER: String
+      CURRENT_DB_INSTANCE_CLASS: String
+      CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE: String
+      CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE: String
+      CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE: String
+      CURRENT_STORAGE_CONFIGURATION_IOPS: String
+      CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT: String
+      CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION: String
+      CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE: String
+      CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST: String
+      CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST: String
+      CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST: String
+      CURRENT_INSTANCE_PERFORMANCE_RISK: String
+      UTILIZATION_METRICS_CPU_MAXIMUM: String
+      UTILIZATION_METRICS_MEMORY_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM: String
+      UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM: String
+      UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM: String
+      UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM: String
+      UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM: String
+      UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM: String
+      UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM: String
+      UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE: String
+      UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE: String
+      UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE: String
+      INSTANCE_FINDING: String
+      INSTANCE_FINDING_REASON_CODES: String
+      STORAGE_FINDING: String
+      STORAGE_FINDING_REASON_CODES: String
+      INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS: String
+      INSTANCE_RECOMMENDATION_OPTIONS_RANK: String
+      INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK: String
+      INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM: String
+      STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE: String
+      STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE: String
+      STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE: String
+      STORAGE_RECOMMENDATION_OPTIONS_IOPS: String
+      STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT: String
+      STORAGE_RECOMMENDATION_OPTIONS_RANK: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION: String
+      INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE: String
+      INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+      STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST: String
+      STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      LAST_REFRESH_TIMESTAMP: String
+      TAGS: String
+      DB_CLUSTER_IDENTIFIER: String
+      PROMOTION_TIER: String
+    end
+
+    module ExportableVolumeField
+      ACCOUNT_ID: String
+      VOLUME_ARN: String
+      FINDING: String
+      UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      LOOKBACK_PERIOD_IN_DAYS: String
+      CURRENT_CONFIGURATION_VOLUME_TYPE: String
+      CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS: String
+      CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT: String
+      CURRENT_CONFIGURATION_VOLUME_BURST_IOPS: String
+      CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT: String
+      CURRENT_CONFIGURATION_VOLUME_SIZE: String
+      CURRENT_MONTHLY_PRICE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT: String
+      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE: String
+      RECOMMENDATION_OPTIONS_MONTHLY_PRICE: String
+      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK: String
+      LAST_REFRESH_TIMESTAMP: String
+      CURRENT_PERFORMANCE_RISK: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE: String
+      TAGS: String
+      ROOT_VOLUME: String
+      CURRENT_CONFIGURATION_ROOT_VOLUME: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE: String
+      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
+      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+    end
+
+    class ExternalMetricStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    module ExternalMetricStatusCode
+      NO_EXTERNAL_METRIC_SET: String
+      INTEGRATION_SUCCESS: String
+      DATADOG_INTEGRATION_ERROR: String
+      DYNATRACE_INTEGRATION_ERROR: String
+      NEWRELIC_INTEGRATION_ERROR: String
+      INSTANA_INTEGRATION_ERROR: String
+      INSUFFICIENT_DATADOG_METRICS: String
+      INSUFFICIENT_DYNATRACE_METRICS: String
+      INSUFFICIENT_NEWRELIC_METRICS: String
+      INSUFFICIENT_INSTANA_METRICS: String
+    end
+
+    class ExternalMetricsPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module ExternalMetricsSource
+      DATADOG: String
+      DYNATRACE: String
+      NEWRELIC: String
+      INSTANA: String
+    end
+
+    module FileFormat
+      CSV: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module FilterName
+      FINDING: String
+      FINDING_REASON_CODES: String
+      RECOMMENDATION_SOURCE_TYPE: String
+      INFERRED_WORKLOAD_TYPES: String
+    end
+
+    module Finding
+      UNDER_PROVISIONED: String
+      OVER_PROVISIONED: String
+      OPTIMIZED: String
+      NOT_OPTIMIZED: String
+    end
+
+    module FindingReasonCode
+      MEMORY_OVER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+    end
+
+    class GetAutoScalingGroupRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?auto_scaling_group_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor auto_scaling_group_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class GetAutoScalingGroupRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?auto_scaling_group_recommendations: Array[Types::AutoScalingGroupRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor auto_scaling_group_recommendations: Array[Types::AutoScalingGroupRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetEBSVolumeRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::EBSFilter],
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::EBSFilter]?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class GetEBSVolumeRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?volume_recommendations: Array[Types::VolumeRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor volume_recommendations: Array[Types::VolumeRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetEC2InstanceRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+        ?account_ids: Array[String],
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class GetEC2InstanceRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?instance_recommendations: Array[Types::InstanceRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor instance_recommendations: Array[Types::InstanceRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetEC2RecommendationProjectedMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?stat: String,
+        ?period: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor stat: String?
+      attr_accessor period: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class GetEC2RecommendationProjectedMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_option_projected_metrics: Array[Types::RecommendedOptionProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_option_projected_metrics: Array[Types::RecommendedOptionProjectedMetric]?
+    end
+
+    class GetECSServiceRecommendationProjectedMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?stat: String,
+        ?period: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor stat: String?
+      attr_accessor period: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class GetECSServiceRecommendationProjectedMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_option_projected_metrics: Array[Types::ECSServiceRecommendedOptionProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_option_projected_metrics: Array[Types::ECSServiceRecommendedOptionProjectedMetric]?
+    end
+
+    class GetECSServiceRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::ECSServiceRecommendationFilter],
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::ECSServiceRecommendationFilter]?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class GetECSServiceRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?ecs_service_recommendations: Array[Types::ECSServiceRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor ecs_service_recommendations: Array[Types::ECSServiceRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetEffectiveRecommendationPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetEffectiveRecommendationPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enhanced_infrastructure_metrics: String,
+        ?external_metrics_preference: Types::ExternalMetricsPreference,
+        ?look_back_period: String,
+        ?utilization_preferences: Array[Types::UtilizationPreference],
+        ?preferred_resources: Array[Types::EffectivePreferredResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enhanced_infrastructure_metrics: String?
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference?
+      attr_accessor look_back_period: String?
+      attr_accessor utilization_preferences: Array[Types::UtilizationPreference]?
+      attr_accessor preferred_resources: Array[Types::EffectivePreferredResource]?
+    end
+
+    class GetEnrollmentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetEnrollmentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?member_accounts_enrolled: bool,
+        ?last_updated_timestamp: Time,
+        ?number_of_member_accounts_opted_in: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor member_accounts_enrolled: bool?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor number_of_member_accounts_opted_in: Integer?
+    end
+
+    class GetEnrollmentStatusesForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::EnrollmentFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::EnrollmentFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetEnrollmentStatusesForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_enrollment_statuses: Array[Types::AccountEnrollmentStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_enrollment_statuses: Array[Types::AccountEnrollmentStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class GetIdleRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::IdleRecommendationFilter],
+        ?account_ids: Array[String],
+        ?order_by: Types::OrderBy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::IdleRecommendationFilter]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor order_by: Types::OrderBy?
+    end
+
+    class GetIdleRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?idle_recommendations: Array[Types::IdleRecommendation],
+        ?errors: Array[Types::IdleRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor idle_recommendations: Array[Types::IdleRecommendation]?
+      attr_accessor errors: Array[Types::IdleRecommendationError]?
+    end
+
+    class GetLambdaFunctionRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arns: Array[String],
+        ?account_ids: Array[String],
+        ?filters: Array[Types::LambdaFunctionRecommendationFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arns: Array[String]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor filters: Array[Types::LambdaFunctionRecommendationFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetLambdaFunctionRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?lambda_function_recommendations: Array[Types::LambdaFunctionRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor lambda_function_recommendations: Array[Types::LambdaFunctionRecommendation]?
+    end
+
+    class GetLicenseRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::LicenseRecommendationFilter],
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::LicenseRecommendationFilter]?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class GetLicenseRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?license_recommendations: Array[Types::LicenseRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor license_recommendations: Array[Types::LicenseRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetRDSDatabaseRecommendationProjectedMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?stat: String,
+        ?period: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor stat: String?
+      attr_accessor period: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class GetRDSDatabaseRecommendationProjectedMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_option_projected_metrics: Array[Types::RDSDatabaseRecommendedOptionProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_option_projected_metrics: Array[Types::RDSDatabaseRecommendedOptionProjectedMetric]?
+    end
+
+    class GetRDSDatabaseRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::RDSDBRecommendationFilter],
+        ?account_ids: Array[String],
+        ?recommendation_preferences: Types::RecommendationPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::RDSDBRecommendationFilter]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences?
+    end
+
+    class GetRDSDatabaseRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?rds_db_recommendations: Array[Types::RDSDBRecommendation],
+        ?errors: Array[Types::GetRecommendationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor rds_db_recommendations: Array[Types::RDSDBRecommendation]?
+      attr_accessor errors: Array[Types::GetRecommendationError]?
+    end
+
+    class GetRecommendationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetRecommendationPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?scope: Types::Scope,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor scope: Types::Scope?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetRecommendationPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_preferences_details: Array[Types::RecommendationPreferencesDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_preferences_details: Array[Types::RecommendationPreferencesDetail]?
+    end
+
+    class GetRecommendationSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetRecommendationSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_summaries: Array[Types::RecommendationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_summaries: Array[Types::RecommendationSummary]?
+    end
+
+    class Gpu
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gpu_count: Integer,
+        ?gpu_memory_size_in_mi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gpu_count: Integer?
+      attr_accessor gpu_memory_size_in_mi_b: Integer?
+    end
+
+    class GpuInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gpus: Array[Types::Gpu],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gpus: Array[Types::Gpu]?
+    end
+
+    module Idle
+      TRUE: String
+      FALSE: String
+    end
+
+    class IdleEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    module IdleFinding
+      IDLE: String
+      UNATTACHED: String
+    end
+
+    module IdleMetricName
+      CPU: String
+      MEMORY: String
+      NETWORK_OUT_BYTES_PER_SECOND: String
+      NETWORK_IN_BYTES_PER_SECOND: String
+      DATABASE_CONNECTIONS: String
+      EBS_VOLUME_READ_IOPS: String
+      EBS_VOLUME_WRITE_IOPS: String
+      VOLUME_READ_OPS_PER_SECOND: String
+      VOLUME_WRITE_OPS_PER_SECOND: String
+    end
+
+    class IdleRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?account_id: String,
+        ?finding: String,
+        ?finding_description: String,
+        ?savings_opportunity: Types::IdleSavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::IdleSavingsOpportunityAfterDiscounts,
+        ?utilization_metrics: Array[Types::IdleUtilizationMetric],
+        ?look_back_period_in_days: Float,
+        ?last_refresh_timestamp: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor account_id: String?
+      attr_accessor finding: String?
+      attr_accessor finding_description: String?
+      attr_accessor savings_opportunity: Types::IdleSavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::IdleSavingsOpportunityAfterDiscounts?
+      attr_accessor utilization_metrics: Array[Types::IdleUtilizationMetric]?
+      attr_accessor look_back_period_in_days: Float?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class IdleRecommendationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?code: String,
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class IdleRecommendationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module IdleRecommendationFilterName
+      FINDING: String
+      RESOURCE_TYPE: String
+    end
+
+    module IdleRecommendationResourceType
+      EC2_INSTANCE: String
+      AUTO_SCALING_GROUP: String
+      EBS_VOLUME: String
+      ECS_SERVICE: String
+      RDS_DB_INSTANCE: String
+    end
+
+    class IdleSavingsOpportunity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::IdleEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::IdleEstimatedMonthlySavings?
+    end
+
+    class IdleSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::IdleEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::IdleEstimatedMonthlySavings?
+    end
+
+    class IdleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+    end
+
+    class IdleUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class InferredWorkloadSaving
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inferred_workload_types: Array[String],
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inferred_workload_types: Array[String]?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    module InferredWorkloadType
+      AMAZON_EMR: String
+      APACHE_CASSANDRA: String
+      APACHE_HADOOP: String
+      MEMCACHED: String
+      NGINX: String
+      POSTGRE_SQL: String
+      REDIS: String
+      KAFKA: String
+      SQLSERVER: String
+    end
+
+    module InferredWorkloadTypesPreference
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class InstanceEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    module InstanceIdle
+      TRUE: String
+      FALSE: String
+    end
+
+    class InstanceRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?account_id: String,
+        ?instance_name: String,
+        ?current_instance_type: String,
+        ?finding: String,
+        ?finding_reason_codes: Array[String],
+        ?utilization_metrics: Array[Types::UtilizationMetric],
+        ?look_back_period_in_days: Float,
+        ?recommendation_options: Array[Types::InstanceRecommendationOption],
+        ?recommendation_sources: Array[Types::RecommendationSource],
+        ?last_refresh_timestamp: Time,
+        ?current_performance_risk: String,
+        ?effective_recommendation_preferences: Types::EffectiveRecommendationPreferences,
+        ?inferred_workload_types: Array[String],
+        ?instance_state: String,
+        ?tags: Array[Types::Tag],
+        ?external_metric_status: Types::ExternalMetricStatus,
+        ?current_instance_gpu_info: Types::GpuInfo,
+        ?idle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor instance_name: String?
+      attr_accessor current_instance_type: String?
+      attr_accessor finding: String?
+      attr_accessor finding_reason_codes: Array[String]?
+      attr_accessor utilization_metrics: Array[Types::UtilizationMetric]?
+      attr_accessor look_back_period_in_days: Float?
+      attr_accessor recommendation_options: Array[Types::InstanceRecommendationOption]?
+      attr_accessor recommendation_sources: Array[Types::RecommendationSource]?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor current_performance_risk: String?
+      attr_accessor effective_recommendation_preferences: Types::EffectiveRecommendationPreferences?
+      attr_accessor inferred_workload_types: Array[String]?
+      attr_accessor instance_state: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor external_metric_status: Types::ExternalMetricStatus?
+      attr_accessor current_instance_gpu_info: Types::GpuInfo?
+      attr_accessor idle: String?
+    end
+
+    module InstanceRecommendationFindingReasonCode
+      CPU_OVER_PROVISIONED: String
+      CPU_UNDER_PROVISIONED: String
+      MEMORY_OVER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+      EBS_THROUGHPUT_OVER_PROVISIONED: String
+      EBS_THROUGHPUT_UNDER_PROVISIONED: String
+      EBS_IOPS_OVER_PROVISIONED: String
+      EBS_IOPS_UNDER_PROVISIONED: String
+      NETWORK_BANDWIDTH_OVER_PROVISIONED: String
+      NETWORK_BANDWIDTH_UNDER_PROVISIONED: String
+      NETWORK_PPS_OVER_PROVISIONED: String
+      NETWORK_PPS_UNDER_PROVISIONED: String
+      DISK_IOPS_OVER_PROVISIONED: String
+      DISK_IOPS_UNDER_PROVISIONED: String
+      DISK_THROUGHPUT_OVER_PROVISIONED: String
+      DISK_THROUGHPUT_UNDER_PROVISIONED: String
+      GPU_UNDER_PROVISIONED: String
+      GPU_OVER_PROVISIONED: String
+      GPU_MEMORY_UNDER_PROVISIONED: String
+      GPU_MEMORY_OVER_PROVISIONED: String
+    end
+
+    class InstanceRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?instance_gpu_info: Types::GpuInfo,
+        ?projected_utilization_metrics: Array[Types::UtilizationMetric],
+        ?platform_differences: Array[String],
+        ?performance_risk: Float,
+        ?rank: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::InstanceSavingsOpportunityAfterDiscounts,
+        ?migration_effort: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor instance_gpu_info: Types::GpuInfo?
+      attr_accessor projected_utilization_metrics: Array[Types::UtilizationMetric]?
+      attr_accessor platform_differences: Array[String]?
+      attr_accessor performance_risk: Float?
+      attr_accessor rank: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::InstanceSavingsOpportunityAfterDiscounts?
+      attr_accessor migration_effort: String?
+    end
+
+    class InstanceSavingsEstimationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module InstanceSavingsEstimationModeSource
+      PUBLIC_PRICING: String
+      COST_EXPLORER_RIGHTSIZING: String
+      COST_OPTIMIZATION_HUB: String
+    end
+
+    class InstanceSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::InstanceEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::InstanceEstimatedMonthlySavings?
+    end
+
+    module InstanceState
+      PENDING: String
+      RUNNING: String
+      SHUTTING_DOWN: String
+      TERMINATED: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module JobFilterName
+      RESOURCE_TYPE: String
+      JOB_STATUS: String
+    end
+
+    module JobStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class LambdaEffectiveRecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_estimation_mode: Types::LambdaSavingsEstimationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_estimation_mode: Types::LambdaSavingsEstimationMode?
+    end
+
+    class LambdaEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    module LambdaFunctionMemoryMetricName
+      DURATION: String
+    end
+
+    module LambdaFunctionMemoryMetricStatistic
+      LOWER_BOUND: String
+      UPPER_BOUND: String
+      EXPECTED: String
+    end
+
+    class LambdaFunctionMemoryProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class LambdaFunctionMemoryRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rank: Integer,
+        ?memory_size: Integer,
+        ?projected_utilization_metrics: Array[Types::LambdaFunctionMemoryProjectedMetric],
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::LambdaSavingsOpportunityAfterDiscounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rank: Integer?
+      attr_accessor memory_size: Integer?
+      attr_accessor projected_utilization_metrics: Array[Types::LambdaFunctionMemoryProjectedMetric]?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::LambdaSavingsOpportunityAfterDiscounts?
+    end
+
+    module LambdaFunctionMetricName
+      DURATION: String
+      MEMORY: String
+    end
+
+    module LambdaFunctionMetricStatistic
+      MAXIMUM: String
+      AVERAGE: String
+    end
+
+    class LambdaFunctionRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?function_version: String,
+        ?account_id: String,
+        ?current_memory_size: Integer,
+        ?number_of_invocations: Integer,
+        ?utilization_metrics: Array[Types::LambdaFunctionUtilizationMetric],
+        ?lookback_period_in_days: Float,
+        ?last_refresh_timestamp: Time,
+        ?finding: String,
+        ?finding_reason_codes: Array[String],
+        ?memory_size_recommendation_options: Array[Types::LambdaFunctionMemoryRecommendationOption],
+        ?current_performance_risk: String,
+        ?effective_recommendation_preferences: Types::LambdaEffectiveRecommendationPreferences,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor function_version: String?
+      attr_accessor account_id: String?
+      attr_accessor current_memory_size: Integer?
+      attr_accessor number_of_invocations: Integer?
+      attr_accessor utilization_metrics: Array[Types::LambdaFunctionUtilizationMetric]?
+      attr_accessor lookback_period_in_days: Float?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor finding: String?
+      attr_accessor finding_reason_codes: Array[String]?
+      attr_accessor memory_size_recommendation_options: Array[Types::LambdaFunctionMemoryRecommendationOption]?
+      attr_accessor current_performance_risk: String?
+      attr_accessor effective_recommendation_preferences: Types::LambdaEffectiveRecommendationPreferences?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LambdaFunctionRecommendationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module LambdaFunctionRecommendationFilterName
+      FINDING: String
+      FINDING_REASON_CODE: String
+    end
+
+    module LambdaFunctionRecommendationFinding
+      OPTIMIZED: String
+      NOT_OPTIMIZED: String
+      UNAVAILABLE: String
+    end
+
+    module LambdaFunctionRecommendationFindingReasonCode
+      MEMORY_OVER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+      INSUFFICIENT_DATA: String
+      INCONCLUSIVE: String
+    end
+
+    class LambdaFunctionUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class LambdaSavingsEstimationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module LambdaSavingsEstimationModeSource
+      PUBLIC_PRICING: String
+      COST_EXPLORER_RIGHTSIZING: String
+      COST_OPTIMIZATION_HUB: String
+    end
+
+    class LambdaSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::LambdaEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::LambdaEstimatedMonthlySavings?
+    end
+
+    class LicenseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_cores: Integer,
+        ?instance_type: String,
+        ?operating_system: String,
+        ?license_edition: String,
+        ?license_name: String,
+        ?license_model: String,
+        ?license_version: String,
+        ?metrics_source: Array[Types::MetricSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_cores: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor operating_system: String?
+      attr_accessor license_edition: String?
+      attr_accessor license_name: String?
+      attr_accessor license_model: String?
+      attr_accessor license_version: String?
+      attr_accessor metrics_source: Array[Types::MetricSource]?
+    end
+
+    module LicenseEdition
+      ENTERPRISE: String
+      STANDARD: String
+      FREE: String
+      NO_LICENSE_EDITION_FOUND: String
+    end
+
+    module LicenseFinding
+      INSUFFICIENT_METRICS: String
+      OPTIMIZED: String
+      NOT_OPTIMIZED: String
+    end
+
+    module LicenseFindingReasonCode
+      CW_APP_INSIGHTS_DISABLED: String
+      CW_APP_INSIGHTS_ERROR: String
+      LICENSE_OVER_PROVISIONED: String
+      OPTIMIZED: String
+    end
+
+    module LicenseModel
+      LICENSE_INCLUDED: String
+      BRING_YOUR_OWN_LICENSE: String
+    end
+
+    module LicenseName
+      SQLSERVER: String
+    end
+
+    class LicenseRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?account_id: String,
+        ?current_license_configuration: Types::LicenseConfiguration,
+        ?lookback_period_in_days: Float,
+        ?last_refresh_timestamp: Time,
+        ?finding: String,
+        ?finding_reason_codes: Array[String],
+        ?license_recommendation_options: Array[Types::LicenseRecommendationOption],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor current_license_configuration: Types::LicenseConfiguration?
+      attr_accessor lookback_period_in_days: Float?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor finding: String?
+      attr_accessor finding_reason_codes: Array[String]?
+      attr_accessor license_recommendation_options: Array[Types::LicenseRecommendationOption]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LicenseRecommendationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module LicenseRecommendationFilterName
+      LICENSE_FINDING: String
+      LICENSE_FINDING_REASON_CODE: String
+      LICENSE_NAME: String
+    end
+
+    class LicenseRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rank: Integer,
+        ?operating_system: String,
+        ?license_edition: String,
+        ?license_model: String,
+        ?savings_opportunity: Types::SavingsOpportunity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rank: Integer?
+      attr_accessor operating_system: String?
+      attr_accessor license_edition: String?
+      attr_accessor license_model: String?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LookBackPeriodPreference
+      DAYS_14: String
+      DAYS_32: String
+      DAYS_93: String
+    end
+
+    class MemorySizeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory: Integer,
+        ?memory_reservation: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory: Integer?
+      attr_accessor memory_reservation: Integer?
+    end
+
+    module MetricName
+      CPU: String
+      MEMORY: String
+      EBS_READ_OPS_PER_SECOND: String
+      EBS_WRITE_OPS_PER_SECOND: String
+      EBS_READ_BYTES_PER_SECOND: String
+      EBS_WRITE_BYTES_PER_SECOND: String
+      DISK_READ_OPS_PER_SECOND: String
+      DISK_WRITE_OPS_PER_SECOND: String
+      DISK_READ_BYTES_PER_SECOND: String
+      DISK_WRITE_BYTES_PER_SECOND: String
+      NETWORK_IN_BYTES_PER_SECOND: String
+      NETWORK_OUT_BYTES_PER_SECOND: String
+      NETWORK_PACKETS_IN_PER_SECOND: String
+      NETWORK_PACKETS_OUT_PER_SECOND: String
+      GPU_PERCENTAGE: String
+      GPU_MEMORY_PERCENTAGE: String
+    end
+
+    class MetricSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor provider_arn: String?
+    end
+
+    module MetricSourceProvider
+      CloudWatchAppInsights: String
+    end
+
+    module MetricStatistic
+      MAXIMUM: String
+      AVERAGE: String
+    end
+
+    module MigrationEffort
+      VERY_LOW: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class MissingAuthenticationToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OptInRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Order
+      ASC: String
+      DESC: String
+    end
+
+    class OrderBy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension: String?
+      attr_accessor order: String?
+    end
+
+    module PlatformDifference
+      HYPERVISOR: String
+      NETWORK_INTERFACE: String
+      STORAGE_INTERFACE: String
+      INSTANCE_STORE_AVAILABILITY: String
+      VIRTUALIZATION_TYPE: String
+      ARCHITECTURE: String
+    end
+
+    class PreferredResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?include_list: Array[String],
+        ?exclude_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor include_list: Array[String]?
+      attr_accessor exclude_list: Array[String]?
+    end
+
+    module PreferredResourceName
+      EC2_INSTANCE_TYPES: String
+    end
+
+    class ProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+    end
+
+    class PutRecommendationPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?scope: Types::Scope,
+        ?enhanced_infrastructure_metrics: String,
+        ?inferred_workload_types: String,
+        ?external_metrics_preference: Types::ExternalMetricsPreference,
+        ?look_back_period: String,
+        ?utilization_preferences: Array[Types::UtilizationPreference],
+        ?preferred_resources: Array[Types::PreferredResource],
+        ?savings_estimation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor scope: Types::Scope?
+      attr_accessor enhanced_infrastructure_metrics: String?
+      attr_accessor inferred_workload_types: String?
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference?
+      attr_accessor look_back_period: String?
+      attr_accessor utilization_preferences: Array[Types::UtilizationPreference]?
+      attr_accessor preferred_resources: Array[Types::PreferredResource]?
+      attr_accessor savings_estimation_mode: String?
+    end
+
+    class PutRecommendationPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RDSCurrentInstancePerformanceRisk
+      VERY_LOW: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class RDSDBInstanceRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_class: String,
+        ?projected_utilization_metrics: Array[Types::RDSDBUtilizationMetric],
+        ?performance_risk: Float,
+        ?rank: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::RDSInstanceSavingsOpportunityAfterDiscounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_class: String?
+      attr_accessor projected_utilization_metrics: Array[Types::RDSDBUtilizationMetric]?
+      attr_accessor performance_risk: Float?
+      attr_accessor rank: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::RDSInstanceSavingsOpportunityAfterDiscounts?
+    end
+
+    module RDSDBMetricName
+      CPU: String
+      MEMORY: String
+      EBS_VOLUME_STORAGE_SPACE_UTILIZATION: String
+      NETWORK_RECEIVE_THROUGHPUT: String
+      NETWORK_TRANSMIT_THROUGHPUT: String
+      EBS_VOLUME_READ_IOPS: String
+      EBS_VOLUME_WRITE_IOPS: String
+      EBS_VOLUME_READ_THROUGHPUT: String
+      EBS_VOLUME_WRITE_THROUGHPUT: String
+      DATABASE_CONNECTIONS: String
+      STORAGE_NETWORK_RECEIVE_THROUGHPUT: String
+      STORAGE_NETWORK_TRANSMIT_THROUGHPUT: String
+      AURORA_MEMORY_HEALTH_STATE: String
+      AURORA_MEMORY_NUM_DECLINED_SQL: String
+      AURORA_MEMORY_NUM_KILL_CONN_TOTAL: String
+      AURORA_MEMORY_NUM_KILL_QUERY_TOTAL: String
+      READ_IOPS_EPHEMERAL_STORAGE: String
+      WRITE_IOPS_EPHEMERAL_STORAGE: String
+      VOLUME_READ_IOPS: String
+      VOLUME_BYTES_USED: String
+      VOLUME_WRITE_IOPS: String
+    end
+
+    module RDSDBMetricStatistic
+      MAXIMUM: String
+      MINIMUM: String
+      AVERAGE: String
+    end
+
+    class RDSDBRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?account_id: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?promotion_tier: Integer,
+        ?current_db_instance_class: String,
+        ?current_storage_configuration: Types::DBStorageConfiguration,
+        ?db_cluster_identifier: String,
+        ?idle: String,
+        ?instance_finding: String,
+        ?storage_finding: String,
+        ?instance_finding_reason_codes: Array[String],
+        ?current_instance_performance_risk: String,
+        ?current_storage_estimated_monthly_volume_io_ps_cost_variation: String,
+        ?storage_finding_reason_codes: Array[String],
+        ?instance_recommendation_options: Array[Types::RDSDBInstanceRecommendationOption],
+        ?storage_recommendation_options: Array[Types::RDSDBStorageRecommendationOption],
+        ?utilization_metrics: Array[Types::RDSDBUtilizationMetric],
+        ?effective_recommendation_preferences: Types::RDSEffectiveRecommendationPreferences,
+        ?lookback_period_in_days: Float,
+        ?last_refresh_timestamp: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor promotion_tier: Integer?
+      attr_accessor current_db_instance_class: String?
+      attr_accessor current_storage_configuration: Types::DBStorageConfiguration?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor idle: String?
+      attr_accessor instance_finding: String?
+      attr_accessor storage_finding: String?
+      attr_accessor instance_finding_reason_codes: Array[String]?
+      attr_accessor current_instance_performance_risk: String?
+      attr_accessor current_storage_estimated_monthly_volume_io_ps_cost_variation: String?
+      attr_accessor storage_finding_reason_codes: Array[String]?
+      attr_accessor instance_recommendation_options: Array[Types::RDSDBInstanceRecommendationOption]?
+      attr_accessor storage_recommendation_options: Array[Types::RDSDBStorageRecommendationOption]?
+      attr_accessor utilization_metrics: Array[Types::RDSDBUtilizationMetric]?
+      attr_accessor effective_recommendation_preferences: Types::RDSEffectiveRecommendationPreferences?
+      attr_accessor lookback_period_in_days: Float?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class RDSDBRecommendationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RDSDBRecommendationFilterName
+      INSTANCE_FINDING: String
+      INSTANCE_FINDING_REASON_CODE: String
+      STORAGE_FINDING: String
+      STORAGE_FINDING_REASON_CODE: String
+      IDLE: String
+    end
+
+    class RDSDBStorageRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_configuration: Types::DBStorageConfiguration,
+        ?rank: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::RDSStorageSavingsOpportunityAfterDiscounts,
+        ?estimated_monthly_volume_io_ps_cost_variation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_configuration: Types::DBStorageConfiguration?
+      attr_accessor rank: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::RDSStorageSavingsOpportunityAfterDiscounts?
+      attr_accessor estimated_monthly_volume_io_ps_cost_variation: String?
+    end
+
+    class RDSDBUtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class RDSDatabaseProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+    end
+
+    class RDSDatabaseRecommendedOptionProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_db_instance_class: String,
+        ?rank: Integer,
+        ?projected_metrics: Array[Types::RDSDatabaseProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_db_instance_class: String?
+      attr_accessor rank: Integer?
+      attr_accessor projected_metrics: Array[Types::RDSDatabaseProjectedMetric]?
+    end
+
+    class RDSEffectiveRecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_vendor_architectures: Array[String],
+        ?enhanced_infrastructure_metrics: String,
+        ?look_back_period: String,
+        ?savings_estimation_mode: Types::RDSSavingsEstimationMode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_vendor_architectures: Array[String]?
+      attr_accessor enhanced_infrastructure_metrics: String?
+      attr_accessor look_back_period: String?
+      attr_accessor savings_estimation_mode: Types::RDSSavingsEstimationMode?
+    end
+
+    module RDSEstimatedMonthlyVolumeIOPsCostVariation
+      NONE: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class RDSInstanceEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    module RDSInstanceFinding
+      OPTIMIZED: String
+      UNDER_PROVISIONED: String
+      OVER_PROVISIONED: String
+    end
+
+    module RDSInstanceFindingReasonCode
+      CPU_OVER_PROVISIONED: String
+      NETWORK_BANDWIDTH_OVER_PROVISIONED: String
+      EBS_IOPS_OVER_PROVISIONED: String
+      EBS_IOPS_UNDER_PROVISIONED: String
+      EBS_THROUGHPUT_OVER_PROVISIONED: String
+      CPU_UNDER_PROVISIONED: String
+      NETWORK_BANDWIDTH_UNDER_PROVISIONED: String
+      EBS_THROUGHPUT_UNDER_PROVISIONED: String
+      NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE: String
+      NEW_ENGINE_VERSION_AVAILABLE: String
+      DB_CLUSTER_WRITER_UNDER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+      INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED: String
+      INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED: String
+    end
+
+    class RDSInstanceSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::RDSInstanceEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::RDSInstanceEstimatedMonthlySavings?
+    end
+
+    class RDSSavingsEstimationMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    module RDSSavingsEstimationModeSource
+      PUBLIC_PRICING: String
+      COST_EXPLORER_RIGHTSIZING: String
+      COST_OPTIMIZATION_HUB: String
+    end
+
+    class RDSStorageEstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor value: Float?
+    end
+
+    module RDSStorageFinding
+      OPTIMIZED: String
+      UNDER_PROVISIONED: String
+      OVER_PROVISIONED: String
+      NOT_OPTIMIZED: String
+    end
+
+    module RDSStorageFindingReasonCode
+      EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED: String
+      EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED: String
+      EBS_VOLUME_IOPS_OVER_PROVISIONED: String
+      EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED: String
+      NEW_GENERATION_STORAGE_TYPE_AVAILABLE: String
+      DB_CLUSTER_STORAGE_OPTION_AVAILABLE: String
+      DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE: String
+    end
+
+    class RDSStorageSavingsOpportunityAfterDiscounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::RDSStorageEstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::RDSStorageEstimatedMonthlySavings?
+    end
+
+    class ReasonCodeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+    end
+
+    class RecommendationExportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?destination: Types::ExportDestination,
+        ?resource_type: String,
+        ?status: String,
+        ?creation_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor destination: Types::ExportDestination?
+      attr_accessor resource_type: String?
+      attr_accessor status: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    module RecommendationPreferenceName
+      ENHANCED_INFRASTRUCTURE_METRICS: String
+      INFERRED_WORKLOAD_TYPES: String
+      EXTERNAL_METRICS_PREFERENCE: String
+      LOOKBACK_PERIOD_PREFERENCE: String
+      PREFERRED_RESOURCES: String
+      UTILIZATION_PREFERENCES: String
+    end
+
+    class RecommendationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_vendor_architectures: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_vendor_architectures: Array[String]?
+    end
+
+    class RecommendationPreferencesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: Types::Scope,
+        ?resource_type: String,
+        ?enhanced_infrastructure_metrics: String,
+        ?inferred_workload_types: String,
+        ?external_metrics_preference: Types::ExternalMetricsPreference,
+        ?look_back_period: String,
+        ?utilization_preferences: Array[Types::UtilizationPreference],
+        ?preferred_resources: Array[Types::EffectivePreferredResource],
+        ?savings_estimation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: Types::Scope?
+      attr_accessor resource_type: String?
+      attr_accessor enhanced_infrastructure_metrics: String?
+      attr_accessor inferred_workload_types: String?
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference?
+      attr_accessor look_back_period: String?
+      attr_accessor utilization_preferences: Array[Types::UtilizationPreference]?
+      attr_accessor preferred_resources: Array[Types::EffectivePreferredResource]?
+      attr_accessor savings_estimation_mode: String?
+    end
+
+    class RecommendationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_source_arn: String,
+        ?recommendation_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_source_arn: String?
+      attr_accessor recommendation_source_type: String?
+    end
+
+    module RecommendationSourceType
+      EC2_INSTANCE: String
+      AUTO_SCALING_GROUP: String
+      EBS_VOLUME: String
+      LAMBDA_FUNCTION: String
+      ECS_SERVICE: String
+      LICENSE: String
+      RDS_DB_INSTANCE: String
+      RDS_DB_INSTANCE_STORAGE: String
+      AURORA_DB_CLUSTER_STORAGE: String
+    end
+
+    class RecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::Summary],
+        ?idle_summaries: Array[Types::IdleSummary],
+        ?recommendation_resource_type: String,
+        ?account_id: String,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?idle_savings_opportunity: Types::SavingsOpportunity,
+        ?aggregated_savings_opportunity: Types::SavingsOpportunity,
+        ?current_performance_risk_ratings: Types::CurrentPerformanceRiskRatings,
+        ?inferred_workload_savings: Array[Types::InferredWorkloadSaving],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::Summary]?
+      attr_accessor idle_summaries: Array[Types::IdleSummary]?
+      attr_accessor recommendation_resource_type: String?
+      attr_accessor account_id: String?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor idle_savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor aggregated_savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor current_performance_risk_ratings: Types::CurrentPerformanceRiskRatings?
+      attr_accessor inferred_workload_savings: Array[Types::InferredWorkloadSaving]?
+    end
+
+    class RecommendedOptionProjectedMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_instance_type: String,
+        ?rank: Integer,
+        ?projected_metrics: Array[Types::ProjectedMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_instance_type: String?
+      attr_accessor rank: Integer?
+      attr_accessor projected_metrics: Array[Types::ProjectedMetric]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      EC2_INSTANCE: String
+      AUTO_SCALING_GROUP: String
+      EBS_VOLUME: String
+      LAMBDA_FUNCTION: String
+      NOT_APPLICABLE: String
+      ECS_SERVICE: String
+      LICENSE: String
+      RDS_DB_INSTANCE: String
+      AURORA_DB_CLUSTER_STORAGE: String
+      IDLE: String
+    end
+
+    class S3Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?metadata_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor metadata_key: String?
+    end
+
+    class S3DestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+    end
+
+    module SavingsEstimationMode
+      AFTER_DISCOUNTS: String
+      BEFORE_DISCOUNTS: String
+    end
+
+    class SavingsOpportunity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_opportunity_percentage: Float,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_opportunity_percentage: Float?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    class Scope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module ScopeName
+      ORGANIZATION: String
+      ACCOUNT_ID: String
+      RESOURCE_ARN: String
+    end
+
+    class ServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory: Integer,
+        ?cpu: Integer,
+        ?container_configurations: Array[Types::ContainerConfiguration],
+        ?auto_scaling_configuration: String,
+        ?task_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory: Integer?
+      attr_accessor cpu: Integer?
+      attr_accessor container_configurations: Array[Types::ContainerConfiguration]?
+      attr_accessor auto_scaling_configuration: String?
+      attr_accessor task_definition_arn: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Status
+      ACTIVE: String
+      INACTIVE: String
+      PENDING: String
+      FAILED: String
+    end
+
+    class Summary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+        ?reason_code_summaries: Array[Types::ReasonCodeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+      attr_accessor reason_code_summaries: Array[Types::ReasonCodeSummary]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateEnrollmentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?include_member_accounts: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor include_member_accounts: bool?
+    end
+
+    class UpdateEnrollmentStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class UtilizationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?statistic: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor statistic: String?
+      attr_accessor value: Float?
+    end
+
+    class UtilizationPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?metric_parameters: Types::CustomizableMetricParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor metric_parameters: Types::CustomizableMetricParameters?
+    end
+
+    class VolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_type: String,
+        ?volume_size: Integer,
+        ?volume_baseline_iops: Integer,
+        ?volume_burst_iops: Integer,
+        ?volume_baseline_throughput: Integer,
+        ?volume_burst_throughput: Integer,
+        ?root_volume: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_type: String?
+      attr_accessor volume_size: Integer?
+      attr_accessor volume_baseline_iops: Integer?
+      attr_accessor volume_burst_iops: Integer?
+      attr_accessor volume_baseline_throughput: Integer?
+      attr_accessor volume_burst_throughput: Integer?
+      attr_accessor root_volume: bool?
+    end
+
+    class VolumeRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_arn: String,
+        ?account_id: String,
+        ?current_configuration: Types::VolumeConfiguration,
+        ?finding: String,
+        ?utilization_metrics: Array[Types::EBSUtilizationMetric],
+        ?look_back_period_in_days: Float,
+        ?volume_recommendation_options: Array[Types::VolumeRecommendationOption],
+        ?last_refresh_timestamp: Time,
+        ?current_performance_risk: String,
+        ?effective_recommendation_preferences: Types::EBSEffectiveRecommendationPreferences,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor current_configuration: Types::VolumeConfiguration?
+      attr_accessor finding: String?
+      attr_accessor utilization_metrics: Array[Types::EBSUtilizationMetric]?
+      attr_accessor look_back_period_in_days: Float?
+      attr_accessor volume_recommendation_options: Array[Types::VolumeRecommendationOption]?
+      attr_accessor last_refresh_timestamp: Time?
+      attr_accessor current_performance_risk: String?
+      attr_accessor effective_recommendation_preferences: Types::EBSEffectiveRecommendationPreferences?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class VolumeRecommendationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::VolumeConfiguration,
+        ?performance_risk: Float,
+        ?rank: Integer,
+        ?savings_opportunity: Types::SavingsOpportunity,
+        ?savings_opportunity_after_discounts: Types::EBSSavingsOpportunityAfterDiscounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::VolumeConfiguration?
+      attr_accessor performance_risk: Float?
+      attr_accessor rank: Integer?
+      attr_accessor savings_opportunity: Types::SavingsOpportunity?
+      attr_accessor savings_opportunity_after_discounts: Types::EBSSavingsOpportunityAfterDiscounts?
+    end
+  end
+end

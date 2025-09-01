@@ -1,0 +1,44 @@
+module Aws::Cloud9
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class ConcurrentAccessException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def class_name: () -> String?
+      def code: () -> Integer?
+    end
+  end
+end

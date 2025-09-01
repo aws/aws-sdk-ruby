@@ -1,0 +1,943 @@
+module Aws::CodePipeline
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodePipeline::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcknowledgeJobResponse
+      include Smithy::Client::_Response[Types::AcknowledgeJobOutput]
+      def status: () -> String?
+    end
+    def acknowledge_job: (
+      ?job_id: String,
+      ?nonce: String
+    ) -> _AcknowledgeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcknowledgeJobResponse
+
+    interface _AcknowledgeThirdPartyJobResponse
+      include Smithy::Client::_Response[Types::AcknowledgeThirdPartyJobOutput]
+      def status: () -> String?
+    end
+    def acknowledge_third_party_job: (
+      ?job_id: String,
+      ?nonce: String,
+      ?client_token: String
+    ) -> _AcknowledgeThirdPartyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcknowledgeThirdPartyJobResponse
+
+    interface _CreateCustomActionTypeResponse
+      include Smithy::Client::_Response[Types::CreateCustomActionTypeOutput]
+      def action_type: () -> Types::ActionType?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_custom_action_type: (
+      ?category: String,
+      ?provider: String,
+      ?version: String,
+      ?settings: {
+        third_party_configuration_url: String,
+        entity_url_template: String,
+        execution_url_template: untyped,
+        revision_url_template: untyped
+      },
+      ?configuration_properties: Array[
+        {
+          name: String,
+          required: bool,
+          key: untyped,
+          secret: untyped,
+          queryable: untyped,
+          description: String,
+          type: String
+        }
+      ],
+      ?input_artifact_details: {
+        minimum_count: Integer,
+        maximum_count: Integer
+      },
+      ?output_artifact_details: {
+        minimum_count: Integer,
+        maximum_count: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCustomActionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomActionTypeResponse
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineOutput]
+      def pipeline: () -> Types::PipelineDeclaration?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_pipeline: (
+      ?pipeline: {
+        name: String,
+        role_arn: String,
+        artifact_store: {
+          type: String,
+          location: String,
+          encryption_key: {
+            id: String,
+            type: String
+          }
+        },
+        artifact_stores: Hash[String,
+          {
+            type: untyped,
+            location: untyped,
+            encryption_key: untyped
+          }
+        ],
+        stages: Array[
+          {
+            name: String,
+            blockers: Array[
+              {
+                name: String,
+                type: String
+              }
+            ],
+            actions: Array[
+              {
+                name: String,
+                action_type_id: {
+                  category: String,
+                  owner: String,
+                  provider: String,
+                  version: String
+                },
+                run_order: Integer,
+                configuration: Hash[String, String],
+                commands: Array[String],
+                output_artifacts: Array[
+                  {
+                    name: String,
+                    files: Array[String]
+                  }
+                ],
+                input_artifacts: Array[
+                  {
+                    name: untyped
+                  }
+                ],
+                output_variables: Array[String],
+                role_arn: untyped,
+                region: String,
+                namespace: String,
+                timeout_in_minutes: Integer,
+                environment_variables: Array[
+                  {
+                    name: String,
+                    value: String,
+                    type: String
+                  }
+                ]
+              }
+            ],
+            on_failure: {
+              result: String,
+              retry_configuration: {
+                retry_mode: String
+              },
+              conditions: Array[
+                {
+                  result: untyped,
+                  rules: Array[
+                    {
+                      name: String,
+                      rule_type_id: {
+                        category: String,
+                        owner: String,
+                        provider: String,
+                        version: untyped
+                      },
+                      configuration: Hash[String, String],
+                      commands: untyped,
+                      input_artifacts: untyped,
+                      role_arn: untyped,
+                      region: untyped,
+                      timeout_in_minutes: Integer
+                    }
+                  ]
+                }
+              ]
+            },
+            on_success: {
+              conditions: untyped
+            },
+            before_entry: {
+              conditions: untyped
+            }
+          }
+        ],
+        version: Integer,
+        execution_mode: String,
+        pipeline_type: String,
+        variables: Array[
+          {
+            name: String,
+            default_value: String,
+            description: String
+          }
+        ],
+        triggers: Array[
+          {
+            provider_type: String,
+            git_configuration: {
+              source_action_name: untyped,
+              push: Array[
+                {
+                  tags: {
+                    includes: Array[String],
+                    excludes: untyped
+                  },
+                  branches: {
+                    includes: Array[String],
+                    excludes: untyped
+                  },
+                  file_paths: {
+                    includes: Array[String],
+                    excludes: untyped
+                  }
+                }
+              ],
+              pull_request: Array[
+                {
+                  events: Array[String],
+                  branches: untyped,
+                  file_paths: untyped
+                }
+              ]
+            }
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
+
+    interface _DeleteCustomActionTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_custom_action_type: (
+      ?category: String,
+      ?provider: String,
+      ?version: String
+    ) -> _DeleteCustomActionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomActionTypeResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_pipeline: (
+      ?name: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _DeleteWebhookResponse
+      include Smithy::Client::_Response[Types::DeleteWebhookOutput]
+    end
+    def delete_webhook: (
+      ?name: String
+    ) -> _DeleteWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebhookResponse
+
+    interface _DeregisterWebhookWithThirdPartyResponse
+      include Smithy::Client::_Response[Types::DeregisterWebhookWithThirdPartyOutput]
+    end
+    def deregister_webhook_with_third_party: (
+      ?webhook_name: String
+    ) -> _DeregisterWebhookWithThirdPartyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterWebhookWithThirdPartyResponse
+
+    interface _DisableStageTransitionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_stage_transition: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?transition_type: String,
+      ?reason: String
+    ) -> _DisableStageTransitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableStageTransitionResponse
+
+    interface _EnableStageTransitionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_stage_transition: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?transition_type: String
+    ) -> _EnableStageTransitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableStageTransitionResponse
+
+    interface _GetActionTypeResponse
+      include Smithy::Client::_Response[Types::GetActionTypeOutput]
+      def action_type: () -> Types::ActionTypeDeclaration?
+    end
+    def get_action_type: (
+      ?category: String,
+      ?owner: String,
+      ?provider: String,
+      ?version: String
+    ) -> _GetActionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetActionTypeResponse
+
+    interface _GetJobDetailsResponse
+      include Smithy::Client::_Response[Types::GetJobDetailsOutput]
+      def job_details: () -> Types::JobDetails?
+    end
+    def get_job_details: (
+      ?job_id: String
+    ) -> _GetJobDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobDetailsResponse
+
+    interface _GetPipelineResponse
+      include Smithy::Client::_Response[Types::GetPipelineOutput]
+      def pipeline: () -> Types::PipelineDeclaration?
+      def metadata: () -> Types::PipelineMetadata?
+    end
+    def get_pipeline: (
+      ?name: String,
+      ?version: Integer
+    ) -> _GetPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineResponse
+
+    interface _GetPipelineExecutionResponse
+      include Smithy::Client::_Response[Types::GetPipelineExecutionOutput]
+      def pipeline_execution: () -> Types::PipelineExecution?
+    end
+    def get_pipeline_execution: (
+      ?pipeline_name: String,
+      ?pipeline_execution_id: String
+    ) -> _GetPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineExecutionResponse
+
+    interface _GetPipelineStateResponse
+      include Smithy::Client::_Response[Types::GetPipelineStateOutput]
+      def pipeline_name: () -> String?
+      def pipeline_version: () -> Integer?
+      def stage_states: () -> Array[Types::StageState]?
+      def created: () -> Time?
+      def updated: () -> Time?
+    end
+    def get_pipeline_state: (
+      ?name: String
+    ) -> _GetPipelineStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineStateResponse
+
+    interface _GetThirdPartyJobDetailsResponse
+      include Smithy::Client::_Response[Types::GetThirdPartyJobDetailsOutput]
+      def job_details: () -> Types::ThirdPartyJobDetails?
+    end
+    def get_third_party_job_details: (
+      ?job_id: String,
+      ?client_token: String
+    ) -> _GetThirdPartyJobDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThirdPartyJobDetailsResponse
+
+    interface _ListActionExecutionsResponse
+      include Smithy::Client::_Response[Types::ListActionExecutionsOutput]
+      def action_execution_details: () -> Array[Types::ActionExecutionDetail]?
+      def next_token: () -> String?
+    end
+    def list_action_executions: (
+      ?pipeline_name: String,
+      ?filter: {
+        pipeline_execution_id: String,
+        latest_in_pipeline_execution: {
+          pipeline_execution_id: untyped,
+          start_time_range: String
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListActionExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionExecutionsResponse
+
+    interface _ListActionTypesResponse
+      include Smithy::Client::_Response[Types::ListActionTypesOutput]
+      def action_types: () -> Array[Types::ActionType]?
+      def next_token: () -> String?
+    end
+    def list_action_types: (
+      ?action_owner_filter: String,
+      ?next_token: String,
+      ?region_filter: String
+    ) -> _ListActionTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionTypesResponse
+
+    interface _ListDeployActionExecutionTargetsResponse
+      include Smithy::Client::_Response[Types::ListDeployActionExecutionTargetsOutput]
+      def targets: () -> Array[Types::DeployActionExecutionTarget]?
+      def next_token: () -> String?
+    end
+    def list_deploy_action_execution_targets: (
+      ?pipeline_name: String,
+      ?action_execution_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeployActionExecutionTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeployActionExecutionTargetsResponse
+
+    interface _ListPipelineExecutionsResponse
+      include Smithy::Client::_Response[Types::ListPipelineExecutionsOutput]
+      def pipeline_execution_summaries: () -> Array[Types::PipelineExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_pipeline_executions: (
+      ?pipeline_name: String,
+      ?max_results: Integer,
+      ?filter: {
+        succeeded_in_stage: {
+          stage_name: String
+        }
+      },
+      ?next_token: String
+    ) -> _ListPipelineExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineExecutionsResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesOutput]
+      def pipelines: () -> Array[Types::PipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_pipelines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
+    interface _ListRuleExecutionsResponse
+      include Smithy::Client::_Response[Types::ListRuleExecutionsOutput]
+      def rule_execution_details: () -> Array[Types::RuleExecutionDetail]?
+      def next_token: () -> String?
+    end
+    def list_rule_executions: (
+      ?pipeline_name: String,
+      ?filter: {
+        pipeline_execution_id: String,
+        latest_in_pipeline_execution: {
+          pipeline_execution_id: untyped,
+          start_time_range: String
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRuleExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleExecutionsResponse
+
+    interface _ListRuleTypesResponse
+      include Smithy::Client::_Response[Types::ListRuleTypesOutput]
+      def rule_types: () -> Array[Types::RuleType]?
+    end
+    def list_rule_types: (
+      ?rule_owner_filter: String,
+      ?region_filter: String
+    ) -> _ListRuleTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleTypesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWebhooksResponse
+      include Smithy::Client::_Response[Types::ListWebhooksOutput]
+      def webhooks: () -> Array[Types::ListWebhookItem]?
+      def next_token: () -> String?
+    end
+    def list_webhooks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWebhooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebhooksResponse
+
+    interface _OverrideStageConditionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def override_stage_condition: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?pipeline_execution_id: String,
+      ?condition_type: String
+    ) -> _OverrideStageConditionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OverrideStageConditionResponse
+
+    interface _PollForJobsResponse
+      include Smithy::Client::_Response[Types::PollForJobsOutput]
+      def jobs: () -> Array[Types::Job]?
+    end
+    def poll_for_jobs: (
+      ?action_type_id: {
+        category: String,
+        owner: String,
+        provider: String,
+        version: String
+      },
+      ?max_batch_size: Integer,
+      ?query_param: Hash[String, String]
+    ) -> _PollForJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PollForJobsResponse
+
+    interface _PollForThirdPartyJobsResponse
+      include Smithy::Client::_Response[Types::PollForThirdPartyJobsOutput]
+      def jobs: () -> Array[Types::ThirdPartyJob]?
+    end
+    def poll_for_third_party_jobs: (
+      ?action_type_id: {
+        category: String,
+        owner: String,
+        provider: String,
+        version: String
+      },
+      ?max_batch_size: Integer
+    ) -> _PollForThirdPartyJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PollForThirdPartyJobsResponse
+
+    interface _PutActionRevisionResponse
+      include Smithy::Client::_Response[Types::PutActionRevisionOutput]
+      def new_revision: () -> bool?
+      def pipeline_execution_id: () -> String?
+    end
+    def put_action_revision: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?action_name: String,
+      ?action_revision: {
+        revision_id: String,
+        revision_change_id: String,
+        created: Time
+      }
+    ) -> _PutActionRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutActionRevisionResponse
+
+    interface _PutApprovalResultResponse
+      include Smithy::Client::_Response[Types::PutApprovalResultOutput]
+      def approved_at: () -> Time?
+    end
+    def put_approval_result: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?action_name: String,
+      ?result: {
+        summary: String,
+        status: String
+      },
+      ?token: String
+    ) -> _PutApprovalResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutApprovalResultResponse
+
+    interface _PutJobFailureResultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_job_failure_result: (
+      ?job_id: String,
+      ?failure_details: {
+        type: String,
+        message: String,
+        external_execution_id: String
+      }
+    ) -> _PutJobFailureResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutJobFailureResultResponse
+
+    interface _PutJobSuccessResultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_job_success_result: (
+      ?job_id: String,
+      ?current_revision: {
+        revision: String,
+        change_identifier: String,
+        created: Time,
+        revision_summary: String
+      },
+      ?continuation_token: String,
+      ?execution_details: {
+        summary: String,
+        external_execution_id: String,
+        percent_complete: Integer
+      },
+      ?output_variables: Hash[String, String]
+    ) -> _PutJobSuccessResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutJobSuccessResultResponse
+
+    interface _PutThirdPartyJobFailureResultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_third_party_job_failure_result: (
+      ?job_id: String,
+      ?client_token: String,
+      ?failure_details: {
+        type: String,
+        message: String,
+        external_execution_id: String
+      }
+    ) -> _PutThirdPartyJobFailureResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutThirdPartyJobFailureResultResponse
+
+    interface _PutThirdPartyJobSuccessResultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_third_party_job_success_result: (
+      ?job_id: String,
+      ?client_token: String,
+      ?current_revision: {
+        revision: String,
+        change_identifier: String,
+        created: Time,
+        revision_summary: String
+      },
+      ?continuation_token: String,
+      ?execution_details: {
+        summary: String,
+        external_execution_id: String,
+        percent_complete: Integer
+      }
+    ) -> _PutThirdPartyJobSuccessResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutThirdPartyJobSuccessResultResponse
+
+    interface _PutWebhookResponse
+      include Smithy::Client::_Response[Types::PutWebhookOutput]
+      def webhook: () -> Types::ListWebhookItem?
+    end
+    def put_webhook: (
+      ?webhook: {
+        name: String,
+        target_pipeline: String,
+        target_action: String,
+        filters: Array[
+          {
+            json_path: String,
+            match_equals: String
+          }
+        ],
+        authentication: String,
+        authentication_configuration: {
+          allowed_ip_range: String,
+          secret_token: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutWebhookResponse
+
+    interface _RegisterWebhookWithThirdPartyResponse
+      include Smithy::Client::_Response[Types::RegisterWebhookWithThirdPartyOutput]
+    end
+    def register_webhook_with_third_party: (
+      ?webhook_name: String
+    ) -> _RegisterWebhookWithThirdPartyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterWebhookWithThirdPartyResponse
+
+    interface _RetryStageExecutionResponse
+      include Smithy::Client::_Response[Types::RetryStageExecutionOutput]
+      def pipeline_execution_id: () -> String?
+    end
+    def retry_stage_execution: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?pipeline_execution_id: String,
+      ?retry_mode: String
+    ) -> _RetryStageExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryStageExecutionResponse
+
+    interface _RollbackStageResponse
+      include Smithy::Client::_Response[Types::RollbackStageOutput]
+      def pipeline_execution_id: () -> String?
+    end
+    def rollback_stage: (
+      ?pipeline_name: String,
+      ?stage_name: String,
+      ?target_pipeline_execution_id: String
+    ) -> _RollbackStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackStageResponse
+
+    interface _StartPipelineExecutionResponse
+      include Smithy::Client::_Response[Types::StartPipelineExecutionOutput]
+      def pipeline_execution_id: () -> String?
+    end
+    def start_pipeline_execution: (
+      ?name: String,
+      ?variables: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String,
+      ?source_revisions: Array[
+        {
+          action_name: String,
+          revision_type: String,
+          revision_value: String
+        }
+      ]
+    ) -> _StartPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipelineExecutionResponse
+
+    interface _StopPipelineExecutionResponse
+      include Smithy::Client::_Response[Types::StopPipelineExecutionOutput]
+      def pipeline_execution_id: () -> String?
+    end
+    def stop_pipeline_execution: (
+      ?pipeline_name: String,
+      ?pipeline_execution_id: String,
+      ?abandon: bool,
+      ?reason: String
+    ) -> _StopPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPipelineExecutionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateActionTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_action_type: (
+      ?action_type: {
+        description: String,
+        executor: {
+          configuration: {
+            lambda_executor_configuration: {
+              lambda_function_arn: String
+            },
+            job_worker_executor_configuration: {
+              polling_accounts: Array[String],
+              polling_service_principals: Array[String]
+            }
+          },
+          type: String,
+          policy_statements_template: String,
+          job_timeout: Integer
+        },
+        id: {
+          category: String,
+          owner: String,
+          provider: String,
+          version: String
+        },
+        input_artifact_details: {
+          minimum_count: Integer,
+          maximum_count: Integer
+        },
+        output_artifact_details: untyped,
+        permissions: {
+          allowed_accounts: Array[String]
+        },
+        properties: Array[
+          {
+            name: String,
+            optional: bool,
+            key: untyped,
+            no_echo: untyped,
+            queryable: untyped,
+            description: String
+          }
+        ],
+        urls: {
+          configuration_url: String,
+          entity_url_template: String,
+          execution_url_template: untyped,
+          revision_url_template: untyped
+        }
+      }
+    ) -> _UpdateActionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateActionTypeResponse
+
+    interface _UpdatePipelineResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineOutput]
+      def pipeline: () -> Types::PipelineDeclaration?
+    end
+    def update_pipeline: (
+      ?pipeline: {
+        name: String,
+        role_arn: String,
+        artifact_store: {
+          type: String,
+          location: String,
+          encryption_key: {
+            id: String,
+            type: String
+          }
+        },
+        artifact_stores: Hash[String,
+          {
+            type: untyped,
+            location: untyped,
+            encryption_key: untyped
+          }
+        ],
+        stages: Array[
+          {
+            name: String,
+            blockers: Array[
+              {
+                name: String,
+                type: String
+              }
+            ],
+            actions: Array[
+              {
+                name: String,
+                action_type_id: {
+                  category: String,
+                  owner: String,
+                  provider: String,
+                  version: String
+                },
+                run_order: Integer,
+                configuration: Hash[String, String],
+                commands: Array[String],
+                output_artifacts: Array[
+                  {
+                    name: String,
+                    files: Array[String]
+                  }
+                ],
+                input_artifacts: Array[
+                  {
+                    name: untyped
+                  }
+                ],
+                output_variables: Array[String],
+                role_arn: untyped,
+                region: String,
+                namespace: String,
+                timeout_in_minutes: Integer,
+                environment_variables: Array[
+                  {
+                    name: String,
+                    value: String,
+                    type: String
+                  }
+                ]
+              }
+            ],
+            on_failure: {
+              result: String,
+              retry_configuration: {
+                retry_mode: String
+              },
+              conditions: Array[
+                {
+                  result: untyped,
+                  rules: Array[
+                    {
+                      name: String,
+                      rule_type_id: {
+                        category: String,
+                        owner: String,
+                        provider: String,
+                        version: untyped
+                      },
+                      configuration: Hash[String, String],
+                      commands: untyped,
+                      input_artifacts: untyped,
+                      role_arn: untyped,
+                      region: untyped,
+                      timeout_in_minutes: Integer
+                    }
+                  ]
+                }
+              ]
+            },
+            on_success: {
+              conditions: untyped
+            },
+            before_entry: {
+              conditions: untyped
+            }
+          }
+        ],
+        version: Integer,
+        execution_mode: String,
+        pipeline_type: String,
+        variables: Array[
+          {
+            name: String,
+            default_value: String,
+            description: String
+          }
+        ],
+        triggers: Array[
+          {
+            provider_type: String,
+            git_configuration: {
+              source_action_name: untyped,
+              push: Array[
+                {
+                  tags: {
+                    includes: Array[String],
+                    excludes: untyped
+                  },
+                  branches: {
+                    includes: Array[String],
+                    excludes: untyped
+                  },
+                  file_paths: {
+                    includes: Array[String],
+                    excludes: untyped
+                  }
+                }
+              ],
+              pull_request: Array[
+                {
+                  events: Array[String],
+                  branches: untyped,
+                  file_paths: untyped
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ) -> _UpdatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineResponse
+  end
+end

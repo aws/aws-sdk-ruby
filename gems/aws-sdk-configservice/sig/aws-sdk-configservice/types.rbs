@@ -1,0 +1,5584 @@
+module Aws::ConfigService
+  module Types
+
+    class AccountAggregationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?all_aws_regions: bool,
+        ?aws_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor all_aws_regions: bool?
+      attr_accessor aws_regions: Array[String]?
+    end
+
+    class AggregateComplianceByConfigRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?compliance: Types::Compliance,
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor compliance: Types::Compliance?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    class AggregateComplianceByConformancePack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?compliance: Types::AggregateConformancePackCompliance,
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor compliance: Types::AggregateConformancePackCompliance?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    class AggregateComplianceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?compliance_summary: Types::ComplianceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor compliance_summary: Types::ComplianceSummary?
+    end
+
+    class AggregateConformancePackCompliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_type: String,
+        ?compliant_rule_count: Integer,
+        ?non_compliant_rule_count: Integer,
+        ?total_rule_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_type: String?
+      attr_accessor compliant_rule_count: Integer?
+      attr_accessor non_compliant_rule_count: Integer?
+      attr_accessor total_rule_count: Integer?
+    end
+
+    class AggregateConformancePackComplianceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliant_conformance_pack_count: Integer,
+        ?non_compliant_conformance_pack_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliant_conformance_pack_count: Integer?
+      attr_accessor non_compliant_conformance_pack_count: Integer?
+    end
+
+    class AggregateConformancePackComplianceFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?compliance_type: String,
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor compliance_type: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    class AggregateConformancePackComplianceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_summary: Types::AggregateConformancePackComplianceCount,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_summary: Types::AggregateConformancePackComplianceCount?
+      attr_accessor group_name: String?
+    end
+
+    class AggregateConformancePackComplianceSummaryFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    module AggregateConformancePackComplianceSummaryGroupKey
+      ACCOUNT_ID: String
+      AWS_REGION: String
+    end
+
+    class AggregateEvaluationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_result_identifier: Types::EvaluationResultIdentifier,
+        ?compliance_type: String,
+        ?result_recorded_time: Time,
+        ?config_rule_invoked_time: Time,
+        ?annotation: String,
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_result_identifier: Types::EvaluationResultIdentifier?
+      attr_accessor compliance_type: String?
+      attr_accessor result_recorded_time: Time?
+      attr_accessor config_rule_invoked_time: Time?
+      attr_accessor annotation: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    class AggregateResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_account_id: String,
+        ?source_region: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_account_id: String?
+      attr_accessor source_region: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class AggregatedSourceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_id: String,
+        ?source_type: String,
+        ?aws_region: String,
+        ?last_update_status: String,
+        ?last_update_time: Time,
+        ?last_error_code: String,
+        ?last_error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+      attr_accessor aws_region: String?
+      attr_accessor last_update_status: String?
+      attr_accessor last_update_time: Time?
+      attr_accessor last_error_code: String?
+      attr_accessor last_error_message: String?
+    end
+
+    module AggregatedSourceStatusType
+      FAILED: String
+      SUCCEEDED: String
+      OUTDATED: String
+    end
+
+    module AggregatedSourceType
+      ACCOUNT: String
+      ORGANIZATION: String
+    end
+
+    class AggregationAuthorization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_authorization_arn: String,
+        ?authorized_account_id: String,
+        ?authorized_aws_region: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_authorization_arn: String?
+      attr_accessor authorized_account_id: String?
+      attr_accessor authorized_aws_region: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class AggregatorFilterResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Array[String]?
+    end
+
+    class AggregatorFilterServicePrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module AggregatorFilterType
+      INCLUDE: String
+    end
+
+    class AggregatorFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: Types::AggregatorFilterResourceType,
+        ?service_principal: Types::AggregatorFilterServicePrincipal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: Types::AggregatorFilterResourceType?
+      attr_accessor service_principal: Types::AggregatorFilterServicePrincipal?
+    end
+
+    class AssociateResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_arn: String,
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_arn: String?
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class AssociateResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder: Types::ConfigurationRecorder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder: Types::ConfigurationRecorder?
+    end
+
+    class BaseConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?account_id: String,
+        ?configuration_item_capture_time: Time,
+        ?configuration_item_status: String,
+        ?configuration_state_id: String,
+        ?arn: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?aws_region: String,
+        ?availability_zone: String,
+        ?resource_creation_time: Time,
+        ?configuration: String,
+        ?supplementary_configuration: Hash[String, String],
+        ?recording_frequency: String,
+        ?configuration_item_delivery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor account_id: String?
+      attr_accessor configuration_item_capture_time: Time?
+      attr_accessor configuration_item_status: String?
+      attr_accessor configuration_state_id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor aws_region: String?
+      attr_accessor availability_zone: String?
+      attr_accessor resource_creation_time: Time?
+      attr_accessor configuration: String?
+      attr_accessor supplementary_configuration: Hash[String, String]?
+      attr_accessor recording_frequency: String?
+      attr_accessor configuration_item_delivery_time: Time?
+    end
+
+    class BatchGetAggregateResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?resource_identifiers: Array[Types::AggregateResourceIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor resource_identifiers: Array[Types::AggregateResourceIdentifier]?
+    end
+
+    class BatchGetAggregateResourceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_configuration_items: Array[Types::BaseConfigurationItem],
+        ?unprocessed_resource_identifiers: Array[Types::AggregateResourceIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_configuration_items: Array[Types::BaseConfigurationItem]?
+      attr_accessor unprocessed_resource_identifiers: Array[Types::AggregateResourceIdentifier]?
+    end
+
+    class BatchGetResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_keys: Array[Types::ResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_keys: Array[Types::ResourceKey]?
+    end
+
+    class BatchGetResourceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_configuration_items: Array[Types::BaseConfigurationItem],
+        ?unprocessed_resource_keys: Array[Types::ResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_configuration_items: Array[Types::BaseConfigurationItem]?
+      attr_accessor unprocessed_resource_keys: Array[Types::ResourceKey]?
+    end
+
+    module ChronologicalOrder
+      Reverse: String
+      Forward: String
+    end
+
+    class Compliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_type: String,
+        ?compliance_contributor_count: Types::ComplianceContributorCount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_type: String?
+      attr_accessor compliance_contributor_count: Types::ComplianceContributorCount?
+    end
+
+    class ComplianceByConfigRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?compliance: Types::Compliance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor compliance: Types::Compliance?
+    end
+
+    class ComplianceByResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?compliance: Types::Compliance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor compliance: Types::Compliance?
+    end
+
+    class ComplianceContributorCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capped_count: Integer,
+        ?cap_exceeded: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capped_count: Integer?
+      attr_accessor cap_exceeded: bool?
+    end
+
+    class ComplianceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliant_resource_count: Types::ComplianceContributorCount,
+        ?non_compliant_resource_count: Types::ComplianceContributorCount,
+        ?compliance_summary_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliant_resource_count: Types::ComplianceContributorCount?
+      attr_accessor non_compliant_resource_count: Types::ComplianceContributorCount?
+      attr_accessor compliance_summary_timestamp: Time?
+    end
+
+    class ComplianceSummaryByResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?compliance_summary: Types::ComplianceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor compliance_summary: Types::ComplianceSummary?
+    end
+
+    module ComplianceType
+      Compliant: String
+      Non_Compliant: String
+      Not_Applicable: String
+      Insufficient_Data: String
+    end
+
+    class ConfigExportDeliveryInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_status: String,
+        ?last_error_code: String,
+        ?last_error_message: String,
+        ?last_attempt_time: Time,
+        ?last_successful_time: Time,
+        ?next_delivery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_status: String?
+      attr_accessor last_error_code: String?
+      attr_accessor last_error_message: String?
+      attr_accessor last_attempt_time: Time?
+      attr_accessor last_successful_time: Time?
+      attr_accessor next_delivery_time: Time?
+    end
+
+    class ConfigRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?config_rule_arn: String,
+        ?config_rule_id: String,
+        ?description: String,
+        ?scope: Types::Scope,
+        ?source: Types::Source,
+        ?input_parameters: String,
+        ?maximum_execution_frequency: String,
+        ?config_rule_state: String,
+        ?created_by: String,
+        ?evaluation_modes: Array[Types::EvaluationModeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor config_rule_arn: String?
+      attr_accessor config_rule_id: String?
+      attr_accessor description: String?
+      attr_accessor scope: Types::Scope?
+      attr_accessor source: Types::Source?
+      attr_accessor input_parameters: String?
+      attr_accessor maximum_execution_frequency: String?
+      attr_accessor config_rule_state: String?
+      attr_accessor created_by: String?
+      attr_accessor evaluation_modes: Array[Types::EvaluationModeConfiguration]?
+    end
+
+    class ConfigRuleComplianceFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?compliance_type: String,
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor compliance_type: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    class ConfigRuleComplianceSummaryFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+    end
+
+    module ConfigRuleComplianceSummaryGroupKey
+      ACCOUNT_ID: String
+      AWS_REGION: String
+    end
+
+    class ConfigRuleEvaluationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?config_rule_arn: String,
+        ?config_rule_id: String,
+        ?last_successful_invocation_time: Time,
+        ?last_failed_invocation_time: Time,
+        ?last_successful_evaluation_time: Time,
+        ?last_failed_evaluation_time: Time,
+        ?first_activated_time: Time,
+        ?last_deactivated_time: Time,
+        ?last_error_code: String,
+        ?last_error_message: String,
+        ?first_evaluation_started: bool,
+        ?last_debug_log_delivery_status: String,
+        ?last_debug_log_delivery_status_reason: String,
+        ?last_debug_log_delivery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor config_rule_arn: String?
+      attr_accessor config_rule_id: String?
+      attr_accessor last_successful_invocation_time: Time?
+      attr_accessor last_failed_invocation_time: Time?
+      attr_accessor last_successful_evaluation_time: Time?
+      attr_accessor last_failed_evaluation_time: Time?
+      attr_accessor first_activated_time: Time?
+      attr_accessor last_deactivated_time: Time?
+      attr_accessor last_error_code: String?
+      attr_accessor last_error_message: String?
+      attr_accessor first_evaluation_started: bool?
+      attr_accessor last_debug_log_delivery_status: String?
+      attr_accessor last_debug_log_delivery_status_reason: String?
+      attr_accessor last_debug_log_delivery_time: Time?
+    end
+
+    module ConfigRuleState
+      ACTIVE: String
+      DELETING: String
+      DELETING_RESULTS: String
+      EVALUATING: String
+    end
+
+    class ConfigSnapshotDeliveryProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_frequency: String?
+    end
+
+    class ConfigStreamDeliveryInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_status: String,
+        ?last_error_code: String,
+        ?last_error_message: String,
+        ?last_status_change_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_status: String?
+      attr_accessor last_error_code: String?
+      attr_accessor last_error_message: String?
+      attr_accessor last_status_change_time: Time?
+    end
+
+    class ConfigurationAggregator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?configuration_aggregator_arn: String,
+        ?account_aggregation_sources: Array[Types::AccountAggregationSource],
+        ?organization_aggregation_source: Types::OrganizationAggregationSource,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?created_by: String,
+        ?aggregator_filters: Types::AggregatorFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor configuration_aggregator_arn: String?
+      attr_accessor account_aggregation_sources: Array[Types::AccountAggregationSource]?
+      attr_accessor organization_aggregation_source: Types::OrganizationAggregationSource?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_by: String?
+      attr_accessor aggregator_filters: Types::AggregatorFilters?
+    end
+
+    class ConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?account_id: String,
+        ?configuration_item_capture_time: Time,
+        ?configuration_item_status: String,
+        ?configuration_state_id: String,
+        ?configuration_item_md5_hash: String,
+        ?arn: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?aws_region: String,
+        ?availability_zone: String,
+        ?resource_creation_time: Time,
+        ?tags: Hash[String, String],
+        ?related_events: Array[String],
+        ?relationships: Array[Types::Relationship],
+        ?configuration: String,
+        ?supplementary_configuration: Hash[String, String],
+        ?recording_frequency: String,
+        ?configuration_item_delivery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor account_id: String?
+      attr_accessor configuration_item_capture_time: Time?
+      attr_accessor configuration_item_status: String?
+      attr_accessor configuration_state_id: String?
+      attr_accessor configuration_item_md5_hash: String?
+      attr_accessor arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor aws_region: String?
+      attr_accessor availability_zone: String?
+      attr_accessor resource_creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor related_events: Array[String]?
+      attr_accessor relationships: Array[Types::Relationship]?
+      attr_accessor configuration: String?
+      attr_accessor supplementary_configuration: Hash[String, String]?
+      attr_accessor recording_frequency: String?
+      attr_accessor configuration_item_delivery_time: Time?
+    end
+
+    module ConfigurationItemStatus
+      OK: String
+      ResourceDiscovered: String
+      ResourceNotRecorded: String
+      ResourceDeleted: String
+      ResourceDeletedNotRecorded: String
+    end
+
+    class ConfigurationRecorder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?role_arn: String,
+        ?recording_group: Types::RecordingGroup,
+        ?recording_mode: Types::RecordingMode,
+        ?recording_scope: String,
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor recording_group: Types::RecordingGroup?
+      attr_accessor recording_mode: Types::RecordingMode?
+      attr_accessor recording_scope: String?
+      attr_accessor service_principal: String?
+    end
+
+    class ConfigurationRecorderFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_name: String,
+        ?filter_value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_name: String?
+      attr_accessor filter_value: Array[String]?
+    end
+
+    module ConfigurationRecorderFilterName
+      RecordingScope: String
+    end
+
+    class ConfigurationRecorderStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?last_start_time: Time,
+        ?last_stop_time: Time,
+        ?recording: bool,
+        ?last_status: String,
+        ?last_error_code: String,
+        ?last_error_message: String,
+        ?last_status_change_time: Time,
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor last_start_time: Time?
+      attr_accessor last_stop_time: Time?
+      attr_accessor recording: bool?
+      attr_accessor last_status: String?
+      attr_accessor last_error_code: String?
+      attr_accessor last_error_message: String?
+      attr_accessor last_status_change_time: Time?
+      attr_accessor service_principal: String?
+    end
+
+    class ConfigurationRecorderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?service_principal: String,
+        ?recording_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor service_principal: String?
+      attr_accessor recording_scope: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConformancePackComplianceFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+        ?compliance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+      attr_accessor compliance_type: String?
+    end
+
+    class ConformancePackComplianceScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: String,
+        ?conformance_pack_name: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: String?
+      attr_accessor conformance_pack_name: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class ConformancePackComplianceScoresFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_names: Array[String]?
+    end
+
+    class ConformancePackComplianceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?conformance_pack_compliance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor conformance_pack_compliance_status: String?
+    end
+
+    module ConformancePackComplianceType
+      COMPLIANT: String
+      NON_COMPLIANT: String
+      INSUFFICIENT_DATA: String
+    end
+
+    class ConformancePackDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?conformance_pack_arn: String,
+        ?conformance_pack_id: String,
+        ?delivery_s3_bucket: String,
+        ?delivery_s3_key_prefix: String,
+        ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
+        ?last_update_requested_time: Time,
+        ?created_by: String,
+        ?template_ssm_document_details: Types::TemplateSSMDocumentDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor conformance_pack_arn: String?
+      attr_accessor conformance_pack_id: String?
+      attr_accessor delivery_s3_bucket: String?
+      attr_accessor delivery_s3_key_prefix: String?
+      attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
+      attr_accessor last_update_requested_time: Time?
+      attr_accessor created_by: String?
+      attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails?
+    end
+
+    class ConformancePackEvaluationFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+        ?compliance_type: String,
+        ?resource_type: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+      attr_accessor compliance_type: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    class ConformancePackEvaluationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_type: String,
+        ?evaluation_result_identifier: Types::EvaluationResultIdentifier,
+        ?config_rule_invoked_time: Time,
+        ?result_recorded_time: Time,
+        ?annotation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_type: String?
+      attr_accessor evaluation_result_identifier: Types::EvaluationResultIdentifier?
+      attr_accessor config_rule_invoked_time: Time?
+      attr_accessor result_recorded_time: Time?
+      attr_accessor annotation: String?
+    end
+
+    class ConformancePackInputParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
+    class ConformancePackRuleCompliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?compliance_type: String,
+        ?controls: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor compliance_type: String?
+      attr_accessor controls: Array[String]?
+    end
+
+    module ConformancePackState
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+    end
+
+    class ConformancePackStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?conformance_pack_id: String,
+        ?conformance_pack_arn: String,
+        ?conformance_pack_state: String,
+        ?stack_arn: String,
+        ?conformance_pack_status_reason: String,
+        ?last_update_requested_time: Time,
+        ?last_update_completed_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor conformance_pack_id: String?
+      attr_accessor conformance_pack_arn: String?
+      attr_accessor conformance_pack_state: String?
+      attr_accessor stack_arn: String?
+      attr_accessor conformance_pack_status_reason: String?
+      attr_accessor last_update_requested_time: Time?
+      attr_accessor last_update_completed_time: Time?
+    end
+
+    class ConformancePackTemplateValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CustomPolicyDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_runtime: String,
+        ?policy_text: String,
+        ?enable_debug_log_delivery: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_runtime: String?
+      attr_accessor policy_text: String?
+      attr_accessor enable_debug_log_delivery: bool?
+    end
+
+    class DeleteAggregationAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_account_id: String,
+        ?authorized_aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_account_id: String?
+      attr_accessor authorized_aws_region: String?
+    end
+
+    class DeleteConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+    end
+
+    class DeleteConfigurationAggregatorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+    end
+
+    class DeleteConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_name: String?
+    end
+
+    class DeleteConformancePackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+    end
+
+    class DeleteDeliveryChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channel_name: String?
+    end
+
+    class DeleteEvaluationResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+    end
+
+    class DeleteEvaluationResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOrganizationConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+    end
+
+    class DeleteOrganizationConformancePackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_name: String?
+    end
+
+    class DeletePendingAggregationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requester_account_id: String,
+        ?requester_aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requester_account_id: String?
+      attr_accessor requester_aws_region: String?
+    end
+
+    class DeleteRemediationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_type: String?
+    end
+
+    class DeleteRemediationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRemediationExceptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_keys: Array[Types::RemediationExceptionResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_keys: Array[Types::RemediationExceptionResourceKey]?
+    end
+
+    class DeleteRemediationExceptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_batches: Array[Types::FailedDeleteRemediationExceptionsBatch],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_batches: Array[Types::FailedDeleteRemediationExceptionsBatch]?
+    end
+
+    class DeleteResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DeleteRetentionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_configuration_name: String?
+    end
+
+    class DeleteServiceLinkedConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+    end
+
+    class DeleteServiceLinkedConfigurationRecorderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteStoredQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_name: String?
+    end
+
+    class DeleteStoredQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeliverConfigSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channel_name: String?
+    end
+
+    class DeliverConfigSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_snapshot_id: String?
+    end
+
+    class DeliveryChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?s3_bucket_name: String,
+        ?s3_key_prefix: String,
+        ?s3_kms_key_arn: String,
+        ?sns_topic_arn: String,
+        ?config_snapshot_delivery_properties: Types::ConfigSnapshotDeliveryProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_key_prefix: String?
+      attr_accessor s3_kms_key_arn: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor config_snapshot_delivery_properties: Types::ConfigSnapshotDeliveryProperties?
+    end
+
+    class DeliveryChannelStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?config_snapshot_delivery_info: Types::ConfigExportDeliveryInfo,
+        ?config_history_delivery_info: Types::ConfigExportDeliveryInfo,
+        ?config_stream_delivery_info: Types::ConfigStreamDeliveryInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor config_snapshot_delivery_info: Types::ConfigExportDeliveryInfo?
+      attr_accessor config_history_delivery_info: Types::ConfigExportDeliveryInfo?
+      attr_accessor config_stream_delivery_info: Types::ConfigStreamDeliveryInfo?
+    end
+
+    module DeliveryStatus
+      Success: String
+      Failure: String
+      Not_Applicable: String
+    end
+
+    class DescribeAggregateComplianceByConfigRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?filters: Types::ConfigRuleComplianceFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor filters: Types::ConfigRuleComplianceFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAggregateComplianceByConfigRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_compliance_by_config_rules: Array[Types::AggregateComplianceByConfigRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_compliance_by_config_rules: Array[Types::AggregateComplianceByConfigRule]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAggregateComplianceByConformancePacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?filters: Types::AggregateConformancePackComplianceFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor filters: Types::AggregateConformancePackComplianceFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAggregateComplianceByConformancePacksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_compliance_by_conformance_packs: Array[Types::AggregateComplianceByConformancePack],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_compliance_by_conformance_packs: Array[Types::AggregateComplianceByConformancePack]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAggregationAuthorizationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAggregationAuthorizationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_authorizations: Array[Types::AggregationAuthorization],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_authorizations: Array[Types::AggregationAuthorization]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeComplianceByConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+        ?compliance_types: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+      attr_accessor compliance_types: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeComplianceByConfigRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_by_config_rules: Array[Types::ComplianceByConfigRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_by_config_rules: Array[Types::ComplianceByConfigRule]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeComplianceByResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?compliance_types: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor compliance_types: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeComplianceByResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_by_resources: Array[Types::ComplianceByResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_by_resources: Array[Types::ComplianceByResource]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigRuleEvaluationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeConfigRuleEvaluationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rules_evaluation_status: Array[Types::ConfigRuleEvaluationStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rules_evaluation_status: Array[Types::ConfigRuleEvaluationStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigRulesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_mode: String?
+    end
+
+    class DescribeConfigRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+        ?next_token: String,
+        ?filters: Types::DescribeConfigRulesFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::DescribeConfigRulesFilters?
+    end
+
+    class DescribeConfigRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rules: Array[Types::ConfigRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rules: Array[Types::ConfigRule]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigurationAggregatorSourcesStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?update_status: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor update_status: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeConfigurationAggregatorSourcesStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregated_source_status_list: Array[Types::AggregatedSourceStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregated_source_status_list: Array[Types::AggregatedSourceStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigurationAggregatorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_names: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeConfigurationAggregatorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregators: Array[Types::ConfigurationAggregator],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregators: Array[Types::ConfigurationAggregator]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigurationRecorderStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_names: Array[String],
+        ?service_principal: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_names: Array[String]?
+      attr_accessor service_principal: String?
+      attr_accessor arn: String?
+    end
+
+    class DescribeConfigurationRecorderStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorders_status: Array[Types::ConfigurationRecorderStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorders_status: Array[Types::ConfigurationRecorderStatus]?
+    end
+
+    class DescribeConfigurationRecordersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_names: Array[String],
+        ?service_principal: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_names: Array[String]?
+      attr_accessor service_principal: String?
+      attr_accessor arn: String?
+    end
+
+    class DescribeConfigurationRecordersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorders: Array[Types::ConfigurationRecorder],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorders: Array[Types::ConfigurationRecorder]?
+    end
+
+    class DescribeConformancePackComplianceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?filters: Types::ConformancePackComplianceFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor filters: Types::ConformancePackComplianceFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConformancePackComplianceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?conformance_pack_rule_compliance_list: Array[Types::ConformancePackRuleCompliance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor conformance_pack_rule_compliance_list: Array[Types::ConformancePackRuleCompliance]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConformancePackStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConformancePackStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_status_details: Array[Types::ConformancePackStatusDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_status_details: Array[Types::ConformancePackStatusDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConformancePacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConformancePacksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_details: Array[Types::ConformancePackDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_details: Array[Types::ConformancePackDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDeliveryChannelStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channel_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channel_names: Array[String]?
+    end
+
+    class DescribeDeliveryChannelStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channels_status: Array[Types::DeliveryChannelStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channels_status: Array[Types::DeliveryChannelStatus]?
+    end
+
+    class DescribeDeliveryChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channel_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channel_names: Array[String]?
+    end
+
+    class DescribeDeliveryChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channels: Array[Types::DeliveryChannel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channels: Array[Types::DeliveryChannel]?
+    end
+
+    class DescribeOrganizationConfigRuleStatusesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConfigRuleStatusesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_statuses: Array[Types::OrganizationConfigRuleStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_statuses: Array[Types::OrganizationConfigRuleStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConfigRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConfigRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rules: Array[Types::OrganizationConfigRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rules: Array[Types::OrganizationConfigRule]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConformancePackStatusesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConformancePackStatusesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_statuses: Array[Types::OrganizationConformancePackStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_statuses: Array[Types::OrganizationConformancePackStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConformancePacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOrganizationConformancePacksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_packs: Array[Types::OrganizationConformancePack],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_packs: Array[Types::OrganizationConformancePack]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePendingAggregationRequestsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePendingAggregationRequestsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending_aggregation_requests: Array[Types::PendingAggregationRequest],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending_aggregation_requests: Array[Types::PendingAggregationRequest]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRemediationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+    end
+
+    class DescribeRemediationConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remediation_configurations: Array[Types::RemediationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remediation_configurations: Array[Types::RemediationConfiguration]?
+    end
+
+    class DescribeRemediationExceptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_keys: Array[Types::RemediationExceptionResourceKey],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_keys: Array[Types::RemediationExceptionResourceKey]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRemediationExceptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remediation_exceptions: Array[Types::RemediationException],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remediation_exceptions: Array[Types::RemediationException]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRemediationExecutionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_keys: Array[Types::ResourceKey],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_keys: Array[Types::ResourceKey]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRemediationExecutionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remediation_execution_statuses: Array[Types::RemediationExecutionStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remediation_execution_statuses: Array[Types::RemediationExecutionStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRetentionConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_configuration_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_configuration_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRetentionConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_configurations: Array[Types::RetentionConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_configurations: Array[Types::RetentionConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_arn: String,
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_arn: String?
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class DisassociateResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder: Types::ConfigurationRecorder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder: Types::ConfigurationRecorder?
+    end
+
+    class Evaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_resource_type: String,
+        ?compliance_resource_id: String,
+        ?compliance_type: String,
+        ?annotation: String,
+        ?ordering_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_resource_type: String?
+      attr_accessor compliance_resource_id: String?
+      attr_accessor compliance_type: String?
+      attr_accessor annotation: String?
+      attr_accessor ordering_timestamp: Time?
+    end
+
+    class EvaluationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_context_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_context_identifier: String?
+    end
+
+    module EvaluationMode
+      DETECTIVE: String
+      PROACTIVE: String
+    end
+
+    class EvaluationModeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    class EvaluationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_result_identifier: Types::EvaluationResultIdentifier,
+        ?compliance_type: String,
+        ?result_recorded_time: Time,
+        ?config_rule_invoked_time: Time,
+        ?annotation: String,
+        ?result_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_result_identifier: Types::EvaluationResultIdentifier?
+      attr_accessor compliance_type: String?
+      attr_accessor result_recorded_time: Time?
+      attr_accessor config_rule_invoked_time: Time?
+      attr_accessor annotation: String?
+      attr_accessor result_token: String?
+    end
+
+    class EvaluationResultIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_result_qualifier: Types::EvaluationResultQualifier,
+        ?ordering_timestamp: Time,
+        ?resource_evaluation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_result_qualifier: Types::EvaluationResultQualifier?
+      attr_accessor ordering_timestamp: Time?
+      attr_accessor resource_evaluation_id: String?
+    end
+
+    class EvaluationResultQualifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?evaluation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor evaluation_mode: String?
+    end
+
+    class EvaluationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    module EventSource
+      Aws_Config: String
+    end
+
+    class ExclusionByResourceTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class ExecutionControls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_controls: Types::SsmControls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_controls: Types::SsmControls?
+    end
+
+    class ExternalEvaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_resource_type: String,
+        ?compliance_resource_id: String,
+        ?compliance_type: String,
+        ?annotation: String,
+        ?ordering_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_resource_type: String?
+      attr_accessor compliance_resource_id: String?
+      attr_accessor compliance_type: String?
+      attr_accessor annotation: String?
+      attr_accessor ordering_timestamp: Time?
+    end
+
+    class FailedDeleteRemediationExceptionsBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_message: String,
+        ?failed_items: Array[Types::RemediationExceptionResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_message: String?
+      attr_accessor failed_items: Array[Types::RemediationExceptionResourceKey]?
+    end
+
+    class FailedRemediationBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_message: String,
+        ?failed_items: Array[Types::RemediationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_message: String?
+      attr_accessor failed_items: Array[Types::RemediationConfiguration]?
+    end
+
+    class FailedRemediationExceptionBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_message: String,
+        ?failed_items: Array[Types::RemediationException],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_message: String?
+      attr_accessor failed_items: Array[Types::RemediationException]?
+    end
+
+    class FieldInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetAggregateComplianceDetailsByConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?config_rule_name: String,
+        ?account_id: String,
+        ?aws_region: String,
+        ?compliance_type: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor config_rule_name: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor compliance_type: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateComplianceDetailsByConfigRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_evaluation_results: Array[Types::AggregateEvaluationResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_evaluation_results: Array[Types::AggregateEvaluationResult]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateConfigRuleComplianceSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?filters: Types::ConfigRuleComplianceSummaryFilters,
+        ?group_by_key: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor filters: Types::ConfigRuleComplianceSummaryFilters?
+      attr_accessor group_by_key: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateConfigRuleComplianceSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_by_key: String,
+        ?aggregate_compliance_counts: Array[Types::AggregateComplianceCount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_by_key: String?
+      attr_accessor aggregate_compliance_counts: Array[Types::AggregateComplianceCount]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateConformancePackComplianceSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?filters: Types::AggregateConformancePackComplianceSummaryFilters,
+        ?group_by_key: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor filters: Types::AggregateConformancePackComplianceSummaryFilters?
+      attr_accessor group_by_key: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateConformancePackComplianceSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_conformance_pack_compliance_summaries: Array[Types::AggregateConformancePackComplianceSummary],
+        ?group_by_key: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_conformance_pack_compliance_summaries: Array[Types::AggregateConformancePackComplianceSummary]?
+      attr_accessor group_by_key: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateDiscoveredResourceCountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?filters: Types::ResourceCountFilters,
+        ?group_by_key: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor filters: Types::ResourceCountFilters?
+      attr_accessor group_by_key: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateDiscoveredResourceCountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_discovered_resources: Integer,
+        ?group_by_key: String,
+        ?grouped_resource_counts: Array[Types::GroupedResourceCount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_discovered_resources: Integer?
+      attr_accessor group_by_key: String?
+      attr_accessor grouped_resource_counts: Array[Types::GroupedResourceCount]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAggregateResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?resource_identifier: Types::AggregateResourceIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor resource_identifier: Types::AggregateResourceIdentifier?
+    end
+
+    class GetAggregateResourceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_item: Types::ConfigurationItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_item: Types::ConfigurationItem?
+    end
+
+    class GetComplianceDetailsByConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?compliance_types: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor compliance_types: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetComplianceDetailsByConfigRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_results: Array[Types::EvaluationResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_results: Array[Types::EvaluationResult]?
+      attr_accessor next_token: String?
+    end
+
+    class GetComplianceDetailsByResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?compliance_types: Array[String],
+        ?next_token: String,
+        ?resource_evaluation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor compliance_types: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor resource_evaluation_id: String?
+    end
+
+    class GetComplianceDetailsByResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_results: Array[Types::EvaluationResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_results: Array[Types::EvaluationResult]?
+      attr_accessor next_token: String?
+    end
+
+    class GetComplianceSummaryByConfigRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_summary: Types::ComplianceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_summary: Types::ComplianceSummary?
+    end
+
+    class GetComplianceSummaryByResourceTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class GetComplianceSummaryByResourceTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_summaries_by_resource_type: Array[Types::ComplianceSummaryByResourceType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_summaries_by_resource_type: Array[Types::ComplianceSummaryByResourceType]?
+    end
+
+    class GetConformancePackComplianceDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?filters: Types::ConformancePackEvaluationFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor filters: Types::ConformancePackEvaluationFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetConformancePackComplianceDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?conformance_pack_rule_evaluation_results: Array[Types::ConformancePackEvaluationResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor conformance_pack_rule_evaluation_results: Array[Types::ConformancePackEvaluationResult]?
+      attr_accessor next_token: String?
+    end
+
+    class GetConformancePackComplianceSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetConformancePackComplianceSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_compliance_summary_list: Array[Types::ConformancePackComplianceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_compliance_summary_list: Array[Types::ConformancePackComplianceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCustomRulePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+    end
+
+    class GetCustomRulePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_text: String?
+    end
+
+    class GetDiscoveredResourceCountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDiscoveredResourceCountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_discovered_resources: Integer,
+        ?resource_counts: Array[Types::ResourceCount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_discovered_resources: Integer?
+      attr_accessor resource_counts: Array[Types::ResourceCount]?
+      attr_accessor next_token: String?
+    end
+
+    class GetOrganizationConfigRuleDetailedStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+        ?filters: Types::StatusDetailFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+      attr_accessor filters: Types::StatusDetailFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetOrganizationConfigRuleDetailedStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_detailed_status: Array[Types::MemberAccountStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_detailed_status: Array[Types::MemberAccountStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class GetOrganizationConformancePackDetailedStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_name: String,
+        ?filters: Types::OrganizationResourceDetailedStatusFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_name: String?
+      attr_accessor filters: Types::OrganizationResourceDetailedStatusFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetOrganizationConformancePackDetailedStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_detailed_statuses: Array[Types::OrganizationConformancePackDetailedStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_detailed_statuses: Array[Types::OrganizationConformancePackDetailedStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class GetOrganizationCustomRulePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+    end
+
+    class GetOrganizationCustomRulePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_text: String?
+    end
+
+    class GetResourceConfigHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?later_time: Time,
+        ?earlier_time: Time,
+        ?chronological_order: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor later_time: Time?
+      attr_accessor earlier_time: Time?
+      attr_accessor chronological_order: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceConfigHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_items: Array[Types::ConfigurationItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_items: Array[Types::ConfigurationItem]?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceEvaluationSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_evaluation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_evaluation_id: String?
+    end
+
+    class GetResourceEvaluationSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_evaluation_id: String,
+        ?evaluation_mode: String,
+        ?evaluation_status: Types::EvaluationStatus,
+        ?evaluation_start_timestamp: Time,
+        ?compliance: String,
+        ?evaluation_context: Types::EvaluationContext,
+        ?resource_details: Types::ResourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_evaluation_id: String?
+      attr_accessor evaluation_mode: String?
+      attr_accessor evaluation_status: Types::EvaluationStatus?
+      attr_accessor evaluation_start_timestamp: Time?
+      attr_accessor compliance: String?
+      attr_accessor evaluation_context: Types::EvaluationContext?
+      attr_accessor resource_details: Types::ResourceDetails?
+    end
+
+    class GetStoredQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_name: String?
+    end
+
+    class GetStoredQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stored_query: Types::StoredQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stored_query: Types::StoredQuery?
+    end
+
+    class GroupedResourceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor resource_count: Integer?
+    end
+
+    class IdempotentParameterMismatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientDeliveryPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientPermissionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConfigurationRecorderNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeliveryChannelNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidExpressionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLimitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRecordingGroupException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResultTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRoleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidS3KeyPrefixException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidS3KmsKeyArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSNSTopicARNException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTimeRangeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastDeliveryChannelDeleteFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAggregateDiscoveredResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?resource_type: String,
+        ?filters: Types::ResourceFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor filters: Types::ResourceFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAggregateDiscoveredResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifiers: Array[Types::AggregateResourceIdentifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifiers: Array[Types::AggregateResourceIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationRecordersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::ConfigurationRecorderFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::ConfigurationRecorderFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationRecordersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_summaries: Array[Types::ConfigurationRecorderSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_summaries: Array[Types::ConfigurationRecorderSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConformancePackComplianceScoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ConformancePackComplianceScoresFilters,
+        ?sort_order: String,
+        ?sort_by: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ConformancePackComplianceScoresFilters?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConformancePackComplianceScoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?conformance_pack_compliance_scores: Array[Types::ConformancePackComplianceScore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor conformance_pack_compliance_scores: Array[Types::ConformancePackComplianceScore]?
+    end
+
+    class ListDiscoveredResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_ids: Array[String],
+        ?resource_name: String,
+        ?limit: Integer,
+        ?include_deleted_resources: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_ids: Array[String]?
+      attr_accessor resource_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor include_deleted_resources: bool?
+      attr_accessor next_token: String?
+    end
+
+    class ListDiscoveredResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifiers: Array[Types::ResourceIdentifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifiers: Array[Types::ResourceIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceEvaluationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ResourceEvaluationFilters,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ResourceEvaluationFilters?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceEvaluationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_evaluations: Array[Types::ResourceEvaluation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_evaluations: Array[Types::ResourceEvaluation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStoredQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStoredQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stored_query_metadata: Array[Types::StoredQueryMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stored_query_metadata: Array[Types::StoredQueryMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class MaxActiveResourcesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfConfigRulesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfConfigurationRecordersExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfConformancePacksExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfDeliveryChannelsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfOrganizationConfigRulesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfOrganizationConformancePacksExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfRetentionConfigurationsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MaximumExecutionFrequency
+      One_Hour: String
+      Three_Hours: String
+      Six_Hours: String
+      Twelve_Hours: String
+      TwentyFour_Hours: String
+    end
+
+    module MemberAccountRuleStatus
+      CREATE_SUCCESSFUL: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_SUCCESSFUL: String
+      DELETE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      UPDATE_SUCCESSFUL: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+    end
+
+    class MemberAccountStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?config_rule_name: String,
+        ?member_account_rule_status: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor config_rule_name: String?
+      attr_accessor member_account_rule_status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    module MessageType
+      ConfigurationItemChangeNotification: String
+      ConfigurationSnapshotDeliveryCompleted: String
+      ScheduledNotification: String
+      OversizedConfigurationItemChangeNotification: String
+    end
+
+    class NoAvailableConfigurationRecorderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoAvailableDeliveryChannelException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoAvailableOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoRunningConfigurationRecorderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchBucketException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchConfigRuleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchConfigRuleInConformancePackException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchConfigurationAggregatorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchConfigurationRecorderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchConformancePackException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchDeliveryChannelException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchOrganizationConfigRuleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchOrganizationConformancePackException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchRemediationConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchRemediationExceptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchRetentionConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationAggregationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?aws_regions: Array[String],
+        ?all_aws_regions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor aws_regions: Array[String]?
+      attr_accessor all_aws_regions: bool?
+    end
+
+    class OrganizationAllFeaturesNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationConfigRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+        ?organization_config_rule_arn: String,
+        ?organization_managed_rule_metadata: Types::OrganizationManagedRuleMetadata,
+        ?organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata,
+        ?excluded_accounts: Array[String],
+        ?last_update_time: Time,
+        ?organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadataNoPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+      attr_accessor organization_config_rule_arn: String?
+      attr_accessor organization_managed_rule_metadata: Types::OrganizationManagedRuleMetadata?
+      attr_accessor organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata?
+      attr_accessor excluded_accounts: Array[String]?
+      attr_accessor last_update_time: Time?
+      attr_accessor organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadataNoPolicy?
+    end
+
+    class OrganizationConfigRuleStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+        ?organization_rule_status: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+      attr_accessor organization_rule_status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    module OrganizationConfigRuleTriggerType
+      CONFIGURATION_ITEM_CHANGE_NOTIFICATION: String
+      OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION: String
+      SCHEDULED_NOTIFICATION: String
+    end
+
+    module OrganizationConfigRuleTriggerTypeNoSN
+      CONFIGURATION_ITEM_CHANGE_NOTIFICATION: String
+      OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION: String
+    end
+
+    class OrganizationConformancePack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_name: String,
+        ?organization_conformance_pack_arn: String,
+        ?delivery_s3_bucket: String,
+        ?delivery_s3_key_prefix: String,
+        ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
+        ?excluded_accounts: Array[String],
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_name: String?
+      attr_accessor organization_conformance_pack_arn: String?
+      attr_accessor delivery_s3_bucket: String?
+      attr_accessor delivery_s3_key_prefix: String?
+      attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
+      attr_accessor excluded_accounts: Array[String]?
+      attr_accessor last_update_time: Time?
+    end
+
+    class OrganizationConformancePackDetailedStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?conformance_pack_name: String,
+        ?status: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor conformance_pack_name: String?
+      attr_accessor status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    class OrganizationConformancePackStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_name: String,
+        ?status: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_name: String?
+      attr_accessor status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor last_update_time: Time?
+    end
+
+    class OrganizationConformancePackTemplateValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationCustomPolicyRuleMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?organization_config_rule_trigger_types: Array[String],
+        ?input_parameters: String,
+        ?maximum_execution_frequency: String,
+        ?resource_types_scope: Array[String],
+        ?resource_id_scope: String,
+        ?tag_key_scope: String,
+        ?tag_value_scope: String,
+        ?policy_runtime: String,
+        ?policy_text: String,
+        ?debug_log_delivery_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor organization_config_rule_trigger_types: Array[String]?
+      attr_accessor input_parameters: String?
+      attr_accessor maximum_execution_frequency: String?
+      attr_accessor resource_types_scope: Array[String]?
+      attr_accessor resource_id_scope: String?
+      attr_accessor tag_key_scope: String?
+      attr_accessor tag_value_scope: String?
+      attr_accessor policy_runtime: String?
+      attr_accessor policy_text: String?
+      attr_accessor debug_log_delivery_accounts: Array[String]?
+    end
+
+    class OrganizationCustomPolicyRuleMetadataNoPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?organization_config_rule_trigger_types: Array[String],
+        ?input_parameters: String,
+        ?maximum_execution_frequency: String,
+        ?resource_types_scope: Array[String],
+        ?resource_id_scope: String,
+        ?tag_key_scope: String,
+        ?tag_value_scope: String,
+        ?policy_runtime: String,
+        ?debug_log_delivery_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor organization_config_rule_trigger_types: Array[String]?
+      attr_accessor input_parameters: String?
+      attr_accessor maximum_execution_frequency: String?
+      attr_accessor resource_types_scope: Array[String]?
+      attr_accessor resource_id_scope: String?
+      attr_accessor tag_key_scope: String?
+      attr_accessor tag_value_scope: String?
+      attr_accessor policy_runtime: String?
+      attr_accessor debug_log_delivery_accounts: Array[String]?
+    end
+
+    class OrganizationCustomRuleMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?lambda_function_arn: String,
+        ?organization_config_rule_trigger_types: Array[String],
+        ?input_parameters: String,
+        ?maximum_execution_frequency: String,
+        ?resource_types_scope: Array[String],
+        ?resource_id_scope: String,
+        ?tag_key_scope: String,
+        ?tag_value_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor lambda_function_arn: String?
+      attr_accessor organization_config_rule_trigger_types: Array[String]?
+      attr_accessor input_parameters: String?
+      attr_accessor maximum_execution_frequency: String?
+      attr_accessor resource_types_scope: Array[String]?
+      attr_accessor resource_id_scope: String?
+      attr_accessor tag_key_scope: String?
+      attr_accessor tag_value_scope: String?
+    end
+
+    class OrganizationManagedRuleMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?rule_identifier: String,
+        ?input_parameters: String,
+        ?maximum_execution_frequency: String,
+        ?resource_types_scope: Array[String],
+        ?resource_id_scope: String,
+        ?tag_key_scope: String,
+        ?tag_value_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor rule_identifier: String?
+      attr_accessor input_parameters: String?
+      attr_accessor maximum_execution_frequency: String?
+      attr_accessor resource_types_scope: Array[String]?
+      attr_accessor resource_id_scope: String?
+      attr_accessor tag_key_scope: String?
+      attr_accessor tag_value_scope: String?
+    end
+
+    module OrganizationResourceDetailedStatus
+      CREATE_SUCCESSFUL: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_SUCCESSFUL: String
+      DELETE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      UPDATE_SUCCESSFUL: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+    end
+
+    class OrganizationResourceDetailedStatusFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+    end
+
+    module OrganizationResourceStatus
+      CREATE_SUCCESSFUL: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_SUCCESSFUL: String
+      DELETE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      UPDATE_SUCCESSFUL: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+    end
+
+    module OrganizationRuleStatus
+      CREATE_SUCCESSFUL: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_SUCCESSFUL: String
+      DELETE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      UPDATE_SUCCESSFUL: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+    end
+
+    class OversizedConfigurationItemException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Owner
+      Custom_Lambda: String
+      Aws: String
+      Custom_Policy: String
+    end
+
+    class PendingAggregationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requester_account_id: String,
+        ?requester_aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requester_account_id: String?
+      attr_accessor requester_aws_region: String?
+    end
+
+    class PutAggregationAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_account_id: String,
+        ?authorized_aws_region: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_account_id: String?
+      attr_accessor authorized_aws_region: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutAggregationAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_authorization: Types::AggregationAuthorization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_authorization: Types::AggregationAuthorization?
+    end
+
+    class PutConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule: Types::ConfigRule,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule: Types::ConfigRule?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutConfigurationAggregatorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator_name: String,
+        ?account_aggregation_sources: Array[Types::AccountAggregationSource],
+        ?organization_aggregation_source: Types::OrganizationAggregationSource,
+        ?tags: Array[Types::Tag],
+        ?aggregator_filters: Types::AggregatorFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor account_aggregation_sources: Array[Types::AccountAggregationSource]?
+      attr_accessor organization_aggregation_source: Types::OrganizationAggregationSource?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor aggregator_filters: Types::AggregatorFilters?
+    end
+
+    class PutConfigurationAggregatorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_aggregator: Types::ConfigurationAggregator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_aggregator: Types::ConfigurationAggregator?
+    end
+
+    class PutConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder: Types::ConfigurationRecorder,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder: Types::ConfigurationRecorder?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutConformancePackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_name: String,
+        ?template_s3_uri: String,
+        ?template_body: String,
+        ?delivery_s3_bucket: String,
+        ?delivery_s3_key_prefix: String,
+        ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
+        ?template_ssm_document_details: Types::TemplateSSMDocumentDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_name: String?
+      attr_accessor template_s3_uri: String?
+      attr_accessor template_body: String?
+      attr_accessor delivery_s3_bucket: String?
+      attr_accessor delivery_s3_key_prefix: String?
+      attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
+      attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails?
+    end
+
+    class PutConformancePackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conformance_pack_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conformance_pack_arn: String?
+    end
+
+    class PutDeliveryChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_channel: Types::DeliveryChannel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_channel: Types::DeliveryChannel?
+    end
+
+    class PutEvaluationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluations: Array[Types::Evaluation],
+        ?result_token: String,
+        ?test_mode: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluations: Array[Types::Evaluation]?
+      attr_accessor result_token: String?
+      attr_accessor test_mode: bool?
+    end
+
+    class PutEvaluationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_evaluations: Array[Types::Evaluation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_evaluations: Array[Types::Evaluation]?
+    end
+
+    class PutExternalEvaluationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?external_evaluation: Types::ExternalEvaluation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor external_evaluation: Types::ExternalEvaluation?
+    end
+
+    class PutExternalEvaluationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutOrganizationConfigRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_name: String,
+        ?organization_managed_rule_metadata: Types::OrganizationManagedRuleMetadata,
+        ?organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata,
+        ?excluded_accounts: Array[String],
+        ?organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_name: String?
+      attr_accessor organization_managed_rule_metadata: Types::OrganizationManagedRuleMetadata?
+      attr_accessor organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata?
+      attr_accessor excluded_accounts: Array[String]?
+      attr_accessor organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadata?
+    end
+
+    class PutOrganizationConfigRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_config_rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_config_rule_arn: String?
+    end
+
+    class PutOrganizationConformancePackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_name: String,
+        ?template_s3_uri: String,
+        ?template_body: String,
+        ?delivery_s3_bucket: String,
+        ?delivery_s3_key_prefix: String,
+        ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
+        ?excluded_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_name: String?
+      attr_accessor template_s3_uri: String?
+      attr_accessor template_body: String?
+      attr_accessor delivery_s3_bucket: String?
+      attr_accessor delivery_s3_key_prefix: String?
+      attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
+      attr_accessor excluded_accounts: Array[String]?
+    end
+
+    class PutOrganizationConformancePackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_conformance_pack_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_conformance_pack_arn: String?
+    end
+
+    class PutRemediationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remediation_configurations: Array[Types::RemediationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remediation_configurations: Array[Types::RemediationConfiguration]?
+    end
+
+    class PutRemediationConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_batches: Array[Types::FailedRemediationBatch],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_batches: Array[Types::FailedRemediationBatch]?
+    end
+
+    class PutRemediationExceptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_keys: Array[Types::RemediationExceptionResourceKey],
+        ?message: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_keys: Array[Types::RemediationExceptionResourceKey]?
+      attr_accessor message: String?
+      attr_accessor expiration_time: Time?
+    end
+
+    class PutRemediationExceptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_batches: Array[Types::FailedRemediationExceptionBatch],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_batches: Array[Types::FailedRemediationExceptionBatch]?
+    end
+
+    class PutResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?schema_version_id: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?configuration: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor schema_version_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor configuration: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutRetentionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period_in_days: Integer?
+    end
+
+    class PutRetentionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_configuration: Types::RetentionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_configuration: Types::RetentionConfiguration?
+    end
+
+    class PutServiceLinkedConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutServiceLinkedConfigurationRecorderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class PutStoredQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stored_query: Types::StoredQuery,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stored_query: Types::StoredQuery?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutStoredQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_arn: String?
+    end
+
+    class QueryInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?select_fields: Array[Types::FieldInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor select_fields: Array[Types::FieldInfo]?
+    end
+
+    module RecorderStatus
+      Pending: String
+      Success: String
+      Failure: String
+      NotApplicable: String
+    end
+
+    module RecordingFrequency
+      CONTINUOUS: String
+      DAILY: String
+    end
+
+    class RecordingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_supported: bool,
+        ?include_global_resource_types: bool,
+        ?resource_types: Array[String],
+        ?exclusion_by_resource_types: Types::ExclusionByResourceTypes,
+        ?recording_strategy: Types::RecordingStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_supported: bool?
+      attr_accessor include_global_resource_types: bool?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor exclusion_by_resource_types: Types::ExclusionByResourceTypes?
+      attr_accessor recording_strategy: Types::RecordingStrategy?
+    end
+
+    class RecordingMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_frequency: String,
+        ?recording_mode_overrides: Array[Types::RecordingModeOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_frequency: String?
+      attr_accessor recording_mode_overrides: Array[Types::RecordingModeOverride]?
+    end
+
+    class RecordingModeOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?resource_types: Array[String],
+        ?recording_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor recording_frequency: String?
+    end
+
+    module RecordingScope
+      INTERNAL: String
+      PAID: String
+    end
+
+    class RecordingStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?use_only: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor use_only: String?
+    end
+
+    module RecordingStrategyType
+      ALL_SUPPORTED_RESOURCE_TYPES: String
+      INCLUSION_BY_RESOURCE_TYPES: String
+      EXCLUSION_BY_RESOURCE_TYPES: String
+    end
+
+    class Relationship
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?relationship_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor relationship_name: String?
+    end
+
+    class RemediationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?target_type: String,
+        ?target_id: String,
+        ?target_version: String,
+        ?parameters: Hash[String, Types::RemediationParameterValue],
+        ?resource_type: String,
+        ?automatic: bool,
+        ?execution_controls: Types::ExecutionControls,
+        ?maximum_automatic_attempts: Integer,
+        ?retry_attempt_seconds: Integer,
+        ?arn: String,
+        ?created_by_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor target_type: String?
+      attr_accessor target_id: String?
+      attr_accessor target_version: String?
+      attr_accessor parameters: Hash[String, Types::RemediationParameterValue]?
+      attr_accessor resource_type: String?
+      attr_accessor automatic: bool?
+      attr_accessor execution_controls: Types::ExecutionControls?
+      attr_accessor maximum_automatic_attempts: Integer?
+      attr_accessor retry_attempt_seconds: Integer?
+      attr_accessor arn: String?
+      attr_accessor created_by_service: String?
+    end
+
+    class RemediationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?message: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor message: String?
+      attr_accessor expiration_time: Time?
+    end
+
+    class RemediationExceptionResourceKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    module RemediationExecutionState
+      QUEUED: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class RemediationExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_key: Types::ResourceKey,
+        ?state: String,
+        ?step_details: Array[Types::RemediationExecutionStep],
+        ?invocation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_key: Types::ResourceKey?
+      attr_accessor state: String?
+      attr_accessor step_details: Array[Types::RemediationExecutionStep]?
+      attr_accessor invocation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class RemediationExecutionStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+        ?error_message: String,
+        ?start_time: Time,
+        ?stop_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+    end
+
+    module RemediationExecutionStepState
+      SUCCEEDED: String
+      PENDING: String
+      FAILED: String
+    end
+
+    class RemediationInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RemediationParameterValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_value: Types::ResourceValue,
+        ?static_value: Types::StaticValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_value: Types::ResourceValue?
+      attr_accessor static_value: Types::StaticValue?
+    end
+
+    module RemediationTargetType
+      SSM_DOCUMENT: String
+    end
+
+    class ResourceConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceConfigurationSchemaType
+      CFN_RESOURCE_SCHEMA: String
+    end
+
+    class ResourceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class ResourceCountFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?account_id: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+    end
+
+    module ResourceCountGroupKey
+      RESOURCE_TYPE: String
+      ACCOUNT_ID: String
+      AWS_REGION: String
+    end
+
+    class ResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?resource_configuration: String,
+        ?resource_configuration_schema_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_configuration: String?
+      attr_accessor resource_configuration_schema_type: String?
+    end
+
+    class ResourceEvaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_evaluation_id: String,
+        ?evaluation_mode: String,
+        ?evaluation_start_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_evaluation_id: String?
+      attr_accessor evaluation_mode: String?
+      attr_accessor evaluation_start_timestamp: Time?
+    end
+
+    class ResourceEvaluationFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_mode: String,
+        ?time_window: Types::TimeWindow,
+        ?evaluation_context_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_mode: String?
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor evaluation_context_identifier: String?
+    end
+
+    module ResourceEvaluationStatus
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class ResourceFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor region: String?
+    end
+
+    class ResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_name: String,
+        ?resource_deletion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_deletion_time: Time?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ResourceNotDiscoveredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      CustomerGateway: String
+      EIP: String
+      Host: String
+      Instance: String
+      InternetGateway: String
+      NetworkAcl: String
+      NetworkInterface: String
+      RouteTable: String
+      SecurityGroup: String
+      Subnet: String
+      Trail: String
+      Volume: String
+      VPC: String
+      VPNConnection: String
+      VPNGateway: String
+      RegisteredHAInstance: String
+      NatGateway: String
+      EgressOnlyInternetGateway: String
+      VPCEndpoint: String
+      VPCEndpointService: String
+      FlowLog: String
+      VPCPeeringConnection: String
+      Domain: String
+      Group: String
+      Policy: String
+      Role: String
+      User: String
+      LoadBalancerV2: String
+      Certificate: String
+      DBInstance: String
+      DBSubnetGroup: String
+      DBSecurityGroup: String
+      DBSnapshot: String
+      DBCluster: String
+      DBClusterSnapshot: String
+      EventSubscription: String
+      Bucket: String
+      AccountPublicAccessBlock: String
+      Cluster: String
+      ClusterSnapshot: String
+      ClusterParameterGroup: String
+      ClusterSecurityGroup: String
+      ClusterSubnetGroup: String
+      RedshiftEventSubscription: String
+      ManagedInstanceInventory: String
+      Alarm: String
+      Stack: String
+      LoadBalancer: String
+      AutoScalingGroup: String
+      LaunchConfiguration: String
+      ScalingPolicy: String
+      ScheduledAction: String
+      Table: String
+      Project: String
+      RateBasedRule: String
+      Rule: String
+      RuleGroup: String
+      WebACL: String
+      RegionalRateBasedRule: String
+      RegionalRule: String
+      RegionalRuleGroup: String
+      RegionalWebACL: String
+      Distribution: String
+      StreamingDistribution: String
+      Function: String
+      NetworkFirewallFirewall: String
+      NetworkFirewallFirewallPolicy: String
+      NetworkFirewallRuleGroup: String
+      Application: String
+      ApplicationVersion: String
+      Environment: String
+      WebACLV2: String
+      RuleGroupV2: String
+      IPSetV2: String
+      RegexPatternSetV2: String
+      ManagedRuleSetV2: String
+      EncryptionConfig: String
+      AssociationCompliance: String
+      PatchCompliance: String
+      Protection: String
+      RegionalProtection: String
+      ConformancePackCompliance: String
+      ResourceCompliance: String
+      Stage: String
+      RestApi: String
+      StageV2: String
+      Api: String
+      Pipeline: String
+      CloudFormationProvisionedProduct: String
+      CloudFormationProduct: String
+      Portfolio: String
+      Queue: String
+      Key: String
+      QLDBLedger: String
+      Secret: String
+      Topic: String
+      FileData: String
+      BackupPlan: String
+      BackupSelection: String
+      BackupVault: String
+      BackupRecoveryPoint: String
+      ECRRepository: String
+      ECSCluster: String
+      ECSService: String
+      ECSTaskDefinition: String
+      EFSAccessPoint: String
+      EFSFileSystem: String
+      EKSCluster: String
+      OpenSearchDomain: String
+      TransitGateway: String
+      KinesisStream: String
+      KinesisStreamConsumer: String
+      CodeDeployApplication: String
+      CodeDeployDeploymentConfig: String
+      CodeDeployDeploymentGroup: String
+      LaunchTemplate: String
+      ECRPublicRepository: String
+      GuardDutyDetector: String
+      EMRSecurityConfiguration: String
+      SageMakerCodeRepository: String
+      Route53ResolverResolverEndpoint: String
+      Route53ResolverResolverRule: String
+      Route53ResolverResolverRuleAssociation: String
+      DMSReplicationSubnetGroup: String
+      DMSEventSubscription: String
+      MSKCluster: String
+      StepFunctionsActivity: String
+      WorkSpacesWorkspace: String
+      WorkSpacesConnectionAlias: String
+      SageMakerModel: String
+      ListenerV2: String
+      StepFunctionsStateMachine: String
+      BatchJobQueue: String
+      BatchComputeEnvironment: String
+      AccessAnalyzerAnalyzer: String
+      AthenaWorkGroup: String
+      AthenaDataCatalog: String
+      DetectiveGraph: String
+      GlobalAcceleratorAccelerator: String
+      GlobalAcceleratorEndpointGroup: String
+      GlobalAcceleratorListener: String
+      TransitGatewayAttachment: String
+      TransitGatewayRouteTable: String
+      DMSCertificate: String
+      AppConfigApplication: String
+      AppSyncGraphQLApi: String
+      DataSyncLocationSMB: String
+      DataSyncLocationFSxLustre: String
+      DataSyncLocationS3: String
+      DataSyncLocationEFS: String
+      DataSyncTask: String
+      DataSyncLocationNFS: String
+      NetworkInsightsAccessScopeAnalysis: String
+      EKSFargateProfile: String
+      GlueJob: String
+      GuardDutyThreatIntelSet: String
+      GuardDutyIPSet: String
+      SageMakerWorkteam: String
+      SageMakerNotebookInstanceLifecycleConfig: String
+      ServiceDiscoveryService: String
+      ServiceDiscoveryPublicDnsNamespace: String
+      SESContactList: String
+      SESConfigurationSet: String
+      Route53HostedZone: String
+      IoTEventsInput: String
+      IoTEventsDetectorModel: String
+      IoTEventsAlarmModel: String
+      ServiceDiscoveryHttpNamespace: String
+      EventsEventBus: String
+      ImageBuilderContainerRecipe: String
+      ImageBuilderDistributionConfiguration: String
+      ImageBuilderInfrastructureConfiguration: String
+      DataSyncLocationObjectStorage: String
+      DataSyncLocationHDFS: String
+      GlueClassifier: String
+      Route53RecoveryReadinessCell: String
+      Route53RecoveryReadinessReadinessCheck: String
+      ECRRegistryPolicy: String
+      BackupReportPlan: String
+      LightsailCertificate: String
+      RUMAppMonitor: String
+      EventsEndpoint: String
+      SESReceiptRuleSet: String
+      EventsArchive: String
+      EventsApiDestination: String
+      LightsailDisk: String
+      FISExperimentTemplate: String
+      DataSyncLocationFSxWindows: String
+      SESReceiptFilter: String
+      GuardDutyFilter: String
+      SESTemplate: String
+      AmazonMQBroker: String
+      AppConfigEnvironment: String
+      AppConfigConfigurationProfile: String
+      Cloud9EnvironmentEC2: String
+      EventSchemasRegistry: String
+      EventSchemasRegistryPolicy: String
+      EventSchemasDiscoverer: String
+      FraudDetectorLabel: String
+      FraudDetectorEntityType: String
+      FraudDetectorVariable: String
+      FraudDetectorOutcome: String
+      IoTAuthorizer: String
+      IoTSecurityProfile: String
+      IoTRoleAlias: String
+      IoTDimension: String
+      IoTAnalyticsDatastore: String
+      LightsailBucket: String
+      LightsailStaticIp: String
+      MediaPackagePackagingGroup: String
+      Route53RecoveryReadinessRecoveryGroup: String
+      ResilienceHubResiliencyPolicy: String
+      TransferWorkflow: String
+      EKSIdentityProviderConfig: String
+      EKSAddon: String
+      GlueMLTransform: String
+      IoTPolicy: String
+      IoTMitigationAction: String
+      IoTTwinMakerWorkspace: String
+      IoTTwinMakerEntity: String
+      IoTAnalyticsDataset: String
+      IoTAnalyticsPipeline: String
+      IoTAnalyticsChannel: String
+      IoTSiteWiseDashboard: String
+      IoTSiteWiseProject: String
+      IoTSiteWisePortal: String
+      IoTSiteWiseAssetModel: String
+      IVSChannel: String
+      IVSRecordingConfiguration: String
+      IVSPlaybackKeyPair: String
+      KinesisAnalyticsV2Application: String
+      RDSGlobalCluster: String
+      S3MultiRegionAccessPoint: String
+      DeviceFarmTestGridProject: String
+      BudgetsBudgetsAction: String
+      LexBot: String
+      CodeGuruReviewerRepositoryAssociation: String
+      IoTCustomMetric: String
+      Route53ResolverFirewallDomainList: String
+      RoboMakerRobotApplicationVersion: String
+      EC2TrafficMirrorSession: String
+      IoTSiteWiseGateway: String
+      LexBotAlias: String
+      LookoutMetricsAlert: String
+      IoTAccountAuditConfiguration: String
+      EC2TrafficMirrorTarget: String
+      S3StorageLens: String
+      IoTScheduledAudit: String
+      EventsConnection: String
+      EventSchemasSchema: String
+      MediaPackagePackagingConfiguration: String
+      KinesisVideoSignalingChannel: String
+      AppStreamDirectoryConfig: String
+      LookoutVisionProject: String
+      Route53RecoveryControlCluster: String
+      Route53RecoveryControlSafetyRule: String
+      Route53RecoveryControlControlPanel: String
+      Route53RecoveryControlRoutingControl: String
+      Route53RecoveryReadinessResourceSet: String
+      RoboMakerSimulationApplication: String
+      RoboMakerRobotApplication: String
+      HealthLakeFHIRDatastore: String
+      PinpointSegment: String
+      PinpointApplicationSettings: String
+      EventsRule: String
+      EC2DHCPOptions: String
+      EC2NetworkInsightsPath: String
+      EC2TrafficMirrorFilter: String
+      EC2IPAM: String
+      IoTTwinMakerScene: String
+      NetworkManagerTransitGatewayRegistration: String
+      CustomerProfilesDomain: String
+      AutoScalingWarmPool: String
+      ConnectPhoneNumber: String
+      AppConfigDeploymentStrategy: String
+      AppFlowFlow: String
+      AuditManagerAssessment: String
+      CloudWatchMetricStream: String
+      DeviceFarmInstanceProfile: String
+      DeviceFarmProject: String
+      EC2EC2Fleet: String
+      EC2SubnetRouteTableAssociation: String
+      ECRPullThroughCacheRule: String
+      GroundStationConfig: String
+      ImageBuilderImagePipeline: String
+      IoTFleetMetric: String
+      IoTWirelessServiceProfile: String
+      NetworkManagerDevice: String
+      NetworkManagerGlobalNetwork: String
+      NetworkManagerLink: String
+      NetworkManagerSite: String
+      PanoramaPackage: String
+      PinpointApp: String
+      RedshiftScheduledAction: String
+      Route53ResolverFirewallRuleGroupAssociation: String
+      SageMakerAppImageConfig: String
+      SageMakerImage: String
+      ECSTaskSet: String
+      CassandraKeyspace: String
+      SignerSigningProfile: String
+      AmplifyApp: String
+      AppMeshVirtualNode: String
+      AppMeshVirtualService: String
+      AppRunnerVpcConnector: String
+      AppStreamApplication: String
+      CodeArtifactRepository: String
+      EC2PrefixList: String
+      EC2SpotFleet: String
+      EvidentlyProject: String
+      ForecastDataset: String
+      IAMSAMLProvider: String
+      IAMServerCertificate: String
+      PinpointCampaign: String
+      PinpointInAppTemplate: String
+      SageMakerDomain: String
+      TransferAgreement: String
+      TransferConnector: String
+      KinesisFirehoseDeliveryStream: String
+      AmplifyBranch: String
+      AppIntegrationsEventIntegration: String
+      AppMeshRoute: String
+      AthenaPreparedStatement: String
+      EC2IPAMScope: String
+      EvidentlyLaunch: String
+      ForecastDatasetGroup: String
+      GreengrassV2ComponentVersion: String
+      GroundStationMissionProfile: String
+      MediaConnectFlowEntitlement: String
+      MediaConnectFlowVpcInterface: String
+      MediaTailorPlaybackConfiguration: String
+      MSKConfiguration: String
+      PersonalizeDataset: String
+      PersonalizeSchema: String
+      PersonalizeSolution: String
+      PinpointEmailTemplate: String
+      PinpointEventStream: String
+      ResilienceHubApp: String
+      ACMPCACertificateAuthority: String
+      AppConfigHostedConfigurationVersion: String
+      AppMeshVirtualGateway: String
+      AppMeshVirtualRouter: String
+      AppRunnerService: String
+      CustomerProfilesObjectType: String
+      DMSEndpoint: String
+      EC2CapacityReservation: String
+      EC2ClientVpnEndpoint: String
+      KendraIndex: String
+      KinesisVideoStream: String
+      LogsDestination: String
+      PinpointEmailChannel: String
+      S3AccessPoint: String
+      NetworkManagerCustomerGatewayAssociation: String
+      NetworkManagerLinkAssociation: String
+      IoTWirelessMulticastGroup: String
+      PersonalizeDatasetGroup: String
+      IoTTwinMakerComponentType: String
+      CodeBuildReportGroup: String
+      SageMakerFeatureGroup: String
+      MSKBatchScramSecret: String
+      AppStreamStack: String
+      IoTJobTemplate: String
+      IoTWirelessFuotaTask: String
+      IoTProvisioningTemplate: String
+      InspectorV2Filter: String
+      Route53ResolverResolverQueryLoggingConfigAssociation: String
+      ServiceDiscoveryInstance: String
+      TransferCertificate: String
+      MediaConnectFlowSource: String
+      APSRuleGroupsNamespace: String
+      CodeGuruProfilerProfilingGroup: String
+      Route53ResolverResolverQueryLoggingConfig: String
+      BatchSchedulingPolicy: String
+      ACMPCACertificateAuthorityActivation: String
+      AppMeshGatewayRoute: String
+      AppMeshMesh: String
+      ConnectInstance: String
+      ConnectQuickConnect: String
+      EC2CarrierGateway: String
+      EC2IPAMPool: String
+      EC2TransitGatewayConnect: String
+      EC2TransitGatewayMulticastDomain: String
+      ECSCapacityProvider: String
+      IAMInstanceProfile: String
+      IoTCACertificate: String
+      IoTTwinMakerSyncJob: String
+      KafkaConnectConnector: String
+      LambdaCodeSigningConfig: String
+      NetworkManagerConnectPeer: String
+      ResourceExplorer2Index: String
+      AppStreamFleet: String
+      CognitoUserPool: String
+      CognitoUserPoolClient: String
+      CognitoUserPoolGroup: String
+      EC2NetworkInsightsAccessScope: String
+      EC2NetworkInsightsAnalysis: String
+      GrafanaWorkspace: String
+      GroundStationDataflowEndpointGroup: String
+      ImageBuilderImageRecipe: String
+      KMSAlias: String
+      M2Environment: String
+      QuickSightDataSource: String
+      QuickSightTemplate: String
+      QuickSightTheme: String
+      RDSOptionGroup: String
+      RedshiftEndpointAccess: String
+      Route53ResolverFirewallRuleGroup: String
+      SSMDocument: String
+      AppConfigExtensionAssociation: String
+      AppIntegrationsApplication: String
+      AppSyncApiCache: String
+      BedrockGuardrail: String
+      BedrockKnowledgeBase: String
+      CognitoIdentityPool: String
+      ConnectRule: String
+      ConnectUser: String
+      EC2ClientVpnTargetNetworkAssociation: String
+      EC2EIPAssociation: String
+      EC2IPAMResourceDiscovery: String
+      EC2IPAMResourceDiscoveryAssociation: String
+      EC2InstanceConnectEndpoint: String
+      EC2SnapshotBlockPublicAccess: String
+      EC2VPCBlockPublicAccessExclusion: String
+      EC2VPCBlockPublicAccessOptions: String
+      EC2VPCEndpointConnectionNotification: String
+      EC2VPNConnectionRoute: String
+      EvidentlySegment: String
+      IAMOIDCProvider: String
+      InspectorV2Activation: String
+      MSKClusterPolicy: String
+      MSKVpcConnection: String
+      MediaConnectGateway: String
+      MemoryDBSubnetGroup: String
+      OpenSearchServerlessCollection: String
+      OpenSearchServerlessVpcEndpoint: String
+      RedshiftEndpointAuthorization: String
+      Route53ProfilesProfile: String
+      S3StorageLensGroup: String
+      S3ExpressBucketPolicy: String
+      S3ExpressDirectoryBucket: String
+      SageMakerInferenceExperiment: String
+      SecurityHubStandard: String
+      TransferProfile: String
+    end
+
+    class ResourceValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    module ResourceValueType
+      RESOURCE_ID: String
+    end
+
+    class RetentionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor retention_period_in_days: Integer?
+    end
+
+    class Scope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_resource_types: Array[String],
+        ?tag_key: String,
+        ?tag_value: String,
+        ?compliance_resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_resource_types: Array[String]?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor compliance_resource_id: String?
+    end
+
+    class SelectAggregateResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?configuration_aggregator_name: String,
+        ?limit: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor configuration_aggregator_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SelectAggregateResourceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[String],
+        ?query_info: Types::QueryInfo,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[String]?
+      attr_accessor query_info: Types::QueryInfo?
+      attr_accessor next_token: String?
+    end
+
+    class SelectResourceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SelectResourceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[String],
+        ?query_info: Types::QueryInfo,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[String]?
+      attr_accessor query_info: Types::QueryInfo?
+      attr_accessor next_token: String?
+    end
+
+    module SortBy
+      SCORE: String
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner: String,
+        ?source_identifier: String,
+        ?source_details: Array[Types::SourceDetail],
+        ?custom_policy_details: Types::CustomPolicyDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner: String?
+      attr_accessor source_identifier: String?
+      attr_accessor source_details: Array[Types::SourceDetail]?
+      attr_accessor custom_policy_details: Types::CustomPolicyDetails?
+    end
+
+    class SourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source: String,
+        ?message_type: String,
+        ?maximum_execution_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source: String?
+      attr_accessor message_type: String?
+      attr_accessor maximum_execution_frequency: String?
+    end
+
+    class SsmControls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?concurrent_execution_rate_percentage: Integer,
+        ?error_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor concurrent_execution_rate_percentage: Integer?
+      attr_accessor error_percentage: Integer?
+    end
+
+    class StartConfigRulesEvaluationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_names: Array[String]?
+    end
+
+    class StartConfigRulesEvaluationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_name: String?
+    end
+
+    class StartRemediationExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_rule_name: String,
+        ?resource_keys: Array[Types::ResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_rule_name: String?
+      attr_accessor resource_keys: Array[Types::ResourceKey]?
+    end
+
+    class StartRemediationExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_message: String,
+        ?failed_items: Array[Types::ResourceKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_message: String?
+      attr_accessor failed_items: Array[Types::ResourceKey]?
+    end
+
+    class StartResourceEvaluationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_details: Types::ResourceDetails,
+        ?evaluation_context: Types::EvaluationContext,
+        ?evaluation_mode: String,
+        ?evaluation_timeout: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_details: Types::ResourceDetails?
+      attr_accessor evaluation_context: Types::EvaluationContext?
+      attr_accessor evaluation_mode: String?
+      attr_accessor evaluation_timeout: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class StartResourceEvaluationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_evaluation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_evaluation_id: String?
+    end
+
+    class StaticValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class StatusDetailFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?member_account_rule_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor member_account_rule_status: String?
+    end
+
+    class StopConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_recorder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_recorder_name: String?
+    end
+
+    class StoredQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?query_arn: String,
+        ?query_name: String,
+        ?description: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor query_arn: String?
+      attr_accessor query_name: String?
+      attr_accessor description: String?
+      attr_accessor expression: String?
+    end
+
+    class StoredQueryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?query_arn: String,
+        ?query_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor query_arn: String?
+      attr_accessor query_name: String?
+      attr_accessor description: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TemplateSSMDocumentDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_name: String,
+        ?document_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_name: String?
+      attr_accessor document_version: String?
+    end
+
+    class TimeWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnmodifiableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

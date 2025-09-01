@@ -1,0 +1,36 @@
+module Aws::MarketplaceDeployment
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Catalog: StringShape
+    ClientToken: StringShape
+    ConflictException: StructureShape
+    DeploymentParameterInput: StructureShape
+    DeploymentParameterName: StringShape
+    DeploymentParameterResourceIdentifier: StringShape
+    InternalServerException: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    PutDeploymentParameterRequest: StructureShape
+    PutDeploymentParameterResponse: StructureShape
+    ResourceArn: StringShape
+    ResourceId: StringShape
+    ResourceNotFoundException: StructureShape
+    SecretString: StringShape
+    ServiceQuotaExceededException: StructureShape
+    StringList: ListShape
+    TagKey: StringShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    Tags: MapShape
+    TagsMap: MapShape
+    ThrottlingException: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    ValidationException: StructureShape
+
+    AWSMPDeploymentParametersService: ServiceShape
+  end
+end

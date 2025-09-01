@@ -1,0 +1,35 @@
+module Aws::CleanRooms
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+      def reason: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def quota_name: () -> String?
+      def quota_value: () -> Float?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def field_list: () -> Array[Types::ValidationExceptionField]?
+    end
+  end
+end

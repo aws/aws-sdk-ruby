@@ -1,0 +1,762 @@
+module Aws::Drs
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Drs::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateSourceNetworkStackResponse
+      include Smithy::Client::_Response[Types::AssociateSourceNetworkStackResponse]
+      def job: () -> Types::Job?
+    end
+    def associate_source_network_stack: (
+      ?source_network_id: String,
+      ?cfn_stack_name: String
+    ) -> _AssociateSourceNetworkStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceNetworkStackResponse
+
+    interface _CreateExtendedSourceServerResponse
+      include Smithy::Client::_Response[Types::CreateExtendedSourceServerOutput]
+      def source_server: () -> Types::SourceServer?
+    end
+    def create_extended_source_server: (
+      ?source_server_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateExtendedSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExtendedSourceServerResponse
+
+    interface _CreateLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::CreateLaunchConfigurationTemplateOutput]
+      def launch_configuration_template: () -> Types::LaunchConfigurationTemplate?
+    end
+    def create_launch_configuration_template: (
+      ?tags: Hash[String, String],
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?export_bucket_arn: String,
+      ?post_launch_enabled: bool,
+      ?launch_into_source_instance: bool
+    ) -> _CreateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchConfigurationTemplateResponse
+
+    interface _CreateReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::CreateReplicationConfigurationTemplateOutput]
+      def replication_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def tags: () -> Hash[String, String]?
+      def pit_policy: () -> Array[Types::PITPolicyRule]?
+      def auto_replicate_new_disks: () -> bool?
+    end
+    def create_replication_configuration_template: (
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?pit_policy: Array[
+        {
+          rule_id: Integer,
+          units: String,
+          interval: Integer,
+          retention_duration: untyped,
+          enabled: bool
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?auto_replicate_new_disks: bool
+    ) -> _CreateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigurationTemplateResponse
+
+    interface _CreateSourceNetworkResponse
+      include Smithy::Client::_Response[Types::CreateSourceNetworkResponse]
+      def source_network_id: () -> String?
+    end
+    def create_source_network: (
+      ?vpc_id: String,
+      ?origin_account_id: String,
+      ?origin_region: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSourceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSourceNetworkResponse
+
+    interface _DeleteJobResponse
+      include Smithy::Client::_Response[Types::DeleteJobOutput]
+    end
+    def delete_job: (
+      ?job_id: String
+    ) -> _DeleteJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobResponse
+
+    interface _DeleteLaunchActionResponse
+      include Smithy::Client::_Response[Types::DeleteLaunchActionResponse]
+    end
+    def delete_launch_action: (
+      ?resource_id: String,
+      ?action_id: String
+    ) -> _DeleteLaunchActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLaunchActionResponse
+
+    interface _DeleteLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteLaunchConfigurationTemplateOutput]
+    end
+    def delete_launch_configuration_template: (
+      ?launch_configuration_template_id: String
+    ) -> _DeleteLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLaunchConfigurationTemplateResponse
+
+    interface _DeleteRecoveryInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_recovery_instance: (
+      ?recovery_instance_id: String
+    ) -> _DeleteRecoveryInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryInstanceResponse
+
+    interface _DeleteReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationConfigurationTemplateOutput]
+    end
+    def delete_replication_configuration_template: (
+      ?replication_configuration_template_id: String
+    ) -> _DeleteReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationConfigurationTemplateResponse
+
+    interface _DeleteSourceNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteSourceNetworkResponse]
+    end
+    def delete_source_network: (
+      ?source_network_id: String
+    ) -> _DeleteSourceNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSourceNetworkResponse
+
+    interface _DeleteSourceServerResponse
+      include Smithy::Client::_Response[Types::DeleteSourceServerOutput]
+    end
+    def delete_source_server: (
+      ?source_server_id: String
+    ) -> _DeleteSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSourceServerResponse
+
+    interface _DescribeJobLogItemsResponse
+      include Smithy::Client::_Response[Types::DescribeJobLogItemsOutput]
+      def items: () -> Array[Types::JobLog]?
+      def next_token: () -> String?
+    end
+    def describe_job_log_items: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeJobLogItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobLogItemsResponse
+
+    interface _DescribeJobsResponse
+      include Smithy::Client::_Response[Types::DescribeJobsOutput]
+      def items: () -> Array[Types::Job]?
+      def next_token: () -> String?
+    end
+    def describe_jobs: (
+      ?filters: {
+        job_i_ds: Array[String],
+        from_date: String,
+        to_date: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobsResponse
+
+    interface _DescribeLaunchConfigurationTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeLaunchConfigurationTemplatesOutput]
+      def items: () -> Array[Types::LaunchConfigurationTemplate]?
+      def next_token: () -> String?
+    end
+    def describe_launch_configuration_templates: (
+      ?launch_configuration_template_i_ds: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeLaunchConfigurationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLaunchConfigurationTemplatesResponse
+
+    interface _DescribeRecoveryInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeRecoveryInstancesOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::RecoveryInstance]?
+    end
+    def describe_recovery_instances: (
+      ?filters: {
+        recovery_instance_i_ds: Array[String],
+        source_server_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeRecoveryInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecoveryInstancesResponse
+
+    interface _DescribeRecoverySnapshotsResponse
+      include Smithy::Client::_Response[Types::DescribeRecoverySnapshotsOutput]
+      def items: () -> Array[Types::RecoverySnapshot]?
+      def next_token: () -> String?
+    end
+    def describe_recovery_snapshots: (
+      ?source_server_id: String,
+      ?filters: {
+        from_date_time: String,
+        to_date_time: untyped
+      },
+      ?order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeRecoverySnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecoverySnapshotsResponse
+
+    interface _DescribeReplicationConfigurationTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationConfigurationTemplatesOutput]
+      def items: () -> Array[Types::ReplicationConfigurationTemplate]?
+      def next_token: () -> String?
+    end
+    def describe_replication_configuration_templates: (
+      ?replication_configuration_template_i_ds: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReplicationConfigurationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationConfigurationTemplatesResponse
+
+    interface _DescribeSourceNetworksResponse
+      include Smithy::Client::_Response[Types::DescribeSourceNetworksResponse]
+      def items: () -> Array[Types::SourceNetwork]?
+      def next_token: () -> String?
+    end
+    def describe_source_networks: (
+      ?filters: {
+        source_network_i_ds: Array[String],
+        origin_account_id: String,
+        origin_region: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSourceNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSourceNetworksResponse
+
+    interface _DescribeSourceServersResponse
+      include Smithy::Client::_Response[Types::DescribeSourceServersOutput]
+      def items: () -> Array[Types::SourceServer]?
+      def next_token: () -> String?
+    end
+    def describe_source_servers: (
+      ?filters: {
+        source_server_i_ds: Array[String],
+        hardware_id: String,
+        staging_account_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSourceServersResponse
+
+    interface _DisconnectRecoveryInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disconnect_recovery_instance: (
+      ?recovery_instance_id: String
+    ) -> _DisconnectRecoveryInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectRecoveryInstanceResponse
+
+    interface _DisconnectSourceServerResponse
+      include Smithy::Client::_Response[Types::DisconnectSourceServerOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def recovery_instance_id: () -> String?
+      def last_launch_result: () -> String?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def staging_area: () -> Types::StagingArea?
+      def source_cloud_properties: () -> Types::SourceCloudProperties?
+      def replication_direction: () -> String?
+      def reversed_direction_source_server_arn: () -> String?
+      def source_network_id: () -> String?
+      def agent_version: () -> String?
+    end
+    def disconnect_source_server: (
+      ?source_server_id: String
+    ) -> _DisconnectSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectSourceServerResponse
+
+    interface _ExportSourceNetworkCfnTemplateResponse
+      include Smithy::Client::_Response[Types::ExportSourceNetworkCfnTemplateResponse]
+      def s3_destination_url: () -> String?
+    end
+    def export_source_network_cfn_template: (
+      ?source_network_id: String
+    ) -> _ExportSourceNetworkCfnTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportSourceNetworkCfnTemplateResponse
+
+    interface _GetFailbackReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetFailbackReplicationConfigurationOutput]
+      def recovery_instance_id: () -> String?
+      def name: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def use_private_ip: () -> bool?
+    end
+    def get_failback_replication_configuration: (
+      ?recovery_instance_id: String
+    ) -> _GetFailbackReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFailbackReplicationConfigurationResponse
+
+    interface _GetLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLaunchConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def post_launch_enabled: () -> bool?
+      def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties?
+    end
+    def get_launch_configuration: (
+      ?source_server_id: String
+    ) -> _GetLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLaunchConfigurationResponse
+
+    interface _GetReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetReplicationConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def replicated_disks: () -> Array[Types::ReplicationConfigurationReplicatedDisk]?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def pit_policy: () -> Array[Types::PITPolicyRule]?
+      def auto_replicate_new_disks: () -> bool?
+    end
+    def get_replication_configuration: (
+      ?source_server_id: String
+    ) -> _GetReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReplicationConfigurationResponse
+
+    interface _InitializeServiceResponse
+      include Smithy::Client::_Response[Types::InitializeServiceOutput]
+    end
+    def initialize_service: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitializeServiceResponse
+
+    interface _ListExtensibleSourceServersResponse
+      include Smithy::Client::_Response[Types::ListExtensibleSourceServersOutput]
+      def items: () -> Array[Types::StagingSourceServer]?
+      def next_token: () -> String?
+    end
+    def list_extensible_source_servers: (
+      ?staging_account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExtensibleSourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExtensibleSourceServersResponse
+
+    interface _ListLaunchActionsResponse
+      include Smithy::Client::_Response[Types::ListLaunchActionsResponse]
+      def items: () -> Array[Types::LaunchAction]?
+      def next_token: () -> String?
+    end
+    def list_launch_actions: (
+      ?resource_id: String,
+      ?filters: {
+        action_ids: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLaunchActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLaunchActionsResponse
+
+    interface _ListStagingAccountsResponse
+      include Smithy::Client::_Response[Types::ListStagingAccountsOutput]
+      def accounts: () -> Array[Types::Account]?
+      def next_token: () -> String?
+    end
+    def list_staging_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListStagingAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStagingAccountsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutLaunchActionResponse
+      include Smithy::Client::_Response[Types::PutLaunchActionResponse]
+      def resource_id: () -> String?
+      def action_id: () -> String?
+      def action_code: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def active: () -> bool?
+      def order: () -> Integer?
+      def action_version: () -> String?
+      def optional: () -> bool?
+      def parameters: () -> Hash[String, Types::LaunchActionParameter]?
+      def description: () -> String?
+      def category: () -> String?
+    end
+    def put_launch_action: (
+      ?resource_id: String,
+      ?action_code: String,
+      ?order: Integer,
+      ?action_id: String,
+      ?optional: bool,
+      ?active: bool,
+      ?name: String,
+      ?action_version: String,
+      ?category: String,
+      ?parameters: Hash[String,
+        {
+          value: String,
+          type: String
+        }
+      ],
+      ?description: String
+    ) -> _PutLaunchActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLaunchActionResponse
+
+    interface _RetryDataReplicationResponse
+      include Smithy::Client::_Response[Types::RetryDataReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def recovery_instance_id: () -> String?
+      def last_launch_result: () -> String?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def staging_area: () -> Types::StagingArea?
+      def source_cloud_properties: () -> Types::SourceCloudProperties?
+      def replication_direction: () -> String?
+      def reversed_direction_source_server_arn: () -> String?
+      def source_network_id: () -> String?
+      def agent_version: () -> String?
+    end
+    def retry_data_replication: (
+      ?source_server_id: String
+    ) -> _RetryDataReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryDataReplicationResponse
+
+    interface _ReverseReplicationResponse
+      include Smithy::Client::_Response[Types::ReverseReplicationOutput]
+      def reversed_direction_source_server_arn: () -> String?
+    end
+    def reverse_replication: (
+      ?recovery_instance_id: String
+    ) -> _ReverseReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReverseReplicationResponse
+
+    interface _StartFailbackLaunchResponse
+      include Smithy::Client::_Response[Types::StartFailbackLaunchOutput]
+      def job: () -> Types::Job?
+    end
+    def start_failback_launch: (
+      ?recovery_instance_i_ds: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _StartFailbackLaunchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFailbackLaunchResponse
+
+    interface _StartRecoveryResponse
+      include Smithy::Client::_Response[Types::StartRecoveryOutput]
+      def job: () -> Types::Job?
+    end
+    def start_recovery: (
+      ?source_servers: Array[
+        {
+          source_server_id: String,
+          recovery_snapshot_id: String
+        }
+      ],
+      ?is_drill: bool,
+      ?tags: Hash[String, String]
+    ) -> _StartRecoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecoveryResponse
+
+    interface _StartReplicationResponse
+      include Smithy::Client::_Response[Types::StartReplicationOutput]
+      def source_server: () -> Types::SourceServer?
+    end
+    def start_replication: (
+      ?source_server_id: String
+    ) -> _StartReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationResponse
+
+    interface _StartSourceNetworkRecoveryResponse
+      include Smithy::Client::_Response[Types::StartSourceNetworkRecoveryResponse]
+      def job: () -> Types::Job?
+    end
+    def start_source_network_recovery: (
+      ?source_networks: Array[
+        {
+          source_network_id: String,
+          cfn_stack_name: String
+        }
+      ],
+      ?deploy_as_new: bool,
+      ?tags: Hash[String, String]
+    ) -> _StartSourceNetworkRecoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSourceNetworkRecoveryResponse
+
+    interface _StartSourceNetworkReplicationResponse
+      include Smithy::Client::_Response[Types::StartSourceNetworkReplicationResponse]
+      def source_network: () -> Types::SourceNetwork?
+    end
+    def start_source_network_replication: (
+      ?source_network_id: String
+    ) -> _StartSourceNetworkReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSourceNetworkReplicationResponse
+
+    interface _StopFailbackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_failback: (
+      ?recovery_instance_id: String
+    ) -> _StopFailbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFailbackResponse
+
+    interface _StopReplicationResponse
+      include Smithy::Client::_Response[Types::StopReplicationOutput]
+      def source_server: () -> Types::SourceServer?
+    end
+    def stop_replication: (
+      ?source_server_id: String
+    ) -> _StopReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopReplicationResponse
+
+    interface _StopSourceNetworkReplicationResponse
+      include Smithy::Client::_Response[Types::StopSourceNetworkReplicationResponse]
+      def source_network: () -> Types::SourceNetwork?
+    end
+    def stop_source_network_replication: (
+      ?source_network_id: String
+    ) -> _StopSourceNetworkReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSourceNetworkReplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateRecoveryInstancesResponse
+      include Smithy::Client::_Response[Types::TerminateRecoveryInstancesOutput]
+      def job: () -> Types::Job?
+    end
+    def terminate_recovery_instances: (
+      ?recovery_instance_i_ds: Array[String]
+    ) -> _TerminateRecoveryInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateRecoveryInstancesResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateFailbackReplicationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_failback_replication_configuration: (
+      ?recovery_instance_id: String,
+      ?name: String,
+      ?bandwidth_throttling: Integer,
+      ?use_private_ip: bool
+    ) -> _UpdateFailbackReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFailbackReplicationConfigurationResponse
+
+    interface _UpdateLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLaunchConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def post_launch_enabled: () -> bool?
+      def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties?
+    end
+    def update_launch_configuration: (
+      ?source_server_id: String,
+      ?name: String,
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?post_launch_enabled: bool,
+      ?launch_into_instance_properties: {
+        launch_into_ec2_instance_id: String
+      }
+    ) -> _UpdateLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationResponse
+
+    interface _UpdateLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateLaunchConfigurationTemplateOutput]
+      def launch_configuration_template: () -> Types::LaunchConfigurationTemplate?
+    end
+    def update_launch_configuration_template: (
+      ?launch_configuration_template_id: String,
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?export_bucket_arn: String,
+      ?post_launch_enabled: bool,
+      ?launch_into_source_instance: bool
+    ) -> _UpdateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationTemplateResponse
+
+    interface _UpdateReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def replicated_disks: () -> Array[Types::ReplicationConfigurationReplicatedDisk]?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def pit_policy: () -> Array[Types::PITPolicyRule]?
+      def auto_replicate_new_disks: () -> bool?
+    end
+    def update_replication_configuration: (
+      ?source_server_id: String,
+      ?name: String,
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?replicated_disks: Array[
+        {
+          device_name: String,
+          is_boot_disk: bool,
+          staging_disk_type: String,
+          iops: Integer,
+          throughput: untyped,
+          optimized_staging_disk_type: untyped
+        }
+      ],
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?pit_policy: Array[
+        {
+          rule_id: Integer,
+          units: String,
+          interval: Integer,
+          retention_duration: untyped,
+          enabled: bool
+        }
+      ],
+      ?auto_replicate_new_disks: bool
+    ) -> _UpdateReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationResponse
+
+    interface _UpdateReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationConfigurationTemplateOutput]
+      def replication_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def tags: () -> Hash[String, String]?
+      def pit_policy: () -> Array[Types::PITPolicyRule]?
+      def auto_replicate_new_disks: () -> bool?
+    end
+    def update_replication_configuration_template: (
+      ?replication_configuration_template_id: String,
+      ?arn: String,
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?pit_policy: Array[
+        {
+          rule_id: Integer,
+          units: String,
+          interval: Integer,
+          retention_duration: untyped,
+          enabled: bool
+        }
+      ],
+      ?auto_replicate_new_disks: bool
+    ) -> _UpdateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationTemplateResponse
+  end
+end

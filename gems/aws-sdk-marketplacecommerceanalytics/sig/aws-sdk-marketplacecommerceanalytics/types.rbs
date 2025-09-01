@@ -1,0 +1,116 @@
+module Aws::MarketplaceCommerceAnalytics
+  module Types
+
+    module DataSetType
+      CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS: String
+      CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS: String
+      DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE: String
+      DAILY_BUSINESS_FEES: String
+      DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS: String
+      DAILY_BUSINESS_NEW_INSTANCES: String
+      DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS: String
+      DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS: String
+      MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA: String
+      MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS: String
+      MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE: String
+      MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE: String
+      DISBURSED_AMOUNT_BY_PRODUCT: String
+      DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS: String
+      DISBURSED_AMOUNT_BY_INSTANCE_HOURS: String
+      DISBURSED_AMOUNT_BY_CUSTOMER_GEO: String
+      DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS: String
+      DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS: String
+      DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS: String
+      DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN: String
+      CUSTOMER_PROFILE_BY_INDUSTRY: String
+      CUSTOMER_PROFILE_BY_REVENUE: String
+      CUSTOMER_PROFILE_BY_GEOGRAPHY: String
+      SALES_COMPENSATION_BILLED_REVENUE: String
+      US_SALES_AND_USE_TAX_RECORDS: String
+    end
+
+    class GenerateDataSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_type: String,
+        ?data_set_publication_date: Time,
+        ?role_name_arn: String,
+        ?destination_s3_bucket_name: String,
+        ?destination_s3_prefix: String,
+        ?sns_topic_arn: String,
+        ?customer_defined_values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_type: String?
+      attr_accessor data_set_publication_date: Time?
+      attr_accessor role_name_arn: String?
+      attr_accessor destination_s3_bucket_name: String?
+      attr_accessor destination_s3_prefix: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor customer_defined_values: Hash[String, String]?
+    end
+
+    class GenerateDataSetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_request_id: String?
+    end
+
+    class MarketplaceCommerceAnalyticsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartSupportDataExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_type: String,
+        ?from_date: Time,
+        ?role_name_arn: String,
+        ?destination_s3_bucket_name: String,
+        ?destination_s3_prefix: String,
+        ?sns_topic_arn: String,
+        ?customer_defined_values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_type: String?
+      attr_accessor from_date: Time?
+      attr_accessor role_name_arn: String?
+      attr_accessor destination_s3_bucket_name: String?
+      attr_accessor destination_s3_prefix: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor customer_defined_values: Hash[String, String]?
+    end
+
+    class StartSupportDataExportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_request_id: String?
+    end
+
+    module SupportDataSetType
+      customer_support_contacts_data: String
+      test_customer_support_contacts_data: String
+    end
+  end
+end

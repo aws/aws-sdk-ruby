@@ -1,0 +1,993 @@
+module Aws::ElasticLoadBalancingV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ElasticLoadBalancingV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddListenerCertificatesResponse
+      include Smithy::Client::_Response[Types::AddListenerCertificatesOutput]
+      def certificates: () -> Array[Types::Certificate]?
+    end
+    def add_listener_certificates: (
+      ?listener_arn: String,
+      ?certificates: Array[
+        {
+          certificate_arn: String,
+          is_default: bool
+        }
+      ]
+    ) -> _AddListenerCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddListenerCertificatesResponse
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsOutput]
+    end
+    def add_tags: (
+      ?resource_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _AddTrustStoreRevocationsResponse
+      include Smithy::Client::_Response[Types::AddTrustStoreRevocationsOutput]
+      def trust_store_revocations: () -> Array[Types::TrustStoreRevocation]?
+    end
+    def add_trust_store_revocations: (
+      ?trust_store_arn: String,
+      ?revocation_contents: Array[
+        {
+          s3_bucket: String,
+          s3_key: String,
+          s3_object_version: String,
+          revocation_type: String
+        }
+      ]
+    ) -> _AddTrustStoreRevocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTrustStoreRevocationsResponse
+
+    interface _CreateListenerResponse
+      include Smithy::Client::_Response[Types::CreateListenerOutput]
+      def listeners: () -> Array[Types::Listener]?
+    end
+    def create_listener: (
+      ?load_balancer_arn: String,
+      ?protocol: String,
+      ?port: Integer,
+      ?ssl_policy: String,
+      ?certificates: Array[
+        {
+          certificate_arn: String,
+          is_default: bool
+        }
+      ],
+      ?default_actions: Array[
+        {
+          type: String,
+          target_group_arn: String,
+          authenticate_oidc_config: {
+            issuer: String,
+            authorization_endpoint: String,
+            token_endpoint: String,
+            user_info_endpoint: String,
+            client_id: String,
+            client_secret: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String,
+            use_existing_client_secret: bool
+          },
+          authenticate_cognito_config: {
+            user_pool_arn: String,
+            user_pool_client_id: String,
+            user_pool_domain: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String
+          },
+          order: Integer,
+          redirect_config: {
+            protocol: String,
+            port: String,
+            host: String,
+            path: String,
+            query: String,
+            status_code: String
+          },
+          fixed_response_config: {
+            message_body: String,
+            status_code: String,
+            content_type: String
+          },
+          forward_config: {
+            target_groups: Array[
+              {
+                target_group_arn: untyped,
+                weight: Integer
+              }
+            ],
+            target_group_stickiness_config: {
+              enabled: bool,
+              duration_seconds: Integer
+            }
+          }
+        }
+      ],
+      ?alpn_policy: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?mutual_authentication: {
+        mode: String,
+        trust_store_arn: String,
+        ignore_client_certificate_expiry: bool,
+        trust_store_association_status: String,
+        advertise_trust_store_ca_names: String
+      }
+    ) -> _CreateListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListenerResponse
+
+    interface _CreateLoadBalancerResponse
+      include Smithy::Client::_Response[Types::CreateLoadBalancerOutput]
+      def load_balancers: () -> Array[Types::LoadBalancer]?
+    end
+    def create_load_balancer: (
+      ?name: String,
+      ?subnets: Array[String],
+      ?subnet_mappings: Array[
+        {
+          subnet_id: String,
+          allocation_id: String,
+          private_i_pv4_address: String,
+          i_pv6_address: String,
+          source_nat_ipv6_prefix: String
+        }
+      ],
+      ?security_groups: Array[String],
+      ?scheme: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?type: String,
+      ?ip_address_type: String,
+      ?customer_owned_ipv4_pool: String,
+      ?enable_prefix_for_ipv6_source_nat: String,
+      ?ipam_pools: {
+        ipv4_ipam_pool_id: String
+      }
+    ) -> _CreateLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleOutput]
+      def rules: () -> Array[Types::Rule]?
+    end
+    def create_rule: (
+      ?listener_arn: String,
+      ?conditions: Array[
+        {
+          field: String,
+          values: Array[String],
+          host_header_config: {
+            values: untyped
+          },
+          path_pattern_config: {
+            values: untyped
+          },
+          http_header_config: {
+            http_header_name: String,
+            values: untyped
+          },
+          query_string_config: {
+            values: Array[
+              {
+                key: String,
+                value: untyped
+              }
+            ]
+          },
+          http_request_method_config: {
+            values: untyped
+          },
+          source_ip_config: {
+            values: untyped
+          }
+        }
+      ],
+      ?priority: Integer,
+      ?actions: Array[
+        {
+          type: String,
+          target_group_arn: String,
+          authenticate_oidc_config: {
+            issuer: String,
+            authorization_endpoint: String,
+            token_endpoint: String,
+            user_info_endpoint: String,
+            client_id: String,
+            client_secret: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String,
+            use_existing_client_secret: bool
+          },
+          authenticate_cognito_config: {
+            user_pool_arn: String,
+            user_pool_client_id: String,
+            user_pool_domain: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String
+          },
+          order: Integer,
+          redirect_config: {
+            protocol: String,
+            port: String,
+            host: String,
+            path: String,
+            query: String,
+            status_code: String
+          },
+          fixed_response_config: {
+            message_body: String,
+            status_code: String,
+            content_type: String
+          },
+          forward_config: {
+            target_groups: Array[
+              {
+                target_group_arn: untyped,
+                weight: Integer
+              }
+            ],
+            target_group_stickiness_config: {
+              enabled: bool,
+              duration_seconds: Integer
+            }
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateTargetGroupResponse
+      include Smithy::Client::_Response[Types::CreateTargetGroupOutput]
+      def target_groups: () -> Array[Types::TargetGroup]?
+    end
+    def create_target_group: (
+      ?name: String,
+      ?protocol: String,
+      ?protocol_version: String,
+      ?port: Integer,
+      ?vpc_id: String,
+      ?health_check_protocol: String,
+      ?health_check_port: String,
+      ?health_check_enabled: bool,
+      ?health_check_path: String,
+      ?health_check_interval_seconds: Integer,
+      ?health_check_timeout_seconds: Integer,
+      ?healthy_threshold_count: Integer,
+      ?unhealthy_threshold_count: Integer,
+      ?matcher: {
+        http_code: String,
+        grpc_code: String
+      },
+      ?target_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?ip_address_type: String
+    ) -> _CreateTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTargetGroupResponse
+
+    interface _CreateTrustStoreResponse
+      include Smithy::Client::_Response[Types::CreateTrustStoreOutput]
+      def trust_stores: () -> Array[Types::TrustStore]?
+    end
+    def create_trust_store: (
+      ?name: String,
+      ?ca_certificates_bundle_s3_bucket: String,
+      ?ca_certificates_bundle_s3_key: String,
+      ?ca_certificates_bundle_s3_object_version: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustStoreResponse
+
+    interface _DeleteListenerResponse
+      include Smithy::Client::_Response[Types::DeleteListenerOutput]
+    end
+    def delete_listener: (
+      ?listener_arn: String
+    ) -> _DeleteListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListenerResponse
+
+    interface _DeleteLoadBalancerResponse
+      include Smithy::Client::_Response[Types::DeleteLoadBalancerOutput]
+    end
+    def delete_load_balancer: (
+      ?load_balancer_arn: String
+    ) -> _DeleteLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleOutput]
+    end
+    def delete_rule: (
+      ?rule_arn: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteSharedTrustStoreAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteSharedTrustStoreAssociationOutput]
+    end
+    def delete_shared_trust_store_association: (
+      ?trust_store_arn: String,
+      ?resource_arn: String
+    ) -> _DeleteSharedTrustStoreAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSharedTrustStoreAssociationResponse
+
+    interface _DeleteTargetGroupResponse
+      include Smithy::Client::_Response[Types::DeleteTargetGroupOutput]
+    end
+    def delete_target_group: (
+      ?target_group_arn: String
+    ) -> _DeleteTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTargetGroupResponse
+
+    interface _DeleteTrustStoreResponse
+      include Smithy::Client::_Response[Types::DeleteTrustStoreOutput]
+    end
+    def delete_trust_store: (
+      ?trust_store_arn: String
+    ) -> _DeleteTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrustStoreResponse
+
+    interface _DeregisterTargetsResponse
+      include Smithy::Client::_Response[Types::DeregisterTargetsOutput]
+    end
+    def deregister_targets: (
+      ?target_group_arn: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer,
+          availability_zone: String
+        }
+      ]
+    ) -> _DeregisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTargetsResponse
+
+    interface _DescribeAccountLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountLimitsOutput]
+      def limits: () -> Array[Types::Limit]?
+      def next_marker: () -> String?
+    end
+    def describe_account_limits: (
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeAccountLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountLimitsResponse
+
+    interface _DescribeCapacityReservationResponse
+      include Smithy::Client::_Response[Types::DescribeCapacityReservationOutput]
+      def last_modified_time: () -> Time?
+      def decrease_requests_remaining: () -> Integer?
+      def minimum_load_balancer_capacity: () -> Types::MinimumLoadBalancerCapacity?
+      def capacity_reservation_state: () -> Array[Types::ZonalCapacityReservationState]?
+    end
+    def describe_capacity_reservation: (
+      ?load_balancer_arn: String
+    ) -> _DescribeCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationResponse
+
+    interface _DescribeListenerAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeListenerAttributesOutput]
+      def attributes: () -> Array[Types::ListenerAttribute]?
+    end
+    def describe_listener_attributes: (
+      ?listener_arn: String
+    ) -> _DescribeListenerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeListenerAttributesResponse
+
+    interface _DescribeListenerCertificatesResponse
+      include Smithy::Client::_Response[Types::DescribeListenerCertificatesOutput]
+      def certificates: () -> Array[Types::Certificate]?
+      def next_marker: () -> String?
+    end
+    def describe_listener_certificates: (
+      ?listener_arn: String,
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeListenerCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeListenerCertificatesResponse
+
+    interface _DescribeListenersResponse
+      include Smithy::Client::_Response[Types::DescribeListenersOutput]
+      def listeners: () -> Array[Types::Listener]?
+      def next_marker: () -> String?
+    end
+    def describe_listeners: (
+      ?load_balancer_arn: String,
+      ?listener_arns: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeListenersResponse
+
+    interface _DescribeLoadBalancerAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancerAttributesOutput]
+      def attributes: () -> Array[Types::LoadBalancerAttribute]?
+    end
+    def describe_load_balancer_attributes: (
+      ?load_balancer_arn: String
+    ) -> _DescribeLoadBalancerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancerAttributesResponse
+
+    interface _DescribeLoadBalancersResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancersOutput]
+      def load_balancers: () -> Array[Types::LoadBalancer]?
+      def next_marker: () -> String?
+    end
+    def describe_load_balancers: (
+      ?load_balancer_arns: Array[String],
+      ?names: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancersResponse
+
+    interface _DescribeRulesResponse
+      include Smithy::Client::_Response[Types::DescribeRulesOutput]
+      def rules: () -> Array[Types::Rule]?
+      def next_marker: () -> String?
+    end
+    def describe_rules: (
+      ?listener_arn: String,
+      ?rule_arns: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRulesResponse
+
+    interface _DescribeSSLPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeSSLPoliciesOutput]
+      def ssl_policies: () -> Array[Types::SslPolicy]?
+      def next_marker: () -> String?
+    end
+    def describe_ssl_policies: (
+      ?names: Array[String],
+      ?marker: String,
+      ?page_size: Integer,
+      ?load_balancer_type: String
+    ) -> _DescribeSSLPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSSLPoliciesResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsOutput]
+      def tag_descriptions: () -> Array[Types::TagDescription]?
+    end
+    def describe_tags: (
+      ?resource_arns: Array[String]
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _DescribeTargetGroupAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeTargetGroupAttributesOutput]
+      def attributes: () -> Array[Types::TargetGroupAttribute]?
+    end
+    def describe_target_group_attributes: (
+      ?target_group_arn: String
+    ) -> _DescribeTargetGroupAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTargetGroupAttributesResponse
+
+    interface _DescribeTargetGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeTargetGroupsOutput]
+      def target_groups: () -> Array[Types::TargetGroup]?
+      def next_marker: () -> String?
+    end
+    def describe_target_groups: (
+      ?load_balancer_arn: String,
+      ?target_group_arns: Array[String],
+      ?names: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeTargetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTargetGroupsResponse
+
+    interface _DescribeTargetHealthResponse
+      include Smithy::Client::_Response[Types::DescribeTargetHealthOutput]
+      def target_health_descriptions: () -> Array[Types::TargetHealthDescription]?
+    end
+    def describe_target_health: (
+      ?target_group_arn: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer,
+          availability_zone: String
+        }
+      ],
+      ?include: Array[String]
+    ) -> _DescribeTargetHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTargetHealthResponse
+
+    interface _DescribeTrustStoreAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeTrustStoreAssociationsOutput]
+      def trust_store_associations: () -> Array[Types::TrustStoreAssociation]?
+      def next_marker: () -> String?
+    end
+    def describe_trust_store_associations: (
+      ?trust_store_arn: String,
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeTrustStoreAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustStoreAssociationsResponse
+
+    interface _DescribeTrustStoreRevocationsResponse
+      include Smithy::Client::_Response[Types::DescribeTrustStoreRevocationsOutput]
+      def trust_store_revocations: () -> Array[Types::DescribeTrustStoreRevocation]?
+      def next_marker: () -> String?
+    end
+    def describe_trust_store_revocations: (
+      ?trust_store_arn: String,
+      ?revocation_ids: Array[Integer],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeTrustStoreRevocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustStoreRevocationsResponse
+
+    interface _DescribeTrustStoresResponse
+      include Smithy::Client::_Response[Types::DescribeTrustStoresOutput]
+      def trust_stores: () -> Array[Types::TrustStore]?
+      def next_marker: () -> String?
+    end
+    def describe_trust_stores: (
+      ?trust_store_arns: Array[String],
+      ?names: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeTrustStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustStoresResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetTrustStoreCaCertificatesBundleResponse
+      include Smithy::Client::_Response[Types::GetTrustStoreCaCertificatesBundleOutput]
+      def location: () -> String?
+    end
+    def get_trust_store_ca_certificates_bundle: (
+      ?trust_store_arn: String
+    ) -> _GetTrustStoreCaCertificatesBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustStoreCaCertificatesBundleResponse
+
+    interface _GetTrustStoreRevocationContentResponse
+      include Smithy::Client::_Response[Types::GetTrustStoreRevocationContentOutput]
+      def location: () -> String?
+    end
+    def get_trust_store_revocation_content: (
+      ?trust_store_arn: String,
+      ?revocation_id: Integer
+    ) -> _GetTrustStoreRevocationContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustStoreRevocationContentResponse
+
+    interface _ModifyCapacityReservationResponse
+      include Smithy::Client::_Response[Types::ModifyCapacityReservationOutput]
+      def last_modified_time: () -> Time?
+      def decrease_requests_remaining: () -> Integer?
+      def minimum_load_balancer_capacity: () -> Types::MinimumLoadBalancerCapacity?
+      def capacity_reservation_state: () -> Array[Types::ZonalCapacityReservationState]?
+    end
+    def modify_capacity_reservation: (
+      ?load_balancer_arn: String,
+      ?minimum_load_balancer_capacity: {
+        capacity_units: Integer
+      },
+      ?reset_capacity_reservation: bool
+    ) -> _ModifyCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyCapacityReservationResponse
+
+    interface _ModifyIpPoolsResponse
+      include Smithy::Client::_Response[Types::ModifyIpPoolsOutput]
+      def ipam_pools: () -> Types::IpamPools?
+    end
+    def modify_ip_pools: (
+      ?load_balancer_arn: String,
+      ?ipam_pools: {
+        ipv4_ipam_pool_id: String
+      },
+      ?remove_ipam_pools: Array[String]
+    ) -> _ModifyIpPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpPoolsResponse
+
+    interface _ModifyListenerResponse
+      include Smithy::Client::_Response[Types::ModifyListenerOutput]
+      def listeners: () -> Array[Types::Listener]?
+    end
+    def modify_listener: (
+      ?listener_arn: String,
+      ?port: Integer,
+      ?protocol: String,
+      ?ssl_policy: String,
+      ?certificates: Array[
+        {
+          certificate_arn: String,
+          is_default: bool
+        }
+      ],
+      ?default_actions: Array[
+        {
+          type: String,
+          target_group_arn: String,
+          authenticate_oidc_config: {
+            issuer: String,
+            authorization_endpoint: String,
+            token_endpoint: String,
+            user_info_endpoint: String,
+            client_id: String,
+            client_secret: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String,
+            use_existing_client_secret: bool
+          },
+          authenticate_cognito_config: {
+            user_pool_arn: String,
+            user_pool_client_id: String,
+            user_pool_domain: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String
+          },
+          order: Integer,
+          redirect_config: {
+            protocol: String,
+            port: String,
+            host: String,
+            path: String,
+            query: String,
+            status_code: String
+          },
+          fixed_response_config: {
+            message_body: String,
+            status_code: String,
+            content_type: String
+          },
+          forward_config: {
+            target_groups: Array[
+              {
+                target_group_arn: untyped,
+                weight: Integer
+              }
+            ],
+            target_group_stickiness_config: {
+              enabled: bool,
+              duration_seconds: Integer
+            }
+          }
+        }
+      ],
+      ?alpn_policy: Array[String],
+      ?mutual_authentication: {
+        mode: String,
+        trust_store_arn: String,
+        ignore_client_certificate_expiry: bool,
+        trust_store_association_status: String,
+        advertise_trust_store_ca_names: String
+      }
+    ) -> _ModifyListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyListenerResponse
+
+    interface _ModifyListenerAttributesResponse
+      include Smithy::Client::_Response[Types::ModifyListenerAttributesOutput]
+      def attributes: () -> Array[Types::ListenerAttribute]?
+    end
+    def modify_listener_attributes: (
+      ?listener_arn: String,
+      ?attributes: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ModifyListenerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyListenerAttributesResponse
+
+    interface _ModifyLoadBalancerAttributesResponse
+      include Smithy::Client::_Response[Types::ModifyLoadBalancerAttributesOutput]
+      def attributes: () -> Array[Types::LoadBalancerAttribute]?
+    end
+    def modify_load_balancer_attributes: (
+      ?load_balancer_arn: String,
+      ?attributes: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ModifyLoadBalancerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyLoadBalancerAttributesResponse
+
+    interface _ModifyRuleResponse
+      include Smithy::Client::_Response[Types::ModifyRuleOutput]
+      def rules: () -> Array[Types::Rule]?
+    end
+    def modify_rule: (
+      ?rule_arn: String,
+      ?conditions: Array[
+        {
+          field: String,
+          values: Array[String],
+          host_header_config: {
+            values: untyped
+          },
+          path_pattern_config: {
+            values: untyped
+          },
+          http_header_config: {
+            http_header_name: String,
+            values: untyped
+          },
+          query_string_config: {
+            values: Array[
+              {
+                key: String,
+                value: untyped
+              }
+            ]
+          },
+          http_request_method_config: {
+            values: untyped
+          },
+          source_ip_config: {
+            values: untyped
+          }
+        }
+      ],
+      ?actions: Array[
+        {
+          type: String,
+          target_group_arn: String,
+          authenticate_oidc_config: {
+            issuer: String,
+            authorization_endpoint: String,
+            token_endpoint: String,
+            user_info_endpoint: String,
+            client_id: String,
+            client_secret: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String,
+            use_existing_client_secret: bool
+          },
+          authenticate_cognito_config: {
+            user_pool_arn: String,
+            user_pool_client_id: String,
+            user_pool_domain: String,
+            session_cookie_name: String,
+            scope: String,
+            session_timeout: Integer,
+            authentication_request_extra_params: Hash[String, String],
+            on_unauthenticated_request: String
+          },
+          order: Integer,
+          redirect_config: {
+            protocol: String,
+            port: String,
+            host: String,
+            path: String,
+            query: String,
+            status_code: String
+          },
+          fixed_response_config: {
+            message_body: String,
+            status_code: String,
+            content_type: String
+          },
+          forward_config: {
+            target_groups: Array[
+              {
+                target_group_arn: untyped,
+                weight: Integer
+              }
+            ],
+            target_group_stickiness_config: {
+              enabled: bool,
+              duration_seconds: Integer
+            }
+          }
+        }
+      ]
+    ) -> _ModifyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyRuleResponse
+
+    interface _ModifyTargetGroupResponse
+      include Smithy::Client::_Response[Types::ModifyTargetGroupOutput]
+      def target_groups: () -> Array[Types::TargetGroup]?
+    end
+    def modify_target_group: (
+      ?target_group_arn: String,
+      ?health_check_protocol: String,
+      ?health_check_port: String,
+      ?health_check_path: String,
+      ?health_check_enabled: bool,
+      ?health_check_interval_seconds: Integer,
+      ?health_check_timeout_seconds: Integer,
+      ?healthy_threshold_count: Integer,
+      ?unhealthy_threshold_count: Integer,
+      ?matcher: {
+        http_code: String,
+        grpc_code: String
+      }
+    ) -> _ModifyTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTargetGroupResponse
+
+    interface _ModifyTargetGroupAttributesResponse
+      include Smithy::Client::_Response[Types::ModifyTargetGroupAttributesOutput]
+      def attributes: () -> Array[Types::TargetGroupAttribute]?
+    end
+    def modify_target_group_attributes: (
+      ?target_group_arn: String,
+      ?attributes: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ModifyTargetGroupAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTargetGroupAttributesResponse
+
+    interface _ModifyTrustStoreResponse
+      include Smithy::Client::_Response[Types::ModifyTrustStoreOutput]
+      def trust_stores: () -> Array[Types::TrustStore]?
+    end
+    def modify_trust_store: (
+      ?trust_store_arn: String,
+      ?ca_certificates_bundle_s3_bucket: String,
+      ?ca_certificates_bundle_s3_key: String,
+      ?ca_certificates_bundle_s3_object_version: String
+    ) -> _ModifyTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTrustStoreResponse
+
+    interface _RegisterTargetsResponse
+      include Smithy::Client::_Response[Types::RegisterTargetsOutput]
+    end
+    def register_targets: (
+      ?target_group_arn: String,
+      ?targets: Array[
+        {
+          id: String,
+          port: Integer,
+          availability_zone: String
+        }
+      ]
+    ) -> _RegisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTargetsResponse
+
+    interface _RemoveListenerCertificatesResponse
+      include Smithy::Client::_Response[Types::RemoveListenerCertificatesOutput]
+    end
+    def remove_listener_certificates: (
+      ?listener_arn: String,
+      ?certificates: Array[
+        {
+          certificate_arn: String,
+          is_default: bool
+        }
+      ]
+    ) -> _RemoveListenerCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveListenerCertificatesResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Types::RemoveTagsOutput]
+    end
+    def remove_tags: (
+      ?resource_arns: Array[String],
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _RemoveTrustStoreRevocationsResponse
+      include Smithy::Client::_Response[Types::RemoveTrustStoreRevocationsOutput]
+    end
+    def remove_trust_store_revocations: (
+      ?trust_store_arn: String,
+      ?revocation_ids: Array[Integer]
+    ) -> _RemoveTrustStoreRevocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTrustStoreRevocationsResponse
+
+    interface _SetIpAddressTypeResponse
+      include Smithy::Client::_Response[Types::SetIpAddressTypeOutput]
+      def ip_address_type: () -> String?
+    end
+    def set_ip_address_type: (
+      ?load_balancer_arn: String,
+      ?ip_address_type: String
+    ) -> _SetIpAddressTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIpAddressTypeResponse
+
+    interface _SetRulePrioritiesResponse
+      include Smithy::Client::_Response[Types::SetRulePrioritiesOutput]
+      def rules: () -> Array[Types::Rule]?
+    end
+    def set_rule_priorities: (
+      ?rule_priorities: Array[
+        {
+          rule_arn: String,
+          priority: Integer
+        }
+      ]
+    ) -> _SetRulePrioritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetRulePrioritiesResponse
+
+    interface _SetSecurityGroupsResponse
+      include Smithy::Client::_Response[Types::SetSecurityGroupsOutput]
+      def security_group_ids: () -> Array[String]?
+      def enforce_security_group_inbound_rules_on_private_link_traffic: () -> String?
+    end
+    def set_security_groups: (
+      ?load_balancer_arn: String,
+      ?security_groups: Array[String],
+      ?enforce_security_group_inbound_rules_on_private_link_traffic: String
+    ) -> _SetSecurityGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSecurityGroupsResponse
+
+    interface _SetSubnetsResponse
+      include Smithy::Client::_Response[Types::SetSubnetsOutput]
+      def availability_zones: () -> Array[Types::AvailabilityZone]?
+      def ip_address_type: () -> String?
+      def enable_prefix_for_ipv6_source_nat: () -> String?
+    end
+    def set_subnets: (
+      ?load_balancer_arn: String,
+      ?subnets: Array[String],
+      ?subnet_mappings: Array[
+        {
+          subnet_id: String,
+          allocation_id: String,
+          private_i_pv4_address: String,
+          i_pv6_address: String,
+          source_nat_ipv6_prefix: String
+        }
+      ],
+      ?ip_address_type: String,
+      ?enable_prefix_for_ipv6_source_nat: String
+    ) -> _SetSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSubnetsResponse
+  end
+end

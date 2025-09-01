@@ -1,0 +1,151 @@
+module Aws::CostandUsageReportService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CostandUsageReportService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteReportDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteReportDefinitionResponse]
+      def response_message: () -> String?
+    end
+    def delete_report_definition: (
+      ?report_name: String
+    ) -> _DeleteReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReportDefinitionResponse
+
+    interface _DescribeReportDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeReportDefinitionsResponse]
+      def report_definitions: () -> Array[Types::ReportDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_report_definitions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReportDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReportDefinitionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?report_name: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyReportDefinitionResponse
+      include Smithy::Client::_Response[Types::ModifyReportDefinitionResponse]
+    end
+    def modify_report_definition: (
+      ?report_name: String,
+      ?report_definition: {
+        report_name: String,
+        time_unit: String,
+        format: String,
+        compression: String,
+        additional_schema_elements: Array[String],
+        s3_bucket: String,
+        s3_prefix: String,
+        s3_region: String,
+        additional_artifacts: Array[String],
+        refresh_closed_reports: bool,
+        report_versioning: String,
+        billing_view_arn: String,
+        report_status: {
+          last_delivery: String,
+          last_status: String
+        }
+      }
+    ) -> _ModifyReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReportDefinitionResponse
+
+    interface _PutReportDefinitionResponse
+      include Smithy::Client::_Response[Types::PutReportDefinitionResponse]
+    end
+    def put_report_definition: (
+      ?report_definition: {
+        report_name: String,
+        time_unit: String,
+        format: String,
+        compression: String,
+        additional_schema_elements: Array[String],
+        s3_bucket: String,
+        s3_prefix: String,
+        s3_region: String,
+        additional_artifacts: Array[String],
+        refresh_closed_reports: bool,
+        report_versioning: String,
+        billing_view_arn: String,
+        report_status: {
+          last_delivery: String,
+          last_status: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutReportDefinitionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?report_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?report_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

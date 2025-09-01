@@ -1,0 +1,5 @@
+  module Aws
+    module MWAA
+      VERSION: String
+    end
+  end

@@ -1,0 +1,2096 @@
+module Aws::B2bi
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AdvancedOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?x12: Types::X12AdvancedOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12AdvancedOptions?
+    end
+
+    class CapabilityConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?edi: Types::EdiConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edi: Types::EdiConfiguration?
+
+      class Edi < CapabilityConfiguration
+      end
+      class Unknown < CapabilityConfiguration
+      end
+    end
+
+    module CapabilityDirection
+      INBOUND: String
+      OUTBOUND: String
+    end
+
+    class CapabilityOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outbound_edi: Types::OutboundEdiOptions,
+        ?inbound_edi: Types::InboundEdiOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outbound_edi: Types::OutboundEdiOptions?
+      attr_accessor inbound_edi: Types::InboundEdiOptions?
+    end
+
+    class CapabilitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+        ?name: String,
+        ?type: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    module CapabilityType
+      EDI: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConversionSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_format: String,
+        ?input_file: Types::InputFileSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_format: String?
+      attr_accessor input_file: Types::InputFileSource?
+    end
+
+    module ConversionSourceFormat
+      JSON: String
+      XML: String
+    end
+
+    class ConversionTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_format: String,
+        ?format_details: Types::ConversionTargetFormatDetails,
+        ?output_sample_file: Types::OutputSampleFileSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_format: String?
+      attr_accessor format_details: Types::ConversionTargetFormatDetails?
+      attr_accessor output_sample_file: Types::OutputSampleFileSource?
+    end
+
+    module ConversionTargetFormat
+      X12: String
+    end
+
+    class ConversionTargetFormatDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x12: Types::X12Details,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12Details?
+
+      class X12 < ConversionTargetFormatDetails
+      end
+      class Unknown < ConversionTargetFormatDetails
+      end
+    end
+
+    class CreateCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::CapabilityConfiguration,
+        ?instructions_documents: Array[Types::S3Location],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::CapabilityConfiguration?
+      attr_accessor instructions_documents: Array[Types::S3Location]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+        ?capability_arn: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::CapabilityConfiguration,
+        ?instructions_documents: Array[Types::S3Location],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+      attr_accessor capability_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::CapabilityConfiguration?
+      attr_accessor instructions_documents: Array[Types::S3Location]?
+      attr_accessor created_at: Time?
+    end
+
+    class CreatePartnershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePartnershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?partnership_id: String,
+        ?partnership_arn: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+        ?trading_partner_id: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor partnership_id: String?
+      attr_accessor partnership_arn: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+      attr_accessor trading_partner_id: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?business_name: String,
+        ?logging: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor business_name: String?
+      attr_accessor logging: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?business_name: String,
+        ?phone: String,
+        ?email: String,
+        ?logging: String,
+        ?log_group_name: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor business_name: String?
+      attr_accessor phone: String?
+      attr_accessor email: String?
+      attr_accessor logging: String?
+      attr_accessor log_group_name: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateStarterMappingTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_sample_location: Types::S3Location,
+        ?mapping_type: String,
+        ?template_details: Types::TemplateDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_sample_location: Types::S3Location?
+      attr_accessor mapping_type: String?
+      attr_accessor template_details: Types::TemplateDetails?
+    end
+
+    class CreateStarterMappingTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mapping_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mapping_template: String?
+    end
+
+    class CreateTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class CreateTransformerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+        ?transformer_arn: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+      attr_accessor transformer_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class DeleteCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+    end
+
+    class DeletePartnershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partnership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partnership_id: String?
+    end
+
+    class DeleteProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DeleteTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+    end
+
+    class EdiConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_direction: String,
+        ?type: Types::EdiType,
+        ?input_location: Types::S3Location,
+        ?output_location: Types::S3Location,
+        ?transformer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_direction: String?
+      attr_accessor type: Types::EdiType?
+      attr_accessor input_location: Types::S3Location?
+      attr_accessor output_location: Types::S3Location?
+      attr_accessor transformer_id: String?
+    end
+
+    class EdiType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x12_details: Types::X12Details,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12_details: Types::X12Details?
+
+      class X12Details < EdiType
+      end
+      class Unknown < EdiType
+      end
+    end
+
+    module FileFormat
+      XML: String
+      JSON: String
+      NOT_USED: String
+    end
+
+    class FormatOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x12: Types::X12Details,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12Details?
+
+      class X12 < FormatOptions
+      end
+      class Unknown < FormatOptions
+      end
+    end
+
+    module FromFormat
+      X12: String
+    end
+
+    class GenerateMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_file_content: String,
+        ?output_file_content: String,
+        ?mapping_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_file_content: String?
+      attr_accessor output_file_content: String?
+      attr_accessor mapping_type: String?
+    end
+
+    class GenerateMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mapping_template: String,
+        ?mapping_accuracy: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mapping_template: String?
+      attr_accessor mapping_accuracy: Float?
+    end
+
+    class GetCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+    end
+
+    class GetCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+        ?capability_arn: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::CapabilityConfiguration,
+        ?instructions_documents: Array[Types::S3Location],
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+      attr_accessor capability_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::CapabilityConfiguration?
+      attr_accessor instructions_documents: Array[Types::S3Location]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class GetPartnershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partnership_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partnership_id: String?
+    end
+
+    class GetPartnershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?partnership_id: String,
+        ?partnership_arn: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+        ?trading_partner_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor partnership_id: String?
+      attr_accessor partnership_arn: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+      attr_accessor trading_partner_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class GetProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class GetProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?business_name: String,
+        ?logging: String,
+        ?log_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor business_name: String?
+      attr_accessor logging: String?
+      attr_accessor log_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class GetTransformerJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_job_id: String,
+        ?transformer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_job_id: String?
+      attr_accessor transformer_id: String?
+    end
+
+    class GetTransformerJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?output_files: Array[Types::S3Location],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor output_files: Array[Types::S3Location]?
+      attr_accessor message: String?
+    end
+
+    class GetTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+    end
+
+    class GetTransformerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+        ?transformer_arn: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+      attr_accessor transformer_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class InboundEdiOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?x12: Types::X12InboundEdiOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12InboundEdiOptions?
+    end
+
+    class InputConversion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_format: String,
+        ?format_options: Types::FormatOptions,
+        ?advanced_options: Types::AdvancedOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_format: String?
+      attr_accessor format_options: Types::FormatOptions?
+      attr_accessor advanced_options: Types::AdvancedOptions?
+    end
+
+    class InputFileSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_content: String?
+
+      class FileContent < InputFileSource
+      end
+      class Unknown < InputFileSource
+      end
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module LineTerminator
+      CRLF: String
+      LF: String
+      CR: String
+    end
+
+    class ListCapabilitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCapabilitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capabilities: Array[Types::CapabilitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capabilities: Array[Types::CapabilitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPartnershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPartnershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partnerships: Array[Types::PartnershipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partnerships: Array[Types::PartnershipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiles: Array[Types::ProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiles: Array[Types::ProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTransformersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTransformersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformers: Array[Types::TransformerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformers: Array[Types::TransformerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module Logging
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class Mapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_language: String,
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_language: String?
+      attr_accessor template: String?
+    end
+
+    module MappingTemplateLanguage
+      XSLT: String
+      JSONATA: String
+    end
+
+    module MappingType
+      JSONATA: String
+      XSLT: String
+    end
+
+    class OutboundEdiOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x12: Types::X12Envelope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12Envelope?
+
+      class X12 < OutboundEdiOptions
+      end
+      class Unknown < OutboundEdiOptions
+      end
+    end
+
+    class OutputConversion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?to_format: String,
+        ?format_options: Types::FormatOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor to_format: String?
+      attr_accessor format_options: Types::FormatOptions?
+    end
+
+    class OutputSampleFileSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_location: Types::S3Location?
+
+      class FileLocation < OutputSampleFileSource
+      end
+      class Unknown < OutputSampleFileSource
+      end
+    end
+
+    class PartnershipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?partnership_id: String,
+        ?name: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+        ?trading_partner_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor partnership_id: String?
+      attr_accessor name: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+      attr_accessor trading_partner_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class ProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?name: String,
+        ?business_name: String,
+        ?logging: String,
+        ?log_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor name: String?
+      attr_accessor business_name: String?
+      attr_accessor logging: String?
+      attr_accessor log_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+    end
+
+    class SampleDocumentKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?output: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor output: String?
+    end
+
+    class SampleDocuments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?keys: Array[Types::SampleDocumentKeys],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor keys: Array[Types::SampleDocumentKeys]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class StartTransformerJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_file: Types::S3Location,
+        ?output_location: Types::S3Location,
+        ?transformer_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_file: Types::S3Location?
+      attr_accessor output_location: Types::S3Location?
+      attr_accessor transformer_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartTransformerJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_job_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TemplateDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x12: Types::X12Details,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x12: Types::X12Details?
+
+      class X12 < TemplateDetails
+      end
+      class Unknown < TemplateDetails
+      end
+    end
+
+    class TestConversionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::ConversionSource,
+        ?target: Types::ConversionTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::ConversionSource?
+      attr_accessor target: Types::ConversionTarget?
+    end
+
+    class TestConversionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?converted_file_content: String,
+        ?validation_messages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor converted_file_content: String?
+      attr_accessor validation_messages: Array[String]?
+    end
+
+    class TestMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_file_content: String,
+        ?mapping_template: String,
+        ?file_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_file_content: String?
+      attr_accessor mapping_template: String?
+      attr_accessor file_format: String?
+    end
+
+    class TestMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mapped_file_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mapped_file_content: String?
+    end
+
+    class TestParsingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_file: Types::S3Location,
+        ?file_format: String,
+        ?edi_type: Types::EdiType,
+        ?advanced_options: Types::AdvancedOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_file: Types::S3Location?
+      attr_accessor file_format: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor advanced_options: Types::AdvancedOptions?
+    end
+
+    class TestParsingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parsed_file_content: String,
+        ?parsed_split_file_contents: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parsed_file_content: String?
+      attr_accessor parsed_split_file_contents: Array[String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module ToFormat
+      X12: String
+    end
+
+    module TransformerJobStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module TransformerStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class TransformerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+        ?name: String,
+        ?configuration: Types::CapabilityConfiguration,
+        ?instructions_documents: Array[Types::S3Location],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::CapabilityConfiguration?
+      attr_accessor instructions_documents: Array[Types::S3Location]?
+    end
+
+    class UpdateCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_id: String,
+        ?capability_arn: String,
+        ?name: String,
+        ?type: String,
+        ?configuration: Types::CapabilityConfiguration,
+        ?instructions_documents: Array[Types::S3Location],
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_id: String?
+      attr_accessor capability_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor configuration: Types::CapabilityConfiguration?
+      attr_accessor instructions_documents: Array[Types::S3Location]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class UpdatePartnershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partnership_id: String,
+        ?name: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partnership_id: String?
+      attr_accessor name: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+    end
+
+    class UpdatePartnershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?partnership_id: String,
+        ?partnership_arn: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?capabilities: Array[String],
+        ?capability_options: Types::CapabilityOptions,
+        ?trading_partner_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor partnership_id: String?
+      attr_accessor partnership_arn: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor capability_options: Types::CapabilityOptions?
+      attr_accessor trading_partner_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class UpdateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?business_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor business_name: String?
+    end
+
+    class UpdateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?email: String,
+        ?phone: String,
+        ?business_name: String,
+        ?logging: String,
+        ?log_group_name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor phone: String?
+      attr_accessor business_name: String?
+      attr_accessor logging: String?
+      attr_accessor log_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class UpdateTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+        ?name: String,
+        ?status: String,
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class UpdateTransformerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_id: String,
+        ?transformer_arn: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?file_format: String,
+        ?mapping_template: String,
+        ?edi_type: Types::EdiType,
+        ?sample_document: String,
+        ?input_conversion: Types::InputConversion,
+        ?mapping: Types::Mapping,
+        ?output_conversion: Types::OutputConversion,
+        ?sample_documents: Types::SampleDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_id: String?
+      attr_accessor transformer_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor file_format: String?
+      attr_accessor mapping_template: String?
+      attr_accessor edi_type: Types::EdiType?
+      attr_accessor sample_document: String?
+      attr_accessor input_conversion: Types::InputConversion?
+      attr_accessor mapping: Types::Mapping?
+      attr_accessor output_conversion: Types::OutputConversion?
+      attr_accessor sample_documents: Types::SampleDocuments?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module WrapFormat
+      SEGMENT: String
+      ONE_LINE: String
+      LINE_LENGTH: String
+    end
+
+    class WrapOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrap_by: String,
+        ?line_terminator: String,
+        ?line_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrap_by: String?
+      attr_accessor line_terminator: String?
+      attr_accessor line_length: Integer?
+    end
+
+    class X12AcknowledgmentOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?functional_acknowledgment: String,
+        ?technical_acknowledgment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor functional_acknowledgment: String?
+      attr_accessor technical_acknowledgment: String?
+    end
+
+    class X12AdvancedOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?split_options: Types::X12SplitOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor split_options: Types::X12SplitOptions?
+    end
+
+    class X12ControlNumbers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starting_interchange_control_number: Integer,
+        ?starting_functional_group_control_number: Integer,
+        ?starting_transaction_set_control_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starting_interchange_control_number: Integer?
+      attr_accessor starting_functional_group_control_number: Integer?
+      attr_accessor starting_transaction_set_control_number: Integer?
+    end
+
+    class X12Delimiters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_separator: String,
+        ?data_element_separator: String,
+        ?segment_terminator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_separator: String?
+      attr_accessor data_element_separator: String?
+      attr_accessor segment_terminator: String?
+    end
+
+    class X12Details
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_set: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_set: String?
+      attr_accessor version: String?
+    end
+
+    class X12Envelope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?common: Types::X12OutboundEdiHeaders,
+        ?wrap_options: Types::WrapOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common: Types::X12OutboundEdiHeaders?
+      attr_accessor wrap_options: Types::WrapOptions?
+    end
+
+    module X12FunctionalAcknowledgment
+      DO_NOT_GENERATE: String
+      GENERATE_ALL_SEGMENTS: String
+      GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP: String
+    end
+
+    class X12FunctionalGroupHeaders
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_sender_code: String,
+        ?application_receiver_code: String,
+        ?responsible_agency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_sender_code: String?
+      attr_accessor application_receiver_code: String?
+      attr_accessor responsible_agency_code: String?
+    end
+
+    module X12GS05TimeFormat
+      HHMM: String
+      HHMMSS: String
+      HHMMSSDD: String
+    end
+
+    class X12InboundEdiOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acknowledgment_options: Types::X12AcknowledgmentOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acknowledgment_options: Types::X12AcknowledgmentOptions?
+    end
+
+    class X12InterchangeControlHeaders
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id_qualifier: String,
+        ?sender_id: String,
+        ?receiver_id_qualifier: String,
+        ?receiver_id: String,
+        ?repetition_separator: String,
+        ?acknowledgment_requested_code: String,
+        ?usage_indicator_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id_qualifier: String?
+      attr_accessor sender_id: String?
+      attr_accessor receiver_id_qualifier: String?
+      attr_accessor receiver_id: String?
+      attr_accessor repetition_separator: String?
+      attr_accessor acknowledgment_requested_code: String?
+      attr_accessor usage_indicator_code: String?
+    end
+
+    class X12OutboundEdiHeaders
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interchange_control_headers: Types::X12InterchangeControlHeaders,
+        ?functional_group_headers: Types::X12FunctionalGroupHeaders,
+        ?delimiters: Types::X12Delimiters,
+        ?validate_edi: bool,
+        ?control_numbers: Types::X12ControlNumbers,
+        ?gs05_time_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interchange_control_headers: Types::X12InterchangeControlHeaders?
+      attr_accessor functional_group_headers: Types::X12FunctionalGroupHeaders?
+      attr_accessor delimiters: Types::X12Delimiters?
+      attr_accessor validate_edi: bool?
+      attr_accessor control_numbers: Types::X12ControlNumbers?
+      attr_accessor gs05_time_format: String?
+    end
+
+    module X12SplitBy
+      NONE: String
+      TRANSACTION: String
+    end
+
+    class X12SplitOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?split_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor split_by: String?
+    end
+
+    module X12TechnicalAcknowledgment
+      DO_NOT_GENERATE: String
+      GENERATE_ALL_SEGMENTS: String
+    end
+
+    module X12TransactionSet
+      X12_100: String
+      X12_101: String
+      X12_102: String
+      X12_103: String
+      X12_104: String
+      X12_105: String
+      X12_106: String
+      X12_107: String
+      X12_108: String
+      X12_109: String
+      X12_110: String
+      X12_111: String
+      X12_112: String
+      X12_113: String
+      X12_120: String
+      X12_121: String
+      X12_124: String
+      X12_125: String
+      X12_126: String
+      X12_127: String
+      X12_128: String
+      X12_129: String
+      X12_130: String
+      X12_131: String
+      X12_132: String
+      X12_133: String
+      X12_135: String
+      X12_138: String
+      X12_139: String
+      X12_140: String
+      X12_141: String
+      X12_142: String
+      X12_143: String
+      X12_144: String
+      X12_146: String
+      X12_147: String
+      X12_148: String
+      X12_149: String
+      X12_150: String
+      X12_151: String
+      X12_152: String
+      X12_153: String
+      X12_154: String
+      X12_155: String
+      X12_157: String
+      X12_158: String
+      X12_159: String
+      X12_160: String
+      X12_161: String
+      X12_163: String
+      X12_170: String
+      X12_175: String
+      X12_176: String
+      X12_179: String
+      X12_180: String
+      X12_185: String
+      X12_186: String
+      X12_187: String
+      X12_188: String
+      X12_189: String
+      X12_190: String
+      X12_191: String
+      X12_194: String
+      X12_195: String
+      X12_196: String
+      X12_197: String
+      X12_198: String
+      X12_199: String
+      X12_200: String
+      X12_201: String
+      X12_202: String
+      X12_203: String
+      X12_204: String
+      X12_205: String
+      X12_206: String
+      X12_210: String
+      X12_211: String
+      X12_212: String
+      X12_213: String
+      X12_214: String
+      X12_215: String
+      X12_216: String
+      X12_217: String
+      X12_218: String
+      X12_219: String
+      X12_220: String
+      X12_222: String
+      X12_223: String
+      X12_224: String
+      X12_225: String
+      X12_227: String
+      X12_228: String
+      X12_240: String
+      X12_242: String
+      X12_244: String
+      X12_245: String
+      X12_248: String
+      X12_249: String
+      X12_250: String
+      X12_251: String
+      X12_252: String
+      X12_255: String
+      X12_256: String
+      X12_259: String
+      X12_260: String
+      X12_261: String
+      X12_262: String
+      X12_263: String
+      X12_264: String
+      X12_265: String
+      X12_266: String
+      X12_267: String
+      X12_268: String
+      X12_269: String
+      X12_270: String
+      X12_271: String
+      X12_272: String
+      X12_273: String
+      X12_274: String
+      X12_275: String
+      X12_276: String
+      X12_277: String
+      X12_278: String
+      X12_280: String
+      X12_283: String
+      X12_284: String
+      X12_285: String
+      X12_286: String
+      X12_288: String
+      X12_290: String
+      X12_300: String
+      X12_301: String
+      X12_303: String
+      X12_304: String
+      X12_309: String
+      X12_310: String
+      X12_311: String
+      X12_312: String
+      X12_313: String
+      X12_315: String
+      X12_317: String
+      X12_319: String
+      X12_322: String
+      X12_323: String
+      X12_324: String
+      X12_325: String
+      X12_326: String
+      X12_350: String
+      X12_352: String
+      X12_353: String
+      X12_354: String
+      X12_355: String
+      X12_356: String
+      X12_357: String
+      X12_358: String
+      X12_361: String
+      X12_362: String
+      X12_404: String
+      X12_410: String
+      X12_412: String
+      X12_414: String
+      X12_417: String
+      X12_418: String
+      X12_419: String
+      X12_420: String
+      X12_421: String
+      X12_422: String
+      X12_423: String
+      X12_424: String
+      X12_425: String
+      X12_426: String
+      X12_429: String
+      X12_431: String
+      X12_432: String
+      X12_433: String
+      X12_434: String
+      X12_435: String
+      X12_436: String
+      X12_437: String
+      X12_440: String
+      X12_451: String
+      X12_452: String
+      X12_453: String
+      X12_455: String
+      X12_456: String
+      X12_460: String
+      X12_463: String
+      X12_466: String
+      X12_468: String
+      X12_470: String
+      X12_475: String
+      X12_485: String
+      X12_486: String
+      X12_490: String
+      X12_492: String
+      X12_494: String
+      X12_500: String
+      X12_501: String
+      X12_503: String
+      X12_504: String
+      X12_511: String
+      X12_517: String
+      X12_521: String
+      X12_527: String
+      X12_536: String
+      X12_540: String
+      X12_561: String
+      X12_567: String
+      X12_568: String
+      X12_601: String
+      X12_602: String
+      X12_620: String
+      X12_625: String
+      X12_650: String
+      X12_715: String
+      X12_753: String
+      X12_754: String
+      X12_805: String
+      X12_806: String
+      X12_810: String
+      X12_811: String
+      X12_812: String
+      X12_813: String
+      X12_814: String
+      X12_815: String
+      X12_816: String
+      X12_818: String
+      X12_819: String
+      X12_820: String
+      X12_821: String
+      X12_822: String
+      X12_823: String
+      X12_824: String
+      X12_826: String
+      X12_827: String
+      X12_828: String
+      X12_829: String
+      X12_830: String
+      X12_831: String
+      X12_832: String
+      X12_833: String
+      X12_834: String
+      X12_835: String
+      X12_836: String
+      X12_837: String
+      X12_838: String
+      X12_839: String
+      X12_840: String
+      X12_841: String
+      X12_842: String
+      X12_843: String
+      X12_844: String
+      X12_845: String
+      X12_846: String
+      X12_847: String
+      X12_848: String
+      X12_849: String
+      X12_850: String
+      X12_851: String
+      X12_852: String
+      X12_853: String
+      X12_854: String
+      X12_855: String
+      X12_856: String
+      X12_857: String
+      X12_858: String
+      X12_859: String
+      X12_860: String
+      X12_861: String
+      X12_862: String
+      X12_863: String
+      X12_864: String
+      X12_865: String
+      X12_866: String
+      X12_867: String
+      X12_868: String
+      X12_869: String
+      X12_870: String
+      X12_871: String
+      X12_872: String
+      X12_873: String
+      X12_874: String
+      X12_875: String
+      X12_876: String
+      X12_877: String
+      X12_878: String
+      X12_879: String
+      X12_880: String
+      X12_881: String
+      X12_882: String
+      X12_883: String
+      X12_884: String
+      X12_885: String
+      X12_886: String
+      X12_887: String
+      X12_888: String
+      X12_889: String
+      X12_891: String
+      X12_893: String
+      X12_894: String
+      X12_895: String
+      X12_896: String
+      X12_920: String
+      X12_924: String
+      X12_925: String
+      X12_926: String
+      X12_928: String
+      X12_940: String
+      X12_943: String
+      X12_944: String
+      X12_945: String
+      X12_947: String
+      X12_980: String
+      X12_990: String
+      X12_993: String
+      X12_996: String
+      X12_997: String
+      X12_998: String
+      X12_999: String
+      X12_270_X279: String
+      X12_271_X279: String
+      X12_275_X210: String
+      X12_275_X211: String
+      X12_276_X212: String
+      X12_277_X212: String
+      X12_277_X214: String
+      X12_277_X364: String
+      X12_278_X217: String
+      X12_820_X218: String
+      X12_820_X306: String
+      X12_824_X186: String
+      X12_834_X220: String
+      X12_834_X307: String
+      X12_834_X318: String
+      X12_835_X221: String
+      X12_837_X222: String
+      X12_837_X223: String
+      X12_837_X224: String
+      X12_837_X291: String
+      X12_837_X292: String
+      X12_837_X298: String
+      X12_999_X231: String
+    end
+
+    module X12Version
+      VERSION_4010: String
+      VERSION_4030: String
+      VERSION_4050: String
+      VERSION_4060: String
+      VERSION_5010: String
+      VERSION_5010_HIPAA: String
+    end
+  end
+end

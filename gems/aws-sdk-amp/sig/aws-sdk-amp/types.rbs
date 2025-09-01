@@ -1,0 +1,1389 @@
+module Aws::Amp
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AlertManagerDefinitionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::AlertManagerDefinitionStatus,
+        ?data: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::AlertManagerDefinitionStatus?
+      attr_accessor data: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class AlertManagerDefinitionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class AmpConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_arn: String?
+    end
+
+    class CloudWatchLogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAlertManagerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?data: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor data: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAlertManagerDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::AlertManagerDefinitionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::AlertManagerDefinitionStatus?
+    end
+
+    class CreateLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?log_group_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor log_group_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::LoggingConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::LoggingConfigurationStatus?
+    end
+
+    class CreateQueryLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?destinations: Array[Types::LoggingDestination],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor destinations: Array[Types::LoggingDestination]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateQueryLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::QueryLoggingConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::QueryLoggingConfigurationStatus?
+    end
+
+    class CreateRuleGroupsNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?name: String,
+        ?data: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor name: String?
+      attr_accessor data: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRuleGroupsNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?status: Types::RuleGroupsNamespaceStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::RuleGroupsNamespaceStatus?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScraperRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?scrape_configuration: Types::ScrapeConfiguration,
+        ?source: Types::Source,
+        ?destination: Types::Destination,
+        ?role_configuration: Types::RoleConfiguration,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration?
+      attr_accessor source: Types::Source?
+      attr_accessor destination: Types::Destination?
+      attr_accessor role_configuration: Types::RoleConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScraperResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?arn: String,
+        ?status: Types::ScraperStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::ScraperStatus?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?arn: String,
+        ?status: Types::WorkspaceStatus,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::WorkspaceStatus?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class DeleteAlertManagerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteQueryLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteRuleGroupsNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteScraperRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteScraperResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?status: Types::ScraperStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor status: Types::ScraperStatus?
+    end
+
+    class DeleteWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DescribeAlertManagerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeAlertManagerDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alert_manager_definition: Types::AlertManagerDefinitionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alert_manager_definition: Types::AlertManagerDefinitionDescription?
+    end
+
+    class DescribeLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfigurationMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfigurationMetadata?
+    end
+
+    class DescribeQueryLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeQueryLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_logging_configuration: Types::QueryLoggingConfigurationMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_logging_configuration: Types::QueryLoggingConfigurationMetadata?
+    end
+
+    class DescribeRuleGroupsNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor name: String?
+    end
+
+    class DescribeRuleGroupsNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_groups_namespace: Types::RuleGroupsNamespaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_groups_namespace: Types::RuleGroupsNamespaceDescription?
+    end
+
+    class DescribeScraperRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+    end
+
+    class DescribeScraperResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper: Types::ScraperDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper: Types::ScraperDescription?
+    end
+
+    class DescribeWorkspaceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_configuration: Types::WorkspaceConfigurationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_configuration: Types::WorkspaceConfigurationDescription?
+    end
+
+    class DescribeWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class Destination
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?amp_configuration: Types::AmpConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amp_configuration: Types::AmpConfiguration?
+
+      class AmpConfiguration < Destination
+      end
+      class Unknown < Destination
+      end
+    end
+
+    class EksConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class GetDefaultScraperConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDefaultScraperConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class LimitsPerLabelSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits: Types::LimitsPerLabelSetEntry,
+        ?label_set: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits: Types::LimitsPerLabelSetEntry?
+      attr_accessor label_set: Hash[String, String]?
+    end
+
+    class LimitsPerLabelSetEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_series: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_series: Integer?
+    end
+
+    class ListRuleGroupsNamespacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRuleGroupsNamespacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_groups_namespaces: Array[Types::RuleGroupsNamespaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_groups_namespaces: Array[Types::RuleGroupsNamespaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScrapersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Hash[String, Array[String]],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListScrapersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scrapers: Array[Types::ScraperSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scrapers: Array[Types::ScraperSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListWorkspacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?alias: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor alias: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkspacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces: Array[Types::WorkspaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces: Array[Types::WorkspaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LoggingConfigurationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::LoggingConfigurationStatus,
+        ?workspace: String,
+        ?log_group_arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::LoggingConfigurationStatus?
+      attr_accessor workspace: String?
+      attr_accessor log_group_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class LoggingConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class LoggingDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogDestination,
+        ?filters: Types::LoggingFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogDestination?
+      attr_accessor filters: Types::LoggingFilter?
+    end
+
+    class LoggingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qsp_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qsp_threshold: Integer?
+    end
+
+    class PutAlertManagerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?data: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor data: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutAlertManagerDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::AlertManagerDefinitionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::AlertManagerDefinitionStatus?
+    end
+
+    class PutRuleGroupsNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?name: String,
+        ?data: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor name: String?
+      attr_accessor data: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutRuleGroupsNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?status: Types::RuleGroupsNamespaceStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::RuleGroupsNamespaceStatus?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class QueryLoggingConfigurationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::QueryLoggingConfigurationStatus,
+        ?workspace: String,
+        ?destinations: Array[Types::LoggingDestination],
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::QueryLoggingConfigurationStatus?
+      attr_accessor workspace: String?
+      attr_accessor destinations: Array[Types::LoggingDestination]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class QueryLoggingConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RoleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_role_arn: String,
+        ?target_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_role_arn: String?
+      attr_accessor target_role_arn: String?
+    end
+
+    class RuleGroupsNamespaceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?status: Types::RuleGroupsNamespaceStatus,
+        ?data: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: Types::RuleGroupsNamespaceStatus?
+      attr_accessor data: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RuleGroupsNamespaceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class RuleGroupsNamespaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?status: Types::RuleGroupsNamespaceStatus,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: Types::RuleGroupsNamespaceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ScrapeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?configuration_blob: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_blob: String?
+
+      class ConfigurationBlob < ScrapeConfiguration
+      end
+      class Unknown < ScrapeConfiguration
+      end
+    end
+
+    class ScraperDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?scraper_id: String,
+        ?arn: String,
+        ?role_arn: String,
+        ?status: Types::ScraperStatus,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?tags: Hash[String, String],
+        ?status_reason: String,
+        ?scrape_configuration: Types::ScrapeConfiguration,
+        ?source: Types::Source,
+        ?destination: Types::Destination,
+        ?role_configuration: Types::RoleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor scraper_id: String?
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: Types::ScraperStatus?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor status_reason: String?
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration?
+      attr_accessor source: Types::Source?
+      attr_accessor destination: Types::Destination?
+      attr_accessor role_configuration: Types::RoleConfiguration?
+    end
+
+    class ScraperStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+    end
+
+    class ScraperSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?scraper_id: String,
+        ?arn: String,
+        ?role_arn: String,
+        ?status: Types::ScraperStatus,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?tags: Hash[String, String],
+        ?status_reason: String,
+        ?source: Types::Source,
+        ?destination: Types::Destination,
+        ?role_configuration: Types::RoleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor scraper_id: String?
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: Types::ScraperStatus?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor status_reason: String?
+      attr_accessor source: Types::Source?
+      attr_accessor destination: Types::Destination?
+      attr_accessor role_configuration: Types::RoleConfiguration?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class Source
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?eks_configuration: Types::EksConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks_configuration: Types::EksConfiguration?
+
+      class EksConfiguration < Source
+      end
+      class Unknown < Source
+      end
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?log_group_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor log_group_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::LoggingConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::LoggingConfigurationStatus?
+    end
+
+    class UpdateQueryLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?destinations: Array[Types::LoggingDestination],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor destinations: Array[Types::LoggingDestination]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateQueryLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::QueryLoggingConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::QueryLoggingConfigurationStatus?
+    end
+
+    class UpdateScraperRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?alias: String,
+        ?scrape_configuration: Types::ScrapeConfiguration,
+        ?destination: Types::Destination,
+        ?role_configuration: Types::RoleConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor alias: String?
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration?
+      attr_accessor destination: Types::Destination?
+      attr_accessor role_configuration: Types::RoleConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateScraperResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?arn: String,
+        ?status: Types::ScraperStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::ScraperStatus?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateWorkspaceAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?alias: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor alias: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateWorkspaceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+        ?limits_per_label_set: Array[Types::LimitsPerLabelSet],
+        ?retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+      attr_accessor limits_per_label_set: Array[Types::LimitsPerLabelSet]?
+      attr_accessor retention_period_in_days: Integer?
+    end
+
+    class UpdateWorkspaceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::WorkspaceConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::WorkspaceConfigurationStatus?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class WorkspaceConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::WorkspaceConfigurationStatus,
+        ?limits_per_label_set: Array[Types::LimitsPerLabelSet],
+        ?retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::WorkspaceConfigurationStatus?
+      attr_accessor limits_per_label_set: Array[Types::LimitsPerLabelSet]?
+      attr_accessor retention_period_in_days: Integer?
+    end
+
+    class WorkspaceConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class WorkspaceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?alias: String,
+        ?arn: String,
+        ?status: Types::WorkspaceStatus,
+        ?prometheus_endpoint: String,
+        ?created_at: Time,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor alias: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::WorkspaceStatus?
+      attr_accessor prometheus_endpoint: String?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class WorkspaceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+    end
+
+    class WorkspaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?alias: String,
+        ?arn: String,
+        ?status: Types::WorkspaceStatus,
+        ?created_at: Time,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor alias: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::WorkspaceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+  end
+end

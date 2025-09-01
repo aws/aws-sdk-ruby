@@ -1,0 +1,150 @@
+module Aws::Organizations
+  module Errors
+    class AWSOrganizationsNotInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccessDeniedForDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class AccountAlreadyClosedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountNotRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountOwnerNotVerifiedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyInOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChildNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConstraintViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class CreateAccountStatusNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DestinationParentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateHandshakeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateOrganizationalUnitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicatePolicyAttachmentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicatePolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EffectivePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FinalizingOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HandshakeAlreadyInStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HandshakeConstraintViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class HandshakeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidHandshakeTransitionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MasterCannotLeaveOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotEmptyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationalUnitNotEmptyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationalUnitNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyChangesInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotAttachedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyTypeAlreadyEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyTypeNotAvailableForOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyTypeNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourcePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RootNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceParentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class UnsupportedAPIEndpointException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

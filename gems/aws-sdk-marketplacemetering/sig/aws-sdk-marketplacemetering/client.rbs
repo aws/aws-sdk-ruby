@@ -1,0 +1,122 @@
+module Aws::MarketplaceMetering
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MarketplaceMetering::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchMeterUsageResponse
+      include Smithy::Client::_Response[Types::BatchMeterUsageResult]
+      def results: () -> Array[Types::UsageRecordResult]?
+      def unprocessed_records: () -> Array[Types::UsageRecord]?
+    end
+    def batch_meter_usage: (
+      ?usage_records: Array[
+        {
+          timestamp: Time,
+          customer_identifier: String,
+          dimension: String,
+          quantity: Integer,
+          usage_allocations: Array[
+            {
+              allocated_usage_quantity: Integer,
+              tags: Array[
+                {
+                  key: String,
+                  value: String
+                }
+              ]
+            }
+          ],
+          customer_aws_account_id: String
+        }
+      ],
+      ?product_code: String
+    ) -> _BatchMeterUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchMeterUsageResponse
+
+    interface _MeterUsageResponse
+      include Smithy::Client::_Response[Types::MeterUsageResult]
+      def metering_record_id: () -> String?
+    end
+    def meter_usage: (
+      ?product_code: String,
+      ?timestamp: Time,
+      ?usage_dimension: String,
+      ?usage_quantity: Integer,
+      ?dry_run: bool,
+      ?usage_allocations: Array[
+        {
+          allocated_usage_quantity: Integer,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      ]
+    ) -> _MeterUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MeterUsageResponse
+
+    interface _RegisterUsageResponse
+      include Smithy::Client::_Response[Types::RegisterUsageResult]
+      def public_key_rotation_timestamp: () -> Time?
+      def signature: () -> String?
+    end
+    def register_usage: (
+      ?product_code: String,
+      ?public_key_version: Integer,
+      ?nonce: String
+    ) -> _RegisterUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterUsageResponse
+
+    interface _ResolveCustomerResponse
+      include Smithy::Client::_Response[Types::ResolveCustomerResult]
+      def customer_identifier: () -> String?
+      def product_code: () -> String?
+      def customer_aws_account_id: () -> String?
+    end
+    def resolve_customer: (
+      ?registration_token: String
+    ) -> _ResolveCustomerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveCustomerResponse
+  end
+end

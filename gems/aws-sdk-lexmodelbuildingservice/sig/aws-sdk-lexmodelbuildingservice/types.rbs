@@ -1,0 +1,2209 @@
+module Aws::LexModelBuildingService
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BotAliasMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_version: String,
+        ?bot_name: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?checksum: String,
+        ?conversation_logs: Types::ConversationLogsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_version: String?
+      attr_accessor bot_name: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor checksum: String?
+      attr_accessor conversation_logs: Types::ConversationLogsResponse?
+    end
+
+    class BotChannelAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_alias: String,
+        ?bot_name: String,
+        ?created_date: Time,
+        ?type: String,
+        ?bot_configuration: Hash[String, String],
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_alias: String?
+      attr_accessor bot_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor type: String?
+      attr_accessor bot_configuration: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class BotMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+    end
+
+    class BuiltinIntentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature: String,
+        ?supported_locales: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature: String?
+      attr_accessor supported_locales: Array[String]?
+    end
+
+    class BuiltinIntentSlot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class BuiltinSlotTypeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature: String,
+        ?supported_locales: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature: String?
+      attr_accessor supported_locales: Array[String]?
+    end
+
+    module ChannelStatus
+      IN_PROGRESS: String
+      CREATED: String
+      FAILED: String
+    end
+
+    module ChannelType
+      FACEBOOK: String
+      SLACK: String
+      TWILIO_SMS: String
+      KIK: String
+    end
+
+    class CodeHook
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?message_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor message_version: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContentType
+      PLAIN_TEXT: String
+      SSML: String
+      CUSTOM_PAYLOAD: String
+    end
+
+    class ConversationLogsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_settings: Array[Types::LogSettingsRequest],
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_settings: Array[Types::LogSettingsRequest]?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class ConversationLogsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_settings: Array[Types::LogSettingsResponse],
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_settings: Array[Types::LogSettingsResponse]?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class CreateBotVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor checksum: String?
+    end
+
+    class CreateBotVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?intents: Array[Types::Intent],
+        ?clarification_prompt: Types::Prompt,
+        ?abort_statement: Types::Statement,
+        ?status: String,
+        ?failure_reason: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?idle_session_ttl_in_seconds: Integer,
+        ?voice_id: String,
+        ?checksum: String,
+        ?version: String,
+        ?locale: String,
+        ?child_directed: bool,
+        ?enable_model_improvements: bool,
+        ?detect_sentiment: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor intents: Array[Types::Intent]?
+      attr_accessor clarification_prompt: Types::Prompt?
+      attr_accessor abort_statement: Types::Statement?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor idle_session_ttl_in_seconds: Integer?
+      attr_accessor voice_id: String?
+      attr_accessor checksum: String?
+      attr_accessor version: String?
+      attr_accessor locale: String?
+      attr_accessor child_directed: bool?
+      attr_accessor enable_model_improvements: bool?
+      attr_accessor detect_sentiment: bool?
+    end
+
+    class CreateIntentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor checksum: String?
+    end
+
+    class CreateIntentVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?slots: Array[Types::Slot],
+        ?sample_utterances: Array[String],
+        ?confirmation_prompt: Types::Prompt,
+        ?rejection_statement: Types::Statement,
+        ?follow_up_prompt: Types::FollowUpPrompt,
+        ?conclusion_statement: Types::Statement,
+        ?dialog_code_hook: Types::CodeHook,
+        ?fulfillment_activity: Types::FulfillmentActivity,
+        ?parent_intent_signature: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?kendra_configuration: Types::KendraConfiguration,
+        ?input_contexts: Array[Types::InputContext],
+        ?output_contexts: Array[Types::OutputContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor slots: Array[Types::Slot]?
+      attr_accessor sample_utterances: Array[String]?
+      attr_accessor confirmation_prompt: Types::Prompt?
+      attr_accessor rejection_statement: Types::Statement?
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt?
+      attr_accessor conclusion_statement: Types::Statement?
+      attr_accessor dialog_code_hook: Types::CodeHook?
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity?
+      attr_accessor parent_intent_signature: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor kendra_configuration: Types::KendraConfiguration?
+      attr_accessor input_contexts: Array[Types::InputContext]?
+      attr_accessor output_contexts: Array[Types::OutputContext]?
+    end
+
+    class CreateSlotTypeVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor checksum: String?
+    end
+
+    class CreateSlotTypeVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?enumeration_values: Array[Types::EnumerationValue],
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?value_selection_strategy: String,
+        ?parent_slot_type_signature: String,
+        ?slot_type_configurations: Array[Types::SlotTypeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor enumeration_values: Array[Types::EnumerationValue]?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor value_selection_strategy: String?
+      attr_accessor parent_slot_type_signature: String?
+      attr_accessor slot_type_configurations: Array[Types::SlotTypeConfiguration]?
+    end
+
+    class DeleteBotAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?bot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor bot_name: String?
+    end
+
+    class DeleteBotChannelAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?bot_name: String,
+        ?bot_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+    end
+
+    class DeleteBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteBotVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteIntentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteIntentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteSlotTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteSlotTypeVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteUtterancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor user_id: String?
+    end
+
+    module Destination
+      CLOUDWATCH_LOGS: String
+      S3: String
+    end
+
+    class EnumerationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?synonyms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor synonyms: Array[String]?
+    end
+
+    module ExportStatus
+      IN_PROGRESS: String
+      READY: String
+      FAILED: String
+    end
+
+    module ExportType
+      ALEXA_SKILLS_KIT: String
+      LEX: String
+    end
+
+    class FollowUpPrompt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prompt: Types::Prompt,
+        ?rejection_statement: Types::Statement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prompt: Types::Prompt?
+      attr_accessor rejection_statement: Types::Statement?
+    end
+
+    class FulfillmentActivity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code_hook: Types::CodeHook,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code_hook: Types::CodeHook?
+    end
+
+    module FulfillmentActivityType
+      RETURN_INTENT: String
+      CODE_HOOK: String
+    end
+
+    class GetBotAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?bot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor bot_name: String?
+    end
+
+    class GetBotAliasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_version: String,
+        ?bot_name: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?checksum: String,
+        ?conversation_logs: Types::ConversationLogsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_version: String?
+      attr_accessor bot_name: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor checksum: String?
+      attr_accessor conversation_logs: Types::ConversationLogsResponse?
+    end
+
+    class GetBotAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class GetBotAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_aliases: Array[Types::BotAliasMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_aliases: Array[Types::BotAliasMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBotChannelAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?bot_name: String,
+        ?bot_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+    end
+
+    class GetBotChannelAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_alias: String,
+        ?bot_name: String,
+        ?created_date: Time,
+        ?type: String,
+        ?bot_configuration: Hash[String, String],
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_alias: String?
+      attr_accessor bot_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor type: String?
+      attr_accessor bot_configuration: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetBotChannelAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class GetBotChannelAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_channel_associations: Array[Types::BotChannelAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_channel_associations: Array[Types::BotChannelAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_or_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_or_alias: String?
+    end
+
+    class GetBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?intents: Array[Types::Intent],
+        ?enable_model_improvements: bool,
+        ?nlu_intent_confidence_threshold: Float,
+        ?clarification_prompt: Types::Prompt,
+        ?abort_statement: Types::Statement,
+        ?status: String,
+        ?failure_reason: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?idle_session_ttl_in_seconds: Integer,
+        ?voice_id: String,
+        ?checksum: String,
+        ?version: String,
+        ?locale: String,
+        ?child_directed: bool,
+        ?detect_sentiment: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor intents: Array[Types::Intent]?
+      attr_accessor enable_model_improvements: bool?
+      attr_accessor nlu_intent_confidence_threshold: Float?
+      attr_accessor clarification_prompt: Types::Prompt?
+      attr_accessor abort_statement: Types::Statement?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor idle_session_ttl_in_seconds: Integer?
+      attr_accessor voice_id: String?
+      attr_accessor checksum: String?
+      attr_accessor version: String?
+      attr_accessor locale: String?
+      attr_accessor child_directed: bool?
+      attr_accessor detect_sentiment: bool?
+    end
+
+    class GetBotVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetBotVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bots: Array[Types::BotMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bots: Array[Types::BotMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class GetBotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bots: Array[Types::BotMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bots: Array[Types::BotMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBuiltinIntentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature: String?
+    end
+
+    class GetBuiltinIntentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature: String,
+        ?supported_locales: Array[String],
+        ?slots: Array[Types::BuiltinIntentSlot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature: String?
+      attr_accessor supported_locales: Array[String]?
+      attr_accessor slots: Array[Types::BuiltinIntentSlot]?
+    end
+
+    class GetBuiltinIntentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locale: String,
+        ?signature_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locale: String?
+      attr_accessor signature_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetBuiltinIntentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intents: Array[Types::BuiltinIntentMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intents: Array[Types::BuiltinIntentMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetBuiltinSlotTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locale: String,
+        ?signature_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locale: String?
+      attr_accessor signature_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetBuiltinSlotTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slot_types: Array[Types::BuiltinSlotTypeMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slot_types: Array[Types::BuiltinSlotTypeMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?resource_type: String,
+        ?export_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor resource_type: String?
+      attr_accessor export_type: String?
+    end
+
+    class GetExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?resource_type: String,
+        ?export_type: String,
+        ?export_status: String,
+        ?failure_reason: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor resource_type: String?
+      attr_accessor export_type: String?
+      attr_accessor export_status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor url: String?
+    end
+
+    class GetImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+    end
+
+    class GetImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_type: String,
+        ?merge_strategy: String,
+        ?import_id: String,
+        ?import_status: String,
+        ?failure_reason: Array[String],
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_type: String?
+      attr_accessor merge_strategy: String?
+      attr_accessor import_id: String?
+      attr_accessor import_status: String?
+      attr_accessor failure_reason: Array[String]?
+      attr_accessor created_date: Time?
+    end
+
+    class GetIntentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class GetIntentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?slots: Array[Types::Slot],
+        ?sample_utterances: Array[String],
+        ?confirmation_prompt: Types::Prompt,
+        ?rejection_statement: Types::Statement,
+        ?follow_up_prompt: Types::FollowUpPrompt,
+        ?conclusion_statement: Types::Statement,
+        ?dialog_code_hook: Types::CodeHook,
+        ?fulfillment_activity: Types::FulfillmentActivity,
+        ?parent_intent_signature: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?kendra_configuration: Types::KendraConfiguration,
+        ?input_contexts: Array[Types::InputContext],
+        ?output_contexts: Array[Types::OutputContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor slots: Array[Types::Slot]?
+      attr_accessor sample_utterances: Array[String]?
+      attr_accessor confirmation_prompt: Types::Prompt?
+      attr_accessor rejection_statement: Types::Statement?
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt?
+      attr_accessor conclusion_statement: Types::Statement?
+      attr_accessor dialog_code_hook: Types::CodeHook?
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity?
+      attr_accessor parent_intent_signature: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor kendra_configuration: Types::KendraConfiguration?
+      attr_accessor input_contexts: Array[Types::InputContext]?
+      attr_accessor output_contexts: Array[Types::OutputContext]?
+    end
+
+    class GetIntentVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetIntentVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intents: Array[Types::IntentMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intents: Array[Types::IntentMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetIntentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class GetIntentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intents: Array[Types::IntentMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intents: Array[Types::IntentMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetMigrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+    end
+
+    class GetMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+        ?v1_bot_name: String,
+        ?v1_bot_version: String,
+        ?v1_bot_locale: String,
+        ?v2_bot_id: String,
+        ?v2_bot_role: String,
+        ?migration_status: String,
+        ?migration_strategy: String,
+        ?migration_timestamp: Time,
+        ?alerts: Array[Types::MigrationAlert],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+      attr_accessor v1_bot_name: String?
+      attr_accessor v1_bot_version: String?
+      attr_accessor v1_bot_locale: String?
+      attr_accessor v2_bot_id: String?
+      attr_accessor v2_bot_role: String?
+      attr_accessor migration_status: String?
+      attr_accessor migration_strategy: String?
+      attr_accessor migration_timestamp: Time?
+      attr_accessor alerts: Array[Types::MigrationAlert]?
+    end
+
+    class GetMigrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by_attribute: String,
+        ?sort_by_order: String,
+        ?v1_bot_name_contains: String,
+        ?migration_status_equals: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by_attribute: String?
+      attr_accessor sort_by_order: String?
+      attr_accessor v1_bot_name_contains: String?
+      attr_accessor migration_status_equals: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetMigrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_summaries: Array[Types::MigrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_summaries: Array[Types::MigrationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSlotTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class GetSlotTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?enumeration_values: Array[Types::EnumerationValue],
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?value_selection_strategy: String,
+        ?parent_slot_type_signature: String,
+        ?slot_type_configurations: Array[Types::SlotTypeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor enumeration_values: Array[Types::EnumerationValue]?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor value_selection_strategy: String?
+      attr_accessor parent_slot_type_signature: String?
+      attr_accessor slot_type_configurations: Array[Types::SlotTypeConfiguration]?
+    end
+
+    class GetSlotTypeVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetSlotTypeVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slot_types: Array[Types::SlotTypeMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slot_types: Array[Types::SlotTypeMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSlotTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class GetSlotTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slot_types: Array[Types::SlotTypeMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slot_types: Array[Types::SlotTypeMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetUtterancesViewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_versions: Array[String],
+        ?status_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_versions: Array[String]?
+      attr_accessor status_type: String?
+    end
+
+    class GetUtterancesViewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?utterances: Array[Types::UtteranceList],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor utterances: Array[Types::UtteranceList]?
+    end
+
+    module ImportStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class InputContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class Intent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_name: String,
+        ?intent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_name: String?
+      attr_accessor intent_version: String?
+    end
+
+    class IntentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KendraConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kendra_index: String,
+        ?query_filter_string: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kendra_index: String?
+      attr_accessor query_filter_string: String?
+      attr_accessor role: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: String?
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module Locale
+      DE_DE: String
+      EN_AU: String
+      EN_GB: String
+      EN_IN: String
+      EN_US: String
+      ES_419: String
+      ES_ES: String
+      ES_US: String
+      FR_FR: String
+      FR_CA: String
+      IT_IT: String
+      JA_JP: String
+      KO_KR: String
+    end
+
+    class LogSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?destination: String,
+        ?kms_key_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class LogSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?destination: String,
+        ?kms_key_arn: String,
+        ?resource_arn: String,
+        ?resource_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_prefix: String?
+    end
+
+    module LogType
+      AUDIO: String
+      TEXT: String
+    end
+
+    module MergeStrategy
+      OVERWRITE_LATEST: String
+      FAIL_ON_CONFLICT: String
+    end
+
+    class Message
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?content: String,
+        ?group_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor content: String?
+      attr_accessor group_number: Integer?
+    end
+
+    class MigrationAlert
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+        ?details: Array[String],
+        ?reference_ur_ls: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+      attr_accessor details: Array[String]?
+      attr_accessor reference_ur_ls: Array[String]?
+    end
+
+    module MigrationAlertType
+      ERROR: String
+      WARN: String
+    end
+
+    module MigrationSortAttribute
+      V1_BOT_NAME: String
+      MIGRATION_DATE_TIME: String
+    end
+
+    module MigrationStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module MigrationStrategy
+      CREATE_NEW: String
+      UPDATE_EXISTING: String
+    end
+
+    class MigrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+        ?v1_bot_name: String,
+        ?v1_bot_version: String,
+        ?v1_bot_locale: String,
+        ?v2_bot_id: String,
+        ?v2_bot_role: String,
+        ?migration_status: String,
+        ?migration_strategy: String,
+        ?migration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+      attr_accessor v1_bot_name: String?
+      attr_accessor v1_bot_version: String?
+      attr_accessor v1_bot_locale: String?
+      attr_accessor v2_bot_id: String?
+      attr_accessor v2_bot_role: String?
+      attr_accessor migration_status: String?
+      attr_accessor migration_strategy: String?
+      attr_accessor migration_timestamp: Time?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ObfuscationSetting
+      NONE: String
+      DEFAULT_OBFUSCATION: String
+    end
+
+    class OutputContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?time_to_live_in_seconds: Integer,
+        ?turns_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor time_to_live_in_seconds: Integer?
+      attr_accessor turns_to_live: Integer?
+    end
+
+    class PreconditionFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ProcessBehavior
+      SAVE: String
+      BUILD: String
+    end
+
+    class Prompt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::Message],
+        ?max_attempts: Integer,
+        ?response_card: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::Message]?
+      attr_accessor max_attempts: Integer?
+      attr_accessor response_card: String?
+    end
+
+    class PutBotAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_version: String,
+        ?bot_name: String,
+        ?checksum: String,
+        ?conversation_logs: Types::ConversationLogsRequest,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_version: String?
+      attr_accessor bot_name: String?
+      attr_accessor checksum: String?
+      attr_accessor conversation_logs: Types::ConversationLogsRequest?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutBotAliasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?bot_version: String,
+        ?bot_name: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?checksum: String,
+        ?conversation_logs: Types::ConversationLogsResponse,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor bot_version: String?
+      attr_accessor bot_name: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor checksum: String?
+      attr_accessor conversation_logs: Types::ConversationLogsResponse?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?intents: Array[Types::Intent],
+        ?enable_model_improvements: bool,
+        ?nlu_intent_confidence_threshold: Float,
+        ?clarification_prompt: Types::Prompt,
+        ?abort_statement: Types::Statement,
+        ?idle_session_ttl_in_seconds: Integer,
+        ?voice_id: String,
+        ?checksum: String,
+        ?process_behavior: String,
+        ?locale: String,
+        ?child_directed: bool,
+        ?detect_sentiment: bool,
+        ?create_version: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor intents: Array[Types::Intent]?
+      attr_accessor enable_model_improvements: bool?
+      attr_accessor nlu_intent_confidence_threshold: Float?
+      attr_accessor clarification_prompt: Types::Prompt?
+      attr_accessor abort_statement: Types::Statement?
+      attr_accessor idle_session_ttl_in_seconds: Integer?
+      attr_accessor voice_id: String?
+      attr_accessor checksum: String?
+      attr_accessor process_behavior: String?
+      attr_accessor locale: String?
+      attr_accessor child_directed: bool?
+      attr_accessor detect_sentiment: bool?
+      attr_accessor create_version: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?intents: Array[Types::Intent],
+        ?enable_model_improvements: bool,
+        ?nlu_intent_confidence_threshold: Float,
+        ?clarification_prompt: Types::Prompt,
+        ?abort_statement: Types::Statement,
+        ?status: String,
+        ?failure_reason: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?idle_session_ttl_in_seconds: Integer,
+        ?voice_id: String,
+        ?checksum: String,
+        ?version: String,
+        ?locale: String,
+        ?child_directed: bool,
+        ?create_version: bool,
+        ?detect_sentiment: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor intents: Array[Types::Intent]?
+      attr_accessor enable_model_improvements: bool?
+      attr_accessor nlu_intent_confidence_threshold: Float?
+      attr_accessor clarification_prompt: Types::Prompt?
+      attr_accessor abort_statement: Types::Statement?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor idle_session_ttl_in_seconds: Integer?
+      attr_accessor voice_id: String?
+      attr_accessor checksum: String?
+      attr_accessor version: String?
+      attr_accessor locale: String?
+      attr_accessor child_directed: bool?
+      attr_accessor create_version: bool?
+      attr_accessor detect_sentiment: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutIntentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?slots: Array[Types::Slot],
+        ?sample_utterances: Array[String],
+        ?confirmation_prompt: Types::Prompt,
+        ?rejection_statement: Types::Statement,
+        ?follow_up_prompt: Types::FollowUpPrompt,
+        ?conclusion_statement: Types::Statement,
+        ?dialog_code_hook: Types::CodeHook,
+        ?fulfillment_activity: Types::FulfillmentActivity,
+        ?parent_intent_signature: String,
+        ?checksum: String,
+        ?create_version: bool,
+        ?kendra_configuration: Types::KendraConfiguration,
+        ?input_contexts: Array[Types::InputContext],
+        ?output_contexts: Array[Types::OutputContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor slots: Array[Types::Slot]?
+      attr_accessor sample_utterances: Array[String]?
+      attr_accessor confirmation_prompt: Types::Prompt?
+      attr_accessor rejection_statement: Types::Statement?
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt?
+      attr_accessor conclusion_statement: Types::Statement?
+      attr_accessor dialog_code_hook: Types::CodeHook?
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity?
+      attr_accessor parent_intent_signature: String?
+      attr_accessor checksum: String?
+      attr_accessor create_version: bool?
+      attr_accessor kendra_configuration: Types::KendraConfiguration?
+      attr_accessor input_contexts: Array[Types::InputContext]?
+      attr_accessor output_contexts: Array[Types::OutputContext]?
+    end
+
+    class PutIntentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?slots: Array[Types::Slot],
+        ?sample_utterances: Array[String],
+        ?confirmation_prompt: Types::Prompt,
+        ?rejection_statement: Types::Statement,
+        ?follow_up_prompt: Types::FollowUpPrompt,
+        ?conclusion_statement: Types::Statement,
+        ?dialog_code_hook: Types::CodeHook,
+        ?fulfillment_activity: Types::FulfillmentActivity,
+        ?parent_intent_signature: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?create_version: bool,
+        ?kendra_configuration: Types::KendraConfiguration,
+        ?input_contexts: Array[Types::InputContext],
+        ?output_contexts: Array[Types::OutputContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor slots: Array[Types::Slot]?
+      attr_accessor sample_utterances: Array[String]?
+      attr_accessor confirmation_prompt: Types::Prompt?
+      attr_accessor rejection_statement: Types::Statement?
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt?
+      attr_accessor conclusion_statement: Types::Statement?
+      attr_accessor dialog_code_hook: Types::CodeHook?
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity?
+      attr_accessor parent_intent_signature: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor create_version: bool?
+      attr_accessor kendra_configuration: Types::KendraConfiguration?
+      attr_accessor input_contexts: Array[Types::InputContext]?
+      attr_accessor output_contexts: Array[Types::OutputContext]?
+    end
+
+    class PutSlotTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?enumeration_values: Array[Types::EnumerationValue],
+        ?checksum: String,
+        ?value_selection_strategy: String,
+        ?create_version: bool,
+        ?parent_slot_type_signature: String,
+        ?slot_type_configurations: Array[Types::SlotTypeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor enumeration_values: Array[Types::EnumerationValue]?
+      attr_accessor checksum: String?
+      attr_accessor value_selection_strategy: String?
+      attr_accessor create_version: bool?
+      attr_accessor parent_slot_type_signature: String?
+      attr_accessor slot_type_configurations: Array[Types::SlotTypeConfiguration]?
+    end
+
+    class PutSlotTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?enumeration_values: Array[Types::EnumerationValue],
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+        ?checksum: String,
+        ?value_selection_strategy: String,
+        ?create_version: bool,
+        ?parent_slot_type_signature: String,
+        ?slot_type_configurations: Array[Types::SlotTypeConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor enumeration_values: Array[Types::EnumerationValue]?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+      attr_accessor checksum: String?
+      attr_accessor value_selection_strategy: String?
+      attr_accessor create_version: bool?
+      attr_accessor parent_slot_type_signature: String?
+      attr_accessor slot_type_configurations: Array[Types::SlotTypeConfiguration]?
+    end
+
+    module ReferenceType
+      INTENT: String
+      BOT: String
+      BOTALIAS: String
+      BOTCHANNEL: String
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_type: String,
+        ?example_reference: Types::ResourceReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_type: String?
+      attr_accessor example_reference: Types::ResourceReference?
+    end
+
+    class ResourceReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    module ResourceType
+      BOT: String
+      INTENT: String
+      SLOT_TYPE: String
+    end
+
+    class Slot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?slot_constraint: String,
+        ?slot_type: String,
+        ?slot_type_version: String,
+        ?value_elicitation_prompt: Types::Prompt,
+        ?priority: Integer,
+        ?sample_utterances: Array[String],
+        ?response_card: String,
+        ?obfuscation_setting: String,
+        ?default_value_spec: Types::SlotDefaultValueSpec,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor slot_constraint: String?
+      attr_accessor slot_type: String?
+      attr_accessor slot_type_version: String?
+      attr_accessor value_elicitation_prompt: Types::Prompt?
+      attr_accessor priority: Integer?
+      attr_accessor sample_utterances: Array[String]?
+      attr_accessor response_card: String?
+      attr_accessor obfuscation_setting: String?
+      attr_accessor default_value_spec: Types::SlotDefaultValueSpec?
+    end
+
+    module SlotConstraint
+      REQUIRED: String
+      OPTIONAL: String
+    end
+
+    class SlotDefaultValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: String?
+    end
+
+    class SlotDefaultValueSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value_list: Array[Types::SlotDefaultValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value_list: Array[Types::SlotDefaultValue]?
+    end
+
+    class SlotTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regex_configuration: Types::SlotTypeRegexConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regex_configuration: Types::SlotTypeRegexConfiguration?
+    end
+
+    class SlotTypeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?last_updated_date: Time,
+        ?created_date: Time,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor version: String?
+    end
+
+    class SlotTypeRegexConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern: String?
+    end
+
+    module SlotValueSelectionStrategy
+      ORIGINAL_VALUE: String
+      TOP_RESOLUTION: String
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+        ?resource_type: String,
+        ?merge_strategy: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+      attr_accessor resource_type: String?
+      attr_accessor merge_strategy: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_type: String,
+        ?merge_strategy: String,
+        ?import_id: String,
+        ?import_status: String,
+        ?tags: Array[Types::Tag],
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_type: String?
+      attr_accessor merge_strategy: String?
+      attr_accessor import_id: String?
+      attr_accessor import_status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_date: Time?
+    end
+
+    class StartMigrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v1_bot_name: String,
+        ?v1_bot_version: String,
+        ?v2_bot_name: String,
+        ?v2_bot_role: String,
+        ?migration_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1_bot_name: String?
+      attr_accessor v1_bot_version: String?
+      attr_accessor v2_bot_name: String?
+      attr_accessor v2_bot_role: String?
+      attr_accessor migration_strategy: String?
+    end
+
+    class StartMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v1_bot_name: String,
+        ?v1_bot_version: String,
+        ?v1_bot_locale: String,
+        ?v2_bot_id: String,
+        ?v2_bot_role: String,
+        ?migration_id: String,
+        ?migration_strategy: String,
+        ?migration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1_bot_name: String?
+      attr_accessor v1_bot_version: String?
+      attr_accessor v1_bot_locale: String?
+      attr_accessor v2_bot_id: String?
+      attr_accessor v2_bot_role: String?
+      attr_accessor migration_id: String?
+      attr_accessor migration_strategy: String?
+      attr_accessor migration_timestamp: Time?
+    end
+
+    class Statement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::Message],
+        ?response_card: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::Message]?
+      attr_accessor response_card: String?
+    end
+
+    module Status
+      BUILDING: String
+      READY: String
+      READY_BASIC_TESTING: String
+      FAILED: String
+      NOT_BUILT: String
+    end
+
+    module StatusType
+      DETECTED: String
+      MISSED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UtteranceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?utterance_string: String,
+        ?count: Integer,
+        ?distinct_users: Integer,
+        ?first_uttered_date: Time,
+        ?last_uttered_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utterance_string: String?
+      attr_accessor count: Integer?
+      attr_accessor distinct_users: Integer?
+      attr_accessor first_uttered_date: Time?
+      attr_accessor last_uttered_date: Time?
+    end
+
+    class UtteranceList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_version: String,
+        ?utterances: Array[Types::UtteranceData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_version: String?
+      attr_accessor utterances: Array[Types::UtteranceData]?
+    end
+  end
+end

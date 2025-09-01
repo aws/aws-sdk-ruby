@@ -1,0 +1,215 @@
+module Aws::OSIS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::OSIS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def create_pipeline: (
+      ?pipeline_name: String,
+      ?min_units: Integer,
+      ?max_units: Integer,
+      ?pipeline_configuration_body: String,
+      ?log_publishing_options: {
+        is_logging_enabled: bool,
+        cloud_watch_log_destination: {
+          log_group: String
+        }
+      },
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        vpc_attachment_options: {
+          attach_to_vpc: bool,
+          cidr_block: String
+        },
+        vpc_endpoint_management: String
+      },
+      ?buffer_options: {
+        persistent_buffer_enabled: bool
+      },
+      ?encryption_at_rest_options: {
+        kms_key_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?pipeline_role_arn: String
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Types::DeletePipelineResponse]
+    end
+    def delete_pipeline: (
+      ?pipeline_name: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _GetPipelineResponse
+      include Smithy::Client::_Response[Types::GetPipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def get_pipeline: (
+      ?pipeline_name: String
+    ) -> _GetPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineResponse
+
+    interface _GetPipelineBlueprintResponse
+      include Smithy::Client::_Response[Types::GetPipelineBlueprintResponse]
+      def blueprint: () -> Types::PipelineBlueprint?
+      def format: () -> String?
+    end
+    def get_pipeline_blueprint: (
+      ?blueprint_name: String,
+      ?format: String
+    ) -> _GetPipelineBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineBlueprintResponse
+
+    interface _GetPipelineChangeProgressResponse
+      include Smithy::Client::_Response[Types::GetPipelineChangeProgressResponse]
+      def change_progress_statuses: () -> Array[Types::ChangeProgressStatus]?
+    end
+    def get_pipeline_change_progress: (
+      ?pipeline_name: String
+    ) -> _GetPipelineChangeProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineChangeProgressResponse
+
+    interface _ListPipelineBlueprintsResponse
+      include Smithy::Client::_Response[Types::ListPipelineBlueprintsResponse]
+      def blueprints: () -> Array[Types::PipelineBlueprintSummary]?
+    end
+    def list_pipeline_blueprints: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineBlueprintsResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesResponse]
+      def next_token: () -> String?
+      def pipelines: () -> Array[Types::PipelineSummary]?
+    end
+    def list_pipelines: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartPipelineResponse
+      include Smithy::Client::_Response[Types::StartPipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def start_pipeline: (
+      ?pipeline_name: String
+    ) -> _StartPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipelineResponse
+
+    interface _StopPipelineResponse
+      include Smithy::Client::_Response[Types::StopPipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def stop_pipeline: (
+      ?pipeline_name: String
+    ) -> _StopPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPipelineResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdatePipelineResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def update_pipeline: (
+      ?pipeline_name: String,
+      ?min_units: Integer,
+      ?max_units: Integer,
+      ?pipeline_configuration_body: String,
+      ?log_publishing_options: {
+        is_logging_enabled: bool,
+        cloud_watch_log_destination: {
+          log_group: String
+        }
+      },
+      ?buffer_options: {
+        persistent_buffer_enabled: bool
+      },
+      ?encryption_at_rest_options: {
+        kms_key_arn: String
+      },
+      ?pipeline_role_arn: String
+    ) -> _UpdatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineResponse
+
+    interface _ValidatePipelineResponse
+      include Smithy::Client::_Response[Types::ValidatePipelineResponse]
+      def is_valid: () -> bool?
+      def errors: () -> Array[Types::ValidationMessage]?
+    end
+    def validate_pipeline: (
+      ?pipeline_configuration_body: String
+    ) -> _ValidatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidatePipelineResponse
+  end
+end

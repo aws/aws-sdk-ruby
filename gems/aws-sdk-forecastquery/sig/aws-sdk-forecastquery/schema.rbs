@@ -1,0 +1,32 @@
+module Aws::Forecastquery
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Arn: StringShape
+    AttributeName: StringShape
+    AttributeValue: StringShape
+    DataPoint: StructureShape
+    DateTime: StringShape
+    Double: FloatShape
+    ErrorMessage: StringShape
+    Filters: MapShape
+    Forecast: StructureShape
+    InvalidInputException: StructureShape
+    InvalidNextTokenException: StructureShape
+    LimitExceededException: StructureShape
+    LongArn: StringShape
+    NextToken: StringShape
+    Predictions: MapShape
+    QueryForecastRequest: StructureShape
+    QueryForecastResponse: StructureShape
+    QueryWhatIfForecastRequest: StructureShape
+    QueryWhatIfForecastResponse: StructureShape
+    ResourceInUseException: StructureShape
+    ResourceNotFoundException: StructureShape
+    Statistic: StringShape
+    TimeSeries: ListShape
+    Timestamp: StringShape
+
+    AmazonForecastRuntime: ServiceShape
+  end
+end

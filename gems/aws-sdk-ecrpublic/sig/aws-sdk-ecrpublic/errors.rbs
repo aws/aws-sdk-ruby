@@ -1,0 +1,80 @@
+module Aws::ECRPUBLIC
+  module Errors
+    class EmptyUploadException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageDigestDoesNotMatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageTagAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLayerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLayerPartException < Smithy::Client::ServiceError
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def upload_id: () -> String?
+      def last_valid_byte_received: () -> Integer?
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayerAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayerPartTooSmallException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayersNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReferencedImagesNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RegistryNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryCatalogDataNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNotEmptyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryPolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedCommandException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UploadNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,1137 @@
+module Aws::Route53RecoveryReadiness
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CellOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_arn: String,
+        ?cell_name: String,
+        ?cells: Array[String],
+        ?parent_readiness_scopes: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_arn: String?
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+      attr_accessor parent_readiness_scopes: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCellRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_name: String,
+        ?cells: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCellResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_arn: String,
+        ?cell_name: String,
+        ?cells: Array[String],
+        ?parent_readiness_scopes: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_arn: String?
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+      attr_accessor parent_readiness_scopes: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCrossAccountAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_authorization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_authorization: String?
+    end
+
+    class CreateCrossAccountAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_authorization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_authorization: String?
+    end
+
+    class CreateReadinessCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_name: String,
+        ?resource_set_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateReadinessCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_arn: String,
+        ?readiness_check_name: String,
+        ?resource_set: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_arn: String?
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecoveryGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecoveryGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_arn: String,
+        ?recovery_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_arn: String?
+      attr_accessor recovery_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResourceSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResourceSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_arn: String,
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_arn: String?
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DNSTargetResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?hosted_zone_arn: String,
+        ?record_set_id: String,
+        ?record_type: String,
+        ?target_resource: Types::TargetResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor hosted_zone_arn: String?
+      attr_accessor record_set_id: String?
+      attr_accessor record_type: String?
+      attr_accessor target_resource: Types::TargetResource?
+    end
+
+    class DeleteCellRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_name: String?
+    end
+
+    class DeleteCrossAccountAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_authorization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_authorization: String?
+    end
+
+    class DeleteCrossAccountAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReadinessCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_name: String?
+    end
+
+    class DeleteRecoveryGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_group_name: String?
+    end
+
+    class DeleteResourceSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_name: String?
+    end
+
+    class GetArchitectureRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?recovery_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor recovery_group_name: String?
+    end
+
+    class GetArchitectureRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_audit_timestamp: Time,
+        ?next_token: String,
+        ?recommendations: Array[Types::Recommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_audit_timestamp: Time?
+      attr_accessor next_token: String?
+      attr_accessor recommendations: Array[Types::Recommendation]?
+    end
+
+    class GetCellReadinessSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetCellReadinessSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?readiness: String,
+        ?readiness_checks: Array[Types::ReadinessCheckSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor readiness: String?
+      attr_accessor readiness_checks: Array[Types::ReadinessCheckSummary]?
+    end
+
+    class GetCellRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_name: String?
+    end
+
+    class GetCellResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_arn: String,
+        ?cell_name: String,
+        ?cells: Array[String],
+        ?parent_readiness_scopes: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_arn: String?
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+      attr_accessor parent_readiness_scopes: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetReadinessCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_name: String?
+    end
+
+    class GetReadinessCheckResourceStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?readiness_check_name: String,
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_identifier: String?
+    end
+
+    class GetReadinessCheckResourceStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?readiness: String,
+        ?rules: Array[Types::RuleResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor readiness: String?
+      attr_accessor rules: Array[Types::RuleResult]?
+    end
+
+    class GetReadinessCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_arn: String,
+        ?readiness_check_name: String,
+        ?resource_set: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_arn: String?
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetReadinessCheckStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?readiness_check_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor readiness_check_name: String?
+    end
+
+    class GetReadinessCheckStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::Message],
+        ?next_token: String,
+        ?readiness: String,
+        ?resources: Array[Types::ResourceResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::Message]?
+      attr_accessor next_token: String?
+      attr_accessor readiness: String?
+      attr_accessor resources: Array[Types::ResourceResult]?
+    end
+
+    class GetRecoveryGroupReadinessSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?recovery_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor recovery_group_name: String?
+    end
+
+    class GetRecoveryGroupReadinessSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?readiness: String,
+        ?readiness_checks: Array[Types::ReadinessCheckSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor readiness: String?
+      attr_accessor readiness_checks: Array[Types::ReadinessCheckSummary]?
+    end
+
+    class GetRecoveryGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_group_name: String?
+    end
+
+    class GetRecoveryGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_arn: String,
+        ?recovery_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_arn: String?
+      attr_accessor recovery_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetResourceSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_name: String?
+    end
+
+    class GetResourceSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_arn: String,
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_arn: String?
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCellsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCellsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[Types::CellOutput],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[Types::CellOutput]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountAuthorizationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountAuthorizationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_authorizations: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_authorizations: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReadinessChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReadinessChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?readiness_checks: Array[Types::ReadinessCheckOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor readiness_checks: Array[Types::ReadinessCheckOutput]?
+    end
+
+    class ListRecoveryGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recovery_groups: Array[Types::RecoveryGroupOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recovery_groups: Array[Types::RecoveryGroupOutput]?
+    end
+
+    class ListResourceSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_sets: Array[Types::ResourceSetOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_sets: Array[Types::ResourceSetOutput]?
+    end
+
+    class ListRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?rule_description: String,
+        ?rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor rule_id: String?
+    end
+
+    class ListRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?rules: Array[Types::ListRulesOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor rules: Array[Types::ListRulesOutput]?
+    end
+
+    class ListTagsForResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Message
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_text: String?
+    end
+
+    class NLBResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class R53ResourceRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?record_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor record_set_id: String?
+    end
+
+    module Readiness
+      READY: String
+      NOT_READY: String
+      UNKNOWN: String
+      NOT_AUTHORIZED: String
+    end
+
+    class ReadinessCheckOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_arn: String,
+        ?readiness_check_name: String,
+        ?resource_set: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_arn: String?
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ReadinessCheckSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness: String,
+        ?readiness_check_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness: String?
+      attr_accessor readiness_check_name: String?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_text: String?
+    end
+
+    class RecoveryGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_arn: String,
+        ?recovery_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_arn: String?
+      attr_accessor recovery_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_id: String,
+        ?dns_target_resource: Types::DNSTargetResource,
+        ?readiness_scopes: Array[String],
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_id: String?
+      attr_accessor dns_target_resource: Types::DNSTargetResource?
+      attr_accessor readiness_scopes: Array[String]?
+      attr_accessor resource_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_id: String,
+        ?last_checked_timestamp: Time,
+        ?readiness: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_id: String?
+      attr_accessor last_checked_timestamp: Time?
+      attr_accessor readiness: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ResourceSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_arn: String,
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_arn: String?
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_checked_timestamp: Time,
+        ?messages: Array[Types::Message],
+        ?readiness: String,
+        ?rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_checked_timestamp: Time?
+      attr_accessor messages: Array[Types::Message]?
+      attr_accessor readiness: String?
+      attr_accessor rule_id: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nlb_resource: Types::NLBResource,
+        ?r53_resource: Types::R53ResourceRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nlb_resource: Types::NLBResource?
+      attr_accessor r53_resource: Types::R53ResourceRecord?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateCellRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_name: String,
+        ?cells: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+    end
+
+    class UpdateCellResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_arn: String,
+        ?cell_name: String,
+        ?cells: Array[String],
+        ?parent_readiness_scopes: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_arn: String?
+      attr_accessor cell_name: String?
+      attr_accessor cells: Array[String]?
+      attr_accessor parent_readiness_scopes: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateReadinessCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_name: String,
+        ?resource_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set_name: String?
+    end
+
+    class UpdateReadinessCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?readiness_check_arn: String,
+        ?readiness_check_name: String,
+        ?resource_set: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor readiness_check_arn: String?
+      attr_accessor readiness_check_name: String?
+      attr_accessor resource_set: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateRecoveryGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_name: String?
+    end
+
+    class UpdateRecoveryGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cells: Array[String],
+        ?recovery_group_arn: String,
+        ?recovery_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cells: Array[String]?
+      attr_accessor recovery_group_arn: String?
+      attr_accessor recovery_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateResourceSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+    end
+
+    class UpdateResourceSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_set_arn: String,
+        ?resource_set_name: String,
+        ?resource_set_type: String,
+        ?resources: Array[Types::Resource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_set_arn: String?
+      attr_accessor resource_set_name: String?
+      attr_accessor resource_set_type: String?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,1424 @@
+module Aws::TranscribeStreaming
+  module Types
+
+    class Alternative
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: String,
+        ?items: Array[Types::Item],
+        ?entities: Array[Types::Entity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: String?
+      attr_accessor items: Array[Types::Item]?
+      attr_accessor entities: Array[Types::Entity]?
+    end
+
+    class AudioEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_chunk: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_chunk: String?
+    end
+
+    class AudioStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audio_event: Types::AudioEvent,
+        ?configuration_event: Types::ConfigurationEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_event: Types::AudioEvent?
+      attr_accessor configuration_event: Types::ConfigurationEvent?
+
+      class AudioEvent < AudioStream
+      end
+      class ConfigurationEvent < AudioStream
+      end
+      class Unknown < AudioStream
+      end
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CallAnalyticsEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+        ?category: String,
+        ?type: String,
+        ?content: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor content: String?
+      attr_accessor confidence: Float?
+    end
+
+    class CallAnalyticsItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+        ?type: String,
+        ?content: String,
+        ?confidence: Float,
+        ?vocabulary_filter_match: bool,
+        ?stable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+      attr_accessor type: String?
+      attr_accessor content: String?
+      attr_accessor confidence: Float?
+      attr_accessor vocabulary_filter_match: bool?
+      attr_accessor stable: bool?
+    end
+
+    module CallAnalyticsLanguageCode
+      EN_US: String
+      EN_GB: String
+      ES_US: String
+      FR_CA: String
+      FR_FR: String
+      EN_AU: String
+      IT_IT: String
+      DE_DE: String
+      PT_BR: String
+    end
+
+    class CallAnalyticsTranscriptResultStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?utterance_event: Types::UtteranceEvent,
+        ?category_event: Types::CategoryEvent,
+        ?bad_request_exception: Types::BadRequestException,
+        ?limit_exceeded_exception: Types::LimitExceededException,
+        ?internal_failure_exception: Types::InternalFailureException,
+        ?conflict_exception: Types::ConflictException,
+        ?service_unavailable_exception: Types::ServiceUnavailableException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utterance_event: Types::UtteranceEvent?
+      attr_accessor category_event: Types::CategoryEvent?
+      attr_accessor bad_request_exception: Types::BadRequestException?
+      attr_accessor limit_exceeded_exception: Types::LimitExceededException?
+      attr_accessor internal_failure_exception: Types::InternalFailureException?
+      attr_accessor conflict_exception: Types::ConflictException?
+      attr_accessor service_unavailable_exception: Types::ServiceUnavailableException?
+
+      class UtteranceEvent < CallAnalyticsTranscriptResultStream
+      end
+      class CategoryEvent < CallAnalyticsTranscriptResultStream
+      end
+      class BadRequestException < CallAnalyticsTranscriptResultStream
+      end
+      class LimitExceededException < CallAnalyticsTranscriptResultStream
+      end
+      class InternalFailureException < CallAnalyticsTranscriptResultStream
+      end
+      class ConflictException < CallAnalyticsTranscriptResultStream
+      end
+      class ServiceUnavailableException < CallAnalyticsTranscriptResultStream
+      end
+      class Unknown < CallAnalyticsTranscriptResultStream
+      end
+    end
+
+    class CategoryEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matched_categories: Array[String],
+        ?matched_details: Hash[String, Types::PointsOfInterest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matched_categories: Array[String]?
+      attr_accessor matched_details: Hash[String, Types::PointsOfInterest]?
+    end
+
+    class ChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class CharacterOffsets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin: Integer,
+        ?end: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin: Integer?
+      attr_accessor end: Integer?
+    end
+
+    class ClinicalNoteGenerationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clinical_note_output_location: String,
+        ?transcript_output_location: String,
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clinical_note_output_location: String?
+      attr_accessor transcript_output_location: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class ClinicalNoteGenerationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_bucket_name: String,
+        ?note_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_bucket_name: String?
+      attr_accessor note_template: String?
+    end
+
+    module ClinicalNoteGenerationStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class ConfigurationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_definitions: Array[Types::ChannelDefinition],
+        ?post_call_analytics_settings: Types::PostCallAnalyticsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_definitions: Array[Types::ChannelDefinition]?
+      attr_accessor post_call_analytics_settings: Types::PostCallAnalyticsSettings?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContentIdentificationType
+      PII: String
+    end
+
+    module ContentRedactionOutput
+      REDACTED: String
+      REDACTED_AND_UNREDACTED: String
+    end
+
+    module ContentRedactionType
+      PII: String
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Float,
+        ?end_time: Float,
+        ?category: String,
+        ?type: String,
+        ?content: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor category: String?
+      attr_accessor type: String?
+      attr_accessor content: String?
+      attr_accessor confidence: Float?
+    end
+
+    class GetMedicalScribeStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class GetMedicalScribeStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_stream_details: Types::MedicalScribeStreamDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_stream_details: Types::MedicalScribeStreamDetails?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IssueDetected
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?character_offsets: Types::CharacterOffsets,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor character_offsets: Types::CharacterOffsets?
+    end
+
+    class Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Float,
+        ?end_time: Float,
+        ?type: String,
+        ?content: String,
+        ?vocabulary_filter_match: bool,
+        ?speaker: String,
+        ?confidence: Float,
+        ?stable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor type: String?
+      attr_accessor content: String?
+      attr_accessor vocabulary_filter_match: bool?
+      attr_accessor speaker: String?
+      attr_accessor confidence: Float?
+      attr_accessor stable: bool?
+    end
+
+    module ItemType
+      PRONUNCIATION: String
+      PUNCTUATION: String
+    end
+
+    module LanguageCode
+      EN_US: String
+      EN_GB: String
+      ES_US: String
+      FR_CA: String
+      FR_FR: String
+      EN_AU: String
+      IT_IT: String
+      DE_DE: String
+      PT_BR: String
+      JA_JP: String
+      KO_KR: String
+      ZH_CN: String
+      TH_TH: String
+      ES_ES: String
+      AR_SA: String
+      PT_PT: String
+      CA_ES: String
+      AR_AE: String
+      HI_IN: String
+      ZH_HK: String
+      NL_NL: String
+      NO_NO: String
+      SV_SE: String
+      PL_PL: String
+      FI_FI: String
+      ZH_TW: String
+      EN_IN: String
+      EN_IE: String
+      EN_NZ: String
+      EN_AB: String
+      EN_ZA: String
+      EN_WL: String
+      DE_CH: String
+      AF_ZA: String
+      EU_ES: String
+      HR_HR: String
+      CS_CZ: String
+      DA_DK: String
+      FA_IR: String
+      GL_ES: String
+      EL_GR: String
+      HE_IL: String
+      ID_ID: String
+      LV_LV: String
+      MS_MY: String
+      RO_RO: String
+      RU_RU: String
+      SR_RS: String
+      SK_SK: String
+      SO_SO: String
+      TL_PH: String
+      UK_UA: String
+      VI_VN: String
+      ZU_ZA: String
+    end
+
+    class LanguageWithScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor score: Float?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MediaEncoding
+      PCM: String
+      OGG_OPUS: String
+      FLAC: String
+    end
+
+    class MedicalAlternative
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: String,
+        ?items: Array[Types::MedicalItem],
+        ?entities: Array[Types::MedicalEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: String?
+      attr_accessor items: Array[Types::MedicalItem]?
+      attr_accessor entities: Array[Types::MedicalEntity]?
+    end
+
+    module MedicalContentIdentificationType
+      PHI: String
+    end
+
+    class MedicalEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Float,
+        ?end_time: Float,
+        ?category: String,
+        ?content: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor category: String?
+      attr_accessor content: String?
+      attr_accessor confidence: Float?
+    end
+
+    class MedicalItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Float,
+        ?end_time: Float,
+        ?type: String,
+        ?content: String,
+        ?confidence: Float,
+        ?speaker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor type: String?
+      attr_accessor content: String?
+      attr_accessor confidence: Float?
+      attr_accessor speaker: String?
+    end
+
+    class MedicalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?start_time: Float,
+        ?end_time: Float,
+        ?is_partial: bool,
+        ?alternatives: Array[Types::MedicalAlternative],
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor is_partial: bool?
+      attr_accessor alternatives: Array[Types::MedicalAlternative]?
+      attr_accessor channel_id: String?
+    end
+
+    class MedicalScribeAudioEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_chunk: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_chunk: String?
+    end
+
+    class MedicalScribeChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class MedicalScribeConfigurationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?resource_access_role_arn: String,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?encryption_settings: Types::MedicalScribeEncryptionSettings,
+        ?post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings,
+        ?medical_scribe_context: Types::MedicalScribeContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor resource_access_role_arn: String?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor encryption_settings: Types::MedicalScribeEncryptionSettings?
+      attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings?
+      attr_accessor medical_scribe_context: Types::MedicalScribeContext?
+    end
+
+    class MedicalScribeContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?patient_context: Types::MedicalScribePatientContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor patient_context: Types::MedicalScribePatientContext?
+    end
+
+    class MedicalScribeEncryptionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_encryption_context: Hash[String, String],
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor kms_key_id: String?
+    end
+
+    class MedicalScribeInputStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audio_event: Types::MedicalScribeAudioEvent,
+        ?session_control_event: Types::MedicalScribeSessionControlEvent,
+        ?configuration_event: Types::MedicalScribeConfigurationEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_event: Types::MedicalScribeAudioEvent?
+      attr_accessor session_control_event: Types::MedicalScribeSessionControlEvent?
+      attr_accessor configuration_event: Types::MedicalScribeConfigurationEvent?
+
+      class AudioEvent < MedicalScribeInputStream
+      end
+      class SessionControlEvent < MedicalScribeInputStream
+      end
+      class ConfigurationEvent < MedicalScribeInputStream
+      end
+      class Unknown < MedicalScribeInputStream
+      end
+    end
+
+    module MedicalScribeLanguageCode
+      EN_US: String
+    end
+
+    module MedicalScribeMediaEncoding
+      PCM: String
+      OGG_OPUS: String
+      FLAC: String
+    end
+
+    module MedicalScribeNoteTemplate
+      HISTORY_AND_PHYSICAL: String
+      GIRPP: String
+      DAP: String
+      SIRP: String
+      BIRP: String
+      BEHAVIORAL_SOAP: String
+      PHYSICAL_SOAP: String
+    end
+
+    module MedicalScribeParticipantRole
+      PATIENT: String
+      CLINICIAN: String
+    end
+
+    class MedicalScribePatientContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pronouns: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pronouns: String?
+    end
+
+    class MedicalScribePostStreamAnalyticsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clinical_note_generation_result: Types::ClinicalNoteGenerationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clinical_note_generation_result: Types::ClinicalNoteGenerationResult?
+    end
+
+    class MedicalScribePostStreamAnalyticsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings?
+    end
+
+    class MedicalScribeResultStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?transcript_event: Types::MedicalScribeTranscriptEvent,
+        ?bad_request_exception: Types::BadRequestException,
+        ?limit_exceeded_exception: Types::LimitExceededException,
+        ?internal_failure_exception: Types::InternalFailureException,
+        ?conflict_exception: Types::ConflictException,
+        ?service_unavailable_exception: Types::ServiceUnavailableException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_event: Types::MedicalScribeTranscriptEvent?
+      attr_accessor bad_request_exception: Types::BadRequestException?
+      attr_accessor limit_exceeded_exception: Types::LimitExceededException?
+      attr_accessor internal_failure_exception: Types::InternalFailureException?
+      attr_accessor conflict_exception: Types::ConflictException?
+      attr_accessor service_unavailable_exception: Types::ServiceUnavailableException?
+
+      class TranscriptEvent < MedicalScribeResultStream
+      end
+      class BadRequestException < MedicalScribeResultStream
+      end
+      class LimitExceededException < MedicalScribeResultStream
+      end
+      class InternalFailureException < MedicalScribeResultStream
+      end
+      class ConflictException < MedicalScribeResultStream
+      end
+      class ServiceUnavailableException < MedicalScribeResultStream
+      end
+      class Unknown < MedicalScribeResultStream
+      end
+    end
+
+    class MedicalScribeSessionControlEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module MedicalScribeSessionControlEventType
+      END_OF_SESSION: String
+    end
+
+    class MedicalScribeStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?stream_created_at: Time,
+        ?stream_ended_at: Time,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?resource_access_role_arn: String,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?encryption_settings: Types::MedicalScribeEncryptionSettings,
+        ?stream_status: String,
+        ?post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings,
+        ?post_stream_analytics_result: Types::MedicalScribePostStreamAnalyticsResult,
+        ?medical_scribe_context_provided: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor stream_created_at: Time?
+      attr_accessor stream_ended_at: Time?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor resource_access_role_arn: String?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor encryption_settings: Types::MedicalScribeEncryptionSettings?
+      attr_accessor stream_status: String?
+      attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings?
+      attr_accessor post_stream_analytics_result: Types::MedicalScribePostStreamAnalyticsResult?
+      attr_accessor medical_scribe_context_provided: bool?
+    end
+
+    module MedicalScribeStreamStatus
+      IN_PROGRESS: String
+      PAUSED: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class MedicalScribeTranscriptEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_segment: Types::MedicalScribeTranscriptSegment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_segment: Types::MedicalScribeTranscriptSegment?
+    end
+
+    class MedicalScribeTranscriptItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_audio_time: Float,
+        ?end_audio_time: Float,
+        ?type: String,
+        ?confidence: Float,
+        ?content: String,
+        ?vocabulary_filter_match: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_audio_time: Float?
+      attr_accessor end_audio_time: Float?
+      attr_accessor type: String?
+      attr_accessor confidence: Float?
+      attr_accessor content: String?
+      attr_accessor vocabulary_filter_match: bool?
+    end
+
+    module MedicalScribeTranscriptItemType
+      PRONUNCIATION: String
+      PUNCTUATION: String
+    end
+
+    class MedicalScribeTranscriptSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_id: String,
+        ?begin_audio_time: Float,
+        ?end_audio_time: Float,
+        ?content: String,
+        ?items: Array[Types::MedicalScribeTranscriptItem],
+        ?is_partial: bool,
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_id: String?
+      attr_accessor begin_audio_time: Float?
+      attr_accessor end_audio_time: Float?
+      attr_accessor content: String?
+      attr_accessor items: Array[Types::MedicalScribeTranscriptItem]?
+      attr_accessor is_partial: bool?
+      attr_accessor channel_id: String?
+    end
+
+    module MedicalScribeVocabularyFilterMethod
+      REMOVE: String
+      MASK: String
+      TAG: String
+    end
+
+    class MedicalTranscript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::MedicalResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::MedicalResult]?
+    end
+
+    class MedicalTranscriptEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: Types::MedicalTranscript,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: Types::MedicalTranscript?
+    end
+
+    class MedicalTranscriptResultStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?transcript_event: Types::MedicalTranscriptEvent,
+        ?bad_request_exception: Types::BadRequestException,
+        ?limit_exceeded_exception: Types::LimitExceededException,
+        ?internal_failure_exception: Types::InternalFailureException,
+        ?conflict_exception: Types::ConflictException,
+        ?service_unavailable_exception: Types::ServiceUnavailableException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_event: Types::MedicalTranscriptEvent?
+      attr_accessor bad_request_exception: Types::BadRequestException?
+      attr_accessor limit_exceeded_exception: Types::LimitExceededException?
+      attr_accessor internal_failure_exception: Types::InternalFailureException?
+      attr_accessor conflict_exception: Types::ConflictException?
+      attr_accessor service_unavailable_exception: Types::ServiceUnavailableException?
+
+      class TranscriptEvent < MedicalTranscriptResultStream
+      end
+      class BadRequestException < MedicalTranscriptResultStream
+      end
+      class LimitExceededException < MedicalTranscriptResultStream
+      end
+      class InternalFailureException < MedicalTranscriptResultStream
+      end
+      class ConflictException < MedicalTranscriptResultStream
+      end
+      class ServiceUnavailableException < MedicalTranscriptResultStream
+      end
+      class Unknown < MedicalTranscriptResultStream
+      end
+    end
+
+    module PartialResultsStability
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module ParticipantRole
+      AGENT: String
+      CUSTOMER: String
+    end
+
+    class PointsOfInterest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp_ranges: Array[Types::TimestampRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp_ranges: Array[Types::TimestampRange]?
+    end
+
+    class PostCallAnalyticsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_location: String,
+        ?data_access_role_arn: String,
+        ?content_redaction_output: String,
+        ?output_encryption_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_location: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor content_redaction_output: String?
+      attr_accessor output_encryption_kms_key_id: String?
+    end
+
+    module Pronouns
+      HE_HIM: String
+      SHE_HER: String
+      THEY_THEM: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Result
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?start_time: Float,
+        ?end_time: Float,
+        ?is_partial: bool,
+        ?alternatives: Array[Types::Alternative],
+        ?channel_id: String,
+        ?language_code: String,
+        ?language_identification: Array[Types::LanguageWithScore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor start_time: Float?
+      attr_accessor end_time: Float?
+      attr_accessor is_partial: bool?
+      attr_accessor alternatives: Array[Types::Alternative]?
+      attr_accessor channel_id: String?
+      attr_accessor language_code: String?
+      attr_accessor language_identification: Array[Types::LanguageWithScore]?
+    end
+
+    module Sentiment
+      POSITIVE: String
+      NEGATIVE: String
+      MIXED: String
+      NEUTRAL: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Specialty
+      PRIMARYCARE: String
+      CARDIOLOGY: String
+      NEUROLOGY: String
+      ONCOLOGY: String
+      RADIOLOGY: String
+      UROLOGY: String
+    end
+
+    class StartCallAnalyticsStreamTranscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?session_id: String,
+        ?audio_stream: Types::AudioStream,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?language_model_name: String,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor session_id: String?
+      attr_accessor audio_stream: Types::AudioStream?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor language_model_name: String?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+    end
+
+    class StartCallAnalyticsStreamTranscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?session_id: String,
+        ?call_analytics_transcript_result_stream: Types::CallAnalyticsTranscriptResultStream,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?language_model_name: String,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor session_id: String?
+      attr_accessor call_analytics_transcript_result_stream: Types::CallAnalyticsTranscriptResultStream?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor language_model_name: String?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+    end
+
+    class StartMedicalScribeStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?input_stream: Types::MedicalScribeInputStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor input_stream: Types::MedicalScribeInputStream?
+    end
+
+    class StartMedicalScribeStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?request_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?result_stream: Types::MedicalScribeResultStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor request_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor result_stream: Types::MedicalScribeResultStream?
+    end
+
+    class StartMedicalStreamTranscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?specialty: String,
+        ?type: String,
+        ?show_speaker_label: bool,
+        ?session_id: String,
+        ?audio_stream: Types::AudioStream,
+        ?enable_channel_identification: bool,
+        ?number_of_channels: Integer,
+        ?content_identification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor specialty: String?
+      attr_accessor type: String?
+      attr_accessor show_speaker_label: bool?
+      attr_accessor session_id: String?
+      attr_accessor audio_stream: Types::AudioStream?
+      attr_accessor enable_channel_identification: bool?
+      attr_accessor number_of_channels: Integer?
+      attr_accessor content_identification_type: String?
+    end
+
+    class StartMedicalStreamTranscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?specialty: String,
+        ?type: String,
+        ?show_speaker_label: bool,
+        ?session_id: String,
+        ?transcript_result_stream: Types::MedicalTranscriptResultStream,
+        ?enable_channel_identification: bool,
+        ?number_of_channels: Integer,
+        ?content_identification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor specialty: String?
+      attr_accessor type: String?
+      attr_accessor show_speaker_label: bool?
+      attr_accessor session_id: String?
+      attr_accessor transcript_result_stream: Types::MedicalTranscriptResultStream?
+      attr_accessor enable_channel_identification: bool?
+      attr_accessor number_of_channels: Integer?
+      attr_accessor content_identification_type: String?
+    end
+
+    class StartStreamTranscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?session_id: String,
+        ?audio_stream: Types::AudioStream,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?show_speaker_label: bool,
+        ?enable_channel_identification: bool,
+        ?number_of_channels: Integer,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+        ?language_model_name: String,
+        ?identify_language: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?identify_multiple_languages: bool,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor session_id: String?
+      attr_accessor audio_stream: Types::AudioStream?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor show_speaker_label: bool?
+      attr_accessor enable_channel_identification: bool?
+      attr_accessor number_of_channels: Integer?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+      attr_accessor language_model_name: String?
+      attr_accessor identify_language: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
+    end
+
+    class StartStreamTranscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?vocabulary_name: String,
+        ?session_id: String,
+        ?transcript_result_stream: Types::TranscriptResultStream,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?show_speaker_label: bool,
+        ?enable_channel_identification: bool,
+        ?number_of_channels: Integer,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+        ?language_model_name: String,
+        ?identify_language: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?identify_multiple_languages: bool,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor session_id: String?
+      attr_accessor transcript_result_stream: Types::TranscriptResultStream?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor show_speaker_label: bool?
+      attr_accessor enable_channel_identification: bool?
+      attr_accessor number_of_channels: Integer?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+      attr_accessor language_model_name: String?
+      attr_accessor identify_language: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
+    end
+
+    class TimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+    end
+
+    class Transcript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::Result],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::Result]?
+    end
+
+    class TranscriptEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: Types::Transcript,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: Types::Transcript?
+    end
+
+    class TranscriptResultStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?transcript_event: Types::TranscriptEvent,
+        ?bad_request_exception: Types::BadRequestException,
+        ?limit_exceeded_exception: Types::LimitExceededException,
+        ?internal_failure_exception: Types::InternalFailureException,
+        ?conflict_exception: Types::ConflictException,
+        ?service_unavailable_exception: Types::ServiceUnavailableException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_event: Types::TranscriptEvent?
+      attr_accessor bad_request_exception: Types::BadRequestException?
+      attr_accessor limit_exceeded_exception: Types::LimitExceededException?
+      attr_accessor internal_failure_exception: Types::InternalFailureException?
+      attr_accessor conflict_exception: Types::ConflictException?
+      attr_accessor service_unavailable_exception: Types::ServiceUnavailableException?
+
+      class TranscriptEvent < TranscriptResultStream
+      end
+      class BadRequestException < TranscriptResultStream
+      end
+      class LimitExceededException < TranscriptResultStream
+      end
+      class InternalFailureException < TranscriptResultStream
+      end
+      class ConflictException < TranscriptResultStream
+      end
+      class ServiceUnavailableException < TranscriptResultStream
+      end
+      class Unknown < TranscriptResultStream
+      end
+    end
+
+    module Type
+      CONVERSATION: String
+      DICTATION: String
+    end
+
+    class UtteranceEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?utterance_id: String,
+        ?is_partial: bool,
+        ?participant_role: String,
+        ?begin_offset_millis: Integer,
+        ?end_offset_millis: Integer,
+        ?transcript: String,
+        ?items: Array[Types::CallAnalyticsItem],
+        ?entities: Array[Types::CallAnalyticsEntity],
+        ?sentiment: String,
+        ?issues_detected: Array[Types::IssueDetected],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utterance_id: String?
+      attr_accessor is_partial: bool?
+      attr_accessor participant_role: String?
+      attr_accessor begin_offset_millis: Integer?
+      attr_accessor end_offset_millis: Integer?
+      attr_accessor transcript: String?
+      attr_accessor items: Array[Types::CallAnalyticsItem]?
+      attr_accessor entities: Array[Types::CallAnalyticsEntity]?
+      attr_accessor sentiment: String?
+      attr_accessor issues_detected: Array[Types::IssueDetected]?
+    end
+
+    module VocabularyFilterMethod
+      REMOVE: String
+      MASK: String
+      TAG: String
+    end
+  end
+end

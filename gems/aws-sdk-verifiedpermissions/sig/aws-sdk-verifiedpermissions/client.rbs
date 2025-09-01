@@ -1,0 +1,908 @@
+module Aws::VerifiedPermissions
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::VerifiedPermissions::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetPolicyResponse
+      include Smithy::Client::_Response[Types::BatchGetPolicyOutput]
+      def results: () -> Array[Types::BatchGetPolicyOutputItem]?
+      def errors: () -> Array[Types::BatchGetPolicyErrorItem]?
+    end
+    def batch_get_policy: (
+      ?requests: Array[
+        {
+          policy_store_id: String,
+          policy_id: String
+        }
+      ]
+    ) -> _BatchGetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPolicyResponse
+
+    interface _BatchIsAuthorizedResponse
+      include Smithy::Client::_Response[Types::BatchIsAuthorizedOutput]
+      def results: () -> Array[Types::BatchIsAuthorizedOutputItem]?
+    end
+    def batch_is_authorized: (
+      ?policy_store_id: String,
+      ?entities: {
+        entity_list: Array[
+          {
+            identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            attributes: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            parents: Array[
+              {
+                entity_type: untyped,
+                entity_id: untyped
+              }
+            ]
+          }
+        ],
+        cedar_json: String
+      },
+      ?requests: Array[
+        {
+          principal: {
+            entity_type: String,
+            entity_id: String
+          },
+          action: {
+            action_type: String,
+            action_id: String
+          },
+          resource: untyped,
+          context: {
+            context_map: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            cedar_json: String
+          }
+        }
+      ]
+    ) -> _BatchIsAuthorizedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchIsAuthorizedResponse
+
+    interface _BatchIsAuthorizedWithTokenResponse
+      include Smithy::Client::_Response[Types::BatchIsAuthorizedWithTokenOutput]
+      def principal: () -> Types::EntityIdentifier?
+      def results: () -> Array[Types::BatchIsAuthorizedWithTokenOutputItem]?
+    end
+    def batch_is_authorized_with_token: (
+      ?policy_store_id: String,
+      ?identity_token: String,
+      ?access_token: String,
+      ?entities: {
+        entity_list: Array[
+          {
+            identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            attributes: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            parents: Array[
+              {
+                entity_type: untyped,
+                entity_id: untyped
+              }
+            ]
+          }
+        ],
+        cedar_json: String
+      },
+      ?requests: Array[
+        {
+          action: {
+            action_type: String,
+            action_id: String
+          },
+          resource: {
+            entity_type: String,
+            entity_id: String
+          },
+          context: {
+            context_map: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            cedar_json: String
+          }
+        }
+      ]
+    ) -> _BatchIsAuthorizedWithTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchIsAuthorizedWithTokenResponse
+
+    interface _CreateIdentitySourceResponse
+      include Smithy::Client::_Response[Types::CreateIdentitySourceOutput]
+      def created_date: () -> Time?
+      def identity_source_id: () -> String?
+      def last_updated_date: () -> Time?
+      def policy_store_id: () -> String?
+    end
+    def create_identity_source: (
+      ?client_token: String,
+      ?policy_store_id: String,
+      ?configuration: {
+        cognito_user_pool_configuration: {
+          user_pool_arn: String,
+          client_ids: Array[String],
+          group_configuration: {
+            group_entity_type: String
+          }
+        },
+        open_id_connect_configuration: {
+          issuer: String,
+          entity_id_prefix: String,
+          group_configuration: {
+            group_claim: String,
+            group_entity_type: untyped
+          },
+          token_selection: {
+            access_token_only: {
+              principal_id_claim: untyped,
+              audiences: Array[String]
+            },
+            identity_token_only: {
+              principal_id_claim: untyped,
+              client_ids: untyped
+            }
+          }
+        }
+      },
+      ?principal_entity_type: String
+    ) -> _CreateIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentitySourceResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyOutput]
+      def policy_store_id: () -> String?
+      def policy_id: () -> String?
+      def policy_type: () -> String?
+      def principal: () -> Types::EntityIdentifier?
+      def resource: () -> Types::EntityIdentifier?
+      def actions: () -> Array[Types::ActionIdentifier]?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def effect: () -> String?
+    end
+    def create_policy: (
+      ?client_token: String,
+      ?policy_store_id: String,
+      ?definition: {
+        static: {
+          description: String,
+          statement: String
+        },
+        template_linked: {
+          policy_template_id: String,
+          principal: {
+            entity_type: String,
+            entity_id: String
+          },
+          resource: untyped
+        }
+      }
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _CreatePolicyStoreResponse
+      include Smithy::Client::_Response[Types::CreatePolicyStoreOutput]
+      def policy_store_id: () -> String?
+      def arn: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def create_policy_store: (
+      ?client_token: String,
+      ?validation_settings: {
+        mode: String
+      },
+      ?description: String,
+      ?deletion_protection: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyStoreResponse
+
+    interface _CreatePolicyTemplateResponse
+      include Smithy::Client::_Response[Types::CreatePolicyTemplateOutput]
+      def policy_store_id: () -> String?
+      def policy_template_id: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def create_policy_template: (
+      ?client_token: String,
+      ?policy_store_id: String,
+      ?description: String,
+      ?statement: String
+    ) -> _CreatePolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyTemplateResponse
+
+    interface _DeleteIdentitySourceResponse
+      include Smithy::Client::_Response[Types::DeleteIdentitySourceOutput]
+    end
+    def delete_identity_source: (
+      ?policy_store_id: String,
+      ?identity_source_id: String
+    ) -> _DeleteIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentitySourceResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Types::DeletePolicyOutput]
+    end
+    def delete_policy: (
+      ?policy_store_id: String,
+      ?policy_id: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeletePolicyStoreResponse
+      include Smithy::Client::_Response[Types::DeletePolicyStoreOutput]
+    end
+    def delete_policy_store: (
+      ?policy_store_id: String
+    ) -> _DeletePolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyStoreResponse
+
+    interface _DeletePolicyTemplateResponse
+      include Smithy::Client::_Response[Types::DeletePolicyTemplateOutput]
+    end
+    def delete_policy_template: (
+      ?policy_store_id: String,
+      ?policy_template_id: String
+    ) -> _DeletePolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyTemplateResponse
+
+    interface _GetIdentitySourceResponse
+      include Smithy::Client::_Response[Types::GetIdentitySourceOutput]
+      def created_date: () -> Time?
+      def details: () -> Types::IdentitySourceDetails?
+      def identity_source_id: () -> String?
+      def last_updated_date: () -> Time?
+      def policy_store_id: () -> String?
+      def principal_entity_type: () -> String?
+      def configuration: () -> Types::ConfigurationDetail?
+    end
+    def get_identity_source: (
+      ?policy_store_id: String,
+      ?identity_source_id: String
+    ) -> _GetIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentitySourceResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyOutput]
+      def policy_store_id: () -> String?
+      def policy_id: () -> String?
+      def policy_type: () -> String?
+      def principal: () -> Types::EntityIdentifier?
+      def resource: () -> Types::EntityIdentifier?
+      def actions: () -> Array[Types::ActionIdentifier]?
+      def definition: () -> Types::PolicyDefinitionDetail?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def effect: () -> String?
+    end
+    def get_policy: (
+      ?policy_store_id: String,
+      ?policy_id: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetPolicyStoreResponse
+      include Smithy::Client::_Response[Types::GetPolicyStoreOutput]
+      def policy_store_id: () -> String?
+      def arn: () -> String?
+      def validation_settings: () -> Types::ValidationSettings?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def description: () -> String?
+      def deletion_protection: () -> String?
+      def cedar_version: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_policy_store: (
+      ?policy_store_id: String,
+      ?tags: bool
+    ) -> _GetPolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyStoreResponse
+
+    interface _GetPolicyTemplateResponse
+      include Smithy::Client::_Response[Types::GetPolicyTemplateOutput]
+      def policy_store_id: () -> String?
+      def policy_template_id: () -> String?
+      def description: () -> String?
+      def statement: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def get_policy_template: (
+      ?policy_store_id: String,
+      ?policy_template_id: String
+    ) -> _GetPolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyTemplateResponse
+
+    interface _GetSchemaResponse
+      include Smithy::Client::_Response[Types::GetSchemaOutput]
+      def policy_store_id: () -> String?
+      def schema: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def namespaces: () -> Array[String]?
+    end
+    def get_schema: (
+      ?policy_store_id: String
+    ) -> _GetSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaResponse
+
+    interface _IsAuthorizedResponse
+      include Smithy::Client::_Response[Types::IsAuthorizedOutput]
+      def decision: () -> String?
+      def determining_policies: () -> Array[Types::DeterminingPolicyItem]?
+      def errors: () -> Array[Types::EvaluationErrorItem]?
+    end
+    def is_authorized: (
+      ?policy_store_id: String,
+      ?principal: {
+        entity_type: String,
+        entity_id: String
+      },
+      ?action: {
+        action_type: String,
+        action_id: String
+      },
+      ?resource: {
+        entity_type: String,
+        entity_id: String
+      },
+      ?context: {
+        context_map: Hash[String,
+          {
+            boolean: bool,
+            entity_identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            long: Integer,
+            string: String,
+            set: Array[
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: untyped,
+                record: Hash[String,
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: untyped,
+                    ipaddr: String,
+                    decimal: String
+                  }
+                ],
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            record: untyped,
+            ipaddr: untyped,
+            decimal: untyped
+          }
+        ],
+        cedar_json: String
+      },
+      ?entities: {
+        entity_list: Array[
+          {
+            identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            attributes: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            parents: Array[
+              {
+                entity_type: untyped,
+                entity_id: untyped
+              }
+            ]
+          }
+        ],
+        cedar_json: String
+      }
+    ) -> _IsAuthorizedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IsAuthorizedResponse
+
+    interface _IsAuthorizedWithTokenResponse
+      include Smithy::Client::_Response[Types::IsAuthorizedWithTokenOutput]
+      def decision: () -> String?
+      def determining_policies: () -> Array[Types::DeterminingPolicyItem]?
+      def errors: () -> Array[Types::EvaluationErrorItem]?
+      def principal: () -> Types::EntityIdentifier?
+    end
+    def is_authorized_with_token: (
+      ?policy_store_id: String,
+      ?identity_token: String,
+      ?access_token: String,
+      ?action: {
+        action_type: String,
+        action_id: String
+      },
+      ?resource: {
+        entity_type: String,
+        entity_id: String
+      },
+      ?context: {
+        context_map: Hash[String,
+          {
+            boolean: bool,
+            entity_identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            long: Integer,
+            string: String,
+            set: Array[
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: untyped,
+                record: Hash[String,
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: untyped,
+                    ipaddr: String,
+                    decimal: String
+                  }
+                ],
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            record: untyped,
+            ipaddr: untyped,
+            decimal: untyped
+          }
+        ],
+        cedar_json: String
+      },
+      ?entities: {
+        entity_list: Array[
+          {
+            identifier: {
+              entity_type: String,
+              entity_id: String
+            },
+            attributes: Hash[String,
+              {
+                boolean: bool,
+                entity_identifier: untyped,
+                long: Integer,
+                string: String,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: String,
+                        decimal: String
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped
+              }
+            ],
+            parents: Array[
+              {
+                entity_type: untyped,
+                entity_id: untyped
+              }
+            ]
+          }
+        ],
+        cedar_json: String
+      }
+    ) -> _IsAuthorizedWithTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IsAuthorizedWithTokenResponse
+
+    interface _ListIdentitySourcesResponse
+      include Smithy::Client::_Response[Types::ListIdentitySourcesOutput]
+      def next_token: () -> String?
+      def identity_sources: () -> Array[Types::IdentitySourceItem]?
+    end
+    def list_identity_sources: (
+      ?policy_store_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          principal_entity_type: String
+        }
+      ]
+    ) -> _ListIdentitySourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentitySourcesResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesOutput]
+      def next_token: () -> String?
+      def policies: () -> Array[Types::PolicyItem]?
+    end
+    def list_policies: (
+      ?policy_store_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        principal: {
+          unspecified: bool,
+          identifier: {
+            entity_type: String,
+            entity_id: String
+          }
+        },
+        resource: untyped,
+        policy_type: String,
+        policy_template_id: String
+      }
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicyStoresResponse
+      include Smithy::Client::_Response[Types::ListPolicyStoresOutput]
+      def next_token: () -> String?
+      def policy_stores: () -> Array[Types::PolicyStoreItem]?
+    end
+    def list_policy_stores: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPolicyStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyStoresResponse
+
+    interface _ListPolicyTemplatesResponse
+      include Smithy::Client::_Response[Types::ListPolicyTemplatesOutput]
+      def next_token: () -> String?
+      def policy_templates: () -> Array[Types::PolicyTemplateItem]?
+    end
+    def list_policy_templates: (
+      ?policy_store_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPolicyTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyTemplatesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutSchemaResponse
+      include Smithy::Client::_Response[Types::PutSchemaOutput]
+      def policy_store_id: () -> String?
+      def namespaces: () -> Array[String]?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def put_schema: (
+      ?policy_store_id: String,
+      ?definition: {
+        cedar_json: String
+      }
+    ) -> _PutSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSchemaResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIdentitySourceResponse
+      include Smithy::Client::_Response[Types::UpdateIdentitySourceOutput]
+      def created_date: () -> Time?
+      def identity_source_id: () -> String?
+      def last_updated_date: () -> Time?
+      def policy_store_id: () -> String?
+    end
+    def update_identity_source: (
+      ?policy_store_id: String,
+      ?identity_source_id: String,
+      ?update_configuration: {
+        cognito_user_pool_configuration: {
+          user_pool_arn: String,
+          client_ids: Array[String],
+          group_configuration: {
+            group_entity_type: String
+          }
+        },
+        open_id_connect_configuration: {
+          issuer: String,
+          entity_id_prefix: String,
+          group_configuration: {
+            group_claim: String,
+            group_entity_type: untyped
+          },
+          token_selection: {
+            access_token_only: {
+              principal_id_claim: untyped,
+              audiences: Array[String]
+            },
+            identity_token_only: {
+              principal_id_claim: untyped,
+              client_ids: untyped
+            }
+          }
+        }
+      },
+      ?principal_entity_type: String
+    ) -> _UpdateIdentitySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentitySourceResponse
+
+    interface _UpdatePolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyOutput]
+      def policy_store_id: () -> String?
+      def policy_id: () -> String?
+      def policy_type: () -> String?
+      def principal: () -> Types::EntityIdentifier?
+      def resource: () -> Types::EntityIdentifier?
+      def actions: () -> Array[Types::ActionIdentifier]?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def effect: () -> String?
+    end
+    def update_policy: (
+      ?policy_store_id: String,
+      ?policy_id: String,
+      ?definition: {
+        static: {
+          description: String,
+          statement: String
+        }
+      }
+    ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+
+    interface _UpdatePolicyStoreResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyStoreOutput]
+      def policy_store_id: () -> String?
+      def arn: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def update_policy_store: (
+      ?policy_store_id: String,
+      ?validation_settings: {
+        mode: String
+      },
+      ?deletion_protection: String,
+      ?description: String
+    ) -> _UpdatePolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyStoreResponse
+
+    interface _UpdatePolicyTemplateResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyTemplateOutput]
+      def policy_store_id: () -> String?
+      def policy_template_id: () -> String?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+    end
+    def update_policy_template: (
+      ?policy_store_id: String,
+      ?policy_template_id: String,
+      ?description: String,
+      ?statement: String
+    ) -> _UpdatePolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyTemplateResponse
+  end
+end

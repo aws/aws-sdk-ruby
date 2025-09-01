@@ -1,0 +1,1202 @@
+module Aws::TimestreamQuery
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountSettingsNotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns_configuration: Types::SnsConfiguration,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns_configuration: Types::SnsConfiguration?
+      attr_accessor role_arn: String?
+    end
+
+    class CancelQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class CancelQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cancellation_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cancellation_message: String?
+    end
+
+    class ColumnInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Types::Type,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Types::Type?
+    end
+
+    module ComputeMode
+      ON_DEMAND: String
+      PROVISIONED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?query_string: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?target_configuration: Types::TargetConfiguration,
+        ?client_token: String,
+        ?scheduled_query_execution_role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?kms_key_id: String,
+        ?error_report_configuration: Types::ErrorReportConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor query_string: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor target_configuration: Types::TargetConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor scheduled_query_execution_role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor kms_key_id: String?
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration?
+    end
+
+    class CreateScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class Datum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalar_value: String,
+        ?time_series_value: Array[Types::TimeSeriesDataPoint],
+        ?array_value: Array[Types::Datum],
+        ?row_value: Types::Row,
+        ?null_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalar_value: String?
+      attr_accessor time_series_value: Array[Types::TimeSeriesDataPoint]?
+      attr_accessor array_value: Array[Types::Datum]?
+      attr_accessor row_value: Types::Row?
+      attr_accessor null_value: bool?
+    end
+
+    class DeleteScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+    end
+
+    class DescribeAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_query_tcu: Integer,
+        ?query_pricing_model: String,
+        ?query_compute: Types::QueryComputeResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_query_tcu: Integer?
+      attr_accessor query_pricing_model: String?
+      attr_accessor query_compute: Types::QueryComputeResponse?
+    end
+
+    class DescribeEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+    end
+
+    class DescribeScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+    end
+
+    class DescribeScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query: Types::ScheduledQueryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query: Types::ScheduledQueryDescription?
+    end
+
+    class DimensionMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dimension_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dimension_value_type: String?
+    end
+
+    module DimensionValueType
+      VARCHAR: String
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?cache_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor cache_period_in_minutes: Integer?
+    end
+
+    class ErrorReportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::S3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3Configuration?
+    end
+
+    class ErrorReportLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_report_location: Types::S3ReportLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_report_location: Types::S3ReportLocation?
+    end
+
+    class ExecuteScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?invocation_time: Time,
+        ?client_token: String,
+        ?query_insights: Types::ScheduledQueryInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor invocation_time: Time?
+      attr_accessor client_token: String?
+      attr_accessor query_insights: Types::ScheduledQueryInsights?
+    end
+
+    class ExecutionStats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_time_in_millis: Integer,
+        ?data_writes: Integer,
+        ?bytes_metered: Integer,
+        ?cumulative_bytes_scanned: Integer,
+        ?records_ingested: Integer,
+        ?query_result_rows: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_time_in_millis: Integer?
+      attr_accessor data_writes: Integer?
+      attr_accessor bytes_metered: Integer?
+      attr_accessor cumulative_bytes_scanned: Integer?
+      attr_accessor records_ingested: Integer?
+      attr_accessor query_result_rows: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndpointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_query_tcu: Integer,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_query_tcu: Integer?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module LastUpdateStatus
+      PENDING: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class ListScheduledQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_queries: Array[Types::ScheduledQuery],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_queries: Array[Types::ScheduledQuery]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    module MeasureValueType
+      BIGINT: String
+      BOOLEAN: String
+      DOUBLE: String
+      VARCHAR: String
+      MULTI: String
+    end
+
+    class MixedMeasureMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?measure_name: String,
+        ?source_column: String,
+        ?target_measure_name: String,
+        ?measure_value_type: String,
+        ?multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor measure_name: String?
+      attr_accessor source_column: String?
+      attr_accessor target_measure_name: String?
+      attr_accessor measure_value_type: String?
+      attr_accessor multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping]?
+    end
+
+    class MultiMeasureAttributeMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_column: String,
+        ?target_multi_measure_attribute_name: String,
+        ?measure_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_column: String?
+      attr_accessor target_multi_measure_attribute_name: String?
+      attr_accessor measure_value_type: String?
+    end
+
+    class MultiMeasureMappings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_multi_measure_name: String,
+        ?multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_multi_measure_name: String?
+      attr_accessor multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping]?
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns_configuration: Types::SnsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns_configuration: Types::SnsConfiguration?
+    end
+
+    class ParameterMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Types::Type,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Types::Type?
+    end
+
+    class PrepareQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?validate_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor validate_only: bool?
+    end
+
+    class PrepareQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?columns: Array[Types::SelectColumn],
+        ?parameters: Array[Types::ParameterMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor columns: Array[Types::SelectColumn]?
+      attr_accessor parameters: Array[Types::ParameterMapping]?
+    end
+
+    class ProvisionedCapacityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_query_tcu: Integer,
+        ?notification_configuration: Types::AccountSettingsNotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_query_tcu: Integer?
+      attr_accessor notification_configuration: Types::AccountSettingsNotificationConfiguration?
+    end
+
+    class ProvisionedCapacityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_query_tcu: Integer,
+        ?notification_configuration: Types::AccountSettingsNotificationConfiguration,
+        ?last_update: Types::LastUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_query_tcu: Integer?
+      attr_accessor notification_configuration: Types::AccountSettingsNotificationConfiguration?
+      attr_accessor last_update: Types::LastUpdate?
+    end
+
+    class QueryComputeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_mode: String,
+        ?provisioned_capacity: Types::ProvisionedCapacityRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_mode: String?
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityRequest?
+    end
+
+    class QueryComputeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_mode: String,
+        ?provisioned_capacity: Types::ProvisionedCapacityResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_mode: String?
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityResponse?
+    end
+
+    class QueryExecutionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QueryInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    module QueryInsightsMode
+      ENABLED_WITH_RATE_CONTROL: String
+      DISABLED: String
+    end
+
+    class QueryInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_spatial_coverage: Types::QuerySpatialCoverage,
+        ?query_temporal_range: Types::QueryTemporalRange,
+        ?query_table_count: Integer,
+        ?output_rows: Integer,
+        ?output_bytes: Integer,
+        ?unload_partition_count: Integer,
+        ?unload_written_rows: Integer,
+        ?unload_written_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_spatial_coverage: Types::QuerySpatialCoverage?
+      attr_accessor query_temporal_range: Types::QueryTemporalRange?
+      attr_accessor query_table_count: Integer?
+      attr_accessor output_rows: Integer?
+      attr_accessor output_bytes: Integer?
+      attr_accessor unload_partition_count: Integer?
+      attr_accessor unload_written_rows: Integer?
+      attr_accessor unload_written_bytes: Integer?
+    end
+
+    module QueryPricingModel
+      BYTES_SCANNED: String
+      COMPUTE_UNITS: String
+    end
+
+    class QueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?client_token: String,
+        ?next_token: String,
+        ?max_rows: Integer,
+        ?query_insights: Types::QueryInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor client_token: String?
+      attr_accessor next_token: String?
+      attr_accessor max_rows: Integer?
+      attr_accessor query_insights: Types::QueryInsights?
+    end
+
+    class QueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?next_token: String,
+        ?rows: Array[Types::Row],
+        ?column_info: Array[Types::ColumnInfo],
+        ?query_status: Types::QueryStatus,
+        ?query_insights_response: Types::QueryInsightsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor rows: Array[Types::Row]?
+      attr_accessor column_info: Array[Types::ColumnInfo]?
+      attr_accessor query_status: Types::QueryStatus?
+      attr_accessor query_insights_response: Types::QueryInsightsResponse?
+    end
+
+    class QuerySpatialCoverage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max: Types::QuerySpatialCoverageMax,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max: Types::QuerySpatialCoverageMax?
+    end
+
+    class QuerySpatialCoverageMax
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?table_arn: String,
+        ?partition_key: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor table_arn: String?
+      attr_accessor partition_key: Array[String]?
+    end
+
+    class QueryStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_percentage: Float,
+        ?cumulative_bytes_scanned: Integer,
+        ?cumulative_bytes_metered: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_percentage: Float?
+      attr_accessor cumulative_bytes_scanned: Integer?
+      attr_accessor cumulative_bytes_metered: Integer?
+    end
+
+    class QueryTemporalRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max: Types::QueryTemporalRangeMax,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max: Types::QueryTemporalRangeMax?
+    end
+
+    class QueryTemporalRangeMax
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor table_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?scheduled_query_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor scheduled_query_arn: String?
+    end
+
+    class Row
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Array[Types::Datum],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Array[Types::Datum]?
+    end
+
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key_prefix: String,
+        ?encryption_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key_prefix: String?
+      attr_accessor encryption_option: String?
+    end
+
+    module S3EncryptionOption
+      SSE_S3: String
+      SSE_KMS: String
+    end
+
+    class S3ReportLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key: String?
+    end
+
+    module ScalarMeasureValueType
+      BIGINT: String
+      BOOLEAN: String
+      DOUBLE: String
+      VARCHAR: String
+      TIMESTAMP: String
+    end
+
+    module ScalarType
+      VARCHAR: String
+      BOOLEAN: String
+      BIGINT: String
+      DOUBLE: String
+      TIMESTAMP: String
+      DATE: String
+      TIME: String
+      INTERVAL_DAY_TO_SECOND: String
+      INTERVAL_YEAR_TO_MONTH: String
+      UNKNOWN: String
+      INTEGER: String
+    end
+
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+    end
+
+    class ScheduledQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?creation_time: Time,
+        ?state: String,
+        ?previous_invocation_time: Time,
+        ?next_invocation_time: Time,
+        ?error_report_configuration: Types::ErrorReportConfiguration,
+        ?target_destination: Types::TargetDestination,
+        ?last_run_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor state: String?
+      attr_accessor previous_invocation_time: Time?
+      attr_accessor next_invocation_time: Time?
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration?
+      attr_accessor target_destination: Types::TargetDestination?
+      attr_accessor last_run_status: String?
+    end
+
+    class ScheduledQueryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?query_string: String,
+        ?creation_time: Time,
+        ?state: String,
+        ?previous_invocation_time: Time,
+        ?next_invocation_time: Time,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?target_configuration: Types::TargetConfiguration,
+        ?scheduled_query_execution_role_arn: String,
+        ?kms_key_id: String,
+        ?error_report_configuration: Types::ErrorReportConfiguration,
+        ?last_run_summary: Types::ScheduledQueryRunSummary,
+        ?recently_failed_runs: Array[Types::ScheduledQueryRunSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor query_string: String?
+      attr_accessor creation_time: Time?
+      attr_accessor state: String?
+      attr_accessor previous_invocation_time: Time?
+      attr_accessor next_invocation_time: Time?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor target_configuration: Types::TargetConfiguration?
+      attr_accessor scheduled_query_execution_role_arn: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration?
+      attr_accessor last_run_summary: Types::ScheduledQueryRunSummary?
+      attr_accessor recently_failed_runs: Array[Types::ScheduledQueryRunSummary]?
+    end
+
+    class ScheduledQueryInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    module ScheduledQueryInsightsMode
+      ENABLED_WITH_RATE_CONTROL: String
+      DISABLED: String
+    end
+
+    class ScheduledQueryInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_spatial_coverage: Types::QuerySpatialCoverage,
+        ?query_temporal_range: Types::QueryTemporalRange,
+        ?query_table_count: Integer,
+        ?output_rows: Integer,
+        ?output_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_spatial_coverage: Types::QuerySpatialCoverage?
+      attr_accessor query_temporal_range: Types::QueryTemporalRange?
+      attr_accessor query_table_count: Integer?
+      attr_accessor output_rows: Integer?
+      attr_accessor output_bytes: Integer?
+    end
+
+    module ScheduledQueryRunStatus
+      AUTO_TRIGGER_SUCCESS: String
+      AUTO_TRIGGER_FAILURE: String
+      MANUAL_TRIGGER_SUCCESS: String
+      MANUAL_TRIGGER_FAILURE: String
+    end
+
+    class ScheduledQueryRunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_time: Time,
+        ?trigger_time: Time,
+        ?run_status: String,
+        ?execution_stats: Types::ExecutionStats,
+        ?query_insights_response: Types::ScheduledQueryInsightsResponse,
+        ?error_report_location: Types::ErrorReportLocation,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_time: Time?
+      attr_accessor trigger_time: Time?
+      attr_accessor run_status: String?
+      attr_accessor execution_stats: Types::ExecutionStats?
+      attr_accessor query_insights_response: Types::ScheduledQueryInsightsResponse?
+      attr_accessor error_report_location: Types::ErrorReportLocation?
+      attr_accessor failure_reason: String?
+    end
+
+    module ScheduledQueryState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class SelectColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Types::Type,
+        ?database_name: String,
+        ?table_name: String,
+        ?aliased: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Types::Type?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor aliased: bool?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_configuration: Types::TimestreamConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_configuration: Types::TimestreamConfiguration?
+    end
+
+    class TargetDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_destination: Types::TimestreamDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_destination: Types::TimestreamDestination?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeSeriesDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time: String,
+        ?value: Types::Datum,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time: String?
+      attr_accessor value: Types::Datum?
+    end
+
+    class TimestreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?time_column: String,
+        ?dimension_mappings: Array[Types::DimensionMapping],
+        ?multi_measure_mappings: Types::MultiMeasureMappings,
+        ?mixed_measure_mappings: Array[Types::MixedMeasureMapping],
+        ?measure_name_column: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor time_column: String?
+      attr_accessor dimension_mappings: Array[Types::DimensionMapping]?
+      attr_accessor multi_measure_mappings: Types::MultiMeasureMappings?
+      attr_accessor mixed_measure_mappings: Array[Types::MixedMeasureMapping]?
+      attr_accessor measure_name_column: String?
+    end
+
+    class TimestreamDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class Type
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalar_type: String,
+        ?array_column_info: Types::ColumnInfo,
+        ?time_series_measure_value_column_info: Types::ColumnInfo,
+        ?row_column_info: Array[Types::ColumnInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalar_type: String?
+      attr_accessor array_column_info: Types::ColumnInfo?
+      attr_accessor time_series_measure_value_column_info: Types::ColumnInfo?
+      attr_accessor row_column_info: Array[Types::ColumnInfo]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_query_tcu: Integer,
+        ?query_pricing_model: String,
+        ?query_compute: Types::QueryComputeRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_query_tcu: Integer?
+      attr_accessor query_pricing_model: String?
+      attr_accessor query_compute: Types::QueryComputeRequest?
+    end
+
+    class UpdateAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_query_tcu: Integer,
+        ?query_pricing_model: String,
+        ?query_compute: Types::QueryComputeResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_query_tcu: Integer?
+      attr_accessor query_pricing_model: String?
+      attr_accessor query_compute: Types::QueryComputeResponse?
+    end
+
+    class UpdateScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor state: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

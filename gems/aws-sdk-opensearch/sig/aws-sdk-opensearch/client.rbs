@@ -1,0 +1,1291 @@
+module Aws::OpenSearch
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::OpenSearch::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptInboundConnectionResponse
+      include Smithy::Client::_Response[Types::AcceptInboundConnectionResponse]
+      def connection: () -> Types::InboundConnection?
+    end
+    def accept_inbound_connection: (
+      ?connection_id: String
+    ) -> _AcceptInboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInboundConnectionResponse
+
+    interface _AddDataSourceResponse
+      include Smithy::Client::_Response[Types::AddDataSourceResponse]
+      def message: () -> String?
+    end
+    def add_data_source: (
+      ?domain_name: String,
+      ?name: String,
+      ?data_source_type: {
+        s3_glue_data_catalog: {
+          role_arn: String
+        }
+      },
+      ?description: String
+    ) -> _AddDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddDataSourceResponse
+
+    interface _AddDirectQueryDataSourceResponse
+      include Smithy::Client::_Response[Types::AddDirectQueryDataSourceResponse]
+      def data_source_arn: () -> String?
+    end
+    def add_direct_query_data_source: (
+      ?data_source_name: String,
+      ?data_source_type: {
+        cloud_watch_log: {
+          role_arn: String
+        },
+        security_lake: {
+          role_arn: untyped
+        }
+      },
+      ?description: String,
+      ?open_search_arns: Array[String],
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddDirectQueryDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddDirectQueryDataSourceResponse
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags: (
+      ?arn: String,
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _AssociatePackageResponse
+      include Smithy::Client::_Response[Types::AssociatePackageResponse]
+      def domain_package_details: () -> Types::DomainPackageDetails?
+    end
+    def associate_package: (
+      ?package_id: String,
+      ?domain_name: String,
+      ?prerequisite_package_id_list: Array[String],
+      ?association_configuration: {
+        key_store_access_option: {
+          key_access_role_arn: String,
+          key_store_access_enabled: bool
+        }
+      }
+    ) -> _AssociatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePackageResponse
+
+    interface _AssociatePackagesResponse
+      include Smithy::Client::_Response[Types::AssociatePackagesResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+    end
+    def associate_packages: (
+      ?package_list: Array[
+        {
+          package_id: String,
+          prerequisite_package_id_list: Array[String],
+          association_configuration: {
+            key_store_access_option: {
+              key_access_role_arn: String,
+              key_store_access_enabled: bool
+            }
+          }
+        }
+      ],
+      ?domain_name: String
+    ) -> _AssociatePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePackagesResponse
+
+    interface _AuthorizeVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::AuthorizeVpcEndpointAccessResponse]
+      def authorized_principal: () -> Types::AuthorizedPrincipal?
+    end
+    def authorize_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?account: String,
+      ?service: String
+    ) -> _AuthorizeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AuthorizeVpcEndpointAccessResponse
+
+    interface _CancelDomainConfigChangeResponse
+      include Smithy::Client::_Response[Types::CancelDomainConfigChangeResponse]
+      def cancelled_change_ids: () -> Array[String]?
+      def cancelled_change_properties: () -> Array[Types::CancelledChangeProperty]?
+      def dry_run: () -> bool?
+    end
+    def cancel_domain_config_change: (
+      ?domain_name: String,
+      ?dry_run: bool
+    ) -> _CancelDomainConfigChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDomainConfigChangeResponse
+
+    interface _CancelServiceSoftwareUpdateResponse
+      include Smithy::Client::_Response[Types::CancelServiceSoftwareUpdateResponse]
+      def service_software_options: () -> Types::ServiceSoftwareOptions?
+    end
+    def cancel_service_software_update: (
+      ?domain_name: String
+    ) -> _CancelServiceSoftwareUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelServiceSoftwareUpdateResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def data_sources: () -> Array[Types::DataSource]?
+      def iam_identity_center_options: () -> Types::IamIdentityCenterOptions?
+      def app_configs: () -> Array[Types::AppConfig]?
+      def tag_list: () -> Array[Types::Tag]?
+      def created_at: () -> Time?
+    end
+    def create_application: (
+      ?client_token: String,
+      ?name: String,
+      ?data_sources: Array[
+        {
+          data_source_arn: String,
+          data_source_description: String
+        }
+      ],
+      ?iam_identity_center_options: {
+        enabled: bool,
+        iam_identity_center_instance_arn: String,
+        iam_role_for_identity_center_application_arn: String
+      },
+      ?app_configs: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainResponse]
+      def domain_status: () -> Types::DomainStatus?
+    end
+    def create_domain: (
+      ?domain_name: String,
+      ?engine_version: String,
+      ?cluster_config: {
+        instance_type: String,
+        instance_count: Integer,
+        dedicated_master_enabled: bool,
+        zone_awareness_enabled: untyped,
+        zone_awareness_config: {
+          availability_zone_count: untyped
+        },
+        dedicated_master_type: untyped,
+        dedicated_master_count: untyped,
+        warm_enabled: untyped,
+        warm_type: String,
+        warm_count: untyped,
+        cold_storage_options: {
+          enabled: untyped
+        },
+        multi_az_with_standby_enabled: untyped,
+        node_options: Array[
+          {
+            node_type: String,
+            node_config: {
+              enabled: untyped,
+              type: untyped,
+              count: untyped
+            }
+          }
+        ]
+      },
+      ?ebs_options: {
+        ebs_enabled: bool,
+        volume_type: String,
+        volume_size: Integer,
+        iops: untyped,
+        throughput: untyped
+      },
+      ?access_policies: String,
+      ?ip_address_type: String,
+      ?snapshot_options: {
+        automated_snapshot_start_hour: Integer
+      },
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?cognito_options: {
+        enabled: bool,
+        user_pool_id: String,
+        identity_pool_id: String,
+        role_arn: String
+      },
+      ?encryption_at_rest_options: {
+        enabled: bool,
+        kms_key_id: String
+      },
+      ?node_to_node_encryption_options: {
+        enabled: bool
+      },
+      ?advanced_options: Hash[String, String],
+      ?log_publishing_options: Hash[String,
+        {
+          cloud_watch_logs_log_group_arn: String,
+          enabled: bool
+        }
+      ],
+      ?domain_endpoint_options: {
+        enforce_https: bool,
+        tls_security_policy: String,
+        custom_endpoint_enabled: untyped,
+        custom_endpoint: String,
+        custom_endpoint_certificate_arn: String
+      },
+      ?advanced_security_options: {
+        enabled: bool,
+        internal_user_database_enabled: untyped,
+        master_user_options: {
+          master_user_arn: String,
+          master_user_name: String,
+          master_user_password: String
+        },
+        saml_options: {
+          enabled: untyped,
+          idp: {
+            metadata_content: String,
+            entity_id: String
+          },
+          master_user_name: untyped,
+          master_backend_role: String,
+          subject_key: String,
+          roles_key: untyped,
+          session_timeout_minutes: Integer
+        },
+        jwt_options: {
+          enabled: untyped,
+          subject_key: String,
+          roles_key: String,
+          public_key: untyped
+        },
+        iam_federation_options: {
+          enabled: untyped,
+          subject_key: String,
+          roles_key: String
+        },
+        anonymous_auth_enabled: untyped
+      },
+      ?identity_center_options: {
+        enabled_api_access: bool,
+        identity_center_instance_arn: String,
+        subject_key: String,
+        roles_key: String
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?auto_tune_options: {
+        desired_state: String,
+        maintenance_schedules: Array[
+          {
+            start_at: Time,
+            duration: {
+              value: Integer,
+              unit: String
+            },
+            cron_expression_for_recurrence: String
+          }
+        ],
+        use_off_peak_window: bool
+      },
+      ?off_peak_window_options: {
+        enabled: bool,
+        off_peak_window: {
+          window_start_time: {
+            hours: Integer,
+            minutes: Integer
+          }
+        }
+      },
+      ?software_update_options: {
+        auto_software_update_enabled: bool
+      },
+      ?aiml_options: {
+        natural_language_query_generation_options: {
+          desired_state: String
+        },
+        s3_vectors_engine: {
+          enabled: bool
+        }
+      }
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateOutboundConnectionResponse
+      include Smithy::Client::_Response[Types::CreateOutboundConnectionResponse]
+      def local_domain_info: () -> Types::DomainInformationContainer?
+      def remote_domain_info: () -> Types::DomainInformationContainer?
+      def connection_alias: () -> String?
+      def connection_status: () -> Types::OutboundConnectionStatus?
+      def connection_id: () -> String?
+      def connection_mode: () -> String?
+      def connection_properties: () -> Types::ConnectionProperties?
+    end
+    def create_outbound_connection: (
+      ?local_domain_info: {
+        aws_domain_information: {
+          owner_id: String,
+          domain_name: String,
+          region: String
+        }
+      },
+      ?remote_domain_info: {
+        aws_domain_information: {
+          owner_id: String,
+          domain_name: String,
+          region: String
+        }
+      },
+      ?connection_alias: String,
+      ?connection_mode: String,
+      ?connection_properties: {
+        endpoint: String,
+        cross_cluster_search: {
+          skip_unavailable: String
+        }
+      }
+    ) -> _CreateOutboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOutboundConnectionResponse
+
+    interface _CreatePackageResponse
+      include Smithy::Client::_Response[Types::CreatePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def create_package: (
+      ?package_name: String,
+      ?package_type: String,
+      ?package_description: String,
+      ?package_source: {
+        s3_bucket_name: String,
+        s3_key: String
+      },
+      ?package_configuration: {
+        license_requirement: String,
+        license_filepath: String,
+        configuration_requirement: untyped,
+        requires_restart_for_configuration_update: bool
+      },
+      ?engine_version: String,
+      ?package_vending_options: {
+        vending_enabled: bool
+      },
+      ?package_encryption_options: {
+        kms_key_identifier: String,
+        encryption_enabled: bool
+      }
+    ) -> _CreatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackageResponse
+
+    interface _CreateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::CreateVpcEndpointResponse]
+      def vpc_endpoint: () -> Types::VpcEndpoint?
+    end
+    def create_vpc_endpoint: (
+      ?domain_arn: String,
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?client_token: String
+    ) -> _CreateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceResponse]
+      def message: () -> String?
+    end
+    def delete_data_source: (
+      ?domain_name: String,
+      ?name: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteDirectQueryDataSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_direct_query_data_source: (
+      ?data_source_name: String
+    ) -> _DeleteDirectQueryDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectQueryDataSourceResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResponse]
+      def domain_status: () -> Types::DomainStatus?
+    end
+    def delete_domain: (
+      ?domain_name: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteInboundConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteInboundConnectionResponse]
+      def connection: () -> Types::InboundConnection?
+    end
+    def delete_inbound_connection: (
+      ?connection_id: String
+    ) -> _DeleteInboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInboundConnectionResponse
+
+    interface _DeleteOutboundConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteOutboundConnectionResponse]
+      def connection: () -> Types::OutboundConnection?
+    end
+    def delete_outbound_connection: (
+      ?connection_id: String
+    ) -> _DeleteOutboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutboundConnectionResponse
+
+    interface _DeletePackageResponse
+      include Smithy::Client::_Response[Types::DeletePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def delete_package: (
+      ?package_id: String
+    ) -> _DeletePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageResponse
+
+    interface _DeleteVpcEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteVpcEndpointResponse]
+      def vpc_endpoint_summary: () -> Types::VpcEndpointSummary?
+    end
+    def delete_vpc_endpoint: (
+      ?vpc_endpoint_id: String
+    ) -> _DeleteVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointResponse
+
+    interface _DescribeDomainResponse
+      include Smithy::Client::_Response[Types::DescribeDomainResponse]
+      def domain_status: () -> Types::DomainStatus?
+    end
+    def describe_domain: (
+      ?domain_name: String
+    ) -> _DescribeDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainResponse
+
+    interface _DescribeDomainAutoTunesResponse
+      include Smithy::Client::_Response[Types::DescribeDomainAutoTunesResponse]
+      def auto_tunes: () -> Array[Types::AutoTune]?
+      def next_token: () -> String?
+    end
+    def describe_domain_auto_tunes: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDomainAutoTunesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainAutoTunesResponse
+
+    interface _DescribeDomainChangeProgressResponse
+      include Smithy::Client::_Response[Types::DescribeDomainChangeProgressResponse]
+      def change_progress_status: () -> Types::ChangeProgressStatusDetails?
+    end
+    def describe_domain_change_progress: (
+      ?domain_name: String,
+      ?change_id: String
+    ) -> _DescribeDomainChangeProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainChangeProgressResponse
+
+    interface _DescribeDomainConfigResponse
+      include Smithy::Client::_Response[Types::DescribeDomainConfigResponse]
+      def domain_config: () -> Types::DomainConfig?
+    end
+    def describe_domain_config: (
+      ?domain_name: String
+    ) -> _DescribeDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainConfigResponse
+
+    interface _DescribeDomainHealthResponse
+      include Smithy::Client::_Response[Types::DescribeDomainHealthResponse]
+      def domain_state: () -> String?
+      def availability_zone_count: () -> String?
+      def active_availability_zone_count: () -> String?
+      def stand_by_availability_zone_count: () -> String?
+      def data_node_count: () -> String?
+      def dedicated_master: () -> bool?
+      def master_eligible_node_count: () -> String?
+      def warm_node_count: () -> String?
+      def master_node: () -> String?
+      def cluster_health: () -> String?
+      def total_shards: () -> String?
+      def total_un_assigned_shards: () -> String?
+      def environment_information: () -> Array[Types::EnvironmentInfo]?
+    end
+    def describe_domain_health: (
+      ?domain_name: String
+    ) -> _DescribeDomainHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainHealthResponse
+
+    interface _DescribeDomainNodesResponse
+      include Smithy::Client::_Response[Types::DescribeDomainNodesResponse]
+      def domain_nodes_status_list: () -> Array[Types::DomainNodesStatus]?
+    end
+    def describe_domain_nodes: (
+      ?domain_name: String
+    ) -> _DescribeDomainNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainNodesResponse
+
+    interface _DescribeDomainsResponse
+      include Smithy::Client::_Response[Types::DescribeDomainsResponse]
+      def domain_status_list: () -> Array[Types::DomainStatus]?
+    end
+    def describe_domains: (
+      ?domain_names: Array[String]
+    ) -> _DescribeDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainsResponse
+
+    interface _DescribeDryRunProgressResponse
+      include Smithy::Client::_Response[Types::DescribeDryRunProgressResponse]
+      def dry_run_progress_status: () -> Types::DryRunProgressStatus?
+      def dry_run_config: () -> Types::DomainStatus?
+      def dry_run_results: () -> Types::DryRunResults?
+    end
+    def describe_dry_run_progress: (
+      ?domain_name: String,
+      ?dry_run_id: String,
+      ?load_dry_run_config: bool
+    ) -> _DescribeDryRunProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDryRunProgressResponse
+
+    interface _DescribeInboundConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeInboundConnectionsResponse]
+      def connections: () -> Array[Types::InboundConnection]?
+      def next_token: () -> String?
+    end
+    def describe_inbound_connections: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeInboundConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInboundConnectionsResponse
+
+    interface _DescribeInstanceTypeLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceTypeLimitsResponse]
+      def limits_by_role: () -> Hash[String, Types::Limits]?
+    end
+    def describe_instance_type_limits: (
+      ?domain_name: String,
+      ?instance_type: String,
+      ?engine_version: String
+    ) -> _DescribeInstanceTypeLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceTypeLimitsResponse
+
+    interface _DescribeOutboundConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeOutboundConnectionsResponse]
+      def connections: () -> Array[Types::OutboundConnection]?
+      def next_token: () -> String?
+    end
+    def describe_outbound_connections: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeOutboundConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOutboundConnectionsResponse
+
+    interface _DescribePackagesResponse
+      include Smithy::Client::_Response[Types::DescribePackagesResponse]
+      def package_details_list: () -> Array[Types::PackageDetails]?
+      def next_token: () -> String?
+    end
+    def describe_packages: (
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackagesResponse
+
+    interface _DescribeReservedInstanceOfferingsResponse
+      include Smithy::Client::_Response[Types::DescribeReservedInstanceOfferingsResponse]
+      def next_token: () -> String?
+      def reserved_instance_offerings: () -> Array[Types::ReservedInstanceOffering]?
+    end
+    def describe_reserved_instance_offerings: (
+      ?reserved_instance_offering_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedInstanceOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedInstanceOfferingsResponse
+
+    interface _DescribeReservedInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeReservedInstancesResponse]
+      def next_token: () -> String?
+      def reserved_instances: () -> Array[Types::ReservedInstance]?
+    end
+    def describe_reserved_instances: (
+      ?reserved_instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedInstancesResponse
+
+    interface _DescribeVpcEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeVpcEndpointsResponse]
+      def vpc_endpoints: () -> Array[Types::VpcEndpoint]?
+      def vpc_endpoint_errors: () -> Array[Types::VpcEndpointError]?
+    end
+    def describe_vpc_endpoints: (
+      ?vpc_endpoint_ids: Array[String]
+    ) -> _DescribeVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEndpointsResponse
+
+    interface _DissociatePackageResponse
+      include Smithy::Client::_Response[Types::DissociatePackageResponse]
+      def domain_package_details: () -> Types::DomainPackageDetails?
+    end
+    def dissociate_package: (
+      ?package_id: String,
+      ?domain_name: String
+    ) -> _DissociatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DissociatePackageResponse
+
+    interface _DissociatePackagesResponse
+      include Smithy::Client::_Response[Types::DissociatePackagesResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+    end
+    def dissociate_packages: (
+      ?package_list: Array[String],
+      ?domain_name: String
+    ) -> _DissociatePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DissociatePackagesResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def endpoint: () -> String?
+      def status: () -> String?
+      def iam_identity_center_options: () -> Types::IamIdentityCenterOptions?
+      def data_sources: () -> Array[Types::DataSource]?
+      def app_configs: () -> Array[Types::AppConfig]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_application: (
+      ?id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetCompatibleVersionsResponse
+      include Smithy::Client::_Response[Types::GetCompatibleVersionsResponse]
+      def compatible_versions: () -> Array[Types::CompatibleVersionsMap]?
+    end
+    def get_compatible_versions: (
+      ?domain_name: String
+    ) -> _GetCompatibleVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCompatibleVersionsResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceResponse]
+      def data_source_type: () -> Types::DataSourceType?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+    end
+    def get_data_source: (
+      ?domain_name: String,
+      ?name: String
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetDirectQueryDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDirectQueryDataSourceResponse]
+      def data_source_name: () -> String?
+      def data_source_type: () -> Types::DirectQueryDataSourceType?
+      def description: () -> String?
+      def open_search_arns: () -> Array[String]?
+      def data_source_arn: () -> String?
+    end
+    def get_direct_query_data_source: (
+      ?data_source_name: String
+    ) -> _GetDirectQueryDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDirectQueryDataSourceResponse
+
+    interface _GetDomainMaintenanceStatusResponse
+      include Smithy::Client::_Response[Types::GetDomainMaintenanceStatusResponse]
+      def status: () -> String?
+      def status_message: () -> String?
+      def node_id: () -> String?
+      def action: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_domain_maintenance_status: (
+      ?domain_name: String,
+      ?maintenance_id: String
+    ) -> _GetDomainMaintenanceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainMaintenanceStatusResponse
+
+    interface _GetPackageVersionHistoryResponse
+      include Smithy::Client::_Response[Types::GetPackageVersionHistoryResponse]
+      def package_id: () -> String?
+      def package_version_history_list: () -> Array[Types::PackageVersionHistory]?
+      def next_token: () -> String?
+    end
+    def get_package_version_history: (
+      ?package_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetPackageVersionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPackageVersionHistoryResponse
+
+    interface _GetUpgradeHistoryResponse
+      include Smithy::Client::_Response[Types::GetUpgradeHistoryResponse]
+      def upgrade_histories: () -> Array[Types::UpgradeHistory]?
+      def next_token: () -> String?
+    end
+    def get_upgrade_history: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetUpgradeHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUpgradeHistoryResponse
+
+    interface _GetUpgradeStatusResponse
+      include Smithy::Client::_Response[Types::GetUpgradeStatusResponse]
+      def upgrade_step: () -> String?
+      def step_status: () -> String?
+      def upgrade_name: () -> String?
+    end
+    def get_upgrade_status: (
+      ?domain_name: String
+    ) -> _GetUpgradeStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUpgradeStatusResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def application_summaries: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?statuses: Array[String],
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesResponse]
+      def data_sources: () -> Array[Types::DataSourceDetails]?
+    end
+    def list_data_sources: (
+      ?domain_name: String
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListDirectQueryDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDirectQueryDataSourcesResponse]
+      def next_token: () -> String?
+      def direct_query_data_sources: () -> Array[Types::DirectQueryDataSource]?
+    end
+    def list_direct_query_data_sources: (
+      ?next_token: String
+    ) -> _ListDirectQueryDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDirectQueryDataSourcesResponse
+
+    interface _ListDomainMaintenancesResponse
+      include Smithy::Client::_Response[Types::ListDomainMaintenancesResponse]
+      def domain_maintenances: () -> Array[Types::DomainMaintenanceDetails]?
+      def next_token: () -> String?
+    end
+    def list_domain_maintenances: (
+      ?domain_name: String,
+      ?action: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainMaintenancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainMaintenancesResponse
+
+    interface _ListDomainNamesResponse
+      include Smithy::Client::_Response[Types::ListDomainNamesResponse]
+      def domain_names: () -> Array[Types::DomainInfo]?
+    end
+    def list_domain_names: (
+      ?engine_type: String
+    ) -> _ListDomainNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainNamesResponse
+
+    interface _ListDomainsForPackageResponse
+      include Smithy::Client::_Response[Types::ListDomainsForPackageResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+      def next_token: () -> String?
+    end
+    def list_domains_for_package: (
+      ?package_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsForPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsForPackageResponse
+
+    interface _ListInstanceTypeDetailsResponse
+      include Smithy::Client::_Response[Types::ListInstanceTypeDetailsResponse]
+      def instance_type_details: () -> Array[Types::InstanceTypeDetails]?
+      def next_token: () -> String?
+    end
+    def list_instance_type_details: (
+      ?engine_version: String,
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?retrieve_a_zs: bool,
+      ?instance_type: String
+    ) -> _ListInstanceTypeDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceTypeDetailsResponse
+
+    interface _ListPackagesForDomainResponse
+      include Smithy::Client::_Response[Types::ListPackagesForDomainResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+      def next_token: () -> String?
+    end
+    def list_packages_for_domain: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPackagesForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagesForDomainResponse
+
+    interface _ListScheduledActionsResponse
+      include Smithy::Client::_Response[Types::ListScheduledActionsResponse]
+      def scheduled_actions: () -> Array[Types::ScheduledAction]?
+      def next_token: () -> String?
+    end
+    def list_scheduled_actions: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScheduledActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduledActionsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags: (
+      ?arn: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListVersionsResponse
+      include Smithy::Client::_Response[Types::ListVersionsResponse]
+      def versions: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_versions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVersionsResponse
+
+    interface _ListVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointAccessResponse]
+      def authorized_principal_list: () -> Array[Types::AuthorizedPrincipal]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?next_token: String
+    ) -> _ListVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointAccessResponse
+
+    interface _ListVpcEndpointsResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointsResponse]
+      def vpc_endpoint_summary_list: () -> Array[Types::VpcEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoints: (
+      ?next_token: String
+    ) -> _ListVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointsResponse
+
+    interface _ListVpcEndpointsForDomainResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointsForDomainResponse]
+      def vpc_endpoint_summary_list: () -> Array[Types::VpcEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoints_for_domain: (
+      ?domain_name: String,
+      ?next_token: String
+    ) -> _ListVpcEndpointsForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointsForDomainResponse
+
+    interface _PurchaseReservedInstanceOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseReservedInstanceOfferingResponse]
+      def reserved_instance_id: () -> String?
+      def reservation_name: () -> String?
+    end
+    def purchase_reserved_instance_offering: (
+      ?reserved_instance_offering_id: String,
+      ?reservation_name: String,
+      ?instance_count: Integer
+    ) -> _PurchaseReservedInstanceOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseReservedInstanceOfferingResponse
+
+    interface _RejectInboundConnectionResponse
+      include Smithy::Client::_Response[Types::RejectInboundConnectionResponse]
+      def connection: () -> Types::InboundConnection?
+    end
+    def reject_inbound_connection: (
+      ?connection_id: String
+    ) -> _RejectInboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectInboundConnectionResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _RevokeVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::RevokeVpcEndpointAccessResponse]
+    end
+    def revoke_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?account: String,
+      ?service: String
+    ) -> _RevokeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeVpcEndpointAccessResponse
+
+    interface _StartDomainMaintenanceResponse
+      include Smithy::Client::_Response[Types::StartDomainMaintenanceResponse]
+      def maintenance_id: () -> String?
+    end
+    def start_domain_maintenance: (
+      ?domain_name: String,
+      ?action: String,
+      ?node_id: String
+    ) -> _StartDomainMaintenanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDomainMaintenanceResponse
+
+    interface _StartServiceSoftwareUpdateResponse
+      include Smithy::Client::_Response[Types::StartServiceSoftwareUpdateResponse]
+      def service_software_options: () -> Types::ServiceSoftwareOptions?
+    end
+    def start_service_software_update: (
+      ?domain_name: String,
+      ?schedule_at: String,
+      ?desired_start_time: Integer
+    ) -> _StartServiceSoftwareUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartServiceSoftwareUpdateResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def data_sources: () -> Array[Types::DataSource]?
+      def iam_identity_center_options: () -> Types::IamIdentityCenterOptions?
+      def app_configs: () -> Array[Types::AppConfig]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def update_application: (
+      ?id: String,
+      ?data_sources: Array[
+        {
+          data_source_arn: String,
+          data_source_description: String
+        }
+      ],
+      ?app_configs: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceResponse]
+      def message: () -> String?
+    end
+    def update_data_source: (
+      ?domain_name: String,
+      ?name: String,
+      ?data_source_type: {
+        s3_glue_data_catalog: {
+          role_arn: String
+        }
+      },
+      ?description: String,
+      ?status: String
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateDirectQueryDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDirectQueryDataSourceResponse]
+      def data_source_arn: () -> String?
+    end
+    def update_direct_query_data_source: (
+      ?data_source_name: String,
+      ?data_source_type: {
+        cloud_watch_log: {
+          role_arn: String
+        },
+        security_lake: {
+          role_arn: untyped
+        }
+      },
+      ?description: String,
+      ?open_search_arns: Array[String]
+    ) -> _UpdateDirectQueryDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectQueryDataSourceResponse
+
+    interface _UpdateDomainConfigResponse
+      include Smithy::Client::_Response[Types::UpdateDomainConfigResponse]
+      def domain_config: () -> Types::DomainConfig?
+      def dry_run_results: () -> Types::DryRunResults?
+      def dry_run_progress_status: () -> Types::DryRunProgressStatus?
+    end
+    def update_domain_config: (
+      ?domain_name: String,
+      ?cluster_config: {
+        instance_type: String,
+        instance_count: Integer,
+        dedicated_master_enabled: bool,
+        zone_awareness_enabled: untyped,
+        zone_awareness_config: {
+          availability_zone_count: untyped
+        },
+        dedicated_master_type: untyped,
+        dedicated_master_count: untyped,
+        warm_enabled: untyped,
+        warm_type: String,
+        warm_count: untyped,
+        cold_storage_options: {
+          enabled: untyped
+        },
+        multi_az_with_standby_enabled: untyped,
+        node_options: Array[
+          {
+            node_type: String,
+            node_config: {
+              enabled: untyped,
+              type: untyped,
+              count: untyped
+            }
+          }
+        ]
+      },
+      ?ebs_options: {
+        ebs_enabled: bool,
+        volume_type: String,
+        volume_size: Integer,
+        iops: untyped,
+        throughput: untyped
+      },
+      ?snapshot_options: {
+        automated_snapshot_start_hour: Integer
+      },
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?cognito_options: {
+        enabled: bool,
+        user_pool_id: String,
+        identity_pool_id: String,
+        role_arn: String
+      },
+      ?advanced_options: Hash[String, String],
+      ?access_policies: String,
+      ?ip_address_type: String,
+      ?log_publishing_options: Hash[String,
+        {
+          cloud_watch_logs_log_group_arn: String,
+          enabled: bool
+        }
+      ],
+      ?encryption_at_rest_options: {
+        enabled: bool,
+        kms_key_id: String
+      },
+      ?domain_endpoint_options: {
+        enforce_https: bool,
+        tls_security_policy: String,
+        custom_endpoint_enabled: untyped,
+        custom_endpoint: String,
+        custom_endpoint_certificate_arn: String
+      },
+      ?node_to_node_encryption_options: {
+        enabled: bool
+      },
+      ?advanced_security_options: {
+        enabled: bool,
+        internal_user_database_enabled: untyped,
+        master_user_options: {
+          master_user_arn: String,
+          master_user_name: String,
+          master_user_password: String
+        },
+        saml_options: {
+          enabled: untyped,
+          idp: {
+            metadata_content: String,
+            entity_id: String
+          },
+          master_user_name: untyped,
+          master_backend_role: String,
+          subject_key: String,
+          roles_key: untyped,
+          session_timeout_minutes: Integer
+        },
+        jwt_options: {
+          enabled: untyped,
+          subject_key: String,
+          roles_key: String,
+          public_key: untyped
+        },
+        iam_federation_options: {
+          enabled: untyped,
+          subject_key: String,
+          roles_key: String
+        },
+        anonymous_auth_enabled: untyped
+      },
+      ?identity_center_options: {
+        enabled_api_access: bool,
+        identity_center_instance_arn: String,
+        subject_key: String,
+        roles_key: String
+      },
+      ?auto_tune_options: {
+        desired_state: String,
+        rollback_on_disable: String,
+        maintenance_schedules: Array[
+          {
+            start_at: Time,
+            duration: {
+              value: Integer,
+              unit: String
+            },
+            cron_expression_for_recurrence: String
+          }
+        ],
+        use_off_peak_window: bool
+      },
+      ?dry_run: bool,
+      ?dry_run_mode: String,
+      ?off_peak_window_options: {
+        enabled: bool,
+        off_peak_window: {
+          window_start_time: {
+            hours: Integer,
+            minutes: Integer
+          }
+        }
+      },
+      ?software_update_options: {
+        auto_software_update_enabled: bool
+      },
+      ?aiml_options: {
+        natural_language_query_generation_options: {
+          desired_state: String
+        },
+        s3_vectors_engine: {
+          enabled: bool
+        }
+      }
+    ) -> _UpdateDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainConfigResponse
+
+    interface _UpdatePackageResponse
+      include Smithy::Client::_Response[Types::UpdatePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def update_package: (
+      ?package_id: String,
+      ?package_source: {
+        s3_bucket_name: String,
+        s3_key: String
+      },
+      ?package_description: String,
+      ?commit_message: String,
+      ?package_configuration: {
+        license_requirement: String,
+        license_filepath: String,
+        configuration_requirement: untyped,
+        requires_restart_for_configuration_update: bool
+      },
+      ?package_encryption_options: {
+        kms_key_identifier: String,
+        encryption_enabled: bool
+      }
+    ) -> _UpdatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageResponse
+
+    interface _UpdatePackageScopeResponse
+      include Smithy::Client::_Response[Types::UpdatePackageScopeResponse]
+      def package_id: () -> String?
+      def operation: () -> String?
+      def package_user_list: () -> Array[String]?
+    end
+    def update_package_scope: (
+      ?package_id: String,
+      ?operation: String,
+      ?package_user_list: Array[String]
+    ) -> _UpdatePackageScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageScopeResponse
+
+    interface _UpdateScheduledActionResponse
+      include Smithy::Client::_Response[Types::UpdateScheduledActionResponse]
+      def scheduled_action: () -> Types::ScheduledAction?
+    end
+    def update_scheduled_action: (
+      ?domain_name: String,
+      ?action_id: String,
+      ?action_type: String,
+      ?schedule_at: String,
+      ?desired_start_time: Integer
+    ) -> _UpdateScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduledActionResponse
+
+    interface _UpdateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateVpcEndpointResponse]
+      def vpc_endpoint: () -> Types::VpcEndpoint?
+    end
+    def update_vpc_endpoint: (
+      ?vpc_endpoint_id: String,
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      }
+    ) -> _UpdateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcEndpointResponse
+
+    interface _UpgradeDomainResponse
+      include Smithy::Client::_Response[Types::UpgradeDomainResponse]
+      def upgrade_id: () -> String?
+      def domain_name: () -> String?
+      def target_version: () -> String?
+      def perform_check_only: () -> bool?
+      def advanced_options: () -> Hash[String, String]?
+      def change_progress_details: () -> Types::ChangeProgressDetails?
+    end
+    def upgrade_domain: (
+      ?domain_name: String,
+      ?target_version: String,
+      ?perform_check_only: bool,
+      ?advanced_options: Hash[String, String]
+    ) -> _UpgradeDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeDomainResponse
+  end
+end

@@ -1,0 +1,549 @@
+module Aws::CloudControl
+  module Types
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelResourceRequestOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_token: String?
+    end
+
+    class CancelResourceRequestOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_event: Types::ProgressEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_event: Types::ProgressEvent?
+    end
+
+    class ClientTokenConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type_version_id: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?desired_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor desired_state: String?
+    end
+
+    class CreateResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_event: Types::ProgressEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_event: Types::ProgressEvent?
+    end
+
+    class DeleteResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type_version_id: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+    end
+
+    class DeleteResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_event: Types::ProgressEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_event: Types::ProgressEvent?
+    end
+
+    class GeneralServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type_version_id: String,
+        ?role_arn: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?resource_description: Types::ResourceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor resource_description: Types::ResourceDescription?
+    end
+
+    class GetResourceRequestStatusOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_token: String?
+    end
+
+    class GetResourceRequestStatusOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_event: Types::ProgressEvent,
+        ?hooks_progress_event: Array[Types::HookProgressEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_event: Types::ProgressEvent?
+      attr_accessor hooks_progress_event: Array[Types::HookProgressEvent]?
+    end
+
+    class HandlerFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HandlerInternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HookProgressEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hook_type_name: String,
+        ?hook_type_version_id: String,
+        ?hook_type_arn: String,
+        ?invocation_point: String,
+        ?hook_status: String,
+        ?hook_event_time: Time,
+        ?hook_status_message: String,
+        ?failure_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hook_type_name: String?
+      attr_accessor hook_type_version_id: String?
+      attr_accessor hook_type_arn: String?
+      attr_accessor invocation_point: String?
+      attr_accessor hook_status: String?
+      attr_accessor hook_event_time: Time?
+      attr_accessor hook_status_message: String?
+      attr_accessor failure_mode: String?
+    end
+
+    class InvalidCredentialsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListResourceRequestsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_request_status_filter: Types::ResourceRequestStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_request_status_filter: Types::ResourceRequestStatusFilter?
+    end
+
+    class ListResourceRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_request_status_summaries: Array[Types::ProgressEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_request_status_summaries: Array[Types::ProgressEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type_version_id: String,
+        ?role_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_model: String?
+    end
+
+    class ListResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?resource_descriptions: Array[Types::ResourceDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor resource_descriptions: Array[Types::ResourceDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class NetworkFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotStabilizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotUpdatableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PrivateTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ProgressEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?identifier: String,
+        ?request_token: String,
+        ?hooks_request_token: String,
+        ?operation: String,
+        ?operation_status: String,
+        ?event_time: Time,
+        ?resource_model: String,
+        ?status_message: String,
+        ?error_code: String,
+        ?retry_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor identifier: String?
+      attr_accessor request_token: String?
+      attr_accessor hooks_request_token: String?
+      attr_accessor operation: String?
+      attr_accessor operation_status: String?
+      attr_accessor event_time: Time?
+      attr_accessor resource_model: String?
+      attr_accessor status_message: String?
+      attr_accessor error_code: String?
+      attr_accessor retry_after: Time?
+    end
+
+    class RequestTokenNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor properties: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceRequestStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[String],
+        ?operation_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[String]?
+      attr_accessor operation_statuses: Array[String]?
+    end
+
+    class ServiceInternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedActionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_name: String,
+        ?type_version_id: String,
+        ?role_arn: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?patch_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor patch_document: String?
+    end
+
+    class UpdateResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_event: Types::ProgressEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_event: Types::ProgressEvent?
+    end
+  end
+end

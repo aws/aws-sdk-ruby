@@ -1,0 +1,5 @@
+  module Aws
+    module Evidently
+      VERSION: String
+    end
+  end

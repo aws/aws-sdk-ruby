@@ -1,0 +1,5 @@
+  module Aws
+    module CleanRooms
+      VERSION: String
+    end
+  end

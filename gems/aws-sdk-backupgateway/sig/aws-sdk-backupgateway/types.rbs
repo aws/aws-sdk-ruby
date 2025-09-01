@@ -1,0 +1,923 @@
+module Aws::BackupGateway
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class AssociateGatewayToServerOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?server_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor server_arn: String?
+    end
+
+    class AssociateGatewayToServerOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class BandwidthRateLimitInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?average_upload_rate_limit_in_bits_per_sec: Integer,
+        ?start_hour_of_day: Integer,
+        ?end_hour_of_day: Integer,
+        ?start_minute_of_hour: Integer,
+        ?end_minute_of_hour: Integer,
+        ?days_of_week: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: Integer?
+      attr_accessor start_hour_of_day: Integer?
+      attr_accessor end_hour_of_day: Integer?
+      attr_accessor start_minute_of_hour: Integer?
+      attr_accessor end_minute_of_hour: Integer?
+      attr_accessor days_of_week: Array[Integer]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_key: String,
+        ?gateway_display_name: String,
+        ?gateway_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_key: String?
+      attr_accessor gateway_display_name: String?
+      attr_accessor gateway_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DeleteHypervisorOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class DeleteHypervisorOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class DisassociateGatewayFromServerOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class DisassociateGatewayFromServerOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class Gateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_display_name: String,
+        ?gateway_type: String,
+        ?hypervisor_id: String,
+        ?last_seen_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_display_name: String?
+      attr_accessor gateway_type: String?
+      attr_accessor hypervisor_id: String?
+      attr_accessor last_seen_time: Time?
+    end
+
+    class GatewayDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_display_name: String,
+        ?gateway_type: String,
+        ?hypervisor_id: String,
+        ?last_seen_time: Time,
+        ?maintenance_start_time: Types::MaintenanceStartTime,
+        ?next_update_availability_time: Time,
+        ?vpc_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_display_name: String?
+      attr_accessor gateway_type: String?
+      attr_accessor hypervisor_id: String?
+      attr_accessor last_seen_time: Time?
+      attr_accessor maintenance_start_time: Types::MaintenanceStartTime?
+      attr_accessor next_update_availability_time: Time?
+      attr_accessor vpc_endpoint: String?
+    end
+
+    class GetBandwidthRateLimitScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class GetBandwidthRateLimitScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval]?
+    end
+
+    class GetGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class GetGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway: Types::GatewayDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway: Types::GatewayDetails?
+    end
+
+    class GetHypervisorOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class GetHypervisorOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor: Types::HypervisorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor: Types::HypervisorDetails?
+    end
+
+    class GetHypervisorPropertyMappingsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class GetHypervisorPropertyMappingsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+        ?vmware_to_aws_tag_mappings: Array[Types::VmwareToAwsTagMapping],
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+      attr_accessor vmware_to_aws_tag_mappings: Array[Types::VmwareToAwsTagMapping]?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class GetVirtualMachineOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetVirtualMachineOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_machine: Types::VirtualMachineDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_machine: Types::VirtualMachineDetails?
+    end
+
+    class Hypervisor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: String,
+        ?hypervisor_arn: String,
+        ?kms_key_arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: String?
+      attr_accessor hypervisor_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class HypervisorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: String,
+        ?hypervisor_arn: String,
+        ?kms_key_arn: String,
+        ?name: String,
+        ?log_group_arn: String,
+        ?state: String,
+        ?last_successful_metadata_sync_time: Time,
+        ?latest_metadata_sync_status_message: String,
+        ?latest_metadata_sync_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: String?
+      attr_accessor hypervisor_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor name: String?
+      attr_accessor log_group_arn: String?
+      attr_accessor state: String?
+      attr_accessor last_successful_metadata_sync_time: Time?
+      attr_accessor latest_metadata_sync_status_message: String?
+      attr_accessor latest_metadata_sync_status: String?
+    end
+
+    class ImportHypervisorConfigurationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?host: String,
+        ?username: String,
+        ?password: String,
+        ?kms_key_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor host: String?
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportHypervisorConfigurationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ListGatewaysOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGatewaysOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateways: Array[Types::Gateway],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateways: Array[Types::Gateway]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHypervisorsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListHypervisorsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisors: Array[Types::Hypervisor],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisors: Array[Types::Hypervisor]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListVirtualMachinesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualMachinesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_machines: Array[Types::VirtualMachine],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_machines: Array[Types::VirtualMachine]?
+      attr_accessor next_token: String?
+    end
+
+    class MaintenanceStartTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_month: Integer,
+        ?day_of_week: Integer,
+        ?hour_of_day: Integer,
+        ?minute_of_hour: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_month: Integer?
+      attr_accessor day_of_week: Integer?
+      attr_accessor hour_of_day: Integer?
+      attr_accessor minute_of_hour: Integer?
+    end
+
+    class PutBandwidthRateLimitScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor bandwidth_rate_limit_intervals: Array[Types::BandwidthRateLimitInterval]?
+    end
+
+    class PutBandwidthRateLimitScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class PutHypervisorPropertyMappingsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+        ?vmware_to_aws_tag_mappings: Array[Types::VmwareToAwsTagMapping],
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+      attr_accessor vmware_to_aws_tag_mappings: Array[Types::VmwareToAwsTagMapping]?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class PutHypervisorPropertyMappingsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class PutMaintenanceStartTimeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?hour_of_day: Integer,
+        ?minute_of_hour: Integer,
+        ?day_of_week: Integer,
+        ?day_of_month: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor hour_of_day: Integer?
+      attr_accessor minute_of_hour: Integer?
+      attr_accessor day_of_week: Integer?
+      attr_accessor day_of_month: Integer?
+    end
+
+    class PutMaintenanceStartTimeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class StartVirtualMachinesMetadataSyncOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class StartVirtualMachinesMetadataSyncOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class TestHypervisorConfigurationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?host: String,
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor host: String?
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class TestHypervisorConfigurationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class UpdateGatewayInformationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+        ?gateway_display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+      attr_accessor gateway_display_name: String?
+    end
+
+    class UpdateGatewayInformationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateGatewaySoftwareNowOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateGatewaySoftwareNowOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_arn: String?
+    end
+
+    class UpdateHypervisorOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+        ?host: String,
+        ?username: String,
+        ?password: String,
+        ?name: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+      attr_accessor host: String?
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor name: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    class UpdateHypervisorOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hypervisor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hypervisor_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class VirtualMachine
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?hypervisor_id: String,
+        ?name: String,
+        ?path: String,
+        ?resource_arn: String,
+        ?last_backup_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor hypervisor_id: String?
+      attr_accessor name: String?
+      attr_accessor path: String?
+      attr_accessor resource_arn: String?
+      attr_accessor last_backup_date: Time?
+    end
+
+    class VirtualMachineDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?hypervisor_id: String,
+        ?name: String,
+        ?path: String,
+        ?resource_arn: String,
+        ?last_backup_date: Time,
+        ?vmware_tags: Array[Types::VmwareTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor hypervisor_id: String?
+      attr_accessor name: String?
+      attr_accessor path: String?
+      attr_accessor resource_arn: String?
+      attr_accessor last_backup_date: Time?
+      attr_accessor vmware_tags: Array[Types::VmwareTag]?
+    end
+
+    class VmwareTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vmware_category: String,
+        ?vmware_tag_name: String,
+        ?vmware_tag_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vmware_category: String?
+      attr_accessor vmware_tag_name: String?
+      attr_accessor vmware_tag_description: String?
+    end
+
+    class VmwareToAwsTagMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vmware_category: String,
+        ?vmware_tag_name: String,
+        ?aws_tag_key: String,
+        ?aws_tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vmware_category: String?
+      attr_accessor vmware_tag_name: String?
+      attr_accessor aws_tag_key: String?
+      attr_accessor aws_tag_value: String?
+    end
+  end
+end

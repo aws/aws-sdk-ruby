@@ -1,0 +1,508 @@
+module Aws::SageMakerGeospatial
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SageMakerGeospatial::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteEarthObservationJobResponse
+      include Smithy::Client::_Response[Types::DeleteEarthObservationJobOutput]
+    end
+    def delete_earth_observation_job: (
+      ?arn: String
+    ) -> _DeleteEarthObservationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEarthObservationJobResponse
+
+    interface _DeleteVectorEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::DeleteVectorEnrichmentJobOutput]
+    end
+    def delete_vector_enrichment_job: (
+      ?arn: String
+    ) -> _DeleteVectorEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVectorEnrichmentJobResponse
+
+    interface _ExportEarthObservationJobResponse
+      include Smithy::Client::_Response[Types::ExportEarthObservationJobOperationOutput]
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def export_status: () -> String?
+      def execution_role_arn: () -> String?
+      def output_config: () -> Types::OutputConfigInput?
+      def export_source_images: () -> bool?
+    end
+    def export_earth_observation_job: (
+      ?arn: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?output_config: {
+        s3_data: {
+          s3_uri: String,
+          kms_key_id: String
+        }
+      },
+      ?export_source_images: bool
+    ) -> _ExportEarthObservationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportEarthObservationJobResponse
+
+    interface _ExportVectorEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::ExportVectorEnrichmentJobOutput]
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def execution_role_arn: () -> String?
+      def export_status: () -> String?
+      def output_config: () -> Types::ExportVectorEnrichmentJobOutputConfig?
+    end
+    def export_vector_enrichment_job: (
+      ?arn: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?output_config: {
+        s3_data: {
+          s3_uri: String,
+          kms_key_id: String
+        }
+      }
+    ) -> _ExportVectorEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportVectorEnrichmentJobResponse
+
+    interface _GetEarthObservationJobResponse
+      include Smithy::Client::_Response[Types::GetEarthObservationJobOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def creation_time: () -> Time?
+      def duration_in_seconds: () -> Integer?
+      def status: () -> String?
+      def kms_key_id: () -> String?
+      def input_config: () -> Types::InputConfigOutput?
+      def job_config: () -> Types::JobConfigInput?
+      def output_bands: () -> Array[Types::OutputBand]?
+      def execution_role_arn: () -> String?
+      def error_details: () -> Types::EarthObservationJobErrorDetails?
+      def export_status: () -> String?
+      def export_error_details: () -> Types::ExportErrorDetails?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_earth_observation_job: (
+      ?arn: String
+    ) -> _GetEarthObservationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEarthObservationJobResponse
+
+    interface _GetRasterDataCollectionResponse
+      include Smithy::Client::_Response[Types::GetRasterDataCollectionOperationOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def description_page_url: () -> String?
+      def supported_filters: () -> Array[Types::Filter]?
+      def image_source_bands: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_raster_data_collection: (
+      ?arn: String
+    ) -> _GetRasterDataCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRasterDataCollectionResponse
+
+    interface _GetTileResponse
+      include Smithy::Client::_Response[Types::GetTileOutput]
+      def binary_file: () -> String?
+    end
+    def get_tile: (
+      ?x: Integer,
+      ?y: Integer,
+      ?z: Integer,
+      ?image_assets: Array[String],
+      ?target: String,
+      ?arn: String,
+      ?image_mask: bool,
+      ?output_format: String,
+      ?time_range_filter: String,
+      ?property_filters: String,
+      ?output_data_type: String,
+      ?execution_role_arn: String
+    ) -> _GetTileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTileResponse
+
+    interface _GetVectorEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::GetVectorEnrichmentJobOutput]
+      def arn: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def creation_time: () -> Time?
+      def duration_in_seconds: () -> Integer?
+      def status: () -> String?
+      def kms_key_id: () -> String?
+      def input_config: () -> Types::VectorEnrichmentJobInputConfig?
+      def job_config: () -> Types::VectorEnrichmentJobConfig?
+      def execution_role_arn: () -> String?
+      def error_details: () -> Types::VectorEnrichmentJobErrorDetails?
+      def export_status: () -> String?
+      def export_error_details: () -> Types::VectorEnrichmentJobExportErrorDetails?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_vector_enrichment_job: (
+      ?arn: String
+    ) -> _GetVectorEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVectorEnrichmentJobResponse
+
+    interface _ListEarthObservationJobsResponse
+      include Smithy::Client::_Response[Types::ListEarthObservationJobsOutput]
+      def earth_observation_job_summaries: () -> Array[Types::ListEarthObservationJobOutputConfig]?
+      def next_token: () -> String?
+    end
+    def list_earth_observation_jobs: (
+      ?status_equals: String,
+      ?sort_order: String,
+      ?sort_by: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEarthObservationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEarthObservationJobsResponse
+
+    interface _ListRasterDataCollectionsResponse
+      include Smithy::Client::_Response[Types::ListRasterDataCollectionsOperationOutput]
+      def raster_data_collection_summaries: () -> Array[Types::RasterDataCollectionMetadata]?
+      def next_token: () -> String?
+    end
+    def list_raster_data_collections: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRasterDataCollectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRasterDataCollectionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVectorEnrichmentJobsResponse
+      include Smithy::Client::_Response[Types::ListVectorEnrichmentJobsOutput]
+      def vector_enrichment_job_summaries: () -> Array[Types::ListVectorEnrichmentJobOutputConfig]?
+      def next_token: () -> String?
+    end
+    def list_vector_enrichment_jobs: (
+      ?status_equals: String,
+      ?sort_order: String,
+      ?sort_by: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVectorEnrichmentJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVectorEnrichmentJobsResponse
+
+    interface _SearchRasterDataCollectionResponse
+      include Smithy::Client::_Response[Types::SearchRasterDataCollectionOutput]
+      def approximate_result_count: () -> Integer?
+      def next_token: () -> String?
+      def items: () -> Array[Types::ItemSource]?
+    end
+    def search_raster_data_collection: (
+      ?arn: String,
+      ?raster_data_collection_query: {
+        time_range_filter: {
+          start_time: Time,
+          end_time: untyped
+        },
+        area_of_interest: {
+          area_of_interest_geometry: {
+            polygon_geometry: {
+              coordinates: Array[
+                Array[
+                  Array[Float]
+                ]
+              ]
+            },
+            multi_polygon_geometry: {
+              coordinates: Array[
+                Array[
+                  Array[
+                    Array[Float]
+                  ]
+                ]
+              ]
+            }
+          }
+        },
+        property_filters: {
+          properties: Array[
+            {
+              property: {
+                eo_cloud_cover: {
+                  lower_bound: Float,
+                  upper_bound: untyped
+                },
+                view_off_nadir: {
+                  lower_bound: untyped,
+                  upper_bound: untyped
+                },
+                view_sun_azimuth: {
+                  lower_bound: untyped,
+                  upper_bound: untyped
+                },
+                view_sun_elevation: {
+                  lower_bound: untyped,
+                  upper_bound: untyped
+                },
+                platform: {
+                  value: String,
+                  comparison_operator: String
+                },
+                landsat_cloud_cover_land: {
+                  lower_bound: untyped,
+                  upper_bound: untyped
+                }
+              }
+            }
+          ],
+          logical_operator: String
+        },
+        band_filter: Array[String]
+      },
+      ?next_token: String
+    ) -> _SearchRasterDataCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRasterDataCollectionResponse
+
+    interface _StartEarthObservationJobResponse
+      include Smithy::Client::_Response[Types::StartEarthObservationJobOperationOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def duration_in_seconds: () -> Integer?
+      def status: () -> String?
+      def kms_key_id: () -> String?
+      def input_config: () -> Types::InputConfigOutput?
+      def job_config: () -> Types::JobConfigInput?
+      def execution_role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_earth_observation_job: (
+      ?name: String,
+      ?client_token: String,
+      ?kms_key_id: String,
+      ?input_config: {
+        previous_earth_observation_job_arn: String,
+        raster_data_collection_query: {
+          raster_data_collection_arn: String,
+          time_range_filter: {
+            start_time: Time,
+            end_time: untyped
+          },
+          area_of_interest: {
+            area_of_interest_geometry: {
+              polygon_geometry: {
+                coordinates: Array[
+                  Array[
+                    Array[Float]
+                  ]
+                ]
+              },
+              multi_polygon_geometry: {
+                coordinates: Array[
+                  Array[
+                    Array[
+                      Array[Float]
+                    ]
+                  ]
+                ]
+              }
+            }
+          },
+          property_filters: {
+            properties: Array[
+              {
+                property: {
+                  eo_cloud_cover: {
+                    lower_bound: Float,
+                    upper_bound: untyped
+                  },
+                  view_off_nadir: {
+                    lower_bound: untyped,
+                    upper_bound: untyped
+                  },
+                  view_sun_azimuth: {
+                    lower_bound: untyped,
+                    upper_bound: untyped
+                  },
+                  view_sun_elevation: {
+                    lower_bound: untyped,
+                    upper_bound: untyped
+                  },
+                  platform: {
+                    value: String,
+                    comparison_operator: String
+                  },
+                  landsat_cloud_cover_land: {
+                    lower_bound: untyped,
+                    upper_bound: untyped
+                  }
+                }
+              }
+            ],
+            logical_operator: String
+          }
+        }
+      },
+      ?job_config: {
+        band_math_config: {
+          predefined_indices: Array[String],
+          custom_indices: {
+            operations: Array[
+              {
+                name: String,
+                equation: untyped,
+                output_type: String
+              }
+            ]
+          }
+        },
+        resampling_config: {
+          output_resolution: {
+            user_defined: {
+              value: Float,
+              unit: String
+            }
+          },
+          algorithm_name: String,
+          target_bands: untyped
+        },
+        temporal_statistics_config: {
+          group_by: String,
+          statistics: Array[String],
+          target_bands: untyped
+        },
+        cloud_removal_config: {
+          algorithm_name: String,
+          interpolation_value: untyped,
+          target_bands: untyped
+        },
+        zonal_statistics_config: {
+          zone_s3_path: String,
+          statistics: Array[String],
+          target_bands: untyped,
+          zone_s3_path_kms_key_id: String
+        },
+        geo_mosaic_config: {
+          algorithm_name: String,
+          target_bands: untyped
+        },
+        stack_config: {
+          output_resolution: {
+            predefined: String,
+            user_defined: untyped
+          },
+          target_bands: untyped
+        },
+        cloud_masking_config: {
+        },
+        land_cover_segmentation_config: {
+        }
+      },
+      ?execution_role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _StartEarthObservationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEarthObservationJobResponse
+
+    interface _StartVectorEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::StartVectorEnrichmentJobOperationOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def type: () -> String?
+      def creation_time: () -> Time?
+      def duration_in_seconds: () -> Integer?
+      def status: () -> String?
+      def kms_key_id: () -> String?
+      def input_config: () -> Types::VectorEnrichmentJobInputConfig?
+      def job_config: () -> Types::VectorEnrichmentJobConfig?
+      def execution_role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_vector_enrichment_job: (
+      ?name: String,
+      ?client_token: String,
+      ?kms_key_id: String,
+      ?input_config: {
+        document_type: String,
+        data_source_config: {
+          s3_data: {
+            s3_uri: String,
+            kms_key_id: String
+          }
+        }
+      },
+      ?job_config: {
+        reverse_geocoding_config: {
+          y_attribute_name: String,
+          x_attribute_name: untyped
+        },
+        map_matching_config: {
+          id_attribute_name: untyped,
+          y_attribute_name: untyped,
+          x_attribute_name: untyped,
+          timestamp_attribute_name: untyped
+        }
+      },
+      ?execution_role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _StartVectorEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVectorEnrichmentJobResponse
+
+    interface _StopEarthObservationJobResponse
+      include Smithy::Client::_Response[Types::StopEarthObservationJobOutput]
+    end
+    def stop_earth_observation_job: (
+      ?arn: String
+    ) -> _StopEarthObservationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEarthObservationJobResponse
+
+    interface _StopVectorEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::StopVectorEnrichmentJobOutput]
+    end
+    def stop_vector_enrichment_job: (
+      ?arn: String
+    ) -> _StopVectorEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopVectorEnrichmentJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

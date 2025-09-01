@@ -1,0 +1,588 @@
+module Aws::Cloud9
+  module Types
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class ConcurrentAccessException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    module ConnectionType
+      CONNECT_SSH: String
+      CONNECT_SSM: String
+    end
+
+    class CreateEnvironmentEC2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?client_request_token: String,
+        ?instance_type: String,
+        ?subnet_id: String,
+        ?image_id: String,
+        ?automatic_stop_time_minutes: Integer,
+        ?owner_arn: String,
+        ?tags: Array[Types::Tag],
+        ?connection_type: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_request_token: String?
+      attr_accessor instance_type: String?
+      attr_accessor subnet_id: String?
+      attr_accessor image_id: String?
+      attr_accessor automatic_stop_time_minutes: Integer?
+      attr_accessor owner_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor connection_type: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateEnvironmentEC2Result
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class CreateEnvironmentMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?user_arn: String,
+        ?permissions: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor permissions: String?
+    end
+
+    class CreateEnvironmentMembershipResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership: Types::EnvironmentMember,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership: Types::EnvironmentMember?
+    end
+
+    class DeleteEnvironmentMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor user_arn: String?
+    end
+
+    class DeleteEnvironmentMembershipResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class DeleteEnvironmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEnvironmentMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_arn: String,
+        ?environment_id: String,
+        ?permissions: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_arn: String?
+      attr_accessor environment_id: String?
+      attr_accessor permissions: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeEnvironmentMembershipsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memberships: Array[Types::EnvironmentMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memberships: Array[Types::EnvironmentMember]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEnvironmentStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class DescribeEnvironmentStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    class DescribeEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_ids: Array[String]?
+    end
+
+    class DescribeEnvironmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::Environment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::Environment]?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?connection_type: String,
+        ?arn: String,
+        ?owner_arn: String,
+        ?lifecycle: Types::EnvironmentLifecycle,
+        ?managed_credentials_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor connection_type: String?
+      attr_accessor arn: String?
+      attr_accessor owner_arn: String?
+      attr_accessor lifecycle: Types::EnvironmentLifecycle?
+      attr_accessor managed_credentials_status: String?
+    end
+
+    class EnvironmentLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+        ?failure_resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+      attr_accessor failure_resource: String?
+    end
+
+    module EnvironmentLifecycleStatus
+      CREATING: String
+      CREATED: String
+      CREATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    class EnvironmentMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: String,
+        ?user_id: String,
+        ?user_arn: String,
+        ?environment_id: String,
+        ?last_access: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: String?
+      attr_accessor user_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor environment_id: String?
+      attr_accessor last_access: Time?
+    end
+
+    module EnvironmentStatus
+      ERROR: String
+      CREATING: String
+      CONNECTING: String
+      READY: String
+      STOPPING: String
+      STOPPED: String
+      DELETING: String
+    end
+
+    module EnvironmentType
+      SSH: String
+      EC2: String
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class ListEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_ids: Array[String]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ManagedCredentialsAction
+      ENABLE: String
+      DISABLE: String
+    end
+
+    module ManagedCredentialsStatus
+      ENABLED_ON_CREATE: String
+      ENABLED_BY_OWNER: String
+      DISABLED_BY_DEFAULT: String
+      DISABLED_BY_OWNER: String
+      DISABLED_BY_COLLABORATOR: String
+      PENDING_REMOVAL_BY_COLLABORATOR: String
+      PENDING_START_REMOVAL_BY_COLLABORATOR: String
+      PENDING_REMOVAL_BY_OWNER: String
+      PENDING_START_REMOVAL_BY_OWNER: String
+      FAILED_REMOVAL_BY_COLLABORATOR: String
+      FAILED_REMOVAL_BY_OWNER: String
+    end
+
+    module MemberPermissions
+      READ_WRITE: String
+      READ_ONLY: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    module Permissions
+      OWNER: String
+      READ_WRITE: String
+      READ_ONLY: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?class_name: String,
+        ?code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor class_name: String?
+      attr_accessor code: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEnvironmentMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?user_arn: String,
+        ?permissions: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor permissions: String?
+    end
+
+    class UpdateEnvironmentMembershipResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership: Types::EnvironmentMember,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership: Types::EnvironmentMember?
+    end
+
+    class UpdateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?name: String,
+        ?description: String,
+        ?managed_credentials_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor managed_credentials_action: String?
+    end
+
+    class UpdateEnvironmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

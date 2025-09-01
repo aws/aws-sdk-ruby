@@ -1,0 +1,2882 @@
+module Aws::SWF
+  module Types
+
+    class ActivityTaskCancelRequestedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decision_task_completed_event_id: Integer,
+        ?activity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor activity_id: String?
+    end
+
+    class ActivityTaskCanceledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?latest_cancel_requested_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor latest_cancel_requested_event_id: Integer?
+    end
+
+    class ActivityTaskCompletedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ActivityTaskFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?details: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor details: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ActivityTaskScheduledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_type: Types::ActivityType,
+        ?activity_id: String,
+        ?input: String,
+        ?control: String,
+        ?schedule_to_start_timeout: String,
+        ?schedule_to_close_timeout: String,
+        ?start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?decision_task_completed_event_id: Integer,
+        ?heartbeat_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_type: Types::ActivityType?
+      attr_accessor activity_id: String?
+      attr_accessor input: String?
+      attr_accessor control: String?
+      attr_accessor schedule_to_start_timeout: String?
+      attr_accessor schedule_to_close_timeout: String?
+      attr_accessor start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor heartbeat_timeout: String?
+    end
+
+    class ActivityTaskStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity: String,
+        ?scheduled_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity: String?
+      attr_accessor scheduled_event_id: Integer?
+    end
+
+    class ActivityTaskTimedOutEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_type: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_type: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor details: String?
+    end
+
+    module ActivityTaskTimeoutType
+      START_TO_CLOSE: String
+      SCHEDULE_TO_START: String
+      SCHEDULE_TO_CLOSE: String
+      HEARTBEAT: String
+    end
+
+    class ActivityType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class ActivityTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_task_start_to_close_timeout: String,
+        ?default_task_heartbeat_timeout: String,
+        ?default_task_list: Types::TaskList,
+        ?default_task_priority: String,
+        ?default_task_schedule_to_start_timeout: String,
+        ?default_task_schedule_to_close_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_task_start_to_close_timeout: String?
+      attr_accessor default_task_heartbeat_timeout: String?
+      attr_accessor default_task_list: Types::TaskList?
+      attr_accessor default_task_priority: String?
+      attr_accessor default_task_schedule_to_start_timeout: String?
+      attr_accessor default_task_schedule_to_close_timeout: String?
+    end
+
+    class ActivityTypeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_type: Types::ActivityType,
+        ?status: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?deprecation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_type: Types::ActivityType?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor deprecation_date: Time?
+    end
+
+    class CancelTimerDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+    end
+
+    module CancelTimerFailedCause
+      TIMER_ID_UNKNOWN: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class CancelTimerFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class CancelWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: String?
+    end
+
+    module CancelWorkflowExecutionFailedCause
+      UNHANDLED_DECISION: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class CancelWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    module ChildPolicy
+      TERMINATE: String
+      REQUEST_CANCEL: String
+      ABANDON: String
+    end
+
+    class ChildWorkflowExecutionCanceledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?details: String,
+        ?initiated_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor details: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ChildWorkflowExecutionCompletedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?result: String,
+        ?initiated_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor result: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ChildWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?reason: String,
+        ?details: String,
+        ?initiated_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor reason: String?
+      attr_accessor details: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ChildWorkflowExecutionStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?initiated_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor initiated_event_id: Integer?
+    end
+
+    class ChildWorkflowExecutionTerminatedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?initiated_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class ChildWorkflowExecutionTimedOutEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?timeout_type: String,
+        ?initiated_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor timeout_type: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    module CloseStatus
+      COMPLETED: String
+      FAILED: String
+      CANCELED: String
+      TERMINATED: String
+      CONTINUED_AS_NEW: String
+      TIMED_OUT: String
+    end
+
+    class CloseStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class CompleteWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+    end
+
+    module CompleteWorkflowExecutionFailedCause
+      UNHANDLED_DECISION: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class CompleteWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class ContinueAsNewWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?task_start_to_close_timeout: String,
+        ?child_policy: String,
+        ?tag_list: Array[String],
+        ?workflow_type_version: String,
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor child_policy: String?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor workflow_type_version: String?
+      attr_accessor lambda_role: String?
+    end
+
+    module ContinueAsNewWorkflowExecutionFailedCause
+      UNHANDLED_DECISION: String
+      WORKFLOW_TYPE_DEPRECATED: String
+      WORKFLOW_TYPE_DOES_NOT_EXIST: String
+      DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_TASK_LIST_UNDEFINED: String
+      DEFAULT_CHILD_POLICY_UNDEFINED: String
+      CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class ContinueAsNewWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class CountClosedWorkflowExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?start_time_filter: Types::ExecutionTimeFilter,
+        ?close_time_filter: Types::ExecutionTimeFilter,
+        ?execution_filter: Types::WorkflowExecutionFilter,
+        ?type_filter: Types::WorkflowTypeFilter,
+        ?tag_filter: Types::TagFilter,
+        ?close_status_filter: Types::CloseStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor close_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter?
+      attr_accessor type_filter: Types::WorkflowTypeFilter?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor close_status_filter: Types::CloseStatusFilter?
+    end
+
+    class CountClosedWorkflowExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor truncated: bool?
+    end
+
+    class CountOpenWorkflowExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?start_time_filter: Types::ExecutionTimeFilter,
+        ?type_filter: Types::WorkflowTypeFilter,
+        ?tag_filter: Types::TagFilter,
+        ?execution_filter: Types::WorkflowExecutionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor type_filter: Types::WorkflowTypeFilter?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter?
+    end
+
+    class CountOpenWorkflowExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor truncated: bool?
+    end
+
+    class CountPendingActivityTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?task_list: Types::TaskList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor task_list: Types::TaskList?
+    end
+
+    class CountPendingActivityTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor truncated: bool?
+    end
+
+    class CountPendingDecisionTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?task_list: Types::TaskList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor task_list: Types::TaskList?
+    end
+
+    class CountPendingDecisionTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor truncated: bool?
+    end
+
+    class Decision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decision_type: String,
+        ?schedule_activity_task_decision_attributes: Types::ScheduleActivityTaskDecisionAttributes,
+        ?request_cancel_activity_task_decision_attributes: Types::RequestCancelActivityTaskDecisionAttributes,
+        ?complete_workflow_execution_decision_attributes: Types::CompleteWorkflowExecutionDecisionAttributes,
+        ?fail_workflow_execution_decision_attributes: Types::FailWorkflowExecutionDecisionAttributes,
+        ?cancel_workflow_execution_decision_attributes: Types::CancelWorkflowExecutionDecisionAttributes,
+        ?continue_as_new_workflow_execution_decision_attributes: Types::ContinueAsNewWorkflowExecutionDecisionAttributes,
+        ?record_marker_decision_attributes: Types::RecordMarkerDecisionAttributes,
+        ?start_timer_decision_attributes: Types::StartTimerDecisionAttributes,
+        ?cancel_timer_decision_attributes: Types::CancelTimerDecisionAttributes,
+        ?signal_external_workflow_execution_decision_attributes: Types::SignalExternalWorkflowExecutionDecisionAttributes,
+        ?request_cancel_external_workflow_execution_decision_attributes: Types::RequestCancelExternalWorkflowExecutionDecisionAttributes,
+        ?start_child_workflow_execution_decision_attributes: Types::StartChildWorkflowExecutionDecisionAttributes,
+        ?schedule_lambda_function_decision_attributes: Types::ScheduleLambdaFunctionDecisionAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decision_type: String?
+      attr_accessor schedule_activity_task_decision_attributes: Types::ScheduleActivityTaskDecisionAttributes?
+      attr_accessor request_cancel_activity_task_decision_attributes: Types::RequestCancelActivityTaskDecisionAttributes?
+      attr_accessor complete_workflow_execution_decision_attributes: Types::CompleteWorkflowExecutionDecisionAttributes?
+      attr_accessor fail_workflow_execution_decision_attributes: Types::FailWorkflowExecutionDecisionAttributes?
+      attr_accessor cancel_workflow_execution_decision_attributes: Types::CancelWorkflowExecutionDecisionAttributes?
+      attr_accessor continue_as_new_workflow_execution_decision_attributes: Types::ContinueAsNewWorkflowExecutionDecisionAttributes?
+      attr_accessor record_marker_decision_attributes: Types::RecordMarkerDecisionAttributes?
+      attr_accessor start_timer_decision_attributes: Types::StartTimerDecisionAttributes?
+      attr_accessor cancel_timer_decision_attributes: Types::CancelTimerDecisionAttributes?
+      attr_accessor signal_external_workflow_execution_decision_attributes: Types::SignalExternalWorkflowExecutionDecisionAttributes?
+      attr_accessor request_cancel_external_workflow_execution_decision_attributes: Types::RequestCancelExternalWorkflowExecutionDecisionAttributes?
+      attr_accessor start_child_workflow_execution_decision_attributes: Types::StartChildWorkflowExecutionDecisionAttributes?
+      attr_accessor schedule_lambda_function_decision_attributes: Types::ScheduleLambdaFunctionDecisionAttributes?
+    end
+
+    class DecisionTaskCompletedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_context: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?task_list: Types::TaskList,
+        ?task_list_schedule_to_start_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_context: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_list_schedule_to_start_timeout: String?
+    end
+
+    class DecisionTaskScheduledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?start_to_close_timeout: String,
+        ?schedule_to_start_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor start_to_close_timeout: String?
+      attr_accessor schedule_to_start_timeout: String?
+    end
+
+    class DecisionTaskStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity: String,
+        ?scheduled_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity: String?
+      attr_accessor scheduled_event_id: Integer?
+    end
+
+    class DecisionTaskTimedOutEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_type: String,
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_type: String?
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+    end
+
+    module DecisionTaskTimeoutType
+      START_TO_CLOSE: String
+      SCHEDULE_TO_START: String
+    end
+
+    module DecisionType
+      ScheduleActivityTask: String
+      RequestCancelActivityTask: String
+      CompleteWorkflowExecution: String
+      FailWorkflowExecution: String
+      CancelWorkflowExecution: String
+      ContinueAsNewWorkflowExecution: String
+      RecordMarker: String
+      StartTimer: String
+      CancelTimer: String
+      SignalExternalWorkflowExecution: String
+      RequestCancelExternalWorkflowExecution: String
+      StartChildWorkflowExecution: String
+      ScheduleLambdaFunction: String
+    end
+
+    class DefaultUndefinedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteActivityTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?activity_type: Types::ActivityType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor activity_type: Types::ActivityType?
+    end
+
+    class DeleteWorkflowTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_type: Types::WorkflowType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+    end
+
+    class DeprecateActivityTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?activity_type: Types::ActivityType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor activity_type: Types::ActivityType?
+    end
+
+    class DeprecateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeprecateWorkflowTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_type: Types::WorkflowType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+    end
+
+    class DescribeActivityTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?activity_type: Types::ActivityType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor activity_type: Types::ActivityType?
+    end
+
+    class DescribeActivityTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_info: Types::ActivityTypeInfo,
+        ?configuration: Types::ActivityTypeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_info: Types::ActivityTypeInfo?
+      attr_accessor configuration: Types::ActivityTypeConfiguration?
+    end
+
+    class DescribeDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_info: Types::DomainInfo,
+        ?configuration: Types::DomainConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_info: Types::DomainInfo?
+      attr_accessor configuration: Types::DomainConfiguration?
+    end
+
+    class DescribeWorkflowExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?execution: Types::WorkflowExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor execution: Types::WorkflowExecution?
+    end
+
+    class DescribeWorkflowExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_info: Types::WorkflowExecutionInfo,
+        ?execution_configuration: Types::WorkflowExecutionConfiguration,
+        ?open_counts: Types::WorkflowExecutionOpenCounts,
+        ?latest_activity_task_timestamp: Time,
+        ?latest_execution_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_info: Types::WorkflowExecutionInfo?
+      attr_accessor execution_configuration: Types::WorkflowExecutionConfiguration?
+      attr_accessor open_counts: Types::WorkflowExecutionOpenCounts?
+      attr_accessor latest_activity_task_timestamp: Time?
+      attr_accessor latest_execution_context: String?
+    end
+
+    class DescribeWorkflowTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_type: Types::WorkflowType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+    end
+
+    class DescribeWorkflowTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_info: Types::WorkflowTypeInfo,
+        ?configuration: Types::WorkflowTypeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_info: Types::WorkflowTypeInfo?
+      attr_accessor configuration: Types::WorkflowTypeConfiguration?
+    end
+
+    class DomainAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DomainConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution_retention_period_in_days: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution_retention_period_in_days: String?
+    end
+
+    class DomainDeprecatedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DomainInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?description: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+    end
+
+    module EventType
+      WorkflowExecutionStarted: String
+      WorkflowExecutionCancelRequested: String
+      WorkflowExecutionCompleted: String
+      CompleteWorkflowExecutionFailed: String
+      WorkflowExecutionFailed: String
+      FailWorkflowExecutionFailed: String
+      WorkflowExecutionTimedOut: String
+      WorkflowExecutionCanceled: String
+      CancelWorkflowExecutionFailed: String
+      WorkflowExecutionContinuedAsNew: String
+      ContinueAsNewWorkflowExecutionFailed: String
+      WorkflowExecutionTerminated: String
+      DecisionTaskScheduled: String
+      DecisionTaskStarted: String
+      DecisionTaskCompleted: String
+      DecisionTaskTimedOut: String
+      ActivityTaskScheduled: String
+      ScheduleActivityTaskFailed: String
+      ActivityTaskStarted: String
+      ActivityTaskCompleted: String
+      ActivityTaskFailed: String
+      ActivityTaskTimedOut: String
+      ActivityTaskCanceled: String
+      ActivityTaskCancelRequested: String
+      RequestCancelActivityTaskFailed: String
+      WorkflowExecutionSignaled: String
+      MarkerRecorded: String
+      RecordMarkerFailed: String
+      TimerStarted: String
+      StartTimerFailed: String
+      TimerFired: String
+      TimerCanceled: String
+      CancelTimerFailed: String
+      StartChildWorkflowExecutionInitiated: String
+      StartChildWorkflowExecutionFailed: String
+      ChildWorkflowExecutionStarted: String
+      ChildWorkflowExecutionCompleted: String
+      ChildWorkflowExecutionFailed: String
+      ChildWorkflowExecutionTimedOut: String
+      ChildWorkflowExecutionCanceled: String
+      ChildWorkflowExecutionTerminated: String
+      SignalExternalWorkflowExecutionInitiated: String
+      SignalExternalWorkflowExecutionFailed: String
+      ExternalWorkflowExecutionSignaled: String
+      RequestCancelExternalWorkflowExecutionInitiated: String
+      RequestCancelExternalWorkflowExecutionFailed: String
+      ExternalWorkflowExecutionCancelRequested: String
+      LambdaFunctionScheduled: String
+      LambdaFunctionStarted: String
+      LambdaFunctionCompleted: String
+      LambdaFunctionFailed: String
+      LambdaFunctionTimedOut: String
+      ScheduleLambdaFunctionFailed: String
+      StartLambdaFunctionFailed: String
+    end
+
+    module ExecutionStatus
+      OPEN: String
+      CLOSED: String
+    end
+
+    class ExecutionTimeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oldest_date: Time,
+        ?latest_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oldest_date: Time?
+      attr_accessor latest_date: Time?
+    end
+
+    class ExternalWorkflowExecutionCancelRequestedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?initiated_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor initiated_event_id: Integer?
+    end
+
+    class ExternalWorkflowExecutionSignaledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_execution: Types::WorkflowExecution,
+        ?initiated_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor initiated_event_id: Integer?
+    end
+
+    class FailWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor details: String?
+    end
+
+    module FailWorkflowExecutionFailedCause
+      UNHANDLED_DECISION: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class FailWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class GetWorkflowExecutionHistoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?execution: Types::WorkflowExecution,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor execution: Types::WorkflowExecution?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+    end
+
+    class GetWorkflowExecutionHistoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::HistoryEvent],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::HistoryEvent]?
+      attr_accessor next_page_token: String?
+    end
+
+    class HistoryEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_timestamp: Time,
+        ?event_type: String,
+        ?event_id: Integer,
+        ?workflow_execution_started_event_attributes: Types::WorkflowExecutionStartedEventAttributes,
+        ?workflow_execution_completed_event_attributes: Types::WorkflowExecutionCompletedEventAttributes,
+        ?complete_workflow_execution_failed_event_attributes: Types::CompleteWorkflowExecutionFailedEventAttributes,
+        ?workflow_execution_failed_event_attributes: Types::WorkflowExecutionFailedEventAttributes,
+        ?fail_workflow_execution_failed_event_attributes: Types::FailWorkflowExecutionFailedEventAttributes,
+        ?workflow_execution_timed_out_event_attributes: Types::WorkflowExecutionTimedOutEventAttributes,
+        ?workflow_execution_canceled_event_attributes: Types::WorkflowExecutionCanceledEventAttributes,
+        ?cancel_workflow_execution_failed_event_attributes: Types::CancelWorkflowExecutionFailedEventAttributes,
+        ?workflow_execution_continued_as_new_event_attributes: Types::WorkflowExecutionContinuedAsNewEventAttributes,
+        ?continue_as_new_workflow_execution_failed_event_attributes: Types::ContinueAsNewWorkflowExecutionFailedEventAttributes,
+        ?workflow_execution_terminated_event_attributes: Types::WorkflowExecutionTerminatedEventAttributes,
+        ?workflow_execution_cancel_requested_event_attributes: Types::WorkflowExecutionCancelRequestedEventAttributes,
+        ?decision_task_scheduled_event_attributes: Types::DecisionTaskScheduledEventAttributes,
+        ?decision_task_started_event_attributes: Types::DecisionTaskStartedEventAttributes,
+        ?decision_task_completed_event_attributes: Types::DecisionTaskCompletedEventAttributes,
+        ?decision_task_timed_out_event_attributes: Types::DecisionTaskTimedOutEventAttributes,
+        ?activity_task_scheduled_event_attributes: Types::ActivityTaskScheduledEventAttributes,
+        ?activity_task_started_event_attributes: Types::ActivityTaskStartedEventAttributes,
+        ?activity_task_completed_event_attributes: Types::ActivityTaskCompletedEventAttributes,
+        ?activity_task_failed_event_attributes: Types::ActivityTaskFailedEventAttributes,
+        ?activity_task_timed_out_event_attributes: Types::ActivityTaskTimedOutEventAttributes,
+        ?activity_task_canceled_event_attributes: Types::ActivityTaskCanceledEventAttributes,
+        ?activity_task_cancel_requested_event_attributes: Types::ActivityTaskCancelRequestedEventAttributes,
+        ?workflow_execution_signaled_event_attributes: Types::WorkflowExecutionSignaledEventAttributes,
+        ?marker_recorded_event_attributes: Types::MarkerRecordedEventAttributes,
+        ?record_marker_failed_event_attributes: Types::RecordMarkerFailedEventAttributes,
+        ?timer_started_event_attributes: Types::TimerStartedEventAttributes,
+        ?timer_fired_event_attributes: Types::TimerFiredEventAttributes,
+        ?timer_canceled_event_attributes: Types::TimerCanceledEventAttributes,
+        ?start_child_workflow_execution_initiated_event_attributes: Types::StartChildWorkflowExecutionInitiatedEventAttributes,
+        ?child_workflow_execution_started_event_attributes: Types::ChildWorkflowExecutionStartedEventAttributes,
+        ?child_workflow_execution_completed_event_attributes: Types::ChildWorkflowExecutionCompletedEventAttributes,
+        ?child_workflow_execution_failed_event_attributes: Types::ChildWorkflowExecutionFailedEventAttributes,
+        ?child_workflow_execution_timed_out_event_attributes: Types::ChildWorkflowExecutionTimedOutEventAttributes,
+        ?child_workflow_execution_canceled_event_attributes: Types::ChildWorkflowExecutionCanceledEventAttributes,
+        ?child_workflow_execution_terminated_event_attributes: Types::ChildWorkflowExecutionTerminatedEventAttributes,
+        ?signal_external_workflow_execution_initiated_event_attributes: Types::SignalExternalWorkflowExecutionInitiatedEventAttributes,
+        ?external_workflow_execution_signaled_event_attributes: Types::ExternalWorkflowExecutionSignaledEventAttributes,
+        ?signal_external_workflow_execution_failed_event_attributes: Types::SignalExternalWorkflowExecutionFailedEventAttributes,
+        ?external_workflow_execution_cancel_requested_event_attributes: Types::ExternalWorkflowExecutionCancelRequestedEventAttributes,
+        ?request_cancel_external_workflow_execution_initiated_event_attributes: Types::RequestCancelExternalWorkflowExecutionInitiatedEventAttributes,
+        ?request_cancel_external_workflow_execution_failed_event_attributes: Types::RequestCancelExternalWorkflowExecutionFailedEventAttributes,
+        ?schedule_activity_task_failed_event_attributes: Types::ScheduleActivityTaskFailedEventAttributes,
+        ?request_cancel_activity_task_failed_event_attributes: Types::RequestCancelActivityTaskFailedEventAttributes,
+        ?start_timer_failed_event_attributes: Types::StartTimerFailedEventAttributes,
+        ?cancel_timer_failed_event_attributes: Types::CancelTimerFailedEventAttributes,
+        ?start_child_workflow_execution_failed_event_attributes: Types::StartChildWorkflowExecutionFailedEventAttributes,
+        ?lambda_function_scheduled_event_attributes: Types::LambdaFunctionScheduledEventAttributes,
+        ?lambda_function_started_event_attributes: Types::LambdaFunctionStartedEventAttributes,
+        ?lambda_function_completed_event_attributes: Types::LambdaFunctionCompletedEventAttributes,
+        ?lambda_function_failed_event_attributes: Types::LambdaFunctionFailedEventAttributes,
+        ?lambda_function_timed_out_event_attributes: Types::LambdaFunctionTimedOutEventAttributes,
+        ?schedule_lambda_function_failed_event_attributes: Types::ScheduleLambdaFunctionFailedEventAttributes,
+        ?start_lambda_function_failed_event_attributes: Types::StartLambdaFunctionFailedEventAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_timestamp: Time?
+      attr_accessor event_type: String?
+      attr_accessor event_id: Integer?
+      attr_accessor workflow_execution_started_event_attributes: Types::WorkflowExecutionStartedEventAttributes?
+      attr_accessor workflow_execution_completed_event_attributes: Types::WorkflowExecutionCompletedEventAttributes?
+      attr_accessor complete_workflow_execution_failed_event_attributes: Types::CompleteWorkflowExecutionFailedEventAttributes?
+      attr_accessor workflow_execution_failed_event_attributes: Types::WorkflowExecutionFailedEventAttributes?
+      attr_accessor fail_workflow_execution_failed_event_attributes: Types::FailWorkflowExecutionFailedEventAttributes?
+      attr_accessor workflow_execution_timed_out_event_attributes: Types::WorkflowExecutionTimedOutEventAttributes?
+      attr_accessor workflow_execution_canceled_event_attributes: Types::WorkflowExecutionCanceledEventAttributes?
+      attr_accessor cancel_workflow_execution_failed_event_attributes: Types::CancelWorkflowExecutionFailedEventAttributes?
+      attr_accessor workflow_execution_continued_as_new_event_attributes: Types::WorkflowExecutionContinuedAsNewEventAttributes?
+      attr_accessor continue_as_new_workflow_execution_failed_event_attributes: Types::ContinueAsNewWorkflowExecutionFailedEventAttributes?
+      attr_accessor workflow_execution_terminated_event_attributes: Types::WorkflowExecutionTerminatedEventAttributes?
+      attr_accessor workflow_execution_cancel_requested_event_attributes: Types::WorkflowExecutionCancelRequestedEventAttributes?
+      attr_accessor decision_task_scheduled_event_attributes: Types::DecisionTaskScheduledEventAttributes?
+      attr_accessor decision_task_started_event_attributes: Types::DecisionTaskStartedEventAttributes?
+      attr_accessor decision_task_completed_event_attributes: Types::DecisionTaskCompletedEventAttributes?
+      attr_accessor decision_task_timed_out_event_attributes: Types::DecisionTaskTimedOutEventAttributes?
+      attr_accessor activity_task_scheduled_event_attributes: Types::ActivityTaskScheduledEventAttributes?
+      attr_accessor activity_task_started_event_attributes: Types::ActivityTaskStartedEventAttributes?
+      attr_accessor activity_task_completed_event_attributes: Types::ActivityTaskCompletedEventAttributes?
+      attr_accessor activity_task_failed_event_attributes: Types::ActivityTaskFailedEventAttributes?
+      attr_accessor activity_task_timed_out_event_attributes: Types::ActivityTaskTimedOutEventAttributes?
+      attr_accessor activity_task_canceled_event_attributes: Types::ActivityTaskCanceledEventAttributes?
+      attr_accessor activity_task_cancel_requested_event_attributes: Types::ActivityTaskCancelRequestedEventAttributes?
+      attr_accessor workflow_execution_signaled_event_attributes: Types::WorkflowExecutionSignaledEventAttributes?
+      attr_accessor marker_recorded_event_attributes: Types::MarkerRecordedEventAttributes?
+      attr_accessor record_marker_failed_event_attributes: Types::RecordMarkerFailedEventAttributes?
+      attr_accessor timer_started_event_attributes: Types::TimerStartedEventAttributes?
+      attr_accessor timer_fired_event_attributes: Types::TimerFiredEventAttributes?
+      attr_accessor timer_canceled_event_attributes: Types::TimerCanceledEventAttributes?
+      attr_accessor start_child_workflow_execution_initiated_event_attributes: Types::StartChildWorkflowExecutionInitiatedEventAttributes?
+      attr_accessor child_workflow_execution_started_event_attributes: Types::ChildWorkflowExecutionStartedEventAttributes?
+      attr_accessor child_workflow_execution_completed_event_attributes: Types::ChildWorkflowExecutionCompletedEventAttributes?
+      attr_accessor child_workflow_execution_failed_event_attributes: Types::ChildWorkflowExecutionFailedEventAttributes?
+      attr_accessor child_workflow_execution_timed_out_event_attributes: Types::ChildWorkflowExecutionTimedOutEventAttributes?
+      attr_accessor child_workflow_execution_canceled_event_attributes: Types::ChildWorkflowExecutionCanceledEventAttributes?
+      attr_accessor child_workflow_execution_terminated_event_attributes: Types::ChildWorkflowExecutionTerminatedEventAttributes?
+      attr_accessor signal_external_workflow_execution_initiated_event_attributes: Types::SignalExternalWorkflowExecutionInitiatedEventAttributes?
+      attr_accessor external_workflow_execution_signaled_event_attributes: Types::ExternalWorkflowExecutionSignaledEventAttributes?
+      attr_accessor signal_external_workflow_execution_failed_event_attributes: Types::SignalExternalWorkflowExecutionFailedEventAttributes?
+      attr_accessor external_workflow_execution_cancel_requested_event_attributes: Types::ExternalWorkflowExecutionCancelRequestedEventAttributes?
+      attr_accessor request_cancel_external_workflow_execution_initiated_event_attributes: Types::RequestCancelExternalWorkflowExecutionInitiatedEventAttributes?
+      attr_accessor request_cancel_external_workflow_execution_failed_event_attributes: Types::RequestCancelExternalWorkflowExecutionFailedEventAttributes?
+      attr_accessor schedule_activity_task_failed_event_attributes: Types::ScheduleActivityTaskFailedEventAttributes?
+      attr_accessor request_cancel_activity_task_failed_event_attributes: Types::RequestCancelActivityTaskFailedEventAttributes?
+      attr_accessor start_timer_failed_event_attributes: Types::StartTimerFailedEventAttributes?
+      attr_accessor cancel_timer_failed_event_attributes: Types::CancelTimerFailedEventAttributes?
+      attr_accessor start_child_workflow_execution_failed_event_attributes: Types::StartChildWorkflowExecutionFailedEventAttributes?
+      attr_accessor lambda_function_scheduled_event_attributes: Types::LambdaFunctionScheduledEventAttributes?
+      attr_accessor lambda_function_started_event_attributes: Types::LambdaFunctionStartedEventAttributes?
+      attr_accessor lambda_function_completed_event_attributes: Types::LambdaFunctionCompletedEventAttributes?
+      attr_accessor lambda_function_failed_event_attributes: Types::LambdaFunctionFailedEventAttributes?
+      attr_accessor lambda_function_timed_out_event_attributes: Types::LambdaFunctionTimedOutEventAttributes?
+      attr_accessor schedule_lambda_function_failed_event_attributes: Types::ScheduleLambdaFunctionFailedEventAttributes?
+      attr_accessor start_lambda_function_failed_event_attributes: Types::StartLambdaFunctionFailedEventAttributes?
+    end
+
+    class LambdaFunctionCompletedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor result: String?
+    end
+
+    class LambdaFunctionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?reason: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor reason: String?
+      attr_accessor details: String?
+    end
+
+    class LambdaFunctionScheduledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?control: String,
+        ?input: String,
+        ?start_to_close_timeout: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor control: String?
+      attr_accessor input: String?
+      attr_accessor start_to_close_timeout: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class LambdaFunctionStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_event_id: Integer?
+    end
+
+    class LambdaFunctionTimedOutEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_event_id: Integer,
+        ?started_event_id: Integer,
+        ?timeout_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor started_event_id: Integer?
+      attr_accessor timeout_type: String?
+    end
+
+    module LambdaFunctionTimeoutType
+      START_TO_CLOSE: String
+    end
+
+    class LimitExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListActivityTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?name: String,
+        ?registration_status: String,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor registration_status: String?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+    end
+
+    class ListActivityTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_infos: Array[Types::ActivityTypeInfo],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_infos: Array[Types::ActivityTypeInfo]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListClosedWorkflowExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?start_time_filter: Types::ExecutionTimeFilter,
+        ?close_time_filter: Types::ExecutionTimeFilter,
+        ?execution_filter: Types::WorkflowExecutionFilter,
+        ?close_status_filter: Types::CloseStatusFilter,
+        ?type_filter: Types::WorkflowTypeFilter,
+        ?tag_filter: Types::TagFilter,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor close_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter?
+      attr_accessor close_status_filter: Types::CloseStatusFilter?
+      attr_accessor type_filter: Types::WorkflowTypeFilter?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+    end
+
+    class ListClosedWorkflowExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_infos: Array[Types::WorkflowExecutionInfo],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_infos: Array[Types::WorkflowExecutionInfo]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?registration_status: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor registration_status: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+    end
+
+    class ListDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_infos: Array[Types::DomainInfo],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_infos: Array[Types::DomainInfo]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListOpenWorkflowExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?start_time_filter: Types::ExecutionTimeFilter,
+        ?type_filter: Types::WorkflowTypeFilter,
+        ?tag_filter: Types::TagFilter,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+        ?execution_filter: Types::WorkflowExecutionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter?
+      attr_accessor type_filter: Types::WorkflowTypeFilter?
+      attr_accessor tag_filter: Types::TagFilter?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter?
+    end
+
+    class ListOpenWorkflowExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_infos: Array[Types::WorkflowExecutionInfo],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_infos: Array[Types::WorkflowExecutionInfo]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::ResourceTag]?
+    end
+
+    class ListWorkflowTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?name: String,
+        ?registration_status: String,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor registration_status: String?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+    end
+
+    class ListWorkflowTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type_infos: Array[Types::WorkflowTypeInfo],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type_infos: Array[Types::WorkflowTypeInfo]?
+      attr_accessor next_page_token: String?
+    end
+
+    class MarkerRecordedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker_name: String,
+        ?details: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker_name: String?
+      attr_accessor details: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class OperationNotPermittedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PollForActivityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?task_list: Types::TaskList,
+        ?identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor identity: String?
+    end
+
+    class PollForActivityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?activity_id: String,
+        ?started_event_id: Integer,
+        ?workflow_execution: Types::WorkflowExecution,
+        ?activity_type: Types::ActivityType,
+        ?input: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor activity_id: String?
+      attr_accessor started_event_id: Integer?
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor activity_type: Types::ActivityType?
+      attr_accessor input: String?
+    end
+
+    class PollForDecisionTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?task_list: Types::TaskList,
+        ?identity: String,
+        ?next_page_token: String,
+        ?maximum_page_size: Integer,
+        ?reverse_order: bool,
+        ?start_at_previous_started_event: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor identity: String?
+      attr_accessor next_page_token: String?
+      attr_accessor maximum_page_size: Integer?
+      attr_accessor reverse_order: bool?
+      attr_accessor start_at_previous_started_event: bool?
+    end
+
+    class PollForDecisionTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?started_event_id: Integer,
+        ?workflow_execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?events: Array[Types::HistoryEvent],
+        ?next_page_token: String,
+        ?previous_started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor started_event_id: Integer?
+      attr_accessor workflow_execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor events: Array[Types::HistoryEvent]?
+      attr_accessor next_page_token: String?
+      attr_accessor previous_started_event_id: Integer?
+    end
+
+    class RecordActivityTaskHeartbeatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor details: String?
+    end
+
+    class RecordActivityTaskHeartbeatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cancel_requested: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cancel_requested: bool?
+    end
+
+    class RecordMarkerDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker_name: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker_name: String?
+      attr_accessor details: String?
+    end
+
+    module RecordMarkerFailedCause
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class RecordMarkerFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker_name: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker_name: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class RegisterActivityTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?name: String,
+        ?version: String,
+        ?description: String,
+        ?default_task_start_to_close_timeout: String,
+        ?default_task_heartbeat_timeout: String,
+        ?default_task_list: Types::TaskList,
+        ?default_task_priority: String,
+        ?default_task_schedule_to_start_timeout: String,
+        ?default_task_schedule_to_close_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor description: String?
+      attr_accessor default_task_start_to_close_timeout: String?
+      attr_accessor default_task_heartbeat_timeout: String?
+      attr_accessor default_task_list: Types::TaskList?
+      attr_accessor default_task_priority: String?
+      attr_accessor default_task_schedule_to_start_timeout: String?
+      attr_accessor default_task_schedule_to_close_timeout: String?
+    end
+
+    class RegisterDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?workflow_execution_retention_period_in_days: String,
+        ?tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor workflow_execution_retention_period_in_days: String?
+      attr_accessor tags: Array[Types::ResourceTag]?
+    end
+
+    class RegisterWorkflowTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?name: String,
+        ?version: String,
+        ?description: String,
+        ?default_task_start_to_close_timeout: String,
+        ?default_execution_start_to_close_timeout: String,
+        ?default_task_list: Types::TaskList,
+        ?default_task_priority: String,
+        ?default_child_policy: String,
+        ?default_lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor description: String?
+      attr_accessor default_task_start_to_close_timeout: String?
+      attr_accessor default_execution_start_to_close_timeout: String?
+      attr_accessor default_task_list: Types::TaskList?
+      attr_accessor default_task_priority: String?
+      attr_accessor default_child_policy: String?
+      attr_accessor default_lambda_role: String?
+    end
+
+    module RegistrationStatus
+      REGISTERED: String
+      DEPRECATED: String
+    end
+
+    class RequestCancelActivityTaskDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+    end
+
+    module RequestCancelActivityTaskFailedCause
+      ACTIVITY_ID_UNKNOWN: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class RequestCancelActivityTaskFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class RequestCancelExternalWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor control: String?
+    end
+
+    module RequestCancelExternalWorkflowExecutionFailedCause
+      UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION: String
+      REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class RequestCancelExternalWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?cause: String,
+        ?initiated_event_id: Integer,
+        ?decision_task_completed_event_id: Integer,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor cause: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor control: String?
+    end
+
+    class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?decision_task_completed_event_id: Integer,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor control: String?
+    end
+
+    class RequestCancelWorkflowExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_id: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class RespondActivityTaskCanceledInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor details: String?
+    end
+
+    class RespondActivityTaskCompletedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor result: String?
+    end
+
+    class RespondActivityTaskFailedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?reason: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor reason: String?
+      attr_accessor details: String?
+    end
+
+    class RespondDecisionTaskCompletedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?decisions: Array[Types::Decision],
+        ?execution_context: String,
+        ?task_list: Types::TaskList,
+        ?task_list_schedule_to_start_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor decisions: Array[Types::Decision]?
+      attr_accessor execution_context: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_list_schedule_to_start_timeout: String?
+    end
+
+    class ScheduleActivityTaskDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_type: Types::ActivityType,
+        ?activity_id: String,
+        ?control: String,
+        ?input: String,
+        ?schedule_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?schedule_to_start_timeout: String,
+        ?start_to_close_timeout: String,
+        ?heartbeat_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_type: Types::ActivityType?
+      attr_accessor activity_id: String?
+      attr_accessor control: String?
+      attr_accessor input: String?
+      attr_accessor schedule_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor schedule_to_start_timeout: String?
+      attr_accessor start_to_close_timeout: String?
+      attr_accessor heartbeat_timeout: String?
+    end
+
+    module ScheduleActivityTaskFailedCause
+      ACTIVITY_TYPE_DEPRECATED: String
+      ACTIVITY_TYPE_DOES_NOT_EXIST: String
+      ACTIVITY_ID_ALREADY_IN_USE: String
+      OPEN_ACTIVITIES_LIMIT_EXCEEDED: String
+      ACTIVITY_CREATION_RATE_EXCEEDED: String
+      DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_TASK_LIST_UNDEFINED: String
+      DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED: String
+      DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class ScheduleActivityTaskFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_type: Types::ActivityType,
+        ?activity_id: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_type: Types::ActivityType?
+      attr_accessor activity_id: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class ScheduleLambdaFunctionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?control: String,
+        ?input: String,
+        ?start_to_close_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor control: String?
+      attr_accessor input: String?
+      attr_accessor start_to_close_timeout: String?
+    end
+
+    module ScheduleLambdaFunctionFailedCause
+      ID_ALREADY_IN_USE: String
+      OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED: String
+      LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED: String
+      LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION: String
+    end
+
+    class ScheduleLambdaFunctionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class SignalExternalWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?signal_name: String,
+        ?input: String,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor signal_name: String?
+      attr_accessor input: String?
+      attr_accessor control: String?
+    end
+
+    module SignalExternalWorkflowExecutionFailedCause
+      UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION: String
+      SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class SignalExternalWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?cause: String,
+        ?initiated_event_id: Integer,
+        ?decision_task_completed_event_id: Integer,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor cause: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor control: String?
+    end
+
+    class SignalExternalWorkflowExecutionInitiatedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+        ?signal_name: String,
+        ?input: String,
+        ?decision_task_completed_event_id: Integer,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor signal_name: String?
+      attr_accessor input: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor control: String?
+    end
+
+    class SignalWorkflowExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_id: String,
+        ?run_id: String,
+        ?signal_name: String,
+        ?input: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor signal_name: String?
+      attr_accessor input: String?
+    end
+
+    class StartChildWorkflowExecutionDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_type: Types::WorkflowType,
+        ?workflow_id: String,
+        ?control: String,
+        ?input: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?task_start_to_close_timeout: String,
+        ?child_policy: String,
+        ?tag_list: Array[String],
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor workflow_id: String?
+      attr_accessor control: String?
+      attr_accessor input: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor child_policy: String?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor lambda_role: String?
+    end
+
+    module StartChildWorkflowExecutionFailedCause
+      WORKFLOW_TYPE_DOES_NOT_EXIST: String
+      WORKFLOW_TYPE_DEPRECATED: String
+      OPEN_CHILDREN_LIMIT_EXCEEDED: String
+      OPEN_WORKFLOWS_LIMIT_EXCEEDED: String
+      CHILD_CREATION_RATE_EXCEEDED: String
+      WORKFLOW_ALREADY_RUNNING: String
+      DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_TASK_LIST_UNDEFINED: String
+      DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED: String
+      DEFAULT_CHILD_POLICY_UNDEFINED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class StartChildWorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_type: Types::WorkflowType,
+        ?cause: String,
+        ?workflow_id: String,
+        ?initiated_event_id: Integer,
+        ?decision_task_completed_event_id: Integer,
+        ?control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor cause: String?
+      attr_accessor workflow_id: String?
+      attr_accessor initiated_event_id: Integer?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor control: String?
+    end
+
+    class StartChildWorkflowExecutionInitiatedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?workflow_type: Types::WorkflowType,
+        ?control: String,
+        ?input: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?decision_task_completed_event_id: Integer,
+        ?child_policy: String,
+        ?task_start_to_close_timeout: String,
+        ?tag_list: Array[String],
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor control: String?
+      attr_accessor input: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor child_policy: String?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor lambda_role: String?
+    end
+
+    module StartLambdaFunctionFailedCause
+      ASSUME_ROLE_FAILED: String
+    end
+
+    class StartLambdaFunctionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_event_id: Integer,
+        ?cause: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_event_id: Integer?
+      attr_accessor cause: String?
+      attr_accessor message: String?
+    end
+
+    class StartTimerDecisionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?control: String,
+        ?start_to_fire_timeout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor control: String?
+      attr_accessor start_to_fire_timeout: String?
+    end
+
+    module StartTimerFailedCause
+      TIMER_ID_ALREADY_IN_USE: String
+      OPEN_TIMERS_LIMIT_EXCEEDED: String
+      TIMER_CREATION_RATE_EXCEEDED: String
+      OPERATION_NOT_PERMITTED: String
+    end
+
+    class StartTimerFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?cause: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor cause: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class StartWorkflowExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_id: String,
+        ?workflow_type: Types::WorkflowType,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?input: String,
+        ?execution_start_to_close_timeout: String,
+        ?tag_list: Array[String],
+        ?task_start_to_close_timeout: String,
+        ?child_policy: String,
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_id: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor input: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor child_policy: String?
+      attr_accessor lambda_role: String?
+    end
+
+    class StartWorkflowExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_id: String?
+    end
+
+    class TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::ResourceTag]?
+    end
+
+    class TaskList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class TerminateWorkflowExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_id: String,
+        ?run_id: String,
+        ?reason: String,
+        ?details: String,
+        ?child_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+      attr_accessor reason: String?
+      attr_accessor details: String?
+      attr_accessor child_policy: String?
+    end
+
+    class TimerCanceledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?started_event_id: Integer,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor started_event_id: Integer?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class TimerFiredEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?started_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor started_event_id: Integer?
+    end
+
+    class TimerStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_id: String,
+        ?control: String,
+        ?start_to_fire_timeout: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_id: String?
+      attr_accessor control: String?
+      attr_accessor start_to_fire_timeout: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class TooManyTagsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeDeprecatedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TypeNotDeprecatedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UndeprecateActivityTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?activity_type: Types::ActivityType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor activity_type: Types::ActivityType?
+    end
+
+    class UndeprecateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class UndeprecateWorkflowTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?workflow_type: Types::WorkflowType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+    end
+
+    class UnknownResourceFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class WorkflowExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor run_id: String?
+    end
+
+    class WorkflowExecutionAlreadyStartedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module WorkflowExecutionCancelRequestedCause
+      CHILD_POLICY_APPLIED: String
+    end
+
+    class WorkflowExecutionCancelRequestedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_workflow_execution: Types::WorkflowExecution,
+        ?external_initiated_event_id: Integer,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_workflow_execution: Types::WorkflowExecution?
+      attr_accessor external_initiated_event_id: Integer?
+      attr_accessor cause: String?
+    end
+
+    class WorkflowExecutionCanceledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class WorkflowExecutionCompletedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class WorkflowExecutionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_start_to_close_timeout: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?child_policy: String,
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor child_policy: String?
+      attr_accessor lambda_role: String?
+    end
+
+    class WorkflowExecutionContinuedAsNewEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?decision_task_completed_event_id: Integer,
+        ?new_execution_run_id: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?task_start_to_close_timeout: String,
+        ?child_policy: String,
+        ?tag_list: Array[String],
+        ?workflow_type: Types::WorkflowType,
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+      attr_accessor new_execution_run_id: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor child_policy: String?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor lambda_role: String?
+    end
+
+    class WorkflowExecutionFailedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?details: String,
+        ?decision_task_completed_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor details: String?
+      attr_accessor decision_task_completed_event_id: Integer?
+    end
+
+    class WorkflowExecutionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+    end
+
+    class WorkflowExecutionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution: Types::WorkflowExecution,
+        ?workflow_type: Types::WorkflowType,
+        ?start_timestamp: Time,
+        ?close_timestamp: Time,
+        ?execution_status: String,
+        ?close_status: String,
+        ?parent: Types::WorkflowExecution,
+        ?tag_list: Array[String],
+        ?cancel_requested: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution: Types::WorkflowExecution?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor start_timestamp: Time?
+      attr_accessor close_timestamp: Time?
+      attr_accessor execution_status: String?
+      attr_accessor close_status: String?
+      attr_accessor parent: Types::WorkflowExecution?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor cancel_requested: bool?
+    end
+
+    class WorkflowExecutionOpenCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_activity_tasks: Integer,
+        ?open_decision_tasks: Integer,
+        ?open_timers: Integer,
+        ?open_child_workflow_executions: Integer,
+        ?open_lambda_functions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_activity_tasks: Integer?
+      attr_accessor open_decision_tasks: Integer?
+      attr_accessor open_timers: Integer?
+      attr_accessor open_child_workflow_executions: Integer?
+      attr_accessor open_lambda_functions: Integer?
+    end
+
+    class WorkflowExecutionSignaledEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signal_name: String,
+        ?input: String,
+        ?external_workflow_execution: Types::WorkflowExecution,
+        ?external_initiated_event_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signal_name: String?
+      attr_accessor input: String?
+      attr_accessor external_workflow_execution: Types::WorkflowExecution?
+      attr_accessor external_initiated_event_id: Integer?
+    end
+
+    class WorkflowExecutionStartedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?execution_start_to_close_timeout: String,
+        ?task_start_to_close_timeout: String,
+        ?child_policy: String,
+        ?task_list: Types::TaskList,
+        ?task_priority: String,
+        ?workflow_type: Types::WorkflowType,
+        ?tag_list: Array[String],
+        ?continued_execution_run_id: String,
+        ?parent_workflow_execution: Types::WorkflowExecution,
+        ?parent_initiated_event_id: Integer,
+        ?lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor execution_start_to_close_timeout: String?
+      attr_accessor task_start_to_close_timeout: String?
+      attr_accessor child_policy: String?
+      attr_accessor task_list: Types::TaskList?
+      attr_accessor task_priority: String?
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor tag_list: Array[String]?
+      attr_accessor continued_execution_run_id: String?
+      attr_accessor parent_workflow_execution: Types::WorkflowExecution?
+      attr_accessor parent_initiated_event_id: Integer?
+      attr_accessor lambda_role: String?
+    end
+
+    module WorkflowExecutionTerminatedCause
+      CHILD_POLICY_APPLIED: String
+      EVENT_LIMIT_EXCEEDED: String
+      OPERATOR_INITIATED: String
+    end
+
+    class WorkflowExecutionTerminatedEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?details: String,
+        ?child_policy: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor details: String?
+      attr_accessor child_policy: String?
+      attr_accessor cause: String?
+    end
+
+    class WorkflowExecutionTimedOutEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_type: String,
+        ?child_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_type: String?
+      attr_accessor child_policy: String?
+    end
+
+    module WorkflowExecutionTimeoutType
+      START_TO_CLOSE: String
+    end
+
+    class WorkflowType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class WorkflowTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_task_start_to_close_timeout: String,
+        ?default_execution_start_to_close_timeout: String,
+        ?default_task_list: Types::TaskList,
+        ?default_task_priority: String,
+        ?default_child_policy: String,
+        ?default_lambda_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_task_start_to_close_timeout: String?
+      attr_accessor default_execution_start_to_close_timeout: String?
+      attr_accessor default_task_list: Types::TaskList?
+      attr_accessor default_task_priority: String?
+      attr_accessor default_child_policy: String?
+      attr_accessor default_lambda_role: String?
+    end
+
+    class WorkflowTypeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class WorkflowTypeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_type: Types::WorkflowType,
+        ?status: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?deprecation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_type: Types::WorkflowType?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor deprecation_date: Time?
+    end
+  end
+end

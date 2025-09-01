@@ -1,0 +1,436 @@
+module Aws::TaxSettings
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::TaxSettings::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchDeleteTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::BatchDeleteTaxRegistrationResponse]
+      def errors: () -> Array[Types::BatchDeleteTaxRegistrationError]?
+    end
+    def batch_delete_tax_registration: (
+      ?account_ids: Array[String]
+    ) -> _BatchDeleteTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteTaxRegistrationResponse
+
+    interface _BatchGetTaxExemptionsResponse
+      include Smithy::Client::_Response[Types::BatchGetTaxExemptionsResponse]
+      def tax_exemption_details_map: () -> Hash[String, Types::TaxExemptionDetails]?
+      def failed_accounts: () -> Array[String]?
+    end
+    def batch_get_tax_exemptions: (
+      ?account_ids: Array[String]
+    ) -> _BatchGetTaxExemptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetTaxExemptionsResponse
+
+    interface _BatchPutTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::BatchPutTaxRegistrationResponse]
+      def status: () -> String?
+      def errors: () -> Array[Types::BatchPutTaxRegistrationError]?
+    end
+    def batch_put_tax_registration: (
+      ?account_ids: Array[String],
+      ?tax_registration_entry: {
+        registration_id: String,
+        registration_type: String,
+        legal_name: String,
+        legal_address: {
+          address_line1: String,
+          address_line2: String,
+          address_line3: String,
+          district_or_county: String,
+          city: String,
+          state_or_region: String,
+          postal_code: String,
+          country_code: String
+        },
+        sector: String,
+        additional_tax_information: {
+          malaysia_additional_info: {
+            service_tax_codes: Array[String],
+            tax_information_number: String,
+            business_registration_number: String
+          },
+          israel_additional_info: {
+            dealer_type: String,
+            customer_type: String
+          },
+          estonia_additional_info: {
+            registry_commercial_code: String
+          },
+          canada_additional_info: {
+            provincial_sales_tax_id: String,
+            canada_quebec_sales_tax_number: String,
+            canada_retail_sales_tax_number: String,
+            is_reseller_account: bool
+          },
+          spain_additional_info: {
+            registration_type: String
+          },
+          kenya_additional_info: {
+            person_type: String
+          },
+          south_korea_additional_info: {
+            business_representative_name: String,
+            line_of_business: String,
+            item_of_business: String
+          },
+          turkey_additional_info: {
+            tax_office: String,
+            kep_email_id: String,
+            secondary_tax_id: String,
+            industries: String
+          },
+          georgia_additional_info: {
+            person_type: untyped
+          },
+          italy_additional_info: {
+            sdi_account_id: String,
+            cig_number: String,
+            cup_number: String,
+            tax_code: String
+          },
+          romania_additional_info: {
+            tax_registration_number_type: String
+          },
+          ukraine_additional_info: {
+            ukraine_trn_type: String
+          },
+          poland_additional_info: {
+            individual_registration_number: String,
+            is_group_vat_enabled: untyped
+          },
+          saudi_arabia_additional_info: {
+            tax_registration_number_type: String
+          },
+          indonesia_additional_info: {
+            tax_registration_number_type: String,
+            ppn_exception_designation_code: String,
+            decision_number: String
+          },
+          vietnam_additional_info: {
+            enterprise_identification_number: String,
+            electronic_transaction_code_number: String,
+            payment_voucher_number: String,
+            payment_voucher_number_date: String
+          },
+          egypt_additional_info: {
+            unique_identification_number: String,
+            unique_identification_number_expiration_date: untyped
+          },
+          greece_additional_info: {
+            contracting_authority_code: String
+          },
+          uzbekistan_additional_info: {
+            tax_registration_number_type: String,
+            vat_registration_number: String
+          }
+        },
+        verification_details: {
+          date_of_birth: String,
+          tax_registration_documents: Array[
+            {
+              s3_location: {
+                bucket: String,
+                key: String
+              },
+              file: {
+                file_name: String,
+                file_content: String
+              }
+            }
+          ]
+        },
+        certified_email_id: String
+      }
+    ) -> _BatchPutTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutTaxRegistrationResponse
+
+    interface _DeleteSupplementalTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::DeleteSupplementalTaxRegistrationResponse]
+    end
+    def delete_supplemental_tax_registration: (
+      ?authority_id: String
+    ) -> _DeleteSupplementalTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSupplementalTaxRegistrationResponse
+
+    interface _DeleteTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::DeleteTaxRegistrationResponse]
+    end
+    def delete_tax_registration: (
+      ?account_id: String
+    ) -> _DeleteTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTaxRegistrationResponse
+
+    interface _GetTaxExemptionTypesResponse
+      include Smithy::Client::_Response[Types::GetTaxExemptionTypesResponse]
+      def tax_exemption_types: () -> Array[Types::TaxExemptionType]?
+    end
+    def get_tax_exemption_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaxExemptionTypesResponse
+
+    interface _GetTaxInheritanceResponse
+      include Smithy::Client::_Response[Types::GetTaxInheritanceResponse]
+      def heritage_status: () -> String?
+    end
+    def get_tax_inheritance: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaxInheritanceResponse
+
+    interface _GetTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::GetTaxRegistrationResponse]
+      def tax_registration: () -> Types::TaxRegistration?
+    end
+    def get_tax_registration: (
+      ?account_id: String
+    ) -> _GetTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaxRegistrationResponse
+
+    interface _GetTaxRegistrationDocumentResponse
+      include Smithy::Client::_Response[Types::GetTaxRegistrationDocumentResponse]
+      def destination_file_path: () -> String?
+      def presigned_s3_url: () -> String?
+    end
+    def get_tax_registration_document: (
+      ?destination_s3_location: {
+        bucket: String,
+        prefix: String
+      },
+      ?tax_document_metadata: {
+        tax_document_access_token: String,
+        tax_document_name: String
+      }
+    ) -> _GetTaxRegistrationDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaxRegistrationDocumentResponse
+
+    interface _ListSupplementalTaxRegistrationsResponse
+      include Smithy::Client::_Response[Types::ListSupplementalTaxRegistrationsResponse]
+      def tax_registrations: () -> Array[Types::SupplementalTaxRegistration]?
+      def next_token: () -> String?
+    end
+    def list_supplemental_tax_registrations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSupplementalTaxRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupplementalTaxRegistrationsResponse
+
+    interface _ListTaxExemptionsResponse
+      include Smithy::Client::_Response[Types::ListTaxExemptionsResponse]
+      def next_token: () -> String?
+      def tax_exemption_details_map: () -> Hash[String, Types::TaxExemptionDetails]?
+    end
+    def list_tax_exemptions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTaxExemptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaxExemptionsResponse
+
+    interface _ListTaxRegistrationsResponse
+      include Smithy::Client::_Response[Types::ListTaxRegistrationsResponse]
+      def account_details: () -> Array[Types::AccountDetails]?
+      def next_token: () -> String?
+    end
+    def list_tax_registrations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTaxRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaxRegistrationsResponse
+
+    interface _PutSupplementalTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::PutSupplementalTaxRegistrationResponse]
+      def authority_id: () -> String?
+      def status: () -> String?
+    end
+    def put_supplemental_tax_registration: (
+      ?tax_registration_entry: {
+        registration_id: String,
+        registration_type: String,
+        legal_name: String,
+        address: {
+          address_line1: String,
+          address_line2: String,
+          address_line3: String,
+          district_or_county: String,
+          city: String,
+          state_or_region: String,
+          postal_code: String,
+          country_code: String
+        }
+      }
+    ) -> _PutSupplementalTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSupplementalTaxRegistrationResponse
+
+    interface _PutTaxExemptionResponse
+      include Smithy::Client::_Response[Types::PutTaxExemptionResponse]
+      def case_id: () -> String?
+    end
+    def put_tax_exemption: (
+      ?account_ids: Array[String],
+      ?authority: {
+        country: String,
+        state: String
+      },
+      ?exemption_type: String,
+      ?exemption_certificate: {
+        document_name: String,
+        document_file: String
+      }
+    ) -> _PutTaxExemptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTaxExemptionResponse
+
+    interface _PutTaxInheritanceResponse
+      include Smithy::Client::_Response[Types::PutTaxInheritanceResponse]
+    end
+    def put_tax_inheritance: (
+      ?heritage_status: String
+    ) -> _PutTaxInheritanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTaxInheritanceResponse
+
+    interface _PutTaxRegistrationResponse
+      include Smithy::Client::_Response[Types::PutTaxRegistrationResponse]
+      def status: () -> String?
+    end
+    def put_tax_registration: (
+      ?account_id: String,
+      ?tax_registration_entry: {
+        registration_id: String,
+        registration_type: String,
+        legal_name: String,
+        legal_address: {
+          address_line1: String,
+          address_line2: String,
+          address_line3: String,
+          district_or_county: String,
+          city: String,
+          state_or_region: String,
+          postal_code: String,
+          country_code: String
+        },
+        sector: String,
+        additional_tax_information: {
+          malaysia_additional_info: {
+            service_tax_codes: Array[String],
+            tax_information_number: String,
+            business_registration_number: String
+          },
+          israel_additional_info: {
+            dealer_type: String,
+            customer_type: String
+          },
+          estonia_additional_info: {
+            registry_commercial_code: String
+          },
+          canada_additional_info: {
+            provincial_sales_tax_id: String,
+            canada_quebec_sales_tax_number: String,
+            canada_retail_sales_tax_number: String,
+            is_reseller_account: bool
+          },
+          spain_additional_info: {
+            registration_type: String
+          },
+          kenya_additional_info: {
+            person_type: String
+          },
+          south_korea_additional_info: {
+            business_representative_name: String,
+            line_of_business: String,
+            item_of_business: String
+          },
+          turkey_additional_info: {
+            tax_office: String,
+            kep_email_id: String,
+            secondary_tax_id: String,
+            industries: String
+          },
+          georgia_additional_info: {
+            person_type: untyped
+          },
+          italy_additional_info: {
+            sdi_account_id: String,
+            cig_number: String,
+            cup_number: String,
+            tax_code: String
+          },
+          romania_additional_info: {
+            tax_registration_number_type: String
+          },
+          ukraine_additional_info: {
+            ukraine_trn_type: String
+          },
+          poland_additional_info: {
+            individual_registration_number: String,
+            is_group_vat_enabled: untyped
+          },
+          saudi_arabia_additional_info: {
+            tax_registration_number_type: String
+          },
+          indonesia_additional_info: {
+            tax_registration_number_type: String,
+            ppn_exception_designation_code: String,
+            decision_number: String
+          },
+          vietnam_additional_info: {
+            enterprise_identification_number: String,
+            electronic_transaction_code_number: String,
+            payment_voucher_number: String,
+            payment_voucher_number_date: String
+          },
+          egypt_additional_info: {
+            unique_identification_number: String,
+            unique_identification_number_expiration_date: untyped
+          },
+          greece_additional_info: {
+            contracting_authority_code: String
+          },
+          uzbekistan_additional_info: {
+            tax_registration_number_type: String,
+            vat_registration_number: String
+          }
+        },
+        verification_details: {
+          date_of_birth: String,
+          tax_registration_documents: Array[
+            {
+              s3_location: {
+                bucket: String,
+                key: String
+              },
+              file: {
+                file_name: String,
+                file_content: String
+              }
+            }
+          ]
+        },
+        certified_email_id: String
+      }
+    ) -> _PutTaxRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTaxRegistrationResponse
+  end
+end

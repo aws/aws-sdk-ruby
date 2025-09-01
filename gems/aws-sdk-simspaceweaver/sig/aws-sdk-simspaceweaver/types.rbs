@@ -1,0 +1,692 @@
+module Aws::SimSpaceWeaver
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudWatchLogsLogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+        ?destination: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+      attr_accessor destination: Types::S3Destination?
+    end
+
+    class CreateSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAppOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+        ?domain: String,
+        ?app: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor app: String?
+    end
+
+    class DeleteAppOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSimulationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+    end
+
+    class DeleteSimulationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAppOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+        ?domain: String,
+        ?app: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor app: String?
+    end
+
+    class DescribeAppOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?simulation: String,
+        ?domain: String,
+        ?status: String,
+        ?target_status: String,
+        ?launch_overrides: Types::LaunchOverrides,
+        ?description: String,
+        ?endpoint_info: Types::SimulationAppEndpointInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor status: String?
+      attr_accessor target_status: String?
+      attr_accessor launch_overrides: Types::LaunchOverrides?
+      attr_accessor description: String?
+      attr_accessor endpoint_info: Types::SimulationAppEndpointInfo?
+    end
+
+    class DescribeSimulationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+    end
+
+    class DescribeSimulationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?execution_id: String,
+        ?arn: String,
+        ?description: String,
+        ?role_arn: String,
+        ?creation_time: Time,
+        ?status: String,
+        ?target_status: String,
+        ?schema_s3_location: Types::S3Location,
+        ?schema_error: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?live_simulation_state: Types::LiveSimulationState,
+        ?maximum_duration: String,
+        ?snapshot_s3_location: Types::S3Location,
+        ?start_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor execution_id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor target_status: String?
+      attr_accessor schema_s3_location: Types::S3Location?
+      attr_accessor schema_error: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor live_simulation_state: Types::LiveSimulationState?
+      attr_accessor maximum_duration: String?
+      attr_accessor snapshot_s3_location: Types::S3Location?
+      attr_accessor start_error: String?
+    end
+
+    class Domain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor lifecycle: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LaunchOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_commands: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_commands: Array[String]?
+    end
+
+    class ListAppsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+        ?domain: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apps: Array[Types::SimulationAppMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apps: Array[Types::SimulationAppMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSimulationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSimulationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulations: Array[Types::SimulationMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulations: Array[Types::SimulationMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LiveSimulationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::Domain],
+        ?clocks: Array[Types::SimulationClock],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::Domain]?
+      attr_accessor clocks: Array[Types::SimulationClock]?
+    end
+
+    class LogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup?
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::LogDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::LogDestination]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key_prefix: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SimulationAppEndpointInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?ingress_port_mappings: Array[Types::SimulationAppPortMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor ingress_port_mappings: Array[Types::SimulationAppPortMapping]?
+    end
+
+    class SimulationAppMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?simulation: String,
+        ?domain: String,
+        ?status: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor status: String?
+      attr_accessor target_status: String?
+    end
+
+    class SimulationAppPortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?declared: Integer,
+        ?actual: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor declared: Integer?
+      attr_accessor actual: Integer?
+    end
+
+    class SimulationClock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor target_status: String?
+    end
+
+    class SimulationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?creation_time: Time,
+        ?status: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor target_status: String?
+    end
+
+    class StartAppOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?simulation: String,
+        ?domain: String,
+        ?name: String,
+        ?description: String,
+        ?launch_overrides: Types::LaunchOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor launch_overrides: Types::LaunchOverrides?
+    end
+
+    class StartAppOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?domain: String,
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor domain: String?
+      attr_accessor simulation: String?
+    end
+
+    class StartClockOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+    end
+
+    class StartClockOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartSimulationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?role_arn: String,
+        ?schema_s3_location: Types::S3Location,
+        ?maximum_duration: String,
+        ?tags: Hash[String, String],
+        ?snapshot_s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor schema_s3_location: Types::S3Location?
+      attr_accessor maximum_duration: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor snapshot_s3_location: Types::S3Location?
+    end
+
+    class StartSimulationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?execution_id: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class StopAppOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+        ?domain: String,
+        ?app: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+      attr_accessor domain: String?
+      attr_accessor app: String?
+    end
+
+    class StopAppOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopClockOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+    end
+
+    class StopClockOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopSimulationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simulation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simulation: String?
+    end
+
+    class StopSimulationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,1649 @@
+module Aws::PcaConnectorAd
+  module Types
+
+    class AccessControlEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_display_name: String,
+        ?group_security_identifier: String,
+        ?access_rights: Types::AccessRights,
+        ?template_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_display_name: String?
+      attr_accessor group_security_identifier: String?
+      attr_accessor access_rights: Types::AccessRights?
+      attr_accessor template_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AccessControlEntrySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_display_name: String,
+        ?group_security_identifier: String,
+        ?access_rights: Types::AccessRights,
+        ?template_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_display_name: String?
+      attr_accessor group_security_identifier: String?
+      attr_accessor access_rights: Types::AccessRights?
+      attr_accessor template_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccessRight
+      ALLOW: String
+      DENY: String
+    end
+
+    class AccessRights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enroll: String,
+        ?auto_enroll: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enroll: String?
+      attr_accessor auto_enroll: String?
+    end
+
+    class ApplicationPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?critical: bool,
+        ?policies: Array[Types::ApplicationPolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor critical: bool?
+      attr_accessor policies: Array[Types::ApplicationPolicy]?
+    end
+
+    class ApplicationPolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?policy_type: String,
+        ?policy_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor policy_object_identifier: String?
+
+      class PolicyType < ApplicationPolicy
+      end
+      class PolicyObjectIdentifier < ApplicationPolicy
+      end
+      class Unknown < ApplicationPolicy
+      end
+    end
+
+    module ApplicationPolicyType
+      ALL_APPLICATION_POLICIES: String
+      ANY_PURPOSE: String
+      ATTESTATION_IDENTITY_KEY_CERTIFICATE: String
+      CERTIFICATE_REQUEST_AGENT: String
+      CLIENT_AUTHENTICATION: String
+      CODE_SIGNING: String
+      CTL_USAGE: String
+      DIGITAL_RIGHTS: String
+      DIRECTORY_SERVICE_EMAIL_REPLICATION: String
+      DISALLOWED_LIST: String
+      DNS_SERVER_TRUST: String
+      DOCUMENT_ENCRYPTION: String
+      DOCUMENT_SIGNING: String
+      DYNAMIC_CODE_GENERATOR: String
+      EARLY_LAUNCH_ANTIMALWARE_DRIVER: String
+      EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION: String
+      ENCLAVE: String
+      ENCRYPTING_FILE_SYSTEM: String
+      ENDORSEMENT_KEY_CERTIFICATE: String
+      FILE_RECOVERY: String
+      HAL_EXTENSION: String
+      IP_SECURITY_END_SYSTEM: String
+      IP_SECURITY_IKE_INTERMEDIATE: String
+      IP_SECURITY_TUNNEL_TERMINATION: String
+      IP_SECURITY_USER: String
+      ISOLATED_USER_MODE: String
+      KDC_AUTHENTICATION: String
+      KERNEL_MODE_CODE_SIGNING: String
+      KEY_PACK_LICENSES: String
+      KEY_RECOVERY: String
+      KEY_RECOVERY_AGENT: String
+      LICENSE_SERVER_VERIFICATION: String
+      LIFETIME_SIGNING: String
+      MICROSOFT_PUBLISHER: String
+      MICROSOFT_TIME_STAMPING: String
+      MICROSOFT_TRUST_LIST_SIGNING: String
+      OCSP_SIGNING: String
+      OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION: String
+      PLATFORM_CERTIFICATE: String
+      PREVIEW_BUILD_SIGNING: String
+      PRIVATE_KEY_ARCHIVAL: String
+      PROTECTED_PROCESS_LIGHT_VERIFICATION: String
+      PROTECTED_PROCESS_VERIFICATION: String
+      QUALIFIED_SUBORDINATION: String
+      REVOKED_LIST_SIGNER: String
+      ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION: String
+      ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION: String
+      ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL: String
+      ROOT_LIST_SIGNER: String
+      SECURE_EMAIL: String
+      SERVER_AUTHENTICATION: String
+      SMART_CARD_LOGIN: String
+      SPC_ENCRYPTED_DIGEST_RETRY_COUNT: String
+      SPC_RELAXED_PE_MARKER_CHECK: String
+      TIME_STAMPING: String
+      WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION: String
+      WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION: String
+      WINDOWS_HARDWARE_DRIVER_VERIFICATION: String
+      WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION: String
+      WINDOWS_KITS_COMPONENT: String
+      WINDOWS_RT_VERIFICATION: String
+      WINDOWS_SOFTWARE_EXTENSION_VERIFICATION: String
+      WINDOWS_STORE: String
+      WINDOWS_SYSTEM_COMPONENT_VERIFICATION: String
+      WINDOWS_TCB_COMPONENT: String
+      WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT: String
+      WINDOWS_UPDATE: String
+    end
+
+    class CertificateValidity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validity_period: Types::ValidityPeriod,
+        ?renewal_period: Types::ValidityPeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validity_period: Types::ValidityPeriod?
+      attr_accessor renewal_period: Types::ValidityPeriod?
+    end
+
+    module ClientCompatibilityV2
+      WINDOWS_SERVER_2003: String
+      WINDOWS_SERVER_2008: String
+      WINDOWS_SERVER_2008_R2: String
+      WINDOWS_SERVER_2012: String
+      WINDOWS_SERVER_2012_R2: String
+      WINDOWS_SERVER_2016: String
+    end
+
+    module ClientCompatibilityV3
+      WINDOWS_SERVER_2008: String
+      WINDOWS_SERVER_2008_R2: String
+      WINDOWS_SERVER_2012: String
+      WINDOWS_SERVER_2012_R2: String
+      WINDOWS_SERVER_2016: String
+    end
+
+    module ClientCompatibilityV4
+      WINDOWS_SERVER_2012: String
+      WINDOWS_SERVER_2012_R2: String
+      WINDOWS_SERVER_2016: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_authority_arn: String,
+        ?certificate_enrollment_policy_server_endpoint: String,
+        ?directory_id: String,
+        ?vpc_information: Types::VpcInformation,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor certificate_enrollment_policy_server_endpoint: String?
+      attr_accessor directory_id: String?
+      attr_accessor vpc_information: Types::VpcInformation?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ConnectorStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    module ConnectorStatusReason
+      CA_CERTIFICATE_REGISTRATION_FAILED: String
+      DIRECTORY_ACCESS_DENIED: String
+      INTERNAL_FAILURE: String
+      INSUFFICIENT_FREE_ADDRESSES: String
+      INVALID_SUBNET_IP_PROTOCOL: String
+      PRIVATECA_ACCESS_DENIED: String
+      PRIVATECA_RESOURCE_NOT_FOUND: String
+      SECURITY_GROUP_NOT_IN_VPC: String
+      VPC_ACCESS_DENIED: String
+      VPC_ENDPOINT_LIMIT_EXCEEDED: String
+      VPC_RESOURCE_NOT_FOUND: String
+    end
+
+    class ConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_authority_arn: String,
+        ?certificate_enrollment_policy_server_endpoint: String,
+        ?directory_id: String,
+        ?vpc_information: Types::VpcInformation,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor certificate_enrollment_policy_server_endpoint: String?
+      attr_accessor directory_id: String?
+      attr_accessor vpc_information: Types::VpcInformation?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?certificate_authority_arn: String,
+        ?vpc_information: Types::VpcInformation,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor vpc_information: Types::VpcInformation?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class CreateDirectoryRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDirectoryRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+    end
+
+    class CreateServicePrincipalNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+        ?connector_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTemplateGroupAccessControlEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?group_security_identifier: String,
+        ?group_display_name: String,
+        ?access_rights: Types::AccessRights,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor group_security_identifier: String?
+      attr_accessor group_display_name: String?
+      attr_accessor access_rights: Types::AccessRights?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?name: String,
+        ?definition: Types::TemplateDefinition,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor name: String?
+      attr_accessor definition: Types::TemplateDefinition?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class DeleteDirectoryRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+    end
+
+    class DeleteServicePrincipalNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+      attr_accessor connector_arn: String?
+    end
+
+    class DeleteTemplateGroupAccessControlEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?group_security_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor group_security_identifier: String?
+    end
+
+    class DeleteTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+    end
+
+    class DirectoryRegistration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?directory_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor directory_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module DirectoryRegistrationStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    module DirectoryRegistrationStatusReason
+      DIRECTORY_ACCESS_DENIED: String
+      DIRECTORY_RESOURCE_NOT_FOUND: String
+      DIRECTORY_NOT_ACTIVE: String
+      DIRECTORY_NOT_REACHABLE: String
+      DIRECTORY_TYPE_NOT_SUPPORTED: String
+      INTERNAL_FAILURE: String
+    end
+
+    class DirectoryRegistrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?directory_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor directory_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class EnrollmentFlagsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_symmetric_algorithms: bool,
+        ?user_interaction_required: bool,
+        ?remove_invalid_certificate_from_personal_store: bool,
+        ?no_security_extension: bool,
+        ?enable_key_reuse_on_nt_token_keyset_storage_full: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_symmetric_algorithms: bool?
+      attr_accessor user_interaction_required: bool?
+      attr_accessor remove_invalid_certificate_from_personal_store: bool?
+      attr_accessor no_security_extension: bool?
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool?
+    end
+
+    class EnrollmentFlagsV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_symmetric_algorithms: bool,
+        ?user_interaction_required: bool,
+        ?remove_invalid_certificate_from_personal_store: bool,
+        ?no_security_extension: bool,
+        ?enable_key_reuse_on_nt_token_keyset_storage_full: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_symmetric_algorithms: bool?
+      attr_accessor user_interaction_required: bool?
+      attr_accessor remove_invalid_certificate_from_personal_store: bool?
+      attr_accessor no_security_extension: bool?
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool?
+    end
+
+    class EnrollmentFlagsV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_symmetric_algorithms: bool,
+        ?user_interaction_required: bool,
+        ?remove_invalid_certificate_from_personal_store: bool,
+        ?no_security_extension: bool,
+        ?enable_key_reuse_on_nt_token_keyset_storage_full: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_symmetric_algorithms: bool?
+      attr_accessor user_interaction_required: bool?
+      attr_accessor remove_invalid_certificate_from_personal_store: bool?
+      attr_accessor no_security_extension: bool?
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool?
+    end
+
+    class ExtensionsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_usage: Types::KeyUsage,
+        ?application_policies: Types::ApplicationPolicies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_usage: Types::KeyUsage?
+      attr_accessor application_policies: Types::ApplicationPolicies?
+    end
+
+    class ExtensionsV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_usage: Types::KeyUsage,
+        ?application_policies: Types::ApplicationPolicies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_usage: Types::KeyUsage?
+      attr_accessor application_policies: Types::ApplicationPolicies?
+    end
+
+    class ExtensionsV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_usage: Types::KeyUsage,
+        ?application_policies: Types::ApplicationPolicies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_usage: Types::KeyUsage?
+      attr_accessor application_policies: Types::ApplicationPolicies?
+    end
+
+    class GeneralFlagsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enrollment: bool,
+        ?machine_type: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enrollment: bool?
+      attr_accessor machine_type: bool?
+    end
+
+    class GeneralFlagsV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enrollment: bool,
+        ?machine_type: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enrollment: bool?
+      attr_accessor machine_type: bool?
+    end
+
+    class GeneralFlagsV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enrollment: bool,
+        ?machine_type: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enrollment: bool?
+      attr_accessor machine_type: bool?
+    end
+
+    class GetConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class GetConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector: Types::Connector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector: Types::Connector?
+    end
+
+    class GetDirectoryRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+    end
+
+    class GetDirectoryRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration: Types::DirectoryRegistration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration: Types::DirectoryRegistration?
+    end
+
+    class GetServicePrincipalNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+      attr_accessor connector_arn: String?
+    end
+
+    class GetServicePrincipalNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal_name: Types::ServicePrincipalName,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal_name: Types::ServicePrincipalName?
+    end
+
+    class GetTemplateGroupAccessControlEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?group_security_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor group_security_identifier: String?
+    end
+
+    class GetTemplateGroupAccessControlEntryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_entry: Types::AccessControlEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_entry: Types::AccessControlEntry?
+    end
+
+    class GetTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+    end
+
+    class GetTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template: Types::Template,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template: Types::Template?
+    end
+
+    module HashAlgorithm
+      SHA256: String
+      SHA384: String
+      SHA512: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUALSTACK: String
+    end
+
+    module KeySpec
+      KEY_EXCHANGE: String
+      SIGNATURE: String
+    end
+
+    class KeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?critical: bool,
+        ?usage_flags: Types::KeyUsageFlags,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor critical: bool?
+      attr_accessor usage_flags: Types::KeyUsageFlags?
+    end
+
+    class KeyUsageFlags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?digital_signature: bool,
+        ?non_repudiation: bool,
+        ?key_encipherment: bool,
+        ?data_encipherment: bool,
+        ?key_agreement: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor digital_signature: bool?
+      attr_accessor non_repudiation: bool?
+      attr_accessor key_encipherment: bool?
+      attr_accessor data_encipherment: bool?
+      attr_accessor key_agreement: bool?
+    end
+
+    class KeyUsageProperty
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?property_type: String,
+        ?property_flags: Types::KeyUsagePropertyFlags,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_type: String?
+      attr_accessor property_flags: Types::KeyUsagePropertyFlags?
+
+      class PropertyType < KeyUsageProperty
+      end
+      class PropertyFlags < KeyUsageProperty
+      end
+      class Unknown < KeyUsageProperty
+      end
+    end
+
+    class KeyUsagePropertyFlags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decrypt: bool,
+        ?key_agreement: bool,
+        ?sign: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decrypt: bool?
+      attr_accessor key_agreement: bool?
+      attr_accessor sign: bool?
+    end
+
+    module KeyUsagePropertyType
+      ALL: String
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectors: Array[Types::ConnectorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectors: Array[Types::ConnectorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDirectoryRegistrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDirectoryRegistrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registrations: Array[Types::DirectoryRegistrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registrations: Array[Types::DirectoryRegistrationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicePrincipalNamesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?directory_registration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor directory_registration_arn: String?
+    end
+
+    class ListServicePrincipalNamesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal_names: Array[Types::ServicePrincipalNameSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal_names: Array[Types::ServicePrincipalNameSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTemplateGroupAccessControlEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor template_arn: String?
+    end
+
+    class ListTemplateGroupAccessControlEntriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_entries: Array[Types::AccessControlEntrySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_entries: Array[Types::AccessControlEntrySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor connector_arn: String?
+    end
+
+    class ListTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates: Array[Types::TemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates: Array[Types::TemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module PrivateKeyAlgorithm
+      RSA: String
+      ECDH_P256: String
+      ECDH_P384: String
+      ECDH_P521: String
+    end
+
+    class PrivateKeyAttributesV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimal_key_length: Integer,
+        ?key_spec: String,
+        ?crypto_providers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimal_key_length: Integer?
+      attr_accessor key_spec: String?
+      attr_accessor crypto_providers: Array[String]?
+    end
+
+    class PrivateKeyAttributesV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimal_key_length: Integer,
+        ?key_spec: String,
+        ?crypto_providers: Array[String],
+        ?key_usage_property: Types::KeyUsageProperty,
+        ?algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimal_key_length: Integer?
+      attr_accessor key_spec: String?
+      attr_accessor crypto_providers: Array[String]?
+      attr_accessor key_usage_property: Types::KeyUsageProperty?
+      attr_accessor algorithm: String?
+    end
+
+    class PrivateKeyAttributesV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimal_key_length: Integer,
+        ?key_spec: String,
+        ?crypto_providers: Array[String],
+        ?key_usage_property: Types::KeyUsageProperty,
+        ?algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimal_key_length: Integer?
+      attr_accessor key_spec: String?
+      attr_accessor crypto_providers: Array[String]?
+      attr_accessor key_usage_property: Types::KeyUsageProperty?
+      attr_accessor algorithm: String?
+    end
+
+    class PrivateKeyFlagsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exportable_key: bool,
+        ?strong_key_protection_required: bool,
+        ?client_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exportable_key: bool?
+      attr_accessor strong_key_protection_required: bool?
+      attr_accessor client_version: String?
+    end
+
+    class PrivateKeyFlagsV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exportable_key: bool,
+        ?strong_key_protection_required: bool,
+        ?require_alternate_signature_algorithm: bool,
+        ?client_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exportable_key: bool?
+      attr_accessor strong_key_protection_required: bool?
+      attr_accessor require_alternate_signature_algorithm: bool?
+      attr_accessor client_version: String?
+    end
+
+    class PrivateKeyFlagsV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exportable_key: bool,
+        ?strong_key_protection_required: bool,
+        ?require_alternate_signature_algorithm: bool,
+        ?require_same_key_renewal: bool,
+        ?use_legacy_provider: bool,
+        ?client_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exportable_key: bool?
+      attr_accessor strong_key_protection_required: bool?
+      attr_accessor require_alternate_signature_algorithm: bool?
+      attr_accessor require_same_key_renewal: bool?
+      attr_accessor use_legacy_provider: bool?
+      attr_accessor client_version: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServicePrincipalName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+        ?connector_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ServicePrincipalNameStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    module ServicePrincipalNameStatusReason
+      DIRECTORY_ACCESS_DENIED: String
+      DIRECTORY_NOT_REACHABLE: String
+      DIRECTORY_RESOURCE_NOT_FOUND: String
+      SPN_EXISTS_ON_DIFFERENT_AD_OBJECT: String
+      SPN_LIMIT_EXCEEDED: String
+      INTERNAL_FAILURE: String
+    end
+
+    class ServicePrincipalNameSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_registration_arn: String,
+        ?connector_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_registration_arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SubjectNameFlagsV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?san_require_domain_dns: bool,
+        ?san_require_spn: bool,
+        ?san_require_directory_guid: bool,
+        ?san_require_upn: bool,
+        ?san_require_email: bool,
+        ?san_require_dns: bool,
+        ?require_dns_as_cn: bool,
+        ?require_email: bool,
+        ?require_common_name: bool,
+        ?require_directory_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor san_require_domain_dns: bool?
+      attr_accessor san_require_spn: bool?
+      attr_accessor san_require_directory_guid: bool?
+      attr_accessor san_require_upn: bool?
+      attr_accessor san_require_email: bool?
+      attr_accessor san_require_dns: bool?
+      attr_accessor require_dns_as_cn: bool?
+      attr_accessor require_email: bool?
+      attr_accessor require_common_name: bool?
+      attr_accessor require_directory_path: bool?
+    end
+
+    class SubjectNameFlagsV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?san_require_domain_dns: bool,
+        ?san_require_spn: bool,
+        ?san_require_directory_guid: bool,
+        ?san_require_upn: bool,
+        ?san_require_email: bool,
+        ?san_require_dns: bool,
+        ?require_dns_as_cn: bool,
+        ?require_email: bool,
+        ?require_common_name: bool,
+        ?require_directory_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor san_require_domain_dns: bool?
+      attr_accessor san_require_spn: bool?
+      attr_accessor san_require_directory_guid: bool?
+      attr_accessor san_require_upn: bool?
+      attr_accessor san_require_email: bool?
+      attr_accessor san_require_dns: bool?
+      attr_accessor require_dns_as_cn: bool?
+      attr_accessor require_email: bool?
+      attr_accessor require_common_name: bool?
+      attr_accessor require_directory_path: bool?
+    end
+
+    class SubjectNameFlagsV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?san_require_domain_dns: bool,
+        ?san_require_spn: bool,
+        ?san_require_directory_guid: bool,
+        ?san_require_upn: bool,
+        ?san_require_email: bool,
+        ?san_require_dns: bool,
+        ?require_dns_as_cn: bool,
+        ?require_email: bool,
+        ?require_common_name: bool,
+        ?require_directory_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor san_require_domain_dns: bool?
+      attr_accessor san_require_spn: bool?
+      attr_accessor san_require_directory_guid: bool?
+      attr_accessor san_require_upn: bool?
+      attr_accessor san_require_email: bool?
+      attr_accessor san_require_dns: bool?
+      attr_accessor require_dns_as_cn: bool?
+      attr_accessor require_email: bool?
+      attr_accessor require_common_name: bool?
+      attr_accessor require_directory_path: bool?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Template
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_arn: String,
+        ?definition: Types::TemplateDefinition,
+        ?name: String,
+        ?object_identifier: String,
+        ?policy_schema: Integer,
+        ?status: String,
+        ?revision: Types::TemplateRevision,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor definition: Types::TemplateDefinition?
+      attr_accessor name: String?
+      attr_accessor object_identifier: String?
+      attr_accessor policy_schema: Integer?
+      attr_accessor status: String?
+      attr_accessor revision: Types::TemplateRevision?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class TemplateDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?template_v2: Types::TemplateV2,
+        ?template_v3: Types::TemplateV3,
+        ?template_v4: Types::TemplateV4,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_v2: Types::TemplateV2?
+      attr_accessor template_v3: Types::TemplateV3?
+      attr_accessor template_v4: Types::TemplateV4?
+
+      class TemplateV2 < TemplateDefinition
+      end
+      class TemplateV3 < TemplateDefinition
+      end
+      class TemplateV4 < TemplateDefinition
+      end
+      class Unknown < TemplateDefinition
+      end
+    end
+
+    class TemplateRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_revision: Integer,
+        ?minor_revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_revision: Integer?
+      attr_accessor minor_revision: Integer?
+    end
+
+    module TemplateStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_arn: String,
+        ?definition: Types::TemplateDefinition,
+        ?name: String,
+        ?object_identifier: String,
+        ?policy_schema: Integer,
+        ?status: String,
+        ?revision: Types::TemplateRevision,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor definition: Types::TemplateDefinition?
+      attr_accessor name: String?
+      attr_accessor object_identifier: String?
+      attr_accessor policy_schema: Integer?
+      attr_accessor status: String?
+      attr_accessor revision: Types::TemplateRevision?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class TemplateV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_validity: Types::CertificateValidity,
+        ?superseded_templates: Array[String],
+        ?private_key_attributes: Types::PrivateKeyAttributesV2,
+        ?private_key_flags: Types::PrivateKeyFlagsV2,
+        ?enrollment_flags: Types::EnrollmentFlagsV2,
+        ?subject_name_flags: Types::SubjectNameFlagsV2,
+        ?general_flags: Types::GeneralFlagsV2,
+        ?extensions: Types::ExtensionsV2,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_validity: Types::CertificateValidity?
+      attr_accessor superseded_templates: Array[String]?
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV2?
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV2?
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV2?
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV2?
+      attr_accessor general_flags: Types::GeneralFlagsV2?
+      attr_accessor extensions: Types::ExtensionsV2?
+    end
+
+    class TemplateV3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_validity: Types::CertificateValidity,
+        ?superseded_templates: Array[String],
+        ?private_key_attributes: Types::PrivateKeyAttributesV3,
+        ?private_key_flags: Types::PrivateKeyFlagsV3,
+        ?enrollment_flags: Types::EnrollmentFlagsV3,
+        ?subject_name_flags: Types::SubjectNameFlagsV3,
+        ?general_flags: Types::GeneralFlagsV3,
+        ?hash_algorithm: String,
+        ?extensions: Types::ExtensionsV3,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_validity: Types::CertificateValidity?
+      attr_accessor superseded_templates: Array[String]?
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV3?
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV3?
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV3?
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV3?
+      attr_accessor general_flags: Types::GeneralFlagsV3?
+      attr_accessor hash_algorithm: String?
+      attr_accessor extensions: Types::ExtensionsV3?
+    end
+
+    class TemplateV4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_validity: Types::CertificateValidity,
+        ?superseded_templates: Array[String],
+        ?private_key_attributes: Types::PrivateKeyAttributesV4,
+        ?private_key_flags: Types::PrivateKeyFlagsV4,
+        ?enrollment_flags: Types::EnrollmentFlagsV4,
+        ?subject_name_flags: Types::SubjectNameFlagsV4,
+        ?general_flags: Types::GeneralFlagsV4,
+        ?hash_algorithm: String,
+        ?extensions: Types::ExtensionsV4,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_validity: Types::CertificateValidity?
+      attr_accessor superseded_templates: Array[String]?
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV4?
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV4?
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV4?
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV4?
+      attr_accessor general_flags: Types::GeneralFlagsV4?
+      attr_accessor hash_algorithm: String?
+      attr_accessor extensions: Types::ExtensionsV4?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateTemplateGroupAccessControlEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?group_security_identifier: String,
+        ?group_display_name: String,
+        ?access_rights: Types::AccessRights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor group_security_identifier: String?
+      attr_accessor group_display_name: String?
+      attr_accessor access_rights: Types::AccessRights?
+    end
+
+    class UpdateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?definition: Types::TemplateDefinition,
+        ?reenroll_all_certificate_holders: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor definition: Types::TemplateDefinition?
+      attr_accessor reenroll_all_certificate_holders: bool?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      FIELD_VALIDATION_FAILED: String
+      INVALID_CA_SUBJECT: String
+      INVALID_PERMISSION: String
+      INVALID_STATE: String
+      MISMATCHED_CONNECTOR: String
+      MISMATCHED_VPC: String
+      NO_CLIENT_TOKEN: String
+      UNKNOWN_OPERATION: String
+      OTHER: String
+    end
+
+    class ValidityPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?period_type: String,
+        ?period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor period_type: String?
+      attr_accessor period: Integer?
+    end
+
+    module ValidityPeriodType
+      HOURS: String
+      DAYS: String
+      WEEKS: String
+      MONTHS: String
+      YEARS: String
+    end
+
+    class VpcInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address_type: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address_type: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+  end
+end

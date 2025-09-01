@@ -1,0 +1,441 @@
+module Aws::IoTThingsGraph
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTThingsGraph::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateEntityToThingResponse
+      include Smithy::Client::_Response[Types::AssociateEntityToThingResponse]
+    end
+    def associate_entity_to_thing: (
+      ?thing_name: String,
+      ?entity_id: String,
+      ?namespace_version: Integer
+    ) -> _AssociateEntityToThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEntityToThingResponse
+
+    interface _CreateFlowTemplateResponse
+      include Smithy::Client::_Response[Types::CreateFlowTemplateResponse]
+      def summary: () -> Types::FlowTemplateSummary?
+    end
+    def create_flow_template: (
+      ?definition: {
+        language: String,
+        text: String
+      },
+      ?compatible_namespace_version: Integer
+    ) -> _CreateFlowTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowTemplateResponse
+
+    interface _CreateSystemInstanceResponse
+      include Smithy::Client::_Response[Types::CreateSystemInstanceResponse]
+      def summary: () -> Types::SystemInstanceSummary?
+    end
+    def create_system_instance: (
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?definition: {
+        language: String,
+        text: String
+      },
+      ?target: String,
+      ?greengrass_group_name: String,
+      ?s3_bucket_name: String,
+      ?metrics_configuration: {
+        cloud_metric_enabled: bool,
+        metric_rule_role_arn: String
+      },
+      ?flow_actions_role_arn: String
+    ) -> _CreateSystemInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSystemInstanceResponse
+
+    interface _CreateSystemTemplateResponse
+      include Smithy::Client::_Response[Types::CreateSystemTemplateResponse]
+      def summary: () -> Types::SystemTemplateSummary?
+    end
+    def create_system_template: (
+      ?definition: {
+        language: String,
+        text: String
+      },
+      ?compatible_namespace_version: Integer
+    ) -> _CreateSystemTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSystemTemplateResponse
+
+    interface _DeleteFlowTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteFlowTemplateResponse]
+    end
+    def delete_flow_template: (
+      ?id: String
+    ) -> _DeleteFlowTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowTemplateResponse
+
+    interface _DeleteNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteNamespaceResponse]
+      def namespace_arn: () -> String?
+      def namespace_name: () -> String?
+    end
+    def delete_namespace: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNamespaceResponse
+
+    interface _DeleteSystemInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteSystemInstanceResponse]
+    end
+    def delete_system_instance: (
+      ?id: String
+    ) -> _DeleteSystemInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSystemInstanceResponse
+
+    interface _DeleteSystemTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteSystemTemplateResponse]
+    end
+    def delete_system_template: (
+      ?id: String
+    ) -> _DeleteSystemTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSystemTemplateResponse
+
+    interface _DeploySystemInstanceResponse
+      include Smithy::Client::_Response[Types::DeploySystemInstanceResponse]
+      def summary: () -> Types::SystemInstanceSummary?
+      def greengrass_deployment_id: () -> String?
+    end
+    def deploy_system_instance: (
+      ?id: String
+    ) -> _DeploySystemInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeploySystemInstanceResponse
+
+    interface _DeprecateFlowTemplateResponse
+      include Smithy::Client::_Response[Types::DeprecateFlowTemplateResponse]
+    end
+    def deprecate_flow_template: (
+      ?id: String
+    ) -> _DeprecateFlowTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateFlowTemplateResponse
+
+    interface _DeprecateSystemTemplateResponse
+      include Smithy::Client::_Response[Types::DeprecateSystemTemplateResponse]
+    end
+    def deprecate_system_template: (
+      ?id: String
+    ) -> _DeprecateSystemTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateSystemTemplateResponse
+
+    interface _DescribeNamespaceResponse
+      include Smithy::Client::_Response[Types::DescribeNamespaceResponse]
+      def namespace_arn: () -> String?
+      def namespace_name: () -> String?
+      def tracking_namespace_name: () -> String?
+      def tracking_namespace_version: () -> Integer?
+      def namespace_version: () -> Integer?
+    end
+    def describe_namespace: (
+      ?namespace_name: String
+    ) -> _DescribeNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNamespaceResponse
+
+    interface _DissociateEntityFromThingResponse
+      include Smithy::Client::_Response[Types::DissociateEntityFromThingResponse]
+    end
+    def dissociate_entity_from_thing: (
+      ?thing_name: String,
+      ?entity_type: String
+    ) -> _DissociateEntityFromThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DissociateEntityFromThingResponse
+
+    interface _GetEntitiesResponse
+      include Smithy::Client::_Response[Types::GetEntitiesResponse]
+      def descriptions: () -> Array[Types::EntityDescription]?
+    end
+    def get_entities: (
+      ?ids: Array[String],
+      ?namespace_version: Integer
+    ) -> _GetEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEntitiesResponse
+
+    interface _GetFlowTemplateResponse
+      include Smithy::Client::_Response[Types::GetFlowTemplateResponse]
+      def description: () -> Types::FlowTemplateDescription?
+    end
+    def get_flow_template: (
+      ?id: String,
+      ?revision_number: Integer
+    ) -> _GetFlowTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowTemplateResponse
+
+    interface _GetFlowTemplateRevisionsResponse
+      include Smithy::Client::_Response[Types::GetFlowTemplateRevisionsResponse]
+      def summaries: () -> Array[Types::FlowTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def get_flow_template_revisions: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetFlowTemplateRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowTemplateRevisionsResponse
+
+    interface _GetNamespaceDeletionStatusResponse
+      include Smithy::Client::_Response[Types::GetNamespaceDeletionStatusResponse]
+      def namespace_arn: () -> String?
+      def namespace_name: () -> String?
+      def status: () -> String?
+      def error_code: () -> String?
+      def error_message: () -> String?
+    end
+    def get_namespace_deletion_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNamespaceDeletionStatusResponse
+
+    interface _GetSystemInstanceResponse
+      include Smithy::Client::_Response[Types::GetSystemInstanceResponse]
+      def description: () -> Types::SystemInstanceDescription?
+    end
+    def get_system_instance: (
+      ?id: String
+    ) -> _GetSystemInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemInstanceResponse
+
+    interface _GetSystemTemplateResponse
+      include Smithy::Client::_Response[Types::GetSystemTemplateResponse]
+      def description: () -> Types::SystemTemplateDescription?
+    end
+    def get_system_template: (
+      ?id: String,
+      ?revision_number: Integer
+    ) -> _GetSystemTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemTemplateResponse
+
+    interface _GetSystemTemplateRevisionsResponse
+      include Smithy::Client::_Response[Types::GetSystemTemplateRevisionsResponse]
+      def summaries: () -> Array[Types::SystemTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def get_system_template_revisions: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetSystemTemplateRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemTemplateRevisionsResponse
+
+    interface _GetUploadStatusResponse
+      include Smithy::Client::_Response[Types::GetUploadStatusResponse]
+      def upload_id: () -> String?
+      def upload_status: () -> String?
+      def namespace_arn: () -> String?
+      def namespace_name: () -> String?
+      def namespace_version: () -> Integer?
+      def failure_reason: () -> Array[String]?
+      def created_date: () -> Time?
+    end
+    def get_upload_status: (
+      ?upload_id: String
+    ) -> _GetUploadStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUploadStatusResponse
+
+    interface _ListFlowExecutionMessagesResponse
+      include Smithy::Client::_Response[Types::ListFlowExecutionMessagesResponse]
+      def messages: () -> Array[Types::FlowExecutionMessage]?
+      def next_token: () -> String?
+    end
+    def list_flow_execution_messages: (
+      ?flow_execution_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFlowExecutionMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowExecutionMessagesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?max_results: Integer,
+      ?resource_arn: String,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SearchEntitiesResponse
+      include Smithy::Client::_Response[Types::SearchEntitiesResponse]
+      def descriptions: () -> Array[Types::EntityDescription]?
+      def next_token: () -> String?
+    end
+    def search_entities: (
+      ?entity_types: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace_version: Integer
+    ) -> _SearchEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchEntitiesResponse
+
+    interface _SearchFlowExecutionsResponse
+      include Smithy::Client::_Response[Types::SearchFlowExecutionsResponse]
+      def summaries: () -> Array[Types::FlowExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def search_flow_executions: (
+      ?system_instance_id: String,
+      ?flow_execution_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchFlowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFlowExecutionsResponse
+
+    interface _SearchFlowTemplatesResponse
+      include Smithy::Client::_Response[Types::SearchFlowTemplatesResponse]
+      def summaries: () -> Array[Types::FlowTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def search_flow_templates: (
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchFlowTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFlowTemplatesResponse
+
+    interface _SearchSystemInstancesResponse
+      include Smithy::Client::_Response[Types::SearchSystemInstancesResponse]
+      def summaries: () -> Array[Types::SystemInstanceSummary]?
+      def next_token: () -> String?
+    end
+    def search_system_instances: (
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchSystemInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSystemInstancesResponse
+
+    interface _SearchSystemTemplatesResponse
+      include Smithy::Client::_Response[Types::SearchSystemTemplatesResponse]
+      def summaries: () -> Array[Types::SystemTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def search_system_templates: (
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchSystemTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSystemTemplatesResponse
+
+    interface _SearchThingsResponse
+      include Smithy::Client::_Response[Types::SearchThingsResponse]
+      def things: () -> Array[Types::Thing]?
+      def next_token: () -> String?
+    end
+    def search_things: (
+      ?entity_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace_version: Integer
+    ) -> _SearchThingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchThingsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UndeploySystemInstanceResponse
+      include Smithy::Client::_Response[Types::UndeploySystemInstanceResponse]
+      def summary: () -> Types::SystemInstanceSummary?
+    end
+    def undeploy_system_instance: (
+      ?id: String
+    ) -> _UndeploySystemInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UndeploySystemInstanceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateFlowTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateFlowTemplateResponse]
+      def summary: () -> Types::FlowTemplateSummary?
+    end
+    def update_flow_template: (
+      ?id: String,
+      ?definition: {
+        language: String,
+        text: String
+      },
+      ?compatible_namespace_version: Integer
+    ) -> _UpdateFlowTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowTemplateResponse
+
+    interface _UpdateSystemTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateSystemTemplateResponse]
+      def summary: () -> Types::SystemTemplateSummary?
+    end
+    def update_system_template: (
+      ?id: String,
+      ?definition: {
+        language: String,
+        text: String
+      },
+      ?compatible_namespace_version: Integer
+    ) -> _UpdateSystemTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSystemTemplateResponse
+
+    interface _UploadEntityDefinitionsResponse
+      include Smithy::Client::_Response[Types::UploadEntityDefinitionsResponse]
+      def upload_id: () -> String?
+    end
+    def upload_entity_definitions: (
+      ?document: {
+        language: String,
+        text: String
+      },
+      ?sync_with_public_namespace: bool,
+      ?deprecate_existing_entities: bool
+    ) -> _UploadEntityDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadEntityDefinitionsResponse
+  end
+end

@@ -1,0 +1,460 @@
+module Aws::CloudFront
+  module Errors
+    class AccessDenied < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchTooLarge < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CNAMEAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CachePolicyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CachePolicyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotChangeImmutablePublicKeyFields < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotDeleteEntityWhileInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotUpdateEntityWhileInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudFrontOriginAccessIdentityAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudFrontOriginAccessIdentityInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContinuousDeploymentPolicyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContinuousDeploymentPolicyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DistributionAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DistributionNotDisabled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntitySizeLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FieldLevelEncryptionConfigAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FieldLevelEncryptionConfigInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FieldLevelEncryptionProfileAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FieldLevelEncryptionProfileInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FieldLevelEncryptionProfileSizeExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FunctionAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FunctionInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FunctionSizeLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalDelete < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalOriginAccessConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalUpdate < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InconsistentQuantities < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgument < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDefaultRootObject < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDomainNameForOriginAccessControl < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidErrorCode < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidForwardCookies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFunctionAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGeoRestrictionParameter < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidHeadersForS3Origin < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIfMatchVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLambdaFunctionAssociation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLocationCode < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMinimumProtocolVersion < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOrigin < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOriginAccessControl < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOriginAccessIdentity < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOriginKeepaliveTimeout < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOriginReadTimeout < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidProtocolSettings < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidQueryStringParameters < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRelativePath < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequiredProtocol < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResponseCode < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTTLOrder < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagging < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidViewerCertificate < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidWebACLId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeyGroupAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingBody < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MonitoringSubscriptionAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchCachePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchCloudFrontOriginAccessIdentity < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchContinuousDeploymentPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchDistribution < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchFieldLevelEncryptionConfig < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchFieldLevelEncryptionProfile < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchFunctionExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchInvalidation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchMonitoringSubscription < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchOrigin < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchOriginAccessControl < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchOriginRequestPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchPublicKey < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchRealtimeLogConfig < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchResource < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchResponseHeadersPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchStreamingDistribution < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OriginAccessControlAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OriginAccessControlInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OriginRequestPolicyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OriginRequestPolicyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PreconditionFailed < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PublicKeyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PublicKeyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueryArgProfileEmpty < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RealtimeLogConfigAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RealtimeLogConfigInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RealtimeLogConfigOwnerMismatch < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotDisabled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResponseHeadersPolicyAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResponseHeadersPolicyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StagingDistributionInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StreamingDistributionAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StreamingDistributionNotDisabled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TestFunctionFailed < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooLongCSPInResponseHeadersPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCacheBehaviors < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCachePolicies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCertificates < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCloudFrontOriginAccessIdentities < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyContinuousDeploymentPolicies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCookieNamesInWhiteList < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCookiesInCachePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCookiesInOriginRequestPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCustomHeadersInResponseHeadersPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionCNAMEs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributions < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToCachePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToKeyGroup < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToOriginAccessControl < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToOriginRequestPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsAssociatedToResponseHeadersPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsWithFunctionAssociations < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsWithLambdaAssociations < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyDistributionsWithSingleFunctionARN < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionConfigs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionContentTypeProfiles < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionEncryptionEntities < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionFieldPatterns < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionProfiles < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFieldLevelEncryptionQueryArgProfiles < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFunctionAssociations < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFunctions < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyHeadersInCachePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyHeadersInForwardedValues < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyHeadersInOriginRequestPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyInvalidationsInProgress < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyKeyGroups < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyKeyGroupsAssociatedToDistribution < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyLambdaFunctionAssociations < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyOriginAccessControls < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyOriginCustomHeaders < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyOriginGroupsPerDistribution < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyOriginRequestPolicies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyOrigins < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyPublicKeys < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyPublicKeysInKeyGroup < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyQueryStringParameters < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyQueryStringsInCachePolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyQueryStringsInOriginRequestPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRealtimeLogConfigs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRemoveHeadersInResponseHeadersPolicy < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyResponseHeadersPolicies < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyStreamingDistributionCNAMEs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyStreamingDistributions < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrustedSigners < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustedKeyGroupDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustedSignerDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

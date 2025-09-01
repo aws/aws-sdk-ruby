@@ -1,0 +1,49 @@
+module Aws::Shield
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccessDeniedForDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def fields: () -> Array[Types::ValidationExceptionField]?
+    end
+    class InvalidResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def type: () -> String?
+      def limit: () -> Integer?
+    end
+    class LockedSubscriptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoAssociatedRoleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OptimisticLockException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+    end
+  end
+end

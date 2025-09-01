@@ -1,0 +1,5 @@
+  module Aws
+    module GameLiftStreams
+      VERSION: String
+    end
+  end

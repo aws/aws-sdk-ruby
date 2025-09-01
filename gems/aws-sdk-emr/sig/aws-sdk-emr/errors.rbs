@@ -1,0 +1,13 @@
+module Aws::EMR
+  module Errors
+    class InternalServerError < Smithy::Client::ServiceError
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,37 @@
+module Aws::ElasticsearchService
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BaseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DisabledOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

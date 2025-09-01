@@ -1,0 +1,2516 @@
+module Aws::DatabaseMigrationService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DatabaseMigrationService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddTagsToResourceResponse]
+    end
+    def add_tags_to_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _ApplyPendingMaintenanceActionResponse
+      include Smithy::Client::_Response[Types::ApplyPendingMaintenanceActionResponse]
+      def resource_pending_maintenance_actions: () -> Types::ResourcePendingMaintenanceActions?
+    end
+    def apply_pending_maintenance_action: (
+      ?replication_instance_arn: String,
+      ?apply_action: String,
+      ?opt_in_type: String
+    ) -> _ApplyPendingMaintenanceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplyPendingMaintenanceActionResponse
+
+    interface _BatchStartRecommendationsResponse
+      include Smithy::Client::_Response[Types::BatchStartRecommendationsResponse]
+      def error_entries: () -> Array[Types::BatchStartRecommendationsErrorEntry]?
+    end
+    def batch_start_recommendations: (
+      ?data: Array[
+        {
+          database_id: String,
+          settings: {
+            instance_sizing_type: untyped,
+            workload_type: untyped
+          }
+        }
+      ]
+    ) -> _BatchStartRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStartRecommendationsResponse
+
+    interface _CancelReplicationTaskAssessmentRunResponse
+      include Smithy::Client::_Response[Types::CancelReplicationTaskAssessmentRunResponse]
+      def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun?
+    end
+    def cancel_replication_task_assessment_run: (
+      ?replication_task_assessment_run_arn: String
+    ) -> _CancelReplicationTaskAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelReplicationTaskAssessmentRunResponse
+
+    interface _CreateDataMigrationResponse
+      include Smithy::Client::_Response[Types::CreateDataMigrationResponse]
+      def data_migration: () -> Types::DataMigration?
+    end
+    def create_data_migration: (
+      ?data_migration_name: String,
+      ?migration_project_identifier: String,
+      ?data_migration_type: String,
+      ?service_access_role_arn: String,
+      ?enable_cloudwatch_logs: bool,
+      ?source_data_settings: Array[
+        {
+          cdc_start_position: String,
+          cdc_start_time: Time,
+          cdc_stop_time: untyped,
+          slot_name: untyped
+        }
+      ],
+      ?target_data_settings: Array[
+        {
+          table_preparation_mode: String
+        }
+      ],
+      ?number_of_jobs: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?selection_rules: String
+    ) -> _CreateDataMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataMigrationResponse
+
+    interface _CreateDataProviderResponse
+      include Smithy::Client::_Response[Types::CreateDataProviderResponse]
+      def data_provider: () -> Types::DataProvider?
+    end
+    def create_data_provider: (
+      ?data_provider_name: String,
+      ?description: String,
+      ?engine: String,
+      ?virtual: bool,
+      ?settings: {
+        redshift_settings: {
+          server_name: String,
+          port: Integer,
+          database_name: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        postgre_sql_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: String,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        my_sql_settings: {
+          server_name: untyped,
+          port: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        oracle_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          asm_server: untyped,
+          secrets_manager_oracle_asm_secret_id: untyped,
+          secrets_manager_oracle_asm_access_role_arn: untyped,
+          secrets_manager_security_db_encryption_secret_id: untyped,
+          secrets_manager_security_db_encryption_access_role_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        microsoft_sql_server_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        doc_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped
+        },
+        maria_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        ibm_db2_luw_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        ibm_db2z_os_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        mongo_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          auth_type: String,
+          auth_source: untyped,
+          auth_mechanism: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _CreateDataProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataProviderResponse
+
+    interface _CreateEndpointResponse
+      include Smithy::Client::_Response[Types::CreateEndpointResponse]
+      def endpoint: () -> Types::Endpoint?
+    end
+    def create_endpoint: (
+      ?endpoint_identifier: String,
+      ?endpoint_type: String,
+      ?engine_name: String,
+      ?username: String,
+      ?password: String,
+      ?server_name: String,
+      ?port: Integer,
+      ?database_name: String,
+      ?extra_connection_attributes: String,
+      ?kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?certificate_arn: String,
+      ?ssl_mode: String,
+      ?service_access_role_arn: String,
+      ?external_table_definition: String,
+      ?dynamo_db_settings: {
+        service_access_role_arn: String
+      },
+      ?s3_settings: {
+        service_access_role_arn: String,
+        external_table_definition: untyped,
+        csv_row_delimiter: untyped,
+        csv_delimiter: untyped,
+        bucket_folder: untyped,
+        bucket_name: untyped,
+        compression_type: String,
+        encryption_mode: String,
+        server_side_encryption_kms_key_id: untyped,
+        data_format: String,
+        encoding_type: String,
+        dict_page_size_limit: Integer,
+        row_group_length: untyped,
+        data_page_size: untyped,
+        parquet_version: String,
+        enable_statistics: bool,
+        include_op_for_full_load: untyped,
+        cdc_inserts_only: untyped,
+        timestamp_column_name: untyped,
+        parquet_timestamp_in_millisecond: untyped,
+        cdc_inserts_and_updates: untyped,
+        date_partition_enabled: untyped,
+        date_partition_sequence: String,
+        date_partition_delimiter: String,
+        use_csv_no_sup_value: untyped,
+        csv_no_sup_value: untyped,
+        preserve_transactions: untyped,
+        cdc_path: untyped,
+        use_task_start_time_for_full_load_timestamp: untyped,
+        canned_acl_for_objects: String,
+        add_column_name: untyped,
+        cdc_max_batch_interval: untyped,
+        cdc_min_file_size: untyped,
+        csv_null_value: untyped,
+        ignore_header_rows: untyped,
+        max_file_size: untyped,
+        rfc4180: untyped,
+        date_partition_timezone: untyped,
+        add_trailing_padding_character: untyped,
+        expected_bucket_owner: untyped,
+        glue_catalog_generation: untyped
+      },
+      ?dms_transfer_settings: {
+        service_access_role_arn: String,
+        bucket_name: untyped
+      },
+      ?mongo_db_settings: {
+        username: String,
+        password: String,
+        server_name: untyped,
+        port: Integer,
+        database_name: untyped,
+        auth_type: String,
+        auth_mechanism: String,
+        nesting_level: String,
+        extract_doc_id: untyped,
+        docs_to_investigate: untyped,
+        auth_source: untyped,
+        kms_key_id: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        use_update_look_up: bool,
+        replicate_shard_collections: untyped
+      },
+      ?kinesis_settings: {
+        stream_arn: String,
+        message_format: String,
+        service_access_role_arn: untyped,
+        include_transaction_details: bool,
+        include_partition_value: untyped,
+        partition_include_schema_table: untyped,
+        include_table_alter_operations: untyped,
+        include_control_details: untyped,
+        include_null_and_empty: untyped,
+        no_hex_prefix: untyped,
+        use_large_integer_value: untyped
+      },
+      ?kafka_settings: {
+        broker: String,
+        topic: untyped,
+        message_format: String,
+        include_transaction_details: bool,
+        include_partition_value: untyped,
+        partition_include_schema_table: untyped,
+        include_table_alter_operations: untyped,
+        include_control_details: untyped,
+        message_max_bytes: Integer,
+        include_null_and_empty: untyped,
+        security_protocol: String,
+        ssl_client_certificate_arn: untyped,
+        ssl_client_key_arn: untyped,
+        ssl_client_key_password: String,
+        ssl_ca_certificate_arn: untyped,
+        sasl_username: untyped,
+        sasl_password: untyped,
+        no_hex_prefix: untyped,
+        sasl_mechanism: String,
+        ssl_endpoint_identification_algorithm: String,
+        use_large_integer_value: untyped
+      },
+      ?elasticsearch_settings: {
+        service_access_role_arn: String,
+        endpoint_uri: untyped,
+        full_load_error_percentage: Integer,
+        error_retry_duration: untyped,
+        use_new_mapping_type: bool
+      },
+      ?neptune_settings: {
+        service_access_role_arn: String,
+        s3_bucket_name: untyped,
+        s3_bucket_folder: untyped,
+        error_retry_duration: Integer,
+        max_file_size: untyped,
+        max_retry_count: untyped,
+        iam_auth_enabled: bool
+      },
+      ?redshift_settings: {
+        accept_any_date: bool,
+        after_connect_script: String,
+        bucket_folder: untyped,
+        bucket_name: untyped,
+        case_sensitive_names: untyped,
+        comp_update: untyped,
+        connection_timeout: Integer,
+        database_name: untyped,
+        date_format: untyped,
+        empty_as_null: untyped,
+        encryption_mode: String,
+        explicit_ids: untyped,
+        file_transfer_upload_streams: untyped,
+        load_timeout: untyped,
+        max_file_size: untyped,
+        password: String,
+        port: untyped,
+        remove_quotes: untyped,
+        replace_invalid_chars: untyped,
+        replace_chars: untyped,
+        server_name: untyped,
+        service_access_role_arn: untyped,
+        server_side_encryption_kms_key_id: untyped,
+        time_format: untyped,
+        trim_blanks: untyped,
+        truncate_columns: untyped,
+        username: untyped,
+        write_buffer_size: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        map_boolean_as_boolean: untyped
+      },
+      ?postgre_sql_settings: {
+        after_connect_script: String,
+        capture_ddls: bool,
+        max_file_size: Integer,
+        database_name: untyped,
+        ddl_artifacts_schema: untyped,
+        execute_timeout: untyped,
+        fail_tasks_on_lob_truncation: untyped,
+        heartbeat_enable: untyped,
+        heartbeat_schema: untyped,
+        heartbeat_frequency: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        username: untyped,
+        slot_name: untyped,
+        plugin_name: String,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        trim_space_in_char: untyped,
+        map_boolean_as_boolean: untyped,
+        map_jsonb_as_clob: untyped,
+        map_long_varchar_as: String,
+        database_mode: String,
+        babelfish_database_name: untyped,
+        disable_unicode_source_filter: untyped,
+        service_access_role_arn: untyped,
+        authentication_method: String
+      },
+      ?my_sql_settings: {
+        after_connect_script: String,
+        clean_source_metadata_on_mismatch: bool,
+        database_name: untyped,
+        events_poll_interval: Integer,
+        target_db_type: String,
+        max_file_size: untyped,
+        parallel_load_threads: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        server_timezone: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        execute_timeout: untyped,
+        service_access_role_arn: untyped,
+        authentication_method: String
+      },
+      ?oracle_settings: {
+        add_supplemental_logging: bool,
+        archived_log_dest_id: Integer,
+        additional_archived_log_dest_id: untyped,
+        extra_archived_log_dest_ids: Array[Integer],
+        allow_select_nested_tables: untyped,
+        parallel_asm_read_threads: untyped,
+        read_ahead_blocks: untyped,
+        access_alternate_directly: untyped,
+        use_alternate_folder_for_online: untyped,
+        oracle_path_prefix: String,
+        use_path_prefix: untyped,
+        replace_path_prefix: untyped,
+        enable_homogenous_tablespace: untyped,
+        direct_path_no_log: untyped,
+        archived_logs_only: untyped,
+        asm_password: String,
+        asm_server: untyped,
+        asm_user: untyped,
+        char_length_semantics: String,
+        database_name: untyped,
+        direct_path_parallel_load: untyped,
+        fail_tasks_on_lob_truncation: untyped,
+        number_datatype_scale: untyped,
+        password: untyped,
+        port: untyped,
+        read_table_space_name: untyped,
+        retry_interval: untyped,
+        security_db_encryption: untyped,
+        security_db_encryption_name: untyped,
+        server_name: untyped,
+        spatial_data_option_to_geo_json_function_name: untyped,
+        standby_delay_time: untyped,
+        username: untyped,
+        use_b_file: untyped,
+        use_direct_path_full_load: untyped,
+        use_logminer_reader: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        secrets_manager_oracle_asm_access_role_arn: untyped,
+        secrets_manager_oracle_asm_secret_id: untyped,
+        trim_space_in_char: untyped,
+        convert_timestamp_with_zone_to_utc: untyped,
+        open_transaction_window: untyped,
+        authentication_method: String
+      },
+      ?sybase_settings: {
+        database_name: String,
+        password: String,
+        port: Integer,
+        server_name: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped
+      },
+      ?microsoft_sql_server_settings: {
+        port: Integer,
+        bcp_packet_size: untyped,
+        database_name: String,
+        control_tables_file_group: untyped,
+        password: String,
+        query_single_always_on_node: bool,
+        read_backup_only: untyped,
+        safeguard_policy: String,
+        server_name: untyped,
+        username: untyped,
+        use_bcp_full_load: untyped,
+        use_third_party_backup_device: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        trim_space_in_char: untyped,
+        tlog_access_mode: String,
+        force_lob_lookup: untyped,
+        authentication_method: String
+      },
+      ?ibm_db2_settings: {
+        database_name: String,
+        password: String,
+        port: Integer,
+        server_name: untyped,
+        set_data_capture_changes: bool,
+        current_lsn: untyped,
+        max_k_bytes_per_read: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        load_timeout: untyped,
+        write_buffer_size: untyped,
+        max_file_size: untyped,
+        keep_csv_files: untyped
+      },
+      ?resource_identifier: String,
+      ?doc_db_settings: {
+        username: String,
+        password: String,
+        server_name: untyped,
+        port: Integer,
+        database_name: untyped,
+        nesting_level: String,
+        extract_doc_id: bool,
+        docs_to_investigate: untyped,
+        kms_key_id: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        use_update_look_up: untyped,
+        replicate_shard_collections: untyped
+      },
+      ?redis_settings: {
+        server_name: String,
+        port: Integer,
+        ssl_security_protocol: String,
+        auth_type: String,
+        auth_user_name: untyped,
+        auth_password: String,
+        ssl_ca_certificate_arn: untyped
+      },
+      ?gcp_my_sql_settings: {
+        after_connect_script: String,
+        clean_source_metadata_on_mismatch: bool,
+        database_name: untyped,
+        events_poll_interval: Integer,
+        target_db_type: String,
+        max_file_size: untyped,
+        parallel_load_threads: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        server_timezone: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped
+      },
+      ?timestream_settings: {
+        database_name: String,
+        memory_duration: Integer,
+        magnetic_duration: untyped,
+        cdc_inserts_and_updates: bool,
+        enable_magnetic_store_writes: untyped
+      }
+    ) -> _CreateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointResponse
+
+    interface _CreateEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateEventSubscriptionResponse]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def create_event_subscription: (
+      ?subscription_name: String,
+      ?sns_topic_arn: String,
+      ?source_type: String,
+      ?event_categories: Array[String],
+      ?source_ids: Array[String],
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _CreateEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventSubscriptionResponse
+
+    interface _CreateFleetAdvisorCollectorResponse
+      include Smithy::Client::_Response[Types::CreateFleetAdvisorCollectorResponse]
+      def collector_referenced_id: () -> String?
+      def collector_name: () -> String?
+      def description: () -> String?
+      def service_access_role_arn: () -> String?
+      def s3_bucket_name: () -> String?
+    end
+    def create_fleet_advisor_collector: (
+      ?collector_name: String,
+      ?description: String,
+      ?service_access_role_arn: String,
+      ?s3_bucket_name: String
+    ) -> _CreateFleetAdvisorCollectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetAdvisorCollectorResponse
+
+    interface _CreateInstanceProfileResponse
+      include Smithy::Client::_Response[Types::CreateInstanceProfileResponse]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def create_instance_profile: (
+      ?availability_zone: String,
+      ?kms_key_arn: String,
+      ?publicly_accessible: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?network_type: String,
+      ?instance_profile_name: String,
+      ?description: String,
+      ?subnet_group_identifier: String,
+      ?vpc_security_groups: Array[String]
+    ) -> _CreateInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceProfileResponse
+
+    interface _CreateMigrationProjectResponse
+      include Smithy::Client::_Response[Types::CreateMigrationProjectResponse]
+      def migration_project: () -> Types::MigrationProject?
+    end
+    def create_migration_project: (
+      ?migration_project_name: String,
+      ?source_data_provider_descriptors: Array[
+        {
+          data_provider_identifier: String,
+          secrets_manager_secret_id: untyped,
+          secrets_manager_access_role_arn: untyped
+        }
+      ],
+      ?target_data_provider_descriptors: Array[
+        {
+          data_provider_identifier: String,
+          secrets_manager_secret_id: untyped,
+          secrets_manager_access_role_arn: untyped
+        }
+      ],
+      ?instance_profile_identifier: String,
+      ?transformation_rules: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?schema_conversion_application_attributes: {
+        s3_bucket_path: String,
+        s3_bucket_role_arn: untyped
+      }
+    ) -> _CreateMigrationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMigrationProjectResponse
+
+    interface _CreateReplicationConfigResponse
+      include Smithy::Client::_Response[Types::CreateReplicationConfigResponse]
+      def replication_config: () -> Types::ReplicationConfig?
+    end
+    def create_replication_config: (
+      ?replication_config_identifier: String,
+      ?source_endpoint_arn: String,
+      ?target_endpoint_arn: String,
+      ?compute_config: {
+        availability_zone: String,
+        dns_name_servers: untyped,
+        kms_key_id: untyped,
+        max_capacity_units: Integer,
+        min_capacity_units: untyped,
+        multi_az: bool,
+        preferred_maintenance_window: untyped,
+        replication_subnet_group_id: untyped,
+        vpc_security_group_ids: Array[String]
+      },
+      ?replication_type: String,
+      ?table_mappings: String,
+      ?replication_settings: String,
+      ?supplemental_settings: String,
+      ?resource_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _CreateReplicationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigResponse
+
+    interface _CreateReplicationInstanceResponse
+      include Smithy::Client::_Response[Types::CreateReplicationInstanceResponse]
+      def replication_instance: () -> Types::ReplicationInstance?
+    end
+    def create_replication_instance: (
+      ?replication_instance_identifier: String,
+      ?allocated_storage: Integer,
+      ?replication_instance_class: String,
+      ?vpc_security_group_ids: Array[String],
+      ?availability_zone: String,
+      ?replication_subnet_group_identifier: String,
+      ?preferred_maintenance_window: String,
+      ?multi_az: bool,
+      ?engine_version: String,
+      ?auto_minor_version_upgrade: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?kms_key_id: String,
+      ?publicly_accessible: bool,
+      ?dns_name_servers: String,
+      ?resource_identifier: String,
+      ?network_type: String,
+      ?kerberos_authentication_settings: {
+        key_cache_secret_id: String,
+        key_cache_secret_iam_arn: untyped,
+        krb5_file_contents: untyped
+      }
+    ) -> _CreateReplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationInstanceResponse
+
+    interface _CreateReplicationSubnetGroupResponse
+      include Smithy::Client::_Response[Types::CreateReplicationSubnetGroupResponse]
+      def replication_subnet_group: () -> Types::ReplicationSubnetGroup?
+    end
+    def create_replication_subnet_group: (
+      ?replication_subnet_group_identifier: String,
+      ?replication_subnet_group_description: String,
+      ?subnet_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _CreateReplicationSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationSubnetGroupResponse
+
+    interface _CreateReplicationTaskResponse
+      include Smithy::Client::_Response[Types::CreateReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def create_replication_task: (
+      ?replication_task_identifier: String,
+      ?source_endpoint_arn: String,
+      ?target_endpoint_arn: String,
+      ?replication_instance_arn: String,
+      ?migration_type: String,
+      ?table_mappings: String,
+      ?replication_task_settings: String,
+      ?cdc_start_time: Time,
+      ?cdc_start_position: String,
+      ?cdc_stop_position: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ],
+      ?task_data: String,
+      ?resource_identifier: String
+    ) -> _CreateReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationTaskResponse
+
+    interface _DeleteCertificateResponse
+      include Smithy::Client::_Response[Types::DeleteCertificateResponse]
+      def certificate: () -> Types::Certificate?
+    end
+    def delete_certificate: (
+      ?certificate_arn: String
+    ) -> _DeleteCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def delete_connection: (
+      ?endpoint_arn: String,
+      ?replication_instance_arn: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteDataMigrationResponse
+      include Smithy::Client::_Response[Types::DeleteDataMigrationResponse]
+      def data_migration: () -> Types::DataMigration?
+    end
+    def delete_data_migration: (
+      ?data_migration_identifier: String
+    ) -> _DeleteDataMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataMigrationResponse
+
+    interface _DeleteDataProviderResponse
+      include Smithy::Client::_Response[Types::DeleteDataProviderResponse]
+      def data_provider: () -> Types::DataProvider?
+    end
+    def delete_data_provider: (
+      ?data_provider_identifier: String
+    ) -> _DeleteDataProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataProviderResponse
+
+    interface _DeleteEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteEndpointResponse]
+      def endpoint: () -> Types::Endpoint?
+    end
+    def delete_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DeleteEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointResponse
+
+    interface _DeleteEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteEventSubscriptionResponse]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def delete_event_subscription: (
+      ?subscription_name: String
+    ) -> _DeleteEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventSubscriptionResponse
+
+    interface _DeleteFleetAdvisorCollectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_fleet_advisor_collector: (
+      ?collector_referenced_id: String
+    ) -> _DeleteFleetAdvisorCollectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetAdvisorCollectorResponse
+
+    interface _DeleteFleetAdvisorDatabasesResponse
+      include Smithy::Client::_Response[Types::DeleteFleetAdvisorDatabasesResponse]
+      def database_ids: () -> Array[String]?
+    end
+    def delete_fleet_advisor_databases: (
+      ?database_ids: Array[String]
+    ) -> _DeleteFleetAdvisorDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetAdvisorDatabasesResponse
+
+    interface _DeleteInstanceProfileResponse
+      include Smithy::Client::_Response[Types::DeleteInstanceProfileResponse]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def delete_instance_profile: (
+      ?instance_profile_identifier: String
+    ) -> _DeleteInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceProfileResponse
+
+    interface _DeleteMigrationProjectResponse
+      include Smithy::Client::_Response[Types::DeleteMigrationProjectResponse]
+      def migration_project: () -> Types::MigrationProject?
+    end
+    def delete_migration_project: (
+      ?migration_project_identifier: String
+    ) -> _DeleteMigrationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMigrationProjectResponse
+
+    interface _DeleteReplicationConfigResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationConfigResponse]
+      def replication_config: () -> Types::ReplicationConfig?
+    end
+    def delete_replication_config: (
+      ?replication_config_arn: String
+    ) -> _DeleteReplicationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationConfigResponse
+
+    interface _DeleteReplicationInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationInstanceResponse]
+      def replication_instance: () -> Types::ReplicationInstance?
+    end
+    def delete_replication_instance: (
+      ?replication_instance_arn: String
+    ) -> _DeleteReplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationInstanceResponse
+
+    interface _DeleteReplicationSubnetGroupResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationSubnetGroupResponse]
+    end
+    def delete_replication_subnet_group: (
+      ?replication_subnet_group_identifier: String
+    ) -> _DeleteReplicationSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationSubnetGroupResponse
+
+    interface _DeleteReplicationTaskResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def delete_replication_task: (
+      ?replication_task_arn: String
+    ) -> _DeleteReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationTaskResponse
+
+    interface _DeleteReplicationTaskAssessmentRunResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationTaskAssessmentRunResponse]
+      def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun?
+    end
+    def delete_replication_task_assessment_run: (
+      ?replication_task_assessment_run_arn: String
+    ) -> _DeleteReplicationTaskAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationTaskAssessmentRunResponse
+
+    interface _DescribeAccountAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeAccountAttributesResponse]
+      def account_quotas: () -> Array[Types::AccountQuota]?
+      def unique_account_identifier: () -> String?
+    end
+    def describe_account_attributes: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountAttributesResponse
+
+    interface _DescribeApplicableIndividualAssessmentsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicableIndividualAssessmentsResponse]
+      def individual_assessment_names: () -> Array[String]?
+      def marker: () -> String?
+    end
+    def describe_applicable_individual_assessments: (
+      ?replication_task_arn: String,
+      ?replication_instance_arn: String,
+      ?replication_config_arn: String,
+      ?source_engine_name: String,
+      ?target_engine_name: String,
+      ?migration_type: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeApplicableIndividualAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicableIndividualAssessmentsResponse
+
+    interface _DescribeCertificatesResponse
+      include Smithy::Client::_Response[Types::DescribeCertificatesResponse]
+      def marker: () -> String?
+      def certificates: () -> Array[Types::Certificate]?
+    end
+    def describe_certificates: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificatesResponse
+
+    interface _DescribeConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionsResponse]
+      def marker: () -> String?
+      def connections: () -> Array[Types::Connection]?
+    end
+    def describe_connections: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionsResponse
+
+    interface _DescribeConversionConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeConversionConfigurationResponse]
+      def migration_project_identifier: () -> String?
+      def conversion_configuration: () -> String?
+    end
+    def describe_conversion_configuration: (
+      ?migration_project_identifier: String
+    ) -> _DescribeConversionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConversionConfigurationResponse
+
+    interface _DescribeDataMigrationsResponse
+      include Smithy::Client::_Response[Types::DescribeDataMigrationsResponse]
+      def data_migrations: () -> Array[Types::DataMigration]?
+      def marker: () -> String?
+    end
+    def describe_data_migrations: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String,
+      ?without_settings: bool,
+      ?without_statistics: bool
+    ) -> _DescribeDataMigrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataMigrationsResponse
+
+    interface _DescribeDataProvidersResponse
+      include Smithy::Client::_Response[Types::DescribeDataProvidersResponse]
+      def marker: () -> String?
+      def data_providers: () -> Array[Types::DataProvider]?
+    end
+    def describe_data_providers: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDataProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataProvidersResponse
+
+    interface _DescribeEndpointSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointSettingsResponse]
+      def marker: () -> String?
+      def endpoint_settings: () -> Array[Types::EndpointSetting]?
+    end
+    def describe_endpoint_settings: (
+      ?engine_name: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEndpointSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointSettingsResponse
+
+    interface _DescribeEndpointTypesResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointTypesResponse]
+      def marker: () -> String?
+      def supported_endpoint_types: () -> Array[Types::SupportedEndpointType]?
+    end
+    def describe_endpoint_types: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEndpointTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointTypesResponse
+
+    interface _DescribeEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointsResponse]
+      def marker: () -> String?
+      def endpoints: () -> Array[Types::Endpoint]?
+    end
+    def describe_endpoints: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointsResponse
+
+    interface _DescribeEngineVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeEngineVersionsResponse]
+      def engine_versions: () -> Array[Types::EngineVersion]?
+      def marker: () -> String?
+    end
+    def describe_engine_versions: (
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEngineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEngineVersionsResponse
+
+    interface _DescribeEventCategoriesResponse
+      include Smithy::Client::_Response[Types::DescribeEventCategoriesResponse]
+      def event_category_group_list: () -> Array[Types::EventCategoryGroup]?
+    end
+    def describe_event_categories: (
+      ?source_type: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeEventCategoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventCategoriesResponse
+
+    interface _DescribeEventSubscriptionsResponse
+      include Smithy::Client::_Response[Types::DescribeEventSubscriptionsResponse]
+      def marker: () -> String?
+      def event_subscriptions_list: () -> Array[Types::EventSubscription]?
+    end
+    def describe_event_subscriptions: (
+      ?subscription_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEventSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventSubscriptionsResponse
+
+    interface _DescribeEventsResponse
+      include Smithy::Client::_Response[Types::DescribeEventsResponse]
+      def marker: () -> String?
+      def events: () -> Array[Types::Event]?
+    end
+    def describe_events: (
+      ?source_identifier: String,
+      ?source_type: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?duration: Integer,
+      ?event_categories: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventsResponse
+
+    interface _DescribeExtensionPackAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeExtensionPackAssociationsResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_extension_pack_associations: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeExtensionPackAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExtensionPackAssociationsResponse
+
+    interface _DescribeFleetAdvisorCollectorsResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAdvisorCollectorsResponse]
+      def collectors: () -> Array[Types::CollectorResponse]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_advisor_collectors: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAdvisorCollectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAdvisorCollectorsResponse
+
+    interface _DescribeFleetAdvisorDatabasesResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAdvisorDatabasesResponse]
+      def databases: () -> Array[Types::DatabaseResponse]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_advisor_databases: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAdvisorDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAdvisorDatabasesResponse
+
+    interface _DescribeFleetAdvisorLsaAnalysisResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAdvisorLsaAnalysisResponse]
+      def analysis: () -> Array[Types::FleetAdvisorLsaAnalysisResponse]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_advisor_lsa_analysis: (
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAdvisorLsaAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAdvisorLsaAnalysisResponse
+
+    interface _DescribeFleetAdvisorSchemaObjectSummaryResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAdvisorSchemaObjectSummaryResponse]
+      def fleet_advisor_schema_objects: () -> Array[Types::FleetAdvisorSchemaObjectResponse]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_advisor_schema_object_summary: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAdvisorSchemaObjectSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAdvisorSchemaObjectSummaryResponse
+
+    interface _DescribeFleetAdvisorSchemasResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAdvisorSchemasResponse]
+      def fleet_advisor_schemas: () -> Array[Types::SchemaResponse]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_advisor_schemas: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAdvisorSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAdvisorSchemasResponse
+
+    interface _DescribeInstanceProfilesResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceProfilesResponse]
+      def marker: () -> String?
+      def instance_profiles: () -> Array[Types::InstanceProfile]?
+    end
+    def describe_instance_profiles: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeInstanceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceProfilesResponse
+
+    interface _DescribeMetadataModelAssessmentsResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelAssessmentsResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_assessments: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelAssessmentsResponse
+
+    interface _DescribeMetadataModelConversionsResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelConversionsResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_conversions: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelConversionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelConversionsResponse
+
+    interface _DescribeMetadataModelExportsAsScriptResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelExportsAsScriptResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_exports_as_script: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelExportsAsScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelExportsAsScriptResponse
+
+    interface _DescribeMetadataModelExportsToTargetResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelExportsToTargetResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_exports_to_target: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelExportsToTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelExportsToTargetResponse
+
+    interface _DescribeMetadataModelImportsResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelImportsResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_imports: (
+      ?migration_project_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelImportsResponse
+
+    interface _DescribeMigrationProjectsResponse
+      include Smithy::Client::_Response[Types::DescribeMigrationProjectsResponse]
+      def marker: () -> String?
+      def migration_projects: () -> Array[Types::MigrationProject]?
+    end
+    def describe_migration_projects: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeMigrationProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMigrationProjectsResponse
+
+    interface _DescribeOrderableReplicationInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeOrderableReplicationInstancesResponse]
+      def orderable_replication_instances: () -> Array[Types::OrderableReplicationInstance]?
+      def marker: () -> String?
+    end
+    def describe_orderable_replication_instances: (
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeOrderableReplicationInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrderableReplicationInstancesResponse
+
+    interface _DescribePendingMaintenanceActionsResponse
+      include Smithy::Client::_Response[Types::DescribePendingMaintenanceActionsResponse]
+      def pending_maintenance_actions: () -> Array[Types::ResourcePendingMaintenanceActions]?
+      def marker: () -> String?
+    end
+    def describe_pending_maintenance_actions: (
+      ?replication_instance_arn: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribePendingMaintenanceActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePendingMaintenanceActionsResponse
+
+    interface _DescribeRecommendationLimitationsResponse
+      include Smithy::Client::_Response[Types::DescribeRecommendationLimitationsResponse]
+      def next_token: () -> String?
+      def limitations: () -> Array[Types::Limitation]?
+    end
+    def describe_recommendation_limitations: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeRecommendationLimitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecommendationLimitationsResponse
+
+    interface _DescribeRecommendationsResponse
+      include Smithy::Client::_Response[Types::DescribeRecommendationsResponse]
+      def next_token: () -> String?
+      def recommendations: () -> Array[Types::Recommendation]?
+    end
+    def describe_recommendations: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecommendationsResponse
+
+    interface _DescribeRefreshSchemasStatusResponse
+      include Smithy::Client::_Response[Types::DescribeRefreshSchemasStatusResponse]
+      def refresh_schemas_status: () -> Types::RefreshSchemasStatus?
+    end
+    def describe_refresh_schemas_status: (
+      ?endpoint_arn: String
+    ) -> _DescribeRefreshSchemasStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRefreshSchemasStatusResponse
+
+    interface _DescribeReplicationConfigsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationConfigsResponse]
+      def marker: () -> String?
+      def replication_configs: () -> Array[Types::ReplicationConfig]?
+    end
+    def describe_replication_configs: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationConfigsResponse
+
+    interface _DescribeReplicationInstanceTaskLogsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationInstanceTaskLogsResponse]
+      def replication_instance_arn: () -> String?
+      def replication_instance_task_logs: () -> Array[Types::ReplicationInstanceTaskLog]?
+      def marker: () -> String?
+    end
+    def describe_replication_instance_task_logs: (
+      ?replication_instance_arn: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationInstanceTaskLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationInstanceTaskLogsResponse
+
+    interface _DescribeReplicationInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationInstancesResponse]
+      def marker: () -> String?
+      def replication_instances: () -> Array[Types::ReplicationInstance]?
+    end
+    def describe_replication_instances: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationInstancesResponse
+
+    interface _DescribeReplicationSubnetGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationSubnetGroupsResponse]
+      def marker: () -> String?
+      def replication_subnet_groups: () -> Array[Types::ReplicationSubnetGroup]?
+    end
+    def describe_replication_subnet_groups: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationSubnetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationSubnetGroupsResponse
+
+    interface _DescribeReplicationTableStatisticsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationTableStatisticsResponse]
+      def replication_config_arn: () -> String?
+      def marker: () -> String?
+      def replication_table_statistics: () -> Array[Types::TableStatistics]?
+    end
+    def describe_replication_table_statistics: (
+      ?replication_config_arn: String,
+      ?max_records: Integer,
+      ?marker: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeReplicationTableStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationTableStatisticsResponse
+
+    interface _DescribeReplicationTaskAssessmentResultsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationTaskAssessmentResultsResponse]
+      def marker: () -> String?
+      def bucket_name: () -> String?
+      def replication_task_assessment_results: () -> Array[Types::ReplicationTaskAssessmentResult]?
+    end
+    def describe_replication_task_assessment_results: (
+      ?replication_task_arn: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationTaskAssessmentResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationTaskAssessmentResultsResponse
+
+    interface _DescribeReplicationTaskAssessmentRunsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationTaskAssessmentRunsResponse]
+      def marker: () -> String?
+      def replication_task_assessment_runs: () -> Array[Types::ReplicationTaskAssessmentRun]?
+    end
+    def describe_replication_task_assessment_runs: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationTaskAssessmentRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationTaskAssessmentRunsResponse
+
+    interface _DescribeReplicationTaskIndividualAssessmentsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationTaskIndividualAssessmentsResponse]
+      def marker: () -> String?
+      def replication_task_individual_assessments: () -> Array[Types::ReplicationTaskIndividualAssessment]?
+    end
+    def describe_replication_task_individual_assessments: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationTaskIndividualAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationTaskIndividualAssessmentsResponse
+
+    interface _DescribeReplicationTasksResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationTasksResponse]
+      def marker: () -> String?
+      def replication_tasks: () -> Array[Types::ReplicationTask]?
+    end
+    def describe_replication_tasks: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String,
+      ?without_settings: bool
+    ) -> _DescribeReplicationTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationTasksResponse
+
+    interface _DescribeReplicationsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationsResponse]
+      def marker: () -> String?
+      def replications: () -> Array[Types::Replication]?
+    end
+    def describe_replications: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeReplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationsResponse
+
+    interface _DescribeSchemasResponse
+      include Smithy::Client::_Response[Types::DescribeSchemasResponse]
+      def marker: () -> String?
+      def schemas: () -> Array[String]?
+    end
+    def describe_schemas: (
+      ?endpoint_arn: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSchemasResponse
+
+    interface _DescribeTableStatisticsResponse
+      include Smithy::Client::_Response[Types::DescribeTableStatisticsResponse]
+      def replication_task_arn: () -> String?
+      def table_statistics: () -> Array[Types::TableStatistics]?
+      def marker: () -> String?
+    end
+    def describe_table_statistics: (
+      ?replication_task_arn: String,
+      ?max_records: Integer,
+      ?marker: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeTableStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTableStatisticsResponse
+
+    interface _ExportMetadataModelAssessmentResponse
+      include Smithy::Client::_Response[Types::ExportMetadataModelAssessmentResponse]
+      def pdf_report: () -> Types::ExportMetadataModelAssessmentResultEntry?
+      def csv_report: () -> Types::ExportMetadataModelAssessmentResultEntry?
+    end
+    def export_metadata_model_assessment: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String,
+      ?file_name: String,
+      ?assessment_report_types: Array[String]
+    ) -> _ExportMetadataModelAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportMetadataModelAssessmentResponse
+
+    interface _ImportCertificateResponse
+      include Smithy::Client::_Response[Types::ImportCertificateResponse]
+      def certificate: () -> Types::Certificate?
+    end
+    def import_certificate: (
+      ?certificate_identifier: String,
+      ?certificate_pem: String,
+      ?certificate_wallet: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _ImportCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCertificateResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?resource_arn_list: Array[String]
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyConversionConfigurationResponse
+      include Smithy::Client::_Response[Types::ModifyConversionConfigurationResponse]
+      def migration_project_identifier: () -> String?
+    end
+    def modify_conversion_configuration: (
+      ?migration_project_identifier: String,
+      ?conversion_configuration: String
+    ) -> _ModifyConversionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyConversionConfigurationResponse
+
+    interface _ModifyDataMigrationResponse
+      include Smithy::Client::_Response[Types::ModifyDataMigrationResponse]
+      def data_migration: () -> Types::DataMigration?
+    end
+    def modify_data_migration: (
+      ?data_migration_identifier: String,
+      ?data_migration_name: String,
+      ?enable_cloudwatch_logs: bool,
+      ?service_access_role_arn: String,
+      ?data_migration_type: String,
+      ?source_data_settings: Array[
+        {
+          cdc_start_position: String,
+          cdc_start_time: Time,
+          cdc_stop_time: untyped,
+          slot_name: untyped
+        }
+      ],
+      ?target_data_settings: Array[
+        {
+          table_preparation_mode: String
+        }
+      ],
+      ?number_of_jobs: Integer,
+      ?selection_rules: String
+    ) -> _ModifyDataMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDataMigrationResponse
+
+    interface _ModifyDataProviderResponse
+      include Smithy::Client::_Response[Types::ModifyDataProviderResponse]
+      def data_provider: () -> Types::DataProvider?
+    end
+    def modify_data_provider: (
+      ?data_provider_identifier: String,
+      ?data_provider_name: String,
+      ?description: String,
+      ?engine: String,
+      ?virtual: bool,
+      ?exact_settings: bool,
+      ?settings: {
+        redshift_settings: {
+          server_name: String,
+          port: Integer,
+          database_name: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        postgre_sql_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: String,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        my_sql_settings: {
+          server_name: untyped,
+          port: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        oracle_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          asm_server: untyped,
+          secrets_manager_oracle_asm_secret_id: untyped,
+          secrets_manager_oracle_asm_access_role_arn: untyped,
+          secrets_manager_security_db_encryption_secret_id: untyped,
+          secrets_manager_security_db_encryption_access_role_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        microsoft_sql_server_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        doc_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped
+        },
+        maria_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        ibm_db2_luw_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        ibm_db2z_os_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          s3_path: untyped,
+          s3_access_role_arn: untyped
+        },
+        mongo_db_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          certificate_arn: untyped,
+          auth_type: String,
+          auth_source: untyped,
+          auth_mechanism: String
+        }
+      }
+    ) -> _ModifyDataProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDataProviderResponse
+
+    interface _ModifyEndpointResponse
+      include Smithy::Client::_Response[Types::ModifyEndpointResponse]
+      def endpoint: () -> Types::Endpoint?
+    end
+    def modify_endpoint: (
+      ?endpoint_arn: String,
+      ?endpoint_identifier: String,
+      ?endpoint_type: String,
+      ?engine_name: String,
+      ?username: String,
+      ?password: String,
+      ?server_name: String,
+      ?port: Integer,
+      ?database_name: String,
+      ?extra_connection_attributes: String,
+      ?certificate_arn: String,
+      ?ssl_mode: String,
+      ?service_access_role_arn: String,
+      ?external_table_definition: String,
+      ?dynamo_db_settings: {
+        service_access_role_arn: String
+      },
+      ?s3_settings: {
+        service_access_role_arn: String,
+        external_table_definition: untyped,
+        csv_row_delimiter: untyped,
+        csv_delimiter: untyped,
+        bucket_folder: untyped,
+        bucket_name: untyped,
+        compression_type: String,
+        encryption_mode: String,
+        server_side_encryption_kms_key_id: untyped,
+        data_format: String,
+        encoding_type: String,
+        dict_page_size_limit: Integer,
+        row_group_length: untyped,
+        data_page_size: untyped,
+        parquet_version: String,
+        enable_statistics: bool,
+        include_op_for_full_load: untyped,
+        cdc_inserts_only: untyped,
+        timestamp_column_name: untyped,
+        parquet_timestamp_in_millisecond: untyped,
+        cdc_inserts_and_updates: untyped,
+        date_partition_enabled: untyped,
+        date_partition_sequence: String,
+        date_partition_delimiter: String,
+        use_csv_no_sup_value: untyped,
+        csv_no_sup_value: untyped,
+        preserve_transactions: untyped,
+        cdc_path: untyped,
+        use_task_start_time_for_full_load_timestamp: untyped,
+        canned_acl_for_objects: String,
+        add_column_name: untyped,
+        cdc_max_batch_interval: untyped,
+        cdc_min_file_size: untyped,
+        csv_null_value: untyped,
+        ignore_header_rows: untyped,
+        max_file_size: untyped,
+        rfc4180: untyped,
+        date_partition_timezone: untyped,
+        add_trailing_padding_character: untyped,
+        expected_bucket_owner: untyped,
+        glue_catalog_generation: untyped
+      },
+      ?dms_transfer_settings: {
+        service_access_role_arn: String,
+        bucket_name: untyped
+      },
+      ?mongo_db_settings: {
+        username: String,
+        password: String,
+        server_name: untyped,
+        port: Integer,
+        database_name: untyped,
+        auth_type: String,
+        auth_mechanism: String,
+        nesting_level: String,
+        extract_doc_id: untyped,
+        docs_to_investigate: untyped,
+        auth_source: untyped,
+        kms_key_id: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        use_update_look_up: bool,
+        replicate_shard_collections: untyped
+      },
+      ?kinesis_settings: {
+        stream_arn: String,
+        message_format: String,
+        service_access_role_arn: untyped,
+        include_transaction_details: bool,
+        include_partition_value: untyped,
+        partition_include_schema_table: untyped,
+        include_table_alter_operations: untyped,
+        include_control_details: untyped,
+        include_null_and_empty: untyped,
+        no_hex_prefix: untyped,
+        use_large_integer_value: untyped
+      },
+      ?kafka_settings: {
+        broker: String,
+        topic: untyped,
+        message_format: String,
+        include_transaction_details: bool,
+        include_partition_value: untyped,
+        partition_include_schema_table: untyped,
+        include_table_alter_operations: untyped,
+        include_control_details: untyped,
+        message_max_bytes: Integer,
+        include_null_and_empty: untyped,
+        security_protocol: String,
+        ssl_client_certificate_arn: untyped,
+        ssl_client_key_arn: untyped,
+        ssl_client_key_password: String,
+        ssl_ca_certificate_arn: untyped,
+        sasl_username: untyped,
+        sasl_password: untyped,
+        no_hex_prefix: untyped,
+        sasl_mechanism: String,
+        ssl_endpoint_identification_algorithm: String,
+        use_large_integer_value: untyped
+      },
+      ?elasticsearch_settings: {
+        service_access_role_arn: String,
+        endpoint_uri: untyped,
+        full_load_error_percentage: Integer,
+        error_retry_duration: untyped,
+        use_new_mapping_type: bool
+      },
+      ?neptune_settings: {
+        service_access_role_arn: String,
+        s3_bucket_name: untyped,
+        s3_bucket_folder: untyped,
+        error_retry_duration: Integer,
+        max_file_size: untyped,
+        max_retry_count: untyped,
+        iam_auth_enabled: bool
+      },
+      ?redshift_settings: {
+        accept_any_date: bool,
+        after_connect_script: String,
+        bucket_folder: untyped,
+        bucket_name: untyped,
+        case_sensitive_names: untyped,
+        comp_update: untyped,
+        connection_timeout: Integer,
+        database_name: untyped,
+        date_format: untyped,
+        empty_as_null: untyped,
+        encryption_mode: String,
+        explicit_ids: untyped,
+        file_transfer_upload_streams: untyped,
+        load_timeout: untyped,
+        max_file_size: untyped,
+        password: String,
+        port: untyped,
+        remove_quotes: untyped,
+        replace_invalid_chars: untyped,
+        replace_chars: untyped,
+        server_name: untyped,
+        service_access_role_arn: untyped,
+        server_side_encryption_kms_key_id: untyped,
+        time_format: untyped,
+        trim_blanks: untyped,
+        truncate_columns: untyped,
+        username: untyped,
+        write_buffer_size: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        map_boolean_as_boolean: untyped
+      },
+      ?postgre_sql_settings: {
+        after_connect_script: String,
+        capture_ddls: bool,
+        max_file_size: Integer,
+        database_name: untyped,
+        ddl_artifacts_schema: untyped,
+        execute_timeout: untyped,
+        fail_tasks_on_lob_truncation: untyped,
+        heartbeat_enable: untyped,
+        heartbeat_schema: untyped,
+        heartbeat_frequency: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        username: untyped,
+        slot_name: untyped,
+        plugin_name: String,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        trim_space_in_char: untyped,
+        map_boolean_as_boolean: untyped,
+        map_jsonb_as_clob: untyped,
+        map_long_varchar_as: String,
+        database_mode: String,
+        babelfish_database_name: untyped,
+        disable_unicode_source_filter: untyped,
+        service_access_role_arn: untyped,
+        authentication_method: String
+      },
+      ?my_sql_settings: {
+        after_connect_script: String,
+        clean_source_metadata_on_mismatch: bool,
+        database_name: untyped,
+        events_poll_interval: Integer,
+        target_db_type: String,
+        max_file_size: untyped,
+        parallel_load_threads: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        server_timezone: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        execute_timeout: untyped,
+        service_access_role_arn: untyped,
+        authentication_method: String
+      },
+      ?oracle_settings: {
+        add_supplemental_logging: bool,
+        archived_log_dest_id: Integer,
+        additional_archived_log_dest_id: untyped,
+        extra_archived_log_dest_ids: Array[Integer],
+        allow_select_nested_tables: untyped,
+        parallel_asm_read_threads: untyped,
+        read_ahead_blocks: untyped,
+        access_alternate_directly: untyped,
+        use_alternate_folder_for_online: untyped,
+        oracle_path_prefix: String,
+        use_path_prefix: untyped,
+        replace_path_prefix: untyped,
+        enable_homogenous_tablespace: untyped,
+        direct_path_no_log: untyped,
+        archived_logs_only: untyped,
+        asm_password: String,
+        asm_server: untyped,
+        asm_user: untyped,
+        char_length_semantics: String,
+        database_name: untyped,
+        direct_path_parallel_load: untyped,
+        fail_tasks_on_lob_truncation: untyped,
+        number_datatype_scale: untyped,
+        password: untyped,
+        port: untyped,
+        read_table_space_name: untyped,
+        retry_interval: untyped,
+        security_db_encryption: untyped,
+        security_db_encryption_name: untyped,
+        server_name: untyped,
+        spatial_data_option_to_geo_json_function_name: untyped,
+        standby_delay_time: untyped,
+        username: untyped,
+        use_b_file: untyped,
+        use_direct_path_full_load: untyped,
+        use_logminer_reader: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        secrets_manager_oracle_asm_access_role_arn: untyped,
+        secrets_manager_oracle_asm_secret_id: untyped,
+        trim_space_in_char: untyped,
+        convert_timestamp_with_zone_to_utc: untyped,
+        open_transaction_window: untyped,
+        authentication_method: String
+      },
+      ?sybase_settings: {
+        database_name: String,
+        password: String,
+        port: Integer,
+        server_name: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped
+      },
+      ?microsoft_sql_server_settings: {
+        port: Integer,
+        bcp_packet_size: untyped,
+        database_name: String,
+        control_tables_file_group: untyped,
+        password: String,
+        query_single_always_on_node: bool,
+        read_backup_only: untyped,
+        safeguard_policy: String,
+        server_name: untyped,
+        username: untyped,
+        use_bcp_full_load: untyped,
+        use_third_party_backup_device: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        trim_space_in_char: untyped,
+        tlog_access_mode: String,
+        force_lob_lookup: untyped,
+        authentication_method: String
+      },
+      ?ibm_db2_settings: {
+        database_name: String,
+        password: String,
+        port: Integer,
+        server_name: untyped,
+        set_data_capture_changes: bool,
+        current_lsn: untyped,
+        max_k_bytes_per_read: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        load_timeout: untyped,
+        write_buffer_size: untyped,
+        max_file_size: untyped,
+        keep_csv_files: untyped
+      },
+      ?doc_db_settings: {
+        username: String,
+        password: String,
+        server_name: untyped,
+        port: Integer,
+        database_name: untyped,
+        nesting_level: String,
+        extract_doc_id: bool,
+        docs_to_investigate: untyped,
+        kms_key_id: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped,
+        use_update_look_up: untyped,
+        replicate_shard_collections: untyped
+      },
+      ?redis_settings: {
+        server_name: String,
+        port: Integer,
+        ssl_security_protocol: String,
+        auth_type: String,
+        auth_user_name: untyped,
+        auth_password: String,
+        ssl_ca_certificate_arn: untyped
+      },
+      ?exact_settings: bool,
+      ?gcp_my_sql_settings: {
+        after_connect_script: String,
+        clean_source_metadata_on_mismatch: bool,
+        database_name: untyped,
+        events_poll_interval: Integer,
+        target_db_type: String,
+        max_file_size: untyped,
+        parallel_load_threads: untyped,
+        password: String,
+        port: untyped,
+        server_name: untyped,
+        server_timezone: untyped,
+        username: untyped,
+        secrets_manager_access_role_arn: untyped,
+        secrets_manager_secret_id: untyped
+      },
+      ?timestream_settings: {
+        database_name: String,
+        memory_duration: Integer,
+        magnetic_duration: untyped,
+        cdc_inserts_and_updates: bool,
+        enable_magnetic_store_writes: untyped
+      }
+    ) -> _ModifyEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyEndpointResponse
+
+    interface _ModifyEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::ModifyEventSubscriptionResponse]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def modify_event_subscription: (
+      ?subscription_name: String,
+      ?sns_topic_arn: String,
+      ?source_type: String,
+      ?event_categories: Array[String],
+      ?enabled: bool
+    ) -> _ModifyEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyEventSubscriptionResponse
+
+    interface _ModifyInstanceProfileResponse
+      include Smithy::Client::_Response[Types::ModifyInstanceProfileResponse]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def modify_instance_profile: (
+      ?instance_profile_identifier: String,
+      ?availability_zone: String,
+      ?kms_key_arn: String,
+      ?publicly_accessible: bool,
+      ?network_type: String,
+      ?instance_profile_name: String,
+      ?description: String,
+      ?subnet_group_identifier: String,
+      ?vpc_security_groups: Array[String]
+    ) -> _ModifyInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceProfileResponse
+
+    interface _ModifyMigrationProjectResponse
+      include Smithy::Client::_Response[Types::ModifyMigrationProjectResponse]
+      def migration_project: () -> Types::MigrationProject?
+    end
+    def modify_migration_project: (
+      ?migration_project_identifier: String,
+      ?migration_project_name: String,
+      ?source_data_provider_descriptors: Array[
+        {
+          data_provider_identifier: String,
+          secrets_manager_secret_id: untyped,
+          secrets_manager_access_role_arn: untyped
+        }
+      ],
+      ?target_data_provider_descriptors: Array[
+        {
+          data_provider_identifier: String,
+          secrets_manager_secret_id: untyped,
+          secrets_manager_access_role_arn: untyped
+        }
+      ],
+      ?instance_profile_identifier: String,
+      ?transformation_rules: String,
+      ?description: String,
+      ?schema_conversion_application_attributes: {
+        s3_bucket_path: String,
+        s3_bucket_role_arn: untyped
+      }
+    ) -> _ModifyMigrationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyMigrationProjectResponse
+
+    interface _ModifyReplicationConfigResponse
+      include Smithy::Client::_Response[Types::ModifyReplicationConfigResponse]
+      def replication_config: () -> Types::ReplicationConfig?
+    end
+    def modify_replication_config: (
+      ?replication_config_arn: String,
+      ?replication_config_identifier: String,
+      ?replication_type: String,
+      ?table_mappings: String,
+      ?replication_settings: String,
+      ?supplemental_settings: String,
+      ?compute_config: {
+        availability_zone: String,
+        dns_name_servers: untyped,
+        kms_key_id: untyped,
+        max_capacity_units: Integer,
+        min_capacity_units: untyped,
+        multi_az: bool,
+        preferred_maintenance_window: untyped,
+        replication_subnet_group_id: untyped,
+        vpc_security_group_ids: Array[String]
+      },
+      ?source_endpoint_arn: String,
+      ?target_endpoint_arn: String
+    ) -> _ModifyReplicationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReplicationConfigResponse
+
+    interface _ModifyReplicationInstanceResponse
+      include Smithy::Client::_Response[Types::ModifyReplicationInstanceResponse]
+      def replication_instance: () -> Types::ReplicationInstance?
+    end
+    def modify_replication_instance: (
+      ?replication_instance_arn: String,
+      ?allocated_storage: Integer,
+      ?apply_immediately: bool,
+      ?replication_instance_class: String,
+      ?vpc_security_group_ids: Array[String],
+      ?preferred_maintenance_window: String,
+      ?multi_az: bool,
+      ?engine_version: String,
+      ?allow_major_version_upgrade: bool,
+      ?auto_minor_version_upgrade: bool,
+      ?replication_instance_identifier: String,
+      ?network_type: String,
+      ?kerberos_authentication_settings: {
+        key_cache_secret_id: String,
+        key_cache_secret_iam_arn: untyped,
+        krb5_file_contents: untyped
+      }
+    ) -> _ModifyReplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReplicationInstanceResponse
+
+    interface _ModifyReplicationSubnetGroupResponse
+      include Smithy::Client::_Response[Types::ModifyReplicationSubnetGroupResponse]
+      def replication_subnet_group: () -> Types::ReplicationSubnetGroup?
+    end
+    def modify_replication_subnet_group: (
+      ?replication_subnet_group_identifier: String,
+      ?replication_subnet_group_description: String,
+      ?subnet_ids: Array[String]
+    ) -> _ModifyReplicationSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReplicationSubnetGroupResponse
+
+    interface _ModifyReplicationTaskResponse
+      include Smithy::Client::_Response[Types::ModifyReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def modify_replication_task: (
+      ?replication_task_arn: String,
+      ?replication_task_identifier: String,
+      ?migration_type: String,
+      ?table_mappings: String,
+      ?replication_task_settings: String,
+      ?cdc_start_time: Time,
+      ?cdc_start_position: String,
+      ?cdc_stop_position: String,
+      ?task_data: String
+    ) -> _ModifyReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReplicationTaskResponse
+
+    interface _MoveReplicationTaskResponse
+      include Smithy::Client::_Response[Types::MoveReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def move_replication_task: (
+      ?replication_task_arn: String,
+      ?target_replication_instance_arn: String
+    ) -> _MoveReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MoveReplicationTaskResponse
+
+    interface _RebootReplicationInstanceResponse
+      include Smithy::Client::_Response[Types::RebootReplicationInstanceResponse]
+      def replication_instance: () -> Types::ReplicationInstance?
+    end
+    def reboot_replication_instance: (
+      ?replication_instance_arn: String,
+      ?force_failover: bool,
+      ?force_planned_failover: bool
+    ) -> _RebootReplicationInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootReplicationInstanceResponse
+
+    interface _RefreshSchemasResponse
+      include Smithy::Client::_Response[Types::RefreshSchemasResponse]
+      def refresh_schemas_status: () -> Types::RefreshSchemasStatus?
+    end
+    def refresh_schemas: (
+      ?endpoint_arn: String,
+      ?replication_instance_arn: String
+    ) -> _RefreshSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RefreshSchemasResponse
+
+    interface _ReloadReplicationTablesResponse
+      include Smithy::Client::_Response[Types::ReloadReplicationTablesResponse]
+      def replication_config_arn: () -> String?
+    end
+    def reload_replication_tables: (
+      ?replication_config_arn: String,
+      ?tables_to_reload: Array[
+        {
+          schema_name: String,
+          table_name: untyped
+        }
+      ],
+      ?reload_option: String
+    ) -> _ReloadReplicationTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReloadReplicationTablesResponse
+
+    interface _ReloadTablesResponse
+      include Smithy::Client::_Response[Types::ReloadTablesResponse]
+      def replication_task_arn: () -> String?
+    end
+    def reload_tables: (
+      ?replication_task_arn: String,
+      ?tables_to_reload: Array[
+        {
+          schema_name: String,
+          table_name: untyped
+        }
+      ],
+      ?reload_option: String
+    ) -> _ReloadTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReloadTablesResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveTagsFromResourceResponse]
+    end
+    def remove_tags_from_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+
+    interface _RunFleetAdvisorLsaAnalysisResponse
+      include Smithy::Client::_Response[Types::RunFleetAdvisorLsaAnalysisResponse]
+      def lsa_analysis_id: () -> String?
+      def status: () -> String?
+    end
+    def run_fleet_advisor_lsa_analysis: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunFleetAdvisorLsaAnalysisResponse
+
+    interface _StartDataMigrationResponse
+      include Smithy::Client::_Response[Types::StartDataMigrationResponse]
+      def data_migration: () -> Types::DataMigration?
+    end
+    def start_data_migration: (
+      ?data_migration_identifier: String,
+      ?start_type: String
+    ) -> _StartDataMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataMigrationResponse
+
+    interface _StartExtensionPackAssociationResponse
+      include Smithy::Client::_Response[Types::StartExtensionPackAssociationResponse]
+      def request_identifier: () -> String?
+    end
+    def start_extension_pack_association: (
+      ?migration_project_identifier: String
+    ) -> _StartExtensionPackAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExtensionPackAssociationResponse
+
+    interface _StartMetadataModelAssessmentResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelAssessmentResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_assessment: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String
+    ) -> _StartMetadataModelAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelAssessmentResponse
+
+    interface _StartMetadataModelConversionResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelConversionResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_conversion: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String
+    ) -> _StartMetadataModelConversionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelConversionResponse
+
+    interface _StartMetadataModelExportAsScriptResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelExportAsScriptResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_export_as_script: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String,
+      ?origin: String,
+      ?file_name: String
+    ) -> _StartMetadataModelExportAsScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelExportAsScriptResponse
+
+    interface _StartMetadataModelExportToTargetResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelExportToTargetResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_export_to_target: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String,
+      ?overwrite_extension_pack: bool
+    ) -> _StartMetadataModelExportToTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelExportToTargetResponse
+
+    interface _StartMetadataModelImportResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelImportResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_import: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String,
+      ?origin: String,
+      ?refresh: bool
+    ) -> _StartMetadataModelImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelImportResponse
+
+    interface _StartRecommendationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_recommendations: (
+      ?database_id: String,
+      ?settings: {
+        instance_sizing_type: String,
+        workload_type: untyped
+      }
+    ) -> _StartRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecommendationsResponse
+
+    interface _StartReplicationResponse
+      include Smithy::Client::_Response[Types::StartReplicationResponse]
+      def replication: () -> Types::Replication?
+    end
+    def start_replication: (
+      ?replication_config_arn: String,
+      ?start_replication_type: String,
+      ?premigration_assessment_settings: String,
+      ?cdc_start_time: Time,
+      ?cdc_start_position: String,
+      ?cdc_stop_position: String
+    ) -> _StartReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationResponse
+
+    interface _StartReplicationTaskResponse
+      include Smithy::Client::_Response[Types::StartReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def start_replication_task: (
+      ?replication_task_arn: String,
+      ?start_replication_task_type: String,
+      ?cdc_start_time: Time,
+      ?cdc_start_position: String,
+      ?cdc_stop_position: String
+    ) -> _StartReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationTaskResponse
+
+    interface _StartReplicationTaskAssessmentResponse
+      include Smithy::Client::_Response[Types::StartReplicationTaskAssessmentResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def start_replication_task_assessment: (
+      ?replication_task_arn: String
+    ) -> _StartReplicationTaskAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationTaskAssessmentResponse
+
+    interface _StartReplicationTaskAssessmentRunResponse
+      include Smithy::Client::_Response[Types::StartReplicationTaskAssessmentRunResponse]
+      def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun?
+    end
+    def start_replication_task_assessment_run: (
+      ?replication_task_arn: String,
+      ?service_access_role_arn: String,
+      ?result_location_bucket: String,
+      ?result_location_folder: String,
+      ?result_encryption_mode: String,
+      ?result_kms_key_arn: String,
+      ?assessment_run_name: String,
+      ?include_only: Array[String],
+      ?exclude: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped,
+          resource_arn: untyped
+        }
+      ]
+    ) -> _StartReplicationTaskAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationTaskAssessmentRunResponse
+
+    interface _StopDataMigrationResponse
+      include Smithy::Client::_Response[Types::StopDataMigrationResponse]
+      def data_migration: () -> Types::DataMigration?
+    end
+    def stop_data_migration: (
+      ?data_migration_identifier: String
+    ) -> _StopDataMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDataMigrationResponse
+
+    interface _StopReplicationResponse
+      include Smithy::Client::_Response[Types::StopReplicationResponse]
+      def replication: () -> Types::Replication?
+    end
+    def stop_replication: (
+      ?replication_config_arn: String
+    ) -> _StopReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopReplicationResponse
+
+    interface _StopReplicationTaskResponse
+      include Smithy::Client::_Response[Types::StopReplicationTaskResponse]
+      def replication_task: () -> Types::ReplicationTask?
+    end
+    def stop_replication_task: (
+      ?replication_task_arn: String
+    ) -> _StopReplicationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopReplicationTaskResponse
+
+    interface _TestConnectionResponse
+      include Smithy::Client::_Response[Types::TestConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def test_connection: (
+      ?replication_instance_arn: String,
+      ?endpoint_arn: String
+    ) -> _TestConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestConnectionResponse
+
+    interface _UpdateSubscriptionsToEventBridgeResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionsToEventBridgeResponse]
+      def result: () -> String?
+    end
+    def update_subscriptions_to_event_bridge: (
+      ?force_move: bool
+    ) -> _UpdateSubscriptionsToEventBridgeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionsToEventBridgeResponse
+  end
+end

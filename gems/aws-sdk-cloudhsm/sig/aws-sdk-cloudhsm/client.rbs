@@ -1,0 +1,271 @@
+module Aws::CloudHSM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudHSM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddTagsToResourceResponse]
+      def status: () -> String?
+    end
+    def add_tags_to_resource: (
+      ?resource_arn: String,
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _CreateHapgResponse
+      include Smithy::Client::_Response[Types::CreateHapgResponse]
+      def hapg_arn: () -> String?
+    end
+    def create_hapg: (
+      ?label: String
+    ) -> _CreateHapgResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHapgResponse
+
+    interface _CreateHsmResponse
+      include Smithy::Client::_Response[Types::CreateHsmResponse]
+      def hsm_arn: () -> String?
+    end
+    def create_hsm: (
+      ?subnet_id: String,
+      ?ssh_key: String,
+      ?eni_ip: String,
+      ?iam_role_arn: String,
+      ?external_id: String,
+      ?subscription_type: String,
+      ?client_token: String,
+      ?syslog_ip: String
+    ) -> _CreateHsmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHsmResponse
+
+    interface _CreateLunaClientResponse
+      include Smithy::Client::_Response[Types::CreateLunaClientResponse]
+      def client_arn: () -> String?
+    end
+    def create_luna_client: (
+      ?label: String,
+      ?certificate: String
+    ) -> _CreateLunaClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLunaClientResponse
+
+    interface _DeleteHapgResponse
+      include Smithy::Client::_Response[Types::DeleteHapgResponse]
+      def status: () -> String?
+    end
+    def delete_hapg: (
+      ?hapg_arn: String
+    ) -> _DeleteHapgResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHapgResponse
+
+    interface _DeleteHsmResponse
+      include Smithy::Client::_Response[Types::DeleteHsmResponse]
+      def status: () -> String?
+    end
+    def delete_hsm: (
+      ?hsm_arn: String
+    ) -> _DeleteHsmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHsmResponse
+
+    interface _DeleteLunaClientResponse
+      include Smithy::Client::_Response[Types::DeleteLunaClientResponse]
+      def status: () -> String?
+    end
+    def delete_luna_client: (
+      ?client_arn: String
+    ) -> _DeleteLunaClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLunaClientResponse
+
+    interface _DescribeHapgResponse
+      include Smithy::Client::_Response[Types::DescribeHapgResponse]
+      def hapg_arn: () -> String?
+      def hapg_serial: () -> String?
+      def hsms_last_action_failed: () -> Array[String]?
+      def hsms_pending_deletion: () -> Array[String]?
+      def hsms_pending_registration: () -> Array[String]?
+      def label: () -> String?
+      def last_modified_timestamp: () -> String?
+      def partition_serial_list: () -> Array[String]?
+      def state: () -> String?
+    end
+    def describe_hapg: (
+      ?hapg_arn: String
+    ) -> _DescribeHapgResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHapgResponse
+
+    interface _DescribeHsmResponse
+      include Smithy::Client::_Response[Types::DescribeHsmResponse]
+      def hsm_arn: () -> String?
+      def status: () -> String?
+      def status_details: () -> String?
+      def availability_zone: () -> String?
+      def eni_id: () -> String?
+      def eni_ip: () -> String?
+      def subscription_type: () -> String?
+      def subscription_start_date: () -> String?
+      def subscription_end_date: () -> String?
+      def vpc_id: () -> String?
+      def subnet_id: () -> String?
+      def iam_role_arn: () -> String?
+      def serial_number: () -> String?
+      def vendor_name: () -> String?
+      def hsm_type: () -> String?
+      def software_version: () -> String?
+      def ssh_public_key: () -> String?
+      def ssh_key_last_updated: () -> String?
+      def server_cert_uri: () -> String?
+      def server_cert_last_updated: () -> String?
+      def partitions: () -> Array[String]?
+    end
+    def describe_hsm: (
+      ?hsm_arn: String,
+      ?hsm_serial_number: String
+    ) -> _DescribeHsmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHsmResponse
+
+    interface _DescribeLunaClientResponse
+      include Smithy::Client::_Response[Types::DescribeLunaClientResponse]
+      def client_arn: () -> String?
+      def certificate: () -> String?
+      def certificate_fingerprint: () -> String?
+      def last_modified_timestamp: () -> String?
+      def label: () -> String?
+    end
+    def describe_luna_client: (
+      ?client_arn: String,
+      ?certificate_fingerprint: String
+    ) -> _DescribeLunaClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLunaClientResponse
+
+    interface _GetConfigResponse
+      include Smithy::Client::_Response[Types::GetConfigResponse]
+      def config_type: () -> String?
+      def config_file: () -> String?
+      def config_cred: () -> String?
+    end
+    def get_config: (
+      ?client_arn: String,
+      ?client_version: String,
+      ?hapg_list: Array[String]
+    ) -> _GetConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigResponse
+
+    interface _ListAvailableZonesResponse
+      include Smithy::Client::_Response[Types::ListAvailableZonesResponse]
+      def az_list: () -> Array[String]?
+    end
+    def list_available_zones: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableZonesResponse
+
+    interface _ListHapgsResponse
+      include Smithy::Client::_Response[Types::ListHapgsResponse]
+      def hapg_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_hapgs: (
+      ?next_token: String
+    ) -> _ListHapgsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHapgsResponse
+
+    interface _ListHsmsResponse
+      include Smithy::Client::_Response[Types::ListHsmsResponse]
+      def hsm_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_hsms: (
+      ?next_token: String
+    ) -> _ListHsmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHsmsResponse
+
+    interface _ListLunaClientsResponse
+      include Smithy::Client::_Response[Types::ListLunaClientsResponse]
+      def client_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_luna_clients: (
+      ?next_token: String
+    ) -> _ListLunaClientsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLunaClientsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyHapgResponse
+      include Smithy::Client::_Response[Types::ModifyHapgResponse]
+      def hapg_arn: () -> String?
+    end
+    def modify_hapg: (
+      ?hapg_arn: String,
+      ?label: String,
+      ?partition_serial_list: Array[String]
+    ) -> _ModifyHapgResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyHapgResponse
+
+    interface _ModifyHsmResponse
+      include Smithy::Client::_Response[Types::ModifyHsmResponse]
+      def hsm_arn: () -> String?
+    end
+    def modify_hsm: (
+      ?hsm_arn: String,
+      ?subnet_id: String,
+      ?eni_ip: String,
+      ?iam_role_arn: String,
+      ?external_id: String,
+      ?syslog_ip: String
+    ) -> _ModifyHsmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyHsmResponse
+
+    interface _ModifyLunaClientResponse
+      include Smithy::Client::_Response[Types::ModifyLunaClientResponse]
+      def client_arn: () -> String?
+    end
+    def modify_luna_client: (
+      ?client_arn: String,
+      ?certificate: String
+    ) -> _ModifyLunaClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyLunaClientResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveTagsFromResourceResponse]
+      def status: () -> String?
+    end
+    def remove_tags_from_resource: (
+      ?resource_arn: String,
+      ?tag_key_list: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+  end
+end

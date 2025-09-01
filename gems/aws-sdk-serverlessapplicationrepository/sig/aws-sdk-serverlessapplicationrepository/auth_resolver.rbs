@@ -1,0 +1,5 @@
+module Aws::ServerlessApplicationRepository
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

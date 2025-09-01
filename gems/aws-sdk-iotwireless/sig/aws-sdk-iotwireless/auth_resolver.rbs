@@ -1,0 +1,5 @@
+module Aws::IoTWireless
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

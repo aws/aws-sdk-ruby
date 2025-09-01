@@ -1,0 +1,4361 @@
+module Aws::Backup
+  module Types
+
+    class AdvancedBackupSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?backup_options: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor backup_options: Hash[String, String]?
+    end
+
+    module AggregationPeriod
+      ONE_DAY: String
+      SEVEN_DAYS: String
+      FOURTEEN_DAYS: String
+    end
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?creator_request_id: String,
+        ?arn: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class AssociateBackupVaultMpaApprovalTeamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?mpa_approval_team_arn: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor mpa_approval_team_arn: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class BackupJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?backup_job_id: String,
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?state: String,
+        ?status_message: String,
+        ?percent_done: String,
+        ?backup_size_in_bytes: Integer,
+        ?iam_role_arn: String,
+        ?created_by: Types::RecoveryPointCreator,
+        ?expected_completion_date: Time,
+        ?start_by: Time,
+        ?resource_type: String,
+        ?bytes_transferred: Integer,
+        ?backup_options: Hash[String, String],
+        ?backup_type: String,
+        ?parent_job_id: String,
+        ?is_parent: bool,
+        ?resource_name: String,
+        ?initiation_date: Time,
+        ?message_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor backup_job_id: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
+      attr_accessor percent_done: String?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor expected_completion_date: Time?
+      attr_accessor start_by: Time?
+      attr_accessor resource_type: String?
+      attr_accessor bytes_transferred: Integer?
+      attr_accessor backup_options: Hash[String, String]?
+      attr_accessor backup_type: String?
+      attr_accessor parent_job_id: String?
+      attr_accessor is_parent: bool?
+      attr_accessor resource_name: String?
+      attr_accessor initiation_date: Time?
+      attr_accessor message_category: String?
+    end
+
+    module BackupJobState
+      CREATED: String
+      PENDING: String
+      RUNNING: String
+      ABORTING: String
+      ABORTED: String
+      COMPLETED: String
+      FAILED: String
+      EXPIRED: String
+      PARTIAL: String
+    end
+
+    module BackupJobStatus
+      CREATED: String
+      PENDING: String
+      RUNNING: String
+      ABORTING: String
+      ABORTED: String
+      COMPLETED: String
+      FAILED: String
+      EXPIRED: String
+      PARTIAL: String
+      AGGREGATE_ALL: String
+      ANY: String
+    end
+
+    class BackupJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?message_category: String,
+        ?count: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor message_category: String?
+      attr_accessor count: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class BackupPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_name: String,
+        ?rules: Array[Types::BackupRule],
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_name: String?
+      attr_accessor rules: Array[Types::BackupRule]?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class BackupPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_name: String,
+        ?rules: Array[Types::BackupRuleInput],
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_name: String?
+      attr_accessor rules: Array[Types::BackupRuleInput]?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class BackupPlanTemplatesListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_template_id: String,
+        ?backup_plan_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_template_id: String?
+      attr_accessor backup_plan_template_name: String?
+    end
+
+    class BackupPlansListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_arn: String,
+        ?backup_plan_id: String,
+        ?creation_date: Time,
+        ?deletion_date: Time,
+        ?version_id: String,
+        ?backup_plan_name: String,
+        ?creator_request_id: String,
+        ?last_execution_date: Time,
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_arn: String?
+      attr_accessor backup_plan_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor deletion_date: Time?
+      attr_accessor version_id: String?
+      attr_accessor backup_plan_name: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor last_execution_date: Time?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class BackupRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?target_backup_vault_name: String,
+        ?schedule_expression: String,
+        ?start_window_minutes: Integer,
+        ?completion_window_minutes: Integer,
+        ?lifecycle: Types::Lifecycle,
+        ?recovery_point_tags: Hash[String, String],
+        ?rule_id: String,
+        ?copy_actions: Array[Types::CopyAction],
+        ?enable_continuous_backup: bool,
+        ?schedule_expression_timezone: String,
+        ?index_actions: Array[Types::IndexAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor target_backup_vault_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor start_window_minutes: Integer?
+      attr_accessor completion_window_minutes: Integer?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor recovery_point_tags: Hash[String, String]?
+      attr_accessor rule_id: String?
+      attr_accessor copy_actions: Array[Types::CopyAction]?
+      attr_accessor enable_continuous_backup: bool?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor index_actions: Array[Types::IndexAction]?
+    end
+
+    class BackupRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?target_backup_vault_name: String,
+        ?schedule_expression: String,
+        ?start_window_minutes: Integer,
+        ?completion_window_minutes: Integer,
+        ?lifecycle: Types::Lifecycle,
+        ?recovery_point_tags: Hash[String, String],
+        ?copy_actions: Array[Types::CopyAction],
+        ?enable_continuous_backup: bool,
+        ?schedule_expression_timezone: String,
+        ?index_actions: Array[Types::IndexAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor target_backup_vault_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor start_window_minutes: Integer?
+      attr_accessor completion_window_minutes: Integer?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor recovery_point_tags: Hash[String, String]?
+      attr_accessor copy_actions: Array[Types::CopyAction]?
+      attr_accessor enable_continuous_backup: bool?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor index_actions: Array[Types::IndexAction]?
+    end
+
+    class BackupSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_name: String,
+        ?iam_role_arn: String,
+        ?resources: Array[String],
+        ?list_of_tags: Array[Types::Condition],
+        ?not_resources: Array[String],
+        ?conditions: Types::Conditions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_name: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor resources: Array[String]?
+      attr_accessor list_of_tags: Array[Types::Condition]?
+      attr_accessor not_resources: Array[String]?
+      attr_accessor conditions: Types::Conditions?
+    end
+
+    class BackupSelectionsListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_id: String,
+        ?selection_name: String,
+        ?backup_plan_id: String,
+        ?creation_date: Time,
+        ?creator_request_id: String,
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_id: String?
+      attr_accessor selection_name: String?
+      attr_accessor backup_plan_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor creator_request_id: String?
+      attr_accessor iam_role_arn: String?
+    end
+
+    module BackupVaultEvent
+      BACKUP_JOB_STARTED: String
+      BACKUP_JOB_COMPLETED: String
+      BACKUP_JOB_SUCCESSFUL: String
+      BACKUP_JOB_FAILED: String
+      BACKUP_JOB_EXPIRED: String
+      RESTORE_JOB_STARTED: String
+      RESTORE_JOB_COMPLETED: String
+      RESTORE_JOB_SUCCESSFUL: String
+      RESTORE_JOB_FAILED: String
+      COPY_JOB_STARTED: String
+      COPY_JOB_SUCCESSFUL: String
+      COPY_JOB_FAILED: String
+      RECOVERY_POINT_MODIFIED: String
+      BACKUP_PLAN_CREATED: String
+      BACKUP_PLAN_MODIFIED: String
+      S3_BACKUP_OBJECT_FAILED: String
+      S3_RESTORE_OBJECT_FAILED: String
+      CONTINUOUS_BACKUP_INTERRUPTED: String
+      RECOVERY_POINT_INDEX_COMPLETED: String
+      RECOVERY_POINT_INDEX_DELETED: String
+      RECOVERY_POINT_INDEXING_FAILED: String
+    end
+
+    class BackupVaultListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?vault_type: String,
+        ?vault_state: String,
+        ?creation_date: Time,
+        ?encryption_key_arn: String,
+        ?creator_request_id: String,
+        ?number_of_recovery_points: Integer,
+        ?locked: bool,
+        ?min_retention_days: Integer,
+        ?max_retention_days: Integer,
+        ?lock_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor vault_type: String?
+      attr_accessor vault_state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor number_of_recovery_points: Integer?
+      attr_accessor locked: bool?
+      attr_accessor min_retention_days: Integer?
+      attr_accessor max_retention_days: Integer?
+      attr_accessor lock_date: Time?
+    end
+
+    class CalculatedLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?move_to_cold_storage_at: Time,
+        ?delete_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor move_to_cold_storage_at: Time?
+      attr_accessor delete_at: Time?
+    end
+
+    class CancelLegalHoldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_hold_id: String,
+        ?cancel_description: String,
+        ?retain_record_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_hold_id: String?
+      attr_accessor cancel_description: String?
+      attr_accessor retain_record_in_days: Integer?
+    end
+
+    class CancelLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_type: String,
+        ?condition_key: String,
+        ?condition_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_type: String?
+      attr_accessor condition_key: String?
+      attr_accessor condition_value: String?
+    end
+
+    class ConditionParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_key: String,
+        ?condition_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_key: String?
+      attr_accessor condition_value: String?
+    end
+
+    module ConditionType
+      STRINGEQUALS: String
+    end
+
+    class Conditions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_equals: Array[Types::ConditionParameter],
+        ?string_not_equals: Array[Types::ConditionParameter],
+        ?string_like: Array[Types::ConditionParameter],
+        ?string_not_like: Array[Types::ConditionParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_equals: Array[Types::ConditionParameter]?
+      attr_accessor string_not_equals: Array[Types::ConditionParameter]?
+      attr_accessor string_like: Array[Types::ConditionParameter]?
+      attr_accessor string_not_like: Array[Types::ConditionParameter]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class ControlInputParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
+    class ControlScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_resource_ids: Array[String],
+        ?compliance_resource_types: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_resource_ids: Array[String]?
+      attr_accessor compliance_resource_types: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CopyAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle: Types::Lifecycle,
+        ?destination_backup_vault_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor destination_backup_vault_arn: String?
+    end
+
+    class CopyJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?copy_job_id: String,
+        ?source_backup_vault_arn: String,
+        ?source_recovery_point_arn: String,
+        ?destination_backup_vault_arn: String,
+        ?destination_recovery_point_arn: String,
+        ?resource_arn: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?state: String,
+        ?status_message: String,
+        ?backup_size_in_bytes: Integer,
+        ?iam_role_arn: String,
+        ?created_by: Types::RecoveryPointCreator,
+        ?resource_type: String,
+        ?parent_job_id: String,
+        ?is_parent: bool,
+        ?composite_member_identifier: String,
+        ?number_of_child_jobs: Integer,
+        ?child_jobs_in_state: Hash[String, Integer],
+        ?resource_name: String,
+        ?message_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor copy_job_id: String?
+      attr_accessor source_backup_vault_arn: String?
+      attr_accessor source_recovery_point_arn: String?
+      attr_accessor destination_backup_vault_arn: String?
+      attr_accessor destination_recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor resource_type: String?
+      attr_accessor parent_job_id: String?
+      attr_accessor is_parent: bool?
+      attr_accessor composite_member_identifier: String?
+      attr_accessor number_of_child_jobs: Integer?
+      attr_accessor child_jobs_in_state: Hash[String, Integer]?
+      attr_accessor resource_name: String?
+      attr_accessor message_category: String?
+    end
+
+    module CopyJobState
+      CREATED: String
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      PARTIAL: String
+    end
+
+    module CopyJobStatus
+      CREATED: String
+      RUNNING: String
+      ABORTING: String
+      ABORTED: String
+      COMPLETING: String
+      COMPLETED: String
+      FAILING: String
+      FAILED: String
+      PARTIAL: String
+      AGGREGATE_ALL: String
+      ANY: String
+    end
+
+    class CopyJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?message_category: String,
+        ?count: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor message_category: String?
+      attr_accessor count: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class CreateBackupPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan: Types::BackupPlanInput,
+        ?backup_plan_tags: Hash[String, String],
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan: Types::BackupPlanInput?
+      attr_accessor backup_plan_tags: Hash[String, String]?
+      attr_accessor creator_request_id: String?
+    end
+
+    class CreateBackupPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_plan_arn: String,
+        ?creation_date: Time,
+        ?version_id: String,
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor version_id: String?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class CreateBackupSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_selection: Types::BackupSelection,
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_selection: Types::BackupSelection?
+      attr_accessor creator_request_id: String?
+    end
+
+    class CreateBackupSelectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_id: String,
+        ?backup_plan_id: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_id: String?
+      attr_accessor backup_plan_id: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class CreateBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_tags: Hash[String, String],
+        ?encryption_key_arn: String,
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_tags: Hash[String, String]?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor creator_request_id: String?
+    end
+
+    class CreateBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class CreateFrameworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_description: String,
+        ?framework_controls: Array[Types::FrameworkControl],
+        ?idempotency_token: String,
+        ?framework_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_description: String?
+      attr_accessor framework_controls: Array[Types::FrameworkControl]?
+      attr_accessor idempotency_token: String?
+      attr_accessor framework_tags: Hash[String, String]?
+    end
+
+    class CreateFrameworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_arn: String?
+    end
+
+    class CreateLegalHoldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?idempotency_token: String,
+        ?recovery_point_selection: Types::RecoveryPointSelection,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?description: String,
+        ?legal_hold_id: String,
+        ?legal_hold_arn: String,
+        ?creation_date: Time,
+        ?recovery_point_selection: Types::RecoveryPointSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor legal_hold_id: String?
+      attr_accessor legal_hold_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection?
+    end
+
+    class CreateLogicallyAirGappedBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_tags: Hash[String, String],
+        ?creator_request_id: String,
+        ?min_retention_days: Integer,
+        ?max_retention_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_tags: Hash[String, String]?
+      attr_accessor creator_request_id: String?
+      attr_accessor min_retention_days: Integer?
+      attr_accessor max_retention_days: Integer?
+    end
+
+    class CreateLogicallyAirGappedBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?creation_date: Time,
+        ?vault_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor vault_state: String?
+    end
+
+    class CreateReportPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+        ?report_plan_description: String,
+        ?report_delivery_channel: Types::ReportDeliveryChannel,
+        ?report_setting: Types::ReportSetting,
+        ?report_plan_tags: Hash[String, String],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+      attr_accessor report_plan_description: String?
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel?
+      attr_accessor report_setting: Types::ReportSetting?
+      attr_accessor report_plan_tags: Hash[String, String]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateReportPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+        ?report_plan_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+      attr_accessor report_plan_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateRestoreAccessBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_backup_vault_arn: String,
+        ?backup_vault_name: String,
+        ?backup_vault_tags: Hash[String, String],
+        ?creator_request_id: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_backup_vault_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_tags: Hash[String, String]?
+      attr_accessor creator_request_id: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class CreateRestoreAccessBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_access_backup_vault_arn: String,
+        ?vault_state: String,
+        ?restore_access_backup_vault_name: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_access_backup_vault_arn: String?
+      attr_accessor vault_state: String?
+      attr_accessor restore_access_backup_vault_name: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class CreateRestoreTestingPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creator_request_id: String,
+        ?restore_testing_plan: Types::RestoreTestingPlanForCreate,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creator_request_id: String?
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForCreate?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRestoreTestingPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+    end
+
+    class CreateRestoreTestingSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creator_request_id: String,
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection: Types::RestoreTestingSelectionForCreate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creator_request_id: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForCreate?
+    end
+
+    class CreateRestoreTestingSelectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+    end
+
+    class DateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_date: Time,
+        ?to_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_date: Time?
+      attr_accessor to_date: Time?
+    end
+
+    class DeleteBackupPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+    end
+
+    class DeleteBackupPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_plan_arn: String,
+        ?deletion_date: Time,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_arn: String?
+      attr_accessor deletion_date: Time?
+      attr_accessor version_id: String?
+    end
+
+    class DeleteBackupSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?selection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor selection_id: String?
+    end
+
+    class DeleteBackupVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class DeleteBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class DeleteBackupVaultLockConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class DeleteBackupVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class DeleteFrameworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+    end
+
+    class DeleteRecoveryPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class DeleteReportPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+    end
+
+    class DeleteRestoreTestingPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_name: String?
+    end
+
+    class DeleteRestoreTestingSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+    end
+
+    class DependencyFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class DescribeBackupJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_job_id: String?
+    end
+
+    class DescribeBackupJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?backup_job_id: String,
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?state: String,
+        ?status_message: String,
+        ?percent_done: String,
+        ?backup_size_in_bytes: Integer,
+        ?iam_role_arn: String,
+        ?created_by: Types::RecoveryPointCreator,
+        ?resource_type: String,
+        ?bytes_transferred: Integer,
+        ?expected_completion_date: Time,
+        ?start_by: Time,
+        ?backup_options: Hash[String, String],
+        ?backup_type: String,
+        ?parent_job_id: String,
+        ?is_parent: bool,
+        ?number_of_child_jobs: Integer,
+        ?child_jobs_in_state: Hash[String, Integer],
+        ?resource_name: String,
+        ?initiation_date: Time,
+        ?message_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor backup_job_id: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
+      attr_accessor percent_done: String?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor resource_type: String?
+      attr_accessor bytes_transferred: Integer?
+      attr_accessor expected_completion_date: Time?
+      attr_accessor start_by: Time?
+      attr_accessor backup_options: Hash[String, String]?
+      attr_accessor backup_type: String?
+      attr_accessor parent_job_id: String?
+      attr_accessor is_parent: bool?
+      attr_accessor number_of_child_jobs: Integer?
+      attr_accessor child_jobs_in_state: Hash[String, Integer]?
+      attr_accessor resource_name: String?
+      attr_accessor initiation_date: Time?
+      attr_accessor message_category: String?
+    end
+
+    class DescribeBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_account_id: String?
+    end
+
+    class DescribeBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?vault_type: String,
+        ?vault_state: String,
+        ?encryption_key_arn: String,
+        ?creation_date: Time,
+        ?creator_request_id: String,
+        ?number_of_recovery_points: Integer,
+        ?locked: bool,
+        ?min_retention_days: Integer,
+        ?max_retention_days: Integer,
+        ?lock_date: Time,
+        ?source_backup_vault_arn: String,
+        ?mpa_approval_team_arn: String,
+        ?mpa_session_arn: String,
+        ?latest_mpa_approval_team_update: Types::LatestMpaApprovalTeamUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor vault_type: String?
+      attr_accessor vault_state: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor creator_request_id: String?
+      attr_accessor number_of_recovery_points: Integer?
+      attr_accessor locked: bool?
+      attr_accessor min_retention_days: Integer?
+      attr_accessor max_retention_days: Integer?
+      attr_accessor lock_date: Time?
+      attr_accessor source_backup_vault_arn: String?
+      attr_accessor mpa_approval_team_arn: String?
+      attr_accessor mpa_session_arn: String?
+      attr_accessor latest_mpa_approval_team_update: Types::LatestMpaApprovalTeamUpdate?
+    end
+
+    class DescribeCopyJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_job_id: String?
+    end
+
+    class DescribeCopyJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_job: Types::CopyJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_job: Types::CopyJob?
+    end
+
+    class DescribeFrameworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+    end
+
+    class DescribeFrameworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_arn: String,
+        ?framework_description: String,
+        ?framework_controls: Array[Types::FrameworkControl],
+        ?creation_time: Time,
+        ?deployment_status: String,
+        ?framework_status: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_arn: String?
+      attr_accessor framework_description: String?
+      attr_accessor framework_controls: Array[Types::FrameworkControl]?
+      attr_accessor creation_time: Time?
+      attr_accessor deployment_status: String?
+      attr_accessor framework_status: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class DescribeGlobalSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeGlobalSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_settings: Hash[String, String],
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_settings: Hash[String, String]?
+      attr_accessor last_update_time: Time?
+    end
+
+    class DescribeProtectedResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeProtectedResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?last_backup_time: Time,
+        ?resource_name: String,
+        ?last_backup_vault_arn: String,
+        ?last_recovery_point_arn: String,
+        ?latest_restore_execution_time_minutes: Integer,
+        ?latest_restore_job_creation_date: Time,
+        ?latest_restore_recovery_point_creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor last_backup_time: Time?
+      attr_accessor resource_name: String?
+      attr_accessor last_backup_vault_arn: String?
+      attr_accessor last_recovery_point_arn: String?
+      attr_accessor latest_restore_execution_time_minutes: Integer?
+      attr_accessor latest_restore_job_creation_date: Time?
+      attr_accessor latest_restore_recovery_point_creation_date: Time?
+    end
+
+    class DescribeRecoveryPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+        ?backup_vault_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_account_id: String?
+    end
+
+    class DescribeRecoveryPointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?source_backup_vault_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?created_by: Types::RecoveryPointCreator,
+        ?iam_role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_date: Time,
+        ?initiation_date: Time,
+        ?completion_date: Time,
+        ?backup_size_in_bytes: Integer,
+        ?calculated_lifecycle: Types::CalculatedLifecycle,
+        ?lifecycle: Types::Lifecycle,
+        ?encryption_key_arn: String,
+        ?is_encrypted: bool,
+        ?storage_class: String,
+        ?last_restore_time: Time,
+        ?parent_recovery_point_arn: String,
+        ?composite_member_identifier: String,
+        ?is_parent: bool,
+        ?resource_name: String,
+        ?vault_type: String,
+        ?index_status: String,
+        ?index_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor source_backup_vault_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor iam_role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_date: Time?
+      attr_accessor initiation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor is_encrypted: bool?
+      attr_accessor storage_class: String?
+      attr_accessor last_restore_time: Time?
+      attr_accessor parent_recovery_point_arn: String?
+      attr_accessor composite_member_identifier: String?
+      attr_accessor is_parent: bool?
+      attr_accessor resource_name: String?
+      attr_accessor vault_type: String?
+      attr_accessor index_status: String?
+      attr_accessor index_status_message: String?
+    end
+
+    class DescribeRegionSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeRegionSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type_opt_in_preference: Hash[String, bool],
+        ?resource_type_management_preference: Hash[String, bool],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type_opt_in_preference: Hash[String, bool]?
+      attr_accessor resource_type_management_preference: Hash[String, bool]?
+    end
+
+    class DescribeReportJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_job_id: String?
+    end
+
+    class DescribeReportJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_job: Types::ReportJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_job: Types::ReportJob?
+    end
+
+    class DescribeReportPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+    end
+
+    class DescribeReportPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan: Types::ReportPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan: Types::ReportPlan?
+    end
+
+    class DescribeRestoreJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_id: String?
+    end
+
+    class DescribeRestoreJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?restore_job_id: String,
+        ?recovery_point_arn: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?status: String,
+        ?status_message: String,
+        ?percent_done: String,
+        ?backup_size_in_bytes: Integer,
+        ?iam_role_arn: String,
+        ?expected_completion_time_minutes: Integer,
+        ?created_resource_arn: String,
+        ?resource_type: String,
+        ?recovery_point_creation_date: Time,
+        ?created_by: Types::RestoreJobCreator,
+        ?validation_status: String,
+        ?validation_status_message: String,
+        ?deletion_status: String,
+        ?deletion_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor restore_job_id: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor percent_done: String?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor expected_completion_time_minutes: Integer?
+      attr_accessor created_resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor recovery_point_creation_date: Time?
+      attr_accessor created_by: Types::RestoreJobCreator?
+      attr_accessor validation_status: String?
+      attr_accessor validation_status_message: String?
+      attr_accessor deletion_status: String?
+      attr_accessor deletion_status_message: String?
+    end
+
+    class DisassociateBackupVaultMpaApprovalTeamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class DisassociateRecoveryPointFromParentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class DisassociateRecoveryPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class ExportBackupPlanTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+    end
+
+    class ExportBackupPlanTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_template_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_template_json: String?
+    end
+
+    class Framework
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_arn: String,
+        ?framework_description: String,
+        ?number_of_controls: Integer,
+        ?creation_time: Time,
+        ?deployment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_arn: String?
+      attr_accessor framework_description: String?
+      attr_accessor number_of_controls: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor deployment_status: String?
+    end
+
+    class FrameworkControl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_name: String,
+        ?control_input_parameters: Array[Types::ControlInputParameter],
+        ?control_scope: Types::ControlScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_name: String?
+      attr_accessor control_input_parameters: Array[Types::ControlInputParameter]?
+      attr_accessor control_scope: Types::ControlScope?
+    end
+
+    class GetBackupPlanFromJSONInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_template_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_template_json: String?
+    end
+
+    class GetBackupPlanFromJSONOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan: Types::BackupPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan: Types::BackupPlan?
+    end
+
+    class GetBackupPlanFromTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_template_id: String?
+    end
+
+    class GetBackupPlanFromTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_document: Types::BackupPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_document: Types::BackupPlan?
+    end
+
+    class GetBackupPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor version_id: String?
+    end
+
+    class GetBackupPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan: Types::BackupPlan,
+        ?backup_plan_id: String,
+        ?backup_plan_arn: String,
+        ?version_id: String,
+        ?creator_request_id: String,
+        ?creation_date: Time,
+        ?deletion_date: Time,
+        ?last_execution_date: Time,
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan: Types::BackupPlan?
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_arn: String?
+      attr_accessor version_id: String?
+      attr_accessor creator_request_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor deletion_date: Time?
+      attr_accessor last_execution_date: Time?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class GetBackupSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?selection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor selection_id: String?
+    end
+
+    class GetBackupSelectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_selection: Types::BackupSelection,
+        ?selection_id: String,
+        ?backup_plan_id: String,
+        ?creation_date: Time,
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_selection: Types::BackupSelection?
+      attr_accessor selection_id: String?
+      attr_accessor backup_plan_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor creator_request_id: String?
+    end
+
+    class GetBackupVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class GetBackupVaultAccessPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class GetBackupVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+    end
+
+    class GetBackupVaultNotificationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?sns_topic_arn: String,
+        ?backup_vault_events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor backup_vault_events: Array[String]?
+    end
+
+    class GetLegalHoldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_hold_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_hold_id: String?
+    end
+
+    class GetLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?description: String,
+        ?cancel_description: String,
+        ?legal_hold_id: String,
+        ?legal_hold_arn: String,
+        ?creation_date: Time,
+        ?cancellation_date: Time,
+        ?retain_record_until: Time,
+        ?recovery_point_selection: Types::RecoveryPointSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor cancel_description: String?
+      attr_accessor legal_hold_id: String?
+      attr_accessor legal_hold_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor cancellation_date: Time?
+      attr_accessor retain_record_until: Time?
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection?
+    end
+
+    class GetRecoveryPointIndexDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class GetRecoveryPointIndexDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?backup_vault_arn: String,
+        ?source_resource_arn: String,
+        ?index_creation_date: Time,
+        ?index_deletion_date: Time,
+        ?index_completion_date: Time,
+        ?index_status: String,
+        ?index_status_message: String,
+        ?total_items_indexed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor index_creation_date: Time?
+      attr_accessor index_deletion_date: Time?
+      attr_accessor index_completion_date: Time?
+      attr_accessor index_status: String?
+      attr_accessor index_status_message: String?
+      attr_accessor total_items_indexed: Integer?
+    end
+
+    class GetRecoveryPointRestoreMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+        ?backup_vault_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_account_id: String?
+    end
+
+    class GetRecoveryPointRestoreMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_arn: String,
+        ?recovery_point_arn: String,
+        ?restore_metadata: Hash[String, String],
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_arn: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor restore_metadata: Hash[String, String]?
+      attr_accessor resource_type: String?
+    end
+
+    class GetRestoreJobMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_id: String?
+    end
+
+    class GetRestoreJobMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_id: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_id: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class GetRestoreTestingInferredMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_account_id: String,
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_account_id: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class GetRestoreTestingInferredMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inferred_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inferred_metadata: Hash[String, String]?
+    end
+
+    class GetRestoreTestingPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_name: String?
+    end
+
+    class GetRestoreTestingPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan: Types::RestoreTestingPlanForGet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForGet?
+    end
+
+    class GetRestoreTestingSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+    end
+
+    class GetRestoreTestingSelectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_selection: Types::RestoreTestingSelectionForGet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForGet?
+    end
+
+    class GetSupportedResourceTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[String]?
+    end
+
+    module Index
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class IndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_types: Array[String]?
+    end
+
+    module IndexStatus
+      PENDING: String
+      ACTIVE: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class IndexedRecoveryPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?source_resource_arn: String,
+        ?iam_role_arn: String,
+        ?backup_creation_date: Time,
+        ?resource_type: String,
+        ?index_creation_date: Time,
+        ?index_status: String,
+        ?index_status_message: String,
+        ?backup_vault_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor backup_creation_date: Time?
+      attr_accessor resource_type: String?
+      attr_accessor index_creation_date: Time?
+      attr_accessor index_status: String?
+      attr_accessor index_status_message: String?
+      attr_accessor backup_vault_arn: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class InvalidResourceStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class KeyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class LatestMpaApprovalTeamUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_session_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?initiation_date: Time,
+        ?expiry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_session_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor initiation_date: Time?
+      attr_accessor expiry_date: Time?
+    end
+
+    class LatestRevokeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_session_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?initiation_date: Time,
+        ?expiry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_session_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor initiation_date: Time?
+      attr_accessor expiry_date: Time?
+    end
+
+    class LegalHold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?description: String,
+        ?legal_hold_id: String,
+        ?legal_hold_arn: String,
+        ?creation_date: Time,
+        ?cancellation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor legal_hold_id: String?
+      attr_accessor legal_hold_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor cancellation_date: Time?
+    end
+
+    module LegalHoldStatus
+      CREATING: String
+      ACTIVE: String
+      CANCELING: String
+      CANCELED: String
+    end
+
+    class Lifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?move_to_cold_storage_after_days: Integer,
+        ?delete_after_days: Integer,
+        ?opt_in_to_archive_for_supported_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor move_to_cold_storage_after_days: Integer?
+      attr_accessor delete_after_days: Integer?
+      attr_accessor opt_in_to_archive_for_supported_resources: bool?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class ListBackupJobSummariesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?message_category: String,
+        ?aggregation_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor message_category: String?
+      attr_accessor aggregation_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupJobSummariesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_job_summaries: Array[Types::BackupJobSummary],
+        ?aggregation_period: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_job_summaries: Array[Types::BackupJobSummary]?
+      attr_accessor aggregation_period: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?by_resource_arn: String,
+        ?by_state: String,
+        ?by_backup_vault_name: String,
+        ?by_created_before: Time,
+        ?by_created_after: Time,
+        ?by_resource_type: String,
+        ?by_account_id: String,
+        ?by_complete_after: Time,
+        ?by_complete_before: Time,
+        ?by_parent_job_id: String,
+        ?by_message_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor by_resource_arn: String?
+      attr_accessor by_state: String?
+      attr_accessor by_backup_vault_name: String?
+      attr_accessor by_created_before: Time?
+      attr_accessor by_created_after: Time?
+      attr_accessor by_resource_type: String?
+      attr_accessor by_account_id: String?
+      attr_accessor by_complete_after: Time?
+      attr_accessor by_complete_before: Time?
+      attr_accessor by_parent_job_id: String?
+      attr_accessor by_message_category: String?
+    end
+
+    class ListBackupJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_jobs: Array[Types::BackupJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_jobs: Array[Types::BackupJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupPlanTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBackupPlanTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?backup_plan_templates_list: Array[Types::BackupPlanTemplatesListMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor backup_plan_templates_list: Array[Types::BackupPlanTemplatesListMember]?
+    end
+
+    class ListBackupPlanVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBackupPlanVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?backup_plan_versions_list: Array[Types::BackupPlansListMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor backup_plan_versions_list: Array[Types::BackupPlansListMember]?
+    end
+
+    class ListBackupPlansInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?include_deleted: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor include_deleted: bool?
+    end
+
+    class ListBackupPlansOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?backup_plans_list: Array[Types::BackupPlansListMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor backup_plans_list: Array[Types::BackupPlansListMember]?
+    end
+
+    class ListBackupSelectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBackupSelectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?backup_selections_list: Array[Types::BackupSelectionsListMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor backup_selections_list: Array[Types::BackupSelectionsListMember]?
+    end
+
+    class ListBackupVaultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?by_vault_type: String,
+        ?by_shared: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor by_vault_type: String?
+      attr_accessor by_shared: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBackupVaultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_list: Array[Types::BackupVaultListMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_list: Array[Types::BackupVaultListMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCopyJobSummariesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?message_category: String,
+        ?aggregation_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor message_category: String?
+      attr_accessor aggregation_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCopyJobSummariesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_job_summaries: Array[Types::CopyJobSummary],
+        ?aggregation_period: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_job_summaries: Array[Types::CopyJobSummary]?
+      attr_accessor aggregation_period: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCopyJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?by_resource_arn: String,
+        ?by_state: String,
+        ?by_created_before: Time,
+        ?by_created_after: Time,
+        ?by_resource_type: String,
+        ?by_destination_vault_arn: String,
+        ?by_account_id: String,
+        ?by_complete_before: Time,
+        ?by_complete_after: Time,
+        ?by_parent_job_id: String,
+        ?by_message_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor by_resource_arn: String?
+      attr_accessor by_state: String?
+      attr_accessor by_created_before: Time?
+      attr_accessor by_created_after: Time?
+      attr_accessor by_resource_type: String?
+      attr_accessor by_destination_vault_arn: String?
+      attr_accessor by_account_id: String?
+      attr_accessor by_complete_before: Time?
+      attr_accessor by_complete_after: Time?
+      attr_accessor by_parent_job_id: String?
+      attr_accessor by_message_category: String?
+    end
+
+    class ListCopyJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_jobs: Array[Types::CopyJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_jobs: Array[Types::CopyJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFrameworksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFrameworksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frameworks: Array[Types::Framework],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frameworks: Array[Types::Framework]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndexedRecoveryPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?source_resource_arn: String,
+        ?created_before: Time,
+        ?created_after: Time,
+        ?resource_type: String,
+        ?index_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor source_resource_arn: String?
+      attr_accessor created_before: Time?
+      attr_accessor created_after: Time?
+      attr_accessor resource_type: String?
+      attr_accessor index_status: String?
+    end
+
+    class ListIndexedRecoveryPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexed_recovery_points: Array[Types::IndexedRecoveryPoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexed_recovery_points: Array[Types::IndexedRecoveryPoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLegalHoldsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLegalHoldsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?legal_holds: Array[Types::LegalHold],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor legal_holds: Array[Types::LegalHold]?
+    end
+
+    class ListProtectedResourcesByBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_account_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_account_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProtectedResourcesByBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::ProtectedResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::ProtectedResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProtectedResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProtectedResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::ProtectedResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::ProtectedResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPointsByBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?backup_vault_account_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?by_resource_arn: String,
+        ?by_resource_type: String,
+        ?by_backup_plan_id: String,
+        ?by_created_before: Time,
+        ?by_created_after: Time,
+        ?by_parent_recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_account_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor by_resource_arn: String?
+      attr_accessor by_resource_type: String?
+      attr_accessor by_backup_plan_id: String?
+      attr_accessor by_created_before: Time?
+      attr_accessor by_created_after: Time?
+      attr_accessor by_parent_recovery_point_arn: String?
+    end
+
+    class ListRecoveryPointsByBackupVaultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recovery_points: Array[Types::RecoveryPointByBackupVault],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recovery_points: Array[Types::RecoveryPointByBackupVault]?
+    end
+
+    class ListRecoveryPointsByLegalHoldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_hold_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_hold_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRecoveryPointsByLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_points: Array[Types::RecoveryPointMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_points: Array[Types::RecoveryPointMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPointsByResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?managed_by_aws_backup_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor managed_by_aws_backup_only: bool?
+    end
+
+    class ListRecoveryPointsByResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recovery_points: Array[Types::RecoveryPointByResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recovery_points: Array[Types::RecoveryPointByResource]?
+    end
+
+    class ListReportJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?by_report_plan_name: String,
+        ?by_creation_before: Time,
+        ?by_creation_after: Time,
+        ?by_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor by_report_plan_name: String?
+      attr_accessor by_creation_before: Time?
+      attr_accessor by_creation_after: Time?
+      attr_accessor by_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_jobs: Array[Types::ReportJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_jobs: Array[Types::ReportJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportPlansInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportPlansOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plans: Array[Types::ReportPlan],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plans: Array[Types::ReportPlan]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreAccessBackupVaultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRestoreAccessBackupVaultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?restore_access_backup_vaults: Array[Types::RestoreAccessBackupVaultListMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor restore_access_backup_vaults: Array[Types::RestoreAccessBackupVaultListMember]?
+    end
+
+    class ListRestoreJobSummariesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?aggregation_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor aggregation_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreJobSummariesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_summaries: Array[Types::RestoreJobSummary],
+        ?aggregation_period: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_summaries: Array[Types::RestoreJobSummary]?
+      attr_accessor aggregation_period: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreJobsByProtectedResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?by_status: String,
+        ?by_recovery_point_creation_date_after: Time,
+        ?by_recovery_point_creation_date_before: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor by_status: String?
+      attr_accessor by_recovery_point_creation_date_after: Time?
+      attr_accessor by_recovery_point_creation_date_before: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRestoreJobsByProtectedResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_jobs: Array[Types::RestoreJobsListMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_jobs: Array[Types::RestoreJobsListMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?by_account_id: String,
+        ?by_resource_type: String,
+        ?by_created_before: Time,
+        ?by_created_after: Time,
+        ?by_status: String,
+        ?by_complete_before: Time,
+        ?by_complete_after: Time,
+        ?by_restore_testing_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor by_account_id: String?
+      attr_accessor by_resource_type: String?
+      attr_accessor by_created_before: Time?
+      attr_accessor by_created_after: Time?
+      attr_accessor by_status: String?
+      attr_accessor by_complete_before: Time?
+      attr_accessor by_complete_after: Time?
+      attr_accessor by_restore_testing_plan_arn: String?
+    end
+
+    class ListRestoreJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_jobs: Array[Types::RestoreJobsListMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_jobs: Array[Types::RestoreJobsListMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreTestingPlansInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRestoreTestingPlansOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?restore_testing_plans: Array[Types::RestoreTestingPlanForList],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor restore_testing_plans: Array[Types::RestoreTestingPlanForList]?
+    end
+
+    class ListRestoreTestingSelectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?restore_testing_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor restore_testing_plan_name: String?
+    end
+
+    class ListRestoreTestingSelectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?restore_testing_selections: Array[Types::RestoreTestingSelectionForList],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor restore_testing_selections: Array[Types::RestoreTestingSelectionForList]?
+    end
+
+    class ListTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MissingParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    module MpaRevokeSessionStatus
+      PENDING: String
+      FAILED: String
+    end
+
+    module MpaSessionStatus
+      PENDING: String
+      APPROVED: String
+      FAILED: String
+    end
+
+    class ProtectedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?last_backup_time: Time,
+        ?resource_name: String,
+        ?last_backup_vault_arn: String,
+        ?last_recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor last_backup_time: Time?
+      attr_accessor resource_name: String?
+      attr_accessor last_backup_vault_arn: String?
+      attr_accessor last_recovery_point_arn: String?
+    end
+
+    class ProtectedResourceConditions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_equals: Array[Types::KeyValue],
+        ?string_not_equals: Array[Types::KeyValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_equals: Array[Types::KeyValue]?
+      attr_accessor string_not_equals: Array[Types::KeyValue]?
+    end
+
+    class PutBackupVaultAccessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor policy: String?
+    end
+
+    class PutBackupVaultLockConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?min_retention_days: Integer,
+        ?max_retention_days: Integer,
+        ?changeable_for_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor min_retention_days: Integer?
+      attr_accessor max_retention_days: Integer?
+      attr_accessor changeable_for_days: Integer?
+    end
+
+    class PutBackupVaultNotificationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?sns_topic_arn: String,
+        ?backup_vault_events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor backup_vault_events: Array[String]?
+    end
+
+    class PutRestoreValidationResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_id: String,
+        ?validation_status: String,
+        ?validation_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_id: String?
+      attr_accessor validation_status: String?
+      attr_accessor validation_status_message: String?
+    end
+
+    class RecoveryPointByBackupVault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?backup_vault_name: String,
+        ?backup_vault_arn: String,
+        ?source_backup_vault_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?created_by: Types::RecoveryPointCreator,
+        ?iam_role_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_date: Time,
+        ?initiation_date: Time,
+        ?completion_date: Time,
+        ?backup_size_in_bytes: Integer,
+        ?calculated_lifecycle: Types::CalculatedLifecycle,
+        ?lifecycle: Types::Lifecycle,
+        ?encryption_key_arn: String,
+        ?is_encrypted: bool,
+        ?last_restore_time: Time,
+        ?parent_recovery_point_arn: String,
+        ?composite_member_identifier: String,
+        ?is_parent: bool,
+        ?resource_name: String,
+        ?vault_type: String,
+        ?index_status: String,
+        ?index_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor source_backup_vault_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor iam_role_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_date: Time?
+      attr_accessor initiation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor is_encrypted: bool?
+      attr_accessor last_restore_time: Time?
+      attr_accessor parent_recovery_point_arn: String?
+      attr_accessor composite_member_identifier: String?
+      attr_accessor is_parent: bool?
+      attr_accessor resource_name: String?
+      attr_accessor vault_type: String?
+      attr_accessor index_status: String?
+      attr_accessor index_status_message: String?
+    end
+
+    class RecoveryPointByResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?creation_date: Time,
+        ?status: String,
+        ?status_message: String,
+        ?encryption_key_arn: String,
+        ?backup_size_bytes: Integer,
+        ?backup_vault_name: String,
+        ?is_parent: bool,
+        ?parent_recovery_point_arn: String,
+        ?resource_name: String,
+        ?vault_type: String,
+        ?index_status: String,
+        ?index_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor backup_size_bytes: Integer?
+      attr_accessor backup_vault_name: String?
+      attr_accessor is_parent: bool?
+      attr_accessor parent_recovery_point_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor vault_type: String?
+      attr_accessor index_status: String?
+      attr_accessor index_status_message: String?
+    end
+
+    class RecoveryPointCreator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_plan_arn: String,
+        ?backup_plan_version: String,
+        ?backup_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_arn: String?
+      attr_accessor backup_plan_version: String?
+      attr_accessor backup_rule_id: String?
+    end
+
+    class RecoveryPointMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor backup_vault_name: String?
+    end
+
+    class RecoveryPointSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vault_names: Array[String],
+        ?resource_identifiers: Array[String],
+        ?date_range: Types::DateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vault_names: Array[String]?
+      attr_accessor resource_identifiers: Array[String]?
+      attr_accessor date_range: Types::DateRange?
+    end
+
+    module RecoveryPointStatus
+      COMPLETED: String
+      PARTIAL: String
+      DELETING: String
+      EXPIRED: String
+      AVAILABLE: String
+      STOPPED: String
+      CREATING: String
+    end
+
+    class ReportDeliveryChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?s3_key_prefix: String,
+        ?formats: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_key_prefix: String?
+      attr_accessor formats: Array[String]?
+    end
+
+    class ReportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?s3_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_keys: Array[String]?
+    end
+
+    class ReportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_job_id: String,
+        ?report_plan_arn: String,
+        ?report_template: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?status: String,
+        ?status_message: String,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_job_id: String?
+      attr_accessor report_plan_arn: String?
+      attr_accessor report_template: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class ReportPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_arn: String,
+        ?report_plan_name: String,
+        ?report_plan_description: String,
+        ?report_setting: Types::ReportSetting,
+        ?report_delivery_channel: Types::ReportDeliveryChannel,
+        ?deployment_status: String,
+        ?creation_time: Time,
+        ?last_attempted_execution_time: Time,
+        ?last_successful_execution_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_arn: String?
+      attr_accessor report_plan_name: String?
+      attr_accessor report_plan_description: String?
+      attr_accessor report_setting: Types::ReportSetting?
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel?
+      attr_accessor deployment_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_attempted_execution_time: Time?
+      attr_accessor last_successful_execution_time: Time?
+    end
+
+    class ReportSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_template: String,
+        ?framework_arns: Array[String],
+        ?number_of_frameworks: Integer,
+        ?accounts: Array[String],
+        ?organization_units: Array[String],
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_template: String?
+      attr_accessor framework_arns: Array[String]?
+      attr_accessor number_of_frameworks: Integer?
+      attr_accessor accounts: Array[String]?
+      attr_accessor organization_units: Array[String]?
+      attr_accessor regions: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class RestoreAccessBackupVaultListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_access_backup_vault_arn: String,
+        ?creation_date: Time,
+        ?approval_date: Time,
+        ?vault_state: String,
+        ?latest_revoke_request: Types::LatestRevokeRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_access_backup_vault_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor approval_date: Time?
+      attr_accessor vault_state: String?
+      attr_accessor latest_revoke_request: Types::LatestRevokeRequest?
+    end
+
+    module RestoreDeletionStatus
+      DELETING: String
+      FAILED: String
+      SUCCESSFUL: String
+    end
+
+    class RestoreJobCreator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_arn: String?
+    end
+
+    module RestoreJobState
+      CREATED: String
+      PENDING: String
+      RUNNING: String
+      ABORTED: String
+      COMPLETED: String
+      FAILED: String
+      AGGREGATE_ALL: String
+      ANY: String
+    end
+
+    module RestoreJobStatus
+      PENDING: String
+      RUNNING: String
+      COMPLETED: String
+      ABORTED: String
+      FAILED: String
+    end
+
+    class RestoreJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?count: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor count: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class RestoreJobsListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?restore_job_id: String,
+        ?recovery_point_arn: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?status: String,
+        ?status_message: String,
+        ?percent_done: String,
+        ?backup_size_in_bytes: Integer,
+        ?iam_role_arn: String,
+        ?expected_completion_time_minutes: Integer,
+        ?created_resource_arn: String,
+        ?resource_type: String,
+        ?recovery_point_creation_date: Time,
+        ?created_by: Types::RestoreJobCreator,
+        ?validation_status: String,
+        ?validation_status_message: String,
+        ?deletion_status: String,
+        ?deletion_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor restore_job_id: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor percent_done: String?
+      attr_accessor backup_size_in_bytes: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor expected_completion_time_minutes: Integer?
+      attr_accessor created_resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor recovery_point_creation_date: Time?
+      attr_accessor created_by: Types::RestoreJobCreator?
+      attr_accessor validation_status: String?
+      attr_accessor validation_status_message: String?
+      attr_accessor deletion_status: String?
+      attr_accessor deletion_status_message: String?
+    end
+
+    class RestoreTestingPlanForCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_selection: Types::RestoreTestingRecoveryPointSelection,
+        ?restore_testing_plan_name: String,
+        ?schedule_expression: String,
+        ?schedule_expression_timezone: String,
+        ?start_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor start_window_hours: Integer?
+    end
+
+    class RestoreTestingPlanForGet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?creator_request_id: String,
+        ?last_execution_time: Time,
+        ?last_update_time: Time,
+        ?recovery_point_selection: Types::RestoreTestingRecoveryPointSelection,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+        ?schedule_expression: String,
+        ?schedule_expression_timezone: String,
+        ?start_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor creator_request_id: String?
+      attr_accessor last_execution_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor start_window_hours: Integer?
+    end
+
+    class RestoreTestingPlanForList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?last_execution_time: Time,
+        ?last_update_time: Time,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+        ?schedule_expression: String,
+        ?schedule_expression_timezone: String,
+        ?start_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor last_execution_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor start_window_hours: Integer?
+    end
+
+    class RestoreTestingPlanForUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_selection: Types::RestoreTestingRecoveryPointSelection,
+        ?schedule_expression: String,
+        ?schedule_expression_timezone: String,
+        ?start_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection?
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor start_window_hours: Integer?
+    end
+
+    class RestoreTestingRecoveryPointSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?exclude_vaults: Array[String],
+        ?include_vaults: Array[String],
+        ?recovery_point_types: Array[String],
+        ?selection_window_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor exclude_vaults: Array[String]?
+      attr_accessor include_vaults: Array[String]?
+      attr_accessor recovery_point_types: Array[String]?
+      attr_accessor selection_window_days: Integer?
+    end
+
+    module RestoreTestingRecoveryPointSelectionAlgorithm
+      LATEST_WITHIN_WINDOW: String
+      RANDOM_WITHIN_WINDOW: String
+    end
+
+    module RestoreTestingRecoveryPointType
+      CONTINUOUS: String
+      SNAPSHOT: String
+    end
+
+    class RestoreTestingSelectionForCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?protected_resource_arns: Array[String],
+        ?protected_resource_conditions: Types::ProtectedResourceConditions,
+        ?protected_resource_type: String,
+        ?restore_metadata_overrides: Hash[String, String],
+        ?restore_testing_selection_name: String,
+        ?validation_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor protected_resource_arns: Array[String]?
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions?
+      attr_accessor protected_resource_type: String?
+      attr_accessor restore_metadata_overrides: Hash[String, String]?
+      attr_accessor restore_testing_selection_name: String?
+      attr_accessor validation_window_hours: Integer?
+    end
+
+    class RestoreTestingSelectionForGet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?creator_request_id: String,
+        ?iam_role_arn: String,
+        ?protected_resource_arns: Array[String],
+        ?protected_resource_conditions: Types::ProtectedResourceConditions,
+        ?protected_resource_type: String,
+        ?restore_metadata_overrides: Hash[String, String],
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+        ?validation_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor creator_request_id: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor protected_resource_arns: Array[String]?
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions?
+      attr_accessor protected_resource_type: String?
+      attr_accessor restore_metadata_overrides: Hash[String, String]?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+      attr_accessor validation_window_hours: Integer?
+    end
+
+    class RestoreTestingSelectionForList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?iam_role_arn: String,
+        ?protected_resource_type: String,
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+        ?validation_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor iam_role_arn: String?
+      attr_accessor protected_resource_type: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+      attr_accessor validation_window_hours: Integer?
+    end
+
+    class RestoreTestingSelectionForUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?protected_resource_arns: Array[String],
+        ?protected_resource_conditions: Types::ProtectedResourceConditions,
+        ?restore_metadata_overrides: Hash[String, String],
+        ?validation_window_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor protected_resource_arns: Array[String]?
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions?
+      attr_accessor restore_metadata_overrides: Hash[String, String]?
+      attr_accessor validation_window_hours: Integer?
+    end
+
+    module RestoreValidationStatus
+      FAILED: String
+      SUCCESSFUL: String
+      TIMED_OUT: String
+      VALIDATING: String
+    end
+
+    class RevokeRestoreAccessBackupVaultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?restore_access_backup_vault_arn: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor restore_access_backup_vault_arn: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?type: String,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor context: String?
+    end
+
+    class StartBackupJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?resource_arn: String,
+        ?iam_role_arn: String,
+        ?idempotency_token: String,
+        ?start_window_minutes: Integer,
+        ?complete_window_minutes: Integer,
+        ?lifecycle: Types::Lifecycle,
+        ?recovery_point_tags: Hash[String, String],
+        ?backup_options: Hash[String, String],
+        ?index: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor start_window_minutes: Integer?
+      attr_accessor complete_window_minutes: Integer?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor recovery_point_tags: Hash[String, String]?
+      attr_accessor backup_options: Hash[String, String]?
+      attr_accessor index: String?
+    end
+
+    class StartBackupJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_job_id: String,
+        ?recovery_point_arn: String,
+        ?creation_date: Time,
+        ?is_parent: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_job_id: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor is_parent: bool?
+    end
+
+    class StartCopyJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?source_backup_vault_name: String,
+        ?destination_backup_vault_arn: String,
+        ?iam_role_arn: String,
+        ?idempotency_token: String,
+        ?lifecycle: Types::Lifecycle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor source_backup_vault_name: String?
+      attr_accessor destination_backup_vault_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor lifecycle: Types::Lifecycle?
+    end
+
+    class StartCopyJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_job_id: String,
+        ?creation_date: Time,
+        ?is_parent: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_job_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor is_parent: bool?
+    end
+
+    class StartReportJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class StartReportJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_job_id: String?
+    end
+
+    class StartRestoreJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?metadata: Hash[String, String],
+        ?iam_role_arn: String,
+        ?idempotency_token: String,
+        ?resource_type: String,
+        ?copy_source_tags_to_restored_resource: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor resource_type: String?
+      attr_accessor copy_source_tags_to_restored_resource: bool?
+    end
+
+    class StartRestoreJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_job_id: String?
+    end
+
+    class StopBackupJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_job_id: String?
+    end
+
+    module StorageClass
+      WARM: String
+      COLD: String
+      DELETED: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_key_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_key_list: Array[String]?
+    end
+
+    class UpdateBackupPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_plan: Types::BackupPlanInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan: Types::BackupPlanInput?
+    end
+
+    class UpdateBackupPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_id: String,
+        ?backup_plan_arn: String,
+        ?creation_date: Time,
+        ?version_id: String,
+        ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor version_id: String?
+      attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+    end
+
+    class UpdateFrameworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_description: String,
+        ?framework_controls: Array[Types::FrameworkControl],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_description: String?
+      attr_accessor framework_controls: Array[Types::FrameworkControl]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class UpdateFrameworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?framework_name: String,
+        ?framework_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework_name: String?
+      attr_accessor framework_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class UpdateGlobalSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_settings: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_settings: Hash[String, String]?
+    end
+
+    class UpdateRecoveryPointIndexSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+        ?iam_role_arn: String,
+        ?index: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor index: String?
+    end
+
+    class UpdateRecoveryPointIndexSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+        ?index_status: String,
+        ?index: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor index_status: String?
+      attr_accessor index: String?
+    end
+
+    class UpdateRecoveryPointLifecycleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?recovery_point_arn: String,
+        ?lifecycle: Types::Lifecycle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor lifecycle: Types::Lifecycle?
+    end
+
+    class UpdateRecoveryPointLifecycleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_arn: String,
+        ?recovery_point_arn: String,
+        ?lifecycle: Types::Lifecycle,
+        ?calculated_lifecycle: Types::CalculatedLifecycle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_arn: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor lifecycle: Types::Lifecycle?
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle?
+    end
+
+    class UpdateRegionSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type_opt_in_preference: Hash[String, bool],
+        ?resource_type_management_preference: Hash[String, bool],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type_opt_in_preference: Hash[String, bool]?
+      attr_accessor resource_type_management_preference: Hash[String, bool]?
+    end
+
+    class UpdateReportPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+        ?report_plan_description: String,
+        ?report_delivery_channel: Types::ReportDeliveryChannel,
+        ?report_setting: Types::ReportSetting,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+      attr_accessor report_plan_description: String?
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel?
+      attr_accessor report_setting: Types::ReportSetting?
+      attr_accessor idempotency_token: String?
+    end
+
+    class UpdateReportPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_plan_name: String,
+        ?report_plan_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_plan_name: String?
+      attr_accessor report_plan_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class UpdateRestoreTestingPlanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan: Types::RestoreTestingPlanForUpdate,
+        ?restore_testing_plan_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForUpdate?
+      attr_accessor restore_testing_plan_name: String?
+    end
+
+    class UpdateRestoreTestingPlanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateRestoreTestingSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection: Types::RestoreTestingSelectionForUpdate,
+        ?restore_testing_selection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForUpdate?
+      attr_accessor restore_testing_selection_name: String?
+    end
+
+    class UpdateRestoreTestingSelectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?restore_testing_plan_arn: String,
+        ?restore_testing_plan_name: String,
+        ?restore_testing_selection_name: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor restore_testing_plan_arn: String?
+      attr_accessor restore_testing_plan_name: String?
+      attr_accessor restore_testing_selection_name: String?
+      attr_accessor update_time: Time?
+    end
+
+    module VaultState
+      CREATING: String
+      AVAILABLE: String
+      FAILED: String
+    end
+
+    module VaultType
+      BACKUP_VAULT: String
+      LOGICALLY_AIR_GAPPED_BACKUP_VAULT: String
+      RESTORE_ACCESS_BACKUP_VAULT: String
+    end
+  end
+end

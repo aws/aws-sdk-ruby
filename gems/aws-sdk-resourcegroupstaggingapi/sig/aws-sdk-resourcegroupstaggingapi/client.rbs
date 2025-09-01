@@ -1,0 +1,138 @@
+module Aws::ResourceGroupsTaggingAPI
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ResourceGroupsTaggingAPI::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DescribeReportCreationResponse
+      include Smithy::Client::_Response[Types::DescribeReportCreationOutput]
+      def status: () -> String?
+      def s3_location: () -> String?
+      def start_date: () -> String?
+      def error_message: () -> String?
+    end
+    def describe_report_creation: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReportCreationResponse
+
+    interface _GetComplianceSummaryResponse
+      include Smithy::Client::_Response[Types::GetComplianceSummaryOutput]
+      def summary_list: () -> Array[Types::Summary]?
+      def pagination_token: () -> String?
+    end
+    def get_compliance_summary: (
+      ?target_id_filters: Array[String],
+      ?region_filters: Array[String],
+      ?resource_type_filters: Array[String],
+      ?tag_key_filters: Array[String],
+      ?group_by: Array[String],
+      ?max_results: Integer,
+      ?pagination_token: String
+    ) -> _GetComplianceSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceSummaryResponse
+
+    interface _GetResourcesResponse
+      include Smithy::Client::_Response[Types::GetResourcesOutput]
+      def pagination_token: () -> String?
+      def resource_tag_mapping_list: () -> Array[Types::ResourceTagMapping]?
+    end
+    def get_resources: (
+      ?pagination_token: String,
+      ?tag_filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?resources_per_page: Integer,
+      ?tags_per_page: Integer,
+      ?resource_type_filters: Array[String],
+      ?include_compliance_details: bool,
+      ?exclude_compliant_resources: bool,
+      ?resource_arn_list: Array[String]
+    ) -> _GetResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcesResponse
+
+    interface _GetTagKeysResponse
+      include Smithy::Client::_Response[Types::GetTagKeysOutput]
+      def pagination_token: () -> String?
+      def tag_keys: () -> Array[String]?
+    end
+    def get_tag_keys: (
+      ?pagination_token: String
+    ) -> _GetTagKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTagKeysResponse
+
+    interface _GetTagValuesResponse
+      include Smithy::Client::_Response[Types::GetTagValuesOutput]
+      def pagination_token: () -> String?
+      def tag_values: () -> Array[String]?
+    end
+    def get_tag_values: (
+      ?pagination_token: String,
+      ?key: String
+    ) -> _GetTagValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTagValuesResponse
+
+    interface _StartReportCreationResponse
+      include Smithy::Client::_Response[Types::StartReportCreationOutput]
+    end
+    def start_report_creation: (
+      ?s3_bucket: String
+    ) -> _StartReportCreationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReportCreationResponse
+
+    interface _TagResourcesResponse
+      include Smithy::Client::_Response[Types::TagResourcesOutput]
+      def failed_resources_map: () -> Hash[String, Types::FailureInfo]?
+    end
+    def tag_resources: (
+      ?resource_arn_list: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _TagResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourcesResponse
+
+    interface _UntagResourcesResponse
+      include Smithy::Client::_Response[Types::UntagResourcesOutput]
+      def failed_resources_map: () -> Hash[String, Types::FailureInfo]?
+    end
+    def untag_resources: (
+      ?resource_arn_list: Array[String],
+      ?tag_keys: Array[String]
+    ) -> _UntagResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourcesResponse
+  end
+end

@@ -1,0 +1,55 @@
+module Aws::Imagebuilder
+  module Errors
+    class CallRateLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidVersionNumberException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

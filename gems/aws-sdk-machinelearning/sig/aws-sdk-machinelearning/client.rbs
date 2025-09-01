@@ -1,0 +1,472 @@
+module Aws::MachineLearning
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MachineLearning::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsOutput]
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    def add_tags: (
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _CreateBatchPredictionResponse
+      include Smithy::Client::_Response[Types::CreateBatchPredictionOutput]
+      def batch_prediction_id: () -> String?
+    end
+    def create_batch_prediction: (
+      ?batch_prediction_id: String,
+      ?batch_prediction_name: String,
+      ?ml_model_id: String,
+      ?batch_prediction_data_source_id: String,
+      ?output_uri: String
+    ) -> _CreateBatchPredictionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchPredictionResponse
+
+    interface _CreateDataSourceFromRDSResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceFromRDSOutput]
+      def data_source_id: () -> String?
+    end
+    def create_data_source_from_rds: (
+      ?data_source_id: String,
+      ?data_source_name: String,
+      ?rds_data: {
+        database_information: {
+          instance_identifier: String,
+          database_name: String
+        },
+        select_sql_query: String,
+        database_credentials: {
+          username: String,
+          password: String
+        },
+        s3_staging_location: String,
+        data_rearrangement: String,
+        data_schema: String,
+        data_schema_uri: untyped,
+        resource_role: String,
+        service_role: String,
+        subnet_id: String,
+        security_group_ids: Array[String]
+      },
+      ?role_arn: String,
+      ?compute_statistics: bool
+    ) -> _CreateDataSourceFromRDSResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceFromRDSResponse
+
+    interface _CreateDataSourceFromRedshiftResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceFromRedshiftOutput]
+      def data_source_id: () -> String?
+    end
+    def create_data_source_from_redshift: (
+      ?data_source_id: String,
+      ?data_source_name: String,
+      ?data_spec: {
+        database_information: {
+          database_name: String,
+          cluster_identifier: String
+        },
+        select_sql_query: String,
+        database_credentials: {
+          username: String,
+          password: String
+        },
+        s3_staging_location: String,
+        data_rearrangement: String,
+        data_schema: String,
+        data_schema_uri: untyped
+      },
+      ?role_arn: String,
+      ?compute_statistics: bool
+    ) -> _CreateDataSourceFromRedshiftResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceFromRedshiftResponse
+
+    interface _CreateDataSourceFromS3Response
+      include Smithy::Client::_Response[Types::CreateDataSourceFromS3Output]
+      def data_source_id: () -> String?
+    end
+    def create_data_source_from_s3: (
+      ?data_source_id: String,
+      ?data_source_name: String,
+      ?data_spec: {
+        data_location_s3: String,
+        data_rearrangement: String,
+        data_schema: String,
+        data_schema_location_s3: untyped
+      },
+      ?compute_statistics: bool
+    ) -> _CreateDataSourceFromS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceFromS3Response
+
+    interface _CreateEvaluationResponse
+      include Smithy::Client::_Response[Types::CreateEvaluationOutput]
+      def evaluation_id: () -> String?
+    end
+    def create_evaluation: (
+      ?evaluation_id: String,
+      ?evaluation_name: String,
+      ?ml_model_id: String,
+      ?evaluation_data_source_id: String
+    ) -> _CreateEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEvaluationResponse
+
+    interface _CreateMLModelResponse
+      include Smithy::Client::_Response[Types::CreateMLModelOutput]
+      def ml_model_id: () -> String?
+    end
+    def create_ml_model: (
+      ?ml_model_id: String,
+      ?ml_model_name: String,
+      ?ml_model_type: String,
+      ?parameters: Hash[String, String],
+      ?training_data_source_id: String,
+      ?recipe: String,
+      ?recipe_uri: String
+    ) -> _CreateMLModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMLModelResponse
+
+    interface _CreateRealtimeEndpointResponse
+      include Smithy::Client::_Response[Types::CreateRealtimeEndpointOutput]
+      def ml_model_id: () -> String?
+      def realtime_endpoint_info: () -> Types::RealtimeEndpointInfo?
+    end
+    def create_realtime_endpoint: (
+      ?ml_model_id: String
+    ) -> _CreateRealtimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRealtimeEndpointResponse
+
+    interface _DeleteBatchPredictionResponse
+      include Smithy::Client::_Response[Types::DeleteBatchPredictionOutput]
+      def batch_prediction_id: () -> String?
+    end
+    def delete_batch_prediction: (
+      ?batch_prediction_id: String
+    ) -> _DeleteBatchPredictionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBatchPredictionResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceOutput]
+      def data_source_id: () -> String?
+    end
+    def delete_data_source: (
+      ?data_source_id: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteEvaluationResponse
+      include Smithy::Client::_Response[Types::DeleteEvaluationOutput]
+      def evaluation_id: () -> String?
+    end
+    def delete_evaluation: (
+      ?evaluation_id: String
+    ) -> _DeleteEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEvaluationResponse
+
+    interface _DeleteMLModelResponse
+      include Smithy::Client::_Response[Types::DeleteMLModelOutput]
+      def ml_model_id: () -> String?
+    end
+    def delete_ml_model: (
+      ?ml_model_id: String
+    ) -> _DeleteMLModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMLModelResponse
+
+    interface _DeleteRealtimeEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteRealtimeEndpointOutput]
+      def ml_model_id: () -> String?
+      def realtime_endpoint_info: () -> Types::RealtimeEndpointInfo?
+    end
+    def delete_realtime_endpoint: (
+      ?ml_model_id: String
+    ) -> _DeleteRealtimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRealtimeEndpointResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Types::DeleteTagsOutput]
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    def delete_tags: (
+      ?tag_keys: Array[String],
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DescribeBatchPredictionsResponse
+      include Smithy::Client::_Response[Types::DescribeBatchPredictionsOutput]
+      def results: () -> Array[Types::BatchPrediction]?
+      def next_token: () -> String?
+    end
+    def describe_batch_predictions: (
+      ?filter_variable: String,
+      ?eq: String,
+      ?gt: String,
+      ?lt: String,
+      ?ge: String,
+      ?le: String,
+      ?ne: String,
+      ?prefix: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeBatchPredictionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBatchPredictionsResponse
+
+    interface _DescribeDataSourcesResponse
+      include Smithy::Client::_Response[Types::DescribeDataSourcesOutput]
+      def results: () -> Array[Types::DataSource]?
+      def next_token: () -> String?
+    end
+    def describe_data_sources: (
+      ?filter_variable: String,
+      ?eq: String,
+      ?gt: String,
+      ?lt: String,
+      ?ge: String,
+      ?le: String,
+      ?ne: String,
+      ?prefix: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataSourcesResponse
+
+    interface _DescribeEvaluationsResponse
+      include Smithy::Client::_Response[Types::DescribeEvaluationsOutput]
+      def results: () -> Array[Types::Evaluation]?
+      def next_token: () -> String?
+    end
+    def describe_evaluations: (
+      ?filter_variable: String,
+      ?eq: String,
+      ?gt: String,
+      ?lt: String,
+      ?ge: String,
+      ?le: String,
+      ?ne: String,
+      ?prefix: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEvaluationsResponse
+
+    interface _DescribeMLModelsResponse
+      include Smithy::Client::_Response[Types::DescribeMLModelsOutput]
+      def results: () -> Array[Types::MLModel]?
+      def next_token: () -> String?
+    end
+    def describe_ml_models: (
+      ?filter_variable: String,
+      ?eq: String,
+      ?gt: String,
+      ?lt: String,
+      ?ge: String,
+      ?le: String,
+      ?ne: String,
+      ?prefix: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeMLModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMLModelsResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsOutput]
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_tags: (
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _GetBatchPredictionResponse
+      include Smithy::Client::_Response[Types::GetBatchPredictionOutput]
+      def batch_prediction_id: () -> String?
+      def ml_model_id: () -> String?
+      def batch_prediction_data_source_id: () -> String?
+      def input_data_location_s3: () -> String?
+      def created_by_iam_user: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def name: () -> String?
+      def status: () -> String?
+      def output_uri: () -> String?
+      def log_uri: () -> String?
+      def message: () -> String?
+      def compute_time: () -> Integer?
+      def finished_at: () -> Time?
+      def started_at: () -> Time?
+      def total_record_count: () -> Integer?
+      def invalid_record_count: () -> Integer?
+    end
+    def get_batch_prediction: (
+      ?batch_prediction_id: String
+    ) -> _GetBatchPredictionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchPredictionResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceOutput]
+      def data_source_id: () -> String?
+      def data_location_s3: () -> String?
+      def data_rearrangement: () -> String?
+      def created_by_iam_user: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def data_size_in_bytes: () -> Integer?
+      def number_of_files: () -> Integer?
+      def name: () -> String?
+      def status: () -> String?
+      def log_uri: () -> String?
+      def message: () -> String?
+      def redshift_metadata: () -> Types::RedshiftMetadata?
+      def rds_metadata: () -> Types::RDSMetadata?
+      def role_arn: () -> String?
+      def compute_statistics: () -> bool?
+      def compute_time: () -> Integer?
+      def finished_at: () -> Time?
+      def started_at: () -> Time?
+      def data_source_schema: () -> String?
+    end
+    def get_data_source: (
+      ?data_source_id: String,
+      ?verbose: bool
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetEvaluationResponse
+      include Smithy::Client::_Response[Types::GetEvaluationOutput]
+      def evaluation_id: () -> String?
+      def ml_model_id: () -> String?
+      def evaluation_data_source_id: () -> String?
+      def input_data_location_s3: () -> String?
+      def created_by_iam_user: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def name: () -> String?
+      def status: () -> String?
+      def performance_metrics: () -> Types::PerformanceMetrics?
+      def log_uri: () -> String?
+      def message: () -> String?
+      def compute_time: () -> Integer?
+      def finished_at: () -> Time?
+      def started_at: () -> Time?
+    end
+    def get_evaluation: (
+      ?evaluation_id: String
+    ) -> _GetEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvaluationResponse
+
+    interface _GetMLModelResponse
+      include Smithy::Client::_Response[Types::GetMLModelOutput]
+      def ml_model_id: () -> String?
+      def training_data_source_id: () -> String?
+      def created_by_iam_user: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def name: () -> String?
+      def status: () -> String?
+      def size_in_bytes: () -> Integer?
+      def endpoint_info: () -> Types::RealtimeEndpointInfo?
+      def training_parameters: () -> Hash[String, String]?
+      def input_data_location_s3: () -> String?
+      def ml_model_type: () -> String?
+      def score_threshold: () -> Float?
+      def score_threshold_last_updated_at: () -> Time?
+      def log_uri: () -> String?
+      def message: () -> String?
+      def compute_time: () -> Integer?
+      def finished_at: () -> Time?
+      def started_at: () -> Time?
+      def recipe: () -> String?
+      def schema: () -> String?
+    end
+    def get_ml_model: (
+      ?ml_model_id: String,
+      ?verbose: bool
+    ) -> _GetMLModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLModelResponse
+
+    interface _PredictResponse
+      include Smithy::Client::_Response[Types::PredictOutput]
+      def prediction: () -> Types::Prediction?
+    end
+    def predict: (
+      ?ml_model_id: String,
+      ?record: Hash[String, String],
+      ?predict_endpoint: String
+    ) -> _PredictResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PredictResponse
+
+    interface _UpdateBatchPredictionResponse
+      include Smithy::Client::_Response[Types::UpdateBatchPredictionOutput]
+      def batch_prediction_id: () -> String?
+    end
+    def update_batch_prediction: (
+      ?batch_prediction_id: String,
+      ?batch_prediction_name: String
+    ) -> _UpdateBatchPredictionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBatchPredictionResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceOutput]
+      def data_source_id: () -> String?
+    end
+    def update_data_source: (
+      ?data_source_id: String,
+      ?data_source_name: String
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateEvaluationResponse
+      include Smithy::Client::_Response[Types::UpdateEvaluationOutput]
+      def evaluation_id: () -> String?
+    end
+    def update_evaluation: (
+      ?evaluation_id: String,
+      ?evaluation_name: String
+    ) -> _UpdateEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEvaluationResponse
+
+    interface _UpdateMLModelResponse
+      include Smithy::Client::_Response[Types::UpdateMLModelOutput]
+      def ml_model_id: () -> String?
+    end
+    def update_ml_model: (
+      ?ml_model_id: String,
+      ?ml_model_name: String,
+      ?score_threshold: Float
+    ) -> _UpdateMLModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMLModelResponse
+  end
+end

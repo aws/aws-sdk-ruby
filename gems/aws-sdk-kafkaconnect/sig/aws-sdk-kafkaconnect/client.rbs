@@ -1,0 +1,356 @@
+module Aws::KafkaConnect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KafkaConnect::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorOutput]
+      def connector_arn: () -> String?
+      def connector_name: () -> String?
+      def connector_state: () -> String?
+    end
+    def create_connector: (
+      ?capacity: {
+        auto_scaling: {
+          max_worker_count: Integer,
+          mcu_count: Integer,
+          min_worker_count: untyped,
+          scale_in_policy: {
+            cpu_utilization_percentage: Integer
+          },
+          scale_out_policy: {
+            cpu_utilization_percentage: untyped
+          }
+        },
+        provisioned_capacity: {
+          mcu_count: untyped,
+          worker_count: untyped
+        }
+      },
+      ?connector_configuration: Hash[String, String],
+      ?connector_description: String,
+      ?connector_name: String,
+      ?kafka_cluster: {
+        apache_kafka_cluster: {
+          bootstrap_servers: String,
+          vpc: {
+            security_groups: Array[String],
+            subnets: untyped
+          }
+        }
+      },
+      ?kafka_cluster_client_authentication: {
+        authentication_type: String
+      },
+      ?kafka_cluster_encryption_in_transit: {
+        encryption_type: String
+      },
+      ?kafka_connect_version: String,
+      ?log_delivery: {
+        worker_log_delivery: {
+          cloud_watch_logs: {
+            enabled: bool,
+            log_group: String
+          },
+          firehose: {
+            delivery_stream: untyped,
+            enabled: untyped
+          },
+          s3: {
+            bucket: untyped,
+            enabled: untyped,
+            prefix: untyped
+          }
+        }
+      },
+      ?plugins: Array[
+        {
+          custom_plugin: {
+            custom_plugin_arn: String,
+            revision: Integer
+          }
+        }
+      ],
+      ?service_execution_role_arn: String,
+      ?worker_configuration: {
+        revision: Integer,
+        worker_configuration_arn: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
+    interface _CreateCustomPluginResponse
+      include Smithy::Client::_Response[Types::CreateCustomPluginOutput]
+      def custom_plugin_arn: () -> String?
+      def custom_plugin_state: () -> String?
+      def name: () -> String?
+      def revision: () -> Integer?
+    end
+    def create_custom_plugin: (
+      ?content_type: String,
+      ?description: String,
+      ?location: {
+        s3_location: {
+          bucket_arn: String,
+          file_key: untyped,
+          object_version: untyped
+        }
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateCustomPluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomPluginResponse
+
+    interface _CreateWorkerConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateWorkerConfigurationOutput]
+      def creation_time: () -> Time?
+      def latest_revision: () -> Types::WorkerConfigurationRevisionSummary?
+      def name: () -> String?
+      def worker_configuration_arn: () -> String?
+      def worker_configuration_state: () -> String?
+    end
+    def create_worker_configuration: (
+      ?description: String,
+      ?name: String,
+      ?properties_file_content: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateWorkerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkerConfigurationResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteConnectorOutput]
+      def connector_arn: () -> String?
+      def connector_state: () -> String?
+    end
+    def delete_connector: (
+      ?connector_arn: String,
+      ?current_version: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
+    interface _DeleteCustomPluginResponse
+      include Smithy::Client::_Response[Types::DeleteCustomPluginOutput]
+      def custom_plugin_arn: () -> String?
+      def custom_plugin_state: () -> String?
+    end
+    def delete_custom_plugin: (
+      ?custom_plugin_arn: String
+    ) -> _DeleteCustomPluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomPluginResponse
+
+    interface _DeleteWorkerConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteWorkerConfigurationOutput]
+      def worker_configuration_arn: () -> String?
+      def worker_configuration_state: () -> String?
+    end
+    def delete_worker_configuration: (
+      ?worker_configuration_arn: String
+    ) -> _DeleteWorkerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkerConfigurationResponse
+
+    interface _DescribeConnectorResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorOutput]
+      def capacity: () -> Types::CapacityDescription?
+      def connector_arn: () -> String?
+      def connector_configuration: () -> Hash[String, String]?
+      def connector_description: () -> String?
+      def connector_name: () -> String?
+      def connector_state: () -> String?
+      def creation_time: () -> Time?
+      def current_version: () -> String?
+      def kafka_cluster: () -> Types::KafkaClusterDescription?
+      def kafka_cluster_client_authentication: () -> Types::KafkaClusterClientAuthenticationDescription?
+      def kafka_cluster_encryption_in_transit: () -> Types::KafkaClusterEncryptionInTransitDescription?
+      def kafka_connect_version: () -> String?
+      def log_delivery: () -> Types::LogDeliveryDescription?
+      def plugins: () -> Array[Types::PluginDescription]?
+      def service_execution_role_arn: () -> String?
+      def worker_configuration: () -> Types::WorkerConfigurationDescription?
+      def state_description: () -> Types::StateDescription?
+    end
+    def describe_connector: (
+      ?connector_arn: String
+    ) -> _DescribeConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorResponse
+
+    interface _DescribeConnectorOperationResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorOperationResponse]
+      def connector_arn: () -> String?
+      def connector_operation_arn: () -> String?
+      def connector_operation_state: () -> String?
+      def connector_operation_type: () -> String?
+      def operation_steps: () -> Array[Types::ConnectorOperationStep]?
+      def origin_worker_setting: () -> Types::WorkerSetting?
+      def origin_connector_configuration: () -> Hash[String, String]?
+      def target_worker_setting: () -> Types::WorkerSetting?
+      def target_connector_configuration: () -> Hash[String, String]?
+      def error_info: () -> Types::StateDescription?
+      def creation_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def describe_connector_operation: (
+      ?connector_operation_arn: String
+    ) -> _DescribeConnectorOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorOperationResponse
+
+    interface _DescribeCustomPluginResponse
+      include Smithy::Client::_Response[Types::DescribeCustomPluginOutput]
+      def creation_time: () -> Time?
+      def custom_plugin_arn: () -> String?
+      def custom_plugin_state: () -> String?
+      def description: () -> String?
+      def latest_revision: () -> Types::CustomPluginRevisionSummary?
+      def name: () -> String?
+      def state_description: () -> Types::StateDescription?
+    end
+    def describe_custom_plugin: (
+      ?custom_plugin_arn: String
+    ) -> _DescribeCustomPluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomPluginResponse
+
+    interface _DescribeWorkerConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeWorkerConfigurationOutput]
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def latest_revision: () -> Types::WorkerConfigurationRevisionDescription?
+      def name: () -> String?
+      def worker_configuration_arn: () -> String?
+      def worker_configuration_state: () -> String?
+    end
+    def describe_worker_configuration: (
+      ?worker_configuration_arn: String
+    ) -> _DescribeWorkerConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkerConfigurationResponse
+
+    interface _ListConnectorOperationsResponse
+      include Smithy::Client::_Response[Types::ListConnectorOperationsResponse]
+      def connector_operations: () -> Array[Types::ConnectorOperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_connector_operations: (
+      ?connector_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorOperationsResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsOutput]
+      def connectors: () -> Array[Types::ConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?connector_name_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListCustomPluginsResponse
+      include Smithy::Client::_Response[Types::ListCustomPluginsOutput]
+      def custom_plugins: () -> Array[Types::CustomPluginSummary]?
+      def next_token: () -> String?
+    end
+    def list_custom_plugins: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_prefix: String
+    ) -> _ListCustomPluginsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomPluginsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkerConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListWorkerConfigurationsOutput]
+      def next_token: () -> String?
+      def worker_configurations: () -> Array[Types::WorkerConfigurationSummary]?
+    end
+    def list_worker_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_prefix: String
+    ) -> _ListWorkerConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkerConfigurationsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorOutput]
+      def connector_arn: () -> String?
+      def connector_state: () -> String?
+      def connector_operation_arn: () -> String?
+    end
+    def update_connector: (
+      ?capacity: {
+        auto_scaling: {
+          max_worker_count: Integer,
+          mcu_count: Integer,
+          min_worker_count: untyped,
+          scale_in_policy: {
+            cpu_utilization_percentage: Integer
+          },
+          scale_out_policy: {
+            cpu_utilization_percentage: untyped
+          }
+        },
+        provisioned_capacity: {
+          mcu_count: untyped,
+          worker_count: untyped
+        }
+      },
+      ?connector_configuration: Hash[String, String],
+      ?connector_arn: String,
+      ?current_version: String
+    ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
+  end
+end

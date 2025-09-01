@@ -1,0 +1,420 @@
+module Aws::Fis
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Fis::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateExperimentTemplateResponse
+      include Smithy::Client::_Response[Types::CreateExperimentTemplateResponse]
+      def experiment_template: () -> Types::ExperimentTemplate?
+    end
+    def create_experiment_template: (
+      ?client_token: String,
+      ?description: String,
+      ?stop_conditions: Array[
+        {
+          source: String,
+          value: String
+        }
+      ],
+      ?targets: Hash[String,
+        {
+          resource_type: String,
+          resource_arns: Array[String],
+          resource_tags: Hash[String, String],
+          filters: Array[
+            {
+              path: String,
+              values: Array[String]
+            }
+          ],
+          selection_mode: String,
+          parameters: Hash[String, String]
+        }
+      ],
+      ?actions: Hash[String,
+        {
+          action_id: String,
+          description: String,
+          parameters: Hash[String, String],
+          targets: Hash[String, String],
+          start_after: Array[String]
+        }
+      ],
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?log_configuration: {
+        cloud_watch_logs_configuration: {
+          log_group_arn: String
+        },
+        s3_configuration: {
+          bucket_name: String,
+          prefix: String
+        },
+        log_schema_version: Integer
+      },
+      ?experiment_options: {
+        account_targeting: String,
+        empty_target_resolution_mode: String
+      },
+      ?experiment_report_configuration: {
+        outputs: {
+          s3_configuration: {
+            bucket_name: String,
+            prefix: String
+          }
+        },
+        data_sources: {
+          cloud_watch_dashboards: Array[
+            {
+              dashboard_identifier: String
+            }
+          ]
+        },
+        pre_experiment_duration: String,
+        post_experiment_duration: untyped
+      }
+    ) -> _CreateExperimentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExperimentTemplateResponse
+
+    interface _CreateTargetAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateTargetAccountConfigurationResponse]
+      def target_account_configuration: () -> Types::TargetAccountConfiguration?
+    end
+    def create_target_account_configuration: (
+      ?client_token: String,
+      ?experiment_template_id: String,
+      ?account_id: String,
+      ?role_arn: String,
+      ?description: String
+    ) -> _CreateTargetAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTargetAccountConfigurationResponse
+
+    interface _DeleteExperimentTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteExperimentTemplateResponse]
+      def experiment_template: () -> Types::ExperimentTemplate?
+    end
+    def delete_experiment_template: (
+      ?id: String
+    ) -> _DeleteExperimentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExperimentTemplateResponse
+
+    interface _DeleteTargetAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteTargetAccountConfigurationResponse]
+      def target_account_configuration: () -> Types::TargetAccountConfiguration?
+    end
+    def delete_target_account_configuration: (
+      ?experiment_template_id: String,
+      ?account_id: String
+    ) -> _DeleteTargetAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTargetAccountConfigurationResponse
+
+    interface _GetActionResponse
+      include Smithy::Client::_Response[Types::GetActionResponse]
+      def action: () -> Types::Action?
+    end
+    def get_action: (
+      ?id: String
+    ) -> _GetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetActionResponse
+
+    interface _GetExperimentResponse
+      include Smithy::Client::_Response[Types::GetExperimentResponse]
+      def experiment: () -> Types::Experiment?
+    end
+    def get_experiment: (
+      ?id: String
+    ) -> _GetExperimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExperimentResponse
+
+    interface _GetExperimentTargetAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::GetExperimentTargetAccountConfigurationResponse]
+      def target_account_configuration: () -> Types::ExperimentTargetAccountConfiguration?
+    end
+    def get_experiment_target_account_configuration: (
+      ?experiment_id: String,
+      ?account_id: String
+    ) -> _GetExperimentTargetAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExperimentTargetAccountConfigurationResponse
+
+    interface _GetExperimentTemplateResponse
+      include Smithy::Client::_Response[Types::GetExperimentTemplateResponse]
+      def experiment_template: () -> Types::ExperimentTemplate?
+    end
+    def get_experiment_template: (
+      ?id: String
+    ) -> _GetExperimentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExperimentTemplateResponse
+
+    interface _GetSafetyLeverResponse
+      include Smithy::Client::_Response[Types::GetSafetyLeverResponse]
+      def safety_lever: () -> Types::SafetyLever?
+    end
+    def get_safety_lever: (
+      ?id: String
+    ) -> _GetSafetyLeverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSafetyLeverResponse
+
+    interface _GetTargetAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTargetAccountConfigurationResponse]
+      def target_account_configuration: () -> Types::TargetAccountConfiguration?
+    end
+    def get_target_account_configuration: (
+      ?experiment_template_id: String,
+      ?account_id: String
+    ) -> _GetTargetAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTargetAccountConfigurationResponse
+
+    interface _GetTargetResourceTypeResponse
+      include Smithy::Client::_Response[Types::GetTargetResourceTypeResponse]
+      def target_resource_type: () -> Types::TargetResourceType?
+    end
+    def get_target_resource_type: (
+      ?resource_type: String
+    ) -> _GetTargetResourceTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTargetResourceTypeResponse
+
+    interface _ListActionsResponse
+      include Smithy::Client::_Response[Types::ListActionsResponse]
+      def actions: () -> Array[Types::ActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_actions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionsResponse
+
+    interface _ListExperimentResolvedTargetsResponse
+      include Smithy::Client::_Response[Types::ListExperimentResolvedTargetsResponse]
+      def resolved_targets: () -> Array[Types::ResolvedTarget]?
+      def next_token: () -> String?
+    end
+    def list_experiment_resolved_targets: (
+      ?experiment_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?target_name: String
+    ) -> _ListExperimentResolvedTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentResolvedTargetsResponse
+
+    interface _ListExperimentTargetAccountConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListExperimentTargetAccountConfigurationsResponse]
+      def target_account_configurations: () -> Array[Types::ExperimentTargetAccountConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiment_target_account_configurations: (
+      ?experiment_id: String,
+      ?next_token: String
+    ) -> _ListExperimentTargetAccountConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentTargetAccountConfigurationsResponse
+
+    interface _ListExperimentTemplatesResponse
+      include Smithy::Client::_Response[Types::ListExperimentTemplatesResponse]
+      def experiment_templates: () -> Array[Types::ExperimentTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiment_templates: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExperimentTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentTemplatesResponse
+
+    interface _ListExperimentsResponse
+      include Smithy::Client::_Response[Types::ListExperimentsResponse]
+      def experiments: () -> Array[Types::ExperimentSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiments: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?experiment_template_id: String
+    ) -> _ListExperimentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetAccountConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListTargetAccountConfigurationsResponse]
+      def target_account_configurations: () -> Array[Types::TargetAccountConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_target_account_configurations: (
+      ?experiment_template_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTargetAccountConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetAccountConfigurationsResponse
+
+    interface _ListTargetResourceTypesResponse
+      include Smithy::Client::_Response[Types::ListTargetResourceTypesResponse]
+      def target_resource_types: () -> Array[Types::TargetResourceTypeSummary]?
+      def next_token: () -> String?
+    end
+    def list_target_resource_types: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTargetResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetResourceTypesResponse
+
+    interface _StartExperimentResponse
+      include Smithy::Client::_Response[Types::StartExperimentResponse]
+      def experiment: () -> Types::Experiment?
+    end
+    def start_experiment: (
+      ?client_token: String,
+      ?experiment_template_id: String,
+      ?experiment_options: {
+        actions_mode: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _StartExperimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExperimentResponse
+
+    interface _StopExperimentResponse
+      include Smithy::Client::_Response[Types::StopExperimentResponse]
+      def experiment: () -> Types::Experiment?
+    end
+    def stop_experiment: (
+      ?id: String
+    ) -> _StopExperimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopExperimentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateExperimentTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateExperimentTemplateResponse]
+      def experiment_template: () -> Types::ExperimentTemplate?
+    end
+    def update_experiment_template: (
+      ?id: String,
+      ?description: String,
+      ?stop_conditions: Array[
+        {
+          source: String,
+          value: String
+        }
+      ],
+      ?targets: Hash[String,
+        {
+          resource_type: String,
+          resource_arns: Array[String],
+          resource_tags: Hash[String, String],
+          filters: Array[
+            {
+              path: String,
+              values: Array[String]
+            }
+          ],
+          selection_mode: String,
+          parameters: Hash[String, String]
+        }
+      ],
+      ?actions: Hash[String,
+        {
+          action_id: String,
+          description: String,
+          parameters: Hash[String, String],
+          targets: Hash[String, String],
+          start_after: Array[String]
+        }
+      ],
+      ?role_arn: String,
+      ?log_configuration: {
+        cloud_watch_logs_configuration: {
+          log_group_arn: String
+        },
+        s3_configuration: {
+          bucket_name: String,
+          prefix: String
+        },
+        log_schema_version: Integer
+      },
+      ?experiment_options: {
+        empty_target_resolution_mode: String
+      },
+      ?experiment_report_configuration: {
+        outputs: {
+          s3_configuration: {
+            bucket_name: String,
+            prefix: String
+          }
+        },
+        data_sources: {
+          cloud_watch_dashboards: Array[
+            {
+              dashboard_identifier: String
+            }
+          ]
+        },
+        pre_experiment_duration: String,
+        post_experiment_duration: untyped
+      }
+    ) -> _UpdateExperimentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExperimentTemplateResponse
+
+    interface _UpdateSafetyLeverStateResponse
+      include Smithy::Client::_Response[Types::UpdateSafetyLeverStateResponse]
+      def safety_lever: () -> Types::SafetyLever?
+    end
+    def update_safety_lever_state: (
+      ?id: String,
+      ?state: {
+        status: String,
+        reason: String
+      }
+    ) -> _UpdateSafetyLeverStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSafetyLeverStateResponse
+
+    interface _UpdateTargetAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateTargetAccountConfigurationResponse]
+      def target_account_configuration: () -> Types::TargetAccountConfiguration?
+    end
+    def update_target_account_configuration: (
+      ?experiment_template_id: String,
+      ?account_id: String,
+      ?role_arn: String,
+      ?description: String
+    ) -> _UpdateTargetAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTargetAccountConfigurationResponse
+  end
+end

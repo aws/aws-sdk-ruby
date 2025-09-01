@@ -1,0 +1,111 @@
+module Aws::CloudDirectory
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchWriteException < Smithy::Client::ServiceError
+      def index: () -> Integer?
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class CannotListParentOfRootException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryDeletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryNotDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FacetAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FacetInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FacetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FacetValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleSchemaException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IndexedAttributeMissingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAttachmentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFacetUpdateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRuleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSchemaDocException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTaggingRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LinkNameAlreadyInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotIndexException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotNodeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ObjectAlreadyDetachedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ObjectNotDetachedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RetryableConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SchemaAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SchemaAlreadyPublishedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StillContainsLinksException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedIndexTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

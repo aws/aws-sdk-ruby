@@ -1,0 +1,5 @@
+  module Aws
+    module SupportApp
+      VERSION: String
+    end
+  end

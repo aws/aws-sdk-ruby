@@ -1,0 +1,16 @@
+module Aws::MediaStoreData
+  module Errors
+    class ContainerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ObjectNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestedRangeNotSatisfiableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

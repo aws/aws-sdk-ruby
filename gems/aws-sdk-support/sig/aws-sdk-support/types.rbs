@@ -1,0 +1,862 @@
+module Aws::Support
+  module Types
+
+    class AddAttachmentsToSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_set_id: String,
+        ?attachments: Array[Types::Attachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_set_id: String?
+      attr_accessor attachments: Array[Types::Attachment]?
+    end
+
+    class AddAttachmentsToSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_set_id: String,
+        ?expiry_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_set_id: String?
+      attr_accessor expiry_time: String?
+    end
+
+    class AddCommunicationToCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?communication_body: String,
+        ?cc_email_addresses: Array[String],
+        ?attachment_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor communication_body: String?
+      attr_accessor cc_email_addresses: Array[String]?
+      attr_accessor attachment_set_id: String?
+    end
+
+    class AddCommunicationToCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: bool?
+    end
+
+    class Attachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_name: String,
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_name: String?
+      attr_accessor data: String?
+    end
+
+    class AttachmentDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?file_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor file_name: String?
+    end
+
+    class AttachmentIdNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachmentLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachmentSetExpired
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachmentSetIdNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachmentSetSizeLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CaseCreationLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CaseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?display_id: String,
+        ?subject: String,
+        ?status: String,
+        ?service_code: String,
+        ?category_code: String,
+        ?severity_code: String,
+        ?submitted_by: String,
+        ?time_created: String,
+        ?recent_communications: Types::RecentCaseCommunications,
+        ?cc_email_addresses: Array[String],
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor display_id: String?
+      attr_accessor subject: String?
+      attr_accessor status: String?
+      attr_accessor service_code: String?
+      attr_accessor category_code: String?
+      attr_accessor severity_code: String?
+      attr_accessor submitted_by: String?
+      attr_accessor time_created: String?
+      attr_accessor recent_communications: Types::RecentCaseCommunications?
+      attr_accessor cc_email_addresses: Array[String]?
+      attr_accessor language: String?
+    end
+
+    class CaseIdNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Category
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor name: String?
+    end
+
+    class Communication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?body: String,
+        ?submitted_by: String,
+        ?time_created: String,
+        ?attachment_set: Array[Types::AttachmentDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor body: String?
+      attr_accessor submitted_by: String?
+      attr_accessor time_created: String?
+      attr_accessor attachment_set: Array[Types::AttachmentDetails]?
+    end
+
+    class CommunicationTypeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?supported_hours: Array[Types::SupportedHour],
+        ?dates_without_support: Array[Types::DateInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor supported_hours: Array[Types::SupportedHour]?
+      attr_accessor dates_without_support: Array[Types::DateInterval]?
+    end
+
+    class CreateCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: String,
+        ?service_code: String,
+        ?severity_code: String,
+        ?category_code: String,
+        ?communication_body: String,
+        ?cc_email_addresses: Array[String],
+        ?language: String,
+        ?issue_type: String,
+        ?attachment_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: String?
+      attr_accessor service_code: String?
+      attr_accessor severity_code: String?
+      attr_accessor category_code: String?
+      attr_accessor communication_body: String?
+      attr_accessor cc_email_addresses: Array[String]?
+      attr_accessor language: String?
+      attr_accessor issue_type: String?
+      attr_accessor attachment_set_id: String?
+    end
+
+    class CreateCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class DateInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date_time: String,
+        ?end_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date_time: String?
+      attr_accessor end_date_time: String?
+    end
+
+    class DescribeAttachmentLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class DescribeAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+    end
+
+    class DescribeCasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id_list: Array[String],
+        ?display_id: String,
+        ?after_time: String,
+        ?before_time: String,
+        ?include_resolved_cases: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?language: String,
+        ?include_communications: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id_list: Array[String]?
+      attr_accessor display_id: String?
+      attr_accessor after_time: String?
+      attr_accessor before_time: String?
+      attr_accessor include_resolved_cases: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor language: String?
+      attr_accessor include_communications: bool?
+    end
+
+    class DescribeCasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cases: Array[Types::CaseDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cases: Array[Types::CaseDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeCommunicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?before_time: String,
+        ?after_time: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor before_time: String?
+      attr_accessor after_time: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeCommunicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?communications: Array[Types::Communication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor communications: Array[Types::Communication]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeCreateCaseOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_type: String,
+        ?service_code: String,
+        ?language: String,
+        ?category_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_type: String?
+      attr_accessor service_code: String?
+      attr_accessor language: String?
+      attr_accessor category_code: String?
+    end
+
+    class DescribeCreateCaseOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_availability: String,
+        ?communication_types: Array[Types::CommunicationTypeOptions],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_availability: String?
+      attr_accessor communication_types: Array[Types::CommunicationTypeOptions]?
+    end
+
+    class DescribeServicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code_list: Array[String],
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code_list: Array[String]?
+      attr_accessor language: String?
+    end
+
+    class DescribeServicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::Service],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::Service]?
+    end
+
+    class DescribeSeverityLevelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+    end
+
+    class DescribeSeverityLevelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severity_levels: Array[Types::SeverityLevel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severity_levels: Array[Types::SeverityLevel]?
+    end
+
+    class DescribeSupportedLanguagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_type: String,
+        ?service_code: String,
+        ?category_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_type: String?
+      attr_accessor service_code: String?
+      attr_accessor category_code: String?
+    end
+
+    class DescribeSupportedLanguagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supported_languages: Array[Types::SupportedLanguage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supported_languages: Array[Types::SupportedLanguage]?
+    end
+
+    class DescribeTrustedAdvisorCheckRefreshStatusesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_ids: Array[String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_ids: Array[String?]?
+    end
+
+    class DescribeTrustedAdvisorCheckRefreshStatusesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statuses: Array[Types::TrustedAdvisorCheckRefreshStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statuses: Array[Types::TrustedAdvisorCheckRefreshStatus]?
+    end
+
+    class DescribeTrustedAdvisorCheckResultRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_id: String,
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_id: String?
+      attr_accessor language: String?
+    end
+
+    class DescribeTrustedAdvisorCheckResultResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::TrustedAdvisorCheckResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::TrustedAdvisorCheckResult?
+    end
+
+    class DescribeTrustedAdvisorCheckSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_ids: Array[String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_ids: Array[String?]?
+    end
+
+    class DescribeTrustedAdvisorCheckSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::TrustedAdvisorCheckSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::TrustedAdvisorCheckSummary]?
+    end
+
+    class DescribeTrustedAdvisorChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+    end
+
+    class DescribeTrustedAdvisorChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checks: Array[Types::TrustedAdvisorCheckDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checks: Array[Types::TrustedAdvisorCheckDescription]?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RecentCaseCommunications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?communications: Array[Types::Communication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor communications: Array[Types::Communication]?
+      attr_accessor next_token: String?
+    end
+
+    class RefreshTrustedAdvisorCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_id: String?
+    end
+
+    class RefreshTrustedAdvisorCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::TrustedAdvisorCheckRefreshStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::TrustedAdvisorCheckRefreshStatus?
+    end
+
+    class ResolveCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class ResolveCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initial_case_status: String,
+        ?final_case_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initial_case_status: String?
+      attr_accessor final_case_status: String?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?name: String,
+        ?categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor name: String?
+      attr_accessor categories: Array[Types::Category]?
+    end
+
+    class SeverityLevel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor name: String?
+    end
+
+    class SupportedHour
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?end_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+    end
+
+    class SupportedLanguage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?language: String,
+        ?display: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor language: String?
+      attr_accessor display: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustedAdvisorCategorySpecificSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_optimizing: Types::TrustedAdvisorCostOptimizingSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_optimizing: Types::TrustedAdvisorCostOptimizingSummary?
+    end
+
+    class TrustedAdvisorCheckDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?category: String,
+        ?metadata: Array[String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor metadata: Array[String?]?
+    end
+
+    class TrustedAdvisorCheckRefreshStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_id: String,
+        ?status: String,
+        ?millis_until_next_refreshable: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_id: String?
+      attr_accessor status: String?
+      attr_accessor millis_until_next_refreshable: Integer?
+    end
+
+    class TrustedAdvisorCheckResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_id: String,
+        ?timestamp: String,
+        ?status: String,
+        ?resources_summary: Types::TrustedAdvisorResourcesSummary,
+        ?category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary,
+        ?flagged_resources: Array[Types::TrustedAdvisorResourceDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_id: String?
+      attr_accessor timestamp: String?
+      attr_accessor status: String?
+      attr_accessor resources_summary: Types::TrustedAdvisorResourcesSummary?
+      attr_accessor category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary?
+      attr_accessor flagged_resources: Array[Types::TrustedAdvisorResourceDetail]?
+    end
+
+    class TrustedAdvisorCheckSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_id: String,
+        ?timestamp: String,
+        ?status: String,
+        ?has_flagged_resources: bool,
+        ?resources_summary: Types::TrustedAdvisorResourcesSummary,
+        ?category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_id: String?
+      attr_accessor timestamp: String?
+      attr_accessor status: String?
+      attr_accessor has_flagged_resources: bool?
+      attr_accessor resources_summary: Types::TrustedAdvisorResourcesSummary?
+      attr_accessor category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary?
+    end
+
+    class TrustedAdvisorCostOptimizingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_monthly_savings: Float,
+        ?estimated_percent_monthly_savings: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_monthly_savings: Float?
+      attr_accessor estimated_percent_monthly_savings: Float?
+    end
+
+    class TrustedAdvisorResourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?region: String,
+        ?resource_id: String,
+        ?is_suppressed: bool,
+        ?metadata: Array[String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor region: String?
+      attr_accessor resource_id: String?
+      attr_accessor is_suppressed: bool?
+      attr_accessor metadata: Array[String?]?
+    end
+
+    class TrustedAdvisorResourcesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources_processed: Integer,
+        ?resources_flagged: Integer,
+        ?resources_ignored: Integer,
+        ?resources_suppressed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources_processed: Integer?
+      attr_accessor resources_flagged: Integer?
+      attr_accessor resources_ignored: Integer?
+      attr_accessor resources_suppressed: Integer?
+    end
+  end
+end

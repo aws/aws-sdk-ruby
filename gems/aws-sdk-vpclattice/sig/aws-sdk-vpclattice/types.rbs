@@ -1,0 +1,3186 @@
+module Aws::VPCLattice
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessLogSubscriptionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?destination_arn: String,
+        ?service_network_log_type: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor destination_arn: String?
+      attr_accessor service_network_log_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ArnResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class BatchUpdateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?rules: Array[Types::RuleUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor rules: Array[Types::RuleUpdate]?
+    end
+
+    class BatchUpdateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::RuleUpdateSuccess],
+        ?unsuccessful: Array[Types::RuleUpdateFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::RuleUpdateSuccess]?
+      attr_accessor unsuccessful: Array[Types::RuleUpdateFailure]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAccessLogSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?resource_identifier: String,
+        ?destination_arn: String,
+        ?service_network_log_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor destination_arn: String?
+      attr_accessor service_network_log_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAccessLogSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?service_network_log_type: String,
+        ?destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor service_network_log_type: String?
+      attr_accessor destination_arn: String?
+    end
+
+    class CreateListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?default_action: Types::RuleAction,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor default_action: Types::RuleAction?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?service_arn: String,
+        ?service_id: String,
+        ?default_action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor service_arn: String?
+      attr_accessor service_id: String?
+      attr_accessor default_action: Types::RuleAction?
+    end
+
+    class CreateResourceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?port_ranges: Array[String],
+        ?protocol: String,
+        ?resource_gateway_identifier: String,
+        ?resource_configuration_group_identifier: String,
+        ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
+        ?allow_association_to_shareable_service_network: bool,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor port_ranges: Array[String]?
+      attr_accessor protocol: String?
+      attr_accessor resource_gateway_identifier: String?
+      attr_accessor resource_configuration_group_identifier: String?
+      attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
+      attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResourceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?resource_gateway_id: String,
+        ?resource_configuration_group_id: String,
+        ?type: String,
+        ?port_ranges: Array[String],
+        ?protocol: String,
+        ?status: String,
+        ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
+        ?allow_association_to_shareable_service_network: bool,
+        ?created_at: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor resource_configuration_group_id: String?
+      attr_accessor type: String?
+      attr_accessor port_ranges: Array[String]?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
+      attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor created_at: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class CreateResourceGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?vpc_identifier: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResourceGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?vpc_identifier: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class CreateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?name: String,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor name: String?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class CreateServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+        ?custom_domain_name: String,
+        ?certificate_arn: String,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor custom_domain_name: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor auth_type: String?
+    end
+
+    class CreateServiceNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?auth_type: String,
+        ?tags: Hash[String, String],
+        ?sharing_config: Types::SharingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor auth_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor sharing_config: Types::SharingConfig?
+    end
+
+    class CreateServiceNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?sharing_config: Types::SharingConfig,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor sharing_config: Types::SharingConfig?
+      attr_accessor auth_type: String?
+    end
+
+    class CreateServiceNetworkResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?resource_configuration_identifier: String,
+        ?service_network_identifier: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor resource_configuration_identifier: String?
+      attr_accessor service_network_identifier: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateServiceNetworkResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_by: String?
+    end
+
+    class CreateServiceNetworkServiceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?service_identifier: String,
+        ?service_network_identifier: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor service_identifier: String?
+      attr_accessor service_network_identifier: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateServiceNetworkServiceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+        ?created_by: String,
+        ?custom_domain_name: String,
+        ?dns_entry: Types::DnsEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor dns_entry: Types::DnsEntry?
+    end
+
+    class CreateServiceNetworkVpcAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?service_network_identifier: String,
+        ?vpc_identifier: String,
+        ?security_group_ids: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor service_network_identifier: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateServiceNetworkVpcAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+        ?created_by: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class CreateServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?custom_domain_name: String,
+        ?certificate_arn: String,
+        ?status: String,
+        ?auth_type: String,
+        ?dns_entry: Types::DnsEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor status: String?
+      attr_accessor auth_type: String?
+      attr_accessor dns_entry: Types::DnsEntry?
+    end
+
+    class CreateTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?config: Types::TargetGroupConfig,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor config: Types::TargetGroupConfig?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?config: Types::TargetGroupConfig,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor config: Types::TargetGroupConfig?
+      attr_accessor status: String?
+    end
+
+    class DeleteAccessLogSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log_subscription_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log_subscription_identifier: String?
+    end
+
+    class DeleteAccessLogSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAuthPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+    end
+
+    class DeleteAuthPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+    end
+
+    class DeleteListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_identifier: String?
+    end
+
+    class DeleteResourceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourceEndpointAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_endpoint_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_endpoint_association_identifier: String?
+    end
+
+    class DeleteResourceEndpointAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_configuration_id: String,
+        ?resource_configuration_arn: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class DeleteResourceGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_gateway_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_gateway_identifier: String?
+    end
+
+    class DeleteResourceGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor rule_identifier: String?
+    end
+
+    class DeleteRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+    end
+
+    class DeleteServiceNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+    end
+
+    class DeleteServiceNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceNetworkResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_resource_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_resource_association_identifier: String?
+    end
+
+    class DeleteServiceNetworkResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteServiceNetworkServiceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_service_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_service_association_identifier: String?
+    end
+
+    class DeleteServiceNetworkServiceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteServiceNetworkVpcAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_vpc_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_vpc_association_identifier: String?
+    end
+
+    class DeleteServiceNetworkVpcAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+    end
+
+    class DeleteTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeregisterTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+        ?targets: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+      attr_accessor targets: Array[Types::Target]?
+    end
+
+    class DeregisterTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::Target],
+        ?unsuccessful: Array[Types::TargetFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::Target]?
+      attr_accessor unsuccessful: Array[Types::TargetFailure]?
+    end
+
+    class DnsEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class DnsResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class FixedResponseAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
+    class ForwardAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::WeightedTargetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::WeightedTargetGroup]?
+    end
+
+    class GetAccessLogSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log_subscription_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log_subscription_identifier: String?
+    end
+
+    class GetAccessLogSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?destination_arn: String,
+        ?service_network_log_type: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor destination_arn: String?
+      attr_accessor service_network_log_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetAuthPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+    end
+
+    class GetAuthPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?state: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+    end
+
+    class GetListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?service_arn: String,
+        ?service_id: String,
+        ?default_action: Types::RuleAction,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor service_arn: String?
+      attr_accessor service_id: String?
+      attr_accessor default_action: Types::RuleAction?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetResourceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_identifier: String?
+    end
+
+    class GetResourceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?resource_gateway_id: String,
+        ?resource_configuration_group_id: String,
+        ?type: String,
+        ?allow_association_to_shareable_service_network: bool,
+        ?port_ranges: Array[String],
+        ?protocol: String,
+        ?custom_domain_name: String,
+        ?status: String,
+        ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
+        ?created_at: Time,
+        ?amazon_managed: bool,
+        ?failure_reason: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor resource_configuration_group_id: String?
+      attr_accessor type: String?
+      attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor port_ranges: Array[String]?
+      attr_accessor protocol: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor status: String?
+      attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
+      attr_accessor created_at: Time?
+      attr_accessor amazon_managed: bool?
+      attr_accessor failure_reason: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetResourceGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_gateway_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_gateway_identifier: String?
+    end
+
+    class GetResourceGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor rule_identifier: String?
+    end
+
+    class GetRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?is_default: bool,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor is_default: bool?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+    end
+
+    class GetServiceNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+    end
+
+    class GetServiceNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?arn: String,
+        ?auth_type: String,
+        ?sharing_config: Types::SharingConfig,
+        ?number_of_associated_vp_cs: Integer,
+        ?number_of_associated_services: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor arn: String?
+      attr_accessor auth_type: String?
+      attr_accessor sharing_config: Types::SharingConfig?
+      attr_accessor number_of_associated_vp_cs: Integer?
+      attr_accessor number_of_associated_services: Integer?
+    end
+
+    class GetServiceNetworkResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_resource_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_resource_association_identifier: String?
+    end
+
+    class GetServiceNetworkResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?resource_configuration_id: String,
+        ?resource_configuration_arn: String,
+        ?resource_configuration_name: String,
+        ?service_network_id: String,
+        ?service_network_arn: String,
+        ?service_network_name: String,
+        ?failure_reason: String,
+        ?failure_code: String,
+        ?last_updated_at: Time,
+        ?private_dns_entry: Types::DnsEntry,
+        ?dns_entry: Types::DnsEntry,
+        ?is_managed_association: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor resource_configuration_name: String?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor service_network_name: String?
+      attr_accessor failure_reason: String?
+      attr_accessor failure_code: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor private_dns_entry: Types::DnsEntry?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor is_managed_association: bool?
+    end
+
+    class GetServiceNetworkServiceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_service_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_service_association_identifier: String?
+    end
+
+    class GetServiceNetworkServiceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?service_id: String,
+        ?service_name: String,
+        ?service_arn: String,
+        ?service_network_id: String,
+        ?service_network_name: String,
+        ?service_network_arn: String,
+        ?dns_entry: Types::DnsEntry,
+        ?custom_domain_name: String,
+        ?failure_message: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor service_id: String?
+      attr_accessor service_name: String?
+      attr_accessor service_arn: String?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_name: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor custom_domain_name: String?
+      attr_accessor failure_message: String?
+      attr_accessor failure_code: String?
+    end
+
+    class GetServiceNetworkVpcAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_vpc_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_vpc_association_identifier: String?
+    end
+
+    class GetServiceNetworkVpcAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?service_network_id: String,
+        ?service_network_name: String,
+        ?service_network_arn: String,
+        ?vpc_id: String,
+        ?security_group_ids: Array[String],
+        ?failure_message: String,
+        ?failure_code: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_name: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor failure_message: String?
+      attr_accessor failure_code: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?dns_entry: Types::DnsEntry,
+        ?custom_domain_name: String,
+        ?certificate_arn: String,
+        ?status: String,
+        ?auth_type: String,
+        ?failure_code: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor custom_domain_name: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor status: String?
+      attr_accessor auth_type: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+    end
+
+    class GetTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+    end
+
+    class GetTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?config: Types::TargetGroupConfig,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?status: String,
+        ?service_arns: Array[String],
+        ?failure_message: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor config: Types::TargetGroupConfig?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor service_arns: Array[String]?
+      attr_accessor failure_message: String?
+      attr_accessor failure_code: String?
+    end
+
+    class HeaderMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?match: Types::HeaderMatchType,
+        ?case_sensitive: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor match: Types::HeaderMatchType?
+      attr_accessor case_sensitive: bool?
+    end
+
+    class HeaderMatchType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?exact: String,
+        ?prefix: String,
+        ?contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor prefix: String?
+      attr_accessor contains: String?
+
+      class Exact < HeaderMatchType
+      end
+      class Prefix < HeaderMatchType
+      end
+      class Contains < HeaderMatchType
+      end
+      class Unknown < HeaderMatchType
+      end
+    end
+
+    class HealthCheckConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?protocol: String,
+        ?protocol_version: String,
+        ?port: Integer,
+        ?path: String,
+        ?health_check_interval_seconds: Integer,
+        ?health_check_timeout_seconds: Integer,
+        ?healthy_threshold_count: Integer,
+        ?unhealthy_threshold_count: Integer,
+        ?matcher: Types::Matcher,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor protocol: String?
+      attr_accessor protocol_version: String?
+      attr_accessor port: Integer?
+      attr_accessor path: String?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor health_check_timeout_seconds: Integer?
+      attr_accessor healthy_threshold_count: Integer?
+      attr_accessor unhealthy_threshold_count: Integer?
+      attr_accessor matcher: Types::Matcher?
+    end
+
+    class HttpMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?method: String,
+        ?path_match: Types::PathMatch,
+        ?header_matches: Array[Types::HeaderMatch],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor method: String?
+      attr_accessor path_match: Types::PathMatch?
+      attr_accessor header_matches: Array[Types::HeaderMatch]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class IpResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+    end
+
+    class ListAccessLogSubscriptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccessLogSubscriptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AccessLogSubscriptionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AccessLogSubscriptionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListListenersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListListenersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ListenerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ListenerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_gateway_identifier: String,
+        ?resource_configuration_group_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_gateway_identifier: String?
+      attr_accessor resource_configuration_group_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResourceConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResourceConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceEndpointAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_identifier: String,
+        ?resource_endpoint_association_identifier: String,
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_owner: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_identifier: String?
+      attr_accessor resource_endpoint_association_identifier: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_owner: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceEndpointAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResourceEndpointAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResourceEndpointAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResourceGatewaySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResourceGatewaySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkResourceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+        ?resource_configuration_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+      attr_accessor resource_configuration_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkResourceAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceNetworkResourceAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceNetworkResourceAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkServiceAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+        ?service_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+      attr_accessor service_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkServiceAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceNetworkServiceAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceNetworkServiceAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkVpcAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+        ?vpc_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkVpcAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceNetworkVpcAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceNetworkVpcAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkVpcEndpointAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworkVpcEndpointAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceNetworkEndpointAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceNetworkEndpointAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceNetworksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceNetworkSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceNetworkSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTargetGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?vpc_identifier: String,
+        ?target_group_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor target_group_type: String?
+    end
+
+    class ListTargetGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::TargetGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::TargetGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?targets: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor targets: Array[Types::Target]?
+    end
+
+    class ListTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::TargetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::TargetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListenerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class Matcher
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?http_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_code: String?
+
+      class HttpCode < Matcher
+      end
+      class Unknown < Matcher
+      end
+    end
+
+    class PathMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match: Types::PathMatchType,
+        ?case_sensitive: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match: Types::PathMatchType?
+      attr_accessor case_sensitive: bool?
+    end
+
+    class PathMatchType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?exact: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor prefix: String?
+
+      class Exact < PathMatchType
+      end
+      class Prefix < PathMatchType
+      end
+      class Unknown < PathMatchType
+      end
+    end
+
+    class PutAuthPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor policy: String?
+    end
+
+    class PutAuthPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor state: String?
+    end
+
+    class PutResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+        ?targets: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+      attr_accessor targets: Array[Types::Target]?
+    end
+
+    class RegisterTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::Target],
+        ?unsuccessful: Array[Types::TargetFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::Target]?
+      attr_accessor unsuccessful: Array[Types::TargetFailure]?
+    end
+
+    class ResourceConfigurationDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dns_resource: Types::DnsResource,
+        ?ip_resource: Types::IpResource,
+        ?arn_resource: Types::ArnResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_resource: Types::DnsResource?
+      attr_accessor ip_resource: Types::IpResource?
+      attr_accessor arn_resource: Types::ArnResource?
+
+      class DnsResource < ResourceConfigurationDefinition
+      end
+      class IpResource < ResourceConfigurationDefinition
+      end
+      class ArnResource < ResourceConfigurationDefinition
+      end
+      class Unknown < ResourceConfigurationDefinition
+      end
+    end
+
+    class ResourceConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?resource_gateway_id: String,
+        ?resource_configuration_group_id: String,
+        ?type: String,
+        ?status: String,
+        ?amazon_managed: bool,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor resource_configuration_group_id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor amazon_managed: bool?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ResourceEndpointAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_configuration_id: String,
+        ?resource_configuration_arn: String,
+        ?resource_configuration_name: String,
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_owner: String,
+        ?created_by: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor resource_configuration_name: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_owner: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+    end
+
+    class ResourceGatewaySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?vpc_identifier: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RuleAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?forward: Types::ForwardAction,
+        ?fixed_response: Types::FixedResponseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forward: Types::ForwardAction?
+      attr_accessor fixed_response: Types::FixedResponseAction?
+
+      class Forward < RuleAction
+      end
+      class FixedResponse < RuleAction
+      end
+      class Unknown < RuleAction
+      end
+    end
+
+    class RuleMatch
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?http_match: Types::HttpMatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_match: Types::HttpMatch?
+
+      class HttpMatch < RuleMatch
+      end
+      class Unknown < RuleMatch
+      end
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?is_default: bool,
+        ?priority: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor is_default: bool?
+      attr_accessor priority: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class RuleUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class RuleUpdateFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?failure_code: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+    end
+
+    class RuleUpdateSuccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?is_default: bool,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor is_default: bool?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class ServiceNetworkEndpointAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_id: String,
+        ?vpc_endpoint_owner_id: String,
+        ?id: String,
+        ?state: String,
+        ?service_network_arn: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_endpoint_owner_id: String?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor created_at: Time?
+    end
+
+    class ServiceNetworkResourceAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?resource_configuration_id: String,
+        ?resource_configuration_arn: String,
+        ?resource_configuration_name: String,
+        ?service_network_id: String,
+        ?service_network_arn: String,
+        ?service_network_name: String,
+        ?dns_entry: Types::DnsEntry,
+        ?private_dns_entry: Types::DnsEntry,
+        ?is_managed_association: bool,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor resource_configuration_name: String?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor service_network_name: String?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor private_dns_entry: Types::DnsEntry?
+      attr_accessor is_managed_association: bool?
+      attr_accessor failure_code: String?
+    end
+
+    class ServiceNetworkServiceAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?service_id: String,
+        ?service_name: String,
+        ?service_arn: String,
+        ?service_network_id: String,
+        ?service_network_name: String,
+        ?service_network_arn: String,
+        ?dns_entry: Types::DnsEntry,
+        ?custom_domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor service_id: String?
+      attr_accessor service_name: String?
+      attr_accessor service_arn: String?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_name: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor custom_domain_name: String?
+    end
+
+    class ServiceNetworkSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?number_of_associated_vp_cs: Integer,
+        ?number_of_associated_services: Integer,
+        ?number_of_associated_resource_configurations: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor number_of_associated_vp_cs: Integer?
+      attr_accessor number_of_associated_services: Integer?
+      attr_accessor number_of_associated_resource_configurations: Integer?
+    end
+
+    class ServiceNetworkVpcAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?service_network_id: String,
+        ?service_network_name: String,
+        ?service_network_arn: String,
+        ?vpc_id: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor service_network_id: String?
+      attr_accessor service_network_name: String?
+      attr_accessor service_network_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?dns_entry: Types::DnsEntry,
+        ?custom_domain_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor dns_entry: Types::DnsEntry?
+      attr_accessor custom_domain_name: String?
+      attr_accessor status: String?
+    end
+
+    class SharingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor port: Integer?
+    end
+
+    class TargetFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?port: Integer,
+        ?failure_code: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor port: Integer?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+    end
+
+    class TargetGroupConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?protocol: String,
+        ?protocol_version: String,
+        ?ip_address_type: String,
+        ?vpc_identifier: String,
+        ?health_check: Types::HealthCheckConfig,
+        ?lambda_event_structure_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor protocol_version: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor health_check: Types::HealthCheckConfig?
+      attr_accessor lambda_event_structure_version: String?
+    end
+
+    class TargetGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?created_at: Time,
+        ?port: Integer,
+        ?protocol: String,
+        ?ip_address_type: String,
+        ?vpc_identifier: String,
+        ?last_updated_at: Time,
+        ?status: String,
+        ?service_arns: Array[String],
+        ?lambda_event_structure_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor vpc_identifier: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor service_arns: Array[String]?
+      attr_accessor lambda_event_structure_version: String?
+    end
+
+    class TargetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?port: Integer,
+        ?status: String,
+        ?reason_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor port: Integer?
+      attr_accessor status: String?
+      attr_accessor reason_code: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccessLogSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log_subscription_identifier: String,
+        ?destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log_subscription_identifier: String?
+      attr_accessor destination_arn: String?
+    end
+
+    class UpdateAccessLogSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor destination_arn: String?
+    end
+
+    class UpdateListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?default_action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor default_action: Types::RuleAction?
+    end
+
+    class UpdateListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?protocol: String,
+        ?port: Integer,
+        ?service_arn: String,
+        ?service_id: String,
+        ?default_action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor service_arn: String?
+      attr_accessor service_id: String?
+      attr_accessor default_action: Types::RuleAction?
+    end
+
+    class UpdateResourceConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_identifier: String,
+        ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
+        ?allow_association_to_shareable_service_network: bool,
+        ?port_ranges: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_identifier: String?
+      attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
+      attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor port_ranges: Array[String]?
+    end
+
+    class UpdateResourceConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?resource_gateway_id: String,
+        ?resource_configuration_group_id: String,
+        ?type: String,
+        ?port_ranges: Array[String],
+        ?allow_association_to_shareable_service_network: bool,
+        ?protocol: String,
+        ?status: String,
+        ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor resource_configuration_group_id: String?
+      attr_accessor type: String?
+      attr_accessor port_ranges: Array[String]?
+      attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
+    end
+
+    class UpdateResourceGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_gateway_identifier: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_gateway_identifier: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class UpdateResourceGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class UpdateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?listener_identifier: String,
+        ?rule_identifier: String,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor listener_identifier: String?
+      attr_accessor rule_identifier: String?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class UpdateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?is_default: bool,
+        ?match: Types::RuleMatch,
+        ?priority: Integer,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor is_default: bool?
+      attr_accessor match: Types::RuleMatch?
+      attr_accessor priority: Integer?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class UpdateServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_identifier: String,
+        ?certificate_arn: String,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_identifier: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor auth_type: String?
+    end
+
+    class UpdateServiceNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_identifier: String,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_identifier: String?
+      attr_accessor auth_type: String?
+    end
+
+    class UpdateServiceNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor auth_type: String?
+    end
+
+    class UpdateServiceNetworkVpcAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_vpc_association_identifier: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_vpc_association_identifier: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class UpdateServiceNetworkVpcAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_by: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_by: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class UpdateServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?custom_domain_name: String,
+        ?certificate_arn: String,
+        ?auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor auth_type: String?
+    end
+
+    class UpdateTargetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+        ?health_check: Types::HealthCheckConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+      attr_accessor health_check: Types::HealthCheckConfig?
+    end
+
+    class UpdateTargetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+        ?config: Types::TargetGroupConfig,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor config: Types::TargetGroupConfig?
+      attr_accessor status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class WeightedTargetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_identifier: String,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_identifier: String?
+      attr_accessor weight: Integer?
+    end
+  end
+end

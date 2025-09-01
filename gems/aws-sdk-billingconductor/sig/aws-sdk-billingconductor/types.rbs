@@ -1,0 +1,1772 @@
+module Aws::Billingconductor
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountAssociationsListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?billing_group_arn: String,
+        ?account_name: String,
+        ?account_email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor billing_group_arn: String?
+      attr_accessor account_name: String?
+      attr_accessor account_email: String?
+    end
+
+    class AccountGrouping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_account_ids: Array[String],
+        ?auto_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_account_ids: Array[String]?
+      attr_accessor auto_associate: bool?
+    end
+
+    class AssociateAccountsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class AssociateAccountsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class AssociatePricingRulesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?pricing_rule_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor pricing_rule_arns: Array[String]?
+    end
+
+    class AssociatePricingRulesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class AssociateResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class AssociateResourceResponseElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?error: Types::AssociateResourceError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor error: Types::AssociateResourceError?
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class BatchAssociateResourcesToCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?resource_arns: Array[String],
+        ?billing_period_range: Types::CustomLineItemBillingPeriodRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange?
+    end
+
+    class BatchAssociateResourcesToCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successfully_associated_resources: Array[Types::AssociateResourceResponseElement],
+        ?failed_associated_resources: Array[Types::AssociateResourceResponseElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successfully_associated_resources: Array[Types::AssociateResourceResponseElement]?
+      attr_accessor failed_associated_resources: Array[Types::AssociateResourceResponseElement]?
+    end
+
+    class BatchDisassociateResourcesFromCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?resource_arns: Array[String],
+        ?billing_period_range: Types::CustomLineItemBillingPeriodRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange?
+    end
+
+    class BatchDisassociateResourcesFromCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successfully_disassociated_resources: Array[Types::DisassociateResourceResponseElement],
+        ?failed_disassociated_resources: Array[Types::DisassociateResourceResponseElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successfully_disassociated_resources: Array[Types::DisassociateResourceResponseElement]?
+      attr_accessor failed_disassociated_resources: Array[Types::DisassociateResourceResponseElement]?
+    end
+
+    class BillingGroupCostReportElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?aws_cost: String,
+        ?proforma_cost: String,
+        ?margin: String,
+        ?margin_percentage: String,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor aws_cost: String?
+      attr_accessor proforma_cost: String?
+      attr_accessor margin: String?
+      attr_accessor margin_percentage: String?
+      attr_accessor currency: String?
+    end
+
+    class BillingGroupCostReportResultElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?aws_cost: String,
+        ?proforma_cost: String,
+        ?margin: String,
+        ?margin_percentage: String,
+        ?currency: String,
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor aws_cost: String?
+      attr_accessor proforma_cost: String?
+      attr_accessor margin: String?
+      attr_accessor margin_percentage: String?
+      attr_accessor currency: String?
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    class BillingGroupListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?primary_account_id: String,
+        ?computation_preference: Types::ComputationPreference,
+        ?size: Integer,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?account_grouping: Types::ListBillingGroupAccountGrouping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor primary_account_id: String?
+      attr_accessor computation_preference: Types::ComputationPreference?
+      attr_accessor size: Integer?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor account_grouping: Types::ListBillingGroupAccountGrouping?
+    end
+
+    class BillingPeriodRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inclusive_start_billing_period: String,
+        ?exclusive_end_billing_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inclusive_start_billing_period: String?
+      attr_accessor exclusive_end_billing_period: String?
+    end
+
+    class ComputationPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_plan_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor reason: String?
+    end
+
+    class CreateBillingGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?account_grouping: Types::AccountGrouping,
+        ?computation_preference: Types::ComputationPreference,
+        ?primary_account_id: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor account_grouping: Types::AccountGrouping?
+      attr_accessor computation_preference: Types::ComputationPreference?
+      attr_accessor primary_account_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateBillingGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?billing_group_arn: String,
+        ?billing_period_range: Types::CustomLineItemBillingPeriodRange,
+        ?tags: Hash[String, String],
+        ?charge_details: Types::CustomLineItemChargeDetails,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor billing_group_arn: String?
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor charge_details: Types::CustomLineItemChargeDetails?
+      attr_accessor account_id: String?
+    end
+
+    class CreateCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateFreeTierConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activated: bool?
+    end
+
+    class CreatePricingPlanOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?pricing_rule_arns: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor pricing_rule_arns: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePricingPlanOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreatePricingRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?scope: String,
+        ?type: String,
+        ?modifier_percentage: Float,
+        ?service: String,
+        ?tags: Hash[String, String],
+        ?billing_entity: String,
+        ?tiering: Types::CreateTieringInput,
+        ?usage_type: String,
+        ?operation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor scope: String?
+      attr_accessor type: String?
+      attr_accessor modifier_percentage: Float?
+      attr_accessor service: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor billing_entity: String?
+      attr_accessor tiering: Types::CreateTieringInput?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+    end
+
+    class CreatePricingRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateTieringInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?free_tier: Types::CreateFreeTierConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor free_tier: Types::CreateFreeTierConfig?
+    end
+
+    class CustomLineItemBillingPeriodRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inclusive_start_billing_period: String,
+        ?exclusive_end_billing_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inclusive_start_billing_period: String?
+      attr_accessor exclusive_end_billing_period: String?
+    end
+
+    class CustomLineItemChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flat: Types::CustomLineItemFlatChargeDetails,
+        ?percentage: Types::CustomLineItemPercentageChargeDetails,
+        ?type: String,
+        ?line_item_filters: Array[Types::LineItemFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flat: Types::CustomLineItemFlatChargeDetails?
+      attr_accessor percentage: Types::CustomLineItemPercentageChargeDetails?
+      attr_accessor type: String?
+      attr_accessor line_item_filters: Array[Types::LineItemFilter]?
+    end
+
+    class CustomLineItemFlatChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_value: Float?
+    end
+
+    class CustomLineItemListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?charge_details: Types::ListCustomLineItemChargeDetails,
+        ?currency_code: String,
+        ?description: String,
+        ?product_code: String,
+        ?billing_group_arn: String,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+        ?association_size: Integer,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails?
+      attr_accessor currency_code: String?
+      attr_accessor description: String?
+      attr_accessor product_code: String?
+      attr_accessor billing_group_arn: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor association_size: Integer?
+      attr_accessor account_id: String?
+    end
+
+    class CustomLineItemPercentageChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percentage_value: Float,
+        ?associated_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percentage_value: Float?
+      attr_accessor associated_values: Array[String]?
+    end
+
+    class CustomLineItemVersionListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?charge_details: Types::ListCustomLineItemChargeDetails,
+        ?currency_code: String,
+        ?description: String,
+        ?product_code: String,
+        ?billing_group_arn: String,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+        ?association_size: Integer,
+        ?start_billing_period: String,
+        ?end_billing_period: String,
+        ?arn: String,
+        ?start_time: Integer,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails?
+      attr_accessor currency_code: String?
+      attr_accessor description: String?
+      attr_accessor product_code: String?
+      attr_accessor billing_group_arn: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor association_size: Integer?
+      attr_accessor start_billing_period: String?
+      attr_accessor end_billing_period: String?
+      attr_accessor arn: String?
+      attr_accessor start_time: Integer?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteBillingGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteBillingGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?billing_period_range: Types::CustomLineItemBillingPeriodRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange?
+    end
+
+    class DeleteCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePricingPlanOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePricingPlanOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePricingRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePricingRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DisassociateAccountsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class DisassociateAccountsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DisassociatePricingRulesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?pricing_rule_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor pricing_rule_arns: Array[String]?
+    end
+
+    class DisassociatePricingRulesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DisassociateResourceResponseElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?error: Types::AssociateResourceError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor error: Types::AssociateResourceError?
+    end
+
+    class FreeTierConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activated: bool?
+    end
+
+    class GetBillingGroupCostReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?billing_period_range: Types::BillingPeriodRange,
+        ?group_by: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor billing_period_range: Types::BillingPeriodRange?
+      attr_accessor group_by: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetBillingGroupCostReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_group_cost_report_results: Array[Types::BillingGroupCostReportResultElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_group_cost_report_results: Array[Types::BillingGroupCostReportResultElement]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class LineItemFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?match_option: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor match_option: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ListAccountAssociationsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: String,
+        ?account_id: String,
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: String?
+      attr_accessor account_id: String?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class ListAccountAssociationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?filters: Types::ListAccountAssociationsFilter,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor filters: Types::ListAccountAssociationsFilter?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountAssociationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_accounts: Array[Types::AccountAssociationsListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_accounts: Array[Types::AccountAssociationsListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillingGroupAccountGrouping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_associate: bool?
+    end
+
+    class ListBillingGroupCostReportsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_group_arns: Array[String]?
+    end
+
+    class ListBillingGroupCostReportsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::ListBillingGroupCostReportsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::ListBillingGroupCostReportsFilter?
+    end
+
+    class ListBillingGroupCostReportsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_group_cost_reports: Array[Types::BillingGroupCostReportElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_group_cost_reports: Array[Types::BillingGroupCostReportElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillingGroupsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+        ?pricing_plan: String,
+        ?statuses: Array[String],
+        ?auto_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+      attr_accessor pricing_plan: String?
+      attr_accessor statuses: Array[String]?
+      attr_accessor auto_associate: bool?
+    end
+
+    class ListBillingGroupsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::ListBillingGroupsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::ListBillingGroupsFilter?
+    end
+
+    class ListBillingGroupsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_groups: Array[Types::BillingGroupListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_groups: Array[Types::BillingGroupListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomLineItemChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flat: Types::ListCustomLineItemFlatChargeDetails,
+        ?percentage: Types::ListCustomLineItemPercentageChargeDetails,
+        ?type: String,
+        ?line_item_filters: Array[Types::LineItemFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flat: Types::ListCustomLineItemFlatChargeDetails?
+      attr_accessor percentage: Types::ListCustomLineItemPercentageChargeDetails?
+      attr_accessor type: String?
+      attr_accessor line_item_filters: Array[Types::LineItemFilter]?
+    end
+
+    class ListCustomLineItemFlatChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_value: Float?
+    end
+
+    class ListCustomLineItemPercentageChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percentage_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percentage_value: Float?
+    end
+
+    class ListCustomLineItemVersionsBillingPeriodRangeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_billing_period: String,
+        ?end_billing_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_billing_period: String?
+      attr_accessor end_billing_period: String?
+    end
+
+    class ListCustomLineItemVersionsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period_range: Types::ListCustomLineItemVersionsBillingPeriodRangeFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period_range: Types::ListCustomLineItemVersionsBillingPeriodRangeFilter?
+    end
+
+    class ListCustomLineItemVersionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::ListCustomLineItemVersionsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::ListCustomLineItemVersionsFilter?
+    end
+
+    class ListCustomLineItemVersionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_line_item_versions: Array[Types::CustomLineItemVersionListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_line_item_versions: Array[Types::CustomLineItemVersionListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomLineItemsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?billing_groups: Array[String],
+        ?arns: Array[String],
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor billing_groups: Array[String]?
+      attr_accessor arns: Array[String]?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class ListCustomLineItemsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::ListCustomLineItemsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::ListCustomLineItemsFilter?
+    end
+
+    class ListCustomLineItemsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_line_items: Array[Types::CustomLineItemListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_line_items: Array[Types::CustomLineItemListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingPlansAssociatedWithPricingRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_rule_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_rule_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingPlansAssociatedWithPricingRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_rule_arn: String,
+        ?pricing_plan_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_rule_arn: String?
+      attr_accessor pricing_plan_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingPlansFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class ListPricingPlansOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?filters: Types::ListPricingPlansFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor filters: Types::ListPricingPlansFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingPlansOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_plans: Array[Types::PricingPlanListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_plans: Array[Types::PricingPlanListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingRulesAssociatedToPricingPlanOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_plan_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_plan_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingRulesAssociatedToPricingPlanOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_plan_arn: String,
+        ?pricing_rule_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_plan_arn: String?
+      attr_accessor pricing_rule_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingRulesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class ListPricingRulesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?filters: Types::ListPricingRulesFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor filters: Types::ListPricingRulesFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPricingRulesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?pricing_rules: Array[Types::PricingRuleListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor pricing_rules: Array[Types::PricingRuleListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesAssociatedToCustomLineItemFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relationship: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relationship: String?
+    end
+
+    class ListResourcesAssociatedToCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::ListResourcesAssociatedToCustomLineItemFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::ListResourcesAssociatedToCustomLineItemFilter?
+    end
+
+    class ListResourcesAssociatedToCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?associated_resources: Array[Types::ListResourcesAssociatedToCustomLineItemResponseElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor associated_resources: Array[Types::ListResourcesAssociatedToCustomLineItemResponseElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesAssociatedToCustomLineItemResponseElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?relationship: String,
+        ?end_billing_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor relationship: String?
+      attr_accessor end_billing_period: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PricingPlanListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?size: Integer,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor size: Integer?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+    end
+
+    class PricingRuleListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?scope: String,
+        ?type: String,
+        ?modifier_percentage: Float,
+        ?service: String,
+        ?associated_pricing_plan_count: Integer,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+        ?billing_entity: String,
+        ?tiering: Types::Tiering,
+        ?usage_type: String,
+        ?operation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor scope: String?
+      attr_accessor type: String?
+      attr_accessor modifier_percentage: Float?
+      attr_accessor service: String?
+      attr_accessor associated_pricing_plan_count: Integer?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor billing_entity: String?
+      attr_accessor tiering: Types::Tiering?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?limit_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor limit_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class Tiering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?free_tier: Types::FreeTierConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor free_tier: Types::FreeTierConfig?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBillingGroupAccountGrouping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_associate: bool?
+    end
+
+    class UpdateBillingGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?computation_preference: Types::ComputationPreference,
+        ?description: String,
+        ?account_grouping: Types::UpdateBillingGroupAccountGrouping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor computation_preference: Types::ComputationPreference?
+      attr_accessor description: String?
+      attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping?
+    end
+
+    class UpdateBillingGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?primary_account_id: String,
+        ?pricing_plan_arn: String,
+        ?size: Integer,
+        ?last_modified_time: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?account_grouping: Types::UpdateBillingGroupAccountGrouping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor primary_account_id: String?
+      attr_accessor pricing_plan_arn: String?
+      attr_accessor size: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping?
+    end
+
+    class UpdateCustomLineItemChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flat: Types::UpdateCustomLineItemFlatChargeDetails,
+        ?percentage: Types::UpdateCustomLineItemPercentageChargeDetails,
+        ?line_item_filters: Array[Types::LineItemFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flat: Types::UpdateCustomLineItemFlatChargeDetails?
+      attr_accessor percentage: Types::UpdateCustomLineItemPercentageChargeDetails?
+      attr_accessor line_item_filters: Array[Types::LineItemFilter]?
+    end
+
+    class UpdateCustomLineItemFlatChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_value: Float?
+    end
+
+    class UpdateCustomLineItemOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?charge_details: Types::UpdateCustomLineItemChargeDetails,
+        ?billing_period_range: Types::CustomLineItemBillingPeriodRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_details: Types::UpdateCustomLineItemChargeDetails?
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange?
+    end
+
+    class UpdateCustomLineItemOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?billing_group_arn: String,
+        ?name: String,
+        ?description: String,
+        ?charge_details: Types::ListCustomLineItemChargeDetails,
+        ?last_modified_time: Integer,
+        ?association_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor billing_group_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor association_size: Integer?
+    end
+
+    class UpdateCustomLineItemPercentageChargeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percentage_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percentage_value: Float?
+    end
+
+    class UpdateFreeTierConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activated: bool?
+    end
+
+    class UpdatePricingPlanOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePricingPlanOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?size: Integer,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor size: Integer?
+      attr_accessor last_modified_time: Integer?
+    end
+
+    class UpdatePricingRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?modifier_percentage: Float,
+        ?tiering: Types::UpdateTieringInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor modifier_percentage: Float?
+      attr_accessor tiering: Types::UpdateTieringInput?
+    end
+
+    class UpdatePricingRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?scope: String,
+        ?type: String,
+        ?modifier_percentage: Float,
+        ?service: String,
+        ?associated_pricing_plan_count: Integer,
+        ?last_modified_time: Integer,
+        ?billing_entity: String,
+        ?tiering: Types::UpdateTieringInput,
+        ?usage_type: String,
+        ?operation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor scope: String?
+      attr_accessor type: String?
+      attr_accessor modifier_percentage: Float?
+      attr_accessor service: String?
+      attr_accessor associated_pricing_plan_count: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor billing_entity: String?
+      attr_accessor tiering: Types::UpdateTieringInput?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+    end
+
+    class UpdateTieringInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?free_tier: Types::UpdateFreeTierConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor free_tier: Types::UpdateFreeTierConfig?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

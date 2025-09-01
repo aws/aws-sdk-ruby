@@ -1,0 +1,1169 @@
+module Aws::Forecast
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Forecast::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAutoPredictorResponse
+      include Smithy::Client::_Response[Types::CreateAutoPredictorResponse]
+      def predictor_arn: () -> String?
+    end
+    def create_auto_predictor: (
+      ?predictor_name: String,
+      ?forecast_horizon: Integer,
+      ?forecast_types: Array[String],
+      ?forecast_dimensions: Array[String],
+      ?forecast_frequency: String,
+      ?data_config: {
+        dataset_group_arn: String,
+        attribute_configs: Array[
+          {
+            attribute_name: String,
+            transformations: Hash[String, String]
+          }
+        ],
+        additional_datasets: Array[
+          {
+            name: untyped,
+            configuration: Hash[String,
+              Array[String]
+            ]
+          }
+        ]
+      },
+      ?encryption_config: {
+        role_arn: String,
+        kms_key_arn: String
+      },
+      ?reference_predictor_arn: String,
+      ?optimization_metric: String,
+      ?explain_predictor: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?monitor_config: {
+        monitor_name: String
+      },
+      ?time_alignment_boundary: {
+        month: String,
+        day_of_month: Integer,
+        day_of_week: String,
+        hour: Integer
+      }
+    ) -> _CreateAutoPredictorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutoPredictorResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_arn: () -> String?
+    end
+    def create_dataset: (
+      ?dataset_name: String,
+      ?domain: String,
+      ?dataset_type: String,
+      ?data_frequency: String,
+      ?schema: {
+        attributes: Array[
+          {
+            attribute_name: String,
+            attribute_type: String
+          }
+        ]
+      },
+      ?encryption_config: {
+        role_arn: String,
+        kms_key_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDatasetGroupResponse
+      include Smithy::Client::_Response[Types::CreateDatasetGroupResponse]
+      def dataset_group_arn: () -> String?
+    end
+    def create_dataset_group: (
+      ?dataset_group_name: String,
+      ?domain: String,
+      ?dataset_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetGroupResponse
+
+    interface _CreateDatasetImportJobResponse
+      include Smithy::Client::_Response[Types::CreateDatasetImportJobResponse]
+      def dataset_import_job_arn: () -> String?
+    end
+    def create_dataset_import_job: (
+      ?dataset_import_job_name: String,
+      ?dataset_arn: String,
+      ?data_source: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?timestamp_format: String,
+      ?time_zone: String,
+      ?use_geolocation_for_time_zone: bool,
+      ?geolocation_format: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?format: String,
+      ?import_mode: String
+    ) -> _CreateDatasetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetImportJobResponse
+
+    interface _CreateExplainabilityResponse
+      include Smithy::Client::_Response[Types::CreateExplainabilityResponse]
+      def explainability_arn: () -> String?
+    end
+    def create_explainability: (
+      ?explainability_name: String,
+      ?resource_arn: String,
+      ?explainability_config: {
+        time_series_granularity: String,
+        time_point_granularity: String
+      },
+      ?data_source: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?schema: {
+        attributes: Array[
+          {
+            attribute_name: String,
+            attribute_type: String
+          }
+        ]
+      },
+      ?enable_visualization: bool,
+      ?start_date_time: String,
+      ?end_date_time: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateExplainabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExplainabilityResponse
+
+    interface _CreateExplainabilityExportResponse
+      include Smithy::Client::_Response[Types::CreateExplainabilityExportResponse]
+      def explainability_export_arn: () -> String?
+    end
+    def create_explainability_export: (
+      ?explainability_export_name: String,
+      ?explainability_arn: String,
+      ?destination: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?format: String
+    ) -> _CreateExplainabilityExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExplainabilityExportResponse
+
+    interface _CreateForecastResponse
+      include Smithy::Client::_Response[Types::CreateForecastResponse]
+      def forecast_arn: () -> String?
+    end
+    def create_forecast: (
+      ?forecast_name: String,
+      ?predictor_arn: String,
+      ?forecast_types: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?time_series_selector: {
+        time_series_identifiers: {
+          data_source: {
+            s3_config: {
+              path: String,
+              role_arn: String,
+              kms_key_arn: String
+            }
+          },
+          schema: {
+            attributes: Array[
+              {
+                attribute_name: String,
+                attribute_type: String
+              }
+            ]
+          },
+          format: String
+        }
+      }
+    ) -> _CreateForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateForecastResponse
+
+    interface _CreateForecastExportJobResponse
+      include Smithy::Client::_Response[Types::CreateForecastExportJobResponse]
+      def forecast_export_job_arn: () -> String?
+    end
+    def create_forecast_export_job: (
+      ?forecast_export_job_name: String,
+      ?forecast_arn: String,
+      ?destination: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?format: String
+    ) -> _CreateForecastExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateForecastExportJobResponse
+
+    interface _CreateMonitorResponse
+      include Smithy::Client::_Response[Types::CreateMonitorResponse]
+      def monitor_arn: () -> String?
+    end
+    def create_monitor: (
+      ?monitor_name: String,
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMonitorResponse
+
+    interface _CreatePredictorResponse
+      include Smithy::Client::_Response[Types::CreatePredictorResponse]
+      def predictor_arn: () -> String?
+    end
+    def create_predictor: (
+      ?predictor_name: String,
+      ?algorithm_arn: String,
+      ?forecast_horizon: Integer,
+      ?forecast_types: Array[String],
+      ?perform_auto_ml: bool,
+      ?auto_ml_override_strategy: String,
+      ?perform_hpo: bool,
+      ?training_parameters: Hash[String, String],
+      ?evaluation_parameters: {
+        number_of_backtest_windows: Integer,
+        back_test_window_offset: untyped
+      },
+      ?hpo_config: {
+        parameter_ranges: {
+          categorical_parameter_ranges: Array[
+            {
+              name: String,
+              values: Array[String]
+            }
+          ],
+          continuous_parameter_ranges: Array[
+            {
+              name: untyped,
+              max_value: Float,
+              min_value: untyped,
+              scaling_type: String
+            }
+          ],
+          integer_parameter_ranges: Array[
+            {
+              name: untyped,
+              max_value: Integer,
+              min_value: untyped,
+              scaling_type: untyped
+            }
+          ]
+        }
+      },
+      ?input_data_config: {
+        dataset_group_arn: String,
+        supplementary_features: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?featurization_config: {
+        forecast_frequency: String,
+        forecast_dimensions: Array[String],
+        featurizations: Array[
+          {
+            attribute_name: String,
+            featurization_pipeline: Array[
+              {
+                featurization_method_name: String,
+                featurization_method_parameters: Hash[String, String]
+              }
+            ]
+          }
+        ]
+      },
+      ?encryption_config: {
+        role_arn: String,
+        kms_key_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?optimization_metric: String
+    ) -> _CreatePredictorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePredictorResponse
+
+    interface _CreatePredictorBacktestExportJobResponse
+      include Smithy::Client::_Response[Types::CreatePredictorBacktestExportJobResponse]
+      def predictor_backtest_export_job_arn: () -> String?
+    end
+    def create_predictor_backtest_export_job: (
+      ?predictor_backtest_export_job_name: String,
+      ?predictor_arn: String,
+      ?destination: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?format: String
+    ) -> _CreatePredictorBacktestExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePredictorBacktestExportJobResponse
+
+    interface _CreateWhatIfAnalysisResponse
+      include Smithy::Client::_Response[Types::CreateWhatIfAnalysisResponse]
+      def what_if_analysis_arn: () -> String?
+    end
+    def create_what_if_analysis: (
+      ?what_if_analysis_name: String,
+      ?forecast_arn: String,
+      ?time_series_selector: {
+        time_series_identifiers: {
+          data_source: {
+            s3_config: {
+              path: String,
+              role_arn: String,
+              kms_key_arn: String
+            }
+          },
+          schema: {
+            attributes: Array[
+              {
+                attribute_name: String,
+                attribute_type: String
+              }
+            ]
+          },
+          format: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWhatIfAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatIfAnalysisResponse
+
+    interface _CreateWhatIfForecastResponse
+      include Smithy::Client::_Response[Types::CreateWhatIfForecastResponse]
+      def what_if_forecast_arn: () -> String?
+    end
+    def create_what_if_forecast: (
+      ?what_if_forecast_name: String,
+      ?what_if_analysis_arn: String,
+      ?time_series_transformations: Array[
+        {
+          action: {
+            attribute_name: String,
+            operation: String,
+            value: Float
+          },
+          time_series_conditions: Array[
+            {
+              attribute_name: untyped,
+              attribute_value: String,
+              condition: String
+            }
+          ]
+        }
+      ],
+      ?time_series_replacements_data_source: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        },
+        schema: {
+          attributes: Array[
+            {
+              attribute_name: String,
+              attribute_type: String
+            }
+          ]
+        },
+        format: String,
+        timestamp_format: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWhatIfForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatIfForecastResponse
+
+    interface _CreateWhatIfForecastExportResponse
+      include Smithy::Client::_Response[Types::CreateWhatIfForecastExportResponse]
+      def what_if_forecast_export_arn: () -> String?
+    end
+    def create_what_if_forecast_export: (
+      ?what_if_forecast_export_name: String,
+      ?what_if_forecast_arns: Array[String],
+      ?destination: {
+        s3_config: {
+          path: String,
+          role_arn: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?format: String
+    ) -> _CreateWhatIfForecastExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatIfForecastExportResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset: (
+      ?dataset_arn: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteDatasetGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset_group: (
+      ?dataset_group_arn: String
+    ) -> _DeleteDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetGroupResponse
+
+    interface _DeleteDatasetImportJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset_import_job: (
+      ?dataset_import_job_arn: String
+    ) -> _DeleteDatasetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetImportJobResponse
+
+    interface _DeleteExplainabilityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_explainability: (
+      ?explainability_arn: String
+    ) -> _DeleteExplainabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExplainabilityResponse
+
+    interface _DeleteExplainabilityExportResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_explainability_export: (
+      ?explainability_export_arn: String
+    ) -> _DeleteExplainabilityExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExplainabilityExportResponse
+
+    interface _DeleteForecastResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_forecast: (
+      ?forecast_arn: String
+    ) -> _DeleteForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteForecastResponse
+
+    interface _DeleteForecastExportJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_forecast_export_job: (
+      ?forecast_export_job_arn: String
+    ) -> _DeleteForecastExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteForecastExportJobResponse
+
+    interface _DeleteMonitorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_monitor: (
+      ?monitor_arn: String
+    ) -> _DeleteMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMonitorResponse
+
+    interface _DeletePredictorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_predictor: (
+      ?predictor_arn: String
+    ) -> _DeletePredictorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePredictorResponse
+
+    interface _DeletePredictorBacktestExportJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_predictor_backtest_export_job: (
+      ?predictor_backtest_export_job_arn: String
+    ) -> _DeletePredictorBacktestExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePredictorBacktestExportJobResponse
+
+    interface _DeleteResourceTreeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_tree: (
+      ?resource_arn: String
+    ) -> _DeleteResourceTreeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceTreeResponse
+
+    interface _DeleteWhatIfAnalysisResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_what_if_analysis: (
+      ?what_if_analysis_arn: String
+    ) -> _DeleteWhatIfAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWhatIfAnalysisResponse
+
+    interface _DeleteWhatIfForecastResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_what_if_forecast: (
+      ?what_if_forecast_arn: String
+    ) -> _DeleteWhatIfForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWhatIfForecastResponse
+
+    interface _DeleteWhatIfForecastExportResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_what_if_forecast_export: (
+      ?what_if_forecast_export_arn: String
+    ) -> _DeleteWhatIfForecastExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWhatIfForecastExportResponse
+
+    interface _DescribeAutoPredictorResponse
+      include Smithy::Client::_Response[Types::DescribeAutoPredictorResponse]
+      def predictor_arn: () -> String?
+      def predictor_name: () -> String?
+      def forecast_horizon: () -> Integer?
+      def forecast_types: () -> Array[String]?
+      def forecast_frequency: () -> String?
+      def forecast_dimensions: () -> Array[String]?
+      def dataset_import_job_arns: () -> Array[String]?
+      def data_config: () -> Types::DataConfig?
+      def encryption_config: () -> Types::EncryptionConfig?
+      def reference_predictor_summary: () -> Types::ReferencePredictorSummary?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def optimization_metric: () -> String?
+      def explainability_info: () -> Types::ExplainabilityInfo?
+      def monitor_info: () -> Types::MonitorInfo?
+      def time_alignment_boundary: () -> Types::TimeAlignmentBoundary?
+    end
+    def describe_auto_predictor: (
+      ?predictor_arn: String
+    ) -> _DescribeAutoPredictorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutoPredictorResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset_arn: () -> String?
+      def dataset_name: () -> String?
+      def domain: () -> String?
+      def dataset_type: () -> String?
+      def data_frequency: () -> String?
+      def schema: () -> Types::Schema?
+      def encryption_config: () -> Types::EncryptionConfig?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def describe_dataset: (
+      ?dataset_arn: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDatasetGroupResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetGroupResponse]
+      def dataset_group_name: () -> String?
+      def dataset_group_arn: () -> String?
+      def dataset_arns: () -> Array[String]?
+      def domain: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def describe_dataset_group: (
+      ?dataset_group_arn: String
+    ) -> _DescribeDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetGroupResponse
+
+    interface _DescribeDatasetImportJobResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetImportJobResponse]
+      def dataset_import_job_name: () -> String?
+      def dataset_import_job_arn: () -> String?
+      def dataset_arn: () -> String?
+      def timestamp_format: () -> String?
+      def time_zone: () -> String?
+      def use_geolocation_for_time_zone: () -> bool?
+      def geolocation_format: () -> String?
+      def data_source: () -> Types::DataSource?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def field_statistics: () -> Hash[String, Types::Statistics]?
+      def data_size: () -> Float?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def format: () -> String?
+      def import_mode: () -> String?
+    end
+    def describe_dataset_import_job: (
+      ?dataset_import_job_arn: String
+    ) -> _DescribeDatasetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetImportJobResponse
+
+    interface _DescribeExplainabilityResponse
+      include Smithy::Client::_Response[Types::DescribeExplainabilityResponse]
+      def explainability_arn: () -> String?
+      def explainability_name: () -> String?
+      def resource_arn: () -> String?
+      def explainability_config: () -> Types::ExplainabilityConfig?
+      def enable_visualization: () -> bool?
+      def data_source: () -> Types::DataSource?
+      def schema: () -> Types::Schema?
+      def start_date_time: () -> String?
+      def end_date_time: () -> String?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def message: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def describe_explainability: (
+      ?explainability_arn: String
+    ) -> _DescribeExplainabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExplainabilityResponse
+
+    interface _DescribeExplainabilityExportResponse
+      include Smithy::Client::_Response[Types::DescribeExplainabilityExportResponse]
+      def explainability_export_arn: () -> String?
+      def explainability_export_name: () -> String?
+      def explainability_arn: () -> String?
+      def destination: () -> Types::DataDestination?
+      def message: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def format: () -> String?
+    end
+    def describe_explainability_export: (
+      ?explainability_export_arn: String
+    ) -> _DescribeExplainabilityExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExplainabilityExportResponse
+
+    interface _DescribeForecastResponse
+      include Smithy::Client::_Response[Types::DescribeForecastResponse]
+      def forecast_arn: () -> String?
+      def forecast_name: () -> String?
+      def forecast_types: () -> Array[String]?
+      def predictor_arn: () -> String?
+      def dataset_group_arn: () -> String?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def time_series_selector: () -> Types::TimeSeriesSelector?
+    end
+    def describe_forecast: (
+      ?forecast_arn: String
+    ) -> _DescribeForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeForecastResponse
+
+    interface _DescribeForecastExportJobResponse
+      include Smithy::Client::_Response[Types::DescribeForecastExportJobResponse]
+      def forecast_export_job_arn: () -> String?
+      def forecast_export_job_name: () -> String?
+      def forecast_arn: () -> String?
+      def destination: () -> Types::DataDestination?
+      def message: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def format: () -> String?
+    end
+    def describe_forecast_export_job: (
+      ?forecast_export_job_arn: String
+    ) -> _DescribeForecastExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeForecastExportJobResponse
+
+    interface _DescribeMonitorResponse
+      include Smithy::Client::_Response[Types::DescribeMonitorResponse]
+      def monitor_name: () -> String?
+      def monitor_arn: () -> String?
+      def resource_arn: () -> String?
+      def status: () -> String?
+      def last_evaluation_time: () -> Time?
+      def last_evaluation_state: () -> String?
+      def baseline: () -> Types::Baseline?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def estimated_evaluation_time_remaining_in_minutes: () -> Integer?
+    end
+    def describe_monitor: (
+      ?monitor_arn: String
+    ) -> _DescribeMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMonitorResponse
+
+    interface _DescribePredictorResponse
+      include Smithy::Client::_Response[Types::DescribePredictorResponse]
+      def predictor_arn: () -> String?
+      def predictor_name: () -> String?
+      def algorithm_arn: () -> String?
+      def auto_ml_algorithm_arns: () -> Array[String]?
+      def forecast_horizon: () -> Integer?
+      def forecast_types: () -> Array[String]?
+      def perform_auto_ml: () -> bool?
+      def auto_ml_override_strategy: () -> String?
+      def perform_hpo: () -> bool?
+      def training_parameters: () -> Hash[String, String]?
+      def evaluation_parameters: () -> Types::EvaluationParameters?
+      def hpo_config: () -> Types::HyperParameterTuningJobConfig?
+      def input_data_config: () -> Types::InputDataConfig?
+      def featurization_config: () -> Types::FeaturizationConfig?
+      def encryption_config: () -> Types::EncryptionConfig?
+      def predictor_execution_details: () -> Types::PredictorExecutionDetails?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def is_auto_predictor: () -> bool?
+      def dataset_import_job_arns: () -> Array[String]?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def optimization_metric: () -> String?
+    end
+    def describe_predictor: (
+      ?predictor_arn: String
+    ) -> _DescribePredictorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePredictorResponse
+
+    interface _DescribePredictorBacktestExportJobResponse
+      include Smithy::Client::_Response[Types::DescribePredictorBacktestExportJobResponse]
+      def predictor_backtest_export_job_arn: () -> String?
+      def predictor_backtest_export_job_name: () -> String?
+      def predictor_arn: () -> String?
+      def destination: () -> Types::DataDestination?
+      def message: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def format: () -> String?
+    end
+    def describe_predictor_backtest_export_job: (
+      ?predictor_backtest_export_job_arn: String
+    ) -> _DescribePredictorBacktestExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePredictorBacktestExportJobResponse
+
+    interface _DescribeWhatIfAnalysisResponse
+      include Smithy::Client::_Response[Types::DescribeWhatIfAnalysisResponse]
+      def what_if_analysis_name: () -> String?
+      def what_if_analysis_arn: () -> String?
+      def forecast_arn: () -> String?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def time_series_selector: () -> Types::TimeSeriesSelector?
+    end
+    def describe_what_if_analysis: (
+      ?what_if_analysis_arn: String
+    ) -> _DescribeWhatIfAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWhatIfAnalysisResponse
+
+    interface _DescribeWhatIfForecastResponse
+      include Smithy::Client::_Response[Types::DescribeWhatIfForecastResponse]
+      def what_if_forecast_name: () -> String?
+      def what_if_forecast_arn: () -> String?
+      def what_if_analysis_arn: () -> String?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def status: () -> String?
+      def message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def time_series_transformations: () -> Array[Types::TimeSeriesTransformation]?
+      def time_series_replacements_data_source: () -> Types::TimeSeriesReplacementsDataSource?
+      def forecast_types: () -> Array[String]?
+    end
+    def describe_what_if_forecast: (
+      ?what_if_forecast_arn: String
+    ) -> _DescribeWhatIfForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWhatIfForecastResponse
+
+    interface _DescribeWhatIfForecastExportResponse
+      include Smithy::Client::_Response[Types::DescribeWhatIfForecastExportResponse]
+      def what_if_forecast_export_arn: () -> String?
+      def what_if_forecast_export_name: () -> String?
+      def what_if_forecast_arns: () -> Array[String]?
+      def destination: () -> Types::DataDestination?
+      def message: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def estimated_time_remaining_in_minutes: () -> Integer?
+      def last_modification_time: () -> Time?
+      def format: () -> String?
+    end
+    def describe_what_if_forecast_export: (
+      ?what_if_forecast_export_arn: String
+    ) -> _DescribeWhatIfForecastExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWhatIfForecastExportResponse
+
+    interface _GetAccuracyMetricsResponse
+      include Smithy::Client::_Response[Types::GetAccuracyMetricsResponse]
+      def predictor_evaluation_results: () -> Array[Types::EvaluationResult]?
+      def is_auto_predictor: () -> bool?
+      def auto_ml_override_strategy: () -> String?
+      def optimization_metric: () -> String?
+    end
+    def get_accuracy_metrics: (
+      ?predictor_arn: String
+    ) -> _GetAccuracyMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccuracyMetricsResponse
+
+    interface _ListDatasetGroupsResponse
+      include Smithy::Client::_Response[Types::ListDatasetGroupsResponse]
+      def dataset_groups: () -> Array[Types::DatasetGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetGroupsResponse
+
+    interface _ListDatasetImportJobsResponse
+      include Smithy::Client::_Response[Types::ListDatasetImportJobsResponse]
+      def dataset_import_jobs: () -> Array[Types::DatasetImportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_import_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListDatasetImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetImportJobsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def datasets: () -> Array[Types::DatasetSummary]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListExplainabilitiesResponse
+      include Smithy::Client::_Response[Types::ListExplainabilitiesResponse]
+      def explainabilities: () -> Array[Types::ExplainabilitySummary]?
+      def next_token: () -> String?
+    end
+    def list_explainabilities: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListExplainabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExplainabilitiesResponse
+
+    interface _ListExplainabilityExportsResponse
+      include Smithy::Client::_Response[Types::ListExplainabilityExportsResponse]
+      def explainability_exports: () -> Array[Types::ExplainabilityExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_explainability_exports: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListExplainabilityExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExplainabilityExportsResponse
+
+    interface _ListForecastExportJobsResponse
+      include Smithy::Client::_Response[Types::ListForecastExportJobsResponse]
+      def forecast_export_jobs: () -> Array[Types::ForecastExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_forecast_export_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListForecastExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListForecastExportJobsResponse
+
+    interface _ListForecastsResponse
+      include Smithy::Client::_Response[Types::ListForecastsResponse]
+      def forecasts: () -> Array[Types::ForecastSummary]?
+      def next_token: () -> String?
+    end
+    def list_forecasts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListForecastsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListForecastsResponse
+
+    interface _ListMonitorEvaluationsResponse
+      include Smithy::Client::_Response[Types::ListMonitorEvaluationsResponse]
+      def next_token: () -> String?
+      def predictor_monitor_evaluations: () -> Array[Types::PredictorMonitorEvaluation]?
+    end
+    def list_monitor_evaluations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?monitor_arn: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListMonitorEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMonitorEvaluationsResponse
+
+    interface _ListMonitorsResponse
+      include Smithy::Client::_Response[Types::ListMonitorsResponse]
+      def monitors: () -> Array[Types::MonitorSummary]?
+      def next_token: () -> String?
+    end
+    def list_monitors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListMonitorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMonitorsResponse
+
+    interface _ListPredictorBacktestExportJobsResponse
+      include Smithy::Client::_Response[Types::ListPredictorBacktestExportJobsResponse]
+      def predictor_backtest_export_jobs: () -> Array[Types::PredictorBacktestExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_predictor_backtest_export_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListPredictorBacktestExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPredictorBacktestExportJobsResponse
+
+    interface _ListPredictorsResponse
+      include Smithy::Client::_Response[Types::ListPredictorsResponse]
+      def predictors: () -> Array[Types::PredictorSummary]?
+      def next_token: () -> String?
+    end
+    def list_predictors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListPredictorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPredictorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWhatIfAnalysesResponse
+      include Smithy::Client::_Response[Types::ListWhatIfAnalysesResponse]
+      def what_if_analyses: () -> Array[Types::WhatIfAnalysisSummary]?
+      def next_token: () -> String?
+    end
+    def list_what_if_analyses: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListWhatIfAnalysesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWhatIfAnalysesResponse
+
+    interface _ListWhatIfForecastExportsResponse
+      include Smithy::Client::_Response[Types::ListWhatIfForecastExportsResponse]
+      def what_if_forecast_exports: () -> Array[Types::WhatIfForecastExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_what_if_forecast_exports: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListWhatIfForecastExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWhatIfForecastExportsResponse
+
+    interface _ListWhatIfForecastsResponse
+      include Smithy::Client::_Response[Types::ListWhatIfForecastsResponse]
+      def what_if_forecasts: () -> Array[Types::WhatIfForecastSummary]?
+      def next_token: () -> String?
+    end
+    def list_what_if_forecasts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          condition: String
+        }
+      ]
+    ) -> _ListWhatIfForecastsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWhatIfForecastsResponse
+
+    interface _ResumeResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def resume_resource: (
+      ?resource_arn: String
+    ) -> _ResumeResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeResourceResponse
+
+    interface _StopResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_resource: (
+      ?resource_arn: String
+    ) -> _StopResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDatasetGroupResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetGroupResponse]
+    end
+    def update_dataset_group: (
+      ?dataset_group_arn: String,
+      ?dataset_arns: Array[String]
+    ) -> _UpdateDatasetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetGroupResponse
+  end
+end

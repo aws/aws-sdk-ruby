@@ -1,0 +1,557 @@
+module Aws::Wisdom
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Wisdom::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAssistantResponse
+      include Smithy::Client::_Response[Types::CreateAssistantOutput]
+      def assistant: () -> Types::AssistantData?
+    end
+    def create_assistant: (
+      ?client_token: String,
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?server_side_encryption_configuration: {
+        kms_key_id: String
+      }
+    ) -> _CreateAssistantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssistantResponse
+
+    interface _CreateAssistantAssociationResponse
+      include Smithy::Client::_Response[Types::CreateAssistantAssociationOutput]
+      def assistant_association: () -> Types::AssistantAssociationData?
+    end
+    def create_assistant_association: (
+      ?assistant_id: String,
+      ?association_type: String,
+      ?association: {
+        knowledge_base_id: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAssistantAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssistantAssociationResponse
+
+    interface _CreateContentResponse
+      include Smithy::Client::_Response[Types::CreateContentOutput]
+      def content: () -> Types::ContentData?
+    end
+    def create_content: (
+      ?knowledge_base_id: String,
+      ?name: String,
+      ?title: String,
+      ?override_link_out_uri: String,
+      ?metadata: Hash[String, String],
+      ?upload_id: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContentResponse
+
+    interface _CreateKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::CreateKnowledgeBaseOutput]
+      def knowledge_base: () -> Types::KnowledgeBaseData?
+    end
+    def create_knowledge_base: (
+      ?client_token: String,
+      ?name: String,
+      ?knowledge_base_type: String,
+      ?source_configuration: {
+        app_integrations: {
+          app_integration_arn: String,
+          object_fields: Array[String]
+        }
+      },
+      ?rendering_configuration: {
+        template_uri: String
+      },
+      ?server_side_encryption_configuration: {
+        kms_key_id: String
+      },
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKnowledgeBaseResponse
+
+    interface _CreateQuickResponseResponse
+      include Smithy::Client::_Response[Types::CreateQuickResponseResponse]
+      def quick_response: () -> Types::QuickResponseData?
+    end
+    def create_quick_response: (
+      ?knowledge_base_id: String,
+      ?name: String,
+      ?content: {
+        content: String
+      },
+      ?content_type: String,
+      ?grouping_configuration: {
+        criteria: String,
+        values: Array[String]
+      },
+      ?description: String,
+      ?shortcut_key: String,
+      ?is_active: bool,
+      ?channels: Array[String],
+      ?language: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateQuickResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuickResponseResponse
+
+    interface _CreateSessionResponse
+      include Smithy::Client::_Response[Types::CreateSessionOutput]
+      def session: () -> Types::SessionData?
+    end
+    def create_session: (
+      ?client_token: String,
+      ?assistant_id: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
+
+    interface _DeleteAssistantResponse
+      include Smithy::Client::_Response[Types::DeleteAssistantOutput]
+    end
+    def delete_assistant: (
+      ?assistant_id: String
+    ) -> _DeleteAssistantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssistantResponse
+
+    interface _DeleteAssistantAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteAssistantAssociationOutput]
+    end
+    def delete_assistant_association: (
+      ?assistant_association_id: String,
+      ?assistant_id: String
+    ) -> _DeleteAssistantAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssistantAssociationResponse
+
+    interface _DeleteContentResponse
+      include Smithy::Client::_Response[Types::DeleteContentOutput]
+    end
+    def delete_content: (
+      ?knowledge_base_id: String,
+      ?content_id: String
+    ) -> _DeleteContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContentResponse
+
+    interface _DeleteImportJobResponse
+      include Smithy::Client::_Response[Types::DeleteImportJobResponse]
+    end
+    def delete_import_job: (
+      ?knowledge_base_id: String,
+      ?import_job_id: String
+    ) -> _DeleteImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImportJobResponse
+
+    interface _DeleteKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::DeleteKnowledgeBaseOutput]
+    end
+    def delete_knowledge_base: (
+      ?knowledge_base_id: String
+    ) -> _DeleteKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKnowledgeBaseResponse
+
+    interface _DeleteQuickResponseResponse
+      include Smithy::Client::_Response[Types::DeleteQuickResponseResponse]
+    end
+    def delete_quick_response: (
+      ?knowledge_base_id: String,
+      ?quick_response_id: String
+    ) -> _DeleteQuickResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQuickResponseResponse
+
+    interface _GetAssistantResponse
+      include Smithy::Client::_Response[Types::GetAssistantOutput]
+      def assistant: () -> Types::AssistantData?
+    end
+    def get_assistant: (
+      ?assistant_id: String
+    ) -> _GetAssistantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssistantResponse
+
+    interface _GetAssistantAssociationResponse
+      include Smithy::Client::_Response[Types::GetAssistantAssociationOutput]
+      def assistant_association: () -> Types::AssistantAssociationData?
+    end
+    def get_assistant_association: (
+      ?assistant_association_id: String,
+      ?assistant_id: String
+    ) -> _GetAssistantAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssistantAssociationResponse
+
+    interface _GetContentResponse
+      include Smithy::Client::_Response[Types::GetContentOutput]
+      def content: () -> Types::ContentData?
+    end
+    def get_content: (
+      ?content_id: String,
+      ?knowledge_base_id: String
+    ) -> _GetContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContentResponse
+
+    interface _GetContentSummaryResponse
+      include Smithy::Client::_Response[Types::GetContentSummaryOutput]
+      def content_summary: () -> Types::ContentSummary?
+    end
+    def get_content_summary: (
+      ?content_id: String,
+      ?knowledge_base_id: String
+    ) -> _GetContentSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContentSummaryResponse
+
+    interface _GetImportJobResponse
+      include Smithy::Client::_Response[Types::GetImportJobResponse]
+      def import_job: () -> Types::ImportJobData?
+    end
+    def get_import_job: (
+      ?import_job_id: String,
+      ?knowledge_base_id: String
+    ) -> _GetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportJobResponse
+
+    interface _GetKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::GetKnowledgeBaseOutput]
+      def knowledge_base: () -> Types::KnowledgeBaseData?
+    end
+    def get_knowledge_base: (
+      ?knowledge_base_id: String
+    ) -> _GetKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKnowledgeBaseResponse
+
+    interface _GetQuickResponseResponse
+      include Smithy::Client::_Response[Types::GetQuickResponseResponse]
+      def quick_response: () -> Types::QuickResponseData?
+    end
+    def get_quick_response: (
+      ?quick_response_id: String,
+      ?knowledge_base_id: String
+    ) -> _GetQuickResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQuickResponseResponse
+
+    interface _GetRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetRecommendationsOutput]
+      def recommendations: () -> Array[Types::RecommendationData]?
+      def triggers: () -> Array[Types::RecommendationTrigger]?
+    end
+    def get_recommendations: (
+      ?assistant_id: String,
+      ?session_id: String,
+      ?max_results: Integer,
+      ?wait_time_seconds: Integer
+    ) -> _GetRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationsResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionOutput]
+      def session: () -> Types::SessionData?
+    end
+    def get_session: (
+      ?assistant_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _ListAssistantAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAssistantAssociationsOutput]
+      def assistant_association_summaries: () -> Array[Types::AssistantAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_assistant_associations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assistant_id: String
+    ) -> _ListAssistantAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssistantAssociationsResponse
+
+    interface _ListAssistantsResponse
+      include Smithy::Client::_Response[Types::ListAssistantsOutput]
+      def assistant_summaries: () -> Array[Types::AssistantSummary]?
+      def next_token: () -> String?
+    end
+    def list_assistants: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssistantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssistantsResponse
+
+    interface _ListContentsResponse
+      include Smithy::Client::_Response[Types::ListContentsOutput]
+      def content_summaries: () -> Array[Types::ContentSummary]?
+      def next_token: () -> String?
+    end
+    def list_contents: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?knowledge_base_id: String
+    ) -> _ListContentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContentsResponse
+
+    interface _ListImportJobsResponse
+      include Smithy::Client::_Response[Types::ListImportJobsResponse]
+      def import_job_summaries: () -> Array[Types::ImportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_import_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?knowledge_base_id: String
+    ) -> _ListImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportJobsResponse
+
+    interface _ListKnowledgeBasesResponse
+      include Smithy::Client::_Response[Types::ListKnowledgeBasesOutput]
+      def knowledge_base_summaries: () -> Array[Types::KnowledgeBaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_knowledge_bases: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKnowledgeBasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKnowledgeBasesResponse
+
+    interface _ListQuickResponsesResponse
+      include Smithy::Client::_Response[Types::ListQuickResponsesResponse]
+      def quick_response_summaries: () -> Array[Types::QuickResponseSummary]?
+      def next_token: () -> String?
+    end
+    def list_quick_responses: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?knowledge_base_id: String
+    ) -> _ListQuickResponsesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuickResponsesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _NotifyRecommendationsReceivedResponse
+      include Smithy::Client::_Response[Types::NotifyRecommendationsReceivedOutput]
+      def recommendation_ids: () -> Array[String]?
+      def errors: () -> Array[Types::NotifyRecommendationsReceivedError]?
+    end
+    def notify_recommendations_received: (
+      ?assistant_id: String,
+      ?session_id: String,
+      ?recommendation_ids: Array[String]
+    ) -> _NotifyRecommendationsReceivedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyRecommendationsReceivedResponse
+
+    interface _QueryAssistantResponse
+      include Smithy::Client::_Response[Types::QueryAssistantOutput]
+      def results: () -> Array[Types::ResultData]?
+      def next_token: () -> String?
+    end
+    def query_assistant: (
+      ?assistant_id: String,
+      ?query_text: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _QueryAssistantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryAssistantResponse
+
+    interface _RemoveKnowledgeBaseTemplateUriResponse
+      include Smithy::Client::_Response[Types::RemoveKnowledgeBaseTemplateUriOutput]
+    end
+    def remove_knowledge_base_template_uri: (
+      ?knowledge_base_id: String
+    ) -> _RemoveKnowledgeBaseTemplateUriResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveKnowledgeBaseTemplateUriResponse
+
+    interface _SearchContentResponse
+      include Smithy::Client::_Response[Types::SearchContentOutput]
+      def content_summaries: () -> Array[Types::ContentSummary]?
+      def next_token: () -> String?
+    end
+    def search_content: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?knowledge_base_id: String,
+      ?search_expression: {
+        filters: Array[
+          {
+            field: String,
+            operator: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _SearchContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContentResponse
+
+    interface _SearchQuickResponsesResponse
+      include Smithy::Client::_Response[Types::SearchQuickResponsesResponse]
+      def results: () -> Array[Types::QuickResponseSearchResultData]?
+      def next_token: () -> String?
+    end
+    def search_quick_responses: (
+      ?knowledge_base_id: String,
+      ?search_expression: {
+        queries: Array[
+          {
+            name: String,
+            values: Array[String],
+            operator: String,
+            allow_fuzziness: bool,
+            priority: String
+          }
+        ],
+        filters: Array[
+          {
+            name: untyped,
+            values: Array[String],
+            operator: String,
+            include_no_existence: untyped
+          }
+        ],
+        order_on_field: {
+          name: untyped,
+          order: String
+        }
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?attributes: Hash[String, String]
+    ) -> _SearchQuickResponsesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchQuickResponsesResponse
+
+    interface _SearchSessionsResponse
+      include Smithy::Client::_Response[Types::SearchSessionsOutput]
+      def session_summaries: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def search_sessions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assistant_id: String,
+      ?search_expression: {
+        filters: Array[
+          {
+            field: String,
+            operator: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _SearchSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSessionsResponse
+
+    interface _StartContentUploadResponse
+      include Smithy::Client::_Response[Types::StartContentUploadOutput]
+      def upload_id: () -> String?
+      def url: () -> String?
+      def url_expiry: () -> Time?
+      def headers_to_include: () -> Hash[String, String]?
+    end
+    def start_content_upload: (
+      ?knowledge_base_id: String,
+      ?content_type: String,
+      ?presigned_url_time_to_live: Integer
+    ) -> _StartContentUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContentUploadResponse
+
+    interface _StartImportJobResponse
+      include Smithy::Client::_Response[Types::StartImportJobResponse]
+      def import_job: () -> Types::ImportJobData?
+    end
+    def start_import_job: (
+      ?knowledge_base_id: String,
+      ?import_job_type: String,
+      ?upload_id: String,
+      ?client_token: String,
+      ?metadata: Hash[String, String],
+      ?external_source_configuration: {
+        source: String,
+        configuration: {
+          connect_configuration: {
+            instance_id: String
+          }
+        }
+      }
+    ) -> _StartImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateContentResponse
+      include Smithy::Client::_Response[Types::UpdateContentOutput]
+      def content: () -> Types::ContentData?
+    end
+    def update_content: (
+      ?knowledge_base_id: String,
+      ?content_id: String,
+      ?revision_id: String,
+      ?title: String,
+      ?override_link_out_uri: String,
+      ?remove_override_link_out_uri: bool,
+      ?metadata: Hash[String, String],
+      ?upload_id: String
+    ) -> _UpdateContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContentResponse
+
+    interface _UpdateKnowledgeBaseTemplateUriResponse
+      include Smithy::Client::_Response[Types::UpdateKnowledgeBaseTemplateUriOutput]
+      def knowledge_base: () -> Types::KnowledgeBaseData?
+    end
+    def update_knowledge_base_template_uri: (
+      ?knowledge_base_id: String,
+      ?template_uri: String
+    ) -> _UpdateKnowledgeBaseTemplateUriResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKnowledgeBaseTemplateUriResponse
+
+    interface _UpdateQuickResponseResponse
+      include Smithy::Client::_Response[Types::UpdateQuickResponseResponse]
+      def quick_response: () -> Types::QuickResponseData?
+    end
+    def update_quick_response: (
+      ?knowledge_base_id: String,
+      ?quick_response_id: String,
+      ?name: String,
+      ?content: {
+        content: String
+      },
+      ?content_type: String,
+      ?grouping_configuration: {
+        criteria: String,
+        values: Array[String]
+      },
+      ?remove_grouping_configuration: bool,
+      ?description: String,
+      ?remove_description: bool,
+      ?shortcut_key: String,
+      ?remove_shortcut_key: bool,
+      ?is_active: bool,
+      ?channels: Array[String],
+      ?language: String
+    ) -> _UpdateQuickResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuickResponseResponse
+  end
+end

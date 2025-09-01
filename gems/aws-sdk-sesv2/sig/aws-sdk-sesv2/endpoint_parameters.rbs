@@ -1,0 +1,17 @@
+module Aws::SESv2
+  class EndpointParameters
+    def initialize: (
+      ?region: String,
+      use_dual_stack: bool,
+      use_fips: bool,
+      ?endpoint: String,
+      ?endpoint_id: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String?
+    attr_accessor use_dual_stack: bool
+    attr_accessor use_fips: bool
+    attr_accessor endpoint: String?
+    attr_accessor endpoint_id: String?
+  end
+end

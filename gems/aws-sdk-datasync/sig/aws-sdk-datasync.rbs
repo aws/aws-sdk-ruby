@@ -1,0 +1,5 @@
+  module Aws
+    module DataSync
+      VERSION: String
+    end
+  end

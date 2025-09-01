@@ -1,0 +1,5 @@
+module Aws::MediaLive
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

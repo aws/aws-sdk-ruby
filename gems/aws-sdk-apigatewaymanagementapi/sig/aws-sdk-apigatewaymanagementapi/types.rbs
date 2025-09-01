@@ -1,0 +1,105 @@
+module Aws::ApiGatewayManagementApi
+  module Types
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class GetConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connected_at: Time,
+        ?identity: Types::Identity,
+        ?last_active_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connected_at: Time?
+      attr_accessor identity: Types::Identity?
+      attr_accessor last_active_at: Time?
+    end
+
+    class GoneException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_ip: String,
+        ?user_agent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_ip: String?
+      attr_accessor user_agent: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PayloadTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PostToConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor connection_id: String?
+    end
+  end
+end

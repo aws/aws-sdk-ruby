@@ -1,0 +1,58 @@
+module Aws::DSQL
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Arn: StringShape
+    ClientToken: StringShape
+    ClusterArn: StringShape
+    ClusterArnList: ListShape
+    ClusterCreationTime: TimestampShape
+    ClusterId: StringShape
+    ClusterList: ListShape
+    ClusterStatus: EnumShape
+    ClusterSummary: StructureShape
+    ConflictException: StructureShape
+    CreateClusterInput: StructureShape
+    CreateClusterOutput: StructureShape
+    DeleteClusterInput: StructureShape
+    DeleteClusterOutput: StructureShape
+    DeletionProtectionEnabled: BooleanShape
+    EncryptionDetails: StructureShape
+    EncryptionStatus: EnumShape
+    EncryptionType: EnumShape
+    GetClusterInput: StructureShape
+    GetClusterOutput: StructureShape
+    GetVpcEndpointServiceNameInput: StructureShape
+    GetVpcEndpointServiceNameOutput: StructureShape
+    InternalServerException: StructureShape
+    KmsEncryptionKey: StringShape
+    KmsKeyArn: StringShape
+    ListClustersInput: StructureShape
+    ListClustersOutput: StructureShape
+    ListTagsForResourceInput: StructureShape
+    ListTagsForResourceOutput: StructureShape
+    MaxResults: IntegerShape
+    MultiRegionProperties: StructureShape
+    NextToken: StringShape
+    Region: StringShape
+    ResourceNotFoundException: StructureShape
+    ServiceName: StringShape
+    ServiceQuotaExceededException: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagMap: MapShape
+    TagResourceInput: StructureShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    UntagResourceInput: StructureShape
+    UpdateClusterInput: StructureShape
+    UpdateClusterOutput: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: EnumShape
+
+    DSQL: ServiceShape
+  end
+end

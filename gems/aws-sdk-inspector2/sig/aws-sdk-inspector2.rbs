@@ -1,0 +1,5 @@
+  module Aws
+    module Inspector2
+      VERSION: String
+    end
+  end

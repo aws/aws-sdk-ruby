@@ -1,0 +1,61 @@
+module Aws::ElasticBeanstalk
+  module Errors
+    class CodeBuildNotInServiceRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ElasticBeanstalkServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientPrivilegesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ManagedActionInvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PlatformVersionStillReferencedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceTypeNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class S3LocationNotInServiceRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class S3SubscriptionRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceBundleDeletionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyApplicationVersionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyApplicationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyBucketsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyConfigurationTemplatesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyEnvironmentsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyPlatformsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,146 @@
+module Aws::SupportApp
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SupportApp::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateSlackChannelConfigurationOutput]
+    end
+    def create_slack_channel_configuration: (
+      ?team_id: String,
+      ?channel_id: String,
+      ?channel_name: String,
+      ?notify_on_create_or_reopen_case: bool,
+      ?notify_on_add_correspondence_to_case: bool,
+      ?notify_on_resolve_case: bool,
+      ?notify_on_case_severity: String,
+      ?channel_role_arn: String
+    ) -> _CreateSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSlackChannelConfigurationResponse
+
+    interface _DeleteAccountAliasResponse
+      include Smithy::Client::_Response[Types::DeleteAccountAliasOutput]
+    end
+    def delete_account_alias: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountAliasResponse
+
+    interface _DeleteSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSlackChannelConfigurationOutput]
+    end
+    def delete_slack_channel_configuration: (
+      ?team_id: String,
+      ?channel_id: String
+    ) -> _DeleteSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlackChannelConfigurationResponse
+
+    interface _DeleteSlackWorkspaceConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSlackWorkspaceConfigurationOutput]
+    end
+    def delete_slack_workspace_configuration: (
+      ?team_id: String
+    ) -> _DeleteSlackWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlackWorkspaceConfigurationResponse
+
+    interface _GetAccountAliasResponse
+      include Smithy::Client::_Response[Types::GetAccountAliasOutput]
+      def account_alias: () -> String?
+    end
+    def get_account_alias: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountAliasResponse
+
+    interface _ListSlackChannelConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSlackChannelConfigurationsOutput]
+      def next_token: () -> String?
+      def slack_channel_configurations: () -> Array[Types::SlackChannelConfiguration]?
+    end
+    def list_slack_channel_configurations: (
+      ?next_token: String
+    ) -> _ListSlackChannelConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSlackChannelConfigurationsResponse
+
+    interface _ListSlackWorkspaceConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSlackWorkspaceConfigurationsOutput]
+      def next_token: () -> String?
+      def slack_workspace_configurations: () -> Array[Types::SlackWorkspaceConfiguration]?
+    end
+    def list_slack_workspace_configurations: (
+      ?next_token: String
+    ) -> _ListSlackWorkspaceConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSlackWorkspaceConfigurationsResponse
+
+    interface _PutAccountAliasResponse
+      include Smithy::Client::_Response[Types::PutAccountAliasOutput]
+    end
+    def put_account_alias: (
+      ?account_alias: String
+    ) -> _PutAccountAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountAliasResponse
+
+    interface _RegisterSlackWorkspaceForOrganizationResponse
+      include Smithy::Client::_Response[Types::RegisterSlackWorkspaceForOrganizationOutput]
+      def team_id: () -> String?
+      def team_name: () -> String?
+      def account_type: () -> String?
+    end
+    def register_slack_workspace_for_organization: (
+      ?team_id: String
+    ) -> _RegisterSlackWorkspaceForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterSlackWorkspaceForOrganizationResponse
+
+    interface _UpdateSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateSlackChannelConfigurationOutput]
+      def team_id: () -> String?
+      def channel_id: () -> String?
+      def channel_name: () -> String?
+      def notify_on_create_or_reopen_case: () -> bool?
+      def notify_on_add_correspondence_to_case: () -> bool?
+      def notify_on_resolve_case: () -> bool?
+      def notify_on_case_severity: () -> String?
+      def channel_role_arn: () -> String?
+    end
+    def update_slack_channel_configuration: (
+      ?team_id: String,
+      ?channel_id: String,
+      ?channel_name: String,
+      ?notify_on_create_or_reopen_case: bool,
+      ?notify_on_add_correspondence_to_case: bool,
+      ?notify_on_resolve_case: bool,
+      ?notify_on_case_severity: String,
+      ?channel_role_arn: String
+    ) -> _UpdateSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSlackChannelConfigurationResponse
+  end
+end

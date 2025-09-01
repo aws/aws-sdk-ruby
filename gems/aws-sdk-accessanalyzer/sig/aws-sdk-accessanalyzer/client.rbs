@@ -1,0 +1,667 @@
+module Aws::AccessAnalyzer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AccessAnalyzer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ApplyArchiveRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def apply_archive_rule: (
+      ?analyzer_arn: String,
+      ?rule_name: String,
+      ?client_token: String
+    ) -> _ApplyArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplyArchiveRuleResponse
+
+    interface _CancelPolicyGenerationResponse
+      include Smithy::Client::_Response[Types::CancelPolicyGenerationOutput]
+    end
+    def cancel_policy_generation: (
+      ?job_id: String
+    ) -> _CancelPolicyGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelPolicyGenerationResponse
+
+    interface _CheckAccessNotGrantedResponse
+      include Smithy::Client::_Response[Types::CheckAccessNotGrantedResponse]
+      def result: () -> String?
+      def message: () -> String?
+      def reasons: () -> Array[Types::ReasonSummary]?
+    end
+    def check_access_not_granted: (
+      ?policy_document: String,
+      ?access: Array[
+        {
+          actions: Array[String],
+          resources: Array[String]
+        }
+      ],
+      ?policy_type: String
+    ) -> _CheckAccessNotGrantedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckAccessNotGrantedResponse
+
+    interface _CheckNoNewAccessResponse
+      include Smithy::Client::_Response[Types::CheckNoNewAccessResponse]
+      def result: () -> String?
+      def message: () -> String?
+      def reasons: () -> Array[Types::ReasonSummary]?
+    end
+    def check_no_new_access: (
+      ?new_policy_document: String,
+      ?existing_policy_document: String,
+      ?policy_type: String
+    ) -> _CheckNoNewAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckNoNewAccessResponse
+
+    interface _CheckNoPublicAccessResponse
+      include Smithy::Client::_Response[Types::CheckNoPublicAccessResponse]
+      def result: () -> String?
+      def message: () -> String?
+      def reasons: () -> Array[Types::ReasonSummary]?
+    end
+    def check_no_public_access: (
+      ?policy_document: String,
+      ?resource_type: String
+    ) -> _CheckNoPublicAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckNoPublicAccessResponse
+
+    interface _CreateAccessPreviewResponse
+      include Smithy::Client::_Response[Types::CreateAccessPreviewOutput]
+      def id: () -> String?
+    end
+    def create_access_preview: (
+      ?analyzer_arn: String,
+      ?configurations: Hash[String,
+        {
+          ebs_snapshot: {
+            user_ids: Array[String],
+            groups: Array[String],
+            kms_key_id: String
+          },
+          ecr_repository: {
+            repository_policy: String
+          },
+          iam_role: {
+            trust_policy: String
+          },
+          efs_file_system: {
+            file_system_policy: String
+          },
+          kms_key: {
+            key_policies: Hash[String, String],
+            grants: Array[
+              {
+                operations: Array[String],
+                grantee_principal: String,
+                retiring_principal: String,
+                constraints: {
+                  encryption_context_equals: Hash[String, String],
+                  encryption_context_subset: untyped
+                },
+                issuing_account: String
+              }
+            ]
+          },
+          rds_db_cluster_snapshot: {
+            attributes: Hash[String,
+              {
+                account_ids: Array[String]
+              }
+            ],
+            kms_key_id: String
+          },
+          rds_db_snapshot: {
+            attributes: Hash[String,
+              {
+                account_ids: Array[String]
+              }
+            ],
+            kms_key_id: String
+          },
+          secrets_manager_secret: {
+            kms_key_id: String,
+            secret_policy: String
+          },
+          s3_bucket: {
+            bucket_policy: String,
+            bucket_acl_grants: Array[
+              {
+                permission: String,
+                grantee: {
+                  id: String,
+                  uri: String
+                }
+              }
+            ],
+            bucket_public_access_block: {
+              ignore_public_acls: bool,
+              restrict_public_buckets: untyped
+            },
+            access_points: Hash[String,
+              {
+                access_point_policy: String,
+                public_access_block: untyped,
+                network_origin: {
+                  vpc_configuration: {
+                    vpc_id: String
+                  },
+                  internet_configuration: {
+                  }
+                }
+              }
+            ]
+          },
+          sns_topic: {
+            topic_policy: String
+          },
+          sqs_queue: {
+            queue_policy: String
+          },
+          s3_express_directory_bucket: {
+            bucket_policy: String,
+            access_points: Hash[String,
+              {
+                access_point_policy: untyped,
+                network_origin: untyped
+              }
+            ]
+          },
+          dynamodb_stream: {
+            stream_policy: String
+          },
+          dynamodb_table: {
+            table_policy: String
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateAccessPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPreviewResponse
+
+    interface _CreateAnalyzerResponse
+      include Smithy::Client::_Response[Types::CreateAnalyzerOutput]
+      def arn: () -> String?
+    end
+    def create_analyzer: (
+      ?analyzer_name: String,
+      ?type: String,
+      ?archive_rules: Array[
+        {
+          rule_name: String,
+          filter: Hash[String,
+            {
+              eq: Array[String],
+              neq: untyped,
+              contains: untyped,
+              exists: bool
+            }
+          ]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?configuration: {
+        unused_access: {
+          unused_access_age: Integer,
+          analysis_rule: {
+            exclusions: Array[
+              {
+                account_ids: Array[String],
+                resource_tags: Array[
+                  Hash[String, String]
+                ]
+              }
+            ]
+          }
+        },
+        internal_access: {
+          analysis_rule: {
+            inclusions: Array[
+              {
+                account_ids: untyped,
+                resource_types: Array[String],
+                resource_arns: Array[String]
+              }
+            ]
+          }
+        }
+      }
+    ) -> _CreateAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnalyzerResponse
+
+    interface _CreateArchiveRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_archive_rule: (
+      ?analyzer_name: String,
+      ?rule_name: String,
+      ?filter: Hash[String,
+        {
+          eq: Array[String],
+          neq: untyped,
+          contains: untyped,
+          exists: bool
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateArchiveRuleResponse
+
+    interface _DeleteAnalyzerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_analyzer: (
+      ?analyzer_name: String,
+      ?client_token: String
+    ) -> _DeleteAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnalyzerResponse
+
+    interface _DeleteArchiveRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_archive_rule: (
+      ?analyzer_name: String,
+      ?rule_name: String,
+      ?client_token: String
+    ) -> _DeleteArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArchiveRuleResponse
+
+    interface _GenerateFindingRecommendationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def generate_finding_recommendation: (
+      ?analyzer_arn: String,
+      ?id: String
+    ) -> _GenerateFindingRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateFindingRecommendationResponse
+
+    interface _GetAccessPreviewResponse
+      include Smithy::Client::_Response[Types::GetAccessPreviewOutput]
+      def access_preview: () -> Types::AccessPreview?
+    end
+    def get_access_preview: (
+      ?access_preview_id: String,
+      ?analyzer_arn: String
+    ) -> _GetAccessPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPreviewResponse
+
+    interface _GetAnalyzedResourceResponse
+      include Smithy::Client::_Response[Types::GetAnalyzedResourceOutput]
+      def resource: () -> Types::AnalyzedResource?
+    end
+    def get_analyzed_resource: (
+      ?analyzer_arn: String,
+      ?resource_arn: String
+    ) -> _GetAnalyzedResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnalyzedResourceResponse
+
+    interface _GetAnalyzerResponse
+      include Smithy::Client::_Response[Types::GetAnalyzerOutput]
+      def analyzer: () -> Types::AnalyzerSummary?
+    end
+    def get_analyzer: (
+      ?analyzer_name: String
+    ) -> _GetAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnalyzerResponse
+
+    interface _GetArchiveRuleResponse
+      include Smithy::Client::_Response[Types::GetArchiveRuleOutput]
+      def archive_rule: () -> Types::ArchiveRuleSummary?
+    end
+    def get_archive_rule: (
+      ?analyzer_name: String,
+      ?rule_name: String
+    ) -> _GetArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveRuleResponse
+
+    interface _GetFindingResponse
+      include Smithy::Client::_Response[Types::GetFindingOutput]
+      def finding: () -> Types::Finding?
+    end
+    def get_finding: (
+      ?analyzer_arn: String,
+      ?id: String
+    ) -> _GetFindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingResponse
+
+    interface _GetFindingRecommendationResponse
+      include Smithy::Client::_Response[Types::GetFindingRecommendationResponse]
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+      def next_token: () -> String?
+      def error: () -> Types::RecommendationError?
+      def resource_arn: () -> String?
+      def recommended_steps: () -> Array[Types::RecommendedStep]?
+      def recommendation_type: () -> String?
+      def status: () -> String?
+    end
+    def get_finding_recommendation: (
+      ?analyzer_arn: String,
+      ?id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetFindingRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingRecommendationResponse
+
+    interface _GetFindingV2Response
+      include Smithy::Client::_Response[Types::GetFindingV2Response]
+      def analyzed_at: () -> Time?
+      def created_at: () -> Time?
+      def error: () -> String?
+      def id: () -> String?
+      def next_token: () -> String?
+      def resource: () -> String?
+      def resource_type: () -> String?
+      def resource_owner_account: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+      def finding_details: () -> Array[Types::FindingDetails]?
+      def finding_type: () -> String?
+    end
+    def get_finding_v2: (
+      ?analyzer_arn: String,
+      ?id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetFindingV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingV2Response
+
+    interface _GetFindingsStatisticsResponse
+      include Smithy::Client::_Response[Types::GetFindingsStatisticsResponse]
+      def findings_statistics: () -> Array[Types::FindingsStatistics]?
+      def last_updated_at: () -> Time?
+    end
+    def get_findings_statistics: (
+      ?analyzer_arn: String
+    ) -> _GetFindingsStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsStatisticsResponse
+
+    interface _GetGeneratedPolicyResponse
+      include Smithy::Client::_Response[Types::GetGeneratedPolicyOutput]
+      def job_details: () -> Types::JobDetails?
+      def generated_policy_result: () -> Types::GeneratedPolicyResult?
+    end
+    def get_generated_policy: (
+      ?job_id: String,
+      ?include_resource_placeholders: bool,
+      ?include_service_level_template: bool
+    ) -> _GetGeneratedPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeneratedPolicyResponse
+
+    interface _ListAccessPreviewFindingsResponse
+      include Smithy::Client::_Response[Types::ListAccessPreviewFindingsOutput]
+      def findings: () -> Array[Types::AccessPreviewFinding]?
+      def next_token: () -> String?
+    end
+    def list_access_preview_findings: (
+      ?access_preview_id: String,
+      ?analyzer_arn: String,
+      ?filter: Hash[String,
+        {
+          eq: Array[String],
+          neq: untyped,
+          contains: untyped,
+          exists: bool
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPreviewFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPreviewFindingsResponse
+
+    interface _ListAccessPreviewsResponse
+      include Smithy::Client::_Response[Types::ListAccessPreviewsOutput]
+      def access_previews: () -> Array[Types::AccessPreviewSummary]?
+      def next_token: () -> String?
+    end
+    def list_access_previews: (
+      ?analyzer_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPreviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPreviewsResponse
+
+    interface _ListAnalyzedResourcesResponse
+      include Smithy::Client::_Response[Types::ListAnalyzedResourcesOutput]
+      def analyzed_resources: () -> Array[Types::AnalyzedResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_analyzed_resources: (
+      ?analyzer_arn: String,
+      ?resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalyzedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalyzedResourcesResponse
+
+    interface _ListAnalyzersResponse
+      include Smithy::Client::_Response[Types::ListAnalyzersOutput]
+      def analyzers: () -> Array[Types::AnalyzerSummary]?
+      def next_token: () -> String?
+    end
+    def list_analyzers: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?type: String
+    ) -> _ListAnalyzersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalyzersResponse
+
+    interface _ListArchiveRulesResponse
+      include Smithy::Client::_Response[Types::ListArchiveRulesOutput]
+      def archive_rules: () -> Array[Types::ArchiveRuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_archive_rules: (
+      ?analyzer_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListArchiveRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArchiveRulesResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsOutput]
+      def findings: () -> Array[Types::FindingSummary]?
+      def next_token: () -> String?
+    end
+    def list_findings: (
+      ?analyzer_arn: String,
+      ?filter: Hash[String,
+        {
+          eq: Array[String],
+          neq: untyped,
+          contains: untyped,
+          exists: bool
+        }
+      ],
+      ?sort: {
+        attribute_name: String,
+        order_by: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListFindingsV2Response
+      include Smithy::Client::_Response[Types::ListFindingsV2Response]
+      def findings: () -> Array[Types::FindingSummaryV2]?
+      def next_token: () -> String?
+    end
+    def list_findings_v2: (
+      ?analyzer_arn: String,
+      ?filter: Hash[String,
+        {
+          eq: Array[String],
+          neq: untyped,
+          contains: untyped,
+          exists: bool
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _ListFindingsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsV2Response
+
+    interface _ListPolicyGenerationsResponse
+      include Smithy::Client::_Response[Types::ListPolicyGenerationsOutput]
+      def policy_generations: () -> Array[Types::PolicyGeneration]?
+      def next_token: () -> String?
+    end
+    def list_policy_generations: (
+      ?principal_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPolicyGenerationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyGenerationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartPolicyGenerationResponse
+      include Smithy::Client::_Response[Types::StartPolicyGenerationOutput]
+      def job_id: () -> String?
+    end
+    def start_policy_generation: (
+      ?policy_generation_details: {
+        principal_arn: String
+      },
+      ?cloud_trail_details: {
+        trails: Array[
+          {
+            cloud_trail_arn: String,
+            regions: Array[String],
+            all_regions: bool
+          }
+        ],
+        access_role: String,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?client_token: String
+    ) -> _StartPolicyGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPolicyGenerationResponse
+
+    interface _StartResourceScanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_resource_scan: (
+      ?analyzer_arn: String,
+      ?resource_arn: String,
+      ?resource_owner_account: String
+    ) -> _StartResourceScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartResourceScanResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnalyzerResponse
+      include Smithy::Client::_Response[Types::UpdateAnalyzerResponse]
+      def configuration: () -> Types::AnalyzerConfiguration?
+    end
+    def update_analyzer: (
+      ?analyzer_name: String,
+      ?configuration: {
+        unused_access: {
+          unused_access_age: Integer,
+          analysis_rule: {
+            exclusions: Array[
+              {
+                account_ids: Array[String],
+                resource_tags: Array[
+                  Hash[String, String]
+                ]
+              }
+            ]
+          }
+        },
+        internal_access: {
+          analysis_rule: {
+            inclusions: Array[
+              {
+                account_ids: untyped,
+                resource_types: Array[String],
+                resource_arns: Array[String]
+              }
+            ]
+          }
+        }
+      }
+    ) -> _UpdateAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnalyzerResponse
+
+    interface _UpdateArchiveRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_archive_rule: (
+      ?analyzer_name: String,
+      ?rule_name: String,
+      ?filter: Hash[String,
+        {
+          eq: Array[String],
+          neq: untyped,
+          contains: untyped,
+          exists: bool
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateArchiveRuleResponse
+
+    interface _UpdateFindingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_findings: (
+      ?analyzer_arn: String,
+      ?status: String,
+      ?ids: Array[String],
+      ?resource_arn: String,
+      ?client_token: String
+    ) -> _UpdateFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFindingsResponse
+
+    interface _ValidatePolicyResponse
+      include Smithy::Client::_Response[Types::ValidatePolicyOutput]
+      def findings: () -> Array[Types::ValidatePolicyFinding]?
+      def next_token: () -> String?
+    end
+    def validate_policy: (
+      ?locale: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?policy_document: String,
+      ?policy_type: String,
+      ?validate_policy_resource_type: String
+    ) -> _ValidatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidatePolicyResponse
+  end
+end

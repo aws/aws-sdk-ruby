@@ -1,0 +1,2616 @@
+module Aws::MediaTailor
+  module Types
+
+    class AccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_type: String,
+        ?secrets_manager_access_token_configuration: Types::SecretsManagerAccessTokenConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_type: String?
+      attr_accessor secrets_manager_access_token_configuration: Types::SecretsManagerAccessTokenConfiguration?
+    end
+
+    module AccessType
+      S3_SIGV4: String
+      SECRETS_MANAGER_ACCESS_TOKEN: String
+      AUTODETECT_SIGV4: String
+    end
+
+    class AdBreak
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_type: String,
+        ?offset_millis: Integer,
+        ?slate: Types::SlateSource,
+        ?splice_insert_message: Types::SpliceInsertMessage,
+        ?time_signal_message: Types::TimeSignalMessage,
+        ?ad_break_metadata: Array[Types::KeyValuePair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_type: String?
+      attr_accessor offset_millis: Integer?
+      attr_accessor slate: Types::SlateSource?
+      attr_accessor splice_insert_message: Types::SpliceInsertMessage?
+      attr_accessor time_signal_message: Types::TimeSignalMessage?
+      attr_accessor ad_break_metadata: Array[Types::KeyValuePair]?
+    end
+
+    class AdBreakOpportunity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offset_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offset_millis: Integer?
+    end
+
+    class AdConditioningConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_media_file_conditioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_media_file_conditioning: String?
+    end
+
+    class AdMarkerPassthrough
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    module AdMarkupType
+      DATERANGE: String
+      SCTE35_ENHANCED: String
+    end
+
+    module AdsInteractionExcludeEventType
+      AD_MARKER_FOUND: String
+      NON_AD_MARKER_FOUND: String
+      MAKING_ADS_REQUEST: String
+      MODIFIED_TARGET_URL: String
+      VAST_REDIRECT: String
+      EMPTY_VAST_RESPONSE: String
+      EMPTY_VMAP_RESPONSE: String
+      VAST_RESPONSE: String
+      REDIRECTED_VAST_RESPONSE: String
+      FILLED_AVAIL: String
+      FILLED_OVERLAY_AVAIL: String
+      BEACON_FIRED: String
+      WARNING_NO_ADVERTISEMENTS: String
+      WARNING_VPAID_AD_DROPPED: String
+      WARNING_URL_VARIABLE_SUBSTITUTION_FAILED: String
+      ERROR_UNKNOWN: String
+      ERROR_UNKNOWN_HOST: String
+      ERROR_DISALLOWED_HOST: String
+      ERROR_ADS_IO: String
+      ERROR_ADS_TIMEOUT: String
+      ERROR_ADS_RESPONSE_PARSE: String
+      ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT: String
+      ERROR_ADS_INVALID_RESPONSE: String
+      ERROR_VAST_REDIRECT_EMPTY_RESPONSE: String
+      ERROR_VAST_REDIRECT_MULTIPLE_VAST: String
+      ERROR_VAST_REDIRECT_FAILED: String
+      ERROR_VAST_MISSING_MEDIAFILES: String
+      ERROR_VAST_MISSING_CREATIVES: String
+      ERROR_VAST_MISSING_OVERLAYS: String
+      ERROR_VAST_MISSING_IMPRESSION: String
+      ERROR_VAST_INVALID_VAST_AD_TAG_URI: String
+      ERROR_VAST_MULTIPLE_TRACKING_EVENTS: String
+      ERROR_VAST_MULTIPLE_LINEAR: String
+      ERROR_VAST_INVALID_MEDIA_FILE: String
+      ERROR_FIRING_BEACON_FAILED: String
+      ERROR_PERSONALIZATION_DISABLED: String
+      VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET: String
+      VOD_TIME_BASED_AVAIL_PLAN_SUCCESS: String
+      VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS: String
+      INTERSTITIAL_VOD_SUCCESS: String
+      INTERSTITIAL_VOD_FAILURE: String
+    end
+
+    class AdsInteractionLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publish_opt_in_event_types: Array[String],
+        ?exclude_event_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publish_opt_in_event_types: Array[String]?
+      attr_accessor exclude_event_types: Array[String]?
+    end
+
+    module AdsInteractionPublishOptInEventType
+      RAW_ADS_RESPONSE: String
+    end
+
+    class Alert
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alert_code: String,
+        ?alert_message: String,
+        ?last_modified_time: Time,
+        ?related_resource_arns: Array[String],
+        ?resource_arn: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alert_code: String?
+      attr_accessor alert_message: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor related_resource_arns: Array[String]?
+      attr_accessor resource_arn: String?
+      attr_accessor category: String?
+    end
+
+    module AlertCategory
+      SCHEDULING_ERROR: String
+      PLAYBACK_WARNING: String
+      INFO: String
+    end
+
+    class AlternateMedia
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+        ?live_source_name: String,
+        ?vod_source_name: String,
+        ?clip_range: Types::ClipRange,
+        ?scheduled_start_time_millis: Integer,
+        ?ad_breaks: Array[Types::AdBreak],
+        ?duration_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+      attr_accessor live_source_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor clip_range: Types::ClipRange?
+      attr_accessor scheduled_start_time_millis: Integer?
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor duration_millis: Integer?
+    end
+
+    class AudienceMedia
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience: String,
+        ?alternate_media: Array[Types::AlternateMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience: String?
+      attr_accessor alternate_media: Array[Types::AlternateMedia]?
+    end
+
+    class AvailMatchingCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_variable: String,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_variable: String?
+      attr_accessor operator: String?
+    end
+
+    class AvailSuppression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?value: String,
+        ?fill_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor value: String?
+      attr_accessor fill_policy: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Bumper
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?end_url: String,
+        ?start_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor end_url: String?
+      attr_accessor start_url: String?
+    end
+
+    class CdnConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_segment_url_prefix: String,
+        ?content_segment_url_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_segment_url_prefix: String?
+      attr_accessor content_segment_url_prefix: String?
+    end
+
+    class Channel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_state: String,
+        ?creation_time: Time,
+        ?filler_slate: Types::SlateSource,
+        ?last_modified_time: Time,
+        ?outputs: Array[Types::ResponseOutputItem],
+        ?playback_mode: String,
+        ?tags: Hash[String, String],
+        ?tier: String,
+        ?log_configuration: Types::LogConfigurationForChannel,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor last_modified_time: Time?
+      attr_accessor outputs: Array[Types::ResponseOutputItem]?
+      attr_accessor playback_mode: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tier: String?
+      attr_accessor log_configuration: Types::LogConfigurationForChannel?
+      attr_accessor audiences: Array[String]?
+    end
+
+    module ChannelState
+      RUNNING: String
+      STOPPED: String
+    end
+
+    class ClipRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?end_offset_millis: Integer,
+        ?start_offset_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor end_offset_millis: Integer?
+      attr_accessor start_offset_millis: Integer?
+    end
+
+    class ConfigureLogsForChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?log_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor log_types: Array[String]?
+    end
+
+    class ConfigureLogsForChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?log_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor log_types: Array[String]?
+    end
+
+    class ConfigureLogsForPlaybackConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percent_enabled: Integer,
+        ?playback_configuration_name: String,
+        ?enabled_logging_strategies: Array[String],
+        ?ads_interaction_log: Types::AdsInteractionLog,
+        ?manifest_service_interaction_log: Types::ManifestServiceInteractionLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percent_enabled: Integer?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor enabled_logging_strategies: Array[String]?
+      attr_accessor ads_interaction_log: Types::AdsInteractionLog?
+      attr_accessor manifest_service_interaction_log: Types::ManifestServiceInteractionLog?
+    end
+
+    class ConfigureLogsForPlaybackConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percent_enabled: Integer,
+        ?playback_configuration_name: String,
+        ?enabled_logging_strategies: Array[String],
+        ?ads_interaction_log: Types::AdsInteractionLog,
+        ?manifest_service_interaction_log: Types::ManifestServiceInteractionLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percent_enabled: Integer?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor enabled_logging_strategies: Array[String]?
+      attr_accessor ads_interaction_log: Types::AdsInteractionLog?
+      attr_accessor manifest_service_interaction_log: Types::ManifestServiceInteractionLog?
+    end
+
+    class CreateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?filler_slate: Types::SlateSource,
+        ?outputs: Array[Types::RequestOutputItem],
+        ?playback_mode: String,
+        ?tags: Hash[String, String],
+        ?tier: String,
+        ?time_shift_configuration: Types::TimeShiftConfiguration,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor outputs: Array[Types::RequestOutputItem]?
+      attr_accessor playback_mode: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tier: String?
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class CreateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_state: String,
+        ?creation_time: Time,
+        ?filler_slate: Types::SlateSource,
+        ?last_modified_time: Time,
+        ?outputs: Array[Types::ResponseOutputItem],
+        ?playback_mode: String,
+        ?tags: Hash[String, String],
+        ?tier: String,
+        ?time_shift_configuration: Types::TimeShiftConfiguration,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor last_modified_time: Time?
+      attr_accessor outputs: Array[Types::ResponseOutputItem]?
+      attr_accessor playback_mode: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tier: String?
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class CreateLiveSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?live_source_name: String,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLiveSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?live_source_name: String,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePrefetchScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumption: Types::PrefetchConsumption,
+        ?name: String,
+        ?playback_configuration_name: String,
+        ?retrieval: Types::PrefetchRetrieval,
+        ?recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration,
+        ?schedule_type: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumption: Types::PrefetchConsumption?
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor retrieval: Types::PrefetchRetrieval?
+      attr_accessor recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration?
+      attr_accessor schedule_type: String?
+      attr_accessor stream_id: String?
+    end
+
+    class CreatePrefetchScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?consumption: Types::PrefetchConsumption,
+        ?name: String,
+        ?playback_configuration_name: String,
+        ?retrieval: Types::PrefetchRetrieval,
+        ?recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration,
+        ?schedule_type: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor consumption: Types::PrefetchConsumption?
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor retrieval: Types::PrefetchRetrieval?
+      attr_accessor recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration?
+      attr_accessor schedule_type: String?
+      attr_accessor stream_id: String?
+    end
+
+    class CreateProgramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_breaks: Array[Types::AdBreak],
+        ?channel_name: String,
+        ?live_source_name: String,
+        ?program_name: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+        ?audience_media: Array[Types::AudienceMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor channel_name: String?
+      attr_accessor live_source_name: String?
+      attr_accessor program_name: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor audience_media: Array[Types::AudienceMedia]?
+    end
+
+    class CreateProgramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_breaks: Array[Types::AdBreak],
+        ?arn: String,
+        ?channel_name: String,
+        ?creation_time: Time,
+        ?live_source_name: String,
+        ?program_name: String,
+        ?scheduled_start_time: Time,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+        ?clip_range: Types::ClipRange,
+        ?duration_millis: Integer,
+        ?audience_media: Array[Types::AudienceMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor program_name: String?
+      attr_accessor scheduled_start_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor clip_range: Types::ClipRange?
+      attr_accessor duration_millis: Integer?
+      attr_accessor audience_media: Array[Types::AudienceMedia]?
+    end
+
+    class CreateSourceLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSourceLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?arn: String,
+        ?creation_time: Time,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?last_modified_time: Time,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor last_modified_time: Time?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateVodSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vod_source_name: String?
+    end
+
+    class CreateVodSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vod_source_name: String?
+    end
+
+    class DashConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_endpoint_prefix: String,
+        ?mpd_location: String,
+        ?origin_manifest_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_endpoint_prefix: String?
+      attr_accessor mpd_location: String?
+      attr_accessor origin_manifest_type: String?
+    end
+
+    class DashConfigurationForPut
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpd_location: String,
+        ?origin_manifest_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpd_location: String?
+      attr_accessor origin_manifest_type: String?
+    end
+
+    class DashPlaylistSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_window_seconds: Integer,
+        ?min_buffer_time_seconds: Integer,
+        ?min_update_period_seconds: Integer,
+        ?suggested_presentation_delay_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor min_buffer_time_seconds: Integer?
+      attr_accessor min_update_period_seconds: Integer?
+      attr_accessor suggested_presentation_delay_seconds: Integer?
+    end
+
+    class DefaultSegmentDeliveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_url: String?
+    end
+
+    class DeleteChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class DeleteChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteChannelPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class DeleteChannelPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLiveSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?live_source_name: String,
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+    end
+
+    class DeleteLiveSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePlaybackConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeletePlaybackConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePrefetchScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?playback_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+    end
+
+    class DeletePrefetchScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProgramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?program_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor program_name: String?
+    end
+
+    class DeleteProgramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSourceLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+    end
+
+    class DeleteSourceLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVodSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+    end
+
+    class DeleteVodSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class DescribeChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_state: String,
+        ?creation_time: Time,
+        ?filler_slate: Types::SlateSource,
+        ?last_modified_time: Time,
+        ?outputs: Array[Types::ResponseOutputItem],
+        ?playback_mode: String,
+        ?tags: Hash[String, String],
+        ?tier: String,
+        ?log_configuration: Types::LogConfigurationForChannel,
+        ?time_shift_configuration: Types::TimeShiftConfiguration,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor last_modified_time: Time?
+      attr_accessor outputs: Array[Types::ResponseOutputItem]?
+      attr_accessor playback_mode: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tier: String?
+      attr_accessor log_configuration: Types::LogConfigurationForChannel?
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class DescribeLiveSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?live_source_name: String,
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+    end
+
+    class DescribeLiveSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?live_source_name: String,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeProgramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?program_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor program_name: String?
+    end
+
+    class DescribeProgramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_breaks: Array[Types::AdBreak],
+        ?arn: String,
+        ?channel_name: String,
+        ?creation_time: Time,
+        ?live_source_name: String,
+        ?program_name: String,
+        ?scheduled_start_time: Time,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+        ?clip_range: Types::ClipRange,
+        ?duration_millis: Integer,
+        ?audience_media: Array[Types::AudienceMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor program_name: String?
+      attr_accessor scheduled_start_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor clip_range: Types::ClipRange?
+      attr_accessor duration_millis: Integer?
+      attr_accessor audience_media: Array[Types::AudienceMedia]?
+    end
+
+    class DescribeSourceLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+    end
+
+    class DescribeSourceLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?arn: String,
+        ?creation_time: Time,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?last_modified_time: Time,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor last_modified_time: Time?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeVodSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+    end
+
+    class DescribeVodSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_break_opportunities: Array[Types::AdBreakOpportunity],
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_break_opportunities: Array[Types::AdBreakOpportunity]?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vod_source_name: String?
+    end
+
+    module FillPolicy
+      FULL_AVAIL_ONLY: String
+      PARTIAL_AVAIL: String
+    end
+
+    class GetChannelPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class GetChannelPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetChannelScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?duration_minutes: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?audience: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor duration_minutes: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor audience: String?
+    end
+
+    class GetChannelScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ScheduleEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ScheduleEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class GetPlaybackConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetPlaybackConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_decision_server_url: String,
+        ?avail_suppression: Types::AvailSuppression,
+        ?bumper: Types::Bumper,
+        ?cdn_configuration: Types::CdnConfiguration,
+        ?configuration_aliases: Hash[String, Hash[String, String]],
+        ?dash_configuration: Types::DashConfiguration,
+        ?hls_configuration: Types::HlsConfiguration,
+        ?insertion_mode: String,
+        ?live_pre_roll_configuration: Types::LivePreRollConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+        ?manifest_processing_rules: Types::ManifestProcessingRules,
+        ?name: String,
+        ?personalization_threshold_seconds: Integer,
+        ?playback_configuration_arn: String,
+        ?playback_endpoint_prefix: String,
+        ?session_initialization_endpoint_prefix: String,
+        ?slate_ad_url: String,
+        ?tags: Hash[String, String],
+        ?transcode_profile_name: String,
+        ?video_content_source_url: String,
+        ?ad_conditioning_configuration: Types::AdConditioningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_decision_server_url: String?
+      attr_accessor avail_suppression: Types::AvailSuppression?
+      attr_accessor bumper: Types::Bumper?
+      attr_accessor cdn_configuration: Types::CdnConfiguration?
+      attr_accessor configuration_aliases: Hash[String, Hash[String, String]]?
+      attr_accessor dash_configuration: Types::DashConfiguration?
+      attr_accessor hls_configuration: Types::HlsConfiguration?
+      attr_accessor insertion_mode: String?
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules?
+      attr_accessor name: String?
+      attr_accessor personalization_threshold_seconds: Integer?
+      attr_accessor playback_configuration_arn: String?
+      attr_accessor playback_endpoint_prefix: String?
+      attr_accessor session_initialization_endpoint_prefix: String?
+      attr_accessor slate_ad_url: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor transcode_profile_name: String?
+      attr_accessor video_content_source_url: String?
+      attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration?
+    end
+
+    class GetPrefetchScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?playback_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+    end
+
+    class GetPrefetchScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?consumption: Types::PrefetchConsumption,
+        ?name: String,
+        ?playback_configuration_name: String,
+        ?retrieval: Types::PrefetchRetrieval,
+        ?schedule_type: String,
+        ?recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor consumption: Types::PrefetchConsumption?
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor retrieval: Types::PrefetchRetrieval?
+      attr_accessor schedule_type: String?
+      attr_accessor recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration?
+      attr_accessor stream_id: String?
+    end
+
+    class HlsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_endpoint_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_endpoint_prefix: String?
+    end
+
+    class HlsPlaylistSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_window_seconds: Integer,
+        ?ad_markup_type: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_window_seconds: Integer?
+      attr_accessor ad_markup_type: Array[String]?
+    end
+
+    class HttpConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_url: String?
+    end
+
+    class HttpPackageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?source_group: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor source_group: String?
+      attr_accessor type: String?
+    end
+
+    module InsertionMode
+      STITCHED_ONLY: String
+      PLAYER_SELECT: String
+    end
+
+    class KeyValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ListAlertsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListAlertsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Alert],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Alert]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Channel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Channel]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLiveSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor source_location_name: String?
+    end
+
+    class ListLiveSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::LiveSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::LiveSource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaybackConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaybackConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::PlaybackConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::PlaybackConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    module ListPrefetchScheduleType
+      SINGLE: String
+      RECURRING: String
+      ALL: String
+    end
+
+    class ListPrefetchSchedulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?playback_configuration_name: String,
+        ?schedule_type: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor schedule_type: String?
+      attr_accessor stream_id: String?
+    end
+
+    class ListPrefetchSchedulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::PrefetchSchedule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::PrefetchSchedule]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourceLocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourceLocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SourceLocation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SourceLocation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVodSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor source_location_name: String?
+    end
+
+    class ListVodSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::VodSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::VodSource]?
+      attr_accessor next_token: String?
+    end
+
+    class LivePreRollConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_decision_server_url: String,
+        ?max_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_decision_server_url: String?
+      attr_accessor max_duration_seconds: Integer?
+    end
+
+    class LiveSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?live_source_name: String,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percent_enabled: Integer,
+        ?enabled_logging_strategies: Array[String],
+        ?ads_interaction_log: Types::AdsInteractionLog,
+        ?manifest_service_interaction_log: Types::ManifestServiceInteractionLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percent_enabled: Integer?
+      attr_accessor enabled_logging_strategies: Array[String]?
+      attr_accessor ads_interaction_log: Types::AdsInteractionLog?
+      attr_accessor manifest_service_interaction_log: Types::ManifestServiceInteractionLog?
+    end
+
+    class LogConfigurationForChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_types: Array[String]?
+    end
+
+    module LogType
+      AS_RUN: String
+    end
+
+    module LoggingStrategy
+      VENDED_LOGS: String
+      LEGACY_CLOUDWATCH: String
+    end
+
+    class ManifestProcessingRules
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_marker_passthrough: Types::AdMarkerPassthrough,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_marker_passthrough: Types::AdMarkerPassthrough?
+    end
+
+    module ManifestServiceExcludeEventType
+      GENERATED_MANIFEST: String
+      ORIGIN_MANIFEST: String
+      SESSION_INITIALIZED: String
+      TRACKING_RESPONSE: String
+      CONFIG_SYNTAX_ERROR: String
+      CONFIG_SECURITY_ERROR: String
+      UNKNOWN_HOST: String
+      TIMEOUT_ERROR: String
+      CONNECTION_ERROR: String
+      IO_ERROR: String
+      UNKNOWN_ERROR: String
+      HOST_DISALLOWED: String
+      PARSING_ERROR: String
+      MANIFEST_ERROR: String
+      NO_MASTER_OR_MEDIA_PLAYLIST: String
+      NO_MASTER_PLAYLIST: String
+      NO_MEDIA_PLAYLIST: String
+      INCOMPATIBLE_HLS_VERSION: String
+      SCTE35_PARSING_ERROR: String
+      INVALID_SINGLE_PERIOD_DASH_MANIFEST: String
+      UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST: String
+      LAST_PERIOD_MISSING_AUDIO: String
+      LAST_PERIOD_MISSING_AUDIO_WARNING: String
+      ERROR_ORIGIN_PREFIX_INTERPOLATION: String
+      ERROR_ADS_INTERPOLATION: String
+      ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION: String
+      ERROR_CDN_AD_SEGMENT_INTERPOLATION: String
+      ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION: String
+      ERROR_SLATE_AD_URL_INTERPOLATION: String
+      ERROR_PROFILE_NAME_INTERPOLATION: String
+      ERROR_BUMPER_START_INTERPOLATION: String
+      ERROR_BUMPER_END_INTERPOLATION: String
+    end
+
+    class ManifestServiceInteractionLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclude_event_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclude_event_types: Array[String]?
+    end
+
+    module MessageType
+      SPLICE_INSERT: String
+      TIME_SIGNAL: String
+    end
+
+    module Mode
+      OFF: String
+      BEHIND_LIVE_EDGE: String
+      AFTER_LIVE_EDGE: String
+    end
+
+    module Operator
+      EQUALS: String
+    end
+
+    module OriginManifestType
+      SINGLE_PERIOD: String
+      MULTI_PERIOD: String
+    end
+
+    class PlaybackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_decision_server_url: String,
+        ?avail_suppression: Types::AvailSuppression,
+        ?bumper: Types::Bumper,
+        ?cdn_configuration: Types::CdnConfiguration,
+        ?configuration_aliases: Hash[String, Hash[String, String]],
+        ?dash_configuration: Types::DashConfiguration,
+        ?hls_configuration: Types::HlsConfiguration,
+        ?insertion_mode: String,
+        ?live_pre_roll_configuration: Types::LivePreRollConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+        ?manifest_processing_rules: Types::ManifestProcessingRules,
+        ?name: String,
+        ?personalization_threshold_seconds: Integer,
+        ?playback_configuration_arn: String,
+        ?playback_endpoint_prefix: String,
+        ?session_initialization_endpoint_prefix: String,
+        ?slate_ad_url: String,
+        ?tags: Hash[String, String],
+        ?transcode_profile_name: String,
+        ?video_content_source_url: String,
+        ?ad_conditioning_configuration: Types::AdConditioningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_decision_server_url: String?
+      attr_accessor avail_suppression: Types::AvailSuppression?
+      attr_accessor bumper: Types::Bumper?
+      attr_accessor cdn_configuration: Types::CdnConfiguration?
+      attr_accessor configuration_aliases: Hash[String, Hash[String, String]]?
+      attr_accessor dash_configuration: Types::DashConfiguration?
+      attr_accessor hls_configuration: Types::HlsConfiguration?
+      attr_accessor insertion_mode: String?
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules?
+      attr_accessor name: String?
+      attr_accessor personalization_threshold_seconds: Integer?
+      attr_accessor playback_configuration_arn: String?
+      attr_accessor playback_endpoint_prefix: String?
+      attr_accessor session_initialization_endpoint_prefix: String?
+      attr_accessor slate_ad_url: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor transcode_profile_name: String?
+      attr_accessor video_content_source_url: String?
+      attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration?
+    end
+
+    module PlaybackMode
+      LOOP: String
+      LINEAR: String
+    end
+
+    class PrefetchConsumption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avail_matching_criteria: Array[Types::AvailMatchingCriteria],
+        ?end_time: Time,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avail_matching_criteria: Array[Types::AvailMatchingCriteria]?
+      attr_accessor end_time: Time?
+      attr_accessor start_time: Time?
+    end
+
+    class PrefetchRetrieval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_variables: Hash[String, String],
+        ?end_time: Time,
+        ?start_time: Time,
+        ?traffic_shaping_type: String,
+        ?traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_variables: Hash[String, String]?
+      attr_accessor end_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor traffic_shaping_type: String?
+      attr_accessor traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow?
+    end
+
+    class PrefetchSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?consumption: Types::PrefetchConsumption,
+        ?name: String,
+        ?playback_configuration_name: String,
+        ?retrieval: Types::PrefetchRetrieval,
+        ?schedule_type: String,
+        ?recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor consumption: Types::PrefetchConsumption?
+      attr_accessor name: String?
+      attr_accessor playback_configuration_name: String?
+      attr_accessor retrieval: Types::PrefetchRetrieval?
+      attr_accessor schedule_type: String?
+      attr_accessor recurring_prefetch_configuration: Types::RecurringPrefetchConfiguration?
+      attr_accessor stream_id: String?
+    end
+
+    module PrefetchScheduleType
+      SINGLE: String
+      RECURRING: String
+    end
+
+    class PutChannelPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor policy: String?
+    end
+
+    class PutChannelPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutPlaybackConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_decision_server_url: String,
+        ?avail_suppression: Types::AvailSuppression,
+        ?bumper: Types::Bumper,
+        ?cdn_configuration: Types::CdnConfiguration,
+        ?configuration_aliases: Hash[String, Hash[String, String]],
+        ?dash_configuration: Types::DashConfigurationForPut,
+        ?insertion_mode: String,
+        ?live_pre_roll_configuration: Types::LivePreRollConfiguration,
+        ?manifest_processing_rules: Types::ManifestProcessingRules,
+        ?name: String,
+        ?personalization_threshold_seconds: Integer,
+        ?slate_ad_url: String,
+        ?tags: Hash[String, String],
+        ?transcode_profile_name: String,
+        ?video_content_source_url: String,
+        ?ad_conditioning_configuration: Types::AdConditioningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_decision_server_url: String?
+      attr_accessor avail_suppression: Types::AvailSuppression?
+      attr_accessor bumper: Types::Bumper?
+      attr_accessor cdn_configuration: Types::CdnConfiguration?
+      attr_accessor configuration_aliases: Hash[String, Hash[String, String]]?
+      attr_accessor dash_configuration: Types::DashConfigurationForPut?
+      attr_accessor insertion_mode: String?
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration?
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules?
+      attr_accessor name: String?
+      attr_accessor personalization_threshold_seconds: Integer?
+      attr_accessor slate_ad_url: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor transcode_profile_name: String?
+      attr_accessor video_content_source_url: String?
+      attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration?
+    end
+
+    class PutPlaybackConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_decision_server_url: String,
+        ?avail_suppression: Types::AvailSuppression,
+        ?bumper: Types::Bumper,
+        ?cdn_configuration: Types::CdnConfiguration,
+        ?configuration_aliases: Hash[String, Hash[String, String]],
+        ?dash_configuration: Types::DashConfiguration,
+        ?hls_configuration: Types::HlsConfiguration,
+        ?insertion_mode: String,
+        ?live_pre_roll_configuration: Types::LivePreRollConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+        ?manifest_processing_rules: Types::ManifestProcessingRules,
+        ?name: String,
+        ?personalization_threshold_seconds: Integer,
+        ?playback_configuration_arn: String,
+        ?playback_endpoint_prefix: String,
+        ?session_initialization_endpoint_prefix: String,
+        ?slate_ad_url: String,
+        ?tags: Hash[String, String],
+        ?transcode_profile_name: String,
+        ?video_content_source_url: String,
+        ?ad_conditioning_configuration: Types::AdConditioningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_decision_server_url: String?
+      attr_accessor avail_suppression: Types::AvailSuppression?
+      attr_accessor bumper: Types::Bumper?
+      attr_accessor cdn_configuration: Types::CdnConfiguration?
+      attr_accessor configuration_aliases: Hash[String, Hash[String, String]]?
+      attr_accessor dash_configuration: Types::DashConfiguration?
+      attr_accessor hls_configuration: Types::HlsConfiguration?
+      attr_accessor insertion_mode: String?
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules?
+      attr_accessor name: String?
+      attr_accessor personalization_threshold_seconds: Integer?
+      attr_accessor playback_configuration_arn: String?
+      attr_accessor playback_endpoint_prefix: String?
+      attr_accessor session_initialization_endpoint_prefix: String?
+      attr_accessor slate_ad_url: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor transcode_profile_name: String?
+      attr_accessor video_content_source_url: String?
+      attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration?
+    end
+
+    class RecurringConsumption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieved_ad_expiration_seconds: Integer,
+        ?avail_matching_criteria: Array[Types::AvailMatchingCriteria],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieved_ad_expiration_seconds: Integer?
+      attr_accessor avail_matching_criteria: Array[Types::AvailMatchingCriteria]?
+    end
+
+    class RecurringPrefetchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recurring_consumption: Types::RecurringConsumption,
+        ?recurring_retrieval: Types::RecurringRetrieval,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recurring_consumption: Types::RecurringConsumption?
+      attr_accessor recurring_retrieval: Types::RecurringRetrieval?
+    end
+
+    class RecurringRetrieval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_variables: Hash[String, String],
+        ?delay_after_avail_end_seconds: Integer,
+        ?traffic_shaping_type: String,
+        ?traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_variables: Hash[String, String]?
+      attr_accessor delay_after_avail_end_seconds: Integer?
+      attr_accessor traffic_shaping_type: String?
+      attr_accessor traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow?
+    end
+
+    module RelativePosition
+      BEFORE_PROGRAM: String
+      AFTER_PROGRAM: String
+    end
+
+    class RequestOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dash_playlist_settings: Types::DashPlaylistSettings,
+        ?hls_playlist_settings: Types::HlsPlaylistSettings,
+        ?manifest_name: String,
+        ?source_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dash_playlist_settings: Types::DashPlaylistSettings?
+      attr_accessor hls_playlist_settings: Types::HlsPlaylistSettings?
+      attr_accessor manifest_name: String?
+      attr_accessor source_group: String?
+    end
+
+    class ResponseOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dash_playlist_settings: Types::DashPlaylistSettings,
+        ?hls_playlist_settings: Types::HlsPlaylistSettings,
+        ?manifest_name: String,
+        ?playback_url: String,
+        ?source_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dash_playlist_settings: Types::DashPlaylistSettings?
+      attr_accessor hls_playlist_settings: Types::HlsPlaylistSettings?
+      attr_accessor manifest_name: String?
+      attr_accessor playback_url: String?
+      attr_accessor source_group: String?
+    end
+
+    class ScheduleAdBreak
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_duration_seconds: Integer,
+        ?approximate_start_time: Time,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_duration_seconds: Integer?
+      attr_accessor approximate_start_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+    end
+
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transition: Types::Transition,
+        ?clip_range: Types::ClipRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transition: Types::Transition?
+      attr_accessor clip_range: Types::ClipRange?
+    end
+
+    class ScheduleEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_duration_seconds: Integer,
+        ?approximate_start_time: Time,
+        ?arn: String,
+        ?channel_name: String,
+        ?live_source_name: String,
+        ?program_name: String,
+        ?schedule_ad_breaks: Array[Types::ScheduleAdBreak],
+        ?schedule_entry_type: String,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_duration_seconds: Integer?
+      attr_accessor approximate_start_time: Time?
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor live_source_name: String?
+      attr_accessor program_name: String?
+      attr_accessor schedule_ad_breaks: Array[Types::ScheduleAdBreak]?
+      attr_accessor schedule_entry_type: String?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor audiences: Array[String]?
+    end
+
+    module ScheduleEntryType
+      PROGRAM: String
+      FILLER_SLATE: String
+      ALTERNATE_MEDIA: String
+    end
+
+    class SecretsManagerAccessTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header_name: String,
+        ?secret_arn: String,
+        ?secret_string_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header_name: String?
+      attr_accessor secret_arn: String?
+      attr_accessor secret_string_key: String?
+    end
+
+    class SegmentDeliveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_url: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_url: String?
+      attr_accessor name: String?
+    end
+
+    class SegmentationDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segmentation_event_id: Integer,
+        ?segmentation_upid_type: Integer,
+        ?segmentation_upid: String,
+        ?segmentation_type_id: Integer,
+        ?segment_num: Integer,
+        ?segments_expected: Integer,
+        ?sub_segment_num: Integer,
+        ?sub_segments_expected: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segmentation_event_id: Integer?
+      attr_accessor segmentation_upid_type: Integer?
+      attr_accessor segmentation_upid: String?
+      attr_accessor segmentation_type_id: Integer?
+      attr_accessor segment_num: Integer?
+      attr_accessor segments_expected: Integer?
+      attr_accessor sub_segment_num: Integer?
+      attr_accessor sub_segments_expected: Integer?
+    end
+
+    class SlateSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_name: String,
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+    end
+
+    class SourceLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?arn: String,
+        ?creation_time: Time,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?last_modified_time: Time,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor last_modified_time: Time?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class SpliceInsertMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avail_num: Integer,
+        ?avails_expected: Integer,
+        ?splice_event_id: Integer,
+        ?unique_program_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avail_num: Integer?
+      attr_accessor avails_expected: Integer?
+      attr_accessor splice_event_id: Integer?
+      attr_accessor unique_program_id: Integer?
+    end
+
+    class StartChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class StartChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+    end
+
+    class StopChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module StreamingMediaFileConditioning
+      TRANSCODE: String
+      NONE: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module Tier
+      BASIC: String
+      STANDARD: String
+    end
+
+    class TimeShiftConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_time_delay_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_time_delay_seconds: Integer?
+    end
+
+    class TimeSignalMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segmentation_descriptors: Array[Types::SegmentationDescriptor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segmentation_descriptors: Array[Types::SegmentationDescriptor]?
+    end
+
+    class TrafficShapingRetrievalWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_window_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_window_duration_seconds: Integer?
+    end
+
+    module TrafficShapingType
+      RETRIEVAL_WINDOW: String
+    end
+
+    class Transition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_millis: Integer,
+        ?relative_position: String,
+        ?relative_program: String,
+        ?scheduled_start_time_millis: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_millis: Integer?
+      attr_accessor relative_position: String?
+      attr_accessor relative_program: String?
+      attr_accessor scheduled_start_time_millis: Integer?
+      attr_accessor type: String?
+    end
+
+    module Type
+      DASH: String
+      HLS: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?filler_slate: Types::SlateSource,
+        ?outputs: Array[Types::RequestOutputItem],
+        ?time_shift_configuration: Types::TimeShiftConfiguration,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor outputs: Array[Types::RequestOutputItem]?
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class UpdateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_name: String,
+        ?channel_state: String,
+        ?creation_time: Time,
+        ?filler_slate: Types::SlateSource,
+        ?last_modified_time: Time,
+        ?outputs: Array[Types::ResponseOutputItem],
+        ?playback_mode: String,
+        ?tags: Hash[String, String],
+        ?tier: String,
+        ?time_shift_configuration: Types::TimeShiftConfiguration,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor filler_slate: Types::SlateSource?
+      attr_accessor last_modified_time: Time?
+      attr_accessor outputs: Array[Types::ResponseOutputItem]?
+      attr_accessor playback_mode: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tier: String?
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class UpdateLiveSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?live_source_name: String,
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+    end
+
+    class UpdateLiveSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?live_source_name: String,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor live_source_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateProgramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_breaks: Array[Types::AdBreak],
+        ?channel_name: String,
+        ?program_name: String,
+        ?schedule_configuration: Types::UpdateProgramScheduleConfiguration,
+        ?audience_media: Array[Types::AudienceMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor channel_name: String?
+      attr_accessor program_name: String?
+      attr_accessor schedule_configuration: Types::UpdateProgramScheduleConfiguration?
+      attr_accessor audience_media: Array[Types::AudienceMedia]?
+    end
+
+    class UpdateProgramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_breaks: Array[Types::AdBreak],
+        ?arn: String,
+        ?channel_name: String,
+        ?creation_time: Time,
+        ?program_name: String,
+        ?source_location_name: String,
+        ?vod_source_name: String,
+        ?live_source_name: String,
+        ?clip_range: Types::ClipRange,
+        ?duration_millis: Integer,
+        ?scheduled_start_time: Time,
+        ?audience_media: Array[Types::AudienceMedia],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_breaks: Array[Types::AdBreak]?
+      attr_accessor arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor program_name: String?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+      attr_accessor live_source_name: String?
+      attr_accessor clip_range: Types::ClipRange?
+      attr_accessor duration_millis: Integer?
+      attr_accessor scheduled_start_time: Time?
+      attr_accessor audience_media: Array[Types::AudienceMedia]?
+    end
+
+    class UpdateProgramScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transition: Types::UpdateProgramTransition,
+        ?clip_range: Types::ClipRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transition: Types::UpdateProgramTransition?
+      attr_accessor clip_range: Types::ClipRange?
+    end
+
+    class UpdateProgramTransition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_start_time_millis: Integer,
+        ?duration_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_start_time_millis: Integer?
+      attr_accessor duration_millis: Integer?
+    end
+
+    class UpdateSourceLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+    end
+
+    class UpdateSourceLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_configuration: Types::AccessConfiguration,
+        ?arn: String,
+        ?creation_time: Time,
+        ?default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration,
+        ?http_configuration: Types::HttpConfiguration,
+        ?last_modified_time: Time,
+        ?segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration],
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_configuration: Types::AccessConfiguration?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration?
+      attr_accessor http_configuration: Types::HttpConfiguration?
+      attr_accessor last_modified_time: Time?
+      attr_accessor segment_delivery_configurations: Array[Types::SegmentDeliveryConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateVodSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?source_location_name: String,
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor source_location_name: String?
+      attr_accessor vod_source_name: String?
+    end
+
+    class UpdateVodSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vod_source_name: String?
+    end
+
+    class VodSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?creation_time: Time,
+        ?http_package_configurations: Array[Types::HttpPackageConfiguration],
+        ?last_modified_time: Time,
+        ?source_location_name: String,
+        ?tags: Hash[String, String],
+        ?vod_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor http_package_configurations: Array[Types::HttpPackageConfiguration]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor source_location_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vod_source_name: String?
+    end
+  end
+end

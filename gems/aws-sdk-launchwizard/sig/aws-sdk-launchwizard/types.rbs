@@ -1,0 +1,592 @@
+module Aws::LaunchWizard
+  module Types
+
+    class CreateDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+        ?name: String,
+        ?specifications: Hash[String, String],
+        ?dry_run: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+      attr_accessor name: String?
+      attr_accessor specifications: Hash[String, String]?
+      attr_accessor dry_run: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class DeleteDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class DeleteDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class DeploymentConditionalField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?comparator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor comparator: String?
+    end
+
+    class DeploymentData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?workload_name: String,
+        ?pattern_name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?specifications: Hash[String, String],
+        ?resource_group: String,
+        ?deleted_at: Time,
+        ?tags: Hash[String, String],
+        ?deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor workload_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor specifications: Hash[String, String]?
+      attr_accessor resource_group: String?
+      attr_accessor deleted_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor deployment_arn: String?
+    end
+
+    class DeploymentDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?workload_name: String,
+        ?pattern_name: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor workload_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    class DeploymentEventDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_reason: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class DeploymentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module DeploymentFilterKey
+      WORKLOAD_NAME: String
+      DEPLOYMENT_STATUS: String
+    end
+
+    class DeploymentSpecificationsField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?allowed_values: Array[String],
+        ?required: String,
+        ?conditionals: Array[Types::DeploymentConditionalField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor required: String?
+      attr_accessor conditionals: Array[Types::DeploymentConditionalField]?
+    end
+
+    module DeploymentStatus
+      COMPLETED: String
+      CREATING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_INITIATING: String
+      DELETE_FAILED: String
+      DELETED: String
+      FAILED: String
+      IN_PROGRESS: String
+      VALIDATING: String
+    end
+
+    module EventStatus
+      CANCELED: String
+      CANCELING: String
+      COMPLETED: String
+      CREATED: String
+      FAILED: String
+      IN_PROGRESS: String
+      PENDING: String
+      TIMED_OUT: String
+    end
+
+    class GetDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class GetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: Types::DeploymentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: Types::DeploymentData?
+    end
+
+    class GetWorkloadDeploymentPatternInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+    end
+
+    class GetWorkloadDeploymentPatternOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_deployment_pattern: Types::WorkloadDeploymentPatternData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_deployment_pattern: Types::WorkloadDeploymentPatternData?
+    end
+
+    class GetWorkloadInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+    end
+
+    class GetWorkloadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload: Types::WorkloadData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload: Types::WorkloadData?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDeploymentEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_events: Array[Types::DeploymentEventDataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_events: Array[Types::DeploymentEventDataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::DeploymentFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::DeploymentFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[Types::DeploymentDataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[Types::DeploymentDataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListWorkloadDeploymentPatternsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadDeploymentPatternsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_deployment_patterns: Array[Types::WorkloadDeploymentPatternDataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_deployment_patterns: Array[Types::WorkloadDeploymentPatternDataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workloads: Array[Types::WorkloadDataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workloads: Array[Types::WorkloadDataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceLimitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WorkloadData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?display_name: String,
+        ?description: String,
+        ?documentation_url: String,
+        ?icon_url: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor documentation_url: String?
+      attr_accessor icon_url: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class WorkloadDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor display_name: String?
+    end
+
+    class WorkloadDeploymentPatternData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+        ?workload_version_name: String,
+        ?display_name: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?specifications: Array[Types::DeploymentSpecificationsField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+      attr_accessor workload_version_name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor specifications: Array[Types::DeploymentSpecificationsField]?
+    end
+
+    class WorkloadDeploymentPatternDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+        ?workload_version_name: String,
+        ?display_name: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+      attr_accessor workload_version_name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module WorkloadDeploymentPatternStatus
+      ACTIVE: String
+      INACTIVE: String
+      DISABLED: String
+      DELETED: String
+    end
+
+    module WorkloadStatus
+      ACTIVE: String
+      INACTIVE: String
+      DISABLED: String
+      DELETED: String
+    end
+  end
+end

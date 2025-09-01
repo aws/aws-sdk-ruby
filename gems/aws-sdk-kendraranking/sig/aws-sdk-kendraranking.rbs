@@ -1,0 +1,5 @@
+  module Aws
+    module KendraRanking
+      VERSION: String
+    end
+  end

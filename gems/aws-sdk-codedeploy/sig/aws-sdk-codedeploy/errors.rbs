@@ -1,0 +1,334 @@
+module Aws::CodeDeploy
+  module Errors
+    class AlarmsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApplicationAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApplicationDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApplicationLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApplicationNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ArnNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BucketNameFilterRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentAlreadyCompletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentConfigAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentConfigDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentConfigInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentConfigLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentConfigNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentGroupAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentGroupDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentGroupLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentGroupNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentIsNotInReadyStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentNotStartedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentTargetDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentTargetIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeploymentTargetListSizeExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescriptionTooLongException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ECSServiceMappingLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GitHubAccountTokenDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GitHubAccountTokenNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IamArnRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IamSessionArnAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IamUserArnAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IamUserArnRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceIdRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceNameAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceNameRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceNotRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAlarmConfigException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidApplicationNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAutoRollbackConfigException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAutoScalingGroupException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBlueGreenDeploymentConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBucketNameFilterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidComputePlatformException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeployedStateFilterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentConfigNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentGroupNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentInstanceTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentStyleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentTargetIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeploymentWaitTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEC2TagCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEC2TagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidECSServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidExternalIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFileExistsBehaviorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGitHubAccountTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGitHubAccountTokenNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIamSessionArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIamUserArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIgnoreApplicationStopFailuresValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstanceNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstanceStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInstanceTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKeyPrefixFilterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLifecycleEventHookExecutionIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLifecycleEventHookExecutionStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLoadBalancerInfoException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMinimumHealthyHostValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOnPremisesTagCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRegistrationStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRevisionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRoleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSortByException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSortOrderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagFilterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagsToAddException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetFilterNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetGroupPairException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetInstancesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTimeRangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTrafficRoutingConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTriggerConfigException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUpdateOutdatedInstancesOnlyValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidZonalDeploymentConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LifecycleEventAlreadyCompletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LifecycleHookLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MultipleIamArnsProvidedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceArnRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevisionDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevisionRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RoleRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagSetListLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TriggerTargetsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedActionForDeploymentTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,7 @@
+module Aws::SagemakerEdge
+  module Errors
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

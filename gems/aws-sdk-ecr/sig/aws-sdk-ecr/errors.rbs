@@ -1,0 +1,129 @@
+module Aws::ECR
+  module Errors
+    class EmptyUploadException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageDigestDoesNotMatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageTagAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLayerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLayerPartException < Smithy::Client::ServiceError
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def upload_id: () -> String?
+      def last_valid_byte_received: () -> Integer?
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def kms_error: () -> String?
+    end
+    class LayerAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayerInaccessibleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayerPartTooSmallException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LayersNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LifecyclePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LifecyclePolicyPreviewInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LifecyclePolicyPreviewNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullThroughCacheRuleAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PullThroughCacheRuleNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReferencedImagesNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RegistryPolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNotEmptyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RepositoryPolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ScanNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SecretNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TemplateAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TemplateNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToAccessSecretException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToDecryptSecretValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToGetUpstreamImageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToGetUpstreamLayerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedImageTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedUpstreamRegistryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UploadNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

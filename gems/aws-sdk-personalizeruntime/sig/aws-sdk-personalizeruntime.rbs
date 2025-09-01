@@ -1,0 +1,5 @@
+  module Aws
+    module PersonalizeRuntime
+      VERSION: String
+    end
+  end

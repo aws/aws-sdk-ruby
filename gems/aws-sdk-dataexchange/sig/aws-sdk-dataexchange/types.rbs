@@ -1,0 +1,2425 @@
+module Aws::DataExchange
+  module Types
+
+    class AcceptDataGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_arn: String?
+    end
+
+    class AcceptDataGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?description: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?grant_distribution_scope: String,
+        ?data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor description: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor grant_distribution_scope: String?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_revision_to_s3: Types::AutoExportRevisionToS3RequestDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_revision_to_s3: Types::AutoExportRevisionToS3RequestDetails?
+    end
+
+    class ApiGatewayApiAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_description: String,
+        ?api_endpoint: String,
+        ?api_id: String,
+        ?api_key: String,
+        ?api_name: String,
+        ?api_specification_download_url: String,
+        ?api_specification_download_url_expires_at: Time,
+        ?protocol_type: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_description: String?
+      attr_accessor api_endpoint: String?
+      attr_accessor api_id: String?
+      attr_accessor api_key: String?
+      attr_accessor api_name: String?
+      attr_accessor api_specification_download_url: String?
+      attr_accessor api_specification_download_url_expires_at: Time?
+      attr_accessor protocol_type: String?
+      attr_accessor stage: String?
+    end
+
+    class AssetDestinationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class AssetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_snapshot_asset: Types::S3SnapshotAsset,
+        ?redshift_data_share_asset: Types::RedshiftDataShareAsset,
+        ?api_gateway_api_asset: Types::ApiGatewayApiAsset,
+        ?s3_data_access_asset: Types::S3DataAccessAsset,
+        ?lake_formation_data_permission_asset: Types::LakeFormationDataPermissionAsset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_snapshot_asset: Types::S3SnapshotAsset?
+      attr_accessor redshift_data_share_asset: Types::RedshiftDataShareAsset?
+      attr_accessor api_gateway_api_asset: Types::ApiGatewayApiAsset?
+      attr_accessor s3_data_access_asset: Types::S3DataAccessAsset?
+      attr_accessor lake_formation_data_permission_asset: Types::LakeFormationDataPermissionAsset?
+    end
+
+    class AssetEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_details: Types::AssetDetails,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?id: String,
+        ?name: String,
+        ?revision_id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_details: Types::AssetDetails?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class AssetSourceEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class AutoExportRevisionDestinationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_pattern: String?
+    end
+
+    class AutoExportRevisionToS3RequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption: Types::ExportServerSideEncryption,
+        ?revision_destination: Types::AutoExportRevisionDestinationEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption: Types::ExportServerSideEncryption?
+      attr_accessor revision_destination: Types::AutoExportRevisionDestinationEntry?
+    end
+
+    class CancelJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateDataGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?grant_distribution_scope: String,
+        ?receiver_principal: String,
+        ?source_data_set_id: String,
+        ?ends_at: Time,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor grant_distribution_scope: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor source_data_set_id: String?
+      attr_accessor ends_at: Time?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?description: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?grant_distribution_scope: String,
+        ?data_set_id: String,
+        ?source_data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor description: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor grant_distribution_scope: String?
+      attr_accessor data_set_id: String?
+      attr_accessor source_data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_type: String,
+        ?description: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_type: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?origin: String,
+        ?origin_details: Types::OriginDetails,
+        ?source_id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor origin: String?
+      attr_accessor origin_details: Types::OriginDetails?
+      attr_accessor source_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateEventActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?event: Types::Event,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor event: Types::Event?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEventActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?arn: String,
+        ?created_at: Time,
+        ?event: Types::Event,
+        ?id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor event: Types::Event?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: Types::RequestDetails,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: Types::RequestDetails?
+      attr_accessor type: String?
+    end
+
+    class CreateJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: Time,
+        ?details: Types::ResponseDetails,
+        ?errors: Array[Types::JobError],
+        ?id: String,
+        ?state: String,
+        ?type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor details: Types::ResponseDetails?
+      attr_accessor errors: Array[Types::JobError]?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: String,
+        ?data_set_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: String?
+      attr_accessor data_set_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?comment: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?id: String,
+        ?source_id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+        ?revocation_comment: String,
+        ?revoked: bool,
+        ?revoked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor comment: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor id: String?
+      attr_accessor source_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+      attr_accessor revocation_comment: String?
+      attr_accessor revoked: bool?
+      attr_accessor revoked_at: Time?
+    end
+
+    class CreateS3DataAccessFromS3BucketRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_source: Types::S3DataAccessAssetSourceEntry,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_source: Types::S3DataAccessAssetSourceEntry?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class CreateS3DataAccessFromS3BucketResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_source: Types::S3DataAccessAssetSourceEntry,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_source: Types::S3DataAccessAssetSourceEntry?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class DataGrantSummaryEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?data_set_id: String,
+        ?source_data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor source_data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DataSetEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?origin: String,
+        ?origin_details: Types::OriginDetails,
+        ?source_id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor origin: String?
+      attr_accessor origin_details: Types::OriginDetails?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class DataUpdateRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_updated_at: Time?
+    end
+
+    class DatabaseLFTagPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class DatabaseLFTagPolicyAndPermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: Array[Types::LFTag],
+        ?permissions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: Array[Types::LFTag]?
+      attr_accessor permissions: Array[String]?
+    end
+
+    class DeleteAssetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class DeleteDataGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_id: String?
+    end
+
+    class DeleteDataSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+    end
+
+    class DeleteEventActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_action_id: String?
+    end
+
+    class DeleteRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class DeprecationRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deprecation_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deprecation_at: Time?
+    end
+
+    class Details
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_asset_from_signed_url_job_error_details: Types::ImportAssetFromSignedUrlJobErrorDetails,
+        ?import_assets_from_s3_job_error_details: Array[Types::AssetSourceEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_asset_from_signed_url_job_error_details: Types::ImportAssetFromSignedUrlJobErrorDetails?
+      attr_accessor import_assets_from_s3_job_error_details: Array[Types::AssetSourceEntry]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_published: Types::RevisionPublished,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_published: Types::RevisionPublished?
+    end
+
+    class EventActionEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?arn: String,
+        ?created_at: Time,
+        ?event: Types::Event,
+        ?id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor event: Types::Event?
+      attr_accessor id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ExportAssetToSignedUrlRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ExportAssetToSignedUrlResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+        ?signed_url: String,
+        ?signed_url_expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor signed_url: String?
+      attr_accessor signed_url_expires_at: Time?
+    end
+
+    class ExportAssetsToS3RequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_destinations: Array[Types::AssetDestinationEntry],
+        ?data_set_id: String,
+        ?encryption: Types::ExportServerSideEncryption,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_destinations: Array[Types::AssetDestinationEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor encryption: Types::ExportServerSideEncryption?
+      attr_accessor revision_id: String?
+    end
+
+    class ExportAssetsToS3ResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_destinations: Array[Types::AssetDestinationEntry],
+        ?data_set_id: String,
+        ?encryption: Types::ExportServerSideEncryption,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_destinations: Array[Types::AssetDestinationEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor encryption: Types::ExportServerSideEncryption?
+      attr_accessor revision_id: String?
+    end
+
+    class ExportRevisionsToS3RequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?encryption: Types::ExportServerSideEncryption,
+        ?revision_destinations: Array[Types::RevisionDestinationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor encryption: Types::ExportServerSideEncryption?
+      attr_accessor revision_destinations: Array[Types::RevisionDestinationEntry]?
+    end
+
+    class ExportRevisionsToS3ResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?encryption: Types::ExportServerSideEncryption,
+        ?revision_destinations: Array[Types::RevisionDestinationEntry],
+        ?event_action_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor encryption: Types::ExportServerSideEncryption?
+      attr_accessor revision_destinations: Array[Types::RevisionDestinationEntry]?
+      attr_accessor event_action_arn: String?
+    end
+
+    class ExportServerSideEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor type: String?
+    end
+
+    class GetAssetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetAssetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_details: Types::AssetDetails,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?id: String,
+        ?name: String,
+        ?revision_id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_details: Types::AssetDetails?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetDataGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_id: String?
+    end
+
+    class GetDataGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?description: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?grant_distribution_scope: String,
+        ?data_set_id: String,
+        ?source_data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor description: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor grant_distribution_scope: String?
+      attr_accessor data_set_id: String?
+      attr_accessor source_data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDataSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+    end
+
+    class GetDataSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?origin: String,
+        ?origin_details: Types::OriginDetails,
+        ?source_id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor origin: String?
+      attr_accessor origin_details: Types::OriginDetails?
+      attr_accessor source_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetEventActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_action_id: String?
+    end
+
+    class GetEventActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?arn: String,
+        ?created_at: Time,
+        ?event: Types::Event,
+        ?id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor event: Types::Event?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: Time,
+        ?details: Types::ResponseDetails,
+        ?errors: Array[Types::JobError],
+        ?id: String,
+        ?state: String,
+        ?type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor details: Types::ResponseDetails?
+      attr_accessor errors: Array[Types::JobError]?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetReceivedDataGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_arn: String?
+    end
+
+    class GetReceivedDataGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?description: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?grant_distribution_scope: String,
+        ?data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor description: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor grant_distribution_scope: String?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?comment: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?id: String,
+        ?source_id: String,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+        ?revocation_comment: String,
+        ?revoked: bool,
+        ?revoked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor comment: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor id: String?
+      attr_accessor source_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+      attr_accessor revocation_comment: String?
+      attr_accessor revoked: bool?
+      attr_accessor revoked_at: Time?
+    end
+
+    class ImportAssetFromApiGatewayApiRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_description: String,
+        ?api_id: String,
+        ?api_key: String,
+        ?api_name: String,
+        ?api_specification_md5_hash: String,
+        ?data_set_id: String,
+        ?protocol_type: String,
+        ?revision_id: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_description: String?
+      attr_accessor api_id: String?
+      attr_accessor api_key: String?
+      attr_accessor api_name: String?
+      attr_accessor api_specification_md5_hash: String?
+      attr_accessor data_set_id: String?
+      attr_accessor protocol_type: String?
+      attr_accessor revision_id: String?
+      attr_accessor stage: String?
+    end
+
+    class ImportAssetFromApiGatewayApiResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_description: String,
+        ?api_id: String,
+        ?api_key: String,
+        ?api_name: String,
+        ?api_specification_md5_hash: String,
+        ?api_specification_upload_url: String,
+        ?api_specification_upload_url_expires_at: Time,
+        ?data_set_id: String,
+        ?protocol_type: String,
+        ?revision_id: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_description: String?
+      attr_accessor api_id: String?
+      attr_accessor api_key: String?
+      attr_accessor api_name: String?
+      attr_accessor api_specification_md5_hash: String?
+      attr_accessor api_specification_upload_url: String?
+      attr_accessor api_specification_upload_url_expires_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor protocol_type: String?
+      attr_accessor revision_id: String?
+      attr_accessor stage: String?
+    end
+
+    class ImportAssetFromSignedUrlJobErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_name: String?
+    end
+
+    class ImportAssetFromSignedUrlRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_name: String,
+        ?data_set_id: String,
+        ?md5_hash: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_name: String?
+      attr_accessor data_set_id: String?
+      attr_accessor md5_hash: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetFromSignedUrlResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_name: String,
+        ?data_set_id: String,
+        ?md5_hash: String,
+        ?revision_id: String,
+        ?signed_url: String,
+        ?signed_url_expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_name: String?
+      attr_accessor data_set_id: String?
+      attr_accessor md5_hash: String?
+      attr_accessor revision_id: String?
+      attr_accessor signed_url: String?
+      attr_accessor signed_url_expires_at: Time?
+    end
+
+    class ImportAssetsFromLakeFormationTagPolicyRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database: Types::DatabaseLFTagPolicyAndPermissions,
+        ?table: Types::TableLFTagPolicyAndPermissions,
+        ?role_arn: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database: Types::DatabaseLFTagPolicyAndPermissions?
+      attr_accessor table: Types::TableLFTagPolicyAndPermissions?
+      attr_accessor role_arn: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetsFromLakeFormationTagPolicyResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database: Types::DatabaseLFTagPolicyAndPermissions,
+        ?table: Types::TableLFTagPolicyAndPermissions,
+        ?role_arn: String,
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database: Types::DatabaseLFTagPolicyAndPermissions?
+      attr_accessor table: Types::TableLFTagPolicyAndPermissions?
+      attr_accessor role_arn: String?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetsFromRedshiftDataSharesRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_sources: Array[Types::RedshiftDataShareAssetSourceEntry],
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_sources: Array[Types::RedshiftDataShareAssetSourceEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetsFromRedshiftDataSharesResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_sources: Array[Types::RedshiftDataShareAssetSourceEntry],
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_sources: Array[Types::RedshiftDataShareAssetSourceEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetsFromS3RequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_sources: Array[Types::AssetSourceEntry],
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_sources: Array[Types::AssetSourceEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ImportAssetsFromS3ResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_sources: Array[Types::AssetSourceEntry],
+        ?data_set_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_sources: Array[Types::AssetSourceEntry]?
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: Time,
+        ?details: Types::ResponseDetails,
+        ?errors: Array[Types::JobError],
+        ?id: String,
+        ?state: String,
+        ?type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor details: Types::ResponseDetails?
+      attr_accessor errors: Array[Types::JobError]?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class JobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?details: Types::Details,
+        ?limit_name: String,
+        ?limit_value: Float,
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor details: Types::Details?
+      attr_accessor limit_name: String?
+      attr_accessor limit_value: Float?
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class KmsKeyToGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+    end
+
+    class LFResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::DatabaseLFTagPolicy,
+        ?table: Types::TableLFTagPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::DatabaseLFTagPolicy?
+      attr_accessor table: Types::TableLFTagPolicy?
+    end
+
+    class LFTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class LFTagPolicyDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource_type: String,
+        ?resource_details: Types::LFResourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_details: Types::LFResourceDetails?
+    end
+
+    class LakeFormationDataPermissionAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lake_formation_data_permission_details: Types::LakeFormationDataPermissionDetails,
+        ?lake_formation_data_permission_type: String,
+        ?permissions: Array[String],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lake_formation_data_permission_details: Types::LakeFormationDataPermissionDetails?
+      attr_accessor lake_formation_data_permission_type: String?
+      attr_accessor permissions: Array[String]?
+      attr_accessor role_arn: String?
+    end
+
+    class LakeFormationDataPermissionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lf_tag_policy: Types::LFTagPolicyDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lf_tag_policy: Types::LFTagPolicyDetails?
+    end
+
+    class LakeFormationTagPolicyDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: String,
+        ?table: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: String?
+      attr_accessor table: String?
+    end
+
+    class ListDataGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataGrantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_summaries: Array[Types::DataGrantSummaryEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_summaries: Array[Types::DataGrantSummaryEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSetRevisionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSetRevisionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?revisions: Array[Types::RevisionEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor revisions: Array[Types::RevisionEntry]?
+    end
+
+    class ListDataSetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor origin: String?
+    end
+
+    class ListDataSetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_sets: Array[Types::DataSetEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_sets: Array[Types::DataSetEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_actions: Array[Types::EventActionEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_actions: Array[Types::EventActionEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ListJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReceivedDataGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?acceptance_state: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor acceptance_state: Array[String]?
+    end
+
+    class ListReceivedDataGrantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_grant_summaries: Array[Types::ReceivedDataGrantSummariesEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_grant_summaries: Array[Types::ReceivedDataGrantSummariesEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRevisionAssetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ListRevisionAssetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assets: Array[Types::AssetEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assets: Array[Types::AssetEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NotificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_update: Types::DataUpdateRequestDetails,
+        ?deprecation: Types::DeprecationRequestDetails,
+        ?schema_change: Types::SchemaChangeRequestDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_update: Types::DataUpdateRequestDetails?
+      attr_accessor deprecation: Types::DeprecationRequestDetails?
+      attr_accessor schema_change: Types::SchemaChangeRequestDetails?
+    end
+
+    class OriginDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?data_grant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor data_grant_id: String?
+    end
+
+    class ReceivedDataGrantSummariesEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sender_principal: String,
+        ?receiver_principal: String,
+        ?acceptance_state: String,
+        ?accepted_at: Time,
+        ?ends_at: Time,
+        ?data_set_id: String,
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sender_principal: String?
+      attr_accessor receiver_principal: String?
+      attr_accessor acceptance_state: String?
+      attr_accessor accepted_at: Time?
+      attr_accessor ends_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class RedshiftDataShareAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class RedshiftDataShareAssetSourceEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_share_arn: String?
+    end
+
+    class RedshiftDataShareDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?database: String,
+        ?function: String,
+        ?table: String,
+        ?schema: String,
+        ?view: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor database: String?
+      attr_accessor function: String?
+      attr_accessor table: String?
+      attr_accessor schema: String?
+      attr_accessor view: String?
+    end
+
+    class RequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_asset_to_signed_url: Types::ExportAssetToSignedUrlRequestDetails,
+        ?export_assets_to_s3: Types::ExportAssetsToS3RequestDetails,
+        ?export_revisions_to_s3: Types::ExportRevisionsToS3RequestDetails,
+        ?import_asset_from_signed_url: Types::ImportAssetFromSignedUrlRequestDetails,
+        ?import_assets_from_s3: Types::ImportAssetsFromS3RequestDetails,
+        ?import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesRequestDetails,
+        ?import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiRequestDetails,
+        ?create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketRequestDetails,
+        ?import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_asset_to_signed_url: Types::ExportAssetToSignedUrlRequestDetails?
+      attr_accessor export_assets_to_s3: Types::ExportAssetsToS3RequestDetails?
+      attr_accessor export_revisions_to_s3: Types::ExportRevisionsToS3RequestDetails?
+      attr_accessor import_asset_from_signed_url: Types::ImportAssetFromSignedUrlRequestDetails?
+      attr_accessor import_assets_from_s3: Types::ImportAssetsFromS3RequestDetails?
+      attr_accessor import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesRequestDetails?
+      attr_accessor import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiRequestDetails?
+      attr_accessor create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketRequestDetails?
+      attr_accessor import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResponseDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_asset_to_signed_url: Types::ExportAssetToSignedUrlResponseDetails,
+        ?export_assets_to_s3: Types::ExportAssetsToS3ResponseDetails,
+        ?export_revisions_to_s3: Types::ExportRevisionsToS3ResponseDetails,
+        ?import_asset_from_signed_url: Types::ImportAssetFromSignedUrlResponseDetails,
+        ?import_assets_from_s3: Types::ImportAssetsFromS3ResponseDetails,
+        ?import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesResponseDetails,
+        ?import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiResponseDetails,
+        ?create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketResponseDetails,
+        ?import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_asset_to_signed_url: Types::ExportAssetToSignedUrlResponseDetails?
+      attr_accessor export_assets_to_s3: Types::ExportAssetsToS3ResponseDetails?
+      attr_accessor export_revisions_to_s3: Types::ExportRevisionsToS3ResponseDetails?
+      attr_accessor import_asset_from_signed_url: Types::ImportAssetFromSignedUrlResponseDetails?
+      attr_accessor import_assets_from_s3: Types::ImportAssetsFromS3ResponseDetails?
+      attr_accessor import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesResponseDetails?
+      attr_accessor import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiResponseDetails?
+      attr_accessor create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketResponseDetails?
+      attr_accessor import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails?
+    end
+
+    class RevisionDestinationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_pattern: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_pattern: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RevisionEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?comment: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+        ?revocation_comment: String,
+        ?revoked: bool,
+        ?revoked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor comment: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor revocation_comment: String?
+      attr_accessor revoked: bool?
+      attr_accessor revoked_at: Time?
+    end
+
+    class RevisionPublished
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+    end
+
+    class RevokeRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?revision_id: String,
+        ?revocation_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor revocation_comment: String?
+    end
+
+    class RevokeRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?comment: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+        ?revocation_comment: String,
+        ?revoked: bool,
+        ?revoked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor comment: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor revocation_comment: String?
+      attr_accessor revoked: bool?
+      attr_accessor revoked_at: Time?
+    end
+
+    class S3DataAccessAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefixes: Array[String],
+        ?keys: Array[String],
+        ?s3_access_point_alias: String,
+        ?s3_access_point_arn: String,
+        ?kms_keys_to_grant: Array[Types::KmsKeyToGrant],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefixes: Array[String]?
+      attr_accessor keys: Array[String]?
+      attr_accessor s3_access_point_alias: String?
+      attr_accessor s3_access_point_arn: String?
+      attr_accessor kms_keys_to_grant: Array[Types::KmsKeyToGrant]?
+    end
+
+    class S3DataAccessAssetSourceEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefixes: Array[String],
+        ?keys: Array[String],
+        ?kms_keys_to_grant: Array[Types::KmsKeyToGrant],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefixes: Array[String]?
+      attr_accessor keys: Array[String]?
+      attr_accessor kms_keys_to_grant: Array[Types::KmsKeyToGrant]?
+    end
+
+    class S3DataAccessDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_prefixes: Array[String],
+        ?keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_prefixes: Array[String]?
+      attr_accessor keys: Array[String]?
+    end
+
+    class S3SnapshotAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size: Float?
+    end
+
+    class SchemaChangeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+    end
+
+    class SchemaChangeRequestDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changes: Array[Types::SchemaChangeDetails],
+        ?schema_change_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changes: Array[Types::SchemaChangeDetails]?
+      attr_accessor schema_change_at: Time?
+    end
+
+    class ScopeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lake_formation_tag_policies: Array[Types::LakeFormationTagPolicyDetails],
+        ?redshift_data_shares: Array[Types::RedshiftDataShareDetails],
+        ?s3_data_accesses: Array[Types::S3DataAccessDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lake_formation_tag_policies: Array[Types::LakeFormationTagPolicyDetails]?
+      attr_accessor redshift_data_shares: Array[Types::RedshiftDataShareDetails]?
+      attr_accessor s3_data_accesses: Array[Types::S3DataAccessDetails]?
+    end
+
+    class SendApiAssetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?query_string_parameters: Hash[String, String],
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?request_headers: Hash[String, String],
+        ?method: String,
+        ?path: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor query_string_parameters: Hash[String, String]?
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor request_headers: Hash[String, String]?
+      attr_accessor method: String?
+      attr_accessor path: String?
+      attr_accessor revision_id: String?
+    end
+
+    class SendApiAssetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?response_headers: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor response_headers: Hash[String, String]?
+    end
+
+    class SendDataSetNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: Types::ScopeDetails,
+        ?client_token: String,
+        ?comment: String,
+        ?data_set_id: String,
+        ?details: Types::NotificationDetails,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: Types::ScopeDetails?
+      attr_accessor client_token: String?
+      attr_accessor comment: String?
+      attr_accessor data_set_id: String?
+      attr_accessor details: Types::NotificationDetails?
+      attr_accessor type: String?
+    end
+
+    class SendDataSetNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_name: String,
+        ?limit_value: Float,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_name: String?
+      attr_accessor limit_value: Float?
+      attr_accessor message: String?
+    end
+
+    class StartJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TableLFTagPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class TableLFTagPolicyAndPermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: Array[Types::LFTag],
+        ?permissions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: Array[Types::LFTag]?
+      attr_accessor permissions: Array[String]?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAssetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?data_set_id: String,
+        ?name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor data_set_id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class UpdateAssetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_details: Types::AssetDetails,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?id: String,
+        ?name: String,
+        ?revision_id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_details: Types::AssetDetails?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateDataSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?description: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateDataSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?asset_type: String,
+        ?created_at: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?origin: String,
+        ?origin_details: Types::OriginDetails,
+        ?source_id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor asset_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor origin: String?
+      attr_accessor origin_details: Types::OriginDetails?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateEventActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?event_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor event_action_id: String?
+    end
+
+    class UpdateEventActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?arn: String,
+        ?created_at: Time,
+        ?event: Types::Event,
+        ?id: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor event: Types::Event?
+      attr_accessor id: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: String,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: String?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor revision_id: String?
+    end
+
+    class UpdateRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?comment: String,
+        ?created_at: Time,
+        ?data_set_id: String,
+        ?finalized: bool,
+        ?id: String,
+        ?source_id: String,
+        ?updated_at: Time,
+        ?revocation_comment: String,
+        ?revoked: bool,
+        ?revoked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor comment: String?
+      attr_accessor created_at: Time?
+      attr_accessor data_set_id: String?
+      attr_accessor finalized: bool?
+      attr_accessor id: String?
+      attr_accessor source_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor revocation_comment: String?
+      attr_accessor revoked: bool?
+      attr_accessor revoked_at: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?exception_cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor exception_cause: String?
+    end
+  end
+end

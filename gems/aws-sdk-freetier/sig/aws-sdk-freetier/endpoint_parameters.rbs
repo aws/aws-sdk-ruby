@@ -1,0 +1,13 @@
+module Aws::FreeTier
+  class EndpointParameters
+    def initialize: (
+      ?region: String,
+      use_fips: bool,
+      ?endpoint: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String?
+    attr_accessor use_fips: bool
+    attr_accessor endpoint: String?
+  end
+end

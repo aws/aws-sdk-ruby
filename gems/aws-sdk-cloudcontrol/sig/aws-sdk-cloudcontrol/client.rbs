@@ -1,0 +1,144 @@
+module Aws::CloudControl
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudControl::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelResourceRequestResponse
+      include Smithy::Client::_Response[Types::CancelResourceRequestOperationOutput]
+      def progress_event: () -> Types::ProgressEvent?
+    end
+    def cancel_resource_request: (
+      ?request_token: String
+    ) -> _CancelResourceRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelResourceRequestResponse
+
+    interface _CreateResourceResponse
+      include Smithy::Client::_Response[Types::CreateResourceOperationOutput]
+      def progress_event: () -> Types::ProgressEvent?
+    end
+    def create_resource: (
+      ?type_name: String,
+      ?type_version_id: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?desired_state: String
+    ) -> _CreateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceResponse
+
+    interface _DeleteResourceResponse
+      include Smithy::Client::_Response[Types::DeleteResourceOperationOutput]
+      def progress_event: () -> Types::ProgressEvent?
+    end
+    def delete_resource: (
+      ?type_name: String,
+      ?type_version_id: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?identifier: String
+    ) -> _DeleteResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceResponse
+
+    interface _GetResourceResponse
+      include Smithy::Client::_Response[Types::GetResourceOperationOutput]
+      def type_name: () -> String?
+      def resource_description: () -> Types::ResourceDescription?
+    end
+    def get_resource: (
+      ?type_name: String,
+      ?type_version_id: String,
+      ?role_arn: String,
+      ?identifier: String
+    ) -> _GetResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceResponse
+
+    interface _GetResourceRequestStatusResponse
+      include Smithy::Client::_Response[Types::GetResourceRequestStatusOperationOutput]
+      def progress_event: () -> Types::ProgressEvent?
+      def hooks_progress_event: () -> Array[Types::HookProgressEvent]?
+    end
+    def get_resource_request_status: (
+      ?request_token: String
+    ) -> _GetResourceRequestStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceRequestStatusResponse
+
+    interface _ListResourceRequestsResponse
+      include Smithy::Client::_Response[Types::ListResourceRequestsOutput]
+      def resource_request_status_summaries: () -> Array[Types::ProgressEvent]?
+      def next_token: () -> String?
+    end
+    def list_resource_requests: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_request_status_filter: {
+        operations: Array[String],
+        operation_statuses: Array[String]
+      }
+    ) -> _ListResourceRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceRequestsResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesOutput]
+      def type_name: () -> String?
+      def resource_descriptions: () -> Array[Types::ResourceDescription]?
+      def next_token: () -> String?
+    end
+    def list_resources: (
+      ?type_name: String,
+      ?type_version_id: String,
+      ?role_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_model: String
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _UpdateResourceResponse
+      include Smithy::Client::_Response[Types::UpdateResourceOperationOutput]
+      def progress_event: () -> Types::ProgressEvent?
+    end
+    def update_resource: (
+      ?type_name: String,
+      ?type_version_id: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?patch_document: String
+    ) -> _UpdateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceResponse
+  end
+end

@@ -1,0 +1,1487 @@
+module Aws::Shield
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessDeniedForDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationLayerAutomaticResponseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?action: Types::ResponseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor action: Types::ResponseAction?
+    end
+
+    module ApplicationLayerAutomaticResponseStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AssociateDRTLogBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_bucket: String?
+    end
+
+    class AssociateDRTLogBucketResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateDRTRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class AssociateDRTRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_id: String,
+        ?health_check_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_id: String?
+      attr_accessor health_check_arn: String?
+    end
+
+    class AssociateHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateProactiveEngagementDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_contact_list: Array[Types::EmergencyContact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_contact_list: Array[Types::EmergencyContact]?
+    end
+
+    class AssociateProactiveEngagementDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttackDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_id: String,
+        ?resource_arn: String,
+        ?sub_resources: Array[Types::SubResourceSummary],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?attack_counters: Array[Types::SummarizedCounter],
+        ?attack_properties: Array[Types::AttackProperty],
+        ?mitigations: Array[Types::Mitigation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor sub_resources: Array[Types::SubResourceSummary]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor attack_counters: Array[Types::SummarizedCounter]?
+      attr_accessor attack_properties: Array[Types::AttackProperty]?
+      attr_accessor mitigations: Array[Types::Mitigation]?
+    end
+
+    module AttackLayer
+      NETWORK: String
+      APPLICATION: String
+    end
+
+    class AttackProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_layer: String,
+        ?attack_property_identifier: String,
+        ?top_contributors: Array[Types::Contributor],
+        ?unit: String,
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_layer: String?
+      attr_accessor attack_property_identifier: String?
+      attr_accessor top_contributors: Array[Types::Contributor]?
+      attr_accessor unit: String?
+      attr_accessor total: Integer?
+    end
+
+    module AttackPropertyIdentifier
+      DESTINATION_URL: String
+      REFERRER: String
+      SOURCE_ASN: String
+      SOURCE_COUNTRY: String
+      SOURCE_IP_ADDRESS: String
+      SOURCE_USER_AGENT: String
+      WORDPRESS_PINGBACK_REFLECTOR: String
+      WORDPRESS_PINGBACK_SOURCE: String
+    end
+
+    class AttackStatisticsDataItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_volume: Types::AttackVolume,
+        ?attack_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_volume: Types::AttackVolume?
+      attr_accessor attack_count: Integer?
+    end
+
+    class AttackSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_id: String,
+        ?resource_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?attack_vectors: Array[Types::AttackVectorDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor attack_vectors: Array[Types::AttackVectorDescription]?
+    end
+
+    class AttackVectorDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_type: String?
+    end
+
+    class AttackVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bits_per_second: Types::AttackVolumeStatistics,
+        ?packets_per_second: Types::AttackVolumeStatistics,
+        ?requests_per_second: Types::AttackVolumeStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bits_per_second: Types::AttackVolumeStatistics?
+      attr_accessor packets_per_second: Types::AttackVolumeStatistics?
+      attr_accessor requests_per_second: Types::AttackVolumeStatistics?
+    end
+
+    class AttackVolumeStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max: Float?
+    end
+
+    module AutoRenew
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class BlockAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Contributor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Integer?
+    end
+
+    class CountAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateProtectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+        ?aggregation: String,
+        ?pattern: String,
+        ?resource_type: String,
+        ?members: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+      attr_accessor aggregation: String?
+      attr_accessor pattern: String?
+      attr_accessor resource_type: String?
+      attr_accessor members: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProtectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_id: String?
+    end
+
+    class CreateSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProtectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+    end
+
+    class DeleteProtectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_id: String?
+    end
+
+    class DeleteProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAttackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_id: String?
+    end
+
+    class DescribeAttackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack: Types::AttackDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack: Types::AttackDetail?
+    end
+
+    class DescribeAttackStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAttackStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::TimeRange,
+        ?data_items: Array[Types::AttackStatisticsDataItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::TimeRange?
+      attr_accessor data_items: Array[Types::AttackStatisticsDataItem]?
+    end
+
+    class DescribeDRTAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeDRTAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?log_bucket_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor log_bucket_list: Array[String]?
+    end
+
+    class DescribeEmergencyContactSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEmergencyContactSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_contact_list: Array[Types::EmergencyContact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_contact_list: Array[Types::EmergencyContact]?
+    end
+
+    class DescribeProtectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+    end
+
+    class DescribeProtectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group: Types::ProtectionGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group: Types::ProtectionGroup?
+    end
+
+    class DescribeProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeProtectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection: Types::Protection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection: Types::Protection?
+    end
+
+    class DescribeSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+    end
+
+    class DisableApplicationLayerAutomaticResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DisableApplicationLayerAutomaticResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableProactiveEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableProactiveEngagementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateDRTLogBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_bucket: String?
+    end
+
+    class DisassociateDRTLogBucketResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateDRTRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateDRTRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_id: String,
+        ?health_check_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_id: String?
+      attr_accessor health_check_arn: String?
+    end
+
+    class DisassociateHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EmergencyContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?phone_number: String,
+        ?contact_notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor phone_number: String?
+      attr_accessor contact_notes: String?
+    end
+
+    class EnableApplicationLayerAutomaticResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?action: Types::ResponseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor action: Types::ResponseAction?
+    end
+
+    class EnableApplicationLayerAutomaticResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableProactiveEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableProactiveEngagementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetSubscriptionStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetSubscriptionStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_state: String?
+    end
+
+    class InclusionProtectionFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?protection_names: Array[String],
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor protection_names: Array[String]?
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class InclusionProtectionGroupFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_ids: Array[String],
+        ?patterns: Array[String],
+        ?resource_types: Array[String],
+        ?aggregations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_ids: Array[String]?
+      attr_accessor patterns: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor aggregations: Array[String]?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPaginationTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class InvalidResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Limit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor max: Integer?
+    end
+
+    class LimitsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?type: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor type: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListAttacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?start_time: Types::TimeRange,
+        ?end_time: Types::TimeRange,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor start_time: Types::TimeRange?
+      attr_accessor end_time: Types::TimeRange?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAttacksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_summaries: Array[Types::AttackSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_summaries: Array[Types::AttackSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProtectionGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?inclusion_filters: Types::InclusionProtectionGroupFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor inclusion_filters: Types::InclusionProtectionGroupFilters?
+    end
+
+    class ListProtectionGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_groups: Array[Types::ProtectionGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_groups: Array[Types::ProtectionGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProtectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?inclusion_filters: Types::InclusionProtectionFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor inclusion_filters: Types::InclusionProtectionFilters?
+    end
+
+    class ListProtectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protections: Array[Types::Protection],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protections: Array[Types::Protection]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesInProtectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourcesInProtectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LockedSubscriptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Mitigation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mitigation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mitigation_name: String?
+    end
+
+    class NoAssociatedRoleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OptimisticLockException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ProactiveEngagementStatus
+      ENABLED: String
+      DISABLED: String
+      PENDING: String
+    end
+
+    module ProtectedResourceType
+      CLOUDFRONT_DISTRIBUTION: String
+      ROUTE_53_HOSTED_ZONE: String
+      ELASTIC_IP_ALLOCATION: String
+      CLASSIC_LOAD_BALANCER: String
+      APPLICATION_LOAD_BALANCER: String
+      GLOBAL_ACCELERATOR: String
+    end
+
+    class Protection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?resource_arn: String,
+        ?health_check_ids: Array[String],
+        ?protection_arn: String,
+        ?application_layer_automatic_response_configuration: Types::ApplicationLayerAutomaticResponseConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor health_check_ids: Array[String]?
+      attr_accessor protection_arn: String?
+      attr_accessor application_layer_automatic_response_configuration: Types::ApplicationLayerAutomaticResponseConfiguration?
+    end
+
+    class ProtectionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+        ?aggregation: String,
+        ?pattern: String,
+        ?resource_type: String,
+        ?members: Array[String],
+        ?protection_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+      attr_accessor aggregation: String?
+      attr_accessor pattern: String?
+      attr_accessor resource_type: String?
+      attr_accessor members: Array[String]?
+      attr_accessor protection_group_arn: String?
+    end
+
+    module ProtectionGroupAggregation
+      SUM: String
+      MEAN: String
+      MAX: String
+    end
+
+    class ProtectionGroupArbitraryPatternLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_members: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_members: Integer?
+    end
+
+    class ProtectionGroupLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_protection_groups: Integer,
+        ?pattern_type_limits: Types::ProtectionGroupPatternTypeLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_protection_groups: Integer?
+      attr_accessor pattern_type_limits: Types::ProtectionGroupPatternTypeLimits?
+    end
+
+    module ProtectionGroupPattern
+      ALL: String
+      ARBITRARY: String
+      BY_RESOURCE_TYPE: String
+    end
+
+    class ProtectionGroupPatternTypeLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arbitrary_pattern_limits: Types::ProtectionGroupArbitraryPatternLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arbitrary_pattern_limits: Types::ProtectionGroupArbitraryPatternLimits?
+    end
+
+    class ProtectionLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_resource_type_limits: Array[Types::Limit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_resource_type_limits: Array[Types::Limit]?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResponseAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block: Types::BlockAction,
+        ?count: Types::CountAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block: Types::BlockAction?
+      attr_accessor count: Types::CountAction?
+    end
+
+    class SubResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+        ?attack_vectors: Array[Types::SummarizedAttackVector],
+        ?counters: Array[Types::SummarizedCounter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor attack_vectors: Array[Types::SummarizedAttackVector]?
+      attr_accessor counters: Array[Types::SummarizedCounter]?
+    end
+
+    module SubResourceType
+      IP: String
+      URL: String
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?time_commitment_in_seconds: Integer,
+        ?auto_renew: String,
+        ?limits: Array[Types::Limit],
+        ?proactive_engagement_status: String,
+        ?subscription_limits: Types::SubscriptionLimits,
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor time_commitment_in_seconds: Integer?
+      attr_accessor auto_renew: String?
+      attr_accessor limits: Array[Types::Limit]?
+      attr_accessor proactive_engagement_status: String?
+      attr_accessor subscription_limits: Types::SubscriptionLimits?
+      attr_accessor subscription_arn: String?
+    end
+
+    class SubscriptionLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_limits: Types::ProtectionLimits,
+        ?protection_group_limits: Types::ProtectionGroupLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_limits: Types::ProtectionLimits?
+      attr_accessor protection_group_limits: Types::ProtectionGroupLimits?
+    end
+
+    module SubscriptionState
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class SummarizedAttackVector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_type: String,
+        ?vector_counters: Array[Types::SummarizedCounter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_type: String?
+      attr_accessor vector_counters: Array[Types::SummarizedCounter]?
+    end
+
+    class SummarizedCounter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max: Float,
+        ?average: Float,
+        ?sum: Float,
+        ?n: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max: Float?
+      attr_accessor average: Float?
+      attr_accessor sum: Float?
+      attr_accessor n: Integer?
+      attr_accessor unit: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_inclusive: Time,
+        ?to_exclusive: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_inclusive: Time?
+      attr_accessor to_exclusive: Time?
+    end
+
+    module Unit
+      BITS: String
+      BYTES: String
+      PACKETS: String
+      REQUESTS: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationLayerAutomaticResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?action: Types::ResponseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor action: Types::ResponseAction?
+    end
+
+    class UpdateApplicationLayerAutomaticResponseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEmergencyContactSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_contact_list: Array[Types::EmergencyContact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_contact_list: Array[Types::EmergencyContact]?
+    end
+
+    class UpdateEmergencyContactSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateProtectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_group_id: String,
+        ?aggregation: String,
+        ?pattern: String,
+        ?resource_type: String,
+        ?members: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_group_id: String?
+      attr_accessor aggregation: String?
+      attr_accessor pattern: String?
+      attr_accessor resource_type: String?
+      attr_accessor members: Array[String]?
+    end
+
+    class UpdateProtectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_renew: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_renew: String?
+    end
+
+    class UpdateSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

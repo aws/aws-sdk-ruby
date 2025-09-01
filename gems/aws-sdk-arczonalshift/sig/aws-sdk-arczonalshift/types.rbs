@@ -1,0 +1,765 @@
+module Aws::ARCZonalShift
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AppliedStatus
+      APPLIED: String
+      NOT_APPLIED: String
+    end
+
+    module AutoshiftAppliedStatus
+      APPLIED: String
+      NOT_APPLIED: String
+    end
+
+    module AutoshiftExecutionStatus
+      ACTIVE: String
+      COMPLETED: String
+    end
+
+    class AutoshiftInResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applied_status: String,
+        ?away_from: String,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applied_status: String?
+      attr_accessor away_from: String?
+      attr_accessor start_time: Time?
+    end
+
+    module AutoshiftObserverNotificationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AutoshiftSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?away_from: String,
+        ?end_time: Time,
+        ?start_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor away_from: String?
+      attr_accessor end_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+    end
+
+    class CancelPracticeRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+    end
+
+    class CancelPracticeRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+    end
+
+    class CancelZonalShiftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+    end
+
+    class CancelZonalShiftRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?zonal_shift_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor zonal_shift_id: String?
+    end
+
+    module ConflictExceptionReason
+      ZONAL_SHIFT_ALREADY_EXISTS: String
+      ZONAL_SHIFT_STATUS_NOT_ACTIVE: String
+      SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT: String
+      PRACTICE_CONFIGURATION_ALREADY_EXISTS: String
+      AUTOSHIFT_ENABLED: String
+      PRACTICE_CONFIGURATION_DOES_NOT_EXIST: String
+      ZONAL_AUTOSHIFT_ACTIVE: String
+      PRACTICE_OUTCOME_ALARMS_RED: String
+      PRACTICE_BLOCKING_ALARMS_RED: String
+      PRACTICE_IN_BLOCKED_DATES: String
+      PRACTICE_IN_BLOCKED_WINDOWS: String
+    end
+
+    class ControlCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?alarm_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor alarm_identifier: String?
+    end
+
+    module ControlConditionType
+      CLOUDWATCH: String
+    end
+
+    class CreatePracticeRunConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?blocked_windows: Array[String],
+        ?blocked_dates: Array[String],
+        ?blocking_alarms: Array[Types::ControlCondition],
+        ?outcome_alarms: Array[Types::ControlCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor blocked_windows: Array[String]?
+      attr_accessor blocked_dates: Array[String]?
+      attr_accessor blocking_alarms: Array[Types::ControlCondition]?
+      attr_accessor outcome_alarms: Array[Types::ControlCondition]?
+    end
+
+    class CreatePracticeRunConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?zonal_autoshift_status: String,
+        ?practice_run_configuration: Types::PracticeRunConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor zonal_autoshift_status: String?
+      attr_accessor practice_run_configuration: Types::PracticeRunConfiguration?
+    end
+
+    class DeletePracticeRunConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+    end
+
+    class DeletePracticeRunConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?zonal_autoshift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor zonal_autoshift_status: String?
+    end
+
+    class GetAutoshiftObserverNotificationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAutoshiftObserverNotificationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GetManagedResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+    end
+
+    class GetManagedResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?applied_weights: Hash[String, Float],
+        ?zonal_shifts: Array[Types::ZonalShiftInResource],
+        ?autoshifts: Array[Types::AutoshiftInResource],
+        ?practice_run_configuration: Types::PracticeRunConfiguration,
+        ?zonal_autoshift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor applied_weights: Hash[String, Float]?
+      attr_accessor zonal_shifts: Array[Types::ZonalShiftInResource]?
+      attr_accessor autoshifts: Array[Types::AutoshiftInResource]?
+      attr_accessor practice_run_configuration: Types::PracticeRunConfiguration?
+      attr_accessor zonal_autoshift_status: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAutoshiftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?status: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAutoshiftsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AutoshiftSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AutoshiftSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListManagedResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ManagedResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ManagedResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListZonalShiftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_identifier: String?
+    end
+
+    class ListZonalShiftsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ZonalShiftSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ZonalShiftSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?availability_zones: Array[String],
+        ?applied_weights: Hash[String, Float],
+        ?zonal_shifts: Array[Types::ZonalShiftInResource],
+        ?autoshifts: Array[Types::AutoshiftInResource],
+        ?zonal_autoshift_status: String,
+        ?practice_run_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor applied_weights: Hash[String, Float]?
+      attr_accessor zonal_shifts: Array[Types::ZonalShiftInResource]?
+      attr_accessor autoshifts: Array[Types::AutoshiftInResource]?
+      attr_accessor zonal_autoshift_status: String?
+      attr_accessor practice_run_status: String?
+    end
+
+    class PracticeRunConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blocking_alarms: Array[Types::ControlCondition],
+        ?outcome_alarms: Array[Types::ControlCondition],
+        ?blocked_windows: Array[String],
+        ?blocked_dates: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blocking_alarms: Array[Types::ControlCondition]?
+      attr_accessor outcome_alarms: Array[Types::ControlCondition]?
+      attr_accessor blocked_windows: Array[String]?
+      attr_accessor blocked_dates: Array[String]?
+    end
+
+    module PracticeRunOutcome
+      FAILED: String
+      INTERRUPTED: String
+      PENDING: String
+      SUCCEEDED: String
+      CAPACITY_CHECK_FAILED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ShiftType
+      ZONAL_SHIFT: String
+      PRACTICE_RUN: String
+      FIS_EXPERIMENT: String
+      ZONAL_AUTOSHIFT: String
+    end
+
+    class StartPracticeRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor comment: String?
+    end
+
+    class StartPracticeRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+    end
+
+    class StartZonalShiftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+    end
+
+    class StartZonalShiftRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expires_in: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expires_in: String?
+      attr_accessor comment: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateAutoshiftObserverNotificationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class UpdateAutoshiftObserverNotificationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class UpdatePracticeRunConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?blocked_windows: Array[String],
+        ?blocked_dates: Array[String],
+        ?blocking_alarms: Array[Types::ControlCondition],
+        ?outcome_alarms: Array[Types::ControlCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor blocked_windows: Array[String]?
+      attr_accessor blocked_dates: Array[String]?
+      attr_accessor blocking_alarms: Array[Types::ControlCondition]?
+      attr_accessor outcome_alarms: Array[Types::ControlCondition]?
+    end
+
+    class UpdatePracticeRunConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?zonal_autoshift_status: String,
+        ?practice_run_configuration: Types::PracticeRunConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor zonal_autoshift_status: String?
+      attr_accessor practice_run_configuration: Types::PracticeRunConfiguration?
+    end
+
+    class UpdateZonalAutoshiftConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?zonal_autoshift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor zonal_autoshift_status: String?
+    end
+
+    class UpdateZonalAutoshiftConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?zonal_autoshift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor zonal_autoshift_status: String?
+    end
+
+    class UpdateZonalShiftOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+    end
+
+    class UpdateZonalShiftRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?comment: String,
+        ?expires_in: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor comment: String?
+      attr_accessor expires_in: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      INVALID_EXPIRES_IN: String
+      INVALID_STATUS: String
+      MISSING_VALUE: String
+      INVALID_TOKEN: String
+      INVALID_RESOURCE_IDENTIFIER: String
+      INVALID_AZ: String
+      UNSUPPORTED_AZ: String
+      INVALID_ALARM_CONDITION: String
+      INVALID_CONDITION_TYPE: String
+      INVALID_PRACTICE_BLOCKER: String
+      FIS_EXPERIMENT_UPDATE_NOT_ALLOWED: String
+      AUTOSHIFT_UPDATE_NOT_ALLOWED: String
+      UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE: String
+    end
+
+    module ZonalAutoshiftStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ZonalShiftInResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applied_status: String,
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?comment: String,
+        ?shift_type: String,
+        ?practice_run_outcome: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applied_status: String?
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor comment: String?
+      attr_accessor shift_type: String?
+      attr_accessor practice_run_outcome: String?
+    end
+
+    module ZonalShiftStatus
+      ACTIVE: String
+      EXPIRED: String
+      CANCELED: String
+    end
+
+    class ZonalShiftSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_id: String,
+        ?resource_identifier: String,
+        ?away_from: String,
+        ?expiry_time: Time,
+        ?start_time: Time,
+        ?status: String,
+        ?comment: String,
+        ?shift_type: String,
+        ?practice_run_outcome: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor away_from: String?
+      attr_accessor expiry_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor comment: String?
+      attr_accessor shift_type: String?
+      attr_accessor practice_run_outcome: String?
+    end
+  end
+end

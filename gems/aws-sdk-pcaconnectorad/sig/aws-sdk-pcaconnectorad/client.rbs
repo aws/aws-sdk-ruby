@@ -1,0 +1,615 @@
+module Aws::PcaConnectorAd
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PcaConnectorAd::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorResponse]
+      def connector_arn: () -> String?
+    end
+    def create_connector: (
+      ?directory_id: String,
+      ?certificate_authority_arn: String,
+      ?vpc_information: {
+        ip_address_type: String,
+        security_group_ids: Array[String]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
+    interface _CreateDirectoryRegistrationResponse
+      include Smithy::Client::_Response[Types::CreateDirectoryRegistrationResponse]
+      def directory_registration_arn: () -> String?
+    end
+    def create_directory_registration: (
+      ?directory_id: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDirectoryRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectoryRegistrationResponse
+
+    interface _CreateServicePrincipalNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_service_principal_name: (
+      ?directory_registration_arn: String,
+      ?connector_arn: String,
+      ?client_token: String
+    ) -> _CreateServicePrincipalNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServicePrincipalNameResponse
+
+    interface _CreateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTemplateResponse]
+      def template_arn: () -> String?
+    end
+    def create_template: (
+      ?connector_arn: String,
+      ?name: String,
+      ?definition: {
+        template_v2: {
+          certificate_validity: {
+            validity_period: {
+              period_type: String,
+              period: Integer
+            },
+            renewal_period: untyped
+          },
+          superseded_templates: Array[String],
+          private_key_attributes: {
+            minimal_key_length: Integer,
+            key_spec: String,
+            crypto_providers: Array[String]
+          },
+          private_key_flags: {
+            exportable_key: bool,
+            strong_key_protection_required: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          extensions: {
+            key_usage: {
+              critical: untyped,
+              usage_flags: {
+                digital_signature: untyped,
+                non_repudiation: untyped,
+                key_encipherment: untyped,
+                data_encipherment: untyped,
+                key_agreement: untyped
+              }
+            },
+            application_policies: {
+              critical: untyped,
+              policies: Array[
+                {
+                  policy_type: String,
+                  policy_object_identifier: String
+                }
+              ]
+            }
+          }
+        },
+        template_v3: {
+          certificate_validity: untyped,
+          superseded_templates: untyped,
+          private_key_attributes: {
+            minimal_key_length: untyped,
+            key_spec: untyped,
+            crypto_providers: untyped,
+            key_usage_property: {
+              property_type: String,
+              property_flags: {
+                decrypt: untyped,
+                key_agreement: untyped,
+                sign: untyped
+              }
+            },
+            algorithm: String
+          },
+          private_key_flags: {
+            exportable_key: untyped,
+            strong_key_protection_required: untyped,
+            require_alternate_signature_algorithm: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          hash_algorithm: String,
+          extensions: {
+            key_usage: untyped,
+            application_policies: untyped
+          }
+        },
+        template_v4: {
+          certificate_validity: untyped,
+          superseded_templates: untyped,
+          private_key_attributes: {
+            minimal_key_length: untyped,
+            key_spec: untyped,
+            crypto_providers: untyped,
+            key_usage_property: untyped,
+            algorithm: untyped
+          },
+          private_key_flags: {
+            exportable_key: untyped,
+            strong_key_protection_required: untyped,
+            require_alternate_signature_algorithm: untyped,
+            require_same_key_renewal: untyped,
+            use_legacy_provider: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          hash_algorithm: untyped,
+          extensions: {
+            key_usage: untyped,
+            application_policies: untyped
+          }
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
+
+    interface _CreateTemplateGroupAccessControlEntryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_template_group_access_control_entry: (
+      ?template_arn: String,
+      ?group_security_identifier: String,
+      ?group_display_name: String,
+      ?access_rights: {
+        enroll: String,
+        auto_enroll: untyped
+      },
+      ?client_token: String
+    ) -> _CreateTemplateGroupAccessControlEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateGroupAccessControlEntryResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector: (
+      ?connector_arn: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
+    interface _DeleteDirectoryRegistrationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_directory_registration: (
+      ?directory_registration_arn: String
+    ) -> _DeleteDirectoryRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectoryRegistrationResponse
+
+    interface _DeleteServicePrincipalNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_service_principal_name: (
+      ?directory_registration_arn: String,
+      ?connector_arn: String
+    ) -> _DeleteServicePrincipalNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServicePrincipalNameResponse
+
+    interface _DeleteTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_template: (
+      ?template_arn: String
+    ) -> _DeleteTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateResponse
+
+    interface _DeleteTemplateGroupAccessControlEntryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_template_group_access_control_entry: (
+      ?template_arn: String,
+      ?group_security_identifier: String
+    ) -> _DeleteTemplateGroupAccessControlEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateGroupAccessControlEntryResponse
+
+    interface _GetConnectorResponse
+      include Smithy::Client::_Response[Types::GetConnectorResponse]
+      def connector: () -> Types::Connector?
+    end
+    def get_connector: (
+      ?connector_arn: String
+    ) -> _GetConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorResponse
+
+    interface _GetDirectoryRegistrationResponse
+      include Smithy::Client::_Response[Types::GetDirectoryRegistrationResponse]
+      def directory_registration: () -> Types::DirectoryRegistration?
+    end
+    def get_directory_registration: (
+      ?directory_registration_arn: String
+    ) -> _GetDirectoryRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDirectoryRegistrationResponse
+
+    interface _GetServicePrincipalNameResponse
+      include Smithy::Client::_Response[Types::GetServicePrincipalNameResponse]
+      def service_principal_name: () -> Types::ServicePrincipalName?
+    end
+    def get_service_principal_name: (
+      ?directory_registration_arn: String,
+      ?connector_arn: String
+    ) -> _GetServicePrincipalNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServicePrincipalNameResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateResponse]
+      def template: () -> Types::Template?
+    end
+    def get_template: (
+      ?template_arn: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _GetTemplateGroupAccessControlEntryResponse
+      include Smithy::Client::_Response[Types::GetTemplateGroupAccessControlEntryResponse]
+      def access_control_entry: () -> Types::AccessControlEntry?
+    end
+    def get_template_group_access_control_entry: (
+      ?template_arn: String,
+      ?group_security_identifier: String
+    ) -> _GetTemplateGroupAccessControlEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateGroupAccessControlEntryResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def connectors: () -> Array[Types::ConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListDirectoryRegistrationsResponse
+      include Smithy::Client::_Response[Types::ListDirectoryRegistrationsResponse]
+      def directory_registrations: () -> Array[Types::DirectoryRegistrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_directory_registrations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDirectoryRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDirectoryRegistrationsResponse
+
+    interface _ListServicePrincipalNamesResponse
+      include Smithy::Client::_Response[Types::ListServicePrincipalNamesResponse]
+      def service_principal_names: () -> Array[Types::ServicePrincipalNameSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_principal_names: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?directory_registration_arn: String
+    ) -> _ListServicePrincipalNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicePrincipalNamesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateGroupAccessControlEntriesResponse
+      include Smithy::Client::_Response[Types::ListTemplateGroupAccessControlEntriesResponse]
+      def access_control_entries: () -> Array[Types::AccessControlEntrySummary]?
+      def next_token: () -> String?
+    end
+    def list_template_group_access_control_entries: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?template_arn: String
+    ) -> _ListTemplateGroupAccessControlEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateGroupAccessControlEntriesResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesResponse]
+      def templates: () -> Array[Types::TemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_templates: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?connector_arn: String
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_template: (
+      ?template_arn: String,
+      ?definition: {
+        template_v2: {
+          certificate_validity: {
+            validity_period: {
+              period_type: String,
+              period: Integer
+            },
+            renewal_period: untyped
+          },
+          superseded_templates: Array[String],
+          private_key_attributes: {
+            minimal_key_length: Integer,
+            key_spec: String,
+            crypto_providers: Array[String]
+          },
+          private_key_flags: {
+            exportable_key: bool,
+            strong_key_protection_required: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          extensions: {
+            key_usage: {
+              critical: untyped,
+              usage_flags: {
+                digital_signature: untyped,
+                non_repudiation: untyped,
+                key_encipherment: untyped,
+                data_encipherment: untyped,
+                key_agreement: untyped
+              }
+            },
+            application_policies: {
+              critical: untyped,
+              policies: Array[
+                {
+                  policy_type: String,
+                  policy_object_identifier: String
+                }
+              ]
+            }
+          }
+        },
+        template_v3: {
+          certificate_validity: untyped,
+          superseded_templates: untyped,
+          private_key_attributes: {
+            minimal_key_length: untyped,
+            key_spec: untyped,
+            crypto_providers: untyped,
+            key_usage_property: {
+              property_type: String,
+              property_flags: {
+                decrypt: untyped,
+                key_agreement: untyped,
+                sign: untyped
+              }
+            },
+            algorithm: String
+          },
+          private_key_flags: {
+            exportable_key: untyped,
+            strong_key_protection_required: untyped,
+            require_alternate_signature_algorithm: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          hash_algorithm: String,
+          extensions: {
+            key_usage: untyped,
+            application_policies: untyped
+          }
+        },
+        template_v4: {
+          certificate_validity: untyped,
+          superseded_templates: untyped,
+          private_key_attributes: {
+            minimal_key_length: untyped,
+            key_spec: untyped,
+            crypto_providers: untyped,
+            key_usage_property: untyped,
+            algorithm: untyped
+          },
+          private_key_flags: {
+            exportable_key: untyped,
+            strong_key_protection_required: untyped,
+            require_alternate_signature_algorithm: untyped,
+            require_same_key_renewal: untyped,
+            use_legacy_provider: untyped,
+            client_version: String
+          },
+          enrollment_flags: {
+            include_symmetric_algorithms: untyped,
+            user_interaction_required: untyped,
+            remove_invalid_certificate_from_personal_store: untyped,
+            no_security_extension: untyped,
+            enable_key_reuse_on_nt_token_keyset_storage_full: untyped
+          },
+          subject_name_flags: {
+            san_require_domain_dns: untyped,
+            san_require_spn: untyped,
+            san_require_directory_guid: untyped,
+            san_require_upn: untyped,
+            san_require_email: untyped,
+            san_require_dns: untyped,
+            require_dns_as_cn: untyped,
+            require_email: untyped,
+            require_common_name: untyped,
+            require_directory_path: untyped
+          },
+          general_flags: {
+            auto_enrollment: untyped,
+            machine_type: untyped
+          },
+          hash_algorithm: untyped,
+          extensions: {
+            key_usage: untyped,
+            application_policies: untyped
+          }
+        }
+      },
+      ?reenroll_all_certificate_holders: bool
+    ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse
+
+    interface _UpdateTemplateGroupAccessControlEntryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_template_group_access_control_entry: (
+      ?template_arn: String,
+      ?group_security_identifier: String,
+      ?group_display_name: String,
+      ?access_rights: {
+        enroll: String,
+        auto_enroll: untyped
+      }
+    ) -> _UpdateTemplateGroupAccessControlEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateGroupAccessControlEntryResponse
+  end
+end

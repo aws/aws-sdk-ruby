@@ -1,0 +1,5 @@
+  module Aws
+    module AIOps
+      VERSION: String
+    end
+  end

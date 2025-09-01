@@ -1,0 +1,957 @@
+module Aws::WAF
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WAF::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateByteMatchSetResponse
+      include Smithy::Client::_Response[Types::CreateByteMatchSetResponse]
+      def byte_match_set: () -> Types::ByteMatchSet?
+      def change_token: () -> String?
+    end
+    def create_byte_match_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateByteMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateByteMatchSetResponse
+
+    interface _CreateGeoMatchSetResponse
+      include Smithy::Client::_Response[Types::CreateGeoMatchSetResponse]
+      def geo_match_set: () -> Types::GeoMatchSet?
+      def change_token: () -> String?
+    end
+    def create_geo_match_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateGeoMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGeoMatchSetResponse
+
+    interface _CreateIPSetResponse
+      include Smithy::Client::_Response[Types::CreateIPSetResponse]
+      def ip_set: () -> Types::IPSet?
+      def change_token: () -> String?
+    end
+    def create_ip_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIPSetResponse
+
+    interface _CreateRateBasedRuleResponse
+      include Smithy::Client::_Response[Types::CreateRateBasedRuleResponse]
+      def rule: () -> Types::RateBasedRule?
+      def change_token: () -> String?
+    end
+    def create_rate_based_rule: (
+      ?name: String,
+      ?metric_name: String,
+      ?rate_key: String,
+      ?rate_limit: Integer,
+      ?change_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRateBasedRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRateBasedRuleResponse
+
+    interface _CreateRegexMatchSetResponse
+      include Smithy::Client::_Response[Types::CreateRegexMatchSetResponse]
+      def regex_match_set: () -> Types::RegexMatchSet?
+      def change_token: () -> String?
+    end
+    def create_regex_match_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateRegexMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegexMatchSetResponse
+
+    interface _CreateRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::CreateRegexPatternSetResponse]
+      def regex_pattern_set: () -> Types::RegexPatternSet?
+      def change_token: () -> String?
+    end
+    def create_regex_pattern_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegexPatternSetResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleResponse]
+      def rule: () -> Types::Rule?
+      def change_token: () -> String?
+    end
+    def create_rule: (
+      ?name: String,
+      ?metric_name: String,
+      ?change_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateRuleGroupResponse
+      include Smithy::Client::_Response[Types::CreateRuleGroupResponse]
+      def rule_group: () -> Types::RuleGroup?
+      def change_token: () -> String?
+    end
+    def create_rule_group: (
+      ?name: String,
+      ?metric_name: String,
+      ?change_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleGroupResponse
+
+    interface _CreateSizeConstraintSetResponse
+      include Smithy::Client::_Response[Types::CreateSizeConstraintSetResponse]
+      def size_constraint_set: () -> Types::SizeConstraintSet?
+      def change_token: () -> String?
+    end
+    def create_size_constraint_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateSizeConstraintSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSizeConstraintSetResponse
+
+    interface _CreateSqlInjectionMatchSetResponse
+      include Smithy::Client::_Response[Types::CreateSqlInjectionMatchSetResponse]
+      def sql_injection_match_set: () -> Types::SqlInjectionMatchSet?
+      def change_token: () -> String?
+    end
+    def create_sql_injection_match_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateSqlInjectionMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSqlInjectionMatchSetResponse
+
+    interface _CreateWebACLResponse
+      include Smithy::Client::_Response[Types::CreateWebACLResponse]
+      def web_acl: () -> Types::WebACL?
+      def change_token: () -> String?
+    end
+    def create_web_acl: (
+      ?name: String,
+      ?metric_name: String,
+      ?default_action: {
+        type: String
+      },
+      ?change_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebACLResponse
+
+    interface _CreateWebACLMigrationStackResponse
+      include Smithy::Client::_Response[Types::CreateWebACLMigrationStackResponse]
+      def s3_object_url: () -> String?
+    end
+    def create_web_acl_migration_stack: (
+      ?web_acl_id: String,
+      ?s3_bucket_name: String,
+      ?ignore_unsupported_type: bool
+    ) -> _CreateWebACLMigrationStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebACLMigrationStackResponse
+
+    interface _CreateXssMatchSetResponse
+      include Smithy::Client::_Response[Types::CreateXssMatchSetResponse]
+      def xss_match_set: () -> Types::XssMatchSet?
+      def change_token: () -> String?
+    end
+    def create_xss_match_set: (
+      ?name: String,
+      ?change_token: String
+    ) -> _CreateXssMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateXssMatchSetResponse
+
+    interface _DeleteByteMatchSetResponse
+      include Smithy::Client::_Response[Types::DeleteByteMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_byte_match_set: (
+      ?byte_match_set_id: String,
+      ?change_token: String
+    ) -> _DeleteByteMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteByteMatchSetResponse
+
+    interface _DeleteGeoMatchSetResponse
+      include Smithy::Client::_Response[Types::DeleteGeoMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_geo_match_set: (
+      ?geo_match_set_id: String,
+      ?change_token: String
+    ) -> _DeleteGeoMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGeoMatchSetResponse
+
+    interface _DeleteIPSetResponse
+      include Smithy::Client::_Response[Types::DeleteIPSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_ip_set: (
+      ?ip_set_id: String,
+      ?change_token: String
+    ) -> _DeleteIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIPSetResponse
+
+    interface _DeleteLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteLoggingConfigurationResponse]
+    end
+    def delete_logging_configuration: (
+      ?resource_arn: String
+    ) -> _DeleteLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoggingConfigurationResponse
+
+    interface _DeletePermissionPolicyResponse
+      include Smithy::Client::_Response[Types::DeletePermissionPolicyResponse]
+    end
+    def delete_permission_policy: (
+      ?resource_arn: String
+    ) -> _DeletePermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionPolicyResponse
+
+    interface _DeleteRateBasedRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRateBasedRuleResponse]
+      def change_token: () -> String?
+    end
+    def delete_rate_based_rule: (
+      ?rule_id: String,
+      ?change_token: String
+    ) -> _DeleteRateBasedRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRateBasedRuleResponse
+
+    interface _DeleteRegexMatchSetResponse
+      include Smithy::Client::_Response[Types::DeleteRegexMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_regex_match_set: (
+      ?regex_match_set_id: String,
+      ?change_token: String
+    ) -> _DeleteRegexMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegexMatchSetResponse
+
+    interface _DeleteRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::DeleteRegexPatternSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_regex_pattern_set: (
+      ?regex_pattern_set_id: String,
+      ?change_token: String
+    ) -> _DeleteRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegexPatternSetResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleResponse]
+      def change_token: () -> String?
+    end
+    def delete_rule: (
+      ?rule_id: String,
+      ?change_token: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteRuleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteRuleGroupResponse]
+      def change_token: () -> String?
+    end
+    def delete_rule_group: (
+      ?rule_group_id: String,
+      ?change_token: String
+    ) -> _DeleteRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleGroupResponse
+
+    interface _DeleteSizeConstraintSetResponse
+      include Smithy::Client::_Response[Types::DeleteSizeConstraintSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_size_constraint_set: (
+      ?size_constraint_set_id: String,
+      ?change_token: String
+    ) -> _DeleteSizeConstraintSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSizeConstraintSetResponse
+
+    interface _DeleteSqlInjectionMatchSetResponse
+      include Smithy::Client::_Response[Types::DeleteSqlInjectionMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_sql_injection_match_set: (
+      ?sql_injection_match_set_id: String,
+      ?change_token: String
+    ) -> _DeleteSqlInjectionMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSqlInjectionMatchSetResponse
+
+    interface _DeleteWebACLResponse
+      include Smithy::Client::_Response[Types::DeleteWebACLResponse]
+      def change_token: () -> String?
+    end
+    def delete_web_acl: (
+      ?web_acl_id: String,
+      ?change_token: String
+    ) -> _DeleteWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebACLResponse
+
+    interface _DeleteXssMatchSetResponse
+      include Smithy::Client::_Response[Types::DeleteXssMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def delete_xss_match_set: (
+      ?xss_match_set_id: String,
+      ?change_token: String
+    ) -> _DeleteXssMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteXssMatchSetResponse
+
+    interface _GetByteMatchSetResponse
+      include Smithy::Client::_Response[Types::GetByteMatchSetResponse]
+      def byte_match_set: () -> Types::ByteMatchSet?
+    end
+    def get_byte_match_set: (
+      ?byte_match_set_id: String
+    ) -> _GetByteMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetByteMatchSetResponse
+
+    interface _GetChangeTokenResponse
+      include Smithy::Client::_Response[Types::GetChangeTokenResponse]
+      def change_token: () -> String?
+    end
+    def get_change_token: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChangeTokenResponse
+
+    interface _GetChangeTokenStatusResponse
+      include Smithy::Client::_Response[Types::GetChangeTokenStatusResponse]
+      def change_token_status: () -> String?
+    end
+    def get_change_token_status: (
+      ?change_token: String
+    ) -> _GetChangeTokenStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChangeTokenStatusResponse
+
+    interface _GetGeoMatchSetResponse
+      include Smithy::Client::_Response[Types::GetGeoMatchSetResponse]
+      def geo_match_set: () -> Types::GeoMatchSet?
+    end
+    def get_geo_match_set: (
+      ?geo_match_set_id: String
+    ) -> _GetGeoMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeoMatchSetResponse
+
+    interface _GetIPSetResponse
+      include Smithy::Client::_Response[Types::GetIPSetResponse]
+      def ip_set: () -> Types::IPSet?
+    end
+    def get_ip_set: (
+      ?ip_set_id: String
+    ) -> _GetIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIPSetResponse
+
+    interface _GetLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def get_logging_configuration: (
+      ?resource_arn: String
+    ) -> _GetLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoggingConfigurationResponse
+
+    interface _GetPermissionPolicyResponse
+      include Smithy::Client::_Response[Types::GetPermissionPolicyResponse]
+      def policy: () -> String?
+    end
+    def get_permission_policy: (
+      ?resource_arn: String
+    ) -> _GetPermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPermissionPolicyResponse
+
+    interface _GetRateBasedRuleResponse
+      include Smithy::Client::_Response[Types::GetRateBasedRuleResponse]
+      def rule: () -> Types::RateBasedRule?
+    end
+    def get_rate_based_rule: (
+      ?rule_id: String
+    ) -> _GetRateBasedRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRateBasedRuleResponse
+
+    interface _GetRateBasedRuleManagedKeysResponse
+      include Smithy::Client::_Response[Types::GetRateBasedRuleManagedKeysResponse]
+      def managed_keys: () -> Array[String]?
+      def next_marker: () -> String?
+    end
+    def get_rate_based_rule_managed_keys: (
+      ?rule_id: String,
+      ?next_marker: String
+    ) -> _GetRateBasedRuleManagedKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRateBasedRuleManagedKeysResponse
+
+    interface _GetRegexMatchSetResponse
+      include Smithy::Client::_Response[Types::GetRegexMatchSetResponse]
+      def regex_match_set: () -> Types::RegexMatchSet?
+    end
+    def get_regex_match_set: (
+      ?regex_match_set_id: String
+    ) -> _GetRegexMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegexMatchSetResponse
+
+    interface _GetRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::GetRegexPatternSetResponse]
+      def regex_pattern_set: () -> Types::RegexPatternSet?
+    end
+    def get_regex_pattern_set: (
+      ?regex_pattern_set_id: String
+    ) -> _GetRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegexPatternSetResponse
+
+    interface _GetRuleResponse
+      include Smithy::Client::_Response[Types::GetRuleResponse]
+      def rule: () -> Types::Rule?
+    end
+    def get_rule: (
+      ?rule_id: String
+    ) -> _GetRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleResponse
+
+    interface _GetRuleGroupResponse
+      include Smithy::Client::_Response[Types::GetRuleGroupResponse]
+      def rule_group: () -> Types::RuleGroup?
+    end
+    def get_rule_group: (
+      ?rule_group_id: String
+    ) -> _GetRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleGroupResponse
+
+    interface _GetSampledRequestsResponse
+      include Smithy::Client::_Response[Types::GetSampledRequestsResponse]
+      def sampled_requests: () -> Array[Types::SampledHTTPRequest]?
+      def population_size: () -> Integer?
+      def time_window: () -> Types::TimeWindow?
+    end
+    def get_sampled_requests: (
+      ?web_acl_id: String,
+      ?rule_id: String,
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?max_items: Integer
+    ) -> _GetSampledRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSampledRequestsResponse
+
+    interface _GetSizeConstraintSetResponse
+      include Smithy::Client::_Response[Types::GetSizeConstraintSetResponse]
+      def size_constraint_set: () -> Types::SizeConstraintSet?
+    end
+    def get_size_constraint_set: (
+      ?size_constraint_set_id: String
+    ) -> _GetSizeConstraintSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSizeConstraintSetResponse
+
+    interface _GetSqlInjectionMatchSetResponse
+      include Smithy::Client::_Response[Types::GetSqlInjectionMatchSetResponse]
+      def sql_injection_match_set: () -> Types::SqlInjectionMatchSet?
+    end
+    def get_sql_injection_match_set: (
+      ?sql_injection_match_set_id: String
+    ) -> _GetSqlInjectionMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSqlInjectionMatchSetResponse
+
+    interface _GetWebACLResponse
+      include Smithy::Client::_Response[Types::GetWebACLResponse]
+      def web_acl: () -> Types::WebACL?
+    end
+    def get_web_acl: (
+      ?web_acl_id: String
+    ) -> _GetWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebACLResponse
+
+    interface _GetXssMatchSetResponse
+      include Smithy::Client::_Response[Types::GetXssMatchSetResponse]
+      def xss_match_set: () -> Types::XssMatchSet?
+    end
+    def get_xss_match_set: (
+      ?xss_match_set_id: String
+    ) -> _GetXssMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetXssMatchSetResponse
+
+    interface _ListActivatedRulesInRuleGroupResponse
+      include Smithy::Client::_Response[Types::ListActivatedRulesInRuleGroupResponse]
+      def next_marker: () -> String?
+      def activated_rules: () -> Array[Types::ActivatedRule]?
+    end
+    def list_activated_rules_in_rule_group: (
+      ?rule_group_id: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListActivatedRulesInRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActivatedRulesInRuleGroupResponse
+
+    interface _ListByteMatchSetsResponse
+      include Smithy::Client::_Response[Types::ListByteMatchSetsResponse]
+      def next_marker: () -> String?
+      def byte_match_sets: () -> Array[Types::ByteMatchSetSummary]?
+    end
+    def list_byte_match_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListByteMatchSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListByteMatchSetsResponse
+
+    interface _ListGeoMatchSetsResponse
+      include Smithy::Client::_Response[Types::ListGeoMatchSetsResponse]
+      def next_marker: () -> String?
+      def geo_match_sets: () -> Array[Types::GeoMatchSetSummary]?
+    end
+    def list_geo_match_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListGeoMatchSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeoMatchSetsResponse
+
+    interface _ListIPSetsResponse
+      include Smithy::Client::_Response[Types::ListIPSetsResponse]
+      def next_marker: () -> String?
+      def ip_sets: () -> Array[Types::IPSetSummary]?
+    end
+    def list_ip_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListIPSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIPSetsResponse
+
+    interface _ListLoggingConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListLoggingConfigurationsResponse]
+      def logging_configurations: () -> Array[Types::LoggingConfiguration]?
+      def next_marker: () -> String?
+    end
+    def list_logging_configurations: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListLoggingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLoggingConfigurationsResponse
+
+    interface _ListRateBasedRulesResponse
+      include Smithy::Client::_Response[Types::ListRateBasedRulesResponse]
+      def next_marker: () -> String?
+      def rules: () -> Array[Types::RuleSummary]?
+    end
+    def list_rate_based_rules: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRateBasedRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRateBasedRulesResponse
+
+    interface _ListRegexMatchSetsResponse
+      include Smithy::Client::_Response[Types::ListRegexMatchSetsResponse]
+      def next_marker: () -> String?
+      def regex_match_sets: () -> Array[Types::RegexMatchSetSummary]?
+    end
+    def list_regex_match_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRegexMatchSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegexMatchSetsResponse
+
+    interface _ListRegexPatternSetsResponse
+      include Smithy::Client::_Response[Types::ListRegexPatternSetsResponse]
+      def next_marker: () -> String?
+      def regex_pattern_sets: () -> Array[Types::RegexPatternSetSummary]?
+    end
+    def list_regex_pattern_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRegexPatternSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegexPatternSetsResponse
+
+    interface _ListRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListRuleGroupsResponse]
+      def next_marker: () -> String?
+      def rule_groups: () -> Array[Types::RuleGroupSummary]?
+    end
+    def list_rule_groups: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesResponse]
+      def next_marker: () -> String?
+      def rules: () -> Array[Types::RuleSummary]?
+    end
+    def list_rules: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListSizeConstraintSetsResponse
+      include Smithy::Client::_Response[Types::ListSizeConstraintSetsResponse]
+      def next_marker: () -> String?
+      def size_constraint_sets: () -> Array[Types::SizeConstraintSetSummary]?
+    end
+    def list_size_constraint_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListSizeConstraintSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSizeConstraintSetsResponse
+
+    interface _ListSqlInjectionMatchSetsResponse
+      include Smithy::Client::_Response[Types::ListSqlInjectionMatchSetsResponse]
+      def next_marker: () -> String?
+      def sql_injection_match_sets: () -> Array[Types::SqlInjectionMatchSetSummary]?
+    end
+    def list_sql_injection_match_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListSqlInjectionMatchSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSqlInjectionMatchSetsResponse
+
+    interface _ListSubscribedRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListSubscribedRuleGroupsResponse]
+      def next_marker: () -> String?
+      def rule_groups: () -> Array[Types::SubscribedRuleGroupSummary]?
+    end
+    def list_subscribed_rule_groups: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListSubscribedRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscribedRuleGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def next_marker: () -> String?
+      def tag_info_for_resource: () -> Types::TagInfoForResource?
+    end
+    def list_tags_for_resource: (
+      ?next_marker: String,
+      ?limit: Integer,
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWebACLsResponse
+      include Smithy::Client::_Response[Types::ListWebACLsResponse]
+      def next_marker: () -> String?
+      def web_ac_ls: () -> Array[Types::WebACLSummary]?
+    end
+    def list_web_ac_ls: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListWebACLsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebACLsResponse
+
+    interface _ListXssMatchSetsResponse
+      include Smithy::Client::_Response[Types::ListXssMatchSetsResponse]
+      def next_marker: () -> String?
+      def xss_match_sets: () -> Array[Types::XssMatchSetSummary]?
+    end
+    def list_xss_match_sets: (
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListXssMatchSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListXssMatchSetsResponse
+
+    interface _PutLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def put_logging_configuration: (
+      ?logging_configuration: {
+        resource_arn: String,
+        log_destination_configs: Array[String],
+        redacted_fields: Array[
+          {
+            type: String,
+            data: String
+          }
+        ]
+      }
+    ) -> _PutLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingConfigurationResponse
+
+    interface _PutPermissionPolicyResponse
+      include Smithy::Client::_Response[Types::PutPermissionPolicyResponse]
+    end
+    def put_permission_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutPermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPermissionPolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateByteMatchSetResponse
+      include Smithy::Client::_Response[Types::UpdateByteMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def update_byte_match_set: (
+      ?byte_match_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          byte_match_tuple: {
+            field_to_match: {
+              type: String,
+              data: String
+            },
+            target_string: String,
+            text_transformation: String,
+            positional_constraint: String
+          }
+        }
+      ]
+    ) -> _UpdateByteMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateByteMatchSetResponse
+
+    interface _UpdateGeoMatchSetResponse
+      include Smithy::Client::_Response[Types::UpdateGeoMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def update_geo_match_set: (
+      ?geo_match_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          geo_match_constraint: {
+            type: String,
+            value: String
+          }
+        }
+      ]
+    ) -> _UpdateGeoMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGeoMatchSetResponse
+
+    interface _UpdateIPSetResponse
+      include Smithy::Client::_Response[Types::UpdateIPSetResponse]
+      def change_token: () -> String?
+    end
+    def update_ip_set: (
+      ?ip_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          ip_set_descriptor: {
+            type: String,
+            value: String
+          }
+        }
+      ]
+    ) -> _UpdateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIPSetResponse
+
+    interface _UpdateRateBasedRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRateBasedRuleResponse]
+      def change_token: () -> String?
+    end
+    def update_rate_based_rule: (
+      ?rule_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          predicate: {
+            negated: bool,
+            type: String,
+            data_id: String
+          }
+        }
+      ],
+      ?rate_limit: Integer
+    ) -> _UpdateRateBasedRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRateBasedRuleResponse
+
+    interface _UpdateRegexMatchSetResponse
+      include Smithy::Client::_Response[Types::UpdateRegexMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def update_regex_match_set: (
+      ?regex_match_set_id: String,
+      ?updates: Array[
+        {
+          action: String,
+          regex_match_tuple: {
+            field_to_match: {
+              type: String,
+              data: String
+            },
+            text_transformation: String,
+            regex_pattern_set_id: String
+          }
+        }
+      ],
+      ?change_token: String
+    ) -> _UpdateRegexMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegexMatchSetResponse
+
+    interface _UpdateRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::UpdateRegexPatternSetResponse]
+      def change_token: () -> String?
+    end
+    def update_regex_pattern_set: (
+      ?regex_pattern_set_id: String,
+      ?updates: Array[
+        {
+          action: String,
+          regex_pattern_string: String
+        }
+      ],
+      ?change_token: String
+    ) -> _UpdateRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegexPatternSetResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRuleResponse]
+      def change_token: () -> String?
+    end
+    def update_rule: (
+      ?rule_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          predicate: {
+            negated: bool,
+            type: String,
+            data_id: String
+          }
+        }
+      ]
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+
+    interface _UpdateRuleGroupResponse
+      include Smithy::Client::_Response[Types::UpdateRuleGroupResponse]
+      def change_token: () -> String?
+    end
+    def update_rule_group: (
+      ?rule_group_id: String,
+      ?updates: Array[
+        {
+          action: String,
+          activated_rule: {
+            priority: Integer,
+            rule_id: String,
+            action: {
+              type: String
+            },
+            override_action: {
+              type: String
+            },
+            type: String,
+            excluded_rules: Array[
+              {
+                rule_id: untyped
+              }
+            ]
+          }
+        }
+      ],
+      ?change_token: String
+    ) -> _UpdateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleGroupResponse
+
+    interface _UpdateSizeConstraintSetResponse
+      include Smithy::Client::_Response[Types::UpdateSizeConstraintSetResponse]
+      def change_token: () -> String?
+    end
+    def update_size_constraint_set: (
+      ?size_constraint_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          size_constraint: {
+            field_to_match: {
+              type: String,
+              data: String
+            },
+            text_transformation: String,
+            comparison_operator: String,
+            size: Integer
+          }
+        }
+      ]
+    ) -> _UpdateSizeConstraintSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSizeConstraintSetResponse
+
+    interface _UpdateSqlInjectionMatchSetResponse
+      include Smithy::Client::_Response[Types::UpdateSqlInjectionMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def update_sql_injection_match_set: (
+      ?sql_injection_match_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          sql_injection_match_tuple: {
+            field_to_match: {
+              type: String,
+              data: String
+            },
+            text_transformation: String
+          }
+        }
+      ]
+    ) -> _UpdateSqlInjectionMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSqlInjectionMatchSetResponse
+
+    interface _UpdateWebACLResponse
+      include Smithy::Client::_Response[Types::UpdateWebACLResponse]
+      def change_token: () -> String?
+    end
+    def update_web_acl: (
+      ?web_acl_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          activated_rule: {
+            priority: Integer,
+            rule_id: String,
+            action: {
+              type: String
+            },
+            override_action: {
+              type: String
+            },
+            type: String,
+            excluded_rules: Array[
+              {
+                rule_id: untyped
+              }
+            ]
+          }
+        }
+      ],
+      ?default_action: {
+        type: String
+      }
+    ) -> _UpdateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebACLResponse
+
+    interface _UpdateXssMatchSetResponse
+      include Smithy::Client::_Response[Types::UpdateXssMatchSetResponse]
+      def change_token: () -> String?
+    end
+    def update_xss_match_set: (
+      ?xss_match_set_id: String,
+      ?change_token: String,
+      ?updates: Array[
+        {
+          action: String,
+          xss_match_tuple: {
+            field_to_match: {
+              type: String,
+              data: String
+            },
+            text_transformation: String
+          }
+        }
+      ]
+    ) -> _UpdateXssMatchSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateXssMatchSetResponse
+  end
+end

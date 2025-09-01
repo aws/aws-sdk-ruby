@@ -1,0 +1,31 @@
+module Aws::KinesisVideoArchivedMedia
+  module Errors
+    class ClientLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCodecPrivateDataException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMediaFrameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingCodecPrivateDataException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoDataRetentionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedStreamMediaTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

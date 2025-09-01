@@ -1,0 +1,5 @@
+  module Aws
+    module FreeTier
+      VERSION: String
+    end
+  end

@@ -1,0 +1,40 @@
+module Aws::SecretsManager
+  module Errors
+    class DecryptionFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EncryptionFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PreconditionNotMetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PublicPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

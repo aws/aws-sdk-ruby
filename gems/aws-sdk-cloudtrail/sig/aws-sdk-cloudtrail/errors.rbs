@@ -1,0 +1,262 @@
+module Aws::CloudTrail
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountHasOngoingImportException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountNotRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccountRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotDelegateManagementAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelARNInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelExistsForEDSException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelMaxLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudTrailARNInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudTrailAccessNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudTrailInvalidClientTokenIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudWatchLogsDeliveryUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DelegatedAdminAccountLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreARNInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreFederationEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreHasOngoingImportException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreMaxLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventDataStoreTerminationProtectedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GenerateResponseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImportNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InactiveEventDataStoreException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InactiveQueryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsightNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientDependencyServiceAccessPermissionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientEncryptionPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientIAMAccessPermissionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientS3BucketPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientSnsTopicPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCloudWatchLogsLogGroupArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCloudWatchLogsRoleArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDateRangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventCategoryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventDataStoreCategoryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventDataStoreStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventSelectorsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidHomeRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidImportSourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInsightSelectorsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidKmsKeyIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLookupAttributesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMaxResultsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidQueryStatementException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidQueryStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3BucketNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3PrefixException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSnsTopicNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTimeRangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTrailNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsKeyDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsKeyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxConcurrentQueriesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumNumberOfTrailsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoManagementAccountSLRExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotOrganizationManagementAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotOrganizationMasterAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotInAllFeaturesModeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationsNotInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueryIdNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceARNNotValidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourcePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourcePolicyNotValidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceTypeNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class S3BucketDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrailAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrailNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrailNotProvidedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

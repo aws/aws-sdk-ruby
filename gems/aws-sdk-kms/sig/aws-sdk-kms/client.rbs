@@ -1,0 +1,727 @@
+module Aws::KMS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KMS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelKeyDeletionResponse
+      include Smithy::Client::_Response[Types::CancelKeyDeletionResponse]
+      def key_id: () -> String?
+    end
+    def cancel_key_deletion: (
+      ?key_id: String
+    ) -> _CancelKeyDeletionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelKeyDeletionResponse
+
+    interface _ConnectCustomKeyStoreResponse
+      include Smithy::Client::_Response[Types::ConnectCustomKeyStoreResponse]
+    end
+    def connect_custom_key_store: (
+      ?custom_key_store_id: String
+    ) -> _ConnectCustomKeyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConnectCustomKeyStoreResponse
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_alias: (
+      ?alias_name: String,
+      ?target_key_id: String
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateCustomKeyStoreResponse
+      include Smithy::Client::_Response[Types::CreateCustomKeyStoreResponse]
+      def custom_key_store_id: () -> String?
+    end
+    def create_custom_key_store: (
+      ?custom_key_store_name: String,
+      ?cloud_hsm_cluster_id: String,
+      ?trust_anchor_certificate: String,
+      ?key_store_password: String,
+      ?custom_key_store_type: String,
+      ?xks_proxy_uri_endpoint: String,
+      ?xks_proxy_uri_path: String,
+      ?xks_proxy_vpc_endpoint_service_name: String,
+      ?xks_proxy_authentication_credential: {
+        access_key_id: String,
+        raw_secret_access_key: String
+      },
+      ?xks_proxy_connectivity: String
+    ) -> _CreateCustomKeyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomKeyStoreResponse
+
+    interface _CreateGrantResponse
+      include Smithy::Client::_Response[Types::CreateGrantResponse]
+      def grant_token: () -> String?
+      def grant_id: () -> String?
+    end
+    def create_grant: (
+      ?key_id: String,
+      ?grantee_principal: String,
+      ?retiring_principal: String,
+      ?operations: Array[String],
+      ?constraints: {
+        encryption_context_subset: Hash[String, String],
+        encryption_context_equals: untyped
+      },
+      ?grant_tokens: Array[String],
+      ?name: String,
+      ?dry_run: bool
+    ) -> _CreateGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGrantResponse
+
+    interface _CreateKeyResponse
+      include Smithy::Client::_Response[Types::CreateKeyResponse]
+      def key_metadata: () -> Types::KeyMetadata?
+    end
+    def create_key: (
+      ?policy: String,
+      ?description: String,
+      ?key_usage: String,
+      ?customer_master_key_spec: String,
+      ?key_spec: String,
+      ?origin: String,
+      ?custom_key_store_id: String,
+      ?bypass_policy_lockout_safety_check: bool,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ],
+      ?multi_region: bool,
+      ?xks_key_id: String
+    ) -> _CreateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyResponse
+
+    interface _DecryptResponse
+      include Smithy::Client::_Response[Types::DecryptResponse]
+      def key_id: () -> String?
+      def plaintext: () -> String?
+      def encryption_algorithm: () -> String?
+      def ciphertext_for_recipient: () -> String?
+      def key_material_id: () -> String?
+    end
+    def decrypt: (
+      ?ciphertext_blob: String,
+      ?encryption_context: Hash[String, String],
+      ?grant_tokens: Array[String],
+      ?key_id: String,
+      ?encryption_algorithm: String,
+      ?recipient: {
+        key_encryption_algorithm: String,
+        attestation_document: String
+      },
+      ?dry_run: bool
+    ) -> _DecryptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecryptResponse
+
+    interface _DeleteAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alias: (
+      ?alias_name: String
+    ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
+
+    interface _DeleteCustomKeyStoreResponse
+      include Smithy::Client::_Response[Types::DeleteCustomKeyStoreResponse]
+    end
+    def delete_custom_key_store: (
+      ?custom_key_store_id: String
+    ) -> _DeleteCustomKeyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomKeyStoreResponse
+
+    interface _DeleteImportedKeyMaterialResponse
+      include Smithy::Client::_Response[Types::DeleteImportedKeyMaterialResponse]
+      def key_id: () -> String?
+      def key_material_id: () -> String?
+    end
+    def delete_imported_key_material: (
+      ?key_id: String,
+      ?key_material_id: String
+    ) -> _DeleteImportedKeyMaterialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImportedKeyMaterialResponse
+
+    interface _DeriveSharedSecretResponse
+      include Smithy::Client::_Response[Types::DeriveSharedSecretResponse]
+      def key_id: () -> String?
+      def shared_secret: () -> String?
+      def ciphertext_for_recipient: () -> String?
+      def key_agreement_algorithm: () -> String?
+      def key_origin: () -> String?
+    end
+    def derive_shared_secret: (
+      ?key_id: String,
+      ?key_agreement_algorithm: String,
+      ?public_key: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool,
+      ?recipient: {
+        key_encryption_algorithm: String,
+        attestation_document: String
+      }
+    ) -> _DeriveSharedSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeriveSharedSecretResponse
+
+    interface _DescribeCustomKeyStoresResponse
+      include Smithy::Client::_Response[Types::DescribeCustomKeyStoresResponse]
+      def custom_key_stores: () -> Array[Types::CustomKeyStoresListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def describe_custom_key_stores: (
+      ?custom_key_store_id: String,
+      ?custom_key_store_name: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _DescribeCustomKeyStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomKeyStoresResponse
+
+    interface _DescribeKeyResponse
+      include Smithy::Client::_Response[Types::DescribeKeyResponse]
+      def key_metadata: () -> Types::KeyMetadata?
+    end
+    def describe_key: (
+      ?key_id: String,
+      ?grant_tokens: Array[String]
+    ) -> _DescribeKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeyResponse
+
+    interface _DisableKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_key: (
+      ?key_id: String
+    ) -> _DisableKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableKeyResponse
+
+    interface _DisableKeyRotationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_key_rotation: (
+      ?key_id: String
+    ) -> _DisableKeyRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableKeyRotationResponse
+
+    interface _DisconnectCustomKeyStoreResponse
+      include Smithy::Client::_Response[Types::DisconnectCustomKeyStoreResponse]
+    end
+    def disconnect_custom_key_store: (
+      ?custom_key_store_id: String
+    ) -> _DisconnectCustomKeyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectCustomKeyStoreResponse
+
+    interface _EnableKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_key: (
+      ?key_id: String
+    ) -> _EnableKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableKeyResponse
+
+    interface _EnableKeyRotationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_key_rotation: (
+      ?key_id: String,
+      ?rotation_period_in_days: Integer
+    ) -> _EnableKeyRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableKeyRotationResponse
+
+    interface _EncryptResponse
+      include Smithy::Client::_Response[Types::EncryptResponse]
+      def ciphertext_blob: () -> String?
+      def key_id: () -> String?
+      def encryption_algorithm: () -> String?
+    end
+    def encrypt: (
+      ?key_id: String,
+      ?plaintext: String,
+      ?encryption_context: Hash[String, String],
+      ?grant_tokens: Array[String],
+      ?encryption_algorithm: String,
+      ?dry_run: bool
+    ) -> _EncryptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EncryptResponse
+
+    interface _GenerateDataKeyResponse
+      include Smithy::Client::_Response[Types::GenerateDataKeyResponse]
+      def ciphertext_blob: () -> String?
+      def plaintext: () -> String?
+      def key_id: () -> String?
+      def ciphertext_for_recipient: () -> String?
+      def key_material_id: () -> String?
+    end
+    def generate_data_key: (
+      ?key_id: String,
+      ?encryption_context: Hash[String, String],
+      ?number_of_bytes: Integer,
+      ?key_spec: String,
+      ?grant_tokens: Array[String],
+      ?recipient: {
+        key_encryption_algorithm: String,
+        attestation_document: String
+      },
+      ?dry_run: bool
+    ) -> _GenerateDataKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateDataKeyResponse
+
+    interface _GenerateDataKeyPairResponse
+      include Smithy::Client::_Response[Types::GenerateDataKeyPairResponse]
+      def private_key_ciphertext_blob: () -> String?
+      def private_key_plaintext: () -> String?
+      def public_key: () -> String?
+      def key_id: () -> String?
+      def key_pair_spec: () -> String?
+      def ciphertext_for_recipient: () -> String?
+      def key_material_id: () -> String?
+    end
+    def generate_data_key_pair: (
+      ?encryption_context: Hash[String, String],
+      ?key_id: String,
+      ?key_pair_spec: String,
+      ?grant_tokens: Array[String],
+      ?recipient: {
+        key_encryption_algorithm: String,
+        attestation_document: String
+      },
+      ?dry_run: bool
+    ) -> _GenerateDataKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateDataKeyPairResponse
+
+    interface _GenerateDataKeyPairWithoutPlaintextResponse
+      include Smithy::Client::_Response[Types::GenerateDataKeyPairWithoutPlaintextResponse]
+      def private_key_ciphertext_blob: () -> String?
+      def public_key: () -> String?
+      def key_id: () -> String?
+      def key_pair_spec: () -> String?
+      def key_material_id: () -> String?
+    end
+    def generate_data_key_pair_without_plaintext: (
+      ?encryption_context: Hash[String, String],
+      ?key_id: String,
+      ?key_pair_spec: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _GenerateDataKeyPairWithoutPlaintextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateDataKeyPairWithoutPlaintextResponse
+
+    interface _GenerateDataKeyWithoutPlaintextResponse
+      include Smithy::Client::_Response[Types::GenerateDataKeyWithoutPlaintextResponse]
+      def ciphertext_blob: () -> String?
+      def key_id: () -> String?
+      def key_material_id: () -> String?
+    end
+    def generate_data_key_without_plaintext: (
+      ?key_id: String,
+      ?encryption_context: Hash[String, String],
+      ?key_spec: String,
+      ?number_of_bytes: Integer,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _GenerateDataKeyWithoutPlaintextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateDataKeyWithoutPlaintextResponse
+
+    interface _GenerateMacResponse
+      include Smithy::Client::_Response[Types::GenerateMacResponse]
+      def mac: () -> String?
+      def mac_algorithm: () -> String?
+      def key_id: () -> String?
+    end
+    def generate_mac: (
+      ?message: String,
+      ?key_id: String,
+      ?mac_algorithm: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _GenerateMacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMacResponse
+
+    interface _GenerateRandomResponse
+      include Smithy::Client::_Response[Types::GenerateRandomResponse]
+      def plaintext: () -> String?
+      def ciphertext_for_recipient: () -> String?
+    end
+    def generate_random: (
+      ?number_of_bytes: Integer,
+      ?custom_key_store_id: String,
+      ?recipient: {
+        key_encryption_algorithm: String,
+        attestation_document: String
+      }
+    ) -> _GenerateRandomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateRandomResponse
+
+    interface _GetKeyPolicyResponse
+      include Smithy::Client::_Response[Types::GetKeyPolicyResponse]
+      def policy: () -> String?
+      def policy_name: () -> String?
+    end
+    def get_key_policy: (
+      ?key_id: String,
+      ?policy_name: String
+    ) -> _GetKeyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyPolicyResponse
+
+    interface _GetKeyRotationStatusResponse
+      include Smithy::Client::_Response[Types::GetKeyRotationStatusResponse]
+      def key_rotation_enabled: () -> bool?
+      def key_id: () -> String?
+      def rotation_period_in_days: () -> Integer?
+      def next_rotation_date: () -> Time?
+      def on_demand_rotation_start_date: () -> Time?
+    end
+    def get_key_rotation_status: (
+      ?key_id: String
+    ) -> _GetKeyRotationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyRotationStatusResponse
+
+    interface _GetParametersForImportResponse
+      include Smithy::Client::_Response[Types::GetParametersForImportResponse]
+      def key_id: () -> String?
+      def import_token: () -> String?
+      def public_key: () -> String?
+      def parameters_valid_to: () -> Time?
+    end
+    def get_parameters_for_import: (
+      ?key_id: String,
+      ?wrapping_algorithm: String,
+      ?wrapping_key_spec: String
+    ) -> _GetParametersForImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersForImportResponse
+
+    interface _GetPublicKeyResponse
+      include Smithy::Client::_Response[Types::GetPublicKeyResponse]
+      def key_id: () -> String?
+      def public_key: () -> String?
+      def customer_master_key_spec: () -> String?
+      def key_spec: () -> String?
+      def key_usage: () -> String?
+      def encryption_algorithms: () -> Array[String]?
+      def signing_algorithms: () -> Array[String]?
+      def key_agreement_algorithms: () -> Array[String]?
+    end
+    def get_public_key: (
+      ?key_id: String,
+      ?grant_tokens: Array[String]
+    ) -> _GetPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyResponse
+
+    interface _ImportKeyMaterialResponse
+      include Smithy::Client::_Response[Types::ImportKeyMaterialResponse]
+      def key_id: () -> String?
+      def key_material_id: () -> String?
+    end
+    def import_key_material: (
+      ?key_id: String,
+      ?import_token: String,
+      ?encrypted_key_material: String,
+      ?valid_to: Time,
+      ?expiration_model: String,
+      ?import_type: String,
+      ?key_material_description: String,
+      ?key_material_id: String
+    ) -> _ImportKeyMaterialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportKeyMaterialResponse
+
+    interface _ListAliasesResponse
+      include Smithy::Client::_Response[Types::ListAliasesResponse]
+      def aliases: () -> Array[Types::AliasListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_aliases: (
+      ?key_id: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
+
+    interface _ListGrantsResponse
+      include Smithy::Client::_Response[Types::ListGrantsOutput]
+      def grants: () -> Array[Types::GrantListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_grants: (
+      ?limit: Integer,
+      ?marker: String,
+      ?key_id: String,
+      ?grant_id: String,
+      ?grantee_principal: String
+    ) -> _ListGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGrantsResponse
+
+    interface _ListKeyPoliciesResponse
+      include Smithy::Client::_Response[Types::ListKeyPoliciesResponse]
+      def policy_names: () -> Array[String]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_key_policies: (
+      ?key_id: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListKeyPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyPoliciesResponse
+
+    interface _ListKeyRotationsResponse
+      include Smithy::Client::_Response[Types::ListKeyRotationsResponse]
+      def rotations: () -> Array[Types::RotationsListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_key_rotations: (
+      ?key_id: String,
+      ?include_key_material: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListKeyRotationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyRotationsResponse
+
+    interface _ListKeysResponse
+      include Smithy::Client::_Response[Types::ListKeysResponse]
+      def keys: () -> Array[Types::KeyListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_keys: (
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeysResponse
+
+    interface _ListResourceTagsResponse
+      include Smithy::Client::_Response[Types::ListResourceTagsResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_resource_tags: (
+      ?key_id: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListResourceTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceTagsResponse
+
+    interface _ListRetirableGrantsResponse
+      include Smithy::Client::_Response[Types::ListRetirableGrantsOutput]
+      def grants: () -> Array[Types::GrantListEntry]?
+      def next_marker: () -> String?
+      def truncated: () -> bool?
+    end
+    def list_retirable_grants: (
+      ?limit: Integer,
+      ?marker: String,
+      ?retiring_principal: String
+    ) -> _ListRetirableGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetirableGrantsResponse
+
+    interface _PutKeyPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_key_policy: (
+      ?key_id: String,
+      ?policy_name: String,
+      ?policy: String,
+      ?bypass_policy_lockout_safety_check: bool
+    ) -> _PutKeyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutKeyPolicyResponse
+
+    interface _ReEncryptResponse
+      include Smithy::Client::_Response[Types::ReEncryptResponse]
+      def ciphertext_blob: () -> String?
+      def source_key_id: () -> String?
+      def key_id: () -> String?
+      def source_encryption_algorithm: () -> String?
+      def destination_encryption_algorithm: () -> String?
+      def source_key_material_id: () -> String?
+      def destination_key_material_id: () -> String?
+    end
+    def re_encrypt: (
+      ?ciphertext_blob: String,
+      ?source_encryption_context: Hash[String, String],
+      ?source_key_id: String,
+      ?destination_key_id: String,
+      ?destination_encryption_context: Hash[String, String],
+      ?source_encryption_algorithm: String,
+      ?destination_encryption_algorithm: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _ReEncryptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReEncryptResponse
+
+    interface _ReplicateKeyResponse
+      include Smithy::Client::_Response[Types::ReplicateKeyResponse]
+      def replica_key_metadata: () -> Types::KeyMetadata?
+      def replica_policy: () -> String?
+      def replica_tags: () -> Array[Types::Tag]?
+    end
+    def replicate_key: (
+      ?key_id: String,
+      ?replica_region: String,
+      ?policy: String,
+      ?bypass_policy_lockout_safety_check: bool,
+      ?description: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _ReplicateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplicateKeyResponse
+
+    interface _RetireGrantResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def retire_grant: (
+      ?grant_token: String,
+      ?key_id: String,
+      ?grant_id: String,
+      ?dry_run: bool
+    ) -> _RetireGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetireGrantResponse
+
+    interface _RevokeGrantResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_grant: (
+      ?key_id: String,
+      ?grant_id: String,
+      ?dry_run: bool
+    ) -> _RevokeGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeGrantResponse
+
+    interface _RotateKeyOnDemandResponse
+      include Smithy::Client::_Response[Types::RotateKeyOnDemandResponse]
+      def key_id: () -> String?
+    end
+    def rotate_key_on_demand: (
+      ?key_id: String
+    ) -> _RotateKeyOnDemandResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RotateKeyOnDemandResponse
+
+    interface _ScheduleKeyDeletionResponse
+      include Smithy::Client::_Response[Types::ScheduleKeyDeletionResponse]
+      def key_id: () -> String?
+      def deletion_date: () -> Time?
+      def key_state: () -> String?
+      def pending_window_in_days: () -> Integer?
+    end
+    def schedule_key_deletion: (
+      ?key_id: String,
+      ?pending_window_in_days: Integer
+    ) -> _ScheduleKeyDeletionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ScheduleKeyDeletionResponse
+
+    interface _SignResponse
+      include Smithy::Client::_Response[Types::SignResponse]
+      def key_id: () -> String?
+      def signature: () -> String?
+      def signing_algorithm: () -> String?
+    end
+    def sign: (
+      ?key_id: String,
+      ?message: String,
+      ?message_type: String,
+      ?grant_tokens: Array[String],
+      ?signing_algorithm: String,
+      ?dry_run: bool
+    ) -> _SignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?key_id: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?key_id: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_alias: (
+      ?alias_name: String,
+      ?target_key_id: String
+    ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
+
+    interface _UpdateCustomKeyStoreResponse
+      include Smithy::Client::_Response[Types::UpdateCustomKeyStoreResponse]
+    end
+    def update_custom_key_store: (
+      ?custom_key_store_id: String,
+      ?new_custom_key_store_name: String,
+      ?key_store_password: String,
+      ?cloud_hsm_cluster_id: String,
+      ?xks_proxy_uri_endpoint: String,
+      ?xks_proxy_uri_path: String,
+      ?xks_proxy_vpc_endpoint_service_name: String,
+      ?xks_proxy_authentication_credential: {
+        access_key_id: String,
+        raw_secret_access_key: String
+      },
+      ?xks_proxy_connectivity: String
+    ) -> _UpdateCustomKeyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomKeyStoreResponse
+
+    interface _UpdateKeyDescriptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_key_description: (
+      ?key_id: String,
+      ?description: String
+    ) -> _UpdateKeyDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyDescriptionResponse
+
+    interface _UpdatePrimaryRegionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_primary_region: (
+      ?key_id: String,
+      ?primary_region: String
+    ) -> _UpdatePrimaryRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrimaryRegionResponse
+
+    interface _VerifyResponse
+      include Smithy::Client::_Response[Types::VerifyResponse]
+      def key_id: () -> String?
+      def signature_valid: () -> bool?
+      def signing_algorithm: () -> String?
+    end
+    def verify: (
+      ?key_id: String,
+      ?message: String,
+      ?message_type: String,
+      ?signature: String,
+      ?signing_algorithm: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _VerifyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyResponse
+
+    interface _VerifyMacResponse
+      include Smithy::Client::_Response[Types::VerifyMacResponse]
+      def key_id: () -> String?
+      def mac_valid: () -> bool?
+      def mac_algorithm: () -> String?
+    end
+    def verify_mac: (
+      ?message: String,
+      ?key_id: String,
+      ?mac_algorithm: String,
+      ?mac: String,
+      ?grant_tokens: Array[String],
+      ?dry_run: bool
+    ) -> _VerifyMacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyMacResponse
+  end
+end

@@ -1,0 +1,4983 @@
+module Aws::OpenSearch
+  module Types
+
+    class AIMLOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput,
+        ?s3_vectors_engine: Types::S3VectorsEngine,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput?
+      attr_accessor s3_vectors_engine: Types::S3VectorsEngine?
+    end
+
+    class AIMLOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput,
+        ?s3_vectors_engine: Types::S3VectorsEngine,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput?
+      attr_accessor s3_vectors_engine: Types::S3VectorsEngine?
+    end
+
+    class AIMLOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::AIMLOptionsOutput,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::AIMLOptionsOutput?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class AWSDomainInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?domain_name: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor region: String?
+    end
+
+    module AWSServicePrincipal
+      application_opensearchservice_amazonaws_com: String
+    end
+
+    class AcceptInboundConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class AcceptInboundConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::InboundConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::InboundConnection?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessPoliciesStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module ActionSeverity
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module ActionStatus
+      PENDING_UPDATE: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+      NOT_ELIGIBLE: String
+      ELIGIBLE: String
+    end
+
+    module ActionType
+      SERVICE_SOFTWARE_UPDATE: String
+      JVM_HEAP_SIZE_TUNING: String
+      JVM_YOUNG_GEN_TUNING: String
+    end
+
+    class AddDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?name: String,
+        ?data_source_type: Types::DataSourceType,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor name: String?
+      attr_accessor data_source_type: Types::DataSourceType?
+      attr_accessor description: String?
+    end
+
+    class AddDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddDirectQueryDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?data_source_type: Types::DirectQueryDataSourceType,
+        ?description: String,
+        ?open_search_arns: Array[String],
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor data_source_type: Types::DirectQueryDataSourceType?
+      attr_accessor description: String?
+      attr_accessor open_search_arns: Array[String]?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class AddDirectQueryDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_arn: String?
+    end
+
+    class AddTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class AdditionalLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_name: String,
+        ?limit_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_name: String?
+      attr_accessor limit_values: Array[String]?
+    end
+
+    class AdvancedOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Hash[String, String],
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Hash[String, String]?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class AdvancedSecurityOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?internal_user_database_enabled: bool,
+        ?saml_options: Types::SAMLOptionsOutput,
+        ?jwt_options: Types::JWTOptionsOutput,
+        ?iam_federation_options: Types::IAMFederationOptionsOutput,
+        ?anonymous_auth_disable_date: Time,
+        ?anonymous_auth_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor internal_user_database_enabled: bool?
+      attr_accessor saml_options: Types::SAMLOptionsOutput?
+      attr_accessor jwt_options: Types::JWTOptionsOutput?
+      attr_accessor iam_federation_options: Types::IAMFederationOptionsOutput?
+      attr_accessor anonymous_auth_disable_date: Time?
+      attr_accessor anonymous_auth_enabled: bool?
+    end
+
+    class AdvancedSecurityOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?internal_user_database_enabled: bool,
+        ?master_user_options: Types::MasterUserOptions,
+        ?saml_options: Types::SAMLOptionsInput,
+        ?jwt_options: Types::JWTOptionsInput,
+        ?iam_federation_options: Types::IAMFederationOptionsInput,
+        ?anonymous_auth_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor internal_user_database_enabled: bool?
+      attr_accessor master_user_options: Types::MasterUserOptions?
+      attr_accessor saml_options: Types::SAMLOptionsInput?
+      attr_accessor jwt_options: Types::JWTOptionsInput?
+      attr_accessor iam_federation_options: Types::IAMFederationOptionsInput?
+      attr_accessor anonymous_auth_enabled: bool?
+    end
+
+    class AdvancedSecurityOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::AdvancedSecurityOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::AdvancedSecurityOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class AppConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module AppConfigType
+      OpensearchDashboardAdminUsers: String
+      OpensearchDashboardAdminGroups: String
+    end
+
+    module ApplicationStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+      FAILED: String
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?endpoint: String,
+        ?status: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class AssociatePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?domain_name: String,
+        ?prerequisite_package_id_list: Array[String],
+        ?association_configuration: Types::PackageAssociationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor prerequisite_package_id_list: Array[String]?
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration?
+    end
+
+    class AssociatePackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details: Types::DomainPackageDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details: Types::DomainPackageDetails?
+    end
+
+    class AssociatePackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_list: Array[Types::PackageDetailsForAssociation],
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_list: Array[Types::PackageDetailsForAssociation]?
+      attr_accessor domain_name: String?
+    end
+
+    class AssociatePackagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details_list: Array[Types::DomainPackageDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details_list: Array[Types::DomainPackageDetails]?
+    end
+
+    class AuthorizeVpcEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?account: String,
+        ?service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor account: String?
+      attr_accessor service: String?
+    end
+
+    class AuthorizeVpcEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_principal: Types::AuthorizedPrincipal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_principal: Types::AuthorizedPrincipal?
+    end
+
+    class AuthorizedPrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_type: String,
+        ?principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_type: String?
+      attr_accessor principal: String?
+    end
+
+    class AutoTune
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_tune_type: String,
+        ?auto_tune_details: Types::AutoTuneDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_tune_type: String?
+      attr_accessor auto_tune_details: Types::AutoTuneDetails?
+    end
+
+    module AutoTuneDesiredState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AutoTuneDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_auto_tune_details: Types::ScheduledAutoTuneDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_auto_tune_details: Types::ScheduledAutoTuneDetails?
+    end
+
+    class AutoTuneMaintenanceSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_at: Time,
+        ?duration: Types::Duration,
+        ?cron_expression_for_recurrence: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_at: Time?
+      attr_accessor duration: Types::Duration?
+      attr_accessor cron_expression_for_recurrence: String?
+    end
+
+    class AutoTuneOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: String,
+        ?rollback_on_disable: String,
+        ?maintenance_schedules: Array[Types::AutoTuneMaintenanceSchedule],
+        ?use_off_peak_window: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: String?
+      attr_accessor rollback_on_disable: String?
+      attr_accessor maintenance_schedules: Array[Types::AutoTuneMaintenanceSchedule]?
+      attr_accessor use_off_peak_window: bool?
+    end
+
+    class AutoTuneOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: String,
+        ?maintenance_schedules: Array[Types::AutoTuneMaintenanceSchedule],
+        ?use_off_peak_window: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: String?
+      attr_accessor maintenance_schedules: Array[Types::AutoTuneMaintenanceSchedule]?
+      attr_accessor use_off_peak_window: bool?
+    end
+
+    class AutoTuneOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error_message: String,
+        ?use_off_peak_window: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+      attr_accessor use_off_peak_window: bool?
+    end
+
+    class AutoTuneOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::AutoTuneOptions,
+        ?status: Types::AutoTuneStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::AutoTuneOptions?
+      attr_accessor status: Types::AutoTuneStatus?
+    end
+
+    module AutoTuneState
+      ENABLED: String
+      DISABLED: String
+      ENABLE_IN_PROGRESS: String
+      DISABLE_IN_PROGRESS: String
+      DISABLED_AND_ROLLBACK_SCHEDULED: String
+      DISABLED_AND_ROLLBACK_IN_PROGRESS: String
+      DISABLED_AND_ROLLBACK_COMPLETE: String
+      DISABLED_AND_ROLLBACK_ERROR: String
+      ERROR: String
+    end
+
+    class AutoTuneStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?update_date: Time,
+        ?update_version: Integer,
+        ?state: String,
+        ?error_message: String,
+        ?pending_deletion: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor update_date: Time?
+      attr_accessor update_version: Integer?
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+      attr_accessor pending_deletion: bool?
+    end
+
+    module AutoTuneType
+      SCHEDULED_ACTION: String
+    end
+
+    class AvailabilityZoneInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_name: String,
+        ?zone_status: String,
+        ?configured_data_node_count: String,
+        ?available_data_node_count: String,
+        ?total_shards: String,
+        ?total_un_assigned_shards: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_name: String?
+      attr_accessor zone_status: String?
+      attr_accessor configured_data_node_count: String?
+      attr_accessor available_data_node_count: String?
+      attr_accessor total_shards: String?
+      attr_accessor total_un_assigned_shards: String?
+    end
+
+    class BaseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelDomainConfigChangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class CancelDomainConfigChangeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cancelled_change_ids: Array[String],
+        ?cancelled_change_properties: Array[Types::CancelledChangeProperty],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cancelled_change_ids: Array[String]?
+      attr_accessor cancelled_change_properties: Array[Types::CancelledChangeProperty]?
+      attr_accessor dry_run: bool?
+    end
+
+    class CancelServiceSoftwareUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class CancelServiceSoftwareUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_software_options: Types::ServiceSoftwareOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions?
+    end
+
+    class CancelledChangeProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property_name: String,
+        ?cancelled_value: String,
+        ?active_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property_name: String?
+      attr_accessor cancelled_value: String?
+      attr_accessor active_value: String?
+    end
+
+    class ChangeProgressDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_id: String,
+        ?message: String,
+        ?config_change_status: String,
+        ?initiated_by: String,
+        ?start_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_id: String?
+      attr_accessor message: String?
+      attr_accessor config_change_status: String?
+      attr_accessor initiated_by: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class ChangeProgressStage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?description: String,
+        ?last_updated: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor last_updated: Time?
+    end
+
+    class ChangeProgressStatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_id: String,
+        ?start_time: Time,
+        ?status: String,
+        ?pending_properties: Array[String],
+        ?completed_properties: Array[String],
+        ?total_number_of_stages: Integer,
+        ?change_progress_stages: Array[Types::ChangeProgressStage],
+        ?last_updated_time: Time,
+        ?config_change_status: String,
+        ?initiated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor status: String?
+      attr_accessor pending_properties: Array[String]?
+      attr_accessor completed_properties: Array[String]?
+      attr_accessor total_number_of_stages: Integer?
+      attr_accessor change_progress_stages: Array[Types::ChangeProgressStage]?
+      attr_accessor last_updated_time: Time?
+      attr_accessor config_change_status: String?
+      attr_accessor initiated_by: String?
+    end
+
+    class CloudWatchDirectQueryDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class ClusterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?instance_count: Integer,
+        ?dedicated_master_enabled: bool,
+        ?zone_awareness_enabled: bool,
+        ?zone_awareness_config: Types::ZoneAwarenessConfig,
+        ?dedicated_master_type: String,
+        ?dedicated_master_count: Integer,
+        ?warm_enabled: bool,
+        ?warm_type: String,
+        ?warm_count: Integer,
+        ?cold_storage_options: Types::ColdStorageOptions,
+        ?multi_az_with_standby_enabled: bool,
+        ?node_options: Array[Types::NodeOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor dedicated_master_enabled: bool?
+      attr_accessor zone_awareness_enabled: bool?
+      attr_accessor zone_awareness_config: Types::ZoneAwarenessConfig?
+      attr_accessor dedicated_master_type: String?
+      attr_accessor dedicated_master_count: Integer?
+      attr_accessor warm_enabled: bool?
+      attr_accessor warm_type: String?
+      attr_accessor warm_count: Integer?
+      attr_accessor cold_storage_options: Types::ColdStorageOptions?
+      attr_accessor multi_az_with_standby_enabled: bool?
+      attr_accessor node_options: Array[Types::NodeOption]?
+    end
+
+    class ClusterConfigStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::ClusterConfig,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::ClusterConfig?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class CognitoOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?user_pool_id: String,
+        ?identity_pool_id: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor user_pool_id: String?
+      attr_accessor identity_pool_id: String?
+      attr_accessor role_arn: String?
+    end
+
+    class CognitoOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::CognitoOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::CognitoOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class ColdStorageOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class CompatibleVersionsMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_version: String,
+        ?target_versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_version: String?
+      attr_accessor target_versions: Array[String]?
+    end
+
+    module ConfigChangeStatus
+      PENDING: String
+      INITIALIZING: String
+      VALIDATING: String
+      VALIDATION_FAILED: String
+      APPLYING_CHANGES: String
+      COMPLETED: String
+      PENDING_USER_INPUT: String
+      CANCELLED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectionMode
+      DIRECT: String
+      VPC_ENDPOINT: String
+    end
+
+    class ConnectionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?cross_cluster_search: Types::CrossClusterSearchConnectionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor cross_cluster_search: Types::CrossClusterSearchConnectionProperties?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?data_sources: Array[Types::DataSource],
+        ?iam_identity_center_options: Types::IamIdentityCenterOptionsInput,
+        ?app_configs: Array[Types::AppConfig],
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptionsInput?
+      attr_accessor app_configs: Array[Types::AppConfig]?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?data_sources: Array[Types::DataSource],
+        ?iam_identity_center_options: Types::IamIdentityCenterOptions,
+        ?app_configs: Array[Types::AppConfig],
+        ?tag_list: Array[Types::Tag],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions?
+      attr_accessor app_configs: Array[Types::AppConfig]?
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?engine_version: String,
+        ?cluster_config: Types::ClusterConfig,
+        ?ebs_options: Types::EBSOptions,
+        ?access_policies: String,
+        ?ip_address_type: String,
+        ?snapshot_options: Types::SnapshotOptions,
+        ?vpc_options: Types::VPCOptions,
+        ?cognito_options: Types::CognitoOptions,
+        ?encryption_at_rest_options: Types::EncryptionAtRestOptions,
+        ?node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions,
+        ?advanced_options: Hash[String, String],
+        ?log_publishing_options: Hash[String, Types::LogPublishingOption],
+        ?domain_endpoint_options: Types::DomainEndpointOptions,
+        ?advanced_security_options: Types::AdvancedSecurityOptionsInput,
+        ?identity_center_options: Types::IdentityCenterOptionsInput,
+        ?tag_list: Array[Types::Tag],
+        ?auto_tune_options: Types::AutoTuneOptionsInput,
+        ?off_peak_window_options: Types::OffPeakWindowOptions,
+        ?software_update_options: Types::SoftwareUpdateOptions,
+        ?aiml_options: Types::AIMLOptionsInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor engine_version: String?
+      attr_accessor cluster_config: Types::ClusterConfig?
+      attr_accessor ebs_options: Types::EBSOptions?
+      attr_accessor access_policies: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor snapshot_options: Types::SnapshotOptions?
+      attr_accessor vpc_options: Types::VPCOptions?
+      attr_accessor cognito_options: Types::CognitoOptions?
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions?
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions?
+      attr_accessor advanced_options: Hash[String, String]?
+      attr_accessor log_publishing_options: Hash[String, Types::LogPublishingOption]?
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions?
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput?
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsInput?
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsInput?
+      attr_accessor off_peak_window_options: Types::OffPeakWindowOptions?
+      attr_accessor software_update_options: Types::SoftwareUpdateOptions?
+      attr_accessor aiml_options: Types::AIMLOptionsInput?
+    end
+
+    class CreateDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_status: Types::DomainStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_status: Types::DomainStatus?
+    end
+
+    class CreateOutboundConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_domain_info: Types::DomainInformationContainer,
+        ?remote_domain_info: Types::DomainInformationContainer,
+        ?connection_alias: String,
+        ?connection_mode: String,
+        ?connection_properties: Types::ConnectionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_domain_info: Types::DomainInformationContainer?
+      attr_accessor remote_domain_info: Types::DomainInformationContainer?
+      attr_accessor connection_alias: String?
+      attr_accessor connection_mode: String?
+      attr_accessor connection_properties: Types::ConnectionProperties?
+    end
+
+    class CreateOutboundConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_domain_info: Types::DomainInformationContainer,
+        ?remote_domain_info: Types::DomainInformationContainer,
+        ?connection_alias: String,
+        ?connection_status: Types::OutboundConnectionStatus,
+        ?connection_id: String,
+        ?connection_mode: String,
+        ?connection_properties: Types::ConnectionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_domain_info: Types::DomainInformationContainer?
+      attr_accessor remote_domain_info: Types::DomainInformationContainer?
+      attr_accessor connection_alias: String?
+      attr_accessor connection_status: Types::OutboundConnectionStatus?
+      attr_accessor connection_id: String?
+      attr_accessor connection_mode: String?
+      attr_accessor connection_properties: Types::ConnectionProperties?
+    end
+
+    class CreatePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_name: String,
+        ?package_type: String,
+        ?package_description: String,
+        ?package_source: Types::PackageSource,
+        ?package_configuration: Types::PackageConfiguration,
+        ?engine_version: String,
+        ?package_vending_options: Types::PackageVendingOptions,
+        ?package_encryption_options: Types::PackageEncryptionOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_name: String?
+      attr_accessor package_type: String?
+      attr_accessor package_description: String?
+      attr_accessor package_source: Types::PackageSource?
+      attr_accessor package_configuration: Types::PackageConfiguration?
+      attr_accessor engine_version: String?
+      attr_accessor package_vending_options: Types::PackageVendingOptions?
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions?
+    end
+
+    class CreatePackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_details: Types::PackageDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_details: Types::PackageDetails?
+    end
+
+    class CreateVpcEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+        ?vpc_options: Types::VPCOptions,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+      attr_accessor vpc_options: Types::VPCOptions?
+      attr_accessor client_token: String?
+    end
+
+    class CreateVpcEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint: Types::VpcEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint: Types::VpcEndpoint?
+    end
+
+    class CrossClusterSearchConnectionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skip_unavailable: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skip_unavailable: String?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_arn: String,
+        ?data_source_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_arn: String?
+      attr_accessor data_source_description: String?
+    end
+
+    class DataSourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_type: Types::DataSourceType,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_type: Types::DataSourceType?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    module DataSourceStatus
+      ACTIVE: String
+      DISABLED: String
+    end
+
+    class DataSourceType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_glue_data_catalog: Types::S3GlueDataCatalog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_glue_data_catalog: Types::S3GlueDataCatalog?
+
+      class S3GlueDataCatalog < DataSourceType
+      end
+      class Unknown < DataSourceType
+      end
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteDirectQueryDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+    end
+
+    class DeleteDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DeleteDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_status: Types::DomainStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_status: Types::DomainStatus?
+    end
+
+    class DeleteInboundConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class DeleteInboundConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::InboundConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::InboundConnection?
+    end
+
+    class DeleteOutboundConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class DeleteOutboundConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::OutboundConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::OutboundConnection?
+    end
+
+    class DeletePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+    end
+
+    class DeletePackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_details: Types::PackageDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_details: Types::PackageDetails?
+    end
+
+    class DeleteVpcEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class DeleteVpcEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_summary: Types::VpcEndpointSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_summary: Types::VpcEndpointSummary?
+    end
+
+    class DependencyFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DeploymentStatus
+      PENDING_UPDATE: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      NOT_ELIGIBLE: String
+      ELIGIBLE: String
+    end
+
+    class DescribeDomainAutoTunesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDomainAutoTunesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_tunes: Array[Types::AutoTune],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_tunes: Array[Types::AutoTune]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDomainChangeProgressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?change_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor change_id: String?
+    end
+
+    class DescribeDomainChangeProgressResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_progress_status: Types::ChangeProgressStatusDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_progress_status: Types::ChangeProgressStatusDetails?
+    end
+
+    class DescribeDomainConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DescribeDomainConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_config: Types::DomainConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_config: Types::DomainConfig?
+    end
+
+    class DescribeDomainHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DescribeDomainHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_state: String,
+        ?availability_zone_count: String,
+        ?active_availability_zone_count: String,
+        ?stand_by_availability_zone_count: String,
+        ?data_node_count: String,
+        ?dedicated_master: bool,
+        ?master_eligible_node_count: String,
+        ?warm_node_count: String,
+        ?master_node: String,
+        ?cluster_health: String,
+        ?total_shards: String,
+        ?total_un_assigned_shards: String,
+        ?environment_information: Array[Types::EnvironmentInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_state: String?
+      attr_accessor availability_zone_count: String?
+      attr_accessor active_availability_zone_count: String?
+      attr_accessor stand_by_availability_zone_count: String?
+      attr_accessor data_node_count: String?
+      attr_accessor dedicated_master: bool?
+      attr_accessor master_eligible_node_count: String?
+      attr_accessor warm_node_count: String?
+      attr_accessor master_node: String?
+      attr_accessor cluster_health: String?
+      attr_accessor total_shards: String?
+      attr_accessor total_un_assigned_shards: String?
+      attr_accessor environment_information: Array[Types::EnvironmentInfo]?
+    end
+
+    class DescribeDomainNodesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DescribeDomainNodesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_nodes_status_list: Array[Types::DomainNodesStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_nodes_status_list: Array[Types::DomainNodesStatus]?
+    end
+
+    class DescribeDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DescribeDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_status: Types::DomainStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_status: Types::DomainStatus?
+    end
+
+    class DescribeDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_names: Array[String]?
+    end
+
+    class DescribeDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_status_list: Array[Types::DomainStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_status_list: Array[Types::DomainStatus]?
+    end
+
+    class DescribeDryRunProgressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?dry_run_id: String,
+        ?load_dry_run_config: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor dry_run_id: String?
+      attr_accessor load_dry_run_config: bool?
+    end
+
+    class DescribeDryRunProgressResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run_progress_status: Types::DryRunProgressStatus,
+        ?dry_run_config: Types::DomainStatus,
+        ?dry_run_results: Types::DryRunResults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run_progress_status: Types::DryRunProgressStatus?
+      attr_accessor dry_run_config: Types::DomainStatus?
+      attr_accessor dry_run_results: Types::DryRunResults?
+    end
+
+    class DescribeInboundConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeInboundConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::InboundConnection],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::InboundConnection]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeInstanceTypeLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?instance_type: String,
+        ?engine_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor instance_type: String?
+      attr_accessor engine_version: String?
+    end
+
+    class DescribeInstanceTypeLimitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits_by_role: Hash[String, Types::Limits],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits_by_role: Hash[String, Types::Limits]?
+    end
+
+    class DescribeOutboundConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOutboundConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::OutboundConnection],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::OutboundConnection]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePackagesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module DescribePackagesFilterName
+      PackageID: String
+      PackageName: String
+      PackageStatus: String
+      PackageType: String
+      EngineVersion: String
+      PackageOwner: String
+    end
+
+    class DescribePackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::DescribePackagesFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::DescribePackagesFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePackagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_details_list: Array[Types::PackageDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_details_list: Array[Types::PackageDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReservedInstanceOfferingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instance_offering_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instance_offering_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReservedInstanceOfferingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reserved_instance_offerings: Array[Types::ReservedInstanceOffering],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reserved_instance_offerings: Array[Types::ReservedInstanceOffering]?
+    end
+
+    class DescribeReservedInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instance_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instance_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReservedInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?reserved_instances: Array[Types::ReservedInstance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor reserved_instances: Array[Types::ReservedInstance]?
+    end
+
+    class DescribeVpcEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_ids: Array[String]?
+    end
+
+    class DescribeVpcEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoints: Array[Types::VpcEndpoint],
+        ?vpc_endpoint_errors: Array[Types::VpcEndpointError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoints: Array[Types::VpcEndpoint]?
+      attr_accessor vpc_endpoint_errors: Array[Types::VpcEndpointError]?
+    end
+
+    class DirectQueryDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?data_source_type: Types::DirectQueryDataSourceType,
+        ?description: String,
+        ?open_search_arns: Array[String],
+        ?data_source_arn: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor data_source_type: Types::DirectQueryDataSourceType?
+      attr_accessor description: String?
+      attr_accessor open_search_arns: Array[String]?
+      attr_accessor data_source_arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class DirectQueryDataSourceType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cloud_watch_log: Types::CloudWatchDirectQueryDataSource,
+        ?security_lake: Types::SecurityLakeDirectQueryDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_log: Types::CloudWatchDirectQueryDataSource?
+      attr_accessor security_lake: Types::SecurityLakeDirectQueryDataSource?
+
+      class CloudWatchLog < DirectQueryDataSourceType
+      end
+      class SecurityLake < DirectQueryDataSourceType
+      end
+      class Unknown < DirectQueryDataSourceType
+      end
+    end
+
+    class DisabledOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DissociatePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DissociatePackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details: Types::DomainPackageDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details: Types::DomainPackageDetails?
+    end
+
+    class DissociatePackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_list: Array[String],
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_list: Array[String]?
+      attr_accessor domain_name: String?
+    end
+
+    class DissociatePackagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details_list: Array[Types::DomainPackageDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details_list: Array[Types::DomainPackageDetails]?
+    end
+
+    class DomainConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_version: Types::VersionStatus,
+        ?cluster_config: Types::ClusterConfigStatus,
+        ?ebs_options: Types::EBSOptionsStatus,
+        ?access_policies: Types::AccessPoliciesStatus,
+        ?ip_address_type: Types::IPAddressTypeStatus,
+        ?snapshot_options: Types::SnapshotOptionsStatus,
+        ?vpc_options: Types::VPCDerivedInfoStatus,
+        ?cognito_options: Types::CognitoOptionsStatus,
+        ?encryption_at_rest_options: Types::EncryptionAtRestOptionsStatus,
+        ?node_to_node_encryption_options: Types::NodeToNodeEncryptionOptionsStatus,
+        ?advanced_options: Types::AdvancedOptionsStatus,
+        ?log_publishing_options: Types::LogPublishingOptionsStatus,
+        ?domain_endpoint_options: Types::DomainEndpointOptionsStatus,
+        ?advanced_security_options: Types::AdvancedSecurityOptionsStatus,
+        ?identity_center_options: Types::IdentityCenterOptionsStatus,
+        ?auto_tune_options: Types::AutoTuneOptionsStatus,
+        ?change_progress_details: Types::ChangeProgressDetails,
+        ?off_peak_window_options: Types::OffPeakWindowOptionsStatus,
+        ?software_update_options: Types::SoftwareUpdateOptionsStatus,
+        ?modifying_properties: Array[Types::ModifyingProperties],
+        ?aiml_options: Types::AIMLOptionsStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_version: Types::VersionStatus?
+      attr_accessor cluster_config: Types::ClusterConfigStatus?
+      attr_accessor ebs_options: Types::EBSOptionsStatus?
+      attr_accessor access_policies: Types::AccessPoliciesStatus?
+      attr_accessor ip_address_type: Types::IPAddressTypeStatus?
+      attr_accessor snapshot_options: Types::SnapshotOptionsStatus?
+      attr_accessor vpc_options: Types::VPCDerivedInfoStatus?
+      attr_accessor cognito_options: Types::CognitoOptionsStatus?
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptionsStatus?
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptionsStatus?
+      attr_accessor advanced_options: Types::AdvancedOptionsStatus?
+      attr_accessor log_publishing_options: Types::LogPublishingOptionsStatus?
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus?
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsStatus?
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsStatus?
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus?
+      attr_accessor change_progress_details: Types::ChangeProgressDetails?
+      attr_accessor off_peak_window_options: Types::OffPeakWindowOptionsStatus?
+      attr_accessor software_update_options: Types::SoftwareUpdateOptionsStatus?
+      attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
+      attr_accessor aiml_options: Types::AIMLOptionsStatus?
+    end
+
+    class DomainEndpointOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enforce_https: bool,
+        ?tls_security_policy: String,
+        ?custom_endpoint_enabled: bool,
+        ?custom_endpoint: String,
+        ?custom_endpoint_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enforce_https: bool?
+      attr_accessor tls_security_policy: String?
+      attr_accessor custom_endpoint_enabled: bool?
+      attr_accessor custom_endpoint: String?
+      attr_accessor custom_endpoint_certificate_arn: String?
+    end
+
+    class DomainEndpointOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::DomainEndpointOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::DomainEndpointOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module DomainHealth
+      Red: String
+      Yellow: String
+      Green: String
+      NotAvailable: String
+    end
+
+    class DomainInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?engine_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor engine_type: String?
+    end
+
+    class DomainInformationContainer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_domain_information: Types::AWSDomainInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_domain_information: Types::AWSDomainInformation?
+    end
+
+    class DomainMaintenanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maintenance_id: String,
+        ?domain_name: String,
+        ?action: String,
+        ?node_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maintenance_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor action: String?
+      attr_accessor node_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DomainNodesStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_id: String,
+        ?node_type: String,
+        ?availability_zone: String,
+        ?instance_type: String,
+        ?node_status: String,
+        ?storage_type: String,
+        ?storage_volume_type: String,
+        ?storage_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_id: String?
+      attr_accessor node_type: String?
+      attr_accessor availability_zone: String?
+      attr_accessor instance_type: String?
+      attr_accessor node_status: String?
+      attr_accessor storage_type: String?
+      attr_accessor storage_volume_type: String?
+      attr_accessor storage_size: String?
+    end
+
+    class DomainPackageDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?package_name: String,
+        ?package_type: String,
+        ?last_updated: Time,
+        ?domain_name: String,
+        ?domain_package_status: String,
+        ?package_version: String,
+        ?prerequisite_package_id_list: Array[String],
+        ?reference_path: String,
+        ?error_details: Types::ErrorDetails,
+        ?association_configuration: Types::PackageAssociationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor package_name: String?
+      attr_accessor package_type: String?
+      attr_accessor last_updated: Time?
+      attr_accessor domain_name: String?
+      attr_accessor domain_package_status: String?
+      attr_accessor package_version: String?
+      attr_accessor prerequisite_package_id_list: Array[String]?
+      attr_accessor reference_path: String?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration?
+    end
+
+    module DomainPackageStatus
+      ASSOCIATING: String
+      ASSOCIATION_FAILED: String
+      ACTIVE: String
+      DISSOCIATING: String
+      DISSOCIATION_FAILED: String
+    end
+
+    module DomainProcessingStatusType
+      CREATING: String
+      ACTIVE: String
+      MODIFYING: String
+      UPGRADING: String
+      UPDATING: String
+      ISOLATED: String
+      DELETING: String
+    end
+
+    module DomainState
+      Active: String
+      Processing: String
+      NotAvailable: String
+    end
+
+    class DomainStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?domain_name: String,
+        ?arn: String,
+        ?created: bool,
+        ?deleted: bool,
+        ?endpoint: String,
+        ?endpoint_v2: String,
+        ?endpoints: Hash[String, String],
+        ?domain_endpoint_v2_hosted_zone_id: String,
+        ?processing: bool,
+        ?upgrade_processing: bool,
+        ?engine_version: String,
+        ?cluster_config: Types::ClusterConfig,
+        ?ebs_options: Types::EBSOptions,
+        ?access_policies: String,
+        ?ip_address_type: String,
+        ?snapshot_options: Types::SnapshotOptions,
+        ?vpc_options: Types::VPCDerivedInfo,
+        ?cognito_options: Types::CognitoOptions,
+        ?encryption_at_rest_options: Types::EncryptionAtRestOptions,
+        ?node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions,
+        ?advanced_options: Hash[String, String],
+        ?log_publishing_options: Hash[String, Types::LogPublishingOption],
+        ?service_software_options: Types::ServiceSoftwareOptions,
+        ?domain_endpoint_options: Types::DomainEndpointOptions,
+        ?advanced_security_options: Types::AdvancedSecurityOptions,
+        ?identity_center_options: Types::IdentityCenterOptions,
+        ?auto_tune_options: Types::AutoTuneOptionsOutput,
+        ?change_progress_details: Types::ChangeProgressDetails,
+        ?off_peak_window_options: Types::OffPeakWindowOptions,
+        ?software_update_options: Types::SoftwareUpdateOptions,
+        ?domain_processing_status: String,
+        ?modifying_properties: Array[Types::ModifyingProperties],
+        ?aiml_options: Types::AIMLOptionsOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor arn: String?
+      attr_accessor created: bool?
+      attr_accessor deleted: bool?
+      attr_accessor endpoint: String?
+      attr_accessor endpoint_v2: String?
+      attr_accessor endpoints: Hash[String, String]?
+      attr_accessor domain_endpoint_v2_hosted_zone_id: String?
+      attr_accessor processing: bool?
+      attr_accessor upgrade_processing: bool?
+      attr_accessor engine_version: String?
+      attr_accessor cluster_config: Types::ClusterConfig?
+      attr_accessor ebs_options: Types::EBSOptions?
+      attr_accessor access_policies: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor snapshot_options: Types::SnapshotOptions?
+      attr_accessor vpc_options: Types::VPCDerivedInfo?
+      attr_accessor cognito_options: Types::CognitoOptions?
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions?
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions?
+      attr_accessor advanced_options: Hash[String, String]?
+      attr_accessor log_publishing_options: Hash[String, Types::LogPublishingOption]?
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions?
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions?
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptions?
+      attr_accessor identity_center_options: Types::IdentityCenterOptions?
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsOutput?
+      attr_accessor change_progress_details: Types::ChangeProgressDetails?
+      attr_accessor off_peak_window_options: Types::OffPeakWindowOptions?
+      attr_accessor software_update_options: Types::SoftwareUpdateOptions?
+      attr_accessor domain_processing_status: String?
+      attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
+      attr_accessor aiml_options: Types::AIMLOptionsOutput?
+    end
+
+    module DryRunMode
+      Basic: String
+      Verbose: String
+    end
+
+    class DryRunProgressStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run_id: String,
+        ?dry_run_status: String,
+        ?creation_date: String,
+        ?update_date: String,
+        ?validation_failures: Array[Types::ValidationFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run_id: String?
+      attr_accessor dry_run_status: String?
+      attr_accessor creation_date: String?
+      attr_accessor update_date: String?
+      attr_accessor validation_failures: Array[Types::ValidationFailure]?
+    end
+
+    class DryRunResults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_type: String?
+      attr_accessor message: String?
+    end
+
+    class Duration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor unit: String?
+    end
+
+    class EBSOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ebs_enabled: bool,
+        ?volume_type: String,
+        ?volume_size: Integer,
+        ?iops: Integer,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ebs_enabled: bool?
+      attr_accessor volume_type: String?
+      attr_accessor volume_size: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+    end
+
+    class EBSOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::EBSOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::EBSOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class EncryptionAtRestOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor kms_key_id: String?
+    end
+
+    class EncryptionAtRestOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::EncryptionAtRestOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::EncryptionAtRestOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module EngineType
+      OpenSearch: String
+      Elasticsearch: String
+    end
+
+    class EnvironmentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_information: Array[Types::AvailabilityZoneInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_information: Array[Types::AvailabilityZoneInfo]?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_type: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_type: String?
+      attr_accessor error_message: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?endpoint: String,
+        ?status: String,
+        ?iam_identity_center_options: Types::IamIdentityCenterOptions,
+        ?data_sources: Array[Types::DataSource],
+        ?app_configs: Array[Types::AppConfig],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor app_configs: Array[Types::AppConfig]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GetCompatibleVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetCompatibleVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compatible_versions: Array[Types::CompatibleVersionsMap],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compatible_versions: Array[Types::CompatibleVersionsMap]?
+    end
+
+    class GetDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_type: Types::DataSourceType,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_type: Types::DataSourceType?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    class GetDirectQueryDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+    end
+
+    class GetDirectQueryDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?data_source_type: Types::DirectQueryDataSourceType,
+        ?description: String,
+        ?open_search_arns: Array[String],
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor data_source_type: Types::DirectQueryDataSourceType?
+      attr_accessor description: String?
+      attr_accessor open_search_arns: Array[String]?
+      attr_accessor data_source_arn: String?
+    end
+
+    class GetDomainMaintenanceStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?maintenance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor maintenance_id: String?
+    end
+
+    class GetDomainMaintenanceStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+        ?node_id: String,
+        ?action: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor node_id: String?
+      attr_accessor action: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetPackageVersionHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetPackageVersionHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?package_version_history_list: Array[Types::PackageVersionHistory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor package_version_history_list: Array[Types::PackageVersionHistory]?
+      attr_accessor next_token: String?
+    end
+
+    class GetUpgradeHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetUpgradeHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgrade_histories: Array[Types::UpgradeHistory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgrade_histories: Array[Types::UpgradeHistory]?
+      attr_accessor next_token: String?
+    end
+
+    class GetUpgradeStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetUpgradeStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgrade_step: String,
+        ?step_status: String,
+        ?upgrade_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgrade_step: String?
+      attr_accessor step_status: String?
+      attr_accessor upgrade_name: String?
+    end
+
+    class IAMFederationOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?subject_key: String,
+        ?roles_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+    end
+
+    class IAMFederationOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?subject_key: String,
+        ?roles_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+    end
+
+    module IPAddressType
+      IPV4: String
+      DUALSTACK: String
+    end
+
+    class IPAddressTypeStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class IamIdentityCenterOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?iam_identity_center_instance_arn: String,
+        ?iam_role_for_identity_center_application_arn: String,
+        ?iam_identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor iam_identity_center_instance_arn: String?
+      attr_accessor iam_role_for_identity_center_application_arn: String?
+      attr_accessor iam_identity_center_application_arn: String?
+    end
+
+    class IamIdentityCenterOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?iam_identity_center_instance_arn: String,
+        ?iam_role_for_identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor iam_identity_center_instance_arn: String?
+      attr_accessor iam_role_for_identity_center_application_arn: String?
+    end
+
+    class IdentityCenterOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_api_access: bool,
+        ?identity_center_instance_arn: String,
+        ?subject_key: String,
+        ?roles_key: String,
+        ?identity_center_application_arn: String,
+        ?identity_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_api_access: bool?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+      attr_accessor identity_center_application_arn: String?
+      attr_accessor identity_store_id: String?
+    end
+
+    class IdentityCenterOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_api_access: bool,
+        ?identity_center_instance_arn: String,
+        ?subject_key: String,
+        ?roles_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_api_access: bool?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+    end
+
+    class IdentityCenterOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::IdentityCenterOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::IdentityCenterOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class InboundConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_domain_info: Types::DomainInformationContainer,
+        ?remote_domain_info: Types::DomainInformationContainer,
+        ?connection_id: String,
+        ?connection_status: Types::InboundConnectionStatus,
+        ?connection_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_domain_info: Types::DomainInformationContainer?
+      attr_accessor remote_domain_info: Types::DomainInformationContainer?
+      attr_accessor connection_id: String?
+      attr_accessor connection_status: Types::InboundConnectionStatus?
+      attr_accessor connection_mode: String?
+    end
+
+    class InboundConnectionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor message: String?
+    end
+
+    module InboundConnectionStatusCode
+      PENDING_ACCEPTANCE: String
+      APPROVED: String
+      PROVISIONING: String
+      ACTIVE: String
+      REJECTING: String
+      REJECTED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module InitiatedBy
+      CUSTOMER: String
+      SERVICE: String
+    end
+
+    class InstanceCountLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_instance_count: Integer,
+        ?maximum_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_instance_count: Integer?
+      attr_accessor maximum_instance_count: Integer?
+    end
+
+    class InstanceLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_count_limits: Types::InstanceCountLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_count_limits: Types::InstanceCountLimits?
+    end
+
+    class InstanceTypeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?encryption_enabled: bool,
+        ?cognito_enabled: bool,
+        ?app_logs_enabled: bool,
+        ?advanced_security_enabled: bool,
+        ?warm_enabled: bool,
+        ?instance_role: Array[String],
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor encryption_enabled: bool?
+      attr_accessor cognito_enabled: bool?
+      attr_accessor app_logs_enabled: bool?
+      attr_accessor advanced_security_enabled: bool?
+      attr_accessor warm_enabled: bool?
+      attr_accessor instance_role: Array[String]?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class InternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPaginationTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JWTOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?subject_key: String,
+        ?roles_key: String,
+        ?public_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+      attr_accessor public_key: String?
+    end
+
+    class JWTOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?subject_key: String,
+        ?roles_key: String,
+        ?public_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+      attr_accessor public_key: String?
+    end
+
+    class KeyStoreAccessOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_access_role_arn: String,
+        ?key_store_access_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_access_role_arn: String?
+      attr_accessor key_store_access_enabled: bool?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Limits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_types: Array[Types::StorageType],
+        ?instance_limits: Types::InstanceLimits,
+        ?additional_limits: Array[Types::AdditionalLimit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_types: Array[Types::StorageType]?
+      attr_accessor instance_limits: Types::InstanceLimits?
+      attr_accessor additional_limits: Array[Types::AdditionalLimit]?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?statuses: Array[String],
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor statuses: Array[String]?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_summaries: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_summaries: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class ListDataSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_sources: Array[Types::DataSourceDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_sources: Array[Types::DataSourceDetails]?
+    end
+
+    class ListDirectQueryDataSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListDirectQueryDataSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?direct_query_data_sources: Array[Types::DirectQueryDataSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor direct_query_data_sources: Array[Types::DirectQueryDataSource]?
+    end
+
+    class ListDomainMaintenancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?action: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor action: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainMaintenancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_maintenances: Array[Types::DomainMaintenanceDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_maintenances: Array[Types::DomainMaintenanceDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainNamesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_type: String?
+    end
+
+    class ListDomainNamesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_names: Array[Types::DomainInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_names: Array[Types::DomainInfo]?
+    end
+
+    class ListDomainsForPackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsForPackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details_list: Array[Types::DomainPackageDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details_list: Array[Types::DomainPackageDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstanceTypeDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_version: String,
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?retrieve_a_zs: bool,
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_version: String?
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor retrieve_a_zs: bool?
+      attr_accessor instance_type: String?
+    end
+
+    class ListInstanceTypeDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type_details: Array[Types::InstanceTypeDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type_details: Array[Types::InstanceTypeDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackagesForDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackagesForDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_package_details_list: Array[Types::DomainPackageDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_package_details_list: Array[Types::DomainPackageDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_actions: Array[Types::ScheduledAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_actions: Array[Types::ScheduledAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class ListVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?versions: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor versions: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_principal_list: Array[Types::AuthorizedPrincipal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_principal_list: Array[Types::AuthorizedPrincipal]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointsForDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointsForDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_summary_list: Array[Types::VpcEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_summary_list: Array[Types::VpcEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_summary_list: Array[Types::VpcEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_summary_list: Array[Types::VpcEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LogPublishingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_log_group_arn: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_log_group_arn: String?
+      attr_accessor enabled: bool?
+    end
+
+    class LogPublishingOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Hash[String, Types::LogPublishingOption],
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Hash[String, Types::LogPublishingOption]?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module LogType
+      INDEX_SLOW_LOGS: String
+      SEARCH_SLOW_LOGS: String
+      ES_APPLICATION_LOGS: String
+      AUDIT_LOGS: String
+    end
+
+    module MaintenanceStatus
+      PENDING: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      TIMED_OUT: String
+    end
+
+    module MaintenanceType
+      REBOOT_NODE: String
+      RESTART_SEARCH_PROCESS: String
+      RESTART_DASHBOARD: String
+    end
+
+    module MasterNodeStatus
+      Available: String
+      UnAvailable: String
+    end
+
+    class MasterUserOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?master_user_arn: String,
+        ?master_user_name: String,
+        ?master_user_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor master_user_arn: String?
+      attr_accessor master_user_name: String?
+      attr_accessor master_user_password: String?
+    end
+
+    class ModifyingProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?active_value: String,
+        ?pending_value: String,
+        ?value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor active_value: String?
+      attr_accessor pending_value: String?
+      attr_accessor value_type: String?
+    end
+
+    module NaturalLanguageQueryGenerationCurrentState
+      NotEnabled: String
+      EnableComplete: String
+      EnableInProgress: String
+      EnableFailed: String
+      DisableComplete: String
+      DisableInProgress: String
+      DisableFailed: String
+    end
+
+    module NaturalLanguageQueryGenerationDesiredState
+      Enabled: String
+      Disabled: String
+    end
+
+    class NaturalLanguageQueryGenerationOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: String?
+    end
+
+    class NaturalLanguageQueryGenerationOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: String,
+        ?current_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+    end
+
+    class NodeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor type: String?
+      attr_accessor count: Integer?
+    end
+
+    class NodeOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_type: String,
+        ?node_config: Types::NodeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_type: String?
+      attr_accessor node_config: Types::NodeConfig?
+    end
+
+    module NodeOptionsNodeType
+      COORDINATOR: String
+    end
+
+    module NodeStatus
+      Active: String
+      StandBy: String
+      NotAvailable: String
+    end
+
+    class NodeToNodeEncryptionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class NodeToNodeEncryptionOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::NodeToNodeEncryptionOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::NodeToNodeEncryptionOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module NodeType
+      Data: String
+      Ultrawarm: String
+      Master: String
+    end
+
+    class OffPeakWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?window_start_time: Types::WindowStartTime,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor window_start_time: Types::WindowStartTime?
+    end
+
+    class OffPeakWindowOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?off_peak_window: Types::OffPeakWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor off_peak_window: Types::OffPeakWindow?
+    end
+
+    class OffPeakWindowOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::OffPeakWindowOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::OffPeakWindowOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module OpenSearchPartitionInstanceType
+      m3_medium_search: String
+      m3_large_search: String
+      m3_xlarge_search: String
+      m3_2xlarge_search: String
+      m4_large_search: String
+      m4_xlarge_search: String
+      m4_2xlarge_search: String
+      m4_4xlarge_search: String
+      m4_10xlarge_search: String
+      m5_large_search: String
+      m5_xlarge_search: String
+      m5_2xlarge_search: String
+      m5_4xlarge_search: String
+      m5_12xlarge_search: String
+      m5_24xlarge_search: String
+      r5_large_search: String
+      r5_xlarge_search: String
+      r5_2xlarge_search: String
+      r5_4xlarge_search: String
+      r5_12xlarge_search: String
+      r5_24xlarge_search: String
+      c5_large_search: String
+      c5_xlarge_search: String
+      c5_2xlarge_search: String
+      c5_4xlarge_search: String
+      c5_9xlarge_search: String
+      c5_18xlarge_search: String
+      t3_nano_search: String
+      t3_micro_search: String
+      t3_small_search: String
+      t3_medium_search: String
+      t3_large_search: String
+      t3_xlarge_search: String
+      t3_2xlarge_search: String
+      or1_medium_search: String
+      or1_large_search: String
+      or1_xlarge_search: String
+      or1_2xlarge_search: String
+      or1_4xlarge_search: String
+      or1_8xlarge_search: String
+      or1_12xlarge_search: String
+      or1_16xlarge_search: String
+      ultrawarm1_medium_search: String
+      ultrawarm1_large_search: String
+      ultrawarm1_xlarge_search: String
+      t2_micro_search: String
+      t2_small_search: String
+      t2_medium_search: String
+      r3_large_search: String
+      r3_xlarge_search: String
+      r3_2xlarge_search: String
+      r3_4xlarge_search: String
+      r3_8xlarge_search: String
+      i2_xlarge_search: String
+      i2_2xlarge_search: String
+      d2_xlarge_search: String
+      d2_2xlarge_search: String
+      d2_4xlarge_search: String
+      d2_8xlarge_search: String
+      c4_large_search: String
+      c4_xlarge_search: String
+      c4_2xlarge_search: String
+      c4_4xlarge_search: String
+      c4_8xlarge_search: String
+      r4_large_search: String
+      r4_xlarge_search: String
+      r4_2xlarge_search: String
+      r4_4xlarge_search: String
+      r4_8xlarge_search: String
+      r4_16xlarge_search: String
+      i3_large_search: String
+      i3_xlarge_search: String
+      i3_2xlarge_search: String
+      i3_4xlarge_search: String
+      i3_8xlarge_search: String
+      i3_16xlarge_search: String
+      r6g_large_search: String
+      r6g_xlarge_search: String
+      r6g_2xlarge_search: String
+      r6g_4xlarge_search: String
+      r6g_8xlarge_search: String
+      r6g_12xlarge_search: String
+      m6g_large_search: String
+      m6g_xlarge_search: String
+      m6g_2xlarge_search: String
+      m6g_4xlarge_search: String
+      m6g_8xlarge_search: String
+      m6g_12xlarge_search: String
+      c6g_large_search: String
+      c6g_xlarge_search: String
+      c6g_2xlarge_search: String
+      c6g_4xlarge_search: String
+      c6g_8xlarge_search: String
+      c6g_12xlarge_search: String
+      r6gd_large_search: String
+      r6gd_xlarge_search: String
+      r6gd_2xlarge_search: String
+      r6gd_4xlarge_search: String
+      r6gd_8xlarge_search: String
+      r6gd_12xlarge_search: String
+      r6gd_16xlarge_search: String
+      t4g_small_search: String
+      t4g_medium_search: String
+    end
+
+    module OpenSearchWarmPartitionInstanceType
+      ultrawarm1_medium_search: String
+      ultrawarm1_large_search: String
+      ultrawarm1_xlarge_search: String
+    end
+
+    module OptionState
+      RequiresIndexDocuments: String
+      Processing: String
+      Active: String
+    end
+
+    class OptionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?update_date: Time,
+        ?update_version: Integer,
+        ?state: String,
+        ?pending_deletion: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor update_date: Time?
+      attr_accessor update_version: Integer?
+      attr_accessor state: String?
+      attr_accessor pending_deletion: bool?
+    end
+
+    class OutboundConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_domain_info: Types::DomainInformationContainer,
+        ?remote_domain_info: Types::DomainInformationContainer,
+        ?connection_id: String,
+        ?connection_alias: String,
+        ?connection_status: Types::OutboundConnectionStatus,
+        ?connection_mode: String,
+        ?connection_properties: Types::ConnectionProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_domain_info: Types::DomainInformationContainer?
+      attr_accessor remote_domain_info: Types::DomainInformationContainer?
+      attr_accessor connection_id: String?
+      attr_accessor connection_alias: String?
+      attr_accessor connection_status: Types::OutboundConnectionStatus?
+      attr_accessor connection_mode: String?
+      attr_accessor connection_properties: Types::ConnectionProperties?
+    end
+
+    class OutboundConnectionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor message: String?
+    end
+
+    module OutboundConnectionStatusCode
+      VALIDATING: String
+      VALIDATION_FAILED: String
+      PENDING_ACCEPTANCE: String
+      APPROVED: String
+      PROVISIONING: String
+      ACTIVE: String
+      REJECTING: String
+      REJECTED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module OverallChangeStatus
+      PENDING: String
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class PackageAssociationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_store_access_option: Types::KeyStoreAccessOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_store_access_option: Types::KeyStoreAccessOption?
+    end
+
+    class PackageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_requirement: String,
+        ?license_filepath: String,
+        ?configuration_requirement: String,
+        ?requires_restart_for_configuration_update: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_requirement: String?
+      attr_accessor license_filepath: String?
+      attr_accessor configuration_requirement: String?
+      attr_accessor requires_restart_for_configuration_update: bool?
+    end
+
+    class PackageDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?package_name: String,
+        ?package_type: String,
+        ?package_description: String,
+        ?package_status: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?available_package_version: String,
+        ?error_details: Types::ErrorDetails,
+        ?engine_version: String,
+        ?available_plugin_properties: Types::PluginProperties,
+        ?available_package_configuration: Types::PackageConfiguration,
+        ?allow_listed_user_list: Array[String],
+        ?package_owner: String,
+        ?package_vending_options: Types::PackageVendingOptions,
+        ?package_encryption_options: Types::PackageEncryptionOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor package_name: String?
+      attr_accessor package_type: String?
+      attr_accessor package_description: String?
+      attr_accessor package_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor available_package_version: String?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor engine_version: String?
+      attr_accessor available_plugin_properties: Types::PluginProperties?
+      attr_accessor available_package_configuration: Types::PackageConfiguration?
+      attr_accessor allow_listed_user_list: Array[String]?
+      attr_accessor package_owner: String?
+      attr_accessor package_vending_options: Types::PackageVendingOptions?
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions?
+    end
+
+    class PackageDetailsForAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?prerequisite_package_id_list: Array[String],
+        ?association_configuration: Types::PackageAssociationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor prerequisite_package_id_list: Array[String]?
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration?
+    end
+
+    class PackageEncryptionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_identifier: String,
+        ?encryption_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_identifier: String?
+      attr_accessor encryption_enabled: bool?
+    end
+
+    module PackageScopeOperationEnum
+      ADD: String
+      OVERRIDE: String
+      REMOVE: String
+    end
+
+    class PackageSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_key: String?
+    end
+
+    module PackageStatus
+      COPYING: String
+      COPY_FAILED: String
+      VALIDATING: String
+      VALIDATION_FAILED: String
+      AVAILABLE: String
+      DELETING: String
+      DELETED: String
+      DELETE_FAILED: String
+    end
+
+    module PackageType
+      TXT_DICTIONARY: String
+      ZIP_PLUGIN: String
+      PACKAGE_LICENSE: String
+      PACKAGE_CONFIG: String
+    end
+
+    class PackageVendingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vending_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vending_enabled: bool?
+    end
+
+    class PackageVersionHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_version: String,
+        ?commit_message: String,
+        ?created_at: Time,
+        ?plugin_properties: Types::PluginProperties,
+        ?package_configuration: Types::PackageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_version: String?
+      attr_accessor commit_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor plugin_properties: Types::PluginProperties?
+      attr_accessor package_configuration: Types::PackageConfiguration?
+    end
+
+    class PluginProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?version: String,
+        ?class_name: String,
+        ?uncompressed_size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor version: String?
+      attr_accessor class_name: String?
+      attr_accessor uncompressed_size_in_bytes: Integer?
+    end
+
+    module PrincipalType
+      AWS_ACCOUNT: String
+      AWS_SERVICE: String
+    end
+
+    module PropertyValueType
+      PLAIN_TEXT: String
+      STRINGIFIED_JSON: String
+    end
+
+    class PurchaseReservedInstanceOfferingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instance_offering_id: String,
+        ?reservation_name: String,
+        ?instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instance_offering_id: String?
+      attr_accessor reservation_name: String?
+      attr_accessor instance_count: Integer?
+    end
+
+    class PurchaseReservedInstanceOfferingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instance_id: String,
+        ?reservation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instance_id: String?
+      attr_accessor reservation_name: String?
+    end
+
+    class RecurringCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recurring_charge_amount: Float,
+        ?recurring_charge_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recurring_charge_amount: Float?
+      attr_accessor recurring_charge_frequency: String?
+    end
+
+    class RejectInboundConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class RejectInboundConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::InboundConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::InboundConnection?
+    end
+
+    class RemoveTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    module RequirementLevel
+      REQUIRED: String
+      OPTIONAL: String
+      NONE: String
+    end
+
+    class ReservedInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_name: String,
+        ?reserved_instance_id: String,
+        ?billing_subscription_id: Integer,
+        ?reserved_instance_offering_id: String,
+        ?instance_type: String,
+        ?start_time: Time,
+        ?duration: Integer,
+        ?fixed_price: Float,
+        ?usage_price: Float,
+        ?currency_code: String,
+        ?instance_count: Integer,
+        ?state: String,
+        ?payment_option: String,
+        ?recurring_charges: Array[Types::RecurringCharge],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_name: String?
+      attr_accessor reserved_instance_id: String?
+      attr_accessor billing_subscription_id: Integer?
+      attr_accessor reserved_instance_offering_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor duration: Integer?
+      attr_accessor fixed_price: Float?
+      attr_accessor usage_price: Float?
+      attr_accessor currency_code: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor state: String?
+      attr_accessor payment_option: String?
+      attr_accessor recurring_charges: Array[Types::RecurringCharge]?
+    end
+
+    class ReservedInstanceOffering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instance_offering_id: String,
+        ?instance_type: String,
+        ?duration: Integer,
+        ?fixed_price: Float,
+        ?usage_price: Float,
+        ?currency_code: String,
+        ?payment_option: String,
+        ?recurring_charges: Array[Types::RecurringCharge],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instance_offering_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor duration: Integer?
+      attr_accessor fixed_price: Float?
+      attr_accessor usage_price: Float?
+      attr_accessor currency_code: String?
+      attr_accessor payment_option: String?
+      attr_accessor recurring_charges: Array[Types::RecurringCharge]?
+    end
+
+    module ReservedInstancePaymentOption
+      ALL_UPFRONT: String
+      PARTIAL_UPFRONT: String
+      NO_UPFRONT: String
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevokeVpcEndpointAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?account: String,
+        ?service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor account: String?
+      attr_accessor service: String?
+    end
+
+    class RevokeVpcEndpointAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RolesKeyIdCOption
+      GroupName: String
+      GroupId: String
+    end
+
+    module RollbackOnDisable
+      NO_ROLLBACK: String
+      DEFAULT_ROLLBACK: String
+    end
+
+    class S3GlueDataCatalog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class S3VectorsEngine
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class SAMLIdp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_content: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_content: String?
+      attr_accessor entity_id: String?
+    end
+
+    class SAMLOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?idp: Types::SAMLIdp,
+        ?master_user_name: String,
+        ?master_backend_role: String,
+        ?subject_key: String,
+        ?roles_key: String,
+        ?session_timeout_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor idp: Types::SAMLIdp?
+      attr_accessor master_user_name: String?
+      attr_accessor master_backend_role: String?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+      attr_accessor session_timeout_minutes: Integer?
+    end
+
+    class SAMLOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?idp: Types::SAMLIdp,
+        ?subject_key: String,
+        ?roles_key: String,
+        ?session_timeout_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor idp: Types::SAMLIdp?
+      attr_accessor subject_key: String?
+      attr_accessor roles_key: String?
+      attr_accessor session_timeout_minutes: Integer?
+    end
+
+    module ScheduleAt
+      NOW: String
+      TIMESTAMP: String
+      OFF_PEAK_WINDOW: String
+    end
+
+    class ScheduledAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?severity: String,
+        ?scheduled_time: Integer,
+        ?description: String,
+        ?scheduled_by: String,
+        ?status: String,
+        ?mandatory: bool,
+        ?cancellable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor severity: String?
+      attr_accessor scheduled_time: Integer?
+      attr_accessor description: String?
+      attr_accessor scheduled_by: String?
+      attr_accessor status: String?
+      attr_accessor mandatory: bool?
+      attr_accessor cancellable: bool?
+    end
+
+    module ScheduledAutoTuneActionType
+      JVM_HEAP_SIZE_TUNING: String
+      JVM_YOUNG_GEN_TUNING: String
+    end
+
+    class ScheduledAutoTuneDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date: Time,
+        ?action_type: String,
+        ?action: String,
+        ?severity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date: Time?
+      attr_accessor action_type: String?
+      attr_accessor action: String?
+      attr_accessor severity: String?
+    end
+
+    module ScheduledAutoTuneSeverityType
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    module ScheduledBy
+      CUSTOMER: String
+      SYSTEM: String
+    end
+
+    class SecurityLakeDirectQueryDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class ServiceSoftwareOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_version: String,
+        ?new_version: String,
+        ?update_available: bool,
+        ?cancellable: bool,
+        ?update_status: String,
+        ?description: String,
+        ?automated_update_date: Time,
+        ?optional_deployment: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_version: String?
+      attr_accessor new_version: String?
+      attr_accessor update_available: bool?
+      attr_accessor cancellable: bool?
+      attr_accessor update_status: String?
+      attr_accessor description: String?
+      attr_accessor automated_update_date: Time?
+      attr_accessor optional_deployment: bool?
+    end
+
+    module SkipUnavailableStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class SlotNotAvailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slot_suggestions: Array[Integer],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slot_suggestions: Array[Integer]?
+      attr_accessor message: String?
+    end
+
+    class SnapshotOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automated_snapshot_start_hour: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automated_snapshot_start_hour: Integer?
+    end
+
+    class SnapshotOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::SnapshotOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::SnapshotOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class SoftwareUpdateOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_software_update_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_software_update_enabled: bool?
+    end
+
+    class SoftwareUpdateOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::SoftwareUpdateOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::SoftwareUpdateOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class StartDomainMaintenanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?action: String,
+        ?node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor action: String?
+      attr_accessor node_id: String?
+    end
+
+    class StartDomainMaintenanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maintenance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maintenance_id: String?
+    end
+
+    class StartServiceSoftwareUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?schedule_at: String,
+        ?desired_start_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor schedule_at: String?
+      attr_accessor desired_start_time: Integer?
+    end
+
+    class StartServiceSoftwareUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_software_options: Types::ServiceSoftwareOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions?
+    end
+
+    class StorageType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type_name: String,
+        ?storage_sub_type_name: String,
+        ?storage_type_limits: Array[Types::StorageTypeLimit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type_name: String?
+      attr_accessor storage_sub_type_name: String?
+      attr_accessor storage_type_limits: Array[Types::StorageTypeLimit]?
+    end
+
+    class StorageTypeLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_name: String,
+        ?limit_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_name: String?
+      attr_accessor limit_values: Array[String]?
+    end
+
+    module SubjectKeyIdCOption
+      UserName: String
+      UserId: String
+      Email: String
+    end
+
+    module TLSSecurityPolicy
+      POLICY_MIN_TLS_1_0_2019_07: String
+      POLICY_MIN_TLS_1_2_2019_07: String
+      POLICY_MIN_TLS_1_2_PFS_2023_10: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module TimeUnit
+      HOURS: String
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_sources: Array[Types::DataSource],
+        ?app_configs: Array[Types::AppConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor app_configs: Array[Types::AppConfig]?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?data_sources: Array[Types::DataSource],
+        ?iam_identity_center_options: Types::IamIdentityCenterOptions,
+        ?app_configs: Array[Types::AppConfig],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions?
+      attr_accessor app_configs: Array[Types::AppConfig]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class UpdateDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?name: String,
+        ?data_source_type: Types::DataSourceType,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor name: String?
+      attr_accessor data_source_type: Types::DataSourceType?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateDirectQueryDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?data_source_type: Types::DirectQueryDataSourceType,
+        ?description: String,
+        ?open_search_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor data_source_type: Types::DirectQueryDataSourceType?
+      attr_accessor description: String?
+      attr_accessor open_search_arns: Array[String]?
+    end
+
+    class UpdateDirectQueryDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_arn: String?
+    end
+
+    class UpdateDomainConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?cluster_config: Types::ClusterConfig,
+        ?ebs_options: Types::EBSOptions,
+        ?snapshot_options: Types::SnapshotOptions,
+        ?vpc_options: Types::VPCOptions,
+        ?cognito_options: Types::CognitoOptions,
+        ?advanced_options: Hash[String, String],
+        ?access_policies: String,
+        ?ip_address_type: String,
+        ?log_publishing_options: Hash[String, Types::LogPublishingOption],
+        ?encryption_at_rest_options: Types::EncryptionAtRestOptions,
+        ?domain_endpoint_options: Types::DomainEndpointOptions,
+        ?node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions,
+        ?advanced_security_options: Types::AdvancedSecurityOptionsInput,
+        ?identity_center_options: Types::IdentityCenterOptionsInput,
+        ?auto_tune_options: Types::AutoTuneOptions,
+        ?dry_run: bool,
+        ?dry_run_mode: String,
+        ?off_peak_window_options: Types::OffPeakWindowOptions,
+        ?software_update_options: Types::SoftwareUpdateOptions,
+        ?aiml_options: Types::AIMLOptionsInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor cluster_config: Types::ClusterConfig?
+      attr_accessor ebs_options: Types::EBSOptions?
+      attr_accessor snapshot_options: Types::SnapshotOptions?
+      attr_accessor vpc_options: Types::VPCOptions?
+      attr_accessor cognito_options: Types::CognitoOptions?
+      attr_accessor advanced_options: Hash[String, String]?
+      attr_accessor access_policies: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor log_publishing_options: Hash[String, Types::LogPublishingOption]?
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions?
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions?
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions?
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput?
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsInput?
+      attr_accessor auto_tune_options: Types::AutoTuneOptions?
+      attr_accessor dry_run: bool?
+      attr_accessor dry_run_mode: String?
+      attr_accessor off_peak_window_options: Types::OffPeakWindowOptions?
+      attr_accessor software_update_options: Types::SoftwareUpdateOptions?
+      attr_accessor aiml_options: Types::AIMLOptionsInput?
+    end
+
+    class UpdateDomainConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_config: Types::DomainConfig,
+        ?dry_run_results: Types::DryRunResults,
+        ?dry_run_progress_status: Types::DryRunProgressStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_config: Types::DomainConfig?
+      attr_accessor dry_run_results: Types::DryRunResults?
+      attr_accessor dry_run_progress_status: Types::DryRunProgressStatus?
+    end
+
+    class UpdatePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?package_source: Types::PackageSource,
+        ?package_description: String,
+        ?commit_message: String,
+        ?package_configuration: Types::PackageConfiguration,
+        ?package_encryption_options: Types::PackageEncryptionOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor package_source: Types::PackageSource?
+      attr_accessor package_description: String?
+      attr_accessor commit_message: String?
+      attr_accessor package_configuration: Types::PackageConfiguration?
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions?
+    end
+
+    class UpdatePackageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_details: Types::PackageDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_details: Types::PackageDetails?
+    end
+
+    class UpdatePackageScopeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?operation: String,
+        ?package_user_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor operation: String?
+      attr_accessor package_user_list: Array[String]?
+    end
+
+    class UpdatePackageScopeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?operation: String,
+        ?package_user_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor operation: String?
+      attr_accessor package_user_list: Array[String]?
+    end
+
+    class UpdateScheduledActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?action_id: String,
+        ?action_type: String,
+        ?schedule_at: String,
+        ?desired_start_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor action_id: String?
+      attr_accessor action_type: String?
+      attr_accessor schedule_at: String?
+      attr_accessor desired_start_time: Integer?
+    end
+
+    class UpdateScheduledActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action: Types::ScheduledAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action: Types::ScheduledAction?
+    end
+
+    class UpdateVpcEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_options: Types::VPCOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_options: Types::VPCOptions?
+    end
+
+    class UpdateVpcEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint: Types::VpcEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint: Types::VpcEndpoint?
+    end
+
+    class UpgradeDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?target_version: String,
+        ?perform_check_only: bool,
+        ?advanced_options: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor target_version: String?
+      attr_accessor perform_check_only: bool?
+      attr_accessor advanced_options: Hash[String, String]?
+    end
+
+    class UpgradeDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgrade_id: String,
+        ?domain_name: String,
+        ?target_version: String,
+        ?perform_check_only: bool,
+        ?advanced_options: Hash[String, String],
+        ?change_progress_details: Types::ChangeProgressDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgrade_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor target_version: String?
+      attr_accessor perform_check_only: bool?
+      attr_accessor advanced_options: Hash[String, String]?
+      attr_accessor change_progress_details: Types::ChangeProgressDetails?
+    end
+
+    class UpgradeHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgrade_name: String,
+        ?start_timestamp: Time,
+        ?upgrade_status: String,
+        ?steps_list: Array[Types::UpgradeStepItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgrade_name: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor upgrade_status: String?
+      attr_accessor steps_list: Array[Types::UpgradeStepItem]?
+    end
+
+    module UpgradeStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      SUCCEEDED_WITH_ISSUES: String
+      FAILED: String
+    end
+
+    module UpgradeStep
+      PRE_UPGRADE_CHECK: String
+      SNAPSHOT: String
+      UPGRADE: String
+    end
+
+    class UpgradeStepItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgrade_step: String,
+        ?upgrade_step_status: String,
+        ?issues: Array[String],
+        ?progress_percent: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgrade_step: String?
+      attr_accessor upgrade_step_status: String?
+      attr_accessor issues: Array[String]?
+      attr_accessor progress_percent: Float?
+    end
+
+    class VPCDerivedInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?availability_zones: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class VPCDerivedInfoStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::VPCDerivedInfo,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::VPCDerivedInfo?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class VPCOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class VersionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module VolumeType
+      standard: String
+      gp2: String
+      io1: String
+      gp3: String
+    end
+
+    class VpcEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_owner: String,
+        ?domain_arn: String,
+        ?vpc_options: Types::VPCDerivedInfo,
+        ?status: String,
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_owner: String?
+      attr_accessor domain_arn: String?
+      attr_accessor vpc_options: Types::VPCDerivedInfo?
+      attr_accessor status: String?
+      attr_accessor endpoint: String?
+    end
+
+    class VpcEndpointError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module VpcEndpointErrorCode
+      ENDPOINT_NOT_FOUND: String
+      SERVER_ERROR: String
+    end
+
+    module VpcEndpointStatus
+      CREATING: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      UPDATING: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    class VpcEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_owner: String,
+        ?domain_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_owner: String?
+      attr_accessor domain_arn: String?
+      attr_accessor status: String?
+    end
+
+    class WindowStartTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hours: Integer,
+        ?minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hours: Integer?
+      attr_accessor minutes: Integer?
+    end
+
+    class ZoneAwarenessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_count: Integer?
+    end
+
+    module ZoneStatus
+      Active: String
+      StandBy: String
+      NotAvailable: String
+    end
+  end
+end

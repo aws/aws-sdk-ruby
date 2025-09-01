@@ -1,0 +1,36 @@
+module Aws::SageMakerMetrics
+  module Schema
+    include Smithy::Schema::Shapes
+
+    BatchGetMetricsRequest: StructureShape
+    BatchGetMetricsResponse: StructureShape
+    BatchPutMetricsError: StructureShape
+    BatchPutMetricsErrorList: ListShape
+    BatchPutMetricsRequest: StructureShape
+    BatchPutMetricsResponse: StructureShape
+    Double: FloatShape
+    ExperimentEntityName: StringShape
+    Integer: IntegerShape
+    Long: IntegerShape
+    Message: StringShape
+    MetricName: StringShape
+    MetricQuery: StructureShape
+    MetricQueryList: ListShape
+    MetricQueryResult: StructureShape
+    MetricQueryResultList: ListShape
+    MetricQueryResultStatus: EnumShape
+    MetricStatistic: EnumShape
+    MetricValues: ListShape
+    Period: EnumShape
+    PutMetricsErrorCode: EnumShape
+    RawMetricData: StructureShape
+    RawMetricDataList: ListShape
+    SageMakerResourceArn: StringShape
+    Step: IntegerShape
+    Timestamp: TimestampShape
+    XAxisType: EnumShape
+    XAxisValues: ListShape
+
+    SageMakerMetricsService: ServiceShape
+  end
+end

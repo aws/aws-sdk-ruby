@@ -1,0 +1,886 @@
+module Aws::Route53
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateKeySigningKeyResponse
+      include Smithy::Client::_Response[Types::ActivateKeySigningKeyResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def activate_key_signing_key: (
+      ?hosted_zone_id: String,
+      ?name: String
+    ) -> _ActivateKeySigningKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateKeySigningKeyResponse
+
+    interface _AssociateVPCWithHostedZoneResponse
+      include Smithy::Client::_Response[Types::AssociateVPCWithHostedZoneResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def associate_vpc_with_hosted_zone: (
+      ?hosted_zone_id: String,
+      ?vpc: {
+        vpc_region: String,
+        vpc_id: String
+      },
+      ?comment: String
+    ) -> _AssociateVPCWithHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateVPCWithHostedZoneResponse
+
+    interface _ChangeCidrCollectionResponse
+      include Smithy::Client::_Response[Types::ChangeCidrCollectionResponse]
+      def id: () -> String?
+    end
+    def change_cidr_collection: (
+      ?id: String,
+      ?collection_version: Integer,
+      ?changes: Array[
+        {
+          location_name: String,
+          action: String,
+          cidr_list: Array[String]
+        }
+      ]
+    ) -> _ChangeCidrCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeCidrCollectionResponse
+
+    interface _ChangeResourceRecordSetsResponse
+      include Smithy::Client::_Response[Types::ChangeResourceRecordSetsResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def change_resource_record_sets: (
+      ?hosted_zone_id: String,
+      ?change_batch: {
+        comment: String,
+        changes: Array[
+          {
+            action: String,
+            resource_record_set: {
+              name: String,
+              type: String,
+              set_identifier: String,
+              weight: Integer,
+              region: String,
+              geo_location: {
+                continent_code: String,
+                country_code: String,
+                subdivision_code: String
+              },
+              failover: String,
+              multi_value_answer: bool,
+              ttl: Integer,
+              resource_records: Array[
+                {
+                  value: String
+                }
+              ],
+              alias_target: {
+                hosted_zone_id: String,
+                dns_name: untyped,
+                evaluate_target_health: bool
+              },
+              health_check_id: String,
+              traffic_policy_instance_id: String,
+              cidr_routing_config: {
+                collection_id: String,
+                location_name: String
+              },
+              geo_proximity_location: {
+                aws_region: String,
+                local_zone_group: String,
+                coordinates: {
+                  latitude: String,
+                  longitude: String
+                },
+                bias: Integer
+              }
+            }
+          }
+        ]
+      }
+    ) -> _ChangeResourceRecordSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeResourceRecordSetsResponse
+
+    interface _ChangeTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ChangeTagsForResourceResponse]
+    end
+    def change_tags_for_resource: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?add_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?remove_tag_keys: Array[String]
+    ) -> _ChangeTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeTagsForResourceResponse
+
+    interface _CreateCidrCollectionResponse
+      include Smithy::Client::_Response[Types::CreateCidrCollectionResponse]
+      def collection: () -> Types::CidrCollection?
+      def location: () -> String?
+    end
+    def create_cidr_collection: (
+      ?name: String,
+      ?caller_reference: String
+    ) -> _CreateCidrCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCidrCollectionResponse
+
+    interface _CreateHealthCheckResponse
+      include Smithy::Client::_Response[Types::CreateHealthCheckResponse]
+      def health_check: () -> Types::HealthCheck?
+      def location: () -> String?
+    end
+    def create_health_check: (
+      ?caller_reference: String,
+      ?health_check_config: {
+        ip_address: String,
+        port: Integer,
+        type: String,
+        resource_path: String,
+        fully_qualified_domain_name: String,
+        search_string: String,
+        request_interval: Integer,
+        failure_threshold: Integer,
+        measure_latency: bool,
+        inverted: bool,
+        disabled: bool,
+        health_threshold: Integer,
+        child_health_checks: Array[String],
+        enable_sni: bool,
+        regions: Array[String],
+        alarm_identifier: {
+          region: String,
+          name: String
+        },
+        insufficient_data_health_status: String,
+        routing_control_arn: String
+      }
+    ) -> _CreateHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHealthCheckResponse
+
+    interface _CreateHostedZoneResponse
+      include Smithy::Client::_Response[Types::CreateHostedZoneResponse]
+      def hosted_zone: () -> Types::HostedZone?
+      def change_info: () -> Types::ChangeInfo?
+      def delegation_set: () -> Types::DelegationSet?
+      def vpc: () -> Types::VPC?
+      def location: () -> String?
+    end
+    def create_hosted_zone: (
+      ?name: String,
+      ?vpc: {
+        vpc_region: String,
+        vpc_id: String
+      },
+      ?caller_reference: String,
+      ?hosted_zone_config: {
+        comment: String,
+        private_zone: bool
+      },
+      ?delegation_set_id: String
+    ) -> _CreateHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHostedZoneResponse
+
+    interface _CreateKeySigningKeyResponse
+      include Smithy::Client::_Response[Types::CreateKeySigningKeyResponse]
+      def change_info: () -> Types::ChangeInfo?
+      def key_signing_key: () -> Types::KeySigningKey?
+      def location: () -> String?
+    end
+    def create_key_signing_key: (
+      ?caller_reference: String,
+      ?hosted_zone_id: String,
+      ?key_management_service_arn: String,
+      ?name: String,
+      ?status: String
+    ) -> _CreateKeySigningKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeySigningKeyResponse
+
+    interface _CreateQueryLoggingConfigResponse
+      include Smithy::Client::_Response[Types::CreateQueryLoggingConfigResponse]
+      def query_logging_config: () -> Types::QueryLoggingConfig?
+      def location: () -> String?
+    end
+    def create_query_logging_config: (
+      ?hosted_zone_id: String,
+      ?cloud_watch_logs_log_group_arn: String
+    ) -> _CreateQueryLoggingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueryLoggingConfigResponse
+
+    interface _CreateReusableDelegationSetResponse
+      include Smithy::Client::_Response[Types::CreateReusableDelegationSetResponse]
+      def delegation_set: () -> Types::DelegationSet?
+      def location: () -> String?
+    end
+    def create_reusable_delegation_set: (
+      ?caller_reference: String,
+      ?hosted_zone_id: String
+    ) -> _CreateReusableDelegationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReusableDelegationSetResponse
+
+    interface _CreateTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::CreateTrafficPolicyResponse]
+      def traffic_policy: () -> Types::TrafficPolicy?
+      def location: () -> String?
+    end
+    def create_traffic_policy: (
+      ?name: String,
+      ?document: String,
+      ?comment: String
+    ) -> _CreateTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrafficPolicyResponse
+
+    interface _CreateTrafficPolicyInstanceResponse
+      include Smithy::Client::_Response[Types::CreateTrafficPolicyInstanceResponse]
+      def traffic_policy_instance: () -> Types::TrafficPolicyInstance?
+      def location: () -> String?
+    end
+    def create_traffic_policy_instance: (
+      ?hosted_zone_id: String,
+      ?name: String,
+      ?ttl: Integer,
+      ?traffic_policy_id: String,
+      ?traffic_policy_version: Integer
+    ) -> _CreateTrafficPolicyInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrafficPolicyInstanceResponse
+
+    interface _CreateTrafficPolicyVersionResponse
+      include Smithy::Client::_Response[Types::CreateTrafficPolicyVersionResponse]
+      def traffic_policy: () -> Types::TrafficPolicy?
+      def location: () -> String?
+    end
+    def create_traffic_policy_version: (
+      ?id: String,
+      ?document: String,
+      ?comment: String
+    ) -> _CreateTrafficPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrafficPolicyVersionResponse
+
+    interface _CreateVPCAssociationAuthorizationResponse
+      include Smithy::Client::_Response[Types::CreateVPCAssociationAuthorizationResponse]
+      def hosted_zone_id: () -> String?
+      def vpc: () -> Types::VPC?
+    end
+    def create_vpc_association_authorization: (
+      ?hosted_zone_id: String,
+      ?vpc: {
+        vpc_region: String,
+        vpc_id: String
+      }
+    ) -> _CreateVPCAssociationAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVPCAssociationAuthorizationResponse
+
+    interface _DeactivateKeySigningKeyResponse
+      include Smithy::Client::_Response[Types::DeactivateKeySigningKeyResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def deactivate_key_signing_key: (
+      ?hosted_zone_id: String,
+      ?name: String
+    ) -> _DeactivateKeySigningKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateKeySigningKeyResponse
+
+    interface _DeleteCidrCollectionResponse
+      include Smithy::Client::_Response[Types::DeleteCidrCollectionResponse]
+    end
+    def delete_cidr_collection: (
+      ?id: String
+    ) -> _DeleteCidrCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCidrCollectionResponse
+
+    interface _DeleteHealthCheckResponse
+      include Smithy::Client::_Response[Types::DeleteHealthCheckResponse]
+    end
+    def delete_health_check: (
+      ?health_check_id: String
+    ) -> _DeleteHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHealthCheckResponse
+
+    interface _DeleteHostedZoneResponse
+      include Smithy::Client::_Response[Types::DeleteHostedZoneResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def delete_hosted_zone: (
+      ?id: String
+    ) -> _DeleteHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHostedZoneResponse
+
+    interface _DeleteKeySigningKeyResponse
+      include Smithy::Client::_Response[Types::DeleteKeySigningKeyResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def delete_key_signing_key: (
+      ?hosted_zone_id: String,
+      ?name: String
+    ) -> _DeleteKeySigningKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeySigningKeyResponse
+
+    interface _DeleteQueryLoggingConfigResponse
+      include Smithy::Client::_Response[Types::DeleteQueryLoggingConfigResponse]
+    end
+    def delete_query_logging_config: (
+      ?id: String
+    ) -> _DeleteQueryLoggingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueryLoggingConfigResponse
+
+    interface _DeleteReusableDelegationSetResponse
+      include Smithy::Client::_Response[Types::DeleteReusableDelegationSetResponse]
+    end
+    def delete_reusable_delegation_set: (
+      ?id: String
+    ) -> _DeleteReusableDelegationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReusableDelegationSetResponse
+
+    interface _DeleteTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteTrafficPolicyResponse]
+    end
+    def delete_traffic_policy: (
+      ?id: String,
+      ?version: Integer
+    ) -> _DeleteTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrafficPolicyResponse
+
+    interface _DeleteTrafficPolicyInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteTrafficPolicyInstanceResponse]
+    end
+    def delete_traffic_policy_instance: (
+      ?id: String
+    ) -> _DeleteTrafficPolicyInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrafficPolicyInstanceResponse
+
+    interface _DeleteVPCAssociationAuthorizationResponse
+      include Smithy::Client::_Response[Types::DeleteVPCAssociationAuthorizationResponse]
+    end
+    def delete_vpc_association_authorization: (
+      ?hosted_zone_id: String,
+      ?vpc: {
+        vpc_region: String,
+        vpc_id: String
+      }
+    ) -> _DeleteVPCAssociationAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVPCAssociationAuthorizationResponse
+
+    interface _DisableHostedZoneDNSSECResponse
+      include Smithy::Client::_Response[Types::DisableHostedZoneDNSSECResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def disable_hosted_zone_dnssec: (
+      ?hosted_zone_id: String
+    ) -> _DisableHostedZoneDNSSECResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableHostedZoneDNSSECResponse
+
+    interface _DisassociateVPCFromHostedZoneResponse
+      include Smithy::Client::_Response[Types::DisassociateVPCFromHostedZoneResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def disassociate_vpc_from_hosted_zone: (
+      ?hosted_zone_id: String,
+      ?vpc: {
+        vpc_region: String,
+        vpc_id: String
+      },
+      ?comment: String
+    ) -> _DisassociateVPCFromHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateVPCFromHostedZoneResponse
+
+    interface _EnableHostedZoneDNSSECResponse
+      include Smithy::Client::_Response[Types::EnableHostedZoneDNSSECResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def enable_hosted_zone_dnssec: (
+      ?hosted_zone_id: String
+    ) -> _EnableHostedZoneDNSSECResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableHostedZoneDNSSECResponse
+
+    interface _GetAccountLimitResponse
+      include Smithy::Client::_Response[Types::GetAccountLimitResponse]
+      def limit: () -> Types::AccountLimit?
+      def count: () -> Integer?
+    end
+    def get_account_limit: (
+      ?type: String
+    ) -> _GetAccountLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountLimitResponse
+
+    interface _GetChangeResponse
+      include Smithy::Client::_Response[Types::GetChangeResponse]
+      def change_info: () -> Types::ChangeInfo?
+    end
+    def get_change: (
+      ?id: String
+    ) -> _GetChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChangeResponse
+
+    interface _GetCheckerIpRangesResponse
+      include Smithy::Client::_Response[Types::GetCheckerIpRangesResponse]
+      def checker_ip_ranges: () -> Array[String]?
+    end
+    def get_checker_ip_ranges: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCheckerIpRangesResponse
+
+    interface _GetDNSSECResponse
+      include Smithy::Client::_Response[Types::GetDNSSECResponse]
+      def status: () -> Types::DNSSECStatus?
+      def key_signing_keys: () -> Array[Types::KeySigningKey]?
+    end
+    def get_dnssec: (
+      ?hosted_zone_id: String
+    ) -> _GetDNSSECResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDNSSECResponse
+
+    interface _GetGeoLocationResponse
+      include Smithy::Client::_Response[Types::GetGeoLocationResponse]
+      def geo_location_details: () -> Types::GeoLocationDetails?
+    end
+    def get_geo_location: (
+      ?continent_code: String,
+      ?country_code: String,
+      ?subdivision_code: String
+    ) -> _GetGeoLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeoLocationResponse
+
+    interface _GetHealthCheckResponse
+      include Smithy::Client::_Response[Types::GetHealthCheckResponse]
+      def health_check: () -> Types::HealthCheck?
+    end
+    def get_health_check: (
+      ?health_check_id: String
+    ) -> _GetHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHealthCheckResponse
+
+    interface _GetHealthCheckCountResponse
+      include Smithy::Client::_Response[Types::GetHealthCheckCountResponse]
+      def health_check_count: () -> Integer?
+    end
+    def get_health_check_count: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHealthCheckCountResponse
+
+    interface _GetHealthCheckLastFailureReasonResponse
+      include Smithy::Client::_Response[Types::GetHealthCheckLastFailureReasonResponse]
+      def health_check_observations: () -> Array[Types::HealthCheckObservation]?
+    end
+    def get_health_check_last_failure_reason: (
+      ?health_check_id: String
+    ) -> _GetHealthCheckLastFailureReasonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHealthCheckLastFailureReasonResponse
+
+    interface _GetHealthCheckStatusResponse
+      include Smithy::Client::_Response[Types::GetHealthCheckStatusResponse]
+      def health_check_observations: () -> Array[Types::HealthCheckObservation]?
+    end
+    def get_health_check_status: (
+      ?health_check_id: String
+    ) -> _GetHealthCheckStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHealthCheckStatusResponse
+
+    interface _GetHostedZoneResponse
+      include Smithy::Client::_Response[Types::GetHostedZoneResponse]
+      def hosted_zone: () -> Types::HostedZone?
+      def delegation_set: () -> Types::DelegationSet?
+      def vp_cs: () -> Array[Types::VPC]?
+    end
+    def get_hosted_zone: (
+      ?id: String
+    ) -> _GetHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostedZoneResponse
+
+    interface _GetHostedZoneCountResponse
+      include Smithy::Client::_Response[Types::GetHostedZoneCountResponse]
+      def hosted_zone_count: () -> Integer?
+    end
+    def get_hosted_zone_count: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostedZoneCountResponse
+
+    interface _GetHostedZoneLimitResponse
+      include Smithy::Client::_Response[Types::GetHostedZoneLimitResponse]
+      def limit: () -> Types::HostedZoneLimit?
+      def count: () -> Integer?
+    end
+    def get_hosted_zone_limit: (
+      ?type: String,
+      ?hosted_zone_id: String
+    ) -> _GetHostedZoneLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostedZoneLimitResponse
+
+    interface _GetQueryLoggingConfigResponse
+      include Smithy::Client::_Response[Types::GetQueryLoggingConfigResponse]
+      def query_logging_config: () -> Types::QueryLoggingConfig?
+    end
+    def get_query_logging_config: (
+      ?id: String
+    ) -> _GetQueryLoggingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryLoggingConfigResponse
+
+    interface _GetReusableDelegationSetResponse
+      include Smithy::Client::_Response[Types::GetReusableDelegationSetResponse]
+      def delegation_set: () -> Types::DelegationSet?
+    end
+    def get_reusable_delegation_set: (
+      ?id: String
+    ) -> _GetReusableDelegationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReusableDelegationSetResponse
+
+    interface _GetReusableDelegationSetLimitResponse
+      include Smithy::Client::_Response[Types::GetReusableDelegationSetLimitResponse]
+      def limit: () -> Types::ReusableDelegationSetLimit?
+      def count: () -> Integer?
+    end
+    def get_reusable_delegation_set_limit: (
+      ?type: String,
+      ?delegation_set_id: String
+    ) -> _GetReusableDelegationSetLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReusableDelegationSetLimitResponse
+
+    interface _GetTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::GetTrafficPolicyResponse]
+      def traffic_policy: () -> Types::TrafficPolicy?
+    end
+    def get_traffic_policy: (
+      ?id: String,
+      ?version: Integer
+    ) -> _GetTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrafficPolicyResponse
+
+    interface _GetTrafficPolicyInstanceResponse
+      include Smithy::Client::_Response[Types::GetTrafficPolicyInstanceResponse]
+      def traffic_policy_instance: () -> Types::TrafficPolicyInstance?
+    end
+    def get_traffic_policy_instance: (
+      ?id: String
+    ) -> _GetTrafficPolicyInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrafficPolicyInstanceResponse
+
+    interface _GetTrafficPolicyInstanceCountResponse
+      include Smithy::Client::_Response[Types::GetTrafficPolicyInstanceCountResponse]
+      def traffic_policy_instance_count: () -> Integer?
+    end
+    def get_traffic_policy_instance_count: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrafficPolicyInstanceCountResponse
+
+    interface _ListCidrBlocksResponse
+      include Smithy::Client::_Response[Types::ListCidrBlocksResponse]
+      def next_token: () -> String?
+      def cidr_blocks: () -> Array[Types::CidrBlockSummary]?
+    end
+    def list_cidr_blocks: (
+      ?collection_id: String,
+      ?location_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCidrBlocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCidrBlocksResponse
+
+    interface _ListCidrCollectionsResponse
+      include Smithy::Client::_Response[Types::ListCidrCollectionsResponse]
+      def next_token: () -> String?
+      def cidr_collections: () -> Array[Types::CollectionSummary]?
+    end
+    def list_cidr_collections: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCidrCollectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCidrCollectionsResponse
+
+    interface _ListCidrLocationsResponse
+      include Smithy::Client::_Response[Types::ListCidrLocationsResponse]
+      def next_token: () -> String?
+      def cidr_locations: () -> Array[Types::LocationSummary]?
+    end
+    def list_cidr_locations: (
+      ?collection_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCidrLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCidrLocationsResponse
+
+    interface _ListGeoLocationsResponse
+      include Smithy::Client::_Response[Types::ListGeoLocationsResponse]
+      def geo_location_details_list: () -> Array[Types::GeoLocationDetails]?
+      def is_truncated: () -> bool?
+      def next_continent_code: () -> String?
+      def next_country_code: () -> String?
+      def next_subdivision_code: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_geo_locations: (
+      ?start_continent_code: String,
+      ?start_country_code: String,
+      ?start_subdivision_code: String,
+      ?max_items: Integer
+    ) -> _ListGeoLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeoLocationsResponse
+
+    interface _ListHealthChecksResponse
+      include Smithy::Client::_Response[Types::ListHealthChecksResponse]
+      def health_checks: () -> Array[Types::HealthCheck]?
+      def marker: () -> String?
+      def is_truncated: () -> bool?
+      def next_marker: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_health_checks: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListHealthChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHealthChecksResponse
+
+    interface _ListHostedZonesResponse
+      include Smithy::Client::_Response[Types::ListHostedZonesResponse]
+      def hosted_zones: () -> Array[Types::HostedZone]?
+      def marker: () -> String?
+      def is_truncated: () -> bool?
+      def next_marker: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_hosted_zones: (
+      ?marker: String,
+      ?max_items: Integer,
+      ?delegation_set_id: String,
+      ?hosted_zone_type: String
+    ) -> _ListHostedZonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostedZonesResponse
+
+    interface _ListHostedZonesByNameResponse
+      include Smithy::Client::_Response[Types::ListHostedZonesByNameResponse]
+      def hosted_zones: () -> Array[Types::HostedZone]?
+      def dns_name: () -> String?
+      def hosted_zone_id: () -> String?
+      def is_truncated: () -> bool?
+      def next_dns_name: () -> String?
+      def next_hosted_zone_id: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_hosted_zones_by_name: (
+      ?dns_name: String,
+      ?hosted_zone_id: String,
+      ?max_items: Integer
+    ) -> _ListHostedZonesByNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostedZonesByNameResponse
+
+    interface _ListHostedZonesByVPCResponse
+      include Smithy::Client::_Response[Types::ListHostedZonesByVPCResponse]
+      def hosted_zone_summaries: () -> Array[Types::HostedZoneSummary]?
+      def max_items: () -> Integer?
+      def next_token: () -> String?
+    end
+    def list_hosted_zones_by_vpc: (
+      ?vpc_id: String,
+      ?vpc_region: String,
+      ?max_items: Integer,
+      ?next_token: String
+    ) -> _ListHostedZonesByVPCResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostedZonesByVPCResponse
+
+    interface _ListQueryLoggingConfigsResponse
+      include Smithy::Client::_Response[Types::ListQueryLoggingConfigsResponse]
+      def query_logging_configs: () -> Array[Types::QueryLoggingConfig]?
+      def next_token: () -> String?
+    end
+    def list_query_logging_configs: (
+      ?hosted_zone_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueryLoggingConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueryLoggingConfigsResponse
+
+    interface _ListResourceRecordSetsResponse
+      include Smithy::Client::_Response[Types::ListResourceRecordSetsResponse]
+      def resource_record_sets: () -> Array[Types::ResourceRecordSet]?
+      def is_truncated: () -> bool?
+      def next_record_name: () -> String?
+      def next_record_type: () -> String?
+      def next_record_identifier: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_resource_record_sets: (
+      ?hosted_zone_id: String,
+      ?start_record_name: String,
+      ?start_record_type: String,
+      ?start_record_identifier: String,
+      ?max_items: Integer
+    ) -> _ListResourceRecordSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceRecordSetsResponse
+
+    interface _ListReusableDelegationSetsResponse
+      include Smithy::Client::_Response[Types::ListReusableDelegationSetsResponse]
+      def delegation_sets: () -> Array[Types::DelegationSet]?
+      def marker: () -> String?
+      def is_truncated: () -> bool?
+      def next_marker: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_reusable_delegation_sets: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListReusableDelegationSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReusableDelegationSetsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_tag_set: () -> Types::ResourceTagSet?
+    end
+    def list_tags_for_resource: (
+      ?resource_type: String,
+      ?resource_id: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTagsForResourcesResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourcesResponse]
+      def resource_tag_sets: () -> Array[Types::ResourceTagSet]?
+    end
+    def list_tags_for_resources: (
+      ?resource_type: String,
+      ?resource_ids: Array[String]
+    ) -> _ListTagsForResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourcesResponse
+
+    interface _ListTrafficPoliciesResponse
+      include Smithy::Client::_Response[Types::ListTrafficPoliciesResponse]
+      def traffic_policy_summaries: () -> Array[Types::TrafficPolicySummary]?
+      def is_truncated: () -> bool?
+      def traffic_policy_id_marker: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_traffic_policies: (
+      ?traffic_policy_id_marker: String,
+      ?max_items: Integer
+    ) -> _ListTrafficPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPoliciesResponse
+
+    interface _ListTrafficPolicyInstancesResponse
+      include Smithy::Client::_Response[Types::ListTrafficPolicyInstancesResponse]
+      def traffic_policy_instances: () -> Array[Types::TrafficPolicyInstance]?
+      def hosted_zone_id_marker: () -> String?
+      def traffic_policy_instance_name_marker: () -> String?
+      def traffic_policy_instance_type_marker: () -> String?
+      def is_truncated: () -> bool?
+      def max_items: () -> Integer?
+    end
+    def list_traffic_policy_instances: (
+      ?hosted_zone_id_marker: String,
+      ?traffic_policy_instance_name_marker: String,
+      ?traffic_policy_instance_type_marker: String,
+      ?max_items: Integer
+    ) -> _ListTrafficPolicyInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPolicyInstancesResponse
+
+    interface _ListTrafficPolicyInstancesByHostedZoneResponse
+      include Smithy::Client::_Response[Types::ListTrafficPolicyInstancesByHostedZoneResponse]
+      def traffic_policy_instances: () -> Array[Types::TrafficPolicyInstance]?
+      def traffic_policy_instance_name_marker: () -> String?
+      def traffic_policy_instance_type_marker: () -> String?
+      def is_truncated: () -> bool?
+      def max_items: () -> Integer?
+    end
+    def list_traffic_policy_instances_by_hosted_zone: (
+      ?hosted_zone_id: String,
+      ?traffic_policy_instance_name_marker: String,
+      ?traffic_policy_instance_type_marker: String,
+      ?max_items: Integer
+    ) -> _ListTrafficPolicyInstancesByHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPolicyInstancesByHostedZoneResponse
+
+    interface _ListTrafficPolicyInstancesByPolicyResponse
+      include Smithy::Client::_Response[Types::ListTrafficPolicyInstancesByPolicyResponse]
+      def traffic_policy_instances: () -> Array[Types::TrafficPolicyInstance]?
+      def hosted_zone_id_marker: () -> String?
+      def traffic_policy_instance_name_marker: () -> String?
+      def traffic_policy_instance_type_marker: () -> String?
+      def is_truncated: () -> bool?
+      def max_items: () -> Integer?
+    end
+    def list_traffic_policy_instances_by_policy: (
+      ?traffic_policy_id: String,
+      ?traffic_policy_version: Integer,
+      ?hosted_zone_id_marker: String,
+      ?traffic_policy_instance_name_marker: String,
+      ?traffic_policy_instance_type_marker: String,
+      ?max_items: Integer
+    ) -> _ListTrafficPolicyInstancesByPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPolicyInstancesByPolicyResponse
+
+    interface _ListTrafficPolicyVersionsResponse
+      include Smithy::Client::_Response[Types::ListTrafficPolicyVersionsResponse]
+      def traffic_policies: () -> Array[Types::TrafficPolicy]?
+      def is_truncated: () -> bool?
+      def traffic_policy_version_marker: () -> String?
+      def max_items: () -> Integer?
+    end
+    def list_traffic_policy_versions: (
+      ?id: String,
+      ?traffic_policy_version_marker: String,
+      ?max_items: Integer
+    ) -> _ListTrafficPolicyVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPolicyVersionsResponse
+
+    interface _ListVPCAssociationAuthorizationsResponse
+      include Smithy::Client::_Response[Types::ListVPCAssociationAuthorizationsResponse]
+      def hosted_zone_id: () -> String?
+      def next_token: () -> String?
+      def vp_cs: () -> Array[Types::VPC]?
+    end
+    def list_vpc_association_authorizations: (
+      ?hosted_zone_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVPCAssociationAuthorizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVPCAssociationAuthorizationsResponse
+
+    interface _TestDNSAnswerResponse
+      include Smithy::Client::_Response[Types::TestDNSAnswerResponse]
+      def nameserver: () -> String?
+      def record_name: () -> String?
+      def record_type: () -> String?
+      def record_data: () -> Array[String]?
+      def response_code: () -> String?
+      def protocol: () -> String?
+    end
+    def test_dns_answer: (
+      ?hosted_zone_id: String,
+      ?record_name: String,
+      ?record_type: String,
+      ?resolver_ip: String,
+      ?edns0_client_subnet_ip: String,
+      ?edns0_client_subnet_mask: String
+    ) -> _TestDNSAnswerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestDNSAnswerResponse
+
+    interface _UpdateHealthCheckResponse
+      include Smithy::Client::_Response[Types::UpdateHealthCheckResponse]
+      def health_check: () -> Types::HealthCheck?
+    end
+    def update_health_check: (
+      ?health_check_id: String,
+      ?health_check_version: Integer,
+      ?ip_address: String,
+      ?port: Integer,
+      ?resource_path: String,
+      ?fully_qualified_domain_name: String,
+      ?search_string: String,
+      ?failure_threshold: Integer,
+      ?inverted: bool,
+      ?disabled: bool,
+      ?health_threshold: Integer,
+      ?child_health_checks: Array[String],
+      ?enable_sni: bool,
+      ?regions: Array[String],
+      ?alarm_identifier: {
+        region: String,
+        name: String
+      },
+      ?insufficient_data_health_status: String,
+      ?reset_elements: Array[String]
+    ) -> _UpdateHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHealthCheckResponse
+
+    interface _UpdateHostedZoneCommentResponse
+      include Smithy::Client::_Response[Types::UpdateHostedZoneCommentResponse]
+      def hosted_zone: () -> Types::HostedZone?
+    end
+    def update_hosted_zone_comment: (
+      ?id: String,
+      ?comment: String
+    ) -> _UpdateHostedZoneCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostedZoneCommentResponse
+
+    interface _UpdateTrafficPolicyCommentResponse
+      include Smithy::Client::_Response[Types::UpdateTrafficPolicyCommentResponse]
+      def traffic_policy: () -> Types::TrafficPolicy?
+    end
+    def update_traffic_policy_comment: (
+      ?id: String,
+      ?version: Integer,
+      ?comment: String
+    ) -> _UpdateTrafficPolicyCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrafficPolicyCommentResponse
+
+    interface _UpdateTrafficPolicyInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateTrafficPolicyInstanceResponse]
+      def traffic_policy_instance: () -> Types::TrafficPolicyInstance?
+    end
+    def update_traffic_policy_instance: (
+      ?id: String,
+      ?ttl: Integer,
+      ?traffic_policy_id: String,
+      ?traffic_policy_version: Integer
+    ) -> _UpdateTrafficPolicyInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrafficPolicyInstanceResponse
+  end
+end

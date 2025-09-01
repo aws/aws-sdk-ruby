@@ -1,0 +1,84 @@
+module Aws::DAX
+  module Errors
+    class ClusterAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterQuotaForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientClusterCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidARNFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidClusterStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnet < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidVPCNetworkStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeQuotaForClusterExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NodeQuotaForCustomerExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceLinkedRoleNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+    end
+    class SubnetGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetGroupInUseFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagQuotaPerResourceExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

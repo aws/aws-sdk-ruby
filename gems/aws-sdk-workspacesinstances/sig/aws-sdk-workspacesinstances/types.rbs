@@ -1,0 +1,1148 @@
+module Aws::WorkspacesInstances
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AmdSevSnpEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AssociateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+        ?volume_id: String,
+        ?device: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+      attr_accessor volume_id: String?
+      attr_accessor device: String?
+    end
+
+    class AssociateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AutoRecoveryEnum
+      DISABLED: String
+      DEFAULT: String
+    end
+
+    module BandwidthWeightingEnum
+      DEFAULT: String
+      VPC_1: String
+      EBS_1: String
+    end
+
+    class BlockDeviceMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?ebs: Types::EbsBlockDevice,
+        ?no_device: String,
+        ?virtual_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor ebs: Types::EbsBlockDevice?
+      attr_accessor no_device: String?
+      attr_accessor virtual_name: String?
+    end
+
+    module CapacityReservationPreferenceEnum
+      CAPACITY_RESERVATIONS_ONLY: String
+      OPEN: String
+      NONE: String
+    end
+
+    class CapacityReservationSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_preference: String,
+        ?capacity_reservation_target: Types::CapacityReservationTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_preference: String?
+      attr_accessor capacity_reservation_target: Types::CapacityReservationTarget?
+    end
+
+    class CapacityReservationTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_id: String,
+        ?capacity_reservation_resource_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_id: String?
+      attr_accessor capacity_reservation_resource_group_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConnectionTrackingSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tcp_established_timeout: Integer,
+        ?udp_stream_timeout: Integer,
+        ?udp_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tcp_established_timeout: Integer?
+      attr_accessor udp_stream_timeout: Integer?
+      attr_accessor udp_timeout: Integer?
+    end
+
+    module CpuCreditsEnum
+      STANDARD: String
+      UNLIMITED: String
+    end
+
+    class CpuOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amd_sev_snp: String,
+        ?core_count: Integer,
+        ?threads_per_core: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amd_sev_snp: String?
+      attr_accessor core_count: Integer?
+      attr_accessor threads_per_core: Integer?
+    end
+
+    class CreateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?client_token: String,
+        ?encrypted: bool,
+        ?iops: Integer,
+        ?kms_key_id: String,
+        ?size_in_gb: Integer,
+        ?snapshot_id: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+        ?throughput: Integer,
+        ?volume_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor client_token: String?
+      attr_accessor encrypted: bool?
+      attr_accessor iops: Integer?
+      attr_accessor kms_key_id: String?
+      attr_accessor size_in_gb: Integer?
+      attr_accessor snapshot_id: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+      attr_accessor throughput: Integer?
+      attr_accessor volume_type: String?
+    end
+
+    class CreateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+    end
+
+    class CreateWorkspaceInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?managed_instance: Types::ManagedInstanceRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor managed_instance: Types::ManagedInstanceRequest?
+    end
+
+    class CreateWorkspaceInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+    end
+
+    class CreditSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_credits: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_credits: String?
+    end
+
+    class DeleteVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+    end
+
+    class DeleteVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkspaceInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+    end
+
+    class DeleteWorkspaceInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DisassociateModeEnum
+      FORCE: String
+      NO_FORCE: String
+    end
+
+    class DisassociateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+        ?volume_id: String,
+        ?device: String,
+        ?disassociate_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+      attr_accessor volume_id: String?
+      attr_accessor device: String?
+      attr_accessor disassociate_mode: String?
+    end
+
+    class DisassociateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EC2InstanceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_error_code: String,
+        ?ec2_exception_type: String,
+        ?ec2_error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_error_code: String?
+      attr_accessor ec2_exception_type: String?
+      attr_accessor ec2_error_message: String?
+    end
+
+    class EC2ManagedInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class EbsBlockDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_type: String,
+        ?encrypted: bool,
+        ?kms_key_id: String,
+        ?iops: Integer,
+        ?throughput: Integer,
+        ?volume_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_type: String?
+      attr_accessor encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+      attr_accessor volume_size: Integer?
+    end
+
+    class EnaSrdSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ena_srd_enabled: bool,
+        ?ena_srd_udp_specification: Types::EnaSrdUdpSpecificationRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ena_srd_enabled: bool?
+      attr_accessor ena_srd_udp_specification: Types::EnaSrdUdpSpecificationRequest?
+    end
+
+    class EnaSrdUdpSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ena_srd_udp_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ena_srd_udp_enabled: bool?
+    end
+
+    class EnclaveOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class GetWorkspaceInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+    end
+
+    class GetWorkspaceInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_errors: Array[Types::WorkspaceInstanceError],
+        ?ec2_instance_errors: Array[Types::EC2InstanceError],
+        ?provision_state: String,
+        ?workspace_instance_id: String,
+        ?ec2_managed_instance: Types::EC2ManagedInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_errors: Array[Types::WorkspaceInstanceError]?
+      attr_accessor ec2_instance_errors: Array[Types::EC2InstanceError]?
+      attr_accessor provision_state: String?
+      attr_accessor workspace_instance_id: String?
+      attr_accessor ec2_managed_instance: Types::EC2ManagedInstance?
+    end
+
+    class HibernationOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured: bool?
+    end
+
+    module HostnameTypeEnum
+      IP_NAME: String
+      RESOURCE_NAME: String
+    end
+
+    module HttpEndpointEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module HttpProtocolIpv6Enum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module HttpTokensEnum
+      OPTIONAL: String
+      REQUIRED: String
+    end
+
+    class IamInstanceProfileSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    module InstanceInterruptionBehaviorEnum
+      HIBERNATE: String
+      STOP: String
+    end
+
+    class InstanceIpv6Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv6_address: String,
+        ?is_primary_ipv6: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv6_address: String?
+      attr_accessor is_primary_ipv6: bool?
+    end
+
+    class InstanceMaintenanceOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_recovery: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_recovery: String?
+    end
+
+    class InstanceMarketOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?market_type: String,
+        ?spot_options: Types::SpotMarketOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor market_type: String?
+      attr_accessor spot_options: Types::SpotMarketOptions?
+    end
+
+    class InstanceMetadataOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_endpoint: String,
+        ?http_protocol_ipv6: String,
+        ?http_put_response_hop_limit: Integer,
+        ?http_tokens: String,
+        ?instance_metadata_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_endpoint: String?
+      attr_accessor http_protocol_ipv6: String?
+      attr_accessor http_put_response_hop_limit: Integer?
+      attr_accessor http_tokens: String?
+      attr_accessor instance_metadata_tags: String?
+    end
+
+    module InstanceMetadataTagsEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class InstanceNetworkInterfaceSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associate_carrier_ip_address: bool,
+        ?associate_public_ip_address: bool,
+        ?connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest,
+        ?description: String,
+        ?device_index: Integer,
+        ?ena_srd_specification: Types::EnaSrdSpecificationRequest,
+        ?interface_type: String,
+        ?ipv4_prefixes: Array[Types::Ipv4PrefixSpecificationRequest],
+        ?ipv4_prefix_count: Integer,
+        ?ipv6_address_count: Integer,
+        ?ipv6_addresses: Array[Types::InstanceIpv6Address],
+        ?ipv6_prefixes: Array[Types::Ipv6PrefixSpecificationRequest],
+        ?ipv6_prefix_count: Integer,
+        ?network_card_index: Integer,
+        ?network_interface_id: String,
+        ?primary_ipv6: bool,
+        ?private_ip_address: String,
+        ?private_ip_addresses: Array[Types::PrivateIpAddressSpecification],
+        ?secondary_private_ip_address_count: Integer,
+        ?groups: Array[String],
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associate_carrier_ip_address: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest?
+      attr_accessor description: String?
+      attr_accessor device_index: Integer?
+      attr_accessor ena_srd_specification: Types::EnaSrdSpecificationRequest?
+      attr_accessor interface_type: String?
+      attr_accessor ipv4_prefixes: Array[Types::Ipv4PrefixSpecificationRequest]?
+      attr_accessor ipv4_prefix_count: Integer?
+      attr_accessor ipv6_address_count: Integer?
+      attr_accessor ipv6_addresses: Array[Types::InstanceIpv6Address]?
+      attr_accessor ipv6_prefixes: Array[Types::Ipv6PrefixSpecificationRequest]?
+      attr_accessor ipv6_prefix_count: Integer?
+      attr_accessor network_card_index: Integer?
+      attr_accessor network_interface_id: String?
+      attr_accessor primary_ipv6: bool?
+      attr_accessor private_ip_address: String?
+      attr_accessor private_ip_addresses: Array[Types::PrivateIpAddressSpecification]?
+      attr_accessor secondary_private_ip_address_count: Integer?
+      attr_accessor groups: Array[String]?
+      attr_accessor subnet_id: String?
+    end
+
+    class InstanceNetworkPerformanceOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth_weighting: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth_weighting: String?
+    end
+
+    class InstanceTypeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+    end
+
+    module InterfaceTypeEnum
+      INTERFACE: String
+      EFA: String
+      EFA_ONLY: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class Ipv4PrefixSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv4_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv4_prefix: String?
+    end
+
+    class Ipv6PrefixSpecificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv6_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv6_prefix: String?
+    end
+
+    class LicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+    end
+
+    class ListInstanceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstanceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_types: Array[Types::InstanceTypeInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_types: Array[Types::InstanceTypeInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[Types::Region],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[Types::Region]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWorkspaceInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provision_states: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provision_states: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkspaceInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instances: Array[Types::WorkspaceInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instances: Array[Types::WorkspaceInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_device_mappings: Array[Types::BlockDeviceMappingRequest],
+        ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+        ?cpu_options: Types::CpuOptionsRequest,
+        ?credit_specification: Types::CreditSpecificationRequest,
+        ?disable_api_stop: bool,
+        ?ebs_optimized: bool,
+        ?enable_primary_ipv6: bool,
+        ?enclave_options: Types::EnclaveOptionsRequest,
+        ?hibernation_options: Types::HibernationOptionsRequest,
+        ?iam_instance_profile: Types::IamInstanceProfileSpecification,
+        ?image_id: String,
+        ?instance_market_options: Types::InstanceMarketOptionsRequest,
+        ?instance_type: String,
+        ?ipv6_addresses: Array[Types::InstanceIpv6Address],
+        ?ipv6_address_count: Integer,
+        ?kernel_id: String,
+        ?key_name: String,
+        ?license_specifications: Array[Types::LicenseConfigurationRequest],
+        ?maintenance_options: Types::InstanceMaintenanceOptionsRequest,
+        ?metadata_options: Types::InstanceMetadataOptionsRequest,
+        ?monitoring: Types::RunInstancesMonitoringEnabled,
+        ?network_interfaces: Array[Types::InstanceNetworkInterfaceSpecification],
+        ?network_performance_options: Types::InstanceNetworkPerformanceOptionsRequest,
+        ?placement: Types::Placement,
+        ?private_dns_name_options: Types::PrivateDnsNameOptionsRequest,
+        ?private_ip_address: String,
+        ?ramdisk_id: String,
+        ?security_group_ids: Array[String],
+        ?security_groups: Array[String],
+        ?subnet_id: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+        ?user_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_device_mappings: Array[Types::BlockDeviceMappingRequest]?
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+      attr_accessor cpu_options: Types::CpuOptionsRequest?
+      attr_accessor credit_specification: Types::CreditSpecificationRequest?
+      attr_accessor disable_api_stop: bool?
+      attr_accessor ebs_optimized: bool?
+      attr_accessor enable_primary_ipv6: bool?
+      attr_accessor enclave_options: Types::EnclaveOptionsRequest?
+      attr_accessor hibernation_options: Types::HibernationOptionsRequest?
+      attr_accessor iam_instance_profile: Types::IamInstanceProfileSpecification?
+      attr_accessor image_id: String?
+      attr_accessor instance_market_options: Types::InstanceMarketOptionsRequest?
+      attr_accessor instance_type: String?
+      attr_accessor ipv6_addresses: Array[Types::InstanceIpv6Address]?
+      attr_accessor ipv6_address_count: Integer?
+      attr_accessor kernel_id: String?
+      attr_accessor key_name: String?
+      attr_accessor license_specifications: Array[Types::LicenseConfigurationRequest]?
+      attr_accessor maintenance_options: Types::InstanceMaintenanceOptionsRequest?
+      attr_accessor metadata_options: Types::InstanceMetadataOptionsRequest?
+      attr_accessor monitoring: Types::RunInstancesMonitoringEnabled?
+      attr_accessor network_interfaces: Array[Types::InstanceNetworkInterfaceSpecification]?
+      attr_accessor network_performance_options: Types::InstanceNetworkPerformanceOptionsRequest?
+      attr_accessor placement: Types::Placement?
+      attr_accessor private_dns_name_options: Types::PrivateDnsNameOptionsRequest?
+      attr_accessor private_ip_address: String?
+      attr_accessor ramdisk_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor subnet_id: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+      attr_accessor user_data: String?
+    end
+
+    module MarketTypeEnum
+      SPOT: String
+      CAPACITY_BLOCK: String
+    end
+
+    class Placement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affinity: String,
+        ?availability_zone: String,
+        ?group_id: String,
+        ?group_name: String,
+        ?host_id: String,
+        ?host_resource_group_arn: String,
+        ?partition_number: Integer,
+        ?tenancy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affinity: String?
+      attr_accessor availability_zone: String?
+      attr_accessor group_id: String?
+      attr_accessor group_name: String?
+      attr_accessor host_id: String?
+      attr_accessor host_resource_group_arn: String?
+      attr_accessor partition_number: Integer?
+      attr_accessor tenancy: String?
+    end
+
+    class PrivateDnsNameOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname_type: String,
+        ?enable_resource_name_dns_a_record: bool,
+        ?enable_resource_name_dns_aaaa_record: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname_type: String?
+      attr_accessor enable_resource_name_dns_a_record: bool?
+      attr_accessor enable_resource_name_dns_aaaa_record: bool?
+    end
+
+    class PrivateIpAddressSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary: bool,
+        ?private_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary: bool?
+      attr_accessor private_ip_address: String?
+    end
+
+    module ProvisionStateEnum
+      ALLOCATING: String
+      ALLOCATED: String
+      DEALLOCATING: String
+      DEALLOCATED: String
+      ERROR_ALLOCATING: String
+      ERROR_DEALLOCATING: String
+    end
+
+    class Region
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceTypeEnum
+      INSTANCE: String
+      VOLUME: String
+      SPOT_INSTANCES_REQUEST: String
+      NETWORK_INTERFACE: String
+    end
+
+    class RunInstancesMonitoringEnabled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    module SpotInstanceTypeEnum
+      ONE_TIME: String
+      PERSISTENT: String
+    end
+
+    class SpotMarketOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_duration_minutes: Integer,
+        ?instance_interruption_behavior: String,
+        ?max_price: String,
+        ?spot_instance_type: String,
+        ?valid_until_utc: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_duration_minutes: Integer?
+      attr_accessor instance_interruption_behavior: String?
+      attr_accessor max_price: String?
+      attr_accessor spot_instance_type: String?
+      attr_accessor valid_until_utc: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module TenancyEnum
+      DEFAULT: String
+      DEDICATED: String
+      HOST: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_instance_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_instance_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?reason: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor reason: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      UNSUPPORTED_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      DEPENDENCY_FAILURE: String
+      OTHER: String
+    end
+
+    module VolumeTypeEnum
+      STANDARD: String
+      IO1: String
+      IO2: String
+      GP2: String
+      SC1: String
+      ST1: String
+      GP3: String
+    end
+
+    class WorkspaceInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provision_state: String,
+        ?workspace_instance_id: String,
+        ?ec2_managed_instance: Types::EC2ManagedInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provision_state: String?
+      attr_accessor workspace_instance_id: String?
+      attr_accessor ec2_managed_instance: Types::EC2ManagedInstance?
+    end
+
+    class WorkspaceInstanceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+  end
+end

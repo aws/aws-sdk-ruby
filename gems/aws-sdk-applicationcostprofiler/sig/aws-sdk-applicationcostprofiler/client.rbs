@@ -1,0 +1,123 @@
+module Aws::ApplicationCostProfiler
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ApplicationCostProfiler::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteReportDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteReportDefinitionResult]
+      def report_id: () -> String?
+    end
+    def delete_report_definition: (
+      ?report_id: String
+    ) -> _DeleteReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReportDefinitionResponse
+
+    interface _GetReportDefinitionResponse
+      include Smithy::Client::_Response[Types::GetReportDefinitionResult]
+      def report_id: () -> String?
+      def report_description: () -> String?
+      def report_frequency: () -> String?
+      def format: () -> String?
+      def destination_s3_location: () -> Types::S3Location?
+      def created_at: () -> Time?
+      def last_updated: () -> Time?
+    end
+    def get_report_definition: (
+      ?report_id: String
+    ) -> _GetReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReportDefinitionResponse
+
+    interface _ImportApplicationUsageResponse
+      include Smithy::Client::_Response[Types::ImportApplicationUsageResult]
+      def import_id: () -> String?
+    end
+    def import_application_usage: (
+      ?source_s3_location: {
+        bucket: String,
+        key: String,
+        region: String
+      }
+    ) -> _ImportApplicationUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportApplicationUsageResponse
+
+    interface _ListReportDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListReportDefinitionsResult]
+      def report_definitions: () -> Array[Types::ReportDefinition]?
+      def next_token: () -> String?
+    end
+    def list_report_definitions: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReportDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportDefinitionsResponse
+
+    interface _PutReportDefinitionResponse
+      include Smithy::Client::_Response[Types::PutReportDefinitionResult]
+      def report_id: () -> String?
+    end
+    def put_report_definition: (
+      ?report_id: String,
+      ?report_description: String,
+      ?report_frequency: String,
+      ?format: String,
+      ?destination_s3_location: {
+        bucket: String,
+        prefix: String
+      }
+    ) -> _PutReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutReportDefinitionResponse
+
+    interface _UpdateReportDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateReportDefinitionResult]
+      def report_id: () -> String?
+    end
+    def update_report_definition: (
+      ?report_id: String,
+      ?report_description: String,
+      ?report_frequency: String,
+      ?format: String,
+      ?destination_s3_location: {
+        bucket: String,
+        prefix: String
+      }
+    ) -> _UpdateReportDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReportDefinitionResponse
+  end
+end

@@ -1,0 +1,269 @@
+module Aws::GeoMaps
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetGlyphsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?font_stack: String,
+        ?font_unicode_range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor font_stack: String?
+      attr_accessor font_unicode_range: String?
+    end
+
+    class GetGlyphsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor e_tag: String?
+    end
+
+    class GetSpritesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_name: String,
+        ?style: String,
+        ?color_scheme: String,
+        ?variant: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_name: String?
+      attr_accessor style: String?
+      attr_accessor color_scheme: String?
+      attr_accessor variant: String?
+    end
+
+    class GetSpritesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor e_tag: String?
+    end
+
+    class GetStaticMapRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: String,
+        ?bounded_positions: String,
+        ?center: String,
+        ?color_scheme: String,
+        ?compact_overlay: String,
+        ?crop_labels: bool,
+        ?geo_json_overlay: String,
+        ?height: Integer,
+        ?key: String,
+        ?label_size: String,
+        ?language: String,
+        ?padding: Integer,
+        ?political_view: String,
+        ?points_of_interests: String,
+        ?radius: Integer,
+        ?file_name: String,
+        ?scale_bar_unit: String,
+        ?style: String,
+        ?width: Integer,
+        ?zoom: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: String?
+      attr_accessor bounded_positions: String?
+      attr_accessor center: String?
+      attr_accessor color_scheme: String?
+      attr_accessor compact_overlay: String?
+      attr_accessor crop_labels: bool?
+      attr_accessor geo_json_overlay: String?
+      attr_accessor height: Integer?
+      attr_accessor key: String?
+      attr_accessor label_size: String?
+      attr_accessor language: String?
+      attr_accessor padding: Integer?
+      attr_accessor political_view: String?
+      attr_accessor points_of_interests: String?
+      attr_accessor radius: Integer?
+      attr_accessor file_name: String?
+      attr_accessor scale_bar_unit: String?
+      attr_accessor style: String?
+      attr_accessor width: Integer?
+      attr_accessor zoom: Float?
+    end
+
+    class GetStaticMapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?e_tag: String,
+        ?pricing_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor e_tag: String?
+      attr_accessor pricing_bucket: String?
+    end
+
+    class GetStyleDescriptorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?style: String,
+        ?color_scheme: String,
+        ?political_view: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor style: String?
+      attr_accessor color_scheme: String?
+      attr_accessor political_view: String?
+      attr_accessor key: String?
+    end
+
+    class GetStyleDescriptorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor e_tag: String?
+    end
+
+    class GetTileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tileset: String,
+        ?z: String,
+        ?x: String,
+        ?y: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tileset: String?
+      attr_accessor z: String?
+      attr_accessor x: String?
+      attr_accessor y: String?
+      attr_accessor key: String?
+    end
+
+    class GetTileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?e_tag: String,
+        ?pricing_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor e_tag: String?
+      attr_accessor pricing_bucket: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

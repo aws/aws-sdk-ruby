@@ -1,0 +1,1659 @@
+module Aws::Pipes
+  module Types
+
+    class AwsVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+        ?assign_public_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor assign_public_ip: String?
+    end
+
+    class BatchArrayProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size: Integer?
+    end
+
+    class BatchContainerOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?environment: Array[Types::BatchEnvironmentVariable],
+        ?instance_type: String,
+        ?resource_requirements: Array[Types::BatchResourceRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor environment: Array[Types::BatchEnvironmentVariable]?
+      attr_accessor instance_type: String?
+      attr_accessor resource_requirements: Array[Types::BatchResourceRequirement]?
+    end
+
+    class BatchEnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class BatchJobDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor type: String?
+    end
+
+    class BatchResourceRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class BatchRetryStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempts: Integer?
+    end
+
+    class CapacityProviderStrategyItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: String,
+        ?weight: Integer,
+        ?base: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: String?
+      attr_accessor weight: Integer?
+      attr_accessor base: Integer?
+    end
+
+    class CloudwatchLogsLogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class CloudwatchLogsLogDestinationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreatePipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?desired_state: String,
+        ?source: String,
+        ?source_parameters: Types::PipeSourceParameters,
+        ?enrichment: String,
+        ?enrichment_parameters: Types::PipeEnrichmentParameters,
+        ?target: String,
+        ?target_parameters: Types::PipeTargetParameters,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?log_configuration: Types::PipeLogConfigurationParameters,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor desired_state: String?
+      attr_accessor source: String?
+      attr_accessor source_parameters: Types::PipeSourceParameters?
+      attr_accessor enrichment: String?
+      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters?
+      attr_accessor target: String?
+      attr_accessor target_parameters: Types::PipeTargetParameters?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_configuration: Types::PipeLogConfigurationParameters?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class CreatePipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DeadLetterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeletePipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DescribePipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribePipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?state_reason: String,
+        ?source: String,
+        ?source_parameters: Types::PipeSourceParameters,
+        ?enrichment: String,
+        ?enrichment_parameters: Types::PipeEnrichmentParameters,
+        ?target: String,
+        ?target_parameters: Types::PipeTargetParameters,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?log_configuration: Types::PipeLogConfiguration,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor state_reason: String?
+      attr_accessor source: String?
+      attr_accessor source_parameters: Types::PipeSourceParameters?
+      attr_accessor enrichment: String?
+      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters?
+      attr_accessor target: String?
+      attr_accessor target_parameters: Types::PipeTargetParameters?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor log_configuration: Types::PipeLogConfiguration?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class DimensionMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_value: String,
+        ?dimension_value_type: String,
+        ?dimension_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_value: String?
+      attr_accessor dimension_value_type: String?
+      attr_accessor dimension_name: String?
+    end
+
+    class EcsContainerOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?cpu: Integer,
+        ?environment: Array[Types::EcsEnvironmentVariable],
+        ?environment_files: Array[Types::EcsEnvironmentFile],
+        ?memory: Integer,
+        ?memory_reservation: Integer,
+        ?name: String,
+        ?resource_requirements: Array[Types::EcsResourceRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor cpu: Integer?
+      attr_accessor environment: Array[Types::EcsEnvironmentVariable]?
+      attr_accessor environment_files: Array[Types::EcsEnvironmentFile]?
+      attr_accessor memory: Integer?
+      attr_accessor memory_reservation: Integer?
+      attr_accessor name: String?
+      attr_accessor resource_requirements: Array[Types::EcsResourceRequirement]?
+    end
+
+    class EcsEnvironmentFile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class EcsEnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class EcsEphemeralStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_in_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_in_gi_b: Integer?
+    end
+
+    class EcsInferenceAcceleratorOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?device_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor device_type: String?
+    end
+
+    class EcsResourceRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class EcsTaskOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_overrides: Array[Types::EcsContainerOverride],
+        ?cpu: String,
+        ?ephemeral_storage: Types::EcsEphemeralStorage,
+        ?execution_role_arn: String,
+        ?inference_accelerator_overrides: Array[Types::EcsInferenceAcceleratorOverride],
+        ?memory: String,
+        ?task_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_overrides: Array[Types::EcsContainerOverride]?
+      attr_accessor cpu: String?
+      attr_accessor ephemeral_storage: Types::EcsEphemeralStorage?
+      attr_accessor execution_role_arn: String?
+      attr_accessor inference_accelerator_overrides: Array[Types::EcsInferenceAcceleratorOverride]?
+      attr_accessor memory: String?
+      attr_accessor task_role_arn: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern: String?
+    end
+
+    class FilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class FirehoseLogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_arn: String?
+    end
+
+    class FirehoseLogDestinationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_arn: String?
+    end
+
+    class InternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListPipesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?source_prefix: String,
+        ?target_prefix: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor source_prefix: String?
+      attr_accessor target_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListPipesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipes: Array[Types::Pipe],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipes: Array[Types::Pipe]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MQBrokerAccessCredentials
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?basic_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor basic_auth: String?
+
+      class BasicAuth < MQBrokerAccessCredentials
+      end
+      class Unknown < MQBrokerAccessCredentials
+      end
+    end
+
+    class MSKAccessCredentials
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sasl_scram512_auth: String,
+        ?client_certificate_tls_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sasl_scram512_auth: String?
+      attr_accessor client_certificate_tls_auth: String?
+
+      class SaslScram512Auth < MSKAccessCredentials
+      end
+      class ClientCertificateTlsAuth < MSKAccessCredentials
+      end
+      class Unknown < MSKAccessCredentials
+      end
+    end
+
+    class MultiMeasureAttributeMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?measure_value: String,
+        ?measure_value_type: String,
+        ?multi_measure_attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor measure_value: String?
+      attr_accessor measure_value_type: String?
+      attr_accessor multi_measure_attribute_name: String?
+    end
+
+    class MultiMeasureMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multi_measure_name: String,
+        ?multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multi_measure_name: String?
+      attr_accessor multi_measure_attribute_mappings: Array[Types::MultiMeasureAttributeMapping]?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?awsvpc_configuration: Types::AwsVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor awsvpc_configuration: Types::AwsVpcConfiguration?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Pipe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?state_reason: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?source: String,
+        ?target: String,
+        ?enrichment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor state_reason: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor enrichment: String?
+    end
+
+    class PipeEnrichmentHttpParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_parameter_values: Array[String],
+        ?header_parameters: Hash[String, String],
+        ?query_string_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_parameter_values: Array[String]?
+      attr_accessor header_parameters: Hash[String, String]?
+      attr_accessor query_string_parameters: Hash[String, String]?
+    end
+
+    class PipeEnrichmentParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_template: String,
+        ?http_parameters: Types::PipeEnrichmentHttpParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_template: String?
+      attr_accessor http_parameters: Types::PipeEnrichmentHttpParameters?
+    end
+
+    class PipeLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_log_destination: Types::S3LogDestination,
+        ?firehose_log_destination: Types::FirehoseLogDestination,
+        ?cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestination,
+        ?level: String,
+        ?include_execution_data: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_log_destination: Types::S3LogDestination?
+      attr_accessor firehose_log_destination: Types::FirehoseLogDestination?
+      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestination?
+      attr_accessor level: String?
+      attr_accessor include_execution_data: Array[String]?
+    end
+
+    class PipeLogConfigurationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_log_destination: Types::S3LogDestinationParameters,
+        ?firehose_log_destination: Types::FirehoseLogDestinationParameters,
+        ?cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestinationParameters,
+        ?level: String,
+        ?include_execution_data: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_log_destination: Types::S3LogDestinationParameters?
+      attr_accessor firehose_log_destination: Types::FirehoseLogDestinationParameters?
+      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestinationParameters?
+      attr_accessor level: String?
+      attr_accessor include_execution_data: Array[String]?
+    end
+
+    class PipeSourceActiveMQBrokerParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::MQBrokerAccessCredentials,
+        ?queue_name: String,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::MQBrokerAccessCredentials?
+      attr_accessor queue_name: String?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class PipeSourceDynamoDBStreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?on_partial_batch_item_failure: String,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?maximum_record_age_in_seconds: Integer,
+        ?maximum_retry_attempts: Integer,
+        ?parallelization_factor: Integer,
+        ?starting_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor on_partial_batch_item_failure: String?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor parallelization_factor: Integer?
+      attr_accessor starting_position: String?
+    end
+
+    class PipeSourceKinesisStreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?on_partial_batch_item_failure: String,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?maximum_record_age_in_seconds: Integer,
+        ?maximum_retry_attempts: Integer,
+        ?parallelization_factor: Integer,
+        ?starting_position: String,
+        ?starting_position_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor on_partial_batch_item_failure: String?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor parallelization_factor: Integer?
+      attr_accessor starting_position: String?
+      attr_accessor starting_position_timestamp: Time?
+    end
+
+    class PipeSourceManagedStreamingKafkaParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?starting_position: String,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?consumer_group_id: String,
+        ?credentials: Types::MSKAccessCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor starting_position: String?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor consumer_group_id: String?
+      attr_accessor credentials: Types::MSKAccessCredentials?
+    end
+
+    class PipeSourceParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_criteria: Types::FilterCriteria,
+        ?kinesis_stream_parameters: Types::PipeSourceKinesisStreamParameters,
+        ?dynamo_db_stream_parameters: Types::PipeSourceDynamoDBStreamParameters,
+        ?sqs_queue_parameters: Types::PipeSourceSqsQueueParameters,
+        ?active_mq_broker_parameters: Types::PipeSourceActiveMQBrokerParameters,
+        ?rabbit_mq_broker_parameters: Types::PipeSourceRabbitMQBrokerParameters,
+        ?managed_streaming_kafka_parameters: Types::PipeSourceManagedStreamingKafkaParameters,
+        ?self_managed_kafka_parameters: Types::PipeSourceSelfManagedKafkaParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor kinesis_stream_parameters: Types::PipeSourceKinesisStreamParameters?
+      attr_accessor dynamo_db_stream_parameters: Types::PipeSourceDynamoDBStreamParameters?
+      attr_accessor sqs_queue_parameters: Types::PipeSourceSqsQueueParameters?
+      attr_accessor active_mq_broker_parameters: Types::PipeSourceActiveMQBrokerParameters?
+      attr_accessor rabbit_mq_broker_parameters: Types::PipeSourceRabbitMQBrokerParameters?
+      attr_accessor managed_streaming_kafka_parameters: Types::PipeSourceManagedStreamingKafkaParameters?
+      attr_accessor self_managed_kafka_parameters: Types::PipeSourceSelfManagedKafkaParameters?
+    end
+
+    class PipeSourceRabbitMQBrokerParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::MQBrokerAccessCredentials,
+        ?queue_name: String,
+        ?virtual_host: String,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::MQBrokerAccessCredentials?
+      attr_accessor queue_name: String?
+      attr_accessor virtual_host: String?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class PipeSourceSelfManagedKafkaParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?starting_position: String,
+        ?additional_bootstrap_servers: Array[String],
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?consumer_group_id: String,
+        ?credentials: Types::SelfManagedKafkaAccessConfigurationCredentials,
+        ?server_root_ca_certificate: String,
+        ?vpc: Types::SelfManagedKafkaAccessConfigurationVpc,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor starting_position: String?
+      attr_accessor additional_bootstrap_servers: Array[String]?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor consumer_group_id: String?
+      attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials?
+      attr_accessor server_root_ca_certificate: String?
+      attr_accessor vpc: Types::SelfManagedKafkaAccessConfigurationVpc?
+    end
+
+    class PipeSourceSqsQueueParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class PipeTargetBatchJobParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_definition: String,
+        ?job_name: String,
+        ?array_properties: Types::BatchArrayProperties,
+        ?retry_strategy: Types::BatchRetryStrategy,
+        ?container_overrides: Types::BatchContainerOverrides,
+        ?depends_on: Array[Types::BatchJobDependency],
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_definition: String?
+      attr_accessor job_name: String?
+      attr_accessor array_properties: Types::BatchArrayProperties?
+      attr_accessor retry_strategy: Types::BatchRetryStrategy?
+      attr_accessor container_overrides: Types::BatchContainerOverrides?
+      attr_accessor depends_on: Array[Types::BatchJobDependency]?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class PipeTargetCloudWatchLogsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor timestamp: String?
+    end
+
+    class PipeTargetEcsTaskParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_definition_arn: String,
+        ?task_count: Integer,
+        ?launch_type: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?platform_version: String,
+        ?group: String,
+        ?capacity_provider_strategy: Array[Types::CapacityProviderStrategyItem],
+        ?enable_ecs_managed_tags: bool,
+        ?enable_execute_command: bool,
+        ?placement_constraints: Array[Types::PlacementConstraint],
+        ?placement_strategy: Array[Types::PlacementStrategy],
+        ?propagate_tags: String,
+        ?reference_id: String,
+        ?overrides: Types::EcsTaskOverride,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_definition_arn: String?
+      attr_accessor task_count: Integer?
+      attr_accessor launch_type: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor platform_version: String?
+      attr_accessor group: String?
+      attr_accessor capacity_provider_strategy: Array[Types::CapacityProviderStrategyItem]?
+      attr_accessor enable_ecs_managed_tags: bool?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor placement_constraints: Array[Types::PlacementConstraint]?
+      attr_accessor placement_strategy: Array[Types::PlacementStrategy]?
+      attr_accessor propagate_tags: String?
+      attr_accessor reference_id: String?
+      attr_accessor overrides: Types::EcsTaskOverride?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PipeTargetEventBridgeEventBusParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?detail_type: String,
+        ?source: String,
+        ?resources: Array[String],
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor detail_type: String?
+      attr_accessor source: String?
+      attr_accessor resources: Array[String]?
+      attr_accessor time: String?
+    end
+
+    class PipeTargetHttpParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_parameter_values: Array[String],
+        ?header_parameters: Hash[String, String],
+        ?query_string_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_parameter_values: Array[String]?
+      attr_accessor header_parameters: Hash[String, String]?
+      attr_accessor query_string_parameters: Hash[String, String]?
+    end
+
+    class PipeTargetKinesisStreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_key: String?
+    end
+
+    class PipeTargetLambdaFunctionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_type: String?
+    end
+
+    class PipeTargetParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_template: String,
+        ?lambda_function_parameters: Types::PipeTargetLambdaFunctionParameters,
+        ?step_function_state_machine_parameters: Types::PipeTargetStateMachineParameters,
+        ?kinesis_stream_parameters: Types::PipeTargetKinesisStreamParameters,
+        ?ecs_task_parameters: Types::PipeTargetEcsTaskParameters,
+        ?batch_job_parameters: Types::PipeTargetBatchJobParameters,
+        ?sqs_queue_parameters: Types::PipeTargetSqsQueueParameters,
+        ?http_parameters: Types::PipeTargetHttpParameters,
+        ?redshift_data_parameters: Types::PipeTargetRedshiftDataParameters,
+        ?sage_maker_pipeline_parameters: Types::PipeTargetSageMakerPipelineParameters,
+        ?event_bridge_event_bus_parameters: Types::PipeTargetEventBridgeEventBusParameters,
+        ?cloud_watch_logs_parameters: Types::PipeTargetCloudWatchLogsParameters,
+        ?timestream_parameters: Types::PipeTargetTimestreamParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_template: String?
+      attr_accessor lambda_function_parameters: Types::PipeTargetLambdaFunctionParameters?
+      attr_accessor step_function_state_machine_parameters: Types::PipeTargetStateMachineParameters?
+      attr_accessor kinesis_stream_parameters: Types::PipeTargetKinesisStreamParameters?
+      attr_accessor ecs_task_parameters: Types::PipeTargetEcsTaskParameters?
+      attr_accessor batch_job_parameters: Types::PipeTargetBatchJobParameters?
+      attr_accessor sqs_queue_parameters: Types::PipeTargetSqsQueueParameters?
+      attr_accessor http_parameters: Types::PipeTargetHttpParameters?
+      attr_accessor redshift_data_parameters: Types::PipeTargetRedshiftDataParameters?
+      attr_accessor sage_maker_pipeline_parameters: Types::PipeTargetSageMakerPipelineParameters?
+      attr_accessor event_bridge_event_bus_parameters: Types::PipeTargetEventBridgeEventBusParameters?
+      attr_accessor cloud_watch_logs_parameters: Types::PipeTargetCloudWatchLogsParameters?
+      attr_accessor timestream_parameters: Types::PipeTargetTimestreamParameters?
+    end
+
+    class PipeTargetRedshiftDataParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_manager_arn: String,
+        ?database: String,
+        ?db_user: String,
+        ?statement_name: String,
+        ?with_event: bool,
+        ?sqls: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_manager_arn: String?
+      attr_accessor database: String?
+      attr_accessor db_user: String?
+      attr_accessor statement_name: String?
+      attr_accessor with_event: bool?
+      attr_accessor sqls: Array[String]?
+    end
+
+    class PipeTargetSageMakerPipelineParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_parameter_list: Array[Types::SageMakerPipelineParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_parameter_list: Array[Types::SageMakerPipelineParameter]?
+    end
+
+    class PipeTargetSqsQueueParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_group_id: String,
+        ?message_deduplication_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_group_id: String?
+      attr_accessor message_deduplication_id: String?
+    end
+
+    class PipeTargetStateMachineParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_type: String?
+    end
+
+    class PipeTargetTimestreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_value: String,
+        ?epoch_time_unit: String,
+        ?time_field_type: String,
+        ?timestamp_format: String,
+        ?version_value: String,
+        ?dimension_mappings: Array[Types::DimensionMapping],
+        ?single_measure_mappings: Array[Types::SingleMeasureMapping],
+        ?multi_measure_mappings: Array[Types::MultiMeasureMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_value: String?
+      attr_accessor epoch_time_unit: String?
+      attr_accessor time_field_type: String?
+      attr_accessor timestamp_format: String?
+      attr_accessor version_value: String?
+      attr_accessor dimension_mappings: Array[Types::DimensionMapping]?
+      attr_accessor single_measure_mappings: Array[Types::SingleMeasureMapping]?
+      attr_accessor multi_measure_mappings: Array[Types::MultiMeasureMapping]?
+    end
+
+    class PlacementConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor expression: String?
+    end
+
+    class PlacementStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor field: String?
+    end
+
+    class S3LogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+        ?bucket_owner: String,
+        ?output_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+      attr_accessor bucket_owner: String?
+      attr_accessor output_format: String?
+    end
+
+    class S3LogDestinationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?bucket_owner: String,
+        ?output_format: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_owner: String?
+      attr_accessor output_format: String?
+      attr_accessor prefix: String?
+    end
+
+    class SageMakerPipelineParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class SelfManagedKafkaAccessConfigurationCredentials
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?basic_auth: String,
+        ?sasl_scram512_auth: String,
+        ?sasl_scram256_auth: String,
+        ?client_certificate_tls_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor basic_auth: String?
+      attr_accessor sasl_scram512_auth: String?
+      attr_accessor sasl_scram256_auth: String?
+      attr_accessor client_certificate_tls_auth: String?
+
+      class BasicAuth < SelfManagedKafkaAccessConfigurationCredentials
+      end
+      class SaslScram512Auth < SelfManagedKafkaAccessConfigurationCredentials
+      end
+      class SaslScram256Auth < SelfManagedKafkaAccessConfigurationCredentials
+      end
+      class ClientCertificateTlsAuth < SelfManagedKafkaAccessConfigurationCredentials
+      end
+      class Unknown < SelfManagedKafkaAccessConfigurationCredentials
+      end
+    end
+
+    class SelfManagedKafkaAccessConfigurationVpc
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_group: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_group: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SingleMeasureMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?measure_value: String,
+        ?measure_value_type: String,
+        ?measure_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor measure_value: String?
+      attr_accessor measure_value_type: String?
+      attr_accessor measure_name: String?
+    end
+
+    class StartPipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StartPipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class StopPipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StopPipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?desired_state: String,
+        ?source_parameters: Types::UpdatePipeSourceParameters,
+        ?enrichment: String,
+        ?enrichment_parameters: Types::PipeEnrichmentParameters,
+        ?target: String,
+        ?target_parameters: Types::PipeTargetParameters,
+        ?role_arn: String,
+        ?log_configuration: Types::PipeLogConfigurationParameters,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor desired_state: String?
+      attr_accessor source_parameters: Types::UpdatePipeSourceParameters?
+      attr_accessor enrichment: String?
+      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters?
+      attr_accessor target: String?
+      attr_accessor target_parameters: Types::PipeTargetParameters?
+      attr_accessor role_arn: String?
+      attr_accessor log_configuration: Types::PipeLogConfigurationParameters?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class UpdatePipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?desired_state: String,
+        ?current_state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor desired_state: String?
+      attr_accessor current_state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class UpdatePipeSourceActiveMQBrokerParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::MQBrokerAccessCredentials,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::MQBrokerAccessCredentials?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class UpdatePipeSourceDynamoDBStreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?on_partial_batch_item_failure: String,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?maximum_record_age_in_seconds: Integer,
+        ?maximum_retry_attempts: Integer,
+        ?parallelization_factor: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor on_partial_batch_item_failure: String?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor parallelization_factor: Integer?
+    end
+
+    class UpdatePipeSourceKinesisStreamParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?on_partial_batch_item_failure: String,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?maximum_record_age_in_seconds: Integer,
+        ?maximum_retry_attempts: Integer,
+        ?parallelization_factor: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor on_partial_batch_item_failure: String?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor parallelization_factor: Integer?
+    end
+
+    class UpdatePipeSourceManagedStreamingKafkaParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?credentials: Types::MSKAccessCredentials,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor credentials: Types::MSKAccessCredentials?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class UpdatePipeSourceParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_criteria: Types::FilterCriteria,
+        ?kinesis_stream_parameters: Types::UpdatePipeSourceKinesisStreamParameters,
+        ?dynamo_db_stream_parameters: Types::UpdatePipeSourceDynamoDBStreamParameters,
+        ?sqs_queue_parameters: Types::UpdatePipeSourceSqsQueueParameters,
+        ?active_mq_broker_parameters: Types::UpdatePipeSourceActiveMQBrokerParameters,
+        ?rabbit_mq_broker_parameters: Types::UpdatePipeSourceRabbitMQBrokerParameters,
+        ?managed_streaming_kafka_parameters: Types::UpdatePipeSourceManagedStreamingKafkaParameters,
+        ?self_managed_kafka_parameters: Types::UpdatePipeSourceSelfManagedKafkaParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor kinesis_stream_parameters: Types::UpdatePipeSourceKinesisStreamParameters?
+      attr_accessor dynamo_db_stream_parameters: Types::UpdatePipeSourceDynamoDBStreamParameters?
+      attr_accessor sqs_queue_parameters: Types::UpdatePipeSourceSqsQueueParameters?
+      attr_accessor active_mq_broker_parameters: Types::UpdatePipeSourceActiveMQBrokerParameters?
+      attr_accessor rabbit_mq_broker_parameters: Types::UpdatePipeSourceRabbitMQBrokerParameters?
+      attr_accessor managed_streaming_kafka_parameters: Types::UpdatePipeSourceManagedStreamingKafkaParameters?
+      attr_accessor self_managed_kafka_parameters: Types::UpdatePipeSourceSelfManagedKafkaParameters?
+    end
+
+    class UpdatePipeSourceRabbitMQBrokerParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::MQBrokerAccessCredentials,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::MQBrokerAccessCredentials?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class UpdatePipeSourceSelfManagedKafkaParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?credentials: Types::SelfManagedKafkaAccessConfigurationCredentials,
+        ?server_root_ca_certificate: String,
+        ?vpc: Types::SelfManagedKafkaAccessConfigurationVpc,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials?
+      attr_accessor server_root_ca_certificate: String?
+      attr_accessor vpc: Types::SelfManagedKafkaAccessConfigurationVpc?
+    end
+
+    class UpdatePipeSourceSqsQueueParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

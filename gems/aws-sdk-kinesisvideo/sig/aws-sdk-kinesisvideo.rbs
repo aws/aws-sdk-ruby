@@ -1,0 +1,5 @@
+  module Aws
+    module KinesisVideo
+      VERSION: String
+    end
+  end

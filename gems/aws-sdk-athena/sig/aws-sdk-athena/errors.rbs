@@ -1,0 +1,25 @@
+module Aws::Athena
+  module Errors
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def athena_error_code: () -> String?
+      def message: () -> String?
+    end
+    class MetadataException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class SessionAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module ResourceExplorer2
+      VERSION: String
+    end
+  end

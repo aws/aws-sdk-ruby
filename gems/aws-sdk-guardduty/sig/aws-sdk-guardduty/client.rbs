@@ -1,0 +1,1066 @@
+module Aws::GuardDuty
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GuardDuty::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptAdministratorInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptAdministratorInvitationResponse]
+    end
+    def accept_administrator_invitation: (
+      ?detector_id: String,
+      ?administrator_id: String,
+      ?invitation_id: String
+    ) -> _AcceptAdministratorInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAdministratorInvitationResponse
+
+    interface _AcceptInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptInvitationResponse]
+    end
+    def accept_invitation: (
+      ?detector_id: String,
+      ?master_id: String,
+      ?invitation_id: String
+    ) -> _AcceptInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInvitationResponse
+
+    interface _ArchiveFindingsResponse
+      include Smithy::Client::_Response[Types::ArchiveFindingsResponse]
+    end
+    def archive_findings: (
+      ?detector_id: String,
+      ?finding_ids: Array[String]
+    ) -> _ArchiveFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ArchiveFindingsResponse
+
+    interface _CreateDetectorResponse
+      include Smithy::Client::_Response[Types::CreateDetectorResponse]
+      def detector_id: () -> String?
+      def unprocessed_data_sources: () -> Types::UnprocessedDataSourcesResult?
+    end
+    def create_detector: (
+      ?enable: bool,
+      ?client_token: String,
+      ?finding_publishing_frequency: String,
+      ?data_sources: {
+        s3_logs: {
+          enable: bool
+        },
+        kubernetes: {
+          audit_logs: {
+            enable: untyped
+          }
+        },
+        malware_protection: {
+          scan_ec2_instance_with_findings: {
+            ebs_volumes: untyped
+          }
+        }
+      },
+      ?tags: Hash[String, String],
+      ?features: Array[
+        {
+          name: String,
+          status: String,
+          additional_configuration: Array[
+            {
+              name: String,
+              status: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDetectorResponse
+
+    interface _CreateFilterResponse
+      include Smithy::Client::_Response[Types::CreateFilterResponse]
+      def name: () -> String?
+    end
+    def create_filter: (
+      ?detector_id: String,
+      ?name: String,
+      ?description: String,
+      ?action: String,
+      ?rank: Integer,
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            neq: Array[String],
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            equals: Array[String],
+            not_equals: Array[String],
+            greater_than: Integer,
+            greater_than_or_equal: untyped,
+            less_than: untyped,
+            less_than_or_equal: untyped
+          }
+        ]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFilterResponse
+
+    interface _CreateIPSetResponse
+      include Smithy::Client::_Response[Types::CreateIPSetResponse]
+      def ip_set_id: () -> String?
+    end
+    def create_ip_set: (
+      ?detector_id: String,
+      ?name: String,
+      ?format: String,
+      ?location: String,
+      ?activate: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?expected_bucket_owner: String
+    ) -> _CreateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIPSetResponse
+
+    interface _CreateMalwareProtectionPlanResponse
+      include Smithy::Client::_Response[Types::CreateMalwareProtectionPlanResponse]
+      def malware_protection_plan_id: () -> String?
+    end
+    def create_malware_protection_plan: (
+      ?client_token: String,
+      ?role: String,
+      ?protected_resource: {
+        s3_bucket: {
+          bucket_name: String,
+          object_prefixes: Array[String]
+        }
+      },
+      ?actions: {
+        tagging: {
+          status: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateMalwareProtectionPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMalwareProtectionPlanResponse
+
+    interface _CreateMembersResponse
+      include Smithy::Client::_Response[Types::CreateMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def create_members: (
+      ?detector_id: String,
+      ?account_details: Array[
+        {
+          account_id: String,
+          email: String
+        }
+      ]
+    ) -> _CreateMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembersResponse
+
+    interface _CreatePublishingDestinationResponse
+      include Smithy::Client::_Response[Types::CreatePublishingDestinationResponse]
+      def destination_id: () -> String?
+    end
+    def create_publishing_destination: (
+      ?detector_id: String,
+      ?destination_type: String,
+      ?destination_properties: {
+        destination_arn: String,
+        kms_key_arn: untyped
+      },
+      ?client_token: String
+    ) -> _CreatePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePublishingDestinationResponse
+
+    interface _CreateSampleFindingsResponse
+      include Smithy::Client::_Response[Types::CreateSampleFindingsResponse]
+    end
+    def create_sample_findings: (
+      ?detector_id: String,
+      ?finding_types: Array[String]
+    ) -> _CreateSampleFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSampleFindingsResponse
+
+    interface _CreateThreatIntelSetResponse
+      include Smithy::Client::_Response[Types::CreateThreatIntelSetResponse]
+      def threat_intel_set_id: () -> String?
+    end
+    def create_threat_intel_set: (
+      ?detector_id: String,
+      ?name: String,
+      ?format: String,
+      ?location: String,
+      ?activate: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?expected_bucket_owner: String
+    ) -> _CreateThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThreatIntelSetResponse
+
+    interface _DeclineInvitationsResponse
+      include Smithy::Client::_Response[Types::DeclineInvitationsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def decline_invitations: (
+      ?account_ids: Array[String]
+    ) -> _DeclineInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeclineInvitationsResponse
+
+    interface _DeleteDetectorResponse
+      include Smithy::Client::_Response[Types::DeleteDetectorResponse]
+    end
+    def delete_detector: (
+      ?detector_id: String
+    ) -> _DeleteDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDetectorResponse
+
+    interface _DeleteFilterResponse
+      include Smithy::Client::_Response[Types::DeleteFilterResponse]
+    end
+    def delete_filter: (
+      ?detector_id: String,
+      ?filter_name: String
+    ) -> _DeleteFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFilterResponse
+
+    interface _DeleteIPSetResponse
+      include Smithy::Client::_Response[Types::DeleteIPSetResponse]
+    end
+    def delete_ip_set: (
+      ?detector_id: String,
+      ?ip_set_id: String
+    ) -> _DeleteIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIPSetResponse
+
+    interface _DeleteInvitationsResponse
+      include Smithy::Client::_Response[Types::DeleteInvitationsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def delete_invitations: (
+      ?account_ids: Array[String]
+    ) -> _DeleteInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInvitationsResponse
+
+    interface _DeleteMalwareProtectionPlanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_malware_protection_plan: (
+      ?malware_protection_plan_id: String
+    ) -> _DeleteMalwareProtectionPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMalwareProtectionPlanResponse
+
+    interface _DeleteMembersResponse
+      include Smithy::Client::_Response[Types::DeleteMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def delete_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _DeleteMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMembersResponse
+
+    interface _DeletePublishingDestinationResponse
+      include Smithy::Client::_Response[Types::DeletePublishingDestinationResponse]
+    end
+    def delete_publishing_destination: (
+      ?detector_id: String,
+      ?destination_id: String
+    ) -> _DeletePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublishingDestinationResponse
+
+    interface _DeleteThreatIntelSetResponse
+      include Smithy::Client::_Response[Types::DeleteThreatIntelSetResponse]
+    end
+    def delete_threat_intel_set: (
+      ?detector_id: String,
+      ?threat_intel_set_id: String
+    ) -> _DeleteThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThreatIntelSetResponse
+
+    interface _DescribeMalwareScansResponse
+      include Smithy::Client::_Response[Types::DescribeMalwareScansResponse]
+      def scans: () -> Array[Types::Scan]?
+      def next_token: () -> String?
+    end
+    def describe_malware_scans: (
+      ?detector_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter_criteria: {
+        filter_criterion: Array[
+          {
+            criterion_key: String,
+            filter_condition: {
+              equals_value: String,
+              greater_than: Integer,
+              less_than: untyped
+            }
+          }
+        ]
+      },
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _DescribeMalwareScansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMalwareScansResponse
+
+    interface _DescribeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigurationResponse]
+      def auto_enable: () -> bool?
+      def member_account_limit_reached: () -> bool?
+      def data_sources: () -> Types::OrganizationDataSourceConfigurationsResult?
+      def features: () -> Array[Types::OrganizationFeatureConfigurationResult]?
+      def next_token: () -> String?
+      def auto_enable_organization_members: () -> String?
+    end
+    def describe_organization_configuration: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigurationResponse
+
+    interface _DescribePublishingDestinationResponse
+      include Smithy::Client::_Response[Types::DescribePublishingDestinationResponse]
+      def destination_id: () -> String?
+      def destination_type: () -> String?
+      def status: () -> String?
+      def publishing_failure_start_timestamp: () -> Integer?
+      def destination_properties: () -> Types::DestinationProperties?
+    end
+    def describe_publishing_destination: (
+      ?detector_id: String,
+      ?destination_id: String
+    ) -> _DescribePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePublishingDestinationResponse
+
+    interface _DisableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::DisableOrganizationAdminAccountResponse]
+    end
+    def disable_organization_admin_account: (
+      ?admin_account_id: String
+    ) -> _DisableOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationAdminAccountResponse
+
+    interface _DisassociateFromAdministratorAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateFromAdministratorAccountResponse]
+    end
+    def disassociate_from_administrator_account: (
+      ?detector_id: String
+    ) -> _DisassociateFromAdministratorAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFromAdministratorAccountResponse
+
+    interface _DisassociateFromMasterAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateFromMasterAccountResponse]
+    end
+    def disassociate_from_master_account: (
+      ?detector_id: String
+    ) -> _DisassociateFromMasterAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFromMasterAccountResponse
+
+    interface _DisassociateMembersResponse
+      include Smithy::Client::_Response[Types::DisassociateMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def disassociate_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _DisassociateMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMembersResponse
+
+    interface _EnableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::EnableOrganizationAdminAccountResponse]
+    end
+    def enable_organization_admin_account: (
+      ?admin_account_id: String
+    ) -> _EnableOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationAdminAccountResponse
+
+    interface _GetAdministratorAccountResponse
+      include Smithy::Client::_Response[Types::GetAdministratorAccountResponse]
+      def administrator: () -> Types::Administrator?
+    end
+    def get_administrator_account: (
+      ?detector_id: String
+    ) -> _GetAdministratorAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdministratorAccountResponse
+
+    interface _GetCoverageStatisticsResponse
+      include Smithy::Client::_Response[Types::GetCoverageStatisticsResponse]
+      def coverage_statistics: () -> Types::CoverageStatistics?
+    end
+    def get_coverage_statistics: (
+      ?detector_id: String,
+      ?filter_criteria: {
+        filter_criterion: Array[
+          {
+            criterion_key: String,
+            filter_condition: {
+              equals: Array[String],
+              not_equals: Array[String]
+            }
+          }
+        ]
+      },
+      ?statistics_type: Array[String]
+    ) -> _GetCoverageStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoverageStatisticsResponse
+
+    interface _GetDetectorResponse
+      include Smithy::Client::_Response[Types::GetDetectorResponse]
+      def created_at: () -> String?
+      def finding_publishing_frequency: () -> String?
+      def service_role: () -> String?
+      def status: () -> String?
+      def updated_at: () -> String?
+      def data_sources: () -> Types::DataSourceConfigurationsResult?
+      def tags: () -> Hash[String, String]?
+      def features: () -> Array[Types::DetectorFeatureConfigurationResult]?
+    end
+    def get_detector: (
+      ?detector_id: String
+    ) -> _GetDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDetectorResponse
+
+    interface _GetFilterResponse
+      include Smithy::Client::_Response[Types::GetFilterResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def action: () -> String?
+      def rank: () -> Integer?
+      def finding_criteria: () -> Types::FindingCriteria?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_filter: (
+      ?detector_id: String,
+      ?filter_name: String
+    ) -> _GetFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFilterResponse
+
+    interface _GetFindingsResponse
+      include Smithy::Client::_Response[Types::GetFindingsResponse]
+      def findings: () -> Array[Types::Finding]?
+    end
+    def get_findings: (
+      ?detector_id: String,
+      ?finding_ids: Array[String],
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _GetFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsResponse
+
+    interface _GetFindingsStatisticsResponse
+      include Smithy::Client::_Response[Types::GetFindingsStatisticsResponse]
+      def finding_statistics: () -> Types::FindingStatistics?
+      def next_token: () -> String?
+    end
+    def get_findings_statistics: (
+      ?detector_id: String,
+      ?finding_statistic_types: Array[String],
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            neq: Array[String],
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            equals: Array[String],
+            not_equals: Array[String],
+            greater_than: Integer,
+            greater_than_or_equal: untyped,
+            less_than: untyped,
+            less_than_or_equal: untyped
+          }
+        ]
+      },
+      ?group_by: String,
+      ?order_by: String,
+      ?max_results: Integer
+    ) -> _GetFindingsStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsStatisticsResponse
+
+    interface _GetIPSetResponse
+      include Smithy::Client::_Response[Types::GetIPSetResponse]
+      def name: () -> String?
+      def format: () -> String?
+      def location: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def expected_bucket_owner: () -> String?
+    end
+    def get_ip_set: (
+      ?detector_id: String,
+      ?ip_set_id: String
+    ) -> _GetIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIPSetResponse
+
+    interface _GetInvitationsCountResponse
+      include Smithy::Client::_Response[Types::GetInvitationsCountResponse]
+      def invitations_count: () -> Integer?
+    end
+    def get_invitations_count: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvitationsCountResponse
+
+    interface _GetMalwareProtectionPlanResponse
+      include Smithy::Client::_Response[Types::GetMalwareProtectionPlanResponse]
+      def arn: () -> String?
+      def role: () -> String?
+      def protected_resource: () -> Types::CreateProtectedResource?
+      def actions: () -> Types::MalwareProtectionPlanActions?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[Types::MalwareProtectionPlanStatusReason]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_malware_protection_plan: (
+      ?malware_protection_plan_id: String
+    ) -> _GetMalwareProtectionPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMalwareProtectionPlanResponse
+
+    interface _GetMalwareScanSettingsResponse
+      include Smithy::Client::_Response[Types::GetMalwareScanSettingsResponse]
+      def scan_resource_criteria: () -> Types::ScanResourceCriteria?
+      def ebs_snapshot_preservation: () -> String?
+    end
+    def get_malware_scan_settings: (
+      ?detector_id: String
+    ) -> _GetMalwareScanSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMalwareScanSettingsResponse
+
+    interface _GetMasterAccountResponse
+      include Smithy::Client::_Response[Types::GetMasterAccountResponse]
+      def master: () -> Types::Master?
+    end
+    def get_master_account: (
+      ?detector_id: String
+    ) -> _GetMasterAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMasterAccountResponse
+
+    interface _GetMemberDetectorsResponse
+      include Smithy::Client::_Response[Types::GetMemberDetectorsResponse]
+      def member_data_source_configurations: () -> Array[Types::MemberDataSourceConfiguration]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def get_member_detectors: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _GetMemberDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemberDetectorsResponse
+
+    interface _GetMembersResponse
+      include Smithy::Client::_Response[Types::GetMembersResponse]
+      def members: () -> Array[Types::Member]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def get_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _GetMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMembersResponse
+
+    interface _GetOrganizationStatisticsResponse
+      include Smithy::Client::_Response[Types::GetOrganizationStatisticsResponse]
+      def organization_details: () -> Types::OrganizationDetails?
+    end
+    def get_organization_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationStatisticsResponse
+
+    interface _GetRemainingFreeTrialDaysResponse
+      include Smithy::Client::_Response[Types::GetRemainingFreeTrialDaysResponse]
+      def accounts: () -> Array[Types::AccountFreeTrialInfo]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def get_remaining_free_trial_days: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _GetRemainingFreeTrialDaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRemainingFreeTrialDaysResponse
+
+    interface _GetThreatIntelSetResponse
+      include Smithy::Client::_Response[Types::GetThreatIntelSetResponse]
+      def name: () -> String?
+      def format: () -> String?
+      def location: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def expected_bucket_owner: () -> String?
+    end
+    def get_threat_intel_set: (
+      ?detector_id: String,
+      ?threat_intel_set_id: String
+    ) -> _GetThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThreatIntelSetResponse
+
+    interface _GetUsageStatisticsResponse
+      include Smithy::Client::_Response[Types::GetUsageStatisticsResponse]
+      def usage_statistics: () -> Types::UsageStatistics?
+      def next_token: () -> String?
+    end
+    def get_usage_statistics: (
+      ?detector_id: String,
+      ?usage_statistic_type: String,
+      ?usage_criteria: {
+        account_ids: Array[String],
+        data_sources: Array[String],
+        resources: Array[String],
+        features: Array[String]
+      },
+      ?unit: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetUsageStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsageStatisticsResponse
+
+    interface _InviteMembersResponse
+      include Smithy::Client::_Response[Types::InviteMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def invite_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String],
+      ?disable_email_notification: bool,
+      ?message: String
+    ) -> _InviteMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InviteMembersResponse
+
+    interface _ListCoverageResponse
+      include Smithy::Client::_Response[Types::ListCoverageResponse]
+      def resources: () -> Array[Types::CoverageResource]?
+      def next_token: () -> String?
+    end
+    def list_coverage: (
+      ?detector_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter_criteria: {
+        filter_criterion: Array[
+          {
+            criterion_key: String,
+            filter_condition: {
+              equals: Array[String],
+              not_equals: Array[String]
+            }
+          }
+        ]
+      },
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _ListCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoverageResponse
+
+    interface _ListDetectorsResponse
+      include Smithy::Client::_Response[Types::ListDetectorsResponse]
+      def detector_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_detectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDetectorsResponse
+
+    interface _ListFiltersResponse
+      include Smithy::Client::_Response[Types::ListFiltersResponse]
+      def filter_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_filters: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFiltersResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsResponse]
+      def finding_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_findings: (
+      ?detector_id: String,
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            neq: Array[String],
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            equals: Array[String],
+            not_equals: Array[String],
+            greater_than: Integer,
+            greater_than_or_equal: untyped,
+            less_than: untyped,
+            less_than_or_equal: untyped
+          }
+        ]
+      },
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListIPSetsResponse
+      include Smithy::Client::_Response[Types::ListIPSetsResponse]
+      def ip_set_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_ip_sets: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIPSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIPSetsResponse
+
+    interface _ListInvitationsResponse
+      include Smithy::Client::_Response[Types::ListInvitationsResponse]
+      def invitations: () -> Array[Types::Invitation]?
+      def next_token: () -> String?
+    end
+    def list_invitations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvitationsResponse
+
+    interface _ListMalwareProtectionPlansResponse
+      include Smithy::Client::_Response[Types::ListMalwareProtectionPlansResponse]
+      def malware_protection_plans: () -> Array[Types::MalwareProtectionPlanSummary]?
+      def next_token: () -> String?
+    end
+    def list_malware_protection_plans: (
+      ?next_token: String
+    ) -> _ListMalwareProtectionPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMalwareProtectionPlansResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersResponse]
+      def members: () -> Array[Types::Member]?
+      def next_token: () -> String?
+    end
+    def list_members: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?only_associated: String
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListOrganizationAdminAccountsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationAdminAccountsResponse]
+      def admin_accounts: () -> Array[Types::AdminAccount]?
+      def next_token: () -> String?
+    end
+    def list_organization_admin_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOrganizationAdminAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationAdminAccountsResponse
+
+    interface _ListPublishingDestinationsResponse
+      include Smithy::Client::_Response[Types::ListPublishingDestinationsResponse]
+      def destinations: () -> Array[Types::Destination]?
+      def next_token: () -> String?
+    end
+    def list_publishing_destinations: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPublishingDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPublishingDestinationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListThreatIntelSetsResponse
+      include Smithy::Client::_Response[Types::ListThreatIntelSetsResponse]
+      def threat_intel_set_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_threat_intel_sets: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListThreatIntelSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatIntelSetsResponse
+
+    interface _StartMalwareScanResponse
+      include Smithy::Client::_Response[Types::StartMalwareScanResponse]
+      def scan_id: () -> String?
+    end
+    def start_malware_scan: (
+      ?resource_arn: String
+    ) -> _StartMalwareScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMalwareScanResponse
+
+    interface _StartMonitoringMembersResponse
+      include Smithy::Client::_Response[Types::StartMonitoringMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def start_monitoring_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _StartMonitoringMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMonitoringMembersResponse
+
+    interface _StopMonitoringMembersResponse
+      include Smithy::Client::_Response[Types::StopMonitoringMembersResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def stop_monitoring_members: (
+      ?detector_id: String,
+      ?account_ids: Array[String]
+    ) -> _StopMonitoringMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMonitoringMembersResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UnarchiveFindingsResponse
+      include Smithy::Client::_Response[Types::UnarchiveFindingsResponse]
+    end
+    def unarchive_findings: (
+      ?detector_id: String,
+      ?finding_ids: Array[String]
+    ) -> _UnarchiveFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnarchiveFindingsResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDetectorResponse
+      include Smithy::Client::_Response[Types::UpdateDetectorResponse]
+    end
+    def update_detector: (
+      ?detector_id: String,
+      ?enable: bool,
+      ?finding_publishing_frequency: String,
+      ?data_sources: {
+        s3_logs: {
+          enable: bool
+        },
+        kubernetes: {
+          audit_logs: {
+            enable: untyped
+          }
+        },
+        malware_protection: {
+          scan_ec2_instance_with_findings: {
+            ebs_volumes: untyped
+          }
+        }
+      },
+      ?features: Array[
+        {
+          name: String,
+          status: String,
+          additional_configuration: Array[
+            {
+              name: String,
+              status: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDetectorResponse
+
+    interface _UpdateFilterResponse
+      include Smithy::Client::_Response[Types::UpdateFilterResponse]
+      def name: () -> String?
+    end
+    def update_filter: (
+      ?detector_id: String,
+      ?filter_name: String,
+      ?description: String,
+      ?action: String,
+      ?rank: Integer,
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            neq: Array[String],
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            equals: Array[String],
+            not_equals: Array[String],
+            greater_than: Integer,
+            greater_than_or_equal: untyped,
+            less_than: untyped,
+            less_than_or_equal: untyped
+          }
+        ]
+      }
+    ) -> _UpdateFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFilterResponse
+
+    interface _UpdateFindingsFeedbackResponse
+      include Smithy::Client::_Response[Types::UpdateFindingsFeedbackResponse]
+    end
+    def update_findings_feedback: (
+      ?detector_id: String,
+      ?finding_ids: Array[String],
+      ?feedback: String,
+      ?comments: String
+    ) -> _UpdateFindingsFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFindingsFeedbackResponse
+
+    interface _UpdateIPSetResponse
+      include Smithy::Client::_Response[Types::UpdateIPSetResponse]
+    end
+    def update_ip_set: (
+      ?detector_id: String,
+      ?ip_set_id: String,
+      ?name: String,
+      ?location: String,
+      ?activate: bool,
+      ?expected_bucket_owner: String
+    ) -> _UpdateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIPSetResponse
+
+    interface _UpdateMalwareProtectionPlanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_malware_protection_plan: (
+      ?malware_protection_plan_id: String,
+      ?role: String,
+      ?actions: {
+        tagging: {
+          status: String
+        }
+      },
+      ?protected_resource: {
+        s3_bucket: {
+          object_prefixes: Array[String]
+        }
+      }
+    ) -> _UpdateMalwareProtectionPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMalwareProtectionPlanResponse
+
+    interface _UpdateMalwareScanSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateMalwareScanSettingsResponse]
+    end
+    def update_malware_scan_settings: (
+      ?detector_id: String,
+      ?scan_resource_criteria: {
+        include: Hash[String,
+          {
+            map_equals: Array[
+              {
+                key: String,
+                value: String
+              }
+            ]
+          }
+        ],
+        exclude: untyped
+      },
+      ?ebs_snapshot_preservation: String
+    ) -> _UpdateMalwareScanSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMalwareScanSettingsResponse
+
+    interface _UpdateMemberDetectorsResponse
+      include Smithy::Client::_Response[Types::UpdateMemberDetectorsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def update_member_detectors: (
+      ?detector_id: String,
+      ?account_ids: Array[String],
+      ?data_sources: {
+        s3_logs: {
+          enable: bool
+        },
+        kubernetes: {
+          audit_logs: {
+            enable: untyped
+          }
+        },
+        malware_protection: {
+          scan_ec2_instance_with_findings: {
+            ebs_volumes: untyped
+          }
+        }
+      },
+      ?features: Array[
+        {
+          name: String,
+          status: String,
+          additional_configuration: Array[
+            {
+              name: String,
+              status: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateMemberDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMemberDetectorsResponse
+
+    interface _UpdateOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateOrganizationConfigurationResponse]
+    end
+    def update_organization_configuration: (
+      ?detector_id: String,
+      ?auto_enable: bool,
+      ?data_sources: {
+        s3_logs: {
+          auto_enable: bool
+        },
+        kubernetes: {
+          audit_logs: {
+            auto_enable: untyped
+          }
+        },
+        malware_protection: {
+          scan_ec2_instance_with_findings: {
+            ebs_volumes: {
+              auto_enable: untyped
+            }
+          }
+        }
+      },
+      ?features: Array[
+        {
+          name: String,
+          auto_enable: String,
+          additional_configuration: Array[
+            {
+              name: String,
+              auto_enable: untyped
+            }
+          ]
+        }
+      ],
+      ?auto_enable_organization_members: String
+    ) -> _UpdateOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrganizationConfigurationResponse
+
+    interface _UpdatePublishingDestinationResponse
+      include Smithy::Client::_Response[Types::UpdatePublishingDestinationResponse]
+    end
+    def update_publishing_destination: (
+      ?detector_id: String,
+      ?destination_id: String,
+      ?destination_properties: {
+        destination_arn: String,
+        kms_key_arn: untyped
+      }
+    ) -> _UpdatePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePublishingDestinationResponse
+
+    interface _UpdateThreatIntelSetResponse
+      include Smithy::Client::_Response[Types::UpdateThreatIntelSetResponse]
+    end
+    def update_threat_intel_set: (
+      ?detector_id: String,
+      ?threat_intel_set_id: String,
+      ?name: String,
+      ?location: String,
+      ?activate: bool,
+      ?expected_bucket_owner: String
+    ) -> _UpdateThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThreatIntelSetResponse
+  end
+end

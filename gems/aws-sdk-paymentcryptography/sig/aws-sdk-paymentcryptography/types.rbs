@@ -1,0 +1,1067 @@
+module Aws::PaymentCryptography
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Alias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor key_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor key_arn: String?
+    end
+
+    class CreateAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class CreateKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Types::KeyAttributes,
+        ?key_check_value_algorithm: String,
+        ?exportable: bool,
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?derive_key_usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor key_check_value_algorithm: String?
+      attr_accessor exportable: bool?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor derive_key_usage: String?
+    end
+
+    class CreateKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class DeleteAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+    end
+
+    class DeleteAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?delete_key_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor delete_key_in_days: Integer?
+    end
+
+    class DeleteKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class DiffieHellmanDerivationData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?shared_information: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_information: String?
+
+      class SharedInformation < DiffieHellmanDerivationData
+      end
+      class Unknown < DiffieHellmanDerivationData
+      end
+    end
+
+    class ExportAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_dukpt_initial_key: Types::ExportDukptInitialKey,
+        ?key_check_value_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_dukpt_initial_key: Types::ExportDukptInitialKey?
+      attr_accessor key_check_value_algorithm: String?
+    end
+
+    class ExportDiffieHellmanTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_key_identifier: String,
+        ?certificate_authority_public_key_identifier: String,
+        ?public_key_certificate: String,
+        ?derive_key_algorithm: String,
+        ?key_derivation_function: String,
+        ?key_derivation_hash_algorithm: String,
+        ?derivation_data: Types::DiffieHellmanDerivationData,
+        ?key_block_headers: Types::KeyBlockHeaders,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_key_identifier: String?
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor public_key_certificate: String?
+      attr_accessor derive_key_algorithm: String?
+      attr_accessor key_derivation_function: String?
+      attr_accessor key_derivation_hash_algorithm: String?
+      attr_accessor derivation_data: Types::DiffieHellmanDerivationData?
+      attr_accessor key_block_headers: Types::KeyBlockHeaders?
+    end
+
+    class ExportDukptInitialKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_serial_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_serial_number: String?
+    end
+
+    class ExportKeyCryptogram
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_public_key_identifier: String,
+        ?wrapping_key_certificate: String,
+        ?wrapping_spec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor wrapping_key_certificate: String?
+      attr_accessor wrapping_spec: String?
+    end
+
+    class ExportKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_material: Types::ExportKeyMaterial,
+        ?export_key_identifier: String,
+        ?export_attributes: Types::ExportAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_material: Types::ExportKeyMaterial?
+      attr_accessor export_key_identifier: String?
+      attr_accessor export_attributes: Types::ExportAttributes?
+    end
+
+    class ExportKeyMaterial
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tr31_key_block: Types::ExportTr31KeyBlock,
+        ?tr34_key_block: Types::ExportTr34KeyBlock,
+        ?key_cryptogram: Types::ExportKeyCryptogram,
+        ?diffie_hellman_tr31_key_block: Types::ExportDiffieHellmanTr31KeyBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tr31_key_block: Types::ExportTr31KeyBlock?
+      attr_accessor tr34_key_block: Types::ExportTr34KeyBlock?
+      attr_accessor key_cryptogram: Types::ExportKeyCryptogram?
+      attr_accessor diffie_hellman_tr31_key_block: Types::ExportDiffieHellmanTr31KeyBlock?
+
+      class Tr31KeyBlock < ExportKeyMaterial
+      end
+      class Tr34KeyBlock < ExportKeyMaterial
+      end
+      class KeyCryptogram < ExportKeyMaterial
+      end
+      class DiffieHellmanTr31KeyBlock < ExportKeyMaterial
+      end
+      class Unknown < ExportKeyMaterial
+      end
+    end
+
+    class ExportKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapped_key: Types::WrappedKey?
+    end
+
+    class ExportTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_identifier: String,
+        ?key_block_headers: Types::KeyBlockHeaders,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_identifier: String?
+      attr_accessor key_block_headers: Types::KeyBlockHeaders?
+    end
+
+    class ExportTr34KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_public_key_identifier: String,
+        ?wrapping_key_certificate: String,
+        ?export_token: String,
+        ?key_block_format: String,
+        ?random_nonce: String,
+        ?key_block_headers: Types::KeyBlockHeaders,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor wrapping_key_certificate: String?
+      attr_accessor export_token: String?
+      attr_accessor key_block_format: String?
+      attr_accessor random_nonce: String?
+      attr_accessor key_block_headers: Types::KeyBlockHeaders?
+    end
+
+    class GetAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+    end
+
+    class GetAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class GetKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+    end
+
+    class GetKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class GetParametersForExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_material_type: String,
+        ?signing_key_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_material_type: String?
+      attr_accessor signing_key_algorithm: String?
+    end
+
+    class GetParametersForExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_key_certificate: String,
+        ?signing_key_certificate_chain: String,
+        ?signing_key_algorithm: String,
+        ?export_token: String,
+        ?parameters_valid_until_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_key_certificate: String?
+      attr_accessor signing_key_certificate_chain: String?
+      attr_accessor signing_key_algorithm: String?
+      attr_accessor export_token: String?
+      attr_accessor parameters_valid_until_timestamp: Time?
+    end
+
+    class GetParametersForImportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_material_type: String,
+        ?wrapping_key_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_material_type: String?
+      attr_accessor wrapping_key_algorithm: String?
+    end
+
+    class GetParametersForImportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_certificate: String,
+        ?wrapping_key_certificate_chain: String,
+        ?wrapping_key_algorithm: String,
+        ?import_token: String,
+        ?parameters_valid_until_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_certificate: String?
+      attr_accessor wrapping_key_certificate_chain: String?
+      attr_accessor wrapping_key_algorithm: String?
+      attr_accessor import_token: String?
+      attr_accessor parameters_valid_until_timestamp: Time?
+    end
+
+    class GetPublicKeyCertificateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+    end
+
+    class GetPublicKeyCertificateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_certificate: String,
+        ?key_certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_certificate: String?
+      attr_accessor key_certificate_chain: String?
+    end
+
+    class ImportDiffieHellmanTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_key_identifier: String,
+        ?certificate_authority_public_key_identifier: String,
+        ?public_key_certificate: String,
+        ?derive_key_algorithm: String,
+        ?key_derivation_function: String,
+        ?key_derivation_hash_algorithm: String,
+        ?derivation_data: Types::DiffieHellmanDerivationData,
+        ?wrapped_key_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_key_identifier: String?
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor public_key_certificate: String?
+      attr_accessor derive_key_algorithm: String?
+      attr_accessor key_derivation_function: String?
+      attr_accessor key_derivation_hash_algorithm: String?
+      attr_accessor derivation_data: Types::DiffieHellmanDerivationData?
+      attr_accessor wrapped_key_block: String?
+    end
+
+    class ImportKeyCryptogram
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Types::KeyAttributes,
+        ?exportable: bool,
+        ?wrapped_key_cryptogram: String,
+        ?import_token: String,
+        ?wrapping_spec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor exportable: bool?
+      attr_accessor wrapped_key_cryptogram: String?
+      attr_accessor import_token: String?
+      attr_accessor wrapping_spec: String?
+    end
+
+    class ImportKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_material: Types::ImportKeyMaterial,
+        ?key_check_value_algorithm: String,
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_material: Types::ImportKeyMaterial?
+      attr_accessor key_check_value_algorithm: String?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportKeyMaterial
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?root_certificate_public_key: Types::RootCertificatePublicKey,
+        ?trusted_certificate_public_key: Types::TrustedCertificatePublicKey,
+        ?tr31_key_block: Types::ImportTr31KeyBlock,
+        ?tr34_key_block: Types::ImportTr34KeyBlock,
+        ?key_cryptogram: Types::ImportKeyCryptogram,
+        ?diffie_hellman_tr31_key_block: Types::ImportDiffieHellmanTr31KeyBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root_certificate_public_key: Types::RootCertificatePublicKey?
+      attr_accessor trusted_certificate_public_key: Types::TrustedCertificatePublicKey?
+      attr_accessor tr31_key_block: Types::ImportTr31KeyBlock?
+      attr_accessor tr34_key_block: Types::ImportTr34KeyBlock?
+      attr_accessor key_cryptogram: Types::ImportKeyCryptogram?
+      attr_accessor diffie_hellman_tr31_key_block: Types::ImportDiffieHellmanTr31KeyBlock?
+
+      class RootCertificatePublicKey < ImportKeyMaterial
+      end
+      class TrustedCertificatePublicKey < ImportKeyMaterial
+      end
+      class Tr31KeyBlock < ImportKeyMaterial
+      end
+      class Tr34KeyBlock < ImportKeyMaterial
+      end
+      class KeyCryptogram < ImportKeyMaterial
+      end
+      class DiffieHellmanTr31KeyBlock < ImportKeyMaterial
+      end
+      class Unknown < ImportKeyMaterial
+      end
+    end
+
+    class ImportKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class ImportTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_identifier: String,
+        ?wrapped_key_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_identifier: String?
+      attr_accessor wrapped_key_block: String?
+    end
+
+    class ImportTr34KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_public_key_identifier: String,
+        ?signing_key_certificate: String,
+        ?import_token: String,
+        ?wrapped_key_block: String,
+        ?key_block_format: String,
+        ?random_nonce: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor signing_key_certificate: String?
+      attr_accessor import_token: String?
+      attr_accessor wrapped_key_block: String?
+      attr_accessor key_block_format: String?
+      attr_accessor random_nonce: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Key
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_attributes: Types::KeyAttributes,
+        ?key_check_value: String,
+        ?key_check_value_algorithm: String,
+        ?enabled: bool,
+        ?exportable: bool,
+        ?key_state: String,
+        ?key_origin: String,
+        ?create_timestamp: Time,
+        ?usage_start_timestamp: Time,
+        ?usage_stop_timestamp: Time,
+        ?delete_pending_timestamp: Time,
+        ?delete_timestamp: Time,
+        ?derive_key_usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor key_check_value: String?
+      attr_accessor key_check_value_algorithm: String?
+      attr_accessor enabled: bool?
+      attr_accessor exportable: bool?
+      attr_accessor key_state: String?
+      attr_accessor key_origin: String?
+      attr_accessor create_timestamp: Time?
+      attr_accessor usage_start_timestamp: Time?
+      attr_accessor usage_stop_timestamp: Time?
+      attr_accessor delete_pending_timestamp: Time?
+      attr_accessor delete_timestamp: Time?
+      attr_accessor derive_key_usage: String?
+    end
+
+    class KeyAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_usage: String,
+        ?key_class: String,
+        ?key_algorithm: String,
+        ?key_modes_of_use: Types::KeyModesOfUse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_usage: String?
+      attr_accessor key_class: String?
+      attr_accessor key_algorithm: String?
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse?
+    end
+
+    class KeyBlockHeaders
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_modes_of_use: Types::KeyModesOfUse,
+        ?key_exportability: String,
+        ?key_version: String,
+        ?optional_blocks: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse?
+      attr_accessor key_exportability: String?
+      attr_accessor key_version: String?
+      attr_accessor optional_blocks: Hash[String, String]?
+    end
+
+    module KeyDerivationFunction
+      NIST_SP800: String
+      ANSI_X963: String
+    end
+
+    module KeyDerivationHashAlgorithm
+      SHA_256: String
+      SHA_384: String
+      SHA_512: String
+    end
+
+    class KeyModesOfUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encrypt: bool,
+        ?decrypt: bool,
+        ?wrap: bool,
+        ?unwrap: bool,
+        ?generate: bool,
+        ?sign: bool,
+        ?verify: bool,
+        ?derive_key: bool,
+        ?no_restrictions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encrypt: bool?
+      attr_accessor decrypt: bool?
+      attr_accessor wrap: bool?
+      attr_accessor unwrap: bool?
+      attr_accessor generate: bool?
+      attr_accessor sign: bool?
+      attr_accessor verify: bool?
+      attr_accessor derive_key: bool?
+      attr_accessor no_restrictions: bool?
+    end
+
+    class KeySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_state: String,
+        ?key_attributes: Types::KeyAttributes,
+        ?key_check_value: String,
+        ?exportable: bool,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_state: String?
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor key_check_value: String?
+      attr_accessor exportable: bool?
+      attr_accessor enabled: bool?
+    end
+
+    class ListAliasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAliasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::Alias],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::Alias]?
+      attr_accessor next_token: String?
+    end
+
+    class ListKeysInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_state: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_state: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListKeysOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keys: Array[Types::KeySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keys: Array[Types::KeySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+    end
+
+    class RestoreKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+    end
+
+    class RestoreKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class RootCertificatePublicKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Types::KeyAttributes,
+        ?public_key_certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor public_key_certificate: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartKeyUsageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+    end
+
+    class StartKeyUsageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class StopKeyUsageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+    end
+
+    class StopKeyUsageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    module SymmetricKeyAlgorithm
+      TDES_2KEY: String
+      TDES_3KEY: String
+      AES_128: String
+      AES_192: String
+      AES_256: String
+      HMAC_SHA256: String
+      HMAC_SHA384: String
+      HMAC_SHA512: String
+      HMAC_SHA224: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustedCertificatePublicKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Types::KeyAttributes,
+        ?public_key_certificate: String,
+        ?certificate_authority_public_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Types::KeyAttributes?
+      attr_accessor public_key_certificate: String?
+      attr_accessor certificate_authority_public_key_identifier: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor key_arn: String?
+    end
+
+    class UpdateAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WrappedKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_arn: String,
+        ?wrapped_key_material_format: String,
+        ?key_material: String,
+        ?key_check_value: String,
+        ?key_check_value_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_arn: String?
+      attr_accessor wrapped_key_material_format: String?
+      attr_accessor key_material: String?
+      attr_accessor key_check_value: String?
+      attr_accessor key_check_value_algorithm: String?
+    end
+  end
+end

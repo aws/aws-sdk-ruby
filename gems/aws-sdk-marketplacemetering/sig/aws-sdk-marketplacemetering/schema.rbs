@@ -1,0 +1,57 @@
+module Aws::MarketplaceMetering
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AllocatedUsageQuantity: IntegerShape
+    BatchMeterUsageRequest: StructureShape
+    BatchMeterUsageResult: StructureShape
+    Boolean: BooleanShape
+    CustomerAWSAccountId: StringShape
+    CustomerIdentifier: StringShape
+    CustomerNotEntitledException: StructureShape
+    DisabledApiException: StructureShape
+    DuplicateRequestException: StructureShape
+    ExpiredTokenException: StructureShape
+    InternalServiceErrorException: StructureShape
+    InvalidCustomerIdentifierException: StructureShape
+    InvalidEndpointRegionException: StructureShape
+    InvalidProductCodeException: StructureShape
+    InvalidPublicKeyVersionException: StructureShape
+    InvalidRegionException: StructureShape
+    InvalidTagException: StructureShape
+    InvalidTokenException: StructureShape
+    InvalidUsageAllocationsException: StructureShape
+    InvalidUsageDimensionException: StructureShape
+    MeterUsageRequest: StructureShape
+    MeterUsageResult: StructureShape
+    NonEmptyString: StringShape
+    Nonce: StringShape
+    PlatformNotSupportedException: StructureShape
+    ProductCode: StringShape
+    RegisterUsageRequest: StructureShape
+    RegisterUsageResult: StructureShape
+    ResolveCustomerRequest: StructureShape
+    ResolveCustomerResult: StructureShape
+    String: StringShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagList: ListShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: TimestampShape
+    TimestampOutOfBoundsException: StructureShape
+    UsageAllocation: StructureShape
+    UsageAllocations: ListShape
+    UsageDimension: StringShape
+    UsageQuantity: IntegerShape
+    UsageRecord: StructureShape
+    UsageRecordList: ListShape
+    UsageRecordResult: StructureShape
+    UsageRecordResultList: ListShape
+    UsageRecordResultStatus: EnumShape
+    VersionInteger: IntegerShape
+    ErrorMessage: StringShape
+
+    AWSMPMeteringService: ServiceShape
+  end
+end

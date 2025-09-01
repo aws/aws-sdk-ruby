@@ -1,0 +1,351 @@
+module Aws::IoTDataPlane
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?clean_session: bool,
+        ?prevent_will_message: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor clean_session: bool?
+      attr_accessor prevent_will_message: bool?
+    end
+
+    class DeleteThingShadowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?shadow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor shadow_name: String?
+    end
+
+    class DeleteThingShadowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetRetainedMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+    end
+
+    class GetRetainedMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+        ?payload: String,
+        ?qos: Integer,
+        ?last_modified_time: Integer,
+        ?user_properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+      attr_accessor payload: String?
+      attr_accessor qos: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor user_properties: String?
+    end
+
+    class GetThingShadowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?shadow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor shadow_name: String?
+    end
+
+    class GetThingShadowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListNamedShadowsForThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListNamedShadowsForThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[String],
+        ?next_token: String,
+        ?timestamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor timestamp: Integer?
+    end
+
+    class ListRetainedMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRetainedMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retained_topics: Array[Types::RetainedMessageSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retained_topics: Array[Types::RetainedMessageSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class MethodNotAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PayloadFormatIndicator
+      UNSPECIFIED_BYTES: String
+      UTF8_DATA: String
+    end
+
+    class PublishRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+        ?qos: Integer,
+        ?retain: bool,
+        ?payload: String,
+        ?user_properties: String,
+        ?payload_format_indicator: String,
+        ?content_type: String,
+        ?response_topic: String,
+        ?correlation_data: String,
+        ?message_expiry: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+      attr_accessor qos: Integer?
+      attr_accessor retain: bool?
+      attr_accessor payload: String?
+      attr_accessor user_properties: String?
+      attr_accessor payload_format_indicator: String?
+      attr_accessor content_type: String?
+      attr_accessor response_topic: String?
+      attr_accessor correlation_data: String?
+      attr_accessor message_expiry: Integer?
+    end
+
+    class RequestEntityTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetainedMessageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+        ?payload_size: Integer,
+        ?qos: Integer,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+      attr_accessor payload_size: Integer?
+      attr_accessor qos: Integer?
+      attr_accessor last_modified_time: Integer?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedDocumentEncodingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateThingShadowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?shadow_name: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor shadow_name: String?
+      attr_accessor payload: String?
+    end
+
+    class UpdateThingShadowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+  end
+end

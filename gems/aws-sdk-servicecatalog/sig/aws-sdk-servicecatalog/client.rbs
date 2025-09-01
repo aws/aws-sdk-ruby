@@ -1,0 +1,1290 @@
+module Aws::ServiceCatalog
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ServiceCatalog::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptPortfolioShareResponse
+      include Smithy::Client::_Response[Types::AcceptPortfolioShareOutput]
+    end
+    def accept_portfolio_share: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?portfolio_share_type: String
+    ) -> _AcceptPortfolioShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptPortfolioShareResponse
+
+    interface _AssociateBudgetWithResourceResponse
+      include Smithy::Client::_Response[Types::AssociateBudgetWithResourceOutput]
+    end
+    def associate_budget_with_resource: (
+      ?budget_name: String,
+      ?resource_id: String
+    ) -> _AssociateBudgetWithResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBudgetWithResourceResponse
+
+    interface _AssociatePrincipalWithPortfolioResponse
+      include Smithy::Client::_Response[Types::AssociatePrincipalWithPortfolioOutput]
+    end
+    def associate_principal_with_portfolio: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?principal_arn: String,
+      ?principal_type: String
+    ) -> _AssociatePrincipalWithPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePrincipalWithPortfolioResponse
+
+    interface _AssociateProductWithPortfolioResponse
+      include Smithy::Client::_Response[Types::AssociateProductWithPortfolioOutput]
+    end
+    def associate_product_with_portfolio: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?portfolio_id: String,
+      ?source_portfolio_id: String
+    ) -> _AssociateProductWithPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProductWithPortfolioResponse
+
+    interface _AssociateServiceActionWithProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::AssociateServiceActionWithProvisioningArtifactOutput]
+    end
+    def associate_service_action_with_provisioning_artifact: (
+      ?product_id: String,
+      ?provisioning_artifact_id: String,
+      ?service_action_id: String,
+      ?accept_language: String,
+      ?idempotency_token: String
+    ) -> _AssociateServiceActionWithProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateServiceActionWithProvisioningArtifactResponse
+
+    interface _AssociateTagOptionWithResourceResponse
+      include Smithy::Client::_Response[Types::AssociateTagOptionWithResourceOutput]
+    end
+    def associate_tag_option_with_resource: (
+      ?resource_id: String,
+      ?tag_option_id: String
+    ) -> _AssociateTagOptionWithResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTagOptionWithResourceResponse
+
+    interface _BatchAssociateServiceActionWithProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::BatchAssociateServiceActionWithProvisioningArtifactOutput]
+      def failed_service_action_associations: () -> Array[Types::FailedServiceActionAssociation]?
+    end
+    def batch_associate_service_action_with_provisioning_artifact: (
+      ?service_action_associations: Array[
+        {
+          service_action_id: String,
+          product_id: untyped,
+          provisioning_artifact_id: untyped
+        }
+      ],
+      ?accept_language: String
+    ) -> _BatchAssociateServiceActionWithProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateServiceActionWithProvisioningArtifactResponse
+
+    interface _BatchDisassociateServiceActionFromProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput]
+      def failed_service_action_associations: () -> Array[Types::FailedServiceActionAssociation]?
+    end
+    def batch_disassociate_service_action_from_provisioning_artifact: (
+      ?service_action_associations: Array[
+        {
+          service_action_id: String,
+          product_id: untyped,
+          provisioning_artifact_id: untyped
+        }
+      ],
+      ?accept_language: String
+    ) -> _BatchDisassociateServiceActionFromProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateServiceActionFromProvisioningArtifactResponse
+
+    interface _CopyProductResponse
+      include Smithy::Client::_Response[Types::CopyProductOutput]
+      def copy_product_token: () -> String?
+    end
+    def copy_product: (
+      ?accept_language: String,
+      ?source_product_arn: String,
+      ?target_product_id: String,
+      ?target_product_name: String,
+      ?source_provisioning_artifact_identifiers: Array[
+        Hash[String, String]
+      ],
+      ?copy_options: Array[String],
+      ?idempotency_token: String
+    ) -> _CopyProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyProductResponse
+
+    interface _CreateConstraintResponse
+      include Smithy::Client::_Response[Types::CreateConstraintOutput]
+      def constraint_detail: () -> Types::ConstraintDetail?
+      def constraint_parameters: () -> String?
+      def status: () -> String?
+    end
+    def create_constraint: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?product_id: String,
+      ?parameters: String,
+      ?type: String,
+      ?description: String,
+      ?idempotency_token: String
+    ) -> _CreateConstraintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConstraintResponse
+
+    interface _CreatePortfolioResponse
+      include Smithy::Client::_Response[Types::CreatePortfolioOutput]
+      def portfolio_detail: () -> Types::PortfolioDetail?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_portfolio: (
+      ?accept_language: String,
+      ?display_name: String,
+      ?description: String,
+      ?provider_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _CreatePortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortfolioResponse
+
+    interface _CreatePortfolioShareResponse
+      include Smithy::Client::_Response[Types::CreatePortfolioShareOutput]
+      def portfolio_share_token: () -> String?
+    end
+    def create_portfolio_share: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?account_id: String,
+      ?organization_node: {
+        type: String,
+        value: String
+      },
+      ?share_tag_options: bool,
+      ?share_principals: bool
+    ) -> _CreatePortfolioShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortfolioShareResponse
+
+    interface _CreateProductResponse
+      include Smithy::Client::_Response[Types::CreateProductOutput]
+      def product_view_detail: () -> Types::ProductViewDetail?
+      def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_product: (
+      ?accept_language: String,
+      ?name: String,
+      ?owner: String,
+      ?description: String,
+      ?distributor: String,
+      ?support_description: String,
+      ?support_email: String,
+      ?support_url: String,
+      ?product_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provisioning_artifact_parameters: {
+        name: String,
+        description: String,
+        info: Hash[String, String],
+        type: String,
+        disable_template_validation: bool
+      },
+      ?idempotency_token: String,
+      ?source_connection: {
+        type: String,
+        connection_parameters: {
+          code_star: {
+            connection_arn: String,
+            repository: String,
+            branch: String,
+            artifact_path: String
+          }
+        }
+      }
+    ) -> _CreateProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProductResponse
+
+    interface _CreateProvisionedProductPlanResponse
+      include Smithy::Client::_Response[Types::CreateProvisionedProductPlanOutput]
+      def plan_name: () -> String?
+      def plan_id: () -> String?
+      def provision_product_id: () -> String?
+      def provisioned_product_name: () -> String?
+      def provisioning_artifact_id: () -> String?
+    end
+    def create_provisioned_product_plan: (
+      ?accept_language: String,
+      ?plan_name: String,
+      ?plan_type: String,
+      ?notification_arns: Array[String],
+      ?path_id: String,
+      ?product_id: String,
+      ?provisioned_product_name: String,
+      ?provisioning_artifact_id: String,
+      ?provisioning_parameters: Array[
+        {
+          key: String,
+          value: String,
+          use_previous_value: bool
+        }
+      ],
+      ?idempotency_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProvisionedProductPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProvisionedProductPlanResponse
+
+    interface _CreateProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::CreateProvisioningArtifactOutput]
+      def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail?
+      def info: () -> Hash[String, String]?
+      def status: () -> String?
+    end
+    def create_provisioning_artifact: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?parameters: {
+        name: String,
+        description: String,
+        info: Hash[String, String],
+        type: String,
+        disable_template_validation: bool
+      },
+      ?idempotency_token: String
+    ) -> _CreateProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProvisioningArtifactResponse
+
+    interface _CreateServiceActionResponse
+      include Smithy::Client::_Response[Types::CreateServiceActionOutput]
+      def service_action_detail: () -> Types::ServiceActionDetail?
+    end
+    def create_service_action: (
+      ?name: String,
+      ?definition_type: String,
+      ?definition: Hash[String, String],
+      ?description: String,
+      ?accept_language: String,
+      ?idempotency_token: String
+    ) -> _CreateServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceActionResponse
+
+    interface _CreateTagOptionResponse
+      include Smithy::Client::_Response[Types::CreateTagOptionOutput]
+      def tag_option_detail: () -> Types::TagOptionDetail?
+    end
+    def create_tag_option: (
+      ?key: String,
+      ?value: String
+    ) -> _CreateTagOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTagOptionResponse
+
+    interface _DeleteConstraintResponse
+      include Smithy::Client::_Response[Types::DeleteConstraintOutput]
+    end
+    def delete_constraint: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DeleteConstraintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConstraintResponse
+
+    interface _DeletePortfolioResponse
+      include Smithy::Client::_Response[Types::DeletePortfolioOutput]
+    end
+    def delete_portfolio: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DeletePortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortfolioResponse
+
+    interface _DeletePortfolioShareResponse
+      include Smithy::Client::_Response[Types::DeletePortfolioShareOutput]
+      def portfolio_share_token: () -> String?
+    end
+    def delete_portfolio_share: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?account_id: String,
+      ?organization_node: {
+        type: String,
+        value: String
+      }
+    ) -> _DeletePortfolioShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortfolioShareResponse
+
+    interface _DeleteProductResponse
+      include Smithy::Client::_Response[Types::DeleteProductOutput]
+    end
+    def delete_product: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DeleteProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProductResponse
+
+    interface _DeleteProvisionedProductPlanResponse
+      include Smithy::Client::_Response[Types::DeleteProvisionedProductPlanOutput]
+    end
+    def delete_provisioned_product_plan: (
+      ?accept_language: String,
+      ?plan_id: String,
+      ?ignore_errors: bool
+    ) -> _DeleteProvisionedProductPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedProductPlanResponse
+
+    interface _DeleteProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::DeleteProvisioningArtifactOutput]
+    end
+    def delete_provisioning_artifact: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?provisioning_artifact_id: String
+    ) -> _DeleteProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisioningArtifactResponse
+
+    interface _DeleteServiceActionResponse
+      include Smithy::Client::_Response[Types::DeleteServiceActionOutput]
+    end
+    def delete_service_action: (
+      ?id: String,
+      ?accept_language: String,
+      ?idempotency_token: String
+    ) -> _DeleteServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceActionResponse
+
+    interface _DeleteTagOptionResponse
+      include Smithy::Client::_Response[Types::DeleteTagOptionOutput]
+    end
+    def delete_tag_option: (
+      ?id: String
+    ) -> _DeleteTagOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagOptionResponse
+
+    interface _DescribeConstraintResponse
+      include Smithy::Client::_Response[Types::DescribeConstraintOutput]
+      def constraint_detail: () -> Types::ConstraintDetail?
+      def constraint_parameters: () -> String?
+      def status: () -> String?
+    end
+    def describe_constraint: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DescribeConstraintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConstraintResponse
+
+    interface _DescribeCopyProductStatusResponse
+      include Smithy::Client::_Response[Types::DescribeCopyProductStatusOutput]
+      def copy_product_status: () -> String?
+      def target_product_id: () -> String?
+      def status_detail: () -> String?
+    end
+    def describe_copy_product_status: (
+      ?accept_language: String,
+      ?copy_product_token: String
+    ) -> _DescribeCopyProductStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCopyProductStatusResponse
+
+    interface _DescribePortfolioResponse
+      include Smithy::Client::_Response[Types::DescribePortfolioOutput]
+      def portfolio_detail: () -> Types::PortfolioDetail?
+      def tags: () -> Array[Types::Tag]?
+      def tag_options: () -> Array[Types::TagOptionDetail]?
+      def budgets: () -> Array[Types::BudgetDetail]?
+    end
+    def describe_portfolio: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DescribePortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePortfolioResponse
+
+    interface _DescribePortfolioShareStatusResponse
+      include Smithy::Client::_Response[Types::DescribePortfolioShareStatusOutput]
+      def portfolio_share_token: () -> String?
+      def portfolio_id: () -> String?
+      def organization_node_value: () -> String?
+      def status: () -> String?
+      def share_details: () -> Types::ShareDetails?
+    end
+    def describe_portfolio_share_status: (
+      ?portfolio_share_token: String
+    ) -> _DescribePortfolioShareStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePortfolioShareStatusResponse
+
+    interface _DescribePortfolioSharesResponse
+      include Smithy::Client::_Response[Types::DescribePortfolioSharesOutput]
+      def next_page_token: () -> String?
+      def portfolio_share_details: () -> Array[Types::PortfolioShareDetail]?
+    end
+    def describe_portfolio_shares: (
+      ?portfolio_id: String,
+      ?type: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _DescribePortfolioSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePortfolioSharesResponse
+
+    interface _DescribeProductResponse
+      include Smithy::Client::_Response[Types::DescribeProductOutput]
+      def product_view_summary: () -> Types::ProductViewSummary?
+      def provisioning_artifacts: () -> Array[Types::ProvisioningArtifact]?
+      def budgets: () -> Array[Types::BudgetDetail]?
+      def launch_paths: () -> Array[Types::LaunchPath]?
+    end
+    def describe_product: (
+      ?accept_language: String,
+      ?id: String,
+      ?name: String
+    ) -> _DescribeProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProductResponse
+
+    interface _DescribeProductAsAdminResponse
+      include Smithy::Client::_Response[Types::DescribeProductAsAdminOutput]
+      def product_view_detail: () -> Types::ProductViewDetail?
+      def provisioning_artifact_summaries: () -> Array[Types::ProvisioningArtifactSummary]?
+      def tags: () -> Array[Types::Tag]?
+      def tag_options: () -> Array[Types::TagOptionDetail]?
+      def budgets: () -> Array[Types::BudgetDetail]?
+    end
+    def describe_product_as_admin: (
+      ?accept_language: String,
+      ?id: String,
+      ?name: String,
+      ?source_portfolio_id: String
+    ) -> _DescribeProductAsAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProductAsAdminResponse
+
+    interface _DescribeProductViewResponse
+      include Smithy::Client::_Response[Types::DescribeProductViewOutput]
+      def product_view_summary: () -> Types::ProductViewSummary?
+      def provisioning_artifacts: () -> Array[Types::ProvisioningArtifact]?
+    end
+    def describe_product_view: (
+      ?accept_language: String,
+      ?id: String
+    ) -> _DescribeProductViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProductViewResponse
+
+    interface _DescribeProvisionedProductResponse
+      include Smithy::Client::_Response[Types::DescribeProvisionedProductOutput]
+      def provisioned_product_detail: () -> Types::ProvisionedProductDetail?
+      def cloud_watch_dashboards: () -> Array[Types::CloudWatchDashboard]?
+    end
+    def describe_provisioned_product: (
+      ?accept_language: String,
+      ?id: String,
+      ?name: String
+    ) -> _DescribeProvisionedProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProvisionedProductResponse
+
+    interface _DescribeProvisionedProductPlanResponse
+      include Smithy::Client::_Response[Types::DescribeProvisionedProductPlanOutput]
+      def provisioned_product_plan_details: () -> Types::ProvisionedProductPlanDetails?
+      def resource_changes: () -> Array[Types::ResourceChange]?
+      def next_page_token: () -> String?
+    end
+    def describe_provisioned_product_plan: (
+      ?accept_language: String,
+      ?plan_id: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _DescribeProvisionedProductPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProvisionedProductPlanResponse
+
+    interface _DescribeProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::DescribeProvisioningArtifactOutput]
+      def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail?
+      def info: () -> Hash[String, String]?
+      def status: () -> String?
+      def provisioning_artifact_parameters: () -> Array[Types::ProvisioningArtifactParameter]?
+    end
+    def describe_provisioning_artifact: (
+      ?accept_language: String,
+      ?provisioning_artifact_id: String,
+      ?product_id: String,
+      ?provisioning_artifact_name: String,
+      ?product_name: String,
+      ?verbose: bool,
+      ?include_provisioning_artifact_parameters: bool
+    ) -> _DescribeProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProvisioningArtifactResponse
+
+    interface _DescribeProvisioningParametersResponse
+      include Smithy::Client::_Response[Types::DescribeProvisioningParametersOutput]
+      def provisioning_artifact_parameters: () -> Array[Types::ProvisioningArtifactParameter]?
+      def constraint_summaries: () -> Array[Types::ConstraintSummary]?
+      def usage_instructions: () -> Array[Types::UsageInstruction]?
+      def tag_options: () -> Array[Types::TagOptionSummary]?
+      def provisioning_artifact_preferences: () -> Types::ProvisioningArtifactPreferences?
+      def provisioning_artifact_outputs: () -> Array[Types::ProvisioningArtifactOutput]?
+      def provisioning_artifact_output_keys: () -> Array[Types::ProvisioningArtifactOutput]?
+    end
+    def describe_provisioning_parameters: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?product_name: String,
+      ?provisioning_artifact_id: String,
+      ?provisioning_artifact_name: String,
+      ?path_id: String,
+      ?path_name: String
+    ) -> _DescribeProvisioningParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProvisioningParametersResponse
+
+    interface _DescribeRecordResponse
+      include Smithy::Client::_Response[Types::DescribeRecordOutput]
+      def record_detail: () -> Types::RecordDetail?
+      def record_outputs: () -> Array[Types::RecordOutput]?
+      def next_page_token: () -> String?
+    end
+    def describe_record: (
+      ?accept_language: String,
+      ?id: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _DescribeRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecordResponse
+
+    interface _DescribeServiceActionResponse
+      include Smithy::Client::_Response[Types::DescribeServiceActionOutput]
+      def service_action_detail: () -> Types::ServiceActionDetail?
+    end
+    def describe_service_action: (
+      ?id: String,
+      ?accept_language: String
+    ) -> _DescribeServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceActionResponse
+
+    interface _DescribeServiceActionExecutionParametersResponse
+      include Smithy::Client::_Response[Types::DescribeServiceActionExecutionParametersOutput]
+      def service_action_parameters: () -> Array[Types::ExecutionParameter]?
+    end
+    def describe_service_action_execution_parameters: (
+      ?provisioned_product_id: String,
+      ?service_action_id: String,
+      ?accept_language: String
+    ) -> _DescribeServiceActionExecutionParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceActionExecutionParametersResponse
+
+    interface _DescribeTagOptionResponse
+      include Smithy::Client::_Response[Types::DescribeTagOptionOutput]
+      def tag_option_detail: () -> Types::TagOptionDetail?
+    end
+    def describe_tag_option: (
+      ?id: String
+    ) -> _DescribeTagOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagOptionResponse
+
+    interface _DisableAWSOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::DisableAWSOrganizationsAccessOutput]
+    end
+    def disable_aws_organizations_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAWSOrganizationsAccessResponse
+
+    interface _DisassociateBudgetFromResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateBudgetFromResourceOutput]
+    end
+    def disassociate_budget_from_resource: (
+      ?budget_name: String,
+      ?resource_id: String
+    ) -> _DisassociateBudgetFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBudgetFromResourceResponse
+
+    interface _DisassociatePrincipalFromPortfolioResponse
+      include Smithy::Client::_Response[Types::DisassociatePrincipalFromPortfolioOutput]
+    end
+    def disassociate_principal_from_portfolio: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?principal_arn: String,
+      ?principal_type: String
+    ) -> _DisassociatePrincipalFromPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePrincipalFromPortfolioResponse
+
+    interface _DisassociateProductFromPortfolioResponse
+      include Smithy::Client::_Response[Types::DisassociateProductFromPortfolioOutput]
+    end
+    def disassociate_product_from_portfolio: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?portfolio_id: String
+    ) -> _DisassociateProductFromPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateProductFromPortfolioResponse
+
+    interface _DisassociateServiceActionFromProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::DisassociateServiceActionFromProvisioningArtifactOutput]
+    end
+    def disassociate_service_action_from_provisioning_artifact: (
+      ?product_id: String,
+      ?provisioning_artifact_id: String,
+      ?service_action_id: String,
+      ?accept_language: String,
+      ?idempotency_token: String
+    ) -> _DisassociateServiceActionFromProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateServiceActionFromProvisioningArtifactResponse
+
+    interface _DisassociateTagOptionFromResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateTagOptionFromResourceOutput]
+    end
+    def disassociate_tag_option_from_resource: (
+      ?resource_id: String,
+      ?tag_option_id: String
+    ) -> _DisassociateTagOptionFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTagOptionFromResourceResponse
+
+    interface _EnableAWSOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::EnableAWSOrganizationsAccessOutput]
+    end
+    def enable_aws_organizations_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAWSOrganizationsAccessResponse
+
+    interface _ExecuteProvisionedProductPlanResponse
+      include Smithy::Client::_Response[Types::ExecuteProvisionedProductPlanOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def execute_provisioned_product_plan: (
+      ?accept_language: String,
+      ?plan_id: String,
+      ?idempotency_token: String
+    ) -> _ExecuteProvisionedProductPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteProvisionedProductPlanResponse
+
+    interface _ExecuteProvisionedProductServiceActionResponse
+      include Smithy::Client::_Response[Types::ExecuteProvisionedProductServiceActionOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def execute_provisioned_product_service_action: (
+      ?provisioned_product_id: String,
+      ?service_action_id: String,
+      ?execute_token: String,
+      ?accept_language: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ]
+    ) -> _ExecuteProvisionedProductServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteProvisionedProductServiceActionResponse
+
+    interface _GetAWSOrganizationsAccessStatusResponse
+      include Smithy::Client::_Response[Types::GetAWSOrganizationsAccessStatusOutput]
+      def access_status: () -> String?
+    end
+    def get_aws_organizations_access_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAWSOrganizationsAccessStatusResponse
+
+    interface _GetProvisionedProductOutputsResponse
+      include Smithy::Client::_Response[Types::GetProvisionedProductOutputsOutput]
+      def outputs: () -> Array[Types::RecordOutput]?
+      def next_page_token: () -> String?
+    end
+    def get_provisioned_product_outputs: (
+      ?accept_language: String,
+      ?provisioned_product_id: String,
+      ?provisioned_product_name: String,
+      ?output_keys: Array[String],
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _GetProvisionedProductOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedProductOutputsResponse
+
+    interface _ImportAsProvisionedProductResponse
+      include Smithy::Client::_Response[Types::ImportAsProvisionedProductOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def import_as_provisioned_product: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?provisioning_artifact_id: String,
+      ?provisioned_product_name: String,
+      ?physical_id: String,
+      ?idempotency_token: String
+    ) -> _ImportAsProvisionedProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportAsProvisionedProductResponse
+
+    interface _ListAcceptedPortfolioSharesResponse
+      include Smithy::Client::_Response[Types::ListAcceptedPortfolioSharesOutput]
+      def portfolio_details: () -> Array[Types::PortfolioDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_accepted_portfolio_shares: (
+      ?accept_language: String,
+      ?page_token: String,
+      ?page_size: Integer,
+      ?portfolio_share_type: String
+    ) -> _ListAcceptedPortfolioSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcceptedPortfolioSharesResponse
+
+    interface _ListBudgetsForResourceResponse
+      include Smithy::Client::_Response[Types::ListBudgetsForResourceOutput]
+      def budgets: () -> Array[Types::BudgetDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_budgets_for_resource: (
+      ?accept_language: String,
+      ?resource_id: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListBudgetsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBudgetsForResourceResponse
+
+    interface _ListConstraintsForPortfolioResponse
+      include Smithy::Client::_Response[Types::ListConstraintsForPortfolioOutput]
+      def constraint_details: () -> Array[Types::ConstraintDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_constraints_for_portfolio: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?product_id: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListConstraintsForPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConstraintsForPortfolioResponse
+
+    interface _ListLaunchPathsResponse
+      include Smithy::Client::_Response[Types::ListLaunchPathsOutput]
+      def launch_path_summaries: () -> Array[Types::LaunchPathSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_launch_paths: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListLaunchPathsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLaunchPathsResponse
+
+    interface _ListOrganizationPortfolioAccessResponse
+      include Smithy::Client::_Response[Types::ListOrganizationPortfolioAccessOutput]
+      def organization_nodes: () -> Array[Types::OrganizationNode]?
+      def next_page_token: () -> String?
+    end
+    def list_organization_portfolio_access: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?organization_node_type: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _ListOrganizationPortfolioAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationPortfolioAccessResponse
+
+    interface _ListPortfolioAccessResponse
+      include Smithy::Client::_Response[Types::ListPortfolioAccessOutput]
+      def account_ids: () -> Array[String]?
+      def next_page_token: () -> String?
+    end
+    def list_portfolio_access: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?organization_parent_id: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _ListPortfolioAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortfolioAccessResponse
+
+    interface _ListPortfoliosResponse
+      include Smithy::Client::_Response[Types::ListPortfoliosOutput]
+      def portfolio_details: () -> Array[Types::PortfolioDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_portfolios: (
+      ?accept_language: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _ListPortfoliosResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortfoliosResponse
+
+    interface _ListPortfoliosForProductResponse
+      include Smithy::Client::_Response[Types::ListPortfoliosForProductOutput]
+      def portfolio_details: () -> Array[Types::PortfolioDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_portfolios_for_product: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _ListPortfoliosForProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortfoliosForProductResponse
+
+    interface _ListPrincipalsForPortfolioResponse
+      include Smithy::Client::_Response[Types::ListPrincipalsForPortfolioOutput]
+      def principals: () -> Array[Types::Principal]?
+      def next_page_token: () -> String?
+    end
+    def list_principals_for_portfolio: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListPrincipalsForPortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrincipalsForPortfolioResponse
+
+    interface _ListProvisionedProductPlansResponse
+      include Smithy::Client::_Response[Types::ListProvisionedProductPlansOutput]
+      def provisioned_product_plans: () -> Array[Types::ProvisionedProductPlanSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_provisioned_product_plans: (
+      ?accept_language: String,
+      ?provision_product_id: String,
+      ?page_size: Integer,
+      ?page_token: String,
+      ?access_level_filter: {
+        key: String,
+        value: String
+      }
+    ) -> _ListProvisionedProductPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisionedProductPlansResponse
+
+    interface _ListProvisioningArtifactsResponse
+      include Smithy::Client::_Response[Types::ListProvisioningArtifactsOutput]
+      def provisioning_artifact_details: () -> Array[Types::ProvisioningArtifactDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_provisioning_artifacts: (
+      ?accept_language: String,
+      ?product_id: String
+    ) -> _ListProvisioningArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisioningArtifactsResponse
+
+    interface _ListProvisioningArtifactsForServiceActionResponse
+      include Smithy::Client::_Response[Types::ListProvisioningArtifactsForServiceActionOutput]
+      def provisioning_artifact_views: () -> Array[Types::ProvisioningArtifactView]?
+      def next_page_token: () -> String?
+    end
+    def list_provisioning_artifacts_for_service_action: (
+      ?service_action_id: String,
+      ?page_size: Integer,
+      ?page_token: String,
+      ?accept_language: String
+    ) -> _ListProvisioningArtifactsForServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisioningArtifactsForServiceActionResponse
+
+    interface _ListRecordHistoryResponse
+      include Smithy::Client::_Response[Types::ListRecordHistoryOutput]
+      def record_details: () -> Array[Types::RecordDetail]?
+      def next_page_token: () -> String?
+    end
+    def list_record_history: (
+      ?accept_language: String,
+      ?access_level_filter: {
+        key: String,
+        value: String
+      },
+      ?search_filter: {
+        key: String,
+        value: String
+      },
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListRecordHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecordHistoryResponse
+
+    interface _ListResourcesForTagOptionResponse
+      include Smithy::Client::_Response[Types::ListResourcesForTagOptionOutput]
+      def resource_details: () -> Array[Types::ResourceDetail]?
+      def page_token: () -> String?
+    end
+    def list_resources_for_tag_option: (
+      ?tag_option_id: String,
+      ?resource_type: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListResourcesForTagOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesForTagOptionResponse
+
+    interface _ListServiceActionsResponse
+      include Smithy::Client::_Response[Types::ListServiceActionsOutput]
+      def service_action_summaries: () -> Array[Types::ServiceActionSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_service_actions: (
+      ?accept_language: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListServiceActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceActionsResponse
+
+    interface _ListServiceActionsForProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::ListServiceActionsForProvisioningArtifactOutput]
+      def service_action_summaries: () -> Array[Types::ServiceActionSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_service_actions_for_provisioning_artifact: (
+      ?product_id: String,
+      ?provisioning_artifact_id: String,
+      ?page_size: Integer,
+      ?page_token: String,
+      ?accept_language: String
+    ) -> _ListServiceActionsForProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceActionsForProvisioningArtifactResponse
+
+    interface _ListStackInstancesForProvisionedProductResponse
+      include Smithy::Client::_Response[Types::ListStackInstancesForProvisionedProductOutput]
+      def stack_instances: () -> Array[Types::StackInstance]?
+      def next_page_token: () -> String?
+    end
+    def list_stack_instances_for_provisioned_product: (
+      ?accept_language: String,
+      ?provisioned_product_id: String,
+      ?page_token: String,
+      ?page_size: Integer
+    ) -> _ListStackInstancesForProvisionedProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStackInstancesForProvisionedProductResponse
+
+    interface _ListTagOptionsResponse
+      include Smithy::Client::_Response[Types::ListTagOptionsOutput]
+      def tag_option_details: () -> Array[Types::TagOptionDetail]?
+      def page_token: () -> String?
+    end
+    def list_tag_options: (
+      ?filters: {
+        key: String,
+        value: String,
+        active: bool
+      },
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ListTagOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagOptionsResponse
+
+    interface _NotifyProvisionProductEngineWorkflowResultResponse
+      include Smithy::Client::_Response[Types::NotifyProvisionProductEngineWorkflowResultOutput]
+    end
+    def notify_provision_product_engine_workflow_result: (
+      ?workflow_token: String,
+      ?record_id: String,
+      ?status: String,
+      ?failure_reason: String,
+      ?resource_identifier: {
+        unique_tag: {
+          key: String,
+          value: String
+        }
+      },
+      ?outputs: Array[
+        {
+          output_key: String,
+          output_value: String,
+          description: String
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _NotifyProvisionProductEngineWorkflowResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyProvisionProductEngineWorkflowResultResponse
+
+    interface _NotifyTerminateProvisionedProductEngineWorkflowResultResponse
+      include Smithy::Client::_Response[Types::NotifyTerminateProvisionedProductEngineWorkflowResultOutput]
+    end
+    def notify_terminate_provisioned_product_engine_workflow_result: (
+      ?workflow_token: String,
+      ?record_id: String,
+      ?status: String,
+      ?failure_reason: String,
+      ?idempotency_token: String
+    ) -> _NotifyTerminateProvisionedProductEngineWorkflowResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyTerminateProvisionedProductEngineWorkflowResultResponse
+
+    interface _NotifyUpdateProvisionedProductEngineWorkflowResultResponse
+      include Smithy::Client::_Response[Types::NotifyUpdateProvisionedProductEngineWorkflowResultOutput]
+    end
+    def notify_update_provisioned_product_engine_workflow_result: (
+      ?workflow_token: String,
+      ?record_id: String,
+      ?status: String,
+      ?failure_reason: String,
+      ?outputs: Array[
+        {
+          output_key: String,
+          output_value: String,
+          description: String
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _NotifyUpdateProvisionedProductEngineWorkflowResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyUpdateProvisionedProductEngineWorkflowResultResponse
+
+    interface _ProvisionProductResponse
+      include Smithy::Client::_Response[Types::ProvisionProductOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def provision_product: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?product_name: String,
+      ?provisioning_artifact_id: String,
+      ?provisioning_artifact_name: String,
+      ?path_id: String,
+      ?path_name: String,
+      ?provisioned_product_name: String,
+      ?provisioning_parameters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provisioning_preferences: {
+        stack_set_accounts: Array[String],
+        stack_set_regions: Array[String],
+        stack_set_failure_tolerance_count: Integer,
+        stack_set_failure_tolerance_percentage: Integer,
+        stack_set_max_concurrency_count: Integer,
+        stack_set_max_concurrency_percentage: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?notification_arns: Array[String],
+      ?provision_token: String
+    ) -> _ProvisionProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ProvisionProductResponse
+
+    interface _RejectPortfolioShareResponse
+      include Smithy::Client::_Response[Types::RejectPortfolioShareOutput]
+    end
+    def reject_portfolio_share: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?portfolio_share_type: String
+    ) -> _RejectPortfolioShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectPortfolioShareResponse
+
+    interface _ScanProvisionedProductsResponse
+      include Smithy::Client::_Response[Types::ScanProvisionedProductsOutput]
+      def provisioned_products: () -> Array[Types::ProvisionedProductDetail]?
+      def next_page_token: () -> String?
+    end
+    def scan_provisioned_products: (
+      ?accept_language: String,
+      ?access_level_filter: {
+        key: String,
+        value: String
+      },
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _ScanProvisionedProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ScanProvisionedProductsResponse
+
+    interface _SearchProductsResponse
+      include Smithy::Client::_Response[Types::SearchProductsOutput]
+      def product_view_summaries: () -> Array[Types::ProductViewSummary]?
+      def product_view_aggregations: () -> Hash[String, Array[Types::ProductViewAggregationValue]]?
+      def next_page_token: () -> String?
+    end
+    def search_products: (
+      ?accept_language: String,
+      ?filters: Hash[String,
+        Array[String]
+      ],
+      ?page_size: Integer,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?page_token: String
+    ) -> _SearchProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchProductsResponse
+
+    interface _SearchProductsAsAdminResponse
+      include Smithy::Client::_Response[Types::SearchProductsAsAdminOutput]
+      def product_view_details: () -> Array[Types::ProductViewDetail]?
+      def next_page_token: () -> String?
+    end
+    def search_products_as_admin: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?filters: Hash[String,
+        Array[String]
+      ],
+      ?sort_by: String,
+      ?sort_order: String,
+      ?page_token: String,
+      ?page_size: Integer,
+      ?product_source: String
+    ) -> _SearchProductsAsAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchProductsAsAdminResponse
+
+    interface _SearchProvisionedProductsResponse
+      include Smithy::Client::_Response[Types::SearchProvisionedProductsOutput]
+      def provisioned_products: () -> Array[Types::ProvisionedProductAttribute]?
+      def total_results_count: () -> Integer?
+      def next_page_token: () -> String?
+    end
+    def search_provisioned_products: (
+      ?accept_language: String,
+      ?access_level_filter: {
+        key: String,
+        value: String
+      },
+      ?filters: Hash[String,
+        Array[String]
+      ],
+      ?sort_by: String,
+      ?sort_order: String,
+      ?page_size: Integer,
+      ?page_token: String
+    ) -> _SearchProvisionedProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchProvisionedProductsResponse
+
+    interface _TerminateProvisionedProductResponse
+      include Smithy::Client::_Response[Types::TerminateProvisionedProductOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def terminate_provisioned_product: (
+      ?provisioned_product_name: String,
+      ?provisioned_product_id: String,
+      ?terminate_token: String,
+      ?ignore_errors: bool,
+      ?accept_language: String,
+      ?retain_physical_resources: bool
+    ) -> _TerminateProvisionedProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateProvisionedProductResponse
+
+    interface _UpdateConstraintResponse
+      include Smithy::Client::_Response[Types::UpdateConstraintOutput]
+      def constraint_detail: () -> Types::ConstraintDetail?
+      def constraint_parameters: () -> String?
+      def status: () -> String?
+    end
+    def update_constraint: (
+      ?accept_language: String,
+      ?id: String,
+      ?description: String,
+      ?parameters: String
+    ) -> _UpdateConstraintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConstraintResponse
+
+    interface _UpdatePortfolioResponse
+      include Smithy::Client::_Response[Types::UpdatePortfolioOutput]
+      def portfolio_detail: () -> Types::PortfolioDetail?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def update_portfolio: (
+      ?accept_language: String,
+      ?id: String,
+      ?display_name: String,
+      ?description: String,
+      ?provider_name: String,
+      ?add_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?remove_tags: Array[String]
+    ) -> _UpdatePortfolioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortfolioResponse
+
+    interface _UpdatePortfolioShareResponse
+      include Smithy::Client::_Response[Types::UpdatePortfolioShareOutput]
+      def portfolio_share_token: () -> String?
+      def status: () -> String?
+    end
+    def update_portfolio_share: (
+      ?accept_language: String,
+      ?portfolio_id: String,
+      ?account_id: String,
+      ?organization_node: {
+        type: String,
+        value: String
+      },
+      ?share_tag_options: bool,
+      ?share_principals: bool
+    ) -> _UpdatePortfolioShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortfolioShareResponse
+
+    interface _UpdateProductResponse
+      include Smithy::Client::_Response[Types::UpdateProductOutput]
+      def product_view_detail: () -> Types::ProductViewDetail?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def update_product: (
+      ?accept_language: String,
+      ?id: String,
+      ?name: String,
+      ?owner: String,
+      ?description: String,
+      ?distributor: String,
+      ?support_description: String,
+      ?support_email: String,
+      ?support_url: String,
+      ?add_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?remove_tags: Array[String],
+      ?source_connection: {
+        type: String,
+        connection_parameters: {
+          code_star: {
+            connection_arn: String,
+            repository: String,
+            branch: String,
+            artifact_path: String
+          }
+        }
+      }
+    ) -> _UpdateProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProductResponse
+
+    interface _UpdateProvisionedProductResponse
+      include Smithy::Client::_Response[Types::UpdateProvisionedProductOutput]
+      def record_detail: () -> Types::RecordDetail?
+    end
+    def update_provisioned_product: (
+      ?accept_language: String,
+      ?provisioned_product_name: String,
+      ?provisioned_product_id: String,
+      ?product_id: String,
+      ?product_name: String,
+      ?provisioning_artifact_id: String,
+      ?provisioning_artifact_name: String,
+      ?path_id: String,
+      ?path_name: String,
+      ?provisioning_parameters: Array[
+        {
+          key: String,
+          value: String,
+          use_previous_value: bool
+        }
+      ],
+      ?provisioning_preferences: {
+        stack_set_accounts: Array[String],
+        stack_set_regions: Array[String],
+        stack_set_failure_tolerance_count: Integer,
+        stack_set_failure_tolerance_percentage: Integer,
+        stack_set_max_concurrency_count: Integer,
+        stack_set_max_concurrency_percentage: Integer,
+        stack_set_operation_type: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?update_token: String
+    ) -> _UpdateProvisionedProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProvisionedProductResponse
+
+    interface _UpdateProvisionedProductPropertiesResponse
+      include Smithy::Client::_Response[Types::UpdateProvisionedProductPropertiesOutput]
+      def provisioned_product_id: () -> String?
+      def provisioned_product_properties: () -> Hash[String, String]?
+      def record_id: () -> String?
+      def status: () -> String?
+    end
+    def update_provisioned_product_properties: (
+      ?accept_language: String,
+      ?provisioned_product_id: String,
+      ?provisioned_product_properties: Hash[String, String],
+      ?idempotency_token: String
+    ) -> _UpdateProvisionedProductPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProvisionedProductPropertiesResponse
+
+    interface _UpdateProvisioningArtifactResponse
+      include Smithy::Client::_Response[Types::UpdateProvisioningArtifactOutput]
+      def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail?
+      def info: () -> Hash[String, String]?
+      def status: () -> String?
+    end
+    def update_provisioning_artifact: (
+      ?accept_language: String,
+      ?product_id: String,
+      ?provisioning_artifact_id: String,
+      ?name: String,
+      ?description: String,
+      ?active: bool,
+      ?guidance: String
+    ) -> _UpdateProvisioningArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProvisioningArtifactResponse
+
+    interface _UpdateServiceActionResponse
+      include Smithy::Client::_Response[Types::UpdateServiceActionOutput]
+      def service_action_detail: () -> Types::ServiceActionDetail?
+    end
+    def update_service_action: (
+      ?id: String,
+      ?name: String,
+      ?definition: Hash[String, String],
+      ?description: String,
+      ?accept_language: String
+    ) -> _UpdateServiceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceActionResponse
+
+    interface _UpdateTagOptionResponse
+      include Smithy::Client::_Response[Types::UpdateTagOptionOutput]
+      def tag_option_detail: () -> Types::TagOptionDetail?
+    end
+    def update_tag_option: (
+      ?id: String,
+      ?value: String,
+      ?active: bool
+    ) -> _UpdateTagOptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTagOptionResponse
+  end
+end

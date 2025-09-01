@@ -1,0 +1,284 @@
+module Aws::QLDB
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::QLDB::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelJournalKinesisStreamResponse
+      include Smithy::Client::_Response[Types::CancelJournalKinesisStreamResponse]
+      def stream_id: () -> String?
+    end
+    def cancel_journal_kinesis_stream: (
+      ?ledger_name: String,
+      ?stream_id: String
+    ) -> _CancelJournalKinesisStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJournalKinesisStreamResponse
+
+    interface _CreateLedgerResponse
+      include Smithy::Client::_Response[Types::CreateLedgerResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def state: () -> String?
+      def creation_date_time: () -> Time?
+      def permissions_mode: () -> String?
+      def deletion_protection: () -> bool?
+      def kms_key_arn: () -> String?
+    end
+    def create_ledger: (
+      ?name: String,
+      ?tags: Hash[String, String?],
+      ?permissions_mode: String,
+      ?deletion_protection: bool,
+      ?kms_key: String
+    ) -> _CreateLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLedgerResponse
+
+    interface _DeleteLedgerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ledger: (
+      ?name: String
+    ) -> _DeleteLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLedgerResponse
+
+    interface _DescribeJournalKinesisStreamResponse
+      include Smithy::Client::_Response[Types::DescribeJournalKinesisStreamResponse]
+      def stream: () -> Types::JournalKinesisStreamDescription?
+    end
+    def describe_journal_kinesis_stream: (
+      ?ledger_name: String,
+      ?stream_id: String
+    ) -> _DescribeJournalKinesisStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJournalKinesisStreamResponse
+
+    interface _DescribeJournalS3ExportResponse
+      include Smithy::Client::_Response[Types::DescribeJournalS3ExportResponse]
+      def export_description: () -> Types::JournalS3ExportDescription?
+    end
+    def describe_journal_s3_export: (
+      ?name: String,
+      ?export_id: String
+    ) -> _DescribeJournalS3ExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJournalS3ExportResponse
+
+    interface _DescribeLedgerResponse
+      include Smithy::Client::_Response[Types::DescribeLedgerResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def state: () -> String?
+      def creation_date_time: () -> Time?
+      def permissions_mode: () -> String?
+      def deletion_protection: () -> bool?
+      def encryption_description: () -> Types::LedgerEncryptionDescription?
+    end
+    def describe_ledger: (
+      ?name: String
+    ) -> _DescribeLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLedgerResponse
+
+    interface _ExportJournalToS3Response
+      include Smithy::Client::_Response[Types::ExportJournalToS3Response]
+      def export_id: () -> String?
+    end
+    def export_journal_to_s3: (
+      ?name: String,
+      ?inclusive_start_time: Time,
+      ?exclusive_end_time: Time,
+      ?s3_export_configuration: {
+        bucket: String,
+        prefix: String,
+        encryption_configuration: {
+          object_encryption_type: String,
+          kms_key_arn: String
+        }
+      },
+      ?role_arn: String,
+      ?output_format: String
+    ) -> _ExportJournalToS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportJournalToS3Response
+
+    interface _GetBlockResponse
+      include Smithy::Client::_Response[Types::GetBlockResponse]
+      def block: () -> Types::ValueHolder?
+      def proof: () -> Types::ValueHolder?
+    end
+    def get_block: (
+      ?name: String,
+      ?block_address: {
+        ion_text: String
+      },
+      ?digest_tip_address: {
+        ion_text: String
+      }
+    ) -> _GetBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlockResponse
+
+    interface _GetDigestResponse
+      include Smithy::Client::_Response[Types::GetDigestResponse]
+      def digest: () -> String?
+      def digest_tip_address: () -> Types::ValueHolder?
+    end
+    def get_digest: (
+      ?name: String
+    ) -> _GetDigestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDigestResponse
+
+    interface _GetRevisionResponse
+      include Smithy::Client::_Response[Types::GetRevisionResponse]
+      def proof: () -> Types::ValueHolder?
+      def revision: () -> Types::ValueHolder?
+    end
+    def get_revision: (
+      ?name: String,
+      ?block_address: {
+        ion_text: String
+      },
+      ?document_id: String,
+      ?digest_tip_address: {
+        ion_text: String
+      }
+    ) -> _GetRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevisionResponse
+
+    interface _ListJournalKinesisStreamsForLedgerResponse
+      include Smithy::Client::_Response[Types::ListJournalKinesisStreamsForLedgerResponse]
+      def streams: () -> Array[Types::JournalKinesisStreamDescription]?
+      def next_token: () -> String?
+    end
+    def list_journal_kinesis_streams_for_ledger: (
+      ?ledger_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListJournalKinesisStreamsForLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJournalKinesisStreamsForLedgerResponse
+
+    interface _ListJournalS3ExportsResponse
+      include Smithy::Client::_Response[Types::ListJournalS3ExportsResponse]
+      def journal_s3_exports: () -> Array[Types::JournalS3ExportDescription]?
+      def next_token: () -> String?
+    end
+    def list_journal_s3_exports: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListJournalS3ExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJournalS3ExportsResponse
+
+    interface _ListJournalS3ExportsForLedgerResponse
+      include Smithy::Client::_Response[Types::ListJournalS3ExportsForLedgerResponse]
+      def journal_s3_exports: () -> Array[Types::JournalS3ExportDescription]?
+      def next_token: () -> String?
+    end
+    def list_journal_s3_exports_for_ledger: (
+      ?name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListJournalS3ExportsForLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJournalS3ExportsForLedgerResponse
+
+    interface _ListLedgersResponse
+      include Smithy::Client::_Response[Types::ListLedgersResponse]
+      def ledgers: () -> Array[Types::LedgerSummary]?
+      def next_token: () -> String?
+    end
+    def list_ledgers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLedgersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLedgersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String?]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StreamJournalToKinesisResponse
+      include Smithy::Client::_Response[Types::StreamJournalToKinesisResponse]
+      def stream_id: () -> String?
+    end
+    def stream_journal_to_kinesis: (
+      ?ledger_name: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String?],
+      ?inclusive_start_time: Time,
+      ?exclusive_end_time: Time,
+      ?kinesis_configuration: {
+        stream_arn: String,
+        aggregation_enabled: bool
+      },
+      ?stream_name: String
+    ) -> _StreamJournalToKinesisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StreamJournalToKinesisResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String?]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateLedgerResponse
+      include Smithy::Client::_Response[Types::UpdateLedgerResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def state: () -> String?
+      def creation_date_time: () -> Time?
+      def deletion_protection: () -> bool?
+      def encryption_description: () -> Types::LedgerEncryptionDescription?
+    end
+    def update_ledger: (
+      ?name: String,
+      ?deletion_protection: bool,
+      ?kms_key: String
+    ) -> _UpdateLedgerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLedgerResponse
+
+    interface _UpdateLedgerPermissionsModeResponse
+      include Smithy::Client::_Response[Types::UpdateLedgerPermissionsModeResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def permissions_mode: () -> String?
+    end
+    def update_ledger_permissions_mode: (
+      ?name: String,
+      ?permissions_mode: String
+    ) -> _UpdateLedgerPermissionsModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLedgerPermissionsModeResponse
+  end
+end

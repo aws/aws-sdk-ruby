@@ -1,0 +1,2430 @@
+module Aws::LookoutEquipment
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AutoPromotionResult
+      MODEL_PROMOTED: String
+      MODEL_NOT_PROMOTED: String
+      RETRAINING_INTERNAL_ERROR: String
+      RETRAINING_CUSTOMER_ERROR: String
+      RETRAINING_CANCELLED: String
+    end
+
+    class CategoricalValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?number_of_category: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor number_of_category: Integer?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CountPercent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor percentage: Float?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?dataset_schema: Types::DatasetSchema,
+        ?server_side_kms_key_id: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_schema: Types::DatasetSchema?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor status: String?
+    end
+
+    class CreateInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?inference_scheduler_name: String,
+        ?data_delay_offset_in_minutes: Integer,
+        ?data_upload_frequency: String,
+        ?data_input_configuration: Types::InferenceInputConfiguration,
+        ?data_output_configuration: Types::InferenceOutputConfiguration,
+        ?role_arn: String,
+        ?server_side_kms_key_id: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor data_delay_offset_in_minutes: Integer?
+      attr_accessor data_upload_frequency: String?
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration?
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateInferenceSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_arn: String,
+        ?inference_scheduler_name: String,
+        ?status: String,
+        ?model_quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor status: String?
+      attr_accessor model_quality: String?
+    end
+
+    class CreateLabelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?fault_codes: Array[String],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor fault_codes: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLabelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_group_arn: String?
+    end
+
+    class CreateLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?rating: String,
+        ?fault_code: String,
+        ?notes: String,
+        ?equipment: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor rating: String?
+      attr_accessor fault_code: String?
+      attr_accessor notes: String?
+      attr_accessor equipment: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateLabelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_id: String?
+    end
+
+    class CreateModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?dataset_name: String,
+        ?dataset_schema: Types::DatasetSchema,
+        ?labels_input_configuration: Types::LabelsInputConfiguration,
+        ?client_token: String,
+        ?training_data_start_time: Time,
+        ?training_data_end_time: Time,
+        ?evaluation_data_start_time: Time,
+        ?evaluation_data_end_time: Time,
+        ?role_arn: String,
+        ?data_pre_processing_configuration: Types::DataPreProcessingConfiguration,
+        ?server_side_kms_key_id: String,
+        ?tags: Array[Types::Tag],
+        ?off_condition: String,
+        ?model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_schema: Types::DatasetSchema?
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor training_data_start_time: Time?
+      attr_accessor training_data_end_time: Time?
+      attr_accessor evaluation_data_start_time: Time?
+      attr_accessor evaluation_data_end_time: Time?
+      attr_accessor role_arn: String?
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor off_condition: String?
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration?
+    end
+
+    class CreateModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor status: String?
+    end
+
+    class CreateRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?retraining_start_date: Time,
+        ?retraining_frequency: String,
+        ?lookback_window: String,
+        ?promote_mode: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor retraining_start_date: Time?
+      attr_accessor retraining_frequency: String?
+      attr_accessor lookback_window: String?
+      attr_accessor promote_mode: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRetrainingSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor status: String?
+    end
+
+    class DataIngestionJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?ingestion_input_configuration: Types::IngestionInputConfiguration,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration?
+      attr_accessor status: String?
+    end
+
+    class DataPreProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_sampling_rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_sampling_rate: String?
+    end
+
+    class DataQualitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insufficient_sensor_data: Types::InsufficientSensorData,
+        ?missing_sensor_data: Types::MissingSensorData,
+        ?invalid_sensor_data: Types::InvalidSensorData,
+        ?unsupported_timestamps: Types::UnsupportedTimestamps,
+        ?duplicate_timestamps: Types::DuplicateTimestamps,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insufficient_sensor_data: Types::InsufficientSensorData?
+      attr_accessor missing_sensor_data: Types::MissingSensorData?
+      attr_accessor invalid_sensor_data: Types::InvalidSensorData?
+      attr_accessor unsupported_timestamps: Types::UnsupportedTimestamps?
+      attr_accessor duplicate_timestamps: Types::DuplicateTimestamps?
+    end
+
+    module DataUploadFrequency
+      PT5M: String
+      PT10M: String
+      PT15M: String
+      PT30M: String
+      PT1H: String
+    end
+
+    class DatasetSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_data_schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_data_schema: String?
+    end
+
+    module DatasetStatus
+      CREATED: String
+      INGESTION_IN_PROGRESS: String
+      ACTIVE: String
+      IMPORT_IN_PROGRESS: String
+    end
+
+    class DatasetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+    end
+
+    class DeleteInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_name: String?
+    end
+
+    class DeleteLabelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+    end
+
+    class DeleteLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_id: String?
+    end
+
+    class DeleteModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DescribeDataIngestionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeDataIngestionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?dataset_arn: String,
+        ?ingestion_input_configuration: Types::IngestionInputConfiguration,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?status: String,
+        ?failed_reason: String,
+        ?data_quality_summary: Types::DataQualitySummary,
+        ?ingested_files_summary: Types::IngestedFilesSummary,
+        ?status_detail: String,
+        ?ingested_data_size: Integer,
+        ?data_start_time: Time,
+        ?data_end_time: Time,
+        ?source_dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor failed_reason: String?
+      attr_accessor data_quality_summary: Types::DataQualitySummary?
+      attr_accessor ingested_files_summary: Types::IngestedFilesSummary?
+      attr_accessor status_detail: String?
+      attr_accessor ingested_data_size: Integer?
+      attr_accessor data_start_time: Time?
+      attr_accessor data_end_time: Time?
+      attr_accessor source_dataset_arn: String?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?status: String,
+        ?schema: String,
+        ?server_side_kms_key_id: String,
+        ?ingestion_input_configuration: Types::IngestionInputConfiguration,
+        ?data_quality_summary: Types::DataQualitySummary,
+        ?ingested_files_summary: Types::IngestedFilesSummary,
+        ?role_arn: String,
+        ?data_start_time: Time,
+        ?data_end_time: Time,
+        ?source_dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor schema: String?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration?
+      attr_accessor data_quality_summary: Types::DataQualitySummary?
+      attr_accessor ingested_files_summary: Types::IngestedFilesSummary?
+      attr_accessor role_arn: String?
+      attr_accessor data_start_time: Time?
+      attr_accessor data_end_time: Time?
+      attr_accessor source_dataset_arn: String?
+    end
+
+    class DescribeInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_name: String?
+    end
+
+    class DescribeInferenceSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?model_name: String,
+        ?inference_scheduler_name: String,
+        ?inference_scheduler_arn: String,
+        ?status: String,
+        ?data_delay_offset_in_minutes: Integer,
+        ?data_upload_frequency: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?data_input_configuration: Types::InferenceInputConfiguration,
+        ?data_output_configuration: Types::InferenceOutputConfiguration,
+        ?role_arn: String,
+        ?server_side_kms_key_id: String,
+        ?latest_inference_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor model_name: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor status: String?
+      attr_accessor data_delay_offset_in_minutes: Integer?
+      attr_accessor data_upload_frequency: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration?
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor latest_inference_result: String?
+    end
+
+    class DescribeLabelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+    end
+
+    class DescribeLabelGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_group_arn: String,
+        ?fault_codes: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_group_arn: String?
+      attr_accessor fault_codes: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DescribeLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_id: String?
+    end
+
+    class DescribeLabelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_group_arn: String,
+        ?label_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?rating: String,
+        ?fault_code: String,
+        ?notes: String,
+        ?equipment: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_group_arn: String?
+      attr_accessor label_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor rating: String?
+      attr_accessor fault_code: String?
+      attr_accessor notes: String?
+      attr_accessor equipment: String?
+      attr_accessor created_at: Time?
+    end
+
+    class DescribeModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DescribeModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?schema: String,
+        ?labels_input_configuration: Types::LabelsInputConfiguration,
+        ?training_data_start_time: Time,
+        ?training_data_end_time: Time,
+        ?evaluation_data_start_time: Time,
+        ?evaluation_data_end_time: Time,
+        ?role_arn: String,
+        ?data_pre_processing_configuration: Types::DataPreProcessingConfiguration,
+        ?status: String,
+        ?training_execution_start_time: Time,
+        ?training_execution_end_time: Time,
+        ?failed_reason: String,
+        ?model_metrics: String,
+        ?last_updated_time: Time,
+        ?created_at: Time,
+        ?server_side_kms_key_id: String,
+        ?off_condition: String,
+        ?source_model_version_arn: String,
+        ?import_job_start_time: Time,
+        ?import_job_end_time: Time,
+        ?active_model_version: Integer,
+        ?active_model_version_arn: String,
+        ?model_version_activated_at: Time,
+        ?previous_active_model_version: Integer,
+        ?previous_active_model_version_arn: String,
+        ?previous_model_version_activated_at: Time,
+        ?prior_model_metrics: String,
+        ?latest_scheduled_retraining_failed_reason: String,
+        ?latest_scheduled_retraining_status: String,
+        ?latest_scheduled_retraining_model_version: Integer,
+        ?latest_scheduled_retraining_start_time: Time,
+        ?latest_scheduled_retraining_available_data_in_days: Integer,
+        ?next_scheduled_retraining_start_date: Time,
+        ?accumulated_inference_data_start_time: Time,
+        ?accumulated_inference_data_end_time: Time,
+        ?retraining_scheduler_status: String,
+        ?model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration,
+        ?model_quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor schema: String?
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration?
+      attr_accessor training_data_start_time: Time?
+      attr_accessor training_data_end_time: Time?
+      attr_accessor evaluation_data_start_time: Time?
+      attr_accessor evaluation_data_end_time: Time?
+      attr_accessor role_arn: String?
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration?
+      attr_accessor status: String?
+      attr_accessor training_execution_start_time: Time?
+      attr_accessor training_execution_end_time: Time?
+      attr_accessor failed_reason: String?
+      attr_accessor model_metrics: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_at: Time?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor off_condition: String?
+      attr_accessor source_model_version_arn: String?
+      attr_accessor import_job_start_time: Time?
+      attr_accessor import_job_end_time: Time?
+      attr_accessor active_model_version: Integer?
+      attr_accessor active_model_version_arn: String?
+      attr_accessor model_version_activated_at: Time?
+      attr_accessor previous_active_model_version: Integer?
+      attr_accessor previous_active_model_version_arn: String?
+      attr_accessor previous_model_version_activated_at: Time?
+      attr_accessor prior_model_metrics: String?
+      attr_accessor latest_scheduled_retraining_failed_reason: String?
+      attr_accessor latest_scheduled_retraining_status: String?
+      attr_accessor latest_scheduled_retraining_model_version: Integer?
+      attr_accessor latest_scheduled_retraining_start_time: Time?
+      attr_accessor latest_scheduled_retraining_available_data_in_days: Integer?
+      attr_accessor next_scheduled_retraining_start_date: Time?
+      attr_accessor accumulated_inference_data_start_time: Time?
+      attr_accessor accumulated_inference_data_end_time: Time?
+      attr_accessor retraining_scheduler_status: String?
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration?
+      attr_accessor model_quality: String?
+    end
+
+    class DescribeModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_version: Integer?
+    end
+
+    class DescribeModelVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?model_version: Integer,
+        ?model_version_arn: String,
+        ?status: String,
+        ?source_type: String,
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?schema: String,
+        ?labels_input_configuration: Types::LabelsInputConfiguration,
+        ?training_data_start_time: Time,
+        ?training_data_end_time: Time,
+        ?evaluation_data_start_time: Time,
+        ?evaluation_data_end_time: Time,
+        ?role_arn: String,
+        ?data_pre_processing_configuration: Types::DataPreProcessingConfiguration,
+        ?training_execution_start_time: Time,
+        ?training_execution_end_time: Time,
+        ?failed_reason: String,
+        ?model_metrics: String,
+        ?last_updated_time: Time,
+        ?created_at: Time,
+        ?server_side_kms_key_id: String,
+        ?off_condition: String,
+        ?source_model_version_arn: String,
+        ?import_job_start_time: Time,
+        ?import_job_end_time: Time,
+        ?imported_data_size_in_bytes: Integer,
+        ?prior_model_metrics: String,
+        ?retraining_available_data_in_days: Integer,
+        ?auto_promotion_result: String,
+        ?auto_promotion_result_reason: String,
+        ?model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration,
+        ?model_diagnostics_results_object: Types::S3Object,
+        ?model_quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor model_version: Integer?
+      attr_accessor model_version_arn: String?
+      attr_accessor status: String?
+      attr_accessor source_type: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor schema: String?
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration?
+      attr_accessor training_data_start_time: Time?
+      attr_accessor training_data_end_time: Time?
+      attr_accessor evaluation_data_start_time: Time?
+      attr_accessor evaluation_data_end_time: Time?
+      attr_accessor role_arn: String?
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration?
+      attr_accessor training_execution_start_time: Time?
+      attr_accessor training_execution_end_time: Time?
+      attr_accessor failed_reason: String?
+      attr_accessor model_metrics: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_at: Time?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor off_condition: String?
+      attr_accessor source_model_version_arn: String?
+      attr_accessor import_job_start_time: Time?
+      attr_accessor import_job_end_time: Time?
+      attr_accessor imported_data_size_in_bytes: Integer?
+      attr_accessor prior_model_metrics: String?
+      attr_accessor retraining_available_data_in_days: Integer?
+      attr_accessor auto_promotion_result: String?
+      attr_accessor auto_promotion_result_reason: String?
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration?
+      attr_accessor model_diagnostics_results_object: Types::S3Object?
+      attr_accessor model_quality: String?
+    end
+
+    class DescribeResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_revision_id: String,
+        ?resource_policy: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_revision_id: String?
+      attr_accessor resource_policy: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DescribeRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DescribeRetrainingSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?retraining_start_date: Time,
+        ?retraining_frequency: String,
+        ?lookback_window: String,
+        ?status: String,
+        ?promote_mode: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor retraining_start_date: Time?
+      attr_accessor retraining_frequency: String?
+      attr_accessor lookback_window: String?
+      attr_accessor status: String?
+      attr_accessor promote_mode: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DuplicateTimestamps
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_number_of_duplicate_timestamps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_number_of_duplicate_timestamps: Integer?
+    end
+
+    class ImportDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_arn: String,
+        ?dataset_name: String,
+        ?client_token: String,
+        ?server_side_kms_key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor client_token: String?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?status: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor status: String?
+      attr_accessor job_id: String?
+    end
+
+    class ImportModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_model_version_arn: String,
+        ?model_name: String,
+        ?dataset_name: String,
+        ?labels_input_configuration: Types::LabelsInputConfiguration,
+        ?client_token: String,
+        ?role_arn: String,
+        ?server_side_kms_key_id: String,
+        ?tags: Array[Types::Tag],
+        ?inference_data_import_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_model_version_arn: String?
+      attr_accessor model_name: String?
+      attr_accessor dataset_name: String?
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor role_arn: String?
+      attr_accessor server_side_kms_key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor inference_data_import_strategy: String?
+    end
+
+    class ImportModelVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?model_version_arn: String,
+        ?model_version: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor model_version_arn: String?
+      attr_accessor model_version: Integer?
+      attr_accessor status: String?
+    end
+
+    module InferenceDataImportStrategy
+      NO_IMPORT: String
+      ADD_WHEN_EMPTY: String
+      OVERWRITE: String
+    end
+
+    class InferenceEventSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_arn: String,
+        ?inference_scheduler_name: String,
+        ?event_start_time: Time,
+        ?event_end_time: Time,
+        ?diagnostics: String,
+        ?event_duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor event_start_time: Time?
+      attr_accessor event_end_time: Time?
+      attr_accessor diagnostics: String?
+      attr_accessor event_duration_in_seconds: Integer?
+    end
+
+    module InferenceExecutionStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class InferenceExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?inference_scheduler_name: String,
+        ?inference_scheduler_arn: String,
+        ?scheduled_start_time: Time,
+        ?data_start_time: Time,
+        ?data_end_time: Time,
+        ?data_input_configuration: Types::InferenceInputConfiguration,
+        ?data_output_configuration: Types::InferenceOutputConfiguration,
+        ?customer_result_object: Types::S3Object,
+        ?status: String,
+        ?failed_reason: String,
+        ?model_version: Integer,
+        ?model_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor scheduled_start_time: Time?
+      attr_accessor data_start_time: Time?
+      attr_accessor data_end_time: Time?
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration?
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor customer_result_object: Types::S3Object?
+      attr_accessor status: String?
+      attr_accessor failed_reason: String?
+      attr_accessor model_version: Integer?
+      attr_accessor model_version_arn: String?
+    end
+
+    class InferenceInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_input_configuration: Types::InferenceS3InputConfiguration,
+        ?input_time_zone_offset: String,
+        ?inference_input_name_configuration: Types::InferenceInputNameConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_input_configuration: Types::InferenceS3InputConfiguration?
+      attr_accessor input_time_zone_offset: String?
+      attr_accessor inference_input_name_configuration: Types::InferenceInputNameConfiguration?
+    end
+
+    class InferenceInputNameConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp_format: String,
+        ?component_timestamp_delimiter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp_format: String?
+      attr_accessor component_timestamp_delimiter: String?
+    end
+
+    class InferenceOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_output_configuration: Types::InferenceS3OutputConfiguration,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_output_configuration: Types::InferenceS3OutputConfiguration?
+      attr_accessor kms_key_id: String?
+    end
+
+    class InferenceS3InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class InferenceS3OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    module InferenceSchedulerStatus
+      PENDING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class InferenceSchedulerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?inference_scheduler_name: String,
+        ?inference_scheduler_arn: String,
+        ?status: String,
+        ?data_delay_offset_in_minutes: Integer,
+        ?data_upload_frequency: String,
+        ?latest_inference_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor status: String?
+      attr_accessor data_delay_offset_in_minutes: Integer?
+      attr_accessor data_upload_frequency: String?
+      attr_accessor latest_inference_result: String?
+    end
+
+    class IngestedFilesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_number_of_files: Integer,
+        ?ingested_number_of_files: Integer,
+        ?discarded_files: Array[Types::S3Object],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_number_of_files: Integer?
+      attr_accessor ingested_number_of_files: Integer?
+      attr_accessor discarded_files: Array[Types::S3Object]?
+    end
+
+    class IngestionInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_input_configuration: Types::IngestionS3InputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_input_configuration: Types::IngestionS3InputConfiguration?
+    end
+
+    module IngestionJobStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+      IMPORT_IN_PROGRESS: String
+    end
+
+    class IngestionS3InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+        ?key_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+      attr_accessor key_pattern: String?
+    end
+
+    class InsufficientSensorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?missing_complete_sensor_data: Types::MissingCompleteSensorData,
+        ?sensors_with_short_date_range: Types::SensorsWithShortDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor missing_complete_sensor_data: Types::MissingCompleteSensorData?
+      attr_accessor sensors_with_short_date_range: Types::SensorsWithShortDateRange?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSensorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affected_sensor_count: Integer,
+        ?total_number_of_invalid_values: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affected_sensor_count: Integer?
+      attr_accessor total_number_of_invalid_values: Integer?
+    end
+
+    class LabelGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_group_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_group_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module LabelRating
+      ANOMALY: String
+      NO_ANOMALY: String
+      NEUTRAL: String
+    end
+
+    class LabelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?label_id: String,
+        ?label_group_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?rating: String,
+        ?fault_code: String,
+        ?equipment: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor label_id: String?
+      attr_accessor label_group_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor rating: String?
+      attr_accessor fault_code: String?
+      attr_accessor equipment: String?
+      attr_accessor created_at: Time?
+    end
+
+    class LabelsInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_input_configuration: Types::LabelsS3InputConfiguration,
+        ?label_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_input_configuration: Types::LabelsS3InputConfiguration?
+      attr_accessor label_group_name: String?
+    end
+
+    class LabelsS3InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class LargeTimestampGaps
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?number_of_large_timestamp_gaps: Integer,
+        ?max_timestamp_gap_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor number_of_large_timestamp_gaps: Integer?
+      attr_accessor max_timestamp_gap_in_days: Integer?
+    end
+
+    module LatestInferenceResult
+      ANOMALOUS: String
+      NORMAL: String
+    end
+
+    class ListDataIngestionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListDataIngestionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?data_ingestion_job_summaries: Array[Types::DataIngestionJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor data_ingestion_job_summaries: Array[Types::DataIngestionJobSummary]?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?dataset_name_begins_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor dataset_name_begins_with: String?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?dataset_summaries: Array[Types::DatasetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor dataset_summaries: Array[Types::DatasetSummary]?
+    end
+
+    class ListInferenceEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?inference_scheduler_name: String,
+        ?interval_start_time: Time,
+        ?interval_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor interval_start_time: Time?
+      attr_accessor interval_end_time: Time?
+    end
+
+    class ListInferenceEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?inference_event_summaries: Array[Types::InferenceEventSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor inference_event_summaries: Array[Types::InferenceEventSummary]?
+    end
+
+    class ListInferenceExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?inference_scheduler_name: String,
+        ?data_start_time_after: Time,
+        ?data_end_time_before: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor data_start_time_after: Time?
+      attr_accessor data_end_time_before: Time?
+      attr_accessor status: String?
+    end
+
+    class ListInferenceExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?inference_execution_summaries: Array[Types::InferenceExecutionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor inference_execution_summaries: Array[Types::InferenceExecutionSummary]?
+    end
+
+    class ListInferenceSchedulersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?inference_scheduler_name_begins_with: String,
+        ?model_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor inference_scheduler_name_begins_with: String?
+      attr_accessor model_name: String?
+      attr_accessor status: String?
+    end
+
+    class ListInferenceSchedulersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?inference_scheduler_summaries: Array[Types::InferenceSchedulerSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor inference_scheduler_summaries: Array[Types::InferenceSchedulerSummary]?
+    end
+
+    class ListLabelGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name_begins_with: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name_begins_with: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLabelGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?label_group_summaries: Array[Types::LabelGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor label_group_summaries: Array[Types::LabelGroupSummary]?
+    end
+
+    class ListLabelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?interval_start_time: Time,
+        ?interval_end_time: Time,
+        ?fault_code: String,
+        ?equipment: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor interval_start_time: Time?
+      attr_accessor interval_end_time: Time?
+      attr_accessor fault_code: String?
+      attr_accessor equipment: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLabelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?label_summaries: Array[Types::LabelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor label_summaries: Array[Types::LabelSummary]?
+    end
+
+    class ListModelVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?source_type: String,
+        ?created_at_end_time: Time,
+        ?created_at_start_time: Time,
+        ?max_model_version: Integer,
+        ?min_model_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor source_type: String?
+      attr_accessor created_at_end_time: Time?
+      attr_accessor created_at_start_time: Time?
+      attr_accessor max_model_version: Integer?
+      attr_accessor min_model_version: Integer?
+    end
+
+    class ListModelVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?model_version_summaries: Array[Types::ModelVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor model_version_summaries: Array[Types::ModelVersionSummary]?
+    end
+
+    class ListModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?model_name_begins_with: String,
+        ?dataset_name_begins_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor model_name_begins_with: String?
+      attr_accessor dataset_name_begins_with: String?
+    end
+
+    class ListModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?model_summaries: Array[Types::ModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor model_summaries: Array[Types::ModelSummary]?
+    end
+
+    class ListRetrainingSchedulersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name_begins_with: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name_begins_with: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRetrainingSchedulersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retraining_scheduler_summaries: Array[Types::RetrainingSchedulerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retraining_scheduler_summaries: Array[Types::RetrainingSchedulerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSensorStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?ingestion_job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor ingestion_job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSensorStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sensor_statistics_summaries: Array[Types::SensorStatisticsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sensor_statistics_summaries: Array[Types::SensorStatisticsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MissingCompleteSensorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affected_sensor_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affected_sensor_count: Integer?
+    end
+
+    class MissingSensorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affected_sensor_count: Integer,
+        ?total_number_of_missing_values: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affected_sensor_count: Integer?
+      attr_accessor total_number_of_missing_values: Integer?
+    end
+
+    class ModelDiagnosticsOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_output_configuration: Types::ModelDiagnosticsS3OutputConfiguration,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_output_configuration: Types::ModelDiagnosticsS3OutputConfiguration?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ModelDiagnosticsS3OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    module ModelPromoteMode
+      MANAGED: String
+      MANUAL: String
+    end
+
+    module ModelQuality
+      QUALITY_THRESHOLD_MET: String
+      CANNOT_DETERMINE_QUALITY: String
+      POOR_QUALITY_DETECTED: String
+    end
+
+    module ModelStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+      IMPORT_IN_PROGRESS: String
+    end
+
+    class ModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?dataset_name: String,
+        ?dataset_arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?active_model_version: Integer,
+        ?active_model_version_arn: String,
+        ?latest_scheduled_retraining_status: String,
+        ?latest_scheduled_retraining_model_version: Integer,
+        ?latest_scheduled_retraining_start_time: Time,
+        ?next_scheduled_retraining_start_date: Time,
+        ?retraining_scheduler_status: String,
+        ?model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration,
+        ?model_quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor active_model_version: Integer?
+      attr_accessor active_model_version_arn: String?
+      attr_accessor latest_scheduled_retraining_status: String?
+      attr_accessor latest_scheduled_retraining_model_version: Integer?
+      attr_accessor latest_scheduled_retraining_start_time: Time?
+      attr_accessor next_scheduled_retraining_start_date: Time?
+      attr_accessor retraining_scheduler_status: String?
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration?
+      attr_accessor model_quality: String?
+    end
+
+    module ModelVersionSourceType
+      TRAINING: String
+      RETRAINING: String
+      IMPORT: String
+    end
+
+    module ModelVersionStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+      IMPORT_IN_PROGRESS: String
+      CANCELED: String
+    end
+
+    class ModelVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?model_version: Integer,
+        ?model_version_arn: String,
+        ?created_at: Time,
+        ?status: String,
+        ?source_type: String,
+        ?model_quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor model_version: Integer?
+      attr_accessor model_version_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor source_type: String?
+      attr_accessor model_quality: String?
+    end
+
+    class MonotonicValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?monotonicity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor monotonicity: String?
+    end
+
+    module Monotonicity
+      DECREASING: String
+      INCREASING: String
+      STATIC: String
+    end
+
+    class MultipleOperatingModes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_policy: String,
+        ?policy_revision_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_policy: String?
+      attr_accessor policy_revision_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RetrainingSchedulerStatus
+      PENDING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class RetrainingSchedulerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?status: String,
+        ?retraining_start_date: Time,
+        ?retraining_frequency: String,
+        ?lookback_window: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor status: String?
+      attr_accessor retraining_start_date: Time?
+      attr_accessor retraining_frequency: String?
+      attr_accessor lookback_window: String?
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class SensorStatisticsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?sensor_name: String,
+        ?data_exists: bool,
+        ?missing_values: Types::CountPercent,
+        ?invalid_values: Types::CountPercent,
+        ?invalid_date_entries: Types::CountPercent,
+        ?duplicate_timestamps: Types::CountPercent,
+        ?categorical_values: Types::CategoricalValues,
+        ?multiple_operating_modes: Types::MultipleOperatingModes,
+        ?large_timestamp_gaps: Types::LargeTimestampGaps,
+        ?monotonic_values: Types::MonotonicValues,
+        ?data_start_time: Time,
+        ?data_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor sensor_name: String?
+      attr_accessor data_exists: bool?
+      attr_accessor missing_values: Types::CountPercent?
+      attr_accessor invalid_values: Types::CountPercent?
+      attr_accessor invalid_date_entries: Types::CountPercent?
+      attr_accessor duplicate_timestamps: Types::CountPercent?
+      attr_accessor categorical_values: Types::CategoricalValues?
+      attr_accessor multiple_operating_modes: Types::MultipleOperatingModes?
+      attr_accessor large_timestamp_gaps: Types::LargeTimestampGaps?
+      attr_accessor monotonic_values: Types::MonotonicValues?
+      attr_accessor data_start_time: Time?
+      attr_accessor data_end_time: Time?
+    end
+
+    class SensorsWithShortDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affected_sensor_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affected_sensor_count: Integer?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartDataIngestionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?ingestion_input_configuration: Types::IngestionInputConfiguration,
+        ?role_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartDataIngestionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class StartInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_name: String?
+    end
+
+    class StartInferenceSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?model_name: String,
+        ?inference_scheduler_name: String,
+        ?inference_scheduler_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor model_name: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor status: String?
+    end
+
+    class StartRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class StartRetrainingSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor status: String?
+    end
+
+    module StatisticalIssueStatus
+      POTENTIAL_ISSUE_DETECTED: String
+      NO_ISSUE_DETECTED: String
+    end
+
+    class StopInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_name: String?
+    end
+
+    class StopInferenceSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?model_name: String,
+        ?inference_scheduler_name: String,
+        ?inference_scheduler_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor model_name: String?
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor inference_scheduler_arn: String?
+      attr_accessor status: String?
+    end
+
+    class StopRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class StopRetrainingSchedulerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor status: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetSamplingRate
+      PT1S: String
+      PT5S: String
+      PT10S: String
+      PT15S: String
+      PT30S: String
+      PT1M: String
+      PT5M: String
+      PT10M: String
+      PT15M: String
+      PT30M: String
+      PT1H: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedTimestamps
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_number_of_unsupported_timestamps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_number_of_unsupported_timestamps: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateActiveModelVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_version: Integer?
+    end
+
+    class UpdateActiveModelVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_arn: String,
+        ?current_active_version: Integer,
+        ?previous_active_version: Integer,
+        ?current_active_version_arn: String,
+        ?previous_active_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_arn: String?
+      attr_accessor current_active_version: Integer?
+      attr_accessor previous_active_version: Integer?
+      attr_accessor current_active_version_arn: String?
+      attr_accessor previous_active_version_arn: String?
+    end
+
+    class UpdateInferenceSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_scheduler_name: String,
+        ?data_delay_offset_in_minutes: Integer,
+        ?data_upload_frequency: String,
+        ?data_input_configuration: Types::InferenceInputConfiguration,
+        ?data_output_configuration: Types::InferenceOutputConfiguration,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_scheduler_name: String?
+      attr_accessor data_delay_offset_in_minutes: Integer?
+      attr_accessor data_upload_frequency: String?
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration?
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateLabelGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_group_name: String,
+        ?fault_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_group_name: String?
+      attr_accessor fault_codes: Array[String]?
+    end
+
+    class UpdateModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?labels_input_configuration: Types::LabelsInputConfiguration,
+        ?role_arn: String,
+        ?model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration?
+    end
+
+    class UpdateRetrainingSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?retraining_start_date: Time,
+        ?retraining_frequency: String,
+        ?lookback_window: String,
+        ?promote_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor retraining_start_date: Time?
+      attr_accessor retraining_frequency: String?
+      attr_accessor lookback_window: String?
+      attr_accessor promote_mode: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

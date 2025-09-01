@@ -1,0 +1,1138 @@
+module Aws::BedrockAgentCoreControl
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BedrockAgentCoreControl::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAgentRuntimeResponse
+      include Smithy::Client::_Response[Types::CreateAgentRuntimeResponse]
+      def agent_runtime_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def agent_runtime_id: () -> String?
+      def agent_runtime_version: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_agent_runtime: (
+      ?agent_runtime_name: String,
+      ?description: String,
+      ?agent_runtime_artifact: {
+        container_configuration: {
+          container_uri: String
+        }
+      },
+      ?role_arn: String,
+      ?network_configuration: {
+        network_mode: String
+      },
+      ?protocol_configuration: {
+        server_protocol: String
+      },
+      ?client_token: String,
+      ?environment_variables: Hash[String, String],
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String]
+        }
+      }
+    ) -> _CreateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentRuntimeResponse
+
+    interface _CreateAgentRuntimeEndpointResponse
+      include Smithy::Client::_Response[Types::CreateAgentRuntimeEndpointResponse]
+      def target_version: () -> String?
+      def agent_runtime_endpoint_arn: () -> String?
+      def agent_runtime_arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_agent_runtime_endpoint: (
+      ?agent_runtime_id: String,
+      ?name: String,
+      ?agent_runtime_version: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateAgentRuntimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentRuntimeEndpointResponse
+
+    interface _CreateApiKeyCredentialProviderResponse
+      include Smithy::Client::_Response[Types::CreateApiKeyCredentialProviderResponse]
+      def api_key_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+    end
+    def create_api_key_credential_provider: (
+      ?name: String,
+      ?api_key: String
+    ) -> _CreateApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiKeyCredentialProviderResponse
+
+    interface _CreateBrowserResponse
+      include Smithy::Client::_Response[Types::CreateBrowserResponse]
+      def browser_id: () -> String?
+      def browser_arn: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_browser: (
+      ?name: String,
+      ?description: String,
+      ?execution_role_arn: String,
+      ?network_configuration: {
+        network_mode: String
+      },
+      ?recording: {
+        enabled: bool,
+        s3_location: {
+          bucket: String,
+          prefix: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _CreateBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserResponse
+
+    interface _CreateCodeInterpreterResponse
+      include Smithy::Client::_Response[Types::CreateCodeInterpreterResponse]
+      def code_interpreter_id: () -> String?
+      def code_interpreter_arn: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_code_interpreter: (
+      ?name: String,
+      ?description: String,
+      ?execution_role_arn: String,
+      ?network_configuration: {
+        network_mode: String
+      },
+      ?client_token: String
+    ) -> _CreateCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeInterpreterResponse
+
+    interface _CreateGatewayResponse
+      include Smithy::Client::_Response[Types::CreateGatewayResponse]
+      def gateway_arn: () -> String?
+      def gateway_id: () -> String?
+      def gateway_url: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def protocol_type: () -> String?
+      def protocol_configuration: () -> Types::GatewayProtocolConfiguration?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def kms_key_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def exception_level: () -> String?
+    end
+    def create_gateway: (
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?role_arn: String,
+      ?protocol_type: String,
+      ?protocol_configuration: {
+        mcp: {
+          supported_versions: Array[String],
+          instructions: String,
+          search_type: String
+        }
+      },
+      ?authorizer_type: String,
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String]
+        }
+      },
+      ?kms_key_arn: String,
+      ?exception_level: String
+    ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _CreateGatewayTargetResponse
+      include Smithy::Client::_Response[Types::CreateGatewayTargetResponse]
+      def gateway_arn: () -> String?
+      def target_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def target_configuration: () -> Types::TargetConfiguration?
+      def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+    end
+    def create_gateway_target: (
+      ?gateway_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?target_configuration: {
+        mcp: {
+          open_api_schema: {
+            s3: {
+              uri: String,
+              bucket_owner_account_id: String
+            },
+            inline_payload: String
+          },
+          smithy_model: untyped,
+          lambda: {
+            lambda_arn: String,
+            tool_schema: {
+              s3: untyped,
+              inline_payload: Array[
+                {
+                  name: String,
+                  description: untyped,
+                  input_schema: {
+                    type: String,
+                    properties: Hash[String,
+                      {
+                        type: untyped,
+                        properties: untyped,
+                        required: Array[String],
+                        items: untyped,
+                        description: untyped
+                      }
+                    ],
+                    required: untyped,
+                    items: untyped,
+                    description: untyped
+                  },
+                  output_schema: untyped
+                }
+              ]
+            }
+          }
+        }
+      },
+      ?credential_provider_configurations: Array[
+        {
+          credential_provider_type: String,
+          credential_provider: {
+            oauth_credential_provider: {
+              provider_arn: String,
+              scopes: Array[String],
+              custom_parameters: Hash[String, String]
+            },
+            api_key_credential_provider: {
+              provider_arn: String,
+              credential_parameter_name: String,
+              credential_prefix: String,
+              credential_location: String
+            }
+          }
+        }
+      ]
+    ) -> _CreateGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayTargetResponse
+
+    interface _CreateMemoryResponse
+      include Smithy::Client::_Response[Types::CreateMemoryOutput]
+      def memory: () -> Types::Memory?
+    end
+    def create_memory: (
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?encryption_key_arn: String,
+      ?memory_execution_role_arn: String,
+      ?event_expiry_duration: Integer,
+      ?memory_strategies: Array[
+        {
+          semantic_memory_strategy: {
+            name: String,
+            description: String,
+            namespaces: Array[String]
+          },
+          summary_memory_strategy: {
+            name: untyped,
+            description: untyped,
+            namespaces: untyped
+          },
+          user_preference_memory_strategy: {
+            name: untyped,
+            description: untyped,
+            namespaces: untyped
+          },
+          custom_memory_strategy: {
+            name: untyped,
+            description: untyped,
+            namespaces: untyped,
+            configuration: {
+              semantic_override: {
+                extraction: {
+                  append_to_prompt: String,
+                  model_id: String
+                },
+                consolidation: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                }
+              },
+              summary_override: {
+                consolidation: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                }
+              },
+              user_preference_override: {
+                extraction: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                },
+                consolidation: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                }
+              }
+            }
+          }
+        }
+      ]
+    ) -> _CreateMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMemoryResponse
+
+    interface _CreateOauth2CredentialProviderResponse
+      include Smithy::Client::_Response[Types::CreateOauth2CredentialProviderResponse]
+      def client_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+    end
+    def create_oauth2_credential_provider: (
+      ?name: String,
+      ?credential_provider_vendor: String,
+      ?oauth2_provider_config_input: {
+        custom_oauth2_provider_config: {
+          oauth_discovery: {
+            discovery_url: String,
+            authorization_server_metadata: {
+              issuer: String,
+              authorization_endpoint: String,
+              token_endpoint: String,
+              response_types: Array[String]
+            }
+          },
+          client_id: String,
+          client_secret: String
+        },
+        google_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        github_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        slack_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        salesforce_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        microsoft_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        }
+      }
+    ) -> _CreateOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOauth2CredentialProviderResponse
+
+    interface _CreateWorkloadIdentityResponse
+      include Smithy::Client::_Response[Types::CreateWorkloadIdentityResponse]
+      def name: () -> String?
+      def workload_identity_arn: () -> String?
+      def allowed_resource_oauth2_return_urls: () -> Array[String]?
+    end
+    def create_workload_identity: (
+      ?name: String,
+      ?allowed_resource_oauth2_return_urls: Array[String]
+    ) -> _CreateWorkloadIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkloadIdentityResponse
+
+    interface _DeleteAgentRuntimeResponse
+      include Smithy::Client::_Response[Types::DeleteAgentRuntimeResponse]
+      def status: () -> String?
+    end
+    def delete_agent_runtime: (
+      ?agent_runtime_id: String
+    ) -> _DeleteAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentRuntimeResponse
+
+    interface _DeleteAgentRuntimeEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteAgentRuntimeEndpointResponse]
+      def status: () -> String?
+    end
+    def delete_agent_runtime_endpoint: (
+      ?agent_runtime_id: String,
+      ?endpoint_name: String,
+      ?client_token: String
+    ) -> _DeleteAgentRuntimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentRuntimeEndpointResponse
+
+    interface _DeleteApiKeyCredentialProviderResponse
+      include Smithy::Client::_Response[Types::DeleteApiKeyCredentialProviderResponse]
+    end
+    def delete_api_key_credential_provider: (
+      ?name: String
+    ) -> _DeleteApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApiKeyCredentialProviderResponse
+
+    interface _DeleteBrowserResponse
+      include Smithy::Client::_Response[Types::DeleteBrowserResponse]
+      def browser_id: () -> String?
+      def status: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def delete_browser: (
+      ?browser_id: String,
+      ?client_token: String
+    ) -> _DeleteBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrowserResponse
+
+    interface _DeleteCodeInterpreterResponse
+      include Smithy::Client::_Response[Types::DeleteCodeInterpreterResponse]
+      def code_interpreter_id: () -> String?
+      def status: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def delete_code_interpreter: (
+      ?code_interpreter_id: String,
+      ?client_token: String
+    ) -> _DeleteCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeInterpreterResponse
+
+    interface _DeleteGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayResponse]
+      def gateway_id: () -> String?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def delete_gateway: (
+      ?gateway_identifier: String
+    ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeleteGatewayTargetResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayTargetResponse]
+      def gateway_arn: () -> String?
+      def target_id: () -> String?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def delete_gateway_target: (
+      ?gateway_identifier: String,
+      ?target_id: String
+    ) -> _DeleteGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayTargetResponse
+
+    interface _DeleteMemoryResponse
+      include Smithy::Client::_Response[Types::DeleteMemoryOutput]
+      def memory_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_memory: (
+      ?client_token: String,
+      ?memory_id: String
+    ) -> _DeleteMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemoryResponse
+
+    interface _DeleteOauth2CredentialProviderResponse
+      include Smithy::Client::_Response[Types::DeleteOauth2CredentialProviderResponse]
+    end
+    def delete_oauth2_credential_provider: (
+      ?name: String
+    ) -> _DeleteOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOauth2CredentialProviderResponse
+
+    interface _DeleteWorkloadIdentityResponse
+      include Smithy::Client::_Response[Types::DeleteWorkloadIdentityResponse]
+    end
+    def delete_workload_identity: (
+      ?name: String
+    ) -> _DeleteWorkloadIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkloadIdentityResponse
+
+    interface _GetAgentRuntimeResponse
+      include Smithy::Client::_Response[Types::GetAgentRuntimeResponse]
+      def agent_runtime_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def agent_runtime_name: () -> String?
+      def description: () -> String?
+      def agent_runtime_id: () -> String?
+      def agent_runtime_version: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def role_arn: () -> String?
+      def agent_runtime_artifact: () -> Types::AgentArtifact?
+      def network_configuration: () -> Types::NetworkConfiguration?
+      def protocol_configuration: () -> Types::ProtocolConfiguration?
+      def environment_variables: () -> Hash[String, String]?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def status: () -> String?
+    end
+    def get_agent_runtime: (
+      ?agent_runtime_id: String,
+      ?agent_runtime_version: String
+    ) -> _GetAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentRuntimeResponse
+
+    interface _GetAgentRuntimeEndpointResponse
+      include Smithy::Client::_Response[Types::GetAgentRuntimeEndpointResponse]
+      def live_version: () -> String?
+      def target_version: () -> String?
+      def agent_runtime_endpoint_arn: () -> String?
+      def agent_runtime_arn: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def failure_reason: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+    end
+    def get_agent_runtime_endpoint: (
+      ?agent_runtime_id: String,
+      ?endpoint_name: String
+    ) -> _GetAgentRuntimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentRuntimeEndpointResponse
+
+    interface _GetApiKeyCredentialProviderResponse
+      include Smithy::Client::_Response[Types::GetApiKeyCredentialProviderResponse]
+      def api_key_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def get_api_key_credential_provider: (
+      ?name: String
+    ) -> _GetApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApiKeyCredentialProviderResponse
+
+    interface _GetBrowserResponse
+      include Smithy::Client::_Response[Types::GetBrowserResponse]
+      def browser_id: () -> String?
+      def browser_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def network_configuration: () -> Types::BrowserNetworkConfiguration?
+      def recording: () -> Types::RecordingConfig?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_browser: (
+      ?browser_id: String
+    ) -> _GetBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrowserResponse
+
+    interface _GetCodeInterpreterResponse
+      include Smithy::Client::_Response[Types::GetCodeInterpreterResponse]
+      def code_interpreter_id: () -> String?
+      def code_interpreter_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_code_interpreter: (
+      ?code_interpreter_id: String
+    ) -> _GetCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeInterpreterResponse
+
+    interface _GetGatewayResponse
+      include Smithy::Client::_Response[Types::GetGatewayResponse]
+      def gateway_arn: () -> String?
+      def gateway_id: () -> String?
+      def gateway_url: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def protocol_type: () -> String?
+      def protocol_configuration: () -> Types::GatewayProtocolConfiguration?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def kms_key_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def exception_level: () -> String?
+    end
+    def get_gateway: (
+      ?gateway_identifier: String
+    ) -> _GetGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayResponse
+
+    interface _GetGatewayTargetResponse
+      include Smithy::Client::_Response[Types::GetGatewayTargetResponse]
+      def gateway_arn: () -> String?
+      def target_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def target_configuration: () -> Types::TargetConfiguration?
+      def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+    end
+    def get_gateway_target: (
+      ?gateway_identifier: String,
+      ?target_id: String
+    ) -> _GetGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayTargetResponse
+
+    interface _GetMemoryResponse
+      include Smithy::Client::_Response[Types::GetMemoryOutput]
+      def memory: () -> Types::Memory?
+    end
+    def get_memory: (
+      ?memory_id: String
+    ) -> _GetMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemoryResponse
+
+    interface _GetOauth2CredentialProviderResponse
+      include Smithy::Client::_Response[Types::GetOauth2CredentialProviderResponse]
+      def client_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+      def credential_provider_vendor: () -> String?
+      def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def get_oauth2_credential_provider: (
+      ?name: String
+    ) -> _GetOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOauth2CredentialProviderResponse
+
+    interface _GetTokenVaultResponse
+      include Smithy::Client::_Response[Types::GetTokenVaultResponse]
+      def token_vault_id: () -> String?
+      def kms_configuration: () -> Types::KmsConfiguration?
+      def last_modified_date: () -> Time?
+    end
+    def get_token_vault: (
+      ?token_vault_id: String
+    ) -> _GetTokenVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTokenVaultResponse
+
+    interface _GetWorkloadIdentityResponse
+      include Smithy::Client::_Response[Types::GetWorkloadIdentityResponse]
+      def name: () -> String?
+      def workload_identity_arn: () -> String?
+      def allowed_resource_oauth2_return_urls: () -> Array[String]?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def get_workload_identity: (
+      ?name: String
+    ) -> _GetWorkloadIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadIdentityResponse
+
+    interface _ListAgentRuntimeEndpointsResponse
+      include Smithy::Client::_Response[Types::ListAgentRuntimeEndpointsResponse]
+      def runtime_endpoints: () -> Array[Types::AgentEndpoint]?
+      def next_token: () -> String?
+    end
+    def list_agent_runtime_endpoints: (
+      ?agent_runtime_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRuntimeEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRuntimeEndpointsResponse
+
+    interface _ListAgentRuntimeVersionsResponse
+      include Smithy::Client::_Response[Types::ListAgentRuntimeVersionsResponse]
+      def agent_runtimes: () -> Array[Types::Agent]?
+      def next_token: () -> String?
+    end
+    def list_agent_runtime_versions: (
+      ?agent_runtime_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRuntimeVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRuntimeVersionsResponse
+
+    interface _ListAgentRuntimesResponse
+      include Smithy::Client::_Response[Types::ListAgentRuntimesResponse]
+      def agent_runtimes: () -> Array[Types::Agent]?
+      def next_token: () -> String?
+    end
+    def list_agent_runtimes: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRuntimesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRuntimesResponse
+
+    interface _ListApiKeyCredentialProvidersResponse
+      include Smithy::Client::_Response[Types::ListApiKeyCredentialProvidersResponse]
+      def credential_providers: () -> Array[Types::ApiKeyCredentialProviderItem]?
+      def next_token: () -> String?
+    end
+    def list_api_key_credential_providers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApiKeyCredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApiKeyCredentialProvidersResponse
+
+    interface _ListBrowsersResponse
+      include Smithy::Client::_Response[Types::ListBrowsersResponse]
+      def browser_summaries: () -> Array[Types::BrowserSummary]?
+      def next_token: () -> String?
+    end
+    def list_browsers: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _ListBrowsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrowsersResponse
+
+    interface _ListCodeInterpretersResponse
+      include Smithy::Client::_Response[Types::ListCodeInterpretersResponse]
+      def code_interpreter_summaries: () -> Array[Types::CodeInterpreterSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_interpreters: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _ListCodeInterpretersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeInterpretersResponse
+
+    interface _ListGatewayTargetsResponse
+      include Smithy::Client::_Response[Types::ListGatewayTargetsResponse]
+      def items: () -> Array[Types::TargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_gateway_targets: (
+      ?gateway_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewayTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewayTargetsResponse
+
+    interface _ListGatewaysResponse
+      include Smithy::Client::_Response[Types::ListGatewaysResponse]
+      def items: () -> Array[Types::GatewaySummary]?
+      def next_token: () -> String?
+    end
+    def list_gateways: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
+
+    interface _ListMemoriesResponse
+      include Smithy::Client::_Response[Types::ListMemoriesOutput]
+      def memories: () -> Array[Types::MemorySummary]?
+      def next_token: () -> String?
+    end
+    def list_memories: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMemoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemoriesResponse
+
+    interface _ListOauth2CredentialProvidersResponse
+      include Smithy::Client::_Response[Types::ListOauth2CredentialProvidersResponse]
+      def credential_providers: () -> Array[Types::Oauth2CredentialProviderItem]?
+      def next_token: () -> String?
+    end
+    def list_oauth2_credential_providers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOauth2CredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOauth2CredentialProvidersResponse
+
+    interface _ListWorkloadIdentitiesResponse
+      include Smithy::Client::_Response[Types::ListWorkloadIdentitiesResponse]
+      def workload_identities: () -> Array[Types::WorkloadIdentityType]?
+      def next_token: () -> String?
+    end
+    def list_workload_identities: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkloadIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadIdentitiesResponse
+
+    interface _SetTokenVaultCMKResponse
+      include Smithy::Client::_Response[Types::SetTokenVaultCMKResponse]
+      def token_vault_id: () -> String?
+      def kms_configuration: () -> Types::KmsConfiguration?
+      def last_modified_date: () -> Time?
+    end
+    def set_token_vault_cmk: (
+      ?token_vault_id: String,
+      ?kms_configuration: {
+        key_type: String,
+        kms_key_arn: String
+      }
+    ) -> _SetTokenVaultCMKResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTokenVaultCMKResponse
+
+    interface _UpdateAgentRuntimeResponse
+      include Smithy::Client::_Response[Types::UpdateAgentRuntimeResponse]
+      def agent_runtime_arn: () -> String?
+      def agent_runtime_id: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def agent_runtime_version: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def update_agent_runtime: (
+      ?agent_runtime_id: String,
+      ?description: String,
+      ?agent_runtime_artifact: {
+        container_configuration: {
+          container_uri: String
+        }
+      },
+      ?role_arn: String,
+      ?network_configuration: {
+        network_mode: String
+      },
+      ?protocol_configuration: {
+        server_protocol: String
+      },
+      ?client_token: String,
+      ?environment_variables: Hash[String, String],
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String]
+        }
+      }
+    ) -> _UpdateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentRuntimeResponse
+
+    interface _UpdateAgentRuntimeEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateAgentRuntimeEndpointResponse]
+      def live_version: () -> String?
+      def target_version: () -> String?
+      def agent_runtime_endpoint_arn: () -> String?
+      def agent_runtime_arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def update_agent_runtime_endpoint: (
+      ?agent_runtime_id: String,
+      ?endpoint_name: String,
+      ?agent_runtime_version: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateAgentRuntimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentRuntimeEndpointResponse
+
+    interface _UpdateApiKeyCredentialProviderResponse
+      include Smithy::Client::_Response[Types::UpdateApiKeyCredentialProviderResponse]
+      def api_key_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def update_api_key_credential_provider: (
+      ?name: String,
+      ?api_key: String
+    ) -> _UpdateApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiKeyCredentialProviderResponse
+
+    interface _UpdateGatewayResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayResponse]
+      def gateway_arn: () -> String?
+      def gateway_id: () -> String?
+      def gateway_url: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def protocol_type: () -> String?
+      def protocol_configuration: () -> Types::GatewayProtocolConfiguration?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def kms_key_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def exception_level: () -> String?
+    end
+    def update_gateway: (
+      ?gateway_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?protocol_type: String,
+      ?protocol_configuration: {
+        mcp: {
+          supported_versions: Array[String],
+          instructions: String,
+          search_type: String
+        }
+      },
+      ?authorizer_type: String,
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String]
+        }
+      },
+      ?kms_key_arn: String,
+      ?exception_level: String
+    ) -> _UpdateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayResponse
+
+    interface _UpdateGatewayTargetResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayTargetResponse]
+      def gateway_arn: () -> String?
+      def target_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def status_reasons: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def target_configuration: () -> Types::TargetConfiguration?
+      def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+    end
+    def update_gateway_target: (
+      ?gateway_identifier: String,
+      ?target_id: String,
+      ?name: String,
+      ?description: String,
+      ?target_configuration: {
+        mcp: {
+          open_api_schema: {
+            s3: {
+              uri: String,
+              bucket_owner_account_id: String
+            },
+            inline_payload: String
+          },
+          smithy_model: untyped,
+          lambda: {
+            lambda_arn: String,
+            tool_schema: {
+              s3: untyped,
+              inline_payload: Array[
+                {
+                  name: String,
+                  description: untyped,
+                  input_schema: {
+                    type: String,
+                    properties: Hash[String,
+                      {
+                        type: untyped,
+                        properties: untyped,
+                        required: Array[String],
+                        items: untyped,
+                        description: untyped
+                      }
+                    ],
+                    required: untyped,
+                    items: untyped,
+                    description: untyped
+                  },
+                  output_schema: untyped
+                }
+              ]
+            }
+          }
+        }
+      },
+      ?credential_provider_configurations: Array[
+        {
+          credential_provider_type: String,
+          credential_provider: {
+            oauth_credential_provider: {
+              provider_arn: String,
+              scopes: Array[String],
+              custom_parameters: Hash[String, String]
+            },
+            api_key_credential_provider: {
+              provider_arn: String,
+              credential_parameter_name: String,
+              credential_prefix: String,
+              credential_location: String
+            }
+          }
+        }
+      ]
+    ) -> _UpdateGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayTargetResponse
+
+    interface _UpdateMemoryResponse
+      include Smithy::Client::_Response[Types::UpdateMemoryOutput]
+      def memory: () -> Types::Memory?
+    end
+    def update_memory: (
+      ?client_token: String,
+      ?memory_id: String,
+      ?description: String,
+      ?event_expiry_duration: Integer,
+      ?memory_execution_role_arn: String,
+      ?memory_strategies: {
+        add_memory_strategies: Array[
+          {
+            semantic_memory_strategy: {
+              name: String,
+              description: String,
+              namespaces: Array[String]
+            },
+            summary_memory_strategy: {
+              name: untyped,
+              description: untyped,
+              namespaces: untyped
+            },
+            user_preference_memory_strategy: {
+              name: untyped,
+              description: untyped,
+              namespaces: untyped
+            },
+            custom_memory_strategy: {
+              name: untyped,
+              description: untyped,
+              namespaces: untyped,
+              configuration: {
+                semantic_override: {
+                  extraction: {
+                    append_to_prompt: String,
+                    model_id: String
+                  },
+                  consolidation: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  }
+                },
+                summary_override: {
+                  consolidation: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  }
+                },
+                user_preference_override: {
+                  extraction: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  },
+                  consolidation: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  }
+                }
+              }
+            }
+          }
+        ],
+        modify_memory_strategies: Array[
+          {
+            memory_strategy_id: untyped,
+            description: untyped,
+            namespaces: untyped,
+            configuration: {
+              extraction: {
+                custom_extraction_configuration: {
+                  semantic_extraction_override: untyped,
+                  user_preference_extraction_override: untyped
+                }
+              },
+              consolidation: {
+                custom_consolidation_configuration: {
+                  semantic_consolidation_override: untyped,
+                  summary_consolidation_override: untyped,
+                  user_preference_consolidation_override: untyped
+                }
+              }
+            }
+          }
+        ],
+        delete_memory_strategies: Array[
+          {
+            memory_strategy_id: untyped
+          }
+        ]
+      }
+    ) -> _UpdateMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMemoryResponse
+
+    interface _UpdateOauth2CredentialProviderResponse
+      include Smithy::Client::_Response[Types::UpdateOauth2CredentialProviderResponse]
+      def client_secret_arn: () -> Types::Secret?
+      def name: () -> String?
+      def credential_provider_vendor: () -> String?
+      def credential_provider_arn: () -> String?
+      def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def update_oauth2_credential_provider: (
+      ?name: String,
+      ?credential_provider_vendor: String,
+      ?oauth2_provider_config_input: {
+        custom_oauth2_provider_config: {
+          oauth_discovery: {
+            discovery_url: String,
+            authorization_server_metadata: {
+              issuer: String,
+              authorization_endpoint: String,
+              token_endpoint: String,
+              response_types: Array[String]
+            }
+          },
+          client_id: String,
+          client_secret: String
+        },
+        google_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        github_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        slack_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        salesforce_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        },
+        microsoft_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped
+        }
+      }
+    ) -> _UpdateOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOauth2CredentialProviderResponse
+
+    interface _UpdateWorkloadIdentityResponse
+      include Smithy::Client::_Response[Types::UpdateWorkloadIdentityResponse]
+      def name: () -> String?
+      def workload_identity_arn: () -> String?
+      def allowed_resource_oauth2_return_urls: () -> Array[String]?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def update_workload_identity: (
+      ?name: String,
+      ?allowed_resource_oauth2_return_urls: Array[String]
+    ) -> _UpdateWorkloadIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkloadIdentityResponse
+  end
+end

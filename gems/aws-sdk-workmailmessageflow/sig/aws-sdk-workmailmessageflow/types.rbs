@@ -1,0 +1,118 @@
+module Aws::WorkMailMessageFlow
+  module Types
+
+    class GetRawMessageContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class GetRawMessageContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_content: String?
+    end
+
+    class InvalidContentLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MessageFrozen
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MessageRejected
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutRawMessageContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?content: Types::RawMessageContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor content: Types::RawMessageContent?
+    end
+
+    class PutRawMessageContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RawMessageContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_reference: Types::S3Reference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_reference: Types::S3Reference?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Reference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor object_version: String?
+    end
+  end
+end

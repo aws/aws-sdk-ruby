@@ -1,0 +1,21 @@
+module Aws::ApiGatewayV2
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def limit_type: () -> String?
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module Aws::SageMaker
+  module Errors
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

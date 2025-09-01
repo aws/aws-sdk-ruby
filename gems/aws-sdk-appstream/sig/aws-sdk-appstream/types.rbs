@@ -1,0 +1,3518 @@
+module Aws::AppStream
+  module Types
+
+    class AccessEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_type: String,
+        ?vpce_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_type: String?
+      attr_accessor vpce_id: String?
+    end
+
+    module AccessEndpointType
+      STREAMING: String
+    end
+
+    module Action
+      CLIPBOARD_COPY_FROM_LOCAL_DEVICE: String
+      CLIPBOARD_COPY_TO_LOCAL_DEVICE: String
+      FILE_UPLOAD: String
+      FILE_DOWNLOAD: String
+      PRINTING_TO_LOCAL_DEVICE: String
+      DOMAIN_PASSWORD_SIGNIN: String
+      DOMAIN_SMART_CARD_SIGNIN: String
+      AUTO_TIME_ZONE_REDIRECTION: String
+    end
+
+    class AppBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?display_name: String,
+        ?source_s3_location: Types::S3Location,
+        ?setup_script_details: Types::ScriptDetails,
+        ?created_time: Time,
+        ?post_setup_script_details: Types::ScriptDetails,
+        ?packaging_type: String,
+        ?state: String,
+        ?app_block_errors: Array[Types::ErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor source_s3_location: Types::S3Location?
+      attr_accessor setup_script_details: Types::ScriptDetails?
+      attr_accessor created_time: Time?
+      attr_accessor post_setup_script_details: Types::ScriptDetails?
+      attr_accessor packaging_type: String?
+      attr_accessor state: String?
+      attr_accessor app_block_errors: Array[Types::ErrorDetails]?
+    end
+
+    class AppBlockBuilder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?platform: String,
+        ?instance_type: String,
+        ?enable_default_internet_access: bool,
+        ?iam_role_arn: String,
+        ?vpc_config: Types::VpcConfig,
+        ?state: String,
+        ?created_time: Time,
+        ?app_block_builder_errors: Array[Types::ResourceError],
+        ?state_change_reason: Types::AppBlockBuilderStateChangeReason,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor platform: String?
+      attr_accessor instance_type: String?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor iam_role_arn: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor state: String?
+      attr_accessor created_time: Time?
+      attr_accessor app_block_builder_errors: Array[Types::ResourceError]?
+      attr_accessor state_change_reason: Types::AppBlockBuilderStateChangeReason?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+    end
+
+    class AppBlockBuilderAppBlockAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_arn: String,
+        ?app_block_builder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_arn: String?
+      attr_accessor app_block_builder_name: String?
+    end
+
+    module AppBlockBuilderAttribute
+      IAM_ROLE_ARN: String
+      ACCESS_ENDPOINTS: String
+      VPC_CONFIGURATION_SECURITY_GROUP_IDS: String
+    end
+
+    module AppBlockBuilderPlatformType
+      WINDOWS_SERVER_2019: String
+    end
+
+    module AppBlockBuilderState
+      STARTING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class AppBlockBuilderStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module AppBlockBuilderStateChangeReasonCode
+      INTERNAL_ERROR: String
+    end
+
+    module AppBlockState
+      INACTIVE: String
+      ACTIVE: String
+    end
+
+    module AppVisibility
+      ALL: String
+      ASSOCIATED: String
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?icon_url: String,
+        ?launch_path: String,
+        ?launch_parameters: String,
+        ?enabled: bool,
+        ?metadata: Hash[String, String],
+        ?working_directory: String,
+        ?description: String,
+        ?arn: String,
+        ?app_block_arn: String,
+        ?icon_s3_location: Types::S3Location,
+        ?platforms: Array[String],
+        ?instance_families: Array[String],
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor icon_url: String?
+      attr_accessor launch_path: String?
+      attr_accessor launch_parameters: String?
+      attr_accessor enabled: bool?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor working_directory: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor app_block_arn: String?
+      attr_accessor icon_s3_location: Types::S3Location?
+      attr_accessor platforms: Array[String]?
+      attr_accessor instance_families: Array[String]?
+      attr_accessor created_time: Time?
+    end
+
+    module ApplicationAttribute
+      LAUNCH_PARAMETERS: String
+      WORKING_DIRECTORY: String
+    end
+
+    class ApplicationFleetAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor application_arn: String?
+    end
+
+    class ApplicationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?settings_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor settings_group: String?
+    end
+
+    class ApplicationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?settings_group: String,
+        ?s3_bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor settings_group: String?
+      attr_accessor s3_bucket_name: String?
+    end
+
+    class AssociateAppBlockBuilderAppBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_arn: String,
+        ?app_block_builder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_arn: String?
+      attr_accessor app_block_builder_name: String?
+    end
+
+    class AssociateAppBlockBuilderAppBlockResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder_app_block_association: Types::AppBlockBuilderAppBlockAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder_app_block_association: Types::AppBlockBuilderAppBlockAssociation?
+    end
+
+    class AssociateApplicationFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor application_arn: String?
+    end
+
+    class AssociateApplicationFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_fleet_association: Types::ApplicationFleetAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_fleet_association: Types::ApplicationFleetAssociation?
+    end
+
+    class AssociateApplicationToEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?entitlement_name: String,
+        ?application_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor entitlement_name: String?
+      attr_accessor application_identifier: String?
+    end
+
+    class AssociateApplicationToEntitlementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor stack_name: String?
+    end
+
+    class AssociateFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AuthenticationType
+      API: String
+      SAML: String
+      USERPOOL: String
+      AWS_AD: String
+    end
+
+    class BatchAssociateUserStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_stack_associations: Array[Types::UserStackAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_stack_associations: Array[Types::UserStackAssociation]?
+    end
+
+    class BatchAssociateUserStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::UserStackAssociationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::UserStackAssociationError]?
+    end
+
+    class BatchDisassociateUserStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_stack_associations: Array[Types::UserStackAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_stack_associations: Array[Types::UserStackAssociation]?
+    end
+
+    class BatchDisassociateUserStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::UserStackAssociationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::UserStackAssociationError]?
+    end
+
+    class CertificateBasedAuthProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    module CertificateBasedAuthStatus
+      DISABLED: String
+      ENABLED: String
+      ENABLED_NO_DIRECTORY_LOGIN_FALLBACK: String
+    end
+
+    class ComputeCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_instances: Integer,
+        ?desired_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_instances: Integer?
+      attr_accessor desired_sessions: Integer?
+    end
+
+    class ComputeCapacityStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired: Integer,
+        ?running: Integer,
+        ?in_use: Integer,
+        ?available: Integer,
+        ?desired_user_sessions: Integer,
+        ?available_user_sessions: Integer,
+        ?active_user_sessions: Integer,
+        ?actual_user_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired: Integer?
+      attr_accessor running: Integer?
+      attr_accessor in_use: Integer?
+      attr_accessor available: Integer?
+      attr_accessor desired_user_sessions: Integer?
+      attr_accessor available_user_sessions: Integer?
+      attr_accessor active_user_sessions: Integer?
+      attr_accessor actual_user_sessions: Integer?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CopyImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_image_name: String,
+        ?destination_image_name: String,
+        ?destination_region: String,
+        ?destination_image_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_image_name: String?
+      attr_accessor destination_image_name: String?
+      attr_accessor destination_region: String?
+      attr_accessor destination_image_description: String?
+    end
+
+    class CopyImageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_image_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_image_name: String?
+    end
+
+    class CreateAppBlockBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?display_name: String,
+        ?tags: Hash[String, String],
+        ?platform: String,
+        ?instance_type: String,
+        ?vpc_config: Types::VpcConfig,
+        ?enable_default_internet_access: bool,
+        ?iam_role_arn: String,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor platform: String?
+      attr_accessor instance_type: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor iam_role_arn: String?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+    end
+
+    class CreateAppBlockBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder: Types::AppBlockBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder: Types::AppBlockBuilder?
+    end
+
+    class CreateAppBlockBuilderStreamingURLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder_name: String,
+        ?validity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder_name: String?
+      attr_accessor validity: Integer?
+    end
+
+    class CreateAppBlockBuilderStreamingURLResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_url: String,
+        ?expires: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_url: String?
+      attr_accessor expires: Time?
+    end
+
+    class CreateAppBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?display_name: String,
+        ?source_s3_location: Types::S3Location,
+        ?setup_script_details: Types::ScriptDetails,
+        ?tags: Hash[String, String],
+        ?post_setup_script_details: Types::ScriptDetails,
+        ?packaging_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor source_s3_location: Types::S3Location?
+      attr_accessor setup_script_details: Types::ScriptDetails?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor post_setup_script_details: Types::ScriptDetails?
+      attr_accessor packaging_type: String?
+    end
+
+    class CreateAppBlockResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block: Types::AppBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block: Types::AppBlock?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?icon_s3_location: Types::S3Location,
+        ?launch_path: String,
+        ?working_directory: String,
+        ?launch_parameters: String,
+        ?platforms: Array[String],
+        ?instance_families: Array[String],
+        ?app_block_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor icon_s3_location: Types::S3Location?
+      attr_accessor launch_path: String?
+      attr_accessor working_directory: String?
+      attr_accessor launch_parameters: String?
+      attr_accessor platforms: Array[String]?
+      attr_accessor instance_families: Array[String]?
+      attr_accessor app_block_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+    end
+
+    class CreateDirectoryConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_name: String,
+        ?organizational_unit_distinguished_names: Array[String],
+        ?service_account_credentials: Types::ServiceAccountCredentials,
+        ?certificate_based_auth_properties: Types::CertificateBasedAuthProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: String?
+      attr_accessor organizational_unit_distinguished_names: Array[String]?
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials?
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties?
+    end
+
+    class CreateDirectoryConfigResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_config: Types::DirectoryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_config: Types::DirectoryConfig?
+    end
+
+    class CreateEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stack_name: String,
+        ?description: String,
+        ?app_visibility: String,
+        ?attributes: Array[Types::EntitlementAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stack_name: String?
+      attr_accessor description: String?
+      attr_accessor app_visibility: String?
+      attr_accessor attributes: Array[Types::EntitlementAttribute]?
+    end
+
+    class CreateEntitlementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement: Types::Entitlement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement: Types::Entitlement?
+    end
+
+    class CreateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image_name: String,
+        ?image_arn: String,
+        ?instance_type: String,
+        ?fleet_type: String,
+        ?compute_capacity: Types::ComputeCapacity,
+        ?vpc_config: Types::VpcConfig,
+        ?max_user_duration_in_seconds: Integer,
+        ?disconnect_timeout_in_seconds: Integer,
+        ?description: String,
+        ?display_name: String,
+        ?enable_default_internet_access: bool,
+        ?domain_join_info: Types::DomainJoinInfo,
+        ?tags: Hash[String, String],
+        ?idle_disconnect_timeout_in_seconds: Integer,
+        ?iam_role_arn: String,
+        ?stream_view: String,
+        ?platform: String,
+        ?max_concurrent_sessions: Integer,
+        ?usb_device_filter_strings: Array[String],
+        ?session_script_s3_location: Types::S3Location,
+        ?max_sessions_per_instance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image_name: String?
+      attr_accessor image_arn: String?
+      attr_accessor instance_type: String?
+      attr_accessor fleet_type: String?
+      attr_accessor compute_capacity: Types::ComputeCapacity?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor max_user_duration_in_seconds: Integer?
+      attr_accessor disconnect_timeout_in_seconds: Integer?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor domain_join_info: Types::DomainJoinInfo?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor idle_disconnect_timeout_in_seconds: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor stream_view: String?
+      attr_accessor platform: String?
+      attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor usb_device_filter_strings: Array[String]?
+      attr_accessor session_script_s3_location: Types::S3Location?
+      attr_accessor max_sessions_per_instance: Integer?
+    end
+
+    class CreateFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet: Types::Fleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet: Types::Fleet?
+    end
+
+    class CreateImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image_name: String,
+        ?image_arn: String,
+        ?instance_type: String,
+        ?description: String,
+        ?display_name: String,
+        ?vpc_config: Types::VpcConfig,
+        ?iam_role_arn: String,
+        ?enable_default_internet_access: bool,
+        ?domain_join_info: Types::DomainJoinInfo,
+        ?appstream_agent_version: String,
+        ?tags: Hash[String, String],
+        ?access_endpoints: Array[Types::AccessEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image_name: String?
+      attr_accessor image_arn: String?
+      attr_accessor instance_type: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor iam_role_arn: String?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor domain_join_info: Types::DomainJoinInfo?
+      attr_accessor appstream_agent_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+    end
+
+    class CreateImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder: Types::ImageBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder: Types::ImageBuilder?
+    end
+
+    class CreateImageBuilderStreamingURLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?validity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor validity: Integer?
+    end
+
+    class CreateImageBuilderStreamingURLResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_url: String,
+        ?expires: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_url: String?
+      attr_accessor expires: Time?
+    end
+
+    class CreateStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?display_name: String,
+        ?storage_connectors: Array[Types::StorageConnector],
+        ?redirect_url: String,
+        ?feedback_url: String,
+        ?user_settings: Array[Types::UserSetting],
+        ?application_settings: Types::ApplicationSettings,
+        ?tags: Hash[String, String],
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?embed_host_domains: Array[String],
+        ?streaming_experience_settings: Types::StreamingExperienceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor storage_connectors: Array[Types::StorageConnector]?
+      attr_accessor redirect_url: String?
+      attr_accessor feedback_url: String?
+      attr_accessor user_settings: Array[Types::UserSetting]?
+      attr_accessor application_settings: Types::ApplicationSettings?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor embed_host_domains: Array[String]?
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+    end
+
+    class CreateStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack: Types::Stack,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack: Types::Stack?
+    end
+
+    class CreateStreamingURLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?fleet_name: String,
+        ?user_id: String,
+        ?application_id: String,
+        ?validity: Integer,
+        ?session_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor fleet_name: String?
+      attr_accessor user_id: String?
+      attr_accessor application_id: String?
+      attr_accessor validity: Integer?
+      attr_accessor session_context: String?
+    end
+
+    class CreateStreamingURLResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_url: String,
+        ?expires: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_url: String?
+      attr_accessor expires: Time?
+    end
+
+    class CreateThemeForStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?footer_links: Array[Types::ThemeFooterLink],
+        ?title_text: String,
+        ?theme_styling: String,
+        ?organization_logo_s3_location: Types::S3Location,
+        ?favicon_s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor footer_links: Array[Types::ThemeFooterLink]?
+      attr_accessor title_text: String?
+      attr_accessor theme_styling: String?
+      attr_accessor organization_logo_s3_location: Types::S3Location?
+      attr_accessor favicon_s3_location: Types::S3Location?
+    end
+
+    class CreateThemeForStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?theme: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor theme: Types::Theme?
+    end
+
+    class CreateUpdatedImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?existing_image_name: String,
+        ?new_image_name: String,
+        ?new_image_description: String,
+        ?new_image_display_name: String,
+        ?new_image_tags: Hash[String, String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor existing_image_name: String?
+      attr_accessor new_image_name: String?
+      attr_accessor new_image_description: String?
+      attr_accessor new_image_display_name: String?
+      attr_accessor new_image_tags: Hash[String, String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateUpdatedImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: Types::Image,
+        ?can_update_image: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: Types::Image?
+      attr_accessor can_update_image: bool?
+    end
+
+    class CreateUsageReportSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateUsageReportSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?schedule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor schedule: String?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?message_action: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor message_action: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor authentication_type: String?
+    end
+
+    class CreateUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAppBlockBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteAppBlockBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAppBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteAppBlockResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDirectoryConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: String?
+    end
+
+    class DeleteDirectoryConfigResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stack_name: String?
+    end
+
+    class DeleteEntitlementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder: Types::ImageBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder: Types::ImageBuilder?
+    end
+
+    class DeleteImagePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?shared_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor shared_account_id: String?
+    end
+
+    class DeleteImagePermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: Types::Image,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: Types::Image?
+    end
+
+    class DeleteStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteThemeForStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+    end
+
+    class DeleteThemeForStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUsageReportSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUsageReportSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor authentication_type: String?
+    end
+
+    class DeleteUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAppBlockBuilderAppBlockAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_arn: String,
+        ?app_block_builder_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_arn: String?
+      attr_accessor app_block_builder_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAppBlockBuilderAppBlockAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder_app_block_associations: Array[Types::AppBlockBuilderAppBlockAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder_app_block_associations: Array[Types::AppBlockBuilderAppBlockAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAppBlockBuildersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAppBlockBuildersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builders: Array[Types::AppBlockBuilder],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builders: Array[Types::AppBlockBuilder]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAppBlocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAppBlocksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_blocks: Array[Types::AppBlock],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_blocks: Array[Types::AppBlock]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationFleetAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?application_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor application_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationFleetAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_fleet_associations: Array[Types::ApplicationFleetAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_fleet_associations: Array[Types::ApplicationFleetAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeApplicationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::Application],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::Application]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectoryConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_names: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_names: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectoryConfigsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_configs: Array[Types::DirectoryConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_configs: Array[Types::DirectoryConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEntitlementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stack_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeEntitlementsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::Entitlement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleets: Array[Types::Fleet],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleets: Array[Types::Fleet]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImageBuildersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImageBuildersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builders: Array[Types::ImageBuilder],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builders: Array[Types::ImageBuilder]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImagePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_results: Integer,
+        ?shared_aws_account_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor shared_aws_account_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImagePermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?shared_image_permissions_list: Array[Types::SharedImagePermissions],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor shared_image_permissions_list: Array[Types::SharedImagePermissions]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?arns: Array[String],
+        ?type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor arns: Array[String]?
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImagesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?images: Array[Types::Image],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor images: Array[Types::Image]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?fleet_name: String,
+        ?user_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?authentication_type: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor fleet_name: String?
+      attr_accessor user_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor authentication_type: String?
+      attr_accessor instance_id: String?
+    end
+
+    class DescribeSessionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::Session],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::Session]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStacksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stacks: Array[Types::Stack],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stacks: Array[Types::Stack]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeThemeForStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+    end
+
+    class DescribeThemeForStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?theme: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor theme: Types::Theme?
+    end
+
+    class DescribeUsageReportSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUsageReportSubscriptionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_report_subscriptions: Array[Types::UsageReportSubscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_report_subscriptions: Array[Types::UsageReportSubscription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUserStackAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?user_name: String,
+        ?authentication_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor user_name: String?
+      attr_accessor authentication_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUserStackAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_stack_associations: Array[Types::UserStackAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_stack_associations: Array[Types::UserStackAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUsersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class DirectoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_name: String,
+        ?organizational_unit_distinguished_names: Array[String],
+        ?service_account_credentials: Types::ServiceAccountCredentials,
+        ?created_time: Time,
+        ?certificate_based_auth_properties: Types::CertificateBasedAuthProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: String?
+      attr_accessor organizational_unit_distinguished_names: Array[String]?
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials?
+      attr_accessor created_time: Time?
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties?
+    end
+
+    class DisableUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor authentication_type: String?
+    end
+
+    class DisableUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateAppBlockBuilderAppBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_arn: String,
+        ?app_block_builder_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_arn: String?
+      attr_accessor app_block_builder_name: String?
+    end
+
+    class DisassociateAppBlockBuilderAppBlockResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateApplicationFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor application_arn: String?
+    end
+
+    class DisassociateApplicationFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateApplicationFromEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?entitlement_name: String,
+        ?application_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor entitlement_name: String?
+      attr_accessor application_identifier: String?
+    end
+
+    class DisassociateApplicationFromEntitlementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor stack_name: String?
+    end
+
+    class DisassociateFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DomainJoinInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_name: String,
+        ?organizational_unit_distinguished_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: String?
+      attr_accessor organizational_unit_distinguished_name: String?
+    end
+
+    module DynamicAppProvidersEnabled
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EnableUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor authentication_type: String?
+    end
+
+    class EnableUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EntitledApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+    end
+
+    class Entitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stack_name: String,
+        ?description: String,
+        ?app_visibility: String,
+        ?attributes: Array[Types::EntitlementAttribute],
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stack_name: String?
+      attr_accessor description: String?
+      attr_accessor app_visibility: String?
+      attr_accessor attributes: Array[Types::EntitlementAttribute]?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class EntitlementAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EntitlementAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class EntitlementNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class ExpireSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class ExpireSessionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Fleet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?image_name: String,
+        ?image_arn: String,
+        ?instance_type: String,
+        ?fleet_type: String,
+        ?compute_capacity_status: Types::ComputeCapacityStatus,
+        ?max_user_duration_in_seconds: Integer,
+        ?disconnect_timeout_in_seconds: Integer,
+        ?state: String,
+        ?vpc_config: Types::VpcConfig,
+        ?created_time: Time,
+        ?fleet_errors: Array[Types::FleetError],
+        ?enable_default_internet_access: bool,
+        ?domain_join_info: Types::DomainJoinInfo,
+        ?idle_disconnect_timeout_in_seconds: Integer,
+        ?iam_role_arn: String,
+        ?stream_view: String,
+        ?platform: String,
+        ?max_concurrent_sessions: Integer,
+        ?usb_device_filter_strings: Array[String],
+        ?session_script_s3_location: Types::S3Location,
+        ?max_sessions_per_instance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor image_name: String?
+      attr_accessor image_arn: String?
+      attr_accessor instance_type: String?
+      attr_accessor fleet_type: String?
+      attr_accessor compute_capacity_status: Types::ComputeCapacityStatus?
+      attr_accessor max_user_duration_in_seconds: Integer?
+      attr_accessor disconnect_timeout_in_seconds: Integer?
+      attr_accessor state: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor created_time: Time?
+      attr_accessor fleet_errors: Array[Types::FleetError]?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor domain_join_info: Types::DomainJoinInfo?
+      attr_accessor idle_disconnect_timeout_in_seconds: Integer?
+      attr_accessor iam_role_arn: String?
+      attr_accessor stream_view: String?
+      attr_accessor platform: String?
+      attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor usb_device_filter_strings: Array[String]?
+      attr_accessor session_script_s3_location: Types::S3Location?
+      attr_accessor max_sessions_per_instance: Integer?
+    end
+
+    module FleetAttribute
+      VPC_CONFIGURATION: String
+      VPC_CONFIGURATION_SECURITY_GROUP_IDS: String
+      DOMAIN_JOIN_INFO: String
+      IAM_ROLE_ARN: String
+      USB_DEVICE_FILTER_STRINGS: String
+      SESSION_SCRIPT_S3_LOCATION: String
+      MAX_SESSIONS_PER_INSTANCE: String
+    end
+
+    class FleetError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module FleetErrorCode
+      IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION: String
+      IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION: String
+      IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION: String
+      NETWORK_INTERFACE_LIMIT_EXCEEDED: String
+      INTERNAL_SERVICE_ERROR: String
+      IAM_SERVICE_ROLE_IS_MISSING: String
+      MACHINE_ROLE_IS_MISSING: String
+      STS_DISABLED_IN_REGION: String
+      SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES: String
+      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION: String
+      SUBNET_NOT_FOUND: String
+      IMAGE_NOT_FOUND: String
+      INVALID_SUBNET_CONFIGURATION: String
+      SECURITY_GROUPS_NOT_FOUND: String
+      IGW_NOT_ATTACHED: String
+      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION: String
+      FLEET_STOPPED: String
+      FLEET_INSTANCE_PROVISIONING_FAILURE: String
+      DOMAIN_JOIN_ERROR_FILE_NOT_FOUND: String
+      DOMAIN_JOIN_ERROR_ACCESS_DENIED: String
+      DOMAIN_JOIN_ERROR_LOGON_FAILURE: String
+      DOMAIN_JOIN_ERROR_INVALID_PARAMETER: String
+      DOMAIN_JOIN_ERROR_MORE_DATA: String
+      DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN: String
+      DOMAIN_JOIN_ERROR_NOT_SUPPORTED: String
+      DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME: String
+      DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED: String
+      DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED: String
+      DOMAIN_JOIN_NERR_PASSWORD_EXPIRED: String
+      DOMAIN_JOIN_INTERNAL_SERVICE_ERROR: String
+    end
+
+    module FleetState
+      STARTING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    module FleetType
+      ALWAYS_ON: String
+      ON_DEMAND: String
+      ELASTIC: String
+    end
+
+    class Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?base_image_arn: String,
+        ?display_name: String,
+        ?state: String,
+        ?visibility: String,
+        ?image_builder_supported: bool,
+        ?image_builder_name: String,
+        ?platform: String,
+        ?description: String,
+        ?state_change_reason: Types::ImageStateChangeReason,
+        ?applications: Array[Types::Application],
+        ?created_time: Time,
+        ?public_base_image_released_date: Time,
+        ?appstream_agent_version: String,
+        ?image_permissions: Types::ImagePermissions,
+        ?image_errors: Array[Types::ResourceError],
+        ?latest_appstream_agent_version: String,
+        ?supported_instance_families: Array[String],
+        ?dynamic_app_providers_enabled: String,
+        ?image_shared_with_others: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor base_image_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor state: String?
+      attr_accessor visibility: String?
+      attr_accessor image_builder_supported: bool?
+      attr_accessor image_builder_name: String?
+      attr_accessor platform: String?
+      attr_accessor description: String?
+      attr_accessor state_change_reason: Types::ImageStateChangeReason?
+      attr_accessor applications: Array[Types::Application]?
+      attr_accessor created_time: Time?
+      attr_accessor public_base_image_released_date: Time?
+      attr_accessor appstream_agent_version: String?
+      attr_accessor image_permissions: Types::ImagePermissions?
+      attr_accessor image_errors: Array[Types::ResourceError]?
+      attr_accessor latest_appstream_agent_version: String?
+      attr_accessor supported_instance_families: Array[String]?
+      attr_accessor dynamic_app_providers_enabled: String?
+      attr_accessor image_shared_with_others: String?
+    end
+
+    class ImageBuilder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?image_arn: String,
+        ?description: String,
+        ?display_name: String,
+        ?vpc_config: Types::VpcConfig,
+        ?instance_type: String,
+        ?platform: String,
+        ?iam_role_arn: String,
+        ?state: String,
+        ?state_change_reason: Types::ImageBuilderStateChangeReason,
+        ?created_time: Time,
+        ?enable_default_internet_access: bool,
+        ?domain_join_info: Types::DomainJoinInfo,
+        ?network_access_configuration: Types::NetworkAccessConfiguration,
+        ?image_builder_errors: Array[Types::ResourceError],
+        ?appstream_agent_version: String,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?latest_appstream_agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor image_arn: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor instance_type: String?
+      attr_accessor platform: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::ImageBuilderStateChangeReason?
+      attr_accessor created_time: Time?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor domain_join_info: Types::DomainJoinInfo?
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration?
+      attr_accessor image_builder_errors: Array[Types::ResourceError]?
+      attr_accessor appstream_agent_version: String?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor latest_appstream_agent_version: String?
+    end
+
+    module ImageBuilderState
+      PENDING: String
+      UPDATING_AGENT: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+      REBOOTING: String
+      SNAPSHOTTING: String
+      DELETING: String
+      FAILED: String
+      UPDATING: String
+      PENDING_QUALIFICATION: String
+    end
+
+    class ImageBuilderStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ImageBuilderStateChangeReasonCode
+      INTERNAL_ERROR: String
+      IMAGE_UNAVAILABLE: String
+    end
+
+    class ImagePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_fleet: bool,
+        ?allow_image_builder: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_fleet: bool?
+      attr_accessor allow_image_builder: bool?
+    end
+
+    module ImageSharedWithOthers
+      TRUE: String
+      FALSE: String
+    end
+
+    module ImageState
+      PENDING: String
+      AVAILABLE: String
+      FAILED: String
+      COPYING: String
+      DELETING: String
+      CREATING: String
+      IMPORTING: String
+    end
+
+    class ImageStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ImageStateChangeReasonCode
+      INTERNAL_ERROR: String
+      IMAGE_BUILDER_NOT_AVAILABLE: String
+      IMAGE_COPY_FAILURE: String
+    end
+
+    class IncompatibleImageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAccountStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRoleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastReportGenerationExecutionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module LatestAppstreamAgentVersion
+      TRUE: String
+      FALSE: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssociatedFleetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedFleetsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedStacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedStacksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntitledApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?entitlement_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor entitlement_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEntitledApplicationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitled_applications: Array[Types::EntitledApplication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitled_applications: Array[Types::EntitledApplication]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MessageAction
+      SUPPRESS: String
+      RESEND: String
+    end
+
+    class NetworkAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eni_private_ip_address: String,
+        ?eni_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eni_private_ip_address: String?
+      attr_accessor eni_id: String?
+    end
+
+    class OperationNotPermittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PackagingType
+      CUSTOM: String
+      APPSTREAM2: String
+    end
+
+    module Permission
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module PlatformType
+      WINDOWS: String
+      WINDOWS_SERVER_2016: String
+      WINDOWS_SERVER_2019: String
+      WINDOWS_SERVER_2022: String
+      AMAZON_LINUX2: String
+      RHEL8: String
+      ROCKY_LINUX8: String
+    end
+
+    module PreferredProtocol
+      TCP: String
+      UDP: String
+    end
+
+    class RequestLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?error_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor error_timestamp: Time?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotAvailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+    end
+
+    class ScriptDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_s3_location: Types::S3Location,
+        ?executable_path: String,
+        ?executable_parameters: String,
+        ?timeout_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_s3_location: Types::S3Location?
+      attr_accessor executable_path: String?
+      attr_accessor executable_parameters: String?
+      attr_accessor timeout_in_seconds: Integer?
+    end
+
+    class ServiceAccountCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_name: String,
+        ?account_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_name: String?
+      attr_accessor account_password: String?
+    end
+
+    class Session
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?user_id: String,
+        ?stack_name: String,
+        ?fleet_name: String,
+        ?state: String,
+        ?connection_state: String,
+        ?start_time: Time,
+        ?max_expiration_time: Time,
+        ?authentication_type: String,
+        ?network_access_configuration: Types::NetworkAccessConfiguration,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor user_id: String?
+      attr_accessor stack_name: String?
+      attr_accessor fleet_name: String?
+      attr_accessor state: String?
+      attr_accessor connection_state: String?
+      attr_accessor start_time: Time?
+      attr_accessor max_expiration_time: Time?
+      attr_accessor authentication_type: String?
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration?
+      attr_accessor instance_id: String?
+    end
+
+    module SessionConnectionState
+      CONNECTED: String
+      NOT_CONNECTED: String
+    end
+
+    module SessionState
+      ACTIVE: String
+      PENDING: String
+      EXPIRED: String
+    end
+
+    class SharedImagePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_account_id: String,
+        ?image_permissions: Types::ImagePermissions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_account_id: String?
+      attr_accessor image_permissions: Types::ImagePermissions?
+    end
+
+    class Stack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?display_name: String,
+        ?created_time: Time,
+        ?storage_connectors: Array[Types::StorageConnector],
+        ?redirect_url: String,
+        ?feedback_url: String,
+        ?stack_errors: Array[Types::StackError],
+        ?user_settings: Array[Types::UserSetting],
+        ?application_settings: Types::ApplicationSettingsResponse,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?embed_host_domains: Array[String],
+        ?streaming_experience_settings: Types::StreamingExperienceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor created_time: Time?
+      attr_accessor storage_connectors: Array[Types::StorageConnector]?
+      attr_accessor redirect_url: String?
+      attr_accessor feedback_url: String?
+      attr_accessor stack_errors: Array[Types::StackError]?
+      attr_accessor user_settings: Array[Types::UserSetting]?
+      attr_accessor application_settings: Types::ApplicationSettingsResponse?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor embed_host_domains: Array[String]?
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+    end
+
+    module StackAttribute
+      STORAGE_CONNECTORS: String
+      STORAGE_CONNECTOR_HOMEFOLDERS: String
+      STORAGE_CONNECTOR_GOOGLE_DRIVE: String
+      STORAGE_CONNECTOR_ONE_DRIVE: String
+      REDIRECT_URL: String
+      FEEDBACK_URL: String
+      THEME_NAME: String
+      USER_SETTINGS: String
+      EMBED_HOST_DOMAINS: String
+      IAM_ROLE_ARN: String
+      ACCESS_ENDPOINTS: String
+      STREAMING_EXPERIENCE_SETTINGS: String
+    end
+
+    class StackError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module StackErrorCode
+      STORAGE_CONNECTOR_ERROR: String
+      INTERNAL_SERVICE_ERROR: String
+    end
+
+    class StartAppBlockBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StartAppBlockBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder: Types::AppBlockBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder: Types::AppBlockBuilder?
+    end
+
+    class StartFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StartFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?appstream_agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor appstream_agent_version: String?
+    end
+
+    class StartImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder: Types::ImageBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder: Types::ImageBuilder?
+    end
+
+    class StopAppBlockBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StopAppBlockBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder: Types::AppBlockBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder: Types::AppBlockBuilder?
+    end
+
+    class StopFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StopFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StopImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder: Types::ImageBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder: Types::ImageBuilder?
+    end
+
+    class StorageConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_type: String,
+        ?resource_identifier: String,
+        ?domains: Array[String],
+        ?domains_require_admin_consent: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor domains: Array[String]?
+      attr_accessor domains_require_admin_consent: Array[String]?
+    end
+
+    module StorageConnectorType
+      HOMEFOLDERS: String
+      GOOGLE_DRIVE: String
+      ONE_DRIVE: String
+    end
+
+    module StreamView
+      APP: String
+      DESKTOP: String
+    end
+
+    class StreamingExperienceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preferred_protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preferred_protocol: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Theme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?state: String,
+        ?theme_title_text: String,
+        ?theme_styling: String,
+        ?theme_footer_links: Array[Types::ThemeFooterLink],
+        ?theme_organization_logo_url: String,
+        ?theme_favicon_url: String,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor state: String?
+      attr_accessor theme_title_text: String?
+      attr_accessor theme_styling: String?
+      attr_accessor theme_footer_links: Array[Types::ThemeFooterLink]?
+      attr_accessor theme_organization_logo_url: String?
+      attr_accessor theme_favicon_url: String?
+      attr_accessor created_time: Time?
+    end
+
+    module ThemeAttribute
+      FOOTER_LINKS: String
+    end
+
+    class ThemeFooterLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?footer_link_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor footer_link_url: String?
+    end
+
+    module ThemeState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ThemeStyling
+      LIGHT_BLUE: String
+      BLUE: String
+      PINK: String
+      RED: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAppBlockBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?display_name: String,
+        ?platform: String,
+        ?instance_type: String,
+        ?vpc_config: Types::VpcConfig,
+        ?enable_default_internet_access: bool,
+        ?iam_role_arn: String,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?attributes_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor platform: String?
+      attr_accessor instance_type: String?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor iam_role_arn: String?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor attributes_to_delete: Array[String]?
+    end
+
+    class UpdateAppBlockBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_block_builder: Types::AppBlockBuilder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_block_builder: Types::AppBlockBuilder?
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?icon_s3_location: Types::S3Location,
+        ?launch_path: String,
+        ?working_directory: String,
+        ?launch_parameters: String,
+        ?app_block_arn: String,
+        ?attributes_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor icon_s3_location: Types::S3Location?
+      attr_accessor launch_path: String?
+      attr_accessor working_directory: String?
+      attr_accessor launch_parameters: String?
+      attr_accessor app_block_arn: String?
+      attr_accessor attributes_to_delete: Array[String]?
+    end
+
+    class UpdateApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+    end
+
+    class UpdateDirectoryConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_name: String,
+        ?organizational_unit_distinguished_names: Array[String],
+        ?service_account_credentials: Types::ServiceAccountCredentials,
+        ?certificate_based_auth_properties: Types::CertificateBasedAuthProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: String?
+      attr_accessor organizational_unit_distinguished_names: Array[String]?
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials?
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties?
+    end
+
+    class UpdateDirectoryConfigResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_config: Types::DirectoryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_config: Types::DirectoryConfig?
+    end
+
+    class UpdateEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?stack_name: String,
+        ?description: String,
+        ?app_visibility: String,
+        ?attributes: Array[Types::EntitlementAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor stack_name: String?
+      attr_accessor description: String?
+      attr_accessor app_visibility: String?
+      attr_accessor attributes: Array[Types::EntitlementAttribute]?
+    end
+
+    class UpdateEntitlementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement: Types::Entitlement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement: Types::Entitlement?
+    end
+
+    class UpdateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_name: String,
+        ?image_arn: String,
+        ?name: String,
+        ?instance_type: String,
+        ?compute_capacity: Types::ComputeCapacity,
+        ?vpc_config: Types::VpcConfig,
+        ?max_user_duration_in_seconds: Integer,
+        ?disconnect_timeout_in_seconds: Integer,
+        ?delete_vpc_config: bool,
+        ?description: String,
+        ?display_name: String,
+        ?enable_default_internet_access: bool,
+        ?domain_join_info: Types::DomainJoinInfo,
+        ?idle_disconnect_timeout_in_seconds: Integer,
+        ?attributes_to_delete: Array[String],
+        ?iam_role_arn: String,
+        ?stream_view: String,
+        ?platform: String,
+        ?max_concurrent_sessions: Integer,
+        ?usb_device_filter_strings: Array[String],
+        ?session_script_s3_location: Types::S3Location,
+        ?max_sessions_per_instance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_name: String?
+      attr_accessor image_arn: String?
+      attr_accessor name: String?
+      attr_accessor instance_type: String?
+      attr_accessor compute_capacity: Types::ComputeCapacity?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor max_user_duration_in_seconds: Integer?
+      attr_accessor disconnect_timeout_in_seconds: Integer?
+      attr_accessor delete_vpc_config: bool?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor enable_default_internet_access: bool?
+      attr_accessor domain_join_info: Types::DomainJoinInfo?
+      attr_accessor idle_disconnect_timeout_in_seconds: Integer?
+      attr_accessor attributes_to_delete: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor stream_view: String?
+      attr_accessor platform: String?
+      attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor usb_device_filter_strings: Array[String]?
+      attr_accessor session_script_s3_location: Types::S3Location?
+      attr_accessor max_sessions_per_instance: Integer?
+    end
+
+    class UpdateFleetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet: Types::Fleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet: Types::Fleet?
+    end
+
+    class UpdateImagePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?shared_account_id: String,
+        ?image_permissions: Types::ImagePermissions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor shared_account_id: String?
+      attr_accessor image_permissions: Types::ImagePermissions?
+    end
+
+    class UpdateImagePermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?name: String,
+        ?storage_connectors: Array[Types::StorageConnector],
+        ?delete_storage_connectors: bool,
+        ?redirect_url: String,
+        ?feedback_url: String,
+        ?attributes_to_delete: Array[String],
+        ?user_settings: Array[Types::UserSetting],
+        ?application_settings: Types::ApplicationSettings,
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?embed_host_domains: Array[String],
+        ?streaming_experience_settings: Types::StreamingExperienceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor storage_connectors: Array[Types::StorageConnector]?
+      attr_accessor delete_storage_connectors: bool?
+      attr_accessor redirect_url: String?
+      attr_accessor feedback_url: String?
+      attr_accessor attributes_to_delete: Array[String]?
+      attr_accessor user_settings: Array[Types::UserSetting]?
+      attr_accessor application_settings: Types::ApplicationSettings?
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor embed_host_domains: Array[String]?
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+    end
+
+    class UpdateStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack: Types::Stack,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack: Types::Stack?
+    end
+
+    class UpdateThemeForStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?footer_links: Array[Types::ThemeFooterLink],
+        ?title_text: String,
+        ?theme_styling: String,
+        ?organization_logo_s3_location: Types::S3Location,
+        ?favicon_s3_location: Types::S3Location,
+        ?state: String,
+        ?attributes_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor footer_links: Array[Types::ThemeFooterLink]?
+      attr_accessor title_text: String?
+      attr_accessor theme_styling: String?
+      attr_accessor organization_logo_s3_location: Types::S3Location?
+      attr_accessor favicon_s3_location: Types::S3Location?
+      attr_accessor state: String?
+      attr_accessor attributes_to_delete: Array[String]?
+    end
+
+    class UpdateThemeForStackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?theme: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor theme: Types::Theme?
+    end
+
+    module UsageReportExecutionErrorCode
+      RESOURCE_NOT_FOUND: String
+      ACCESS_DENIED: String
+      INTERNAL_SERVICE_ERROR: String
+    end
+
+    module UsageReportSchedule
+      DAILY: String
+    end
+
+    class UsageReportSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?schedule: String,
+        ?last_generated_report_date: Time,
+        ?subscription_errors: Array[Types::LastReportGenerationExecutionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor schedule: String?
+      attr_accessor last_generated_report_date: Time?
+      attr_accessor subscription_errors: Array[Types::LastReportGenerationExecutionError]?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?user_name: String,
+        ?enabled: bool,
+        ?status: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?created_time: Time,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor user_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor status: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor created_time: Time?
+      attr_accessor authentication_type: String?
+    end
+
+    class UserSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?permission: String,
+        ?maximum_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor permission: String?
+      attr_accessor maximum_length: Integer?
+    end
+
+    class UserStackAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?user_name: String,
+        ?authentication_type: String,
+        ?send_email_notification: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor user_name: String?
+      attr_accessor authentication_type: String?
+      attr_accessor send_email_notification: bool?
+    end
+
+    class UserStackAssociationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_stack_association: Types::UserStackAssociation,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_stack_association: Types::UserStackAssociation?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module UserStackAssociationErrorCode
+      STACK_NOT_FOUND: String
+      USER_NAME_NOT_FOUND: String
+      DIRECTORY_NOT_FOUND: String
+      INTERNAL_ERROR: String
+    end
+
+    module VisibilityType
+      PUBLIC: String
+      PRIVATE: String
+      SHARED: String
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+  end
+end

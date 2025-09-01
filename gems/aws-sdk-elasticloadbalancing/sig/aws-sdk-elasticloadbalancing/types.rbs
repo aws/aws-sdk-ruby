@@ -1,0 +1,1338 @@
+module Aws::ElasticLoadBalancing
+  module Types
+
+    class AccessLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?s3_bucket_name: String,
+        ?emit_interval: Integer,
+        ?s3_bucket_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor emit_interval: Integer?
+      attr_accessor s3_bucket_prefix: String?
+    end
+
+    class AccessPointNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddAvailabilityZonesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class AddAvailabilityZonesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class AddTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_names: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_names: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AdditionalAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class AppCookieStickinessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?cookie_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor cookie_name: String?
+    end
+
+    class ApplySecurityGroupsToLoadBalancerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class ApplySecurityGroupsToLoadBalancerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class AttachLoadBalancerToSubnetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor subnets: Array[String]?
+    end
+
+    class AttachLoadBalancerToSubnetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+    end
+
+    class BackendServerDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_port: Integer,
+        ?policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_port: Integer?
+      attr_accessor policy_names: Array[String]?
+    end
+
+    class CertificateNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConfigureHealthCheckInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?health_check: Types::HealthCheck,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor health_check: Types::HealthCheck?
+    end
+
+    class ConfigureHealthCheckOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check: Types::HealthCheck,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check: Types::HealthCheck?
+    end
+
+    class ConnectionDraining
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor timeout: Integer?
+    end
+
+    class ConnectionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idle_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idle_timeout: Integer?
+    end
+
+    class CreateAccessPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?listeners: Array[Types::Listener],
+        ?availability_zones: Array[String],
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+        ?scheme: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor listeners: Array[Types::Listener]?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor scheme: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAccessPointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: String?
+    end
+
+    class CreateAppCookieStickinessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?policy_name: String,
+        ?cookie_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor cookie_name: String?
+    end
+
+    class CreateAppCookieStickinessPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLBCookieStickinessPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?policy_name: String,
+        ?cookie_expiration_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor cookie_expiration_period: Integer?
+    end
+
+    class CreateLBCookieStickinessPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLoadBalancerListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?listeners: Array[Types::Listener],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor listeners: Array[Types::Listener]?
+    end
+
+    class CreateLoadBalancerListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLoadBalancerPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?policy_name: String,
+        ?policy_type_name: String,
+        ?policy_attributes: Array[Types::PolicyAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_type_name: String?
+      attr_accessor policy_attributes: Array[Types::PolicyAttribute]?
+    end
+
+    class CreateLoadBalancerPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CrossZoneLoadBalancing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class DeleteAccessPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+    end
+
+    class DeleteAccessPointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLoadBalancerListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?load_balancer_ports: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor load_balancer_ports: Array[Integer]?
+    end
+
+    class DeleteLoadBalancerListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLoadBalancerPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor policy_name: String?
+    end
+
+    class DeleteLoadBalancerPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependencyThrottleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeregisterEndPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?instances: Array[Types::Instance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor instances: Array[Types::Instance]?
+    end
+
+    class DeregisterEndPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::Instance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::Instance]?
+    end
+
+    class DescribeAccessPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_names: Array[String],
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_names: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeAccessPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_descriptions: Array[Types::LoadBalancerDescription],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_descriptions: Array[Types::LoadBalancerDescription]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeAccountLimitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class DescribeAccountLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits: Array[Types::Limit],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits: Array[Types::Limit]?
+      attr_accessor next_marker: String?
+    end
+
+    class DescribeEndPointStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?instances: Array[Types::Instance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor instances: Array[Types::Instance]?
+    end
+
+    class DescribeEndPointStateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_states: Array[Types::InstanceState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_states: Array[Types::InstanceState]?
+    end
+
+    class DescribeLoadBalancerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+    end
+
+    class DescribeLoadBalancerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_attributes: Types::LoadBalancerAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes?
+    end
+
+    class DescribeLoadBalancerPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor policy_names: Array[String]?
+    end
+
+    class DescribeLoadBalancerPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_descriptions: Array[Types::PolicyDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_descriptions: Array[Types::PolicyDescription]?
+    end
+
+    class DescribeLoadBalancerPolicyTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type_names: Array[String]?
+    end
+
+    class DescribeLoadBalancerPolicyTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type_descriptions: Array[Types::PolicyTypeDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type_descriptions: Array[Types::PolicyTypeDescription]?
+    end
+
+    class DescribeTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_names: Array[String]?
+    end
+
+    class DescribeTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_descriptions: Array[Types::TagDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_descriptions: Array[Types::TagDescription]?
+    end
+
+    class DetachLoadBalancerFromSubnetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor subnets: Array[String]?
+    end
+
+    class DetachLoadBalancerFromSubnetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+    end
+
+    class DuplicateAccessPointNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateListenerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicatePolicyNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateTagKeysException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: String,
+        ?interval: Integer,
+        ?timeout: Integer,
+        ?unhealthy_threshold: Integer,
+        ?healthy_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: String?
+      attr_accessor interval: Integer?
+      attr_accessor timeout: Integer?
+      attr_accessor unhealthy_threshold: Integer?
+      attr_accessor healthy_threshold: Integer?
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class InstanceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?state: String,
+        ?reason_code: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor state: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+    end
+
+    class InvalidConfigurationRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndPointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSchemeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSecurityGroupException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSubnetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LBCookieStickinessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?cookie_expiration_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor cookie_expiration_period: Integer?
+    end
+
+    class Limit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max: String?
+    end
+
+    class Listener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?load_balancer_port: Integer,
+        ?instance_protocol: String,
+        ?instance_port: Integer,
+        ?ssl_certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor load_balancer_port: Integer?
+      attr_accessor instance_protocol: String?
+      attr_accessor instance_port: Integer?
+      attr_accessor ssl_certificate_id: String?
+    end
+
+    class ListenerDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::Listener,
+        ?policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::Listener?
+      attr_accessor policy_names: Array[String]?
+    end
+
+    class ListenerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LoadBalancerAttributeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LoadBalancerAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_zone_load_balancing: Types::CrossZoneLoadBalancing,
+        ?access_log: Types::AccessLog,
+        ?connection_draining: Types::ConnectionDraining,
+        ?connection_settings: Types::ConnectionSettings,
+        ?additional_attributes: Array[Types::AdditionalAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_zone_load_balancing: Types::CrossZoneLoadBalancing?
+      attr_accessor access_log: Types::AccessLog?
+      attr_accessor connection_draining: Types::ConnectionDraining?
+      attr_accessor connection_settings: Types::ConnectionSettings?
+      attr_accessor additional_attributes: Array[Types::AdditionalAttribute]?
+    end
+
+    class LoadBalancerDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?dns_name: String,
+        ?canonical_hosted_zone_name: String,
+        ?canonical_hosted_zone_name_id: String,
+        ?listener_descriptions: Array[Types::ListenerDescription],
+        ?policies: Types::Policies,
+        ?backend_server_descriptions: Array[Types::BackendServerDescription],
+        ?availability_zones: Array[String],
+        ?subnets: Array[String],
+        ?vpc_id: String,
+        ?instances: Array[Types::Instance],
+        ?health_check: Types::HealthCheck,
+        ?source_security_group: Types::SourceSecurityGroup,
+        ?security_groups: Array[String],
+        ?created_time: Time,
+        ?scheme: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor dns_name: String?
+      attr_accessor canonical_hosted_zone_name: String?
+      attr_accessor canonical_hosted_zone_name_id: String?
+      attr_accessor listener_descriptions: Array[Types::ListenerDescription]?
+      attr_accessor policies: Types::Policies?
+      attr_accessor backend_server_descriptions: Array[Types::BackendServerDescription]?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor subnets: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor health_check: Types::HealthCheck?
+      attr_accessor source_security_group: Types::SourceSecurityGroup?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor created_time: Time?
+      attr_accessor scheme: String?
+    end
+
+    class ModifyLoadBalancerAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?load_balancer_attributes: Types::LoadBalancerAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes?
+    end
+
+    class ModifyLoadBalancerAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?load_balancer_attributes: Types::LoadBalancerAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes?
+    end
+
+    class OperationNotPermittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Policies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_cookie_stickiness_policies: Array[Types::AppCookieStickinessPolicy],
+        ?lb_cookie_stickiness_policies: Array[Types::LBCookieStickinessPolicy],
+        ?other_policies: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_cookie_stickiness_policies: Array[Types::AppCookieStickinessPolicy]?
+      attr_accessor lb_cookie_stickiness_policies: Array[Types::LBCookieStickinessPolicy]?
+      attr_accessor other_policies: Array[String]?
+    end
+
+    class PolicyAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+    end
+
+    class PolicyAttributeDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+    end
+
+    class PolicyAttributeTypeDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?description: String,
+        ?default_value: String,
+        ?cardinality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor description: String?
+      attr_accessor default_value: String?
+      attr_accessor cardinality: String?
+    end
+
+    class PolicyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_type_name: String,
+        ?policy_attribute_descriptions: Array[Types::PolicyAttributeDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_type_name: String?
+      attr_accessor policy_attribute_descriptions: Array[Types::PolicyAttributeDescription]?
+    end
+
+    class PolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyTypeDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type_name: String,
+        ?description: String,
+        ?policy_attribute_type_descriptions: Array[Types::PolicyAttributeTypeDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type_name: String?
+      attr_accessor description: String?
+      attr_accessor policy_attribute_type_descriptions: Array[Types::PolicyAttributeTypeDescription]?
+    end
+
+    class PolicyTypeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RegisterEndPointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?instances: Array[Types::Instance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor instances: Array[Types::Instance]?
+    end
+
+    class RegisterEndPointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::Instance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::Instance]?
+    end
+
+    class RemoveAvailabilityZonesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class RemoveAvailabilityZonesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class RemoveTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_names: Array[String],
+        ?tags: Array[Types::TagKeyOnly],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_names: Array[String]?
+      attr_accessor tags: Array[Types::TagKeyOnly]?
+    end
+
+    class RemoveTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SetLoadBalancerListenerSSLCertificateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?load_balancer_port: Integer,
+        ?ssl_certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor load_balancer_port: Integer?
+      attr_accessor ssl_certificate_id: String?
+    end
+
+    class SetLoadBalancerListenerSSLCertificateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SetLoadBalancerPoliciesForBackendServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?instance_port: Integer,
+        ?policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor instance_port: Integer?
+      attr_accessor policy_names: Array[String]?
+    end
+
+    class SetLoadBalancerPoliciesForBackendServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SetLoadBalancerPoliciesOfListenerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?load_balancer_port: Integer,
+        ?policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor load_balancer_port: Integer?
+      attr_accessor policy_names: Array[String]?
+    end
+
+    class SetLoadBalancerPoliciesOfListenerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SourceSecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_alias: String,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_alias: String?
+      attr_accessor group_name: String?
+    end
+
+    class SubnetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagKeyOnly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+    end
+
+    class TooManyAccessPointsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyPoliciesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedProtocolException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

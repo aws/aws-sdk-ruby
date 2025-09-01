@@ -1,0 +1,32 @@
+module Aws::EC2InstanceConnect
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AuthException: StructureShape
+    AvailabilityZone: StringShape
+    EC2InstanceNotFoundException: StructureShape
+    EC2InstanceStateInvalidException: StructureShape
+    EC2InstanceTypeInvalidException: StructureShape
+    EC2InstanceUnavailableException: StructureShape
+    InstanceId: StringShape
+    InstanceOSUser: StringShape
+    InvalidArgsException: StructureShape
+    RequestId: StringShape
+    SSHPublicKey: StringShape
+    SendSSHPublicKeyRequest: StructureShape
+    SendSSHPublicKeyResponse: StructureShape
+    SendSerialConsoleSSHPublicKeyRequest: StructureShape
+    SendSerialConsoleSSHPublicKeyResponse: StructureShape
+    SerialConsoleAccessDisabledException: StructureShape
+    SerialConsoleSessionLimitExceededException: StructureShape
+    SerialConsoleSessionUnavailableException: StructureShape
+    SerialConsoleSessionUnsupportedException: StructureShape
+    SerialPort: IntegerShape
+    ServiceException: StructureShape
+    String: StringShape
+    Success: BooleanShape
+    ThrottlingException: StructureShape
+
+    AWSEC2InstanceConnectService: ServiceShape
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module GuardDuty
+      VERSION: String
+    end
+  end

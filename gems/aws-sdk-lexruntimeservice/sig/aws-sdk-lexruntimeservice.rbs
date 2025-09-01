@@ -1,0 +1,5 @@
+  module Aws
+    module LexRuntimeService
+      VERSION: String
+    end
+  end

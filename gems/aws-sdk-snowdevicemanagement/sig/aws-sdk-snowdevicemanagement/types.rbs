@@ -1,0 +1,704 @@
+module Aws::SnowDeviceManagement
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelTaskOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class CancelTaskOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class Capacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?unit: String,
+        ?total: Integer,
+        ?used: Integer,
+        ?available: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor unit: String?
+      attr_accessor total: Integer?
+      attr_accessor used: Integer?
+      attr_accessor available: Integer?
+    end
+
+    class Command
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?unlock: Types::Unlock,
+        ?reboot: Types::Reboot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unlock: Types::Unlock?
+      attr_accessor reboot: Types::Reboot?
+
+      class Unlock < Command
+      end
+      class Reboot < Command
+      end
+      class Unknown < Command
+      end
+    end
+
+    class CpuOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_count: Integer,
+        ?threads_per_core: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_count: Integer?
+      attr_accessor threads_per_core: Integer?
+    end
+
+    class CreateTaskOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?targets: Array[String],
+        ?command: Types::Command,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor targets: Array[String]?
+      attr_accessor command: Types::Command?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTaskOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+    end
+
+    class DescribeDeviceEc2InstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_device_id: String,
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_device_id: String?
+      attr_accessor instance_ids: Array[String]?
+    end
+
+    class DescribeDeviceEc2InstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::InstanceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::InstanceSummary]?
+    end
+
+    class DescribeDeviceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_device_id: String?
+    end
+
+    class DescribeDeviceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_reached_out_at: Time,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+        ?managed_device_id: String,
+        ?managed_device_arn: String,
+        ?device_type: String,
+        ?associated_with_job: String,
+        ?device_state: String,
+        ?physical_network_interfaces: Array[Types::PhysicalNetworkInterface],
+        ?device_capacities: Array[Types::Capacity],
+        ?software: Types::SoftwareInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_reached_out_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor managed_device_id: String?
+      attr_accessor managed_device_arn: String?
+      attr_accessor device_type: String?
+      attr_accessor associated_with_job: String?
+      attr_accessor device_state: String?
+      attr_accessor physical_network_interfaces: Array[Types::PhysicalNetworkInterface]?
+      attr_accessor device_capacities: Array[Types::Capacity]?
+      attr_accessor software: Types::SoftwareInformation?
+    end
+
+    class DescribeExecutionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?managed_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor managed_device_id: String?
+    end
+
+    class DescribeExecutionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?execution_id: String,
+        ?managed_device_id: String,
+        ?state: String,
+        ?started_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor execution_id: String?
+      attr_accessor managed_device_id: String?
+      attr_accessor state: String?
+      attr_accessor started_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class DescribeTaskOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class DescribeTaskOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?targets: Array[String],
+        ?state: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?completed_at: Time,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor targets: Array[String]?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeviceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_device_id: String,
+        ?managed_device_arn: String,
+        ?associated_with_job: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_device_id: String?
+      attr_accessor managed_device_arn: String?
+      attr_accessor associated_with_job: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class EbsInstanceBlockDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attach_time: Time,
+        ?delete_on_termination: bool,
+        ?status: String,
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attach_time: Time?
+      attr_accessor delete_on_termination: bool?
+      attr_accessor status: String?
+      attr_accessor volume_id: String?
+    end
+
+    class ExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?execution_id: String,
+        ?managed_device_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor execution_id: String?
+      attr_accessor managed_device_id: String?
+      attr_accessor state: String?
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?ami_launch_index: Integer,
+        ?instance_id: String,
+        ?state: Types::InstanceState,
+        ?instance_type: String,
+        ?private_ip_address: String,
+        ?public_ip_address: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?block_device_mappings: Array[Types::InstanceBlockDeviceMapping],
+        ?security_groups: Array[Types::SecurityGroupIdentifier],
+        ?cpu_options: Types::CpuOptions,
+        ?root_device_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor ami_launch_index: Integer?
+      attr_accessor instance_id: String?
+      attr_accessor state: Types::InstanceState?
+      attr_accessor instance_type: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor public_ip_address: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor block_device_mappings: Array[Types::InstanceBlockDeviceMapping]?
+      attr_accessor security_groups: Array[Types::SecurityGroupIdentifier]?
+      attr_accessor cpu_options: Types::CpuOptions?
+      attr_accessor root_device_name: String?
+    end
+
+    class InstanceBlockDeviceMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?ebs: Types::EbsInstanceBlockDevice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor ebs: Types::EbsInstanceBlockDevice?
+    end
+
+    class InstanceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: Integer,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: Integer?
+      attr_accessor name: String?
+    end
+
+    class InstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDeviceResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_device_id: String,
+        ?type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_device_id: String?
+      attr_accessor type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeviceResourcesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::ResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::ResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDevicesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDevicesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::DeviceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::DeviceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?state: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor state: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?executions: Array[Types::ExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor executions: Array[Types::ExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTasksOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTasksOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::TaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::TaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class PhysicalNetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?physical_network_interface_id: String,
+        ?physical_connector_type: String,
+        ?ip_address_assignment: String,
+        ?ip_address: String,
+        ?netmask: String,
+        ?default_gateway: String,
+        ?mac_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor physical_network_interface_id: String?
+      attr_accessor physical_connector_type: String?
+      attr_accessor ip_address_assignment: String?
+      attr_accessor ip_address: String?
+      attr_accessor netmask: String?
+      attr_accessor default_gateway: String?
+      attr_accessor mac_address: String?
+    end
+
+    class Reboot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class SecurityGroupIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor group_name: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SoftwareInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?installed_version: String,
+        ?installing_version: String,
+        ?install_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor installed_version: String?
+      attr_accessor installing_version: String?
+      attr_accessor install_state: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Unlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

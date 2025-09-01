@@ -1,0 +1,1488 @@
+module Aws::Budgets
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?budget_name: String,
+        ?notification_type: String,
+        ?action_type: String,
+        ?action_threshold: Types::ActionThreshold,
+        ?definition: Types::Definition,
+        ?execution_role_arn: String,
+        ?approval_model: String,
+        ?status: String,
+        ?subscribers: Array[Types::Subscriber],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification_type: String?
+      attr_accessor action_type: String?
+      attr_accessor action_threshold: Types::ActionThreshold?
+      attr_accessor definition: Types::Definition?
+      attr_accessor execution_role_arn: String?
+      attr_accessor approval_model: String?
+      attr_accessor status: String?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+    end
+
+    class ActionHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?status: String,
+        ?event_type: String,
+        ?action_history_details: Types::ActionHistoryDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor event_type: String?
+      attr_accessor action_history_details: Types::ActionHistoryDetails?
+    end
+
+    class ActionHistoryDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?action: Types::Action,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor action: Types::Action?
+    end
+
+    module ActionStatus
+      Standby: String
+      Pending: String
+      Execution_In_Progress: String
+      Execution_Success: String
+      Execution_Failure: String
+      Reverse_In_Progress: String
+      Reverse_Success: String
+      Reverse_Failure: String
+      Reset_In_Progress: String
+      Reset_Failure: String
+    end
+
+    module ActionSubType
+      STOP_EC2: String
+      STOP_RDS: String
+    end
+
+    class ActionThreshold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_threshold_value: Float,
+        ?action_threshold_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_threshold_value: Float?
+      attr_accessor action_threshold_type: String?
+    end
+
+    module ActionType
+      IAM: String
+      SCP: String
+      SSM: String
+    end
+
+    module ApprovalModel
+      AUTO: String
+      MANUAL: String
+    end
+
+    class AutoAdjustData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_adjust_type: String,
+        ?historical_options: Types::HistoricalOptions,
+        ?last_auto_adjust_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_adjust_type: String?
+      attr_accessor historical_options: Types::HistoricalOptions?
+      attr_accessor last_auto_adjust_time: Time?
+    end
+
+    module AutoAdjustType
+      HISTORICAL: String
+      FORECAST: String
+    end
+
+    class Budget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_name: String,
+        ?budget_limit: Types::Spend,
+        ?planned_budget_limits: Hash[String, Types::Spend],
+        ?cost_filters: Hash[String, Array[String]],
+        ?cost_types: Types::CostTypes,
+        ?time_unit: String,
+        ?time_period: Types::TimePeriod,
+        ?calculated_spend: Types::CalculatedSpend,
+        ?budget_type: String,
+        ?last_updated_time: Time,
+        ?auto_adjust_data: Types::AutoAdjustData,
+        ?filter_expression: Types::Expression,
+        ?metrics: Array[String],
+        ?billing_view_arn: String,
+        ?health_status: Types::HealthStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_name: String?
+      attr_accessor budget_limit: Types::Spend?
+      attr_accessor planned_budget_limits: Hash[String, Types::Spend]?
+      attr_accessor cost_filters: Hash[String, Array[String]]?
+      attr_accessor cost_types: Types::CostTypes?
+      attr_accessor time_unit: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor calculated_spend: Types::CalculatedSpend?
+      attr_accessor budget_type: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor auto_adjust_data: Types::AutoAdjustData?
+      attr_accessor filter_expression: Types::Expression?
+      attr_accessor metrics: Array[String]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor health_status: Types::HealthStatus?
+    end
+
+    class BudgetNotificationsForAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notifications: Array[Types::Notification],
+        ?budget_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notifications: Array[Types::Notification]?
+      attr_accessor budget_name: String?
+    end
+
+    class BudgetPerformanceHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_name: String,
+        ?budget_type: String,
+        ?cost_filters: Hash[String, Array[String]],
+        ?cost_types: Types::CostTypes,
+        ?time_unit: String,
+        ?billing_view_arn: String,
+        ?budgeted_and_actual_amounts_list: Array[Types::BudgetedAndActualAmounts],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_name: String?
+      attr_accessor budget_type: String?
+      attr_accessor cost_filters: Hash[String, Array[String]]?
+      attr_accessor cost_types: Types::CostTypes?
+      attr_accessor time_unit: String?
+      attr_accessor billing_view_arn: String?
+      attr_accessor budgeted_and_actual_amounts_list: Array[Types::BudgetedAndActualAmounts]?
+    end
+
+    module BudgetType
+      Usage: String
+      Cost: String
+      RIUtilization: String
+      RICoverage: String
+      SPUtilization: String
+      SPCoverage: String
+    end
+
+    class BudgetedAndActualAmounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budgeted_amount: Types::Spend,
+        ?actual_amount: Types::Spend,
+        ?time_period: Types::TimePeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budgeted_amount: Types::Spend?
+      attr_accessor actual_amount: Types::Spend?
+      attr_accessor time_period: Types::TimePeriod?
+    end
+
+    class CalculatedSpend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actual_spend: Types::Spend,
+        ?forecasted_spend: Types::Spend,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actual_spend: Types::Spend?
+      attr_accessor forecasted_spend: Types::Spend?
+    end
+
+    module ComparisonOperator
+      GREATER_THAN: String
+      LESS_THAN: String
+      EQUAL_TO: String
+    end
+
+    class CostCategoryValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class CostTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_tax: bool,
+        ?include_subscription: bool,
+        ?use_blended: bool,
+        ?include_refund: bool,
+        ?include_credit: bool,
+        ?include_upfront: bool,
+        ?include_recurring: bool,
+        ?include_other_subscription: bool,
+        ?include_support: bool,
+        ?include_discount: bool,
+        ?use_amortized: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_tax: bool?
+      attr_accessor include_subscription: bool?
+      attr_accessor use_blended: bool?
+      attr_accessor include_refund: bool?
+      attr_accessor include_credit: bool?
+      attr_accessor include_upfront: bool?
+      attr_accessor include_recurring: bool?
+      attr_accessor include_other_subscription: bool?
+      attr_accessor include_support: bool?
+      attr_accessor include_discount: bool?
+      attr_accessor use_amortized: bool?
+    end
+
+    class CreateBudgetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification_type: String,
+        ?action_type: String,
+        ?action_threshold: Types::ActionThreshold,
+        ?definition: Types::Definition,
+        ?execution_role_arn: String,
+        ?approval_model: String,
+        ?subscribers: Array[Types::Subscriber],
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification_type: String?
+      attr_accessor action_type: String?
+      attr_accessor action_threshold: Types::ActionThreshold?
+      attr_accessor definition: Types::Definition?
+      attr_accessor execution_role_arn: String?
+      attr_accessor approval_model: String?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateBudgetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+    end
+
+    class CreateBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget: Types::Budget,
+        ?notifications_with_subscribers: Array[Types::NotificationWithSubscribers],
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget: Types::Budget?
+      attr_accessor notifications_with_subscribers: Array[Types::NotificationWithSubscribers]?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+        ?subscribers: Array[Types::Subscriber],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+    end
+
+    class CreateNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+        ?subscriber: Types::Subscriber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor subscriber: Types::Subscriber?
+    end
+
+    class CreateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreationLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Definition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_action_definition: Types::IamActionDefinition,
+        ?scp_action_definition: Types::ScpActionDefinition,
+        ?ssm_action_definition: Types::SsmActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_action_definition: Types::IamActionDefinition?
+      attr_accessor scp_action_definition: Types::ScpActionDefinition?
+      attr_accessor ssm_action_definition: Types::SsmActionDefinition?
+    end
+
+    class DeleteBudgetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+    end
+
+    class DeleteBudgetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action: Types::Action,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action: Types::Action?
+    end
+
+    class DeleteBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+    end
+
+    class DeleteBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+    end
+
+    class DeleteNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+        ?subscriber: Types::Subscriber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor subscriber: Types::Subscriber?
+    end
+
+    class DeleteSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeBudgetActionHistoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+        ?time_period: Types::TimePeriod,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetActionHistoriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_histories: Array[Types::ActionHistory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_histories: Array[Types::ActionHistory]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+    end
+
+    class DescribeBudgetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action: Types::Action,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action: Types::Action?
+    end
+
+    class DescribeBudgetActionsForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetActionsForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Array[Types::Action],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetActionsForBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetActionsForBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Array[Types::Action],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetNotificationsForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetNotificationsForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_notifications_for_account: Array[Types::BudgetNotificationsForAccount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_notifications_for_account: Array[Types::BudgetNotificationsForAccount]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetPerformanceHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?time_period: Types::TimePeriod,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetPerformanceHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_performance_history: Types::BudgetPerformanceHistory,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_performance_history: Types::BudgetPerformanceHistory?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?show_filter_expression: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor show_filter_expression: bool?
+    end
+
+    class DescribeBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget: Types::Budget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget: Types::Budget?
+    end
+
+    class DescribeBudgetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?show_filter_expression: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor show_filter_expression: bool?
+    end
+
+    class DescribeBudgetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budgets: Array[Types::Budget],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budgets: Array[Types::Budget]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeNotificationsForBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeNotificationsForBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notifications: Array[Types::Notification],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notifications: Array[Types::Notification]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSubscribersForNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSubscribersForNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscribers: Array[Types::Subscriber],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscribers: Array[Types::Subscriber]?
+      attr_accessor next_token: String?
+    end
+
+    module Dimension
+      AZ: String
+      INSTANCE_TYPE: String
+      LINKED_ACCOUNT: String
+      LINKED_ACCOUNT_NAME: String
+      OPERATION: String
+      PURCHASE_TYPE: String
+      REGION: String
+      SERVICE: String
+      SERVICE_CODE: String
+      USAGE_TYPE: String
+      USAGE_TYPE_GROUP: String
+      RECORD_TYPE: String
+      OPERATING_SYSTEM: String
+      TENANCY: String
+      SCOPE: String
+      PLATFORM: String
+      SUBSCRIPTION_ID: String
+      LEGAL_ENTITY_NAME: String
+      INVOICING_ENTITY: String
+      DEPLOYMENT_OPTION: String
+      DATABASE_ENGINE: String
+      CACHE_ENGINE: String
+      INSTANCE_TYPE_FAMILY: String
+      BILLING_ENTITY: String
+      RESERVATION_ID: String
+      RESOURCE_ID: String
+      RIGHTSIZING_TYPE: String
+      SAVINGS_PLANS_TYPE: String
+      SAVINGS_PLAN_ARN: String
+      PAYMENT_OPTION: String
+      RESERVATION_MODIFIED: String
+      TAG_KEY: String
+      COST_CATEGORY_NAME: String
+    end
+
+    class DuplicateRecordException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EventType
+      System: String
+      CreateAction: String
+      DeleteAction: String
+      UpdateAction: String
+      ExecuteAction: String
+    end
+
+    class ExecuteBudgetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+        ?execution_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+      attr_accessor execution_type: String?
+    end
+
+    class ExecuteBudgetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+        ?execution_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+      attr_accessor execution_type: String?
+    end
+
+    module ExecutionType
+      ApproveBudgetAction: String
+      RetryBudgetAction: String
+      ReverseBudgetAction: String
+      ResetBudgetAction: String
+    end
+
+    class ExpiredNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?or: Array[Types::Expression],
+        ?and: Array[Types::Expression],
+        ?not: Types::Expression,
+        ?dimensions: Types::ExpressionDimensionValues,
+        ?tags: Types::TagValues,
+        ?cost_categories: Types::CostCategoryValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor or: Array[Types::Expression]?
+      attr_accessor and: Array[Types::Expression]?
+      attr_accessor not: Types::Expression?
+      attr_accessor dimensions: Types::ExpressionDimensionValues?
+      attr_accessor tags: Types::TagValues?
+      attr_accessor cost_categories: Types::CostCategoryValues?
+    end
+
+    class ExpressionDimensionValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class HealthStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    module HealthStatusReason
+      BILLING_VIEW_NO_ACCESS: String
+      BILLING_VIEW_UNHEALTHY: String
+      FILTER_INVALID: String
+    end
+
+    module HealthStatusValue
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    class HistoricalOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_adjustment_period: Integer,
+        ?look_back_available_periods: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_adjustment_period: Integer?
+      attr_accessor look_back_available_periods: Integer?
+    end
+
+    class IamActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?roles: Array[String],
+        ?groups: Array[String],
+        ?users: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor roles: Array[String]?
+      attr_accessor groups: Array[String]?
+      attr_accessor users: Array[String]?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    module MatchOption
+      EQUALS: String
+      ABSENT: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+      GREATER_THAN_OR_EQUAL: String
+      CASE_SENSITIVE: String
+      CASE_INSENSITIVE: String
+    end
+
+    module Metric
+      BLENDED_COST: String
+      UNBLENDED_COST: String
+      AMORTIZED_COST: String
+      NET_UNBLENDED_COST: String
+      NET_AMORTIZED_COST: String
+      USAGE_QUANTITY: String
+      NORMALIZED_USAGE_AMOUNT: String
+      HOURS: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Notification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_type: String,
+        ?comparison_operator: String,
+        ?threshold: Float,
+        ?threshold_type: String,
+        ?notification_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_type: String?
+      attr_accessor comparison_operator: String?
+      attr_accessor threshold: Float?
+      attr_accessor threshold_type: String?
+      attr_accessor notification_state: String?
+    end
+
+    module NotificationState
+      OK: String
+      ALARM: String
+    end
+
+    module NotificationType
+      ACTUAL: String
+      FORECASTED: String
+    end
+
+    class NotificationWithSubscribers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification: Types::Notification,
+        ?subscribers: Array[Types::Subscriber],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification: Types::Notification?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+    end
+
+    class ResourceLockedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ScpActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?target_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor target_ids: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Spend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor unit: String?
+    end
+
+    class SsmActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_sub_type: String,
+        ?region: String,
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_sub_type: String?
+      attr_accessor region: String?
+      attr_accessor instance_ids: Array[String]?
+    end
+
+    class Subscriber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_type: String,
+        ?address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_type: String?
+      attr_accessor address: String?
+    end
+
+    module SubscriptionType
+      SNS: String
+      EMAIL: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    module ThresholdType
+      PERCENTAGE: String
+      ABSOLUTE_VALUE: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+    end
+
+    module TimeUnit
+      DAILY: String
+      MONTHLY: String
+      QUARTERLY: String
+      ANNUALLY: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBudgetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?action_id: String,
+        ?notification_type: String,
+        ?action_threshold: Types::ActionThreshold,
+        ?definition: Types::Definition,
+        ?execution_role_arn: String,
+        ?approval_model: String,
+        ?subscribers: Array[Types::Subscriber],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor action_id: String?
+      attr_accessor notification_type: String?
+      attr_accessor action_threshold: Types::ActionThreshold?
+      attr_accessor definition: Types::Definition?
+      attr_accessor execution_role_arn: String?
+      attr_accessor approval_model: String?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+    end
+
+    class UpdateBudgetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?old_action: Types::Action,
+        ?new_action: Types::Action,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor old_action: Types::Action?
+      attr_accessor new_action: Types::Action?
+    end
+
+    class UpdateBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?new_budget: Types::Budget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor new_budget: Types::Budget?
+    end
+
+    class UpdateBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?old_notification: Types::Notification,
+        ?new_notification: Types::Notification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor old_notification: Types::Notification?
+      attr_accessor new_notification: Types::Notification?
+    end
+
+    class UpdateNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?budget_name: String,
+        ?notification: Types::Notification,
+        ?old_subscriber: Types::Subscriber,
+        ?new_subscriber: Types::Subscriber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor budget_name: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor old_subscriber: Types::Subscriber?
+      attr_accessor new_subscriber: Types::Subscriber?
+    end
+
+    class UpdateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

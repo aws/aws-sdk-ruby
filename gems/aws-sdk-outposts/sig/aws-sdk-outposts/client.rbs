@@ -1,0 +1,502 @@
+module Aws::Outposts
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Outposts::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelCapacityTaskResponse
+      include Smithy::Client::_Response[Types::CancelCapacityTaskOutput]
+    end
+    def cancel_capacity_task: (
+      ?capacity_task_id: String,
+      ?outpost_identifier: String
+    ) -> _CancelCapacityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelCapacityTaskResponse
+
+    interface _CancelOrderResponse
+      include Smithy::Client::_Response[Types::CancelOrderOutput]
+    end
+    def cancel_order: (
+      ?order_id: String
+    ) -> _CancelOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelOrderResponse
+
+    interface _CreateOrderResponse
+      include Smithy::Client::_Response[Types::CreateOrderOutput]
+      def order: () -> Types::Order?
+    end
+    def create_order: (
+      ?outpost_identifier: String,
+      ?line_items: Array[
+        {
+          catalog_item_id: String,
+          quantity: Integer
+        }
+      ],
+      ?payment_option: String,
+      ?payment_term: String
+    ) -> _CreateOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOrderResponse
+
+    interface _CreateOutpostResponse
+      include Smithy::Client::_Response[Types::CreateOutpostOutput]
+      def outpost: () -> Types::Outpost?
+    end
+    def create_outpost: (
+      ?name: String,
+      ?description: String,
+      ?site_id: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String,
+      ?tags: Hash[String, String],
+      ?supported_hardware_type: String
+    ) -> _CreateOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOutpostResponse
+
+    interface _CreateSiteResponse
+      include Smithy::Client::_Response[Types::CreateSiteOutput]
+      def site: () -> Types::Site?
+    end
+    def create_site: (
+      ?name: String,
+      ?description: String,
+      ?notes: String,
+      ?tags: Hash[String, String],
+      ?operating_address: {
+        contact_name: String,
+        contact_phone_number: String,
+        address_line1: String,
+        address_line2: String,
+        address_line3: String,
+        city: String,
+        state_or_region: String,
+        district_or_county: String,
+        postal_code: String,
+        country_code: String,
+        municipality: String
+      },
+      ?shipping_address: {
+        contact_name: String,
+        contact_phone_number: String,
+        address_line1: String,
+        address_line2: String,
+        address_line3: String,
+        city: String,
+        state_or_region: String,
+        district_or_county: String,
+        postal_code: String,
+        country_code: String,
+        municipality: String
+      },
+      ?rack_physical_properties: {
+        power_draw_kva: String,
+        power_phase: String,
+        power_connector: String,
+        power_feed_drop: String,
+        uplink_gbps: String,
+        uplink_count: String,
+        fiber_optic_cable_type: String,
+        optical_standard: String,
+        maximum_supported_weight_lbs: String
+      }
+    ) -> _CreateSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSiteResponse
+
+    interface _DeleteOutpostResponse
+      include Smithy::Client::_Response[Types::DeleteOutpostOutput]
+    end
+    def delete_outpost: (
+      ?outpost_id: String
+    ) -> _DeleteOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutpostResponse
+
+    interface _DeleteSiteResponse
+      include Smithy::Client::_Response[Types::DeleteSiteOutput]
+    end
+    def delete_site: (
+      ?site_id: String
+    ) -> _DeleteSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSiteResponse
+
+    interface _GetCapacityTaskResponse
+      include Smithy::Client::_Response[Types::GetCapacityTaskOutput]
+      def capacity_task_id: () -> String?
+      def outpost_id: () -> String?
+      def order_id: () -> String?
+      def asset_id: () -> String?
+      def requested_instance_pools: () -> Array[Types::InstanceTypeCapacity]?
+      def instances_to_exclude: () -> Types::InstancesToExclude?
+      def dry_run: () -> bool?
+      def capacity_task_status: () -> String?
+      def failed: () -> Types::CapacityTaskFailure?
+      def creation_date: () -> Time?
+      def completion_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def task_action_on_blocking_instances: () -> String?
+    end
+    def get_capacity_task: (
+      ?capacity_task_id: String,
+      ?outpost_identifier: String
+    ) -> _GetCapacityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityTaskResponse
+
+    interface _GetCatalogItemResponse
+      include Smithy::Client::_Response[Types::GetCatalogItemOutput]
+      def catalog_item: () -> Types::CatalogItem?
+    end
+    def get_catalog_item: (
+      ?catalog_item_id: String
+    ) -> _GetCatalogItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCatalogItemResponse
+
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionResponse]
+      def connection_id: () -> String?
+      def connection_details: () -> Types::ConnectionDetails?
+    end
+    def get_connection: (
+      ?connection_id: String
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetOrderResponse
+      include Smithy::Client::_Response[Types::GetOrderOutput]
+      def order: () -> Types::Order?
+    end
+    def get_order: (
+      ?order_id: String
+    ) -> _GetOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrderResponse
+
+    interface _GetOutpostResponse
+      include Smithy::Client::_Response[Types::GetOutpostOutput]
+      def outpost: () -> Types::Outpost?
+    end
+    def get_outpost: (
+      ?outpost_id: String
+    ) -> _GetOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostResponse
+
+    interface _GetOutpostBillingInformationResponse
+      include Smithy::Client::_Response[Types::GetOutpostBillingInformationOutput]
+      def next_token: () -> String?
+      def subscriptions: () -> Array[Types::Subscription]?
+      def contract_end_date: () -> String?
+    end
+    def get_outpost_billing_information: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?outpost_identifier: String
+    ) -> _GetOutpostBillingInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostBillingInformationResponse
+
+    interface _GetOutpostInstanceTypesResponse
+      include Smithy::Client::_Response[Types::GetOutpostInstanceTypesOutput]
+      def instance_types: () -> Array[Types::InstanceTypeItem]?
+      def next_token: () -> String?
+      def outpost_id: () -> String?
+      def outpost_arn: () -> String?
+    end
+    def get_outpost_instance_types: (
+      ?outpost_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetOutpostInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostInstanceTypesResponse
+
+    interface _GetOutpostSupportedInstanceTypesResponse
+      include Smithy::Client::_Response[Types::GetOutpostSupportedInstanceTypesOutput]
+      def instance_types: () -> Array[Types::InstanceTypeItem]?
+      def next_token: () -> String?
+    end
+    def get_outpost_supported_instance_types: (
+      ?outpost_identifier: String,
+      ?order_id: String,
+      ?asset_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetOutpostSupportedInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostSupportedInstanceTypesResponse
+
+    interface _GetSiteResponse
+      include Smithy::Client::_Response[Types::GetSiteOutput]
+      def site: () -> Types::Site?
+    end
+    def get_site: (
+      ?site_id: String
+    ) -> _GetSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSiteResponse
+
+    interface _GetSiteAddressResponse
+      include Smithy::Client::_Response[Types::GetSiteAddressOutput]
+      def site_id: () -> String?
+      def address_type: () -> String?
+      def address: () -> Types::Address?
+    end
+    def get_site_address: (
+      ?site_id: String,
+      ?address_type: String
+    ) -> _GetSiteAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSiteAddressResponse
+
+    interface _ListAssetInstancesResponse
+      include Smithy::Client::_Response[Types::ListAssetInstancesOutput]
+      def asset_instances: () -> Array[Types::AssetInstance]?
+      def next_token: () -> String?
+    end
+    def list_asset_instances: (
+      ?outpost_identifier: String,
+      ?asset_id_filter: Array[String],
+      ?instance_type_filter: Array[String],
+      ?account_id_filter: Array[String],
+      ?aws_service_filter: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssetInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetInstancesResponse
+
+    interface _ListAssetsResponse
+      include Smithy::Client::_Response[Types::ListAssetsOutput]
+      def assets: () -> Array[Types::AssetInfo]?
+      def next_token: () -> String?
+    end
+    def list_assets: (
+      ?outpost_identifier: String,
+      ?host_id_filter: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status_filter: Array[String]
+    ) -> _ListAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsResponse
+
+    interface _ListBlockingInstancesForCapacityTaskResponse
+      include Smithy::Client::_Response[Types::ListBlockingInstancesForCapacityTaskOutput]
+      def blocking_instances: () -> Array[Types::BlockingInstance]?
+      def next_token: () -> String?
+    end
+    def list_blocking_instances_for_capacity_task: (
+      ?outpost_identifier: String,
+      ?capacity_task_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBlockingInstancesForCapacityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBlockingInstancesForCapacityTaskResponse
+
+    interface _ListCapacityTasksResponse
+      include Smithy::Client::_Response[Types::ListCapacityTasksOutput]
+      def capacity_tasks: () -> Array[Types::CapacityTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_capacity_tasks: (
+      ?outpost_identifier_filter: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?capacity_task_status_filter: Array[String]
+    ) -> _ListCapacityTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapacityTasksResponse
+
+    interface _ListCatalogItemsResponse
+      include Smithy::Client::_Response[Types::ListCatalogItemsOutput]
+      def catalog_items: () -> Array[Types::CatalogItem]?
+      def next_token: () -> String?
+    end
+    def list_catalog_items: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?item_class_filter: Array[String],
+      ?supported_storage_filter: Array[String],
+      ?ec2_family_filter: Array[String]
+    ) -> _ListCatalogItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCatalogItemsResponse
+
+    interface _ListOrdersResponse
+      include Smithy::Client::_Response[Types::ListOrdersOutput]
+      def orders: () -> Array[Types::OrderSummary]?
+      def next_token: () -> String?
+    end
+    def list_orders: (
+      ?outpost_identifier_filter: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOrdersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrdersResponse
+
+    interface _ListOutpostsResponse
+      include Smithy::Client::_Response[Types::ListOutpostsOutput]
+      def outposts: () -> Array[Types::Outpost]?
+      def next_token: () -> String?
+    end
+    def list_outposts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?life_cycle_status_filter: Array[String],
+      ?availability_zone_filter: Array[String],
+      ?availability_zone_id_filter: Array[String]
+    ) -> _ListOutpostsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOutpostsResponse
+
+    interface _ListSitesResponse
+      include Smithy::Client::_Response[Types::ListSitesOutput]
+      def sites: () -> Array[Types::Site]?
+      def next_token: () -> String?
+    end
+    def list_sites: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?operating_address_country_code_filter: Array[String],
+      ?operating_address_state_or_region_filter: Array[String],
+      ?operating_address_city_filter: Array[String]
+    ) -> _ListSitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSitesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartCapacityTaskResponse
+      include Smithy::Client::_Response[Types::StartCapacityTaskOutput]
+      def capacity_task_id: () -> String?
+      def outpost_id: () -> String?
+      def order_id: () -> String?
+      def asset_id: () -> String?
+      def requested_instance_pools: () -> Array[Types::InstanceTypeCapacity]?
+      def instances_to_exclude: () -> Types::InstancesToExclude?
+      def dry_run: () -> bool?
+      def capacity_task_status: () -> String?
+      def failed: () -> Types::CapacityTaskFailure?
+      def creation_date: () -> Time?
+      def completion_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def task_action_on_blocking_instances: () -> String?
+    end
+    def start_capacity_task: (
+      ?outpost_identifier: String,
+      ?order_id: String,
+      ?asset_id: String,
+      ?instance_pools: Array[
+        {
+          instance_type: String,
+          count: Integer
+        }
+      ],
+      ?instances_to_exclude: {
+        instances: Array[String],
+        account_ids: Array[String],
+        services: Array[String]
+      },
+      ?dry_run: bool,
+      ?task_action_on_blocking_instances: String
+    ) -> _StartCapacityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCapacityTaskResponse
+
+    interface _StartConnectionResponse
+      include Smithy::Client::_Response[Types::StartConnectionResponse]
+      def connection_id: () -> String?
+      def underlay_ip_address: () -> String?
+    end
+    def start_connection: (
+      ?device_serial_number: String,
+      ?asset_id: String,
+      ?client_public_key: String,
+      ?network_interface_device_index: Integer
+    ) -> _StartConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConnectionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateOutpostResponse
+      include Smithy::Client::_Response[Types::UpdateOutpostOutput]
+      def outpost: () -> Types::Outpost?
+    end
+    def update_outpost: (
+      ?outpost_id: String,
+      ?name: String,
+      ?description: String,
+      ?supported_hardware_type: String
+    ) -> _UpdateOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOutpostResponse
+
+    interface _UpdateSiteResponse
+      include Smithy::Client::_Response[Types::UpdateSiteOutput]
+      def site: () -> Types::Site?
+    end
+    def update_site: (
+      ?site_id: String,
+      ?name: String,
+      ?description: String,
+      ?notes: String
+    ) -> _UpdateSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSiteResponse
+
+    interface _UpdateSiteAddressResponse
+      include Smithy::Client::_Response[Types::UpdateSiteAddressOutput]
+      def address_type: () -> String?
+      def address: () -> Types::Address?
+    end
+    def update_site_address: (
+      ?site_id: String,
+      ?address_type: String,
+      ?address: {
+        contact_name: String,
+        contact_phone_number: String,
+        address_line1: String,
+        address_line2: String,
+        address_line3: String,
+        city: String,
+        state_or_region: String,
+        district_or_county: String,
+        postal_code: String,
+        country_code: String,
+        municipality: String
+      }
+    ) -> _UpdateSiteAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSiteAddressResponse
+
+    interface _UpdateSiteRackPhysicalPropertiesResponse
+      include Smithy::Client::_Response[Types::UpdateSiteRackPhysicalPropertiesOutput]
+      def site: () -> Types::Site?
+    end
+    def update_site_rack_physical_properties: (
+      ?site_id: String,
+      ?power_draw_kva: String,
+      ?power_phase: String,
+      ?power_connector: String,
+      ?power_feed_drop: String,
+      ?uplink_gbps: String,
+      ?uplink_count: String,
+      ?fiber_optic_cable_type: String,
+      ?optical_standard: String,
+      ?maximum_supported_weight_lbs: String
+    ) -> _UpdateSiteRackPhysicalPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSiteRackPhysicalPropertiesResponse
+  end
+end

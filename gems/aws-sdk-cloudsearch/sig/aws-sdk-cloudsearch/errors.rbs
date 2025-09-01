@@ -1,0 +1,36 @@
+module Aws::CloudSearch
+  module Errors
+    class BaseException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class DisabledOperationException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class InternalException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class InvalidTypeException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+  end
+end

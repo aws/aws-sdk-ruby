@@ -1,0 +1,3086 @@
+module Aws::Athena
+  module Types
+
+    class AclConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_acl_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_acl_option: String?
+    end
+
+    class ApplicationDPUSizes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_runtime_id: String,
+        ?supported_dpu_sizes: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_runtime_id: String?
+      attr_accessor supported_dpu_sizes: Array[Integer]?
+    end
+
+    class AthenaError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_category: Integer,
+        ?error_type: Integer,
+        ?retryable: bool,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_category: Integer?
+      attr_accessor error_type: Integer?
+      attr_accessor retryable: bool?
+      attr_accessor error_message: String?
+    end
+
+    module AuthenticationType
+      DIRECTORY_IDENTITY: String
+    end
+
+    class BatchGetNamedQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_ids: Array[String]?
+    end
+
+    class BatchGetNamedQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_queries: Array[Types::NamedQuery],
+        ?unprocessed_named_query_ids: Array[Types::UnprocessedNamedQueryId],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_queries: Array[Types::NamedQuery]?
+      attr_accessor unprocessed_named_query_ids: Array[Types::UnprocessedNamedQueryId]?
+    end
+
+    class BatchGetPreparedStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepared_statement_names: Array[String],
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepared_statement_names: Array[String]?
+      attr_accessor work_group: String?
+    end
+
+    class BatchGetPreparedStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepared_statements: Array[Types::PreparedStatement],
+        ?unprocessed_prepared_statement_names: Array[Types::UnprocessedPreparedStatementName],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepared_statements: Array[Types::PreparedStatement]?
+      attr_accessor unprocessed_prepared_statement_names: Array[Types::UnprocessedPreparedStatementName]?
+    end
+
+    class BatchGetQueryExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_ids: Array[String]?
+    end
+
+    class BatchGetQueryExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_executions: Array[Types::QueryExecution],
+        ?unprocessed_query_execution_ids: Array[Types::UnprocessedQueryExecutionId],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_executions: Array[Types::QueryExecution]?
+      attr_accessor unprocessed_query_execution_ids: Array[Types::UnprocessedQueryExecutionId]?
+    end
+
+    class CalculationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_block: String?
+    end
+
+    module CalculationExecutionState
+      CREATING: String
+      CREATED: String
+      QUEUED: String
+      RUNNING: String
+      CANCELING: String
+      CANCELED: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class CalculationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?std_out_s3_uri: String,
+        ?std_error_s3_uri: String,
+        ?result_s3_uri: String,
+        ?result_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor std_out_s3_uri: String?
+      attr_accessor std_error_s3_uri: String?
+      attr_accessor result_s3_uri: String?
+      attr_accessor result_type: String?
+    end
+
+    class CalculationStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dpu_execution_in_millis: Integer,
+        ?progress: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dpu_execution_in_millis: Integer?
+      attr_accessor progress: String?
+    end
+
+    class CalculationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submission_date_time: Time,
+        ?completion_date_time: Time,
+        ?state: String,
+        ?state_change_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submission_date_time: Time?
+      attr_accessor completion_date_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_change_reason: String?
+    end
+
+    class CalculationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+        ?description: String,
+        ?status: Types::CalculationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+      attr_accessor description: String?
+      attr_accessor status: Types::CalculationStatus?
+    end
+
+    class CancelCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CancelCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CapacityAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+        ?request_time: Time,
+        ?request_completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor request_time: Time?
+      attr_accessor request_completion_time: Time?
+    end
+
+    module CapacityAllocationStatus
+      PENDING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class CapacityAssignment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group_names: Array[String]?
+    end
+
+    class CapacityAssignmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_name: String,
+        ?capacity_assignments: Array[Types::CapacityAssignment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_name: String?
+      attr_accessor capacity_assignments: Array[Types::CapacityAssignment]?
+    end
+
+    class CapacityReservation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?target_dpus: Integer,
+        ?allocated_dpus: Integer,
+        ?last_allocation: Types::CapacityAllocation,
+        ?last_successful_allocation_time: Time,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor target_dpus: Integer?
+      attr_accessor allocated_dpus: Integer?
+      attr_accessor last_allocation: Types::CapacityAllocation?
+      attr_accessor last_successful_allocation_time: Time?
+      attr_accessor creation_time: Time?
+    end
+
+    module CapacityReservationStatus
+      PENDING: String
+      ACTIVE: String
+      CANCELLING: String
+      CANCELLED: String
+      FAILED: String
+      UPDATE_PENDING: String
+    end
+
+    class Column
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor comment: String?
+    end
+
+    class ColumnInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?schema_name: String,
+        ?table_name: String,
+        ?name: String,
+        ?label: String,
+        ?type: String,
+        ?precision: Integer,
+        ?scale: Integer,
+        ?nullable: String,
+        ?case_sensitive: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor table_name: String?
+      attr_accessor name: String?
+      attr_accessor label: String?
+      attr_accessor type: String?
+      attr_accessor precision: Integer?
+      attr_accessor scale: Integer?
+      attr_accessor nullable: String?
+      attr_accessor case_sensitive: bool?
+    end
+
+    module ColumnNullable
+      NOT_NULL: String
+      NULLABLE: String
+      UNKNOWN: String
+    end
+
+    module ConnectionType
+      DYNAMODB: String
+      MYSQL: String
+      POSTGRESQL: String
+      REDSHIFT: String
+      ORACLE: String
+      SYNAPSE: String
+      SQLSERVER: String
+      DB2: String
+      OPENSEARCH: String
+      BIGQUERY: String
+      GOOGLECLOUDSTORAGE: String
+      HBASE: String
+      DOCUMENTDB: String
+      CMDB: String
+      TPCDS: String
+      TIMESTREAM: String
+      SAPHANA: String
+      SNOWFLAKE: String
+      DATALAKEGEN2: String
+      DB2AS400: String
+    end
+
+    class CreateCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_dpus: Integer,
+        ?name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_dpus: Integer?
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDataCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_catalog: Types::DataCatalog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_catalog: Types::DataCatalog?
+    end
+
+    class CreateNamedQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?database: String,
+        ?query_string: String,
+        ?client_request_token: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor database: String?
+      attr_accessor query_string: String?
+      attr_accessor client_request_token: String?
+      attr_accessor work_group: String?
+    end
+
+    class CreateNamedQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_id: String?
+    end
+
+    class CreateNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+    end
+
+    class CreatePreparedStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?work_group: String,
+        ?query_statement: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor work_group: String?
+      attr_accessor query_statement: String?
+      attr_accessor description: String?
+    end
+
+    class CreatePreparedStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreatePresignedNotebookUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class CreatePresignedNotebookUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_url: String,
+        ?auth_token: String,
+        ?auth_token_expiration_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_url: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_expiration_time: Integer?
+    end
+
+    class CreateWorkGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::WorkGroupConfiguration,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::WorkGroupConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWorkGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CustomerContentEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key: String?
+    end
+
+    class DataCatalog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?parameters: Hash[String, String],
+        ?status: String,
+        ?connection_type: String,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor connection_type: String?
+      attr_accessor error: String?
+    end
+
+    module DataCatalogStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+      CREATE_FAILED_CLEANUP_IN_PROGRESS: String
+      CREATE_FAILED_CLEANUP_COMPLETE: String
+      CREATE_FAILED_CLEANUP_FAILED: String
+      DELETE_IN_PROGRESS: String
+      DELETE_COMPLETE: String
+      DELETE_FAILED: String
+    end
+
+    class DataCatalogSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?type: String,
+        ?status: String,
+        ?connection_type: String,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor connection_type: String?
+      attr_accessor error: String?
+    end
+
+    module DataCatalogType
+      LAMBDA: String
+      GLUE: String
+      HIVE: String
+      FEDERATED: String
+    end
+
+    class Database
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class Datum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?var_char_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor var_char_value: String?
+    end
+
+    class DeleteCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?delete_catalog_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor delete_catalog_only: bool?
+    end
+
+    class DeleteDataCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_catalog: Types::DataCatalog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_catalog: Types::DataCatalog?
+    end
+
+    class DeleteNamedQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_id: String?
+    end
+
+    class DeleteNamedQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+    end
+
+    class DeleteNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePreparedStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor work_group: String?
+    end
+
+    class DeletePreparedStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?recursive_delete_option: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor recursive_delete_option: bool?
+    end
+
+    class DeleteWorkGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_option: String,
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_option: String?
+      attr_accessor kms_key: String?
+    end
+
+    module EncryptionOption
+      SSE_S3: String
+      SSE_KMS: String
+      CSE_KMS: String
+    end
+
+    class EngineConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coordinator_dpu_size: Integer,
+        ?max_concurrent_dpus: Integer,
+        ?default_executor_dpu_size: Integer,
+        ?additional_configs: Hash[String, String],
+        ?spark_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coordinator_dpu_size: Integer?
+      attr_accessor max_concurrent_dpus: Integer?
+      attr_accessor default_executor_dpu_size: Integer?
+      attr_accessor additional_configs: Hash[String, String]?
+      attr_accessor spark_properties: Hash[String, String]?
+    end
+
+    class EngineVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selected_engine_version: String,
+        ?effective_engine_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selected_engine_version: String?
+      attr_accessor effective_engine_version: String?
+    end
+
+    module ExecutorState
+      CREATING: String
+      CREATED: String
+      REGISTERED: String
+      TERMINATING: String
+      TERMINATED: String
+      FAILED: String
+    end
+
+    module ExecutorType
+      COORDINATOR: String
+      GATEWAY: String
+      WORKER: String
+    end
+
+    class ExecutorsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?executor_id: String,
+        ?executor_type: String,
+        ?start_date_time: Integer,
+        ?termination_date_time: Integer,
+        ?executor_state: String,
+        ?executor_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor executor_id: String?
+      attr_accessor executor_type: String?
+      attr_accessor start_date_time: Integer?
+      attr_accessor termination_date_time: Integer?
+      attr_accessor executor_state: String?
+      attr_accessor executor_size: Integer?
+    end
+
+    class ExportNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+    end
+
+    class ExportNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_metadata: Types::NotebookMetadata,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_metadata: Types::NotebookMetadata?
+      attr_accessor payload: String?
+    end
+
+    class FilterDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetCalculationExecutionCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+    end
+
+    class GetCalculationExecutionCodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_block: String?
+    end
+
+    class GetCalculationExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+    end
+
+    class GetCalculationExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+        ?session_id: String,
+        ?description: String,
+        ?working_directory: String,
+        ?status: Types::CalculationStatus,
+        ?statistics: Types::CalculationStatistics,
+        ?result: Types::CalculationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+      attr_accessor session_id: String?
+      attr_accessor description: String?
+      attr_accessor working_directory: String?
+      attr_accessor status: Types::CalculationStatus?
+      attr_accessor statistics: Types::CalculationStatistics?
+      attr_accessor result: Types::CalculationResult?
+    end
+
+    class GetCalculationExecutionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+    end
+
+    class GetCalculationExecutionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::CalculationStatus,
+        ?statistics: Types::CalculationStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::CalculationStatus?
+      attr_accessor statistics: Types::CalculationStatistics?
+    end
+
+    class GetCapacityAssignmentConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_name: String?
+    end
+
+    class GetCapacityAssignmentConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_assignment_configuration: Types::CapacityAssignmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_assignment_configuration: Types::CapacityAssignmentConfiguration?
+    end
+
+    class GetCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation: Types::CapacityReservation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation: Types::CapacityReservation?
+    end
+
+    class GetDataCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor work_group: String?
+    end
+
+    class GetDataCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_catalog: Types::DataCatalog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_catalog: Types::DataCatalog?
+    end
+
+    class GetDatabaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?database_name: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor database_name: String?
+      attr_accessor work_group: String?
+    end
+
+    class GetDatabaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::Database,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::Database?
+    end
+
+    class GetNamedQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_id: String?
+    end
+
+    class GetNamedQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query: Types::NamedQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query: Types::NamedQuery?
+    end
+
+    class GetNotebookMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+    end
+
+    class GetNotebookMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_metadata: Types::NotebookMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_metadata: Types::NotebookMetadata?
+    end
+
+    class GetPreparedStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor work_group: String?
+    end
+
+    class GetPreparedStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepared_statement: Types::PreparedStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepared_statement: Types::PreparedStatement?
+    end
+
+    class GetQueryExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+    end
+
+    class GetQueryExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution: Types::QueryExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution: Types::QueryExecution?
+    end
+
+    class GetQueryResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?query_result_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor query_result_type: String?
+    end
+
+    class GetQueryResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_count: Integer,
+        ?result_set: Types::ResultSet,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_count: Integer?
+      attr_accessor result_set: Types::ResultSet?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryRuntimeStatisticsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+    end
+
+    class GetQueryRuntimeStatisticsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_runtime_statistics: Types::QueryRuntimeStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_runtime_statistics: Types::QueryRuntimeStatistics?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?description: String,
+        ?work_group: String,
+        ?engine_version: String,
+        ?engine_configuration: Types::EngineConfiguration,
+        ?notebook_version: String,
+        ?session_configuration: Types::SessionConfiguration,
+        ?status: Types::SessionStatus,
+        ?statistics: Types::SessionStatistics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor description: String?
+      attr_accessor work_group: String?
+      attr_accessor engine_version: String?
+      attr_accessor engine_configuration: Types::EngineConfiguration?
+      attr_accessor notebook_version: String?
+      attr_accessor session_configuration: Types::SessionConfiguration?
+      attr_accessor status: Types::SessionStatus?
+      attr_accessor statistics: Types::SessionStatistics?
+    end
+
+    class GetSessionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?status: Types::SessionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor status: Types::SessionStatus?
+    end
+
+    class GetTableMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor work_group: String?
+    end
+
+    class GetTableMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_metadata: Types::TableMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_metadata: Types::TableMetadata?
+    end
+
+    class GetWorkGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+    end
+
+    class GetWorkGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: Types::WorkGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: Types::WorkGroup?
+    end
+
+    class IdentityCenterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_identity_center: bool,
+        ?identity_center_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_identity_center: bool?
+      attr_accessor identity_center_instance_arn: String?
+    end
+
+    class ImportNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?name: String,
+        ?payload: String,
+        ?type: String,
+        ?notebook_s3_location_uri: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor name: String?
+      attr_accessor payload: String?
+      attr_accessor type: String?
+      attr_accessor notebook_s3_location_uri: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class ImportNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?athena_error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor athena_error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ListApplicationDPUSizesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationDPUSizesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_dpu_sizes: Array[Types::ApplicationDPUSizes],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_dpu_sizes: Array[Types::ApplicationDPUSizes]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCalculationExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?state_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor state_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCalculationExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?calculations: Array[Types::CalculationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor calculations: Array[Types::CalculationSummary]?
+    end
+
+    class ListCapacityReservationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCapacityReservationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?capacity_reservations: Array[Types::CapacityReservation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor capacity_reservations: Array[Types::CapacityReservation]?
+    end
+
+    class ListDataCatalogsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListDataCatalogsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_catalogs_summary: Array[Types::DataCatalogSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_catalogs_summary: Array[Types::DataCatalogSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatabasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListDatabasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_list: Array[Types::Database],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_list: Array[Types::Database]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngineVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEngineVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_versions: Array[Types::EngineVersion],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_versions: Array[Types::EngineVersion]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?executor_state_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor executor_state_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?next_token: String,
+        ?executors_summary: Array[Types::ExecutorsSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor next_token: String?
+      attr_accessor executors_summary: Array[Types::ExecutorsSummary]?
+    end
+
+    class ListNamedQueriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListNamedQueriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebookMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::FilterDefinition,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::FilterDefinition?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListNotebookMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?notebook_metadata_list: Array[Types::NotebookMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor notebook_metadata_list: Array[Types::NotebookMetadata]?
+    end
+
+    class ListNotebookSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebookSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_sessions_list: Array[Types::NotebookSessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_sessions_list: Array[Types::NotebookSessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPreparedStatementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPreparedStatementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepared_statements: Array[Types::PreparedStatementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepared_statements: Array[Types::PreparedStatementSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueryExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListQueryExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?state_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor state_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sessions: Array[Types::SessionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sessions: Array[Types::SessionSummary]?
+    end
+
+    class ListTableMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_name: String,
+        ?database_name: String,
+        ?expression: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_name: String?
+      attr_accessor database_name: String?
+      attr_accessor expression: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor work_group: String?
+    end
+
+    class ListTableMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_metadata_list: Array[Types::TableMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_metadata_list: Array[Types::TableMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_groups: Array[Types::WorkGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_groups: Array[Types::WorkGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedQueryResultsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration?
+    end
+
+    class ManagedQueryResultsConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration,
+        ?remove_encryption_configuration: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration?
+      attr_accessor remove_encryption_configuration: bool?
+    end
+
+    class ManagedQueryResultsEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key: String?
+    end
+
+    class MetadataException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NamedQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?database: String,
+        ?query_string: String,
+        ?named_query_id: String,
+        ?work_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor database: String?
+      attr_accessor query_string: String?
+      attr_accessor named_query_id: String?
+      attr_accessor work_group: String?
+    end
+
+    class NotebookMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?name: String,
+        ?work_group: String,
+        ?creation_time: Time,
+        ?type: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor name: String?
+      attr_accessor work_group: String?
+      attr_accessor creation_time: Time?
+      attr_accessor type: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class NotebookSessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor creation_time: Time?
+    end
+
+    module NotebookType
+      IPYNB: String
+    end
+
+    class PreparedStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?query_statement: String,
+        ?work_group_name: String,
+        ?description: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor query_statement: String?
+      attr_accessor work_group_name: String?
+      attr_accessor description: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class PreparedStatementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class PutCapacityAssignmentConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_name: String,
+        ?capacity_assignments: Array[Types::CapacityAssignment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_name: String?
+      attr_accessor capacity_assignments: Array[Types::CapacityAssignment]?
+    end
+
+    class PutCapacityAssignmentConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+        ?query: String,
+        ?statement_type: String,
+        ?managed_query_results_configuration: Types::ManagedQueryResultsConfiguration,
+        ?result_configuration: Types::ResultConfiguration,
+        ?result_reuse_configuration: Types::ResultReuseConfiguration,
+        ?query_execution_context: Types::QueryExecutionContext,
+        ?status: Types::QueryExecutionStatus,
+        ?statistics: Types::QueryExecutionStatistics,
+        ?work_group: String,
+        ?engine_version: Types::EngineVersion,
+        ?execution_parameters: Array[String],
+        ?substatement_type: String,
+        ?query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+      attr_accessor query: String?
+      attr_accessor statement_type: String?
+      attr_accessor managed_query_results_configuration: Types::ManagedQueryResultsConfiguration?
+      attr_accessor result_configuration: Types::ResultConfiguration?
+      attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration?
+      attr_accessor query_execution_context: Types::QueryExecutionContext?
+      attr_accessor status: Types::QueryExecutionStatus?
+      attr_accessor statistics: Types::QueryExecutionStatistics?
+      attr_accessor work_group: String?
+      attr_accessor engine_version: Types::EngineVersion?
+      attr_accessor execution_parameters: Array[String]?
+      attr_accessor substatement_type: String?
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration?
+    end
+
+    class QueryExecutionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: String,
+        ?catalog: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: String?
+      attr_accessor catalog: String?
+    end
+
+    module QueryExecutionState
+      QUEUED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class QueryExecutionStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_execution_time_in_millis: Integer,
+        ?data_scanned_in_bytes: Integer,
+        ?data_manifest_location: String,
+        ?total_execution_time_in_millis: Integer,
+        ?query_queue_time_in_millis: Integer,
+        ?service_pre_processing_time_in_millis: Integer,
+        ?query_planning_time_in_millis: Integer,
+        ?service_processing_time_in_millis: Integer,
+        ?result_reuse_information: Types::ResultReuseInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_execution_time_in_millis: Integer?
+      attr_accessor data_scanned_in_bytes: Integer?
+      attr_accessor data_manifest_location: String?
+      attr_accessor total_execution_time_in_millis: Integer?
+      attr_accessor query_queue_time_in_millis: Integer?
+      attr_accessor service_pre_processing_time_in_millis: Integer?
+      attr_accessor query_planning_time_in_millis: Integer?
+      attr_accessor service_processing_time_in_millis: Integer?
+      attr_accessor result_reuse_information: Types::ResultReuseInformation?
+    end
+
+    class QueryExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: String,
+        ?submission_date_time: Time,
+        ?completion_date_time: Time,
+        ?athena_error: Types::AthenaError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: String?
+      attr_accessor submission_date_time: Time?
+      attr_accessor completion_date_time: Time?
+      attr_accessor athena_error: Types::AthenaError?
+    end
+
+    module QueryResultType
+      DATA_MANIFEST: String
+      DATA_ROWS: String
+    end
+
+    class QueryResultsS3AccessGrantsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_s3_access_grants: bool,
+        ?create_user_level_prefix: bool,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_s3_access_grants: bool?
+      attr_accessor create_user_level_prefix: bool?
+      attr_accessor authentication_type: String?
+    end
+
+    class QueryRuntimeStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeline: Types::QueryRuntimeStatisticsTimeline,
+        ?rows: Types::QueryRuntimeStatisticsRows,
+        ?output_stage: Types::QueryStage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeline: Types::QueryRuntimeStatisticsTimeline?
+      attr_accessor rows: Types::QueryRuntimeStatisticsRows?
+      attr_accessor output_stage: Types::QueryStage?
+    end
+
+    class QueryRuntimeStatisticsRows
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_rows: Integer,
+        ?input_bytes: Integer,
+        ?output_bytes: Integer,
+        ?output_rows: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_rows: Integer?
+      attr_accessor input_bytes: Integer?
+      attr_accessor output_bytes: Integer?
+      attr_accessor output_rows: Integer?
+    end
+
+    class QueryRuntimeStatisticsTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_queue_time_in_millis: Integer,
+        ?service_pre_processing_time_in_millis: Integer,
+        ?query_planning_time_in_millis: Integer,
+        ?engine_execution_time_in_millis: Integer,
+        ?service_processing_time_in_millis: Integer,
+        ?total_execution_time_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_queue_time_in_millis: Integer?
+      attr_accessor service_pre_processing_time_in_millis: Integer?
+      attr_accessor query_planning_time_in_millis: Integer?
+      attr_accessor engine_execution_time_in_millis: Integer?
+      attr_accessor service_processing_time_in_millis: Integer?
+      attr_accessor total_execution_time_in_millis: Integer?
+    end
+
+    class QueryStage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_id: Integer,
+        ?state: String,
+        ?output_bytes: Integer,
+        ?output_rows: Integer,
+        ?input_bytes: Integer,
+        ?input_rows: Integer,
+        ?execution_time: Integer,
+        ?query_stage_plan: Types::QueryStagePlanNode,
+        ?sub_stages: Array[Types::QueryStage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_id: Integer?
+      attr_accessor state: String?
+      attr_accessor output_bytes: Integer?
+      attr_accessor output_rows: Integer?
+      attr_accessor input_bytes: Integer?
+      attr_accessor input_rows: Integer?
+      attr_accessor execution_time: Integer?
+      attr_accessor query_stage_plan: Types::QueryStagePlanNode?
+      attr_accessor sub_stages: Array[Types::QueryStage]?
+    end
+
+    class QueryStagePlanNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?identifier: String,
+        ?children: Array[Types::QueryStagePlanNode],
+        ?remote_sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor identifier: String?
+      attr_accessor children: Array[Types::QueryStagePlanNode]?
+      attr_accessor remote_sources: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResultConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_location: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?expected_bucket_owner: String,
+        ?acl_configuration: Types::AclConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_location: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor acl_configuration: Types::AclConfiguration?
+    end
+
+    class ResultConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_location: String,
+        ?remove_output_location: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?remove_encryption_configuration: bool,
+        ?expected_bucket_owner: String,
+        ?remove_expected_bucket_owner: bool,
+        ?acl_configuration: Types::AclConfiguration,
+        ?remove_acl_configuration: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_location: String?
+      attr_accessor remove_output_location: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor remove_encryption_configuration: bool?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor remove_expected_bucket_owner: bool?
+      attr_accessor acl_configuration: Types::AclConfiguration?
+      attr_accessor remove_acl_configuration: bool?
+    end
+
+    class ResultReuseByAgeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?max_age_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor max_age_in_minutes: Integer?
+    end
+
+    class ResultReuseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_reuse_by_age_configuration: Types::ResultReuseByAgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_reuse_by_age_configuration: Types::ResultReuseByAgeConfiguration?
+    end
+
+    class ResultReuseInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reused_previous_result: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reused_previous_result: bool?
+    end
+
+    class ResultSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rows: Array[Types::Row],
+        ?result_set_metadata: Types::ResultSetMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rows: Array[Types::Row]?
+      attr_accessor result_set_metadata: Types::ResultSetMetadata?
+    end
+
+    class ResultSetMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_info: Array[Types::ColumnInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_info: Array[Types::ColumnInfo]?
+    end
+
+    class Row
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Array[Types::Datum],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Array[Types::Datum]?
+    end
+
+    module S3AclOption
+      BUCKET_OWNER_FULL_CONTROL: String
+    end
+
+    class SessionAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SessionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_role: String,
+        ?working_directory: String,
+        ?idle_timeout_seconds: Integer,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_role: String?
+      attr_accessor working_directory: String?
+      attr_accessor idle_timeout_seconds: Integer?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    module SessionState
+      CREATING: String
+      CREATED: String
+      IDLE: String
+      BUSY: String
+      TERMINATING: String
+      TERMINATED: String
+      DEGRADED: String
+      FAILED: String
+    end
+
+    class SessionStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dpu_execution_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dpu_execution_in_millis: Integer?
+    end
+
+    class SessionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date_time: Time,
+        ?last_modified_date_time: Time,
+        ?end_date_time: Time,
+        ?idle_since_date_time: Time,
+        ?state: String,
+        ?state_change_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date_time: Time?
+      attr_accessor last_modified_date_time: Time?
+      attr_accessor end_date_time: Time?
+      attr_accessor idle_since_date_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_change_reason: String?
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?description: String,
+        ?engine_version: Types::EngineVersion,
+        ?notebook_version: String,
+        ?status: Types::SessionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor description: String?
+      attr_accessor engine_version: Types::EngineVersion?
+      attr_accessor notebook_version: String?
+      attr_accessor status: Types::SessionStatus?
+    end
+
+    class StartCalculationExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?description: String,
+        ?calculation_configuration: Types::CalculationConfiguration,
+        ?code_block: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor description: String?
+      attr_accessor calculation_configuration: Types::CalculationConfiguration?
+      attr_accessor code_block: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class StartCalculationExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+      attr_accessor state: String?
+    end
+
+    class StartQueryExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?client_request_token: String,
+        ?query_execution_context: Types::QueryExecutionContext,
+        ?result_configuration: Types::ResultConfiguration,
+        ?work_group: String,
+        ?execution_parameters: Array[String],
+        ?result_reuse_configuration: Types::ResultReuseConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor client_request_token: String?
+      attr_accessor query_execution_context: Types::QueryExecutionContext?
+      attr_accessor result_configuration: Types::ResultConfiguration?
+      attr_accessor work_group: String?
+      attr_accessor execution_parameters: Array[String]?
+      attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration?
+    end
+
+    class StartQueryExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+    end
+
+    class StartSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?work_group: String,
+        ?engine_configuration: Types::EngineConfiguration,
+        ?notebook_version: String,
+        ?session_idle_timeout_in_minutes: Integer,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor work_group: String?
+      attr_accessor engine_configuration: Types::EngineConfiguration?
+      attr_accessor notebook_version: String?
+      attr_accessor session_idle_timeout_in_minutes: Integer?
+      attr_accessor client_request_token: String?
+    end
+
+    class StartSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor state: String?
+    end
+
+    module StatementType
+      DDL: String
+      DML: String
+      UTILITY: String
+    end
+
+    class StopCalculationExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculation_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculation_execution_id: String?
+    end
+
+    class StopCalculationExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class StopQueryExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+    end
+
+    class StopQueryExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TableMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?create_time: Time,
+        ?last_access_time: Time,
+        ?table_type: String,
+        ?columns: Array[Types::Column],
+        ?partition_keys: Array[Types::Column],
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor last_access_time: Time?
+      attr_accessor table_type: String?
+      attr_accessor columns: Array[Types::Column]?
+      attr_accessor partition_keys: Array[Types::Column]?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TerminateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class TerminateSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    module ThrottleReason
+      CONCURRENT_QUERY_LIMIT_EXCEEDED: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class UnprocessedNamedQueryId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UnprocessedPreparedStatementName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UnprocessedQueryExecutionId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_execution_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_execution_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCapacityReservationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_dpus: Integer,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_dpus: Integer?
+      attr_accessor name: String?
+    end
+
+    class UpdateCapacityReservationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class UpdateDataCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNamedQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?named_query_id: String,
+        ?name: String,
+        ?description: String,
+        ?query_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor named_query_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor query_string: String?
+    end
+
+    class UpdateNamedQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?payload: String,
+        ?type: String,
+        ?session_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor payload: String?
+      attr_accessor type: String?
+      attr_accessor session_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpdateNotebookMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?client_request_token: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateNotebookMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePreparedStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_name: String,
+        ?work_group: String,
+        ?query_statement: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_name: String?
+      attr_accessor work_group: String?
+      attr_accessor query_statement: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePreparedStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?description: String,
+        ?configuration_updates: Types::WorkGroupConfigurationUpdates,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor description: String?
+      attr_accessor configuration_updates: Types::WorkGroupConfigurationUpdates?
+      attr_accessor state: String?
+    end
+
+    class UpdateWorkGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class WorkGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+        ?configuration: Types::WorkGroupConfiguration,
+        ?description: String,
+        ?creation_time: Time,
+        ?identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor configuration: Types::WorkGroupConfiguration?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor identity_center_application_arn: String?
+    end
+
+    class WorkGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_configuration: Types::ResultConfiguration,
+        ?managed_query_results_configuration: Types::ManagedQueryResultsConfiguration,
+        ?enforce_work_group_configuration: bool,
+        ?publish_cloud_watch_metrics_enabled: bool,
+        ?bytes_scanned_cutoff_per_query: Integer,
+        ?requester_pays_enabled: bool,
+        ?engine_version: Types::EngineVersion,
+        ?additional_configuration: String,
+        ?execution_role: String,
+        ?customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration,
+        ?enable_minimum_encryption_configuration: bool,
+        ?identity_center_configuration: Types::IdentityCenterConfiguration,
+        ?query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_configuration: Types::ResultConfiguration?
+      attr_accessor managed_query_results_configuration: Types::ManagedQueryResultsConfiguration?
+      attr_accessor enforce_work_group_configuration: bool?
+      attr_accessor publish_cloud_watch_metrics_enabled: bool?
+      attr_accessor bytes_scanned_cutoff_per_query: Integer?
+      attr_accessor requester_pays_enabled: bool?
+      attr_accessor engine_version: Types::EngineVersion?
+      attr_accessor additional_configuration: String?
+      attr_accessor execution_role: String?
+      attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration?
+      attr_accessor enable_minimum_encryption_configuration: bool?
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration?
+    end
+
+    class WorkGroupConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enforce_work_group_configuration: bool,
+        ?result_configuration_updates: Types::ResultConfigurationUpdates,
+        ?managed_query_results_configuration_updates: Types::ManagedQueryResultsConfigurationUpdates,
+        ?publish_cloud_watch_metrics_enabled: bool,
+        ?bytes_scanned_cutoff_per_query: Integer,
+        ?remove_bytes_scanned_cutoff_per_query: bool,
+        ?requester_pays_enabled: bool,
+        ?engine_version: Types::EngineVersion,
+        ?remove_customer_content_encryption_configuration: bool,
+        ?additional_configuration: String,
+        ?execution_role: String,
+        ?customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration,
+        ?enable_minimum_encryption_configuration: bool,
+        ?query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enforce_work_group_configuration: bool?
+      attr_accessor result_configuration_updates: Types::ResultConfigurationUpdates?
+      attr_accessor managed_query_results_configuration_updates: Types::ManagedQueryResultsConfigurationUpdates?
+      attr_accessor publish_cloud_watch_metrics_enabled: bool?
+      attr_accessor bytes_scanned_cutoff_per_query: Integer?
+      attr_accessor remove_bytes_scanned_cutoff_per_query: bool?
+      attr_accessor requester_pays_enabled: bool?
+      attr_accessor engine_version: Types::EngineVersion?
+      attr_accessor remove_customer_content_encryption_configuration: bool?
+      attr_accessor additional_configuration: String?
+      attr_accessor execution_role: String?
+      attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration?
+      attr_accessor enable_minimum_encryption_configuration: bool?
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration?
+    end
+
+    module WorkGroupState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class WorkGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?engine_version: Types::EngineVersion,
+        ?identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor engine_version: Types::EngineVersion?
+      attr_accessor identity_center_application_arn: String?
+    end
+  end
+end

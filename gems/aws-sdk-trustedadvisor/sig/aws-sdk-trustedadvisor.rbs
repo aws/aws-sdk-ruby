@@ -1,0 +1,5 @@
+  module Aws
+    module TrustedAdvisor
+      VERSION: String
+    end
+  end

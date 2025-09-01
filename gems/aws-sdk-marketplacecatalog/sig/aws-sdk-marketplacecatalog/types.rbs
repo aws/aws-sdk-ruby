@@ -1,0 +1,1901 @@
+module Aws::MarketplaceCatalog
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AmiProductEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class AmiProductFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::AmiProductEntityIdFilter,
+        ?last_modified_date: Types::AmiProductLastModifiedDateFilter,
+        ?product_title: Types::AmiProductTitleFilter,
+        ?visibility: Types::AmiProductVisibilityFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::AmiProductEntityIdFilter?
+      attr_accessor last_modified_date: Types::AmiProductLastModifiedDateFilter?
+      attr_accessor product_title: Types::AmiProductTitleFilter?
+      attr_accessor visibility: Types::AmiProductVisibilityFilter?
+    end
+
+    class AmiProductLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::AmiProductLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::AmiProductLastModifiedDateFilterDateRange?
+    end
+
+    class AmiProductLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class AmiProductSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module AmiProductSortBy
+      EntityId: String
+      LastModifiedDate: String
+      ProductTitle: String
+      Visibility: String
+    end
+
+    class AmiProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_title: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_title: String?
+      attr_accessor visibility: String?
+    end
+
+    class AmiProductTitleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class AmiProductVisibilityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module AmiProductVisibilityString
+      Limited: String
+      Public: String
+      Restricted: String
+      Draft: String
+    end
+
+    class BatchDescribeEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_request_list: Array[Types::EntityRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_request_list: Array[Types::EntityRequest]?
+    end
+
+    class BatchDescribeEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_details: Hash[String, Types::EntityDetail],
+        ?errors: Hash[String, Types::BatchDescribeErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_details: Hash[String, Types::EntityDetail]?
+      attr_accessor errors: Hash[String, Types::BatchDescribeErrorDetail]?
+    end
+
+    class BatchDescribeErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class CancelChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?change_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor change_set_id: String?
+    end
+
+    class CancelChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_id: String,
+        ?change_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_arn: String?
+    end
+
+    class Change
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_type: String,
+        ?entity: Types::Entity,
+        ?entity_tags: Array[Types::Tag],
+        ?details: String,
+        ?details_document: Smithy::Schema::document,
+        ?change_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_type: String?
+      attr_accessor entity: Types::Entity?
+      attr_accessor entity_tags: Array[Types::Tag]?
+      attr_accessor details: String?
+      attr_accessor details_document: Smithy::Schema::document?
+      attr_accessor change_name: String?
+    end
+
+    class ChangeSetSummaryListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_id: String,
+        ?change_set_arn: String,
+        ?change_set_name: String,
+        ?start_time: String,
+        ?end_time: String,
+        ?status: String,
+        ?entity_id_list: Array[String],
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_arn: String?
+      attr_accessor change_set_name: String?
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+      attr_accessor status: String?
+      attr_accessor entity_id_list: Array[String]?
+      attr_accessor failure_code: String?
+    end
+
+    module ChangeStatus
+      PREPARING: String
+      APPLYING: String
+      SUCCEEDED: String
+      CANCELLED: String
+      FAILED: String
+    end
+
+    class ChangeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_type: String,
+        ?entity: Types::Entity,
+        ?details: String,
+        ?details_document: Smithy::Schema::document,
+        ?error_detail_list: Array[Types::ErrorDetail],
+        ?change_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_type: String?
+      attr_accessor entity: Types::Entity?
+      attr_accessor details: String?
+      attr_accessor details_document: Smithy::Schema::document?
+      attr_accessor error_detail_list: Array[Types::ErrorDetail]?
+      attr_accessor change_name: String?
+    end
+
+    class ContainerProductEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class ContainerProductFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::ContainerProductEntityIdFilter,
+        ?last_modified_date: Types::ContainerProductLastModifiedDateFilter,
+        ?product_title: Types::ContainerProductTitleFilter,
+        ?visibility: Types::ContainerProductVisibilityFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::ContainerProductEntityIdFilter?
+      attr_accessor last_modified_date: Types::ContainerProductLastModifiedDateFilter?
+      attr_accessor product_title: Types::ContainerProductTitleFilter?
+      attr_accessor visibility: Types::ContainerProductVisibilityFilter?
+    end
+
+    class ContainerProductLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::ContainerProductLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::ContainerProductLastModifiedDateFilterDateRange?
+    end
+
+    class ContainerProductLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class ContainerProductSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module ContainerProductSortBy
+      EntityId: String
+      LastModifiedDate: String
+      ProductTitle: String
+      Visibility: String
+    end
+
+    class ContainerProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_title: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_title: String?
+      attr_accessor visibility: String?
+    end
+
+    class ContainerProductTitleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ContainerProductVisibilityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module ContainerProductVisibilityString
+      Limited: String
+      Public: String
+      Restricted: String
+      Draft: String
+    end
+
+    class DataProductEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class DataProductFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::DataProductEntityIdFilter,
+        ?product_title: Types::DataProductTitleFilter,
+        ?visibility: Types::DataProductVisibilityFilter,
+        ?last_modified_date: Types::DataProductLastModifiedDateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::DataProductEntityIdFilter?
+      attr_accessor product_title: Types::DataProductTitleFilter?
+      attr_accessor visibility: Types::DataProductVisibilityFilter?
+      attr_accessor last_modified_date: Types::DataProductLastModifiedDateFilter?
+    end
+
+    class DataProductLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::DataProductLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::DataProductLastModifiedDateFilterDateRange?
+    end
+
+    class DataProductLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class DataProductSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module DataProductSortBy
+      EntityId: String
+      ProductTitle: String
+      Visibility: String
+      LastModifiedDate: String
+    end
+
+    class DataProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_title: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_title: String?
+      attr_accessor visibility: String?
+    end
+
+    class DataProductTitleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class DataProductVisibilityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module DataProductVisibilityString
+      Limited: String
+      Public: String
+      Restricted: String
+      Unavailable: String
+      Draft: String
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?change_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor change_set_id: String?
+    end
+
+    class DescribeChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_id: String,
+        ?change_set_arn: String,
+        ?change_set_name: String,
+        ?intent: String,
+        ?start_time: String,
+        ?end_time: String,
+        ?status: String,
+        ?failure_code: String,
+        ?failure_description: String,
+        ?change_set: Array[Types::ChangeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_arn: String?
+      attr_accessor change_set_name: String?
+      attr_accessor intent: String?
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+      attr_accessor status: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_description: String?
+      attr_accessor change_set: Array[Types::ChangeSummary]?
+    end
+
+    class DescribeEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor entity_id: String?
+    end
+
+    class DescribeEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?entity_arn: String,
+        ?last_modified_date: String,
+        ?details: String,
+        ?details_document: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_arn: String?
+      attr_accessor last_modified_date: String?
+      attr_accessor details: String?
+      attr_accessor details_document: Smithy::Schema::document?
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+    end
+
+    class EntityDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?entity_arn: String,
+        ?entity_identifier: String,
+        ?last_modified_date: String,
+        ?details_document: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor entity_arn: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor last_modified_date: String?
+      attr_accessor details_document: Smithy::Schema::document?
+    end
+
+    class EntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor entity_id: String?
+    end
+
+    class EntitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?entity_type: String,
+        ?entity_id: String,
+        ?entity_arn: String,
+        ?last_modified_date: String,
+        ?visibility: String,
+        ?ami_product_summary: Types::AmiProductSummary,
+        ?container_product_summary: Types::ContainerProductSummary,
+        ?data_product_summary: Types::DataProductSummary,
+        ?saa_s_product_summary: Types::SaaSProductSummary,
+        ?offer_summary: Types::OfferSummary,
+        ?resale_authorization_summary: Types::ResaleAuthorizationSummary,
+        ?machine_learning_product_summary: Types::MachineLearningProductSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+      attr_accessor entity_arn: String?
+      attr_accessor last_modified_date: String?
+      attr_accessor visibility: String?
+      attr_accessor ami_product_summary: Types::AmiProductSummary?
+      attr_accessor container_product_summary: Types::ContainerProductSummary?
+      attr_accessor data_product_summary: Types::DataProductSummary?
+      attr_accessor saa_s_product_summary: Types::SaaSProductSummary?
+      attr_accessor offer_summary: Types::OfferSummary?
+      attr_accessor resale_authorization_summary: Types::ResaleAuthorizationSummary?
+      attr_accessor machine_learning_product_summary: Types::MachineLearningProductSummary?
+    end
+
+    class EntityTypeFilters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?data_product_filters: Types::DataProductFilters,
+        ?saa_s_product_filters: Types::SaaSProductFilters,
+        ?ami_product_filters: Types::AmiProductFilters,
+        ?offer_filters: Types::OfferFilters,
+        ?container_product_filters: Types::ContainerProductFilters,
+        ?resale_authorization_filters: Types::ResaleAuthorizationFilters,
+        ?machine_learning_product_filters: Types::MachineLearningProductFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_product_filters: Types::DataProductFilters?
+      attr_accessor saa_s_product_filters: Types::SaaSProductFilters?
+      attr_accessor ami_product_filters: Types::AmiProductFilters?
+      attr_accessor offer_filters: Types::OfferFilters?
+      attr_accessor container_product_filters: Types::ContainerProductFilters?
+      attr_accessor resale_authorization_filters: Types::ResaleAuthorizationFilters?
+      attr_accessor machine_learning_product_filters: Types::MachineLearningProductFilters?
+
+      class DataProductFilters < EntityTypeFilters
+      end
+      class SaaSProductFilters < EntityTypeFilters
+      end
+      class AmiProductFilters < EntityTypeFilters
+      end
+      class OfferFilters < EntityTypeFilters
+      end
+      class ContainerProductFilters < EntityTypeFilters
+      end
+      class ResaleAuthorizationFilters < EntityTypeFilters
+      end
+      class MachineLearningProductFilters < EntityTypeFilters
+      end
+      class Unknown < EntityTypeFilters
+      end
+    end
+
+    class EntityTypeSort
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?data_product_sort: Types::DataProductSort,
+        ?saa_s_product_sort: Types::SaaSProductSort,
+        ?ami_product_sort: Types::AmiProductSort,
+        ?offer_sort: Types::OfferSort,
+        ?container_product_sort: Types::ContainerProductSort,
+        ?resale_authorization_sort: Types::ResaleAuthorizationSort,
+        ?machine_learning_product_sort: Types::MachineLearningProductSort,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_product_sort: Types::DataProductSort?
+      attr_accessor saa_s_product_sort: Types::SaaSProductSort?
+      attr_accessor ami_product_sort: Types::AmiProductSort?
+      attr_accessor offer_sort: Types::OfferSort?
+      attr_accessor container_product_sort: Types::ContainerProductSort?
+      attr_accessor resale_authorization_sort: Types::ResaleAuthorizationSort?
+      attr_accessor machine_learning_product_sort: Types::MachineLearningProductSort?
+
+      class DataProductSort < EntityTypeSort
+      end
+      class SaaSProductSort < EntityTypeSort
+      end
+      class AmiProductSort < EntityTypeSort
+      end
+      class OfferSort < EntityTypeSort
+      end
+      class ContainerProductSort < EntityTypeSort
+      end
+      class ResaleAuthorizationSort < EntityTypeSort
+      end
+      class MachineLearningProductSort < EntityTypeSort
+      end
+      class Unknown < EntityTypeSort
+      end
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module FailureCode
+      ClientError: String
+      ServerFault: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value_list: Array[String]?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    module Intent
+      VALIDATE: String
+      APPLY: String
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChangeSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?filter_list: Array[Types::Filter],
+        ?sort: Types::Sort,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor filter_list: Array[Types::Filter]?
+      attr_accessor sort: Types::Sort?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChangeSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_summary_list: Array[Types::ChangeSetSummaryListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_summary_list: Array[Types::ChangeSetSummaryListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?entity_type: String,
+        ?filter_list: Array[Types::Filter],
+        ?sort: Types::Sort,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?ownership_type: String,
+        ?entity_type_filters: Types::EntityTypeFilters,
+        ?entity_type_sort: Types::EntityTypeSort,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor entity_type: String?
+      attr_accessor filter_list: Array[Types::Filter]?
+      attr_accessor sort: Types::Sort?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor ownership_type: String?
+      attr_accessor entity_type_filters: Types::EntityTypeFilters?
+      attr_accessor entity_type_sort: Types::EntityTypeSort?
+    end
+
+    class ListEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_summary_list: Array[Types::EntitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_summary_list: Array[Types::EntitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MachineLearningProductEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class MachineLearningProductFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::MachineLearningProductEntityIdFilter,
+        ?last_modified_date: Types::MachineLearningProductLastModifiedDateFilter,
+        ?product_title: Types::MachineLearningProductTitleFilter,
+        ?visibility: Types::MachineLearningProductVisibilityFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::MachineLearningProductEntityIdFilter?
+      attr_accessor last_modified_date: Types::MachineLearningProductLastModifiedDateFilter?
+      attr_accessor product_title: Types::MachineLearningProductTitleFilter?
+      attr_accessor visibility: Types::MachineLearningProductVisibilityFilter?
+    end
+
+    class MachineLearningProductLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::MachineLearningProductLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::MachineLearningProductLastModifiedDateFilterDateRange?
+    end
+
+    class MachineLearningProductLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class MachineLearningProductSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module MachineLearningProductSortBy
+      EntityId: String
+      LastModifiedDate: String
+      ProductTitle: String
+      Visibility: String
+    end
+
+    class MachineLearningProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_title: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_title: String?
+      attr_accessor visibility: String?
+    end
+
+    class MachineLearningProductTitleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class MachineLearningProductVisibilityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module MachineLearningProductVisibilityString
+      Limited: String
+      Public: String
+      Restricted: String
+      Draft: String
+    end
+
+    class OfferAvailabilityEndDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::OfferAvailabilityEndDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::OfferAvailabilityEndDateFilterDateRange?
+    end
+
+    class OfferAvailabilityEndDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class OfferBuyerAccountsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wild_card_value: String?
+    end
+
+    class OfferEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::OfferEntityIdFilter,
+        ?name: Types::OfferNameFilter,
+        ?product_id: Types::OfferProductIdFilter,
+        ?resale_authorization_id: Types::OfferResaleAuthorizationIdFilter,
+        ?release_date: Types::OfferReleaseDateFilter,
+        ?availability_end_date: Types::OfferAvailabilityEndDateFilter,
+        ?buyer_accounts: Types::OfferBuyerAccountsFilter,
+        ?state: Types::OfferStateFilter,
+        ?targeting: Types::OfferTargetingFilter,
+        ?last_modified_date: Types::OfferLastModifiedDateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::OfferEntityIdFilter?
+      attr_accessor name: Types::OfferNameFilter?
+      attr_accessor product_id: Types::OfferProductIdFilter?
+      attr_accessor resale_authorization_id: Types::OfferResaleAuthorizationIdFilter?
+      attr_accessor release_date: Types::OfferReleaseDateFilter?
+      attr_accessor availability_end_date: Types::OfferAvailabilityEndDateFilter?
+      attr_accessor buyer_accounts: Types::OfferBuyerAccountsFilter?
+      attr_accessor state: Types::OfferStateFilter?
+      attr_accessor targeting: Types::OfferTargetingFilter?
+      attr_accessor last_modified_date: Types::OfferLastModifiedDateFilter?
+    end
+
+    class OfferLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::OfferLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::OfferLastModifiedDateFilterDateRange?
+    end
+
+    class OfferLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class OfferNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class OfferProductIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferReleaseDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::OfferReleaseDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::OfferReleaseDateFilterDateRange?
+    end
+
+    class OfferReleaseDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class OfferResaleAuthorizationIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module OfferSortBy
+      EntityId: String
+      Name: String
+      ProductId: String
+      ResaleAuthorizationId: String
+      ReleaseDate: String
+      AvailabilityEndDate: String
+      BuyerAccounts: String
+      State: String
+      Targeting: String
+      LastModifiedDate: String
+    end
+
+    class OfferStateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module OfferStateString
+      Draft: String
+      Released: String
+    end
+
+    class OfferSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?product_id: String,
+        ?resale_authorization_id: String,
+        ?release_date: String,
+        ?availability_end_date: String,
+        ?buyer_accounts: Array[String],
+        ?state: String,
+        ?targeting: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor product_id: String?
+      attr_accessor resale_authorization_id: String?
+      attr_accessor release_date: String?
+      attr_accessor availability_end_date: String?
+      attr_accessor buyer_accounts: Array[String]?
+      attr_accessor state: String?
+      attr_accessor targeting: Array[String]?
+    end
+
+    class OfferTargetingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module OfferTargetingString
+      BuyerAccounts: String
+      ParticipatingPrograms: String
+      CountryCodes: String
+      None: String
+    end
+
+    module OwnershipType
+      SELF: String
+      SHARED: String
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResaleAuthorizationAvailabilityEndDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::ResaleAuthorizationAvailabilityEndDateFilterDateRange,
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::ResaleAuthorizationAvailabilityEndDateFilterDateRange?
+      attr_accessor value_list: Array[String]?
+    end
+
+    class ResaleAuthorizationAvailabilityEndDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class ResaleAuthorizationCreatedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::ResaleAuthorizationCreatedDateFilterDateRange,
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::ResaleAuthorizationCreatedDateFilterDateRange?
+      attr_accessor value_list: Array[String]?
+    end
+
+    class ResaleAuthorizationCreatedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class ResaleAuthorizationEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class ResaleAuthorizationFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::ResaleAuthorizationEntityIdFilter,
+        ?name: Types::ResaleAuthorizationNameFilter,
+        ?product_id: Types::ResaleAuthorizationProductIdFilter,
+        ?created_date: Types::ResaleAuthorizationCreatedDateFilter,
+        ?availability_end_date: Types::ResaleAuthorizationAvailabilityEndDateFilter,
+        ?manufacturer_account_id: Types::ResaleAuthorizationManufacturerAccountIdFilter,
+        ?product_name: Types::ResaleAuthorizationProductNameFilter,
+        ?manufacturer_legal_name: Types::ResaleAuthorizationManufacturerLegalNameFilter,
+        ?reseller_account_id: Types::ResaleAuthorizationResellerAccountIDFilter,
+        ?reseller_legal_name: Types::ResaleAuthorizationResellerLegalNameFilter,
+        ?status: Types::ResaleAuthorizationStatusFilter,
+        ?offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter,
+        ?last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::ResaleAuthorizationEntityIdFilter?
+      attr_accessor name: Types::ResaleAuthorizationNameFilter?
+      attr_accessor product_id: Types::ResaleAuthorizationProductIdFilter?
+      attr_accessor created_date: Types::ResaleAuthorizationCreatedDateFilter?
+      attr_accessor availability_end_date: Types::ResaleAuthorizationAvailabilityEndDateFilter?
+      attr_accessor manufacturer_account_id: Types::ResaleAuthorizationManufacturerAccountIdFilter?
+      attr_accessor product_name: Types::ResaleAuthorizationProductNameFilter?
+      attr_accessor manufacturer_legal_name: Types::ResaleAuthorizationManufacturerLegalNameFilter?
+      attr_accessor reseller_account_id: Types::ResaleAuthorizationResellerAccountIDFilter?
+      attr_accessor reseller_legal_name: Types::ResaleAuthorizationResellerLegalNameFilter?
+      attr_accessor status: Types::ResaleAuthorizationStatusFilter?
+      attr_accessor offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter?
+      attr_accessor last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter?
+    end
+
+    class ResaleAuthorizationLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::ResaleAuthorizationLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::ResaleAuthorizationLastModifiedDateFilterDateRange?
+    end
+
+    class ResaleAuthorizationLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class ResaleAuthorizationManufacturerAccountIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationManufacturerLegalNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationOfferExtendedStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class ResaleAuthorizationProductIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationProductNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationResellerAccountIDFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationResellerLegalNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class ResaleAuthorizationSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module ResaleAuthorizationSortBy
+      EntityId: String
+      Name: String
+      ProductId: String
+      ProductName: String
+      ManufacturerAccountId: String
+      ManufacturerLegalName: String
+      ResellerAccountID: String
+      ResellerLegalName: String
+      Status: String
+      OfferExtendedStatus: String
+      CreatedDate: String
+      AvailabilityEndDate: String
+      LastModifiedDate: String
+    end
+
+    class ResaleAuthorizationStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module ResaleAuthorizationStatusString
+      Draft: String
+      Active: String
+      Restricted: String
+    end
+
+    class ResaleAuthorizationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?manufacturer_account_id: String,
+        ?manufacturer_legal_name: String,
+        ?reseller_account_id: String,
+        ?reseller_legal_name: String,
+        ?status: String,
+        ?offer_extended_status: String,
+        ?created_date: String,
+        ?availability_end_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor manufacturer_account_id: String?
+      attr_accessor manufacturer_legal_name: String?
+      attr_accessor reseller_account_id: String?
+      attr_accessor reseller_legal_name: String?
+      attr_accessor status: String?
+      attr_accessor offer_extended_status: String?
+      attr_accessor created_date: String?
+      attr_accessor availability_end_date: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SaaSProductEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class SaaSProductFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::SaaSProductEntityIdFilter,
+        ?product_title: Types::SaaSProductTitleFilter,
+        ?visibility: Types::SaaSProductVisibilityFilter,
+        ?last_modified_date: Types::SaaSProductLastModifiedDateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::SaaSProductEntityIdFilter?
+      attr_accessor product_title: Types::SaaSProductTitleFilter?
+      attr_accessor visibility: Types::SaaSProductVisibilityFilter?
+      attr_accessor last_modified_date: Types::SaaSProductLastModifiedDateFilter?
+    end
+
+    class SaaSProductLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::SaaSProductLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::SaaSProductLastModifiedDateFilterDateRange?
+    end
+
+    class SaaSProductLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class SaaSProductSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SaaSProductSortBy
+      EntityId: String
+      ProductTitle: String
+      Visibility: String
+      LastModifiedDate: String
+    end
+
+    class SaaSProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_title: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_title: String?
+      attr_accessor visibility: String?
+    end
+
+    class SaaSProductTitleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+        ?wild_card_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+      attr_accessor wild_card_value: String?
+    end
+
+    class SaaSProductVisibilityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module SaaSProductVisibilityString
+      Limited: String
+      Public: String
+      Restricted: String
+      Draft: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Sort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?change_set: Array[Types::Change],
+        ?change_set_name: String,
+        ?client_request_token: String,
+        ?change_set_tags: Array[Types::Tag],
+        ?intent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor change_set: Array[Types::Change]?
+      attr_accessor change_set_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor change_set_tags: Array[Types::Tag]?
+      attr_accessor intent: String?
+    end
+
+    class StartChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_set_id: String,
+        ?change_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_set_id: String?
+      attr_accessor change_set_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

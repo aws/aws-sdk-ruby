@@ -1,0 +1,5 @@
+  module Aws
+    module Repostspace
+      VERSION: String
+    end
+  end

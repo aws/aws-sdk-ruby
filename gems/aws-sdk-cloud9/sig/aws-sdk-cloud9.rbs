@@ -1,0 +1,5 @@
+  module Aws
+    module Cloud9
+      VERSION: String
+    end
+  end

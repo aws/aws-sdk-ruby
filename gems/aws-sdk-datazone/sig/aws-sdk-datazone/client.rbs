@@ -1,0 +1,3861 @@
+module Aws::DataZone
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DataZone::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptPredictionsResponse
+      include Smithy::Client::_Response[Types::AcceptPredictionsOutput]
+      def domain_id: () -> String?
+      def asset_id: () -> String?
+      def revision: () -> String?
+    end
+    def accept_predictions: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String,
+      ?accept_rule: {
+        rule: String,
+        threshold: Float
+      },
+      ?accept_choices: Array[
+        {
+          prediction_target: String,
+          prediction_choice: Integer,
+          edited_value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _AcceptPredictionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptPredictionsResponse
+
+    interface _AcceptSubscriptionRequestResponse
+      include Smithy::Client::_Response[Types::AcceptSubscriptionRequestOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def request_reason: () -> String?
+      def subscribed_principals: () -> Array[Types::SubscribedPrincipal]?
+      def subscribed_listings: () -> Array[Types::SubscribedListing]?
+      def reviewer_id: () -> String?
+      def decision_comment: () -> String?
+      def existing_subscription_id: () -> String?
+      def metadata_forms: () -> Array[Types::FormOutput]?
+    end
+    def accept_subscription_request: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?decision_comment: String,
+      ?asset_scopes: Array[
+        {
+          asset_id: String,
+          filter_ids: Array[String]
+        }
+      ]
+    ) -> _AcceptSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptSubscriptionRequestResponse
+
+    interface _AddEntityOwnerResponse
+      include Smithy::Client::_Response[Types::AddEntityOwnerOutput]
+    end
+    def add_entity_owner: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?owner: {
+        user: {
+          user_identifier: String
+        },
+        group: {
+          group_identifier: String
+        }
+      },
+      ?client_token: String
+    ) -> _AddEntityOwnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddEntityOwnerResponse
+
+    interface _AddPolicyGrantResponse
+      include Smithy::Client::_Response[Types::AddPolicyGrantOutput]
+    end
+    def add_policy_grant: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?policy_type: String,
+      ?principal: {
+        user: {
+          user_identifier: String,
+          all_users_grant_filter: {
+          }
+        },
+        group: {
+          group_identifier: String
+        },
+        project: {
+          project_designation: String,
+          project_identifier: String,
+          project_grant_filter: {
+            domain_unit_filter: {
+              domain_unit: String,
+              include_child_domain_units: bool
+            }
+          }
+        },
+        domain_unit: {
+          domain_unit_designation: String,
+          domain_unit_identifier: untyped,
+          domain_unit_grant_filter: {
+            all_domain_units_grant_filter: {
+            }
+          }
+        }
+      },
+      ?detail: {
+        create_domain_unit: {
+          include_child_domain_units: bool
+        },
+        override_domain_unit_owners: {
+          include_child_domain_units: untyped
+        },
+        add_to_project_member_pool: {
+          include_child_domain_units: untyped
+        },
+        override_project_owners: {
+          include_child_domain_units: untyped
+        },
+        create_glossary: {
+          include_child_domain_units: untyped
+        },
+        create_form_type: {
+          include_child_domain_units: untyped
+        },
+        create_asset_type: {
+          include_child_domain_units: untyped
+        },
+        create_project: {
+          include_child_domain_units: untyped
+        },
+        create_environment_profile: {
+          domain_unit_id: String
+        },
+        delegate_create_environment_profile: {
+        },
+        create_environment: untyped,
+        create_environment_from_blueprint: untyped,
+        create_project_from_project_profile: {
+          include_child_domain_units: untyped,
+          project_profiles: Array[String]
+        },
+        use_asset_type: {
+          domain_unit_id: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _AddPolicyGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPolicyGrantResponse
+
+    interface _AssociateEnvironmentRoleResponse
+      include Smithy::Client::_Response[Types::AssociateEnvironmentRoleOutput]
+    end
+    def associate_environment_role: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?environment_role_arn: String
+    ) -> _AssociateEnvironmentRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEnvironmentRoleResponse
+
+    interface _CancelMetadataGenerationRunResponse
+      include Smithy::Client::_Response[Types::CancelMetadataGenerationRunOutput]
+    end
+    def cancel_metadata_generation_run: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _CancelMetadataGenerationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMetadataGenerationRunResponse
+
+    interface _CancelSubscriptionResponse
+      include Smithy::Client::_Response[Types::CancelSubscriptionOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscribed_principal: () -> Types::SubscribedPrincipal?
+      def subscribed_listing: () -> Types::SubscribedListing?
+      def subscription_request_id: () -> String?
+      def retain_permissions: () -> bool?
+    end
+    def cancel_subscription: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _CancelSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSubscriptionResponse
+
+    interface _CreateAccountPoolResponse
+      include Smithy::Client::_Response[Types::CreateAccountPoolOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def resolution_strategy: () -> String?
+      def account_source: () -> Types::AccountSource?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def updated_by: () -> String?
+      def domain_unit_id: () -> String?
+    end
+    def create_account_pool: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?resolution_strategy: String,
+      ?account_source: {
+        accounts: Array[
+          {
+            aws_account_id: String,
+            supported_regions: Array[String],
+            aws_account_name: String
+          }
+        ],
+        custom_account_pool_handler: {
+          lambda_function_arn: String,
+          lambda_execution_role_arn: String
+        }
+      }
+    ) -> _CreateAccountPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountPoolResponse
+
+    interface _CreateAssetResponse
+      include Smithy::Client::_Response[Types::CreateAssetOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def type_identifier: () -> String?
+      def type_revision: () -> String?
+      def external_identifier: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def listing: () -> Types::AssetListingDetails?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def read_only_forms_output: () -> Array[Types::FormOutput]?
+      def latest_time_series_data_point_forms_output: () -> Array[Types::TimeSeriesDataPointSummaryFormOutput]?
+      def prediction_configuration: () -> Types::PredictionConfiguration?
+    end
+    def create_asset: (
+      ?name: String,
+      ?domain_identifier: String,
+      ?external_identifier: String,
+      ?type_identifier: String,
+      ?type_revision: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?owning_project_identifier: String,
+      ?prediction_configuration: {
+        business_name_generation: {
+          enabled: bool
+        }
+      },
+      ?client_token: String
+    ) -> _CreateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetResponse
+
+    interface _CreateAssetFilterResponse
+      include Smithy::Client::_Response[Types::CreateAssetFilterOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def asset_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def configuration: () -> Types::AssetFilterConfiguration?
+      def created_at: () -> Time?
+      def error_message: () -> String?
+      def effective_column_names: () -> Array[String]?
+      def effective_row_filter: () -> String?
+    end
+    def create_asset_filter: (
+      ?domain_identifier: String,
+      ?asset_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?configuration: {
+        column_configuration: {
+          included_column_names: Array[String]
+        },
+        row_configuration: {
+          row_filter: {
+            expression: {
+              equal_to: {
+                column_name: String,
+                value: untyped
+              },
+              not_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              greater_than: {
+                column_name: untyped,
+                value: untyped
+              },
+              less_than: {
+                column_name: untyped,
+                value: untyped
+              },
+              greater_than_or_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              less_than_or_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              is_null: {
+                column_name: untyped
+              },
+              is_not_null: {
+                column_name: untyped
+              },
+              in: {
+                column_name: untyped,
+                values: Array[String]
+              },
+              not_in: {
+                column_name: untyped,
+                values: untyped
+              },
+              like: {
+                column_name: untyped,
+                value: untyped
+              },
+              not_like: {
+                column_name: untyped,
+                value: untyped
+              }
+            },
+            and: Array[
+              {
+                expression: untyped,
+                and: untyped,
+                or: untyped
+              }
+            ],
+            or: untyped
+          },
+          sensitive: bool
+        }
+      },
+      ?client_token: String
+    ) -> _CreateAssetFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetFilterResponse
+
+    interface _CreateAssetRevisionResponse
+      include Smithy::Client::_Response[Types::CreateAssetRevisionOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def type_identifier: () -> String?
+      def type_revision: () -> String?
+      def external_identifier: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def listing: () -> Types::AssetListingDetails?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def read_only_forms_output: () -> Array[Types::FormOutput]?
+      def latest_time_series_data_point_forms_output: () -> Array[Types::TimeSeriesDataPointSummaryFormOutput]?
+      def prediction_configuration: () -> Types::PredictionConfiguration?
+    end
+    def create_asset_revision: (
+      ?name: String,
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?type_revision: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?prediction_configuration: {
+        business_name_generation: {
+          enabled: bool
+        }
+      },
+      ?client_token: String
+    ) -> _CreateAssetRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetRevisionResponse
+
+    interface _CreateAssetTypeResponse
+      include Smithy::Client::_Response[Types::CreateAssetTypeOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def forms_output: () -> Hash[String, Types::FormEntryOutput]?
+      def owning_project_id: () -> String?
+      def origin_domain_id: () -> String?
+      def origin_project_id: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def create_asset_type: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?forms_input: Hash[String,
+        {
+          type_identifier: String,
+          type_revision: String,
+          required: bool
+        }
+      ],
+      ?owning_project_identifier: String
+    ) -> _CreateAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetTypeResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionOutput]
+      def connection_id: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def domain_unit_id: () -> String?
+      def environment_id: () -> String?
+      def name: () -> String?
+      def physical_endpoints: () -> Array[Types::PhysicalEndpoint]?
+      def project_id: () -> String?
+      def props: () -> Types::ConnectionPropertiesOutput?
+      def type: () -> String?
+    end
+    def create_connection: (
+      ?aws_location: {
+        access_role: String,
+        aws_account_id: String,
+        aws_region: String,
+        iam_connection_id: String
+      },
+      ?client_token: String,
+      ?description: String,
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?name: String,
+      ?props: {
+        athena_properties: {
+          workgroup_name: String
+        },
+        glue_properties: {
+          glue_connection_input: {
+            connection_properties: Hash[String, String],
+            physical_connection_requirements: {
+              subnet_id: String,
+              subnet_id_list: Array[String],
+              security_group_id_list: Array[String],
+              availability_zone: untyped
+            },
+            name: untyped,
+            description: untyped,
+            connection_type: String,
+            match_criteria: untyped,
+            validate_credentials: bool,
+            validate_for_compute_environments: Array[String],
+            spark_properties: Hash[String, String],
+            athena_properties: untyped,
+            python_properties: untyped,
+            authentication_configuration: {
+              authentication_type: String,
+              o_auth2_properties: {
+                o_auth2_grant_type: String,
+                o_auth2_client_application: {
+                  user_managed_client_application_client_id: untyped,
+                  a_ws_managed_client_application_reference: untyped
+                },
+                token_url: untyped,
+                token_url_parameters_map: Hash[String, String],
+                authorization_code_properties: {
+                  authorization_code: untyped,
+                  redirect_uri: untyped
+                },
+                o_auth2_credentials: {
+                  user_managed_client_application_client_secret: untyped,
+                  access_token: untyped,
+                  refresh_token: untyped,
+                  jwt_token: untyped
+                }
+              },
+              secret_arn: untyped,
+              kms_key_arn: untyped,
+              basic_authentication_credentials: {
+                user_name: untyped,
+                password: untyped
+              },
+              custom_authentication_credentials: Hash[String, String]
+            }
+          }
+        },
+        hyper_pod_properties: {
+          cluster_name: untyped
+        },
+        iam_properties: {
+          glue_lineage_sync_enabled: untyped
+        },
+        redshift_properties: {
+          storage: {
+            cluster_name: untyped,
+            workgroup_name: untyped
+          },
+          database_name: untyped,
+          host: untyped,
+          port: Integer,
+          credentials: {
+            secret_arn: untyped,
+            username_password: {
+              password: String,
+              username: String
+            }
+          },
+          lineage_sync: {
+            enabled: untyped,
+            schedule: {
+              schedule: untyped
+            }
+          }
+        },
+        spark_emr_properties: {
+          compute_arn: untyped,
+          instance_profile_arn: untyped,
+          java_virtual_env: untyped,
+          log_uri: untyped,
+          python_virtual_env: untyped,
+          runtime_role: untyped,
+          trusted_certificates_s3_uri: untyped
+        },
+        spark_glue_properties: {
+          additional_args: {
+            connection: untyped
+          },
+          glue_connection_name: untyped,
+          glue_version: untyped,
+          idle_timeout: untyped,
+          java_virtual_env: untyped,
+          number_of_workers: untyped,
+          python_virtual_env: untyped,
+          worker_type: untyped
+        },
+        s3_properties: {
+          s3_uri: String,
+          s3_access_grant_location_id: String
+        }
+      }
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateDataProductResponse
+      include Smithy::Client::_Response[Types::CreateDataProductOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def revision: () -> String?
+      def owning_project_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def items: () -> Array[Types::DataProductItem]?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+    end
+    def create_data_product: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?owning_project_identifier: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?items: Array[
+        {
+          item_type: String,
+          identifier: String,
+          revision: String,
+          glossary_terms: Array[String]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateDataProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataProductResponse
+
+    interface _CreateDataProductRevisionResponse
+      include Smithy::Client::_Response[Types::CreateDataProductRevisionOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def revision: () -> String?
+      def owning_project_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def items: () -> Array[Types::DataProductItem]?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+    end
+    def create_data_product_revision: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?items: Array[
+        {
+          item_type: String,
+          identifier: String,
+          revision: String,
+          glossary_terms: Array[String]
+        }
+      ],
+      ?forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateDataProductRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataProductRevisionResponse
+
+    interface _CreateDataSourceResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def connection_id: () -> String?
+      def configuration: () -> Types::DataSourceConfigurationOutput?
+      def recommendation: () -> Types::RecommendationConfiguration?
+      def enable_setting: () -> String?
+      def publish_on_import: () -> bool?
+      def asset_forms_output: () -> Array[Types::FormOutput]?
+      def schedule: () -> Types::ScheduleConfiguration?
+      def last_run_status: () -> String?
+      def last_run_at: () -> Time?
+      def last_run_error_message: () -> Types::DataSourceErrorMessage?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_data_source: (
+      ?name: String,
+      ?description: String,
+      ?domain_identifier: String,
+      ?project_identifier: String,
+      ?environment_identifier: String,
+      ?connection_identifier: String,
+      ?type: String,
+      ?configuration: {
+        glue_run_configuration: {
+          data_access_role: String,
+          relational_filter_configurations: Array[
+            {
+              database_name: untyped,
+              schema_name: untyped,
+              filter_expressions: Array[
+                {
+                  type: String,
+                  expression: untyped
+                }
+              ]
+            }
+          ],
+          auto_import_data_quality_result: bool,
+          catalog_name: untyped
+        },
+        redshift_run_configuration: {
+          data_access_role: untyped,
+          relational_filter_configurations: untyped,
+          redshift_credential_configuration: {
+            secret_manager_arn: untyped
+          },
+          redshift_storage: {
+            redshift_cluster_source: {
+              cluster_name: untyped
+            },
+            redshift_serverless_source: {
+              workgroup_name: untyped
+            }
+          }
+        },
+        sage_maker_run_configuration: {
+          tracking_assets: Hash[String,
+            Array[String]
+          ]
+        }
+      },
+      ?recommendation: {
+        enable_business_name_generation: bool
+      },
+      ?enable_setting: String,
+      ?schedule: {
+        timezone: String,
+        schedule: String
+      },
+      ?publish_on_import: bool,
+      ?asset_forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainOutput]
+      def id: () -> String?
+      def root_domain_unit_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def single_sign_on: () -> Types::SingleSignOn?
+      def domain_execution_role: () -> String?
+      def arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def status: () -> String?
+      def portal_url: () -> String?
+      def tags: () -> Hash[String, String]?
+      def domain_version: () -> String?
+      def service_role: () -> String?
+    end
+    def create_domain: (
+      ?name: String,
+      ?description: String,
+      ?single_sign_on: {
+        type: String,
+        user_assignment: String,
+        idc_instance_arn: String
+      },
+      ?domain_execution_role: String,
+      ?kms_key_identifier: String,
+      ?tags: Hash[String, String],
+      ?domain_version: String,
+      ?service_role: String,
+      ?client_token: String
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateDomainUnitResponse
+      include Smithy::Client::_Response[Types::CreateDomainUnitOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def name: () -> String?
+      def parent_domain_unit_id: () -> String?
+      def description: () -> String?
+      def owners: () -> Array[Types::DomainUnitOwnerProperties]?
+      def ancestor_domain_unit_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def create_domain_unit: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?parent_domain_unit_identifier: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateDomainUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainUnitResponse
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentOutput]
+      def project_id: () -> String?
+      def id: () -> String?
+      def domain_id: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_profile_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def provider: () -> String?
+      def provisioned_resources: () -> Array[Types::Resource]?
+      def status: () -> String?
+      def environment_actions: () -> Array[Types::ConfigurableEnvironmentAction]?
+      def glossary_terms: () -> Array[String]?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def last_deployment: () -> Types::Deployment?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def environment_blueprint_id: () -> String?
+      def environment_configuration_id: () -> String?
+    end
+    def create_environment: (
+      ?project_identifier: String,
+      ?domain_identifier: String,
+      ?description: String,
+      ?name: String,
+      ?environment_profile_identifier: String,
+      ?user_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?glossary_terms: Array[String],
+      ?environment_account_identifier: String,
+      ?environment_account_region: String,
+      ?environment_blueprint_identifier: String,
+      ?deployment_order: Integer,
+      ?environment_configuration_id: String
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateEnvironmentActionResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentActionOutput]
+      def domain_id: () -> String?
+      def environment_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def parameters: () -> Types::ActionParameters?
+      def description: () -> String?
+    end
+    def create_environment_action: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?name: String,
+      ?parameters: {
+        aws_console_link: {
+          uri: String
+        }
+      },
+      ?description: String
+    ) -> _CreateEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentActionResponse
+
+    interface _CreateEnvironmentProfileResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentProfileOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_blueprint_id: () -> String?
+      def project_id: () -> String?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+    end
+    def create_environment_profile: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?environment_blueprint_identifier: String,
+      ?project_identifier: String,
+      ?user_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?aws_account_id: String,
+      ?aws_account_region: String
+    ) -> _CreateEnvironmentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentProfileResponse
+
+    interface _CreateFormTypeResponse
+      include Smithy::Client::_Response[Types::CreateFormTypeOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def owning_project_id: () -> String?
+      def origin_domain_id: () -> String?
+      def origin_project_id: () -> String?
+    end
+    def create_form_type: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?model: {
+        smithy: String
+      },
+      ?owning_project_identifier: String,
+      ?status: String,
+      ?description: String
+    ) -> _CreateFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFormTypeResponse
+
+    interface _CreateGlossaryResponse
+      include Smithy::Client::_Response[Types::CreateGlossaryOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def owning_project_id: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+    end
+    def create_glossary: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?owning_project_identifier: String,
+      ?description: String,
+      ?status: String,
+      ?client_token: String
+    ) -> _CreateGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlossaryResponse
+
+    interface _CreateGlossaryTermResponse
+      include Smithy::Client::_Response[Types::CreateGlossaryTermOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def glossary_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+      def term_relations: () -> Types::TermRelations?
+    end
+    def create_glossary_term: (
+      ?domain_identifier: String,
+      ?glossary_identifier: String,
+      ?name: String,
+      ?status: String,
+      ?short_description: String,
+      ?long_description: String,
+      ?term_relations: {
+        is_a: Array[String],
+        classifies: untyped
+      },
+      ?client_token: String
+    ) -> _CreateGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlossaryTermResponse
+
+    interface _CreateGroupProfileResponse
+      include Smithy::Client::_Response[Types::CreateGroupProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def group_name: () -> String?
+    end
+    def create_group_profile: (
+      ?domain_identifier: String,
+      ?group_identifier: String,
+      ?client_token: String
+    ) -> _CreateGroupProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupProfileResponse
+
+    interface _CreateListingChangeSetResponse
+      include Smithy::Client::_Response[Types::CreateListingChangeSetOutput]
+      def listing_id: () -> String?
+      def listing_revision: () -> String?
+      def status: () -> String?
+    end
+    def create_listing_change_set: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?entity_revision: String,
+      ?action: String,
+      ?client_token: String
+    ) -> _CreateListingChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListingChangeSetResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def project_status: () -> String?
+      def failure_reasons: () -> Array[Types::ProjectDeletionError]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def glossary_terms: () -> Array[String]?
+      def domain_unit_id: () -> String?
+      def project_profile_id: () -> String?
+      def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
+      def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+    end
+    def create_project: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?domain_unit_id: String,
+      ?project_profile_id: String,
+      ?user_parameters: Array[
+        {
+          environment_id: String,
+          environment_resolved_account: {
+            aws_account_id: String,
+            region_name: String,
+            source_account_pool_id: String
+          },
+          environment_configuration_name: String,
+          environment_parameters: Array[
+            {
+              name: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _CreateProjectMembershipResponse
+      include Smithy::Client::_Response[Types::CreateProjectMembershipOutput]
+    end
+    def create_project_membership: (
+      ?domain_identifier: String,
+      ?project_identifier: String,
+      ?member: {
+        user_identifier: String,
+        group_identifier: untyped
+      },
+      ?designation: String
+    ) -> _CreateProjectMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectMembershipResponse
+
+    interface _CreateProjectProfileResponse
+      include Smithy::Client::_Response[Types::CreateProjectProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def domain_unit_id: () -> String?
+    end
+    def create_project_profile: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?status: String,
+      ?environment_configurations: Array[
+        {
+          name: String,
+          id: String,
+          environment_blueprint_id: String,
+          description: String,
+          deployment_mode: String,
+          configuration_parameters: {
+            ssm_path: String,
+            parameter_overrides: Array[
+              {
+                name: String,
+                value: String,
+                is_editable: bool
+              }
+            ],
+            resolved_parameters: untyped
+          },
+          aws_account: {
+            aws_account_id: String,
+            aws_account_id_path: untyped
+          },
+          account_pools: Array[String],
+          aws_region: {
+            region_name: String,
+            region_name_path: untyped
+          },
+          deployment_order: Integer
+        }
+      ],
+      ?domain_unit_identifier: String
+    ) -> _CreateProjectProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectProfileResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleOutput]
+      def identifier: () -> String?
+      def name: () -> String?
+      def rule_type: () -> String?
+      def target: () -> Types::RuleTarget?
+      def action: () -> String?
+      def scope: () -> Types::RuleScope?
+      def detail: () -> Types::RuleDetail?
+      def target_type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def create_rule: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?target: {
+        domain_unit_target: {
+          domain_unit_id: String,
+          include_child_domain_units: bool
+        }
+      },
+      ?action: String,
+      ?scope: {
+        asset_type: {
+          selection_mode: String,
+          specific_asset_types: Array[String]
+        },
+        data_product: bool,
+        project: {
+          selection_mode: untyped,
+          specific_projects: Array[String]
+        }
+      },
+      ?detail: {
+        metadata_form_enforcement_detail: {
+          required_metadata_forms: Array[
+            {
+              type_identifier: String,
+              type_revision: String
+            }
+          ]
+        }
+      },
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateSubscriptionGrantResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionGrantOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscription_target_id: () -> String?
+      def granted_entity: () -> Types::GrantedEntity?
+      def status: () -> String?
+      def assets: () -> Array[Types::SubscribedAsset]?
+      def subscription_id: () -> String?
+    end
+    def create_subscription_grant: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?subscription_target_identifier: String,
+      ?granted_entity: {
+        listing: {
+          identifier: String,
+          revision: String
+        }
+      },
+      ?asset_target_names: Array[
+        {
+          asset_id: String,
+          target_name: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateSubscriptionGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionGrantResponse
+
+    interface _CreateSubscriptionRequestResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionRequestOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def request_reason: () -> String?
+      def subscribed_principals: () -> Array[Types::SubscribedPrincipal]?
+      def subscribed_listings: () -> Array[Types::SubscribedListing]?
+      def reviewer_id: () -> String?
+      def decision_comment: () -> String?
+      def existing_subscription_id: () -> String?
+      def metadata_forms: () -> Array[Types::FormOutput]?
+    end
+    def create_subscription_request: (
+      ?domain_identifier: String,
+      ?subscribed_principals: Array[
+        {
+          project: {
+            identifier: String
+          }
+        }
+      ],
+      ?subscribed_listings: Array[
+        {
+          identifier: String
+        }
+      ],
+      ?request_reason: String,
+      ?client_token: String,
+      ?metadata_forms: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ]
+    ) -> _CreateSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionRequestResponse
+
+    interface _CreateSubscriptionTargetResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionTargetOutput]
+      def id: () -> String?
+      def authorized_principals: () -> Array[String]?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def manage_access_role: () -> String?
+      def applicable_asset_types: () -> Array[String]?
+      def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
+      def provider: () -> String?
+    end
+    def create_subscription_target: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?name: String,
+      ?type: String,
+      ?subscription_target_config: Array[
+        {
+          form_name: String,
+          content: String
+        }
+      ],
+      ?authorized_principals: Array[String],
+      ?manage_access_role: String,
+      ?applicable_asset_types: Array[String],
+      ?provider: String,
+      ?client_token: String
+    ) -> _CreateSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionTargetResponse
+
+    interface _CreateUserProfileResponse
+      include Smithy::Client::_Response[Types::CreateUserProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def details: () -> Types::UserProfileDetails?
+    end
+    def create_user_profile: (
+      ?domain_identifier: String,
+      ?user_identifier: String,
+      ?user_type: String,
+      ?client_token: String
+    ) -> _CreateUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserProfileResponse
+
+    interface _DeleteAccountPoolResponse
+      include Smithy::Client::_Response[Types::DeleteAccountPoolOutput]
+    end
+    def delete_account_pool: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteAccountPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountPoolResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Types::DeleteAssetOutput]
+    end
+    def delete_asset: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeleteAssetFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_asset_filter: (
+      ?domain_identifier: String,
+      ?asset_identifier: String,
+      ?identifier: String
+    ) -> _DeleteAssetFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetFilterResponse
+
+    interface _DeleteAssetTypeResponse
+      include Smithy::Client::_Response[Types::DeleteAssetTypeOutput]
+    end
+    def delete_asset_type: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetTypeResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionOutput]
+      def status: () -> String?
+    end
+    def delete_connection: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteDataProductResponse
+      include Smithy::Client::_Response[Types::DeleteDataProductOutput]
+    end
+    def delete_data_product: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteDataProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataProductResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def connection_id: () -> String?
+      def configuration: () -> Types::DataSourceConfigurationOutput?
+      def enable_setting: () -> String?
+      def publish_on_import: () -> bool?
+      def asset_forms_output: () -> Array[Types::FormOutput]?
+      def schedule: () -> Types::ScheduleConfiguration?
+      def last_run_status: () -> String?
+      def last_run_at: () -> Time?
+      def last_run_error_message: () -> Types::DataSourceErrorMessage?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def self_grant_status: () -> Types::SelfGrantStatusOutput?
+      def retain_permissions_on_revoke_failure: () -> bool?
+    end
+    def delete_data_source: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?retain_permissions_on_revoke_failure: bool
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainOutput]
+      def status: () -> String?
+    end
+    def delete_domain: (
+      ?identifier: String,
+      ?client_token: String,
+      ?skip_deletion_check: bool
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteDomainUnitResponse
+      include Smithy::Client::_Response[Types::DeleteDomainUnitOutput]
+    end
+    def delete_domain_unit: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteDomainUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainUnitResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_environment: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteEnvironmentActionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_environment_action: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String
+    ) -> _DeleteEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentActionResponse
+
+    interface _DeleteEnvironmentBlueprintConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentBlueprintConfigurationOutput]
+    end
+    def delete_environment_blueprint_configuration: (
+      ?domain_identifier: String,
+      ?environment_blueprint_identifier: String
+    ) -> _DeleteEnvironmentBlueprintConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentBlueprintConfigurationResponse
+
+    interface _DeleteEnvironmentProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_environment_profile: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteEnvironmentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentProfileResponse
+
+    interface _DeleteFormTypeResponse
+      include Smithy::Client::_Response[Types::DeleteFormTypeOutput]
+    end
+    def delete_form_type: (
+      ?domain_identifier: String,
+      ?form_type_identifier: String
+    ) -> _DeleteFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFormTypeResponse
+
+    interface _DeleteGlossaryResponse
+      include Smithy::Client::_Response[Types::DeleteGlossaryOutput]
+    end
+    def delete_glossary: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlossaryResponse
+
+    interface _DeleteGlossaryTermResponse
+      include Smithy::Client::_Response[Types::DeleteGlossaryTermOutput]
+    end
+    def delete_glossary_term: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlossaryTermResponse
+
+    interface _DeleteListingResponse
+      include Smithy::Client::_Response[Types::DeleteListingOutput]
+    end
+    def delete_listing: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteListingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListingResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectOutput]
+    end
+    def delete_project: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?skip_deletion_check: bool
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteProjectMembershipResponse
+      include Smithy::Client::_Response[Types::DeleteProjectMembershipOutput]
+    end
+    def delete_project_membership: (
+      ?domain_identifier: String,
+      ?project_identifier: String,
+      ?member: {
+        user_identifier: String,
+        group_identifier: untyped
+      }
+    ) -> _DeleteProjectMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectMembershipResponse
+
+    interface _DeleteProjectProfileResponse
+      include Smithy::Client::_Response[Types::DeleteProjectProfileOutput]
+    end
+    def delete_project_profile: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteProjectProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectProfileResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleOutput]
+    end
+    def delete_rule: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteSubscriptionGrantResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriptionGrantOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscription_target_id: () -> String?
+      def granted_entity: () -> Types::GrantedEntity?
+      def status: () -> String?
+      def assets: () -> Array[Types::SubscribedAsset]?
+      def subscription_id: () -> String?
+    end
+    def delete_subscription_grant: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteSubscriptionGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionGrantResponse
+
+    interface _DeleteSubscriptionRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_subscription_request: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionRequestResponse
+
+    interface _DeleteSubscriptionTargetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_subscription_target: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String
+    ) -> _DeleteSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionTargetResponse
+
+    interface _DeleteTimeSeriesDataPointsResponse
+      include Smithy::Client::_Response[Types::DeleteTimeSeriesDataPointsOutput]
+    end
+    def delete_time_series_data_points: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?form_name: String,
+      ?client_token: String
+    ) -> _DeleteTimeSeriesDataPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTimeSeriesDataPointsResponse
+
+    interface _DisassociateEnvironmentRoleResponse
+      include Smithy::Client::_Response[Types::DisassociateEnvironmentRoleOutput]
+    end
+    def disassociate_environment_role: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?environment_role_arn: String
+    ) -> _DisassociateEnvironmentRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEnvironmentRoleResponse
+
+    interface _GetAccountPoolResponse
+      include Smithy::Client::_Response[Types::GetAccountPoolOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def resolution_strategy: () -> String?
+      def account_source: () -> Types::AccountSource?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def updated_by: () -> String?
+      def domain_unit_id: () -> String?
+    end
+    def get_account_pool: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetAccountPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountPoolResponse
+
+    interface _GetAssetResponse
+      include Smithy::Client::_Response[Types::GetAssetOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def type_identifier: () -> String?
+      def type_revision: () -> String?
+      def external_identifier: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def listing: () -> Types::AssetListingDetails?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def read_only_forms_output: () -> Array[Types::FormOutput]?
+      def latest_time_series_data_point_forms_output: () -> Array[Types::TimeSeriesDataPointSummaryFormOutput]?
+    end
+    def get_asset: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String
+    ) -> _GetAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetResponse
+
+    interface _GetAssetFilterResponse
+      include Smithy::Client::_Response[Types::GetAssetFilterOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def asset_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def configuration: () -> Types::AssetFilterConfiguration?
+      def created_at: () -> Time?
+      def error_message: () -> String?
+      def effective_column_names: () -> Array[String]?
+      def effective_row_filter: () -> String?
+    end
+    def get_asset_filter: (
+      ?domain_identifier: String,
+      ?asset_identifier: String,
+      ?identifier: String
+    ) -> _GetAssetFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetFilterResponse
+
+    interface _GetAssetTypeResponse
+      include Smithy::Client::_Response[Types::GetAssetTypeOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def revision: () -> String?
+      def description: () -> String?
+      def forms_output: () -> Hash[String, Types::FormEntryOutput]?
+      def owning_project_id: () -> String?
+      def origin_domain_id: () -> String?
+      def origin_project_id: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_asset_type: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String
+    ) -> _GetAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetTypeResponse
+
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionOutput]
+      def connection_credentials: () -> Types::ConnectionCredentials?
+      def connection_id: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def domain_unit_id: () -> String?
+      def environment_id: () -> String?
+      def environment_user_role: () -> String?
+      def name: () -> String?
+      def physical_endpoints: () -> Array[Types::PhysicalEndpoint]?
+      def project_id: () -> String?
+      def props: () -> Types::ConnectionPropertiesOutput?
+      def type: () -> String?
+    end
+    def get_connection: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?with_secret: bool
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetDataProductResponse
+      include Smithy::Client::_Response[Types::GetDataProductOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def revision: () -> String?
+      def owning_project_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def items: () -> Array[Types::DataProductItem]?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def first_revision_created_at: () -> Time?
+      def first_revision_created_by: () -> String?
+    end
+    def get_data_product: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String
+    ) -> _GetDataProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataProductResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def connection_id: () -> String?
+      def configuration: () -> Types::DataSourceConfigurationOutput?
+      def recommendation: () -> Types::RecommendationConfiguration?
+      def enable_setting: () -> String?
+      def publish_on_import: () -> bool?
+      def asset_forms_output: () -> Array[Types::FormOutput]?
+      def schedule: () -> Types::ScheduleConfiguration?
+      def last_run_status: () -> String?
+      def last_run_at: () -> Time?
+      def last_run_error_message: () -> Types::DataSourceErrorMessage?
+      def last_run_asset_count: () -> Integer?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def self_grant_status: () -> Types::SelfGrantStatusOutput?
+    end
+    def get_data_source: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetDataSourceRunResponse
+      include Smithy::Client::_Response[Types::GetDataSourceRunOutput]
+      def domain_id: () -> String?
+      def data_source_id: () -> String?
+      def id: () -> String?
+      def project_id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def data_source_configuration_snapshot: () -> String?
+      def run_statistics_for_assets: () -> Types::RunStatisticsForAssets?
+      def lineage_summary: () -> Types::DataSourceRunLineageSummary?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def started_at: () -> Time?
+      def stopped_at: () -> Time?
+    end
+    def get_data_source_run: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetDataSourceRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceRunResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainOutput]
+      def id: () -> String?
+      def root_domain_unit_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def single_sign_on: () -> Types::SingleSignOn?
+      def domain_execution_role: () -> String?
+      def arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def status: () -> String?
+      def portal_url: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def domain_version: () -> String?
+      def service_role: () -> String?
+    end
+    def get_domain: (
+      ?identifier: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetDomainUnitResponse
+      include Smithy::Client::_Response[Types::GetDomainUnitOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def name: () -> String?
+      def parent_domain_unit_id: () -> String?
+      def description: () -> String?
+      def owners: () -> Array[Types::DomainUnitOwnerProperties]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def created_by: () -> String?
+      def last_updated_by: () -> String?
+    end
+    def get_domain_unit: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetDomainUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainUnitResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentOutput]
+      def project_id: () -> String?
+      def id: () -> String?
+      def domain_id: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_profile_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def provider: () -> String?
+      def provisioned_resources: () -> Array[Types::Resource]?
+      def status: () -> String?
+      def environment_actions: () -> Array[Types::ConfigurableEnvironmentAction]?
+      def glossary_terms: () -> Array[String]?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def last_deployment: () -> Types::Deployment?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def environment_blueprint_id: () -> String?
+      def environment_configuration_id: () -> String?
+    end
+    def get_environment: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetEnvironmentActionResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentActionOutput]
+      def domain_id: () -> String?
+      def environment_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def parameters: () -> Types::ActionParameters?
+      def description: () -> String?
+    end
+    def get_environment_action: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String
+    ) -> _GetEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentActionResponse
+
+    interface _GetEnvironmentBlueprintResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentBlueprintOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def provider: () -> String?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def glossary_terms: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_environment_blueprint: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentBlueprintResponse
+
+    interface _GetEnvironmentBlueprintConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentBlueprintConfigurationOutput]
+      def domain_id: () -> String?
+      def environment_blueprint_id: () -> String?
+      def provisioning_role_arn: () -> String?
+      def environment_role_permission_boundary: () -> String?
+      def manage_access_role_arn: () -> String?
+      def enabled_regions: () -> Array[String]?
+      def regional_parameters: () -> Hash[String, Hash[String, String]]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def provisioning_configurations: () -> Array[Types::ProvisioningConfiguration]?
+    end
+    def get_environment_blueprint_configuration: (
+      ?domain_identifier: String,
+      ?environment_blueprint_identifier: String
+    ) -> _GetEnvironmentBlueprintConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentBlueprintConfigurationResponse
+
+    interface _GetEnvironmentCredentialsResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentCredentialsOutput]
+      def access_key_id: () -> String?
+      def secret_access_key: () -> String?
+      def session_token: () -> String?
+      def expiration: () -> Time?
+    end
+    def get_environment_credentials: (
+      ?domain_identifier: String,
+      ?environment_identifier: String
+    ) -> _GetEnvironmentCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentCredentialsResponse
+
+    interface _GetEnvironmentProfileResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentProfileOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_blueprint_id: () -> String?
+      def project_id: () -> String?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+    end
+    def get_environment_profile: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetEnvironmentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentProfileResponse
+
+    interface _GetFormTypeResponse
+      include Smithy::Client::_Response[Types::GetFormTypeOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def revision: () -> String?
+      def model: () -> Types::Model?
+      def owning_project_id: () -> String?
+      def origin_domain_id: () -> String?
+      def origin_project_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def description: () -> String?
+      def imports: () -> Array[Types::Import]?
+    end
+    def get_form_type: (
+      ?domain_identifier: String,
+      ?form_type_identifier: String,
+      ?revision: String
+    ) -> _GetFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFormTypeResponse
+
+    interface _GetGlossaryResponse
+      include Smithy::Client::_Response[Types::GetGlossaryOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def owning_project_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_glossary: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlossaryResponse
+
+    interface _GetGlossaryTermResponse
+      include Smithy::Client::_Response[Types::GetGlossaryTermOutput]
+      def domain_id: () -> String?
+      def glossary_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+      def term_relations: () -> Types::TermRelations?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def get_glossary_term: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlossaryTermResponse
+
+    interface _GetGroupProfileResponse
+      include Smithy::Client::_Response[Types::GetGroupProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def group_name: () -> String?
+    end
+    def get_group_profile: (
+      ?domain_identifier: String,
+      ?group_identifier: String
+    ) -> _GetGroupProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupProfileResponse
+
+    interface _GetIamPortalLoginUrlResponse
+      include Smithy::Client::_Response[Types::GetIamPortalLoginUrlOutput]
+      def auth_code_url: () -> String?
+      def user_profile_id: () -> String?
+    end
+    def get_iam_portal_login_url: (
+      ?domain_identifier: String
+    ) -> _GetIamPortalLoginUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIamPortalLoginUrlResponse
+
+    interface _GetJobRunResponse
+      include Smithy::Client::_Response[Types::GetJobRunOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def job_id: () -> String?
+      def job_type: () -> String?
+      def run_mode: () -> String?
+      def details: () -> Types::JobRunDetails?
+      def status: () -> String?
+      def error: () -> Types::JobRunError?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def get_job_run: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobRunResponse
+
+    interface _GetLineageEventResponse
+      include Smithy::Client::_Response[Types::GetLineageEventOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def event: () -> String?
+      def created_by: () -> String?
+      def processing_status: () -> String?
+      def event_time: () -> Time?
+      def created_at: () -> Time?
+    end
+    def get_lineage_event: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetLineageEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLineageEventResponse
+
+    interface _GetLineageNodeResponse
+      include Smithy::Client::_Response[Types::GetLineageNodeOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def id: () -> String?
+      def type_name: () -> String?
+      def type_revision: () -> String?
+      def source_identifier: () -> String?
+      def event_timestamp: () -> Time?
+      def forms_output: () -> Array[Types::FormOutput]?
+      def upstream_nodes: () -> Array[Types::LineageNodeReference]?
+      def downstream_nodes: () -> Array[Types::LineageNodeReference]?
+    end
+    def get_lineage_node: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?event_timestamp: Time
+    ) -> _GetLineageNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLineageNodeResponse
+
+    interface _GetListingResponse
+      include Smithy::Client::_Response[Types::GetListingOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def listing_revision: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def item: () -> Types::ListingItem?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+    end
+    def get_listing: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?listing_revision: String
+    ) -> _GetListingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetListingResponse
+
+    interface _GetMetadataGenerationRunResponse
+      include Smithy::Client::_Response[Types::GetMetadataGenerationRunOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def target: () -> Types::MetadataGenerationRunTarget?
+      def status: () -> String?
+      def type: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def owning_project_id: () -> String?
+    end
+    def get_metadata_generation_run: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetMetadataGenerationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetadataGenerationRunResponse
+
+    interface _GetProjectResponse
+      include Smithy::Client::_Response[Types::GetProjectOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def project_status: () -> String?
+      def failure_reasons: () -> Array[Types::ProjectDeletionError]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def glossary_terms: () -> Array[String]?
+      def domain_unit_id: () -> String?
+      def project_profile_id: () -> String?
+      def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
+      def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+    end
+    def get_project: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProjectResponse
+
+    interface _GetProjectProfileResponse
+      include Smithy::Client::_Response[Types::GetProjectProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def domain_unit_id: () -> String?
+    end
+    def get_project_profile: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetProjectProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProjectProfileResponse
+
+    interface _GetRuleResponse
+      include Smithy::Client::_Response[Types::GetRuleOutput]
+      def identifier: () -> String?
+      def revision: () -> String?
+      def name: () -> String?
+      def rule_type: () -> String?
+      def target: () -> Types::RuleTarget?
+      def action: () -> String?
+      def scope: () -> Types::RuleScope?
+      def detail: () -> Types::RuleDetail?
+      def target_type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def created_by: () -> String?
+      def last_updated_by: () -> String?
+    end
+    def get_rule: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String
+    ) -> _GetRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleResponse
+
+    interface _GetSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscribed_principal: () -> Types::SubscribedPrincipal?
+      def subscribed_listing: () -> Types::SubscribedListing?
+      def subscription_request_id: () -> String?
+      def retain_permissions: () -> bool?
+    end
+    def get_subscription: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionResponse
+
+    interface _GetSubscriptionGrantResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionGrantOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscription_target_id: () -> String?
+      def granted_entity: () -> Types::GrantedEntity?
+      def status: () -> String?
+      def assets: () -> Array[Types::SubscribedAsset]?
+      def subscription_id: () -> String?
+    end
+    def get_subscription_grant: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetSubscriptionGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionGrantResponse
+
+    interface _GetSubscriptionRequestDetailsResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionRequestDetailsOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def request_reason: () -> String?
+      def subscribed_principals: () -> Array[Types::SubscribedPrincipal]?
+      def subscribed_listings: () -> Array[Types::SubscribedListing]?
+      def reviewer_id: () -> String?
+      def decision_comment: () -> String?
+      def existing_subscription_id: () -> String?
+      def metadata_forms: () -> Array[Types::FormOutput]?
+    end
+    def get_subscription_request_details: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetSubscriptionRequestDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionRequestDetailsResponse
+
+    interface _GetSubscriptionTargetResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionTargetOutput]
+      def id: () -> String?
+      def authorized_principals: () -> Array[String]?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def manage_access_role: () -> String?
+      def applicable_asset_types: () -> Array[String]?
+      def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
+      def provider: () -> String?
+    end
+    def get_subscription_target: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String
+    ) -> _GetSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionTargetResponse
+
+    interface _GetTimeSeriesDataPointResponse
+      include Smithy::Client::_Response[Types::GetTimeSeriesDataPointOutput]
+      def domain_id: () -> String?
+      def entity_id: () -> String?
+      def entity_type: () -> String?
+      def form_name: () -> String?
+      def form: () -> Types::TimeSeriesDataPointFormOutput?
+    end
+    def get_time_series_data_point: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?identifier: String,
+      ?form_name: String
+    ) -> _GetTimeSeriesDataPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTimeSeriesDataPointResponse
+
+    interface _GetUserProfileResponse
+      include Smithy::Client::_Response[Types::GetUserProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def details: () -> Types::UserProfileDetails?
+    end
+    def get_user_profile: (
+      ?domain_identifier: String,
+      ?user_identifier: String,
+      ?type: String
+    ) -> _GetUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserProfileResponse
+
+    interface _ListAccountPoolsResponse
+      include Smithy::Client::_Response[Types::ListAccountPoolsOutput]
+      def items: () -> Array[Types::AccountPoolSummary]?
+      def next_token: () -> String?
+    end
+    def list_account_pools: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountPoolsResponse
+
+    interface _ListAccountsInAccountPoolResponse
+      include Smithy::Client::_Response[Types::ListAccountsInAccountPoolOutput]
+      def items: () -> Array[Types::AccountInfo]?
+      def next_token: () -> String?
+    end
+    def list_accounts_in_account_pool: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountsInAccountPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsInAccountPoolResponse
+
+    interface _ListAssetFiltersResponse
+      include Smithy::Client::_Response[Types::ListAssetFiltersOutput]
+      def items: () -> Array[Types::AssetFilterSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_filters: (
+      ?domain_identifier: String,
+      ?asset_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetFiltersResponse
+
+    interface _ListAssetRevisionsResponse
+      include Smithy::Client::_Response[Types::ListAssetRevisionsOutput]
+      def items: () -> Array[Types::AssetRevision]?
+      def next_token: () -> String?
+    end
+    def list_asset_revisions: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetRevisionsResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsOutput]
+      def items: () -> Array[Types::ConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?name: String,
+      ?environment_identifier: String,
+      ?project_identifier: String,
+      ?type: String
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListDataProductRevisionsResponse
+      include Smithy::Client::_Response[Types::ListDataProductRevisionsOutput]
+      def items: () -> Array[Types::DataProductRevision]?
+      def next_token: () -> String?
+    end
+    def list_data_product_revisions: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataProductRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataProductRevisionsResponse
+
+    interface _ListDataSourceRunActivitiesResponse
+      include Smithy::Client::_Response[Types::ListDataSourceRunActivitiesOutput]
+      def items: () -> Array[Types::DataSourceRunActivity]?
+      def next_token: () -> String?
+    end
+    def list_data_source_run_activities: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourceRunActivitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourceRunActivitiesResponse
+
+    interface _ListDataSourceRunsResponse
+      include Smithy::Client::_Response[Types::ListDataSourceRunsOutput]
+      def items: () -> Array[Types::DataSourceRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_source_runs: (
+      ?domain_identifier: String,
+      ?data_source_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourceRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourceRunsResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesOutput]
+      def items: () -> Array[Types::DataSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_sources: (
+      ?domain_identifier: String,
+      ?project_identifier: String,
+      ?environment_identifier: String,
+      ?connection_identifier: String,
+      ?type: String,
+      ?status: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListDomainUnitsForParentResponse
+      include Smithy::Client::_Response[Types::ListDomainUnitsForParentOutput]
+      def items: () -> Array[Types::DomainUnitSummary]?
+      def next_token: () -> String?
+    end
+    def list_domain_units_for_parent: (
+      ?domain_identifier: String,
+      ?parent_domain_unit_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainUnitsForParentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainUnitsForParentResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def items: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListEntityOwnersResponse
+      include Smithy::Client::_Response[Types::ListEntityOwnersOutput]
+      def owners: () -> Array[Types::OwnerPropertiesOutput]?
+      def next_token: () -> String?
+    end
+    def list_entity_owners: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEntityOwnersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntityOwnersResponse
+
+    interface _ListEnvironmentActionsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentActionsOutput]
+      def items: () -> Array[Types::EnvironmentActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_environment_actions: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentActionsResponse
+
+    interface _ListEnvironmentBlueprintConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentBlueprintConfigurationsOutput]
+      def items: () -> Array[Types::EnvironmentBlueprintConfigurationItem]?
+      def next_token: () -> String?
+    end
+    def list_environment_blueprint_configurations: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEnvironmentBlueprintConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentBlueprintConfigurationsResponse
+
+    interface _ListEnvironmentBlueprintsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentBlueprintsOutput]
+      def items: () -> Array[Types::EnvironmentBlueprintSummary]?
+      def next_token: () -> String?
+    end
+    def list_environment_blueprints: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name: String,
+      ?managed: bool
+    ) -> _ListEnvironmentBlueprintsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentBlueprintsResponse
+
+    interface _ListEnvironmentProfilesResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentProfilesOutput]
+      def items: () -> Array[Types::EnvironmentProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_environment_profiles: (
+      ?domain_identifier: String,
+      ?aws_account_id: String,
+      ?aws_account_region: String,
+      ?environment_blueprint_identifier: String,
+      ?project_identifier: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentProfilesResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsOutput]
+      def items: () -> Array[Types::EnvironmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?domain_identifier: String,
+      ?aws_account_id: String,
+      ?status: String,
+      ?aws_account_region: String,
+      ?project_identifier: String,
+      ?environment_profile_identifier: String,
+      ?environment_blueprint_identifier: String,
+      ?provider: String,
+      ?name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListJobRunsResponse
+      include Smithy::Client::_Response[Types::ListJobRunsOutput]
+      def items: () -> Array[Types::JobRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_job_runs: (
+      ?domain_identifier: String,
+      ?job_identifier: String,
+      ?status: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobRunsResponse
+
+    interface _ListLineageEventsResponse
+      include Smithy::Client::_Response[Types::ListLineageEventsOutput]
+      def items: () -> Array[Types::LineageEventSummary]?
+      def next_token: () -> String?
+    end
+    def list_lineage_events: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?timestamp_after: Time,
+      ?timestamp_before: Time,
+      ?processing_status: String,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListLineageEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLineageEventsResponse
+
+    interface _ListLineageNodeHistoryResponse
+      include Smithy::Client::_Response[Types::ListLineageNodeHistoryOutput]
+      def nodes: () -> Array[Types::LineageNodeSummary]?
+      def next_token: () -> String?
+    end
+    def list_lineage_node_history: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?identifier: String,
+      ?direction: String,
+      ?event_timestamp_gte: Time,
+      ?event_timestamp_lte: Time,
+      ?sort_order: String
+    ) -> _ListLineageNodeHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLineageNodeHistoryResponse
+
+    interface _ListMetadataGenerationRunsResponse
+      include Smithy::Client::_Response[Types::ListMetadataGenerationRunsOutput]
+      def items: () -> Array[Types::MetadataGenerationRunItem]?
+      def next_token: () -> String?
+    end
+    def list_metadata_generation_runs: (
+      ?domain_identifier: String,
+      ?status: String,
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMetadataGenerationRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetadataGenerationRunsResponse
+
+    interface _ListNotificationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationsOutput]
+      def notifications: () -> Array[Types::NotificationOutput]?
+      def next_token: () -> String?
+    end
+    def list_notifications: (
+      ?domain_identifier: String,
+      ?type: String,
+      ?after_timestamp: Time,
+      ?before_timestamp: Time,
+      ?subjects: Array[String],
+      ?task_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationsResponse
+
+    interface _ListPolicyGrantsResponse
+      include Smithy::Client::_Response[Types::ListPolicyGrantsOutput]
+      def grant_list: () -> Array[Types::PolicyGrantMember]?
+      def next_token: () -> String?
+    end
+    def list_policy_grants: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?policy_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPolicyGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyGrantsResponse
+
+    interface _ListProjectMembershipsResponse
+      include Smithy::Client::_Response[Types::ListProjectMembershipsOutput]
+      def members: () -> Array[Types::ProjectMember]?
+      def next_token: () -> String?
+    end
+    def list_project_memberships: (
+      ?domain_identifier: String,
+      ?project_identifier: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectMembershipsResponse
+
+    interface _ListProjectProfilesResponse
+      include Smithy::Client::_Response[Types::ListProjectProfilesOutput]
+      def items: () -> Array[Types::ProjectProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_project_profiles: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectProfilesResponse
+
+    interface _ListProjectsResponse
+      include Smithy::Client::_Response[Types::ListProjectsOutput]
+      def items: () -> Array[Types::ProjectSummary]?
+      def next_token: () -> String?
+    end
+    def list_projects: (
+      ?domain_identifier: String,
+      ?user_identifier: String,
+      ?group_identifier: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesOutput]
+      def items: () -> Array[Types::RuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_rules: (
+      ?domain_identifier: String,
+      ?target_type: String,
+      ?target_identifier: String,
+      ?rule_type: String,
+      ?action: String,
+      ?project_ids: Array[String],
+      ?asset_types: Array[String],
+      ?data_product: bool,
+      ?include_cascaded: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListSubscriptionGrantsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionGrantsOutput]
+      def items: () -> Array[Types::SubscriptionGrantSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscription_grants: (
+      ?domain_identifier: String,
+      ?environment_id: String,
+      ?subscription_target_id: String,
+      ?subscribed_listing_id: String,
+      ?subscription_id: String,
+      ?owning_project_id: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubscriptionGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionGrantsResponse
+
+    interface _ListSubscriptionRequestsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionRequestsOutput]
+      def items: () -> Array[Types::SubscriptionRequestSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscription_requests: (
+      ?domain_identifier: String,
+      ?status: String,
+      ?subscribed_listing_id: String,
+      ?owning_project_id: String,
+      ?approver_project_id: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubscriptionRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionRequestsResponse
+
+    interface _ListSubscriptionTargetsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionTargetsOutput]
+      def items: () -> Array[Types::SubscriptionTargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscription_targets: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubscriptionTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionTargetsResponse
+
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsOutput]
+      def items: () -> Array[Types::SubscriptionSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions: (
+      ?domain_identifier: String,
+      ?subscription_request_identifier: String,
+      ?status: String,
+      ?subscribed_listing_id: String,
+      ?owning_project_id: String,
+      ?approver_project_id: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTimeSeriesDataPointsResponse
+      include Smithy::Client::_Response[Types::ListTimeSeriesDataPointsOutput]
+      def items: () -> Array[Types::TimeSeriesDataPointSummaryFormOutput]?
+      def next_token: () -> String?
+    end
+    def list_time_series_data_points: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?form_name: String,
+      ?started_at: Time,
+      ?ended_at: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTimeSeriesDataPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTimeSeriesDataPointsResponse
+
+    interface _PostLineageEventResponse
+      include Smithy::Client::_Response[Types::PostLineageEventOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+    end
+    def post_lineage_event: (
+      ?domain_identifier: String,
+      ?event: String,
+      ?client_token: String
+    ) -> _PostLineageEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostLineageEventResponse
+
+    interface _PostTimeSeriesDataPointsResponse
+      include Smithy::Client::_Response[Types::PostTimeSeriesDataPointsOutput]
+      def domain_id: () -> String?
+      def entity_id: () -> String?
+      def entity_type: () -> String?
+      def forms: () -> Array[Types::TimeSeriesDataPointFormOutput]?
+    end
+    def post_time_series_data_points: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?forms: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          timestamp: Time,
+          content: String
+        }
+      ],
+      ?client_token: String
+    ) -> _PostTimeSeriesDataPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostTimeSeriesDataPointsResponse
+
+    interface _PutEnvironmentBlueprintConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEnvironmentBlueprintConfigurationOutput]
+      def domain_id: () -> String?
+      def environment_blueprint_id: () -> String?
+      def provisioning_role_arn: () -> String?
+      def environment_role_permission_boundary: () -> String?
+      def manage_access_role_arn: () -> String?
+      def enabled_regions: () -> Array[String]?
+      def regional_parameters: () -> Hash[String, Hash[String, String]]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def provisioning_configurations: () -> Array[Types::ProvisioningConfiguration]?
+    end
+    def put_environment_blueprint_configuration: (
+      ?domain_identifier: String,
+      ?environment_blueprint_identifier: String,
+      ?provisioning_role_arn: String,
+      ?manage_access_role_arn: String,
+      ?environment_role_permission_boundary: String,
+      ?enabled_regions: Array[String],
+      ?regional_parameters: Hash[String,
+        Hash[String, String]
+      ],
+      ?provisioning_configurations: Array[
+        {
+          lake_formation_configuration: {
+            location_registration_role: String,
+            location_registration_exclude_s3_locations: Array[String]
+          }
+        }
+      ]
+    ) -> _PutEnvironmentBlueprintConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEnvironmentBlueprintConfigurationResponse
+
+    interface _RejectPredictionsResponse
+      include Smithy::Client::_Response[Types::RejectPredictionsOutput]
+      def domain_id: () -> String?
+      def asset_id: () -> String?
+      def asset_revision: () -> String?
+    end
+    def reject_predictions: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?revision: String,
+      ?reject_rule: {
+        rule: String,
+        threshold: Float
+      },
+      ?reject_choices: Array[
+        {
+          prediction_target: String,
+          prediction_choices: Array[Integer]
+        }
+      ],
+      ?client_token: String
+    ) -> _RejectPredictionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectPredictionsResponse
+
+    interface _RejectSubscriptionRequestResponse
+      include Smithy::Client::_Response[Types::RejectSubscriptionRequestOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def request_reason: () -> String?
+      def subscribed_principals: () -> Array[Types::SubscribedPrincipal]?
+      def subscribed_listings: () -> Array[Types::SubscribedListing]?
+      def reviewer_id: () -> String?
+      def decision_comment: () -> String?
+      def existing_subscription_id: () -> String?
+      def metadata_forms: () -> Array[Types::FormOutput]?
+    end
+    def reject_subscription_request: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?decision_comment: String
+    ) -> _RejectSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectSubscriptionRequestResponse
+
+    interface _RemoveEntityOwnerResponse
+      include Smithy::Client::_Response[Types::RemoveEntityOwnerOutput]
+    end
+    def remove_entity_owner: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?owner: {
+        user: {
+          user_identifier: String
+        },
+        group: {
+          group_identifier: String
+        }
+      },
+      ?client_token: String
+    ) -> _RemoveEntityOwnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveEntityOwnerResponse
+
+    interface _RemovePolicyGrantResponse
+      include Smithy::Client::_Response[Types::RemovePolicyGrantOutput]
+    end
+    def remove_policy_grant: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?policy_type: String,
+      ?principal: {
+        user: {
+          user_identifier: String,
+          all_users_grant_filter: {
+          }
+        },
+        group: {
+          group_identifier: String
+        },
+        project: {
+          project_designation: String,
+          project_identifier: String,
+          project_grant_filter: {
+            domain_unit_filter: {
+              domain_unit: String,
+              include_child_domain_units: bool
+            }
+          }
+        },
+        domain_unit: {
+          domain_unit_designation: String,
+          domain_unit_identifier: untyped,
+          domain_unit_grant_filter: {
+            all_domain_units_grant_filter: {
+            }
+          }
+        }
+      },
+      ?client_token: String
+    ) -> _RemovePolicyGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePolicyGrantResponse
+
+    interface _RevokeSubscriptionResponse
+      include Smithy::Client::_Response[Types::RevokeSubscriptionOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscribed_principal: () -> Types::SubscribedPrincipal?
+      def subscribed_listing: () -> Types::SubscribedListing?
+      def subscription_request_id: () -> String?
+      def retain_permissions: () -> bool?
+    end
+    def revoke_subscription: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?retain_permissions: bool
+    ) -> _RevokeSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeSubscriptionResponse
+
+    interface _SearchResponse
+      include Smithy::Client::_Response[Types::SearchOutput]
+      def items: () -> Array[Types::SearchInventoryResultItem]?
+      def next_token: () -> String?
+      def total_match_count: () -> Integer?
+    end
+    def search: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?search_scope: String,
+      ?search_text: String,
+      ?search_in: Array[
+        {
+          attribute: String
+        }
+      ],
+      ?filters: {
+        filter: {
+          attribute: String,
+          value: String
+        },
+        and: Array[
+          {
+            filter: untyped,
+            and: untyped,
+            or: untyped
+          }
+        ],
+        or: untyped
+      },
+      ?sort: {
+        attribute: String,
+        order: String
+      },
+      ?additional_attributes: Array[String]
+    ) -> _SearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchResponse
+
+    interface _SearchGroupProfilesResponse
+      include Smithy::Client::_Response[Types::SearchGroupProfilesOutput]
+      def items: () -> Array[Types::GroupProfileSummary]?
+      def next_token: () -> String?
+    end
+    def search_group_profiles: (
+      ?domain_identifier: String,
+      ?group_type: String,
+      ?search_text: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchGroupProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchGroupProfilesResponse
+
+    interface _SearchListingsResponse
+      include Smithy::Client::_Response[Types::SearchListingsOutput]
+      def items: () -> Array[Types::SearchResultItem]?
+      def next_token: () -> String?
+      def total_match_count: () -> Integer?
+      def aggregates: () -> Array[Types::AggregationOutput]?
+    end
+    def search_listings: (
+      ?domain_identifier: String,
+      ?search_text: String,
+      ?search_in: Array[
+        {
+          attribute: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: {
+        filter: {
+          attribute: String,
+          value: String
+        },
+        and: Array[
+          {
+            filter: untyped,
+            and: untyped,
+            or: untyped
+          }
+        ],
+        or: untyped
+      },
+      ?aggregations: Array[
+        {
+          attribute: String,
+          display_value: String
+        }
+      ],
+      ?sort: {
+        attribute: String,
+        order: String
+      },
+      ?additional_attributes: Array[String]
+    ) -> _SearchListingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchListingsResponse
+
+    interface _SearchTypesResponse
+      include Smithy::Client::_Response[Types::SearchTypesOutput]
+      def items: () -> Array[Types::SearchTypesResultItem]?
+      def next_token: () -> String?
+      def total_match_count: () -> Integer?
+    end
+    def search_types: (
+      ?domain_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?search_scope: String,
+      ?search_text: String,
+      ?search_in: Array[
+        {
+          attribute: String
+        }
+      ],
+      ?filters: {
+        filter: {
+          attribute: String,
+          value: String
+        },
+        and: Array[
+          {
+            filter: untyped,
+            and: untyped,
+            or: untyped
+          }
+        ],
+        or: untyped
+      },
+      ?sort: {
+        attribute: String,
+        order: String
+      },
+      ?managed: bool
+    ) -> _SearchTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTypesResponse
+
+    interface _SearchUserProfilesResponse
+      include Smithy::Client::_Response[Types::SearchUserProfilesOutput]
+      def items: () -> Array[Types::UserProfileSummary]?
+      def next_token: () -> String?
+    end
+    def search_user_profiles: (
+      ?domain_identifier: String,
+      ?user_type: String,
+      ?search_text: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchUserProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUserProfilesResponse
+
+    interface _StartDataSourceRunResponse
+      include Smithy::Client::_Response[Types::StartDataSourceRunOutput]
+      def domain_id: () -> String?
+      def data_source_id: () -> String?
+      def id: () -> String?
+      def project_id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def data_source_configuration_snapshot: () -> String?
+      def run_statistics_for_assets: () -> Types::RunStatisticsForAssets?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def started_at: () -> Time?
+      def stopped_at: () -> Time?
+    end
+    def start_data_source_run: (
+      ?domain_identifier: String,
+      ?data_source_identifier: String,
+      ?client_token: String
+    ) -> _StartDataSourceRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataSourceRunResponse
+
+    interface _StartMetadataGenerationRunResponse
+      include Smithy::Client::_Response[Types::StartMetadataGenerationRunOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def owning_project_id: () -> String?
+    end
+    def start_metadata_generation_run: (
+      ?domain_identifier: String,
+      ?type: String,
+      ?target: {
+        type: String,
+        identifier: String,
+        revision: String
+      },
+      ?client_token: String,
+      ?owning_project_identifier: String
+    ) -> _StartMetadataGenerationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataGenerationRunResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountPoolResponse
+      include Smithy::Client::_Response[Types::UpdateAccountPoolOutput]
+      def domain_id: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def resolution_strategy: () -> String?
+      def account_source: () -> Types::AccountSource?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def updated_by: () -> String?
+      def domain_unit_id: () -> String?
+    end
+    def update_account_pool: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?resolution_strategy: String,
+      ?account_source: {
+        accounts: Array[
+          {
+            aws_account_id: String,
+            supported_regions: Array[String],
+            aws_account_name: String
+          }
+        ],
+        custom_account_pool_handler: {
+          lambda_function_arn: String,
+          lambda_execution_role_arn: String
+        }
+      }
+    ) -> _UpdateAccountPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountPoolResponse
+
+    interface _UpdateAssetFilterResponse
+      include Smithy::Client::_Response[Types::UpdateAssetFilterOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def asset_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def configuration: () -> Types::AssetFilterConfiguration?
+      def created_at: () -> Time?
+      def error_message: () -> String?
+      def effective_column_names: () -> Array[String]?
+      def effective_row_filter: () -> String?
+    end
+    def update_asset_filter: (
+      ?domain_identifier: String,
+      ?asset_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?configuration: {
+        column_configuration: {
+          included_column_names: Array[String]
+        },
+        row_configuration: {
+          row_filter: {
+            expression: {
+              equal_to: {
+                column_name: String,
+                value: untyped
+              },
+              not_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              greater_than: {
+                column_name: untyped,
+                value: untyped
+              },
+              less_than: {
+                column_name: untyped,
+                value: untyped
+              },
+              greater_than_or_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              less_than_or_equal_to: {
+                column_name: untyped,
+                value: untyped
+              },
+              is_null: {
+                column_name: untyped
+              },
+              is_not_null: {
+                column_name: untyped
+              },
+              in: {
+                column_name: untyped,
+                values: Array[String]
+              },
+              not_in: {
+                column_name: untyped,
+                values: untyped
+              },
+              like: {
+                column_name: untyped,
+                value: untyped
+              },
+              not_like: {
+                column_name: untyped,
+                value: untyped
+              }
+            },
+            and: Array[
+              {
+                expression: untyped,
+                and: untyped,
+                or: untyped
+              }
+            ],
+            or: untyped
+          },
+          sensitive: bool
+        }
+      }
+    ) -> _UpdateAssetFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetFilterResponse
+
+    interface _UpdateConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionOutput]
+      def connection_id: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def domain_unit_id: () -> String?
+      def environment_id: () -> String?
+      def name: () -> String?
+      def physical_endpoints: () -> Array[Types::PhysicalEndpoint]?
+      def project_id: () -> String?
+      def props: () -> Types::ConnectionPropertiesOutput?
+      def type: () -> String?
+    end
+    def update_connection: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?description: String,
+      ?aws_location: {
+        access_role: String,
+        aws_account_id: String,
+        aws_region: String,
+        iam_connection_id: String
+      },
+      ?props: {
+        athena_properties: {
+          workgroup_name: String
+        },
+        glue_properties: {
+          glue_connection_input: {
+            description: untyped,
+            connection_properties: Hash[String, String],
+            authentication_configuration: {
+              secret_arn: untyped,
+              basic_authentication_credentials: {
+                user_name: untyped,
+                password: untyped
+              }
+            }
+          }
+        },
+        iam_properties: {
+          glue_lineage_sync_enabled: bool
+        },
+        redshift_properties: {
+          storage: {
+            cluster_name: untyped,
+            workgroup_name: untyped
+          },
+          database_name: untyped,
+          host: untyped,
+          port: Integer,
+          credentials: {
+            secret_arn: untyped,
+            username_password: {
+              password: String,
+              username: String
+            }
+          },
+          lineage_sync: {
+            enabled: untyped,
+            schedule: {
+              schedule: untyped
+            }
+          }
+        },
+        spark_emr_properties: {
+          compute_arn: untyped,
+          instance_profile_arn: untyped,
+          java_virtual_env: untyped,
+          log_uri: untyped,
+          python_virtual_env: untyped,
+          runtime_role: untyped,
+          trusted_certificates_s3_uri: untyped
+        },
+        s3_properties: {
+          s3_uri: String,
+          s3_access_grant_location_id: String
+        }
+      }
+    ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def connection_id: () -> String?
+      def configuration: () -> Types::DataSourceConfigurationOutput?
+      def recommendation: () -> Types::RecommendationConfiguration?
+      def enable_setting: () -> String?
+      def publish_on_import: () -> bool?
+      def asset_forms_output: () -> Array[Types::FormOutput]?
+      def schedule: () -> Types::ScheduleConfiguration?
+      def last_run_status: () -> String?
+      def last_run_at: () -> Time?
+      def last_run_error_message: () -> Types::DataSourceErrorMessage?
+      def error_message: () -> Types::DataSourceErrorMessage?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def self_grant_status: () -> Types::SelfGrantStatusOutput?
+      def retain_permissions_on_revoke_failure: () -> bool?
+    end
+    def update_data_source: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?enable_setting: String,
+      ?publish_on_import: bool,
+      ?asset_forms_input: Array[
+        {
+          form_name: String,
+          type_identifier: String,
+          type_revision: String,
+          content: String
+        }
+      ],
+      ?schedule: {
+        timezone: String,
+        schedule: String
+      },
+      ?configuration: {
+        glue_run_configuration: {
+          data_access_role: String,
+          relational_filter_configurations: Array[
+            {
+              database_name: untyped,
+              schema_name: untyped,
+              filter_expressions: Array[
+                {
+                  type: String,
+                  expression: untyped
+                }
+              ]
+            }
+          ],
+          auto_import_data_quality_result: bool,
+          catalog_name: untyped
+        },
+        redshift_run_configuration: {
+          data_access_role: untyped,
+          relational_filter_configurations: untyped,
+          redshift_credential_configuration: {
+            secret_manager_arn: untyped
+          },
+          redshift_storage: {
+            redshift_cluster_source: {
+              cluster_name: untyped
+            },
+            redshift_serverless_source: {
+              workgroup_name: untyped
+            }
+          }
+        },
+        sage_maker_run_configuration: {
+          tracking_assets: Hash[String,
+            Array[String]
+          ]
+        }
+      },
+      ?recommendation: {
+        enable_business_name_generation: bool
+      },
+      ?retain_permissions_on_revoke_failure: bool
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateDomainResponse
+      include Smithy::Client::_Response[Types::UpdateDomainOutput]
+      def id: () -> String?
+      def root_domain_unit_id: () -> String?
+      def description: () -> String?
+      def single_sign_on: () -> Types::SingleSignOn?
+      def domain_execution_role: () -> String?
+      def service_role: () -> String?
+      def name: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def update_domain: (
+      ?identifier: String,
+      ?description: String,
+      ?single_sign_on: {
+        type: String,
+        user_assignment: String,
+        idc_instance_arn: String
+      },
+      ?domain_execution_role: String,
+      ?service_role: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _UpdateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainResponse
+
+    interface _UpdateDomainUnitResponse
+      include Smithy::Client::_Response[Types::UpdateDomainUnitOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def name: () -> String?
+      def owners: () -> Array[Types::DomainUnitOwnerProperties]?
+      def description: () -> String?
+      def parent_domain_unit_id: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def created_by: () -> String?
+      def last_updated_by: () -> String?
+    end
+    def update_domain_unit: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?description: String,
+      ?name: String
+    ) -> _UpdateDomainUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainUnitResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentOutput]
+      def project_id: () -> String?
+      def id: () -> String?
+      def domain_id: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_profile_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def provider: () -> String?
+      def provisioned_resources: () -> Array[Types::Resource]?
+      def status: () -> String?
+      def environment_actions: () -> Array[Types::ConfigurableEnvironmentAction]?
+      def glossary_terms: () -> Array[String]?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def last_deployment: () -> Types::Deployment?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def environment_blueprint_id: () -> String?
+      def environment_configuration_id: () -> String?
+    end
+    def update_environment: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?blueprint_version: String,
+      ?user_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ]
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+
+    interface _UpdateEnvironmentActionResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentActionOutput]
+      def domain_id: () -> String?
+      def environment_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def parameters: () -> Types::ActionParameters?
+      def description: () -> String?
+    end
+    def update_environment_action: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String,
+      ?parameters: {
+        aws_console_link: {
+          uri: String
+        }
+      },
+      ?name: String,
+      ?description: String
+    ) -> _UpdateEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentActionResponse
+
+    interface _UpdateEnvironmentProfileResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentProfileOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def aws_account_id: () -> String?
+      def aws_account_region: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def name: () -> String?
+      def description: () -> String?
+      def environment_blueprint_id: () -> String?
+      def project_id: () -> String?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+    end
+    def update_environment_profile: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?user_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ],
+      ?aws_account_id: String,
+      ?aws_account_region: String
+    ) -> _UpdateEnvironmentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentProfileResponse
+
+    interface _UpdateGlossaryResponse
+      include Smithy::Client::_Response[Types::UpdateGlossaryOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def owning_project_id: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+    end
+    def update_glossary: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?status: String,
+      ?client_token: String
+    ) -> _UpdateGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlossaryResponse
+
+    interface _UpdateGlossaryTermResponse
+      include Smithy::Client::_Response[Types::UpdateGlossaryTermOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def glossary_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+      def term_relations: () -> Types::TermRelations?
+    end
+    def update_glossary_term: (
+      ?domain_identifier: String,
+      ?glossary_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?short_description: String,
+      ?long_description: String,
+      ?term_relations: {
+        is_a: Array[String],
+        classifies: untyped
+      },
+      ?status: String
+    ) -> _UpdateGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlossaryTermResponse
+
+    interface _UpdateGroupProfileResponse
+      include Smithy::Client::_Response[Types::UpdateGroupProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def group_name: () -> String?
+    end
+    def update_group_profile: (
+      ?domain_identifier: String,
+      ?group_identifier: String,
+      ?status: String
+    ) -> _UpdateGroupProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupProfileResponse
+
+    interface _UpdateProjectResponse
+      include Smithy::Client::_Response[Types::UpdateProjectOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def project_status: () -> String?
+      def failure_reasons: () -> Array[Types::ProjectDeletionError]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def glossary_terms: () -> Array[String]?
+      def domain_unit_id: () -> String?
+      def project_profile_id: () -> String?
+      def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
+      def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+    end
+    def update_project: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?glossary_terms: Array[String],
+      ?domain_unit_id: String,
+      ?environment_deployment_details: {
+        overall_deployment_status: String,
+        environment_failure_reasons: Hash[String,
+          Array[
+            {
+              code: String,
+              message: untyped
+            }
+          ]
+        ]
+      },
+      ?user_parameters: Array[
+        {
+          environment_id: String,
+          environment_resolved_account: {
+            aws_account_id: String,
+            region_name: String,
+            source_account_pool_id: String
+          },
+          environment_configuration_name: String,
+          environment_parameters: Array[
+            {
+              name: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?project_profile_version: String
+    ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+
+    interface _UpdateProjectProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProjectProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def domain_unit_id: () -> String?
+    end
+    def update_project_profile: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?status: String,
+      ?environment_configurations: Array[
+        {
+          name: String,
+          id: String,
+          environment_blueprint_id: String,
+          description: String,
+          deployment_mode: String,
+          configuration_parameters: {
+            ssm_path: String,
+            parameter_overrides: Array[
+              {
+                name: String,
+                value: String,
+                is_editable: bool
+              }
+            ],
+            resolved_parameters: untyped
+          },
+          aws_account: {
+            aws_account_id: String,
+            aws_account_id_path: untyped
+          },
+          account_pools: Array[String],
+          aws_region: {
+            region_name: String,
+            region_name_path: untyped
+          },
+          deployment_order: Integer
+        }
+      ],
+      ?domain_unit_identifier: String
+    ) -> _UpdateProjectProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectProfileResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRuleOutput]
+      def identifier: () -> String?
+      def revision: () -> String?
+      def name: () -> String?
+      def rule_type: () -> String?
+      def target: () -> Types::RuleTarget?
+      def action: () -> String?
+      def scope: () -> Types::RuleScope?
+      def detail: () -> Types::RuleDetail?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def created_by: () -> String?
+      def last_updated_by: () -> String?
+    end
+    def update_rule: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?scope: {
+        asset_type: {
+          selection_mode: String,
+          specific_asset_types: Array[String]
+        },
+        data_product: bool,
+        project: {
+          selection_mode: untyped,
+          specific_projects: Array[String]
+        }
+      },
+      ?detail: {
+        metadata_form_enforcement_detail: {
+          required_metadata_forms: Array[
+            {
+              type_identifier: String,
+              type_revision: String
+            }
+          ]
+        }
+      },
+      ?include_child_domain_units: bool
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+
+    interface _UpdateSubscriptionGrantStatusResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionGrantStatusOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def subscription_target_id: () -> String?
+      def granted_entity: () -> Types::GrantedEntity?
+      def status: () -> String?
+      def assets: () -> Array[Types::SubscribedAsset]?
+      def subscription_id: () -> String?
+    end
+    def update_subscription_grant_status: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?asset_identifier: String,
+      ?status: String,
+      ?failure_cause: {
+        message: String
+      },
+      ?target_name: String
+    ) -> _UpdateSubscriptionGrantStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionGrantStatusResponse
+
+    interface _UpdateSubscriptionRequestResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionRequestOutput]
+      def id: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def domain_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def request_reason: () -> String?
+      def subscribed_principals: () -> Array[Types::SubscribedPrincipal]?
+      def subscribed_listings: () -> Array[Types::SubscribedListing]?
+      def reviewer_id: () -> String?
+      def decision_comment: () -> String?
+      def existing_subscription_id: () -> String?
+      def metadata_forms: () -> Array[Types::FormOutput]?
+    end
+    def update_subscription_request: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?request_reason: String
+    ) -> _UpdateSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionRequestResponse
+
+    interface _UpdateSubscriptionTargetResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionTargetOutput]
+      def id: () -> String?
+      def authorized_principals: () -> Array[String]?
+      def domain_id: () -> String?
+      def project_id: () -> String?
+      def environment_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def manage_access_role: () -> String?
+      def applicable_asset_types: () -> Array[String]?
+      def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
+      def provider: () -> String?
+    end
+    def update_subscription_target: (
+      ?domain_identifier: String,
+      ?environment_identifier: String,
+      ?identifier: String,
+      ?name: String,
+      ?authorized_principals: Array[String],
+      ?applicable_asset_types: Array[String],
+      ?subscription_target_config: Array[
+        {
+          form_name: String,
+          content: String
+        }
+      ],
+      ?manage_access_role: String,
+      ?provider: String
+    ) -> _UpdateSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionTargetResponse
+
+    interface _UpdateUserProfileResponse
+      include Smithy::Client::_Response[Types::UpdateUserProfileOutput]
+      def domain_id: () -> String?
+      def id: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def details: () -> Types::UserProfileDetails?
+    end
+    def update_user_profile: (
+      ?domain_identifier: String,
+      ?user_identifier: String,
+      ?type: String,
+      ?status: String
+    ) -> _UpdateUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserProfileResponse
+  end
+end

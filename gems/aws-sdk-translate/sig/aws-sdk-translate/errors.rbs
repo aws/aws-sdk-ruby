@@ -1,0 +1,54 @@
+module Aws::Translate
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DetectedLanguageLowConfidenceException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def detected_language_code: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFilterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TextSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_arn: () -> String?
+    end
+    class UnsupportedDisplayLanguageCodeException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def display_language_code: () -> String?
+    end
+    class UnsupportedLanguagePairException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def source_language_code: () -> String?
+      def target_language_code: () -> String?
+    end
+  end
+end

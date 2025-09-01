@@ -1,0 +1,1071 @@
+module Aws::Signer
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class AddProfilePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_version: String,
+        ?action: String,
+        ?principal: String,
+        ?revision_id: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor action: String?
+      attr_accessor principal: String?
+      attr_accessor revision_id: String?
+      attr_accessor statement_id: String?
+    end
+
+    class AddProfilePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class CancelSigningProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+    end
+
+    module Category
+      AWSIoT: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class DescribeSigningJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeSigningJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?source: Types::Source,
+        ?signing_material: Types::SigningMaterial,
+        ?platform_id: String,
+        ?platform_display_name: String,
+        ?profile_name: String,
+        ?profile_version: String,
+        ?overrides: Types::SigningPlatformOverrides,
+        ?signing_parameters: Hash[String, String],
+        ?created_at: Time,
+        ?completed_at: Time,
+        ?signature_expires_at: Time,
+        ?requested_by: String,
+        ?status: String,
+        ?status_reason: String,
+        ?revocation_record: Types::SigningJobRevocationRecord,
+        ?signed_object: Types::SignedObject,
+        ?job_owner: String,
+        ?job_invoker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor source: Types::Source?
+      attr_accessor signing_material: Types::SigningMaterial?
+      attr_accessor platform_id: String?
+      attr_accessor platform_display_name: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor overrides: Types::SigningPlatformOverrides?
+      attr_accessor signing_parameters: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor signature_expires_at: Time?
+      attr_accessor requested_by: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor revocation_record: Types::SigningJobRevocationRecord?
+      attr_accessor signed_object: Types::SignedObject?
+      attr_accessor job_owner: String?
+      attr_accessor job_invoker: String?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Destination?
+    end
+
+    module EncryptionAlgorithm
+      RSA: String
+      ECDSA: String
+    end
+
+    class EncryptionAlgorithmOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_values: Array[String],
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor default_value: String?
+    end
+
+    class GetRevocationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature_timestamp: Time,
+        ?platform_id: String,
+        ?profile_version_arn: String,
+        ?job_arn: String,
+        ?certificate_hashes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature_timestamp: Time?
+      attr_accessor platform_id: String?
+      attr_accessor profile_version_arn: String?
+      attr_accessor job_arn: String?
+      attr_accessor certificate_hashes: Array[String]?
+    end
+
+    class GetRevocationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revoked_entities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revoked_entities: Array[String]?
+    end
+
+    class GetSigningPlatformRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_id: String?
+    end
+
+    class GetSigningPlatformResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_id: String,
+        ?display_name: String,
+        ?partner: String,
+        ?target: String,
+        ?category: String,
+        ?signing_configuration: Types::SigningConfiguration,
+        ?signing_image_format: Types::SigningImageFormat,
+        ?max_size_in_mb: Integer,
+        ?revocation_supported: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_id: String?
+      attr_accessor display_name: String?
+      attr_accessor partner: String?
+      attr_accessor target: String?
+      attr_accessor category: String?
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+      attr_accessor signing_image_format: Types::SigningImageFormat?
+      attr_accessor max_size_in_mb: Integer?
+      attr_accessor revocation_supported: bool?
+    end
+
+    class GetSigningProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_owner: String?
+    end
+
+    class GetSigningProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_version: String,
+        ?profile_version_arn: String,
+        ?revocation_record: Types::SigningProfileRevocationRecord,
+        ?signing_material: Types::SigningMaterial,
+        ?platform_id: String,
+        ?platform_display_name: String,
+        ?signature_validity_period: Types::SignatureValidityPeriod,
+        ?overrides: Types::SigningPlatformOverrides,
+        ?signing_parameters: Hash[String, String],
+        ?status: String,
+        ?status_reason: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor profile_version_arn: String?
+      attr_accessor revocation_record: Types::SigningProfileRevocationRecord?
+      attr_accessor signing_material: Types::SigningMaterial?
+      attr_accessor platform_id: String?
+      attr_accessor platform_display_name: String?
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod?
+      attr_accessor overrides: Types::SigningPlatformOverrides?
+      attr_accessor signing_parameters: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module HashAlgorithm
+      SHA1: String
+      SHA256: String
+    end
+
+    class HashAlgorithmOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_values: Array[String],
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor default_value: String?
+    end
+
+    module ImageFormat
+      JSON: String
+      JSONEmbedded: String
+      JSONDetached: String
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class ListProfilePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?policy_size_bytes: Integer,
+        ?permissions: Array[Types::Permission],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor policy_size_bytes: Integer?
+      attr_accessor permissions: Array[Types::Permission]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSigningJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?platform_id: String,
+        ?requested_by: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?is_revoked: bool,
+        ?signature_expires_before: Time,
+        ?signature_expires_after: Time,
+        ?job_invoker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor platform_id: String?
+      attr_accessor requested_by: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor is_revoked: bool?
+      attr_accessor signature_expires_before: Time?
+      attr_accessor signature_expires_after: Time?
+      attr_accessor job_invoker: String?
+    end
+
+    class ListSigningJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::SigningJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::SigningJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSigningPlatformsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?partner: String,
+        ?target: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor partner: String?
+      attr_accessor target: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSigningPlatformsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platforms: Array[Types::SigningPlatform],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platforms: Array[Types::SigningPlatform]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSigningProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_canceled: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?platform_id: String,
+        ?statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_canceled: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor platform_id: String?
+      attr_accessor statuses: Array[String]?
+    end
+
+    class ListSigningProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profiles: Array[Types::SigningProfile],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profiles: Array[Types::SigningProfile]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class Permission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?principal: String,
+        ?statement_id: String,
+        ?profile_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor principal: String?
+      attr_accessor statement_id: String?
+      attr_accessor profile_version: String?
+    end
+
+    class PutSigningProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?signing_material: Types::SigningMaterial,
+        ?signature_validity_period: Types::SignatureValidityPeriod,
+        ?platform_id: String,
+        ?overrides: Types::SigningPlatformOverrides,
+        ?signing_parameters: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor signing_material: Types::SigningMaterial?
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod?
+      attr_accessor platform_id: String?
+      attr_accessor overrides: Types::SigningPlatformOverrides?
+      attr_accessor signing_parameters: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutSigningProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?profile_version: String,
+        ?profile_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor profile_version: String?
+      attr_accessor profile_version_arn: String?
+    end
+
+    class RemoveProfilePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?revision_id: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor revision_id: String?
+      attr_accessor statement_id: String?
+    end
+
+    class RemoveProfilePermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class RevokeSignatureRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_owner: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_owner: String?
+      attr_accessor reason: String?
+    end
+
+    class RevokeSigningProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_version: String,
+        ?reason: String,
+        ?effective_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor reason: String?
+      attr_accessor effective_time: Time?
+    end
+
+    class S3Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class S3SignedObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+    end
+
+    class S3Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+      attr_accessor version: String?
+    end
+
+    class ServiceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class SignPayloadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_owner: String,
+        ?payload: String,
+        ?payload_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_owner: String?
+      attr_accessor payload: String?
+      attr_accessor payload_format: String?
+    end
+
+    class SignPayloadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_owner: String,
+        ?metadata: Hash[String, String],
+        ?signature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_owner: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor signature: String?
+    end
+
+    class SignatureValidityPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor type: String?
+    end
+
+    class SignedObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3SignedObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3SignedObject?
+    end
+
+    class SigningConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_algorithm_options: Types::EncryptionAlgorithmOptions,
+        ?hash_algorithm_options: Types::HashAlgorithmOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_algorithm_options: Types::EncryptionAlgorithmOptions?
+      attr_accessor hash_algorithm_options: Types::HashAlgorithmOptions?
+    end
+
+    class SigningConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_algorithm: String,
+        ?hash_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_algorithm: String?
+      attr_accessor hash_algorithm: String?
+    end
+
+    class SigningImageFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supported_formats: Array[String],
+        ?default_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supported_formats: Array[String]?
+      attr_accessor default_format: String?
+    end
+
+    class SigningJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?source: Types::Source,
+        ?signed_object: Types::SignedObject,
+        ?signing_material: Types::SigningMaterial,
+        ?created_at: Time,
+        ?status: String,
+        ?is_revoked: bool,
+        ?profile_name: String,
+        ?profile_version: String,
+        ?platform_id: String,
+        ?platform_display_name: String,
+        ?signature_expires_at: Time,
+        ?job_owner: String,
+        ?job_invoker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor source: Types::Source?
+      attr_accessor signed_object: Types::SignedObject?
+      attr_accessor signing_material: Types::SigningMaterial?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor is_revoked: bool?
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor platform_id: String?
+      attr_accessor platform_display_name: String?
+      attr_accessor signature_expires_at: Time?
+      attr_accessor job_owner: String?
+      attr_accessor job_invoker: String?
+    end
+
+    class SigningJobRevocationRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?revoked_at: Time,
+        ?revoked_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor revoked_at: Time?
+      attr_accessor revoked_by: String?
+    end
+
+    class SigningMaterial
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class SigningPlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_id: String,
+        ?display_name: String,
+        ?partner: String,
+        ?target: String,
+        ?category: String,
+        ?signing_configuration: Types::SigningConfiguration,
+        ?signing_image_format: Types::SigningImageFormat,
+        ?max_size_in_mb: Integer,
+        ?revocation_supported: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_id: String?
+      attr_accessor display_name: String?
+      attr_accessor partner: String?
+      attr_accessor target: String?
+      attr_accessor category: String?
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+      attr_accessor signing_image_format: Types::SigningImageFormat?
+      attr_accessor max_size_in_mb: Integer?
+      attr_accessor revocation_supported: bool?
+    end
+
+    class SigningPlatformOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_configuration: Types::SigningConfigurationOverrides,
+        ?signing_image_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_configuration: Types::SigningConfigurationOverrides?
+      attr_accessor signing_image_format: String?
+    end
+
+    class SigningProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_name: String,
+        ?profile_version: String,
+        ?profile_version_arn: String,
+        ?signing_material: Types::SigningMaterial,
+        ?signature_validity_period: Types::SignatureValidityPeriod,
+        ?platform_id: String,
+        ?platform_display_name: String,
+        ?signing_parameters: Hash[String, String],
+        ?status: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: String?
+      attr_accessor profile_version_arn: String?
+      attr_accessor signing_material: Types::SigningMaterial?
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod?
+      attr_accessor platform_id: String?
+      attr_accessor platform_display_name: String?
+      attr_accessor signing_parameters: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class SigningProfileRevocationRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revocation_effective_from: Time,
+        ?revoked_at: Time,
+        ?revoked_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revocation_effective_from: Time?
+      attr_accessor revoked_at: Time?
+      attr_accessor revoked_by: String?
+    end
+
+    module SigningProfileStatus
+      Active: String
+      Canceled: String
+      Revoked: String
+    end
+
+    module SigningStatus
+      InProgress: String
+      Failed: String
+      Succeeded: String
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Source,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Source?
+    end
+
+    class StartSigningJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::Source,
+        ?destination: Types::Destination,
+        ?profile_name: String,
+        ?client_request_token: String,
+        ?profile_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::Source?
+      attr_accessor destination: Types::Destination?
+      attr_accessor profile_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor profile_owner: String?
+    end
+
+    class StartSigningJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_owner: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ValidityType
+      DAYS: String
+      MONTHS: String
+      YEARS: String
+    end
+  end
+end

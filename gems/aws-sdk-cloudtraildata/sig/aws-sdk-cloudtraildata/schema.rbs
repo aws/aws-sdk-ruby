@@ -1,0 +1,27 @@
+module Aws::CloudTrailData
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AuditEvent: StructureShape
+    AuditEventResultEntries: ListShape
+    AuditEventResultEntry: StructureShape
+    AuditEvents: ListShape
+    ChannelArn: StringShape
+    ChannelInsufficientPermission: StructureShape
+    ChannelNotFound: StructureShape
+    ChannelUnsupportedSchema: StructureShape
+    DuplicatedAuditEventId: StructureShape
+    ErrorCode: StringShape
+    ErrorMessage: StringShape
+    ExternalId: StringShape
+    InvalidChannelARN: StructureShape
+    PutAuditEventsInput: StructureShape
+    PutAuditEventsOutput: StructureShape
+    ResultErrorEntries: ListShape
+    ResultErrorEntry: StructureShape
+    UnsupportedOperationException: StructureShape
+    Uuid: StringShape
+
+    CloudTrailDataService: ServiceShape
+  end
+end

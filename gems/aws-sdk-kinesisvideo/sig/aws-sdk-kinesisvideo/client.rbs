@@ -1,0 +1,416 @@
+module Aws::KinesisVideo
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KinesisVideo::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateSignalingChannelResponse
+      include Smithy::Client::_Response[Types::CreateSignalingChannelOutput]
+      def channel_arn: () -> String?
+    end
+    def create_signaling_channel: (
+      ?channel_name: String,
+      ?channel_type: String,
+      ?single_master_configuration: {
+        message_ttl_seconds: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSignalingChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSignalingChannelResponse
+
+    interface _CreateStreamResponse
+      include Smithy::Client::_Response[Types::CreateStreamOutput]
+      def stream_arn: () -> String?
+    end
+    def create_stream: (
+      ?device_name: String,
+      ?stream_name: String,
+      ?media_type: String,
+      ?kms_key_id: String,
+      ?data_retention_in_hours: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamResponse
+
+    interface _DeleteEdgeConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteEdgeConfigurationOutput]
+    end
+    def delete_edge_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DeleteEdgeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEdgeConfigurationResponse
+
+    interface _DeleteSignalingChannelResponse
+      include Smithy::Client::_Response[Types::DeleteSignalingChannelOutput]
+    end
+    def delete_signaling_channel: (
+      ?channel_arn: String,
+      ?current_version: String
+    ) -> _DeleteSignalingChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSignalingChannelResponse
+
+    interface _DeleteStreamResponse
+      include Smithy::Client::_Response[Types::DeleteStreamOutput]
+    end
+    def delete_stream: (
+      ?stream_arn: String,
+      ?current_version: String
+    ) -> _DeleteStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamResponse
+
+    interface _DescribeEdgeConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeEdgeConfigurationOutput]
+      def stream_name: () -> String?
+      def stream_arn: () -> String?
+      def creation_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def sync_status: () -> String?
+      def failed_status_details: () -> String?
+      def edge_config: () -> Types::EdgeConfig?
+      def edge_agent_status: () -> Types::EdgeAgentStatus?
+    end
+    def describe_edge_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeEdgeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEdgeConfigurationResponse
+
+    interface _DescribeImageGenerationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeImageGenerationConfigurationOutput]
+      def image_generation_configuration: () -> Types::ImageGenerationConfiguration?
+    end
+    def describe_image_generation_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeImageGenerationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageGenerationConfigurationResponse
+
+    interface _DescribeMappedResourceConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeMappedResourceConfigurationOutput]
+      def mapped_resource_configuration_list: () -> Array[Types::MappedResourceConfigurationListItem]?
+      def next_token: () -> String?
+    end
+    def describe_mapped_resource_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMappedResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMappedResourceConfigurationResponse
+
+    interface _DescribeMediaStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeMediaStorageConfigurationOutput]
+      def media_storage_configuration: () -> Types::MediaStorageConfiguration?
+    end
+    def describe_media_storage_configuration: (
+      ?channel_name: String,
+      ?channel_arn: String
+    ) -> _DescribeMediaStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMediaStorageConfigurationResponse
+
+    interface _DescribeNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeNotificationConfigurationOutput]
+      def notification_configuration: () -> Types::NotificationConfiguration?
+    end
+    def describe_notification_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotificationConfigurationResponse
+
+    interface _DescribeSignalingChannelResponse
+      include Smithy::Client::_Response[Types::DescribeSignalingChannelOutput]
+      def channel_info: () -> Types::ChannelInfo?
+    end
+    def describe_signaling_channel: (
+      ?channel_name: String,
+      ?channel_arn: String
+    ) -> _DescribeSignalingChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSignalingChannelResponse
+
+    interface _DescribeStreamResponse
+      include Smithy::Client::_Response[Types::DescribeStreamOutput]
+      def stream_info: () -> Types::StreamInfo?
+    end
+    def describe_stream: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamResponse
+
+    interface _GetDataEndpointResponse
+      include Smithy::Client::_Response[Types::GetDataEndpointOutput]
+      def data_endpoint: () -> String?
+    end
+    def get_data_endpoint: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?api_name: String
+    ) -> _GetDataEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataEndpointResponse
+
+    interface _GetSignalingChannelEndpointResponse
+      include Smithy::Client::_Response[Types::GetSignalingChannelEndpointOutput]
+      def resource_endpoint_list: () -> Array[Types::ResourceEndpointListItem]?
+    end
+    def get_signaling_channel_endpoint: (
+      ?channel_arn: String,
+      ?single_master_channel_endpoint_configuration: {
+        protocols: Array[String],
+        role: String
+      }
+    ) -> _GetSignalingChannelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSignalingChannelEndpointResponse
+
+    interface _ListEdgeAgentConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListEdgeAgentConfigurationsOutput]
+      def edge_configs: () -> Array[Types::ListEdgeAgentConfigurationsEdgeConfig]?
+      def next_token: () -> String?
+    end
+    def list_edge_agent_configurations: (
+      ?hub_device_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEdgeAgentConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEdgeAgentConfigurationsResponse
+
+    interface _ListSignalingChannelsResponse
+      include Smithy::Client::_Response[Types::ListSignalingChannelsOutput]
+      def channel_info_list: () -> Array[Types::ChannelInfo]?
+      def next_token: () -> String?
+    end
+    def list_signaling_channels: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?channel_name_condition: {
+        comparison_operator: String,
+        comparison_value: String
+      }
+    ) -> _ListSignalingChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSignalingChannelsResponse
+
+    interface _ListStreamsResponse
+      include Smithy::Client::_Response[Types::ListStreamsOutput]
+      def stream_info_list: () -> Array[Types::StreamInfo]?
+      def next_token: () -> String?
+    end
+    def list_streams: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?stream_name_condition: {
+        comparison_operator: String,
+        comparison_value: String
+      }
+    ) -> _ListStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def next_token: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?next_token: String,
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTagsForStreamResponse
+      include Smithy::Client::_Response[Types::ListTagsForStreamOutput]
+      def next_token: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_stream: (
+      ?next_token: String,
+      ?stream_arn: String,
+      ?stream_name: String
+    ) -> _ListTagsForStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForStreamResponse
+
+    interface _StartEdgeConfigurationUpdateResponse
+      include Smithy::Client::_Response[Types::StartEdgeConfigurationUpdateOutput]
+      def stream_name: () -> String?
+      def stream_arn: () -> String?
+      def creation_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def sync_status: () -> String?
+      def failed_status_details: () -> String?
+      def edge_config: () -> Types::EdgeConfig?
+    end
+    def start_edge_configuration_update: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?edge_config: {
+        hub_device_arn: String,
+        recorder_config: {
+          media_source_config: {
+            media_uri_secret_arn: String,
+            media_uri_type: String
+          },
+          schedule_config: {
+            schedule_expression: String,
+            duration_in_seconds: Integer
+          }
+        },
+        uploader_config: {
+          schedule_config: untyped
+        },
+        deletion_config: {
+          edge_retention_in_hours: Integer,
+          local_size_config: {
+            max_local_media_size_in_mb: Integer,
+            strategy_on_full_size: String
+          },
+          delete_after_upload: bool
+        }
+      }
+    ) -> _StartEdgeConfigurationUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEdgeConfigurationUpdateResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TagStreamResponse
+      include Smithy::Client::_Response[Types::TagStreamOutput]
+    end
+    def tag_stream: (
+      ?stream_arn: String,
+      ?stream_name: String,
+      ?tags: Hash[String, String]
+    ) -> _TagStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagStreamResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_key_list: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UntagStreamResponse
+      include Smithy::Client::_Response[Types::UntagStreamOutput]
+    end
+    def untag_stream: (
+      ?stream_arn: String,
+      ?stream_name: String,
+      ?tag_key_list: Array[String]
+    ) -> _UntagStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagStreamResponse
+
+    interface _UpdateDataRetentionResponse
+      include Smithy::Client::_Response[Types::UpdateDataRetentionOutput]
+    end
+    def update_data_retention: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?current_version: String,
+      ?operation: String,
+      ?data_retention_change_in_hours: Integer
+    ) -> _UpdateDataRetentionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataRetentionResponse
+
+    interface _UpdateImageGenerationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateImageGenerationConfigurationOutput]
+    end
+    def update_image_generation_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?image_generation_configuration: {
+        status: String,
+        image_selector_type: String,
+        destination_config: {
+          uri: String,
+          destination_region: String
+        },
+        sampling_interval: Integer,
+        format: String,
+        format_config: Hash[String, String],
+        width_pixels: Integer,
+        height_pixels: Integer
+      }
+    ) -> _UpdateImageGenerationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImageGenerationConfigurationResponse
+
+    interface _UpdateMediaStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateMediaStorageConfigurationOutput]
+    end
+    def update_media_storage_configuration: (
+      ?channel_arn: String,
+      ?media_storage_configuration: {
+        stream_arn: String,
+        status: String
+      }
+    ) -> _UpdateMediaStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMediaStorageConfigurationResponse
+
+    interface _UpdateNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationConfigurationOutput]
+    end
+    def update_notification_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?notification_configuration: {
+        status: String,
+        destination_config: {
+          uri: String
+        }
+      }
+    ) -> _UpdateNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationConfigurationResponse
+
+    interface _UpdateSignalingChannelResponse
+      include Smithy::Client::_Response[Types::UpdateSignalingChannelOutput]
+    end
+    def update_signaling_channel: (
+      ?channel_arn: String,
+      ?current_version: String,
+      ?single_master_configuration: {
+        message_ttl_seconds: Integer
+      }
+    ) -> _UpdateSignalingChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSignalingChannelResponse
+
+    interface _UpdateStreamResponse
+      include Smithy::Client::_Response[Types::UpdateStreamOutput]
+    end
+    def update_stream: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?current_version: String,
+      ?device_name: String,
+      ?media_type: String
+    ) -> _UpdateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamResponse
+  end
+end

@@ -1,0 +1,44 @@
+module Aws::Glacier
+  module Errors
+    class InsufficientCapacityException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class MissingParameterValueException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class PolicyEnforcedException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class RequestTimeoutException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
+  end
+end

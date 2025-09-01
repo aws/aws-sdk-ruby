@@ -1,0 +1,4340 @@
+module Aws::WAFV2
+  module Types
+
+    class APIKeySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_domains: Array[String],
+        ?api_key: String,
+        ?creation_timestamp: Time,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_domains: Array[String]?
+      attr_accessor api_key: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor version: Integer?
+    end
+
+    class AWSManagedRulesACFPRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_path: String,
+        ?registration_page_path: String,
+        ?request_inspection: Types::RequestInspectionACFP,
+        ?response_inspection: Types::ResponseInspection,
+        ?enable_regex_in_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_path: String?
+      attr_accessor registration_page_path: String?
+      attr_accessor request_inspection: Types::RequestInspectionACFP?
+      attr_accessor response_inspection: Types::ResponseInspection?
+      attr_accessor enable_regex_in_path: bool?
+    end
+
+    class AWSManagedRulesATPRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?login_path: String,
+        ?request_inspection: Types::RequestInspection,
+        ?response_inspection: Types::ResponseInspection,
+        ?enable_regex_in_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor login_path: String?
+      attr_accessor request_inspection: Types::RequestInspection?
+      attr_accessor response_inspection: Types::ResponseInspection?
+      attr_accessor enable_regex_in_path: bool?
+    end
+
+    class AWSManagedRulesAntiDDoSRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_side_action_config: Types::ClientSideActionConfig,
+        ?sensitivity_to_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_side_action_config: Types::ClientSideActionConfig?
+      attr_accessor sensitivity_to_block: String?
+    end
+
+    class AWSManagedRulesBotControlRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inspection_level: String,
+        ?enable_machine_learning: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inspection_level: String?
+      attr_accessor enable_machine_learning: bool?
+    end
+
+    class ActionCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    module ActionValue
+      ALLOW: String
+      BLOCK: String
+      COUNT: String
+      CAPTCHA: String
+      CHALLENGE: String
+      EXCLUDED_AS_COUNT: String
+    end
+
+    class AddressField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class All
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AllQueryArguments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AllowAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_request_handling: Types::CustomRequestHandling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_request_handling: Types::CustomRequestHandling?
+    end
+
+    class AndStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::Statement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::Statement]?
+    end
+
+    class ApplicationAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ApplicationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::ApplicationAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::ApplicationAttribute]?
+    end
+
+    class AsnMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asn_list: Array[Integer],
+        ?forwarded_ip_config: Types::ForwardedIPConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asn_list: Array[Integer]?
+      attr_accessor forwarded_ip_config: Types::ForwardedIPConfig?
+    end
+
+    class AssociateWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class AssociateWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AssociatedResourceType
+      CLOUDFRONT: String
+      API_GATEWAY: String
+      COGNITO_USER_POOL: String
+      APP_RUNNER_SERVICE: String
+      VERIFIED_ACCESS_INSTANCE: String
+    end
+
+    class AssociationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_body: Hash[String, Types::RequestBodyAssociatedResourceTypeConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_body: Hash[String, Types::RequestBodyAssociatedResourceTypeConfig]?
+    end
+
+    class BlockAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_response: Types::CustomResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_response: Types::CustomResponse?
+    end
+
+    class Body
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oversize_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oversize_handling: String?
+    end
+
+    module BodyParsingFallbackBehavior
+      MATCH: String
+      NO_MATCH: String
+      EVALUATE_AS_STRING: String
+    end
+
+    class ByteMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_string: String,
+        ?field_to_match: Types::FieldToMatch,
+        ?text_transformations: Array[Types::TextTransformation],
+        ?positional_constraint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_string: String?
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor positional_constraint: String?
+    end
+
+    class CaptchaAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_request_handling: Types::CustomRequestHandling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_request_handling: Types::CustomRequestHandling?
+    end
+
+    class CaptchaConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?immunity_time_property: Types::ImmunityTimeProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor immunity_time_property: Types::ImmunityTimeProperty?
+    end
+
+    class CaptchaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_code: Integer,
+        ?solve_timestamp: Integer,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_code: Integer?
+      attr_accessor solve_timestamp: Integer?
+      attr_accessor failure_reason: String?
+    end
+
+    class ChallengeAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_request_handling: Types::CustomRequestHandling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_request_handling: Types::CustomRequestHandling?
+    end
+
+    class ChallengeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?immunity_time_property: Types::ImmunityTimeProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor immunity_time_property: Types::ImmunityTimeProperty?
+    end
+
+    class ChallengeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_code: Integer,
+        ?solve_timestamp: Integer,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_code: Integer?
+      attr_accessor solve_timestamp: Integer?
+      attr_accessor failure_reason: String?
+    end
+
+    class CheckCapacityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class CheckCapacityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Integer?
+    end
+
+    class ClientSideAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_of_action: String,
+        ?sensitivity: String,
+        ?exempt_uri_regular_expressions: Array[Types::Regex],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_of_action: String?
+      attr_accessor sensitivity: String?
+      attr_accessor exempt_uri_regular_expressions: Array[Types::Regex]?
+    end
+
+    class ClientSideActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge: Types::ClientSideAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge: Types::ClientSideAction?
+    end
+
+    module ComparisonOperator
+      EQ: String
+      NE: String
+      LE: String
+      LT: String
+      GE: String
+      GT: String
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_condition: Types::ActionCondition,
+        ?label_name_condition: Types::LabelNameCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_condition: Types::ActionCondition?
+      attr_accessor label_name_condition: Types::LabelNameCondition?
+    end
+
+    class CookieMatchPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all: Types::All,
+        ?included_cookies: Array[String],
+        ?excluded_cookies: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all: Types::All?
+      attr_accessor included_cookies: Array[String]?
+      attr_accessor excluded_cookies: Array[String]?
+    end
+
+    class Cookies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_pattern: Types::CookieMatchPattern,
+        ?match_scope: String,
+        ?oversize_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_pattern: Types::CookieMatchPattern?
+      attr_accessor match_scope: String?
+      attr_accessor oversize_handling: String?
+    end
+
+    class CountAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_request_handling: Types::CustomRequestHandling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_request_handling: Types::CustomRequestHandling?
+    end
+
+    module CountryCode
+      AF: String
+      AX: String
+      AL: String
+      DZ: String
+      AS: String
+      AD: String
+      AO: String
+      AI: String
+      AQ: String
+      AG: String
+      AR: String
+      AM: String
+      AW: String
+      AU: String
+      AT: String
+      AZ: String
+      BS: String
+      BH: String
+      BD: String
+      BB: String
+      BY: String
+      BE: String
+      BZ: String
+      BJ: String
+      BM: String
+      BT: String
+      BO: String
+      BQ: String
+      BA: String
+      BW: String
+      BV: String
+      BR: String
+      IO: String
+      BN: String
+      BG: String
+      BF: String
+      BI: String
+      KH: String
+      CM: String
+      CA: String
+      CV: String
+      KY: String
+      CF: String
+      TD: String
+      CL: String
+      CN: String
+      CX: String
+      CC: String
+      CO: String
+      KM: String
+      CG: String
+      CD: String
+      CK: String
+      CR: String
+      CI: String
+      HR: String
+      CU: String
+      CW: String
+      CY: String
+      CZ: String
+      DK: String
+      DJ: String
+      DM: String
+      DO: String
+      EC: String
+      EG: String
+      SV: String
+      GQ: String
+      ER: String
+      EE: String
+      ET: String
+      FK: String
+      FO: String
+      FJ: String
+      FI: String
+      FR: String
+      GF: String
+      PF: String
+      TF: String
+      GA: String
+      GM: String
+      GE: String
+      DE: String
+      GH: String
+      GI: String
+      GR: String
+      GL: String
+      GD: String
+      GP: String
+      GU: String
+      GT: String
+      GG: String
+      GN: String
+      GW: String
+      GY: String
+      HT: String
+      HM: String
+      VA: String
+      HN: String
+      HK: String
+      HU: String
+      IS: String
+      IN: String
+      ID: String
+      IR: String
+      IQ: String
+      IE: String
+      IM: String
+      IL: String
+      IT: String
+      JM: String
+      JP: String
+      JE: String
+      JO: String
+      KZ: String
+      KE: String
+      KI: String
+      KP: String
+      KR: String
+      KW: String
+      KG: String
+      LA: String
+      LV: String
+      LB: String
+      LS: String
+      LR: String
+      LY: String
+      LI: String
+      LT: String
+      LU: String
+      MO: String
+      MK: String
+      MG: String
+      MW: String
+      MY: String
+      MV: String
+      ML: String
+      MT: String
+      MH: String
+      MQ: String
+      MR: String
+      MU: String
+      YT: String
+      MX: String
+      FM: String
+      MD: String
+      MC: String
+      MN: String
+      ME: String
+      MS: String
+      MA: String
+      MZ: String
+      MM: String
+      NA: String
+      NR: String
+      NP: String
+      NL: String
+      NC: String
+      NZ: String
+      NI: String
+      NE: String
+      NG: String
+      NU: String
+      NF: String
+      MP: String
+      NO: String
+      OM: String
+      PK: String
+      PW: String
+      PS: String
+      PA: String
+      PG: String
+      PY: String
+      PE: String
+      PH: String
+      PN: String
+      PL: String
+      PT: String
+      PR: String
+      QA: String
+      RE: String
+      RO: String
+      RU: String
+      RW: String
+      BL: String
+      SH: String
+      KN: String
+      LC: String
+      MF: String
+      PM: String
+      VC: String
+      WS: String
+      SM: String
+      ST: String
+      SA: String
+      SN: String
+      RS: String
+      SC: String
+      SL: String
+      SG: String
+      SX: String
+      SK: String
+      SI: String
+      SB: String
+      SO: String
+      ZA: String
+      GS: String
+      SS: String
+      ES: String
+      LK: String
+      SD: String
+      SR: String
+      SJ: String
+      SZ: String
+      SE: String
+      CH: String
+      SY: String
+      TW: String
+      TJ: String
+      TZ: String
+      TH: String
+      TL: String
+      TG: String
+      TK: String
+      TO: String
+      TT: String
+      TN: String
+      TR: String
+      TM: String
+      TC: String
+      TV: String
+      UG: String
+      UA: String
+      AE: String
+      GB: String
+      US: String
+      UM: String
+      UY: String
+      UZ: String
+      VU: String
+      VE: String
+      VN: String
+      VG: String
+      VI: String
+      WF: String
+      EH: String
+      YE: String
+      ZM: String
+      ZW: String
+      XK: String
+    end
+
+    class CreateAPIKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?token_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor token_domains: Array[String]?
+    end
+
+    class CreateAPIKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+    end
+
+    class CreateIPSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?description: String,
+        ?ip_address_version: String,
+        ?addresses: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor description: String?
+      attr_accessor ip_address_version: String?
+      attr_accessor addresses: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIPSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::IPSetSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::IPSetSummary?
+    end
+
+    class CreateRegexPatternSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?description: String,
+        ?regular_expression_list: Array[Types::Regex],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor description: String?
+      attr_accessor regular_expression_list: Array[Types::Regex]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRegexPatternSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::RegexPatternSetSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::RegexPatternSetSummary?
+    end
+
+    class CreateRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?capacity: Integer,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?tags: Array[Types::Tag],
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor capacity: Integer?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+    end
+
+    class CreateRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::RuleGroupSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::RuleGroupSummary?
+    end
+
+    class CreateWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?default_action: Types::DefaultAction,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?data_protection_config: Types::DataProtectionConfig,
+        ?tags: Array[Types::Tag],
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?captcha_config: Types::CaptchaConfig,
+        ?challenge_config: Types::ChallengeConfig,
+        ?token_domains: Array[String],
+        ?association_config: Types::AssociationConfig,
+        ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
+        ?application_config: Types::ApplicationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor default_action: Types::DefaultAction?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor data_protection_config: Types::DataProtectionConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor captcha_config: Types::CaptchaConfig?
+      attr_accessor challenge_config: Types::ChallengeConfig?
+      attr_accessor token_domains: Array[String]?
+      attr_accessor association_config: Types::AssociationConfig?
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
+      attr_accessor application_config: Types::ApplicationConfig?
+    end
+
+    class CreateWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::WebACLSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::WebACLSummary?
+    end
+
+    class CustomHTTPHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class CustomRequestHandling
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insert_headers: Array[Types::CustomHTTPHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insert_headers: Array[Types::CustomHTTPHeader]?
+    end
+
+    class CustomResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_code: Integer,
+        ?custom_response_body_key: String,
+        ?response_headers: Array[Types::CustomHTTPHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_code: Integer?
+      attr_accessor custom_response_body_key: String?
+      attr_accessor response_headers: Array[Types::CustomHTTPHeader]?
+    end
+
+    class CustomResponseBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor content: String?
+    end
+
+    class DataProtection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: Types::FieldToProtect,
+        ?action: String,
+        ?exclude_rule_match_details: bool,
+        ?exclude_rate_based_details: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: Types::FieldToProtect?
+      attr_accessor action: String?
+      attr_accessor exclude_rule_match_details: bool?
+      attr_accessor exclude_rate_based_details: bool?
+    end
+
+    module DataProtectionAction
+      SUBSTITUTION: String
+      HASH: String
+    end
+
+    class DataProtectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protections: Array[Types::DataProtection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protections: Array[Types::DataProtection]?
+    end
+
+    class DefaultAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block: Types::BlockAction,
+        ?allow: Types::AllowAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block: Types::BlockAction?
+      attr_accessor allow: Types::AllowAction?
+    end
+
+    class DeleteAPIKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?api_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor api_key: String?
+    end
+
+    class DeleteAPIKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFirewallManagerRuleGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?web_acl_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor web_acl_lock_token: String?
+    end
+
+    class DeleteFirewallManagerRuleGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_web_acl_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_web_acl_lock_token: String?
+    end
+
+    class DeleteIPSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+    end
+
+    class DeleteIPSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?log_type: String,
+        ?log_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor log_type: String?
+      attr_accessor log_scope: String?
+    end
+
+    class DeleteLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePermissionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeletePermissionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRegexPatternSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+    end
+
+    class DeleteRegexPatternSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+    end
+
+    class DeleteRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+    end
+
+    class DeleteWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAllManagedProductsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+    end
+
+    class DescribeAllManagedProductsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_products: Array[Types::ManagedProductDescriptor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_products: Array[Types::ManagedProductDescriptor]?
+    end
+
+    class DescribeManagedProductsByVendorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor scope: String?
+    end
+
+    class DescribeManagedProductsByVendorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_products: Array[Types::ManagedProductDescriptor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_products: Array[Types::ManagedProductDescriptor]?
+    end
+
+    class DescribeManagedRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?name: String,
+        ?scope: String,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor version_name: String?
+    end
+
+    class DescribeManagedRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_name: String,
+        ?sns_topic_arn: String,
+        ?capacity: Integer,
+        ?rules: Array[Types::RuleSummary],
+        ?label_namespace: String,
+        ?available_labels: Array[Types::LabelSummary],
+        ?consumed_labels: Array[Types::LabelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_name: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor capacity: Integer?
+      attr_accessor rules: Array[Types::RuleSummary]?
+      attr_accessor label_namespace: String?
+      attr_accessor available_labels: Array[Types::LabelSummary]?
+      attr_accessor consumed_labels: Array[Types::LabelSummary]?
+    end
+
+    class DisassociateWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DisassociateWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EmailField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class ExcludedRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module FailureReason
+      TOKEN_MISSING: String
+      TOKEN_EXPIRED: String
+      TOKEN_INVALID: String
+      TOKEN_DOMAIN_MISMATCH: String
+    end
+
+    module FallbackBehavior
+      MATCH: String
+      NO_MATCH: String
+    end
+
+    class FieldToMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?single_header: Types::SingleHeader,
+        ?single_query_argument: Types::SingleQueryArgument,
+        ?all_query_arguments: Types::AllQueryArguments,
+        ?uri_path: Types::UriPath,
+        ?query_string: Types::QueryString,
+        ?body: Types::Body,
+        ?method: Types::Method,
+        ?json_body: Types::JsonBody,
+        ?headers: Types::Headers,
+        ?cookies: Types::Cookies,
+        ?header_order: Types::HeaderOrder,
+        ?ja3_fingerprint: Types::JA3Fingerprint,
+        ?ja4_fingerprint: Types::JA4Fingerprint,
+        ?uri_fragment: Types::UriFragment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor single_header: Types::SingleHeader?
+      attr_accessor single_query_argument: Types::SingleQueryArgument?
+      attr_accessor all_query_arguments: Types::AllQueryArguments?
+      attr_accessor uri_path: Types::UriPath?
+      attr_accessor query_string: Types::QueryString?
+      attr_accessor body: Types::Body?
+      attr_accessor method: Types::Method?
+      attr_accessor json_body: Types::JsonBody?
+      attr_accessor headers: Types::Headers?
+      attr_accessor cookies: Types::Cookies?
+      attr_accessor header_order: Types::HeaderOrder?
+      attr_accessor ja3_fingerprint: Types::JA3Fingerprint?
+      attr_accessor ja4_fingerprint: Types::JA4Fingerprint?
+      attr_accessor uri_fragment: Types::UriFragment?
+    end
+
+    class FieldToProtect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_type: String,
+        ?field_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_type: String?
+      attr_accessor field_keys: Array[String]?
+    end
+
+    module FieldToProtectType
+      SINGLE_HEADER: String
+      SINGLE_COOKIE: String
+      SINGLE_QUERY_ARGUMENT: String
+      QUERY_STRING: String
+      BODY: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+        ?requirement: String,
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+      attr_accessor requirement: String?
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    module FilterBehavior
+      KEEP: String
+      DROP: String
+    end
+
+    module FilterRequirement
+      MEETS_ALL: String
+      MEETS_ANY: String
+    end
+
+    class FirewallManagerRuleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?priority: Integer,
+        ?firewall_manager_statement: Types::FirewallManagerStatement,
+        ?override_action: Types::OverrideAction,
+        ?visibility_config: Types::VisibilityConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor firewall_manager_statement: Types::FirewallManagerStatement?
+      attr_accessor override_action: Types::OverrideAction?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+    end
+
+    class FirewallManagerStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_rule_group_statement: Types::ManagedRuleGroupStatement,
+        ?rule_group_reference_statement: Types::RuleGroupReferenceStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_rule_group_statement: Types::ManagedRuleGroupStatement?
+      attr_accessor rule_group_reference_statement: Types::RuleGroupReferenceStatement?
+    end
+
+    class ForwardedIPConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header_name: String,
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header_name: String?
+      attr_accessor fallback_behavior: String?
+    end
+
+    module ForwardedIPPosition
+      FIRST: String
+      LAST: String
+      ANY: String
+    end
+
+    class GenerateMobileSdkReleaseUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform: String,
+        ?release_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform: String?
+      attr_accessor release_version: String?
+    end
+
+    class GenerateMobileSdkReleaseUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class GeoMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country_codes: Array[String],
+        ?forwarded_ip_config: Types::ForwardedIPConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country_codes: Array[String]?
+      attr_accessor forwarded_ip_config: Types::ForwardedIPConfig?
+    end
+
+    class GetDecryptedAPIKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?api_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor api_key: String?
+    end
+
+    class GetDecryptedAPIKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_domains: Array[String],
+        ?creation_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_domains: Array[String]?
+      attr_accessor creation_timestamp: Time?
+    end
+
+    class GetIPSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+    end
+
+    class GetIPSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_set: Types::IPSet,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_set: Types::IPSet?
+      attr_accessor lock_token: String?
+    end
+
+    class GetLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?log_type: String,
+        ?log_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor log_type: String?
+      attr_accessor log_scope: String?
+    end
+
+    class GetLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class GetManagedRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+    end
+
+    class GetManagedRuleSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_rule_set: Types::ManagedRuleSet,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_rule_set: Types::ManagedRuleSet?
+      attr_accessor lock_token: String?
+    end
+
+    class GetMobileSdkReleaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform: String,
+        ?release_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform: String?
+      attr_accessor release_version: String?
+    end
+
+    class GetMobileSdkReleaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mobile_sdk_release: Types::MobileSdkRelease,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mobile_sdk_release: Types::MobileSdkRelease?
+    end
+
+    class GetPermissionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetPermissionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetRateBasedStatementManagedKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?web_acl_name: String,
+        ?web_acl_id: String,
+        ?rule_group_rule_name: String,
+        ?rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor web_acl_name: String?
+      attr_accessor web_acl_id: String?
+      attr_accessor rule_group_rule_name: String?
+      attr_accessor rule_name: String?
+    end
+
+    class GetRateBasedStatementManagedKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_keys_ipv4: Types::RateBasedStatementManagedKeysIPSet,
+        ?managed_keys_ipv6: Types::RateBasedStatementManagedKeysIPSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_keys_ipv4: Types::RateBasedStatementManagedKeysIPSet?
+      attr_accessor managed_keys_ipv6: Types::RateBasedStatementManagedKeysIPSet?
+    end
+
+    class GetRegexPatternSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+    end
+
+    class GetRegexPatternSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regex_pattern_set: Types::RegexPatternSet,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regex_pattern_set: Types::RegexPatternSet?
+      attr_accessor lock_token: String?
+    end
+
+    class GetRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class GetRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_group: Types::RuleGroup,
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_group: Types::RuleGroup?
+      attr_accessor lock_token: String?
+    end
+
+    class GetSampledRequestsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?rule_metric_name: String,
+        ?scope: String,
+        ?time_window: Types::TimeWindow,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor rule_metric_name: String?
+      attr_accessor scope: String?
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor max_items: Integer?
+    end
+
+    class GetSampledRequestsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampled_requests: Array[Types::SampledHTTPRequest],
+        ?population_size: Integer,
+        ?time_window: Types::TimeWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampled_requests: Array[Types::SampledHTTPRequest]?
+      attr_accessor population_size: Integer?
+      attr_accessor time_window: Types::TimeWindow?
+    end
+
+    class GetWebACLForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetWebACLForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl: Types::WebACL,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl: Types::WebACL?
+    end
+
+    class GetWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class GetWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl: Types::WebACL,
+        ?lock_token: String,
+        ?application_integration_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl: Types::WebACL?
+      attr_accessor lock_token: String?
+      attr_accessor application_integration_url: String?
+    end
+
+    class HTTPHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class HTTPRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_ip: String,
+        ?country: String,
+        ?uri: String,
+        ?method: String,
+        ?http_version: String,
+        ?headers: Array[Types::HTTPHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_ip: String?
+      attr_accessor country: String?
+      attr_accessor uri: String?
+      attr_accessor method: String?
+      attr_accessor http_version: String?
+      attr_accessor headers: Array[Types::HTTPHeader]?
+    end
+
+    class HeaderMatchPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all: Types::All,
+        ?included_headers: Array[String],
+        ?excluded_headers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all: Types::All?
+      attr_accessor included_headers: Array[String]?
+      attr_accessor excluded_headers: Array[String]?
+    end
+
+    class HeaderOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oversize_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oversize_handling: String?
+    end
+
+    class Headers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_pattern: Types::HeaderMatchPattern,
+        ?match_scope: String,
+        ?oversize_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_pattern: Types::HeaderMatchPattern?
+      attr_accessor match_scope: String?
+      attr_accessor oversize_handling: String?
+    end
+
+    module IPAddressVersion
+      IPV4: String
+      IPV6: String
+    end
+
+    class IPSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?ip_address_version: String,
+        ?addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor ip_address_version: String?
+      attr_accessor addresses: Array[String]?
+    end
+
+    class IPSetForwardedIPConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header_name: String,
+        ?fallback_behavior: String,
+        ?position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header_name: String?
+      attr_accessor fallback_behavior: String?
+      attr_accessor position: String?
+    end
+
+    class IPSetReferenceStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?ip_set_forwarded_ip_config: Types::IPSetForwardedIPConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor ip_set_forwarded_ip_config: Types::IPSetForwardedIPConfig?
+    end
+
+    class IPSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lock_token: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lock_token: String?
+      attr_accessor arn: String?
+    end
+
+    class ImmunityTimeProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?immunity_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor immunity_time: Integer?
+    end
+
+    module InspectionLevel
+      COMMON: String
+      TARGETED: String
+    end
+
+    class JA3Fingerprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_behavior: String?
+    end
+
+    class JA4Fingerprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_behavior: String?
+    end
+
+    class JsonBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_pattern: Types::JsonMatchPattern,
+        ?match_scope: String,
+        ?invalid_fallback_behavior: String,
+        ?oversize_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_pattern: Types::JsonMatchPattern?
+      attr_accessor match_scope: String?
+      attr_accessor invalid_fallback_behavior: String?
+      attr_accessor oversize_handling: String?
+    end
+
+    class JsonMatchPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all: Types::All,
+        ?included_paths: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all: Types::All?
+      attr_accessor included_paths: Array[String]?
+    end
+
+    module JsonMatchScope
+      ALL: String
+      KEY: String
+      VALUE: String
+    end
+
+    class Label
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module LabelMatchScope
+      LABEL: String
+      NAMESPACE: String
+    end
+
+    class LabelMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor key: String?
+    end
+
+    class LabelNameCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_name: String?
+    end
+
+    class LabelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class ListAPIKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListAPIKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?api_key_summaries: Array[Types::APIKeySummary],
+        ?application_integration_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor api_key_summaries: Array[Types::APIKeySummary]?
+      attr_accessor application_integration_url: String?
+    end
+
+    class ListAvailableManagedRuleGroupVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?name: String,
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListAvailableManagedRuleGroupVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?versions: Array[Types::ManagedRuleGroupVersion],
+        ?current_default_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor versions: Array[Types::ManagedRuleGroupVersion]?
+      attr_accessor current_default_version: String?
+    end
+
+    class ListAvailableManagedRuleGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListAvailableManagedRuleGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?managed_rule_groups: Array[Types::ManagedRuleGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor managed_rule_groups: Array[Types::ManagedRuleGroupSummary]?
+    end
+
+    class ListIPSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListIPSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?ip_sets: Array[Types::IPSetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor ip_sets: Array[Types::IPSetSummary]?
+    end
+
+    class ListLoggingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+        ?log_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+      attr_accessor log_scope: String?
+    end
+
+    class ListLoggingConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configurations: Array[Types::LoggingConfiguration],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configurations: Array[Types::LoggingConfiguration]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListManagedRuleSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListManagedRuleSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?managed_rule_sets: Array[Types::ManagedRuleSetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor managed_rule_sets: Array[Types::ManagedRuleSetSummary]?
+    end
+
+    class ListMobileSdkReleasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListMobileSdkReleasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_summaries: Array[Types::ReleaseSummary],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_summaries: Array[Types::ReleaseSummary]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListRegexPatternSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListRegexPatternSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?regex_pattern_sets: Array[Types::RegexPatternSetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor regex_pattern_sets: Array[Types::RegexPatternSetSummary]?
+    end
+
+    class ListResourcesForWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListResourcesForWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+    end
+
+    class ListRuleGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListRuleGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?rule_groups: Array[Types::RuleGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor rule_groups: Array[Types::RuleGroupSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?limit: Integer,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?tag_info_for_resource: Types::TagInfoForResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor tag_info_for_resource: Types::TagInfoForResource?
+    end
+
+    class ListWebACLsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?next_marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListWebACLsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?web_ac_ls: Array[Types::WebACLSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor web_ac_ls: Array[Types::WebACLSummary]?
+    end
+
+    module LogScope
+      CUSTOMER: String
+      SECURITY_LAKE: String
+    end
+
+    module LogType
+      WAF_LOGS: String
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?log_destination_configs: Array[String],
+        ?redacted_fields: Array[Types::FieldToMatch],
+        ?managed_by_firewall_manager: bool,
+        ?logging_filter: Types::LoggingFilter,
+        ?log_type: String,
+        ?log_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor log_destination_configs: Array[String]?
+      attr_accessor redacted_fields: Array[Types::FieldToMatch]?
+      attr_accessor managed_by_firewall_manager: bool?
+      attr_accessor logging_filter: Types::LoggingFilter?
+      attr_accessor log_type: String?
+      attr_accessor log_scope: String?
+    end
+
+    class LoggingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?default_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor default_behavior: String?
+    end
+
+    module LowReputationMode
+      ACTIVE_UNDER_DDOS: String
+      ALWAYS_ON: String
+    end
+
+    class ManagedProductDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?managed_rule_set_name: String,
+        ?product_id: String,
+        ?product_link: String,
+        ?product_title: String,
+        ?product_description: String,
+        ?sns_topic_arn: String,
+        ?is_versioning_supported: bool,
+        ?is_advanced_managed_rule_set: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor managed_rule_set_name: String?
+      attr_accessor product_id: String?
+      attr_accessor product_link: String?
+      attr_accessor product_title: String?
+      attr_accessor product_description: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor is_versioning_supported: bool?
+      attr_accessor is_advanced_managed_rule_set: bool?
+    end
+
+    class ManagedRuleGroupConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?login_path: String,
+        ?payload_type: String,
+        ?username_field: Types::UsernameField,
+        ?password_field: Types::PasswordField,
+        ?aws_managed_rules_bot_control_rule_set: Types::AWSManagedRulesBotControlRuleSet,
+        ?aws_managed_rules_atp_rule_set: Types::AWSManagedRulesATPRuleSet,
+        ?aws_managed_rules_acfp_rule_set: Types::AWSManagedRulesACFPRuleSet,
+        ?aws_managed_rules_anti_d_do_s_rule_set: Types::AWSManagedRulesAntiDDoSRuleSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor login_path: String?
+      attr_accessor payload_type: String?
+      attr_accessor username_field: Types::UsernameField?
+      attr_accessor password_field: Types::PasswordField?
+      attr_accessor aws_managed_rules_bot_control_rule_set: Types::AWSManagedRulesBotControlRuleSet?
+      attr_accessor aws_managed_rules_atp_rule_set: Types::AWSManagedRulesATPRuleSet?
+      attr_accessor aws_managed_rules_acfp_rule_set: Types::AWSManagedRulesACFPRuleSet?
+      attr_accessor aws_managed_rules_anti_d_do_s_rule_set: Types::AWSManagedRulesAntiDDoSRuleSet?
+    end
+
+    class ManagedRuleGroupStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?name: String,
+        ?version: String,
+        ?excluded_rules: Array[Types::ExcludedRule],
+        ?scope_down_statement: Types::Statement,
+        ?managed_rule_group_configs: Array[Types::ManagedRuleGroupConfig],
+        ?rule_action_overrides: Array[Types::RuleActionOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor excluded_rules: Array[Types::ExcludedRule]?
+      attr_accessor scope_down_statement: Types::Statement?
+      attr_accessor managed_rule_group_configs: Array[Types::ManagedRuleGroupConfig]?
+      attr_accessor rule_action_overrides: Array[Types::RuleActionOverride]?
+    end
+
+    class ManagedRuleGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?name: String,
+        ?versioning_supported: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor name: String?
+      attr_accessor versioning_supported: bool?
+      attr_accessor description: String?
+    end
+
+    class ManagedRuleGroupVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?last_update_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor last_update_timestamp: Time?
+    end
+
+    class ManagedRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?published_versions: Hash[String, Types::ManagedRuleSetVersion],
+        ?recommended_version: String,
+        ?label_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor published_versions: Hash[String, Types::ManagedRuleSetVersion]?
+      attr_accessor recommended_version: String?
+      attr_accessor label_namespace: String?
+    end
+
+    class ManagedRuleSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lock_token: String,
+        ?arn: String,
+        ?label_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lock_token: String?
+      attr_accessor arn: String?
+      attr_accessor label_namespace: String?
+    end
+
+    class ManagedRuleSetVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_rule_group_arn: String,
+        ?capacity: Integer,
+        ?forecasted_lifetime: Integer,
+        ?publish_timestamp: Time,
+        ?last_update_timestamp: Time,
+        ?expiry_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_rule_group_arn: String?
+      attr_accessor capacity: Integer?
+      attr_accessor forecasted_lifetime: Integer?
+      attr_accessor publish_timestamp: Time?
+      attr_accessor last_update_timestamp: Time?
+      attr_accessor expiry_timestamp: Time?
+    end
+
+    module MapMatchScope
+      ALL: String
+      KEY: String
+      VALUE: String
+    end
+
+    class Method
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class MobileSdkRelease
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_version: String,
+        ?timestamp: Time,
+        ?release_notes: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_version: String?
+      attr_accessor timestamp: Time?
+      attr_accessor release_notes: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NoneAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NotStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: Types::Statement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: Types::Statement?
+    end
+
+    class OnSourceDDoSProtectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alb_low_reputation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alb_low_reputation_mode: String?
+    end
+
+    class OrStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::Statement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::Statement]?
+    end
+
+    class OverrideAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Types::CountAction,
+        ?none: Types::NoneAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Types::CountAction?
+      attr_accessor none: Types::NoneAction?
+    end
+
+    module OversizeHandling
+      CONTINUE: String
+      MATCH: String
+      NO_MATCH: String
+    end
+
+    module ParameterExceptionField
+      WEB_ACL: String
+      RULE_GROUP: String
+      REGEX_PATTERN_SET: String
+      IP_SET: String
+      MANAGED_RULE_SET: String
+      RULE: String
+      EXCLUDED_RULE: String
+      STATEMENT: String
+      BYTE_MATCH_STATEMENT: String
+      SQLI_MATCH_STATEMENT: String
+      XSS_MATCH_STATEMENT: String
+      SIZE_CONSTRAINT_STATEMENT: String
+      GEO_MATCH_STATEMENT: String
+      RATE_BASED_STATEMENT: String
+      RULE_GROUP_REFERENCE_STATEMENT: String
+      REGEX_PATTERN_REFERENCE_STATEMENT: String
+      IP_SET_REFERENCE_STATEMENT: String
+      MANAGED_RULE_SET_STATEMENT: String
+      LABEL_MATCH_STATEMENT: String
+      AND_STATEMENT: String
+      OR_STATEMENT: String
+      NOT_STATEMENT: String
+      IP_ADDRESS: String
+      IP_ADDRESS_VERSION: String
+      FIELD_TO_MATCH: String
+      TEXT_TRANSFORMATION: String
+      SINGLE_QUERY_ARGUMENT: String
+      SINGLE_HEADER: String
+      DEFAULT_ACTION: String
+      RULE_ACTION: String
+      ENTITY_LIMIT: String
+      OVERRIDE_ACTION: String
+      SCOPE_VALUE: String
+      RESOURCE_ARN: String
+      RESOURCE_TYPE: String
+      TAGS: String
+      TAG_KEYS: String
+      METRIC_NAME: String
+      FIREWALL_MANAGER_STATEMENT: String
+      FALLBACK_BEHAVIOR: String
+      POSITION: String
+      FORWARDED_IP_CONFIG: String
+      IP_SET_FORWARDED_IP_CONFIG: String
+      HEADER_NAME: String
+      CUSTOM_REQUEST_HANDLING: String
+      RESPONSE_CONTENT_TYPE: String
+      CUSTOM_RESPONSE: String
+      CUSTOM_RESPONSE_BODY: String
+      JSON_MATCH_PATTERN: String
+      JSON_MATCH_SCOPE: String
+      BODY_PARSING_FALLBACK_BEHAVIOR: String
+      LOGGING_FILTER: String
+      FILTER_CONDITION: String
+      EXPIRE_TIMESTAMP: String
+      CHANGE_PROPAGATION_STATUS: String
+      ASSOCIABLE_RESOURCE: String
+      LOG_DESTINATION: String
+      MANAGED_RULE_GROUP_CONFIG: String
+      PAYLOAD_TYPE: String
+      HEADER_MATCH_PATTERN: String
+      COOKIE_MATCH_PATTERN: String
+      MAP_MATCH_SCOPE: String
+      OVERSIZE_HANDLING: String
+      CHALLENGE_CONFIG: String
+      TOKEN_DOMAIN: String
+      ATP_RULE_SET_RESPONSE_INSPECTION: String
+      ASSOCIATED_RESOURCE_TYPE: String
+      SCOPE_DOWN: String
+      CUSTOM_KEYS: String
+      ACP_RULE_SET_RESPONSE_INSPECTION: String
+      DATA_PROTECTION_CONFIG: String
+      LOW_REPUTATION_MODE: String
+    end
+
+    class PasswordField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    module PayloadType
+      JSON: String
+      FORM_ENCODED: String
+    end
+
+    class PhoneNumberField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    module Platform
+      IOS: String
+      ANDROID: String
+    end
+
+    module PositionalConstraint
+      EXACTLY: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+      CONTAINS_WORD: String
+    end
+
+    class PutLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class PutLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class PutManagedRuleSetVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+        ?recommended_version: String,
+        ?versions_to_publish: Hash[String, Types::VersionToPublish],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+      attr_accessor recommended_version: String?
+      attr_accessor versions_to_publish: Hash[String, Types::VersionToPublish]?
+    end
+
+    class PutManagedRuleSetVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_lock_token: String?
+    end
+
+    class PutPermissionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutPermissionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RateBasedStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?evaluation_window_sec: Integer,
+        ?aggregate_key_type: String,
+        ?scope_down_statement: Types::Statement,
+        ?forwarded_ip_config: Types::ForwardedIPConfig,
+        ?custom_keys: Array[Types::RateBasedStatementCustomKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor evaluation_window_sec: Integer?
+      attr_accessor aggregate_key_type: String?
+      attr_accessor scope_down_statement: Types::Statement?
+      attr_accessor forwarded_ip_config: Types::ForwardedIPConfig?
+      attr_accessor custom_keys: Array[Types::RateBasedStatementCustomKey]?
+    end
+
+    module RateBasedStatementAggregateKeyType
+      IP: String
+      FORWARDED_IP: String
+      CUSTOM_KEYS: String
+      CONSTANT: String
+    end
+
+    class RateBasedStatementCustomKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header: Types::RateLimitHeader,
+        ?cookie: Types::RateLimitCookie,
+        ?query_argument: Types::RateLimitQueryArgument,
+        ?query_string: Types::RateLimitQueryString,
+        ?http_method: Types::RateLimitHTTPMethod,
+        ?forwarded_ip: Types::RateLimitForwardedIP,
+        ?ip: Types::RateLimitIP,
+        ?label_namespace: Types::RateLimitLabelNamespace,
+        ?uri_path: Types::RateLimitUriPath,
+        ?ja3_fingerprint: Types::RateLimitJA3Fingerprint,
+        ?ja4_fingerprint: Types::RateLimitJA4Fingerprint,
+        ?asn: Types::RateLimitAsn,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header: Types::RateLimitHeader?
+      attr_accessor cookie: Types::RateLimitCookie?
+      attr_accessor query_argument: Types::RateLimitQueryArgument?
+      attr_accessor query_string: Types::RateLimitQueryString?
+      attr_accessor http_method: Types::RateLimitHTTPMethod?
+      attr_accessor forwarded_ip: Types::RateLimitForwardedIP?
+      attr_accessor ip: Types::RateLimitIP?
+      attr_accessor label_namespace: Types::RateLimitLabelNamespace?
+      attr_accessor uri_path: Types::RateLimitUriPath?
+      attr_accessor ja3_fingerprint: Types::RateLimitJA3Fingerprint?
+      attr_accessor ja4_fingerprint: Types::RateLimitJA4Fingerprint?
+      attr_accessor asn: Types::RateLimitAsn?
+    end
+
+    class RateBasedStatementManagedKeysIPSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address_version: String,
+        ?addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address_version: String?
+      attr_accessor addresses: Array[String]?
+    end
+
+    class RateLimitAsn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RateLimitCookie
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RateLimitForwardedIP
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RateLimitHTTPMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RateLimitHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RateLimitIP
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RateLimitJA3Fingerprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_behavior: String?
+    end
+
+    class RateLimitJA4Fingerprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_behavior: String?
+    end
+
+    class RateLimitLabelNamespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+    end
+
+    class RateLimitQueryArgument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RateLimitQueryString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RateLimitUriPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class Regex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regex_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regex_string: String?
+    end
+
+    class RegexMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regex_string: String,
+        ?field_to_match: Types::FieldToMatch,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regex_string: String?
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RegexPatternSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?regular_expression_list: Array[Types::Regex],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor regular_expression_list: Array[Types::Regex]?
+    end
+
+    class RegexPatternSetReferenceStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?field_to_match: Types::FieldToMatch,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    class RegexPatternSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lock_token: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lock_token: String?
+      attr_accessor arn: String?
+    end
+
+    class ReleaseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_version: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_version: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class RequestBodyAssociatedResourceTypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_size_inspection_limit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_size_inspection_limit: String?
+    end
+
+    class RequestInspection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload_type: String,
+        ?username_field: Types::UsernameField,
+        ?password_field: Types::PasswordField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_type: String?
+      attr_accessor username_field: Types::UsernameField?
+      attr_accessor password_field: Types::PasswordField?
+    end
+
+    class RequestInspectionACFP
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload_type: String,
+        ?username_field: Types::UsernameField,
+        ?password_field: Types::PasswordField,
+        ?email_field: Types::EmailField,
+        ?phone_number_fields: Array[Types::PhoneNumberField],
+        ?address_fields: Array[Types::AddressField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_type: String?
+      attr_accessor username_field: Types::UsernameField?
+      attr_accessor password_field: Types::PasswordField?
+      attr_accessor email_field: Types::EmailField?
+      attr_accessor phone_number_fields: Array[Types::PhoneNumberField]?
+      attr_accessor address_fields: Array[Types::AddressField]?
+    end
+
+    module ResourceType
+      APPLICATION_LOAD_BALANCER: String
+      API_GATEWAY: String
+      APPSYNC: String
+      COGNITIO_USER_POOL: String
+      APP_RUNNER_SERVICE: String
+      VERIFIED_ACCESS_INSTANCE: String
+      AMPLIFY: String
+    end
+
+    module ResponseContentType
+      TEXT_PLAIN: String
+      TEXT_HTML: String
+      APPLICATION_JSON: String
+    end
+
+    class ResponseInspection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Types::ResponseInspectionStatusCode,
+        ?header: Types::ResponseInspectionHeader,
+        ?body_contains: Types::ResponseInspectionBodyContains,
+        ?json: Types::ResponseInspectionJson,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Types::ResponseInspectionStatusCode?
+      attr_accessor header: Types::ResponseInspectionHeader?
+      attr_accessor body_contains: Types::ResponseInspectionBodyContains?
+      attr_accessor json: Types::ResponseInspectionJson?
+    end
+
+    class ResponseInspectionBodyContains
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success_strings: Array[String],
+        ?failure_strings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success_strings: Array[String]?
+      attr_accessor failure_strings: Array[String]?
+    end
+
+    class ResponseInspectionHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?success_values: Array[String],
+        ?failure_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor success_values: Array[String]?
+      attr_accessor failure_values: Array[String]?
+    end
+
+    class ResponseInspectionJson
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?success_values: Array[String],
+        ?failure_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor success_values: Array[String]?
+      attr_accessor failure_values: Array[String]?
+    end
+
+    class ResponseInspectionStatusCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success_codes: Array[Integer],
+        ?failure_codes: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success_codes: Array[Integer]?
+      attr_accessor failure_codes: Array[Integer]?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?priority: Integer,
+        ?statement: Types::Statement,
+        ?action: Types::RuleAction,
+        ?override_action: Types::OverrideAction,
+        ?rule_labels: Array[Types::Label],
+        ?visibility_config: Types::VisibilityConfig,
+        ?captcha_config: Types::CaptchaConfig,
+        ?challenge_config: Types::ChallengeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor statement: Types::Statement?
+      attr_accessor action: Types::RuleAction?
+      attr_accessor override_action: Types::OverrideAction?
+      attr_accessor rule_labels: Array[Types::Label]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor captcha_config: Types::CaptchaConfig?
+      attr_accessor challenge_config: Types::ChallengeConfig?
+    end
+
+    class RuleAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block: Types::BlockAction,
+        ?allow: Types::AllowAction,
+        ?count: Types::CountAction,
+        ?captcha: Types::CaptchaAction,
+        ?challenge: Types::ChallengeAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block: Types::BlockAction?
+      attr_accessor allow: Types::AllowAction?
+      attr_accessor count: Types::CountAction?
+      attr_accessor captcha: Types::CaptchaAction?
+      attr_accessor challenge: Types::ChallengeAction?
+    end
+
+    class RuleActionOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action_to_use: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action_to_use: Types::RuleAction?
+    end
+
+    class RuleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?capacity: Integer,
+        ?arn: String,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?label_namespace: String,
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?available_labels: Array[Types::LabelSummary],
+        ?consumed_labels: Array[Types::LabelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor capacity: Integer?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor label_namespace: String?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor available_labels: Array[Types::LabelSummary]?
+      attr_accessor consumed_labels: Array[Types::LabelSummary]?
+    end
+
+    class RuleGroupReferenceStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?excluded_rules: Array[Types::ExcludedRule],
+        ?rule_action_overrides: Array[Types::RuleActionOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor excluded_rules: Array[Types::ExcludedRule]?
+      attr_accessor rule_action_overrides: Array[Types::RuleActionOverride]?
+    end
+
+    class RuleGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lock_token: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lock_token: String?
+      attr_accessor arn: String?
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action: Types::RuleAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action: Types::RuleAction?
+    end
+
+    class SampledHTTPRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request: Types::HTTPRequest,
+        ?weight: Integer,
+        ?timestamp: Time,
+        ?action: String,
+        ?rule_name_within_rule_group: String,
+        ?request_headers_inserted: Array[Types::HTTPHeader],
+        ?response_code_sent: Integer,
+        ?labels: Array[Types::Label],
+        ?captcha_response: Types::CaptchaResponse,
+        ?challenge_response: Types::ChallengeResponse,
+        ?overridden_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request: Types::HTTPRequest?
+      attr_accessor weight: Integer?
+      attr_accessor timestamp: Time?
+      attr_accessor action: String?
+      attr_accessor rule_name_within_rule_group: String?
+      attr_accessor request_headers_inserted: Array[Types::HTTPHeader]?
+      attr_accessor response_code_sent: Integer?
+      attr_accessor labels: Array[Types::Label]?
+      attr_accessor captcha_response: Types::CaptchaResponse?
+      attr_accessor challenge_response: Types::ChallengeResponse?
+      attr_accessor overridden_action: String?
+    end
+
+    module Scope
+      CLOUDFRONT: String
+      REGIONAL: String
+    end
+
+    module SensitivityLevel
+      LOW: String
+      HIGH: String
+    end
+
+    module SensitivityToAct
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class SingleHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class SingleQueryArgument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class SizeConstraintStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_to_match: Types::FieldToMatch,
+        ?comparison_operator: String,
+        ?size: Integer,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor comparison_operator: String?
+      attr_accessor size: Integer?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+
+    module SizeInspectionLimit
+      KB_16: String
+      KB_32: String
+      KB_48: String
+      KB_64: String
+    end
+
+    class SqliMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_to_match: Types::FieldToMatch,
+        ?text_transformations: Array[Types::TextTransformation],
+        ?sensitivity_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor sensitivity_level: String?
+    end
+
+    class Statement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byte_match_statement: Types::ByteMatchStatement,
+        ?sqli_match_statement: Types::SqliMatchStatement,
+        ?xss_match_statement: Types::XssMatchStatement,
+        ?size_constraint_statement: Types::SizeConstraintStatement,
+        ?geo_match_statement: Types::GeoMatchStatement,
+        ?rule_group_reference_statement: Types::RuleGroupReferenceStatement,
+        ?ip_set_reference_statement: Types::IPSetReferenceStatement,
+        ?regex_pattern_set_reference_statement: Types::RegexPatternSetReferenceStatement,
+        ?rate_based_statement: Types::RateBasedStatement,
+        ?and_statement: Types::AndStatement,
+        ?or_statement: Types::OrStatement,
+        ?not_statement: Types::NotStatement,
+        ?managed_rule_group_statement: Types::ManagedRuleGroupStatement,
+        ?label_match_statement: Types::LabelMatchStatement,
+        ?regex_match_statement: Types::RegexMatchStatement,
+        ?asn_match_statement: Types::AsnMatchStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byte_match_statement: Types::ByteMatchStatement?
+      attr_accessor sqli_match_statement: Types::SqliMatchStatement?
+      attr_accessor xss_match_statement: Types::XssMatchStatement?
+      attr_accessor size_constraint_statement: Types::SizeConstraintStatement?
+      attr_accessor geo_match_statement: Types::GeoMatchStatement?
+      attr_accessor rule_group_reference_statement: Types::RuleGroupReferenceStatement?
+      attr_accessor ip_set_reference_statement: Types::IPSetReferenceStatement?
+      attr_accessor regex_pattern_set_reference_statement: Types::RegexPatternSetReferenceStatement?
+      attr_accessor rate_based_statement: Types::RateBasedStatement?
+      attr_accessor and_statement: Types::AndStatement?
+      attr_accessor or_statement: Types::OrStatement?
+      attr_accessor not_statement: Types::NotStatement?
+      attr_accessor managed_rule_group_statement: Types::ManagedRuleGroupStatement?
+      attr_accessor label_match_statement: Types::LabelMatchStatement?
+      attr_accessor regex_match_statement: Types::RegexMatchStatement?
+      attr_accessor asn_match_statement: Types::AsnMatchStatement?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagInfoForResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority: Integer?
+      attr_accessor type: String?
+    end
+
+    module TextTransformationType
+      NONE: String
+      COMPRESS_WHITE_SPACE: String
+      HTML_ENTITY_DECODE: String
+      LOWERCASE: String
+      CMD_LINE: String
+      URL_DECODE: String
+      BASE64_DECODE: String
+      HEX_DECODE: String
+      MD5: String
+      REPLACE_COMMENTS: String
+      ESCAPE_SEQ_DECODE: String
+      SQL_HEX_DECODE: String
+      CSS_DECODE: String
+      JS_DECODE: String
+      NORMALIZE_PATH: String
+      NORMALIZE_PATH_WIN: String
+      REMOVE_NULLS: String
+      REPLACE_NULLS: String
+      BASE64_DECODE_EXT: String
+      URL_DECODE_UNI: String
+      UTF8_TO_UNICODE: String
+    end
+
+    class TimeWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIPSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?description: String,
+        ?addresses: Array[String],
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor addresses: Array[String]?
+      attr_accessor lock_token: String?
+    end
+
+    class UpdateIPSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_lock_token: String?
+    end
+
+    class UpdateManagedRuleSetVersionExpiryDateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?lock_token: String,
+        ?version_to_expire: String,
+        ?expiry_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor lock_token: String?
+      attr_accessor version_to_expire: String?
+      attr_accessor expiry_timestamp: Time?
+    end
+
+    class UpdateManagedRuleSetVersionExpiryDateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiring_version: String,
+        ?expiry_timestamp: Time,
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiring_version: String?
+      attr_accessor expiry_timestamp: Time?
+      attr_accessor next_lock_token: String?
+    end
+
+    class UpdateRegexPatternSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?description: String,
+        ?regular_expression_list: Array[Types::Regex],
+        ?lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor regular_expression_list: Array[Types::Regex]?
+      attr_accessor lock_token: String?
+    end
+
+    class UpdateRegexPatternSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_lock_token: String?
+    end
+
+    class UpdateRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?lock_token: String,
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor lock_token: String?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+    end
+
+    class UpdateRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_lock_token: String?
+    end
+
+    class UpdateWebACLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scope: String,
+        ?id: String,
+        ?default_action: Types::DefaultAction,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?data_protection_config: Types::DataProtectionConfig,
+        ?lock_token: String,
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?captcha_config: Types::CaptchaConfig,
+        ?challenge_config: Types::ChallengeConfig,
+        ?token_domains: Array[String],
+        ?association_config: Types::AssociationConfig,
+        ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scope: String?
+      attr_accessor id: String?
+      attr_accessor default_action: Types::DefaultAction?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor data_protection_config: Types::DataProtectionConfig?
+      attr_accessor lock_token: String?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor captcha_config: Types::CaptchaConfig?
+      attr_accessor challenge_config: Types::ChallengeConfig?
+      attr_accessor token_domains: Array[String]?
+      attr_accessor association_config: Types::AssociationConfig?
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
+    end
+
+    class UpdateWebACLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_lock_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_lock_token: String?
+    end
+
+    class UriFragment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_behavior: String?
+    end
+
+    class UriPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UsageOfAction
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class UsernameField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class VersionToPublish
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_rule_group_arn: String,
+        ?forecasted_lifetime: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_rule_group_arn: String?
+      attr_accessor forecasted_lifetime: Integer?
+    end
+
+    class VisibilityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampled_requests_enabled: bool,
+        ?cloud_watch_metrics_enabled: bool,
+        ?metric_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampled_requests_enabled: bool?
+      attr_accessor cloud_watch_metrics_enabled: bool?
+      attr_accessor metric_name: String?
+    end
+
+    class WAFAssociatedItemException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFConfigurationWarningException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFDuplicateItemException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFExpiredManagedRuleGroupVersionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFInternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFInvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFInvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field: String,
+        ?parameter: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field: String?
+      attr_accessor parameter: String?
+      attr_accessor reason: String?
+    end
+
+    class WAFInvalidPermissionPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFInvalidResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFLimitsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor source_type: String?
+    end
+
+    class WAFLogDestinationPermissionIssueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFNonexistentItemException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFOptimisticLockException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFServiceLinkedRoleErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFSubscriptionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFTagOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFTagOperationInternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFUnavailableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WAFUnsupportedAggregateKeyTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WebACL
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?default_action: Types::DefaultAction,
+        ?description: String,
+        ?rules: Array[Types::Rule],
+        ?visibility_config: Types::VisibilityConfig,
+        ?data_protection_config: Types::DataProtectionConfig,
+        ?capacity: Integer,
+        ?pre_process_firewall_manager_rule_groups: Array[Types::FirewallManagerRuleGroup],
+        ?post_process_firewall_manager_rule_groups: Array[Types::FirewallManagerRuleGroup],
+        ?managed_by_firewall_manager: bool,
+        ?label_namespace: String,
+        ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?captcha_config: Types::CaptchaConfig,
+        ?challenge_config: Types::ChallengeConfig,
+        ?token_domains: Array[String],
+        ?association_config: Types::AssociationConfig,
+        ?retrofitted_by_firewall_manager: bool,
+        ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
+        ?application_config: Types::ApplicationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor default_action: Types::DefaultAction?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor visibility_config: Types::VisibilityConfig?
+      attr_accessor data_protection_config: Types::DataProtectionConfig?
+      attr_accessor capacity: Integer?
+      attr_accessor pre_process_firewall_manager_rule_groups: Array[Types::FirewallManagerRuleGroup]?
+      attr_accessor post_process_firewall_manager_rule_groups: Array[Types::FirewallManagerRuleGroup]?
+      attr_accessor managed_by_firewall_manager: bool?
+      attr_accessor label_namespace: String?
+      attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor captcha_config: Types::CaptchaConfig?
+      attr_accessor challenge_config: Types::ChallengeConfig?
+      attr_accessor token_domains: Array[String]?
+      attr_accessor association_config: Types::AssociationConfig?
+      attr_accessor retrofitted_by_firewall_manager: bool?
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
+      attr_accessor application_config: Types::ApplicationConfig?
+    end
+
+    class WebACLSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?description: String,
+        ?lock_token: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor lock_token: String?
+      attr_accessor arn: String?
+    end
+
+    class XssMatchStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_to_match: Types::FieldToMatch,
+        ?text_transformations: Array[Types::TextTransformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_to_match: Types::FieldToMatch?
+      attr_accessor text_transformations: Array[Types::TextTransformation]?
+    end
+  end
+end

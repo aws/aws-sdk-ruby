@@ -1,0 +1,6164 @@
+module Aws::GameLift
+  module Types
+
+    class AcceptMatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_id: String,
+        ?player_ids: Array[String],
+        ?acceptance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_id: String?
+      attr_accessor player_ids: Array[String]?
+      attr_accessor acceptance_type: String?
+    end
+
+    class AcceptMatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AcceptanceType
+      ACCEPT: String
+      REJECT: String
+    end
+
+    class Alias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?name: String,
+        ?alias_arn: String,
+        ?description: String,
+        ?routing_strategy: Types::RoutingStrategy,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor name: String?
+      attr_accessor alias_arn: String?
+      attr_accessor description: String?
+      attr_accessor routing_strategy: Types::RoutingStrategy?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class AnywhereConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost: String?
+    end
+
+    class AttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s: String,
+        ?n: Float,
+        ?sl: Array[String],
+        ?sdm: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s: String?
+      attr_accessor n: Float?
+      attr_accessor sl: Array[String]?
+      attr_accessor sdm: Hash[String, Float]?
+    end
+
+    class AwsCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+    end
+
+    module BackfillMode
+      AUTOMATIC: String
+      MANUAL: String
+    end
+
+    module BalancingStrategy
+      SPOT_ONLY: String
+      SPOT_PREFERRED: String
+      ON_DEMAND_ONLY: String
+    end
+
+    class Build
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+        ?build_arn: String,
+        ?name: String,
+        ?version: String,
+        ?status: String,
+        ?size_on_disk: Integer,
+        ?operating_system: String,
+        ?creation_time: Time,
+        ?server_sdk_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+      attr_accessor build_arn: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor status: String?
+      attr_accessor size_on_disk: Integer?
+      attr_accessor operating_system: String?
+      attr_accessor creation_time: Time?
+      attr_accessor server_sdk_version: String?
+    end
+
+    module BuildStatus
+      INITIALIZED: String
+      READY: String
+      FAILED: String
+    end
+
+    class CertificateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_type: String?
+    end
+
+    module CertificateType
+      Disabled: String
+      Generated: String
+    end
+
+    class ClaimFilterOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_statuses: Array[String]?
+    end
+
+    class ClaimGameServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_id: String,
+        ?game_server_data: String,
+        ?filter_option: Types::ClaimFilterOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_id: String?
+      attr_accessor game_server_data: String?
+      attr_accessor filter_option: Types::ClaimFilterOption?
+    end
+
+    class ClaimGameServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server: Types::GameServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server: Types::GameServer?
+    end
+
+    module ComparisonOperatorType
+      GreaterThanOrEqualToThreshold: String
+      GreaterThanThreshold: String
+      LessThanThreshold: String
+      LessThanOrEqualToThreshold: String
+    end
+
+    class Compute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?compute_name: String,
+        ?compute_arn: String,
+        ?ip_address: String,
+        ?dns_name: String,
+        ?compute_status: String,
+        ?location: String,
+        ?creation_time: Time,
+        ?operating_system: String,
+        ?type: String,
+        ?game_lift_service_sdk_endpoint: String,
+        ?game_lift_agent_endpoint: String,
+        ?instance_id: String,
+        ?container_attributes: Array[Types::ContainerAttribute],
+        ?game_server_container_group_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor compute_name: String?
+      attr_accessor compute_arn: String?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor compute_status: String?
+      attr_accessor location: String?
+      attr_accessor creation_time: Time?
+      attr_accessor operating_system: String?
+      attr_accessor type: String?
+      attr_accessor game_lift_service_sdk_endpoint: String?
+      attr_accessor game_lift_agent_endpoint: String?
+      attr_accessor instance_id: String?
+      attr_accessor container_attributes: Array[Types::ContainerAttribute]?
+      attr_accessor game_server_container_group_definition_arn: String?
+    end
+
+    module ComputeStatus
+      PENDING: String
+      ACTIVE: String
+      TERMINATING: String
+      IMPAIRED: String
+    end
+
+    module ComputeType
+      EC2: String
+      ANYWHERE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectionPortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+    end
+
+    class ContainerAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?container_runtime_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor container_runtime_id: String?
+    end
+
+    class ContainerDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor condition: String?
+    end
+
+    module ContainerDependencyCondition
+      START: String
+      COMPLETE: String
+      SUCCESS: String
+      HEALTHY: String
+    end
+
+    class ContainerEnvironment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class ContainerFleet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?fleet_role_arn: String,
+        ?game_server_container_group_definition_name: String,
+        ?game_server_container_group_definition_arn: String,
+        ?per_instance_container_group_definition_name: String,
+        ?per_instance_container_group_definition_arn: String,
+        ?instance_connection_port_range: Types::ConnectionPortRange,
+        ?instance_inbound_permissions: Array[Types::IpPermission],
+        ?game_server_container_groups_per_instance: Integer,
+        ?maximum_game_server_container_groups_per_instance: Integer,
+        ?instance_type: String,
+        ?billing_type: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?metric_groups: Array[String],
+        ?new_game_session_protection_policy: String,
+        ?game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy,
+        ?status: String,
+        ?deployment_details: Types::DeploymentDetails,
+        ?log_configuration: Types::LogConfiguration,
+        ?location_attributes: Array[Types::ContainerFleetLocationAttributes],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor fleet_role_arn: String?
+      attr_accessor game_server_container_group_definition_name: String?
+      attr_accessor game_server_container_group_definition_arn: String?
+      attr_accessor per_instance_container_group_definition_name: String?
+      attr_accessor per_instance_container_group_definition_arn: String?
+      attr_accessor instance_connection_port_range: Types::ConnectionPortRange?
+      attr_accessor instance_inbound_permissions: Array[Types::IpPermission]?
+      attr_accessor game_server_container_groups_per_instance: Integer?
+      attr_accessor maximum_game_server_container_groups_per_instance: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor billing_type: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy?
+      attr_accessor status: String?
+      attr_accessor deployment_details: Types::DeploymentDetails?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor location_attributes: Array[Types::ContainerFleetLocationAttributes]?
+    end
+
+    module ContainerFleetBillingType
+      ON_DEMAND: String
+      SPOT: String
+    end
+
+    class ContainerFleetLocationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor status: String?
+    end
+
+    module ContainerFleetLocationStatus
+      PENDING: String
+      CREATING: String
+      CREATED: String
+      ACTIVATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+    end
+
+    module ContainerFleetRemoveAttribute
+      PER_INSTANCE_CONTAINER_GROUP_DEFINITION: String
+    end
+
+    module ContainerFleetStatus
+      PENDING: String
+      CREATING: String
+      CREATED: String
+      ACTIVATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+    end
+
+    class ContainerGroupDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definition_arn: String,
+        ?creation_time: Time,
+        ?operating_system: String,
+        ?name: String,
+        ?container_group_type: String,
+        ?total_memory_limit_mebibytes: Integer,
+        ?total_vcpu_limit: Float,
+        ?game_server_container_definition: Types::GameServerContainerDefinition,
+        ?support_container_definitions: Array[Types::SupportContainerDefinition],
+        ?version_number: Integer,
+        ?version_description: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definition_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor operating_system: String?
+      attr_accessor name: String?
+      attr_accessor container_group_type: String?
+      attr_accessor total_memory_limit_mebibytes: Integer?
+      attr_accessor total_vcpu_limit: Float?
+      attr_accessor game_server_container_definition: Types::GameServerContainerDefinition?
+      attr_accessor support_container_definitions: Array[Types::SupportContainerDefinition]?
+      attr_accessor version_number: Integer?
+      attr_accessor version_description: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    module ContainerGroupDefinitionStatus
+      READY: String
+      COPYING: String
+      FAILED: String
+    end
+
+    module ContainerGroupType
+      GAME_SERVER: String
+      PER_INSTANCE: String
+    end
+
+    class ContainerHealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command: Array[String],
+        ?interval: Integer,
+        ?retries: Integer,
+        ?start_period: Integer,
+        ?timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command: Array[String]?
+      attr_accessor interval: Integer?
+      attr_accessor retries: Integer?
+      attr_accessor start_period: Integer?
+      attr_accessor timeout: Integer?
+    end
+
+    class ContainerIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?container_runtime_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor container_runtime_id: String?
+    end
+
+    class ContainerMountPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_path: String,
+        ?container_path: String,
+        ?access_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_path: String?
+      attr_accessor container_path: String?
+      attr_accessor access_level: String?
+    end
+
+    module ContainerMountPointAccessLevel
+      READ_ONLY: String
+      READ_AND_WRITE: String
+    end
+
+    module ContainerOperatingSystem
+      AMAZON_LINUX_2023: String
+    end
+
+    class ContainerPortConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_port_ranges: Array[Types::ContainerPortRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_port_ranges: Array[Types::ContainerPortRange]?
+    end
+
+    class ContainerPortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class CreateAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?routing_strategy: Types::RoutingStrategy,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor routing_strategy: Types::RoutingStrategy?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class CreateBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?storage_location: Types::S3Location,
+        ?operating_system: String,
+        ?tags: Array[Types::Tag],
+        ?server_sdk_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor storage_location: Types::S3Location?
+      attr_accessor operating_system: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor server_sdk_version: String?
+    end
+
+    class CreateBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+        ?upload_credentials: Types::AwsCredentials,
+        ?storage_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+      attr_accessor upload_credentials: Types::AwsCredentials?
+      attr_accessor storage_location: Types::S3Location?
+    end
+
+    class CreateContainerFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_role_arn: String,
+        ?description: String,
+        ?game_server_container_group_definition_name: String,
+        ?per_instance_container_group_definition_name: String,
+        ?instance_connection_port_range: Types::ConnectionPortRange,
+        ?instance_inbound_permissions: Array[Types::IpPermission],
+        ?game_server_container_groups_per_instance: Integer,
+        ?instance_type: String,
+        ?billing_type: String,
+        ?locations: Array[Types::LocationConfiguration],
+        ?metric_groups: Array[String],
+        ?new_game_session_protection_policy: String,
+        ?game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy,
+        ?log_configuration: Types::LogConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor game_server_container_group_definition_name: String?
+      attr_accessor per_instance_container_group_definition_name: String?
+      attr_accessor instance_connection_port_range: Types::ConnectionPortRange?
+      attr_accessor instance_inbound_permissions: Array[Types::IpPermission]?
+      attr_accessor game_server_container_groups_per_instance: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor billing_type: String?
+      attr_accessor locations: Array[Types::LocationConfiguration]?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateContainerFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_fleet: Types::ContainerFleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_fleet: Types::ContainerFleet?
+    end
+
+    class CreateContainerGroupDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?container_group_type: String,
+        ?total_memory_limit_mebibytes: Integer,
+        ?total_vcpu_limit: Float,
+        ?game_server_container_definition: Types::GameServerContainerDefinitionInput,
+        ?support_container_definitions: Array[Types::SupportContainerDefinitionInput],
+        ?operating_system: String,
+        ?version_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor container_group_type: String?
+      attr_accessor total_memory_limit_mebibytes: Integer?
+      attr_accessor total_vcpu_limit: Float?
+      attr_accessor game_server_container_definition: Types::GameServerContainerDefinitionInput?
+      attr_accessor support_container_definitions: Array[Types::SupportContainerDefinitionInput]?
+      attr_accessor operating_system: String?
+      attr_accessor version_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateContainerGroupDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definition: Types::ContainerGroupDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definition: Types::ContainerGroupDefinition?
+    end
+
+    class CreateFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?build_id: String,
+        ?script_id: String,
+        ?server_launch_path: String,
+        ?server_launch_parameters: String,
+        ?log_paths: Array[String],
+        ?ec2_instance_type: String,
+        ?ec2_inbound_permissions: Array[Types::IpPermission],
+        ?new_game_session_protection_policy: String,
+        ?runtime_configuration: Types::RuntimeConfiguration,
+        ?resource_creation_limit_policy: Types::ResourceCreationLimitPolicy,
+        ?metric_groups: Array[String],
+        ?peer_vpc_aws_account_id: String,
+        ?peer_vpc_id: String,
+        ?fleet_type: String,
+        ?instance_role_arn: String,
+        ?certificate_configuration: Types::CertificateConfiguration,
+        ?locations: Array[Types::LocationConfiguration],
+        ?tags: Array[Types::Tag],
+        ?compute_type: String,
+        ?anywhere_configuration: Types::AnywhereConfiguration,
+        ?instance_role_credentials_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor build_id: String?
+      attr_accessor script_id: String?
+      attr_accessor server_launch_path: String?
+      attr_accessor server_launch_parameters: String?
+      attr_accessor log_paths: Array[String]?
+      attr_accessor ec2_instance_type: String?
+      attr_accessor ec2_inbound_permissions: Array[Types::IpPermission]?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration?
+      attr_accessor resource_creation_limit_policy: Types::ResourceCreationLimitPolicy?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor peer_vpc_aws_account_id: String?
+      attr_accessor peer_vpc_id: String?
+      attr_accessor fleet_type: String?
+      attr_accessor instance_role_arn: String?
+      attr_accessor certificate_configuration: Types::CertificateConfiguration?
+      attr_accessor locations: Array[Types::LocationConfiguration]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor compute_type: String?
+      attr_accessor anywhere_configuration: Types::AnywhereConfiguration?
+      attr_accessor instance_role_credentials_provider: String?
+    end
+
+    class CreateFleetLocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?locations: Array[Types::LocationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor locations: Array[Types::LocationConfiguration]?
+    end
+
+    class CreateFleetLocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?location_states: Array[Types::LocationState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor location_states: Array[Types::LocationState]?
+    end
+
+    class CreateFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_attributes: Types::FleetAttributes,
+        ?location_states: Array[Types::LocationState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_attributes: Types::FleetAttributes?
+      attr_accessor location_states: Array[Types::LocationState]?
+    end
+
+    class CreateGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?role_arn: String,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?instance_definitions: Array[Types::InstanceDefinition],
+        ?auto_scaling_policy: Types::GameServerGroupAutoScalingPolicy,
+        ?balancing_strategy: String,
+        ?game_server_protection_policy: String,
+        ?vpc_subnets: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor instance_definitions: Array[Types::InstanceDefinition]?
+      attr_accessor auto_scaling_policy: Types::GameServerGroupAutoScalingPolicy?
+      attr_accessor balancing_strategy: String?
+      attr_accessor game_server_protection_policy: String?
+      attr_accessor vpc_subnets: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class CreateGameSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?alias_id: String,
+        ?maximum_player_session_count: Integer,
+        ?name: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?creator_id: String,
+        ?game_session_id: String,
+        ?idempotency_token: String,
+        ?game_session_data: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor alias_id: String?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor name: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor creator_id: String?
+      attr_accessor game_session_id: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor game_session_data: String?
+      attr_accessor location: String?
+    end
+
+    class CreateGameSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session: Types::GameSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session: Types::GameSession?
+    end
+
+    class CreateGameSessionQueueInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?timeout_in_seconds: Integer,
+        ?player_latency_policies: Array[Types::PlayerLatencyPolicy],
+        ?destinations: Array[Types::GameSessionQueueDestination],
+        ?filter_configuration: Types::FilterConfiguration,
+        ?priority_configuration: Types::PriorityConfiguration,
+        ?custom_event_data: String,
+        ?notification_target: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor player_latency_policies: Array[Types::PlayerLatencyPolicy]?
+      attr_accessor destinations: Array[Types::GameSessionQueueDestination]?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor priority_configuration: Types::PriorityConfiguration?
+      attr_accessor custom_event_data: String?
+      attr_accessor notification_target: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGameSessionQueueOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_queue: Types::GameSessionQueue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_queue: Types::GameSessionQueue?
+    end
+
+    class CreateLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: Types::LocationModel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: Types::LocationModel?
+    end
+
+    class CreateMatchmakingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?game_session_queue_arns: Array[String],
+        ?request_timeout_seconds: Integer,
+        ?acceptance_timeout_seconds: Integer,
+        ?acceptance_required: bool,
+        ?rule_set_name: String,
+        ?notification_target: String,
+        ?additional_player_count: Integer,
+        ?custom_event_data: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?game_session_data: String,
+        ?backfill_mode: String,
+        ?flex_match_mode: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor game_session_queue_arns: Array[String]?
+      attr_accessor request_timeout_seconds: Integer?
+      attr_accessor acceptance_timeout_seconds: Integer?
+      attr_accessor acceptance_required: bool?
+      attr_accessor rule_set_name: String?
+      attr_accessor notification_target: String?
+      attr_accessor additional_player_count: Integer?
+      attr_accessor custom_event_data: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor game_session_data: String?
+      attr_accessor backfill_mode: String?
+      attr_accessor flex_match_mode: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMatchmakingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::MatchmakingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::MatchmakingConfiguration?
+    end
+
+    class CreateMatchmakingRuleSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?rule_set_body: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor rule_set_body: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMatchmakingRuleSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set: Types::MatchmakingRuleSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set: Types::MatchmakingRuleSet?
+    end
+
+    class CreatePlayerSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?player_id: String,
+        ?player_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor player_id: String?
+      attr_accessor player_data: String?
+    end
+
+    class CreatePlayerSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_session: Types::PlayerSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_session: Types::PlayerSession?
+    end
+
+    class CreatePlayerSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?player_ids: Array[String],
+        ?player_data_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor player_ids: Array[String]?
+      attr_accessor player_data_map: Hash[String, String]?
+    end
+
+    class CreatePlayerSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_sessions: Array[Types::PlayerSession],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_sessions: Array[Types::PlayerSession]?
+    end
+
+    class CreateScriptInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?storage_location: Types::S3Location,
+        ?zip_file: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor storage_location: Types::S3Location?
+      attr_accessor zip_file: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateScriptOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script: Types::Script,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script: Types::Script?
+    end
+
+    class CreateVpcPeeringAuthorizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_lift_aws_account_id: String,
+        ?peer_vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_lift_aws_account_id: String?
+      attr_accessor peer_vpc_id: String?
+    end
+
+    class CreateVpcPeeringAuthorizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_peering_authorization: Types::VpcPeeringAuthorization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_peering_authorization: Types::VpcPeeringAuthorization?
+    end
+
+    class CreateVpcPeeringConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?peer_vpc_aws_account_id: String,
+        ?peer_vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor peer_vpc_aws_account_id: String?
+      attr_accessor peer_vpc_id: String?
+    end
+
+    class CreateVpcPeeringConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class DeleteBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+    end
+
+    class DeleteContainerFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteContainerFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContainerGroupDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_number: Integer,
+        ?version_count_to_retain: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor version_count_to_retain: Integer?
+    end
+
+    class DeleteContainerGroupDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteFleetLocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?locations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor locations: Array[String]?
+    end
+
+    class DeleteFleetLocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?location_states: Array[Types::LocationState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor location_states: Array[Types::LocationState]?
+    end
+
+    class DeleteGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?delete_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor delete_option: String?
+    end
+
+    class DeleteGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class DeleteGameSessionQueueInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteGameSessionQueueOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_name: String?
+    end
+
+    class DeleteLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMatchmakingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteMatchmakingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMatchmakingRuleSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteMatchmakingRuleSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteScriptInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_id: String?
+    end
+
+    class DeleteVpcPeeringAuthorizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_lift_aws_account_id: String,
+        ?peer_vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_lift_aws_account_id: String?
+      attr_accessor peer_vpc_id: String?
+    end
+
+    class DeleteVpcPeeringAuthorizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVpcPeeringConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?vpc_peering_connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor vpc_peering_connection_id: String?
+    end
+
+    class DeleteVpcPeeringConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeploymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protection_strategy: String,
+        ?minimum_healthy_percentage: Integer,
+        ?impairment_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protection_strategy: String?
+      attr_accessor minimum_healthy_percentage: Integer?
+      attr_accessor impairment_strategy: String?
+    end
+
+    class DeploymentDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_deployment_id: String?
+    end
+
+    module DeploymentImpairmentStrategy
+      MAINTAIN: String
+      ROLLBACK: String
+    end
+
+    module DeploymentProtectionStrategy
+      WITH_PROTECTION: String
+      IGNORE_PROTECTION: String
+    end
+
+    module DeploymentStatus
+      IN_PROGRESS: String
+      IMPAIRED: String
+      COMPLETE: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_COMPLETE: String
+      CANCELLED: String
+      PENDING: String
+    end
+
+    class DeregisterComputeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?compute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor compute_name: String?
+    end
+
+    class DeregisterComputeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterGameServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_id: String?
+    end
+
+    class DescribeAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class DescribeAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class DescribeBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+    end
+
+    class DescribeBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+    end
+
+    class DescribeComputeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?compute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor compute_name: String?
+    end
+
+    class DescribeComputeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute: Types::Compute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute: Types::Compute?
+    end
+
+    class DescribeContainerFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DescribeContainerFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_fleet: Types::ContainerFleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_fleet: Types::ContainerFleet?
+    end
+
+    class DescribeContainerGroupDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DescribeContainerGroupDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definition: Types::ContainerGroupDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definition: Types::ContainerGroupDefinition?
+    end
+
+    class DescribeEC2InstanceLimitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_type: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_type: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeEC2InstanceLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_limits: Array[Types::EC2InstanceLimit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_limits: Array[Types::EC2InstanceLimit]?
+    end
+
+    class DescribeFleetAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_ids: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_ids: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_attributes: Array[Types::FleetAttributes],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_attributes: Array[Types::FleetAttributes]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_ids: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_ids: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetCapacityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_capacity: Array[Types::FleetCapacity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_capacity: Array[Types::FleetCapacity]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class DescribeFleetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_deployment: Types::FleetDeployment,
+        ?locational_deployments: Hash[String, Types::LocationalDeployment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_deployment: Types::FleetDeployment?
+      attr_accessor locational_deployments: Hash[String, Types::LocationalDeployment]?
+    end
+
+    class DescribeFleetEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetLocationAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?locations: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor locations: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetLocationAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?location_attributes: Array[Types::LocationAttributes],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor location_attributes: Array[Types::LocationAttributes]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetLocationCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeFleetLocationCapacityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_capacity: Types::FleetCapacity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_capacity: Types::FleetCapacity?
+    end
+
+    class DescribeFleetLocationUtilizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeFleetLocationUtilizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_utilization: Types::FleetUtilization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_utilization: Types::FleetUtilization?
+    end
+
+    class DescribeFleetPortSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeFleetPortSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?inbound_permissions: Array[Types::IpPermission],
+        ?update_status: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor inbound_permissions: Array[Types::IpPermission]?
+      attr_accessor update_status: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeFleetUtilizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_ids: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_ids: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFleetUtilizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_utilization: Array[Types::FleetUtilization],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_utilization: Array[Types::FleetUtilization]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+    end
+
+    class DescribeGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class DescribeGameServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_id: String?
+    end
+
+    class DescribeGameServerInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?instance_ids: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameServerInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_instances: Array[Types::GameServerInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_instances: Array[Types::GameServerInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server: Types::GameServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server: Types::GameServer?
+    end
+
+    class DescribeGameSessionDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?game_session_id: String,
+        ?alias_id: String,
+        ?location: String,
+        ?status_filter: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor game_session_id: String?
+      attr_accessor alias_id: String?
+      attr_accessor location: String?
+      attr_accessor status_filter: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameSessionDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_details: Array[Types::GameSessionDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_details: Array[Types::GameSessionDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameSessionPlacementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?placement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor placement_id: String?
+    end
+
+    class DescribeGameSessionPlacementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_placement: Types::GameSessionPlacement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_placement: Types::GameSessionPlacement?
+    end
+
+    class DescribeGameSessionQueuesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameSessionQueuesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_queues: Array[Types::GameSessionQueue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_queues: Array[Types::GameSessionQueue]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?game_session_id: String,
+        ?alias_id: String,
+        ?location: String,
+        ?status_filter: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor game_session_id: String?
+      attr_accessor alias_id: String?
+      attr_accessor location: String?
+      attr_accessor status_filter: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGameSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_sessions: Array[Types::GameSession],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_sessions: Array[Types::GameSession]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?instance_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::Instance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMatchmakingConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?rule_set_name: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor rule_set_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMatchmakingConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Types::MatchmakingConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Types::MatchmakingConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMatchmakingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_ids: Array[String]?
+    end
+
+    class DescribeMatchmakingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_list: Array[Types::MatchmakingTicket],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_list: Array[Types::MatchmakingTicket]?
+    end
+
+    class DescribeMatchmakingRuleSetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMatchmakingRuleSetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_sets: Array[Types::MatchmakingRuleSet],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_sets: Array[Types::MatchmakingRuleSet]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePlayerSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?player_id: String,
+        ?player_session_id: String,
+        ?player_session_status_filter: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor player_id: String?
+      attr_accessor player_session_id: String?
+      attr_accessor player_session_status_filter: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePlayerSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_sessions: Array[Types::PlayerSession],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_sessions: Array[Types::PlayerSession]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRuntimeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DescribeRuntimeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_configuration: Types::RuntimeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration?
+    end
+
+    class DescribeScalingPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?status_filter: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor status_filter: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor location: String?
+    end
+
+    class DescribeScalingPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_policies: Array[Types::ScalingPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_policies: Array[Types::ScalingPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScriptInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_id: String?
+    end
+
+    class DescribeScriptOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script: Types::Script,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script: Types::Script?
+    end
+
+    class DescribeVpcPeeringAuthorizationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeVpcPeeringAuthorizationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_peering_authorizations: Array[Types::VpcPeeringAuthorization],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_peering_authorizations: Array[Types::VpcPeeringAuthorization]?
+    end
+
+    class DescribeVpcPeeringConnectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DescribeVpcPeeringConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_peering_connections: Array[Types::VpcPeeringConnection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_peering_connections: Array[Types::VpcPeeringConnection]?
+    end
+
+    class DesiredPlayerSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?player_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor player_data: String?
+    end
+
+    class EC2InstanceCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired: Integer,
+        ?minimum: Integer,
+        ?maximum: Integer,
+        ?pending: Integer,
+        ?active: Integer,
+        ?idle: Integer,
+        ?terminating: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired: Integer?
+      attr_accessor minimum: Integer?
+      attr_accessor maximum: Integer?
+      attr_accessor pending: Integer?
+      attr_accessor active: Integer?
+      attr_accessor idle: Integer?
+      attr_accessor terminating: Integer?
+    end
+
+    class EC2InstanceLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_type: String,
+        ?current_instances: Integer,
+        ?instance_limit: Integer,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_type: String?
+      attr_accessor current_instances: Integer?
+      attr_accessor instance_limit: Integer?
+      attr_accessor location: String?
+    end
+
+    module EC2InstanceType
+      t2_micro: String
+      t2_small: String
+      t2_medium: String
+      t2_large: String
+      c3_large: String
+      c3_xlarge: String
+      c3_2xlarge: String
+      c3_4xlarge: String
+      c3_8xlarge: String
+      c4_large: String
+      c4_xlarge: String
+      c4_2xlarge: String
+      c4_4xlarge: String
+      c4_8xlarge: String
+      c5_large: String
+      c5_xlarge: String
+      c5_2xlarge: String
+      c5_4xlarge: String
+      c5_9xlarge: String
+      c5_12xlarge: String
+      c5_18xlarge: String
+      c5_24xlarge: String
+      c5a_large: String
+      c5a_xlarge: String
+      c5a_2xlarge: String
+      c5a_4xlarge: String
+      c5a_8xlarge: String
+      c5a_12xlarge: String
+      c5a_16xlarge: String
+      c5a_24xlarge: String
+      r3_large: String
+      r3_xlarge: String
+      r3_2xlarge: String
+      r3_4xlarge: String
+      r3_8xlarge: String
+      r4_large: String
+      r4_xlarge: String
+      r4_2xlarge: String
+      r4_4xlarge: String
+      r4_8xlarge: String
+      r4_16xlarge: String
+      r5_large: String
+      r5_xlarge: String
+      r5_2xlarge: String
+      r5_4xlarge: String
+      r5_8xlarge: String
+      r5_12xlarge: String
+      r5_16xlarge: String
+      r5_24xlarge: String
+      r5a_large: String
+      r5a_xlarge: String
+      r5a_2xlarge: String
+      r5a_4xlarge: String
+      r5a_8xlarge: String
+      r5a_12xlarge: String
+      r5a_16xlarge: String
+      r5a_24xlarge: String
+      m3_medium: String
+      m3_large: String
+      m3_xlarge: String
+      m3_2xlarge: String
+      m4_large: String
+      m4_xlarge: String
+      m4_2xlarge: String
+      m4_4xlarge: String
+      m4_10xlarge: String
+      m5_large: String
+      m5_xlarge: String
+      m5_2xlarge: String
+      m5_4xlarge: String
+      m5_8xlarge: String
+      m5_12xlarge: String
+      m5_16xlarge: String
+      m5_24xlarge: String
+      m5a_large: String
+      m5a_xlarge: String
+      m5a_2xlarge: String
+      m5a_4xlarge: String
+      m5a_8xlarge: String
+      m5a_12xlarge: String
+      m5a_16xlarge: String
+      m5a_24xlarge: String
+      c5d_large: String
+      c5d_xlarge: String
+      c5d_2xlarge: String
+      c5d_4xlarge: String
+      c5d_9xlarge: String
+      c5d_12xlarge: String
+      c5d_18xlarge: String
+      c5d_24xlarge: String
+      c6a_large: String
+      c6a_xlarge: String
+      c6a_2xlarge: String
+      c6a_4xlarge: String
+      c6a_8xlarge: String
+      c6a_12xlarge: String
+      c6a_16xlarge: String
+      c6a_24xlarge: String
+      c6i_large: String
+      c6i_xlarge: String
+      c6i_2xlarge: String
+      c6i_4xlarge: String
+      c6i_8xlarge: String
+      c6i_12xlarge: String
+      c6i_16xlarge: String
+      c6i_24xlarge: String
+      r5d_large: String
+      r5d_xlarge: String
+      r5d_2xlarge: String
+      r5d_4xlarge: String
+      r5d_8xlarge: String
+      r5d_12xlarge: String
+      r5d_16xlarge: String
+      r5d_24xlarge: String
+      m6g_medium: String
+      m6g_large: String
+      m6g_xlarge: String
+      m6g_2xlarge: String
+      m6g_4xlarge: String
+      m6g_8xlarge: String
+      m6g_12xlarge: String
+      m6g_16xlarge: String
+      c6g_medium: String
+      c6g_large: String
+      c6g_xlarge: String
+      c6g_2xlarge: String
+      c6g_4xlarge: String
+      c6g_8xlarge: String
+      c6g_12xlarge: String
+      c6g_16xlarge: String
+      r6g_medium: String
+      r6g_large: String
+      r6g_xlarge: String
+      r6g_2xlarge: String
+      r6g_4xlarge: String
+      r6g_8xlarge: String
+      r6g_12xlarge: String
+      r6g_16xlarge: String
+      c6gn_medium: String
+      c6gn_large: String
+      c6gn_xlarge: String
+      c6gn_2xlarge: String
+      c6gn_4xlarge: String
+      c6gn_8xlarge: String
+      c6gn_12xlarge: String
+      c6gn_16xlarge: String
+      c7g_medium: String
+      c7g_large: String
+      c7g_xlarge: String
+      c7g_2xlarge: String
+      c7g_4xlarge: String
+      c7g_8xlarge: String
+      c7g_12xlarge: String
+      c7g_16xlarge: String
+      r7g_medium: String
+      r7g_large: String
+      r7g_xlarge: String
+      r7g_2xlarge: String
+      r7g_4xlarge: String
+      r7g_8xlarge: String
+      r7g_12xlarge: String
+      r7g_16xlarge: String
+      m7g_medium: String
+      m7g_large: String
+      m7g_xlarge: String
+      m7g_2xlarge: String
+      m7g_4xlarge: String
+      m7g_8xlarge: String
+      m7g_12xlarge: String
+      m7g_16xlarge: String
+      g5g_xlarge: String
+      g5g_2xlarge: String
+      g5g_4xlarge: String
+      g5g_8xlarge: String
+      g5g_16xlarge: String
+      r6i_large: String
+      r6i_xlarge: String
+      r6i_2xlarge: String
+      r6i_4xlarge: String
+      r6i_8xlarge: String
+      r6i_12xlarge: String
+      r6i_16xlarge: String
+      c6gd_medium: String
+      c6gd_large: String
+      c6gd_xlarge: String
+      c6gd_2xlarge: String
+      c6gd_4xlarge: String
+      c6gd_8xlarge: String
+      c6gd_12xlarge: String
+      c6gd_16xlarge: String
+      c6in_large: String
+      c6in_xlarge: String
+      c6in_2xlarge: String
+      c6in_4xlarge: String
+      c6in_8xlarge: String
+      c6in_12xlarge: String
+      c6in_16xlarge: String
+      c7a_medium: String
+      c7a_large: String
+      c7a_xlarge: String
+      c7a_2xlarge: String
+      c7a_4xlarge: String
+      c7a_8xlarge: String
+      c7a_12xlarge: String
+      c7a_16xlarge: String
+      c7gd_medium: String
+      c7gd_large: String
+      c7gd_xlarge: String
+      c7gd_2xlarge: String
+      c7gd_4xlarge: String
+      c7gd_8xlarge: String
+      c7gd_12xlarge: String
+      c7gd_16xlarge: String
+      c7gn_medium: String
+      c7gn_large: String
+      c7gn_xlarge: String
+      c7gn_2xlarge: String
+      c7gn_4xlarge: String
+      c7gn_8xlarge: String
+      c7gn_12xlarge: String
+      c7gn_16xlarge: String
+      c7i_large: String
+      c7i_xlarge: String
+      c7i_2xlarge: String
+      c7i_4xlarge: String
+      c7i_8xlarge: String
+      c7i_12xlarge: String
+      c7i_16xlarge: String
+      m6a_large: String
+      m6a_xlarge: String
+      m6a_2xlarge: String
+      m6a_4xlarge: String
+      m6a_8xlarge: String
+      m6a_12xlarge: String
+      m6a_16xlarge: String
+      m6gd_medium: String
+      m6gd_large: String
+      m6gd_xlarge: String
+      m6gd_2xlarge: String
+      m6gd_4xlarge: String
+      m6gd_8xlarge: String
+      m6gd_12xlarge: String
+      m6gd_16xlarge: String
+      m6i_large: String
+      m6i_xlarge: String
+      m6i_2xlarge: String
+      m6i_4xlarge: String
+      m6i_8xlarge: String
+      m6i_12xlarge: String
+      m6i_16xlarge: String
+      m7a_medium: String
+      m7a_large: String
+      m7a_xlarge: String
+      m7a_2xlarge: String
+      m7a_4xlarge: String
+      m7a_8xlarge: String
+      m7a_12xlarge: String
+      m7a_16xlarge: String
+      m7gd_medium: String
+      m7gd_large: String
+      m7gd_xlarge: String
+      m7gd_2xlarge: String
+      m7gd_4xlarge: String
+      m7gd_8xlarge: String
+      m7gd_12xlarge: String
+      m7gd_16xlarge: String
+      m7i_large: String
+      m7i_xlarge: String
+      m7i_2xlarge: String
+      m7i_4xlarge: String
+      m7i_8xlarge: String
+      m7i_12xlarge: String
+      m7i_16xlarge: String
+      r6gd_medium: String
+      r6gd_large: String
+      r6gd_xlarge: String
+      r6gd_2xlarge: String
+      r6gd_4xlarge: String
+      r6gd_8xlarge: String
+      r6gd_12xlarge: String
+      r6gd_16xlarge: String
+      r7a_medium: String
+      r7a_large: String
+      r7a_xlarge: String
+      r7a_2xlarge: String
+      r7a_4xlarge: String
+      r7a_8xlarge: String
+      r7a_12xlarge: String
+      r7a_16xlarge: String
+      r7gd_medium: String
+      r7gd_large: String
+      r7gd_xlarge: String
+      r7gd_2xlarge: String
+      r7gd_4xlarge: String
+      r7gd_8xlarge: String
+      r7gd_12xlarge: String
+      r7gd_16xlarge: String
+      r7i_large: String
+      r7i_xlarge: String
+      r7i_2xlarge: String
+      r7i_4xlarge: String
+      r7i_8xlarge: String
+      r7i_12xlarge: String
+      r7i_16xlarge: String
+      r7i_24xlarge: String
+      r7i_48xlarge: String
+      c5ad_large: String
+      c5ad_xlarge: String
+      c5ad_2xlarge: String
+      c5ad_4xlarge: String
+      c5ad_8xlarge: String
+      c5ad_12xlarge: String
+      c5ad_16xlarge: String
+      c5ad_24xlarge: String
+      c5n_large: String
+      c5n_xlarge: String
+      c5n_2xlarge: String
+      c5n_4xlarge: String
+      c5n_9xlarge: String
+      c5n_18xlarge: String
+      r5ad_large: String
+      r5ad_xlarge: String
+      r5ad_2xlarge: String
+      r5ad_4xlarge: String
+      r5ad_8xlarge: String
+      r5ad_12xlarge: String
+      r5ad_16xlarge: String
+      r5ad_24xlarge: String
+      c6id_large: String
+      c6id_xlarge: String
+      c6id_2xlarge: String
+      c6id_4xlarge: String
+      c6id_8xlarge: String
+      c6id_12xlarge: String
+      c6id_16xlarge: String
+      c6id_24xlarge: String
+      c6id_32xlarge: String
+      c8g_medium: String
+      c8g_large: String
+      c8g_xlarge: String
+      c8g_2xlarge: String
+      c8g_4xlarge: String
+      c8g_8xlarge: String
+      c8g_12xlarge: String
+      c8g_16xlarge: String
+      c8g_24xlarge: String
+      c8g_48xlarge: String
+      m5ad_large: String
+      m5ad_xlarge: String
+      m5ad_2xlarge: String
+      m5ad_4xlarge: String
+      m5ad_8xlarge: String
+      m5ad_12xlarge: String
+      m5ad_16xlarge: String
+      m5ad_24xlarge: String
+      m5d_large: String
+      m5d_xlarge: String
+      m5d_2xlarge: String
+      m5d_4xlarge: String
+      m5d_8xlarge: String
+      m5d_12xlarge: String
+      m5d_16xlarge: String
+      m5d_24xlarge: String
+      m5dn_large: String
+      m5dn_xlarge: String
+      m5dn_2xlarge: String
+      m5dn_4xlarge: String
+      m5dn_8xlarge: String
+      m5dn_12xlarge: String
+      m5dn_16xlarge: String
+      m5dn_24xlarge: String
+      m5n_large: String
+      m5n_xlarge: String
+      m5n_2xlarge: String
+      m5n_4xlarge: String
+      m5n_8xlarge: String
+      m5n_12xlarge: String
+      m5n_16xlarge: String
+      m5n_24xlarge: String
+      m6id_large: String
+      m6id_xlarge: String
+      m6id_2xlarge: String
+      m6id_4xlarge: String
+      m6id_8xlarge: String
+      m6id_12xlarge: String
+      m6id_16xlarge: String
+      m6id_24xlarge: String
+      m6id_32xlarge: String
+      m6idn_large: String
+      m6idn_xlarge: String
+      m6idn_2xlarge: String
+      m6idn_4xlarge: String
+      m6idn_8xlarge: String
+      m6idn_12xlarge: String
+      m6idn_16xlarge: String
+      m6idn_24xlarge: String
+      m6idn_32xlarge: String
+      m6in_large: String
+      m6in_xlarge: String
+      m6in_2xlarge: String
+      m6in_4xlarge: String
+      m6in_8xlarge: String
+      m6in_12xlarge: String
+      m6in_16xlarge: String
+      m6in_24xlarge: String
+      m6in_32xlarge: String
+      m8g_medium: String
+      m8g_large: String
+      m8g_xlarge: String
+      m8g_2xlarge: String
+      m8g_4xlarge: String
+      m8g_8xlarge: String
+      m8g_12xlarge: String
+      m8g_16xlarge: String
+      m8g_24xlarge: String
+      m8g_48xlarge: String
+      r5dn_large: String
+      r5dn_xlarge: String
+      r5dn_2xlarge: String
+      r5dn_4xlarge: String
+      r5dn_8xlarge: String
+      r5dn_12xlarge: String
+      r5dn_16xlarge: String
+      r5dn_24xlarge: String
+      r5n_large: String
+      r5n_xlarge: String
+      r5n_2xlarge: String
+      r5n_4xlarge: String
+      r5n_8xlarge: String
+      r5n_12xlarge: String
+      r5n_16xlarge: String
+      r5n_24xlarge: String
+      r6a_large: String
+      r6a_xlarge: String
+      r6a_2xlarge: String
+      r6a_4xlarge: String
+      r6a_8xlarge: String
+      r6a_12xlarge: String
+      r6a_16xlarge: String
+      r6a_24xlarge: String
+      r6a_32xlarge: String
+      r6a_48xlarge: String
+      r6id_large: String
+      r6id_xlarge: String
+      r6id_2xlarge: String
+      r6id_4xlarge: String
+      r6id_8xlarge: String
+      r6id_12xlarge: String
+      r6id_16xlarge: String
+      r6id_24xlarge: String
+      r6id_32xlarge: String
+      r6idn_large: String
+      r6idn_xlarge: String
+      r6idn_2xlarge: String
+      r6idn_4xlarge: String
+      r6idn_8xlarge: String
+      r6idn_12xlarge: String
+      r6idn_16xlarge: String
+      r6idn_24xlarge: String
+      r6idn_32xlarge: String
+      r6in_large: String
+      r6in_xlarge: String
+      r6in_2xlarge: String
+      r6in_4xlarge: String
+      r6in_8xlarge: String
+      r6in_12xlarge: String
+      r6in_16xlarge: String
+      r6in_24xlarge: String
+      r6in_32xlarge: String
+      r8g_medium: String
+      r8g_large: String
+      r8g_xlarge: String
+      r8g_2xlarge: String
+      r8g_4xlarge: String
+      r8g_8xlarge: String
+      r8g_12xlarge: String
+      r8g_16xlarge: String
+      r8g_24xlarge: String
+      r8g_48xlarge: String
+      m4_16xlarge: String
+      c6a_32xlarge: String
+      c6a_48xlarge: String
+      c6i_32xlarge: String
+      r6i_24xlarge: String
+      r6i_32xlarge: String
+      c6in_24xlarge: String
+      c6in_32xlarge: String
+      c7a_24xlarge: String
+      c7a_32xlarge: String
+      c7a_48xlarge: String
+      c7i_24xlarge: String
+      c7i_48xlarge: String
+      m6a_24xlarge: String
+      m6a_32xlarge: String
+      m6a_48xlarge: String
+      m6i_24xlarge: String
+      m6i_32xlarge: String
+      m7a_24xlarge: String
+      m7a_32xlarge: String
+      m7a_48xlarge: String
+      m7i_24xlarge: String
+      m7i_48xlarge: String
+      r7a_24xlarge: String
+      r7a_32xlarge: String
+      r7a_48xlarge: String
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?resource_id: String,
+        ?event_code: String,
+        ?message: String,
+        ?event_time: Time,
+        ?pre_signed_log_url: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor event_code: String?
+      attr_accessor message: String?
+      attr_accessor event_time: Time?
+      attr_accessor pre_signed_log_url: String?
+      attr_accessor count: Integer?
+    end
+
+    module EventCode
+      GENERIC_EVENT: String
+      FLEET_CREATED: String
+      FLEET_DELETED: String
+      FLEET_SCALING_EVENT: String
+      FLEET_STATE_DOWNLOADING: String
+      FLEET_STATE_VALIDATING: String
+      FLEET_STATE_BUILDING: String
+      FLEET_STATE_ACTIVATING: String
+      FLEET_STATE_ACTIVE: String
+      FLEET_STATE_ERROR: String
+      FLEET_STATE_PENDING: String
+      FLEET_STATE_CREATING: String
+      FLEET_STATE_CREATED: String
+      FLEET_STATE_UPDATING: String
+      FLEET_INITIALIZATION_FAILED: String
+      FLEET_BINARY_DOWNLOAD_FAILED: String
+      FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND: String
+      FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE: String
+      FLEET_VALIDATION_TIMED_OUT: String
+      FLEET_ACTIVATION_FAILED: String
+      FLEET_ACTIVATION_FAILED_NO_INSTANCES: String
+      FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED: String
+      SERVER_PROCESS_INVALID_PATH: String
+      SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT: String
+      SERVER_PROCESS_PROCESS_READY_TIMEOUT: String
+      SERVER_PROCESS_CRASHED: String
+      SERVER_PROCESS_TERMINATED_UNHEALTHY: String
+      SERVER_PROCESS_FORCE_TERMINATED: String
+      SERVER_PROCESS_PROCESS_EXIT_TIMEOUT: String
+      SERVER_PROCESS_SDK_INITIALIZATION_FAILED: String
+      SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT: String
+      GAME_SESSION_ACTIVATION_TIMEOUT: String
+      FLEET_CREATION_EXTRACTING_BUILD: String
+      FLEET_CREATION_RUNNING_INSTALLER: String
+      FLEET_CREATION_VALIDATING_RUNTIME_CONFIG: String
+      FLEET_VPC_PEERING_SUCCEEDED: String
+      FLEET_VPC_PEERING_FAILED: String
+      FLEET_VPC_PEERING_DELETED: String
+      INSTANCE_INTERRUPTED: String
+      INSTANCE_RECYCLED: String
+      INSTANCE_REPLACED_UNHEALTHY: String
+      FLEET_CREATION_COMPLETED_INSTALLER: String
+      FLEET_CREATION_FAILED_INSTALLER: String
+      COMPUTE_LOG_UPLOAD_FAILED: String
+      GAME_SERVER_CONTAINER_GROUP_CRASHED: String
+      PER_INSTANCE_CONTAINER_GROUP_CRASHED: String
+      GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY: String
+      LOCATION_STATE_PENDING: String
+      LOCATION_STATE_CREATING: String
+      LOCATION_STATE_CREATED: String
+      LOCATION_STATE_ACTIVATING: String
+      LOCATION_STATE_ACTIVE: String
+      LOCATION_STATE_UPDATING: String
+      LOCATION_STATE_ERROR: String
+      LOCATION_STATE_DELETING: String
+      LOCATION_STATE_DELETED: String
+    end
+
+    class FilterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_locations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_locations: Array[String]?
+    end
+
+    module FilterInstanceStatus
+      ACTIVE: String
+      DRAINING: String
+    end
+
+    module FleetAction
+      AutoScaling: String
+    end
+
+    class FleetAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?fleet_type: String,
+        ?instance_type: String,
+        ?description: String,
+        ?name: String,
+        ?creation_time: Time,
+        ?termination_time: Time,
+        ?status: String,
+        ?build_id: String,
+        ?build_arn: String,
+        ?script_id: String,
+        ?script_arn: String,
+        ?server_launch_path: String,
+        ?server_launch_parameters: String,
+        ?log_paths: Array[String],
+        ?new_game_session_protection_policy: String,
+        ?operating_system: String,
+        ?resource_creation_limit_policy: Types::ResourceCreationLimitPolicy,
+        ?metric_groups: Array[String],
+        ?stopped_actions: Array[String],
+        ?instance_role_arn: String,
+        ?certificate_configuration: Types::CertificateConfiguration,
+        ?compute_type: String,
+        ?anywhere_configuration: Types::AnywhereConfiguration,
+        ?instance_role_credentials_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor fleet_type: String?
+      attr_accessor instance_type: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor termination_time: Time?
+      attr_accessor status: String?
+      attr_accessor build_id: String?
+      attr_accessor build_arn: String?
+      attr_accessor script_id: String?
+      attr_accessor script_arn: String?
+      attr_accessor server_launch_path: String?
+      attr_accessor server_launch_parameters: String?
+      attr_accessor log_paths: Array[String]?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor operating_system: String?
+      attr_accessor resource_creation_limit_policy: Types::ResourceCreationLimitPolicy?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor stopped_actions: Array[String]?
+      attr_accessor instance_role_arn: String?
+      attr_accessor certificate_configuration: Types::CertificateConfiguration?
+      attr_accessor compute_type: String?
+      attr_accessor anywhere_configuration: Types::AnywhereConfiguration?
+      attr_accessor instance_role_credentials_provider: String?
+    end
+
+    class FleetCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?instance_type: String,
+        ?instance_counts: Types::EC2InstanceCounts,
+        ?location: String,
+        ?game_server_container_group_counts: Types::GameServerContainerGroupCounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor instance_type: String?
+      attr_accessor instance_counts: Types::EC2InstanceCounts?
+      attr_accessor location: String?
+      attr_accessor game_server_container_group_counts: Types::GameServerContainerGroupCounts?
+    end
+
+    class FleetCapacityExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FleetDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?fleet_id: String,
+        ?game_server_binary_arn: String,
+        ?rollback_game_server_binary_arn: String,
+        ?per_instance_binary_arn: String,
+        ?rollback_per_instance_binary_arn: String,
+        ?deployment_status: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor game_server_binary_arn: String?
+      attr_accessor rollback_game_server_binary_arn: String?
+      attr_accessor per_instance_binary_arn: String?
+      attr_accessor rollback_per_instance_binary_arn: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor creation_time: Time?
+    end
+
+    module FleetStatus
+      NEW: String
+      DOWNLOADING: String
+      VALIDATING: String
+      BUILDING: String
+      ACTIVATING: String
+      ACTIVE: String
+      DELETING: String
+      ERROR: String
+      TERMINATED: String
+      NOT_FOUND: String
+    end
+
+    module FleetType
+      OnDemand: String
+      Spot: String
+    end
+
+    class FleetUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?active_server_process_count: Integer,
+        ?active_game_session_count: Integer,
+        ?current_player_session_count: Integer,
+        ?maximum_player_session_count: Integer,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor active_server_process_count: Integer?
+      attr_accessor active_game_session_count: Integer?
+      attr_accessor current_player_session_count: Integer?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor location: String?
+    end
+
+    module FlexMatchMode
+      STANDALONE: String
+      WITH_QUEUE: String
+    end
+
+    class GameProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class GameServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_group_arn: String,
+        ?game_server_id: String,
+        ?instance_id: String,
+        ?connection_info: String,
+        ?game_server_data: String,
+        ?claim_status: String,
+        ?utilization_status: String,
+        ?registration_time: Time,
+        ?last_claim_time: Time,
+        ?last_health_check_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_group_arn: String?
+      attr_accessor game_server_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor connection_info: String?
+      attr_accessor game_server_data: String?
+      attr_accessor claim_status: String?
+      attr_accessor utilization_status: String?
+      attr_accessor registration_time: Time?
+      attr_accessor last_claim_time: Time?
+      attr_accessor last_health_check_time: Time?
+    end
+
+    module GameServerClaimStatus
+      CLAIMED: String
+    end
+
+    class GameServerContainerDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?depends_on: Array[Types::ContainerDependency],
+        ?mount_points: Array[Types::ContainerMountPoint],
+        ?environment_override: Array[Types::ContainerEnvironment],
+        ?image_uri: String,
+        ?port_configuration: Types::ContainerPortConfiguration,
+        ?resolved_image_digest: String,
+        ?server_sdk_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor depends_on: Array[Types::ContainerDependency]?
+      attr_accessor mount_points: Array[Types::ContainerMountPoint]?
+      attr_accessor environment_override: Array[Types::ContainerEnvironment]?
+      attr_accessor image_uri: String?
+      attr_accessor port_configuration: Types::ContainerPortConfiguration?
+      attr_accessor resolved_image_digest: String?
+      attr_accessor server_sdk_version: String?
+    end
+
+    class GameServerContainerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?depends_on: Array[Types::ContainerDependency],
+        ?mount_points: Array[Types::ContainerMountPoint],
+        ?environment_override: Array[Types::ContainerEnvironment],
+        ?image_uri: String,
+        ?port_configuration: Types::ContainerPortConfiguration,
+        ?server_sdk_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor depends_on: Array[Types::ContainerDependency]?
+      attr_accessor mount_points: Array[Types::ContainerMountPoint]?
+      attr_accessor environment_override: Array[Types::ContainerEnvironment]?
+      attr_accessor image_uri: String?
+      attr_accessor port_configuration: Types::ContainerPortConfiguration?
+      attr_accessor server_sdk_version: String?
+    end
+
+    class GameServerContainerGroupCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?active: Integer,
+        ?idle: Integer,
+        ?terminating: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor active: Integer?
+      attr_accessor idle: Integer?
+      attr_accessor terminating: Integer?
+    end
+
+    class GameServerGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_group_arn: String,
+        ?role_arn: String,
+        ?instance_definitions: Array[Types::InstanceDefinition],
+        ?balancing_strategy: String,
+        ?game_server_protection_policy: String,
+        ?auto_scaling_group_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?suspended_actions: Array[String],
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_group_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor instance_definitions: Array[Types::InstanceDefinition]?
+      attr_accessor balancing_strategy: String?
+      attr_accessor game_server_protection_policy: String?
+      attr_accessor auto_scaling_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor suspended_actions: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    module GameServerGroupAction
+      REPLACE_INSTANCE_TYPES: String
+    end
+
+    class GameServerGroupAutoScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_instance_warmup: Integer,
+        ?target_tracking_configuration: Types::TargetTrackingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_instance_warmup: Integer?
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration?
+    end
+
+    module GameServerGroupDeleteOption
+      SAFE_DELETE: String
+      FORCE_DELETE: String
+      RETAIN: String
+    end
+
+    module GameServerGroupInstanceType
+      c4_large: String
+      c4_xlarge: String
+      c4_2xlarge: String
+      c4_4xlarge: String
+      c4_8xlarge: String
+      c5_large: String
+      c5_xlarge: String
+      c5_2xlarge: String
+      c5_4xlarge: String
+      c5_9xlarge: String
+      c5_12xlarge: String
+      c5_18xlarge: String
+      c5_24xlarge: String
+      c5a_large: String
+      c5a_xlarge: String
+      c5a_2xlarge: String
+      c5a_4xlarge: String
+      c5a_8xlarge: String
+      c5a_12xlarge: String
+      c5a_16xlarge: String
+      c5a_24xlarge: String
+      c6g_medium: String
+      c6g_large: String
+      c6g_xlarge: String
+      c6g_2xlarge: String
+      c6g_4xlarge: String
+      c6g_8xlarge: String
+      c6g_12xlarge: String
+      c6g_16xlarge: String
+      r4_large: String
+      r4_xlarge: String
+      r4_2xlarge: String
+      r4_4xlarge: String
+      r4_8xlarge: String
+      r4_16xlarge: String
+      r5_large: String
+      r5_xlarge: String
+      r5_2xlarge: String
+      r5_4xlarge: String
+      r5_8xlarge: String
+      r5_12xlarge: String
+      r5_16xlarge: String
+      r5_24xlarge: String
+      r5a_large: String
+      r5a_xlarge: String
+      r5a_2xlarge: String
+      r5a_4xlarge: String
+      r5a_8xlarge: String
+      r5a_12xlarge: String
+      r5a_16xlarge: String
+      r5a_24xlarge: String
+      r6g_medium: String
+      r6g_large: String
+      r6g_xlarge: String
+      r6g_2xlarge: String
+      r6g_4xlarge: String
+      r6g_8xlarge: String
+      r6g_12xlarge: String
+      r6g_16xlarge: String
+      m4_large: String
+      m4_xlarge: String
+      m4_2xlarge: String
+      m4_4xlarge: String
+      m4_10xlarge: String
+      m5_large: String
+      m5_xlarge: String
+      m5_2xlarge: String
+      m5_4xlarge: String
+      m5_8xlarge: String
+      m5_12xlarge: String
+      m5_16xlarge: String
+      m5_24xlarge: String
+      m5a_large: String
+      m5a_xlarge: String
+      m5a_2xlarge: String
+      m5a_4xlarge: String
+      m5a_8xlarge: String
+      m5a_12xlarge: String
+      m5a_16xlarge: String
+      m5a_24xlarge: String
+      m6g_medium: String
+      m6g_large: String
+      m6g_xlarge: String
+      m6g_2xlarge: String
+      m6g_4xlarge: String
+      m6g_8xlarge: String
+      m6g_12xlarge: String
+      m6g_16xlarge: String
+    end
+
+    module GameServerGroupStatus
+      NEW: String
+      ACTIVATING: String
+      ACTIVE: String
+      DELETE_SCHEDULED: String
+      DELETING: String
+      DELETED: String
+      ERROR: String
+    end
+
+    module GameServerHealthCheck
+      HEALTHY: String
+    end
+
+    class GameServerInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_group_arn: String,
+        ?instance_id: String,
+        ?instance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_group_arn: String?
+      attr_accessor instance_id: String?
+      attr_accessor instance_status: String?
+    end
+
+    module GameServerInstanceStatus
+      ACTIVE: String
+      DRAINING: String
+      SPOT_TERMINATING: String
+    end
+
+    module GameServerProtectionPolicy
+      NO_PROTECTION: String
+      FULL_PROTECTION: String
+    end
+
+    module GameServerUtilizationStatus
+      AVAILABLE: String
+      UTILIZED: String
+    end
+
+    class GameSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?name: String,
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?creation_time: Time,
+        ?termination_time: Time,
+        ?current_player_session_count: Integer,
+        ?maximum_player_session_count: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?ip_address: String,
+        ?dns_name: String,
+        ?port: Integer,
+        ?player_session_creation_policy: String,
+        ?creator_id: String,
+        ?game_session_data: String,
+        ?matchmaker_data: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor name: String?
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor termination_time: Time?
+      attr_accessor current_player_session_count: Integer?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor port: Integer?
+      attr_accessor player_session_creation_policy: String?
+      attr_accessor creator_id: String?
+      attr_accessor game_session_data: String?
+      attr_accessor matchmaker_data: String?
+      attr_accessor location: String?
+    end
+
+    class GameSessionConnectionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_arn: String,
+        ?ip_address: String,
+        ?dns_name: String,
+        ?port: Integer,
+        ?matched_player_sessions: Array[Types::MatchedPlayerSession],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_arn: String?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor port: Integer?
+      attr_accessor matched_player_sessions: Array[Types::MatchedPlayerSession]?
+    end
+
+    class GameSessionCreationLimitPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_game_sessions_per_creator: Integer,
+        ?policy_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_game_sessions_per_creator: Integer?
+      attr_accessor policy_period_in_minutes: Integer?
+    end
+
+    class GameSessionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session: Types::GameSession,
+        ?protection_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session: Types::GameSession?
+      attr_accessor protection_policy: String?
+    end
+
+    class GameSessionFullException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GameSessionPlacement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?placement_id: String,
+        ?game_session_queue_name: String,
+        ?status: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?maximum_player_session_count: Integer,
+        ?game_session_name: String,
+        ?game_session_id: String,
+        ?game_session_arn: String,
+        ?game_session_region: String,
+        ?player_latencies: Array[Types::PlayerLatency],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?ip_address: String,
+        ?dns_name: String,
+        ?port: Integer,
+        ?placed_player_sessions: Array[Types::PlacedPlayerSession],
+        ?game_session_data: String,
+        ?matchmaker_data: String,
+        ?priority_configuration_override: Types::PriorityConfigurationOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor placement_id: String?
+      attr_accessor game_session_queue_name: String?
+      attr_accessor status: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor game_session_name: String?
+      attr_accessor game_session_id: String?
+      attr_accessor game_session_arn: String?
+      attr_accessor game_session_region: String?
+      attr_accessor player_latencies: Array[Types::PlayerLatency]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor port: Integer?
+      attr_accessor placed_player_sessions: Array[Types::PlacedPlayerSession]?
+      attr_accessor game_session_data: String?
+      attr_accessor matchmaker_data: String?
+      attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride?
+    end
+
+    module GameSessionPlacementState
+      PENDING: String
+      FULFILLED: String
+      CANCELLED: String
+      TIMED_OUT: String
+      FAILED: String
+    end
+
+    class GameSessionQueue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?game_session_queue_arn: String,
+        ?timeout_in_seconds: Integer,
+        ?player_latency_policies: Array[Types::PlayerLatencyPolicy],
+        ?destinations: Array[Types::GameSessionQueueDestination],
+        ?filter_configuration: Types::FilterConfiguration,
+        ?priority_configuration: Types::PriorityConfiguration,
+        ?custom_event_data: String,
+        ?notification_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor game_session_queue_arn: String?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor player_latency_policies: Array[Types::PlayerLatencyPolicy]?
+      attr_accessor destinations: Array[Types::GameSessionQueueDestination]?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor priority_configuration: Types::PriorityConfiguration?
+      attr_accessor custom_event_data: String?
+      attr_accessor notification_target: String?
+    end
+
+    class GameSessionQueueDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_arn: String?
+    end
+
+    module GameSessionStatus
+      ACTIVE: String
+      ACTIVATING: String
+      TERMINATED: String
+      TERMINATING: String
+      ERROR: String
+    end
+
+    module GameSessionStatusReason
+      INTERRUPTED: String
+      TRIGGERED_ON_PROCESS_TERMINATE: String
+      FORCE_TERMINATED: String
+    end
+
+    class GetComputeAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?compute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor compute_name: String?
+    end
+
+    class GetComputeAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?compute_name: String,
+        ?compute_arn: String,
+        ?credentials: Types::AwsCredentials,
+        ?target: String,
+        ?container_identifiers: Array[Types::ContainerIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor compute_name: String?
+      attr_accessor compute_arn: String?
+      attr_accessor credentials: Types::AwsCredentials?
+      attr_accessor target: String?
+      attr_accessor container_identifiers: Array[Types::ContainerIdentifier]?
+    end
+
+    class GetComputeAuthTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?compute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor compute_name: String?
+    end
+
+    class GetComputeAuthTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?compute_name: String,
+        ?compute_arn: String,
+        ?auth_token: String,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor compute_name: String?
+      attr_accessor compute_arn: String?
+      attr_accessor auth_token: String?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class GetGameSessionLogUrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+    end
+
+    class GetGameSessionLogUrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pre_signed_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pre_signed_url: String?
+    end
+
+    class GetInstanceAccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor instance_id: String?
+    end
+
+    class GetInstanceAccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_access: Types::InstanceAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_access: Types::InstanceAccess?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?instance_id: String,
+        ?ip_address: String,
+        ?dns_name: String,
+        ?operating_system: String,
+        ?type: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor instance_id: String?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor operating_system: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor location: String?
+    end
+
+    class InstanceAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?instance_id: String,
+        ?ip_address: String,
+        ?operating_system: String,
+        ?credentials: Types::InstanceCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor ip_address: String?
+      attr_accessor operating_system: String?
+      attr_accessor credentials: Types::InstanceCredentials?
+    end
+
+    class InstanceCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor secret: String?
+    end
+
+    class InstanceDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?weighted_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor weighted_capacity: String?
+    end
+
+    module InstanceRoleCredentialsProvider
+      SHARED_CREDENTIAL_FILE: String
+    end
+
+    module InstanceStatus
+      PENDING: String
+      ACTIVE: String
+      TERMINATING: String
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFleetStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGameSessionStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IpPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+        ?ip_range: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+      attr_accessor ip_range: String?
+      attr_accessor protocol: String?
+    end
+
+    module IpProtocol
+      TCP: String
+      UDP: String
+    end
+
+    class LaunchTemplateSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template_id: String,
+        ?launch_template_name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template_id: String?
+      attr_accessor launch_template_name: String?
+      attr_accessor version: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAliasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_strategy_type: String,
+        ?name: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_strategy_type: String?
+      attr_accessor name: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAliasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::Alias],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::Alias]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBuildsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?builds: Array[Types::Build],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor builds: Array[Types::Build]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComputeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?location: String,
+        ?container_group_definition_name: String,
+        ?compute_status: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor location: String?
+      attr_accessor container_group_definition_name: String?
+      attr_accessor compute_status: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    module ListComputeInputStatus
+      ACTIVE: String
+      IMPAIRED: String
+    end
+
+    class ListComputeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_list: Array[Types::Compute],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_list: Array[Types::Compute]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definition_name: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definition_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_fleets: Array[Types::ContainerFleet],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_fleets: Array[Types::ContainerFleet]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerGroupDefinitionVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerGroupDefinitionVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definitions: Array[Types::ContainerGroupDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definitions: Array[Types::ContainerGroupDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerGroupDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_type: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_type: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerGroupDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definitions: Array[Types::ContainerGroupDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definitions: Array[Types::ContainerGroupDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_deployments: Array[Types::FleetDeployment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_deployments: Array[Types::FleetDeployment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+        ?script_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+      attr_accessor script_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGameServerGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGameServerGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_groups: Array[Types::GameServerGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_groups: Array[Types::GameServerGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGameServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?sort_order: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor sort_order: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGameServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_servers: Array[Types::GameServer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_servers: Array[Types::GameServer]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locations: Array[Types::LocationModel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locations: Array[Types::LocationModel]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScriptsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScriptsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scripts: Array[Types::Script],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scripts: Array[Types::Script]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LocationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_state: Types::LocationState,
+        ?stopped_actions: Array[String],
+        ?update_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_state: Types::LocationState?
+      attr_accessor stopped_actions: Array[String]?
+      attr_accessor update_status: String?
+    end
+
+    class LocationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    module LocationFilter
+      AWS: String
+      CUSTOM: String
+    end
+
+    class LocationModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_name: String,
+        ?location_arn: String,
+        ?ping_beacon: Types::PingBeacon,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_name: String?
+      attr_accessor location_arn: String?
+      attr_accessor ping_beacon: Types::PingBeacon?
+    end
+
+    class LocationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor status: String?
+    end
+
+    module LocationUpdateStatus
+      PENDING_UPDATE: String
+    end
+
+    class LocationalDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_status: String?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_destination: String,
+        ?s3_bucket_name: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_destination: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    module LogDestination
+      NONE: String
+      CLOUDWATCH: String
+      S3: String
+    end
+
+    class MatchedPlayerSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?player_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor player_session_id: String?
+    end
+
+    class MatchmakingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration_arn: String,
+        ?description: String,
+        ?game_session_queue_arns: Array[String],
+        ?request_timeout_seconds: Integer,
+        ?acceptance_timeout_seconds: Integer,
+        ?acceptance_required: bool,
+        ?rule_set_name: String,
+        ?rule_set_arn: String,
+        ?notification_target: String,
+        ?additional_player_count: Integer,
+        ?custom_event_data: String,
+        ?creation_time: Time,
+        ?game_properties: Array[Types::GameProperty],
+        ?game_session_data: String,
+        ?backfill_mode: String,
+        ?flex_match_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration_arn: String?
+      attr_accessor description: String?
+      attr_accessor game_session_queue_arns: Array[String]?
+      attr_accessor request_timeout_seconds: Integer?
+      attr_accessor acceptance_timeout_seconds: Integer?
+      attr_accessor acceptance_required: bool?
+      attr_accessor rule_set_name: String?
+      attr_accessor rule_set_arn: String?
+      attr_accessor notification_target: String?
+      attr_accessor additional_player_count: Integer?
+      attr_accessor custom_event_data: String?
+      attr_accessor creation_time: Time?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor game_session_data: String?
+      attr_accessor backfill_mode: String?
+      attr_accessor flex_match_mode: String?
+    end
+
+    module MatchmakingConfigurationStatus
+      CANCELLED: String
+      COMPLETED: String
+      FAILED: String
+      PLACING: String
+      QUEUED: String
+      REQUIRES_ACCEPTANCE: String
+      SEARCHING: String
+      TIMED_OUT: String
+    end
+
+    class MatchmakingRuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_name: String,
+        ?rule_set_arn: String,
+        ?rule_set_body: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_name: String?
+      attr_accessor rule_set_arn: String?
+      attr_accessor rule_set_body: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class MatchmakingTicket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_id: String,
+        ?configuration_name: String,
+        ?configuration_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?status_message: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?players: Array[Types::Player],
+        ?game_session_connection_info: Types::GameSessionConnectionInfo,
+        ?estimated_wait_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_id: String?
+      attr_accessor configuration_name: String?
+      attr_accessor configuration_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor status_message: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor players: Array[Types::Player]?
+      attr_accessor game_session_connection_info: Types::GameSessionConnectionInfo?
+      attr_accessor estimated_wait_time: Integer?
+    end
+
+    module MetricName
+      ActivatingGameSessions: String
+      ActiveGameSessions: String
+      ActiveInstances: String
+      AvailableGameSessions: String
+      AvailablePlayerSessions: String
+      CurrentPlayerSessions: String
+      IdleInstances: String
+      PercentAvailableGameSessions: String
+      PercentIdleInstances: String
+      QueueDepth: String
+      WaitTime: String
+      ConcurrentActivatableGameSessions: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OperatingSystem
+      WINDOWS_2012: String
+      AMAZON_LINUX: String
+      AMAZON_LINUX_2: String
+      WINDOWS_2016: String
+      AMAZON_LINUX_2023: String
+    end
+
+    class OutOfCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PingBeacon
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?udp_endpoint: Types::UDPEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor udp_endpoint: Types::UDPEndpoint?
+    end
+
+    class PlacedPlayerSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?player_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor player_session_id: String?
+    end
+
+    module PlacementFallbackStrategy
+      DEFAULT_AFTER_SINGLE_PASS: String
+      NONE: String
+    end
+
+    class Player
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?player_attributes: Hash[String, Types::AttributeValue],
+        ?team: String,
+        ?latency_in_ms: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor player_attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor team: String?
+      attr_accessor latency_in_ms: Hash[String, Integer]?
+    end
+
+    class PlayerLatency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?region_identifier: String,
+        ?latency_in_milliseconds: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor region_identifier: String?
+      attr_accessor latency_in_milliseconds: Float?
+    end
+
+    class PlayerLatencyPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_individual_player_latency_milliseconds: Integer,
+        ?policy_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_individual_player_latency_milliseconds: Integer?
+      attr_accessor policy_duration_seconds: Integer?
+    end
+
+    class PlayerSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_session_id: String,
+        ?player_id: String,
+        ?game_session_id: String,
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?creation_time: Time,
+        ?termination_time: Time,
+        ?status: String,
+        ?ip_address: String,
+        ?dns_name: String,
+        ?port: Integer,
+        ?player_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_session_id: String?
+      attr_accessor player_id: String?
+      attr_accessor game_session_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor termination_time: Time?
+      attr_accessor status: String?
+      attr_accessor ip_address: String?
+      attr_accessor dns_name: String?
+      attr_accessor port: Integer?
+      attr_accessor player_data: String?
+    end
+
+    module PlayerSessionCreationPolicy
+      ACCEPT_ALL: String
+      DENY_ALL: String
+    end
+
+    module PlayerSessionStatus
+      RESERVED: String
+      ACTIVE: String
+      COMPLETED: String
+      TIMEDOUT: String
+    end
+
+    module PolicyType
+      RuleBased: String
+      TargetBased: String
+    end
+
+    class PriorityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority_order: Array[String],
+        ?location_order: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority_order: Array[String]?
+      attr_accessor location_order: Array[String]?
+    end
+
+    class PriorityConfigurationOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?placement_fallback_strategy: String,
+        ?location_order: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor placement_fallback_strategy: String?
+      attr_accessor location_order: Array[String]?
+    end
+
+    module PriorityType
+      LATENCY: String
+      COST: String
+      DESTINATION: String
+      LOCATION: String
+    end
+
+    module ProtectionPolicy
+      NoProtection: String
+      FullProtection: String
+    end
+
+    class PutScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fleet_id: String,
+        ?scaling_adjustment: Integer,
+        ?scaling_adjustment_type: String,
+        ?threshold: Float,
+        ?comparison_operator: String,
+        ?evaluation_periods: Integer,
+        ?metric_name: String,
+        ?policy_type: String,
+        ?target_configuration: Types::TargetConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fleet_id: String?
+      attr_accessor scaling_adjustment: Integer?
+      attr_accessor scaling_adjustment_type: String?
+      attr_accessor threshold: Float?
+      attr_accessor comparison_operator: String?
+      attr_accessor evaluation_periods: Integer?
+      attr_accessor metric_name: String?
+      attr_accessor policy_type: String?
+      attr_accessor target_configuration: Types::TargetConfiguration?
+    end
+
+    class PutScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class RegisterComputeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?compute_name: String,
+        ?certificate_path: String,
+        ?dns_name: String,
+        ?ip_address: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor compute_name: String?
+      attr_accessor certificate_path: String?
+      attr_accessor dns_name: String?
+      attr_accessor ip_address: String?
+      attr_accessor location: String?
+    end
+
+    class RegisterComputeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute: Types::Compute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute: Types::Compute?
+    end
+
+    class RegisterGameServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_id: String,
+        ?instance_id: String,
+        ?connection_info: String,
+        ?game_server_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor connection_info: String?
+      attr_accessor game_server_data: String?
+    end
+
+    class RegisterGameServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server: Types::GameServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server: Types::GameServer?
+    end
+
+    class RequestUploadCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+    end
+
+    class RequestUploadCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_credentials: Types::AwsCredentials,
+        ?storage_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_credentials: Types::AwsCredentials?
+      attr_accessor storage_location: Types::S3Location?
+    end
+
+    class ResolveAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class ResolveAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+    end
+
+    class ResourceCreationLimitPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_game_sessions_per_creator: Integer,
+        ?policy_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_game_sessions_per_creator: Integer?
+      attr_accessor policy_period_in_minutes: Integer?
+    end
+
+    class ResumeGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?resume_actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor resume_actions: Array[String]?
+    end
+
+    class ResumeGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class RoutingStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?fleet_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor fleet_id: String?
+      attr_accessor message: String?
+    end
+
+    module RoutingStrategyType
+      SIMPLE: String
+      TERMINAL: String
+    end
+
+    class RuntimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_processes: Array[Types::ServerProcess],
+        ?max_concurrent_game_session_activations: Integer,
+        ?game_session_activation_timeout_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_processes: Array[Types::ServerProcess]?
+      attr_accessor max_concurrent_game_session_activations: Integer?
+      attr_accessor game_session_activation_timeout_seconds: Integer?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?role_arn: String,
+        ?object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor role_arn: String?
+      attr_accessor object_version: String?
+    end
+
+    module ScalingAdjustmentType
+      ChangeInCapacity: String
+      ExactCapacity: String
+      PercentChangeInCapacity: String
+    end
+
+    class ScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?name: String,
+        ?status: String,
+        ?scaling_adjustment: Integer,
+        ?scaling_adjustment_type: String,
+        ?comparison_operator: String,
+        ?threshold: Float,
+        ?evaluation_periods: Integer,
+        ?metric_name: String,
+        ?policy_type: String,
+        ?target_configuration: Types::TargetConfiguration,
+        ?update_status: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor scaling_adjustment: Integer?
+      attr_accessor scaling_adjustment_type: String?
+      attr_accessor comparison_operator: String?
+      attr_accessor threshold: Float?
+      attr_accessor evaluation_periods: Integer?
+      attr_accessor metric_name: String?
+      attr_accessor policy_type: String?
+      attr_accessor target_configuration: Types::TargetConfiguration?
+      attr_accessor update_status: String?
+      attr_accessor location: String?
+    end
+
+    module ScalingStatusType
+      ACTIVE: String
+      UPDATE_REQUESTED: String
+      UPDATING: String
+      DELETE_REQUESTED: String
+      DELETING: String
+      DELETED: String
+      ERROR: String
+    end
+
+    class Script
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_id: String,
+        ?script_arn: String,
+        ?name: String,
+        ?version: String,
+        ?size_on_disk: Integer,
+        ?creation_time: Time,
+        ?storage_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_id: String?
+      attr_accessor script_arn: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor size_on_disk: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor storage_location: Types::S3Location?
+    end
+
+    class SearchGameSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?alias_id: String,
+        ?location: String,
+        ?filter_expression: String,
+        ?sort_expression: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor alias_id: String?
+      attr_accessor location: String?
+      attr_accessor filter_expression: String?
+      attr_accessor sort_expression: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchGameSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_sessions: Array[Types::GameSession],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_sessions: Array[Types::GameSession]?
+      attr_accessor next_token: String?
+    end
+
+    class ServerProcess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_path: String,
+        ?parameters: String,
+        ?concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_path: String?
+      attr_accessor parameters: String?
+      attr_accessor concurrent_executions: Integer?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartFleetActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?actions: Array[String],
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor actions: Array[String]?
+      attr_accessor location: String?
+    end
+
+    class StartFleetActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+    end
+
+    class StartGameSessionPlacementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?placement_id: String,
+        ?game_session_queue_name: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?maximum_player_session_count: Integer,
+        ?game_session_name: String,
+        ?player_latencies: Array[Types::PlayerLatency],
+        ?desired_player_sessions: Array[Types::DesiredPlayerSession],
+        ?game_session_data: String,
+        ?priority_configuration_override: Types::PriorityConfigurationOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor placement_id: String?
+      attr_accessor game_session_queue_name: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor game_session_name: String?
+      attr_accessor player_latencies: Array[Types::PlayerLatency]?
+      attr_accessor desired_player_sessions: Array[Types::DesiredPlayerSession]?
+      attr_accessor game_session_data: String?
+      attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride?
+    end
+
+    class StartGameSessionPlacementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_placement: Types::GameSessionPlacement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_placement: Types::GameSessionPlacement?
+    end
+
+    class StartMatchBackfillInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_id: String,
+        ?configuration_name: String,
+        ?game_session_arn: String,
+        ?players: Array[Types::Player],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_id: String?
+      attr_accessor configuration_name: String?
+      attr_accessor game_session_arn: String?
+      attr_accessor players: Array[Types::Player]?
+    end
+
+    class StartMatchBackfillOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matchmaking_ticket: Types::MatchmakingTicket,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matchmaking_ticket: Types::MatchmakingTicket?
+    end
+
+    class StartMatchmakingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_id: String,
+        ?configuration_name: String,
+        ?players: Array[Types::Player],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_id: String?
+      attr_accessor configuration_name: String?
+      attr_accessor players: Array[Types::Player]?
+    end
+
+    class StartMatchmakingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matchmaking_ticket: Types::MatchmakingTicket,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matchmaking_ticket: Types::MatchmakingTicket?
+    end
+
+    class StopFleetActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?actions: Array[String],
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor actions: Array[String]?
+      attr_accessor location: String?
+    end
+
+    class StopFleetActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+    end
+
+    class StopGameSessionPlacementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?placement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor placement_id: String?
+    end
+
+    class StopGameSessionPlacementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_placement: Types::GameSessionPlacement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_placement: Types::GameSessionPlacement?
+    end
+
+    class StopMatchmakingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ticket_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ticket_id: String?
+    end
+
+    class StopMatchmakingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SupportContainerDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?depends_on: Array[Types::ContainerDependency],
+        ?mount_points: Array[Types::ContainerMountPoint],
+        ?environment_override: Array[Types::ContainerEnvironment],
+        ?essential: bool,
+        ?health_check: Types::ContainerHealthCheck,
+        ?image_uri: String,
+        ?memory_hard_limit_mebibytes: Integer,
+        ?port_configuration: Types::ContainerPortConfiguration,
+        ?resolved_image_digest: String,
+        ?vcpu: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor depends_on: Array[Types::ContainerDependency]?
+      attr_accessor mount_points: Array[Types::ContainerMountPoint]?
+      attr_accessor environment_override: Array[Types::ContainerEnvironment]?
+      attr_accessor essential: bool?
+      attr_accessor health_check: Types::ContainerHealthCheck?
+      attr_accessor image_uri: String?
+      attr_accessor memory_hard_limit_mebibytes: Integer?
+      attr_accessor port_configuration: Types::ContainerPortConfiguration?
+      attr_accessor resolved_image_digest: String?
+      attr_accessor vcpu: Float?
+    end
+
+    class SupportContainerDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?depends_on: Array[Types::ContainerDependency],
+        ?mount_points: Array[Types::ContainerMountPoint],
+        ?environment_override: Array[Types::ContainerEnvironment],
+        ?essential: bool,
+        ?health_check: Types::ContainerHealthCheck,
+        ?image_uri: String,
+        ?memory_hard_limit_mebibytes: Integer,
+        ?port_configuration: Types::ContainerPortConfiguration,
+        ?vcpu: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor depends_on: Array[Types::ContainerDependency]?
+      attr_accessor mount_points: Array[Types::ContainerMountPoint]?
+      attr_accessor environment_override: Array[Types::ContainerEnvironment]?
+      attr_accessor essential: bool?
+      attr_accessor health_check: Types::ContainerHealthCheck?
+      attr_accessor image_uri: String?
+      attr_accessor memory_hard_limit_mebibytes: Integer?
+      attr_accessor port_configuration: Types::ContainerPortConfiguration?
+      attr_accessor vcpu: Float?
+    end
+
+    class SuspendGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?suspend_actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor suspend_actions: Array[String]?
+    end
+
+    class SuspendGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaggingFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TargetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_value: Float?
+    end
+
+    class TargetTrackingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_value: Float?
+    end
+
+    class TerminalRoutingStrategyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TerminateGameSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?termination_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor termination_mode: String?
+    end
+
+    class TerminateGameSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session: Types::GameSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session: Types::GameSession?
+    end
+
+    module TerminationMode
+      TRIGGER_ON_PROCESS_TERMINATE: String
+      FORCE_TERMINATE: String
+    end
+
+    class UDPEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor port: Integer?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?name: String,
+        ?description: String,
+        ?routing_strategy: Types::RoutingStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor routing_strategy: Types::RoutingStrategy?
+    end
+
+    class UpdateAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: Types::Alias,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: Types::Alias?
+    end
+
+    class UpdateBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build_id: String,
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build_id: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class UpdateBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?build: Types::Build,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor build: Types::Build?
+    end
+
+    class UpdateContainerFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?game_server_container_group_definition_name: String,
+        ?per_instance_container_group_definition_name: String,
+        ?game_server_container_groups_per_instance: Integer,
+        ?instance_connection_port_range: Types::ConnectionPortRange,
+        ?instance_inbound_permission_authorizations: Array[Types::IpPermission],
+        ?instance_inbound_permission_revocations: Array[Types::IpPermission],
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?description: String,
+        ?metric_groups: Array[String],
+        ?new_game_session_protection_policy: String,
+        ?game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy,
+        ?log_configuration: Types::LogConfiguration,
+        ?remove_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor game_server_container_group_definition_name: String?
+      attr_accessor per_instance_container_group_definition_name: String?
+      attr_accessor game_server_container_groups_per_instance: Integer?
+      attr_accessor instance_connection_port_range: Types::ConnectionPortRange?
+      attr_accessor instance_inbound_permission_authorizations: Array[Types::IpPermission]?
+      attr_accessor instance_inbound_permission_revocations: Array[Types::IpPermission]?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor description: String?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor remove_attributes: Array[String]?
+    end
+
+    class UpdateContainerFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_fleet: Types::ContainerFleet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_fleet: Types::ContainerFleet?
+    end
+
+    class UpdateContainerGroupDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?game_server_container_definition: Types::GameServerContainerDefinitionInput,
+        ?support_container_definitions: Array[Types::SupportContainerDefinitionInput],
+        ?total_memory_limit_mebibytes: Integer,
+        ?total_vcpu_limit: Float,
+        ?version_description: String,
+        ?source_version_number: Integer,
+        ?operating_system: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor game_server_container_definition: Types::GameServerContainerDefinitionInput?
+      attr_accessor support_container_definitions: Array[Types::SupportContainerDefinitionInput]?
+      attr_accessor total_memory_limit_mebibytes: Integer?
+      attr_accessor total_vcpu_limit: Float?
+      attr_accessor version_description: String?
+      attr_accessor source_version_number: Integer?
+      attr_accessor operating_system: String?
+    end
+
+    class UpdateContainerGroupDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_group_definition: Types::ContainerGroupDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_group_definition: Types::ContainerGroupDefinition?
+    end
+
+    class UpdateFleetAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?name: String,
+        ?description: String,
+        ?new_game_session_protection_policy: String,
+        ?resource_creation_limit_policy: Types::ResourceCreationLimitPolicy,
+        ?metric_groups: Array[String],
+        ?anywhere_configuration: Types::AnywhereConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor new_game_session_protection_policy: String?
+      attr_accessor resource_creation_limit_policy: Types::ResourceCreationLimitPolicy?
+      attr_accessor metric_groups: Array[String]?
+      attr_accessor anywhere_configuration: Types::AnywhereConfiguration?
+    end
+
+    class UpdateFleetAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+    end
+
+    class UpdateFleetCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?desired_instances: Integer,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor desired_instances: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor location: String?
+    end
+
+    class UpdateFleetCapacityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor location: String?
+    end
+
+    class UpdateFleetPortSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?inbound_permission_authorizations: Array[Types::IpPermission],
+        ?inbound_permission_revocations: Array[Types::IpPermission],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor inbound_permission_authorizations: Array[Types::IpPermission]?
+      attr_accessor inbound_permission_revocations: Array[Types::IpPermission]?
+    end
+
+    class UpdateFleetPortSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+    end
+
+    class UpdateGameServerGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?role_arn: String,
+        ?instance_definitions: Array[Types::InstanceDefinition],
+        ?game_server_protection_policy: String,
+        ?balancing_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor instance_definitions: Array[Types::InstanceDefinition]?
+      attr_accessor game_server_protection_policy: String?
+      attr_accessor balancing_strategy: String?
+    end
+
+    class UpdateGameServerGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group: Types::GameServerGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group: Types::GameServerGroup?
+    end
+
+    class UpdateGameServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_group_name: String,
+        ?game_server_id: String,
+        ?game_server_data: String,
+        ?utilization_status: String,
+        ?health_check: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_group_name: String?
+      attr_accessor game_server_id: String?
+      attr_accessor game_server_data: String?
+      attr_accessor utilization_status: String?
+      attr_accessor health_check: String?
+    end
+
+    class UpdateGameServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server: Types::GameServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server: Types::GameServer?
+    end
+
+    class UpdateGameSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?maximum_player_session_count: Integer,
+        ?name: String,
+        ?player_session_creation_policy: String,
+        ?protection_policy: String,
+        ?game_properties: Array[Types::GameProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor maximum_player_session_count: Integer?
+      attr_accessor name: String?
+      attr_accessor player_session_creation_policy: String?
+      attr_accessor protection_policy: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+    end
+
+    class UpdateGameSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session: Types::GameSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session: Types::GameSession?
+    end
+
+    class UpdateGameSessionQueueInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?timeout_in_seconds: Integer,
+        ?player_latency_policies: Array[Types::PlayerLatencyPolicy],
+        ?destinations: Array[Types::GameSessionQueueDestination],
+        ?filter_configuration: Types::FilterConfiguration,
+        ?priority_configuration: Types::PriorityConfiguration,
+        ?custom_event_data: String,
+        ?notification_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor player_latency_policies: Array[Types::PlayerLatencyPolicy]?
+      attr_accessor destinations: Array[Types::GameSessionQueueDestination]?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor priority_configuration: Types::PriorityConfiguration?
+      attr_accessor custom_event_data: String?
+      attr_accessor notification_target: String?
+    end
+
+    class UpdateGameSessionQueueOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_queue: Types::GameSessionQueue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_queue: Types::GameSessionQueue?
+    end
+
+    class UpdateMatchmakingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?game_session_queue_arns: Array[String],
+        ?request_timeout_seconds: Integer,
+        ?acceptance_timeout_seconds: Integer,
+        ?acceptance_required: bool,
+        ?rule_set_name: String,
+        ?notification_target: String,
+        ?additional_player_count: Integer,
+        ?custom_event_data: String,
+        ?game_properties: Array[Types::GameProperty],
+        ?game_session_data: String,
+        ?backfill_mode: String,
+        ?flex_match_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor game_session_queue_arns: Array[String]?
+      attr_accessor request_timeout_seconds: Integer?
+      attr_accessor acceptance_timeout_seconds: Integer?
+      attr_accessor acceptance_required: bool?
+      attr_accessor rule_set_name: String?
+      attr_accessor notification_target: String?
+      attr_accessor additional_player_count: Integer?
+      attr_accessor custom_event_data: String?
+      attr_accessor game_properties: Array[Types::GameProperty]?
+      attr_accessor game_session_data: String?
+      attr_accessor backfill_mode: String?
+      attr_accessor flex_match_mode: String?
+    end
+
+    class UpdateMatchmakingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::MatchmakingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::MatchmakingConfiguration?
+    end
+
+    class UpdateRuntimeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?runtime_configuration: Types::RuntimeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration?
+    end
+
+    class UpdateRuntimeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_configuration: Types::RuntimeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration?
+    end
+
+    class UpdateScriptInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_id: String,
+        ?name: String,
+        ?version: String,
+        ?storage_location: Types::S3Location,
+        ?zip_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_id: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor storage_location: Types::S3Location?
+      attr_accessor zip_file: String?
+    end
+
+    class UpdateScriptOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script: Types::Script,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script: Types::Script?
+    end
+
+    class ValidateMatchmakingRuleSetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_body: String?
+    end
+
+    class ValidateMatchmakingRuleSetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?valid: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor valid: bool?
+    end
+
+    class VpcPeeringAuthorization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_lift_aws_account_id: String,
+        ?peer_vpc_aws_account_id: String,
+        ?peer_vpc_id: String,
+        ?creation_time: Time,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_lift_aws_account_id: String?
+      attr_accessor peer_vpc_aws_account_id: String?
+      attr_accessor peer_vpc_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor expiration_time: Time?
+    end
+
+    class VpcPeeringConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?ip_v4_cidr_block: String,
+        ?vpc_peering_connection_id: String,
+        ?status: Types::VpcPeeringConnectionStatus,
+        ?peer_vpc_id: String,
+        ?game_lift_vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor ip_v4_cidr_block: String?
+      attr_accessor vpc_peering_connection_id: String?
+      attr_accessor status: Types::VpcPeeringConnectionStatus?
+      attr_accessor peer_vpc_id: String?
+      attr_accessor game_lift_vpc_id: String?
+    end
+
+    class VpcPeeringConnectionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+  end
+end

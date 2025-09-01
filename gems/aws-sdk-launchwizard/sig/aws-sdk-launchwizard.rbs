@@ -1,0 +1,5 @@
+  module Aws
+    module LaunchWizard
+      VERSION: String
+    end
+  end

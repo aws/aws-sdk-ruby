@@ -1,0 +1,376 @@
+module Aws::VoiceID
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::VoiceID::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateFraudsterResponse
+      include Smithy::Client::_Response[Types::AssociateFraudsterOutput]
+      def fraudster: () -> Types::Fraudster?
+    end
+    def associate_fraudster: (
+      ?domain_id: String,
+      ?watchlist_id: String,
+      ?fraudster_id: String
+    ) -> _AssociateFraudsterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFraudsterResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def create_domain: (
+      ?name: String,
+      ?description: String,
+      ?server_side_encryption_configuration: {
+        kms_key_id: String
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateWatchlistResponse
+      include Smithy::Client::_Response[Types::CreateWatchlistOutput]
+      def watchlist: () -> Types::Watchlist?
+    end
+    def create_watchlist: (
+      ?domain_id: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateWatchlistResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWatchlistResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_domain: (
+      ?domain_id: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteFraudsterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_fraudster: (
+      ?domain_id: String,
+      ?fraudster_id: String
+    ) -> _DeleteFraudsterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFraudsterResponse
+
+    interface _DeleteSpeakerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_speaker: (
+      ?domain_id: String,
+      ?speaker_id: String
+    ) -> _DeleteSpeakerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSpeakerResponse
+
+    interface _DeleteWatchlistResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_watchlist: (
+      ?domain_id: String,
+      ?watchlist_id: String
+    ) -> _DeleteWatchlistResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWatchlistResponse
+
+    interface _DescribeDomainResponse
+      include Smithy::Client::_Response[Types::DescribeDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def describe_domain: (
+      ?domain_id: String
+    ) -> _DescribeDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainResponse
+
+    interface _DescribeFraudsterResponse
+      include Smithy::Client::_Response[Types::DescribeFraudsterOutput]
+      def fraudster: () -> Types::Fraudster?
+    end
+    def describe_fraudster: (
+      ?domain_id: String,
+      ?fraudster_id: String
+    ) -> _DescribeFraudsterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFraudsterResponse
+
+    interface _DescribeFraudsterRegistrationJobResponse
+      include Smithy::Client::_Response[Types::DescribeFraudsterRegistrationJobOutput]
+      def job: () -> Types::FraudsterRegistrationJob?
+    end
+    def describe_fraudster_registration_job: (
+      ?domain_id: String,
+      ?job_id: String
+    ) -> _DescribeFraudsterRegistrationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFraudsterRegistrationJobResponse
+
+    interface _DescribeSpeakerResponse
+      include Smithy::Client::_Response[Types::DescribeSpeakerOutput]
+      def speaker: () -> Types::Speaker?
+    end
+    def describe_speaker: (
+      ?domain_id: String,
+      ?speaker_id: String
+    ) -> _DescribeSpeakerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSpeakerResponse
+
+    interface _DescribeSpeakerEnrollmentJobResponse
+      include Smithy::Client::_Response[Types::DescribeSpeakerEnrollmentJobOutput]
+      def job: () -> Types::SpeakerEnrollmentJob?
+    end
+    def describe_speaker_enrollment_job: (
+      ?domain_id: String,
+      ?job_id: String
+    ) -> _DescribeSpeakerEnrollmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSpeakerEnrollmentJobResponse
+
+    interface _DescribeWatchlistResponse
+      include Smithy::Client::_Response[Types::DescribeWatchlistOutput]
+      def watchlist: () -> Types::Watchlist?
+    end
+    def describe_watchlist: (
+      ?domain_id: String,
+      ?watchlist_id: String
+    ) -> _DescribeWatchlistResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWatchlistResponse
+
+    interface _DisassociateFraudsterResponse
+      include Smithy::Client::_Response[Types::DisassociateFraudsterOutput]
+      def fraudster: () -> Types::Fraudster?
+    end
+    def disassociate_fraudster: (
+      ?domain_id: String,
+      ?watchlist_id: String,
+      ?fraudster_id: String
+    ) -> _DisassociateFraudsterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFraudsterResponse
+
+    interface _EvaluateSessionResponse
+      include Smithy::Client::_Response[Types::EvaluateSessionOutput]
+      def domain_id: () -> String?
+      def session_id: () -> String?
+      def session_name: () -> String?
+      def streaming_status: () -> String?
+      def authentication_result: () -> Types::AuthenticationResult?
+      def fraud_detection_result: () -> Types::FraudDetectionResult?
+    end
+    def evaluate_session: (
+      ?domain_id: String,
+      ?session_name_or_id: String
+    ) -> _EvaluateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateSessionResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def domain_summaries: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListFraudsterRegistrationJobsResponse
+      include Smithy::Client::_Response[Types::ListFraudsterRegistrationJobsOutput]
+      def job_summaries: () -> Array[Types::FraudsterRegistrationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_fraudster_registration_jobs: (
+      ?domain_id: String,
+      ?job_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFraudsterRegistrationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFraudsterRegistrationJobsResponse
+
+    interface _ListFraudstersResponse
+      include Smithy::Client::_Response[Types::ListFraudstersOutput]
+      def fraudster_summaries: () -> Array[Types::FraudsterSummary]?
+      def next_token: () -> String?
+    end
+    def list_fraudsters: (
+      ?domain_id: String,
+      ?watchlist_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFraudstersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFraudstersResponse
+
+    interface _ListSpeakerEnrollmentJobsResponse
+      include Smithy::Client::_Response[Types::ListSpeakerEnrollmentJobsOutput]
+      def job_summaries: () -> Array[Types::SpeakerEnrollmentJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_speaker_enrollment_jobs: (
+      ?domain_id: String,
+      ?job_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSpeakerEnrollmentJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpeakerEnrollmentJobsResponse
+
+    interface _ListSpeakersResponse
+      include Smithy::Client::_Response[Types::ListSpeakersOutput]
+      def speaker_summaries: () -> Array[Types::SpeakerSummary]?
+      def next_token: () -> String?
+    end
+    def list_speakers: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSpeakersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpeakersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWatchlistsResponse
+      include Smithy::Client::_Response[Types::ListWatchlistsOutput]
+      def watchlist_summaries: () -> Array[Types::WatchlistSummary]?
+      def next_token: () -> String?
+    end
+    def list_watchlists: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWatchlistsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWatchlistsResponse
+
+    interface _OptOutSpeakerResponse
+      include Smithy::Client::_Response[Types::OptOutSpeakerOutput]
+      def speaker: () -> Types::Speaker?
+    end
+    def opt_out_speaker: (
+      ?domain_id: String,
+      ?speaker_id: String
+    ) -> _OptOutSpeakerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OptOutSpeakerResponse
+
+    interface _StartFraudsterRegistrationJobResponse
+      include Smithy::Client::_Response[Types::StartFraudsterRegistrationJobOutput]
+      def job: () -> Types::FraudsterRegistrationJob?
+    end
+    def start_fraudster_registration_job: (
+      ?client_token: String,
+      ?job_name: String,
+      ?domain_id: String,
+      ?data_access_role_arn: String,
+      ?registration_config: {
+        duplicate_registration_action: String,
+        fraudster_similarity_threshold: Integer,
+        watchlist_ids: Array[String]
+      },
+      ?input_data_config: {
+        s3_uri: String
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      }
+    ) -> _StartFraudsterRegistrationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFraudsterRegistrationJobResponse
+
+    interface _StartSpeakerEnrollmentJobResponse
+      include Smithy::Client::_Response[Types::StartSpeakerEnrollmentJobOutput]
+      def job: () -> Types::SpeakerEnrollmentJob?
+    end
+    def start_speaker_enrollment_job: (
+      ?client_token: String,
+      ?job_name: String,
+      ?domain_id: String,
+      ?data_access_role_arn: String,
+      ?enrollment_config: {
+        existing_enrollment_action: String,
+        fraud_detection_config: {
+          fraud_detection_action: String,
+          risk_threshold: Integer,
+          watchlist_ids: Array[String]
+        }
+      },
+      ?input_data_config: {
+        s3_uri: String
+      },
+      ?output_data_config: {
+        s3_uri: String,
+        kms_key_id: String
+      }
+    ) -> _StartSpeakerEnrollmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSpeakerEnrollmentJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDomainResponse
+      include Smithy::Client::_Response[Types::UpdateDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def update_domain: (
+      ?domain_id: String,
+      ?name: String,
+      ?description: String,
+      ?server_side_encryption_configuration: {
+        kms_key_id: String
+      }
+    ) -> _UpdateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainResponse
+
+    interface _UpdateWatchlistResponse
+      include Smithy::Client::_Response[Types::UpdateWatchlistOutput]
+      def watchlist: () -> Types::Watchlist?
+    end
+    def update_watchlist: (
+      ?domain_id: String,
+      ?watchlist_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateWatchlistResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWatchlistResponse
+  end
+end

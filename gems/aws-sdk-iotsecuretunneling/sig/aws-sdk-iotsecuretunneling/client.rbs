@@ -1,0 +1,144 @@
+module Aws::IoTSecureTunneling
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTSecureTunneling::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CloseTunnelResponse
+      include Smithy::Client::_Response[Types::CloseTunnelResponse]
+    end
+    def close_tunnel: (
+      ?tunnel_id: String,
+      ?delete: bool
+    ) -> _CloseTunnelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloseTunnelResponse
+
+    interface _DescribeTunnelResponse
+      include Smithy::Client::_Response[Types::DescribeTunnelResponse]
+      def tunnel: () -> Types::Tunnel?
+    end
+    def describe_tunnel: (
+      ?tunnel_id: String
+    ) -> _DescribeTunnelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTunnelResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTunnelsResponse
+      include Smithy::Client::_Response[Types::ListTunnelsResponse]
+      def tunnel_summaries: () -> Array[Types::TunnelSummary]?
+      def next_token: () -> String?
+    end
+    def list_tunnels: (
+      ?thing_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTunnelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTunnelsResponse
+
+    interface _OpenTunnelResponse
+      include Smithy::Client::_Response[Types::OpenTunnelResponse]
+      def tunnel_id: () -> String?
+      def tunnel_arn: () -> String?
+      def source_access_token: () -> String?
+      def destination_access_token: () -> String?
+    end
+    def open_tunnel: (
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?destination_config: {
+        thing_name: String,
+        services: Array[String]
+      },
+      ?timeout_config: {
+        max_lifetime_timeout_minutes: Integer
+      }
+    ) -> _OpenTunnelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OpenTunnelResponse
+
+    interface _RotateTunnelAccessTokenResponse
+      include Smithy::Client::_Response[Types::RotateTunnelAccessTokenResponse]
+      def tunnel_arn: () -> String?
+      def source_access_token: () -> String?
+      def destination_access_token: () -> String?
+    end
+    def rotate_tunnel_access_token: (
+      ?tunnel_id: String,
+      ?client_mode: String,
+      ?destination_config: {
+        thing_name: String,
+        services: Array[String]
+      }
+    ) -> _RotateTunnelAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RotateTunnelAccessTokenResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

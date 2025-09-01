@@ -1,0 +1,429 @@
+module Aws::Amp
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Amp::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAlertManagerDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateAlertManagerDefinitionOutput]
+      def status: () -> Types::AlertManagerDefinitionStatus?
+    end
+    def create_alert_manager_definition: (
+      ?workspace_id: String,
+      ?data: String,
+      ?client_token: String
+    ) -> _CreateAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAlertManagerDefinitionResponse
+
+    interface _CreateLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateLoggingConfigurationOutput]
+      def status: () -> Types::LoggingConfigurationStatus?
+    end
+    def create_logging_configuration: (
+      ?workspace_id: String,
+      ?log_group_arn: String,
+      ?client_token: String
+    ) -> _CreateLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoggingConfigurationResponse
+
+    interface _CreateQueryLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateQueryLoggingConfigurationResponse]
+      def status: () -> Types::QueryLoggingConfigurationStatus?
+    end
+    def create_query_logging_configuration: (
+      ?workspace_id: String,
+      ?destinations: Array[
+        {
+          cloud_watch_logs: {
+            log_group_arn: String
+          },
+          filters: {
+            qsp_threshold: Integer
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueryLoggingConfigurationResponse
+
+    interface _CreateRuleGroupsNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateRuleGroupsNamespaceOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::RuleGroupsNamespaceStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_rule_groups_namespace: (
+      ?workspace_id: String,
+      ?name: String,
+      ?data: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRuleGroupsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleGroupsNamespaceResponse
+
+    interface _CreateScraperResponse
+      include Smithy::Client::_Response[Types::CreateScraperResponse]
+      def scraper_id: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::ScraperStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_scraper: (
+      ?alias: String,
+      ?scrape_configuration: {
+        configuration_blob: String
+      },
+      ?source: {
+        eks_configuration: {
+          cluster_arn: String,
+          security_group_ids: Array[String],
+          subnet_ids: Array[String]
+        }
+      },
+      ?destination: {
+        amp_configuration: {
+          workspace_arn: String
+        }
+      },
+      ?role_configuration: {
+        source_role_arn: String,
+        target_role_arn: untyped
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScraperResponse
+
+    interface _CreateWorkspaceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceOutput]
+      def workspace_id: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::WorkspaceStatus?
+      def tags: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+    end
+    def create_workspace: (
+      ?alias: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String
+    ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
+
+    interface _DeleteAlertManagerDefinitionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alert_manager_definition: (
+      ?workspace_id: String,
+      ?client_token: String
+    ) -> _DeleteAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlertManagerDefinitionResponse
+
+    interface _DeleteLoggingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_logging_configuration: (
+      ?workspace_id: String,
+      ?client_token: String
+    ) -> _DeleteLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoggingConfigurationResponse
+
+    interface _DeleteQueryLoggingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_query_logging_configuration: (
+      ?workspace_id: String,
+      ?client_token: String
+    ) -> _DeleteQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueryLoggingConfigurationResponse
+
+    interface _DeleteRuleGroupsNamespaceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_rule_groups_namespace: (
+      ?workspace_id: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _DeleteRuleGroupsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleGroupsNamespaceResponse
+
+    interface _DeleteScraperResponse
+      include Smithy::Client::_Response[Types::DeleteScraperResponse]
+      def scraper_id: () -> String?
+      def status: () -> Types::ScraperStatus?
+    end
+    def delete_scraper: (
+      ?scraper_id: String,
+      ?client_token: String
+    ) -> _DeleteScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScraperResponse
+
+    interface _DeleteWorkspaceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workspace: (
+      ?workspace_id: String,
+      ?client_token: String
+    ) -> _DeleteWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceResponse
+
+    interface _DescribeAlertManagerDefinitionResponse
+      include Smithy::Client::_Response[Types::DescribeAlertManagerDefinitionOutput]
+      def alert_manager_definition: () -> Types::AlertManagerDefinitionDescription?
+    end
+    def describe_alert_manager_definition: (
+      ?workspace_id: String
+    ) -> _DescribeAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlertManagerDefinitionResponse
+
+    interface _DescribeLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeLoggingConfigurationOutput]
+      def logging_configuration: () -> Types::LoggingConfigurationMetadata?
+    end
+    def describe_logging_configuration: (
+      ?workspace_id: String
+    ) -> _DescribeLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingConfigurationResponse
+
+    interface _DescribeQueryLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeQueryLoggingConfigurationResponse]
+      def query_logging_configuration: () -> Types::QueryLoggingConfigurationMetadata?
+    end
+    def describe_query_logging_configuration: (
+      ?workspace_id: String
+    ) -> _DescribeQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueryLoggingConfigurationResponse
+
+    interface _DescribeRuleGroupsNamespaceResponse
+      include Smithy::Client::_Response[Types::DescribeRuleGroupsNamespaceOutput]
+      def rule_groups_namespace: () -> Types::RuleGroupsNamespaceDescription?
+    end
+    def describe_rule_groups_namespace: (
+      ?workspace_id: String,
+      ?name: String
+    ) -> _DescribeRuleGroupsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleGroupsNamespaceResponse
+
+    interface _DescribeScraperResponse
+      include Smithy::Client::_Response[Types::DescribeScraperResponse]
+      def scraper: () -> Types::ScraperDescription?
+    end
+    def describe_scraper: (
+      ?scraper_id: String
+    ) -> _DescribeScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScraperResponse
+
+    interface _DescribeWorkspaceResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceOutput]
+      def workspace: () -> Types::WorkspaceDescription?
+    end
+    def describe_workspace: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceResponse
+
+    interface _DescribeWorkspaceConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceConfigurationResponse]
+      def workspace_configuration: () -> Types::WorkspaceConfigurationDescription?
+    end
+    def describe_workspace_configuration: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceConfigurationResponse
+
+    interface _GetDefaultScraperConfigurationResponse
+      include Smithy::Client::_Response[Types::GetDefaultScraperConfigurationResponse]
+      def configuration: () -> String?
+    end
+    def get_default_scraper_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultScraperConfigurationResponse
+
+    interface _ListRuleGroupsNamespacesResponse
+      include Smithy::Client::_Response[Types::ListRuleGroupsNamespacesOutput]
+      def rule_groups_namespaces: () -> Array[Types::RuleGroupsNamespaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_rule_groups_namespaces: (
+      ?workspace_id: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRuleGroupsNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsNamespacesResponse
+
+    interface _ListScrapersResponse
+      include Smithy::Client::_Response[Types::ListScrapersResponse]
+      def scrapers: () -> Array[Types::ScraperSummary]?
+      def next_token: () -> String?
+    end
+    def list_scrapers: (
+      ?filters: Hash[String,
+        Array[String]
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListScrapersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScrapersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkspacesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacesOutput]
+      def workspaces: () -> Array[Types::WorkspaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_workspaces: (
+      ?next_token: String,
+      ?alias: String,
+      ?max_results: Integer
+    ) -> _ListWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacesResponse
+
+    interface _PutAlertManagerDefinitionResponse
+      include Smithy::Client::_Response[Types::PutAlertManagerDefinitionOutput]
+      def status: () -> Types::AlertManagerDefinitionStatus?
+    end
+    def put_alert_manager_definition: (
+      ?workspace_id: String,
+      ?data: String,
+      ?client_token: String
+    ) -> _PutAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlertManagerDefinitionResponse
+
+    interface _PutRuleGroupsNamespaceResponse
+      include Smithy::Client::_Response[Types::PutRuleGroupsNamespaceOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::RuleGroupsNamespaceStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def put_rule_groups_namespace: (
+      ?workspace_id: String,
+      ?name: String,
+      ?data: String,
+      ?client_token: String
+    ) -> _PutRuleGroupsNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRuleGroupsNamespaceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLoggingConfigurationOutput]
+      def status: () -> Types::LoggingConfigurationStatus?
+    end
+    def update_logging_configuration: (
+      ?workspace_id: String,
+      ?log_group_arn: String,
+      ?client_token: String
+    ) -> _UpdateLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoggingConfigurationResponse
+
+    interface _UpdateQueryLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateQueryLoggingConfigurationResponse]
+      def status: () -> Types::QueryLoggingConfigurationStatus?
+    end
+    def update_query_logging_configuration: (
+      ?workspace_id: String,
+      ?destinations: Array[
+        {
+          cloud_watch_logs: {
+            log_group_arn: String
+          },
+          filters: {
+            qsp_threshold: Integer
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueryLoggingConfigurationResponse
+
+    interface _UpdateScraperResponse
+      include Smithy::Client::_Response[Types::UpdateScraperResponse]
+      def scraper_id: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::ScraperStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_scraper: (
+      ?scraper_id: String,
+      ?alias: String,
+      ?scrape_configuration: {
+        configuration_blob: String
+      },
+      ?destination: {
+        amp_configuration: {
+          workspace_arn: String
+        }
+      },
+      ?role_configuration: {
+        source_role_arn: String,
+        target_role_arn: untyped
+      },
+      ?client_token: String
+    ) -> _UpdateScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScraperResponse
+
+    interface _UpdateWorkspaceAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_workspace_alias: (
+      ?workspace_id: String,
+      ?alias: String,
+      ?client_token: String
+    ) -> _UpdateWorkspaceAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceAliasResponse
+
+    interface _UpdateWorkspaceConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceConfigurationResponse]
+      def status: () -> Types::WorkspaceConfigurationStatus?
+    end
+    def update_workspace_configuration: (
+      ?workspace_id: String,
+      ?client_token: String,
+      ?limits_per_label_set: Array[
+        {
+          limits: {
+            max_series: Integer
+          },
+          label_set: Hash[String, String]
+        }
+      ],
+      ?retention_period_in_days: Integer
+    ) -> _UpdateWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceConfigurationResponse
+  end
+end

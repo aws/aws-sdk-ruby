@@ -1,0 +1,381 @@
+module Aws::Shield
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Shield::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateDRTLogBucketResponse
+      include Smithy::Client::_Response[Types::AssociateDRTLogBucketResponse]
+    end
+    def associate_drt_log_bucket: (
+      ?log_bucket: String
+    ) -> _AssociateDRTLogBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDRTLogBucketResponse
+
+    interface _AssociateDRTRoleResponse
+      include Smithy::Client::_Response[Types::AssociateDRTRoleResponse]
+    end
+    def associate_drt_role: (
+      ?role_arn: String
+    ) -> _AssociateDRTRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDRTRoleResponse
+
+    interface _AssociateHealthCheckResponse
+      include Smithy::Client::_Response[Types::AssociateHealthCheckResponse]
+    end
+    def associate_health_check: (
+      ?protection_id: String,
+      ?health_check_arn: String
+    ) -> _AssociateHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateHealthCheckResponse
+
+    interface _AssociateProactiveEngagementDetailsResponse
+      include Smithy::Client::_Response[Types::AssociateProactiveEngagementDetailsResponse]
+    end
+    def associate_proactive_engagement_details: (
+      ?emergency_contact_list: Array[
+        {
+          email_address: String,
+          phone_number: String,
+          contact_notes: String
+        }
+      ]
+    ) -> _AssociateProactiveEngagementDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProactiveEngagementDetailsResponse
+
+    interface _CreateProtectionResponse
+      include Smithy::Client::_Response[Types::CreateProtectionResponse]
+      def protection_id: () -> String?
+    end
+    def create_protection: (
+      ?name: String,
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProtectionResponse
+
+    interface _CreateProtectionGroupResponse
+      include Smithy::Client::_Response[Types::CreateProtectionGroupResponse]
+    end
+    def create_protection_group: (
+      ?protection_group_id: String,
+      ?aggregation: String,
+      ?pattern: String,
+      ?resource_type: String,
+      ?members: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProtectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProtectionGroupResponse
+
+    interface _CreateSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionResponse]
+    end
+    def create_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionResponse
+
+    interface _DeleteProtectionResponse
+      include Smithy::Client::_Response[Types::DeleteProtectionResponse]
+    end
+    def delete_protection: (
+      ?protection_id: String
+    ) -> _DeleteProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProtectionResponse
+
+    interface _DeleteProtectionGroupResponse
+      include Smithy::Client::_Response[Types::DeleteProtectionGroupResponse]
+    end
+    def delete_protection_group: (
+      ?protection_group_id: String
+    ) -> _DeleteProtectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProtectionGroupResponse
+
+    interface _DeleteSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriptionResponse]
+    end
+    def delete_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionResponse
+
+    interface _DescribeAttackResponse
+      include Smithy::Client::_Response[Types::DescribeAttackResponse]
+      def attack: () -> Types::AttackDetail?
+    end
+    def describe_attack: (
+      ?attack_id: String
+    ) -> _DescribeAttackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttackResponse
+
+    interface _DescribeAttackStatisticsResponse
+      include Smithy::Client::_Response[Types::DescribeAttackStatisticsResponse]
+      def time_range: () -> Types::TimeRange?
+      def data_items: () -> Array[Types::AttackStatisticsDataItem]?
+    end
+    def describe_attack_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttackStatisticsResponse
+
+    interface _DescribeDRTAccessResponse
+      include Smithy::Client::_Response[Types::DescribeDRTAccessResponse]
+      def role_arn: () -> String?
+      def log_bucket_list: () -> Array[String]?
+    end
+    def describe_drt_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDRTAccessResponse
+
+    interface _DescribeEmergencyContactSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeEmergencyContactSettingsResponse]
+      def emergency_contact_list: () -> Array[Types::EmergencyContact]?
+    end
+    def describe_emergency_contact_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEmergencyContactSettingsResponse
+
+    interface _DescribeProtectionResponse
+      include Smithy::Client::_Response[Types::DescribeProtectionResponse]
+      def protection: () -> Types::Protection?
+    end
+    def describe_protection: (
+      ?protection_id: String,
+      ?resource_arn: String
+    ) -> _DescribeProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProtectionResponse
+
+    interface _DescribeProtectionGroupResponse
+      include Smithy::Client::_Response[Types::DescribeProtectionGroupResponse]
+      def protection_group: () -> Types::ProtectionGroup?
+    end
+    def describe_protection_group: (
+      ?protection_group_id: String
+    ) -> _DescribeProtectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProtectionGroupResponse
+
+    interface _DescribeSubscriptionResponse
+      include Smithy::Client::_Response[Types::DescribeSubscriptionResponse]
+      def subscription: () -> Types::Subscription?
+    end
+    def describe_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSubscriptionResponse
+
+    interface _DisableApplicationLayerAutomaticResponseResponse
+      include Smithy::Client::_Response[Types::DisableApplicationLayerAutomaticResponseResponse]
+    end
+    def disable_application_layer_automatic_response: (
+      ?resource_arn: String
+    ) -> _DisableApplicationLayerAutomaticResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableApplicationLayerAutomaticResponseResponse
+
+    interface _DisableProactiveEngagementResponse
+      include Smithy::Client::_Response[Types::DisableProactiveEngagementResponse]
+    end
+    def disable_proactive_engagement: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableProactiveEngagementResponse
+
+    interface _DisassociateDRTLogBucketResponse
+      include Smithy::Client::_Response[Types::DisassociateDRTLogBucketResponse]
+    end
+    def disassociate_drt_log_bucket: (
+      ?log_bucket: String
+    ) -> _DisassociateDRTLogBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDRTLogBucketResponse
+
+    interface _DisassociateDRTRoleResponse
+      include Smithy::Client::_Response[Types::DisassociateDRTRoleResponse]
+    end
+    def disassociate_drt_role: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDRTRoleResponse
+
+    interface _DisassociateHealthCheckResponse
+      include Smithy::Client::_Response[Types::DisassociateHealthCheckResponse]
+    end
+    def disassociate_health_check: (
+      ?protection_id: String,
+      ?health_check_arn: String
+    ) -> _DisassociateHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateHealthCheckResponse
+
+    interface _EnableApplicationLayerAutomaticResponseResponse
+      include Smithy::Client::_Response[Types::EnableApplicationLayerAutomaticResponseResponse]
+    end
+    def enable_application_layer_automatic_response: (
+      ?resource_arn: String,
+      ?action: {
+        block: {
+        },
+        count: {
+        }
+      }
+    ) -> _EnableApplicationLayerAutomaticResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableApplicationLayerAutomaticResponseResponse
+
+    interface _EnableProactiveEngagementResponse
+      include Smithy::Client::_Response[Types::EnableProactiveEngagementResponse]
+    end
+    def enable_proactive_engagement: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableProactiveEngagementResponse
+
+    interface _GetSubscriptionStateResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionStateResponse]
+      def subscription_state: () -> String?
+    end
+    def get_subscription_state: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionStateResponse
+
+    interface _ListAttacksResponse
+      include Smithy::Client::_Response[Types::ListAttacksResponse]
+      def attack_summaries: () -> Array[Types::AttackSummary]?
+      def next_token: () -> String?
+    end
+    def list_attacks: (
+      ?resource_arns: Array[String],
+      ?start_time: {
+        from_inclusive: Time,
+        to_exclusive: untyped
+      },
+      ?end_time: {
+        from_inclusive: Time,
+        to_exclusive: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAttacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttacksResponse
+
+    interface _ListProtectionGroupsResponse
+      include Smithy::Client::_Response[Types::ListProtectionGroupsResponse]
+      def protection_groups: () -> Array[Types::ProtectionGroup]?
+      def next_token: () -> String?
+    end
+    def list_protection_groups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?inclusion_filters: {
+        protection_group_ids: Array[String],
+        patterns: Array[String],
+        resource_types: Array[String],
+        aggregations: Array[String]
+      }
+    ) -> _ListProtectionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectionGroupsResponse
+
+    interface _ListProtectionsResponse
+      include Smithy::Client::_Response[Types::ListProtectionsResponse]
+      def protections: () -> Array[Types::Protection]?
+      def next_token: () -> String?
+    end
+    def list_protections: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?inclusion_filters: {
+        resource_arns: Array[String],
+        protection_names: Array[String],
+        resource_types: Array[String]
+      }
+    ) -> _ListProtectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectionsResponse
+
+    interface _ListResourcesInProtectionGroupResponse
+      include Smithy::Client::_Response[Types::ListResourcesInProtectionGroupResponse]
+      def resource_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_resources_in_protection_group: (
+      ?protection_group_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourcesInProtectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesInProtectionGroupResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationLayerAutomaticResponseResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationLayerAutomaticResponseResponse]
+    end
+    def update_application_layer_automatic_response: (
+      ?resource_arn: String,
+      ?action: {
+        block: {
+        },
+        count: {
+        }
+      }
+    ) -> _UpdateApplicationLayerAutomaticResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationLayerAutomaticResponseResponse
+
+    interface _UpdateEmergencyContactSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateEmergencyContactSettingsResponse]
+    end
+    def update_emergency_contact_settings: (
+      ?emergency_contact_list: Array[
+        {
+          email_address: String,
+          phone_number: String,
+          contact_notes: String
+        }
+      ]
+    ) -> _UpdateEmergencyContactSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEmergencyContactSettingsResponse
+
+    interface _UpdateProtectionGroupResponse
+      include Smithy::Client::_Response[Types::UpdateProtectionGroupResponse]
+    end
+    def update_protection_group: (
+      ?protection_group_id: String,
+      ?aggregation: String,
+      ?pattern: String,
+      ?resource_type: String,
+      ?members: Array[String]
+    ) -> _UpdateProtectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProtectionGroupResponse
+
+    interface _UpdateSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionResponse]
+    end
+    def update_subscription: (
+      ?auto_renew: String
+    ) -> _UpdateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionResponse
+  end
+end

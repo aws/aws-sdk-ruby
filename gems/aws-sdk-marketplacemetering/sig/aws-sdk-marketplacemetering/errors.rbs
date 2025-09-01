@@ -1,0 +1,55 @@
+module Aws::MarketplaceMetering
+  module Errors
+    class CustomerNotEntitledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DisabledApiException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCustomerIdentifierException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEndpointRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidProductCodeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPublicKeyVersionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUsageAllocationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUsageDimensionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PlatformNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TimestampOutOfBoundsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

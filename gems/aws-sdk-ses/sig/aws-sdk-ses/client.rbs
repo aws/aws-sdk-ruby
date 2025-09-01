@@ -1,0 +1,916 @@
+module Aws::SES
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SES::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CloneReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::CloneReceiptRuleSetResponse]
+    end
+    def clone_receipt_rule_set: (
+      ?rule_set_name: String,
+      ?original_rule_set_name: String
+    ) -> _CloneReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloneReceiptRuleSetResponse
+
+    interface _CreateConfigurationSetResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationSetResponse]
+    end
+    def create_configuration_set: (
+      ?configuration_set: {
+        name: String
+      }
+    ) -> _CreateConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationSetResponse
+
+    interface _CreateConfigurationSetEventDestinationResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationSetEventDestinationResponse]
+    end
+    def create_configuration_set_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination: {
+        name: String,
+        enabled: bool,
+        matching_event_types: Array[String],
+        kinesis_firehose_destination: {
+          iam_role_arn: String,
+          delivery_stream_arn: untyped
+        },
+        cloud_watch_destination: {
+          dimension_configurations: Array[
+            {
+              dimension_name: String,
+              dimension_value_source: String,
+              default_dimension_value: String
+            }
+          ]
+        },
+        sns_destination: {
+          topic_arn: untyped
+        }
+      }
+    ) -> _CreateConfigurationSetEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationSetEventDestinationResponse
+
+    interface _CreateConfigurationSetTrackingOptionsResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationSetTrackingOptionsResponse]
+    end
+    def create_configuration_set_tracking_options: (
+      ?configuration_set_name: String,
+      ?tracking_options: {
+        custom_redirect_domain: String
+      }
+    ) -> _CreateConfigurationSetTrackingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationSetTrackingOptionsResponse
+
+    interface _CreateCustomVerificationEmailTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_custom_verification_email_template: (
+      ?template_name: String,
+      ?from_email_address: String,
+      ?template_subject: String,
+      ?template_content: String,
+      ?success_redirection_url: String,
+      ?failure_redirection_url: String
+    ) -> _CreateCustomVerificationEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomVerificationEmailTemplateResponse
+
+    interface _CreateReceiptFilterResponse
+      include Smithy::Client::_Response[Types::CreateReceiptFilterResponse]
+    end
+    def create_receipt_filter: (
+      ?filter: {
+        name: String,
+        ip_filter: {
+          policy: String,
+          cidr: String
+        }
+      }
+    ) -> _CreateReceiptFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReceiptFilterResponse
+
+    interface _CreateReceiptRuleResponse
+      include Smithy::Client::_Response[Types::CreateReceiptRuleResponse]
+    end
+    def create_receipt_rule: (
+      ?rule_set_name: String,
+      ?after: String,
+      ?rule: {
+        name: String,
+        enabled: bool,
+        tls_policy: String,
+        recipients: Array[String],
+        actions: Array[
+          {
+            s3_action: {
+              topic_arn: String,
+              bucket_name: String,
+              object_key_prefix: String,
+              kms_key_arn: untyped,
+              iam_role_arn: String
+            },
+            bounce_action: {
+              topic_arn: untyped,
+              smtp_reply_code: String,
+              status_code: String,
+              message: String,
+              sender: String
+            },
+            workmail_action: {
+              topic_arn: untyped,
+              organization_arn: untyped
+            },
+            lambda_action: {
+              topic_arn: untyped,
+              function_arn: untyped,
+              invocation_type: String
+            },
+            stop_action: {
+              scope: String,
+              topic_arn: untyped
+            },
+            add_header_action: {
+              header_name: String,
+              header_value: String
+            },
+            sns_action: {
+              topic_arn: untyped,
+              encoding: String
+            },
+            connect_action: {
+              instance_arn: String,
+              iam_role_arn: untyped
+            }
+          }
+        ],
+        scan_enabled: untyped
+      }
+    ) -> _CreateReceiptRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReceiptRuleResponse
+
+    interface _CreateReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::CreateReceiptRuleSetResponse]
+    end
+    def create_receipt_rule_set: (
+      ?rule_set_name: String
+    ) -> _CreateReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReceiptRuleSetResponse
+
+    interface _CreateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTemplateResponse]
+    end
+    def create_template: (
+      ?template: {
+        template_name: String,
+        subject_part: String,
+        text_part: String,
+        html_part: String
+      }
+    ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
+
+    interface _DeleteConfigurationSetResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationSetResponse]
+    end
+    def delete_configuration_set: (
+      ?configuration_set_name: String
+    ) -> _DeleteConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationSetResponse
+
+    interface _DeleteConfigurationSetEventDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationSetEventDestinationResponse]
+    end
+    def delete_configuration_set_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination_name: String
+    ) -> _DeleteConfigurationSetEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationSetEventDestinationResponse
+
+    interface _DeleteConfigurationSetTrackingOptionsResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationSetTrackingOptionsResponse]
+    end
+    def delete_configuration_set_tracking_options: (
+      ?configuration_set_name: String
+    ) -> _DeleteConfigurationSetTrackingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationSetTrackingOptionsResponse
+
+    interface _DeleteCustomVerificationEmailTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_custom_verification_email_template: (
+      ?template_name: String
+    ) -> _DeleteCustomVerificationEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomVerificationEmailTemplateResponse
+
+    interface _DeleteIdentityResponse
+      include Smithy::Client::_Response[Types::DeleteIdentityResponse]
+    end
+    def delete_identity: (
+      ?identity: String
+    ) -> _DeleteIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityResponse
+
+    interface _DeleteIdentityPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteIdentityPolicyResponse]
+    end
+    def delete_identity_policy: (
+      ?identity: String,
+      ?policy_name: String
+    ) -> _DeleteIdentityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityPolicyResponse
+
+    interface _DeleteReceiptFilterResponse
+      include Smithy::Client::_Response[Types::DeleteReceiptFilterResponse]
+    end
+    def delete_receipt_filter: (
+      ?filter_name: String
+    ) -> _DeleteReceiptFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReceiptFilterResponse
+
+    interface _DeleteReceiptRuleResponse
+      include Smithy::Client::_Response[Types::DeleteReceiptRuleResponse]
+    end
+    def delete_receipt_rule: (
+      ?rule_set_name: String,
+      ?rule_name: String
+    ) -> _DeleteReceiptRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReceiptRuleResponse
+
+    interface _DeleteReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::DeleteReceiptRuleSetResponse]
+    end
+    def delete_receipt_rule_set: (
+      ?rule_set_name: String
+    ) -> _DeleteReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReceiptRuleSetResponse
+
+    interface _DeleteTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteTemplateResponse]
+    end
+    def delete_template: (
+      ?template_name: String
+    ) -> _DeleteTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateResponse
+
+    interface _DeleteVerifiedEmailAddressResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_verified_email_address: (
+      ?email_address: String
+    ) -> _DeleteVerifiedEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVerifiedEmailAddressResponse
+
+    interface _DescribeActiveReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::DescribeActiveReceiptRuleSetResponse]
+      def metadata: () -> Types::ReceiptRuleSetMetadata?
+      def rules: () -> Array[Types::ReceiptRule]?
+    end
+    def describe_active_receipt_rule_set: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActiveReceiptRuleSetResponse
+
+    interface _DescribeConfigurationSetResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationSetResponse]
+      def configuration_set: () -> Types::ConfigurationSet?
+      def event_destinations: () -> Array[Types::EventDestination]?
+      def tracking_options: () -> Types::TrackingOptions?
+      def delivery_options: () -> Types::DeliveryOptions?
+      def reputation_options: () -> Types::ReputationOptions?
+    end
+    def describe_configuration_set: (
+      ?configuration_set_name: String,
+      ?configuration_set_attribute_names: Array[String]
+    ) -> _DescribeConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationSetResponse
+
+    interface _DescribeReceiptRuleResponse
+      include Smithy::Client::_Response[Types::DescribeReceiptRuleResponse]
+      def rule: () -> Types::ReceiptRule?
+    end
+    def describe_receipt_rule: (
+      ?rule_set_name: String,
+      ?rule_name: String
+    ) -> _DescribeReceiptRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReceiptRuleResponse
+
+    interface _DescribeReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::DescribeReceiptRuleSetResponse]
+      def metadata: () -> Types::ReceiptRuleSetMetadata?
+      def rules: () -> Array[Types::ReceiptRule]?
+    end
+    def describe_receipt_rule_set: (
+      ?rule_set_name: String
+    ) -> _DescribeReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReceiptRuleSetResponse
+
+    interface _GetAccountSendingEnabledResponse
+      include Smithy::Client::_Response[Types::GetAccountSendingEnabledResponse]
+      def enabled: () -> bool?
+    end
+    def get_account_sending_enabled: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSendingEnabledResponse
+
+    interface _GetCustomVerificationEmailTemplateResponse
+      include Smithy::Client::_Response[Types::GetCustomVerificationEmailTemplateResponse]
+      def template_name: () -> String?
+      def from_email_address: () -> String?
+      def template_subject: () -> String?
+      def template_content: () -> String?
+      def success_redirection_url: () -> String?
+      def failure_redirection_url: () -> String?
+    end
+    def get_custom_verification_email_template: (
+      ?template_name: String
+    ) -> _GetCustomVerificationEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomVerificationEmailTemplateResponse
+
+    interface _GetIdentityDkimAttributesResponse
+      include Smithy::Client::_Response[Types::GetIdentityDkimAttributesResponse]
+      def dkim_attributes: () -> Hash[String, Types::IdentityDkimAttributes]?
+    end
+    def get_identity_dkim_attributes: (
+      ?identities: Array[String]
+    ) -> _GetIdentityDkimAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityDkimAttributesResponse
+
+    interface _GetIdentityMailFromDomainAttributesResponse
+      include Smithy::Client::_Response[Types::GetIdentityMailFromDomainAttributesResponse]
+      def mail_from_domain_attributes: () -> Hash[String, Types::IdentityMailFromDomainAttributes]?
+    end
+    def get_identity_mail_from_domain_attributes: (
+      ?identities: Array[String]
+    ) -> _GetIdentityMailFromDomainAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityMailFromDomainAttributesResponse
+
+    interface _GetIdentityNotificationAttributesResponse
+      include Smithy::Client::_Response[Types::GetIdentityNotificationAttributesResponse]
+      def notification_attributes: () -> Hash[String, Types::IdentityNotificationAttributes]?
+    end
+    def get_identity_notification_attributes: (
+      ?identities: Array[String]
+    ) -> _GetIdentityNotificationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityNotificationAttributesResponse
+
+    interface _GetIdentityPoliciesResponse
+      include Smithy::Client::_Response[Types::GetIdentityPoliciesResponse]
+      def policies: () -> Hash[String, String]?
+    end
+    def get_identity_policies: (
+      ?identity: String,
+      ?policy_names: Array[String]
+    ) -> _GetIdentityPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityPoliciesResponse
+
+    interface _GetIdentityVerificationAttributesResponse
+      include Smithy::Client::_Response[Types::GetIdentityVerificationAttributesResponse]
+      def verification_attributes: () -> Hash[String, Types::IdentityVerificationAttributes]?
+    end
+    def get_identity_verification_attributes: (
+      ?identities: Array[String]
+    ) -> _GetIdentityVerificationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityVerificationAttributesResponse
+
+    interface _GetSendQuotaResponse
+      include Smithy::Client::_Response[Types::GetSendQuotaResponse]
+      def max24_hour_send: () -> Float?
+      def max_send_rate: () -> Float?
+      def sent_last24_hours: () -> Float?
+    end
+    def get_send_quota: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSendQuotaResponse
+
+    interface _GetSendStatisticsResponse
+      include Smithy::Client::_Response[Types::GetSendStatisticsResponse]
+      def send_data_points: () -> Array[Types::SendDataPoint]?
+    end
+    def get_send_statistics: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSendStatisticsResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateResponse]
+      def template: () -> Types::Template?
+    end
+    def get_template: (
+      ?template_name: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _ListConfigurationSetsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationSetsResponse]
+      def configuration_sets: () -> Array[Types::ConfigurationSet]?
+      def next_token: () -> String?
+    end
+    def list_configuration_sets: (
+      ?next_token: String,
+      ?max_items: Integer
+    ) -> _ListConfigurationSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationSetsResponse
+
+    interface _ListCustomVerificationEmailTemplatesResponse
+      include Smithy::Client::_Response[Types::ListCustomVerificationEmailTemplatesResponse]
+      def custom_verification_email_templates: () -> Array[Types::CustomVerificationEmailTemplate]?
+      def next_token: () -> String?
+    end
+    def list_custom_verification_email_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCustomVerificationEmailTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomVerificationEmailTemplatesResponse
+
+    interface _ListIdentitiesResponse
+      include Smithy::Client::_Response[Types::ListIdentitiesResponse]
+      def identities: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_identities: (
+      ?identity_type: String,
+      ?next_token: String,
+      ?max_items: Integer
+    ) -> _ListIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentitiesResponse
+
+    interface _ListIdentityPoliciesResponse
+      include Smithy::Client::_Response[Types::ListIdentityPoliciesResponse]
+      def policy_names: () -> Array[String]?
+    end
+    def list_identity_policies: (
+      ?identity: String
+    ) -> _ListIdentityPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityPoliciesResponse
+
+    interface _ListReceiptFiltersResponse
+      include Smithy::Client::_Response[Types::ListReceiptFiltersResponse]
+      def filters: () -> Array[Types::ReceiptFilter]?
+    end
+    def list_receipt_filters: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceiptFiltersResponse
+
+    interface _ListReceiptRuleSetsResponse
+      include Smithy::Client::_Response[Types::ListReceiptRuleSetsResponse]
+      def rule_sets: () -> Array[Types::ReceiptRuleSetMetadata]?
+      def next_token: () -> String?
+    end
+    def list_receipt_rule_sets: (
+      ?next_token: String
+    ) -> _ListReceiptRuleSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReceiptRuleSetsResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesResponse]
+      def templates_metadata: () -> Array[Types::TemplateMetadata]?
+      def next_token: () -> String?
+    end
+    def list_templates: (
+      ?next_token: String,
+      ?max_items: Integer
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _ListVerifiedEmailAddressesResponse
+      include Smithy::Client::_Response[Types::ListVerifiedEmailAddressesResponse]
+      def verified_email_addresses: () -> Array[String]?
+    end
+    def list_verified_email_addresses: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVerifiedEmailAddressesResponse
+
+    interface _PutConfigurationSetDeliveryOptionsResponse
+      include Smithy::Client::_Response[Types::PutConfigurationSetDeliveryOptionsResponse]
+    end
+    def put_configuration_set_delivery_options: (
+      ?configuration_set_name: String,
+      ?delivery_options: {
+        tls_policy: String
+      }
+    ) -> _PutConfigurationSetDeliveryOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigurationSetDeliveryOptionsResponse
+
+    interface _PutIdentityPolicyResponse
+      include Smithy::Client::_Response[Types::PutIdentityPolicyResponse]
+    end
+    def put_identity_policy: (
+      ?identity: String,
+      ?policy_name: String,
+      ?policy: String
+    ) -> _PutIdentityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIdentityPolicyResponse
+
+    interface _ReorderReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::ReorderReceiptRuleSetResponse]
+    end
+    def reorder_receipt_rule_set: (
+      ?rule_set_name: String,
+      ?rule_names: Array[String]
+    ) -> _ReorderReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReorderReceiptRuleSetResponse
+
+    interface _SendBounceResponse
+      include Smithy::Client::_Response[Types::SendBounceResponse]
+      def message_id: () -> String?
+    end
+    def send_bounce: (
+      ?original_message_id: String,
+      ?bounce_sender: String,
+      ?explanation: String,
+      ?message_dsn: {
+        reporting_mta: String,
+        arrival_date: Time,
+        extension_fields: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?bounced_recipient_info_list: Array[
+        {
+          recipient: String,
+          recipient_arn: String,
+          bounce_type: String,
+          recipient_dsn_fields: {
+            final_recipient: untyped,
+            action: String,
+            remote_mta: String,
+            status: String,
+            diagnostic_code: String,
+            last_attempt_date: Time,
+            extension_fields: Array[
+              {
+                name: String,
+                value: String
+              }
+            ]
+          }
+        }
+      ],
+      ?bounce_sender_arn: String
+    ) -> _SendBounceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendBounceResponse
+
+    interface _SendBulkTemplatedEmailResponse
+      include Smithy::Client::_Response[Types::SendBulkTemplatedEmailResponse]
+      def status: () -> Array[Types::BulkEmailDestinationStatus]?
+    end
+    def send_bulk_templated_email: (
+      ?source: String,
+      ?source_arn: String,
+      ?reply_to_addresses: Array[String],
+      ?return_path: String,
+      ?return_path_arn: String,
+      ?configuration_set_name: String,
+      ?default_tags: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?template: String,
+      ?template_arn: String,
+      ?default_template_data: String,
+      ?destinations: Array[
+        {
+          destination: {
+            to_addresses: Array[String],
+            cc_addresses: untyped,
+            bcc_addresses: untyped
+          },
+          replacement_tags: Array[
+            {
+              name: String,
+              value: String
+            }
+          ],
+          replacement_template_data: String
+        }
+      ]
+    ) -> _SendBulkTemplatedEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendBulkTemplatedEmailResponse
+
+    interface _SendCustomVerificationEmailResponse
+      include Smithy::Client::_Response[Types::SendCustomVerificationEmailResponse]
+      def message_id: () -> String?
+    end
+    def send_custom_verification_email: (
+      ?email_address: String,
+      ?template_name: String,
+      ?configuration_set_name: String
+    ) -> _SendCustomVerificationEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendCustomVerificationEmailResponse
+
+    interface _SendEmailResponse
+      include Smithy::Client::_Response[Types::SendEmailResponse]
+      def message_id: () -> String?
+    end
+    def send_email: (
+      ?source: String,
+      ?destination: {
+        to_addresses: Array[String],
+        cc_addresses: untyped,
+        bcc_addresses: untyped
+      },
+      ?message: {
+        subject: {
+          data: String,
+          charset: String
+        },
+        body: {
+          text: untyped,
+          html: untyped
+        }
+      },
+      ?reply_to_addresses: Array[String],
+      ?return_path: String,
+      ?source_arn: String,
+      ?return_path_arn: String,
+      ?tags: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?configuration_set_name: String
+    ) -> _SendEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendEmailResponse
+
+    interface _SendRawEmailResponse
+      include Smithy::Client::_Response[Types::SendRawEmailResponse]
+      def message_id: () -> String?
+    end
+    def send_raw_email: (
+      ?source: String,
+      ?destinations: Array[String],
+      ?raw_message: {
+        data: String
+      },
+      ?from_arn: String,
+      ?source_arn: String,
+      ?return_path_arn: String,
+      ?tags: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?configuration_set_name: String
+    ) -> _SendRawEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendRawEmailResponse
+
+    interface _SendTemplatedEmailResponse
+      include Smithy::Client::_Response[Types::SendTemplatedEmailResponse]
+      def message_id: () -> String?
+    end
+    def send_templated_email: (
+      ?source: String,
+      ?destination: {
+        to_addresses: Array[String],
+        cc_addresses: untyped,
+        bcc_addresses: untyped
+      },
+      ?reply_to_addresses: Array[String],
+      ?return_path: String,
+      ?source_arn: String,
+      ?return_path_arn: String,
+      ?tags: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?configuration_set_name: String,
+      ?template: String,
+      ?template_arn: String,
+      ?template_data: String
+    ) -> _SendTemplatedEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTemplatedEmailResponse
+
+    interface _SetActiveReceiptRuleSetResponse
+      include Smithy::Client::_Response[Types::SetActiveReceiptRuleSetResponse]
+    end
+    def set_active_receipt_rule_set: (
+      ?rule_set_name: String
+    ) -> _SetActiveReceiptRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetActiveReceiptRuleSetResponse
+
+    interface _SetIdentityDkimEnabledResponse
+      include Smithy::Client::_Response[Types::SetIdentityDkimEnabledResponse]
+    end
+    def set_identity_dkim_enabled: (
+      ?identity: String,
+      ?dkim_enabled: bool
+    ) -> _SetIdentityDkimEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIdentityDkimEnabledResponse
+
+    interface _SetIdentityFeedbackForwardingEnabledResponse
+      include Smithy::Client::_Response[Types::SetIdentityFeedbackForwardingEnabledResponse]
+    end
+    def set_identity_feedback_forwarding_enabled: (
+      ?identity: String,
+      ?forwarding_enabled: bool
+    ) -> _SetIdentityFeedbackForwardingEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIdentityFeedbackForwardingEnabledResponse
+
+    interface _SetIdentityHeadersInNotificationsEnabledResponse
+      include Smithy::Client::_Response[Types::SetIdentityHeadersInNotificationsEnabledResponse]
+    end
+    def set_identity_headers_in_notifications_enabled: (
+      ?identity: String,
+      ?notification_type: String,
+      ?enabled: bool
+    ) -> _SetIdentityHeadersInNotificationsEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIdentityHeadersInNotificationsEnabledResponse
+
+    interface _SetIdentityMailFromDomainResponse
+      include Smithy::Client::_Response[Types::SetIdentityMailFromDomainResponse]
+    end
+    def set_identity_mail_from_domain: (
+      ?identity: String,
+      ?mail_from_domain: String,
+      ?behavior_on_mx_failure: String
+    ) -> _SetIdentityMailFromDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIdentityMailFromDomainResponse
+
+    interface _SetIdentityNotificationTopicResponse
+      include Smithy::Client::_Response[Types::SetIdentityNotificationTopicResponse]
+    end
+    def set_identity_notification_topic: (
+      ?identity: String,
+      ?notification_type: String,
+      ?sns_topic: String
+    ) -> _SetIdentityNotificationTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIdentityNotificationTopicResponse
+
+    interface _SetReceiptRulePositionResponse
+      include Smithy::Client::_Response[Types::SetReceiptRulePositionResponse]
+    end
+    def set_receipt_rule_position: (
+      ?rule_set_name: String,
+      ?rule_name: String,
+      ?after: String
+    ) -> _SetReceiptRulePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetReceiptRulePositionResponse
+
+    interface _TestRenderTemplateResponse
+      include Smithy::Client::_Response[Types::TestRenderTemplateResponse]
+      def rendered_template: () -> String?
+    end
+    def test_render_template: (
+      ?template_name: String,
+      ?template_data: String
+    ) -> _TestRenderTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestRenderTemplateResponse
+
+    interface _UpdateAccountSendingEnabledResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_account_sending_enabled: (
+      ?enabled: bool
+    ) -> _UpdateAccountSendingEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSendingEnabledResponse
+
+    interface _UpdateConfigurationSetEventDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationSetEventDestinationResponse]
+    end
+    def update_configuration_set_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination: {
+        name: String,
+        enabled: bool,
+        matching_event_types: Array[String],
+        kinesis_firehose_destination: {
+          iam_role_arn: String,
+          delivery_stream_arn: untyped
+        },
+        cloud_watch_destination: {
+          dimension_configurations: Array[
+            {
+              dimension_name: String,
+              dimension_value_source: String,
+              default_dimension_value: String
+            }
+          ]
+        },
+        sns_destination: {
+          topic_arn: untyped
+        }
+      }
+    ) -> _UpdateConfigurationSetEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationSetEventDestinationResponse
+
+    interface _UpdateConfigurationSetReputationMetricsEnabledResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_configuration_set_reputation_metrics_enabled: (
+      ?configuration_set_name: String,
+      ?enabled: bool
+    ) -> _UpdateConfigurationSetReputationMetricsEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationSetReputationMetricsEnabledResponse
+
+    interface _UpdateConfigurationSetSendingEnabledResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_configuration_set_sending_enabled: (
+      ?configuration_set_name: String,
+      ?enabled: bool
+    ) -> _UpdateConfigurationSetSendingEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationSetSendingEnabledResponse
+
+    interface _UpdateConfigurationSetTrackingOptionsResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationSetTrackingOptionsResponse]
+    end
+    def update_configuration_set_tracking_options: (
+      ?configuration_set_name: String,
+      ?tracking_options: {
+        custom_redirect_domain: String
+      }
+    ) -> _UpdateConfigurationSetTrackingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationSetTrackingOptionsResponse
+
+    interface _UpdateCustomVerificationEmailTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_custom_verification_email_template: (
+      ?template_name: String,
+      ?from_email_address: String,
+      ?template_subject: String,
+      ?template_content: String,
+      ?success_redirection_url: String,
+      ?failure_redirection_url: String
+    ) -> _UpdateCustomVerificationEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomVerificationEmailTemplateResponse
+
+    interface _UpdateReceiptRuleResponse
+      include Smithy::Client::_Response[Types::UpdateReceiptRuleResponse]
+    end
+    def update_receipt_rule: (
+      ?rule_set_name: String,
+      ?rule: {
+        name: String,
+        enabled: bool,
+        tls_policy: String,
+        recipients: Array[String],
+        actions: Array[
+          {
+            s3_action: {
+              topic_arn: String,
+              bucket_name: String,
+              object_key_prefix: String,
+              kms_key_arn: untyped,
+              iam_role_arn: String
+            },
+            bounce_action: {
+              topic_arn: untyped,
+              smtp_reply_code: String,
+              status_code: String,
+              message: String,
+              sender: String
+            },
+            workmail_action: {
+              topic_arn: untyped,
+              organization_arn: untyped
+            },
+            lambda_action: {
+              topic_arn: untyped,
+              function_arn: untyped,
+              invocation_type: String
+            },
+            stop_action: {
+              scope: String,
+              topic_arn: untyped
+            },
+            add_header_action: {
+              header_name: String,
+              header_value: String
+            },
+            sns_action: {
+              topic_arn: untyped,
+              encoding: String
+            },
+            connect_action: {
+              instance_arn: String,
+              iam_role_arn: untyped
+            }
+          }
+        ],
+        scan_enabled: untyped
+      }
+    ) -> _UpdateReceiptRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReceiptRuleResponse
+
+    interface _UpdateTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateResponse]
+    end
+    def update_template: (
+      ?template: {
+        template_name: String,
+        subject_part: String,
+        text_part: String,
+        html_part: String
+      }
+    ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse
+
+    interface _VerifyDomainDkimResponse
+      include Smithy::Client::_Response[Types::VerifyDomainDkimResponse]
+      def dkim_tokens: () -> Array[String]?
+    end
+    def verify_domain_dkim: (
+      ?domain: String
+    ) -> _VerifyDomainDkimResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyDomainDkimResponse
+
+    interface _VerifyDomainIdentityResponse
+      include Smithy::Client::_Response[Types::VerifyDomainIdentityResponse]
+      def verification_token: () -> String?
+    end
+    def verify_domain_identity: (
+      ?domain: String
+    ) -> _VerifyDomainIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyDomainIdentityResponse
+
+    interface _VerifyEmailAddressResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def verify_email_address: (
+      ?email_address: String
+    ) -> _VerifyEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyEmailAddressResponse
+
+    interface _VerifyEmailIdentityResponse
+      include Smithy::Client::_Response[Types::VerifyEmailIdentityResponse]
+    end
+    def verify_email_identity: (
+      ?email_address: String
+    ) -> _VerifyEmailIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyEmailIdentityResponse
+  end
+end

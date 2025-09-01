@@ -1,0 +1,1263 @@
+module Aws::IoTTwinMaker
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTTwinMaker::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchPutPropertyValuesResponse
+      include Smithy::Client::_Response[Types::BatchPutPropertyValuesOutput]
+      def error_entries: () -> Array[Types::BatchPutPropertyErrorEntry]?
+    end
+    def batch_put_property_values: (
+      ?workspace_id: String,
+      ?entries: Array[
+        {
+          entity_property_reference: {
+            component_name: String,
+            component_path: String,
+            external_id_property: Hash[String, String],
+            entity_id: String,
+            property_name: untyped
+          },
+          property_values: Array[
+            {
+              timestamp: Time,
+              value: {
+                boolean_value: bool,
+                double_value: Float,
+                integer_value: Integer,
+                long_value: Integer,
+                string_value: String,
+                list_value: Array[
+                  {
+                    boolean_value: untyped,
+                    double_value: untyped,
+                    integer_value: untyped,
+                    long_value: untyped,
+                    string_value: untyped,
+                    list_value: untyped,
+                    map_value: Hash[String,
+                      {
+                        boolean_value: untyped,
+                        double_value: untyped,
+                        integer_value: untyped,
+                        long_value: untyped,
+                        string_value: untyped,
+                        list_value: untyped,
+                        map_value: untyped,
+                        relationship_value: {
+                          target_entity_id: untyped,
+                          target_component_name: untyped
+                        },
+                        expression: String
+                      }
+                    ],
+                    relationship_value: untyped,
+                    expression: untyped
+                  }
+                ],
+                map_value: untyped,
+                relationship_value: untyped,
+                expression: untyped
+              },
+              time: String
+            }
+          ]
+        }
+      ]
+    ) -> _BatchPutPropertyValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutPropertyValuesResponse
+
+    interface _CancelMetadataTransferJobResponse
+      include Smithy::Client::_Response[Types::CancelMetadataTransferJobResponse]
+      def metadata_transfer_job_id: () -> String?
+      def arn: () -> String?
+      def update_date_time: () -> Time?
+      def status: () -> Types::MetadataTransferJobStatus?
+      def progress: () -> Types::MetadataTransferJobProgress?
+    end
+    def cancel_metadata_transfer_job: (
+      ?metadata_transfer_job_id: String
+    ) -> _CancelMetadataTransferJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMetadataTransferJobResponse
+
+    interface _CreateComponentTypeResponse
+      include Smithy::Client::_Response[Types::CreateComponentTypeOutput]
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+      def state: () -> String?
+    end
+    def create_component_type: (
+      ?workspace_id: String,
+      ?is_singleton: bool,
+      ?component_type_id: String,
+      ?description: String,
+      ?property_definitions: Hash[String,
+        {
+          data_type: {
+            type: String,
+            nested_type: untyped,
+            allowed_values: Array[
+              {
+                boolean_value: bool,
+                double_value: Float,
+                integer_value: Integer,
+                long_value: Integer,
+                string_value: String,
+                list_value: untyped,
+                map_value: Hash[String,
+                  {
+                    boolean_value: untyped,
+                    double_value: untyped,
+                    integer_value: untyped,
+                    long_value: untyped,
+                    string_value: untyped,
+                    list_value: untyped,
+                    map_value: untyped,
+                    relationship_value: {
+                      target_entity_id: String,
+                      target_component_name: String
+                    },
+                    expression: String
+                  }
+                ],
+                relationship_value: untyped,
+                expression: untyped
+              }
+            ],
+            unit_of_measure: untyped,
+            relationship: {
+              target_component_type_id: String,
+              relationship_type: untyped
+            }
+          },
+          is_required_in_entity: untyped,
+          is_external_id: untyped,
+          is_stored_externally: untyped,
+          is_time_series: untyped,
+          default_value: {
+            boolean_value: untyped,
+            double_value: untyped,
+            integer_value: untyped,
+            long_value: untyped,
+            string_value: untyped,
+            list_value: untyped,
+            map_value: untyped,
+            relationship_value: untyped,
+            expression: untyped
+          },
+          configuration: Hash[String, String],
+          display_name: String
+        }
+      ],
+      ?extends_from: Array[String],
+      ?functions: Hash[String,
+        {
+          required_properties: Array[String],
+          scope: String,
+          implemented_by: {
+            lambda: {
+              arn: String
+            },
+            is_native: bool
+          }
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?property_groups: Hash[String,
+        {
+          group_type: String,
+          property_names: Array[String]
+        }
+      ],
+      ?component_type_name: String,
+      ?composite_component_types: Hash[String,
+        {
+          component_type_id: String
+        }
+      ]
+    ) -> _CreateComponentTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentTypeResponse
+
+    interface _CreateEntityResponse
+      include Smithy::Client::_Response[Types::CreateEntityOutput]
+      def entity_id: () -> String?
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+      def state: () -> String?
+    end
+    def create_entity: (
+      ?workspace_id: String,
+      ?entity_id: String,
+      ?entity_name: String,
+      ?description: String,
+      ?components: Hash[String,
+        {
+          description: String,
+          component_type_id: String,
+          properties: Hash[String,
+            {
+              definition: {
+                data_type: {
+                  type: String,
+                  nested_type: untyped,
+                  allowed_values: Array[
+                    {
+                      boolean_value: bool,
+                      double_value: Float,
+                      integer_value: Integer,
+                      long_value: Integer,
+                      string_value: String,
+                      list_value: untyped,
+                      map_value: Hash[String,
+                        {
+                          boolean_value: untyped,
+                          double_value: untyped,
+                          integer_value: untyped,
+                          long_value: untyped,
+                          string_value: untyped,
+                          list_value: untyped,
+                          map_value: untyped,
+                          relationship_value: {
+                            target_entity_id: String,
+                            target_component_name: String
+                          },
+                          expression: String
+                        }
+                      ],
+                      relationship_value: untyped,
+                      expression: untyped
+                    }
+                  ],
+                  unit_of_measure: untyped,
+                  relationship: {
+                    target_component_type_id: untyped,
+                    relationship_type: untyped
+                  }
+                },
+                is_required_in_entity: untyped,
+                is_external_id: untyped,
+                is_stored_externally: untyped,
+                is_time_series: untyped,
+                default_value: {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  integer_value: untyped,
+                  long_value: untyped,
+                  string_value: untyped,
+                  list_value: untyped,
+                  map_value: untyped,
+                  relationship_value: untyped,
+                  expression: untyped
+                },
+                configuration: Hash[String, String],
+                display_name: String
+              },
+              value: untyped,
+              update_type: String
+            }
+          ],
+          property_groups: Hash[String,
+            {
+              group_type: String,
+              property_names: Array[String],
+              update_type: String
+            }
+          ]
+        }
+      ],
+      ?composite_components: Hash[String,
+        {
+          description: String,
+          properties: Hash[String,
+            {
+              definition: {
+                data_type: {
+                  type: String,
+                  nested_type: untyped,
+                  allowed_values: Array[
+                    {
+                      boolean_value: bool,
+                      double_value: Float,
+                      integer_value: Integer,
+                      long_value: Integer,
+                      string_value: String,
+                      list_value: untyped,
+                      map_value: Hash[String,
+                        {
+                          boolean_value: untyped,
+                          double_value: untyped,
+                          integer_value: untyped,
+                          long_value: untyped,
+                          string_value: untyped,
+                          list_value: untyped,
+                          map_value: untyped,
+                          relationship_value: {
+                            target_entity_id: String,
+                            target_component_name: String
+                          },
+                          expression: String
+                        }
+                      ],
+                      relationship_value: untyped,
+                      expression: untyped
+                    }
+                  ],
+                  unit_of_measure: untyped,
+                  relationship: {
+                    target_component_type_id: String,
+                    relationship_type: untyped
+                  }
+                },
+                is_required_in_entity: untyped,
+                is_external_id: untyped,
+                is_stored_externally: untyped,
+                is_time_series: untyped,
+                default_value: {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  integer_value: untyped,
+                  long_value: untyped,
+                  string_value: untyped,
+                  list_value: untyped,
+                  map_value: untyped,
+                  relationship_value: untyped,
+                  expression: untyped
+                },
+                configuration: Hash[String, String],
+                display_name: String
+              },
+              value: untyped,
+              update_type: String
+            }
+          ],
+          property_groups: Hash[String,
+            {
+              group_type: String,
+              property_names: Array[String],
+              update_type: String
+            }
+          ]
+        }
+      ],
+      ?parent_entity_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEntityResponse
+
+    interface _CreateMetadataTransferJobResponse
+      include Smithy::Client::_Response[Types::CreateMetadataTransferJobResponse]
+      def metadata_transfer_job_id: () -> String?
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+      def status: () -> Types::MetadataTransferJobStatus?
+    end
+    def create_metadata_transfer_job: (
+      ?metadata_transfer_job_id: String,
+      ?description: String,
+      ?sources: Array[
+        {
+          type: String,
+          s3_configuration: {
+            location: String
+          },
+          iot_site_wise_configuration: {
+            filters: Array[
+              {
+                filter_by_asset_model: {
+                  asset_model_id: String,
+                  asset_model_external_id: String,
+                  include_offspring: bool,
+                  include_assets: untyped
+                },
+                filter_by_asset: {
+                  asset_id: untyped,
+                  asset_external_id: untyped,
+                  include_offspring: untyped,
+                  include_asset_model: untyped
+                }
+              }
+            ]
+          },
+          iot_twin_maker_configuration: {
+            workspace: String,
+            filters: Array[
+              {
+                filter_by_component_type: {
+                  component_type_id: String
+                },
+                filter_by_entity: {
+                  entity_id: String
+                }
+              }
+            ]
+          }
+        }
+      ],
+      ?destination: {
+        type: String,
+        s3_configuration: {
+          location: String
+        },
+        iot_twin_maker_configuration: {
+          workspace: String
+        }
+      }
+    ) -> _CreateMetadataTransferJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMetadataTransferJobResponse
+
+    interface _CreateSceneResponse
+      include Smithy::Client::_Response[Types::CreateSceneOutput]
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def create_scene: (
+      ?workspace_id: String,
+      ?scene_id: String,
+      ?content_location: String,
+      ?description: String,
+      ?capabilities: Array[String],
+      ?tags: Hash[String, String],
+      ?scene_metadata: Hash[String, String]
+    ) -> _CreateSceneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSceneResponse
+
+    interface _CreateSyncJobResponse
+      include Smithy::Client::_Response[Types::CreateSyncJobOutput]
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+      def state: () -> String?
+    end
+    def create_sync_job: (
+      ?workspace_id: String,
+      ?sync_source: String,
+      ?sync_role: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSyncJobResponse
+
+    interface _CreateWorkspaceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceOutput]
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def create_workspace: (
+      ?workspace_id: String,
+      ?description: String,
+      ?s3_location: String,
+      ?role: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
+
+    interface _DeleteComponentTypeResponse
+      include Smithy::Client::_Response[Types::DeleteComponentTypeOutput]
+      def state: () -> String?
+    end
+    def delete_component_type: (
+      ?workspace_id: String,
+      ?component_type_id: String
+    ) -> _DeleteComponentTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComponentTypeResponse
+
+    interface _DeleteEntityResponse
+      include Smithy::Client::_Response[Types::DeleteEntityOutput]
+      def state: () -> String?
+    end
+    def delete_entity: (
+      ?workspace_id: String,
+      ?entity_id: String,
+      ?is_recursive: bool
+    ) -> _DeleteEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEntityResponse
+
+    interface _DeleteSceneResponse
+      include Smithy::Client::_Response[Types::DeleteSceneOutput]
+    end
+    def delete_scene: (
+      ?workspace_id: String,
+      ?scene_id: String
+    ) -> _DeleteSceneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSceneResponse
+
+    interface _DeleteSyncJobResponse
+      include Smithy::Client::_Response[Types::DeleteSyncJobOutput]
+      def state: () -> String?
+    end
+    def delete_sync_job: (
+      ?workspace_id: String,
+      ?sync_source: String
+    ) -> _DeleteSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSyncJobResponse
+
+    interface _DeleteWorkspaceResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceOutput]
+      def message: () -> String?
+    end
+    def delete_workspace: (
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceResponse
+
+    interface _ExecuteQueryResponse
+      include Smithy::Client::_Response[Types::ExecuteQueryOutput]
+      def column_descriptions: () -> Array[Types::ColumnDescription]?
+      def rows: () -> Array[Types::Row]?
+      def next_token: () -> String?
+    end
+    def execute_query: (
+      ?workspace_id: String,
+      ?query_statement: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ExecuteQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteQueryResponse
+
+    interface _GetComponentTypeResponse
+      include Smithy::Client::_Response[Types::GetComponentTypeOutput]
+      def workspace_id: () -> String?
+      def is_singleton: () -> bool?
+      def component_type_id: () -> String?
+      def description: () -> String?
+      def property_definitions: () -> Hash[String, Types::PropertyDefinitionResponse]?
+      def extends_from: () -> Array[String]?
+      def functions: () -> Hash[String, Types::FunctionResponse]?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+      def arn: () -> String?
+      def is_abstract: () -> bool?
+      def is_schema_initialized: () -> bool?
+      def status: () -> Types::Status?
+      def property_groups: () -> Hash[String, Types::PropertyGroupResponse]?
+      def sync_source: () -> String?
+      def component_type_name: () -> String?
+      def composite_component_types: () -> Hash[String, Types::CompositeComponentTypeResponse]?
+    end
+    def get_component_type: (
+      ?workspace_id: String,
+      ?component_type_id: String
+    ) -> _GetComponentTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentTypeResponse
+
+    interface _GetEntityResponse
+      include Smithy::Client::_Response[Types::GetEntityOutput]
+      def entity_id: () -> String?
+      def entity_name: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::Status?
+      def workspace_id: () -> String?
+      def description: () -> String?
+      def components: () -> Hash[String, Types::ComponentResponse]?
+      def parent_entity_id: () -> String?
+      def has_child_entities: () -> bool?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+      def sync_source: () -> String?
+      def are_all_components_returned: () -> bool?
+    end
+    def get_entity: (
+      ?workspace_id: String,
+      ?entity_id: String
+    ) -> _GetEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEntityResponse
+
+    interface _GetMetadataTransferJobResponse
+      include Smithy::Client::_Response[Types::GetMetadataTransferJobResponse]
+      def metadata_transfer_job_id: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def sources: () -> Array[Types::SourceConfiguration]?
+      def destination: () -> Types::DestinationConfiguration?
+      def metadata_transfer_job_role: () -> String?
+      def report_url: () -> String?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+      def status: () -> Types::MetadataTransferJobStatus?
+      def progress: () -> Types::MetadataTransferJobProgress?
+    end
+    def get_metadata_transfer_job: (
+      ?metadata_transfer_job_id: String
+    ) -> _GetMetadataTransferJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetadataTransferJobResponse
+
+    interface _GetPricingPlanResponse
+      include Smithy::Client::_Response[Types::GetPricingPlanOutput]
+      def current_pricing_plan: () -> Types::PricingPlan?
+      def pending_pricing_plan: () -> Types::PricingPlan?
+    end
+    def get_pricing_plan: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPricingPlanResponse
+
+    interface _GetPropertyValueResponse
+      include Smithy::Client::_Response[Types::GetPropertyValueOutput]
+      def property_values: () -> Hash[String, Types::PropertyLatestValue]?
+      def next_token: () -> String?
+      def tabular_property_values: () -> Array[Array[Hash[String, Types::DataValue]]]?
+    end
+    def get_property_value: (
+      ?component_name: String,
+      ?component_path: String,
+      ?component_type_id: String,
+      ?entity_id: String,
+      ?selected_properties: Array[String],
+      ?workspace_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?property_group_name: String,
+      ?tabular_conditions: {
+        order_by: Array[
+          {
+            order: String,
+            property_name: String
+          }
+        ],
+        property_filters: Array[
+          {
+            property_name: untyped,
+            operator: untyped,
+            value: {
+              boolean_value: bool,
+              double_value: Float,
+              integer_value: Integer,
+              long_value: Integer,
+              string_value: untyped,
+              list_value: Array[
+                {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  integer_value: untyped,
+                  long_value: untyped,
+                  string_value: untyped,
+                  list_value: untyped,
+                  map_value: Hash[String,
+                    {
+                      boolean_value: untyped,
+                      double_value: untyped,
+                      integer_value: untyped,
+                      long_value: untyped,
+                      string_value: untyped,
+                      list_value: untyped,
+                      map_value: untyped,
+                      relationship_value: {
+                        target_entity_id: String,
+                        target_component_name: String
+                      },
+                      expression: String
+                    }
+                  ],
+                  relationship_value: untyped,
+                  expression: untyped
+                }
+              ],
+              map_value: untyped,
+              relationship_value: untyped,
+              expression: untyped
+            }
+          }
+        ]
+      }
+    ) -> _GetPropertyValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPropertyValueResponse
+
+    interface _GetPropertyValueHistoryResponse
+      include Smithy::Client::_Response[Types::GetPropertyValueHistoryOutput]
+      def property_values: () -> Array[Types::PropertyValueHistory]?
+      def next_token: () -> String?
+    end
+    def get_property_value_history: (
+      ?workspace_id: String,
+      ?entity_id: String,
+      ?component_name: String,
+      ?component_path: String,
+      ?component_type_id: String,
+      ?selected_properties: Array[String],
+      ?property_filters: Array[
+        {
+          property_name: String,
+          operator: untyped,
+          value: {
+            boolean_value: bool,
+            double_value: Float,
+            integer_value: Integer,
+            long_value: Integer,
+            string_value: untyped,
+            list_value: Array[
+              {
+                boolean_value: untyped,
+                double_value: untyped,
+                integer_value: untyped,
+                long_value: untyped,
+                string_value: untyped,
+                list_value: untyped,
+                map_value: Hash[String,
+                  {
+                    boolean_value: untyped,
+                    double_value: untyped,
+                    integer_value: untyped,
+                    long_value: untyped,
+                    string_value: untyped,
+                    list_value: untyped,
+                    map_value: untyped,
+                    relationship_value: {
+                      target_entity_id: String,
+                      target_component_name: String
+                    },
+                    expression: String
+                  }
+                ],
+                relationship_value: untyped,
+                expression: untyped
+              }
+            ],
+            map_value: untyped,
+            relationship_value: untyped,
+            expression: untyped
+          }
+        }
+      ],
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?interpolation: {
+        interpolation_type: String,
+        interval_in_seconds: Integer
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?order_by_time: String,
+      ?start_time: String,
+      ?end_time: String
+    ) -> _GetPropertyValueHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPropertyValueHistoryResponse
+
+    interface _GetSceneResponse
+      include Smithy::Client::_Response[Types::GetSceneOutput]
+      def workspace_id: () -> String?
+      def scene_id: () -> String?
+      def content_location: () -> String?
+      def arn: () -> String?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+      def description: () -> String?
+      def capabilities: () -> Array[String]?
+      def scene_metadata: () -> Hash[String, String]?
+      def generated_scene_metadata: () -> Hash[String, String]?
+      def error: () -> Types::SceneError?
+    end
+    def get_scene: (
+      ?workspace_id: String,
+      ?scene_id: String
+    ) -> _GetSceneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSceneResponse
+
+    interface _GetSyncJobResponse
+      include Smithy::Client::_Response[Types::GetSyncJobOutput]
+      def arn: () -> String?
+      def workspace_id: () -> String?
+      def sync_source: () -> String?
+      def sync_role: () -> String?
+      def status: () -> Types::SyncJobStatus?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+    end
+    def get_sync_job: (
+      ?sync_source: String,
+      ?workspace_id: String
+    ) -> _GetSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSyncJobResponse
+
+    interface _GetWorkspaceResponse
+      include Smithy::Client::_Response[Types::GetWorkspaceOutput]
+      def workspace_id: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def linked_services: () -> Array[String]?
+      def s3_location: () -> String?
+      def role: () -> String?
+      def creation_date_time: () -> Time?
+      def update_date_time: () -> Time?
+    end
+    def get_workspace: (
+      ?workspace_id: String
+    ) -> _GetWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkspaceResponse
+
+    interface _ListComponentTypesResponse
+      include Smithy::Client::_Response[Types::ListComponentTypesOutput]
+      def workspace_id: () -> String?
+      def component_type_summaries: () -> Array[Types::ComponentTypeSummary]?
+      def next_token: () -> String?
+      def max_results: () -> Integer?
+    end
+    def list_component_types: (
+      ?workspace_id: String,
+      ?filters: Array[
+        {
+          extends_from: String,
+          namespace: String,
+          is_abstract: bool
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComponentTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentTypesResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsResponse]
+      def component_summaries: () -> Array[Types::ComponentSummary]?
+      def next_token: () -> String?
+    end
+    def list_components: (
+      ?workspace_id: String,
+      ?entity_id: String,
+      ?component_path: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListEntitiesResponse
+      include Smithy::Client::_Response[Types::ListEntitiesOutput]
+      def entity_summaries: () -> Array[Types::EntitySummary]?
+      def next_token: () -> String?
+    end
+    def list_entities: (
+      ?workspace_id: String,
+      ?filters: Array[
+        {
+          parent_entity_id: String,
+          component_type_id: String,
+          external_id: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitiesResponse
+
+    interface _ListMetadataTransferJobsResponse
+      include Smithy::Client::_Response[Types::ListMetadataTransferJobsResponse]
+      def metadata_transfer_job_summaries: () -> Array[Types::MetadataTransferJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_metadata_transfer_jobs: (
+      ?source_type: String,
+      ?destination_type: String,
+      ?filters: Array[
+        {
+          workspace_id: String,
+          state: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMetadataTransferJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetadataTransferJobsResponse
+
+    interface _ListPropertiesResponse
+      include Smithy::Client::_Response[Types::ListPropertiesResponse]
+      def property_summaries: () -> Array[Types::PropertySummary]?
+      def next_token: () -> String?
+    end
+    def list_properties: (
+      ?workspace_id: String,
+      ?component_name: String,
+      ?component_path: String,
+      ?entity_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPropertiesResponse
+
+    interface _ListScenesResponse
+      include Smithy::Client::_Response[Types::ListScenesOutput]
+      def scene_summaries: () -> Array[Types::SceneSummary]?
+      def next_token: () -> String?
+    end
+    def list_scenes: (
+      ?workspace_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScenesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScenesResponse
+
+    interface _ListSyncJobsResponse
+      include Smithy::Client::_Response[Types::ListSyncJobsOutput]
+      def sync_job_summaries: () -> Array[Types::SyncJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_sync_jobs: (
+      ?workspace_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSyncJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSyncJobsResponse
+
+    interface _ListSyncResourcesResponse
+      include Smithy::Client::_Response[Types::ListSyncResourcesOutput]
+      def sync_resources: () -> Array[Types::SyncResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_sync_resources: (
+      ?workspace_id: String,
+      ?sync_source: String,
+      ?filters: Array[
+        {
+          state: String,
+          resource_type: String,
+          resource_id: String,
+          external_id: untyped
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSyncResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSyncResourcesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkspacesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacesOutput]
+      def workspace_summaries: () -> Array[Types::WorkspaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_workspaces: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateComponentTypeResponse
+      include Smithy::Client::_Response[Types::UpdateComponentTypeOutput]
+      def workspace_id: () -> String?
+      def arn: () -> String?
+      def component_type_id: () -> String?
+      def state: () -> String?
+    end
+    def update_component_type: (
+      ?workspace_id: String,
+      ?is_singleton: bool,
+      ?component_type_id: String,
+      ?description: String,
+      ?property_definitions: Hash[String,
+        {
+          data_type: {
+            type: String,
+            nested_type: untyped,
+            allowed_values: Array[
+              {
+                boolean_value: bool,
+                double_value: Float,
+                integer_value: Integer,
+                long_value: Integer,
+                string_value: String,
+                list_value: untyped,
+                map_value: Hash[String,
+                  {
+                    boolean_value: untyped,
+                    double_value: untyped,
+                    integer_value: untyped,
+                    long_value: untyped,
+                    string_value: untyped,
+                    list_value: untyped,
+                    map_value: untyped,
+                    relationship_value: {
+                      target_entity_id: String,
+                      target_component_name: String
+                    },
+                    expression: String
+                  }
+                ],
+                relationship_value: untyped,
+                expression: untyped
+              }
+            ],
+            unit_of_measure: untyped,
+            relationship: {
+              target_component_type_id: String,
+              relationship_type: untyped
+            }
+          },
+          is_required_in_entity: untyped,
+          is_external_id: untyped,
+          is_stored_externally: untyped,
+          is_time_series: untyped,
+          default_value: {
+            boolean_value: untyped,
+            double_value: untyped,
+            integer_value: untyped,
+            long_value: untyped,
+            string_value: untyped,
+            list_value: untyped,
+            map_value: untyped,
+            relationship_value: untyped,
+            expression: untyped
+          },
+          configuration: Hash[String, String],
+          display_name: String
+        }
+      ],
+      ?extends_from: Array[String],
+      ?functions: Hash[String,
+        {
+          required_properties: Array[String],
+          scope: String,
+          implemented_by: {
+            lambda: {
+              arn: String
+            },
+            is_native: bool
+          }
+        }
+      ],
+      ?property_groups: Hash[String,
+        {
+          group_type: String,
+          property_names: Array[String]
+        }
+      ],
+      ?component_type_name: String,
+      ?composite_component_types: Hash[String,
+        {
+          component_type_id: String
+        }
+      ]
+    ) -> _UpdateComponentTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComponentTypeResponse
+
+    interface _UpdateEntityResponse
+      include Smithy::Client::_Response[Types::UpdateEntityOutput]
+      def update_date_time: () -> Time?
+      def state: () -> String?
+    end
+    def update_entity: (
+      ?workspace_id: String,
+      ?entity_id: String,
+      ?entity_name: String,
+      ?description: String,
+      ?component_updates: Hash[String,
+        {
+          update_type: String,
+          description: String,
+          component_type_id: String,
+          property_updates: Hash[String,
+            {
+              definition: {
+                data_type: {
+                  type: String,
+                  nested_type: untyped,
+                  allowed_values: Array[
+                    {
+                      boolean_value: bool,
+                      double_value: Float,
+                      integer_value: Integer,
+                      long_value: Integer,
+                      string_value: String,
+                      list_value: untyped,
+                      map_value: Hash[String,
+                        {
+                          boolean_value: untyped,
+                          double_value: untyped,
+                          integer_value: untyped,
+                          long_value: untyped,
+                          string_value: untyped,
+                          list_value: untyped,
+                          map_value: untyped,
+                          relationship_value: {
+                            target_entity_id: String,
+                            target_component_name: String
+                          },
+                          expression: String
+                        }
+                      ],
+                      relationship_value: untyped,
+                      expression: untyped
+                    }
+                  ],
+                  unit_of_measure: untyped,
+                  relationship: {
+                    target_component_type_id: untyped,
+                    relationship_type: untyped
+                  }
+                },
+                is_required_in_entity: untyped,
+                is_external_id: untyped,
+                is_stored_externally: untyped,
+                is_time_series: untyped,
+                default_value: {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  integer_value: untyped,
+                  long_value: untyped,
+                  string_value: untyped,
+                  list_value: untyped,
+                  map_value: untyped,
+                  relationship_value: untyped,
+                  expression: untyped
+                },
+                configuration: Hash[String, String],
+                display_name: String
+              },
+              value: untyped,
+              update_type: String
+            }
+          ],
+          property_group_updates: Hash[String,
+            {
+              group_type: String,
+              property_names: Array[String],
+              update_type: String
+            }
+          ]
+        }
+      ],
+      ?composite_component_updates: Hash[String,
+        {
+          update_type: String,
+          description: String,
+          property_updates: Hash[String,
+            {
+              definition: {
+                data_type: {
+                  type: String,
+                  nested_type: untyped,
+                  allowed_values: Array[
+                    {
+                      boolean_value: bool,
+                      double_value: Float,
+                      integer_value: Integer,
+                      long_value: Integer,
+                      string_value: String,
+                      list_value: untyped,
+                      map_value: Hash[String,
+                        {
+                          boolean_value: untyped,
+                          double_value: untyped,
+                          integer_value: untyped,
+                          long_value: untyped,
+                          string_value: untyped,
+                          list_value: untyped,
+                          map_value: untyped,
+                          relationship_value: {
+                            target_entity_id: String,
+                            target_component_name: String
+                          },
+                          expression: String
+                        }
+                      ],
+                      relationship_value: untyped,
+                      expression: untyped
+                    }
+                  ],
+                  unit_of_measure: untyped,
+                  relationship: {
+                    target_component_type_id: String,
+                    relationship_type: untyped
+                  }
+                },
+                is_required_in_entity: untyped,
+                is_external_id: untyped,
+                is_stored_externally: untyped,
+                is_time_series: untyped,
+                default_value: {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  integer_value: untyped,
+                  long_value: untyped,
+                  string_value: untyped,
+                  list_value: untyped,
+                  map_value: untyped,
+                  relationship_value: untyped,
+                  expression: untyped
+                },
+                configuration: Hash[String, String],
+                display_name: String
+              },
+              value: untyped,
+              update_type: String
+            }
+          ],
+          property_group_updates: Hash[String,
+            {
+              group_type: String,
+              property_names: Array[String],
+              update_type: String
+            }
+          ]
+        }
+      ],
+      ?parent_entity_update: {
+        update_type: String,
+        parent_entity_id: String
+      }
+    ) -> _UpdateEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEntityResponse
+
+    interface _UpdatePricingPlanResponse
+      include Smithy::Client::_Response[Types::UpdatePricingPlanOutput]
+      def current_pricing_plan: () -> Types::PricingPlan?
+      def pending_pricing_plan: () -> Types::PricingPlan?
+    end
+    def update_pricing_plan: (
+      ?pricing_mode: String,
+      ?bundle_names: Array[String]
+    ) -> _UpdatePricingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePricingPlanResponse
+
+    interface _UpdateSceneResponse
+      include Smithy::Client::_Response[Types::UpdateSceneOutput]
+      def update_date_time: () -> Time?
+    end
+    def update_scene: (
+      ?workspace_id: String,
+      ?scene_id: String,
+      ?content_location: String,
+      ?description: String,
+      ?capabilities: Array[String],
+      ?scene_metadata: Hash[String, String]
+    ) -> _UpdateSceneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSceneResponse
+
+    interface _UpdateWorkspaceResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceOutput]
+      def update_date_time: () -> Time?
+    end
+    def update_workspace: (
+      ?workspace_id: String,
+      ?description: String,
+      ?role: String,
+      ?s3_location: String
+    ) -> _UpdateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceResponse
+  end
+end

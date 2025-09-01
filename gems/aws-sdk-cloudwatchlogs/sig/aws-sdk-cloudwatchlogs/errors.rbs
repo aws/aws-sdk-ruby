@@ -1,0 +1,68 @@
+module Aws::CloudWatchLogs
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataAlreadyAcceptedException < Smithy::Client::ServiceError
+      def expected_sequence_token: () -> String?
+      def message: () -> String?
+    end
+    class InternalStreamingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSequenceTokenException < Smithy::Client::ServiceError
+      def expected_sequence_token: () -> String?
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedQueryException < Smithy::Client::ServiceError
+      def query_compile_error: () -> Types::QueryCompileError?
+      def message: () -> String?
+    end
+    class OperationAbortedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SessionStreamingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SessionTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class UnrecognizedClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Organizations
+      VERSION: String
+    end
+  end

@@ -1,0 +1,741 @@
+module Aws::Evs
+  module Types
+
+    class Check
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?result: String,
+        ?impaired_since: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor result: String?
+      attr_accessor impaired_since: Time?
+    end
+
+    module CheckResult
+      PASSED: String
+      FAILED: String
+      UNKNOWN: String
+    end
+
+    module CheckType
+      KEY_REUSE: String
+      KEY_COVERAGE: String
+      REACHABILITY: String
+      HOST_COUNT: String
+    end
+
+    class ConnectivityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_route_server_peerings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_route_server_peerings: Array[String]?
+    end
+
+    class CreateEnvironmentHostRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_id: String,
+        ?host: Types::HostInfoForCreate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_id: String?
+      attr_accessor host: Types::HostInfoForCreate?
+    end
+
+    class CreateEnvironmentHostResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_summary: Types::EnvironmentSummary,
+        ?host: Types::Host,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_summary: Types::EnvironmentSummary?
+      attr_accessor host: Types::Host?
+    end
+
+    class CreateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_name: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+        ?service_access_security_groups: Types::ServiceAccessSecurityGroups,
+        ?vpc_id: String,
+        ?service_access_subnet_id: String,
+        ?vcf_version: String,
+        ?terms_accepted: bool,
+        ?license_info: Array[Types::LicenseInfo],
+        ?initial_vlans: Types::InitialVlans,
+        ?hosts: Array[Types::HostInfoForCreate],
+        ?connectivity_info: Types::ConnectivityInfo,
+        ?vcf_hostnames: Types::VcfHostnames,
+        ?site_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor service_access_security_groups: Types::ServiceAccessSecurityGroups?
+      attr_accessor vpc_id: String?
+      attr_accessor service_access_subnet_id: String?
+      attr_accessor vcf_version: String?
+      attr_accessor terms_accepted: bool?
+      attr_accessor license_info: Array[Types::LicenseInfo]?
+      attr_accessor initial_vlans: Types::InitialVlans?
+      attr_accessor hosts: Array[Types::HostInfoForCreate]?
+      attr_accessor connectivity_info: Types::ConnectivityInfo?
+      attr_accessor vcf_hostnames: Types::VcfHostnames?
+      attr_accessor site_id: String?
+    end
+
+    class CreateEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class DeleteEnvironmentHostRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_id: String,
+        ?host_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_id: String?
+      attr_accessor host_name: String?
+    end
+
+    class DeleteEnvironmentHostResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_summary: Types::EnvironmentSummary,
+        ?host: Types::Host,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_summary: Types::EnvironmentSummary?
+      attr_accessor host: Types::Host?
+    end
+
+    class DeleteEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_id: String?
+    end
+
+    class DeleteEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_state: String,
+        ?state_details: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?environment_arn: String,
+        ?environment_name: String,
+        ?vpc_id: String,
+        ?service_access_subnet_id: String,
+        ?vcf_version: String,
+        ?terms_accepted: bool,
+        ?license_info: Array[Types::LicenseInfo],
+        ?site_id: String,
+        ?environment_status: String,
+        ?checks: Array[Types::Check],
+        ?connectivity_info: Types::ConnectivityInfo,
+        ?vcf_hostnames: Types::VcfHostnames,
+        ?kms_key_id: String,
+        ?service_access_security_groups: Types::ServiceAccessSecurityGroups,
+        ?credentials: Array[Types::Secret],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_state: String?
+      attr_accessor state_details: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor environment_arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor vpc_id: String?
+      attr_accessor service_access_subnet_id: String?
+      attr_accessor vcf_version: String?
+      attr_accessor terms_accepted: bool?
+      attr_accessor license_info: Array[Types::LicenseInfo]?
+      attr_accessor site_id: String?
+      attr_accessor environment_status: String?
+      attr_accessor checks: Array[Types::Check]?
+      attr_accessor connectivity_info: Types::ConnectivityInfo?
+      attr_accessor vcf_hostnames: Types::VcfHostnames?
+      attr_accessor kms_key_id: String?
+      attr_accessor service_access_security_groups: Types::ServiceAccessSecurityGroups?
+      attr_accessor credentials: Array[Types::Secret]?
+    end
+
+    module EnvironmentState
+      CREATING: String
+      CREATED: String
+      DELETING: String
+      DELETED: String
+      CREATE_FAILED: String
+    end
+
+    class EnvironmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+        ?vcf_version: String,
+        ?environment_status: String,
+        ?environment_state: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?environment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor vcf_version: String?
+      attr_accessor environment_status: String?
+      attr_accessor environment_state: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor environment_arn: String?
+    end
+
+    class GetEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class GetEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class Host
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?ip_address: String,
+        ?key_name: String,
+        ?instance_type: String,
+        ?placement_group_id: String,
+        ?dedicated_host_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?host_state: String,
+        ?state_details: String,
+        ?ec2_instance_id: String,
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor ip_address: String?
+      attr_accessor key_name: String?
+      attr_accessor instance_type: String?
+      attr_accessor placement_group_id: String?
+      attr_accessor dedicated_host_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor host_state: String?
+      attr_accessor state_details: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    class HostInfoForCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?key_name: String,
+        ?instance_type: String,
+        ?placement_group_id: String,
+        ?dedicated_host_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor key_name: String?
+      attr_accessor instance_type: String?
+      attr_accessor placement_group_id: String?
+      attr_accessor dedicated_host_id: String?
+    end
+
+    module HostState
+      CREATING: String
+      CREATED: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+    end
+
+    class InitialVlanInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class InitialVlans
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vmk_management: Types::InitialVlanInfo,
+        ?vm_management: Types::InitialVlanInfo,
+        ?v_motion: Types::InitialVlanInfo,
+        ?v_san: Types::InitialVlanInfo,
+        ?v_tep: Types::InitialVlanInfo,
+        ?edge_v_tep: Types::InitialVlanInfo,
+        ?nsx_uplink: Types::InitialVlanInfo,
+        ?hcx: Types::InitialVlanInfo,
+        ?expansion_vlan1: Types::InitialVlanInfo,
+        ?expansion_vlan2: Types::InitialVlanInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vmk_management: Types::InitialVlanInfo?
+      attr_accessor vm_management: Types::InitialVlanInfo?
+      attr_accessor v_motion: Types::InitialVlanInfo?
+      attr_accessor v_san: Types::InitialVlanInfo?
+      attr_accessor v_tep: Types::InitialVlanInfo?
+      attr_accessor edge_v_tep: Types::InitialVlanInfo?
+      attr_accessor nsx_uplink: Types::InitialVlanInfo?
+      attr_accessor hcx: Types::InitialVlanInfo?
+      attr_accessor expansion_vlan1: Types::InitialVlanInfo?
+      attr_accessor expansion_vlan2: Types::InitialVlanInfo?
+    end
+
+    module InstanceType
+      I4I_METAL: String
+    end
+
+    class LicenseInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_key: String,
+        ?vsan_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_key: String?
+      attr_accessor vsan_key: String?
+    end
+
+    class ListEnvironmentHostsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor environment_id: String?
+    end
+
+    class ListEnvironmentHostsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_hosts: Array[Types::Host],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_hosts: Array[Types::Host]?
+    end
+
+    class ListEnvironmentVlansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor environment_id: String?
+    end
+
+    class ListEnvironmentVlansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_vlans: Array[Types::Vlan],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_vlans: Array[Types::Vlan]?
+    end
+
+    class ListEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state: Array[String]?
+    end
+
+    class ListEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_summaries: Array[Types::EnvironmentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_summaries: Array[Types::EnvironmentSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class Secret
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+    end
+
+    class ServiceAccessSecurityGroups
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class VcfHostnames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_center: String,
+        ?nsx: String,
+        ?nsx_manager1: String,
+        ?nsx_manager2: String,
+        ?nsx_manager3: String,
+        ?nsx_edge1: String,
+        ?nsx_edge2: String,
+        ?sddc_manager: String,
+        ?cloud_builder: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_center: String?
+      attr_accessor nsx: String?
+      attr_accessor nsx_manager1: String?
+      attr_accessor nsx_manager2: String?
+      attr_accessor nsx_manager3: String?
+      attr_accessor nsx_edge1: String?
+      attr_accessor nsx_edge2: String?
+      attr_accessor sddc_manager: String?
+      attr_accessor cloud_builder: String?
+    end
+
+    module VcfVersion
+      VCF_5_2_1: String
+    end
+
+    class Vlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vlan_id: Integer,
+        ?cidr: String,
+        ?availability_zone: String,
+        ?function_name: String,
+        ?subnet_id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?vlan_state: String,
+        ?state_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vlan_id: Integer?
+      attr_accessor cidr: String?
+      attr_accessor availability_zone: String?
+      attr_accessor function_name: String?
+      attr_accessor subnet_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor vlan_state: String?
+      attr_accessor state_details: String?
+    end
+
+    module VlanState
+      CREATING: String
+      CREATED: String
+      DELETING: String
+      DELETED: String
+      CREATE_FAILED: String
+    end
+  end
+end

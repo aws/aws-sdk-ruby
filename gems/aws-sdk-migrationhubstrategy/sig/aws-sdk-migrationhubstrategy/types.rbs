@@ -1,0 +1,1590 @@
+module Aws::MigrationHubStrategy
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AnalysisStatusUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?runtime_analysis_status: String,
+        ?src_code_or_db_analysis_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_analysis_status: String?
+      attr_accessor src_code_or_db_analysis_status: String?
+
+      class RuntimeAnalysisStatus < AnalysisStatusUnion
+      end
+      class SrcCodeOrDbAnalysisStatus < AnalysisStatusUnion
+      end
+      class Unknown < AnalysisStatusUnion
+      end
+    end
+
+    class AnalyzableServerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?ip_address: String,
+        ?source: String,
+        ?vm_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor ip_address: String?
+      attr_accessor source: String?
+      attr_accessor vm_id: String?
+    end
+
+    class AnalyzerNameUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?binary_analyzer_name: String,
+        ?run_time_analyzer_name: String,
+        ?source_code_analyzer_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor binary_analyzer_name: String?
+      attr_accessor run_time_analyzer_name: String?
+      attr_accessor source_code_analyzer_name: String?
+
+      class BinaryAnalyzerName < AnalyzerNameUnion
+      end
+      class RunTimeAnalyzerName < AnalyzerNameUnion
+      end
+      class SourceCodeAnalyzerName < AnalyzerNameUnion
+      end
+      class Unknown < AnalyzerNameUnion
+      end
+    end
+
+    class AntipatternReportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analyzer_name: Types::AnalyzerNameUnion,
+        ?anti_pattern_report_s3_object: Types::S3Object,
+        ?antipattern_report_status: String,
+        ?antipattern_report_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analyzer_name: Types::AnalyzerNameUnion?
+      attr_accessor anti_pattern_report_s3_object: Types::S3Object?
+      attr_accessor antipattern_report_status: String?
+      attr_accessor antipattern_report_status_message: String?
+    end
+
+    class AntipatternSeveritySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severity: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severity: String?
+      attr_accessor count: Integer?
+    end
+
+    class AppUnitError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_unit_error_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_unit_error_category: String?
+    end
+
+    class ApplicationComponentDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?recommendation_set: Types::RecommendationSet,
+        ?analysis_status: String,
+        ?status_message: String,
+        ?list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary],
+        ?database_config_detail: Types::DatabaseConfigDetail,
+        ?source_code_repositories: Array[Types::SourceCodeRepository],
+        ?app_type: String,
+        ?resource_sub_type: String,
+        ?inclusion_status: String,
+        ?antipattern_report_s3_object: Types::S3Object,
+        ?antipattern_report_status: String,
+        ?antipattern_report_status_message: String,
+        ?os_version: String,
+        ?os_driver: String,
+        ?last_analyzed_timestamp: Time,
+        ?associated_server_id: String,
+        ?more_server_association_exists: bool,
+        ?runtime_status: String,
+        ?runtime_status_message: String,
+        ?app_unit_error: Types::AppUnitError,
+        ?result_list: Array[Types::Result],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor recommendation_set: Types::RecommendationSet?
+      attr_accessor analysis_status: String?
+      attr_accessor status_message: String?
+      attr_accessor list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary]?
+      attr_accessor database_config_detail: Types::DatabaseConfigDetail?
+      attr_accessor source_code_repositories: Array[Types::SourceCodeRepository]?
+      attr_accessor app_type: String?
+      attr_accessor resource_sub_type: String?
+      attr_accessor inclusion_status: String?
+      attr_accessor antipattern_report_s3_object: Types::S3Object?
+      attr_accessor antipattern_report_status: String?
+      attr_accessor antipattern_report_status_message: String?
+      attr_accessor os_version: String?
+      attr_accessor os_driver: String?
+      attr_accessor last_analyzed_timestamp: Time?
+      attr_accessor associated_server_id: String?
+      attr_accessor more_server_association_exists: bool?
+      attr_accessor runtime_status: String?
+      attr_accessor runtime_status_message: String?
+      attr_accessor app_unit_error: Types::AppUnitError?
+      attr_accessor result_list: Array[Types::Result]?
+    end
+
+    class ApplicationComponentStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?src_code_or_db_analysis_status: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor src_code_or_db_analysis_status: String?
+      attr_accessor count: Integer?
+    end
+
+    class ApplicationComponentStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation: Types::RecommendationSet,
+        ?status: String,
+        ?is_preferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation: Types::RecommendationSet?
+      attr_accessor status: String?
+      attr_accessor is_preferred: bool?
+    end
+
+    class ApplicationComponentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class ApplicationPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_preference: Types::ManagementPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_preference: Types::ManagementPreference?
+    end
+
+    class AssessmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list_server_strategy_summary: Array[Types::StrategySummary],
+        ?list_application_component_strategy_summary: Array[Types::StrategySummary],
+        ?list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary],
+        ?list_application_component_summary: Array[Types::ApplicationComponentSummary],
+        ?list_server_summary: Array[Types::ServerSummary],
+        ?antipattern_report_s3_object: Types::S3Object,
+        ?antipattern_report_status: String,
+        ?antipattern_report_status_message: String,
+        ?last_analyzed_timestamp: Time,
+        ?list_application_component_status_summary: Array[Types::ApplicationComponentStatusSummary],
+        ?list_server_status_summary: Array[Types::ServerStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list_server_strategy_summary: Array[Types::StrategySummary]?
+      attr_accessor list_application_component_strategy_summary: Array[Types::StrategySummary]?
+      attr_accessor list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary]?
+      attr_accessor list_application_component_summary: Array[Types::ApplicationComponentSummary]?
+      attr_accessor list_server_summary: Array[Types::ServerSummary]?
+      attr_accessor antipattern_report_s3_object: Types::S3Object?
+      attr_accessor antipattern_report_status: String?
+      attr_accessor antipattern_report_status_message: String?
+      attr_accessor last_analyzed_timestamp: Time?
+      attr_accessor list_application_component_status_summary: Array[Types::ApplicationComponentStatusSummary]?
+      attr_accessor list_server_status_summary: Array[Types::ServerStatusSummary]?
+    end
+
+    class AssessmentTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition: String,
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition: String?
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class AssociatedApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+    end
+
+    class AwsManagedResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_destination: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_destination: Array[String]?
+    end
+
+    class BusinessGoals
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speed_of_migration: Integer,
+        ?reduce_operational_overhead_with_managed_services: Integer,
+        ?modernize_infrastructure_with_cloud_native_technologies: Integer,
+        ?license_cost_reduction: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speed_of_migration: Integer?
+      attr_accessor reduce_operational_overhead_with_managed_services: Integer?
+      attr_accessor modernize_infrastructure_with_cloud_native_technologies: Integer?
+      attr_accessor license_cost_reduction: Integer?
+    end
+
+    class Collector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collector_id: String,
+        ?ip_address: String,
+        ?host_name: String,
+        ?collector_health: String,
+        ?collector_version: String,
+        ?registered_time_stamp: String,
+        ?last_activity_time_stamp: String,
+        ?configuration_summary: Types::ConfigurationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collector_id: String?
+      attr_accessor ip_address: String?
+      attr_accessor host_name: String?
+      attr_accessor collector_health: String?
+      attr_accessor collector_version: String?
+      attr_accessor registered_time_stamp: String?
+      attr_accessor last_activity_time_stamp: String?
+      attr_accessor configuration_summary: Types::ConfigurationSummary?
+    end
+
+    class ConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcenter_based_remote_info_list: Array[Types::VcenterBasedRemoteInfo],
+        ?ip_address_based_remote_info_list: Array[Types::IPAddressBasedRemoteInfo],
+        ?version_control_info_list: Array[Types::VersionControlInfo],
+        ?pipeline_info_list: Array[Types::PipelineInfo],
+        ?remote_source_code_analysis_server_info: Types::RemoteSourceCodeAnalysisServerInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcenter_based_remote_info_list: Array[Types::VcenterBasedRemoteInfo]?
+      attr_accessor ip_address_based_remote_info_list: Array[Types::IPAddressBasedRemoteInfo]?
+      attr_accessor version_control_info_list: Array[Types::VersionControlInfo]?
+      attr_accessor pipeline_info_list: Array[Types::PipelineInfo]?
+      attr_accessor remote_source_code_analysis_server_info: Types::RemoteSourceCodeAnalysisServerInfo?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataCollectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?servers: Integer,
+        ?failed: Integer,
+        ?success: Integer,
+        ?in_progress: Integer,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor servers: Integer?
+      attr_accessor failed: Integer?
+      attr_accessor success: Integer?
+      attr_accessor in_progress: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor status_message: String?
+    end
+
+    class DatabaseConfigDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+    end
+
+    class DatabaseMigrationPreference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?heterogeneous: Types::Heterogeneous,
+        ?homogeneous: Types::Homogeneous,
+        ?no_preference: Types::NoDatabaseMigrationPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor heterogeneous: Types::Heterogeneous?
+      attr_accessor homogeneous: Types::Homogeneous?
+      attr_accessor no_preference: Types::NoDatabaseMigrationPreference?
+
+      class Heterogeneous < DatabaseMigrationPreference
+      end
+      class Homogeneous < DatabaseMigrationPreference
+      end
+      class NoPreference < DatabaseMigrationPreference
+      end
+      class Unknown < DatabaseMigrationPreference
+      end
+    end
+
+    class DatabasePreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_management_preference: String,
+        ?database_migration_preference: Types::DatabaseMigrationPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_management_preference: String?
+      attr_accessor database_migration_preference: Types::DatabaseMigrationPreference?
+    end
+
+    class DependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetApplicationComponentDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_id: String?
+    end
+
+    class GetApplicationComponentDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_detail: Types::ApplicationComponentDetail,
+        ?associated_applications: Array[Types::AssociatedApplication],
+        ?more_application_resource: bool,
+        ?associated_server_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_detail: Types::ApplicationComponentDetail?
+      attr_accessor associated_applications: Array[Types::AssociatedApplication]?
+      attr_accessor more_application_resource: bool?
+      attr_accessor associated_server_ids: Array[String]?
+    end
+
+    class GetApplicationComponentStrategiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_id: String?
+    end
+
+    class GetApplicationComponentStrategiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_strategies: Array[Types::ApplicationComponentStrategy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_strategies: Array[Types::ApplicationComponentStrategy]?
+    end
+
+    class GetAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_collection_details: Types::DataCollectionDetails,
+        ?assessment_targets: Array[Types::AssessmentTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_collection_details: Types::DataCollectionDetails?
+      attr_accessor assessment_targets: Array[Types::AssessmentTarget]?
+    end
+
+    class GetImportFileTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetImportFileTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?input_s3_bucket: String,
+        ?input_s3_key: String,
+        ?status_report_s3_bucket: String,
+        ?status_report_s3_key: String,
+        ?completion_time: Time,
+        ?number_of_records_success: Integer,
+        ?number_of_records_failed: Integer,
+        ?import_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor input_s3_bucket: String?
+      attr_accessor input_s3_key: String?
+      attr_accessor status_report_s3_bucket: String?
+      attr_accessor status_report_s3_key: String?
+      attr_accessor completion_time: Time?
+      attr_accessor number_of_records_success: Integer?
+      attr_accessor number_of_records_failed: Integer?
+      attr_accessor import_name: String?
+    end
+
+    class GetLatestAssessmentIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetLatestAssessmentIdOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetPortfolioPreferencesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetPortfolioPreferencesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prioritize_business_goals: Types::PrioritizeBusinessGoals,
+        ?application_preferences: Types::ApplicationPreferences,
+        ?database_preferences: Types::DatabasePreferences,
+        ?application_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prioritize_business_goals: Types::PrioritizeBusinessGoals?
+      attr_accessor application_preferences: Types::ApplicationPreferences?
+      attr_accessor database_preferences: Types::DatabasePreferences?
+      attr_accessor application_mode: String?
+    end
+
+    class GetPortfolioSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetPortfolioSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_summary: Types::AssessmentSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_summary: Types::AssessmentSummary?
+    end
+
+    class GetRecommendationReportDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetRecommendationReportDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?recommendation_report_details: Types::RecommendationReportDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor recommendation_report_details: Types::RecommendationReportDetails?
+    end
+
+    class GetServerDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetServerDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?server_detail: Types::ServerDetail,
+        ?associated_applications: Array[Types::AssociatedApplication],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor server_detail: Types::ServerDetail?
+      attr_accessor associated_applications: Array[Types::AssociatedApplication]?
+    end
+
+    class GetServerStrategiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class GetServerStrategiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_strategies: Array[Types::ServerStrategy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_strategies: Array[Types::ServerStrategy]?
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class Heterogeneous
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_database_engine: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_database_engine: Array[String]?
+    end
+
+    class Homogeneous
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_database_engine: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_database_engine: Array[String]?
+    end
+
+    class IPAddressBasedRemoteInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address_configuration_time_stamp: String,
+        ?auth_type: String,
+        ?os_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address_configuration_time_stamp: String?
+      attr_accessor auth_type: String?
+      attr_accessor os_type: String?
+    end
+
+    class ImportFileTaskInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?input_s3_bucket: String,
+        ?input_s3_key: String,
+        ?status_report_s3_bucket: String,
+        ?status_report_s3_key: String,
+        ?completion_time: Time,
+        ?number_of_records_success: Integer,
+        ?number_of_records_failed: Integer,
+        ?import_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor input_s3_bucket: String?
+      attr_accessor input_s3_key: String?
+      attr_accessor status_report_s3_bucket: String?
+      attr_accessor status_report_s3_key: String?
+      attr_accessor completion_time: Time?
+      attr_accessor number_of_records_success: Integer?
+      attr_accessor number_of_records_failed: Integer?
+      attr_accessor import_name: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAnalyzableServersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAnalyzableServersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analyzable_servers: Array[Types::AnalyzableServerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analyzable_servers: Array[Types::AnalyzableServerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationComponentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_criteria: String,
+        ?filter_value: String,
+        ?sort: String,
+        ?group_id_filter: Array[Types::Group],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_criteria: String?
+      attr_accessor filter_value: String?
+      attr_accessor sort: String?
+      attr_accessor group_id_filter: Array[Types::Group]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationComponentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_infos: Array[Types::ApplicationComponentDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_infos: Array[Types::ApplicationComponentDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCollectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collectors: Array[Types::Collector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collectors: Array[Types::Collector]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportFileTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListImportFileTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_infos: Array[Types::ImportFileTaskInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_infos: Array[Types::ImportFileTaskInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_criteria: String,
+        ?filter_value: String,
+        ?sort: String,
+        ?group_id_filter: Array[Types::Group],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_criteria: String?
+      attr_accessor filter_value: String?
+      attr_accessor sort: String?
+      attr_accessor group_id_filter: Array[Types::Group]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_infos: Array[Types::ServerDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_infos: Array[Types::ServerDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagementPreference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?aws_managed_resources: Types::AwsManagedResources,
+        ?self_manage_resources: Types::SelfManageResources,
+        ?no_preference: Types::NoManagementPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_managed_resources: Types::AwsManagedResources?
+      attr_accessor self_manage_resources: Types::SelfManageResources?
+      attr_accessor no_preference: Types::NoManagementPreference?
+
+      class AwsManagedResources < ManagementPreference
+      end
+      class SelfManageResources < ManagementPreference
+      end
+      class NoPreference < ManagementPreference
+      end
+      class Unknown < ManagementPreference
+      end
+    end
+
+    class NetworkInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_name: String,
+        ?ip_address: String,
+        ?mac_address: String,
+        ?net_mask: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_name: String?
+      attr_accessor ip_address: String?
+      attr_accessor mac_address: String?
+      attr_accessor net_mask: String?
+    end
+
+    class NoDatabaseMigrationPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_database_engine: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_database_engine: Array[String]?
+    end
+
+    class NoManagementPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_destination: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_destination: Array[String]?
+    end
+
+    class OSInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor version: String?
+    end
+
+    class PipelineInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_type: String,
+        ?pipeline_configuration_time_stamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_type: String?
+      attr_accessor pipeline_configuration_time_stamp: String?
+    end
+
+    class PrioritizeBusinessGoals
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_goals: Types::BusinessGoals,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_goals: Types::BusinessGoals?
+    end
+
+    class PutPortfolioPreferencesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prioritize_business_goals: Types::PrioritizeBusinessGoals,
+        ?application_preferences: Types::ApplicationPreferences,
+        ?database_preferences: Types::DatabasePreferences,
+        ?application_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prioritize_business_goals: Types::PrioritizeBusinessGoals?
+      attr_accessor application_preferences: Types::ApplicationPreferences?
+      attr_accessor database_preferences: Types::DatabasePreferences?
+      attr_accessor application_mode: String?
+    end
+
+    class PutPortfolioPreferencesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RecommendationReportDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?s3_bucket: String,
+        ?s3_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_keys: Array[String]?
+    end
+
+    class RecommendationSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformation_tool: Types::TransformationTool,
+        ?target_destination: String,
+        ?strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformation_tool: Types::TransformationTool?
+      attr_accessor target_destination: String?
+      attr_accessor strategy: String?
+    end
+
+    class RemoteSourceCodeAnalysisServerInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remote_source_code_analysis_server_configuration_timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remote_source_code_analysis_server_configuration_timestamp: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Result
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_type: String,
+        ?analysis_status: Types::AnalysisStatusUnion,
+        ?status_message: String,
+        ?antipattern_report_result_list: Array[Types::AntipatternReportResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_type: String?
+      attr_accessor analysis_status: Types::AnalysisStatusUnion?
+      attr_accessor status_message: String?
+      attr_accessor antipattern_report_result_list: Array[Types::AntipatternReportResult]?
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3key: String?
+    end
+
+    class SelfManageResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_destination: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_destination: Array[String]?
+    end
+
+    class ServerDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?recommendation_set: Types::RecommendationSet,
+        ?data_collection_status: String,
+        ?status_message: String,
+        ?list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary],
+        ?system_info: Types::SystemInfo,
+        ?application_component_strategy_summary: Array[Types::StrategySummary],
+        ?antipattern_report_s3_object: Types::S3Object,
+        ?antipattern_report_status: String,
+        ?antipattern_report_status_message: String,
+        ?server_type: String,
+        ?last_analyzed_timestamp: Time,
+        ?server_error: Types::ServerError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor recommendation_set: Types::RecommendationSet?
+      attr_accessor data_collection_status: String?
+      attr_accessor status_message: String?
+      attr_accessor list_antipattern_severity_summary: Array[Types::AntipatternSeveritySummary]?
+      attr_accessor system_info: Types::SystemInfo?
+      attr_accessor application_component_strategy_summary: Array[Types::StrategySummary]?
+      attr_accessor antipattern_report_s3_object: Types::S3Object?
+      attr_accessor antipattern_report_status: String?
+      attr_accessor antipattern_report_status_message: String?
+      attr_accessor server_type: String?
+      attr_accessor last_analyzed_timestamp: Time?
+      attr_accessor server_error: Types::ServerError?
+    end
+
+    class ServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_error_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_error_category: String?
+    end
+
+    class ServerStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_time_assessment_status: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_time_assessment_status: String?
+      attr_accessor count: Integer?
+    end
+
+    class ServerStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation: Types::RecommendationSet,
+        ?status: String,
+        ?number_of_application_components: Integer,
+        ?is_preferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation: Types::RecommendationSet?
+      attr_accessor status: String?
+      attr_accessor number_of_application_components: Integer?
+      attr_accessor is_preferred: bool?
+    end
+
+    class ServerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_os_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_os_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class ServiceLinkedRoleLockClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_control: String,
+        ?source_version: String,
+        ?location: String,
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_control: String?
+      attr_accessor source_version: String?
+      attr_accessor location: String?
+      attr_accessor project_name: String?
+    end
+
+    class SourceCodeRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: String,
+        ?branch: String,
+        ?version_control_type: String,
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: String?
+      attr_accessor branch: String?
+      attr_accessor version_control_type: String?
+      attr_accessor project_name: String?
+    end
+
+    class StartAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3bucket_for_analysis_data: String,
+        ?s3bucket_for_report_data: String,
+        ?assessment_targets: Array[Types::AssessmentTarget],
+        ?assessment_data_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3bucket_for_analysis_data: String?
+      attr_accessor s3bucket_for_report_data: String?
+      attr_accessor assessment_targets: Array[Types::AssessmentTarget]?
+      attr_accessor assessment_data_source_type: String?
+    end
+
+    class StartAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class StartImportFileTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?s3_bucket: String,
+        ?s3key: String,
+        ?data_source_type: String,
+        ?group_id: Array[Types::Group],
+        ?s3bucket_for_report_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3key: String?
+      attr_accessor data_source_type: String?
+      attr_accessor group_id: Array[Types::Group]?
+      attr_accessor s3bucket_for_report_data: String?
+    end
+
+    class StartImportFileTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StartRecommendationReportGenerationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_format: String,
+        ?group_id_filter: Array[Types::Group],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_format: String?
+      attr_accessor group_id_filter: Array[Types::Group]?
+    end
+
+    class StartRecommendationReportGenerationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class StopAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StrategyOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?strategy: String,
+        ?tool_name: String,
+        ?target_destination: String,
+        ?is_preferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor strategy: String?
+      attr_accessor tool_name: String?
+      attr_accessor target_destination: String?
+      attr_accessor is_preferred: bool?
+    end
+
+    class StrategySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?strategy: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor strategy: String?
+      attr_accessor count: Integer?
+    end
+
+    class SystemInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os_info: Types::OSInfo,
+        ?file_system_type: String,
+        ?network_info_list: Array[Types::NetworkInfo],
+        ?cpu_architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os_info: Types::OSInfo?
+      attr_accessor file_system_type: String?
+      attr_accessor network_info_list: Array[Types::NetworkInfo]?
+      attr_accessor cpu_architecture: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransformationTool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tranformation_tool_installation_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tranformation_tool_installation_link: String?
+    end
+
+    class UpdateApplicationComponentConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_id: String,
+        ?inclusion_status: String,
+        ?strategy_option: Types::StrategyOption,
+        ?source_code_list: Array[Types::SourceCode],
+        ?secrets_manager_key: String,
+        ?configure_only: bool,
+        ?app_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_id: String?
+      attr_accessor inclusion_status: String?
+      attr_accessor strategy_option: Types::StrategyOption?
+      attr_accessor source_code_list: Array[Types::SourceCode]?
+      attr_accessor secrets_manager_key: String?
+      attr_accessor configure_only: bool?
+      attr_accessor app_type: String?
+    end
+
+    class UpdateApplicationComponentConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServerConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?strategy_option: Types::StrategyOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor strategy_option: Types::StrategyOption?
+    end
+
+    class UpdateServerConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VcenterBasedRemoteInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcenter_configuration_time_stamp: String,
+        ?os_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcenter_configuration_time_stamp: String?
+      attr_accessor os_type: String?
+    end
+
+    class VersionControlInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_control_type: String,
+        ?version_control_configuration_time_stamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_control_type: String?
+      attr_accessor version_control_configuration_time_stamp: String?
+    end
+  end
+end

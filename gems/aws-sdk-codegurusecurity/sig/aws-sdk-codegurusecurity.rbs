@@ -1,0 +1,5 @@
+  module Aws
+    module CodeGuruSecurity
+      VERSION: String
+    end
+  end

@@ -1,0 +1,13 @@
+module Aws::MarketplaceEntitlementService
+  module Errors
+    class InternalServiceErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

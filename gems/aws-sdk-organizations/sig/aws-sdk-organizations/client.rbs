@@ -1,0 +1,611 @@
+module Aws::Organizations
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Organizations::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptHandshakeResponse
+      include Smithy::Client::_Response[Types::AcceptHandshakeResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def accept_handshake: (
+      ?handshake_id: String
+    ) -> _AcceptHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptHandshakeResponse
+
+    interface _AttachPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def attach_policy: (
+      ?policy_id: String,
+      ?target_id: String
+    ) -> _AttachPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachPolicyResponse
+
+    interface _CancelHandshakeResponse
+      include Smithy::Client::_Response[Types::CancelHandshakeResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def cancel_handshake: (
+      ?handshake_id: String
+    ) -> _CancelHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelHandshakeResponse
+
+    interface _CloseAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def close_account: (
+      ?account_id: String
+    ) -> _CloseAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloseAccountResponse
+
+    interface _CreateAccountResponse
+      include Smithy::Client::_Response[Types::CreateAccountResponse]
+      def create_account_status: () -> Types::CreateAccountStatus?
+    end
+    def create_account: (
+      ?email: String,
+      ?account_name: String,
+      ?role_name: String,
+      ?iam_user_access_to_billing: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountResponse
+
+    interface _CreateGovCloudAccountResponse
+      include Smithy::Client::_Response[Types::CreateGovCloudAccountResponse]
+      def create_account_status: () -> Types::CreateAccountStatus?
+    end
+    def create_gov_cloud_account: (
+      ?email: String,
+      ?account_name: String,
+      ?role_name: String,
+      ?iam_user_access_to_billing: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGovCloudAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGovCloudAccountResponse
+
+    interface _CreateOrganizationResponse
+      include Smithy::Client::_Response[Types::CreateOrganizationResponse]
+      def organization: () -> Types::Organization?
+    end
+    def create_organization: (
+      ?feature_set: String
+    ) -> _CreateOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOrganizationResponse
+
+    interface _CreateOrganizationalUnitResponse
+      include Smithy::Client::_Response[Types::CreateOrganizationalUnitResponse]
+      def organizational_unit: () -> Types::OrganizationalUnit?
+    end
+    def create_organizational_unit: (
+      ?parent_id: String,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOrganizationalUnitResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def create_policy: (
+      ?content: String,
+      ?description: String,
+      ?name: String,
+      ?type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _DeclineHandshakeResponse
+      include Smithy::Client::_Response[Types::DeclineHandshakeResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def decline_handshake: (
+      ?handshake_id: String
+    ) -> _DeclineHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeclineHandshakeResponse
+
+    interface _DeleteOrganizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOrganizationResponse
+
+    interface _DeleteOrganizationalUnitResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_organizational_unit: (
+      ?organizational_unit_id: String
+    ) -> _DeleteOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOrganizationalUnitResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?policy_id: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeregisterDelegatedAdministratorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_delegated_administrator: (
+      ?account_id: String,
+      ?service_principal: String
+    ) -> _DeregisterDelegatedAdministratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterDelegatedAdministratorResponse
+
+    interface _DescribeAccountResponse
+      include Smithy::Client::_Response[Types::DescribeAccountResponse]
+      def account: () -> Types::Account?
+    end
+    def describe_account: (
+      ?account_id: String
+    ) -> _DescribeAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountResponse
+
+    interface _DescribeCreateAccountStatusResponse
+      include Smithy::Client::_Response[Types::DescribeCreateAccountStatusResponse]
+      def create_account_status: () -> Types::CreateAccountStatus?
+    end
+    def describe_create_account_status: (
+      ?create_account_request_id: String
+    ) -> _DescribeCreateAccountStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCreateAccountStatusResponse
+
+    interface _DescribeEffectivePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeEffectivePolicyResponse]
+      def effective_policy: () -> Types::EffectivePolicy?
+    end
+    def describe_effective_policy: (
+      ?policy_type: String,
+      ?target_id: String
+    ) -> _DescribeEffectivePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEffectivePolicyResponse
+
+    interface _DescribeHandshakeResponse
+      include Smithy::Client::_Response[Types::DescribeHandshakeResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def describe_handshake: (
+      ?handshake_id: String
+    ) -> _DescribeHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHandshakeResponse
+
+    interface _DescribeOrganizationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationResponse]
+      def organization: () -> Types::Organization?
+    end
+    def describe_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationResponse
+
+    interface _DescribeOrganizationalUnitResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationalUnitResponse]
+      def organizational_unit: () -> Types::OrganizationalUnit?
+    end
+    def describe_organizational_unit: (
+      ?organizational_unit_id: String
+    ) -> _DescribeOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationalUnitResponse
+
+    interface _DescribePolicyResponse
+      include Smithy::Client::_Response[Types::DescribePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def describe_policy: (
+      ?policy_id: String
+    ) -> _DescribePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePolicyResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def resource_policy: () -> Types::ResourcePolicy?
+    end
+    def describe_resource_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
+
+    interface _DetachPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def detach_policy: (
+      ?policy_id: String,
+      ?target_id: String
+    ) -> _DetachPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachPolicyResponse
+
+    interface _DisableAWSServiceAccessResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_aws_service_access: (
+      ?service_principal: String
+    ) -> _DisableAWSServiceAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAWSServiceAccessResponse
+
+    interface _DisablePolicyTypeResponse
+      include Smithy::Client::_Response[Types::DisablePolicyTypeResponse]
+      def root: () -> Types::Root?
+    end
+    def disable_policy_type: (
+      ?root_id: String,
+      ?policy_type: String
+    ) -> _DisablePolicyTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisablePolicyTypeResponse
+
+    interface _EnableAWSServiceAccessResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_aws_service_access: (
+      ?service_principal: String
+    ) -> _EnableAWSServiceAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAWSServiceAccessResponse
+
+    interface _EnableAllFeaturesResponse
+      include Smithy::Client::_Response[Types::EnableAllFeaturesResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def enable_all_features: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAllFeaturesResponse
+
+    interface _EnablePolicyTypeResponse
+      include Smithy::Client::_Response[Types::EnablePolicyTypeResponse]
+      def root: () -> Types::Root?
+    end
+    def enable_policy_type: (
+      ?root_id: String,
+      ?policy_type: String
+    ) -> _EnablePolicyTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnablePolicyTypeResponse
+
+    interface _InviteAccountToOrganizationResponse
+      include Smithy::Client::_Response[Types::InviteAccountToOrganizationResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def invite_account_to_organization: (
+      ?target: {
+        id: String,
+        type: String
+      },
+      ?notes: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _InviteAccountToOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InviteAccountToOrganizationResponse
+
+    interface _LeaveOrganizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def leave_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LeaveOrganizationResponse
+
+    interface _ListAWSServiceAccessForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListAWSServiceAccessForOrganizationResponse]
+      def enabled_service_principals: () -> Array[Types::EnabledServicePrincipal]?
+      def next_token: () -> String?
+    end
+    def list_aws_service_access_for_organization: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAWSServiceAccessForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAWSServiceAccessForOrganizationResponse
+
+    interface _ListAccountsResponse
+      include Smithy::Client::_Response[Types::ListAccountsResponse]
+      def accounts: () -> Array[Types::Account]?
+      def next_token: () -> String?
+    end
+    def list_accounts: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsResponse
+
+    interface _ListAccountsForParentResponse
+      include Smithy::Client::_Response[Types::ListAccountsForParentResponse]
+      def accounts: () -> Array[Types::Account]?
+      def next_token: () -> String?
+    end
+    def list_accounts_for_parent: (
+      ?parent_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountsForParentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsForParentResponse
+
+    interface _ListAccountsWithInvalidEffectivePolicyResponse
+      include Smithy::Client::_Response[Types::ListAccountsWithInvalidEffectivePolicyResponse]
+      def accounts: () -> Array[Types::Account]?
+      def policy_type: () -> String?
+      def next_token: () -> String?
+    end
+    def list_accounts_with_invalid_effective_policy: (
+      ?policy_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountsWithInvalidEffectivePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsWithInvalidEffectivePolicyResponse
+
+    interface _ListChildrenResponse
+      include Smithy::Client::_Response[Types::ListChildrenResponse]
+      def children: () -> Array[Types::Child]?
+      def next_token: () -> String?
+    end
+    def list_children: (
+      ?parent_id: String,
+      ?child_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChildrenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChildrenResponse
+
+    interface _ListCreateAccountStatusResponse
+      include Smithy::Client::_Response[Types::ListCreateAccountStatusResponse]
+      def create_account_statuses: () -> Array[Types::CreateAccountStatus]?
+      def next_token: () -> String?
+    end
+    def list_create_account_status: (
+      ?states: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCreateAccountStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCreateAccountStatusResponse
+
+    interface _ListDelegatedAdministratorsResponse
+      include Smithy::Client::_Response[Types::ListDelegatedAdministratorsResponse]
+      def delegated_administrators: () -> Array[Types::DelegatedAdministrator]?
+      def next_token: () -> String?
+    end
+    def list_delegated_administrators: (
+      ?service_principal: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDelegatedAdministratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDelegatedAdministratorsResponse
+
+    interface _ListDelegatedServicesForAccountResponse
+      include Smithy::Client::_Response[Types::ListDelegatedServicesForAccountResponse]
+      def delegated_services: () -> Array[Types::DelegatedService]?
+      def next_token: () -> String?
+    end
+    def list_delegated_services_for_account: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDelegatedServicesForAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDelegatedServicesForAccountResponse
+
+    interface _ListEffectivePolicyValidationErrorsResponse
+      include Smithy::Client::_Response[Types::ListEffectivePolicyValidationErrorsResponse]
+      def account_id: () -> String?
+      def policy_type: () -> String?
+      def path: () -> String?
+      def evaluation_timestamp: () -> Time?
+      def next_token: () -> String?
+      def effective_policy_validation_errors: () -> Array[Types::EffectivePolicyValidationError]?
+    end
+    def list_effective_policy_validation_errors: (
+      ?account_id: String,
+      ?policy_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEffectivePolicyValidationErrorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEffectivePolicyValidationErrorsResponse
+
+    interface _ListHandshakesForAccountResponse
+      include Smithy::Client::_Response[Types::ListHandshakesForAccountResponse]
+      def handshakes: () -> Array[Types::Handshake]?
+      def next_token: () -> String?
+    end
+    def list_handshakes_for_account: (
+      ?filter: {
+        action_type: String,
+        parent_handshake_id: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHandshakesForAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHandshakesForAccountResponse
+
+    interface _ListHandshakesForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListHandshakesForOrganizationResponse]
+      def handshakes: () -> Array[Types::Handshake]?
+      def next_token: () -> String?
+    end
+    def list_handshakes_for_organization: (
+      ?filter: {
+        action_type: String,
+        parent_handshake_id: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHandshakesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHandshakesForOrganizationResponse
+
+    interface _ListOrganizationalUnitsForParentResponse
+      include Smithy::Client::_Response[Types::ListOrganizationalUnitsForParentResponse]
+      def organizational_units: () -> Array[Types::OrganizationalUnit]?
+      def next_token: () -> String?
+    end
+    def list_organizational_units_for_parent: (
+      ?parent_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOrganizationalUnitsForParentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationalUnitsForParentResponse
+
+    interface _ListParentsResponse
+      include Smithy::Client::_Response[Types::ListParentsResponse]
+      def parents: () -> Array[Types::Parent]?
+      def next_token: () -> String?
+    end
+    def list_parents: (
+      ?child_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListParentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListParentsResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def policies: () -> Array[Types::PolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_policies: (
+      ?filter: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPoliciesForTargetResponse
+      include Smithy::Client::_Response[Types::ListPoliciesForTargetResponse]
+      def policies: () -> Array[Types::PolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_policies_for_target: (
+      ?target_id: String,
+      ?filter: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPoliciesForTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesForTargetResponse
+
+    interface _ListRootsResponse
+      include Smithy::Client::_Response[Types::ListRootsResponse]
+      def roots: () -> Array[Types::Root]?
+      def next_token: () -> String?
+    end
+    def list_roots: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRootsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRootsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_id: String,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetsForPolicyResponse
+      include Smithy::Client::_Response[Types::ListTargetsForPolicyResponse]
+      def targets: () -> Array[Types::PolicyTargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_targets_for_policy: (
+      ?policy_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTargetsForPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetsForPolicyResponse
+
+    interface _MoveAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def move_account: (
+      ?account_id: String,
+      ?source_parent_id: String,
+      ?destination_parent_id: String
+    ) -> _MoveAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MoveAccountResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_policy: () -> Types::ResourcePolicy?
+    end
+    def put_resource_policy: (
+      ?content: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterDelegatedAdministratorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_delegated_administrator: (
+      ?account_id: String,
+      ?service_principal: String
+    ) -> _RegisterDelegatedAdministratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDelegatedAdministratorResponse
+
+    interface _RemoveAccountFromOrganizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_account_from_organization: (
+      ?account_id: String
+    ) -> _RemoveAccountFromOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAccountFromOrganizationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateOrganizationalUnitResponse
+      include Smithy::Client::_Response[Types::UpdateOrganizationalUnitResponse]
+      def organizational_unit: () -> Types::OrganizationalUnit?
+    end
+    def update_organizational_unit: (
+      ?organizational_unit_id: String,
+      ?name: String
+    ) -> _UpdateOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrganizationalUnitResponse
+
+    interface _UpdatePolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def update_policy: (
+      ?policy_id: String,
+      ?name: String,
+      ?description: String,
+      ?content: String
+    ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+  end
+end

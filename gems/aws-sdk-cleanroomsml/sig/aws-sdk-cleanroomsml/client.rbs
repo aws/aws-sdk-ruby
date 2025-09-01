@@ -1,0 +1,998 @@
+module Aws::CleanRoomsML
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CleanRoomsML::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelTrainedModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_trained_model: (
+      ?membership_identifier: String,
+      ?trained_model_arn: String,
+      ?version_identifier: String
+    ) -> _CancelTrainedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTrainedModelResponse
+
+    interface _CancelTrainedModelInferenceJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_trained_model_inference_job: (
+      ?membership_identifier: String,
+      ?trained_model_inference_job_arn: String
+    ) -> _CancelTrainedModelInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTrainedModelInferenceJobResponse
+
+    interface _CreateAudienceModelResponse
+      include Smithy::Client::_Response[Types::CreateAudienceModelResponse]
+      def audience_model_arn: () -> String?
+    end
+    def create_audience_model: (
+      ?training_data_start_time: Time,
+      ?training_data_end_time: Time,
+      ?name: String,
+      ?training_dataset_arn: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String],
+      ?description: String
+    ) -> _CreateAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAudienceModelResponse
+
+    interface _CreateConfiguredAudienceModelResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredAudienceModelResponse]
+      def configured_audience_model_arn: () -> String?
+    end
+    def create_configured_audience_model: (
+      ?name: String,
+      ?audience_model_arn: String,
+      ?output_config: {
+        destination: {
+          s3_destination: {
+            s3_uri: String
+          }
+        },
+        role_arn: String
+      },
+      ?description: String,
+      ?shared_audience_metrics: Array[String],
+      ?min_matching_seed_size: Integer,
+      ?audience_size_config: {
+        audience_size_type: String,
+        audience_size_bins: Array[Integer]
+      },
+      ?tags: Hash[String, String],
+      ?child_resource_tag_on_create_policy: String
+    ) -> _CreateConfiguredAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredAudienceModelResponse
+
+    interface _CreateConfiguredModelAlgorithmResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredModelAlgorithmResponse]
+      def configured_model_algorithm_arn: () -> String?
+    end
+    def create_configured_model_algorithm: (
+      ?name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?training_container_config: {
+        image_uri: String,
+        entrypoint: Array[String],
+        arguments: Array[String],
+        metric_definitions: Array[
+          {
+            name: String,
+            regex: String
+          }
+        ]
+      },
+      ?inference_container_config: {
+        image_uri: String
+      },
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String
+    ) -> _CreateConfiguredModelAlgorithmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredModelAlgorithmResponse
+
+    interface _CreateConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredModelAlgorithmAssociationResponse]
+      def configured_model_algorithm_association_arn: () -> String?
+    end
+    def create_configured_model_algorithm_association: (
+      ?membership_identifier: String,
+      ?configured_model_algorithm_arn: String,
+      ?name: String,
+      ?description: String,
+      ?privacy_configuration: {
+        policies: {
+          trained_models: {
+            container_logs: Array[
+              {
+                allowed_account_ids: Array[String],
+                filter_pattern: String
+              }
+            ],
+            container_metrics: {
+              noise_level: String
+            },
+            max_artifact_size: {
+              unit: String,
+              value: Float
+            }
+          },
+          trained_model_exports: {
+            max_size: {
+              unit: String,
+              value: Float
+            },
+            files_to_export: Array[String]
+          },
+          trained_model_inference_jobs: {
+            container_logs: untyped,
+            max_output_size: {
+              unit: String,
+              value: Float
+            }
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateConfiguredModelAlgorithmAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredModelAlgorithmAssociationResponse
+
+    interface _CreateMLInputChannelResponse
+      include Smithy::Client::_Response[Types::CreateMLInputChannelResponse]
+      def ml_input_channel_arn: () -> String?
+    end
+    def create_ml_input_channel: (
+      ?membership_identifier: String,
+      ?configured_model_algorithm_associations: Array[String],
+      ?input_channel: {
+        data_source: {
+          protected_query_input_parameters: {
+            sql_parameters: {
+              query_string: String,
+              analysis_template_arn: String,
+              parameters: Hash[String, String]
+            },
+            compute_configuration: {
+              worker: {
+                type: String,
+                number: Integer
+              }
+            },
+            result_format: String
+          }
+        },
+        role_arn: String
+      },
+      ?name: String,
+      ?retention_in_days: Integer,
+      ?description: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMLInputChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMLInputChannelResponse
+
+    interface _CreateTrainedModelResponse
+      include Smithy::Client::_Response[Types::CreateTrainedModelResponse]
+      def trained_model_arn: () -> String?
+      def version_identifier: () -> String?
+    end
+    def create_trained_model: (
+      ?membership_identifier: String,
+      ?name: String,
+      ?configured_model_algorithm_association_arn: String,
+      ?hyperparameters: Hash[String, String],
+      ?environment: Hash[String, String],
+      ?resource_config: {
+        instance_count: Integer,
+        instance_type: String,
+        volume_size_in_gb: untyped
+      },
+      ?stopping_condition: {
+        max_runtime_in_seconds: Integer
+      },
+      ?incremental_training_data_channels: Array[
+        {
+          trained_model_arn: String,
+          version_identifier: String,
+          channel_name: String
+        }
+      ],
+      ?data_channels: Array[
+        {
+          ml_input_channel_arn: String,
+          channel_name: String,
+          s3_data_distribution_type: String
+        }
+      ],
+      ?training_input_mode: String,
+      ?description: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTrainedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainedModelResponse
+
+    interface _CreateTrainingDatasetResponse
+      include Smithy::Client::_Response[Types::CreateTrainingDatasetResponse]
+      def training_dataset_arn: () -> String?
+    end
+    def create_training_dataset: (
+      ?name: String,
+      ?role_arn: String,
+      ?training_data: Array[
+        {
+          type: String,
+          input_config: {
+            schema: Array[
+              {
+                column_name: String,
+                column_types: Array[String]
+              }
+            ],
+            data_source: {
+              glue_data_source: {
+                table_name: String,
+                database_name: String,
+                catalog_id: String
+              }
+            }
+          }
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?description: String
+    ) -> _CreateTrainingDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainingDatasetResponse
+
+    interface _DeleteAudienceGenerationJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_audience_generation_job: (
+      ?audience_generation_job_arn: String
+    ) -> _DeleteAudienceGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAudienceGenerationJobResponse
+
+    interface _DeleteAudienceModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_audience_model: (
+      ?audience_model_arn: String
+    ) -> _DeleteAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAudienceModelResponse
+
+    interface _DeleteConfiguredAudienceModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configured_audience_model: (
+      ?configured_audience_model_arn: String
+    ) -> _DeleteConfiguredAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredAudienceModelResponse
+
+    interface _DeleteConfiguredAudienceModelPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configured_audience_model_policy: (
+      ?configured_audience_model_arn: String
+    ) -> _DeleteConfiguredAudienceModelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredAudienceModelPolicyResponse
+
+    interface _DeleteConfiguredModelAlgorithmResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configured_model_algorithm: (
+      ?configured_model_algorithm_arn: String
+    ) -> _DeleteConfiguredModelAlgorithmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredModelAlgorithmResponse
+
+    interface _DeleteConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configured_model_algorithm_association: (
+      ?configured_model_algorithm_association_arn: String,
+      ?membership_identifier: String
+    ) -> _DeleteConfiguredModelAlgorithmAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredModelAlgorithmAssociationResponse
+
+    interface _DeleteMLConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ml_configuration: (
+      ?membership_identifier: String
+    ) -> _DeleteMLConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMLConfigurationResponse
+
+    interface _DeleteMLInputChannelDataResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ml_input_channel_data: (
+      ?ml_input_channel_arn: String,
+      ?membership_identifier: String
+    ) -> _DeleteMLInputChannelDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMLInputChannelDataResponse
+
+    interface _DeleteTrainedModelOutputResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_trained_model_output: (
+      ?trained_model_arn: String,
+      ?membership_identifier: String,
+      ?version_identifier: String
+    ) -> _DeleteTrainedModelOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrainedModelOutputResponse
+
+    interface _DeleteTrainingDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_training_dataset: (
+      ?training_dataset_arn: String
+    ) -> _DeleteTrainingDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrainingDatasetResponse
+
+    interface _GetAudienceGenerationJobResponse
+      include Smithy::Client::_Response[Types::GetAudienceGenerationJobResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def audience_generation_job_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def configured_audience_model_arn: () -> String?
+      def seed_audience: () -> Types::AudienceGenerationJobDataSource?
+      def include_seed_in_output: () -> bool?
+      def collaboration_id: () -> String?
+      def metrics: () -> Types::AudienceQualityMetrics?
+      def started_by: () -> String?
+      def tags: () -> Hash[String, String]?
+      def protected_query_identifier: () -> String?
+    end
+    def get_audience_generation_job: (
+      ?audience_generation_job_arn: String
+    ) -> _GetAudienceGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAudienceGenerationJobResponse
+
+    interface _GetAudienceModelResponse
+      include Smithy::Client::_Response[Types::GetAudienceModelResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def training_data_start_time: () -> Time?
+      def training_data_end_time: () -> Time?
+      def audience_model_arn: () -> String?
+      def name: () -> String?
+      def training_dataset_arn: () -> String?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def kms_key_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def description: () -> String?
+    end
+    def get_audience_model: (
+      ?audience_model_arn: String
+    ) -> _GetAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAudienceModelResponse
+
+    interface _GetCollaborationConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Client::_Response[Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def configured_model_algorithm_association_arn: () -> String?
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def configured_model_algorithm_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def creator_account_id: () -> String?
+      def privacy_configuration: () -> Types::PrivacyConfiguration?
+    end
+    def get_collaboration_configured_model_algorithm_association: (
+      ?configured_model_algorithm_association_arn: String,
+      ?collaboration_identifier: String
+    ) -> _GetCollaborationConfiguredModelAlgorithmAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationConfiguredModelAlgorithmAssociationResponse
+
+    interface _GetCollaborationMLInputChannelResponse
+      include Smithy::Client::_Response[Types::GetCollaborationMLInputChannelResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def creator_account_id: () -> String?
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def ml_input_channel_arn: () -> String?
+      def name: () -> String?
+      def configured_model_algorithm_associations: () -> Array[String]?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def retention_in_days: () -> Integer?
+      def number_of_records: () -> Integer?
+      def description: () -> String?
+    end
+    def get_collaboration_ml_input_channel: (
+      ?ml_input_channel_arn: String,
+      ?collaboration_identifier: String
+    ) -> _GetCollaborationMLInputChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationMLInputChannelResponse
+
+    interface _GetCollaborationTrainedModelResponse
+      include Smithy::Client::_Response[Types::GetCollaborationTrainedModelResponse]
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def trained_model_arn: () -> String?
+      def version_identifier: () -> String?
+      def incremental_training_data_channels: () -> Array[Types::IncrementalTrainingDataChannelOutput]?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def configured_model_algorithm_association_arn: () -> String?
+      def resource_config: () -> Types::ResourceConfig?
+      def training_input_mode: () -> String?
+      def stopping_condition: () -> Types::StoppingCondition?
+      def metrics_status: () -> String?
+      def metrics_status_details: () -> String?
+      def logs_status: () -> String?
+      def logs_status_details: () -> String?
+      def training_container_image_digest: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def creator_account_id: () -> String?
+    end
+    def get_collaboration_trained_model: (
+      ?trained_model_arn: String,
+      ?collaboration_identifier: String,
+      ?version_identifier: String
+    ) -> _GetCollaborationTrainedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationTrainedModelResponse
+
+    interface _GetConfiguredAudienceModelResponse
+      include Smithy::Client::_Response[Types::GetConfiguredAudienceModelResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def configured_audience_model_arn: () -> String?
+      def name: () -> String?
+      def audience_model_arn: () -> String?
+      def output_config: () -> Types::ConfiguredAudienceModelOutputConfig?
+      def description: () -> String?
+      def status: () -> String?
+      def shared_audience_metrics: () -> Array[String]?
+      def min_matching_seed_size: () -> Integer?
+      def audience_size_config: () -> Types::AudienceSizeConfig?
+      def tags: () -> Hash[String, String]?
+      def child_resource_tag_on_create_policy: () -> String?
+    end
+    def get_configured_audience_model: (
+      ?configured_audience_model_arn: String
+    ) -> _GetConfiguredAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredAudienceModelResponse
+
+    interface _GetConfiguredAudienceModelPolicyResponse
+      include Smithy::Client::_Response[Types::GetConfiguredAudienceModelPolicyResponse]
+      def configured_audience_model_arn: () -> String?
+      def configured_audience_model_policy: () -> String?
+      def policy_hash: () -> String?
+    end
+    def get_configured_audience_model_policy: (
+      ?configured_audience_model_arn: String
+    ) -> _GetConfiguredAudienceModelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredAudienceModelPolicyResponse
+
+    interface _GetConfiguredModelAlgorithmResponse
+      include Smithy::Client::_Response[Types::GetConfiguredModelAlgorithmResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def configured_model_algorithm_arn: () -> String?
+      def name: () -> String?
+      def training_container_config: () -> Types::ContainerConfig?
+      def inference_container_config: () -> Types::InferenceContainerConfig?
+      def role_arn: () -> String?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+    end
+    def get_configured_model_algorithm: (
+      ?configured_model_algorithm_arn: String
+    ) -> _GetConfiguredModelAlgorithmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredModelAlgorithmResponse
+
+    interface _GetConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Client::_Response[Types::GetConfiguredModelAlgorithmAssociationResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def configured_model_algorithm_association_arn: () -> String?
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def configured_model_algorithm_arn: () -> String?
+      def name: () -> String?
+      def privacy_configuration: () -> Types::PrivacyConfiguration?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_configured_model_algorithm_association: (
+      ?configured_model_algorithm_association_arn: String,
+      ?membership_identifier: String
+    ) -> _GetConfiguredModelAlgorithmAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredModelAlgorithmAssociationResponse
+
+    interface _GetMLConfigurationResponse
+      include Smithy::Client::_Response[Types::GetMLConfigurationResponse]
+      def membership_identifier: () -> String?
+      def default_output_location: () -> Types::MLOutputConfiguration?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+    end
+    def get_ml_configuration: (
+      ?membership_identifier: String
+    ) -> _GetMLConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLConfigurationResponse
+
+    interface _GetMLInputChannelResponse
+      include Smithy::Client::_Response[Types::GetMLInputChannelResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def input_channel: () -> Types::InputChannel?
+      def protected_query_identifier: () -> String?
+      def ml_input_channel_arn: () -> String?
+      def name: () -> String?
+      def configured_model_algorithm_associations: () -> Array[String]?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def retention_in_days: () -> Integer?
+      def number_of_records: () -> Integer?
+      def number_of_files: () -> Float?
+      def size_in_gb: () -> Float?
+      def description: () -> String?
+      def kms_key_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_ml_input_channel: (
+      ?ml_input_channel_arn: String,
+      ?membership_identifier: String
+    ) -> _GetMLInputChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMLInputChannelResponse
+
+    interface _GetTrainedModelResponse
+      include Smithy::Client::_Response[Types::GetTrainedModelResponse]
+      def membership_identifier: () -> String?
+      def collaboration_identifier: () -> String?
+      def trained_model_arn: () -> String?
+      def version_identifier: () -> String?
+      def incremental_training_data_channels: () -> Array[Types::IncrementalTrainingDataChannelOutput]?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def configured_model_algorithm_association_arn: () -> String?
+      def resource_config: () -> Types::ResourceConfig?
+      def training_input_mode: () -> String?
+      def stopping_condition: () -> Types::StoppingCondition?
+      def metrics_status: () -> String?
+      def metrics_status_details: () -> String?
+      def logs_status: () -> String?
+      def logs_status_details: () -> String?
+      def training_container_image_digest: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def hyperparameters: () -> Hash[String, String]?
+      def environment: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def data_channels: () -> Array[Types::ModelTrainingDataChannel]?
+    end
+    def get_trained_model: (
+      ?trained_model_arn: String,
+      ?membership_identifier: String,
+      ?version_identifier: String
+    ) -> _GetTrainedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrainedModelResponse
+
+    interface _GetTrainedModelInferenceJobResponse
+      include Smithy::Client::_Response[Types::GetTrainedModelInferenceJobResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def trained_model_inference_job_arn: () -> String?
+      def configured_model_algorithm_association_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def trained_model_arn: () -> String?
+      def trained_model_version_identifier: () -> String?
+      def resource_config: () -> Types::InferenceResourceConfig?
+      def output_configuration: () -> Types::InferenceOutputConfiguration?
+      def membership_identifier: () -> String?
+      def data_source: () -> Types::ModelInferenceDataSource?
+      def container_execution_parameters: () -> Types::InferenceContainerExecutionParameters?
+      def status_details: () -> Types::StatusDetails?
+      def description: () -> String?
+      def inference_container_image_digest: () -> String?
+      def environment: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+      def metrics_status: () -> String?
+      def metrics_status_details: () -> String?
+      def logs_status: () -> String?
+      def logs_status_details: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_trained_model_inference_job: (
+      ?membership_identifier: String,
+      ?trained_model_inference_job_arn: String
+    ) -> _GetTrainedModelInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrainedModelInferenceJobResponse
+
+    interface _GetTrainingDatasetResponse
+      include Smithy::Client::_Response[Types::GetTrainingDatasetResponse]
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def training_dataset_arn: () -> String?
+      def name: () -> String?
+      def training_data: () -> Array[Types::Dataset]?
+      def status: () -> String?
+      def role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def description: () -> String?
+    end
+    def get_training_dataset: (
+      ?training_dataset_arn: String
+    ) -> _GetTrainingDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrainingDatasetResponse
+
+    interface _ListAudienceExportJobsResponse
+      include Smithy::Client::_Response[Types::ListAudienceExportJobsResponse]
+      def next_token: () -> String?
+      def audience_export_jobs: () -> Array[Types::AudienceExportJobSummary]?
+    end
+    def list_audience_export_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?audience_generation_job_arn: String
+    ) -> _ListAudienceExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAudienceExportJobsResponse
+
+    interface _ListAudienceGenerationJobsResponse
+      include Smithy::Client::_Response[Types::ListAudienceGenerationJobsResponse]
+      def next_token: () -> String?
+      def audience_generation_jobs: () -> Array[Types::AudienceGenerationJobSummary]?
+    end
+    def list_audience_generation_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?configured_audience_model_arn: String,
+      ?collaboration_id: String
+    ) -> _ListAudienceGenerationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAudienceGenerationJobsResponse
+
+    interface _ListAudienceModelsResponse
+      include Smithy::Client::_Response[Types::ListAudienceModelsResponse]
+      def next_token: () -> String?
+      def audience_models: () -> Array[Types::AudienceModelSummary]?
+    end
+    def list_audience_models: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAudienceModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAudienceModelsResponse
+
+    interface _ListCollaborationConfiguredModelAlgorithmAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationConfiguredModelAlgorithmAssociationsResponse]
+      def next_token: () -> String?
+      def collaboration_configured_model_algorithm_associations: () -> Array[Types::CollaborationConfiguredModelAlgorithmAssociationSummary]?
+    end
+    def list_collaboration_configured_model_algorithm_associations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?collaboration_identifier: String
+    ) -> _ListCollaborationConfiguredModelAlgorithmAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationConfiguredModelAlgorithmAssociationsResponse
+
+    interface _ListCollaborationMLInputChannelsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationMLInputChannelsResponse]
+      def next_token: () -> String?
+      def collaboration_ml_input_channels_list: () -> Array[Types::CollaborationMLInputChannelSummary]?
+    end
+    def list_collaboration_ml_input_channels: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?collaboration_identifier: String
+    ) -> _ListCollaborationMLInputChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationMLInputChannelsResponse
+
+    interface _ListCollaborationTrainedModelExportJobsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationTrainedModelExportJobsResponse]
+      def next_token: () -> String?
+      def collaboration_trained_model_export_jobs: () -> Array[Types::CollaborationTrainedModelExportJobSummary]?
+    end
+    def list_collaboration_trained_model_export_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?collaboration_identifier: String,
+      ?trained_model_arn: String,
+      ?trained_model_version_identifier: String
+    ) -> _ListCollaborationTrainedModelExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationTrainedModelExportJobsResponse
+
+    interface _ListCollaborationTrainedModelInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationTrainedModelInferenceJobsResponse]
+      def next_token: () -> String?
+      def collaboration_trained_model_inference_jobs: () -> Array[Types::CollaborationTrainedModelInferenceJobSummary]?
+    end
+    def list_collaboration_trained_model_inference_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?collaboration_identifier: String,
+      ?trained_model_arn: String,
+      ?trained_model_version_identifier: String
+    ) -> _ListCollaborationTrainedModelInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationTrainedModelInferenceJobsResponse
+
+    interface _ListCollaborationTrainedModelsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationTrainedModelsResponse]
+      def next_token: () -> String?
+      def collaboration_trained_models: () -> Array[Types::CollaborationTrainedModelSummary]?
+    end
+    def list_collaboration_trained_models: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?collaboration_identifier: String
+    ) -> _ListCollaborationTrainedModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationTrainedModelsResponse
+
+    interface _ListConfiguredAudienceModelsResponse
+      include Smithy::Client::_Response[Types::ListConfiguredAudienceModelsResponse]
+      def next_token: () -> String?
+      def configured_audience_models: () -> Array[Types::ConfiguredAudienceModelSummary]?
+    end
+    def list_configured_audience_models: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfiguredAudienceModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredAudienceModelsResponse
+
+    interface _ListConfiguredModelAlgorithmAssociationsResponse
+      include Smithy::Client::_Response[Types::ListConfiguredModelAlgorithmAssociationsResponse]
+      def next_token: () -> String?
+      def configured_model_algorithm_associations: () -> Array[Types::ConfiguredModelAlgorithmAssociationSummary]?
+    end
+    def list_configured_model_algorithm_associations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?membership_identifier: String
+    ) -> _ListConfiguredModelAlgorithmAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredModelAlgorithmAssociationsResponse
+
+    interface _ListConfiguredModelAlgorithmsResponse
+      include Smithy::Client::_Response[Types::ListConfiguredModelAlgorithmsResponse]
+      def next_token: () -> String?
+      def configured_model_algorithms: () -> Array[Types::ConfiguredModelAlgorithmSummary]?
+    end
+    def list_configured_model_algorithms: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfiguredModelAlgorithmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredModelAlgorithmsResponse
+
+    interface _ListMLInputChannelsResponse
+      include Smithy::Client::_Response[Types::ListMLInputChannelsResponse]
+      def next_token: () -> String?
+      def ml_input_channels_list: () -> Array[Types::MLInputChannelSummary]?
+    end
+    def list_ml_input_channels: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?membership_identifier: String
+    ) -> _ListMLInputChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLInputChannelsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTrainedModelInferenceJobsResponse
+      include Smithy::Client::_Response[Types::ListTrainedModelInferenceJobsResponse]
+      def next_token: () -> String?
+      def trained_model_inference_jobs: () -> Array[Types::TrainedModelInferenceJobSummary]?
+    end
+    def list_trained_model_inference_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?membership_identifier: String,
+      ?trained_model_arn: String,
+      ?trained_model_version_identifier: String
+    ) -> _ListTrainedModelInferenceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainedModelInferenceJobsResponse
+
+    interface _ListTrainedModelVersionsResponse
+      include Smithy::Client::_Response[Types::ListTrainedModelVersionsResponse]
+      def next_token: () -> String?
+      def trained_models: () -> Array[Types::TrainedModelSummary]?
+    end
+    def list_trained_model_versions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?membership_identifier: String,
+      ?trained_model_arn: String,
+      ?status: String
+    ) -> _ListTrainedModelVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainedModelVersionsResponse
+
+    interface _ListTrainedModelsResponse
+      include Smithy::Client::_Response[Types::ListTrainedModelsResponse]
+      def next_token: () -> String?
+      def trained_models: () -> Array[Types::TrainedModelSummary]?
+    end
+    def list_trained_models: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?membership_identifier: String
+    ) -> _ListTrainedModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainedModelsResponse
+
+    interface _ListTrainingDatasetsResponse
+      include Smithy::Client::_Response[Types::ListTrainingDatasetsResponse]
+      def next_token: () -> String?
+      def training_datasets: () -> Array[Types::TrainingDatasetSummary]?
+    end
+    def list_training_datasets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTrainingDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainingDatasetsResponse
+
+    interface _PutConfiguredAudienceModelPolicyResponse
+      include Smithy::Client::_Response[Types::PutConfiguredAudienceModelPolicyResponse]
+      def configured_audience_model_policy: () -> String?
+      def policy_hash: () -> String?
+    end
+    def put_configured_audience_model_policy: (
+      ?configured_audience_model_arn: String,
+      ?configured_audience_model_policy: String,
+      ?previous_policy_hash: String,
+      ?policy_existence_condition: String
+    ) -> _PutConfiguredAudienceModelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfiguredAudienceModelPolicyResponse
+
+    interface _PutMLConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_ml_configuration: (
+      ?membership_identifier: String,
+      ?default_output_location: {
+        destination: {
+          s3_destination: {
+            s3_uri: String
+          }
+        },
+        role_arn: String
+      }
+    ) -> _PutMLConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMLConfigurationResponse
+
+    interface _StartAudienceExportJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_audience_export_job: (
+      ?name: String,
+      ?audience_generation_job_arn: String,
+      ?audience_size: {
+        type: String,
+        value: Integer
+      },
+      ?description: String
+    ) -> _StartAudienceExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAudienceExportJobResponse
+
+    interface _StartAudienceGenerationJobResponse
+      include Smithy::Client::_Response[Types::StartAudienceGenerationJobResponse]
+      def audience_generation_job_arn: () -> String?
+    end
+    def start_audience_generation_job: (
+      ?name: String,
+      ?configured_audience_model_arn: String,
+      ?seed_audience: {
+        data_source: {
+          s3_uri: String
+        },
+        role_arn: String,
+        sql_parameters: {
+          query_string: String,
+          analysis_template_arn: String,
+          parameters: Hash[String, String]
+        },
+        sql_compute_configuration: {
+          worker: {
+            type: String,
+            number: Integer
+          }
+        }
+      },
+      ?include_seed_in_output: bool,
+      ?collaboration_id: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _StartAudienceGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAudienceGenerationJobResponse
+
+    interface _StartTrainedModelExportJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_trained_model_export_job: (
+      ?name: String,
+      ?trained_model_arn: String,
+      ?trained_model_version_identifier: String,
+      ?membership_identifier: String,
+      ?output_configuration: {
+        members: Array[
+          {
+            account_id: String
+          }
+        ]
+      },
+      ?description: String
+    ) -> _StartTrainedModelExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTrainedModelExportJobResponse
+
+    interface _StartTrainedModelInferenceJobResponse
+      include Smithy::Client::_Response[Types::StartTrainedModelInferenceJobResponse]
+      def trained_model_inference_job_arn: () -> String?
+    end
+    def start_trained_model_inference_job: (
+      ?membership_identifier: String,
+      ?name: String,
+      ?trained_model_arn: String,
+      ?trained_model_version_identifier: String,
+      ?configured_model_algorithm_association_arn: String,
+      ?resource_config: {
+        instance_type: String,
+        instance_count: Integer
+      },
+      ?output_configuration: {
+        accept: String,
+        members: Array[
+          {
+            account_id: String
+          }
+        ]
+      },
+      ?data_source: {
+        ml_input_channel_arn: String
+      },
+      ?description: String,
+      ?container_execution_parameters: {
+        max_payload_in_mb: Integer
+      },
+      ?environment: Hash[String, String],
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _StartTrainedModelInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTrainedModelInferenceJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConfiguredAudienceModelResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredAudienceModelResponse]
+      def configured_audience_model_arn: () -> String?
+    end
+    def update_configured_audience_model: (
+      ?configured_audience_model_arn: String,
+      ?output_config: {
+        destination: {
+          s3_destination: {
+            s3_uri: String
+          }
+        },
+        role_arn: String
+      },
+      ?audience_model_arn: String,
+      ?shared_audience_metrics: Array[String],
+      ?min_matching_seed_size: Integer,
+      ?audience_size_config: {
+        audience_size_type: String,
+        audience_size_bins: Array[Integer]
+      },
+      ?description: String
+    ) -> _UpdateConfiguredAudienceModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredAudienceModelResponse
+  end
+end

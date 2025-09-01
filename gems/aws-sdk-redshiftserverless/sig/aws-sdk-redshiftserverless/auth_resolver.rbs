@@ -1,0 +1,5 @@
+module Aws::RedshiftServerless
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

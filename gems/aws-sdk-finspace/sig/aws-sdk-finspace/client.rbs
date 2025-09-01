@@ -1,0 +1,997 @@
+module Aws::Finspace
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Finspace::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentResponse]
+      def environment_id: () -> String?
+      def environment_arn: () -> String?
+      def environment_url: () -> String?
+    end
+    def create_environment: (
+      ?name: String,
+      ?description: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?federation_mode: String,
+      ?federation_parameters: {
+        saml_metadata_document: String,
+        saml_metadata_url: String,
+        application_call_back_url: untyped,
+        federation_urn: String,
+        federation_provider_name: String,
+        attribute_map: Hash[String, String]
+      },
+      ?superuser_parameters: {
+        email_address: String,
+        first_name: String,
+        last_name: untyped
+      },
+      ?data_bundles: Array[String]
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateKxChangesetResponse
+      include Smithy::Client::_Response[Types::CreateKxChangesetResponse]
+      def changeset_id: () -> String?
+      def database_name: () -> String?
+      def environment_id: () -> String?
+      def change_requests: () -> Array[Types::ChangeRequest]?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def status: () -> String?
+      def error_info: () -> Types::ErrorInfo?
+    end
+    def create_kx_changeset: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?change_requests: Array[
+        {
+          change_type: String,
+          s3_path: String,
+          db_path: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateKxChangesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxChangesetResponse
+
+    interface _CreateKxClusterResponse
+      include Smithy::Client::_Response[Types::CreateKxClusterResponse]
+      def environment_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cluster_name: () -> String?
+      def cluster_type: () -> String?
+      def tickerplant_log_configuration: () -> Types::TickerplantLogConfiguration?
+      def volumes: () -> Array[Types::Volume]?
+      def databases: () -> Array[Types::KxDatabaseConfiguration]?
+      def cache_storage_configurations: () -> Array[Types::KxCacheStorageConfiguration]?
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+      def cluster_description: () -> String?
+      def capacity_configuration: () -> Types::CapacityConfiguration?
+      def release_label: () -> String?
+      def vpc_configuration: () -> Types::VpcConfiguration?
+      def initialization_script: () -> String?
+      def command_line_arguments: () -> Array[Types::KxCommandLineArgument]?
+      def code: () -> Types::CodeConfiguration?
+      def execution_role: () -> String?
+      def last_modified_timestamp: () -> Time?
+      def savedown_storage_configuration: () -> Types::KxSavedownStorageConfiguration?
+      def az_mode: () -> String?
+      def availability_zone_id: () -> String?
+      def created_timestamp: () -> Time?
+      def scaling_group_configuration: () -> Types::KxScalingGroupConfiguration?
+    end
+    def create_kx_cluster: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?cluster_type: String,
+      ?tickerplant_log_configuration: {
+        tickerplant_log_volumes: Array[String]
+      },
+      ?databases: Array[
+        {
+          database_name: String,
+          cache_configurations: Array[
+            {
+              cache_type: String,
+              db_paths: Array[String],
+              dataview_name: String
+            }
+          ],
+          changeset_id: String,
+          dataview_name: untyped,
+          dataview_configuration: {
+            dataview_name: untyped,
+            dataview_version_id: String,
+            changeset_id: untyped,
+            segment_configurations: Array[
+              {
+                db_paths: Array[String],
+                volume_name: String,
+                on_demand: bool
+              }
+            ]
+          }
+        }
+      ],
+      ?cache_storage_configurations: Array[
+        {
+          type: String,
+          size: Integer
+        }
+      ],
+      ?auto_scaling_configuration: {
+        min_node_count: Integer,
+        max_node_count: untyped,
+        auto_scaling_metric: String,
+        metric_target: Float,
+        scale_in_cooldown_seconds: Float,
+        scale_out_cooldown_seconds: untyped
+      },
+      ?cluster_description: String,
+      ?capacity_configuration: {
+        node_type: String,
+        node_count: Integer
+      },
+      ?release_label: String,
+      ?vpc_configuration: {
+        vpc_id: String,
+        security_group_ids: Array[String],
+        subnet_ids: Array[String],
+        ip_address_type: String
+      },
+      ?initialization_script: String,
+      ?command_line_arguments: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?code: {
+        s3_bucket: String,
+        s3_key: String,
+        s3_object_version: String
+      },
+      ?execution_role: String,
+      ?savedown_storage_configuration: {
+        type: String,
+        size: Integer,
+        volume_name: String
+      },
+      ?az_mode: String,
+      ?availability_zone_id: String,
+      ?tags: Hash[String, String],
+      ?scaling_group_configuration: {
+        scaling_group_name: String,
+        memory_limit: Integer,
+        memory_reservation: untyped,
+        node_count: Integer,
+        cpu: Float
+      }
+    ) -> _CreateKxClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxClusterResponse
+
+    interface _CreateKxDatabaseResponse
+      include Smithy::Client::_Response[Types::CreateKxDatabaseResponse]
+      def database_name: () -> String?
+      def database_arn: () -> String?
+      def environment_id: () -> String?
+      def description: () -> String?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+    end
+    def create_kx_database: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateKxDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxDatabaseResponse
+
+    interface _CreateKxDataviewResponse
+      include Smithy::Client::_Response[Types::CreateKxDataviewResponse]
+      def dataview_name: () -> String?
+      def database_name: () -> String?
+      def environment_id: () -> String?
+      def az_mode: () -> String?
+      def availability_zone_id: () -> String?
+      def changeset_id: () -> String?
+      def segment_configurations: () -> Array[Types::KxDataviewSegmentConfiguration]?
+      def description: () -> String?
+      def auto_update: () -> bool?
+      def read_write: () -> bool?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def status: () -> String?
+    end
+    def create_kx_dataview: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?dataview_name: String,
+      ?az_mode: String,
+      ?availability_zone_id: String,
+      ?changeset_id: String,
+      ?segment_configurations: Array[
+        {
+          db_paths: Array[String],
+          volume_name: String,
+          on_demand: bool
+        }
+      ],
+      ?auto_update: bool,
+      ?read_write: bool,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateKxDataviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxDataviewResponse
+
+    interface _CreateKxEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateKxEnvironmentResponse]
+      def name: () -> String?
+      def status: () -> String?
+      def environment_id: () -> String?
+      def description: () -> String?
+      def environment_arn: () -> String?
+      def kms_key_id: () -> String?
+      def creation_timestamp: () -> Time?
+    end
+    def create_kx_environment: (
+      ?name: String,
+      ?description: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateKxEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxEnvironmentResponse
+
+    interface _CreateKxScalingGroupResponse
+      include Smithy::Client::_Response[Types::CreateKxScalingGroupResponse]
+      def environment_id: () -> String?
+      def scaling_group_name: () -> String?
+      def host_type: () -> String?
+      def availability_zone_id: () -> String?
+      def status: () -> String?
+      def last_modified_timestamp: () -> Time?
+      def created_timestamp: () -> Time?
+    end
+    def create_kx_scaling_group: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?scaling_group_name: String,
+      ?host_type: String,
+      ?availability_zone_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateKxScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxScalingGroupResponse
+
+    interface _CreateKxUserResponse
+      include Smithy::Client::_Response[Types::CreateKxUserResponse]
+      def user_name: () -> String?
+      def user_arn: () -> String?
+      def environment_id: () -> String?
+      def iam_role: () -> String?
+    end
+    def create_kx_user: (
+      ?environment_id: String,
+      ?user_name: String,
+      ?iam_role: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateKxUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxUserResponse
+
+    interface _CreateKxVolumeResponse
+      include Smithy::Client::_Response[Types::CreateKxVolumeResponse]
+      def environment_id: () -> String?
+      def volume_name: () -> String?
+      def volume_type: () -> String?
+      def volume_arn: () -> String?
+      def nas1_configuration: () -> Types::KxNAS1Configuration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def az_mode: () -> String?
+      def description: () -> String?
+      def availability_zone_ids: () -> Array[String]?
+      def created_timestamp: () -> Time?
+    end
+    def create_kx_volume: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?volume_type: String,
+      ?volume_name: String,
+      ?description: String,
+      ?nas1_configuration: {
+        type: String,
+        size: Integer
+      },
+      ?az_mode: String,
+      ?availability_zone_ids: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateKxVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKxVolumeResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentResponse]
+    end
+    def delete_environment: (
+      ?environment_id: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteKxClusterResponse
+      include Smithy::Client::_Response[Types::DeleteKxClusterResponse]
+    end
+    def delete_kx_cluster: (
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?client_token: String
+    ) -> _DeleteKxClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxClusterResponse
+
+    interface _DeleteKxClusterNodeResponse
+      include Smithy::Client::_Response[Types::DeleteKxClusterNodeResponse]
+    end
+    def delete_kx_cluster_node: (
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?node_id: String
+    ) -> _DeleteKxClusterNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxClusterNodeResponse
+
+    interface _DeleteKxDatabaseResponse
+      include Smithy::Client::_Response[Types::DeleteKxDatabaseResponse]
+    end
+    def delete_kx_database: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?client_token: String
+    ) -> _DeleteKxDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxDatabaseResponse
+
+    interface _DeleteKxDataviewResponse
+      include Smithy::Client::_Response[Types::DeleteKxDataviewResponse]
+    end
+    def delete_kx_dataview: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?dataview_name: String,
+      ?client_token: String
+    ) -> _DeleteKxDataviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxDataviewResponse
+
+    interface _DeleteKxEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteKxEnvironmentResponse]
+    end
+    def delete_kx_environment: (
+      ?environment_id: String,
+      ?client_token: String
+    ) -> _DeleteKxEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxEnvironmentResponse
+
+    interface _DeleteKxScalingGroupResponse
+      include Smithy::Client::_Response[Types::DeleteKxScalingGroupResponse]
+    end
+    def delete_kx_scaling_group: (
+      ?environment_id: String,
+      ?scaling_group_name: String,
+      ?client_token: String
+    ) -> _DeleteKxScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxScalingGroupResponse
+
+    interface _DeleteKxUserResponse
+      include Smithy::Client::_Response[Types::DeleteKxUserResponse]
+    end
+    def delete_kx_user: (
+      ?user_name: String,
+      ?environment_id: String,
+      ?client_token: String
+    ) -> _DeleteKxUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxUserResponse
+
+    interface _DeleteKxVolumeResponse
+      include Smithy::Client::_Response[Types::DeleteKxVolumeResponse]
+    end
+    def delete_kx_volume: (
+      ?environment_id: String,
+      ?volume_name: String,
+      ?client_token: String
+    ) -> _DeleteKxVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKxVolumeResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def get_environment: (
+      ?environment_id: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetKxChangesetResponse
+      include Smithy::Client::_Response[Types::GetKxChangesetResponse]
+      def changeset_id: () -> String?
+      def database_name: () -> String?
+      def environment_id: () -> String?
+      def change_requests: () -> Array[Types::ChangeRequest]?
+      def created_timestamp: () -> Time?
+      def active_from_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def status: () -> String?
+      def error_info: () -> Types::ErrorInfo?
+    end
+    def get_kx_changeset: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?changeset_id: String
+    ) -> _GetKxChangesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxChangesetResponse
+
+    interface _GetKxClusterResponse
+      include Smithy::Client::_Response[Types::GetKxClusterResponse]
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cluster_name: () -> String?
+      def cluster_type: () -> String?
+      def tickerplant_log_configuration: () -> Types::TickerplantLogConfiguration?
+      def volumes: () -> Array[Types::Volume]?
+      def databases: () -> Array[Types::KxDatabaseConfiguration]?
+      def cache_storage_configurations: () -> Array[Types::KxCacheStorageConfiguration]?
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+      def cluster_description: () -> String?
+      def capacity_configuration: () -> Types::CapacityConfiguration?
+      def release_label: () -> String?
+      def vpc_configuration: () -> Types::VpcConfiguration?
+      def initialization_script: () -> String?
+      def command_line_arguments: () -> Array[Types::KxCommandLineArgument]?
+      def code: () -> Types::CodeConfiguration?
+      def execution_role: () -> String?
+      def last_modified_timestamp: () -> Time?
+      def savedown_storage_configuration: () -> Types::KxSavedownStorageConfiguration?
+      def az_mode: () -> String?
+      def availability_zone_id: () -> String?
+      def created_timestamp: () -> Time?
+      def scaling_group_configuration: () -> Types::KxScalingGroupConfiguration?
+    end
+    def get_kx_cluster: (
+      ?environment_id: String,
+      ?cluster_name: String
+    ) -> _GetKxClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxClusterResponse
+
+    interface _GetKxConnectionStringResponse
+      include Smithy::Client::_Response[Types::GetKxConnectionStringResponse]
+      def signed_connection_string: () -> String?
+    end
+    def get_kx_connection_string: (
+      ?user_arn: String,
+      ?environment_id: String,
+      ?cluster_name: String
+    ) -> _GetKxConnectionStringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxConnectionStringResponse
+
+    interface _GetKxDatabaseResponse
+      include Smithy::Client::_Response[Types::GetKxDatabaseResponse]
+      def database_name: () -> String?
+      def database_arn: () -> String?
+      def environment_id: () -> String?
+      def description: () -> String?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def last_completed_changeset_id: () -> String?
+      def num_bytes: () -> Integer?
+      def num_changesets: () -> Integer?
+      def num_files: () -> Integer?
+    end
+    def get_kx_database: (
+      ?environment_id: String,
+      ?database_name: String
+    ) -> _GetKxDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxDatabaseResponse
+
+    interface _GetKxDataviewResponse
+      include Smithy::Client::_Response[Types::GetKxDataviewResponse]
+      def database_name: () -> String?
+      def dataview_name: () -> String?
+      def az_mode: () -> String?
+      def availability_zone_id: () -> String?
+      def changeset_id: () -> String?
+      def segment_configurations: () -> Array[Types::KxDataviewSegmentConfiguration]?
+      def active_versions: () -> Array[Types::KxDataviewActiveVersion]?
+      def description: () -> String?
+      def auto_update: () -> bool?
+      def read_write: () -> bool?
+      def environment_id: () -> String?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def get_kx_dataview: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?dataview_name: String
+    ) -> _GetKxDataviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxDataviewResponse
+
+    interface _GetKxEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetKxEnvironmentResponse]
+      def name: () -> String?
+      def environment_id: () -> String?
+      def aws_account_id: () -> String?
+      def status: () -> String?
+      def tgw_status: () -> String?
+      def dns_status: () -> String?
+      def error_message: () -> String?
+      def description: () -> String?
+      def environment_arn: () -> String?
+      def kms_key_id: () -> String?
+      def dedicated_service_account_id: () -> String?
+      def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration?
+      def custom_dns_configuration: () -> Array[Types::CustomDNSServer]?
+      def creation_timestamp: () -> Time?
+      def update_timestamp: () -> Time?
+      def availability_zone_ids: () -> Array[String]?
+      def certificate_authority_arn: () -> String?
+    end
+    def get_kx_environment: (
+      ?environment_id: String
+    ) -> _GetKxEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxEnvironmentResponse
+
+    interface _GetKxScalingGroupResponse
+      include Smithy::Client::_Response[Types::GetKxScalingGroupResponse]
+      def scaling_group_name: () -> String?
+      def scaling_group_arn: () -> String?
+      def host_type: () -> String?
+      def clusters: () -> Array[String]?
+      def availability_zone_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_modified_timestamp: () -> Time?
+      def created_timestamp: () -> Time?
+    end
+    def get_kx_scaling_group: (
+      ?environment_id: String,
+      ?scaling_group_name: String
+    ) -> _GetKxScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxScalingGroupResponse
+
+    interface _GetKxUserResponse
+      include Smithy::Client::_Response[Types::GetKxUserResponse]
+      def user_name: () -> String?
+      def user_arn: () -> String?
+      def environment_id: () -> String?
+      def iam_role: () -> String?
+    end
+    def get_kx_user: (
+      ?user_name: String,
+      ?environment_id: String
+    ) -> _GetKxUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxUserResponse
+
+    interface _GetKxVolumeResponse
+      include Smithy::Client::_Response[Types::GetKxVolumeResponse]
+      def environment_id: () -> String?
+      def volume_name: () -> String?
+      def volume_type: () -> String?
+      def volume_arn: () -> String?
+      def nas1_configuration: () -> Types::KxNAS1Configuration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_timestamp: () -> Time?
+      def description: () -> String?
+      def az_mode: () -> String?
+      def availability_zone_ids: () -> Array[String]?
+      def last_modified_timestamp: () -> Time?
+      def attached_clusters: () -> Array[Types::KxAttachedCluster]?
+    end
+    def get_kx_volume: (
+      ?environment_id: String,
+      ?volume_name: String
+    ) -> _GetKxVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKxVolumeResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsResponse]
+      def environments: () -> Array[Types::Environment]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListKxChangesetsResponse
+      include Smithy::Client::_Response[Types::ListKxChangesetsResponse]
+      def kx_changesets: () -> Array[Types::KxChangesetListEntry]?
+      def next_token: () -> String?
+    end
+    def list_kx_changesets: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxChangesetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxChangesetsResponse
+
+    interface _ListKxClusterNodesResponse
+      include Smithy::Client::_Response[Types::ListKxClusterNodesResponse]
+      def nodes: () -> Array[Types::KxNode]?
+      def next_token: () -> String?
+    end
+    def list_kx_cluster_nodes: (
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxClusterNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxClusterNodesResponse
+
+    interface _ListKxClustersResponse
+      include Smithy::Client::_Response[Types::ListKxClustersResponse]
+      def kx_cluster_summaries: () -> Array[Types::KxCluster]?
+      def next_token: () -> String?
+    end
+    def list_kx_clusters: (
+      ?environment_id: String,
+      ?cluster_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListKxClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxClustersResponse
+
+    interface _ListKxDatabasesResponse
+      include Smithy::Client::_Response[Types::ListKxDatabasesResponse]
+      def kx_databases: () -> Array[Types::KxDatabaseListEntry]?
+      def next_token: () -> String?
+    end
+    def list_kx_databases: (
+      ?environment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxDatabasesResponse
+
+    interface _ListKxDataviewsResponse
+      include Smithy::Client::_Response[Types::ListKxDataviewsResponse]
+      def kx_dataviews: () -> Array[Types::KxDataviewListEntry]?
+      def next_token: () -> String?
+    end
+    def list_kx_dataviews: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxDataviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxDataviewsResponse
+
+    interface _ListKxEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListKxEnvironmentsResponse]
+      def environments: () -> Array[Types::KxEnvironment]?
+      def next_token: () -> String?
+    end
+    def list_kx_environments: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxEnvironmentsResponse
+
+    interface _ListKxScalingGroupsResponse
+      include Smithy::Client::_Response[Types::ListKxScalingGroupsResponse]
+      def scaling_groups: () -> Array[Types::KxScalingGroup]?
+      def next_token: () -> String?
+    end
+    def list_kx_scaling_groups: (
+      ?environment_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListKxScalingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxScalingGroupsResponse
+
+    interface _ListKxUsersResponse
+      include Smithy::Client::_Response[Types::ListKxUsersResponse]
+      def users: () -> Array[Types::KxUser]?
+      def next_token: () -> String?
+    end
+    def list_kx_users: (
+      ?environment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKxUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxUsersResponse
+
+    interface _ListKxVolumesResponse
+      include Smithy::Client::_Response[Types::ListKxVolumesResponse]
+      def kx_volume_summaries: () -> Array[Types::KxVolume]?
+      def next_token: () -> String?
+    end
+    def list_kx_volumes: (
+      ?environment_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?volume_type: String
+    ) -> _ListKxVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKxVolumesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def update_environment: (
+      ?environment_id: String,
+      ?name: String,
+      ?description: String,
+      ?federation_mode: String,
+      ?federation_parameters: {
+        saml_metadata_document: String,
+        saml_metadata_url: String,
+        application_call_back_url: untyped,
+        federation_urn: String,
+        federation_provider_name: String,
+        attribute_map: Hash[String, String]
+      }
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+
+    interface _UpdateKxClusterCodeConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateKxClusterCodeConfigurationResponse]
+    end
+    def update_kx_cluster_code_configuration: (
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?client_token: String,
+      ?code: {
+        s3_bucket: String,
+        s3_key: String,
+        s3_object_version: String
+      },
+      ?initialization_script: String,
+      ?command_line_arguments: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?deployment_configuration: {
+        deployment_strategy: String
+      }
+    ) -> _UpdateKxClusterCodeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxClusterCodeConfigurationResponse
+
+    interface _UpdateKxClusterDatabasesResponse
+      include Smithy::Client::_Response[Types::UpdateKxClusterDatabasesResponse]
+    end
+    def update_kx_cluster_databases: (
+      ?environment_id: String,
+      ?cluster_name: String,
+      ?client_token: String,
+      ?databases: Array[
+        {
+          database_name: String,
+          cache_configurations: Array[
+            {
+              cache_type: String,
+              db_paths: Array[String],
+              dataview_name: String
+            }
+          ],
+          changeset_id: String,
+          dataview_name: untyped,
+          dataview_configuration: {
+            dataview_name: untyped,
+            dataview_version_id: String,
+            changeset_id: untyped,
+            segment_configurations: Array[
+              {
+                db_paths: Array[String],
+                volume_name: String,
+                on_demand: bool
+              }
+            ]
+          }
+        }
+      ],
+      ?deployment_configuration: {
+        deployment_strategy: String
+      }
+    ) -> _UpdateKxClusterDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxClusterDatabasesResponse
+
+    interface _UpdateKxDatabaseResponse
+      include Smithy::Client::_Response[Types::UpdateKxDatabaseResponse]
+      def database_name: () -> String?
+      def environment_id: () -> String?
+      def description: () -> String?
+      def last_modified_timestamp: () -> Time?
+    end
+    def update_kx_database: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateKxDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxDatabaseResponse
+
+    interface _UpdateKxDataviewResponse
+      include Smithy::Client::_Response[Types::UpdateKxDataviewResponse]
+      def environment_id: () -> String?
+      def database_name: () -> String?
+      def dataview_name: () -> String?
+      def az_mode: () -> String?
+      def availability_zone_id: () -> String?
+      def changeset_id: () -> String?
+      def segment_configurations: () -> Array[Types::KxDataviewSegmentConfiguration]?
+      def active_versions: () -> Array[Types::KxDataviewActiveVersion]?
+      def status: () -> String?
+      def auto_update: () -> bool?
+      def read_write: () -> bool?
+      def description: () -> String?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+    end
+    def update_kx_dataview: (
+      ?environment_id: String,
+      ?database_name: String,
+      ?dataview_name: String,
+      ?description: String,
+      ?changeset_id: String,
+      ?segment_configurations: Array[
+        {
+          db_paths: Array[String],
+          volume_name: String,
+          on_demand: bool
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateKxDataviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxDataviewResponse
+
+    interface _UpdateKxEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateKxEnvironmentResponse]
+      def name: () -> String?
+      def environment_id: () -> String?
+      def aws_account_id: () -> String?
+      def status: () -> String?
+      def tgw_status: () -> String?
+      def dns_status: () -> String?
+      def error_message: () -> String?
+      def description: () -> String?
+      def environment_arn: () -> String?
+      def kms_key_id: () -> String?
+      def dedicated_service_account_id: () -> String?
+      def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration?
+      def custom_dns_configuration: () -> Array[Types::CustomDNSServer]?
+      def creation_timestamp: () -> Time?
+      def update_timestamp: () -> Time?
+      def availability_zone_ids: () -> Array[String]?
+    end
+    def update_kx_environment: (
+      ?environment_id: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateKxEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxEnvironmentResponse
+
+    interface _UpdateKxEnvironmentNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateKxEnvironmentNetworkResponse]
+      def name: () -> String?
+      def environment_id: () -> String?
+      def aws_account_id: () -> String?
+      def status: () -> String?
+      def tgw_status: () -> String?
+      def dns_status: () -> String?
+      def error_message: () -> String?
+      def description: () -> String?
+      def environment_arn: () -> String?
+      def kms_key_id: () -> String?
+      def dedicated_service_account_id: () -> String?
+      def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration?
+      def custom_dns_configuration: () -> Array[Types::CustomDNSServer]?
+      def creation_timestamp: () -> Time?
+      def update_timestamp: () -> Time?
+      def availability_zone_ids: () -> Array[String]?
+    end
+    def update_kx_environment_network: (
+      ?environment_id: String,
+      ?transit_gateway_configuration: {
+        transit_gateway_id: String,
+        routable_cidr_space: String,
+        attachment_network_acl_configuration: Array[
+          {
+            rule_number: Integer,
+            protocol: String,
+            rule_action: String,
+            port_range: {
+              from: Integer,
+              to: untyped
+            },
+            icmp_type_code: {
+              type: Integer,
+              code: untyped
+            },
+            cidr_block: String
+          }
+        ]
+      },
+      ?custom_dns_configuration: Array[
+        {
+          custom_dns_server_name: String,
+          custom_dns_server_ip: String
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateKxEnvironmentNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxEnvironmentNetworkResponse
+
+    interface _UpdateKxUserResponse
+      include Smithy::Client::_Response[Types::UpdateKxUserResponse]
+      def user_name: () -> String?
+      def user_arn: () -> String?
+      def environment_id: () -> String?
+      def iam_role: () -> String?
+    end
+    def update_kx_user: (
+      ?environment_id: String,
+      ?user_name: String,
+      ?iam_role: String,
+      ?client_token: String
+    ) -> _UpdateKxUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxUserResponse
+
+    interface _UpdateKxVolumeResponse
+      include Smithy::Client::_Response[Types::UpdateKxVolumeResponse]
+      def environment_id: () -> String?
+      def volume_name: () -> String?
+      def volume_type: () -> String?
+      def volume_arn: () -> String?
+      def nas1_configuration: () -> Types::KxNAS1Configuration?
+      def status: () -> String?
+      def description: () -> String?
+      def status_reason: () -> String?
+      def created_timestamp: () -> Time?
+      def az_mode: () -> String?
+      def availability_zone_ids: () -> Array[String]?
+      def last_modified_timestamp: () -> Time?
+      def attached_clusters: () -> Array[Types::KxAttachedCluster]?
+    end
+    def update_kx_volume: (
+      ?environment_id: String,
+      ?volume_name: String,
+      ?description: String,
+      ?client_token: String,
+      ?nas1_configuration: {
+        type: String,
+        size: Integer
+      }
+    ) -> _UpdateKxVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKxVolumeResponse
+  end
+end

@@ -1,0 +1,1533 @@
+module Aws::Chatbot
+  module Types
+
+    class AccountPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_authorization_required: bool,
+        ?training_data_collection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_authorization_required: bool?
+      attr_accessor training_data_collection_enabled: bool?
+    end
+
+    class AssociateToConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?chat_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor chat_configuration: String?
+    end
+
+    class AssociateToConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociationListing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+    end
+
+    class ChimeWebhookConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_description: String,
+        ?chat_configuration_arn: String,
+        ?iam_role_arn: String,
+        ?sns_topic_arns: Array[String],
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?tags: Array[Types::Tag],
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_description: String?
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class ConfiguredTeam
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_id: String,
+        ?team_id: String,
+        ?team_name: String,
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_id: String?
+      attr_accessor team_id: String?
+      attr_accessor team_name: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateChimeWebhookConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateChimeWebhookConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_description: String,
+        ?webhook_url: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_description: String?
+      attr_accessor webhook_url: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateChimeWebhookConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_configuration: Types::ChimeWebhookConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_configuration: Types::ChimeWebhookConfiguration?
+    end
+
+    class CreateCustomActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Types::CustomActionDefinition,
+        ?alias_name: String,
+        ?attachments: Array[Types::CustomActionAttachment],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+        ?action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Types::CustomActionDefinition?
+      attr_accessor alias_name: String?
+      attr_accessor attachments: Array[Types::CustomActionAttachment]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+      attr_accessor action_name: String?
+    end
+
+    class CreateCustomActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+    end
+
+    class CreateSlackChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateSlackChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_team_id: String,
+        ?slack_channel_id: String,
+        ?slack_channel_name: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_team_id: String?
+      attr_accessor slack_channel_id: String?
+      attr_accessor slack_channel_name: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSlackChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_configuration: Types::SlackChannelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_configuration: Types::SlackChannelConfiguration?
+    end
+
+    class CreateTeamsChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateTeamsChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: String,
+        ?channel_name: String,
+        ?team_id: String,
+        ?team_name: String,
+        ?tenant_id: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor team_id: String?
+      attr_accessor team_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTeamsChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_configuration: Types::TeamsChannelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration?
+    end
+
+    class CustomAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+        ?definition: Types::CustomActionDefinition,
+        ?alias_name: String,
+        ?attachments: Array[Types::CustomActionAttachment],
+        ?action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+      attr_accessor definition: Types::CustomActionDefinition?
+      attr_accessor alias_name: String?
+      attr_accessor attachments: Array[Types::CustomActionAttachment]?
+      attr_accessor action_name: String?
+    end
+
+    class CustomActionAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_type: String,
+        ?button_text: String,
+        ?criteria: Array[Types::CustomActionAttachmentCriteria],
+        ?variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_type: String?
+      attr_accessor button_text: String?
+      attr_accessor criteria: Array[Types::CustomActionAttachmentCriteria]?
+      attr_accessor variables: Hash[String, String]?
+    end
+
+    class CustomActionAttachmentCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operator: String,
+        ?variable_name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operator: String?
+      attr_accessor variable_name: String?
+      attr_accessor value: String?
+    end
+
+    module CustomActionAttachmentCriteriaOperator
+      HAS_VALUE: String
+      EQUALS: String
+    end
+
+    class CustomActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?command_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor command_text: String?
+    end
+
+    class DeleteChimeWebhookConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteChimeWebhookConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class DeleteChimeWebhookConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCustomActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+    end
+
+    class DeleteCustomActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor user_id: String?
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSlackChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteSlackChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class DeleteSlackChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSlackUserIdentityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteSlackUserIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?slack_team_id: String,
+        ?slack_user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor slack_team_id: String?
+      attr_accessor slack_user_id: String?
+    end
+
+    class DeleteSlackUserIdentityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSlackWorkspaceAuthorizationFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteSlackWorkspaceAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_team_id: String?
+    end
+
+    class DeleteSlackWorkspaceAuthorizationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTeamsChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteTeamsChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class DeleteTeamsChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTeamsConfiguredTeamException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteTeamsConfiguredTeamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+    end
+
+    class DeleteTeamsConfiguredTeamResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeChimeWebhookConfigurationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeChimeWebhookConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class DescribeChimeWebhookConfigurationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?webhook_configurations: Array[Types::ChimeWebhookConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor webhook_configurations: Array[Types::ChimeWebhookConfiguration]?
+    end
+
+    class DescribeSlackChannelConfigurationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeSlackChannelConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class DescribeSlackChannelConfigurationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?slack_channel_configurations: Array[Types::SlackChannelConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor slack_channel_configurations: Array[Types::SlackChannelConfiguration]?
+    end
+
+    class DescribeSlackUserIdentitiesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeSlackUserIdentitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeSlackUserIdentitiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_user_identities: Array[Types::SlackUserIdentity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_user_identities: Array[Types::SlackUserIdentity]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSlackWorkspacesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeSlackWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSlackWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_workspaces: Array[Types::SlackWorkspace],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_workspaces: Array[Types::SlackWorkspace]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateFromConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?chat_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor chat_configuration: String?
+    end
+
+    class DisassociateFromConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountPreferencesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAccountPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountPreferencesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_preferences: Types::AccountPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_preferences: Types::AccountPreferences?
+    end
+
+    class GetCustomActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+    end
+
+    class GetCustomActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action: Types::CustomAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action: Types::CustomAction?
+    end
+
+    class GetTeamsChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetTeamsChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+    end
+
+    class GetTeamsChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_configuration: Types::TeamsChannelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::AssociationListing],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::AssociationListing]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomActionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_actions: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_actions: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_teams: Array[Types::ConfiguredTeam],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_teams: Array[Types::ConfiguredTeam]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?teams_user_identities: Array[Types::TeamsUserIdentity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor teams_user_identities: Array[Types::TeamsUserIdentity]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTeamsChannelConfigurationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTeamsChannelConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor team_id: String?
+    end
+
+    class ListTeamsChannelConfigurationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?team_channel_configurations: Array[Types::TeamsChannelConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor team_channel_configurations: Array[Types::TeamsChannelConfiguration]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SlackChannelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_team_name: String,
+        ?slack_team_id: String,
+        ?slack_channel_id: String,
+        ?slack_channel_name: String,
+        ?chat_configuration_arn: String,
+        ?iam_role_arn: String,
+        ?sns_topic_arns: Array[String],
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+        ?tags: Array[Types::Tag],
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_team_name: String?
+      attr_accessor slack_team_id: String?
+      attr_accessor slack_channel_id: String?
+      attr_accessor slack_channel_name: String?
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class SlackUserIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?chat_configuration_arn: String,
+        ?slack_team_id: String,
+        ?slack_user_id: String,
+        ?aws_user_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor slack_team_id: String?
+      attr_accessor slack_user_id: String?
+      attr_accessor aws_user_identity: String?
+    end
+
+    class SlackWorkspace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slack_team_id: String,
+        ?slack_team_name: String,
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slack_team_id: String?
+      attr_accessor slack_team_name: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TeamsChannelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: String,
+        ?channel_name: String,
+        ?team_id: String,
+        ?team_name: String,
+        ?tenant_id: String,
+        ?chat_configuration_arn: String,
+        ?iam_role_arn: String,
+        ?sns_topic_arns: Array[String],
+        ?configuration_name: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+        ?tags: Array[Types::Tag],
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor team_id: String?
+      attr_accessor team_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor configuration_name: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class TeamsUserIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?chat_configuration_arn: String,
+        ?team_id: String,
+        ?user_id: String,
+        ?aws_user_identity: String,
+        ?teams_channel_id: String,
+        ?teams_tenant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor team_id: String?
+      attr_accessor user_id: String?
+      attr_accessor aws_user_identity: String?
+      attr_accessor teams_channel_id: String?
+      attr_accessor teams_tenant_id: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccountPreferencesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateAccountPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_authorization_required: bool,
+        ?training_data_collection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_authorization_required: bool?
+      attr_accessor training_data_collection_enabled: bool?
+    end
+
+    class UpdateAccountPreferencesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_preferences: Types::AccountPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_preferences: Types::AccountPreferences?
+    end
+
+    class UpdateChimeWebhookConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateChimeWebhookConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?webhook_description: String,
+        ?webhook_url: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?logging_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor webhook_description: String?
+      attr_accessor webhook_url: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor logging_level: String?
+    end
+
+    class UpdateChimeWebhookConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_configuration: Types::ChimeWebhookConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_configuration: Types::ChimeWebhookConfiguration?
+    end
+
+    class UpdateCustomActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+        ?definition: Types::CustomActionDefinition,
+        ?alias_name: String,
+        ?attachments: Array[Types::CustomActionAttachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+      attr_accessor definition: Types::CustomActionDefinition?
+      attr_accessor alias_name: String?
+      attr_accessor attachments: Array[Types::CustomActionAttachment]?
+    end
+
+    class UpdateCustomActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_arn: String?
+    end
+
+    class UpdateSlackChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateSlackChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?slack_channel_id: String,
+        ?slack_channel_name: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor slack_channel_id: String?
+      attr_accessor slack_channel_name: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+    end
+
+    class UpdateSlackChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_configuration: Types::SlackChannelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_configuration: Types::SlackChannelConfiguration?
+    end
+
+    class UpdateTeamsChannelConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateTeamsChannelConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chat_configuration_arn: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?sns_topic_arns: Array[String],
+        ?iam_role_arn: String,
+        ?logging_level: String,
+        ?guardrail_policy_arns: Array[String],
+        ?user_authorization_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chat_configuration_arn: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor sns_topic_arns: Array[String]?
+      attr_accessor iam_role_arn: String?
+      attr_accessor logging_level: String?
+      attr_accessor guardrail_policy_arns: Array[String]?
+      attr_accessor user_authorization_required: bool?
+    end
+
+    class UpdateTeamsChannelConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_configuration: Types::TeamsChannelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration?
+    end
+  end
+end

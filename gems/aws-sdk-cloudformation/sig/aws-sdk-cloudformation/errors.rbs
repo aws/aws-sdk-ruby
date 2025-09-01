@@ -1,0 +1,91 @@
+module Aws::CloudFormation
+  module Errors
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CFNRegistryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChangeSetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentResourcesLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CreatedButModifiedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GeneratedTemplateNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HookResultNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientCapabilitiesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidChangeSetStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateTransitionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NameAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationIdAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationStatusCheckFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceScanInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceScanLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceScanNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StackInstanceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StackNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StackRefactorNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StackSetNotEmptyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StackSetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StaleRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TokenAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeConfigurationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

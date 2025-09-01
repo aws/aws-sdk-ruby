@@ -1,0 +1,756 @@
+module Aws::RedshiftData
+  module Types
+
+    class ActiveSessionsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActiveStatementsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchExecuteStatementException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor statement_id: String?
+    end
+
+    class BatchExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sqls: Array[String],
+        ?cluster_identifier: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?with_event: bool,
+        ?statement_name: String,
+        ?workgroup_name: String,
+        ?client_token: String,
+        ?session_keep_alive_seconds: Integer,
+        ?session_id: String,
+        ?result_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sqls: Array[String]?
+      attr_accessor cluster_identifier: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor with_event: bool?
+      attr_accessor statement_name: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor client_token: String?
+      attr_accessor session_keep_alive_seconds: Integer?
+      attr_accessor session_id: String?
+      attr_accessor result_format: String?
+    end
+
+    class BatchExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?created_at: Time,
+        ?cluster_identifier: String,
+        ?db_user: String,
+        ?db_groups: Array[String],
+        ?database: String,
+        ?secret_arn: String,
+        ?workgroup_name: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor cluster_identifier: String?
+      attr_accessor db_user: String?
+      attr_accessor db_groups: Array[String]?
+      attr_accessor database: String?
+      attr_accessor secret_arn: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor session_id: String?
+    end
+
+    class CancelStatementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CancelStatementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: bool?
+    end
+
+    class ColumnMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_case_sensitive: bool,
+        ?is_currency: bool,
+        ?is_signed: bool,
+        ?label: String,
+        ?name: String,
+        ?nullable: Integer,
+        ?precision: Integer,
+        ?scale: Integer,
+        ?schema_name: String,
+        ?table_name: String,
+        ?type_name: String,
+        ?length: Integer,
+        ?column_default: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_case_sensitive: bool?
+      attr_accessor is_currency: bool?
+      attr_accessor is_signed: bool?
+      attr_accessor label: String?
+      attr_accessor name: String?
+      attr_accessor nullable: Integer?
+      attr_accessor precision: Integer?
+      attr_accessor scale: Integer?
+      attr_accessor schema_name: String?
+      attr_accessor table_name: String?
+      attr_accessor type_name: String?
+      attr_accessor length: Integer?
+      attr_accessor column_default: String?
+    end
+
+    class DatabaseConnectionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DescribeStatementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeStatementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?cluster_identifier: String,
+        ?duration: Integer,
+        ?error: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?redshift_pid: Integer,
+        ?has_result_set: bool,
+        ?query_string: String,
+        ?result_rows: Integer,
+        ?result_size: Integer,
+        ?redshift_query_id: Integer,
+        ?query_parameters: Array[Types::SqlParameter],
+        ?sub_statements: Array[Types::SubStatementData],
+        ?workgroup_name: String,
+        ?session_id: String,
+        ?result_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor cluster_identifier: String?
+      attr_accessor duration: Integer?
+      attr_accessor error: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor redshift_pid: Integer?
+      attr_accessor has_result_set: bool?
+      attr_accessor query_string: String?
+      attr_accessor result_rows: Integer?
+      attr_accessor result_size: Integer?
+      attr_accessor redshift_query_id: Integer?
+      attr_accessor query_parameters: Array[Types::SqlParameter]?
+      attr_accessor sub_statements: Array[Types::SubStatementData]?
+      attr_accessor workgroup_name: String?
+      attr_accessor session_id: String?
+      attr_accessor result_format: String?
+    end
+
+    class DescribeTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?connected_database: String,
+        ?schema: String,
+        ?table: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor connected_database: String?
+      attr_accessor schema: String?
+      attr_accessor table: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workgroup_name: String?
+    end
+
+    class DescribeTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?column_list: Array[Types::ColumnMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor column_list: Array[Types::ColumnMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ExecuteStatementException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor statement_id: String?
+    end
+
+    class ExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sql: String,
+        ?cluster_identifier: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?with_event: bool,
+        ?statement_name: String,
+        ?parameters: Array[Types::SqlParameter],
+        ?workgroup_name: String,
+        ?client_token: String,
+        ?session_keep_alive_seconds: Integer,
+        ?session_id: String,
+        ?result_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sql: String?
+      attr_accessor cluster_identifier: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor with_event: bool?
+      attr_accessor statement_name: String?
+      attr_accessor parameters: Array[Types::SqlParameter]?
+      attr_accessor workgroup_name: String?
+      attr_accessor client_token: String?
+      attr_accessor session_keep_alive_seconds: Integer?
+      attr_accessor session_id: String?
+      attr_accessor result_format: String?
+    end
+
+    class ExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?created_at: Time,
+        ?cluster_identifier: String,
+        ?db_user: String,
+        ?db_groups: Array[String],
+        ?database: String,
+        ?secret_arn: String,
+        ?workgroup_name: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor cluster_identifier: String?
+      attr_accessor db_user: String?
+      attr_accessor db_groups: Array[String]?
+      attr_accessor database: String?
+      attr_accessor secret_arn: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor session_id: String?
+    end
+
+    class Field
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?is_null: bool,
+        ?boolean_value: bool,
+        ?long_value: Integer,
+        ?double_value: Float,
+        ?string_value: String,
+        ?blob_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_null: bool?
+      attr_accessor boolean_value: bool?
+      attr_accessor long_value: Integer?
+      attr_accessor double_value: Float?
+      attr_accessor string_value: String?
+      attr_accessor blob_value: String?
+
+      class IsNull < Field
+      end
+      class BooleanValue < Field
+      end
+      class LongValue < Field
+      end
+      class DoubleValue < Field
+      end
+      class StringValue < Field
+      end
+      class BlobValue < Field
+      end
+      class Unknown < Field
+      end
+    end
+
+    class GetStatementResultRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetStatementResultResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Array[Types::Field]],
+        ?column_metadata: Array[Types::ColumnMetadata],
+        ?total_num_rows: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Array[Types::Field]]?
+      attr_accessor column_metadata: Array[Types::ColumnMetadata]?
+      attr_accessor total_num_rows: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetStatementResultV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetStatementResultV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::QueryRecords],
+        ?column_metadata: Array[Types::ColumnMetadata],
+        ?total_num_rows: Integer,
+        ?result_format: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::QueryRecords]?
+      attr_accessor column_metadata: Array[Types::ColumnMetadata]?
+      attr_accessor total_num_rows: Integer?
+      attr_accessor result_format: String?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDatabasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?database: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor database: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ListDatabasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?databases: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor databases: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchemasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?connected_database: String,
+        ?schema_pattern: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor connected_database: String?
+      attr_accessor schema_pattern: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ListSchemasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schemas: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schemas: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStatementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?statement_name: String,
+        ?status: String,
+        ?role_level: bool,
+        ?database: String,
+        ?cluster_identifier: String,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor statement_name: String?
+      attr_accessor status: String?
+      attr_accessor role_level: bool?
+      attr_accessor database: String?
+      attr_accessor cluster_identifier: String?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ListStatementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::StatementData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::StatementData]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?secret_arn: String,
+        ?db_user: String,
+        ?database: String,
+        ?connected_database: String,
+        ?schema_pattern: String,
+        ?table_pattern: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?workgroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor secret_arn: String?
+      attr_accessor db_user: String?
+      attr_accessor database: String?
+      attr_accessor connected_database: String?
+      attr_accessor schema_pattern: String?
+      attr_accessor table_pattern: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor workgroup_name: String?
+    end
+
+    class ListTablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tables: Array[Types::TableMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tables: Array[Types::TableMember]?
+      attr_accessor next_token: String?
+    end
+
+    class QueryRecords
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?csv_records: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv_records: String?
+
+      class CSVRecords < QueryRecords
+      end
+      class Unknown < QueryRecords
+      end
+    end
+
+    class QueryTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class SqlParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class StatementData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?query_string: String,
+        ?query_strings: Array[String],
+        ?secret_arn: String,
+        ?status: String,
+        ?statement_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?query_parameters: Array[Types::SqlParameter],
+        ?is_batch_statement: bool,
+        ?result_format: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor query_string: String?
+      attr_accessor query_strings: Array[String]?
+      attr_accessor secret_arn: String?
+      attr_accessor status: String?
+      attr_accessor statement_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor query_parameters: Array[Types::SqlParameter]?
+      attr_accessor is_batch_statement: bool?
+      attr_accessor result_format: String?
+      attr_accessor session_id: String?
+    end
+
+    class SubStatementData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?duration: Integer,
+        ?error: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?query_string: String,
+        ?result_rows: Integer,
+        ?result_size: Integer,
+        ?redshift_query_id: Integer,
+        ?has_result_set: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor duration: Integer?
+      attr_accessor error: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor query_string: String?
+      attr_accessor result_rows: Integer?
+      attr_accessor result_size: Integer?
+      attr_accessor redshift_query_id: Integer?
+      attr_accessor has_result_set: bool?
+    end
+
+    class TableMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor schema: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

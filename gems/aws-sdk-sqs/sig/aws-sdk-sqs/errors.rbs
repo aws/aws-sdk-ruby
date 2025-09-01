@@ -1,0 +1,86 @@
+module Aws::SQS
+  module Errors
+    class BatchEntryIdsNotDistinct < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchRequestTooLong < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EmptyBatchRequest < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAddress < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAttributeName < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAttributeValue < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBatchEntryId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIdFormat < Smithy::Client::ServiceError
+    end
+    class InvalidMessageContents < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSecurity < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsAccessDenied < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsDisabled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsInvalidKeyUsage < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsInvalidState < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsOptInRequired < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsThrottled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MessageNotInflight < Smithy::Client::ServiceError
+    end
+    class OverLimit < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PurgeQueueInProgress < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueueDeletedRecently < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueueDoesNotExist < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueueNameExists < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReceiptHandleIsInvalid < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestThrottled < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyEntriesInBatchRequest < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

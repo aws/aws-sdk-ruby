@@ -1,0 +1,106 @@
+module Aws::IoT
+  module Errors
+    class CertificateConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CertificateStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CertificateValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+    end
+    class ConflictingResourceUpdateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IndexNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAggregationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidQueryException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResponseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateTransitionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotConfiguredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RegistrationCodeValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceRegistrationFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SqlParseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaskAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransferAlreadyCompletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransferConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VersionConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VersionsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

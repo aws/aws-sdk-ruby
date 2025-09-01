@@ -1,0 +1,2234 @@
+module Aws::WorkDocs
+  module Types
+
+    class AbortDocumentVersionUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+    end
+
+    class ActivateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?authentication_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor authentication_token: String?
+    end
+
+    class ActivateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class Activity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?time_stamp: Time,
+        ?is_indirect_activity: bool,
+        ?organization_id: String,
+        ?initiator: Types::UserMetadata,
+        ?participants: Types::Participants,
+        ?resource_metadata: Types::ResourceMetadata,
+        ?original_parent: Types::ResourceMetadata,
+        ?comment_metadata: Types::CommentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor time_stamp: Time?
+      attr_accessor is_indirect_activity: bool?
+      attr_accessor organization_id: String?
+      attr_accessor initiator: Types::UserMetadata?
+      attr_accessor participants: Types::Participants?
+      attr_accessor resource_metadata: Types::ResourceMetadata?
+      attr_accessor original_parent: Types::ResourceMetadata?
+      attr_accessor comment_metadata: Types::CommentMetadata?
+    end
+
+    module ActivityType
+      DOCUMENT_CHECKED_IN: String
+      DOCUMENT_CHECKED_OUT: String
+      DOCUMENT_RENAMED: String
+      DOCUMENT_VERSION_UPLOADED: String
+      DOCUMENT_VERSION_DELETED: String
+      DOCUMENT_VERSION_VIEWED: String
+      DOCUMENT_VERSION_DOWNLOADED: String
+      DOCUMENT_RECYCLED: String
+      DOCUMENT_RESTORED: String
+      DOCUMENT_REVERTED: String
+      DOCUMENT_SHARED: String
+      DOCUMENT_UNSHARED: String
+      DOCUMENT_SHARE_PERMISSION_CHANGED: String
+      DOCUMENT_SHAREABLE_LINK_CREATED: String
+      DOCUMENT_SHAREABLE_LINK_REMOVED: String
+      DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED: String
+      DOCUMENT_MOVED: String
+      DOCUMENT_COMMENT_ADDED: String
+      DOCUMENT_COMMENT_DELETED: String
+      DOCUMENT_ANNOTATION_ADDED: String
+      DOCUMENT_ANNOTATION_DELETED: String
+      FOLDER_CREATED: String
+      FOLDER_DELETED: String
+      FOLDER_RENAMED: String
+      FOLDER_RECYCLED: String
+      FOLDER_RESTORED: String
+      FOLDER_SHARED: String
+      FOLDER_UNSHARED: String
+      FOLDER_SHARE_PERMISSION_CHANGED: String
+      FOLDER_SHAREABLE_LINK_CREATED: String
+      FOLDER_SHAREABLE_LINK_REMOVED: String
+      FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED: String
+      FOLDER_MOVED: String
+    end
+
+    class AddResourcePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+        ?principals: Array[Types::SharePrincipal],
+        ?notification_options: Types::NotificationOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+      attr_accessor principals: Array[Types::SharePrincipal]?
+      attr_accessor notification_options: Types::NotificationOptions?
+    end
+
+    class AddResourcePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_results: Array[Types::ShareResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_results: Array[Types::ShareResult]?
+    end
+
+    module AdditionalResponseFieldType
+      WEBURL: String
+    end
+
+    module BooleanEnumType
+      TRUE: String
+      FALSE: String
+    end
+
+    class Comment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?parent_id: String,
+        ?thread_id: String,
+        ?text: String,
+        ?contributor: Types::User,
+        ?created_timestamp: Time,
+        ?status: String,
+        ?visibility: String,
+        ?recipient_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor parent_id: String?
+      attr_accessor thread_id: String?
+      attr_accessor text: String?
+      attr_accessor contributor: Types::User?
+      attr_accessor created_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor visibility: String?
+      attr_accessor recipient_id: String?
+    end
+
+    class CommentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?contributor: Types::User,
+        ?created_timestamp: Time,
+        ?comment_status: String,
+        ?recipient_id: String,
+        ?contributor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor contributor: Types::User?
+      attr_accessor created_timestamp: Time?
+      attr_accessor comment_status: String?
+      attr_accessor recipient_id: String?
+      attr_accessor contributor_id: String?
+    end
+
+    module CommentStatusType
+      DRAFT: String
+      PUBLISHED: String
+      DELETED: String
+    end
+
+    module CommentVisibilityType
+      PUBLIC: String
+      PRIVATE: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictingOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContentCategoryType
+      IMAGE: String
+      DOCUMENT: String
+      PDF: String
+      SPREADSHEET: String
+      PRESENTATION: String
+      AUDIO: String
+      VIDEO: String
+      SOURCE_CODE: String
+      OTHER: String
+    end
+
+    class CreateCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?parent_id: String,
+        ?thread_id: String,
+        ?text: String,
+        ?visibility: String,
+        ?notify_collaborators: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor parent_id: String?
+      attr_accessor thread_id: String?
+      attr_accessor text: String?
+      attr_accessor visibility: String?
+      attr_accessor notify_collaborators: bool?
+    end
+
+    class CreateCommentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::Comment?
+    end
+
+    class CreateCustomMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+        ?version_id: String,
+        ?custom_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+      attr_accessor version_id: String?
+      attr_accessor custom_metadata: Hash[String, String]?
+    end
+
+    class CreateCustomMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateFolderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?name: String,
+        ?parent_folder_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor name: String?
+      attr_accessor parent_folder_id: String?
+    end
+
+    class CreateFolderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::FolderMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::FolderMetadata?
+    end
+
+    class CreateLabelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?labels: Array[String],
+        ?authentication_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor authentication_token: String?
+    end
+
+    class CreateLabelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateNotificationSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?endpoint: String,
+        ?protocol: String,
+        ?subscription_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor endpoint: String?
+      attr_accessor protocol: String?
+      attr_accessor subscription_type: String?
+    end
+
+    class CreateNotificationSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?username: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?password: String,
+        ?time_zone_id: String,
+        ?storage_rule: Types::StorageRuleType,
+        ?authentication_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor username: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor password: String?
+      attr_accessor time_zone_id: String?
+      attr_accessor storage_rule: Types::StorageRuleType?
+      attr_accessor authentication_token: String?
+    end
+
+    class CreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class CustomMetadataLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DateRangeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_value: Time,
+        ?end_value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_value: Time?
+      attr_accessor end_value: Time?
+    end
+
+    class DeactivateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?authentication_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor authentication_token: String?
+    end
+
+    class DeactivatingLastSystemUserException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class DeleteCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?comment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor comment_id: String?
+    end
+
+    class DeleteCustomMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+        ?version_id: String,
+        ?keys: Array[String],
+        ?delete_all: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+      attr_accessor version_id: String?
+      attr_accessor keys: Array[String]?
+      attr_accessor delete_all: bool?
+    end
+
+    class DeleteCustomMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+    end
+
+    class DeleteDocumentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?delete_prior_versions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor delete_prior_versions: bool?
+    end
+
+    class DeleteFolderContentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+    end
+
+    class DeleteFolderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+    end
+
+    class DeleteLabelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?authentication_token: String,
+        ?labels: Array[String],
+        ?delete_all: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor authentication_token: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor delete_all: bool?
+    end
+
+    class DeleteLabelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotificationSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_id: String,
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_id: String?
+      attr_accessor organization_id: String?
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor user_id: String?
+    end
+
+    class DescribeActivitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?organization_id: String,
+        ?activity_types: String,
+        ?resource_id: String,
+        ?user_id: String,
+        ?include_indirect_activities: bool,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor organization_id: String?
+      attr_accessor activity_types: String?
+      attr_accessor resource_id: String?
+      attr_accessor user_id: String?
+      attr_accessor include_indirect_activities: bool?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeActivitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_activities: Array[Types::Activity],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_activities: Array[Types::Activity]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCommentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCommentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comments: Array[Types::Comment],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comments: Array[Types::Comment]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDocumentVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?marker: String,
+        ?limit: Integer,
+        ?include: String,
+        ?fields: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+      attr_accessor include: String?
+      attr_accessor fields: String?
+    end
+
+    class DescribeDocumentVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_versions: Array[Types::DocumentVersionMetadata],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_versions: Array[Types::DocumentVersionMetadata]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeFolderContentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+        ?sort: String,
+        ?order: String,
+        ?limit: Integer,
+        ?marker: String,
+        ?type: String,
+        ?include: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+      attr_accessor sort: String?
+      attr_accessor order: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+      attr_accessor type: String?
+      attr_accessor include: String?
+    end
+
+    class DescribeFolderContentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?folders: Array[Types::FolderMetadata],
+        ?documents: Array[Types::DocumentMetadata],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor folders: Array[Types::FolderMetadata]?
+      attr_accessor documents: Array[Types::DocumentMetadata]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?search_query: String,
+        ?organization_id: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor search_query: String?
+      attr_accessor organization_id: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupMetadata],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupMetadata]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeNotificationSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeNotificationSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::Subscription],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeResourcePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+        ?principal_id: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeResourcePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principals: Array[Types::Principal],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principals: Array[Types::Principal]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeRootFoldersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeRootFoldersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?folders: Array[Types::FolderMetadata],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor folders: Array[Types::FolderMetadata]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?organization_id: String,
+        ?user_ids: String,
+        ?query: String,
+        ?include: String,
+        ?order: String,
+        ?sort: String,
+        ?marker: String,
+        ?limit: Integer,
+        ?fields: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor user_ids: String?
+      attr_accessor query: String?
+      attr_accessor include: String?
+      attr_accessor order: String?
+      attr_accessor sort: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+      attr_accessor fields: String?
+    end
+
+    class DescribeUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?total_number_of_users: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor total_number_of_users: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DocumentLockedForCommentsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DocumentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?creator_id: String,
+        ?parent_folder_id: String,
+        ?created_timestamp: Time,
+        ?modified_timestamp: Time,
+        ?latest_version_metadata: Types::DocumentVersionMetadata,
+        ?resource_state: String,
+        ?labels: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor creator_id: String?
+      attr_accessor parent_folder_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor modified_timestamp: Time?
+      attr_accessor latest_version_metadata: Types::DocumentVersionMetadata?
+      attr_accessor resource_state: String?
+      attr_accessor labels: Array[String]?
+    end
+
+    module DocumentSourceType
+      ORIGINAL: String
+      WITH_COMMENTS: String
+    end
+
+    module DocumentStatusType
+      INITIALIZED: String
+      ACTIVE: String
+    end
+
+    module DocumentThumbnailType
+      SMALL: String
+      SMALL_HQ: String
+      LARGE: String
+    end
+
+    class DocumentVersionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?content_type: String,
+        ?size: Integer,
+        ?signature: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?modified_timestamp: Time,
+        ?content_created_timestamp: Time,
+        ?content_modified_timestamp: Time,
+        ?creator_id: String,
+        ?thumbnail: Hash[String, String],
+        ?source: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor content_type: String?
+      attr_accessor size: Integer?
+      attr_accessor signature: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor modified_timestamp: Time?
+      attr_accessor content_created_timestamp: Time?
+      attr_accessor content_modified_timestamp: Time?
+      attr_accessor creator_id: String?
+      attr_accessor thumbnail: Hash[String, String]?
+      attr_accessor source: Hash[String, String]?
+    end
+
+    module DocumentVersionStatus
+      ACTIVE: String
+    end
+
+    class DraftUploadOutOfSyncException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EntityAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EntityNotExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?entity_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor entity_ids: Array[String]?
+    end
+
+    class FailedDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Filters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_locales: Array[String],
+        ?content_categories: Array[String],
+        ?resource_types: Array[String],
+        ?labels: Array[String],
+        ?principals: Array[Types::SearchPrincipalType],
+        ?ancestor_ids: Array[String],
+        ?search_collection_types: Array[String],
+        ?size_range: Types::LongRangeType,
+        ?created_range: Types::DateRangeType,
+        ?modified_range: Types::DateRangeType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_locales: Array[String]?
+      attr_accessor content_categories: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor labels: Array[String]?
+      attr_accessor principals: Array[Types::SearchPrincipalType]?
+      attr_accessor ancestor_ids: Array[String]?
+      attr_accessor search_collection_types: Array[String]?
+      attr_accessor size_range: Types::LongRangeType?
+      attr_accessor created_range: Types::DateRangeType?
+      attr_accessor modified_range: Types::DateRangeType?
+    end
+
+    module FolderContentType
+      ALL: String
+      DOCUMENT: String
+      FOLDER: String
+    end
+
+    class FolderMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?creator_id: String,
+        ?parent_folder_id: String,
+        ?created_timestamp: Time,
+        ?modified_timestamp: Time,
+        ?resource_state: String,
+        ?signature: String,
+        ?labels: Array[String],
+        ?size: Integer,
+        ?latest_version_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor creator_id: String?
+      attr_accessor parent_folder_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor modified_timestamp: Time?
+      attr_accessor resource_state: String?
+      attr_accessor signature: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor size: Integer?
+      attr_accessor latest_version_size: Integer?
+    end
+
+    class GetCurrentUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+    end
+
+    class GetCurrentUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class GetDocumentPathRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor fields: String?
+      attr_accessor marker: String?
+    end
+
+    class GetDocumentPathResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: Types::ResourcePath,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: Types::ResourcePath?
+    end
+
+    class GetDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?include_custom_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor include_custom_metadata: bool?
+    end
+
+    class GetDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::DocumentMetadata,
+        ?custom_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::DocumentMetadata?
+      attr_accessor custom_metadata: Hash[String, String]?
+    end
+
+    class GetDocumentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?fields: String,
+        ?include_custom_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor fields: String?
+      attr_accessor include_custom_metadata: bool?
+    end
+
+    class GetDocumentVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::DocumentVersionMetadata,
+        ?custom_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::DocumentVersionMetadata?
+      attr_accessor custom_metadata: Hash[String, String]?
+    end
+
+    class GetFolderPathRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor fields: String?
+      attr_accessor marker: String?
+    end
+
+    class GetFolderPathResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: Types::ResourcePath,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: Types::ResourcePath?
+    end
+
+    class GetFolderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+        ?include_custom_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+      attr_accessor include_custom_metadata: bool?
+    end
+
+    class GetFolderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::FolderMetadata,
+        ?custom_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::FolderMetadata?
+      attr_accessor custom_metadata: Hash[String, String]?
+    end
+
+    class GetResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?user_id: String,
+        ?collection_type: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor user_id: String?
+      attr_accessor collection_type: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class GetResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?folders: Array[Types::FolderMetadata],
+        ?documents: Array[Types::DocumentMetadata],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor folders: Array[Types::FolderMetadata]?
+      attr_accessor documents: Array[Types::DocumentMetadata]?
+      attr_accessor marker: String?
+    end
+
+    class GroupMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class IllegalUserStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InitiateDocumentVersionUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?id: String,
+        ?name: String,
+        ?content_created_timestamp: Time,
+        ?content_modified_timestamp: Time,
+        ?content_type: String,
+        ?document_size_in_bytes: Integer,
+        ?parent_folder_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor content_created_timestamp: Time?
+      attr_accessor content_modified_timestamp: Time?
+      attr_accessor content_type: String?
+      attr_accessor document_size_in_bytes: Integer?
+      attr_accessor parent_folder_id: String?
+    end
+
+    class InitiateDocumentVersionUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::DocumentMetadata,
+        ?upload_metadata: Types::UploadMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::DocumentMetadata?
+      attr_accessor upload_metadata: Types::UploadMetadata?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCommentOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPasswordException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LanguageCodeType
+      AR: String
+      BG: String
+      BN: String
+      DA: String
+      DE: String
+      CS: String
+      EL: String
+      EN: String
+      ES: String
+      FA: String
+      FI: String
+      FR: String
+      HI: String
+      HU: String
+      ID: String
+      IT: String
+      JA: String
+      KO: String
+      LT: String
+      LV: String
+      NL: String
+      NO: String
+      PT: String
+      RO: String
+      RU: String
+      SV: String
+      SW: String
+      TH: String
+      TR: String
+      ZH: String
+      DEFAULT: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LocaleType
+      EN: String
+      FR: String
+      KO: String
+      DE: String
+      ES: String
+      JA: String
+      RU: String
+      ZH_CN: String
+      ZH_TW: String
+      PT_BR: String
+      DEFAULT: String
+    end
+
+    class LongRangeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_value: Integer,
+        ?end_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_value: Integer?
+      attr_accessor end_value: Integer?
+    end
+
+    class NotificationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?send_email: bool,
+        ?email_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor send_email: bool?
+      attr_accessor email_message: String?
+    end
+
+    module OrderByFieldType
+      RELEVANCE: String
+      NAME: String
+      SIZE: String
+      CREATED_TIMESTAMP: String
+      MODIFIED_TIMESTAMP: String
+    end
+
+    module OrderType
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class Participants
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::UserMetadata],
+        ?groups: Array[Types::GroupMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::UserMetadata]?
+      attr_accessor groups: Array[Types::GroupMetadata]?
+    end
+
+    class PermissionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor type: String?
+    end
+
+    class Principal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?roles: Array[Types::PermissionInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor roles: Array[Types::PermissionInfo]?
+    end
+
+    module PrincipalRoleType
+      VIEWER: String
+      CONTRIBUTOR: String
+      OWNER: String
+      COOWNER: String
+    end
+
+    module PrincipalType
+      USER: String
+      GROUP: String
+      INVITE: String
+      ANONYMOUS: String
+      ORGANIZATION: String
+    end
+
+    class ProhibitedStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RemoveAllResourcePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+    end
+
+    class RemoveResourcePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?resource_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor resource_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class RequestedEntityTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceAlreadyCheckedOutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceCollectionType
+      SHARED_WITH_ME: String
+    end
+
+    class ResourceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?original_name: String,
+        ?id: String,
+        ?version_id: String,
+        ?owner: Types::UserMetadata,
+        ?parent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor original_name: String?
+      attr_accessor id: String?
+      attr_accessor version_id: String?
+      attr_accessor owner: Types::UserMetadata?
+      attr_accessor parent_id: String?
+    end
+
+    class ResourcePath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?components: Array[Types::ResourcePathComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor components: Array[Types::ResourcePathComponent]?
+    end
+
+    class ResourcePathComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    module ResourceSortType
+      DATE: String
+      NAME: String
+    end
+
+    module ResourceStateType
+      ACTIVE: String
+      RESTORING: String
+      RECYCLING: String
+      RECYCLED: String
+    end
+
+    module ResourceType
+      FOLDER: String
+      DOCUMENT: String
+    end
+
+    class ResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?web_url: String,
+        ?document_metadata: Types::DocumentMetadata,
+        ?folder_metadata: Types::FolderMetadata,
+        ?comment_metadata: Types::CommentMetadata,
+        ?document_version_metadata: Types::DocumentVersionMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor web_url: String?
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor folder_metadata: Types::FolderMetadata?
+      attr_accessor comment_metadata: Types::CommentMetadata?
+      attr_accessor document_version_metadata: Types::DocumentVersionMetadata?
+    end
+
+    module ResponseItemType
+      DOCUMENT: String
+      FOLDER: String
+      COMMENT: String
+      DOCUMENT_VERSION: String
+    end
+
+    class RestoreDocumentVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+    end
+
+    module RolePermissionType
+      DIRECT: String
+      INHERITED: String
+    end
+
+    module RoleType
+      VIEWER: String
+      CONTRIBUTOR: String
+      OWNER: String
+      COOWNER: String
+    end
+
+    module SearchCollectionType
+      OWNED: String
+      SHARED_WITH_ME: String
+    end
+
+    class SearchPrincipalType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?roles: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor roles: Array[String]?
+    end
+
+    module SearchQueryScopeType
+      NAME: String
+      CONTENT: String
+    end
+
+    module SearchResourceType
+      FOLDER: String
+      DOCUMENT: String
+      COMMENT: String
+      DOCUMENT_VERSION: String
+    end
+
+    class SearchResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?query_text: String,
+        ?query_scopes: Array[String],
+        ?organization_id: String,
+        ?additional_response_fields: Array[String],
+        ?filters: Types::Filters,
+        ?order_by: Array[Types::SearchSortResult],
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor query_text: String?
+      attr_accessor query_scopes: Array[String]?
+      attr_accessor organization_id: String?
+      attr_accessor additional_response_fields: Array[String]?
+      attr_accessor filters: Types::Filters?
+      attr_accessor order_by: Array[Types::SearchSortResult]?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class SearchResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResponseItem],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResponseItem]?
+      attr_accessor marker: String?
+    end
+
+    class SearchSortResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor order: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SharePrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor role: String?
+    end
+
+    class ShareResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id: String,
+        ?invitee_principal_id: String,
+        ?role: String,
+        ?status: String,
+        ?share_id: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id: String?
+      attr_accessor invitee_principal_id: String?
+      attr_accessor role: String?
+      attr_accessor status: String?
+      attr_accessor share_id: String?
+      attr_accessor status_message: String?
+    end
+
+    module ShareStatusType
+      SUCCESS: String
+      FAILURE: String
+    end
+
+    module SortOrder
+      ASC: String
+      DESC: String
+    end
+
+    class StorageLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StorageLimitWillExceedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StorageRuleType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_allocated_in_bytes: Integer,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_allocated_in_bytes: Integer?
+      attr_accessor storage_type: String?
+    end
+
+    module StorageType
+      UNLIMITED: String
+      QUOTA: String
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_id: String,
+        ?end_point: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_id: String?
+      attr_accessor end_point: String?
+      attr_accessor protocol: String?
+    end
+
+    module SubscriptionProtocolType
+      HTTPS: String
+      SQS: String
+    end
+
+    module SubscriptionType
+      ALL: String
+    end
+
+    class TooManyLabelsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManySubscriptionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UnauthorizedResourceAccessException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?name: String,
+        ?parent_folder_id: String,
+        ?resource_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor name: String?
+      attr_accessor parent_folder_id: String?
+      attr_accessor resource_state: String?
+    end
+
+    class UpdateDocumentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?document_id: String,
+        ?version_id: String,
+        ?version_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor document_id: String?
+      attr_accessor version_id: String?
+      attr_accessor version_status: String?
+    end
+
+    class UpdateFolderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?folder_id: String,
+        ?name: String,
+        ?parent_folder_id: String,
+        ?resource_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor folder_id: String?
+      attr_accessor name: String?
+      attr_accessor parent_folder_id: String?
+      attr_accessor resource_state: String?
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_token: String,
+        ?user_id: String,
+        ?given_name: String,
+        ?surname: String,
+        ?type: String,
+        ?storage_rule: Types::StorageRuleType,
+        ?time_zone_id: String,
+        ?locale: String,
+        ?grant_poweruser_privileges: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_token: String?
+      attr_accessor user_id: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor type: String?
+      attr_accessor storage_rule: Types::StorageRuleType?
+      attr_accessor time_zone_id: String?
+      attr_accessor locale: String?
+      attr_accessor grant_poweruser_privileges: String?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class UploadMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_url: String,
+        ?signed_headers: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_url: String?
+      attr_accessor signed_headers: Hash[String, String]?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?username: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?organization_id: String,
+        ?root_folder_id: String,
+        ?recycle_bin_folder_id: String,
+        ?status: String,
+        ?type: String,
+        ?created_timestamp: Time,
+        ?modified_timestamp: Time,
+        ?time_zone_id: String,
+        ?locale: String,
+        ?storage: Types::UserStorageMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor username: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor organization_id: String?
+      attr_accessor root_folder_id: String?
+      attr_accessor recycle_bin_folder_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor modified_timestamp: Time?
+      attr_accessor time_zone_id: String?
+      attr_accessor locale: String?
+      attr_accessor storage: Types::UserStorageMetadata?
+    end
+
+    module UserFilterType
+      ALL: String
+      ACTIVE_PENDING: String
+    end
+
+    class UserMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?username: String,
+        ?given_name: String,
+        ?surname: String,
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor username: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor email_address: String?
+    end
+
+    module UserSortType
+      USER_NAME: String
+      FULL_NAME: String
+      STORAGE_LIMIT: String
+      USER_STATUS: String
+      STORAGE_USED: String
+    end
+
+    module UserStatusType
+      ACTIVE: String
+      INACTIVE: String
+      PENDING: String
+    end
+
+    class UserStorageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_utilized_in_bytes: Integer,
+        ?storage_rule: Types::StorageRuleType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_utilized_in_bytes: Integer?
+      attr_accessor storage_rule: Types::StorageRuleType?
+    end
+
+    module UserType
+      USER: String
+      ADMIN: String
+      POWERUSER: String
+      MINIMALUSER: String
+      WORKSPACESUSER: String
+    end
+  end
+end

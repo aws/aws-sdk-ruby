@@ -1,0 +1,272 @@
+module Aws::Repostspace
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Repostspace::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchAddChannelRoleToAccessorsResponse
+      include Smithy::Client::_Response[Types::BatchAddChannelRoleToAccessorsOutput]
+      def added_accessor_ids: () -> Array[String]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_add_channel_role_to_accessors: (
+      ?space_id: String,
+      ?channel_id: String,
+      ?accessor_ids: Array[String],
+      ?channel_role: String
+    ) -> _BatchAddChannelRoleToAccessorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAddChannelRoleToAccessorsResponse
+
+    interface _BatchAddRoleResponse
+      include Smithy::Client::_Response[Types::BatchAddRoleOutput]
+      def added_accessor_ids: () -> Array[String]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_add_role: (
+      ?space_id: String,
+      ?accessor_ids: Array[String],
+      ?role: String
+    ) -> _BatchAddRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAddRoleResponse
+
+    interface _BatchRemoveChannelRoleFromAccessorsResponse
+      include Smithy::Client::_Response[Types::BatchRemoveChannelRoleFromAccessorsOutput]
+      def removed_accessor_ids: () -> Array[String]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_remove_channel_role_from_accessors: (
+      ?space_id: String,
+      ?channel_id: String,
+      ?accessor_ids: Array[String],
+      ?channel_role: String
+    ) -> _BatchRemoveChannelRoleFromAccessorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchRemoveChannelRoleFromAccessorsResponse
+
+    interface _BatchRemoveRoleResponse
+      include Smithy::Client::_Response[Types::BatchRemoveRoleOutput]
+      def removed_accessor_ids: () -> Array[String]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_remove_role: (
+      ?space_id: String,
+      ?accessor_ids: Array[String],
+      ?role: String
+    ) -> _BatchRemoveRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchRemoveRoleResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelOutput]
+      def channel_id: () -> String?
+    end
+    def create_channel: (
+      ?space_id: String,
+      ?channel_name: String,
+      ?channel_description: String
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateSpaceResponse
+      include Smithy::Client::_Response[Types::CreateSpaceOutput]
+      def space_id: () -> String?
+    end
+    def create_space: (
+      ?name: String,
+      ?subdomain: String,
+      ?tier: String,
+      ?description: String,
+      ?user_kms_key: String,
+      ?tags: Hash[String, String],
+      ?role_arn: String,
+      ?supported_email_domains: {
+        enabled: String,
+        allowed_domains: Array[String]
+      }
+    ) -> _CreateSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSpaceResponse
+
+    interface _DeleteSpaceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_space: (
+      ?space_id: String
+    ) -> _DeleteSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSpaceResponse
+
+    interface _DeregisterAdminResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_admin: (
+      ?space_id: String,
+      ?admin_id: String
+    ) -> _DeregisterAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterAdminResponse
+
+    interface _GetChannelResponse
+      include Smithy::Client::_Response[Types::GetChannelOutput]
+      def space_id: () -> String?
+      def channel_id: () -> String?
+      def channel_name: () -> String?
+      def channel_description: () -> String?
+      def create_date_time: () -> Time?
+      def delete_date_time: () -> Time?
+      def channel_roles: () -> Hash[String, Array[String]]?
+      def channel_status: () -> String?
+    end
+    def get_channel: (
+      ?space_id: String,
+      ?channel_id: String
+    ) -> _GetChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelResponse
+
+    interface _GetSpaceResponse
+      include Smithy::Client::_Response[Types::GetSpaceOutput]
+      def space_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def configuration_status: () -> String?
+      def client_id: () -> String?
+      def identity_store_id: () -> String?
+      def application_arn: () -> String?
+      def description: () -> String?
+      def vanity_domain_status: () -> String?
+      def vanity_domain: () -> String?
+      def random_domain: () -> String?
+      def customer_role_arn: () -> String?
+      def create_date_time: () -> Time?
+      def delete_date_time: () -> Time?
+      def tier: () -> String?
+      def storage_limit: () -> Integer?
+      def user_admins: () -> Array[String]?
+      def group_admins: () -> Array[String]?
+      def roles: () -> Hash[String, Array[String]]?
+      def user_kms_key: () -> String?
+      def user_count: () -> Integer?
+      def content_size: () -> Integer?
+      def supported_email_domains: () -> Types::SupportedEmailDomainsStatus?
+    end
+    def get_space: (
+      ?space_id: String
+    ) -> _GetSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpaceResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsOutput]
+      def channels: () -> Array[Types::ChannelData]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?space_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListSpacesResponse
+      include Smithy::Client::_Response[Types::ListSpacesOutput]
+      def spaces: () -> Array[Types::SpaceData]?
+      def next_token: () -> String?
+    end
+    def list_spaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpacesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterAdminResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_admin: (
+      ?space_id: String,
+      ?admin_id: String
+    ) -> _RegisterAdminResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAdminResponse
+
+    interface _SendInvitesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def send_invites: (
+      ?space_id: String,
+      ?accessor_ids: Array[String],
+      ?title: String,
+      ?body: String
+    ) -> _SendInvitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendInvitesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelOutput]
+    end
+    def update_channel: (
+      ?space_id: String,
+      ?channel_id: String,
+      ?channel_name: String,
+      ?channel_description: String
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateSpaceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_space: (
+      ?space_id: String,
+      ?description: String,
+      ?tier: String,
+      ?role_arn: String,
+      ?supported_email_domains: {
+        enabled: String,
+        allowed_domains: Array[String]
+      }
+    ) -> _UpdateSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSpaceResponse
+  end
+end

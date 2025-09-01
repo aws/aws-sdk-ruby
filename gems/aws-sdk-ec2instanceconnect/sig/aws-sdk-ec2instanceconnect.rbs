@@ -1,0 +1,5 @@
+  module Aws
+    module EC2InstanceConnect
+      VERSION: String
+    end
+  end

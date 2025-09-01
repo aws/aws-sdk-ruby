@@ -1,0 +1,3363 @@
+module Aws::GeoRoutes
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CalculateIsolinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow: Types::IsolineAllowOptions,
+        ?arrival_time: String,
+        ?avoid: Types::IsolineAvoidanceOptions,
+        ?depart_now: bool,
+        ?departure_time: String,
+        ?destination: Array[Float],
+        ?destination_options: Types::IsolineDestinationOptions,
+        ?isoline_geometry_format: String,
+        ?isoline_granularity: Types::IsolineGranularityOptions,
+        ?key: String,
+        ?optimize_isoline_for: String,
+        ?optimize_routing_for: String,
+        ?origin: Array[Float],
+        ?origin_options: Types::IsolineOriginOptions,
+        ?thresholds: Types::IsolineThresholds,
+        ?traffic: Types::IsolineTrafficOptions,
+        ?travel_mode: String,
+        ?travel_mode_options: Types::IsolineTravelModeOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow: Types::IsolineAllowOptions?
+      attr_accessor arrival_time: String?
+      attr_accessor avoid: Types::IsolineAvoidanceOptions?
+      attr_accessor depart_now: bool?
+      attr_accessor departure_time: String?
+      attr_accessor destination: Array[Float]?
+      attr_accessor destination_options: Types::IsolineDestinationOptions?
+      attr_accessor isoline_geometry_format: String?
+      attr_accessor isoline_granularity: Types::IsolineGranularityOptions?
+      attr_accessor key: String?
+      attr_accessor optimize_isoline_for: String?
+      attr_accessor optimize_routing_for: String?
+      attr_accessor origin: Array[Float]?
+      attr_accessor origin_options: Types::IsolineOriginOptions?
+      attr_accessor thresholds: Types::IsolineThresholds?
+      attr_accessor traffic: Types::IsolineTrafficOptions?
+      attr_accessor travel_mode: String?
+      attr_accessor travel_mode_options: Types::IsolineTravelModeOptions?
+    end
+
+    class CalculateIsolinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arrival_time: String,
+        ?departure_time: String,
+        ?isoline_geometry_format: String,
+        ?isolines: Array[Types::Isoline],
+        ?pricing_bucket: String,
+        ?snapped_destination: Array[Float],
+        ?snapped_origin: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arrival_time: String?
+      attr_accessor departure_time: String?
+      attr_accessor isoline_geometry_format: String?
+      attr_accessor isolines: Array[Types::Isoline]?
+      attr_accessor pricing_bucket: String?
+      attr_accessor snapped_destination: Array[Float]?
+      attr_accessor snapped_origin: Array[Float]?
+    end
+
+    class CalculateRouteMatrixRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow: Types::RouteMatrixAllowOptions,
+        ?avoid: Types::RouteMatrixAvoidanceOptions,
+        ?depart_now: bool,
+        ?departure_time: String,
+        ?destinations: Array[Types::RouteMatrixDestination],
+        ?exclude: Types::RouteMatrixExclusionOptions,
+        ?key: String,
+        ?optimize_routing_for: String,
+        ?origins: Array[Types::RouteMatrixOrigin],
+        ?routing_boundary: Types::RouteMatrixBoundary,
+        ?traffic: Types::RouteMatrixTrafficOptions,
+        ?travel_mode: String,
+        ?travel_mode_options: Types::RouteMatrixTravelModeOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow: Types::RouteMatrixAllowOptions?
+      attr_accessor avoid: Types::RouteMatrixAvoidanceOptions?
+      attr_accessor depart_now: bool?
+      attr_accessor departure_time: String?
+      attr_accessor destinations: Array[Types::RouteMatrixDestination]?
+      attr_accessor exclude: Types::RouteMatrixExclusionOptions?
+      attr_accessor key: String?
+      attr_accessor optimize_routing_for: String?
+      attr_accessor origins: Array[Types::RouteMatrixOrigin]?
+      attr_accessor routing_boundary: Types::RouteMatrixBoundary?
+      attr_accessor traffic: Types::RouteMatrixTrafficOptions?
+      attr_accessor travel_mode: String?
+      attr_accessor travel_mode_options: Types::RouteMatrixTravelModeOptions?
+    end
+
+    class CalculateRouteMatrixResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_count: Integer,
+        ?pricing_bucket: String,
+        ?route_matrix: Array[Array[Types::RouteMatrixEntry]],
+        ?routing_boundary: Types::RouteMatrixBoundary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_count: Integer?
+      attr_accessor pricing_bucket: String?
+      attr_accessor route_matrix: Array[Array[Types::RouteMatrixEntry]]?
+      attr_accessor routing_boundary: Types::RouteMatrixBoundary?
+    end
+
+    class CalculateRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow: Types::RouteAllowOptions,
+        ?arrival_time: String,
+        ?avoid: Types::RouteAvoidanceOptions,
+        ?depart_now: bool,
+        ?departure_time: String,
+        ?destination: Array[Float],
+        ?destination_options: Types::RouteDestinationOptions,
+        ?driver: Types::RouteDriverOptions,
+        ?exclude: Types::RouteExclusionOptions,
+        ?instructions_measurement_system: String,
+        ?key: String,
+        ?languages: Array[String],
+        ?leg_additional_features: Array[String],
+        ?leg_geometry_format: String,
+        ?max_alternatives: Integer,
+        ?optimize_routing_for: String,
+        ?origin: Array[Float],
+        ?origin_options: Types::RouteOriginOptions,
+        ?span_additional_features: Array[String],
+        ?tolls: Types::RouteTollOptions,
+        ?traffic: Types::RouteTrafficOptions,
+        ?travel_mode: String,
+        ?travel_mode_options: Types::RouteTravelModeOptions,
+        ?travel_step_type: String,
+        ?waypoints: Array[Types::RouteWaypoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow: Types::RouteAllowOptions?
+      attr_accessor arrival_time: String?
+      attr_accessor avoid: Types::RouteAvoidanceOptions?
+      attr_accessor depart_now: bool?
+      attr_accessor departure_time: String?
+      attr_accessor destination: Array[Float]?
+      attr_accessor destination_options: Types::RouteDestinationOptions?
+      attr_accessor driver: Types::RouteDriverOptions?
+      attr_accessor exclude: Types::RouteExclusionOptions?
+      attr_accessor instructions_measurement_system: String?
+      attr_accessor key: String?
+      attr_accessor languages: Array[String]?
+      attr_accessor leg_additional_features: Array[String]?
+      attr_accessor leg_geometry_format: String?
+      attr_accessor max_alternatives: Integer?
+      attr_accessor optimize_routing_for: String?
+      attr_accessor origin: Array[Float]?
+      attr_accessor origin_options: Types::RouteOriginOptions?
+      attr_accessor span_additional_features: Array[String]?
+      attr_accessor tolls: Types::RouteTollOptions?
+      attr_accessor traffic: Types::RouteTrafficOptions?
+      attr_accessor travel_mode: String?
+      attr_accessor travel_mode_options: Types::RouteTravelModeOptions?
+      attr_accessor travel_step_type: String?
+      attr_accessor waypoints: Array[Types::RouteWaypoint]?
+    end
+
+    class CalculateRoutesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?leg_geometry_format: String,
+        ?notices: Array[Types::RouteResponseNotice],
+        ?pricing_bucket: String,
+        ?routes: Array[Types::Route],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor leg_geometry_format: String?
+      attr_accessor notices: Array[Types::RouteResponseNotice]?
+      attr_accessor pricing_bucket: String?
+      attr_accessor routes: Array[Types::Route]?
+    end
+
+    class Circle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?center: Array[Float],
+        ?radius: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor center: Array[Float]?
+      attr_accessor radius: Float?
+    end
+
+    class Corridor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_string: Array[Array[Float]],
+        ?radius: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_string: Array[Array[Float]]?
+      attr_accessor radius: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Isoline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::IsolineConnection],
+        ?distance_threshold: Integer,
+        ?geometries: Array[Types::IsolineShapeGeometry],
+        ?time_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::IsolineConnection]?
+      attr_accessor distance_threshold: Integer?
+      attr_accessor geometries: Array[Types::IsolineShapeGeometry]?
+      attr_accessor time_threshold: Integer?
+    end
+
+    class IsolineAllowOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hot: bool,
+        ?hov: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hot: bool?
+      attr_accessor hov: bool?
+    end
+
+    class IsolineAvoidanceArea
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?except: Array[Types::IsolineAvoidanceAreaGeometry],
+        ?geometry: Types::IsolineAvoidanceAreaGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor except: Array[Types::IsolineAvoidanceAreaGeometry]?
+      attr_accessor geometry: Types::IsolineAvoidanceAreaGeometry?
+    end
+
+    class IsolineAvoidanceAreaGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?corridor: Types::Corridor,
+        ?polygon: Array[Array[Array[Float]]],
+        ?polyline_corridor: Types::PolylineCorridor,
+        ?polyline_polygon: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor corridor: Types::Corridor?
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+      attr_accessor polyline_corridor: Types::PolylineCorridor?
+      attr_accessor polyline_polygon: Array[String]?
+    end
+
+    class IsolineAvoidanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?areas: Array[Types::IsolineAvoidanceArea],
+        ?car_shuttle_trains: bool,
+        ?controlled_access_highways: bool,
+        ?dirt_roads: bool,
+        ?ferries: bool,
+        ?seasonal_closure: bool,
+        ?toll_roads: bool,
+        ?toll_transponders: bool,
+        ?truck_road_types: Array[String],
+        ?tunnels: bool,
+        ?u_turns: bool,
+        ?zone_categories: Array[Types::IsolineAvoidanceZoneCategory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor areas: Array[Types::IsolineAvoidanceArea]?
+      attr_accessor car_shuttle_trains: bool?
+      attr_accessor controlled_access_highways: bool?
+      attr_accessor dirt_roads: bool?
+      attr_accessor ferries: bool?
+      attr_accessor seasonal_closure: bool?
+      attr_accessor toll_roads: bool?
+      attr_accessor toll_transponders: bool?
+      attr_accessor truck_road_types: Array[String]?
+      attr_accessor tunnels: bool?
+      attr_accessor u_turns: bool?
+      attr_accessor zone_categories: Array[Types::IsolineAvoidanceZoneCategory]?
+    end
+
+    class IsolineAvoidanceZoneCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class IsolineCarOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_type: String,
+        ?license_plate: Types::IsolineVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_type: String?
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class IsolineConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_polygon_index: Integer,
+        ?geometry: Types::IsolineConnectionGeometry,
+        ?to_polygon_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_polygon_index: Integer?
+      attr_accessor geometry: Types::IsolineConnectionGeometry?
+      attr_accessor to_polygon_index: Integer?
+    end
+
+    class IsolineConnectionGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_string: Array[Array[Float]],
+        ?polyline: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_string: Array[Array[Float]]?
+      attr_accessor polyline: String?
+    end
+
+    class IsolineDestinationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?heading: Float,
+        ?matching: Types::IsolineMatchingOptions,
+        ?side_of_street: Types::IsolineSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::IsolineMatchingOptions?
+      attr_accessor side_of_street: Types::IsolineSideOfStreetOptions?
+    end
+
+    class IsolineGranularityOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_points: Integer,
+        ?max_resolution: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_points: Integer?
+      attr_accessor max_resolution: Integer?
+    end
+
+    class IsolineMatchingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_hint: String,
+        ?on_road_threshold: Integer,
+        ?radius: Integer,
+        ?strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_hint: String?
+      attr_accessor on_road_threshold: Integer?
+      attr_accessor radius: Integer?
+      attr_accessor strategy: String?
+    end
+
+    class IsolineOriginOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?heading: Float,
+        ?matching: Types::IsolineMatchingOptions,
+        ?side_of_street: Types::IsolineSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::IsolineMatchingOptions?
+      attr_accessor side_of_street: Types::IsolineSideOfStreetOptions?
+    end
+
+    class IsolineScooterOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_type: String,
+        ?license_plate: Types::IsolineVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_type: String?
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class IsolineShapeGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?polygon: Array[Array[Array[Float]]],
+        ?polyline_polygon: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+      attr_accessor polyline_polygon: Array[String]?
+    end
+
+    class IsolineSideOfStreetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?use_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor use_with: String?
+    end
+
+    class IsolineThresholds
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Array[Integer],
+        ?time: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Array[Integer]?
+      attr_accessor time: Array[Integer]?
+    end
+
+    class IsolineTrafficOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_event_threshold_override: Integer,
+        ?usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_event_threshold_override: Integer?
+      attr_accessor usage: String?
+    end
+
+    class IsolineTrailerOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?axle_count: Integer,
+        ?trailer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor axle_count: Integer?
+      attr_accessor trailer_count: Integer?
+    end
+
+    class IsolineTravelModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?car: Types::IsolineCarOptions,
+        ?scooter: Types::IsolineScooterOptions,
+        ?truck: Types::IsolineTruckOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor car: Types::IsolineCarOptions?
+      attr_accessor scooter: Types::IsolineScooterOptions?
+      attr_accessor truck: Types::IsolineTruckOptions?
+    end
+
+    class IsolineTruckOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?axle_count: Integer,
+        ?engine_type: String,
+        ?gross_weight: Integer,
+        ?hazardous_cargos: Array[String],
+        ?height: Integer,
+        ?height_above_first_axle: Integer,
+        ?kpra_length: Integer,
+        ?length: Integer,
+        ?license_plate: Types::IsolineVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+        ?payload_capacity: Integer,
+        ?tire_count: Integer,
+        ?trailer: Types::IsolineTrailerOptions,
+        ?truck_type: String,
+        ?tunnel_restriction_code: String,
+        ?weight_per_axle: Integer,
+        ?weight_per_axle_group: Types::WeightPerAxleGroup,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor axle_count: Integer?
+      attr_accessor engine_type: String?
+      attr_accessor gross_weight: Integer?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor height: Integer?
+      attr_accessor height_above_first_axle: Integer?
+      attr_accessor kpra_length: Integer?
+      attr_accessor length: Integer?
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+      attr_accessor payload_capacity: Integer?
+      attr_accessor tire_count: Integer?
+      attr_accessor trailer: Types::IsolineTrailerOptions?
+      attr_accessor truck_type: String?
+      attr_accessor tunnel_restriction_code: String?
+      attr_accessor weight_per_axle: Integer?
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup?
+      attr_accessor width: Integer?
+    end
+
+    class IsolineVehicleLicensePlate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_character: String?
+    end
+
+    class LocalizedString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor value: String?
+    end
+
+    class OptimizeWaypointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid: Types::WaypointOptimizationAvoidanceOptions,
+        ?clustering: Types::WaypointOptimizationClusteringOptions,
+        ?departure_time: String,
+        ?destination: Array[Float],
+        ?destination_options: Types::WaypointOptimizationDestinationOptions,
+        ?driver: Types::WaypointOptimizationDriverOptions,
+        ?exclude: Types::WaypointOptimizationExclusionOptions,
+        ?key: String,
+        ?optimize_sequencing_for: String,
+        ?origin: Array[Float],
+        ?origin_options: Types::WaypointOptimizationOriginOptions,
+        ?traffic: Types::WaypointOptimizationTrafficOptions,
+        ?travel_mode: String,
+        ?travel_mode_options: Types::WaypointOptimizationTravelModeOptions,
+        ?waypoints: Array[Types::WaypointOptimizationWaypoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid: Types::WaypointOptimizationAvoidanceOptions?
+      attr_accessor clustering: Types::WaypointOptimizationClusteringOptions?
+      attr_accessor departure_time: String?
+      attr_accessor destination: Array[Float]?
+      attr_accessor destination_options: Types::WaypointOptimizationDestinationOptions?
+      attr_accessor driver: Types::WaypointOptimizationDriverOptions?
+      attr_accessor exclude: Types::WaypointOptimizationExclusionOptions?
+      attr_accessor key: String?
+      attr_accessor optimize_sequencing_for: String?
+      attr_accessor origin: Array[Float]?
+      attr_accessor origin_options: Types::WaypointOptimizationOriginOptions?
+      attr_accessor traffic: Types::WaypointOptimizationTrafficOptions?
+      attr_accessor travel_mode: String?
+      attr_accessor travel_mode_options: Types::WaypointOptimizationTravelModeOptions?
+      attr_accessor waypoints: Array[Types::WaypointOptimizationWaypoint]?
+    end
+
+    class OptimizeWaypointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::WaypointOptimizationConnection],
+        ?distance: Integer,
+        ?duration: Integer,
+        ?impeding_waypoints: Array[Types::WaypointOptimizationImpedingWaypoint],
+        ?optimized_waypoints: Array[Types::WaypointOptimizationOptimizedWaypoint],
+        ?pricing_bucket: String,
+        ?time_breakdown: Types::WaypointOptimizationTimeBreakdown,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::WaypointOptimizationConnection]?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor impeding_waypoints: Array[Types::WaypointOptimizationImpedingWaypoint]?
+      attr_accessor optimized_waypoints: Array[Types::WaypointOptimizationOptimizedWaypoint]?
+      attr_accessor pricing_bucket: String?
+      attr_accessor time_breakdown: Types::WaypointOptimizationTimeBreakdown?
+    end
+
+    class PolylineCorridor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?polyline: String,
+        ?radius: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polyline: String?
+      attr_accessor radius: Integer?
+    end
+
+    class RoadSnapNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?title: String,
+        ?trace_point_indexes: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor title: String?
+      attr_accessor trace_point_indexes: Array[Integer]?
+    end
+
+    class RoadSnapSnappedGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_string: Array[Array[Float]],
+        ?polyline: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_string: Array[Array[Float]]?
+      attr_accessor polyline: String?
+    end
+
+    class RoadSnapSnappedTracePoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence: Float,
+        ?original_position: Array[Float],
+        ?snapped_position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence: Float?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor snapped_position: Array[Float]?
+    end
+
+    class RoadSnapTracePoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?heading: Float,
+        ?position: Array[Float],
+        ?speed: Float,
+        ?timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor heading: Float?
+      attr_accessor position: Array[Float]?
+      attr_accessor speed: Float?
+      attr_accessor timestamp: String?
+    end
+
+    class RoadSnapTrailerOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trailer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trailer_count: Integer?
+    end
+
+    class RoadSnapTravelModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?truck: Types::RoadSnapTruckOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor truck: Types::RoadSnapTruckOptions?
+    end
+
+    class RoadSnapTruckOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gross_weight: Integer,
+        ?hazardous_cargos: Array[String],
+        ?height: Integer,
+        ?length: Integer,
+        ?trailer: Types::RoadSnapTrailerOptions,
+        ?tunnel_restriction_code: String,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gross_weight: Integer?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor height: Integer?
+      attr_accessor length: Integer?
+      attr_accessor trailer: Types::RoadSnapTrailerOptions?
+      attr_accessor tunnel_restriction_code: String?
+      attr_accessor width: Integer?
+    end
+
+    class Route
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legs: Array[Types::RouteLeg],
+        ?major_road_labels: Array[Types::RouteMajorRoadLabel],
+        ?summary: Types::RouteSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legs: Array[Types::RouteLeg]?
+      attr_accessor major_road_labels: Array[Types::RouteMajorRoadLabel]?
+      attr_accessor summary: Types::RouteSummary?
+    end
+
+    class RouteAllowOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hot: bool,
+        ?hov: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hot: bool?
+      attr_accessor hov: bool?
+    end
+
+    class RouteAvoidanceArea
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?except: Array[Types::RouteAvoidanceAreaGeometry],
+        ?geometry: Types::RouteAvoidanceAreaGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor except: Array[Types::RouteAvoidanceAreaGeometry]?
+      attr_accessor geometry: Types::RouteAvoidanceAreaGeometry?
+    end
+
+    class RouteAvoidanceAreaGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?corridor: Types::Corridor,
+        ?bounding_box: Array[Float],
+        ?polygon: Array[Array[Array[Float]]],
+        ?polyline_corridor: Types::PolylineCorridor,
+        ?polyline_polygon: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor corridor: Types::Corridor?
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+      attr_accessor polyline_corridor: Types::PolylineCorridor?
+      attr_accessor polyline_polygon: Array[String]?
+    end
+
+    class RouteAvoidanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?areas: Array[Types::RouteAvoidanceArea],
+        ?car_shuttle_trains: bool,
+        ?controlled_access_highways: bool,
+        ?dirt_roads: bool,
+        ?ferries: bool,
+        ?seasonal_closure: bool,
+        ?toll_roads: bool,
+        ?toll_transponders: bool,
+        ?truck_road_types: Array[String],
+        ?tunnels: bool,
+        ?u_turns: bool,
+        ?zone_categories: Array[Types::RouteAvoidanceZoneCategory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor areas: Array[Types::RouteAvoidanceArea]?
+      attr_accessor car_shuttle_trains: bool?
+      attr_accessor controlled_access_highways: bool?
+      attr_accessor dirt_roads: bool?
+      attr_accessor ferries: bool?
+      attr_accessor seasonal_closure: bool?
+      attr_accessor toll_roads: bool?
+      attr_accessor toll_transponders: bool?
+      attr_accessor truck_road_types: Array[String]?
+      attr_accessor tunnels: bool?
+      attr_accessor u_turns: bool?
+      attr_accessor zone_categories: Array[Types::RouteAvoidanceZoneCategory]?
+    end
+
+    class RouteAvoidanceZoneCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class RouteCarOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_type: String,
+        ?license_plate: Types::RouteVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_type: String?
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class RouteContinueHighwayStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteContinueStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+    end
+
+    class RouteDestinationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?avoid_u_turns: bool,
+        ?heading: Float,
+        ?matching: Types::RouteMatchingOptions,
+        ?side_of_street: Types::RouteSideOfStreetOptions,
+        ?stop_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor avoid_u_turns: bool?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::RouteMatchingOptions?
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions?
+      attr_accessor stop_duration: Integer?
+    end
+
+    class RouteDriverOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule: Array[Types::RouteDriverScheduleInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule: Array[Types::RouteDriverScheduleInterval]?
+    end
+
+    class RouteDriverScheduleInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?drive_duration: Integer,
+        ?rest_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor drive_duration: Integer?
+      attr_accessor rest_duration: Integer?
+    end
+
+    class RouteEmissionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?co2_emission_class: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor co2_emission_class: String?
+      attr_accessor type: String?
+    end
+
+    class RouteEnterHighwayStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteExclusionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor countries: Array[String]?
+    end
+
+    class RouteExitStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?relative_exit: Integer,
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor relative_exit: Integer?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteFerryAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    class RouteFerryArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteFerryPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteFerryPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteFerryBeforeTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    class RouteFerryDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteFerryPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteFerryPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteFerryLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_travel_steps: Array[Types::RouteFerryAfterTravelStep],
+        ?arrival: Types::RouteFerryArrival,
+        ?before_travel_steps: Array[Types::RouteFerryBeforeTravelStep],
+        ?departure: Types::RouteFerryDeparture,
+        ?notices: Array[Types::RouteFerryNotice],
+        ?pass_through_waypoints: Array[Types::RoutePassThroughWaypoint],
+        ?route_name: String,
+        ?spans: Array[Types::RouteFerrySpan],
+        ?summary: Types::RouteFerrySummary,
+        ?travel_steps: Array[Types::RouteFerryTravelStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_travel_steps: Array[Types::RouteFerryAfterTravelStep]?
+      attr_accessor arrival: Types::RouteFerryArrival?
+      attr_accessor before_travel_steps: Array[Types::RouteFerryBeforeTravelStep]?
+      attr_accessor departure: Types::RouteFerryDeparture?
+      attr_accessor notices: Array[Types::RouteFerryNotice]?
+      attr_accessor pass_through_waypoints: Array[Types::RoutePassThroughWaypoint]?
+      attr_accessor route_name: String?
+      attr_accessor spans: Array[Types::RouteFerrySpan]?
+      attr_accessor summary: Types::RouteFerrySummary?
+      attr_accessor travel_steps: Array[Types::RouteFerryTravelStep]?
+    end
+
+    class RouteFerryNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor impact: String?
+    end
+
+    class RouteFerryOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+    end
+
+    class RouteFerryPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    class RouteFerrySpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?geometry_offset: Integer,
+        ?names: Array[Types::LocalizedString],
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor names: Array[Types::LocalizedString]?
+      attr_accessor region: String?
+    end
+
+    class RouteFerrySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RouteFerryOverviewSummary,
+        ?travel_only: Types::RouteFerryTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RouteFerryOverviewSummary?
+      attr_accessor travel_only: Types::RouteFerryTravelOnlySummary?
+    end
+
+    class RouteFerryTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+    end
+
+    class RouteFerryTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    class RouteKeepStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteLeg
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ferry_leg_details: Types::RouteFerryLegDetails,
+        ?geometry: Types::RouteLegGeometry,
+        ?language: String,
+        ?pedestrian_leg_details: Types::RoutePedestrianLegDetails,
+        ?travel_mode: String,
+        ?type: String,
+        ?vehicle_leg_details: Types::RouteVehicleLegDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ferry_leg_details: Types::RouteFerryLegDetails?
+      attr_accessor geometry: Types::RouteLegGeometry?
+      attr_accessor language: String?
+      attr_accessor pedestrian_leg_details: Types::RoutePedestrianLegDetails?
+      attr_accessor travel_mode: String?
+      attr_accessor type: String?
+      attr_accessor vehicle_leg_details: Types::RouteVehicleLegDetails?
+    end
+
+    class RouteLegGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_string: Array[Array[Float]],
+        ?polyline: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_string: Array[Array[Float]]?
+      attr_accessor polyline: String?
+    end
+
+    class RouteMajorRoadLabel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?road_name: Types::LocalizedString,
+        ?route_number: Types::RouteNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor road_name: Types::LocalizedString?
+      attr_accessor route_number: Types::RouteNumber?
+    end
+
+    class RouteMatchingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_hint: String,
+        ?on_road_threshold: Integer,
+        ?radius: Integer,
+        ?strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_hint: String?
+      attr_accessor on_road_threshold: Integer?
+      attr_accessor radius: Integer?
+      attr_accessor strategy: String?
+    end
+
+    class RouteMatrixAllowOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hot: bool,
+        ?hov: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hot: bool?
+      attr_accessor hov: bool?
+    end
+
+    class RouteMatrixAutoCircle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?margin: Integer,
+        ?max_radius: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor margin: Integer?
+      attr_accessor max_radius: Integer?
+    end
+
+    class RouteMatrixAvoidanceArea
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geometry: Types::RouteMatrixAvoidanceAreaGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geometry: Types::RouteMatrixAvoidanceAreaGeometry?
+    end
+
+    class RouteMatrixAvoidanceAreaGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?polygon: Array[Array[Array[Float]]],
+        ?polyline_polygon: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+      attr_accessor polyline_polygon: Array[String]?
+    end
+
+    class RouteMatrixAvoidanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?areas: Array[Types::RouteMatrixAvoidanceArea],
+        ?car_shuttle_trains: bool,
+        ?controlled_access_highways: bool,
+        ?dirt_roads: bool,
+        ?ferries: bool,
+        ?toll_roads: bool,
+        ?toll_transponders: bool,
+        ?truck_road_types: Array[String],
+        ?tunnels: bool,
+        ?u_turns: bool,
+        ?zone_categories: Array[Types::RouteMatrixAvoidanceZoneCategory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor areas: Array[Types::RouteMatrixAvoidanceArea]?
+      attr_accessor car_shuttle_trains: bool?
+      attr_accessor controlled_access_highways: bool?
+      attr_accessor dirt_roads: bool?
+      attr_accessor ferries: bool?
+      attr_accessor toll_roads: bool?
+      attr_accessor toll_transponders: bool?
+      attr_accessor truck_road_types: Array[String]?
+      attr_accessor tunnels: bool?
+      attr_accessor u_turns: bool?
+      attr_accessor zone_categories: Array[Types::RouteMatrixAvoidanceZoneCategory]?
+    end
+
+    class RouteMatrixAvoidanceZoneCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class RouteMatrixBoundary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geometry: Types::RouteMatrixBoundaryGeometry,
+        ?unbounded: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geometry: Types::RouteMatrixBoundaryGeometry?
+      attr_accessor unbounded: bool?
+    end
+
+    class RouteMatrixBoundaryGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_circle: Types::RouteMatrixAutoCircle,
+        ?circle: Types::Circle,
+        ?bounding_box: Array[Float],
+        ?polygon: Array[Array[Array[Float]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_circle: Types::RouteMatrixAutoCircle?
+      attr_accessor circle: Types::Circle?
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+    end
+
+    class RouteMatrixCarOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_plate: Types::RouteMatrixVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class RouteMatrixDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::RouteMatrixDestinationOptions,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::RouteMatrixDestinationOptions?
+      attr_accessor position: Array[Float]?
+    end
+
+    class RouteMatrixDestinationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?heading: Float,
+        ?matching: Types::RouteMatrixMatchingOptions,
+        ?side_of_street: Types::RouteMatrixSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::RouteMatrixMatchingOptions?
+      attr_accessor side_of_street: Types::RouteMatrixSideOfStreetOptions?
+    end
+
+    class RouteMatrixEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor error: String?
+    end
+
+    class RouteMatrixExclusionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor countries: Array[String]?
+    end
+
+    class RouteMatrixMatchingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_hint: String,
+        ?on_road_threshold: Integer,
+        ?radius: Integer,
+        ?strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_hint: String?
+      attr_accessor on_road_threshold: Integer?
+      attr_accessor radius: Integer?
+      attr_accessor strategy: String?
+    end
+
+    class RouteMatrixOrigin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::RouteMatrixOriginOptions,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::RouteMatrixOriginOptions?
+      attr_accessor position: Array[Float]?
+    end
+
+    class RouteMatrixOriginOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?heading: Float,
+        ?matching: Types::RouteMatrixMatchingOptions,
+        ?side_of_street: Types::RouteMatrixSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::RouteMatrixMatchingOptions?
+      attr_accessor side_of_street: Types::RouteMatrixSideOfStreetOptions?
+    end
+
+    class RouteMatrixScooterOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_plate: Types::RouteMatrixVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class RouteMatrixSideOfStreetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?use_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor use_with: String?
+    end
+
+    class RouteMatrixTrafficOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_event_threshold_override: Integer,
+        ?usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_event_threshold_override: Integer?
+      attr_accessor usage: String?
+    end
+
+    class RouteMatrixTrailerOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trailer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trailer_count: Integer?
+    end
+
+    class RouteMatrixTravelModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?car: Types::RouteMatrixCarOptions,
+        ?scooter: Types::RouteMatrixScooterOptions,
+        ?truck: Types::RouteMatrixTruckOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor car: Types::RouteMatrixCarOptions?
+      attr_accessor scooter: Types::RouteMatrixScooterOptions?
+      attr_accessor truck: Types::RouteMatrixTruckOptions?
+    end
+
+    class RouteMatrixTruckOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?axle_count: Integer,
+        ?gross_weight: Integer,
+        ?hazardous_cargos: Array[String],
+        ?height: Integer,
+        ?kpra_length: Integer,
+        ?length: Integer,
+        ?license_plate: Types::RouteMatrixVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+        ?payload_capacity: Integer,
+        ?trailer: Types::RouteMatrixTrailerOptions,
+        ?truck_type: String,
+        ?tunnel_restriction_code: String,
+        ?weight_per_axle: Integer,
+        ?weight_per_axle_group: Types::WeightPerAxleGroup,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor axle_count: Integer?
+      attr_accessor gross_weight: Integer?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor height: Integer?
+      attr_accessor kpra_length: Integer?
+      attr_accessor length: Integer?
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+      attr_accessor payload_capacity: Integer?
+      attr_accessor trailer: Types::RouteMatrixTrailerOptions?
+      attr_accessor truck_type: String?
+      attr_accessor tunnel_restriction_code: String?
+      attr_accessor weight_per_axle: Integer?
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup?
+      attr_accessor width: Integer?
+    end
+
+    class RouteMatrixVehicleLicensePlate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_character: String?
+    end
+
+    class RouteNoticeDetailRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class RouteNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direction: String,
+        ?language: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direction: String?
+      attr_accessor language: String?
+      attr_accessor value: String?
+    end
+
+    class RouteOriginOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?avoid_u_turns: bool,
+        ?heading: Float,
+        ?matching: Types::RouteMatchingOptions,
+        ?side_of_street: Types::RouteSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor avoid_u_turns: bool?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::RouteMatchingOptions?
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions?
+    end
+
+    class RoutePassThroughPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    class RoutePassThroughWaypoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geometry_offset: Integer,
+        ?place: Types::RoutePassThroughPlace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geometry_offset: Integer?
+      attr_accessor place: Types::RoutePassThroughPlace?
+    end
+
+    class RoutePedestrianArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RoutePedestrianPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RoutePedestrianPlace?
+      attr_accessor time: String?
+    end
+
+    class RoutePedestrianDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RoutePedestrianPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RoutePedestrianPlace?
+      attr_accessor time: String?
+    end
+
+    class RoutePedestrianLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arrival: Types::RoutePedestrianArrival,
+        ?departure: Types::RoutePedestrianDeparture,
+        ?notices: Array[Types::RoutePedestrianNotice],
+        ?pass_through_waypoints: Array[Types::RoutePassThroughWaypoint],
+        ?spans: Array[Types::RoutePedestrianSpan],
+        ?summary: Types::RoutePedestrianSummary,
+        ?travel_steps: Array[Types::RoutePedestrianTravelStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arrival: Types::RoutePedestrianArrival?
+      attr_accessor departure: Types::RoutePedestrianDeparture?
+      attr_accessor notices: Array[Types::RoutePedestrianNotice]?
+      attr_accessor pass_through_waypoints: Array[Types::RoutePassThroughWaypoint]?
+      attr_accessor spans: Array[Types::RoutePedestrianSpan]?
+      attr_accessor summary: Types::RoutePedestrianSummary?
+      attr_accessor travel_steps: Array[Types::RoutePedestrianTravelStep]?
+    end
+
+    class RoutePedestrianNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor impact: String?
+    end
+
+    class RoutePedestrianOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speed: Float?
+    end
+
+    class RoutePedestrianOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+    end
+
+    class RoutePedestrianPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?side_of_street: String,
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor side_of_street: String?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    class RoutePedestrianSpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_case_duration: Integer,
+        ?country: String,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?dynamic_speed: Types::RouteSpanDynamicSpeedDetails,
+        ?functional_classification: Integer,
+        ?geometry_offset: Integer,
+        ?incidents: Array[Integer],
+        ?names: Array[Types::LocalizedString],
+        ?pedestrian_access: Array[String],
+        ?region: String,
+        ?road_attributes: Array[String],
+        ?route_numbers: Array[Types::RouteNumber],
+        ?speed_limit: Types::RouteSpanSpeedLimitDetails,
+        ?typical_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_case_duration: Integer?
+      attr_accessor country: String?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor dynamic_speed: Types::RouteSpanDynamicSpeedDetails?
+      attr_accessor functional_classification: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor incidents: Array[Integer]?
+      attr_accessor names: Array[Types::LocalizedString]?
+      attr_accessor pedestrian_access: Array[String]?
+      attr_accessor region: String?
+      attr_accessor road_attributes: Array[String]?
+      attr_accessor route_numbers: Array[Types::RouteNumber]?
+      attr_accessor speed_limit: Types::RouteSpanSpeedLimitDetails?
+      attr_accessor typical_duration: Integer?
+    end
+
+    class RoutePedestrianSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RoutePedestrianOverviewSummary,
+        ?travel_only: Types::RoutePedestrianTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RoutePedestrianOverviewSummary?
+      attr_accessor travel_only: Types::RoutePedestrianTravelOnlySummary?
+    end
+
+    class RoutePedestrianTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+    end
+
+    class RoutePedestrianTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continue_step_details: Types::RouteContinueStepDetails,
+        ?current_road: Types::RouteRoad,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?exit_number: Array[Types::LocalizedString],
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?keep_step_details: Types::RouteKeepStepDetails,
+        ?next_road: Types::RouteRoad,
+        ?roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails,
+        ?roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails,
+        ?roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails,
+        ?signpost: Types::RouteSignpost,
+        ?turn_step_details: Types::RouteTurnStepDetails,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails?
+      attr_accessor current_road: Types::RouteRoad?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor exit_number: Array[Types::LocalizedString]?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails?
+      attr_accessor next_road: Types::RouteRoad?
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails?
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails?
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails?
+      attr_accessor signpost: Types::RouteSignpost?
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails?
+      attr_accessor type: String?
+    end
+
+    class RouteRampStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteResponseNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor impact: String?
+    end
+
+    class RouteRoad
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?road_name: Array[Types::LocalizedString],
+        ?route_number: Array[Types::RouteNumber],
+        ?towards: Array[Types::LocalizedString],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor road_name: Array[Types::LocalizedString]?
+      attr_accessor route_number: Array[Types::RouteNumber]?
+      attr_accessor towards: Array[Types::LocalizedString]?
+      attr_accessor type: String?
+    end
+
+    class RouteRoundaboutEnterStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteRoundaboutExitStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?relative_exit: Integer,
+        ?roundabout_angle: Float,
+        ?steering_direction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor relative_exit: Integer?
+      attr_accessor roundabout_angle: Float?
+      attr_accessor steering_direction: String?
+    end
+
+    class RouteRoundaboutPassStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteScooterOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_type: String,
+        ?license_plate: Types::RouteVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_type: String?
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+    end
+
+    class RouteSideOfStreetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?use_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor use_with: String?
+    end
+
+    class RouteSignpost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?labels: Array[Types::RouteSignpostLabel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor labels: Array[Types::RouteSignpostLabel]?
+    end
+
+    class RouteSignpostLabel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_number: Types::RouteNumber,
+        ?text: Types::LocalizedString,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_number: Types::RouteNumber?
+      attr_accessor text: Types::LocalizedString?
+    end
+
+    class RouteSpanDynamicSpeedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_case_speed: Float,
+        ?turn_duration: Integer,
+        ?typical_speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_case_speed: Float?
+      attr_accessor turn_duration: Integer?
+      attr_accessor typical_speed: Float?
+    end
+
+    class RouteSpanSpeedLimitDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_speed: Float,
+        ?unlimited: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_speed: Float?
+      attr_accessor unlimited: bool?
+    end
+
+    class RouteSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+        ?tolls: Types::RouteTollSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor tolls: Types::RouteTollSummary?
+    end
+
+    class RouteToll
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?payment_sites: Array[Types::RouteTollPaymentSite],
+        ?rates: Array[Types::RouteTollRate],
+        ?systems: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor payment_sites: Array[Types::RouteTollPaymentSite]?
+      attr_accessor rates: Array[Types::RouteTollRate]?
+      attr_accessor systems: Array[Integer]?
+    end
+
+    class RouteTollOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_transponders: bool,
+        ?all_vignettes: bool,
+        ?currency: String,
+        ?emission_type: Types::RouteEmissionType,
+        ?vehicle_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_transponders: bool?
+      attr_accessor all_vignettes: bool?
+      attr_accessor currency: String?
+      attr_accessor emission_type: Types::RouteEmissionType?
+      attr_accessor vehicle_category: String?
+    end
+
+    class RouteTollPass
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?includes_return_trip: bool,
+        ?senior_pass: bool,
+        ?transfer_count: Integer,
+        ?trip_count: Integer,
+        ?validity_period: Types::RouteTollPassValidityPeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor includes_return_trip: bool?
+      attr_accessor senior_pass: bool?
+      attr_accessor transfer_count: Integer?
+      attr_accessor trip_count: Integer?
+      attr_accessor validity_period: Types::RouteTollPassValidityPeriod?
+    end
+
+    class RouteTollPassValidityPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?period: String,
+        ?period_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor period: String?
+      attr_accessor period_count: Integer?
+    end
+
+    class RouteTollPaymentSite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor position: Array[Float]?
+    end
+
+    class RouteTollPrice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?estimate: bool,
+        ?per_duration: Integer,
+        ?range: bool,
+        ?range_value: Types::RouteTollPriceValueRange,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor estimate: bool?
+      attr_accessor per_duration: Integer?
+      attr_accessor range: bool?
+      attr_accessor range_value: Types::RouteTollPriceValueRange?
+      attr_accessor value: Float?
+    end
+
+    class RouteTollPriceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?estimate: bool,
+        ?range: bool,
+        ?range_value: Types::RouteTollPriceValueRange,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor estimate: bool?
+      attr_accessor range: bool?
+      attr_accessor range_value: Types::RouteTollPriceValueRange?
+      attr_accessor value: Float?
+    end
+
+    class RouteTollPriceValueRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class RouteTollRate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applicable_times: String,
+        ?converted_price: Types::RouteTollPrice,
+        ?id: String,
+        ?local_price: Types::RouteTollPrice,
+        ?name: String,
+        ?pass: Types::RouteTollPass,
+        ?payment_methods: Array[String],
+        ?transponders: Array[Types::RouteTransponder],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applicable_times: String?
+      attr_accessor converted_price: Types::RouteTollPrice?
+      attr_accessor id: String?
+      attr_accessor local_price: Types::RouteTollPrice?
+      attr_accessor name: String?
+      attr_accessor pass: Types::RouteTollPass?
+      attr_accessor payment_methods: Array[String]?
+      attr_accessor transponders: Array[Types::RouteTransponder]?
+    end
+
+    class RouteTollSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Types::RouteTollPriceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Types::RouteTollPriceSummary?
+    end
+
+    class RouteTollSystem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class RouteTrafficOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_event_threshold_override: Integer,
+        ?usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_event_threshold_override: Integer?
+      attr_accessor usage: String?
+    end
+
+    class RouteTrailerOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?axle_count: Integer,
+        ?trailer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor axle_count: Integer?
+      attr_accessor trailer_count: Integer?
+    end
+
+    class RouteTransponder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_name: String?
+    end
+
+    class RouteTravelModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?car: Types::RouteCarOptions,
+        ?pedestrian: Types::RoutePedestrianOptions,
+        ?scooter: Types::RouteScooterOptions,
+        ?truck: Types::RouteTruckOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor car: Types::RouteCarOptions?
+      attr_accessor pedestrian: Types::RoutePedestrianOptions?
+      attr_accessor scooter: Types::RouteScooterOptions?
+      attr_accessor truck: Types::RouteTruckOptions?
+    end
+
+    class RouteTruckOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?axle_count: Integer,
+        ?engine_type: String,
+        ?gross_weight: Integer,
+        ?hazardous_cargos: Array[String],
+        ?height: Integer,
+        ?height_above_first_axle: Integer,
+        ?kpra_length: Integer,
+        ?length: Integer,
+        ?license_plate: Types::RouteVehicleLicensePlate,
+        ?max_speed: Float,
+        ?occupancy: Integer,
+        ?payload_capacity: Integer,
+        ?tire_count: Integer,
+        ?trailer: Types::RouteTrailerOptions,
+        ?truck_type: String,
+        ?tunnel_restriction_code: String,
+        ?weight_per_axle: Integer,
+        ?weight_per_axle_group: Types::WeightPerAxleGroup,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor axle_count: Integer?
+      attr_accessor engine_type: String?
+      attr_accessor gross_weight: Integer?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor height: Integer?
+      attr_accessor height_above_first_axle: Integer?
+      attr_accessor kpra_length: Integer?
+      attr_accessor length: Integer?
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate?
+      attr_accessor max_speed: Float?
+      attr_accessor occupancy: Integer?
+      attr_accessor payload_capacity: Integer?
+      attr_accessor tire_count: Integer?
+      attr_accessor trailer: Types::RouteTrailerOptions?
+      attr_accessor truck_type: String?
+      attr_accessor tunnel_restriction_code: String?
+      attr_accessor weight_per_axle: Integer?
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup?
+      attr_accessor width: Integer?
+    end
+
+    class RouteTurnStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteUTurnStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intersection: Array[Types::LocalizedString],
+        ?steering_direction: String,
+        ?turn_angle: Float,
+        ?turn_intensity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intersection: Array[Types::LocalizedString]?
+      attr_accessor steering_direction: String?
+      attr_accessor turn_angle: Float?
+      attr_accessor turn_intensity: String?
+    end
+
+    class RouteVehicleArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteVehiclePlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteVehiclePlace?
+      attr_accessor time: String?
+    end
+
+    class RouteVehicleDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteVehiclePlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteVehiclePlace?
+      attr_accessor time: String?
+    end
+
+    class RouteVehicleIncident
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?end_time: String,
+        ?severity: String,
+        ?start_time: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor end_time: String?
+      attr_accessor severity: String?
+      attr_accessor start_time: String?
+      attr_accessor type: String?
+    end
+
+    class RouteVehicleLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arrival: Types::RouteVehicleArrival,
+        ?departure: Types::RouteVehicleDeparture,
+        ?incidents: Array[Types::RouteVehicleIncident],
+        ?notices: Array[Types::RouteVehicleNotice],
+        ?pass_through_waypoints: Array[Types::RoutePassThroughWaypoint],
+        ?spans: Array[Types::RouteVehicleSpan],
+        ?summary: Types::RouteVehicleSummary,
+        ?tolls: Array[Types::RouteToll],
+        ?toll_systems: Array[Types::RouteTollSystem],
+        ?travel_steps: Array[Types::RouteVehicleTravelStep],
+        ?truck_road_types: Array[String],
+        ?zones: Array[Types::RouteZone],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arrival: Types::RouteVehicleArrival?
+      attr_accessor departure: Types::RouteVehicleDeparture?
+      attr_accessor incidents: Array[Types::RouteVehicleIncident]?
+      attr_accessor notices: Array[Types::RouteVehicleNotice]?
+      attr_accessor pass_through_waypoints: Array[Types::RoutePassThroughWaypoint]?
+      attr_accessor spans: Array[Types::RouteVehicleSpan]?
+      attr_accessor summary: Types::RouteVehicleSummary?
+      attr_accessor tolls: Array[Types::RouteToll]?
+      attr_accessor toll_systems: Array[Types::RouteTollSystem]?
+      attr_accessor travel_steps: Array[Types::RouteVehicleTravelStep]?
+      attr_accessor truck_road_types: Array[String]?
+      attr_accessor zones: Array[Types::RouteZone]?
+    end
+
+    class RouteVehicleLicensePlate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_character: String?
+    end
+
+    class RouteVehicleNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?details: Array[Types::RouteVehicleNoticeDetail],
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor details: Array[Types::RouteVehicleNoticeDetail]?
+      attr_accessor impact: String?
+    end
+
+    class RouteVehicleNoticeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?violated_constraints: Types::RouteViolatedConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor violated_constraints: Types::RouteViolatedConstraints?
+    end
+
+    class RouteVehicleOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_case_duration: Integer,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?typical_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_case_duration: Integer?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor typical_duration: Integer?
+    end
+
+    class RouteVehiclePlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?side_of_street: String,
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor side_of_street: String?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    class RouteVehicleSpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_case_duration: Integer,
+        ?car_access: Array[String],
+        ?country: String,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?dynamic_speed: Types::RouteSpanDynamicSpeedDetails,
+        ?functional_classification: Integer,
+        ?gate: String,
+        ?geometry_offset: Integer,
+        ?incidents: Array[Integer],
+        ?names: Array[Types::LocalizedString],
+        ?notices: Array[Integer],
+        ?railway_crossing: String,
+        ?region: String,
+        ?road_attributes: Array[String],
+        ?route_numbers: Array[Types::RouteNumber],
+        ?scooter_access: Array[String],
+        ?speed_limit: Types::RouteSpanSpeedLimitDetails,
+        ?toll_systems: Array[Integer],
+        ?truck_access: Array[String],
+        ?truck_road_types: Array[Integer],
+        ?typical_duration: Integer,
+        ?zones: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_case_duration: Integer?
+      attr_accessor car_access: Array[String]?
+      attr_accessor country: String?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor dynamic_speed: Types::RouteSpanDynamicSpeedDetails?
+      attr_accessor functional_classification: Integer?
+      attr_accessor gate: String?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor incidents: Array[Integer]?
+      attr_accessor names: Array[Types::LocalizedString]?
+      attr_accessor notices: Array[Integer]?
+      attr_accessor railway_crossing: String?
+      attr_accessor region: String?
+      attr_accessor road_attributes: Array[String]?
+      attr_accessor route_numbers: Array[Types::RouteNumber]?
+      attr_accessor scooter_access: Array[String]?
+      attr_accessor speed_limit: Types::RouteSpanSpeedLimitDetails?
+      attr_accessor toll_systems: Array[Integer]?
+      attr_accessor truck_access: Array[String]?
+      attr_accessor truck_road_types: Array[Integer]?
+      attr_accessor typical_duration: Integer?
+      attr_accessor zones: Array[Integer]?
+    end
+
+    class RouteVehicleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RouteVehicleOverviewSummary,
+        ?travel_only: Types::RouteVehicleTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RouteVehicleOverviewSummary?
+      attr_accessor travel_only: Types::RouteVehicleTravelOnlySummary?
+    end
+
+    class RouteVehicleTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_case_duration: Integer,
+        ?duration: Integer,
+        ?typical_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_case_duration: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor typical_duration: Integer?
+    end
+
+    class RouteVehicleTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continue_highway_step_details: Types::RouteContinueHighwayStepDetails,
+        ?continue_step_details: Types::RouteContinueStepDetails,
+        ?current_road: Types::RouteRoad,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?enter_highway_step_details: Types::RouteEnterHighwayStepDetails,
+        ?exit_number: Array[Types::LocalizedString],
+        ?exit_step_details: Types::RouteExitStepDetails,
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?keep_step_details: Types::RouteKeepStepDetails,
+        ?next_road: Types::RouteRoad,
+        ?ramp_step_details: Types::RouteRampStepDetails,
+        ?roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails,
+        ?roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails,
+        ?roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails,
+        ?signpost: Types::RouteSignpost,
+        ?turn_step_details: Types::RouteTurnStepDetails,
+        ?type: String,
+        ?u_turn_step_details: Types::RouteUTurnStepDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continue_highway_step_details: Types::RouteContinueHighwayStepDetails?
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails?
+      attr_accessor current_road: Types::RouteRoad?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor enter_highway_step_details: Types::RouteEnterHighwayStepDetails?
+      attr_accessor exit_number: Array[Types::LocalizedString]?
+      attr_accessor exit_step_details: Types::RouteExitStepDetails?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails?
+      attr_accessor next_road: Types::RouteRoad?
+      attr_accessor ramp_step_details: Types::RouteRampStepDetails?
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails?
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails?
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails?
+      attr_accessor signpost: Types::RouteSignpost?
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails?
+      attr_accessor type: String?
+      attr_accessor u_turn_step_details: Types::RouteUTurnStepDetails?
+    end
+
+    class RouteViolatedConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_hazards_restricted: bool,
+        ?axle_count: Types::RouteNoticeDetailRange,
+        ?hazardous_cargos: Array[String],
+        ?max_height: Integer,
+        ?max_kpra_length: Integer,
+        ?max_length: Integer,
+        ?max_payload_capacity: Integer,
+        ?max_weight: Types::RouteWeightConstraint,
+        ?max_weight_per_axle: Integer,
+        ?max_weight_per_axle_group: Types::WeightPerAxleGroup,
+        ?max_width: Integer,
+        ?occupancy: Types::RouteNoticeDetailRange,
+        ?restricted_times: String,
+        ?time_dependent: bool,
+        ?trailer_count: Types::RouteNoticeDetailRange,
+        ?travel_mode: bool,
+        ?truck_road_type: String,
+        ?truck_type: String,
+        ?tunnel_restriction_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_hazards_restricted: bool?
+      attr_accessor axle_count: Types::RouteNoticeDetailRange?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor max_height: Integer?
+      attr_accessor max_kpra_length: Integer?
+      attr_accessor max_length: Integer?
+      attr_accessor max_payload_capacity: Integer?
+      attr_accessor max_weight: Types::RouteWeightConstraint?
+      attr_accessor max_weight_per_axle: Integer?
+      attr_accessor max_weight_per_axle_group: Types::WeightPerAxleGroup?
+      attr_accessor max_width: Integer?
+      attr_accessor occupancy: Types::RouteNoticeDetailRange?
+      attr_accessor restricted_times: String?
+      attr_accessor time_dependent: bool?
+      attr_accessor trailer_count: Types::RouteNoticeDetailRange?
+      attr_accessor travel_mode: bool?
+      attr_accessor truck_road_type: String?
+      attr_accessor truck_type: String?
+      attr_accessor tunnel_restriction_code: String?
+    end
+
+    class RouteWaypoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_actions_for_distance: Integer,
+        ?avoid_u_turns: bool,
+        ?heading: Float,
+        ?matching: Types::RouteMatchingOptions,
+        ?pass_through: bool,
+        ?position: Array[Float],
+        ?side_of_street: Types::RouteSideOfStreetOptions,
+        ?stop_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_actions_for_distance: Integer?
+      attr_accessor avoid_u_turns: bool?
+      attr_accessor heading: Float?
+      attr_accessor matching: Types::RouteMatchingOptions?
+      attr_accessor pass_through: bool?
+      attr_accessor position: Array[Float]?
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions?
+      attr_accessor stop_duration: Integer?
+    end
+
+    class RouteWeightConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    class RouteZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor name: String?
+    end
+
+    class SnapToRoadsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?snapped_geometry_format: String,
+        ?snap_radius: Integer,
+        ?trace_points: Array[Types::RoadSnapTracePoint],
+        ?travel_mode: String,
+        ?travel_mode_options: Types::RoadSnapTravelModeOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor snapped_geometry_format: String?
+      attr_accessor snap_radius: Integer?
+      attr_accessor trace_points: Array[Types::RoadSnapTracePoint]?
+      attr_accessor travel_mode: String?
+      attr_accessor travel_mode_options: Types::RoadSnapTravelModeOptions?
+    end
+
+    class SnapToRoadsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notices: Array[Types::RoadSnapNotice],
+        ?pricing_bucket: String,
+        ?snapped_geometry: Types::RoadSnapSnappedGeometry,
+        ?snapped_geometry_format: String,
+        ?snapped_trace_points: Array[Types::RoadSnapSnappedTracePoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notices: Array[Types::RoadSnapNotice]?
+      attr_accessor pricing_bucket: String?
+      attr_accessor snapped_geometry: Types::RoadSnapSnappedGeometry?
+      attr_accessor snapped_geometry_format: String?
+      attr_accessor snapped_trace_points: Array[Types::RoadSnapSnappedTracePoint]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class WaypointOptimizationAccessHours
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: Types::WaypointOptimizationAccessHoursEntry,
+        ?to: Types::WaypointOptimizationAccessHoursEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: Types::WaypointOptimizationAccessHoursEntry?
+      attr_accessor to: Types::WaypointOptimizationAccessHoursEntry?
+    end
+
+    class WaypointOptimizationAccessHoursEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_week: String,
+        ?time_of_day: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_week: String?
+      attr_accessor time_of_day: String?
+    end
+
+    class WaypointOptimizationAvoidanceArea
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geometry: Types::WaypointOptimizationAvoidanceAreaGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geometry: Types::WaypointOptimizationAvoidanceAreaGeometry?
+    end
+
+    class WaypointOptimizationAvoidanceAreaGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+    end
+
+    class WaypointOptimizationAvoidanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?areas: Array[Types::WaypointOptimizationAvoidanceArea],
+        ?car_shuttle_trains: bool,
+        ?controlled_access_highways: bool,
+        ?dirt_roads: bool,
+        ?ferries: bool,
+        ?toll_roads: bool,
+        ?tunnels: bool,
+        ?u_turns: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor areas: Array[Types::WaypointOptimizationAvoidanceArea]?
+      attr_accessor car_shuttle_trains: bool?
+      attr_accessor controlled_access_highways: bool?
+      attr_accessor dirt_roads: bool?
+      attr_accessor ferries: bool?
+      attr_accessor toll_roads: bool?
+      attr_accessor tunnels: bool?
+      attr_accessor u_turns: bool?
+    end
+
+    class WaypointOptimizationClusteringOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?driving_distance_options: Types::WaypointOptimizationDrivingDistanceOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor driving_distance_options: Types::WaypointOptimizationDrivingDistanceOptions?
+    end
+
+    class WaypointOptimizationConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?from: String,
+        ?rest_duration: Integer,
+        ?to: String,
+        ?travel_duration: Integer,
+        ?wait_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor from: String?
+      attr_accessor rest_duration: Integer?
+      attr_accessor to: String?
+      attr_accessor travel_duration: Integer?
+      attr_accessor wait_duration: Integer?
+    end
+
+    class WaypointOptimizationDestinationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_hours: Types::WaypointOptimizationAccessHours,
+        ?appointment_time: String,
+        ?heading: Float,
+        ?id: String,
+        ?service_duration: Integer,
+        ?side_of_street: Types::WaypointOptimizationSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_hours: Types::WaypointOptimizationAccessHours?
+      attr_accessor appointment_time: String?
+      attr_accessor heading: Float?
+      attr_accessor id: String?
+      attr_accessor service_duration: Integer?
+      attr_accessor side_of_street: Types::WaypointOptimizationSideOfStreetOptions?
+    end
+
+    class WaypointOptimizationDriverOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_cycles: Types::WaypointOptimizationRestCycles,
+        ?rest_profile: Types::WaypointOptimizationRestProfile,
+        ?treat_service_time_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_cycles: Types::WaypointOptimizationRestCycles?
+      attr_accessor rest_profile: Types::WaypointOptimizationRestProfile?
+      attr_accessor treat_service_time_as: String?
+    end
+
+    class WaypointOptimizationDrivingDistanceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?driving_distance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor driving_distance: Integer?
+    end
+
+    class WaypointOptimizationExclusionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor countries: Array[String]?
+    end
+
+    class WaypointOptimizationFailedConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint: String?
+      attr_accessor reason: String?
+    end
+
+    class WaypointOptimizationImpedingWaypoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_constraints: Array[Types::WaypointOptimizationFailedConstraint],
+        ?id: String,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_constraints: Array[Types::WaypointOptimizationFailedConstraint]?
+      attr_accessor id: String?
+      attr_accessor position: Array[Float]?
+    end
+
+    class WaypointOptimizationOptimizedWaypoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arrival_time: String,
+        ?cluster_index: Integer,
+        ?departure_time: String,
+        ?id: String,
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arrival_time: String?
+      attr_accessor cluster_index: Integer?
+      attr_accessor departure_time: String?
+      attr_accessor id: String?
+      attr_accessor position: Array[Float]?
+    end
+
+    class WaypointOptimizationOriginOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class WaypointOptimizationPedestrianOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speed: Float?
+    end
+
+    class WaypointOptimizationRestCycleDurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_duration: Integer,
+        ?work_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_duration: Integer?
+      attr_accessor work_duration: Integer?
+    end
+
+    class WaypointOptimizationRestCycles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_cycle: Types::WaypointOptimizationRestCycleDurations,
+        ?short_cycle: Types::WaypointOptimizationRestCycleDurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_cycle: Types::WaypointOptimizationRestCycleDurations?
+      attr_accessor short_cycle: Types::WaypointOptimizationRestCycleDurations?
+    end
+
+    class WaypointOptimizationRestProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: String?
+    end
+
+    class WaypointOptimizationSideOfStreetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?use_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor use_with: String?
+    end
+
+    class WaypointOptimizationTimeBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_duration: Integer,
+        ?service_duration: Integer,
+        ?travel_duration: Integer,
+        ?wait_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_duration: Integer?
+      attr_accessor service_duration: Integer?
+      attr_accessor travel_duration: Integer?
+      attr_accessor wait_duration: Integer?
+    end
+
+    class WaypointOptimizationTrafficOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage: String?
+    end
+
+    class WaypointOptimizationTrailerOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trailer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trailer_count: Integer?
+    end
+
+    class WaypointOptimizationTravelModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pedestrian: Types::WaypointOptimizationPedestrianOptions,
+        ?truck: Types::WaypointOptimizationTruckOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pedestrian: Types::WaypointOptimizationPedestrianOptions?
+      attr_accessor truck: Types::WaypointOptimizationTruckOptions?
+    end
+
+    class WaypointOptimizationTruckOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gross_weight: Integer,
+        ?hazardous_cargos: Array[String],
+        ?height: Integer,
+        ?length: Integer,
+        ?trailer: Types::WaypointOptimizationTrailerOptions,
+        ?truck_type: String,
+        ?tunnel_restriction_code: String,
+        ?weight_per_axle: Integer,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gross_weight: Integer?
+      attr_accessor hazardous_cargos: Array[String]?
+      attr_accessor height: Integer?
+      attr_accessor length: Integer?
+      attr_accessor trailer: Types::WaypointOptimizationTrailerOptions?
+      attr_accessor truck_type: String?
+      attr_accessor tunnel_restriction_code: String?
+      attr_accessor weight_per_axle: Integer?
+      attr_accessor width: Integer?
+    end
+
+    class WaypointOptimizationWaypoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_hours: Types::WaypointOptimizationAccessHours,
+        ?appointment_time: String,
+        ?before: Array[Integer],
+        ?heading: Float,
+        ?id: String,
+        ?position: Array[Float],
+        ?service_duration: Integer,
+        ?side_of_street: Types::WaypointOptimizationSideOfStreetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_hours: Types::WaypointOptimizationAccessHours?
+      attr_accessor appointment_time: String?
+      attr_accessor before: Array[Integer]?
+      attr_accessor heading: Float?
+      attr_accessor id: String?
+      attr_accessor position: Array[Float]?
+      attr_accessor service_duration: Integer?
+      attr_accessor side_of_street: Types::WaypointOptimizationSideOfStreetOptions?
+    end
+
+    class WeightPerAxleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?single: Integer,
+        ?tandem: Integer,
+        ?triple: Integer,
+        ?quad: Integer,
+        ?quint: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor single: Integer?
+      attr_accessor tandem: Integer?
+      attr_accessor triple: Integer?
+      attr_accessor quad: Integer?
+      attr_accessor quint: Integer?
+    end
+  end
+end

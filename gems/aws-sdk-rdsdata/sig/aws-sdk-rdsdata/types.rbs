@@ -1,0 +1,642 @@
+module Aws::RDSData
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ArrayValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?boolean_values: Array[bool],
+        ?long_values: Array[Integer],
+        ?double_values: Array[Float],
+        ?string_values: Array[String],
+        ?array_values: Array[Types::ArrayValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor boolean_values: Array[bool]?
+      attr_accessor long_values: Array[Integer]?
+      attr_accessor double_values: Array[Float]?
+      attr_accessor string_values: Array[String]?
+      attr_accessor array_values: Array[Types::ArrayValue]?
+
+      class BooleanValues < ArrayValue
+      end
+      class LongValues < ArrayValue
+      end
+      class DoubleValues < ArrayValue
+      end
+      class StringValues < ArrayValue
+      end
+      class ArrayValues < ArrayValue
+      end
+      class Unknown < ArrayValue
+      end
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?sql: String,
+        ?database: String,
+        ?schema: String,
+        ?parameter_sets: Array[Array[Types::SqlParameter]],
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor sql: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+      attr_accessor parameter_sets: Array[Array[Types::SqlParameter]]?
+      attr_accessor transaction_id: String?
+    end
+
+    class BatchExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_results: Array[Types::UpdateResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_results: Array[Types::UpdateResult]?
+    end
+
+    class BeginTransactionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?database: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+    end
+
+    class BeginTransactionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class ColumnMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: Integer,
+        ?type_name: String,
+        ?label: String,
+        ?schema_name: String,
+        ?table_name: String,
+        ?is_auto_increment: bool,
+        ?is_signed: bool,
+        ?is_currency: bool,
+        ?is_case_sensitive: bool,
+        ?nullable: Integer,
+        ?precision: Integer,
+        ?scale: Integer,
+        ?array_base_column_type: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: Integer?
+      attr_accessor type_name: String?
+      attr_accessor label: String?
+      attr_accessor schema_name: String?
+      attr_accessor table_name: String?
+      attr_accessor is_auto_increment: bool?
+      attr_accessor is_signed: bool?
+      attr_accessor is_currency: bool?
+      attr_accessor is_case_sensitive: bool?
+      attr_accessor nullable: Integer?
+      attr_accessor precision: Integer?
+      attr_accessor scale: Integer?
+      attr_accessor array_base_column_type: Integer?
+    end
+
+    class CommitTransactionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor transaction_id: String?
+    end
+
+    class CommitTransactionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_status: String?
+    end
+
+    class DatabaseErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DatabaseNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DatabaseResumingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DatabaseUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ExecuteSqlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_or_instance_arn: String,
+        ?aws_secret_store_arn: String,
+        ?sql_statements: String,
+        ?database: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_or_instance_arn: String?
+      attr_accessor aws_secret_store_arn: String?
+      attr_accessor sql_statements: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+    end
+
+    class ExecuteSqlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sql_statement_results: Array[Types::SqlStatementResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sql_statement_results: Array[Types::SqlStatementResult]?
+    end
+
+    class ExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?sql: String,
+        ?database: String,
+        ?schema: String,
+        ?parameters: Array[Types::SqlParameter],
+        ?transaction_id: String,
+        ?include_result_metadata: bool,
+        ?continue_after_timeout: bool,
+        ?result_set_options: Types::ResultSetOptions,
+        ?format_records_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor sql: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+      attr_accessor parameters: Array[Types::SqlParameter]?
+      attr_accessor transaction_id: String?
+      attr_accessor include_result_metadata: bool?
+      attr_accessor continue_after_timeout: bool?
+      attr_accessor result_set_options: Types::ResultSetOptions?
+      attr_accessor format_records_as: String?
+    end
+
+    class ExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Array[Types::Field]],
+        ?column_metadata: Array[Types::ColumnMetadata],
+        ?number_of_records_updated: Integer,
+        ?generated_fields: Array[Types::Field],
+        ?formatted_records: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Array[Types::Field]]?
+      attr_accessor column_metadata: Array[Types::ColumnMetadata]?
+      attr_accessor number_of_records_updated: Integer?
+      attr_accessor generated_fields: Array[Types::Field]?
+      attr_accessor formatted_records: String?
+    end
+
+    class Field
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?is_null: bool,
+        ?boolean_value: bool,
+        ?long_value: Integer,
+        ?double_value: Float,
+        ?string_value: String,
+        ?blob_value: String,
+        ?array_value: Types::ArrayValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_null: bool?
+      attr_accessor boolean_value: bool?
+      attr_accessor long_value: Integer?
+      attr_accessor double_value: Float?
+      attr_accessor string_value: String?
+      attr_accessor blob_value: String?
+      attr_accessor array_value: Types::ArrayValue?
+
+      class IsNull < Field
+      end
+      class BooleanValue < Field
+      end
+      class LongValue < Field
+      end
+      class DoubleValue < Field
+      end
+      class StringValue < Field
+      end
+      class BlobValue < Field
+      end
+      class ArrayValue < Field
+      end
+      class Unknown < Field
+      end
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HttpEndpointNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InvalidResourceStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSecretException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[Types::Value],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[Types::Value]?
+    end
+
+    class ResultFrame
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_set_metadata: Types::ResultSetMetadata,
+        ?records: Array[Types::Record],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_set_metadata: Types::ResultSetMetadata?
+      attr_accessor records: Array[Types::Record]?
+    end
+
+    class ResultSetMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_count: Integer,
+        ?column_metadata: Array[Types::ColumnMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_count: Integer?
+      attr_accessor column_metadata: Array[Types::ColumnMetadata]?
+    end
+
+    class ResultSetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decimal_return_type: String,
+        ?long_return_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decimal_return_type: String?
+      attr_accessor long_return_type: String?
+    end
+
+    class RollbackTransactionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?secret_arn: String,
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor secret_arn: String?
+      attr_accessor transaction_id: String?
+    end
+
+    class RollbackTransactionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_status: String?
+    end
+
+    class SecretsErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SqlParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Types::Field,
+        ?type_hint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Types::Field?
+      attr_accessor type_hint: String?
+    end
+
+    class SqlStatementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_frame: Types::ResultFrame,
+        ?number_of_records_updated: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_frame: Types::ResultFrame?
+      attr_accessor number_of_records_updated: Integer?
+    end
+
+    class StatementTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?db_connection_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor db_connection_id: Integer?
+    end
+
+    class StructValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::Value],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::Value]?
+    end
+
+    class TransactionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedResultException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_fields: Array[Types::Field],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_fields: Array[Types::Field]?
+    end
+
+    class Value
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?is_null: bool,
+        ?bit_value: bool,
+        ?big_int_value: Integer,
+        ?int_value: Integer,
+        ?double_value: Float,
+        ?real_value: Float,
+        ?string_value: String,
+        ?blob_value: String,
+        ?array_values: Array[Types::Value],
+        ?struct_value: Types::StructValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_null: bool?
+      attr_accessor bit_value: bool?
+      attr_accessor big_int_value: Integer?
+      attr_accessor int_value: Integer?
+      attr_accessor double_value: Float?
+      attr_accessor real_value: Float?
+      attr_accessor string_value: String?
+      attr_accessor blob_value: String?
+      attr_accessor array_values: Array[Types::Value]?
+      attr_accessor struct_value: Types::StructValue?
+
+      class IsNull < Value
+      end
+      class BitValue < Value
+      end
+      class BigIntValue < Value
+      end
+      class IntValue < Value
+      end
+      class DoubleValue < Value
+      end
+      class RealValue < Value
+      end
+      class StringValue < Value
+      end
+      class BlobValue < Value
+      end
+      class ArrayValues < Value
+      end
+      class StructValue < Value
+      end
+      class Unknown < Value
+      end
+    end
+  end
+end

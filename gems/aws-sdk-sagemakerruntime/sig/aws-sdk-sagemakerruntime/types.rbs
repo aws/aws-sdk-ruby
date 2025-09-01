@@ -1,0 +1,275 @@
+module Aws::SageMakerRuntime
+  module Types
+
+    class InternalDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalStreamFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvokeEndpointAsyncInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?content_type: String,
+        ?accept: String,
+        ?custom_attributes: String,
+        ?inference_id: String,
+        ?input_location: String,
+        ?request_ttl_seconds: Integer,
+        ?invocation_timeout_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor custom_attributes: String?
+      attr_accessor inference_id: String?
+      attr_accessor input_location: String?
+      attr_accessor request_ttl_seconds: Integer?
+      attr_accessor invocation_timeout_seconds: Integer?
+    end
+
+    class InvokeEndpointAsyncOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inference_id: String,
+        ?output_location: String,
+        ?failure_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inference_id: String?
+      attr_accessor output_location: String?
+      attr_accessor failure_location: String?
+    end
+
+    class InvokeEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?body: String,
+        ?content_type: String,
+        ?accept: String,
+        ?custom_attributes: String,
+        ?target_model: String,
+        ?target_variant: String,
+        ?target_container_hostname: String,
+        ?inference_id: String,
+        ?enable_explanations: String,
+        ?inference_component_name: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor custom_attributes: String?
+      attr_accessor target_model: String?
+      attr_accessor target_variant: String?
+      attr_accessor target_container_hostname: String?
+      attr_accessor inference_id: String?
+      attr_accessor enable_explanations: String?
+      attr_accessor inference_component_name: String?
+      attr_accessor session_id: String?
+    end
+
+    class InvokeEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?content_type: String,
+        ?invoked_production_variant: String,
+        ?custom_attributes: String,
+        ?new_session_id: String,
+        ?closed_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+      attr_accessor invoked_production_variant: String?
+      attr_accessor custom_attributes: String?
+      attr_accessor new_session_id: String?
+      attr_accessor closed_session_id: String?
+    end
+
+    class InvokeEndpointWithResponseStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?body: String,
+        ?content_type: String,
+        ?accept: String,
+        ?custom_attributes: String,
+        ?target_variant: String,
+        ?target_container_hostname: String,
+        ?inference_id: String,
+        ?inference_component_name: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor custom_attributes: String?
+      attr_accessor target_variant: String?
+      attr_accessor target_container_hostname: String?
+      attr_accessor inference_id: String?
+      attr_accessor inference_component_name: String?
+      attr_accessor session_id: String?
+    end
+
+    class InvokeEndpointWithResponseStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: Types::ResponseStream,
+        ?content_type: String,
+        ?invoked_production_variant: String,
+        ?custom_attributes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: Types::ResponseStream?
+      attr_accessor content_type: String?
+      attr_accessor invoked_production_variant: String?
+      attr_accessor custom_attributes: String?
+    end
+
+    class ModelError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?original_status_code: Integer,
+        ?original_message: String,
+        ?log_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor original_status_code: Integer?
+      attr_accessor original_message: String?
+      attr_accessor log_stream_arn: String?
+    end
+
+    class ModelNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ModelStreamError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class PayloadPart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+    end
+
+    class ResponseStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?payload_part: Types::PayloadPart,
+        ?model_stream_error: Types::ModelStreamError,
+        ?internal_stream_failure: Types::InternalStreamFailure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_part: Types::PayloadPart?
+      attr_accessor model_stream_error: Types::ModelStreamError?
+      attr_accessor internal_stream_failure: Types::InternalStreamFailure?
+
+      class PayloadPart < ResponseStream
+      end
+      class ModelStreamError < ResponseStream
+      end
+      class InternalStreamFailure < ResponseStream
+      end
+      class Unknown < ResponseStream
+      end
+    end
+
+    class ServiceUnavailable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

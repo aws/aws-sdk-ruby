@@ -1,0 +1,17 @@
+module Aws::NeptuneGraph
+  class EndpointParameters
+    def initialize: (
+      ?region: String,
+      use_fips: bool,
+      use_dual_stack: bool,
+      ?endpoint: String,
+      api_type: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String?
+    attr_accessor use_fips: bool
+    attr_accessor use_dual_stack: bool
+    attr_accessor endpoint: String?
+    attr_accessor api_type: String
+  end
+end

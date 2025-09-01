@@ -1,0 +1,1521 @@
+module Aws::Ivs
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class AudioConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?codec: String,
+        ?target_bitrate: Integer,
+        ?sample_rate: Integer,
+        ?channels: Integer,
+        ?track: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor codec: String?
+      attr_accessor target_bitrate: Integer?
+      attr_accessor sample_rate: Integer?
+      attr_accessor channels: Integer?
+      attr_accessor track: String?
+    end
+
+    class BatchError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class BatchGetChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::Channel],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::Channel]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class BatchGetStreamKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class BatchGetStreamKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_keys: Array[Types::StreamKey],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_keys: Array[Types::StreamKey]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class BatchStartViewerSessionRevocationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?viewer_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor viewer_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchStartViewerSessionRevocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?viewer_sessions: Array[Types::BatchStartViewerSessionRevocationViewerSession],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor viewer_sessions: Array[Types::BatchStartViewerSessionRevocationViewerSession]?
+    end
+
+    class BatchStartViewerSessionRevocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchStartViewerSessionRevocationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchStartViewerSessionRevocationError]?
+    end
+
+    class BatchStartViewerSessionRevocationViewerSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?viewer_id: String,
+        ?viewer_session_versions_less_than_or_equal_to: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor viewer_id: String?
+      attr_accessor viewer_session_versions_less_than_or_equal_to: Integer?
+    end
+
+    class Channel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?latency_mode: String,
+        ?type: String,
+        ?recording_configuration_arn: String,
+        ?ingest_endpoint: String,
+        ?playback_url: String,
+        ?authorized: bool,
+        ?tags: Hash[String, String],
+        ?insecure_ingest: bool,
+        ?preset: String,
+        ?srt: Types::Srt,
+        ?playback_restriction_policy_arn: String,
+        ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
+        ?container_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor latency_mode: String?
+      attr_accessor type: String?
+      attr_accessor recording_configuration_arn: String?
+      attr_accessor ingest_endpoint: String?
+      attr_accessor playback_url: String?
+      attr_accessor authorized: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor insecure_ingest: bool?
+      attr_accessor preset: String?
+      attr_accessor srt: Types::Srt?
+      attr_accessor playback_restriction_policy_arn: String?
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
+      attr_accessor container_format: String?
+    end
+
+    class ChannelNotBroadcasting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class ChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?latency_mode: String,
+        ?authorized: bool,
+        ?recording_configuration_arn: String,
+        ?tags: Hash[String, String],
+        ?insecure_ingest: bool,
+        ?type: String,
+        ?preset: String,
+        ?playback_restriction_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor latency_mode: String?
+      attr_accessor authorized: bool?
+      attr_accessor recording_configuration_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor insecure_ingest: bool?
+      attr_accessor type: String?
+      attr_accessor preset: String?
+      attr_accessor playback_restriction_policy_arn: String?
+    end
+
+    module ChannelType
+      BasicChannelType: String
+      StandardChannelType: String
+      AdvancedSDChannelType: String
+      AdvancedHDChannelType: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class CreateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?latency_mode: String,
+        ?type: String,
+        ?authorized: bool,
+        ?recording_configuration_arn: String,
+        ?tags: Hash[String, String],
+        ?insecure_ingest: bool,
+        ?preset: String,
+        ?playback_restriction_policy_arn: String,
+        ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
+        ?container_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor latency_mode: String?
+      attr_accessor type: String?
+      attr_accessor authorized: bool?
+      attr_accessor recording_configuration_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor insecure_ingest: bool?
+      attr_accessor preset: String?
+      attr_accessor playback_restriction_policy_arn: String?
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
+      attr_accessor container_format: String?
+    end
+
+    class CreateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Types::Channel,
+        ?stream_key: Types::StreamKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Types::Channel?
+      attr_accessor stream_key: Types::StreamKey?
+    end
+
+    class CreatePlaybackRestrictionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_countries: Array[String],
+        ?allowed_origins: Array[String],
+        ?enable_strict_origin_enforcement: bool,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_countries: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor enable_strict_origin_enforcement: bool?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePlaybackRestrictionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?playback_restriction_policy: Types::PlaybackRestrictionPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy?
+    end
+
+    class CreateRecordingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?tags: Hash[String, String],
+        ?thumbnail_configuration: Types::ThumbnailConfiguration,
+        ?recording_reconnect_window_seconds: Integer,
+        ?rendition_configuration: Types::RenditionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration?
+      attr_accessor recording_reconnect_window_seconds: Integer?
+      attr_accessor rendition_configuration: Types::RenditionConfiguration?
+    end
+
+    class CreateRecordingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_configuration: Types::RecordingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_configuration: Types::RecordingConfiguration?
+    end
+
+    class CreateStreamKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateStreamKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_key: Types::StreamKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_key: Types::StreamKey?
+    end
+
+    class DeleteChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePlaybackKeyPairInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePlaybackKeyPairOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePlaybackRestrictionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteRecordingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteStreamKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3DestinationConfiguration?
+    end
+
+    class GetChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Types::Channel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Types::Channel?
+    end
+
+    class GetPlaybackKeyPairInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPlaybackKeyPairOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_pair: Types::PlaybackKeyPair,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_pair: Types::PlaybackKeyPair?
+    end
+
+    class GetPlaybackRestrictionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPlaybackRestrictionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?playback_restriction_policy: Types::PlaybackRestrictionPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy?
+    end
+
+    class GetRecordingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRecordingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_configuration: Types::RecordingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_configuration: Types::RecordingConfiguration?
+    end
+
+    class GetStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class GetStreamKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetStreamKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_key: Types::StreamKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_key: Types::StreamKey?
+    end
+
+    class GetStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream: Types::Stream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream: Types::Stream?
+    end
+
+    class GetStreamSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor stream_id: String?
+    end
+
+    class GetStreamSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_session: Types::StreamSession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_session: Types::StreamSession?
+    end
+
+    class ImportPlaybackKeyPairInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_key_material: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_key_material: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ImportPlaybackKeyPairOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_pair: Types::PlaybackKeyPair,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_pair: Types::PlaybackKeyPair?
+    end
+
+    class IngestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?video: Types::VideoConfiguration,
+        ?audio: Types::AudioConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor video: Types::VideoConfiguration?
+      attr_accessor audio: Types::AudioConfiguration?
+    end
+
+    class IngestConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?video_configurations: Array[Types::VideoConfiguration],
+        ?audio_configurations: Array[Types::AudioConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor video_configurations: Array[Types::VideoConfiguration]?
+      attr_accessor audio_configurations: Array[Types::AudioConfiguration]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class ListChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_by_name: String,
+        ?filter_by_recording_configuration_arn: String,
+        ?filter_by_playback_restriction_policy_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_by_name: String?
+      attr_accessor filter_by_recording_configuration_arn: String?
+      attr_accessor filter_by_playback_restriction_policy_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaybackKeyPairsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPlaybackKeyPairsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_pairs: Array[Types::PlaybackKeyPairSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_pairs: Array[Types::PlaybackKeyPairSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaybackRestrictionPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPlaybackRestrictionPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?playback_restriction_policies: Array[Types::PlaybackRestrictionPolicySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor playback_restriction_policies: Array[Types::PlaybackRestrictionPolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecordingConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRecordingConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_configurations: Array[Types::RecordingConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_configurations: Array[Types::RecordingConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamKeysInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStreamKeysOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_keys: Array[Types::StreamKeySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_keys: Array[Types::StreamKeySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStreamSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_sessions: Array[Types::StreamSessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_sessions: Array[Types::StreamSessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_by: Types::StreamFilters,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_by: Types::StreamFilters?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::StreamSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::StreamSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MultitrackInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?policy: String,
+        ?maximum_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor policy: String?
+      attr_accessor maximum_resolution: String?
+    end
+
+    module MultitrackMaximumResolution
+      SD: String
+      HD: String
+      FULL_HD: String
+    end
+
+    module MultitrackPolicy
+      ALLOW: String
+      REQUIRE: String
+    end
+
+    class PendingVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class PlaybackKeyPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?fingerprint: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor fingerprint: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PlaybackKeyPairSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PlaybackRestrictionPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?allowed_countries: Array[String],
+        ?allowed_origins: Array[String],
+        ?enable_strict_origin_enforcement: bool,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor allowed_countries: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor enable_strict_origin_enforcement: bool?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PlaybackRestrictionPolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?allowed_countries: Array[String],
+        ?allowed_origins: Array[String],
+        ?enable_strict_origin_enforcement: bool,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor allowed_countries: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor enable_strict_origin_enforcement: bool?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor metadata: String?
+    end
+
+    class RecordingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?thumbnail_configuration: Types::ThumbnailConfiguration,
+        ?recording_reconnect_window_seconds: Integer,
+        ?rendition_configuration: Types::RenditionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration?
+      attr_accessor recording_reconnect_window_seconds: Integer?
+      attr_accessor rendition_configuration: Types::RenditionConfiguration?
+    end
+
+    class RecordingConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RenditionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rendition_selection: String,
+        ?renditions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rendition_selection: String?
+      attr_accessor renditions: Array[String]?
+    end
+
+    module RenditionConfigurationRendition
+      SD: String
+      HD: String
+      FULL_HD: String
+      LOWEST_RESOLUTION: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class Srt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?passphrase: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor passphrase: String?
+    end
+
+    class StartViewerSessionRevocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?viewer_id: String,
+        ?viewer_session_versions_less_than_or_equal_to: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor viewer_id: String?
+      attr_accessor viewer_session_versions_less_than_or_equal_to: Integer?
+    end
+
+    class StartViewerSessionRevocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class StopStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Stream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?stream_id: String,
+        ?playback_url: String,
+        ?start_time: Time,
+        ?state: String,
+        ?health: String,
+        ?viewer_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor playback_url: String?
+      attr_accessor start_time: Time?
+      attr_accessor state: String?
+      attr_accessor health: String?
+      attr_accessor viewer_count: Integer?
+    end
+
+    class StreamEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?event_time: Time,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor event_time: Time?
+      attr_accessor code: String?
+    end
+
+    class StreamFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health: String?
+    end
+
+    class StreamKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?value: String,
+        ?channel_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor value: String?
+      attr_accessor channel_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StreamKeySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?channel_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor channel_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StreamSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?channel: Types::Channel,
+        ?ingest_configuration: Types::IngestConfiguration,
+        ?ingest_configurations: Types::IngestConfigurations,
+        ?recording_configuration: Types::RecordingConfiguration,
+        ?truncated_events: Array[Types::StreamEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor channel: Types::Channel?
+      attr_accessor ingest_configuration: Types::IngestConfiguration?
+      attr_accessor ingest_configurations: Types::IngestConfigurations?
+      attr_accessor recording_configuration: Types::RecordingConfiguration?
+      attr_accessor truncated_events: Array[Types::StreamEvent]?
+    end
+
+    class StreamSessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?has_error_event: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor has_error_event: bool?
+    end
+
+    class StreamSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?stream_id: String,
+        ?state: String,
+        ?health: String,
+        ?viewer_count: Integer,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor state: String?
+      attr_accessor health: String?
+      attr_accessor viewer_count: Integer?
+      attr_accessor start_time: Time?
+    end
+
+    class StreamUnavailable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class ThumbnailConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_mode: String,
+        ?target_interval_seconds: Integer,
+        ?resolution: String,
+        ?storage: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_mode: String?
+      attr_accessor target_interval_seconds: Integer?
+      attr_accessor resolution: String?
+      attr_accessor storage: Array[String]?
+    end
+
+    module ThumbnailConfigurationResolution
+      SD: String
+      HD: String
+      FULL_HD: String
+      LOWEST_RESOLUTION: String
+    end
+
+    module TranscodePreset
+      HigherBandwidthTranscodePreset: String
+      ConstrainedBandwidthTranscodePreset: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?latency_mode: String,
+        ?type: String,
+        ?authorized: bool,
+        ?recording_configuration_arn: String,
+        ?insecure_ingest: bool,
+        ?preset: String,
+        ?playback_restriction_policy_arn: String,
+        ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
+        ?container_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor latency_mode: String?
+      attr_accessor type: String?
+      attr_accessor authorized: bool?
+      attr_accessor recording_configuration_arn: String?
+      attr_accessor insecure_ingest: bool?
+      attr_accessor preset: String?
+      attr_accessor playback_restriction_policy_arn: String?
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
+      attr_accessor container_format: String?
+    end
+
+    class UpdateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Types::Channel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Types::Channel?
+    end
+
+    class UpdatePlaybackRestrictionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?allowed_countries: Array[String],
+        ?allowed_origins: Array[String],
+        ?enable_strict_origin_enforcement: bool,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor allowed_countries: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor enable_strict_origin_enforcement: bool?
+      attr_accessor name: String?
+    end
+
+    class UpdatePlaybackRestrictionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?playback_restriction_policy: Types::PlaybackRestrictionPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_message: String?
+    end
+
+    class VideoConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avc_profile: String,
+        ?avc_level: String,
+        ?codec: String,
+        ?encoder: String,
+        ?target_bitrate: Integer,
+        ?target_framerate: Integer,
+        ?video_height: Integer,
+        ?video_width: Integer,
+        ?level: String,
+        ?track: String,
+        ?profile: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avc_profile: String?
+      attr_accessor avc_level: String?
+      attr_accessor codec: String?
+      attr_accessor encoder: String?
+      attr_accessor target_bitrate: Integer?
+      attr_accessor target_framerate: Integer?
+      attr_accessor video_height: Integer?
+      attr_accessor video_width: Integer?
+      attr_accessor level: String?
+      attr_accessor track: String?
+      attr_accessor profile: String?
+    end
+  end
+end

@@ -1,0 +1,2944 @@
+module Aws::SSM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddTagsToResourceResult]
+    end
+    def add_tags_to_resource: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _AssociateOpsItemRelatedItemResponse
+      include Smithy::Client::_Response[Types::AssociateOpsItemRelatedItemResponse]
+      def association_id: () -> String?
+    end
+    def associate_ops_item_related_item: (
+      ?ops_item_id: String,
+      ?association_type: String,
+      ?resource_type: String,
+      ?resource_uri: String
+    ) -> _AssociateOpsItemRelatedItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateOpsItemRelatedItemResponse
+
+    interface _CancelCommandResponse
+      include Smithy::Client::_Response[Types::CancelCommandResult]
+    end
+    def cancel_command: (
+      ?command_id: String,
+      ?instance_ids: Array[String]
+    ) -> _CancelCommandResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelCommandResponse
+
+    interface _CancelMaintenanceWindowExecutionResponse
+      include Smithy::Client::_Response[Types::CancelMaintenanceWindowExecutionResult]
+      def window_execution_id: () -> String?
+    end
+    def cancel_maintenance_window_execution: (
+      ?window_execution_id: String
+    ) -> _CancelMaintenanceWindowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMaintenanceWindowExecutionResponse
+
+    interface _CreateActivationResponse
+      include Smithy::Client::_Response[Types::CreateActivationResult]
+      def activation_id: () -> String?
+      def activation_code: () -> String?
+    end
+    def create_activation: (
+      ?description: String,
+      ?default_instance_name: String,
+      ?iam_role: String,
+      ?registration_limit: Integer,
+      ?expiration_date: Time,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?registration_metadata: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateActivationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateActivationResponse
+
+    interface _CreateAssociationResponse
+      include Smithy::Client::_Response[Types::CreateAssociationResult]
+      def association_description: () -> Types::AssociationDescription?
+    end
+    def create_association: (
+      ?name: String,
+      ?document_version: String,
+      ?instance_id: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ],
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?schedule_expression: String,
+      ?output_location: {
+        s3_location: {
+          output_s3_region: String,
+          output_s3_bucket_name: String,
+          output_s3_key_prefix: String
+        }
+      },
+      ?association_name: String,
+      ?automation_target_parameter_name: String,
+      ?max_errors: String,
+      ?max_concurrency: String,
+      ?compliance_severity: String,
+      ?sync_compliance: String,
+      ?apply_only_at_cron_interval: bool,
+      ?calendar_names: Array[String],
+      ?target_locations: Array[
+        {
+          accounts: Array[String],
+          regions: Array[String],
+          target_location_max_concurrency: String,
+          target_location_max_errors: String,
+          execution_role_name: String,
+          target_location_alarm_configuration: {
+            ignore_poll_alarm_failure: bool,
+            alarms: Array[
+              {
+                name: String
+              }
+            ]
+          },
+          include_child_organization_units: untyped,
+          exclude_accounts: Array[String],
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          targets_max_concurrency: untyped,
+          targets_max_errors: untyped
+        }
+      ],
+      ?schedule_offset: Integer,
+      ?duration: Integer,
+      ?target_maps: Array[
+        Hash[String,
+          Array[String]
+        ]
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _CreateAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssociationResponse
+
+    interface _CreateAssociationBatchResponse
+      include Smithy::Client::_Response[Types::CreateAssociationBatchResult]
+      def successful: () -> Array[Types::AssociationDescription]?
+      def failed: () -> Array[Types::FailedCreateAssociation]?
+    end
+    def create_association_batch: (
+      ?entries: Array[
+        {
+          name: String,
+          instance_id: String,
+          parameters: Hash[String,
+            Array[String]
+          ],
+          automation_target_parameter_name: String,
+          document_version: String,
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          schedule_expression: String,
+          output_location: {
+            s3_location: {
+              output_s3_region: String,
+              output_s3_bucket_name: String,
+              output_s3_key_prefix: String
+            }
+          },
+          association_name: String,
+          max_errors: String,
+          max_concurrency: String,
+          compliance_severity: String,
+          sync_compliance: String,
+          apply_only_at_cron_interval: bool,
+          calendar_names: Array[String],
+          target_locations: Array[
+            {
+              accounts: Array[String],
+              regions: Array[String],
+              target_location_max_concurrency: untyped,
+              target_location_max_errors: untyped,
+              execution_role_name: String,
+              target_location_alarm_configuration: {
+                ignore_poll_alarm_failure: bool,
+                alarms: Array[
+                  {
+                    name: String
+                  }
+                ]
+              },
+              include_child_organization_units: untyped,
+              exclude_accounts: Array[String],
+              targets: untyped,
+              targets_max_concurrency: untyped,
+              targets_max_errors: untyped
+            }
+          ],
+          schedule_offset: Integer,
+          duration: Integer,
+          target_maps: Array[
+            Hash[String,
+              Array[String]
+            ]
+          ],
+          alarm_configuration: untyped
+        }
+      ]
+    ) -> _CreateAssociationBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssociationBatchResponse
+
+    interface _CreateDocumentResponse
+      include Smithy::Client::_Response[Types::CreateDocumentResult]
+      def document_description: () -> Types::DocumentDescription?
+    end
+    def create_document: (
+      ?content: String,
+      ?requires: Array[
+        {
+          name: String,
+          version: String,
+          require_type: String,
+          version_name: String
+        }
+      ],
+      ?attachments: Array[
+        {
+          key: String,
+          values: Array[String],
+          name: String
+        }
+      ],
+      ?name: String,
+      ?display_name: String,
+      ?version_name: String,
+      ?document_type: String,
+      ?document_format: String,
+      ?target_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDocumentResponse
+
+    interface _CreateMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::CreateMaintenanceWindowResult]
+      def window_id: () -> String?
+    end
+    def create_maintenance_window: (
+      ?name: String,
+      ?description: String,
+      ?start_date: String,
+      ?end_date: String,
+      ?schedule: String,
+      ?schedule_timezone: String,
+      ?schedule_offset: Integer,
+      ?duration: Integer,
+      ?cutoff: Integer,
+      ?allow_unassociated_targets: bool,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMaintenanceWindowResponse
+
+    interface _CreateOpsItemResponse
+      include Smithy::Client::_Response[Types::CreateOpsItemResponse]
+      def ops_item_id: () -> String?
+      def ops_item_arn: () -> String?
+    end
+    def create_ops_item: (
+      ?description: String,
+      ?ops_item_type: String,
+      ?operational_data: Hash[String,
+        {
+          value: String,
+          type: String
+        }
+      ],
+      ?notifications: Array[
+        {
+          arn: String
+        }
+      ],
+      ?priority: Integer,
+      ?related_ops_items: Array[
+        {
+          ops_item_id: String
+        }
+      ],
+      ?source: String,
+      ?title: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?category: String,
+      ?severity: String,
+      ?actual_start_time: Time,
+      ?actual_end_time: Time,
+      ?planned_start_time: Time,
+      ?planned_end_time: Time,
+      ?account_id: String
+    ) -> _CreateOpsItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOpsItemResponse
+
+    interface _CreateOpsMetadataResponse
+      include Smithy::Client::_Response[Types::CreateOpsMetadataResult]
+      def ops_metadata_arn: () -> String?
+    end
+    def create_ops_metadata: (
+      ?resource_id: String,
+      ?metadata: Hash[String,
+        {
+          value: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateOpsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOpsMetadataResponse
+
+    interface _CreatePatchBaselineResponse
+      include Smithy::Client::_Response[Types::CreatePatchBaselineResult]
+      def baseline_id: () -> String?
+    end
+    def create_patch_baseline: (
+      ?operating_system: String,
+      ?name: String,
+      ?global_filters: {
+        patch_filters: Array[
+          {
+            key: String,
+            values: Array[String]
+          }
+        ]
+      },
+      ?approval_rules: {
+        patch_rules: Array[
+          {
+            patch_filter_group: {
+              patch_filters: Array[
+                {
+                  key: String,
+                  values: Array[String]
+                }
+              ]
+            },
+            compliance_level: String,
+            approve_after_days: Integer,
+            approve_until_date: String,
+            enable_non_security: bool
+          }
+        ]
+      },
+      ?approved_patches: Array[String],
+      ?approved_patches_compliance_level: String,
+      ?approved_patches_enable_non_security: bool,
+      ?rejected_patches: Array[String],
+      ?rejected_patches_action: String,
+      ?description: String,
+      ?sources: Array[
+        {
+          name: String,
+          products: Array[String],
+          configuration: String
+        }
+      ],
+      ?available_security_updates_compliance_status: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePatchBaselineResponse
+
+    interface _CreateResourceDataSyncResponse
+      include Smithy::Client::_Response[Types::CreateResourceDataSyncResult]
+    end
+    def create_resource_data_sync: (
+      ?sync_name: String,
+      ?s3_destination: {
+        bucket_name: String,
+        prefix: String,
+        sync_format: String,
+        region: String,
+        awskms_key_arn: String,
+        destination_data_sharing: {
+          destination_data_sharing_type: String
+        }
+      },
+      ?sync_type: String,
+      ?sync_source: {
+        source_type: String,
+        aws_organizations_source: {
+          organization_source_type: String,
+          organizational_units: Array[
+            {
+              organizational_unit_id: String
+            }
+          ]
+        },
+        source_regions: Array[String],
+        include_future_regions: bool,
+        enable_all_ops_data_sources: bool
+      }
+    ) -> _CreateResourceDataSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceDataSyncResponse
+
+    interface _DeleteActivationResponse
+      include Smithy::Client::_Response[Types::DeleteActivationResult]
+    end
+    def delete_activation: (
+      ?activation_id: String
+    ) -> _DeleteActivationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteActivationResponse
+
+    interface _DeleteAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteAssociationResult]
+    end
+    def delete_association: (
+      ?name: String,
+      ?instance_id: String,
+      ?association_id: String
+    ) -> _DeleteAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssociationResponse
+
+    interface _DeleteDocumentResponse
+      include Smithy::Client::_Response[Types::DeleteDocumentResult]
+    end
+    def delete_document: (
+      ?name: String,
+      ?document_version: String,
+      ?version_name: String,
+      ?force: bool
+    ) -> _DeleteDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDocumentResponse
+
+    interface _DeleteInventoryResponse
+      include Smithy::Client::_Response[Types::DeleteInventoryResult]
+      def deletion_id: () -> String?
+      def type_name: () -> String?
+      def deletion_summary: () -> Types::InventoryDeletionSummary?
+    end
+    def delete_inventory: (
+      ?type_name: String,
+      ?schema_delete_option: String,
+      ?dry_run: bool,
+      ?client_token: String
+    ) -> _DeleteInventoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInventoryResponse
+
+    interface _DeleteMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::DeleteMaintenanceWindowResult]
+      def window_id: () -> String?
+    end
+    def delete_maintenance_window: (
+      ?window_id: String
+    ) -> _DeleteMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMaintenanceWindowResponse
+
+    interface _DeleteOpsItemResponse
+      include Smithy::Client::_Response[Types::DeleteOpsItemResponse]
+    end
+    def delete_ops_item: (
+      ?ops_item_id: String
+    ) -> _DeleteOpsItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOpsItemResponse
+
+    interface _DeleteOpsMetadataResponse
+      include Smithy::Client::_Response[Types::DeleteOpsMetadataResult]
+    end
+    def delete_ops_metadata: (
+      ?ops_metadata_arn: String
+    ) -> _DeleteOpsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOpsMetadataResponse
+
+    interface _DeleteParameterResponse
+      include Smithy::Client::_Response[Types::DeleteParameterResult]
+    end
+    def delete_parameter: (
+      ?name: String
+    ) -> _DeleteParameterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteParameterResponse
+
+    interface _DeleteParametersResponse
+      include Smithy::Client::_Response[Types::DeleteParametersResult]
+      def deleted_parameters: () -> Array[String]?
+      def invalid_parameters: () -> Array[String]?
+    end
+    def delete_parameters: (
+      ?names: Array[String]
+    ) -> _DeleteParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteParametersResponse
+
+    interface _DeletePatchBaselineResponse
+      include Smithy::Client::_Response[Types::DeletePatchBaselineResult]
+      def baseline_id: () -> String?
+    end
+    def delete_patch_baseline: (
+      ?baseline_id: String
+    ) -> _DeletePatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePatchBaselineResponse
+
+    interface _DeleteResourceDataSyncResponse
+      include Smithy::Client::_Response[Types::DeleteResourceDataSyncResult]
+    end
+    def delete_resource_data_sync: (
+      ?sync_name: String,
+      ?sync_type: String
+    ) -> _DeleteResourceDataSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceDataSyncResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?policy_id: String,
+      ?policy_hash: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeregisterManagedInstanceResponse
+      include Smithy::Client::_Response[Types::DeregisterManagedInstanceResult]
+    end
+    def deregister_managed_instance: (
+      ?instance_id: String
+    ) -> _DeregisterManagedInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterManagedInstanceResponse
+
+    interface _DeregisterPatchBaselineForPatchGroupResponse
+      include Smithy::Client::_Response[Types::DeregisterPatchBaselineForPatchGroupResult]
+      def baseline_id: () -> String?
+      def patch_group: () -> String?
+    end
+    def deregister_patch_baseline_for_patch_group: (
+      ?baseline_id: String,
+      ?patch_group: String
+    ) -> _DeregisterPatchBaselineForPatchGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterPatchBaselineForPatchGroupResponse
+
+    interface _DeregisterTargetFromMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::DeregisterTargetFromMaintenanceWindowResult]
+      def window_id: () -> String?
+      def window_target_id: () -> String?
+    end
+    def deregister_target_from_maintenance_window: (
+      ?window_id: String,
+      ?window_target_id: String,
+      ?safe: bool
+    ) -> _DeregisterTargetFromMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTargetFromMaintenanceWindowResponse
+
+    interface _DeregisterTaskFromMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::DeregisterTaskFromMaintenanceWindowResult]
+      def window_id: () -> String?
+      def window_task_id: () -> String?
+    end
+    def deregister_task_from_maintenance_window: (
+      ?window_id: String,
+      ?window_task_id: String
+    ) -> _DeregisterTaskFromMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTaskFromMaintenanceWindowResponse
+
+    interface _DescribeActivationsResponse
+      include Smithy::Client::_Response[Types::DescribeActivationsResult]
+      def activation_list: () -> Array[Types::Activation]?
+      def next_token: () -> String?
+    end
+    def describe_activations: (
+      ?filters: Array[
+        {
+          filter_key: String,
+          filter_values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeActivationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActivationsResponse
+
+    interface _DescribeAssociationResponse
+      include Smithy::Client::_Response[Types::DescribeAssociationResult]
+      def association_description: () -> Types::AssociationDescription?
+    end
+    def describe_association: (
+      ?name: String,
+      ?instance_id: String,
+      ?association_id: String,
+      ?association_version: String
+    ) -> _DescribeAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssociationResponse
+
+    interface _DescribeAssociationExecutionTargetsResponse
+      include Smithy::Client::_Response[Types::DescribeAssociationExecutionTargetsResult]
+      def association_execution_targets: () -> Array[Types::AssociationExecutionTarget]?
+      def next_token: () -> String?
+    end
+    def describe_association_execution_targets: (
+      ?association_id: String,
+      ?execution_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAssociationExecutionTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssociationExecutionTargetsResponse
+
+    interface _DescribeAssociationExecutionsResponse
+      include Smithy::Client::_Response[Types::DescribeAssociationExecutionsResult]
+      def association_executions: () -> Array[Types::AssociationExecution]?
+      def next_token: () -> String?
+    end
+    def describe_association_executions: (
+      ?association_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String,
+          type: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAssociationExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssociationExecutionsResponse
+
+    interface _DescribeAutomationExecutionsResponse
+      include Smithy::Client::_Response[Types::DescribeAutomationExecutionsResult]
+      def automation_execution_metadata_list: () -> Array[Types::AutomationExecutionMetadata]?
+      def next_token: () -> String?
+    end
+    def describe_automation_executions: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAutomationExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutomationExecutionsResponse
+
+    interface _DescribeAutomationStepExecutionsResponse
+      include Smithy::Client::_Response[Types::DescribeAutomationStepExecutionsResult]
+      def step_executions: () -> Array[Types::StepExecution]?
+      def next_token: () -> String?
+    end
+    def describe_automation_step_executions: (
+      ?automation_execution_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?reverse_order: bool
+    ) -> _DescribeAutomationStepExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutomationStepExecutionsResponse
+
+    interface _DescribeAvailablePatchesResponse
+      include Smithy::Client::_Response[Types::DescribeAvailablePatchesResult]
+      def patches: () -> Array[Types::Patch]?
+      def next_token: () -> String?
+    end
+    def describe_available_patches: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAvailablePatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAvailablePatchesResponse
+
+    interface _DescribeDocumentResponse
+      include Smithy::Client::_Response[Types::DescribeDocumentResult]
+      def document: () -> Types::DocumentDescription?
+    end
+    def describe_document: (
+      ?name: String,
+      ?document_version: String,
+      ?version_name: String
+    ) -> _DescribeDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDocumentResponse
+
+    interface _DescribeDocumentPermissionResponse
+      include Smithy::Client::_Response[Types::DescribeDocumentPermissionResponse]
+      def account_ids: () -> Array[String]?
+      def account_sharing_info_list: () -> Array[Types::AccountSharingInfo]?
+      def next_token: () -> String?
+    end
+    def describe_document_permission: (
+      ?name: String,
+      ?permission_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDocumentPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDocumentPermissionResponse
+
+    interface _DescribeEffectiveInstanceAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeEffectiveInstanceAssociationsResult]
+      def associations: () -> Array[Types::InstanceAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_effective_instance_associations: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeEffectiveInstanceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEffectiveInstanceAssociationsResponse
+
+    interface _DescribeEffectivePatchesForPatchBaselineResponse
+      include Smithy::Client::_Response[Types::DescribeEffectivePatchesForPatchBaselineResult]
+      def effective_patches: () -> Array[Types::EffectivePatch]?
+      def next_token: () -> String?
+    end
+    def describe_effective_patches_for_patch_baseline: (
+      ?baseline_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeEffectivePatchesForPatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEffectivePatchesForPatchBaselineResponse
+
+    interface _DescribeInstanceAssociationsStatusResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceAssociationsStatusResult]
+      def instance_association_status_infos: () -> Array[Types::InstanceAssociationStatusInfo]?
+      def next_token: () -> String?
+    end
+    def describe_instance_associations_status: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeInstanceAssociationsStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceAssociationsStatusResponse
+
+    interface _DescribeInstanceInformationResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceInformationResult]
+      def instance_information_list: () -> Array[Types::InstanceInformation]?
+      def next_token: () -> String?
+    end
+    def describe_instance_information: (
+      ?instance_information_filter_list: Array[
+        {
+          key: String,
+          value_set: Array[String]
+        }
+      ],
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeInstanceInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceInformationResponse
+
+    interface _DescribeInstancePatchStatesResponse
+      include Smithy::Client::_Response[Types::DescribeInstancePatchStatesResult]
+      def instance_patch_states: () -> Array[Types::InstancePatchState]?
+      def next_token: () -> String?
+    end
+    def describe_instance_patch_states: (
+      ?instance_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeInstancePatchStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstancePatchStatesResponse
+
+    interface _DescribeInstancePatchStatesForPatchGroupResponse
+      include Smithy::Client::_Response[Types::DescribeInstancePatchStatesForPatchGroupResult]
+      def instance_patch_states: () -> Array[Types::InstancePatchState]?
+      def next_token: () -> String?
+    end
+    def describe_instance_patch_states_for_patch_group: (
+      ?patch_group: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeInstancePatchStatesForPatchGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstancePatchStatesForPatchGroupResponse
+
+    interface _DescribeInstancePatchesResponse
+      include Smithy::Client::_Response[Types::DescribeInstancePatchesResult]
+      def patches: () -> Array[Types::PatchComplianceData]?
+      def next_token: () -> String?
+    end
+    def describe_instance_patches: (
+      ?instance_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeInstancePatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstancePatchesResponse
+
+    interface _DescribeInstancePropertiesResponse
+      include Smithy::Client::_Response[Types::DescribeInstancePropertiesResult]
+      def instance_properties: () -> Array[Types::InstanceProperty]?
+      def next_token: () -> String?
+    end
+    def describe_instance_properties: (
+      ?instance_property_filter_list: Array[
+        {
+          key: String,
+          value_set: Array[String]
+        }
+      ],
+      ?filters_with_operator: Array[
+        {
+          key: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeInstancePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstancePropertiesResponse
+
+    interface _DescribeInventoryDeletionsResponse
+      include Smithy::Client::_Response[Types::DescribeInventoryDeletionsResult]
+      def inventory_deletions: () -> Array[Types::InventoryDeletionStatusItem]?
+      def next_token: () -> String?
+    end
+    def describe_inventory_deletions: (
+      ?deletion_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeInventoryDeletionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInventoryDeletionsResponse
+
+    interface _DescribeMaintenanceWindowExecutionTaskInvocationsResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult]
+      def window_execution_task_invocation_identities: () -> Array[Types::MaintenanceWindowExecutionTaskInvocationIdentity]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_execution_task_invocations: (
+      ?window_execution_id: String,
+      ?task_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowExecutionTaskInvocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowExecutionTaskInvocationsResponse
+
+    interface _DescribeMaintenanceWindowExecutionTasksResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowExecutionTasksResult]
+      def window_execution_task_identities: () -> Array[Types::MaintenanceWindowExecutionTaskIdentity]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_execution_tasks: (
+      ?window_execution_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowExecutionTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowExecutionTasksResponse
+
+    interface _DescribeMaintenanceWindowExecutionsResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowExecutionsResult]
+      def window_executions: () -> Array[Types::MaintenanceWindowExecution]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_executions: (
+      ?window_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowExecutionsResponse
+
+    interface _DescribeMaintenanceWindowScheduleResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowScheduleResult]
+      def scheduled_window_executions: () -> Array[Types::ScheduledWindowExecution]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_schedule: (
+      ?window_id: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?resource_type: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowScheduleResponse
+
+    interface _DescribeMaintenanceWindowTargetsResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowTargetsResult]
+      def targets: () -> Array[Types::MaintenanceWindowTarget]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_targets: (
+      ?window_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowTargetsResponse
+
+    interface _DescribeMaintenanceWindowTasksResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowTasksResult]
+      def tasks: () -> Array[Types::MaintenanceWindowTask]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_window_tasks: (
+      ?window_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowTasksResponse
+
+    interface _DescribeMaintenanceWindowsResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowsResult]
+      def window_identities: () -> Array[Types::MaintenanceWindowIdentity]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_windows: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowsResponse
+
+    interface _DescribeMaintenanceWindowsForTargetResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceWindowsForTargetResult]
+      def window_identities: () -> Array[Types::MaintenanceWindowIdentityForTarget]?
+      def next_token: () -> String?
+    end
+    def describe_maintenance_windows_for_target: (
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMaintenanceWindowsForTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceWindowsForTargetResponse
+
+    interface _DescribeOpsItemsResponse
+      include Smithy::Client::_Response[Types::DescribeOpsItemsResponse]
+      def next_token: () -> String?
+      def ops_item_summaries: () -> Array[Types::OpsItemSummary]?
+    end
+    def describe_ops_items: (
+      ?ops_item_filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeOpsItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOpsItemsResponse
+
+    interface _DescribeParametersResponse
+      include Smithy::Client::_Response[Types::DescribeParametersResult]
+      def parameters: () -> Array[Types::ParameterMetadata]?
+      def next_token: () -> String?
+    end
+    def describe_parameters: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?parameter_filters: Array[
+        {
+          key: String,
+          option: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?shared: bool
+    ) -> _DescribeParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeParametersResponse
+
+    interface _DescribePatchBaselinesResponse
+      include Smithy::Client::_Response[Types::DescribePatchBaselinesResult]
+      def baseline_identities: () -> Array[Types::PatchBaselineIdentity]?
+      def next_token: () -> String?
+    end
+    def describe_patch_baselines: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribePatchBaselinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePatchBaselinesResponse
+
+    interface _DescribePatchGroupStateResponse
+      include Smithy::Client::_Response[Types::DescribePatchGroupStateResult]
+      def instances: () -> Integer?
+      def instances_with_installed_patches: () -> Integer?
+      def instances_with_installed_other_patches: () -> Integer?
+      def instances_with_installed_pending_reboot_patches: () -> Integer?
+      def instances_with_installed_rejected_patches: () -> Integer?
+      def instances_with_missing_patches: () -> Integer?
+      def instances_with_failed_patches: () -> Integer?
+      def instances_with_not_applicable_patches: () -> Integer?
+      def instances_with_unreported_not_applicable_patches: () -> Integer?
+      def instances_with_critical_non_compliant_patches: () -> Integer?
+      def instances_with_security_non_compliant_patches: () -> Integer?
+      def instances_with_other_non_compliant_patches: () -> Integer?
+      def instances_with_available_security_updates: () -> Integer?
+    end
+    def describe_patch_group_state: (
+      ?patch_group: String
+    ) -> _DescribePatchGroupStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePatchGroupStateResponse
+
+    interface _DescribePatchGroupsResponse
+      include Smithy::Client::_Response[Types::DescribePatchGroupsResult]
+      def mappings: () -> Array[Types::PatchGroupPatchBaselineMapping]?
+      def next_token: () -> String?
+    end
+    def describe_patch_groups: (
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String
+    ) -> _DescribePatchGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePatchGroupsResponse
+
+    interface _DescribePatchPropertiesResponse
+      include Smithy::Client::_Response[Types::DescribePatchPropertiesResult]
+      def properties: () -> Array[Hash[String, String]]?
+      def next_token: () -> String?
+    end
+    def describe_patch_properties: (
+      ?operating_system: String,
+      ?property: String,
+      ?patch_set: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribePatchPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePatchPropertiesResponse
+
+    interface _DescribeSessionsResponse
+      include Smithy::Client::_Response[Types::DescribeSessionsResponse]
+      def sessions: () -> Array[Types::Session]?
+      def next_token: () -> String?
+    end
+    def describe_sessions: (
+      ?state: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _DescribeSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSessionsResponse
+
+    interface _DisassociateOpsItemRelatedItemResponse
+      include Smithy::Client::_Response[Types::DisassociateOpsItemRelatedItemResponse]
+    end
+    def disassociate_ops_item_related_item: (
+      ?ops_item_id: String,
+      ?association_id: String
+    ) -> _DisassociateOpsItemRelatedItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateOpsItemRelatedItemResponse
+
+    interface _GetAccessTokenResponse
+      include Smithy::Client::_Response[Types::GetAccessTokenResponse]
+      def credentials: () -> Types::Credentials?
+      def access_request_status: () -> String?
+    end
+    def get_access_token: (
+      ?access_request_id: String
+    ) -> _GetAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessTokenResponse
+
+    interface _GetAutomationExecutionResponse
+      include Smithy::Client::_Response[Types::GetAutomationExecutionResult]
+      def automation_execution: () -> Types::AutomationExecution?
+    end
+    def get_automation_execution: (
+      ?automation_execution_id: String
+    ) -> _GetAutomationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomationExecutionResponse
+
+    interface _GetCalendarStateResponse
+      include Smithy::Client::_Response[Types::GetCalendarStateResponse]
+      def state: () -> String?
+      def at_time: () -> String?
+      def next_transition_time: () -> String?
+    end
+    def get_calendar_state: (
+      ?calendar_names: Array[String],
+      ?at_time: String
+    ) -> _GetCalendarStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalendarStateResponse
+
+    interface _GetCommandInvocationResponse
+      include Smithy::Client::_Response[Types::GetCommandInvocationResult]
+      def command_id: () -> String?
+      def instance_id: () -> String?
+      def comment: () -> String?
+      def document_name: () -> String?
+      def document_version: () -> String?
+      def plugin_name: () -> String?
+      def response_code: () -> Integer?
+      def execution_start_date_time: () -> String?
+      def execution_elapsed_time: () -> String?
+      def execution_end_date_time: () -> String?
+      def status: () -> String?
+      def status_details: () -> String?
+      def standard_output_content: () -> String?
+      def standard_output_url: () -> String?
+      def standard_error_content: () -> String?
+      def standard_error_url: () -> String?
+      def cloud_watch_output_config: () -> Types::CloudWatchOutputConfig?
+    end
+    def get_command_invocation: (
+      ?command_id: String,
+      ?instance_id: String,
+      ?plugin_name: String
+    ) -> _GetCommandInvocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommandInvocationResponse
+
+    interface _GetConnectionStatusResponse
+      include Smithy::Client::_Response[Types::GetConnectionStatusResponse]
+      def target: () -> String?
+      def status: () -> String?
+    end
+    def get_connection_status: (
+      ?target: String
+    ) -> _GetConnectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionStatusResponse
+
+    interface _GetDefaultPatchBaselineResponse
+      include Smithy::Client::_Response[Types::GetDefaultPatchBaselineResult]
+      def baseline_id: () -> String?
+      def operating_system: () -> String?
+    end
+    def get_default_patch_baseline: (
+      ?operating_system: String
+    ) -> _GetDefaultPatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultPatchBaselineResponse
+
+    interface _GetDeployablePatchSnapshotForInstanceResponse
+      include Smithy::Client::_Response[Types::GetDeployablePatchSnapshotForInstanceResult]
+      def instance_id: () -> String?
+      def snapshot_id: () -> String?
+      def snapshot_download_url: () -> String?
+      def product: () -> String?
+    end
+    def get_deployable_patch_snapshot_for_instance: (
+      ?instance_id: String,
+      ?snapshot_id: String,
+      ?baseline_override: {
+        operating_system: String,
+        global_filters: {
+          patch_filters: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ]
+        },
+        approval_rules: {
+          patch_rules: Array[
+            {
+              patch_filter_group: untyped,
+              compliance_level: String,
+              approve_after_days: Integer,
+              approve_until_date: String,
+              enable_non_security: bool
+            }
+          ]
+        },
+        approved_patches: Array[String],
+        approved_patches_compliance_level: untyped,
+        rejected_patches: untyped,
+        rejected_patches_action: String,
+        approved_patches_enable_non_security: untyped,
+        sources: Array[
+          {
+            name: String,
+            products: Array[String],
+            configuration: String
+          }
+        ],
+        available_security_updates_compliance_status: String
+      }
+    ) -> _GetDeployablePatchSnapshotForInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeployablePatchSnapshotForInstanceResponse
+
+    interface _GetDocumentResponse
+      include Smithy::Client::_Response[Types::GetDocumentResult]
+      def name: () -> String?
+      def created_date: () -> Time?
+      def display_name: () -> String?
+      def version_name: () -> String?
+      def document_version: () -> String?
+      def status: () -> String?
+      def status_information: () -> String?
+      def content: () -> String?
+      def document_type: () -> String?
+      def document_format: () -> String?
+      def requires: () -> Array[Types::DocumentRequires]?
+      def attachments_content: () -> Array[Types::AttachmentContent]?
+      def review_status: () -> String?
+    end
+    def get_document: (
+      ?name: String,
+      ?version_name: String,
+      ?document_version: String,
+      ?document_format: String
+    ) -> _GetDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDocumentResponse
+
+    interface _GetExecutionPreviewResponse
+      include Smithy::Client::_Response[Types::GetExecutionPreviewResponse]
+      def execution_preview_id: () -> String?
+      def ended_at: () -> Time?
+      def status: () -> String?
+      def status_message: () -> String?
+      def execution_preview: () -> Types::ExecutionPreview?
+    end
+    def get_execution_preview: (
+      ?execution_preview_id: String
+    ) -> _GetExecutionPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExecutionPreviewResponse
+
+    interface _GetInventoryResponse
+      include Smithy::Client::_Response[Types::GetInventoryResult]
+      def entities: () -> Array[Types::InventoryResultEntity]?
+      def next_token: () -> String?
+    end
+    def get_inventory: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?aggregators: Array[
+        {
+          expression: String,
+          aggregators: untyped,
+          groups: Array[
+            {
+              name: String,
+              filters: Array[
+                {
+                  key: String,
+                  values: Array[String],
+                  type: String
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      ?result_attributes: Array[
+        {
+          type_name: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetInventoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInventoryResponse
+
+    interface _GetInventorySchemaResponse
+      include Smithy::Client::_Response[Types::GetInventorySchemaResult]
+      def schemas: () -> Array[Types::InventoryItemSchema]?
+      def next_token: () -> String?
+    end
+    def get_inventory_schema: (
+      ?type_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?aggregator: bool,
+      ?sub_type: bool
+    ) -> _GetInventorySchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInventorySchemaResponse
+
+    interface _GetMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::GetMaintenanceWindowResult]
+      def window_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def start_date: () -> String?
+      def end_date: () -> String?
+      def schedule: () -> String?
+      def schedule_timezone: () -> String?
+      def schedule_offset: () -> Integer?
+      def next_execution_time: () -> String?
+      def duration: () -> Integer?
+      def cutoff: () -> Integer?
+      def allow_unassociated_targets: () -> bool?
+      def enabled: () -> bool?
+      def created_date: () -> Time?
+      def modified_date: () -> Time?
+    end
+    def get_maintenance_window: (
+      ?window_id: String
+    ) -> _GetMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaintenanceWindowResponse
+
+    interface _GetMaintenanceWindowExecutionResponse
+      include Smithy::Client::_Response[Types::GetMaintenanceWindowExecutionResult]
+      def window_execution_id: () -> String?
+      def task_ids: () -> Array[String]?
+      def status: () -> String?
+      def status_details: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def get_maintenance_window_execution: (
+      ?window_execution_id: String
+    ) -> _GetMaintenanceWindowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaintenanceWindowExecutionResponse
+
+    interface _GetMaintenanceWindowExecutionTaskResponse
+      include Smithy::Client::_Response[Types::GetMaintenanceWindowExecutionTaskResult]
+      def window_execution_id: () -> String?
+      def task_execution_id: () -> String?
+      def task_arn: () -> String?
+      def service_role: () -> String?
+      def type: () -> String?
+      def task_parameters: () -> Array[Hash[String, Types::MaintenanceWindowTaskParameterValueExpression]]?
+      def priority: () -> Integer?
+      def max_concurrency: () -> String?
+      def max_errors: () -> String?
+      def status: () -> String?
+      def status_details: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def alarm_configuration: () -> Types::AlarmConfiguration?
+      def triggered_alarms: () -> Array[Types::AlarmStateInformation]?
+    end
+    def get_maintenance_window_execution_task: (
+      ?window_execution_id: String,
+      ?task_id: String
+    ) -> _GetMaintenanceWindowExecutionTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaintenanceWindowExecutionTaskResponse
+
+    interface _GetMaintenanceWindowExecutionTaskInvocationResponse
+      include Smithy::Client::_Response[Types::GetMaintenanceWindowExecutionTaskInvocationResult]
+      def window_execution_id: () -> String?
+      def task_execution_id: () -> String?
+      def invocation_id: () -> String?
+      def execution_id: () -> String?
+      def task_type: () -> String?
+      def parameters: () -> String?
+      def status: () -> String?
+      def status_details: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def owner_information: () -> String?
+      def window_target_id: () -> String?
+    end
+    def get_maintenance_window_execution_task_invocation: (
+      ?window_execution_id: String,
+      ?task_id: String,
+      ?invocation_id: String
+    ) -> _GetMaintenanceWindowExecutionTaskInvocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaintenanceWindowExecutionTaskInvocationResponse
+
+    interface _GetMaintenanceWindowTaskResponse
+      include Smithy::Client::_Response[Types::GetMaintenanceWindowTaskResult]
+      def window_id: () -> String?
+      def window_task_id: () -> String?
+      def targets: () -> Array[Types::Target]?
+      def task_arn: () -> String?
+      def service_role_arn: () -> String?
+      def task_type: () -> String?
+      def task_parameters: () -> Hash[String, Types::MaintenanceWindowTaskParameterValueExpression]?
+      def task_invocation_parameters: () -> Types::MaintenanceWindowTaskInvocationParameters?
+      def priority: () -> Integer?
+      def max_concurrency: () -> String?
+      def max_errors: () -> String?
+      def logging_info: () -> Types::LoggingInfo?
+      def name: () -> String?
+      def description: () -> String?
+      def cutoff_behavior: () -> String?
+      def alarm_configuration: () -> Types::AlarmConfiguration?
+    end
+    def get_maintenance_window_task: (
+      ?window_id: String,
+      ?window_task_id: String
+    ) -> _GetMaintenanceWindowTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaintenanceWindowTaskResponse
+
+    interface _GetOpsItemResponse
+      include Smithy::Client::_Response[Types::GetOpsItemResponse]
+      def ops_item: () -> Types::OpsItem?
+    end
+    def get_ops_item: (
+      ?ops_item_id: String,
+      ?ops_item_arn: String
+    ) -> _GetOpsItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpsItemResponse
+
+    interface _GetOpsMetadataResponse
+      include Smithy::Client::_Response[Types::GetOpsMetadataResult]
+      def resource_id: () -> String?
+      def metadata: () -> Hash[String, Types::MetadataValue]?
+      def next_token: () -> String?
+    end
+    def get_ops_metadata: (
+      ?ops_metadata_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetOpsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpsMetadataResponse
+
+    interface _GetOpsSummaryResponse
+      include Smithy::Client::_Response[Types::GetOpsSummaryResult]
+      def entities: () -> Array[Types::OpsEntity]?
+      def next_token: () -> String?
+    end
+    def get_ops_summary: (
+      ?sync_name: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?aggregators: Array[
+        {
+          aggregator_type: String,
+          type_name: String,
+          attribute_name: String,
+          values: Hash[String, String],
+          filters: Array[
+            {
+              key: String,
+              values: Array[String],
+              type: String
+            }
+          ],
+          aggregators: untyped
+        }
+      ],
+      ?result_attributes: Array[
+        {
+          type_name: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetOpsSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpsSummaryResponse
+
+    interface _GetParameterResponse
+      include Smithy::Client::_Response[Types::GetParameterResult]
+      def parameter: () -> Types::Parameter?
+    end
+    def get_parameter: (
+      ?name: String,
+      ?with_decryption: bool
+    ) -> _GetParameterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParameterResponse
+
+    interface _GetParameterHistoryResponse
+      include Smithy::Client::_Response[Types::GetParameterHistoryResult]
+      def parameters: () -> Array[Types::ParameterHistory]?
+      def next_token: () -> String?
+    end
+    def get_parameter_history: (
+      ?name: String,
+      ?with_decryption: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetParameterHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParameterHistoryResponse
+
+    interface _GetParametersResponse
+      include Smithy::Client::_Response[Types::GetParametersResult]
+      def parameters: () -> Array[Types::Parameter]?
+      def invalid_parameters: () -> Array[String]?
+    end
+    def get_parameters: (
+      ?names: Array[String],
+      ?with_decryption: bool
+    ) -> _GetParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersResponse
+
+    interface _GetParametersByPathResponse
+      include Smithy::Client::_Response[Types::GetParametersByPathResult]
+      def parameters: () -> Array[Types::Parameter]?
+      def next_token: () -> String?
+    end
+    def get_parameters_by_path: (
+      ?path: String,
+      ?recursive: bool,
+      ?parameter_filters: Array[
+        {
+          key: String,
+          option: String,
+          values: Array[String]
+        }
+      ],
+      ?with_decryption: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetParametersByPathResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersByPathResponse
+
+    interface _GetPatchBaselineResponse
+      include Smithy::Client::_Response[Types::GetPatchBaselineResult]
+      def baseline_id: () -> String?
+      def name: () -> String?
+      def operating_system: () -> String?
+      def global_filters: () -> Types::PatchFilterGroup?
+      def approval_rules: () -> Types::PatchRuleGroup?
+      def approved_patches: () -> Array[String]?
+      def approved_patches_compliance_level: () -> String?
+      def approved_patches_enable_non_security: () -> bool?
+      def rejected_patches: () -> Array[String]?
+      def rejected_patches_action: () -> String?
+      def patch_groups: () -> Array[String]?
+      def created_date: () -> Time?
+      def modified_date: () -> Time?
+      def description: () -> String?
+      def sources: () -> Array[Types::PatchSource]?
+      def available_security_updates_compliance_status: () -> String?
+    end
+    def get_patch_baseline: (
+      ?baseline_id: String
+    ) -> _GetPatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPatchBaselineResponse
+
+    interface _GetPatchBaselineForPatchGroupResponse
+      include Smithy::Client::_Response[Types::GetPatchBaselineForPatchGroupResult]
+      def baseline_id: () -> String?
+      def patch_group: () -> String?
+      def operating_system: () -> String?
+    end
+    def get_patch_baseline_for_patch_group: (
+      ?patch_group: String,
+      ?operating_system: String
+    ) -> _GetPatchBaselineForPatchGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPatchBaselineForPatchGroupResponse
+
+    interface _GetResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::GetResourcePoliciesResponse]
+      def next_token: () -> String?
+      def policies: () -> Array[Types::GetResourcePoliciesResponseEntry]?
+    end
+    def get_resource_policies: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePoliciesResponse
+
+    interface _GetServiceSettingResponse
+      include Smithy::Client::_Response[Types::GetServiceSettingResult]
+      def service_setting: () -> Types::ServiceSetting?
+    end
+    def get_service_setting: (
+      ?setting_id: String
+    ) -> _GetServiceSettingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSettingResponse
+
+    interface _LabelParameterVersionResponse
+      include Smithy::Client::_Response[Types::LabelParameterVersionResult]
+      def invalid_labels: () -> Array[String]?
+      def parameter_version: () -> Integer?
+    end
+    def label_parameter_version: (
+      ?name: String,
+      ?parameter_version: Integer,
+      ?labels: Array[String]
+    ) -> _LabelParameterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LabelParameterVersionResponse
+
+    interface _ListAssociationVersionsResponse
+      include Smithy::Client::_Response[Types::ListAssociationVersionsResult]
+      def association_versions: () -> Array[Types::AssociationVersionInfo]?
+      def next_token: () -> String?
+    end
+    def list_association_versions: (
+      ?association_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociationVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationVersionsResponse
+
+    interface _ListAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAssociationsResult]
+      def associations: () -> Array[Types::Association]?
+      def next_token: () -> String?
+    end
+    def list_associations: (
+      ?association_filter_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationsResponse
+
+    interface _ListCommandInvocationsResponse
+      include Smithy::Client::_Response[Types::ListCommandInvocationsResult]
+      def command_invocations: () -> Array[Types::CommandInvocation]?
+      def next_token: () -> String?
+    end
+    def list_command_invocations: (
+      ?command_id: String,
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?details: bool
+    ) -> _ListCommandInvocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommandInvocationsResponse
+
+    interface _ListCommandsResponse
+      include Smithy::Client::_Response[Types::ListCommandsResult]
+      def commands: () -> Array[Types::Command]?
+      def next_token: () -> String?
+    end
+    def list_commands: (
+      ?command_id: String,
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ListCommandsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommandsResponse
+
+    interface _ListComplianceItemsResponse
+      include Smithy::Client::_Response[Types::ListComplianceItemsResult]
+      def compliance_items: () -> Array[Types::ComplianceItem]?
+      def next_token: () -> String?
+    end
+    def list_compliance_items: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?resource_ids: Array[String],
+      ?resource_types: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComplianceItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComplianceItemsResponse
+
+    interface _ListComplianceSummariesResponse
+      include Smithy::Client::_Response[Types::ListComplianceSummariesResult]
+      def compliance_summary_items: () -> Array[Types::ComplianceSummaryItem]?
+      def next_token: () -> String?
+    end
+    def list_compliance_summaries: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComplianceSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComplianceSummariesResponse
+
+    interface _ListDocumentMetadataHistoryResponse
+      include Smithy::Client::_Response[Types::ListDocumentMetadataHistoryResponse]
+      def name: () -> String?
+      def document_version: () -> String?
+      def author: () -> String?
+      def metadata: () -> Types::DocumentMetadataResponseInfo?
+      def next_token: () -> String?
+    end
+    def list_document_metadata_history: (
+      ?name: String,
+      ?document_version: String,
+      ?metadata: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDocumentMetadataHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentMetadataHistoryResponse
+
+    interface _ListDocumentVersionsResponse
+      include Smithy::Client::_Response[Types::ListDocumentVersionsResult]
+      def document_versions: () -> Array[Types::DocumentVersionInfo]?
+      def next_token: () -> String?
+    end
+    def list_document_versions: (
+      ?name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDocumentVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentVersionsResponse
+
+    interface _ListDocumentsResponse
+      include Smithy::Client::_Response[Types::ListDocumentsResult]
+      def document_identifiers: () -> Array[Types::DocumentIdentifier]?
+      def next_token: () -> String?
+    end
+    def list_documents: (
+      ?document_filter_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentsResponse
+
+    interface _ListInventoryEntriesResponse
+      include Smithy::Client::_Response[Types::ListInventoryEntriesResult]
+      def type_name: () -> String?
+      def instance_id: () -> String?
+      def schema_version: () -> String?
+      def capture_time: () -> String?
+      def entries: () -> Array[Hash[String, String]]?
+      def next_token: () -> String?
+    end
+    def list_inventory_entries: (
+      ?instance_id: String,
+      ?type_name: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInventoryEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInventoryEntriesResponse
+
+    interface _ListNodesResponse
+      include Smithy::Client::_Response[Types::ListNodesResult]
+      def nodes: () -> Array[Types::Node]?
+      def next_token: () -> String?
+    end
+    def list_nodes: (
+      ?sync_name: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesResponse
+
+    interface _ListNodesSummaryResponse
+      include Smithy::Client::_Response[Types::ListNodesSummaryResult]
+      def summary: () -> Array[Hash[String, String]]?
+      def next_token: () -> String?
+    end
+    def list_nodes_summary: (
+      ?sync_name: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?aggregators: Array[
+        {
+          aggregator_type: String,
+          type_name: String,
+          attribute_name: String,
+          aggregators: untyped
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNodesSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesSummaryResponse
+
+    interface _ListOpsItemEventsResponse
+      include Smithy::Client::_Response[Types::ListOpsItemEventsResponse]
+      def next_token: () -> String?
+      def summaries: () -> Array[Types::OpsItemEventSummary]?
+    end
+    def list_ops_item_events: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOpsItemEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpsItemEventsResponse
+
+    interface _ListOpsItemRelatedItemsResponse
+      include Smithy::Client::_Response[Types::ListOpsItemRelatedItemsResponse]
+      def next_token: () -> String?
+      def summaries: () -> Array[Types::OpsItemRelatedItemSummary]?
+    end
+    def list_ops_item_related_items: (
+      ?ops_item_id: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOpsItemRelatedItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpsItemRelatedItemsResponse
+
+    interface _ListOpsMetadataResponse
+      include Smithy::Client::_Response[Types::ListOpsMetadataResult]
+      def ops_metadata_list: () -> Array[Types::OpsMetadata]?
+      def next_token: () -> String?
+    end
+    def list_ops_metadata: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOpsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpsMetadataResponse
+
+    interface _ListResourceComplianceSummariesResponse
+      include Smithy::Client::_Response[Types::ListResourceComplianceSummariesResult]
+      def resource_compliance_summary_items: () -> Array[Types::ResourceComplianceSummaryItem]?
+      def next_token: () -> String?
+    end
+    def list_resource_compliance_summaries: (
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          type: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceComplianceSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceComplianceSummariesResponse
+
+    interface _ListResourceDataSyncResponse
+      include Smithy::Client::_Response[Types::ListResourceDataSyncResult]
+      def resource_data_sync_items: () -> Array[Types::ResourceDataSyncItem]?
+      def next_token: () -> String?
+    end
+    def list_resource_data_sync: (
+      ?sync_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceDataSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceDataSyncResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_type: String,
+      ?resource_id: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyDocumentPermissionResponse
+      include Smithy::Client::_Response[Types::ModifyDocumentPermissionResponse]
+    end
+    def modify_document_permission: (
+      ?name: String,
+      ?permission_type: String,
+      ?account_ids_to_add: Array[String],
+      ?account_ids_to_remove: Array[String],
+      ?shared_document_version: String
+    ) -> _ModifyDocumentPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDocumentPermissionResponse
+
+    interface _PutComplianceItemsResponse
+      include Smithy::Client::_Response[Types::PutComplianceItemsResult]
+    end
+    def put_compliance_items: (
+      ?resource_id: String,
+      ?resource_type: String,
+      ?compliance_type: String,
+      ?execution_summary: {
+        execution_time: Time,
+        execution_id: String,
+        execution_type: String
+      },
+      ?items: Array[
+        {
+          id: String,
+          title: String,
+          severity: String,
+          status: String,
+          details: Hash[String, String]
+        }
+      ],
+      ?item_content_hash: String,
+      ?upload_type: String
+    ) -> _PutComplianceItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutComplianceItemsResponse
+
+    interface _PutInventoryResponse
+      include Smithy::Client::_Response[Types::PutInventoryResult]
+      def message: () -> String?
+    end
+    def put_inventory: (
+      ?instance_id: String,
+      ?items: Array[
+        {
+          type_name: String,
+          schema_version: String,
+          capture_time: String,
+          content_hash: String,
+          content: Array[
+            Hash[String, String]
+          ],
+          context: Hash[String, String]
+        }
+      ]
+    ) -> _PutInventoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInventoryResponse
+
+    interface _PutParameterResponse
+      include Smithy::Client::_Response[Types::PutParameterResult]
+      def version: () -> Integer?
+      def tier: () -> String?
+    end
+    def put_parameter: (
+      ?name: String,
+      ?description: String,
+      ?value: String,
+      ?type: String,
+      ?key_id: String,
+      ?overwrite: bool,
+      ?allowed_pattern: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?tier: String,
+      ?policies: String,
+      ?data_type: String
+    ) -> _PutParameterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutParameterResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy_id: () -> String?
+      def policy_hash: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?policy_id: String,
+      ?policy_hash: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterDefaultPatchBaselineResponse
+      include Smithy::Client::_Response[Types::RegisterDefaultPatchBaselineResult]
+      def baseline_id: () -> String?
+    end
+    def register_default_patch_baseline: (
+      ?baseline_id: String
+    ) -> _RegisterDefaultPatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDefaultPatchBaselineResponse
+
+    interface _RegisterPatchBaselineForPatchGroupResponse
+      include Smithy::Client::_Response[Types::RegisterPatchBaselineForPatchGroupResult]
+      def baseline_id: () -> String?
+      def patch_group: () -> String?
+    end
+    def register_patch_baseline_for_patch_group: (
+      ?baseline_id: String,
+      ?patch_group: String
+    ) -> _RegisterPatchBaselineForPatchGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterPatchBaselineForPatchGroupResponse
+
+    interface _RegisterTargetWithMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::RegisterTargetWithMaintenanceWindowResult]
+      def window_target_id: () -> String?
+    end
+    def register_target_with_maintenance_window: (
+      ?window_id: String,
+      ?resource_type: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?owner_information: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _RegisterTargetWithMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTargetWithMaintenanceWindowResponse
+
+    interface _RegisterTaskWithMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::RegisterTaskWithMaintenanceWindowResult]
+      def window_task_id: () -> String?
+    end
+    def register_task_with_maintenance_window: (
+      ?window_id: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?task_arn: String,
+      ?service_role_arn: String,
+      ?task_type: String,
+      ?task_parameters: Hash[String,
+        {
+          values: Array[String]
+        }
+      ],
+      ?task_invocation_parameters: {
+        run_command: {
+          comment: String,
+          cloud_watch_output_config: {
+            cloud_watch_log_group_name: String,
+            cloud_watch_output_enabled: bool
+          },
+          document_hash: String,
+          document_hash_type: String,
+          document_version: String,
+          notification_config: {
+            notification_arn: String,
+            notification_events: Array[String],
+            notification_type: String
+          },
+          output_s3_bucket_name: String,
+          output_s3_key_prefix: String,
+          parameters: Hash[String,
+            Array[String]
+          ],
+          service_role_arn: String,
+          timeout_seconds: Integer
+        },
+        automation: {
+          document_version: untyped,
+          parameters: Hash[String,
+            Array[String]
+          ]
+        },
+        step_functions: {
+          input: String,
+          name: String
+        },
+        lambda: {
+          client_context: String,
+          qualifier: String,
+          payload: String
+        }
+      },
+      ?priority: Integer,
+      ?max_concurrency: String,
+      ?max_errors: String,
+      ?logging_info: {
+        s3_bucket_name: String,
+        s3_key_prefix: String,
+        s3_region: String
+      },
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?cutoff_behavior: String,
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _RegisterTaskWithMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTaskWithMaintenanceWindowResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveTagsFromResourceResult]
+    end
+    def remove_tags_from_resource: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+
+    interface _ResetServiceSettingResponse
+      include Smithy::Client::_Response[Types::ResetServiceSettingResult]
+      def service_setting: () -> Types::ServiceSetting?
+    end
+    def reset_service_setting: (
+      ?setting_id: String
+    ) -> _ResetServiceSettingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetServiceSettingResponse
+
+    interface _ResumeSessionResponse
+      include Smithy::Client::_Response[Types::ResumeSessionResponse]
+      def session_id: () -> String?
+      def token_value: () -> String?
+      def stream_url: () -> String?
+    end
+    def resume_session: (
+      ?session_id: String
+    ) -> _ResumeSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeSessionResponse
+
+    interface _SendAutomationSignalResponse
+      include Smithy::Client::_Response[Types::SendAutomationSignalResult]
+    end
+    def send_automation_signal: (
+      ?automation_execution_id: String,
+      ?signal_type: String,
+      ?payload: Hash[String,
+        Array[String]
+      ]
+    ) -> _SendAutomationSignalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendAutomationSignalResponse
+
+    interface _SendCommandResponse
+      include Smithy::Client::_Response[Types::SendCommandResult]
+      def command: () -> Types::Command?
+    end
+    def send_command: (
+      ?instance_ids: Array[String],
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?document_name: String,
+      ?document_version: String,
+      ?document_hash: String,
+      ?document_hash_type: String,
+      ?timeout_seconds: Integer,
+      ?comment: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ],
+      ?output_s3_region: String,
+      ?output_s3_bucket_name: String,
+      ?output_s3_key_prefix: String,
+      ?max_concurrency: String,
+      ?max_errors: String,
+      ?service_role_arn: String,
+      ?notification_config: {
+        notification_arn: String,
+        notification_events: Array[String],
+        notification_type: String
+      },
+      ?cloud_watch_output_config: {
+        cloud_watch_log_group_name: String,
+        cloud_watch_output_enabled: bool
+      },
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _SendCommandResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendCommandResponse
+
+    interface _StartAccessRequestResponse
+      include Smithy::Client::_Response[Types::StartAccessRequestResponse]
+      def access_request_id: () -> String?
+    end
+    def start_access_request: (
+      ?reason: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartAccessRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAccessRequestResponse
+
+    interface _StartAssociationsOnceResponse
+      include Smithy::Client::_Response[Types::StartAssociationsOnceResult]
+    end
+    def start_associations_once: (
+      ?association_ids: Array[String]
+    ) -> _StartAssociationsOnceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAssociationsOnceResponse
+
+    interface _StartAutomationExecutionResponse
+      include Smithy::Client::_Response[Types::StartAutomationExecutionResult]
+      def automation_execution_id: () -> String?
+    end
+    def start_automation_execution: (
+      ?document_name: String,
+      ?document_version: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ],
+      ?client_token: String,
+      ?mode: String,
+      ?target_parameter_name: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?target_maps: Array[
+        Hash[String,
+          Array[String]
+        ]
+      ],
+      ?max_concurrency: String,
+      ?max_errors: String,
+      ?target_locations: Array[
+        {
+          accounts: Array[String],
+          regions: Array[String],
+          target_location_max_concurrency: String,
+          target_location_max_errors: String,
+          execution_role_name: String,
+          target_location_alarm_configuration: {
+            ignore_poll_alarm_failure: bool,
+            alarms: Array[
+              {
+                name: String
+              }
+            ]
+          },
+          include_child_organization_units: untyped,
+          exclude_accounts: Array[String],
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          targets_max_concurrency: untyped,
+          targets_max_errors: untyped
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      },
+      ?target_locations_url: String
+    ) -> _StartAutomationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutomationExecutionResponse
+
+    interface _StartChangeRequestExecutionResponse
+      include Smithy::Client::_Response[Types::StartChangeRequestExecutionResult]
+      def automation_execution_id: () -> String?
+    end
+    def start_change_request_execution: (
+      ?scheduled_time: Time,
+      ?document_name: String,
+      ?document_version: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ],
+      ?change_request_name: String,
+      ?client_token: String,
+      ?auto_approve: bool,
+      ?runbooks: Array[
+        {
+          document_name: String,
+          document_version: String,
+          parameters: Hash[String,
+            Array[String]
+          ],
+          target_parameter_name: String,
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          target_maps: Array[
+            Hash[String,
+              Array[String]
+            ]
+          ],
+          max_concurrency: String,
+          max_errors: String,
+          target_locations: Array[
+            {
+              accounts: Array[String],
+              regions: Array[String],
+              target_location_max_concurrency: untyped,
+              target_location_max_errors: untyped,
+              execution_role_name: String,
+              target_location_alarm_configuration: {
+                ignore_poll_alarm_failure: bool,
+                alarms: Array[
+                  {
+                    name: String
+                  }
+                ]
+              },
+              include_child_organization_units: untyped,
+              exclude_accounts: Array[String],
+              targets: untyped,
+              targets_max_concurrency: untyped,
+              targets_max_errors: untyped
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?scheduled_end_time: Time,
+      ?change_details: String
+    ) -> _StartChangeRequestExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartChangeRequestExecutionResponse
+
+    interface _StartExecutionPreviewResponse
+      include Smithy::Client::_Response[Types::StartExecutionPreviewResponse]
+      def execution_preview_id: () -> String?
+    end
+    def start_execution_preview: (
+      ?document_name: String,
+      ?document_version: String,
+      ?execution_inputs: {
+        automation: {
+          parameters: Hash[String,
+            Array[String]
+          ],
+          target_parameter_name: String,
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          target_maps: Array[
+            Hash[String,
+              Array[String]
+            ]
+          ],
+          target_locations: Array[
+            {
+              accounts: Array[String],
+              regions: Array[String],
+              target_location_max_concurrency: String,
+              target_location_max_errors: String,
+              execution_role_name: String,
+              target_location_alarm_configuration: {
+                ignore_poll_alarm_failure: bool,
+                alarms: Array[
+                  {
+                    name: String
+                  }
+                ]
+              },
+              include_child_organization_units: untyped,
+              exclude_accounts: Array[String],
+              targets: untyped,
+              targets_max_concurrency: untyped,
+              targets_max_errors: untyped
+            }
+          ],
+          target_locations_url: String
+        }
+      }
+    ) -> _StartExecutionPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExecutionPreviewResponse
+
+    interface _StartSessionResponse
+      include Smithy::Client::_Response[Types::StartSessionResponse]
+      def session_id: () -> String?
+      def token_value: () -> String?
+      def stream_url: () -> String?
+    end
+    def start_session: (
+      ?target: String,
+      ?document_name: String,
+      ?reason: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ]
+    ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
+
+    interface _StopAutomationExecutionResponse
+      include Smithy::Client::_Response[Types::StopAutomationExecutionResult]
+    end
+    def stop_automation_execution: (
+      ?automation_execution_id: String,
+      ?type: String
+    ) -> _StopAutomationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAutomationExecutionResponse
+
+    interface _TerminateSessionResponse
+      include Smithy::Client::_Response[Types::TerminateSessionResponse]
+      def session_id: () -> String?
+    end
+    def terminate_session: (
+      ?session_id: String
+    ) -> _TerminateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateSessionResponse
+
+    interface _UnlabelParameterVersionResponse
+      include Smithy::Client::_Response[Types::UnlabelParameterVersionResult]
+      def removed_labels: () -> Array[String]?
+      def invalid_labels: () -> Array[String]?
+    end
+    def unlabel_parameter_version: (
+      ?name: String,
+      ?parameter_version: Integer,
+      ?labels: Array[String]
+    ) -> _UnlabelParameterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnlabelParameterVersionResponse
+
+    interface _UpdateAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateAssociationResult]
+      def association_description: () -> Types::AssociationDescription?
+    end
+    def update_association: (
+      ?association_id: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ],
+      ?document_version: String,
+      ?schedule_expression: String,
+      ?output_location: {
+        s3_location: {
+          output_s3_region: String,
+          output_s3_bucket_name: String,
+          output_s3_key_prefix: String
+        }
+      },
+      ?name: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?association_name: String,
+      ?association_version: String,
+      ?automation_target_parameter_name: String,
+      ?max_errors: String,
+      ?max_concurrency: String,
+      ?compliance_severity: String,
+      ?sync_compliance: String,
+      ?apply_only_at_cron_interval: bool,
+      ?calendar_names: Array[String],
+      ?target_locations: Array[
+        {
+          accounts: Array[String],
+          regions: Array[String],
+          target_location_max_concurrency: String,
+          target_location_max_errors: String,
+          execution_role_name: String,
+          target_location_alarm_configuration: {
+            ignore_poll_alarm_failure: bool,
+            alarms: Array[
+              {
+                name: String
+              }
+            ]
+          },
+          include_child_organization_units: untyped,
+          exclude_accounts: Array[String],
+          targets: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          targets_max_concurrency: untyped,
+          targets_max_errors: untyped
+        }
+      ],
+      ?schedule_offset: Integer,
+      ?duration: Integer,
+      ?target_maps: Array[
+        Hash[String,
+          Array[String]
+        ]
+      ],
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _UpdateAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssociationResponse
+
+    interface _UpdateAssociationStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAssociationStatusResult]
+      def association_description: () -> Types::AssociationDescription?
+    end
+    def update_association_status: (
+      ?name: String,
+      ?instance_id: String,
+      ?association_status: {
+        date: Time,
+        name: String,
+        message: String,
+        additional_info: String
+      }
+    ) -> _UpdateAssociationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssociationStatusResponse
+
+    interface _UpdateDocumentResponse
+      include Smithy::Client::_Response[Types::UpdateDocumentResult]
+      def document_description: () -> Types::DocumentDescription?
+    end
+    def update_document: (
+      ?content: String,
+      ?attachments: Array[
+        {
+          key: String,
+          values: Array[String],
+          name: String
+        }
+      ],
+      ?name: String,
+      ?display_name: String,
+      ?version_name: String,
+      ?document_version: String,
+      ?document_format: String,
+      ?target_type: String
+    ) -> _UpdateDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDocumentResponse
+
+    interface _UpdateDocumentDefaultVersionResponse
+      include Smithy::Client::_Response[Types::UpdateDocumentDefaultVersionResult]
+      def description: () -> Types::DocumentDefaultVersionDescription?
+    end
+    def update_document_default_version: (
+      ?name: String,
+      ?document_version: String
+    ) -> _UpdateDocumentDefaultVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDocumentDefaultVersionResponse
+
+    interface _UpdateDocumentMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateDocumentMetadataResponse]
+    end
+    def update_document_metadata: (
+      ?name: String,
+      ?document_version: String,
+      ?document_reviews: {
+        action: String,
+        comment: Array[
+          {
+            type: String,
+            content: String
+          }
+        ]
+      }
+    ) -> _UpdateDocumentMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDocumentMetadataResponse
+
+    interface _UpdateMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::UpdateMaintenanceWindowResult]
+      def window_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def start_date: () -> String?
+      def end_date: () -> String?
+      def schedule: () -> String?
+      def schedule_timezone: () -> String?
+      def schedule_offset: () -> Integer?
+      def duration: () -> Integer?
+      def cutoff: () -> Integer?
+      def allow_unassociated_targets: () -> bool?
+      def enabled: () -> bool?
+    end
+    def update_maintenance_window: (
+      ?window_id: String,
+      ?name: String,
+      ?description: String,
+      ?start_date: String,
+      ?end_date: String,
+      ?schedule: String,
+      ?schedule_timezone: String,
+      ?schedule_offset: Integer,
+      ?duration: Integer,
+      ?cutoff: Integer,
+      ?allow_unassociated_targets: bool,
+      ?enabled: bool,
+      ?replace: bool
+    ) -> _UpdateMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMaintenanceWindowResponse
+
+    interface _UpdateMaintenanceWindowTargetResponse
+      include Smithy::Client::_Response[Types::UpdateMaintenanceWindowTargetResult]
+      def window_id: () -> String?
+      def window_target_id: () -> String?
+      def targets: () -> Array[Types::Target]?
+      def owner_information: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def update_maintenance_window_target: (
+      ?window_id: String,
+      ?window_target_id: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?owner_information: String,
+      ?name: String,
+      ?description: String,
+      ?replace: bool
+    ) -> _UpdateMaintenanceWindowTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMaintenanceWindowTargetResponse
+
+    interface _UpdateMaintenanceWindowTaskResponse
+      include Smithy::Client::_Response[Types::UpdateMaintenanceWindowTaskResult]
+      def window_id: () -> String?
+      def window_task_id: () -> String?
+      def targets: () -> Array[Types::Target]?
+      def task_arn: () -> String?
+      def service_role_arn: () -> String?
+      def task_parameters: () -> Hash[String, Types::MaintenanceWindowTaskParameterValueExpression]?
+      def task_invocation_parameters: () -> Types::MaintenanceWindowTaskInvocationParameters?
+      def priority: () -> Integer?
+      def max_concurrency: () -> String?
+      def max_errors: () -> String?
+      def logging_info: () -> Types::LoggingInfo?
+      def name: () -> String?
+      def description: () -> String?
+      def cutoff_behavior: () -> String?
+      def alarm_configuration: () -> Types::AlarmConfiguration?
+    end
+    def update_maintenance_window_task: (
+      ?window_id: String,
+      ?window_task_id: String,
+      ?targets: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?task_arn: String,
+      ?service_role_arn: String,
+      ?task_parameters: Hash[String,
+        {
+          values: Array[String]
+        }
+      ],
+      ?task_invocation_parameters: {
+        run_command: {
+          comment: String,
+          cloud_watch_output_config: {
+            cloud_watch_log_group_name: String,
+            cloud_watch_output_enabled: bool
+          },
+          document_hash: String,
+          document_hash_type: String,
+          document_version: String,
+          notification_config: {
+            notification_arn: String,
+            notification_events: Array[String],
+            notification_type: String
+          },
+          output_s3_bucket_name: String,
+          output_s3_key_prefix: String,
+          parameters: Hash[String,
+            Array[String]
+          ],
+          service_role_arn: String,
+          timeout_seconds: Integer
+        },
+        automation: {
+          document_version: untyped,
+          parameters: Hash[String,
+            Array[String]
+          ]
+        },
+        step_functions: {
+          input: String,
+          name: String
+        },
+        lambda: {
+          client_context: String,
+          qualifier: String,
+          payload: String
+        }
+      },
+      ?priority: Integer,
+      ?max_concurrency: String,
+      ?max_errors: String,
+      ?logging_info: {
+        s3_bucket_name: String,
+        s3_key_prefix: String,
+        s3_region: String
+      },
+      ?name: String,
+      ?description: String,
+      ?replace: bool,
+      ?cutoff_behavior: String,
+      ?alarm_configuration: {
+        ignore_poll_alarm_failure: bool,
+        alarms: Array[
+          {
+            name: String
+          }
+        ]
+      }
+    ) -> _UpdateMaintenanceWindowTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMaintenanceWindowTaskResponse
+
+    interface _UpdateManagedInstanceRoleResponse
+      include Smithy::Client::_Response[Types::UpdateManagedInstanceRoleResult]
+    end
+    def update_managed_instance_role: (
+      ?instance_id: String,
+      ?iam_role: String
+    ) -> _UpdateManagedInstanceRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedInstanceRoleResponse
+
+    interface _UpdateOpsItemResponse
+      include Smithy::Client::_Response[Types::UpdateOpsItemResponse]
+    end
+    def update_ops_item: (
+      ?description: String,
+      ?operational_data: Hash[String,
+        {
+          value: String,
+          type: String
+        }
+      ],
+      ?operational_data_to_delete: Array[String],
+      ?notifications: Array[
+        {
+          arn: String
+        }
+      ],
+      ?priority: Integer,
+      ?related_ops_items: Array[
+        {
+          ops_item_id: String
+        }
+      ],
+      ?status: String,
+      ?ops_item_id: String,
+      ?title: String,
+      ?category: String,
+      ?severity: String,
+      ?actual_start_time: Time,
+      ?actual_end_time: Time,
+      ?planned_start_time: Time,
+      ?planned_end_time: Time,
+      ?ops_item_arn: String
+    ) -> _UpdateOpsItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOpsItemResponse
+
+    interface _UpdateOpsMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateOpsMetadataResult]
+      def ops_metadata_arn: () -> String?
+    end
+    def update_ops_metadata: (
+      ?ops_metadata_arn: String,
+      ?metadata_to_update: Hash[String,
+        {
+          value: String
+        }
+      ],
+      ?keys_to_delete: Array[String]
+    ) -> _UpdateOpsMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOpsMetadataResponse
+
+    interface _UpdatePatchBaselineResponse
+      include Smithy::Client::_Response[Types::UpdatePatchBaselineResult]
+      def baseline_id: () -> String?
+      def name: () -> String?
+      def operating_system: () -> String?
+      def global_filters: () -> Types::PatchFilterGroup?
+      def approval_rules: () -> Types::PatchRuleGroup?
+      def approved_patches: () -> Array[String]?
+      def approved_patches_compliance_level: () -> String?
+      def approved_patches_enable_non_security: () -> bool?
+      def rejected_patches: () -> Array[String]?
+      def rejected_patches_action: () -> String?
+      def created_date: () -> Time?
+      def modified_date: () -> Time?
+      def description: () -> String?
+      def sources: () -> Array[Types::PatchSource]?
+      def available_security_updates_compliance_status: () -> String?
+    end
+    def update_patch_baseline: (
+      ?baseline_id: String,
+      ?name: String,
+      ?global_filters: {
+        patch_filters: Array[
+          {
+            key: String,
+            values: Array[String]
+          }
+        ]
+      },
+      ?approval_rules: {
+        patch_rules: Array[
+          {
+            patch_filter_group: {
+              patch_filters: Array[
+                {
+                  key: String,
+                  values: Array[String]
+                }
+              ]
+            },
+            compliance_level: String,
+            approve_after_days: Integer,
+            approve_until_date: String,
+            enable_non_security: bool
+          }
+        ]
+      },
+      ?approved_patches: Array[String],
+      ?approved_patches_compliance_level: String,
+      ?approved_patches_enable_non_security: bool,
+      ?rejected_patches: Array[String],
+      ?rejected_patches_action: String,
+      ?description: String,
+      ?sources: Array[
+        {
+          name: String,
+          products: Array[String],
+          configuration: String
+        }
+      ],
+      ?available_security_updates_compliance_status: String,
+      ?replace: bool
+    ) -> _UpdatePatchBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePatchBaselineResponse
+
+    interface _UpdateResourceDataSyncResponse
+      include Smithy::Client::_Response[Types::UpdateResourceDataSyncResult]
+    end
+    def update_resource_data_sync: (
+      ?sync_name: String,
+      ?sync_type: String,
+      ?sync_source: {
+        source_type: String,
+        aws_organizations_source: {
+          organization_source_type: String,
+          organizational_units: Array[
+            {
+              organizational_unit_id: String
+            }
+          ]
+        },
+        source_regions: Array[String],
+        include_future_regions: bool,
+        enable_all_ops_data_sources: bool
+      }
+    ) -> _UpdateResourceDataSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceDataSyncResponse
+
+    interface _UpdateServiceSettingResponse
+      include Smithy::Client::_Response[Types::UpdateServiceSettingResult]
+    end
+    def update_service_setting: (
+      ?setting_id: String,
+      ?setting_value: String
+    ) -> _UpdateServiceSettingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSettingResponse
+  end
+end

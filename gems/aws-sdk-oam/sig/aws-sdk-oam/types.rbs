@@ -1,0 +1,622 @@
+module Aws::OAM
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class CreateLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_template: String,
+        ?resource_types: Array[String],
+        ?sink_identifier: String,
+        ?tags: Hash[String, String],
+        ?link_configuration: Types::LinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_template: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor sink_identifier: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor link_configuration: Types::LinkConfiguration?
+    end
+
+    class CreateLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?label: String,
+        ?label_template: String,
+        ?resource_types: Array[String],
+        ?sink_arn: String,
+        ?tags: Hash[String, String],
+        ?link_configuration: Types::LinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor label: String?
+      attr_accessor label_template: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor sink_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor link_configuration: Types::LinkConfiguration?
+    end
+
+    class CreateSinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteSinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?include_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor include_tags: bool?
+    end
+
+    class GetLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?label: String,
+        ?label_template: String,
+        ?resource_types: Array[String],
+        ?sink_arn: String,
+        ?tags: Hash[String, String],
+        ?link_configuration: Types::LinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor label: String?
+      attr_accessor label_template: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor sink_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor link_configuration: Types::LinkConfiguration?
+    end
+
+    class GetSinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?include_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor include_tags: bool?
+    end
+
+    class GetSinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetSinkPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_identifier: String?
+    end
+
+    class GetSinkPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_arn: String,
+        ?sink_id: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_arn: String?
+      attr_accessor sink_id: String?
+      attr_accessor policy: String?
+    end
+
+    class InternalServiceFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class LinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_configuration: Types::LogGroupConfiguration,
+        ?metric_configuration: Types::MetricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_configuration: Types::LogGroupConfiguration?
+      attr_accessor metric_configuration: Types::MetricConfiguration?
+    end
+
+    class ListAttachedLinksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sink_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sink_identifier: String?
+    end
+
+    class ListAttachedLinksItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?link_arn: String,
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor link_arn: String?
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class ListAttachedLinksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ListAttachedLinksItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ListAttachedLinksItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLinksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLinksItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?label: String,
+        ?resource_types: Array[String],
+        ?sink_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor label: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor sink_arn: String?
+    end
+
+    class ListLinksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ListLinksItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ListLinksItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSinksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSinksItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class ListSinksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ListSinksItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ListSinksItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LogGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: String?
+    end
+
+    class MetricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: String?
+    end
+
+    class MissingRequiredParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class PutSinkPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_identifier: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_identifier: String?
+      attr_accessor policy: String?
+    end
+
+    class PutSinkPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_arn: String,
+        ?sink_id: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_arn: String?
+      attr_accessor sink_id: String?
+      attr_accessor policy: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    module ResourceType
+      AWS_CLOUDWATCH_METRIC: String
+      AWS_LOGS_LOGGROUP: String
+      AWS_XRAY_TRACE: String
+      AWS_APPLICATIONINSIGHTS_APPLICATION: String
+      AWS_INTERNETMONITOR_MONITOR: String
+      AWS_APPLICATION_SIGNALS_SERVICE: String
+      AWS_APPLICATION_SIGNALS_SLO: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLinkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?resource_types: Array[String],
+        ?link_configuration: Types::LinkConfiguration,
+        ?include_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor link_configuration: Types::LinkConfiguration?
+      attr_accessor include_tags: bool?
+    end
+
+    class UpdateLinkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?label: String,
+        ?label_template: String,
+        ?resource_types: Array[String],
+        ?sink_arn: String,
+        ?tags: Hash[String, String],
+        ?link_configuration: Types::LinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor label: String?
+      attr_accessor label_template: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor sink_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor link_configuration: Types::LinkConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

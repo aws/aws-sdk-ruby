@@ -1,0 +1,353 @@
+module Aws::Scheduler
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Scheduler::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateScheduleResponse
+      include Smithy::Client::_Response[Types::CreateScheduleOperationOutput]
+      def schedule_arn: () -> String?
+    end
+    def create_schedule: (
+      ?name: String,
+      ?group_name: String,
+      ?schedule_expression: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?description: String,
+      ?schedule_expression_timezone: String,
+      ?state: String,
+      ?kms_key_arn: String,
+      ?target: {
+        arn: String,
+        role_arn: String,
+        dead_letter_config: {
+          arn: String
+        },
+        retry_policy: {
+          maximum_event_age_in_seconds: Integer,
+          maximum_retry_attempts: Integer
+        },
+        input: String,
+        ecs_parameters: {
+          task_definition_arn: String,
+          task_count: Integer,
+          launch_type: String,
+          network_configuration: {
+            awsvpc_configuration: {
+              subnets: Array[String],
+              security_groups: Array[String],
+              assign_public_ip: String
+            }
+          },
+          platform_version: String,
+          group: String,
+          capacity_provider_strategy: Array[
+            {
+              capacity_provider: String,
+              weight: Integer,
+              base: Integer
+            }
+          ],
+          enable_ecs_managed_tags: bool,
+          enable_execute_command: bool,
+          placement_constraints: Array[
+            {
+              type: String,
+              expression: String
+            }
+          ],
+          placement_strategy: Array[
+            {
+              type: String,
+              field: String
+            }
+          ],
+          propagate_tags: String,
+          reference_id: String,
+          tags: Array[
+            Hash[String, String]
+          ]
+        },
+        event_bridge_parameters: {
+          detail_type: String,
+          source: String
+        },
+        kinesis_parameters: {
+          partition_key: String
+        },
+        sage_maker_pipeline_parameters: {
+          pipeline_parameter_list: Array[
+            {
+              name: String,
+              value: String
+            }
+          ]
+        },
+        sqs_parameters: {
+          message_group_id: String
+        }
+      },
+      ?flexible_time_window: {
+        mode: String,
+        maximum_window_in_minutes: Integer
+      },
+      ?client_token: String,
+      ?action_after_completion: String
+    ) -> _CreateScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduleResponse
+
+    interface _CreateScheduleGroupResponse
+      include Smithy::Client::_Response[Types::CreateScheduleGroupOperationOutput]
+      def schedule_group_arn: () -> String?
+    end
+    def create_schedule_group: (
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateScheduleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduleGroupResponse
+
+    interface _DeleteScheduleResponse
+      include Smithy::Client::_Response[Types::DeleteScheduleOperationOutput]
+    end
+    def delete_schedule: (
+      ?name: String,
+      ?group_name: String,
+      ?client_token: String
+    ) -> _DeleteScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduleResponse
+
+    interface _DeleteScheduleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteScheduleGroupOperationOutput]
+    end
+    def delete_schedule_group: (
+      ?name: String,
+      ?client_token: String
+    ) -> _DeleteScheduleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduleGroupResponse
+
+    interface _GetScheduleResponse
+      include Smithy::Client::_Response[Types::GetScheduleOperationOutput]
+      def arn: () -> String?
+      def group_name: () -> String?
+      def name: () -> String?
+      def schedule_expression: () -> String?
+      def start_date: () -> Time?
+      def end_date: () -> Time?
+      def description: () -> String?
+      def schedule_expression_timezone: () -> String?
+      def state: () -> String?
+      def creation_date: () -> Time?
+      def last_modification_date: () -> Time?
+      def kms_key_arn: () -> String?
+      def target: () -> Types::Target?
+      def flexible_time_window: () -> Types::FlexibleTimeWindow?
+      def action_after_completion: () -> String?
+    end
+    def get_schedule: (
+      ?name: String,
+      ?group_name: String
+    ) -> _GetScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduleResponse
+
+    interface _GetScheduleGroupResponse
+      include Smithy::Client::_Response[Types::GetScheduleGroupOperationOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def creation_date: () -> Time?
+      def last_modification_date: () -> Time?
+    end
+    def get_schedule_group: (
+      ?name: String
+    ) -> _GetScheduleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduleGroupResponse
+
+    interface _ListScheduleGroupsResponse
+      include Smithy::Client::_Response[Types::ListScheduleGroupsOperationOutput]
+      def next_token: () -> String?
+      def schedule_groups: () -> Array[Types::ScheduleGroupSummary]?
+    end
+    def list_schedule_groups: (
+      ?name_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListScheduleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduleGroupsResponse
+
+    interface _ListSchedulesResponse
+      include Smithy::Client::_Response[Types::ListSchedulesOperationOutput]
+      def next_token: () -> String?
+      def schedules: () -> Array[Types::ScheduleSummary]?
+    end
+    def list_schedules: (
+      ?group_name: String,
+      ?name_prefix: String,
+      ?state: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSchedulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchedulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateScheduleResponse
+      include Smithy::Client::_Response[Types::UpdateScheduleOperationOutput]
+      def schedule_arn: () -> String?
+    end
+    def update_schedule: (
+      ?name: String,
+      ?group_name: String,
+      ?schedule_expression: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?description: String,
+      ?schedule_expression_timezone: String,
+      ?state: String,
+      ?kms_key_arn: String,
+      ?target: {
+        arn: String,
+        role_arn: String,
+        dead_letter_config: {
+          arn: String
+        },
+        retry_policy: {
+          maximum_event_age_in_seconds: Integer,
+          maximum_retry_attempts: Integer
+        },
+        input: String,
+        ecs_parameters: {
+          task_definition_arn: String,
+          task_count: Integer,
+          launch_type: String,
+          network_configuration: {
+            awsvpc_configuration: {
+              subnets: Array[String],
+              security_groups: Array[String],
+              assign_public_ip: String
+            }
+          },
+          platform_version: String,
+          group: String,
+          capacity_provider_strategy: Array[
+            {
+              capacity_provider: String,
+              weight: Integer,
+              base: Integer
+            }
+          ],
+          enable_ecs_managed_tags: bool,
+          enable_execute_command: bool,
+          placement_constraints: Array[
+            {
+              type: String,
+              expression: String
+            }
+          ],
+          placement_strategy: Array[
+            {
+              type: String,
+              field: String
+            }
+          ],
+          propagate_tags: String,
+          reference_id: String,
+          tags: Array[
+            Hash[String, String]
+          ]
+        },
+        event_bridge_parameters: {
+          detail_type: String,
+          source: String
+        },
+        kinesis_parameters: {
+          partition_key: String
+        },
+        sage_maker_pipeline_parameters: {
+          pipeline_parameter_list: Array[
+            {
+              name: String,
+              value: String
+            }
+          ]
+        },
+        sqs_parameters: {
+          message_group_id: String
+        }
+      },
+      ?flexible_time_window: {
+        mode: String,
+        maximum_window_in_minutes: Integer
+      },
+      ?client_token: String,
+      ?action_after_completion: String
+    ) -> _UpdateScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduleResponse
+  end
+end

@@ -1,0 +1,1409 @@
+module Aws::Batch
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Batch::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelJobResponse
+      include Smithy::Client::_Response[Types::CancelJobResponse]
+    end
+    def cancel_job: (
+      ?job_id: String,
+      ?reason: String
+    ) -> _CancelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobResponse
+
+    interface _CreateComputeEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateComputeEnvironmentResponse]
+      def compute_environment_name: () -> String?
+      def compute_environment_arn: () -> String?
+    end
+    def create_compute_environment: (
+      ?compute_environment_name: String,
+      ?type: String,
+      ?state: String,
+      ?unmanagedv_cpus: Integer,
+      ?compute_resources: {
+        type: String,
+        allocation_strategy: String,
+        minv_cpus: Integer,
+        maxv_cpus: untyped,
+        desiredv_cpus: untyped,
+        instance_types: Array[String],
+        image_id: String,
+        subnets: untyped,
+        security_group_ids: untyped,
+        ec2_key_pair: untyped,
+        instance_role: untyped,
+        tags: Hash[String, String],
+        placement_group: untyped,
+        bid_percentage: untyped,
+        spot_iam_fleet_role: untyped,
+        launch_template: {
+          launch_template_id: untyped,
+          launch_template_name: untyped,
+          version: untyped,
+          overrides: Array[
+            {
+              launch_template_id: untyped,
+              launch_template_name: untyped,
+              version: untyped,
+              target_instance_types: untyped,
+              userdata_type: String
+            }
+          ],
+          userdata_type: untyped
+        },
+        ec2_configuration: Array[
+          {
+            image_type: String,
+            image_id_override: String,
+            image_kubernetes_version: String
+          }
+        ]
+      },
+      ?service_role: String,
+      ?tags: Hash[String, String],
+      ?eks_configuration: {
+        eks_cluster_arn: String,
+        kubernetes_namespace: untyped
+      },
+      ?context: String
+    ) -> _CreateComputeEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComputeEnvironmentResponse
+
+    interface _CreateConsumableResourceResponse
+      include Smithy::Client::_Response[Types::CreateConsumableResourceResponse]
+      def consumable_resource_name: () -> String?
+      def consumable_resource_arn: () -> String?
+    end
+    def create_consumable_resource: (
+      ?consumable_resource_name: String,
+      ?total_quantity: Integer,
+      ?resource_type: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConsumableResourceResponse
+
+    interface _CreateJobQueueResponse
+      include Smithy::Client::_Response[Types::CreateJobQueueResponse]
+      def job_queue_name: () -> String?
+      def job_queue_arn: () -> String?
+    end
+    def create_job_queue: (
+      ?job_queue_name: String,
+      ?state: String,
+      ?scheduling_policy_arn: String,
+      ?priority: Integer,
+      ?compute_environment_order: Array[
+        {
+          order: Integer,
+          compute_environment: String
+        }
+      ],
+      ?service_environment_order: Array[
+        {
+          order: Integer,
+          service_environment: String
+        }
+      ],
+      ?job_queue_type: String,
+      ?tags: Hash[String, String],
+      ?job_state_time_limit_actions: Array[
+        {
+          reason: String,
+          state: String,
+          max_time_seconds: Integer,
+          action: String
+        }
+      ]
+    ) -> _CreateJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobQueueResponse
+
+    interface _CreateSchedulingPolicyResponse
+      include Smithy::Client::_Response[Types::CreateSchedulingPolicyResponse]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_scheduling_policy: (
+      ?name: String,
+      ?fairshare_policy: {
+        share_decay_seconds: Integer,
+        compute_reservation: untyped,
+        share_distribution: Array[
+          {
+            share_identifier: String,
+            weight_factor: Float
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateSchedulingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSchedulingPolicyResponse
+
+    interface _CreateServiceEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateServiceEnvironmentResponse]
+      def service_environment_name: () -> String?
+      def service_environment_arn: () -> String?
+    end
+    def create_service_environment: (
+      ?service_environment_name: String,
+      ?service_environment_type: String,
+      ?state: String,
+      ?capacity_limits: Array[
+        {
+          max_capacity: Integer,
+          capacity_unit: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateServiceEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceEnvironmentResponse
+
+    interface _DeleteComputeEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteComputeEnvironmentResponse]
+    end
+    def delete_compute_environment: (
+      ?compute_environment: String
+    ) -> _DeleteComputeEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComputeEnvironmentResponse
+
+    interface _DeleteConsumableResourceResponse
+      include Smithy::Client::_Response[Types::DeleteConsumableResourceResponse]
+    end
+    def delete_consumable_resource: (
+      ?consumable_resource: String
+    ) -> _DeleteConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConsumableResourceResponse
+
+    interface _DeleteJobQueueResponse
+      include Smithy::Client::_Response[Types::DeleteJobQueueResponse]
+    end
+    def delete_job_queue: (
+      ?job_queue: String
+    ) -> _DeleteJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobQueueResponse
+
+    interface _DeleteSchedulingPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteSchedulingPolicyResponse]
+    end
+    def delete_scheduling_policy: (
+      ?arn: String
+    ) -> _DeleteSchedulingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchedulingPolicyResponse
+
+    interface _DeleteServiceEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteServiceEnvironmentResponse]
+    end
+    def delete_service_environment: (
+      ?service_environment: String
+    ) -> _DeleteServiceEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceEnvironmentResponse
+
+    interface _DeregisterJobDefinitionResponse
+      include Smithy::Client::_Response[Types::DeregisterJobDefinitionResponse]
+    end
+    def deregister_job_definition: (
+      ?job_definition: String
+    ) -> _DeregisterJobDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterJobDefinitionResponse
+
+    interface _DescribeComputeEnvironmentsResponse
+      include Smithy::Client::_Response[Types::DescribeComputeEnvironmentsResponse]
+      def compute_environments: () -> Array[Types::ComputeEnvironmentDetail]?
+      def next_token: () -> String?
+    end
+    def describe_compute_environments: (
+      ?compute_environments: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeComputeEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComputeEnvironmentsResponse
+
+    interface _DescribeConsumableResourceResponse
+      include Smithy::Client::_Response[Types::DescribeConsumableResourceResponse]
+      def consumable_resource_name: () -> String?
+      def consumable_resource_arn: () -> String?
+      def total_quantity: () -> Integer?
+      def in_use_quantity: () -> Integer?
+      def available_quantity: () -> Integer?
+      def resource_type: () -> String?
+      def created_at: () -> Integer?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_consumable_resource: (
+      ?consumable_resource: String
+    ) -> _DescribeConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConsumableResourceResponse
+
+    interface _DescribeJobDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeJobDefinitionsResponse]
+      def job_definitions: () -> Array[Types::JobDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_job_definitions: (
+      ?job_definitions: Array[String],
+      ?max_results: Integer,
+      ?job_definition_name: String,
+      ?status: String,
+      ?next_token: String
+    ) -> _DescribeJobDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobDefinitionsResponse
+
+    interface _DescribeJobQueuesResponse
+      include Smithy::Client::_Response[Types::DescribeJobQueuesResponse]
+      def job_queues: () -> Array[Types::JobQueueDetail]?
+      def next_token: () -> String?
+    end
+    def describe_job_queues: (
+      ?job_queues: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeJobQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobQueuesResponse
+
+    interface _DescribeJobsResponse
+      include Smithy::Client::_Response[Types::DescribeJobsResponse]
+      def jobs: () -> Array[Types::JobDetail]?
+    end
+    def describe_jobs: (
+      ?jobs: Array[String]
+    ) -> _DescribeJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobsResponse
+
+    interface _DescribeSchedulingPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeSchedulingPoliciesResponse]
+      def scheduling_policies: () -> Array[Types::SchedulingPolicyDetail]?
+    end
+    def describe_scheduling_policies: (
+      ?arns: Array[String]
+    ) -> _DescribeSchedulingPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSchedulingPoliciesResponse
+
+    interface _DescribeServiceEnvironmentsResponse
+      include Smithy::Client::_Response[Types::DescribeServiceEnvironmentsResponse]
+      def service_environments: () -> Array[Types::ServiceEnvironmentDetail]?
+      def next_token: () -> String?
+    end
+    def describe_service_environments: (
+      ?service_environments: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeServiceEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceEnvironmentsResponse
+
+    interface _DescribeServiceJobResponse
+      include Smithy::Client::_Response[Types::DescribeServiceJobResponse]
+      def attempts: () -> Array[Types::ServiceJobAttemptDetail]?
+      def created_at: () -> Integer?
+      def is_terminated: () -> bool?
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def job_name: () -> String?
+      def job_queue: () -> String?
+      def latest_attempt: () -> Types::LatestServiceJobAttempt?
+      def retry_strategy: () -> Types::ServiceJobRetryStrategy?
+      def scheduling_priority: () -> Integer?
+      def service_request_payload: () -> String?
+      def service_job_type: () -> String?
+      def share_identifier: () -> String?
+      def started_at: () -> Integer?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def stopped_at: () -> Integer?
+      def tags: () -> Hash[String, String]?
+      def timeout_config: () -> Types::ServiceJobTimeout?
+    end
+    def describe_service_job: (
+      ?job_id: String
+    ) -> _DescribeServiceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceJobResponse
+
+    interface _GetJobQueueSnapshotResponse
+      include Smithy::Client::_Response[Types::GetJobQueueSnapshotResponse]
+      def front_of_queue: () -> Types::FrontOfQueueDetail?
+    end
+    def get_job_queue_snapshot: (
+      ?job_queue: String
+    ) -> _GetJobQueueSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobQueueSnapshotResponse
+
+    interface _ListConsumableResourcesResponse
+      include Smithy::Client::_Response[Types::ListConsumableResourcesResponse]
+      def consumable_resources: () -> Array[Types::ConsumableResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_consumable_resources: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConsumableResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConsumableResourcesResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResponse]
+      def job_summary_list: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?job_queue: String,
+      ?array_job_id: String,
+      ?multi_node_job_id: String,
+      ?job_status: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListJobsByConsumableResourceResponse
+      include Smithy::Client::_Response[Types::ListJobsByConsumableResourceResponse]
+      def jobs: () -> Array[Types::ListJobsByConsumableResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_jobs_by_consumable_resource: (
+      ?consumable_resource: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListJobsByConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsByConsumableResourceResponse
+
+    interface _ListSchedulingPoliciesResponse
+      include Smithy::Client::_Response[Types::ListSchedulingPoliciesResponse]
+      def scheduling_policies: () -> Array[Types::SchedulingPolicyListingDetail]?
+      def next_token: () -> String?
+    end
+    def list_scheduling_policies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSchedulingPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchedulingPoliciesResponse
+
+    interface _ListServiceJobsResponse
+      include Smithy::Client::_Response[Types::ListServiceJobsResponse]
+      def job_summary_list: () -> Array[Types::ServiceJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_jobs: (
+      ?job_queue: String,
+      ?job_status: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListServiceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceJobsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterJobDefinitionResponse
+      include Smithy::Client::_Response[Types::RegisterJobDefinitionResponse]
+      def job_definition_name: () -> String?
+      def job_definition_arn: () -> String?
+      def revision: () -> Integer?
+    end
+    def register_job_definition: (
+      ?job_definition_name: String,
+      ?type: String,
+      ?parameters: Hash[String, String],
+      ?scheduling_priority: Integer,
+      ?container_properties: {
+        image: String,
+        vcpus: Integer,
+        memory: untyped,
+        command: Array[String],
+        job_role_arn: untyped,
+        execution_role_arn: untyped,
+        volumes: Array[
+          {
+            host: {
+              source_path: untyped
+            },
+            name: untyped,
+            efs_volume_configuration: {
+              file_system_id: untyped,
+              root_directory: untyped,
+              transit_encryption: String,
+              transit_encryption_port: untyped,
+              authorization_config: {
+                access_point_id: untyped,
+                iam: String
+              }
+            }
+          }
+        ],
+        environment: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        mount_points: Array[
+          {
+            container_path: untyped,
+            read_only: bool,
+            source_volume: untyped
+          }
+        ],
+        readonly_root_filesystem: untyped,
+        privileged: untyped,
+        ulimits: Array[
+          {
+            hard_limit: untyped,
+            name: untyped,
+            soft_limit: untyped
+          }
+        ],
+        user: untyped,
+        instance_type: untyped,
+        resource_requirements: Array[
+          {
+            value: untyped,
+            type: String
+          }
+        ],
+        linux_parameters: {
+          devices: Array[
+            {
+              host_path: untyped,
+              container_path: untyped,
+              permissions: Array[String]
+            }
+          ],
+          init_process_enabled: untyped,
+          shared_memory_size: untyped,
+          tmpfs: Array[
+            {
+              container_path: untyped,
+              size: untyped,
+              mount_options: untyped
+            }
+          ],
+          max_swap: untyped,
+          swappiness: untyped
+        },
+        log_configuration: {
+          log_driver: String,
+          options: Hash[String, String],
+          secret_options: Array[
+            {
+              name: untyped,
+              value_from: untyped
+            }
+          ]
+        },
+        secrets: untyped,
+        network_configuration: {
+          assign_public_ip: String
+        },
+        fargate_platform_configuration: {
+          platform_version: untyped
+        },
+        enable_execute_command: untyped,
+        ephemeral_storage: {
+          size_in_gi_b: untyped
+        },
+        runtime_platform: {
+          operating_system_family: untyped,
+          cpu_architecture: untyped
+        },
+        repository_credentials: {
+          credentials_parameter: untyped
+        }
+      },
+      ?node_properties: {
+        num_nodes: Integer,
+        main_node: untyped,
+        node_range_properties: Array[
+          {
+            target_nodes: String,
+            container: {
+              image: untyped,
+              vcpus: untyped,
+              memory: untyped,
+              command: Array[String],
+              job_role_arn: untyped,
+              execution_role_arn: untyped,
+              volumes: Array[
+                {
+                  host: {
+                    source_path: untyped
+                  },
+                  name: untyped,
+                  efs_volume_configuration: {
+                    file_system_id: untyped,
+                    root_directory: untyped,
+                    transit_encryption: String,
+                    transit_encryption_port: untyped,
+                    authorization_config: {
+                      access_point_id: untyped,
+                      iam: String
+                    }
+                  }
+                }
+              ],
+              environment: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ],
+              mount_points: Array[
+                {
+                  container_path: untyped,
+                  read_only: bool,
+                  source_volume: untyped
+                }
+              ],
+              readonly_root_filesystem: untyped,
+              privileged: untyped,
+              ulimits: Array[
+                {
+                  hard_limit: untyped,
+                  name: untyped,
+                  soft_limit: untyped
+                }
+              ],
+              user: untyped,
+              instance_type: untyped,
+              resource_requirements: Array[
+                {
+                  value: untyped,
+                  type: String
+                }
+              ],
+              linux_parameters: {
+                devices: Array[
+                  {
+                    host_path: untyped,
+                    container_path: untyped,
+                    permissions: Array[String]
+                  }
+                ],
+                init_process_enabled: untyped,
+                shared_memory_size: untyped,
+                tmpfs: Array[
+                  {
+                    container_path: untyped,
+                    size: untyped,
+                    mount_options: untyped
+                  }
+                ],
+                max_swap: untyped,
+                swappiness: untyped
+              },
+              log_configuration: {
+                log_driver: String,
+                options: Hash[String, String],
+                secret_options: Array[
+                  {
+                    name: untyped,
+                    value_from: untyped
+                  }
+                ]
+              },
+              secrets: untyped,
+              network_configuration: {
+                assign_public_ip: String
+              },
+              fargate_platform_configuration: {
+                platform_version: untyped
+              },
+              enable_execute_command: untyped,
+              ephemeral_storage: {
+                size_in_gi_b: untyped
+              },
+              runtime_platform: {
+                operating_system_family: untyped,
+                cpu_architecture: untyped
+              },
+              repository_credentials: {
+                credentials_parameter: untyped
+              }
+            },
+            instance_types: untyped,
+            ecs_properties: {
+              task_properties: Array[
+                {
+                  containers: Array[
+                    {
+                      command: untyped,
+                      depends_on: Array[
+                        {
+                          container_name: untyped,
+                          condition: untyped
+                        }
+                      ],
+                      environment: untyped,
+                      essential: untyped,
+                      firelens_configuration: {
+                        type: String,
+                        options: Hash[String, String]
+                      },
+                      image: untyped,
+                      linux_parameters: untyped,
+                      log_configuration: untyped,
+                      mount_points: untyped,
+                      name: untyped,
+                      privileged: untyped,
+                      readonly_root_filesystem: untyped,
+                      repository_credentials: untyped,
+                      resource_requirements: untyped,
+                      secrets: untyped,
+                      ulimits: untyped,
+                      user: untyped
+                    }
+                  ],
+                  ephemeral_storage: untyped,
+                  execution_role_arn: untyped,
+                  platform_version: untyped,
+                  ipc_mode: untyped,
+                  task_role_arn: untyped,
+                  pid_mode: untyped,
+                  network_configuration: untyped,
+                  runtime_platform: untyped,
+                  volumes: untyped,
+                  enable_execute_command: untyped
+                }
+              ]
+            },
+            eks_properties: {
+              pod_properties: {
+                service_account_name: untyped,
+                host_network: untyped,
+                dns_policy: untyped,
+                image_pull_secrets: Array[
+                  {
+                    name: untyped
+                  }
+                ],
+                containers: Array[
+                  {
+                    name: untyped,
+                    image: untyped,
+                    image_pull_policy: untyped,
+                    command: untyped,
+                    args: untyped,
+                    env: Array[
+                      {
+                        name: untyped,
+                        value: untyped
+                      }
+                    ],
+                    resources: {
+                      limits: Hash[String, String],
+                      requests: Hash[String, String]
+                    },
+                    volume_mounts: Array[
+                      {
+                        name: untyped,
+                        mount_path: untyped,
+                        sub_path: untyped,
+                        read_only: untyped
+                      }
+                    ],
+                    security_context: {
+                      run_as_user: Integer,
+                      run_as_group: untyped,
+                      privileged: untyped,
+                      allow_privilege_escalation: untyped,
+                      read_only_root_filesystem: untyped,
+                      run_as_non_root: untyped
+                    }
+                  }
+                ],
+                init_containers: untyped,
+                volumes: Array[
+                  {
+                    name: untyped,
+                    host_path: {
+                      path: untyped
+                    },
+                    empty_dir: {
+                      medium: untyped,
+                      size_limit: String
+                    },
+                    secret: {
+                      secret_name: untyped,
+                      optional: untyped
+                    },
+                    persistent_volume_claim: {
+                      claim_name: untyped,
+                      read_only: untyped
+                    }
+                  }
+                ],
+                metadata: {
+                  labels: Hash[String, String],
+                  annotations: Hash[String, String],
+                  namespace: untyped
+                },
+                share_process_namespace: untyped
+              }
+            },
+            consumable_resource_properties: {
+              consumable_resource_list: Array[
+                {
+                  consumable_resource: untyped,
+                  quantity: untyped
+                }
+              ]
+            }
+          }
+        ]
+      },
+      ?retry_strategy: {
+        attempts: Integer,
+        evaluate_on_exit: Array[
+          {
+            on_status_reason: String,
+            on_reason: untyped,
+            on_exit_code: untyped,
+            action: String
+          }
+        ]
+      },
+      ?propagate_tags: bool,
+      ?timeout: {
+        attempt_duration_seconds: Integer
+      },
+      ?tags: Hash[String, String],
+      ?platform_capabilities: Array[String],
+      ?eks_properties: {
+        pod_properties: {
+          service_account_name: String,
+          host_network: bool,
+          dns_policy: untyped,
+          image_pull_secrets: Array[
+            {
+              name: untyped
+            }
+          ],
+          containers: Array[
+            {
+              name: untyped,
+              image: untyped,
+              image_pull_policy: untyped,
+              command: Array[String],
+              args: untyped,
+              env: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ],
+              resources: {
+                limits: Hash[String, String],
+                requests: Hash[String, String]
+              },
+              volume_mounts: Array[
+                {
+                  name: untyped,
+                  mount_path: untyped,
+                  sub_path: untyped,
+                  read_only: untyped
+                }
+              ],
+              security_context: {
+                run_as_user: Integer,
+                run_as_group: untyped,
+                privileged: untyped,
+                allow_privilege_escalation: untyped,
+                read_only_root_filesystem: untyped,
+                run_as_non_root: untyped
+              }
+            }
+          ],
+          init_containers: untyped,
+          volumes: Array[
+            {
+              name: untyped,
+              host_path: {
+                path: untyped
+              },
+              empty_dir: {
+                medium: untyped,
+                size_limit: String
+              },
+              secret: {
+                secret_name: untyped,
+                optional: untyped
+              },
+              persistent_volume_claim: {
+                claim_name: untyped,
+                read_only: untyped
+              }
+            }
+          ],
+          metadata: {
+            labels: Hash[String, String],
+            annotations: Hash[String, String],
+            namespace: untyped
+          },
+          share_process_namespace: untyped
+        }
+      },
+      ?ecs_properties: {
+        task_properties: Array[
+          {
+            containers: Array[
+              {
+                command: Array[String],
+                depends_on: Array[
+                  {
+                    container_name: String,
+                    condition: untyped
+                  }
+                ],
+                environment: Array[
+                  {
+                    name: untyped,
+                    value: untyped
+                  }
+                ],
+                essential: bool,
+                firelens_configuration: {
+                  type: String,
+                  options: Hash[String, String]
+                },
+                image: untyped,
+                linux_parameters: {
+                  devices: Array[
+                    {
+                      host_path: untyped,
+                      container_path: untyped,
+                      permissions: Array[String]
+                    }
+                  ],
+                  init_process_enabled: untyped,
+                  shared_memory_size: Integer,
+                  tmpfs: Array[
+                    {
+                      container_path: untyped,
+                      size: untyped,
+                      mount_options: untyped
+                    }
+                  ],
+                  max_swap: untyped,
+                  swappiness: untyped
+                },
+                log_configuration: {
+                  log_driver: String,
+                  options: Hash[String, String],
+                  secret_options: Array[
+                    {
+                      name: untyped,
+                      value_from: untyped
+                    }
+                  ]
+                },
+                mount_points: Array[
+                  {
+                    container_path: untyped,
+                    read_only: untyped,
+                    source_volume: untyped
+                  }
+                ],
+                name: untyped,
+                privileged: untyped,
+                readonly_root_filesystem: untyped,
+                repository_credentials: {
+                  credentials_parameter: untyped
+                },
+                resource_requirements: Array[
+                  {
+                    value: untyped,
+                    type: String
+                  }
+                ],
+                secrets: untyped,
+                ulimits: Array[
+                  {
+                    hard_limit: untyped,
+                    name: untyped,
+                    soft_limit: untyped
+                  }
+                ],
+                user: untyped
+              }
+            ],
+            ephemeral_storage: {
+              size_in_gi_b: untyped
+            },
+            execution_role_arn: untyped,
+            platform_version: untyped,
+            ipc_mode: untyped,
+            task_role_arn: untyped,
+            pid_mode: untyped,
+            network_configuration: {
+              assign_public_ip: String
+            },
+            runtime_platform: {
+              operating_system_family: untyped,
+              cpu_architecture: untyped
+            },
+            volumes: Array[
+              {
+                host: {
+                  source_path: untyped
+                },
+                name: untyped,
+                efs_volume_configuration: {
+                  file_system_id: untyped,
+                  root_directory: untyped,
+                  transit_encryption: String,
+                  transit_encryption_port: untyped,
+                  authorization_config: {
+                    access_point_id: untyped,
+                    iam: String
+                  }
+                }
+              }
+            ],
+            enable_execute_command: untyped
+          }
+        ]
+      },
+      ?consumable_resource_properties: {
+        consumable_resource_list: Array[
+          {
+            consumable_resource: String,
+            quantity: Integer
+          }
+        ]
+      }
+    ) -> _RegisterJobDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterJobDefinitionResponse
+
+    interface _SubmitJobResponse
+      include Smithy::Client::_Response[Types::SubmitJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def job_id: () -> String?
+    end
+    def submit_job: (
+      ?job_name: String,
+      ?job_queue: String,
+      ?share_identifier: String,
+      ?scheduling_priority_override: Integer,
+      ?array_properties: {
+        size: Integer
+      },
+      ?depends_on: Array[
+        {
+          job_id: String,
+          type: String
+        }
+      ],
+      ?job_definition: String,
+      ?parameters: Hash[String, String],
+      ?container_overrides: {
+        vcpus: Integer,
+        memory: untyped,
+        command: Array[String],
+        instance_type: String,
+        environment: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        resource_requirements: Array[
+          {
+            value: untyped,
+            type: String
+          }
+        ]
+      },
+      ?node_overrides: {
+        num_nodes: Integer,
+        node_property_overrides: Array[
+          {
+            target_nodes: String,
+            container_overrides: {
+              vcpus: untyped,
+              memory: untyped,
+              command: Array[String],
+              instance_type: untyped,
+              environment: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ],
+              resource_requirements: Array[
+                {
+                  value: untyped,
+                  type: String
+                }
+              ]
+            },
+            ecs_properties_override: {
+              task_properties: Array[
+                {
+                  containers: Array[
+                    {
+                      command: untyped,
+                      environment: untyped,
+                      name: untyped,
+                      resource_requirements: untyped
+                    }
+                  ]
+                }
+              ]
+            },
+            instance_types: untyped,
+            eks_properties_override: {
+              pod_properties: {
+                containers: Array[
+                  {
+                    name: untyped,
+                    image: untyped,
+                    command: untyped,
+                    args: untyped,
+                    env: Array[
+                      {
+                        name: untyped,
+                        value: untyped
+                      }
+                    ],
+                    resources: {
+                      limits: Hash[String, String],
+                      requests: Hash[String, String]
+                    }
+                  }
+                ],
+                init_containers: untyped,
+                metadata: {
+                  labels: Hash[String, String],
+                  annotations: Hash[String, String],
+                  namespace: untyped
+                }
+              }
+            },
+            consumable_resource_properties_override: {
+              consumable_resource_list: Array[
+                {
+                  consumable_resource: untyped,
+                  quantity: Integer
+                }
+              ]
+            }
+          }
+        ]
+      },
+      ?retry_strategy: {
+        attempts: Integer,
+        evaluate_on_exit: Array[
+          {
+            on_status_reason: String,
+            on_reason: untyped,
+            on_exit_code: untyped,
+            action: String
+          }
+        ]
+      },
+      ?propagate_tags: bool,
+      ?timeout: {
+        attempt_duration_seconds: Integer
+      },
+      ?tags: Hash[String, String],
+      ?eks_properties_override: {
+        pod_properties: {
+          containers: Array[
+            {
+              name: String,
+              image: untyped,
+              command: Array[String],
+              args: untyped,
+              env: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ],
+              resources: {
+                limits: Hash[String, String],
+                requests: Hash[String, String]
+              }
+            }
+          ],
+          init_containers: untyped,
+          metadata: {
+            labels: Hash[String, String],
+            annotations: Hash[String, String],
+            namespace: untyped
+          }
+        }
+      },
+      ?ecs_properties_override: {
+        task_properties: Array[
+          {
+            containers: Array[
+              {
+                command: Array[String],
+                environment: Array[
+                  {
+                    name: String,
+                    value: untyped
+                  }
+                ],
+                name: untyped,
+                resource_requirements: Array[
+                  {
+                    value: untyped,
+                    type: String
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      ?consumable_resource_properties_override: {
+        consumable_resource_list: Array[
+          {
+            consumable_resource: String,
+            quantity: Integer
+          }
+        ]
+      }
+    ) -> _SubmitJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitJobResponse
+
+    interface _SubmitServiceJobResponse
+      include Smithy::Client::_Response[Types::SubmitServiceJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def job_id: () -> String?
+    end
+    def submit_service_job: (
+      ?job_name: String,
+      ?job_queue: String,
+      ?retry_strategy: {
+        attempts: Integer,
+        evaluate_on_exit: Array[
+          {
+            action: String,
+            on_status_reason: String
+          }
+        ]
+      },
+      ?scheduling_priority: Integer,
+      ?service_request_payload: String,
+      ?service_job_type: String,
+      ?share_identifier: String,
+      ?timeout_config: {
+        attempt_duration_seconds: Integer
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _SubmitServiceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitServiceJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateJobResponse
+      include Smithy::Client::_Response[Types::TerminateJobResponse]
+    end
+    def terminate_job: (
+      ?job_id: String,
+      ?reason: String
+    ) -> _TerminateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateJobResponse
+
+    interface _TerminateServiceJobResponse
+      include Smithy::Client::_Response[Types::TerminateServiceJobResponse]
+    end
+    def terminate_service_job: (
+      ?job_id: String,
+      ?reason: String
+    ) -> _TerminateServiceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateServiceJobResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateComputeEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateComputeEnvironmentResponse]
+      def compute_environment_name: () -> String?
+      def compute_environment_arn: () -> String?
+    end
+    def update_compute_environment: (
+      ?compute_environment: String,
+      ?state: String,
+      ?unmanagedv_cpus: Integer,
+      ?compute_resources: {
+        minv_cpus: Integer,
+        maxv_cpus: untyped,
+        desiredv_cpus: untyped,
+        subnets: Array[String],
+        security_group_ids: untyped,
+        allocation_strategy: String,
+        instance_types: untyped,
+        ec2_key_pair: String,
+        instance_role: untyped,
+        tags: Hash[String, String],
+        placement_group: untyped,
+        bid_percentage: untyped,
+        launch_template: {
+          launch_template_id: untyped,
+          launch_template_name: untyped,
+          version: untyped,
+          overrides: Array[
+            {
+              launch_template_id: untyped,
+              launch_template_name: untyped,
+              version: untyped,
+              target_instance_types: untyped,
+              userdata_type: String
+            }
+          ],
+          userdata_type: untyped
+        },
+        ec2_configuration: Array[
+          {
+            image_type: String,
+            image_id_override: String,
+            image_kubernetes_version: String
+          }
+        ],
+        update_to_latest_image_version: bool,
+        type: String,
+        image_id: untyped
+      },
+      ?service_role: String,
+      ?update_policy: {
+        terminate_jobs_on_update: bool,
+        job_execution_timeout_minutes: Integer
+      },
+      ?context: String
+    ) -> _UpdateComputeEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComputeEnvironmentResponse
+
+    interface _UpdateConsumableResourceResponse
+      include Smithy::Client::_Response[Types::UpdateConsumableResourceResponse]
+      def consumable_resource_name: () -> String?
+      def consumable_resource_arn: () -> String?
+      def total_quantity: () -> Integer?
+    end
+    def update_consumable_resource: (
+      ?consumable_resource: String,
+      ?operation: String,
+      ?quantity: Integer,
+      ?client_token: String
+    ) -> _UpdateConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConsumableResourceResponse
+
+    interface _UpdateJobQueueResponse
+      include Smithy::Client::_Response[Types::UpdateJobQueueResponse]
+      def job_queue_name: () -> String?
+      def job_queue_arn: () -> String?
+    end
+    def update_job_queue: (
+      ?job_queue: String,
+      ?state: String,
+      ?scheduling_policy_arn: String,
+      ?priority: Integer,
+      ?compute_environment_order: Array[
+        {
+          order: Integer,
+          compute_environment: String
+        }
+      ],
+      ?service_environment_order: Array[
+        {
+          order: Integer,
+          service_environment: String
+        }
+      ],
+      ?job_state_time_limit_actions: Array[
+        {
+          reason: String,
+          state: String,
+          max_time_seconds: Integer,
+          action: String
+        }
+      ]
+    ) -> _UpdateJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobQueueResponse
+
+    interface _UpdateSchedulingPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateSchedulingPolicyResponse]
+    end
+    def update_scheduling_policy: (
+      ?arn: String,
+      ?fairshare_policy: {
+        share_decay_seconds: Integer,
+        compute_reservation: untyped,
+        share_distribution: Array[
+          {
+            share_identifier: String,
+            weight_factor: Float
+          }
+        ]
+      }
+    ) -> _UpdateSchedulingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSchedulingPolicyResponse
+
+    interface _UpdateServiceEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateServiceEnvironmentResponse]
+      def service_environment_name: () -> String?
+      def service_environment_arn: () -> String?
+    end
+    def update_service_environment: (
+      ?service_environment: String,
+      ?state: String,
+      ?capacity_limits: Array[
+        {
+          max_capacity: Integer,
+          capacity_unit: String
+        }
+      ]
+    ) -> _UpdateServiceEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceEnvironmentResponse
+  end
+end

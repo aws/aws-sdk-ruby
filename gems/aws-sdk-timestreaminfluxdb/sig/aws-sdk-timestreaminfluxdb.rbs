@@ -1,0 +1,5 @@
+  module Aws
+    module TimestreamInfluxDB
+      VERSION: String
+    end
+  end

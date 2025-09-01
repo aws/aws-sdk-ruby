@@ -1,0 +1,1907 @@
+module Aws::QBusiness
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::QBusiness::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociatePermissionResponse
+      include Smithy::Client::_Response[Types::AssociatePermissionResponse]
+      def statement: () -> String?
+    end
+    def associate_permission: (
+      ?application_id: String,
+      ?statement_id: String,
+      ?actions: Array[String],
+      ?conditions: Array[
+        {
+          condition_operator: String,
+          condition_key: String,
+          condition_values: Array[String]
+        }
+      ],
+      ?principal: String
+    ) -> _AssociatePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePermissionResponse
+
+    interface _BatchDeleteDocumentResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDocumentResponse]
+      def failed_documents: () -> Array[Types::FailedDocument]?
+    end
+    def batch_delete_document: (
+      ?application_id: String,
+      ?index_id: String,
+      ?documents: Array[
+        {
+          document_id: String
+        }
+      ],
+      ?data_source_sync_id: String
+    ) -> _BatchDeleteDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDocumentResponse
+
+    interface _BatchPutDocumentResponse
+      include Smithy::Client::_Response[Types::BatchPutDocumentResponse]
+      def failed_documents: () -> Array[Types::FailedDocument]?
+    end
+    def batch_put_document: (
+      ?application_id: String,
+      ?index_id: String,
+      ?documents: Array[
+        {
+          id: String,
+          attributes: Array[
+            {
+              name: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            }
+          ],
+          content: {
+            blob: String,
+            s3: {
+              bucket: String,
+              key: String
+            }
+          },
+          content_type: String,
+          title: String,
+          access_configuration: {
+            access_controls: Array[
+              {
+                principals: Array[
+                  {
+                    user: {
+                      id: String,
+                      access: String,
+                      membership_type: String
+                    },
+                    group: {
+                      name: String,
+                      access: untyped,
+                      membership_type: untyped
+                    }
+                  }
+                ],
+                member_relation: String
+              }
+            ],
+            member_relation: untyped
+          },
+          document_enrichment_configuration: {
+            inline_configurations: Array[
+              {
+                condition: {
+                  key: untyped,
+                  operator: String,
+                  value: untyped
+                },
+                target: {
+                  key: untyped,
+                  value: untyped,
+                  attribute_value_operator: String
+                },
+                document_content_operator: String
+              }
+            ],
+            pre_extraction_hook_configuration: {
+              invocation_condition: untyped,
+              lambda_arn: String,
+              s3_bucket_name: untyped,
+              role_arn: String
+            },
+            post_extraction_hook_configuration: untyped
+          },
+          media_extraction_configuration: {
+            image_extraction_configuration: {
+              image_extraction_status: String
+            },
+            audio_extraction_configuration: {
+              audio_extraction_status: String
+            },
+            video_extraction_configuration: {
+              video_extraction_status: String
+            }
+          }
+        }
+      ],
+      ?role_arn: String,
+      ?data_source_sync_id: String
+    ) -> _BatchPutDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutDocumentResponse
+
+    interface _CancelSubscriptionResponse
+      include Smithy::Client::_Response[Types::CancelSubscriptionResponse]
+      def subscription_arn: () -> String?
+      def current_subscription: () -> Types::SubscriptionDetails?
+      def next_subscription: () -> Types::SubscriptionDetails?
+    end
+    def cancel_subscription: (
+      ?application_id: String,
+      ?subscription_id: String
+    ) -> _CancelSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSubscriptionResponse
+
+    interface _ChatResponse
+      include Smithy::Client::_Response[Types::ChatOutput]
+      def output_stream: () -> Types::ChatOutputStream?
+    end
+    def chat: (
+      ?application_id: String,
+      ?user_id: String,
+      ?user_groups: Array[String],
+      ?conversation_id: String,
+      ?parent_message_id: String,
+      ?client_token: String,
+      ?input_stream: {
+        configuration_event: {
+          chat_mode: String,
+          chat_mode_configuration: {
+            plugin_configuration: {
+              plugin_id: String
+            }
+          },
+          attribute_filter: {
+            and_all_filters: Array[
+              {
+                and_all_filters: untyped,
+                or_all_filters: untyped,
+                not_filter: untyped,
+                equals_to: {
+                  name: String,
+                  value: {
+                    string_value: String,
+                    string_list_value: Array[String],
+                    long_value: Integer,
+                    date_value: Time
+                  }
+                },
+                contains_all: untyped,
+                contains_any: untyped,
+                greater_than: untyped,
+                greater_than_or_equals: untyped,
+                less_than: untyped,
+                less_than_or_equals: untyped
+              }
+            ],
+            or_all_filters: untyped,
+            not_filter: untyped,
+            equals_to: untyped,
+            contains_all: untyped,
+            contains_any: untyped,
+            greater_than: untyped,
+            greater_than_or_equals: untyped,
+            less_than: untyped,
+            less_than_or_equals: untyped
+          }
+        },
+        text_event: {
+          user_message: String
+        },
+        attachment_event: {
+          attachment: {
+            data: String,
+            name: String,
+            copy_from: {
+              conversation: {
+                conversation_id: String,
+                attachment_id: String
+              }
+            }
+          }
+        },
+        action_execution_event: {
+          plugin_id: untyped,
+          payload: Hash[String,
+            {
+              value: Smithy::Schema::document
+            }
+          ],
+          payload_field_name_separator: String
+        },
+        end_of_input_event: {
+        },
+        auth_challenge_response_event: {
+          response_map: Hash[String, String]
+        }
+      }
+    ) -> _ChatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChatResponse
+
+    interface _ChatSyncResponse
+      include Smithy::Client::_Response[Types::ChatSyncOutput]
+      def conversation_id: () -> String?
+      def system_message: () -> String?
+      def system_message_id: () -> String?
+      def user_message_id: () -> String?
+      def action_review: () -> Types::ActionReview?
+      def auth_challenge_request: () -> Types::AuthChallengeRequest?
+      def source_attributions: () -> Array[Types::SourceAttribution?]?
+      def failed_attachments: () -> Array[Types::AttachmentOutput]?
+    end
+    def chat_sync: (
+      ?application_id: String,
+      ?user_id: String,
+      ?user_groups: Array[String],
+      ?user_message: String,
+      ?attachments: Array[
+        {
+          data: String,
+          name: String,
+          copy_from: {
+            conversation: {
+              conversation_id: String,
+              attachment_id: String
+            }
+          }
+        }
+      ],
+      ?action_execution: {
+        plugin_id: String,
+        payload: Hash[String,
+          {
+            value: Smithy::Schema::document
+          }
+        ],
+        payload_field_name_separator: String
+      },
+      ?auth_challenge_response: {
+        response_map: Hash[String, String]
+      },
+      ?conversation_id: String,
+      ?parent_message_id: String,
+      ?attribute_filter: {
+        and_all_filters: Array[
+          {
+            and_all_filters: untyped,
+            or_all_filters: untyped,
+            not_filter: untyped,
+            equals_to: {
+              name: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            contains_all: untyped,
+            contains_any: untyped,
+            greater_than: untyped,
+            greater_than_or_equals: untyped,
+            less_than: untyped,
+            less_than_or_equals: untyped
+          }
+        ],
+        or_all_filters: untyped,
+        not_filter: untyped,
+        equals_to: untyped,
+        contains_all: untyped,
+        contains_any: untyped,
+        greater_than: untyped,
+        greater_than_or_equals: untyped,
+        less_than: untyped,
+        less_than_or_equals: untyped
+      },
+      ?chat_mode: String,
+      ?chat_mode_configuration: {
+        plugin_configuration: {
+          plugin_id: String
+        }
+      },
+      ?client_token: String
+    ) -> _ChatSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChatSyncResponse
+
+    interface _CheckDocumentAccessResponse
+      include Smithy::Client::_Response[Types::CheckDocumentAccessResponse]
+      def user_groups: () -> Array[Types::AssociatedGroup]?
+      def user_aliases: () -> Array[Types::AssociatedUser]?
+      def has_access: () -> bool?
+      def document_acl: () -> Types::DocumentAcl?
+    end
+    def check_document_access: (
+      ?application_id: String,
+      ?index_id: String,
+      ?user_id: String,
+      ?document_id: String,
+      ?data_source_id: String
+    ) -> _CheckDocumentAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckDocumentAccessResponse
+
+    interface _CreateAnonymousWebExperienceUrlResponse
+      include Smithy::Client::_Response[Types::CreateAnonymousWebExperienceUrlResponse]
+      def anonymous_url: () -> String?
+    end
+    def create_anonymous_web_experience_url: (
+      ?application_id: String,
+      ?web_experience_id: String,
+      ?session_duration_in_minutes: Integer
+    ) -> _CreateAnonymousWebExperienceUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnonymousWebExperienceUrlResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def application_id: () -> String?
+      def application_arn: () -> String?
+    end
+    def create_application: (
+      ?display_name: String,
+      ?role_arn: String,
+      ?identity_type: String,
+      ?iam_identity_provider_arn: String,
+      ?identity_center_instance_arn: String,
+      ?client_ids_for_oidc: Array[String],
+      ?description: String,
+      ?encryption_configuration: {
+        kms_key_id: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?attachments_configuration: {
+        attachments_control_mode: String
+      },
+      ?q_apps_configuration: {
+        q_apps_control_mode: String
+      },
+      ?personalization_configuration: {
+        personalization_control_mode: String
+      },
+      ?quick_sight_configuration: {
+        client_namespace: String
+      }
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateChatResponseConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateChatResponseConfigurationResponse]
+      def chat_response_configuration_id: () -> String?
+      def chat_response_configuration_arn: () -> String?
+    end
+    def create_chat_response_configuration: (
+      ?application_id: String,
+      ?display_name: String,
+      ?client_token: String,
+      ?response_configurations: Hash[String,
+        {
+          instruction_collection: {
+            response_length: String,
+            target_audience: untyped,
+            perspective: untyped,
+            output_style: untyped,
+            identity: untyped,
+            tone: untyped,
+            custom_instructions: untyped,
+            examples: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateChatResponseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChatResponseConfigurationResponse
+
+    interface _CreateDataAccessorResponse
+      include Smithy::Client::_Response[Types::CreateDataAccessorResponse]
+      def data_accessor_id: () -> String?
+      def idc_application_arn: () -> String?
+      def data_accessor_arn: () -> String?
+    end
+    def create_data_accessor: (
+      ?application_id: String,
+      ?principal: String,
+      ?action_configurations: Array[
+        {
+          action: String,
+          filter_configuration: {
+            document_attribute_filter: {
+              and_all_filters: Array[
+                {
+                  and_all_filters: untyped,
+                  or_all_filters: untyped,
+                  not_filter: untyped,
+                  equals_to: {
+                    name: String,
+                    value: {
+                      string_value: String,
+                      string_list_value: Array[String],
+                      long_value: Integer,
+                      date_value: Time
+                    }
+                  },
+                  contains_all: untyped,
+                  contains_any: untyped,
+                  greater_than: untyped,
+                  greater_than_or_equals: untyped,
+                  less_than: untyped,
+                  less_than_or_equals: untyped
+                }
+              ],
+              or_all_filters: untyped,
+              not_filter: untyped,
+              equals_to: untyped,
+              contains_all: untyped,
+              contains_any: untyped,
+              greater_than: untyped,
+              greater_than_or_equals: untyped,
+              less_than: untyped,
+              less_than_or_equals: untyped
+            }
+          }
+        }
+      ],
+      ?client_token: String,
+      ?display_name: String,
+      ?authentication_detail: {
+        authentication_type: String,
+        authentication_configuration: {
+          idc_trusted_token_issuer_configuration: {
+            idc_trusted_token_issuer_arn: String
+          }
+        },
+        external_ids: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataAccessorResponse
+
+    interface _CreateDataSourceResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceResponse]
+      def data_source_id: () -> String?
+      def data_source_arn: () -> String?
+    end
+    def create_data_source: (
+      ?application_id: String,
+      ?index_id: String,
+      ?display_name: String,
+      ?configuration: Smithy::Schema::document,
+      ?vpc_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?sync_schedule: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?document_enrichment_configuration: {
+        inline_configurations: Array[
+          {
+            condition: {
+              key: String,
+              operator: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            target: {
+              key: untyped,
+              value: untyped,
+              attribute_value_operator: String
+            },
+            document_content_operator: String
+          }
+        ],
+        pre_extraction_hook_configuration: {
+          invocation_condition: untyped,
+          lambda_arn: String,
+          s3_bucket_name: String,
+          role_arn: String
+        },
+        post_extraction_hook_configuration: untyped
+      },
+      ?media_extraction_configuration: {
+        image_extraction_configuration: {
+          image_extraction_status: String
+        },
+        audio_extraction_configuration: {
+          audio_extraction_status: String
+        },
+        video_extraction_configuration: {
+          video_extraction_status: String
+        }
+      }
+    ) -> _CreateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexResponse]
+      def index_id: () -> String?
+      def index_arn: () -> String?
+    end
+    def create_index: (
+      ?application_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?capacity_configuration: {
+        units: Integer
+      },
+      ?client_token: String
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
+
+    interface _CreatePluginResponse
+      include Smithy::Client::_Response[Types::CreatePluginResponse]
+      def plugin_id: () -> String?
+      def plugin_arn: () -> String?
+      def build_status: () -> String?
+    end
+    def create_plugin: (
+      ?application_id: String,
+      ?display_name: String,
+      ?type: String,
+      ?auth_configuration: {
+        basic_auth_configuration: {
+          secret_arn: String,
+          role_arn: String
+        },
+        o_auth2_client_credential_configuration: {
+          secret_arn: untyped,
+          role_arn: untyped,
+          authorization_url: String,
+          token_url: untyped
+        },
+        no_auth_configuration: {
+        },
+        idc_auth_configuration: {
+          idc_application_arn: String,
+          role_arn: untyped
+        }
+      },
+      ?server_url: String,
+      ?custom_plugin_configuration: {
+        description: String,
+        api_schema_type: String,
+        api_schema: {
+          payload: String,
+          s3: {
+            bucket: String,
+            key: String
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreatePluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePluginResponse
+
+    interface _CreateRetrieverResponse
+      include Smithy::Client::_Response[Types::CreateRetrieverResponse]
+      def retriever_id: () -> String?
+      def retriever_arn: () -> String?
+    end
+    def create_retriever: (
+      ?application_id: String,
+      ?type: String,
+      ?display_name: String,
+      ?configuration: {
+        native_index_configuration: {
+          index_id: String,
+          version: Integer,
+          boosting_override: Hash[String,
+            {
+              number_configuration: {
+                boosting_level: String,
+                boosting_type: String
+              },
+              string_configuration: {
+                boosting_level: untyped,
+                attribute_value_boosting: Hash[String, String]
+              },
+              date_configuration: {
+                boosting_level: untyped,
+                boosting_duration_in_seconds: Integer
+              },
+              string_list_configuration: {
+                boosting_level: untyped
+              }
+            }
+          ]
+        },
+        kendra_index_configuration: {
+          index_id: String
+        }
+      },
+      ?role_arn: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRetrieverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRetrieverResponse
+
+    interface _CreateSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionResponse]
+      def subscription_id: () -> String?
+      def subscription_arn: () -> String?
+      def current_subscription: () -> Types::SubscriptionDetails?
+      def next_subscription: () -> Types::SubscriptionDetails?
+    end
+    def create_subscription: (
+      ?application_id: String,
+      ?principal: {
+        user: String,
+        group: String
+      },
+      ?type: String,
+      ?client_token: String
+    ) -> _CreateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+    end
+    def create_user: (
+      ?application_id: String,
+      ?user_id: String,
+      ?user_aliases: Array[
+        {
+          index_id: String,
+          data_source_id: String,
+          user_id: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _CreateWebExperienceResponse
+      include Smithy::Client::_Response[Types::CreateWebExperienceResponse]
+      def web_experience_id: () -> String?
+      def web_experience_arn: () -> String?
+    end
+    def create_web_experience: (
+      ?application_id: String,
+      ?title: String,
+      ?subtitle: String,
+      ?welcome_message: String,
+      ?sample_prompts_control_mode: String,
+      ?origins: Array[String],
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?identity_provider_configuration: {
+        saml_configuration: {
+          authentication_url: String
+        },
+        open_id_connect_configuration: {
+          secrets_arn: String,
+          secrets_role: String
+        }
+      },
+      ?browser_extension_configuration: {
+        enabled_browser_extensions: Array[String]
+      },
+      ?customization_configuration: {
+        custom_css_url: String,
+        logo_url: String,
+        font_url: String,
+        favicon_url: String
+      }
+    ) -> _CreateWebExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebExperienceResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?application_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteAttachmentResponse]
+    end
+    def delete_attachment: (
+      ?application_id: String,
+      ?conversation_id: String,
+      ?attachment_id: String,
+      ?user_id: String
+    ) -> _DeleteAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttachmentResponse
+
+    interface _DeleteChatControlsConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteChatControlsConfigurationResponse]
+    end
+    def delete_chat_controls_configuration: (
+      ?application_id: String
+    ) -> _DeleteChatControlsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChatControlsConfigurationResponse
+
+    interface _DeleteChatResponseConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteChatResponseConfigurationResponse]
+    end
+    def delete_chat_response_configuration: (
+      ?application_id: String,
+      ?chat_response_configuration_id: String
+    ) -> _DeleteChatResponseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChatResponseConfigurationResponse
+
+    interface _DeleteConversationResponse
+      include Smithy::Client::_Response[Types::DeleteConversationResponse]
+    end
+    def delete_conversation: (
+      ?conversation_id: String,
+      ?application_id: String,
+      ?user_id: String
+    ) -> _DeleteConversationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConversationResponse
+
+    interface _DeleteDataAccessorResponse
+      include Smithy::Client::_Response[Types::DeleteDataAccessorResponse]
+    end
+    def delete_data_accessor: (
+      ?application_id: String,
+      ?data_accessor_id: String
+    ) -> _DeleteDataAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataAccessorResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceResponse]
+    end
+    def delete_data_source: (
+      ?application_id: String,
+      ?index_id: String,
+      ?data_source_id: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResponse]
+    end
+    def delete_group: (
+      ?application_id: String,
+      ?index_id: String,
+      ?group_name: String,
+      ?data_source_id: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteIndexResponse
+      include Smithy::Client::_Response[Types::DeleteIndexResponse]
+    end
+    def delete_index: (
+      ?application_id: String,
+      ?index_id: String
+    ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
+    interface _DeletePluginResponse
+      include Smithy::Client::_Response[Types::DeletePluginResponse]
+    end
+    def delete_plugin: (
+      ?application_id: String,
+      ?plugin_id: String
+    ) -> _DeletePluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePluginResponse
+
+    interface _DeleteRetrieverResponse
+      include Smithy::Client::_Response[Types::DeleteRetrieverResponse]
+    end
+    def delete_retriever: (
+      ?application_id: String,
+      ?retriever_id: String
+    ) -> _DeleteRetrieverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetrieverResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
+    end
+    def delete_user: (
+      ?application_id: String,
+      ?user_id: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeleteWebExperienceResponse
+      include Smithy::Client::_Response[Types::DeleteWebExperienceResponse]
+    end
+    def delete_web_experience: (
+      ?application_id: String,
+      ?web_experience_id: String
+    ) -> _DeleteWebExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebExperienceResponse
+
+    interface _DisassociatePermissionResponse
+      include Smithy::Client::_Response[Types::DisassociatePermissionResponse]
+    end
+    def disassociate_permission: (
+      ?application_id: String,
+      ?statement_id: String
+    ) -> _DisassociatePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePermissionResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationResponse]
+      def display_name: () -> String?
+      def application_id: () -> String?
+      def application_arn: () -> String?
+      def identity_type: () -> String?
+      def iam_identity_provider_arn: () -> String?
+      def identity_center_application_arn: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def error: () -> Types::ErrorDetail?
+      def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration?
+      def q_apps_configuration: () -> Types::QAppsConfiguration?
+      def personalization_configuration: () -> Types::PersonalizationConfiguration?
+      def auto_subscription_configuration: () -> Types::AutoSubscriptionConfiguration?
+      def client_ids_for_oidc: () -> Array[String]?
+      def quick_sight_configuration: () -> Types::QuickSightConfiguration?
+    end
+    def get_application: (
+      ?application_id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetChatControlsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetChatControlsConfigurationResponse]
+      def response_scope: () -> String?
+      def orchestration_configuration: () -> Types::AppliedOrchestrationConfiguration?
+      def blocked_phrases: () -> Types::BlockedPhrasesConfiguration?
+      def topic_configurations: () -> Array[Types::TopicConfiguration]?
+      def creator_mode_configuration: () -> Types::AppliedCreatorModeConfiguration?
+      def next_token: () -> String?
+      def hallucination_reduction_configuration: () -> Types::HallucinationReductionConfiguration?
+    end
+    def get_chat_controls_configuration: (
+      ?application_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetChatControlsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChatControlsConfigurationResponse
+
+    interface _GetChatResponseConfigurationResponse
+      include Smithy::Client::_Response[Types::GetChatResponseConfigurationResponse]
+      def chat_response_configuration_id: () -> String?
+      def chat_response_configuration_arn: () -> String?
+      def display_name: () -> String?
+      def created_at: () -> Time?
+      def in_use_configuration: () -> Types::ChatResponseConfigurationDetail?
+      def last_update_configuration: () -> Types::ChatResponseConfigurationDetail?
+    end
+    def get_chat_response_configuration: (
+      ?application_id: String,
+      ?chat_response_configuration_id: String
+    ) -> _GetChatResponseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChatResponseConfigurationResponse
+
+    interface _GetDataAccessorResponse
+      include Smithy::Client::_Response[Types::GetDataAccessorResponse]
+      def display_name: () -> String?
+      def data_accessor_id: () -> String?
+      def data_accessor_arn: () -> String?
+      def application_id: () -> String?
+      def idc_application_arn: () -> String?
+      def principal: () -> String?
+      def action_configurations: () -> Array[Types::ActionConfiguration]?
+      def authentication_detail: () -> Types::DataAccessorAuthenticationDetail?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_data_accessor: (
+      ?application_id: String,
+      ?data_accessor_id: String
+    ) -> _GetDataAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAccessorResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceResponse]
+      def application_id: () -> String?
+      def index_id: () -> String?
+      def data_source_id: () -> String?
+      def data_source_arn: () -> String?
+      def display_name: () -> String?
+      def type: () -> String?
+      def configuration: () -> Smithy::Schema::document?
+      def vpc_configuration: () -> Types::DataSourceVpcConfiguration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def description: () -> String?
+      def status: () -> String?
+      def sync_schedule: () -> String?
+      def role_arn: () -> String?
+      def error: () -> Types::ErrorDetail?
+      def document_enrichment_configuration: () -> Types::DocumentEnrichmentConfiguration?
+      def media_extraction_configuration: () -> Types::MediaExtractionConfiguration?
+    end
+    def get_data_source: (
+      ?application_id: String,
+      ?index_id: String,
+      ?data_source_id: String
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetDocumentContentResponse
+      include Smithy::Client::_Response[Types::GetDocumentContentResponse]
+      def presigned_url: () -> String?
+      def mime_type: () -> String?
+    end
+    def get_document_content: (
+      ?application_id: String,
+      ?index_id: String,
+      ?data_source_id: String,
+      ?document_id: String,
+      ?output_format: String
+    ) -> _GetDocumentContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDocumentContentResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResponse]
+      def status: () -> Types::GroupStatusDetail?
+      def status_history: () -> Array[Types::GroupStatusDetail]?
+    end
+    def get_group: (
+      ?application_id: String,
+      ?index_id: String,
+      ?group_name: String,
+      ?data_source_id: String
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _GetIndexResponse
+      include Smithy::Client::_Response[Types::GetIndexResponse]
+      def application_id: () -> String?
+      def index_id: () -> String?
+      def display_name: () -> String?
+      def index_arn: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def capacity_configuration: () -> Types::IndexCapacityConfiguration?
+      def document_attribute_configurations: () -> Array[Types::DocumentAttributeConfiguration]?
+      def error: () -> Types::ErrorDetail?
+      def index_statistics: () -> Types::IndexStatistics?
+    end
+    def get_index: (
+      ?application_id: String,
+      ?index_id: String
+    ) -> _GetIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIndexResponse
+
+    interface _GetMediaResponse
+      include Smithy::Client::_Response[Types::GetMediaResponse]
+      def media_bytes: () -> String?
+      def media_mime_type: () -> String?
+    end
+    def get_media: (
+      ?application_id: String,
+      ?conversation_id: String,
+      ?message_id: String,
+      ?media_id: String
+    ) -> _GetMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaResponse
+
+    interface _GetPluginResponse
+      include Smithy::Client::_Response[Types::GetPluginResponse]
+      def application_id: () -> String?
+      def plugin_id: () -> String?
+      def display_name: () -> String?
+      def type: () -> String?
+      def server_url: () -> String?
+      def auth_configuration: () -> Types::PluginAuthConfiguration?
+      def custom_plugin_configuration: () -> Types::CustomPluginConfiguration?
+      def build_status: () -> String?
+      def plugin_arn: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_plugin: (
+      ?application_id: String,
+      ?plugin_id: String
+    ) -> _GetPluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPluginResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy: () -> String?
+    end
+    def get_policy: (
+      ?application_id: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetRetrieverResponse
+      include Smithy::Client::_Response[Types::GetRetrieverResponse]
+      def application_id: () -> String?
+      def retriever_id: () -> String?
+      def retriever_arn: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def display_name: () -> String?
+      def configuration: () -> Types::RetrieverConfiguration?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_retriever: (
+      ?application_id: String,
+      ?retriever_id: String
+    ) -> _GetRetrieverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRetrieverResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def user_aliases: () -> Array[Types::UserAlias]?
+    end
+    def get_user: (
+      ?application_id: String,
+      ?user_id: String
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetWebExperienceResponse
+      include Smithy::Client::_Response[Types::GetWebExperienceResponse]
+      def application_id: () -> String?
+      def web_experience_id: () -> String?
+      def web_experience_arn: () -> String?
+      def default_endpoint: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def title: () -> String?
+      def subtitle: () -> String?
+      def welcome_message: () -> String?
+      def sample_prompts_control_mode: () -> String?
+      def origins: () -> Array[String]?
+      def role_arn: () -> String?
+      def identity_provider_configuration: () -> Types::IdentityProviderConfiguration?
+      def authentication_configuration: () -> Types::WebExperienceAuthConfiguration?
+      def error: () -> Types::ErrorDetail?
+      def browser_extension_configuration: () -> Types::BrowserExtensionConfiguration?
+      def customization_configuration: () -> Types::CustomizationConfiguration?
+    end
+    def get_web_experience: (
+      ?application_id: String,
+      ?web_experience_id: String
+    ) -> _GetWebExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebExperienceResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def next_token: () -> String?
+      def applications: () -> Array[Types::Application]?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListAttachmentsResponse]
+      def attachments: () -> Array[Types::Attachment]?
+      def next_token: () -> String?
+    end
+    def list_attachments: (
+      ?application_id: String,
+      ?conversation_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachmentsResponse
+
+    interface _ListChatResponseConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListChatResponseConfigurationsResponse]
+      def chat_response_configurations: () -> Array[Types::ChatResponseConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_chat_response_configurations: (
+      ?application_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChatResponseConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChatResponseConfigurationsResponse
+
+    interface _ListConversationsResponse
+      include Smithy::Client::_Response[Types::ListConversationsResponse]
+      def next_token: () -> String?
+      def conversations: () -> Array[Types::Conversation]?
+    end
+    def list_conversations: (
+      ?application_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConversationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConversationsResponse
+
+    interface _ListDataAccessorsResponse
+      include Smithy::Client::_Response[Types::ListDataAccessorsResponse]
+      def data_accessors: () -> Array[Types::DataAccessor]?
+      def next_token: () -> String?
+    end
+    def list_data_accessors: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataAccessorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAccessorsResponse
+
+    interface _ListDataSourceSyncJobsResponse
+      include Smithy::Client::_Response[Types::ListDataSourceSyncJobsResponse]
+      def history: () -> Array[Types::DataSourceSyncJob]?
+      def next_token: () -> String?
+    end
+    def list_data_source_sync_jobs: (
+      ?data_source_id: String,
+      ?application_id: String,
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?status_filter: String
+    ) -> _ListDataSourceSyncJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourceSyncJobsResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesResponse]
+      def data_sources: () -> Array[Types::DataSource]?
+      def next_token: () -> String?
+    end
+    def list_data_sources: (
+      ?application_id: String,
+      ?index_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListDocumentsResponse
+      include Smithy::Client::_Response[Types::ListDocumentsResponse]
+      def document_detail_list: () -> Array[Types::DocumentDetails]?
+      def next_token: () -> String?
+    end
+    def list_documents: (
+      ?application_id: String,
+      ?index_id: String,
+      ?data_source_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDocumentsResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::GroupSummary]?
+    end
+    def list_groups: (
+      ?application_id: String,
+      ?index_id: String,
+      ?updated_earlier_than: Time,
+      ?data_source_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListIndicesResponse
+      include Smithy::Client::_Response[Types::ListIndicesResponse]
+      def next_token: () -> String?
+      def indices: () -> Array[Types::Index]?
+    end
+    def list_indices: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIndicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndicesResponse
+
+    interface _ListMessagesResponse
+      include Smithy::Client::_Response[Types::ListMessagesResponse]
+      def messages: () -> Array[Types::Message]?
+      def next_token: () -> String?
+    end
+    def list_messages: (
+      ?conversation_id: String,
+      ?application_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMessagesResponse
+
+    interface _ListPluginActionsResponse
+      include Smithy::Client::_Response[Types::ListPluginActionsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ActionSummary]?
+    end
+    def list_plugin_actions: (
+      ?application_id: String,
+      ?plugin_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPluginActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPluginActionsResponse
+
+    interface _ListPluginTypeActionsResponse
+      include Smithy::Client::_Response[Types::ListPluginTypeActionsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ActionSummary]?
+    end
+    def list_plugin_type_actions: (
+      ?plugin_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPluginTypeActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPluginTypeActionsResponse
+
+    interface _ListPluginTypeMetadataResponse
+      include Smithy::Client::_Response[Types::ListPluginTypeMetadataResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::PluginTypeMetadataSummary]?
+    end
+    def list_plugin_type_metadata: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPluginTypeMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPluginTypeMetadataResponse
+
+    interface _ListPluginsResponse
+      include Smithy::Client::_Response[Types::ListPluginsResponse]
+      def next_token: () -> String?
+      def plugins: () -> Array[Types::Plugin]?
+    end
+    def list_plugins: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPluginsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPluginsResponse
+
+    interface _ListRetrieversResponse
+      include Smithy::Client::_Response[Types::ListRetrieversResponse]
+      def retrievers: () -> Array[Types::Retriever]?
+      def next_token: () -> String?
+    end
+    def list_retrievers: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRetrieversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetrieversResponse
+
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsResponse]
+      def next_token: () -> String?
+      def subscriptions: () -> Array[Types::Subscription]?
+    end
+    def list_subscriptions: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWebExperiencesResponse
+      include Smithy::Client::_Response[Types::ListWebExperiencesResponse]
+      def web_experiences: () -> Array[Types::WebExperience]?
+      def next_token: () -> String?
+    end
+    def list_web_experiences: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWebExperiencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebExperiencesResponse
+
+    interface _PutFeedbackResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_feedback: (
+      ?application_id: String,
+      ?user_id: String,
+      ?conversation_id: String,
+      ?message_id: String,
+      ?message_copied_at: Time,
+      ?message_usefulness: {
+        usefulness: String,
+        reason: String,
+        comment: String,
+        submitted_at: Time
+      }
+    ) -> _PutFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFeedbackResponse
+
+    interface _PutGroupResponse
+      include Smithy::Client::_Response[Types::PutGroupResponse]
+    end
+    def put_group: (
+      ?application_id: String,
+      ?index_id: String,
+      ?group_name: String,
+      ?data_source_id: String,
+      ?type: String,
+      ?group_members: {
+        member_groups: Array[
+          {
+            group_name: String,
+            type: String
+          }
+        ],
+        member_users: Array[
+          {
+            user_id: String,
+            type: untyped
+          }
+        ],
+        s3_path_for_group_members: {
+          bucket: String,
+          key: String
+        }
+      },
+      ?role_arn: String
+    ) -> _PutGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGroupResponse
+
+    interface _SearchRelevantContentResponse
+      include Smithy::Client::_Response[Types::SearchRelevantContentResponse]
+      def relevant_content: () -> Array[Types::RelevantContent]?
+      def next_token: () -> String?
+    end
+    def search_relevant_content: (
+      ?application_id: String,
+      ?query_text: String,
+      ?content_source: {
+        retriever: {
+          retriever_id: String
+        }
+      },
+      ?attribute_filter: {
+        and_all_filters: Array[
+          {
+            and_all_filters: untyped,
+            or_all_filters: untyped,
+            not_filter: untyped,
+            equals_to: {
+              name: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            contains_all: untyped,
+            contains_any: untyped,
+            greater_than: untyped,
+            greater_than_or_equals: untyped,
+            less_than: untyped,
+            less_than_or_equals: untyped
+          }
+        ],
+        or_all_filters: untyped,
+        not_filter: untyped,
+        equals_to: untyped,
+        contains_all: untyped,
+        contains_any: untyped,
+        greater_than: untyped,
+        greater_than_or_equals: untyped,
+        less_than: untyped,
+        less_than_or_equals: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchRelevantContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRelevantContentResponse
+
+    interface _StartDataSourceSyncJobResponse
+      include Smithy::Client::_Response[Types::StartDataSourceSyncJobResponse]
+      def execution_id: () -> String?
+    end
+    def start_data_source_sync_job: (
+      ?data_source_id: String,
+      ?application_id: String,
+      ?index_id: String
+    ) -> _StartDataSourceSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataSourceSyncJobResponse
+
+    interface _StopDataSourceSyncJobResponse
+      include Smithy::Client::_Response[Types::StopDataSourceSyncJobResponse]
+    end
+    def stop_data_source_sync_job: (
+      ?data_source_id: String,
+      ?application_id: String,
+      ?index_id: String
+    ) -> _StopDataSourceSyncJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDataSourceSyncJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+    end
+    def update_application: (
+      ?application_id: String,
+      ?identity_center_instance_arn: String,
+      ?display_name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?attachments_configuration: {
+        attachments_control_mode: String
+      },
+      ?q_apps_configuration: {
+        q_apps_control_mode: String
+      },
+      ?personalization_configuration: {
+        personalization_control_mode: String
+      },
+      ?auto_subscription_configuration: {
+        auto_subscribe: String,
+        default_subscription_type: String
+      }
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateChatControlsConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateChatControlsConfigurationResponse]
+    end
+    def update_chat_controls_configuration: (
+      ?application_id: String,
+      ?client_token: String,
+      ?response_scope: String,
+      ?orchestration_configuration: {
+        control: String
+      },
+      ?blocked_phrases_configuration_update: {
+        blocked_phrases_to_create_or_update: Array[String],
+        blocked_phrases_to_delete: untyped,
+        system_message_override: String
+      },
+      ?topic_configurations_to_create_or_update: Array[
+        {
+          name: String,
+          description: String,
+          example_chat_messages: Array[String],
+          rules: Array[
+            {
+              included_users_and_groups: {
+                user_ids: Array[String],
+                user_groups: Array[String]
+              },
+              excluded_users_and_groups: untyped,
+              rule_type: String,
+              rule_configuration: {
+                content_blocker_rule: {
+                  system_message_override: String
+                },
+                content_retrieval_rule: {
+                  eligible_data_sources: Array[
+                    {
+                      index_id: String,
+                      data_source_id: String
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      ?topic_configurations_to_delete: Array[
+        {
+          name: String,
+          description: String,
+          example_chat_messages: Array[String],
+          rules: Array[
+            {
+              included_users_and_groups: {
+                user_ids: Array[String],
+                user_groups: Array[String]
+              },
+              excluded_users_and_groups: untyped,
+              rule_type: String,
+              rule_configuration: {
+                content_blocker_rule: {
+                  system_message_override: String
+                },
+                content_retrieval_rule: {
+                  eligible_data_sources: Array[
+                    {
+                      index_id: String,
+                      data_source_id: String
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      ?creator_mode_configuration: {
+        creator_mode_control: String
+      },
+      ?hallucination_reduction_configuration: {
+        hallucination_reduction_control: String
+      }
+    ) -> _UpdateChatControlsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChatControlsConfigurationResponse
+
+    interface _UpdateChatResponseConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateChatResponseConfigurationResponse]
+    end
+    def update_chat_response_configuration: (
+      ?application_id: String,
+      ?chat_response_configuration_id: String,
+      ?display_name: String,
+      ?response_configurations: Hash[String,
+        {
+          instruction_collection: {
+            response_length: String,
+            target_audience: untyped,
+            perspective: untyped,
+            output_style: untyped,
+            identity: untyped,
+            tone: untyped,
+            custom_instructions: untyped,
+            examples: untyped
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateChatResponseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChatResponseConfigurationResponse
+
+    interface _UpdateDataAccessorResponse
+      include Smithy::Client::_Response[Types::UpdateDataAccessorResponse]
+    end
+    def update_data_accessor: (
+      ?application_id: String,
+      ?data_accessor_id: String,
+      ?action_configurations: Array[
+        {
+          action: String,
+          filter_configuration: {
+            document_attribute_filter: {
+              and_all_filters: Array[
+                {
+                  and_all_filters: untyped,
+                  or_all_filters: untyped,
+                  not_filter: untyped,
+                  equals_to: {
+                    name: String,
+                    value: {
+                      string_value: String,
+                      string_list_value: Array[String],
+                      long_value: Integer,
+                      date_value: Time
+                    }
+                  },
+                  contains_all: untyped,
+                  contains_any: untyped,
+                  greater_than: untyped,
+                  greater_than_or_equals: untyped,
+                  less_than: untyped,
+                  less_than_or_equals: untyped
+                }
+              ],
+              or_all_filters: untyped,
+              not_filter: untyped,
+              equals_to: untyped,
+              contains_all: untyped,
+              contains_any: untyped,
+              greater_than: untyped,
+              greater_than_or_equals: untyped,
+              less_than: untyped,
+              less_than_or_equals: untyped
+            }
+          }
+        }
+      ],
+      ?authentication_detail: {
+        authentication_type: String,
+        authentication_configuration: {
+          idc_trusted_token_issuer_configuration: {
+            idc_trusted_token_issuer_arn: String
+          }
+        },
+        external_ids: Array[String]
+      },
+      ?display_name: String
+    ) -> _UpdateDataAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataAccessorResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceResponse]
+    end
+    def update_data_source: (
+      ?application_id: String,
+      ?index_id: String,
+      ?data_source_id: String,
+      ?display_name: String,
+      ?configuration: Smithy::Schema::document,
+      ?vpc_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?description: String,
+      ?sync_schedule: String,
+      ?role_arn: String,
+      ?document_enrichment_configuration: {
+        inline_configurations: Array[
+          {
+            condition: {
+              key: String,
+              operator: String,
+              value: {
+                string_value: String,
+                string_list_value: Array[String],
+                long_value: Integer,
+                date_value: Time
+              }
+            },
+            target: {
+              key: untyped,
+              value: untyped,
+              attribute_value_operator: String
+            },
+            document_content_operator: String
+          }
+        ],
+        pre_extraction_hook_configuration: {
+          invocation_condition: untyped,
+          lambda_arn: String,
+          s3_bucket_name: String,
+          role_arn: String
+        },
+        post_extraction_hook_configuration: untyped
+      },
+      ?media_extraction_configuration: {
+        image_extraction_configuration: {
+          image_extraction_status: String
+        },
+        audio_extraction_configuration: {
+          audio_extraction_status: String
+        },
+        video_extraction_configuration: {
+          video_extraction_status: String
+        }
+      }
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateIndexResponse
+      include Smithy::Client::_Response[Types::UpdateIndexResponse]
+    end
+    def update_index: (
+      ?application_id: String,
+      ?index_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?capacity_configuration: {
+        units: Integer
+      },
+      ?document_attribute_configurations: Array[
+        {
+          name: String,
+          type: String,
+          search: String
+        }
+      ]
+    ) -> _UpdateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexResponse
+
+    interface _UpdatePluginResponse
+      include Smithy::Client::_Response[Types::UpdatePluginResponse]
+    end
+    def update_plugin: (
+      ?application_id: String,
+      ?plugin_id: String,
+      ?display_name: String,
+      ?state: String,
+      ?server_url: String,
+      ?custom_plugin_configuration: {
+        description: String,
+        api_schema_type: String,
+        api_schema: {
+          payload: String,
+          s3: {
+            bucket: String,
+            key: String
+          }
+        }
+      },
+      ?auth_configuration: {
+        basic_auth_configuration: {
+          secret_arn: String,
+          role_arn: String
+        },
+        o_auth2_client_credential_configuration: {
+          secret_arn: untyped,
+          role_arn: untyped,
+          authorization_url: String,
+          token_url: untyped
+        },
+        no_auth_configuration: {
+        },
+        idc_auth_configuration: {
+          idc_application_arn: String,
+          role_arn: untyped
+        }
+      }
+    ) -> _UpdatePluginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePluginResponse
+
+    interface _UpdateRetrieverResponse
+      include Smithy::Client::_Response[Types::UpdateRetrieverResponse]
+    end
+    def update_retriever: (
+      ?application_id: String,
+      ?retriever_id: String,
+      ?configuration: {
+        native_index_configuration: {
+          index_id: String,
+          version: Integer,
+          boosting_override: Hash[String,
+            {
+              number_configuration: {
+                boosting_level: String,
+                boosting_type: String
+              },
+              string_configuration: {
+                boosting_level: untyped,
+                attribute_value_boosting: Hash[String, String]
+              },
+              date_configuration: {
+                boosting_level: untyped,
+                boosting_duration_in_seconds: Integer
+              },
+              string_list_configuration: {
+                boosting_level: untyped
+              }
+            }
+          ]
+        },
+        kendra_index_configuration: {
+          index_id: String
+        }
+      },
+      ?display_name: String,
+      ?role_arn: String
+    ) -> _UpdateRetrieverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRetrieverResponse
+
+    interface _UpdateSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionResponse]
+      def subscription_arn: () -> String?
+      def current_subscription: () -> Types::SubscriptionDetails?
+      def next_subscription: () -> Types::SubscriptionDetails?
+    end
+    def update_subscription: (
+      ?application_id: String,
+      ?subscription_id: String,
+      ?type: String
+    ) -> _UpdateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def user_aliases_added: () -> Array[Types::UserAlias]?
+      def user_aliases_updated: () -> Array[Types::UserAlias]?
+      def user_aliases_deleted: () -> Array[Types::UserAlias]?
+    end
+    def update_user: (
+      ?application_id: String,
+      ?user_id: String,
+      ?user_aliases_to_update: Array[
+        {
+          index_id: String,
+          data_source_id: String,
+          user_id: String
+        }
+      ],
+      ?user_aliases_to_delete: Array[
+        {
+          index_id: String,
+          data_source_id: String,
+          user_id: String
+        }
+      ]
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+
+    interface _UpdateWebExperienceResponse
+      include Smithy::Client::_Response[Types::UpdateWebExperienceResponse]
+    end
+    def update_web_experience: (
+      ?application_id: String,
+      ?web_experience_id: String,
+      ?role_arn: String,
+      ?authentication_configuration: {
+        saml_configuration: {
+          metadata_xml: String,
+          role_arn: String,
+          user_id_attribute: String,
+          user_group_attribute: untyped
+        }
+      },
+      ?title: String,
+      ?subtitle: String,
+      ?welcome_message: String,
+      ?sample_prompts_control_mode: String,
+      ?identity_provider_configuration: {
+        saml_configuration: {
+          authentication_url: String
+        },
+        open_id_connect_configuration: {
+          secrets_arn: String,
+          secrets_role: String
+        }
+      },
+      ?origins: Array[String],
+      ?browser_extension_configuration: {
+        enabled_browser_extensions: Array[String]
+      },
+      ?customization_configuration: {
+        custom_css_url: String,
+        logo_url: String,
+        font_url: String,
+        favicon_url: String
+      }
+    ) -> _UpdateWebExperienceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebExperienceResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Backup
+      VERSION: String
+    end
+  end

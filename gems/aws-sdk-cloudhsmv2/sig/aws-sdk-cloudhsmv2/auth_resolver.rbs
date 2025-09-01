@@ -1,0 +1,5 @@
+module Aws::CloudHSMV2
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

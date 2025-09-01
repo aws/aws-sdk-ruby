@@ -1,0 +1,1619 @@
+module Aws::Omics
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Omics::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AbortMultipartReadSetUploadResponse
+      include Smithy::Client::_Response[Types::AbortMultipartReadSetUploadResponse]
+    end
+    def abort_multipart_read_set_upload: (
+      ?sequence_store_id: String,
+      ?upload_id: String
+    ) -> _AbortMultipartReadSetUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AbortMultipartReadSetUploadResponse
+
+    interface _AcceptShareResponse
+      include Smithy::Client::_Response[Types::AcceptShareResponse]
+      def status: () -> String?
+    end
+    def accept_share: (
+      ?share_id: String
+    ) -> _AcceptShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptShareResponse
+
+    interface _BatchDeleteReadSetResponse
+      include Smithy::Client::_Response[Types::BatchDeleteReadSetResponse]
+      def errors: () -> Array[Types::ReadSetBatchError]?
+    end
+    def batch_delete_read_set: (
+      ?ids: Array[String],
+      ?sequence_store_id: String
+    ) -> _BatchDeleteReadSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteReadSetResponse
+
+    interface _CancelAnnotationImportJobResponse
+      include Smithy::Client::_Response[Types::CancelAnnotationImportResponse]
+    end
+    def cancel_annotation_import_job: (
+      ?job_id: String
+    ) -> _CancelAnnotationImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAnnotationImportJobResponse
+
+    interface _CancelRunResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_run: (
+      ?id: String
+    ) -> _CancelRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelRunResponse
+
+    interface _CancelVariantImportJobResponse
+      include Smithy::Client::_Response[Types::CancelVariantImportResponse]
+    end
+    def cancel_variant_import_job: (
+      ?job_id: String
+    ) -> _CancelVariantImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelVariantImportJobResponse
+
+    interface _CompleteMultipartReadSetUploadResponse
+      include Smithy::Client::_Response[Types::CompleteMultipartReadSetUploadResponse]
+      def read_set_id: () -> String?
+    end
+    def complete_multipart_read_set_upload: (
+      ?sequence_store_id: String,
+      ?upload_id: String,
+      ?parts: Array[
+        {
+          part_number: Integer,
+          part_source: String,
+          checksum: String
+        }
+      ]
+    ) -> _CompleteMultipartReadSetUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteMultipartReadSetUploadResponse
+
+    interface _CreateAnnotationStoreResponse
+      include Smithy::Client::_Response[Types::CreateAnnotationStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def store_format: () -> String?
+      def store_options: () -> Types::StoreOptions?
+      def status: () -> String?
+      def name: () -> String?
+      def version_name: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_annotation_store: (
+      ?reference: {
+        reference_arn: String
+      },
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?version_name: String,
+      ?sse_config: {
+        type: String,
+        key_arn: String
+      },
+      ?store_format: String,
+      ?store_options: {
+        tsv_store_options: {
+          annotation_type: String,
+          format_to_header: Hash[String, String],
+          schema: Array[
+            Hash[String, String]
+          ]
+        }
+      }
+    ) -> _CreateAnnotationStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnnotationStoreResponse
+
+    interface _CreateAnnotationStoreVersionResponse
+      include Smithy::Client::_Response[Types::CreateAnnotationStoreVersionResponse]
+      def id: () -> String?
+      def version_name: () -> String?
+      def store_id: () -> String?
+      def version_options: () -> Types::VersionOptions?
+      def name: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_annotation_store_version: (
+      ?name: String,
+      ?version_name: String,
+      ?description: String,
+      ?version_options: {
+        tsv_version_options: {
+          annotation_type: String,
+          format_to_header: Hash[String, String],
+          schema: Array[
+            Hash[String, String]
+          ]
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateAnnotationStoreVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnnotationStoreVersionResponse
+
+    interface _CreateMultipartReadSetUploadResponse
+      include Smithy::Client::_Response[Types::CreateMultipartReadSetUploadResponse]
+      def sequence_store_id: () -> String?
+      def upload_id: () -> String?
+      def source_file_type: () -> String?
+      def subject_id: () -> String?
+      def sample_id: () -> String?
+      def generated_from: () -> String?
+      def reference_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+      def creation_time: () -> Time?
+    end
+    def create_multipart_read_set_upload: (
+      ?sequence_store_id: String,
+      ?client_token: String,
+      ?source_file_type: String,
+      ?subject_id: String,
+      ?sample_id: String,
+      ?generated_from: String,
+      ?reference_arn: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMultipartReadSetUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultipartReadSetUploadResponse
+
+    interface _CreateReferenceStoreResponse
+      include Smithy::Client::_Response[Types::CreateReferenceStoreResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+    end
+    def create_reference_store: (
+      ?name: String,
+      ?description: String,
+      ?sse_config: {
+        type: String,
+        key_arn: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateReferenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReferenceStoreResponse
+
+    interface _CreateRunCacheResponse
+      include Smithy::Client::_Response[Types::CreateRunCacheResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_run_cache: (
+      ?cache_behavior: String,
+      ?cache_s3_location: String,
+      ?description: String,
+      ?name: String,
+      ?request_id: String,
+      ?tags: Hash[String, String],
+      ?cache_bucket_owner_id: String
+    ) -> _CreateRunCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRunCacheResponse
+
+    interface _CreateRunGroupResponse
+      include Smithy::Client::_Response[Types::CreateRunGroupResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_run_group: (
+      ?name: String,
+      ?max_cpus: Integer,
+      ?max_runs: Integer,
+      ?max_duration: Integer,
+      ?tags: Hash[String, String],
+      ?request_id: String,
+      ?max_gpus: Integer
+    ) -> _CreateRunGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRunGroupResponse
+
+    interface _CreateSequenceStoreResponse
+      include Smithy::Client::_Response[Types::CreateSequenceStoreResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+      def fallback_location: () -> String?
+      def e_tag_algorithm_family: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def propagated_set_level_tags: () -> Array[String]?
+      def s3_access: () -> Types::SequenceStoreS3Access?
+    end
+    def create_sequence_store: (
+      ?name: String,
+      ?description: String,
+      ?sse_config: {
+        type: String,
+        key_arn: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?fallback_location: String,
+      ?e_tag_algorithm_family: String,
+      ?propagated_set_level_tags: Array[String],
+      ?s3_access_config: {
+        access_log_location: String
+      }
+    ) -> _CreateSequenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSequenceStoreResponse
+
+    interface _CreateShareResponse
+      include Smithy::Client::_Response[Types::CreateShareResponse]
+      def share_id: () -> String?
+      def status: () -> String?
+      def share_name: () -> String?
+    end
+    def create_share: (
+      ?resource_arn: String,
+      ?principal_subscriber: String,
+      ?share_name: String
+    ) -> _CreateShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateShareResponse
+
+    interface _CreateVariantStoreResponse
+      include Smithy::Client::_Response[Types::CreateVariantStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def status: () -> String?
+      def name: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_variant_store: (
+      ?reference: {
+        reference_arn: String
+      },
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?sse_config: {
+        type: String,
+        key_arn: String
+      }
+    ) -> _CreateVariantStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVariantStoreResponse
+
+    interface _CreateWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def uuid: () -> String?
+    end
+    def create_workflow: (
+      ?name: String,
+      ?description: String,
+      ?engine: String,
+      ?definition_zip: String,
+      ?definition_uri: String,
+      ?main: String,
+      ?parameter_template: Hash[String,
+        {
+          description: String,
+          optional: bool
+        }
+      ],
+      ?storage_capacity: Integer,
+      ?tags: Hash[String, String],
+      ?request_id: String,
+      ?accelerators: String,
+      ?storage_type: String,
+      ?readme_markdown: String,
+      ?parameter_template_path: String,
+      ?readme_path: String,
+      ?definition_repository: {
+        connection_arn: String,
+        full_repository_id: String,
+        source_reference: {
+          type: String,
+          value: String
+        },
+        exclude_file_patterns: Array[String]
+      },
+      ?workflow_bucket_owner_id: String,
+      ?readme_uri: String
+    ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
+
+    interface _CreateWorkflowVersionResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowVersionResponse]
+      def arn: () -> String?
+      def workflow_id: () -> String?
+      def version_name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def uuid: () -> String?
+    end
+    def create_workflow_version: (
+      ?workflow_id: String,
+      ?version_name: String,
+      ?definition_zip: String,
+      ?definition_uri: String,
+      ?accelerators: String,
+      ?description: String,
+      ?engine: String,
+      ?main: String,
+      ?parameter_template: Hash[String,
+        {
+          description: String,
+          optional: bool
+        }
+      ],
+      ?request_id: String,
+      ?storage_type: String,
+      ?storage_capacity: Integer,
+      ?tags: Hash[String, String],
+      ?workflow_bucket_owner_id: String,
+      ?readme_markdown: String,
+      ?parameter_template_path: String,
+      ?readme_path: String,
+      ?definition_repository: {
+        connection_arn: String,
+        full_repository_id: String,
+        source_reference: {
+          type: String,
+          value: String
+        },
+        exclude_file_patterns: Array[String]
+      },
+      ?readme_uri: String
+    ) -> _CreateWorkflowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowVersionResponse
+
+    interface _DeleteAnnotationStoreResponse
+      include Smithy::Client::_Response[Types::DeleteAnnotationStoreResponse]
+      def status: () -> String?
+    end
+    def delete_annotation_store: (
+      ?name: String,
+      ?force: bool
+    ) -> _DeleteAnnotationStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnnotationStoreResponse
+
+    interface _DeleteAnnotationStoreVersionsResponse
+      include Smithy::Client::_Response[Types::DeleteAnnotationStoreVersionsResponse]
+      def errors: () -> Array[Types::VersionDeleteError]?
+    end
+    def delete_annotation_store_versions: (
+      ?name: String,
+      ?versions: Array[String],
+      ?force: bool
+    ) -> _DeleteAnnotationStoreVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnnotationStoreVersionsResponse
+
+    interface _DeleteReferenceResponse
+      include Smithy::Client::_Response[Types::DeleteReferenceResponse]
+    end
+    def delete_reference: (
+      ?id: String,
+      ?reference_store_id: String
+    ) -> _DeleteReferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReferenceResponse
+
+    interface _DeleteReferenceStoreResponse
+      include Smithy::Client::_Response[Types::DeleteReferenceStoreResponse]
+    end
+    def delete_reference_store: (
+      ?id: String
+    ) -> _DeleteReferenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReferenceStoreResponse
+
+    interface _DeleteRunResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_run: (
+      ?id: String
+    ) -> _DeleteRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunResponse
+
+    interface _DeleteRunCacheResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_run_cache: (
+      ?id: String
+    ) -> _DeleteRunCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunCacheResponse
+
+    interface _DeleteRunGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_run_group: (
+      ?id: String
+    ) -> _DeleteRunGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunGroupResponse
+
+    interface _DeleteS3AccessPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteS3AccessPolicyResponse]
+    end
+    def delete_s3_access_policy: (
+      ?s3_access_point_arn: String
+    ) -> _DeleteS3AccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteS3AccessPolicyResponse
+
+    interface _DeleteSequenceStoreResponse
+      include Smithy::Client::_Response[Types::DeleteSequenceStoreResponse]
+    end
+    def delete_sequence_store: (
+      ?id: String
+    ) -> _DeleteSequenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSequenceStoreResponse
+
+    interface _DeleteShareResponse
+      include Smithy::Client::_Response[Types::DeleteShareResponse]
+      def status: () -> String?
+    end
+    def delete_share: (
+      ?share_id: String
+    ) -> _DeleteShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteShareResponse
+
+    interface _DeleteVariantStoreResponse
+      include Smithy::Client::_Response[Types::DeleteVariantStoreResponse]
+      def status: () -> String?
+    end
+    def delete_variant_store: (
+      ?name: String,
+      ?force: bool
+    ) -> _DeleteVariantStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVariantStoreResponse
+
+    interface _DeleteWorkflowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workflow: (
+      ?id: String
+    ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
+
+    interface _DeleteWorkflowVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workflow_version: (
+      ?workflow_id: String,
+      ?version_name: String
+    ) -> _DeleteWorkflowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowVersionResponse
+
+    interface _GetAnnotationImportJobResponse
+      include Smithy::Client::_Response[Types::GetAnnotationImportResponse]
+      def id: () -> String?
+      def destination_name: () -> String?
+      def version_name: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def completion_time: () -> Time?
+      def items: () -> Array[Types::AnnotationImportItemDetail]?
+      def run_left_normalization: () -> bool?
+      def format_options: () -> Types::FormatOptions?
+      def annotation_fields: () -> Hash[String, String]?
+    end
+    def get_annotation_import_job: (
+      ?job_id: String
+    ) -> _GetAnnotationImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnnotationImportJobResponse
+
+    interface _GetAnnotationStoreResponse
+      include Smithy::Client::_Response[Types::GetAnnotationStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def status: () -> String?
+      def store_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def store_options: () -> Types::StoreOptions?
+      def store_format: () -> String?
+      def status_message: () -> String?
+      def store_size_bytes: () -> Integer?
+      def num_versions: () -> Integer?
+    end
+    def get_annotation_store: (
+      ?name: String
+    ) -> _GetAnnotationStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnnotationStoreResponse
+
+    interface _GetAnnotationStoreVersionResponse
+      include Smithy::Client::_Response[Types::GetAnnotationStoreVersionResponse]
+      def store_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def version_arn: () -> String?
+      def name: () -> String?
+      def version_name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def version_options: () -> Types::VersionOptions?
+      def status_message: () -> String?
+      def version_size_bytes: () -> Integer?
+    end
+    def get_annotation_store_version: (
+      ?name: String,
+      ?version_name: String
+    ) -> _GetAnnotationStoreVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnnotationStoreVersionResponse
+
+    interface _GetReadSetResponse
+      include Smithy::Client::_Response[Types::GetReadSetResponse]
+      def payload: () -> String?
+    end
+    def get_read_set: (
+      ?id: String,
+      ?sequence_store_id: String,
+      ?file: String,
+      ?part_number: Integer
+    ) -> _GetReadSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadSetResponse
+
+    interface _GetReadSetActivationJobResponse
+      include Smithy::Client::_Response[Types::GetReadSetActivationJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def completion_time: () -> Time?
+      def sources: () -> Array[Types::ActivateReadSetSourceItem]?
+    end
+    def get_read_set_activation_job: (
+      ?id: String,
+      ?sequence_store_id: String
+    ) -> _GetReadSetActivationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadSetActivationJobResponse
+
+    interface _GetReadSetExportJobResponse
+      include Smithy::Client::_Response[Types::GetReadSetExportJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def destination: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def completion_time: () -> Time?
+      def read_sets: () -> Array[Types::ExportReadSetDetail]?
+    end
+    def get_read_set_export_job: (
+      ?sequence_store_id: String,
+      ?id: String
+    ) -> _GetReadSetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadSetExportJobResponse
+
+    interface _GetReadSetImportJobResponse
+      include Smithy::Client::_Response[Types::GetReadSetImportJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def completion_time: () -> Time?
+      def sources: () -> Array[Types::ImportReadSetSourceItem]?
+    end
+    def get_read_set_import_job: (
+      ?id: String,
+      ?sequence_store_id: String
+    ) -> _GetReadSetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadSetImportJobResponse
+
+    interface _GetReadSetMetadataResponse
+      include Smithy::Client::_Response[Types::GetReadSetMetadataResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def sequence_store_id: () -> String?
+      def subject_id: () -> String?
+      def sample_id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def file_type: () -> String?
+      def creation_time: () -> Time?
+      def sequence_information: () -> Types::SequenceInformation?
+      def reference_arn: () -> String?
+      def files: () -> Types::ReadSetFiles?
+      def status_message: () -> String?
+      def creation_type: () -> String?
+      def etag: () -> Types::ETag?
+      def creation_job_id: () -> String?
+    end
+    def get_read_set_metadata: (
+      ?id: String,
+      ?sequence_store_id: String
+    ) -> _GetReadSetMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReadSetMetadataResponse
+
+    interface _GetReferenceResponse
+      include Smithy::Client::_Response[Types::GetReferenceResponse]
+      def payload: () -> String?
+    end
+    def get_reference: (
+      ?id: String,
+      ?reference_store_id: String,
+      ?range: String,
+      ?part_number: Integer,
+      ?file: String
+    ) -> _GetReferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReferenceResponse
+
+    interface _GetReferenceImportJobResponse
+      include Smithy::Client::_Response[Types::GetReferenceImportJobResponse]
+      def id: () -> String?
+      def reference_store_id: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def completion_time: () -> Time?
+      def sources: () -> Array[Types::ImportReferenceSourceItem]?
+    end
+    def get_reference_import_job: (
+      ?id: String,
+      ?reference_store_id: String
+    ) -> _GetReferenceImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReferenceImportJobResponse
+
+    interface _GetReferenceMetadataResponse
+      include Smithy::Client::_Response[Types::GetReferenceMetadataResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def reference_store_id: () -> String?
+      def md5: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def files: () -> Types::ReferenceFiles?
+      def creation_type: () -> String?
+      def creation_job_id: () -> String?
+    end
+    def get_reference_metadata: (
+      ?id: String,
+      ?reference_store_id: String
+    ) -> _GetReferenceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReferenceMetadataResponse
+
+    interface _GetReferenceStoreResponse
+      include Smithy::Client::_Response[Types::GetReferenceStoreResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+    end
+    def get_reference_store: (
+      ?id: String
+    ) -> _GetReferenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReferenceStoreResponse
+
+    interface _GetRunResponse
+      include Smithy::Client::_Response[Types::GetRunResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def cache_id: () -> String?
+      def cache_behavior: () -> String?
+      def engine_version: () -> String?
+      def status: () -> String?
+      def workflow_id: () -> String?
+      def workflow_type: () -> String?
+      def run_id: () -> String?
+      def role_arn: () -> String?
+      def name: () -> String?
+      def run_group_id: () -> String?
+      def priority: () -> Integer?
+      def definition: () -> String?
+      def digest: () -> String?
+      def parameters: () -> Smithy::Schema::document?
+      def storage_capacity: () -> Integer?
+      def output_uri: () -> String?
+      def log_level: () -> String?
+      def resource_digests: () -> Hash[String, String]?
+      def started_by: () -> String?
+      def creation_time: () -> Time?
+      def start_time: () -> Time?
+      def stop_time: () -> Time?
+      def status_message: () -> String?
+      def tags: () -> Hash[String, String]?
+      def accelerators: () -> String?
+      def retention_mode: () -> String?
+      def failure_reason: () -> String?
+      def log_location: () -> Types::RunLogLocation?
+      def uuid: () -> String?
+      def run_output_uri: () -> String?
+      def storage_type: () -> String?
+      def workflow_owner_id: () -> String?
+      def workflow_version_name: () -> String?
+      def workflow_uuid: () -> String?
+    end
+    def get_run: (
+      ?id: String,
+      ?export: Array[String]
+    ) -> _GetRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRunResponse
+
+    interface _GetRunCacheResponse
+      include Smithy::Client::_Response[Types::GetRunCacheResponse]
+      def arn: () -> String?
+      def cache_behavior: () -> String?
+      def cache_bucket_owner_id: () -> String?
+      def cache_s3_uri: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_run_cache: (
+      ?id: String
+    ) -> _GetRunCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRunCacheResponse
+
+    interface _GetRunGroupResponse
+      include Smithy::Client::_Response[Types::GetRunGroupResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def max_cpus: () -> Integer?
+      def max_runs: () -> Integer?
+      def max_duration: () -> Integer?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def max_gpus: () -> Integer?
+    end
+    def get_run_group: (
+      ?id: String
+    ) -> _GetRunGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRunGroupResponse
+
+    interface _GetRunTaskResponse
+      include Smithy::Client::_Response[Types::GetRunTaskResponse]
+      def task_id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def cpus: () -> Integer?
+      def cache_hit: () -> bool?
+      def cache_s3_uri: () -> String?
+      def memory: () -> Integer?
+      def creation_time: () -> Time?
+      def start_time: () -> Time?
+      def stop_time: () -> Time?
+      def status_message: () -> String?
+      def log_stream: () -> String?
+      def gpus: () -> Integer?
+      def instance_type: () -> String?
+      def failure_reason: () -> String?
+    end
+    def get_run_task: (
+      ?id: String,
+      ?task_id: String
+    ) -> _GetRunTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRunTaskResponse
+
+    interface _GetS3AccessPolicyResponse
+      include Smithy::Client::_Response[Types::GetS3AccessPolicyResponse]
+      def s3_access_point_arn: () -> String?
+      def store_id: () -> String?
+      def store_type: () -> String?
+      def update_time: () -> Time?
+      def s3_access_policy: () -> String?
+    end
+    def get_s3_access_policy: (
+      ?s3_access_point_arn: String
+    ) -> _GetS3AccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetS3AccessPolicyResponse
+
+    interface _GetSequenceStoreResponse
+      include Smithy::Client::_Response[Types::GetSequenceStoreResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+      def fallback_location: () -> String?
+      def s3_access: () -> Types::SequenceStoreS3Access?
+      def e_tag_algorithm_family: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def propagated_set_level_tags: () -> Array[String]?
+      def update_time: () -> Time?
+    end
+    def get_sequence_store: (
+      ?id: String
+    ) -> _GetSequenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSequenceStoreResponse
+
+    interface _GetShareResponse
+      include Smithy::Client::_Response[Types::GetShareResponse]
+      def share: () -> Types::ShareDetails?
+    end
+    def get_share: (
+      ?share_id: String
+    ) -> _GetShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetShareResponse
+
+    interface _GetVariantImportJobResponse
+      include Smithy::Client::_Response[Types::GetVariantImportResponse]
+      def id: () -> String?
+      def destination_name: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def completion_time: () -> Time?
+      def items: () -> Array[Types::VariantImportItemDetail]?
+      def run_left_normalization: () -> bool?
+      def annotation_fields: () -> Hash[String, String]?
+    end
+    def get_variant_import_job: (
+      ?job_id: String
+    ) -> _GetVariantImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVariantImportJobResponse
+
+    interface _GetVariantStoreResponse
+      include Smithy::Client::_Response[Types::GetVariantStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def status: () -> String?
+      def store_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def status_message: () -> String?
+      def store_size_bytes: () -> Integer?
+    end
+    def get_variant_store: (
+      ?name: String
+    ) -> _GetVariantStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVariantStoreResponse
+
+    interface _GetWorkflowResponse
+      include Smithy::Client::_Response[Types::GetWorkflowResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def engine: () -> String?
+      def definition: () -> String?
+      def main: () -> String?
+      def digest: () -> String?
+      def parameter_template: () -> Hash[String, Types::WorkflowParameter]?
+      def storage_capacity: () -> Integer?
+      def creation_time: () -> Time?
+      def status_message: () -> String?
+      def tags: () -> Hash[String, String]?
+      def metadata: () -> Hash[String, String]?
+      def accelerators: () -> String?
+      def storage_type: () -> String?
+      def uuid: () -> String?
+      def readme: () -> String?
+      def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
+      def readme_path: () -> String?
+    end
+    def get_workflow: (
+      ?id: String,
+      ?type: String,
+      ?export: Array[String],
+      ?workflow_owner_id: String
+    ) -> _GetWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowResponse
+
+    interface _GetWorkflowVersionResponse
+      include Smithy::Client::_Response[Types::GetWorkflowVersionResponse]
+      def arn: () -> String?
+      def workflow_id: () -> String?
+      def version_name: () -> String?
+      def accelerators: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def definition: () -> String?
+      def digest: () -> String?
+      def engine: () -> String?
+      def main: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def parameter_template: () -> Hash[String, Types::WorkflowParameter]?
+      def status: () -> String?
+      def status_message: () -> String?
+      def storage_type: () -> String?
+      def storage_capacity: () -> Integer?
+      def type: () -> String?
+      def tags: () -> Hash[String, String]?
+      def uuid: () -> String?
+      def workflow_bucket_owner_id: () -> String?
+      def readme: () -> String?
+      def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
+      def readme_path: () -> String?
+    end
+    def get_workflow_version: (
+      ?workflow_id: String,
+      ?version_name: String,
+      ?type: String,
+      ?export: Array[String],
+      ?workflow_owner_id: String
+    ) -> _GetWorkflowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowVersionResponse
+
+    interface _ListAnnotationImportJobsResponse
+      include Smithy::Client::_Response[Types::ListAnnotationImportJobsResponse]
+      def annotation_import_jobs: () -> Array[Types::AnnotationImportJobItem]?
+      def next_token: () -> String?
+    end
+    def list_annotation_import_jobs: (
+      ?max_results: Integer,
+      ?ids: Array[String],
+      ?next_token: String,
+      ?filter: {
+        status: String,
+        store_name: String
+      }
+    ) -> _ListAnnotationImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnnotationImportJobsResponse
+
+    interface _ListAnnotationStoreVersionsResponse
+      include Smithy::Client::_Response[Types::ListAnnotationStoreVersionsResponse]
+      def annotation_store_versions: () -> Array[Types::AnnotationStoreVersionItem]?
+      def next_token: () -> String?
+    end
+    def list_annotation_store_versions: (
+      ?name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        status: String
+      }
+    ) -> _ListAnnotationStoreVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnnotationStoreVersionsResponse
+
+    interface _ListAnnotationStoresResponse
+      include Smithy::Client::_Response[Types::ListAnnotationStoresResponse]
+      def annotation_stores: () -> Array[Types::AnnotationStoreItem]?
+      def next_token: () -> String?
+    end
+    def list_annotation_stores: (
+      ?ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        status: String
+      }
+    ) -> _ListAnnotationStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnnotationStoresResponse
+
+    interface _ListMultipartReadSetUploadsResponse
+      include Smithy::Client::_Response[Types::ListMultipartReadSetUploadsResponse]
+      def next_token: () -> String?
+      def uploads: () -> Array[Types::MultipartReadSetUploadListItem]?
+    end
+    def list_multipart_read_set_uploads: (
+      ?sequence_store_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMultipartReadSetUploadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultipartReadSetUploadsResponse
+
+    interface _ListReadSetActivationJobsResponse
+      include Smithy::Client::_Response[Types::ListReadSetActivationJobsResponse]
+      def next_token: () -> String?
+      def activation_jobs: () -> Array[Types::ActivateReadSetJobItem]?
+    end
+    def list_read_set_activation_jobs: (
+      ?sequence_store_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        status: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReadSetActivationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadSetActivationJobsResponse
+
+    interface _ListReadSetExportJobsResponse
+      include Smithy::Client::_Response[Types::ListReadSetExportJobsResponse]
+      def next_token: () -> String?
+      def export_jobs: () -> Array[Types::ExportReadSetJobDetail]?
+    end
+    def list_read_set_export_jobs: (
+      ?sequence_store_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        status: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReadSetExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadSetExportJobsResponse
+
+    interface _ListReadSetImportJobsResponse
+      include Smithy::Client::_Response[Types::ListReadSetImportJobsResponse]
+      def next_token: () -> String?
+      def import_jobs: () -> Array[Types::ImportReadSetJobItem]?
+    end
+    def list_read_set_import_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sequence_store_id: String,
+      ?filter: {
+        status: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReadSetImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadSetImportJobsResponse
+
+    interface _ListReadSetUploadPartsResponse
+      include Smithy::Client::_Response[Types::ListReadSetUploadPartsResponse]
+      def next_token: () -> String?
+      def parts: () -> Array[Types::ReadSetUploadPartListItem]?
+    end
+    def list_read_set_upload_parts: (
+      ?sequence_store_id: String,
+      ?upload_id: String,
+      ?part_source: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReadSetUploadPartsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadSetUploadPartsResponse
+
+    interface _ListReadSetsResponse
+      include Smithy::Client::_Response[Types::ListReadSetsResponse]
+      def next_token: () -> String?
+      def read_sets: () -> Array[Types::ReadSetListItem]?
+    end
+    def list_read_sets: (
+      ?sequence_store_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        name: String,
+        status: String,
+        reference_arn: String,
+        created_after: Time,
+        created_before: untyped,
+        sample_id: String,
+        subject_id: String,
+        generated_from: String,
+        creation_type: String
+      }
+    ) -> _ListReadSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReadSetsResponse
+
+    interface _ListReferenceImportJobsResponse
+      include Smithy::Client::_Response[Types::ListReferenceImportJobsResponse]
+      def next_token: () -> String?
+      def import_jobs: () -> Array[Types::ImportReferenceJobItem]?
+    end
+    def list_reference_import_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?reference_store_id: String,
+      ?filter: {
+        status: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReferenceImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReferenceImportJobsResponse
+
+    interface _ListReferenceStoresResponse
+      include Smithy::Client::_Response[Types::ListReferenceStoresResponse]
+      def next_token: () -> String?
+      def reference_stores: () -> Array[Types::ReferenceStoreDetail]?
+    end
+    def list_reference_stores: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        name: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReferenceStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReferenceStoresResponse
+
+    interface _ListReferencesResponse
+      include Smithy::Client::_Response[Types::ListReferencesResponse]
+      def next_token: () -> String?
+      def references: () -> Array[Types::ReferenceListItem]?
+    end
+    def list_references: (
+      ?reference_store_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        name: String,
+        md5: String,
+        created_after: Time,
+        created_before: untyped
+      }
+    ) -> _ListReferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReferencesResponse
+
+    interface _ListRunCachesResponse
+      include Smithy::Client::_Response[Types::ListRunCachesResponse]
+      def items: () -> Array[Types::RunCacheListItem]?
+      def next_token: () -> String?
+    end
+    def list_run_caches: (
+      ?max_results: Integer,
+      ?starting_token: String
+    ) -> _ListRunCachesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunCachesResponse
+
+    interface _ListRunGroupsResponse
+      include Smithy::Client::_Response[Types::ListRunGroupsResponse]
+      def items: () -> Array[Types::RunGroupListItem]?
+      def next_token: () -> String?
+    end
+    def list_run_groups: (
+      ?name: String,
+      ?starting_token: String,
+      ?max_results: Integer
+    ) -> _ListRunGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunGroupsResponse
+
+    interface _ListRunTasksResponse
+      include Smithy::Client::_Response[Types::ListRunTasksResponse]
+      def items: () -> Array[Types::TaskListItem]?
+      def next_token: () -> String?
+    end
+    def list_run_tasks: (
+      ?id: String,
+      ?status: String,
+      ?starting_token: String,
+      ?max_results: Integer
+    ) -> _ListRunTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunTasksResponse
+
+    interface _ListRunsResponse
+      include Smithy::Client::_Response[Types::ListRunsResponse]
+      def items: () -> Array[Types::RunListItem]?
+      def next_token: () -> String?
+    end
+    def list_runs: (
+      ?name: String,
+      ?run_group_id: String,
+      ?starting_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunsResponse
+
+    interface _ListSequenceStoresResponse
+      include Smithy::Client::_Response[Types::ListSequenceStoresResponse]
+      def next_token: () -> String?
+      def sequence_stores: () -> Array[Types::SequenceStoreDetail]?
+    end
+    def list_sequence_stores: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        name: String,
+        created_after: Time,
+        created_before: untyped,
+        status: String,
+        updated_after: untyped,
+        updated_before: untyped
+      }
+    ) -> _ListSequenceStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSequenceStoresResponse
+
+    interface _ListSharesResponse
+      include Smithy::Client::_Response[Types::ListSharesResponse]
+      def shares: () -> Array[Types::ShareDetails]?
+      def next_token: () -> String?
+    end
+    def list_shares: (
+      ?resource_owner: String,
+      ?filter: {
+        resource_arns: Array[String],
+        status: Array[String],
+        type: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSharesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVariantImportJobsResponse
+      include Smithy::Client::_Response[Types::ListVariantImportJobsResponse]
+      def variant_import_jobs: () -> Array[Types::VariantImportJobItem]?
+      def next_token: () -> String?
+    end
+    def list_variant_import_jobs: (
+      ?max_results: Integer,
+      ?ids: Array[String],
+      ?next_token: String,
+      ?filter: {
+        status: String,
+        store_name: String
+      }
+    ) -> _ListVariantImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVariantImportJobsResponse
+
+    interface _ListVariantStoresResponse
+      include Smithy::Client::_Response[Types::ListVariantStoresResponse]
+      def variant_stores: () -> Array[Types::VariantStoreItem]?
+      def next_token: () -> String?
+    end
+    def list_variant_stores: (
+      ?max_results: Integer,
+      ?ids: Array[String],
+      ?next_token: String,
+      ?filter: {
+        status: String
+      }
+    ) -> _ListVariantStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVariantStoresResponse
+
+    interface _ListWorkflowVersionsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowVersionsResponse]
+      def items: () -> Array[Types::WorkflowVersionListItem]?
+      def next_token: () -> String?
+    end
+    def list_workflow_versions: (
+      ?workflow_id: String,
+      ?type: String,
+      ?workflow_owner_id: String,
+      ?starting_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkflowVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowVersionsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsResponse]
+      def items: () -> Array[Types::WorkflowListItem]?
+      def next_token: () -> String?
+    end
+    def list_workflows: (
+      ?type: String,
+      ?name: String,
+      ?starting_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _PutS3AccessPolicyResponse
+      include Smithy::Client::_Response[Types::PutS3AccessPolicyResponse]
+      def s3_access_point_arn: () -> String?
+      def store_id: () -> String?
+      def store_type: () -> String?
+    end
+    def put_s3_access_policy: (
+      ?s3_access_point_arn: String,
+      ?s3_access_policy: String
+    ) -> _PutS3AccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutS3AccessPolicyResponse
+
+    interface _StartAnnotationImportJobResponse
+      include Smithy::Client::_Response[Types::StartAnnotationImportResponse]
+      def job_id: () -> String?
+    end
+    def start_annotation_import_job: (
+      ?destination_name: String,
+      ?role_arn: String,
+      ?items: Array[
+        {
+          source: String
+        }
+      ],
+      ?version_name: String,
+      ?format_options: {
+        tsv_options: {
+          read_options: {
+            sep: String,
+            encoding: String,
+            quote: String,
+            quote_all: bool,
+            escape: String,
+            escape_quotes: bool,
+            comment: String,
+            header: bool,
+            line_sep: String
+          }
+        },
+        vcf_options: {
+          ignore_qual_field: bool,
+          ignore_filter_field: untyped
+        }
+      },
+      ?run_left_normalization: bool,
+      ?annotation_fields: Hash[String, String]
+    ) -> _StartAnnotationImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAnnotationImportJobResponse
+
+    interface _StartReadSetActivationJobResponse
+      include Smithy::Client::_Response[Types::StartReadSetActivationJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def start_read_set_activation_job: (
+      ?sequence_store_id: String,
+      ?client_token: String,
+      ?sources: Array[
+        {
+          read_set_id: String
+        }
+      ]
+    ) -> _StartReadSetActivationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReadSetActivationJobResponse
+
+    interface _StartReadSetExportJobResponse
+      include Smithy::Client::_Response[Types::StartReadSetExportJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def destination: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def start_read_set_export_job: (
+      ?sequence_store_id: String,
+      ?destination: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?sources: Array[
+        {
+          read_set_id: String
+        }
+      ]
+    ) -> _StartReadSetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReadSetExportJobResponse
+
+    interface _StartReadSetImportJobResponse
+      include Smithy::Client::_Response[Types::StartReadSetImportJobResponse]
+      def id: () -> String?
+      def sequence_store_id: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def start_read_set_import_job: (
+      ?sequence_store_id: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?sources: Array[
+        {
+          source_files: {
+            source1: String,
+            source2: untyped
+          },
+          source_file_type: String,
+          subject_id: String,
+          sample_id: String,
+          generated_from: String,
+          reference_arn: String,
+          name: String,
+          description: String,
+          tags: Hash[String, String]
+        }
+      ]
+    ) -> _StartReadSetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReadSetImportJobResponse
+
+    interface _StartReferenceImportJobResponse
+      include Smithy::Client::_Response[Types::StartReferenceImportJobResponse]
+      def id: () -> String?
+      def reference_store_id: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def start_reference_import_job: (
+      ?reference_store_id: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?sources: Array[
+        {
+          source_file: String,
+          name: String,
+          description: String,
+          tags: Hash[String, String]
+        }
+      ]
+    ) -> _StartReferenceImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReferenceImportJobResponse
+
+    interface _StartRunResponse
+      include Smithy::Client::_Response[Types::StartRunResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def uuid: () -> String?
+      def run_output_uri: () -> String?
+    end
+    def start_run: (
+      ?workflow_id: String,
+      ?workflow_type: String,
+      ?run_id: String,
+      ?role_arn: String,
+      ?name: String,
+      ?cache_id: String,
+      ?cache_behavior: String,
+      ?run_group_id: String,
+      ?priority: Integer,
+      ?parameters: Smithy::Schema::document,
+      ?storage_capacity: Integer,
+      ?output_uri: String,
+      ?log_level: String,
+      ?tags: Hash[String, String],
+      ?request_id: String,
+      ?retention_mode: String,
+      ?storage_type: String,
+      ?workflow_owner_id: String,
+      ?workflow_version_name: String
+    ) -> _StartRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRunResponse
+
+    interface _StartVariantImportJobResponse
+      include Smithy::Client::_Response[Types::StartVariantImportResponse]
+      def job_id: () -> String?
+    end
+    def start_variant_import_job: (
+      ?destination_name: String,
+      ?role_arn: String,
+      ?items: Array[
+        {
+          source: String
+        }
+      ],
+      ?run_left_normalization: bool,
+      ?annotation_fields: Hash[String, String]
+    ) -> _StartVariantImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVariantImportJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnnotationStoreResponse
+      include Smithy::Client::_Response[Types::UpdateAnnotationStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def store_options: () -> Types::StoreOptions?
+      def store_format: () -> String?
+    end
+    def update_annotation_store: (
+      ?name: String,
+      ?description: String
+    ) -> _UpdateAnnotationStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnnotationStoreResponse
+
+    interface _UpdateAnnotationStoreVersionResponse
+      include Smithy::Client::_Response[Types::UpdateAnnotationStoreVersionResponse]
+      def store_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def version_name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+    end
+    def update_annotation_store_version: (
+      ?name: String,
+      ?version_name: String,
+      ?description: String
+    ) -> _UpdateAnnotationStoreVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnnotationStoreVersionResponse
+
+    interface _UpdateRunCacheResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_run_cache: (
+      ?cache_behavior: String,
+      ?description: String,
+      ?id: String,
+      ?name: String
+    ) -> _UpdateRunCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRunCacheResponse
+
+    interface _UpdateRunGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_run_group: (
+      ?id: String,
+      ?name: String,
+      ?max_cpus: Integer,
+      ?max_runs: Integer,
+      ?max_duration: Integer,
+      ?max_gpus: Integer
+    ) -> _UpdateRunGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRunGroupResponse
+
+    interface _UpdateSequenceStoreResponse
+      include Smithy::Client::_Response[Types::UpdateSequenceStoreResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def sse_config: () -> Types::SseConfig?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+      def propagated_set_level_tags: () -> Array[String]?
+      def status: () -> String?
+      def status_message: () -> String?
+      def fallback_location: () -> String?
+      def s3_access: () -> Types::SequenceStoreS3Access?
+      def e_tag_algorithm_family: () -> String?
+    end
+    def update_sequence_store: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?fallback_location: String,
+      ?propagated_set_level_tags: Array[String],
+      ?s3_access_config: {
+        access_log_location: String
+      }
+    ) -> _UpdateSequenceStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSequenceStoreResponse
+
+    interface _UpdateVariantStoreResponse
+      include Smithy::Client::_Response[Types::UpdateVariantStoreResponse]
+      def id: () -> String?
+      def reference: () -> Types::ReferenceItem?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def update_time: () -> Time?
+    end
+    def update_variant_store: (
+      ?name: String,
+      ?description: String
+    ) -> _UpdateVariantStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVariantStoreResponse
+
+    interface _UpdateWorkflowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_workflow: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?storage_type: String,
+      ?storage_capacity: Integer,
+      ?readme_markdown: String
+    ) -> _UpdateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowResponse
+
+    interface _UpdateWorkflowVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_workflow_version: (
+      ?workflow_id: String,
+      ?version_name: String,
+      ?description: String,
+      ?storage_type: String,
+      ?storage_capacity: Integer,
+      ?readme_markdown: String
+    ) -> _UpdateWorkflowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowVersionResponse
+
+    interface _UploadReadSetPartResponse
+      include Smithy::Client::_Response[Types::UploadReadSetPartResponse]
+      def checksum: () -> String?
+    end
+    def upload_read_set_part: (
+      ?sequence_store_id: String,
+      ?upload_id: String,
+      ?part_source: String,
+      ?part_number: Integer,
+      ?payload: String
+    ) -> _UploadReadSetPartResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadReadSetPartResponse
+  end
+end

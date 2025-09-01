@@ -1,0 +1,5 @@
+  module Aws
+    module CloudDirectory
+      VERSION: String
+    end
+  end

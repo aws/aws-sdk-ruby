@@ -1,0 +1,2986 @@
+module Aws::Forecast
+  module Types
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?operation: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor operation: String?
+      attr_accessor value: Float?
+    end
+
+    class AdditionalDataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Hash[String, Array[String]]?
+    end
+
+    class AttributeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?transformations: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor transformations: Hash[String, String]?
+    end
+
+    module AttributeType
+      STRING: String
+      INTEGER: String
+      FLOAT: String
+      TIMESTAMP: String
+      GEOLOCATION: String
+    end
+
+    module AutoMLOverrideStrategy
+      LatencyOptimized: String
+      AccuracyOptimized: String
+    end
+
+    class Baseline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_baseline: Types::PredictorBaseline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_baseline: Types::PredictorBaseline?
+    end
+
+    class BaselineMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+    end
+
+    class CategoricalParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module Condition
+      EQUALS: String
+      NOT_EQUALS: String
+      LESS_THAN: String
+      GREATER_THAN: String
+    end
+
+    class ContinuousParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_value: Float,
+        ?min_value: Float,
+        ?scaling_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_value: Float?
+      attr_accessor min_value: Float?
+      attr_accessor scaling_type: String?
+    end
+
+    class CreateAutoPredictorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_name: String,
+        ?forecast_horizon: Integer,
+        ?forecast_types: Array[String],
+        ?forecast_dimensions: Array[String],
+        ?forecast_frequency: String,
+        ?data_config: Types::DataConfig,
+        ?encryption_config: Types::EncryptionConfig,
+        ?reference_predictor_arn: String,
+        ?optimization_metric: String,
+        ?explain_predictor: bool,
+        ?tags: Array[Types::Tag],
+        ?monitor_config: Types::MonitorConfig,
+        ?time_alignment_boundary: Types::TimeAlignmentBoundary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_name: String?
+      attr_accessor forecast_horizon: Integer?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor forecast_dimensions: Array[String]?
+      attr_accessor forecast_frequency: String?
+      attr_accessor data_config: Types::DataConfig?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor reference_predictor_arn: String?
+      attr_accessor optimization_metric: String?
+      attr_accessor explain_predictor: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor monitor_config: Types::MonitorConfig?
+      attr_accessor time_alignment_boundary: Types::TimeAlignmentBoundary?
+    end
+
+    class CreateAutoPredictorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class CreateDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_name: String,
+        ?domain: String,
+        ?dataset_arns: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_name: String?
+      attr_accessor domain: String?
+      attr_accessor dataset_arns: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+    end
+
+    class CreateDatasetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_name: String,
+        ?dataset_arn: String,
+        ?data_source: Types::DataSource,
+        ?timestamp_format: String,
+        ?time_zone: String,
+        ?use_geolocation_for_time_zone: bool,
+        ?geolocation_format: String,
+        ?tags: Array[Types::Tag],
+        ?format: String,
+        ?import_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor timestamp_format: String?
+      attr_accessor time_zone: String?
+      attr_accessor use_geolocation_for_time_zone: bool?
+      attr_accessor geolocation_format: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor format: String?
+      attr_accessor import_mode: String?
+    end
+
+    class CreateDatasetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_name: String,
+        ?domain: String,
+        ?dataset_type: String,
+        ?data_frequency: String,
+        ?schema: Types::Schema,
+        ?encryption_config: Types::EncryptionConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_name: String?
+      attr_accessor domain: String?
+      attr_accessor dataset_type: String?
+      attr_accessor data_frequency: String?
+      attr_accessor schema: Types::Schema?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class CreateExplainabilityExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_name: String,
+        ?explainability_arn: String,
+        ?destination: Types::DataDestination,
+        ?tags: Array[Types::Tag],
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_name: String?
+      attr_accessor explainability_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor format: String?
+    end
+
+    class CreateExplainabilityExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_arn: String?
+    end
+
+    class CreateExplainabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_name: String,
+        ?resource_arn: String,
+        ?explainability_config: Types::ExplainabilityConfig,
+        ?data_source: Types::DataSource,
+        ?schema: Types::Schema,
+        ?enable_visualization: bool,
+        ?start_date_time: String,
+        ?end_date_time: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor explainability_config: Types::ExplainabilityConfig?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor schema: Types::Schema?
+      attr_accessor enable_visualization: bool?
+      attr_accessor start_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateExplainabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+    end
+
+    class CreateForecastExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_name: String,
+        ?forecast_arn: String,
+        ?destination: Types::DataDestination,
+        ?tags: Array[Types::Tag],
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_name: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor format: String?
+    end
+
+    class CreateForecastExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_arn: String?
+    end
+
+    class CreateForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_name: String,
+        ?predictor_arn: String,
+        ?forecast_types: Array[String],
+        ?tags: Array[Types::Tag],
+        ?time_series_selector: Types::TimeSeriesSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_name: String?
+      attr_accessor predictor_arn: String?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor time_series_selector: Types::TimeSeriesSelector?
+    end
+
+    class CreateForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+    end
+
+    class CreateMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class CreatePredictorBacktestExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_name: String,
+        ?predictor_arn: String,
+        ?destination: Types::DataDestination,
+        ?tags: Array[Types::Tag],
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_name: String?
+      attr_accessor predictor_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor format: String?
+    end
+
+    class CreatePredictorBacktestExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_arn: String?
+    end
+
+    class CreatePredictorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_name: String,
+        ?algorithm_arn: String,
+        ?forecast_horizon: Integer,
+        ?forecast_types: Array[String],
+        ?perform_auto_ml: bool,
+        ?auto_ml_override_strategy: String,
+        ?perform_hpo: bool,
+        ?training_parameters: Hash[String, String],
+        ?evaluation_parameters: Types::EvaluationParameters,
+        ?hpo_config: Types::HyperParameterTuningJobConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?featurization_config: Types::FeaturizationConfig,
+        ?encryption_config: Types::EncryptionConfig,
+        ?tags: Array[Types::Tag],
+        ?optimization_metric: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_name: String?
+      attr_accessor algorithm_arn: String?
+      attr_accessor forecast_horizon: Integer?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor perform_auto_ml: bool?
+      attr_accessor auto_ml_override_strategy: String?
+      attr_accessor perform_hpo: bool?
+      attr_accessor training_parameters: Hash[String, String]?
+      attr_accessor evaluation_parameters: Types::EvaluationParameters?
+      attr_accessor hpo_config: Types::HyperParameterTuningJobConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor featurization_config: Types::FeaturizationConfig?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor optimization_metric: String?
+    end
+
+    class CreatePredictorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class CreateWhatIfAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_name: String,
+        ?forecast_arn: String,
+        ?time_series_selector: Types::TimeSeriesSelector,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_name: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor time_series_selector: Types::TimeSeriesSelector?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWhatIfAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_arn: String?
+    end
+
+    class CreateWhatIfForecastExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_name: String,
+        ?what_if_forecast_arns: Array[String],
+        ?destination: Types::DataDestination,
+        ?tags: Array[Types::Tag],
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_name: String?
+      attr_accessor what_if_forecast_arns: Array[String]?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor format: String?
+    end
+
+    class CreateWhatIfForecastExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_arn: String?
+    end
+
+    class CreateWhatIfForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_name: String,
+        ?what_if_analysis_arn: String,
+        ?time_series_transformations: Array[Types::TimeSeriesTransformation],
+        ?time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_name: String?
+      attr_accessor what_if_analysis_arn: String?
+      attr_accessor time_series_transformations: Array[Types::TimeSeriesTransformation]?
+      attr_accessor time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWhatIfForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_arn: String?
+    end
+
+    class DataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?attribute_configs: Array[Types::AttributeConfig],
+        ?additional_datasets: Array[Types::AdditionalDataset],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor attribute_configs: Array[Types::AttributeConfig]?
+      attr_accessor additional_datasets: Array[Types::AdditionalDataset]?
+    end
+
+    class DataDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_config: Types::S3Config,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_config: Types::S3Config?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_config: Types::S3Config,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_config: Types::S3Config?
+    end
+
+    class DatasetGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?dataset_group_name: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor dataset_group_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class DatasetImportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+        ?dataset_import_job_name: String,
+        ?data_source: Types::DataSource,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?import_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+      attr_accessor dataset_import_job_name: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor import_mode: String?
+    end
+
+    class DatasetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?dataset_name: String,
+        ?dataset_type: String,
+        ?domain: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor dataset_type: String?
+      attr_accessor domain: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    module DatasetType
+      TARGET_TIME_SERIES: String
+      RELATED_TIME_SERIES: String
+      ITEM_METADATA: String
+    end
+
+    module DayOfWeek
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
+      SUNDAY: String
+    end
+
+    class DeleteDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+    end
+
+    class DeleteDatasetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class DeleteExplainabilityExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_arn: String?
+    end
+
+    class DeleteExplainabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+    end
+
+    class DeleteForecastExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_arn: String?
+    end
+
+    class DeleteForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+    end
+
+    class DeleteMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class DeletePredictorBacktestExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_arn: String?
+    end
+
+    class DeletePredictorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class DeleteResourceTreeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteWhatIfAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_arn: String?
+    end
+
+    class DeleteWhatIfForecastExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_arn: String?
+    end
+
+    class DeleteWhatIfForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_arn: String?
+    end
+
+    class DescribeAutoPredictorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class DescribeAutoPredictorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+        ?predictor_name: String,
+        ?forecast_horizon: Integer,
+        ?forecast_types: Array[String],
+        ?forecast_frequency: String,
+        ?forecast_dimensions: Array[String],
+        ?dataset_import_job_arns: Array[String],
+        ?data_config: Types::DataConfig,
+        ?encryption_config: Types::EncryptionConfig,
+        ?reference_predictor_summary: Types::ReferencePredictorSummary,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?optimization_metric: String,
+        ?explainability_info: Types::ExplainabilityInfo,
+        ?monitor_info: Types::MonitorInfo,
+        ?time_alignment_boundary: Types::TimeAlignmentBoundary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+      attr_accessor predictor_name: String?
+      attr_accessor forecast_horizon: Integer?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor forecast_frequency: String?
+      attr_accessor forecast_dimensions: Array[String]?
+      attr_accessor dataset_import_job_arns: Array[String]?
+      attr_accessor data_config: Types::DataConfig?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor reference_predictor_summary: Types::ReferencePredictorSummary?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor optimization_metric: String?
+      attr_accessor explainability_info: Types::ExplainabilityInfo?
+      attr_accessor monitor_info: Types::MonitorInfo?
+      attr_accessor time_alignment_boundary: Types::TimeAlignmentBoundary?
+    end
+
+    class DescribeDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+    end
+
+    class DescribeDatasetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_name: String,
+        ?dataset_group_arn: String,
+        ?dataset_arns: Array[String],
+        ?domain: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor dataset_arns: Array[String]?
+      attr_accessor domain: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class DescribeDatasetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+    end
+
+    class DescribeDatasetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_name: String,
+        ?dataset_import_job_arn: String,
+        ?dataset_arn: String,
+        ?timestamp_format: String,
+        ?time_zone: String,
+        ?use_geolocation_for_time_zone: bool,
+        ?geolocation_format: String,
+        ?data_source: Types::DataSource,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?field_statistics: Hash[String, Types::Statistics],
+        ?data_size: Float,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?format: String,
+        ?import_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_name: String?
+      attr_accessor dataset_import_job_arn: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor timestamp_format: String?
+      attr_accessor time_zone: String?
+      attr_accessor use_geolocation_for_time_zone: bool?
+      attr_accessor geolocation_format: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor field_statistics: Hash[String, Types::Statistics]?
+      attr_accessor data_size: Float?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor format: String?
+      attr_accessor import_mode: String?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?dataset_name: String,
+        ?domain: String,
+        ?dataset_type: String,
+        ?data_frequency: String,
+        ?schema: Types::Schema,
+        ?encryption_config: Types::EncryptionConfig,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_name: String?
+      attr_accessor domain: String?
+      attr_accessor dataset_type: String?
+      attr_accessor data_frequency: String?
+      attr_accessor schema: Types::Schema?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class DescribeExplainabilityExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_arn: String?
+    end
+
+    class DescribeExplainabilityExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_arn: String,
+        ?explainability_export_name: String,
+        ?explainability_arn: String,
+        ?destination: Types::DataDestination,
+        ?message: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_arn: String?
+      attr_accessor explainability_export_name: String?
+      attr_accessor explainability_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor format: String?
+    end
+
+    class DescribeExplainabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+    end
+
+    class DescribeExplainabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+        ?explainability_name: String,
+        ?resource_arn: String,
+        ?explainability_config: Types::ExplainabilityConfig,
+        ?enable_visualization: bool,
+        ?data_source: Types::DataSource,
+        ?schema: Types::Schema,
+        ?start_date_time: String,
+        ?end_date_time: String,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?message: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+      attr_accessor explainability_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor explainability_config: Types::ExplainabilityConfig?
+      attr_accessor enable_visualization: bool?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor schema: Types::Schema?
+      attr_accessor start_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class DescribeForecastExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_arn: String?
+    end
+
+    class DescribeForecastExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_arn: String,
+        ?forecast_export_job_name: String,
+        ?forecast_arn: String,
+        ?destination: Types::DataDestination,
+        ?message: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_arn: String?
+      attr_accessor forecast_export_job_name: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor format: String?
+    end
+
+    class DescribeForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+    end
+
+    class DescribeForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+        ?forecast_name: String,
+        ?forecast_types: Array[String],
+        ?predictor_arn: String,
+        ?dataset_group_arn: String,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?time_series_selector: Types::TimeSeriesSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+      attr_accessor forecast_name: String?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor predictor_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor time_series_selector: Types::TimeSeriesSelector?
+    end
+
+    class DescribeMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class DescribeMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?monitor_arn: String,
+        ?resource_arn: String,
+        ?status: String,
+        ?last_evaluation_time: Time,
+        ?last_evaluation_state: String,
+        ?baseline: Types::Baseline,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?estimated_evaluation_time_remaining_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor monitor_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor status: String?
+      attr_accessor last_evaluation_time: Time?
+      attr_accessor last_evaluation_state: String?
+      attr_accessor baseline: Types::Baseline?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor estimated_evaluation_time_remaining_in_minutes: Integer?
+    end
+
+    class DescribePredictorBacktestExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_arn: String?
+    end
+
+    class DescribePredictorBacktestExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_arn: String,
+        ?predictor_backtest_export_job_name: String,
+        ?predictor_arn: String,
+        ?destination: Types::DataDestination,
+        ?message: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_arn: String?
+      attr_accessor predictor_backtest_export_job_name: String?
+      attr_accessor predictor_arn: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor format: String?
+    end
+
+    class DescribePredictorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class DescribePredictorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+        ?predictor_name: String,
+        ?algorithm_arn: String,
+        ?auto_ml_algorithm_arns: Array[String],
+        ?forecast_horizon: Integer,
+        ?forecast_types: Array[String],
+        ?perform_auto_ml: bool,
+        ?auto_ml_override_strategy: String,
+        ?perform_hpo: bool,
+        ?training_parameters: Hash[String, String],
+        ?evaluation_parameters: Types::EvaluationParameters,
+        ?hpo_config: Types::HyperParameterTuningJobConfig,
+        ?input_data_config: Types::InputDataConfig,
+        ?featurization_config: Types::FeaturizationConfig,
+        ?encryption_config: Types::EncryptionConfig,
+        ?predictor_execution_details: Types::PredictorExecutionDetails,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?is_auto_predictor: bool,
+        ?dataset_import_job_arns: Array[String],
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?optimization_metric: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+      attr_accessor predictor_name: String?
+      attr_accessor algorithm_arn: String?
+      attr_accessor auto_ml_algorithm_arns: Array[String]?
+      attr_accessor forecast_horizon: Integer?
+      attr_accessor forecast_types: Array[String]?
+      attr_accessor perform_auto_ml: bool?
+      attr_accessor auto_ml_override_strategy: String?
+      attr_accessor perform_hpo: bool?
+      attr_accessor training_parameters: Hash[String, String]?
+      attr_accessor evaluation_parameters: Types::EvaluationParameters?
+      attr_accessor hpo_config: Types::HyperParameterTuningJobConfig?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor featurization_config: Types::FeaturizationConfig?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor predictor_execution_details: Types::PredictorExecutionDetails?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor is_auto_predictor: bool?
+      attr_accessor dataset_import_job_arns: Array[String]?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor optimization_metric: String?
+    end
+
+    class DescribeWhatIfAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_arn: String?
+    end
+
+    class DescribeWhatIfAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_name: String,
+        ?what_if_analysis_arn: String,
+        ?forecast_arn: String,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?time_series_selector: Types::TimeSeriesSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_name: String?
+      attr_accessor what_if_analysis_arn: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor time_series_selector: Types::TimeSeriesSelector?
+    end
+
+    class DescribeWhatIfForecastExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_arn: String?
+    end
+
+    class DescribeWhatIfForecastExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_arn: String,
+        ?what_if_forecast_export_name: String,
+        ?what_if_forecast_arns: Array[String],
+        ?destination: Types::DataDestination,
+        ?message: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?last_modification_time: Time,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_arn: String?
+      attr_accessor what_if_forecast_export_name: String?
+      attr_accessor what_if_forecast_arns: Array[String]?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor last_modification_time: Time?
+      attr_accessor format: String?
+    end
+
+    class DescribeWhatIfForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_arn: String?
+    end
+
+    class DescribeWhatIfForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_name: String,
+        ?what_if_forecast_arn: String,
+        ?what_if_analysis_arn: String,
+        ?estimated_time_remaining_in_minutes: Integer,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?time_series_transformations: Array[Types::TimeSeriesTransformation],
+        ?time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource,
+        ?forecast_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_name: String?
+      attr_accessor what_if_forecast_arn: String?
+      attr_accessor what_if_analysis_arn: String?
+      attr_accessor estimated_time_remaining_in_minutes: Integer?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor time_series_transformations: Array[Types::TimeSeriesTransformation]?
+      attr_accessor time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource?
+      attr_accessor forecast_types: Array[String]?
+    end
+
+    module Domain
+      RETAIL: String
+      CUSTOM: String
+      INVENTORY_PLANNING: String
+      EC2_CAPACITY: String
+      WORK_FORCE: String
+      WEB_TRAFFIC: String
+      METRICS: String
+    end
+
+    class EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class ErrorMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_type: String,
+        ?wape: Float,
+        ?rmse: Float,
+        ?mase: Float,
+        ?mape: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_type: String?
+      attr_accessor wape: Float?
+      attr_accessor rmse: Float?
+      attr_accessor mase: Float?
+      attr_accessor mape: Float?
+    end
+
+    class EvaluationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_backtest_windows: Integer,
+        ?back_test_window_offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_backtest_windows: Integer?
+      attr_accessor back_test_window_offset: Integer?
+    end
+
+    class EvaluationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_arn: String,
+        ?test_windows: Array[Types::WindowSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_arn: String?
+      attr_accessor test_windows: Array[Types::WindowSummary]?
+    end
+
+    module EvaluationType
+      SUMMARY: String
+      COMPUTED: String
+    end
+
+    class ExplainabilityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_granularity: String,
+        ?time_point_granularity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_granularity: String?
+      attr_accessor time_point_granularity: String?
+    end
+
+    class ExplainabilityExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_export_arn: String,
+        ?explainability_export_name: String,
+        ?destination: Types::DataDestination,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_export_arn: String?
+      attr_accessor explainability_export_name: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class ExplainabilityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+      attr_accessor status: String?
+    end
+
+    class ExplainabilitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_arn: String,
+        ?explainability_name: String,
+        ?resource_arn: String,
+        ?explainability_config: Types::ExplainabilityConfig,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_arn: String?
+      attr_accessor explainability_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor explainability_config: Types::ExplainabilityConfig?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class Featurization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?featurization_pipeline: Array[Types::FeaturizationMethod],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor featurization_pipeline: Array[Types::FeaturizationMethod]?
+    end
+
+    class FeaturizationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_frequency: String,
+        ?forecast_dimensions: Array[String],
+        ?featurizations: Array[Types::Featurization],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_frequency: String?
+      attr_accessor forecast_dimensions: Array[String]?
+      attr_accessor featurizations: Array[Types::Featurization]?
+    end
+
+    class FeaturizationMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?featurization_method_name: String,
+        ?featurization_method_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor featurization_method_name: String?
+      attr_accessor featurization_method_parameters: Hash[String, String]?
+    end
+
+    module FeaturizationMethodName
+      filling: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor condition: String?
+    end
+
+    module FilterConditionString
+      IS: String
+      IS_NOT: String
+    end
+
+    class ForecastExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_job_arn: String,
+        ?forecast_export_job_name: String,
+        ?destination: Types::DataDestination,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_job_arn: String?
+      attr_accessor forecast_export_job_name: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class ForecastSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+        ?forecast_name: String,
+        ?predictor_arn: String,
+        ?created_using_auto_predictor: bool,
+        ?dataset_group_arn: String,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+      attr_accessor forecast_name: String?
+      attr_accessor predictor_arn: String?
+      attr_accessor created_using_auto_predictor: bool?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetAccuracyMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+    end
+
+    class GetAccuracyMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_evaluation_results: Array[Types::EvaluationResult],
+        ?is_auto_predictor: bool,
+        ?auto_ml_override_strategy: String,
+        ?optimization_metric: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_evaluation_results: Array[Types::EvaluationResult]?
+      attr_accessor is_auto_predictor: bool?
+      attr_accessor auto_ml_override_strategy: String?
+      attr_accessor optimization_metric: String?
+    end
+
+    class HyperParameterTuningJobConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_ranges: Types::ParameterRanges,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_ranges: Types::ParameterRanges?
+    end
+
+    module ImportMode
+      FULL: String
+      INCREMENTAL: String
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?supplementary_features: Array[Types::SupplementaryFeature],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor supplementary_features: Array[Types::SupplementaryFeature]?
+    end
+
+    class IntegerParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_value: Integer,
+        ?min_value: Integer,
+        ?scaling_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_value: Integer?
+      attr_accessor min_value: Integer?
+      attr_accessor scaling_type: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDatasetGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_groups: Array[Types::DatasetGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_groups: Array[Types::DatasetGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListDatasetImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_jobs: Array[Types::DatasetImportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_jobs: Array[Types::DatasetImportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasets: Array[Types::DatasetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasets: Array[Types::DatasetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExplainabilitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListExplainabilitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainabilities: Array[Types::ExplainabilitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainabilities: Array[Types::ExplainabilitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExplainabilityExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListExplainabilityExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explainability_exports: Array[Types::ExplainabilityExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explainability_exports: Array[Types::ExplainabilityExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListForecastExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListForecastExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_export_jobs: Array[Types::ForecastExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_export_jobs: Array[Types::ForecastExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListForecastsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListForecastsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecasts: Array[Types::ForecastSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecasts: Array[Types::ForecastSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMonitorEvaluationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?monitor_arn: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor monitor_arn: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListMonitorEvaluationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?predictor_monitor_evaluations: Array[Types::PredictorMonitorEvaluation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor predictor_monitor_evaluations: Array[Types::PredictorMonitorEvaluation]?
+    end
+
+    class ListMonitorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListMonitorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitors: Array[Types::MonitorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitors: Array[Types::MonitorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPredictorBacktestExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListPredictorBacktestExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_jobs: Array[Types::PredictorBacktestExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_jobs: Array[Types::PredictorBacktestExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPredictorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListPredictorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictors: Array[Types::PredictorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictors: Array[Types::PredictorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWhatIfAnalysesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListWhatIfAnalysesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analyses: Array[Types::WhatIfAnalysisSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analyses: Array[Types::WhatIfAnalysisSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWhatIfForecastExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListWhatIfForecastExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_exports: Array[Types::WhatIfForecastExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_exports: Array[Types::WhatIfForecastExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWhatIfForecastsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListWhatIfForecastsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecasts: Array[Types::WhatIfForecastSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecasts: Array[Types::WhatIfForecastSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class MetricResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?metric_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor metric_value: Float?
+    end
+
+    class Metrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rmse: Float,
+        ?weighted_quantile_losses: Array[Types::WeightedQuantileLoss],
+        ?error_metrics: Array[Types::ErrorMetric],
+        ?average_weighted_quantile_loss: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rmse: Float?
+      attr_accessor weighted_quantile_losses: Array[Types::WeightedQuantileLoss]?
+      attr_accessor error_metrics: Array[Types::ErrorMetric]?
+      attr_accessor average_weighted_quantile_loss: Float?
+    end
+
+    class MonitorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+    end
+
+    class MonitorDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+        ?forecast_arn: String,
+        ?predictor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor predictor_arn: String?
+    end
+
+    class MonitorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor status: String?
+    end
+
+    class MonitorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?resource_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    module Month
+      JANUARY: String
+      FEBRUARY: String
+      MARCH: String
+      APRIL: String
+      MAY: String
+      JUNE: String
+      JULY: String
+      AUGUST: String
+      SEPTEMBER: String
+      OCTOBER: String
+      NOVEMBER: String
+      DECEMBER: String
+    end
+
+    module Operation
+      ADD: String
+      SUBTRACT: String
+      MULTIPLY: String
+      DIVIDE: String
+    end
+
+    module OptimizationMetric
+      WAPE: String
+      RMSE: String
+      AverageWeightedQuantileLoss: String
+      MASE: String
+      MAPE: String
+    end
+
+    class ParameterRanges
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?categorical_parameter_ranges: Array[Types::CategoricalParameterRange],
+        ?continuous_parameter_ranges: Array[Types::ContinuousParameterRange],
+        ?integer_parameter_ranges: Array[Types::IntegerParameterRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor categorical_parameter_ranges: Array[Types::CategoricalParameterRange]?
+      attr_accessor continuous_parameter_ranges: Array[Types::ContinuousParameterRange]?
+      attr_accessor integer_parameter_ranges: Array[Types::IntegerParameterRange]?
+    end
+
+    class PredictorBacktestExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_backtest_export_job_arn: String,
+        ?predictor_backtest_export_job_name: String,
+        ?destination: Types::DataDestination,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_backtest_export_job_arn: String?
+      attr_accessor predictor_backtest_export_job_name: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class PredictorBaseline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_metrics: Array[Types::BaselineMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_metrics: Array[Types::BaselineMetric]?
+    end
+
+    class PredictorEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detail: String,
+        ?datetime: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detail: String?
+      attr_accessor datetime: Time?
+    end
+
+    class PredictorExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_arn: String,
+        ?test_windows: Array[Types::TestWindowSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_arn: String?
+      attr_accessor test_windows: Array[Types::TestWindowSummary]?
+    end
+
+    class PredictorExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_executions: Array[Types::PredictorExecution],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_executions: Array[Types::PredictorExecution]?
+    end
+
+    class PredictorMonitorEvaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?monitor_arn: String,
+        ?evaluation_time: Time,
+        ?evaluation_state: String,
+        ?window_start_datetime: Time,
+        ?window_end_datetime: Time,
+        ?predictor_event: Types::PredictorEvent,
+        ?monitor_data_source: Types::MonitorDataSource,
+        ?metric_results: Array[Types::MetricResult],
+        ?num_items_evaluated: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor monitor_arn: String?
+      attr_accessor evaluation_time: Time?
+      attr_accessor evaluation_state: String?
+      attr_accessor window_start_datetime: Time?
+      attr_accessor window_end_datetime: Time?
+      attr_accessor predictor_event: Types::PredictorEvent?
+      attr_accessor monitor_data_source: Types::MonitorDataSource?
+      attr_accessor metric_results: Array[Types::MetricResult]?
+      attr_accessor num_items_evaluated: Integer?
+      attr_accessor message: String?
+    end
+
+    class PredictorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictor_arn: String,
+        ?predictor_name: String,
+        ?dataset_group_arn: String,
+        ?is_auto_predictor: bool,
+        ?reference_predictor_summary: Types::ReferencePredictorSummary,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictor_arn: String?
+      attr_accessor predictor_name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor is_auto_predictor: bool?
+      attr_accessor reference_predictor_summary: Types::ReferencePredictorSummary?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class ReferencePredictorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor state: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResumeResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class S3Config
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?role_arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    module ScalingType
+      Auto: String
+      Linear: String
+      Logarithmic: String
+      ReverseLogarithmic: String
+    end
+
+    class Schema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::SchemaAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::SchemaAttribute]?
+    end
+
+    class SchemaAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+    end
+
+    module State
+      Active: String
+      Deleted: String
+    end
+
+    class Statistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?count_distinct: Integer,
+        ?count_null: Integer,
+        ?count_nan: Integer,
+        ?min: String,
+        ?max: String,
+        ?avg: Float,
+        ?stddev: Float,
+        ?count_long: Integer,
+        ?count_distinct_long: Integer,
+        ?count_null_long: Integer,
+        ?count_nan_long: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor count_distinct: Integer?
+      attr_accessor count_null: Integer?
+      attr_accessor count_nan: Integer?
+      attr_accessor min: String?
+      attr_accessor max: String?
+      attr_accessor avg: Float?
+      attr_accessor stddev: Float?
+      attr_accessor count_long: Integer?
+      attr_accessor count_distinct_long: Integer?
+      attr_accessor count_null_long: Integer?
+      attr_accessor count_nan_long: Integer?
+    end
+
+    class StopResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class SupplementaryFeature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TestWindowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_window_start: Time,
+        ?test_window_end: Time,
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_window_start: Time?
+      attr_accessor test_window_end: Time?
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    class TimeAlignmentBoundary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?month: String,
+        ?day_of_month: Integer,
+        ?day_of_week: String,
+        ?hour: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor month: String?
+      attr_accessor day_of_month: Integer?
+      attr_accessor day_of_week: String?
+      attr_accessor hour: Integer?
+    end
+
+    module TimePointGranularity
+      ALL: String
+      SPECIFIC: String
+    end
+
+    class TimeSeriesCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_value: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+      attr_accessor condition: String?
+    end
+
+    module TimeSeriesGranularity
+      ALL: String
+      SPECIFIC: String
+    end
+
+    class TimeSeriesIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::DataSource,
+        ?schema: Types::Schema,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor schema: Types::Schema?
+      attr_accessor format: String?
+    end
+
+    class TimeSeriesReplacementsDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_config: Types::S3Config,
+        ?schema: Types::Schema,
+        ?format: String,
+        ?timestamp_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_config: Types::S3Config?
+      attr_accessor schema: Types::Schema?
+      attr_accessor format: String?
+      attr_accessor timestamp_format: String?
+    end
+
+    class TimeSeriesSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_identifiers: Types::TimeSeriesIdentifiers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_identifiers: Types::TimeSeriesIdentifiers?
+    end
+
+    class TimeSeriesTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+        ?time_series_conditions: Array[Types::TimeSeriesCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+      attr_accessor time_series_conditions: Array[Types::TimeSeriesCondition]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?dataset_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor dataset_arns: Array[String]?
+    end
+
+    class UpdateDatasetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class WeightedQuantileLoss
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantile: Float,
+        ?loss_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantile: Float?
+      attr_accessor loss_value: Float?
+    end
+
+    class WhatIfAnalysisSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_analysis_arn: String,
+        ?what_if_analysis_name: String,
+        ?forecast_arn: String,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_analysis_arn: String?
+      attr_accessor what_if_analysis_name: String?
+      attr_accessor forecast_arn: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class WhatIfForecastExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_export_arn: String,
+        ?what_if_forecast_arns: Array[String],
+        ?what_if_forecast_export_name: String,
+        ?destination: Types::DataDestination,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_export_arn: String?
+      attr_accessor what_if_forecast_arns: Array[String]?
+      attr_accessor what_if_forecast_export_name: String?
+      attr_accessor destination: Types::DataDestination?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class WhatIfForecastSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_arn: String,
+        ?what_if_forecast_name: String,
+        ?what_if_analysis_arn: String,
+        ?status: String,
+        ?message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_arn: String?
+      attr_accessor what_if_forecast_name: String?
+      attr_accessor what_if_analysis_arn: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class WindowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_window_start: Time,
+        ?test_window_end: Time,
+        ?item_count: Integer,
+        ?evaluation_type: String,
+        ?metrics: Types::Metrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_window_start: Time?
+      attr_accessor test_window_end: Time?
+      attr_accessor item_count: Integer?
+      attr_accessor evaluation_type: String?
+      attr_accessor metrics: Types::Metrics?
+    end
+  end
+end

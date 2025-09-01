@@ -1,0 +1,54 @@
+module Aws::IoTSecureTunneling
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AmazonResourceName: StringShape
+    ClientAccessToken: StringShape
+    ClientMode: EnumShape
+    CloseTunnelRequest: StructureShape
+    CloseTunnelResponse: StructureShape
+    ConnectionState: StructureShape
+    ConnectionStatus: EnumShape
+    DateType: TimestampShape
+    DeleteFlag: BooleanShape
+    DescribeTunnelRequest: StructureShape
+    DescribeTunnelResponse: StructureShape
+    Description: StringShape
+    DestinationConfig: StructureShape
+    ErrorMessage: StringShape
+    LimitExceededException: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    ListTunnelsRequest: StructureShape
+    ListTunnelsResponse: StructureShape
+    MaxResults: IntegerShape
+    NextToken: StringShape
+    OpenTunnelRequest: StructureShape
+    OpenTunnelResponse: StructureShape
+    ResourceNotFoundException: StructureShape
+    RotateTunnelAccessTokenRequest: StructureShape
+    RotateTunnelAccessTokenResponse: StructureShape
+    Service: StringShape
+    ServiceList: ListShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    ThingName: StringShape
+    TimeoutConfig: StructureShape
+    TimeoutInMin: IntegerShape
+    Tunnel: StructureShape
+    TunnelArn: StringShape
+    TunnelId: StringShape
+    TunnelStatus: EnumShape
+    TunnelSummary: StructureShape
+    TunnelSummaryList: ListShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+
+    IoTSecuredTunneling: ServiceShape
+  end
+end

@@ -1,0 +1,83 @@
+module Aws::DatabaseMigrationService
+  module Errors
+    class AccessDeniedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CollectorNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FailedDependencyFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientResourceCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCertificateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnet < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSAccessDeniedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSDisabledFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSThrottlingFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_arn: () -> String?
+    end
+    class ResourceNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class S3AccessDeniedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class S3ResourceNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SNSInvalidTopicFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SNSNoAuthorizationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StorageQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetAlreadyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpgradeDependencyFailureFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

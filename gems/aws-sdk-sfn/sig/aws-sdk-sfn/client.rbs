@@ -1,0 +1,565 @@
+module Aws::SFN
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SFN::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateActivityResponse
+      include Smithy::Client::_Response[Types::CreateActivityOutput]
+      def activity_arn: () -> String?
+      def creation_date: () -> Time?
+    end
+    def create_activity: (
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_data_key_reuse_period_seconds: Integer,
+        type: String
+      }
+    ) -> _CreateActivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateActivityResponse
+
+    interface _CreateStateMachineResponse
+      include Smithy::Client::_Response[Types::CreateStateMachineOutput]
+      def state_machine_arn: () -> String?
+      def creation_date: () -> Time?
+      def state_machine_version_arn: () -> String?
+    end
+    def create_state_machine: (
+      ?name: String,
+      ?definition: String,
+      ?role_arn: String,
+      ?type: String,
+      ?logging_configuration: {
+        level: String,
+        include_execution_data: bool,
+        destinations: Array[
+          {
+            cloud_watch_logs_log_group: {
+              log_group_arn: String
+            }
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?tracing_configuration: {
+        enabled: bool
+      },
+      ?publish: bool,
+      ?version_description: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_data_key_reuse_period_seconds: Integer,
+        type: String
+      }
+    ) -> _CreateStateMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStateMachineResponse
+
+    interface _CreateStateMachineAliasResponse
+      include Smithy::Client::_Response[Types::CreateStateMachineAliasOutput]
+      def state_machine_alias_arn: () -> String?
+      def creation_date: () -> Time?
+    end
+    def create_state_machine_alias: (
+      ?description: String,
+      ?name: String,
+      ?routing_configuration: Array[
+        {
+          state_machine_version_arn: String,
+          weight: Integer
+        }
+      ]
+    ) -> _CreateStateMachineAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStateMachineAliasResponse
+
+    interface _DeleteActivityResponse
+      include Smithy::Client::_Response[Types::DeleteActivityOutput]
+    end
+    def delete_activity: (
+      ?activity_arn: String
+    ) -> _DeleteActivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteActivityResponse
+
+    interface _DeleteStateMachineResponse
+      include Smithy::Client::_Response[Types::DeleteStateMachineOutput]
+    end
+    def delete_state_machine: (
+      ?state_machine_arn: String
+    ) -> _DeleteStateMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStateMachineResponse
+
+    interface _DeleteStateMachineAliasResponse
+      include Smithy::Client::_Response[Types::DeleteStateMachineAliasOutput]
+    end
+    def delete_state_machine_alias: (
+      ?state_machine_alias_arn: String
+    ) -> _DeleteStateMachineAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStateMachineAliasResponse
+
+    interface _DeleteStateMachineVersionResponse
+      include Smithy::Client::_Response[Types::DeleteStateMachineVersionOutput]
+    end
+    def delete_state_machine_version: (
+      ?state_machine_version_arn: String
+    ) -> _DeleteStateMachineVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStateMachineVersionResponse
+
+    interface _DescribeActivityResponse
+      include Smithy::Client::_Response[Types::DescribeActivityOutput]
+      def activity_arn: () -> String?
+      def name: () -> String?
+      def creation_date: () -> Time?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+    end
+    def describe_activity: (
+      ?activity_arn: String
+    ) -> _DescribeActivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActivityResponse
+
+    interface _DescribeExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeExecutionOutput]
+      def execution_arn: () -> String?
+      def state_machine_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def start_date: () -> Time?
+      def stop_date: () -> Time?
+      def input: () -> String?
+      def input_details: () -> Types::CloudWatchEventsExecutionDataDetails?
+      def output: () -> String?
+      def output_details: () -> Types::CloudWatchEventsExecutionDataDetails?
+      def trace_header: () -> String?
+      def map_run_arn: () -> String?
+      def error: () -> String?
+      def cause: () -> String?
+      def state_machine_version_arn: () -> String?
+      def state_machine_alias_arn: () -> String?
+      def redrive_count: () -> Integer?
+      def redrive_date: () -> Time?
+      def redrive_status: () -> String?
+      def redrive_status_reason: () -> String?
+    end
+    def describe_execution: (
+      ?execution_arn: String,
+      ?included_data: String
+    ) -> _DescribeExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExecutionResponse
+
+    interface _DescribeMapRunResponse
+      include Smithy::Client::_Response[Types::DescribeMapRunOutput]
+      def map_run_arn: () -> String?
+      def execution_arn: () -> String?
+      def status: () -> String?
+      def start_date: () -> Time?
+      def stop_date: () -> Time?
+      def max_concurrency: () -> Integer?
+      def tolerated_failure_percentage: () -> Float?
+      def tolerated_failure_count: () -> Integer?
+      def item_counts: () -> Types::MapRunItemCounts?
+      def execution_counts: () -> Types::MapRunExecutionCounts?
+      def redrive_count: () -> Integer?
+      def redrive_date: () -> Time?
+    end
+    def describe_map_run: (
+      ?map_run_arn: String
+    ) -> _DescribeMapRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMapRunResponse
+
+    interface _DescribeStateMachineResponse
+      include Smithy::Client::_Response[Types::DescribeStateMachineOutput]
+      def state_machine_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def definition: () -> String?
+      def role_arn: () -> String?
+      def type: () -> String?
+      def creation_date: () -> Time?
+      def logging_configuration: () -> Types::LoggingConfiguration?
+      def tracing_configuration: () -> Types::TracingConfiguration?
+      def label: () -> String?
+      def revision_id: () -> String?
+      def description: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def variable_references: () -> Hash[String, Array[String]]?
+    end
+    def describe_state_machine: (
+      ?state_machine_arn: String,
+      ?included_data: String
+    ) -> _DescribeStateMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStateMachineResponse
+
+    interface _DescribeStateMachineAliasResponse
+      include Smithy::Client::_Response[Types::DescribeStateMachineAliasOutput]
+      def state_machine_alias_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def routing_configuration: () -> Array[Types::RoutingConfigurationListItem]?
+      def creation_date: () -> Time?
+      def update_date: () -> Time?
+    end
+    def describe_state_machine_alias: (
+      ?state_machine_alias_arn: String
+    ) -> _DescribeStateMachineAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStateMachineAliasResponse
+
+    interface _DescribeStateMachineForExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeStateMachineForExecutionOutput]
+      def state_machine_arn: () -> String?
+      def name: () -> String?
+      def definition: () -> String?
+      def role_arn: () -> String?
+      def update_date: () -> Time?
+      def logging_configuration: () -> Types::LoggingConfiguration?
+      def tracing_configuration: () -> Types::TracingConfiguration?
+      def map_run_arn: () -> String?
+      def label: () -> String?
+      def revision_id: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def variable_references: () -> Hash[String, Array[String]]?
+    end
+    def describe_state_machine_for_execution: (
+      ?execution_arn: String,
+      ?included_data: String
+    ) -> _DescribeStateMachineForExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStateMachineForExecutionResponse
+
+    interface _GetActivityTaskResponse
+      include Smithy::Client::_Response[Types::GetActivityTaskOutput]
+      def task_token: () -> String?
+      def input: () -> String?
+    end
+    def get_activity_task: (
+      ?activity_arn: String,
+      ?worker_name: String
+    ) -> _GetActivityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetActivityTaskResponse
+
+    interface _GetExecutionHistoryResponse
+      include Smithy::Client::_Response[Types::GetExecutionHistoryOutput]
+      def events: () -> Array[Types::HistoryEvent]?
+      def next_token: () -> String?
+    end
+    def get_execution_history: (
+      ?execution_arn: String,
+      ?max_results: Integer,
+      ?reverse_order: bool,
+      ?next_token: String,
+      ?include_execution_data: bool
+    ) -> _GetExecutionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExecutionHistoryResponse
+
+    interface _ListActivitiesResponse
+      include Smithy::Client::_Response[Types::ListActivitiesOutput]
+      def activities: () -> Array[Types::ActivityListItem]?
+      def next_token: () -> String?
+    end
+    def list_activities: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListActivitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActivitiesResponse
+
+    interface _ListExecutionsResponse
+      include Smithy::Client::_Response[Types::ListExecutionsOutput]
+      def executions: () -> Array[Types::ExecutionListItem]?
+      def next_token: () -> String?
+    end
+    def list_executions: (
+      ?state_machine_arn: String,
+      ?status_filter: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?map_run_arn: String,
+      ?redrive_filter: String
+    ) -> _ListExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutionsResponse
+
+    interface _ListMapRunsResponse
+      include Smithy::Client::_Response[Types::ListMapRunsOutput]
+      def map_runs: () -> Array[Types::MapRunListItem]?
+      def next_token: () -> String?
+    end
+    def list_map_runs: (
+      ?execution_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMapRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMapRunsResponse
+
+    interface _ListStateMachineAliasesResponse
+      include Smithy::Client::_Response[Types::ListStateMachineAliasesOutput]
+      def state_machine_aliases: () -> Array[Types::StateMachineAliasListItem]?
+      def next_token: () -> String?
+    end
+    def list_state_machine_aliases: (
+      ?state_machine_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStateMachineAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStateMachineAliasesResponse
+
+    interface _ListStateMachineVersionsResponse
+      include Smithy::Client::_Response[Types::ListStateMachineVersionsOutput]
+      def state_machine_versions: () -> Array[Types::StateMachineVersionListItem]?
+      def next_token: () -> String?
+    end
+    def list_state_machine_versions: (
+      ?state_machine_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStateMachineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStateMachineVersionsResponse
+
+    interface _ListStateMachinesResponse
+      include Smithy::Client::_Response[Types::ListStateMachinesOutput]
+      def state_machines: () -> Array[Types::StateMachineListItem]?
+      def next_token: () -> String?
+    end
+    def list_state_machines: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListStateMachinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStateMachinesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PublishStateMachineVersionResponse
+      include Smithy::Client::_Response[Types::PublishStateMachineVersionOutput]
+      def creation_date: () -> Time?
+      def state_machine_version_arn: () -> String?
+    end
+    def publish_state_machine_version: (
+      ?state_machine_arn: String,
+      ?revision_id: String,
+      ?description: String
+    ) -> _PublishStateMachineVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishStateMachineVersionResponse
+
+    interface _RedriveExecutionResponse
+      include Smithy::Client::_Response[Types::RedriveExecutionOutput]
+      def redrive_date: () -> Time?
+    end
+    def redrive_execution: (
+      ?execution_arn: String,
+      ?client_token: String
+    ) -> _RedriveExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RedriveExecutionResponse
+
+    interface _SendTaskFailureResponse
+      include Smithy::Client::_Response[Types::SendTaskFailureOutput]
+    end
+    def send_task_failure: (
+      ?task_token: String,
+      ?error: String,
+      ?cause: String
+    ) -> _SendTaskFailureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTaskFailureResponse
+
+    interface _SendTaskHeartbeatResponse
+      include Smithy::Client::_Response[Types::SendTaskHeartbeatOutput]
+    end
+    def send_task_heartbeat: (
+      ?task_token: String
+    ) -> _SendTaskHeartbeatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTaskHeartbeatResponse
+
+    interface _SendTaskSuccessResponse
+      include Smithy::Client::_Response[Types::SendTaskSuccessOutput]
+    end
+    def send_task_success: (
+      ?task_token: String,
+      ?output: String
+    ) -> _SendTaskSuccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTaskSuccessResponse
+
+    interface _StartExecutionResponse
+      include Smithy::Client::_Response[Types::StartExecutionOutput]
+      def execution_arn: () -> String?
+      def start_date: () -> Time?
+    end
+    def start_execution: (
+      ?state_machine_arn: String,
+      ?name: String,
+      ?input: String,
+      ?trace_header: String
+    ) -> _StartExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExecutionResponse
+
+    interface _StartSyncExecutionResponse
+      include Smithy::Client::_Response[Types::StartSyncExecutionOutput]
+      def execution_arn: () -> String?
+      def state_machine_arn: () -> String?
+      def name: () -> String?
+      def start_date: () -> Time?
+      def stop_date: () -> Time?
+      def status: () -> String?
+      def error: () -> String?
+      def cause: () -> String?
+      def input: () -> String?
+      def input_details: () -> Types::CloudWatchEventsExecutionDataDetails?
+      def output: () -> String?
+      def output_details: () -> Types::CloudWatchEventsExecutionDataDetails?
+      def trace_header: () -> String?
+      def billing_details: () -> Types::BillingDetails?
+    end
+    def start_sync_execution: (
+      ?state_machine_arn: String,
+      ?name: String,
+      ?input: String,
+      ?trace_header: String,
+      ?included_data: String
+    ) -> _StartSyncExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSyncExecutionResponse
+
+    interface _StopExecutionResponse
+      include Smithy::Client::_Response[Types::StopExecutionOutput]
+      def stop_date: () -> Time?
+    end
+    def stop_execution: (
+      ?execution_arn: String,
+      ?error: String,
+      ?cause: String
+    ) -> _StopExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopExecutionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestStateResponse
+      include Smithy::Client::_Response[Types::TestStateOutput]
+      def output: () -> String?
+      def error: () -> String?
+      def cause: () -> String?
+      def inspection_data: () -> Types::InspectionData?
+      def next_state: () -> String?
+      def status: () -> String?
+    end
+    def test_state: (
+      ?definition: String,
+      ?role_arn: String,
+      ?input: String,
+      ?inspection_level: String,
+      ?reveal_secrets: bool,
+      ?variables: String
+    ) -> _TestStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestStateResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMapRunResponse
+      include Smithy::Client::_Response[Types::UpdateMapRunOutput]
+    end
+    def update_map_run: (
+      ?map_run_arn: String,
+      ?max_concurrency: Integer,
+      ?tolerated_failure_percentage: Float,
+      ?tolerated_failure_count: Integer
+    ) -> _UpdateMapRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMapRunResponse
+
+    interface _UpdateStateMachineResponse
+      include Smithy::Client::_Response[Types::UpdateStateMachineOutput]
+      def update_date: () -> Time?
+      def revision_id: () -> String?
+      def state_machine_version_arn: () -> String?
+    end
+    def update_state_machine: (
+      ?state_machine_arn: String,
+      ?definition: String,
+      ?role_arn: String,
+      ?logging_configuration: {
+        level: String,
+        include_execution_data: bool,
+        destinations: Array[
+          {
+            cloud_watch_logs_log_group: {
+              log_group_arn: String
+            }
+          }
+        ]
+      },
+      ?tracing_configuration: {
+        enabled: bool
+      },
+      ?publish: bool,
+      ?version_description: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_data_key_reuse_period_seconds: Integer,
+        type: String
+      }
+    ) -> _UpdateStateMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStateMachineResponse
+
+    interface _UpdateStateMachineAliasResponse
+      include Smithy::Client::_Response[Types::UpdateStateMachineAliasOutput]
+      def update_date: () -> Time?
+    end
+    def update_state_machine_alias: (
+      ?state_machine_alias_arn: String,
+      ?description: String,
+      ?routing_configuration: Array[
+        {
+          state_machine_version_arn: String,
+          weight: Integer
+        }
+      ]
+    ) -> _UpdateStateMachineAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStateMachineAliasResponse
+
+    interface _ValidateStateMachineDefinitionResponse
+      include Smithy::Client::_Response[Types::ValidateStateMachineDefinitionOutput]
+      def result: () -> String?
+      def diagnostics: () -> Array[Types::ValidateStateMachineDefinitionDiagnostic]?
+      def truncated: () -> bool?
+    end
+    def validate_state_machine_definition: (
+      ?definition: String,
+      ?type: String,
+      ?severity: String,
+      ?max_results: Integer
+    ) -> _ValidateStateMachineDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateStateMachineDefinitionResponse
+  end
+end

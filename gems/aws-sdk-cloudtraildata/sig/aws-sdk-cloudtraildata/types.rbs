@@ -1,0 +1,141 @@
+module Aws::CloudTrailData
+  module Types
+
+    class AuditEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?event_data: String,
+        ?event_data_checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor event_data: String?
+      attr_accessor event_data_checksum: String?
+    end
+
+    class AuditEventResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor event_id: String?
+    end
+
+    class ChannelInsufficientPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ChannelNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ChannelUnsupportedSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicatedAuditEventId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidChannelARN
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutAuditEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_events: Array[Types::AuditEvent],
+        ?channel_arn: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_events: Array[Types::AuditEvent]?
+      attr_accessor channel_arn: String?
+      attr_accessor external_id: String?
+    end
+
+    class PutAuditEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::AuditEventResultEntry],
+        ?failed: Array[Types::ResultErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::AuditEventResultEntry]?
+      attr_accessor failed: Array[Types::ResultErrorEntry]?
+    end
+
+    class ResultErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

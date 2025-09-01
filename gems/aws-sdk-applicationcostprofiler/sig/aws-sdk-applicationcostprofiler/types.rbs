@@ -1,0 +1,292 @@
+module Aws::ApplicationCostProfiler
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    class DeleteReportDefinitionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    module Format
+      CSV: String
+      PARQUET: String
+    end
+
+    class GetReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    class GetReportDefinitionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_description: String,
+        ?report_frequency: String,
+        ?format: String,
+        ?destination_s3_location: Types::S3Location,
+        ?created_at: Time,
+        ?last_updated: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_description: String?
+      attr_accessor report_frequency: String?
+      attr_accessor format: String?
+      attr_accessor destination_s3_location: Types::S3Location?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated: Time?
+    end
+
+    class ImportApplicationUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_s3_location: Types::SourceS3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_s3_location: Types::SourceS3Location?
+    end
+
+    class ImportApplicationUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListReportDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReportDefinitionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_definitions: Array[Types::ReportDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_definitions: Array[Types::ReportDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class PutReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_description: String,
+        ?report_frequency: String,
+        ?format: String,
+        ?destination_s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_description: String?
+      attr_accessor report_frequency: String?
+      attr_accessor format: String?
+      attr_accessor destination_s3_location: Types::S3Location?
+    end
+
+    class PutReportDefinitionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    class ReportDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_description: String,
+        ?report_frequency: String,
+        ?format: String,
+        ?destination_s3_location: Types::S3Location,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_description: String?
+      attr_accessor report_frequency: String?
+      attr_accessor format: String?
+      attr_accessor destination_s3_location: Types::S3Location?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    module ReportFrequency
+      MONTHLY: String
+      DAILY: String
+      ALL: String
+    end
+
+    module S3BucketRegion
+      AP_EAST_1: String
+      ME_SOUTH_1: String
+      EU_SOUTH_1: String
+      AF_SOUTH_1: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceS3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor region: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?report_description: String,
+        ?report_frequency: String,
+        ?format: String,
+        ?destination_s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor report_description: String?
+      attr_accessor report_frequency: String?
+      attr_accessor format: String?
+      attr_accessor destination_s3_location: Types::S3Location?
+    end
+
+    class UpdateReportDefinitionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,215 @@
+module Aws::Codestarnotifications
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Codestarnotifications::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateNotificationRuleResponse
+      include Smithy::Client::_Response[Types::CreateNotificationRuleResult]
+      def arn: () -> String?
+    end
+    def create_notification_rule: (
+      ?name: String,
+      ?event_type_ids: Array[String],
+      ?resource: String,
+      ?targets: Array[
+        {
+          target_type: String,
+          target_address: String
+        }
+      ],
+      ?detail_type: String,
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?status: String
+    ) -> _CreateNotificationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotificationRuleResponse
+
+    interface _DeleteNotificationRuleResponse
+      include Smithy::Client::_Response[Types::DeleteNotificationRuleResult]
+      def arn: () -> String?
+    end
+    def delete_notification_rule: (
+      ?arn: String
+    ) -> _DeleteNotificationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationRuleResponse
+
+    interface _DeleteTargetResponse
+      include Smithy::Client::_Response[Types::DeleteTargetResult]
+    end
+    def delete_target: (
+      ?target_address: String,
+      ?force_unsubscribe_all: bool
+    ) -> _DeleteTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTargetResponse
+
+    interface _DescribeNotificationRuleResponse
+      include Smithy::Client::_Response[Types::DescribeNotificationRuleResult]
+      def arn: () -> String?
+      def name: () -> String?
+      def event_types: () -> Array[Types::EventTypeSummary]?
+      def resource: () -> String?
+      def targets: () -> Array[Types::TargetSummary]?
+      def detail_type: () -> String?
+      def created_by: () -> String?
+      def status: () -> String?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_notification_rule: (
+      ?arn: String
+    ) -> _DescribeNotificationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotificationRuleResponse
+
+    interface _ListEventTypesResponse
+      include Smithy::Client::_Response[Types::ListEventTypesResult]
+      def event_types: () -> Array[Types::EventTypeSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_types: (
+      ?filters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventTypesResponse
+
+    interface _ListNotificationRulesResponse
+      include Smithy::Client::_Response[Types::ListNotificationRulesResult]
+      def next_token: () -> String?
+      def notification_rules: () -> Array[Types::NotificationRuleSummary]?
+    end
+    def list_notification_rules: (
+      ?filters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNotificationRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationRulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetsResponse
+      include Smithy::Client::_Response[Types::ListTargetsResult]
+      def targets: () -> Array[Types::TargetSummary]?
+      def next_token: () -> String?
+    end
+    def list_targets: (
+      ?filters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetsResponse
+
+    interface _SubscribeResponse
+      include Smithy::Client::_Response[Types::SubscribeResult]
+      def arn: () -> String?
+    end
+    def subscribe: (
+      ?arn: String,
+      ?target: {
+        target_type: String,
+        target_address: String
+      },
+      ?client_request_token: String
+    ) -> _SubscribeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubscribeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+      def tags: () -> Hash[String, String]?
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UnsubscribeResponse
+      include Smithy::Client::_Response[Types::UnsubscribeResult]
+      def arn: () -> String?
+    end
+    def unsubscribe: (
+      ?arn: String,
+      ?target_address: String
+    ) -> _UnsubscribeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnsubscribeResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateNotificationRuleResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationRuleResult]
+    end
+    def update_notification_rule: (
+      ?arn: String,
+      ?name: String,
+      ?status: String,
+      ?event_type_ids: Array[String],
+      ?targets: Array[
+        {
+          target_type: String,
+          target_address: String
+        }
+      ],
+      ?detail_type: String
+    ) -> _UpdateNotificationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationRuleResponse
+  end
+end

@@ -1,0 +1,1186 @@
+module Aws::Neptune
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Neptune::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddRoleToDBClusterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_role_to_db_cluster: (
+      ?db_cluster_identifier: String,
+      ?role_arn: String,
+      ?feature_name: String
+    ) -> _AddRoleToDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddRoleToDBClusterResponse
+
+    interface _AddSourceIdentifierToSubscriptionResponse
+      include Smithy::Client::_Response[Types::AddSourceIdentifierToSubscriptionResult]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def add_source_identifier_to_subscription: (
+      ?subscription_name: String,
+      ?source_identifier: String
+    ) -> _AddSourceIdentifierToSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddSourceIdentifierToSubscriptionResponse
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags_to_resource: (
+      ?resource_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _ApplyPendingMaintenanceActionResponse
+      include Smithy::Client::_Response[Types::ApplyPendingMaintenanceActionResult]
+      def resource_pending_maintenance_actions: () -> Types::ResourcePendingMaintenanceActions?
+    end
+    def apply_pending_maintenance_action: (
+      ?resource_identifier: String,
+      ?apply_action: String,
+      ?opt_in_type: String
+    ) -> _ApplyPendingMaintenanceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplyPendingMaintenanceActionResponse
+
+    interface _CopyDBClusterParameterGroupResponse
+      include Smithy::Client::_Response[Types::CopyDBClusterParameterGroupResult]
+      def db_cluster_parameter_group: () -> Types::DBClusterParameterGroup?
+    end
+    def copy_db_cluster_parameter_group: (
+      ?source_db_cluster_parameter_group_identifier: String,
+      ?target_db_cluster_parameter_group_identifier: String,
+      ?target_db_cluster_parameter_group_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CopyDBClusterParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDBClusterParameterGroupResponse
+
+    interface _CopyDBClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::CopyDBClusterSnapshotResult]
+      def db_cluster_snapshot: () -> Types::DBClusterSnapshot?
+    end
+    def copy_db_cluster_snapshot: (
+      ?source_db_cluster_snapshot_identifier: String,
+      ?target_db_cluster_snapshot_identifier: String,
+      ?kms_key_id: String,
+      ?pre_signed_url: String,
+      ?copy_tags: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CopyDBClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDBClusterSnapshotResponse
+
+    interface _CopyDBParameterGroupResponse
+      include Smithy::Client::_Response[Types::CopyDBParameterGroupResult]
+      def db_parameter_group: () -> Types::DBParameterGroup?
+    end
+    def copy_db_parameter_group: (
+      ?source_db_parameter_group_identifier: String,
+      ?target_db_parameter_group_identifier: String,
+      ?target_db_parameter_group_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CopyDBParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDBParameterGroupResponse
+
+    interface _CreateDBClusterResponse
+      include Smithy::Client::_Response[Types::CreateDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def create_db_cluster: (
+      ?availability_zones: Array[String],
+      ?backup_retention_period: Integer,
+      ?character_set_name: String,
+      ?copy_tags_to_snapshot: bool,
+      ?database_name: String,
+      ?db_cluster_identifier: String,
+      ?db_cluster_parameter_group_name: String,
+      ?vpc_security_group_ids: Array[String],
+      ?db_subnet_group_name: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?port: Integer,
+      ?master_username: String,
+      ?master_user_password: String,
+      ?option_group_name: String,
+      ?preferred_backup_window: String,
+      ?preferred_maintenance_window: String,
+      ?replication_source_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?storage_encrypted: bool,
+      ?kms_key_id: String,
+      ?pre_signed_url: String,
+      ?enable_iam_database_authentication: bool,
+      ?enable_cloudwatch_logs_exports: Array[String],
+      ?deletion_protection: bool,
+      ?serverless_v2_scaling_configuration: {
+        min_capacity: Float,
+        max_capacity: untyped
+      },
+      ?global_cluster_identifier: String,
+      ?storage_type: String
+    ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
+
+    interface _CreateDBClusterEndpointResponse
+      include Smithy::Client::_Response[Types::CreateDBClusterEndpointOutput]
+      def db_cluster_endpoint_identifier: () -> String?
+      def db_cluster_identifier: () -> String?
+      def db_cluster_endpoint_resource_identifier: () -> String?
+      def endpoint: () -> String?
+      def status: () -> String?
+      def endpoint_type: () -> String?
+      def custom_endpoint_type: () -> String?
+      def static_members: () -> Array[String]?
+      def excluded_members: () -> Array[String]?
+      def db_cluster_endpoint_arn: () -> String?
+    end
+    def create_db_cluster_endpoint: (
+      ?db_cluster_identifier: String,
+      ?db_cluster_endpoint_identifier: String,
+      ?endpoint_type: String,
+      ?static_members: Array[String],
+      ?excluded_members: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateDBClusterEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterEndpointResponse
+
+    interface _CreateDBClusterParameterGroupResponse
+      include Smithy::Client::_Response[Types::CreateDBClusterParameterGroupResult]
+      def db_cluster_parameter_group: () -> Types::DBClusterParameterGroup?
+    end
+    def create_db_cluster_parameter_group: (
+      ?db_cluster_parameter_group_name: String,
+      ?db_parameter_group_family: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateDBClusterParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterParameterGroupResponse
+
+    interface _CreateDBClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateDBClusterSnapshotResult]
+      def db_cluster_snapshot: () -> Types::DBClusterSnapshot?
+    end
+    def create_db_cluster_snapshot: (
+      ?db_cluster_snapshot_identifier: String,
+      ?db_cluster_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateDBClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterSnapshotResponse
+
+    interface _CreateDBInstanceResponse
+      include Smithy::Client::_Response[Types::CreateDBInstanceResult]
+      def db_instance: () -> Types::DBInstance?
+    end
+    def create_db_instance: (
+      ?db_name: String,
+      ?db_instance_identifier: String,
+      ?allocated_storage: Integer,
+      ?db_instance_class: String,
+      ?engine: String,
+      ?master_username: String,
+      ?master_user_password: String,
+      ?db_security_groups: Array[String],
+      ?vpc_security_group_ids: Array[String],
+      ?availability_zone: String,
+      ?db_subnet_group_name: String,
+      ?preferred_maintenance_window: String,
+      ?db_parameter_group_name: String,
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?port: Integer,
+      ?multi_az: bool,
+      ?engine_version: String,
+      ?auto_minor_version_upgrade: bool,
+      ?license_model: String,
+      ?iops: Integer,
+      ?option_group_name: String,
+      ?character_set_name: String,
+      ?publicly_accessible: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?db_cluster_identifier: String,
+      ?storage_type: String,
+      ?tde_credential_arn: String,
+      ?tde_credential_password: String,
+      ?storage_encrypted: bool,
+      ?kms_key_id: String,
+      ?domain: String,
+      ?copy_tags_to_snapshot: bool,
+      ?monitoring_interval: Integer,
+      ?monitoring_role_arn: String,
+      ?domain_iam_role_name: String,
+      ?promotion_tier: Integer,
+      ?timezone: String,
+      ?enable_iam_database_authentication: bool,
+      ?enable_performance_insights: bool,
+      ?performance_insights_kms_key_id: String,
+      ?enable_cloudwatch_logs_exports: Array[String],
+      ?deletion_protection: bool
+    ) -> _CreateDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBInstanceResponse
+
+    interface _CreateDBParameterGroupResponse
+      include Smithy::Client::_Response[Types::CreateDBParameterGroupResult]
+      def db_parameter_group: () -> Types::DBParameterGroup?
+    end
+    def create_db_parameter_group: (
+      ?db_parameter_group_name: String,
+      ?db_parameter_group_family: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateDBParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBParameterGroupResponse
+
+    interface _CreateDBSubnetGroupResponse
+      include Smithy::Client::_Response[Types::CreateDBSubnetGroupResult]
+      def db_subnet_group: () -> Types::DBSubnetGroup?
+    end
+    def create_db_subnet_group: (
+      ?db_subnet_group_name: String,
+      ?db_subnet_group_description: String,
+      ?subnet_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateDBSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBSubnetGroupResponse
+
+    interface _CreateEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateEventSubscriptionResult]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def create_event_subscription: (
+      ?subscription_name: String,
+      ?sns_topic_arn: String,
+      ?source_type: String,
+      ?event_categories: Array[String],
+      ?source_ids: Array[String],
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventSubscriptionResponse
+
+    interface _CreateGlobalClusterResponse
+      include Smithy::Client::_Response[Types::CreateGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def create_global_cluster: (
+      ?global_cluster_identifier: String,
+      ?source_db_cluster_identifier: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?deletion_protection: bool,
+      ?storage_encrypted: bool
+    ) -> _CreateGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalClusterResponse
+
+    interface _DeleteDBClusterResponse
+      include Smithy::Client::_Response[Types::DeleteDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def delete_db_cluster: (
+      ?db_cluster_identifier: String,
+      ?skip_final_snapshot: bool,
+      ?final_db_snapshot_identifier: String
+    ) -> _DeleteDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBClusterResponse
+
+    interface _DeleteDBClusterEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteDBClusterEndpointOutput]
+      def db_cluster_endpoint_identifier: () -> String?
+      def db_cluster_identifier: () -> String?
+      def db_cluster_endpoint_resource_identifier: () -> String?
+      def endpoint: () -> String?
+      def status: () -> String?
+      def endpoint_type: () -> String?
+      def custom_endpoint_type: () -> String?
+      def static_members: () -> Array[String]?
+      def excluded_members: () -> Array[String]?
+      def db_cluster_endpoint_arn: () -> String?
+    end
+    def delete_db_cluster_endpoint: (
+      ?db_cluster_endpoint_identifier: String
+    ) -> _DeleteDBClusterEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBClusterEndpointResponse
+
+    interface _DeleteDBClusterParameterGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_db_cluster_parameter_group: (
+      ?db_cluster_parameter_group_name: String
+    ) -> _DeleteDBClusterParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBClusterParameterGroupResponse
+
+    interface _DeleteDBClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteDBClusterSnapshotResult]
+      def db_cluster_snapshot: () -> Types::DBClusterSnapshot?
+    end
+    def delete_db_cluster_snapshot: (
+      ?db_cluster_snapshot_identifier: String
+    ) -> _DeleteDBClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBClusterSnapshotResponse
+
+    interface _DeleteDBInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteDBInstanceResult]
+      def db_instance: () -> Types::DBInstance?
+    end
+    def delete_db_instance: (
+      ?db_instance_identifier: String,
+      ?skip_final_snapshot: bool,
+      ?final_db_snapshot_identifier: String
+    ) -> _DeleteDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBInstanceResponse
+
+    interface _DeleteDBParameterGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_db_parameter_group: (
+      ?db_parameter_group_name: String
+    ) -> _DeleteDBParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBParameterGroupResponse
+
+    interface _DeleteDBSubnetGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_db_subnet_group: (
+      ?db_subnet_group_name: String
+    ) -> _DeleteDBSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDBSubnetGroupResponse
+
+    interface _DeleteEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteEventSubscriptionResult]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def delete_event_subscription: (
+      ?subscription_name: String
+    ) -> _DeleteEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventSubscriptionResponse
+
+    interface _DeleteGlobalClusterResponse
+      include Smithy::Client::_Response[Types::DeleteGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def delete_global_cluster: (
+      ?global_cluster_identifier: String
+    ) -> _DeleteGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlobalClusterResponse
+
+    interface _DescribeDBClusterEndpointsResponse
+      include Smithy::Client::_Response[Types::DBClusterEndpointMessage]
+      def marker: () -> String?
+      def db_cluster_endpoints: () -> Array[Types::DBClusterEndpoint]?
+    end
+    def describe_db_cluster_endpoints: (
+      ?db_cluster_identifier: String,
+      ?db_cluster_endpoint_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBClusterEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClusterEndpointsResponse
+
+    interface _DescribeDBClusterParameterGroupsResponse
+      include Smithy::Client::_Response[Types::DBClusterParameterGroupsMessage]
+      def marker: () -> String?
+      def db_cluster_parameter_groups: () -> Array[Types::DBClusterParameterGroup]?
+    end
+    def describe_db_cluster_parameter_groups: (
+      ?db_cluster_parameter_group_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBClusterParameterGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClusterParameterGroupsResponse
+
+    interface _DescribeDBClusterParametersResponse
+      include Smithy::Client::_Response[Types::DescribeDBClusterParametersOutput]
+      def parameters: () -> Array[Types::Parameter]?
+      def marker: () -> String?
+    end
+    def describe_db_cluster_parameters: (
+      ?db_cluster_parameter_group_name: String,
+      ?source: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBClusterParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClusterParametersResponse
+
+    interface _DescribeDBClusterSnapshotAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeDBClusterSnapshotAttributesResult]
+      def db_cluster_snapshot_attributes_result: () -> Types::DBClusterSnapshotAttributesResult?
+    end
+    def describe_db_cluster_snapshot_attributes: (
+      ?db_cluster_snapshot_identifier: String
+    ) -> _DescribeDBClusterSnapshotAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClusterSnapshotAttributesResponse
+
+    interface _DescribeDBClusterSnapshotsResponse
+      include Smithy::Client::_Response[Types::DBClusterSnapshotMessage]
+      def marker: () -> String?
+      def db_cluster_snapshots: () -> Array[Types::DBClusterSnapshot]?
+    end
+    def describe_db_cluster_snapshots: (
+      ?db_cluster_identifier: String,
+      ?db_cluster_snapshot_identifier: String,
+      ?snapshot_type: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String,
+      ?include_shared: bool,
+      ?include_public: bool
+    ) -> _DescribeDBClusterSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClusterSnapshotsResponse
+
+    interface _DescribeDBClustersResponse
+      include Smithy::Client::_Response[Types::DBClusterMessage]
+      def marker: () -> String?
+      def db_clusters: () -> Array[Types::DBCluster]?
+    end
+    def describe_db_clusters: (
+      ?db_cluster_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBClustersResponse
+
+    interface _DescribeDBEngineVersionsResponse
+      include Smithy::Client::_Response[Types::DBEngineVersionMessage]
+      def marker: () -> String?
+      def db_engine_versions: () -> Array[Types::DBEngineVersion]?
+    end
+    def describe_db_engine_versions: (
+      ?engine: String,
+      ?engine_version: String,
+      ?db_parameter_group_family: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String,
+      ?default_only: bool,
+      ?list_supported_character_sets: bool,
+      ?list_supported_timezones: bool
+    ) -> _DescribeDBEngineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBEngineVersionsResponse
+
+    interface _DescribeDBInstancesResponse
+      include Smithy::Client::_Response[Types::DBInstanceMessage]
+      def marker: () -> String?
+      def db_instances: () -> Array[Types::DBInstance]?
+    end
+    def describe_db_instances: (
+      ?db_instance_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBInstancesResponse
+
+    interface _DescribeDBParameterGroupsResponse
+      include Smithy::Client::_Response[Types::DBParameterGroupsMessage]
+      def marker: () -> String?
+      def db_parameter_groups: () -> Array[Types::DBParameterGroup]?
+    end
+    def describe_db_parameter_groups: (
+      ?db_parameter_group_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBParameterGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBParameterGroupsResponse
+
+    interface _DescribeDBParametersResponse
+      include Smithy::Client::_Response[Types::DescribeDBParametersOutput]
+      def parameters: () -> Array[Types::Parameter]?
+      def marker: () -> String?
+    end
+    def describe_db_parameters: (
+      ?db_parameter_group_name: String,
+      ?source: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBParametersResponse
+
+    interface _DescribeDBSubnetGroupsResponse
+      include Smithy::Client::_Response[Types::DBSubnetGroupMessage]
+      def marker: () -> String?
+      def db_subnet_groups: () -> Array[Types::DBSubnetGroup]?
+    end
+    def describe_db_subnet_groups: (
+      ?db_subnet_group_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeDBSubnetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDBSubnetGroupsResponse
+
+    interface _DescribeEngineDefaultClusterParametersResponse
+      include Smithy::Client::_Response[Types::DescribeEngineDefaultClusterParametersResult]
+      def engine_defaults: () -> Types::EngineDefaults?
+    end
+    def describe_engine_default_cluster_parameters: (
+      ?db_parameter_group_family: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEngineDefaultClusterParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEngineDefaultClusterParametersResponse
+
+    interface _DescribeEngineDefaultParametersResponse
+      include Smithy::Client::_Response[Types::DescribeEngineDefaultParametersResult]
+      def engine_defaults: () -> Types::EngineDefaults?
+    end
+    def describe_engine_default_parameters: (
+      ?db_parameter_group_family: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEngineDefaultParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEngineDefaultParametersResponse
+
+    interface _DescribeEventCategoriesResponse
+      include Smithy::Client::_Response[Types::EventCategoriesMessage]
+      def event_categories_map_list: () -> Array[Types::EventCategoriesMap]?
+    end
+    def describe_event_categories: (
+      ?source_type: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeEventCategoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventCategoriesResponse
+
+    interface _DescribeEventSubscriptionsResponse
+      include Smithy::Client::_Response[Types::EventSubscriptionsMessage]
+      def marker: () -> String?
+      def event_subscriptions_list: () -> Array[Types::EventSubscription]?
+    end
+    def describe_event_subscriptions: (
+      ?subscription_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEventSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventSubscriptionsResponse
+
+    interface _DescribeEventsResponse
+      include Smithy::Client::_Response[Types::EventsMessage]
+      def marker: () -> String?
+      def events: () -> Array[Types::Event]?
+    end
+    def describe_events: (
+      ?source_identifier: String,
+      ?source_type: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?duration: Integer,
+      ?event_categories: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventsResponse
+
+    interface _DescribeGlobalClustersResponse
+      include Smithy::Client::_Response[Types::GlobalClustersMessage]
+      def marker: () -> String?
+      def global_clusters: () -> Array[Types::GlobalCluster]?
+    end
+    def describe_global_clusters: (
+      ?global_cluster_identifier: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeGlobalClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGlobalClustersResponse
+
+    interface _DescribeOrderableDBInstanceOptionsResponse
+      include Smithy::Client::_Response[Types::OrderableDBInstanceOptionsMessage]
+      def orderable_db_instance_options: () -> Array[Types::OrderableDBInstanceOption]?
+      def marker: () -> String?
+    end
+    def describe_orderable_db_instance_options: (
+      ?engine: String,
+      ?engine_version: String,
+      ?db_instance_class: String,
+      ?license_model: String,
+      ?vpc: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeOrderableDBInstanceOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrderableDBInstanceOptionsResponse
+
+    interface _DescribePendingMaintenanceActionsResponse
+      include Smithy::Client::_Response[Types::PendingMaintenanceActionsMessage]
+      def pending_maintenance_actions: () -> Array[Types::ResourcePendingMaintenanceActions]?
+      def marker: () -> String?
+    end
+    def describe_pending_maintenance_actions: (
+      ?resource_identifier: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribePendingMaintenanceActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePendingMaintenanceActionsResponse
+
+    interface _DescribeValidDBInstanceModificationsResponse
+      include Smithy::Client::_Response[Types::DescribeValidDBInstanceModificationsResult]
+      def valid_db_instance_modifications_message: () -> Types::ValidDBInstanceModificationsMessage?
+    end
+    def describe_valid_db_instance_modifications: (
+      ?db_instance_identifier: String
+    ) -> _DescribeValidDBInstanceModificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeValidDBInstanceModificationsResponse
+
+    interface _FailoverDBClusterResponse
+      include Smithy::Client::_Response[Types::FailoverDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def failover_db_cluster: (
+      ?db_cluster_identifier: String,
+      ?target_db_instance_identifier: String
+    ) -> _FailoverDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FailoverDBClusterResponse
+
+    interface _FailoverGlobalClusterResponse
+      include Smithy::Client::_Response[Types::FailoverGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def failover_global_cluster: (
+      ?global_cluster_identifier: String,
+      ?target_db_cluster_identifier: String,
+      ?allow_data_loss: bool,
+      ?switchover: bool
+    ) -> _FailoverGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FailoverGlobalClusterResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::TagListMessage]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyDBClusterResponse
+      include Smithy::Client::_Response[Types::ModifyDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def modify_db_cluster: (
+      ?db_cluster_identifier: String,
+      ?new_db_cluster_identifier: String,
+      ?apply_immediately: bool,
+      ?backup_retention_period: Integer,
+      ?db_cluster_parameter_group_name: String,
+      ?vpc_security_group_ids: Array[String],
+      ?port: Integer,
+      ?master_user_password: String,
+      ?option_group_name: String,
+      ?preferred_backup_window: String,
+      ?preferred_maintenance_window: String,
+      ?enable_iam_database_authentication: bool,
+      ?cloudwatch_logs_export_configuration: {
+        enable_log_types: Array[String],
+        disable_log_types: untyped
+      },
+      ?engine_version: String,
+      ?allow_major_version_upgrade: bool,
+      ?db_instance_parameter_group_name: String,
+      ?deletion_protection: bool,
+      ?copy_tags_to_snapshot: bool,
+      ?serverless_v2_scaling_configuration: {
+        min_capacity: Float,
+        max_capacity: untyped
+      },
+      ?storage_type: String
+    ) -> _ModifyDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterResponse
+
+    interface _ModifyDBClusterEndpointResponse
+      include Smithy::Client::_Response[Types::ModifyDBClusterEndpointOutput]
+      def db_cluster_endpoint_identifier: () -> String?
+      def db_cluster_identifier: () -> String?
+      def db_cluster_endpoint_resource_identifier: () -> String?
+      def endpoint: () -> String?
+      def status: () -> String?
+      def endpoint_type: () -> String?
+      def custom_endpoint_type: () -> String?
+      def static_members: () -> Array[String]?
+      def excluded_members: () -> Array[String]?
+      def db_cluster_endpoint_arn: () -> String?
+    end
+    def modify_db_cluster_endpoint: (
+      ?db_cluster_endpoint_identifier: String,
+      ?endpoint_type: String,
+      ?static_members: Array[String],
+      ?excluded_members: Array[String]
+    ) -> _ModifyDBClusterEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterEndpointResponse
+
+    interface _ModifyDBClusterParameterGroupResponse
+      include Smithy::Client::_Response[Types::ModifyDBClusterParameterGroupOutput]
+      def db_cluster_parameter_group_name: () -> String?
+    end
+    def modify_db_cluster_parameter_group: (
+      ?db_cluster_parameter_group_name: String,
+      ?parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: untyped,
+          description: untyped,
+          source: untyped,
+          apply_type: untyped,
+          data_type: untyped,
+          allowed_values: untyped,
+          is_modifiable: bool,
+          minimum_engine_version: untyped,
+          apply_method: String
+        }
+      ]
+    ) -> _ModifyDBClusterParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterParameterGroupResponse
+
+    interface _ModifyDBClusterSnapshotAttributeResponse
+      include Smithy::Client::_Response[Types::ModifyDBClusterSnapshotAttributeResult]
+      def db_cluster_snapshot_attributes_result: () -> Types::DBClusterSnapshotAttributesResult?
+    end
+    def modify_db_cluster_snapshot_attribute: (
+      ?db_cluster_snapshot_identifier: String,
+      ?attribute_name: String,
+      ?values_to_add: Array[String],
+      ?values_to_remove: Array[String]
+    ) -> _ModifyDBClusterSnapshotAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterSnapshotAttributeResponse
+
+    interface _ModifyDBInstanceResponse
+      include Smithy::Client::_Response[Types::ModifyDBInstanceResult]
+      def db_instance: () -> Types::DBInstance?
+    end
+    def modify_db_instance: (
+      ?db_instance_identifier: String,
+      ?allocated_storage: Integer,
+      ?db_instance_class: String,
+      ?db_subnet_group_name: String,
+      ?db_security_groups: Array[String],
+      ?vpc_security_group_ids: Array[String],
+      ?apply_immediately: bool,
+      ?master_user_password: String,
+      ?db_parameter_group_name: String,
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?preferred_maintenance_window: String,
+      ?multi_az: bool,
+      ?engine_version: String,
+      ?allow_major_version_upgrade: bool,
+      ?auto_minor_version_upgrade: bool,
+      ?license_model: String,
+      ?iops: Integer,
+      ?option_group_name: String,
+      ?new_db_instance_identifier: String,
+      ?storage_type: String,
+      ?tde_credential_arn: String,
+      ?tde_credential_password: String,
+      ?ca_certificate_identifier: String,
+      ?domain: String,
+      ?copy_tags_to_snapshot: bool,
+      ?monitoring_interval: Integer,
+      ?db_port_number: Integer,
+      ?publicly_accessible: bool,
+      ?monitoring_role_arn: String,
+      ?domain_iam_role_name: String,
+      ?promotion_tier: Integer,
+      ?enable_iam_database_authentication: bool,
+      ?enable_performance_insights: bool,
+      ?performance_insights_kms_key_id: String,
+      ?cloudwatch_logs_export_configuration: {
+        enable_log_types: Array[String],
+        disable_log_types: untyped
+      },
+      ?deletion_protection: bool
+    ) -> _ModifyDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBInstanceResponse
+
+    interface _ModifyDBParameterGroupResponse
+      include Smithy::Client::_Response[Types::ModifyDBParameterGroupOutput]
+      def db_parameter_group_name: () -> String?
+    end
+    def modify_db_parameter_group: (
+      ?db_parameter_group_name: String,
+      ?parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: untyped,
+          description: untyped,
+          source: untyped,
+          apply_type: untyped,
+          data_type: untyped,
+          allowed_values: untyped,
+          is_modifiable: bool,
+          minimum_engine_version: untyped,
+          apply_method: String
+        }
+      ]
+    ) -> _ModifyDBParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBParameterGroupResponse
+
+    interface _ModifyDBSubnetGroupResponse
+      include Smithy::Client::_Response[Types::ModifyDBSubnetGroupResult]
+      def db_subnet_group: () -> Types::DBSubnetGroup?
+    end
+    def modify_db_subnet_group: (
+      ?db_subnet_group_name: String,
+      ?db_subnet_group_description: String,
+      ?subnet_ids: Array[String]
+    ) -> _ModifyDBSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBSubnetGroupResponse
+
+    interface _ModifyEventSubscriptionResponse
+      include Smithy::Client::_Response[Types::ModifyEventSubscriptionResult]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def modify_event_subscription: (
+      ?subscription_name: String,
+      ?sns_topic_arn: String,
+      ?source_type: String,
+      ?event_categories: Array[String],
+      ?enabled: bool
+    ) -> _ModifyEventSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyEventSubscriptionResponse
+
+    interface _ModifyGlobalClusterResponse
+      include Smithy::Client::_Response[Types::ModifyGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def modify_global_cluster: (
+      ?global_cluster_identifier: String,
+      ?new_global_cluster_identifier: String,
+      ?deletion_protection: bool,
+      ?engine_version: String,
+      ?allow_major_version_upgrade: bool
+    ) -> _ModifyGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyGlobalClusterResponse
+
+    interface _PromoteReadReplicaDBClusterResponse
+      include Smithy::Client::_Response[Types::PromoteReadReplicaDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def promote_read_replica_db_cluster: (
+      ?db_cluster_identifier: String
+    ) -> _PromoteReadReplicaDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PromoteReadReplicaDBClusterResponse
+
+    interface _RebootDBInstanceResponse
+      include Smithy::Client::_Response[Types::RebootDBInstanceResult]
+      def db_instance: () -> Types::DBInstance?
+    end
+    def reboot_db_instance: (
+      ?db_instance_identifier: String,
+      ?force_failover: bool
+    ) -> _RebootDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootDBInstanceResponse
+
+    interface _RemoveFromGlobalClusterResponse
+      include Smithy::Client::_Response[Types::RemoveFromGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def remove_from_global_cluster: (
+      ?global_cluster_identifier: String,
+      ?db_cluster_identifier: String
+    ) -> _RemoveFromGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFromGlobalClusterResponse
+
+    interface _RemoveRoleFromDBClusterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_role_from_db_cluster: (
+      ?db_cluster_identifier: String,
+      ?role_arn: String,
+      ?feature_name: String
+    ) -> _RemoveRoleFromDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveRoleFromDBClusterResponse
+
+    interface _RemoveSourceIdentifierFromSubscriptionResponse
+      include Smithy::Client::_Response[Types::RemoveSourceIdentifierFromSubscriptionResult]
+      def event_subscription: () -> Types::EventSubscription?
+    end
+    def remove_source_identifier_from_subscription: (
+      ?subscription_name: String,
+      ?source_identifier: String
+    ) -> _RemoveSourceIdentifierFromSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveSourceIdentifierFromSubscriptionResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags_from_resource: (
+      ?resource_name: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+
+    interface _ResetDBClusterParameterGroupResponse
+      include Smithy::Client::_Response[Types::ResetDBClusterParameterGroupOutput]
+      def db_cluster_parameter_group_name: () -> String?
+    end
+    def reset_db_cluster_parameter_group: (
+      ?db_cluster_parameter_group_name: String,
+      ?reset_all_parameters: bool,
+      ?parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: untyped,
+          description: untyped,
+          source: untyped,
+          apply_type: untyped,
+          data_type: untyped,
+          allowed_values: untyped,
+          is_modifiable: bool,
+          minimum_engine_version: untyped,
+          apply_method: String
+        }
+      ]
+    ) -> _ResetDBClusterParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetDBClusterParameterGroupResponse
+
+    interface _ResetDBParameterGroupResponse
+      include Smithy::Client::_Response[Types::ResetDBParameterGroupOutput]
+      def db_parameter_group_name: () -> String?
+    end
+    def reset_db_parameter_group: (
+      ?db_parameter_group_name: String,
+      ?reset_all_parameters: bool,
+      ?parameters: Array[
+        {
+          parameter_name: String,
+          parameter_value: untyped,
+          description: untyped,
+          source: untyped,
+          apply_type: untyped,
+          data_type: untyped,
+          allowed_values: untyped,
+          is_modifiable: bool,
+          minimum_engine_version: untyped,
+          apply_method: String
+        }
+      ]
+    ) -> _ResetDBParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetDBParameterGroupResponse
+
+    interface _RestoreDBClusterFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreDBClusterFromSnapshotResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def restore_db_cluster_from_snapshot: (
+      ?availability_zones: Array[String],
+      ?db_cluster_identifier: String,
+      ?snapshot_identifier: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?port: Integer,
+      ?db_subnet_group_name: String,
+      ?database_name: String,
+      ?option_group_name: String,
+      ?vpc_security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?kms_key_id: String,
+      ?enable_iam_database_authentication: bool,
+      ?enable_cloudwatch_logs_exports: Array[String],
+      ?db_cluster_parameter_group_name: String,
+      ?deletion_protection: bool,
+      ?copy_tags_to_snapshot: bool,
+      ?serverless_v2_scaling_configuration: {
+        min_capacity: Float,
+        max_capacity: untyped
+      },
+      ?storage_type: String
+    ) -> _RestoreDBClusterFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterFromSnapshotResponse
+
+    interface _RestoreDBClusterToPointInTimeResponse
+      include Smithy::Client::_Response[Types::RestoreDBClusterToPointInTimeResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def restore_db_cluster_to_point_in_time: (
+      ?db_cluster_identifier: String,
+      ?restore_type: String,
+      ?source_db_cluster_identifier: String,
+      ?restore_to_time: Time,
+      ?use_latest_restorable_time: bool,
+      ?port: Integer,
+      ?db_subnet_group_name: String,
+      ?option_group_name: String,
+      ?vpc_security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?kms_key_id: String,
+      ?enable_iam_database_authentication: bool,
+      ?enable_cloudwatch_logs_exports: Array[String],
+      ?db_cluster_parameter_group_name: String,
+      ?deletion_protection: bool,
+      ?serverless_v2_scaling_configuration: {
+        min_capacity: Float,
+        max_capacity: untyped
+      },
+      ?storage_type: String
+    ) -> _RestoreDBClusterToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterToPointInTimeResponse
+
+    interface _StartDBClusterResponse
+      include Smithy::Client::_Response[Types::StartDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def start_db_cluster: (
+      ?db_cluster_identifier: String
+    ) -> _StartDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDBClusterResponse
+
+    interface _StopDBClusterResponse
+      include Smithy::Client::_Response[Types::StopDBClusterResult]
+      def db_cluster: () -> Types::DBCluster?
+    end
+    def stop_db_cluster: (
+      ?db_cluster_identifier: String
+    ) -> _StopDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDBClusterResponse
+
+    interface _SwitchoverGlobalClusterResponse
+      include Smithy::Client::_Response[Types::SwitchoverGlobalClusterResult]
+      def global_cluster: () -> Types::GlobalCluster?
+    end
+    def switchover_global_cluster: (
+      ?global_cluster_identifier: String,
+      ?target_db_cluster_identifier: String
+    ) -> _SwitchoverGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SwitchoverGlobalClusterResponse
+  end
+end

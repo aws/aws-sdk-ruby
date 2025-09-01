@@ -1,0 +1,5 @@
+  module Aws
+    module ARCZonalShift
+      VERSION: String
+    end
+  end

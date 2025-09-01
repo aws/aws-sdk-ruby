@@ -1,0 +1,103 @@
+module Aws::KeyspacesStreams
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::KeyspacesStreams::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetRecordsResponse
+      include Smithy::Client::_Response[Types::GetRecordsOutput]
+      def change_records: () -> Array[Types::Record]?
+      def next_shard_iterator: () -> String?
+    end
+    def get_records: (
+      ?shard_iterator: String,
+      ?max_results: Integer
+    ) -> _GetRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecordsResponse
+
+    interface _GetShardIteratorResponse
+      include Smithy::Client::_Response[Types::GetShardIteratorOutput]
+      def shard_iterator: () -> String?
+    end
+    def get_shard_iterator: (
+      ?stream_arn: String,
+      ?shard_id: String,
+      ?shard_iterator_type: String,
+      ?sequence_number: String
+    ) -> _GetShardIteratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetShardIteratorResponse
+
+    interface _GetStreamResponse
+      include Smithy::Client::_Response[Types::GetStreamOutput]
+      def stream_arn: () -> String?
+      def stream_label: () -> String?
+      def stream_status: () -> String?
+      def stream_view_type: () -> String?
+      def creation_request_date_time: () -> Time?
+      def keyspace_name: () -> String?
+      def table_name: () -> String?
+      def shards: () -> Array[Types::Shard]?
+      def next_token: () -> String?
+    end
+    def get_stream: (
+      ?stream_arn: String,
+      ?max_results: Integer,
+      ?shard_filter: {
+        type: String,
+        shard_id: String
+      },
+      ?next_token: String
+    ) -> _GetStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamResponse
+
+    interface _ListStreamsResponse
+      include Smithy::Client::_Response[Types::ListStreamsOutput]
+      def streams: () -> Array[Types::Stream]?
+      def next_token: () -> String?
+    end
+    def list_streams: (
+      ?keyspace_name: String,
+      ?table_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamsResponse
+  end
+end

@@ -1,0 +1,1166 @@
+module Aws::RoboMaker
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RoboMaker::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchDeleteWorldsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteWorldsResponse]
+      def unprocessed_worlds: () -> Array[String]?
+    end
+    def batch_delete_worlds: (
+      ?worlds: Array[String]
+    ) -> _BatchDeleteWorldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteWorldsResponse
+
+    interface _BatchDescribeSimulationJobResponse
+      include Smithy::Client::_Response[Types::BatchDescribeSimulationJobResponse]
+      def jobs: () -> Array[Types::SimulationJob]?
+      def unprocessed_jobs: () -> Array[String]?
+    end
+    def batch_describe_simulation_job: (
+      ?jobs: Array[String]
+    ) -> _BatchDescribeSimulationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDescribeSimulationJobResponse
+
+    interface _CancelDeploymentJobResponse
+      include Smithy::Client::_Response[Types::CancelDeploymentJobResponse]
+    end
+    def cancel_deployment_job: (
+      ?job: String
+    ) -> _CancelDeploymentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDeploymentJobResponse
+
+    interface _CancelSimulationJobResponse
+      include Smithy::Client::_Response[Types::CancelSimulationJobResponse]
+    end
+    def cancel_simulation_job: (
+      ?job: String
+    ) -> _CancelSimulationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSimulationJobResponse
+
+    interface _CancelSimulationJobBatchResponse
+      include Smithy::Client::_Response[Types::CancelSimulationJobBatchResponse]
+    end
+    def cancel_simulation_job_batch: (
+      ?batch: String
+    ) -> _CancelSimulationJobBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSimulationJobBatchResponse
+
+    interface _CancelWorldExportJobResponse
+      include Smithy::Client::_Response[Types::CancelWorldExportJobResponse]
+    end
+    def cancel_world_export_job: (
+      ?job: String
+    ) -> _CancelWorldExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelWorldExportJobResponse
+
+    interface _CancelWorldGenerationJobResponse
+      include Smithy::Client::_Response[Types::CancelWorldGenerationJobResponse]
+    end
+    def cancel_world_generation_job: (
+      ?job: String
+    ) -> _CancelWorldGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelWorldGenerationJobResponse
+
+    interface _CreateDeploymentJobResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentJobResponse]
+      def arn: () -> String?
+      def fleet: () -> String?
+      def status: () -> String?
+      def deployment_application_configs: () -> Array[Types::DeploymentApplicationConfig]?
+      def failure_reason: () -> String?
+      def failure_code: () -> String?
+      def created_at: () -> Time?
+      def deployment_config: () -> Types::DeploymentConfig?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_deployment_job: (
+      ?deployment_config: {
+        concurrent_deployment_percentage: Integer,
+        failure_threshold_percentage: untyped,
+        robot_deployment_timeout_in_seconds: Integer,
+        download_condition_file: {
+          bucket: String,
+          key: String,
+          etag: String
+        }
+      },
+      ?client_request_token: String,
+      ?fleet: String,
+      ?deployment_application_configs: Array[
+        {
+          application: String,
+          application_version: String,
+          launch_config: {
+            package_name: String,
+            pre_launch_file: String,
+            launch_file: untyped,
+            post_launch_file: untyped,
+            environment_variables: Hash[String, String]
+          }
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateDeploymentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentJobResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_fleet: (
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateRobotResponse
+      include Smithy::Client::_Response[Types::CreateRobotResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def greengrass_group_id: () -> String?
+      def architecture: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_robot: (
+      ?name: String,
+      ?architecture: String,
+      ?greengrass_group_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRobotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRobotResponse
+
+    interface _CreateRobotApplicationResponse
+      include Smithy::Client::_Response[Types::CreateRobotApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def environment: () -> Types::Environment?
+    end
+    def create_robot_application: (
+      ?name: String,
+      ?sources: Array[
+        {
+          s3_bucket: String,
+          s3_key: String,
+          architecture: String
+        }
+      ],
+      ?robot_software_suite: {
+        name: String,
+        version: String
+      },
+      ?tags: Hash[String, String],
+      ?environment: {
+        uri: String
+      }
+    ) -> _CreateRobotApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRobotApplicationResponse
+
+    interface _CreateRobotApplicationVersionResponse
+      include Smithy::Client::_Response[Types::CreateRobotApplicationVersionResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def environment: () -> Types::Environment?
+    end
+    def create_robot_application_version: (
+      ?application: String,
+      ?current_revision_id: String,
+      ?s3_etags: Array[String],
+      ?image_digest: String
+    ) -> _CreateRobotApplicationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRobotApplicationVersionResponse
+
+    interface _CreateSimulationApplicationResponse
+      include Smithy::Client::_Response[Types::CreateSimulationApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def simulation_software_suite: () -> Types::SimulationSoftwareSuite?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def rendering_engine: () -> Types::RenderingEngine?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def environment: () -> Types::Environment?
+    end
+    def create_simulation_application: (
+      ?name: String,
+      ?sources: Array[
+        {
+          s3_bucket: String,
+          s3_key: String,
+          architecture: String
+        }
+      ],
+      ?simulation_software_suite: {
+        name: String,
+        version: String
+      },
+      ?robot_software_suite: {
+        name: String,
+        version: String
+      },
+      ?rendering_engine: {
+        name: String,
+        version: String
+      },
+      ?tags: Hash[String, String],
+      ?environment: {
+        uri: String
+      }
+    ) -> _CreateSimulationApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSimulationApplicationResponse
+
+    interface _CreateSimulationApplicationVersionResponse
+      include Smithy::Client::_Response[Types::CreateSimulationApplicationVersionResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def simulation_software_suite: () -> Types::SimulationSoftwareSuite?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def rendering_engine: () -> Types::RenderingEngine?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def environment: () -> Types::Environment?
+    end
+    def create_simulation_application_version: (
+      ?application: String,
+      ?current_revision_id: String,
+      ?s3_etags: Array[String],
+      ?image_digest: String
+    ) -> _CreateSimulationApplicationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSimulationApplicationVersionResponse
+
+    interface _CreateSimulationJobResponse
+      include Smithy::Client::_Response[Types::CreateSimulationJobResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def last_started_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def failure_behavior: () -> String?
+      def failure_code: () -> String?
+      def client_request_token: () -> String?
+      def output_location: () -> Types::OutputLocation?
+      def logging_config: () -> Types::LoggingConfig?
+      def max_job_duration_in_seconds: () -> Integer?
+      def simulation_time_millis: () -> Integer?
+      def iam_role: () -> String?
+      def robot_applications: () -> Array[Types::RobotApplicationConfig]?
+      def simulation_applications: () -> Array[Types::SimulationApplicationConfig]?
+      def data_sources: () -> Array[Types::DataSource]?
+      def tags: () -> Hash[String, String]?
+      def vpc_config: () -> Types::VPCConfigResponse?
+      def compute: () -> Types::ComputeResponse?
+    end
+    def create_simulation_job: (
+      ?client_request_token: String,
+      ?output_location: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?logging_config: {
+        record_all_ros_topics: bool
+      },
+      ?max_job_duration_in_seconds: Integer,
+      ?iam_role: String,
+      ?failure_behavior: String,
+      ?robot_applications: Array[
+        {
+          application: String,
+          application_version: String,
+          launch_config: {
+            package_name: String,
+            launch_file: untyped,
+            environment_variables: Hash[String, String],
+            port_forwarding_config: {
+              port_mappings: Array[
+                {
+                  job_port: Integer,
+                  application_port: Integer,
+                  enable_on_public_ip: bool
+                }
+              ]
+            },
+            stream_ui: untyped,
+            command: Array[String]
+          },
+          upload_configurations: Array[
+            {
+              name: String,
+              path: String,
+              upload_behavior: String
+            }
+          ],
+          use_default_upload_configurations: bool,
+          tools: Array[
+            {
+              stream_ui: untyped,
+              name: untyped,
+              command: String,
+              stream_output_to_cloud_watch: untyped,
+              exit_behavior: String
+            }
+          ],
+          use_default_tools: untyped
+        }
+      ],
+      ?simulation_applications: Array[
+        {
+          application: String,
+          application_version: String,
+          launch_config: {
+            package_name: String,
+            launch_file: untyped,
+            environment_variables: Hash[String, String],
+            port_forwarding_config: {
+              port_mappings: Array[
+                {
+                  job_port: Integer,
+                  application_port: Integer,
+                  enable_on_public_ip: bool
+                }
+              ]
+            },
+            stream_ui: untyped,
+            command: Array[String]
+          },
+          upload_configurations: Array[
+            {
+              name: String,
+              path: String,
+              upload_behavior: String
+            }
+          ],
+          world_configs: Array[
+            {
+              world: untyped
+            }
+          ],
+          use_default_upload_configurations: bool,
+          tools: Array[
+            {
+              stream_ui: untyped,
+              name: untyped,
+              command: String,
+              stream_output_to_cloud_watch: untyped,
+              exit_behavior: String
+            }
+          ],
+          use_default_tools: untyped
+        }
+      ],
+      ?data_sources: Array[
+        {
+          name: String,
+          s3_bucket: String,
+          s3_keys: Array[String],
+          type: String,
+          destination: String
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?vpc_config: {
+        subnets: Array[String],
+        security_groups: Array[String],
+        assign_public_ip: bool
+      },
+      ?compute: {
+        simulation_unit_limit: Integer,
+        compute_type: String,
+        gpu_unit_limit: Integer
+      }
+    ) -> _CreateSimulationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSimulationJobResponse
+
+    interface _CreateWorldExportJobResponse
+      include Smithy::Client::_Response[Types::CreateWorldExportJobResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def failure_code: () -> String?
+      def client_request_token: () -> String?
+      def output_location: () -> Types::OutputLocation?
+      def iam_role: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_world_export_job: (
+      ?client_request_token: String,
+      ?worlds: Array[String],
+      ?output_location: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?iam_role: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateWorldExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorldExportJobResponse
+
+    interface _CreateWorldGenerationJobResponse
+      include Smithy::Client::_Response[Types::CreateWorldGenerationJobResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def failure_code: () -> String?
+      def client_request_token: () -> String?
+      def template: () -> String?
+      def world_count: () -> Types::WorldCount?
+      def tags: () -> Hash[String, String]?
+      def world_tags: () -> Hash[String, String]?
+    end
+    def create_world_generation_job: (
+      ?client_request_token: String,
+      ?template: String,
+      ?world_count: {
+        floorplan_count: Integer,
+        interior_count_per_floorplan: Integer
+      },
+      ?tags: Hash[String, String],
+      ?world_tags: Hash[String, String]
+    ) -> _CreateWorldGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorldGenerationJobResponse
+
+    interface _CreateWorldTemplateResponse
+      include Smithy::Client::_Response[Types::CreateWorldTemplateResponse]
+      def arn: () -> String?
+      def client_request_token: () -> String?
+      def created_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_world_template: (
+      ?client_request_token: String,
+      ?name: String,
+      ?template_body: String,
+      ?template_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateWorldTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorldTemplateResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Types::DeleteFleetResponse]
+    end
+    def delete_fleet: (
+      ?fleet: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteRobotResponse
+      include Smithy::Client::_Response[Types::DeleteRobotResponse]
+    end
+    def delete_robot: (
+      ?robot: String
+    ) -> _DeleteRobotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRobotResponse
+
+    interface _DeleteRobotApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteRobotApplicationResponse]
+    end
+    def delete_robot_application: (
+      ?application: String,
+      ?application_version: String
+    ) -> _DeleteRobotApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRobotApplicationResponse
+
+    interface _DeleteSimulationApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteSimulationApplicationResponse]
+    end
+    def delete_simulation_application: (
+      ?application: String,
+      ?application_version: String
+    ) -> _DeleteSimulationApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSimulationApplicationResponse
+
+    interface _DeleteWorldTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteWorldTemplateResponse]
+    end
+    def delete_world_template: (
+      ?template: String
+    ) -> _DeleteWorldTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorldTemplateResponse
+
+    interface _DeregisterRobotResponse
+      include Smithy::Client::_Response[Types::DeregisterRobotResponse]
+      def fleet: () -> String?
+      def robot: () -> String?
+    end
+    def deregister_robot: (
+      ?fleet: String,
+      ?robot: String
+    ) -> _DeregisterRobotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterRobotResponse
+
+    interface _DescribeDeploymentJobResponse
+      include Smithy::Client::_Response[Types::DescribeDeploymentJobResponse]
+      def arn: () -> String?
+      def fleet: () -> String?
+      def status: () -> String?
+      def deployment_config: () -> Types::DeploymentConfig?
+      def deployment_application_configs: () -> Array[Types::DeploymentApplicationConfig]?
+      def failure_reason: () -> String?
+      def failure_code: () -> String?
+      def created_at: () -> Time?
+      def robot_deployment_summary: () -> Array[Types::RobotDeployment]?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_deployment_job: (
+      ?job: String
+    ) -> _DescribeDeploymentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeploymentJobResponse
+
+    interface _DescribeFleetResponse
+      include Smithy::Client::_Response[Types::DescribeFleetResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def robots: () -> Array[Types::Robot]?
+      def created_at: () -> Time?
+      def last_deployment_status: () -> String?
+      def last_deployment_job: () -> String?
+      def last_deployment_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_fleet: (
+      ?fleet: String
+    ) -> _DescribeFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetResponse
+
+    interface _DescribeRobotResponse
+      include Smithy::Client::_Response[Types::DescribeRobotResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def fleet_arn: () -> String?
+      def status: () -> String?
+      def greengrass_group_id: () -> String?
+      def created_at: () -> Time?
+      def architecture: () -> String?
+      def last_deployment_job: () -> String?
+      def last_deployment_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_robot: (
+      ?robot: String
+    ) -> _DescribeRobotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRobotResponse
+
+    interface _DescribeRobotApplicationResponse
+      include Smithy::Client::_Response[Types::DescribeRobotApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def revision_id: () -> String?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def environment: () -> Types::Environment?
+      def image_digest: () -> String?
+    end
+    def describe_robot_application: (
+      ?application: String,
+      ?application_version: String
+    ) -> _DescribeRobotApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRobotApplicationResponse
+
+    interface _DescribeSimulationApplicationResponse
+      include Smithy::Client::_Response[Types::DescribeSimulationApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def simulation_software_suite: () -> Types::SimulationSoftwareSuite?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def rendering_engine: () -> Types::RenderingEngine?
+      def revision_id: () -> String?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def environment: () -> Types::Environment?
+      def image_digest: () -> String?
+    end
+    def describe_simulation_application: (
+      ?application: String,
+      ?application_version: String
+    ) -> _DescribeSimulationApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSimulationApplicationResponse
+
+    interface _DescribeSimulationJobResponse
+      include Smithy::Client::_Response[Types::DescribeSimulationJobResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def last_started_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def failure_behavior: () -> String?
+      def failure_code: () -> String?
+      def failure_reason: () -> String?
+      def client_request_token: () -> String?
+      def output_location: () -> Types::OutputLocation?
+      def logging_config: () -> Types::LoggingConfig?
+      def max_job_duration_in_seconds: () -> Integer?
+      def simulation_time_millis: () -> Integer?
+      def iam_role: () -> String?
+      def robot_applications: () -> Array[Types::RobotApplicationConfig]?
+      def simulation_applications: () -> Array[Types::SimulationApplicationConfig]?
+      def data_sources: () -> Array[Types::DataSource]?
+      def tags: () -> Hash[String, String]?
+      def vpc_config: () -> Types::VPCConfigResponse?
+      def network_interface: () -> Types::NetworkInterface?
+      def compute: () -> Types::ComputeResponse?
+    end
+    def describe_simulation_job: (
+      ?job: String
+    ) -> _DescribeSimulationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSimulationJobResponse
+
+    interface _DescribeSimulationJobBatchResponse
+      include Smithy::Client::_Response[Types::DescribeSimulationJobBatchResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def client_request_token: () -> String?
+      def batch_policy: () -> Types::BatchPolicy?
+      def failure_code: () -> String?
+      def failure_reason: () -> String?
+      def failed_requests: () -> Array[Types::FailedCreateSimulationJobRequest]?
+      def pending_requests: () -> Array[Types::SimulationJobRequest]?
+      def created_requests: () -> Array[Types::SimulationJobSummary]?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_simulation_job_batch: (
+      ?batch: String
+    ) -> _DescribeSimulationJobBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSimulationJobBatchResponse
+
+    interface _DescribeWorldResponse
+      include Smithy::Client::_Response[Types::DescribeWorldResponse]
+      def arn: () -> String?
+      def generation_job: () -> String?
+      def template: () -> String?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def world_description_body: () -> String?
+    end
+    def describe_world: (
+      ?world: String
+    ) -> _DescribeWorldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorldResponse
+
+    interface _DescribeWorldExportJobResponse
+      include Smithy::Client::_Response[Types::DescribeWorldExportJobResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def failure_code: () -> String?
+      def failure_reason: () -> String?
+      def client_request_token: () -> String?
+      def worlds: () -> Array[String]?
+      def output_location: () -> Types::OutputLocation?
+      def iam_role: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_world_export_job: (
+      ?job: String
+    ) -> _DescribeWorldExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorldExportJobResponse
+
+    interface _DescribeWorldGenerationJobResponse
+      include Smithy::Client::_Response[Types::DescribeWorldGenerationJobResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def failure_code: () -> String?
+      def failure_reason: () -> String?
+      def client_request_token: () -> String?
+      def template: () -> String?
+      def world_count: () -> Types::WorldCount?
+      def finished_worlds_summary: () -> Types::FinishedWorldsSummary?
+      def tags: () -> Hash[String, String]?
+      def world_tags: () -> Hash[String, String]?
+    end
+    def describe_world_generation_job: (
+      ?job: String
+    ) -> _DescribeWorldGenerationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorldGenerationJobResponse
+
+    interface _DescribeWorldTemplateResponse
+      include Smithy::Client::_Response[Types::DescribeWorldTemplateResponse]
+      def arn: () -> String?
+      def client_request_token: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def version: () -> String?
+    end
+    def describe_world_template: (
+      ?template: String
+    ) -> _DescribeWorldTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorldTemplateResponse
+
+    interface _GetWorldTemplateBodyResponse
+      include Smithy::Client::_Response[Types::GetWorldTemplateBodyResponse]
+      def template_body: () -> String?
+    end
+    def get_world_template_body: (
+      ?template: String,
+      ?generation_job: String
+    ) -> _GetWorldTemplateBodyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorldTemplateBodyResponse
+
+    interface _ListDeploymentJobsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentJobsResponse]
+      def deployment_jobs: () -> Array[Types::DeploymentJob]?
+      def next_token: () -> String?
+    end
+    def list_deployment_jobs: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDeploymentJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentJobsResponse
+
+    interface _ListFleetsResponse
+      include Smithy::Client::_Response[Types::ListFleetsResponse]
+      def fleet_details: () -> Array[Types::Fleet]?
+      def next_token: () -> String?
+    end
+    def list_fleets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
+
+    interface _ListRobotApplicationsResponse
+      include Smithy::Client::_Response[Types::ListRobotApplicationsResponse]
+      def robot_application_summaries: () -> Array[Types::RobotApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_robot_applications: (
+      ?version_qualifier: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListRobotApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRobotApplicationsResponse
+
+    interface _ListRobotsResponse
+      include Smithy::Client::_Response[Types::ListRobotsResponse]
+      def robots: () -> Array[Types::Robot]?
+      def next_token: () -> String?
+    end
+    def list_robots: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListRobotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRobotsResponse
+
+    interface _ListSimulationApplicationsResponse
+      include Smithy::Client::_Response[Types::ListSimulationApplicationsResponse]
+      def simulation_application_summaries: () -> Array[Types::SimulationApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_simulation_applications: (
+      ?version_qualifier: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListSimulationApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSimulationApplicationsResponse
+
+    interface _ListSimulationJobBatchesResponse
+      include Smithy::Client::_Response[Types::ListSimulationJobBatchesResponse]
+      def simulation_job_batch_summaries: () -> Array[Types::SimulationJobBatchSummary]?
+      def next_token: () -> String?
+    end
+    def list_simulation_job_batches: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListSimulationJobBatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSimulationJobBatchesResponse
+
+    interface _ListSimulationJobsResponse
+      include Smithy::Client::_Response[Types::ListSimulationJobsResponse]
+      def simulation_job_summaries: () -> Array[Types::SimulationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_simulation_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListSimulationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSimulationJobsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorldExportJobsResponse
+      include Smithy::Client::_Response[Types::ListWorldExportJobsResponse]
+      def world_export_job_summaries: () -> Array[Types::WorldExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_world_export_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListWorldExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorldExportJobsResponse
+
+    interface _ListWorldGenerationJobsResponse
+      include Smithy::Client::_Response[Types::ListWorldGenerationJobsResponse]
+      def world_generation_job_summaries: () -> Array[Types::WorldGenerationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_world_generation_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListWorldGenerationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorldGenerationJobsResponse
+
+    interface _ListWorldTemplatesResponse
+      include Smithy::Client::_Response[Types::ListWorldTemplatesResponse]
+      def template_summaries: () -> Array[Types::TemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_world_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorldTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorldTemplatesResponse
+
+    interface _ListWorldsResponse
+      include Smithy::Client::_Response[Types::ListWorldsResponse]
+      def world_summaries: () -> Array[Types::WorldSummary]?
+      def next_token: () -> String?
+    end
+    def list_worlds: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListWorldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorldsResponse
+
+    interface _RegisterRobotResponse
+      include Smithy::Client::_Response[Types::RegisterRobotResponse]
+      def fleet: () -> String?
+      def robot: () -> String?
+    end
+    def register_robot: (
+      ?fleet: String,
+      ?robot: String
+    ) -> _RegisterRobotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterRobotResponse
+
+    interface _RestartSimulationJobResponse
+      include Smithy::Client::_Response[Types::RestartSimulationJobResponse]
+    end
+    def restart_simulation_job: (
+      ?job: String
+    ) -> _RestartSimulationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestartSimulationJobResponse
+
+    interface _StartSimulationJobBatchResponse
+      include Smithy::Client::_Response[Types::StartSimulationJobBatchResponse]
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def client_request_token: () -> String?
+      def batch_policy: () -> Types::BatchPolicy?
+      def failure_code: () -> String?
+      def failure_reason: () -> String?
+      def failed_requests: () -> Array[Types::FailedCreateSimulationJobRequest]?
+      def pending_requests: () -> Array[Types::SimulationJobRequest]?
+      def created_requests: () -> Array[Types::SimulationJobSummary]?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_simulation_job_batch: (
+      ?client_request_token: String,
+      ?batch_policy: {
+        timeout_in_seconds: Integer,
+        max_concurrency: Integer
+      },
+      ?create_simulation_job_requests: Array[
+        {
+          output_location: {
+            s3_bucket: String,
+            s3_prefix: String
+          },
+          logging_config: {
+            record_all_ros_topics: bool
+          },
+          max_job_duration_in_seconds: Integer,
+          iam_role: String,
+          failure_behavior: String,
+          use_default_applications: untyped,
+          robot_applications: Array[
+            {
+              application: String,
+              application_version: String,
+              launch_config: {
+                package_name: String,
+                launch_file: untyped,
+                environment_variables: Hash[String, String],
+                port_forwarding_config: {
+                  port_mappings: Array[
+                    {
+                      job_port: Integer,
+                      application_port: Integer,
+                      enable_on_public_ip: bool
+                    }
+                  ]
+                },
+                stream_ui: untyped,
+                command: Array[String]
+              },
+              upload_configurations: Array[
+                {
+                  name: String,
+                  path: String,
+                  upload_behavior: String
+                }
+              ],
+              use_default_upload_configurations: untyped,
+              tools: Array[
+                {
+                  stream_ui: untyped,
+                  name: untyped,
+                  command: String,
+                  stream_output_to_cloud_watch: untyped,
+                  exit_behavior: String
+                }
+              ],
+              use_default_tools: untyped
+            }
+          ],
+          simulation_applications: Array[
+            {
+              application: untyped,
+              application_version: untyped,
+              launch_config: untyped,
+              upload_configurations: untyped,
+              world_configs: Array[
+                {
+                  world: untyped
+                }
+              ],
+              use_default_upload_configurations: untyped,
+              tools: untyped,
+              use_default_tools: untyped
+            }
+          ],
+          data_sources: Array[
+            {
+              name: untyped,
+              s3_bucket: untyped,
+              s3_keys: Array[String],
+              type: String,
+              destination: untyped
+            }
+          ],
+          vpc_config: {
+            subnets: Array[String],
+            security_groups: Array[String],
+            assign_public_ip: untyped
+          },
+          compute: {
+            simulation_unit_limit: Integer,
+            compute_type: String,
+            gpu_unit_limit: Integer
+          },
+          tags: Hash[String, String]
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _StartSimulationJobBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSimulationJobBatchResponse
+
+    interface _SyncDeploymentJobResponse
+      include Smithy::Client::_Response[Types::SyncDeploymentJobResponse]
+      def arn: () -> String?
+      def fleet: () -> String?
+      def status: () -> String?
+      def deployment_config: () -> Types::DeploymentConfig?
+      def deployment_application_configs: () -> Array[Types::DeploymentApplicationConfig]?
+      def failure_reason: () -> String?
+      def failure_code: () -> String?
+      def created_at: () -> Time?
+    end
+    def sync_deployment_job: (
+      ?client_request_token: String,
+      ?fleet: String
+    ) -> _SyncDeploymentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SyncDeploymentJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateRobotApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateRobotApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def environment: () -> Types::Environment?
+    end
+    def update_robot_application: (
+      ?application: String,
+      ?sources: Array[
+        {
+          s3_bucket: String,
+          s3_key: String,
+          architecture: String
+        }
+      ],
+      ?robot_software_suite: {
+        name: String,
+        version: String
+      },
+      ?current_revision_id: String,
+      ?environment: {
+        uri: String
+      }
+    ) -> _UpdateRobotApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRobotApplicationResponse
+
+    interface _UpdateSimulationApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateSimulationApplicationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def sources: () -> Array[Types::Source]?
+      def simulation_software_suite: () -> Types::SimulationSoftwareSuite?
+      def robot_software_suite: () -> Types::RobotSoftwareSuite?
+      def rendering_engine: () -> Types::RenderingEngine?
+      def last_updated_at: () -> Time?
+      def revision_id: () -> String?
+      def environment: () -> Types::Environment?
+    end
+    def update_simulation_application: (
+      ?application: String,
+      ?sources: Array[
+        {
+          s3_bucket: String,
+          s3_key: String,
+          architecture: String
+        }
+      ],
+      ?simulation_software_suite: {
+        name: String,
+        version: String
+      },
+      ?robot_software_suite: {
+        name: String,
+        version: String
+      },
+      ?rendering_engine: {
+        name: String,
+        version: String
+      },
+      ?current_revision_id: String,
+      ?environment: {
+        uri: String
+      }
+    ) -> _UpdateSimulationApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSimulationApplicationResponse
+
+    interface _UpdateWorldTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateWorldTemplateResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def update_world_template: (
+      ?template: String,
+      ?name: String,
+      ?template_body: String,
+      ?template_location: {
+        s3_bucket: String,
+        s3_key: String
+      }
+    ) -> _UpdateWorldTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorldTemplateResponse
+  end
+end

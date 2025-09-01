@@ -1,0 +1,5 @@
+  module Aws
+    module WorkSpacesThinClient
+      VERSION: String
+    end
+  end

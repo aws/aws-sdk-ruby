@@ -1,0 +1,28 @@
+module Aws::MarketplaceAgreement
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+      def reason: () -> String?
+      def fields: () -> Array[Types::ValidationExceptionField]?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module ResourceGroupsTaggingAPI
+      VERSION: String
+    end
+  end

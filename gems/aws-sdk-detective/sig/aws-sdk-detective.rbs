@@ -1,0 +1,5 @@
+  module Aws
+    module Detective
+      VERSION: String
+    end
+  end

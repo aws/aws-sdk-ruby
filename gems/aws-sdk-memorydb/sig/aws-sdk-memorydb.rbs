@@ -1,0 +1,5 @@
+  module Aws
+    module MemoryDB
+      VERSION: String
+    end
+  end

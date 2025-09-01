@@ -1,0 +1,1238 @@
+module Aws::DirectConnect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DirectConnect::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptDirectConnectGatewayAssociationProposalResponse
+      include Smithy::Client::_Response[Types::AcceptDirectConnectGatewayAssociationProposalResult]
+      def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation?
+    end
+    def accept_direct_connect_gateway_association_proposal: (
+      ?direct_connect_gateway_id: String,
+      ?proposal_id: String,
+      ?associated_gateway_owner_account: String,
+      ?override_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ]
+    ) -> _AcceptDirectConnectGatewayAssociationProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptDirectConnectGatewayAssociationProposalResponse
+
+    interface _AllocateConnectionOnInterconnectResponse
+      include Smithy::Client::_Response[Types::AllocateConnectionOnInterconnectOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def allocate_connection_on_interconnect: (
+      ?bandwidth: String,
+      ?connection_name: String,
+      ?owner_account: String,
+      ?interconnect_id: String,
+      ?vlan: Integer
+    ) -> _AllocateConnectionOnInterconnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocateConnectionOnInterconnectResponse
+
+    interface _AllocateHostedConnectionResponse
+      include Smithy::Client::_Response[Types::AllocateHostedConnectionOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def allocate_hosted_connection: (
+      ?connection_id: String,
+      ?owner_account: String,
+      ?bandwidth: String,
+      ?connection_name: String,
+      ?vlan: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AllocateHostedConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocateHostedConnectionResponse
+
+    interface _AllocatePrivateVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::AllocatePrivateVirtualInterfaceOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def allocate_private_virtual_interface: (
+      ?connection_id: String,
+      ?owner_account: String,
+      ?new_private_virtual_interface_allocation: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        mtu: Integer,
+        auth_key: String,
+        amazon_address: String,
+        address_family: String,
+        customer_address: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _AllocatePrivateVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocatePrivateVirtualInterfaceResponse
+
+    interface _AllocatePublicVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::AllocatePublicVirtualInterfaceOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def allocate_public_virtual_interface: (
+      ?connection_id: String,
+      ?owner_account: String,
+      ?new_public_virtual_interface_allocation: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        auth_key: String,
+        amazon_address: String,
+        customer_address: String,
+        address_family: String,
+        route_filter_prefixes: Array[
+          {
+            cidr: String
+          }
+        ],
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _AllocatePublicVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocatePublicVirtualInterfaceResponse
+
+    interface _AllocateTransitVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::AllocateTransitVirtualInterfaceResult]
+      def virtual_interface: () -> Types::VirtualInterface?
+    end
+    def allocate_transit_virtual_interface: (
+      ?connection_id: String,
+      ?owner_account: String,
+      ?new_transit_virtual_interface_allocation: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        mtu: Integer,
+        auth_key: String,
+        amazon_address: String,
+        customer_address: String,
+        address_family: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _AllocateTransitVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocateTransitVirtualInterfaceResponse
+
+    interface _AssociateConnectionWithLagResponse
+      include Smithy::Client::_Response[Types::AssociateConnectionWithLagOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def associate_connection_with_lag: (
+      ?connection_id: String,
+      ?lag_id: String
+    ) -> _AssociateConnectionWithLagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateConnectionWithLagResponse
+
+    interface _AssociateHostedConnectionResponse
+      include Smithy::Client::_Response[Types::AssociateHostedConnectionOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def associate_hosted_connection: (
+      ?connection_id: String,
+      ?parent_connection_id: String
+    ) -> _AssociateHostedConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateHostedConnectionResponse
+
+    interface _AssociateMacSecKeyResponse
+      include Smithy::Client::_Response[Types::AssociateMacSecKeyResponse]
+      def connection_id: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def associate_mac_sec_key: (
+      ?connection_id: String,
+      ?secret_arn: String,
+      ?ckn: String,
+      ?cak: String
+    ) -> _AssociateMacSecKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMacSecKeyResponse
+
+    interface _AssociateVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::AssociateVirtualInterfaceOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def associate_virtual_interface: (
+      ?virtual_interface_id: String,
+      ?connection_id: String
+    ) -> _AssociateVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateVirtualInterfaceResponse
+
+    interface _ConfirmConnectionResponse
+      include Smithy::Client::_Response[Types::ConfirmConnectionResponse]
+      def connection_state: () -> String?
+    end
+    def confirm_connection: (
+      ?connection_id: String
+    ) -> _ConfirmConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmConnectionResponse
+
+    interface _ConfirmCustomerAgreementResponse
+      include Smithy::Client::_Response[Types::ConfirmCustomerAgreementResponse]
+      def status: () -> String?
+    end
+    def confirm_customer_agreement: (
+      ?agreement_name: String
+    ) -> _ConfirmCustomerAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmCustomerAgreementResponse
+
+    interface _ConfirmPrivateVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::ConfirmPrivateVirtualInterfaceResponse]
+      def virtual_interface_state: () -> String?
+    end
+    def confirm_private_virtual_interface: (
+      ?virtual_interface_id: String,
+      ?virtual_gateway_id: String,
+      ?direct_connect_gateway_id: String
+    ) -> _ConfirmPrivateVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmPrivateVirtualInterfaceResponse
+
+    interface _ConfirmPublicVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::ConfirmPublicVirtualInterfaceResponse]
+      def virtual_interface_state: () -> String?
+    end
+    def confirm_public_virtual_interface: (
+      ?virtual_interface_id: String
+    ) -> _ConfirmPublicVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmPublicVirtualInterfaceResponse
+
+    interface _ConfirmTransitVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::ConfirmTransitVirtualInterfaceResponse]
+      def virtual_interface_state: () -> String?
+    end
+    def confirm_transit_virtual_interface: (
+      ?virtual_interface_id: String,
+      ?direct_connect_gateway_id: String
+    ) -> _ConfirmTransitVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmTransitVirtualInterfaceResponse
+
+    interface _CreateBGPPeerResponse
+      include Smithy::Client::_Response[Types::CreateBGPPeerResponse]
+      def virtual_interface: () -> Types::VirtualInterface?
+    end
+    def create_bgp_peer: (
+      ?virtual_interface_id: String,
+      ?new_bgp_peer: {
+        asn: Integer,
+        auth_key: String,
+        address_family: String,
+        amazon_address: String,
+        customer_address: String
+      }
+    ) -> _CreateBGPPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBGPPeerResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def create_connection: (
+      ?location: String,
+      ?bandwidth: String,
+      ?connection_name: String,
+      ?lag_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provider_name: String,
+      ?request_mac_sec: bool
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateDirectConnectGatewayResponse
+      include Smithy::Client::_Response[Types::CreateDirectConnectGatewayResult]
+      def direct_connect_gateway: () -> Types::DirectConnectGateway?
+    end
+    def create_direct_connect_gateway: (
+      ?direct_connect_gateway_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?amazon_side_asn: Integer
+    ) -> _CreateDirectConnectGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectConnectGatewayResponse
+
+    interface _CreateDirectConnectGatewayAssociationResponse
+      include Smithy::Client::_Response[Types::CreateDirectConnectGatewayAssociationResult]
+      def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation?
+    end
+    def create_direct_connect_gateway_association: (
+      ?direct_connect_gateway_id: String,
+      ?gateway_id: String,
+      ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ],
+      ?virtual_gateway_id: String
+    ) -> _CreateDirectConnectGatewayAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectConnectGatewayAssociationResponse
+
+    interface _CreateDirectConnectGatewayAssociationProposalResponse
+      include Smithy::Client::_Response[Types::CreateDirectConnectGatewayAssociationProposalResult]
+      def direct_connect_gateway_association_proposal: () -> Types::DirectConnectGatewayAssociationProposal?
+    end
+    def create_direct_connect_gateway_association_proposal: (
+      ?direct_connect_gateway_id: String,
+      ?direct_connect_gateway_owner_account: String,
+      ?gateway_id: String,
+      ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ],
+      ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ]
+    ) -> _CreateDirectConnectGatewayAssociationProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectConnectGatewayAssociationProposalResponse
+
+    interface _CreateInterconnectResponse
+      include Smithy::Client::_Response[Types::CreateInterconnectOutput]
+      def interconnect_id: () -> String?
+      def interconnect_name: () -> String?
+      def interconnect_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def create_interconnect: (
+      ?interconnect_name: String,
+      ?bandwidth: String,
+      ?location: String,
+      ?lag_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provider_name: String,
+      ?request_mac_sec: bool
+    ) -> _CreateInterconnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInterconnectResponse
+
+    interface _CreateLagResponse
+      include Smithy::Client::_Response[Types::CreateLagOutput]
+      def connections_bandwidth: () -> String?
+      def number_of_connections: () -> Integer?
+      def lag_id: () -> String?
+      def owner_account: () -> String?
+      def lag_name: () -> String?
+      def lag_state: () -> String?
+      def location: () -> String?
+      def region: () -> String?
+      def minimum_links: () -> Integer?
+      def aws_device: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def connections: () -> Array[Types::Connection]?
+      def allows_hosted_connections: () -> bool?
+      def jumbo_frame_capable: () -> bool?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def create_lag: (
+      ?number_of_connections: Integer,
+      ?location: String,
+      ?connections_bandwidth: String,
+      ?lag_name: String,
+      ?connection_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?child_connection_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provider_name: String,
+      ?request_mac_sec: bool
+    ) -> _CreateLagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLagResponse
+
+    interface _CreatePrivateVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::CreatePrivateVirtualInterfaceOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def create_private_virtual_interface: (
+      ?connection_id: String,
+      ?new_private_virtual_interface: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        mtu: Integer,
+        auth_key: String,
+        amazon_address: String,
+        customer_address: String,
+        address_family: String,
+        virtual_gateway_id: String,
+        direct_connect_gateway_id: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        enable_site_link: bool
+      }
+    ) -> _CreatePrivateVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateVirtualInterfaceResponse
+
+    interface _CreatePublicVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::CreatePublicVirtualInterfaceOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def create_public_virtual_interface: (
+      ?connection_id: String,
+      ?new_public_virtual_interface: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        auth_key: String,
+        amazon_address: String,
+        customer_address: String,
+        address_family: String,
+        route_filter_prefixes: Array[
+          {
+            cidr: String
+          }
+        ],
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _CreatePublicVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePublicVirtualInterfaceResponse
+
+    interface _CreateTransitVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::CreateTransitVirtualInterfaceResult]
+      def virtual_interface: () -> Types::VirtualInterface?
+    end
+    def create_transit_virtual_interface: (
+      ?connection_id: String,
+      ?new_transit_virtual_interface: {
+        virtual_interface_name: String,
+        vlan: Integer,
+        asn: Integer,
+        mtu: Integer,
+        auth_key: String,
+        amazon_address: String,
+        customer_address: String,
+        address_family: String,
+        direct_connect_gateway_id: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        enable_site_link: bool
+      }
+    ) -> _CreateTransitVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitVirtualInterfaceResponse
+
+    interface _DeleteBGPPeerResponse
+      include Smithy::Client::_Response[Types::DeleteBGPPeerResponse]
+      def virtual_interface: () -> Types::VirtualInterface?
+    end
+    def delete_bgp_peer: (
+      ?virtual_interface_id: String,
+      ?asn: Integer,
+      ?customer_address: String,
+      ?bgp_peer_id: String
+    ) -> _DeleteBGPPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBGPPeerResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def delete_connection: (
+      ?connection_id: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteDirectConnectGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteDirectConnectGatewayResult]
+      def direct_connect_gateway: () -> Types::DirectConnectGateway?
+    end
+    def delete_direct_connect_gateway: (
+      ?direct_connect_gateway_id: String
+    ) -> _DeleteDirectConnectGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectConnectGatewayResponse
+
+    interface _DeleteDirectConnectGatewayAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteDirectConnectGatewayAssociationResult]
+      def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation?
+    end
+    def delete_direct_connect_gateway_association: (
+      ?association_id: String,
+      ?direct_connect_gateway_id: String,
+      ?virtual_gateway_id: String
+    ) -> _DeleteDirectConnectGatewayAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectConnectGatewayAssociationResponse
+
+    interface _DeleteDirectConnectGatewayAssociationProposalResponse
+      include Smithy::Client::_Response[Types::DeleteDirectConnectGatewayAssociationProposalResult]
+      def direct_connect_gateway_association_proposal: () -> Types::DirectConnectGatewayAssociationProposal?
+    end
+    def delete_direct_connect_gateway_association_proposal: (
+      ?proposal_id: String
+    ) -> _DeleteDirectConnectGatewayAssociationProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectConnectGatewayAssociationProposalResponse
+
+    interface _DeleteInterconnectResponse
+      include Smithy::Client::_Response[Types::DeleteInterconnectResponse]
+      def interconnect_state: () -> String?
+    end
+    def delete_interconnect: (
+      ?interconnect_id: String
+    ) -> _DeleteInterconnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInterconnectResponse
+
+    interface _DeleteLagResponse
+      include Smithy::Client::_Response[Types::DeleteLagOutput]
+      def connections_bandwidth: () -> String?
+      def number_of_connections: () -> Integer?
+      def lag_id: () -> String?
+      def owner_account: () -> String?
+      def lag_name: () -> String?
+      def lag_state: () -> String?
+      def location: () -> String?
+      def region: () -> String?
+      def minimum_links: () -> Integer?
+      def aws_device: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def connections: () -> Array[Types::Connection]?
+      def allows_hosted_connections: () -> bool?
+      def jumbo_frame_capable: () -> bool?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def delete_lag: (
+      ?lag_id: String
+    ) -> _DeleteLagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLagResponse
+
+    interface _DeleteVirtualInterfaceResponse
+      include Smithy::Client::_Response[Types::DeleteVirtualInterfaceResponse]
+      def virtual_interface_state: () -> String?
+    end
+    def delete_virtual_interface: (
+      ?virtual_interface_id: String
+    ) -> _DeleteVirtualInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualInterfaceResponse
+
+    interface _DescribeConnectionLoaResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionLoaResponse]
+      def loa: () -> Types::Loa?
+    end
+    def describe_connection_loa: (
+      ?connection_id: String,
+      ?provider_name: String,
+      ?loa_content_type: String
+    ) -> _DescribeConnectionLoaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionLoaResponse
+
+    interface _DescribeConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionsOutput]
+      def connections: () -> Array[Types::Connection]?
+    end
+    def describe_connections: (
+      ?connection_id: String
+    ) -> _DescribeConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionsResponse
+
+    interface _DescribeConnectionsOnInterconnectResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionsOnInterconnectOutput]
+      def connections: () -> Array[Types::Connection]?
+    end
+    def describe_connections_on_interconnect: (
+      ?interconnect_id: String
+    ) -> _DescribeConnectionsOnInterconnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionsOnInterconnectResponse
+
+    interface _DescribeCustomerMetadataResponse
+      include Smithy::Client::_Response[Types::DescribeCustomerMetadataResponse]
+      def agreements: () -> Array[Types::CustomerAgreement]?
+      def nni_partner_type: () -> String?
+    end
+    def describe_customer_metadata: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomerMetadataResponse
+
+    interface _DescribeDirectConnectGatewayAssociationProposalsResponse
+      include Smithy::Client::_Response[Types::DescribeDirectConnectGatewayAssociationProposalsResult]
+      def direct_connect_gateway_association_proposals: () -> Array[Types::DirectConnectGatewayAssociationProposal]?
+      def next_token: () -> String?
+    end
+    def describe_direct_connect_gateway_association_proposals: (
+      ?direct_connect_gateway_id: String,
+      ?proposal_id: String,
+      ?associated_gateway_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDirectConnectGatewayAssociationProposalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectConnectGatewayAssociationProposalsResponse
+
+    interface _DescribeDirectConnectGatewayAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeDirectConnectGatewayAssociationsResult]
+      def direct_connect_gateway_associations: () -> Array[Types::DirectConnectGatewayAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_direct_connect_gateway_associations: (
+      ?association_id: String,
+      ?associated_gateway_id: String,
+      ?direct_connect_gateway_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?virtual_gateway_id: String
+    ) -> _DescribeDirectConnectGatewayAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectConnectGatewayAssociationsResponse
+
+    interface _DescribeDirectConnectGatewayAttachmentsResponse
+      include Smithy::Client::_Response[Types::DescribeDirectConnectGatewayAttachmentsResult]
+      def direct_connect_gateway_attachments: () -> Array[Types::DirectConnectGatewayAttachment]?
+      def next_token: () -> String?
+    end
+    def describe_direct_connect_gateway_attachments: (
+      ?direct_connect_gateway_id: String,
+      ?virtual_interface_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDirectConnectGatewayAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectConnectGatewayAttachmentsResponse
+
+    interface _DescribeDirectConnectGatewaysResponse
+      include Smithy::Client::_Response[Types::DescribeDirectConnectGatewaysResult]
+      def direct_connect_gateways: () -> Array[Types::DirectConnectGateway]?
+      def next_token: () -> String?
+    end
+    def describe_direct_connect_gateways: (
+      ?direct_connect_gateway_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDirectConnectGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectConnectGatewaysResponse
+
+    interface _DescribeHostedConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeHostedConnectionsOutput]
+      def connections: () -> Array[Types::Connection]?
+    end
+    def describe_hosted_connections: (
+      ?connection_id: String
+    ) -> _DescribeHostedConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHostedConnectionsResponse
+
+    interface _DescribeInterconnectLoaResponse
+      include Smithy::Client::_Response[Types::DescribeInterconnectLoaResponse]
+      def loa: () -> Types::Loa?
+    end
+    def describe_interconnect_loa: (
+      ?interconnect_id: String,
+      ?provider_name: String,
+      ?loa_content_type: String
+    ) -> _DescribeInterconnectLoaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInterconnectLoaResponse
+
+    interface _DescribeInterconnectsResponse
+      include Smithy::Client::_Response[Types::DescribeInterconnectsOutput]
+      def interconnects: () -> Array[Types::Interconnect]?
+    end
+    def describe_interconnects: (
+      ?interconnect_id: String
+    ) -> _DescribeInterconnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInterconnectsResponse
+
+    interface _DescribeLagsResponse
+      include Smithy::Client::_Response[Types::DescribeLagsOutput]
+      def lags: () -> Array[Types::Lag]?
+    end
+    def describe_lags: (
+      ?lag_id: String
+    ) -> _DescribeLagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLagsResponse
+
+    interface _DescribeLoaResponse
+      include Smithy::Client::_Response[Types::DescribeLoaOutput]
+      def loa_content: () -> String?
+      def loa_content_type: () -> String?
+    end
+    def describe_loa: (
+      ?connection_id: String,
+      ?provider_name: String,
+      ?loa_content_type: String
+    ) -> _DescribeLoaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoaResponse
+
+    interface _DescribeLocationsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationsOutput]
+      def locations: () -> Array[Types::Location]?
+    end
+    def describe_locations: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationsResponse
+
+    interface _DescribeRouterConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeRouterConfigurationResponse]
+      def customer_router_config: () -> String?
+      def router: () -> Types::RouterType?
+      def virtual_interface_id: () -> String?
+      def virtual_interface_name: () -> String?
+    end
+    def describe_router_configuration: (
+      ?virtual_interface_id: String,
+      ?router_type_identifier: String
+    ) -> _DescribeRouterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRouterConfigurationResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsResponse]
+      def resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def describe_tags: (
+      ?resource_arns: Array[String]
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _DescribeVirtualGatewaysResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualGatewaysOutput]
+      def virtual_gateways: () -> Array[Types::VirtualGateway]?
+    end
+    def describe_virtual_gateways: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualGatewaysResponse
+
+    interface _DescribeVirtualInterfacesResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualInterfacesOutput]
+      def virtual_interfaces: () -> Array[Types::VirtualInterface]?
+    end
+    def describe_virtual_interfaces: (
+      ?connection_id: String,
+      ?virtual_interface_id: String
+    ) -> _DescribeVirtualInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualInterfacesResponse
+
+    interface _DisassociateConnectionFromLagResponse
+      include Smithy::Client::_Response[Types::DisassociateConnectionFromLagOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def disassociate_connection_from_lag: (
+      ?connection_id: String,
+      ?lag_id: String
+    ) -> _DisassociateConnectionFromLagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateConnectionFromLagResponse
+
+    interface _DisassociateMacSecKeyResponse
+      include Smithy::Client::_Response[Types::DisassociateMacSecKeyResponse]
+      def connection_id: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def disassociate_mac_sec_key: (
+      ?connection_id: String,
+      ?secret_arn: String
+    ) -> _DisassociateMacSecKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMacSecKeyResponse
+
+    interface _ListVirtualInterfaceTestHistoryResponse
+      include Smithy::Client::_Response[Types::ListVirtualInterfaceTestHistoryResponse]
+      def virtual_interface_test_history: () -> Array[Types::VirtualInterfaceTestHistory]?
+      def next_token: () -> String?
+    end
+    def list_virtual_interface_test_history: (
+      ?test_id: String,
+      ?virtual_interface_id: String,
+      ?bgp_peers: Array[String],
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVirtualInterfaceTestHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualInterfaceTestHistoryResponse
+
+    interface _StartBgpFailoverTestResponse
+      include Smithy::Client::_Response[Types::StartBgpFailoverTestResponse]
+      def virtual_interface_test: () -> Types::VirtualInterfaceTestHistory?
+    end
+    def start_bgp_failover_test: (
+      ?virtual_interface_id: String,
+      ?bgp_peers: Array[String],
+      ?test_duration_in_minutes: Integer
+    ) -> _StartBgpFailoverTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBgpFailoverTestResponse
+
+    interface _StopBgpFailoverTestResponse
+      include Smithy::Client::_Response[Types::StopBgpFailoverTestResponse]
+      def virtual_interface_test: () -> Types::VirtualInterfaceTestHistory?
+    end
+    def stop_bgp_failover_test: (
+      ?virtual_interface_id: String
+    ) -> _StopBgpFailoverTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBgpFailoverTestResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionOutput]
+      def owner_account: () -> String?
+      def connection_id: () -> String?
+      def connection_name: () -> String?
+      def connection_state: () -> String?
+      def region: () -> String?
+      def location: () -> String?
+      def bandwidth: () -> String?
+      def vlan: () -> Integer?
+      def partner_name: () -> String?
+      def loa_issue_time: () -> Time?
+      def lag_id: () -> String?
+      def aws_device: () -> String?
+      def jumbo_frame_capable: () -> bool?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def port_encryption_status: () -> String?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+      def partner_interconnect_mac_sec_capable: () -> bool?
+    end
+    def update_connection: (
+      ?connection_id: String,
+      ?connection_name: String,
+      ?encryption_mode: String
+    ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
+
+    interface _UpdateDirectConnectGatewayResponse
+      include Smithy::Client::_Response[Types::UpdateDirectConnectGatewayResponse]
+      def direct_connect_gateway: () -> Types::DirectConnectGateway?
+    end
+    def update_direct_connect_gateway: (
+      ?direct_connect_gateway_id: String,
+      ?new_direct_connect_gateway_name: String
+    ) -> _UpdateDirectConnectGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectConnectGatewayResponse
+
+    interface _UpdateDirectConnectGatewayAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateDirectConnectGatewayAssociationResult]
+      def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation?
+    end
+    def update_direct_connect_gateway_association: (
+      ?association_id: String,
+      ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ],
+      ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
+        {
+          cidr: String
+        }
+      ]
+    ) -> _UpdateDirectConnectGatewayAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectConnectGatewayAssociationResponse
+
+    interface _UpdateLagResponse
+      include Smithy::Client::_Response[Types::UpdateLagOutput]
+      def connections_bandwidth: () -> String?
+      def number_of_connections: () -> Integer?
+      def lag_id: () -> String?
+      def owner_account: () -> String?
+      def lag_name: () -> String?
+      def lag_state: () -> String?
+      def location: () -> String?
+      def region: () -> String?
+      def minimum_links: () -> Integer?
+      def aws_device: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def connections: () -> Array[Types::Connection]?
+      def allows_hosted_connections: () -> bool?
+      def jumbo_frame_capable: () -> bool?
+      def has_logical_redundancy: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def provider_name: () -> String?
+      def mac_sec_capable: () -> bool?
+      def encryption_mode: () -> String?
+      def mac_sec_keys: () -> Array[Types::MacSecKey]?
+    end
+    def update_lag: (
+      ?lag_id: String,
+      ?lag_name: String,
+      ?minimum_links: Integer,
+      ?encryption_mode: String
+    ) -> _UpdateLagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLagResponse
+
+    interface _UpdateVirtualInterfaceAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualInterfaceAttributesOutput]
+      def owner_account: () -> String?
+      def virtual_interface_id: () -> String?
+      def location: () -> String?
+      def connection_id: () -> String?
+      def virtual_interface_type: () -> String?
+      def virtual_interface_name: () -> String?
+      def vlan: () -> Integer?
+      def asn: () -> Integer?
+      def amazon_side_asn: () -> Integer?
+      def auth_key: () -> String?
+      def amazon_address: () -> String?
+      def customer_address: () -> String?
+      def address_family: () -> String?
+      def virtual_interface_state: () -> String?
+      def customer_router_config: () -> String?
+      def mtu: () -> Integer?
+      def jumbo_frame_capable: () -> bool?
+      def virtual_gateway_id: () -> String?
+      def direct_connect_gateway_id: () -> String?
+      def route_filter_prefixes: () -> Array[Types::RouteFilterPrefix]?
+      def bgp_peers: () -> Array[Types::BGPPeer]?
+      def region: () -> String?
+      def aws_device_v2: () -> String?
+      def aws_logical_device_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def site_link_enabled: () -> bool?
+    end
+    def update_virtual_interface_attributes: (
+      ?virtual_interface_id: String,
+      ?mtu: Integer,
+      ?enable_site_link: bool,
+      ?virtual_interface_name: String
+    ) -> _UpdateVirtualInterfaceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualInterfaceAttributesResponse
+  end
+end

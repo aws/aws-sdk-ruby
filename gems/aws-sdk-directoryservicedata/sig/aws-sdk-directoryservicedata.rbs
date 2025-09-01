@@ -1,0 +1,5 @@
+  module Aws
+    module DirectoryServiceData
+      VERSION: String
+    end
+  end

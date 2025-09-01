@@ -1,0 +1,5 @@
+  module Aws
+    module Ivschat
+      VERSION: String
+    end
+  end

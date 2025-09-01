@@ -1,0 +1,61 @@
+module Aws::SSOOIDC
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccessToken: StringShape
+    ArnType: StringShape
+    Assertion: StringShape
+    AuthCode: StringShape
+    AuthorizationPendingException: StructureShape
+    AwsAdditionalDetails: StructureShape
+    ClientId: StringShape
+    ClientName: StringShape
+    ClientSecret: StringShape
+    ClientType: StringShape
+    CodeVerifier: StringShape
+    CreateTokenRequest: StructureShape
+    CreateTokenResponse: StructureShape
+    CreateTokenWithIAMRequest: StructureShape
+    CreateTokenWithIAMResponse: StructureShape
+    DeviceCode: StringShape
+    Error: StringShape
+    ErrorDescription: StringShape
+    ExpirationInSeconds: IntegerShape
+    ExpiredTokenException: StructureShape
+    GrantType: StringShape
+    GrantTypes: ListShape
+    IdToken: StringShape
+    IdentityContext: StringShape
+    InternalServerException: StructureShape
+    IntervalInSeconds: IntegerShape
+    InvalidClientException: StructureShape
+    InvalidClientMetadataException: StructureShape
+    InvalidGrantException: StructureShape
+    InvalidRedirectUriException: StructureShape
+    InvalidRequestException: StructureShape
+    InvalidRequestRegionException: StructureShape
+    InvalidScopeException: StructureShape
+    Location: StringShape
+    LongTimeStampType: IntegerShape
+    RedirectUris: ListShape
+    RefreshToken: StringShape
+    Region: StringShape
+    RegisterClientRequest: StructureShape
+    RegisterClientResponse: StructureShape
+    Scope: StringShape
+    Scopes: ListShape
+    SlowDownException: StructureShape
+    StartDeviceAuthorizationRequest: StructureShape
+    StartDeviceAuthorizationResponse: StructureShape
+    SubjectToken: StringShape
+    TokenType: StringShape
+    TokenTypeURI: StringShape
+    URI: StringShape
+    UnauthorizedClientException: StructureShape
+    UnsupportedGrantTypeException: StructureShape
+    UserCode: StringShape
+
+    AWSSSOOIDCService: ServiceShape
+  end
+end

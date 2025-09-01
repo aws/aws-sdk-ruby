@@ -1,0 +1,659 @@
+module Aws::Budgets
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Budgets::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBudgetResponse
+      include Smithy::Client::_Response[Types::CreateBudgetResponse]
+    end
+    def create_budget: (
+      ?account_id: String,
+      ?budget: {
+        budget_name: String,
+        budget_limit: {
+          amount: String,
+          unit: String
+        },
+        planned_budget_limits: Hash[String,
+          {
+            amount: untyped,
+            unit: untyped
+          }
+        ],
+        cost_filters: Hash[String,
+          Array[String]
+        ],
+        cost_types: {
+          include_tax: bool,
+          include_subscription: untyped,
+          use_blended: untyped,
+          include_refund: untyped,
+          include_credit: untyped,
+          include_upfront: untyped,
+          include_recurring: untyped,
+          include_other_subscription: untyped,
+          include_support: untyped,
+          include_discount: untyped,
+          use_amortized: untyped
+        },
+        time_unit: String,
+        time_period: {
+          start: Time,
+          end: untyped
+        },
+        calculated_spend: {
+          actual_spend: untyped,
+          forecasted_spend: untyped
+        },
+        budget_type: String,
+        last_updated_time: untyped,
+        auto_adjust_data: {
+          auto_adjust_type: String,
+          historical_options: {
+            budget_adjustment_period: Integer,
+            look_back_available_periods: untyped
+          },
+          last_auto_adjust_time: untyped
+        },
+        filter_expression: {
+          or: Array[
+            {
+              or: untyped,
+              and: untyped,
+              not: untyped,
+              dimensions: {
+                key: String,
+                values: Array[String],
+                match_options: Array[String]
+              },
+              tags: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              },
+              cost_categories: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              }
+            }
+          ],
+          and: untyped,
+          not: untyped,
+          dimensions: untyped,
+          tags: untyped,
+          cost_categories: untyped
+        },
+        metrics: Array[String],
+        billing_view_arn: String,
+        health_status: {
+          status: String,
+          status_reason: String,
+          last_updated_time: untyped
+        }
+      },
+      ?notifications_with_subscribers: Array[
+        {
+          notification: {
+            notification_type: String,
+            comparison_operator: String,
+            threshold: Float,
+            threshold_type: String,
+            notification_state: String
+          },
+          subscribers: Array[
+            {
+              subscription_type: String,
+              address: String
+            }
+          ]
+        }
+      ],
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBudgetResponse
+
+    interface _CreateBudgetActionResponse
+      include Smithy::Client::_Response[Types::CreateBudgetActionResponse]
+      def account_id: () -> String?
+      def budget_name: () -> String?
+      def action_id: () -> String?
+    end
+    def create_budget_action: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification_type: String,
+      ?action_type: String,
+      ?action_threshold: {
+        action_threshold_value: Float,
+        action_threshold_type: String
+      },
+      ?definition: {
+        iam_action_definition: {
+          policy_arn: String,
+          roles: Array[String],
+          groups: Array[String],
+          users: Array[String]
+        },
+        scp_action_definition: {
+          policy_id: String,
+          target_ids: Array[String]
+        },
+        ssm_action_definition: {
+          action_sub_type: String,
+          region: String,
+          instance_ids: Array[String]
+        }
+      },
+      ?execution_role_arn: String,
+      ?approval_model: String,
+      ?subscribers: Array[
+        {
+          subscription_type: String,
+          address: String
+        }
+      ],
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBudgetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBudgetActionResponse
+
+    interface _CreateNotificationResponse
+      include Smithy::Client::_Response[Types::CreateNotificationResponse]
+    end
+    def create_notification: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?subscribers: Array[
+        {
+          subscription_type: String,
+          address: String
+        }
+      ]
+    ) -> _CreateNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotificationResponse
+
+    interface _CreateSubscriberResponse
+      include Smithy::Client::_Response[Types::CreateSubscriberResponse]
+    end
+    def create_subscriber: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?subscriber: {
+        subscription_type: String,
+        address: String
+      }
+    ) -> _CreateSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriberResponse
+
+    interface _DeleteBudgetResponse
+      include Smithy::Client::_Response[Types::DeleteBudgetResponse]
+    end
+    def delete_budget: (
+      ?account_id: String,
+      ?budget_name: String
+    ) -> _DeleteBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBudgetResponse
+
+    interface _DeleteBudgetActionResponse
+      include Smithy::Client::_Response[Types::DeleteBudgetActionResponse]
+      def account_id: () -> String?
+      def budget_name: () -> String?
+      def action: () -> Types::Action?
+    end
+    def delete_budget_action: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?action_id: String
+    ) -> _DeleteBudgetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBudgetActionResponse
+
+    interface _DeleteNotificationResponse
+      include Smithy::Client::_Response[Types::DeleteNotificationResponse]
+    end
+    def delete_notification: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      }
+    ) -> _DeleteNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationResponse
+
+    interface _DeleteSubscriberResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriberResponse]
+    end
+    def delete_subscriber: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?subscriber: {
+        subscription_type: String,
+        address: String
+      }
+    ) -> _DeleteSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriberResponse
+
+    interface _DescribeBudgetResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetResponse]
+      def budget: () -> Types::Budget?
+    end
+    def describe_budget: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?show_filter_expression: bool
+    ) -> _DescribeBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetResponse
+
+    interface _DescribeBudgetActionResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetActionResponse]
+      def account_id: () -> String?
+      def budget_name: () -> String?
+      def action: () -> Types::Action?
+    end
+    def describe_budget_action: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?action_id: String
+    ) -> _DescribeBudgetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetActionResponse
+
+    interface _DescribeBudgetActionHistoriesResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetActionHistoriesResponse]
+      def action_histories: () -> Array[Types::ActionHistory]?
+      def next_token: () -> String?
+    end
+    def describe_budget_action_histories: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?action_id: String,
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBudgetActionHistoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetActionHistoriesResponse
+
+    interface _DescribeBudgetActionsForAccountResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetActionsForAccountResponse]
+      def actions: () -> Array[Types::Action]?
+      def next_token: () -> String?
+    end
+    def describe_budget_actions_for_account: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBudgetActionsForAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetActionsForAccountResponse
+
+    interface _DescribeBudgetActionsForBudgetResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetActionsForBudgetResponse]
+      def actions: () -> Array[Types::Action]?
+      def next_token: () -> String?
+    end
+    def describe_budget_actions_for_budget: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBudgetActionsForBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetActionsForBudgetResponse
+
+    interface _DescribeBudgetNotificationsForAccountResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetNotificationsForAccountResponse]
+      def budget_notifications_for_account: () -> Array[Types::BudgetNotificationsForAccount]?
+      def next_token: () -> String?
+    end
+    def describe_budget_notifications_for_account: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBudgetNotificationsForAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetNotificationsForAccountResponse
+
+    interface _DescribeBudgetPerformanceHistoryResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetPerformanceHistoryResponse]
+      def budget_performance_history: () -> Types::BudgetPerformanceHistory?
+      def next_token: () -> String?
+    end
+    def describe_budget_performance_history: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBudgetPerformanceHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetPerformanceHistoryResponse
+
+    interface _DescribeBudgetsResponse
+      include Smithy::Client::_Response[Types::DescribeBudgetsResponse]
+      def budgets: () -> Array[Types::Budget]?
+      def next_token: () -> String?
+    end
+    def describe_budgets: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?show_filter_expression: bool
+    ) -> _DescribeBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBudgetsResponse
+
+    interface _DescribeNotificationsForBudgetResponse
+      include Smithy::Client::_Response[Types::DescribeNotificationsForBudgetResponse]
+      def notifications: () -> Array[Types::Notification]?
+      def next_token: () -> String?
+    end
+    def describe_notifications_for_budget: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeNotificationsForBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotificationsForBudgetResponse
+
+    interface _DescribeSubscribersForNotificationResponse
+      include Smithy::Client::_Response[Types::DescribeSubscribersForNotificationResponse]
+      def subscribers: () -> Array[Types::Subscriber]?
+      def next_token: () -> String?
+    end
+    def describe_subscribers_for_notification: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSubscribersForNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSubscribersForNotificationResponse
+
+    interface _ExecuteBudgetActionResponse
+      include Smithy::Client::_Response[Types::ExecuteBudgetActionResponse]
+      def account_id: () -> String?
+      def budget_name: () -> String?
+      def action_id: () -> String?
+      def execution_type: () -> String?
+    end
+    def execute_budget_action: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?action_id: String,
+      ?execution_type: String
+    ) -> _ExecuteBudgetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteBudgetActionResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?resource_tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBudgetResponse
+      include Smithy::Client::_Response[Types::UpdateBudgetResponse]
+    end
+    def update_budget: (
+      ?account_id: String,
+      ?new_budget: {
+        budget_name: String,
+        budget_limit: {
+          amount: String,
+          unit: String
+        },
+        planned_budget_limits: Hash[String,
+          {
+            amount: untyped,
+            unit: untyped
+          }
+        ],
+        cost_filters: Hash[String,
+          Array[String]
+        ],
+        cost_types: {
+          include_tax: bool,
+          include_subscription: untyped,
+          use_blended: untyped,
+          include_refund: untyped,
+          include_credit: untyped,
+          include_upfront: untyped,
+          include_recurring: untyped,
+          include_other_subscription: untyped,
+          include_support: untyped,
+          include_discount: untyped,
+          use_amortized: untyped
+        },
+        time_unit: String,
+        time_period: {
+          start: Time,
+          end: untyped
+        },
+        calculated_spend: {
+          actual_spend: untyped,
+          forecasted_spend: untyped
+        },
+        budget_type: String,
+        last_updated_time: untyped,
+        auto_adjust_data: {
+          auto_adjust_type: String,
+          historical_options: {
+            budget_adjustment_period: Integer,
+            look_back_available_periods: untyped
+          },
+          last_auto_adjust_time: untyped
+        },
+        filter_expression: {
+          or: Array[
+            {
+              or: untyped,
+              and: untyped,
+              not: untyped,
+              dimensions: {
+                key: String,
+                values: Array[String],
+                match_options: Array[String]
+              },
+              tags: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              },
+              cost_categories: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              }
+            }
+          ],
+          and: untyped,
+          not: untyped,
+          dimensions: untyped,
+          tags: untyped,
+          cost_categories: untyped
+        },
+        metrics: Array[String],
+        billing_view_arn: String,
+        health_status: {
+          status: String,
+          status_reason: String,
+          last_updated_time: untyped
+        }
+      }
+    ) -> _UpdateBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBudgetResponse
+
+    interface _UpdateBudgetActionResponse
+      include Smithy::Client::_Response[Types::UpdateBudgetActionResponse]
+      def account_id: () -> String?
+      def budget_name: () -> String?
+      def old_action: () -> Types::Action?
+      def new_action: () -> Types::Action?
+    end
+    def update_budget_action: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?action_id: String,
+      ?notification_type: String,
+      ?action_threshold: {
+        action_threshold_value: Float,
+        action_threshold_type: String
+      },
+      ?definition: {
+        iam_action_definition: {
+          policy_arn: String,
+          roles: Array[String],
+          groups: Array[String],
+          users: Array[String]
+        },
+        scp_action_definition: {
+          policy_id: String,
+          target_ids: Array[String]
+        },
+        ssm_action_definition: {
+          action_sub_type: String,
+          region: String,
+          instance_ids: Array[String]
+        }
+      },
+      ?execution_role_arn: String,
+      ?approval_model: String,
+      ?subscribers: Array[
+        {
+          subscription_type: String,
+          address: String
+        }
+      ]
+    ) -> _UpdateBudgetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBudgetActionResponse
+
+    interface _UpdateNotificationResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationResponse]
+    end
+    def update_notification: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?old_notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?new_notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      }
+    ) -> _UpdateNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationResponse
+
+    interface _UpdateSubscriberResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriberResponse]
+    end
+    def update_subscriber: (
+      ?account_id: String,
+      ?budget_name: String,
+      ?notification: {
+        notification_type: String,
+        comparison_operator: String,
+        threshold: Float,
+        threshold_type: String,
+        notification_state: String
+      },
+      ?old_subscriber: {
+        subscription_type: String,
+        address: String
+      },
+      ?new_subscriber: {
+        subscription_type: String,
+        address: String
+      }
+    ) -> _UpdateSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriberResponse
+  end
+end

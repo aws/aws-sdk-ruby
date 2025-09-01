@@ -1,0 +1,419 @@
+module Aws::ManagedBlockchain
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ManagedBlockchain::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccessorResponse
+      include Smithy::Client::_Response[Types::CreateAccessorOutput]
+      def accessor_id: () -> String?
+      def billing_token: () -> String?
+      def network_type: () -> String?
+    end
+    def create_accessor: (
+      ?client_request_token: String,
+      ?accessor_type: String,
+      ?tags: Hash[String, String],
+      ?network_type: String
+    ) -> _CreateAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessorResponse
+
+    interface _CreateMemberResponse
+      include Smithy::Client::_Response[Types::CreateMemberOutput]
+      def member_id: () -> String?
+    end
+    def create_member: (
+      ?client_request_token: String,
+      ?invitation_id: String,
+      ?network_id: String,
+      ?member_configuration: {
+        name: String,
+        description: String,
+        framework_configuration: {
+          fabric: {
+            admin_username: String,
+            admin_password: String
+          }
+        },
+        log_publishing_configuration: {
+          fabric: {
+            ca_logs: {
+              cloudwatch: {
+                enabled: bool
+              }
+            }
+          }
+        },
+        tags: Hash[String, String],
+        kms_key_arn: String
+      }
+    ) -> _CreateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMemberResponse
+
+    interface _CreateNetworkResponse
+      include Smithy::Client::_Response[Types::CreateNetworkOutput]
+      def network_id: () -> String?
+      def member_id: () -> String?
+    end
+    def create_network: (
+      ?client_request_token: String,
+      ?name: String,
+      ?description: String,
+      ?framework: String,
+      ?framework_version: String,
+      ?framework_configuration: {
+        fabric: {
+          edition: String
+        }
+      },
+      ?voting_policy: {
+        approval_threshold_policy: {
+          threshold_percentage: Integer,
+          proposal_duration_in_hours: Integer,
+          threshold_comparator: String
+        }
+      },
+      ?member_configuration: {
+        name: String,
+        description: String,
+        framework_configuration: {
+          fabric: {
+            admin_username: String,
+            admin_password: String
+          }
+        },
+        log_publishing_configuration: {
+          fabric: {
+            ca_logs: {
+              cloudwatch: {
+                enabled: bool
+              }
+            }
+          }
+        },
+        tags: Hash[String, String],
+        kms_key_arn: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkResponse
+
+    interface _CreateNodeResponse
+      include Smithy::Client::_Response[Types::CreateNodeOutput]
+      def node_id: () -> String?
+    end
+    def create_node: (
+      ?client_request_token: String,
+      ?network_id: String,
+      ?member_id: String,
+      ?node_configuration: {
+        instance_type: String,
+        availability_zone: String,
+        log_publishing_configuration: {
+          fabric: {
+            chaincode_logs: {
+              cloudwatch: {
+                enabled: bool
+              }
+            },
+            peer_logs: untyped
+          }
+        },
+        state_db: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodeResponse
+
+    interface _CreateProposalResponse
+      include Smithy::Client::_Response[Types::CreateProposalOutput]
+      def proposal_id: () -> String?
+    end
+    def create_proposal: (
+      ?client_request_token: String,
+      ?network_id: String,
+      ?member_id: String,
+      ?actions: {
+        invitations: Array[
+          {
+            principal: String
+          }
+        ],
+        removals: Array[
+          {
+            member_id: String
+          }
+        ]
+      },
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProposalResponse
+
+    interface _DeleteAccessorResponse
+      include Smithy::Client::_Response[Types::DeleteAccessorOutput]
+    end
+    def delete_accessor: (
+      ?accessor_id: String
+    ) -> _DeleteAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessorResponse
+
+    interface _DeleteMemberResponse
+      include Smithy::Client::_Response[Types::DeleteMemberOutput]
+    end
+    def delete_member: (
+      ?network_id: String,
+      ?member_id: String
+    ) -> _DeleteMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemberResponse
+
+    interface _DeleteNodeResponse
+      include Smithy::Client::_Response[Types::DeleteNodeOutput]
+    end
+    def delete_node: (
+      ?network_id: String,
+      ?member_id: String,
+      ?node_id: String
+    ) -> _DeleteNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNodeResponse
+
+    interface _GetAccessorResponse
+      include Smithy::Client::_Response[Types::GetAccessorOutput]
+      def accessor: () -> Types::Accessor?
+    end
+    def get_accessor: (
+      ?accessor_id: String
+    ) -> _GetAccessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessorResponse
+
+    interface _GetMemberResponse
+      include Smithy::Client::_Response[Types::GetMemberOutput]
+      def member: () -> Types::Member?
+    end
+    def get_member: (
+      ?network_id: String,
+      ?member_id: String
+    ) -> _GetMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemberResponse
+
+    interface _GetNetworkResponse
+      include Smithy::Client::_Response[Types::GetNetworkOutput]
+      def network: () -> Types::Network?
+    end
+    def get_network: (
+      ?network_id: String
+    ) -> _GetNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkResponse
+
+    interface _GetNodeResponse
+      include Smithy::Client::_Response[Types::GetNodeOutput]
+      def node: () -> Types::Node?
+    end
+    def get_node: (
+      ?network_id: String,
+      ?member_id: String,
+      ?node_id: String
+    ) -> _GetNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNodeResponse
+
+    interface _GetProposalResponse
+      include Smithy::Client::_Response[Types::GetProposalOutput]
+      def proposal: () -> Types::Proposal?
+    end
+    def get_proposal: (
+      ?network_id: String,
+      ?proposal_id: String
+    ) -> _GetProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProposalResponse
+
+    interface _ListAccessorsResponse
+      include Smithy::Client::_Response[Types::ListAccessorsOutput]
+      def accessors: () -> Array[Types::AccessorSummary]?
+      def next_token: () -> String?
+    end
+    def list_accessors: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?network_type: String
+    ) -> _ListAccessorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessorsResponse
+
+    interface _ListInvitationsResponse
+      include Smithy::Client::_Response[Types::ListInvitationsOutput]
+      def invitations: () -> Array[Types::Invitation]?
+      def next_token: () -> String?
+    end
+    def list_invitations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvitationsResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersOutput]
+      def members: () -> Array[Types::MemberSummary]?
+      def next_token: () -> String?
+    end
+    def list_members: (
+      ?network_id: String,
+      ?name: String,
+      ?status: String,
+      ?is_owned: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListNetworksResponse
+      include Smithy::Client::_Response[Types::ListNetworksOutput]
+      def networks: () -> Array[Types::NetworkSummary]?
+      def next_token: () -> String?
+    end
+    def list_networks: (
+      ?name: String,
+      ?framework: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworksResponse
+
+    interface _ListNodesResponse
+      include Smithy::Client::_Response[Types::ListNodesOutput]
+      def nodes: () -> Array[Types::NodeSummary]?
+      def next_token: () -> String?
+    end
+    def list_nodes: (
+      ?network_id: String,
+      ?member_id: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesResponse
+
+    interface _ListProposalVotesResponse
+      include Smithy::Client::_Response[Types::ListProposalVotesOutput]
+      def proposal_votes: () -> Array[Types::VoteSummary]?
+      def next_token: () -> String?
+    end
+    def list_proposal_votes: (
+      ?network_id: String,
+      ?proposal_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProposalVotesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProposalVotesResponse
+
+    interface _ListProposalsResponse
+      include Smithy::Client::_Response[Types::ListProposalsOutput]
+      def proposals: () -> Array[Types::ProposalSummary]?
+      def next_token: () -> String?
+    end
+    def list_proposals: (
+      ?network_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProposalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProposalsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RejectInvitationResponse
+      include Smithy::Client::_Response[Types::RejectInvitationOutput]
+    end
+    def reject_invitation: (
+      ?invitation_id: String
+    ) -> _RejectInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectInvitationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMemberResponse
+      include Smithy::Client::_Response[Types::UpdateMemberOutput]
+    end
+    def update_member: (
+      ?network_id: String,
+      ?member_id: String,
+      ?log_publishing_configuration: {
+        fabric: {
+          ca_logs: {
+            cloudwatch: {
+              enabled: bool
+            }
+          }
+        }
+      }
+    ) -> _UpdateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMemberResponse
+
+    interface _UpdateNodeResponse
+      include Smithy::Client::_Response[Types::UpdateNodeOutput]
+    end
+    def update_node: (
+      ?network_id: String,
+      ?member_id: String,
+      ?node_id: String,
+      ?log_publishing_configuration: {
+        fabric: {
+          chaincode_logs: {
+            cloudwatch: {
+              enabled: bool
+            }
+          },
+          peer_logs: untyped
+        }
+      }
+    ) -> _UpdateNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodeResponse
+
+    interface _VoteOnProposalResponse
+      include Smithy::Client::_Response[Types::VoteOnProposalOutput]
+    end
+    def vote_on_proposal: (
+      ?network_id: String,
+      ?proposal_id: String,
+      ?voter_member_id: String,
+      ?vote: String
+    ) -> _VoteOnProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VoteOnProposalResponse
+  end
+end

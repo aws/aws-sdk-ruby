@@ -1,0 +1,5 @@
+  module Aws
+    module NetworkFirewall
+      VERSION: String
+    end
+  end

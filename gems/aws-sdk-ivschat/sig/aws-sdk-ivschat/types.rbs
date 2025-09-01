@@ -1,0 +1,761 @@
+module Aws::Ivschat
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudWatchLogsDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateChatTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_identifier: String,
+        ?user_id: String,
+        ?capabilities: Array[String],
+        ?session_duration_in_minutes: Integer,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_identifier: String?
+      attr_accessor user_id: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor session_duration_in_minutes: Integer?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class CreateChatTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?token_expiration_time: Time,
+        ?session_expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor token_expiration_time: Time?
+      attr_accessor session_expiration_time: Time?
+    end
+
+    class CreateLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRoomInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?maximum_message_rate_per_second: Integer,
+        ?maximum_message_length: Integer,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?tags: Hash[String, String],
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor maximum_message_rate_per_second: Integer?
+      attr_accessor maximum_message_length: Integer?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class CreateRoomOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?maximum_message_rate_per_second: Integer,
+        ?maximum_message_length: Integer,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?tags: Hash[String, String],
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor maximum_message_rate_per_second: Integer?
+      attr_accessor maximum_message_length: Integer?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class DeleteLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteMessageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_identifier: String,
+        ?id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_identifier: String?
+      attr_accessor id: String?
+      attr_accessor reason: String?
+    end
+
+    class DeleteMessageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteRoomInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DestinationConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::S3DestinationConfiguration,
+        ?cloud_watch_logs: Types::CloudWatchLogsDestinationConfiguration,
+        ?firehose: Types::FirehoseDestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3DestinationConfiguration?
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsDestinationConfiguration?
+      attr_accessor firehose: Types::FirehoseDestinationConfiguration?
+
+      class S3 < DestinationConfiguration
+      end
+      class CloudWatchLogs < DestinationConfiguration
+      end
+      class Firehose < DestinationConfiguration
+      end
+      class Unknown < DestinationConfiguration
+      end
+    end
+
+    class DisconnectUserInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_identifier: String,
+        ?user_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_identifier: String?
+      attr_accessor user_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DisconnectUserOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class FirehoseDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+    end
+
+    class GetLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetRoomInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetRoomOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?maximum_message_rate_per_second: Integer,
+        ?maximum_message_length: Integer,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?tags: Hash[String, String],
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor maximum_message_rate_per_second: Integer?
+      attr_accessor maximum_message_length: Integer?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListLoggingConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLoggingConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configurations: Array[Types::LoggingConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configurations: Array[Types::LoggingConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoomsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?message_review_handler_uri: String,
+        ?logging_configuration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor message_review_handler_uri: String?
+      attr_accessor logging_configuration_identifier: String?
+    end
+
+    class ListRoomsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rooms: Array[Types::RoomSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rooms: Array[Types::RoomSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LoggingConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MessageReviewHandler
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?fallback_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor fallback_result: String?
+    end
+
+    class PendingVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RoomSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?tags: Hash[String, String],
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+    end
+
+    class SendEventInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_identifier: String,
+        ?event_name: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_identifier: String?
+      attr_accessor event_name: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SendEventOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor limit: Integer?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor limit: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+    end
+
+    class UpdateLoggingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateRoomInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?maximum_message_rate_per_second: Integer,
+        ?maximum_message_length: Integer,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor maximum_message_rate_per_second: Integer?
+      attr_accessor maximum_message_length: Integer?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class UpdateRoomOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?maximum_message_rate_per_second: Integer,
+        ?maximum_message_length: Integer,
+        ?message_review_handler: Types::MessageReviewHandler,
+        ?tags: Hash[String, String],
+        ?logging_configuration_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor maximum_message_rate_per_second: Integer?
+      attr_accessor maximum_message_length: Integer?
+      attr_accessor message_review_handler: Types::MessageReviewHandler?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration_identifiers: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

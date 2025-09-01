@@ -1,0 +1,1158 @@
+module Aws::DataSync
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DataSync::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelTaskExecutionResponse
+      include Smithy::Client::_Response[Types::CancelTaskExecutionResponse]
+    end
+    def cancel_task_execution: (
+      ?task_execution_arn: String
+    ) -> _CancelTaskExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTaskExecutionResponse
+
+    interface _CreateAgentResponse
+      include Smithy::Client::_Response[Types::CreateAgentResponse]
+      def agent_arn: () -> String?
+    end
+    def create_agent: (
+      ?activation_key: String,
+      ?agent_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?vpc_endpoint_id: String,
+      ?subnet_arns: Array[String],
+      ?security_group_arns: Array[String]
+    ) -> _CreateAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentResponse
+
+    interface _CreateLocationAzureBlobResponse
+      include Smithy::Client::_Response[Types::CreateLocationAzureBlobResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_azure_blob: (
+      ?container_url: String,
+      ?authentication_type: String,
+      ?sas_configuration: {
+        token: String
+      },
+      ?blob_type: String,
+      ?access_tier: String,
+      ?subdirectory: String,
+      ?agent_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
+    ) -> _CreateLocationAzureBlobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationAzureBlobResponse
+
+    interface _CreateLocationEfsResponse
+      include Smithy::Client::_Response[Types::CreateLocationEfsResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_efs: (
+      ?subdirectory: String,
+      ?efs_filesystem_arn: String,
+      ?ec2_config: {
+        subnet_arn: String,
+        security_group_arns: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?access_point_arn: String,
+      ?file_system_access_role_arn: String,
+      ?in_transit_encryption: String
+    ) -> _CreateLocationEfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationEfsResponse
+
+    interface _CreateLocationFsxLustreResponse
+      include Smithy::Client::_Response[Types::CreateLocationFsxLustreResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_fsx_lustre: (
+      ?fsx_filesystem_arn: String,
+      ?security_group_arns: Array[String],
+      ?subdirectory: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationFsxLustreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationFsxLustreResponse
+
+    interface _CreateLocationFsxOntapResponse
+      include Smithy::Client::_Response[Types::CreateLocationFsxOntapResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_fsx_ontap: (
+      ?protocol: {
+        nfs: {
+          mount_options: {
+            version: String
+          }
+        },
+        smb: {
+          domain: String,
+          mount_options: {
+            version: String
+          },
+          password: String,
+          user: String
+        }
+      },
+      ?security_group_arns: Array[String],
+      ?storage_virtual_machine_arn: String,
+      ?subdirectory: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationFsxOntapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationFsxOntapResponse
+
+    interface _CreateLocationFsxOpenZfsResponse
+      include Smithy::Client::_Response[Types::CreateLocationFsxOpenZfsResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_fsx_open_zfs: (
+      ?fsx_filesystem_arn: String,
+      ?protocol: {
+        nfs: {
+          mount_options: {
+            version: String
+          }
+        },
+        smb: {
+          domain: String,
+          mount_options: {
+            version: String
+          },
+          password: String,
+          user: String
+        }
+      },
+      ?security_group_arns: Array[String],
+      ?subdirectory: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationFsxOpenZfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationFsxOpenZfsResponse
+
+    interface _CreateLocationFsxWindowsResponse
+      include Smithy::Client::_Response[Types::CreateLocationFsxWindowsResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_fsx_windows: (
+      ?subdirectory: String,
+      ?fsx_filesystem_arn: String,
+      ?security_group_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?user: String,
+      ?domain: String,
+      ?password: String
+    ) -> _CreateLocationFsxWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationFsxWindowsResponse
+
+    interface _CreateLocationHdfsResponse
+      include Smithy::Client::_Response[Types::CreateLocationHdfsResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_hdfs: (
+      ?subdirectory: String,
+      ?name_nodes: Array[
+        {
+          hostname: String,
+          port: Integer
+        }
+      ],
+      ?block_size: Integer,
+      ?replication_factor: Integer,
+      ?kms_key_provider_uri: String,
+      ?qop_configuration: {
+        rpc_protection: String,
+        data_transfer_protection: String
+      },
+      ?authentication_type: String,
+      ?simple_user: String,
+      ?kerberos_principal: String,
+      ?kerberos_keytab: String,
+      ?kerberos_krb5_conf: String,
+      ?agent_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationHdfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationHdfsResponse
+
+    interface _CreateLocationNfsResponse
+      include Smithy::Client::_Response[Types::CreateLocationNfsResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_nfs: (
+      ?subdirectory: String,
+      ?server_hostname: String,
+      ?on_prem_config: {
+        agent_arns: Array[String]
+      },
+      ?mount_options: {
+        version: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationNfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationNfsResponse
+
+    interface _CreateLocationObjectStorageResponse
+      include Smithy::Client::_Response[Types::CreateLocationObjectStorageResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_object_storage: (
+      ?server_hostname: String,
+      ?server_port: Integer,
+      ?server_protocol: String,
+      ?subdirectory: String,
+      ?bucket_name: String,
+      ?access_key: String,
+      ?secret_key: String,
+      ?agent_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?server_certificate: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
+    ) -> _CreateLocationObjectStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationObjectStorageResponse
+
+    interface _CreateLocationS3Response
+      include Smithy::Client::_Response[Types::CreateLocationS3Response]
+      def location_arn: () -> String?
+    end
+    def create_location_s3: (
+      ?subdirectory: String,
+      ?s3_bucket_arn: String,
+      ?s3_storage_class: String,
+      ?s3_config: {
+        bucket_access_role_arn: String
+      },
+      ?agent_arns: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationS3Response
+
+    interface _CreateLocationSmbResponse
+      include Smithy::Client::_Response[Types::CreateLocationSmbResponse]
+      def location_arn: () -> String?
+    end
+    def create_location_smb: (
+      ?subdirectory: String,
+      ?server_hostname: String,
+      ?user: String,
+      ?domain: String,
+      ?password: String,
+      ?agent_arns: Array[String],
+      ?mount_options: {
+        version: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?authentication_type: String,
+      ?dns_ip_addresses: Array[String],
+      ?kerberos_principal: String,
+      ?kerberos_keytab: String,
+      ?kerberos_krb5_conf: String
+    ) -> _CreateLocationSmbResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationSmbResponse
+
+    interface _CreateTaskResponse
+      include Smithy::Client::_Response[Types::CreateTaskResponse]
+      def task_arn: () -> String?
+    end
+    def create_task: (
+      ?source_location_arn: String,
+      ?destination_location_arn: String,
+      ?cloud_watch_log_group_arn: String,
+      ?name: String,
+      ?options: {
+        verify_mode: String,
+        overwrite_mode: String,
+        atime: String,
+        mtime: String,
+        uid: String,
+        gid: String,
+        preserve_deleted_files: String,
+        preserve_devices: String,
+        posix_permissions: String,
+        bytes_per_second: Integer,
+        task_queueing: String,
+        log_level: String,
+        transfer_mode: String,
+        security_descriptor_copy_flags: String,
+        object_tags: String
+      },
+      ?excludes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?schedule: {
+        schedule_expression: String,
+        status: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?includes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?manifest_config: {
+        action: String,
+        format: String,
+        source: {
+          s3: {
+            manifest_object_path: String,
+            bucket_access_role_arn: String,
+            s3_bucket_arn: String,
+            manifest_object_version_id: String
+          }
+        }
+      },
+      ?task_report_config: {
+        destination: {
+          s3: {
+            subdirectory: String,
+            s3_bucket_arn: String,
+            bucket_access_role_arn: String
+          }
+        },
+        output_type: String,
+        report_level: String,
+        object_version_ids: String,
+        overrides: {
+          transferred: {
+            report_level: untyped
+          },
+          verified: untyped,
+          deleted: untyped,
+          skipped: untyped
+        }
+      },
+      ?task_mode: String
+    ) -> _CreateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTaskResponse
+
+    interface _DeleteAgentResponse
+      include Smithy::Client::_Response[Types::DeleteAgentResponse]
+    end
+    def delete_agent: (
+      ?agent_arn: String
+    ) -> _DeleteAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentResponse
+
+    interface _DeleteLocationResponse
+      include Smithy::Client::_Response[Types::DeleteLocationResponse]
+    end
+    def delete_location: (
+      ?location_arn: String
+    ) -> _DeleteLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLocationResponse
+
+    interface _DeleteTaskResponse
+      include Smithy::Client::_Response[Types::DeleteTaskResponse]
+    end
+    def delete_task: (
+      ?task_arn: String
+    ) -> _DeleteTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTaskResponse
+
+    interface _DescribeAgentResponse
+      include Smithy::Client::_Response[Types::DescribeAgentResponse]
+      def agent_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def last_connection_time: () -> Time?
+      def creation_time: () -> Time?
+      def endpoint_type: () -> String?
+      def private_link_config: () -> Types::PrivateLinkConfig?
+      def platform: () -> Types::Platform?
+    end
+    def describe_agent: (
+      ?agent_arn: String
+    ) -> _DescribeAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAgentResponse
+
+    interface _DescribeLocationAzureBlobResponse
+      include Smithy::Client::_Response[Types::DescribeLocationAzureBlobResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def authentication_type: () -> String?
+      def blob_type: () -> String?
+      def access_tier: () -> String?
+      def agent_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+      def managed_secret_config: () -> Types::ManagedSecretConfig?
+      def cmk_secret_config: () -> Types::CmkSecretConfig?
+      def custom_secret_config: () -> Types::CustomSecretConfig?
+    end
+    def describe_location_azure_blob: (
+      ?location_arn: String
+    ) -> _DescribeLocationAzureBlobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationAzureBlobResponse
+
+    interface _DescribeLocationEfsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationEfsResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def ec2_config: () -> Types::Ec2Config?
+      def creation_time: () -> Time?
+      def access_point_arn: () -> String?
+      def file_system_access_role_arn: () -> String?
+      def in_transit_encryption: () -> String?
+    end
+    def describe_location_efs: (
+      ?location_arn: String
+    ) -> _DescribeLocationEfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationEfsResponse
+
+    interface _DescribeLocationFsxLustreResponse
+      include Smithy::Client::_Response[Types::DescribeLocationFsxLustreResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def security_group_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+    end
+    def describe_location_fsx_lustre: (
+      ?location_arn: String
+    ) -> _DescribeLocationFsxLustreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationFsxLustreResponse
+
+    interface _DescribeLocationFsxOntapResponse
+      include Smithy::Client::_Response[Types::DescribeLocationFsxOntapResponse]
+      def creation_time: () -> Time?
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def protocol: () -> Types::FsxProtocol?
+      def security_group_arns: () -> Array[String]?
+      def storage_virtual_machine_arn: () -> String?
+      def fsx_filesystem_arn: () -> String?
+    end
+    def describe_location_fsx_ontap: (
+      ?location_arn: String
+    ) -> _DescribeLocationFsxOntapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationFsxOntapResponse
+
+    interface _DescribeLocationFsxOpenZfsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationFsxOpenZfsResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def security_group_arns: () -> Array[String]?
+      def protocol: () -> Types::FsxProtocol?
+      def creation_time: () -> Time?
+    end
+    def describe_location_fsx_open_zfs: (
+      ?location_arn: String
+    ) -> _DescribeLocationFsxOpenZfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationFsxOpenZfsResponse
+
+    interface _DescribeLocationFsxWindowsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationFsxWindowsResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def security_group_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+      def user: () -> String?
+      def domain: () -> String?
+    end
+    def describe_location_fsx_windows: (
+      ?location_arn: String
+    ) -> _DescribeLocationFsxWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationFsxWindowsResponse
+
+    interface _DescribeLocationHdfsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationHdfsResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def name_nodes: () -> Array[Types::HdfsNameNode]?
+      def block_size: () -> Integer?
+      def replication_factor: () -> Integer?
+      def kms_key_provider_uri: () -> String?
+      def qop_configuration: () -> Types::QopConfiguration?
+      def authentication_type: () -> String?
+      def simple_user: () -> String?
+      def kerberos_principal: () -> String?
+      def agent_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+    end
+    def describe_location_hdfs: (
+      ?location_arn: String
+    ) -> _DescribeLocationHdfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationHdfsResponse
+
+    interface _DescribeLocationNfsResponse
+      include Smithy::Client::_Response[Types::DescribeLocationNfsResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def on_prem_config: () -> Types::OnPremConfig?
+      def mount_options: () -> Types::NfsMountOptions?
+      def creation_time: () -> Time?
+    end
+    def describe_location_nfs: (
+      ?location_arn: String
+    ) -> _DescribeLocationNfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationNfsResponse
+
+    interface _DescribeLocationObjectStorageResponse
+      include Smithy::Client::_Response[Types::DescribeLocationObjectStorageResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def access_key: () -> String?
+      def server_port: () -> Integer?
+      def server_protocol: () -> String?
+      def agent_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+      def server_certificate: () -> String?
+      def managed_secret_config: () -> Types::ManagedSecretConfig?
+      def cmk_secret_config: () -> Types::CmkSecretConfig?
+      def custom_secret_config: () -> Types::CustomSecretConfig?
+    end
+    def describe_location_object_storage: (
+      ?location_arn: String
+    ) -> _DescribeLocationObjectStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationObjectStorageResponse
+
+    interface _DescribeLocationS3Response
+      include Smithy::Client::_Response[Types::DescribeLocationS3Response]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def s3_storage_class: () -> String?
+      def s3_config: () -> Types::S3Config?
+      def agent_arns: () -> Array[String]?
+      def creation_time: () -> Time?
+    end
+    def describe_location_s3: (
+      ?location_arn: String
+    ) -> _DescribeLocationS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationS3Response
+
+    interface _DescribeLocationSmbResponse
+      include Smithy::Client::_Response[Types::DescribeLocationSmbResponse]
+      def location_arn: () -> String?
+      def location_uri: () -> String?
+      def agent_arns: () -> Array[String]?
+      def user: () -> String?
+      def domain: () -> String?
+      def mount_options: () -> Types::SmbMountOptions?
+      def creation_time: () -> Time?
+      def dns_ip_addresses: () -> Array[String]?
+      def kerberos_principal: () -> String?
+      def authentication_type: () -> String?
+    end
+    def describe_location_smb: (
+      ?location_arn: String
+    ) -> _DescribeLocationSmbResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLocationSmbResponse
+
+    interface _DescribeTaskResponse
+      include Smithy::Client::_Response[Types::DescribeTaskResponse]
+      def task_arn: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def current_task_execution_arn: () -> String?
+      def source_location_arn: () -> String?
+      def destination_location_arn: () -> String?
+      def cloud_watch_log_group_arn: () -> String?
+      def source_network_interface_arns: () -> Array[String]?
+      def destination_network_interface_arns: () -> Array[String]?
+      def options: () -> Types::Options?
+      def excludes: () -> Array[Types::FilterRule]?
+      def schedule: () -> Types::TaskSchedule?
+      def error_code: () -> String?
+      def error_detail: () -> String?
+      def creation_time: () -> Time?
+      def includes: () -> Array[Types::FilterRule]?
+      def manifest_config: () -> Types::ManifestConfig?
+      def task_report_config: () -> Types::TaskReportConfig?
+      def schedule_details: () -> Types::TaskScheduleDetails?
+      def task_mode: () -> String?
+    end
+    def describe_task: (
+      ?task_arn: String
+    ) -> _DescribeTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTaskResponse
+
+    interface _DescribeTaskExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeTaskExecutionResponse]
+      def task_execution_arn: () -> String?
+      def status: () -> String?
+      def options: () -> Types::Options?
+      def excludes: () -> Array[Types::FilterRule]?
+      def includes: () -> Array[Types::FilterRule]?
+      def manifest_config: () -> Types::ManifestConfig?
+      def start_time: () -> Time?
+      def estimated_files_to_transfer: () -> Integer?
+      def estimated_bytes_to_transfer: () -> Integer?
+      def files_transferred: () -> Integer?
+      def bytes_written: () -> Integer?
+      def bytes_transferred: () -> Integer?
+      def bytes_compressed: () -> Integer?
+      def result: () -> Types::TaskExecutionResultDetail?
+      def task_report_config: () -> Types::TaskReportConfig?
+      def files_deleted: () -> Integer?
+      def files_skipped: () -> Integer?
+      def files_verified: () -> Integer?
+      def report_result: () -> Types::ReportResult?
+      def estimated_files_to_delete: () -> Integer?
+      def task_mode: () -> String?
+      def files_prepared: () -> Integer?
+      def files_listed: () -> Types::TaskExecutionFilesListedDetail?
+      def files_failed: () -> Types::TaskExecutionFilesFailedDetail?
+      def launch_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def describe_task_execution: (
+      ?task_execution_arn: String
+    ) -> _DescribeTaskExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTaskExecutionResponse
+
+    interface _ListAgentsResponse
+      include Smithy::Client::_Response[Types::ListAgentsResponse]
+      def agents: () -> Array[Types::AgentListEntry]?
+      def next_token: () -> String?
+    end
+    def list_agents: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentsResponse
+
+    interface _ListLocationsResponse
+      include Smithy::Client::_Response[Types::ListLocationsResponse]
+      def locations: () -> Array[Types::LocationListEntry]?
+      def next_token: () -> String?
+    end
+    def list_locations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ]
+    ) -> _ListLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLocationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::TagListEntry]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTaskExecutionsResponse
+      include Smithy::Client::_Response[Types::ListTaskExecutionsResponse]
+      def task_executions: () -> Array[Types::TaskExecutionListEntry]?
+      def next_token: () -> String?
+    end
+    def list_task_executions: (
+      ?task_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTaskExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaskExecutionsResponse
+
+    interface _ListTasksResponse
+      include Smithy::Client::_Response[Types::ListTasksResponse]
+      def tasks: () -> Array[Types::TaskListEntry]?
+      def next_token: () -> String?
+    end
+    def list_tasks: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ]
+    ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
+
+    interface _StartTaskExecutionResponse
+      include Smithy::Client::_Response[Types::StartTaskExecutionResponse]
+      def task_execution_arn: () -> String?
+    end
+    def start_task_execution: (
+      ?task_arn: String,
+      ?override_options: {
+        verify_mode: String,
+        overwrite_mode: String,
+        atime: String,
+        mtime: String,
+        uid: String,
+        gid: String,
+        preserve_deleted_files: String,
+        preserve_devices: String,
+        posix_permissions: String,
+        bytes_per_second: Integer,
+        task_queueing: String,
+        log_level: String,
+        transfer_mode: String,
+        security_descriptor_copy_flags: String,
+        object_tags: String
+      },
+      ?includes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?excludes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?manifest_config: {
+        action: String,
+        format: String,
+        source: {
+          s3: {
+            manifest_object_path: String,
+            bucket_access_role_arn: String,
+            s3_bucket_arn: String,
+            manifest_object_version_id: String
+          }
+        }
+      },
+      ?task_report_config: {
+        destination: {
+          s3: {
+            subdirectory: String,
+            s3_bucket_arn: String,
+            bucket_access_role_arn: String
+          }
+        },
+        output_type: String,
+        report_level: String,
+        object_version_ids: String,
+        overrides: {
+          transferred: {
+            report_level: untyped
+          },
+          verified: untyped,
+          deleted: untyped,
+          skipped: untyped
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartTaskExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTaskExecutionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentResponse
+      include Smithy::Client::_Response[Types::UpdateAgentResponse]
+    end
+    def update_agent: (
+      ?agent_arn: String,
+      ?name: String
+    ) -> _UpdateAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentResponse
+
+    interface _UpdateLocationAzureBlobResponse
+      include Smithy::Client::_Response[Types::UpdateLocationAzureBlobResponse]
+    end
+    def update_location_azure_blob: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?authentication_type: String,
+      ?sas_configuration: {
+        token: String
+      },
+      ?blob_type: String,
+      ?access_tier: String,
+      ?agent_arns: Array[String],
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
+    ) -> _UpdateLocationAzureBlobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationAzureBlobResponse
+
+    interface _UpdateLocationEfsResponse
+      include Smithy::Client::_Response[Types::UpdateLocationEfsResponse]
+    end
+    def update_location_efs: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?access_point_arn: String,
+      ?file_system_access_role_arn: String,
+      ?in_transit_encryption: String
+    ) -> _UpdateLocationEfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationEfsResponse
+
+    interface _UpdateLocationFsxLustreResponse
+      include Smithy::Client::_Response[Types::UpdateLocationFsxLustreResponse]
+    end
+    def update_location_fsx_lustre: (
+      ?location_arn: String,
+      ?subdirectory: String
+    ) -> _UpdateLocationFsxLustreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationFsxLustreResponse
+
+    interface _UpdateLocationFsxOntapResponse
+      include Smithy::Client::_Response[Types::UpdateLocationFsxOntapResponse]
+    end
+    def update_location_fsx_ontap: (
+      ?location_arn: String,
+      ?protocol: {
+        nfs: {
+          mount_options: {
+            version: String
+          }
+        },
+        smb: {
+          domain: String,
+          mount_options: {
+            version: String
+          },
+          password: String,
+          user: String
+        }
+      },
+      ?subdirectory: String
+    ) -> _UpdateLocationFsxOntapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationFsxOntapResponse
+
+    interface _UpdateLocationFsxOpenZfsResponse
+      include Smithy::Client::_Response[Types::UpdateLocationFsxOpenZfsResponse]
+    end
+    def update_location_fsx_open_zfs: (
+      ?location_arn: String,
+      ?protocol: {
+        nfs: {
+          mount_options: {
+            version: String
+          }
+        },
+        smb: {
+          domain: String,
+          mount_options: {
+            version: String
+          },
+          password: String,
+          user: String
+        }
+      },
+      ?subdirectory: String
+    ) -> _UpdateLocationFsxOpenZfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationFsxOpenZfsResponse
+
+    interface _UpdateLocationFsxWindowsResponse
+      include Smithy::Client::_Response[Types::UpdateLocationFsxWindowsResponse]
+    end
+    def update_location_fsx_windows: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?domain: String,
+      ?user: String,
+      ?password: String
+    ) -> _UpdateLocationFsxWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationFsxWindowsResponse
+
+    interface _UpdateLocationHdfsResponse
+      include Smithy::Client::_Response[Types::UpdateLocationHdfsResponse]
+    end
+    def update_location_hdfs: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?name_nodes: Array[
+        {
+          hostname: String,
+          port: Integer
+        }
+      ],
+      ?block_size: Integer,
+      ?replication_factor: Integer,
+      ?kms_key_provider_uri: String,
+      ?qop_configuration: {
+        rpc_protection: String,
+        data_transfer_protection: String
+      },
+      ?authentication_type: String,
+      ?simple_user: String,
+      ?kerberos_principal: String,
+      ?kerberos_keytab: String,
+      ?kerberos_krb5_conf: String,
+      ?agent_arns: Array[String]
+    ) -> _UpdateLocationHdfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationHdfsResponse
+
+    interface _UpdateLocationNfsResponse
+      include Smithy::Client::_Response[Types::UpdateLocationNfsResponse]
+    end
+    def update_location_nfs: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?server_hostname: String,
+      ?on_prem_config: {
+        agent_arns: Array[String]
+      },
+      ?mount_options: {
+        version: String
+      }
+    ) -> _UpdateLocationNfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationNfsResponse
+
+    interface _UpdateLocationObjectStorageResponse
+      include Smithy::Client::_Response[Types::UpdateLocationObjectStorageResponse]
+    end
+    def update_location_object_storage: (
+      ?location_arn: String,
+      ?server_port: Integer,
+      ?server_protocol: String,
+      ?subdirectory: String,
+      ?server_hostname: String,
+      ?access_key: String,
+      ?secret_key: String,
+      ?agent_arns: Array[String],
+      ?server_certificate: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
+    ) -> _UpdateLocationObjectStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationObjectStorageResponse
+
+    interface _UpdateLocationS3Response
+      include Smithy::Client::_Response[Types::UpdateLocationS3Response]
+    end
+    def update_location_s3: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?s3_storage_class: String,
+      ?s3_config: {
+        bucket_access_role_arn: String
+      }
+    ) -> _UpdateLocationS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationS3Response
+
+    interface _UpdateLocationSmbResponse
+      include Smithy::Client::_Response[Types::UpdateLocationSmbResponse]
+    end
+    def update_location_smb: (
+      ?location_arn: String,
+      ?subdirectory: String,
+      ?server_hostname: String,
+      ?user: String,
+      ?domain: String,
+      ?password: String,
+      ?agent_arns: Array[String],
+      ?mount_options: {
+        version: String
+      },
+      ?authentication_type: String,
+      ?dns_ip_addresses: Array[String],
+      ?kerberos_principal: String,
+      ?kerberos_keytab: String,
+      ?kerberos_krb5_conf: String
+    ) -> _UpdateLocationSmbResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationSmbResponse
+
+    interface _UpdateTaskResponse
+      include Smithy::Client::_Response[Types::UpdateTaskResponse]
+    end
+    def update_task: (
+      ?task_arn: String,
+      ?options: {
+        verify_mode: String,
+        overwrite_mode: String,
+        atime: String,
+        mtime: String,
+        uid: String,
+        gid: String,
+        preserve_deleted_files: String,
+        preserve_devices: String,
+        posix_permissions: String,
+        bytes_per_second: Integer,
+        task_queueing: String,
+        log_level: String,
+        transfer_mode: String,
+        security_descriptor_copy_flags: String,
+        object_tags: String
+      },
+      ?excludes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?schedule: {
+        schedule_expression: String,
+        status: String
+      },
+      ?name: String,
+      ?cloud_watch_log_group_arn: String,
+      ?includes: Array[
+        {
+          filter_type: String,
+          value: String
+        }
+      ],
+      ?manifest_config: {
+        action: String,
+        format: String,
+        source: {
+          s3: {
+            manifest_object_path: String,
+            bucket_access_role_arn: String,
+            s3_bucket_arn: String,
+            manifest_object_version_id: String
+          }
+        }
+      },
+      ?task_report_config: {
+        destination: {
+          s3: {
+            subdirectory: String,
+            s3_bucket_arn: String,
+            bucket_access_role_arn: String
+          }
+        },
+        output_type: String,
+        report_level: String,
+        object_version_ids: String,
+        overrides: {
+          transferred: {
+            report_level: untyped
+          },
+          verified: untyped,
+          deleted: untyped,
+          skipped: untyped
+        }
+      }
+    ) -> _UpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskResponse
+
+    interface _UpdateTaskExecutionResponse
+      include Smithy::Client::_Response[Types::UpdateTaskExecutionResponse]
+    end
+    def update_task_execution: (
+      ?task_execution_arn: String,
+      ?options: {
+        verify_mode: String,
+        overwrite_mode: String,
+        atime: String,
+        mtime: String,
+        uid: String,
+        gid: String,
+        preserve_deleted_files: String,
+        preserve_devices: String,
+        posix_permissions: String,
+        bytes_per_second: Integer,
+        task_queueing: String,
+        log_level: String,
+        transfer_mode: String,
+        security_descriptor_copy_flags: String,
+        object_tags: String
+      }
+    ) -> _UpdateTaskExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskExecutionResponse
+  end
+end

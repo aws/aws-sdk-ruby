@@ -1,0 +1,5 @@
+  module Aws
+    module IotDeviceAdvisor
+      VERSION: String
+    end
+  end

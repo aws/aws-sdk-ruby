@@ -1,0 +1,84 @@
+module Aws::SSMGuiConnect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSMGuiConnect::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteConnectionRecordingPreferencesResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionRecordingPreferencesResponse]
+      def client_token: () -> String?
+    end
+    def delete_connection_recording_preferences: (
+      ?client_token: String
+    ) -> _DeleteConnectionRecordingPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionRecordingPreferencesResponse
+
+    interface _GetConnectionRecordingPreferencesResponse
+      include Smithy::Client::_Response[Types::GetConnectionRecordingPreferencesResponse]
+      def client_token: () -> String?
+      def connection_recording_preferences: () -> Types::ConnectionRecordingPreferences?
+    end
+    def get_connection_recording_preferences: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionRecordingPreferencesResponse
+
+    interface _UpdateConnectionRecordingPreferencesResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionRecordingPreferencesResponse]
+      def client_token: () -> String?
+      def connection_recording_preferences: () -> Types::ConnectionRecordingPreferences?
+    end
+    def update_connection_recording_preferences: (
+      ?connection_recording_preferences: {
+        recording_destinations: {
+          s3_buckets: Array[
+            {
+              bucket_owner: String,
+              bucket_name: String
+            }
+          ]
+        },
+        kms_key_arn: String
+      },
+      ?client_token: String
+    ) -> _UpdateConnectionRecordingPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionRecordingPreferencesResponse
+  end
+end

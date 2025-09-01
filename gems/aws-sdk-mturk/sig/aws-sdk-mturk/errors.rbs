@@ -1,0 +1,12 @@
+module Aws::MTurk
+  module Errors
+    class RequestError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def turk_error_code: () -> String?
+    end
+    class ServiceFault < Smithy::Client::ServiceError
+      def message: () -> String?
+      def turk_error_code: () -> String?
+    end
+  end
+end

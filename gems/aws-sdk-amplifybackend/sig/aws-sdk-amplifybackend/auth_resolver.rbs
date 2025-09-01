@@ -1,0 +1,5 @@
+module Aws::AmplifyBackend
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

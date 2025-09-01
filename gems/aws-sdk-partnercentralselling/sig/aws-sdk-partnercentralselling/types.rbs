@@ -1,0 +1,3216 @@
+module Aws::PartnerCentralSelling
+  module Types
+
+    class AcceptEngagementInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Account
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?industry: String,
+        ?other_industry: String,
+        ?company_name: String,
+        ?website_url: String,
+        ?aws_account_id: String,
+        ?address: Types::Address,
+        ?duns: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor industry: String?
+      attr_accessor other_industry: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor address: Types::Address?
+      attr_accessor duns: String?
+    end
+
+    class AccountReceiver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class AccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?industry: String,
+        ?other_industry: String,
+        ?company_name: String,
+        ?website_url: String,
+        ?address: Types::AddressSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor industry: String?
+      attr_accessor other_industry: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor address: Types::AddressSummary?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?city: String,
+        ?postal_code: String,
+        ?state_or_region: String,
+        ?country_code: String,
+        ?street_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor city: String?
+      attr_accessor postal_code: String?
+      attr_accessor state_or_region: String?
+      attr_accessor country_code: String?
+      attr_accessor street_address: String?
+    end
+
+    class AddressSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?city: String,
+        ?postal_code: String,
+        ?state_or_region: String,
+        ?country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor city: String?
+      attr_accessor postal_code: String?
+      attr_accessor state_or_region: String?
+      attr_accessor country_code: String?
+    end
+
+    class AssignOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?assignee: Types::AssigneeContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor assignee: Types::AssigneeContact?
+    end
+
+    class AssigneeContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?business_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor business_title: String?
+    end
+
+    class AssociateOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?opportunity_identifier: String,
+        ?related_entity_type: String,
+        ?related_entity_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor opportunity_identifier: String?
+      attr_accessor related_entity_type: String?
+      attr_accessor related_entity_identifier: String?
+    end
+
+    module AwsClosedLostReason
+      ADMINISTRATIVE: String
+      BUSINESS_ASSOCIATE_AGREEMENT: String
+      COMPANY_ACQUIRED_DISSOLVED: String
+      COMPETITIVE_OFFERING: String
+      CUSTOMER_DATA_REQUIREMENT: String
+      CUSTOMER_DEFICIENCY: String
+      CUSTOMER_EXPERIENCE: String
+      DELAY_CANCELLATION_OF_PROJECT: String
+      DUPLICATE: String
+      DUPLICATE_OPPORTUNITY: String
+      EXECUTIVE_BLOCKER: String
+      FAILED_VETTING: String
+      FEATURE_LIMITATION: String
+      FINANCIAL_COMMERCIAL: String
+      INSUFFICIENT_AMAZON_VALUE: String
+      INSUFFICIENT_AWS_VALUE: String
+      INTERNATIONAL_CONSTRAINTS: String
+      LEGAL_TAX_REGULATORY: String
+      LEGAL_TERMS_AND_CONDITIONS: String
+      LOST_TO_COMPETITOR: String
+      LOST_TO_COMPETITOR_GOOGLE: String
+      LOST_TO_COMPETITOR_MICROSOFT: String
+      LOST_TO_COMPETITOR_OTHER: String
+      LOST_TO_COMPETITOR_RACKSPACE: String
+      LOST_TO_COMPETITOR_SOFTLAYER: String
+      LOST_TO_COMPETITOR_VMWARE: String
+      NO_CUSTOMER_REFERENCE: String
+      NO_INTEGRATION_RESOURCES: String
+      NO_OPPORTUNITY: String
+      NO_PERCEIVED_VALUE_OF_MP: String
+      NO_RESPONSE: String
+      NOT_COMMITTED_TO_AWS: String
+      NO_UPDATE: String
+      ON_PREMISES_DEPLOYMENT: String
+      OTHER: String
+      OTHER_DETAILS_IN_DESCRIPTION: String
+      PARTNER_GAP: String
+      PAST_DUE: String
+      PEOPLE_RELATIONSHIP_GOVERNANCE: String
+      PLATFORM_TECHNOLOGY_LIMITATION: String
+      PREFERENCE_FOR_COMPETITOR: String
+      PRICE: String
+      PRODUCT_TECHNOLOGY: String
+      PRODUCT_NOT_ON_AWS: String
+      SECURITY_COMPLIANCE: String
+      SELF_SERVICE: String
+      TECHNICAL_LIMITATIONS: String
+      TERM_SHEET_IMPASSE: String
+    end
+
+    module AwsFundingUsed
+      YES: String
+      NO: String
+    end
+
+    module AwsMemberBusinessTitle
+      AWS_SALES_REP: String
+      AWS_ACCOUNT_OWNER: String
+      WWPSPDM: String
+      PDM: String
+      PSM: String
+      ISVSM: String
+    end
+
+    class AwsOpportunityCustomer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contacts: Array[Types::Contact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contacts: Array[Types::Contact]?
+    end
+
+    class AwsOpportunityInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_best_actions: String,
+        ?engagement_score: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_best_actions: String?
+      attr_accessor engagement_score: String?
+    end
+
+    class AwsOpportunityLifeCycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_close_date: String,
+        ?closed_lost_reason: String,
+        ?stage: String,
+        ?next_steps: String,
+        ?next_steps_history: Array[Types::ProfileNextStepsHistory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_close_date: String?
+      attr_accessor closed_lost_reason: String?
+      attr_accessor stage: String?
+      attr_accessor next_steps: String?
+      attr_accessor next_steps_history: Array[Types::ProfileNextStepsHistory]?
+    end
+
+    class AwsOpportunityProject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+    end
+
+    class AwsOpportunityRelatedEntities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_products: Array[String],
+        ?solutions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_products: Array[String]?
+      attr_accessor solutions: Array[String]?
+    end
+
+    module AwsOpportunityStage
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      PROSPECT: String
+      ENGAGED: String
+      IDENTIFIED: String
+      QUALIFY: String
+      RESEARCH: String
+      SELLER_ENGAGED: String
+      EVALUATING: String
+      SELLER_REGISTERED: String
+      TERM_SHEET_NEGOTIATION: String
+      CONTRACT_NEGOTIATION: String
+      ONBOARDING: String
+      BUILDING_INTEGRATION: String
+      QUALIFIED: String
+      ON_HOLD: String
+      TECHNICAL_VALIDATION: String
+      BUSINESS_VALIDATION: String
+      COMMITTED: String
+      LAUNCHED: String
+      DEFERRED_TO_PARTNER: String
+      CLOSED_LOST: String
+      COMPLETED: String
+      CLOSED_INCOMPLETE: String
+    end
+
+    class AwsSubmission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?involvement_type: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor involvement_type: String?
+      attr_accessor visibility: String?
+    end
+
+    class AwsTeamMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?business_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor business_title: String?
+    end
+
+    module Channel
+      AWS_MARKETING_CENTRAL: String
+      CONTENT_SYNDICATION: String
+      DISPLAY: String
+      EMAIL: String
+      LIVE_EVENT: String
+      OUT_OF_HOME: String
+      PRINT: String
+      SEARCH: String
+      SOCIAL: String
+      TELEMARKETING: String
+      TV: String
+      VIDEO: String
+      VIRTUAL_EVENT: String
+    end
+
+    module ClosedLostReason
+      CUSTOMER_DEFICIENCY: String
+      DELAY_CANCELLATION_OF_PROJECT: String
+      LEGAL_TAX_REGULATORY: String
+      LOST_TO_COMPETITOR_GOOGLE: String
+      LOST_TO_COMPETITOR_MICROSOFT: String
+      LOST_TO_COMPETITOR_SOFTLAYER: String
+      LOST_TO_COMPETITOR_VMWARE: String
+      LOST_TO_COMPETITOR_OTHER: String
+      NO_OPPORTUNITY: String
+      ON_PREMISES_DEPLOYMENT: String
+      PARTNER_GAP: String
+      PRICE: String
+      SECURITY_COMPLIANCE: String
+      TECHNICAL_LIMITATIONS: String
+      CUSTOMER_EXPERIENCE: String
+      OTHER: String
+      PEOPLERELATIONSHIPGOVERNANCE: String
+      PRODUCTTECHNOLOGY: String
+      FINANCIALCOMMERCIAL: String
+    end
+
+    module CompetitorName
+      ORACLE_CLOUD: String
+      ON_PREM: String
+      CO_LOCATION: String
+      AKAMAI: String
+      ALICLOUD: String
+      GOOGLE_CLOUD_PLATFORM: String
+      IBM_SOFTLAYER: String
+      MICROSOFT_AZURE: String
+      OTHER_COST_OPTIMIZATION: String
+      NO_COMPETITION: String
+      OTHER: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?business_title: String,
+        ?phone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor business_title: String?
+      attr_accessor phone: String?
+    end
+
+    module CountryCode
+      US: String
+      AF: String
+      AX: String
+      AL: String
+      DZ: String
+      AS: String
+      AD: String
+      AO: String
+      AI: String
+      AQ: String
+      AG: String
+      AR: String
+      AM: String
+      AW: String
+      AU: String
+      AT: String
+      AZ: String
+      BS: String
+      BH: String
+      BD: String
+      BB: String
+      BY: String
+      BE: String
+      BZ: String
+      BJ: String
+      BM: String
+      BT: String
+      BO: String
+      BQ: String
+      BA: String
+      BW: String
+      BV: String
+      BR: String
+      IO: String
+      BN: String
+      BG: String
+      BF: String
+      BI: String
+      KH: String
+      CM: String
+      CA: String
+      CV: String
+      KY: String
+      CF: String
+      TD: String
+      CL: String
+      CN: String
+      CX: String
+      CC: String
+      CO: String
+      KM: String
+      CG: String
+      CK: String
+      CR: String
+      CI: String
+      HR: String
+      CU: String
+      CW: String
+      CY: String
+      CZ: String
+      CD: String
+      DK: String
+      DJ: String
+      DM: String
+      DO: String
+      EC: String
+      EG: String
+      SV: String
+      GQ: String
+      ER: String
+      EE: String
+      ET: String
+      FK: String
+      FO: String
+      FJ: String
+      FI: String
+      FR: String
+      GF: String
+      PF: String
+      TF: String
+      GA: String
+      GM: String
+      GE: String
+      DE: String
+      GH: String
+      GI: String
+      GR: String
+      GL: String
+      GD: String
+      GP: String
+      GU: String
+      GT: String
+      GG: String
+      GN: String
+      GW: String
+      GY: String
+      HT: String
+      HM: String
+      VA: String
+      HN: String
+      HK: String
+      HU: String
+      IS: String
+      IN: String
+      ID: String
+      IR: String
+      IQ: String
+      IE: String
+      IM: String
+      IL: String
+      IT: String
+      JM: String
+      JP: String
+      JE: String
+      JO: String
+      KZ: String
+      KE: String
+      KI: String
+      KR: String
+      KW: String
+      KG: String
+      LA: String
+      LV: String
+      LB: String
+      LS: String
+      LR: String
+      LY: String
+      LI: String
+      LT: String
+      LU: String
+      MO: String
+      MK: String
+      MG: String
+      MW: String
+      MY: String
+      MV: String
+      ML: String
+      MT: String
+      MH: String
+      MQ: String
+      MR: String
+      MU: String
+      YT: String
+      MX: String
+      FM: String
+      MD: String
+      MC: String
+      MN: String
+      ME: String
+      MS: String
+      MA: String
+      MZ: String
+      MM: String
+      NA: String
+      NR: String
+      NP: String
+      NL: String
+      AN: String
+      NC: String
+      NZ: String
+      NI: String
+      NE: String
+      NG: String
+      NU: String
+      NF: String
+      MP: String
+      NO: String
+      OM: String
+      PK: String
+      PW: String
+      PS: String
+      PA: String
+      PG: String
+      PY: String
+      PE: String
+      PH: String
+      PN: String
+      PL: String
+      PT: String
+      PR: String
+      QA: String
+      RE: String
+      RO: String
+      RU: String
+      RW: String
+      BL: String
+      SH: String
+      KN: String
+      LC: String
+      MF: String
+      PM: String
+      VC: String
+      WS: String
+      SM: String
+      ST: String
+      SA: String
+      SN: String
+      RS: String
+      SC: String
+      SL: String
+      SG: String
+      SX: String
+      SK: String
+      SI: String
+      SB: String
+      SO: String
+      ZA: String
+      GS: String
+      SS: String
+      ES: String
+      LK: String
+      SD: String
+      SR: String
+      SJ: String
+      SZ: String
+      SE: String
+      CH: String
+      SY: String
+      TW: String
+      TJ: String
+      TZ: String
+      TH: String
+      TL: String
+      TG: String
+      TK: String
+      TO: String
+      TT: String
+      TN: String
+      TR: String
+      TM: String
+      TC: String
+      TV: String
+      UG: String
+      UA: String
+      AE: String
+      GB: String
+      UM: String
+      UY: String
+      UZ: String
+      VU: String
+      VE: String
+      VN: String
+      VG: String
+      VI: String
+      WF: String
+      EH: String
+      YE: String
+      ZM: String
+      ZW: String
+    end
+
+    class CreateEngagementInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?engagement_identifier: String,
+        ?invitation: Types::Invitation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor invitation: Types::Invitation?
+    end
+
+    class CreateEngagementInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?title: String,
+        ?description: String,
+        ?contexts: Array[Types::EngagementContextDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor contexts: Array[Types::EngagementContextDetails]?
+    end
+
+    class CreateEngagementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?primary_needs_from_aws: Array[String],
+        ?national_security: String,
+        ?partner_opportunity_identifier: String,
+        ?customer: Types::Customer,
+        ?project: Types::Project,
+        ?opportunity_type: String,
+        ?marketing: Types::Marketing,
+        ?software_revenue: Types::SoftwareRevenue,
+        ?client_token: String,
+        ?life_cycle: Types::LifeCycle,
+        ?origin: String,
+        ?opportunity_team: Array[Types::Contact],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor primary_needs_from_aws: Array[String]?
+      attr_accessor national_security: String?
+      attr_accessor partner_opportunity_identifier: String?
+      attr_accessor customer: Types::Customer?
+      attr_accessor project: Types::Project?
+      attr_accessor opportunity_type: String?
+      attr_accessor marketing: Types::Marketing?
+      attr_accessor software_revenue: Types::SoftwareRevenue?
+      attr_accessor client_token: String?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor origin: String?
+      attr_accessor opportunity_team: Array[Types::Contact]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateOpportunityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?partner_opportunity_identifier: String,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor partner_opportunity_identifier: String?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class CreateResourceSnapshotJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?engagement_identifier: String,
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_snapshot_template_identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_snapshot_template_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateResourceSnapshotJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateResourceSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?engagement_identifier: String,
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_snapshot_template_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_snapshot_template_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateResourceSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor revision: Integer?
+    end
+
+    module CurrencyCode
+      USD: String
+      EUR: String
+      GBP: String
+      AUD: String
+      CAD: String
+      CNY: String
+      NZD: String
+      INR: String
+      JPY: String
+      CHF: String
+      SEK: String
+      AED: String
+      AFN: String
+      ALL: String
+      AMD: String
+      ANG: String
+      AOA: String
+      ARS: String
+      AWG: String
+      AZN: String
+      BAM: String
+      BBD: String
+      BDT: String
+      BGN: String
+      BHD: String
+      BIF: String
+      BMD: String
+      BND: String
+      BOB: String
+      BOV: String
+      BRL: String
+      BSD: String
+      BTN: String
+      BWP: String
+      BYN: String
+      BZD: String
+      CDF: String
+      CHE: String
+      CHW: String
+      CLF: String
+      CLP: String
+      COP: String
+      COU: String
+      CRC: String
+      CUC: String
+      CUP: String
+      CVE: String
+      CZK: String
+      DJF: String
+      DKK: String
+      DOP: String
+      DZD: String
+      EGP: String
+      ERN: String
+      ETB: String
+      FJD: String
+      FKP: String
+      GEL: String
+      GHS: String
+      GIP: String
+      GMD: String
+      GNF: String
+      GTQ: String
+      GYD: String
+      HKD: String
+      HNL: String
+      HRK: String
+      HTG: String
+      HUF: String
+      IDR: String
+      ILS: String
+      IQD: String
+      IRR: String
+      ISK: String
+      JMD: String
+      JOD: String
+      KES: String
+      KGS: String
+      KHR: String
+      KMF: String
+      KPW: String
+      KRW: String
+      KWD: String
+      KYD: String
+      KZT: String
+      LAK: String
+      LBP: String
+      LKR: String
+      LRD: String
+      LSL: String
+      LYD: String
+      MAD: String
+      MDL: String
+      MGA: String
+      MKD: String
+      MMK: String
+      MNT: String
+      MOP: String
+      MRU: String
+      MUR: String
+      MVR: String
+      MWK: String
+      MXN: String
+      MXV: String
+      MYR: String
+      MZN: String
+      NAD: String
+      NGN: String
+      NIO: String
+      NOK: String
+      NPR: String
+      OMR: String
+      PAB: String
+      PEN: String
+      PGK: String
+      PHP: String
+      PKR: String
+      PLN: String
+      PYG: String
+      QAR: String
+      RON: String
+      RSD: String
+      RUB: String
+      RWF: String
+      SAR: String
+      SBD: String
+      SCR: String
+      SDG: String
+      SGD: String
+      SHP: String
+      SLL: String
+      SOS: String
+      SRD: String
+      SSP: String
+      STN: String
+      SVC: String
+      SYP: String
+      SZL: String
+      THB: String
+      TJS: String
+      TMT: String
+      TND: String
+      TOP: String
+      TRY: String
+      TTD: String
+      TWD: String
+      TZS: String
+      UAH: String
+      UGX: String
+      USN: String
+      UYI: String
+      UYU: String
+      UZS: String
+      VEF: String
+      VND: String
+      VUV: String
+      WST: String
+      XAF: String
+      XCD: String
+      XDR: String
+      XOF: String
+      XPF: String
+      XSU: String
+      XUA: String
+      YER: String
+      ZAR: String
+      ZMW: String
+      ZWL: String
+    end
+
+    class Customer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::Account,
+        ?contacts: Array[Types::Contact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::Account?
+      attr_accessor contacts: Array[Types::Contact]?
+    end
+
+    class CustomerProjectsContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer: Types::EngagementCustomer,
+        ?project: Types::EngagementCustomerProjectDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer: Types::EngagementCustomer?
+      attr_accessor project: Types::EngagementCustomerProjectDetails?
+    end
+
+    class CustomerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::AccountSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::AccountSummary?
+    end
+
+    class DeleteResourceSnapshotJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_identifier: String?
+    end
+
+    module DeliveryModel
+      SAAS_OR_PAAS: String
+      BYOL_OR_AMI: String
+      MANAGED_SERVICES: String
+      PROFESSIONAL_SERVICES: String
+      RESELL: String
+      OTHER: String
+    end
+
+    class DisassociateOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?opportunity_identifier: String,
+        ?related_entity_type: String,
+        ?related_entity_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor opportunity_identifier: String?
+      attr_accessor related_entity_type: String?
+      attr_accessor related_entity_identifier: String?
+    end
+
+    class EngagementContextDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?payload: Types::EngagementContextPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor payload: Types::EngagementContextPayload?
+    end
+
+    class EngagementContextPayload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_project: Types::CustomerProjectsContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_project: Types::CustomerProjectsContext?
+
+      class CustomerProject < EngagementContextPayload
+      end
+      class Unknown < EngagementContextPayload
+      end
+    end
+
+    module EngagementContextType
+      CUSTOMER_PROJECT: String
+    end
+
+    class EngagementCustomer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?industry: String,
+        ?company_name: String,
+        ?website_url: String,
+        ?country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor industry: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor country_code: String?
+    end
+
+    class EngagementCustomerProjectDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?business_problem: String,
+        ?target_completion_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor business_problem: String?
+      attr_accessor target_completion_date: String?
+    end
+
+    module EngagementInvitationPayloadType
+      OPPORTUNITY_INVITATION: String
+    end
+
+    class EngagementInvitationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?payload_type: String,
+        ?id: String,
+        ?engagement_id: String,
+        ?engagement_title: String,
+        ?status: String,
+        ?invitation_date: Time,
+        ?expiration_date: Time,
+        ?sender_aws_account_id: String,
+        ?sender_company_name: String,
+        ?receiver: Types::Receiver,
+        ?catalog: String,
+        ?participant_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor payload_type: String?
+      attr_accessor id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_title: String?
+      attr_accessor status: String?
+      attr_accessor invitation_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor sender_aws_account_id: String?
+      attr_accessor sender_company_name: String?
+      attr_accessor receiver: Types::Receiver?
+      attr_accessor catalog: String?
+      attr_accessor participant_type: String?
+    end
+
+    class EngagementMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?company_name: String,
+        ?website_url: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor account_id: String?
+    end
+
+    class EngagementMemberSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?company_name: String,
+        ?website_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+    end
+
+    class EngagementResourceAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?engagement_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor engagement_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor created_by: String?
+    end
+
+    module EngagementScore
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    class EngagementSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module EngagementSortName
+      CreatedDate: String
+    end
+
+    class EngagementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?member_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor member_count: Integer?
+    end
+
+    class ExpectedCustomerSpend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?currency_code: String,
+        ?frequency: String,
+        ?target_company: String,
+        ?estimation_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor frequency: String?
+      attr_accessor target_company: String?
+      attr_accessor estimation_url: String?
+    end
+
+    class GetAwsOpportunitySummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?related_opportunity_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor related_opportunity_identifier: String?
+    end
+
+    class GetAwsOpportunitySummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?related_opportunity_id: String,
+        ?origin: String,
+        ?involvement_type: String,
+        ?visibility: String,
+        ?life_cycle: Types::AwsOpportunityLifeCycle,
+        ?opportunity_team: Array[Types::AwsTeamMember],
+        ?insights: Types::AwsOpportunityInsights,
+        ?involvement_type_change_reason: String,
+        ?related_entity_ids: Types::AwsOpportunityRelatedEntities,
+        ?customer: Types::AwsOpportunityCustomer,
+        ?project: Types::AwsOpportunityProject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor related_opportunity_id: String?
+      attr_accessor origin: String?
+      attr_accessor involvement_type: String?
+      attr_accessor visibility: String?
+      attr_accessor life_cycle: Types::AwsOpportunityLifeCycle?
+      attr_accessor opportunity_team: Array[Types::AwsTeamMember]?
+      attr_accessor insights: Types::AwsOpportunityInsights?
+      attr_accessor involvement_type_change_reason: String?
+      attr_accessor related_entity_ids: Types::AwsOpportunityRelatedEntities?
+      attr_accessor customer: Types::AwsOpportunityCustomer?
+      attr_accessor project: Types::AwsOpportunityProject?
+    end
+
+    class GetEngagementInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetEngagementInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?payload_type: String,
+        ?id: String,
+        ?engagement_id: String,
+        ?engagement_title: String,
+        ?status: String,
+        ?invitation_date: Time,
+        ?expiration_date: Time,
+        ?sender_aws_account_id: String,
+        ?sender_company_name: String,
+        ?receiver: Types::Receiver,
+        ?catalog: String,
+        ?rejection_reason: String,
+        ?payload: Types::Payload,
+        ?invitation_message: String,
+        ?engagement_description: String,
+        ?existing_members: Array[Types::EngagementMemberSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor payload_type: String?
+      attr_accessor id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_title: String?
+      attr_accessor status: String?
+      attr_accessor invitation_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor sender_aws_account_id: String?
+      attr_accessor sender_company_name: String?
+      attr_accessor receiver: Types::Receiver?
+      attr_accessor catalog: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor payload: Types::Payload?
+      attr_accessor invitation_message: String?
+      attr_accessor engagement_description: String?
+      attr_accessor existing_members: Array[Types::EngagementMemberSummary]?
+    end
+
+    class GetEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetEngagementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?title: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?member_count: Integer,
+        ?contexts: Array[Types::EngagementContextDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor member_count: Integer?
+      attr_accessor contexts: Array[Types::EngagementContextDetails]?
+    end
+
+    class GetOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetOpportunityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?primary_needs_from_aws: Array[String],
+        ?national_security: String,
+        ?partner_opportunity_identifier: String,
+        ?customer: Types::Customer,
+        ?project: Types::Project,
+        ?opportunity_type: String,
+        ?marketing: Types::Marketing,
+        ?software_revenue: Types::SoftwareRevenue,
+        ?id: String,
+        ?arn: String,
+        ?last_modified_date: Time,
+        ?created_date: Time,
+        ?related_entity_identifiers: Types::RelatedEntityIdentifiers,
+        ?life_cycle: Types::LifeCycle,
+        ?opportunity_team: Array[Types::Contact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor primary_needs_from_aws: Array[String]?
+      attr_accessor national_security: String?
+      attr_accessor partner_opportunity_identifier: String?
+      attr_accessor customer: Types::Customer?
+      attr_accessor project: Types::Project?
+      attr_accessor opportunity_type: String?
+      attr_accessor marketing: Types::Marketing?
+      attr_accessor software_revenue: Types::SoftwareRevenue?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor related_entity_identifiers: Types::RelatedEntityIdentifiers?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor opportunity_team: Array[Types::Contact]?
+    end
+
+    class GetResourceSnapshotJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_identifier: String?
+    end
+
+    class GetResourceSnapshotJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?engagement_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?resource_snapshot_template_name: String,
+        ?created_at: Time,
+        ?status: String,
+        ?last_successful_execution_date: Time,
+        ?last_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor engagement_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_snapshot_template_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor last_successful_execution_date: Time?
+      attr_accessor last_failure: String?
+    end
+
+    class GetResourceSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?engagement_identifier: String,
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_snapshot_template_identifier: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_snapshot_template_identifier: String?
+      attr_accessor revision: Integer?
+    end
+
+    class GetResourceSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?engagement_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_snapshot_template_name: String,
+        ?revision: Integer,
+        ?payload: Types::ResourceSnapshotPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor engagement_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_snapshot_template_name: String?
+      attr_accessor revision: Integer?
+      attr_accessor payload: Types::ResourceSnapshotPayload?
+    end
+
+    class GetSellingSystemSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+    end
+
+    class GetSellingSystemSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_role_arn: String?
+    end
+
+    module Industry
+      AEROSPACE_SATELLITE: String
+      AGRICULTURE: String
+      AUTOMOTIVE: String
+      COMPUTERS_ELECTRONICS: String
+      CONSUMER_GOODS: String
+      EDUCATION: String
+      ENERGY_OIL_GAS: String
+      ENERGY_POWER_UTILITIES: String
+      FINANCIAL_SERVICES: String
+      GAMING: String
+      GOVERNMENT: String
+      HEALTHCARE: String
+      HOSPITALITY: String
+      LIFE_SCIENCES: String
+      MANUFACTURING: String
+      MARKETING_ADVERTISING: String
+      MEDIA_ENTERTAINMENT: String
+      MINING: String
+      NON_PROFIT_ORGANIZATION: String
+      PROFESSIONAL_SERVICES: String
+      REALESTATE_CONSTRUCTION: String
+      RETAIL: String
+      SOFTWARE_INTERNET: String
+      TELECOMMUNICATIONS: String
+      TRANSPORTATION_LOGISTICS: String
+      TRAVEL: String
+      WHOLESALE_DISTRIBUTION: String
+      OTHER: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Invitation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?receiver: Types::Receiver,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor receiver: Types::Receiver?
+      attr_accessor payload: Types::Payload?
+    end
+
+    module InvitationStatus
+      ACCEPTED: String
+      PENDING: String
+      REJECTED: String
+      EXPIRED: String
+    end
+
+    module InvolvementTypeChangeReason
+      EXPANSION_OPPORTUNITY: String
+      CHANGE_IN_DEAL_INFORMATION: String
+      CUSTOMER_REQUESTED: String
+      TECHNICAL_COMPLEXITY: String
+      RISK_MITIGATION: String
+    end
+
+    class LastModifiedDate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_last_modified_date: Time,
+        ?before_last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_last_modified_date: Time?
+      attr_accessor before_last_modified_date: Time?
+    end
+
+    class LifeCycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: String,
+        ?closed_lost_reason: String,
+        ?next_steps: String,
+        ?target_close_date: String,
+        ?review_status: String,
+        ?review_comments: String,
+        ?review_status_reason: String,
+        ?next_steps_history: Array[Types::NextStepsHistory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: String?
+      attr_accessor closed_lost_reason: String?
+      attr_accessor next_steps: String?
+      attr_accessor target_close_date: String?
+      attr_accessor review_status: String?
+      attr_accessor review_comments: String?
+      attr_accessor review_status_reason: String?
+      attr_accessor next_steps_history: Array[Types::NextStepsHistory]?
+    end
+
+    class LifeCycleForView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_close_date: String,
+        ?review_status: String,
+        ?stage: String,
+        ?next_steps: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_close_date: String?
+      attr_accessor review_status: String?
+      attr_accessor stage: String?
+      attr_accessor next_steps: String?
+    end
+
+    class LifeCycleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage: String,
+        ?closed_lost_reason: String,
+        ?next_steps: String,
+        ?target_close_date: String,
+        ?review_status: String,
+        ?review_comments: String,
+        ?review_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage: String?
+      attr_accessor closed_lost_reason: String?
+      attr_accessor next_steps: String?
+      attr_accessor target_close_date: String?
+      attr_accessor review_status: String?
+      attr_accessor review_comments: String?
+      attr_accessor review_status_reason: String?
+    end
+
+    class ListEngagementByAcceptingInvitationTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_invitation_id: String?
+    end
+
+    class ListEngagementByAcceptingInvitationTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::ListTasksSortBase,
+        ?catalog: String,
+        ?task_status: Array[String],
+        ?opportunity_identifier: Array[String],
+        ?engagement_invitation_identifier: Array[String],
+        ?task_identifier: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::ListTasksSortBase?
+      attr_accessor catalog: String?
+      attr_accessor task_status: Array[String]?
+      attr_accessor opportunity_identifier: Array[String]?
+      attr_accessor engagement_invitation_identifier: Array[String]?
+      attr_accessor task_identifier: Array[String]?
+    end
+
+    class ListEngagementByAcceptingInvitationTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_summaries: Array[Types::ListEngagementByAcceptingInvitationTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_summaries: Array[Types::ListEngagementByAcceptingInvitationTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementFromOpportunityTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_id: String,
+        ?engagement_invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_invitation_id: String?
+    end
+
+    class ListEngagementFromOpportunityTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::ListTasksSortBase,
+        ?catalog: String,
+        ?task_status: Array[String],
+        ?task_identifier: Array[String],
+        ?opportunity_identifier: Array[String],
+        ?engagement_identifier: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::ListTasksSortBase?
+      attr_accessor catalog: String?
+      attr_accessor task_status: Array[String]?
+      attr_accessor task_identifier: Array[String]?
+      attr_accessor opportunity_identifier: Array[String]?
+      attr_accessor engagement_identifier: Array[String]?
+    end
+
+    class ListEngagementFromOpportunityTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_summaries: Array[Types::ListEngagementFromOpportunityTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_summaries: Array[Types::ListEngagementFromOpportunityTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementInvitationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::OpportunityEngagementInvitationSort,
+        ?payload_type: Array[String],
+        ?participant_type: String,
+        ?status: Array[String],
+        ?engagement_identifier: Array[String],
+        ?sender_aws_account_id: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::OpportunityEngagementInvitationSort?
+      attr_accessor payload_type: Array[String]?
+      attr_accessor participant_type: String?
+      attr_accessor status: Array[String]?
+      attr_accessor engagement_identifier: Array[String]?
+      attr_accessor sender_aws_account_id: Array[String]?
+    end
+
+    class ListEngagementInvitationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_invitation_summaries: Array[Types::EngagementInvitationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_invitation_summaries: Array[Types::EngagementInvitationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_member_list: Array[Types::EngagementMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_member_list: Array[Types::EngagementMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementResourceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?engagement_identifier: String,
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor created_by: String?
+    end
+
+    class ListEngagementResourceAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_resource_association_summaries: Array[Types::EngagementResourceAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_resource_association_summaries: Array[Types::EngagementResourceAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEngagementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?created_by: Array[String],
+        ?exclude_created_by: Array[String],
+        ?sort: Types::EngagementSort,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?engagement_identifier: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor created_by: Array[String]?
+      attr_accessor exclude_created_by: Array[String]?
+      attr_accessor sort: Types::EngagementSort?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor engagement_identifier: Array[String]?
+    end
+
+    class ListEngagementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_summary_list: Array[Types::EngagementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_summary_list: Array[Types::EngagementSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOpportunitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::OpportunitySort,
+        ?last_modified_date: Types::LastModifiedDate,
+        ?identifier: Array[String],
+        ?life_cycle_stage: Array[String],
+        ?life_cycle_review_status: Array[String],
+        ?customer_company_name: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::OpportunitySort?
+      attr_accessor last_modified_date: Types::LastModifiedDate?
+      attr_accessor identifier: Array[String]?
+      attr_accessor life_cycle_stage: Array[String]?
+      attr_accessor life_cycle_review_status: Array[String]?
+      attr_accessor customer_company_name: Array[String]?
+    end
+
+    class ListOpportunitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opportunity_summaries: Array[Types::OpportunitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opportunity_summaries: Array[Types::OpportunitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceSnapshotJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?engagement_identifier: String,
+        ?status: String,
+        ?sort: Types::SortObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor status: String?
+      attr_accessor sort: Types::SortObject?
+    end
+
+    class ListResourceSnapshotJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_snapshot_job_summaries: Array[Types::ResourceSnapshotJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_snapshot_job_summaries: Array[Types::ResourceSnapshotJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?engagement_identifier: String,
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_snapshot_template_identifier: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_snapshot_template_identifier: String?
+      attr_accessor created_by: String?
+    end
+
+    class ListResourceSnapshotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_snapshot_summaries: Array[Types::ResourceSnapshotSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_snapshot_summaries: Array[Types::ResourceSnapshotSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::SolutionSort,
+        ?status: Array[String],
+        ?identifier: Array[String],
+        ?category: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::SolutionSort?
+      attr_accessor status: Array[String]?
+      attr_accessor identifier: Array[String]?
+      attr_accessor category: Array[String]?
+    end
+
+    class ListSolutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_summaries: Array[Types::SolutionBase],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_summaries: Array[Types::SolutionBase]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTasksSortBase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module ListTasksSortName
+      START_TIME: String
+    end
+
+    class Marketing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_name: String,
+        ?source: String,
+        ?use_cases: Array[String],
+        ?channels: Array[String],
+        ?aws_funding_used: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_name: String?
+      attr_accessor source: String?
+      attr_accessor use_cases: Array[String]?
+      attr_accessor channels: Array[String]?
+      attr_accessor aws_funding_used: String?
+    end
+
+    module MarketingSource
+      MARKETING_ACTIVITY: String
+      NONE: String
+    end
+
+    class MonetaryValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor currency_code: String?
+    end
+
+    module NationalSecurity
+      YES: String
+      NO: String
+    end
+
+    class NextStepsHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor time: Time?
+    end
+
+    class OpportunityEngagementInvitationSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module OpportunityEngagementInvitationSortName
+      INVITATION_DATE: String
+    end
+
+    class OpportunityInvitationPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_contacts: Array[Types::SenderContact],
+        ?receiver_responsibilities: Array[String],
+        ?customer: Types::EngagementCustomer,
+        ?project: Types::ProjectDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_contacts: Array[Types::SenderContact]?
+      attr_accessor receiver_responsibilities: Array[String]?
+      attr_accessor customer: Types::EngagementCustomer?
+      attr_accessor project: Types::ProjectDetails?
+    end
+
+    module OpportunityOrigin
+      AWS_REFERRAL: String
+      PARTNER_REFERRAL: String
+    end
+
+    class OpportunitySort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module OpportunitySortName
+      LAST_MODIFIEDDATE: String
+      IDENTIFIER: String
+      CUSTOMER_COMPANY_NAME: String
+    end
+
+    class OpportunitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?partner_opportunity_identifier: String,
+        ?opportunity_type: String,
+        ?last_modified_date: Time,
+        ?created_date: Time,
+        ?life_cycle: Types::LifeCycleSummary,
+        ?customer: Types::CustomerSummary,
+        ?project: Types::ProjectSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor partner_opportunity_identifier: String?
+      attr_accessor opportunity_type: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor life_cycle: Types::LifeCycleSummary?
+      attr_accessor customer: Types::CustomerSummary?
+      attr_accessor project: Types::ProjectSummary?
+    end
+
+    class OpportunitySummaryView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opportunity_type: String,
+        ?lifecycle: Types::LifeCycleForView,
+        ?opportunity_team: Array[Types::Contact],
+        ?primary_needs_from_aws: Array[String],
+        ?customer: Types::Customer,
+        ?project: Types::ProjectView,
+        ?related_entity_identifiers: Types::RelatedEntityIdentifiers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opportunity_type: String?
+      attr_accessor lifecycle: Types::LifeCycleForView?
+      attr_accessor opportunity_team: Array[Types::Contact]?
+      attr_accessor primary_needs_from_aws: Array[String]?
+      attr_accessor customer: Types::Customer?
+      attr_accessor project: Types::ProjectView?
+      attr_accessor related_entity_identifiers: Types::RelatedEntityIdentifiers?
+    end
+
+    module OpportunityType
+      NET_NEW_BUSINESS: String
+      FLAT_RENEWAL: String
+      EXPANSION: String
+    end
+
+    module ParticipantType
+      SENDER: String
+      RECEIVER: String
+    end
+
+    class Payload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?opportunity_invitation: Types::OpportunityInvitationPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opportunity_invitation: Types::OpportunityInvitationPayload?
+
+      class OpportunityInvitation < Payload
+      end
+      class Unknown < Payload
+      end
+    end
+
+    module PaymentFrequency
+      MONTHLY: String
+    end
+
+    module PrimaryNeedFromAws
+      CO_SELL_ARCHITECTURAL_VALIDATION: String
+      CO_SELL_BUSINESS_PRESENTATION: String
+      CO_SELL_COMPETITIVE_INFORMATION: String
+      CO_SELL_PRICING_ASSISTANCE: String
+      CO_SELL_TECHNICAL_CONSULTATION: String
+      CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION: String
+      CO_SELL_DEAL_SUPPORT: String
+      CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX: String
+    end
+
+    class ProfileNextStepsHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor time: Time?
+    end
+
+    class Project
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_models: Array[String],
+        ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?title: String,
+        ?apn_programs: Array[String],
+        ?customer_business_problem: String,
+        ?customer_use_case: String,
+        ?related_opportunity_identifier: String,
+        ?sales_activities: Array[String],
+        ?competitor_name: String,
+        ?other_competitor_names: String,
+        ?other_solution_description: String,
+        ?additional_comments: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_models: Array[String]?
+      attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor title: String?
+      attr_accessor apn_programs: Array[String]?
+      attr_accessor customer_business_problem: String?
+      attr_accessor customer_use_case: String?
+      attr_accessor related_opportunity_identifier: String?
+      attr_accessor sales_activities: Array[String]?
+      attr_accessor competitor_name: String?
+      attr_accessor other_competitor_names: String?
+      attr_accessor other_solution_description: String?
+      attr_accessor additional_comments: String?
+    end
+
+    class ProjectDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_problem: String,
+        ?title: String,
+        ?target_completion_date: String,
+        ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_problem: String?
+      attr_accessor title: String?
+      attr_accessor target_completion_date: String?
+      attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+    end
+
+    class ProjectSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_models: Array[String],
+        ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_models: Array[String]?
+      attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+    end
+
+    class ProjectView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_models: Array[String],
+        ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?customer_use_case: String,
+        ?sales_activities: Array[String],
+        ?other_solution_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_models: Array[String]?
+      attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor customer_use_case: String?
+      attr_accessor sales_activities: Array[String]?
+      attr_accessor other_solution_description: String?
+    end
+
+    class PutSellingSystemSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_role_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_role_identifier: String?
+    end
+
+    class PutSellingSystemSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_role_arn: String?
+    end
+
+    module ReasonCode
+      INVITATION_ACCESS_DENIED: String
+      INVITATION_VALIDATION_FAILED: String
+      ENGAGEMENT_ACCESS_DENIED: String
+      OPPORTUNITY_ACCESS_DENIED: String
+      RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED: String
+      RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED: String
+      RESOURCE_SNAPSHOT_JOB_CONFLICT: String
+      ENGAGEMENT_VALIDATION_FAILED: String
+      ENGAGEMENT_CONFLICT: String
+      OPPORTUNITY_SUBMISSION_FAILED: String
+      ENGAGEMENT_INVITATION_CONFLICT: String
+      INTERNAL_ERROR: String
+      OPPORTUNITY_VALIDATION_FAILED: String
+      OPPORTUNITY_CONFLICT: String
+      RESOURCE_SNAPSHOT_ACCESS_DENIED: String
+      RESOURCE_SNAPSHOT_VALIDATION_FAILED: String
+      RESOURCE_SNAPSHOT_CONFLICT: String
+      SERVICE_QUOTA_EXCEEDED: String
+      REQUEST_THROTTLED: String
+    end
+
+    class Receiver
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?account: Types::AccountReceiver,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::AccountReceiver?
+
+      class Account < Receiver
+      end
+      class Unknown < Receiver
+      end
+    end
+
+    module ReceiverResponsibility
+      DISTRIBUTOR: String
+      RESELLER: String
+      HARDWARE_PARTNER: String
+      MANAGED_SERVICE_PROVIDER: String
+      SOFTWARE_PARTNER: String
+      SERVICES_PARTNER: String
+      TRAINING_PARTNER: String
+      CO_SELL_FACILITATOR: String
+      FACILITATOR: String
+    end
+
+    class RejectEngagementInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?rejection_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor rejection_reason: String?
+    end
+
+    class RelatedEntityIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_marketplace_offers: Array[String],
+        ?solutions: Array[String],
+        ?aws_products: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_marketplace_offers: Array[String]?
+      attr_accessor solutions: Array[String]?
+      attr_accessor aws_products: Array[String]?
+    end
+
+    module RelatedEntityType
+      SOLUTIONS: String
+      AWS_PRODUCTS: String
+      AWS_MARKETPLACE_OFFERS: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceSnapshotJobStatus
+      RUNNING: String
+      STOPPED: String
+    end
+
+    class ResourceSnapshotJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?engagement_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor engagement_id: String?
+      attr_accessor status: String?
+    end
+
+    class ResourceSnapshotPayload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?opportunity_summary: Types::OpportunitySummaryView,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opportunity_summary: Types::OpportunitySummaryView?
+
+      class OpportunitySummary < ResourceSnapshotPayload
+      end
+      class Unknown < ResourceSnapshotPayload
+      end
+    end
+
+    class ResourceSnapshotSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?revision: Integer,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_snapshot_template_name: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor revision: Integer?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_snapshot_template_name: String?
+      attr_accessor created_by: String?
+    end
+
+    module ResourceType
+      OPPORTUNITY: String
+    end
+
+    module RevenueModel
+      CONTRACT: String
+      PAY_AS_YOU_GO: String
+      SUBSCRIPTION: String
+    end
+
+    module ReviewStatus
+      PENDING_SUBMISSION: String
+      SUBMITTED: String
+      IN_REVIEW: String
+      APPROVED: String
+      REJECTED: String
+      ACTION_REQUIRED: String
+    end
+
+    module SalesActivity
+      INITIALIZED_DISCUSSIONS_WITH_CUSTOMER: String
+      CUSTOMER_HAS_SHOWN_INTEREST: String
+      CONDUCTED_POC_DEMO: String
+      IN_EVALUATION_PLANNING_STAGE: String
+      AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM: String
+      COMPLETED_ACTION_PLAN: String
+      FINALIZED_DEPLOYMENT_NEEDS: String
+      SOW_SIGNED: String
+    end
+
+    module SalesInvolvementType
+      FOR_VISIBILITY_ONLY: String
+      CO_SELL: String
+    end
+
+    class SenderContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?business_title: String,
+        ?phone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor business_title: String?
+      attr_accessor phone: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SoftwareRevenue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_model: String,
+        ?value: Types::MonetaryValue,
+        ?effective_date: String,
+        ?expiration_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_model: String?
+      attr_accessor value: Types::MonetaryValue?
+      attr_accessor effective_date: String?
+      attr_accessor expiration_date: String?
+    end
+
+    class SolutionBase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?category: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor category: String?
+      attr_accessor created_date: Time?
+    end
+
+    class SolutionSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module SolutionSortName
+      IDENTIFIER: String
+      NAME: String
+      STATUS: String
+      CATEGORY: String
+      CREATEDDATE: String
+    end
+
+    module SolutionStatus
+      ACTIVE: String
+      INACTIVE: String
+      DRAFT: String
+    end
+
+    module SortBy
+      CREATED_DATE: String
+    end
+
+    class SortObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    module Stage
+      PROSPECT: String
+      QUALIFIED: String
+      TECHNICAL_VALIDATION: String
+      BUSINESS_VALIDATION: String
+      COMMITTED: String
+      LAUNCHED: String
+      CLOSED_LOST: String
+    end
+
+    class StartEngagementByAcceptingInvitationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartEngagementByAcceptingInvitationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_invitation_id: String?
+    end
+
+    class StartEngagementFromOpportunityTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?aws_submission: Types::AwsSubmission,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor aws_submission: Types::AwsSubmission?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartEngagementFromOpportunityTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_id: String,
+        ?engagement_invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_invitation_id: String?
+    end
+
+    class StartResourceSnapshotJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_identifier: String?
+    end
+
+    class StopResourceSnapshotJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?resource_snapshot_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor resource_snapshot_job_identifier: String?
+    end
+
+    class SubmitOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?involvement_type: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor involvement_type: String?
+      attr_accessor visibility: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TaskStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateOpportunityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?primary_needs_from_aws: Array[String],
+        ?national_security: String,
+        ?partner_opportunity_identifier: String,
+        ?customer: Types::Customer,
+        ?project: Types::Project,
+        ?opportunity_type: String,
+        ?marketing: Types::Marketing,
+        ?software_revenue: Types::SoftwareRevenue,
+        ?last_modified_date: Time,
+        ?identifier: String,
+        ?life_cycle: Types::LifeCycle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor primary_needs_from_aws: Array[String]?
+      attr_accessor national_security: String?
+      attr_accessor partner_opportunity_identifier: String?
+      attr_accessor customer: Types::Customer?
+      attr_accessor project: Types::Project?
+      attr_accessor opportunity_type: String?
+      attr_accessor marketing: Types::Marketing?
+      attr_accessor software_revenue: Types::SoftwareRevenue?
+      attr_accessor last_modified_date: Time?
+      attr_accessor identifier: String?
+      attr_accessor life_cycle: Types::LifeCycle?
+    end
+
+    class UpdateOpportunityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?error_list: Array[Types::ValidationExceptionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor error_list: Array[Types::ValidationExceptionError]?
+    end
+
+    class ValidationExceptionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ValidationExceptionErrorCode
+      REQUIRED_FIELD_MISSING: String
+      INVALID_ENUM_VALUE: String
+      INVALID_STRING_FORMAT: String
+      INVALID_VALUE: String
+      TOO_MANY_VALUES: String
+      INVALID_RESOURCE_STATE: String
+      DUPLICATE_KEY_VALUE: String
+      VALUE_OUT_OF_RANGE: String
+      ACTION_NOT_PERMITTED: String
+    end
+
+    module ValidationExceptionReason
+      REQUEST_VALIDATION_FAILED: String
+      BUSINESS_VALIDATION_FAILED: String
+    end
+
+    module Visibility
+      FULL: String
+      LIMITED: String
+    end
+  end
+end

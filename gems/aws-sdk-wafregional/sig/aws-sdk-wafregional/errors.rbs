@@ -1,0 +1,67 @@
+module Aws::WAFRegional
+  module Errors
+    class WAFBadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFDisallowedNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFEntityMigrationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def migration_error_type: () -> String?
+      def migration_error_reason: () -> String?
+    end
+    class WAFInternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFInvalidAccountException < Smithy::Client::ServiceError
+    end
+    class WAFInvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFInvalidParameterException < Smithy::Client::ServiceError
+      def field: () -> String?
+      def parameter: () -> String?
+      def reason: () -> String?
+    end
+    class WAFInvalidPermissionPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFInvalidRegexPatternException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFLimitsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFNonEmptyEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFNonexistentContainerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFNonexistentItemException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFReferencedItemException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFServiceLinkedRoleErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFStaleDataException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFSubscriptionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFTagOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFTagOperationInternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WAFUnavailableEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

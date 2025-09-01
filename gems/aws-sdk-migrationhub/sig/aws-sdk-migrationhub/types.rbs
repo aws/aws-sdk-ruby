@@ -1,0 +1,852 @@
+module Aws::MigrationHub
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?application_status: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor application_status: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    module ApplicationStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+    end
+
+    class AssociateCreatedArtifactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?created_artifact: Types::CreatedArtifact,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor created_artifact: Types::CreatedArtifact?
+      attr_accessor dry_run: bool?
+    end
+
+    class AssociateCreatedArtifactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateDiscoveredResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?discovered_resource: Types::DiscoveredResource,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor discovered_resource: Types::DiscoveredResource?
+      attr_accessor dry_run: bool?
+    end
+
+    class AssociateDiscoveredResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateSourceResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?source_resource: Types::SourceResource,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor source_resource: Types::SourceResource?
+      attr_accessor dry_run: bool?
+    end
+
+    class AssociateSourceResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateProgressUpdateStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateProgressUpdateStreamResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreatedArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class DeleteProgressUpdateStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DeleteProgressUpdateStreamResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeApplicationStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class DescribeApplicationStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_status: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_status: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class DescribeMigrationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+    end
+
+    class DescribeMigrationTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_task: Types::MigrationTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_task: Types::MigrationTask?
+    end
+
+    class DisassociateCreatedArtifactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?created_artifact_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor created_artifact_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DisassociateCreatedArtifactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateDiscoveredResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?configuration_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor configuration_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DisassociateDiscoveredResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateSourceResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?source_resource_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor source_resource_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DisassociateSourceResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DiscoveredResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor description: String?
+    end
+
+    class DryRunOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HomeRegionNotSetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImportMigrationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class ImportMigrationTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationStatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_ids: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationStatesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_state_list: Array[Types::ApplicationState],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_state_list: Array[Types::ApplicationState]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCreatedArtifactsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCreatedArtifactsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?created_artifact_list: Array[Types::CreatedArtifact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor created_artifact_list: Array[Types::CreatedArtifact]?
+    end
+
+    class ListDiscoveredResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDiscoveredResourcesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?discovered_resource_list: Array[Types::DiscoveredResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor discovered_resource_list: Array[Types::DiscoveredResource]?
+    end
+
+    class ListMigrationTaskUpdatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMigrationTaskUpdatesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?migration_task_update_list: Array[Types::MigrationTaskUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor migration_task_update_list: Array[Types::MigrationTaskUpdate]?
+    end
+
+    class ListMigrationTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_name: String?
+    end
+
+    class ListMigrationTasksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?migration_task_summary_list: Array[Types::MigrationTaskSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor migration_task_summary_list: Array[Types::MigrationTaskSummary]?
+    end
+
+    class ListProgressUpdateStreamsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProgressUpdateStreamsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream_summary_list: Array[Types::ProgressUpdateStreamSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream_summary_list: Array[Types::ProgressUpdateStreamSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourceResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSourceResourcesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?source_resource_list: Array[Types::SourceResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor source_resource_list: Array[Types::SourceResource]?
+    end
+
+    class MigrationTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?task: Types::Task,
+        ?update_date_time: Time,
+        ?resource_attribute_list: Array[Types::ResourceAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor task: Types::Task?
+      attr_accessor update_date_time: Time?
+      attr_accessor resource_attribute_list: Array[Types::ResourceAttribute]?
+    end
+
+    class MigrationTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?status: String,
+        ?progress_percent: Integer,
+        ?status_detail: String,
+        ?update_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor status: String?
+      attr_accessor progress_percent: Integer?
+      attr_accessor status_detail: String?
+      attr_accessor update_date_time: Time?
+    end
+
+    class MigrationTaskUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_date_time: Time,
+        ?update_type: String,
+        ?migration_task_state: Types::Task,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_date_time: Time?
+      attr_accessor update_type: String?
+      attr_accessor migration_task_state: Types::Task?
+    end
+
+    class NotifyApplicationStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?status: String,
+        ?update_date_time: Time,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor status: String?
+      attr_accessor update_date_time: Time?
+      attr_accessor dry_run: bool?
+    end
+
+    class NotifyApplicationStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NotifyMigrationTaskStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?task: Types::Task,
+        ?update_date_time: Time,
+        ?next_update_seconds: Integer,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor task: Types::Task?
+      attr_accessor update_date_time: Time?
+      attr_accessor next_update_seconds: Integer?
+      attr_accessor dry_run: bool?
+    end
+
+    class NotifyMigrationTaskStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PolicyErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ProgressUpdateStreamSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream_name: String?
+    end
+
+    class PutResourceAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_update_stream: String,
+        ?migration_task_name: String,
+        ?resource_attribute_list: Array[Types::ResourceAttribute],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_update_stream: String?
+      attr_accessor migration_task_name: String?
+      attr_accessor resource_attribute_list: Array[Types::ResourceAttribute]?
+      attr_accessor dry_run: bool?
+    end
+
+    class PutResourceAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module ResourceAttributeType
+      IPV4_ADDRESS: String
+      IPV6_ADDRESS: String
+      MAC_ADDRESS: String
+      FQDN: String
+      VM_MANAGER_ID: String
+      VM_MANAGED_OBJECT_REFERENCE: String
+      VM_NAME: String
+      VM_PATH: String
+      BIOS_ID: String
+      MOTHERBOARD_SERIAL_NUMBER: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?status_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status_detail: String?
+    end
+
+    module Status
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class Task
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_detail: String,
+        ?progress_percent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_detail: String?
+      attr_accessor progress_percent: Integer?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UnauthorizedOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module UpdateType
+      MigrationTaskStateUpdated: String
+    end
+  end
+end

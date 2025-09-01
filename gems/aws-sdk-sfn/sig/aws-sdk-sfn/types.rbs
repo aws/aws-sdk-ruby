@@ -1,0 +1,2657 @@
+module Aws::SFN
+  module Types
+
+    class ActivityAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivityDoesNotExist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivityFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ActivityLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivityListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+        ?name: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+      attr_accessor name: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class ActivityScheduleFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ActivityScheduledEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?input: String,
+        ?input_details: Types::HistoryEventExecutionDataDetails,
+        ?timeout_in_seconds: Integer,
+        ?heartbeat_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor input: String?
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor heartbeat_in_seconds: Integer?
+    end
+
+    class ActivityStartedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_name: String?
+    end
+
+    class ActivitySucceededEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class ActivityTimedOutEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ActivityWorkerLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssignedVariablesDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor truncated: bool?
+    end
+
+    class BillingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billed_memory_used_in_mb: Integer,
+        ?billed_duration_in_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billed_memory_used_in_mb: Integer?
+      attr_accessor billed_duration_in_milliseconds: Integer?
+    end
+
+    class CloudWatchEventsExecutionDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?included: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor included: bool?
+    end
+
+    class CloudWatchLogsLogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateActivityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Array[Types::Tag],
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateActivityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class CreateStateMachineAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?name: String,
+        ?routing_configuration: Array[Types::RoutingConfigurationListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor routing_configuration: Array[Types::RoutingConfigurationListItem]?
+    end
+
+    class CreateStateMachineAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class CreateStateMachineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?definition: String,
+        ?role_arn: String,
+        ?type: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?tags: Array[Types::Tag],
+        ?tracing_configuration: Types::TracingConfiguration,
+        ?publish: bool,
+        ?version_description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor definition: String?
+      attr_accessor role_arn: String?
+      attr_accessor type: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor tracing_configuration: Types::TracingConfiguration?
+      attr_accessor publish: bool?
+      attr_accessor version_description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateStateMachineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?creation_date: Time,
+        ?state_machine_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor state_machine_version_arn: String?
+    end
+
+    class DeleteActivityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+    end
+
+    class DeleteActivityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStateMachineAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+    end
+
+    class DeleteStateMachineAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStateMachineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+    end
+
+    class DeleteStateMachineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStateMachineVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_version_arn: String?
+    end
+
+    class DeleteStateMachineVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeActivityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+    end
+
+    class DescribeActivityOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+        ?name: String,
+        ?creation_date: Time,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+      attr_accessor name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class DescribeExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?included_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor included_data: String?
+    end
+
+    class DescribeExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?state_machine_arn: String,
+        ?name: String,
+        ?status: String,
+        ?start_date: Time,
+        ?stop_date: Time,
+        ?input: String,
+        ?input_details: Types::CloudWatchEventsExecutionDataDetails,
+        ?output: String,
+        ?output_details: Types::CloudWatchEventsExecutionDataDetails,
+        ?trace_header: String,
+        ?map_run_arn: String,
+        ?error: String,
+        ?cause: String,
+        ?state_machine_version_arn: String,
+        ?state_machine_alias_arn: String,
+        ?redrive_count: Integer,
+        ?redrive_date: Time,
+        ?redrive_status: String,
+        ?redrive_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor start_date: Time?
+      attr_accessor stop_date: Time?
+      attr_accessor input: String?
+      attr_accessor input_details: Types::CloudWatchEventsExecutionDataDetails?
+      attr_accessor output: String?
+      attr_accessor output_details: Types::CloudWatchEventsExecutionDataDetails?
+      attr_accessor trace_header: String?
+      attr_accessor map_run_arn: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+      attr_accessor state_machine_version_arn: String?
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor redrive_count: Integer?
+      attr_accessor redrive_date: Time?
+      attr_accessor redrive_status: String?
+      attr_accessor redrive_status_reason: String?
+    end
+
+    class DescribeMapRunInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_run_arn: String?
+    end
+
+    class DescribeMapRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_run_arn: String,
+        ?execution_arn: String,
+        ?status: String,
+        ?start_date: Time,
+        ?stop_date: Time,
+        ?max_concurrency: Integer,
+        ?tolerated_failure_percentage: Float,
+        ?tolerated_failure_count: Integer,
+        ?item_counts: Types::MapRunItemCounts,
+        ?execution_counts: Types::MapRunExecutionCounts,
+        ?redrive_count: Integer,
+        ?redrive_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_run_arn: String?
+      attr_accessor execution_arn: String?
+      attr_accessor status: String?
+      attr_accessor start_date: Time?
+      attr_accessor stop_date: Time?
+      attr_accessor max_concurrency: Integer?
+      attr_accessor tolerated_failure_percentage: Float?
+      attr_accessor tolerated_failure_count: Integer?
+      attr_accessor item_counts: Types::MapRunItemCounts?
+      attr_accessor execution_counts: Types::MapRunExecutionCounts?
+      attr_accessor redrive_count: Integer?
+      attr_accessor redrive_date: Time?
+    end
+
+    class DescribeStateMachineAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+    end
+
+    class DescribeStateMachineAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+        ?name: String,
+        ?description: String,
+        ?routing_configuration: Array[Types::RoutingConfigurationListItem],
+        ?creation_date: Time,
+        ?update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor routing_configuration: Array[Types::RoutingConfigurationListItem]?
+      attr_accessor creation_date: Time?
+      attr_accessor update_date: Time?
+    end
+
+    class DescribeStateMachineForExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?included_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor included_data: String?
+    end
+
+    class DescribeStateMachineForExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?name: String,
+        ?definition: String,
+        ?role_arn: String,
+        ?update_date: Time,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?tracing_configuration: Types::TracingConfiguration,
+        ?map_run_arn: String,
+        ?label: String,
+        ?revision_id: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?variable_references: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor definition: String?
+      attr_accessor role_arn: String?
+      attr_accessor update_date: Time?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor tracing_configuration: Types::TracingConfiguration?
+      attr_accessor map_run_arn: String?
+      attr_accessor label: String?
+      attr_accessor revision_id: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor variable_references: Hash[String, Array[String]]?
+    end
+
+    class DescribeStateMachineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?included_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor included_data: String?
+    end
+
+    class DescribeStateMachineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?name: String,
+        ?status: String,
+        ?definition: String,
+        ?role_arn: String,
+        ?type: String,
+        ?creation_date: Time,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?tracing_configuration: Types::TracingConfiguration,
+        ?label: String,
+        ?revision_id: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?variable_references: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor definition: String?
+      attr_accessor role_arn: String?
+      attr_accessor type: String?
+      attr_accessor creation_date: Time?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor tracing_configuration: Types::TracingConfiguration?
+      attr_accessor label: String?
+      attr_accessor revision_id: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor variable_references: Hash[String, Array[String]]?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?kms_data_key_reuse_period_seconds: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_data_key_reuse_period_seconds: Integer?
+      attr_accessor type: String?
+    end
+
+    module EncryptionType
+      AWS_OWNED_KEY: String
+      CUSTOMER_MANAGED_KMS_KEY: String
+    end
+
+    class EvaluationFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+        ?location: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+      attr_accessor location: String?
+      attr_accessor state: String?
+    end
+
+    class ExecutionAbortedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ExecutionAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExecutionDoesNotExist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExecutionFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ExecutionLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExecutionListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?state_machine_arn: String,
+        ?name: String,
+        ?status: String,
+        ?start_date: Time,
+        ?stop_date: Time,
+        ?map_run_arn: String,
+        ?item_count: Integer,
+        ?state_machine_version_arn: String,
+        ?state_machine_alias_arn: String,
+        ?redrive_count: Integer,
+        ?redrive_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor start_date: Time?
+      attr_accessor stop_date: Time?
+      attr_accessor map_run_arn: String?
+      attr_accessor item_count: Integer?
+      attr_accessor state_machine_version_arn: String?
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor redrive_count: Integer?
+      attr_accessor redrive_date: Time?
+    end
+
+    class ExecutionNotRedrivable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ExecutionRedriveFilter
+      REDRIVEN: String
+      NOT_REDRIVEN: String
+    end
+
+    module ExecutionRedriveStatus
+      REDRIVABLE: String
+      NOT_REDRIVABLE: String
+      REDRIVABLE_BY_MAP_RUN: String
+    end
+
+    class ExecutionRedrivenEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redrive_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redrive_count: Integer?
+    end
+
+    class ExecutionStartedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?input_details: Types::HistoryEventExecutionDataDetails,
+        ?role_arn: String,
+        ?state_machine_alias_arn: String,
+        ?state_machine_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails?
+      attr_accessor role_arn: String?
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor state_machine_version_arn: String?
+    end
+
+    module ExecutionStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+      ABORTED: String
+      PENDING_REDRIVE: String
+    end
+
+    class ExecutionSucceededEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class ExecutionTimedOutEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class GetActivityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_arn: String,
+        ?worker_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_arn: String?
+      attr_accessor worker_name: String?
+    end
+
+    class GetActivityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?input: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor input: String?
+    end
+
+    class GetExecutionHistoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?max_results: Integer,
+        ?reverse_order: bool,
+        ?next_token: String,
+        ?include_execution_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor reverse_order: bool?
+      attr_accessor next_token: String?
+      attr_accessor include_execution_data: bool?
+    end
+
+    class GetExecutionHistoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::HistoryEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::HistoryEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class HistoryEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?type: String,
+        ?id: Integer,
+        ?previous_event_id: Integer,
+        ?activity_failed_event_details: Types::ActivityFailedEventDetails,
+        ?activity_schedule_failed_event_details: Types::ActivityScheduleFailedEventDetails,
+        ?activity_scheduled_event_details: Types::ActivityScheduledEventDetails,
+        ?activity_started_event_details: Types::ActivityStartedEventDetails,
+        ?activity_succeeded_event_details: Types::ActivitySucceededEventDetails,
+        ?activity_timed_out_event_details: Types::ActivityTimedOutEventDetails,
+        ?task_failed_event_details: Types::TaskFailedEventDetails,
+        ?task_scheduled_event_details: Types::TaskScheduledEventDetails,
+        ?task_start_failed_event_details: Types::TaskStartFailedEventDetails,
+        ?task_started_event_details: Types::TaskStartedEventDetails,
+        ?task_submit_failed_event_details: Types::TaskSubmitFailedEventDetails,
+        ?task_submitted_event_details: Types::TaskSubmittedEventDetails,
+        ?task_succeeded_event_details: Types::TaskSucceededEventDetails,
+        ?task_timed_out_event_details: Types::TaskTimedOutEventDetails,
+        ?execution_failed_event_details: Types::ExecutionFailedEventDetails,
+        ?execution_started_event_details: Types::ExecutionStartedEventDetails,
+        ?execution_succeeded_event_details: Types::ExecutionSucceededEventDetails,
+        ?execution_aborted_event_details: Types::ExecutionAbortedEventDetails,
+        ?execution_timed_out_event_details: Types::ExecutionTimedOutEventDetails,
+        ?execution_redriven_event_details: Types::ExecutionRedrivenEventDetails,
+        ?map_state_started_event_details: Types::MapStateStartedEventDetails,
+        ?map_iteration_started_event_details: Types::MapIterationEventDetails,
+        ?map_iteration_succeeded_event_details: Types::MapIterationEventDetails,
+        ?map_iteration_failed_event_details: Types::MapIterationEventDetails,
+        ?map_iteration_aborted_event_details: Types::MapIterationEventDetails,
+        ?lambda_function_failed_event_details: Types::LambdaFunctionFailedEventDetails,
+        ?lambda_function_schedule_failed_event_details: Types::LambdaFunctionScheduleFailedEventDetails,
+        ?lambda_function_scheduled_event_details: Types::LambdaFunctionScheduledEventDetails,
+        ?lambda_function_start_failed_event_details: Types::LambdaFunctionStartFailedEventDetails,
+        ?lambda_function_succeeded_event_details: Types::LambdaFunctionSucceededEventDetails,
+        ?lambda_function_timed_out_event_details: Types::LambdaFunctionTimedOutEventDetails,
+        ?state_entered_event_details: Types::StateEnteredEventDetails,
+        ?state_exited_event_details: Types::StateExitedEventDetails,
+        ?map_run_started_event_details: Types::MapRunStartedEventDetails,
+        ?map_run_failed_event_details: Types::MapRunFailedEventDetails,
+        ?map_run_redriven_event_details: Types::MapRunRedrivenEventDetails,
+        ?evaluation_failed_event_details: Types::EvaluationFailedEventDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor type: String?
+      attr_accessor id: Integer?
+      attr_accessor previous_event_id: Integer?
+      attr_accessor activity_failed_event_details: Types::ActivityFailedEventDetails?
+      attr_accessor activity_schedule_failed_event_details: Types::ActivityScheduleFailedEventDetails?
+      attr_accessor activity_scheduled_event_details: Types::ActivityScheduledEventDetails?
+      attr_accessor activity_started_event_details: Types::ActivityStartedEventDetails?
+      attr_accessor activity_succeeded_event_details: Types::ActivitySucceededEventDetails?
+      attr_accessor activity_timed_out_event_details: Types::ActivityTimedOutEventDetails?
+      attr_accessor task_failed_event_details: Types::TaskFailedEventDetails?
+      attr_accessor task_scheduled_event_details: Types::TaskScheduledEventDetails?
+      attr_accessor task_start_failed_event_details: Types::TaskStartFailedEventDetails?
+      attr_accessor task_started_event_details: Types::TaskStartedEventDetails?
+      attr_accessor task_submit_failed_event_details: Types::TaskSubmitFailedEventDetails?
+      attr_accessor task_submitted_event_details: Types::TaskSubmittedEventDetails?
+      attr_accessor task_succeeded_event_details: Types::TaskSucceededEventDetails?
+      attr_accessor task_timed_out_event_details: Types::TaskTimedOutEventDetails?
+      attr_accessor execution_failed_event_details: Types::ExecutionFailedEventDetails?
+      attr_accessor execution_started_event_details: Types::ExecutionStartedEventDetails?
+      attr_accessor execution_succeeded_event_details: Types::ExecutionSucceededEventDetails?
+      attr_accessor execution_aborted_event_details: Types::ExecutionAbortedEventDetails?
+      attr_accessor execution_timed_out_event_details: Types::ExecutionTimedOutEventDetails?
+      attr_accessor execution_redriven_event_details: Types::ExecutionRedrivenEventDetails?
+      attr_accessor map_state_started_event_details: Types::MapStateStartedEventDetails?
+      attr_accessor map_iteration_started_event_details: Types::MapIterationEventDetails?
+      attr_accessor map_iteration_succeeded_event_details: Types::MapIterationEventDetails?
+      attr_accessor map_iteration_failed_event_details: Types::MapIterationEventDetails?
+      attr_accessor map_iteration_aborted_event_details: Types::MapIterationEventDetails?
+      attr_accessor lambda_function_failed_event_details: Types::LambdaFunctionFailedEventDetails?
+      attr_accessor lambda_function_schedule_failed_event_details: Types::LambdaFunctionScheduleFailedEventDetails?
+      attr_accessor lambda_function_scheduled_event_details: Types::LambdaFunctionScheduledEventDetails?
+      attr_accessor lambda_function_start_failed_event_details: Types::LambdaFunctionStartFailedEventDetails?
+      attr_accessor lambda_function_succeeded_event_details: Types::LambdaFunctionSucceededEventDetails?
+      attr_accessor lambda_function_timed_out_event_details: Types::LambdaFunctionTimedOutEventDetails?
+      attr_accessor state_entered_event_details: Types::StateEnteredEventDetails?
+      attr_accessor state_exited_event_details: Types::StateExitedEventDetails?
+      attr_accessor map_run_started_event_details: Types::MapRunStartedEventDetails?
+      attr_accessor map_run_failed_event_details: Types::MapRunFailedEventDetails?
+      attr_accessor map_run_redriven_event_details: Types::MapRunRedrivenEventDetails?
+      attr_accessor evaluation_failed_event_details: Types::EvaluationFailedEventDetails?
+    end
+
+    class HistoryEventExecutionDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor truncated: bool?
+    end
+
+    module HistoryEventType
+      ActivityFailed: String
+      ActivityScheduled: String
+      ActivityScheduleFailed: String
+      ActivityStarted: String
+      ActivitySucceeded: String
+      ActivityTimedOut: String
+      ChoiceStateEntered: String
+      ChoiceStateExited: String
+      ExecutionAborted: String
+      ExecutionFailed: String
+      ExecutionStarted: String
+      ExecutionSucceeded: String
+      ExecutionTimedOut: String
+      FailStateEntered: String
+      LambdaFunctionFailed: String
+      LambdaFunctionScheduled: String
+      LambdaFunctionScheduleFailed: String
+      LambdaFunctionStarted: String
+      LambdaFunctionStartFailed: String
+      LambdaFunctionSucceeded: String
+      LambdaFunctionTimedOut: String
+      MapIterationAborted: String
+      MapIterationFailed: String
+      MapIterationStarted: String
+      MapIterationSucceeded: String
+      MapStateAborted: String
+      MapStateEntered: String
+      MapStateExited: String
+      MapStateFailed: String
+      MapStateStarted: String
+      MapStateSucceeded: String
+      ParallelStateAborted: String
+      ParallelStateEntered: String
+      ParallelStateExited: String
+      ParallelStateFailed: String
+      ParallelStateStarted: String
+      ParallelStateSucceeded: String
+      PassStateEntered: String
+      PassStateExited: String
+      SucceedStateEntered: String
+      SucceedStateExited: String
+      TaskFailed: String
+      TaskScheduled: String
+      TaskStarted: String
+      TaskStartFailed: String
+      TaskStateAborted: String
+      TaskStateEntered: String
+      TaskStateExited: String
+      TaskSubmitFailed: String
+      TaskSubmitted: String
+      TaskSucceeded: String
+      TaskTimedOut: String
+      WaitStateAborted: String
+      WaitStateEntered: String
+      WaitStateExited: String
+      MapRunAborted: String
+      MapRunFailed: String
+      MapRunStarted: String
+      MapRunSucceeded: String
+      ExecutionRedriven: String
+      MapRunRedriven: String
+      EvaluationFailed: String
+    end
+
+    module IncludedData
+      ALL_DATA: String
+      METADATA_ONLY: String
+    end
+
+    class InspectionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?after_arguments: String,
+        ?after_input_path: String,
+        ?after_parameters: String,
+        ?result: String,
+        ?after_result_selector: String,
+        ?after_result_path: String,
+        ?request: Types::InspectionDataRequest,
+        ?response: Types::InspectionDataResponse,
+        ?variables: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor after_arguments: String?
+      attr_accessor after_input_path: String?
+      attr_accessor after_parameters: String?
+      attr_accessor result: String?
+      attr_accessor after_result_selector: String?
+      attr_accessor after_result_path: String?
+      attr_accessor request: Types::InspectionDataRequest?
+      attr_accessor response: Types::InspectionDataResponse?
+      attr_accessor variables: String?
+    end
+
+    class InspectionDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?method: String,
+        ?url: String,
+        ?headers: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor method: String?
+      attr_accessor url: String?
+      attr_accessor headers: String?
+      attr_accessor body: String?
+    end
+
+    class InspectionDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?status_code: String,
+        ?status_message: String,
+        ?headers: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor headers: String?
+      attr_accessor body: String?
+    end
+
+    module InspectionLevel
+      INFO: String
+      DEBUG: String
+      TRACE: String
+    end
+
+    class InvalidArn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTracingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_state: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_state: String?
+      attr_accessor message: String?
+    end
+
+    module KmsKeyState
+      DISABLED: String
+      PENDING_DELETION: String
+      PENDING_IMPORT: String
+      UNAVAILABLE: String
+      CREATING: String
+    end
+
+    class KmsThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaFunctionFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class LambdaFunctionScheduleFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class LambdaFunctionScheduledEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?input: String,
+        ?input_details: Types::HistoryEventExecutionDataDetails,
+        ?timeout_in_seconds: Integer,
+        ?task_credentials: Types::TaskCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor input: String?
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor task_credentials: Types::TaskCredentials?
+    end
+
+    class LambdaFunctionStartFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class LambdaFunctionSucceededEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class LambdaFunctionTimedOutEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class ListActivitiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListActivitiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::ActivityListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::ActivityListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?status_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?map_run_arn: String,
+        ?redrive_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor status_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor map_run_arn: String?
+      attr_accessor redrive_filter: String?
+    end
+
+    class ListExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?executions: Array[Types::ExecutionListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor executions: Array[Types::ExecutionListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMapRunsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMapRunsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_runs: Array[Types::MapRunListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_runs: Array[Types::MapRunListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStateMachineAliasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStateMachineAliasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_aliases: Array[Types::StateMachineAliasListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_aliases: Array[Types::StateMachineAliasListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStateMachineVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStateMachineVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_versions: Array[Types::StateMachineVersionListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_versions: Array[Types::StateMachineVersionListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStateMachinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListStateMachinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machines: Array[Types::StateMachineListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machines: Array[Types::StateMachineListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LogDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup?
+    end
+
+    module LogLevel
+      ALL: String
+      ERROR: String
+      FATAL: String
+      OFF: String
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level: String,
+        ?include_execution_data: bool,
+        ?destinations: Array[Types::LogDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level: String?
+      attr_accessor include_execution_data: bool?
+      attr_accessor destinations: Array[Types::LogDestination]?
+    end
+
+    class MapIterationEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor index: Integer?
+    end
+
+    class MapRunExecutionCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?running: Integer,
+        ?succeeded: Integer,
+        ?failed: Integer,
+        ?timed_out: Integer,
+        ?aborted: Integer,
+        ?total: Integer,
+        ?results_written: Integer,
+        ?failures_not_redrivable: Integer,
+        ?pending_redrive: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor running: Integer?
+      attr_accessor succeeded: Integer?
+      attr_accessor failed: Integer?
+      attr_accessor timed_out: Integer?
+      attr_accessor aborted: Integer?
+      attr_accessor total: Integer?
+      attr_accessor results_written: Integer?
+      attr_accessor failures_not_redrivable: Integer?
+      attr_accessor pending_redrive: Integer?
+    end
+
+    class MapRunFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class MapRunItemCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?running: Integer,
+        ?succeeded: Integer,
+        ?failed: Integer,
+        ?timed_out: Integer,
+        ?aborted: Integer,
+        ?total: Integer,
+        ?results_written: Integer,
+        ?failures_not_redrivable: Integer,
+        ?pending_redrive: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor running: Integer?
+      attr_accessor succeeded: Integer?
+      attr_accessor failed: Integer?
+      attr_accessor timed_out: Integer?
+      attr_accessor aborted: Integer?
+      attr_accessor total: Integer?
+      attr_accessor results_written: Integer?
+      attr_accessor failures_not_redrivable: Integer?
+      attr_accessor pending_redrive: Integer?
+    end
+
+    class MapRunListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?map_run_arn: String,
+        ?state_machine_arn: String,
+        ?start_date: Time,
+        ?stop_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor map_run_arn: String?
+      attr_accessor state_machine_arn: String?
+      attr_accessor start_date: Time?
+      attr_accessor stop_date: Time?
+    end
+
+    class MapRunRedrivenEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_run_arn: String,
+        ?redrive_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_run_arn: String?
+      attr_accessor redrive_count: Integer?
+    end
+
+    class MapRunStartedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_run_arn: String?
+    end
+
+    module MapRunStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      ABORTED: String
+    end
+
+    class MapStateStartedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor length: Integer?
+    end
+
+    class MissingRequiredParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PublishStateMachineVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?revision_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor description: String?
+    end
+
+    class PublishStateMachineVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?state_machine_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor state_machine_version_arn: String?
+    end
+
+    class RedriveExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class RedriveExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redrive_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redrive_date: Time?
+    end
+
+    class ResourceNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class RoutingConfigurationListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_version_arn: String,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_version_arn: String?
+      attr_accessor weight: Integer?
+    end
+
+    class SendTaskFailureInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class SendTaskFailureOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SendTaskHeartbeatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+    end
+
+    class SendTaskHeartbeatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SendTaskSuccessInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_token: String,
+        ?output: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_token: String?
+      attr_accessor output: String?
+    end
+
+    class SendTaskSuccessOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?name: String,
+        ?input: String,
+        ?trace_header: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor input: String?
+      attr_accessor trace_header: String?
+    end
+
+    class StartExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?start_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor start_date: Time?
+    end
+
+    class StartSyncExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?name: String,
+        ?input: String,
+        ?trace_header: String,
+        ?included_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor input: String?
+      attr_accessor trace_header: String?
+      attr_accessor included_data: String?
+    end
+
+    class StartSyncExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?state_machine_arn: String,
+        ?name: String,
+        ?start_date: Time,
+        ?stop_date: Time,
+        ?status: String,
+        ?error: String,
+        ?cause: String,
+        ?input: String,
+        ?input_details: Types::CloudWatchEventsExecutionDataDetails,
+        ?output: String,
+        ?output_details: Types::CloudWatchEventsExecutionDataDetails,
+        ?trace_header: String,
+        ?billing_details: Types::BillingDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor start_date: Time?
+      attr_accessor stop_date: Time?
+      attr_accessor status: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+      attr_accessor input: String?
+      attr_accessor input_details: Types::CloudWatchEventsExecutionDataDetails?
+      attr_accessor output: String?
+      attr_accessor output_details: Types::CloudWatchEventsExecutionDataDetails?
+      attr_accessor trace_header: String?
+      attr_accessor billing_details: Types::BillingDetails?
+    end
+
+    class StateEnteredEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?input: String,
+        ?input_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor input: String?
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class StateExitedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+        ?assigned_variables: Hash[String, String],
+        ?assigned_variables_details: Types::AssignedVariablesDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+      attr_accessor assigned_variables: Hash[String, String]?
+      attr_accessor assigned_variables_details: Types::AssignedVariablesDetails?
+    end
+
+    class StateMachineAliasListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class StateMachineAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateMachineDeleting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateMachineDoesNotExist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateMachineLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateMachineListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?name: String,
+        ?type: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor creation_date: Time?
+    end
+
+    module StateMachineStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    module StateMachineType
+      STANDARD: String
+      EXPRESS: String
+    end
+
+    class StateMachineTypeNotSupported
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StateMachineVersionListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_version_arn: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_version_arn: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class StopExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_arn: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_arn: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class StopExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stop_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stop_date: Time?
+    end
+
+    module SyncExecutionStatus
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class TaskDoesNotExist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TaskFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class TaskScheduledEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?region: String,
+        ?parameters: String,
+        ?timeout_in_seconds: Integer,
+        ?heartbeat_in_seconds: Integer,
+        ?task_credentials: Types::TaskCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor region: String?
+      attr_accessor parameters: String?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor heartbeat_in_seconds: Integer?
+      attr_accessor task_credentials: Types::TaskCredentials?
+    end
+
+    class TaskStartFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class TaskStartedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+    end
+
+    class TaskSubmitFailedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class TaskSubmittedEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class TaskSucceededEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?output: String,
+        ?output_details: Types::HistoryEventExecutionDataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor output: String?
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails?
+    end
+
+    class TaskTimedOut
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TaskTimedOutEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    module TestExecutionStatus
+      SUCCEEDED: String
+      FAILED: String
+      RETRIABLE: String
+      CAUGHT_ERROR: String
+    end
+
+    class TestStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: String,
+        ?role_arn: String,
+        ?input: String,
+        ?inspection_level: String,
+        ?reveal_secrets: bool,
+        ?variables: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: String?
+      attr_accessor role_arn: String?
+      attr_accessor input: String?
+      attr_accessor inspection_level: String?
+      attr_accessor reveal_secrets: bool?
+      attr_accessor variables: String?
+    end
+
+    class TestStateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: String,
+        ?error: String,
+        ?cause: String,
+        ?inspection_data: Types::InspectionData,
+        ?next_state: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: String?
+      attr_accessor error: String?
+      attr_accessor cause: String?
+      attr_accessor inspection_data: Types::InspectionData?
+      attr_accessor next_state: String?
+      attr_accessor status: String?
+    end
+
+    class TooManyTags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class TracingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMapRunInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_run_arn: String,
+        ?max_concurrency: Integer,
+        ?tolerated_failure_percentage: Float,
+        ?tolerated_failure_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_run_arn: String?
+      attr_accessor max_concurrency: Integer?
+      attr_accessor tolerated_failure_percentage: Float?
+      attr_accessor tolerated_failure_count: Integer?
+    end
+
+    class UpdateMapRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStateMachineAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_alias_arn: String,
+        ?description: String,
+        ?routing_configuration: Array[Types::RoutingConfigurationListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_alias_arn: String?
+      attr_accessor description: String?
+      attr_accessor routing_configuration: Array[Types::RoutingConfigurationListItem]?
+    end
+
+    class UpdateStateMachineAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_date: Time?
+    end
+
+    class UpdateStateMachineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_machine_arn: String,
+        ?definition: String,
+        ?role_arn: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?tracing_configuration: Types::TracingConfiguration,
+        ?publish: bool,
+        ?version_description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_machine_arn: String?
+      attr_accessor definition: String?
+      attr_accessor role_arn: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor tracing_configuration: Types::TracingConfiguration?
+      attr_accessor publish: bool?
+      attr_accessor version_description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateStateMachineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_date: Time,
+        ?revision_id: String,
+        ?state_machine_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_date: Time?
+      attr_accessor revision_id: String?
+      attr_accessor state_machine_version_arn: String?
+    end
+
+    class ValidateStateMachineDefinitionDiagnostic
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severity: String,
+        ?code: String,
+        ?message: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severity: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor location: String?
+    end
+
+    class ValidateStateMachineDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: String,
+        ?type: String,
+        ?severity: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: String?
+      attr_accessor type: String?
+      attr_accessor severity: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ValidateStateMachineDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?diagnostics: Array[Types::ValidateStateMachineDefinitionDiagnostic],
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor diagnostics: Array[Types::ValidateStateMachineDefinitionDiagnostic]?
+      attr_accessor truncated: bool?
+    end
+
+    module ValidateStateMachineDefinitionResultCode
+      OK: String
+      FAIL: String
+    end
+
+    module ValidateStateMachineDefinitionSeverity
+      ERROR: String
+      WARNING: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      API_DOES_NOT_SUPPORT_LABELED_ARNS: String
+      MISSING_REQUIRED_PARAMETER: String
+      CANNOT_UPDATE_COMPLETED_MAP_RUN: String
+      INVALID_ROUTING_CONFIGURATION: String
+    end
+  end
+end

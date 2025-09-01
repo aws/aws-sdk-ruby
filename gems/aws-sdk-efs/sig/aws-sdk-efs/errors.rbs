@@ -1,0 +1,134 @@
+module Aws::EFS
+  module Errors
+    class AccessPointAlreadyExists < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+      def access_point_id: () -> String?
+    end
+    class AccessPointLimitExceeded < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class AccessPointNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class AvailabilityZonesMismatch < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class BadRequest < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class DependencyTimeout < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class FileSystemAlreadyExists < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+      def file_system_id: () -> String?
+    end
+    class FileSystemInUse < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class FileSystemLimitExceeded < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class FileSystemNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class IncorrectFileSystemLifeCycleState < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class IncorrectMountTargetState < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class InsufficientThroughputCapacity < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class InvalidPolicyException < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class IpAddressInUse < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class MountTargetConflict < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class MountTargetNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class NetworkInterfaceLimitExceeded < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class NoFreeAddressesInSubnet < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class PolicyNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ReplicationAlreadyExists < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ReplicationNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class SecurityGroupLimitExceeded < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class SecurityGroupNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class SubnetNotFound < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ThroughputLimitExceeded < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class TooManyRequests < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class UnsupportedAvailabilityZone < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def error_code: () -> String?
+      def message: () -> String?
+    end
+  end
+end

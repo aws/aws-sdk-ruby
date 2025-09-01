@@ -1,0 +1,55 @@
+module Aws::ServiceDiscovery
+  module Errors
+    class CustomHealthNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateRequest < Smithy::Client::ServiceError
+      def message: () -> String?
+      def duplicate_operation_id: () -> String?
+    end
+    class InstanceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NamespaceAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+      def creator_request_id: () -> String?
+      def namespace_id: () -> String?
+    end
+    class NamespaceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceAlreadyExists < Smithy::Client::ServiceError
+      def message: () -> String?
+      def creator_request_id: () -> String?
+      def service_id: () -> String?
+    end
+    class ServiceAttributesLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+  end
+end

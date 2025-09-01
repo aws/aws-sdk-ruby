@@ -1,0 +1,293 @@
+module Aws::S3Outposts
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?subnet_id: String,
+        ?security_group_id: String,
+        ?access_type: String,
+        ?customer_owned_ipv4_pool: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor security_group_id: String?
+      attr_accessor access_type: String?
+      attr_accessor customer_owned_ipv4_pool: String?
+    end
+
+    class CreateEndpointResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+    end
+
+    class DeleteEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor outpost_id: String?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+        ?outposts_id: String,
+        ?cidr_block: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?vpc_id: String,
+        ?subnet_id: String,
+        ?security_group_id: String,
+        ?access_type: String,
+        ?customer_owned_ipv4_pool: String,
+        ?failed_reason: Types::FailedReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+      attr_accessor outposts_id: String?
+      attr_accessor cidr_block: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor security_group_id: String?
+      attr_accessor access_type: String?
+      attr_accessor customer_owned_ipv4_pool: String?
+      attr_accessor failed_reason: Types::FailedReason?
+    end
+
+    module EndpointAccessType
+      PRIVATE: String
+      CUSTOMER_OWNED_IP: String
+    end
+
+    module EndpointStatus
+      PENDING: String
+      AVAILABLE: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+    end
+
+    class FailedReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEndpointsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOutpostsWithS3Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOutpostsWithS3Result
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outposts: Array[Types::Outpost],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outposts: Array[Types::Outpost]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSharedEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor outpost_id: String?
+    end
+
+    class ListSharedEndpointsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_id: String?
+    end
+
+    class Outpost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_arn: String,
+        ?s3_outpost_arn: String,
+        ?outpost_id: String,
+        ?owner_id: String,
+        ?capacity_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_arn: String?
+      attr_accessor s3_outpost_arn: String?
+      attr_accessor outpost_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor capacity_in_bytes: Integer?
+    end
+
+    class OutpostOfflineException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

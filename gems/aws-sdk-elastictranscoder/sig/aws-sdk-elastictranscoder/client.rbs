@@ -1,0 +1,553 @@
+module Aws::ElasticTranscoder
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ElasticTranscoder::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelJobResponse
+      include Smithy::Client::_Response[Types::CancelJobResponse]
+    end
+    def cancel_job: (
+      ?id: String
+    ) -> _CancelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobResponse
+
+    interface _CreateJobResponse
+      include Smithy::Client::_Response[Types::CreateJobResponse]
+      def job: () -> Types::Job?
+    end
+    def create_job: (
+      ?pipeline_id: String,
+      ?input: {
+        key: String,
+        frame_rate: String,
+        resolution: String,
+        aspect_ratio: String,
+        interlaced: String,
+        container: String,
+        encryption: {
+          mode: String,
+          key: String,
+          key_md5: untyped,
+          initialization_vector: String
+        },
+        time_span: {
+          start_time: String,
+          duration: untyped
+        },
+        input_captions: {
+          merge_policy: String,
+          caption_sources: Array[
+            {
+              key: untyped,
+              language: String,
+              time_offset: String,
+              label: String,
+              encryption: untyped
+            }
+          ]
+        },
+        detected_properties: {
+          width: Integer,
+          height: untyped,
+          frame_rate: String,
+          file_size: Integer,
+          duration_millis: untyped
+        }
+      },
+      ?inputs: Array[
+        {
+          key: String,
+          frame_rate: String,
+          resolution: String,
+          aspect_ratio: String,
+          interlaced: String,
+          container: String,
+          encryption: {
+            mode: String,
+            key: String,
+            key_md5: untyped,
+            initialization_vector: String
+          },
+          time_span: {
+            start_time: String,
+            duration: untyped
+          },
+          input_captions: {
+            merge_policy: String,
+            caption_sources: Array[
+              {
+                key: untyped,
+                language: String,
+                time_offset: String,
+                label: String,
+                encryption: untyped
+              }
+            ]
+          },
+          detected_properties: {
+            width: Integer,
+            height: untyped,
+            frame_rate: String,
+            file_size: Integer,
+            duration_millis: untyped
+          }
+        }
+      ],
+      ?output: {
+        key: String,
+        thumbnail_pattern: String,
+        thumbnail_encryption: {
+          mode: String,
+          key: String,
+          key_md5: untyped,
+          initialization_vector: String
+        },
+        rotate: String,
+        preset_id: String,
+        segment_duration: String,
+        watermarks: Array[
+          {
+            preset_watermark_id: String,
+            input_key: String,
+            encryption: untyped
+          }
+        ],
+        album_art: {
+          merge_policy: String,
+          artwork: Array[
+            {
+              input_key: untyped,
+              max_width: String,
+              max_height: untyped,
+              sizing_policy: String,
+              padding_policy: String,
+              album_art_format: String,
+              encryption: untyped
+            }
+          ]
+        },
+        composition: Array[
+          {
+            time_span: {
+              start_time: String,
+              duration: untyped
+            }
+          }
+        ],
+        captions: {
+          merge_policy: String,
+          caption_sources: Array[
+            {
+              key: String,
+              language: untyped,
+              time_offset: String,
+              label: String,
+              encryption: untyped
+            }
+          ],
+          caption_formats: Array[
+            {
+              format: String,
+              pattern: String,
+              encryption: untyped
+            }
+          ]
+        },
+        encryption: untyped
+      },
+      ?outputs: Array[
+        {
+          key: String,
+          thumbnail_pattern: String,
+          thumbnail_encryption: {
+            mode: String,
+            key: String,
+            key_md5: untyped,
+            initialization_vector: String
+          },
+          rotate: String,
+          preset_id: String,
+          segment_duration: String,
+          watermarks: Array[
+            {
+              preset_watermark_id: String,
+              input_key: String,
+              encryption: untyped
+            }
+          ],
+          album_art: {
+            merge_policy: String,
+            artwork: Array[
+              {
+                input_key: untyped,
+                max_width: String,
+                max_height: untyped,
+                sizing_policy: String,
+                padding_policy: String,
+                album_art_format: String,
+                encryption: untyped
+              }
+            ]
+          },
+          composition: Array[
+            {
+              time_span: {
+                start_time: String,
+                duration: untyped
+              }
+            }
+          ],
+          captions: {
+            merge_policy: String,
+            caption_sources: Array[
+              {
+                key: String,
+                language: untyped,
+                time_offset: String,
+                label: String,
+                encryption: untyped
+              }
+            ],
+            caption_formats: Array[
+              {
+                format: String,
+                pattern: String,
+                encryption: untyped
+              }
+            ]
+          },
+          encryption: untyped
+        }
+      ],
+      ?output_key_prefix: String,
+      ?playlists: Array[
+        {
+          name: String,
+          format: String,
+          output_keys: Array[String],
+          hls_content_protection: {
+            method: String,
+            key: String,
+            key_md5: untyped,
+            initialization_vector: String,
+            license_acquisition_url: String,
+            key_storage_policy: String
+          },
+          play_ready_drm: {
+            format: String,
+            key: String,
+            key_md5: untyped,
+            key_id: String,
+            initialization_vector: untyped,
+            license_acquisition_url: String
+          }
+        }
+      ],
+      ?user_metadata: Hash[String, String]
+    ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+      def warnings: () -> Array[Types::Warning]?
+    end
+    def create_pipeline: (
+      ?name: String,
+      ?input_bucket: String,
+      ?output_bucket: String,
+      ?role: String,
+      ?aws_kms_key_arn: String,
+      ?notifications: {
+        progressing: String,
+        completed: untyped,
+        warning: untyped,
+        error: untyped
+      },
+      ?content_config: {
+        bucket: String,
+        storage_class: String,
+        permissions: Array[
+          {
+            grantee_type: String,
+            grantee: String,
+            access: Array[String]
+          }
+        ]
+      },
+      ?thumbnail_config: {
+        bucket: String,
+        storage_class: String,
+        permissions: Array[
+          {
+            grantee_type: String,
+            grantee: String,
+            access: Array[String]
+          }
+        ]
+      }
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
+
+    interface _CreatePresetResponse
+      include Smithy::Client::_Response[Types::CreatePresetResponse]
+      def preset: () -> Types::Preset?
+      def warning: () -> String?
+    end
+    def create_preset: (
+      ?name: String,
+      ?description: String,
+      ?container: String,
+      ?video: {
+        codec: String,
+        codec_options: Hash[String, String],
+        keyframes_max_dist: String,
+        fixed_gop: String,
+        bit_rate: String,
+        frame_rate: String,
+        max_frame_rate: String,
+        resolution: String,
+        aspect_ratio: String,
+        max_width: String,
+        max_height: untyped,
+        display_aspect_ratio: untyped,
+        sizing_policy: String,
+        padding_policy: String,
+        watermarks: Array[
+          {
+            id: String,
+            max_width: String,
+            max_height: untyped,
+            sizing_policy: String,
+            horizontal_align: String,
+            horizontal_offset: untyped,
+            vertical_align: String,
+            vertical_offset: untyped,
+            opacity: String,
+            target: String
+          }
+        ]
+      },
+      ?audio: {
+        codec: String,
+        sample_rate: String,
+        bit_rate: String,
+        channels: String,
+        audio_packing_mode: String,
+        codec_options: {
+          profile: String,
+          bit_depth: String,
+          bit_order: String,
+          signed: String
+        }
+      },
+      ?thumbnails: {
+        format: String,
+        interval: String,
+        resolution: String,
+        aspect_ratio: String,
+        max_width: String,
+        max_height: untyped,
+        sizing_policy: String,
+        padding_policy: String
+      }
+    ) -> _CreatePresetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePresetResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Types::DeletePipelineResponse]
+    end
+    def delete_pipeline: (
+      ?id: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _DeletePresetResponse
+      include Smithy::Client::_Response[Types::DeletePresetResponse]
+    end
+    def delete_preset: (
+      ?id: String
+    ) -> _DeletePresetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePresetResponse
+
+    interface _ListJobsByPipelineResponse
+      include Smithy::Client::_Response[Types::ListJobsByPipelineResponse]
+      def jobs: () -> Array[Types::Job]?
+      def next_page_token: () -> String?
+    end
+    def list_jobs_by_pipeline: (
+      ?pipeline_id: String,
+      ?ascending: String,
+      ?page_token: String
+    ) -> _ListJobsByPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsByPipelineResponse
+
+    interface _ListJobsByStatusResponse
+      include Smithy::Client::_Response[Types::ListJobsByStatusResponse]
+      def jobs: () -> Array[Types::Job]?
+      def next_page_token: () -> String?
+    end
+    def list_jobs_by_status: (
+      ?status: String,
+      ?ascending: String,
+      ?page_token: String
+    ) -> _ListJobsByStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsByStatusResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesResponse]
+      def pipelines: () -> Array[Types::Pipeline]?
+      def next_page_token: () -> String?
+    end
+    def list_pipelines: (
+      ?ascending: String,
+      ?page_token: String
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
+    interface _ListPresetsResponse
+      include Smithy::Client::_Response[Types::ListPresetsResponse]
+      def presets: () -> Array[Types::Preset]?
+      def next_page_token: () -> String?
+    end
+    def list_presets: (
+      ?ascending: String,
+      ?page_token: String
+    ) -> _ListPresetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPresetsResponse
+
+    interface _ReadJobResponse
+      include Smithy::Client::_Response[Types::ReadJobResponse]
+      def job: () -> Types::Job?
+    end
+    def read_job: (
+      ?id: String
+    ) -> _ReadJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReadJobResponse
+
+    interface _ReadPipelineResponse
+      include Smithy::Client::_Response[Types::ReadPipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+      def warnings: () -> Array[Types::Warning]?
+    end
+    def read_pipeline: (
+      ?id: String
+    ) -> _ReadPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReadPipelineResponse
+
+    interface _ReadPresetResponse
+      include Smithy::Client::_Response[Types::ReadPresetResponse]
+      def preset: () -> Types::Preset?
+    end
+    def read_preset: (
+      ?id: String
+    ) -> _ReadPresetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReadPresetResponse
+
+    interface _TestRoleResponse
+      include Smithy::Client::_Response[Types::TestRoleResponse]
+      def success: () -> String?
+      def messages: () -> Array[String]?
+    end
+    def test_role: (
+      ?role: String,
+      ?input_bucket: String,
+      ?output_bucket: String,
+      ?topics: Array[String]
+    ) -> _TestRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestRoleResponse
+
+    interface _UpdatePipelineResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineResponse]
+      def pipeline: () -> Types::Pipeline?
+      def warnings: () -> Array[Types::Warning]?
+    end
+    def update_pipeline: (
+      ?id: String,
+      ?name: String,
+      ?input_bucket: String,
+      ?role: String,
+      ?aws_kms_key_arn: String,
+      ?notifications: {
+        progressing: String,
+        completed: untyped,
+        warning: untyped,
+        error: untyped
+      },
+      ?content_config: {
+        bucket: String,
+        storage_class: String,
+        permissions: Array[
+          {
+            grantee_type: String,
+            grantee: String,
+            access: Array[String]
+          }
+        ]
+      },
+      ?thumbnail_config: {
+        bucket: String,
+        storage_class: String,
+        permissions: Array[
+          {
+            grantee_type: String,
+            grantee: String,
+            access: Array[String]
+          }
+        ]
+      }
+    ) -> _UpdatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineResponse
+
+    interface _UpdatePipelineNotificationsResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineNotificationsResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def update_pipeline_notifications: (
+      ?id: String,
+      ?notifications: {
+        progressing: String,
+        completed: untyped,
+        warning: untyped,
+        error: untyped
+      }
+    ) -> _UpdatePipelineNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineNotificationsResponse
+
+    interface _UpdatePipelineStatusResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineStatusResponse]
+      def pipeline: () -> Types::Pipeline?
+    end
+    def update_pipeline_status: (
+      ?id: String,
+      ?status: String
+    ) -> _UpdatePipelineStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineStatusResponse
+  end
+end

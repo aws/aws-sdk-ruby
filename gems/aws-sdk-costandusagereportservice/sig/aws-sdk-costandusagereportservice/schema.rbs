@@ -1,0 +1,55 @@
+module Aws::CostandUsageReportService
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AWSRegion: EnumShape
+    AdditionalArtifact: EnumShape
+    AdditionalArtifactList: ListShape
+    BillingViewArn: StringShape
+    CompressionFormat: EnumShape
+    DeleteReportDefinitionRequest: StructureShape
+    DeleteReportDefinitionResponse: StructureShape
+    DeleteResponseMessage: StringShape
+    DescribeReportDefinitionsRequest: StructureShape
+    DescribeReportDefinitionsResponse: StructureShape
+    DuplicateReportNameException: StructureShape
+    ErrorMessage: StringShape
+    GenericString: StringShape
+    InternalErrorException: StructureShape
+    LastDelivery: StringShape
+    LastStatus: EnumShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    MaxResults: IntegerShape
+    ModifyReportDefinitionRequest: StructureShape
+    ModifyReportDefinitionResponse: StructureShape
+    PutReportDefinitionRequest: StructureShape
+    PutReportDefinitionResponse: StructureShape
+    RefreshClosedReports: BooleanShape
+    ReportDefinition: StructureShape
+    ReportDefinitionList: ListShape
+    ReportFormat: EnumShape
+    ReportLimitReachedException: StructureShape
+    ReportName: StringShape
+    ReportStatus: StructureShape
+    ReportVersioning: EnumShape
+    ResourceNotFoundException: StructureShape
+    S3Bucket: StringShape
+    S3Prefix: StringShape
+    SchemaElement: EnumShape
+    SchemaElementList: ListShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    TimeUnit: EnumShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    ValidationException: StructureShape
+
+    AWSOrigamiServiceGatewayService: ServiceShape
+  end
+end

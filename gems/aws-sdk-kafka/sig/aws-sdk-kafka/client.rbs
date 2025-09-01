@@ -1,0 +1,971 @@
+module Aws::Kafka
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Kafka::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchAssociateScramSecretResponse
+      include Smithy::Client::_Response[Types::BatchAssociateScramSecretResponse]
+      def cluster_arn: () -> String?
+      def unprocessed_scram_secrets: () -> Array[Types::UnprocessedScramSecret]?
+    end
+    def batch_associate_scram_secret: (
+      ?cluster_arn: String,
+      ?secret_arn_list: Array[String]
+    ) -> _BatchAssociateScramSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateScramSecretResponse
+
+    interface _BatchDisassociateScramSecretResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateScramSecretResponse]
+      def cluster_arn: () -> String?
+      def unprocessed_scram_secrets: () -> Array[Types::UnprocessedScramSecret]?
+    end
+    def batch_disassociate_scram_secret: (
+      ?cluster_arn: String,
+      ?secret_arn_list: Array[String]
+    ) -> _BatchDisassociateScramSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateScramSecretResponse
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def cluster_arn: () -> String?
+      def cluster_name: () -> String?
+      def state: () -> String?
+    end
+    def create_cluster: (
+      ?broker_node_group_info: {
+        broker_az_distribution: String,
+        client_subnets: Array[String],
+        instance_type: String,
+        security_groups: untyped,
+        storage_info: {
+          ebs_storage_info: {
+            provisioned_throughput: {
+              enabled: bool,
+              volume_throughput: Integer
+            },
+            volume_size: Integer
+          }
+        },
+        connectivity_info: {
+          public_access: {
+            type: String
+          },
+          vpc_connectivity: {
+            client_authentication: {
+              sasl: {
+                scram: {
+                  enabled: untyped
+                },
+                iam: {
+                  enabled: untyped
+                }
+              },
+              tls: {
+                enabled: untyped
+              }
+            }
+          }
+        },
+        zone_ids: untyped
+      },
+      ?client_authentication: {
+        sasl: {
+          scram: {
+            enabled: bool
+          },
+          iam: {
+            enabled: untyped
+          }
+        },
+        tls: {
+          certificate_authority_arn_list: Array[String],
+          enabled: untyped
+        },
+        unauthenticated: {
+          enabled: untyped
+        }
+      },
+      ?cluster_name: String,
+      ?configuration_info: {
+        arn: String,
+        revision: Integer
+      },
+      ?encryption_info: {
+        encryption_at_rest: {
+          data_volume_kms_key_id: String
+        },
+        encryption_in_transit: {
+          client_broker: String,
+          in_cluster: bool
+        }
+      },
+      ?enhanced_monitoring: String,
+      ?open_monitoring: {
+        prometheus: {
+          jmx_exporter: {
+            enabled_in_broker: bool
+          },
+          node_exporter: {
+            enabled_in_broker: untyped
+          }
+        }
+      },
+      ?kafka_version: String,
+      ?logging_info: {
+        broker_logs: {
+          cloud_watch_logs: {
+            enabled: bool,
+            log_group: String
+          },
+          firehose: {
+            delivery_stream: untyped,
+            enabled: untyped
+          },
+          s3: {
+            bucket: untyped,
+            enabled: untyped,
+            prefix: untyped
+          }
+        }
+      },
+      ?number_of_broker_nodes: Integer,
+      ?tags: Hash[String, String],
+      ?storage_mode: String
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateClusterV2Response
+      include Smithy::Client::_Response[Types::CreateClusterV2Response]
+      def cluster_arn: () -> String?
+      def cluster_name: () -> String?
+      def state: () -> String?
+      def cluster_type: () -> String?
+    end
+    def create_cluster_v2: (
+      ?cluster_name: String,
+      ?tags: Hash[String, String],
+      ?provisioned: {
+        broker_node_group_info: {
+          broker_az_distribution: String,
+          client_subnets: Array[String],
+          instance_type: String,
+          security_groups: untyped,
+          storage_info: {
+            ebs_storage_info: {
+              provisioned_throughput: {
+                enabled: bool,
+                volume_throughput: Integer
+              },
+              volume_size: Integer
+            }
+          },
+          connectivity_info: {
+            public_access: {
+              type: String
+            },
+            vpc_connectivity: {
+              client_authentication: {
+                sasl: {
+                  scram: {
+                    enabled: untyped
+                  },
+                  iam: {
+                    enabled: untyped
+                  }
+                },
+                tls: {
+                  enabled: untyped
+                }
+              }
+            }
+          },
+          zone_ids: untyped
+        },
+        client_authentication: {
+          sasl: {
+            scram: {
+              enabled: untyped
+            },
+            iam: {
+              enabled: untyped
+            }
+          },
+          tls: {
+            certificate_authority_arn_list: untyped,
+            enabled: untyped
+          },
+          unauthenticated: {
+            enabled: untyped
+          }
+        },
+        configuration_info: {
+          arn: untyped,
+          revision: Integer
+        },
+        encryption_info: {
+          encryption_at_rest: {
+            data_volume_kms_key_id: untyped
+          },
+          encryption_in_transit: {
+            client_broker: String,
+            in_cluster: untyped
+          }
+        },
+        enhanced_monitoring: String,
+        open_monitoring: {
+          prometheus: {
+            jmx_exporter: {
+              enabled_in_broker: untyped
+            },
+            node_exporter: {
+              enabled_in_broker: untyped
+            }
+          }
+        },
+        kafka_version: String,
+        logging_info: {
+          broker_logs: {
+            cloud_watch_logs: {
+              enabled: untyped,
+              log_group: untyped
+            },
+            firehose: {
+              delivery_stream: untyped,
+              enabled: untyped
+            },
+            s3: {
+              bucket: untyped,
+              enabled: untyped,
+              prefix: untyped
+            }
+          }
+        },
+        number_of_broker_nodes: Integer,
+        storage_mode: String
+      },
+      ?serverless: {
+        vpc_configs: Array[
+          {
+            subnet_ids: Array[String],
+            security_group_ids: untyped
+          }
+        ],
+        client_authentication: {
+          sasl: {
+            iam: {
+              enabled: bool
+            }
+          }
+        }
+      }
+    ) -> _CreateClusterV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterV2Response
+
+    interface _CreateConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationResponse]
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def latest_revision: () -> Types::ConfigurationRevision?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def create_configuration: (
+      ?description: String,
+      ?kafka_versions: Array[String],
+      ?name: String,
+      ?server_properties: String
+    ) -> _CreateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationResponse
+
+    interface _CreateReplicatorResponse
+      include Smithy::Client::_Response[Types::CreateReplicatorResponse]
+      def replicator_arn: () -> String?
+      def replicator_name: () -> String?
+      def replicator_state: () -> String?
+    end
+    def create_replicator: (
+      ?description: String,
+      ?kafka_clusters: Array[
+        {
+          amazon_msk_cluster: {
+            msk_cluster_arn: String
+          },
+          vpc_config: {
+            security_group_ids: Array[String],
+            subnet_ids: untyped
+          }
+        }
+      ],
+      ?replication_info_list: Array[
+        {
+          consumer_group_replication: {
+            consumer_groups_to_exclude: Array[String],
+            consumer_groups_to_replicate: untyped,
+            detect_and_copy_new_consumer_groups: bool,
+            synchronise_consumer_group_offsets: untyped
+          },
+          source_kafka_cluster_arn: String,
+          target_compression_type: String,
+          target_kafka_cluster_arn: untyped,
+          topic_replication: {
+            copy_access_control_lists_for_topics: untyped,
+            copy_topic_configurations: untyped,
+            detect_and_copy_new_topics: untyped,
+            starting_position: {
+              type: String
+            },
+            topic_name_configuration: {
+              type: String
+            },
+            topics_to_exclude: Array[String],
+            topics_to_replicate: untyped
+          }
+        }
+      ],
+      ?replicator_name: String,
+      ?service_execution_role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicatorResponse
+
+    interface _CreateVpcConnectionResponse
+      include Smithy::Client::_Response[Types::CreateVpcConnectionResponse]
+      def vpc_connection_arn: () -> String?
+      def state: () -> String?
+      def authentication: () -> String?
+      def vpc_id: () -> String?
+      def client_subnets: () -> Array[String]?
+      def security_groups: () -> Array[String]?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_vpc_connection: (
+      ?target_cluster_arn: String,
+      ?authentication: String,
+      ?vpc_id: String,
+      ?client_subnets: Array[String],
+      ?security_groups: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcConnectionResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+      def cluster_arn: () -> String?
+      def state: () -> String?
+    end
+    def delete_cluster: (
+      ?cluster_arn: String,
+      ?current_version: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteClusterPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteClusterPolicyResponse]
+    end
+    def delete_cluster_policy: (
+      ?cluster_arn: String
+    ) -> _DeleteClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterPolicyResponse
+
+    interface _DeleteConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationResponse]
+      def arn: () -> String?
+      def state: () -> String?
+    end
+    def delete_configuration: (
+      ?arn: String
+    ) -> _DeleteConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationResponse
+
+    interface _DeleteReplicatorResponse
+      include Smithy::Client::_Response[Types::DeleteReplicatorResponse]
+      def replicator_arn: () -> String?
+      def replicator_state: () -> String?
+    end
+    def delete_replicator: (
+      ?current_version: String,
+      ?replicator_arn: String
+    ) -> _DeleteReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicatorResponse
+
+    interface _DeleteVpcConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteVpcConnectionResponse]
+      def vpc_connection_arn: () -> String?
+      def state: () -> String?
+    end
+    def delete_vpc_connection: (
+      ?arn: String
+    ) -> _DeleteVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcConnectionResponse
+
+    interface _DescribeClusterResponse
+      include Smithy::Client::_Response[Types::DescribeClusterResponse]
+      def cluster_info: () -> Types::ClusterInfo?
+    end
+    def describe_cluster: (
+      ?cluster_arn: String
+    ) -> _DescribeClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterResponse
+
+    interface _DescribeClusterOperationResponse
+      include Smithy::Client::_Response[Types::DescribeClusterOperationResponse]
+      def cluster_operation_info: () -> Types::ClusterOperationInfo?
+    end
+    def describe_cluster_operation: (
+      ?cluster_operation_arn: String
+    ) -> _DescribeClusterOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterOperationResponse
+
+    interface _DescribeClusterOperationV2Response
+      include Smithy::Client::_Response[Types::DescribeClusterOperationV2Response]
+      def cluster_operation_info: () -> Types::ClusterOperationV2?
+    end
+    def describe_cluster_operation_v2: (
+      ?cluster_operation_arn: String
+    ) -> _DescribeClusterOperationV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterOperationV2Response
+
+    interface _DescribeClusterV2Response
+      include Smithy::Client::_Response[Types::DescribeClusterV2Response]
+      def cluster_info: () -> Types::Cluster?
+    end
+    def describe_cluster_v2: (
+      ?cluster_arn: String
+    ) -> _DescribeClusterV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterV2Response
+
+    interface _DescribeConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationResponse]
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def kafka_versions: () -> Array[String]?
+      def latest_revision: () -> Types::ConfigurationRevision?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def describe_configuration: (
+      ?arn: String
+    ) -> _DescribeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationResponse
+
+    interface _DescribeConfigurationRevisionResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationRevisionResponse]
+      def arn: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def revision: () -> Integer?
+      def server_properties: () -> String?
+    end
+    def describe_configuration_revision: (
+      ?arn: String,
+      ?revision: Integer
+    ) -> _DescribeConfigurationRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationRevisionResponse
+
+    interface _DescribeReplicatorResponse
+      include Smithy::Client::_Response[Types::DescribeReplicatorResponse]
+      def creation_time: () -> Time?
+      def current_version: () -> String?
+      def is_replicator_reference: () -> bool?
+      def kafka_clusters: () -> Array[Types::KafkaClusterDescription]?
+      def replication_info_list: () -> Array[Types::ReplicationInfoDescription]?
+      def replicator_arn: () -> String?
+      def replicator_description: () -> String?
+      def replicator_name: () -> String?
+      def replicator_resource_arn: () -> String?
+      def replicator_state: () -> String?
+      def service_execution_role_arn: () -> String?
+      def state_info: () -> Types::ReplicationStateInfo?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_replicator: (
+      ?replicator_arn: String
+    ) -> _DescribeReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicatorResponse
+
+    interface _DescribeVpcConnectionResponse
+      include Smithy::Client::_Response[Types::DescribeVpcConnectionResponse]
+      def vpc_connection_arn: () -> String?
+      def target_cluster_arn: () -> String?
+      def state: () -> String?
+      def authentication: () -> String?
+      def vpc_id: () -> String?
+      def subnets: () -> Array[String]?
+      def security_groups: () -> Array[String]?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_vpc_connection: (
+      ?arn: String
+    ) -> _DescribeVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcConnectionResponse
+
+    interface _GetBootstrapBrokersResponse
+      include Smithy::Client::_Response[Types::GetBootstrapBrokersResponse]
+      def bootstrap_broker_string: () -> String?
+      def bootstrap_broker_string_tls: () -> String?
+      def bootstrap_broker_string_sasl_scram: () -> String?
+      def bootstrap_broker_string_sasl_iam: () -> String?
+      def bootstrap_broker_string_public_tls: () -> String?
+      def bootstrap_broker_string_public_sasl_scram: () -> String?
+      def bootstrap_broker_string_public_sasl_iam: () -> String?
+      def bootstrap_broker_string_vpc_connectivity_tls: () -> String?
+      def bootstrap_broker_string_vpc_connectivity_sasl_scram: () -> String?
+      def bootstrap_broker_string_vpc_connectivity_sasl_iam: () -> String?
+    end
+    def get_bootstrap_brokers: (
+      ?cluster_arn: String
+    ) -> _GetBootstrapBrokersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBootstrapBrokersResponse
+
+    interface _GetClusterPolicyResponse
+      include Smithy::Client::_Response[Types::GetClusterPolicyResponse]
+      def current_version: () -> String?
+      def policy: () -> String?
+    end
+    def get_cluster_policy: (
+      ?cluster_arn: String
+    ) -> _GetClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterPolicyResponse
+
+    interface _GetCompatibleKafkaVersionsResponse
+      include Smithy::Client::_Response[Types::GetCompatibleKafkaVersionsResponse]
+      def compatible_kafka_versions: () -> Array[Types::CompatibleKafkaVersion]?
+    end
+    def get_compatible_kafka_versions: (
+      ?cluster_arn: String
+    ) -> _GetCompatibleKafkaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCompatibleKafkaVersionsResponse
+
+    interface _ListClientVpcConnectionsResponse
+      include Smithy::Client::_Response[Types::ListClientVpcConnectionsResponse]
+      def client_vpc_connections: () -> Array[Types::ClientVpcConnection]?
+      def next_token: () -> String?
+    end
+    def list_client_vpc_connections: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClientVpcConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClientVpcConnectionsResponse
+
+    interface _ListClusterOperationsResponse
+      include Smithy::Client::_Response[Types::ListClusterOperationsResponse]
+      def cluster_operation_info_list: () -> Array[Types::ClusterOperationInfo]?
+      def next_token: () -> String?
+    end
+    def list_cluster_operations: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClusterOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClusterOperationsResponse
+
+    interface _ListClusterOperationsV2Response
+      include Smithy::Client::_Response[Types::ListClusterOperationsV2Response]
+      def cluster_operation_info_list: () -> Array[Types::ClusterOperationV2Summary]?
+      def next_token: () -> String?
+    end
+    def list_cluster_operations_v2: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClusterOperationsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClusterOperationsV2Response
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersResponse]
+      def cluster_info_list: () -> Array[Types::ClusterInfo]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?cluster_name_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListClustersV2Response
+      include Smithy::Client::_Response[Types::ListClustersV2Response]
+      def cluster_info_list: () -> Array[Types::Cluster]?
+      def next_token: () -> String?
+    end
+    def list_clusters_v2: (
+      ?cluster_name_filter: String,
+      ?cluster_type_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClustersV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersV2Response
+
+    interface _ListConfigurationRevisionsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationRevisionsResponse]
+      def next_token: () -> String?
+      def revisions: () -> Array[Types::ConfigurationRevision]?
+    end
+    def list_configuration_revisions: (
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationRevisionsResponse
+
+    interface _ListConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationsResponse]
+      def configurations: () -> Array[Types::Configuration]?
+      def next_token: () -> String?
+    end
+    def list_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationsResponse
+
+    interface _ListKafkaVersionsResponse
+      include Smithy::Client::_Response[Types::ListKafkaVersionsResponse]
+      def kafka_versions: () -> Array[Types::KafkaVersion]?
+      def next_token: () -> String?
+    end
+    def list_kafka_versions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListKafkaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKafkaVersionsResponse
+
+    interface _ListNodesResponse
+      include Smithy::Client::_Response[Types::ListNodesResponse]
+      def next_token: () -> String?
+      def node_info_list: () -> Array[Types::NodeInfo]?
+    end
+    def list_nodes: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesResponse
+
+    interface _ListReplicatorsResponse
+      include Smithy::Client::_Response[Types::ListReplicatorsResponse]
+      def next_token: () -> String?
+      def replicators: () -> Array[Types::ReplicatorSummary]?
+    end
+    def list_replicators: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?replicator_name_filter: String
+    ) -> _ListReplicatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReplicatorsResponse
+
+    interface _ListScramSecretsResponse
+      include Smithy::Client::_Response[Types::ListScramSecretsResponse]
+      def next_token: () -> String?
+      def secret_arn_list: () -> Array[String]?
+    end
+    def list_scram_secrets: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScramSecretsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScramSecretsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVpcConnectionsResponse
+      include Smithy::Client::_Response[Types::ListVpcConnectionsResponse]
+      def vpc_connections: () -> Array[Types::VpcConnection]?
+      def next_token: () -> String?
+    end
+    def list_vpc_connections: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVpcConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcConnectionsResponse
+
+    interface _PutClusterPolicyResponse
+      include Smithy::Client::_Response[Types::PutClusterPolicyResponse]
+      def current_version: () -> String?
+    end
+    def put_cluster_policy: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?policy: String
+    ) -> _PutClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutClusterPolicyResponse
+
+    interface _RebootBrokerResponse
+      include Smithy::Client::_Response[Types::RebootBrokerResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def reboot_broker: (
+      ?broker_ids: Array[String],
+      ?cluster_arn: String
+    ) -> _RebootBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootBrokerResponse
+
+    interface _RejectClientVpcConnectionResponse
+      include Smithy::Client::_Response[Types::RejectClientVpcConnectionResponse]
+    end
+    def reject_client_vpc_connection: (
+      ?cluster_arn: String,
+      ?vpc_connection_arn: String
+    ) -> _RejectClientVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectClientVpcConnectionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBrokerCountResponse
+      include Smithy::Client::_Response[Types::UpdateBrokerCountResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_broker_count: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?target_number_of_broker_nodes: Integer
+    ) -> _UpdateBrokerCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerCountResponse
+
+    interface _UpdateBrokerStorageResponse
+      include Smithy::Client::_Response[Types::UpdateBrokerStorageResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_broker_storage: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?target_broker_ebs_volume_info: Array[
+        {
+          kafka_broker_node_id: String,
+          provisioned_throughput: {
+            enabled: bool,
+            volume_throughput: Integer
+          },
+          volume_size_gb: untyped
+        }
+      ]
+    ) -> _UpdateBrokerStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerStorageResponse
+
+    interface _UpdateBrokerTypeResponse
+      include Smithy::Client::_Response[Types::UpdateBrokerTypeResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_broker_type: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?target_instance_type: String
+    ) -> _UpdateBrokerTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerTypeResponse
+
+    interface _UpdateClusterConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateClusterConfigurationResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_cluster_configuration: (
+      ?cluster_arn: String,
+      ?configuration_info: {
+        arn: String,
+        revision: Integer
+      },
+      ?current_version: String
+    ) -> _UpdateClusterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterConfigurationResponse
+
+    interface _UpdateClusterKafkaVersionResponse
+      include Smithy::Client::_Response[Types::UpdateClusterKafkaVersionResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_cluster_kafka_version: (
+      ?cluster_arn: String,
+      ?configuration_info: {
+        arn: String,
+        revision: Integer
+      },
+      ?current_version: String,
+      ?target_kafka_version: String
+    ) -> _UpdateClusterKafkaVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterKafkaVersionResponse
+
+    interface _UpdateConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationResponse]
+      def arn: () -> String?
+      def latest_revision: () -> Types::ConfigurationRevision?
+    end
+    def update_configuration: (
+      ?arn: String,
+      ?description: String,
+      ?server_properties: String
+    ) -> _UpdateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationResponse
+
+    interface _UpdateConnectivityResponse
+      include Smithy::Client::_Response[Types::UpdateConnectivityResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_connectivity: (
+      ?cluster_arn: String,
+      ?connectivity_info: {
+        public_access: {
+          type: String
+        },
+        vpc_connectivity: {
+          client_authentication: {
+            sasl: {
+              scram: {
+                enabled: bool
+              },
+              iam: {
+                enabled: untyped
+              }
+            },
+            tls: {
+              enabled: untyped
+            }
+          }
+        }
+      },
+      ?current_version: String
+    ) -> _UpdateConnectivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectivityResponse
+
+    interface _UpdateMonitoringResponse
+      include Smithy::Client::_Response[Types::UpdateMonitoringResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_monitoring: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?enhanced_monitoring: String,
+      ?open_monitoring: {
+        prometheus: {
+          jmx_exporter: {
+            enabled_in_broker: bool
+          },
+          node_exporter: {
+            enabled_in_broker: untyped
+          }
+        }
+      },
+      ?logging_info: {
+        broker_logs: {
+          cloud_watch_logs: {
+            enabled: bool,
+            log_group: String
+          },
+          firehose: {
+            delivery_stream: untyped,
+            enabled: untyped
+          },
+          s3: {
+            bucket: untyped,
+            enabled: untyped,
+            prefix: untyped
+          }
+        }
+      }
+    ) -> _UpdateMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitoringResponse
+
+    interface _UpdateReplicationInfoResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationInfoResponse]
+      def replicator_arn: () -> String?
+      def replicator_state: () -> String?
+    end
+    def update_replication_info: (
+      ?consumer_group_replication: {
+        consumer_groups_to_exclude: Array[String],
+        consumer_groups_to_replicate: untyped,
+        detect_and_copy_new_consumer_groups: bool,
+        synchronise_consumer_group_offsets: untyped
+      },
+      ?current_version: String,
+      ?replicator_arn: String,
+      ?source_kafka_cluster_arn: String,
+      ?target_kafka_cluster_arn: String,
+      ?topic_replication: {
+        copy_access_control_lists_for_topics: bool,
+        copy_topic_configurations: untyped,
+        detect_and_copy_new_topics: untyped,
+        topics_to_exclude: Array[String],
+        topics_to_replicate: untyped
+      }
+    ) -> _UpdateReplicationInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationInfoResponse
+
+    interface _UpdateSecurityResponse
+      include Smithy::Client::_Response[Types::UpdateSecurityResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_security: (
+      ?client_authentication: {
+        sasl: {
+          scram: {
+            enabled: bool
+          },
+          iam: {
+            enabled: untyped
+          }
+        },
+        tls: {
+          certificate_authority_arn_list: Array[String],
+          enabled: untyped
+        },
+        unauthenticated: {
+          enabled: untyped
+        }
+      },
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?encryption_info: {
+        encryption_at_rest: {
+          data_volume_kms_key_id: String
+        },
+        encryption_in_transit: {
+          client_broker: String,
+          in_cluster: bool
+        }
+      }
+    ) -> _UpdateSecurityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityResponse
+
+    interface _UpdateStorageResponse
+      include Smithy::Client::_Response[Types::UpdateStorageResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_storage: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?provisioned_throughput: {
+        enabled: bool,
+        volume_throughput: Integer
+      },
+      ?storage_mode: String,
+      ?volume_size_gb: Integer
+    ) -> _UpdateStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStorageResponse
+  end
+end

@@ -1,0 +1,65 @@
+module Aws::EBS
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccessDeniedExceptionReason: EnumShape
+    Block: StructureShape
+    BlockData: BlobShape
+    BlockIndex: IntegerShape
+    BlockSize: IntegerShape
+    BlockToken: StringShape
+    Blocks: ListShape
+    Boolean: BooleanShape
+    ChangedBlock: StructureShape
+    ChangedBlocks: ListShape
+    ChangedBlocksCount: IntegerShape
+    Checksum: StringShape
+    ChecksumAggregationMethod: EnumShape
+    ChecksumAlgorithm: EnumShape
+    CompleteSnapshotRequest: StructureShape
+    CompleteSnapshotResponse: StructureShape
+    ConcurrentLimitExceededException: StructureShape
+    ConflictException: StructureShape
+    DataLength: IntegerShape
+    Description: StringShape
+    ErrorMessage: StringShape
+    GetSnapshotBlockRequest: StructureShape
+    GetSnapshotBlockResponse: StructureShape
+    IdempotencyToken: StringShape
+    InternalServerException: StructureShape
+    KmsKeyArn: StringShape
+    ListChangedBlocksRequest: StructureShape
+    ListChangedBlocksResponse: StructureShape
+    ListSnapshotBlocksRequest: StructureShape
+    ListSnapshotBlocksResponse: StructureShape
+    MaxResults: IntegerShape
+    OwnerId: StringShape
+    PageToken: StringShape
+    Progress: IntegerShape
+    PutSnapshotBlockRequest: StructureShape
+    PutSnapshotBlockResponse: StructureShape
+    RequestThrottledException: StructureShape
+    RequestThrottledExceptionReason: EnumShape
+    ResourceNotFoundException: StructureShape
+    ResourceNotFoundExceptionReason: EnumShape
+    SSEType: EnumShape
+    ServiceQuotaExceededException: StructureShape
+    ServiceQuotaExceededExceptionReason: EnumShape
+    SnapshotId: StringShape
+    StartSnapshotRequest: StructureShape
+    StartSnapshotResponse: StructureShape
+    Status: EnumShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagValue: StringShape
+    Tags: ListShape
+    TimeStamp: TimestampShape
+    Timeout: IntegerShape
+    ValidationException: StructureShape
+    ValidationExceptionReason: EnumShape
+    VolumeSize: IntegerShape
+
+    Ebs: ServiceShape
+  end
+end

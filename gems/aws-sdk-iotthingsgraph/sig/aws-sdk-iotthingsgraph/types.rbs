@@ -1,0 +1,1362 @@
+module Aws::IoTThingsGraph
+  module Types
+
+    class AssociateEntityToThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?entity_id: String,
+        ?namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor entity_id: String?
+      attr_accessor namespace_version: Integer?
+    end
+
+    class AssociateEntityToThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateFlowTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Types::DefinitionDocument,
+        ?compatible_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor compatible_namespace_version: Integer?
+    end
+
+    class CreateFlowTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::FlowTemplateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::FlowTemplateSummary?
+    end
+
+    class CreateSystemInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?definition: Types::DefinitionDocument,
+        ?target: String,
+        ?greengrass_group_name: String,
+        ?s3_bucket_name: String,
+        ?metrics_configuration: Types::MetricsConfiguration,
+        ?flow_actions_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor target: String?
+      attr_accessor greengrass_group_name: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor metrics_configuration: Types::MetricsConfiguration?
+      attr_accessor flow_actions_role_arn: String?
+    end
+
+    class CreateSystemInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemInstanceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemInstanceSummary?
+    end
+
+    class CreateSystemTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Types::DefinitionDocument,
+        ?compatible_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor compatible_namespace_version: Integer?
+    end
+
+    class CreateSystemTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemTemplateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemTemplateSummary?
+    end
+
+    class DefinitionDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor text: String?
+    end
+
+    module DefinitionLanguage
+      GRAPHQL: String
+    end
+
+    class DeleteFlowTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteFlowTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_arn: String,
+        ?namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_arn: String?
+      attr_accessor namespace_name: String?
+    end
+
+    class DeleteSystemInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteSystemInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSystemTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteSystemTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependencyRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?revision_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor revision_number: Integer?
+    end
+
+    class DeploySystemInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeploySystemInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemInstanceSummary,
+        ?greengrass_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemInstanceSummary?
+      attr_accessor greengrass_deployment_id: String?
+    end
+
+    module DeploymentTarget
+      GREENGRASS: String
+      CLOUD: String
+    end
+
+    class DeprecateFlowTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeprecateFlowTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeprecateSystemTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeprecateSystemTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+    end
+
+    class DescribeNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_arn: String,
+        ?namespace_name: String,
+        ?tracking_namespace_name: String,
+        ?tracking_namespace_version: Integer,
+        ?namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_arn: String?
+      attr_accessor namespace_name: String?
+      attr_accessor tracking_namespace_name: String?
+      attr_accessor tracking_namespace_version: Integer?
+      attr_accessor namespace_version: Integer?
+    end
+
+    class DissociateEntityFromThingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor entity_type: String?
+    end
+
+    class DissociateEntityFromThingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EntityDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?type: String,
+        ?created_at: Time,
+        ?definition: Types::DefinitionDocument,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor definition: Types::DefinitionDocument?
+    end
+
+    class EntityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module EntityFilterName
+      NAME: String
+      NAMESPACE: String
+      SEMANTIC_TYPE_PATH: String
+      REFERENCED_ENTITY_ID: String
+    end
+
+    module EntityType
+      DEVICE: String
+      SERVICE: String
+      DEVICE_MODEL: String
+      CAPABILITY: String
+      STATE: String
+      ACTION: String
+      EVENT: String
+      PROPERTY: String
+      MAPPING: String
+      ENUM: String
+    end
+
+    module FlowExecutionEventType
+      EXECUTION_STARTED: String
+      EXECUTION_FAILED: String
+      EXECUTION_ABORTED: String
+      EXECUTION_SUCCEEDED: String
+      STEP_STARTED: String
+      STEP_FAILED: String
+      STEP_SUCCEEDED: String
+      ACTIVITY_SCHEDULED: String
+      ACTIVITY_STARTED: String
+      ACTIVITY_FAILED: String
+      ACTIVITY_SUCCEEDED: String
+      START_FLOW_EXECUTION_TASK: String
+      SCHEDULE_NEXT_READY_STEPS_TASK: String
+      THING_ACTION_TASK: String
+      THING_ACTION_TASK_FAILED: String
+      THING_ACTION_TASK_SUCCEEDED: String
+      ACKNOWLEDGE_TASK_MESSAGE: String
+    end
+
+    class FlowExecutionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?event_type: String,
+        ?timestamp: Time,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor event_type: String?
+      attr_accessor timestamp: Time?
+      attr_accessor payload: String?
+    end
+
+    module FlowExecutionStatus
+      RUNNING: String
+      ABORTED: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class FlowExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_execution_id: String,
+        ?status: String,
+        ?system_instance_id: String,
+        ?flow_template_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor system_instance_id: String?
+      attr_accessor flow_template_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class FlowTemplateDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::FlowTemplateSummary,
+        ?definition: Types::DefinitionDocument,
+        ?validated_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::FlowTemplateSummary?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor validated_namespace_version: Integer?
+    end
+
+    class FlowTemplateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module FlowTemplateFilterName
+      DEVICE_MODEL_ID: String
+    end
+
+    class FlowTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision_number: Integer,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision_number: Integer?
+      attr_accessor created_at: Time?
+    end
+
+    class GetEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor namespace_version: Integer?
+    end
+
+    class GetEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?descriptions: Array[Types::EntityDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor descriptions: Array[Types::EntityDescription]?
+    end
+
+    class GetFlowTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?revision_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor revision_number: Integer?
+    end
+
+    class GetFlowTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: Types::FlowTemplateDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: Types::FlowTemplateDescription?
+    end
+
+    class GetFlowTemplateRevisionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetFlowTemplateRevisionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::FlowTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::FlowTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNamespaceDeletionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetNamespaceDeletionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_arn: String,
+        ?namespace_name: String,
+        ?status: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_arn: String?
+      attr_accessor namespace_name: String?
+      attr_accessor status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class GetSystemInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetSystemInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: Types::SystemInstanceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: Types::SystemInstanceDescription?
+    end
+
+    class GetSystemTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?revision_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor revision_number: Integer?
+    end
+
+    class GetSystemTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: Types::SystemTemplateDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: Types::SystemTemplateDescription?
+    end
+
+    class GetSystemTemplateRevisionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetSystemTemplateRevisionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::SystemTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::SystemTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetUploadStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+    end
+
+    class GetUploadStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?upload_status: String,
+        ?namespace_arn: String,
+        ?namespace_name: String,
+        ?namespace_version: Integer,
+        ?failure_reason: Array[String],
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor upload_status: String?
+      attr_accessor namespace_arn: String?
+      attr_accessor namespace_name: String?
+      attr_accessor namespace_version: Integer?
+      attr_accessor failure_reason: Array[String]?
+      attr_accessor created_date: Time?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListFlowExecutionMessagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_execution_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_execution_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFlowExecutionMessagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::FlowExecutionMessage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::FlowExecutionMessage]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class MetricsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_metric_enabled: bool,
+        ?metric_rule_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_metric_enabled: bool?
+      attr_accessor metric_rule_role_arn: String?
+    end
+
+    module NamespaceDeletionStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module NamespaceDeletionStatusErrorCodes
+      VALIDATION_FAILED: String
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SearchEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_types: Array[String],
+        ?filters: Array[Types::EntityFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_types: Array[String]?
+      attr_accessor filters: Array[Types::EntityFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor namespace_version: Integer?
+    end
+
+    class SearchEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?descriptions: Array[Types::EntityDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor descriptions: Array[Types::EntityDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchFlowExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_instance_id: String,
+        ?flow_execution_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_instance_id: String?
+      attr_accessor flow_execution_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchFlowExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::FlowExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::FlowExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchFlowTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::FlowTemplateFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::FlowTemplateFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchFlowTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::FlowTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::FlowTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchSystemInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::SystemInstanceFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::SystemInstanceFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchSystemInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::SystemInstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::SystemInstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchSystemTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::SystemTemplateFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::SystemTemplateFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchSystemTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::SystemTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::SystemTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchThingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor namespace_version: Integer?
+    end
+
+    class SearchThingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?things: Array[Types::Thing],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor things: Array[Types::Thing]?
+      attr_accessor next_token: String?
+    end
+
+    module SystemInstanceDeploymentStatus
+      NOT_DEPLOYED: String
+      BOOTSTRAP: String
+      DEPLOY_IN_PROGRESS: String
+      DEPLOYED_IN_TARGET: String
+      UNDEPLOY_IN_PROGRESS: String
+      FAILED: String
+      PENDING_DELETE: String
+      DELETED_IN_TARGET: String
+    end
+
+    class SystemInstanceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemInstanceSummary,
+        ?definition: Types::DefinitionDocument,
+        ?s3_bucket_name: String,
+        ?metrics_configuration: Types::MetricsConfiguration,
+        ?validated_namespace_version: Integer,
+        ?validated_dependency_revisions: Array[Types::DependencyRevision],
+        ?flow_actions_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemInstanceSummary?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor metrics_configuration: Types::MetricsConfiguration?
+      attr_accessor validated_namespace_version: Integer?
+      attr_accessor validated_dependency_revisions: Array[Types::DependencyRevision]?
+      attr_accessor flow_actions_role_arn: String?
+    end
+
+    class SystemInstanceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module SystemInstanceFilterName
+      SYSTEM_TEMPLATE_ID: String
+      STATUS: String
+      GREENGRASS_GROUP_NAME: String
+    end
+
+    class SystemInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?target: String,
+        ?greengrass_group_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?greengrass_group_id: String,
+        ?greengrass_group_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor target: String?
+      attr_accessor greengrass_group_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor greengrass_group_id: String?
+      attr_accessor greengrass_group_version_id: String?
+    end
+
+    class SystemTemplateDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemTemplateSummary,
+        ?definition: Types::DefinitionDocument,
+        ?validated_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemTemplateSummary?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor validated_namespace_version: Integer?
+    end
+
+    class SystemTemplateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module SystemTemplateFilterName
+      FLOW_TEMPLATE_ID: String
+    end
+
+    class SystemTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision_number: Integer,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision_number: Integer?
+      attr_accessor created_at: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Thing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_arn: String,
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_arn: String?
+      attr_accessor thing_name: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UndeploySystemInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class UndeploySystemInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemInstanceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemInstanceSummary?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFlowTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?definition: Types::DefinitionDocument,
+        ?compatible_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor compatible_namespace_version: Integer?
+    end
+
+    class UpdateFlowTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::FlowTemplateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::FlowTemplateSummary?
+    end
+
+    class UpdateSystemTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?definition: Types::DefinitionDocument,
+        ?compatible_namespace_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor definition: Types::DefinitionDocument?
+      attr_accessor compatible_namespace_version: Integer?
+    end
+
+    class UpdateSystemTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SystemTemplateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SystemTemplateSummary?
+    end
+
+    class UploadEntityDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::DefinitionDocument,
+        ?sync_with_public_namespace: bool,
+        ?deprecate_existing_entities: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::DefinitionDocument?
+      attr_accessor sync_with_public_namespace: bool?
+      attr_accessor deprecate_existing_entities: bool?
+    end
+
+    class UploadEntityDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+    end
+
+    module UploadStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+  end
+end

@@ -1,0 +1,2147 @@
+module Aws::AmplifyUIBuilder
+  module Types
+
+    class ActionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::ComponentProperty,
+        ?url: Types::ComponentProperty,
+        ?anchor: Types::ComponentProperty,
+        ?target: Types::ComponentProperty,
+        ?global: Types::ComponentProperty,
+        ?model: String,
+        ?id: Types::ComponentProperty,
+        ?fields: Hash[String, Types::ComponentProperty],
+        ?state: Types::MutationActionSetStateParameter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::ComponentProperty?
+      attr_accessor url: Types::ComponentProperty?
+      attr_accessor anchor: Types::ComponentProperty?
+      attr_accessor target: Types::ComponentProperty?
+      attr_accessor global: Types::ComponentProperty?
+      attr_accessor model: String?
+      attr_accessor id: Types::ComponentProperty?
+      attr_accessor fields: Hash[String, Types::ComponentProperty]?
+      attr_accessor state: Types::MutationActionSetStateParameter?
+    end
+
+    class ApiConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?graph_ql_config: Types::GraphQLRenderConfig,
+        ?data_store_config: Types::DataStoreRenderConfig,
+        ?no_api_config: Types::NoApiRenderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_ql_config: Types::GraphQLRenderConfig?
+      attr_accessor data_store_config: Types::DataStoreRenderConfig?
+      attr_accessor no_api_config: Types::NoApiRenderConfig?
+
+      class GraphQLConfig < ApiConfiguration
+      end
+      class DataStoreConfig < ApiConfiguration
+      end
+      class NoApiConfig < ApiConfiguration
+      end
+      class Unknown < ApiConfiguration
+      end
+    end
+
+    class CodegenDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?supported_version: String,
+        ?is_sem_ver: bool,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor supported_version: String?
+      attr_accessor is_sem_ver: bool?
+      attr_accessor reason: String?
+    end
+
+    class CodegenFeatureFlags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_relationship_supported: bool,
+        ?is_non_model_supported: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_relationship_supported: bool?
+      attr_accessor is_non_model_supported: bool?
+    end
+
+    class CodegenGenericDataEnum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    class CodegenGenericDataField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?data_type_value: String,
+        ?required: bool,
+        ?read_only: bool,
+        ?is_array: bool,
+        ?relationship: Types::CodegenGenericDataRelationshipType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor data_type_value: String?
+      attr_accessor required: bool?
+      attr_accessor read_only: bool?
+      attr_accessor is_array: bool?
+      attr_accessor relationship: Types::CodegenGenericDataRelationshipType?
+    end
+
+    module CodegenGenericDataFieldDataType
+      ID: String
+      STRING: String
+      INT: String
+      FLOAT: String
+      AWS_DATE: String
+      AWS_TIME: String
+      AWS_DATE_TIME: String
+      AWS_TIMESTAMP: String
+      AWS_EMAIL: String
+      AWS_URL: String
+      AWS_IP_ADDRESS: String
+      BOOLEAN: String
+      AWS_JSON: String
+      AWS_PHONE: String
+      ENUM: String
+      MODEL: String
+      NON_MODEL: String
+    end
+
+    class CodegenGenericDataModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Hash[String, Types::CodegenGenericDataField],
+        ?is_join_table: bool,
+        ?primary_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Hash[String, Types::CodegenGenericDataField]?
+      attr_accessor is_join_table: bool?
+      attr_accessor primary_keys: Array[String]?
+    end
+
+    class CodegenGenericDataNonModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Hash[String, Types::CodegenGenericDataField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Hash[String, Types::CodegenGenericDataField]?
+    end
+
+    class CodegenGenericDataRelationshipType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?related_model_name: String,
+        ?related_model_fields: Array[String],
+        ?can_unlink_associated_model: bool,
+        ?related_join_field_name: String,
+        ?related_join_table_name: String,
+        ?belongs_to_field_on_related_model: String,
+        ?associated_fields: Array[String],
+        ?is_has_many_index: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor related_model_name: String?
+      attr_accessor related_model_fields: Array[String]?
+      attr_accessor can_unlink_associated_model: bool?
+      attr_accessor related_join_field_name: String?
+      attr_accessor related_join_table_name: String?
+      attr_accessor belongs_to_field_on_related_model: String?
+      attr_accessor associated_fields: Array[String]?
+      attr_accessor is_has_many_index: bool?
+    end
+
+    class CodegenJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?app_id: String,
+        ?environment_name: String,
+        ?render_config: Types::CodegenJobRenderConfig,
+        ?generic_data_schema: Types::CodegenJobGenericDataSchema,
+        ?auto_generate_forms: bool,
+        ?features: Types::CodegenFeatureFlags,
+        ?status: String,
+        ?status_message: String,
+        ?asset: Types::CodegenJobAsset,
+        ?tags: Hash[String, String],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?dependencies: Array[Types::CodegenDependency],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor render_config: Types::CodegenJobRenderConfig?
+      attr_accessor generic_data_schema: Types::CodegenJobGenericDataSchema?
+      attr_accessor auto_generate_forms: bool?
+      attr_accessor features: Types::CodegenFeatureFlags?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor asset: Types::CodegenJobAsset?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor dependencies: Array[Types::CodegenDependency]?
+    end
+
+    class CodegenJobAsset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?download_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor download_url: String?
+    end
+
+    class CodegenJobGenericDataSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_type: String,
+        ?models: Hash[String, Types::CodegenGenericDataModel],
+        ?enums: Hash[String, Types::CodegenGenericDataEnum],
+        ?non_models: Hash[String, Types::CodegenGenericDataNonModel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_type: String?
+      attr_accessor models: Hash[String, Types::CodegenGenericDataModel]?
+      attr_accessor enums: Hash[String, Types::CodegenGenericDataEnum]?
+      attr_accessor non_models: Hash[String, Types::CodegenGenericDataNonModel]?
+    end
+
+    module CodegenJobGenericDataSourceType
+      DATA_STORE: String
+    end
+
+    class CodegenJobRenderConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?react: Types::ReactStartCodegenJobData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor react: Types::ReactStartCodegenJobData?
+
+      class React < CodegenJobRenderConfig
+      end
+      class Unknown < CodegenJobRenderConfig
+      end
+    end
+
+    module CodegenJobStatus
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class CodegenJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class Component
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?source_id: String,
+        ?id: String,
+        ?name: String,
+        ?component_type: String,
+        ?properties: Hash[String, Types::ComponentProperty],
+        ?children: Array[Types::ComponentChild],
+        ?variants: Array[Types::ComponentVariant],
+        ?overrides: Hash[String, Hash[String, String]],
+        ?binding_properties: Hash[String, Types::ComponentBindingPropertiesValue],
+        ?collection_properties: Hash[String, Types::ComponentDataConfiguration],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+        ?events: Hash[String, Types::ComponentEvent],
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor source_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor component_type: String?
+      attr_accessor properties: Hash[String, Types::ComponentProperty]?
+      attr_accessor children: Array[Types::ComponentChild]?
+      attr_accessor variants: Array[Types::ComponentVariant]?
+      attr_accessor overrides: Hash[String, Hash[String, String]]?
+      attr_accessor binding_properties: Hash[String, Types::ComponentBindingPropertiesValue]?
+      attr_accessor collection_properties: Hash[String, Types::ComponentDataConfiguration]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor events: Hash[String, Types::ComponentEvent]?
+      attr_accessor schema_version: String?
+    end
+
+    class ComponentBindingPropertiesValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?binding_properties: Types::ComponentBindingPropertiesValueProperties,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor binding_properties: Types::ComponentBindingPropertiesValueProperties?
+      attr_accessor default_value: String?
+    end
+
+    class ComponentBindingPropertiesValueProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model: String,
+        ?field: String,
+        ?predicates: Array[Types::Predicate],
+        ?user_attribute: String,
+        ?bucket: String,
+        ?key: String,
+        ?default_value: String,
+        ?slot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model: String?
+      attr_accessor field: String?
+      attr_accessor predicates: Array[Types::Predicate]?
+      attr_accessor user_attribute: String?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor default_value: String?
+      attr_accessor slot_name: String?
+    end
+
+    class ComponentChild
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_type: String,
+        ?name: String,
+        ?properties: Hash[String, Types::ComponentProperty],
+        ?children: Array[Types::ComponentChild],
+        ?events: Hash[String, Types::ComponentEvent],
+        ?source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_type: String?
+      attr_accessor name: String?
+      attr_accessor properties: Hash[String, Types::ComponentProperty]?
+      attr_accessor children: Array[Types::ComponentChild]?
+      attr_accessor events: Hash[String, Types::ComponentEvent]?
+      attr_accessor source_id: String?
+    end
+
+    class ComponentConditionProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property: String,
+        ?field: String,
+        ?operator: String,
+        ?operand: String,
+        ?then: Types::ComponentProperty,
+        ?else: Types::ComponentProperty,
+        ?operand_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property: String?
+      attr_accessor field: String?
+      attr_accessor operator: String?
+      attr_accessor operand: String?
+      attr_accessor then: Types::ComponentProperty?
+      attr_accessor else: Types::ComponentProperty?
+      attr_accessor operand_type: String?
+    end
+
+    class ComponentDataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model: String,
+        ?sort: Array[Types::SortProperty],
+        ?predicate: Types::Predicate,
+        ?identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model: String?
+      attr_accessor sort: Array[Types::SortProperty]?
+      attr_accessor predicate: Types::Predicate?
+      attr_accessor identifiers: Array[String]?
+    end
+
+    class ComponentEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?parameters: Types::ActionParameters,
+        ?binding_event: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor parameters: Types::ActionParameters?
+      attr_accessor binding_event: String?
+    end
+
+    class ComponentProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?binding_properties: Types::ComponentPropertyBindingProperties,
+        ?collection_binding_properties: Types::ComponentPropertyBindingProperties,
+        ?default_value: String,
+        ?model: String,
+        ?bindings: Hash[String, Types::FormBindingElement],
+        ?event: String,
+        ?user_attribute: String,
+        ?concat: Array[Types::ComponentProperty],
+        ?condition: Types::ComponentConditionProperty,
+        ?configured: bool,
+        ?type: String,
+        ?imported_value: String,
+        ?component_name: String,
+        ?property: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor binding_properties: Types::ComponentPropertyBindingProperties?
+      attr_accessor collection_binding_properties: Types::ComponentPropertyBindingProperties?
+      attr_accessor default_value: String?
+      attr_accessor model: String?
+      attr_accessor bindings: Hash[String, Types::FormBindingElement]?
+      attr_accessor event: String?
+      attr_accessor user_attribute: String?
+      attr_accessor concat: Array[Types::ComponentProperty]?
+      attr_accessor condition: Types::ComponentConditionProperty?
+      attr_accessor configured: bool?
+      attr_accessor type: String?
+      attr_accessor imported_value: String?
+      attr_accessor component_name: String?
+      attr_accessor property: String?
+    end
+
+    class ComponentPropertyBindingProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property: String,
+        ?field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property: String?
+      attr_accessor field: String?
+    end
+
+    class ComponentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?name: String,
+        ?component_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor component_type: String?
+    end
+
+    class ComponentVariant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variant_values: Hash[String, String],
+        ?overrides: Hash[String, Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variant_values: Hash[String, String]?
+      attr_accessor overrides: Hash[String, Hash[String, String]]?
+    end
+
+    class CreateComponentData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?source_id: String,
+        ?component_type: String,
+        ?properties: Hash[String, Types::ComponentProperty],
+        ?children: Array[Types::ComponentChild],
+        ?variants: Array[Types::ComponentVariant],
+        ?overrides: Hash[String, Hash[String, String]],
+        ?binding_properties: Hash[String, Types::ComponentBindingPropertiesValue],
+        ?collection_properties: Hash[String, Types::ComponentDataConfiguration],
+        ?tags: Hash[String, String],
+        ?events: Hash[String, Types::ComponentEvent],
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor source_id: String?
+      attr_accessor component_type: String?
+      attr_accessor properties: Hash[String, Types::ComponentProperty]?
+      attr_accessor children: Array[Types::ComponentChild]?
+      attr_accessor variants: Array[Types::ComponentVariant]?
+      attr_accessor overrides: Hash[String, Hash[String, String]]?
+      attr_accessor binding_properties: Hash[String, Types::ComponentBindingPropertiesValue]?
+      attr_accessor collection_properties: Hash[String, Types::ComponentDataConfiguration]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor events: Hash[String, Types::ComponentEvent]?
+      attr_accessor schema_version: String?
+    end
+
+    class CreateComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?client_token: String,
+        ?component_to_create: Types::CreateComponentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor component_to_create: Types::CreateComponentData?
+    end
+
+    class CreateComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Component?
+    end
+
+    class CreateFormData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: Types::FormDataTypeConfig,
+        ?form_action_type: String,
+        ?fields: Hash[String, Types::FieldConfig],
+        ?style: Types::FormStyle,
+        ?sectional_elements: Hash[String, Types::SectionalElement],
+        ?schema_version: String,
+        ?cta: Types::FormCTA,
+        ?tags: Hash[String, String],
+        ?label_decorator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: Types::FormDataTypeConfig?
+      attr_accessor form_action_type: String?
+      attr_accessor fields: Hash[String, Types::FieldConfig]?
+      attr_accessor style: Types::FormStyle?
+      attr_accessor sectional_elements: Hash[String, Types::SectionalElement]?
+      attr_accessor schema_version: String?
+      attr_accessor cta: Types::FormCTA?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor label_decorator: String?
+    end
+
+    class CreateFormInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?client_token: String,
+        ?form_to_create: Types::CreateFormData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor form_to_create: Types::CreateFormData?
+    end
+
+    class CreateFormOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Form,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Form?
+    end
+
+    class CreateThemeData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[Types::ThemeValues],
+        ?overrides: Array[Types::ThemeValues],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[Types::ThemeValues]?
+      attr_accessor overrides: Array[Types::ThemeValues]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateThemeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?client_token: String,
+        ?theme_to_create: Types::CreateThemeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor theme_to_create: Types::CreateThemeData?
+    end
+
+    class CreateThemeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Theme?
+    end
+
+    class DataStoreRenderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteFormInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteThemeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class ExchangeCodeForTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?request: Types::ExchangeCodeForTokenRequestBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor request: Types::ExchangeCodeForTokenRequestBody?
+    end
+
+    class ExchangeCodeForTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?expires_in: Integer,
+        ?refresh_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor refresh_token: String?
+    end
+
+    class ExchangeCodeForTokenRequestBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?redirect_uri: String,
+        ?client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor redirect_uri: String?
+      attr_accessor client_id: String?
+    end
+
+    class ExportComponentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ExportComponentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Component],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Component]?
+      attr_accessor next_token: String?
+    end
+
+    class ExportFormsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ExportFormsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Form],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Form]?
+      attr_accessor next_token: String?
+    end
+
+    class ExportThemesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ExportThemesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::Theme],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::Theme]?
+      attr_accessor next_token: String?
+    end
+
+    class FieldConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?position: Types::FieldPosition,
+        ?excluded: bool,
+        ?input_type: Types::FieldInputConfig,
+        ?validations: Array[Types::FieldValidationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor position: Types::FieldPosition?
+      attr_accessor excluded: bool?
+      attr_accessor input_type: Types::FieldInputConfig?
+      attr_accessor validations: Array[Types::FieldValidationConfiguration]?
+    end
+
+    class FieldInputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?required: bool,
+        ?read_only: bool,
+        ?placeholder: String,
+        ?default_value: String,
+        ?descriptive_text: String,
+        ?default_checked: bool,
+        ?default_country_code: String,
+        ?value_mappings: Types::ValueMappings,
+        ?name: String,
+        ?min_value: Float,
+        ?max_value: Float,
+        ?step: Float,
+        ?value: String,
+        ?is_array: bool,
+        ?file_uploader_config: Types::FileUploaderFieldConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor required: bool?
+      attr_accessor read_only: bool?
+      attr_accessor placeholder: String?
+      attr_accessor default_value: String?
+      attr_accessor descriptive_text: String?
+      attr_accessor default_checked: bool?
+      attr_accessor default_country_code: String?
+      attr_accessor value_mappings: Types::ValueMappings?
+      attr_accessor name: String?
+      attr_accessor min_value: Float?
+      attr_accessor max_value: Float?
+      attr_accessor step: Float?
+      attr_accessor value: String?
+      attr_accessor is_array: bool?
+      attr_accessor file_uploader_config: Types::FileUploaderFieldConfig?
+    end
+
+    class FieldPosition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?fixed: String,
+        ?right_of: String,
+        ?below: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed: String?
+      attr_accessor right_of: String?
+      attr_accessor below: String?
+
+      class Fixed < FieldPosition
+      end
+      class RightOf < FieldPosition
+      end
+      class Below < FieldPosition
+      end
+      class Unknown < FieldPosition
+      end
+    end
+
+    class FieldValidationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?str_values: Array[String],
+        ?num_values: Array[Integer],
+        ?validation_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor str_values: Array[String]?
+      attr_accessor num_values: Array[Integer]?
+      attr_accessor validation_message: String?
+    end
+
+    class FileUploaderFieldConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_level: String,
+        ?accepted_file_types: Array[String],
+        ?show_thumbnails: bool,
+        ?is_resumable: bool,
+        ?max_file_count: Integer,
+        ?max_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_level: String?
+      attr_accessor accepted_file_types: Array[String]?
+      attr_accessor show_thumbnails: bool?
+      attr_accessor is_resumable: bool?
+      attr_accessor max_file_count: Integer?
+      attr_accessor max_size: Integer?
+    end
+
+    module FixedPosition
+      FIRST: String
+    end
+
+    class Form
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?name: String,
+        ?form_action_type: String,
+        ?style: Types::FormStyle,
+        ?data_type: Types::FormDataTypeConfig,
+        ?fields: Hash[String, Types::FieldConfig],
+        ?sectional_elements: Hash[String, Types::SectionalElement],
+        ?schema_version: String,
+        ?tags: Hash[String, String],
+        ?cta: Types::FormCTA,
+        ?label_decorator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor form_action_type: String?
+      attr_accessor style: Types::FormStyle?
+      attr_accessor data_type: Types::FormDataTypeConfig?
+      attr_accessor fields: Hash[String, Types::FieldConfig]?
+      attr_accessor sectional_elements: Hash[String, Types::SectionalElement]?
+      attr_accessor schema_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor cta: Types::FormCTA?
+      attr_accessor label_decorator: String?
+    end
+
+    module FormActionType
+      CREATE: String
+      UPDATE: String
+    end
+
+    class FormBindingElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?element: String,
+        ?property: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor element: String?
+      attr_accessor property: String?
+    end
+
+    class FormButton
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?excluded: bool,
+        ?children: String,
+        ?position: Types::FieldPosition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor excluded: bool?
+      attr_accessor children: String?
+      attr_accessor position: Types::FieldPosition?
+    end
+
+    module FormButtonsPosition
+      TOP: String
+      BOTTOM: String
+      TOP_AND_BOTTOM: String
+    end
+
+    class FormCTA
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: String,
+        ?clear: Types::FormButton,
+        ?cancel: Types::FormButton,
+        ?submit: Types::FormButton,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: String?
+      attr_accessor clear: Types::FormButton?
+      attr_accessor cancel: Types::FormButton?
+      attr_accessor submit: Types::FormButton?
+    end
+
+    class FormDataTypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_type: String,
+        ?data_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_type: String?
+      attr_accessor data_type_name: String?
+    end
+
+    class FormInputBindingPropertiesValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?binding_properties: Types::FormInputBindingPropertiesValueProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor binding_properties: Types::FormInputBindingPropertiesValueProperties?
+    end
+
+    class FormInputBindingPropertiesValueProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model: String?
+    end
+
+    class FormInputValueProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?binding_properties: Types::FormInputValuePropertyBindingProperties,
+        ?concat: Array[Types::FormInputValueProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor binding_properties: Types::FormInputValuePropertyBindingProperties?
+      attr_accessor concat: Array[Types::FormInputValueProperty]?
+    end
+
+    class FormInputValuePropertyBindingProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?property: String,
+        ?field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor property: String?
+      attr_accessor field: String?
+    end
+
+    class FormStyle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal_gap: Types::FormStyleConfig,
+        ?vertical_gap: Types::FormStyleConfig,
+        ?outer_padding: Types::FormStyleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal_gap: Types::FormStyleConfig?
+      attr_accessor vertical_gap: Types::FormStyleConfig?
+      attr_accessor outer_padding: Types::FormStyleConfig?
+    end
+
+    class FormStyleConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?token_reference: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_reference: String?
+      attr_accessor value: String?
+
+      class TokenReference < FormStyleConfig
+      end
+      class Value < FormStyleConfig
+      end
+      class Unknown < FormStyleConfig
+      end
+    end
+
+    class FormSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?data_type: Types::FormDataTypeConfig,
+        ?environment_name: String,
+        ?form_action_type: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor data_type: Types::FormDataTypeConfig?
+      attr_accessor environment_name: String?
+      attr_accessor form_action_type: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    module GenericDataRelationshipType
+      HAS_MANY: String
+      HAS_ONE: String
+      BELONGS_TO: String
+    end
+
+    class GetCodegenJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class GetCodegenJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::CodegenJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::CodegenJob?
+    end
+
+    class GetComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class GetComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class GetFormInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class GetFormOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form: Types::Form,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form: Types::Form?
+    end
+
+    class GetMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class GetMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?features: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor features: Hash[String, String]?
+    end
+
+    class GetThemeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+    end
+
+    class GetThemeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?theme: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor theme: Types::Theme?
+    end
+
+    class GraphQLRenderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types_file_path: String,
+        ?queries_file_path: String,
+        ?mutations_file_path: String,
+        ?subscriptions_file_path: String,
+        ?fragments_file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types_file_path: String?
+      attr_accessor queries_file_path: String?
+      attr_accessor mutations_file_path: String?
+      attr_accessor subscriptions_file_path: String?
+      attr_accessor fragments_file_path: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JSModule
+      ES2020: String
+      ESNEXT: String
+    end
+
+    module JSScript
+      JSX: String
+      TSX: String
+      JS: String
+    end
+
+    module JSTarget
+      ES2015: String
+      ES2020: String
+    end
+
+    class ListCodegenJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCodegenJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::CodegenJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::CodegenJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComponentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::ComponentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::ComponentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFormsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFormsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::FormSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::FormSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListThemesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListThemesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::ThemeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::ThemeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class MutationActionSetStateParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?property: String,
+        ?set: Types::ComponentProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor property: String?
+      attr_accessor set: Types::ComponentProperty?
+    end
+
+    class NoApiRenderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Predicate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?or: Array[Types::Predicate],
+        ?and: Array[Types::Predicate],
+        ?field: String,
+        ?operator: String,
+        ?operand: String,
+        ?operand_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor or: Array[Types::Predicate]?
+      attr_accessor and: Array[Types::Predicate]?
+      attr_accessor field: String?
+      attr_accessor operator: String?
+      attr_accessor operand: String?
+      attr_accessor operand_type: String?
+    end
+
+    class PutMetadataFlagBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_value: String?
+    end
+
+    class PutMetadataFlagInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?feature_name: String,
+        ?body: Types::PutMetadataFlagBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor feature_name: String?
+      attr_accessor body: Types::PutMetadataFlagBody?
+    end
+
+    class ReactStartCodegenJobData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?module: String,
+        ?target: String,
+        ?script: String,
+        ?render_type_declarations: bool,
+        ?inline_source_map: bool,
+        ?api_configuration: Types::ApiConfiguration,
+        ?dependencies: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor module: String?
+      attr_accessor target: String?
+      attr_accessor script: String?
+      attr_accessor render_type_declarations: bool?
+      attr_accessor inline_source_map: bool?
+      attr_accessor api_configuration: Types::ApiConfiguration?
+      attr_accessor dependencies: Hash[String, String]?
+    end
+
+    class RefreshTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?refresh_token_body: Types::RefreshTokenRequestBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor refresh_token_body: Types::RefreshTokenRequestBody?
+    end
+
+    class RefreshTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?expires_in: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor expires_in: Integer?
+    end
+
+    class RefreshTokenRequestBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor client_id: String?
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SectionalElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?position: Types::FieldPosition,
+        ?text: String,
+        ?level: Integer,
+        ?orientation: String,
+        ?excluded: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor position: Types::FieldPosition?
+      attr_accessor text: String?
+      attr_accessor level: Integer?
+      attr_accessor orientation: String?
+      attr_accessor excluded: bool?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SortDirection
+      ASC: String
+      DESC: String
+    end
+
+    class SortProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?direction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor direction: String?
+    end
+
+    class StartCodegenJobData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?render_config: Types::CodegenJobRenderConfig,
+        ?generic_data_schema: Types::CodegenJobGenericDataSchema,
+        ?auto_generate_forms: bool,
+        ?features: Types::CodegenFeatureFlags,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor render_config: Types::CodegenJobRenderConfig?
+      attr_accessor generic_data_schema: Types::CodegenJobGenericDataSchema?
+      attr_accessor auto_generate_forms: bool?
+      attr_accessor features: Types::CodegenFeatureFlags?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartCodegenJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?client_token: String,
+        ?codegen_job_to_create: Types::StartCodegenJobData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor codegen_job_to_create: Types::StartCodegenJobData?
+    end
+
+    class StartCodegenJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::CodegenJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::CodegenJob?
+    end
+
+    module StorageAccessLevel
+      PUBLIC: String
+      PROTECTED: String
+      PRIVATE: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Theme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?values: Array[Types::ThemeValues],
+        ?overrides: Array[Types::ThemeValues],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor values: Array[Types::ThemeValues]?
+      attr_accessor overrides: Array[Types::ThemeValues]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThemeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class ThemeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?children: Array[Types::ThemeValues],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor children: Array[Types::ThemeValues]?
+    end
+
+    class ThemeValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Types::ThemeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Types::ThemeValue?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateComponentData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?source_id: String,
+        ?component_type: String,
+        ?properties: Hash[String, Types::ComponentProperty],
+        ?children: Array[Types::ComponentChild],
+        ?variants: Array[Types::ComponentVariant],
+        ?overrides: Hash[String, Hash[String, String]],
+        ?binding_properties: Hash[String, Types::ComponentBindingPropertiesValue],
+        ?collection_properties: Hash[String, Types::ComponentDataConfiguration],
+        ?events: Hash[String, Types::ComponentEvent],
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor source_id: String?
+      attr_accessor component_type: String?
+      attr_accessor properties: Hash[String, Types::ComponentProperty]?
+      attr_accessor children: Array[Types::ComponentChild]?
+      attr_accessor variants: Array[Types::ComponentVariant]?
+      attr_accessor overrides: Hash[String, Hash[String, String]]?
+      attr_accessor binding_properties: Hash[String, Types::ComponentBindingPropertiesValue]?
+      attr_accessor collection_properties: Hash[String, Types::ComponentDataConfiguration]?
+      attr_accessor events: Hash[String, Types::ComponentEvent]?
+      attr_accessor schema_version: String?
+    end
+
+    class UpdateComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?client_token: String,
+        ?updated_component: Types::UpdateComponentData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+      attr_accessor updated_component: Types::UpdateComponentData?
+    end
+
+    class UpdateComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Component?
+    end
+
+    class UpdateFormData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: Types::FormDataTypeConfig,
+        ?form_action_type: String,
+        ?fields: Hash[String, Types::FieldConfig],
+        ?style: Types::FormStyle,
+        ?sectional_elements: Hash[String, Types::SectionalElement],
+        ?schema_version: String,
+        ?cta: Types::FormCTA,
+        ?label_decorator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: Types::FormDataTypeConfig?
+      attr_accessor form_action_type: String?
+      attr_accessor fields: Hash[String, Types::FieldConfig]?
+      attr_accessor style: Types::FormStyle?
+      attr_accessor sectional_elements: Hash[String, Types::SectionalElement]?
+      attr_accessor schema_version: String?
+      attr_accessor cta: Types::FormCTA?
+      attr_accessor label_decorator: String?
+    end
+
+    class UpdateFormInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?client_token: String,
+        ?updated_form: Types::UpdateFormData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+      attr_accessor updated_form: Types::UpdateFormData?
+    end
+
+    class UpdateFormOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Form,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Form?
+    end
+
+    class UpdateThemeData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?values: Array[Types::ThemeValues],
+        ?overrides: Array[Types::ThemeValues],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor values: Array[Types::ThemeValues]?
+      attr_accessor overrides: Array[Types::ThemeValues]?
+    end
+
+    class UpdateThemeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?environment_name: String,
+        ?id: String,
+        ?client_token: String,
+        ?updated_theme: Types::UpdateThemeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+      attr_accessor updated_theme: Types::UpdateThemeData?
+    end
+
+    class UpdateThemeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::Theme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::Theme?
+    end
+
+    class ValueMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_value: Types::FormInputValueProperty,
+        ?value: Types::FormInputValueProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_value: Types::FormInputValueProperty?
+      attr_accessor value: Types::FormInputValueProperty?
+    end
+
+    class ValueMappings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[Types::ValueMapping],
+        ?binding_properties: Hash[String, Types::FormInputBindingPropertiesValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[Types::ValueMapping]?
+      attr_accessor binding_properties: Hash[String, Types::FormInputBindingPropertiesValue]?
+    end
+  end
+end

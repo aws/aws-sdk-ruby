@@ -1,0 +1,5 @@
+  module Aws
+    module CloudFront
+      VERSION: String
+    end
+  end

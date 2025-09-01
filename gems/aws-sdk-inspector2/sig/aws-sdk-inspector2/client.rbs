@@ -1,0 +1,1753 @@
+module Aws::Inspector2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Inspector2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateMemberResponse
+      include Smithy::Client::_Response[Types::AssociateMemberOutput]
+      def account_id: () -> String?
+    end
+    def associate_member: (
+      ?account_id: String
+    ) -> _AssociateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberResponse
+
+    interface _BatchAssociateCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::BatchAssociateCodeSecurityScanConfigurationResponse]
+      def failed_associations: () -> Array[Types::FailedAssociationResult]?
+      def successful_associations: () -> Array[Types::SuccessfulAssociationResult]?
+    end
+    def batch_associate_code_security_scan_configuration: (
+      ?associate_configuration_requests: Array[
+        {
+          scan_configuration_arn: String,
+          resource: {
+            project_id: String
+          }
+        }
+      ]
+    ) -> _BatchAssociateCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateCodeSecurityScanConfigurationResponse
+
+    interface _BatchDisassociateCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateCodeSecurityScanConfigurationResponse]
+      def failed_associations: () -> Array[Types::FailedAssociationResult]?
+      def successful_associations: () -> Array[Types::SuccessfulAssociationResult]?
+    end
+    def batch_disassociate_code_security_scan_configuration: (
+      ?disassociate_configuration_requests: Array[
+        {
+          scan_configuration_arn: String,
+          resource: {
+            project_id: String
+          }
+        }
+      ]
+    ) -> _BatchDisassociateCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateCodeSecurityScanConfigurationResponse
+
+    interface _BatchGetAccountStatusResponse
+      include Smithy::Client::_Response[Types::BatchGetAccountStatusOutput]
+      def accounts: () -> Array[Types::AccountState]?
+      def failed_accounts: () -> Array[Types::FailedAccount]?
+    end
+    def batch_get_account_status: (
+      ?account_ids: Array[String]
+    ) -> _BatchGetAccountStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAccountStatusResponse
+
+    interface _BatchGetCodeSnippetResponse
+      include Smithy::Client::_Response[Types::BatchGetCodeSnippetResponse]
+      def code_snippet_results: () -> Array[Types::CodeSnippetResult]?
+      def errors: () -> Array[Types::CodeSnippetError]?
+    end
+    def batch_get_code_snippet: (
+      ?finding_arns: Array[String]
+    ) -> _BatchGetCodeSnippetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCodeSnippetResponse
+
+    interface _BatchGetFindingDetailsResponse
+      include Smithy::Client::_Response[Types::BatchGetFindingDetailsResponse]
+      def finding_details: () -> Array[Types::FindingDetail]?
+      def errors: () -> Array[Types::FindingDetailsError]?
+    end
+    def batch_get_finding_details: (
+      ?finding_arns: Array[String]
+    ) -> _BatchGetFindingDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFindingDetailsResponse
+
+    interface _BatchGetFreeTrialInfoResponse
+      include Smithy::Client::_Response[Types::BatchGetFreeTrialInfoOutput]
+      def accounts: () -> Array[Types::FreeTrialAccountInfo]?
+      def failed_accounts: () -> Array[Types::FreeTrialInfoError]?
+    end
+    def batch_get_free_trial_info: (
+      ?account_ids: Array[String]
+    ) -> _BatchGetFreeTrialInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFreeTrialInfoResponse
+
+    interface _BatchGetMemberEc2DeepInspectionStatusResponse
+      include Smithy::Client::_Response[Types::BatchGetMemberEc2DeepInspectionStatusResponse]
+      def account_ids: () -> Array[Types::MemberAccountEc2DeepInspectionStatusState]?
+      def failed_account_ids: () -> Array[Types::FailedMemberAccountEc2DeepInspectionStatusState]?
+    end
+    def batch_get_member_ec2_deep_inspection_status: (
+      ?account_ids: Array[String]
+    ) -> _BatchGetMemberEc2DeepInspectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetMemberEc2DeepInspectionStatusResponse
+
+    interface _BatchUpdateMemberEc2DeepInspectionStatusResponse
+      include Smithy::Client::_Response[Types::BatchUpdateMemberEc2DeepInspectionStatusResponse]
+      def account_ids: () -> Array[Types::MemberAccountEc2DeepInspectionStatusState]?
+      def failed_account_ids: () -> Array[Types::FailedMemberAccountEc2DeepInspectionStatusState]?
+    end
+    def batch_update_member_ec2_deep_inspection_status: (
+      ?account_ids: Array[
+        {
+          account_id: String,
+          activate_deep_inspection: bool
+        }
+      ]
+    ) -> _BatchUpdateMemberEc2DeepInspectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateMemberEc2DeepInspectionStatusResponse
+
+    interface _CancelFindingsReportResponse
+      include Smithy::Client::_Response[Types::CancelFindingsReportOutput]
+      def report_id: () -> String?
+    end
+    def cancel_findings_report: (
+      ?report_id: String
+    ) -> _CancelFindingsReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelFindingsReportResponse
+
+    interface _CancelSbomExportResponse
+      include Smithy::Client::_Response[Types::CancelSbomExportResponse]
+      def report_id: () -> String?
+    end
+    def cancel_sbom_export: (
+      ?report_id: String
+    ) -> _CancelSbomExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSbomExportResponse
+
+    interface _CreateCisScanConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateCisScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def create_cis_scan_configuration: (
+      ?scan_name: String,
+      ?security_level: String,
+      ?schedule: {
+        one_time: {
+        },
+        daily: {
+          start_time: {
+            time_of_day: String,
+            timezone: String
+          }
+        },
+        weekly: {
+          start_time: untyped,
+          days: Array[String]
+        },
+        monthly: {
+          start_time: untyped,
+          day: String
+        }
+      },
+      ?targets: {
+        account_ids: Array[String],
+        target_resource_tags: Hash[String,
+          Array[String]
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCisScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCisScanConfigurationResponse
+
+    interface _CreateCodeSecurityIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateCodeSecurityIntegrationResponse]
+      def integration_arn: () -> String?
+      def status: () -> String?
+      def authorization_url: () -> String?
+    end
+    def create_code_security_integration: (
+      ?name: String,
+      ?type: String,
+      ?details: {
+        gitlab_self_managed: {
+          instance_url: String,
+          access_token: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCodeSecurityIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeSecurityIntegrationResponse
+
+    interface _CreateCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateCodeSecurityScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def create_code_security_scan_configuration: (
+      ?name: String,
+      ?level: String,
+      ?configuration: {
+        periodic_scan_configuration: {
+          frequency: String,
+          frequency_expression: String
+        },
+        continuous_integration_scan_configuration: {
+          supported_events: Array[String]
+        },
+        rule_set_categories: Array[String]
+      },
+      ?scope_settings: {
+        project_selection_scope: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeSecurityScanConfigurationResponse
+
+    interface _CreateFilterResponse
+      include Smithy::Client::_Response[Types::CreateFilterOutput]
+      def arn: () -> String?
+    end
+    def create_filter: (
+      ?action: String,
+      ?description: String,
+      ?filter_criteria: {
+        finding_arn: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        aws_account_id: untyped,
+        finding_type: untyped,
+        severity: untyped,
+        first_observed_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        last_observed_at: untyped,
+        updated_at: untyped,
+        finding_status: untyped,
+        title: untyped,
+        inspector_score: Array[
+          {
+            upper_inclusive: Float,
+            lower_inclusive: untyped
+          }
+        ],
+        resource_type: untyped,
+        resource_id: untyped,
+        resource_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: String
+          }
+        ],
+        ec2_instance_image_id: untyped,
+        ec2_instance_vpc_id: untyped,
+        ec2_instance_subnet_id: untyped,
+        ecr_image_pushed_at: untyped,
+        ecr_image_architecture: untyped,
+        ecr_image_registry: untyped,
+        ecr_image_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ecr_image_hash: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: untyped,
+        port_range: Array[
+          {
+            begin_inclusive: Integer,
+            end_inclusive: untyped
+          }
+        ],
+        network_protocol: untyped,
+        component_id: untyped,
+        component_type: untyped,
+        vulnerability_id: untyped,
+        vulnerability_source: untyped,
+        vendor_severity: untyped,
+        vulnerable_packages: Array[
+          {
+            name: {
+              comparison: untyped,
+              value: untyped
+            },
+            version: untyped,
+            epoch: {
+              upper_inclusive: untyped,
+              lower_inclusive: untyped
+            },
+            release: untyped,
+            architecture: untyped,
+            source_layer_hash: untyped,
+            source_lambda_layer_arn: untyped,
+            file_path: untyped
+          }
+        ],
+        related_vulnerabilities: untyped,
+        fix_available: untyped,
+        lambda_function_name: untyped,
+        lambda_function_layers: untyped,
+        lambda_function_runtime: untyped,
+        lambda_function_last_modified_at: untyped,
+        lambda_function_execution_role_arn: untyped,
+        exploit_available: untyped,
+        code_vulnerability_detector_name: untyped,
+        code_vulnerability_detector_tags: untyped,
+        code_vulnerability_file_path: untyped,
+        epss_score: untyped,
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped
+      },
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?reason: String
+    ) -> _CreateFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFilterResponse
+
+    interface _CreateFindingsReportResponse
+      include Smithy::Client::_Response[Types::CreateFindingsReportOutput]
+      def report_id: () -> String?
+    end
+    def create_findings_report: (
+      ?filter_criteria: {
+        finding_arn: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        aws_account_id: untyped,
+        finding_type: untyped,
+        severity: untyped,
+        first_observed_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        last_observed_at: untyped,
+        updated_at: untyped,
+        finding_status: untyped,
+        title: untyped,
+        inspector_score: Array[
+          {
+            upper_inclusive: Float,
+            lower_inclusive: untyped
+          }
+        ],
+        resource_type: untyped,
+        resource_id: untyped,
+        resource_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: String
+          }
+        ],
+        ec2_instance_image_id: untyped,
+        ec2_instance_vpc_id: untyped,
+        ec2_instance_subnet_id: untyped,
+        ecr_image_pushed_at: untyped,
+        ecr_image_architecture: untyped,
+        ecr_image_registry: untyped,
+        ecr_image_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ecr_image_hash: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: untyped,
+        port_range: Array[
+          {
+            begin_inclusive: Integer,
+            end_inclusive: untyped
+          }
+        ],
+        network_protocol: untyped,
+        component_id: untyped,
+        component_type: untyped,
+        vulnerability_id: untyped,
+        vulnerability_source: untyped,
+        vendor_severity: untyped,
+        vulnerable_packages: Array[
+          {
+            name: {
+              comparison: untyped,
+              value: untyped
+            },
+            version: untyped,
+            epoch: {
+              upper_inclusive: untyped,
+              lower_inclusive: untyped
+            },
+            release: untyped,
+            architecture: untyped,
+            source_layer_hash: untyped,
+            source_lambda_layer_arn: untyped,
+            file_path: untyped
+          }
+        ],
+        related_vulnerabilities: untyped,
+        fix_available: untyped,
+        lambda_function_name: untyped,
+        lambda_function_layers: untyped,
+        lambda_function_runtime: untyped,
+        lambda_function_last_modified_at: untyped,
+        lambda_function_execution_role_arn: untyped,
+        exploit_available: untyped,
+        code_vulnerability_detector_name: untyped,
+        code_vulnerability_detector_tags: untyped,
+        code_vulnerability_file_path: untyped,
+        epss_score: untyped,
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped
+      },
+      ?report_format: String,
+      ?s3_destination: {
+        bucket_name: String,
+        key_prefix: untyped,
+        kms_key_arn: untyped
+      }
+    ) -> _CreateFindingsReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFindingsReportResponse
+
+    interface _CreateSbomExportResponse
+      include Smithy::Client::_Response[Types::CreateSbomExportResponse]
+      def report_id: () -> String?
+    end
+    def create_sbom_export: (
+      ?resource_filter_criteria: {
+        account_id: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        resource_id: untyped,
+        resource_type: untyped,
+        ecr_repository_name: untyped,
+        lambda_function_name: untyped,
+        ecr_image_tags: untyped,
+        ec2_instance_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        lambda_function_tags: untyped
+      },
+      ?report_format: String,
+      ?s3_destination: {
+        bucket_name: String,
+        key_prefix: untyped,
+        kms_key_arn: untyped
+      }
+    ) -> _CreateSbomExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSbomExportResponse
+
+    interface _DeleteCisScanConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteCisScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def delete_cis_scan_configuration: (
+      ?scan_configuration_arn: String
+    ) -> _DeleteCisScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCisScanConfigurationResponse
+
+    interface _DeleteCodeSecurityIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteCodeSecurityIntegrationResponse]
+      def integration_arn: () -> String?
+    end
+    def delete_code_security_integration: (
+      ?integration_arn: String
+    ) -> _DeleteCodeSecurityIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeSecurityIntegrationResponse
+
+    interface _DeleteCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteCodeSecurityScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def delete_code_security_scan_configuration: (
+      ?scan_configuration_arn: String
+    ) -> _DeleteCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeSecurityScanConfigurationResponse
+
+    interface _DeleteFilterResponse
+      include Smithy::Client::_Response[Types::DeleteFilterOutput]
+      def arn: () -> String?
+    end
+    def delete_filter: (
+      ?arn: String
+    ) -> _DeleteFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFilterResponse
+
+    interface _DescribeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigurationOutput]
+      def auto_enable: () -> Types::AutoEnable?
+      def max_account_limit_reached: () -> bool?
+    end
+    def describe_organization_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigurationResponse
+
+    interface _DisableResponse
+      include Smithy::Client::_Response[Types::DisableOutput]
+      def accounts: () -> Array[Types::Account]?
+      def failed_accounts: () -> Array[Types::FailedAccount]?
+    end
+    def disable: (
+      ?account_ids: Array[String],
+      ?resource_types: Array[String]
+    ) -> _DisableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableResponse
+
+    interface _DisableDelegatedAdminAccountResponse
+      include Smithy::Client::_Response[Types::DisableDelegatedAdminAccountOutput]
+      def delegated_admin_account_id: () -> String?
+    end
+    def disable_delegated_admin_account: (
+      ?delegated_admin_account_id: String
+    ) -> _DisableDelegatedAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDelegatedAdminAccountResponse
+
+    interface _DisassociateMemberResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberOutput]
+      def account_id: () -> String?
+    end
+    def disassociate_member: (
+      ?account_id: String
+    ) -> _DisassociateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberResponse
+
+    interface _EnableResponse
+      include Smithy::Client::_Response[Types::EnableOutput]
+      def accounts: () -> Array[Types::Account]?
+      def failed_accounts: () -> Array[Types::FailedAccount]?
+    end
+    def enable: (
+      ?account_ids: Array[String],
+      ?resource_types: Array[String],
+      ?client_token: String
+    ) -> _EnableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableResponse
+
+    interface _EnableDelegatedAdminAccountResponse
+      include Smithy::Client::_Response[Types::EnableDelegatedAdminAccountOutput]
+      def delegated_admin_account_id: () -> String?
+    end
+    def enable_delegated_admin_account: (
+      ?delegated_admin_account_id: String,
+      ?client_token: String
+    ) -> _EnableDelegatedAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDelegatedAdminAccountResponse
+
+    interface _GetCisScanReportResponse
+      include Smithy::Client::_Response[Types::GetCisScanReportResponse]
+      def url: () -> String?
+      def status: () -> String?
+    end
+    def get_cis_scan_report: (
+      ?scan_arn: String,
+      ?target_accounts: Array[String],
+      ?report_format: String
+    ) -> _GetCisScanReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCisScanReportResponse
+
+    interface _GetCisScanResultDetailsResponse
+      include Smithy::Client::_Response[Types::GetCisScanResultDetailsResponse]
+      def scan_result_details: () -> Array[Types::CisScanResultDetails]?
+      def next_token: () -> String?
+    end
+    def get_cis_scan_result_details: (
+      ?scan_arn: String,
+      ?target_resource_id: String,
+      ?account_id: String,
+      ?filter_criteria: {
+        finding_status_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        check_id_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        title_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        security_level_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        finding_arn_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ]
+      },
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCisScanResultDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCisScanResultDetailsResponse
+
+    interface _GetClustersForImageResponse
+      include Smithy::Client::_Response[Types::GetClustersForImageResponse]
+      def cluster: () -> Array[Types::ClusterInformation]?
+      def next_token: () -> String?
+    end
+    def get_clusters_for_image: (
+      ?filter: {
+        resource_id: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetClustersForImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClustersForImageResponse
+
+    interface _GetCodeSecurityIntegrationResponse
+      include Smithy::Client::_Response[Types::GetCodeSecurityIntegrationResponse]
+      def integration_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_on: () -> Time?
+      def last_update_on: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def authorization_url: () -> String?
+    end
+    def get_code_security_integration: (
+      ?integration_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _GetCodeSecurityIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSecurityIntegrationResponse
+
+    interface _GetCodeSecurityScanResponse
+      include Smithy::Client::_Response[Types::GetCodeSecurityScanResponse]
+      def scan_id: () -> String?
+      def resource: () -> Types::CodeSecurityResource?
+      def account_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def last_commit_id: () -> String?
+    end
+    def get_code_security_scan: (
+      ?resource: {
+        project_id: String
+      },
+      ?scan_id: String
+    ) -> _GetCodeSecurityScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSecurityScanResponse
+
+    interface _GetCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::GetCodeSecurityScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+      def name: () -> String?
+      def configuration: () -> Types::CodeSecurityScanConfiguration?
+      def level: () -> String?
+      def scope_settings: () -> Types::ScopeSettings?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_code_security_scan_configuration: (
+      ?scan_configuration_arn: String
+    ) -> _GetCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSecurityScanConfigurationResponse
+
+    interface _GetConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationOutput]
+      def ecr_configuration: () -> Types::EcrConfigurationState?
+      def ec2_configuration: () -> Types::Ec2ConfigurationState?
+    end
+    def get_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
+
+    interface _GetDelegatedAdminAccountResponse
+      include Smithy::Client::_Response[Types::GetDelegatedAdminAccountOutput]
+      def delegated_admin: () -> Types::DelegatedAdmin?
+    end
+    def get_delegated_admin_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDelegatedAdminAccountResponse
+
+    interface _GetEc2DeepInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEc2DeepInspectionConfigurationResponse]
+      def package_paths: () -> Array[String]?
+      def org_package_paths: () -> Array[String]?
+      def status: () -> String?
+      def error_message: () -> String?
+    end
+    def get_ec2_deep_inspection_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEc2DeepInspectionConfigurationResponse
+
+    interface _GetEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::GetEncryptionKeyResponse]
+      def kms_key_id: () -> String?
+    end
+    def get_encryption_key: (
+      ?scan_type: String,
+      ?resource_type: String
+    ) -> _GetEncryptionKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEncryptionKeyResponse
+
+    interface _GetFindingsReportStatusResponse
+      include Smithy::Client::_Response[Types::GetFindingsReportStatusOutput]
+      def report_id: () -> String?
+      def status: () -> String?
+      def error_code: () -> String?
+      def error_message: () -> String?
+      def destination: () -> Types::Destination?
+      def filter_criteria: () -> Types::FilterCriteria?
+    end
+    def get_findings_report_status: (
+      ?report_id: String
+    ) -> _GetFindingsReportStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsReportStatusResponse
+
+    interface _GetMemberResponse
+      include Smithy::Client::_Response[Types::GetMemberOutput]
+      def member: () -> Types::Member?
+    end
+    def get_member: (
+      ?account_id: String
+    ) -> _GetMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemberResponse
+
+    interface _GetSbomExportResponse
+      include Smithy::Client::_Response[Types::GetSbomExportResponse]
+      def report_id: () -> String?
+      def format: () -> String?
+      def status: () -> String?
+      def error_code: () -> String?
+      def error_message: () -> String?
+      def s3_destination: () -> Types::Destination?
+      def filter_criteria: () -> Types::ResourceFilterCriteria?
+    end
+    def get_sbom_export: (
+      ?report_id: String
+    ) -> _GetSbomExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSbomExportResponse
+
+    interface _ListAccountPermissionsResponse
+      include Smithy::Client::_Response[Types::ListAccountPermissionsOutput]
+      def permissions: () -> Array[Types::Permission]?
+      def next_token: () -> String?
+    end
+    def list_account_permissions: (
+      ?service: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccountPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountPermissionsResponse
+
+    interface _ListCisScanConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListCisScanConfigurationsResponse]
+      def scan_configurations: () -> Array[Types::CisScanConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_cis_scan_configurations: (
+      ?filter_criteria: {
+        scan_name_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        target_resource_tag_filters: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        scan_configuration_arn_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ]
+      },
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCisScanConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCisScanConfigurationsResponse
+
+    interface _ListCisScanResultsAggregatedByChecksResponse
+      include Smithy::Client::_Response[Types::ListCisScanResultsAggregatedByChecksResponse]
+      def check_aggregations: () -> Array[Types::CisCheckAggregation]?
+      def next_token: () -> String?
+    end
+    def list_cis_scan_results_aggregated_by_checks: (
+      ?scan_arn: String,
+      ?filter_criteria: {
+        account_id_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        check_id_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        title_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        platform_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        failed_resources_filters: Array[
+          {
+            upper_inclusive: Integer,
+            lower_inclusive: untyped
+          }
+        ],
+        security_level_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ]
+      },
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCisScanResultsAggregatedByChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCisScanResultsAggregatedByChecksResponse
+
+    interface _ListCisScanResultsAggregatedByTargetResourceResponse
+      include Smithy::Client::_Response[Types::ListCisScanResultsAggregatedByTargetResourceResponse]
+      def target_resource_aggregations: () -> Array[Types::CisTargetResourceAggregation]?
+      def next_token: () -> String?
+    end
+    def list_cis_scan_results_aggregated_by_target_resource: (
+      ?scan_arn: String,
+      ?filter_criteria: {
+        account_id_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        status_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        check_id_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        target_resource_id_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        target_resource_tag_filters: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        platform_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        target_status_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        target_status_reason_filters: Array[
+          {
+            comparison: untyped,
+            value: String
+          }
+        ],
+        failed_checks_filters: Array[
+          {
+            upper_inclusive: Integer,
+            lower_inclusive: untyped
+          }
+        ]
+      },
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCisScanResultsAggregatedByTargetResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCisScanResultsAggregatedByTargetResourceResponse
+
+    interface _ListCisScansResponse
+      include Smithy::Client::_Response[Types::ListCisScansResponse]
+      def scans: () -> Array[Types::CisScan]?
+      def next_token: () -> String?
+    end
+    def list_cis_scans: (
+      ?filter_criteria: {
+        scan_name_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        target_resource_tag_filters: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        target_resource_id_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        scan_status_filters: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        scan_at_filters: Array[
+          {
+            earliest_scan_start_time: Time,
+            latest_scan_start_time: untyped
+          }
+        ],
+        scan_configuration_arn_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        scan_arn_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        scheduled_by_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ],
+        failed_checks_filters: Array[
+          {
+            upper_inclusive: Integer,
+            lower_inclusive: untyped
+          }
+        ],
+        target_account_id_filters: Array[
+          {
+            comparison: untyped,
+            value: untyped
+          }
+        ]
+      },
+      ?detail_level: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCisScansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCisScansResponse
+
+    interface _ListCodeSecurityIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListCodeSecurityIntegrationsResponse]
+      def integrations: () -> Array[Types::CodeSecurityIntegrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_security_integrations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCodeSecurityIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSecurityIntegrationsResponse
+
+    interface _ListCodeSecurityScanConfigurationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCodeSecurityScanConfigurationAssociationsResponse]
+      def associations: () -> Array[Types::CodeSecurityScanConfigurationAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_security_scan_configuration_associations: (
+      ?scan_configuration_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCodeSecurityScanConfigurationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSecurityScanConfigurationAssociationsResponse
+
+    interface _ListCodeSecurityScanConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListCodeSecurityScanConfigurationsResponse]
+      def configurations: () -> Array[Types::CodeSecurityScanConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_security_scan_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCodeSecurityScanConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSecurityScanConfigurationsResponse
+
+    interface _ListCoverageResponse
+      include Smithy::Client::_Response[Types::ListCoverageOutput]
+      def next_token: () -> String?
+      def covered_resources: () -> Array[Types::CoveredResource]?
+    end
+    def list_coverage: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_criteria: {
+        scan_status_code: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        scan_status_reason: untyped,
+        account_id: untyped,
+        resource_id: untyped,
+        resource_type: untyped,
+        scan_type: untyped,
+        ecr_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ec2_instance_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        lambda_function_name: untyped,
+        lambda_function_tags: untyped,
+        lambda_function_runtime: untyped,
+        last_scanned_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        scan_mode: untyped,
+        image_pulled_at: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: Array[
+          {
+            upper_inclusive: Integer,
+            lower_inclusive: untyped
+          }
+        ],
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped,
+        code_repository_provider_type_visibility: untyped,
+        last_scanned_commit_id: untyped
+      }
+    ) -> _ListCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoverageResponse
+
+    interface _ListCoverageStatisticsResponse
+      include Smithy::Client::_Response[Types::ListCoverageStatisticsOutput]
+      def counts_by_group: () -> Array[Types::Counts]?
+      def total_counts: () -> Integer?
+      def next_token: () -> String?
+    end
+    def list_coverage_statistics: (
+      ?filter_criteria: {
+        scan_status_code: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        scan_status_reason: untyped,
+        account_id: untyped,
+        resource_id: untyped,
+        resource_type: untyped,
+        scan_type: untyped,
+        ecr_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ec2_instance_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: untyped
+          }
+        ],
+        lambda_function_name: untyped,
+        lambda_function_tags: untyped,
+        lambda_function_runtime: untyped,
+        last_scanned_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        scan_mode: untyped,
+        image_pulled_at: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: Array[
+          {
+            upper_inclusive: Integer,
+            lower_inclusive: untyped
+          }
+        ],
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped,
+        code_repository_provider_type_visibility: untyped,
+        last_scanned_commit_id: untyped
+      },
+      ?group_by: String,
+      ?next_token: String
+    ) -> _ListCoverageStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoverageStatisticsResponse
+
+    interface _ListDelegatedAdminAccountsResponse
+      include Smithy::Client::_Response[Types::ListDelegatedAdminAccountsOutput]
+      def delegated_admin_accounts: () -> Array[Types::DelegatedAdminAccount]?
+      def next_token: () -> String?
+    end
+    def list_delegated_admin_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDelegatedAdminAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDelegatedAdminAccountsResponse
+
+    interface _ListFiltersResponse
+      include Smithy::Client::_Response[Types::ListFiltersOutput]
+      def filters: () -> Array[Types::Filter]?
+      def next_token: () -> String?
+    end
+    def list_filters: (
+      ?arns: Array[String],
+      ?action: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFiltersResponse
+
+    interface _ListFindingAggregationsResponse
+      include Smithy::Client::_Response[Types::ListFindingAggregationsOutput]
+      def aggregation_type: () -> String?
+      def responses: () -> Array[Types::AggregationResponse]?
+      def next_token: () -> String?
+    end
+    def list_finding_aggregations: (
+      ?aggregation_type: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?account_ids: Array[
+        {
+          comparison: String,
+          value: String
+        }
+      ],
+      ?aggregation_request: {
+        account_aggregation: {
+          finding_type: String,
+          resource_type: String,
+          sort_order: String,
+          sort_by: String
+        },
+        ami_aggregation: {
+          amis: Array[
+            {
+              comparison: String,
+              value: String
+            }
+          ],
+          sort_order: untyped,
+          sort_by: String
+        },
+        aws_ecr_container_aggregation: {
+          resource_ids: untyped,
+          image_shas: untyped,
+          repositories: untyped,
+          architectures: untyped,
+          image_tags: untyped,
+          sort_order: untyped,
+          sort_by: String,
+          last_in_use_at: Array[
+            {
+              start_inclusive: Time,
+              end_inclusive: untyped
+            }
+          ],
+          in_use_count: Array[
+            {
+              upper_inclusive: Float,
+              lower_inclusive: untyped
+            }
+          ]
+        },
+        ec2_instance_aggregation: {
+          amis: untyped,
+          operating_systems: untyped,
+          instance_ids: untyped,
+          instance_tags: Array[
+            {
+              comparison: String,
+              key: String,
+              value: String
+            }
+          ],
+          sort_order: untyped,
+          sort_by: String
+        },
+        finding_type_aggregation: {
+          finding_type: untyped,
+          resource_type: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        image_layer_aggregation: {
+          repositories: untyped,
+          resource_ids: untyped,
+          layer_hashes: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        package_aggregation: {
+          package_names: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        repository_aggregation: {
+          repositories: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        title_aggregation: {
+          titles: untyped,
+          vulnerability_ids: untyped,
+          resource_type: untyped,
+          sort_order: untyped,
+          sort_by: String,
+          finding_type: untyped
+        },
+        lambda_layer_aggregation: {
+          function_names: untyped,
+          resource_ids: untyped,
+          layer_arns: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        lambda_function_aggregation: {
+          resource_ids: untyped,
+          function_names: untyped,
+          runtimes: untyped,
+          function_tags: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        code_repository_aggregation: {
+          project_names: untyped,
+          provider_types: untyped,
+          sort_order: untyped,
+          sort_by: String,
+          resource_ids: untyped
+        }
+      }
+    ) -> _ListFindingAggregationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingAggregationsResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsOutput]
+      def next_token: () -> String?
+      def findings: () -> Array[Types::Finding]?
+    end
+    def list_findings: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_criteria: {
+        finding_arn: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        aws_account_id: untyped,
+        finding_type: untyped,
+        severity: untyped,
+        first_observed_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        last_observed_at: untyped,
+        updated_at: untyped,
+        finding_status: untyped,
+        title: untyped,
+        inspector_score: Array[
+          {
+            upper_inclusive: Float,
+            lower_inclusive: untyped
+          }
+        ],
+        resource_type: untyped,
+        resource_id: untyped,
+        resource_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: String
+          }
+        ],
+        ec2_instance_image_id: untyped,
+        ec2_instance_vpc_id: untyped,
+        ec2_instance_subnet_id: untyped,
+        ecr_image_pushed_at: untyped,
+        ecr_image_architecture: untyped,
+        ecr_image_registry: untyped,
+        ecr_image_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ecr_image_hash: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: untyped,
+        port_range: Array[
+          {
+            begin_inclusive: Integer,
+            end_inclusive: untyped
+          }
+        ],
+        network_protocol: untyped,
+        component_id: untyped,
+        component_type: untyped,
+        vulnerability_id: untyped,
+        vulnerability_source: untyped,
+        vendor_severity: untyped,
+        vulnerable_packages: Array[
+          {
+            name: {
+              comparison: untyped,
+              value: untyped
+            },
+            version: untyped,
+            epoch: {
+              upper_inclusive: untyped,
+              lower_inclusive: untyped
+            },
+            release: untyped,
+            architecture: untyped,
+            source_layer_hash: untyped,
+            source_lambda_layer_arn: untyped,
+            file_path: untyped
+          }
+        ],
+        related_vulnerabilities: untyped,
+        fix_available: untyped,
+        lambda_function_name: untyped,
+        lambda_function_layers: untyped,
+        lambda_function_runtime: untyped,
+        lambda_function_last_modified_at: untyped,
+        lambda_function_execution_role_arn: untyped,
+        exploit_available: untyped,
+        code_vulnerability_detector_name: untyped,
+        code_vulnerability_detector_tags: untyped,
+        code_vulnerability_file_path: untyped,
+        epss_score: untyped,
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped
+      },
+      ?sort_criteria: {
+        field: String,
+        sort_order: String
+      }
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersOutput]
+      def members: () -> Array[Types::Member]?
+      def next_token: () -> String?
+    end
+    def list_members: (
+      ?only_associated: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUsageTotalsResponse
+      include Smithy::Client::_Response[Types::ListUsageTotalsOutput]
+      def next_token: () -> String?
+      def totals: () -> Array[Types::UsageTotal]?
+    end
+    def list_usage_totals: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_ids: Array[String]
+    ) -> _ListUsageTotalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsageTotalsResponse
+
+    interface _ResetEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::ResetEncryptionKeyResponse]
+    end
+    def reset_encryption_key: (
+      ?scan_type: String,
+      ?resource_type: String
+    ) -> _ResetEncryptionKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetEncryptionKeyResponse
+
+    interface _SearchVulnerabilitiesResponse
+      include Smithy::Client::_Response[Types::SearchVulnerabilitiesResponse]
+      def vulnerabilities: () -> Array[Types::Vulnerability]?
+      def next_token: () -> String?
+    end
+    def search_vulnerabilities: (
+      ?filter_criteria: {
+        vulnerability_ids: Array[String]
+      },
+      ?next_token: String
+    ) -> _SearchVulnerabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchVulnerabilitiesResponse
+
+    interface _SendCisSessionHealthResponse
+      include Smithy::Client::_Response[Types::SendCisSessionHealthResponse]
+    end
+    def send_cis_session_health: (
+      ?scan_job_id: String,
+      ?session_token: String
+    ) -> _SendCisSessionHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendCisSessionHealthResponse
+
+    interface _SendCisSessionTelemetryResponse
+      include Smithy::Client::_Response[Types::SendCisSessionTelemetryResponse]
+    end
+    def send_cis_session_telemetry: (
+      ?scan_job_id: String,
+      ?session_token: String,
+      ?messages: Array[
+        {
+          rule_id: String,
+          status: String,
+          cis_rule_details: String
+        }
+      ]
+    ) -> _SendCisSessionTelemetryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendCisSessionTelemetryResponse
+
+    interface _StartCisSessionResponse
+      include Smithy::Client::_Response[Types::StartCisSessionResponse]
+    end
+    def start_cis_session: (
+      ?scan_job_id: String,
+      ?message: {
+        session_token: String
+      }
+    ) -> _StartCisSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCisSessionResponse
+
+    interface _StartCodeSecurityScanResponse
+      include Smithy::Client::_Response[Types::StartCodeSecurityScanResponse]
+      def scan_id: () -> String?
+      def status: () -> String?
+    end
+    def start_code_security_scan: (
+      ?client_token: String,
+      ?resource: {
+        project_id: String
+      }
+    ) -> _StartCodeSecurityScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodeSecurityScanResponse
+
+    interface _StopCisSessionResponse
+      include Smithy::Client::_Response[Types::StopCisSessionResponse]
+    end
+    def stop_cis_session: (
+      ?scan_job_id: String,
+      ?session_token: String,
+      ?message: {
+        status: String,
+        reason: String,
+        progress: {
+          total_checks: Integer,
+          successful_checks: untyped,
+          failed_checks: untyped,
+          not_evaluated_checks: untyped,
+          unknown_checks: untyped,
+          not_applicable_checks: untyped,
+          informational_checks: untyped,
+          error_checks: untyped
+        },
+        compute_platform: {
+          vendor: String,
+          product: String,
+          version: String
+        },
+        benchmark_version: String,
+        benchmark_profile: String
+      }
+    ) -> _StopCisSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCisSessionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCisScanConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateCisScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def update_cis_scan_configuration: (
+      ?scan_configuration_arn: String,
+      ?scan_name: String,
+      ?security_level: String,
+      ?schedule: {
+        one_time: {
+        },
+        daily: {
+          start_time: {
+            time_of_day: String,
+            timezone: String
+          }
+        },
+        weekly: {
+          start_time: untyped,
+          days: Array[String]
+        },
+        monthly: {
+          start_time: untyped,
+          day: String
+        }
+      },
+      ?targets: {
+        account_ids: Array[String],
+        target_resource_tags: Hash[String,
+          Array[String]
+        ]
+      }
+    ) -> _UpdateCisScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCisScanConfigurationResponse
+
+    interface _UpdateCodeSecurityIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateCodeSecurityIntegrationResponse]
+      def integration_arn: () -> String?
+      def status: () -> String?
+    end
+    def update_code_security_integration: (
+      ?integration_arn: String,
+      ?details: {
+        gitlab_self_managed: {
+          auth_code: String
+        },
+        github: {
+          code: String,
+          installation_id: String
+        }
+      }
+    ) -> _UpdateCodeSecurityIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCodeSecurityIntegrationResponse
+
+    interface _UpdateCodeSecurityScanConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateCodeSecurityScanConfigurationResponse]
+      def scan_configuration_arn: () -> String?
+    end
+    def update_code_security_scan_configuration: (
+      ?scan_configuration_arn: String,
+      ?configuration: {
+        periodic_scan_configuration: {
+          frequency: String,
+          frequency_expression: String
+        },
+        continuous_integration_scan_configuration: {
+          supported_events: Array[String]
+        },
+        rule_set_categories: Array[String]
+      }
+    ) -> _UpdateCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCodeSecurityScanConfigurationResponse
+
+    interface _UpdateConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationOutput]
+    end
+    def update_configuration: (
+      ?ecr_configuration: {
+        rescan_duration: String,
+        pull_date_rescan_duration: String,
+        pull_date_rescan_mode: String
+      },
+      ?ec2_configuration: {
+        scan_mode: String
+      }
+    ) -> _UpdateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationResponse
+
+    interface _UpdateEc2DeepInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateEc2DeepInspectionConfigurationResponse]
+      def package_paths: () -> Array[String]?
+      def org_package_paths: () -> Array[String]?
+      def status: () -> String?
+      def error_message: () -> String?
+    end
+    def update_ec2_deep_inspection_configuration: (
+      ?activate_deep_inspection: bool,
+      ?package_paths: Array[String]
+    ) -> _UpdateEc2DeepInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEc2DeepInspectionConfigurationResponse
+
+    interface _UpdateEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::UpdateEncryptionKeyResponse]
+    end
+    def update_encryption_key: (
+      ?kms_key_id: String,
+      ?scan_type: String,
+      ?resource_type: String
+    ) -> _UpdateEncryptionKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEncryptionKeyResponse
+
+    interface _UpdateFilterResponse
+      include Smithy::Client::_Response[Types::UpdateFilterOutput]
+      def arn: () -> String?
+    end
+    def update_filter: (
+      ?action: String,
+      ?description: String,
+      ?filter_criteria: {
+        finding_arn: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        aws_account_id: untyped,
+        finding_type: untyped,
+        severity: untyped,
+        first_observed_at: Array[
+          {
+            start_inclusive: Time,
+            end_inclusive: untyped
+          }
+        ],
+        last_observed_at: untyped,
+        updated_at: untyped,
+        finding_status: untyped,
+        title: untyped,
+        inspector_score: Array[
+          {
+            upper_inclusive: Float,
+            lower_inclusive: untyped
+          }
+        ],
+        resource_type: untyped,
+        resource_id: untyped,
+        resource_tags: Array[
+          {
+            comparison: String,
+            key: String,
+            value: String
+          }
+        ],
+        ec2_instance_image_id: untyped,
+        ec2_instance_vpc_id: untyped,
+        ec2_instance_subnet_id: untyped,
+        ecr_image_pushed_at: untyped,
+        ecr_image_architecture: untyped,
+        ecr_image_registry: untyped,
+        ecr_image_repository_name: untyped,
+        ecr_image_tags: untyped,
+        ecr_image_hash: untyped,
+        ecr_image_last_in_use_at: untyped,
+        ecr_image_in_use_count: untyped,
+        port_range: Array[
+          {
+            begin_inclusive: Integer,
+            end_inclusive: untyped
+          }
+        ],
+        network_protocol: untyped,
+        component_id: untyped,
+        component_type: untyped,
+        vulnerability_id: untyped,
+        vulnerability_source: untyped,
+        vendor_severity: untyped,
+        vulnerable_packages: Array[
+          {
+            name: {
+              comparison: untyped,
+              value: untyped
+            },
+            version: untyped,
+            epoch: {
+              upper_inclusive: untyped,
+              lower_inclusive: untyped
+            },
+            release: untyped,
+            architecture: untyped,
+            source_layer_hash: untyped,
+            source_lambda_layer_arn: untyped,
+            file_path: untyped
+          }
+        ],
+        related_vulnerabilities: untyped,
+        fix_available: untyped,
+        lambda_function_name: untyped,
+        lambda_function_layers: untyped,
+        lambda_function_runtime: untyped,
+        lambda_function_last_modified_at: untyped,
+        lambda_function_execution_role_arn: untyped,
+        exploit_available: untyped,
+        code_vulnerability_detector_name: untyped,
+        code_vulnerability_detector_tags: untyped,
+        code_vulnerability_file_path: untyped,
+        epss_score: untyped,
+        code_repository_project_name: untyped,
+        code_repository_provider_type: untyped
+      },
+      ?name: String,
+      ?filter_arn: String,
+      ?reason: String
+    ) -> _UpdateFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFilterResponse
+
+    interface _UpdateOrgEc2DeepInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateOrgEc2DeepInspectionConfigurationResponse]
+    end
+    def update_org_ec2_deep_inspection_configuration: (
+      ?org_package_paths: Array[String]
+    ) -> _UpdateOrgEc2DeepInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrgEc2DeepInspectionConfigurationResponse
+
+    interface _UpdateOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateOrganizationConfigurationOutput]
+      def auto_enable: () -> Types::AutoEnable?
+    end
+    def update_organization_configuration: (
+      ?auto_enable: {
+        ec2: bool,
+        ecr: untyped,
+        lambda: untyped,
+        lambda_code: untyped,
+        code_repository: untyped
+      }
+    ) -> _UpdateOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrganizationConfigurationResponse
+  end
+end

@@ -1,0 +1,2250 @@
+module Aws::ConnectCases
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AuditEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?type: String,
+        ?related_item_type: String,
+        ?performed_time: Time,
+        ?fields: Array[Types::AuditEventField?],
+        ?performed_by: Types::AuditEventPerformedBy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor type: String?
+      attr_accessor related_item_type: String?
+      attr_accessor performed_time: Time?
+      attr_accessor fields: Array[Types::AuditEventField?]?
+      attr_accessor performed_by: Types::AuditEventPerformedBy?
+    end
+
+    class AuditEventField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_field_id: String,
+        ?old_value: Types::AuditEventFieldValueUnion,
+        ?new_value: Types::AuditEventFieldValueUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_field_id: String?
+      attr_accessor old_value: Types::AuditEventFieldValueUnion?
+      attr_accessor new_value: Types::AuditEventFieldValueUnion?
+    end
+
+    class AuditEventFieldValueUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?double_value: Float,
+        ?boolean_value: bool,
+        ?empty_value: Types::EmptyFieldValue,
+        ?user_arn_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor double_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor empty_value: Types::EmptyFieldValue?
+      attr_accessor user_arn_value: String?
+
+      class StringValue < AuditEventFieldValueUnion
+      end
+      class DoubleValue < AuditEventFieldValueUnion
+      end
+      class BooleanValue < AuditEventFieldValueUnion
+      end
+      class EmptyValue < AuditEventFieldValueUnion
+      end
+      class UserArnValue < AuditEventFieldValueUnion
+      end
+      class Unknown < AuditEventFieldValueUnion
+      end
+    end
+
+    class AuditEventPerformedBy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::UserUnion,
+        ?iam_principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::UserUnion?
+      attr_accessor iam_principal_arn: String?
+    end
+
+    class BasicLayout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?top_panel: Types::LayoutSections,
+        ?more_info: Types::LayoutSections,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor top_panel: Types::LayoutSections?
+      attr_accessor more_info: Types::LayoutSections?
+    end
+
+    class BatchGetCaseRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_rules: Array[Types::CaseRuleIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_rules: Array[Types::CaseRuleIdentifier]?
+    end
+
+    class BatchGetCaseRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rules: Array[Types::GetCaseRuleResponse],
+        ?errors: Array[Types::CaseRuleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rules: Array[Types::GetCaseRuleResponse]?
+      attr_accessor errors: Array[Types::CaseRuleError]?
+    end
+
+    class BatchGetFieldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?fields: Array[Types::FieldIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor fields: Array[Types::FieldIdentifier]?
+    end
+
+    class BatchGetFieldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::GetFieldResponse],
+        ?errors: Array[Types::FieldError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::GetFieldResponse]?
+      attr_accessor errors: Array[Types::FieldError]?
+    end
+
+    class BatchPutFieldOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?field_id: String,
+        ?options: Array[Types::FieldOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor field_id: String?
+      attr_accessor options: Array[Types::FieldOption]?
+    end
+
+    class BatchPutFieldOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::FieldOptionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::FieldOptionError]?
+    end
+
+    class BooleanCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?equal_to: Types::BooleanOperands,
+        ?not_equal_to: Types::BooleanOperands,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor equal_to: Types::BooleanOperands?
+      attr_accessor not_equal_to: Types::BooleanOperands?
+
+      class EqualTo < BooleanCondition
+      end
+      class NotEqualTo < BooleanCondition
+      end
+      class Unknown < BooleanCondition
+      end
+    end
+
+    class BooleanOperands
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operand_one: Types::OperandOne,
+        ?operand_two: Types::OperandTwo,
+        ?result: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operand_one: Types::OperandOne?
+      attr_accessor operand_two: Types::OperandTwo?
+      attr_accessor result: bool?
+    end
+
+    class CaseEventIncludedData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldIdentifier]?
+    end
+
+    class CaseFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?field: Types::FieldFilter,
+        ?not: Types::CaseFilter,
+        ?and_all: Array[Types::CaseFilter],
+        ?or_all: Array[Types::CaseFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: Types::FieldFilter?
+      attr_accessor not: Types::CaseFilter?
+      attr_accessor and_all: Array[Types::CaseFilter]?
+      attr_accessor or_all: Array[Types::CaseFilter]?
+
+      class Field < CaseFilter
+      end
+      class Not < CaseFilter
+      end
+      class AndAll < CaseFilter
+      end
+      class OrAll < CaseFilter
+      end
+      class Unknown < CaseFilter
+      end
+    end
+
+    class CaseRuleDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?required: Types::RequiredCaseRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor required: Types::RequiredCaseRule?
+
+      class Required < CaseRuleDetails
+      end
+      class Unknown < CaseRuleDetails
+      end
+    end
+
+    class CaseRuleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class CaseRuleIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CaseRuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rule_id: String,
+        ?name: String,
+        ?case_rule_arn: String,
+        ?rule_type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor case_rule_arn: String?
+      attr_accessor rule_type: String?
+      attr_accessor description: String?
+    end
+
+    class CaseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor template_id: String?
+    end
+
+    class CommentContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+    end
+
+    class CommentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+    end
+
+    class ContactContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?channel: String,
+        ?connected_to_system_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor channel: String?
+      attr_accessor connected_to_system_time: Time?
+    end
+
+    class ContactFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: Array[String],
+        ?contact_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: Array[String]?
+      attr_accessor contact_arn: String?
+    end
+
+    class CreateCaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?template_id: String,
+        ?fields: Array[Types::FieldValue],
+        ?client_token: String,
+        ?performed_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor template_id: String?
+      attr_accessor fields: Array[Types::FieldValue]?
+      attr_accessor client_token: String?
+      attr_accessor performed_by: Types::UserUnion?
+    end
+
+    class CreateCaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?case_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor case_arn: String?
+    end
+
+    class CreateCaseRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?description: String,
+        ?rule: Types::CaseRuleDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule: Types::CaseRuleDetails?
+    end
+
+    class CreateCaseRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rule_id: String,
+        ?case_rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rule_id: String?
+      attr_accessor case_rule_arn: String?
+    end
+
+    class CreateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CreateDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?domain_arn: String,
+        ?domain_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor domain_arn: String?
+      attr_accessor domain_status: String?
+    end
+
+    class CreateFieldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+    end
+
+    class CreateFieldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_id: String,
+        ?field_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+      attr_accessor field_arn: String?
+    end
+
+    class CreateLayoutInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?content: Types::LayoutContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::LayoutContent?
+    end
+
+    class CreateLayoutOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layout_id: String,
+        ?layout_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layout_id: String?
+      attr_accessor layout_arn: String?
+    end
+
+    class CreateRelatedItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+        ?type: String,
+        ?content: Types::RelatedItemInputContent,
+        ?performed_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+      attr_accessor type: String?
+      attr_accessor content: Types::RelatedItemInputContent?
+      attr_accessor performed_by: Types::UserUnion?
+    end
+
+    class CreateRelatedItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_item_id: String,
+        ?related_item_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_item_id: String?
+      attr_accessor related_item_arn: String?
+    end
+
+    class CreateTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?description: String,
+        ?layout_configuration: Types::LayoutConfiguration,
+        ?required_fields: Array[Types::RequiredField],
+        ?status: String,
+        ?rules: Array[Types::TemplateRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor layout_configuration: Types::LayoutConfiguration?
+      attr_accessor required_fields: Array[Types::RequiredField]?
+      attr_accessor status: String?
+      attr_accessor rules: Array[Types::TemplateRule]?
+    end
+
+    class CreateTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+    end
+
+    class DeleteCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+    end
+
+    class DeleteCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCaseRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_rule_id: String?
+    end
+
+    class DeleteCaseRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class DeleteDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFieldRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?field_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor field_id: String?
+    end
+
+    class DeleteFieldResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLayoutRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?layout_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor layout_id: String?
+    end
+
+    class DeleteLayoutResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRelatedItemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+        ?related_item_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+      attr_accessor related_item_id: String?
+    end
+
+    class DeleteRelatedItemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor template_id: String?
+    end
+
+    class DeleteTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?domain_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor domain_arn: String?
+      attr_accessor name: String?
+    end
+
+    class EmptyFieldValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EmptyOperandValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EventBridgeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?included_data: Types::EventIncludedData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor included_data: Types::EventIncludedData?
+    end
+
+    class EventIncludedData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_data: Types::CaseEventIncludedData,
+        ?related_item_data: Types::RelatedItemEventIncludedData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_data: Types::CaseEventIncludedData?
+      attr_accessor related_item_data: Types::RelatedItemEventIncludedData?
+    end
+
+    class FieldError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class FieldFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?equal_to: Types::FieldValue,
+        ?contains: Types::FieldValue,
+        ?greater_than: Types::FieldValue,
+        ?greater_than_or_equal_to: Types::FieldValue,
+        ?less_than: Types::FieldValue,
+        ?less_than_or_equal_to: Types::FieldValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor equal_to: Types::FieldValue?
+      attr_accessor contains: Types::FieldValue?
+      attr_accessor greater_than: Types::FieldValue?
+      attr_accessor greater_than_or_equal_to: Types::FieldValue?
+      attr_accessor less_than: Types::FieldValue?
+      attr_accessor less_than_or_equal_to: Types::FieldValue?
+
+      class EqualTo < FieldFilter
+      end
+      class Contains < FieldFilter
+      end
+      class GreaterThan < FieldFilter
+      end
+      class GreaterThanOrEqualTo < FieldFilter
+      end
+      class LessThan < FieldFilter
+      end
+      class LessThanOrEqualTo < FieldFilter
+      end
+      class Unknown < FieldFilter
+      end
+    end
+
+    class FieldGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fields: Array[Types::FieldItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fields: Array[Types::FieldItem]?
+    end
+
+    class FieldIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class FieldItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class FieldOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor active: bool?
+    end
+
+    class FieldOptionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor value: String?
+    end
+
+    class FieldSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_id: String,
+        ?field_arn: String,
+        ?name: String,
+        ?type: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+      attr_accessor field_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor namespace: String?
+    end
+
+    class FieldValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?value: Types::FieldValueUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor value: Types::FieldValueUnion?
+    end
+
+    class FieldValueUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?double_value: Float,
+        ?boolean_value: bool,
+        ?empty_value: Types::EmptyFieldValue,
+        ?user_arn_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor double_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor empty_value: Types::EmptyFieldValue?
+      attr_accessor user_arn_value: String?
+
+      class StringValue < FieldValueUnion
+      end
+      class DoubleValue < FieldValueUnion
+      end
+      class BooleanValue < FieldValueUnion
+      end
+      class EmptyValue < FieldValueUnion
+      end
+      class UserArnValue < FieldValueUnion
+      end
+      class Unknown < FieldValueUnion
+      end
+    end
+
+    class FileContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_arn: String?
+    end
+
+    class FileFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_arn: String?
+    end
+
+    class GetCaseAuditEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetCaseAuditEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?audit_events: Array[Types::AuditEvent?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor audit_events: Array[Types::AuditEvent?]?
+    end
+
+    class GetCaseEventConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class GetCaseEventConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge: Types::EventBridgeConfiguration?
+    end
+
+    class GetCaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?domain_id: String,
+        ?fields: Array[Types::FieldIdentifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor fields: Array[Types::FieldIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldValue],
+        ?template_id: String,
+        ?next_token: String,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldValue]?
+      attr_accessor template_id: String?
+      attr_accessor next_token: String?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class GetCaseRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rule_id: String,
+        ?name: String,
+        ?case_rule_arn: String,
+        ?rule: Types::CaseRuleDetails,
+        ?description: String,
+        ?deleted: bool,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor case_rule_arn: String?
+      attr_accessor rule: Types::CaseRuleDetails?
+      attr_accessor description: String?
+      attr_accessor deleted: bool?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class GetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class GetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?domain_arn: String,
+        ?name: String,
+        ?created_time: Time,
+        ?domain_status: String,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor domain_arn: String?
+      attr_accessor name: String?
+      attr_accessor created_time: Time?
+      attr_accessor domain_status: String?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class GetFieldResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_id: String,
+        ?name: String,
+        ?field_arn: String,
+        ?description: String,
+        ?type: String,
+        ?namespace: String,
+        ?tags: Hash[String, String?],
+        ?deleted: bool,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+      attr_accessor name: String?
+      attr_accessor field_arn: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor namespace: String?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor deleted: bool?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class GetLayoutInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?layout_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor layout_id: String?
+    end
+
+    class GetLayoutOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layout_id: String,
+        ?layout_arn: String,
+        ?name: String,
+        ?content: Types::LayoutContent,
+        ?tags: Hash[String, String?],
+        ?deleted: bool,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layout_id: String?
+      attr_accessor layout_arn: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::LayoutContent?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor deleted: bool?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class GetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor template_id: String?
+    end
+
+    class GetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?name: String,
+        ?description: String,
+        ?layout_configuration: Types::LayoutConfiguration,
+        ?required_fields: Array[Types::RequiredField],
+        ?tags: Hash[String, String?],
+        ?status: String,
+        ?deleted: bool,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?rules: Array[Types::TemplateRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor layout_configuration: Types::LayoutConfiguration?
+      attr_accessor required_fields: Array[Types::RequiredField]?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor status: String?
+      attr_accessor deleted: bool?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor rules: Array[Types::TemplateRule]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class LayoutConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_layout: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_layout: String?
+    end
+
+    class LayoutContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?basic: Types::BasicLayout,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor basic: Types::BasicLayout?
+
+      class Basic < LayoutContent
+      end
+      class Unknown < LayoutContent
+      end
+    end
+
+    class LayoutSections
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sections: Array[Types::Section],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sections: Array[Types::Section]?
+    end
+
+    class LayoutSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layout_id: String,
+        ?layout_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layout_id: String?
+      attr_accessor layout_arn: String?
+      attr_accessor name: String?
+    end
+
+    class ListCaseRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCaseRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rules: Array[Types::CaseRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rules: Array[Types::CaseRuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCasesForContactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?contact_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor contact_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCasesForContactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cases: Array[Types::CaseSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cases: Array[Types::CaseSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFieldOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?field_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor field_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ListFieldOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Array[Types::FieldOption],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Array[Types::FieldOption]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFieldsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFieldsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLayoutsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLayoutsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layouts: Array[Types::LayoutSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layouts: Array[Types::LayoutSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class ListTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: Array[String]?
+    end
+
+    class ListTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates: Array[Types::TemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates: Array[Types::TemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class OperandOne
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?field_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+
+      class FieldId < OperandOne
+      end
+      class Unknown < OperandOne
+      end
+    end
+
+    class OperandTwo
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?boolean_value: bool,
+        ?double_value: Float,
+        ?empty_value: Types::EmptyOperandValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor boolean_value: bool?
+      attr_accessor double_value: Float?
+      attr_accessor empty_value: Types::EmptyOperandValue?
+
+      class StringValue < OperandTwo
+      end
+      class BooleanValue < OperandTwo
+      end
+      class DoubleValue < OperandTwo
+      end
+      class EmptyValue < OperandTwo
+      end
+      class Unknown < OperandTwo
+      end
+    end
+
+    class PutCaseEventConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?event_bridge: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor event_bridge: Types::EventBridgeConfiguration?
+    end
+
+    class PutCaseEventConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RelatedItemContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?contact: Types::ContactContent,
+        ?comment: Types::CommentContent,
+        ?file: Types::FileContent,
+        ?sla: Types::SlaContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact: Types::ContactContent?
+      attr_accessor comment: Types::CommentContent?
+      attr_accessor file: Types::FileContent?
+      attr_accessor sla: Types::SlaContent?
+
+      class Contact < RelatedItemContent
+      end
+      class Comment < RelatedItemContent
+      end
+      class File < RelatedItemContent
+      end
+      class Sla < RelatedItemContent
+      end
+      class Unknown < RelatedItemContent
+      end
+    end
+
+    class RelatedItemEventIncludedData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_content: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_content: bool?
+    end
+
+    class RelatedItemInputContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?contact: Types::Contact,
+        ?comment: Types::CommentContent,
+        ?file: Types::FileContent,
+        ?sla: Types::SlaInputContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact: Types::Contact?
+      attr_accessor comment: Types::CommentContent?
+      attr_accessor file: Types::FileContent?
+      attr_accessor sla: Types::SlaInputContent?
+
+      class Contact < RelatedItemInputContent
+      end
+      class Comment < RelatedItemInputContent
+      end
+      class File < RelatedItemInputContent
+      end
+      class Sla < RelatedItemInputContent
+      end
+      class Unknown < RelatedItemInputContent
+      end
+    end
+
+    class RelatedItemTypeFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?contact: Types::ContactFilter,
+        ?comment: Types::CommentFilter,
+        ?file: Types::FileFilter,
+        ?sla: Types::SlaFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact: Types::ContactFilter?
+      attr_accessor comment: Types::CommentFilter?
+      attr_accessor file: Types::FileFilter?
+      attr_accessor sla: Types::SlaFilter?
+
+      class Contact < RelatedItemTypeFilter
+      end
+      class Comment < RelatedItemTypeFilter
+      end
+      class File < RelatedItemTypeFilter
+      end
+      class Sla < RelatedItemTypeFilter
+      end
+      class Unknown < RelatedItemTypeFilter
+      end
+    end
+
+    class RequiredCaseRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: bool,
+        ?conditions: Array[Types::BooleanCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: bool?
+      attr_accessor conditions: Array[Types::BooleanCondition]?
+    end
+
+    class RequiredField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class SearchCasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?search_term: String,
+        ?filter: Types::CaseFilter,
+        ?sorts: Array[Types::Sort],
+        ?fields: Array[Types::FieldIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor search_term: String?
+      attr_accessor filter: Types::CaseFilter?
+      attr_accessor sorts: Array[Types::Sort]?
+      attr_accessor fields: Array[Types::FieldIdentifier]?
+    end
+
+    class SearchCasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cases: Array[Types::SearchCasesResponseItem?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cases: Array[Types::SearchCasesResponseItem?]?
+    end
+
+    class SearchCasesResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?template_id: String,
+        ?fields: Array[Types::FieldValue],
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor template_id: String?
+      attr_accessor fields: Array[Types::FieldValue]?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class SearchRelatedItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RelatedItemTypeFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RelatedItemTypeFilter]?
+    end
+
+    class SearchRelatedItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?related_items: Array[Types::SearchRelatedItemsResponseItem?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor related_items: Array[Types::SearchRelatedItemsResponseItem?]?
+    end
+
+    class SearchRelatedItemsResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_item_id: String,
+        ?type: String,
+        ?association_time: Time,
+        ?content: Types::RelatedItemContent,
+        ?tags: Hash[String, String?],
+        ?performed_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_item_id: String?
+      attr_accessor type: String?
+      attr_accessor association_time: Time?
+      attr_accessor content: Types::RelatedItemContent?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor performed_by: Types::UserUnion?
+    end
+
+    class Section
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?field_group: Types::FieldGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_group: Types::FieldGroup?
+
+      class FieldGroup < Section
+      end
+      class Unknown < Section
+      end
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SlaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?field_id: String,
+        ?target_field_values: Array[Types::FieldValueUnion],
+        ?target_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor field_id: String?
+      attr_accessor target_field_values: Array[Types::FieldValueUnion]?
+      attr_accessor target_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class SlaContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sla_configuration: Types::SlaConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sla_configuration: Types::SlaConfiguration?
+    end
+
+    class SlaFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class SlaInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?field_id: String,
+        ?target_field_values: Array[Types::FieldValueUnion],
+        ?target_sla_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor field_id: String?
+      attr_accessor target_field_values: Array[Types::FieldValueUnion]?
+      attr_accessor target_sla_minutes: Integer?
+    end
+
+    class SlaInputContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sla_input_configuration: Types::SlaInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sla_input_configuration: Types::SlaInputConfiguration?
+
+      class SlaInputConfiguration < SlaInputContent
+      end
+      class Unknown < SlaInputContent
+      end
+    end
+
+    class Sort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_id: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_id: String?
+      attr_accessor sort_order: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class TemplateRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_rule_id: String,
+        ?field_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_rule_id: String?
+      attr_accessor field_id: String?
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateCaseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+        ?fields: Array[Types::FieldValue],
+        ?performed_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+      attr_accessor fields: Array[Types::FieldValue]?
+      attr_accessor performed_by: Types::UserUnion?
+    end
+
+    class UpdateCaseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCaseRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?rule: Types::CaseRuleDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule: Types::CaseRuleDetails?
+    end
+
+    class UpdateCaseRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFieldInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?field_id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor field_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateFieldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLayoutInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?layout_id: String,
+        ?name: String,
+        ?content: Types::LayoutContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor layout_id: String?
+      attr_accessor name: String?
+      attr_accessor content: Types::LayoutContent?
+    end
+
+    class UpdateLayoutOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?template_id: String,
+        ?name: String,
+        ?description: String,
+        ?layout_configuration: Types::LayoutConfiguration,
+        ?required_fields: Array[Types::RequiredField],
+        ?status: String,
+        ?rules: Array[Types::TemplateRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor template_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor layout_configuration: Types::LayoutConfiguration?
+      attr_accessor required_fields: Array[Types::RequiredField]?
+      attr_accessor status: String?
+      attr_accessor rules: Array[Types::TemplateRule]?
+    end
+
+    class UpdateTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UserUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user_arn: String,
+        ?custom_entity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_arn: String?
+      attr_accessor custom_entity: String?
+
+      class UserArn < UserUnion
+      end
+      class CustomEntity < UserUnion
+      end
+      class Unknown < UserUnion
+      end
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

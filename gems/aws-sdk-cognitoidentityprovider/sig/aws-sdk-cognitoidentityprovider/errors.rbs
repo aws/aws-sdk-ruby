@@ -1,0 +1,167 @@
+module Aws::CognitoIdentityProvider
+  module Errors
+    class AliasExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CodeDeliveryFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CodeMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeviceKeyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateProviderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EnableSoftwareTokenMFAException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredCodeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FeatureUnavailableInTierException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GroupExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEmailRoleAccessPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLambdaResponseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOAuthFlowException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason_code: () -> String?
+    end
+    class InvalidPasswordException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSmsRoleAccessPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSmsRoleTrustRelationshipException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUserPoolConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MFAMethodNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ManagedLoginBrandingExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PasswordHistoryPolicyViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PasswordResetRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PreconditionNotMetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RefreshTokenReuseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ScopeDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SoftwareTokenMFANotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TierChangeNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyFailedAttemptsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnexpectedLambdaException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedIdentityProviderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedTokenTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedUserStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserImportInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserLambdaValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserNotConfirmedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserPoolAddOnNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserPoolTaggingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UsernameExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnChallengeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnClientMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnConfigurationMissingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnCredentialNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnOriginNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WebAuthnRelyingPartyMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

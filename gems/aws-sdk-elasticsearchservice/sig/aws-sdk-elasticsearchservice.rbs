@@ -1,0 +1,5 @@
+  module Aws
+    module ElasticsearchService
+      VERSION: String
+    end
+  end

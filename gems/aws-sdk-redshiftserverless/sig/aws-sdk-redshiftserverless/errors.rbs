@@ -1,0 +1,44 @@
+module Aws::RedshiftServerless
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientCapacityException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class InvalidPaginationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class Ipv6CidrBlockNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

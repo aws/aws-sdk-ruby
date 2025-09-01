@@ -1,0 +1,2467 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::GroundStation
+  # This module contains the types returned by client operations.
+  module Types
+
+    # <p>Detailed information about the agent.</p>
+    # @!attribute agent_version
+    #   <p>Current agent version.</p>
+    #   @return [String]
+    # @!attribute instance_id
+    #   <p>ID of EC2 instance agent is running on.</p>
+    #   @return [String]
+    # @!attribute instance_type
+    #   <p>Type of EC2 instance agent is running on.</p>
+    #   @return [String]
+    # @!attribute reserved_cpu_cores
+    #   <note>
+    #               <p>This field should not be used. Use agentCpuCores instead.</p>
+    #            </note>
+    #            <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>
+    #   @return [Array<Integer>]
+    # @!attribute agent_cpu_cores
+    #   <p>List of CPU cores reserved for the agent.</p>
+    #   @return [Array<Integer>]
+    # @!attribute component_versions
+    #   <p>List of versions being used by agent components.</p>
+    #   @return [Array<Types::ComponentVersion>]
+    class AgentDetails < Struct.new(
+      :agent_version,
+      :instance_id,
+      :instance_type,
+      :reserved_cpu_cores,
+      :agent_cpu_cores,
+      :component_versions,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module AgentStatus
+      SUCCESS = 'SUCCESS'
+      FAILED = 'FAILED'
+      ACTIVE = 'ACTIVE'
+      INACTIVE = 'INACTIVE'
+    end
+
+    # <p>Aggregate status of Agent components.</p>
+    # @!attribute status
+    #   <p>Aggregate status.</p>
+    #   @return [String]
+    # @!attribute signature_map
+    #   <p>Sparse map of failure signatures.</p>
+    #   @return [Hash<String, Boolean>]
+    class AggregateStatus < Struct.new(
+      :status,
+      :signature_map,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module AngleUnits
+      DEGREE_ANGLE = 'DEGREE_ANGLE'
+      RADIAN = 'RADIAN'
+    end
+
+    # <p>Details about an antenna demod decode <code>Config</code> used in a contact.</p>
+    # @!attribute output_node
+    #   <p>Name of an antenna demod decode output node used in a contact.</p>
+    #   @return [String]
+    class AntennaDemodDecodeDetails < Struct.new(
+      :output_node,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about how AWS Ground Station should configure an
+    #          antenna for downlink during a contact.</p>
+    # @!attribute spectrum_config
+    #   <p>Object that describes a spectral <code>Config</code>.</p>
+    #   @return [Types::SpectrumConfig]
+    class AntennaDownlinkConfig < Struct.new(
+      :spectrum_config,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.</p>
+    # @!attribute spectrum_config
+    #   <p>Information about the spectral <code>Config</code>.</p>
+    #   @return [Types::SpectrumConfig]
+    # @!attribute demodulation_config
+    #   <p>Information about the demodulation <code>Config</code>.</p>
+    #   @return [Types::DemodulationConfig]
+    # @!attribute decode_config
+    #   <p>Information about the decode <code>Config</code>.</p>
+    #   @return [Types::DecodeConfig]
+    class AntennaDownlinkDemodDecodeConfig < Struct.new(
+      :spectrum_config,
+      :demodulation_config,
+      :decode_config,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the uplink <code>Config</code> of an antenna.</p>
+    # @!attribute transmit_disabled
+    #   <p>Whether or not uplink transmit is disabled.</p>
+    #   @return [Boolean]
+    # @!attribute spectrum_config
+    #   <p>Information about the uplink spectral <code>Config</code>.</p>
+    #   @return [Types::UplinkSpectrumConfig]
+    # @!attribute target_eirp
+    #   <p>EIRP of the target.</p>
+    #   @return [Types::Eirp]
+    class AntennaUplinkConfig < Struct.new(
+      :transmit_disabled,
+      :spectrum_config,
+      :target_eirp,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module AuditResults
+      HEALTHY = 'HEALTHY'
+      UNHEALTHY = 'UNHEALTHY'
+    end
+
+    # <p>Information about AwsGroundStationAgentEndpoint.</p>
+    # @!attribute name
+    #   <p>Name string associated with AgentEndpoint. Used as a human-readable identifier for AgentEndpoint.</p>
+    #   @return [String]
+    # @!attribute egress_address
+    #   <p>The egress address of AgentEndpoint.</p>
+    #   @return [Types::ConnectionDetails]
+    # @!attribute ingress_address
+    #   <p>The ingress address of AgentEndpoint.</p>
+    #   @return [Types::RangedConnectionDetails]
+    # @!attribute agent_status
+    #   <p>The status of AgentEndpoint.</p>
+    #   @return [String]
+    # @!attribute audit_results
+    #   <p>The results of the audit.</p>
+    #   @return [String]
+    class AwsGroundStationAgentEndpoint < Struct.new(
+      :name,
+      :egress_address,
+      :ingress_address,
+      :agent_status,
+      :audit_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module BandwidthUnits
+      GHZ = 'GHz'
+      MHZ = 'MHz'
+      KHZ = 'kHz'
+    end
+
+    # <p/>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    class CancelContactInput < Struct.new(
+      :contact_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    class CancelContactOutput < Struct.new(
+      :contact_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module CapabilityHealth
+      HEALTHY = 'HEALTHY'
+      UNHEALTHY = 'UNHEALTHY'
+    end
+
+    module CapabilityHealthReason
+      NO_REGISTERED_AGENT = 'NO_REGISTERED_AGENT'
+      INVALID_IP_OWNERSHIP = 'INVALID_IP_OWNERSHIP'
+      NOT_AUTHORIZED_TO_CREATE_SLR = 'NOT_AUTHORIZED_TO_CREATE_SLR'
+      UNVERIFIED_IP_OWNERSHIP = 'UNVERIFIED_IP_OWNERSHIP'
+      INITIALIZING_DATAPLANE = 'INITIALIZING_DATAPLANE'
+      DATAPLANE_FAILURE = 'DATAPLANE_FAILURE'
+      HEALTHY = 'HEALTHY'
+    end
+
+    # <p>Data on the status of agent components.</p>
+    # @!attribute component_type
+    #   <p>The Component type.</p>
+    #   @return [String]
+    # @!attribute capability_arn
+    #   <p>Capability ARN of the component.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Component status.</p>
+    #   @return [String]
+    # @!attribute bytes_sent
+    #   <p>Bytes sent by the component.</p>
+    #   @return [Integer]
+    # @!attribute bytes_received
+    #   <p>Bytes received by the component.</p>
+    #   @return [Integer]
+    # @!attribute packets_dropped
+    #   <p>Packets dropped by component.</p>
+    #   @return [Integer]
+    # @!attribute dataflow_id
+    #   <p>Dataflow UUID associated with the component.</p>
+    #   @return [String]
+    class ComponentStatusData < Struct.new(
+      :component_type,
+      :capability_arn,
+      :status,
+      :bytes_sent,
+      :bytes_received,
+      :packets_dropped,
+      :dataflow_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Version information for agent components.</p>
+    # @!attribute component_type
+    #   <p>Component type.</p>
+    #   @return [String]
+    # @!attribute versions
+    #   <p>List of versions.</p>
+    #   @return [Array<String>]
+    class ComponentVersion < Struct.new(
+      :component_type,
+      :versions,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ConfigCapabilityType
+      ANTENNA_DOWNLINK = 'antenna-downlink'
+      ANTENNA_DOWNLINK_DEMOD_DECODE = 'antenna-downlink-demod-decode'
+      TRACKING = 'tracking'
+      DATAFLOW_ENDPOINT = 'dataflow-endpoint'
+      ANTENNA_UPLINK = 'antenna-uplink'
+      UPLINK_ECHO = 'uplink-echo'
+      S3_RECORDING = 's3-recording'
+    end
+
+    # <p>Details for certain <code>Config</code> object types in a contact.</p>
+    # @!attribute endpoint_details
+    #   <p>Information about the endpoint details.</p>
+    #   @return [Types::EndpointDetails]
+    # @!attribute antenna_demod_decode_details
+    #   <p>Details for antenna demod decode <code>Config</code> in a contact.</p>
+    #   @return [Types::AntennaDemodDecodeDetails]
+    # @!attribute s3_recording_details
+    #   <p>Details for an S3 recording <code>Config</code> in a contact.</p>
+    #   @return [Types::S3RecordingDetails]
+    class ConfigDetails < Struct.new(
+      :endpoint_details,
+      :antenna_demod_decode_details,
+      :s3_recording_details,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
+
+      class EndpointDetails < ConfigDetails; end
+      class AntennaDemodDecodeDetails < ConfigDetails; end
+      class S3RecordingDetails < ConfigDetails; end
+      class Unknown < ConfigDetails; end
+    end
+
+    # <p>An item in a list of <code>Config</code> objects.</p>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_arn
+    #   <p>ARN of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a <code>Config</code>.</p>
+    #   @return [String]
+    class ConfigListItem < Struct.new(
+      :config_id,
+      :config_type,
+      :config_arn,
+      :name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object containing the parameters of a <code>Config</code>.</p>
+    #          <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+    # @!attribute antenna_downlink_config
+    #   <p>Information about how AWS Ground Station should configure an antenna for downlink during a contact.</p>
+    #   @return [Types::AntennaDownlinkConfig]
+    # @!attribute tracking_config
+    #   <p>Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. </p>
+    #   @return [Types::TrackingConfig]
+    # @!attribute dataflow_endpoint_config
+    #   <p>Information about the dataflow endpoint <code>Config</code>.</p>
+    #   @return [Types::DataflowEndpointConfig]
+    # @!attribute antenna_downlink_demod_decode_config
+    #   <p>Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.</p>
+    #   @return [Types::AntennaDownlinkDemodDecodeConfig]
+    # @!attribute antenna_uplink_config
+    #   <p>Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.</p>
+    #   @return [Types::AntennaUplinkConfig]
+    # @!attribute uplink_echo_config
+    #   <p>Information about an uplink echo <code>Config</code>.</p>
+    #            <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+    #   @return [Types::UplinkEchoConfig]
+    # @!attribute s3_recording_config
+    #   <p>Information about an S3 recording <code>Config</code>.</p>
+    #   @return [Types::S3RecordingConfig]
+    class ConfigTypeData < Struct.new(
+      :antenna_downlink_config,
+      :tracking_config,
+      :dataflow_endpoint_config,
+      :antenna_downlink_demod_decode_config,
+      :antenna_uplink_config,
+      :uplink_echo_config,
+      :s3_recording_config,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
+
+      class AntennaDownlinkConfig < ConfigTypeData; end
+      class TrackingConfig < ConfigTypeData; end
+      class DataflowEndpointConfig < ConfigTypeData; end
+      class AntennaDownlinkDemodDecodeConfig < ConfigTypeData; end
+      class AntennaUplinkConfig < ConfigTypeData; end
+      class UplinkEchoConfig < ConfigTypeData; end
+      class S3RecordingConfig < ConfigTypeData; end
+      class Unknown < ConfigTypeData; end
+    end
+
+    # <p>Egress address of AgentEndpoint with an optional mtu.</p>
+    # @!attribute socket_address
+    #   <p>A socket address.</p>
+    #   @return [Types::SocketAddress]
+    # @!attribute mtu
+    #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+    #   @return [Integer]
+    class ConnectionDetails < Struct.new(
+      :socket_address,
+      :mtu,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Data describing a contact.</p>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>Start time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>End time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute pre_pass_start_time
+    #   <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+    #   @return [Time]
+    # @!attribute post_pass_end_time
+    #   <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+    #   @return [Time]
+    # @!attribute ground_station
+    #   <p>Name of a ground station.</p>
+    #   @return [String]
+    # @!attribute contact_status
+    #   <p>Status of a contact.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>Error message of a contact.</p>
+    #   @return [String]
+    # @!attribute maximum_elevation
+    #   <p>Maximum elevation angle of a contact.</p>
+    #   @return [Types::Elevation]
+    # @!attribute region
+    #   <p>Region of a contact.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to a contact.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute visibility_start_time
+    #   <p>
+    #            Projected time in UTC your satellite will rise above the
+    #            <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>.
+    #            This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was
+    #            active during contact execution for completed contacts.
+    #            <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>
+    #            </p>
+    #   @return [Time]
+    # @!attribute visibility_end_time
+    #   <p>
+    #            Projected time in UTC your satellite will set below the
+    #            <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>.
+    #            This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was
+    #            active during contact execution for completed contacts.
+    #            <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>
+    #            </p>
+    #   @return [Time]
+    class ContactData < Struct.new(
+      :contact_id,
+      :mission_profile_arn,
+      :satellite_arn,
+      :start_time,
+      :end_time,
+      :pre_pass_start_time,
+      :post_pass_end_time,
+      :ground_station,
+      :contact_status,
+      :error_message,
+      :maximum_elevation,
+      :region,
+      :tags,
+      :visibility_start_time,
+      :visibility_end_time,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ContactStatus
+      SCHEDULING = 'SCHEDULING'
+      FAILED_TO_SCHEDULE = 'FAILED_TO_SCHEDULE'
+      SCHEDULED = 'SCHEDULED'
+      CANCELLED = 'CANCELLED'
+      AWS_CANCELLED = 'AWS_CANCELLED'
+      PREPASS = 'PREPASS'
+      PASS = 'PASS'
+      POSTPASS = 'POSTPASS'
+      COMPLETED = 'COMPLETED'
+      FAILED = 'FAILED'
+      AVAILABLE = 'AVAILABLE'
+      CANCELLING = 'CANCELLING'
+      AWS_FAILED = 'AWS_FAILED'
+    end
+
+    # <p/>
+    # @!attribute name
+    #   <p>Name of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_data
+    #   <p>Parameters of a <code>Config</code>.</p>
+    #   @return [Types::ConfigTypeData]
+    # @!attribute tags
+    #   <p>Tags assigned to a <code>Config</code>.</p>
+    #   @return [Hash<String, String>]
+    class CreateConfigInput < Struct.new(
+      :name,
+      :config_data,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_arn
+    #   <p>ARN of a <code>Config</code>.</p>
+    #   @return [String]
+    class CreateConfigOutput < Struct.new(
+      :config_id,
+      :config_type,
+      :config_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute endpoint_details
+    #   <p>Endpoint details of each endpoint in the dataflow endpoint group.
+    #   
+    #            All dataflow endpoints within a single dataflow endpoint group must be of the same type.
+    #            You cannot mix <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html">
+    #               AWS Ground Station Agent endpoints</a> with
+    #            <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html">Dataflow endpoints</a> in the same group.
+    #            If your use case requires both types of endpoints, you must create separate dataflow endpoint
+    #            groups for each type.
+    #         </p>
+    #   @return [Array<Types::EndpointDetails>]
+    # @!attribute tags
+    #   <p>Tags of a dataflow endpoint group.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute contact_pre_pass_duration_seconds
+    #   <p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>
+    #   @return [Integer]
+    # @!attribute contact_post_pass_duration_seconds
+    #   <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
+    #   @return [Integer]
+    class CreateDataflowEndpointGroupInput < Struct.new(
+      :endpoint_details,
+      :tags,
+      :contact_pre_pass_duration_seconds,
+      :contact_post_pass_duration_seconds,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    class CreateDataflowEndpointGroupOutput < Struct.new(
+      :dataflow_endpoint_group_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute satellite_id
+    #   <p>AWS Ground Station satellite ID for this ephemeris.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Whether to set the ephemeris status to <code>ENABLED</code> after validation.</p>
+    #            <p>Setting this to false will set the ephemeris status to <code>DISABLED</code> after validation.</p>
+    #   @return [Boolean]
+    # @!attribute priority
+    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
+    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
+    #            <p>Priority must be 1 or greater</p>
+    #   @return [Integer]
+    # @!attribute expiration_time
+    #   <p>An overall expiration time for the ephemeris in UTC, after which it will become <code>EXPIRED</code>.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of a KMS key used to encrypt the ephemeris in Ground Station.</p>
+    #   @return [String]
+    # @!attribute ephemeris
+    #   <p>Ephemeris data.</p>
+    #   @return [Types::EphemerisData]
+    # @!attribute tags
+    #   <p>Tags assigned to an ephemeris.</p>
+    #   @return [Hash<String, String>]
+    class CreateEphemerisInput < Struct.new(
+      :satellite_id,
+      :enabled,
+      :priority,
+      :expiration_time,
+      :name,
+      :kms_key_arn,
+      :ephemeris,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    class CreateEphemerisOutput < Struct.new(
+      :ephemeris_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute name
+    #   <p>Name of a mission profile.</p>
+    #   @return [String]
+    # @!attribute contact_pre_pass_duration_seconds
+    #   <p>Amount of time prior to contact start you’d like to receive a Ground Station Contact State Change event indicating an upcoming pass.</p>
+    #   @return [Integer]
+    # @!attribute contact_post_pass_duration_seconds
+    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   @return [Integer]
+    # @!attribute minimum_viable_contact_duration_seconds
+    #   <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+    #   @return [Integer]
+    # @!attribute dataflow_edges
+    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
+    #               <code>Config</code> and a <i>to</i>
+    #               <code>Config</code>.</p>
+    #   @return [Array<Array<String>>]
+    # @!attribute tracking_config_arn
+    #   <p>ARN of a tracking <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to a mission profile.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute streams_kms_key
+    #   <p>KMS key to use for encrypting streams.</p>
+    #   @return [Types::KmsKey]
+    # @!attribute streams_kms_role
+    #   <p>Role to use for encrypting streams with KMS key.</p>
+    #   @return [String]
+    class CreateMissionProfileInput < Struct.new(
+      :name,
+      :contact_pre_pass_duration_seconds,
+      :contact_post_pass_duration_seconds,
+      :minimum_viable_contact_duration_seconds,
+      :dataflow_edges,
+      :tracking_config_arn,
+      :tags,
+      :streams_kms_key,
+      :streams_kms_role,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    class CreateMissionProfileOutput < Struct.new(
+      :mission_profile_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module Criticality
+      REQUIRED = 'REQUIRED'
+      PREFERRED = 'PREFERRED'
+      REMOVED = 'REMOVED'
+    end
+
+    # <p>Information about a dataflow edge used in a contact.</p>
+    # @!attribute source
+    #   <p>Dataflow details for the source side.</p>
+    #   @return [Types::Source]
+    # @!attribute destination
+    #   <p>Dataflow details for the destination side.</p>
+    #   @return [Types::Destination]
+    # @!attribute error_message
+    #   <p>Error message for a dataflow.</p>
+    #   @return [String]
+    class DataflowDetail < Struct.new(
+      :source,
+      :destination,
+      :error_message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about a dataflow endpoint.</p>
+    # @!attribute name
+    #   <p>Name of a dataflow endpoint.</p>
+    #   @return [String]
+    # @!attribute address
+    #   <p>Socket address of a dataflow endpoint.</p>
+    #   @return [Types::SocketAddress]
+    # @!attribute status
+    #   <p>Status of a dataflow endpoint.</p>
+    #   @return [String]
+    # @!attribute mtu
+    #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+    #   @return [Integer]
+    class DataflowEndpoint < Struct.new(
+      :name,
+      :address,
+      :status,
+      :mtu,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the dataflow endpoint <code>Config</code>.</p>
+    # @!attribute dataflow_endpoint_name
+    #   <p>Name of a dataflow endpoint.</p>
+    #   @return [String]
+    # @!attribute dataflow_endpoint_region
+    #   <p>Region of a dataflow endpoint.</p>
+    #   @return [String]
+    class DataflowEndpointConfig < Struct.new(
+      :dataflow_endpoint_name,
+      :dataflow_endpoint_region,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Item in a list of <code>DataflowEndpoint</code> groups.</p>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    # @!attribute dataflow_endpoint_group_arn
+    #   <p>ARN of a dataflow endpoint group.</p>
+    #   @return [String]
+    class DataflowEndpointListItem < Struct.new(
+      :dataflow_endpoint_group_id,
+      :dataflow_endpoint_group_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the decode <code>Config</code>.</p>
+    # @!attribute unvalidated_json
+    #   <p>Unvalidated JSON of a decode <code>Config</code>.</p>
+    #   @return [String]
+    class DecodeConfig < Struct.new(
+      :unvalidated_json,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    class DeleteConfigInput < Struct.new(
+      :config_id,
+      :config_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_arn
+    #   <p>ARN of a <code>Config</code>.</p>
+    #   @return [String]
+    class DeleteConfigOutput < Struct.new(
+      :config_id,
+      :config_type,
+      :config_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    class DeleteDataflowEndpointGroupInput < Struct.new(
+      :dataflow_endpoint_group_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    class DeleteDataflowEndpointGroupOutput < Struct.new(
+      :dataflow_endpoint_group_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    class DeleteEphemerisInput < Struct.new(
+      :ephemeris_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    class DeleteEphemerisOutput < Struct.new(
+      :ephemeris_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    class DeleteMissionProfileInput < Struct.new(
+      :mission_profile_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    class DeleteMissionProfileOutput < Struct.new(
+      :mission_profile_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the demodulation <code>Config</code>.</p>
+    # @!attribute unvalidated_json
+    #   <p>Unvalidated JSON of a demodulation <code>Config</code>.</p>
+    #   @return [String]
+    class DemodulationConfig < Struct.new(
+      :unvalidated_json,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Dependency encountered an error.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute parameter_name
+    #   <p/>
+    #   @return [String]
+    class DependencyException < Struct.new(
+      :message,
+      :parameter_name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    class DescribeContactInput < Struct.new(
+      :contact_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>Start time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>End time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute pre_pass_start_time
+    #   <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+    #   @return [Time]
+    # @!attribute post_pass_end_time
+    #   <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+    #   @return [Time]
+    # @!attribute ground_station
+    #   <p>Ground station for a contact.</p>
+    #   @return [String]
+    # @!attribute contact_status
+    #   <p>Status of a contact.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>Error message for a contact.</p>
+    #   @return [String]
+    # @!attribute maximum_elevation
+    #   <p>Maximum elevation angle of a contact.</p>
+    #   @return [Types::Elevation]
+    # @!attribute tags
+    #   <p>Tags assigned to a contact.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute region
+    #   <p>Region of a contact.</p>
+    #   @return [String]
+    # @!attribute dataflow_list
+    #   <p>List describing source and destination details for each dataflow edge.</p>
+    #   @return [Array<Types::DataflowDetail>]
+    # @!attribute visibility_start_time
+    #   <p>
+    #            Projected time in UTC your satellite will rise above the
+    #            <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>.
+    #            This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was
+    #            active during contact execution for completed contacts.
+    #         </p>
+    #   @return [Time]
+    # @!attribute visibility_end_time
+    #   <p>
+    #            Projected time in UTC your satellite will set below the
+    #            <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>.
+    #            This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was
+    #            active during contact execution for completed contacts.
+    #         </p>
+    #   @return [Time]
+    class DescribeContactOutput < Struct.new(
+      :contact_id,
+      :mission_profile_arn,
+      :satellite_arn,
+      :start_time,
+      :end_time,
+      :pre_pass_start_time,
+      :post_pass_end_time,
+      :ground_station,
+      :contact_status,
+      :error_message,
+      :maximum_elevation,
+      :tags,
+      :region,
+      :dataflow_list,
+      :visibility_start_time,
+      :visibility_end_time,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    class DescribeEphemerisInput < Struct.new(
+      :ephemeris_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    # @!attribute satellite_id
+    #   <p>The AWS Ground Station satellite ID associated with ephemeris.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ephemeris.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
+    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
+    #            <p>Priority must be 1 or greater</p>
+    #   @return [Integer]
+    # @!attribute creation_time
+    #   <p>The time the ephemeris was uploaded in UTC.</p>
+    #   @return [Time]
+    # @!attribute enabled
+    #   <p>Whether or not the ephemeris is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute name
+    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to an ephemeris.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute supplied_data
+    #   <p>Supplied ephemeris data.</p>
+    #   @return [Types::EphemerisTypeDescription]
+    # @!attribute invalid_reason
+    #   <p>Reason that an ephemeris failed validation. Only provided for ephemerides with <code>INVALID</code> status.</p>
+    #   @return [String]
+    class DescribeEphemerisOutput < Struct.new(
+      :ephemeris_id,
+      :satellite_id,
+      :status,
+      :priority,
+      :creation_time,
+      :enabled,
+      :name,
+      :tags,
+      :supplied_data,
+      :invalid_reason,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Dataflow details for the destination side.</p>
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_details
+    #   <p>Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.</p>
+    #   @return [Types::ConfigDetails]
+    # @!attribute dataflow_destination_region
+    #   <p>Region of a dataflow destination.</p>
+    #   @return [String]
+    class Destination < Struct.new(
+      :config_type,
+      :config_id,
+      :config_details,
+      :dataflow_destination_region,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Data for agent discovery.</p>
+    # @!attribute public_ip_addresses
+    #   <p>List of public IP addresses to associate with agent.</p>
+    #   @return [Array<String>]
+    # @!attribute private_ip_addresses
+    #   <p>List of private IP addresses to associate with agent.</p>
+    #   @return [Array<String>]
+    # @!attribute capability_arns
+    #   <p>List of capabilities to associate with agent.</p>
+    #   @return [Array<String>]
+    class DiscoveryData < Struct.new(
+      :public_ip_addresses,
+      :private_ip_addresses,
+      :capability_arns,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object that represents EIRP.</p>
+    # @!attribute value
+    #   <p>Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.</p>
+    #   @return [Float]
+    # @!attribute units
+    #   <p>Units of an EIRP.</p>
+    #   @return [String]
+    class Eirp < Struct.new(
+      :value,
+      :units,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EirpUnits
+      DBW = 'dBW'
+    end
+
+    # <p>Elevation angle of the satellite in the sky during a contact.</p>
+    # @!attribute value
+    #   <p>Elevation angle value.</p>
+    #   @return [Float]
+    # @!attribute unit
+    #   <p>Elevation angle units.</p>
+    #   @return [String]
+    class Elevation < Struct.new(
+      :value,
+      :unit,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the endpoint details.</p>
+    # @!attribute security_details
+    #   <p>Endpoint security details including a list of subnets, a list of security groups and a role to connect streams to instances.</p>
+    #   @return [Types::SecurityDetails]
+    # @!attribute endpoint
+    #   <p>A dataflow endpoint.</p>
+    #   @return [Types::DataflowEndpoint]
+    # @!attribute aws_ground_station_agent_endpoint
+    #   <p>An agent endpoint.</p>
+    #   @return [Types::AwsGroundStationAgentEndpoint]
+    # @!attribute health_status
+    #   <p>A dataflow endpoint health status. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>
+    #   @return [String]
+    # @!attribute health_reasons
+    #   <p>Health reasons for a dataflow endpoint. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>
+    #   @return [Array<String>]
+    class EndpointDetails < Struct.new(
+      :security_details,
+      :endpoint,
+      :aws_ground_station_agent_endpoint,
+      :health_status,
+      :health_reasons,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EndpointStatus
+      created = 'created'
+      creating = 'creating'
+      deleted = 'deleted'
+      deleting = 'deleting'
+      failed = 'failed'
+    end
+
+    # <p>Ephemeris data.</p>
+    # @!attribute tle
+    #   <p>Two-line element set (TLE) ephemeris.</p>
+    #   @return [Types::TLEEphemeris]
+    # @!attribute oem
+    #   <p>
+    #               Ephemeris data in Orbit Ephemeris Message (OEM) format.
+    #           </p>
+    #            <p>
+    #               AWS Ground Station processes OEM Customer Provided Ephemerides according to the <a href="https://public.ccsds.org/Pubs/502x0b3e1.pdf">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-custom-ephemeris-data.html#oem-ephemeris-format">OEM ephemeris format</a> in the AWS Ground Station user guide.
+    #           </p>
+    #   @return [Types::OEMEphemeris]
+    class EphemerisData < Struct.new(
+      :tle,
+      :oem,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
+
+      class Tle < EphemerisData; end
+      class Oem < EphemerisData; end
+      class Unknown < EphemerisData; end
+    end
+
+    # <p>Description of ephemeris.</p>
+    # @!attribute source_s3_object
+    #   <p>Source S3 object used for the ephemeris.</p>
+    #   @return [Types::S3Object]
+    # @!attribute ephemeris_data
+    #   <p>Supplied ephemeris data.</p>
+    #   @return [String]
+    class EphemerisDescription < Struct.new(
+      :source_s3_object,
+      :ephemeris_data,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EphemerisInvalidReason
+      # Provided spacecraft identifiers such as spacecraft NORAD Id are invalid
+      METADATA_INVALID = 'METADATA_INVALID'
+      # Start, end, or expiration time(s) are invalid for the provided ephemeris
+      TIME_RANGE_INVALID = 'TIME_RANGE_INVALID'
+      # Provided ephemeris defines invalid spacecraft trajectory
+      TRAJECTORY_INVALID = 'TRAJECTORY_INVALID'
+      # Provided KMS key is invalid
+      KMS_KEY_INVALID = 'KMS_KEY_INVALID'
+      # Internal Service Error occurred while processing ephemeris
+      VALIDATION_ERROR = 'VALIDATION_ERROR'
+    end
+
+    # <p>Ephemeris item.</p>
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ephemeris.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
+    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
+    #            <p>Priority must be 1 or greater</p>
+    #   @return [Integer]
+    # @!attribute enabled
+    #   <p>Whether or not the ephemeris is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute creation_time
+    #   <p>The time the ephemeris was uploaded in UTC.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   @return [String]
+    # @!attribute source_s3_object
+    #   <p>Source S3 object used for the ephemeris.</p>
+    #   @return [Types::S3Object]
+    class EphemerisItem < Struct.new(
+      :ephemeris_id,
+      :status,
+      :priority,
+      :enabled,
+      :creation_time,
+      :name,
+      :source_s3_object,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Metadata describing a particular ephemeris.</p>
+    # @!attribute source
+    #   <p>The <code>EphemerisSource</code> that generated a given ephemeris.</p>
+    #   @return [String]
+    # @!attribute ephemeris_id
+    #   <p>UUID of a customer-provided ephemeris.</p>
+    #            <p>This field is not populated for default ephemerides from Space Track.</p>
+    #   @return [String]
+    # @!attribute epoch
+    #   <p>The epoch of a default, ephemeris from Space Track in UTC.</p>
+    #            <p>This field is not populated for customer-provided ephemerides.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #            <p>A name is only returned for customer-provider ephemerides that have a name associated.</p>
+    #   @return [String]
+    class EphemerisMetaData < Struct.new(
+      :source,
+      :ephemeris_id,
+      :epoch,
+      :name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EphemerisSource
+      CUSTOMER_PROVIDED = 'CUSTOMER_PROVIDED'
+      SPACE_TRACK = 'SPACE_TRACK'
+    end
+
+    module EphemerisStatus
+      VALIDATING = 'VALIDATING'
+      INVALID = 'INVALID'
+      ERROR = 'ERROR'
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+      EXPIRED = 'EXPIRED'
+    end
+
+    # <p/>
+    # @!attribute tle
+    #   <p>Description of ephemeris.</p>
+    #   @return [Types::EphemerisDescription]
+    # @!attribute oem
+    #   <p>Description of ephemeris.</p>
+    #   @return [Types::EphemerisDescription]
+    class EphemerisTypeDescription < Struct.new(
+      :tle,
+      :oem,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
+
+      class Tle < EphemerisTypeDescription; end
+      class Oem < EphemerisTypeDescription; end
+      class Unknown < EphemerisTypeDescription; end
+    end
+
+    # <p>Object that describes the frequency.</p>
+    # @!attribute value
+    #   <p>Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>
+    #   @return [Float]
+    # @!attribute units
+    #   <p>Frequency units.</p>
+    #   @return [String]
+    class Frequency < Struct.new(
+      :value,
+      :units,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object that describes the frequency bandwidth. </p>
+    # @!attribute value
+    #   <p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Float]
+    # @!attribute units
+    #   <p>Frequency bandwidth units.</p>
+    #   @return [String]
+    class FrequencyBandwidth < Struct.new(
+      :value,
+      :units,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module FrequencyUnits
+      GHZ = 'GHz'
+      MHZ = 'MHz'
+      KHZ = 'kHz'
+    end
+
+    # @!attribute agent_id
+    #   <p>UUID of agent to get configuration information for.</p>
+    #   @return [String]
+    class GetAgentConfigurationInput < Struct.new(
+      :agent_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>UUID of agent.</p>
+    #   @return [String]
+    # @!attribute tasking_document
+    #   <p>Tasking document for agent.</p>
+    #   @return [String]
+    class GetAgentConfigurationOutput < Struct.new(
+      :agent_id,
+      :tasking_document,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    class GetConfigInput < Struct.new(
+      :config_id,
+      :config_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_arn
+    #   <p>ARN of a <code>Config</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_data
+    #   <p>Data elements in a <code>Config</code>.</p>
+    #   @return [Types::ConfigTypeData]
+    # @!attribute tags
+    #   <p>Tags assigned to a <code>Config</code>.</p>
+    #   @return [Hash<String, String>]
+    class GetConfigOutput < Struct.new(
+      :config_id,
+      :config_arn,
+      :name,
+      :config_type,
+      :config_data,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    class GetDataflowEndpointGroupInput < Struct.new(
+      :dataflow_endpoint_group_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute dataflow_endpoint_group_id
+    #   <p>UUID of a dataflow endpoint group.</p>
+    #   @return [String]
+    # @!attribute dataflow_endpoint_group_arn
+    #   <p>ARN of a dataflow endpoint group.</p>
+    #   @return [String]
+    # @!attribute endpoints_details
+    #   <p>Details of a dataflow endpoint.</p>
+    #   @return [Array<Types::EndpointDetails>]
+    # @!attribute tags
+    #   <p>Tags assigned to a dataflow endpoint group.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute contact_pre_pass_duration_seconds
+    #   <p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>
+    #   @return [Integer]
+    # @!attribute contact_post_pass_duration_seconds
+    #   <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
+    #   @return [Integer]
+    class GetDataflowEndpointGroupOutput < Struct.new(
+      :dataflow_endpoint_group_id,
+      :dataflow_endpoint_group_arn,
+      :endpoints_details,
+      :tags,
+      :contact_pre_pass_duration_seconds,
+      :contact_post_pass_duration_seconds,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute month
+    #   <p>The month being requested, with a value of 1-12.</p>
+    #   @return [Integer]
+    # @!attribute year
+    #   <p>The year being requested, in the format of YYYY.</p>
+    #   @return [Integer]
+    class GetMinuteUsageInput < Struct.new(
+      :month,
+      :year,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute is_reserved_minutes_customer
+    #   <p>Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.</p>
+    #   @return [Boolean]
+    # @!attribute total_reserved_minute_allocation
+    #   <p>Total number of reserved minutes allocated, specific to the month being requested.</p>
+    #   @return [Integer]
+    # @!attribute upcoming_minutes_scheduled
+    #   <p>Upcoming minutes scheduled for an account, specific to the month being requested.</p>
+    #   @return [Integer]
+    # @!attribute total_scheduled_minutes
+    #   <p>Total scheduled minutes for an account, specific to the month being requested.</p>
+    #   @return [Integer]
+    # @!attribute estimated_minutes_remaining
+    #   <p>Estimated number of minutes remaining for an account, specific to the month being requested.</p>
+    #   @return [Integer]
+    class GetMinuteUsageOutput < Struct.new(
+      :is_reserved_minutes_customer,
+      :total_reserved_minute_allocation,
+      :upcoming_minutes_scheduled,
+      :total_scheduled_minutes,
+      :estimated_minutes_remaining,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    class GetMissionProfileInput < Struct.new(
+      :mission_profile_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a mission profile.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>Region of a mission profile.</p>
+    #   @return [String]
+    # @!attribute contact_pre_pass_duration_seconds
+    #   <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+    #   @return [Integer]
+    # @!attribute contact_post_pass_duration_seconds
+    #   <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+    #   @return [Integer]
+    # @!attribute minimum_viable_contact_duration_seconds
+    #   <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+    #   @return [Integer]
+    # @!attribute dataflow_edges
+    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
+    #               <code>Config</code> and a <i>to</i>
+    #               <code>Config</code>.</p>
+    #   @return [Array<Array<String>>]
+    # @!attribute tracking_config_arn
+    #   <p>ARN of a tracking <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to a mission profile.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute streams_kms_key
+    #   <p>KMS key to use for encrypting streams.</p>
+    #   @return [Types::KmsKey]
+    # @!attribute streams_kms_role
+    #   <p>Role to use for encrypting streams with KMS key.</p>
+    #   @return [String]
+    class GetMissionProfileOutput < Struct.new(
+      :mission_profile_id,
+      :mission_profile_arn,
+      :name,
+      :region,
+      :contact_pre_pass_duration_seconds,
+      :contact_post_pass_duration_seconds,
+      :minimum_viable_contact_duration_seconds,
+      :dataflow_edges,
+      :tracking_config_arn,
+      :tags,
+      :streams_kms_key,
+      :streams_kms_role,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute satellite_id
+    #   <p>UUID of a satellite.</p>
+    #   @return [String]
+    class GetSatelliteInput < Struct.new(
+      :satellite_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute satellite_id
+    #   <p>UUID of a satellite.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite.</p>
+    #   @return [String]
+    # @!attribute norad_satellite_id
+    #   <p>NORAD satellite ID number.</p>
+    #   @return [Integer]
+    # @!attribute ground_stations
+    #   <p>A list of ground stations to which the satellite is on-boarded.</p>
+    #   @return [Array<String>]
+    # @!attribute current_ephemeris
+    #   <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
+    #   @return [Types::EphemerisMetaData]
+    class GetSatelliteOutput < Struct.new(
+      :satellite_id,
+      :satellite_arn,
+      :norad_satellite_id,
+      :ground_stations,
+      :current_ephemeris,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:norad_satellite_id] = 0 unless options.key?(:norad_satellite_id)
+        super
+      end
+    end
+
+    # <p>Information about the ground station data.</p>
+    # @!attribute ground_station_id
+    #   <p>UUID of a ground station.</p>
+    #   @return [String]
+    # @!attribute ground_station_name
+    #   <p>Name of a ground station.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>Ground station Region.</p>
+    #   @return [String]
+    class GroundStationData < Struct.new(
+      :ground_station_id,
+      :ground_station_name,
+      :region,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An integer range that has a minimum and maximum value.</p>
+    # @!attribute minimum
+    #   <p>A minimum value.</p>
+    #   @return [Integer]
+    # @!attribute maximum
+    #   <p>A maximum value.</p>
+    #   @return [Integer]
+    class IntegerRange < Struct.new(
+      :minimum,
+      :maximum,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>One or more parameters are not valid.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute parameter_name
+    #   <p/>
+    #   @return [String]
+    class InvalidParameterException < Struct.new(
+      :message,
+      :parameter_name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>KMS key info.</p>
+    # @!attribute kms_key_arn
+    #   <p>KMS Key Arn.</p>
+    #   @return [String]
+    # @!attribute kms_alias_arn
+    #   <p>KMS Alias Arn.</p>
+    #   @return [String]
+    # @!attribute kms_alias_name
+    #   <p>KMS Alias Name.</p>
+    #   @return [String]
+    class KmsKey < Struct.new(
+      :kms_key_arn,
+      :kms_alias_arn,
+      :kms_alias_name,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
+
+      class KmsKeyArn < KmsKey; end
+      class KmsAliasArn < KmsKey; end
+      class KmsAliasName < KmsKey; end
+      class Unknown < KmsKey; end
+    end
+
+    # <p/>
+    # @!attribute max_results
+    #   <p>Maximum number of <code>Configs</code> returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token returned in the request of a previous <code>ListConfigs</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    class ListConfigsInput < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token returned in the response of a previous <code>ListConfigs</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    # @!attribute config_list
+    #   <p>List of <code>Config</code> items.</p>
+    #   @return [Array<Types::ConfigListItem>]
+    class ListConfigsOutput < Struct.new(
+      :next_token,
+      :config_list,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute max_results
+    #   <p>Maximum number of contacts returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    # @!attribute status_list
+    #   <p>Status of a contact reservation.</p>
+    #   @return [Array<String>]
+    # @!attribute start_time
+    #   <p>Start time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>End time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute ground_station
+    #   <p>Name of a ground station.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite.</p>
+    #   @return [String]
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    class ListContactsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :status_list,
+      :start_time,
+      :end_time,
+      :ground_station,
+      :satellite_arn,
+      :mission_profile_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token returned in the response of a previous <code>ListContacts</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    # @!attribute contact_list
+    #   <p>List of contacts.</p>
+    #   @return [Array<Types::ContactData>]
+    class ListContactsOutput < Struct.new(
+      :next_token,
+      :contact_list,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute max_results
+    #   <p>Maximum number of dataflow endpoint groups returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token returned in the request of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    class ListDataflowEndpointGroupsInput < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token returned in the response of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    # @!attribute dataflow_endpoint_group_list
+    #   <p>A list of dataflow endpoint groups.</p>
+    #   @return [Array<Types::DataflowEndpointListItem>]
+    class ListDataflowEndpointGroupsOutput < Struct.new(
+      :next_token,
+      :dataflow_endpoint_group_list,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute satellite_id
+    #   <p>The AWS Ground Station satellite ID to list ephemeris for.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The start time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>
+    #   @return [Time]
+    # @!attribute status_list
+    #   <p>The list of ephemeris status to return.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>Maximum number of ephemerides to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token.</p>
+    #   @return [String]
+    class ListEphemeridesInput < Struct.new(
+      :satellite_id,
+      :start_time,
+      :end_time,
+      :status_list,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>Pagination token.</p>
+    #   @return [String]
+    # @!attribute ephemerides
+    #   <p>List of ephemerides.</p>
+    #   @return [Array<Types::EphemerisItem>]
+    class ListEphemeridesOutput < Struct.new(
+      :next_token,
+      :ephemerides,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute satellite_id
+    #   <p>Satellite ID to retrieve on-boarded ground stations.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of ground stations returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token that can be supplied in the next call to get the next page of ground stations.</p>
+    #   @return [String]
+    class ListGroundStationsInput < Struct.new(
+      :satellite_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token that can be supplied in the next call to get the next page of ground stations.</p>
+    #   @return [String]
+    # @!attribute ground_station_list
+    #   <p>List of ground stations.</p>
+    #   @return [Array<Types::GroundStationData>]
+    class ListGroundStationsOutput < Struct.new(
+      :next_token,
+      :ground_station_list,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute max_results
+    #   <p>Maximum number of mission profiles returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token returned in the request of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    class ListMissionProfilesInput < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token returned in the response of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.</p>
+    #   @return [String]
+    # @!attribute mission_profile_list
+    #   <p>List of mission profiles.</p>
+    #   @return [Array<Types::MissionProfileListItem>]
+    class ListMissionProfilesOutput < Struct.new(
+      :next_token,
+      :mission_profile_list,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute max_results
+    #   <p>Maximum number of satellites returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next token that can be supplied in the next call to get the next page of satellites.</p>
+    #   @return [String]
+    class ListSatellitesInput < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute next_token
+    #   <p>Next token that can be supplied in the next call to get the next page of satellites.</p>
+    #   @return [String]
+    # @!attribute satellites
+    #   <p>List of satellites.</p>
+    #   @return [Array<Types::SatelliteListItem>]
+    class ListSatellitesOutput < Struct.new(
+      :next_token,
+      :satellites,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute resource_arn
+    #   <p>ARN of a resource.</p>
+    #   @return [String]
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute tags
+    #   <p>Tags assigned to a resource.</p>
+    #   @return [Hash<String, String>]
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Item in a list of mission profiles.</p>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>Region of a mission profile.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a mission profile.</p>
+    #   @return [String]
+    class MissionProfileListItem < Struct.new(
+      :mission_profile_id,
+      :mission_profile_arn,
+      :region,
+      :name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>
+    #             Ephemeris data in Orbit Ephemeris Message (OEM) format.
+    #         </p>
+    #          <p>
+    #             AWS Ground Station processes OEM Customer Provided Ephemerides according to the <a href="https://public.ccsds.org/Pubs/502x0b3e1.pdf">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-custom-ephemeris-data.html#oem-ephemeris-format">OEM ephemeris format</a> in the AWS Ground Station user guide.
+    #         </p>
+    # @!attribute s3_object
+    #   <p>Identifies the S3 object to be used as the ephemeris.</p>
+    #   @return [Types::S3Object]
+    # @!attribute oem_data
+    #   <p>The data for an OEM ephemeris, supplied directly in the request rather than through an S3 object.</p>
+    #   @return [String]
+    class OEMEphemeris < Struct.new(
+      :s3_object,
+      :oem_data,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module Polarization
+      RIGHT_HAND = 'RIGHT_HAND'
+      LEFT_HAND = 'LEFT_HAND'
+      NONE = 'NONE'
+    end
+
+    # <p>Ingress address of AgentEndpoint with a port range and an optional mtu.</p>
+    # @!attribute socket_address
+    #   <p>A ranged socket address.</p>
+    #   @return [Types::RangedSocketAddress]
+    # @!attribute mtu
+    #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+    #   @return [Integer]
+    class RangedConnectionDetails < Struct.new(
+      :socket_address,
+      :mtu,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A socket address with a port range.</p>
+    # @!attribute name
+    #   <p>IPv4 socket address.</p>
+    #   @return [String]
+    # @!attribute port_range
+    #   <p>Port range of a socket address.</p>
+    #   @return [Types::IntegerRange]
+    class RangedSocketAddress < Struct.new(
+      :name,
+      :port_range,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute discovery_data
+    #   <p>Data for associating an agent with the capabilities it is managing.</p>
+    #   @return [Types::DiscoveryData]
+    # @!attribute agent_details
+    #   <p>Detailed information about the agent being registered.</p>
+    #   @return [Types::AgentDetails]
+    # @!attribute tags
+    #   <p>Tags assigned to an <code>Agent</code>.</p>
+    #   @return [Hash<String, String>]
+    class RegisterAgentInput < Struct.new(
+      :discovery_data,
+      :agent_details,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>UUID of registered agent.</p>
+    #   @return [String]
+    class RegisterAgentOutput < Struct.new(
+      :agent_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_arn
+    #   <p>ARN of a mission profile.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>Start time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>End time of a contact in UTC.</p>
+    #   @return [Time]
+    # @!attribute ground_station
+    #   <p>Name of a ground station.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to a contact.</p>
+    #   @return [Hash<String, String>]
+    class ReserveContactInput < Struct.new(
+      :mission_profile_arn,
+      :satellite_arn,
+      :start_time,
+      :end_time,
+      :ground_station,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute contact_id
+    #   <p>UUID of a contact.</p>
+    #   @return [String]
+    class ReserveContactOutput < Struct.new(
+      :contact_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Account limits for this resource have been exceeded.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute parameter_name
+    #   <p/>
+    #   @return [String]
+    class ResourceLimitExceededException < Struct.new(
+      :message,
+      :parameter_name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Resource was not found.</p>
+    # @!attribute message
+    #   @return [String]
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object stored in S3 containing ephemeris data.</p>
+    # @!attribute bucket
+    #   <p>An Amazon S3 Bucket name.</p>
+    #   @return [String]
+    # @!attribute key
+    #   <p>An Amazon S3 key for the ephemeris.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>For versioned S3 objects, the version to use for the ephemeris.</p>
+    #   @return [String]
+    class S3Object < Struct.new(
+      :bucket,
+      :key,
+      :version,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about an S3 recording <code>Config</code>.</p>
+    # @!attribute bucket_arn
+    #   <p>ARN of the bucket to record to.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>ARN of the role Ground Station assumes to write data to the bucket.</p>
+    #   @return [String]
+    # @!attribute prefix
+    #   <p>S3 Key prefix to prefice data files.</p>
+    #   @return [String]
+    class S3RecordingConfig < Struct.new(
+      :bucket_arn,
+      :role_arn,
+      :prefix,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details about an S3 recording <code>Config</code> used in a contact.</p>
+    # @!attribute bucket_arn
+    #   <p>ARN of the bucket used.</p>
+    #   @return [String]
+    # @!attribute key_template
+    #   <p>Key template used for the S3 Recording Configuration</p>
+    #   @return [String]
+    class S3RecordingDetails < Struct.new(
+      :bucket_arn,
+      :key_template,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Item in a list of satellites.</p>
+    # @!attribute satellite_id
+    #   <p>UUID of a satellite.</p>
+    #   @return [String]
+    # @!attribute satellite_arn
+    #   <p>ARN of a satellite.</p>
+    #   @return [String]
+    # @!attribute norad_satellite_id
+    #   <p>NORAD satellite ID number.</p>
+    #   @return [Integer]
+    # @!attribute ground_stations
+    #   <p>A list of ground stations to which the satellite is on-boarded.</p>
+    #   @return [Array<String>]
+    # @!attribute current_ephemeris
+    #   <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
+    #   @return [Types::EphemerisMetaData]
+    class SatelliteListItem < Struct.new(
+      :satellite_id,
+      :satellite_arn,
+      :norad_satellite_id,
+      :ground_stations,
+      :current_ephemeris,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:norad_satellite_id] = 0 unless options.key?(:norad_satellite_id)
+        super
+      end
+    end
+
+    # <p>Information about endpoints.</p>
+    # @!attribute subnet_ids
+    #   <p>A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_ids
+    #   <p>The security groups to attach to the elastic network interfaces.</p>
+    #   @return [Array<String>]
+    # @!attribute role_arn
+    #   <p>ARN to a role needed for connecting streams to your instances. </p>
+    #   @return [String]
+    class SecurityDetails < Struct.new(
+      :subnet_ids,
+      :security_group_ids,
+      :role_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the socket address.</p>
+    # @!attribute name
+    #   <p>Name of a socket address.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>Port of a socket address.</p>
+    #   @return [Integer]
+    class SocketAddress < Struct.new(
+      :name,
+      :port,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Dataflow details for the source side.</p>
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_details
+    #   <p>Additional details for a <code>Config</code>, if type is <code>dataflow-endpoint</code> or <code>antenna-downlink-demod-decode</code>
+    #            </p>
+    #   @return [Types::ConfigDetails]
+    # @!attribute dataflow_source_region
+    #   <p>Region of a dataflow source.</p>
+    #   @return [String]
+    class Source < Struct.new(
+      :config_type,
+      :config_id,
+      :config_details,
+      :dataflow_source_region,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object that describes a spectral <code>Config</code>.</p>
+    # @!attribute center_frequency
+    #   <p>Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>
+    #   @return [Types::Frequency]
+    # @!attribute bandwidth
+    #   <p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Types::FrequencyBandwidth]
+    # @!attribute polarization
+    #   <p>Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
+    #   @return [String]
+    class SpectrumConfig < Struct.new(
+      :center_frequency,
+      :bandwidth,
+      :polarization,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Two-line element set (TLE) data.</p>
+    # @!attribute tle_line1
+    #   <p>First line of two-line element set (TLE) data.</p>
+    #   @return [String]
+    # @!attribute tle_line2
+    #   <p>Second line of two-line element set (TLE) data.</p>
+    #   @return [String]
+    # @!attribute valid_time_range
+    #   <p>The valid time range for the TLE. Gaps or overlap are not permitted.</p>
+    #   @return [Types::TimeRange]
+    class TLEData < Struct.new(
+      :tle_line1,
+      :tle_line2,
+      :valid_time_range,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Two-line element set (TLE) ephemeris.</p>
+    # @!attribute s3_object
+    #   <p>Identifies the S3 object to be used as the ephemeris.</p>
+    #   @return [Types::S3Object]
+    # @!attribute tle_data
+    #   <p>The data for a TLE ephemeris, supplied directly in the request rather than through an S3 object.</p>
+    #   @return [Array<Types::TLEData>]
+    class TLEEphemeris < Struct.new(
+      :s3_object,
+      :tle_data,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute resource_arn
+    #   <p>ARN of a resource tag.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to a resource.</p>
+    #   @return [Hash<String, String>]
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    class TagResourceOutput < Struct.new(
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A time range with a start and end time.</p>
+    # @!attribute start_time
+    #   <p>Time in UTC at which the time range starts.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>Time in UTC at which the time range ends.</p>
+    #   @return [Time]
+    class TimeRange < Struct.new(
+      :start_time,
+      :end_time,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Object that determines whether tracking should be used during a contact
+    #          executed with this <code>Config</code> in the mission profile.</p>
+    # @!attribute autotrack
+    #   <p>Current setting for autotrack.</p>
+    #   @return [String]
+    class TrackingConfig < Struct.new(
+      :autotrack,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute resource_arn
+    #   <p>ARN of a resource.</p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>Keys of a resource tag.</p>
+    #   @return [Array<String>]
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    class UntagResourceOutput < Struct.new(
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>UUID of agent to update.</p>
+    #   @return [String]
+    # @!attribute task_id
+    #   <p>GUID of agent task.</p>
+    #   @return [String]
+    # @!attribute aggregate_status
+    #   <p>Aggregate status for agent.</p>
+    #   @return [Types::AggregateStatus]
+    # @!attribute component_statuses
+    #   <p>List of component statuses for agent.</p>
+    #   @return [Array<Types::ComponentStatusData>]
+    class UpdateAgentStatusInput < Struct.new(
+      :agent_id,
+      :task_id,
+      :aggregate_status,
+      :component_statuses,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>UUID of updated agent.</p>
+    #   @return [String]
+    class UpdateAgentStatusOutput < Struct.new(
+      :agent_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_data
+    #   <p>Parameters of a <code>Config</code>.</p>
+    #   @return [Types::ConfigTypeData]
+    class UpdateConfigInput < Struct.new(
+      :config_id,
+      :name,
+      :config_type,
+      :config_data,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute config_id
+    #   <p>UUID of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_type
+    #   <p>Type of a <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute config_arn
+    #   <p>ARN of a <code>Config</code>.</p>
+    #   @return [String]
+    class UpdateConfigOutput < Struct.new(
+      :config_id,
+      :config_type,
+      :config_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Whether the ephemeris is enabled or not. Changing this value will not require the ephemeris to be re-validated.</p>
+    #   @return [Boolean]
+    # @!attribute name
+    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
+    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
+    #            <p>Priority must be 1 or greater</p>
+    #   @return [Integer]
+    class UpdateEphemerisInput < Struct.new(
+      :ephemeris_id,
+      :enabled,
+      :name,
+      :priority,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute ephemeris_id
+    #   <p>The AWS Ground Station ephemeris ID.</p>
+    #   @return [String]
+    class UpdateEphemerisOutput < Struct.new(
+      :ephemeris_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of a mission profile.</p>
+    #   @return [String]
+    # @!attribute contact_pre_pass_duration_seconds
+    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   @return [Integer]
+    # @!attribute contact_post_pass_duration_seconds
+    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   @return [Integer]
+    # @!attribute minimum_viable_contact_duration_seconds
+    #   <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+    #   @return [Integer]
+    # @!attribute dataflow_edges
+    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
+    #               <code>Config</code> and a <i>to</i>
+    #               <code>Config</code>.</p>
+    #   @return [Array<Array<String>>]
+    # @!attribute tracking_config_arn
+    #   <p>ARN of a tracking <code>Config</code>.</p>
+    #   @return [String]
+    # @!attribute streams_kms_key
+    #   <p>KMS key to use for encrypting streams.</p>
+    #   @return [Types::KmsKey]
+    # @!attribute streams_kms_role
+    #   <p>Role to use for encrypting streams with KMS key.</p>
+    #   @return [String]
+    class UpdateMissionProfileInput < Struct.new(
+      :mission_profile_id,
+      :name,
+      :contact_pre_pass_duration_seconds,
+      :contact_post_pass_duration_seconds,
+      :minimum_viable_contact_duration_seconds,
+      :dataflow_edges,
+      :tracking_config_arn,
+      :streams_kms_key,
+      :streams_kms_role,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p/>
+    # @!attribute mission_profile_id
+    #   <p>UUID of a mission profile.</p>
+    #   @return [String]
+    class UpdateMissionProfileOutput < Struct.new(
+      :mission_profile_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about an uplink echo <code>Config</code>.</p>
+    #          <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the 
+    #          specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> 
+    #          is used in a contact.</p>
+    # @!attribute enabled
+    #   <p>Whether or not an uplink <code>Config</code> is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute antenna_uplink_config_arn
+    #   <p>ARN of an uplink <code>Config</code>.</p>
+    #   @return [String]
+    class UplinkEchoConfig < Struct.new(
+      :enabled,
+      :antenna_uplink_config_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the uplink spectral <code>Config</code>.</p>
+    # @!attribute center_frequency
+    #   <p>Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.</p>
+    #   @return [Types::Frequency]
+    # @!attribute polarization
+    #   <p>Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
+    #   @return [String]
+    class UplinkSpectrumConfig < Struct.new(
+      :center_frequency,
+      :polarization,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+  end
+end

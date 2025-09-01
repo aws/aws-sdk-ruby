@@ -1,0 +1,1880 @@
+module Aws::QApps
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Action
+      READ: String
+      WRITE: String
+    end
+
+    class AppDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_definition_version: String,
+        ?cards: Array[Types::Card],
+        ?can_edit: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_definition_version: String?
+      attr_accessor cards: Array[Types::Card]?
+      attr_accessor can_edit: bool?
+    end
+
+    class AppDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cards: Array[Types::CardInput],
+        ?initial_prompt: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cards: Array[Types::CardInput]?
+      attr_accessor initial_prompt: String?
+    end
+
+    module AppRequiredCapability
+      FILE_UPLOAD: String
+      CREATOR_MODE: String
+      RETRIEVAL_MODE: String
+      PLUGIN_MODE: String
+    end
+
+    module AppStatus
+      PUBLISHED: String
+      DRAFT: String
+      DELETED: String
+    end
+
+    class AssociateLibraryItemReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+    end
+
+    class AssociateQAppWithUserInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+    end
+
+    class AttributeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and_all_filters: Array[Types::AttributeFilter],
+        ?or_all_filters: Array[Types::AttributeFilter],
+        ?not_filter: Types::AttributeFilter,
+        ?equals_to: Types::DocumentAttribute,
+        ?contains_all: Types::DocumentAttribute,
+        ?contains_any: Types::DocumentAttribute,
+        ?greater_than: Types::DocumentAttribute,
+        ?greater_than_or_equals: Types::DocumentAttribute,
+        ?less_than: Types::DocumentAttribute,
+        ?less_than_or_equals: Types::DocumentAttribute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_all_filters: Array[Types::AttributeFilter]?
+      attr_accessor or_all_filters: Array[Types::AttributeFilter]?
+      attr_accessor not_filter: Types::AttributeFilter?
+      attr_accessor equals_to: Types::DocumentAttribute?
+      attr_accessor contains_all: Types::DocumentAttribute?
+      attr_accessor contains_any: Types::DocumentAttribute?
+      attr_accessor greater_than: Types::DocumentAttribute?
+      attr_accessor greater_than_or_equals: Types::DocumentAttribute?
+      attr_accessor less_than: Types::DocumentAttribute?
+      attr_accessor less_than_or_equals: Types::DocumentAttribute?
+    end
+
+    class BatchCreateCategoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?categories: Array[Types::BatchCreateCategoryInputCategory],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor categories: Array[Types::BatchCreateCategoryInputCategory]?
+    end
+
+    class BatchCreateCategoryInputCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor color: String?
+    end
+
+    class BatchDeleteCategoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor categories: Array[String]?
+    end
+
+    class BatchUpdateCategoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?categories: Array[Types::CategoryInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor categories: Array[Types::CategoryInput]?
+    end
+
+    class Card
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text_input: Types::TextInputCard,
+        ?q_query: Types::QQueryCard,
+        ?q_plugin: Types::QPluginCard,
+        ?file_upload: Types::FileUploadCard,
+        ?form_input: Types::FormInputCard,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_input: Types::TextInputCard?
+      attr_accessor q_query: Types::QQueryCard?
+      attr_accessor q_plugin: Types::QPluginCard?
+      attr_accessor file_upload: Types::FileUploadCard?
+      attr_accessor form_input: Types::FormInputCard?
+
+      class TextInput < Card
+      end
+      class QQuery < Card
+      end
+      class QPlugin < Card
+      end
+      class FileUpload < Card
+      end
+      class FormInput < Card
+      end
+      class Unknown < Card
+      end
+    end
+
+    class CardInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text_input: Types::TextInputCardInput,
+        ?q_query: Types::QQueryCardInput,
+        ?q_plugin: Types::QPluginCardInput,
+        ?file_upload: Types::FileUploadCardInput,
+        ?form_input: Types::FormInputCardInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_input: Types::TextInputCardInput?
+      attr_accessor q_query: Types::QQueryCardInput?
+      attr_accessor q_plugin: Types::QPluginCardInput?
+      attr_accessor file_upload: Types::FileUploadCardInput?
+      attr_accessor form_input: Types::FormInputCardInput?
+
+      class TextInput < CardInput
+      end
+      class QQuery < CardInput
+      end
+      class QPlugin < CardInput
+      end
+      class FileUpload < CardInput
+      end
+      class FormInput < CardInput
+      end
+      class Unknown < CardInput
+      end
+    end
+
+    module CardOutputSource
+      APPROVED_SOURCES: String
+      LLM: String
+    end
+
+    class CardStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_state: String,
+        ?current_value: String,
+        ?submissions: Array[Types::Submission],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_state: String?
+      attr_accessor current_value: String?
+      attr_accessor submissions: Array[Types::Submission]?
+    end
+
+    module CardType
+      TEXT_INPUT: String
+      Q_QUERY: String
+      FILE_UPLOAD: String
+      Q_PLUGIN: String
+      FORM_INPUT: String
+    end
+
+    class CardValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_id: String,
+        ?value: String,
+        ?submission_mutation: Types::SubmissionMutation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_id: String?
+      attr_accessor value: String?
+      attr_accessor submission_mutation: Types::SubmissionMutation?
+    end
+
+    class Category
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?color: String,
+        ?app_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor color: String?
+      attr_accessor app_count: Integer?
+    end
+
+    class CategoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor color: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ContentTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConversationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor type: String?
+    end
+
+    class CreateLibraryItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+        ?categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+      attr_accessor categories: Array[String]?
+    end
+
+    class CreateLibraryItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_item_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?rating_count: Integer,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_item_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor rating_count: Integer?
+      attr_accessor is_verified: bool?
+    end
+
+    class CreatePresignedUrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?card_id: String,
+        ?app_id: String,
+        ?file_contents_sha256: String,
+        ?file_name: String,
+        ?scope: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor card_id: String?
+      attr_accessor app_id: String?
+      attr_accessor file_contents_sha256: String?
+      attr_accessor file_name: String?
+      attr_accessor scope: String?
+      attr_accessor session_id: String?
+    end
+
+    class CreatePresignedUrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_id: String,
+        ?presigned_url: String,
+        ?presigned_url_fields: Hash[String, String],
+        ?presigned_url_expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_id: String?
+      attr_accessor presigned_url: String?
+      attr_accessor presigned_url_fields: Hash[String, String]?
+      attr_accessor presigned_url_expiration: Time?
+    end
+
+    class CreateQAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?title: String,
+        ?description: String,
+        ?app_definition: Types::AppDefinitionInput,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor app_definition: Types::AppDefinitionInput?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_arn: String,
+        ?title: String,
+        ?description: String,
+        ?initial_prompt: String,
+        ?app_version: Integer,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?required_capabilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor initial_prompt: String?
+      attr_accessor app_version: Integer?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor required_capabilities: Array[String]?
+    end
+
+    class DeleteLibraryItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+    end
+
+    class DeleteQAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+    end
+
+    class DescribeQAppPermissionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+    end
+
+    class DescribeQAppPermissionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?app_id: String,
+        ?permissions: Array[Types::PermissionOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor app_id: String?
+      attr_accessor permissions: Array[Types::PermissionOutput]?
+    end
+
+    class DisassociateLibraryItemReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+    end
+
+    class DisassociateQAppFromUserInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+    end
+
+    class DocumentAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Types::DocumentAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Types::DocumentAttributeValue?
+    end
+
+    class DocumentAttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?string_list_value: Array[String],
+        ?long_value: Integer,
+        ?date_value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor string_list_value: Array[String]?
+      attr_accessor long_value: Integer?
+      attr_accessor date_value: Time?
+
+      class StringValue < DocumentAttributeValue
+      end
+      class StringListValue < DocumentAttributeValue
+      end
+      class LongValue < DocumentAttributeValue
+      end
+      class DateValue < DocumentAttributeValue
+      end
+      class Unknown < DocumentAttributeValue
+      end
+    end
+
+    module DocumentScope
+      APPLICATION: String
+      SESSION: String
+    end
+
+    module ExecutionStatus
+      IN_PROGRESS: String
+      WAITING: String
+      COMPLETED: String
+      ERROR: String
+    end
+
+    class ExportQAppSessionDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class ExportQAppSessionDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv_file_link: String,
+        ?expires_at: Time,
+        ?session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv_file_link: String?
+      attr_accessor expires_at: Time?
+      attr_accessor session_arn: String?
+    end
+
+    class FileUploadCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?dependencies: Array[String],
+        ?type: String,
+        ?filename: String,
+        ?file_id: String,
+        ?allow_override: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor dependencies: Array[String]?
+      attr_accessor type: String?
+      attr_accessor filename: String?
+      attr_accessor file_id: String?
+      attr_accessor allow_override: bool?
+    end
+
+    class FileUploadCardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?id: String,
+        ?type: String,
+        ?filename: String,
+        ?file_id: String,
+        ?allow_override: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor filename: String?
+      attr_accessor file_id: String?
+      attr_accessor allow_override: bool?
+    end
+
+    class FormInputCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?dependencies: Array[String],
+        ?type: String,
+        ?metadata: Types::FormInputCardMetadata,
+        ?compute_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor dependencies: Array[String]?
+      attr_accessor type: String?
+      attr_accessor metadata: Types::FormInputCardMetadata?
+      attr_accessor compute_mode: String?
+    end
+
+    class FormInputCardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?id: String,
+        ?type: String,
+        ?metadata: Types::FormInputCardMetadata,
+        ?compute_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor metadata: Types::FormInputCardMetadata?
+      attr_accessor compute_mode: String?
+    end
+
+    class FormInputCardMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: Smithy::Schema::document?
+    end
+
+    class GetLibraryItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+      attr_accessor app_id: String?
+    end
+
+    class GetLibraryItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_item_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+        ?categories: Array[Types::Category],
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?rating_count: Integer,
+        ?is_rated_by_user: bool,
+        ?user_count: Integer,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_item_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor rating_count: Integer?
+      attr_accessor is_rated_by_user: bool?
+      attr_accessor user_count: Integer?
+      attr_accessor is_verified: bool?
+    end
+
+    class GetQAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+    end
+
+    class GetQAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_arn: String,
+        ?title: String,
+        ?description: String,
+        ?initial_prompt: String,
+        ?app_version: Integer,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?required_capabilities: Array[String],
+        ?app_definition: Types::AppDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor initial_prompt: String?
+      attr_accessor app_version: Integer?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor required_capabilities: Array[String]?
+      attr_accessor app_definition: Types::AppDefinition?
+    end
+
+    class GetQAppSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetQAppSessionMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetQAppSessionMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+        ?session_name: String,
+        ?sharing_configuration: Types::SessionSharingConfiguration,
+        ?session_owner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+      attr_accessor session_name: String?
+      attr_accessor sharing_configuration: Types::SessionSharingConfiguration?
+      attr_accessor session_owner: bool?
+    end
+
+    class GetQAppSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+        ?session_name: String,
+        ?app_version: Integer,
+        ?latest_published_app_version: Integer,
+        ?status: String,
+        ?card_status: Hash[String, Types::CardStatus],
+        ?user_is_host: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+      attr_accessor session_name: String?
+      attr_accessor app_version: Integer?
+      attr_accessor latest_published_app_version: Integer?
+      attr_accessor status: String?
+      attr_accessor card_status: Hash[String, Types::CardStatus]?
+      attr_accessor user_is_host: bool?
+    end
+
+    class ImportDocumentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?card_id: String,
+        ?app_id: String,
+        ?file_contents_base64: String,
+        ?file_name: String,
+        ?scope: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor card_id: String?
+      attr_accessor app_id: String?
+      attr_accessor file_contents_base64: String?
+      attr_accessor file_name: String?
+      attr_accessor scope: String?
+      attr_accessor session_id: String?
+    end
+
+    class ImportDocumentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_id: String?
+    end
+
+    module InputCardComputeMode
+      APPEND: String
+      REPLACE: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class LibraryItemMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_item_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+        ?categories: Array[Types::Category],
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?rating_count: Integer,
+        ?is_rated_by_user: bool,
+        ?user_count: Integer,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_item_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor rating_count: Integer?
+      attr_accessor is_rated_by_user: bool?
+      attr_accessor user_count: Integer?
+      attr_accessor is_verified: bool?
+    end
+
+    module LibraryItemStatus
+      PUBLISHED: String
+      DISABLED: String
+    end
+
+    class ListCategoriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class ListCategoriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor categories: Array[Types::Category]?
+    end
+
+    class ListLibraryItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?category_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor category_id: String?
+    end
+
+    class ListLibraryItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_items: Array[Types::LibraryItemMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_items: Array[Types::LibraryItemMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQAppSessionDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class ListQAppSessionDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+        ?session_data: Array[Types::QAppSessionData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+      attr_accessor session_data: Array[Types::QAppSessionData]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQAppsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListQAppsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apps: Array[Types::UserAppItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apps: Array[Types::UserAppItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PermissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor principal: String?
+    end
+
+    class PermissionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?principal: Types::PrincipalOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor principal: Types::PrincipalOutput?
+    end
+
+    module PluginType
+      SERVICE_NOW: String
+      SALESFORCE: String
+      JIRA: String
+      ZENDESK: String
+      CUSTOM: String
+      ASANA: String
+      ATLASSIAN_CONFLUENCE: String
+      GOOGLE_CALENDAR: String
+      JIRA_CLOUD: String
+      MICROSOFT_EXCHANGE: String
+      MICROSOFT_TEAMS: String
+      PAGERDUTY_ADVANCE: String
+      SALESFORCE_CRM: String
+      SERVICENOW_NOW_PLATFORM: String
+      SMARTSHEET: String
+      ZENDESK_SUITE: String
+    end
+
+    class PredictAppDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?app_definition: Types::AppDefinitionInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor app_definition: Types::AppDefinitionInput?
+    end
+
+    class PredictQAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?options: Types::PredictQAppInputOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor options: Types::PredictQAppInputOptions?
+    end
+
+    class PredictQAppInputOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?conversation: Array[Types::ConversationMessage],
+        ?problem_statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conversation: Array[Types::ConversationMessage]?
+      attr_accessor problem_statement: String?
+
+      class Conversation < PredictQAppInputOptions
+      end
+      class ProblemStatement < PredictQAppInputOptions
+      end
+      class Unknown < PredictQAppInputOptions
+      end
+    end
+
+    class PredictQAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::PredictAppDefinition,
+        ?problem_statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::PredictAppDefinition?
+      attr_accessor problem_statement: String?
+    end
+
+    class PrincipalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?user_type: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor user_type: String?
+      attr_accessor email: String?
+    end
+
+    class QAppSessionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_id: String,
+        ?value: Smithy::Schema::document,
+        ?user: Types::User,
+        ?submission_id: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_id: String?
+      attr_accessor value: Smithy::Schema::document?
+      attr_accessor user: Types::User?
+      attr_accessor submission_id: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class QPluginCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?dependencies: Array[String],
+        ?type: String,
+        ?prompt: String,
+        ?plugin_type: String,
+        ?plugin_id: String,
+        ?action_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor dependencies: Array[String]?
+      attr_accessor type: String?
+      attr_accessor prompt: String?
+      attr_accessor plugin_type: String?
+      attr_accessor plugin_id: String?
+      attr_accessor action_identifier: String?
+    end
+
+    class QPluginCardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?id: String,
+        ?type: String,
+        ?prompt: String,
+        ?plugin_id: String,
+        ?action_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor prompt: String?
+      attr_accessor plugin_id: String?
+      attr_accessor action_identifier: String?
+    end
+
+    class QQueryCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?dependencies: Array[String],
+        ?type: String,
+        ?prompt: String,
+        ?output_source: String,
+        ?attribute_filter: Types::AttributeFilter,
+        ?memory_references: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor dependencies: Array[String]?
+      attr_accessor type: String?
+      attr_accessor prompt: String?
+      attr_accessor output_source: String?
+      attr_accessor attribute_filter: Types::AttributeFilter?
+      attr_accessor memory_references: Array[String]?
+    end
+
+    class QQueryCardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?id: String,
+        ?type: String,
+        ?prompt: String,
+        ?output_source: String,
+        ?attribute_filter: Types::AttributeFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor prompt: String?
+      attr_accessor output_source: String?
+      attr_accessor attribute_filter: Types::AttributeFilter?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module Sender
+      USER: String
+      SYSTEM: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SessionSharingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?accept_responses: bool,
+        ?reveal_cards: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor accept_responses: bool?
+      attr_accessor reveal_cards: bool?
+    end
+
+    class StartQAppSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+        ?initial_values: Array[Types::CardValue],
+        ?session_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+      attr_accessor initial_values: Array[Types::CardValue]?
+      attr_accessor session_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartQAppSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+    end
+
+    class StopQAppSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class Submission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Smithy::Schema::document,
+        ?submission_id: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Smithy::Schema::document?
+      attr_accessor submission_id: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class SubmissionMutation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submission_id: String,
+        ?mutation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submission_id: String?
+      attr_accessor mutation_type: String?
+    end
+
+    module SubmissionMutationKind
+      edit: String
+      delete: String
+      add: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextInputCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?dependencies: Array[String],
+        ?type: String,
+        ?placeholder: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor dependencies: Array[String]?
+      attr_accessor type: String?
+      attr_accessor placeholder: String?
+      attr_accessor default_value: String?
+    end
+
+    class TextInputCardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?id: String,
+        ?type: String,
+        ?placeholder: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor placeholder: String?
+      attr_accessor default_value: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLibraryItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+        ?status: String,
+        ?categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+      attr_accessor status: String?
+      attr_accessor categories: Array[String]?
+    end
+
+    class UpdateLibraryItemMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?library_item_id: String,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor library_item_id: String?
+      attr_accessor is_verified: bool?
+    end
+
+    class UpdateLibraryItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_item_id: String,
+        ?app_id: String,
+        ?app_version: Integer,
+        ?categories: Array[Types::Category],
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?rating_count: Integer,
+        ?is_rated_by_user: bool,
+        ?user_count: Integer,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_item_id: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: Integer?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor rating_count: Integer?
+      attr_accessor is_rated_by_user: bool?
+      attr_accessor user_count: Integer?
+      attr_accessor is_verified: bool?
+    end
+
+    class UpdateQAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+        ?title: String,
+        ?description: String,
+        ?app_definition: Types::AppDefinitionInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor app_definition: Types::AppDefinitionInput?
+    end
+
+    class UpdateQAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_arn: String,
+        ?title: String,
+        ?description: String,
+        ?initial_prompt: String,
+        ?app_version: Integer,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?required_capabilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor initial_prompt: String?
+      attr_accessor app_version: Integer?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor required_capabilities: Array[String]?
+    end
+
+    class UpdateQAppPermissionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?app_id: String,
+        ?grant_permissions: Array[Types::PermissionInput],
+        ?revoke_permissions: Array[Types::PermissionInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor app_id: String?
+      attr_accessor grant_permissions: Array[Types::PermissionInput]?
+      attr_accessor revoke_permissions: Array[Types::PermissionInput]?
+    end
+
+    class UpdateQAppPermissionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?app_id: String,
+        ?permissions: Array[Types::PermissionOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor app_id: String?
+      attr_accessor permissions: Array[Types::PermissionOutput]?
+    end
+
+    class UpdateQAppSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+        ?values: Array[Types::CardValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+      attr_accessor values: Array[Types::CardValue]?
+    end
+
+    class UpdateQAppSessionMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?session_id: String,
+        ?session_name: String,
+        ?sharing_configuration: Types::SessionSharingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor session_id: String?
+      attr_accessor session_name: String?
+      attr_accessor sharing_configuration: Types::SessionSharingConfiguration?
+    end
+
+    class UpdateQAppSessionMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+        ?session_name: String,
+        ?sharing_configuration: Types::SessionSharingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+      attr_accessor session_name: String?
+      attr_accessor sharing_configuration: Types::SessionSharingConfiguration?
+    end
+
+    class UpdateQAppSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor session_arn: String?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class UserAppItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?app_arn: String,
+        ?title: String,
+        ?description: String,
+        ?created_at: Time,
+        ?can_edit: bool,
+        ?status: String,
+        ?is_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor app_arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor can_edit: bool?
+      attr_accessor status: String?
+      attr_accessor is_verified: bool?
+    end
+
+    module UserType
+      OWNER: String
+      USER: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

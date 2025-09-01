@@ -1,0 +1,2797 @@
+module Aws::WorkSpacesWeb
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class AssociateBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class AssociateDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?data_protection_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor data_protection_settings_arn: String?
+    end
+
+    class AssociateDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?data_protection_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor data_protection_settings_arn: String?
+    end
+
+    class AssociateIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?ip_access_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor ip_access_settings_arn: String?
+    end
+
+    class AssociateIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?ip_access_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor ip_access_settings_arn: String?
+    end
+
+    class AssociateNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?network_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor network_settings_arn: String?
+    end
+
+    class AssociateNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?network_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor network_settings_arn: String?
+    end
+
+    class AssociateSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?session_logger_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor session_logger_arn: String?
+    end
+
+    class AssociateSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?session_logger_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor session_logger_arn: String?
+    end
+
+    class AssociateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor trust_store_arn: String?
+    end
+
+    class AssociateTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor trust_store_arn: String?
+    end
+
+    class AssociateUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?user_access_logging_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor user_access_logging_settings_arn: String?
+    end
+
+    class AssociateUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?user_access_logging_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor user_access_logging_settings_arn: String?
+    end
+
+    class AssociateUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?user_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor user_settings_arn: String?
+    end
+
+    class AssociateUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?user_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor user_settings_arn: String?
+    end
+
+    class BrowserSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+        ?associated_portal_arns: Array[String],
+        ?browser_policy: String,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor browser_policy: String?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+    end
+
+    class BrowserSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thumbprint: String,
+        ?subject: String,
+        ?issuer: String,
+        ?not_valid_before: Time,
+        ?not_valid_after: Time,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thumbprint: String?
+      attr_accessor subject: String?
+      attr_accessor issuer: String?
+      attr_accessor not_valid_before: Time?
+      attr_accessor not_valid_after: Time?
+      attr_accessor body: String?
+    end
+
+    class CertificateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thumbprint: String,
+        ?subject: String,
+        ?issuer: String,
+        ?not_valid_before: Time,
+        ?not_valid_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thumbprint: String?
+      attr_accessor subject: String?
+      attr_accessor issuer: String?
+      attr_accessor not_valid_before: Time?
+      attr_accessor not_valid_after: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CookieSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?name: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor name: String?
+      attr_accessor path: String?
+    end
+
+    class CookieSynchronizationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowlist: Array[Types::CookieSpecification],
+        ?blocklist: Array[Types::CookieSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowlist: Array[Types::CookieSpecification]?
+      attr_accessor blocklist: Array[Types::CookieSpecification]?
+    end
+
+    class CreateBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?browser_policy: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor browser_policy: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class CreateDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?inline_redaction_configuration: Types::InlineRedactionConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class CreateDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+    end
+
+    class CreateIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?identity_provider_name: String,
+        ?identity_provider_type: String,
+        ?identity_provider_details: Hash[String, String],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor identity_provider_type: String?
+      attr_accessor identity_provider_details: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+    end
+
+    class CreateIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?ip_rules: Array[Types::IpRule],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor ip_rules: Array[Types::IpRule]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+    end
+
+    class CreateNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+    end
+
+    class CreatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?tags: Array[Types::Tag],
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?client_token: String,
+        ?authentication_type: String,
+        ?instance_type: String,
+        ?max_concurrent_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor authentication_type: String?
+      attr_accessor instance_type: String?
+      attr_accessor max_concurrent_sessions: Integer?
+    end
+
+    class CreatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?portal_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor portal_endpoint: String?
+    end
+
+    class CreateSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_filter: Types::EventFilter,
+        ?log_configuration: Types::LogConfiguration,
+        ?display_name: String,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor display_name: String?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+    end
+
+    class CreateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_list: Array[String],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_list: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class CreateUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_stream_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_stream_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+    end
+
+    class CreateUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_allowed: String,
+        ?paste_allowed: String,
+        ?download_allowed: String,
+        ?upload_allowed: String,
+        ?print_allowed: String,
+        ?tags: Array[Types::Tag],
+        ?disconnect_timeout_in_minutes: Integer,
+        ?idle_disconnect_timeout_in_minutes: Integer,
+        ?client_token: String,
+        ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?deep_link_allowed: String,
+        ?toolbar_configuration: Types::ToolbarConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_allowed: String?
+      attr_accessor paste_allowed: String?
+      attr_accessor download_allowed: String?
+      attr_accessor upload_allowed: String?
+      attr_accessor print_allowed: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor disconnect_timeout_in_minutes: Integer?
+      attr_accessor idle_disconnect_timeout_in_minutes: Integer?
+      attr_accessor client_token: String?
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor deep_link_allowed: String?
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+    end
+
+    class CreateUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+    end
+
+    class CustomPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern_name: String,
+        ?pattern_regex: String,
+        ?pattern_description: String,
+        ?keyword_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern_name: String?
+      attr_accessor pattern_regex: String?
+      attr_accessor pattern_description: String?
+      attr_accessor keyword_regex: String?
+    end
+
+    class DataProtectionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+        ?inline_redaction_configuration: Types::InlineRedactionConfiguration,
+        ?associated_portal_arns: Array[String],
+        ?display_name: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+    end
+
+    class DataProtectionSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+        ?display_name: String,
+        ?description: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class DeleteBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class DeleteBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+    end
+
+    class DeleteDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+    end
+
+    class DeleteIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+    end
+
+    class DeleteIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+    end
+
+    class DeleteNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DeletePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+    end
+
+    class DeleteSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class DeleteTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+    end
+
+    class DeleteUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+    end
+
+    class DeleteUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class DisassociateUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Event
+      WEBSITE_INTERACT: String
+      FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK: String
+      FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK: String
+      FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK: String
+      FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER: String
+      CONTENT_PASTE_TO_WEBSITE: String
+      CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD: String
+      CONTENT_COPY_FROM_WEBSITE: String
+      URL_LOAD: String
+      TAB_OPEN: String
+      TAB_CLOSE: String
+      PRINT_JOB_SUBMIT: String
+      SESSION_CONNECT: String
+      SESSION_START: String
+      SESSION_DISCONNECT: String
+      SESSION_END: String
+    end
+
+    class EventFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?all: Smithy::Schema::EmptyStructure,
+        ?include: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all: Smithy::Schema::EmptyStructure?
+      attr_accessor include: Array[String]?
+
+      class All < EventFilter
+      end
+      class Include < EventFilter
+      end
+      class Unknown < EventFilter
+      end
+    end
+
+    class ExpireSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class ExpireSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module FolderStructure
+      FLAT: String
+      NESTED_BY_DATE: String
+    end
+
+    class GetBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+    end
+
+    class GetBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings: Types::BrowserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings: Types::BrowserSettings?
+    end
+
+    class GetDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+    end
+
+    class GetDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings: Types::DataProtectionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings: Types::DataProtectionSettings?
+    end
+
+    class GetIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+    end
+
+    class GetIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+    end
+
+    class GetIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+    end
+
+    class GetIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings: Types::IpAccessSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings: Types::IpAccessSettings?
+    end
+
+    class GetNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+    end
+
+    class GetNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings: Types::NetworkSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings: Types::NetworkSettings?
+    end
+
+    class GetPortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class GetPortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal: Types::Portal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal: Types::Portal?
+    end
+
+    class GetPortalServiceProviderMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+    end
+
+    class GetPortalServiceProviderMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?service_provider_saml_metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor service_provider_saml_metadata: String?
+    end
+
+    class GetSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+    end
+
+    class GetSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger: Types::SessionLogger,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger: Types::SessionLogger?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::Session,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::Session?
+    end
+
+    class GetTrustStoreCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?thumbprint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor thumbprint: String?
+    end
+
+    class GetTrustStoreCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?certificate: Types::Certificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor certificate: Types::Certificate?
+    end
+
+    class GetTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class GetTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store: Types::TrustStore,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store: Types::TrustStore?
+    end
+
+    class GetUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+    end
+
+    class GetUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings: Types::UserAccessLoggingSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings: Types::UserAccessLoggingSettings?
+    end
+
+    class GetUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+    end
+
+    class GetUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings: Types::UserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings: Types::UserSettings?
+    end
+
+    class IdentityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?identity_provider_name: String,
+        ?identity_provider_type: String,
+        ?identity_provider_details: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor identity_provider_type: String?
+      attr_accessor identity_provider_details: Hash[String, String]?
+    end
+
+    class IdentityProviderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?identity_provider_name: String,
+        ?identity_provider_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor identity_provider_type: String?
+    end
+
+    class InlineRedactionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_redaction_patterns: Array[Types::InlineRedactionPattern],
+        ?global_enforced_urls: Array[String],
+        ?global_exempt_urls: Array[String],
+        ?global_confidence_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_redaction_patterns: Array[Types::InlineRedactionPattern]?
+      attr_accessor global_enforced_urls: Array[String]?
+      attr_accessor global_exempt_urls: Array[String]?
+      attr_accessor global_confidence_level: Integer?
+    end
+
+    class InlineRedactionPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?built_in_pattern_id: String,
+        ?custom_pattern: Types::CustomPattern,
+        ?redaction_place_holder: Types::RedactionPlaceHolder,
+        ?enforced_urls: Array[String],
+        ?exempt_urls: Array[String],
+        ?confidence_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor built_in_pattern_id: String?
+      attr_accessor custom_pattern: Types::CustomPattern?
+      attr_accessor redaction_place_holder: Types::RedactionPlaceHolder?
+      attr_accessor enforced_urls: Array[String]?
+      attr_accessor exempt_urls: Array[String]?
+      attr_accessor confidence_level: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class IpAccessSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+        ?associated_portal_arns: Array[String],
+        ?ip_rules: Array[Types::IpRule],
+        ?display_name: String,
+        ?description: String,
+        ?creation_date: Time,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor ip_rules: Array[Types::IpRule]?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+    end
+
+    class IpAccessSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+        ?display_name: String,
+        ?description: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class IpRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_range: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_range: String?
+      attr_accessor description: String?
+    end
+
+    class ListBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings: Array[Types::BrowserSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings: Array[Types::BrowserSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings: Array[Types::DataProtectionSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings: Array[Types::DataProtectionSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityProvidersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?portal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor portal_arn: String?
+    end
+
+    class ListIdentityProvidersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?identity_providers: Array[Types::IdentityProviderSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor identity_providers: Array[Types::IdentityProviderSummary]?
+    end
+
+    class ListIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings: Array[Types::IpAccessSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings: Array[Types::IpAccessSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings: Array[Types::NetworkSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings: Array[Types::NetworkSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPortalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPortalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portals: Array[Types::PortalSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portals: Array[Types::PortalSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionLoggersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSessionLoggersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_loggers: Array[Types::SessionLoggerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_loggers: Array[Types::SessionLoggerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+        ?username: String,
+        ?session_id: String,
+        ?sort_by: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+      attr_accessor username: String?
+      attr_accessor session_id: String?
+      attr_accessor sort_by: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::SessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::SessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTrustStoreCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTrustStoreCertificatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_list: Array[Types::CertificateSummary],
+        ?trust_store_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_list: Array[Types::CertificateSummary]?
+      attr_accessor trust_store_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrustStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTrustStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_stores: Array[Types::TrustStoreSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_stores: Array[Types::TrustStoreSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings: Array[Types::UserAccessLoggingSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings: Array[Types::UserAccessLoggingSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings: Array[Types::UserSettingsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings: Array[Types::UserSettingsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3LogConfiguration?
+    end
+
+    module LogFileFormat
+      JSON_LINES: String
+      JSON: String
+    end
+
+    class NetworkSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+        ?associated_portal_arns: Array[String],
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class NetworkSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class Portal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?renderer_type: String,
+        ?browser_type: String,
+        ?portal_status: String,
+        ?portal_endpoint: String,
+        ?display_name: String,
+        ?creation_date: Time,
+        ?browser_settings_arn: String,
+        ?data_protection_settings_arn: String,
+        ?user_settings_arn: String,
+        ?network_settings_arn: String,
+        ?session_logger_arn: String,
+        ?trust_store_arn: String,
+        ?status_reason: String,
+        ?user_access_logging_settings_arn: String,
+        ?authentication_type: String,
+        ?ip_access_settings_arn: String,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?instance_type: String,
+        ?max_concurrent_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor renderer_type: String?
+      attr_accessor browser_type: String?
+      attr_accessor portal_status: String?
+      attr_accessor portal_endpoint: String?
+      attr_accessor display_name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor browser_settings_arn: String?
+      attr_accessor data_protection_settings_arn: String?
+      attr_accessor user_settings_arn: String?
+      attr_accessor network_settings_arn: String?
+      attr_accessor session_logger_arn: String?
+      attr_accessor trust_store_arn: String?
+      attr_accessor status_reason: String?
+      attr_accessor user_access_logging_settings_arn: String?
+      attr_accessor authentication_type: String?
+      attr_accessor ip_access_settings_arn: String?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor instance_type: String?
+      attr_accessor max_concurrent_sessions: Integer?
+    end
+
+    class PortalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?renderer_type: String,
+        ?browser_type: String,
+        ?portal_status: String,
+        ?portal_endpoint: String,
+        ?display_name: String,
+        ?creation_date: Time,
+        ?browser_settings_arn: String,
+        ?data_protection_settings_arn: String,
+        ?user_settings_arn: String,
+        ?network_settings_arn: String,
+        ?session_logger_arn: String,
+        ?trust_store_arn: String,
+        ?user_access_logging_settings_arn: String,
+        ?authentication_type: String,
+        ?ip_access_settings_arn: String,
+        ?instance_type: String,
+        ?max_concurrent_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor renderer_type: String?
+      attr_accessor browser_type: String?
+      attr_accessor portal_status: String?
+      attr_accessor portal_endpoint: String?
+      attr_accessor display_name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor browser_settings_arn: String?
+      attr_accessor data_protection_settings_arn: String?
+      attr_accessor user_settings_arn: String?
+      attr_accessor network_settings_arn: String?
+      attr_accessor session_logger_arn: String?
+      attr_accessor trust_store_arn: String?
+      attr_accessor user_access_logging_settings_arn: String?
+      attr_accessor authentication_type: String?
+      attr_accessor ip_access_settings_arn: String?
+      attr_accessor instance_type: String?
+      attr_accessor max_concurrent_sessions: Integer?
+    end
+
+    class RedactionPlaceHolder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redaction_place_holder_type: String,
+        ?redaction_place_holder_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redaction_place_holder_type: String?
+      attr_accessor redaction_place_holder_text: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class S3LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+        ?bucket_owner: String,
+        ?log_file_format: String,
+        ?folder_structure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+      attr_accessor bucket_owner: String?
+      attr_accessor log_file_format: String?
+      attr_accessor folder_structure: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class Session
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?session_id: String,
+        ?username: String,
+        ?client_ip_addresses: Array[String],
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor username: String?
+      attr_accessor client_ip_addresses: Array[String]?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class SessionLogger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+        ?event_filter: Types::EventFilter,
+        ?log_configuration: Types::LogConfiguration,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?associated_portal_arns: Array[String],
+        ?display_name: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor display_name: String?
+      attr_accessor creation_date: Time?
+    end
+
+    class SessionLoggerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+        ?log_configuration: Types::LogConfiguration,
+        ?display_name: String,
+        ?creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor display_name: String?
+      attr_accessor creation_date: Time?
+    end
+
+    module SessionSortBy
+      START_TIME_ASCENDING: String
+      START_TIME_DESCENDING: String
+    end
+
+    module SessionStatus
+      ACTIVE: String
+      TERMINATED: String
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?session_id: String,
+        ?username: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor session_id: String?
+      attr_accessor username: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ToolbarConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?toolbar_type: String,
+        ?visual_mode: String,
+        ?hidden_toolbar_items: Array[String],
+        ?max_display_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor toolbar_type: String?
+      attr_accessor visual_mode: String?
+      attr_accessor hidden_toolbar_items: Array[String]?
+      attr_accessor max_display_resolution: String?
+    end
+
+    class TrustStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_portal_arns: Array[String],
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor trust_store_arn: String?
+    end
+
+    class TrustStoreSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBrowserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings_arn: String,
+        ?browser_policy: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings_arn: String?
+      attr_accessor browser_policy: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateBrowserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_settings: Types::BrowserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_settings: Types::BrowserSettings?
+    end
+
+    class UpdateDataProtectionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings_arn: String,
+        ?inline_redaction_configuration: Types::InlineRedactionConfiguration,
+        ?display_name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings_arn: String?
+      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDataProtectionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_protection_settings: Types::DataProtectionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_protection_settings: Types::DataProtectionSettings?
+    end
+
+    class UpdateIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_arn: String,
+        ?identity_provider_name: String,
+        ?identity_provider_type: String,
+        ?identity_provider_details: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_arn: String?
+      attr_accessor identity_provider_name: String?
+      attr_accessor identity_provider_type: String?
+      attr_accessor identity_provider_details: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider: Types::IdentityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider: Types::IdentityProvider?
+    end
+
+    class UpdateIpAccessSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings_arn: String,
+        ?display_name: String,
+        ?description: String,
+        ?ip_rules: Array[Types::IpRule],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor ip_rules: Array[Types::IpRule]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateIpAccessSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_access_settings: Types::IpAccessSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_access_settings: Types::IpAccessSettings?
+    end
+
+    class UpdateNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings_arn: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings_arn: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_settings: Types::NetworkSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_settings: Types::NetworkSettings?
+    end
+
+    class UpdatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_arn: String,
+        ?display_name: String,
+        ?authentication_type: String,
+        ?instance_type: String,
+        ?max_concurrent_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor authentication_type: String?
+      attr_accessor instance_type: String?
+      attr_accessor max_concurrent_sessions: Integer?
+    end
+
+    class UpdatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal: Types::Portal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal: Types::Portal?
+    end
+
+    class UpdateSessionLoggerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger_arn: String,
+        ?event_filter: Types::EventFilter,
+        ?log_configuration: Types::LogConfiguration,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger_arn: String?
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor display_name: String?
+    end
+
+    class UpdateSessionLoggerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_logger: Types::SessionLogger,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_logger: Types::SessionLogger?
+    end
+
+    class UpdateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+        ?certificates_to_add: Array[String],
+        ?certificates_to_delete: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+      attr_accessor certificates_to_add: Array[String]?
+      attr_accessor certificates_to_delete: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateTrustStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_arn: String?
+    end
+
+    class UpdateUserAccessLoggingSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+        ?kinesis_stream_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+      attr_accessor kinesis_stream_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateUserAccessLoggingSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings: Types::UserAccessLoggingSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings: Types::UserAccessLoggingSettings?
+    end
+
+    class UpdateUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+        ?copy_allowed: String,
+        ?paste_allowed: String,
+        ?download_allowed: String,
+        ?upload_allowed: String,
+        ?print_allowed: String,
+        ?disconnect_timeout_in_minutes: Integer,
+        ?idle_disconnect_timeout_in_minutes: Integer,
+        ?client_token: String,
+        ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
+        ?deep_link_allowed: String,
+        ?toolbar_configuration: Types::ToolbarConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+      attr_accessor copy_allowed: String?
+      attr_accessor paste_allowed: String?
+      attr_accessor download_allowed: String?
+      attr_accessor upload_allowed: String?
+      attr_accessor print_allowed: String?
+      attr_accessor disconnect_timeout_in_minutes: Integer?
+      attr_accessor idle_disconnect_timeout_in_minutes: Integer?
+      attr_accessor client_token: String?
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
+      attr_accessor deep_link_allowed: String?
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+    end
+
+    class UpdateUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings: Types::UserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings: Types::UserSettings?
+    end
+
+    class UserAccessLoggingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+        ?associated_portal_arns: Array[String],
+        ?kinesis_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor kinesis_stream_arn: String?
+    end
+
+    class UserAccessLoggingSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_logging_settings_arn: String,
+        ?kinesis_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_logging_settings_arn: String?
+      attr_accessor kinesis_stream_arn: String?
+    end
+
+    class UserSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+        ?associated_portal_arns: Array[String],
+        ?copy_allowed: String,
+        ?paste_allowed: String,
+        ?download_allowed: String,
+        ?upload_allowed: String,
+        ?print_allowed: String,
+        ?disconnect_timeout_in_minutes: Integer,
+        ?idle_disconnect_timeout_in_minutes: Integer,
+        ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
+        ?customer_managed_key: String,
+        ?additional_encryption_context: Hash[String, String],
+        ?deep_link_allowed: String,
+        ?toolbar_configuration: Types::ToolbarConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+      attr_accessor associated_portal_arns: Array[String]?
+      attr_accessor copy_allowed: String?
+      attr_accessor paste_allowed: String?
+      attr_accessor download_allowed: String?
+      attr_accessor upload_allowed: String?
+      attr_accessor print_allowed: String?
+      attr_accessor disconnect_timeout_in_minutes: Integer?
+      attr_accessor idle_disconnect_timeout_in_minutes: Integer?
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
+      attr_accessor customer_managed_key: String?
+      attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor deep_link_allowed: String?
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+    end
+
+    class UserSettingsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings_arn: String,
+        ?copy_allowed: String,
+        ?paste_allowed: String,
+        ?download_allowed: String,
+        ?upload_allowed: String,
+        ?print_allowed: String,
+        ?disconnect_timeout_in_minutes: Integer,
+        ?idle_disconnect_timeout_in_minutes: Integer,
+        ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
+        ?deep_link_allowed: String,
+        ?toolbar_configuration: Types::ToolbarConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings_arn: String?
+      attr_accessor copy_allowed: String?
+      attr_accessor paste_allowed: String?
+      attr_accessor download_allowed: String?
+      attr_accessor upload_allowed: String?
+      attr_accessor print_allowed: String?
+      attr_accessor disconnect_timeout_in_minutes: Integer?
+      attr_accessor idle_disconnect_timeout_in_minutes: Integer?
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
+      attr_accessor deep_link_allowed: String?
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

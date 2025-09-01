@@ -1,0 +1,5 @@
+  module Aws
+    module Amplify
+      VERSION: String
+    end
+  end

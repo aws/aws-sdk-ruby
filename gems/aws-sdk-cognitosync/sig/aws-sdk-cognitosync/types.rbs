@@ -1,0 +1,765 @@
+module Aws::CognitoSync
+  module Types
+
+    class AlreadyStreamedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BulkPublishRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class BulkPublishResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    module BulkPublishStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class CognitoStreams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?role_arn: String,
+        ?streaming_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor streaming_status: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Dataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?dataset_name: String,
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+        ?last_modified_by: String,
+        ?data_storage: Integer,
+        ?num_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor data_storage: Integer?
+      attr_accessor num_records: Integer?
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+    end
+
+    class DeleteDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::Dataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::Dataset?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::Dataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::Dataset?
+    end
+
+    class DescribeIdentityPoolUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class DescribeIdentityPoolUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_usage: Types::IdentityPoolUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_usage: Types::IdentityPoolUsage?
+    end
+
+    class DescribeIdentityUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+    end
+
+    class DescribeIdentityUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_usage: Types::IdentityUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_usage: Types::IdentityUsage?
+    end
+
+    class DuplicateRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetBulkPublishDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class GetBulkPublishDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?bulk_publish_start_time: Time,
+        ?bulk_publish_complete_time: Time,
+        ?bulk_publish_status: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor bulk_publish_start_time: Time?
+      attr_accessor bulk_publish_complete_time: Time?
+      attr_accessor bulk_publish_status: String?
+      attr_accessor failure_message: String?
+    end
+
+    class GetCognitoEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class GetCognitoEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Hash[String, String]?
+    end
+
+    class GetIdentityPoolConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+    end
+
+    class GetIdentityPoolConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?push_sync: Types::PushSync,
+        ?cognito_streams: Types::CognitoStreams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor push_sync: Types::PushSync?
+      attr_accessor cognito_streams: Types::CognitoStreams?
+    end
+
+    class IdentityPoolUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?sync_sessions_count: Integer,
+        ?data_storage: Integer,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor sync_sessions_count: Integer?
+      attr_accessor data_storage: Integer?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class IdentityUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_id: String,
+        ?identity_pool_id: String,
+        ?last_modified_date: Time,
+        ?dataset_count: Integer,
+        ?data_storage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_id: String?
+      attr_accessor identity_pool_id: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor dataset_count: Integer?
+      attr_accessor data_storage: Integer?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLambdaFunctionOutputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasets: Array[Types::Dataset],
+        ?count: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasets: Array[Types::Dataset]?
+      attr_accessor count: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityPoolUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdentityPoolUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_usages: Array[Types::IdentityPoolUsage],
+        ?max_results: Integer,
+        ?count: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_usages: Array[Types::IdentityPoolUsage]?
+      attr_accessor max_results: Integer?
+      attr_accessor count: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+        ?last_sync_count: Integer,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sync_session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor last_sync_count: Integer?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sync_session_token: String?
+    end
+
+    class ListRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::Record],
+        ?next_token: String,
+        ?count: Integer,
+        ?dataset_sync_count: Integer,
+        ?last_modified_by: String,
+        ?merged_dataset_names: Array[String],
+        ?dataset_exists: bool,
+        ?dataset_deleted_after_requested_sync_count: bool,
+        ?sync_session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::Record]?
+      attr_accessor next_token: String?
+      attr_accessor count: Integer?
+      attr_accessor dataset_sync_count: Integer?
+      attr_accessor last_modified_by: String?
+      attr_accessor merged_dataset_names: Array[String]?
+      attr_accessor dataset_exists: bool?
+      attr_accessor dataset_deleted_after_requested_sync_count: bool?
+      attr_accessor sync_session_token: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Operation
+      replace: String
+      remove: String
+    end
+
+    module Platform
+      APNS: String
+      APNS_SANDBOX: String
+      GCM: String
+      ADM: String
+    end
+
+    class PushSync
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arns: Array[String],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arns: Array[String]?
+      attr_accessor role_arn: String?
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?sync_count: Integer,
+        ?last_modified_date: Time,
+        ?last_modified_by: String,
+        ?device_last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor sync_count: Integer?
+      attr_accessor last_modified_date: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor device_last_modified_date: Time?
+    end
+
+    class RecordPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?op: String,
+        ?key: String,
+        ?value: String,
+        ?sync_count: Integer,
+        ?device_last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor op: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor sync_count: Integer?
+      attr_accessor device_last_modified_date: Time?
+    end
+
+    class RegisterDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?platform: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor platform: String?
+      attr_accessor token: String?
+    end
+
+    class RegisterDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetCognitoEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?events: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor events: Hash[String, String]?
+    end
+
+    class SetIdentityPoolConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?push_sync: Types::PushSync,
+        ?cognito_streams: Types::CognitoStreams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor push_sync: Types::PushSync?
+      attr_accessor cognito_streams: Types::CognitoStreams?
+    end
+
+    class SetIdentityPoolConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?push_sync: Types::PushSync,
+        ?cognito_streams: Types::CognitoStreams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor push_sync: Types::PushSync?
+      attr_accessor cognito_streams: Types::CognitoStreams?
+    end
+
+    module StreamingStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class SubscribeToDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor device_id: String?
+    end
+
+    class SubscribeToDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsubscribeFromDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor device_id: String?
+    end
+
+    class UnsubscribeFromDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?identity_id: String,
+        ?dataset_name: String,
+        ?device_id: String,
+        ?record_patches: Array[Types::RecordPatch],
+        ?sync_session_token: String,
+        ?client_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor dataset_name: String?
+      attr_accessor device_id: String?
+      attr_accessor record_patches: Array[Types::RecordPatch]?
+      attr_accessor sync_session_token: String?
+      attr_accessor client_context: String?
+    end
+
+    class UpdateRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::Record],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::Record]?
+    end
+  end
+end

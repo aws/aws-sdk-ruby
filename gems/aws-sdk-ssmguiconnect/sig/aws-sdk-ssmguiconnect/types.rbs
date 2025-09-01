@@ -1,0 +1,179 @@
+module Aws::SSMGuiConnect
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectionRecordingPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recording_destinations: Types::RecordingDestinations,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recording_destinations: Types::RecordingDestinations?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class DeleteConnectionRecordingPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+    end
+
+    class DeleteConnectionRecordingPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+    end
+
+    class GetConnectionRecordingPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?connection_recording_preferences: Types::ConnectionRecordingPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RecordingDestinations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_buckets: Array[Types::S3Bucket],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_buckets: Array[Types::S3Bucket]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Bucket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_owner: String,
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_owner: String?
+      attr_accessor bucket_name: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateConnectionRecordingPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_recording_preferences: Types::ConnectionRecordingPreferences,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateConnectionRecordingPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?connection_recording_preferences: Types::ConnectionRecordingPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

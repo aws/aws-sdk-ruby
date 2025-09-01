@@ -1,0 +1,227 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::BedrockDataAutomationRuntime
+  # This module contains a schema composed of shapes used by the client.
+  module Schema
+
+    AccessDeniedException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AssetProcessingConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#AssetProcessingConfiguration', name: 'AssetProcessingConfiguration')
+    AutomationJobStatus = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#AutomationJobStatus', name: 'AutomationJobStatus')
+    Blueprint = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#Blueprint', name: 'Blueprint')
+    BlueprintArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#BlueprintArn', name: 'BlueprintArn', traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):blueprint/(bedrock-data-insights-public-[a-zA-Z0-9-_]{1,30}|bedrock-data-automation-public-[a-zA-Z0-9-_]{1,30}|[a-zA-Z0-9-]{12,36})$"})
+    BlueprintList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#BlueprintList', name: 'BlueprintList', traits: {"smithy.api#length" => {"min" => 1, "max" => 40}})
+    BlueprintStage = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#BlueprintStage', name: 'BlueprintStage')
+    BlueprintVersion = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#BlueprintVersion', name: 'BlueprintVersion', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9]*$"})
+    DataAutomationArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#DataAutomationArn', name: 'DataAutomationArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):data-automation-project/[a-zA-Z0-9-_]+$"})
+    DataAutomationConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#DataAutomationConfiguration', name: 'DataAutomationConfiguration')
+    DataAutomationProfileArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#DataAutomationProfileArn', name: 'DataAutomationProfileArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):data-automation-profile/[a-zA-Z0-9-_.]+$"})
+    DataAutomationStage = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#DataAutomationStage', name: 'DataAutomationStage')
+    EncryptionConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#EncryptionConfiguration', name: 'EncryptionConfiguration')
+    EncryptionContextKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#EncryptionContextKey', name: 'EncryptionContextKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^.*\\S.*$"})
+    EncryptionContextMap = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#EncryptionContextMap', name: 'EncryptionContextMap', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EncryptionContextValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#EncryptionContextValue', name: 'EncryptionContextValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^.*\\S.*$"})
+    EventBridgeConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#EventBridgeConfiguration', name: 'EventBridgeConfiguration')
+    GetDataAutomationStatusRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusRequest', name: 'GetDataAutomationStatusRequest', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource"}]})
+    GetDataAutomationStatusResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusResponse', name: 'GetDataAutomationStatusResponse')
+    IdempotencyToken = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#IdempotencyToken', name: 'IdempotencyToken', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
+    InputConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#InputConfiguration', name: 'InputConfiguration')
+    InternalServerException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    InvocationArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#InvocationArn', name: 'InvocationArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:(insights-invocation|data-automation-invocation)/[a-zA-Z0-9-_]+$"})
+    InvokeDataAutomationAsyncRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncRequest', name: 'InvokeDataAutomationAsyncRequest')
+    InvokeDataAutomationAsyncResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncResponse', name: 'InvokeDataAutomationAsyncResponse', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource"}]})
+    KMSKeyId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#KMSKeyId', name: 'KMSKeyId', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]+$"})
+    ListTagsForResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
+    NonBlankString = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#NonBlankString', name: 'NonBlankString', traits: {"smithy.api#pattern" => "^[\\s\\S]*$"})
+    NotificationConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#NotificationConfiguration', name: 'NotificationConfiguration')
+    OutputConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#OutputConfiguration', name: 'OutputConfiguration')
+    ResourceNotFoundException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    S3Uri = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#S3Uri', name: 'S3Uri', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/[^\\x00-\\x1F\\x7F\\{^}%`\\]\">\\[~<#|]*)?$"})
+    ServiceQuotaExceededException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    Tag = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#Tag', name: 'Tag')
+    TagKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"})
+    TagKeyList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    TagList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagList', name: 'TagList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    TagResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagResourceRequest', name: 'TagResourceRequest')
+    TagResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagResourceResponse', name: 'TagResourceResponse')
+    TagValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    TaggableResourceArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TaggableResourceArn', name: 'TaggableResourceArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:data-automation-invocation/[a-zA-Z0-9-_]+$"})
+    ThrottlingException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimestampSegment = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#TimestampSegment', name: 'TimestampSegment')
+    UntagResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#UntagResourceRequest', name: 'UntagResourceRequest')
+    UntagResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#UntagResourceResponse', name: 'UntagResourceResponse')
+    ValidationException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    VideoAssetProcessingConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#VideoAssetProcessingConfiguration', name: 'VideoAssetProcessingConfiguration')
+    VideoSegmentConfiguration = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockdataautomationruntime#VideoSegmentConfiguration', name: 'VideoSegmentConfiguration')
+
+    AccessDeniedException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    AccessDeniedException.type = Types::AccessDeniedException
+    AssetProcessingConfiguration.add_member(:video, Smithy::Schema::Shapes::ShapeRef.new(shape: VideoAssetProcessingConfiguration, location_name: 'video', traits: {"smithy.api#documentation" => "Video asset processing configuration"}))
+    AssetProcessingConfiguration.type = Types::AssetProcessingConfiguration
+    AutomationJobStatus.add_member(:created, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATED', traits: {"smithy.api#enumValue" => "Created"}))
+    AutomationJobStatus.add_member(:in_progress, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "InProgress"}))
+    AutomationJobStatus.add_member(:success, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUCCESS', traits: {"smithy.api#enumValue" => "Success"}))
+    AutomationJobStatus.add_member(:service_error, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SERVICE_ERROR', traits: {"smithy.api#enumValue" => "ServiceError"}))
+    AutomationJobStatus.add_member(:client_error, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CLIENT_ERROR', traits: {"smithy.api#enumValue" => "ClientError"}))
+    Blueprint.add_member(:blueprint_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintArn, location_name: 'blueprintArn', traits: {"smithy.api#documentation" => "Arn of blueprint.", "smithy.api#required" => {}}))
+    Blueprint.add_member(:version, Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: 'version', traits: {"smithy.api#documentation" => "Version of blueprint."}))
+    Blueprint.add_member(:stage, Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintStage, location_name: 'stage', traits: {"smithy.api#documentation" => "Stage of blueprint."}))
+    Blueprint.type = Types::Blueprint
+    BlueprintList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Blueprint, traits: {"smithy.api#documentation" => "Blueprint."})
+    BlueprintStage.add_member(:development, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEVELOPMENT', traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
+    BlueprintStage.add_member(:live, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LIVE', traits: {"smithy.api#enumValue" => "LIVE"}))
+    DataAutomationConfiguration.add_member(:data_automation_project_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationArn, location_name: 'dataAutomationProjectArn', traits: {"smithy.api#documentation" => "Data automation project arn.", "smithy.api#required" => {}}))
+    DataAutomationConfiguration.add_member(:stage, Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationStage, location_name: 'stage', traits: {"smithy.api#documentation" => "Data automation stage."}))
+    DataAutomationConfiguration.type = Types::DataAutomationConfiguration
+    DataAutomationStage.add_member(:live, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LIVE', traits: {"smithy.api#enumValue" => "LIVE"}))
+    DataAutomationStage.add_member(:development, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEVELOPMENT', traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
+    EncryptionConfiguration.add_member(:kms_key_id, Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKeyId, location_name: 'kmsKeyId', traits: {"smithy.api#documentation" => "Customer KMS key used for encryption", "smithy.api#required" => {}}))
+    EncryptionConfiguration.add_member(:kms_encryption_context, Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: 'kmsEncryptionContext', traits: {"smithy.api#documentation" => "KMS encryption context."}))
+    EncryptionConfiguration.type = Types::EncryptionConfiguration
+    EncryptionContextMap.key = Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    EncryptionContextMap.value = Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextValue)
+    EventBridgeConfiguration.add_member(:event_bridge_enabled, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'eventBridgeEnabled', traits: {"smithy.api#documentation" => "Event bridge flag.", "smithy.api#required" => {}}))
+    EventBridgeConfiguration.type = Types::EventBridgeConfiguration
+    GetDataAutomationStatusRequest.add_member(:invocation_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: InvocationArn, location_name: 'invocationArn', traits: {"smithy.api#documentation" => "Invocation arn.", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDataAutomationStatusRequest.type = Types::GetDataAutomationStatusRequest
+    GetDataAutomationStatusResponse.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: AutomationJobStatus, location_name: 'status', traits: {"smithy.api#documentation" => "Job Status."}))
+    GetDataAutomationStatusResponse.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "Error Type."}))
+    GetDataAutomationStatusResponse.add_member(:error_message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorMessage', traits: {"smithy.api#documentation" => "Error Message."}))
+    GetDataAutomationStatusResponse.add_member(:output_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: 'outputConfiguration', traits: {"smithy.api#documentation" => "Output configuration."}))
+    GetDataAutomationStatusResponse.type = Types::GetDataAutomationStatusResponse
+    InputConfiguration.add_member(:s3_uri, Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: 's3Uri', traits: {"smithy.api#documentation" => "S3 uri.", "smithy.api#required" => {}}))
+    InputConfiguration.add_member(:asset_processing_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: AssetProcessingConfiguration, location_name: 'assetProcessingConfiguration', traits: {"smithy.api#documentation" => "Asset processing configuration"}))
+    InputConfiguration.type = Types::InputConfiguration
+    InternalServerException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    InternalServerException.type = Types::InternalServerException
+    InvokeDataAutomationAsyncRequest.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "Idempotency token.", "smithy.api#idempotencyToken" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:input_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: InputConfiguration, location_name: 'inputConfiguration', traits: {"smithy.api#documentation" => "Input configuration.", "smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:output_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: 'outputConfiguration', traits: {"smithy.api#documentation" => "Output configuration.", "smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:data_automation_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationConfiguration, location_name: 'dataAutomationConfiguration', traits: {"smithy.api#documentation" => "Data automation configuration."}))
+    InvokeDataAutomationAsyncRequest.add_member(:encryption_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: 'encryptionConfiguration', traits: {"smithy.api#documentation" => "Encryption configuration."}))
+    InvokeDataAutomationAsyncRequest.add_member(:notification_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: 'notificationConfiguration', traits: {"smithy.api#documentation" => "Notification configuration."}))
+    InvokeDataAutomationAsyncRequest.add_member(:blueprints, Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintList, location_name: 'blueprints', traits: {"smithy.api#documentation" => "Blueprint list."}))
+    InvokeDataAutomationAsyncRequest.add_member(:data_automation_profile_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationProfileArn, location_name: 'dataAutomationProfileArn', traits: {"smithy.api#documentation" => "Data automation profile ARN", "smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'tags', traits: {"smithy.api#documentation" => "List of tags."}))
+    InvokeDataAutomationAsyncRequest.type = Types::InvokeDataAutomationAsyncRequest
+    InvokeDataAutomationAsyncResponse.add_member(:invocation_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: InvocationArn, location_name: 'invocationArn', traits: {"smithy.api#documentation" => "ARN of the automation job", "smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncResponse.type = Types::InvokeDataAutomationAsyncResponse
+    ListTagsForResourceRequest.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: 'resourceARN', traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
+    ListTagsForResourceResponse.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'tags'))
+    ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    NotificationConfiguration.add_member(:event_bridge_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: EventBridgeConfiguration, location_name: 'eventBridgeConfiguration', traits: {"smithy.api#documentation" => "Event bridge configuration.", "smithy.api#required" => {}}))
+    NotificationConfiguration.type = Types::NotificationConfiguration
+    OutputConfiguration.add_member(:s3_uri, Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: 's3Uri', traits: {"smithy.api#documentation" => "S3 uri.", "smithy.api#required" => {}}))
+    OutputConfiguration.type = Types::OutputConfiguration
+    ResourceNotFoundException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ServiceQuotaExceededException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    Tag.add_member(:key, Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: 'key', traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: 'value', traits: {"smithy.api#required" => {}}))
+    Tag.type = Types::Tag
+    TagKeyList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
+    TagResourceRequest.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: 'resourceARN', traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'tags', traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.type = Types::TagResourceRequest
+    TagResourceResponse.type = Types::TagResourceResponse
+    ThrottlingException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    ThrottlingException.type = Types::ThrottlingException
+    TimestampSegment.add_member(:start_time_millis, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Long, location_name: 'startTimeMillis', traits: {"smithy.api#documentation" => "Start timestamp in milliseconds", "smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    TimestampSegment.add_member(:end_time_millis, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Long, location_name: 'endTimeMillis', traits: {"smithy.api#documentation" => "End timestamp in milliseconds", "smithy.api#range" => {"min" => 300000}, "smithy.api#required" => {}}))
+    TimestampSegment.type = Types::TimestampSegment
+    UntagResourceRequest.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: 'resourceARN', traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'tagKeys', traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.type = Types::UntagResourceRequest
+    UntagResourceResponse.type = Types::UntagResourceResponse
+    ValidationException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
+    ValidationException.type = Types::ValidationException
+    VideoAssetProcessingConfiguration.add_member(:segment_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: VideoSegmentConfiguration, location_name: 'segmentConfiguration', traits: {"smithy.api#documentation" => "Delimits the segment of the input that will be processed"}))
+    VideoAssetProcessingConfiguration.type = Types::VideoAssetProcessingConfiguration
+    VideoSegmentConfiguration.add_member(:timestamp_segment, Types::VideoSegmentConfiguration::TimestampSegment, Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampSegment, location_name: 'timestampSegment', traits: {"smithy.api#documentation" => "Timestamp segment"}))
+    VideoSegmentConfiguration.add_member(:unknown, Types::VideoSegmentConfiguration::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    VideoSegmentConfiguration.type = Types::VideoSegmentConfiguration
+
+    AmazonBedrockKeystoneRuntimeService = Smithy::Schema::Shapes::ServiceShape.new do |service|
+      service.id = "com.amazonaws.bedrockdataautomationruntime#AmazonBedrockKeystoneRuntimeService"
+      service.name = "AmazonBedrockKeystoneRuntimeService"
+      service.version = "2024-06-13"
+      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock Data Automation Runtime", "arnNamespace" => "bedrock", "endpointPrefix" => "bedrock-data-automation-runtime", "cloudTrailEventSource" => "bedrock.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Runtime for Amazon Bedrock Data Automation"}
+      service.add_operation(:get_data_automation_status, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatus"
+        operation.name = "GetDataAutomationStatus"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataAutomationStatusRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataAutomationStatusResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:invoke_data_automation_async, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsync"
+        operation.name = "InvokeDataAutomationAsync"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeDataAutomationAsyncRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeDataAutomationAsyncResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:list_tags_for_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockdataautomationruntime#ListTagsForResource"
+        operation.name = "ListTagsForResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:tag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockdataautomationruntime#TagResource"
+        operation.name = "TagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:untag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockdataautomationruntime#UntagResource"
+        operation.name = "UntagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+
+    end
+
+    class << self
+      def type_registry
+        return @type_registry if @type_registry
+
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = Smithy::Schema::TypeRegistry.new(shapes)
+      end
+    end
+  end
+end

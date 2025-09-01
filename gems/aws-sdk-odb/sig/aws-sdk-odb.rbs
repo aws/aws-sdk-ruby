@@ -1,0 +1,5 @@
+  module Aws
+    module Odb
+      VERSION: String
+    end
+  end

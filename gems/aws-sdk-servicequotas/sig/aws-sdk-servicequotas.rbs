@@ -1,0 +1,5 @@
+  module Aws
+    module ServiceQuotas
+      VERSION: String
+    end
+  end

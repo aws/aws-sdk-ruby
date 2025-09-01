@@ -1,0 +1,20 @@
+module Aws::InspectorScan
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    InternalServerException: StructureShape
+    InternalServerExceptionReason: EnumShape
+    OutputFormat: EnumShape
+    Sbom: DocumentShape
+    ScanSbomRequest: StructureShape
+    ScanSbomResponse: StructureShape
+    ThrottlingException: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFields: ListShape
+    ValidationExceptionReason: EnumShape
+
+    InspectorScan: ServiceShape
+  end
+end

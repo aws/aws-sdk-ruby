@@ -1,0 +1,525 @@
+module Aws::IVSRealTime
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IVSRealTime::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateEncoderConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateEncoderConfigurationResponse]
+      def encoder_configuration: () -> Types::EncoderConfiguration?
+    end
+    def create_encoder_configuration: (
+      ?name: String,
+      ?video: {
+        width: Integer,
+        height: Integer,
+        framerate: Float,
+        bitrate: Integer
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateEncoderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEncoderConfigurationResponse
+
+    interface _CreateIngestConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateIngestConfigurationResponse]
+      def ingest_configuration: () -> Types::IngestConfiguration?
+    end
+    def create_ingest_configuration: (
+      ?name: String,
+      ?stage_arn: String,
+      ?user_id: String,
+      ?attributes: Hash[String, String],
+      ?ingest_protocol: String,
+      ?insecure_ingest: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIngestConfigurationResponse
+
+    interface _CreateParticipantTokenResponse
+      include Smithy::Client::_Response[Types::CreateParticipantTokenOutput]
+      def participant_token: () -> Types::ParticipantToken?
+    end
+    def create_participant_token: (
+      ?stage_arn: String,
+      ?duration: Integer,
+      ?user_id: String,
+      ?attributes: Hash[String, String],
+      ?capabilities: Array[String]
+    ) -> _CreateParticipantTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParticipantTokenResponse
+
+    interface _CreateStageResponse
+      include Smithy::Client::_Response[Types::CreateStageOutput]
+      def stage: () -> Types::Stage?
+      def participant_tokens: () -> Array[Types::ParticipantToken]?
+    end
+    def create_stage: (
+      ?name: String,
+      ?participant_token_configurations: Array[
+        {
+          duration: Integer,
+          user_id: String,
+          attributes: Hash[String, String],
+          capabilities: Array[String]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?auto_participant_recording_configuration: {
+        storage_configuration_arn: String,
+        media_types: Array[String],
+        thumbnail_configuration: {
+          target_interval_seconds: Integer,
+          storage: Array[String],
+          recording_mode: String
+        },
+        recording_reconnect_window_seconds: Integer,
+        hls_configuration: {
+          target_segment_duration_seconds: Integer
+        },
+        record_participant_replicas: bool
+      }
+    ) -> _CreateStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStageResponse
+
+    interface _CreateStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateStorageConfigurationResponse]
+      def storage_configuration: () -> Types::StorageConfiguration?
+    end
+    def create_storage_configuration: (
+      ?name: String,
+      ?s3: {
+        bucket_name: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStorageConfigurationResponse
+
+    interface _DeleteEncoderConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteEncoderConfigurationResponse]
+    end
+    def delete_encoder_configuration: (
+      ?arn: String
+    ) -> _DeleteEncoderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEncoderConfigurationResponse
+
+    interface _DeleteIngestConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteIngestConfigurationResponse]
+    end
+    def delete_ingest_configuration: (
+      ?arn: String,
+      ?force: bool
+    ) -> _DeleteIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIngestConfigurationResponse
+
+    interface _DeletePublicKeyResponse
+      include Smithy::Client::_Response[Types::DeletePublicKeyResponse]
+    end
+    def delete_public_key: (
+      ?arn: String
+    ) -> _DeletePublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublicKeyResponse
+
+    interface _DeleteStageResponse
+      include Smithy::Client::_Response[Types::DeleteStageOutput]
+    end
+    def delete_stage: (
+      ?arn: String
+    ) -> _DeleteStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStageResponse
+
+    interface _DeleteStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteStorageConfigurationResponse]
+    end
+    def delete_storage_configuration: (
+      ?arn: String
+    ) -> _DeleteStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageConfigurationResponse
+
+    interface _DisconnectParticipantResponse
+      include Smithy::Client::_Response[Types::DisconnectParticipantOutput]
+    end
+    def disconnect_participant: (
+      ?stage_arn: String,
+      ?participant_id: String,
+      ?reason: String
+    ) -> _DisconnectParticipantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectParticipantResponse
+
+    interface _GetCompositionResponse
+      include Smithy::Client::_Response[Types::GetCompositionResponse]
+      def composition: () -> Types::Composition?
+    end
+    def get_composition: (
+      ?arn: String
+    ) -> _GetCompositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCompositionResponse
+
+    interface _GetEncoderConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEncoderConfigurationResponse]
+      def encoder_configuration: () -> Types::EncoderConfiguration?
+    end
+    def get_encoder_configuration: (
+      ?arn: String
+    ) -> _GetEncoderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEncoderConfigurationResponse
+
+    interface _GetIngestConfigurationResponse
+      include Smithy::Client::_Response[Types::GetIngestConfigurationResponse]
+      def ingest_configuration: () -> Types::IngestConfiguration?
+    end
+    def get_ingest_configuration: (
+      ?arn: String
+    ) -> _GetIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngestConfigurationResponse
+
+    interface _GetParticipantResponse
+      include Smithy::Client::_Response[Types::GetParticipantResponse]
+      def participant: () -> Types::Participant?
+    end
+    def get_participant: (
+      ?stage_arn: String,
+      ?session_id: String,
+      ?participant_id: String
+    ) -> _GetParticipantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParticipantResponse
+
+    interface _GetPublicKeyResponse
+      include Smithy::Client::_Response[Types::GetPublicKeyResponse]
+      def public_key: () -> Types::PublicKey?
+    end
+    def get_public_key: (
+      ?arn: String
+    ) -> _GetPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyResponse
+
+    interface _GetStageResponse
+      include Smithy::Client::_Response[Types::GetStageOutput]
+      def stage: () -> Types::Stage?
+    end
+    def get_stage: (
+      ?arn: String
+    ) -> _GetStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStageResponse
+
+    interface _GetStageSessionResponse
+      include Smithy::Client::_Response[Types::GetStageSessionResponse]
+      def stage_session: () -> Types::StageSession?
+    end
+    def get_stage_session: (
+      ?stage_arn: String,
+      ?session_id: String
+    ) -> _GetStageSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStageSessionResponse
+
+    interface _GetStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::GetStorageConfigurationResponse]
+      def storage_configuration: () -> Types::StorageConfiguration?
+    end
+    def get_storage_configuration: (
+      ?arn: String
+    ) -> _GetStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageConfigurationResponse
+
+    interface _ImportPublicKeyResponse
+      include Smithy::Client::_Response[Types::ImportPublicKeyResponse]
+      def public_key: () -> Types::PublicKey?
+    end
+    def import_public_key: (
+      ?public_key_material: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _ImportPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPublicKeyResponse
+
+    interface _ListCompositionsResponse
+      include Smithy::Client::_Response[Types::ListCompositionsResponse]
+      def compositions: () -> Array[Types::CompositionSummary]?
+      def next_token: () -> String?
+    end
+    def list_compositions: (
+      ?filter_by_stage_arn: String,
+      ?filter_by_encoder_configuration_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCompositionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCompositionsResponse
+
+    interface _ListEncoderConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListEncoderConfigurationsResponse]
+      def encoder_configurations: () -> Array[Types::EncoderConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_encoder_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEncoderConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEncoderConfigurationsResponse
+
+    interface _ListIngestConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListIngestConfigurationsResponse]
+      def ingest_configurations: () -> Array[Types::IngestConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_ingest_configurations: (
+      ?filter_by_stage_arn: String,
+      ?filter_by_state: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIngestConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIngestConfigurationsResponse
+
+    interface _ListParticipantEventsResponse
+      include Smithy::Client::_Response[Types::ListParticipantEventsResponse]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def list_participant_events: (
+      ?stage_arn: String,
+      ?session_id: String,
+      ?participant_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListParticipantEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListParticipantEventsResponse
+
+    interface _ListParticipantReplicasResponse
+      include Smithy::Client::_Response[Types::ListParticipantReplicasResponse]
+      def replicas: () -> Array[Types::ParticipantReplica]?
+      def next_token: () -> String?
+    end
+    def list_participant_replicas: (
+      ?source_stage_arn: String,
+      ?participant_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListParticipantReplicasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListParticipantReplicasResponse
+
+    interface _ListParticipantsResponse
+      include Smithy::Client::_Response[Types::ListParticipantsResponse]
+      def participants: () -> Array[Types::ParticipantSummary]?
+      def next_token: () -> String?
+    end
+    def list_participants: (
+      ?stage_arn: String,
+      ?session_id: String,
+      ?filter_by_user_id: String,
+      ?filter_by_published: bool,
+      ?filter_by_state: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter_by_recording_state: String
+    ) -> _ListParticipantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListParticipantsResponse
+
+    interface _ListPublicKeysResponse
+      include Smithy::Client::_Response[Types::ListPublicKeysResponse]
+      def public_keys: () -> Array[Types::PublicKeySummary]?
+      def next_token: () -> String?
+    end
+    def list_public_keys: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPublicKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPublicKeysResponse
+
+    interface _ListStageSessionsResponse
+      include Smithy::Client::_Response[Types::ListStageSessionsResponse]
+      def stage_sessions: () -> Array[Types::StageSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_stage_sessions: (
+      ?stage_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStageSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStageSessionsResponse
+
+    interface _ListStagesResponse
+      include Smithy::Client::_Response[Types::ListStagesOutput]
+      def stages: () -> Array[Types::StageSummary]?
+      def next_token: () -> String?
+    end
+    def list_stages: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStagesResponse
+
+    interface _ListStorageConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListStorageConfigurationsResponse]
+      def storage_configurations: () -> Array[Types::StorageConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_storage_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStorageConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStorageConfigurationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartCompositionResponse
+      include Smithy::Client::_Response[Types::StartCompositionResponse]
+      def composition: () -> Types::Composition?
+    end
+    def start_composition: (
+      ?stage_arn: String,
+      ?idempotency_token: String,
+      ?layout: {
+        grid: {
+          featured_participant_attribute: String,
+          omit_stopped_video: bool,
+          video_aspect_ratio: String,
+          video_fill_mode: String,
+          grid_gap: Integer
+        },
+        pip: {
+          featured_participant_attribute: untyped,
+          omit_stopped_video: untyped,
+          video_fill_mode: untyped,
+          grid_gap: untyped,
+          pip_participant_attribute: untyped,
+          pip_behavior: String,
+          pip_offset: Integer,
+          pip_position: String,
+          pip_width: Integer,
+          pip_height: Integer
+        }
+      },
+      ?destinations: Array[
+        {
+          name: String,
+          channel: {
+            channel_arn: String,
+            encoder_configuration_arn: String
+          },
+          s3: {
+            storage_configuration_arn: String,
+            encoder_configuration_arns: Array[String],
+            recording_configuration: {
+              hls_configuration: {
+                target_segment_duration_seconds: Integer
+              },
+              format: String
+            },
+            thumbnail_configurations: Array[
+              {
+                target_interval_seconds: Integer,
+                storage: Array[String]
+              }
+            ]
+          }
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _StartCompositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCompositionResponse
+
+    interface _StartParticipantReplicationResponse
+      include Smithy::Client::_Response[Types::StartParticipantReplicationResponse]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+    end
+    def start_participant_replication: (
+      ?source_stage_arn: String,
+      ?destination_stage_arn: String,
+      ?participant_id: String,
+      ?reconnect_window_seconds: Integer,
+      ?attributes: Hash[String, String]
+    ) -> _StartParticipantReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartParticipantReplicationResponse
+
+    interface _StopCompositionResponse
+      include Smithy::Client::_Response[Types::StopCompositionResponse]
+    end
+    def stop_composition: (
+      ?arn: String
+    ) -> _StopCompositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCompositionResponse
+
+    interface _StopParticipantReplicationResponse
+      include Smithy::Client::_Response[Types::StopParticipantReplicationResponse]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+    end
+    def stop_participant_replication: (
+      ?source_stage_arn: String,
+      ?destination_stage_arn: String,
+      ?participant_id: String
+    ) -> _StopParticipantReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopParticipantReplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIngestConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateIngestConfigurationResponse]
+      def ingest_configuration: () -> Types::IngestConfiguration?
+    end
+    def update_ingest_configuration: (
+      ?arn: String,
+      ?stage_arn: String
+    ) -> _UpdateIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIngestConfigurationResponse
+
+    interface _UpdateStageResponse
+      include Smithy::Client::_Response[Types::UpdateStageOutput]
+      def stage: () -> Types::Stage?
+    end
+    def update_stage: (
+      ?arn: String,
+      ?name: String,
+      ?auto_participant_recording_configuration: {
+        storage_configuration_arn: String,
+        media_types: Array[String],
+        thumbnail_configuration: {
+          target_interval_seconds: Integer,
+          storage: Array[String],
+          recording_mode: String
+        },
+        recording_reconnect_window_seconds: Integer,
+        hls_configuration: {
+          target_segment_duration_seconds: Integer
+        },
+        record_participant_replicas: bool
+      }
+    ) -> _UpdateStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStageResponse
+  end
+end

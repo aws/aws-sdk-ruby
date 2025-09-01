@@ -1,0 +1,5 @@
+  module Aws
+    module Identitystore
+      VERSION: String
+    end
+  end

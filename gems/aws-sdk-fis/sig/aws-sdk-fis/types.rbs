@@ -1,0 +1,1873 @@
+module Aws::Fis
+  module Types
+
+    module AccountTargeting
+      SINGLE_ACCOUNT: String
+      MULTI_ACCOUNT: String
+    end
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?parameters: Hash[String, Types::ActionParameter],
+        ?targets: Hash[String, Types::ActionTarget],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, Types::ActionParameter]?
+      attr_accessor targets: Hash[String, Types::ActionTarget]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ActionParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor required: bool?
+    end
+
+    class ActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?targets: Hash[String, Types::ActionTarget],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor targets: Hash[String, Types::ActionTarget]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ActionTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+    end
+
+    module ActionsMode
+      SKIP_ALL: String
+      RUN_ALL: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateExperimentTemplateActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+        ?targets: Hash[String, String],
+        ?start_after: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor targets: Hash[String, String]?
+      attr_accessor start_after: Array[String]?
+    end
+
+    class CreateExperimentTemplateExperimentOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_targeting: String,
+        ?empty_target_resolution_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_targeting: String?
+      attr_accessor empty_target_resolution_mode: String?
+    end
+
+    class CreateExperimentTemplateLogConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput,
+        ?s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput,
+        ?log_schema_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput?
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput?
+      attr_accessor log_schema_version: Integer?
+    end
+
+    class CreateExperimentTemplateReportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outputs: Types::ExperimentTemplateReportConfigurationOutputsInput,
+        ?data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput,
+        ?pre_experiment_duration: String,
+        ?post_experiment_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputsInput?
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput?
+      attr_accessor pre_experiment_duration: String?
+      attr_accessor post_experiment_duration: String?
+    end
+
+    class CreateExperimentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?description: String,
+        ?stop_conditions: Array[Types::CreateExperimentTemplateStopConditionInput],
+        ?targets: Hash[String, Types::CreateExperimentTemplateTargetInput],
+        ?actions: Hash[String, Types::CreateExperimentTemplateActionInput],
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?log_configuration: Types::CreateExperimentTemplateLogConfigurationInput,
+        ?experiment_options: Types::CreateExperimentTemplateExperimentOptionsInput,
+        ?experiment_report_configuration: Types::CreateExperimentTemplateReportConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor stop_conditions: Array[Types::CreateExperimentTemplateStopConditionInput]?
+      attr_accessor targets: Hash[String, Types::CreateExperimentTemplateTargetInput]?
+      attr_accessor actions: Hash[String, Types::CreateExperimentTemplateActionInput]?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_configuration: Types::CreateExperimentTemplateLogConfigurationInput?
+      attr_accessor experiment_options: Types::CreateExperimentTemplateExperimentOptionsInput?
+      attr_accessor experiment_report_configuration: Types::CreateExperimentTemplateReportConfigurationInput?
+    end
+
+    class CreateExperimentTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template: Types::ExperimentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template: Types::ExperimentTemplate?
+    end
+
+    class CreateExperimentTemplateStopConditionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor value: String?
+    end
+
+    class CreateExperimentTemplateTargetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_arns: Array[String],
+        ?resource_tags: Hash[String, String],
+        ?filters: Array[Types::ExperimentTemplateTargetInputFilter],
+        ?selection_mode: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor filters: Array[Types::ExperimentTemplateTargetInputFilter]?
+      attr_accessor selection_mode: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class CreateTargetAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?experiment_template_id: String,
+        ?account_id: String,
+        ?role_arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor experiment_template_id: String?
+      attr_accessor account_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+    end
+
+    class CreateTargetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configuration: Types::TargetAccountConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration?
+    end
+
+    class DeleteExperimentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteExperimentTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template: Types::ExperimentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template: Types::ExperimentTemplate?
+    end
+
+    class DeleteTargetAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteTargetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configuration: Types::TargetAccountConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration?
+    end
+
+    module EmptyTargetResolutionMode
+      FAIL: String
+      SKIP: String
+    end
+
+    class Experiment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?experiment_template_id: String,
+        ?role_arn: String,
+        ?state: Types::ExperimentState,
+        ?targets: Hash[String, Types::ExperimentTarget],
+        ?actions: Hash[String, Types::ExperimentAction],
+        ?stop_conditions: Array[Types::ExperimentStopCondition],
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?tags: Hash[String, String],
+        ?log_configuration: Types::ExperimentLogConfiguration,
+        ?experiment_options: Types::ExperimentOptions,
+        ?target_account_configurations_count: Integer,
+        ?experiment_report_configuration: Types::ExperimentReportConfiguration,
+        ?experiment_report: Types::ExperimentReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor experiment_template_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor state: Types::ExperimentState?
+      attr_accessor targets: Hash[String, Types::ExperimentTarget]?
+      attr_accessor actions: Hash[String, Types::ExperimentAction]?
+      attr_accessor stop_conditions: Array[Types::ExperimentStopCondition]?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_configuration: Types::ExperimentLogConfiguration?
+      attr_accessor experiment_options: Types::ExperimentOptions?
+      attr_accessor target_account_configurations_count: Integer?
+      attr_accessor experiment_report_configuration: Types::ExperimentReportConfiguration?
+      attr_accessor experiment_report: Types::ExperimentReport?
+    end
+
+    class ExperimentAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+        ?targets: Hash[String, String],
+        ?start_after: Array[String],
+        ?state: Types::ExperimentActionState,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor targets: Hash[String, String]?
+      attr_accessor start_after: Array[String]?
+      attr_accessor state: Types::ExperimentActionState?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ExperimentActionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    module ExperimentActionStatus
+      pending: String
+      initiating: String
+      running: String
+      completed: String
+      cancelled: String
+      stopping: String
+      stopped: String
+      failed: String
+      skipped: String
+    end
+
+    class ExperimentCloudWatchLogsLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ExperimentError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?code: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor code: String?
+      attr_accessor location: String?
+    end
+
+    class ExperimentLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_configuration: Types::ExperimentCloudWatchLogsLogConfiguration,
+        ?s3_configuration: Types::ExperimentS3LogConfiguration,
+        ?log_schema_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentCloudWatchLogsLogConfiguration?
+      attr_accessor s3_configuration: Types::ExperimentS3LogConfiguration?
+      attr_accessor log_schema_version: Integer?
+    end
+
+    class ExperimentOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_targeting: String,
+        ?empty_target_resolution_mode: String,
+        ?actions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_targeting: String?
+      attr_accessor empty_target_resolution_mode: String?
+      attr_accessor actions_mode: String?
+    end
+
+    class ExperimentReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: Types::ExperimentReportState,
+        ?s3_reports: Array[Types::ExperimentReportS3Report],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: Types::ExperimentReportState?
+      attr_accessor s3_reports: Array[Types::ExperimentReportS3Report]?
+    end
+
+    class ExperimentReportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outputs: Types::ExperimentReportConfigurationOutputs,
+        ?data_sources: Types::ExperimentReportConfigurationDataSources,
+        ?pre_experiment_duration: String,
+        ?post_experiment_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outputs: Types::ExperimentReportConfigurationOutputs?
+      attr_accessor data_sources: Types::ExperimentReportConfigurationDataSources?
+      attr_accessor pre_experiment_duration: String?
+      attr_accessor post_experiment_duration: String?
+    end
+
+    class ExperimentReportConfigurationCloudWatchDashboard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_identifier: String?
+    end
+
+    class ExperimentReportConfigurationDataSources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_dashboards: Array[Types::ExperimentReportConfigurationCloudWatchDashboard],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_dashboards: Array[Types::ExperimentReportConfigurationCloudWatchDashboard]?
+    end
+
+    class ExperimentReportConfigurationOutputs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::ExperimentReportConfigurationOutputsS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::ExperimentReportConfigurationOutputsS3Configuration?
+    end
+
+    class ExperimentReportConfigurationOutputsS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ExperimentReportError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+    end
+
+    class ExperimentReportS3Report
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?report_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor report_type: String?
+    end
+
+    class ExperimentReportState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+        ?error: Types::ExperimentReportError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+      attr_accessor error: Types::ExperimentReportError?
+    end
+
+    module ExperimentReportStatus
+      pending: String
+      running: String
+      completed: String
+      cancelled: String
+      failed: String
+    end
+
+    class ExperimentS3LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ExperimentState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+        ?error: Types::ExperimentError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+      attr_accessor error: Types::ExperimentError?
+    end
+
+    module ExperimentStatus
+      pending: String
+      initiating: String
+      running: String
+      completed: String
+      stopping: String
+      stopped: String
+      failed: String
+      cancelled: String
+    end
+
+    class ExperimentStopCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor value: String?
+    end
+
+    class ExperimentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?experiment_template_id: String,
+        ?state: Types::ExperimentState,
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+        ?experiment_options: Types::ExperimentOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor experiment_template_id: String?
+      attr_accessor state: Types::ExperimentState?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor experiment_options: Types::ExperimentOptions?
+    end
+
+    class ExperimentTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_arns: Array[String],
+        ?resource_tags: Hash[String, String],
+        ?filters: Array[Types::ExperimentTargetFilter],
+        ?selection_mode: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor filters: Array[Types::ExperimentTargetFilter]?
+      attr_accessor selection_mode: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class ExperimentTargetAccountConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor description: String?
+    end
+
+    class ExperimentTargetAccountConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor description: String?
+    end
+
+    class ExperimentTargetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ExperimentTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?targets: Hash[String, Types::ExperimentTemplateTarget],
+        ?actions: Hash[String, Types::ExperimentTemplateAction],
+        ?stop_conditions: Array[Types::ExperimentTemplateStopCondition],
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?log_configuration: Types::ExperimentTemplateLogConfiguration,
+        ?experiment_options: Types::ExperimentTemplateExperimentOptions,
+        ?target_account_configurations_count: Integer,
+        ?experiment_report_configuration: Types::ExperimentTemplateReportConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor targets: Hash[String, Types::ExperimentTemplateTarget]?
+      attr_accessor actions: Hash[String, Types::ExperimentTemplateAction]?
+      attr_accessor stop_conditions: Array[Types::ExperimentTemplateStopCondition]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_configuration: Types::ExperimentTemplateLogConfiguration?
+      attr_accessor experiment_options: Types::ExperimentTemplateExperimentOptions?
+      attr_accessor target_account_configurations_count: Integer?
+      attr_accessor experiment_report_configuration: Types::ExperimentTemplateReportConfiguration?
+    end
+
+    class ExperimentTemplateAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+        ?targets: Hash[String, String],
+        ?start_after: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor targets: Hash[String, String]?
+      attr_accessor start_after: Array[String]?
+    end
+
+    class ExperimentTemplateCloudWatchLogsLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ExperimentTemplateCloudWatchLogsLogConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+    end
+
+    class ExperimentTemplateExperimentOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_targeting: String,
+        ?empty_target_resolution_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_targeting: String?
+      attr_accessor empty_target_resolution_mode: String?
+    end
+
+    class ExperimentTemplateLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfiguration,
+        ?s3_configuration: Types::ExperimentTemplateS3LogConfiguration,
+        ?log_schema_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfiguration?
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfiguration?
+      attr_accessor log_schema_version: Integer?
+    end
+
+    class ExperimentTemplateReportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outputs: Types::ExperimentTemplateReportConfigurationOutputs,
+        ?data_sources: Types::ExperimentTemplateReportConfigurationDataSources,
+        ?pre_experiment_duration: String,
+        ?post_experiment_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputs?
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSources?
+      attr_accessor pre_experiment_duration: String?
+      attr_accessor post_experiment_duration: String?
+    end
+
+    class ExperimentTemplateReportConfigurationCloudWatchDashboard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_identifier: String?
+    end
+
+    class ExperimentTemplateReportConfigurationDataSources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_dashboards: Array[Types::ExperimentTemplateReportConfigurationCloudWatchDashboard],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_dashboards: Array[Types::ExperimentTemplateReportConfigurationCloudWatchDashboard]?
+    end
+
+    class ExperimentTemplateReportConfigurationDataSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_dashboards: Array[Types::ReportConfigurationCloudWatchDashboardInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_dashboards: Array[Types::ReportConfigurationCloudWatchDashboardInput]?
+    end
+
+    class ExperimentTemplateReportConfigurationOutputs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::ReportConfigurationS3Output,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::ReportConfigurationS3Output?
+    end
+
+    class ExperimentTemplateReportConfigurationOutputsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::ReportConfigurationS3OutputInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::ReportConfigurationS3OutputInput?
+    end
+
+    class ExperimentTemplateS3LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ExperimentTemplateS3LogConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ExperimentTemplateStopCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor value: String?
+    end
+
+    class ExperimentTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ExperimentTemplateTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_arns: Array[String],
+        ?resource_tags: Hash[String, String],
+        ?filters: Array[Types::ExperimentTemplateTargetFilter],
+        ?selection_mode: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor filters: Array[Types::ExperimentTemplateTargetFilter]?
+      attr_accessor selection_mode: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class ExperimentTemplateTargetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ExperimentTemplateTargetInputFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GetActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::Action,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::Action?
+    end
+
+    class GetExperimentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetExperimentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment: Types::Experiment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment: Types::Experiment?
+    end
+
+    class GetExperimentTargetAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class GetExperimentTargetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configuration: Types::ExperimentTargetAccountConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configuration: Types::ExperimentTargetAccountConfiguration?
+    end
+
+    class GetExperimentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetExperimentTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template: Types::ExperimentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template: Types::ExperimentTemplate?
+    end
+
+    class GetSafetyLeverRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetSafetyLeverResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?safety_lever: Types::SafetyLever,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor safety_lever: Types::SafetyLever?
+    end
+
+    class GetTargetAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class GetTargetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configuration: Types::TargetAccountConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration?
+    end
+
+    class GetTargetResourceTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+    end
+
+    class GetTargetResourceTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource_type: Types::TargetResourceType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource_type: Types::TargetResourceType?
+    end
+
+    class ListActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Array[Types::ActionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Array[Types::ActionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentResolvedTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?target_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor target_name: String?
+    end
+
+    class ListExperimentResolvedTargetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolved_targets: Array[Types::ResolvedTarget],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolved_targets: Array[Types::ResolvedTarget]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentTargetAccountConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentTargetAccountConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configurations: Array[Types::ExperimentTargetAccountConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configurations: Array[Types::ExperimentTargetAccountConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_templates: Array[Types::ExperimentTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_templates: Array[Types::ExperimentTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?experiment_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor experiment_template_id: String?
+    end
+
+    class ListExperimentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiments: Array[Types::ExperimentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiments: Array[Types::ExperimentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTargetAccountConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTargetAccountConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configurations: Array[Types::TargetAccountConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configurations: Array[Types::TargetAccountConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTargetResourceTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTargetResourceTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource_types: Array[Types::TargetResourceTypeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource_types: Array[Types::TargetResourceTypeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ReportConfigurationCloudWatchDashboardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboard_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboard_identifier: String?
+    end
+
+    class ReportConfigurationS3Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ReportConfigurationS3OutputInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    class ResolvedTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?target_name: String,
+        ?target_information: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor target_name: String?
+      attr_accessor target_information: Hash[String, String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SafetyLever
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?state: Types::SafetyLeverState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor state: Types::SafetyLeverState?
+    end
+
+    class SafetyLeverState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    module SafetyLeverStatus
+      DISENGAGED: String
+      ENGAGED: String
+      ENGAGING: String
+    end
+
+    module SafetyLeverStatusInput
+      DISENGAGED: String
+      ENGAGED: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartExperimentExperimentOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions_mode: String?
+    end
+
+    class StartExperimentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?experiment_template_id: String,
+        ?experiment_options: Types::StartExperimentExperimentOptionsInput,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor experiment_template_id: String?
+      attr_accessor experiment_options: Types::StartExperimentExperimentOptionsInput?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartExperimentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment: Types::Experiment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment: Types::Experiment?
+    end
+
+    class StopExperimentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StopExperimentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment: Types::Experiment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment: Types::Experiment?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetAccountConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor description: String?
+    end
+
+    class TargetAccountConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor description: String?
+    end
+
+    class TargetResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?description: String,
+        ?parameters: Hash[String, Types::TargetResourceTypeParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, Types::TargetResourceTypeParameter]?
+    end
+
+    class TargetResourceTypeParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor required: bool?
+    end
+
+    class TargetResourceTypeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor description: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateExperimentTemplateActionInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?description: String,
+        ?parameters: Hash[String, String],
+        ?targets: Hash[String, String],
+        ?start_after: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor description: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor targets: Hash[String, String]?
+      attr_accessor start_after: Array[String]?
+    end
+
+    class UpdateExperimentTemplateExperimentOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?empty_target_resolution_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor empty_target_resolution_mode: String?
+    end
+
+    class UpdateExperimentTemplateLogConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput,
+        ?s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput,
+        ?log_schema_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput?
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput?
+      attr_accessor log_schema_version: Integer?
+    end
+
+    class UpdateExperimentTemplateReportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outputs: Types::ExperimentTemplateReportConfigurationOutputsInput,
+        ?data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput,
+        ?pre_experiment_duration: String,
+        ?post_experiment_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputsInput?
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput?
+      attr_accessor pre_experiment_duration: String?
+      attr_accessor post_experiment_duration: String?
+    end
+
+    class UpdateExperimentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?description: String,
+        ?stop_conditions: Array[Types::UpdateExperimentTemplateStopConditionInput],
+        ?targets: Hash[String, Types::UpdateExperimentTemplateTargetInput],
+        ?actions: Hash[String, Types::UpdateExperimentTemplateActionInputItem],
+        ?role_arn: String,
+        ?log_configuration: Types::UpdateExperimentTemplateLogConfigurationInput,
+        ?experiment_options: Types::UpdateExperimentTemplateExperimentOptionsInput,
+        ?experiment_report_configuration: Types::UpdateExperimentTemplateReportConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor stop_conditions: Array[Types::UpdateExperimentTemplateStopConditionInput]?
+      attr_accessor targets: Hash[String, Types::UpdateExperimentTemplateTargetInput]?
+      attr_accessor actions: Hash[String, Types::UpdateExperimentTemplateActionInputItem]?
+      attr_accessor role_arn: String?
+      attr_accessor log_configuration: Types::UpdateExperimentTemplateLogConfigurationInput?
+      attr_accessor experiment_options: Types::UpdateExperimentTemplateExperimentOptionsInput?
+      attr_accessor experiment_report_configuration: Types::UpdateExperimentTemplateReportConfigurationInput?
+    end
+
+    class UpdateExperimentTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template: Types::ExperimentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template: Types::ExperimentTemplate?
+    end
+
+    class UpdateExperimentTemplateStopConditionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor value: String?
+    end
+
+    class UpdateExperimentTemplateTargetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_arns: Array[String],
+        ?resource_tags: Hash[String, String],
+        ?filters: Array[Types::ExperimentTemplateTargetInputFilter],
+        ?selection_mode: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor filters: Array[Types::ExperimentTemplateTargetInputFilter]?
+      attr_accessor selection_mode: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class UpdateSafetyLeverStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class UpdateSafetyLeverStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?state: Types::UpdateSafetyLeverStateInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor state: Types::UpdateSafetyLeverStateInput?
+    end
+
+    class UpdateSafetyLeverStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?safety_lever: Types::SafetyLever,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor safety_lever: Types::SafetyLever?
+    end
+
+    class UpdateTargetAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_template_id: String,
+        ?account_id: String,
+        ?role_arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_template_id: String?
+      attr_accessor account_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateTargetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_configuration: Types::TargetAccountConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

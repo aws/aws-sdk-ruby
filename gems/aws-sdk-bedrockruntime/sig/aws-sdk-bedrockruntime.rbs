@@ -1,0 +1,5 @@
+  module Aws
+    module BedrockRuntime
+      VERSION: String
+    end
+  end

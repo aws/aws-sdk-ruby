@@ -1,0 +1,540 @@
+module Aws::Rbin
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ConflictExceptionReason
+      INVALID_RULE_STATE: String
+    end
+
+    class CreateRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_period: Types::RetentionPeriod,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?resource_type: String,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?lock_configuration: Types::LockConfiguration,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor resource_type: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?resource_type: String,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?status: String,
+        ?lock_configuration: Types::LockConfiguration,
+        ?lock_state: String,
+        ?rule_arn: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor resource_type: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor status: String?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+      attr_accessor lock_state: String?
+      attr_accessor rule_arn: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class DeleteRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?resource_type: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?status: String,
+        ?lock_configuration: Types::LockConfiguration,
+        ?lock_state: String,
+        ?lock_end_time: Time,
+        ?rule_arn: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor resource_type: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor status: String?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+      attr_accessor lock_state: String?
+      attr_accessor lock_end_time: Time?
+      attr_accessor rule_arn: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_type: String,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?lock_state: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor lock_state: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class ListRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::RuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::RuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unlock_delay: Types::UnlockDelay,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unlock_delay: Types::UnlockDelay?
+    end
+
+    class LockRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?lock_configuration: Types::LockConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+    end
+
+    class LockRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?resource_type: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?status: String,
+        ?lock_configuration: Types::LockConfiguration,
+        ?lock_state: String,
+        ?rule_arn: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor resource_type: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor status: String?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+      attr_accessor lock_state: String?
+      attr_accessor rule_arn: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    module LockState
+      LOCKED: String
+      PENDING_UNLOCK: String
+      UNLOCKED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      RULE_NOT_FOUND: String
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tag_key: String,
+        ?resource_tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tag_key: String?
+      attr_accessor resource_tag_value: String?
+    end
+
+    module ResourceType
+      EBS_SNAPSHOT: String
+      EC2_IMAGE: String
+    end
+
+    class RetentionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_period_value: Integer,
+        ?retention_period_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period_value: Integer?
+      attr_accessor retention_period_unit: String?
+    end
+
+    module RetentionPeriodUnit
+      DAYS: String
+    end
+
+    module RuleStatus
+      PENDING: String
+      AVAILABLE: String
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?lock_state: String,
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor lock_state: String?
+      attr_accessor rule_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ServiceQuotaExceededExceptionReason
+      SERVICE_QUOTA_EXCEEDED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UnlockDelay
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unlock_delay_value: Integer,
+        ?unlock_delay_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unlock_delay_value: Integer?
+      attr_accessor unlock_delay_unit: String?
+    end
+
+    module UnlockDelayUnit
+      DAYS: String
+    end
+
+    class UnlockRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class UnlockRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?resource_type: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?status: String,
+        ?lock_configuration: Types::LockConfiguration,
+        ?lock_state: String,
+        ?lock_end_time: Time,
+        ?rule_arn: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor resource_type: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor status: String?
+      attr_accessor lock_configuration: Types::LockConfiguration?
+      attr_accessor lock_state: String?
+      attr_accessor lock_end_time: Time?
+      attr_accessor rule_arn: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?description: String,
+        ?resource_type: String,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor description: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class UpdateRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?retention_period: Types::RetentionPeriod,
+        ?description: String,
+        ?resource_type: String,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?status: String,
+        ?lock_state: String,
+        ?lock_end_time: Time,
+        ?rule_arn: String,
+        ?exclude_resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor retention_period: Types::RetentionPeriod?
+      attr_accessor description: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor status: String?
+      attr_accessor lock_state: String?
+      attr_accessor lock_end_time: Time?
+      attr_accessor rule_arn: String?
+      attr_accessor exclude_resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      INVALID_PAGE_TOKEN: String
+      INVALID_PARAMETER_VALUE: String
+    end
+  end
+end

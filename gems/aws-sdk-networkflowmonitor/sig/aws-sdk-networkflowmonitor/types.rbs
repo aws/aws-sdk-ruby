@@ -1,0 +1,1119 @@
+module Aws::NetworkFlowMonitor
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?local_resources: Array[Types::MonitorLocalResource],
+        ?remote_resources: Array[Types::MonitorRemoteResource],
+        ?scope_arn: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor local_resources: Array[Types::MonitorLocalResource]?
+      attr_accessor remote_resources: Array[Types::MonitorRemoteResource]?
+      attr_accessor scope_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?monitor_status: String,
+        ?local_resources: Array[Types::MonitorLocalResource],
+        ?remote_resources: Array[Types::MonitorRemoteResource],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor monitor_status: String?
+      attr_accessor local_resources: Array[Types::MonitorLocalResource]?
+      attr_accessor remote_resources: Array[Types::MonitorRemoteResource]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?targets: Array[Types::TargetResource],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor targets: Array[Types::TargetResource]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?status: String,
+        ?scope_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor status: String?
+      attr_accessor scope_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+    end
+
+    class DeleteMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+    end
+
+    class DeleteScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DestinationCategory
+      INTRA_AZ: String
+      INTER_AZ: String
+      INTER_VPC: String
+      UNCLASSIFIED: String
+      AMAZON_S3: String
+      AMAZON_DYNAMODB: String
+    end
+
+    class GetMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+    end
+
+    class GetMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?monitor_status: String,
+        ?local_resources: Array[Types::MonitorLocalResource],
+        ?remote_resources: Array[Types::MonitorRemoteResource],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor monitor_status: String?
+      attr_accessor local_resources: Array[Types::MonitorLocalResource]?
+      attr_accessor remote_resources: Array[Types::MonitorRemoteResource]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetQueryResultsMonitorTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?query_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetQueryResultsMonitorTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?top_contributors: Array[Types::MonitorTopContributorsRow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor top_contributors: Array[Types::MonitorTopContributorsRow]?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryResultsWorkloadInsightsTopContributorsDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetQueryResultsWorkloadInsightsTopContributorsDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?datapoints: Array[Types::WorkloadInsightsTopContributorsDataPoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor datapoints: Array[Types::WorkloadInsightsTopContributorsDataPoint]?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryResultsWorkloadInsightsTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetQueryResultsWorkloadInsightsTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?top_contributors: Array[Types::WorkloadInsightsTopContributorsRow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor top_contributors: Array[Types::WorkloadInsightsTopContributorsRow]?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryStatusMonitorTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryStatusMonitorTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GetQueryStatusWorkloadInsightsTopContributorsDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryStatusWorkloadInsightsTopContributorsDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GetQueryStatusWorkloadInsightsTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryStatusWorkloadInsightsTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GetScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+    end
+
+    class GetScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?status: String,
+        ?scope_arn: String,
+        ?targets: Array[Types::TargetResource],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor status: String?
+      attr_accessor scope_arn: String?
+      attr_accessor targets: Array[Types::TargetResource]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KubernetesMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_service_name: String,
+        ?local_pod_name: String,
+        ?local_pod_namespace: String,
+        ?remote_service_name: String,
+        ?remote_pod_name: String,
+        ?remote_pod_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_service_name: String?
+      attr_accessor local_pod_name: String?
+      attr_accessor local_pod_namespace: String?
+      attr_accessor remote_service_name: String?
+      attr_accessor remote_pod_name: String?
+      attr_accessor remote_pod_namespace: String?
+    end
+
+    class ListMonitorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?monitor_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor monitor_status: String?
+    end
+
+    class ListMonitorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitors: Array[Types::MonitorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitors: Array[Types::MonitorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScopesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListScopesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scopes: Array[Types::ScopeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scopes: Array[Types::ScopeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MetricUnit
+      SECONDS: String
+      MICROSECONDS: String
+      MILLISECONDS: String
+      BYTES: String
+      KILOBYTES: String
+      MEGABYTES: String
+      GIGABYTES: String
+      TERABYTES: String
+      BITS: String
+      KILOBITS: String
+      MEGABITS: String
+      GIGABITS: String
+      TERABITS: String
+      PERCENT: String
+      COUNT: String
+      BYTES_PER_SECOND: String
+      KILOBYTES_PER_SECOND: String
+      MEGABYTES_PER_SECOND: String
+      GIGABYTES_PER_SECOND: String
+      TERABYTES_PER_SECOND: String
+      BITS_PER_SECOND: String
+      KILOBITS_PER_SECOND: String
+      MEGABITS_PER_SECOND: String
+      GIGABITS_PER_SECOND: String
+      TERABITS_PER_SECOND: String
+      COUNT_PER_SECOND: String
+      NONE: String
+    end
+
+    class MonitorLocalResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+    end
+
+    module MonitorLocalResourceType
+      AWS_VPC: String
+      AWS_AZ: String
+      AWS_SUBNET: String
+    end
+
+    module MonitorMetric
+      ROUND_TRIP_TIME: String
+      TIMEOUTS: String
+      RETRANSMISSIONS: String
+      DATA_TRANSFERRED: String
+    end
+
+    class MonitorRemoteResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+    end
+
+    module MonitorRemoteResourceType
+      AWS_VPC: String
+      AWS_AZ: String
+      AWS_SUBNET: String
+      AWS_SERVICE: String
+    end
+
+    module MonitorStatus
+      PENDING: String
+      ACTIVE: String
+      INACTIVE: String
+      ERROR: String
+      DELETING: String
+    end
+
+    class MonitorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?monitor_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor monitor_status: String?
+    end
+
+    class MonitorTopContributorsRow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_ip: String,
+        ?snat_ip: String,
+        ?local_instance_id: String,
+        ?local_vpc_id: String,
+        ?local_region: String,
+        ?local_az: String,
+        ?local_subnet_id: String,
+        ?target_port: Integer,
+        ?destination_category: String,
+        ?remote_vpc_id: String,
+        ?remote_region: String,
+        ?remote_az: String,
+        ?remote_subnet_id: String,
+        ?remote_instance_id: String,
+        ?remote_ip: String,
+        ?dnat_ip: String,
+        ?value: Integer,
+        ?traversed_constructs: Array[Types::TraversedComponent],
+        ?kubernetes_metadata: Types::KubernetesMetadata,
+        ?local_instance_arn: String,
+        ?local_subnet_arn: String,
+        ?local_vpc_arn: String,
+        ?remote_instance_arn: String,
+        ?remote_subnet_arn: String,
+        ?remote_vpc_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_ip: String?
+      attr_accessor snat_ip: String?
+      attr_accessor local_instance_id: String?
+      attr_accessor local_vpc_id: String?
+      attr_accessor local_region: String?
+      attr_accessor local_az: String?
+      attr_accessor local_subnet_id: String?
+      attr_accessor target_port: Integer?
+      attr_accessor destination_category: String?
+      attr_accessor remote_vpc_id: String?
+      attr_accessor remote_region: String?
+      attr_accessor remote_az: String?
+      attr_accessor remote_subnet_id: String?
+      attr_accessor remote_instance_id: String?
+      attr_accessor remote_ip: String?
+      attr_accessor dnat_ip: String?
+      attr_accessor value: Integer?
+      attr_accessor traversed_constructs: Array[Types::TraversedComponent]?
+      attr_accessor kubernetes_metadata: Types::KubernetesMetadata?
+      attr_accessor local_instance_arn: String?
+      attr_accessor local_subnet_arn: String?
+      attr_accessor local_vpc_arn: String?
+      attr_accessor remote_instance_arn: String?
+      attr_accessor remote_subnet_arn: String?
+      attr_accessor remote_vpc_arn: String?
+    end
+
+    module QueryStatus
+      QUEUED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ScopeStatus
+      SUCCEEDED: String
+      IN_PROGRESS: String
+      FAILED: String
+      DEACTIVATING: String
+      DEACTIVATED: String
+    end
+
+    class ScopeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?status: String,
+        ?scope_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor status: String?
+      attr_accessor scope_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartQueryMonitorTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metric_name: String,
+        ?destination_category: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metric_name: String?
+      attr_accessor destination_category: String?
+      attr_accessor limit: Integer?
+    end
+
+    class StartQueryMonitorTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class StartQueryWorkloadInsightsTopContributorsDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metric_name: String,
+        ?destination_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metric_name: String?
+      attr_accessor destination_category: String?
+    end
+
+    class StartQueryWorkloadInsightsTopContributorsDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class StartQueryWorkloadInsightsTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metric_name: String,
+        ?destination_category: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metric_name: String?
+      attr_accessor destination_category: String?
+      attr_accessor limit: Integer?
+    end
+
+    class StartQueryWorkloadInsightsTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class StopQueryMonitorTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor query_id: String?
+    end
+
+    class StopQueryMonitorTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopQueryWorkloadInsightsTopContributorsDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+    end
+
+    class StopQueryWorkloadInsightsTopContributorsDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopQueryWorkloadInsightsTopContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor query_id: String?
+    end
+
+    class StopQueryWorkloadInsightsTopContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetId
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+
+      class AccountId < TargetId
+      end
+      class Unknown < TargetId
+      end
+    end
+
+    class TargetIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: Types::TargetId,
+        ?target_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: Types::TargetId?
+      attr_accessor target_type: String?
+    end
+
+    class TargetResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_identifier: Types::TargetIdentifier,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_identifier: Types::TargetIdentifier?
+      attr_accessor region: String?
+    end
+
+    module TargetType
+      ACCOUNT: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TraversedComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_id: String,
+        ?component_type: String,
+        ?component_arn: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_id: String?
+      attr_accessor component_type: String?
+      attr_accessor component_arn: String?
+      attr_accessor service_name: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?local_resources_to_add: Array[Types::MonitorLocalResource],
+        ?local_resources_to_remove: Array[Types::MonitorLocalResource],
+        ?remote_resources_to_add: Array[Types::MonitorRemoteResource],
+        ?remote_resources_to_remove: Array[Types::MonitorRemoteResource],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor local_resources_to_add: Array[Types::MonitorLocalResource]?
+      attr_accessor local_resources_to_remove: Array[Types::MonitorLocalResource]?
+      attr_accessor remote_resources_to_add: Array[Types::MonitorRemoteResource]?
+      attr_accessor remote_resources_to_remove: Array[Types::MonitorRemoteResource]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?monitor_status: String,
+        ?local_resources: Array[Types::MonitorLocalResource],
+        ?remote_resources: Array[Types::MonitorRemoteResource],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor monitor_status: String?
+      attr_accessor local_resources: Array[Types::MonitorLocalResource]?
+      attr_accessor remote_resources: Array[Types::MonitorRemoteResource]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?resources_to_add: Array[Types::TargetResource],
+        ?resources_to_delete: Array[Types::TargetResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor resources_to_add: Array[Types::TargetResource]?
+      attr_accessor resources_to_delete: Array[Types::TargetResource]?
+    end
+
+    class UpdateScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?status: String,
+        ?scope_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor status: String?
+      attr_accessor scope_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module WorkloadInsightsMetric
+      TIMEOUTS: String
+      RETRANSMISSIONS: String
+      DATA_TRANSFERRED: String
+    end
+
+    class WorkloadInsightsTopContributorsDataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+      attr_accessor label: String?
+    end
+
+    class WorkloadInsightsTopContributorsRow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?local_subnet_id: String,
+        ?local_az: String,
+        ?local_vpc_id: String,
+        ?local_region: String,
+        ?remote_identifier: String,
+        ?value: Integer,
+        ?local_subnet_arn: String,
+        ?local_vpc_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor local_subnet_id: String?
+      attr_accessor local_az: String?
+      attr_accessor local_vpc_id: String?
+      attr_accessor local_region: String?
+      attr_accessor remote_identifier: String?
+      attr_accessor value: Integer?
+      attr_accessor local_subnet_arn: String?
+      attr_accessor local_vpc_arn: String?
+    end
+  end
+end

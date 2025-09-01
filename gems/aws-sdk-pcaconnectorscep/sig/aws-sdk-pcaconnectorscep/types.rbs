@@ -1,0 +1,536 @@
+module Aws::PcaConnectorScep
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Challenge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor password: String?
+    end
+
+    class ChallengeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ChallengeMetadataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_authority_arn: String,
+        ?type: String,
+        ?mobile_device_management: Types::MobileDeviceManagement,
+        ?open_id_configuration: Types::OpenIdConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?endpoint: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor type: String?
+      attr_accessor mobile_device_management: Types::MobileDeviceManagement?
+      attr_accessor open_id_configuration: Types::OpenIdConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor endpoint: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ConnectorStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    module ConnectorStatusReason
+      INTERNAL_FAILURE: String
+      PRIVATECA_ACCESS_DENIED: String
+      PRIVATECA_INVALID_STATE: String
+      PRIVATECA_RESOURCE_NOT_FOUND: String
+    end
+
+    class ConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_authority_arn: String,
+        ?type: String,
+        ?mobile_device_management: Types::MobileDeviceManagement,
+        ?open_id_configuration: Types::OpenIdConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?endpoint: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor type: String?
+      attr_accessor mobile_device_management: Types::MobileDeviceManagement?
+      attr_accessor open_id_configuration: Types::OpenIdConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor endpoint: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ConnectorType
+      GENERAL_PURPOSE: String
+      INTUNE: String
+    end
+
+    class CreateChallengeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateChallengeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge: Types::Challenge,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge: Types::Challenge?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arn: String,
+        ?mobile_device_management: Types::MobileDeviceManagement,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor mobile_device_management: Types::MobileDeviceManagement?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class DeleteChallengeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge_arn: String?
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class GetChallengeMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge_arn: String?
+    end
+
+    class GetChallengeMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge_metadata: Types::ChallengeMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge_metadata: Types::ChallengeMetadata?
+    end
+
+    class GetChallengePasswordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge_arn: String?
+    end
+
+    class GetChallengePasswordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor password: String?
+    end
+
+    class GetConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class GetConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector: Types::Connector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector: Types::Connector?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IntuneConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?azure_application_id: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure_application_id: String?
+      attr_accessor domain: String?
+    end
+
+    class ListChallengeMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor connector_arn: String?
+    end
+
+    class ListChallengeMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenges: Array[Types::ChallengeMetadataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenges: Array[Types::ChallengeMetadataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectors: Array[Types::ConnectorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectors: Array[Types::ConnectorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MobileDeviceManagement
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?intune: Types::IntuneConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intune: Types::IntuneConfiguration?
+
+      class Intune < MobileDeviceManagement
+      end
+      class Unknown < MobileDeviceManagement
+      end
+    end
+
+    class OpenIdConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?subject: String,
+        ?audience: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor subject: String?
+      attr_accessor audience: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      CA_CERT_VALIDITY_TOO_SHORT: String
+      INVALID_CA_USAGE_MODE: String
+      INVALID_CONNECTOR_TYPE: String
+      INVALID_STATE: String
+      NO_CLIENT_TOKEN: String
+      UNKNOWN_OPERATION: String
+      OTHER: String
+    end
+  end
+end

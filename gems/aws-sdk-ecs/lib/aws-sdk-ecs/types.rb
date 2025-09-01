@@ -1,0 +1,11772 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::ECS
+  # This module contains the types returned by client operations.
+  module Types
+
+    # <p>You don't have authorization to perform the requested action.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class AccessDeniedException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The advanced settings for a load balancer used in blue/green deployments. Specify the
+    #          alternate target group, listener rules, and IAM role required for traffic shifting during
+    #          blue/green deployments. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html">Required resources for Amazon ECS
+    #             blue/green deployments</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute alternate_target_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the alternate target group for Amazon ECS blue/green deployments.</p>
+    #   @return [String]
+    # @!attribute production_listener_rule
+    #   <p>The Amazon Resource Name (ARN) that that identifies the production listener rule (in the case of an Application Load Balancer) or
+    #            listener (in the case for an Network Load Balancer) for routing production traffic.</p>
+    #   @return [String]
+    # @!attribute test_listener_rule
+    #   <p>The Amazon Resource Name (ARN) that identifies ) that identifies the test listener rule  (in the case of an Application Load Balancer) or
+    #            listener (in the case for an Network Load Balancer) for routing test traffic.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.</p>
+    #   @return [String]
+    class AdvancedConfiguration < Struct.new(
+      :alternate_target_group_arn,
+      :production_listener_rule,
+      :test_listener_rule,
+      :role_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module AgentUpdateStatus
+      PENDING = 'PENDING'
+      STAGING = 'STAGING'
+      STAGED = 'STAGED'
+      UPDATING = 'UPDATING'
+      UPDATED = 'UPDATED'
+      FAILED = 'FAILED'
+    end
+
+    module ApplicationProtocol
+      HTTP = 'http'
+      HTTP2 = 'http2'
+      GRPC = 'grpc'
+    end
+
+    module AssignPublicIp
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>An object representing a container instance or task attachment.</p>
+    # @!attribute id
+    #   <p>The unique identifier for the attachment.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the attachment, such as <code>ElasticNetworkInterface</code>,
+    #   				<code>Service Connect</code>, and <code>AmazonElasticBlockStorage</code>.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p> The status of the attachment. Valid values are <code>PRECREATED</code>,
+    #   				<code>CREATED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>,
+    #   				<code>DETACHING</code>, <code>DETACHED</code>, <code>DELETED</code>, and
+    #   				<code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Details of the attachment.</p>
+    #            <p>For elastic network interfaces, this includes the network interface ID, the MAC
+    #   			address, the subnet ID, and the private IPv4 address.</p>
+    #            <p>For Service Connect services, this includes <code>portName</code>,
+    #   				<code>clientAliases</code>, <code>discoveryName</code>, and
+    #   				<code>ingressPortOverride</code>.</p>
+    #            <p>For Elastic Block Storage, this includes <code>roleArn</code>,
+    #   				<code>deleteOnTermination</code>, <code>volumeName</code>, <code>volumeId</code>,
+    #   			and <code>statusReason</code> (only when the attachment fails to create or
+    #   			attach).</p>
+    #   @return [Array<Types::KeyValuePair>]
+    class Attachment < Struct.new(
+      :id,
+      :type,
+      :status,
+      :details,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object representing a change in state for a task attachment.</p>
+    # @!attribute attachment_arn
+    #   <p>The Amazon Resource Name (ARN) of the attachment.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the attachment.</p>
+    #   @return [String]
+    class AttachmentStateChange < Struct.new(
+      :attachment_arn,
+      :status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An attribute is a name-value pair that's associated with an Amazon ECS object. Use
+    # 			attributes to extend the Amazon ECS data model by adding custom metadata to your resources.
+    # 			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes">Attributes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute name
+    #   <p>The name of the attribute. The <code>name</code> must contain between 1 and 128
+    #   			characters. The name may contain letters (uppercase and lowercase), numbers, hyphens
+    #   			(-), underscores (_), forward slashes (/), back slashes (\), or periods (.).</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the attribute. The <code>value</code> must contain between 1 and 128
+    #   			characters. It can contain letters (uppercase and lowercase), numbers, hyphens (-),
+    #   			underscores (_), periods (.), at signs (@), forward slashes (/), back slashes (\),
+    #   			colons (:), or spaces. The value can't start or end with a space.</p>
+    #   @return [String]
+    # @!attribute target_type
+    #   <p>The type of the target to attach the attribute with. This parameter is required if you
+    #   			use the short form ID for a resource instead of the full ARN.</p>
+    #   @return [String]
+    # @!attribute target_id
+    #   <p>The ID of the target. You can specify the short form ID for a resource or the full
+    #   			Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    class Attribute < Struct.new(
+      :name,
+      :value,
+      :target_type,
+      :target_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>You can apply up to 10 custom attributes for each resource. You can view the
+    # 			attributes of a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html">ListAttributes</a>.
+    # 			You can remove existing attributes on a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html">DeleteAttributes</a>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class AttributeLimitExceededException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details of the Auto Scaling group for the capacity provider.</p>
+    # @!attribute auto_scaling_group_arn
+    #   <p>The Amazon Resource Name (ARN) that identifies the Auto Scaling group, or the Auto Scaling group
+    #   			name.</p>
+    #   @return [String]
+    # @!attribute managed_scaling
+    #   <p>The managed scaling settings for the Auto Scaling group capacity provider.</p>
+    #   @return [Types::ManagedScaling]
+    # @!attribute managed_termination_protection
+    #   <p>The managed termination protection setting to use for the Auto Scaling group capacity
+    #   			provider. This determines whether the Auto Scaling group has managed termination
+    #   			protection. The default is off.</p>
+    #            <important>
+    #               <p>When using managed termination protection, managed scaling must also be used
+    #   				otherwise managed termination protection doesn't work.</p>
+    #            </important>
+    #            <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an
+    #   			Auto Scaling group that contain tasks from being terminated during a scale-in action.
+    #   			The Auto Scaling group and each instance in the Auto Scaling group must have instance
+    #   			protection from scale-in actions on as well. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>
+    #            <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from
+    #   			termination when the Auto Scaling group scales in.</p>
+    #   @return [String]
+    # @!attribute managed_draining
+    #   <p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>
+    #   @return [String]
+    class AutoScalingGroupProvider < Struct.new(
+      :auto_scaling_group_arn,
+      :managed_scaling,
+      :managed_termination_protection,
+      :managed_draining,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details of the Auto Scaling group capacity provider to update.</p>
+    # @!attribute managed_scaling
+    #   <p>The managed scaling settings for the Auto Scaling group capacity provider.</p>
+    #   @return [Types::ManagedScaling]
+    # @!attribute managed_termination_protection
+    #   <p>The managed termination protection setting to use for the Auto Scaling group capacity
+    #   			provider. This determines whether the Auto Scaling group has managed termination
+    #   			protection.</p>
+    #            <important>
+    #               <p>When using managed termination protection, managed scaling must also be used
+    #   				otherwise managed termination protection doesn't work.</p>
+    #            </important>
+    #            <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an
+    #   			Auto Scaling group that contain tasks from being terminated during a scale-in action.
+    #   			The Auto Scaling group and each instance in the Auto Scaling group must have instance
+    #   			protection from scale-in actions on. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>
+    #            <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from
+    #   			termination when the Auto Scaling group scales in.</p>
+    #   @return [String]
+    # @!attribute managed_draining
+    #   <p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>
+    #   @return [String]
+    class AutoScalingGroupProviderUpdate < Struct.new(
+      :managed_scaling,
+      :managed_termination_protection,
+      :managed_draining,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module AvailabilityZoneRebalancing
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>An object representing the networking details for a task or service. For example
+    # 				<code>awsVpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}</code>.</p>
+    # @!attribute subnets
+    #   <p>The IDs of the subnets associated with the task or service. There's a limit of 16
+    #   			subnets that can be specified.</p>
+    #            <note>
+    #               <p>All specified subnets must be from the same VPC.</p>
+    #            </note>
+    #   @return [Array<String>]
+    # @!attribute security_groups
+    #   <p>The IDs of the security groups associated with the task or service. If you don't
+    #   			specify a security group, the default security group for the VPC is used. There's a
+    #   			limit of 5 security groups that can be specified.</p>
+    #            <note>
+    #               <p>All specified security groups must be from the same VPC.</p>
+    #            </note>
+    #   @return [Array<String>]
+    # @!attribute assign_public_ip
+    #   <p>Whether the task's elastic network interface receives a public IP address. </p>
+    #            <p>Consider the following when you set this value:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>When you use <code>create-service</code> or <code>update-service</code>, the
+    #   					default is <code>DISABLED</code>. </p>
+    #               </li>
+    #               <li>
+    #                  <p>When the service <code>deploymentController</code> is <code>ECS</code>, the
+    #   					value must be <code>DISABLED</code>. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class AwsVpcConfiguration < Struct.new(
+      :subnets,
+      :security_groups,
+      :assign_public_ip,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Your Amazon Web Services account was blocked. For more information, contact <a href="http://aws.amazon.com/contact-us/">
+    # 				Amazon Web ServicesSupport</a>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class BlockedException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module CPUArchitecture
+      X86_64 = 'X86_64'
+      ARM64 = 'ARM64'
+    end
+
+    # <p>The details for a capacity provider.</p>
+    # @!attribute capacity_provider_arn
+    #   <p>The Amazon Resource Name (ARN) that identifies the capacity provider.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the capacity provider.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the capacity provider. Only capacity providers in an
+    #   				<code>ACTIVE</code> state can be used in a cluster. When a capacity provider is
+    #   			successfully deleted, it has an <code>INACTIVE</code> status.</p>
+    #   @return [String]
+    # @!attribute auto_scaling_group_provider
+    #   <p>The Auto Scaling group settings for the capacity provider.</p>
+    #   @return [Types::AutoScalingGroupProvider]
+    # @!attribute update_status
+    #   <p>The update status of the capacity provider. The following are the possible states that
+    #   			is returned.</p>
+    #            <dl>
+    #               <dt>DELETE_IN_PROGRESS</dt>
+    #               <dd>
+    #                  <p>The capacity provider is in the process of being deleted.</p>
+    #               </dd>
+    #               <dt>DELETE_COMPLETE</dt>
+    #               <dd>
+    #                  <p>The capacity provider was successfully deleted and has an
+    #   							<code>INACTIVE</code> status.</p>
+    #               </dd>
+    #               <dt>DELETE_FAILED</dt>
+    #               <dd>
+    #                  <p>The capacity provider can't be deleted. The update status reason provides
+    #   						further details about why the delete failed.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute update_status_reason
+    #   <p>The update status reason. This provides further details about the update status for
+    #   			the capacity provider.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the capacity provider to help you categorize and
+    #   			organize it. Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class CapacityProvider < Struct.new(
+      :capacity_provider_arn,
+      :name,
+      :status,
+      :auto_scaling_group_provider,
+      :update_status,
+      :update_status_reason,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module CapacityProviderField
+      TAGS = 'TAGS'
+    end
+
+    module CapacityProviderStatus
+      ACTIVE = 'ACTIVE'
+      INACTIVE = 'INACTIVE'
+    end
+
+    # <p>The details of a capacity provider strategy. A capacity provider strategy can be set
+    # 			when using the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html">RunTask</a>or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html">CreateCluster</a> APIs or as the default capacity provider strategy for a
+    # 			cluster with the <code>CreateCluster</code> API.</p>
+    #          <p>Only capacity providers that are already associated with a cluster and have an
+    # 				<code>ACTIVE</code> or <code>UPDATING</code> status can be used in a capacity
+    # 			provider strategy. The <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API is used to associate a capacity provider
+    # 			with a cluster.</p>
+    #          <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+    # 			provider must already be created. New Auto Scaling group capacity providers can be
+    # 			created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html">CreateClusterCapacityProvider</a> API operation.</p>
+    #          <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or
+    # 				<code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are
+    # 			available to all accounts and only need to be associated with a cluster to be used in a
+    # 			capacity provider strategy.</p>
+    #          <p>With <code>FARGATE_SPOT</code>, you can run interruption tolerant tasks at a rate
+    # 			that's discounted compared to the <code>FARGATE</code> price. <code>FARGATE_SPOT</code>
+    # 			runs tasks on spare compute capacity. When Amazon Web Services needs the capacity back, your tasks are
+    # 			interrupted with a two-minute warning. <code>FARGATE_SPOT</code> supports Linux tasks
+    # 			with the X86_64 architecture on platform version 1.3.0 or later.
+    # 				<code>FARGATE_SPOT</code> supports Linux tasks with the ARM64 architecture on
+    # 			platform version 1.4.0 or later.</p>
+    #          <p>A capacity provider strategy can contain a maximum of 20 capacity providers.</p>
+    # @!attribute capacity_provider
+    #   <p>The short name of the capacity provider.</p>
+    #   @return [String]
+    # @!attribute weight
+    #   <p>The <i>weight</i> value designates the relative percentage of the total
+    #   			number of tasks launched that should use the specified capacity provider. The
+    #   				<code>weight</code> value is taken into consideration after the <code>base</code>
+    #   			value, if defined, is satisfied.</p>
+    #            <p>If no <code>weight</code> value is specified, the default value of <code>0</code> is
+    #   			used. When multiple capacity providers are specified within a capacity provider
+    #   			strategy, at least one of the capacity providers must have a weight value greater than
+    #   			zero and any capacity providers with a weight of <code>0</code> can't be used to place
+    #   			tasks. If you specify multiple capacity providers in a strategy that all have a weight
+    #   			of <code>0</code>, any <code>RunTask</code> or <code>CreateService</code> actions using
+    #   			the capacity provider strategy will fail.</p>
+    #            <p>An example scenario for using weights is defining a strategy that contains two
+    #   			capacity providers and both have a weight of <code>1</code>, then when the
+    #   				<code>base</code> is satisfied, the tasks will be split evenly across the two
+    #   			capacity providers. Using that same logic, if you specify a weight of <code>1</code> for
+    #   				<i>capacityProviderA</i> and a weight of <code>4</code> for
+    #   				<i>capacityProviderB</i>, then for every one task that's run using
+    #   				<i>capacityProviderA</i>, four tasks would use
+    #   				<i>capacityProviderB</i>.</p>
+    #   @return [Integer]
+    # @!attribute base
+    #   <p>The <i>base</i> value designates how many tasks, at a minimum, to run on
+    #   			the specified capacity provider. Only one capacity provider in a capacity provider
+    #   			strategy can have a <i>base</i> defined. If no value is specified, the
+    #   			default value of <code>0</code> is used.</p>
+    #   @return [Integer]
+    class CapacityProviderStrategyItem < Struct.new(
+      :capacity_provider,
+      :weight,
+      :base,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:weight] = 0 unless options.key?(:weight)
+        options[:base] = 0 unless options.key?(:base)
+        super
+      end
+    end
+
+    module CapacityProviderUpdateStatus
+      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
+      DELETE_COMPLETE = 'DELETE_COMPLETE'
+      DELETE_FAILED = 'DELETE_FAILED'
+      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
+      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
+      UPDATE_FAILED = 'UPDATE_FAILED'
+    end
+
+    # <p>These errors are usually caused by a client action. This client action might be using
+    # 			an action or resource on behalf of a user that doesn't have permissions to use the
+    # 			action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ClientException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A regional grouping of one or more container instances where you can run task
+    # 			requests. Each account receives a default cluster the first time you use the Amazon ECS
+    # 			service, but you may also create other clusters. Clusters may contain more than one
+    # 			instance type simultaneously.</p>
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that identifies the cluster. For more information about the ARN
+    #   			format, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids">Amazon Resource Name (ARN)</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute cluster_name
+    #   <p>A user-generated string that you use to identify your cluster.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The execute command and managed storage configuration for the cluster.</p>
+    #   @return [Types::ClusterConfiguration]
+    # @!attribute status
+    #   <p>The status of the cluster. The following are the possible states that are
+    #   			returned.</p>
+    #            <dl>
+    #               <dt>ACTIVE</dt>
+    #               <dd>
+    #                  <p>The cluster is ready to accept tasks and if applicable you can register
+    #   						container instances with the cluster.</p>
+    #               </dd>
+    #               <dt>PROVISIONING</dt>
+    #               <dd>
+    #                  <p>The cluster has capacity providers that are associated with it and the
+    #   						resources needed for the capacity provider are being created.</p>
+    #               </dd>
+    #               <dt>DEPROVISIONING</dt>
+    #               <dd>
+    #                  <p>The cluster has capacity providers that are associated with it and the
+    #   						resources needed for the capacity provider are being deleted.</p>
+    #               </dd>
+    #               <dt>FAILED</dt>
+    #               <dd>
+    #                  <p>The cluster has capacity providers that are associated with it and the
+    #   						resources needed for the capacity provider have failed to create.</p>
+    #               </dd>
+    #               <dt>INACTIVE</dt>
+    #               <dd>
+    #                  <p>The cluster has been deleted. Clusters with an <code>INACTIVE</code>
+    #   						status may remain discoverable in your account for a period of time.
+    #   						However, this behavior is subject to change in the future. We don't
+    #   						recommend that you rely on <code>INACTIVE</code> clusters persisting.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute registered_container_instances_count
+    #   <p>The number of container instances registered into the cluster. This includes container
+    #   			instances in both <code>ACTIVE</code> and <code>DRAINING</code> status.</p>
+    #   @return [Integer]
+    # @!attribute running_tasks_count
+    #   <p>The number of tasks in the cluster that are in the <code>RUNNING</code> state.</p>
+    #   @return [Integer]
+    # @!attribute pending_tasks_count
+    #   <p>The number of tasks in the cluster that are in the <code>PENDING</code> state.</p>
+    #   @return [Integer]
+    # @!attribute active_services_count
+    #   <p>The number of services that are running on the cluster in an <code>ACTIVE</code>
+    #   			state. You can view these services with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html">PListServices</a>.</p>
+    #   @return [Integer]
+    # @!attribute statistics
+    #   <p>Additional information about your clusters that are separated by launch type. They
+    #   			include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>runningEC2TasksCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>RunningFargateTasksCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>pendingEC2TasksCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>pendingFargateTasksCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>activeEC2ServiceCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>activeFargateServiceCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>drainingEC2ServiceCount</p>
+    #               </li>
+    #               <li>
+    #                  <p>drainingFargateServiceCount</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::KeyValuePair>]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the cluster to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute settings
+    #   <p>The settings for the cluster. This parameter indicates whether CloudWatch Container Insights
+    #   			is on or off for a cluster.</p>
+    #   @return [Array<Types::ClusterSetting>]
+    # @!attribute capacity_providers
+    #   <p>The capacity providers associated with the cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute default_capacity_provider_strategy
+    #   <p>The default capacity provider strategy for the cluster. When services or tasks are run
+    #   			in the cluster with no launch type or capacity provider strategy specified, the default
+    #   			capacity provider strategy is used.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute attachments
+    #   <p>The resources attached to a cluster. When using a capacity provider with a cluster,
+    #   			the capacity provider and associated resources are returned as cluster
+    #   			attachments.</p>
+    #   @return [Array<Types::Attachment>]
+    # @!attribute attachments_status
+    #   <p>The status of the capacity providers associated with the cluster. The following are
+    #   			the states that are returned.</p>
+    #            <dl>
+    #               <dt>UPDATE_IN_PROGRESS</dt>
+    #               <dd>
+    #                  <p>The available capacity providers for the cluster are updating.</p>
+    #               </dd>
+    #               <dt>UPDATE_COMPLETE</dt>
+    #               <dd>
+    #                  <p>The capacity providers have successfully updated.</p>
+    #               </dd>
+    #               <dt>UPDATE_FAILED</dt>
+    #               <dd>
+    #                  <p>The capacity provider updates failed.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute service_connect_defaults
+    #   <p>Use this parameter to set a default Service Connect namespace. After you set a default 
+    #   	Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as
+    #   	client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to
+    #   	<code>true</code> in the <code>ServiceConnectConfiguration</code>.
+    #   	You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default
+    #   	parameter.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ClusterServiceConnectDefaults]
+    class Cluster < Struct.new(
+      :cluster_arn,
+      :cluster_name,
+      :configuration,
+      :status,
+      :registered_container_instances_count,
+      :running_tasks_count,
+      :pending_tasks_count,
+      :active_services_count,
+      :statistics,
+      :tags,
+      :settings,
+      :capacity_providers,
+      :default_capacity_provider_strategy,
+      :attachments,
+      :attachments_status,
+      :service_connect_defaults,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:registered_container_instances_count] = 0 unless options.key?(:registered_container_instances_count)
+        options[:running_tasks_count] = 0 unless options.key?(:running_tasks_count)
+        options[:pending_tasks_count] = 0 unless options.key?(:pending_tasks_count)
+        options[:active_services_count] = 0 unless options.key?(:active_services_count)
+        super
+      end
+    end
+
+    # <p>The execute command and managed storage configuration for the cluster.</p>
+    # @!attribute execute_command_configuration
+    #   <p>The details of the execute command configuration.</p>
+    #   @return [Types::ExecuteCommandConfiguration]
+    # @!attribute managed_storage_configuration
+    #   <p>The details of the managed storage configuration.</p>
+    #   @return [Types::ManagedStorageConfiguration]
+    class ClusterConfiguration < Struct.new(
+      :execute_command_configuration,
+      :managed_storage_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>You can't delete a cluster that has registered container instances. First, deregister
+    # 			the container instances before you can delete the cluster. For more information, see
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html">DeregisterContainerInstance</a>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ClusterContainsContainerInstancesException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>You can't delete a cluster that contains services. First, update the service to reduce
+    # 			its desired task count to 0, and then delete the service. For more information, see
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a> and
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html">DeleteService</a>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ClusterContainsServicesException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>You can't delete a cluster that has active tasks.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ClusterContainsTasksException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ClusterField
+      ATTACHMENTS = 'ATTACHMENTS'
+      CONFIGURATIONS = 'CONFIGURATIONS'
+      SETTINGS = 'SETTINGS'
+      STATISTICS = 'STATISTICS'
+      TAGS = 'TAGS'
+    end
+
+    # <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ClusterNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Use this parameter to set a default Service Connect namespace. After you set a default 
+    # 	Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as
+    # 	client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to
+    # 	<code>true</code> in the <code>ServiceConnectConfiguration</code>.
+    # 	You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default
+    # 	parameter.</p>
+    #          <p>Tasks that run in a namespace can use short names to connect
+    # 	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    # 	Tasks connect through a managed proxy container
+    # 	that collects logs and metrics for increased visibility.
+    # 	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    # 	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute namespace
+    #   <p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace. When you create a service and don't specify a
+    #   			Service Connect configuration, this namespace is used.</p>
+    #   @return [String]
+    class ClusterServiceConnectDefaults < Struct.new(
+      :namespace,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Use this parameter to set a default Service Connect namespace. After you set a default 
+    # 	Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as
+    # 	client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to
+    # 	<code>true</code> in the <code>ServiceConnectConfiguration</code>.
+    # 	You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default
+    # 	parameter.</p>
+    #          <p>Tasks that run in a namespace can use short names to connect
+    # 	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    # 	Tasks connect through a managed proxy container
+    # 	that collects logs and metrics for increased visibility.
+    # 	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    # 	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute namespace
+    #   <p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify
+    #   			a Service Connect configuration. The namespace name can include up to 1024 characters.
+    #   			The name is case-sensitive. The name can't include greater than (>), less than
+    #   			(<), double quotation marks ("), or slash (/).</p>
+    #            <p>If you enter an existing namespace name or ARN, then that namespace will be used.
+    #   			Any namespace type is supported. The namespace must be in this account and this Amazon Web Services
+    #   			Region.</p>
+    #            <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a
+    #   			Cloud Map namespace with the "API calls" method of instance discovery only. This instance
+    #   			discovery method is the "HTTP" namespace type in the Command Line Interface. Other types of instance
+    #   			discovery aren't used by Service Connect.</p>
+    #            <p>If you update the cluster with an empty string <code>""</code> for the namespace name,
+    #   			the cluster configuration for Service Connect is removed. Note that the namespace will
+    #   			remain in Cloud Map and must be deleted separately.</p>
+    #            <p>For more information about Cloud Map, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html">Working with Services</a>
+    #   			in the <i>Cloud Map Developer Guide</i>.</p>
+    #   @return [String]
+    class ClusterServiceConnectDefaultsRequest < Struct.new(
+      :namespace,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The settings to use when creating a cluster. This parameter is used to turn on CloudWatch
+    # 			Container Insights with enhanced observability or CloudWatch Container Insights for a
+    # 			cluster.</p>
+    #          <p>Container Insights with enhanced observability provides all the Container Insights
+    # 			metrics, plus additional task and container metrics. This version supports enhanced
+    # 			observability for Amazon ECS clusters using the Amazon EC2 and Fargate launch types. After you
+    # 			configure Container Insights with enhanced observability on Amazon ECS, Container Insights
+    # 			auto-collects detailed infrastructure telemetry from the cluster level down to the
+    # 			container level in your environment and displays these critical performance data in
+    # 			curated dashboards removing the heavy lifting in observability set-up. </p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html">Monitor
+    # 				Amazon ECS containers using Container Insights with enhanced observability</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute name
+    #   <p>The name of the cluster setting. The value is <code>containerInsights</code> .</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to set for the cluster setting. The supported values are
+    #   				<code>enhanced</code>, <code>enabled</code>, and <code>disabled</code>. </p>
+    #            <p>To use Container Insights with enhanced observability, set the
+    #   				<code>containerInsights</code> account setting to <code>enhanced</code>.</p>
+    #            <p>To use Container Insights, set the <code>containerInsights</code> account setting to
+    #   				<code>enabled</code>.</p>
+    #            <p>If a cluster value is specified, it will override the <code>containerInsights</code>
+    #   			value set with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html">PutAccountSetting</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html">PutAccountSettingDefault</a>.</p>
+    #   @return [String]
+    class ClusterSetting < Struct.new(
+      :name,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ClusterSettingName
+      CONTAINER_INSIGHTS = 'containerInsights'
+    end
+
+    module Compatibility
+      EC2 = 'EC2'
+      FARGATE = 'FARGATE'
+      EXTERNAL = 'EXTERNAL'
+    end
+
+    # <p>The request could not be processed because of conflict in the current state of the resource. </p>
+    # @!attribute resource_ids
+    #   <p>The existing task ARNs which are already associated with the
+    #   				<code>clientToken</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ConflictException < Struct.new(
+      :resource_ids,
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module Connectivity
+      CONNECTED = 'CONNECTED'
+      DISCONNECTED = 'DISCONNECTED'
+    end
+
+    # <p>A Docker container that's part of a task.</p>
+    # @!attribute container_arn
+    #   <p>The Amazon Resource Name (ARN) of the container.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The ARN of the task.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the container.</p>
+    #   @return [String]
+    # @!attribute image
+    #   <p>The image used for the container.</p>
+    #   @return [String]
+    # @!attribute image_digest
+    #   <p>The container image manifest digest.</p>
+    #   @return [String]
+    # @!attribute runtime_id
+    #   <p>The ID of the Docker container.</p>
+    #   @return [String]
+    # @!attribute last_status
+    #   <p>The last known status of the container.</p>
+    #   @return [String]
+    # @!attribute exit_code
+    #   <p>The exit code returned from the container.</p>
+    #   @return [Integer]
+    # @!attribute reason
+    #   <p>A short (1024 max characters) human-readable string to provide additional details about a
+    #   			running or stopped container.</p>
+    #   @return [String]
+    # @!attribute network_bindings
+    #   <p>The network bindings associated with the container.</p>
+    #   @return [Array<Types::NetworkBinding>]
+    # @!attribute network_interfaces
+    #   <p>The network interfaces associated with the container.</p>
+    #   @return [Array<Types::NetworkInterface>]
+    # @!attribute health_status
+    #   <p>The health status of the container. If health checks aren't configured for this
+    #   			container in its task definition, then it reports the health status as
+    #   				<code>UNKNOWN</code>.</p>
+    #   @return [String]
+    # @!attribute managed_agents
+    #   <p>The details of any Amazon ECS managed agents associated with the container.</p>
+    #   @return [Array<Types::ManagedAgent>]
+    # @!attribute cpu
+    #   <p>The number of CPU units set for the container. The value is <code>0</code> if no value
+    #   			was specified in the container definition when the task definition was
+    #   			registered.</p>
+    #   @return [String]
+    # @!attribute memory
+    #   <p>The hard limit (in MiB) of memory set for the container.</p>
+    #   @return [String]
+    # @!attribute memory_reservation
+    #   <p>The soft limit (in MiB) of memory set for the container.</p>
+    #   @return [String]
+    # @!attribute gpu_ids
+    #   <p>The IDs of each GPU assigned to the container.</p>
+    #   @return [Array<String>]
+    class Container < Struct.new(
+      :container_arn,
+      :task_arn,
+      :name,
+      :image,
+      :image_digest,
+      :runtime_id,
+      :last_status,
+      :exit_code,
+      :reason,
+      :network_bindings,
+      :network_interfaces,
+      :health_status,
+      :managed_agents,
+      :cpu,
+      :memory,
+      :memory_reservation,
+      :gpu_ids,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ContainerCondition
+      START = 'START'
+      COMPLETE = 'COMPLETE'
+      SUCCESS = 'SUCCESS'
+      HEALTHY = 'HEALTHY'
+    end
+
+    # <p>Container definitions are used in task definitions to describe the different
+    # 			containers that are launched as part of a task.</p>
+    # @!attribute name
+    #   <p>The name of a container. If you're linking multiple containers together in a task
+    #   			definition, the <code>name</code> of one container can be entered in the
+    #   				<code>links</code> of another container to connect the containers.
+    #   			Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to <code>name</code> in the docker container
+    #   			create command and the <code>--name</code> option to docker run. </p>
+    #   @return [String]
+    # @!attribute image
+    #   <p>The image used to start a container. This string is passed directly to the Docker
+    #   			daemon. By default, images in the Docker Hub registry are available. Other repositories
+    #   			are specified with either <code>
+    #                  <i>repository-url</i>/<i>image</i>:<i>tag</i>
+    #               </code> or <code>
+    #                  <i>repository-url</i>/<i>image</i>@<i>digest</i>
+    #               </code>. For images using tags (repository-url/image:tag), up to 255 characters total are allowed, including letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs (#). For images using digests (repository-url/image@digest), the 255 character limit applies only to the repository URL and image name (everything before the @ sign). The only supported hash function is sha256, and the hash value after sha256: must be exactly 64 characters (only letters A-F, a-f, and numbers 0-9 are allowed). This parameter maps to <code>Image</code> in the docker
+    #   			container create command and the <code>IMAGE</code> parameter of docker run.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>When a new task starts, the Amazon ECS container agent pulls the latest version of
+    #   					the specified image and tag for the container to use. However, subsequent
+    #   					updates to a repository image aren't propagated to already running tasks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Images in Amazon ECR repositories can be specified by either using the full
+    #   						<code>registry/repository:tag</code> or
+    #   						<code>registry/repository@digest</code>. For example,
+    #   						<code>012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest</code>
+    #   					or
+    #   						<code>012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE</code>.
+    #   				</p>
+    #               </li>
+    #               <li>
+    #                  <p>Images in official repositories on Docker Hub use a single name (for example,
+    #   						<code>ubuntu</code> or <code>mongo</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>Images in other repositories on Docker Hub are qualified with an organization
+    #   					name (for example, <code>amazon/amazon-ecs-agent</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>Images in other online repositories are qualified further by a domain name
+    #   					(for example, <code>quay.io/assemblyline/ubuntu</code>).</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute repository_credentials
+    #   <p>The private repository authentication credentials to use.</p>
+    #   @return [Types::RepositoryCredentials]
+    # @!attribute cpu
+    #   <p>The number of <code>cpu</code> units reserved for the container. This parameter maps
+    #   			to <code>CpuShares</code> in the docker container create commandand the
+    #   				<code>--cpu-shares</code> option to docker run.</p>
+    #            <p>This field is optional for tasks using the Fargate launch type, and the
+    #   			only requirement is that the total amount of CPU reserved for all containers within a
+    #   			task be lower than the task-level <code>cpu</code> value.</p>
+    #            <note>
+    #               <p>You can determine the number of CPU units that are available per EC2 instance type
+    #   				by multiplying the vCPUs listed for that instance type on the <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 Instances</a> detail page
+    #   				by 1,024.</p>
+    #            </note>
+    #            <p>Linux containers share unallocated CPU units with other containers on the container
+    #   			instance with the same ratio as their allocated amount. For example, if you run a
+    #   			single-container task on a single-core instance type with 512 CPU units specified for
+    #   			that container, and that's the only task running on the container instance, that
+    #   			container could use the full 1,024 CPU unit share at any given time. However, if you
+    #   			launched another copy of the same task on that container instance, each task is
+    #   			guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float
+    #   			to higher CPU usage if the other container was not using it. If both tasks were 100%
+    #   			active all of the time, they would be limited to 512 CPU units.</p>
+    #            <p>On Linux container instances, the Docker daemon on the container instance uses the CPU
+    #   			value to calculate the relative CPU share ratios for running containers. The minimum
+    #   			valid CPU share value that the Linux kernel allows is 2, and the maximum valid CPU share
+    #   			value that the Linux kernel allows is 262144. However, the CPU parameter isn't required,
+    #   			and you can use CPU values below 2 or above 262144 in your container definitions. For
+    #   			CPU values below 2 (including null) or above 262144, the behavior varies based on your
+    #   			Amazon ECS container agent version:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Agent versions less than or equal to 1.1.0:</b>
+    #   					Null and zero CPU values are passed to Docker as 0, which Docker then converts
+    #   					to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux
+    #   					kernel converts to two CPU shares.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Agent versions greater than or equal to 1.2.0:</b>
+    #   					Null, zero, and CPU values of 1 are passed to Docker as 2.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Agent versions greater than or equal to
+    #   						1.84.0:</b> CPU values greater than 256 vCPU are passed to Docker as
+    #   					256, which is equivalent to 262144 CPU shares.</p>
+    #               </li>
+    #            </ul>
+    #            <p>On Windows container instances, the CPU limit is enforced as an absolute limit, or a
+    #   			quota. Windows containers only have access to the specified amount of CPU that's
+    #   			described in the task definition. A null or zero CPU value is passed to Docker as
+    #   				<code>0</code>, which Windows interprets as 1% of one CPU.</p>
+    #   @return [Integer]
+    # @!attribute memory
+    #   <p>The amount (in MiB) of memory to present to the container. If your container attempts
+    #   			to exceed the memory specified here, the container is killed. The total amount of memory
+    #   			reserved for all containers within a task must be lower than the task
+    #   				<code>memory</code> value, if one is specified. This parameter maps to
+    #   				<code>Memory</code> in the docker container create command and the
+    #   				<code>--memory</code> option to docker run.</p>
+    #            <p>If using the Fargate launch type, this parameter is optional.</p>
+    #            <p>If using the EC2 launch type, you must specify either a task-level
+    #   			memory value or a container-level memory value. If you specify both a container-level
+    #   				<code>memory</code> and <code>memoryReservation</code> value, <code>memory</code>
+    #   			must be greater than <code>memoryReservation</code>. If you specify
+    #   				<code>memoryReservation</code>, then that value is subtracted from the available
+    #   			memory resources for the container instance where the container is placed. Otherwise,
+    #   			the value of <code>memory</code> is used.</p>
+    #            <p>The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a
+    #   			container. So, don't specify less than 6 MiB of memory for your containers. </p>
+    #            <p>The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a
+    #   			container. So, don't specify less than 4 MiB of memory for your containers.</p>
+    #   @return [Integer]
+    # @!attribute memory_reservation
+    #   <p>The soft limit (in MiB) of memory to reserve for the container. When system memory is
+    #   			under heavy contention, Docker attempts to keep the container memory to this soft limit.
+    #   			However, your container can consume more memory when it needs to, up to either the hard
+    #   			limit specified with the <code>memory</code> parameter (if applicable), or all of the
+    #   			available memory on the container instance, whichever comes first. This parameter maps
+    #   			to <code>MemoryReservation</code> in the docker container create command and the
+    #   				<code>--memory-reservation</code> option to docker run.</p>
+    #            <p>If a task-level memory value is not specified, you must specify a non-zero integer for
+    #   			one or both of <code>memory</code> or <code>memoryReservation</code> in a container
+    #   			definition. If you specify both, <code>memory</code> must be greater than
+    #   				<code>memoryReservation</code>. If you specify <code>memoryReservation</code>, then
+    #   			that value is subtracted from the available memory resources for the container instance
+    #   			where the container is placed. Otherwise, the value of <code>memory</code> is
+    #   			used.</p>
+    #            <p>For example, if your container normally uses 128 MiB of memory, but occasionally
+    #   			bursts to 256 MiB of memory for short periods of time, you can set a
+    #   				<code>memoryReservation</code> of 128 MiB, and a <code>memory</code> hard limit of
+    #   			300 MiB. This configuration would allow the container to only reserve 128 MiB of memory
+    #   			from the remaining resources on the container instance, but also allow the container to
+    #   			consume more memory resources when needed.</p>
+    #            <p>The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a
+    #   			container. So, don't specify less than 6 MiB of memory for your containers. </p>
+    #            <p>The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a
+    #   			container. So, don't specify less than 4 MiB of memory for your containers.</p>
+    #   @return [Integer]
+    # @!attribute links
+    #   <p>The <code>links</code> parameter allows containers to communicate with each other
+    #   			without the need for port mappings. This parameter is only supported if the network mode
+    #   			of a task definition is <code>bridge</code>. The <code>name:internalName</code>
+    #   			construct is analogous to <code>name:alias</code> in Docker links.
+    #   			Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to <code>Links</code> in the docker
+    #   			container create command and the <code>--link</code> option to docker run.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #            <important>
+    #               <p>Containers that are collocated on a single container instance may be able to
+    #   				communicate with each other without requiring links or host port mappings. Network
+    #   				isolation is achieved on the container instance using security groups and VPC
+    #   				settings.</p>
+    #            </important>
+    #   @return [Array<String>]
+    # @!attribute port_mappings
+    #   <p>The list of port mappings for the container. Port mappings allow containers to access
+    #   			ports on the host container instance to send or receive traffic.</p>
+    #            <p>For task definitions that use the <code>awsvpc</code> network mode, only specify the
+    #   				<code>containerPort</code>. The <code>hostPort</code> can be left blank or it must
+    #   			be the same value as the <code>containerPort</code>.</p>
+    #            <p>Port mappings on Windows use the <code>NetNAT</code> gateway address rather than
+    #   				<code>localhost</code>. There's no loopback for port mappings on Windows, so you
+    #   			can't access a container's mapped port from the host itself. </p>
+    #            <p>This parameter maps to <code>PortBindings</code> in the the docker container create
+    #   			command and the <code>--publish</code> option to docker run. If the network mode of a
+    #   			task definition is set to <code>none</code>, then you can't specify port mappings. If
+    #   			the network mode of a task definition is set to <code>host</code>, then host ports must
+    #   			either be undefined or they must match the container port in the port mapping.</p>
+    #            <note>
+    #               <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host
+    #   				and container port assignments are visible in the <b>Network
+    #   					Bindings</b> section of a container description for a selected task in
+    #   				the Amazon ECS console. The assignments are also visible in the
+    #   					<code>networkBindings</code> section <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">DescribeTasks</a>
+    #   				responses.</p>
+    #            </note>
+    #   @return [Array<Types::PortMapping>]
+    # @!attribute essential
+    #   <p>If the <code>essential</code> parameter of a container is marked as <code>true</code>,
+    #   			and that container fails or stops for any reason, all other containers that are part of
+    #   			the task are stopped. If the <code>essential</code> parameter of a container is marked
+    #   			as <code>false</code>, its failure doesn't affect the rest of the containers in a task.
+    #   			If this parameter is omitted, a container is assumed to be essential.</p>
+    #            <p>All tasks must have at least one essential container. If you have an application
+    #   			that's composed of multiple containers, group containers that are used for a common
+    #   			purpose into components, and separate the different components into multiple task
+    #   			definitions. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html">Application
+    #   				Architecture</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Boolean]
+    # @!attribute restart_policy
+    #   <p>The restart policy for a container. When you set up a restart policy, Amazon ECS can
+    #   			restart the container without needing to replace the task. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html">Restart
+    #   				individual containers in Amazon ECS tasks with container restart policies</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ContainerRestartPolicy]
+    # @!attribute entry_point
+    #   <important>
+    #               <p>Early versions of the Amazon ECS container agent don't properly handle
+    #   					<code>entryPoint</code> parameters. If you have problems using
+    #   					<code>entryPoint</code>, update your container agent or enter your commands and
+    #   				arguments as <code>command</code> array items instead.</p>
+    #            </important>
+    #            <p>The entry point that's passed to the container. This parameter maps to
+    #   				<code>Entrypoint</code> in the docker container create command and the
+    #   				<code>--entrypoint</code> option to docker run.</p>
+    #   @return [Array<String>]
+    # @!attribute command
+    #   <p>The command that's passed to the container. This parameter maps to <code>Cmd</code> in
+    #   			the docker container create command and the <code>COMMAND</code> parameter to docker
+    #   			run. If there are multiple arguments, each argument is a separated string in the
+    #   			array.</p>
+    #   @return [Array<String>]
+    # @!attribute environment
+    #   <p>The environment variables to pass to a container. This parameter maps to
+    #   				<code>Env</code> in the docker container create command and the <code>--env</code>
+    #   			option to docker run.</p>
+    #            <important>
+    #               <p>We don't recommend that you use plaintext environment variables for sensitive
+    #   				information, such as credential data.</p>
+    #            </important>
+    #   @return [Array<Types::KeyValuePair>]
+    # @!attribute environment_files
+    #   <p>A list of files containing the environment variables to pass to a container. This
+    #   			parameter maps to the <code>--env-file</code> option to docker run.</p>
+    #            <p>You can specify up to ten environment files. The file must have a <code>.env</code>
+    #   			file extension. Each line in an environment file contains an environment variable in
+    #   				<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated
+    #   			as comments and are ignored.</p>
+    #            <p>If there are environment variables specified using the <code>environment</code>
+    #   			parameter in a container definition, they take precedence over the variables contained
+    #   			within an environment file. If multiple environment files are specified that contain the
+    #   			same variable, they're processed from the top down. We recommend that you use unique
+    #   			variable names. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html">Specifying Environment
+    #   				Variables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<Types::EnvironmentFile>]
+    # @!attribute mount_points
+    #   <p>The mount points for data volumes in your container.</p>
+    #            <p>This parameter maps to <code>Volumes</code> in the docker container create command and
+    #   			the <code>--volume</code> option to docker run.</p>
+    #            <p>Windows containers can mount whole directories on the same drive as
+    #   				<code>$env:ProgramData</code>. Windows containers can't mount directories on a
+    #   			different drive, and mount point can't be across drives.</p>
+    #   @return [Array<Types::MountPoint>]
+    # @!attribute volumes_from
+    #   <p>Data volumes to mount from another container. This parameter maps to
+    #   				<code>VolumesFrom</code> in the docker container create command and the
+    #   				<code>--volumes-from</code> option to docker run.</p>
+    #   @return [Array<Types::VolumeFrom>]
+    # @!attribute linux_parameters
+    #   <p>Linux-specific modifications that are applied to the default Docker container
+    #   			configuration, such as Linux kernel capabilities. For more information see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html">KernelCapabilities</a>.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Types::LinuxParameters]
+    # @!attribute secrets
+    #   <p>The secrets to pass to the container. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying
+    #   				Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<Types::Secret>]
+    # @!attribute depends_on
+    #   <p>The dependencies defined for container startup and shutdown. A container can contain
+    #   			multiple dependencies on other containers in a task definition. When a dependency is
+    #   			defined for container startup, for container shutdown it is reversed.</p>
+    #            <p>For tasks using the EC2 launch type, the container instances require at
+    #   			least version 1.26.0 of the container agent to turn on container dependencies. However,
+    #   			we recommend using the latest container agent version. For information about checking
+    #   			your agent version and updating to the latest version, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS
+    #   				Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,
+    #   			your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If
+    #   			your container instances are launched from version <code>20190301</code> or later, then
+    #   			they contain the required versions of the container agent and <code>ecs-init</code>. For
+    #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>For tasks using the Fargate launch type, the task or service requires
+    #   			the following platforms:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Linux platform version <code>1.3.0</code> or later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::ContainerDependency>]
+    # @!attribute start_timeout
+    #   <p>Time duration (in seconds) to wait before giving up on resolving dependencies for a
+    #   			container. For example, you specify two containers in a task definition with containerA
+    #   			having a dependency on containerB reaching a <code>COMPLETE</code>,
+    #   			<code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code>
+    #   			value is specified for containerB and it doesn't reach the desired status within that
+    #   			time then containerA gives up and not start. This results in the task transitioning to a
+    #   				<code>STOPPED</code> state.</p>
+    #            <note>
+    #               <p>When the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration
+    #   				variable is used, it's enforced independently from this start timeout value.</p>
+    #            </note>
+    #            <p>For tasks using the Fargate launch type, the task or service requires
+    #   			the following platforms:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Linux platform version <code>1.3.0</code> or later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For tasks using the EC2 launch type, your container instances require at
+    #   			least version <code>1.26.0</code> of the container agent to use a container start
+    #   			timeout value. However, we recommend using the latest container agent version. For
+    #   			information about checking your agent version and updating to the latest version, see
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS
+    #   				Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,
+    #   			your instance needs at least version <code>1.26.0-1</code> of the <code>ecs-init</code>
+    #   			package. If your container instances are launched from version <code>20190301</code> or
+    #   			later, then they contain the required versions of the container agent and
+    #   				<code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The valid values for Fargate are 2-120 seconds.</p>
+    #   @return [Integer]
+    # @!attribute stop_timeout
+    #   <p>Time duration (in seconds) to wait before the container is forcefully killed if it
+    #   			doesn't exit normally on its own.</p>
+    #            <p>For tasks using the Fargate launch type, the task or service requires
+    #   			the following platforms:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Linux platform version <code>1.3.0</code> or later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For tasks that use the Fargate launch type, the max stop timeout value is 120
+    #   			seconds and if the parameter is not specified, the default value of 30 seconds is
+    #   			used.</p>
+    #            <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code>
+    #   			parameter isn't specified, the value set for the Amazon ECS container agent configuration
+    #   			variable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the
+    #   				<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>
+    #   			agent configuration variable are set, then the default values of 30 seconds for Linux
+    #   			containers and 30 seconds on Windows containers are used. Your container instances
+    #   			require at least version 1.26.0 of the container agent to use a container stop timeout
+    #   			value. However, we recommend using the latest container agent version. For information
+    #   			about checking your agent version and updating to the latest version, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using
+    #   			an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the
+    #   				<code>ecs-init</code> package. If your container instances are launched from version
+    #   				<code>20190301</code> or later, then they contain the required versions of the
+    #   			container agent and <code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The valid values for Fargate are 2-120 seconds.</p>
+    #   @return [Integer]
+    # @!attribute version_consistency
+    #   <p>Specifies whether Amazon ECS will resolve the container image tag provided in the container
+    #   			definition to an image digest. By default, the value is <code>enabled</code>. If you set
+    #   			the value for a container as <code>disabled</code>, Amazon ECS will not resolve the provided
+    #   			container image tag to a digest and will use the original image URI specified in the
+    #   			container definition for deployment. For more information about container image
+    #   			resolution, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability">Container image resolution</a> in the <i>Amazon ECS Developer
+    #   				Guide</i>.</p>
+    #   @return [String]
+    # @!attribute hostname
+    #   <p>The hostname to use for your container. This parameter maps to <code>Hostname</code>
+    #   			in the docker container create command and the <code>--hostname</code> option to docker
+    #   			run.</p>
+    #            <note>
+    #               <p>The <code>hostname</code> parameter is not supported if you're using the
+    #   					<code>awsvpc</code> network mode.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute user
+    #   <p>The user to use inside the container. This parameter maps to <code>User</code> in the
+    #   			docker container create command and the <code>--user</code> option to docker run.</p>
+    #            <important>
+    #               <p>When running tasks using the <code>host</code> network mode, don't run containers
+    #   				using the root user (UID 0). We recommend using a non-root user for better
+    #   				security.</p>
+    #            </important>
+    #            <p>You can specify the <code>user</code> using the following formats. If specifying a UID
+    #   			or GID, you must specify it as a positive integer.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>user</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>user:group</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>uid</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>uid:gid</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>user:gid</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>uid:group</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute working_directory
+    #   <p>The working directory to run commands inside the container in. This parameter maps to
+    #   				<code>WorkingDir</code> in the docker container create command and the
+    #   				<code>--workdir</code> option to docker run.</p>
+    #   @return [String]
+    # @!attribute disable_networking
+    #   <p>When this parameter is true, networking is off within the container. This parameter
+    #   			maps to <code>NetworkDisabled</code> in the docker container create command.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute privileged
+    #   <p>When this parameter is true, the container is given elevated privileges on the host
+    #   			container instance (similar to the <code>root</code> user). This parameter maps to
+    #   				<code>Privileged</code> in the docker container create command and the
+    #   				<code>--privileged</code> option to docker run</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute readonly_root_filesystem
+    #   <p>When this parameter is true, the container is given read-only access to its root file
+    #   			system. This parameter maps to <code>ReadonlyRootfs</code> in the docker container
+    #   			create command and the <code>--read-only</code> option to docker run.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute dns_servers
+    #   <p>A list of DNS servers that are presented to the container. This parameter maps to
+    #   				<code>Dns</code> in the docker container create command and the <code>--dns</code>
+    #   			option to docker run.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Array<String>]
+    # @!attribute dns_search_domains
+    #   <p>A list of DNS search domains that are presented to the container. This parameter maps
+    #   			to <code>DnsSearch</code> in the docker container create command and the
+    #   				<code>--dns-search</code> option to docker run.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Array<String>]
+    # @!attribute extra_hosts
+    #   <p>A list of hostnames and IP address mappings to append to the <code>/etc/hosts</code>
+    #   			file on the container. This parameter maps to <code>ExtraHosts</code> in the docker
+    #   			container create command and the <code>--add-host</code> option to docker run.</p>
+    #            <note>
+    #               <p>This parameter isn't supported for Windows containers or tasks that use the
+    #   					<code>awsvpc</code> network mode.</p>
+    #            </note>
+    #   @return [Array<Types::HostEntry>]
+    # @!attribute docker_security_options
+    #   <p>A list of strings to provide custom configuration for multiple security systems. This
+    #   			field isn't valid for containers in tasks using the Fargate launch
+    #   			type.</p>
+    #            <p>For Linux tasks on EC2, this parameter can be used to reference custom
+    #   			labels for SELinux and AppArmor multi-level security systems.</p>
+    #            <p>For any tasks on EC2, this parameter can be used to reference a
+    #   			credential spec file that configures a container for Active Directory authentication.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html">Using gMSAs for Windows
+    #   				Containers</a> and <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html">Using gMSAs for Linux
+    #   				Containers</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>This parameter maps to <code>SecurityOpt</code> in the docker container create command
+    #   			and the <code>--security-opt</code> option to docker run.</p>
+    #            <note>
+    #               <p>The Amazon ECS container agent running on a container instance must register with the
+    #   					<code>ECS_SELINUX_CAPABLE=true</code> or <code>ECS_APPARMOR_CAPABLE=true</code>
+    #   				environment variables before containers placed on that instance can use these
+    #   				security options. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS Container
+    #   					Agent Configuration</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            </note>
+    #            <p>Valid values: "no-new-privileges" | "apparmor:PROFILE" | "label:value" |
+    #   			"credentialspec:CredentialSpecFilePath"</p>
+    #   @return [Array<String>]
+    # @!attribute interactive
+    #   <p>When this parameter is <code>true</code>, you can deploy containerized applications
+    #   			that require <code>stdin</code> or a <code>tty</code> to be allocated. This parameter
+    #   			maps to <code>OpenStdin</code> in the docker container create command and the
+    #   				<code>--interactive</code> option to docker run.</p>
+    #   @return [Boolean]
+    # @!attribute pseudo_terminal
+    #   <p>When this parameter is <code>true</code>, a TTY is allocated. This parameter maps to
+    #   				<code>Tty</code> in the docker container create command and the <code>--tty</code>
+    #   			option to docker run.</p>
+    #   @return [Boolean]
+    # @!attribute docker_labels
+    #   <p>A key/value map of labels to add to the container. This parameter maps to
+    #   				<code>Labels</code> in the docker container create command and the
+    #   				<code>--label</code> option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>
+    #            </p>
+    #   @return [Hash<String, String>]
+    # @!attribute ulimits
+    #   <p>A list of <code>ulimits</code> to set in the container. If a <code>ulimit</code> value
+    #   			is specified in a task definition, it overrides the default values set by Docker. This
+    #   			parameter maps to <code>Ulimits</code> in the docker container create command and the
+    #   				<code>--ulimit</code> option to docker run. Valid naming values are displayed in the
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Ulimit.html">Ulimit</a> data type.</p>
+    #            <p>Amazon ECS tasks hosted on Fargate use the default
+    #   							resource limit values set by the operating system with the exception of
+    #   							the <code>nofile</code> resource limit parameter which Fargate
+    #   							overrides. The <code>nofile</code> resource limit sets a restriction on
+    #   							the number of open files that a container can use. The default
+    #   								<code>nofile</code> soft limit is <code> 65535</code> and the default hard limit
+    #   							is <code>65535</code>.</p>
+    #            <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>
+    #            </p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #   @return [Array<Types::Ulimit>]
+    # @!attribute log_configuration
+    #   <p>The log configuration specification for the container.</p>
+    #            <p>This parameter maps to <code>LogConfig</code> in the docker container create command
+    #   			and the <code>--log-driver</code> option to docker run. By default, containers use the
+    #   			same logging driver that the Docker daemon uses. However the container can use a
+    #   			different logging driver than the Docker daemon by specifying a log driver with this
+    #   			parameter in the container definition. To use a different logging driver for a
+    #   			container, the log system must be configured properly on the container instance (or on a
+    #   			different log server for remote logging options). </p>
+    #            <note>
+    #               <p>Amazon ECS currently supports a subset of the logging drivers available to the Docker
+    #   				daemon (shown in the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html">LogConfiguration</a> data type). Additional log drivers may be available in
+    #   				future releases of the Amazon ECS container agent.</p>
+    #            </note>
+    #            <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>
+    #            </p>
+    #            <note>
+    #               <p>The Amazon ECS container agent running on a container instance must register the
+    #   				logging drivers available on that instance with the
+    #   					<code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before
+    #   				containers placed on that instance can use these log configuration options. For more
+    #   				information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS Container
+    #   					Agent Configuration</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            </note>
+    #   @return [Types::LogConfiguration]
+    # @!attribute health_check
+    #   <p>The container health check command and associated configuration parameters for the
+    #   			container. This parameter maps to <code>HealthCheck</code> in the docker container
+    #   			create command and the <code>HEALTHCHECK</code> parameter of docker run.</p>
+    #   @return [Types::HealthCheck]
+    # @!attribute system_controls
+    #   <p>A list of namespaced kernel parameters to set in the container. This parameter maps to
+    #   				<code>Sysctls</code> in the docker container create command and the
+    #   				<code>--sysctl</code> option to docker run. For example, you can configure
+    #   				<code>net.ipv4.tcp_keepalive_time</code> setting to maintain longer lived
+    #   			connections.</p>
+    #   @return [Array<Types::SystemControl>]
+    # @!attribute resource_requirements
+    #   <p>The type and amount of a resource to assign to a container. The only supported
+    #   			resource is a GPU.</p>
+    #   @return [Array<Types::ResourceRequirement>]
+    # @!attribute firelens_configuration
+    #   <p>The FireLens configuration for the container. This is used to specify and configure a
+    #   			log router for container logs. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html">Custom Log Routing</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::FirelensConfiguration]
+    # @!attribute credential_specs
+    #   <p>A list of ARNs in SSM or Amazon S3 to a credential spec (<code>CredSpec</code>) file that
+    #   			configures the container for Active Directory authentication. We recommend that you use
+    #   			this parameter instead of the <code>dockerSecurityOptions</code>. The maximum number of
+    #   			ARNs is 1.</p>
+    #            <p>There are two formats for each ARN.</p>
+    #            <dl>
+    #               <dt>credentialspecdomainless:MyARN</dt>
+    #               <dd>
+    #                  <p>You use <code>credentialspecdomainless:MyARN</code> to provide a
+    #   							<code>CredSpec</code> with an additional section for a secret in Secrets Manager.
+    #   						You provide the login credentials to the domain in the secret.</p>
+    #                  <p>Each task that runs on any container instance can join different
+    #   						domains.</p>
+    #                  <p>You can use this format without joining the container instance to a
+    #   						domain.</p>
+    #               </dd>
+    #               <dt>credentialspec:MyARN</dt>
+    #               <dd>
+    #                  <p>You use <code>credentialspec:MyARN</code> to provide a
+    #   							<code>CredSpec</code> for a single domain.</p>
+    #                  <p>You must join the container instance to the domain before you start any
+    #   						tasks that use this task definition.</p>
+    #               </dd>
+    #            </dl>
+    #            <p>In both formats, replace <code>MyARN</code> with the ARN in SSM or Amazon S3.</p>
+    #            <p>If you provide a <code>credentialspecdomainless:MyARN</code>, the
+    #   				<code>credspec</code> must provide a ARN in Secrets Manager for a secret containing the
+    #   			username, password, and the domain to connect to. For better security, the instance
+    #   			isn't joined to the domain for domainless authentication. Other applications on the
+    #   			instance can't use the domainless credentials. You can use this parameter to run tasks
+    #   			on the same instance, even it the tasks need to join different domains. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html">Using gMSAs for Windows
+    #   				Containers</a> and <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html">Using gMSAs for Linux
+    #   				Containers</a>.</p>
+    #   @return [Array<String>]
+    class ContainerDefinition < Struct.new(
+      :name,
+      :image,
+      :repository_credentials,
+      :cpu,
+      :memory,
+      :memory_reservation,
+      :links,
+      :port_mappings,
+      :essential,
+      :restart_policy,
+      :entry_point,
+      :command,
+      :environment,
+      :environment_files,
+      :mount_points,
+      :volumes_from,
+      :linux_parameters,
+      :secrets,
+      :depends_on,
+      :start_timeout,
+      :stop_timeout,
+      :version_consistency,
+      :hostname,
+      :user,
+      :working_directory,
+      :disable_networking,
+      :privileged,
+      :readonly_root_filesystem,
+      :dns_servers,
+      :dns_search_domains,
+      :extra_hosts,
+      :docker_security_options,
+      :interactive,
+      :pseudo_terminal,
+      :docker_labels,
+      :ulimits,
+      :log_configuration,
+      :health_check,
+      :system_controls,
+      :resource_requirements,
+      :firelens_configuration,
+      :credential_specs,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:cpu] = 0 unless options.key?(:cpu)
+        super
+      end
+    end
+
+    # <p>The dependencies defined for container startup and shutdown. A container can contain
+    # 			multiple dependencies. When a dependency is defined for container startup, for container
+    # 			shutdown it is reversed.</p>
+    #          <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent
+    # 			to use container dependencies. However, we recommend using the latest container agent
+    # 			version. For information about checking your agent version and updating to the latest
+    # 			version, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS
+    # 				Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,
+    # 			your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If
+    # 			your container instances are launched from version <code>20190301</code> or later, then
+    # 			they contain the required versions of the container agent and <code>ecs-init</code>. For
+    # 			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a>
+    # 			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <note>
+    #             <p>For tasks that use the Fargate launch type, the task or service
+    # 				requires the following platforms:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Linux platform version <code>1.3.0</code> or later.</p>
+    #                </li>
+    #                <li>
+    #                   <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    #          <p>For more information about how to create a container dependency, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency">Container dependency</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute container_name
+    #   <p>The name of a container.</p>
+    #   @return [String]
+    # @!attribute condition
+    #   <p>The dependency condition of the container. The following are the available conditions
+    #   			and their behavior:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>START</code> - This condition emulates the behavior of links and
+    #   					volumes today. It validates that a dependent container is started before
+    #   					permitting other containers to start.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>COMPLETE</code> - This condition validates that a dependent
+    #   					container runs to completion (exits) before permitting other containers to
+    #   					start. This can be useful for nonessential containers that run a script and then
+    #   					exit. This condition can't be set on an essential container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SUCCESS</code> - This condition is the same as
+    #   						<code>COMPLETE</code>, but it also requires that the container exits with a
+    #   						<code>zero</code> status. This condition can't be set on an essential
+    #   					container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HEALTHY</code> - This condition validates that the dependent
+    #   					container passes its Docker health check before permitting other containers to
+    #   					start. This requires that the dependent container has health checks configured.
+    #   					This condition is confirmed only at task startup.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class ContainerDependency < Struct.new(
+      :container_name,
+      :condition,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details about the container image a service revision uses. </p>
+    #          <p>To ensure that all tasks in a service use the same container image, Amazon ECS
+    # 			resolves container image names and any image tags specified in the task definition to
+    # 			container image digests. </p>
+    #          <p>After the container image digest has been established, Amazon ECS uses the digest to
+    # 			start any other desired tasks, and for any future service and service revision updates.
+    # 			This leads to all tasks in a service always running identical container images,
+    # 			resulting in version consistency for your software. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability">Container image resolution</a> in the Amazon ECS Developer Guide.</p>
+    # @!attribute container_name
+    #   <p>The name of the container.</p>
+    #   @return [String]
+    # @!attribute image_digest
+    #   <p>The container image digest.</p>
+    #   @return [String]
+    # @!attribute image
+    #   <p>The container image. </p>
+    #   @return [String]
+    class ContainerImage < Struct.new(
+      :container_name,
+      :image_digest,
+      :image,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An Amazon EC2 or External instance that's running the Amazon ECS agent and has been registered
+    # 			with a cluster.</p>
+    # @!attribute container_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the container instance. For more information about the ARN format,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids">Amazon Resource Name (ARN)</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute ec2_instance_id
+    #   <p>The ID of the container instance. For Amazon EC2 instances, this value is the Amazon EC2
+    #   			instance ID. For external instances, this value is the Amazon Web Services Systems Manager managed instance ID.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_name
+    #   <p>The capacity provider that's associated with the container instance.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version counter for the container instance. Every time a container instance
+    #   			experiences a change that triggers a CloudWatch event, the version counter is
+    #   			incremented. If you're replicating your Amazon ECS container instance state with CloudWatch
+    #   			Events, you can compare the version of a container instance reported by the Amazon ECS APIs
+    #   			with the version reported in CloudWatch Events for the container instance (inside the
+    #   				<code>detail</code> object) to verify that the version in your event stream is
+    #   			current.</p>
+    #   @return [Integer]
+    # @!attribute version_info
+    #   <p>The version information for the Amazon ECS container agent and Docker daemon running on the
+    #   			container instance.</p>
+    #   @return [Types::VersionInfo]
+    # @!attribute remaining_resources
+    #   <p>For CPU and memory resource types, this parameter describes the remaining CPU and
+    #   			memory that wasn't already allocated to tasks and is therefore available for new tasks.
+    #   			For port resource types, this parameter describes the ports that were reserved by the
+    #   			Amazon ECS container agent (at instance registration time) and any task containers that have
+    #   			reserved port mappings on the host (with the <code>host</code> or <code>bridge</code>
+    #   			network mode). Any port that's not specified here is available for new tasks.</p>
+    #   @return [Array<Types::Resource>]
+    # @!attribute registered_resources
+    #   <p>For CPU and memory resource types, this parameter describes the amount of each
+    #   			resource that was available on the container instance when the container agent
+    #   			registered it with Amazon ECS. This value represents the total amount of CPU and memory that
+    #   			can be allocated on this container instance to tasks. For port resource types, this
+    #   			parameter describes the ports that were reserved by the Amazon ECS container agent when it
+    #   			registered the container instance with Amazon ECS.</p>
+    #   @return [Array<Types::Resource>]
+    # @!attribute status
+    #   <p>The status of the container instance. The valid values are <code>REGISTERING</code>,
+    #   				<code>REGISTRATION_FAILED</code>, <code>ACTIVE</code>, <code>INACTIVE</code>,
+    #   				<code>DEREGISTERING</code>, or <code>DRAINING</code>.</p>
+    #            <p>If your account has opted in to the <code>awsvpcTrunking</code> account setting, then
+    #   			any newly registered container instance will transition to a <code>REGISTERING</code>
+    #   			status while the trunk elastic network interface is provisioned for the instance. If the
+    #   			registration fails, the instance will transition to a <code>REGISTRATION_FAILED</code>
+    #   			status. You can describe the container instance and see the reason for failure in the
+    #   				<code>statusReason</code> parameter. Once the container instance is terminated, the
+    #   			instance transitions to a <code>DEREGISTERING</code> status while the trunk elastic
+    #   			network interface is deprovisioned. The instance then transitions to an
+    #   				<code>INACTIVE</code> status.</p>
+    #            <p>The <code>ACTIVE</code> status indicates that the container instance can accept tasks.
+    #   			The <code>DRAINING</code> indicates that new tasks aren't placed on the container
+    #   			instance and any service tasks running on the container instance are removed if
+    #   			possible. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html">Container instance draining</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason that the container instance reached its current status.</p>
+    #   @return [String]
+    # @!attribute agent_connected
+    #   <p>This parameter returns <code>true</code> if the agent is connected to Amazon ECS. An
+    #   			instance with an agent that may be unhealthy or stopped return <code>false</code>. Only
+    #   			instances connected to an agent can accept task placement requests.</p>
+    #   @return [Boolean]
+    # @!attribute running_tasks_count
+    #   <p>The number of tasks on the container instance that have a desired status
+    #   				(<code>desiredStatus</code>) of <code>RUNNING</code>.</p>
+    #   @return [Integer]
+    # @!attribute pending_tasks_count
+    #   <p>The number of tasks on the container instance that are in the <code>PENDING</code>
+    #   			status.</p>
+    #   @return [Integer]
+    # @!attribute agent_update_status
+    #   <p>The status of the most recent agent update. If an update wasn't ever requested, this
+    #   			value is <code>NULL</code>.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>The attributes set for the container instance, either by the Amazon ECS container agent at
+    #   			instance registration or manually with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html">PutAttributes</a>
+    #   			operation.</p>
+    #   @return [Array<Types::Attribute>]
+    # @!attribute registered_at
+    #   <p>The Unix timestamp for the time when the container instance was registered.</p>
+    #   @return [Time]
+    # @!attribute attachments
+    #   <p>The resources attached to a container instance, such as an elastic network
+    #   			interface.</p>
+    #   @return [Array<Types::Attachment>]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the container instance to help you categorize and
+    #   			organize them. Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute health_status
+    #   <p>An object representing the health status of the container instance.</p>
+    #   @return [Types::ContainerInstanceHealthStatus]
+    class ContainerInstance < Struct.new(
+      :container_instance_arn,
+      :ec2_instance_id,
+      :capacity_provider_name,
+      :version,
+      :version_info,
+      :remaining_resources,
+      :registered_resources,
+      :status,
+      :status_reason,
+      :agent_connected,
+      :running_tasks_count,
+      :pending_tasks_count,
+      :agent_update_status,
+      :attributes,
+      :registered_at,
+      :attachments,
+      :tags,
+      :health_status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:version] = 0 unless options.key?(:version)
+        options[:agent_connected] = false unless options.key?(:agent_connected)
+        options[:running_tasks_count] = 0 unless options.key?(:running_tasks_count)
+        options[:pending_tasks_count] = 0 unless options.key?(:pending_tasks_count)
+        super
+      end
+    end
+
+    module ContainerInstanceField
+      TAGS = 'TAGS'
+      CONTAINER_INSTANCE_HEALTH = 'CONTAINER_INSTANCE_HEALTH'
+    end
+
+    # <p>An object representing the health status of the container instance.</p>
+    # @!attribute overall_status
+    #   <p>The overall health status of the container instance. This is an aggregate status of
+    #   			all container instance health checks.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>An array of objects representing the details of the container instance health
+    #   			status.</p>
+    #   @return [Array<Types::InstanceHealthCheckResult>]
+    class ContainerInstanceHealthStatus < Struct.new(
+      :overall_status,
+      :details,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ContainerInstanceStatus
+      ACTIVE = 'ACTIVE'
+      DRAINING = 'DRAINING'
+      REGISTERING = 'REGISTERING'
+      DEREGISTERING = 'DEREGISTERING'
+      REGISTRATION_FAILED = 'REGISTRATION_FAILED'
+    end
+
+    # <p>The overrides that are sent to a container. An empty container override can be passed
+    # 			in. An example of an empty container override is <code>{"containerOverrides": [ ]
+    # 				}</code>. If a non-empty container override is specified, the <code>name</code>
+    # 			parameter must be included.</p>
+    #          <p>You can use Secrets Manager or Amazon Web Services Systems Manager Parameter Store to store the
+    # 			sensitive data. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/secrets-envvar.html">Retrieve secrets through
+    # 				environment variables</a> in the Amazon ECS Developer Guide.</p>
+    # @!attribute name
+    #   <p>The name of the container that receives the override. This parameter is required if
+    #   			any override is specified.</p>
+    #   @return [String]
+    # @!attribute command
+    #   <p>The command to send to the container that overrides the default command from the
+    #   			Docker image or the task definition. You must also specify a container name.</p>
+    #   @return [Array<String>]
+    # @!attribute environment
+    #   <p>The environment variables to send to the container. You can add new environment
+    #   			variables, which are added to the container at launch, or you can override the existing
+    #   			environment variables from the Docker image or the task definition. You must also
+    #   			specify a container name.</p>
+    #   @return [Array<Types::KeyValuePair>]
+    # @!attribute environment_files
+    #   <p>A list of files containing the environment variables to pass to a container, instead
+    #   			of the value from the container definition.</p>
+    #   @return [Array<Types::EnvironmentFile>]
+    # @!attribute cpu
+    #   <p>The number of <code>cpu</code> units reserved for the container, instead of the
+    #   			default value from the task definition. You must also specify a container name.</p>
+    #   @return [Integer]
+    # @!attribute memory
+    #   <p>The hard limit (in MiB) of memory to present to the container, instead of the default
+    #   			value from the task definition. If your container attempts to exceed the memory
+    #   			specified here, the container is killed. You must also specify a container name.</p>
+    #   @return [Integer]
+    # @!attribute memory_reservation
+    #   <p>The soft limit (in MiB) of memory to reserve for the container, instead of the default
+    #   			value from the task definition. You must also specify a container name.</p>
+    #   @return [Integer]
+    # @!attribute resource_requirements
+    #   <p>The type and amount of a resource to assign to a container, instead of the default
+    #   			value from the task definition. The only supported resource is a GPU.</p>
+    #   @return [Array<Types::ResourceRequirement>]
+    class ContainerOverride < Struct.new(
+      :name,
+      :command,
+      :environment,
+      :environment_files,
+      :cpu,
+      :memory,
+      :memory_reservation,
+      :resource_requirements,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>You can enable a restart policy for each container defined in your task definition, to
+    # 			overcome transient failures faster and maintain task availability. When you enable a
+    # 			restart policy for a container, Amazon ECS can restart the container if it exits, without
+    # 			needing to replace the task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html">Restart
+    # 				individual containers in Amazon ECS tasks with container restart policies</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether a restart policy is enabled for the container.</p>
+    #   @return [Boolean]
+    # @!attribute ignored_exit_codes
+    #   <p>A list of exit codes that Amazon ECS will ignore and not attempt a restart on. You can
+    #   			specify a maximum of 50 container exit codes. By default, Amazon ECS does not ignore any exit
+    #   			codes.</p>
+    #   @return [Array<Integer>]
+    # @!attribute restart_attempt_period
+    #   <p>A period of time (in seconds) that the container must run for before a restart can be
+    #   			attempted. A container can be restarted only once every
+    #   				<code>restartAttemptPeriod</code> seconds. If a container isn't able to run for this
+    #   			time period and exits early, it will not be restarted. You can set a minimum
+    #   				<code>restartAttemptPeriod</code> of 60 seconds and a maximum
+    #   				<code>restartAttemptPeriod</code> of 1800 seconds. By default, a container must run
+    #   			for 300 seconds before it can be restarted.</p>
+    #   @return [Integer]
+    class ContainerRestartPolicy < Struct.new(
+      :enabled,
+      :ignored_exit_codes,
+      :restart_attempt_period,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents a change in state for a container.</p>
+    # @!attribute container_name
+    #   <p>The name of the container.</p>
+    #   @return [String]
+    # @!attribute image_digest
+    #   <p>The container image SHA 256 digest.</p>
+    #   @return [String]
+    # @!attribute runtime_id
+    #   <p>The ID of the Docker container.</p>
+    #   @return [String]
+    # @!attribute exit_code
+    #   <p>The exit code for the container, if the state change is a result of the container
+    #   			exiting.</p>
+    #   @return [Integer]
+    # @!attribute network_bindings
+    #   <p>Any network bindings that are associated with the container.</p>
+    #   @return [Array<Types::NetworkBinding>]
+    # @!attribute reason
+    #   <p>The reason for the state change.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the container.</p>
+    #   @return [String]
+    class ContainerStateChange < Struct.new(
+      :container_name,
+      :image_digest,
+      :runtime_id,
+      :exit_code,
+      :network_bindings,
+      :reason,
+      :status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the capacity provider. Up to 255 characters are allowed. They include
+    #   			letters (both upper and lowercase letters), numbers, underscores (_), and hyphens (-).
+    #   			The name can't be prefixed with "<code>aws</code>", "<code>ecs</code>", or
+    #   				"<code>fargate</code>".</p>
+    #   @return [String]
+    # @!attribute auto_scaling_group_provider
+    #   <p>The details of the Auto Scaling group for the capacity provider.</p>
+    #   @return [Types::AutoScalingGroupProvider]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the capacity provider to categorize and organize them
+    #   			more conveniently. Each tag consists of a key and an optional value. You define both of
+    #   			them.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class CreateCapacityProviderRequest < Struct.new(
+      :name,
+      :auto_scaling_group_provider,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_provider
+    #   <p>The full description of the new capacity provider.</p>
+    #   @return [Types::CapacityProvider]
+    class CreateCapacityProviderResponse < Struct.new(
+      :capacity_provider,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster. If you don't specify a name for your cluster, you create a
+    #   			cluster that's named <code>default</code>. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. </p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the cluster to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute settings
+    #   <p>The setting to use when creating a cluster. This parameter is used to turn on CloudWatch
+    #   			Container Insights for a cluster. If this value is specified, it overrides the
+    #   				<code>containerInsights</code> value set with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html">PutAccountSetting</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html">PutAccountSettingDefault</a>.</p>
+    #   @return [Array<Types::ClusterSetting>]
+    # @!attribute configuration
+    #   <p>The <code>execute</code> command configuration for the cluster.</p>
+    #   @return [Types::ClusterConfiguration]
+    # @!attribute capacity_providers
+    #   <p>The short name of one or more capacity providers to associate with the cluster. A
+    #   			capacity provider must be associated with a cluster before it can be included as part of
+    #   			the default capacity provider strategy of the cluster or used in a capacity provider
+    #   			strategy when calling the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a> or
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html">RunTask</a> actions.</p>
+    #            <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+    #   			provider must be created but not associated with another cluster. New Auto Scaling group
+    #   			capacity providers can be created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html">CreateCapacityProvider</a> API operation.</p>
+    #            <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or
+    #   				<code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are
+    #   			available to all accounts and only need to be associated with a cluster to be
+    #   			used.</p>
+    #            <p>The <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html">PutCapacityProvider</a> API operation is used to update the list of available
+    #   			capacity providers for a cluster after the cluster is created.</p>
+    #   @return [Array<String>]
+    # @!attribute default_capacity_provider_strategy
+    #   <p>The capacity provider strategy to set as the default for the cluster. After a default
+    #   			capacity provider strategy is set for a cluster, when you call the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html">RunTask</a> APIs with no
+    #   			capacity provider strategy or launch type specified, the default capacity provider
+    #   			strategy for the cluster is used.</p>
+    #            <p>If a default capacity provider strategy isn't defined for a cluster when it was
+    #   			created, it can be defined later with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API operation.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute service_connect_defaults
+    #   <p>Use this parameter to set a default Service Connect namespace. After you set a default 
+    #   	Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as
+    #   	client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to
+    #   	<code>true</code> in the <code>ServiceConnectConfiguration</code>.
+    #   	You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default
+    #   	parameter.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ClusterServiceConnectDefaultsRequest]
+    class CreateClusterRequest < Struct.new(
+      :cluster_name,
+      :tags,
+      :settings,
+      :configuration,
+      :capacity_providers,
+      :default_capacity_provider_strategy,
+      :service_connect_defaults,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The full description of your new cluster.</p>
+    #   @return [Types::Cluster]
+    class CreateClusterResponse < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute service_name
+    #   <p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within
+    #   			a cluster, but you can have similarly named services in multiple clusters within a
+    #   			Region or across multiple Regions.</p>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full ARN of the task definition to run in your service. If a <code>revision</code>
+    #   			isn't specified, the latest <code>ACTIVE</code> revision is used.</p>
+    #            <p>A task definition must be specified if the service uses either the <code>ECS</code> or
+    #   				<code>CODE_DEPLOY</code> deployment controllers.</p>
+    #            <p>For more information about deployment types, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS deployment
+    #   				types</a>.</p>
+    #   @return [String]
+    # @!attribute availability_zone_rebalancing
+    #   <p>Indicates whether to use Availability Zone rebalancing for the service.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html">Balancing an Amazon ECS service across Availability Zones</a> in
+    #   			the <i>
+    #                  <i>Amazon Elastic Container Service Developer Guide</i>
+    #               </i>.</p>
+    #   @return [String]
+    # @!attribute load_balancers
+    #   <p>A load balancer object representing the load balancers to use with your service. For
+    #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>If the service uses the rolling update (<code>ECS</code>) deployment controller and
+    #   			using either an Application Load Balancer or Network Load Balancer, you must specify one or more target group ARNs to attach
+    #   			to the service. The service-linked role is required for services that use multiple
+    #   			target groups. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using service-linked roles for Amazon ECS</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>If the service uses the <code>CODE_DEPLOY</code> deployment controller, the service is
+    #   			required to use either an Application Load Balancer or Network Load Balancer. When creating an CodeDeploy deployment group, you
+    #   			specify two target groups (referred to as a <code>targetGroupPair</code>). During a
+    #   			deployment, CodeDeploy determines which task set in your service has the status
+    #   				<code>PRIMARY</code>, and it associates one target group with it. Then, it also
+    #   			associates the other target group with the replacement task set. The load balancer can
+    #   			also have up to two listeners: a required listener for production traffic and an
+    #   			optional listener that you can use to perform validation tests with Lambda functions
+    #   			before routing production traffic to it.</p>
+    #            <p>If you use the <code>CODE_DEPLOY</code> deployment controller, these values can be
+    #   			changed when updating the service.</p>
+    #            <p>For Application Load Balancers and Network Load Balancers, this object must contain the load balancer target group ARN,
+    #   			the container name, and the container port to access from the load balancer. The
+    #   			container name must be as it appears in a container definition. The load balancer name
+    #   			parameter must be omitted. When a task from this service is placed on a container
+    #   			instance, the container instance and port combination is registered as a target in the
+    #   			target group that's specified here.</p>
+    #            <p>For Classic Load Balancers, this object must contain the load balancer name, the container name , and
+    #   			the container port to access from the load balancer. The container name must be as it
+    #   			appears in a container definition. The target group ARN parameter must be omitted.
+    #   			When a task from this service is placed on a container instance, the container instance
+    #   			is registered with the load balancer that's specified here.</p>
+    #            <p>Services with tasks that use the <code>awsvpc</code> network mode (for example, those
+    #   			with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers
+    #   			aren't supported. Also, when you create any target groups for these services, you must
+    #   			choose <code>ip</code> as the target type, not <code>instance</code>. This is because
+    #   			tasks that use the <code>awsvpc</code> network mode are associated with an elastic
+    #   			network interface, not an Amazon EC2 instance.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute service_registries
+    #   <p>The details of the service discovery registry to associate with this service. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+    #   				discovery</a>.</p>
+    #            <note>
+    #               <p>Each service may be associated with one service registry. Multiple service
+    #   				registries for each service isn't supported.</p>
+    #            </note>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute desired_count
+    #   <p>The number of instantiations of the specified task definition to place and keep
+    #   			running in your service.</p>
+    #            <p>This is required if <code>schedulingStrategy</code> is <code>REPLICA</code> or isn't
+    #   			specified. If <code>schedulingStrategy</code> is <code>DAEMON</code> then this isn't
+    #   			required.</p>
+    #   @return [Integer]
+    # @!attribute client_token
+    #   <p>An identifier that you provide to ensure the idempotency of the request. It must be
+    #   			unique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.</p>
+    #   @return [String]
+    # @!attribute launch_type
+    #   <p>The infrastructure that you run your service on. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The <code>FARGATE</code> launch type runs your tasks on Fargate On-Demand
+    #   			infrastructure.</p>
+    #            <note>
+    #               <p>Fargate Spot infrastructure is available for use but a capacity provider
+    #   				strategy must be used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html">Fargate capacity providers</a> in the <i>Amazon ECS
+    #   					Developer Guide</i>.</p>
+    #            </note>
+    #            <p>The <code>EC2</code> launch type runs your tasks on Amazon EC2 instances registered to your
+    #   			cluster.</p>
+    #            <p>The <code>EXTERNAL</code> launch type runs your tasks on your on-premises server or
+    #   			virtual machine (VM) capacity registered to your cluster.</p>
+    #            <p>A service can use either a launch type or a capacity provider strategy. If a
+    #   				<code>launchType</code> is specified, the <code>capacityProviderStrategy</code>
+    #   			parameter must be omitted.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy to use for the service.</p>
+    #            <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>
+    #   			parameter must be omitted. If no <code>capacityProviderStrategy</code> or
+    #   				<code>launchType</code> is specified, the
+    #   				<code>defaultCapacityProviderStrategy</code> for the cluster is used.</p>
+    #            <p>A capacity provider strategy can contain a maximum of 20 capacity providers.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute platform_version
+    #   <p>The platform version that your tasks in the service are running on. A platform version
+    #   			is specified only for tasks using the Fargate launch type. If one isn't
+    #   			specified, the <code>LATEST</code> platform version is used. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate platform
+    #   				versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute role
+    #   <p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your
+    #   			load balancer on your behalf. This parameter is only permitted if you are using a load
+    #   			balancer with your service and your task definition doesn't use the <code>awsvpc</code>
+    #   			network mode. If you specify the <code>role</code> parameter, you must also specify a
+    #   			load balancer object with the <code>loadBalancers</code> parameter.</p>
+    #            <important>
+    #               <p>If your account has already created the Amazon ECS service-linked role, that role is
+    #   				used for your service unless you specify a role here. The service-linked role is
+    #   				required if your task definition uses the <code>awsvpc</code> network mode or if the
+    #   				service is configured to use service discovery, an external deployment controller,
+    #   				multiple target groups, or Elastic Inference accelerators in which case you don't
+    #   				specify a role here. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using
+    #   					service-linked roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            </important>
+    #            <p>If your specified role has a path other than <code>/</code>, then you must either
+    #   			specify the full role ARN (this is recommended) or prefix the role name with the path.
+    #   			For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code>
+    #   			then you would specify <code>/foo/bar</code> as the role name. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly names and paths</a> in the <i>IAM User
+    #   			Guide</i>.</p>
+    #   @return [String]
+    # @!attribute deployment_configuration
+    #   <p>Optional deployment parameters that control how many tasks run during the deployment
+    #   			and the ordering of stopping and starting tasks.</p>
+    #   @return [Types::DeploymentConfiguration]
+    # @!attribute placement_constraints
+    #   <p>An array of placement constraint objects to use for tasks in your service. You can
+    #   			specify a maximum of 10 constraints for each task. This limit includes constraints in
+    #   			the task definition and those specified at runtime.</p>
+    #   @return [Array<Types::PlacementConstraint>]
+    # @!attribute placement_strategy
+    #   <p>The placement strategy objects to use for tasks in your service. You can specify a
+    #   			maximum of 5 strategy rules for each service.</p>
+    #   @return [Array<Types::PlacementStrategy>]
+    # @!attribute network_configuration
+    #   <p>The network configuration for the service. This parameter is required for task
+    #   			definitions that use the <code>awsvpc</code> network mode to receive their own elastic
+    #   			network interface, and it isn't supported for other network modes. For more information,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task networking</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute health_check_grace_period_seconds
+    #   <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy
+    #   			Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't
+    #   			specify a health check grace period value, the default value of <code>0</code> is used.
+    #   			If you don't use any of the health checks, then
+    #   				<code>healthCheckGracePeriodSeconds</code> is unused.</p>
+    #            <p>If your service's tasks take a while to start and respond to health checks, you can
+    #   			specify a health check grace period of up to 2,147,483,647 seconds (about 69 years).
+    #   			During that time, the Amazon ECS service scheduler ignores health check status. This grace
+    #   			period can prevent the service scheduler from marking tasks as unhealthy and stopping
+    #   			them before they have time to come up.</p>
+    #   @return [Integer]
+    # @!attribute scheduling_strategy
+    #   <p>The scheduling strategy to use for the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p>
+    #            <p>There are two service scheduler strategies available:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>REPLICA</code>-The replica scheduling strategy places and
+    #   					maintains the desired number of tasks across your cluster. By default, the
+    #   					service scheduler spreads tasks across Availability Zones. You can use task
+    #   					placement strategies and constraints to customize task placement decisions. This
+    #   					scheduler strategy is required if the service uses the <code>CODE_DEPLOY</code>
+    #   					or <code>EXTERNAL</code> deployment controller types.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DAEMON</code>-The daemon scheduling strategy deploys exactly one
+    #   					task on each active container instance that meets all of the task placement
+    #   					constraints that you specify in your cluster. The service scheduler also
+    #   					evaluates the task placement constraints for running tasks and will stop tasks
+    #   					that don't meet the placement constraints. When you're using this strategy, you
+    #   					don't need to specify a desired number of tasks, a task placement strategy, or
+    #   					use Service Auto Scaling policies.</p>
+    #                  <note>
+    #                     <p>Tasks using the Fargate launch type or the
+    #   							<code>CODE_DEPLOY</code> or <code>EXTERNAL</code> deployment controller
+    #   						types don't support the <code>DAEMON</code> scheduling strategy.</p>
+    #                  </note>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute deployment_controller
+    #   <p>The deployment controller to use for the service. If no deployment controller is
+    #   			specified, the default value of <code>ECS</code> is used.</p>
+    #   @return [Types::DeploymentController]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the service to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value, both of which you define. When a
+    #   			service is deleted, the tags are deleted as well.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute enable_ecs_managed_tags
+    #   <p>Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For
+    #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging your Amazon ECS
+    #   				resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>When you use Amazon ECS managed tags, you must set the <code>propagateTags</code>
+    #   			request parameter.</p>
+    #   @return [Boolean]
+    # @!attribute propagate_tags
+    #   <p>Specifies whether to propagate the tags from the task definition to the task. If no
+    #   			value is specified, the tags aren't propagated. Tags can only be propagated to the task
+    #   			during task creation. To add tags to a task after task creation, use the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html">TagResource</a> API action.</p>
+    #            <p>You must set this to a value other than <code>NONE</code> when you use Cost Explorer.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html">Amazon ECS usage reports</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The default is <code>NONE</code>.</p>
+    #   @return [String]
+    # @!attribute enable_execute_command
+    #   <p>Determines whether the execute command functionality is turned on for the service. If
+    #   				<code>true</code>, this enables execute command functionality on all containers in
+    #   			the service tasks.</p>
+    #   @return [Boolean]
+    # @!attribute service_connect_configuration
+    #   <p>The configuration for this service to discover and connect to
+    #   	services, and be discovered by, and connected from, other services within a namespace.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ServiceConnectConfiguration]
+    # @!attribute volume_configurations
+    #   <p>The configuration for a volume specified in the task definition as a volume that is
+    #   			configured at launch time. Currently, the only supported volume type is an Amazon EBS
+    #   			volume.</p>
+    #   @return [Array<Types::ServiceVolumeConfiguration>]
+    # @!attribute vpc_lattice_configurations
+    #   <p>The VPC Lattice configuration for the service being created.</p>
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    class CreateServiceRequest < Struct.new(
+      :cluster,
+      :service_name,
+      :task_definition,
+      :availability_zone_rebalancing,
+      :load_balancers,
+      :service_registries,
+      :desired_count,
+      :client_token,
+      :launch_type,
+      :capacity_provider_strategy,
+      :platform_version,
+      :role,
+      :deployment_configuration,
+      :placement_constraints,
+      :placement_strategy,
+      :network_configuration,
+      :health_check_grace_period_seconds,
+      :scheduling_strategy,
+      :deployment_controller,
+      :tags,
+      :enable_ecs_managed_tags,
+      :propagate_tags,
+      :enable_execute_command,
+      :service_connect_configuration,
+      :volume_configurations,
+      :vpc_lattice_configurations,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The full description of your service following the create call.</p>
+    #            <p>A service will return either a <code>capacityProviderStrategy</code> or
+    #   				<code>launchType</code> parameter, but not both, depending where one was specified
+    #   			when it was created.</p>
+    #            <p>If a service is using the <code>ECS</code> deployment controller, the
+    #   				<code>deploymentController</code> and <code>taskSets</code> parameters will not be
+    #   			returned.</p>
+    #            <p>if the service uses the <code>CODE_DEPLOY</code> deployment controller, the
+    #   				<code>deploymentController</code>, <code>taskSets</code> and
+    #   				<code>deployments</code> parameters will be returned, however the
+    #   				<code>deployments</code> parameter will be an empty list.</p>
+    #   @return [Types::Service]
+    class CreateServiceResponse < Struct.new(
+      :service,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The short name or full Amazon Resource Name (ARN) of the service to create the task set in.</p>
+    #   @return [String]
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the
+    #   			task set in.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>An optional non-unique tag that identifies this task set in external systems. If the
+    #   			task set is associated with a service discovery registry, the tasks in this task set
+    #   			will have the <code>ECS_TASK_SET_EXTERNAL_ID</code> Cloud Map attribute set to the provided
+    #   			value.</p>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The task definition for the tasks in the task set to use. If a revision isn't
+    #   			specified, the latest <code>ACTIVE</code> revision is used.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>An object representing the network configuration for a task set.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute load_balancers
+    #   <p>A load balancer object representing the load balancer to use with the task set. The
+    #   			supported load balancer types are either an Application Load Balancer or a Network Load Balancer.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute service_registries
+    #   <p>The details of the service discovery registries to assign to this task set. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+    #   				discovery</a>.</p>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute launch_type
+    #   <p>The launch type that new tasks in the task set uses. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code>
+    #   			parameter must be omitted.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy to use for the task set.</p>
+    #            <p>A capacity provider strategy consists of one or more capacity providers along with the
+    #   				<code>base</code> and <code>weight</code> to assign to them. A capacity provider
+    #   			must be associated with the cluster to be used in a capacity provider strategy. The
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API is used to associate a capacity provider
+    #   			with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+    #   				<code>UPDATING</code> status can be used.</p>
+    #            <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>
+    #   			parameter must be omitted. If no <code>capacityProviderStrategy</code> or
+    #   				<code>launchType</code> is specified, the
+    #   				<code>defaultCapacityProviderStrategy</code> for the cluster is used.</p>
+    #            <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+    #   			provider must already be created. New capacity providers can be created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProviderProvider.html">CreateCapacityProviderProvider</a>API operation.</p>
+    #            <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or
+    #   				<code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are
+    #   			available to all accounts and only need to be associated with a cluster to be
+    #   			used.</p>
+    #            <p>The <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API operation is used to update the list of
+    #   			available capacity providers for a cluster after the cluster is created.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute platform_version
+    #   <p>The platform version that the tasks in the task set uses. A platform version is
+    #   			specified only for tasks using the Fargate launch type. If one isn't
+    #   			specified, the <code>LATEST</code> platform version is used.</p>
+    #   @return [String]
+    # @!attribute scale
+    #   <p>A floating-point percentage of the desired number of tasks to place and keep running
+    #   			in the task set.</p>
+    #   @return [Types::Scale]
+    # @!attribute client_token
+    #   <p>An identifier that you provide to ensure the idempotency of the request. It must be
+    #   			unique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task set to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value. You define both. When a service is
+    #   			deleted, the tags are deleted.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class CreateTaskSetRequest < Struct.new(
+      :service,
+      :cluster,
+      :external_id,
+      :task_definition,
+      :network_configuration,
+      :load_balancers,
+      :service_registries,
+      :launch_type,
+      :capacity_provider_strategy,
+      :platform_version,
+      :scale,
+      :client_token,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_set
+    #   <p>Information about a set of Amazon ECS tasks in either an CodeDeploy or an
+    #   				<code>EXTERNAL</code> deployment. A task set includes details such as the desired
+    #   			number of tasks, how many tasks are running, and whether the task set serves production
+    #   			traffic.</p>
+    #   @return [Types::TaskSet]
+    class CreateTaskSetResponse < Struct.new(
+      :task_set,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The optional filter to narrow the <code>ListServiceDeployment</code> results.</p>
+    #          <p> If you do not specify a value, service deployments that were created before the
+    # 			current time are included in the result.</p>
+    # @!attribute before
+    #   <p>Include service deployments in the result that were created before this time. The
+    #   			format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute after
+    #   <p>Include service deployments in the result that were created after this time. The
+    #   			format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    class CreatedAt < Struct.new(
+      :before,
+      :after,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The resource name to disable the account setting for. If
+    #   				<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is
+    #   			affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for
+    #   			your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is
+    #   			specified, the ARN and resource ID for your Amazon ECS container instances is affected. If
+    #   				<code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container
+    #   			instances is affected.</p>
+    #   @return [String]
+    # @!attribute principal_arn
+    #   <p>The Amazon Resource Name (ARN) of the principal. It can be a user, role, or the
+    #   			root user. If you specify the root user, it disables the account setting for all users, roles,
+    #   			and the root user of the account unless a user or role explicitly overrides these settings.
+    #   			If this field is omitted, the setting is changed only for the authenticated user.</p>
+    #            <p>In order to use this parameter, you must be the root user, or the principal.</p>
+    #   @return [String]
+    class DeleteAccountSettingRequest < Struct.new(
+      :name,
+      :principal_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute setting
+    #   <p>The account setting for the specified principal ARN.</p>
+    #   @return [Types::Setting]
+    class DeleteAccountSettingResponse < Struct.new(
+      :setting,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to delete
+    #   			attributes. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>The attributes to delete from your resource. You can specify up to 10 attributes for
+    #   			each request. For custom attributes, specify the attribute name and target ID, but don't
+    #   			specify the value. If you specify the target ID using the short form, you must also
+    #   			specify the target type.</p>
+    #   @return [Array<Types::Attribute>]
+    class DeleteAttributesRequest < Struct.new(
+      :cluster,
+      :attributes,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute attributes
+    #   <p>A list of attribute objects that were successfully deleted from your resource.</p>
+    #   @return [Array<Types::Attribute>]
+    class DeleteAttributesResponse < Struct.new(
+      :attributes,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_provider
+    #   <p>The short name or full Amazon Resource Name (ARN) of the capacity provider to delete.</p>
+    #   @return [String]
+    class DeleteCapacityProviderRequest < Struct.new(
+      :capacity_provider,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_provider
+    #   <p>The details of the capacity provider.</p>
+    #   @return [Types::CapacityProvider]
+    class DeleteCapacityProviderResponse < Struct.new(
+      :capacity_provider,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to delete.</p>
+    #   @return [String]
+    class DeleteClusterRequest < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The full description of the deleted cluster.</p>
+    #   @return [Types::Cluster]
+    class DeleteClusterResponse < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to delete.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The name of the service to delete.</p>
+    #   @return [String]
+    # @!attribute force
+    #   <p>If <code>true</code>, allows you to delete a service even if it wasn't scaled down to
+    #   			zero tasks. It's only necessary to use this if the service uses the <code>REPLICA</code>
+    #   			scheduling strategy.</p>
+    #   @return [Boolean]
+    class DeleteServiceRequest < Struct.new(
+      :cluster,
+      :service,
+      :force,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The full description of the deleted service.</p>
+    #   @return [Types::Service]
+    class DeleteServiceResponse < Struct.new(
+      :service,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definitions
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full Amazon Resource Name (ARN) of the task definition to delete. You must specify a
+    #   				<code>revision</code>.</p>
+    #            <p>You can specify up to 10 task definitions as a comma separated list.</p>
+    #   @return [Array<String>]
+    class DeleteTaskDefinitionsRequest < Struct.new(
+      :task_definitions,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definitions
+    #   <p>The list of deleted task definitions.</p>
+    #   @return [Array<Types::TaskDefinition>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DeleteTaskDefinitionsResponse < Struct.new(
+      :task_definitions,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			set found in to delete.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The short name or full Amazon Resource Name (ARN) of the service that hosts the task set to
+    #   			delete.</p>
+    #   @return [String]
+    # @!attribute task_set
+    #   <p>The task set ID or full Amazon Resource Name (ARN) of the task set to delete.</p>
+    #   @return [String]
+    # @!attribute force
+    #   <p>If <code>true</code>, you can delete a task set even if it hasn't been scaled down to
+    #   			zero.</p>
+    #   @return [Boolean]
+    class DeleteTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_set,
+      :force,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_set
+    #   <p>Details about the task set.</p>
+    #   @return [Types::TaskSet]
+    class DeleteTaskSetResponse < Struct.new(
+      :task_set,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details of an Amazon ECS service deployment. This is used only when a service uses the
+    # 				<code>ECS</code> deployment controller type.</p>
+    # @!attribute id
+    #   <p>The ID of the deployment.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the deployment. The following describes each state.</p>
+    #            <dl>
+    #               <dt>PRIMARY</dt>
+    #               <dd>
+    #                  <p>The most recent deployment of a service.</p>
+    #               </dd>
+    #               <dt>ACTIVE</dt>
+    #               <dd>
+    #                  <p>A service deployment that still has running tasks, but are in the process
+    #   						of being replaced with a new <code>PRIMARY</code> deployment.</p>
+    #               </dd>
+    #               <dt>INACTIVE</dt>
+    #               <dd>
+    #                  <p>A deployment that has been completely replaced.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The most recent task definition that was specified for the tasks in the service to
+    #   			use.</p>
+    #   @return [String]
+    # @!attribute desired_count
+    #   <p>The most recent desired count of tasks that was specified for the service to deploy or
+    #   			maintain.</p>
+    #   @return [Integer]
+    # @!attribute pending_count
+    #   <p>The number of tasks in the deployment that are in the <code>PENDING</code>
+    #   			status.</p>
+    #   @return [Integer]
+    # @!attribute running_count
+    #   <p>The number of tasks in the deployment that are in the <code>RUNNING</code>
+    #   			status.</p>
+    #   @return [Integer]
+    # @!attribute failed_tasks
+    #   <p>The number of consecutively failed tasks in the deployment. A task is considered a
+    #   			failure if the service scheduler can't launch the task, the task doesn't transition to a
+    #   				<code>RUNNING</code> state, or if it fails any of its defined health checks and is
+    #   			stopped.</p>
+    #            <note>
+    #               <p>Once a service deployment has one or more successfully running tasks, the failed
+    #   				task count resets to zero and stops being evaluated.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute created_at
+    #   <p>The Unix timestamp for the time when the service deployment was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The Unix timestamp for the time when the service deployment was last updated.</p>
+    #   @return [Time]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy that the deployment is using.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute launch_type
+    #   <p>The launch type the tasks in the service are using. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute platform_version
+    #   <p>The platform version that your tasks in the service run on. A platform version is only
+    #   			specified for tasks using the Fargate launch type. If one isn't specified,
+    #   			the <code>LATEST</code> platform version is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute platform_family
+    #   <p>The operating system that your tasks in the service, or tasks are running on. A
+    #   			platform family is specified only for tasks using the Fargate launch type. </p>
+    #            <p> All tasks that run as part of this service must use the same
+    #   				<code>platformFamily</code> value as the service, for example, <code>
+    #   			LINUX.</code>.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The VPC subnet and security group configuration for tasks that receive their own
+    #               elastic network interface by using the <code>awsvpc</code> networking mode.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute rollout_state
+    #   <note>
+    #               <p>The <code>rolloutState</code> of a service is only returned for services that use
+    #   				the rolling update (<code>ECS</code>) deployment type that aren't behind a
+    #   				Classic Load Balancer.</p>
+    #            </note>
+    #            <p>The rollout state of the deployment. When a service deployment is started, it begins
+    #   			in an <code>IN_PROGRESS</code> state. When the service reaches a steady state, the
+    #   			deployment transitions to a <code>COMPLETED</code> state. If the service fails to reach
+    #   			a steady state and circuit breaker is turned on, the deployment transitions to a
+    #   				<code>FAILED</code> state. A deployment in <code>FAILED</code> state doesn't launch
+    #   			any new tasks. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentCircuitBreaker.html">DeploymentCircuitBreaker</a>.</p>
+    #   @return [String]
+    # @!attribute rollout_state_reason
+    #   <p>A description of the rollout state of a deployment.</p>
+    #   @return [String]
+    # @!attribute service_connect_configuration
+    #   <p>The details of the Service Connect configuration that's used by this deployment.
+    #   			Compare the configuration between multiple deployments when troubleshooting issues with
+    #   			new deployments.</p>
+    #            <p>The configuration for this service to discover and connect to
+    #   	services, and be discovered by, and connected from, other services within a namespace.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ServiceConnectConfiguration]
+    # @!attribute service_connect_resources
+    #   <p>The list of Service Connect resources that are associated with this deployment. Each
+    #   			list entry maps a discovery name to a Cloud Map service name.</p>
+    #   @return [Array<Types::ServiceConnectServiceResource>]
+    # @!attribute volume_configurations
+    #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
+    #   			different settings like the size, throughput, volumeType, and ecryption in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html">ServiceManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume
+    #   			must match the <code>name</code> from the task definition.</p>
+    #   @return [Array<Types::ServiceVolumeConfiguration>]
+    # @!attribute fargate_ephemeral_storage
+    #   <p>The Fargate ephemeral storage settings for the deployment.</p>
+    #   @return [Types::DeploymentEphemeralStorage]
+    # @!attribute vpc_lattice_configurations
+    #   <p>The VPC Lattice configuration for the service deployment.</p>
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    class Deployment < Struct.new(
+      :id,
+      :status,
+      :task_definition,
+      :desired_count,
+      :pending_count,
+      :running_count,
+      :failed_tasks,
+      :created_at,
+      :updated_at,
+      :capacity_provider_strategy,
+      :launch_type,
+      :platform_version,
+      :platform_family,
+      :network_configuration,
+      :rollout_state,
+      :rollout_state_reason,
+      :service_connect_configuration,
+      :service_connect_resources,
+      :volume_configurations,
+      :fargate_ephemeral_storage,
+      :vpc_lattice_configurations,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:desired_count] = 0 unless options.key?(:desired_count)
+        options[:pending_count] = 0 unless options.key?(:pending_count)
+        options[:running_count] = 0 unless options.key?(:running_count)
+        options[:failed_tasks] = 0 unless options.key?(:failed_tasks)
+        super
+      end
+    end
+
+    # <p>One of the methods which provide a way for you to quickly identify when a deployment
+    # 			has failed, and then to optionally roll back the failure to the last working
+    # 			deployment.</p>
+    #          <p>When the alarms are generated, Amazon ECS sets the service deployment to failed. Set the
+    # 			rollback parameter to have Amazon ECS to roll back your service to the last completed
+    # 			deployment after a failure.</p>
+    #          <p>You can only use the <code>DeploymentAlarms</code> method to detect failures when the
+    # 				<code>DeploymentController</code> is set to <code>ECS</code>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html">Rolling
+    # 				update</a> in the <i>
+    #                <i>Amazon Elastic Container Service Developer Guide</i>
+    #             </i>.</p>
+    # @!attribute alarm_names
+    #   <p>One or more CloudWatch alarm names. Use a "," to separate the alarms.</p>
+    #   @return [Array<String>]
+    # @!attribute rollback
+    #   <p>Determines whether to configure Amazon ECS to roll back the service if a service deployment
+    #   			fails. If rollback is used, when a service deployment fails, the service is rolled back
+    #   			to the last deployment that completed successfully.</p>
+    #   @return [Boolean]
+    # @!attribute enable
+    #   <p>Determines whether to use the CloudWatch alarm option in the service deployment
+    #   			process.</p>
+    #   @return [Boolean]
+    class DeploymentAlarms < Struct.new(
+      :alarm_names,
+      :rollback,
+      :enable,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:rollback] = false unless options.key?(:rollback)
+        options[:enable] = false unless options.key?(:enable)
+        super
+      end
+    end
+
+    # <note>
+    #             <p>The deployment circuit breaker can only be used for services using the rolling
+    # 				update (<code>ECS</code>) deployment type.</p>
+    #          </note>
+    #          <p>The <b>deployment circuit breaker</b> determines whether a
+    # 			service deployment will fail if the service can't reach a steady state. If it is turned
+    # 			on, a service deployment will transition to a failed state and stop launching new tasks.
+    # 			You can also configure Amazon ECS to roll back your service to the last completed deployment
+    # 			after a failure. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html">Rolling
+    # 				update</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <p>For more information about API failure reasons, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html">API failure
+    # 				reasons</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute enable
+    #   <p>Determines whether to use the deployment circuit breaker logic for the service.</p>
+    #   @return [Boolean]
+    # @!attribute rollback
+    #   <p>Determines whether to configure Amazon ECS to roll back the service if a service deployment
+    #   			fails. If rollback is on, when a service deployment fails, the service is rolled back to
+    #   			the last deployment that completed successfully.</p>
+    #   @return [Boolean]
+    class DeploymentCircuitBreaker < Struct.new(
+      :enable,
+      :rollback,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enable] = false unless options.key?(:enable)
+        options[:rollback] = false unless options.key?(:rollback)
+        super
+      end
+    end
+
+    # <p>Optional deployment parameters that control how many tasks run during a deployment and
+    # 			the ordering of stopping and starting tasks.</p>
+    # @!attribute deployment_circuit_breaker
+    #   <note>
+    #               <p>The deployment circuit breaker can only be used for services using the rolling
+    #   				update (<code>ECS</code>) deployment type.</p>
+    #            </note>
+    #            <p>The <b>deployment circuit breaker</b> determines whether a
+    #   			service deployment will fail if the service can't reach a steady state. If you use the
+    #   			deployment circuit breaker, a service deployment will transition to a failed state and
+    #   			stop launching new tasks. If you use the rollback option, when a service deployment
+    #   			fails, the service is rolled back to the last deployment that completed successfully.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html">Rolling
+    #   				update</a> in the <i>Amazon Elastic Container Service Developer
+    #   				Guide</i>
+    #            </p>
+    #   @return [Types::DeploymentCircuitBreaker]
+    # @!attribute maximum_percent
+    #   <p>If a service is using the rolling update (<code>ECS</code>) deployment type, the
+    #   				<code>maximumPercent</code> parameter represents an upper limit on the number of
+    #   			your service's tasks that are allowed in the <code>RUNNING</code> or
+    #   				<code>PENDING</code> state during a deployment, as a percentage of the
+    #   				<code>desiredCount</code> (rounded down to the nearest integer). This parameter
+    #   			enables you to define the deployment batch size. For example, if your service is using
+    #   			the <code>REPLICA</code> service scheduler and has a <code>desiredCount</code> of four
+    #   			tasks and a <code>maximumPercent</code> value of 200%, the scheduler may start four new
+    #   			tasks before stopping the four older tasks (provided that the cluster resources required
+    #   			to do this are available). The default <code>maximumPercent</code> value for a service
+    #   			using the <code>REPLICA</code> service scheduler is 200%.</p>
+    #            <p>The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting
+    #   			replacement tasks first and then stopping the unhealthy tasks, as long as cluster
+    #   			resources for starting replacement tasks are available. For more information about how
+    #   			the scheduler replaces unhealthy tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Amazon ECS
+    #   			services</a>.</p>
+    #            <p>If a service is using either the blue/green (<code>CODE_DEPLOY</code>) or
+    #   				<code>EXTERNAL</code> deployment types, and tasks in the service use the
+    #   			EC2 launch type, the <b>maximum percent</b>
+    #   			value is set to the default value. The <b>maximum percent</b>
+    #   			value is used to define the upper limit on the number of the tasks in the service that
+    #   			remain in the <code>RUNNING</code> state while the container instances are in the
+    #   				<code>DRAINING</code> state.</p>
+    #            <note>
+    #               <p>You can't specify a custom <code>maximumPercent</code> value for a service that
+    #   				uses either the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code>
+    #   				deployment types and has tasks that use the EC2 launch type.</p>
+    #            </note>
+    #            <p>If the service uses either the blue/green (<code>CODE_DEPLOY</code>) or
+    #   				<code>EXTERNAL</code> deployment types, and the tasks in the service use the
+    #   			Fargate launch type, the maximum percent value is not used. The value is
+    #   			still returned when describing your service.</p>
+    #   @return [Integer]
+    # @!attribute minimum_healthy_percent
+    #   <p>If a service is using the rolling update (<code>ECS</code>) deployment type, the
+    #   				<code>minimumHealthyPercent</code> represents a lower limit on the number of your
+    #   			service's tasks that must remain in the <code>RUNNING</code> state during a deployment,
+    #   			as a percentage of the <code>desiredCount</code> (rounded up to the nearest integer).
+    #   			This parameter enables you to deploy without using additional cluster capacity. For
+    #   			example, if your service has a <code>desiredCount</code> of four tasks and a
+    #   				<code>minimumHealthyPercent</code> of 50%, the service scheduler may stop two
+    #   			existing tasks to free up cluster capacity before starting two new tasks. </p>
+    #            <p> If any tasks are unhealthy and if <code>maximumPercent</code> doesn't allow the Amazon ECS
+    #   			scheduler to start replacement tasks, the scheduler stops the unhealthy tasks one-by-one
+    #   			— using the <code>minimumHealthyPercent</code> as a constraint — to clear up capacity to
+    #   			launch replacement tasks. For more information about how the scheduler replaces
+    #   			unhealthy tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Amazon ECS services</a> . </p>
+    #            <p>For services that <i>do not</i> use a load balancer, the following
+    #   			should be noted:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>A service is considered healthy if all essential containers within the tasks
+    #   					in the service pass their health checks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If a task has no essential containers with a health check defined, the service
+    #   					scheduler will wait for 40 seconds after a task reaches a <code>RUNNING</code>
+    #   					state before the task is counted towards the minimum healthy percent
+    #   					total.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If a task has one or more essential containers with a health check defined,
+    #   					the service scheduler will wait for the task to reach a healthy status before
+    #   					counting it towards the minimum healthy percent total. A task is considered
+    #   					healthy when all essential containers within the task have passed their health
+    #   					checks. The amount of time the service scheduler can wait for is determined by
+    #   					the container health check settings. </p>
+    #               </li>
+    #            </ul>
+    #            <p>For services that <i>do</i> use a load balancer, the following should be
+    #   			noted:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If a task has no essential containers with a health check defined, the service
+    #   					scheduler will wait for the load balancer target group health check to return a
+    #   					healthy status before counting the task towards the minimum healthy percent
+    #   					total.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If a task has an essential container with a health check defined, the service
+    #   					scheduler will wait for both the task to reach a healthy status and the load
+    #   					balancer target group health check to return a healthy status before counting
+    #   					the task towards the minimum healthy percent total.</p>
+    #               </li>
+    #            </ul>
+    #            <p>The default value for a replica service for <code>minimumHealthyPercent</code> is
+    #   			100%. The default <code>minimumHealthyPercent</code> value for a service using the
+    #   				<code>DAEMON</code> service schedule is 0% for the CLI, the Amazon Web Services SDKs, and the
+    #   			APIs and 50% for the Amazon Web Services Management Console.</p>
+    #            <p>The minimum number of healthy tasks during a deployment is the
+    #   				<code>desiredCount</code> multiplied by the <code>minimumHealthyPercent</code>/100,
+    #   			rounded up to the nearest integer value.</p>
+    #            <p>If a service is using either the blue/green (<code>CODE_DEPLOY</code>) or
+    #   				<code>EXTERNAL</code> deployment types and is running tasks that use the
+    #   			EC2 launch type, the <b>minimum healthy
+    #   				percent</b> value is set to the default value. The <b>minimum healthy percent</b> value is used to define the lower limit on the
+    #   			number of the tasks in the service that remain in the <code>RUNNING</code> state while
+    #   			the container instances are in the <code>DRAINING</code> state.</p>
+    #            <note>
+    #               <p>You can't specify a custom <code>minimumHealthyPercent</code> value for a service
+    #   				that uses either the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code>
+    #   				deployment types and has tasks that use the EC2 launch type.</p>
+    #            </note>
+    #            <p>If a service is using either the blue/green (<code>CODE_DEPLOY</code>) or
+    #   				<code>EXTERNAL</code> deployment types and is running tasks that use the
+    #   			Fargate launch type, the minimum healthy percent value is not used,
+    #   			although it is returned when describing your service.</p>
+    #   @return [Integer]
+    # @!attribute alarms
+    #   <p>Information about the CloudWatch alarms.</p>
+    #   @return [Types::DeploymentAlarms]
+    # @!attribute strategy
+    #   <p>The deployment strategy for the service. Choose from these valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ROLLING</code> - When you create a service which uses the rolling update
+    #                     (<code>ROLLING</code>) deployment strategy, the Amazon ECS service scheduler replaces
+    #                  the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or
+    #                  removes from the service during a rolling update is controlled by the service
+    #                  deployment configuration.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BLUE_GREEN</code> - A blue/green deployment strategy
+    #                     (<code>BLUE_GREEN</code>) is a release methodology that reduces downtime and risk
+    #                  by running two identical production environments called blue and green. With Amazon ECS
+    #                  blue/green deployments, you can validate new service revisions before directing
+    #                  production traffic to them. This approach provides a safer way to deploy changes with
+    #                  the ability to quickly roll back if needed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute bake_time_in_minutes
+    #   <p>The time period when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p>
+    #            <p>You must provide this parameter when you use the <code>BLUE_GREEN</code> deployment
+    #            strategy.</p>
+    #   @return [Integer]
+    # @!attribute lifecycle_hooks
+    #   <p>An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.</p>
+    #   @return [Array<Types::DeploymentLifecycleHook>]
+    class DeploymentConfiguration < Struct.new(
+      :deployment_circuit_breaker,
+      :maximum_percent,
+      :minimum_healthy_percent,
+      :alarms,
+      :strategy,
+      :bake_time_in_minutes,
+      :lifecycle_hooks,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The deployment controller to use for the service. </p>
+    # @!attribute type
+    #   <p>The deployment controller type to use.</p>
+    #            <p>The deployment controller is the mechanism that determines how tasks are deployed for
+    #   			your service. The valid options are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>ECS</p>
+    #                  <p>When you create a service which uses the <code>ECS</code> deployment controller, you can choose between the following deployment strategies:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>ROLLING</code>: When you create a service which uses the <i>rolling update</i>
+    #   							(<code>ROLLING</code>) deployment strategy, the Amazon ECS service scheduler replaces the
+    #   							currently running tasks with new tasks. The number of tasks that Amazon ECS adds or
+    #   							removes from the service during a rolling update is controlled by the service
+    #   							deployment configuration. </p>
+    #                        <p>Rolling update deployments are best suited for the following scenarios:</p>
+    #                        <ul>
+    #                           <li>
+    #                              <p>Gradual service updates: You need to
+    #   									update your service incrementally without taking the entire service
+    #   									offline at once.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Limited resource requirements: You
+    #   									want to avoid the additional resource costs of running two complete
+    #   									environments simultaneously (as required by blue/green
+    #   									deployments).</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Acceptable deployment time: Your
+    #   									application can tolerate a longer deployment process, as rolling updates
+    #   									replace tasks one by one.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>No need for instant roll back: Your
+    #   									service can tolerate a rollback process that takes minutes rather than
+    #   									seconds.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Simple deployment process: You prefer
+    #   									a straightforward deployment approach without the complexity of managing
+    #   									multiple environments, target groups, and listeners.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>No load balancer requirement: Your
+    #   									service doesn't use or require a load balancer, Application Load Balancer, Network Load Balancer, or Service Connect (which are required
+    #   									for blue/green deployments).</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Stateful applications: Your
+    #   									application maintains state that makes it difficult to run two parallel
+    #   									environments.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Cost sensitivity: You want to
+    #   									minimize deployment costs by not running duplicate environments during
+    #   									deployment.</p>
+    #                           </li>
+    #                        </ul>
+    #                        <p>Rolling updates are the default deployment strategy for services and provide a
+    #   							balance between deployment safety and resource efficiency for many common
+    #   							application scenarios.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>BLUE_GREEN</code>: A <i>blue/green</i> deployment strategy (<code>BLUE_GREEN</code>) is a release methodology that reduces downtime and
+    #   							risk by running two identical production environments called blue and green.
+    #   							With Amazon ECS blue/green deployments, you can validate new service revisions before
+    #   							directing production traffic to them. This approach provides a safer way to
+    #   							deploy changes with the ability to quickly roll back if needed.</p>
+    #                        <p>Amazon ECS blue/green deployments are best suited for the following scenarios:</p>
+    #                        <ul>
+    #                           <li>
+    #                              <p>Service validation: When you need to
+    #   									validate new service revisions before directing production traffic to
+    #   									them</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Zero downtime: When your service
+    #   									requires zero-downtime deployments</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Instant roll back: When you
+    #   									need the ability to quickly roll back if issues are detected</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Load balancer requirement: When your
+    #   									service uses Application Load Balancer, Network Load Balancer, or Service Connect</p>
+    #                           </li>
+    #                        </ul>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>External</p>
+    #                  <p>Use a third-party deployment controller.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Blue/green deployment (powered by CodeDeploy)</p>
+    #                  <p>CodeDeploy installs an updated version of the application as a new replacement task
+    #   					set and reroutes production traffic from the original application task set to
+    #   					the replacement task set. The original task set is terminated after a successful
+    #   					deployment. Use this deployment controller to verify a new deployment of a service
+    #   					before sending production traffic to it.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class DeploymentController < Struct.new(
+      :type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module DeploymentControllerType
+      ECS = 'ECS'
+      CODE_DEPLOY = 'CODE_DEPLOY'
+      EXTERNAL = 'EXTERNAL'
+    end
+
+    # <p>The amount of ephemeral storage to allocate for the deployment.</p>
+    # @!attribute kms_key_id
+    #   <p>Specify an Key Management Service key ID to encrypt the ephemeral storage for
+    #   			deployment.</p>
+    #   @return [String]
+    class DeploymentEphemeralStorage < Struct.new(
+      :kms_key_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html">Lifecycle hooks for Amazon ECS service deployments</a> in the <i>
+    #             Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute hook_target_arn
+    #   <p>The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.</p>
+    #            <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html">Permissions required
+    #               for Lambda functions in Amazon ECS blue/green deployments</a> in the <i>
+    #               Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute lifecycle_stages
+    #   <p>The lifecycle stages at which to run the hook. Choose from these valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>RECONCILE_SERVICE</p>
+    #                  <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>PRE_SCALE_UP</p>
+    #                  <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_SCALE_UP</p>
+    #                  <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>TEST_TRAFFIC_SHIFT</p>
+    #                  <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_TEST_TRAFFIC_SHIFT</p>
+    #                  <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>PRODUCTION_TRAFFIC_SHIFT</p>
+    #                  <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_PRODUCTION_TRAFFIC_SHIFT</p>
+    #                  <p>The production traffic shift is complete.</p>
+    #                  <p>You can use a lifecycle hook for this stage.</p>
+    #               </li>
+    #            </ul>
+    #            <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>
+    #   @return [Array<String>]
+    class DeploymentLifecycleHook < Struct.new(
+      :hook_target_arn,
+      :role_arn,
+      :lifecycle_stages,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module DeploymentLifecycleHookStage
+      RECONCILE_SERVICE = 'RECONCILE_SERVICE'
+      PRE_SCALE_UP = 'PRE_SCALE_UP'
+      POST_SCALE_UP = 'POST_SCALE_UP'
+      TEST_TRAFFIC_SHIFT = 'TEST_TRAFFIC_SHIFT'
+      POST_TEST_TRAFFIC_SHIFT = 'POST_TEST_TRAFFIC_SHIFT'
+      PRODUCTION_TRAFFIC_SHIFT = 'PRODUCTION_TRAFFIC_SHIFT'
+      POST_PRODUCTION_TRAFFIC_SHIFT = 'POST_PRODUCTION_TRAFFIC_SHIFT'
+    end
+
+    module DeploymentRolloutState
+      COMPLETED = 'COMPLETED'
+      FAILED = 'FAILED'
+      IN_PROGRESS = 'IN_PROGRESS'
+    end
+
+    module DeploymentStrategy
+      ROLLING = 'ROLLING'
+      BLUE_GREEN = 'BLUE_GREEN'
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to
+    #   			deregister. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container_instance
+    #   <p>The container instance ID or full ARN of the container instance to deregister. For
+    #   			more information about the ARN format, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids">Amazon Resource Name (ARN)</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute force
+    #   <p>Forces the container instance to be deregistered. If you have tasks running on the
+    #   			container instance when you deregister it with the <code>force</code> option, these
+    #   			tasks remain running until you terminate the instance or the tasks stop through some
+    #   			other means, but they're orphaned (no longer monitored or accounted for by Amazon ECS). If an
+    #   			orphaned task on your container instance is part of an Amazon ECS service, then the service
+    #   			scheduler starts another copy of that task, on a different container instance if
+    #   			possible. </p>
+    #            <p>Any containers in orphaned service tasks that are registered with a Classic Load Balancer or an Application Load Balancer
+    #   			target group are deregistered. They begin connection draining according to the settings
+    #   			on the load balancer or target group.</p>
+    #   @return [Boolean]
+    class DeregisterContainerInstanceRequest < Struct.new(
+      :cluster,
+      :container_instance,
+      :force,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instance
+    #   <p>The container instance that was deregistered.</p>
+    #   @return [Types::ContainerInstance]
+    class DeregisterContainerInstanceResponse < Struct.new(
+      :container_instance,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full Amazon Resource Name (ARN) of the task definition to deregister. You must specify a
+    #   				<code>revision</code>.</p>
+    #   @return [String]
+    class DeregisterTaskDefinitionRequest < Struct.new(
+      :task_definition,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition
+    #   <p>The full description of the deregistered task.</p>
+    #   @return [Types::TaskDefinition]
+    class DeregisterTaskDefinitionResponse < Struct.new(
+      :task_definition,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_providers
+    #   <p>The short name or full Amazon Resource Name (ARN) of one or more capacity providers. Up to
+    #   				<code>100</code> capacity providers can be described in an action.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Specifies whether or not you want to see the resource tags for the capacity provider.
+    #   			If <code>TAGS</code> is specified, the tags are included in the response. If this field
+    #   			is omitted, tags aren't included in the response.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of account setting results returned by
+    #   				<code>DescribeCapacityProviders</code> in paginated output. When this parameter is
+    #   			used, <code>DescribeCapacityProviders</code> only returns <code>maxResults</code>
+    #   			results in a single page along with a <code>nextToken</code> response element. The
+    #   			remaining results of the initial request can be seen by sending another
+    #   				<code>DescribeCapacityProviders</code> request with the returned
+    #   				<code>nextToken</code> value. This value can be between
+    #   			1 and 10. If this
+    #   			parameter is not used, then <code>DescribeCapacityProviders</code> returns up to
+    #   			10 results and a <code>nextToken</code> value
+    #   			if applicable.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a previous paginated
+    #   				<code>DescribeCapacityProviders</code> request where <code>maxResults</code> was
+    #   			used and the results exceeded the value of that parameter. Pagination continues from the
+    #   			end of the previous results that returned the <code>nextToken</code> value.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    class DescribeCapacityProvidersRequest < Struct.new(
+      :capacity_providers,
+      :include,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_providers
+    #   <p>The list of capacity providers.</p>
+    #   @return [Array<Types::CapacityProvider>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>DescribeCapacityProviders</code> request. When the results of a
+    #   				<code>DescribeCapacityProviders</code> request exceed <code>maxResults</code>, this
+    #   			value can be used to retrieve the next page of results. This value is <code>null</code>
+    #   			when there are no more results to return.</p>
+    #   @return [String]
+    class DescribeCapacityProvidersResponse < Struct.new(
+      :capacity_providers,
+      :failures,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute clusters
+    #   <p>A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN) entries.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Determines whether to include additional information about the clusters in the
+    #   			response. If this field is omitted, this information isn't included.</p>
+    #            <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances
+    #   			or tasks within the cluster are included, for example the capacity providers.</p>
+    #            <p>If <code>SETTINGS</code> is specified, the settings for the cluster are
+    #   			included.</p>
+    #            <p>If <code>CONFIGURATIONS</code> is specified, the configuration for the cluster is
+    #   			included.</p>
+    #            <p>If <code>STATISTICS</code> is specified, the task and service count is included,
+    #   			separated by launch type.</p>
+    #            <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are
+    #   			included.</p>
+    #   @return [Array<String>]
+    class DescribeClustersRequest < Struct.new(
+      :clusters,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute clusters
+    #   <p>The list of clusters.</p>
+    #   @return [Array<Types::Cluster>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeClustersResponse < Struct.new(
+      :clusters,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to
+    #   			describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the container instance
+    #   			or container instances you are describing were launched in any cluster other than the
+    #   			default cluster.</p>
+    #   @return [String]
+    # @!attribute container_instances
+    #   <p>A list of up to 100 container instance IDs or full Amazon Resource Name (ARN) entries.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Specifies whether you want to see the resource tags for the container instance. If
+    #   				<code>TAGS</code> is specified, the tags are included in the response. If
+    #   				<code>CONTAINER_INSTANCE_HEALTH</code> is specified, the container instance health
+    #   			is included in the response. If this field is omitted, tags and container instance
+    #   			health status aren't included in the response.</p>
+    #   @return [Array<String>]
+    class DescribeContainerInstancesRequest < Struct.new(
+      :cluster,
+      :container_instances,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instances
+    #   <p>The list of container instances.</p>
+    #   @return [Array<Types::ContainerInstance>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeContainerInstancesResponse < Struct.new(
+      :container_instances,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_deployment_arns
+    #   <p>The ARN of the service deployment.</p>
+    #            <p>You can specify a maximum of 20 ARNs.</p>
+    #   @return [Array<String>]
+    class DescribeServiceDeploymentsRequest < Struct.new(
+      :service_deployment_arns,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_deployments
+    #   <p>The list of service deployments described.</p>
+    #   @return [Array<Types::ServiceDeployment>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #            <p>If you decsribe a deployment with a service revision created before October 25, 2024,
+    #   			the call fails. The failure includes the service revision ARN and the reason set to
+    #   				<code>MISSING</code>.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeServiceDeploymentsResponse < Struct.new(
+      :service_deployments,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_revision_arns
+    #   <p>The ARN of the service revision. </p>
+    #            <p>You can specify a maximum of 20 ARNs.</p>
+    #            <p>You can call <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html">ListServiceDeployments</a> to get the ARNs.</p>
+    #   @return [Array<String>]
+    class DescribeServiceRevisionsRequest < Struct.new(
+      :service_revision_arns,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_revisions
+    #   <p>The list of service revisions described.</p>
+    #   @return [Array<Types::ServiceRevision>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeServiceRevisionsResponse < Struct.new(
+      :service_revisions,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN)the cluster that hosts the service to describe.
+    #   			If you do not specify a cluster, the default cluster is assumed. This parameter is required if the service or services you are
+    #   			describing were launched in any cluster other than the default cluster.</p>
+    #   @return [String]
+    # @!attribute services
+    #   <p>A list of services to describe. You may specify up to 10 services to describe in a
+    #   			single operation.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Determines whether you want to see the resource tags for the service. If
+    #   				<code>TAGS</code> is specified, the tags are included in the response. If this field
+    #   			is omitted, tags aren't included in the response.</p>
+    #   @return [Array<String>]
+    class DescribeServicesRequest < Struct.new(
+      :cluster,
+      :services,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute services
+    #   <p>The list of services described.</p>
+    #   @return [Array<Types::Service>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeServicesResponse < Struct.new(
+      :services,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition
+    #   <p>The <code>family</code> for the latest <code>ACTIVE</code> revision,
+    #   				<code>family</code> and <code>revision</code> (<code>family:revision</code>) for a
+    #   			specific revision in the family, or full Amazon Resource Name (ARN) of the task definition to
+    #   			describe.</p>
+    #   @return [String]
+    # @!attribute include
+    #   <p>Determines whether to see the resource tags for the task definition. If
+    #   				<code>TAGS</code> is specified, the tags are included in the response. If this field
+    #   			is omitted, tags aren't included in the response.</p>
+    #   @return [Array<String>]
+    class DescribeTaskDefinitionRequest < Struct.new(
+      :task_definition,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition
+    #   <p>The full task definition description.</p>
+    #   @return [Types::TaskDefinition]
+    # @!attribute tags
+    #   <p>The metadata that's applied to the task definition to help you categorize and organize
+    #   			them. Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class DescribeTaskDefinitionResponse < Struct.new(
+      :task_definition,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			sets exist in.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The short name or full Amazon Resource Name (ARN) of the service that the task sets exist in.</p>
+    #   @return [String]
+    # @!attribute task_sets
+    #   <p>The ID or full Amazon Resource Name (ARN) of task sets to
+    #   			describe.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Specifies whether to see the resource tags for the task set. If <code>TAGS</code> is
+    #   			specified, the tags are included in the response. If this field is omitted, tags aren't
+    #   			included in the response.</p>
+    #   @return [Array<String>]
+    class DescribeTaskSetsRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_sets,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_sets
+    #   <p>The list of task sets described.</p>
+    #   @return [Array<Types::TaskSet>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeTaskSetsResponse < Struct.new(
+      :task_sets,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to
+    #   			describe. If you do not specify a cluster, the default cluster is assumed. If you do not specify a
+    #   			value, the <code>default</code> cluster is used.</p>
+    #   @return [String]
+    # @!attribute tasks
+    #   <p>A list of up to 100 task IDs or full ARN entries.</p>
+    #   @return [Array<String>]
+    # @!attribute include
+    #   <p>Specifies whether you want to see the resource tags for the task. If <code>TAGS</code>
+    #   			is specified, the tags are included in the response. If this field is omitted, tags
+    #   			aren't included in the response.</p>
+    #   @return [Array<String>]
+    class DescribeTasksRequest < Struct.new(
+      :cluster,
+      :tasks,
+      :include,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute tasks
+    #   <p>The list of tasks.</p>
+    #   @return [Array<Types::Task>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class DescribeTasksResponse < Struct.new(
+      :tasks,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module DesiredStatus
+      RUNNING = 'RUNNING'
+      PENDING = 'PENDING'
+      STOPPED = 'STOPPED'
+    end
+
+    # <p>An object representing a container instance host device.</p>
+    # @!attribute host_path
+    #   <p>The path for the device on the host container instance.</p>
+    #   @return [String]
+    # @!attribute container_path
+    #   <p>The path inside the container at which to expose the host device.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The explicit permissions to provide to the container for the device. By default, the
+    #   			container has permissions for <code>read</code>, <code>write</code>, and
+    #   				<code>mknod</code> for the device.</p>
+    #   @return [Array<String>]
+    class Device < Struct.new(
+      :host_path,
+      :container_path,
+      :permissions,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module DeviceCgroupPermission
+      READ = 'read'
+      WRITE = 'write'
+      MKNOD = 'mknod'
+    end
+
+    # @!attribute container_instance
+    #   <p>The container instance ID or full ARN of the container instance. For more
+    #   			information about the ARN format, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids">Amazon Resource Name (ARN)</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that the container instance belongs
+    #   			to.</p>
+    #   @return [String]
+    class DiscoverPollEndpointRequest < Struct.new(
+      :container_instance,
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute endpoint
+    #   <p>The endpoint for the Amazon ECS agent to poll.</p>
+    #   @return [String]
+    # @!attribute telemetry_endpoint
+    #   <p>The telemetry endpoint for the Amazon ECS agent.</p>
+    #   @return [String]
+    # @!attribute service_connect_endpoint
+    #   <p>The endpoint for the Amazon ECS agent to poll for Service Connect configuration.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    class DiscoverPollEndpointResponse < Struct.new(
+      :endpoint,
+      :telemetry_endpoint,
+      :service_connect_endpoint,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>This parameter is specified when you're using Docker volumes. Docker volumes are only
+    # 			supported when you're using the EC2 launch type. Windows containers only
+    # 			support the use of the <code>local</code> driver. To use bind mounts, specify a
+    # 				<code>host</code> instead.</p>
+    # @!attribute scope
+    #   <p>The scope for the Docker volume that determines its lifecycle. Docker volumes that are
+    #   			scoped to a <code>task</code> are automatically provisioned when the task starts and
+    #   			destroyed when the task stops. Docker volumes that are scoped as <code>shared</code>
+    #   			persist after the task stops.</p>
+    #   @return [String]
+    # @!attribute autoprovision
+    #   <p>If this value is <code>true</code>, the Docker volume is created if it doesn't already
+    #   			exist.</p>
+    #            <note>
+    #               <p>This field is only used if the <code>scope</code> is <code>shared</code>.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute driver
+    #   <p>The Docker volume driver to use. The driver value must match the driver name provided
+    #   			by Docker because it is used for task placement. If the driver was installed using the
+    #   			Docker plugin CLI, use <code>docker plugin ls</code> to retrieve the driver name from
+    #   			your container instance. If the driver was installed using another method, use Docker
+    #   			plugin discovery to retrieve the driver name. This parameter maps to <code>Driver</code>
+    #   			in the docker container create command and the <code>xxdriver</code> option to docker
+    #   			volume create.</p>
+    #   @return [String]
+    # @!attribute driver_opts
+    #   <p>A map of Docker driver-specific options passed through. This parameter maps to
+    #   				<code>DriverOpts</code> in the docker create-volume command and the
+    #   				<code>xxopt</code> option to docker volume create.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute labels
+    #   <p>Custom metadata to add to your Docker volume. This parameter maps to
+    #   				<code>Labels</code> in the docker container create command and the
+    #   				<code>xxlabel</code> option to docker volume create.</p>
+    #   @return [Hash<String, String>]
+    class DockerVolumeConfiguration < Struct.new(
+      :scope,
+      :autoprovision,
+      :driver,
+      :driver_opts,
+      :labels,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EBSResourceType
+      VOLUME = 'volume'
+    end
+
+    # <p>The tag specifications of an Amazon EBS volume.</p>
+    # @!attribute resource_type
+    #   <p>The type of volume resource.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags applied to this Amazon EBS volume. <code>AmazonECSCreated</code> and
+    #   				<code>AmazonECSManaged</code> are reserved tags that can't be used.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute propagate_tags
+    #   <p>Determines whether to propagate the tags from the task definition to  the Amazon EBS
+    #   			volume. Tags can only propagate to a <code>SERVICE</code> specified in
+    #   				 <code>ServiceVolumeConfiguration</code>. If no value is specified, the tags aren't
+    #   			 propagated.</p>
+    #   @return [String]
+    class EBSTagSpecification < Struct.new(
+      :resource_type,
+      :tags,
+      :propagate_tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The authorization configuration details for the Amazon EFS file system.</p>
+    # @!attribute access_point_id
+    #   <p>The Amazon EFS access point ID to use. If an access point is specified, the root directory
+    #   			value specified in the <code>EFSVolumeConfiguration</code> must either be omitted or set
+    #   			to <code>/</code> which will enforce the path set on the EFS access point. If an access
+    #   			point is used, transit encryption must be on in the <code>EFSVolumeConfiguration</code>.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html">Working with Amazon EFS access
+    #   				points</a> in the <i>Amazon Elastic File System User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute iam
+    #   <p>Determines whether to use the Amazon ECS task role defined in a task definition when
+    #   			mounting the Amazon EFS file system. If it is turned on, transit encryption must be turned on
+    #   			in the <code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default
+    #   			value of <code>DISABLED</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints">Using
+    #   				Amazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    class EFSAuthorizationConfig < Struct.new(
+      :access_point_id,
+      :iam,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EFSAuthorizationConfigIAM
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    module EFSTransitEncryption
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>This parameter is specified when you're using an Amazon Elastic File System file system for task
+    # 			storage. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html">Amazon EFS volumes</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute file_system_id
+    #   <p>The Amazon EFS file system ID to use.</p>
+    #   @return [String]
+    # @!attribute root_directory
+    #   <p>The directory within the Amazon EFS file system to mount as the root directory inside the
+    #   			host. If this parameter is omitted, the root of the Amazon EFS volume will be used.
+    #   			Specifying <code>/</code> will have the same effect as omitting this parameter.</p>
+    #            <important>
+    #               <p>If an EFS access point is specified in the <code>authorizationConfig</code>, the
+    #   				root directory parameter must either be omitted or set to <code>/</code> which will
+    #   				enforce the path set on the EFS access point.</p>
+    #            </important>
+    #   @return [String]
+    # @!attribute transit_encryption
+    #   <p>Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host
+    #   			and the Amazon EFS server. Transit encryption must be turned on if Amazon EFS IAM authorization
+    #   			is used. If this parameter is omitted, the default value of <code>DISABLED</code> is
+    #   			used. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html">Encrypting data in transit</a> in
+    #   			the <i>Amazon Elastic File System User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute transit_encryption_port
+    #   <p>The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS
+    #   			server. If you do not specify a transit encryption port, it will use the port selection
+    #   			strategy that the Amazon EFS mount helper uses. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html">EFS mount
+    #   				helper</a> in the <i>Amazon Elastic File System User Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute authorization_config
+    #   <p>The authorization configuration details for the Amazon EFS file system.</p>
+    #   @return [Types::EFSAuthorizationConfig]
+    class EFSVolumeConfiguration < Struct.new(
+      :file_system_id,
+      :root_directory,
+      :transit_encryption,
+      :transit_encryption_port,
+      :authorization_config,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A list of files containing the environment variables to pass to a container. You can
+    # 			specify up to ten environment files. The file must have a <code>.env</code> file
+    # 			extension. Each line in an environment file should contain an environment variable in
+    # 				<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated
+    # 			as comments and are ignored.</p>
+    #          <p>If there are environment variables specified using the <code>environment</code>
+    # 			parameter in a container definition, they take precedence over the variables contained
+    # 			within an environment file. If multiple environment files are specified that contain the
+    # 			same variable, they're processed from the top down. We recommend that you use unique
+    # 			variable names. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/use-environment-file.html">Use a file to pass
+    # 				environment variables to a container</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <p>Environment variable files are objects in Amazon S3 and all Amazon S3 security considerations
+    # 			apply. </p>
+    #          <p>You must use the following platforms for the Fargate launch type:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Linux platform version <code>1.4.0</code> or later.</p>
+    #             </li>
+    #             <li>
+    #                <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #             </li>
+    #          </ul>
+    #          <p>Consider the following when using the Fargate launch type:</p>
+    #          <ul>
+    #             <li>
+    #                <p>The file is handled like a native Docker env-file.</p>
+    #             </li>
+    #             <li>
+    #                <p>There is no support for shell escape handling.</p>
+    #             </li>
+    #             <li>
+    #                <p>The container entry point interperts the <code>VARIABLE</code> values.</p>
+    #             </li>
+    #          </ul>
+    # @!attribute value
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment
+    #   			variable file.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The file type to use. Environment files are objects in Amazon S3. The only supported value
+    #   			is <code>s3</code>.</p>
+    #   @return [String]
+    class EnvironmentFile < Struct.new(
+      :value,
+      :type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module EnvironmentFileType
+      S3 = 's3'
+    end
+
+    # <p>The amount of ephemeral storage to allocate for the task. This parameter is used to
+    # 			expand the total amount of ephemeral storage available, beyond the default amount, for
+    # 			tasks hosted on Fargate. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html">Using data volumes in
+    # 				tasks</a> in the <i>Amazon ECS Developer Guide;</i>.</p>
+    #          <note>
+    #             <p>For tasks using the Fargate launch type, the task requires the
+    # 				following platforms:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Linux platform version <code>1.4.0</code> or later.</p>
+    #                </li>
+    #                <li>
+    #                   <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    # @!attribute size_in_gi_b
+    #   <p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum
+    #   			supported value is <code>21</code> GiB and the maximum supported value is
+    #   				<code>200</code> GiB.</p>
+    #   @return [Integer]
+    class EphemeralStorage < Struct.new(
+      :size_in_gi_b,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:size_in_gi_b] = 0 unless options.key?(:size_in_gi_b)
+        super
+      end
+    end
+
+    # <p>The details of the execute command configuration.</p>
+    # @!attribute kms_key_id
+    #   <p>Specify an Key Management Service key ID to encrypt the data between the local client
+    #   			and the container.</p>
+    #   @return [String]
+    # @!attribute logging
+    #   <p>The log setting to use for redirecting logs for your execute command results. The
+    #   			following log settings are available.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code>: The execute command session is not logged.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code>: The <code>awslogs</code> configuration in the task
+    #   					definition is used. If no logging parameter is specified, it defaults to this
+    #   					value. If no <code>awslogs</code> log driver is configured in the task
+    #   					definition, the output won't be logged.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OVERRIDE</code>: Specify the logging details as a part of
+    #   						<code>logConfiguration</code>. If the <code>OVERRIDE</code> logging option
+    #   					is specified, the <code>logConfiguration</code> is required.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute log_configuration
+    #   <p>The log configuration for the results of the execute command actions. The logs can be
+    #   			sent to CloudWatch Logs or an Amazon S3 bucket. When <code>logging=OVERRIDE</code> is
+    #   			specified, a <code>logConfiguration</code> must be provided.</p>
+    #   @return [Types::ExecuteCommandLogConfiguration]
+    class ExecuteCommandConfiguration < Struct.new(
+      :kms_key_id,
+      :logging,
+      :log_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The log configuration for the results of the execute command actions. The logs can be
+    # 			sent to CloudWatch Logs or an Amazon S3 bucket.</p>
+    # @!attribute cloud_watch_log_group_name
+    #   <p>The name of the CloudWatch log group to send logs to.</p>
+    #            <note>
+    #               <p>The CloudWatch log group must already be created.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute cloud_watch_encryption_enabled
+    #   <p>Determines whether to use encryption on the CloudWatch logs. If not specified,
+    #   			encryption will be off.</p>
+    #   @return [Boolean]
+    # @!attribute s3_bucket_name
+    #   <p>The name of the S3 bucket to send logs to.</p>
+    #            <note>
+    #               <p>The S3 bucket must already be created.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute s3_encryption_enabled
+    #   <p>Determines whether to use encryption on the S3 logs. If not specified, encryption is
+    #   			not used.</p>
+    #   @return [Boolean]
+    # @!attribute s3_key_prefix
+    #   <p>An optional folder in the S3 bucket to place logs in.</p>
+    #   @return [String]
+    class ExecuteCommandLogConfiguration < Struct.new(
+      :cloud_watch_log_group_name,
+      :cloud_watch_encryption_enabled,
+      :s3_bucket_name,
+      :s3_encryption_enabled,
+      :s3_key_prefix,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:cloud_watch_encryption_enabled] = false unless options.key?(:cloud_watch_encryption_enabled)
+        options[:s3_encryption_enabled] = false unless options.key?(:s3_encryption_enabled)
+        super
+      end
+    end
+
+    module ExecuteCommandLogging
+      NONE = 'NONE'
+      DEFAULT = 'DEFAULT'
+      OVERRIDE = 'OVERRIDE'
+    end
+
+    # @!attribute cluster
+    #   <p>The Amazon Resource Name (ARN) or short name of the cluster the task is running in.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container
+    #   <p>The name of the container to execute the command on. A container name only needs to be
+    #   			specified for tasks containing multiple containers.</p>
+    #   @return [String]
+    # @!attribute command
+    #   <p>The command to run on the container.</p>
+    #   @return [String]
+    # @!attribute interactive
+    #   <p>Use this flag to run your command in interactive mode.</p>
+    #   @return [Boolean]
+    # @!attribute task
+    #   <p>The Amazon Resource Name (ARN) or ID of the task the container is part of.</p>
+    #   @return [String]
+    class ExecuteCommandRequest < Struct.new(
+      :cluster,
+      :container,
+      :command,
+      :interactive,
+      :task,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
+    #   @return [String]
+    # @!attribute container_arn
+    #   <p>The Amazon Resource Name (ARN) of the container.</p>
+    #   @return [String]
+    # @!attribute container_name
+    #   <p>The name of the container.</p>
+    #   @return [String]
+    # @!attribute interactive
+    #   <p>Determines whether the execute command session is running in interactive mode. Amazon ECS
+    #   			only supports initiating interactive sessions, so you must specify <code>true</code> for
+    #   			this value.</p>
+    #   @return [Boolean]
+    # @!attribute session
+    #   <p>The details of the SSM session that was created for this instance of
+    #   			execute-command.</p>
+    #   @return [Types::Session]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task.</p>
+    #   @return [String]
+    class ExecuteCommandResponse < Struct.new(
+      :cluster_arn,
+      :container_arn,
+      :container_name,
+      :interactive,
+      :session,
+      :task_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:interactive] = false unless options.key?(:interactive)
+        super
+      end
+    end
+
+    # <p>The authorization configuration details for Amazon FSx for Windows File Server file system. See <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_FSxWindowsFileServerVolumeConfiguration.html">FSxWindowsFileServerVolumeConfiguration</a> in the <i>Amazon ECS API
+    # 				Reference</i>.</p>
+    #          <p>For more information and the input format, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html">Amazon FSx for Windows File Server Volumes</a>
+    # 			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute credentials_parameter
+    #   <p>The authorization credential option to use. The authorization credential options can
+    #   			be provided using either the Amazon Resource Name (ARN) of an Secrets Manager secret or SSM Parameter Store
+    #   			parameter. The ARN refers to the stored credentials.</p>
+    #   @return [String]
+    # @!attribute domain
+    #   <p>A fully qualified domain name hosted by an <a href="https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html">Directory Service</a> Managed Microsoft AD (Active Directory) or self-hosted AD on
+    #   			Amazon EC2.</p>
+    #   @return [String]
+    class FSxWindowsFileServerAuthorizationConfig < Struct.new(
+      :credentials_parameter,
+      :domain,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>This parameter is specified when you're using <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html">Amazon FSx for Windows File Server</a> file system for task
+    # 			storage.</p>
+    #          <p>For more information and the input format, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html">Amazon FSx for Windows File Server volumes</a>
+    # 			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute file_system_id
+    #   <p>The Amazon FSx for Windows File Server file system ID to use.</p>
+    #   @return [String]
+    # @!attribute root_directory
+    #   <p>The directory within the Amazon FSx for Windows File Server file system to mount as the root directory
+    #   			inside the host.</p>
+    #   @return [String]
+    # @!attribute authorization_config
+    #   <p>The authorization configuration details for the Amazon FSx for Windows File Server file system.</p>
+    #   @return [Types::FSxWindowsFileServerAuthorizationConfig]
+    class FSxWindowsFileServerVolumeConfiguration < Struct.new(
+      :file_system_id,
+      :root_directory,
+      :authorization_config,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A failed resource. For a list of common causes, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html">API failure
+    # 				reasons</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the failed resource.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the failure.</p>
+    #   @return [String]
+    # @!attribute detail
+    #   <p>The details of the failure.</p>
+    #   @return [String]
+    class Failure < Struct.new(
+      :arn,
+      :reason,
+      :detail,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The FireLens configuration for the container. This is used to specify and configure a
+    # 			log router for container logs. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html">Custom log routing</a>
+    # 			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute type
+    #   <p>The log router to use. The valid values are <code>fluentd</code> or
+    #   				<code>fluentbit</code>.</p>
+    #   @return [String]
+    # @!attribute options
+    #   <p>The options to use when configuring the log router. This field is optional and can be
+    #   			used to specify a custom configuration file or to add additional metadata, such as the
+    #   			task, task definition, cluster, and container instance details to the log event. If
+    #   			specified, the syntax to use is
+    #   				<code>"options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}</code>.
+    #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef">Creating
+    #   				a task definition that uses a FireLens configuration</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <note>
+    #               <p>Tasks hosted on Fargate only support the <code>file</code> configuration file
+    #   				type.</p>
+    #            </note>
+    #   @return [Hash<String, String>]
+    class FirelensConfiguration < Struct.new(
+      :type,
+      :options,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module FirelensConfigurationType
+      FLUENTD = 'fluentd'
+      FLUENTBIT = 'fluentbit'
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			sets exist in.</p>
+    #   @return [String]
+    # @!attribute tasks
+    #   <p>A list of up to 100 task IDs or full ARN entries.</p>
+    #   @return [Array<String>]
+    class GetTaskProtectionRequest < Struct.new(
+      :cluster,
+      :tasks,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute protected_tasks
+    #   <p>A list of tasks with the following information.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>taskArn</code>: The task ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>protectionEnabled</code>: The protection status of the task. If scale-in
+    #   					protection is turned on for a task, the value is <code>true</code>. Otherwise,
+    #   					it is <code>false</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>expirationDate</code>: The epoch time when protection for the task will
+    #   					expire.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::ProtectedTask>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class GetTaskProtectionResponse < Struct.new(
+      :protected_tasks,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object representing a container health check. Health check parameters that are
+    # 			specified in a container definition override any Docker health checks that exist in the
+    # 			container image (such as those specified in a parent image or from the image's
+    # 			Dockerfile). This configuration maps to the <code>HEALTHCHECK</code> parameter of docker
+    # 			run.</p>
+    #          <note>
+    #             <p>The Amazon ECS container agent only monitors and reports on the health checks specified
+    # 				in the task definition. Amazon ECS does not monitor Docker health checks that are
+    # 				embedded in a container image and not specified in the container definition. Health
+    # 				check parameters that are specified in a container definition override any Docker
+    # 				health checks that exist in the container image.</p>
+    #          </note>
+    #          <p>You can view the health status of both individual containers and a task with the
+    # 			DescribeTasks API operation or when viewing the task details in the console.</p>
+    #          <p>The health check is designed to make sure that your containers survive agent restarts,
+    # 			upgrades, or temporary unavailability.</p>
+    #          <p>Amazon ECS performs health checks on containers with the default that launched the
+    # 			container instance or the task.</p>
+    #          <p>The following describes the possible <code>healthStatus</code> values for a
+    # 			container:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>HEALTHY</code>-The container health check has passed
+    # 					successfully.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>UNHEALTHY</code>-The container health check has failed.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>UNKNOWN</code>-The container health check is being evaluated,
+    # 					there's no container health check defined, or Amazon ECS doesn't have the health
+    # 					status of the container.</p>
+    #             </li>
+    #          </ul>
+    #          <p>The following describes the possible <code>healthStatus</code> values based on the
+    # 			container health checker status of essential containers in the task with the following
+    # 			priority order (high to low):</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>UNHEALTHY</code>-One or more essential containers have failed
+    # 					their health check.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>UNKNOWN</code>-Any essential container running within the task is
+    # 					in an <code>UNKNOWN</code> state and no other essential containers have an
+    # 						<code>UNHEALTHY</code> state.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>HEALTHY</code>-All essential containers within the task have
+    # 					passed their health checks.</p>
+    #             </li>
+    #          </ul>
+    #          <p>Consider the following task health example with 2 containers.</p>
+    #          <ul>
+    #             <li>
+    #                <p>If Container1 is <code>UNHEALTHY</code> and Container2 is
+    # 					<code>UNKNOWN</code>, the task health is <code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>UNHEALTHY</code> and Container2 is
+    # 					<code>HEALTHY</code>, the task health is <code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>,
+    # 					the task health is <code>UNKNOWN</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>HEALTHY</code>,
+    # 					the task health is <code>HEALTHY</code>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>Consider the following task health example with 3 containers.</p>
+    #          <ul>
+    #             <li>
+    #                <p>If Container1 is <code>UNHEALTHY</code> and Container2 is
+    # 					<code>UNKNOWN</code>, and Container3 is <code>UNKNOWN</code>, the task health is
+    # 						<code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>UNHEALTHY</code> and Container2 is
+    # 					<code>UNKNOWN</code>, and Container3 is <code>HEALTHY</code>, the task health is
+    # 						<code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>UNHEALTHY</code> and Container2 is
+    # 					<code>HEALTHY</code>, and Container3 is <code>HEALTHY</code>, the task health is
+    # 						<code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>,
+    # 					and Container3 is <code>HEALTHY</code>, the task health is
+    # 					<code>UNKNOWN</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>,
+    # 					and Container3 is <code>UNKNOWN</code>, the task health is
+    # 					<code>UNKNOWN</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>HEALTHY</code>,
+    # 					and Container3 is <code>HEALTHY</code>, the task health is
+    # 					<code>HEALTHY</code>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>If a task is run manually, and not as part of a service, the task will continue its
+    # 			lifecycle regardless of its health status. For tasks that are part of a service, if the
+    # 			task reports as unhealthy then the task will be stopped and the service scheduler will
+    # 			replace it.</p>
+    #          <p>When a container health check fails for a task that is part of a service, the following process occurs:</p>
+    #          <ol>
+    #             <li>
+    #                <p>The task is marked as <code>UNHEALTHY</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>The unhealthy task will be stopped, and during the stopping process, it will go through the following states:</p>
+    #                <ul>
+    #                   <li>
+    #                      <p>
+    #                         <code>DEACTIVATING</code> - In this state, Amazon ECS performs additional steps before stopping the
+    # 							task. For example, for tasks that are part of services configured to use
+    # 							Elastic Load Balancing target groups, target groups will be deregistered
+    # 							in this state.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>STOPPING</code> - The task is in the process of being stopped.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>DEPROVISIONING</code> - Resources associated with the task are being cleaned up.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>STOPPED</code> - The task has been completely stopped.</p>
+    #                   </li>
+    #                </ul>
+    #             </li>
+    #             <li>
+    #                <p>After the old task stops, a new task will be launched to ensure service operation, and the new task will go through the following lifecycle:</p>
+    #                <ul>
+    #                   <li>
+    #                      <p>
+    #                         <code>PROVISIONING</code> - Resources required for the task are being provisioned.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>PENDING</code> - The task is waiting to be placed on a container instance.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>ACTIVATING</code> - In this state, Amazon ECS pulls container images, creates containers,
+    # 							configures task networking, registers load balancer target groups, and
+    # 							configures service discovery status.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <code>RUNNING</code> - The task is running and performing its work.</p>
+    #                   </li>
+    #                </ul>
+    #             </li>
+    #          </ol>
+    #          <p>For more detailed information about task lifecycle states, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle-explanation.html">Task lifecycle</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <p>The following are notes about container health check support:</p>
+    #          <ul>
+    #             <li>
+    #                <p>If the Amazon ECS container agent becomes disconnected from the Amazon ECS service, this
+    # 					won't cause a container to transition to an <code>UNHEALTHY</code> status. This
+    # 					is by design, to ensure that containers remain running during agent restarts or
+    # 					temporary unavailability. The health check status is the "last heard from"
+    # 					response from the Amazon ECS agent, so if the container was considered
+    # 						<code>HEALTHY</code> prior to the disconnect, that status will remain until
+    # 					the agent reconnects and another health check occurs. There are no assumptions
+    # 					made about the status of the container health checks.</p>
+    #             </li>
+    #             <li>
+    #                <p>Container health checks require version <code>1.17.0</code> or greater of the
+    # 					Amazon ECS container agent. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the
+    # 						Amazon ECS container agent</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Container health checks are supported for Fargate tasks if
+    # 					you're using platform version <code>1.1.0</code> or greater. For more
+    # 					information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate
+    # 						platform versions</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Container health checks aren't supported for tasks that are part of a service
+    # 					that's configured to use a Classic Load Balancer.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For an example of how to specify a task definition with multiple containers where
+    # 			container dependency is specified, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency">Container dependency</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute command
+    #   <p>A string array representing the command that the container runs to determine if it is
+    #   			healthy. The string array must start with <code>CMD</code> to run the command arguments
+    #   			directly, or <code>CMD-SHELL</code> to run the command with the container's default
+    #   			shell. </p>
+    #            <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, enclose the list
+    #   			of commands in double quotes and brackets.</p>
+    #            <p>
+    #               <code>[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]</code>
+    #            </p>
+    #            <p>You don't include the double quotes and brackets when you use the Amazon Web Services Management Console.</p>
+    #            <p>
+    #               <code> CMD-SHELL, curl -f http://localhost/ || exit 1</code>
+    #            </p>
+    #            <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For
+    #   			more information, see <code>HealthCheck</code> in the docker container create
+    #   			command.</p>
+    #   @return [Array<String>]
+    # @!attribute interval
+    #   <p>The time period in seconds between each health check execution. You may specify
+    #   			between 5 and 300 seconds. The default value is 30 seconds. This value applies only when
+    #   			you specify a <code>command</code>. </p>
+    #   @return [Integer]
+    # @!attribute timeout
+    #   <p>The time period in seconds to wait for a health check to succeed before it is
+    #   			considered a failure. You may specify between 2 and 60 seconds. The default value is 5.
+    #   			This value applies only when you specify a <code>command</code>. </p>
+    #   @return [Integer]
+    # @!attribute retries
+    #   <p>The number of times to retry a failed health check before the container is considered
+    #   			unhealthy. You may specify between 1 and 10 retries. The default value is 3. This value
+    #   			applies only when you specify a <code>command</code>. </p>
+    #   @return [Integer]
+    # @!attribute start_period
+    #   <p>The optional grace period to provide containers time to bootstrap before failed health
+    #   			checks count towards the maximum number of retries. You can specify between 0 and 300
+    #   			seconds. By default, the <code>startPeriod</code> is off. This value applies only when
+    #   			you specify a <code>command</code>. </p>
+    #            <note>
+    #               <p>If a health check succeeds within the <code>startPeriod</code>, then the container
+    #   				is considered healthy and any subsequent failures count toward the maximum number of
+    #   				retries.</p>
+    #            </note>
+    #   @return [Integer]
+    class HealthCheck < Struct.new(
+      :command,
+      :interval,
+      :timeout,
+      :retries,
+      :start_period,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module HealthStatus
+      HEALTHY = 'HEALTHY'
+      UNHEALTHY = 'UNHEALTHY'
+      UNKNOWN = 'UNKNOWN'
+    end
+
+    # <p>Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of
+    # 			a container via the <code>extraHosts</code> parameter of its <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html">ContainerDefinition</a>. </p>
+    # @!attribute hostname
+    #   <p>The hostname to use in the <code>/etc/hosts</code> entry.</p>
+    #   @return [String]
+    # @!attribute ip_address
+    #   <p>The IP address to use in the <code>/etc/hosts</code> entry.</p>
+    #   @return [String]
+    class HostEntry < Struct.new(
+      :hostname,
+      :ip_address,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on a container instance bind mount host volume.</p>
+    # @!attribute source_path
+    #   <p>When the <code>host</code> parameter is used, specify a <code>sourcePath</code> to
+    #   			declare the path on the host container instance that's presented to the container. If
+    #   			this parameter is empty, then the Docker daemon has assigned a host path for you. If the
+    #   				<code>host</code> parameter contains a <code>sourcePath</code> file location, then
+    #   			the data volume persists at the specified location on the host container instance until
+    #   			you delete it manually. If the <code>sourcePath</code> value doesn't exist on the host
+    #   			container instance, the Docker daemon creates it. If the location does exist, the
+    #   			contents of the source path folder are exported.</p>
+    #            <p>If you're using the Fargate launch type, the <code>sourcePath</code>
+    #   			parameter is not supported.</p>
+    #   @return [String]
+    class HostVolumeProperties < Struct.new(
+      :source_path,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on an Elastic Inference accelerator. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html">Working with Amazon Elastic Inference on Amazon ECS</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute device_name
+    #   <p>The Elastic Inference accelerator device name. The <code>deviceName</code> must also
+    #   			be referenced in a container definition as a <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ResourceRequirement.html">ResourceRequirement</a>.</p>
+    #   @return [String]
+    # @!attribute device_type
+    #   <p>The Elastic Inference accelerator type to use.</p>
+    #   @return [String]
+    class InferenceAccelerator < Struct.new(
+      :device_name,
+      :device_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on an Elastic Inference accelerator task override. This parameter is used to
+    # 			override the Elastic Inference accelerator specified in the task definition. For more
+    # 			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html">Working with Amazon
+    # 				Elastic Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute device_name
+    #   <p>The Elastic Inference accelerator device name to override for the task. This parameter
+    #   			must match a <code>deviceName</code> specified in the task definition.</p>
+    #   @return [String]
+    # @!attribute device_type
+    #   <p>The Elastic Inference accelerator type to use.</p>
+    #   @return [String]
+    class InferenceAcceleratorOverride < Struct.new(
+      :device_name,
+      :device_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object representing the result of a container instance health status check.</p>
+    # @!attribute type
+    #   <p>The type of container instance health status that was verified.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The container instance health status.</p>
+    #   @return [String]
+    # @!attribute last_updated
+    #   <p>The Unix timestamp for when the container instance health status was last
+    #   			updated.</p>
+    #   @return [Time]
+    # @!attribute last_status_change
+    #   <p>The Unix timestamp for when the container instance health status last changed.</p>
+    #   @return [Time]
+    class InstanceHealthCheckResult < Struct.new(
+      :type,
+      :status,
+      :last_updated,
+      :last_status_change,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module InstanceHealthCheckState
+      OK = 'OK'
+      IMPAIRED = 'IMPAIRED'
+      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
+      INITIALIZING = 'INITIALIZING'
+    end
+
+    module InstanceHealthCheckType
+      CONTAINER_RUNTIME = 'CONTAINER_RUNTIME'
+    end
+
+    # <p>The specified parameter isn't valid. Review the available parameters for the API
+    # 			request.</p>
+    #          <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service
+    # 				event messages</a>. </p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class InvalidParameterException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module IpcMode
+      HOST = 'host'
+      TASK = 'task'
+      NONE = 'none'
+    end
+
+    # <p>The Linux capabilities to add or remove from the default Docker configuration for a
+    # 			container defined in the task definition. For more detailed information about these
+    # 			Linux capabilities, see the <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities(7)</a> Linux manual page.</p>
+    #          <p>The following describes how Docker processes the Linux capabilities specified in the
+    # 				<code>add</code> and <code>drop</code> request parameters. For information about the
+    # 			latest behavior, see <a href="https://forums.docker.com/t/docker-compose-order-of-cap-drop-and-cap-add/97136/1">Docker Compose: order of cap_drop and cap_add</a> in the Docker Community
+    # 			Forum.</p>
+    #          <ul>
+    #             <li>
+    #                <p>When the container is a privleged container, the container capabilities are
+    # 					all of the default Docker capabilities. The capabilities specified in the
+    # 						<code>add</code> request parameter, and the <code>drop</code> request
+    # 					parameter are ignored.</p>
+    #             </li>
+    #             <li>
+    #                <p>When the <code>add</code> request parameter is set to ALL, the container
+    # 					capabilities are all of the default Docker capabilities, excluding those
+    # 					specified in the <code>drop</code> request parameter.</p>
+    #             </li>
+    #             <li>
+    #                <p>When the <code>drop</code> request parameter is set to ALL, the container
+    # 					capabilities are the capabilities specified in the <code>add</code> request
+    # 					parameter.</p>
+    #             </li>
+    #             <li>
+    #                <p>When the <code>add</code> request parameter and the <code>drop</code> request
+    # 					parameter are both empty, the capabilities the container capabilities are all of
+    # 					the default Docker capabilities.</p>
+    #             </li>
+    #             <li>
+    #                <p>The default is to first drop the capabilities specified in the
+    # 						<code>drop</code> request parameter, and then add the capabilities specified
+    # 					in the <code>add</code> request parameter.</p>
+    #             </li>
+    #          </ul>
+    # @!attribute add
+    #   <p>The Linux capabilities for the container that have been added to the default
+    #   			configuration provided by Docker. This parameter maps to <code>CapAdd</code> in the
+    #   			docker container create command and the <code>--cap-add</code> option to docker
+    #   			run.</p>
+    #            <note>
+    #               <p>Tasks launched on Fargate only support adding the <code>SYS_PTRACE</code> kernel
+    #   				capability.</p>
+    #            </note>
+    #            <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
+    #   				"CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
+    #   				"IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" |
+    #   				"MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP"
+    #   				| "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" |
+    #   				"SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" |
+    #   				"SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" |
+    #   			"WAKE_ALARM"</code>
+    #            </p>
+    #   @return [Array<String>]
+    # @!attribute drop
+    #   <p>The Linux capabilities for the container that have been removed from the default
+    #   			configuration provided by Docker. This parameter maps to <code>CapDrop</code> in the
+    #   			docker container create command and the <code>--cap-drop</code> option to docker
+    #   			run.</p>
+    #            <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
+    #   				"CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
+    #   				"IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" |
+    #   				"MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP"
+    #   				| "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" |
+    #   				"SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" |
+    #   				"SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" |
+    #   			"WAKE_ALARM"</code>
+    #            </p>
+    #   @return [Array<String>]
+    class KernelCapabilities < Struct.new(
+      :add,
+      :drop,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A key-value pair object.</p>
+    # @!attribute name
+    #   <p>The name of the key-value pair. For environment variables, this is the name of the
+    #   			environment variable.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the key-value pair. For environment variables, this is the value of the
+    #   			environment variable.</p>
+    #   @return [String]
+    class KeyValuePair < Struct.new(
+      :name,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module LaunchType
+      EC2 = 'EC2'
+      FARGATE = 'FARGATE'
+      EXTERNAL = 'EXTERNAL'
+    end
+
+    # <p>The limit for the resource was exceeded.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class LimitExceededException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The Linux-specific options that are applied to the container, such as Linux <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html">KernelCapabilities</a>.</p>
+    # @!attribute capabilities
+    #   <p>The Linux capabilities for the container that are added to or dropped from the default
+    #   			configuration provided by Docker.</p>
+    #            <note>
+    #               <p>For tasks that use the Fargate launch type,
+    #   					<code>capabilities</code> is supported for all platform versions but the
+    #   					<code>add</code> parameter is only supported if using platform version 1.4.0 or
+    #   				later.</p>
+    #            </note>
+    #   @return [Types::KernelCapabilities]
+    # @!attribute devices
+    #   <p>Any host devices to expose to the container. This parameter maps to
+    #   				<code>Devices</code> in the docker container create command and the
+    #   				<code>--device</code> option to docker run.</p>
+    #            <note>
+    #               <p>If you're using tasks that use the Fargate launch type, the
+    #   					<code>devices</code> parameter isn't supported.</p>
+    #            </note>
+    #   @return [Array<Types::Device>]
+    # @!attribute init_process_enabled
+    #   <p>Run an <code>init</code> process inside the container that forwards signals and reaps
+    #   			processes. This parameter maps to the <code>--init</code> option to docker run.
+    #   			This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>
+    #            </p>
+    #   @return [Boolean]
+    # @!attribute shared_memory_size
+    #   <p>The value for the size (in MiB) of the <code>/dev/shm</code> volume. This parameter
+    #   			maps to the <code>--shm-size</code> option to docker run.</p>
+    #            <note>
+    #               <p>If you are using tasks that use the Fargate launch type, the
+    #   					<code>sharedMemorySize</code> parameter is not supported.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute tmpfs
+    #   <p>The container path, mount options, and size (in MiB) of the tmpfs mount. This
+    #   			parameter maps to the <code>--tmpfs</code> option to docker run.</p>
+    #            <note>
+    #               <p>If you're using tasks that use the Fargate launch type, the
+    #   					<code>tmpfs</code> parameter isn't supported.</p>
+    #            </note>
+    #   @return [Array<Types::Tmpfs>]
+    # @!attribute max_swap
+    #   <p>The total amount of swap memory (in MiB) a container can use. This parameter will be
+    #   			translated to the <code>--memory-swap</code> option to docker run where the value would
+    #   			be the sum of the container memory plus the <code>maxSwap</code> value.</p>
+    #            <p>If a <code>maxSwap</code> value of <code>0</code> is specified, the container will not
+    #   			use swap. Accepted values are <code>0</code> or any positive integer. If the
+    #   				<code>maxSwap</code> parameter is omitted, the container will use the swap
+    #   			configuration for the container instance it is running on. A <code>maxSwap</code> value
+    #   			must be set for the <code>swappiness</code> parameter to be used.</p>
+    #            <note>
+    #               <p>If you're using tasks that use the Fargate launch type, the
+    #   					<code>maxSwap</code> parameter isn't supported.</p>
+    #               <p>If you're using tasks on Amazon Linux 2023 the <code>swappiness</code> parameter isn't
+    #   				supported.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute swappiness
+    #   <p>This allows you to tune a container's memory swappiness behavior. A
+    #   				<code>swappiness</code> value of <code>0</code> will cause swapping to not happen
+    #   			unless absolutely necessary. A <code>swappiness</code> value of <code>100</code> will
+    #   			cause pages to be swapped very aggressively. Accepted values are whole numbers between
+    #   				<code>0</code> and <code>100</code>. If the <code>swappiness</code> parameter is not
+    #   			specified, a default value of <code>60</code> is used. If a value is not specified for
+    #   				<code>maxSwap</code> then this parameter is ignored. This parameter maps to the
+    #   				<code>--memory-swappiness</code> option to docker run.</p>
+    #            <note>
+    #               <p>If you're using tasks that use the Fargate launch type, the
+    #   					<code>swappiness</code> parameter isn't supported.</p>
+    #               <p>If you're using tasks on Amazon Linux 2023 the <code>swappiness</code> parameter isn't
+    #   				supported.</p>
+    #            </note>
+    #   @return [Integer]
+    class LinuxParameters < Struct.new(
+      :capabilities,
+      :devices,
+      :init_process_enabled,
+      :shared_memory_size,
+      :tmpfs,
+      :max_swap,
+      :swappiness,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the account setting you want to list the settings for.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the account settings to filter results with. You must also specify an
+    #   			account setting name to use this parameter.</p>
+    #   @return [String]
+    # @!attribute principal_arn
+    #   <p>The ARN of the principal, which can be a user, role, or the root user. If this field is
+    #   			omitted, the account settings are listed only for the authenticated user.</p>
+    #            <p>In order to use this parameter, you must be the root user, or the principal.</p>
+    #            <note>
+    #               <p>Federated users assume the account setting of the root user and can't have explicit
+    #   				account settings set for them.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute effective_settings
+    #   <p>Determines whether to return the effective settings. If <code>true</code>, the account
+    #   			settings for the root user or the default setting for the <code>principalArn</code> are
+    #   			returned. If <code>false</code>, the account settings for the <code>principalArn</code>
+    #   			are returned if they're set. Otherwise, no account settings are returned.</p>
+    #   @return [Boolean]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListAccountSettings</code>
+    #   			request indicating that more results are available to fulfill the request and further
+    #   			calls will be needed. If <code>maxResults</code> was provided, it's possible the number
+    #   			of results to be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of account setting results returned by
+    #   				<code>ListAccountSettings</code> in paginated output. When this parameter is used,
+    #   				<code>ListAccountSettings</code> only returns <code>maxResults</code> results in a
+    #   			single page along with a <code>nextToken</code> response element. The remaining results
+    #   			of the initial request can be seen by sending another <code>ListAccountSettings</code>
+    #   			request with the returned <code>nextToken</code> value. This value can be between
+    #   			1 and 10. If this
+    #   			parameter isn't used, then <code>ListAccountSettings</code> returns up to
+    #   			10 results and a <code>nextToken</code> value
+    #   			if applicable.</p>
+    #   @return [Integer]
+    class ListAccountSettingsRequest < Struct.new(
+      :name,
+      :value,
+      :principal_arn,
+      :effective_settings,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute settings
+    #   <p>The account settings for the resource.</p>
+    #   @return [Array<Types::Setting>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListAccountSettings</code> request. When the results of a
+    #   				<code>ListAccountSettings</code> request exceed <code>maxResults</code>, this value
+    #   			can be used to retrieve the next page of results. This value is <code>null</code> when
+    #   			there are no more results to return.</p>
+    #   @return [String]
+    class ListAccountSettingsResponse < Struct.new(
+      :settings,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to list attributes.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute target_type
+    #   <p>The type of the target to list attributes with.</p>
+    #   @return [String]
+    # @!attribute attribute_name
+    #   <p>The name of the attribute to filter the results with. </p>
+    #   @return [String]
+    # @!attribute attribute_value
+    #   <p>The value of the attribute to filter results with. You must also specify an attribute
+    #   			name to use this parameter.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListAttributes</code> request
+    #   			indicating that more results are available to fulfill the request and further calls are
+    #   			needed. If <code>maxResults</code> was provided, it's possible the number of results to
+    #   			be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of cluster results that <code>ListAttributes</code> returned in
+    #   			paginated output. When this parameter is used, <code>ListAttributes</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListAttributes</code> request with the returned <code>nextToken</code>
+    #   			value. This value can be between 1 and 100. If this
+    #   			parameter isn't used, then <code>ListAttributes</code> returns up to
+    #   			100 results and a <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    class ListAttributesRequest < Struct.new(
+      :cluster,
+      :target_type,
+      :attribute_name,
+      :attribute_value,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute attributes
+    #   <p>A list of attribute objects that meet the criteria of the request.</p>
+    #   @return [Array<Types::Attribute>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListAttributes</code>
+    #   			request. When the results of a <code>ListAttributes</code> request exceed
+    #   				<code>maxResults</code>, this value can be used to retrieve the next page of
+    #   			results. This value is <code>null</code> when there are no more results to
+    #   			return.</p>
+    #   @return [String]
+    class ListAttributesResponse < Struct.new(
+      :attributes,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListClusters</code> request
+    #   			indicating that more results are available to fulfill the request and further calls are
+    #   			needed. If <code>maxResults</code> was provided, it's possible the number of results to
+    #   			be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of cluster results that <code>ListClusters</code> returned in
+    #   			paginated output. When this parameter is used, <code>ListClusters</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListClusters</code> request with the returned <code>nextToken</code>
+    #   			value. This value can be between 1 and 100. If this
+    #   			parameter isn't used, then <code>ListClusters</code> returns up to 100
+    #   			results and a <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    class ListClustersRequest < Struct.new(
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arns
+    #   <p>The list of full Amazon Resource Name (ARN) entries for each cluster that's associated with your
+    #   			account.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListClusters</code>
+    #   			request. When the results of a <code>ListClusters</code> request exceed
+    #   				<code>maxResults</code>, this value can be used to retrieve the next page of
+    #   			results. This value is <code>null</code> when there are no more results to
+    #   			return.</p>
+    #   @return [String]
+    class ListClustersResponse < Struct.new(
+      :cluster_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to
+    #   			list. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute filter
+    #   <p>You can filter the results of a <code>ListContainerInstances</code> operation with
+    #   			cluster query language statements. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListContainerInstances</code>
+    #   			request indicating that more results are available to fulfill the request and further
+    #   			calls are needed. If <code>maxResults</code> was provided, it's possible the number of
+    #   			results to be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of container instance results that
+    #   				<code>ListContainerInstances</code> returned in paginated output. When this
+    #   			parameter is used, <code>ListContainerInstances</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListContainerInstances</code> request with the returned
+    #   				<code>nextToken</code> value. This value can be between 1 and
+    #   			100. If this parameter isn't used, then
+    #   				<code>ListContainerInstances</code> returns up to 100 results and
+    #   			a <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    # @!attribute status
+    #   <p>Filters the container instances by status. For example, if you specify the
+    #   				<code>DRAINING</code> status, the results include only container instances that have
+    #   			been set to <code>DRAINING</code> using <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html">UpdateContainerInstancesState</a>. If you don't specify this parameter, the
+    #   			default is to include container instances set to all states other than
+    #   				<code>INACTIVE</code>.</p>
+    #   @return [String]
+    class ListContainerInstancesRequest < Struct.new(
+      :cluster,
+      :filter,
+      :next_token,
+      :max_results,
+      :status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instance_arns
+    #   <p>The list of container instances with full ARN entries for each container instance
+    #   			associated with the specified cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListContainerInstances</code> request. When the results of a
+    #   				<code>ListContainerInstances</code> request exceed <code>maxResults</code>, this
+    #   			value can be used to retrieve the next page of results. This value is <code>null</code>
+    #   			when there are no more results to return.</p>
+    #   @return [String]
+    class ListContainerInstancesResponse < Struct.new(
+      :container_instance_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The ARN or name of the service</p>
+    #   @return [String]
+    # @!attribute cluster
+    #   <p>The cluster that hosts the service. This can either be the cluster name or ARN.
+    #   			Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon
+    #   			Elastic Inference (EI), and will help current customers migrate their workloads to
+    #   			options that offer better price and performance. If you don't specify a cluster,
+    #   				<code>default</code> is used.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>An optional filter you can use to narrow the results. If you do not specify a status,
+    #   			then all status values are included in the result.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>An optional filter you can use to narrow the results by the service creation date. If
+    #   			you do not specify a value, the result includes all services created before the current
+    #   			time. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>
+    #   @return [Types::CreatedAt]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListServiceDeployments</code>
+    #   			request indicating that more results are available to fulfill the request and further
+    #   			calls are needed. If you provided <code>maxResults</code>, it's possible the number of
+    #   			results is fewer than <code>maxResults</code>.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of service deployment results that
+    #   				<code>ListServiceDeployments</code> returned in paginated output. When this
+    #   			parameter is used, <code>ListServiceDeployments</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListServiceDeployments</code> request with the returned
+    #   				<code>nextToken</code> value. This value can be between 1 and 100. If this parameter
+    #   			isn't used, then <code>ListServiceDeployments</code> returns up to 20 results and a
+    #   				<code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    class ListServiceDeploymentsRequest < Struct.new(
+      :service,
+      :cluster,
+      :status,
+      :created_at,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_deployments
+    #   <p>An overview of the service deployment, including the following properties:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The ARN of the service deployment.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The ARN of the service being deployed.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The ARN of the cluster that hosts the service in the service
+    #   					deployment.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The time that the service deployment started.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The time that the service deployment completed.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The service deployment status.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Information about why the service deployment is in the current state.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The ARN of the service revision that is being deployed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::ServiceDeploymentBrief>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListServiceDeployments</code> request. When the results of a
+    #   				<code>ListServiceDeployments</code> request exceed <code>maxResults</code>, this
+    #   			value can be used to retrieve the next page of results. This value is null when there
+    #   			are no more results to return.</p>
+    #   @return [String]
+    class ListServiceDeploymentsResponse < Struct.new(
+      :service_deployments,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute namespace
+    #   <p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace to list the services in.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value that's returned from a
+    #   				<code>ListServicesByNamespace</code> request. It indicates that more results are
+    #   			available to fulfill the request and further calls are needed. If
+    #   				<code>maxResults</code> is returned, it is possible the number of results is less
+    #   			than <code>maxResults</code>.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of service results that <code>ListServicesByNamespace</code>
+    #   			returns in paginated output. When this parameter is used,
+    #   				<code>ListServicesByNamespace</code> only returns <code>maxResults</code> results in
+    #   			a single page along with a <code>nextToken</code> response element. The remaining
+    #   			results of the initial request can be seen by sending another
+    #   				<code>ListServicesByNamespace</code> request with the returned
+    #   				<code>nextToken</code> value. This value can be between 1 and
+    #   			100. If this parameter isn't used, then
+    #   				<code>ListServicesByNamespace</code> returns up to
+    #   			10 results and a <code>nextToken</code>
+    #   			value if applicable.</p>
+    #   @return [Integer]
+    class ListServicesByNamespaceRequest < Struct.new(
+      :namespace,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_arns
+    #   <p>The list of full ARN entries for each service that's associated with the specified
+    #   			namespace.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListServicesByNamespace</code> request. When the results of a
+    #   				<code>ListServicesByNamespace</code> request exceed <code>maxResults</code>, this
+    #   			value can be used to retrieve the next page of results. When there are no more results
+    #   			to return, this value is <code>null</code>.</p>
+    #   @return [String]
+    class ListServicesByNamespaceResponse < Struct.new(
+      :service_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the
+    #   				<code>ListServices</code> results. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListServices</code> request
+    #   			indicating that more results are available to fulfill the request and further calls will
+    #   			be needed. If <code>maxResults</code> was provided, it is possible the number of results
+    #   			to be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of service results that <code>ListServices</code> returned in
+    #   			paginated output. When this parameter is used, <code>ListServices</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListServices</code> request with the returned <code>nextToken</code>
+    #   			value. This value can be between 1 and 100. If
+    #   			this parameter isn't used, then <code>ListServices</code> returns up to
+    #   			10 results and a <code>nextToken</code> value if
+    #   			applicable.</p>
+    #   @return [Integer]
+    # @!attribute launch_type
+    #   <p>The launch type to use when filtering the <code>ListServices</code> results.</p>
+    #   @return [String]
+    # @!attribute scheduling_strategy
+    #   <p>The scheduling strategy to use when filtering the <code>ListServices</code>
+    #   			results.</p>
+    #   @return [String]
+    class ListServicesRequest < Struct.new(
+      :cluster,
+      :next_token,
+      :max_results,
+      :launch_type,
+      :scheduling_strategy,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_arns
+    #   <p>The list of full ARN entries for each service that's associated with the specified
+    #   			cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListServices</code>
+    #   			request. When the results of a <code>ListServices</code> request exceed
+    #   				<code>maxResults</code>, this value can be used to retrieve the next page of
+    #   			results. This value is <code>null</code> when there are no more results to
+    #   			return.</p>
+    #   @return [String]
+    class ListServicesResponse < Struct.new(
+      :service_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the
+    #   			supported resources are Amazon ECS tasks, services, task definitions, clusters, and container
+    #   			instances.</p>
+    #   @return [String]
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute tags
+    #   <p>The tags for the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute family_prefix
+    #   <p>The <code>familyPrefix</code> is a string that's used to filter the results of
+    #   				<code>ListTaskDefinitionFamilies</code>. If you specify a <code>familyPrefix</code>,
+    #   			only task definition family names that begin with the <code>familyPrefix</code> string
+    #   			are returned.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The task definition family status to filter the
+    #   				<code>ListTaskDefinitionFamilies</code> results with. By default, both
+    #   				<code>ACTIVE</code> and <code>INACTIVE</code> task definition families are listed.
+    #   			If this parameter is set to <code>ACTIVE</code>, only task definition families that have
+    #   			an <code>ACTIVE</code> task definition revision are returned. If this parameter is set
+    #   			to <code>INACTIVE</code>, only task definition families that do not have any
+    #   				<code>ACTIVE</code> task definition revisions are returned. If you paginate the
+    #   			resulting output, be sure to keep the <code>status</code> value constant in each
+    #   			subsequent request.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a
+    #   				<code>ListTaskDefinitionFamilies</code> request indicating that more results are
+    #   			available to fulfill the request and further calls will be needed. If
+    #   				<code>maxResults</code> was provided, it is possible the number of results to be
+    #   			fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of task definition family results that
+    #   				<code>ListTaskDefinitionFamilies</code> returned in paginated output. When this
+    #   			parameter is used, <code>ListTaskDefinitions</code> only returns <code>maxResults</code>
+    #   			results in a single page along with a <code>nextToken</code> response element. The
+    #   			remaining results of the initial request can be seen by sending another
+    #   				<code>ListTaskDefinitionFamilies</code> request with the returned
+    #   				<code>nextToken</code> value. This value can be between 1 and
+    #   			100. If this parameter isn't used, then
+    #   				<code>ListTaskDefinitionFamilies</code> returns up to 100 results
+    #   			and a <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    class ListTaskDefinitionFamiliesRequest < Struct.new(
+      :family_prefix,
+      :status,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute families
+    #   <p>The list of task definition family names that match the
+    #   				<code>ListTaskDefinitionFamilies</code> request.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListTaskDefinitionFamilies</code> request. When the results of a
+    #   				<code>ListTaskDefinitionFamilies</code> request exceed <code>maxResults</code>, this
+    #   			value can be used to retrieve the next page of results. This value is <code>null</code>
+    #   			when there are no more results to return.</p>
+    #   @return [String]
+    class ListTaskDefinitionFamiliesResponse < Struct.new(
+      :families,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute family_prefix
+    #   <p>The full family name to filter the <code>ListTaskDefinitions</code> results with.
+    #   			Specifying a <code>familyPrefix</code> limits the listed task definitions to task
+    #   			definition revisions that belong to that family.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The task definition status to filter the <code>ListTaskDefinitions</code> results
+    #   			with. By default, only <code>ACTIVE</code> task definitions are listed. By setting this
+    #   			parameter to <code>INACTIVE</code>, you can view task definitions that are
+    #   				<code>INACTIVE</code> as long as an active task or service still references them. If
+    #   			you paginate the resulting output, be sure to keep the <code>status</code> value
+    #   			constant in each subsequent request.</p>
+    #   @return [String]
+    # @!attribute sort
+    #   <p>The order to sort the results in. Valid values are <code>ASC</code> and
+    #   				<code>DESC</code>. By default, (<code>ASC</code>) task definitions are listed
+    #   			lexicographically by family name and in ascending numerical order by revision so that
+    #   			the newest task definitions in a family are listed last. Setting this parameter to
+    #   				<code>DESC</code> reverses the sort order on family name and revision. This is so
+    #   			that the newest task definitions in a family are listed first.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListTaskDefinitions</code>
+    #   			request indicating that more results are available to fulfill the request and further
+    #   			calls will be needed. If <code>maxResults</code> was provided, it is possible the number
+    #   			of results to be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of task definition results that <code>ListTaskDefinitions</code>
+    #   			returned in paginated output. When this parameter is used,
+    #   				<code>ListTaskDefinitions</code> only returns <code>maxResults</code> results in a
+    #   			single page along with a <code>nextToken</code> response element. The remaining results
+    #   			of the initial request can be seen by sending another <code>ListTaskDefinitions</code>
+    #   			request with the returned <code>nextToken</code> value. This value can be between
+    #   			1 and 100. If this parameter isn't used, then
+    #   				<code>ListTaskDefinitions</code> returns up to 100 results and a
+    #   				<code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    class ListTaskDefinitionsRequest < Struct.new(
+      :family_prefix,
+      :status,
+      :sort,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition_arns
+    #   <p>The list of task definition Amazon Resource Name (ARN) entries for the <code>ListTaskDefinitions</code>
+    #   			request.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #   				<code>ListTaskDefinitions</code> request. When the results of a
+    #   				<code>ListTaskDefinitions</code> request exceed <code>maxResults</code>, this value
+    #   			can be used to retrieve the next page of results. This value is <code>null</code> when
+    #   			there are no more results to return.</p>
+    #   @return [String]
+    class ListTaskDefinitionsResponse < Struct.new(
+      :task_definition_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the
+    #   				<code>ListTasks</code> results. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container_instance
+    #   <p>The container instance ID or full ARN of the container instance to use when
+    #   			filtering the <code>ListTasks</code> results. Specifying a
+    #   				<code>containerInstance</code> limits the results to tasks that belong to that
+    #   			container instance.</p>
+    #   @return [String]
+    # @!attribute family
+    #   <p>The name of the task definition family to use when filtering the
+    #   				<code>ListTasks</code> results. Specifying a <code>family</code> limits the results
+    #   			to tasks that belong to that family.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a <code>ListTasks</code> request
+    #   			indicating that more results are available to fulfill the request and further calls will
+    #   			be needed. If <code>maxResults</code> was provided, it's possible the number of results
+    #   			to be fewer than <code>maxResults</code>.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of task results that <code>ListTasks</code> returned in paginated
+    #   			output. When this parameter is used, <code>ListTasks</code> only returns
+    #   				<code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #   			response element. The remaining results of the initial request can be seen by sending
+    #   			another <code>ListTasks</code> request with the returned <code>nextToken</code> value.
+    #   			This value can be between 1 and 100. If this parameter
+    #   			isn't used, then <code>ListTasks</code> returns up to 100 results and
+    #   			a <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    # @!attribute started_by
+    #   <p>The <code>startedBy</code> value to filter the task results with. Specifying a
+    #   				<code>startedBy</code> value limits the results to tasks that were started with that
+    #   			value.</p>
+    #            <p>When you specify <code>startedBy</code> as the filter, it must be the only filter that
+    #   			you use.</p>
+    #   @return [String]
+    # @!attribute service_name
+    #   <p>The name of the service to use when filtering the <code>ListTasks</code> results.
+    #   			Specifying a <code>serviceName</code> limits the results to tasks that belong to that
+    #   			service.</p>
+    #   @return [String]
+    # @!attribute desired_status
+    #   <p>The task desired status to use when filtering the <code>ListTasks</code> results.
+    #   			Specifying a <code>desiredStatus</code> of <code>STOPPED</code> limits the results to
+    #   			tasks that Amazon ECS has set the desired status to <code>STOPPED</code>. This can be useful
+    #   			for debugging tasks that aren't starting properly or have died or finished. The default
+    #   			status filter is <code>RUNNING</code>, which shows tasks that Amazon ECS has set the desired
+    #   			status to <code>RUNNING</code>.</p>
+    #            <note>
+    #               <p>Although you can filter results based on a desired status of <code>PENDING</code>,
+    #   				this doesn't return any results. Amazon ECS never sets the desired status of a task to
+    #   				that value (only a task's <code>lastStatus</code> may have a value of
+    #   					<code>PENDING</code>).</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute launch_type
+    #   <p>The launch type to use when filtering the <code>ListTasks</code> results.</p>
+    #   @return [String]
+    class ListTasksRequest < Struct.new(
+      :cluster,
+      :container_instance,
+      :family,
+      :next_token,
+      :max_results,
+      :started_by,
+      :service_name,
+      :desired_status,
+      :launch_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_arns
+    #   <p>The list of task ARN entries for the <code>ListTasks</code> request.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListTasks</code>
+    #   			request. When the results of a <code>ListTasks</code> request exceed
+    #   				<code>maxResults</code>, this value can be used to retrieve the next page of
+    #   			results. This value is <code>null</code> when there are no more results to
+    #   			return.</p>
+    #   @return [String]
+    class ListTasksResponse < Struct.new(
+      :task_arns,
+      :next_token,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The load balancer configuration to use with a service or task set.</p>
+    #          <p>When you add, update, or remove a load balancer configuration, Amazon ECS starts a new
+    # 			deployment with the updated Elastic Load Balancing configuration. This causes tasks to register to and
+    # 			deregister from load balancers.</p>
+    #          <p>We recommend that you verify this on a test environment before you update the Elastic Load Balancing
+    # 			configuration. </p>
+    #          <p>A service-linked role is required for services that use multiple target groups. For
+    # 			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using
+    # 				service-linked roles</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute target_group_arn
+    #   <p>The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or
+    #   			task set.</p>
+    #            <p>A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. </p>
+    #            <p>For services using the <code>ECS</code> deployment controller, you can specify one or
+    #   			multiple target groups. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html">Registering multiple target groups with a service</a> in
+    #   			the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>For services using the <code>CODE_DEPLOY</code> deployment controller, you're required
+    #   			to define two target groups for the load balancer. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html">Blue/green deployment with CodeDeploy</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <important>
+    #               <p>If your service's task definition uses the <code>awsvpc</code> network mode, you
+    #   				must choose <code>ip</code> as the target type, not <code>instance</code>. Do this
+    #   				when creating your target groups because tasks that use the <code>awsvpc</code>
+    #   				network mode are associated with an elastic network interface, not an Amazon EC2
+    #   				instance. This network mode is required for the Fargate launch
+    #   				type.</p>
+    #            </important>
+    #   @return [String]
+    # @!attribute load_balancer_name
+    #   <p>The name of the load balancer to associate with the Amazon ECS service or task set.</p>
+    #            <p>If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be
+    #   			omitted.</p>
+    #   @return [String]
+    # @!attribute container_name
+    #   <p>The name of the container (as it appears in a container definition) to associate with
+    #   			the load balancer.</p>
+    #            <p>You need to specify the container name when configuring the target group for an Amazon ECS
+    #   			load balancer.</p>
+    #   @return [String]
+    # @!attribute container_port
+    #   <p>The port on the container to associate with the load balancer. This port must
+    #   			correspond to a <code>containerPort</code> in the task definition the tasks in the
+    #   			service are using. For tasks that use the EC2 launch type, the container
+    #   			instance they're launched on must allow ingress traffic on the <code>hostPort</code> of
+    #   			the port mapping.</p>
+    #   @return [Integer]
+    # @!attribute advanced_configuration
+    #   <p>The advanced settings for the load balancer used in blue/green deployments. Specify the alternate target group, listener rules, and IAM role required for traffic shifting during blue/green deployments.</p>
+    #   @return [Types::AdvancedConfiguration]
+    class LoadBalancer < Struct.new(
+      :target_group_arn,
+      :load_balancer_name,
+      :container_name,
+      :container_port,
+      :advanced_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The log configuration for the container. This parameter maps to <code>LogConfig</code>
+    # 			in the docker container create command and the <code>--log-driver</code> option to
+    # 			docker run.</p>
+    #          <p>By default, containers use the same logging driver that the Docker daemon uses.
+    # 			However, the container might use a different logging driver than the Docker daemon by
+    # 			specifying a log driver configuration in the container definition.</p>
+    #          <p>Understand the following when specifying a log configuration for your
+    # 			containers.</p>
+    #          <ul>
+    #             <li>
+    #                <p>Amazon ECS currently supports a subset of the logging drivers available to the
+    # 					Docker daemon. Additional log drivers may be available in future releases of the
+    # 					Amazon ECS container agent.</p>
+    #                <p>For tasks on Fargate, the supported log drivers are <code>awslogs</code>,
+    # 						<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #                <p>For tasks hosted on Amazon EC2 instances, the supported log drivers are
+    # 						<code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>,
+    # 						<code>json-file</code>, <code>journald</code>,<code>syslog</code>,
+    # 						<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>This parameter requires version 1.18 of the Docker Remote API or greater on
+    # 					your container instance.</p>
+    #             </li>
+    #             <li>
+    #                <p>For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must
+    # 					register the available logging drivers with the
+    # 						<code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before
+    # 					containers placed on that instance can use these log configuration options. For
+    # 					more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS container agent configuration</a> in the
+    # 					<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #             </li>
+    #             <li>
+    #                <p>For tasks that are on Fargate, because you don't have access to the
+    # 					underlying infrastructure your tasks are hosted on, any additional software
+    # 					needed must be installed outside of the task. For example, the Fluentd output
+    # 					aggregators or a remote host running Logstash to send Gelf logs to.</p>
+    #             </li>
+    #          </ul>
+    # @!attribute log_driver
+    #   <p>The log driver to use for the container.</p>
+    #            <p>For tasks on Fargate, the supported log drivers are <code>awslogs</code>,
+    #   				<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #            <p>For tasks hosted on Amazon EC2 instances, the supported log drivers are
+    #   				<code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>,
+    #   				<code>json-file</code>, <code>journald</code>, <code>syslog</code>,
+    #   				<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #            <p>For more information about using the <code>awslogs</code> log driver, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html">Send
+    #   				Amazon ECS logs to CloudWatch</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>For more information about using the <code>awsfirelens</code> log driver, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html">Send
+    #   				Amazon ECS logs to an Amazon Web Services service or Amazon Web Services Partner</a>.</p>
+    #            <note>
+    #               <p>If you have a custom driver that isn't listed, you can fork the Amazon ECS container
+    #   				agent project that's <a href="https://github.com/aws/amazon-ecs-agent">available
+    #   					on GitHub</a> and customize it to work with that driver. We encourage you to
+    #   				submit pull requests for changes that you would like to have included. However, we
+    #   				don't currently provide support for running modified copies of this software.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute options
+    #   <p>The configuration options to send to the log driver.</p>
+    #            <p>The options you can specify depend on the log driver. Some of the options you can
+    #   			specify when you use the <code>awslogs</code> log driver to route logs to Amazon CloudWatch
+    #   			include the following:</p>
+    #            <dl>
+    #               <dt>awslogs-create-group</dt>
+    #               <dd>
+    #                  <p>Required: No</p>
+    #                  <p>Specify whether you want the log group to be created automatically. If
+    #   						this option isn't specified, it defaults to <code>false</code>.</p>
+    #                  <note>
+    #                     <p>Your IAM policy must include the <code>logs:CreateLogGroup</code>
+    #   							permission before you attempt to use
+    #   							<code>awslogs-create-group</code>.</p>
+    #                  </note>
+    #               </dd>
+    #               <dt>awslogs-region</dt>
+    #               <dd>
+    #                  <p>Required: Yes</p>
+    #                  <p>Specify the Amazon Web Services Region that the <code>awslogs</code> log driver is to
+    #   						send your Docker logs to. You can choose to send all of your logs from
+    #   						clusters in different Regions to a single region in CloudWatch Logs. This is so that
+    #   						they're all visible in one location. Otherwise, you can separate them by
+    #   						Region for more granularity. Make sure that the specified log group exists
+    #   						in the Region that you specify with this option.</p>
+    #               </dd>
+    #               <dt>awslogs-group</dt>
+    #               <dd>
+    #                  <p>Required: Yes</p>
+    #                  <p>Make sure to specify a log group that the <code>awslogs</code> log driver
+    #   						sends its log streams to.</p>
+    #               </dd>
+    #               <dt>awslogs-stream-prefix</dt>
+    #               <dd>
+    #                  <p>Required: Yes, when using Fargate.Optional when using EC2.</p>
+    #                  <p>Use the <code>awslogs-stream-prefix</code> option to associate a log
+    #   						stream with the specified prefix, the container name, and the ID of the
+    #   						Amazon ECS task that the container belongs to. If you specify a prefix with this
+    #   						option, then the log stream takes the format
+    #   							<code>prefix-name/container-name/ecs-task-id</code>.</p>
+    #                  <p>If you don't specify a prefix with this option, then the log stream is
+    #   						named after the container ID that's assigned by the Docker daemon on the
+    #   						container instance. Because it's difficult to trace logs back to the
+    #   						container that sent them with just the Docker container ID (which is only
+    #   						available on the container instance), we recommend that you specify a prefix
+    #   						with this option.</p>
+    #                  <p>For Amazon ECS services, you can use the service name as the prefix. Doing so,
+    #   						you can trace log streams to the service that the container belongs to, the
+    #   						name of the container that sent them, and the ID of the task that the
+    #   						container belongs to.</p>
+    #                  <p>You must specify a stream-prefix for your logs to have your logs appear in
+    #   						the Log pane when using the Amazon ECS console.</p>
+    #               </dd>
+    #               <dt>awslogs-datetime-format</dt>
+    #               <dd>
+    #                  <p>Required: No</p>
+    #                  <p>This option defines a multiline start pattern in Python
+    #   							<code>strftime</code> format. A log message consists of a line that
+    #   						matches the pattern and any following lines that don’t match the pattern.
+    #   						The matched line is the delimiter between log messages.</p>
+    #                  <p>One example of a use case for using this format is for parsing output such
+    #   						as a stack dump, which might otherwise be logged in multiple entries. The
+    #   						correct pattern allows it to be captured in a single entry.</p>
+    #                  <p>For more information, see <a href="https://docs.docker.com/config/containers/logging/awslogs/#awslogs-datetime-format">awslogs-datetime-format</a>.</p>
+    #                  <p>You cannot configure both the <code>awslogs-datetime-format</code> and
+    #   							<code>awslogs-multiline-pattern</code> options.</p>
+    #                  <note>
+    #                     <p>Multiline logging performs regular expression parsing and matching of
+    #   							all log messages. This might have a negative impact on logging
+    #   							performance.</p>
+    #                  </note>
+    #               </dd>
+    #               <dt>awslogs-multiline-pattern</dt>
+    #               <dd>
+    #                  <p>Required: No</p>
+    #                  <p>This option defines a multiline start pattern that uses a regular
+    #   						expression. A log message consists of a line that matches the pattern and
+    #   						any following lines that don’t match the pattern. The matched line is the
+    #   						delimiter between log messages.</p>
+    #                  <p>For more information, see <a href="https://docs.docker.com/config/containers/logging/awslogs/#awslogs-multiline-pattern">awslogs-multiline-pattern</a>.</p>
+    #                  <p>This option is ignored if <code>awslogs-datetime-format</code> is also
+    #   						configured.</p>
+    #                  <p>You cannot configure both the <code>awslogs-datetime-format</code> and
+    #   							<code>awslogs-multiline-pattern</code> options.</p>
+    #                  <note>
+    #                     <p>Multiline logging performs regular expression parsing and matching of
+    #   							all log messages. This might have a negative impact on logging
+    #   							performance.</p>
+    #                  </note>
+    #               </dd>
+    #            </dl>
+    #            <p>The following options apply to all supported log drivers.</p>
+    #            <dl>
+    #               <dt>mode</dt>
+    #               <dd>
+    #                  <p>Required: No</p>
+    #                  <p>Valid values: <code>non-blocking</code> | <code>blocking</code>
+    #                  </p>
+    #                  <p>This option defines the delivery mode of log messages from the container
+    #   						to the log driver specified using <code>logDriver</code>. The delivery mode
+    #   						you choose affects application availability when the flow of logs from
+    #   						container is interrupted.</p>
+    #                  <p>If you use the <code>blocking</code> mode and the flow of logs is
+    #   						interrupted, calls from container code to write to the <code>stdout</code>
+    #   						and <code>stderr</code> streams will block. The logging thread of the
+    #   						application will block as a result. This may cause the application to become
+    #   						unresponsive and lead to container healthcheck failure. </p>
+    #                  <p>If you use the <code>non-blocking</code> mode, the container's logs are
+    #   						instead stored in an in-memory intermediate buffer configured with the
+    #   							<code>max-buffer-size</code> option. This prevents the application from
+    #   						becoming unresponsive when logs cannot be sent. We recommend using this mode
+    #   						if you want to ensure service availability and are okay with some log loss.
+    #   						For more information, see <a href="http://aws.amazon.com/blogs/containers/preventing-log-loss-with-non-blocking-mode-in-the-awslogs-container-log-driver/">Preventing log loss with non-blocking mode in the <code>awslogs</code>
+    #   							container log driver</a>.</p>
+    #                  <p>You can set a default <code>mode</code> for all containers in a specific
+    #   						Amazon Web Services Region by using the <code>defaultLogDriverMode</code> account setting.
+    #   						If you don't specify the <code>mode</code> option or
+    #   						configure the account setting, Amazon ECS will default to the
+    #   							<code>non-blocking</code> mode. For more information about the account setting, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#default-log-driver-mode">Default log driver mode</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #                  <note>
+    #                     <p>On June 25, 2025, Amazon ECS changed the default log driver mode from <code>blocking</code> to <code>non-blocking</code> to prioritize task availability over logging. To continue using the <code>blocking</code> mode after this change, do one of the following:</p>
+    #                     <ul>
+    #                        <li>
+    #                           <p>Set the <code>mode</code> option in your container definition's <code>logConfiguration</code> as <code>blocking</code>.</p>
+    #                        </li>
+    #                        <li>
+    #                           <p>Set the <code>defaultLogDriverMode</code> account setting to <code>blocking</code>.</p>
+    #                        </li>
+    #                     </ul>
+    #                  </note>
+    #               </dd>
+    #               <dt>max-buffer-size</dt>
+    #               <dd>
+    #                  <p>Required: No</p>
+    #                  <p>Default value: <code>1m</code>
+    #                  </p>
+    #                  <p>When <code>non-blocking</code> mode is used, the
+    #   							<code>max-buffer-size</code> log option controls the size of the buffer
+    #   						that's used for intermediate message storage. Make sure to specify an
+    #   						adequate buffer size based on your application. When the buffer fills up,
+    #   						further logs cannot be stored. Logs that cannot be stored are lost. </p>
+    #               </dd>
+    #            </dl>
+    #            <p>To route logs using the <code>splunk</code> log router, you need to specify a
+    #   				<code>splunk-token</code> and a <code>splunk-url</code>.</p>
+    #            <p>When you use the <code>awsfirelens</code> log router to route logs to an Amazon Web Services Service
+    #   			or Amazon Web Services Partner Network destination for log storage and analytics, you can set the
+    #   				<code>log-driver-buffer-limit</code> option to limit the number of events that are
+    #   			buffered in memory, before being sent to the log router container. It can help to
+    #   			resolve potential log loss issue because high throughput might result in memory running
+    #   			out for the buffer inside of Docker.</p>
+    #            <p>Other options you can specify when using <code>awsfirelens</code> to route logs depend
+    #   			on the destination. When you export logs to Amazon Data Firehose, you can specify the Amazon Web Services Region
+    #   			with <code>region</code> and a name for the log stream with
+    #   			<code>delivery_stream</code>.</p>
+    #            <p>When you export logs to Amazon Kinesis Data Streams, you can specify an Amazon Web Services Region with
+    #   				<code>region</code> and a data stream name with <code>stream</code>.</p>
+    #            <p> When you export logs to Amazon OpenSearch Service, you can specify options like <code>Name</code>,
+    #   				<code>Host</code> (OpenSearch Service endpoint without protocol), <code>Port</code>,
+    #   				<code>Index</code>, <code>Type</code>, <code>Aws_auth</code>,
+    #   				<code>Aws_region</code>, <code>Suppress_Type_Name</code>, and <code>tls</code>. For
+    #   			more information, see <a href="http://aws.amazon.com/blogs/containers/under-the-hood-firelens-for-amazon-ecs-tasks/">Under the hood:
+    #   				FireLens for Amazon ECS Tasks</a>.</p>
+    #            <p>When you export logs to Amazon S3, you can specify the bucket using the <code>bucket</code>
+    #   			option. You can also specify <code>region</code>, <code>total_file_size</code>,
+    #   				<code>upload_timeout</code>, and <code>use_put_object</code> as options.</p>
+    #            <p>This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>
+    #            </p>
+    #   @return [Hash<String, String>]
+    # @!attribute secret_options
+    #   <p>The secrets to pass to the log configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying
+    #   				sensitive data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<Types::Secret>]
+    class LogConfiguration < Struct.new(
+      :log_driver,
+      :options,
+      :secret_options,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module LogDriver
+      JSON_FILE = 'json-file'
+      SYSLOG = 'syslog'
+      JOURNALD = 'journald'
+      GELF = 'gelf'
+      FLUENTD = 'fluentd'
+      AWSLOGS = 'awslogs'
+      SPLUNK = 'splunk'
+      AWSFIRELENS = 'awsfirelens'
+    end
+
+    # <p>Details about the managed agent status for the container.</p>
+    # @!attribute last_started_at
+    #   <p>The Unix timestamp for the time when the managed agent was last started.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the managed agent. When the execute command feature is turned on, the
+    #   			managed agent name is <code>ExecuteCommandAgent</code>.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for why the managed agent is in the state it is in.</p>
+    #   @return [String]
+    # @!attribute last_status
+    #   <p>The last known status of the managed agent.</p>
+    #   @return [String]
+    class ManagedAgent < Struct.new(
+      :last_started_at,
+      :name,
+      :reason,
+      :last_status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ManagedAgentName
+      ExecuteCommandAgent = 'ExecuteCommandAgent'
+    end
+
+    # <p>An object representing a change in state for a managed agent.</p>
+    # @!attribute container_name
+    #   <p>The name of the container that's associated with the managed agent.</p>
+    #   @return [String]
+    # @!attribute managed_agent_name
+    #   <p>The name of the managed agent.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the managed agent.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the status of the managed agent.</p>
+    #   @return [String]
+    class ManagedAgentStateChange < Struct.new(
+      :container_name,
+      :managed_agent_name,
+      :status,
+      :reason,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ManagedDraining
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>The managed scaling settings for the Auto Scaling group capacity provider.</p>
+    #          <p>When managed scaling is turned on, Amazon ECS manages the scale-in and scale-out actions of
+    # 			the Auto Scaling group. Amazon ECS manages a target tracking scaling policy using an Amazon ECS
+    # 			managed CloudWatch metric with the specified <code>targetCapacity</code> value as the target
+    # 			value for the metric. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling">Using managed scaling</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <p>If managed scaling is off, the user must manage the scaling of the Auto Scaling
+    # 			group.</p>
+    # @!attribute status
+    #   <p>Determines whether to use managed scaling for the capacity provider.</p>
+    #   @return [String]
+    # @!attribute target_capacity
+    #   <p>The target capacity utilization as a percentage for the capacity provider. The
+    #   			specified value must be greater than <code>0</code> and less than or equal to
+    #   				<code>100</code>. For example, if you want the capacity provider to maintain 10%
+    #   			spare capacity, then that means the utilization is 90%, so use a
+    #   				<code>targetCapacity</code> of <code>90</code>. The default value of
+    #   				<code>100</code> percent results in the Amazon EC2 instances in your Auto Scaling group
+    #   			being completely used.</p>
+    #   @return [Integer]
+    # @!attribute minimum_scaling_step_size
+    #   <p>The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale
+    #   			in process is not affected by this parameter If this parameter is omitted, the default
+    #   			value of <code>1</code> is used.</p>
+    #            <p>When additional capacity is required, Amazon ECS will scale up the minimum scaling step
+    #   			size even if the actual demand is less than the minimum scaling step size.</p>
+    #            <p>If you use a capacity provider with an Auto Scaling group configured with more than
+    #   			one Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up by the exact minimum
+    #   			scaling step size value and will ignore both the maximum scaling step size as well as
+    #   			the capacity demand.</p>
+    #   @return [Integer]
+    # @!attribute maximum_scaling_step_size
+    #   <p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. If this
+    #   			parameter is omitted, the default value of <code>10000</code> is used.</p>
+    #   @return [Integer]
+    # @!attribute instance_warmup_period
+    #   <p>The period of time, in seconds, after a newly launched Amazon EC2 instance can contribute
+    #   			to CloudWatch metrics for Auto Scaling group. If this parameter is omitted, the default value
+    #   			of <code>300</code> seconds is used.</p>
+    #   @return [Integer]
+    class ManagedScaling < Struct.new(
+      :status,
+      :target_capacity,
+      :minimum_scaling_step_size,
+      :maximum_scaling_step_size,
+      :instance_warmup_period,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ManagedScalingStatus
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>The managed storage configuration for the cluster.</p>
+    # @!attribute kms_key_id
+    #   <p>Specify a Key Management Service key ID to encrypt Amazon ECS managed storage.</p>
+    #            <p> When you specify a <code>kmsKeyId</code>, Amazon ECS uses the key to encrypt data volumes
+    #   			managed by Amazon ECS that are attached to tasks in the cluster. The following data volumes
+    #   			are managed by Amazon ECS: Amazon EBS. For more information about encryption of Amazon EBS volumes
+    #   			attached to Amazon ECS tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html">Encrypt data stored in Amazon EBS volumes for Amazon ECS</a> in the
+    #   			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The key must be a single Region key.</p>
+    #   @return [String]
+    # @!attribute fargate_ephemeral_storage_kms_key_id
+    #   <p>Specify the Key Management Service key ID for Fargate ephemeral storage.</p>
+    #            <p>When you specify a <code>fargateEphemeralStorageKmsKeyId</code>, Amazon Web Services Fargate uses
+    #   			the key to encrypt data at rest in ephemeral storage. For more information about
+    #   			Fargate ephemeral storage encryption, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html">Customer managed keys for Amazon Web Services Fargate ephemeral storage for
+    #   				Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The key must be a single Region key.</p>
+    #   @return [String]
+    class ManagedStorageConfiguration < Struct.new(
+      :kms_key_id,
+      :fargate_ephemeral_storage_kms_key_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ManagedTerminationProtection
+      ENABLED = 'ENABLED'
+      DISABLED = 'DISABLED'
+    end
+
+    # <p>Amazon ECS can't determine the current version of the Amazon ECS container agent on the
+    # 			container instance and doesn't have enough information to proceed with an update. This
+    # 			could be because the agent running on the container instance is a previous or custom
+    # 			version that doesn't use our version information.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class MissingVersionException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details for a volume mount point that's used in a container definition.</p>
+    # @!attribute source_volume
+    #   <p>The name of the volume to mount. Must be a volume name referenced in the
+    #   				<code>name</code> parameter of task definition <code>volume</code>.</p>
+    #   @return [String]
+    # @!attribute container_path
+    #   <p>The path on the container to mount the host volume at.</p>
+    #   @return [String]
+    # @!attribute read_only
+    #   <p>If this value is <code>true</code>, the container has read-only access to the volume.
+    #   			If this value is <code>false</code>, then the container can write to the volume. The
+    #   			default value is <code>false</code>.</p>
+    #   @return [Boolean]
+    class MountPoint < Struct.new(
+      :source_volume,
+      :container_path,
+      :read_only,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified namespace wasn't found.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class NamespaceNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on the network bindings between a container and its host container instance.
+    # 			After a task reaches the <code>RUNNING</code> status, manual and automatic host and
+    # 			container port assignments are visible in the <code>networkBindings</code> section of
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">DescribeTasks</a> API
+    # 			responses.</p>
+    # @!attribute bind_ip
+    #   <p>The IP address that the container is bound to on the container instance.</p>
+    #   @return [String]
+    # @!attribute container_port
+    #   <p>The port number on the container that's used with the network binding.</p>
+    #   @return [Integer]
+    # @!attribute host_port
+    #   <p>The port number on the host that's used with the network binding.</p>
+    #   @return [Integer]
+    # @!attribute protocol
+    #   <p>The protocol used for the network binding.</p>
+    #   @return [String]
+    # @!attribute container_port_range
+    #   <p>The port number range on the container that's bound to the dynamically mapped host
+    #   			port range.</p>
+    #            <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>
+    #   					network mode.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter is available for both the EC2 and Fargate launch types.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter is available for both the Linux and Windows operating systems.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The container instance must have at least version 1.67.0 of the container agent
+    #   					and at least version 1.67.0-1 of the <code>ecs-init</code> package </p>
+    #               </li>
+    #               <li>
+    #                  <p>You can specify a maximum of 100 port ranges per container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set
+    #   					as follows:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>For containers in a task with the <code>awsvpc</code> network mode,
+    #   							the <code>hostPortRange</code> is set to the same value as the
+    #   								<code>containerPortRange</code>. This is a static mapping
+    #   							strategy.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>The <code>containerPortRange</code> valid values are between 1 and
+    #   					65535.</p>
+    #               </li>
+    #               <li>
+    #                  <p>A port can only be included in one port mapping per container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>You cannot specify overlapping port ranges.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The first port in the range must be less than last port in the range.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>
+    #                  <p>For more information, see <a href="https://github.com/moby/moby/issues/11185"> Issue #11185</a> on the Github website.</p>
+    #                  <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>You can call <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">
+    #                  <code>DescribeTasks</code>
+    #               </a> to view the <code>hostPortRange</code> which
+    #   			are the host ports that are bound to the container ports.</p>
+    #   @return [String]
+    # @!attribute host_port_range
+    #   <p>The port number range on the host that's used with the network binding. This is
+    #   			assigned is assigned by Docker and delivered by the Amazon ECS agent.</p>
+    #   @return [String]
+    class NetworkBinding < Struct.new(
+      :bind_ip,
+      :container_port,
+      :host_port,
+      :protocol,
+      :container_port_range,
+      :host_port_range,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The network configuration for a task or service.</p>
+    # @!attribute awsvpc_configuration
+    #   <p>The VPC subnets and security groups that are associated with a task.</p>
+    #            <note>
+    #               <p>All specified subnets and security groups must be from the same VPC.</p>
+    #            </note>
+    #   @return [Types::AwsVpcConfiguration]
+    class NetworkConfiguration < Struct.new(
+      :awsvpc_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object representing the elastic network interface for tasks that use the
+    # 				<code>awsvpc</code> network mode.</p>
+    # @!attribute attachment_id
+    #   <p>The attachment ID for the network interface.</p>
+    #   @return [String]
+    # @!attribute private_ipv4_address
+    #   <p>The private IPv4 address for the network interface.</p>
+    #   @return [String]
+    # @!attribute ipv6_address
+    #   <p>The private IPv6 address for the network interface.</p>
+    #   @return [String]
+    class NetworkInterface < Struct.new(
+      :attachment_id,
+      :private_ipv4_address,
+      :ipv6_address,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module NetworkMode
+      BRIDGE = 'bridge'
+      HOST = 'host'
+      AWSVPC = 'awsvpc'
+      NONE = 'none'
+    end
+
+    # <p>There's no update available for this Amazon ECS container agent. This might be because the
+    # 			agent is already running the latest version or because it's so old that there's no
+    # 			update path to the current version.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class NoUpdateAvailableException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module OSFamily
+      WINDOWS_SERVER_2019_FULL = 'WINDOWS_SERVER_2019_FULL'
+      WINDOWS_SERVER_2019_CORE = 'WINDOWS_SERVER_2019_CORE'
+      WINDOWS_SERVER_2016_FULL = 'WINDOWS_SERVER_2016_FULL'
+      WINDOWS_SERVER_2004_CORE = 'WINDOWS_SERVER_2004_CORE'
+      WINDOWS_SERVER_2022_CORE = 'WINDOWS_SERVER_2022_CORE'
+      WINDOWS_SERVER_2022_FULL = 'WINDOWS_SERVER_2022_FULL'
+      WINDOWS_SERVER_2025_CORE = 'WINDOWS_SERVER_2025_CORE'
+      WINDOWS_SERVER_2025_FULL = 'WINDOWS_SERVER_2025_FULL'
+      WINDOWS_SERVER_20H2_CORE = 'WINDOWS_SERVER_20H2_CORE'
+      LINUX = 'LINUX'
+    end
+
+    module PidMode
+      HOST = 'host'
+      TASK = 'task'
+    end
+
+    # <p>An object representing a constraint on task placement. For more information, see
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task placement constraints</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <note>
+    #             <p>If you're using the Fargate launch type, task placement constraints
+    # 				aren't supported.</p>
+    #          </note>
+    # @!attribute type
+    #   <p>The type of constraint. Use <code>distinctInstance</code> to ensure that each task in
+    #   			a particular group is running on a different container instance. Use
+    #   				<code>memberOf</code> to restrict the selection to a group of valid
+    #   			candidates.</p>
+    #   @return [String]
+    # @!attribute expression
+    #   <p>A cluster query language expression to apply to the constraint. The expression can
+    #   			have a maximum length of 2000 characters. You can't specify an expression if the
+    #   			constraint type is <code>distinctInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    class PlacementConstraint < Struct.new(
+      :type,
+      :expression,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module PlacementConstraintType
+      DISTINCT_INSTANCE = 'distinctInstance'
+      MEMBER_OF = 'memberOf'
+    end
+
+    # <p>The task placement strategy for a task or service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task placement strategies</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute type
+    #   <p>The type of placement strategy. The <code>random</code> placement strategy randomly
+    #   			places tasks on available candidates. The <code>spread</code> placement strategy spreads
+    #   			placement across available candidates evenly based on the <code>field</code> parameter.
+    #   			The <code>binpack</code> strategy places tasks on available candidates that have the
+    #   			least available amount of the resource that's specified with the <code>field</code>
+    #   			parameter. For example, if you binpack on memory, a task is placed on the instance with
+    #   			the least amount of remaining memory but still enough to run the task.</p>
+    #   @return [String]
+    # @!attribute field
+    #   <p>The field to apply the placement strategy against. For the <code>spread</code>
+    #   			placement strategy, valid values are <code>instanceId</code> (or <code>host</code>,
+    #   			which has the same effect), or any platform or custom attribute that's applied to a
+    #   			container instance, such as <code>attribute:ecs.availability-zone</code>. For the
+    #   				<code>binpack</code> placement strategy, valid values are <code>cpu</code> and
+    #   				<code>memory</code>. For the <code>random</code> placement strategy, this field is
+    #   			not used.</p>
+    #   @return [String]
+    class PlacementStrategy < Struct.new(
+      :type,
+      :field,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module PlacementStrategyType
+      RANDOM = 'random'
+      SPREAD = 'spread'
+      BINPACK = 'binpack'
+    end
+
+    # <p>The devices that are available on the container instance. The only supported device
+    # 			type is a GPU.</p>
+    # @!attribute id
+    #   <p>The ID for the GPUs on the container instance. The available GPU IDs can also be
+    #   			obtained on the container instance in the
+    #   				<code>/var/lib/ecs/gpu/nvidia_gpu_info.json</code> file.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of device that's available on the container instance. The only supported
+    #   			value is <code>GPU</code>.</p>
+    #   @return [String]
+    class PlatformDevice < Struct.new(
+      :id,
+      :type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module PlatformDeviceType
+      GPU = 'GPU'
+    end
+
+    # <p>The specified platform version doesn't satisfy the required capabilities of the task
+    # 			definition.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class PlatformTaskDefinitionIncompatibilityException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified platform version doesn't exist.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class PlatformUnknownException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Port mappings allow containers to access ports on the host container instance to send
+    # 			or receive traffic. Port mappings are specified as part of the container
+    # 			definition.</p>
+    #          <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>
+    # 			network mode, specify the exposed ports using <code>containerPort</code>. The
+    # 				<code>hostPort</code> can be left blank or it must be the same value as the
+    # 				<code>containerPort</code>.</p>
+    #          <p>Most fields of this parameter (<code>containerPort</code>, <code>hostPort</code>,
+    # 				<code>protocol</code>) maps to <code>PortBindings</code> in the docker container
+    # 			create command and the <code>--publish</code> option to <code>docker run</code>. If the
+    # 			network mode of a task definition is set to <code>host</code>, host ports must either be
+    # 			undefined or match the container port in the port mapping.</p>
+    #          <note>
+    #             <p>You can't expose the same container port for multiple protocols. If you attempt
+    # 				this, an error is returned.</p>
+    #          </note>
+    #          <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and
+    # 			container port assignments are visible in the <code>networkBindings</code> section of
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">DescribeTasks</a> API
+    # 			responses.</p>
+    # @!attribute container_port
+    #   <p>The port number on the container that's bound to the user-specified or automatically
+    #   			assigned host port.</p>
+    #            <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>
+    #   			network mode, specify the exposed ports using <code>containerPort</code>.</p>
+    #            <p>If you use containers in a task with the <code>bridge</code> network mode and you
+    #   			specify a container port and not a host port, your container automatically receives a
+    #   			host port in the ephemeral port range. For more information, see <code>hostPort</code>.
+    #   			Port mappings that are automatically assigned in this way do not count toward the 100
+    #   			reserved ports limit of a container instance.</p>
+    #   @return [Integer]
+    # @!attribute host_port
+    #   <p>The port number on the container instance to reserve for your container.</p>
+    #            <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value
+    #   			of the <code>hostPort</code> is set as follows:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For containers in a task with the <code>awsvpc</code> network mode, the
+    #   						<code>hostPort</code> is set to the same value as the
+    #   						<code>containerPort</code>. This is a static mapping strategy.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS
+    #   					agent finds open ports on the host and automatically binds them to the container
+    #   					ports. This is a dynamic mapping strategy.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>
+    #   			network mode, the <code>hostPort</code> can either be left blank or set to the same
+    #   			value as the <code>containerPort</code>.</p>
+    #            <p>If you use containers in a task with the <code>bridge</code> network mode, you can
+    #   			specify a non-reserved host port for your container port mapping, or you can omit the
+    #   				<code>hostPort</code> (or set it to <code>0</code>) while specifying a
+    #   				<code>containerPort</code> and your container automatically receives a port in the
+    #   			ephemeral port range for your container instance operating system and Docker
+    #   			version.</p>
+    #            <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the
+    #   			instance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel
+    #   			parameter is unavailable, the default ephemeral port range from 49153 through 65535
+    #   			(Linux) or 49152 through 65535 (Windows) is used. Do not attempt to specify a host port
+    #   			in the ephemeral port range as these are reserved for automatic assignment. In general,
+    #   			ports below 32768 are outside of the ephemeral port range.</p>
+    #            <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the
+    #   			Amazon ECS container agent ports 51678-51680. Any host port that was previously specified in
+    #   			a running task is also reserved while the task is running. That is, after a task stops,
+    #   			the host port is released. The current reserved ports are displayed in the
+    #   				<code>remainingResources</code> of <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html">DescribeContainerInstances</a> output. A container instance can have up to 100
+    #   			reserved ports at a time. This number includes the default reserved ports. Automatically
+    #   			assigned ports aren't included in the 100 reserved ports quota.</p>
+    #   @return [Integer]
+    # @!attribute protocol
+    #   <p>The protocol used for the port mapping. Valid values are <code>tcp</code> and
+    #   				<code>udp</code>. The default is <code>tcp</code>. <code>protocol</code> is
+    #   			immutable in a Service Connect service. Updating this field requires a service deletion
+    #   			and redeployment. </p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name that's used for the port mapping. This parameter is the name that you use in
+    #   			the <code>serviceConnectConfiguration</code> and the
+    #   				<code>vpcLatticeConfigurations</code> of a service. The name can include up to 64
+    #   			characters. The characters can include lowercase letters, numbers, underscores (_), and
+    #   			hyphens (-). The name can't start with a hyphen.</p>
+    #   @return [String]
+    # @!attribute app_protocol
+    #   <p>The application protocol that's used for the port mapping. This parameter only applies
+    #   			to Service Connect. We recommend that you set this parameter to be consistent with the
+    #   			protocol that your application uses. If you set this parameter, Amazon ECS adds
+    #   			protocol-specific connection handling to the Service Connect proxy. If you set this
+    #   			parameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch.</p>
+    #            <p>If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't
+    #   			add protocol-specific telemetry for TCP.</p>
+    #            <p>
+    #               <code>appProtocol</code> is immutable in a Service Connect service. Updating this
+    #   			field requires a service deletion and redeployment.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute container_port_range
+    #   <p>The port number range on the container that's bound to the dynamically mapped host
+    #   			port range. </p>
+    #            <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>
+    #   					network mode.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter is available for both the EC2 and Fargate launch types.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter is available for both the Linux and Windows operating systems.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The container instance must have at least version 1.67.0 of the container agent
+    #   					and at least version 1.67.0-1 of the <code>ecs-init</code> package </p>
+    #               </li>
+    #               <li>
+    #                  <p>You can specify a maximum of 100 port ranges per container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set
+    #   					as follows:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>For containers in a task with the <code>awsvpc</code> network mode,
+    #   							the <code>hostPortRange</code> is set to the same value as the
+    #   								<code>containerPortRange</code>. This is a static mapping
+    #   							strategy.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>The <code>containerPortRange</code> valid values are between 1 and
+    #   					65535.</p>
+    #               </li>
+    #               <li>
+    #                  <p>A port can only be included in one port mapping per container.</p>
+    #               </li>
+    #               <li>
+    #                  <p>You cannot specify overlapping port ranges.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The first port in the range must be less than last port in the range.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>
+    #                  <p>For more information, see <a href="https://github.com/moby/moby/issues/11185"> Issue #11185</a> on the Github website.</p>
+    #                  <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>You can call <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">
+    #                  <code>DescribeTasks</code>
+    #               </a> to view the <code>hostPortRange</code> which
+    #   			are the host ports that are bound to the container ports.</p>
+    #   @return [String]
+    class PortMapping < Struct.new(
+      :container_port,
+      :host_port,
+      :protocol,
+      :name,
+      :app_protocol,
+      :container_port_range,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module PropagateTags
+      TASK_DEFINITION = 'TASK_DEFINITION'
+      SERVICE = 'SERVICE'
+      NONE = 'NONE'
+    end
+
+    # <p>An object representing the protection status details for a task. You can set the
+    # 			protection status with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateTaskProtection.html">UpdateTaskProtection</a> API and get the status of tasks with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_GetTaskProtection.html">GetTaskProtection</a> API.</p>
+    # @!attribute task_arn
+    #   <p>The task ARN.</p>
+    #   @return [String]
+    # @!attribute protection_enabled
+    #   <p>The protection status of the task. If scale-in protection is on for a task, the value
+    #   			is <code>true</code>. Otherwise, it is <code>false</code>.</p>
+    #   @return [Boolean]
+    # @!attribute expiration_date
+    #   <p>The epoch time when protection for the task will expire.</p>
+    #   @return [Time]
+    class ProtectedTask < Struct.new(
+      :task_arn,
+      :protection_enabled,
+      :expiration_date,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:protection_enabled] = false unless options.key?(:protection_enabled)
+        super
+      end
+    end
+
+    # <p>The configuration details for the App Mesh proxy.</p>
+    #          <p>For tasks that use the EC2 launch type, the container instances require
+    # 			at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the
+    # 				<code>ecs-init</code> package to use a proxy configuration. If your container
+    # 			instances are launched from the Amazon ECS optimized AMI version <code>20190301</code> or
+    # 			later, then they contain the required versions of the container agent and
+    # 				<code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a>
+    #          </p>
+    # @!attribute type
+    #   <p>The proxy type. The only supported value is <code>APPMESH</code>.</p>
+    #   @return [String]
+    # @!attribute container_name
+    #   <p>The name of the container that will serve as the App Mesh proxy.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>The set of network configuration parameters to provide the Container Network Interface
+    #   			(CNI) plugin, specified as key-value pairs.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IgnoredUID</code> - (Required) The user ID (UID) of the proxy
+    #   					container as defined by the <code>user</code> parameter in a container
+    #   					definition. This is used to ensure the proxy ignores its own traffic. If
+    #   						<code>IgnoredGID</code> is specified, this field can be empty.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IgnoredGID</code> - (Required) The group ID (GID) of the proxy
+    #   					container as defined by the <code>user</code> parameter in a container
+    #   					definition. This is used to ensure the proxy ignores its own traffic. If
+    #   						<code>IgnoredUID</code> is specified, this field can be empty.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AppPorts</code> - (Required) The list of ports that the
+    #   					application uses. Network traffic to these ports is forwarded to the
+    #   						<code>ProxyIngressPort</code> and <code>ProxyEgressPort</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ProxyIngressPort</code> - (Required) Specifies the port that
+    #   					incoming traffic to the <code>AppPorts</code> is directed to.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ProxyEgressPort</code> - (Required) Specifies the port that
+    #   					outgoing traffic from the <code>AppPorts</code> is directed to.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EgressIgnoredPorts</code> - (Required) The egress traffic going to
+    #   					the specified ports is ignored and not redirected to the
+    #   						<code>ProxyEgressPort</code>. It can be an empty list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EgressIgnoredIPs</code> - (Required) The egress traffic going to
+    #   					the specified IP addresses is ignored and not redirected to the
+    #   						<code>ProxyEgressPort</code>. It can be an empty list.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::KeyValuePair>]
+    class ProxyConfiguration < Struct.new(
+      :type,
+      :container_name,
+      :properties,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ProxyConfigurationType
+      APPMESH = 'APPMESH'
+    end
+
+    # @!attribute name
+    #   <p>The resource name for which to modify the account setting.</p>
+    #            <p>The following are the valid values for the account setting name.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>serviceLongArnFormat</code> - When modified, the Amazon Resource Name
+    #   					(ARN) and resource ID format of the resource type for a specified user, role, or
+    #   					the root user for an account is affected. The opt-in and opt-out account setting
+    #   					must be set for each Amazon ECS resource separately. The ARN and resource ID format
+    #   					of a resource is defined by the opt-in status of the user or role that created
+    #   					the resource. You must turn on this setting to use Amazon ECS features such as
+    #   					resource tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>taskLongArnFormat</code> - When modified, the Amazon Resource Name (ARN)
+    #   					and resource ID format of the resource type for a specified user, role, or the
+    #   					root user for an account is affected. The opt-in and opt-out account setting must
+    #   					be set for each Amazon ECS resource separately. The ARN and resource ID format of a
+    #   					resource is defined by the opt-in status of the user or role that created the
+    #   					resource. You must turn on this setting to use Amazon ECS features such as resource
+    #   					tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>containerInstanceLongArnFormat</code> - When modified, the Amazon
+    #   					Resource Name (ARN) and resource ID format of the resource type for a specified
+    #   					user, role, or the root user for an account is affected. The opt-in and opt-out
+    #   					account setting must be set for each Amazon ECS resource separately. The ARN and
+    #   					resource ID format of a resource is defined by the opt-in status of the user or
+    #   					role that created the resource. You must turn on this setting to use Amazon ECS
+    #   					features such as resource tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>awsvpcTrunking</code> - When modified, the elastic network interface
+    #   					(ENI) limit for any new container instances that support the feature is changed.
+    #   					If <code>awsvpcTrunking</code> is turned on, any new container instances that
+    #   					support the feature are launched have the increased ENI limits available to
+    #   					them. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html">Elastic
+    #   						Network Interface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>containerInsights</code> - Container Insights with enhanced
+    #   					observability provides all the Container Insights metrics, plus additional task
+    #   					and container metrics. This version supports enhanced observability for Amazon ECS
+    #   					clusters using the Amazon EC2 and Fargate launch types. After you configure
+    #   					Container Insights with enhanced observability on Amazon ECS, Container Insights
+    #   					auto-collects detailed infrastructure telemetry from the cluster level down to
+    #   					the container level in your environment and displays these critical performance
+    #   					data in curated dashboards removing the heavy lifting in observability set-up. </p>
+    #                  <p>To use Container Insights with enhanced observability, set the
+    #   						<code>containerInsights</code> account setting to
+    #   					<code>enhanced</code>.</p>
+    #                  <p>To use Container Insights, set the <code>containerInsights</code> account
+    #   					setting to <code>enabled</code>.</p>
+    #                  <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html">Monitor Amazon ECS containers using Container Insights with enhanced
+    #   						observability</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>dualStackIPv6</code> - When turned on, when using a VPC in dual stack
+    #   					mode, your tasks using the <code>awsvpc</code> network mode can have an IPv6
+    #   					address assigned. For more information on using IPv6 with tasks launched on
+    #   					Amazon EC2 instances, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack">Using a VPC in dual-stack mode</a>. For more information on using IPv6
+    #   					with tasks launched on Fargate, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack">Using a VPC in dual-stack mode</a>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>fargateFIPSMode</code> - If you specify <code>fargateFIPSMode</code>,
+    #   					Fargate FIPS 140 compliance is affected.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>fargateTaskRetirementWaitPeriod</code> - When Amazon Web Services determines that a
+    #   					security or infrastructure update is needed for an Amazon ECS task hosted on
+    #   					Fargate, the tasks need to be stopped and new tasks launched to replace them.
+    #   					Use <code>fargateTaskRetirementWaitPeriod</code> to configure the wait time to
+    #   					retire a Fargate task. For information about the Fargate tasks maintenance,
+    #   					see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html">Amazon Web Services Fargate
+    #   						task maintenance</a> in the <i>Amazon ECS Developer
+    #   					Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>tagResourceAuthorization</code> - Amazon ECS is introducing tagging
+    #   					authorization for resource creation. Users must have permissions for actions
+    #   					that create the resource, such as <code>ecsCreateCluster</code>. If tags are
+    #   					specified when you create a resource, Amazon Web Services performs additional authorization to
+    #   					verify if users or roles have permissions to create tags. Therefore, you must
+    #   					grant explicit permissions to use the <code>ecs:TagResource</code> action. For
+    #   					more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html">Grant permission to tag resources on creation</a> in the
+    #   						<i>Amazon ECS Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>defaultLogDriverMode</code> -Amazon ECS supports setting a default delivery
+    #   					mode of log messages from a container to the <code>logDriver</code> that you specify in the container's <code>logConfiguration</code>. The delivery mode affects
+    #   					application stability when the flow of logs from the container to the log driver is
+    #   					interrupted. The <code>defaultLogDriverMode</code> setting supports two values:
+    #   						<code>blocking</code> and <code>non-blocking</code>. If you don't specify a
+    #   					delivery mode in your container definition's <code>logConfiguration</code>, the
+    #   					mode you specify using this account setting will be used as the default. For
+    #   					more information about log delivery modes, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html">LogConfiguration</a>.</p>
+    #                  <note>
+    #                     <p>On June 25, 2025, Amazon ECS changed the default log driver mode from <code>blocking</code> to <code>non-blocking</code> to prioritize task availability over logging. To continue using the <code>blocking</code> mode after this change, do one of the following:</p>
+    #                     <ul>
+    #                        <li>
+    #                           <p>Set the <code>mode</code> option in your container definition's <code>logConfiguration</code> as <code>blocking</code>.</p>
+    #                        </li>
+    #                        <li>
+    #                           <p>Set the <code>defaultLogDriverMode</code> account setting to <code>blocking</code>.</p>
+    #                        </li>
+    #                     </ul>
+    #                  </note>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>guardDutyActivate</code> - The <code>guardDutyActivate</code> parameter is read-only in Amazon ECS and indicates whether
+    #   			Amazon ECS Runtime Monitoring is enabled or disabled by your security administrator in your
+    #   			Amazon ECS account. Amazon GuardDuty controls this account setting on your behalf. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html">Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring</a>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The account setting value for the specified principal ARN. Accepted values are
+    #   				<code>enabled</code>, <code>disabled</code>, <code>on</code>, <code>enhanced</code>,
+    #   			and <code>off</code>.</p>
+    #            <p>When you specify <code>fargateTaskRetirementWaitPeriod</code> for the
+    #   				<code>name</code>, the following are the valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>0</code> - Amazon Web Services sends the notification, and immediately retires the
+    #   					affected tasks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>7</code> - Amazon Web Services sends the notification, and waits 7 calendar days to
+    #   					retire the tasks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>14</code> - Amazon Web Services sends the notification, and waits 14 calendar days to
+    #   					retire the tasks.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class PutAccountSettingDefaultRequest < Struct.new(
+      :name,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute setting
+    #   <p>The current setting for a resource.</p>
+    #   @return [Types::Setting]
+    class PutAccountSettingDefaultResponse < Struct.new(
+      :setting,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The Amazon ECS account setting name to modify.</p>
+    #            <p>The following are the valid values for the account setting name.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>serviceLongArnFormat</code> - When modified, the Amazon Resource Name
+    #   					(ARN) and resource ID format of the resource type for a specified user, role, or
+    #   					the root user for an account is affected. The opt-in and opt-out account setting
+    #   					must be set for each Amazon ECS resource separately. The ARN and resource ID format
+    #   					of a resource is defined by the opt-in status of the user or role that created
+    #   					the resource. You must turn on this setting to use Amazon ECS features such as
+    #   					resource tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>taskLongArnFormat</code> - When modified, the Amazon Resource Name (ARN)
+    #   					and resource ID format of the resource type for a specified user, role, or the
+    #   					root user for an account is affected. The opt-in and opt-out account setting must
+    #   					be set for each Amazon ECS resource separately. The ARN and resource ID format of a
+    #   					resource is defined by the opt-in status of the user or role that created the
+    #   					resource. You must turn on this setting to use Amazon ECS features such as resource
+    #   					tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>containerInstanceLongArnFormat</code> - When modified, the Amazon
+    #   					Resource Name (ARN) and resource ID format of the resource type for a specified
+    #   					user, role, or the root user for an account is affected. The opt-in and opt-out
+    #   					account setting must be set for each Amazon ECS resource separately. The ARN and
+    #   					resource ID format of a resource is defined by the opt-in status of the user or
+    #   					role that created the resource. You must turn on this setting to use Amazon ECS
+    #   					features such as resource tagging.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>awsvpcTrunking</code> - When modified, the elastic network interface
+    #   					(ENI) limit for any new container instances that support the feature is changed.
+    #   					If <code>awsvpcTrunking</code> is turned on, any new container instances that
+    #   					support the feature are launched have the increased ENI limits available to
+    #   					them. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html">Elastic
+    #   						Network Interface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>containerInsights</code> - Container Insights with enhanced
+    #   					observability provides all the Container Insights metrics, plus additional task
+    #   					and container metrics. This version supports enhanced observability for Amazon ECS
+    #   					clusters using the Amazon EC2 and Fargate launch types. After you configure
+    #   					Container Insights with enhanced observability on Amazon ECS, Container Insights
+    #   					auto-collects detailed infrastructure telemetry from the cluster level down to
+    #   					the container level in your environment and displays these critical performance
+    #   					data in curated dashboards removing the heavy lifting in observability set-up. </p>
+    #                  <p>To use Container Insights with enhanced observability, set the
+    #   						<code>containerInsights</code> account setting to
+    #   					<code>enhanced</code>.</p>
+    #                  <p>To use Container Insights, set the <code>containerInsights</code> account
+    #   					setting to <code>enabled</code>.</p>
+    #                  <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html">Monitor Amazon ECS containers using Container Insights with enhanced
+    #   						observability</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>dualStackIPv6</code> - When turned on, when using a VPC in dual stack
+    #   					mode, your tasks using the <code>awsvpc</code> network mode can have an IPv6
+    #   					address assigned. For more information on using IPv6 with tasks launched on
+    #   					Amazon EC2 instances, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack">Using a VPC in dual-stack mode</a>. For more information on using IPv6
+    #   					with tasks launched on Fargate, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack">Using a VPC in dual-stack mode</a>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>fargateTaskRetirementWaitPeriod</code> - When Amazon Web Services determines that a
+    #   					security or infrastructure update is needed for an Amazon ECS task hosted on
+    #   					Fargate, the tasks need to be stopped and new tasks launched to replace them.
+    #   					Use <code>fargateTaskRetirementWaitPeriod</code> to configure the wait time to
+    #   					retire a Fargate task. For information about the Fargate tasks maintenance,
+    #   					see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html">Amazon Web Services Fargate
+    #   						task maintenance</a> in the <i>Amazon ECS Developer
+    #   					Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>tagResourceAuthorization</code> - Amazon ECS is introducing tagging
+    #   					authorization for resource creation. Users must have permissions for actions
+    #   					that create the resource, such as <code>ecsCreateCluster</code>. If tags are
+    #   					specified when you create a resource, Amazon Web Services performs additional authorization to
+    #   					verify if users or roles have permissions to create tags. Therefore, you must
+    #   					grant explicit permissions to use the <code>ecs:TagResource</code> action. For
+    #   					more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html">Grant permission to tag resources on creation</a> in the
+    #   						<i>Amazon ECS Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>defaultLogDriverMode</code> - Amazon ECS supports setting a default delivery
+    #   					mode of log messages from a container to the <code>logDriver</code> that you specify in the container's <code>logConfiguration</code>. The delivery mode affects
+    #   					application stability when the flow of logs from the container to the log driver is
+    #   					interrupted. The <code>defaultLogDriverMode</code> setting supports two values:
+    #   					<code>blocking</code> and <code>non-blocking</code>. If you don't specify a
+    #   					delivery mode in your container definition's <code>logConfiguration</code>, the
+    #   					mode you specify using this account setting will be used as the default. For
+    #   					more information about log delivery modes, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html">LogConfiguration</a>.
+    #   				</p>
+    #                  <note>
+    #                     <p>On June 25, 2025, Amazon ECS changed the default log driver mode from <code>blocking</code> to <code>non-blocking</code> to prioritize task availability over logging. To continue using the <code>blocking</code> mode after this change, do one of the following:</p>
+    #                     <ul>
+    #                        <li>
+    #                           <p>Set the <code>mode</code> option in your container definition's <code>logConfiguration</code> as <code>blocking</code>.</p>
+    #                        </li>
+    #                        <li>
+    #                           <p>Set the <code>defaultLogDriverMode</code> account setting to <code>blocking</code>.</p>
+    #                        </li>
+    #                     </ul>
+    #                  </note>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>guardDutyActivate</code> - The <code>guardDutyActivate</code> parameter is read-only in Amazon ECS and indicates whether
+    #   			Amazon ECS Runtime Monitoring is enabled or disabled by your security administrator in your
+    #   			Amazon ECS account. Amazon GuardDuty controls this account setting on your behalf. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html">Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring</a>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The account setting value for the specified principal ARN. Accepted values are
+    #   				<code>enabled</code>, <code>disabled</code>, <code>enhanced</code>, <code>on</code>,
+    #   			and <code>off</code>.</p>
+    #            <p>When you specify <code>fargateTaskRetirementWaitPeriod</code> for the
+    #   				<code>name</code>, the following are the valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>0</code> - Amazon Web Services sends the notification, and immediately retires the
+    #   					affected tasks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>7</code> - Amazon Web Services sends the notification, and waits 7 calendar days to
+    #   					retire the tasks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>14</code> - Amazon Web Services sends the notification, and waits 14 calendar days to
+    #   					retire the tasks.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute principal_arn
+    #   <p>The ARN of the principal, which can be a user, role, or the root user. If you specify
+    #   			the root user, it modifies the account setting for all users, roles, and the root user of the
+    #   			account unless a user or role explicitly overrides these settings. If this field is
+    #   			omitted, the setting is changed only for the authenticated user.</p>
+    #            <p>In order to use this parameter, you must be the root user, or the principal.</p>
+    #            <note>
+    #               <p>You must use the root user when you set the Fargate wait time
+    #   					(<code>fargateTaskRetirementWaitPeriod</code>). </p>
+    #               <p>Federated users assume the account setting of the root user and can't have explicit
+    #   				account settings set for them.</p>
+    #            </note>
+    #   @return [String]
+    class PutAccountSettingRequest < Struct.new(
+      :name,
+      :value,
+      :principal_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute setting
+    #   <p>The current account setting for a resource.</p>
+    #   @return [Types::Setting]
+    class PutAccountSettingResponse < Struct.new(
+      :setting,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply
+    #   			attributes. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>The attributes to apply to your resource. You can specify up to 10 custom attributes
+    #   			for each resource. You can specify up to 10 attributes in a single call.</p>
+    #   @return [Array<Types::Attribute>]
+    class PutAttributesRequest < Struct.new(
+      :cluster,
+      :attributes,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute attributes
+    #   <p>The attributes applied to your resource.</p>
+    #   @return [Array<Types::Attribute>]
+    class PutAttributesResponse < Struct.new(
+      :attributes,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to modify the capacity provider
+    #   			settings for. If you don't specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute capacity_providers
+    #   <p>The name of one or more capacity providers to associate with the cluster.</p>
+    #            <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+    #   			provider must already be created. New capacity providers can be created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html">CreateCapacityProvider</a> API operation.</p>
+    #            <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or
+    #   				<code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are
+    #   			available to all accounts and only need to be associated with a cluster to be
+    #   			used.</p>
+    #   @return [Array<String>]
+    # @!attribute default_capacity_provider_strategy
+    #   <p>The capacity provider strategy to use by default for the cluster.</p>
+    #            <p>When creating a service or running a task on a cluster, if no capacity provider or
+    #   			launch type is specified then the default capacity provider strategy for the cluster is
+    #   			used.</p>
+    #            <p>A capacity provider strategy consists of one or more capacity providers along with the
+    #   				<code>base</code> and <code>weight</code> to assign to them. A capacity provider
+    #   			must be associated with the cluster to be used in a capacity provider strategy. The
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API is used to associate a capacity provider
+    #   			with a cluster. Only capacity providers with an <code>ACTIVE</code> or
+    #   				<code>UPDATING</code> status can be used.</p>
+    #            <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+    #   			provider must already be created. New capacity providers can be created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html">CreateCapacityProvider</a> API operation.</p>
+    #            <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or
+    #   				<code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are
+    #   			available to all accounts and only need to be associated with a cluster to be
+    #   			used.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    class PutClusterCapacityProvidersRequest < Struct.new(
+      :cluster,
+      :capacity_providers,
+      :default_capacity_provider_strategy,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>Details about the cluster.</p>
+    #   @return [Types::Cluster]
+    class PutClusterCapacityProvidersResponse < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to register your container instance
+    #   			with. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute instance_identity_document
+    #   <p>The instance identity document for the EC2 instance to register. This document can be
+    #   			found by running the following command from the instance: <code>curl
+    #   				http://169.254.169.254/latest/dynamic/instance-identity/document/</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute instance_identity_document_signature
+    #   <p>The instance identity document signature for the EC2 instance to register. This
+    #   			signature can be found by running the following command from the instance: <code>curl
+    #   				http://169.254.169.254/latest/dynamic/instance-identity/signature/</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute total_resources
+    #   <p>The resources available on the instance.</p>
+    #   @return [Array<Types::Resource>]
+    # @!attribute version_info
+    #   <p>The version information for the Amazon ECS container agent and Docker daemon that runs on
+    #   			the container instance.</p>
+    #   @return [Types::VersionInfo]
+    # @!attribute container_instance_arn
+    #   <p>The ARN of the container instance (if it was previously registered).</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>The container instance attributes that this container instance supports.</p>
+    #   @return [Array<Types::Attribute>]
+    # @!attribute platform_devices
+    #   <p>The devices that are available on the container instance. The only supported device
+    #   			type is a GPU.</p>
+    #   @return [Array<Types::PlatformDevice>]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the container instance to help you categorize and
+    #   			organize them. Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class RegisterContainerInstanceRequest < Struct.new(
+      :cluster,
+      :instance_identity_document,
+      :instance_identity_document_signature,
+      :total_resources,
+      :version_info,
+      :container_instance_arn,
+      :attributes,
+      :platform_devices,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instance
+    #   <p>The container instance that was registered.</p>
+    #   @return [Types::ContainerInstance]
+    class RegisterContainerInstanceResponse < Struct.new(
+      :container_instance,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute family
+    #   <p>You must specify a <code>family</code> for a task definition. You can use it track
+    #   			multiple versions of the same task definition. The <code>family</code> is used as a name
+    #   			for your task definition. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>
+    #   @return [String]
+    # @!attribute task_role_arn
+    #   <p>The short name or full Amazon Resource Name (ARN) of the IAM role that containers in this task can
+    #   			assume. All containers in this task are granted the permissions that are specified in
+    #   			this role. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">IAM Roles for
+    #   				Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent
+    #               permission to make Amazon Web Services API calls on your behalf. For informationabout the required IAM roles for Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html">IAM roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute network_mode
+    #   <p>The Docker networking mode to use for the containers in the task. The valid values are
+    #                   <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.
+    #               If no network mode is specified, the default is <code>bridge</code>.</p>
+    #            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. 
+    #               For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network
+    #               mode is set to <code>none</code>, you cannot specify port mappings in your container
+    #               definitions, and the tasks containers do not have external connectivity. The
+    #                   <code>host</code> and <code>awsvpc</code> network modes offer the highest networking
+    #               performance for containers because they use the EC2 network stack instead of the
+    #               virtualized network stack provided by the <code>bridge</code> mode.</p>
+    #            <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container
+    #               ports are mapped directly to the corresponding host port (for the <code>host</code>
+    #               network mode) or the attached elastic network interface port (for the
+    #                   <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port
+    #               mappings. </p>
+    #            <important>
+    #               <p>When using the <code>host</code> network mode, you should not run
+    #                               containers using the root user (UID 0). It is considered best practice
+    #                               to use a non-root user.</p>
+    #            </important>
+    #            <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network
+    #               interface, and you must specify a <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html">NetworkConfiguration</a> value when you create
+    #               a service or run a task with the task definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task Networking</a> in the
+    #                   <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the
+    #               same task on a single container instance when port mappings are used.</p>
+    #   @return [String]
+    # @!attribute container_definitions
+    #   <p>A list of container definitions in JSON format that describe the different containers
+    #   			that make up your task.</p>
+    #   @return [Array<Types::ContainerDefinition>]
+    # @!attribute volumes
+    #   <p>A list of volume definitions in JSON format that containers in your task might
+    #   			use.</p>
+    #   @return [Array<Types::Volume>]
+    # @!attribute placement_constraints
+    #   <p>An array of placement constraint objects to use for the task. You can specify a
+    #   			maximum of 10 constraints for each task. This limit includes constraints in the task
+    #   			definition and those specified at runtime.</p>
+    #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
+    # @!attribute requires_compatibilities
+    #   <p>The task launch type that Amazon ECS validates the task definition against. A client
+    #   			exception is returned if the task definition doesn't validate against the
+    #   			compatibilities specified. If no value is specified, the parameter is omitted from the
+    #   			response.</p>
+    #   @return [Array<String>]
+    # @!attribute cpu
+    #   <p>The number of CPU units used by the task. It can be expressed as an integer using CPU
+    #   			units (for example, <code>1024</code>) or as a string using vCPUs (for example, <code>1
+    #   				vCPU</code> or <code>1 vcpu</code>) in a task definition. String values are
+    #   			converted to an integer indicating the CPU units when the task definition is
+    #   			registered.</p>
+    #            <note>
+    #               <p>Task-level CPU and memory parameters are ignored for Windows containers. We
+    #   				recommend specifying container-level resources for Windows containers.</p>
+    #            </note>
+    #            <p>If you're using the EC2 launch type or external launch type, this field
+    #   			is optional. Supported values are between <code>128</code> CPU units (<code>0.125</code>
+    #   			vCPUs) and <code>196608</code> CPU units (<code>192</code> vCPUs). If you do not specify
+    #   			a value, the parameter is ignored.</p>
+    #            <p>This field is required for Fargate. For information about the valid values, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size">Task size</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute memory
+    #   <p>The amount of memory (in MiB) used by the task. It can be expressed as an integer
+    #   			using MiB (for example ,<code>1024</code>) or as a string using GB (for example,
+    #   				<code>1GB</code> or <code>1 GB</code>) in a task definition. String values are
+    #   			converted to an integer indicating the MiB when the task definition is
+    #   			registered.</p>
+    #            <note>
+    #               <p>Task-level CPU and memory parameters are ignored for Windows containers. We
+    #   				recommend specifying container-level resources for Windows containers.</p>
+    #            </note>
+    #            <p>If using the EC2 launch type, this field is optional.</p>
+    #            <p>If using the Fargate launch type, this field is required and you must
+    #   			use one of the following values. This determines your range of supported values for the
+    #   				<code>cpu</code> parameter.</p>
+    #            <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on
+    #   			Fargate.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task definition to help you categorize and organize
+    #   			them. Each tag consists of a key and an optional value. You define both of them.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute pid_mode
+    #   <p>The process namespace to use for the containers in the task. The valid
+    #                               values are <code>host</code> or <code>task</code>. On Fargate for
+    #                               Linux containers, the only valid value is <code>task</code>. For
+    #                               example, monitoring sidecars might need <code>pidMode</code> to access
+    #                               information about other containers running in the same task.</p>
+    #            <p>If <code>host</code> is specified, all containers within the tasks
+    #                               that specified the <code>host</code> PID mode on the same container
+    #                               instance share the same process namespace with the host Amazon EC2
+    #                               instance.</p>
+    #            <p>If <code>task</code> is specified, all containers within the specified
+    #                               task share the same process namespace.</p>
+    #            <p>If no value is specified, the
+    #                               default is a private namespace for each container.</p>
+    #            <p>If the <code>host</code> PID mode is used, there's a heightened risk
+    #                               of undesired process namespace exposure.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #            <note>
+    #               <p>This parameter is only supported for tasks that are hosted on
+    #           Fargate if the tasks are using platform version <code>1.4.0</code> or later
+    #           (Linux). This isn't supported for Windows containers on
+    #           Fargate.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute ipc_mode
+    #   <p>The IPC resource namespace to use for the containers in the task. The valid values are
+    #                   <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is
+    #               specified, then all containers within the tasks that specified the <code>host</code> IPC
+    #               mode on the same container instance share the same IPC resources with the host Amazon EC2
+    #               instance. If <code>task</code> is specified, all containers within the specified task
+    #               share the same IPC resources. If <code>none</code> is specified, then IPC resources
+    #               within the containers of a task are private and not shared with other containers in a
+    #               task or on the container instance. If no value is specified, then the IPC resource
+    #               namespace sharing depends on the Docker daemon setting on the container instance.</p>
+    #            <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of
+    #               undesired IPC namespace expose.</p>
+    #            <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for
+    #               the containers in the task, the following will apply to your IPC resource namespace. For
+    #               more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html">System
+    #                   Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related
+    #                           <code>systemControls</code> are not supported.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related
+    #                           <code>systemControls</code> will apply to all containers within a
+    #                       task.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute proxy_configuration
+    #   <p>The configuration details for the App Mesh proxy.</p>
+    #            <p>For tasks hosted on Amazon EC2 instances, the container instances require at least version
+    #   				<code>1.26.0</code> of the container agent and at least version
+    #   				<code>1.26.0-1</code> of the <code>ecs-init</code> package to use a proxy
+    #   			configuration. If your container instances are launched from the Amazon ECS-optimized
+    #   			AMI version <code>20190301</code> or later, then they contain the required versions of
+    #   			the container agent and <code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html">Amazon ECS-optimized AMI versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute inference_accelerators
+    #   <p>The Elastic Inference accelerators to use for the containers in the task.</p>
+    #   @return [Array<Types::InferenceAccelerator>]
+    # @!attribute ephemeral_storage
+    #   <p>The amount of ephemeral storage to allocate for the task. This parameter is used to
+    #   			expand the total amount of ephemeral storage available, beyond the default amount, for
+    #   			tasks hosted on Fargate. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html">Using data volumes in
+    #   				tasks</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #            <note>
+    #               <p>For tasks using the Fargate launch type, the task requires the
+    #   				following platforms:</p>
+    #               <ul>
+    #                  <li>
+    #                     <p>Linux platform version <code>1.4.0</code> or later.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Types::EphemeralStorage]
+    # @!attribute runtime_platform
+    #   <p>The operating system that your tasks definitions run on. A platform family is
+    #   			specified only for tasks using the Fargate launch type. </p>
+    #   @return [Types::RuntimePlatform]
+    # @!attribute enable_fault_injection
+    #   <p>Enables fault injection when you register your task definition and allows for fault
+    #   			injection requests to be accepted from the task's containers. The default value is
+    #   				<code>false</code>.</p>
+    #   @return [Boolean]
+    class RegisterTaskDefinitionRequest < Struct.new(
+      :family,
+      :task_role_arn,
+      :execution_role_arn,
+      :network_mode,
+      :container_definitions,
+      :volumes,
+      :placement_constraints,
+      :requires_compatibilities,
+      :cpu,
+      :memory,
+      :tags,
+      :pid_mode,
+      :ipc_mode,
+      :proxy_configuration,
+      :inference_accelerators,
+      :ephemeral_storage,
+      :runtime_platform,
+      :enable_fault_injection,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_definition
+    #   <p>The full description of the registered task definition.</p>
+    #   @return [Types::TaskDefinition]
+    # @!attribute tags
+    #   <p>The list of tags associated with the task definition.</p>
+    #   @return [Array<Types::Tag>]
+    class RegisterTaskDefinitionResponse < Struct.new(
+      :task_definition,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The repository credentials for private registry authentication.</p>
+    # @!attribute credentials_parameter
+    #   <p>The Amazon Resource Name (ARN) of the secret containing the private repository
+    #   			credentials.</p>
+    #            <note>
+    #               <p>When you use the Amazon ECS API, CLI, or Amazon Web Services SDK, if the secret exists in the same
+    #   				Region as the task that you're launching then you can use either the full ARN or
+    #   				the name of the secret. When you use the Amazon Web Services Management Console, you must specify the full ARN
+    #   				of the secret.</p>
+    #            </note>
+    #   @return [String]
+    class RepositoryCredentials < Struct.new(
+      :credentials_parameter,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The resolved configuration for a service revision, which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>
+    # @!attribute load_balancers
+    #   <p>The resolved load balancer configuration for the service revision. This includes information about which target groups serve traffic and which listener rules direct traffic to them.</p>
+    #   @return [Array<Types::ServiceRevisionLoadBalancer>]
+    class ResolvedConfiguration < Struct.new(
+      :load_balancers,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Describes the resources available for a container instance.</p>
+    # @!attribute name
+    #   <p>The name of the resource, such as <code>CPU</code>, <code>MEMORY</code>,
+    #   				<code>PORTS</code>, <code>PORTS_UDP</code>, or a user-defined resource.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the resource. Valid values: <code>INTEGER</code>, <code>DOUBLE</code>,
+    #   				<code>LONG</code>, or <code>STRINGSET</code>.</p>
+    #   @return [String]
+    # @!attribute double_value
+    #   <p>When the <code>doubleValue</code> type is set, the value of the resource must be a
+    #   			double precision floating-point type.</p>
+    #   @return [Float]
+    # @!attribute long_value
+    #   <p>When the <code>longValue</code> type is set, the value of the resource must be an
+    #   			extended precision floating-point type.</p>
+    #   @return [Integer]
+    # @!attribute integer_value
+    #   <p>When the <code>integerValue</code> type is set, the value of the resource must be an
+    #   			integer.</p>
+    #   @return [Integer]
+    # @!attribute string_set_value
+    #   <p>When the <code>stringSetValue</code> type is set, the value of the resource must be a
+    #   			string type.</p>
+    #   @return [Array<String>]
+    class Resource < Struct.new(
+      :name,
+      :type,
+      :double_value,
+      :long_value,
+      :integer_value,
+      :string_set_value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:double_value] = 0 unless options.key?(:double_value)
+        options[:long_value] = 0 unless options.key?(:long_value)
+        options[:integer_value] = 0 unless options.key?(:integer_value)
+        super
+      end
+    end
+
+    # <p>The specified resource is in-use and can't be removed.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ResourceInUseException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified resource wasn't found.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The type and amount of a resource to assign to a container. The supported resource
+    # 			types are GPUs and Elastic Inference accelerators. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html">Working with
+    # 				GPUs on Amazon ECS</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html">Working with Amazon Elastic
+    # 				Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>
+    #          </p>
+    # @!attribute value
+    #   <p>The value for the specified resource type.</p>
+    #            <p>When the type is <code>GPU</code>, the value is the number of physical
+    #   				<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number
+    #   			of GPUs that's reserved for all containers in a task can't exceed the number of
+    #   			available GPUs on the container instance that the task is launched on.</p>
+    #            <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the
+    #   				<code>deviceName</code> for an <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html">InferenceAccelerator</a> specified in a task definition.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of resource to assign to a container. </p>
+    #   @return [String]
+    class ResourceRequirement < Struct.new(
+      :value,
+      :type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ResourceType
+      GPU = 'GPU'
+      INFERENCE_ACCELERATOR = 'InferenceAccelerator'
+    end
+
+    # <p>Information about the service deployment rollback.</p>
+    # @!attribute reason
+    #   <p>The reason the rollback happened. For example, the circuit breaker initiated the
+    #   			rollback operation.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>Time time that the rollback started. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute service_revision_arn
+    #   <p>The ARN of the service revision deployed as part of the rollback.</p>
+    #   @return [String]
+    class Rollback < Struct.new(
+      :reason,
+      :started_at,
+      :service_revision_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy to use for the task.</p>
+    #            <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>
+    #   			parameter must be omitted. If no <code>capacityProviderStrategy</code> or
+    #   				<code>launchType</code> is specified, the
+    #   				<code>defaultCapacityProviderStrategy</code> for the cluster is used.</p>
+    #            <p>When you use cluster auto scaling, you must specify
+    #   				<code>capacityProviderStrategy</code> and not <code>launchType</code>. </p>
+    #            <p>A capacity provider strategy can contain a maximum of 20 capacity providers.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to run your task on.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #            <p>Each account receives a default cluster the first time you use the service, but you
+    #   			may also create other clusters.</p>
+    #   @return [String]
+    # @!attribute count
+    #   <p>The number of instantiations of the specified task to place on your cluster. You can
+    #   			specify up to 10 tasks for each call.</p>
+    #   @return [Integer]
+    # @!attribute enable_ecs_managed_tags
+    #   <p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS
+    #   				Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Boolean]
+    # @!attribute enable_execute_command
+    #   <p>Determines whether to use the execute command functionality for the containers in this
+    #   			task. If <code>true</code>, this enables execute command functionality on all containers
+    #   			in the task.</p>
+    #            <p>If <code>true</code>, then the task definition must have a task role, or you must
+    #   			provide one as an override.</p>
+    #   @return [Boolean]
+    # @!attribute group
+    #   <p>The name of the task group to associate with the task. The default value is the family
+    #   			name of the task definition (for example, <code>family:my-family-name</code>).</p>
+    #   @return [String]
+    # @!attribute launch_type
+    #   <p>The infrastructure to run your standalone task on. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>The <code>FARGATE</code> launch type runs your tasks on Fargate On-Demand
+    #   			infrastructure.</p>
+    #            <note>
+    #               <p>Fargate Spot infrastructure is available for use but a capacity provider
+    #   				strategy must be used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html">Fargate capacity providers</a> in the
+    #   					<i>Amazon ECS Developer Guide</i>.</p>
+    #            </note>
+    #            <p>The <code>EC2</code> launch type runs your tasks on Amazon EC2 instances registered to your
+    #   			cluster.</p>
+    #            <p>The <code>EXTERNAL</code> launch type runs your tasks on your on-premises server or
+    #   			virtual machine (VM) capacity registered to your cluster.</p>
+    #            <p>A task can use either a launch type or a capacity provider strategy. If a
+    #   				<code>launchType</code> is specified, the <code>capacityProviderStrategy</code>
+    #   			parameter must be omitted.</p>
+    #            <p>When you use cluster auto scaling, you must specify
+    #   				<code>capacityProviderStrategy</code> and not <code>launchType</code>. </p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The network configuration for the task. This parameter is required for task
+    #   			definitions that use the <code>awsvpc</code> network mode to receive their own elastic
+    #   			network interface, and it isn't supported for other network modes. For more information,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task networking</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute overrides
+    #   <p>A list of container overrides in JSON format that specify the name of a container in
+    #   			the specified task definition and the overrides it should receive. You can override the
+    #   			default command for a container (that's specified in the task definition or Docker
+    #   			image) with a <code>command</code> override. You can also override existing environment
+    #   			variables (that are specified in the task definition or Docker image) on a container or
+    #   			add new environment variables to it with an <code>environment</code> override.</p>
+    #            <p>A total of 8192 characters are allowed for overrides. This limit includes the JSON
+    #   			formatting characters of the override structure.</p>
+    #   @return [Types::TaskOverride]
+    # @!attribute placement_constraints
+    #   <p>An array of placement constraint objects to use for the task. You can specify up to 10
+    #   			constraints for each task (including constraints in the task definition and those
+    #   			specified at runtime).</p>
+    #   @return [Array<Types::PlacementConstraint>]
+    # @!attribute placement_strategy
+    #   <p>The placement strategy objects to use for the task. You can specify a maximum of 5
+    #   			strategy rules for each task.</p>
+    #   @return [Array<Types::PlacementStrategy>]
+    # @!attribute platform_version
+    #   <p>The platform version the task uses. A platform version is only specified for tasks
+    #   			hosted on Fargate. If one isn't specified, the <code>LATEST</code>
+    #   			platform version is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate platform
+    #   				versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute propagate_tags
+    #   <p>Specifies whether to propagate the tags from the task definition to the task. If no
+    #   			value is specified, the tags aren't propagated. Tags can only be propagated to the task
+    #   			during task creation. To add tags to a task after task creation, use the<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html">TagResource</a> API action.</p>
+    #            <note>
+    #               <p>An error will be received if you specify the <code>SERVICE</code> option when
+    #   				running a task.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute reference_id
+    #   <p>This parameter is only used by Amazon ECS. It is not intended for use by customers.</p>
+    #   @return [String]
+    # @!attribute started_by
+    #   <p>An optional tag specified when a task is started. For example, if you automatically
+    #   			trigger a task to run a batch process job, you could apply a unique identifier for that
+    #   			job to your task with the <code>startedBy</code> parameter. You can then identify which
+    #   			tasks belong to that job by filtering the results of a <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html">ListTasks</a> call with
+    #   			the <code>startedBy</code> value. Up to 128 letters (uppercase and lowercase), numbers,
+    #   			hyphens (-), forward slash (/), and underscores (_) are allowed.</p>
+    #            <p>If a task is started by an Amazon ECS service, then the <code>startedBy</code> parameter
+    #   			contains the deployment ID of the service that starts it.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task to help you categorize and organize them. Each
+    #   			tag consists of a key and an optional value, both of which you define.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute task_definition
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full ARN of the task definition to run. If a <code>revision</code> isn't specified,
+    #   			the latest <code>ACTIVE</code> revision is used.</p>
+    #            <p>The full ARN value must match the value that you specified as the
+    #   				<code>Resource</code> of the principal's permissions policy.</p>
+    #            <p>When you specify a task definition, you must either specify a specific revision, or
+    #   			all revisions in the ARN.</p>
+    #            <p>To specify a specific revision, include the revision number in the ARN. For example,
+    #   			to specify revision 2, use
+    #   				<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:2</code>.</p>
+    #            <p>To specify all revisions, use the wildcard (*) in the ARN. For example, to specify
+    #   			all revisions, use
+    #   				<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*</code>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources">Policy Resources for Amazon ECS</a> in the Amazon Elastic Container Service Developer Guide.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>An identifier that you provide to ensure the idempotency of the request. It must be
+    #   			unique and is case sensitive. Up to 64 characters are allowed. The valid characters are
+    #   			characters in the range of 33-126, inclusive. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html">Ensuring idempotency</a>.</p>
+    #   @return [String]
+    # @!attribute volume_configurations
+    #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
+    #   			the size, volumeType, IOPS, throughput, snapshot and encryption in in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html">TaskManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume must
+    #   			match the <code>name</code> from the task definition.</p>
+    #   @return [Array<Types::TaskVolumeConfiguration>]
+    class RunTaskRequest < Struct.new(
+      :capacity_provider_strategy,
+      :cluster,
+      :count,
+      :enable_ecs_managed_tags,
+      :enable_execute_command,
+      :group,
+      :launch_type,
+      :network_configuration,
+      :overrides,
+      :placement_constraints,
+      :placement_strategy,
+      :platform_version,
+      :propagate_tags,
+      :reference_id,
+      :started_by,
+      :tags,
+      :task_definition,
+      :client_token,
+      :volume_configurations,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute tasks
+    #   <p>A full description of the tasks that were run. The tasks that were successfully placed
+    #   			on your cluster are described here.</p>
+    #   @return [Array<Types::Task>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #            <p>For information about how to address failures, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages.html#service-event-messages-list">Service event messages</a> and <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html">API failure
+    #   				reasons</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<Types::Failure>]
+    class RunTaskResponse < Struct.new(
+      :tasks,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the platform for the Amazon ECS service or task.</p>
+    #          <p>For more information about <code>RuntimePlatform</code>, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform">RuntimePlatform</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute cpu_architecture
+    #   <p>The CPU architecture.</p>
+    #            <p>You can run your Linux tasks on an ARM-based platform by setting the value to
+    #   				<code>ARM64</code>. This option is available for tasks that run on Linux Amazon EC2
+    #   			instance or Linux containers on Fargate.</p>
+    #   @return [String]
+    # @!attribute operating_system_family
+    #   <p>The operating system.</p>
+    #   @return [String]
+    class RuntimePlatform < Struct.new(
+      :cpu_architecture,
+      :operating_system_family,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A floating-point percentage of the desired number of tasks to place and keep running
+    # 			in the task set.</p>
+    # @!attribute value
+    #   <p>The value, specified as a percent total of a service's <code>desiredCount</code>, to
+    #   			scale the task set. Accepted values are numbers between 0 and 100.</p>
+    #   @return [Float]
+    # @!attribute unit
+    #   <p>The unit of measure for the scale value.</p>
+    #   @return [String]
+    class Scale < Struct.new(
+      :value,
+      :unit,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:value] = 0 unless options.key?(:value)
+        super
+      end
+    end
+
+    module ScaleUnit
+      PERCENT = 'PERCENT'
+    end
+
+    module SchedulingStrategy
+      REPLICA = 'REPLICA'
+      DAEMON = 'DAEMON'
+    end
+
+    module Scope
+      TASK = 'task'
+      SHARED = 'shared'
+    end
+
+    # <p>An object representing the secret to expose to your container. Secrets can be exposed
+    # 			to a container in the following ways:</p>
+    #          <ul>
+    #             <li>
+    #                <p>To inject sensitive data into your containers as environment variables, use
+    # 					the <code>secrets</code> container definition parameter.</p>
+    #             </li>
+    #             <li>
+    #                <p>To reference sensitive information in the log configuration of a container,
+    # 					use the <code>secretOptions</code> container definition parameter.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying
+    # 				sensitive data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute name
+    #   <p>The name of the secret.</p>
+    #   @return [String]
+    # @!attribute value_from
+    #   <p>The secret to expose to the container. The supported values are either the full ARN
+    #   			of the Secrets Manager secret or the full ARN of the parameter in the SSM
+    #   			Parameter Store.</p>
+    #            <p>For information about the require Identity and Access Management permissions, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam">Required IAM permissions for Amazon ECS secrets</a> (for Secrets Manager) or
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html">Required IAM permissions for Amazon ECS secrets</a> (for Systems Manager Parameter
+    #   			store) in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <note>
+    #               <p>If the SSM Parameter Store parameter exists in the same Region as the task
+    #   				you're launching, then you can use either the full ARN or name of the parameter.
+    #   				If the parameter exists in a different Region, then the full ARN must be
+    #   				specified.</p>
+    #            </note>
+    #   @return [String]
+    class Secret < Struct.new(
+      :name,
+      :value_from,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>These errors are usually caused by a server issue.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ServerException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on a service within a cluster.</p>
+    # @!attribute service_arn
+    #   <p>The ARN that identifies the service. For more information about the ARN format,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids">Amazon Resource Name (ARN)</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute service_name
+    #   <p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within
+    #   			a cluster. However, you can have similarly named services in multiple clusters within a
+    #   			Region or across multiple Regions.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster that hosts the service.</p>
+    #   @return [String]
+    # @!attribute load_balancers
+    #   <p>A list of Elastic Load Balancing load balancer objects. It contains the load balancer name, the
+    #   			container name, and the container port to access from the load balancer. The container
+    #   			name is as it appears in a container definition.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute service_registries
+    #   <p>The details for the service discovery registries to assign to this service. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+    #   				Discovery</a>.</p>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute status
+    #   <p>The status of the service. The valid values are <code>ACTIVE</code>,
+    #   				<code>DRAINING</code>, or <code>INACTIVE</code>.</p>
+    #   @return [String]
+    # @!attribute desired_count
+    #   <p>The desired number of instantiations of the task definition to keep running on the
+    #   			service. This value is specified when the service is created with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a> , and it can be modified with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a>.</p>
+    #   @return [Integer]
+    # @!attribute running_count
+    #   <p>The number of tasks in the cluster that are in the <code>RUNNING</code> state.</p>
+    #   @return [Integer]
+    # @!attribute pending_count
+    #   <p>The number of tasks in the cluster that are in the <code>PENDING</code> state.</p>
+    #   @return [Integer]
+    # @!attribute launch_type
+    #   <p>The launch type the service is using. When using the DescribeServices API, this field
+    #   			is omitted if the service was created using a capacity provider strategy.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy the service uses. When using the DescribeServices API,
+    #   			this field is omitted if the service was created using a launch type.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute platform_version
+    #   <p>The platform version to run your service on. A platform version is only specified for
+    #   			tasks that are hosted on Fargate. If one isn't specified, the <code>LATEST</code>
+    #   			platform version is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform
+    #   				Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute platform_family
+    #   <p>The operating system that your tasks in the service run on. A platform family is
+    #   			specified only for tasks using the Fargate launch type. </p>
+    #            <p> All tasks that run as part of this service must use the same
+    #   				<code>platformFamily</code> value as the service (for example,
+    #   			<code>LINUX</code>).</p>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The task definition to use for tasks in the service. This value is specified when the
+    #   			service is created with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a>,
+    #   			and it can be modified with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a>.</p>
+    #   @return [String]
+    # @!attribute deployment_configuration
+    #   <p>Optional deployment parameters that control how many tasks run during the deployment
+    #   			and the ordering of stopping and starting tasks.</p>
+    #   @return [Types::DeploymentConfiguration]
+    # @!attribute task_sets
+    #   <p>Information about a set of Amazon ECS tasks in either an CodeDeploy or an <code>EXTERNAL</code>
+    #   			deployment. An Amazon ECS task set includes details such as the desired number of tasks, how
+    #   			many tasks are running, and whether the task set serves production traffic.</p>
+    #   @return [Array<Types::TaskSet>]
+    # @!attribute deployments
+    #   <p>The current state of deployments for the service.</p>
+    #   @return [Array<Types::Deployment>]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role that's associated with the service. It allows the Amazon ECS
+    #   			container agent to register container instances with an Elastic Load Balancing load balancer.</p>
+    #   @return [String]
+    # @!attribute events
+    #   <p>The event stream for your service. A maximum of 100 of the latest events are
+    #   			displayed.</p>
+    #   @return [Array<Types::ServiceEvent>]
+    # @!attribute created_at
+    #   <p>The Unix timestamp for the time when the service was created.</p>
+    #   @return [Time]
+    # @!attribute placement_constraints
+    #   <p>The placement constraints for the tasks in the service.</p>
+    #   @return [Array<Types::PlacementConstraint>]
+    # @!attribute placement_strategy
+    #   <p>The placement strategy that determines how tasks for the service are placed.</p>
+    #   @return [Array<Types::PlacementStrategy>]
+    # @!attribute network_configuration
+    #   <p>The VPC subnet and security group configuration for tasks that receive their own
+    #               elastic network interface by using the <code>awsvpc</code> networking mode.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute health_check_grace_period_seconds
+    #   <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy
+    #   			Elastic Load Balancing target health checks after a task has first started.</p>
+    #   @return [Integer]
+    # @!attribute scheduling_strategy
+    #   <p>The scheduling strategy to use for the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p>
+    #            <p>There are two service scheduler strategies available.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>REPLICA</code>-The replica scheduling strategy places and
+    #   					maintains the desired number of tasks across your cluster. By default, the
+    #   					service scheduler spreads tasks across Availability Zones. You can use task
+    #   					placement strategies and constraints to customize task placement
+    #   					decisions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DAEMON</code>-The daemon scheduling strategy deploys exactly one
+    #   					task on each active container instance. This task meets all of the task
+    #   					placement constraints that you specify in your cluster. The service scheduler
+    #   					also evaluates the task placement constraints for running tasks. It stop tasks
+    #   					that don't meet the placement constraints.</p>
+    #                  <note>
+    #                     <p>Fargate tasks don't support the <code>DAEMON</code>
+    #   						scheduling strategy.</p>
+    #                  </note>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute deployment_controller
+    #   <p>The deployment controller type the service is using. </p>
+    #   @return [Types::DeploymentController]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the service to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value. You define bot the key and
+    #   			value.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute created_by
+    #   <p>The principal that created the service.</p>
+    #   @return [String]
+    # @!attribute enable_ecs_managed_tags
+    #   <p>Determines whether to use Amazon ECS managed tags for the tasks in the service. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS
+    #   				Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Boolean]
+    # @!attribute propagate_tags
+    #   <p>Determines whether to propagate the tags from the task definition or the service to
+    #   			the task. If no value is specified, the tags aren't propagated.</p>
+    #   @return [String]
+    # @!attribute enable_execute_command
+    #   <p>Determines whether the execute command functionality is turned on for the service. If
+    #   				<code>true</code>, the execute command functionality is turned on for all containers
+    #   			in tasks as part of the service.</p>
+    #   @return [Boolean]
+    # @!attribute availability_zone_rebalancing
+    #   <p>Indicates whether to use Availability Zone rebalancing for the service.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html">Balancing an Amazon ECS service across Availability Zones</a> in
+    #   			the <i>
+    #                  <i>Amazon Elastic Container Service Developer Guide</i>
+    #               </i>.</p>
+    #   @return [String]
+    class Service < Struct.new(
+      :service_arn,
+      :service_name,
+      :cluster_arn,
+      :load_balancers,
+      :service_registries,
+      :status,
+      :desired_count,
+      :running_count,
+      :pending_count,
+      :launch_type,
+      :capacity_provider_strategy,
+      :platform_version,
+      :platform_family,
+      :task_definition,
+      :deployment_configuration,
+      :task_sets,
+      :deployments,
+      :role_arn,
+      :events,
+      :created_at,
+      :placement_constraints,
+      :placement_strategy,
+      :network_configuration,
+      :health_check_grace_period_seconds,
+      :scheduling_strategy,
+      :deployment_controller,
+      :tags,
+      :created_by,
+      :enable_ecs_managed_tags,
+      :propagate_tags,
+      :enable_execute_command,
+      :availability_zone_rebalancing,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:desired_count] = 0 unless options.key?(:desired_count)
+        options[:running_count] = 0 unless options.key?(:running_count)
+        options[:pending_count] = 0 unless options.key?(:pending_count)
+        options[:enable_ecs_managed_tags] = false unless options.key?(:enable_ecs_managed_tags)
+        options[:enable_execute_command] = false unless options.key?(:enable_execute_command)
+        super
+      end
+    end
+
+    # <p>Each alias ("endpoint") is a fully-qualified name and port number that other tasks
+    # 			("clients") can use to connect to this service.</p>
+    #          <p>Each name and port mapping must be unique within the namespace.</p>
+    #          <p>Tasks that run in a namespace can use short names to connect
+    # 	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    # 	Tasks connect through a managed proxy container
+    # 	that collects logs and metrics for increased visibility.
+    # 	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    # 	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute port
+    #   <p>The listening port number for the Service Connect proxy. This port is available
+    #   			inside of all of the tasks within the same namespace.</p>
+    #            <p>To avoid changing your applications in client Amazon ECS services, set this to the same
+    #   			port that the client application uses by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute dns_name
+    #   <p>The <code>dnsName</code> is the name that you use in the applications of client tasks
+    #   			to connect to this service. The name must be a valid DNS name but doesn't need to be
+    #   			fully-qualified. The name can include up to 127 characters. The name can include
+    #   			lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name
+    #   			can't start with a hyphen.</p>
+    #            <p>If this parameter isn't specified, the default value of <code>discoveryName.namespace</code> is used. If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>
+    #            <p>To avoid changing your applications in client Amazon ECS services, set this to the same
+    #   			name that the client application uses by default. For example, a few common names are
+    #   				<code>database</code>, <code>db</code>, or the lowercase name of a database, such as
+    #   				<code>mysql</code> or <code>redis</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute test_traffic_rules
+    #   <p>The configuration for test traffic routing rules used during blue/green deployments with Amazon ECS Service Connect. This allows you to route a portion of traffic to the new service revision of your service for testing before shifting all production traffic.</p>
+    #   @return [Types::ServiceConnectTestTrafficRules]
+    class ServiceConnectClientAlias < Struct.new(
+      :port,
+      :dns_name,
+      :test_traffic_rules,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The Service Connect configuration of your Amazon ECS service. The configuration for this
+    # 			service to discover and connect to services, and be discovered by, and connected from,
+    # 			other services within a namespace.</p>
+    #          <p>Tasks that run in a namespace can use short names to connect
+    # 	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    # 	Tasks connect through a managed proxy container
+    # 	that collects logs and metrics for increased visibility.
+    # 	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    # 	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether to use Service Connect with this service.</p>
+    #   @return [Boolean]
+    # @!attribute namespace
+    #   <p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace for use with Service Connect. The namespace must be in
+    #   			the same Amazon Web Services Region as the Amazon ECS service and cluster. The type of namespace doesn't
+    #   			affect Service Connect. For more information about Cloud Map, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html">Working
+    #   				with Services</a> in the <i>Cloud Map Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute services
+    #   <p>The list of Service Connect service objects. These are names and aliases (also known
+    #   			as endpoints) that are used by other Amazon ECS services to connect to this service.
+    #   			</p>
+    #            <p>This field is not required for a "client" Amazon ECS service that's a member of a namespace
+    #   			only to connect to other services within the namespace. An example of this would be a
+    #   			frontend application that accepts incoming requests from either a load balancer that's
+    #   			attached to the service or by other means.</p>
+    #            <p>An object selects a port from the task definition, assigns a name for the Cloud Map
+    #   			service, and a list of aliases (endpoints) and ports for client applications to refer to
+    #   			this service.</p>
+    #   @return [Array<Types::ServiceConnectService>]
+    # @!attribute log_configuration
+    #   <p>The log configuration for the container. This parameter maps to <code>LogConfig</code>
+    #   			in the docker container create command and the <code>--log-driver</code> option to
+    #   			docker run.</p>
+    #            <p>By default, containers use the same logging driver that the Docker daemon uses.
+    #   			However, the container might use a different logging driver than the Docker daemon by
+    #   			specifying a log driver configuration in the container definition.</p>
+    #            <p>Understand the following when specifying a log configuration for your
+    #   			containers.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Amazon ECS currently supports a subset of the logging drivers available to the
+    #   					Docker daemon. Additional log drivers may be available in future releases of the
+    #   					Amazon ECS container agent.</p>
+    #                  <p>For tasks on Fargate, the supported log drivers are <code>awslogs</code>,
+    #   						<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #                  <p>For tasks hosted on Amazon EC2 instances, the supported log drivers are
+    #   						<code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>,
+    #   						<code>json-file</code>, <code>journald</code>,<code>syslog</code>,
+    #   						<code>splunk</code>, and <code>awsfirelens</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter requires version 1.18 of the Docker Remote API or greater on
+    #   					your container instance.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must
+    #   					register the available logging drivers with the
+    #   						<code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before
+    #   					containers placed on that instance can use these log configuration options. For
+    #   					more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS container agent configuration</a> in the
+    #   					<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For tasks that are on Fargate, because you don't have access to the
+    #   					underlying infrastructure your tasks are hosted on, any additional software
+    #   					needed must be installed outside of the task. For example, the Fluentd output
+    #   					aggregators or a remote host running Logstash to send Gelf logs to.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Types::LogConfiguration]
+    class ServiceConnectConfiguration < Struct.new(
+      :enabled,
+      :namespace,
+      :services,
+      :log_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = false unless options.key?(:enabled)
+        super
+      end
+    end
+
+    # <p>The Service Connect service object configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute port_name
+    #   <p>The <code>portName</code> must match the name of one of the <code>portMappings</code>
+    #   			from all the containers in the task definition of this Amazon ECS service.</p>
+    #   @return [String]
+    # @!attribute discovery_name
+    #   <p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates
+    #   			for this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,
+    #   			numbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>
+    #            <p>If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>
+    #   @return [String]
+    # @!attribute client_aliases
+    #   <p>The list of client aliases for this Service Connect service. You use these to assign
+    #   			names that can be used by client applications. The maximum number of client aliases that
+    #   			you can have in this list is 1.</p>
+    #            <p>Each alias ("endpoint") is a fully-qualified name and port number that other Amazon ECS
+    #   			tasks ("clients") can use to connect to this service.</p>
+    #            <p>Each name and port mapping must be unique within the namespace.</p>
+    #            <p>For each <code>ServiceConnectService</code>, you must provide at least one
+    #   				<code>clientAlias</code> with one <code>port</code>.</p>
+    #   @return [Array<Types::ServiceConnectClientAlias>]
+    # @!attribute ingress_port_override
+    #   <p>The port number for the Service Connect proxy to listen on.</p>
+    #            <p>Use the value of this field to bypass the proxy for traffic on the port number
+    #   			specified in the named <code>portMapping</code> in the task definition of this
+    #   			application, and then use it in your VPC security groups to allow traffic into the proxy
+    #   			for this Amazon ECS service.</p>
+    #            <p>In <code>awsvpc</code> mode and Fargate, the default value is the container port
+    #   			number. The container port number is in the <code>portMapping</code> in the task
+    #   			definition. In bridge mode, the default value is the ephemeral port of the
+    #   			Service Connect proxy.</p>
+    #   @return [Integer]
+    # @!attribute timeout
+    #   <p>A reference to an object that represents the configured timeouts for
+    #   			Service Connect.</p>
+    #   @return [Types::TimeoutConfiguration]
+    # @!attribute tls
+    #   <p>A reference to an object that represents a Transport Layer Security (TLS)
+    #   			configuration.</p>
+    #   @return [Types::ServiceConnectTlsConfiguration]
+    class ServiceConnectService < Struct.new(
+      :port_name,
+      :discovery_name,
+      :client_aliases,
+      :ingress_port_override,
+      :timeout,
+      :tls,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The Service Connect resource. Each configuration maps a discovery name to a
+    # 			Cloud Map service name. The data is stored in Cloud Map as part of the
+    # 			Service Connect configuration for each discovery name of this Amazon ECS service.</p>
+    #          <p>A task can resolve the <code>dnsName</code> for each of the <code>clientAliases</code>
+    # 			of a service. However a task can't resolve the discovery names. If you want to connect
+    # 			to a service, refer to the <code>ServiceConnectConfiguration</code> of that service for
+    # 			the list of <code>clientAliases</code> that you can use.</p>
+    # @!attribute discovery_name
+    #   <p>The discovery name of this Service Connect resource.</p>
+    #            <p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates
+    #   			for this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,
+    #   			numbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>
+    #            <p>If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>
+    #   @return [String]
+    # @!attribute discovery_arn
+    #   <p>The Amazon Resource Name (ARN) for the service in Cloud Map that matches the discovery name for this
+    #   			Service Connect resource. You can use this ARN in other integrations with Cloud Map.
+    #   			However, Service Connect can't ensure connectivity outside of Amazon ECS.</p>
+    #   @return [String]
+    class ServiceConnectServiceResource < Struct.new(
+      :discovery_name,
+      :discovery_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The header matching rules for test traffic routing in Amazon ECS blue/green deployments.
+    #          These rules determine how incoming requests are matched based on HTTP headers to route test
+    #          traffic to the new service revision.</p>
+    # @!attribute exact
+    #   <p>The exact value that the HTTP header must match for the test traffic routing rule to apply. This provides precise control over which requests are routed to the new service revision during blue/green deployments.</p>
+    #   @return [String]
+    class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
+      :exact,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The HTTP header rules used to identify and route test traffic during Amazon ECS blue/green
+    #          deployments. These rules specify which HTTP headers to examine and what values to match for
+    #          routing decisions.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html">Service Connect for Amazon ECS blue/green deployments</a> in the <i>
+    #                Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute name
+    #   <p>The name of the HTTP header to examine for test traffic routing. Common examples include custom headers like <code>X-Test-Version</code> or <code>X-Canary-Request</code> that can be used to identify test traffic.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The header value matching configuration that determines how the HTTP header value is evaluated for test traffic routing decisions.</p>
+    #   @return [Types::ServiceConnectTestTrafficHeaderMatchRules]
+    class ServiceConnectTestTrafficHeaderRules < Struct.new(
+      :name,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The test traffic routing configuration for Amazon ECS blue/green deployments. This
+    #          configuration allows you to define rules for routing specific traffic to the new service
+    #          revision during the deployment process, allowing for safe testing before full production
+    #          traffic shift.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html">Service Connect for Amazon ECS blue/green deployments</a> in the <i>
+    #                Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute header
+    #   <p>The HTTP header-based routing rules that determine which requests should be routed to the new service version during blue/green deployment testing. These rules provide fine-grained control over test traffic routing based on request headers.</p>
+    #   @return [Types::ServiceConnectTestTrafficHeaderRules]
+    class ServiceConnectTestTrafficRules < Struct.new(
+      :header,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The certificate root authority that secures your service.</p>
+    # @!attribute aws_pca_authority_arn
+    #   <p>The ARN of the Amazon Web Services Private Certificate Authority certificate.</p>
+    #   @return [String]
+    class ServiceConnectTlsCertificateAuthority < Struct.new(
+      :aws_pca_authority_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The key that encrypts and decrypts your resources for Service Connect TLS.</p>
+    # @!attribute issuer_certificate_authority
+    #   <p>The signer certificate authority.</p>
+    #   @return [Types::ServiceConnectTlsCertificateAuthority]
+    # @!attribute kms_key
+    #   <p>The Amazon Web Services Key Management Service key.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.</p>
+    #   @return [String]
+    class ServiceConnectTlsConfiguration < Struct.new(
+      :issuer_certificate_authority,
+      :kms_key,
+      :role_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the service deployment.</p>
+    #          <p>Service deployments provide a comprehensive view of your deployments. For information
+    # 			about service deployments, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html">View service history using Amazon ECS service deployments</a> in the
+    # 			<i>
+    #                <i>Amazon Elastic Container Service Developer Guide</i>
+    #             </i>.</p>
+    # @!attribute service_deployment_arn
+    #   <p>The ARN of the service deployment.</p>
+    #   @return [String]
+    # @!attribute service_arn
+    #   <p>The ARN of the service for this service deployment.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The ARN of the cluster that hosts the service.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time the service deployment was created. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The time the service deployment statred. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute finished_at
+    #   <p>The time the service deployment finished. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute stopped_at
+    #   <p>The time the service deployment stopped. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #            <p>The service deployment stops when any of the following actions happen:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>A user manually stops the deployment</p>
+    #               </li>
+    #               <li>
+    #                  <p>The rollback option is not in use for the failure detection mechanism (the
+    #   					circuit breaker or alarm-based) and the service fails.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time that the service deployment was last updated. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute source_service_revisions
+    #   <p>The currently deployed workload configuration.</p>
+    #   @return [Array<Types::ServiceRevisionSummary>]
+    # @!attribute target_service_revision
+    #   <p>The workload configuration being deployed.</p>
+    #   @return [Types::ServiceRevisionSummary]
+    # @!attribute status
+    #   <p>The service deployment state.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Information about why the service deployment is in the current status. For example,
+    #   			the circuit breaker detected a failure.</p>
+    #   @return [String]
+    # @!attribute lifecycle_stage
+    #   <p>The current lifecycle stage of the deployment. Possible values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>RECONCILE_SERVICE</p>
+    #                  <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p>
+    #               </li>
+    #               <li>
+    #                  <p>PRE_SCALE_UP</p>
+    #                  <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>
+    #               </li>
+    #               <li>
+    #                  <p>SCALE_UP</p>
+    #                  <p>The stage when the green service revision scales up to 100% and launches new tasks. The green service revision is not serving any traffic at this point.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_SCALE_UP</p>
+    #                  <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>
+    #               </li>
+    #               <li>
+    #                  <p>TEST_TRAFFIC_SHIFT</p>
+    #                  <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_TEST_TRAFFIC_SHIFT</p>
+    #                  <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p>
+    #               </li>
+    #               <li>
+    #                  <p>PRODUCTION_TRAFFIC_SHIFT</p>
+    #                  <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p>
+    #               </li>
+    #               <li>
+    #                  <p>POST_PRODUCTION_TRAFFIC_SHIFT</p>
+    #                  <p>The production traffic shift is complete.</p>
+    #               </li>
+    #               <li>
+    #                  <p>BAKE_TIME</p>
+    #                  <p>The stage when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p>
+    #               </li>
+    #               <li>
+    #                  <p>CLEAN_UP</p>
+    #                  <p>The stage when the blue service revision has completely scaled down to 0 running tasks. The green service revision is now the production service revision after this stage.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute deployment_configuration
+    #   <p>Optional deployment parameters that control how many tasks run during a deployment and
+    #   			the ordering of stopping and starting tasks.</p>
+    #   @return [Types::DeploymentConfiguration]
+    # @!attribute rollback
+    #   <p>The rollback options the service deployment uses when the deployment fails.</p>
+    #   @return [Types::Rollback]
+    # @!attribute deployment_circuit_breaker
+    #   <p>The circuit breaker configuration that determines a service deployment failed.</p>
+    #   @return [Types::ServiceDeploymentCircuitBreaker]
+    # @!attribute alarms
+    #   <p>The CloudWatch alarms that determine when a service deployment fails.</p>
+    #   @return [Types::ServiceDeploymentAlarms]
+    class ServiceDeployment < Struct.new(
+      :service_deployment_arn,
+      :service_arn,
+      :cluster_arn,
+      :created_at,
+      :started_at,
+      :finished_at,
+      :stopped_at,
+      :updated_at,
+      :source_service_revisions,
+      :target_service_revision,
+      :status,
+      :status_reason,
+      :lifecycle_stage,
+      :deployment_configuration,
+      :rollback,
+      :deployment_circuit_breaker,
+      :alarms,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The CloudWatch alarms used to determine a service deployment failed. </p>
+    #          <p>Amazon ECS considers the service deployment as failed when any of the alarms move to
+    # 			the <code>ALARM</code> state. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html">How CloudWatch
+    # 				alarms detect Amazon ECS deployment failures</a> in the Amazon ECS Developer
+    # 			Guide.</p>
+    # @!attribute status
+    #   <p>The status of the alarms check. Amazon ECS is not using alarms for service deployment
+    #   			failures when the status is <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute alarm_names
+    #   <p>The name of the CloudWatch alarms that determine when a service deployment failed. A
+    #   			"," separates the alarms.</p>
+    #   @return [Array<String>]
+    # @!attribute triggered_alarm_names
+    #   <p>One or more CloudWatch alarm names that have been triggered during the service
+    #   			deployment. A "," separates the alarm names.</p>
+    #   @return [Array<String>]
+    class ServiceDeploymentAlarms < Struct.new(
+      :status,
+      :alarm_names,
+      :triggered_alarm_names,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The service deployment properties that are retured when you call
+    # 				<code>ListServiceDeployments</code>.</p>
+    #          <p>This provides a high-level overview of the service deployment. </p>
+    # @!attribute service_deployment_arn
+    #   <p>The ARN of the service deployment.</p>
+    #   @return [String]
+    # @!attribute service_arn
+    #   <p>The ARN of the service for this service deployment.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The ARN of the cluster that hosts the service.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The time that the service deployment statred. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute created_at
+    #   <p>The time that the service deployment was created. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute finished_at
+    #   <p>The time that the service deployment completed. The format is yyyy-MM-dd
+    #   			HH:mm:ss.SSSSSS.</p>
+    #   @return [Time]
+    # @!attribute target_service_revision_arn
+    #   <p>The ARN of the service revision being deplyed.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the service deployment</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Information about why the service deployment is in the current status. For example,
+    #   			the circuit breaker detected a deployment failure.</p>
+    #   @return [String]
+    class ServiceDeploymentBrief < Struct.new(
+      :service_deployment_arn,
+      :service_arn,
+      :cluster_arn,
+      :started_at,
+      :created_at,
+      :finished_at,
+      :target_service_revision_arn,
+      :status,
+      :status_reason,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the circuit breaker used to determine when a service deployment has
+    # 			failed.</p>
+    #          <p>The deployment circuit breaker is the rolling update mechanism that determines if the
+    # 			tasks reach a steady state. The deployment circuit breaker has an option that will
+    # 			automatically roll back a failed deployment to the last cpompleted service revision. For
+    # 			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html">How the Amazon
+    # 				ECS deployment circuit breaker detects failures</a> in the<i> Amazon ECS
+    # 				Developer Guide</i>.</p>
+    # @!attribute status
+    #   <p>The circuit breaker status. Amazon ECS is not using the circuit breaker for service
+    #   			deployment failures when the status is <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute failure_count
+    #   <p>The number of times the circuit breaker detected a service deploymeny failure.</p>
+    #   @return [Integer]
+    # @!attribute threshold
+    #   <p>The threshhold which determines that the service deployment failed.</p>
+    #            <p>The deployment circuit breaker calculates the threshold value, and then uses the value
+    #   			to determine when to move the deployment to a FAILED state. The deployment circuit
+    #   			breaker has a minimum threshold of 3 and a maximum threshold of 200. and uses the values
+    #   			in the following formula to determine the deployment failure.</p>
+    #            <p>
+    #               <code>0.5 * desired task count</code>
+    #            </p>
+    #   @return [Integer]
+    class ServiceDeploymentCircuitBreaker < Struct.new(
+      :status,
+      :failure_count,
+      :threshold,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:failure_count] = 0 unless options.key?(:failure_count)
+        options[:threshold] = 0 unless options.key?(:threshold)
+        super
+      end
+    end
+
+    module ServiceDeploymentLifecycleStage
+      RECONCILE_SERVICE = 'RECONCILE_SERVICE'
+      PRE_SCALE_UP = 'PRE_SCALE_UP'
+      SCALE_UP = 'SCALE_UP'
+      POST_SCALE_UP = 'POST_SCALE_UP'
+      TEST_TRAFFIC_SHIFT = 'TEST_TRAFFIC_SHIFT'
+      POST_TEST_TRAFFIC_SHIFT = 'POST_TEST_TRAFFIC_SHIFT'
+      PRODUCTION_TRAFFIC_SHIFT = 'PRODUCTION_TRAFFIC_SHIFT'
+      POST_PRODUCTION_TRAFFIC_SHIFT = 'POST_PRODUCTION_TRAFFIC_SHIFT'
+      BAKE_TIME = 'BAKE_TIME'
+      CLEAN_UP = 'CLEAN_UP'
+    end
+
+    # <p>The service deploy ARN that you specified in the <code>StopServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ServiceDeploymentNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ServiceDeploymentRollbackMonitorsStatus
+      TRIGGERED = 'TRIGGERED'
+      MONITORING = 'MONITORING'
+      MONITORING_COMPLETE = 'MONITORING_COMPLETE'
+      DISABLED = 'DISABLED'
+    end
+
+    module ServiceDeploymentStatus
+      PENDING = 'PENDING'
+      SUCCESSFUL = 'SUCCESSFUL'
+      STOPPED = 'STOPPED'
+      STOP_REQUESTED = 'STOP_REQUESTED'
+      IN_PROGRESS = 'IN_PROGRESS'
+      ROLLBACK_REQUESTED = 'ROLLBACK_REQUESTED'
+      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
+      ROLLBACK_SUCCESSFUL = 'ROLLBACK_SUCCESSFUL'
+      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
+    end
+
+    # <p>The details for an event that's associated with a service.</p>
+    # @!attribute id
+    #   <p>The ID string for the event.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The Unix timestamp for the time when the event was triggered.</p>
+    #   @return [Time]
+    # @!attribute message
+    #   <p>The event message.</p>
+    #   @return [String]
+    class ServiceEvent < Struct.new(
+      :id,
+      :created_at,
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module ServiceField
+      TAGS = 'TAGS'
+    end
+
+    # <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
+    # 			These settings are used to create each Amazon EBS volume, with one volume created for each
+    # 			task in the service. For information about the supported launch types and operating
+    # 			systems, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration">Supported operating systems and launch types</a> in the<i> Amazon Elastic Container Service
+    # 				Developer Guide</i>.</p>
+    #          <p>Many of these parameters map 1:1 with the Amazon EBS <code>CreateVolume</code> API request
+    # 			parameters.</p>
+    # @!attribute encrypted
+    #   <p>Indicates whether the volume should be encrypted. If you turn on Region-level Amazon EBS
+    #   			encryption by default but set this value as <code>false</code>, the setting is
+    #   			overridden and the volume is encrypted with the KMS key specified for Amazon EBS encryption
+    #   			by default. This parameter maps 1:1 with the <code>Encrypted</code> parameter of the
+    #   				<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Boolean]
+    # @!attribute kms_key_id
+    #   <p>The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption. When a key
+    #   			is specified using this parameter, it overrides Amazon EBS default encryption or any KMS key
+    #   			that you specified for cluster-level managed storage encryption. This parameter maps 1:1
+    #   			with the <code>KmsKeyId</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in
+    #   			the <i>Amazon EC2 API Reference</i>. For more information about encrypting
+    #   			Amazon EBS volumes attached to tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html">Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks</a>.</p>
+    #            <important>
+    #               <p>Amazon Web Services authenticates the Amazon Web Services Key Management Service key asynchronously. Therefore, if you specify an
+    #   				ID, alias, or ARN that is invalid, the action can appear to complete, but
+    #   				eventually fails.</p>
+    #            </important>
+    #   @return [String]
+    # @!attribute volume_type
+    #   <p>The volume type. This parameter maps 1:1 with the <code>VolumeType</code> parameter of
+    #   			the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html">Amazon EBS volume types</a> in
+    #   			the <i>Amazon EC2 User Guide</i>.</p>
+    #            <p>The following are the supported volume types.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>General Purpose SSD: <code>gp2</code>|<code>gp3</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Provisioned IOPS SSD: <code>io1</code>|<code>io2</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Throughput Optimized HDD: <code>st1</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Cold HDD: <code>sc1</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Magnetic: <code>standard</code>
+    #                  </p>
+    #                  <note>
+    #                     <p>The magnetic volume type is not supported on Fargate.</p>
+    #                  </note>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute size_in_gi_b
+    #   <p>The size of the volume in GiB. You must specify either a volume size or a snapshot ID.
+    #   			If you specify a snapshot ID, the snapshot size is used for the volume size by default.
+    #   			You can optionally specify a volume size greater than or equal to the snapshot size.
+    #   			This parameter maps 1:1 with the <code>Size</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #            <p>The following are the supported volume size values for each volume type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>gp2</code> and <code>gp3</code>: 1-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io1</code> and <code>io2</code>: 4-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>st1</code> and <code>sc1</code>: 125-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>standard</code>: 1-1,024</p>
+    #               </li>
+    #            </ul>
+    #   @return [Integer]
+    # @!attribute snapshot_id
+    #   <p>The snapshot that Amazon ECS uses to create volumes for attachment to tasks maintained by
+    #   			the service. You must specify either <code>snapshotId</code> or <code>sizeInGiB</code>
+    #   			in your volume configuration. This parameter maps 1:1 with the <code>SnapshotId</code>
+    #   			parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in
+    #   			the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [String]
+    # @!attribute volume_initialization_rate
+    #   <p>The rate, in MiB/s, at which data is fetched from a snapshot of an existing EBS volume
+    #   			to create new volumes for attachment to the tasks maintained by the service. This
+    #   			property can be specified only if you specify a <code>snapshotId</code>. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize Amazon EBS volumes</a> in the <i>Amazon EBS User
+    #   				Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute iops
+    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>,
+    #   			<code>io1</code>, and <code>io2</code> volumes, this represents the number of IOPS that
+    #   			are provisioned for the volume. For <code>gp2</code> volumes, this represents the
+    #   			baseline performance of the volume and the rate at which the volume accumulates I/O
+    #   			credits for bursting.</p>
+    #            <p>The following are the supported values for each volume type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io1</code>: 100 - 64,000 IOPS</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io2</code>: 100 - 256,000 IOPS</p>
+    #               </li>
+    #            </ul>
+    #            <p>This parameter is required for <code>io1</code> and <code>io2</code> volume types. The
+    #   			default for <code>gp3</code> volumes is <code>3,000 IOPS</code>. This parameter is not
+    #   			supported for <code>st1</code>, <code>sc1</code>, or <code>standard</code> volume
+    #   			types.</p>
+    #            <p>This parameter maps 1:1 with the <code>Iops</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Integer]
+    # @!attribute throughput
+    #   <p>The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
+    #   			This parameter maps 1:1 with the <code>Throughput</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #            <important>
+    #               <p>This parameter is only supported for the <code>gp3</code> volume type.</p>
+    #            </important>
+    #   @return [Integer]
+    # @!attribute tag_specifications
+    #   <p>The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This
+    #   			parameter maps 1:1 with the <code>TagSpecifications.N</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Array<Types::EBSTagSpecification>]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role to associate with this volume. This is the Amazon ECS
+    #   			infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. We recommend
+    #   			using the Amazon ECS-managed <code>AmazonECSInfrastructureRolePolicyForVolumes</code> IAM
+    #   			policy with this role. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html">Amazon ECS
+    #   				infrastructure IAM role</a> in the <i>Amazon ECS Developer
+    #   			Guide</i>.</p>
+    #   @return [String]
+    # @!attribute filesystem_type
+    #   <p>The filesystem type for the volume. For volumes created from a snapshot, you must
+    #   			specify the same filesystem type that the volume was using when the snapshot was
+    #   			created. If there is a filesystem type mismatch, the tasks will fail to start.</p>
+    #            <p>The available Linux filesystem types are  <code>ext3</code>, <code>ext4</code>, and
+    #   				<code>xfs</code>. If no value is specified, the <code>xfs</code> filesystem type is
+    #   			used by default.</p>
+    #            <p>The available Windows filesystem types are <code>NTFS</code>.</p>
+    #   @return [String]
+    class ServiceManagedEBSVolumeConfiguration < Struct.new(
+      :encrypted,
+      :kms_key_id,
+      :volume_type,
+      :size_in_gi_b,
+      :snapshot_id,
+      :volume_initialization_rate,
+      :iops,
+      :throughput,
+      :tag_specifications,
+      :role_arn,
+      :filesystem_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified service isn't active. You can't update a service that's inactive. If you
+    # 			have previously deleted a service, you can re-create it with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ServiceNotActiveException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified service wasn't found. You can view your available services with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html">ListServices</a>. Amazon ECS services are cluster specific and Region
+    # 			specific.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class ServiceNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details for the service registry.</p>
+    #          <p>Each service may be associated with one service registry. Multiple service registries
+    # 			for each service are not supported.</p>
+    #          <p>When you add, update, or remove the service registries configuration, Amazon ECS starts a
+    # 			new deployment. New tasks are registered and deregistered to the updated service
+    # 			registry configuration.</p>
+    # @!attribute registry_arn
+    #   <p>The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is
+    #   			Cloud Map. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html">CreateService</a>.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port value used if your service discovery service specified an SRV record. This
+    #   			field might be used if both the <code>awsvpc</code> network mode and SRV records are
+    #   			used.</p>
+    #   @return [Integer]
+    # @!attribute container_name
+    #   <p>The container name value to be used for your service discovery service. It's already
+    #   			specified in the task definition. If the task definition that your service task
+    #   			specifies uses the <code>bridge</code> or <code>host</code> network mode, you must
+    #   			specify a <code>containerName</code> and <code>containerPort</code> combination from the
+    #   			task definition. If the task definition that your service task specifies uses the
+    #   				<code>awsvpc</code> network mode and a type SRV DNS record is used, you must specify
+    #   			either a <code>containerName</code> and <code>containerPort</code> combination or a
+    #   				<code>port</code> value. However, you can't specify both.</p>
+    #   @return [String]
+    # @!attribute container_port
+    #   <p>The port value to be used for your service discovery service. It's already specified
+    #   			in the task definition. If the task definition your service task specifies uses the
+    #   				<code>bridge</code> or <code>host</code> network mode, you must specify a
+    #   				<code>containerName</code> and <code>containerPort</code> combination from the task
+    #   			definition. If the task definition your service task specifies uses the
+    #   				<code>awsvpc</code> network mode and a type SRV DNS record is used, you must specify
+    #   			either a <code>containerName</code> and <code>containerPort</code> combination or a
+    #   				<code>port</code> value. However, you can't specify both.</p>
+    #   @return [Integer]
+    class ServiceRegistry < Struct.new(
+      :registry_arn,
+      :port,
+      :container_name,
+      :container_port,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about the service revision.</p>
+    #          <p>A service revision contains a record of the workload configuration Amazon ECS is attempting
+    # 			to deploy. Whenever you create or deploy a service, Amazon ECS automatically creates and
+    # 			captures the configuration that you're trying to deploy in the service revision. For
+    # 			information about service revisions, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html">Amazon ECS service
+    # 				revisions</a> in the <i>
+    #                <i>Amazon Elastic Container Service Developer Guide</i>
+    #             </i>.</p>
+    # @!attribute service_revision_arn
+    #   <p>The ARN of the service revision.</p>
+    #   @return [String]
+    # @!attribute service_arn
+    #   <p>The ARN of the service for the service revision.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The ARN of the cluster that hosts the service.</p>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The task definition the service revision uses.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy the service revision uses.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute launch_type
+    #   <p>The launch type the service revision uses.</p>
+    #   @return [String]
+    # @!attribute platform_version
+    #   <p>For the Fargate launch type, the platform version the service revision uses.</p>
+    #   @return [String]
+    # @!attribute platform_family
+    #   <p>The platform family the service revision uses.</p>
+    #   @return [String]
+    # @!attribute load_balancers
+    #   <p>The load balancers the service revision uses.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute service_registries
+    #   <p>The service registries (for Service Discovery) the service revision uses.</p>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute network_configuration
+    #   <p>The network configuration for a task or service.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute container_images
+    #   <p>The container images the service revision uses.</p>
+    #   @return [Array<Types::ContainerImage>]
+    # @!attribute guard_duty_enabled
+    #   <p>Indicates whether Runtime Monitoring is turned on.</p>
+    #   @return [Boolean]
+    # @!attribute service_connect_configuration
+    #   <p>The Service Connect configuration of your Amazon ECS service. The configuration for this
+    #   			service to discover and connect to services, and be discovered by, and connected from,
+    #   			other services within a namespace.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ServiceConnectConfiguration]
+    # @!attribute volume_configurations
+    #   <p>The volumes that are configured at deployment that the service revision uses.</p>
+    #   @return [Array<Types::ServiceVolumeConfiguration>]
+    # @!attribute fargate_ephemeral_storage
+    #   <p>The amount of ephemeral storage to allocate for the deployment.</p>
+    #   @return [Types::DeploymentEphemeralStorage]
+    # @!attribute created_at
+    #   <p>The time that the service revision was created. The format is yyyy-mm-dd
+    #   			HH:mm:ss.SSSSS.</p>
+    #   @return [Time]
+    # @!attribute vpc_lattice_configurations
+    #   <p>The VPC Lattice configuration for the service revision.</p>
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    # @!attribute resolved_configuration
+    #   <p>The resolved configuration for the service revision which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>
+    #   @return [Types::ResolvedConfiguration]
+    class ServiceRevision < Struct.new(
+      :service_revision_arn,
+      :service_arn,
+      :cluster_arn,
+      :task_definition,
+      :capacity_provider_strategy,
+      :launch_type,
+      :platform_version,
+      :platform_family,
+      :load_balancers,
+      :service_registries,
+      :network_configuration,
+      :container_images,
+      :guard_duty_enabled,
+      :service_connect_configuration,
+      :volume_configurations,
+      :fargate_ephemeral_storage,
+      :created_at,
+      :vpc_lattice_configurations,
+      :resolved_configuration,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:guard_duty_enabled] = false unless options.key?(:guard_duty_enabled)
+        super
+      end
+    end
+
+    # <p>The resolved load balancer configuration for a service revision. This includes information about which target groups serve traffic and which listener rules direct traffic to them.</p>
+    # @!attribute target_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the target group associated with the service revision.</p>
+    #   @return [String]
+    # @!attribute production_listener_rule
+    #   <p>The Amazon Resource Name (ARN) of the production listener rule or listener that directs traffic to the target group associated with the service revision.</p>
+    #   @return [String]
+    class ServiceRevisionLoadBalancer < Struct.new(
+      :target_group_arn,
+      :production_listener_rule,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The information about the number of requested, pending, and running tasks for a
+    # 			service revision.</p>
+    # @!attribute arn
+    #   <p>The ARN of the service revision.</p>
+    #   @return [String]
+    # @!attribute requested_task_count
+    #   <p>The number of requested tasks for the service revision.</p>
+    #   @return [Integer]
+    # @!attribute running_task_count
+    #   <p>The number of running tasks for the service revision.</p>
+    #   @return [Integer]
+    # @!attribute pending_task_count
+    #   <p>The number of pending tasks for the service revision.</p>
+    #   @return [Integer]
+    class ServiceRevisionSummary < Struct.new(
+      :arn,
+      :requested_task_count,
+      :running_task_count,
+      :pending_task_count,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:requested_task_count] = 0 unless options.key?(:requested_task_count)
+        options[:running_task_count] = 0 unless options.key?(:running_task_count)
+        options[:pending_task_count] = 0 unless options.key?(:pending_task_count)
+        super
+      end
+    end
+
+    # <p>The configuration for a volume specified in the task definition as a volume that is
+    # 			configured at launch time. Currently, the only supported volume type is an Amazon EBS
+    # 			volume.</p>
+    # @!attribute name
+    #   <p>The name of the volume. This value must match the volume name from the
+    #   				<code>Volume</code> object in the task definition.</p>
+    #   @return [String]
+    # @!attribute managed_ebs_volume
+    #   <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
+    #   			These settings are used to create each Amazon EBS volume, with one volume created for each
+    #   			task in the service. The Amazon EBS volumes are visible in your account in the Amazon EC2 console
+    #   			once they are created.</p>
+    #   @return [Types::ServiceManagedEBSVolumeConfiguration]
+    class ServiceVolumeConfiguration < Struct.new(
+      :name,
+      :managed_ebs_volume,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The details for the execute command session.</p>
+    # @!attribute session_id
+    #   <p>The ID of the execute command session.</p>
+    #   @return [String]
+    # @!attribute stream_url
+    #   <p>A URL to the managed agent on the container that the SSM Session Manager client uses
+    #   			to send commands and receive output from the container.</p>
+    #   @return [String]
+    # @!attribute token_value
+    #   <p>An encrypted token value containing session and caller information. It's used to
+    #   			authenticate the connection to the container.</p>
+    #   @return [String]
+    class Session < Struct.new(
+      :session_id,
+      :stream_url,
+      :token_value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The current account setting for a resource.</p>
+    # @!attribute name
+    #   <p>The Amazon ECS resource name.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>Determines whether the account setting is on or off for the specified resource.</p>
+    #   @return [String]
+    # @!attribute principal_arn
+    #   <p>The ARN of the principal. It can be a user, role, or the root user. If this field is
+    #   			omitted, the authenticated user is assumed.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Indicates whether Amazon Web Services manages the account setting, or if the user manages it.</p>
+    #            <p>
+    #               <code>aws_managed</code> account settings are read-only, as Amazon Web Services manages such on the
+    #   			customer's behalf. Currently, the <code>guardDutyActivate</code> account setting is the
+    #   			only one Amazon Web Services manages.</p>
+    #   @return [String]
+    class Setting < Struct.new(
+      :name,
+      :value,
+      :principal_arn,
+      :type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module SettingName
+      SERVICE_LONG_ARN_FORMAT = 'serviceLongArnFormat'
+      TASK_LONG_ARN_FORMAT = 'taskLongArnFormat'
+      CONTAINER_INSTANCE_LONG_ARN_FORMAT = 'containerInstanceLongArnFormat'
+      AWSVPC_TRUNKING = 'awsvpcTrunking'
+      CONTAINER_INSIGHTS = 'containerInsights'
+      FARGATE_FIPS_MODE = 'fargateFIPSMode'
+      TAG_RESOURCE_AUTHORIZATION = 'tagResourceAuthorization'
+      FARGATE_TASK_RETIREMENT_WAIT_PERIOD = 'fargateTaskRetirementWaitPeriod'
+      GUARD_DUTY_ACTIVATE = 'guardDutyActivate'
+      DEFAULT_LOG_DRIVER_MODE = 'defaultLogDriverMode'
+    end
+
+    module SettingType
+      USER = 'user'
+      AWS_MANAGED = 'aws_managed'
+    end
+
+    module SortOrder
+      ASC = 'ASC'
+      DESC = 'DESC'
+    end
+
+    module StabilityStatus
+      STEADY_STATE = 'STEADY_STATE'
+      STABILIZING = 'STABILIZING'
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster where to start your task.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container_instances
+    #   <p>The container instance IDs or full ARN entries for the container instances where you
+    #   			would like to place your task. You can specify up to 10 container instances.</p>
+    #   @return [Array<String>]
+    # @!attribute enable_ecs_managed_tags
+    #   <p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS
+    #   				Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Boolean]
+    # @!attribute enable_execute_command
+    #   <p>Whether or not the execute command functionality is turned on for the task. If
+    #   				<code>true</code>, this turns on the execute command functionality on all containers
+    #   			in the task.</p>
+    #   @return [Boolean]
+    # @!attribute group
+    #   <p>The name of the task group to associate with the task. The default value is the family
+    #   			name of the task definition (for example, family:my-family-name).</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The VPC subnet and security group configuration for tasks that receive their own
+    #               elastic network interface by using the <code>awsvpc</code> networking mode.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute overrides
+    #   <p>A list of container overrides in JSON format that specify the name of a container in
+    #   			the specified task definition and the overrides it receives. You can override the
+    #   			default command for a container (that's specified in the task definition or Docker
+    #   			image) with a <code>command</code> override. You can also override existing environment
+    #   			variables (that are specified in the task definition or Docker image) on a container or
+    #   			add new environment variables to it with an <code>environment</code> override.</p>
+    #            <note>
+    #               <p>A total of 8192 characters are allowed for overrides. This limit includes the JSON
+    #   				formatting characters of the override structure.</p>
+    #            </note>
+    #   @return [Types::TaskOverride]
+    # @!attribute propagate_tags
+    #   <p>Specifies whether to propagate the tags from the task definition or the service to the
+    #   			task. If no value is specified, the tags aren't propagated.</p>
+    #   @return [String]
+    # @!attribute reference_id
+    #   <p>This parameter is only used by Amazon ECS. It is not intended for use by customers.</p>
+    #   @return [String]
+    # @!attribute started_by
+    #   <p>An optional tag specified when a task is started. For example, if you automatically
+    #   			trigger a task to run a batch process job, you could apply a unique identifier for that
+    #   			job to your task with the <code>startedBy</code> parameter. You can then identify which
+    #   			tasks belong to that job by filtering the results of a <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html">ListTasks</a> call with
+    #   			the <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase), numbers,
+    #   			hyphens (-), forward slash (/), and underscores (_) are allowed.</p>
+    #            <p>If a task is started by an Amazon ECS service, the <code>startedBy</code> parameter
+    #   			contains the deployment ID of the service that starts it.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task to help you categorize and organize them. Each
+    #   			tag consists of a key and an optional value, both of which you define.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute task_definition
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full ARN of the task definition to start. If a <code>revision</code> isn't specified,
+    #   			the latest <code>ACTIVE</code> revision is used.</p>
+    #   @return [String]
+    # @!attribute volume_configurations
+    #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
+    #   			the size, volumeType, IOPS, throughput, snapshot and encryption in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html">TaskManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume must
+    #   			match the <code>name</code> from the task definition.</p>
+    #   @return [Array<Types::TaskVolumeConfiguration>]
+    class StartTaskRequest < Struct.new(
+      :cluster,
+      :container_instances,
+      :enable_ecs_managed_tags,
+      :enable_execute_command,
+      :group,
+      :network_configuration,
+      :overrides,
+      :propagate_tags,
+      :reference_id,
+      :started_by,
+      :tags,
+      :task_definition,
+      :volume_configurations,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute tasks
+    #   <p>A full description of the tasks that were started. Each task that was successfully
+    #   			placed on your container instances is described.</p>
+    #   @return [Array<Types::Task>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class StartTaskResponse < Struct.new(
+      :tasks,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_deployment_arn
+    #   <p>The ARN of the service deployment that you want to stop.</p>
+    #   @return [String]
+    # @!attribute stop_type
+    #   <p>How you want Amazon ECS to stop the service. </p>
+    #            <p>The valid values are <code>ROLLBACK</code>.</p>
+    #   @return [String]
+    class StopServiceDeploymentRequest < Struct.new(
+      :service_deployment_arn,
+      :stop_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service_deployment_arn
+    #   <p>The ARN of the stopped service deployment.</p>
+    #   @return [String]
+    class StopServiceDeploymentResponse < Struct.new(
+      :service_deployment_arn,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module StopServiceDeploymentStopType
+      ABORT = 'ABORT'
+      ROLLBACK = 'ROLLBACK'
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute task
+    #   <p>Thefull Amazon Resource Name (ARN) of the task.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>An optional message specified when a task is stopped. For example, if you're using a
+    #   			custom scheduler, you can use this parameter to specify the reason for stopping the task
+    #   			here, and the message appears in subsequent <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html">DescribeTasks</a>>
+    #   			API operations on this task.</p>
+    #   @return [String]
+    class StopTaskRequest < Struct.new(
+      :cluster,
+      :task,
+      :reason,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task
+    #   <p>The task that was stopped.</p>
+    #   @return [Types::Task]
+    class StopTaskResponse < Struct.new(
+      :task,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full ARN of the cluster that hosts the container instance the
+    #   			attachment belongs to.</p>
+    #   @return [String]
+    # @!attribute attachments
+    #   <p>Any attachments associated with the state change request.</p>
+    #   @return [Array<Types::AttachmentStateChange>]
+    class SubmitAttachmentStateChangesRequest < Struct.new(
+      :cluster,
+      :attachments,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute acknowledgment
+    #   <p>Acknowledgement of the state change.</p>
+    #   @return [String]
+    class SubmitAttachmentStateChangesResponse < Struct.new(
+      :acknowledgment,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full ARN of the cluster that hosts the container.</p>
+    #   @return [String]
+    # @!attribute task
+    #   <p>The task ID or full Amazon Resource Name (ARN) of the task that hosts the container.</p>
+    #   @return [String]
+    # @!attribute container_name
+    #   <p>The name of the container.</p>
+    #   @return [String]
+    # @!attribute runtime_id
+    #   <p>The ID of the Docker container.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the state change request.</p>
+    #   @return [String]
+    # @!attribute exit_code
+    #   <p>The exit code that's returned for the state change request.</p>
+    #   @return [Integer]
+    # @!attribute reason
+    #   <p>The reason for the state change request.</p>
+    #   @return [String]
+    # @!attribute network_bindings
+    #   <p>The network bindings of the container.</p>
+    #   @return [Array<Types::NetworkBinding>]
+    class SubmitContainerStateChangeRequest < Struct.new(
+      :cluster,
+      :task,
+      :container_name,
+      :runtime_id,
+      :status,
+      :exit_code,
+      :reason,
+      :network_bindings,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute acknowledgment
+    #   <p>Acknowledgement of the state change.</p>
+    #   @return [String]
+    class SubmitContainerStateChangeResponse < Struct.new(
+      :acknowledgment,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task.</p>
+    #   @return [String]
+    # @!attribute task
+    #   <p>The task ID or full ARN of the task in the state change request.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the state change request.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the state change request.</p>
+    #   @return [String]
+    # @!attribute containers
+    #   <p>Any containers that's associated with the state change request.</p>
+    #   @return [Array<Types::ContainerStateChange>]
+    # @!attribute attachments
+    #   <p>Any attachments associated with the state change request.</p>
+    #   @return [Array<Types::AttachmentStateChange>]
+    # @!attribute managed_agents
+    #   <p>The details for the managed agent that's associated with the task.</p>
+    #   @return [Array<Types::ManagedAgentStateChange>]
+    # @!attribute pull_started_at
+    #   <p>The Unix timestamp for the time when the container image pull started.</p>
+    #   @return [Time]
+    # @!attribute pull_stopped_at
+    #   <p>The Unix timestamp for the time when the container image pull completed.</p>
+    #   @return [Time]
+    # @!attribute execution_stopped_at
+    #   <p>The Unix timestamp for the time when the task execution stopped.</p>
+    #   @return [Time]
+    class SubmitTaskStateChangeRequest < Struct.new(
+      :cluster,
+      :task,
+      :status,
+      :reason,
+      :containers,
+      :attachments,
+      :managed_agents,
+      :pull_started_at,
+      :pull_stopped_at,
+      :execution_stopped_at,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute acknowledgment
+    #   <p>Acknowledgement of the state change.</p>
+    #   @return [String]
+    class SubmitTaskStateChangeResponse < Struct.new(
+      :acknowledgment,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>A list of namespaced kernel parameters to set in the container. This parameter maps to
+    # 				<code>Sysctls</code> in the docker container create command and the
+    # 				<code>--sysctl</code> option to docker run. For example, you can configure
+    # 				<code>net.ipv4.tcp_keepalive_time</code> setting to maintain longer lived
+    # 			connections.</p>
+    #          <p>We don't recommend that you specify network-related <code>systemControls</code>
+    # 			parameters for multiple containers in a single task that also uses either the
+    # 				<code>awsvpc</code> or <code>host</code> network mode. Doing this has the following
+    # 			disadvantages:</p>
+    #          <ul>
+    #             <li>
+    #                <p>For tasks that use the <code>awsvpc</code> network mode including Fargate,
+    # 					if you set <code>systemControls</code> for any container, it applies to all
+    # 					containers in the task. If you set different <code>systemControls</code> for
+    # 					multiple containers in a single task, the container that's started last
+    # 					determines which <code>systemControls</code> take effect.</p>
+    #             </li>
+    #             <li>
+    #                <p>For tasks that use the <code>host</code> network mode, the network namespace
+    # 						<code>systemControls</code> aren't supported.</p>
+    #             </li>
+    #          </ul>
+    #          <p>If you're setting an IPC resource namespace to use for the containers in the task, the
+    # 			following conditions apply to your system controls. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode">IPC mode</a>.</p>
+    #          <ul>
+    #             <li>
+    #                <p>For tasks that use the <code>host</code> IPC mode, IPC namespace
+    # 						<code>systemControls</code> aren't supported.</p>
+    #             </li>
+    #             <li>
+    #                <p>For tasks that use the <code>task</code> IPC mode, IPC namespace
+    # 						<code>systemControls</code> values apply to all containers within a
+    # 					task.</p>
+    #             </li>
+    #          </ul>
+    #          <note>
+    #             <p>This parameter is not supported for Windows containers.</p>
+    #          </note>
+    #          <note>
+    #             <p>This parameter is only supported for tasks that are hosted on
+    #         Fargate if the tasks are using platform version <code>1.4.0</code> or later
+    #         (Linux). This isn't supported for Windows containers on
+    #         Fargate.</p>
+    #          </note>
+    # @!attribute namespace
+    #   <p>The namespaced kernel parameter to set a <code>value</code> for.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The namespaced kernel parameter to set a <code>value</code> for.</p>
+    #            <p>Valid IPC namespace values: <code>"kernel.msgmax" | "kernel.msgmnb" | "kernel.msgmni"
+    #   				| "kernel.sem" | "kernel.shmall" | "kernel.shmmax" | "kernel.shmmni" |
+    #   				"kernel.shm_rmid_forced"</code>, and <code>Sysctls</code> that start with
+    #   				<code>"fs.mqueue.*"</code>
+    #            </p>
+    #            <p>Valid network namespace values: <code>Sysctls</code> that start with
+    #   				<code>"net.*"</code>. Only namespaced <code>Sysctls</code> that exist within the
+    #   			container starting with "net.* are accepted.</p>
+    #            <p>All of these values are supported by Fargate.</p>
+    #   @return [String]
+    class SystemControl < Struct.new(
+      :namespace,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The metadata that you apply to a resource to help you categorize and organize them.
+    # 			Each tag consists of a key and an optional value. You define them.</p>
+    #          <p>The following basic restrictions apply to tags:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Maximum number of tags per resource - 50</p>
+    #             </li>
+    #             <li>
+    #                <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                     one value.</p>
+    #             </li>
+    #             <li>
+    #                <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #             </li>
+    #             <li>
+    #                <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #             </li>
+    #             <li>
+    #                <p>If your tagging schema is used across multiple services and resources,
+    #                     remember that other services may have restrictions on allowed characters.
+    #                     Generally allowed characters are: letters, numbers, and spaces representable in
+    #                     UTF-8, and the following characters: + - = . _ : / @.</p>
+    #             </li>
+    #             <li>
+    #                <p>Tag keys and values are case-sensitive.</p>
+    #             </li>
+    #             <li>
+    #                <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                     combination of such as a prefix for either keys or values as it is reserved for
+    #                     Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                     this prefix do not count against your tags per resource limit.</p>
+    #             </li>
+    #          </ul>
+    # @!attribute key
+    #   <p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label
+    #   			that acts like a category for more specific tag values.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as
+    #   			a descriptor within a tag category (key).</p>
+    #   @return [String]
+    class Tag < Struct.new(
+      :key,
+      :value,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource to add tags to. Currently, the supported resources are
+    #   			Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container
+    #   			instances.</p>
+    #            <p>In order to tag a service that has the following ARN format, you need to migrate the
+    #   			service to the long ARN. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-arn-migration.html">Migrate an Amazon ECS short service ARN to a long ARN</a> in the <i>Amazon Elastic Container Service
+    #   				Developer Guide</i>.</p>
+    #            <p>
+    #               <code>arn:aws:ecs:region:aws_account_id:service/service-name</code>
+    #            </p>
+    #            <p>After the migration is complete, the service has the long ARN format, as shown below. Use this ARN to tag the service.</p>
+    #            <p>
+    #               <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>
+    #            </p>
+    #            <p>If you try to tag a service with a short ARN, you receive an
+    #   				<code>InvalidParameterException</code> error.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to add to the resource. A tag is an array of key-value pairs.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    class TagResourceResponse < Struct.new(
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The execute command cannot run. This error can be caused by any of the following
+    # 			configuration issues:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Incorrect IAM permissions</p>
+    #             </li>
+    #             <li>
+    #                <p>The SSM agent is not installed or is not running</p>
+    #             </li>
+    #             <li>
+    #                <p> There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for
+    # 					Systems Manager Session Manager</p>
+    #             </li>
+    #          </ul>
+    #          <p>For information about how to troubleshoot the issues, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">Troubleshooting issues with ECS
+    # 				Exec</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class TargetNotConnectedException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The specified target wasn't found. You can view your available container instances
+    # 			with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html">ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and
+    # 			Region-specific.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class TargetNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module TargetType
+      CONTAINER_INSTANCE = 'container-instance'
+    end
+
+    # <p>Details on a task in a cluster.</p>
+    # @!attribute attachments
+    #   <p>The Elastic Network Adapter that's associated with the task if the task uses the
+    #   				<code>awsvpc</code> network mode.</p>
+    #   @return [Array<Types::Attachment>]
+    # @!attribute attributes
+    #   <p>The attributes of the task</p>
+    #   @return [Array<Types::Attribute>]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone for the task.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_name
+    #   <p>The capacity provider that's associated with the task.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The ARN of the cluster that hosts the task.</p>
+    #   @return [String]
+    # @!attribute connectivity
+    #   <p>The connectivity status of a task.</p>
+    #   @return [String]
+    # @!attribute connectivity_at
+    #   <p>The Unix timestamp for the time when the task last went into <code>CONNECTED</code>
+    #   			status.</p>
+    #   @return [Time]
+    # @!attribute container_instance_arn
+    #   <p>The ARN of the container instances that host the task.</p>
+    #   @return [String]
+    # @!attribute containers
+    #   <p>The containers that's associated with the task.</p>
+    #   @return [Array<Types::Container>]
+    # @!attribute cpu
+    #   <p>The number of CPU units used by the task as expressed in a task definition. It can be
+    #   			expressed as an integer using CPU units (for example, <code>1024</code>). It can also be
+    #   			expressed as a string using vCPUs (for example, <code>1 vCPU</code> or <code>1
+    #   				vcpu</code>). String values are converted to an integer that indicates the CPU units
+    #   			when the task definition is registered.</p>
+    #            <p>If you're using the EC2 launch type or the external launch type, this field is
+    #   			optional. Supported values are between <code>128</code> CPU units (<code>0.125</code>
+    #   			vCPUs) and <code>196608</code> CPU units (<code>192</code> vCPUs). If you do not specify
+    #   			a value, the parameter is ignored.</p>
+    #            <p>This field is required for Fargate. For information about the valid values, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size">Task size</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The Unix timestamp for the time when the task was created. More specifically, it's for
+    #   			the time when the task entered the <code>PENDING</code> state.</p>
+    #   @return [Time]
+    # @!attribute desired_status
+    #   <p>The desired status of the task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html">Task
+    #   			Lifecycle</a>.</p>
+    #   @return [String]
+    # @!attribute enable_execute_command
+    #   <p>Determines whether execute command functionality is turned on for this task. If
+    #   				<code>true</code>, execute command functionality is turned on all the containers in
+    #   			the task.</p>
+    #   @return [Boolean]
+    # @!attribute execution_stopped_at
+    #   <p>The Unix timestamp for the time when the task execution stopped.</p>
+    #   @return [Time]
+    # @!attribute group
+    #   <p>The name of the task group that's associated with the task.</p>
+    #   @return [String]
+    # @!attribute health_status
+    #   <p>The health status for the task. It's determined by the health of the essential
+    #   			containers in the task. If all essential containers in the task are reporting as
+    #   				<code>HEALTHY</code>, the task status also reports as <code>HEALTHY</code>. If any
+    #   			essential containers in the task are reporting as <code>UNHEALTHY</code> or
+    #   				<code>UNKNOWN</code>, the task status also reports as <code>UNHEALTHY</code> or
+    #   				<code>UNKNOWN</code>.</p>
+    #            <note>
+    #               <p>The Amazon ECS container agent doesn't monitor or report on Docker health checks that
+    #   				are embedded in a container image and not specified in the container definition. For
+    #   				example, this includes those specified in a parent image or from the image's
+    #   				Dockerfile. Health check parameters that are specified in a container definition
+    #   				override any Docker health checks that are found in the container image.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute inference_accelerators
+    #   <p>The Elastic Inference accelerator that's associated with the task.</p>
+    #   @return [Array<Types::InferenceAccelerator>]
+    # @!attribute last_status
+    #   <p>The last known status for the task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html">Task
+    #   				Lifecycle</a>.</p>
+    #   @return [String]
+    # @!attribute launch_type
+    #   <p>The infrastructure where your task runs on. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute memory
+    #   <p>The amount of memory (in MiB) that the task uses as expressed in a task definition. It
+    #   			can be expressed as an integer using MiB (for example, <code>1024</code>). If it's
+    #   			expressed as a string using GB (for example, <code>1GB</code> or <code>1 GB</code>),
+    #   			it's converted to an integer indicating the MiB when the task definition is
+    #   			registered.</p>
+    #            <p>If you use the EC2 launch type, this field is optional.</p>
+    #            <p>If you use the Fargate launch type, this field is required. You must use
+    #   			one of the following values. The value that you choose determines the range of supported
+    #   			values for the <code>cpu</code> parameter.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute overrides
+    #   <p>One or more container overrides.</p>
+    #   @return [Types::TaskOverride]
+    # @!attribute platform_version
+    #   <p>The platform version where your task runs on. A platform version is only specified for
+    #   			tasks that use the Fargate launch type. If you didn't specify one, the
+    #   				<code>LATEST</code> platform version is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute platform_family
+    #   <p>The operating system that your tasks are running on. A platform family is specified
+    #   			only for tasks that use the Fargate launch type. </p>
+    #            <p> All tasks that run as part of this service must use the same
+    #   				<code>platformFamily</code> value as the service (for example,
+    #   			<code>LINUX.</code>).</p>
+    #   @return [String]
+    # @!attribute pull_started_at
+    #   <p>The Unix timestamp for the time when the container image pull began.</p>
+    #   @return [Time]
+    # @!attribute pull_stopped_at
+    #   <p>The Unix timestamp for the time when the container image pull completed.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The Unix timestamp for the time when the task started. More specifically, it's for the
+    #   			time when the task transitioned from the <code>PENDING</code> state to the
+    #   				<code>RUNNING</code> state.</p>
+    #   @return [Time]
+    # @!attribute started_by
+    #   <p>The tag specified when a task is started. If an Amazon ECS service started the task, the
+    #   				<code>startedBy</code> parameter contains the deployment ID of that service.</p>
+    #   @return [String]
+    # @!attribute stop_code
+    #   <p>The stop code indicating why a task was stopped. The <code>stoppedReason</code> might
+    #   			contain additional details. </p>
+    #            <p>For more information about stop code, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stopped-task-error-codes.html">Stopped tasks
+    #   				error codes</a> in the <i>Amazon ECS Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute stopped_at
+    #   <p>The Unix timestamp for the time when the task was stopped. More specifically, it's for
+    #   			the time when the task transitioned from the <code>RUNNING</code> state to the
+    #   				<code>STOPPED</code> state.</p>
+    #   @return [Time]
+    # @!attribute stopped_reason
+    #   <p>The reason that the task was stopped.</p>
+    #   @return [String]
+    # @!attribute stopping_at
+    #   <p>The Unix timestamp for the time when the task stops. More specifically, it's for the
+    #   			time when the task transitions from the <code>RUNNING</code> state to
+    #   				<code>STOPPING</code>.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task to help you categorize and organize the task.
+    #   			Each tag consists of a key and an optional value. You define both the key and
+    #   			value.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task.</p>
+    #   @return [String]
+    # @!attribute task_definition_arn
+    #   <p>The ARN of the task definition that creates the task.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version counter for the task. Every time a task experiences a change that starts a
+    #   			CloudWatch event, the version counter is incremented. If you replicate your Amazon ECS task state
+    #   			with CloudWatch Events, you can compare the version of a task reported by the Amazon ECS API
+    #   			actions with the version reported in CloudWatch Events for the task (inside the
+    #   				<code>detail</code> object) to verify that the version in your event stream is
+    #   			current.</p>
+    #   @return [Integer]
+    # @!attribute ephemeral_storage
+    #   <p>The ephemeral storage settings for the task.</p>
+    #   @return [Types::EphemeralStorage]
+    # @!attribute fargate_ephemeral_storage
+    #   <p>The Fargate ephemeral storage settings for the task.</p>
+    #   @return [Types::TaskEphemeralStorage]
+    class Task < Struct.new(
+      :attachments,
+      :attributes,
+      :availability_zone,
+      :capacity_provider_name,
+      :cluster_arn,
+      :connectivity,
+      :connectivity_at,
+      :container_instance_arn,
+      :containers,
+      :cpu,
+      :created_at,
+      :desired_status,
+      :enable_execute_command,
+      :execution_stopped_at,
+      :group,
+      :health_status,
+      :inference_accelerators,
+      :last_status,
+      :launch_type,
+      :memory,
+      :overrides,
+      :platform_version,
+      :platform_family,
+      :pull_started_at,
+      :pull_stopped_at,
+      :started_at,
+      :started_by,
+      :stop_code,
+      :stopped_at,
+      :stopped_reason,
+      :stopping_at,
+      :tags,
+      :task_arn,
+      :task_definition_arn,
+      :version,
+      :ephemeral_storage,
+      :fargate_ephemeral_storage,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enable_execute_command] = false unless options.key?(:enable_execute_command)
+        options[:version] = 0 unless options.key?(:version)
+        super
+      end
+    end
+
+    # <p>The details of a task definition which describes the container and volume definitions
+    # 			of an Amazon Elastic Container Service task. You can specify which Docker images to use, the required
+    # 			resources, and other configurations related to launching the task definition through an
+    # 			Amazon ECS service or task.</p>
+    # @!attribute task_definition_arn
+    #   <p>The full Amazon Resource Name (ARN) of the task definition.</p>
+    #   @return [String]
+    # @!attribute container_definitions
+    #   <p>A list of container definitions in JSON format that describe the different containers
+    #   			that make up your task. For more information about container definition parameters and
+    #   			defaults, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Amazon ECS Task
+    #   				Definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<Types::ContainerDefinition>]
+    # @!attribute family
+    #   <p>The name of a family that this task definition is registered to. Up to 255 characters
+    #   			are allowed. Letters (both uppercase and lowercase letters), numbers, hyphens (-), and
+    #   			underscores (_) are allowed.</p>
+    #            <p>A family groups multiple versions of a task definition. Amazon ECS gives the first task
+    #   			definition that you registered to a family a revision number of 1. Amazon ECS gives
+    #   			sequential revision numbers to each task definition that you add.</p>
+    #   @return [String]
+    # @!attribute task_role_arn
+    #   <p>The short name or full Amazon Resource Name (ARN) of the Identity and Access Management role that grants containers in the
+    #   			task permission to call Amazon Web Services APIs on your behalf. For informationabout the required
+    #   			IAM roles for Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html">IAM
+    #   				roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent
+    #               permission to make Amazon Web Services API calls on your behalf. For informationabout the required IAM roles for Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html">IAM roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute network_mode
+    #   <p>The Docker networking mode to use for the containers in the task. The valid values are
+    #                   <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.
+    #               If no network mode is specified, the default is <code>bridge</code>.</p>
+    #            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. 
+    #               For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network
+    #               mode is set to <code>none</code>, you cannot specify port mappings in your container
+    #               definitions, and the tasks containers do not have external connectivity. The
+    #                   <code>host</code> and <code>awsvpc</code> network modes offer the highest networking
+    #               performance for containers because they use the EC2 network stack instead of the
+    #               virtualized network stack provided by the <code>bridge</code> mode.</p>
+    #            <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container
+    #               ports are mapped directly to the corresponding host port (for the <code>host</code>
+    #               network mode) or the attached elastic network interface port (for the
+    #                   <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port
+    #               mappings. </p>
+    #            <important>
+    #               <p>When using the <code>host</code> network mode, you should not run
+    #                               containers using the root user (UID 0). It is considered best practice
+    #                               to use a non-root user.</p>
+    #            </important>
+    #            <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network
+    #               interface, and you must specify a <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html">NetworkConfiguration</a> value when you create
+    #               a service or run a task with the task definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task Networking</a> in the
+    #                   <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the
+    #               same task on a single container instance when port mappings are used.</p>
+    #   @return [String]
+    # @!attribute revision
+    #   <p>The revision of the task in a particular family. The revision is a version number of a
+    #   			task definition in a family. When you register a task definition for the first time, the
+    #   			revision is <code>1</code>. Each time that you register a new revision of a task
+    #   			definition in the same family, the revision value always increases by one. This is even
+    #   			if you deregistered previous revisions in this family.</p>
+    #   @return [Integer]
+    # @!attribute volumes
+    #   <p>The list of data volume definitions for the task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html">Using data volumes in tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <note>
+    #               <p>The <code>host</code> and <code>sourcePath</code> parameters aren't supported for
+    #   				tasks run on Fargate. </p>
+    #            </note>
+    #   @return [Array<Types::Volume>]
+    # @!attribute status
+    #   <p>The status of the task definition.</p>
+    #   @return [String]
+    # @!attribute requires_attributes
+    #   <p>The container instance attributes required by your task. When an Amazon EC2 instance is
+    #   			registered to your cluster, the Amazon ECS container agent assigns some standard attributes
+    #   			to the instance. You can apply custom attributes. These are specified as key-value pairs
+    #   			using the Amazon ECS console or the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html">PutAttributes</a>
+    #   			API. These attributes are used when determining task placement for tasks hosted on Amazon EC2
+    #   			instances. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes">Attributes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <note>
+    #               <p>This parameter isn't supported for tasks run on Fargate.</p>
+    #            </note>
+    #   @return [Array<Types::Attribute>]
+    # @!attribute placement_constraints
+    #   <p>An array of placement constraint objects to use for tasks.</p>
+    #            <note>
+    #               <p>This parameter isn't supported for tasks run on Fargate.</p>
+    #            </note>
+    #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
+    # @!attribute compatibilities
+    #   <p>Amazon ECS validates the task definition parameters with those supported by the launch
+    #   			type. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<String>]
+    # @!attribute runtime_platform
+    #   <p>The operating system that your task definitions are running on. A platform family is
+    #   			specified only for tasks using the Fargate launch type. </p>
+    #            <p>When you specify a task in a service, this value must match the
+    #   				<code>runtimePlatform</code> value of the service.</p>
+    #   @return [Types::RuntimePlatform]
+    # @!attribute requires_compatibilities
+    #   <p>The task launch types the task definition was validated against. The valid values are
+    #   				<code>EC2</code>, <code>FARGATE</code>, and <code>EXTERNAL</code>. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS launch types</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Array<String>]
+    # @!attribute cpu
+    #   <p>The number of <code>cpu</code> units used by the task. If you use the EC2 launch type,
+    #   			this field is optional. Any value can be used. If you use the Fargate launch type, this
+    #   			field is required. You must use one of the following values. The value that you choose
+    #   			determines your range of valid values for the <code>memory</code> parameter.</p>
+    #            <p>If you're using the EC2 launch type or the external launch type, this
+    #   			field is optional. Supported values are between <code>128</code> CPU units
+    #   				(<code>0.125</code> vCPUs) and <code>196608</code> CPU units (<code>192</code>
+    #   			vCPUs). </p>
+    #            <p>This field is required for Fargate. For information about the valid values, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size">Task size</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute memory
+    #   <p>The amount (in MiB) of memory used by the task.</p>
+    #            <p>If your tasks runs on Amazon EC2 instances, you must specify either a task-level memory
+    #   			value or a container-level memory value. This field is optional and any value can be
+    #   			used. If a task-level memory value is specified, the container-level memory value is
+    #   			optional. For more information regarding container-level memory and memory reservation,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html">ContainerDefinition</a>.</p>
+    #            <p>If your tasks runs on Fargate, this field is required. You must use one of the
+    #   			following values. The value you choose determines your range of valid values for the
+    #   				<code>cpu</code> parameter.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>
+    #                  <p>This option requires Linux platform <code>1.4.0</code> or
+    #                                           later.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute inference_accelerators
+    #   <p>The Elastic Inference accelerator that's associated with the task.</p>
+    #   @return [Array<Types::InferenceAccelerator>]
+    # @!attribute pid_mode
+    #   <p>The process namespace to use for the containers in the task. The valid
+    #                               values are <code>host</code> or <code>task</code>. On Fargate for
+    #                               Linux containers, the only valid value is <code>task</code>. For
+    #                               example, monitoring sidecars might need <code>pidMode</code> to access
+    #                               information about other containers running in the same task.</p>
+    #            <p>If <code>host</code> is specified, all containers within the tasks
+    #                               that specified the <code>host</code> PID mode on the same container
+    #                               instance share the same process namespace with the host Amazon EC2
+    #                               instance.</p>
+    #            <p>If <code>task</code> is specified, all containers within the specified
+    #                               task share the same process namespace.</p>
+    #            <p>If no value is specified, the
+    #                               default is a private namespace for each container.</p>
+    #            <p>If the <code>host</code> PID mode is used, there's a heightened risk
+    #                               of undesired process namespace exposure.</p>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers.</p>
+    #            </note>
+    #            <note>
+    #               <p>This parameter is only supported for tasks that are hosted on
+    #           Fargate if the tasks are using platform version <code>1.4.0</code> or later
+    #           (Linux). This isn't supported for Windows containers on
+    #           Fargate.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute ipc_mode
+    #   <p>The IPC resource namespace to use for the containers in the task. The valid values are
+    #                   <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is
+    #               specified, then all containers within the tasks that specified the <code>host</code> IPC
+    #               mode on the same container instance share the same IPC resources with the host Amazon EC2
+    #               instance. If <code>task</code> is specified, all containers within the specified task
+    #               share the same IPC resources. If <code>none</code> is specified, then IPC resources
+    #               within the containers of a task are private and not shared with other containers in a
+    #               task or on the container instance. If no value is specified, then the IPC resource
+    #               namespace sharing depends on the Docker daemon setting on the container instance.</p>
+    #            <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of
+    #               undesired IPC namespace expose.</p>
+    #            <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for
+    #               the containers in the task, the following will apply to your IPC resource namespace. For
+    #               more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html">System
+    #                   Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related
+    #                           <code>systemControls</code> are not supported.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related
+    #                           <code>systemControls</code> will apply to all containers within a
+    #                       task.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute proxy_configuration
+    #   <p>The configuration details for the App Mesh proxy.</p>
+    #            <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent
+    #   			and at least version 1.26.0-1 of the <code>ecs-init</code> package to use a proxy
+    #   			configuration. If your container instances are launched from the Amazon ECS optimized AMI
+    #   			version <code>20190301</code> or later, they contain the required versions of the
+    #   			container agent and <code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute registered_at
+    #   <p>The Unix timestamp for the time when the task definition was registered.</p>
+    #   @return [Time]
+    # @!attribute deregistered_at
+    #   <p>The Unix timestamp for the time when the task definition was deregistered.</p>
+    #   @return [Time]
+    # @!attribute registered_by
+    #   <p>The principal that registered the task definition.</p>
+    #   @return [String]
+    # @!attribute ephemeral_storage
+    #   <p>The ephemeral storage settings to use for tasks run with the task definition.</p>
+    #   @return [Types::EphemeralStorage]
+    # @!attribute enable_fault_injection
+    #   <p>Enables fault injection and allows for fault injection requests to be accepted from
+    #   			the task's containers. The default value is <code>false</code>.</p>
+    #   @return [Boolean]
+    class TaskDefinition < Struct.new(
+      :task_definition_arn,
+      :container_definitions,
+      :family,
+      :task_role_arn,
+      :execution_role_arn,
+      :network_mode,
+      :revision,
+      :volumes,
+      :status,
+      :requires_attributes,
+      :placement_constraints,
+      :compatibilities,
+      :runtime_platform,
+      :requires_compatibilities,
+      :cpu,
+      :memory,
+      :inference_accelerators,
+      :pid_mode,
+      :ipc_mode,
+      :proxy_configuration,
+      :registered_at,
+      :deregistered_at,
+      :registered_by,
+      :ephemeral_storage,
+      :enable_fault_injection,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:revision] = 0 unless options.key?(:revision)
+        super
+      end
+    end
+
+    module TaskDefinitionFamilyStatus
+      ACTIVE = 'ACTIVE'
+      INACTIVE = 'INACTIVE'
+      ALL = 'ALL'
+    end
+
+    module TaskDefinitionField
+      TAGS = 'TAGS'
+    end
+
+    # <p>The constraint on task placement in the task definition. For more information, see
+    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task placement constraints</a> in the
+    # 			<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #          <note>
+    #             <p>Task placement constraints aren't supported for tasks run on Fargate.</p>
+    #          </note>
+    # @!attribute type
+    #   <p>The type of constraint. The <code>MemberOf</code> constraint restricts selection to be
+    #   			from a group of valid candidates.</p>
+    #   @return [String]
+    # @!attribute expression
+    #   <p>A cluster query language expression to apply to the constraint. For more information,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    class TaskDefinitionPlacementConstraint < Struct.new(
+      :type,
+      :expression,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module TaskDefinitionPlacementConstraintType
+      MEMBER_OF = 'memberOf'
+    end
+
+    module TaskDefinitionStatus
+      ACTIVE = 'ACTIVE'
+      INACTIVE = 'INACTIVE'
+      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
+    end
+
+    # <p>The amount of ephemeral storage to allocate for the task.</p>
+    # @!attribute size_in_gi_b
+    #   <p>The total amount, in GiB, of the ephemeral storage to set for the task. The minimum
+    #   			supported value is <code>20</code> GiB and the maximum supported value is 
+    #   				<code>200</code> GiB.</p>
+    #   @return [Integer]
+    # @!attribute kms_key_id
+    #   <p>Specify an Key Management Service key ID to encrypt the ephemeral storage for the
+    #   			task.</p>
+    #   @return [String]
+    class TaskEphemeralStorage < Struct.new(
+      :size_in_gi_b,
+      :kms_key_id,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:size_in_gi_b] = 0 unless options.key?(:size_in_gi_b)
+        super
+      end
+    end
+
+    module TaskField
+      TAGS = 'TAGS'
+    end
+
+    module TaskFilesystemType
+      EXT3 = 'ext3'
+      EXT4 = 'ext4'
+      XFS = 'xfs'
+      NTFS = 'ntfs'
+    end
+
+    # <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
+    # 			These settings are used to create each Amazon EBS volume, with one volume created for each
+    # 			task.</p>
+    # @!attribute encrypted
+    #   <p>Indicates whether the volume should be encrypted. If you turn on Region-level Amazon EBS
+    #   			encryption by default but set this value as <code>false</code>, the setting is
+    #   			overridden and the volume is encrypted with the KMS key specified for Amazon EBS encryption
+    #   			by default. This parameter maps 1:1 with the <code>Encrypted</code> parameter of the
+    #   				<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Boolean]
+    # @!attribute kms_key_id
+    #   <p>The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption. When a key
+    #   			is specified using this parameter, it overrides Amazon EBS default encryption or any KMS key
+    #   			that you specified for cluster-level managed storage encryption. This parameter maps 1:1
+    #   			with the <code>KmsKeyId</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in
+    #   			the <i>Amazon EC2 API Reference</i>. For more information about encrypting
+    #   			Amazon EBS volumes attached to a task, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html">Encrypt data stored in Amazon EBS volumes attached to Amazon ECS tasks</a>.</p>
+    #            <important>
+    #               <p>Amazon Web Services authenticates the Amazon Web Services Key Management Service key asynchronously. Therefore, if you specify an
+    #   				ID, alias, or ARN that is invalid, the action can appear to complete, but
+    #   				eventually fails.</p>
+    #            </important>
+    #   @return [String]
+    # @!attribute volume_type
+    #   <p>The volume type. This parameter maps 1:1 with the <code>VolumeType</code> parameter of
+    #   			the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html">Amazon EBS volume types</a> in
+    #   			the <i>Amazon EC2 User Guide</i>.</p>
+    #            <p>The following are the supported volume types.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>General Purpose SSD: <code>gp2</code>|<code>gp3</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Provisioned IOPS SSD: <code>io1</code>|<code>io2</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Throughput Optimized HDD: <code>st1</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Cold HDD: <code>sc1</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Magnetic: <code>standard</code>
+    #                  </p>
+    #                  <note>
+    #                     <p>The magnetic volume type is not supported on Fargate.</p>
+    #                  </note>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute size_in_gi_b
+    #   <p>The size of the volume in GiB. You must specify either a volume size or a snapshot ID.
+    #   			If you specify a snapshot ID, the snapshot size is used for the volume size by default.
+    #   			You can optionally specify a volume size greater than or equal to the snapshot size.
+    #   			This parameter maps 1:1 with the <code>Size</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #            <p>The following are the supported volume size values for each volume type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>gp2</code> and <code>gp3</code>: 1-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io1</code> and <code>io2</code>: 4-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>st1</code> and <code>sc1</code>: 125-16,384</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>standard</code>: 1-1,024</p>
+    #               </li>
+    #            </ul>
+    #   @return [Integer]
+    # @!attribute snapshot_id
+    #   <p>The snapshot that Amazon ECS uses to create the volume. You must specify either a snapshot
+    #   			ID or a volume size. This parameter maps 1:1 with the <code>SnapshotId</code> parameter
+    #   			of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in
+    #   			the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [String]
+    # @!attribute volume_initialization_rate
+    #   <p>The rate, in MiB/s, at which data is fetched from a snapshot of an existing Amazon EBS
+    #   			volume to create a new volume for attachment to the task. This property can be specified
+    #   			only if you specify a <code>snapshotId</code>. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize Amazon EBS volumes</a> in the <i>Amazon EBS User
+    #   				Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute iops
+    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>,
+    #   			<code>io1</code>, and <code>io2</code> volumes, this represents the number of IOPS that
+    #   			are provisioned for the volume. For <code>gp2</code> volumes, this represents the
+    #   			baseline performance of the volume and the rate at which the volume accumulates I/O
+    #   			credits for bursting.</p>
+    #            <p>The following are the supported values for each volume type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io1</code>: 100 - 64,000 IOPS</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>io2</code>: 100 - 256,000 IOPS</p>
+    #               </li>
+    #            </ul>
+    #            <p>This parameter is required for <code>io1</code> and <code>io2</code> volume types. The
+    #   			default for <code>gp3</code> volumes is <code>3,000 IOPS</code>. This parameter is not
+    #   			supported for <code>st1</code>, <code>sc1</code>, or <code>standard</code> volume
+    #   			types.</p>
+    #            <p>This parameter maps 1:1 with the <code>Iops</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Integer]
+    # @!attribute throughput
+    #   <p>The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
+    #   			This parameter maps 1:1 with the <code>Throughput</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #            <important>
+    #               <p>This parameter is only supported for the <code>gp3</code> volume type.</p>
+    #            </important>
+    #   @return [Integer]
+    # @!attribute tag_specifications
+    #   <p>The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This
+    #   			parameter maps 1:1 with the <code>TagSpecifications.N</code> parameter of the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html">CreateVolume API</a> in the <i>Amazon EC2 API Reference</i>.</p>
+    #   @return [Array<Types::EBSTagSpecification>]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role to associate with this volume. This is the Amazon ECS
+    #   			infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. We recommend
+    #   			using the Amazon ECS-managed <code>AmazonECSInfrastructureRolePolicyForVolumes</code> IAM
+    #   			policy with this role. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html">Amazon ECS
+    #   				infrastructure IAM role</a> in the <i>Amazon ECS Developer
+    #   			Guide</i>.</p>
+    #   @return [String]
+    # @!attribute termination_policy
+    #   <p>The termination policy for the volume when the task exits. This provides a way to
+    #   			control whether Amazon ECS terminates the Amazon EBS volume when the task stops.</p>
+    #   @return [Types::TaskManagedEBSVolumeTerminationPolicy]
+    # @!attribute filesystem_type
+    #   <p>The Linux filesystem type for the volume. For volumes created from a snapshot, you
+    #   			must specify the same filesystem type that the volume was using when the snapshot was
+    #   			created. If there is a filesystem type mismatch, the task will fail to start.</p>
+    #            <p>The available filesystem types are  <code>ext3</code>, <code>ext4</code>, and
+    #   				<code>xfs</code>. If no value is specified, the <code>xfs</code> filesystem type is
+    #   			used by default.</p>
+    #   @return [String]
+    class TaskManagedEBSVolumeConfiguration < Struct.new(
+      :encrypted,
+      :kms_key_id,
+      :volume_type,
+      :size_in_gi_b,
+      :snapshot_id,
+      :volume_initialization_rate,
+      :iops,
+      :throughput,
+      :tag_specifications,
+      :role_arn,
+      :termination_policy,
+      :filesystem_type,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The termination policy for the Amazon EBS volume when the task exits. For more information,
+    # 			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types">Amazon ECS volume termination policy</a>.</p>
+    # @!attribute delete_on_termination
+    #   <p>Indicates whether the volume should be deleted on when the task stops. If a value of
+    #   				<code>true</code> is specified,  Amazon ECS deletes the Amazon EBS volume on your behalf when
+    #   			the task goes into the <code>STOPPED</code> state. If no value is specified, the
+    #   			 default value is <code>true</code> is used. When set to <code>false</code>, Amazon ECS
+    #   			leaves the volume in your  account.</p>
+    #   @return [Boolean]
+    class TaskManagedEBSVolumeTerminationPolicy < Struct.new(
+      :delete_on_termination,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The overrides that are associated with a task.</p>
+    # @!attribute container_overrides
+    #   <p>One or more container overrides that are sent to a task.</p>
+    #   @return [Array<Types::ContainerOverride>]
+    # @!attribute cpu
+    #   <p>The CPU override for the task.</p>
+    #   @return [String]
+    # @!attribute inference_accelerator_overrides
+    #   <p>The Elastic Inference accelerator override for the task.</p>
+    #   @return [Array<Types::InferenceAcceleratorOverride>]
+    # @!attribute execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the task execution role override for the task. For more information,
+    #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Amazon ECS task
+    #   				execution IAM role</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute memory
+    #   <p>The memory override for the task.</p>
+    #   @return [String]
+    # @!attribute task_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the role that containers in this task can assume. All containers in
+    #   			this task are granted the permissions that are specified in this role. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">IAM Role for Tasks</a>
+    #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute ephemeral_storage
+    #   <p>The ephemeral storage setting override for the task.</p>
+    #            <note>
+    #               <p>This parameter is only supported for tasks hosted on Fargate that
+    #   				use the following platform versions:</p>
+    #               <ul>
+    #                  <li>
+    #                     <p>Linux platform version <code>1.4.0</code> or later.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Windows platform version <code>1.0.0</code> or later.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Types::EphemeralStorage]
+    class TaskOverride < Struct.new(
+      :container_overrides,
+      :cpu,
+      :inference_accelerator_overrides,
+      :execution_role_arn,
+      :memory,
+      :task_role_arn,
+      :ephemeral_storage,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Information about a set of Amazon ECS tasks in either an CodeDeploy or an <code>EXTERNAL</code>
+    # 			deployment. An Amazon ECS task set includes details such as the desired number of tasks, how
+    # 			many tasks are running, and whether the task set serves production traffic.</p>
+    # @!attribute id
+    #   <p>The ID of the task set.</p>
+    #   @return [String]
+    # @!attribute task_set_arn
+    #   <p>The Amazon Resource Name (ARN) of the task set.</p>
+    #   @return [String]
+    # @!attribute service_arn
+    #   <p>The Amazon Resource Name (ARN) of the service the task set exists in.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster that the service that hosts the task set exists
+    #   			in.</p>
+    #   @return [String]
+    # @!attribute started_by
+    #   <p>The tag specified when a task set is started. If an CodeDeploy deployment created the task
+    #   			set, the <code>startedBy</code> parameter is <code>CODE_DEPLOY</code>. If an external
+    #   			deployment created the task set, the <code>startedBy</code> field isn't used.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID associated with the task set.</p>
+    #            <p>If an CodeDeploy deployment created a task set, the <code>externalId</code> parameter
+    #   			contains the CodeDeploy deployment ID.</p>
+    #            <p>If a task set is created for an external deployment and is associated with a service
+    #   			discovery registry, the <code>externalId</code> parameter contains the
+    #   				<code>ECS_TASK_SET_EXTERNAL_ID</code> Cloud Map attribute.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the task set. The following describes each state.</p>
+    #            <dl>
+    #               <dt>PRIMARY</dt>
+    #               <dd>
+    #                  <p>The task set is serving production traffic.</p>
+    #               </dd>
+    #               <dt>ACTIVE</dt>
+    #               <dd>
+    #                  <p>The task set isn't serving production traffic.</p>
+    #               </dd>
+    #               <dt>DRAINING</dt>
+    #               <dd>
+    #                  <p>The tasks in the task set are being stopped, and their corresponding
+    #   						targets are being deregistered from their target group.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute task_definition
+    #   <p>The task definition that the task set is using.</p>
+    #   @return [String]
+    # @!attribute computed_desired_count
+    #   <p>The computed desired count for the task set. This is calculated by multiplying the
+    #   			service's <code>desiredCount</code> by the task set's <code>scale</code> percentage. The
+    #   			result is always rounded up. For example, if the computed desired count is 1.2, it
+    #   			rounds up to 2 tasks.</p>
+    #   @return [Integer]
+    # @!attribute pending_count
+    #   <p>The number of tasks in the task set that are in the <code>PENDING</code> status during
+    #   			a deployment. A task in the <code>PENDING</code> state is preparing to enter the
+    #   				<code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when
+    #   			it launches for the first time or when it's restarted after being in the
+    #   				<code>STOPPED</code> state.</p>
+    #   @return [Integer]
+    # @!attribute running_count
+    #   <p>The number of tasks in the task set that are in the <code>RUNNING</code> status during
+    #   			a deployment. A task in the <code>RUNNING</code> state is running and ready for
+    #   			use.</p>
+    #   @return [Integer]
+    # @!attribute created_at
+    #   <p>The Unix timestamp for the time when the task set was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The Unix timestamp for the time when the task set was last updated.</p>
+    #   @return [Time]
+    # @!attribute launch_type
+    #   <p>The launch type the tasks in the task set are using. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS
+    #   				launch types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The capacity provider strategy that are associated with the task set.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute platform_version
+    #   <p>The Fargate platform version where the tasks in the task set are running. A platform
+    #   			version is only specified for tasks run on Fargate. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate platform versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute platform_family
+    #   <p>The operating system that your tasks in the set are running on. A platform family is
+    #   			specified only for tasks that use the Fargate launch type. </p>
+    #            <p> All tasks in the set must have the same value.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The network configuration for the task set.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute load_balancers
+    #   <p>Details on a load balancer that are used with a task set.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute service_registries
+    #   <p>The details for the service discovery registries to assign to this task set. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+    #   				discovery</a>.</p>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute scale
+    #   <p>A floating-point percentage of your desired number of tasks to place and keep running
+    #   			in the task set.</p>
+    #   @return [Types::Scale]
+    # @!attribute stability_status
+    #   <p>The stability status. This indicates whether the task set has reached a steady state.
+    #   			If the following conditions are met, the task set are in
+    #   			<code>STEADY_STATE</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The task <code>runningCount</code> is equal to the
+    #   						<code>computedDesiredCount</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The <code>pendingCount</code> is <code>0</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>There are no tasks that are running on container instances in the
+    #   						<code>DRAINING</code> status.</p>
+    #               </li>
+    #               <li>
+    #                  <p>All tasks are reporting a healthy status from the load balancers, service
+    #   					discovery, and container health checks.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If any of those conditions aren't met, the stability status returns
+    #   				<code>STABILIZING</code>.</p>
+    #   @return [String]
+    # @!attribute stability_status_at
+    #   <p>The Unix timestamp for the time when the task set stability status was
+    #   			retrieved.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The metadata that you apply to the task set to help you categorize and organize them.
+    #   			Each tag consists of a key and an optional value. You define both.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource - 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length - 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length - 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Tag>]
+    # @!attribute fargate_ephemeral_storage
+    #   <p>The Fargate ephemeral storage settings for the task set.</p>
+    #   @return [Types::DeploymentEphemeralStorage]
+    class TaskSet < Struct.new(
+      :id,
+      :task_set_arn,
+      :service_arn,
+      :cluster_arn,
+      :started_by,
+      :external_id,
+      :status,
+      :task_definition,
+      :computed_desired_count,
+      :pending_count,
+      :running_count,
+      :created_at,
+      :updated_at,
+      :launch_type,
+      :capacity_provider_strategy,
+      :platform_version,
+      :platform_family,
+      :network_configuration,
+      :load_balancers,
+      :service_registries,
+      :scale,
+      :stability_status,
+      :stability_status_at,
+      :tags,
+      :fargate_ephemeral_storage,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:computed_desired_count] = 0 unless options.key?(:computed_desired_count)
+        options[:pending_count] = 0 unless options.key?(:pending_count)
+        options[:running_count] = 0 unless options.key?(:running_count)
+        super
+      end
+    end
+
+    module TaskSetField
+      TAGS = 'TAGS'
+    end
+
+    # <p>The specified task set wasn't found. You can view your available task sets with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html">DescribeTaskSets</a>. Task sets are specific to each cluster, service and
+    # 			Region.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class TaskSetNotFoundException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module TaskStopCode
+      TASK_FAILED_TO_START = 'TaskFailedToStart'
+      ESSENTIAL_CONTAINER_EXITED = 'EssentialContainerExited'
+      USER_INITIATED = 'UserInitiated'
+      SERVICE_SCHEDULER_INITIATED = 'ServiceSchedulerInitiated'
+      SPOT_INTERRUPTION = 'SpotInterruption'
+      TERMINATION_NOTICE = 'TerminationNotice'
+    end
+
+    # <p>Configuration settings for the task volume that was <code>configuredAtLaunch</code>
+    # 			that weren't set during <code>RegisterTaskDef</code>.</p>
+    # @!attribute name
+    #   <p>The name of the volume. This value must match the volume name from the
+    #   				<code>Volume</code> object in the task definition.</p>
+    #   @return [String]
+    # @!attribute managed_ebs_volume
+    #   <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
+    #   			These settings are used to create each Amazon EBS volume, with one volume created for each
+    #   			task. The Amazon EBS volumes are visible in your account in the Amazon EC2 console once they are
+    #   			created.</p>
+    #   @return [Types::TaskManagedEBSVolumeConfiguration]
+    class TaskVolumeConfiguration < Struct.new(
+      :name,
+      :managed_ebs_volume,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents the timeout configurations for Service Connect.</p>
+    #          <note>
+    #             <p>If <code>idleTimeout</code> is set to a time that is less than
+    # 					<code>perRequestTimeout</code>, the connection will close when the
+    # 					<code>idleTimeout</code> is reached and not the
+    # 				<code>perRequestTimeout</code>.</p>
+    #          </note>
+    # @!attribute idle_timeout_seconds
+    #   <p>The amount of time in seconds a connection will stay active while idle. A value of
+    #   				<code>0</code> can be set to disable <code>idleTimeout</code>.</p>
+    #            <p>The <code>idleTimeout</code> default for
+    #   				<code>HTTP</code>/<code>HTTP2</code>/<code>GRPC</code> is 5 minutes.</p>
+    #            <p>The <code>idleTimeout</code> default for <code>TCP</code> is 1 hour.</p>
+    #   @return [Integer]
+    # @!attribute per_request_timeout_seconds
+    #   <p>The amount of time waiting for the upstream to respond with a complete response per
+    #   			request. A value of <code>0</code> can be set to disable <code>perRequestTimeout</code>.
+    #   				<code>perRequestTimeout</code> can only be set if Service Connect
+    #   				<code>appProtocol</code> isn't <code>TCP</code>. Only <code>idleTimeout</code> is
+    #   			allowed for <code>TCP</code>
+    #               <code>appProtocol</code>.</p>
+    #   @return [Integer]
+    class TimeoutConfiguration < Struct.new(
+      :idle_timeout_seconds,
+      :per_request_timeout_seconds,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The container path, mount options, and size of the tmpfs mount.</p>
+    # @!attribute container_path
+    #   <p>The absolute file path where the tmpfs volume is to be mounted.</p>
+    #   @return [String]
+    # @!attribute size
+    #   <p>The maximum size (in MiB) of the tmpfs volume.</p>
+    #   @return [Integer]
+    # @!attribute mount_options
+    #   <p>The list of tmpfs volume mount options.</p>
+    #            <p>Valid values: <code>"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" |
+    #   				"exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" |
+    #   				"atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" |
+    #   				"runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
+    #   				"relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid"
+    #   				| "nr_inodes" | "nr_blocks" | "mpol"</code>
+    #            </p>
+    #   @return [Array<String>]
+    class Tmpfs < Struct.new(
+      :container_path,
+      :size,
+      :mount_options,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:size] = 0 unless options.key?(:size)
+        super
+      end
+    end
+
+    module TransportProtocol
+      TCP = 'tcp'
+      UDP = 'udp'
+    end
+
+    # <p>The <code>ulimit</code> settings to pass to the container.</p>
+    #          <p>Amazon ECS tasks hosted on Fargate use the default
+    # 							resource limit values set by the operating system with the exception of
+    # 							the <code>nofile</code> resource limit parameter which Fargate
+    # 							overrides. The <code>nofile</code> resource limit sets a restriction on
+    # 							the number of open files that a container can use. The default
+    # 								<code>nofile</code> soft limit is <code> 65535</code> and the default hard limit
+    # 							is <code>65535</code>.</p>
+    #          <p>You can specify the <code>ulimit</code> settings for a container in a task
+    # 			definition.</p>
+    # @!attribute name
+    #   <p>The <code>type</code> of the <code>ulimit</code>.</p>
+    #   @return [String]
+    # @!attribute soft_limit
+    #   <p>The soft limit for the <code>ulimit</code> type. The value can be specified in bytes,
+    #   			seconds, or as a count, depending on the <code>type</code> of the
+    #   			<code>ulimit</code>.</p>
+    #   @return [Integer]
+    # @!attribute hard_limit
+    #   <p>The hard limit for the <code>ulimit</code> type. The value can be specified in bytes,
+    #   			seconds, or as a count, depending on the <code>type</code> of the
+    #   			<code>ulimit</code>.</p>
+    #   @return [Integer]
+    class Ulimit < Struct.new(
+      :name,
+      :soft_limit,
+      :hard_limit,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:soft_limit] = 0 unless options.key?(:soft_limit)
+        options[:hard_limit] = 0 unless options.key?(:hard_limit)
+        super
+      end
+    end
+
+    module UlimitName
+      CORE = 'core'
+      CPU = 'cpu'
+      DATA = 'data'
+      FSIZE = 'fsize'
+      LOCKS = 'locks'
+      MEMLOCK = 'memlock'
+      MSGQUEUE = 'msgqueue'
+      NICE = 'nice'
+      NOFILE = 'nofile'
+      NPROC = 'nproc'
+      RSS = 'rss'
+      RTPRIO = 'rtprio'
+      RTTIME = 'rttime'
+      SIGPENDING = 'sigpending'
+      STACK = 'stack'
+    end
+
+    # <p>The specified task isn't supported in this Region.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class UnsupportedFeatureException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource to delete tags from. Currently, the supported resources
+    #   			are Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container
+    #   			instances.</p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>The keys of the tags to be removed.</p>
+    #   @return [Array<String>]
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    class UntagResourceResponse < Struct.new(
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the capacity provider to update.</p>
+    #   @return [String]
+    # @!attribute auto_scaling_group_provider
+    #   <p>An object that represent the parameters to update for the Auto Scaling group capacity
+    #   			provider.</p>
+    #   @return [Types::AutoScalingGroupProviderUpdate]
+    class UpdateCapacityProviderRequest < Struct.new(
+      :name,
+      :auto_scaling_group_provider,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute capacity_provider
+    #   <p>Details about the capacity provider.</p>
+    #   @return [Types::CapacityProvider]
+    class UpdateCapacityProviderResponse < Struct.new(
+      :capacity_provider,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The name of the cluster to modify the settings for.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>The cluster settings for your cluster.</p>
+    #   @return [Array<Types::ClusterSetting>]
+    # @!attribute configuration
+    #   <p>The execute command configuration for the cluster.</p>
+    #   @return [Types::ClusterConfiguration]
+    # @!attribute service_connect_defaults
+    #   <p>Use this parameter to set a default Service Connect namespace. After you set a default 
+    #   	Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as
+    #   	client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to
+    #   	<code>true</code> in the <code>ServiceConnectConfiguration</code>.
+    #   	You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default
+    #   	parameter.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ClusterServiceConnectDefaultsRequest]
+    class UpdateClusterRequest < Struct.new(
+      :cluster,
+      :settings,
+      :configuration,
+      :service_connect_defaults,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>Details about the cluster.</p>
+    #   @return [Types::Cluster]
+    class UpdateClusterResponse < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The name of the cluster to modify the settings for.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>The setting to use by default for a cluster. This parameter is used to turn on CloudWatch
+    #   			Container Insights for a cluster. If this value is specified, it overrides the
+    #   				<code>containerInsights</code> value set with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html">PutAccountSetting</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html">PutAccountSettingDefault</a>.</p>
+    #            <important>
+    #               <p>Currently, if you delete an existing cluster that does not have Container Insights
+    #   				turned on, and then create a new cluster with the same name with Container Insights
+    #   				tuned on, Container Insights will not actually be turned on. If you want to preserve
+    #   				the same name for your existing cluster and turn on Container Insights, you must
+    #   				wait 7 days before you can re-create it.</p>
+    #            </important>
+    #   @return [Array<Types::ClusterSetting>]
+    class UpdateClusterSettingsRequest < Struct.new(
+      :cluster,
+      :settings,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>Details about the cluster</p>
+    #   @return [Types::Cluster]
+    class UpdateClusterSettingsResponse < Struct.new(
+      :cluster,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that your container instance is
+    #   			running on. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container_instance
+    #   <p>The container instance ID or full ARN entries for the container instance where you
+    #   			would like to update the Amazon ECS container agent.</p>
+    #   @return [String]
+    class UpdateContainerAgentRequest < Struct.new(
+      :cluster,
+      :container_instance,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instance
+    #   <p>The container instance that the container agent was updated for.</p>
+    #   @return [Types::ContainerInstance]
+    class UpdateContainerAgentResponse < Struct.new(
+      :container_instance,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to
+    #   			update. If you do not specify a cluster, the default cluster is assumed.</p>
+    #   @return [String]
+    # @!attribute container_instances
+    #   <p>A list of up to 10 container instance IDs or full ARN entries.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The container instance state to update the container instance with. The only valid
+    #   			values for this action are <code>ACTIVE</code> and <code>DRAINING</code>. A container
+    #   			instance can only be updated to <code>DRAINING</code> status once it has reached an
+    #   				<code>ACTIVE</code> state. If a container instance is in <code>REGISTERING</code>,
+    #   				<code>DEREGISTERING</code>, or <code>REGISTRATION_FAILED</code> state you can
+    #   			describe the container instance but can't update the container instance state.</p>
+    #   @return [String]
+    class UpdateContainerInstancesStateRequest < Struct.new(
+      :cluster,
+      :container_instances,
+      :status,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute container_instances
+    #   <p>The list of container instances.</p>
+    #   @return [Array<Types::ContainerInstance>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class UpdateContainerInstancesStateResponse < Struct.new(
+      :container_instances,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>There's already a current Amazon ECS container agent update in progress on the container
+    # 			instance that's specified. If the container agent becomes disconnected while it's in a
+    # 			transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update
+    # 			process can get stuck in that state. However, when the agent reconnects, it resumes
+    # 			where it stopped previously.</p>
+    # @!attribute message
+    #   <p> Message that describes the cause of the exception.</p>
+    #   @return [String]
+    class UpdateInProgressException < Struct.new(
+      :message,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			set exists in.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The short name or full Amazon Resource Name (ARN) of the service that the task set exists in.</p>
+    #   @return [String]
+    # @!attribute primary_task_set
+    #   <p>The short name or full Amazon Resource Name (ARN) of the task set to set as the primary task set in the
+    #   			deployment.</p>
+    #   @return [String]
+    class UpdateServicePrimaryTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :primary_task_set,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_set
+    #   <p>The details about the task set.</p>
+    #   @return [Types::TaskSet]
+    class UpdateServicePrimaryTaskSetResponse < Struct.new(
+      :task_set,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that your service runs on.
+    #   			If you do not specify a cluster, the default cluster is assumed.</p>
+    #            <p>You can't change the cluster name.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The name of the service to update.</p>
+    #   @return [String]
+    # @!attribute desired_count
+    #   <p>The number of instantiations of the task to place and keep running in your
+    #   			service.</p>
+    #   @return [Integer]
+    # @!attribute task_definition
+    #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
+    #   			full ARN of the task definition to run in your service. If a <code>revision</code> is
+    #   			not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task
+    #   			definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of
+    #   			the task definition and then stops an old task after the new version is running.</p>
+    #   @return [String]
+    # @!attribute capacity_provider_strategy
+    #   <p>The details of a capacity provider strategy. You can set a capacity provider when you
+    #   			create a cluster, run a task, or update a service.</p>
+    #            <p>When you use Fargate, the capacity providers are <code>FARGATE</code> or
+    #   				<code>FARGATE_SPOT</code>.</p>
+    #            <p>When you use Amazon EC2, the capacity providers are Auto Scaling groups.</p>
+    #            <p>You can change capacity providers for rolling deployments and blue/green
+    #   			deployments.</p>
+    #            <p>The following list provides the valid transitions:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Update the Fargate launch type to an Auto Scaling group capacity provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Update the Amazon EC2 launch type to a Fargate capacity provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Update the Fargate capacity provider to an Auto Scaling group capacity provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Update the Amazon EC2 capacity provider to a Fargate capacity provider. </p>
+    #               </li>
+    #               <li>
+    #                  <p>Update the Auto Scaling group or Fargate capacity provider back to the launch type.</p>
+    #                  <p>Pass an empty list in the <code>capacityProviderStrategy</code> parameter.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For information about Amazon Web Services CDK considerations, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html">Amazon Web Services CDK considerations</a>.</p>
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    # @!attribute deployment_configuration
+    #   <p>Optional deployment parameters that control how many tasks run during the deployment
+    #   			and the ordering of stopping and starting tasks.</p>
+    #   @return [Types::DeploymentConfiguration]
+    # @!attribute availability_zone_rebalancing
+    #   <p>Indicates whether to use Availability Zone rebalancing for the service.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html">Balancing an Amazon ECS service across Availability Zones</a> in
+    #   			the <i>
+    #                  <i>Amazon Elastic Container Service Developer Guide</i>
+    #               </i>.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>An object representing the network configuration for the service.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute placement_constraints
+    #   <p>An array of task placement constraint objects to update the service to use. If no
+    #   			value is specified, the existing placement constraints for the service will remain
+    #   			unchanged. If this value is specified, it will override any existing placement
+    #   			constraints defined for the service. To remove all existing placement constraints,
+    #   			specify an empty array.</p>
+    #            <p>You can specify a maximum of 10 constraints for each task. This limit includes
+    #   			constraints in the task definition and those specified at runtime.</p>
+    #   @return [Array<Types::PlacementConstraint>]
+    # @!attribute placement_strategy
+    #   <p>The task placement strategy objects to update the service to use. If no value is
+    #   			specified, the existing placement strategy for the service will remain unchanged. If
+    #   			this value is specified, it will override the existing placement strategy defined for
+    #   			the service. To remove an existing placement strategy, specify an empty object.</p>
+    #            <p>You can specify a maximum of five strategy rules for each service.</p>
+    #   @return [Array<Types::PlacementStrategy>]
+    # @!attribute platform_version
+    #   <p>The platform version that your tasks in the service run on. A platform version is only
+    #   			specified for tasks using the Fargate launch type. If a platform version
+    #   			is not specified, the <code>LATEST</code> platform version is used. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform
+    #   				Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute force_new_deployment
+    #   <p>Determines whether to force a new deployment of the service. By default, deployments
+    #   			aren't forced. You can use this option to start a new deployment with no service
+    #   			definition changes. For example, you can update a service's tasks to use a newer Docker
+    #   			image with the same image/tag combination (<code>my_image:latest</code>) or to roll
+    #   			Fargate tasks onto a newer platform version.</p>
+    #   @return [Boolean]
+    # @!attribute health_check_grace_period_seconds
+    #   <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy
+    #   			Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't
+    #   			specify a health check grace period value, the default value of <code>0</code> is used.
+    #   			If you don't use any of the health checks, then
+    #   				<code>healthCheckGracePeriodSeconds</code> is unused.</p>
+    #            <p>If your service's tasks take a while to start and respond to health checks, you can
+    #   			specify a health check grace period of up to 2,147,483,647 seconds (about 69 years).
+    #   			During that time, the Amazon ECS service scheduler ignores health check status. This grace
+    #   			period can prevent the service scheduler from marking tasks as unhealthy and stopping
+    #   			them before they have time to come up.</p>
+    #   @return [Integer]
+    # @!attribute deployment_controller
+    #   <p>The deployment controller to use for the service. </p>
+    #   @return [Types::DeploymentController]
+    # @!attribute enable_execute_command
+    #   <p>If <code>true</code>, this enables execute command functionality on all task
+    #   			containers.</p>
+    #            <p>If you do not want to override the value that was set when the service was created,
+    #   			you can set this to <code>null</code> when performing this action.</p>
+    #   @return [Boolean]
+    # @!attribute enable_ecs_managed_tags
+    #   <p>Determines whether to turn on Amazon ECS managed tags for the tasks in the service. For
+    #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS
+    #   				Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>Only tasks launched after the update will reflect the update. To update the tags on
+    #   			all tasks, set <code>forceNewDeployment</code> to <code>true</code>, so that Amazon ECS
+    #   			starts new tasks with the updated tags.</p>
+    #   @return [Boolean]
+    # @!attribute load_balancers
+    #   <note>
+    #               <p>You must have a service-linked role when you update this property</p>
+    #            </note>
+    #            <p>A list of Elastic Load Balancing load balancer objects. It contains the load balancer name, the
+    #   			container name, and the container port to access from the load balancer. The container
+    #   			name is as it appears in a container definition.</p>
+    #            <p>When you add, update, or remove a load balancer configuration, Amazon ECS starts new tasks
+    #   			with the updated Elastic Load Balancing configuration, and then stops the old tasks when the new tasks
+    #   			are running.</p>
+    #            <p>For services that use rolling updates, you can add, update, or remove Elastic Load Balancing target
+    #   			groups. You can update from a single target group to multiple target groups and from
+    #   			multiple target groups to a single target group.</p>
+    #            <p>For services that use blue/green deployments, you can update Elastic Load Balancing target groups by
+    #   			using <code>
+    #                  <a href="https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html">CreateDeployment</a>
+    #               </code> through CodeDeploy. Note that multiple target groups
+    #   			are not supported for blue/green deployments. For more information see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html">Register
+    #   				multiple target groups with a service</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. </p>
+    #            <p>For services that use the external deployment controller, you can add, update, or
+    #   			remove load balancers by using <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html">CreateTaskSet</a>.
+    #   			Note that multiple target groups are not supported for external deployments. For more
+    #   			information see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html">Register
+    #   				multiple target groups with a service</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. </p>
+    #            <p>You can remove existing <code>loadBalancers</code> by passing an empty list.</p>
+    #   @return [Array<Types::LoadBalancer>]
+    # @!attribute propagate_tags
+    #   <p>Determines whether to propagate the tags from the task definition or the service to
+    #   			the task. If no value is specified, the tags aren't propagated.</p>
+    #            <p>Only tasks launched after the update will reflect the update. To update the tags on
+    #   			all tasks, set <code>forceNewDeployment</code> to <code>true</code>, so that Amazon ECS
+    #   			starts new tasks with the updated tags.</p>
+    #   @return [String]
+    # @!attribute service_registries
+    #   <note>
+    #               <p>You must have a service-linked role when you update this property.</p>
+    #               <p>For more information about the role see the <code>CreateService</code> request
+    #   				parameter <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role">
+    #                     <code>role</code>
+    #                  </a>. </p>
+    #            </note>
+    #            <p>The details for the service discovery registries to assign to this service. For more
+    #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
+    #   				Discovery</a>.</p>
+    #            <p>When you add, update, or remove the service registries configuration, Amazon ECS starts new
+    #   			tasks with the updated service registries configuration, and then stops the old tasks
+    #   			when the new tasks are running.</p>
+    #            <p>You can remove existing <code>serviceRegistries</code> by passing an empty
+    #   			list.</p>
+    #   @return [Array<Types::ServiceRegistry>]
+    # @!attribute service_connect_configuration
+    #   <p>The configuration for this service to discover and connect to
+    #   	services, and be discovered by, and connected from, other services within a namespace.</p>
+    #            <p>Tasks that run in a namespace can use short names to connect
+    #   	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
+    #   	Tasks connect through a managed proxy container
+    #   	that collects logs and metrics for increased visibility.
+    #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
+    #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #   @return [Types::ServiceConnectConfiguration]
+    # @!attribute volume_configurations
+    #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
+    #   			the size, volumeType, IOPS, throughput, snapshot and encryption in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html">ServiceManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume
+    #   			must match the <code>name</code> from the task definition. If set to null, no new
+    #   			deployment is triggered. Otherwise, if this configuration differs from the existing one,
+    #   			it triggers a new deployment.</p>
+    #   @return [Array<Types::ServiceVolumeConfiguration>]
+    # @!attribute vpc_lattice_configurations
+    #   <p>An object representing the VPC Lattice configuration for the service being
+    #   			updated.</p>
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    class UpdateServiceRequest < Struct.new(
+      :cluster,
+      :service,
+      :desired_count,
+      :task_definition,
+      :capacity_provider_strategy,
+      :deployment_configuration,
+      :availability_zone_rebalancing,
+      :network_configuration,
+      :placement_constraints,
+      :placement_strategy,
+      :platform_version,
+      :force_new_deployment,
+      :health_check_grace_period_seconds,
+      :deployment_controller,
+      :enable_execute_command,
+      :enable_ecs_managed_tags,
+      :load_balancers,
+      :propagate_tags,
+      :service_registries,
+      :service_connect_configuration,
+      :volume_configurations,
+      :vpc_lattice_configurations,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The full description of your service following the update call.</p>
+    #   @return [Types::Service]
+    class UpdateServiceResponse < Struct.new(
+      :service,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			sets exist in.</p>
+    #   @return [String]
+    # @!attribute tasks
+    #   <p>A list of up to 10 task IDs or full ARN entries.</p>
+    #   @return [Array<String>]
+    # @!attribute protection_enabled
+    #   <p>Specify <code>true</code> to mark a task for protection and <code>false</code> to
+    #   			unset protection, making it eligible for termination.</p>
+    #   @return [Boolean]
+    # @!attribute expires_in_minutes
+    #   <p>If you set <code>protectionEnabled</code> to <code>true</code>, you can specify the
+    #   			duration for task protection in minutes. You can specify a value from 1 minute to up to
+    #   			2,880 minutes (48 hours). During this time, your task will not be terminated by scale-in
+    #   			events from Service Auto Scaling or deployments. After this time period lapses,
+    #   				<code>protectionEnabled</code> will be reset to <code>false</code>.</p>
+    #            <p>If you don’t specify the time, then the task is automatically protected for 120
+    #   			minutes (2 hours).</p>
+    #   @return [Integer]
+    class UpdateTaskProtectionRequest < Struct.new(
+      :cluster,
+      :tasks,
+      :protection_enabled,
+      :expires_in_minutes,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute protected_tasks
+    #   <p>A list of tasks with the following information.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>taskArn</code>: The task ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>protectionEnabled</code>: The protection status of the task. If scale-in
+    #   					protection is turned on for a task, the value is <code>true</code>. Otherwise,
+    #   					it is <code>false</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>expirationDate</code>: The epoch time when protection for the task will
+    #   					expire.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::ProtectedTask>]
+    # @!attribute failures
+    #   <p>Any failures associated with the call.</p>
+    #   @return [Array<Types::Failure>]
+    class UpdateTaskProtectionResponse < Struct.new(
+      :protected_tasks,
+      :failures,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task
+    #   			set is found in.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The short name or full Amazon Resource Name (ARN) of the service that the task set is found in.</p>
+    #   @return [String]
+    # @!attribute task_set
+    #   <p>The short name or full Amazon Resource Name (ARN) of the task set to update.</p>
+    #   @return [String]
+    # @!attribute scale
+    #   <p>A floating-point percentage of the desired number of tasks to place and keep running
+    #   			in the task set.</p>
+    #   @return [Types::Scale]
+    class UpdateTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_set,
+      :scale,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # @!attribute task_set
+    #   <p>Details about the task set.</p>
+    #   @return [Types::TaskSet]
+    class UpdateTaskSetResponse < Struct.new(
+      :task_set,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    module VersionConsistency
+      ENABLED = 'enabled'
+      DISABLED = 'disabled'
+    end
+
+    # <p>The Docker and Amazon ECS container agent version information about a container
+    # 			instance.</p>
+    # @!attribute agent_version
+    #   <p>The version number of the Amazon ECS container agent.</p>
+    #   @return [String]
+    # @!attribute agent_hash
+    #   <p>The Git commit hash for the Amazon ECS container agent build on the <a href="https://github.com/aws/amazon-ecs-agent">amazon-ecs-agent
+    #   			</a> GitHub repository.</p>
+    #   @return [String]
+    # @!attribute docker_version
+    #   <p>The Docker version that's running on the container instance.</p>
+    #   @return [String]
+    class VersionInfo < Struct.new(
+      :agent_version,
+      :agent_hash,
+      :docker_version,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The data volume configuration for tasks launched using this task definition.
+    # 			Specifying a volume configuration in a task definition is optional. The volume
+    # 			configuration may contain multiple volumes but only one volume configured at launch is
+    # 			supported. Each volume defined in the volume configuration may only specify a
+    # 				<code>name</code> and one of either <code>configuredAtLaunch</code>,
+    # 				<code>dockerVolumeConfiguration</code>, <code>efsVolumeConfiguration</code>,
+    # 				<code>fsxWindowsFileServerVolumeConfiguration</code>, or <code>host</code>. If an
+    # 			empty volume configuration is specified, by default Amazon ECS uses a host volume. For more
+    # 			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html">Using data volumes in
+    # 				tasks</a>.</p>
+    # @!attribute name
+    #   <p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>
+    #            <p>When using a volume configured at launch, the <code>name</code> is required and must
+    #   			also be specified as the volume name in the <code>ServiceVolumeConfiguration</code> or
+    #   				<code>TaskVolumeConfiguration</code> parameter when creating your service or
+    #   			standalone task.</p>
+    #            <p>For all other types of volumes, this name is referenced in the
+    #   				<code>sourceVolume</code> parameter of the <code>mountPoints</code> object in the
+    #   			container definition.</p>
+    #            <p>When a volume is using the <code>efsVolumeConfiguration</code>, the name is
+    #   			required.</p>
+    #   @return [String]
+    # @!attribute host
+    #   <p>This parameter is specified when you use bind mount host volumes. The contents of the
+    #   				<code>host</code> parameter determine whether your bind mount host volume persists
+    #   			on the host container instance and where it's stored. If the <code>host</code> parameter
+    #   			is empty, then the Docker daemon assigns a host path for your data volume. However, the
+    #   			data isn't guaranteed to persist after the containers that are associated with it stop
+    #   			running.</p>
+    #            <p>Windows containers can mount whole directories on the same drive as
+    #   				<code>$env:ProgramData</code>. Windows containers can't mount directories on a
+    #   			different drive, and mount point can't be across drives. For example, you can mount
+    #   				<code>C:\my\path:C:\my\path</code> and <code>D:\:D:\</code>, but not
+    #   				<code>D:\my\path:C:\my\path</code> or <code>D:\:C:\my\path</code>.</p>
+    #   @return [Types::HostVolumeProperties]
+    # @!attribute docker_volume_configuration
+    #   <p>This parameter is specified when you use Docker volumes.</p>
+    #            <p>Windows containers only support the use of the <code>local</code> driver. To use bind
+    #   			mounts, specify the <code>host</code> parameter instead.</p>
+    #            <note>
+    #               <p>Docker volumes aren't supported by tasks run on Fargate.</p>
+    #            </note>
+    #   @return [Types::DockerVolumeConfiguration]
+    # @!attribute efs_volume_configuration
+    #   <p>This parameter is specified when you use an Amazon Elastic File System file system for task
+    #   			storage.</p>
+    #   @return [Types::EFSVolumeConfiguration]
+    # @!attribute fsx_windows_file_server_volume_configuration
+    #   <p>This parameter is specified when you use Amazon FSx for Windows File Server file system for task
+    #   			storage.</p>
+    #   @return [Types::FSxWindowsFileServerVolumeConfiguration]
+    # @!attribute configured_at_launch
+    #   <p>Indicates whether the volume should be configured at launch time. This is used to
+    #   			create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each
+    #   			task definition revision may only have one volume configured at launch in the volume
+    #   			configuration.</p>
+    #            <p>To configure a volume at launch time, use this task definition revision and specify a
+    #   				<code>volumeConfigurations</code> object when calling the
+    #   			<code>CreateService</code>, <code>UpdateService</code>, <code>RunTask</code> or
+    #   				<code>StartTask</code> APIs.</p>
+    #   @return [Boolean]
+    class Volume < Struct.new(
+      :name,
+      :host,
+      :docker_volume_configuration,
+      :efs_volume_configuration,
+      :fsx_windows_file_server_volume_configuration,
+      :configured_at_launch,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>Details on a data volume from another container in the same task definition.</p>
+    # @!attribute source_container
+    #   <p>The name of another container within the same task definition to mount volumes
+    #   			from.</p>
+    #   @return [String]
+    # @!attribute read_only
+    #   <p>If this value is <code>true</code>, the container has read-only access to the volume.
+    #   			If this value is <code>false</code>, then the container can write to the volume. The
+    #   			default value is <code>false</code>.</p>
+    #   @return [Boolean]
+    class VolumeFrom < Struct.new(
+      :source_container,
+      :read_only,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+    # <p>The VPC Lattice configuration for your service that holds the information for the target
+    # 			group(s) Amazon ECS tasks will be registered to.</p>
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role to associate with this VPC Lattice configuration. This is the
+    #   			Amazon ECS  infrastructure IAM role that is used to manage your VPC Lattice
+    #   			infrastructure.</p>
+    #   @return [String]
+    # @!attribute target_group_arn
+    #   <p>The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice
+    #   			configuration that the Amazon ECS tasks will be registered to.</p>
+    #   @return [String]
+    # @!attribute port_name
+    #   <p>The name of the port mapping to register in the VPC Lattice target group. This is the name
+    #   			of the <code>portMapping</code> you defined in your task definition.</p>
+    #   @return [String]
+    class VpcLatticeConfiguration < Struct.new(
+      :role_arn,
+      :target_group_arn,
+      :port_name,
+      keyword_init: true)
+      include Smithy::Schema::Structure
+    end
+
+  end
+end

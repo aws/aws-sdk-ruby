@@ -1,0 +1,577 @@
+module Aws::FMS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::FMS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_admin_account: (
+      ?admin_account: String
+    ) -> _AssociateAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAdminAccountResponse
+
+    interface _AssociateThirdPartyFirewallResponse
+      include Smithy::Client::_Response[Types::AssociateThirdPartyFirewallResponse]
+      def third_party_firewall_status: () -> String?
+    end
+    def associate_third_party_firewall: (
+      ?third_party_firewall: String
+    ) -> _AssociateThirdPartyFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateThirdPartyFirewallResponse
+
+    interface _BatchAssociateResourceResponse
+      include Smithy::Client::_Response[Types::BatchAssociateResourceResponse]
+      def resource_set_identifier: () -> String?
+      def failed_items: () -> Array[Types::FailedItem]?
+    end
+    def batch_associate_resource: (
+      ?resource_set_identifier: String,
+      ?items: Array[String]
+    ) -> _BatchAssociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateResourceResponse
+
+    interface _BatchDisassociateResourceResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateResourceResponse]
+      def resource_set_identifier: () -> String?
+      def failed_items: () -> Array[Types::FailedItem]?
+    end
+    def batch_disassociate_resource: (
+      ?resource_set_identifier: String,
+      ?items: Array[String]
+    ) -> _BatchDisassociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateResourceResponse
+
+    interface _DeleteAppsListResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_apps_list: (
+      ?list_id: String
+    ) -> _DeleteAppsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppsListResponse
+
+    interface _DeleteNotificationChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_notification_channel: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationChannelResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?policy_id: String,
+      ?delete_all_policy_resources: bool
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeleteProtocolsListResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_protocols_list: (
+      ?list_id: String
+    ) -> _DeleteProtocolsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProtocolsListResponse
+
+    interface _DeleteResourceSetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_set: (
+      ?identifier: String
+    ) -> _DeleteResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceSetResponse
+
+    interface _DisassociateAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_admin_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAdminAccountResponse
+
+    interface _DisassociateThirdPartyFirewallResponse
+      include Smithy::Client::_Response[Types::DisassociateThirdPartyFirewallResponse]
+      def third_party_firewall_status: () -> String?
+    end
+    def disassociate_third_party_firewall: (
+      ?third_party_firewall: String
+    ) -> _DisassociateThirdPartyFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateThirdPartyFirewallResponse
+
+    interface _GetAdminAccountResponse
+      include Smithy::Client::_Response[Types::GetAdminAccountResponse]
+      def admin_account: () -> String?
+      def role_status: () -> String?
+    end
+    def get_admin_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdminAccountResponse
+
+    interface _GetAdminScopeResponse
+      include Smithy::Client::_Response[Types::GetAdminScopeResponse]
+      def admin_scope: () -> Types::AdminScope?
+      def status: () -> String?
+    end
+    def get_admin_scope: (
+      ?admin_account: String
+    ) -> _GetAdminScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdminScopeResponse
+
+    interface _GetAppsListResponse
+      include Smithy::Client::_Response[Types::GetAppsListResponse]
+      def apps_list: () -> Types::AppsListData?
+      def apps_list_arn: () -> String?
+    end
+    def get_apps_list: (
+      ?list_id: String,
+      ?default_list: bool
+    ) -> _GetAppsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppsListResponse
+
+    interface _GetComplianceDetailResponse
+      include Smithy::Client::_Response[Types::GetComplianceDetailResponse]
+      def policy_compliance_detail: () -> Types::PolicyComplianceDetail?
+    end
+    def get_compliance_detail: (
+      ?policy_id: String,
+      ?member_account: String
+    ) -> _GetComplianceDetailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceDetailResponse
+
+    interface _GetNotificationChannelResponse
+      include Smithy::Client::_Response[Types::GetNotificationChannelResponse]
+      def sns_topic_arn: () -> String?
+      def sns_role_name: () -> String?
+    end
+    def get_notification_channel: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationChannelResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy: () -> Types::Policy?
+      def policy_arn: () -> String?
+    end
+    def get_policy: (
+      ?policy_id: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetProtectionStatusResponse
+      include Smithy::Client::_Response[Types::GetProtectionStatusResponse]
+      def admin_account_id: () -> String?
+      def service_type: () -> String?
+      def data: () -> String?
+      def next_token: () -> String?
+    end
+    def get_protection_status: (
+      ?policy_id: String,
+      ?member_account_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetProtectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProtectionStatusResponse
+
+    interface _GetProtocolsListResponse
+      include Smithy::Client::_Response[Types::GetProtocolsListResponse]
+      def protocols_list: () -> Types::ProtocolsListData?
+      def protocols_list_arn: () -> String?
+    end
+    def get_protocols_list: (
+      ?list_id: String,
+      ?default_list: bool
+    ) -> _GetProtocolsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProtocolsListResponse
+
+    interface _GetResourceSetResponse
+      include Smithy::Client::_Response[Types::GetResourceSetResponse]
+      def resource_set: () -> Types::ResourceSet?
+      def resource_set_arn: () -> String?
+    end
+    def get_resource_set: (
+      ?identifier: String
+    ) -> _GetResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSetResponse
+
+    interface _GetThirdPartyFirewallAssociationStatusResponse
+      include Smithy::Client::_Response[Types::GetThirdPartyFirewallAssociationStatusResponse]
+      def third_party_firewall_status: () -> String?
+      def marketplace_onboarding_status: () -> String?
+    end
+    def get_third_party_firewall_association_status: (
+      ?third_party_firewall: String
+    ) -> _GetThirdPartyFirewallAssociationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThirdPartyFirewallAssociationStatusResponse
+
+    interface _GetViolationDetailsResponse
+      include Smithy::Client::_Response[Types::GetViolationDetailsResponse]
+      def violation_detail: () -> Types::ViolationDetail?
+    end
+    def get_violation_details: (
+      ?policy_id: String,
+      ?member_account: String,
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _GetViolationDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetViolationDetailsResponse
+
+    interface _ListAdminAccountsForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListAdminAccountsForOrganizationResponse]
+      def admin_accounts: () -> Array[Types::AdminAccountSummary]?
+      def next_token: () -> String?
+    end
+    def list_admin_accounts_for_organization: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAdminAccountsForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdminAccountsForOrganizationResponse
+
+    interface _ListAdminsManagingAccountResponse
+      include Smithy::Client::_Response[Types::ListAdminsManagingAccountResponse]
+      def admin_accounts: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_admins_managing_account: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAdminsManagingAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdminsManagingAccountResponse
+
+    interface _ListAppsListsResponse
+      include Smithy::Client::_Response[Types::ListAppsListsResponse]
+      def apps_lists: () -> Array[Types::AppsListDataSummary]?
+      def next_token: () -> String?
+    end
+    def list_apps_lists: (
+      ?default_lists: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppsListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppsListsResponse
+
+    interface _ListComplianceStatusResponse
+      include Smithy::Client::_Response[Types::ListComplianceStatusResponse]
+      def policy_compliance_status_list: () -> Array[Types::PolicyComplianceStatus]?
+      def next_token: () -> String?
+    end
+    def list_compliance_status: (
+      ?policy_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComplianceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComplianceStatusResponse
+
+    interface _ListDiscoveredResourcesResponse
+      include Smithy::Client::_Response[Types::ListDiscoveredResourcesResponse]
+      def items: () -> Array[Types::DiscoveredResource]?
+      def next_token: () -> String?
+    end
+    def list_discovered_resources: (
+      ?member_account_ids: Array[String],
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDiscoveredResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoveredResourcesResponse
+
+    interface _ListMemberAccountsResponse
+      include Smithy::Client::_Response[Types::ListMemberAccountsResponse]
+      def member_accounts: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_member_accounts: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMemberAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemberAccountsResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def policy_list: () -> Array[Types::PolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_policies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListProtocolsListsResponse
+      include Smithy::Client::_Response[Types::ListProtocolsListsResponse]
+      def protocols_lists: () -> Array[Types::ProtocolsListDataSummary]?
+      def next_token: () -> String?
+    end
+    def list_protocols_lists: (
+      ?default_lists: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtocolsListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtocolsListsResponse
+
+    interface _ListResourceSetResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourceSetResourcesResponse]
+      def items: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+    end
+    def list_resource_set_resources: (
+      ?identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceSetResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSetResourcesResponse
+
+    interface _ListResourceSetsResponse
+      include Smithy::Client::_Response[Types::ListResourceSetsResponse]
+      def resource_sets: () -> Array[Types::ResourceSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_sets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSetsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListThirdPartyFirewallFirewallPoliciesResponse
+      include Smithy::Client::_Response[Types::ListThirdPartyFirewallFirewallPoliciesResponse]
+      def third_party_firewall_firewall_policies: () -> Array[Types::ThirdPartyFirewallFirewallPolicy]?
+      def next_token: () -> String?
+    end
+    def list_third_party_firewall_firewall_policies: (
+      ?third_party_firewall: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListThirdPartyFirewallFirewallPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThirdPartyFirewallFirewallPoliciesResponse
+
+    interface _PutAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_admin_account: (
+      ?admin_account: String,
+      ?admin_scope: {
+        account_scope: {
+          accounts: Array[String],
+          all_accounts_enabled: bool,
+          exclude_specified_accounts: untyped
+        },
+        organizational_unit_scope: {
+          organizational_units: Array[String],
+          all_organizational_units_enabled: untyped,
+          exclude_specified_organizational_units: untyped
+        },
+        region_scope: {
+          regions: Array[String],
+          all_regions_enabled: untyped
+        },
+        policy_type_scope: {
+          policy_types: Array[String],
+          all_policy_types_enabled: untyped
+        }
+      }
+    ) -> _PutAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAdminAccountResponse
+
+    interface _PutAppsListResponse
+      include Smithy::Client::_Response[Types::PutAppsListResponse]
+      def apps_list: () -> Types::AppsListData?
+      def apps_list_arn: () -> String?
+    end
+    def put_apps_list: (
+      ?apps_list: {
+        list_id: String,
+        list_name: String,
+        list_update_token: String,
+        create_time: Time,
+        last_update_time: untyped,
+        apps_list: Array[
+          {
+            app_name: untyped,
+            protocol: String,
+            port: Integer
+          }
+        ],
+        previous_apps_list: Hash[String,
+          Array[
+            {
+              app_name: untyped,
+              protocol: untyped,
+              port: untyped
+            }
+          ]
+        ]
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutAppsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppsListResponse
+
+    interface _PutNotificationChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_notification_channel: (
+      ?sns_topic_arn: String,
+      ?sns_role_name: String
+    ) -> _PutNotificationChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutNotificationChannelResponse
+
+    interface _PutPolicyResponse
+      include Smithy::Client::_Response[Types::PutPolicyResponse]
+      def policy: () -> Types::Policy?
+      def policy_arn: () -> String?
+    end
+    def put_policy: (
+      ?policy: {
+        policy_id: String,
+        policy_name: String,
+        policy_update_token: String,
+        security_service_policy_data: {
+          type: String,
+          managed_service_data: String,
+          policy_option: {
+            network_firewall_policy: {
+              firewall_deployment_model: String
+            },
+            third_party_firewall_policy: {
+              firewall_deployment_model: untyped
+            },
+            network_acl_common_policy: {
+              network_acl_entry_set: {
+                first_entries: Array[
+                  {
+                    icmp_type_code: {
+                      code: Integer,
+                      type: untyped
+                    },
+                    protocol: String,
+                    port_range: {
+                      from: Integer,
+                      to: untyped
+                    },
+                    cidr_block: String,
+                    ipv6_cidr_block: untyped,
+                    rule_action: String,
+                    egress: bool
+                  }
+                ],
+                force_remediate_for_first_entries: untyped,
+                last_entries: untyped,
+                force_remediate_for_last_entries: untyped
+              }
+            }
+          }
+        },
+        resource_type: String,
+        resource_type_list: Array[String],
+        resource_tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        exclude_resource_tags: bool,
+        remediation_enabled: untyped,
+        delete_unused_fm_managed_resources: untyped,
+        include_map: Hash[String,
+          Array[String]
+        ],
+        exclude_map: untyped,
+        resource_set_ids: Array[String],
+        policy_description: String,
+        policy_status: String,
+        resource_tag_logical_operator: String
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPolicyResponse
+
+    interface _PutProtocolsListResponse
+      include Smithy::Client::_Response[Types::PutProtocolsListResponse]
+      def protocols_list: () -> Types::ProtocolsListData?
+      def protocols_list_arn: () -> String?
+    end
+    def put_protocols_list: (
+      ?protocols_list: {
+        list_id: String,
+        list_name: String,
+        list_update_token: String,
+        create_time: Time,
+        last_update_time: untyped,
+        protocols_list: Array[String],
+        previous_protocols_list: Hash[String,
+          Array[String]
+        ]
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutProtocolsListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProtocolsListResponse
+
+    interface _PutResourceSetResponse
+      include Smithy::Client::_Response[Types::PutResourceSetResponse]
+      def resource_set: () -> Types::ResourceSet?
+      def resource_set_arn: () -> String?
+    end
+    def put_resource_set: (
+      ?resource_set: {
+        id: String,
+        name: String,
+        description: String,
+        update_token: String,
+        resource_type_list: Array[String],
+        last_update_time: Time,
+        resource_set_status: String
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutResourceSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourceSetResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

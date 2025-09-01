@@ -1,0 +1,5 @@
+  module Aws
+    module CloudWatchEvents
+      VERSION: String
+    end
+  end

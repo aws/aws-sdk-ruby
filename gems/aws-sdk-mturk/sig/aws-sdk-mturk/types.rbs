@@ -1,0 +1,1571 @@
+module Aws::MTurk
+  module Types
+
+    class AcceptQualificationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_request_id: String,
+        ?integer_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_request_id: String?
+      attr_accessor integer_value: Integer?
+    end
+
+    class AcceptQualificationRequestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ApproveAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_id: String,
+        ?requester_feedback: String,
+        ?override_rejection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_id: String?
+      attr_accessor requester_feedback: String?
+      attr_accessor override_rejection: bool?
+    end
+
+    class ApproveAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Assignment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_id: String,
+        ?worker_id: String,
+        ?hit_id: String,
+        ?assignment_status: String,
+        ?auto_approval_time: Time,
+        ?accept_time: Time,
+        ?submit_time: Time,
+        ?approval_time: Time,
+        ?rejection_time: Time,
+        ?deadline: Time,
+        ?answer: String,
+        ?requester_feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor hit_id: String?
+      attr_accessor assignment_status: String?
+      attr_accessor auto_approval_time: Time?
+      attr_accessor accept_time: Time?
+      attr_accessor submit_time: Time?
+      attr_accessor approval_time: Time?
+      attr_accessor rejection_time: Time?
+      attr_accessor deadline: Time?
+      attr_accessor answer: String?
+      attr_accessor requester_feedback: String?
+    end
+
+    module AssignmentStatus
+      Submitted: String
+      Approved: String
+      Rejected: String
+    end
+
+    class AssociateQualificationWithWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?worker_id: String,
+        ?integer_value: Integer,
+        ?send_notification: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor integer_value: Integer?
+      attr_accessor send_notification: bool?
+    end
+
+    class AssociateQualificationWithWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BonusPayment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?bonus_amount: String,
+        ?assignment_id: String,
+        ?reason: String,
+        ?grant_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor bonus_amount: String?
+      attr_accessor assignment_id: String?
+      attr_accessor reason: String?
+      attr_accessor grant_time: Time?
+    end
+
+    module Comparator
+      LessThan: String
+      LessThanOrEqualTo: String
+      GreaterThan: String
+      GreaterThanOrEqualTo: String
+      EqualTo: String
+      NotEqualTo: String
+      Exists: String
+      DoesNotExist: String
+      In: String
+      NotIn: String
+    end
+
+    class CreateAdditionalAssignmentsForHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?number_of_additional_assignments: Integer,
+        ?unique_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor number_of_additional_assignments: Integer?
+      attr_accessor unique_request_token: String?
+    end
+
+    class CreateAdditionalAssignmentsForHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_assignments: Integer,
+        ?auto_approval_delay_in_seconds: Integer,
+        ?lifetime_in_seconds: Integer,
+        ?assignment_duration_in_seconds: Integer,
+        ?reward: String,
+        ?title: String,
+        ?keywords: String,
+        ?description: String,
+        ?question: String,
+        ?requester_annotation: String,
+        ?qualification_requirements: Array[Types::QualificationRequirement],
+        ?unique_request_token: String,
+        ?assignment_review_policy: Types::ReviewPolicy,
+        ?hit_review_policy: Types::ReviewPolicy,
+        ?hit_layout_id: String,
+        ?hit_layout_parameters: Array[Types::HITLayoutParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_assignments: Integer?
+      attr_accessor auto_approval_delay_in_seconds: Integer?
+      attr_accessor lifetime_in_seconds: Integer?
+      attr_accessor assignment_duration_in_seconds: Integer?
+      attr_accessor reward: String?
+      attr_accessor title: String?
+      attr_accessor keywords: String?
+      attr_accessor description: String?
+      attr_accessor question: String?
+      attr_accessor requester_annotation: String?
+      attr_accessor qualification_requirements: Array[Types::QualificationRequirement]?
+      attr_accessor unique_request_token: String?
+      attr_accessor assignment_review_policy: Types::ReviewPolicy?
+      attr_accessor hit_review_policy: Types::ReviewPolicy?
+      attr_accessor hit_layout_id: String?
+      attr_accessor hit_layout_parameters: Array[Types::HITLayoutParameter]?
+    end
+
+    class CreateHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit: Types::HIT,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit: Types::HIT?
+    end
+
+    class CreateHITTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_approval_delay_in_seconds: Integer,
+        ?assignment_duration_in_seconds: Integer,
+        ?reward: String,
+        ?title: String,
+        ?keywords: String,
+        ?description: String,
+        ?qualification_requirements: Array[Types::QualificationRequirement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_approval_delay_in_seconds: Integer?
+      attr_accessor assignment_duration_in_seconds: Integer?
+      attr_accessor reward: String?
+      attr_accessor title: String?
+      attr_accessor keywords: String?
+      attr_accessor description: String?
+      attr_accessor qualification_requirements: Array[Types::QualificationRequirement]?
+    end
+
+    class CreateHITTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_type_id: String?
+    end
+
+    class CreateHITWithHITTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_type_id: String,
+        ?max_assignments: Integer,
+        ?lifetime_in_seconds: Integer,
+        ?question: String,
+        ?requester_annotation: String,
+        ?unique_request_token: String,
+        ?assignment_review_policy: Types::ReviewPolicy,
+        ?hit_review_policy: Types::ReviewPolicy,
+        ?hit_layout_id: String,
+        ?hit_layout_parameters: Array[Types::HITLayoutParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_type_id: String?
+      attr_accessor max_assignments: Integer?
+      attr_accessor lifetime_in_seconds: Integer?
+      attr_accessor question: String?
+      attr_accessor requester_annotation: String?
+      attr_accessor unique_request_token: String?
+      attr_accessor assignment_review_policy: Types::ReviewPolicy?
+      attr_accessor hit_review_policy: Types::ReviewPolicy?
+      attr_accessor hit_layout_id: String?
+      attr_accessor hit_layout_parameters: Array[Types::HITLayoutParameter]?
+    end
+
+    class CreateHITWithHITTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit: Types::HIT,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit: Types::HIT?
+    end
+
+    class CreateQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?keywords: String,
+        ?description: String,
+        ?qualification_type_status: String,
+        ?retry_delay_in_seconds: Integer,
+        ?test: String,
+        ?answer_key: String,
+        ?test_duration_in_seconds: Integer,
+        ?auto_granted: bool,
+        ?auto_granted_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor keywords: String?
+      attr_accessor description: String?
+      attr_accessor qualification_type_status: String?
+      attr_accessor retry_delay_in_seconds: Integer?
+      attr_accessor test: String?
+      attr_accessor answer_key: String?
+      attr_accessor test_duration_in_seconds: Integer?
+      attr_accessor auto_granted: bool?
+      attr_accessor auto_granted_value: Integer?
+    end
+
+    class CreateQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type: Types::QualificationType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type: Types::QualificationType?
+    end
+
+    class CreateWorkerBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor reason: String?
+    end
+
+    class CreateWorkerBlockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+    end
+
+    class DeleteHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+    end
+
+    class DeleteQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkerBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DeleteWorkerBlockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateQualificationFromWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?qualification_type_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor qualification_type_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DisassociateQualificationFromWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module EventType
+      AssignmentAccepted: String
+      AssignmentAbandoned: String
+      AssignmentReturned: String
+      AssignmentSubmitted: String
+      AssignmentRejected: String
+      AssignmentApproved: String
+      HITCreated: String
+      HITExpired: String
+      HITReviewable: String
+      HITExtended: String
+      HITDisposed: String
+      Ping: String
+    end
+
+    class GetAccountBalanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountBalanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_balance: String,
+        ?on_hold_balance: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_balance: String?
+      attr_accessor on_hold_balance: String?
+    end
+
+    class GetAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_id: String?
+    end
+
+    class GetAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment: Types::Assignment,
+        ?hit: Types::HIT,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment: Types::Assignment?
+      attr_accessor hit: Types::HIT?
+    end
+
+    class GetFileUploadURLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_id: String,
+        ?question_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_id: String?
+      attr_accessor question_identifier: String?
+    end
+
+    class GetFileUploadURLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_upload_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_upload_url: String?
+    end
+
+    class GetHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+    end
+
+    class GetHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit: Types::HIT,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit: Types::HIT?
+    end
+
+    class GetQualificationScoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor worker_id: String?
+    end
+
+    class GetQualificationScoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification: Types::Qualification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification: Types::Qualification?
+    end
+
+    class GetQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+    end
+
+    class GetQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type: Types::QualificationType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type: Types::QualificationType?
+    end
+
+    class HIT
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?hit_type_id: String,
+        ?hit_group_id: String,
+        ?hit_layout_id: String,
+        ?creation_time: Time,
+        ?title: String,
+        ?description: String,
+        ?question: String,
+        ?keywords: String,
+        ?hit_status: String,
+        ?max_assignments: Integer,
+        ?reward: String,
+        ?auto_approval_delay_in_seconds: Integer,
+        ?expiration: Time,
+        ?assignment_duration_in_seconds: Integer,
+        ?requester_annotation: String,
+        ?qualification_requirements: Array[Types::QualificationRequirement],
+        ?hit_review_status: String,
+        ?number_of_assignments_pending: Integer,
+        ?number_of_assignments_available: Integer,
+        ?number_of_assignments_completed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor hit_type_id: String?
+      attr_accessor hit_group_id: String?
+      attr_accessor hit_layout_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor question: String?
+      attr_accessor keywords: String?
+      attr_accessor hit_status: String?
+      attr_accessor max_assignments: Integer?
+      attr_accessor reward: String?
+      attr_accessor auto_approval_delay_in_seconds: Integer?
+      attr_accessor expiration: Time?
+      attr_accessor assignment_duration_in_seconds: Integer?
+      attr_accessor requester_annotation: String?
+      attr_accessor qualification_requirements: Array[Types::QualificationRequirement]?
+      attr_accessor hit_review_status: String?
+      attr_accessor number_of_assignments_pending: Integer?
+      attr_accessor number_of_assignments_available: Integer?
+      attr_accessor number_of_assignments_completed: Integer?
+    end
+
+    module HITAccessActions
+      Accept: String
+      PreviewAndAccept: String
+      DiscoverPreviewAndAccept: String
+    end
+
+    class HITLayoutParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module HITReviewStatus
+      NotReviewed: String
+      MarkedForReview: String
+      ReviewedAppropriate: String
+      ReviewedInappropriate: String
+    end
+
+    module HITStatus
+      Assignable: String
+      Unassignable: String
+      Reviewable: String
+      Reviewing: String
+      Disposed: String
+    end
+
+    class ListAssignmentsForHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assignment_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assignment_statuses: Array[String]?
+    end
+
+    class ListAssignmentsForHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?assignments: Array[Types::Assignment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor assignments: Array[Types::Assignment]?
+    end
+
+    class ListBonusPaymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?assignment_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor assignment_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBonusPaymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_results: Integer,
+        ?next_token: String,
+        ?bonus_payments: Array[Types::BonusPayment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor bonus_payments: Array[Types::BonusPayment]?
+    end
+
+    class ListHITsForQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListHITsForQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?hi_ts: Array[Types::HIT],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor hi_ts: Array[Types::HIT]?
+    end
+
+    class ListHITsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListHITsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?hi_ts: Array[Types::HIT],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor hi_ts: Array[Types::HIT]?
+    end
+
+    class ListQualificationRequestsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQualificationRequestsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_results: Integer,
+        ?next_token: String,
+        ?qualification_requests: Array[Types::QualificationRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor qualification_requests: Array[Types::QualificationRequest]?
+    end
+
+    class ListQualificationTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query: String,
+        ?must_be_requestable: bool,
+        ?must_be_owned_by_caller: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: String?
+      attr_accessor must_be_requestable: bool?
+      attr_accessor must_be_owned_by_caller: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQualificationTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_results: Integer,
+        ?next_token: String,
+        ?qualification_types: Array[Types::QualificationType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor qualification_types: Array[Types::QualificationType]?
+    end
+
+    class ListReviewPolicyResultsForHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?policy_levels: Array[String],
+        ?retrieve_actions: bool,
+        ?retrieve_results: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor policy_levels: Array[String]?
+      attr_accessor retrieve_actions: bool?
+      attr_accessor retrieve_results: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReviewPolicyResultsForHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?assignment_review_policy: Types::ReviewPolicy,
+        ?hit_review_policy: Types::ReviewPolicy,
+        ?assignment_review_report: Types::ReviewReport,
+        ?hit_review_report: Types::ReviewReport,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor assignment_review_policy: Types::ReviewPolicy?
+      attr_accessor hit_review_policy: Types::ReviewPolicy?
+      attr_accessor assignment_review_report: Types::ReviewReport?
+      attr_accessor hit_review_report: Types::ReviewReport?
+      attr_accessor next_token: String?
+    end
+
+    class ListReviewableHITsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_type_id: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_type_id: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReviewableHITsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?hi_ts: Array[Types::HIT],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor hi_ts: Array[Types::HIT]?
+    end
+
+    class ListWorkerBlocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkerBlocksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?worker_blocks: Array[Types::WorkerBlock],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor worker_blocks: Array[Types::WorkerBlock]?
+    end
+
+    class ListWorkersWithQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkersWithQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?num_results: Integer,
+        ?qualifications: Array[Types::Qualification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor num_results: Integer?
+      attr_accessor qualifications: Array[Types::Qualification]?
+    end
+
+    class Locale
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?subdivision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor subdivision: String?
+    end
+
+    class NotificationSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?transport: String,
+        ?version: String,
+        ?event_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor transport: String?
+      attr_accessor version: String?
+      attr_accessor event_types: Array[String]?
+    end
+
+    module NotificationTransport
+      Email: String
+      SQS: String
+      SNS: String
+    end
+
+    module NotifyWorkersFailureCode
+      SoftFailure: String
+      HardFailure: String
+    end
+
+    class NotifyWorkersFailureStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_workers_failure_code: String,
+        ?notify_workers_failure_message: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_workers_failure_code: String?
+      attr_accessor notify_workers_failure_message: String?
+      attr_accessor worker_id: String?
+    end
+
+    class NotifyWorkersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: String,
+        ?message_text: String,
+        ?worker_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: String?
+      attr_accessor message_text: String?
+      attr_accessor worker_ids: Array[String]?
+    end
+
+    class NotifyWorkersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_workers_failure_statuses: Array[Types::NotifyWorkersFailureStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_workers_failure_statuses: Array[Types::NotifyWorkersFailureStatus]?
+    end
+
+    class ParameterMapEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class PolicyParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?map_entries: Array[Types::ParameterMapEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor map_entries: Array[Types::ParameterMapEntry]?
+    end
+
+    class Qualification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?worker_id: String,
+        ?grant_time: Time,
+        ?integer_value: Integer,
+        ?locale_value: Types::Locale,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor grant_time: Time?
+      attr_accessor integer_value: Integer?
+      attr_accessor locale_value: Types::Locale?
+      attr_accessor status: String?
+    end
+
+    class QualificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_request_id: String,
+        ?qualification_type_id: String,
+        ?worker_id: String,
+        ?test: String,
+        ?answer: String,
+        ?submit_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_request_id: String?
+      attr_accessor qualification_type_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor test: String?
+      attr_accessor answer: String?
+      attr_accessor submit_time: Time?
+    end
+
+    class QualificationRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?comparator: String,
+        ?integer_values: Array[Integer],
+        ?locale_values: Array[Types::Locale],
+        ?required_to_preview: bool,
+        ?actions_guarded: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor comparator: String?
+      attr_accessor integer_values: Array[Integer]?
+      attr_accessor locale_values: Array[Types::Locale]?
+      attr_accessor required_to_preview: bool?
+      attr_accessor actions_guarded: String?
+    end
+
+    module QualificationStatus
+      Granted: String
+      Revoked: String
+    end
+
+    class QualificationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?creation_time: Time,
+        ?name: String,
+        ?description: String,
+        ?keywords: String,
+        ?qualification_type_status: String,
+        ?test: String,
+        ?test_duration_in_seconds: Integer,
+        ?answer_key: String,
+        ?retry_delay_in_seconds: Integer,
+        ?is_requestable: bool,
+        ?auto_granted: bool,
+        ?auto_granted_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor keywords: String?
+      attr_accessor qualification_type_status: String?
+      attr_accessor test: String?
+      attr_accessor test_duration_in_seconds: Integer?
+      attr_accessor answer_key: String?
+      attr_accessor retry_delay_in_seconds: Integer?
+      attr_accessor is_requestable: bool?
+      attr_accessor auto_granted: bool?
+      attr_accessor auto_granted_value: Integer?
+    end
+
+    module QualificationTypeStatus
+      Active: String
+      Inactive: String
+    end
+
+    class RejectAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_id: String,
+        ?requester_feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_id: String?
+      attr_accessor requester_feedback: String?
+    end
+
+    class RejectAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RejectQualificationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_request_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_request_id: String?
+      attr_accessor reason: String?
+    end
+
+    class RejectQualificationRequestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RequestError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?turk_error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor turk_error_code: String?
+    end
+
+    class ReviewActionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_name: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?status: String,
+        ?complete_time: Time,
+        ?result: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_name: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor status: String?
+      attr_accessor complete_time: Time?
+      attr_accessor result: String?
+      attr_accessor error_code: String?
+    end
+
+    module ReviewActionStatus
+      Intended: String
+      Succeeded: String
+      Failed: String
+      Cancelled: String
+    end
+
+    class ReviewPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?parameters: Array[Types::PolicyParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor parameters: Array[Types::PolicyParameter]?
+    end
+
+    module ReviewPolicyLevel
+      Assignment: String
+      HIT: String
+    end
+
+    class ReviewReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?review_results: Array[Types::ReviewResultDetail],
+        ?review_actions: Array[Types::ReviewActionDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor review_results: Array[Types::ReviewResultDetail]?
+      attr_accessor review_actions: Array[Types::ReviewActionDetail]?
+    end
+
+    class ReviewResultDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?subject_id: String,
+        ?subject_type: String,
+        ?question_id: String,
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor subject_id: String?
+      attr_accessor subject_type: String?
+      attr_accessor question_id: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module ReviewableHITStatus
+      Reviewable: String
+      Reviewing: String
+    end
+
+    class SendBonusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?bonus_amount: String,
+        ?assignment_id: String,
+        ?reason: String,
+        ?unique_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor bonus_amount: String?
+      attr_accessor assignment_id: String?
+      attr_accessor reason: String?
+      attr_accessor unique_request_token: String?
+    end
+
+    class SendBonusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SendTestEventNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification: Types::NotificationSpecification,
+        ?test_event_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification: Types::NotificationSpecification?
+      attr_accessor test_event_type: String?
+    end
+
+    class SendTestEventNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?turk_error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor turk_error_code: String?
+    end
+
+    class UpdateExpirationForHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?expire_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor expire_at: Time?
+    end
+
+    class UpdateExpirationForHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateHITReviewStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?revert: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor revert: bool?
+    end
+
+    class UpdateHITReviewStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateHITTypeOfHITRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_id: String,
+        ?hit_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_id: String?
+      attr_accessor hit_type_id: String?
+    end
+
+    class UpdateHITTypeOfHITResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNotificationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hit_type_id: String,
+        ?notification: Types::NotificationSpecification,
+        ?active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hit_type_id: String?
+      attr_accessor notification: Types::NotificationSpecification?
+      attr_accessor active: bool?
+    end
+
+    class UpdateNotificationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateQualificationTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type_id: String,
+        ?description: String,
+        ?qualification_type_status: String,
+        ?test: String,
+        ?answer_key: String,
+        ?test_duration_in_seconds: Integer,
+        ?retry_delay_in_seconds: Integer,
+        ?auto_granted: bool,
+        ?auto_granted_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type_id: String?
+      attr_accessor description: String?
+      attr_accessor qualification_type_status: String?
+      attr_accessor test: String?
+      attr_accessor answer_key: String?
+      attr_accessor test_duration_in_seconds: Integer?
+      attr_accessor retry_delay_in_seconds: Integer?
+      attr_accessor auto_granted: bool?
+      attr_accessor auto_granted_value: Integer?
+    end
+
+    class UpdateQualificationTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_type: Types::QualificationType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_type: Types::QualificationType?
+    end
+
+    class WorkerBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor reason: String?
+    end
+  end
+end

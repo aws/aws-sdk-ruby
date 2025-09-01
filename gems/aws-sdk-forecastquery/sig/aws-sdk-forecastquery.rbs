@@ -1,0 +1,5 @@
+  module Aws
+    module Forecastquery
+      VERSION: String
+    end
+  end

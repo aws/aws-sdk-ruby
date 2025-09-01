@@ -1,0 +1,1082 @@
+module Aws::Proton
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Proton::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::AcceptEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def accept_environment_account_connection: (
+      ?id: String
+    ) -> _AcceptEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptEnvironmentAccountConnectionResponse
+
+    interface _CancelComponentDeploymentResponse
+      include Smithy::Client::_Response[Types::CancelComponentDeploymentOperationOutput]
+      def component: () -> Types::Component?
+    end
+    def cancel_component_deployment: (
+      ?component_name: String
+    ) -> _CancelComponentDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelComponentDeploymentResponse
+
+    interface _CancelEnvironmentDeploymentResponse
+      include Smithy::Client::_Response[Types::CancelEnvironmentDeploymentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def cancel_environment_deployment: (
+      ?environment_name: String
+    ) -> _CancelEnvironmentDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelEnvironmentDeploymentResponse
+
+    interface _CancelServiceInstanceDeploymentResponse
+      include Smithy::Client::_Response[Types::CancelServiceInstanceDeploymentOperationOutput]
+      def service_instance: () -> Types::ServiceInstance?
+    end
+    def cancel_service_instance_deployment: (
+      ?service_instance_name: String,
+      ?service_name: String
+    ) -> _CancelServiceInstanceDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelServiceInstanceDeploymentResponse
+
+    interface _CancelServicePipelineDeploymentResponse
+      include Smithy::Client::_Response[Types::CancelServicePipelineDeploymentOperationOutput]
+      def pipeline: () -> Types::ServicePipeline?
+    end
+    def cancel_service_pipeline_deployment: (
+      ?service_name: String
+    ) -> _CancelServicePipelineDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelServicePipelineDeploymentResponse
+
+    interface _CreateComponentResponse
+      include Smithy::Client::_Response[Types::CreateComponentOperationOutput]
+      def component: () -> Types::Component?
+    end
+    def create_component: (
+      ?name: String,
+      ?description: String,
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?environment_name: String,
+      ?template_file: String,
+      ?manifest: String,
+      ?service_spec: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentResponse
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def create_environment: (
+      ?name: String,
+      ?template_name: String,
+      ?template_major_version: String,
+      ?template_minor_version: String,
+      ?description: String,
+      ?spec: String,
+      ?proton_service_role_arn: String,
+      ?environment_account_connection_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?provisioning_repository: {
+        provider: String,
+        name: String,
+        branch: String
+      },
+      ?component_role_arn: String,
+      ?codebuild_role_arn: String
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def create_environment_account_connection: (
+      ?client_token: String,
+      ?management_account_id: String,
+      ?role_arn: String,
+      ?environment_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?component_role_arn: String,
+      ?codebuild_role_arn: String
+    ) -> _CreateEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentAccountConnectionResponse
+
+    interface _CreateEnvironmentTemplateResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentTemplateOperationOutput]
+      def environment_template: () -> Types::EnvironmentTemplate?
+    end
+    def create_environment_template: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?encryption_key: String,
+      ?provisioning: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateEnvironmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentTemplateResponse
+
+    interface _CreateEnvironmentTemplateVersionResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentTemplateVersionOperationOutput]
+      def environment_template_version: () -> Types::EnvironmentTemplateVersion?
+    end
+    def create_environment_template_version: (
+      ?client_token: String,
+      ?template_name: String,
+      ?description: String,
+      ?major_version: String,
+      ?source: {
+        s3: {
+          bucket: String,
+          key: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateEnvironmentTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentTemplateVersionResponse
+
+    interface _CreateRepositoryResponse
+      include Smithy::Client::_Response[Types::CreateRepositoryOperationOutput]
+      def repository: () -> Types::Repository?
+    end
+    def create_repository: (
+      ?provider: String,
+      ?name: String,
+      ?connection_arn: String,
+      ?encryption_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRepositoryResponse
+
+    interface _CreateServiceResponse
+      include Smithy::Client::_Response[Types::CreateServiceOperationOutput]
+      def service: () -> Types::Service?
+    end
+    def create_service: (
+      ?name: String,
+      ?description: String,
+      ?template_name: String,
+      ?template_major_version: String,
+      ?template_minor_version: String,
+      ?spec: String,
+      ?repository_connection_arn: String,
+      ?repository_id: String,
+      ?branch_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
+
+    interface _CreateServiceInstanceResponse
+      include Smithy::Client::_Response[Types::CreateServiceInstanceOperationOutput]
+      def service_instance: () -> Types::ServiceInstance?
+    end
+    def create_service_instance: (
+      ?name: String,
+      ?service_name: String,
+      ?spec: String,
+      ?template_major_version: String,
+      ?template_minor_version: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateServiceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceInstanceResponse
+
+    interface _CreateServiceSyncConfigResponse
+      include Smithy::Client::_Response[Types::CreateServiceSyncConfigOperationOutput]
+      def service_sync_config: () -> Types::ServiceSyncConfig?
+    end
+    def create_service_sync_config: (
+      ?service_name: String,
+      ?repository_provider: String,
+      ?repository_name: String,
+      ?branch: String,
+      ?file_path: String
+    ) -> _CreateServiceSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceSyncConfigResponse
+
+    interface _CreateServiceTemplateResponse
+      include Smithy::Client::_Response[Types::CreateServiceTemplateOperationOutput]
+      def service_template: () -> Types::ServiceTemplate?
+    end
+    def create_service_template: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?encryption_key: String,
+      ?pipeline_provisioning: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateServiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceTemplateResponse
+
+    interface _CreateServiceTemplateVersionResponse
+      include Smithy::Client::_Response[Types::CreateServiceTemplateVersionOperationOutput]
+      def service_template_version: () -> Types::ServiceTemplateVersion?
+    end
+    def create_service_template_version: (
+      ?client_token: String,
+      ?template_name: String,
+      ?description: String,
+      ?major_version: String,
+      ?source: {
+        s3: {
+          bucket: String,
+          key: String
+        }
+      },
+      ?compatible_environment_templates: Array[
+        {
+          template_name: String,
+          major_version: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?supported_component_sources: Array[String]
+    ) -> _CreateServiceTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceTemplateVersionResponse
+
+    interface _CreateTemplateSyncConfigResponse
+      include Smithy::Client::_Response[Types::CreateTemplateSyncConfigOperationOutput]
+      def template_sync_config: () -> Types::TemplateSyncConfig?
+    end
+    def create_template_sync_config: (
+      ?template_name: String,
+      ?template_type: String,
+      ?repository_provider: String,
+      ?repository_name: String,
+      ?branch: String,
+      ?subdirectory: String
+    ) -> _CreateTemplateSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateSyncConfigResponse
+
+    interface _DeleteComponentResponse
+      include Smithy::Client::_Response[Types::DeleteComponentOperationOutput]
+      def component: () -> Types::Component?
+    end
+    def delete_component: (
+      ?name: String
+    ) -> _DeleteComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComponentResponse
+
+    interface _DeleteDeploymentResponse
+      include Smithy::Client::_Response[Types::DeleteDeploymentOutput]
+      def deployment: () -> Types::Deployment?
+    end
+    def delete_deployment: (
+      ?id: String
+    ) -> _DeleteDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def delete_environment: (
+      ?name: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def delete_environment_account_connection: (
+      ?id: String
+    ) -> _DeleteEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentAccountConnectionResponse
+
+    interface _DeleteEnvironmentTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentTemplateOperationOutput]
+      def environment_template: () -> Types::EnvironmentTemplate?
+    end
+    def delete_environment_template: (
+      ?name: String
+    ) -> _DeleteEnvironmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentTemplateResponse
+
+    interface _DeleteEnvironmentTemplateVersionResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentTemplateVersionOperationOutput]
+      def environment_template_version: () -> Types::EnvironmentTemplateVersion?
+    end
+    def delete_environment_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String
+    ) -> _DeleteEnvironmentTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentTemplateVersionResponse
+
+    interface _DeleteRepositoryResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryOperationOutput]
+      def repository: () -> Types::Repository?
+    end
+    def delete_repository: (
+      ?provider: String,
+      ?name: String
+    ) -> _DeleteRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryResponse
+
+    interface _DeleteServiceResponse
+      include Smithy::Client::_Response[Types::DeleteServiceOperationOutput]
+      def service: () -> Types::Service?
+    end
+    def delete_service: (
+      ?name: String
+    ) -> _DeleteServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceResponse
+
+    interface _DeleteServiceSyncConfigResponse
+      include Smithy::Client::_Response[Types::DeleteServiceSyncConfigOperationOutput]
+      def service_sync_config: () -> Types::ServiceSyncConfig?
+    end
+    def delete_service_sync_config: (
+      ?service_name: String
+    ) -> _DeleteServiceSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceSyncConfigResponse
+
+    interface _DeleteServiceTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteServiceTemplateOperationOutput]
+      def service_template: () -> Types::ServiceTemplate?
+    end
+    def delete_service_template: (
+      ?name: String
+    ) -> _DeleteServiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceTemplateResponse
+
+    interface _DeleteServiceTemplateVersionResponse
+      include Smithy::Client::_Response[Types::DeleteServiceTemplateVersionOperationOutput]
+      def service_template_version: () -> Types::ServiceTemplateVersion?
+    end
+    def delete_service_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String
+    ) -> _DeleteServiceTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceTemplateVersionResponse
+
+    interface _DeleteTemplateSyncConfigResponse
+      include Smithy::Client::_Response[Types::DeleteTemplateSyncConfigOperationOutput]
+      def template_sync_config: () -> Types::TemplateSyncConfig?
+    end
+    def delete_template_sync_config: (
+      ?template_name: String,
+      ?template_type: String
+    ) -> _DeleteTemplateSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateSyncConfigResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsOperationOutput]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetComponentResponse
+      include Smithy::Client::_Response[Types::GetComponentOperationOutput]
+      def component: () -> Types::Component?
+    end
+    def get_component: (
+      ?name: String
+    ) -> _GetComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentOutput]
+      def deployment: () -> Types::Deployment?
+    end
+    def get_deployment: (
+      ?id: String,
+      ?environment_name: String,
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?component_name: String
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def get_environment: (
+      ?name: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def get_environment_account_connection: (
+      ?id: String
+    ) -> _GetEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentAccountConnectionResponse
+
+    interface _GetEnvironmentTemplateResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentTemplateOperationOutput]
+      def environment_template: () -> Types::EnvironmentTemplate?
+    end
+    def get_environment_template: (
+      ?name: String
+    ) -> _GetEnvironmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentTemplateResponse
+
+    interface _GetEnvironmentTemplateVersionResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentTemplateVersionOperationOutput]
+      def environment_template_version: () -> Types::EnvironmentTemplateVersion?
+    end
+    def get_environment_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String
+    ) -> _GetEnvironmentTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentTemplateVersionResponse
+
+    interface _GetRepositoryResponse
+      include Smithy::Client::_Response[Types::GetRepositoryOperationOutput]
+      def repository: () -> Types::Repository?
+    end
+    def get_repository: (
+      ?provider: String,
+      ?name: String
+    ) -> _GetRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryResponse
+
+    interface _GetRepositorySyncStatusResponse
+      include Smithy::Client::_Response[Types::GetRepositorySyncStatusOperationOutput]
+      def latest_sync: () -> Types::RepositorySyncAttempt?
+    end
+    def get_repository_sync_status: (
+      ?repository_name: String,
+      ?repository_provider: String,
+      ?branch: String,
+      ?sync_type: String
+    ) -> _GetRepositorySyncStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositorySyncStatusResponse
+
+    interface _GetResourcesSummaryResponse
+      include Smithy::Client::_Response[Types::GetResourcesSummaryOperationOutput]
+      def counts: () -> Types::CountsSummary?
+    end
+    def get_resources_summary: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcesSummaryResponse
+
+    interface _GetServiceResponse
+      include Smithy::Client::_Response[Types::GetServiceOperationOutput]
+      def service: () -> Types::Service?
+    end
+    def get_service: (
+      ?name: String
+    ) -> _GetServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceResponse
+
+    interface _GetServiceInstanceResponse
+      include Smithy::Client::_Response[Types::GetServiceInstanceOperationOutput]
+      def service_instance: () -> Types::ServiceInstance?
+    end
+    def get_service_instance: (
+      ?name: String,
+      ?service_name: String
+    ) -> _GetServiceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceInstanceResponse
+
+    interface _GetServiceInstanceSyncStatusResponse
+      include Smithy::Client::_Response[Types::GetServiceInstanceSyncStatusOperationOutput]
+      def latest_sync: () -> Types::ResourceSyncAttempt?
+      def latest_successful_sync: () -> Types::ResourceSyncAttempt?
+      def desired_state: () -> Types::Revision?
+    end
+    def get_service_instance_sync_status: (
+      ?service_name: String,
+      ?service_instance_name: String
+    ) -> _GetServiceInstanceSyncStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceInstanceSyncStatusResponse
+
+    interface _GetServiceSyncBlockerSummaryResponse
+      include Smithy::Client::_Response[Types::GetServiceSyncBlockerSummaryOperationOutput]
+      def service_sync_blocker_summary: () -> Types::ServiceSyncBlockerSummary?
+    end
+    def get_service_sync_blocker_summary: (
+      ?service_name: String,
+      ?service_instance_name: String
+    ) -> _GetServiceSyncBlockerSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSyncBlockerSummaryResponse
+
+    interface _GetServiceSyncConfigResponse
+      include Smithy::Client::_Response[Types::GetServiceSyncConfigOperationOutput]
+      def service_sync_config: () -> Types::ServiceSyncConfig?
+    end
+    def get_service_sync_config: (
+      ?service_name: String
+    ) -> _GetServiceSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSyncConfigResponse
+
+    interface _GetServiceTemplateResponse
+      include Smithy::Client::_Response[Types::GetServiceTemplateOperationOutput]
+      def service_template: () -> Types::ServiceTemplate?
+    end
+    def get_service_template: (
+      ?name: String
+    ) -> _GetServiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceTemplateResponse
+
+    interface _GetServiceTemplateVersionResponse
+      include Smithy::Client::_Response[Types::GetServiceTemplateVersionOperationOutput]
+      def service_template_version: () -> Types::ServiceTemplateVersion?
+    end
+    def get_service_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String
+    ) -> _GetServiceTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceTemplateVersionResponse
+
+    interface _GetTemplateSyncConfigResponse
+      include Smithy::Client::_Response[Types::GetTemplateSyncConfigOperationOutput]
+      def template_sync_config: () -> Types::TemplateSyncConfig?
+    end
+    def get_template_sync_config: (
+      ?template_name: String,
+      ?template_type: String
+    ) -> _GetTemplateSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateSyncConfigResponse
+
+    interface _GetTemplateSyncStatusResponse
+      include Smithy::Client::_Response[Types::GetTemplateSyncStatusOperationOutput]
+      def latest_sync: () -> Types::ResourceSyncAttempt?
+      def latest_successful_sync: () -> Types::ResourceSyncAttempt?
+      def desired_state: () -> Types::Revision?
+    end
+    def get_template_sync_status: (
+      ?template_name: String,
+      ?template_type: String,
+      ?template_version: String
+    ) -> _GetTemplateSyncStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateSyncStatusResponse
+
+    interface _ListComponentOutputsResponse
+      include Smithy::Client::_Response[Types::ListComponentOutputsOperationOutput]
+      def next_token: () -> String?
+      def outputs: () -> Array[Types::Output]?
+    end
+    def list_component_outputs: (
+      ?component_name: String,
+      ?next_token: String,
+      ?deployment_id: String
+    ) -> _ListComponentOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentOutputsResponse
+
+    interface _ListComponentProvisionedResourcesResponse
+      include Smithy::Client::_Response[Types::ListComponentProvisionedResourcesOperationOutput]
+      def next_token: () -> String?
+      def provisioned_resources: () -> Array[Types::ProvisionedResource]?
+    end
+    def list_component_provisioned_resources: (
+      ?component_name: String,
+      ?next_token: String
+    ) -> _ListComponentProvisionedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentProvisionedResourcesResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsOperationOutput]
+      def next_token: () -> String?
+      def components: () -> Array[Types::ComponentSummary]?
+    end
+    def list_components: (
+      ?next_token: String,
+      ?environment_name: String,
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?max_results: Integer
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsOutput]
+      def next_token: () -> String?
+      def deployments: () -> Array[Types::DeploymentSummary]?
+    end
+    def list_deployments: (
+      ?next_token: String,
+      ?environment_name: String,
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?component_name: String,
+      ?max_results: Integer
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListEnvironmentAccountConnectionsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentAccountConnectionsOperationOutput]
+      def environment_account_connections: () -> Array[Types::EnvironmentAccountConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_environment_account_connections: (
+      ?requested_by: String,
+      ?environment_name: String,
+      ?statuses: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentAccountConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentAccountConnectionsResponse
+
+    interface _ListEnvironmentOutputsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentOutputsOperationOutput]
+      def next_token: () -> String?
+      def outputs: () -> Array[Types::Output]?
+    end
+    def list_environment_outputs: (
+      ?environment_name: String,
+      ?next_token: String,
+      ?deployment_id: String
+    ) -> _ListEnvironmentOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentOutputsResponse
+
+    interface _ListEnvironmentProvisionedResourcesResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentProvisionedResourcesOperationOutput]
+      def next_token: () -> String?
+      def provisioned_resources: () -> Array[Types::ProvisionedResource]?
+    end
+    def list_environment_provisioned_resources: (
+      ?environment_name: String,
+      ?next_token: String
+    ) -> _ListEnvironmentProvisionedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentProvisionedResourcesResponse
+
+    interface _ListEnvironmentTemplateVersionsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentTemplateVersionsOperationOutput]
+      def next_token: () -> String?
+      def template_versions: () -> Array[Types::EnvironmentTemplateVersionSummary]?
+    end
+    def list_environment_template_versions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?template_name: String,
+      ?major_version: String
+    ) -> _ListEnvironmentTemplateVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentTemplateVersionsResponse
+
+    interface _ListEnvironmentTemplatesResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentTemplatesOperationOutput]
+      def next_token: () -> String?
+      def templates: () -> Array[Types::EnvironmentTemplateSummary]?
+    end
+    def list_environment_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentTemplatesResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsOperationOutput]
+      def next_token: () -> String?
+      def environments: () -> Array[Types::EnvironmentSummary]?
+    end
+    def list_environments: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?environment_templates: Array[
+        {
+          template_name: String,
+          major_version: String
+        }
+      ]
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListRepositoriesResponse
+      include Smithy::Client::_Response[Types::ListRepositoriesOperationOutput]
+      def next_token: () -> String?
+      def repositories: () -> Array[Types::RepositorySummary]?
+    end
+    def list_repositories: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoriesResponse
+
+    interface _ListRepositorySyncDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListRepositorySyncDefinitionsOperationOutput]
+      def next_token: () -> String?
+      def sync_definitions: () -> Array[Types::RepositorySyncDefinition]?
+    end
+    def list_repository_sync_definitions: (
+      ?repository_name: String,
+      ?repository_provider: String,
+      ?sync_type: String,
+      ?next_token: String
+    ) -> _ListRepositorySyncDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositorySyncDefinitionsResponse
+
+    interface _ListServiceInstanceOutputsResponse
+      include Smithy::Client::_Response[Types::ListServiceInstanceOutputsOperationOutput]
+      def next_token: () -> String?
+      def outputs: () -> Array[Types::Output]?
+    end
+    def list_service_instance_outputs: (
+      ?service_instance_name: String,
+      ?service_name: String,
+      ?next_token: String,
+      ?deployment_id: String
+    ) -> _ListServiceInstanceOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceInstanceOutputsResponse
+
+    interface _ListServiceInstanceProvisionedResourcesResponse
+      include Smithy::Client::_Response[Types::ListServiceInstanceProvisionedResourcesOperationOutput]
+      def next_token: () -> String?
+      def provisioned_resources: () -> Array[Types::ProvisionedResource]?
+    end
+    def list_service_instance_provisioned_resources: (
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?next_token: String
+    ) -> _ListServiceInstanceProvisionedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceInstanceProvisionedResourcesResponse
+
+    interface _ListServiceInstancesResponse
+      include Smithy::Client::_Response[Types::ListServiceInstancesOperationOutput]
+      def next_token: () -> String?
+      def service_instances: () -> Array[Types::ServiceInstanceSummary]?
+    end
+    def list_service_instances: (
+      ?service_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListServiceInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceInstancesResponse
+
+    interface _ListServicePipelineOutputsResponse
+      include Smithy::Client::_Response[Types::ListServicePipelineOutputsOperationOutput]
+      def next_token: () -> String?
+      def outputs: () -> Array[Types::Output]?
+    end
+    def list_service_pipeline_outputs: (
+      ?service_name: String,
+      ?next_token: String,
+      ?deployment_id: String
+    ) -> _ListServicePipelineOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicePipelineOutputsResponse
+
+    interface _ListServicePipelineProvisionedResourcesResponse
+      include Smithy::Client::_Response[Types::ListServicePipelineProvisionedResourcesOperationOutput]
+      def next_token: () -> String?
+      def provisioned_resources: () -> Array[Types::ProvisionedResource]?
+    end
+    def list_service_pipeline_provisioned_resources: (
+      ?service_name: String,
+      ?next_token: String
+    ) -> _ListServicePipelineProvisionedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicePipelineProvisionedResourcesResponse
+
+    interface _ListServiceTemplateVersionsResponse
+      include Smithy::Client::_Response[Types::ListServiceTemplateVersionsOperationOutput]
+      def next_token: () -> String?
+      def template_versions: () -> Array[Types::ServiceTemplateVersionSummary]?
+    end
+    def list_service_template_versions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?template_name: String,
+      ?major_version: String
+    ) -> _ListServiceTemplateVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceTemplateVersionsResponse
+
+    interface _ListServiceTemplatesResponse
+      include Smithy::Client::_Response[Types::ListServiceTemplatesOperationOutput]
+      def next_token: () -> String?
+      def templates: () -> Array[Types::ServiceTemplateSummary]?
+    end
+    def list_service_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServiceTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceTemplatesResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesOperationOutput]
+      def next_token: () -> String?
+      def services: () -> Array[Types::ServiceSummary]?
+    end
+    def list_services: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _NotifyResourceDeploymentStatusChangeResponse
+      include Smithy::Client::_Response[Types::NotifyResourceDeploymentStatusChangeOperationOutput]
+    end
+    def notify_resource_deployment_status_change: (
+      ?resource_arn: String,
+      ?status: String,
+      ?outputs: Array[
+        {
+          key: String,
+          value_string: String
+        }
+      ],
+      ?deployment_id: String,
+      ?status_message: String
+    ) -> _NotifyResourceDeploymentStatusChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyResourceDeploymentStatusChangeResponse
+
+    interface _RejectEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::RejectEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def reject_environment_account_connection: (
+      ?id: String
+    ) -> _RejectEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectEnvironmentAccountConnectionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsOperationOutput]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def update_account_settings: (
+      ?pipeline_service_role_arn: String,
+      ?pipeline_provisioning_repository: {
+        provider: String,
+        name: String,
+        branch: String
+      },
+      ?delete_pipeline_provisioning_repository: bool,
+      ?pipeline_codebuild_role_arn: String
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateComponentResponse
+      include Smithy::Client::_Response[Types::UpdateComponentOperationOutput]
+      def component: () -> Types::Component?
+    end
+    def update_component: (
+      ?name: String,
+      ?deployment_type: String,
+      ?description: String,
+      ?service_name: String,
+      ?service_instance_name: String,
+      ?service_spec: String,
+      ?template_file: String,
+      ?client_token: String
+    ) -> _UpdateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComponentResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def update_environment: (
+      ?name: String,
+      ?description: String,
+      ?spec: String,
+      ?template_major_version: String,
+      ?template_minor_version: String,
+      ?proton_service_role_arn: String,
+      ?deployment_type: String,
+      ?environment_account_connection_id: String,
+      ?provisioning_repository: {
+        provider: String,
+        name: String,
+        branch: String
+      },
+      ?component_role_arn: String,
+      ?codebuild_role_arn: String
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+
+    interface _UpdateEnvironmentAccountConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentAccountConnectionOperationOutput]
+      def environment_account_connection: () -> Types::EnvironmentAccountConnection?
+    end
+    def update_environment_account_connection: (
+      ?id: String,
+      ?role_arn: String,
+      ?component_role_arn: String,
+      ?codebuild_role_arn: String
+    ) -> _UpdateEnvironmentAccountConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentAccountConnectionResponse
+
+    interface _UpdateEnvironmentTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentTemplateOperationOutput]
+      def environment_template: () -> Types::EnvironmentTemplate?
+    end
+    def update_environment_template: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String
+    ) -> _UpdateEnvironmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentTemplateResponse
+
+    interface _UpdateEnvironmentTemplateVersionResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentTemplateVersionOperationOutput]
+      def environment_template_version: () -> Types::EnvironmentTemplateVersion?
+    end
+    def update_environment_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String,
+      ?description: String,
+      ?status: String
+    ) -> _UpdateEnvironmentTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentTemplateVersionResponse
+
+    interface _UpdateServiceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceOperationOutput]
+      def service: () -> Types::Service?
+    end
+    def update_service: (
+      ?name: String,
+      ?description: String,
+      ?spec: String
+    ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
+
+    interface _UpdateServiceInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceInstanceOperationOutput]
+      def service_instance: () -> Types::ServiceInstance?
+    end
+    def update_service_instance: (
+      ?name: String,
+      ?service_name: String,
+      ?deployment_type: String,
+      ?spec: String,
+      ?template_major_version: String,
+      ?template_minor_version: String,
+      ?client_token: String
+    ) -> _UpdateServiceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceInstanceResponse
+
+    interface _UpdateServicePipelineResponse
+      include Smithy::Client::_Response[Types::UpdateServicePipelineOperationOutput]
+      def pipeline: () -> Types::ServicePipeline?
+    end
+    def update_service_pipeline: (
+      ?service_name: String,
+      ?spec: String,
+      ?deployment_type: String,
+      ?template_major_version: String,
+      ?template_minor_version: String
+    ) -> _UpdateServicePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServicePipelineResponse
+
+    interface _UpdateServiceSyncBlockerResponse
+      include Smithy::Client::_Response[Types::UpdateServiceSyncBlockerOperationOutput]
+      def service_name: () -> String?
+      def service_instance_name: () -> String?
+      def service_sync_blocker: () -> Types::SyncBlocker?
+    end
+    def update_service_sync_blocker: (
+      ?id: String,
+      ?resolved_reason: String
+    ) -> _UpdateServiceSyncBlockerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSyncBlockerResponse
+
+    interface _UpdateServiceSyncConfigResponse
+      include Smithy::Client::_Response[Types::UpdateServiceSyncConfigOperationOutput]
+      def service_sync_config: () -> Types::ServiceSyncConfig?
+    end
+    def update_service_sync_config: (
+      ?service_name: String,
+      ?repository_provider: String,
+      ?repository_name: String,
+      ?branch: String,
+      ?file_path: String
+    ) -> _UpdateServiceSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSyncConfigResponse
+
+    interface _UpdateServiceTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateServiceTemplateOperationOutput]
+      def service_template: () -> Types::ServiceTemplate?
+    end
+    def update_service_template: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String
+    ) -> _UpdateServiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceTemplateResponse
+
+    interface _UpdateServiceTemplateVersionResponse
+      include Smithy::Client::_Response[Types::UpdateServiceTemplateVersionOperationOutput]
+      def service_template_version: () -> Types::ServiceTemplateVersion?
+    end
+    def update_service_template_version: (
+      ?template_name: String,
+      ?major_version: String,
+      ?minor_version: String,
+      ?description: String,
+      ?status: String,
+      ?compatible_environment_templates: Array[
+        {
+          template_name: String,
+          major_version: String
+        }
+      ],
+      ?supported_component_sources: Array[String]
+    ) -> _UpdateServiceTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceTemplateVersionResponse
+
+    interface _UpdateTemplateSyncConfigResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateSyncConfigOperationOutput]
+      def template_sync_config: () -> Types::TemplateSyncConfig?
+    end
+    def update_template_sync_config: (
+      ?template_name: String,
+      ?template_type: String,
+      ?repository_provider: String,
+      ?repository_name: String,
+      ?branch: String,
+      ?subdirectory: String
+    ) -> _UpdateTemplateSyncConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateSyncConfigResponse
+  end
+end

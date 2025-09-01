@@ -1,0 +1,1111 @@
+module Aws::MedicalImaging
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CopyDestinationImageSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_id: String,
+        ?latest_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_id: String?
+      attr_accessor latest_version_id: String?
+    end
+
+    class CopyDestinationImageSetProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_id: String,
+        ?latest_version_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?image_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_id: String?
+      attr_accessor latest_version_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor image_set_arn: String?
+    end
+
+    class CopyImageSetInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_image_set: Types::CopySourceImageSetInformation,
+        ?destination_image_set: Types::CopyDestinationImageSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_image_set: Types::CopySourceImageSetInformation?
+      attr_accessor destination_image_set: Types::CopyDestinationImageSet?
+    end
+
+    class CopyImageSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?source_image_set_id: String,
+        ?copy_image_set_information: Types::CopyImageSetInformation,
+        ?force: bool,
+        ?promote_to_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor source_image_set_id: String?
+      attr_accessor copy_image_set_information: Types::CopyImageSetInformation?
+      attr_accessor force: bool?
+      attr_accessor promote_to_primary: bool?
+    end
+
+    class CopyImageSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?source_image_set_properties: Types::CopySourceImageSetProperties,
+        ?destination_image_set_properties: Types::CopyDestinationImageSetProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor source_image_set_properties: Types::CopySourceImageSetProperties?
+      attr_accessor destination_image_set_properties: Types::CopyDestinationImageSetProperties?
+    end
+
+    class CopySourceImageSetInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_version_id: String,
+        ?dicom_copies: Types::MetadataCopies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_version_id: String?
+      attr_accessor dicom_copies: Types::MetadataCopies?
+    end
+
+    class CopySourceImageSetProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_id: String,
+        ?latest_version_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?image_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_id: String?
+      attr_accessor latest_version_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor image_set_arn: String?
+    end
+
+    class CreateDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_status: String?
+    end
+
+    class DICOMImportJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?datastore_id: String,
+        ?data_access_role_arn: String,
+        ?ended_at: Time,
+        ?submitted_at: Time,
+        ?input_s3_uri: String,
+        ?output_s3_uri: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor datastore_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor ended_at: Time?
+      attr_accessor submitted_at: Time?
+      attr_accessor input_s3_uri: String?
+      attr_accessor output_s3_uri: String?
+      attr_accessor message: String?
+    end
+
+    class DICOMImportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?datastore_id: String,
+        ?data_access_role_arn: String,
+        ?ended_at: Time,
+        ?submitted_at: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor datastore_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor ended_at: Time?
+      attr_accessor submitted_at: Time?
+      attr_accessor message: String?
+    end
+
+    class DICOMStudyDateAndTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dicom_study_date: String,
+        ?dicom_study_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_study_date: String?
+      attr_accessor dicom_study_time: String?
+    end
+
+    class DICOMTags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dicom_patient_id: String,
+        ?dicom_patient_name: String,
+        ?dicom_patient_birth_date: String,
+        ?dicom_patient_sex: String,
+        ?dicom_study_instance_uid: String,
+        ?dicom_study_id: String,
+        ?dicom_study_description: String,
+        ?dicom_number_of_study_related_series: Integer,
+        ?dicom_number_of_study_related_instances: Integer,
+        ?dicom_accession_number: String,
+        ?dicom_series_instance_uid: String,
+        ?dicom_series_modality: String,
+        ?dicom_series_body_part: String,
+        ?dicom_series_number: Integer,
+        ?dicom_study_date: String,
+        ?dicom_study_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_patient_id: String?
+      attr_accessor dicom_patient_name: String?
+      attr_accessor dicom_patient_birth_date: String?
+      attr_accessor dicom_patient_sex: String?
+      attr_accessor dicom_study_instance_uid: String?
+      attr_accessor dicom_study_id: String?
+      attr_accessor dicom_study_description: String?
+      attr_accessor dicom_number_of_study_related_series: Integer?
+      attr_accessor dicom_number_of_study_related_instances: Integer?
+      attr_accessor dicom_accession_number: String?
+      attr_accessor dicom_series_instance_uid: String?
+      attr_accessor dicom_series_modality: String?
+      attr_accessor dicom_series_body_part: String?
+      attr_accessor dicom_series_number: Integer?
+      attr_accessor dicom_study_date: String?
+      attr_accessor dicom_study_time: String?
+    end
+
+    class DICOMUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?removable_attributes: String,
+        ?updatable_attributes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor removable_attributes: String?
+      attr_accessor updatable_attributes: String?
+    end
+
+    class DatastoreProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_name: String,
+        ?datastore_status: String,
+        ?kms_key_arn: String,
+        ?datastore_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_name: String?
+      attr_accessor datastore_status: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module DatastoreStatus
+      CREATING: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class DatastoreSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_name: String,
+        ?datastore_status: String,
+        ?datastore_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_name: String?
+      attr_accessor datastore_status: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeleteDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+    end
+
+    class DeleteDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_status: String?
+    end
+
+    class DeleteImageSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+    end
+
+    class DeleteImageSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+    end
+
+    class GetDICOMImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetDICOMImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_properties: Types::DICOMImportJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_properties: Types::DICOMImportJobProperties?
+    end
+
+    class GetDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+    end
+
+    class GetDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_properties: Types::DatastoreProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_properties: Types::DatastoreProperties?
+    end
+
+    class GetImageFrameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?image_frame_information: Types::ImageFrameInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor image_frame_information: Types::ImageFrameInformation?
+    end
+
+    class GetImageFrameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_frame_blob: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_frame_blob: String?
+      attr_accessor content_type: String?
+    end
+
+    class GetImageSetMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor version_id: String?
+    end
+
+    class GetImageSetMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_metadata_blob: String,
+        ?content_type: String,
+        ?content_encoding: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_metadata_blob: String?
+      attr_accessor content_type: String?
+      attr_accessor content_encoding: String?
+    end
+
+    class GetImageSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor version_id: String?
+    end
+
+    class GetImageSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?version_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?deleted_at: Time,
+        ?message: String,
+        ?image_set_arn: String,
+        ?overrides: Types::Overrides,
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor version_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor deleted_at: Time?
+      attr_accessor message: String?
+      attr_accessor image_set_arn: String?
+      attr_accessor overrides: Types::Overrides?
+      attr_accessor is_primary: bool?
+    end
+
+    class ImageFrameInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_frame_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_frame_id: String?
+    end
+
+    class ImageSetProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_id: String,
+        ?version_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?deleted_at: Time,
+        ?message: String,
+        ?overrides: Types::Overrides,
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_id: String?
+      attr_accessor version_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor deleted_at: Time?
+      attr_accessor message: String?
+      attr_accessor overrides: Types::Overrides?
+      attr_accessor is_primary: bool?
+    end
+
+    module ImageSetState
+      ACTIVE: String
+      LOCKED: String
+      DELETED: String
+    end
+
+    module ImageSetWorkflowStatus
+      CREATED: String
+      COPIED: String
+      COPYING: String
+      COPYING_WITH_READ_ONLY_ACCESS: String
+      COPY_FAILED: String
+      UPDATING: String
+      UPDATED: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class ImageSetsMetadataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_id: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?dicom_tags: Types::DICOMTags,
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_id: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor dicom_tags: Types::DICOMTags?
+      attr_accessor is_primary: bool?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class ListDICOMImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?job_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor job_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDICOMImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::DICOMImportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::DICOMImportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatastoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatastoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_summaries: Array[Types::DatastoreSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_summaries: Array[Types::DatastoreSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImageSetVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListImageSetVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_set_properties_list: Array[Types::ImageSetProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_set_properties_list: Array[Types::ImageSetProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MetadataCopies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copiable_attributes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copiable_attributes: String?
+    end
+
+    class MetadataUpdates
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dicom_updates: Types::DICOMUpdates,
+        ?revert_to_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_updates: Types::DICOMUpdates?
+      attr_accessor revert_to_version_id: String?
+
+      class DICOMUpdates < MetadataUpdates
+      end
+      class RevertToVersionId < MetadataUpdates
+      end
+      class Unknown < MetadataUpdates
+      end
+    end
+
+    module Operator
+      EQUAL: String
+      BETWEEN: String
+    end
+
+    class Overrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forced: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forced: bool?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SearchByAttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dicom_patient_id: String,
+        ?dicom_accession_number: String,
+        ?dicom_study_id: String,
+        ?dicom_study_instance_uid: String,
+        ?dicom_series_instance_uid: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?dicom_study_date_and_time: Types::DICOMStudyDateAndTime,
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_patient_id: String?
+      attr_accessor dicom_accession_number: String?
+      attr_accessor dicom_study_id: String?
+      attr_accessor dicom_study_instance_uid: String?
+      attr_accessor dicom_series_instance_uid: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor dicom_study_date_and_time: Types::DICOMStudyDateAndTime?
+      attr_accessor is_primary: bool?
+
+      class DICOMPatientId < SearchByAttributeValue
+      end
+      class DICOMAccessionNumber < SearchByAttributeValue
+      end
+      class DICOMStudyId < SearchByAttributeValue
+      end
+      class DICOMStudyInstanceUID < SearchByAttributeValue
+      end
+      class DICOMSeriesInstanceUID < SearchByAttributeValue
+      end
+      class CreatedAt < SearchByAttributeValue
+      end
+      class UpdatedAt < SearchByAttributeValue
+      end
+      class DICOMStudyDateAndTime < SearchByAttributeValue
+      end
+      class IsPrimary < SearchByAttributeValue
+      end
+      class Unknown < SearchByAttributeValue
+      end
+    end
+
+    class SearchCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::SearchFilter],
+        ?sort: Types::Sort,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::SearchFilter]?
+      attr_accessor sort: Types::Sort?
+    end
+
+    class SearchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[Types::SearchByAttributeValue],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[Types::SearchByAttributeValue]?
+      attr_accessor operator: String?
+    end
+
+    class SearchImageSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?search_criteria: Types::SearchCriteria,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor search_criteria: Types::SearchCriteria?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchImageSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_sets_metadata_summaries: Array[Types::ImageSetsMetadataSummary],
+        ?sort: Types::Sort,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_sets_metadata_summaries: Array[Types::ImageSetsMetadataSummary]?
+      attr_accessor sort: Types::Sort?
+      attr_accessor next_token: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Sort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_field: String?
+    end
+
+    module SortField
+      updatedAt: String
+      createdAt: String
+      DICOMStudyDateAndTime: String
+    end
+
+    module SortOrder
+      ASC: String
+      DESC: String
+    end
+
+    class StartDICOMImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?data_access_role_arn: String,
+        ?client_token: String,
+        ?datastore_id: String,
+        ?input_s3_uri: String,
+        ?output_s3_uri: String,
+        ?input_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor datastore_id: String?
+      attr_accessor input_s3_uri: String?
+      attr_accessor output_s3_uri: String?
+      attr_accessor input_owner_account_id: String?
+    end
+
+    class StartDICOMImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?job_id: String,
+        ?job_status: String,
+        ?submitted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor submitted_at: Time?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateImageSetMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?latest_version_id: String,
+        ?force: bool,
+        ?update_image_set_metadata_updates: Types::MetadataUpdates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor latest_version_id: String?
+      attr_accessor force: bool?
+      attr_accessor update_image_set_metadata_updates: Types::MetadataUpdates?
+    end
+
+    class UpdateImageSetMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?image_set_id: String,
+        ?latest_version_id: String,
+        ?image_set_state: String,
+        ?image_set_workflow_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor image_set_id: String?
+      attr_accessor latest_version_id: String?
+      attr_accessor image_set_state: String?
+      attr_accessor image_set_workflow_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

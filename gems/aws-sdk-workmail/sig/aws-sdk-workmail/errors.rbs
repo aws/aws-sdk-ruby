@@ -1,0 +1,70 @@
+module Aws::WorkMail
+  module Errors
+    class DirectoryInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryServiceAuthenticationFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DirectoryUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EmailAddressInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCustomSesConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPasswordException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MailDomainInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MailDomainNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MailDomainStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NameAvailabilityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReservedNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

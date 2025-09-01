@@ -1,0 +1,4027 @@
+module Aws::Mgn
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?application_aggregated_status: Types::ApplicationAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+        ?wave_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor wave_id: String?
+    end
+
+    class ApplicationAggregatedStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_update_date_time: String,
+        ?health_status: String,
+        ?progress_status: String,
+        ?total_source_servers: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_update_date_time: String?
+      attr_accessor health_status: String?
+      attr_accessor progress_status: String?
+      attr_accessor total_source_servers: Integer?
+    end
+
+    class ArchiveApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class ArchiveApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?application_aggregated_status: Types::ApplicationAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+        ?wave_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor wave_id: String?
+    end
+
+    class ArchiveWaveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class ArchiveWaveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?wave_aggregated_status: Types::WaveAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AssociateApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?application_i_ds: Array[String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor application_i_ds: Array[String]?
+      attr_accessor account_id: String?
+    end
+
+    class AssociateApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateSourceServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?source_server_i_ds: Array[String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor account_id: String?
+    end
+
+    class AssociateSourceServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CPU
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cores: Integer,
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cores: Integer?
+      attr_accessor model_name: String?
+    end
+
+    class ChangeServerLifeCycleStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?life_cycle: Types::ChangeServerLifeCycleStateSourceServerLifecycle,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor life_cycle: Types::ChangeServerLifeCycleStateSourceServerLifecycle?
+      attr_accessor account_id: String?
+    end
+
+    class ChangeServerLifeCycleStateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class ChangeServerLifeCycleStateSourceServerLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?errors: Array[Types::ErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor errors: Array[Types::ErrorDetails]?
+    end
+
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?name: String,
+        ?ssm_instance_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?ssm_command_config: Types::ConnectorSsmCommandConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor ssm_instance_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig?
+    end
+
+    class ConnectorSsmCommandConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_output_enabled: bool,
+        ?output_s3_bucket_name: String,
+        ?cloud_watch_output_enabled: bool,
+        ?cloud_watch_log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_output_enabled: bool?
+      attr_accessor output_s3_bucket_name: String?
+      attr_accessor cloud_watch_output_enabled: bool?
+      attr_accessor cloud_watch_log_group_name: String?
+    end
+
+    class CreateApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+    end
+
+    class CreateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?application_aggregated_status: Types::ApplicationAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+        ?wave_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor wave_id: String?
+    end
+
+    class CreateConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?name: String,
+        ?ssm_instance_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?ssm_command_config: Types::ConnectorSsmCommandConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor ssm_instance_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?ssm_instance_id: String,
+        ?tags: Hash[String, String],
+        ?ssm_command_config: Types::ConnectorSsmCommandConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor ssm_instance_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig?
+    end
+
+    class CreateLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?tags: Hash[String, String],
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?associate_public_ip_address: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?small_volume_max_size: Integer,
+        ?small_volume_conf: Types::LaunchTemplateDiskConf,
+        ?large_volume_conf: Types::LaunchTemplateDiskConf,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor small_volume_max_size: Integer?
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+    end
+
+    class CreateLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?arn: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?tags: Hash[String, String],
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?associate_public_ip_address: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?small_volume_max_size: Integer,
+        ?small_volume_conf: Types::LaunchTemplateDiskConf,
+        ?large_volume_conf: Types::LaunchTemplateDiskConf,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor small_volume_max_size: Integer?
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+    end
+
+    class CreateReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWaveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+    end
+
+    class CreateWaveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?wave_aggregated_status: Types::WaveAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DataReplicationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?raw_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor raw_error: String?
+    end
+
+    class DataReplicationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_duration: String,
+        ?eta_date_time: String,
+        ?replicated_disks: Array[Types::DataReplicationInfoReplicatedDisk],
+        ?data_replication_state: String,
+        ?data_replication_initiation: Types::DataReplicationInitiation,
+        ?data_replication_error: Types::DataReplicationError,
+        ?last_snapshot_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_duration: String?
+      attr_accessor eta_date_time: String?
+      attr_accessor replicated_disks: Array[Types::DataReplicationInfoReplicatedDisk]?
+      attr_accessor data_replication_state: String?
+      attr_accessor data_replication_initiation: Types::DataReplicationInitiation?
+      attr_accessor data_replication_error: Types::DataReplicationError?
+      attr_accessor last_snapshot_date_time: String?
+    end
+
+    class DataReplicationInfoReplicatedDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?total_storage_bytes: Integer,
+        ?replicated_storage_bytes: Integer,
+        ?rescanned_storage_bytes: Integer,
+        ?backlogged_storage_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor total_storage_bytes: Integer?
+      attr_accessor replicated_storage_bytes: Integer?
+      attr_accessor rescanned_storage_bytes: Integer?
+      attr_accessor backlogged_storage_bytes: Integer?
+    end
+
+    class DataReplicationInitiation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date_time: String,
+        ?next_attempt_date_time: String,
+        ?steps: Array[Types::DataReplicationInitiationStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date_time: String?
+      attr_accessor next_attempt_date_time: String?
+      attr_accessor steps: Array[Types::DataReplicationInitiationStep]?
+    end
+
+    class DataReplicationInitiationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class DeleteJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+    end
+
+    class DeleteLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+    end
+
+    class DeleteReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSourceServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteSourceServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVcenterClientInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcenter_client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcenter_client_id: String?
+    end
+
+    class DeleteWaveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteWaveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeJobLogItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeJobLogItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::JobLog],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::JobLog]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeJobsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeJobsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Job],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Job]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+        ?from_date: String,
+        ?to_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+      attr_accessor from_date: String?
+      attr_accessor to_date: String?
+    end
+
+    class DescribeLaunchConfigurationTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_i_ds: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_i_ds: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLaunchConfigurationTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::LaunchConfigurationTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::LaunchConfigurationTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReplicationConfigurationTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_i_ds: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_i_ds: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReplicationConfigurationTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ReplicationConfigurationTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ReplicationConfigurationTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeSourceServersRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeSourceServersRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeSourceServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SourceServer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SourceServer]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceServersRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_i_ds: Array[String],
+        ?is_archived: bool,
+        ?replication_types: Array[String],
+        ?life_cycle_states: Array[String],
+        ?application_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor is_archived: bool?
+      attr_accessor replication_types: Array[String]?
+      attr_accessor life_cycle_states: Array[String]?
+      attr_accessor application_i_ds: Array[String]?
+    end
+
+    class DescribeVcenterClientsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeVcenterClientsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::VcenterClient],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::VcenterClient]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?application_i_ds: Array[String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor application_i_ds: Array[String]?
+      attr_accessor account_id: String?
+    end
+
+    class DisassociateApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateSourceServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?source_server_i_ds: Array[String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor account_id: String?
+    end
+
+    class DisassociateSourceServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisconnectFromServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DisconnectFromServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class Disk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor bytes: Integer?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ExportErrorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?raw_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor raw_error: String?
+    end
+
+    class ExportTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_bucket_owner: String,
+        ?creation_date_time: String,
+        ?end_date_time: String,
+        ?status: String,
+        ?progress_percentage: Float,
+        ?summary: Types::ExportTaskSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor creation_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor status: String?
+      attr_accessor progress_percentage: Float?
+      attr_accessor summary: Types::ExportTaskSummary?
+    end
+
+    class ExportTaskError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_date_time: String,
+        ?error_data: Types::ExportErrorData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_date_time: String?
+      attr_accessor error_data: Types::ExportErrorData?
+    end
+
+    class ExportTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?servers_count: Integer,
+        ?applications_count: Integer,
+        ?waves_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor servers_count: Integer?
+      attr_accessor applications_count: Integer?
+      attr_accessor waves_count: Integer?
+    end
+
+    class FinalizeCutoverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class FinalizeCutoverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class GetLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class GetLaunchConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+    end
+
+    class GetReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class GetReplicationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+    end
+
+    class IdentificationHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fqdn: String,
+        ?hostname: String,
+        ?vm_ware_uuid: String,
+        ?aws_instance_id: String,
+        ?vm_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fqdn: String?
+      attr_accessor hostname: String?
+      attr_accessor vm_ware_uuid: String?
+      attr_accessor aws_instance_id: String?
+      attr_accessor vm_path: String?
+    end
+
+    class ImportErrorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?application_id: String,
+        ?wave_id: String,
+        ?ec2_launch_template_id: String,
+        ?row_number: Integer,
+        ?raw_error: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor application_id: String?
+      attr_accessor wave_id: String?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor row_number: Integer?
+      attr_accessor raw_error: String?
+      attr_accessor account_id: String?
+    end
+
+    class ImportTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?s3_bucket_source: Types::S3BucketSource,
+        ?creation_date_time: String,
+        ?end_date_time: String,
+        ?status: String,
+        ?progress_percentage: Float,
+        ?summary: Types::ImportTaskSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor s3_bucket_source: Types::S3BucketSource?
+      attr_accessor creation_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor status: String?
+      attr_accessor progress_percentage: Float?
+      attr_accessor summary: Types::ImportTaskSummary?
+    end
+
+    class ImportTaskError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_date_time: String,
+        ?error_type: String,
+        ?error_data: Types::ImportErrorData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_date_time: String?
+      attr_accessor error_type: String?
+      attr_accessor error_data: Types::ImportErrorData?
+    end
+
+    class ImportTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?waves: Types::ImportTaskSummaryWaves,
+        ?applications: Types::ImportTaskSummaryApplications,
+        ?servers: Types::ImportTaskSummaryServers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor waves: Types::ImportTaskSummaryWaves?
+      attr_accessor applications: Types::ImportTaskSummaryApplications?
+      attr_accessor servers: Types::ImportTaskSummaryServers?
+    end
+
+    class ImportTaskSummaryApplications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_count: Integer,
+        ?modified_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_count: Integer?
+      attr_accessor modified_count: Integer?
+    end
+
+    class ImportTaskSummaryServers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_count: Integer,
+        ?modified_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_count: Integer?
+      attr_accessor modified_count: Integer?
+    end
+
+    class ImportTaskSummaryWaves
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_count: Integer,
+        ?modified_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_count: Integer?
+      attr_accessor modified_count: Integer?
+    end
+
+    class InitializeServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InitializeServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?arn: String,
+        ?type: String,
+        ?initiated_by: String,
+        ?creation_date_time: String,
+        ?end_date_time: String,
+        ?status: String,
+        ?participating_servers: Array[Types::ParticipatingServer],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor initiated_by: String?
+      attr_accessor creation_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor status: String?
+      attr_accessor participating_servers: Array[Types::ParticipatingServer]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class JobLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_date_time: String,
+        ?event: String,
+        ?event_data: Types::JobLogEventData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_date_time: String?
+      attr_accessor event: String?
+      attr_accessor event_data: Types::JobLogEventData?
+    end
+
+    class JobLogEventData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?conversion_server_id: String,
+        ?target_instance_id: String,
+        ?raw_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor conversion_server_id: String?
+      attr_accessor target_instance_id: String?
+      attr_accessor raw_error: String?
+    end
+
+    class JobPostLaunchActionsLaunchStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_document: Types::SsmDocument,
+        ?ssm_document_type: String,
+        ?execution_id: String,
+        ?execution_status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_document: Types::SsmDocument?
+      attr_accessor ssm_document_type: String?
+      attr_accessor execution_id: String?
+      attr_accessor execution_status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class LaunchConfigurationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?arn: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?tags: Hash[String, String],
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?associate_public_ip_address: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?small_volume_max_size: Integer,
+        ?small_volume_conf: Types::LaunchTemplateDiskConf,
+        ?large_volume_conf: Types::LaunchTemplateDiskConf,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor small_volume_max_size: Integer?
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+    end
+
+    class LaunchTemplateDiskConf
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_type: String,
+        ?iops: Integer,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+    end
+
+    class LaunchedInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_id: String,
+        ?job_id: String,
+        ?first_boot: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_id: String?
+      attr_accessor job_id: String?
+      attr_accessor first_boot: String?
+    end
+
+    class Licensing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os_byol: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os_byol: bool?
+    end
+
+    class LifeCycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?added_to_service_date_time: String,
+        ?first_byte_date_time: String,
+        ?elapsed_replication_duration: String,
+        ?last_seen_by_service_date_time: String,
+        ?last_test: Types::LifeCycleLastTest,
+        ?last_cutover: Types::LifeCycleLastCutover,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor added_to_service_date_time: String?
+      attr_accessor first_byte_date_time: String?
+      attr_accessor elapsed_replication_duration: String?
+      attr_accessor last_seen_by_service_date_time: String?
+      attr_accessor last_test: Types::LifeCycleLastTest?
+      attr_accessor last_cutover: Types::LifeCycleLastCutover?
+      attr_accessor state: String?
+    end
+
+    class LifeCycleLastCutover
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initiated: Types::LifeCycleLastCutoverInitiated,
+        ?reverted: Types::LifeCycleLastCutoverReverted,
+        ?finalized: Types::LifeCycleLastCutoverFinalized,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initiated: Types::LifeCycleLastCutoverInitiated?
+      attr_accessor reverted: Types::LifeCycleLastCutoverReverted?
+      attr_accessor finalized: Types::LifeCycleLastCutoverFinalized?
+    end
+
+    class LifeCycleLastCutoverFinalized
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+    end
+
+    class LifeCycleLastCutoverInitiated
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+      attr_accessor job_id: String?
+    end
+
+    class LifeCycleLastCutoverReverted
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+    end
+
+    class LifeCycleLastTest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initiated: Types::LifeCycleLastTestInitiated,
+        ?reverted: Types::LifeCycleLastTestReverted,
+        ?finalized: Types::LifeCycleLastTestFinalized,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initiated: Types::LifeCycleLastTestInitiated?
+      attr_accessor reverted: Types::LifeCycleLastTestReverted?
+      attr_accessor finalized: Types::LifeCycleLastTestFinalized?
+    end
+
+    class LifeCycleLastTestFinalized
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+    end
+
+    class LifeCycleLastTestInitiated
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+      attr_accessor job_id: String?
+    end
+
+    class LifeCycleLastTestReverted
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+    end
+
+    class ListApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListApplicationsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListApplicationsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Application],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Application]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_i_ds: Array[String],
+        ?is_archived: bool,
+        ?wave_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_i_ds: Array[String]?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_i_ds: Array[String]?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListConnectorsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListConnectorsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_i_ds: Array[String]?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Connector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Connector]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportErrorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportErrorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExportTaskError],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExportTaskError]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListExportsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListExportsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExportTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExportTask]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_i_ds: Array[String]?
+    end
+
+    class ListImportErrorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportErrorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ImportTaskError],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ImportTaskError]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListImportsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListImportsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ImportTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ImportTask]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_i_ds: Array[String]?
+    end
+
+    class ListManagedAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ManagedAccount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ManagedAccount]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourceServerActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?filters: Types::SourceServerActionsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor filters: Types::SourceServerActionsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListSourceServerActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SourceServerActionDocument],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SourceServerActionDocument]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTemplateActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?filters: Types::TemplateActionsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor filters: Types::TemplateActionsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTemplateActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::TemplateActionDocument],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::TemplateActionDocument]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWavesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListWavesRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListWavesRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListWavesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Wave],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Wave]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWavesRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_i_ds: Array[String],
+        ?is_archived: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_i_ds: Array[String]?
+      attr_accessor is_archived: bool?
+    end
+
+    class ManagedAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class MarkAsArchivedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class MarkAsArchivedOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mac_address: String,
+        ?ips: Array[String],
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mac_address: String?
+      attr_accessor ips: Array[String]?
+      attr_accessor is_primary: bool?
+    end
+
+    class OS
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?full_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor full_string: String?
+    end
+
+    class ParticipatingServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?launch_status: String,
+        ?launched_ec2_instance_id: String,
+        ?post_launch_actions_status: Types::PostLaunchActionsStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor launch_status: String?
+      attr_accessor launched_ec2_instance_id: String?
+      attr_accessor post_launch_actions_status: Types::PostLaunchActionsStatus?
+    end
+
+    class PauseReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class PauseReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class PostLaunchActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: String,
+        ?s3_log_bucket: String,
+        ?s3_output_key_prefix: String,
+        ?cloud_watch_log_group_name: String,
+        ?ssm_documents: Array[Types::SsmDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: String?
+      attr_accessor s3_log_bucket: String?
+      attr_accessor s3_output_key_prefix: String?
+      attr_accessor cloud_watch_log_group_name: String?
+      attr_accessor ssm_documents: Array[Types::SsmDocument]?
+    end
+
+    class PostLaunchActionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_agent_discovery_datetime: String,
+        ?post_launch_actions_launch_status_list: Array[Types::JobPostLaunchActionsLaunchStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_agent_discovery_datetime: String?
+      attr_accessor post_launch_actions_launch_status_list: Array[Types::JobPostLaunchActionsLaunchStatus]?
+    end
+
+    class PutSourceServerActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?action_id: String,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor action_id: String?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor account_id: String?
+    end
+
+    class PutSourceServerActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class PutTemplateActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?action_id: String,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?operating_system: String,
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor action_id: String?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor operating_system: String?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class PutTemplateActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?operating_system: String,
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor operating_system: String?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class RemoveSourceServerActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?action_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor action_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class RemoveSourceServerActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveTemplateActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor action_id: String?
+    end
+
+    class RemoveTemplateActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReplicationConfigurationReplicatedDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?is_boot_disk: bool,
+        ?staging_disk_type: String,
+        ?iops: Integer,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor is_boot_disk: bool?
+      attr_accessor staging_disk_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+    end
+
+    class ReplicationConfigurationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResumeReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class ResumeReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class RetryDataReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class RetryDataReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class S3BucketSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_bucket_owner: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?quota_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor quota_value: Integer?
+    end
+
+    class SourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_updated_date_time: String,
+        ?recommended_instance_type: String,
+        ?identification_hints: Types::IdentificationHints,
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?disks: Array[Types::Disk],
+        ?cpus: Array[Types::CPU],
+        ?ram_bytes: Integer,
+        ?os: Types::OS,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_updated_date_time: String?
+      attr_accessor recommended_instance_type: String?
+      attr_accessor identification_hints: Types::IdentificationHints?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor disks: Array[Types::Disk]?
+      attr_accessor cpus: Array[Types::CPU]?
+      attr_accessor ram_bytes: Integer?
+      attr_accessor os: Types::OS?
+    end
+
+    class SourceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class SourceServerActionDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class SourceServerActionsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_i_ds: Array[String]?
+    end
+
+    class SourceServerConnectorAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials_secret_arn: String,
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials_secret_arn: String?
+      attr_accessor connector_arn: String?
+    end
+
+    class SsmDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_name: String,
+        ?ssm_document_name: String,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_name: String?
+      attr_accessor ssm_document_name: String?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+    end
+
+    class SsmExternalParameter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dynamic_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_path: String?
+
+      class DynamicPath < SsmExternalParameter
+      end
+      class Unknown < SsmExternalParameter
+      end
+    end
+
+    class SsmParameterStoreParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_type: String,
+        ?parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_type: String?
+      attr_accessor parameter_name: String?
+    end
+
+    class StartCutoverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_i_ds: Array[String],
+        ?tags: Hash[String, String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+    end
+
+    class StartCutoverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class StartExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_bucket_owner: String?
+    end
+
+    class StartExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_task: Types::ExportTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_task: Types::ExportTask?
+    end
+
+    class StartImportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?s3_bucket_source: Types::S3BucketSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket_source: Types::S3BucketSource?
+    end
+
+    class StartImportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_task: Types::ImportTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_task: Types::ImportTask?
+    end
+
+    class StartReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class StartReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class StartTestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_i_ds: Array[String],
+        ?tags: Hash[String, String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+    end
+
+    class StartTestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class StopReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class StopReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TemplateActionDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_name: String,
+        ?document_identifier: String,
+        ?order: Integer,
+        ?document_version: String,
+        ?active: bool,
+        ?timeout_seconds: Integer,
+        ?must_succeed_for_cutover: bool,
+        ?parameters: Hash[String, Array[Types::SsmParameterStoreParameter]],
+        ?operating_system: String,
+        ?external_parameters: Hash[String, Types::SsmExternalParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_name: String?
+      attr_accessor document_identifier: String?
+      attr_accessor order: Integer?
+      attr_accessor document_version: String?
+      attr_accessor active: bool?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor must_succeed_for_cutover: bool?
+      attr_accessor parameters: Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      attr_accessor operating_system: String?
+      attr_accessor external_parameters: Hash[String, Types::SsmExternalParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class TemplateActionsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_i_ds: Array[String]?
+    end
+
+    class TerminateTargetInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_i_ds: Array[String],
+        ?tags: Hash[String, String],
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+    end
+
+    class TerminateTargetInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: String?
+    end
+
+    class UnarchiveApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class UnarchiveApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?application_aggregated_status: Types::ApplicationAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+        ?wave_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor wave_id: String?
+    end
+
+    class UnarchiveWaveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class UnarchiveWaveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?wave_aggregated_status: Types::WaveAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UninitializedAccountException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?name: String,
+        ?description: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor account_id: String?
+    end
+
+    class UpdateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?application_aggregated_status: Types::ApplicationAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+        ?wave_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor wave_id: String?
+    end
+
+    class UpdateConnectorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?name: String,
+        ?ssm_instance_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?ssm_command_config: Types::ConnectorSsmCommandConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor ssm_instance_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig?
+    end
+
+    class UpdateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?name: String,
+        ?ssm_command_config: Types::ConnectorSsmCommandConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig?
+    end
+
+    class UpdateLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class UpdateLaunchConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+    end
+
+    class UpdateLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?associate_public_ip_address: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?small_volume_max_size: Integer,
+        ?small_volume_conf: Types::LaunchTemplateDiskConf,
+        ?large_volume_conf: Types::LaunchTemplateDiskConf,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor small_volume_max_size: Integer?
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+    end
+
+    class UpdateLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?arn: String,
+        ?post_launch_actions: Types::PostLaunchActions,
+        ?enable_map_auto_tagging: bool,
+        ?map_auto_tagging_mpe_id: String,
+        ?tags: Hash[String, String],
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?associate_public_ip_address: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?boot_mode: String,
+        ?small_volume_max_size: Integer,
+        ?small_volume_conf: Types::LaunchTemplateDiskConf,
+        ?large_volume_conf: Types::LaunchTemplateDiskConf,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor post_launch_actions: Types::PostLaunchActions?
+      attr_accessor enable_map_auto_tagging: bool?
+      attr_accessor map_auto_tagging_mpe_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor boot_mode: String?
+      attr_accessor small_volume_max_size: Integer?
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+    end
+
+    class UpdateReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+      attr_accessor account_id: String?
+    end
+
+    class UpdateReplicationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+    end
+
+    class UpdateReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+    end
+
+    class UpdateReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?use_fips_endpoint: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor use_fips_endpoint: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateSourceServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class UpdateSourceServerReplicationTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?replication_type: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor replication_type: String?
+      attr_accessor account_id: String?
+    end
+
+    class UpdateSourceServerReplicationTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?is_archived: bool,
+        ?tags: Hash[String, String],
+        ?launched_instance: Types::LaunchedInstance,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?replication_type: String,
+        ?vcenter_client_id: String,
+        ?application_id: String,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor is_archived: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launched_instance: Types::LaunchedInstance?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor replication_type: String?
+      attr_accessor vcenter_client_id: String?
+      attr_accessor application_id: String?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class UpdateSourceServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?source_server_id: String,
+        ?connector_action: Types::SourceServerConnectorAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor source_server_id: String?
+      attr_accessor connector_action: Types::SourceServerConnectorAction?
+    end
+
+    class UpdateWaveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?name: String,
+        ?description: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor account_id: String?
+    end
+
+    class UpdateWaveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?wave_aggregated_status: Types::WaveAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class VcenterClient
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcenter_client_id: String,
+        ?arn: String,
+        ?hostname: String,
+        ?vcenter_uuid: String,
+        ?datacenter_name: String,
+        ?last_seen_datetime: String,
+        ?source_server_tags: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcenter_client_id: String?
+      attr_accessor arn: String?
+      attr_accessor hostname: String?
+      attr_accessor vcenter_uuid: String?
+      attr_accessor datacenter_name: String?
+      attr_accessor last_seen_datetime: String?
+      attr_accessor source_server_tags: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Wave
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wave_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?is_archived: bool,
+        ?wave_aggregated_status: Types::WaveAggregatedStatus,
+        ?creation_date_time: String,
+        ?last_modified_date_time: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wave_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor is_archived: bool?
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus?
+      attr_accessor creation_date_time: String?
+      attr_accessor last_modified_date_time: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class WaveAggregatedStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_update_date_time: String,
+        ?replication_started_date_time: String,
+        ?health_status: String,
+        ?progress_status: String,
+        ?total_applications: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_update_date_time: String?
+      attr_accessor replication_started_date_time: String?
+      attr_accessor health_status: String?
+      attr_accessor progress_status: String?
+      attr_accessor total_applications: Integer?
+    end
+  end
+end

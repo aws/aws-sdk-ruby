@@ -1,0 +1,782 @@
+module Aws::EntityResolution
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EntityResolution::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddPolicyStatementResponse
+      include Smithy::Client::_Response[Types::AddPolicyStatementOutput]
+      def arn: () -> String?
+      def token: () -> String?
+      def policy: () -> String?
+    end
+    def add_policy_statement: (
+      ?arn: String,
+      ?statement_id: String,
+      ?effect: String,
+      ?action: Array[String],
+      ?principal: Array[String],
+      ?condition: String
+    ) -> _AddPolicyStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPolicyStatementResponse
+
+    interface _BatchDeleteUniqueIdResponse
+      include Smithy::Client::_Response[Types::BatchDeleteUniqueIdOutput]
+      def status: () -> String?
+      def errors: () -> Array[Types::DeleteUniqueIdError]?
+      def deleted: () -> Array[Types::DeletedUniqueId]?
+      def disconnected_unique_ids: () -> Array[String]?
+    end
+    def batch_delete_unique_id: (
+      ?workflow_name: String,
+      ?input_source: String,
+      ?unique_ids: Array[String]
+    ) -> _BatchDeleteUniqueIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteUniqueIdResponse
+
+    interface _CreateIdMappingWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateIdMappingWorkflowOutput]
+      def workflow_name: () -> String?
+      def workflow_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdMappingWorkflowInputSource]?
+      def output_source_config: () -> Array[Types::IdMappingWorkflowOutputSource]?
+      def id_mapping_techniques: () -> Types::IdMappingTechniques?
+      def role_arn: () -> String?
+    end
+    def create_id_mapping_workflow: (
+      ?workflow_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String,
+          type: String
+        }
+      ],
+      ?output_source_config: Array[
+        {
+          output_s3_path: String,
+          kms_arn: String
+        }
+      ],
+      ?id_mapping_techniques: {
+        id_mapping_type: String,
+        rule_based_properties: {
+          rules: Array[
+            {
+              rule_name: String,
+              matching_keys: Array[String]
+            }
+          ],
+          rule_definition_type: String,
+          attribute_matching_model: String,
+          record_matching_model: String
+        },
+        provider_properties: {
+          provider_service_arn: String,
+          provider_configuration: Smithy::Schema::document,
+          intermediate_source_configuration: {
+            intermediate_s3_path: String
+          }
+        }
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIdMappingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdMappingWorkflowResponse
+
+    interface _CreateIdNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateIdNamespaceOutput]
+      def id_namespace_name: () -> String?
+      def id_namespace_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdNamespaceInputSource]?
+      def id_mapping_workflow_properties: () -> Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      def type: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_id_namespace: (
+      ?id_namespace_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String
+        }
+      ],
+      ?id_mapping_workflow_properties: Array[
+        {
+          id_mapping_type: String,
+          rule_based_properties: {
+            rules: Array[
+              {
+                rule_name: String,
+                matching_keys: Array[String]
+              }
+            ],
+            rule_definition_types: Array[String],
+            attribute_matching_model: String,
+            record_matching_models: Array[String]
+          },
+          provider_properties: {
+            provider_service_arn: String,
+            provider_configuration: Smithy::Schema::document
+          }
+        }
+      ],
+      ?type: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIdNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdNamespaceResponse
+
+    interface _CreateMatchingWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateMatchingWorkflowOutput]
+      def workflow_name: () -> String?
+      def workflow_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::InputSource]?
+      def output_source_config: () -> Array[Types::OutputSource]?
+      def resolution_techniques: () -> Types::ResolutionTechniques?
+      def incremental_run_config: () -> Types::IncrementalRunConfig?
+      def role_arn: () -> String?
+    end
+    def create_matching_workflow: (
+      ?workflow_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String,
+          apply_normalization: bool
+        }
+      ],
+      ?output_source_config: Array[
+        {
+          output_s3_path: String,
+          kms_arn: String,
+          output: Array[
+            {
+              name: String,
+              hashed: bool
+            }
+          ],
+          apply_normalization: untyped
+        }
+      ],
+      ?resolution_techniques: {
+        resolution_type: String,
+        rule_based_properties: {
+          rules: Array[
+            {
+              rule_name: String,
+              matching_keys: Array[String]
+            }
+          ],
+          attribute_matching_model: String,
+          match_purpose: String
+        },
+        rule_condition_properties: {
+          rules: Array[
+            {
+              rule_name: untyped,
+              condition: untyped
+            }
+          ]
+        },
+        provider_properties: {
+          provider_service_arn: String,
+          provider_configuration: Smithy::Schema::document,
+          intermediate_source_configuration: {
+            intermediate_s3_path: String
+          }
+        }
+      },
+      ?incremental_run_config: {
+        incremental_run_type: String
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMatchingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMatchingWorkflowResponse
+
+    interface _CreateSchemaMappingResponse
+      include Smithy::Client::_Response[Types::CreateSchemaMappingOutput]
+      def schema_name: () -> String?
+      def schema_arn: () -> String?
+      def description: () -> String?
+      def mapped_input_fields: () -> Array[Types::SchemaInputAttribute]?
+    end
+    def create_schema_mapping: (
+      ?schema_name: String,
+      ?description: String,
+      ?mapped_input_fields: Array[
+        {
+          field_name: String,
+          type: String,
+          group_name: untyped,
+          match_key: untyped,
+          sub_type: untyped,
+          hashed: bool
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateSchemaMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSchemaMappingResponse
+
+    interface _DeleteIdMappingWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteIdMappingWorkflowOutput]
+      def message: () -> String?
+    end
+    def delete_id_mapping_workflow: (
+      ?workflow_name: String
+    ) -> _DeleteIdMappingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdMappingWorkflowResponse
+
+    interface _DeleteIdNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteIdNamespaceOutput]
+      def message: () -> String?
+    end
+    def delete_id_namespace: (
+      ?id_namespace_name: String
+    ) -> _DeleteIdNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdNamespaceResponse
+
+    interface _DeleteMatchingWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteMatchingWorkflowOutput]
+      def message: () -> String?
+    end
+    def delete_matching_workflow: (
+      ?workflow_name: String
+    ) -> _DeleteMatchingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMatchingWorkflowResponse
+
+    interface _DeletePolicyStatementResponse
+      include Smithy::Client::_Response[Types::DeletePolicyStatementOutput]
+      def arn: () -> String?
+      def token: () -> String?
+      def policy: () -> String?
+    end
+    def delete_policy_statement: (
+      ?arn: String,
+      ?statement_id: String
+    ) -> _DeletePolicyStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyStatementResponse
+
+    interface _DeleteSchemaMappingResponse
+      include Smithy::Client::_Response[Types::DeleteSchemaMappingOutput]
+      def message: () -> String?
+    end
+    def delete_schema_mapping: (
+      ?schema_name: String
+    ) -> _DeleteSchemaMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchemaMappingResponse
+
+    interface _GenerateMatchIdResponse
+      include Smithy::Client::_Response[Types::GenerateMatchIdOutput]
+      def match_groups: () -> Array[Types::MatchGroup]?
+      def failed_records: () -> Array[Types::FailedRecord]?
+    end
+    def generate_match_id: (
+      ?workflow_name: String,
+      ?records: Array[
+        {
+          input_source_arn: String,
+          unique_id: String,
+          record_attribute_map: Hash[String, String]
+        }
+      ],
+      ?processing_type: String
+    ) -> _GenerateMatchIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMatchIdResponse
+
+    interface _GetIdMappingJobResponse
+      include Smithy::Client::_Response[Types::GetIdMappingJobOutput]
+      def job_id: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def metrics: () -> Types::IdMappingJobMetrics?
+      def error_details: () -> Types::ErrorDetails?
+      def output_source_config: () -> Array[Types::IdMappingJobOutputSource]?
+    end
+    def get_id_mapping_job: (
+      ?workflow_name: String,
+      ?job_id: String
+    ) -> _GetIdMappingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdMappingJobResponse
+
+    interface _GetIdMappingWorkflowResponse
+      include Smithy::Client::_Response[Types::GetIdMappingWorkflowOutput]
+      def workflow_name: () -> String?
+      def workflow_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdMappingWorkflowInputSource]?
+      def output_source_config: () -> Array[Types::IdMappingWorkflowOutputSource]?
+      def id_mapping_techniques: () -> Types::IdMappingTechniques?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_id_mapping_workflow: (
+      ?workflow_name: String
+    ) -> _GetIdMappingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdMappingWorkflowResponse
+
+    interface _GetIdNamespaceResponse
+      include Smithy::Client::_Response[Types::GetIdNamespaceOutput]
+      def id_namespace_name: () -> String?
+      def id_namespace_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdNamespaceInputSource]?
+      def id_mapping_workflow_properties: () -> Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      def type: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_id_namespace: (
+      ?id_namespace_name: String
+    ) -> _GetIdNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdNamespaceResponse
+
+    interface _GetMatchIdResponse
+      include Smithy::Client::_Response[Types::GetMatchIdOutput]
+      def match_id: () -> String?
+      def match_rule: () -> String?
+    end
+    def get_match_id: (
+      ?workflow_name: String,
+      ?record: Hash[String, String],
+      ?apply_normalization: bool
+    ) -> _GetMatchIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMatchIdResponse
+
+    interface _GetMatchingJobResponse
+      include Smithy::Client::_Response[Types::GetMatchingJobOutput]
+      def job_id: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def metrics: () -> Types::JobMetrics?
+      def error_details: () -> Types::ErrorDetails?
+      def output_source_config: () -> Array[Types::JobOutputSource]?
+    end
+    def get_matching_job: (
+      ?workflow_name: String,
+      ?job_id: String
+    ) -> _GetMatchingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMatchingJobResponse
+
+    interface _GetMatchingWorkflowResponse
+      include Smithy::Client::_Response[Types::GetMatchingWorkflowOutput]
+      def workflow_name: () -> String?
+      def workflow_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::InputSource]?
+      def output_source_config: () -> Array[Types::OutputSource]?
+      def resolution_techniques: () -> Types::ResolutionTechniques?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def incremental_run_config: () -> Types::IncrementalRunConfig?
+      def role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_matching_workflow: (
+      ?workflow_name: String
+    ) -> _GetMatchingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMatchingWorkflowResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyOutput]
+      def arn: () -> String?
+      def token: () -> String?
+      def policy: () -> String?
+    end
+    def get_policy: (
+      ?arn: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetProviderServiceResponse
+      include Smithy::Client::_Response[Types::GetProviderServiceOutput]
+      def provider_name: () -> String?
+      def provider_service_name: () -> String?
+      def provider_service_display_name: () -> String?
+      def provider_service_type: () -> String?
+      def provider_service_arn: () -> String?
+      def provider_configuration_definition: () -> Smithy::Schema::document?
+      def provider_id_name_space_configuration: () -> Types::ProviderIdNameSpaceConfiguration?
+      def provider_job_configuration: () -> Smithy::Schema::document?
+      def provider_endpoint_configuration: () -> Types::ProviderEndpointConfiguration?
+      def anonymized_output: () -> bool?
+      def provider_entity_output_definition: () -> Smithy::Schema::document?
+      def provider_intermediate_data_access_configuration: () -> Types::ProviderIntermediateDataAccessConfiguration?
+      def provider_component_schema: () -> Types::ProviderComponentSchema?
+    end
+    def get_provider_service: (
+      ?provider_name: String,
+      ?provider_service_name: String
+    ) -> _GetProviderServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProviderServiceResponse
+
+    interface _GetSchemaMappingResponse
+      include Smithy::Client::_Response[Types::GetSchemaMappingOutput]
+      def schema_name: () -> String?
+      def schema_arn: () -> String?
+      def description: () -> String?
+      def mapped_input_fields: () -> Array[Types::SchemaInputAttribute]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def has_workflows: () -> bool?
+    end
+    def get_schema_mapping: (
+      ?schema_name: String
+    ) -> _GetSchemaMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaMappingResponse
+
+    interface _ListIdMappingJobsResponse
+      include Smithy::Client::_Response[Types::ListIdMappingJobsOutput]
+      def jobs: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_id_mapping_jobs: (
+      ?workflow_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdMappingJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdMappingJobsResponse
+
+    interface _ListIdMappingWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListIdMappingWorkflowsOutput]
+      def workflow_summaries: () -> Array[Types::IdMappingWorkflowSummary]?
+      def next_token: () -> String?
+    end
+    def list_id_mapping_workflows: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdMappingWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdMappingWorkflowsResponse
+
+    interface _ListIdNamespacesResponse
+      include Smithy::Client::_Response[Types::ListIdNamespacesOutput]
+      def id_namespace_summaries: () -> Array[Types::IdNamespaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_id_namespaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdNamespacesResponse
+
+    interface _ListMatchingJobsResponse
+      include Smithy::Client::_Response[Types::ListMatchingJobsOutput]
+      def jobs: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_matching_jobs: (
+      ?workflow_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMatchingJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMatchingJobsResponse
+
+    interface _ListMatchingWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListMatchingWorkflowsOutput]
+      def workflow_summaries: () -> Array[Types::MatchingWorkflowSummary]?
+      def next_token: () -> String?
+    end
+    def list_matching_workflows: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMatchingWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMatchingWorkflowsResponse
+
+    interface _ListProviderServicesResponse
+      include Smithy::Client::_Response[Types::ListProviderServicesOutput]
+      def provider_service_summaries: () -> Array[Types::ProviderServiceSummary]?
+      def next_token: () -> String?
+    end
+    def list_provider_services: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?provider_name: String
+    ) -> _ListProviderServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProviderServicesResponse
+
+    interface _ListSchemaMappingsResponse
+      include Smithy::Client::_Response[Types::ListSchemaMappingsOutput]
+      def schema_list: () -> Array[Types::SchemaMappingSummary]?
+      def next_token: () -> String?
+    end
+    def list_schema_mappings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSchemaMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemaMappingsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutPolicyResponse
+      include Smithy::Client::_Response[Types::PutPolicyOutput]
+      def arn: () -> String?
+      def token: () -> String?
+      def policy: () -> String?
+    end
+    def put_policy: (
+      ?arn: String,
+      ?token: String,
+      ?policy: String
+    ) -> _PutPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPolicyResponse
+
+    interface _StartIdMappingJobResponse
+      include Smithy::Client::_Response[Types::StartIdMappingJobOutput]
+      def job_id: () -> String?
+      def output_source_config: () -> Array[Types::IdMappingJobOutputSource]?
+    end
+    def start_id_mapping_job: (
+      ?workflow_name: String,
+      ?output_source_config: Array[
+        {
+          role_arn: String,
+          output_s3_path: String,
+          kms_arn: String
+        }
+      ]
+    ) -> _StartIdMappingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartIdMappingJobResponse
+
+    interface _StartMatchingJobResponse
+      include Smithy::Client::_Response[Types::StartMatchingJobOutput]
+      def job_id: () -> String?
+    end
+    def start_matching_job: (
+      ?workflow_name: String
+    ) -> _StartMatchingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMatchingJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIdMappingWorkflowResponse
+      include Smithy::Client::_Response[Types::UpdateIdMappingWorkflowOutput]
+      def workflow_name: () -> String?
+      def workflow_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdMappingWorkflowInputSource]?
+      def output_source_config: () -> Array[Types::IdMappingWorkflowOutputSource]?
+      def id_mapping_techniques: () -> Types::IdMappingTechniques?
+      def role_arn: () -> String?
+    end
+    def update_id_mapping_workflow: (
+      ?workflow_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String,
+          type: String
+        }
+      ],
+      ?output_source_config: Array[
+        {
+          output_s3_path: String,
+          kms_arn: String
+        }
+      ],
+      ?id_mapping_techniques: {
+        id_mapping_type: String,
+        rule_based_properties: {
+          rules: Array[
+            {
+              rule_name: String,
+              matching_keys: Array[String]
+            }
+          ],
+          rule_definition_type: String,
+          attribute_matching_model: String,
+          record_matching_model: String
+        },
+        provider_properties: {
+          provider_service_arn: String,
+          provider_configuration: Smithy::Schema::document,
+          intermediate_source_configuration: {
+            intermediate_s3_path: String
+          }
+        }
+      },
+      ?role_arn: String
+    ) -> _UpdateIdMappingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdMappingWorkflowResponse
+
+    interface _UpdateIdNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdateIdNamespaceOutput]
+      def id_namespace_name: () -> String?
+      def id_namespace_arn: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::IdNamespaceInputSource]?
+      def id_mapping_workflow_properties: () -> Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      def type: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_id_namespace: (
+      ?id_namespace_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String
+        }
+      ],
+      ?id_mapping_workflow_properties: Array[
+        {
+          id_mapping_type: String,
+          rule_based_properties: {
+            rules: Array[
+              {
+                rule_name: String,
+                matching_keys: Array[String]
+              }
+            ],
+            rule_definition_types: Array[String],
+            attribute_matching_model: String,
+            record_matching_models: Array[String]
+          },
+          provider_properties: {
+            provider_service_arn: String,
+            provider_configuration: Smithy::Schema::document
+          }
+        }
+      ],
+      ?role_arn: String
+    ) -> _UpdateIdNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdNamespaceResponse
+
+    interface _UpdateMatchingWorkflowResponse
+      include Smithy::Client::_Response[Types::UpdateMatchingWorkflowOutput]
+      def workflow_name: () -> String?
+      def description: () -> String?
+      def input_source_config: () -> Array[Types::InputSource]?
+      def output_source_config: () -> Array[Types::OutputSource]?
+      def resolution_techniques: () -> Types::ResolutionTechniques?
+      def incremental_run_config: () -> Types::IncrementalRunConfig?
+      def role_arn: () -> String?
+    end
+    def update_matching_workflow: (
+      ?workflow_name: String,
+      ?description: String,
+      ?input_source_config: Array[
+        {
+          input_source_arn: String,
+          schema_name: String,
+          apply_normalization: bool
+        }
+      ],
+      ?output_source_config: Array[
+        {
+          output_s3_path: String,
+          kms_arn: String,
+          output: Array[
+            {
+              name: String,
+              hashed: bool
+            }
+          ],
+          apply_normalization: untyped
+        }
+      ],
+      ?resolution_techniques: {
+        resolution_type: String,
+        rule_based_properties: {
+          rules: Array[
+            {
+              rule_name: String,
+              matching_keys: Array[String]
+            }
+          ],
+          attribute_matching_model: String,
+          match_purpose: String
+        },
+        rule_condition_properties: {
+          rules: Array[
+            {
+              rule_name: untyped,
+              condition: untyped
+            }
+          ]
+        },
+        provider_properties: {
+          provider_service_arn: String,
+          provider_configuration: Smithy::Schema::document,
+          intermediate_source_configuration: {
+            intermediate_s3_path: String
+          }
+        }
+      },
+      ?incremental_run_config: {
+        incremental_run_type: String
+      },
+      ?role_arn: String
+    ) -> _UpdateMatchingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMatchingWorkflowResponse
+
+    interface _UpdateSchemaMappingResponse
+      include Smithy::Client::_Response[Types::UpdateSchemaMappingOutput]
+      def schema_name: () -> String?
+      def schema_arn: () -> String?
+      def description: () -> String?
+      def mapped_input_fields: () -> Array[Types::SchemaInputAttribute]?
+    end
+    def update_schema_mapping: (
+      ?schema_name: String,
+      ?description: String,
+      ?mapped_input_fields: Array[
+        {
+          field_name: String,
+          type: String,
+          group_name: untyped,
+          match_key: untyped,
+          sub_type: untyped,
+          hashed: bool
+        }
+      ]
+    ) -> _UpdateSchemaMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSchemaMappingResponse
+  end
+end

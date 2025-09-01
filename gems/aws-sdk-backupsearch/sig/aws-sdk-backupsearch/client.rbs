@@ -1,0 +1,233 @@
+module Aws::BackupSearch
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BackupSearch::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetSearchJobResponse
+      include Smithy::Client::_Response[Types::GetSearchJobOutput]
+      def name: () -> String?
+      def search_scope_summary: () -> Types::SearchScopeSummary?
+      def current_search_progress: () -> Types::CurrentSearchProgress?
+      def status_message: () -> String?
+      def encryption_key_arn: () -> String?
+      def completion_time: () -> Time?
+      def status: () -> String?
+      def search_scope: () -> Types::SearchScope?
+      def item_filters: () -> Types::ItemFilters?
+      def creation_time: () -> Time?
+      def search_job_identifier: () -> String?
+      def search_job_arn: () -> String?
+    end
+    def get_search_job: (
+      ?search_job_identifier: String
+    ) -> _GetSearchJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSearchJobResponse
+
+    interface _GetSearchResultExportJobResponse
+      include Smithy::Client::_Response[Types::GetSearchResultExportJobOutput]
+      def export_job_identifier: () -> String?
+      def export_job_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def completion_time: () -> Time?
+      def status_message: () -> String?
+      def export_specification: () -> Types::ExportSpecification?
+      def search_job_arn: () -> String?
+    end
+    def get_search_result_export_job: (
+      ?export_job_identifier: String
+    ) -> _GetSearchResultExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSearchResultExportJobResponse
+
+    interface _ListSearchJobBackupsResponse
+      include Smithy::Client::_Response[Types::ListSearchJobBackupsOutput]
+      def results: () -> Array[Types::SearchJobBackupsResult]?
+      def next_token: () -> String?
+    end
+    def list_search_job_backups: (
+      ?search_job_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSearchJobBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSearchJobBackupsResponse
+
+    interface _ListSearchJobResultsResponse
+      include Smithy::Client::_Response[Types::ListSearchJobResultsOutput]
+      def results: () -> Array[Types::ResultItem]?
+      def next_token: () -> String?
+    end
+    def list_search_job_results: (
+      ?search_job_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSearchJobResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSearchJobResultsResponse
+
+    interface _ListSearchJobsResponse
+      include Smithy::Client::_Response[Types::ListSearchJobsOutput]
+      def search_jobs: () -> Array[Types::SearchJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_search_jobs: (
+      ?by_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSearchJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSearchJobsResponse
+
+    interface _ListSearchResultExportJobsResponse
+      include Smithy::Client::_Response[Types::ListSearchResultExportJobsOutput]
+      def export_jobs: () -> Array[Types::ExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_search_result_export_jobs: (
+      ?status: String,
+      ?search_job_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSearchResultExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSearchResultExportJobsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String?]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartSearchJobResponse
+      include Smithy::Client::_Response[Types::StartSearchJobOutput]
+      def search_job_arn: () -> String?
+      def creation_time: () -> Time?
+      def search_job_identifier: () -> String?
+    end
+    def start_search_job: (
+      ?tags: Hash[String, String?],
+      ?name: String,
+      ?encryption_key_arn: String,
+      ?client_token: String,
+      ?search_scope: {
+        backup_resource_types: Array[String],
+        backup_resource_creation_time: {
+          created_after: Time,
+          created_before: untyped
+        },
+        source_resource_arns: Array[String],
+        backup_resource_arns: Array[String],
+        backup_resource_tags: Hash[String, String?]
+      },
+      ?item_filters: {
+        s3_item_filters: Array[
+          {
+            object_keys: Array[
+              {
+                value: String,
+                operator: String
+              }
+            ],
+            sizes: Array[
+              {
+                value: Integer,
+                operator: String
+              }
+            ],
+            creation_times: Array[
+              {
+                value: Time,
+                operator: String
+              }
+            ],
+            version_ids: untyped,
+            e_tags: untyped
+          }
+        ],
+        ebs_item_filters: Array[
+          {
+            file_paths: untyped,
+            sizes: untyped,
+            creation_times: untyped,
+            last_modification_times: untyped
+          }
+        ]
+      }
+    ) -> _StartSearchJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSearchJobResponse
+
+    interface _StartSearchResultExportJobResponse
+      include Smithy::Client::_Response[Types::StartSearchResultExportJobOutput]
+      def export_job_arn: () -> String?
+      def export_job_identifier: () -> String?
+    end
+    def start_search_result_export_job: (
+      ?search_job_identifier: String,
+      ?export_specification: {
+        s3_export_specification: {
+          destination_bucket: String,
+          destination_prefix: untyped
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String?],
+      ?role_arn: String
+    ) -> _StartSearchResultExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSearchResultExportJobResponse
+
+    interface _StopSearchJobResponse
+      include Smithy::Client::_Response[Types::StopSearchJobOutput]
+    end
+    def stop_search_job: (
+      ?search_job_identifier: String
+    ) -> _StopSearchJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSearchJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String?]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

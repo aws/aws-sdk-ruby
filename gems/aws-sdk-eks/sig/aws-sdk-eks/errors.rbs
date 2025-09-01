@@ -1,0 +1,82 @@
+module Aws::EKS
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def addon_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def fargate_profile_name: () -> String?
+      def addon_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def addon_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def addon_name: () -> String?
+      def message: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def fargate_profile_name: () -> String?
+      def addon_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class ResourcePropagationDelayException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def addon_name: () -> String?
+      def subscription_id: () -> String?
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def cluster_name: () -> String?
+      def message: () -> String?
+    end
+    class UnsupportedAvailabilityZoneException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def cluster_name: () -> String?
+      def nodegroup_name: () -> String?
+      def valid_zones: () -> Array[String]?
+    end
+  end
+end

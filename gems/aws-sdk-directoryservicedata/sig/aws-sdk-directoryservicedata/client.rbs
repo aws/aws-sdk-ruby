@@ -1,0 +1,317 @@
+module Aws::DirectoryServiceData
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DirectoryServiceData::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddGroupMemberResponse
+      include Smithy::Client::_Response[Types::AddGroupMemberResult]
+    end
+    def add_group_member: (
+      ?directory_id: String,
+      ?group_name: String,
+      ?member_name: String,
+      ?member_realm: String,
+      ?client_token: String
+    ) -> _AddGroupMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddGroupMemberResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResult]
+      def directory_id: () -> String?
+      def sam_account_name: () -> String?
+      def sid: () -> String?
+    end
+    def create_group: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?group_type: String,
+      ?group_scope: String,
+      ?other_attributes: Hash[String,
+        {
+          s: String,
+          n: Integer,
+          bool: bool,
+          ss: Array[String]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResult]
+      def directory_id: () -> String?
+      def sid: () -> String?
+      def sam_account_name: () -> String?
+    end
+    def create_user: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?email_address: String,
+      ?given_name: String,
+      ?surname: String,
+      ?other_attributes: Hash[String,
+        {
+          s: String,
+          n: Integer,
+          bool: bool,
+          ss: Array[String]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResult]
+    end
+    def delete_group: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?client_token: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResult]
+    end
+    def delete_user: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?client_token: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DescribeGroupResponse
+      include Smithy::Client::_Response[Types::DescribeGroupResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def sid: () -> String?
+      def sam_account_name: () -> String?
+      def distinguished_name: () -> String?
+      def group_type: () -> String?
+      def group_scope: () -> String?
+      def other_attributes: () -> Hash[String, Types::AttributeValue]?
+    end
+    def describe_group: (
+      ?directory_id: String,
+      ?realm: String,
+      ?sam_account_name: String,
+      ?other_attributes: Array[String]
+    ) -> _DescribeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGroupResponse
+
+    interface _DescribeUserResponse
+      include Smithy::Client::_Response[Types::DescribeUserResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def sid: () -> String?
+      def sam_account_name: () -> String?
+      def distinguished_name: () -> String?
+      def user_principal_name: () -> String?
+      def email_address: () -> String?
+      def given_name: () -> String?
+      def surname: () -> String?
+      def enabled: () -> bool?
+      def other_attributes: () -> Hash[String, Types::AttributeValue]?
+    end
+    def describe_user: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?other_attributes: Array[String],
+      ?realm: String
+    ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
+
+    interface _DisableUserResponse
+      include Smithy::Client::_Response[Types::DisableUserResult]
+    end
+    def disable_user: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?client_token: String
+    ) -> _DisableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableUserResponse
+
+    interface _ListGroupMembersResponse
+      include Smithy::Client::_Response[Types::ListGroupMembersResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def member_realm: () -> String?
+      def members: () -> Array[Types::Member]?
+      def next_token: () -> String?
+    end
+    def list_group_members: (
+      ?directory_id: String,
+      ?realm: String,
+      ?member_realm: String,
+      ?sam_account_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupMembersResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def groups: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_groups: (
+      ?directory_id: String,
+      ?realm: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListGroupsForMemberResponse
+      include Smithy::Client::_Response[Types::ListGroupsForMemberResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def member_realm: () -> String?
+      def groups: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_groups_for_member: (
+      ?directory_id: String,
+      ?realm: String,
+      ?member_realm: String,
+      ?sam_account_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsForMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsForMemberResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def users: () -> Array[Types::UserSummary]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?directory_id: String,
+      ?realm: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _RemoveGroupMemberResponse
+      include Smithy::Client::_Response[Types::RemoveGroupMemberResult]
+    end
+    def remove_group_member: (
+      ?directory_id: String,
+      ?group_name: String,
+      ?member_name: String,
+      ?member_realm: String,
+      ?client_token: String
+    ) -> _RemoveGroupMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveGroupMemberResponse
+
+    interface _SearchGroupsResponse
+      include Smithy::Client::_Response[Types::SearchGroupsResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def groups: () -> Array[Types::Group]?
+      def next_token: () -> String?
+    end
+    def search_groups: (
+      ?directory_id: String,
+      ?search_string: String,
+      ?search_attributes: Array[String],
+      ?realm: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchGroupsResponse
+
+    interface _SearchUsersResponse
+      include Smithy::Client::_Response[Types::SearchUsersResult]
+      def directory_id: () -> String?
+      def realm: () -> String?
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def search_users: (
+      ?directory_id: String,
+      ?realm: String,
+      ?search_string: String,
+      ?search_attributes: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _SearchUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUsersResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGroupResult]
+    end
+    def update_group: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?group_type: String,
+      ?group_scope: String,
+      ?other_attributes: Hash[String,
+        {
+          s: String,
+          n: Integer,
+          bool: bool,
+          ss: Array[String]
+        }
+      ],
+      ?update_type: String,
+      ?client_token: String
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResult]
+    end
+    def update_user: (
+      ?directory_id: String,
+      ?sam_account_name: String,
+      ?email_address: String,
+      ?given_name: String,
+      ?surname: String,
+      ?other_attributes: Hash[String,
+        {
+          s: String,
+          n: Integer,
+          bool: bool,
+          ss: Array[String]
+        }
+      ],
+      ?update_type: String,
+      ?client_token: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

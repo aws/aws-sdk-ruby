@@ -1,0 +1,1032 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::SSMIncidents
+  # This module contains a schema composed of shapes used by the client.
+  module Schema
+
+    AccessDeniedException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    Action = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#Action', name: 'Action')
+    ActionsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#ActionsList', name: 'ActionsList', traits: {"smithy.api#length" => {"max" => 1}})
+    AddRegionAction = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#AddRegionAction', name: 'AddRegionAction')
+    Arn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#Arn', name: 'Arn', traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:[a-z0-9-]*:[a-z0-9-]*:([0-9]{12})?:.+$"})
+    AttributeValueList = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#AttributeValueList', name: 'AttributeValueList')
+    AutomationExecution = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#AutomationExecution', name: 'AutomationExecution')
+    AutomationExecutionSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#AutomationExecutionSet', name: 'AutomationExecutionSet', traits: {"smithy.api#length" => {"max" => 100}})
+    BatchGetIncidentFindingsError = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#BatchGetIncidentFindingsError', name: 'BatchGetIncidentFindingsError')
+    BatchGetIncidentFindingsErrorList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#BatchGetIncidentFindingsErrorList', name: 'BatchGetIncidentFindingsErrorList')
+    BatchGetIncidentFindingsInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#BatchGetIncidentFindingsInput', name: 'BatchGetIncidentFindingsInput')
+    BatchGetIncidentFindingsOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#BatchGetIncidentFindingsOutput', name: 'BatchGetIncidentFindingsOutput')
+    ChatChannel = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#ChatChannel', name: 'ChatChannel')
+    ChatbotSnsConfigurationSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet', name: 'ChatbotSnsConfigurationSet', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#uniqueItems" => {}})
+    ClientToken = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ClientToken', name: 'ClientToken', traits: {"smithy.api#length" => {"max" => 128}})
+    CloudFormationStackUpdate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CloudFormationStackUpdate', name: 'CloudFormationStackUpdate')
+    CodeDeployDeployment = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CodeDeployDeployment', name: 'CodeDeployDeployment')
+    Condition = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#Condition', name: 'Condition')
+    ConflictException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    CreateReplicationSetOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateReplicationSetOperationInput', name: 'CreateReplicationSetOperationInput')
+    CreateReplicationSetOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateReplicationSetOperationOutput', name: 'CreateReplicationSetOperationOutput')
+    CreateResponsePlanOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateResponsePlanOperationInput', name: 'CreateResponsePlanOperationInput')
+    CreateResponsePlanOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateResponsePlanOperationOutput', name: 'CreateResponsePlanOperationOutput')
+    CreateTimelineEventOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateTimelineEventOperationInput', name: 'CreateTimelineEventOperationInput')
+    CreateTimelineEventOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#CreateTimelineEventOperationOutput', name: 'CreateTimelineEventOperationOutput')
+    DedupeString = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#DedupeString', name: 'DedupeString', traits: {"smithy.api#length" => {"max" => 1000}})
+    DeleteIncidentRecordOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteIncidentRecordOperationInput', name: 'DeleteIncidentRecordOperationInput')
+    DeleteIncidentRecordOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteIncidentRecordOperationOutput', name: 'DeleteIncidentRecordOperationOutput')
+    DeleteRegionAction = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteRegionAction', name: 'DeleteRegionAction')
+    DeleteReplicationSetOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteReplicationSetOperationInput', name: 'DeleteReplicationSetOperationInput')
+    DeleteReplicationSetOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteReplicationSetOperationOutput', name: 'DeleteReplicationSetOperationOutput')
+    DeleteResourcePolicyOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteResourcePolicyOperationInput', name: 'DeleteResourcePolicyOperationInput')
+    DeleteResourcePolicyOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteResourcePolicyOperationOutput', name: 'DeleteResourcePolicyOperationOutput')
+    DeleteResponsePlanOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteResponsePlanOperationInput', name: 'DeleteResponsePlanOperationInput')
+    DeleteResponsePlanOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteResponsePlanOperationOutput', name: 'DeleteResponsePlanOperationOutput')
+    DeleteTimelineEventOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteTimelineEventOperationInput', name: 'DeleteTimelineEventOperationInput')
+    DeleteTimelineEventOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#DeleteTimelineEventOperationOutput', name: 'DeleteTimelineEventOperationOutput')
+    DynamicSsmParameterValue = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#DynamicSsmParameterValue', name: 'DynamicSsmParameterValue')
+    DynamicSsmParameters = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#DynamicSsmParameters', name: 'DynamicSsmParameters', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    EmptyChatChannel = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#EmptyChatChannel', name: 'EmptyChatChannel')
+    EngagementSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#EngagementSet', name: 'EngagementSet', traits: {"smithy.api#length" => {"max" => 5}, "smithy.api#uniqueItems" => {}})
+    EventData = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#EventData', name: 'EventData', traits: {"smithy.api#length" => {"max" => 12000}})
+    EventReference = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#EventReference', name: 'EventReference')
+    EventReferenceList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#EventReferenceList', name: 'EventReferenceList', traits: {"smithy.api#length" => {"max" => 10}})
+    EventSummary = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#EventSummary', name: 'EventSummary')
+    EventSummaryList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#EventSummaryList', name: 'EventSummaryList', traits: {"smithy.api#length" => {"max" => 100}})
+    ExceptionMessage = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ExceptionMessage', name: 'ExceptionMessage')
+    Filter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#Filter', name: 'Filter')
+    FilterList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#FilterList', name: 'FilterList', traits: {"smithy.api#length" => {"max" => 5}})
+    Finding = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#Finding', name: 'Finding')
+    FindingDetails = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#FindingDetails', name: 'FindingDetails')
+    FindingId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#FindingId', name: 'FindingId', traits: {"smithy.api#length" => {"max" => 128}})
+    FindingIdList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#FindingIdList', name: 'FindingIdList', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    FindingList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#FindingList', name: 'FindingList')
+    FindingSummary = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#FindingSummary', name: 'FindingSummary')
+    FindingSummaryList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#FindingSummaryList', name: 'FindingSummaryList', traits: {"smithy.api#length" => {"max" => 100}})
+    GeneratedId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#GeneratedId', name: 'GeneratedId', traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^related-item/(ANALYSIS|INCIDENT|METRIC|PARENT|ATTACHMENT|OTHER|AUTOMATION|INVOLVED_RESOURCE|TASK)/([0-9]|[A-F]){32}$"})
+    GetIncidentRecordOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetIncidentRecordOperationInput', name: 'GetIncidentRecordOperationInput')
+    GetIncidentRecordOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetIncidentRecordOperationOutput', name: 'GetIncidentRecordOperationOutput')
+    GetReplicationSetOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetReplicationSetOperationInput', name: 'GetReplicationSetOperationInput')
+    GetReplicationSetOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetReplicationSetOperationOutput', name: 'GetReplicationSetOperationOutput')
+    GetResourcePoliciesOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetResourcePoliciesOperationInput', name: 'GetResourcePoliciesOperationInput')
+    GetResourcePoliciesOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetResourcePoliciesOperationOutput', name: 'GetResourcePoliciesOperationOutput')
+    GetResponsePlanOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetResponsePlanOperationInput', name: 'GetResponsePlanOperationInput')
+    GetResponsePlanOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetResponsePlanOperationOutput', name: 'GetResponsePlanOperationOutput')
+    GetTimelineEventOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetTimelineEventOperationInput', name: 'GetTimelineEventOperationInput')
+    GetTimelineEventOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#GetTimelineEventOperationOutput', name: 'GetTimelineEventOperationOutput')
+    Impact = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ssmincidents#Impact', name: 'Impact', traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
+    IncidentRecord = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#IncidentRecord', name: 'IncidentRecord')
+    IncidentRecordSource = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#IncidentRecordSource', name: 'IncidentRecordSource')
+    IncidentRecordStatus = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#IncidentRecordStatus', name: 'IncidentRecordStatus', traits: {"smithy.api#enum" => [{"value" => "OPEN", "name" => "OPEN"}, {"value" => "RESOLVED", "name" => "RESOLVED"}]})
+    IncidentRecordSummary = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#IncidentRecordSummary', name: 'IncidentRecordSummary')
+    IncidentRecordSummaryList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#IncidentRecordSummaryList', name: 'IncidentRecordSummaryList', traits: {"smithy.api#length" => {"max" => 100}})
+    IncidentSource = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#IncidentSource', name: 'IncidentSource', traits: {"smithy.api#length" => {"max" => 50}})
+    IncidentSummary = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#IncidentSummary', name: 'IncidentSummary', traits: {"smithy.api#length" => {"max" => 8000}})
+    IncidentTemplate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#IncidentTemplate', name: 'IncidentTemplate')
+    IncidentTitle = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#IncidentTitle', name: 'IncidentTitle', traits: {"smithy.api#length" => {"max" => 200}})
+    IntegerList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#IntegerList', name: 'IntegerList', traits: {"smithy.api#length" => {"max" => 100}})
+    Integration = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#Integration', name: 'Integration')
+    Integrations = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#Integrations', name: 'Integrations', traits: {"smithy.api#length" => {"max" => 1}})
+    InternalServerException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    ItemIdentifier = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ItemIdentifier', name: 'ItemIdentifier')
+    ItemType = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ItemType', name: 'ItemType', traits: {"smithy.api#enum" => [{"value" => "ANALYSIS", "name" => "ANALYSIS"}, {"value" => "INCIDENT", "name" => "INCIDENT"}, {"value" => "METRIC", "name" => "METRIC"}, {"value" => "PARENT", "name" => "PARENT"}, {"value" => "ATTACHMENT", "name" => "ATTACHMENT"}, {"value" => "OTHER", "name" => "OTHER"}, {"value" => "AUTOMATION", "name" => "AUTOMATION"}, {"value" => "INVOLVED_RESOURCE", "name" => "INVOLVED_RESOURCE"}, {"value" => "TASK", "name" => "TASK"}]})
+    ItemValue = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#ItemValue', name: 'ItemValue')
+    ListIncidentFindingsInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListIncidentFindingsInput', name: 'ListIncidentFindingsInput')
+    ListIncidentFindingsOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListIncidentFindingsOutput', name: 'ListIncidentFindingsOutput')
+    ListIncidentRecordsOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListIncidentRecordsOperationInput', name: 'ListIncidentRecordsOperationInput')
+    ListIncidentRecordsOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListIncidentRecordsOperationOutput', name: 'ListIncidentRecordsOperationOutput')
+    ListRelatedItemsOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListRelatedItemsOperationInput', name: 'ListRelatedItemsOperationInput')
+    ListRelatedItemsOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListRelatedItemsOperationOutput', name: 'ListRelatedItemsOperationOutput')
+    ListReplicationSetsOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListReplicationSetsOperationInput', name: 'ListReplicationSetsOperationInput')
+    ListReplicationSetsOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListReplicationSetsOperationOutput', name: 'ListReplicationSetsOperationOutput')
+    ListResponsePlansOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListResponsePlansOperationInput', name: 'ListResponsePlansOperationInput')
+    ListResponsePlansOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListResponsePlansOperationOutput', name: 'ListResponsePlansOperationOutput')
+    ListTagsForResourceInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListTagsForResourceInput', name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListTagsForResourceOutput', name: 'ListTagsForResourceOutput')
+    ListTimelineEventsOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListTimelineEventsOperationInput', name: 'ListTimelineEventsOperationInput')
+    ListTimelineEventsOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ListTimelineEventsOperationOutput', name: 'ListTimelineEventsOperationOutput')
+    MaxResults = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ssmincidents#MaxResults', name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MetricDefinition = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#MetricDefinition', name: 'MetricDefinition', traits: {"smithy.api#length" => {"max" => 4000}})
+    NextToken = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#NextToken', name: 'NextToken', traits: {"smithy.api#length" => {"max" => 2000}})
+    NotificationTargetItem = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#NotificationTargetItem', name: 'NotificationTargetItem')
+    NotificationTargetSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#NotificationTargetSet', name: 'NotificationTargetSet', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    PagerDutyConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#PagerDutyConfiguration', name: 'PagerDutyConfiguration')
+    PagerDutyIncidentConfiguration = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#PagerDutyIncidentConfiguration', name: 'PagerDutyIncidentConfiguration')
+    PagerDutyIncidentDetail = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#PagerDutyIncidentDetail', name: 'PagerDutyIncidentDetail')
+    Policy = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#Policy', name: 'Policy', traits: {"smithy.api#length" => {"max" => 4000}})
+    PolicyId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#PolicyId', name: 'PolicyId', traits: {"smithy.api#length" => {"max" => 256}})
+    PutResourcePolicyOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#PutResourcePolicyOperationInput', name: 'PutResourcePolicyOperationInput')
+    PutResourcePolicyOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#PutResourcePolicyOperationOutput', name: 'PutResourcePolicyOperationOutput')
+    RawData = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#RawData', name: 'RawData', traits: {"smithy.api#length" => {"max" => 10000}})
+    RegionInfo = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#RegionInfo', name: 'RegionInfo')
+    RegionInfoMap = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#RegionInfoMap', name: 'RegionInfoMap')
+    RegionMapInput = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#RegionMapInput', name: 'RegionMapInput', traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    RegionMapInputValue = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#RegionMapInputValue', name: 'RegionMapInputValue')
+    RegionName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#RegionName', name: 'RegionName', traits: {"smithy.api#length" => {"max" => 20}})
+    RegionStatus = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#RegionStatus', name: 'RegionStatus', traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE", "documentation" => "All operations have completed successfully and the region is ready to use"}, {"value" => "CREATING", "name" => "CREATING", "documentation" => "The region is in the process of being created."}, {"value" => "DELETING", "name" => "DELETING", "documentation" => "The region is in the process of being deleted."}, {"value" => "FAILED", "name" => "FAILED", "documentation" => "The region is not healthy and we cannot automatically fix it."}]})
+    RelatedItem = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#RelatedItem', name: 'RelatedItem')
+    RelatedItemList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#RelatedItemList', name: 'RelatedItemList', traits: {"smithy.api#length" => {"max" => 100}})
+    RelatedItemsUpdate = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#RelatedItemsUpdate', name: 'RelatedItemsUpdate')
+    ReplicationSet = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ReplicationSet', name: 'ReplicationSet')
+    ReplicationSetArnList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#ReplicationSetArnList', name: 'ReplicationSetArnList')
+    ReplicationSetStatus = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ReplicationSetStatus', name: 'ReplicationSetStatus', traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE", "documentation" => "All operations have completed successfully and the replication set is ready to use"}, {"value" => "CREATING", "name" => "CREATING", "documentation" => "Replication set is in the process of being created."}, {"value" => "UPDATING", "name" => "UPDATING", "documentation" => "Replication set is in the process of being updated."}, {"value" => "DELETING", "name" => "DELETING", "documentation" => "Replication set is in the process of being deleted."}, {"value" => "FAILED", "name" => "FAILED", "documentation" => "Replication set is not healthy and we cannot fix it."}]})
+    ResourceNotFoundException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourcePolicy = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ResourcePolicy', name: 'ResourcePolicy')
+    ResourcePolicyList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#ResourcePolicyList', name: 'ResourcePolicyList', traits: {"smithy.api#length" => {"max" => 100}})
+    ResourceType = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ResourceType', name: 'ResourceType', traits: {"smithy.api#enum" => [{"value" => "RESPONSE_PLAN", "name" => "RESPONSE_PLAN"}, {"value" => "INCIDENT_RECORD", "name" => "INCIDENT_RECORD"}, {"value" => "TIMELINE_EVENT", "name" => "TIMELINE_EVENT"}, {"value" => "REPLICATION_SET", "name" => "REPLICATION_SET"}, {"value" => "RESOURCE_POLICY", "name" => "RESOURCE_POLICY"}]})
+    ResponsePlanDisplayName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ResponsePlanDisplayName', name: 'ResponsePlanDisplayName', traits: {"smithy.api#length" => {"max" => 200}})
+    ResponsePlanName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ResponsePlanName', name: 'ResponsePlanName', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]*$"})
+    ResponsePlanSummary = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ResponsePlanSummary', name: 'ResponsePlanSummary')
+    ResponsePlanSummaryList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#ResponsePlanSummaryList', name: 'ResponsePlanSummaryList', traits: {"smithy.api#length" => {"max" => 100}})
+    RoleArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#RoleArn', name: 'RoleArn', traits: {"aws.api#arnReference" => {"type" => "AWS::IAM::Role"}, "smithy.api#length" => {"max" => 1000}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:iam::([0-9]{12})?:role/.+$"})
+    ServiceCode = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ServiceCode', name: 'ServiceCode', traits: {"smithy.api#enum" => [{"value" => "ssm-incidents", "name" => "SSM_INCIDENTS"}]})
+    ServicePrincipal = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#ServicePrincipal', name: 'ServicePrincipal', traits: {"smithy.api#length" => {"max" => 1000}})
+    ServiceQuotaExceededException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SnsArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#SnsArn', name: 'SnsArn', traits: {"aws.api#arnReference" => {"type" => "AWS::SNS::Topic"}, "smithy.api#length" => {"max" => 1000}})
+    SortOrder = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#SortOrder', name: 'SortOrder', traits: {"smithy.api#enum" => [{"value" => "ASCENDING", "name" => "ASCENDING"}, {"value" => "DESCENDING", "name" => "DESCENDING"}]})
+    SseKmsKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#SseKmsKey', name: 'SseKmsKey', traits: {"smithy.api#length" => {"max" => 2048}})
+    SsmAutomation = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#SsmAutomation', name: 'SsmAutomation')
+    SsmContactsArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#SsmContactsArn', name: 'SsmContactsArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:ssm-contacts:[a-z0-9-]*:([0-9]{12}):contact/[a-z0-9_-]+$"})
+    SsmParameterValues = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#SsmParameterValues', name: 'SsmParameterValues', traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    SsmParameters = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#SsmParameters', name: 'SsmParameters', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    SsmTargetAccount = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#SsmTargetAccount', name: 'SsmTargetAccount', traits: {"smithy.api#enum" => [{"value" => "RESPONSE_PLAN_OWNER_ACCOUNT", "name" => "RESPONSE_PLAN_OWNER_ACCOUNT"}, {"value" => "IMPACTED_ACCOUNT", "name" => "IMPACTED_ACCOUNT"}]})
+    StartIncidentOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#StartIncidentOperationInput', name: 'StartIncidentOperationInput')
+    StartIncidentOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#StartIncidentOperationOutput', name: 'StartIncidentOperationOutput')
+    StringList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#StringList', name: 'StringList', traits: {"smithy.api#length" => {"max" => 100}})
+    TagKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[A-Za-z0-9 _=@:.+-/]+$"})
+    TagKeyList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    TagMap = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#TagMap', name: 'TagMap', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    TagMapUpdate = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmincidents#TagMapUpdate', name: 'TagMapUpdate', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagResourceInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#TagResourceInput', name: 'TagResourceInput')
+    TagResourceOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#TagResourceOutput', name: 'TagResourceOutput')
+    TagValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]*$"})
+    ThrottlingException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimelineEvent = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#TimelineEvent', name: 'TimelineEvent')
+    TimelineEventSort = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#TimelineEventSort', name: 'TimelineEventSort', traits: {"smithy.api#enum" => [{"value" => "EVENT_TIME", "name" => "EVENT_TIME"}]})
+    TimelineEventType = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#TimelineEventType', name: 'TimelineEventType', traits: {"smithy.api#length" => {"max" => 100}})
+    TriggerDetails = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#TriggerDetails', name: 'TriggerDetails')
+    UUID = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#UUID', name: 'UUID', traits: {"smithy.api#length" => {"max" => 50}})
+    UntagResourceInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UntagResourceInput', name: 'UntagResourceInput')
+    UntagResourceOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UntagResourceOutput', name: 'UntagResourceOutput')
+    UpdateActionList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmincidents#UpdateActionList', name: 'UpdateActionList')
+    UpdateDeletionProtectionOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateDeletionProtectionOperationInput', name: 'UpdateDeletionProtectionOperationInput')
+    UpdateDeletionProtectionOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateDeletionProtectionOperationOutput', name: 'UpdateDeletionProtectionOperationOutput')
+    UpdateIncidentRecordOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateIncidentRecordOperationInput', name: 'UpdateIncidentRecordOperationInput')
+    UpdateIncidentRecordOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateIncidentRecordOperationOutput', name: 'UpdateIncidentRecordOperationOutput')
+    UpdateRelatedItemsOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateRelatedItemsOperationInput', name: 'UpdateRelatedItemsOperationInput')
+    UpdateRelatedItemsOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateRelatedItemsOperationOutput', name: 'UpdateRelatedItemsOperationOutput')
+    UpdateReplicationSetAction = Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.ssmincidents#UpdateReplicationSetAction', name: 'UpdateReplicationSetAction')
+    UpdateReplicationSetOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateReplicationSetOperationInput', name: 'UpdateReplicationSetOperationInput')
+    UpdateReplicationSetOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateReplicationSetOperationOutput', name: 'UpdateReplicationSetOperationOutput')
+    UpdateResponsePlanOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateResponsePlanOperationInput', name: 'UpdateResponsePlanOperationInput')
+    UpdateResponsePlanOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateResponsePlanOperationOutput', name: 'UpdateResponsePlanOperationOutput')
+    UpdateTimelineEventOperationInput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateTimelineEventOperationInput', name: 'UpdateTimelineEventOperationInput')
+    UpdateTimelineEventOperationOutput = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#UpdateTimelineEventOperationOutput', name: 'UpdateTimelineEventOperationOutput')
+    Url = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#Url', name: 'Url', traits: {"smithy.api#length" => {"max" => 1000}})
+    ValidationException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmincidents#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    VariableType = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmincidents#VariableType', name: 'VariableType', traits: {"smithy.api#enum" => [{"value" => "INCIDENT_RECORD_ARN", "name" => "INCIDENT_RECORD_ARN"}, {"value" => "INVOLVED_RESOURCES", "name" => "INVOLVED_RESOURCES"}]})
+
+    AccessDeniedException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.type = Types::AccessDeniedException
+    Action.add_member(:ssm_automation, Types::Action::SsmAutomation, Smithy::Schema::Shapes::ShapeRef.new(shape: SsmAutomation, location_name: 'ssmAutomation', traits: {"smithy.api#documentation" => "<p>The Systems Manager automation document to start as the runbook at the beginning of the\n      incident.</p>"}))
+    Action.add_member(:unknown, Types::Action::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    Action.type = Types::Action
+    ActionsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Action)
+    AddRegionAction.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'regionName', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services Region name to add to the replication set.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    AddRegionAction.add_member(:sse_kms_key_id, Smithy::Schema::Shapes::ShapeRef.new(shape: SseKmsKey, location_name: 'sseKmsKeyId', traits: {"smithy.api#documentation" => "<p>The KMS key ID to use to encrypt your replication set.</p>"}))
+    AddRegionAction.type = Types::AddRegionAction
+    AttributeValueList.add_member(:string_values, Types::AttributeValueList::StringValues, Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'stringValues', traits: {"smithy.api#documentation" => "<p>The list of string values that the filter matches.</p>"}))
+    AttributeValueList.add_member(:integer_values, Types::AttributeValueList::IntegerValues, Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerList, location_name: 'integerValues', traits: {"smithy.api#documentation" => "<p>The list of integer values that the filter matches.</p>"}))
+    AttributeValueList.add_member(:unknown, Types::AttributeValueList::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    AttributeValueList.type = Types::AttributeValueList
+    AutomationExecution.add_member(:ssm_execution_arn, Types::AutomationExecution::SsmExecutionArn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'ssmExecutionArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the automation process.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    AutomationExecution.add_member(:unknown, Types::AutomationExecution::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    AutomationExecution.type = Types::AutomationExecution
+    AutomationExecutionSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AutomationExecution)
+    BatchGetIncidentFindingsError.add_member(:finding_id, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingId, location_name: 'findingId', traits: {"smithy.api#documentation" => "<p>The ID of a specified finding for which an error was returned for a\n        <code>BatchGetIncidentFindings</code> operation.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    BatchGetIncidentFindingsError.add_member(:code, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'code', traits: {"smithy.api#documentation" => "<p>The code associated with an error that was returned for a\n        <code>BatchGetIncidentFindings</code> operation.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    BatchGetIncidentFindingsError.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#documentation" => "<p>The description for an error that was returned for a <code>BatchGetIncidentFindings</code>\n      operation.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    BatchGetIncidentFindingsError.type = Types::BatchGetIncidentFindingsError
+    BatchGetIncidentFindingsErrorList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsError)
+    BatchGetIncidentFindingsInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident for which you want to view finding\n      details.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    BatchGetIncidentFindingsInput.add_member(:finding_ids, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingIdList, location_name: 'findingIds', traits: {"smithy.api#documentation" => "<p>A list of IDs of findings for which you want to view details.</p>", "smithy.api#required" => {}}))
+    BatchGetIncidentFindingsInput.type = Types::BatchGetIncidentFindingsInput
+    BatchGetIncidentFindingsOutput.add_member(:findings, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingList, location_name: 'findings', traits: {"smithy.api#documentation" => "<p>Information about the requested findings.</p>", "smithy.api#required" => {}}))
+    BatchGetIncidentFindingsOutput.add_member(:errors, Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsErrorList, location_name: 'errors', traits: {"smithy.api#documentation" => "<p>A list of errors encountered during the operation.</p>", "smithy.api#required" => {}}))
+    BatchGetIncidentFindingsOutput.type = Types::BatchGetIncidentFindingsOutput
+    ChatChannel.add_member(:empty, Types::ChatChannel::Empty, Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyChatChannel, location_name: 'empty', traits: {"smithy.api#documentation" => "<p>Used to remove the chat channel from an incident record or response plan.</p>"}))
+    ChatChannel.add_member(:chatbot_sns, Types::ChatChannel::ChatbotSns, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatbotSnsConfigurationSet, location_name: 'chatbotSns', traits: {"smithy.api#documentation" => "<p>The Amazon SNS targets that Chatbot uses to notify the chat channel of\n      updates to an incident. You can also make updates to the incident through the chat channel by\n      using the Amazon SNS topics. </p>"}))
+    ChatChannel.add_member(:unknown, Types::ChatChannel::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    ChatChannel.type = Types::ChatChannel
+    ChatbotSnsConfigurationSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: SnsArn, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    CloudFormationStackUpdate.add_member(:start_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'startTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the CloudFormation stack creation or update began.</p>", "smithy.api#required" => {}}))
+    CloudFormationStackUpdate.add_member(:end_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the CloudFormation stack creation or update ended. Not reported\n      for deployments that are still in progress.</p>"}))
+    CloudFormationStackUpdate.add_member(:stack_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'stackArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the CloudFormation stack involved in the\n      update.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CloudFormationStackUpdate.type = Types::CloudFormationStackUpdate
+    CodeDeployDeployment.add_member(:start_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'startTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the CodeDeploy deployment began.</p>", "smithy.api#required" => {}}))
+    CodeDeployDeployment.add_member(:end_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the CodeDeploy deployment ended. Not reported for\n      deployments that are still in progress.</p>"}))
+    CodeDeployDeployment.add_member(:deployment_group_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'deploymentGroupArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the CodeDeploy deployment group associated with\n      the deployment.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CodeDeployDeployment.add_member(:deployment_id, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'deploymentId', traits: {"smithy.api#documentation" => "<p>The ID of the CodeDeploy deployment.</p>", "smithy.api#length" => {"max" => 128}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CodeDeployDeployment.type = Types::CodeDeployDeployment
+    Condition.add_member(:before, Types::Condition::Before, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'before', traits: {"smithy.api#documentation" => "<p>Before the specified timestamp</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    Condition.add_member(:after, Types::Condition::After, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'after', traits: {"smithy.api#documentation" => "<p>After the specified timestamp.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    Condition.add_member(:equals, Types::Condition::Equals, Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValueList, location_name: 'equals', traits: {"smithy.api#documentation" => "<p>The value is equal to the provided string or integer. </p>"}))
+    Condition.add_member(:unknown, Types::Condition::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    Condition.type = Types::Condition
+    ConflictException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_identifier, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceIdentifier', traits: {"smithy.api#documentation" => "The identifier of the requested resource"}))
+    ConflictException.add_member(:resource_type, Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: 'resourceType', traits: {"smithy.api#documentation" => "The resource type"}))
+    ConflictException.add_member(:retry_after, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'retryAfter', traits: {"smithy.api#documentation" => "If present in the output, the operation can be retried after this time"}))
+    ConflictException.type = Types::ConflictException
+    CreateReplicationSetOperationInput.add_member(:regions, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionMapInput, location_name: 'regions', traits: {"smithy.api#documentation" => "<p>The Regions that Incident Manager replicates your data to. You can have up to three Regions in\n      your replication set.</p>", "smithy.api#required" => {}}))
+    CreateReplicationSetOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateReplicationSetOperationInput.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A list of tags to add to the replication set.</p>"}))
+    CreateReplicationSetOperationInput.type = Types::CreateReplicationSetOperationInput
+    CreateReplicationSetOperationOutput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set. </p>", "smithy.api#required" => {}}))
+    CreateReplicationSetOperationOutput.type = Types::CreateReplicationSetOperationOutput
+    CreateResponsePlanOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token ensuring that the operation is called only once with the specified details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateResponsePlanOperationInput.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanName, location_name: 'name', traits: {"smithy.api#documentation" => "<p>The short format name of the response plan. Can't include spaces.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateResponsePlanOperationInput.add_member(:display_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: 'displayName', traits: {"smithy.api#documentation" => "<p>The long format of the response plan name. This field can contain spaces.</p>"}))
+    CreateResponsePlanOperationInput.add_member(:incident_template, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTemplate, location_name: 'incidentTemplate', traits: {"smithy.api#documentation" => "<p>Details used to create an incident when using this response plan.</p>", "smithy.api#required" => {}}))
+    CreateResponsePlanOperationInput.add_member(:chat_channel, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatChannel, location_name: 'chatChannel', traits: {"smithy.api#documentation" => "<p>The Chatbot chat channel used for collaboration during an incident.</p>"}))
+    CreateResponsePlanOperationInput.add_member(:engagements, Smithy::Schema::Shapes::ShapeRef.new(shape: EngagementSet, location_name: 'engagements', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"}))
+    CreateResponsePlanOperationInput.add_member(:actions, Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: 'actions', traits: {"smithy.api#documentation" => "<p>The actions that the response plan starts at the beginning of an incident.</p>"}))
+    CreateResponsePlanOperationInput.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A list of tags that you are adding to the response plan.</p>"}))
+    CreateResponsePlanOperationInput.add_member(:integrations, Smithy::Schema::Shapes::ShapeRef.new(shape: Integrations, location_name: 'integrations', traits: {"smithy.api#documentation" => "<p>Information about third-party services integrated into the response plan.</p>"}))
+    CreateResponsePlanOperationInput.type = Types::CreateResponsePlanOperationInput
+    CreateResponsePlanOperationOutput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan.</p>", "smithy.api#required" => {}}))
+    CreateResponsePlanOperationOutput.type = Types::CreateResponsePlanOperationOutput
+    CreateTimelineEventOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that a client calls the action only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateTimelineEventOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record that the action adds the incident\n      to.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    CreateTimelineEventOperationInput.add_member(:event_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the event occurred.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateTimelineEventOperationInput.add_member(:event_type, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEventType, location_name: 'eventType', traits: {"smithy.api#documentation" => "<p>The type of event. You can create timeline events of type <code>Custom Event</code> and\n        <code>Note</code>.</p>\n         <p>To make a Note-type event appear on the <i>Incident notes</i> panel in the\n      console, specify <code>eventType</code> as <code>Note</code>and enter the Amazon Resource Name\n      (ARN) of the incident as the value for <code>eventReference</code>.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    CreateTimelineEventOperationInput.add_member(:event_data, Smithy::Schema::Shapes::ShapeRef.new(shape: EventData, location_name: 'eventData', traits: {"smithy.api#documentation" => "<p>A short description of the event.</p>", "smithy.api#required" => {}}))
+    CreateTimelineEventOperationInput.add_member(:event_references, Smithy::Schema::Shapes::ShapeRef.new(shape: EventReferenceList, location_name: 'eventReferences', traits: {"smithy.api#documentation" => "<p>Adds one or more references to the <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter\n      its Amazon Resource Name (ARN). You can also specify a related item associated with a\n      resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a\n      resource, use the table's ARN. You can also specify an Amazon CloudWatch metric associated\n      with the DynamoDB table as a related item.</p>"}))
+    CreateTimelineEventOperationInput.type = Types::CreateTimelineEventOperationInput
+    CreateTimelineEventOperationOutput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The ARN of the incident record that you added the event to.</p>", "smithy.api#required" => {}}))
+    CreateTimelineEventOperationOutput.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The ID of the event for easy reference later. </p>", "smithy.api#required" => {}}))
+    CreateTimelineEventOperationOutput.type = Types::CreateTimelineEventOperationOutput
+    DeleteIncidentRecordOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record you are deleting.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteIncidentRecordOperationInput.type = Types::DeleteIncidentRecordOperationInput
+    DeleteIncidentRecordOperationOutput.type = Types::DeleteIncidentRecordOperationOutput
+    DeleteRegionAction.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'regionName', traits: {"smithy.api#documentation" => "<p>The name of the Amazon Web Services Region you're deleting from the replication set.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    DeleteRegionAction.type = Types::DeleteRegionAction
+    DeleteReplicationSetOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set you're deleting.</p>", "smithy.api#httpQuery" => "arn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteReplicationSetOperationInput.type = Types::DeleteReplicationSetOperationInput
+    DeleteReplicationSetOperationOutput.type = Types::DeleteReplicationSetOperationOutput
+    DeleteResourcePolicyOperationInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the resource you're deleting the policy from.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteResourcePolicyOperationInput.add_member(:policy_id, Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: 'policyId', traits: {"smithy.api#documentation" => "<p>The ID of the resource policy you're deleting.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigation"]}))
+    DeleteResourcePolicyOperationInput.type = Types::DeleteResourcePolicyOperationInput
+    DeleteResourcePolicyOperationOutput.type = Types::DeleteResourcePolicyOperationOutput
+    DeleteResponsePlanOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteResponsePlanOperationInput.type = Types::DeleteResponsePlanOperationInput
+    DeleteResponsePlanOperationOutput.type = Types::DeleteResponsePlanOperationOutput
+    DeleteTimelineEventOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteTimelineEventOperationInput.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an\n      event's ID.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    DeleteTimelineEventOperationInput.type = Types::DeleteTimelineEventOperationInput
+    DeleteTimelineEventOperationOutput.type = Types::DeleteTimelineEventOperationOutput
+    DynamicSsmParameterValue.add_member(:variable, Types::DynamicSsmParameterValue::Variable, Smithy::Schema::Shapes::ShapeRef.new(shape: VariableType, location_name: 'variable', traits: {"smithy.api#documentation" => "<p>Variable dynamic parameters. A parameter value is determined when an incident is\n      created.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    DynamicSsmParameterValue.add_member(:unknown, Types::DynamicSsmParameterValue::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    DynamicSsmParameterValue.type = Types::DynamicSsmParameterValue
+    DynamicSsmParameters.key = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    DynamicSsmParameters.value = Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicSsmParameterValue)
+    EmptyChatChannel.type = Types::EmptyChatChannel
+    EngagementSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    EventReference.add_member(:resource, Types::EventReference::Resource, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resource', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in a\n        <code>TimelineEvent</code>.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    EventReference.add_member(:related_item_id, Types::EventReference::RelatedItemId, Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedId, location_name: 'relatedItemId', traits: {"smithy.api#documentation" => "<p>The ID of a <code>RelatedItem</code> referenced in a <code>TimelineEvent</code>.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    EventReference.add_member(:unknown, Types::EventReference::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    EventReference.type = Types::EventReference
+    EventReferenceList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventReference)
+    EventSummary.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that the event happened during.</p>", "smithy.api#required" => {}}))
+    EventSummary.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The timeline event ID.</p>", "smithy.api#required" => {}}))
+    EventSummary.add_member(:event_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the event occurred.</p>", "smithy.api#required" => {}}))
+    EventSummary.add_member(:event_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventUpdatedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the timeline event was last updated.</p>", "smithy.api#required" => {}}))
+    EventSummary.add_member(:event_type, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEventType, location_name: 'eventType', traits: {"smithy.api#documentation" => "<p>The type of event. The timeline event must be <code>Custom Event</code> or\n        <code>Note</code>.</p>", "smithy.api#required" => {}}))
+    EventSummary.add_member(:event_references, Smithy::Schema::Shapes::ShapeRef.new(shape: EventReferenceList, location_name: 'eventReferences', traits: {"smithy.api#documentation" => "<p>A list of references in a <code>TimelineEvent</code>.</p>"}))
+    EventSummary.type = Types::EventSummary
+    EventSummaryList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventSummary)
+    Filter.add_member(:key, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'key', traits: {"smithy.api#documentation" => "<p>The key that you're filtering on.</p>", "smithy.api#length" => {"max" => 50}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    Filter.add_member(:condition, Smithy::Schema::Shapes::ShapeRef.new(shape: Condition, location_name: 'condition', traits: {"smithy.api#documentation" => "<p>The condition accepts before or after a specified time, equal to a string, or equal to an\n      integer.</p>", "smithy.api#required" => {}}))
+    Filter.type = Types::Filter
+    FilterList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
+    Finding.add_member(:id, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingId, location_name: 'id', traits: {"smithy.api#documentation" => "<p>The ID assigned to the finding.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    Finding.add_member(:creation_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'creationTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when a finding was created.</p>", "smithy.api#required" => {}}))
+    Finding.add_member(:last_modified_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'lastModifiedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the finding was most recently updated with additional\n      information.</p>", "smithy.api#required" => {}}))
+    Finding.add_member(:details, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingDetails, location_name: 'details', traits: {"smithy.api#documentation" => "<p>Details about the finding.</p>"}))
+    Finding.type = Types::Finding
+    FindingDetails.add_member(:code_deploy_deployment, Types::FindingDetails::CodeDeployDeployment, Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeployDeployment, location_name: 'codeDeployDeployment', traits: {"smithy.api#documentation" => "<p>Information about the CodeDeploy deployment associated with the finding.</p>"}))
+    FindingDetails.add_member(:cloud_formation_stack_update, Types::FindingDetails::CloudFormationStackUpdate, Smithy::Schema::Shapes::ShapeRef.new(shape: CloudFormationStackUpdate, location_name: 'cloudFormationStackUpdate', traits: {"smithy.api#documentation" => "<p>Information about the CloudFormation stack creation or update associated with the\n      finding.</p>"}))
+    FindingDetails.add_member(:unknown, Types::FindingDetails::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    FindingDetails.type = Types::FindingDetails
+    FindingIdList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: FindingId)
+    FindingList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Finding)
+    FindingSummary.add_member(:id, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingId, location_name: 'id', traits: {"smithy.api#documentation" => "<p>The ID of the finding.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    FindingSummary.add_member(:last_modified_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'lastModifiedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the finding was last updated.</p>", "smithy.api#required" => {}}))
+    FindingSummary.type = Types::FindingSummary
+    FindingSummaryList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: FindingSummary)
+    GetIncidentRecordOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record.</p>", "smithy.api#httpQuery" => "arn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetIncidentRecordOperationInput.type = Types::GetIncidentRecordOperationInput
+    GetIncidentRecordOperationOutput.add_member(:incident_record, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecord, location_name: 'incidentRecord', traits: {"smithy.api#documentation" => "<p>Details the structure of the incident record.</p>", "smithy.api#required" => {}}))
+    GetIncidentRecordOperationOutput.type = Types::GetIncidentRecordOperationOutput
+    GetReplicationSetOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set you want to retrieve.</p>", "smithy.api#httpQuery" => "arn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetReplicationSetOperationInput.type = Types::GetReplicationSetOperationInput
+    GetReplicationSetOperationOutput.add_member(:replication_set, Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationSet, location_name: 'replicationSet', traits: {"smithy.api#documentation" => "<p>Details of the replication set.</p>", "smithy.api#required" => {}}))
+    GetReplicationSetOperationOutput.type = Types::GetReplicationSetOperationOutput
+    GetResourcePoliciesOperationInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan with the attached resource policy.\n    </p>", "smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetResourcePoliciesOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of resource policies to display for each page of results.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    GetResourcePoliciesOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    GetResourcePoliciesOperationInput.type = Types::GetResourcePoliciesOperationInput
+    GetResourcePoliciesOperationOutput.add_member(:resource_policies, Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicyList, location_name: 'resourcePolicies', traits: {"smithy.api#documentation" => "<p>Details about the resource policy attached to the response plan.</p>", "smithy.api#required" => {}}))
+    GetResourcePoliciesOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    GetResourcePoliciesOperationOutput.type = Types::GetResourcePoliciesOperationOutput
+    GetResponsePlanOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan.</p>", "smithy.api#httpQuery" => "arn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetResponsePlanOperationInput.type = Types::GetResponsePlanOperationInput
+    GetResponsePlanOperationOutput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The ARN of the response plan.</p>", "smithy.api#required" => {}}))
+    GetResponsePlanOperationOutput.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanName, location_name: 'name', traits: {"smithy.api#documentation" => "<p>The short format name of the response plan. The name can't contain spaces.</p>", "smithy.api#required" => {}}))
+    GetResponsePlanOperationOutput.add_member(:display_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: 'displayName', traits: {"smithy.api#documentation" => "<p>The long format name of the response plan. Can contain spaces.</p>"}))
+    GetResponsePlanOperationOutput.add_member(:incident_template, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTemplate, location_name: 'incidentTemplate', traits: {"smithy.api#documentation" => "<p>Details used to create the incident when using this response plan.</p>", "smithy.api#required" => {}}))
+    GetResponsePlanOperationOutput.add_member(:chat_channel, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatChannel, location_name: 'chatChannel', traits: {"smithy.api#documentation" => "<p>The Chatbot chat channel used for collaboration during an incident.</p>"}))
+    GetResponsePlanOperationOutput.add_member(:engagements, Smithy::Schema::Shapes::ShapeRef.new(shape: EngagementSet, location_name: 'engagements', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"}))
+    GetResponsePlanOperationOutput.add_member(:actions, Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: 'actions', traits: {"smithy.api#documentation" => "<p>The actions that this response plan takes at the beginning of the incident.</p>"}))
+    GetResponsePlanOperationOutput.add_member(:integrations, Smithy::Schema::Shapes::ShapeRef.new(shape: Integrations, location_name: 'integrations', traits: {"smithy.api#documentation" => "<p>Information about third-party services integrated into the Incident Manager response\n      plan.</p>"}))
+    GetResponsePlanOperationOutput.type = Types::GetResponsePlanOperationOutput
+    GetTimelineEventOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>", "smithy.api#httpQuery" => "incidentRecordArn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetTimelineEventOperationInput.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The ID of the event. You can get an event's ID when you create it, or by using\n        <code>ListTimelineEvents</code>.</p>", "smithy.api#httpQuery" => "eventId", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    GetTimelineEventOperationInput.type = Types::GetTimelineEventOperationInput
+    GetTimelineEventOperationOutput.add_member(:event, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEvent, location_name: 'event', traits: {"smithy.api#documentation" => "<p>Details about the timeline event.</p>", "smithy.api#required" => {}}))
+    GetTimelineEventOperationOutput.type = Types::GetTimelineEventOperationOutput
+    IncidentRecord.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'title', traits: {"smithy.api#documentation" => "<p>The title of the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:summary, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSummary, location_name: 'summary', traits: {"smithy.api#documentation" => "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n      currently happening, and context of the incident.</p>"}))
+    IncidentRecord.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordStatus, location_name: 'status', traits: {"smithy.api#documentation" => "<p>The current status of the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'impact', traits: {"smithy.api#documentation" => "<p>The impact of the incident on customers and applications.</p>\n         <p class=\"title\">\n            <b>Supported impact codes</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No Impact</p>\n            </li>\n         </ul>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:creation_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'creationTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when Incident Manager created the incident record.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:resolved_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'resolvedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the incident was resolved. This appears as a timeline event.</p>"}))
+    IncidentRecord.add_member(:last_modified_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'lastModifiedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the incident was most recently modified.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:last_modified_by, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'lastModifiedBy', traits: {"smithy.api#documentation" => "<p>Who modified the incident most recently.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:automation_executions, Smithy::Schema::Shapes::ShapeRef.new(shape: AutomationExecutionSet, location_name: 'automationExecutions', traits: {"smithy.api#documentation" => "<p>The runbook, or automation document, that's run at the beginning of the incident.</p>"}))
+    IncidentRecord.add_member(:incident_record_source, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordSource, location_name: 'incidentRecordSource', traits: {"smithy.api#documentation" => "<p>Details about the action that started the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:dedupe_string, Smithy::Schema::Shapes::ShapeRef.new(shape: DedupeString, location_name: 'dedupeString', traits: {"smithy.api#documentation" => "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same\n      incident in the same account.</p>", "smithy.api#required" => {}}))
+    IncidentRecord.add_member(:chat_channel, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatChannel, location_name: 'chatChannel', traits: {"smithy.api#documentation" => "<p>The chat channel used for collaboration during an incident.</p>"}))
+    IncidentRecord.add_member(:notification_targets, Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: 'notificationTargets', traits: {"smithy.api#documentation" => "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"}))
+    IncidentRecord.type = Types::IncidentRecord
+    IncidentRecordSource.add_member(:created_by, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'createdBy', traits: {"smithy.api#documentation" => "<p>The principal that started the incident.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    IncidentRecordSource.add_member(:invoked_by, Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: 'invokedBy', traits: {"smithy.api#documentation" => "<p>The service principal that assumed the role specified in <code>createdBy</code>. If no\n      service principal assumed the role this will be left blank.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    IncidentRecordSource.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The resource that caused the incident to be created.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    IncidentRecordSource.add_member(:source, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSource, location_name: 'source', traits: {"smithy.api#documentation" => "<p>The service that started the incident. This can be manually created from Incident Manager,\n      automatically created using an Amazon CloudWatch alarm, or Amazon EventBridge\n      event.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    IncidentRecordSource.type = Types::IncidentRecordSource
+    IncidentRecordSummary.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'title', traits: {"smithy.api#documentation" => "<p>The title of the incident. This value is either provided by the response plan or\n      overwritten on creation.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordStatus, location_name: 'status', traits: {"smithy.api#documentation" => "<p>The current status of the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.add_member(:impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'impact', traits: {"smithy.api#documentation" => "<p>Defines the impact to customers and applications.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.add_member(:creation_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'creationTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the incident was created.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.add_member(:resolved_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'resolvedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the incident was resolved.</p>"}))
+    IncidentRecordSummary.add_member(:incident_record_source, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordSource, location_name: 'incidentRecordSource', traits: {"smithy.api#documentation" => "<p>What caused Incident Manager to create the incident.</p>", "smithy.api#required" => {}}))
+    IncidentRecordSummary.type = Types::IncidentRecordSummary
+    IncidentRecordSummaryList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordSummary)
+    IncidentTemplate.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'title', traits: {"smithy.api#documentation" => "<p>The title of the incident. </p>", "smithy.api#required" => {}}))
+    IncidentTemplate.add_member(:impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'impact', traits: {"smithy.api#documentation" => "<p>The impact of the incident on your customers and applications.</p>\n         <p class=\"title\">\n            <b>Supported impact codes</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No Impact</p>\n            </li>\n         </ul>", "smithy.api#required" => {}}))
+    IncidentTemplate.add_member(:summary, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSummary, location_name: 'summary', traits: {"smithy.api#documentation" => "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n      currently happening, and context.</p>"}))
+    IncidentTemplate.add_member(:dedupe_string, Smithy::Schema::Shapes::ShapeRef.new(shape: DedupeString, location_name: 'dedupeString', traits: {"smithy.api#documentation" => "<p>The string Incident Manager uses to prevent the same root cause from creating multiple\n      incidents in the same account.</p>\n         <p>A deduplication string is a term or phrase the system uses to check for duplicate\n      incidents. If you specify a deduplication string, Incident Manager searches for open incidents that\n      contain the same string in the <code>dedupeString</code> field when it creates the incident.\n      If a duplicate is detected, Incident Manager deduplicates the newer incident into the existing\n      incident.</p>\n         <note>\n            <p>By default, Incident Manager automatically deduplicates multiple incidents created by the\n        same Amazon CloudWatch alarm or Amazon EventBridge event. You don't have to enter\n        your own deduplication string to prevent duplication for these resource types.</p>\n         </note>", "smithy.api#tags" => ["logs_investigations"]}))
+    IncidentTemplate.add_member(:notification_targets, Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: 'notificationTargets', traits: {"smithy.api#documentation" => "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"}))
+    IncidentTemplate.add_member(:incident_tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'incidentTags', traits: {"smithy.api#documentation" => "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is called,\n      Incident Manager assigns the tags specified in the template to the incident.</p>"}))
+    IncidentTemplate.type = Types::IncidentTemplate
+    IntegerList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Integer, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    Integration.add_member(:pager_duty_configuration, Types::Integration::PagerDutyConfiguration, Smithy::Schema::Shapes::ShapeRef.new(shape: PagerDutyConfiguration, location_name: 'pagerDutyConfiguration', traits: {"smithy.api#documentation" => "<p>Information about the PagerDuty service where the response plan creates an\n      incident.</p>"}))
+    Integration.add_member(:unknown, Types::Integration::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    Integration.type = Types::Integration
+    Integrations.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Integration)
+    InternalServerException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    InternalServerException.type = Types::InternalServerException
+    ItemIdentifier.add_member(:value, Smithy::Schema::Shapes::ShapeRef.new(shape: ItemValue, location_name: 'value', traits: {"smithy.api#documentation" => "<p>Details about the related item.</p>", "smithy.api#required" => {}}))
+    ItemIdentifier.add_member(:type, Smithy::Schema::Shapes::ShapeRef.new(shape: ItemType, location_name: 'type', traits: {"smithy.api#documentation" => "<p>The type of related item. </p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    ItemIdentifier.type = Types::ItemIdentifier
+    ItemValue.add_member(:arn, Types::ItemValue::Arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon\n      resource.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ItemValue.add_member(:url, Types::ItemValue::Url, Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: 'url', traits: {"smithy.api#documentation" => "<p>The URL, if the related item is a non-Amazon Web Services resource.</p>"}))
+    ItemValue.add_member(:metric_definition, Types::ItemValue::MetricDefinition, Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDefinition, location_name: 'metricDefinition', traits: {"smithy.api#documentation" => "<p>The metric definition, if the related item is a metric in Amazon CloudWatch.</p>"}))
+    ItemValue.add_member(:pager_duty_incident_detail, Types::ItemValue::PagerDutyIncidentDetail, Smithy::Schema::Shapes::ShapeRef.new(shape: PagerDutyIncidentDetail, location_name: 'pagerDutyIncidentDetail', traits: {"smithy.api#documentation" => "<p>Details about an incident that is associated with a PagerDuty incident.</p>"}))
+    ItemValue.add_member(:unknown, Types::ItemValue::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    ItemValue.type = Types::ItemValue
+    ListIncidentFindingsInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident for which you want to view associated\n      findings.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    ListIncidentFindingsInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of findings to retrieve per call.</p>", "smithy.api#range" => {"min" => 1, "max" => 20}, "smithy.api#tags" => ["logs_investigations"]}))
+    ListIncidentFindingsInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListIncidentFindingsInput.type = Types::ListIncidentFindingsInput
+    ListIncidentFindingsOutput.add_member(:findings, Smithy::Schema::Shapes::ShapeRef.new(shape: FindingSummaryList, location_name: 'findings', traits: {"smithy.api#documentation" => "<p>A list of findings that represent deployments that might be the potential cause of the\n      incident.</p>", "smithy.api#required" => {}}))
+    ListIncidentFindingsOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListIncidentFindingsOutput.type = Types::ListIncidentFindingsOutput
+    ListIncidentRecordsOperationInput.add_member(:filters, Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: 'filters', traits: {"smithy.api#documentation" => "<p>Filters the list of incident records you want to search through. You can filter on the\n      following keys:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>impact</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>createdBy</code>\n               </p>\n            </li>\n         </ul>\n         <p>Note the following when when you use Filters:</p>\n         <ul>\n            <li>\n               <p>If you don't specify a Filter, the response includes all incident records.</p>\n            </li>\n            <li>\n               <p>If you specify more than one filter in a single request, the response returns incident\n          records that match all filters.</p>\n            </li>\n            <li>\n               <p>If you specify a filter with more than one value, the response returns incident\n          records that match any of the values provided.</p>\n            </li>\n         </ul>"}))
+    ListIncidentRecordsOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of results per page.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListIncidentRecordsOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListIncidentRecordsOperationInput.type = Types::ListIncidentRecordsOperationInput
+    ListIncidentRecordsOperationOutput.add_member(:incident_record_summaries, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordSummaryList, location_name: 'incidentRecordSummaries', traits: {"smithy.api#documentation" => "<p>The details of each listed incident record.</p>", "smithy.api#required" => {}}))
+    ListIncidentRecordsOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListIncidentRecordsOperationOutput.type = Types::ListIncidentRecordsOperationOutput
+    ListRelatedItemsOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record containing the listed related\n      items.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    ListRelatedItemsOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of related items per page.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListRelatedItemsOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListRelatedItemsOperationInput.type = Types::ListRelatedItemsOperationInput
+    ListRelatedItemsOperationOutput.add_member(:related_items, Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemList, location_name: 'relatedItems', traits: {"smithy.api#documentation" => "<p>Details about each related item.</p>", "smithy.api#required" => {}}))
+    ListRelatedItemsOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListRelatedItemsOperationOutput.type = Types::ListRelatedItemsOperationOutput
+    ListReplicationSetsOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of results per page. </p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListReplicationSetsOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListReplicationSetsOperationInput.type = Types::ListReplicationSetsOperationInput
+    ListReplicationSetsOperationOutput.add_member(:replication_set_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationSetArnList, location_name: 'replicationSetArns', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the list replication set.</p>", "smithy.api#required" => {}}))
+    ListReplicationSetsOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListReplicationSetsOperationOutput.type = Types::ListReplicationSetsOperationOutput
+    ListResponsePlansOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of response plans per page.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListResponsePlansOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListResponsePlansOperationInput.type = Types::ListResponsePlansOperationInput
+    ListResponsePlansOperationOutput.add_member(:response_plan_summaries, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanSummaryList, location_name: 'responsePlanSummaries', traits: {"smithy.api#documentation" => "<p>Details of each response plan.</p>", "smithy.api#required" => {}}))
+    ListResponsePlansOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListResponsePlansOperationOutput.type = Types::ListResponsePlansOperationOutput
+    ListTagsForResourceInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan or incident.</p>", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    ListTagsForResourceInput.type = Types::ListTagsForResourceInput
+    ListTagsForResourceOutput.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A list of tags for the response plan or incident.</p>", "smithy.api#required" => {}}))
+    ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    ListTimelineEventsOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    ListTimelineEventsOperationInput.add_member(:filters, Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: 'filters', traits: {"smithy.api#documentation" => "<p>Filters the timeline events based on the provided conditional values. You can filter\n      timeline events with the following keys:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>eventReference</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventType</code>\n               </p>\n            </li>\n         </ul>\n         <p>Note the following when deciding how to use Filters:</p>\n         <ul>\n            <li>\n               <p>If you don't specify a Filter, the response includes all timeline events.</p>\n            </li>\n            <li>\n               <p>If you specify more than one filter in a single request, the response returns timeline\n          events that match all filters.</p>\n            </li>\n            <li>\n               <p>If you specify a filter with more than one value, the response returns timeline events\n          that match any of the values provided.</p>\n            </li>\n         </ul>"}))
+    ListTimelineEventsOperationInput.add_member(:sort_by, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEventSort, location_name: 'sortBy', traits: {"smithy.api#documentation" => "<p>Sort timeline events by the specified key value pair.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListTimelineEventsOperationInput.add_member(:sort_order, Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: 'sortOrder', traits: {"smithy.api#documentation" => "<p>Sorts the order of timeline events by the value specified in the <code>sortBy</code>\n      field.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListTimelineEventsOperationInput.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of results per page.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListTimelineEventsOperationInput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token for the next set of items to return. (You received this token from a\n      previous call.)</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    ListTimelineEventsOperationInput.type = Types::ListTimelineEventsOperationInput
+    ListTimelineEventsOperationOutput.add_member(:event_summaries, Smithy::Schema::Shapes::ShapeRef.new(shape: EventSummaryList, location_name: 'eventSummaries', traits: {"smithy.api#documentation" => "<p>Details about each event that occurred during the incident.</p>", "smithy.api#required" => {}}))
+    ListTimelineEventsOperationOutput.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>The pagination token to use when requesting the next set of items. If there are no\n      additional items to return, the string is null.</p>"}))
+    ListTimelineEventsOperationOutput.type = Types::ListTimelineEventsOperationOutput
+    NotificationTargetItem.add_member(:sns_topic_arn, Types::NotificationTargetItem::SnsTopicArn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'snsTopicArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the SNS topic.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    NotificationTargetItem.add_member(:unknown, Types::NotificationTargetItem::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    NotificationTargetItem.type = Types::NotificationTargetItem
+    NotificationTargetSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationTargetItem)
+    PagerDutyConfiguration.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'name', traits: {"smithy.api#documentation" => "<p>The name of the PagerDuty configuration.</p>", "smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    PagerDutyConfiguration.add_member(:secret_id, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'secretId', traits: {"smithy.api#documentation" => "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n      User Token REST API Key, and other user credentials.</p>", "smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#required" => {}}))
+    PagerDutyConfiguration.add_member(:pager_duty_incident_configuration, Smithy::Schema::Shapes::ShapeRef.new(shape: PagerDutyIncidentConfiguration, location_name: 'pagerDutyIncidentConfiguration', traits: {"smithy.api#documentation" => "<p>Details about the PagerDuty service associated with the configuration.</p>", "smithy.api#required" => {}}))
+    PagerDutyConfiguration.type = Types::PagerDutyConfiguration
+    PagerDutyIncidentConfiguration.add_member(:service_id, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'serviceId', traits: {"smithy.api#documentation" => "<p>The ID of the PagerDuty service that the response plan associates with an incident when it\n      launches.</p>", "smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    PagerDutyIncidentConfiguration.type = Types::PagerDutyIncidentConfiguration
+    PagerDutyIncidentDetail.add_member(:id, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'id', traits: {"smithy.api#documentation" => "<p>The ID of the incident associated with the PagerDuty service for the response plan.</p>", "smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    PagerDutyIncidentDetail.add_member(:auto_resolve, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'autoResolve', traits: {"smithy.api#documentation" => "<p>Indicates whether to resolve the PagerDuty incident when you resolve the associated\n      Incident Manager incident.</p>"}))
+    PagerDutyIncidentDetail.add_member(:secret_id, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'secretId', traits: {"smithy.api#documentation" => "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n      User Token REST API Key, and other user credentials.</p>", "smithy.api#length" => {"min" => 1, "max" => 512}}))
+    PagerDutyIncidentDetail.type = Types::PagerDutyIncidentDetail
+    PutResourcePolicyOperationInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan to add the resource policy to.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    PutResourcePolicyOperationInput.add_member(:policy, Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: 'policy', traits: {"smithy.api#documentation" => "<p>Details of the resource policy.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    PutResourcePolicyOperationInput.type = Types::PutResourcePolicyOperationInput
+    PutResourcePolicyOperationOutput.add_member(:policy_id, Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: 'policyId', traits: {"smithy.api#documentation" => "<p>The ID of the resource policy.</p>", "smithy.api#required" => {}}))
+    PutResourcePolicyOperationOutput.type = Types::PutResourcePolicyOperationOutput
+    RegionInfo.add_member(:sse_kms_key_id, Smithy::Schema::Shapes::ShapeRef.new(shape: SseKmsKey, location_name: 'sseKmsKeyId', traits: {"smithy.api#documentation" => "<p>The ID of the KMS key used to encrypt the data in this Amazon Web Services Region.</p>"}))
+    RegionInfo.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionStatus, location_name: 'status', traits: {"smithy.api#documentation" => "<p>The status of the Amazon Web Services Region in the replication set.</p>", "smithy.api#required" => {}}))
+    RegionInfo.add_member(:status_message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'statusMessage', traits: {"smithy.api#documentation" => "<p>Information displayed about the status of the Amazon Web Services Region.</p>"}))
+    RegionInfo.add_member(:status_update_date_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'statusUpdateDateTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when Incident Manager updated the status of the Amazon Web Services Region.</p>", "smithy.api#required" => {}}))
+    RegionInfo.type = Types::RegionInfo
+    RegionInfoMap.key = Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName)
+    RegionInfoMap.value = Smithy::Schema::Shapes::ShapeRef.new(shape: RegionInfo)
+    RegionMapInput.key = Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    RegionMapInput.value = Smithy::Schema::Shapes::ShapeRef.new(shape: RegionMapInputValue)
+    RegionMapInputValue.add_member(:sse_kms_key_id, Smithy::Schema::Shapes::ShapeRef.new(shape: SseKmsKey, location_name: 'sseKmsKeyId', traits: {"smithy.api#documentation" => "<p>The KMS key used to encrypt the data in your replication set.</p>"}))
+    RegionMapInputValue.type = Types::RegionMapInputValue
+    RelatedItem.add_member(:identifier, Smithy::Schema::Shapes::ShapeRef.new(shape: ItemIdentifier, location_name: 'identifier', traits: {"smithy.api#documentation" => "<p>Details about the related item.</p>", "smithy.api#required" => {}}))
+    RelatedItem.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'title', traits: {"smithy.api#documentation" => "<p>The title of the related item.</p>", "smithy.api#length" => {"max" => 200}}))
+    RelatedItem.add_member(:generated_id, Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedId, location_name: 'generatedId', traits: {"smithy.api#documentation" => "<p>A unique ID for a <code>RelatedItem</code>.</p>\n         <important>\n            <p>Don't specify this parameter when you add a <code>RelatedItem</code> by using the <a>UpdateRelatedItems</a> API action.</p>\n         </important>"}))
+    RelatedItem.type = Types::RelatedItem
+    RelatedItemList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItem)
+    RelatedItemsUpdate.add_member(:item_to_add, Types::RelatedItemsUpdate::ItemToAdd, Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItem, location_name: 'itemToAdd', traits: {"smithy.api#documentation" => "<p>Details about the related item you're adding.</p>"}))
+    RelatedItemsUpdate.add_member(:item_to_remove, Types::RelatedItemsUpdate::ItemToRemove, Smithy::Schema::Shapes::ShapeRef.new(shape: ItemIdentifier, location_name: 'itemToRemove', traits: {"smithy.api#documentation" => "<p>Details about the related item you're deleting.</p>"}))
+    RelatedItemsUpdate.add_member(:unknown, Types::RelatedItemsUpdate::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    RelatedItemsUpdate.type = Types::RelatedItemsUpdate
+    ReplicationSet.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set.</p>"}))
+    ReplicationSet.add_member(:region_map, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionInfoMap, location_name: 'regionMap', traits: {"smithy.api#documentation" => "<p>The map between each Amazon Web Services Region in your replication set and the KMS key that's used to encrypt the data in that Region.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationSetStatus, location_name: 'status', traits: {"smithy.api#documentation" => "<p>The status of the replication set. If the replication set is still pending, you can't use\n      Incident Manager functionality.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:deletion_protected, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'deletionProtected', traits: {"smithy.api#documentation" => "<p>Determines if the replication set deletion protection is enabled or not. If deletion\n      protection is enabled, you can't delete the last Amazon Web Services Region in the replication\n      set. </p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:created_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdTime', traits: {"smithy.api#documentation" => "<p>When the replication set was created.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:created_by, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'createdBy', traits: {"smithy.api#documentation" => "<p>Details about who created the replication set.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:last_modified_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'lastModifiedTime', traits: {"smithy.api#documentation" => "<p>When the replication set was last updated.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.add_member(:last_modified_by, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'lastModifiedBy', traits: {"smithy.api#documentation" => "<p>Who last modified the replication set.</p>", "smithy.api#required" => {}}))
+    ReplicationSet.type = Types::ReplicationSet
+    ReplicationSetArnList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
+    ResourceNotFoundException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_identifier, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceIdentifier', traits: {"smithy.api#documentation" => "The identifier for the requested resource"}))
+    ResourceNotFoundException.add_member(:resource_type, Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: 'resourceType', traits: {"smithy.api#documentation" => "The resource type"}))
+    ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourcePolicy.add_member(:policy_document, Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: 'policyDocument', traits: {"smithy.api#documentation" => "<p>The JSON blob that describes the policy.</p>", "smithy.api#required" => {}}))
+    ResourcePolicy.add_member(:policy_id, Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: 'policyId', traits: {"smithy.api#documentation" => "<p>The ID of the resource policy.</p>", "smithy.api#required" => {}}))
+    ResourcePolicy.add_member(:ram_resource_share_region, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'ramResourceShareRegion', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services Region that policy allows resources to be used in.</p>", "smithy.api#required" => {}}))
+    ResourcePolicy.type = Types::ResourcePolicy
+    ResourcePolicyList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy)
+    ResponsePlanSummary.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan.</p>", "smithy.api#required" => {}}))
+    ResponsePlanSummary.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanName, location_name: 'name', traits: {"smithy.api#documentation" => "<p>The name of the response plan. This can't include spaces.</p>", "smithy.api#required" => {}}))
+    ResponsePlanSummary.add_member(:display_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: 'displayName', traits: {"smithy.api#documentation" => "<p>The human readable name of the response plan. This can include spaces.</p>"}))
+    ResponsePlanSummary.type = Types::ResponsePlanSummary
+    ResponsePlanSummaryList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanSummary)
+    ServiceQuotaExceededException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_identifier, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceIdentifier', traits: {"smithy.api#documentation" => "The identifier for the requested resource"}))
+    ServiceQuotaExceededException.add_member(:resource_type, Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: 'resourceType', traits: {"smithy.api#documentation" => "The resource type"}))
+    ServiceQuotaExceededException.add_member(:service_code, Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: 'serviceCode', traits: {"smithy.api#documentation" => "Originating service code", "smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'quotaCode', traits: {"smithy.api#documentation" => "Originating quota code", "smithy.api#required" => {}}))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SsmAutomation.add_member(:role_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when\n      running commands.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    SsmAutomation.add_member(:document_name, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'documentName', traits: {"smithy.api#documentation" => "<p>The automation document's name.</p>", "smithy.api#pattern" => "^[a-zA-Z0-9_\\-.:/]{3,128}$", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    SsmAutomation.add_member(:document_version, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'documentVersion', traits: {"smithy.api#documentation" => "<p>The automation document's version to use when running.</p>", "smithy.api#length" => {"max" => 128}, "smithy.api#tags" => ["logs_investigations"]}))
+    SsmAutomation.add_member(:target_account, Smithy::Schema::Shapes::ShapeRef.new(shape: SsmTargetAccount, location_name: 'targetAccount', traits: {"smithy.api#documentation" => "<p>The account that the automation document will be run in. This can be in either the\n      management account or an application account.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    SsmAutomation.add_member(:parameters, Smithy::Schema::Shapes::ShapeRef.new(shape: SsmParameters, location_name: 'parameters', traits: {"smithy.api#documentation" => "<p>The key-value pair parameters to use when running the automation document.</p>"}))
+    SsmAutomation.add_member(:dynamic_parameters, Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicSsmParameters, location_name: 'dynamicParameters', traits: {"smithy.api#documentation" => "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation\n      runbook.</p>"}))
+    SsmAutomation.type = Types::SsmAutomation
+    SsmParameterValues.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
+    SsmParameters.key = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    SsmParameters.value = Smithy::Schema::Shapes::ShapeRef.new(shape: SsmParameterValues)
+    StartIncidentOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token ensuring that the operation is called only once with the specified details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    StartIncidentOperationInput.add_member(:response_plan_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'responsePlanArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n      channels, Amazon SNS topics, runbooks, title, and impact of the incident. </p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    StartIncidentOperationInput.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'title', traits: {"smithy.api#documentation" => "<p>Provide a title for the incident. Providing a title overwrites the title provided by the\n      response plan. </p>"}))
+    StartIncidentOperationInput.add_member(:impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'impact', traits: {"smithy.api#documentation" => "<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by\n      a response plan.</p>\n         <p class=\"title\">\n            <b>Supported impact codes</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No Impact</p>\n            </li>\n         </ul>"}))
+    StartIncidentOperationInput.add_member(:trigger_details, Smithy::Schema::Shapes::ShapeRef.new(shape: TriggerDetails, location_name: 'triggerDetails', traits: {"smithy.api#documentation" => "<p>Details of what created the incident record in Incident Manager.</p>"}))
+    StartIncidentOperationInput.add_member(:related_items, Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemList, location_name: 'relatedItems', traits: {"smithy.api#documentation" => "<p>Add related items to the incident for other responders to use. Related items are Amazon Web Services\n      resources, external links, or files uploaded to an Amazon S3 bucket. </p>"}))
+    StartIncidentOperationInput.type = Types::StartIncidentOperationInput
+    StartIncidentOperationOutput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The ARN of the newly created incident record.</p>", "smithy.api#required" => {}}))
+    StartIncidentOperationOutput.type = Types::StartIncidentOperationOutput
+    StringList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#tags" => ["logs_investigations"]})
+    TagKeyList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.key = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    TagMap.value = Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    TagMapUpdate.key = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    TagMapUpdate.value = Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, traits: {"smithy.api#tags" => ["logs_investigations"]})
+    TagResourceInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan you're adding the tags to.</p>", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    TagResourceInput.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A list of tags to add to the response plan.</p>", "smithy.api#required" => {}}))
+    TagResourceInput.type = Types::TagResourceInput
+    TagResourceOutput.type = Types::TagResourceOutput
+    ThrottlingException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: 'serviceCode', traits: {"smithy.api#documentation" => "Originating service code", "smithy.api#required" => {}}))
+    ThrottlingException.add_member(:quota_code, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'quotaCode', traits: {"smithy.api#documentation" => "Originating quota code", "smithy.api#required" => {}}))
+    ThrottlingException.type = Types::ThrottlingException
+    TimelineEvent.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that the event occurred during.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The ID of the timeline event.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the event occurred.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventUpdatedTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the timeline event was last updated.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_type, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEventType, location_name: 'eventType', traits: {"smithy.api#documentation" => "<p>The type of event that occurred. Currently Incident Manager supports only the <code>Custom\n        Event</code> and <code>Note</code> types.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_data, Smithy::Schema::Shapes::ShapeRef.new(shape: EventData, location_name: 'eventData', traits: {"smithy.api#documentation" => "<p>A short description of the event.</p>", "smithy.api#required" => {}}))
+    TimelineEvent.add_member(:event_references, Smithy::Schema::Shapes::ShapeRef.new(shape: EventReferenceList, location_name: 'eventReferences', traits: {"smithy.api#documentation" => "<p>A list of references in a <code>TimelineEvent</code>.</p>"}))
+    TimelineEvent.type = Types::TimelineEvent
+    TriggerDetails.add_member(:source, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSource, location_name: 'source', traits: {"smithy.api#documentation" => "<p>Identifies the service that sourced the event. All events sourced from within Amazon Web Services begin with \"<code>aws.</code>\" Customer-generated events can have any value here,\n      as long as it doesn't begin with \"<code>aws.</code>\" We recommend the use of Java package-name\n      style reverse domain-name strings. </p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    TriggerDetails.add_member(:trigger_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'triggerArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the source that detected the incident.</p>", "smithy.api#tags" => ["logs_required"]}))
+    TriggerDetails.add_member(:timestamp, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'timestamp', traits: {"smithy.api#documentation" => "<p>The timestamp for when the incident was detected.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    TriggerDetails.add_member(:raw_data, Smithy::Schema::Shapes::ShapeRef.new(shape: RawData, location_name: 'rawData', traits: {"smithy.api#documentation" => "<p>Raw data passed from either Amazon EventBridge, Amazon CloudWatch, or Incident Manager when an incident is created.</p>"}))
+    TriggerDetails.type = Types::TriggerDetails
+    UntagResourceInput.add_member(:resource_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan you're removing a tag from.</p>", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UntagResourceInput.add_member(:tag_keys, Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'tagKeys', traits: {"smithy.api#documentation" => "<p>The name of the tag to remove from the response plan.</p>", "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.type = Types::UntagResourceInput
+    UntagResourceOutput.type = Types::UntagResourceOutput
+    UpdateActionList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateReplicationSetAction)
+    UpdateDeletionProtectionOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set to update.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateDeletionProtectionOperationInput.add_member(:deletion_protected, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'deletionProtected', traits: {"smithy.api#documentation" => "<p>Specifies if deletion protection is turned on or off in your account. </p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateDeletionProtectionOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateDeletionProtectionOperationInput.type = Types::UpdateDeletionProtectionOperationInput
+    UpdateDeletionProtectionOperationOutput.type = Types::UpdateDeletionProtectionOperationOutput
+    UpdateIncidentRecordOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateIncidentRecordOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record you are updating.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateIncidentRecordOperationInput.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'title', traits: {"smithy.api#documentation" => "<p>A brief description of the incident.</p>"}))
+    UpdateIncidentRecordOperationInput.add_member(:summary, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSummary, location_name: 'summary', traits: {"smithy.api#documentation" => "<p>A longer description of what occurred during the incident.</p>"}))
+    UpdateIncidentRecordOperationInput.add_member(:impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'impact', traits: {"smithy.api#documentation" => "<p>Defines the impact of the incident to customers and applications. If you provide an impact\n      for an incident, it overwrites the impact provided by the response plan.</p>\n         <p class=\"title\">\n            <b>Supported impact codes</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No Impact</p>\n            </li>\n         </ul>"}))
+    UpdateIncidentRecordOperationInput.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentRecordStatus, location_name: 'status', traits: {"smithy.api#documentation" => "<p>The status of the incident. Possible statuses are <code>Open</code> or\n        <code>Resolved</code>.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateIncidentRecordOperationInput.add_member(:chat_channel, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatChannel, location_name: 'chatChannel', traits: {"smithy.api#documentation" => "<p>The Chatbot chat channel where responders can collaborate.</p>"}))
+    UpdateIncidentRecordOperationInput.add_member(:notification_targets, Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: 'notificationTargets', traits: {"smithy.api#documentation" => "<p>The Amazon SNS targets that Incident Manager notifies when a client updates an\n      incident.</p>\n         <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the\n      incident.</p>"}))
+    UpdateIncidentRecordOperationInput.type = Types::UpdateIncidentRecordOperationInput
+    UpdateIncidentRecordOperationOutput.type = Types::UpdateIncidentRecordOperationOutput
+    UpdateRelatedItemsOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateRelatedItemsOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident record that contains the related items that\n      you update.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateRelatedItemsOperationInput.add_member(:related_items_update, Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemsUpdate, location_name: 'relatedItemsUpdate', traits: {"smithy.api#documentation" => "<p>Details about the item that you are add to, or delete from, an incident.</p>", "smithy.api#required" => {}}))
+    UpdateRelatedItemsOperationInput.type = Types::UpdateRelatedItemsOperationInput
+    UpdateRelatedItemsOperationOutput.type = Types::UpdateRelatedItemsOperationOutput
+    UpdateReplicationSetAction.add_member(:add_region_action, Types::UpdateReplicationSetAction::AddRegionAction, Smithy::Schema::Shapes::ShapeRef.new(shape: AddRegionAction, location_name: 'addRegionAction', traits: {"smithy.api#documentation" => "<p>Details about the Amazon Web Services Region that you're adding to the replication\n      set.</p>"}))
+    UpdateReplicationSetAction.add_member(:delete_region_action, Types::UpdateReplicationSetAction::DeleteRegionAction, Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegionAction, location_name: 'deleteRegionAction', traits: {"smithy.api#documentation" => "<p>Details about the Amazon Web Services Region that you're deleting to the replication\n      set.</p>"}))
+    UpdateReplicationSetAction.add_member(:unknown, Types::UpdateReplicationSetAction::Unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit))
+    UpdateReplicationSetAction.type = Types::UpdateReplicationSetAction
+    UpdateReplicationSetOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the replication set you're updating.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateReplicationSetOperationInput.add_member(:actions, Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateActionList, location_name: 'actions', traits: {"smithy.api#documentation" => "<p>An action to add or delete a Region.</p>", "smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#required" => {}}))
+    UpdateReplicationSetOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateReplicationSetOperationInput.type = Types::UpdateReplicationSetOperationInput
+    UpdateReplicationSetOperationOutput.type = Types::UpdateReplicationSetOperationOutput
+    UpdateResponsePlanOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token ensuring that the operation is called only once with the specified details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateResponsePlanOperationInput.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the response plan.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateResponsePlanOperationInput.add_member(:display_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: 'displayName', traits: {"smithy.api#documentation" => "<p>The long format name of the response plan. The display name can't contain spaces.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_title, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentTitle, location_name: 'incidentTemplateTitle', traits: {"smithy.api#documentation" => "<p>The short format name of the incident. The title can't contain spaces.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_impact, Smithy::Schema::Shapes::ShapeRef.new(shape: Impact, location_name: 'incidentTemplateImpact', traits: {"smithy.api#documentation" => "<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by\n      a response plan.</p>\n         <p class=\"title\">\n            <b>Supported impact codes</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No Impact</p>\n            </li>\n         </ul>"}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_summary, Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentSummary, location_name: 'incidentTemplateSummary', traits: {"smithy.api#documentation" => "<p>A brief summary of the incident. This typically contains what has happened, what's\n      currently happening, and next steps.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_dedupe_string, Smithy::Schema::Shapes::ShapeRef.new(shape: DedupeString, location_name: 'incidentTemplateDedupeString', traits: {"smithy.api#documentation" => "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same\n      incident in the same account.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_notification_targets, Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: 'incidentTemplateNotificationTargets', traits: {"smithy.api#documentation" => "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:chat_channel, Smithy::Schema::Shapes::ShapeRef.new(shape: ChatChannel, location_name: 'chatChannel', traits: {"smithy.api#documentation" => "<p>The Chatbot chat channel used for collaboration during an incident.</p>\n         <p>Use the empty structure to remove the chat channel from the response plan.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:engagements, Smithy::Schema::Shapes::ShapeRef.new(shape: EngagementSet, location_name: 'engagements', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:actions, Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: 'actions', traits: {"smithy.api#documentation" => "<p>The actions that this response plan takes at the beginning of an incident.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:incident_template_tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapUpdate, location_name: 'incidentTemplateTags', traits: {"smithy.api#documentation" => "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is called,\n      Incident Manager assigns the tags specified in the template to the incident. To call this action,\n      you must also have permission to call the <code>TagResource</code> API action for the incident\n      record resource.</p>"}))
+    UpdateResponsePlanOperationInput.add_member(:integrations, Smithy::Schema::Shapes::ShapeRef.new(shape: Integrations, location_name: 'integrations', traits: {"smithy.api#documentation" => "<p>Information about third-party services integrated into the response plan.</p>"}))
+    UpdateResponsePlanOperationInput.type = Types::UpdateResponsePlanOperationInput
+    UpdateResponsePlanOperationOutput.type = Types::UpdateResponsePlanOperationOutput
+    UpdateTimelineEventOperationInput.add_member(:client_token, Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#documentation" => "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>", "smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateTimelineEventOperationInput.add_member(:incident_record_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'incidentRecordArn', traits: {"smithy.api#documentation" => "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateTimelineEventOperationInput.add_member(:event_id, Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'eventId', traits: {"smithy.api#documentation" => "<p>The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an\n      event's ID.</p>", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
+    UpdateTimelineEventOperationInput.add_member(:event_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'eventTime', traits: {"smithy.api#documentation" => "<p>The timestamp for when the event occurred.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateTimelineEventOperationInput.add_member(:event_type, Smithy::Schema::Shapes::ShapeRef.new(shape: TimelineEventType, location_name: 'eventType', traits: {"smithy.api#documentation" => "<p>The type of event. You can update events of type <code>Custom Event</code> and\n        <code>Note</code>.</p>", "smithy.api#tags" => ["logs_investigations"]}))
+    UpdateTimelineEventOperationInput.add_member(:event_data, Smithy::Schema::Shapes::ShapeRef.new(shape: EventData, location_name: 'eventData', traits: {"smithy.api#documentation" => "<p>A short description of the event.</p>"}))
+    UpdateTimelineEventOperationInput.add_member(:event_references, Smithy::Schema::Shapes::ShapeRef.new(shape: EventReferenceList, location_name: 'eventReferences', traits: {"smithy.api#documentation" => "<p>Updates all existing references in a <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter\n      its Amazon Resource Name (ARN). You can also specify a related item associated with that\n      resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a\n      resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with\n      the DynamoDB table as a related item.</p>\n         <important>\n            <p>This update action overrides all existing references. If you want to keep existing\n        references, you must specify them in the call. If you don't, this action removes any\n        existing references and enters only new references.</p>\n         </important>"}))
+    UpdateTimelineEventOperationInput.type = Types::UpdateTimelineEventOperationInput
+    UpdateTimelineEventOperationOutput.type = Types::UpdateTimelineEventOperationOutput
+    ValidationException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ValidationException.type = Types::ValidationException
+
+    SSMIncidents = Smithy::Schema::Shapes::ServiceShape.new do |service|
+      service.id = "com.amazonaws.ssmincidents#SSMIncidents"
+      service.name = "SSMIncidents"
+      service.version = "2018-05-10"
+      service.traits = {"aws.api#service" => {"sdkId" => "SSM Incidents", "arnNamespace" => "ssm-incidents", "awsProductName" => "AWSSystemsManager", "cloudFormationName" => "SSMIncidents"}, "aws.auth#sigv4" => {"name" => "ssm-incidents"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id"]}, "smithy.api#title" => "AWS Systems Manager Incident Manager"}
+      service.add_operation(:batch_get_incident_findings, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#BatchGetIncidentFindings"
+        operation.name = "BatchGetIncidentFindings"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/batchGetIncidentFindings"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:create_replication_set, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#CreateReplicationSet"
+        operation.name = "CreateReplicationSet"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateReplicationSetOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateReplicationSetOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/createReplicationSet"}}
+      end)
+      service.add_operation(:create_response_plan, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#CreateResponsePlan"
+        operation.name = "CreateResponsePlan"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResponsePlanOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResponsePlanOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/createResponsePlan"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_timeline_event, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#CreateTimelineEvent"
+        operation.name = "CreateTimelineEvent"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTimelineEventOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTimelineEventOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/createTimelineEvent"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_incident_record, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#DeleteIncidentRecord"
+        operation.name = "DeleteIncidentRecord"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIncidentRecordOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIncidentRecordOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/deleteIncidentRecord"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_replication_set, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#DeleteReplicationSet"
+        operation.name = "DeleteReplicationSet"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReplicationSetOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReplicationSetOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/deleteReplicationSet"}}
+      end)
+      service.add_operation(:delete_resource_policy, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#DeleteResourcePolicy"
+        operation.name = "DeleteResourcePolicy"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/deleteResourcePolicy"}}
+      end)
+      service.add_operation(:delete_response_plan, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#DeleteResponsePlan"
+        operation.name = "DeleteResponsePlan"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResponsePlanOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResponsePlanOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/deleteResponsePlan"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_timeline_event, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#DeleteTimelineEvent"
+        operation.name = "DeleteTimelineEvent"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTimelineEventOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTimelineEventOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/deleteTimelineEvent"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:get_incident_record, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#GetIncidentRecord"
+        operation.name = "GetIncidentRecord"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetIncidentRecordOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetIncidentRecordOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/getIncidentRecord"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_replication_set, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#GetReplicationSet"
+        operation.name = "GetReplicationSet"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetReplicationSetOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetReplicationSetOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/getReplicationSet"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_resource_policies, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#GetResourcePolicies"
+        operation.name = "GetResourcePolicies"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePoliciesOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePoliciesOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/getResourcePolicies"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::GetResourcePolicies.new
+      end)
+      service.add_operation(:get_response_plan, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#GetResponsePlan"
+        operation.name = "GetResponsePlan"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetResponsePlanOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetResponsePlanOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/getResponsePlan"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_timeline_event, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#GetTimelineEvent"
+        operation.name = "GetTimelineEvent"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetTimelineEventOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetTimelineEventOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/getTimelineEvent"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_incident_findings, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListIncidentFindings"
+        operation.name = "ListIncidentFindings"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListIncidentFindingsInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListIncidentFindingsOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listIncidentFindings"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListIncidentFindings.new
+      end)
+      service.add_operation(:list_incident_records, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListIncidentRecords"
+        operation.name = "ListIncidentRecords"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListIncidentRecordsOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListIncidentRecordsOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listIncidentRecords"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListIncidentRecords.new
+      end)
+      service.add_operation(:list_related_items, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListRelatedItems"
+        operation.name = "ListRelatedItems"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListRelatedItemsOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListRelatedItemsOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listRelatedItems"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRelatedItems.new
+      end)
+      service.add_operation(:list_replication_sets, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListReplicationSets"
+        operation.name = "ListReplicationSets"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListReplicationSetsOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListReplicationSetsOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listReplicationSets"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListReplicationSets.new
+      end)
+      service.add_operation(:list_response_plans, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListResponsePlans"
+        operation.name = "ListResponsePlans"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListResponsePlansOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListResponsePlansOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listResponsePlans"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListResponsePlans.new
+      end)
+      service.add_operation(:list_tags_for_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListTagsForResource"
+        operation.name = "ListTagsForResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_timeline_events, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#ListTimelineEvents"
+        operation.name = "ListTimelineEvents"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTimelineEventsOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTimelineEventsOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listTimelineEvents"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListTimelineEvents.new
+      end)
+      service.add_operation(:put_resource_policy, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#PutResourcePolicy"
+        operation.name = "PutResourcePolicy"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/putResourcePolicy"}}
+      end)
+      service.add_operation(:start_incident, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#StartIncident"
+        operation.name = "StartIncident"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: StartIncidentOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: StartIncidentOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/startIncident"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:tag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#TagResource"
+        operation.name = "TagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/tags/{resourceArn}"}}
+      end)
+      service.add_operation(:untag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UntagResource"
+        operation.name = "UntagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_deletion_protection, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateDeletionProtection"
+        operation.name = "UpdateDeletionProtection"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDeletionProtectionOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDeletionProtectionOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateDeletionProtection"}}
+      end)
+      service.add_operation(:update_incident_record, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateIncidentRecord"
+        operation.name = "UpdateIncidentRecord"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIncidentRecordOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIncidentRecordOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateIncidentRecord"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_related_items, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateRelatedItems"
+        operation.name = "UpdateRelatedItems"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRelatedItemsOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRelatedItemsOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateRelatedItems"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_replication_set, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateReplicationSet"
+        operation.name = "UpdateReplicationSet"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateReplicationSetOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateReplicationSetOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateReplicationSet"}}
+      end)
+      service.add_operation(:update_response_plan, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateResponsePlan"
+        operation.name = "UpdateResponsePlan"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResponsePlanOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResponsePlanOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateResponsePlan"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_timeline_event, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmincidents#UpdateTimelineEvent"
+        operation.name = "UpdateTimelineEvent"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTimelineEventOperationInput)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTimelineEventOperationOutput)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/updateTimelineEvent"}, "smithy.api#idempotent" => {}}
+      end)
+
+    end
+
+    class << self
+      def type_registry
+        return @type_registry if @type_registry
+
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = Smithy::Schema::TypeRegistry.new(shapes)
+      end
+    end
+  end
+end

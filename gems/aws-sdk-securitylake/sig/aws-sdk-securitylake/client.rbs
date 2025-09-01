@@ -1,0 +1,503 @@
+module Aws::SecurityLake
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SecurityLake::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAwsLogSourceResponse
+      include Smithy::Client::_Response[Types::CreateAwsLogSourceResponse]
+      def failed: () -> Array[String]?
+    end
+    def create_aws_log_source: (
+      ?sources: Array[
+        {
+          accounts: Array[String],
+          regions: Array[String],
+          source_name: String,
+          source_version: String
+        }
+      ]
+    ) -> _CreateAwsLogSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAwsLogSourceResponse
+
+    interface _CreateCustomLogSourceResponse
+      include Smithy::Client::_Response[Types::CreateCustomLogSourceResponse]
+      def source: () -> Types::CustomLogSourceResource?
+    end
+    def create_custom_log_source: (
+      ?source_name: String,
+      ?source_version: String,
+      ?event_classes: Array[String],
+      ?configuration: {
+        crawler_configuration: {
+          role_arn: String
+        },
+        provider_identity: {
+          principal: String,
+          external_id: String
+        }
+      }
+    ) -> _CreateCustomLogSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomLogSourceResponse
+
+    interface _CreateDataLakeResponse
+      include Smithy::Client::_Response[Types::CreateDataLakeResponse]
+      def data_lakes: () -> Array[Types::DataLakeResource]?
+    end
+    def create_data_lake: (
+      ?configurations: Array[
+        {
+          region: String,
+          encryption_configuration: {
+            kms_key_id: String
+          },
+          lifecycle_configuration: {
+            expiration: {
+              days: Integer
+            },
+            transitions: Array[
+              {
+                storage_class: String,
+                days: untyped
+              }
+            ]
+          },
+          replication_configuration: {
+            regions: Array[String],
+            role_arn: String
+          }
+        }
+      ],
+      ?meta_store_manager_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataLakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataLakeResponse
+
+    interface _CreateDataLakeExceptionSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateDataLakeExceptionSubscriptionResponse]
+    end
+    def create_data_lake_exception_subscription: (
+      ?subscription_protocol: String,
+      ?notification_endpoint: String,
+      ?exception_time_to_live: Integer
+    ) -> _CreateDataLakeExceptionSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataLakeExceptionSubscriptionResponse
+
+    interface _CreateDataLakeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateDataLakeOrganizationConfigurationResponse]
+    end
+    def create_data_lake_organization_configuration: (
+      ?auto_enable_new_account: Array[
+        {
+          region: String,
+          sources: Array[
+            {
+              source_name: String,
+              source_version: String
+            }
+          ]
+        }
+      ]
+    ) -> _CreateDataLakeOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataLakeOrganizationConfigurationResponse
+
+    interface _CreateSubscriberResponse
+      include Smithy::Client::_Response[Types::CreateSubscriberResponse]
+      def subscriber: () -> Types::SubscriberResource?
+    end
+    def create_subscriber: (
+      ?subscriber_identity: {
+        principal: String,
+        external_id: String
+      },
+      ?subscriber_name: String,
+      ?subscriber_description: String,
+      ?sources: Array[
+        {
+          aws_log_source: {
+            source_name: String,
+            source_version: String
+          },
+          custom_log_source: {
+            source_name: String,
+            source_version: String,
+            provider: {
+              role_arn: String,
+              location: String
+            },
+            attributes: {
+              crawler_arn: String,
+              database_arn: untyped,
+              table_arn: untyped
+            }
+          }
+        }
+      ],
+      ?access_types: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriberResponse
+
+    interface _CreateSubscriberNotificationResponse
+      include Smithy::Client::_Response[Types::CreateSubscriberNotificationResponse]
+      def subscriber_endpoint: () -> String?
+    end
+    def create_subscriber_notification: (
+      ?subscriber_id: String,
+      ?configuration: {
+        sqs_notification_configuration: {
+        },
+        https_notification_configuration: {
+          endpoint: String,
+          authorization_api_key_name: untyped,
+          authorization_api_key_value: untyped,
+          http_method: String,
+          target_role_arn: String
+        }
+      }
+    ) -> _CreateSubscriberNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriberNotificationResponse
+
+    interface _DeleteAwsLogSourceResponse
+      include Smithy::Client::_Response[Types::DeleteAwsLogSourceResponse]
+      def failed: () -> Array[String]?
+    end
+    def delete_aws_log_source: (
+      ?sources: Array[
+        {
+          accounts: Array[String],
+          regions: Array[String],
+          source_name: String,
+          source_version: String
+        }
+      ]
+    ) -> _DeleteAwsLogSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAwsLogSourceResponse
+
+    interface _DeleteCustomLogSourceResponse
+      include Smithy::Client::_Response[Types::DeleteCustomLogSourceResponse]
+    end
+    def delete_custom_log_source: (
+      ?source_name: String,
+      ?source_version: String
+    ) -> _DeleteCustomLogSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomLogSourceResponse
+
+    interface _DeleteDataLakeResponse
+      include Smithy::Client::_Response[Types::DeleteDataLakeResponse]
+    end
+    def delete_data_lake: (
+      ?regions: Array[String]
+    ) -> _DeleteDataLakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataLakeResponse
+
+    interface _DeleteDataLakeExceptionSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteDataLakeExceptionSubscriptionResponse]
+    end
+    def delete_data_lake_exception_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataLakeExceptionSubscriptionResponse
+
+    interface _DeleteDataLakeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteDataLakeOrganizationConfigurationResponse]
+    end
+    def delete_data_lake_organization_configuration: (
+      ?auto_enable_new_account: Array[
+        {
+          region: String,
+          sources: Array[
+            {
+              source_name: String,
+              source_version: String
+            }
+          ]
+        }
+      ]
+    ) -> _DeleteDataLakeOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataLakeOrganizationConfigurationResponse
+
+    interface _DeleteSubscriberResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriberResponse]
+    end
+    def delete_subscriber: (
+      ?subscriber_id: String
+    ) -> _DeleteSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriberResponse
+
+    interface _DeleteSubscriberNotificationResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriberNotificationResponse]
+    end
+    def delete_subscriber_notification: (
+      ?subscriber_id: String
+    ) -> _DeleteSubscriberNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriberNotificationResponse
+
+    interface _DeregisterDataLakeDelegatedAdministratorResponse
+      include Smithy::Client::_Response[Types::DeregisterDataLakeDelegatedAdministratorResponse]
+    end
+    def deregister_data_lake_delegated_administrator: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterDataLakeDelegatedAdministratorResponse
+
+    interface _GetDataLakeExceptionSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetDataLakeExceptionSubscriptionResponse]
+      def subscription_protocol: () -> String?
+      def notification_endpoint: () -> String?
+      def exception_time_to_live: () -> Integer?
+    end
+    def get_data_lake_exception_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeExceptionSubscriptionResponse
+
+    interface _GetDataLakeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetDataLakeOrganizationConfigurationResponse]
+      def auto_enable_new_account: () -> Array[Types::DataLakeAutoEnableNewAccountConfiguration]?
+    end
+    def get_data_lake_organization_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeOrganizationConfigurationResponse
+
+    interface _GetDataLakeSourcesResponse
+      include Smithy::Client::_Response[Types::GetDataLakeSourcesResponse]
+      def data_lake_arn: () -> String?
+      def data_lake_sources: () -> Array[Types::DataLakeSource]?
+      def next_token: () -> String?
+    end
+    def get_data_lake_sources: (
+      ?accounts: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetDataLakeSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeSourcesResponse
+
+    interface _GetSubscriberResponse
+      include Smithy::Client::_Response[Types::GetSubscriberResponse]
+      def subscriber: () -> Types::SubscriberResource?
+    end
+    def get_subscriber: (
+      ?subscriber_id: String
+    ) -> _GetSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriberResponse
+
+    interface _ListDataLakeExceptionsResponse
+      include Smithy::Client::_Response[Types::ListDataLakeExceptionsResponse]
+      def exceptions: () -> Array[Types::DataLakeException]?
+      def next_token: () -> String?
+    end
+    def list_data_lake_exceptions: (
+      ?regions: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataLakeExceptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataLakeExceptionsResponse
+
+    interface _ListDataLakesResponse
+      include Smithy::Client::_Response[Types::ListDataLakesResponse]
+      def data_lakes: () -> Array[Types::DataLakeResource]?
+    end
+    def list_data_lakes: (
+      ?regions: Array[String]
+    ) -> _ListDataLakesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataLakesResponse
+
+    interface _ListLogSourcesResponse
+      include Smithy::Client::_Response[Types::ListLogSourcesResponse]
+      def sources: () -> Array[Types::LogSource]?
+      def next_token: () -> String?
+    end
+    def list_log_sources: (
+      ?accounts: Array[String],
+      ?regions: Array[String],
+      ?sources: Array[
+        {
+          aws_log_source: {
+            source_name: String,
+            source_version: String
+          },
+          custom_log_source: {
+            source_name: String,
+            source_version: String,
+            provider: {
+              role_arn: String,
+              location: String
+            },
+            attributes: {
+              crawler_arn: String,
+              database_arn: untyped,
+              table_arn: untyped
+            }
+          }
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLogSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogSourcesResponse
+
+    interface _ListSubscribersResponse
+      include Smithy::Client::_Response[Types::ListSubscribersResponse]
+      def subscribers: () -> Array[Types::SubscriberResource]?
+      def next_token: () -> String?
+    end
+    def list_subscribers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSubscribersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscribersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterDataLakeDelegatedAdministratorResponse
+      include Smithy::Client::_Response[Types::RegisterDataLakeDelegatedAdministratorResponse]
+    end
+    def register_data_lake_delegated_administrator: (
+      ?account_id: String
+    ) -> _RegisterDataLakeDelegatedAdministratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDataLakeDelegatedAdministratorResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDataLakeResponse
+      include Smithy::Client::_Response[Types::UpdateDataLakeResponse]
+      def data_lakes: () -> Array[Types::DataLakeResource]?
+    end
+    def update_data_lake: (
+      ?configurations: Array[
+        {
+          region: String,
+          encryption_configuration: {
+            kms_key_id: String
+          },
+          lifecycle_configuration: {
+            expiration: {
+              days: Integer
+            },
+            transitions: Array[
+              {
+                storage_class: String,
+                days: untyped
+              }
+            ]
+          },
+          replication_configuration: {
+            regions: Array[String],
+            role_arn: String
+          }
+        }
+      ],
+      ?meta_store_manager_role_arn: String
+    ) -> _UpdateDataLakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataLakeResponse
+
+    interface _UpdateDataLakeExceptionSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateDataLakeExceptionSubscriptionResponse]
+    end
+    def update_data_lake_exception_subscription: (
+      ?subscription_protocol: String,
+      ?notification_endpoint: String,
+      ?exception_time_to_live: Integer
+    ) -> _UpdateDataLakeExceptionSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataLakeExceptionSubscriptionResponse
+
+    interface _UpdateSubscriberResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriberResponse]
+      def subscriber: () -> Types::SubscriberResource?
+    end
+    def update_subscriber: (
+      ?subscriber_id: String,
+      ?subscriber_identity: {
+        principal: String,
+        external_id: String
+      },
+      ?subscriber_name: String,
+      ?subscriber_description: String,
+      ?sources: Array[
+        {
+          aws_log_source: {
+            source_name: String,
+            source_version: String
+          },
+          custom_log_source: {
+            source_name: String,
+            source_version: String,
+            provider: {
+              role_arn: String,
+              location: String
+            },
+            attributes: {
+              crawler_arn: String,
+              database_arn: untyped,
+              table_arn: untyped
+            }
+          }
+        }
+      ]
+    ) -> _UpdateSubscriberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriberResponse
+
+    interface _UpdateSubscriberNotificationResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriberNotificationResponse]
+      def subscriber_endpoint: () -> String?
+    end
+    def update_subscriber_notification: (
+      ?subscriber_id: String,
+      ?configuration: {
+        sqs_notification_configuration: {
+        },
+        https_notification_configuration: {
+          endpoint: String,
+          authorization_api_key_name: untyped,
+          authorization_api_key_value: untyped,
+          http_method: String,
+          target_role_arn: String
+        }
+      }
+    ) -> _UpdateSubscriberNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriberNotificationResponse
+  end
+end

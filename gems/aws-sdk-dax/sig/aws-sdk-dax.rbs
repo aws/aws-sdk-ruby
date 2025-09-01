@@ -1,0 +1,5 @@
+  module Aws
+    module DAX
+      VERSION: String
+    end
+  end

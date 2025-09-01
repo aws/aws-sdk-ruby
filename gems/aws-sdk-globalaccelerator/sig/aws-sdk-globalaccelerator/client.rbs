@@ -1,0 +1,703 @@
+module Aws::GlobalAccelerator
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GlobalAccelerator::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddCustomRoutingEndpointsResponse
+      include Smithy::Client::_Response[Types::AddCustomRoutingEndpointsResponse]
+      def endpoint_descriptions: () -> Array[Types::CustomRoutingEndpointDescription]?
+      def endpoint_group_arn: () -> String?
+    end
+    def add_custom_routing_endpoints: (
+      ?endpoint_configurations: Array[
+        {
+          endpoint_id: String,
+          attachment_arn: untyped
+        }
+      ],
+      ?endpoint_group_arn: String
+    ) -> _AddCustomRoutingEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCustomRoutingEndpointsResponse
+
+    interface _AddEndpointsResponse
+      include Smithy::Client::_Response[Types::AddEndpointsResponse]
+      def endpoint_descriptions: () -> Array[Types::EndpointDescription]?
+      def endpoint_group_arn: () -> String?
+    end
+    def add_endpoints: (
+      ?endpoint_configurations: Array[
+        {
+          endpoint_id: String,
+          weight: Integer,
+          client_ip_preservation_enabled: bool,
+          attachment_arn: untyped
+        }
+      ],
+      ?endpoint_group_arn: String
+    ) -> _AddEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddEndpointsResponse
+
+    interface _AdvertiseByoipCidrResponse
+      include Smithy::Client::_Response[Types::AdvertiseByoipCidrResponse]
+      def byoip_cidr: () -> Types::ByoipCidr?
+    end
+    def advertise_byoip_cidr: (
+      ?cidr: String
+    ) -> _AdvertiseByoipCidrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdvertiseByoipCidrResponse
+
+    interface _AllowCustomRoutingTrafficResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def allow_custom_routing_traffic: (
+      ?endpoint_group_arn: String,
+      ?endpoint_id: String,
+      ?destination_addresses: Array[String],
+      ?destination_ports: Array[Integer],
+      ?allow_all_traffic_to_endpoint: bool
+    ) -> _AllowCustomRoutingTrafficResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllowCustomRoutingTrafficResponse
+
+    interface _CreateAcceleratorResponse
+      include Smithy::Client::_Response[Types::CreateAcceleratorResponse]
+      def accelerator: () -> Types::Accelerator?
+    end
+    def create_accelerator: (
+      ?name: String,
+      ?ip_address_type: String,
+      ?ip_addresses: Array[String],
+      ?enabled: bool,
+      ?idempotency_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAcceleratorResponse
+
+    interface _CreateCrossAccountAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateCrossAccountAttachmentResponse]
+      def cross_account_attachment: () -> Types::Attachment?
+    end
+    def create_cross_account_attachment: (
+      ?name: String,
+      ?principals: Array[String],
+      ?resources: Array[
+        {
+          endpoint_id: String,
+          cidr: untyped,
+          region: untyped
+        }
+      ],
+      ?idempotency_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCrossAccountAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCrossAccountAttachmentResponse
+
+    interface _CreateCustomRoutingAcceleratorResponse
+      include Smithy::Client::_Response[Types::CreateCustomRoutingAcceleratorResponse]
+      def accelerator: () -> Types::CustomRoutingAccelerator?
+    end
+    def create_custom_routing_accelerator: (
+      ?name: String,
+      ?ip_address_type: String,
+      ?ip_addresses: Array[String],
+      ?enabled: bool,
+      ?idempotency_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCustomRoutingAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomRoutingAcceleratorResponse
+
+    interface _CreateCustomRoutingEndpointGroupResponse
+      include Smithy::Client::_Response[Types::CreateCustomRoutingEndpointGroupResponse]
+      def endpoint_group: () -> Types::CustomRoutingEndpointGroup?
+    end
+    def create_custom_routing_endpoint_group: (
+      ?listener_arn: String,
+      ?endpoint_group_region: String,
+      ?destination_configurations: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          protocols: Array[String]
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _CreateCustomRoutingEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomRoutingEndpointGroupResponse
+
+    interface _CreateCustomRoutingListenerResponse
+      include Smithy::Client::_Response[Types::CreateCustomRoutingListenerResponse]
+      def listener: () -> Types::CustomRoutingListener?
+    end
+    def create_custom_routing_listener: (
+      ?accelerator_arn: String,
+      ?port_ranges: Array[
+        {
+          from_port: Integer,
+          to_port: untyped
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _CreateCustomRoutingListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomRoutingListenerResponse
+
+    interface _CreateEndpointGroupResponse
+      include Smithy::Client::_Response[Types::CreateEndpointGroupResponse]
+      def endpoint_group: () -> Types::EndpointGroup?
+    end
+    def create_endpoint_group: (
+      ?listener_arn: String,
+      ?endpoint_group_region: String,
+      ?endpoint_configurations: Array[
+        {
+          endpoint_id: String,
+          weight: Integer,
+          client_ip_preservation_enabled: bool,
+          attachment_arn: untyped
+        }
+      ],
+      ?traffic_dial_percentage: Float,
+      ?health_check_port: Integer,
+      ?health_check_protocol: String,
+      ?health_check_path: String,
+      ?health_check_interval_seconds: Integer,
+      ?threshold_count: Integer,
+      ?idempotency_token: String,
+      ?port_overrides: Array[
+        {
+          listener_port: Integer,
+          endpoint_port: untyped
+        }
+      ]
+    ) -> _CreateEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointGroupResponse
+
+    interface _CreateListenerResponse
+      include Smithy::Client::_Response[Types::CreateListenerResponse]
+      def listener: () -> Types::Listener?
+    end
+    def create_listener: (
+      ?accelerator_arn: String,
+      ?port_ranges: Array[
+        {
+          from_port: Integer,
+          to_port: untyped
+        }
+      ],
+      ?protocol: String,
+      ?client_affinity: String,
+      ?idempotency_token: String
+    ) -> _CreateListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListenerResponse
+
+    interface _DeleteAcceleratorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_accelerator: (
+      ?accelerator_arn: String
+    ) -> _DeleteAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAcceleratorResponse
+
+    interface _DeleteCrossAccountAttachmentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cross_account_attachment: (
+      ?attachment_arn: String
+    ) -> _DeleteCrossAccountAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCrossAccountAttachmentResponse
+
+    interface _DeleteCustomRoutingAcceleratorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_custom_routing_accelerator: (
+      ?accelerator_arn: String
+    ) -> _DeleteCustomRoutingAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomRoutingAcceleratorResponse
+
+    interface _DeleteCustomRoutingEndpointGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_custom_routing_endpoint_group: (
+      ?endpoint_group_arn: String
+    ) -> _DeleteCustomRoutingEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomRoutingEndpointGroupResponse
+
+    interface _DeleteCustomRoutingListenerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_custom_routing_listener: (
+      ?listener_arn: String
+    ) -> _DeleteCustomRoutingListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomRoutingListenerResponse
+
+    interface _DeleteEndpointGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_endpoint_group: (
+      ?endpoint_group_arn: String
+    ) -> _DeleteEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointGroupResponse
+
+    interface _DeleteListenerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_listener: (
+      ?listener_arn: String
+    ) -> _DeleteListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListenerResponse
+
+    interface _DenyCustomRoutingTrafficResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deny_custom_routing_traffic: (
+      ?endpoint_group_arn: String,
+      ?endpoint_id: String,
+      ?destination_addresses: Array[String],
+      ?destination_ports: Array[Integer],
+      ?deny_all_traffic_to_endpoint: bool
+    ) -> _DenyCustomRoutingTrafficResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DenyCustomRoutingTrafficResponse
+
+    interface _DeprovisionByoipCidrResponse
+      include Smithy::Client::_Response[Types::DeprovisionByoipCidrResponse]
+      def byoip_cidr: () -> Types::ByoipCidr?
+    end
+    def deprovision_byoip_cidr: (
+      ?cidr: String
+    ) -> _DeprovisionByoipCidrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprovisionByoipCidrResponse
+
+    interface _DescribeAcceleratorResponse
+      include Smithy::Client::_Response[Types::DescribeAcceleratorResponse]
+      def accelerator: () -> Types::Accelerator?
+    end
+    def describe_accelerator: (
+      ?accelerator_arn: String
+    ) -> _DescribeAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcceleratorResponse
+
+    interface _DescribeAcceleratorAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeAcceleratorAttributesResponse]
+      def accelerator_attributes: () -> Types::AcceleratorAttributes?
+    end
+    def describe_accelerator_attributes: (
+      ?accelerator_arn: String
+    ) -> _DescribeAcceleratorAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcceleratorAttributesResponse
+
+    interface _DescribeCrossAccountAttachmentResponse
+      include Smithy::Client::_Response[Types::DescribeCrossAccountAttachmentResponse]
+      def cross_account_attachment: () -> Types::Attachment?
+    end
+    def describe_cross_account_attachment: (
+      ?attachment_arn: String
+    ) -> _DescribeCrossAccountAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCrossAccountAttachmentResponse
+
+    interface _DescribeCustomRoutingAcceleratorResponse
+      include Smithy::Client::_Response[Types::DescribeCustomRoutingAcceleratorResponse]
+      def accelerator: () -> Types::CustomRoutingAccelerator?
+    end
+    def describe_custom_routing_accelerator: (
+      ?accelerator_arn: String
+    ) -> _DescribeCustomRoutingAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomRoutingAcceleratorResponse
+
+    interface _DescribeCustomRoutingAcceleratorAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeCustomRoutingAcceleratorAttributesResponse]
+      def accelerator_attributes: () -> Types::CustomRoutingAcceleratorAttributes?
+    end
+    def describe_custom_routing_accelerator_attributes: (
+      ?accelerator_arn: String
+    ) -> _DescribeCustomRoutingAcceleratorAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomRoutingAcceleratorAttributesResponse
+
+    interface _DescribeCustomRoutingEndpointGroupResponse
+      include Smithy::Client::_Response[Types::DescribeCustomRoutingEndpointGroupResponse]
+      def endpoint_group: () -> Types::CustomRoutingEndpointGroup?
+    end
+    def describe_custom_routing_endpoint_group: (
+      ?endpoint_group_arn: String
+    ) -> _DescribeCustomRoutingEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomRoutingEndpointGroupResponse
+
+    interface _DescribeCustomRoutingListenerResponse
+      include Smithy::Client::_Response[Types::DescribeCustomRoutingListenerResponse]
+      def listener: () -> Types::CustomRoutingListener?
+    end
+    def describe_custom_routing_listener: (
+      ?listener_arn: String
+    ) -> _DescribeCustomRoutingListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomRoutingListenerResponse
+
+    interface _DescribeEndpointGroupResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointGroupResponse]
+      def endpoint_group: () -> Types::EndpointGroup?
+    end
+    def describe_endpoint_group: (
+      ?endpoint_group_arn: String
+    ) -> _DescribeEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointGroupResponse
+
+    interface _DescribeListenerResponse
+      include Smithy::Client::_Response[Types::DescribeListenerResponse]
+      def listener: () -> Types::Listener?
+    end
+    def describe_listener: (
+      ?listener_arn: String
+    ) -> _DescribeListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeListenerResponse
+
+    interface _ListAcceleratorsResponse
+      include Smithy::Client::_Response[Types::ListAcceleratorsResponse]
+      def accelerators: () -> Array[Types::Accelerator]?
+      def next_token: () -> String?
+    end
+    def list_accelerators: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAcceleratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcceleratorsResponse
+
+    interface _ListByoipCidrsResponse
+      include Smithy::Client::_Response[Types::ListByoipCidrsResponse]
+      def byoip_cidrs: () -> Array[Types::ByoipCidr]?
+      def next_token: () -> String?
+    end
+    def list_byoip_cidrs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListByoipCidrsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListByoipCidrsResponse
+
+    interface _ListCrossAccountAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListCrossAccountAttachmentsResponse]
+      def cross_account_attachments: () -> Array[Types::Attachment]?
+      def next_token: () -> String?
+    end
+    def list_cross_account_attachments: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCrossAccountAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCrossAccountAttachmentsResponse
+
+    interface _ListCrossAccountResourceAccountsResponse
+      include Smithy::Client::_Response[Types::ListCrossAccountResourceAccountsResponse]
+      def resource_owner_aws_account_ids: () -> Array[String]?
+    end
+    def list_cross_account_resource_accounts: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCrossAccountResourceAccountsResponse
+
+    interface _ListCrossAccountResourcesResponse
+      include Smithy::Client::_Response[Types::ListCrossAccountResourcesResponse]
+      def cross_account_resources: () -> Array[Types::CrossAccountResource]?
+      def next_token: () -> String?
+    end
+    def list_cross_account_resources: (
+      ?accelerator_arn: String,
+      ?resource_owner_aws_account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCrossAccountResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCrossAccountResourcesResponse
+
+    interface _ListCustomRoutingAcceleratorsResponse
+      include Smithy::Client::_Response[Types::ListCustomRoutingAcceleratorsResponse]
+      def accelerators: () -> Array[Types::CustomRoutingAccelerator]?
+      def next_token: () -> String?
+    end
+    def list_custom_routing_accelerators: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomRoutingAcceleratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomRoutingAcceleratorsResponse
+
+    interface _ListCustomRoutingEndpointGroupsResponse
+      include Smithy::Client::_Response[Types::ListCustomRoutingEndpointGroupsResponse]
+      def endpoint_groups: () -> Array[Types::CustomRoutingEndpointGroup]?
+      def next_token: () -> String?
+    end
+    def list_custom_routing_endpoint_groups: (
+      ?listener_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomRoutingEndpointGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomRoutingEndpointGroupsResponse
+
+    interface _ListCustomRoutingListenersResponse
+      include Smithy::Client::_Response[Types::ListCustomRoutingListenersResponse]
+      def listeners: () -> Array[Types::CustomRoutingListener]?
+      def next_token: () -> String?
+    end
+    def list_custom_routing_listeners: (
+      ?accelerator_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomRoutingListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomRoutingListenersResponse
+
+    interface _ListCustomRoutingPortMappingsResponse
+      include Smithy::Client::_Response[Types::ListCustomRoutingPortMappingsResponse]
+      def port_mappings: () -> Array[Types::PortMapping]?
+      def next_token: () -> String?
+    end
+    def list_custom_routing_port_mappings: (
+      ?accelerator_arn: String,
+      ?endpoint_group_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomRoutingPortMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomRoutingPortMappingsResponse
+
+    interface _ListCustomRoutingPortMappingsByDestinationResponse
+      include Smithy::Client::_Response[Types::ListCustomRoutingPortMappingsByDestinationResponse]
+      def destination_port_mappings: () -> Array[Types::DestinationPortMapping]?
+      def next_token: () -> String?
+    end
+    def list_custom_routing_port_mappings_by_destination: (
+      ?endpoint_id: String,
+      ?destination_address: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomRoutingPortMappingsByDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomRoutingPortMappingsByDestinationResponse
+
+    interface _ListEndpointGroupsResponse
+      include Smithy::Client::_Response[Types::ListEndpointGroupsResponse]
+      def endpoint_groups: () -> Array[Types::EndpointGroup]?
+      def next_token: () -> String?
+    end
+    def list_endpoint_groups: (
+      ?listener_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEndpointGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEndpointGroupsResponse
+
+    interface _ListListenersResponse
+      include Smithy::Client::_Response[Types::ListListenersResponse]
+      def listeners: () -> Array[Types::Listener]?
+      def next_token: () -> String?
+    end
+    def list_listeners: (
+      ?accelerator_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListListenersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ProvisionByoipCidrResponse
+      include Smithy::Client::_Response[Types::ProvisionByoipCidrResponse]
+      def byoip_cidr: () -> Types::ByoipCidr?
+    end
+    def provision_byoip_cidr: (
+      ?cidr: String,
+      ?cidr_authorization_context: {
+        message: String,
+        signature: untyped
+      }
+    ) -> _ProvisionByoipCidrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ProvisionByoipCidrResponse
+
+    interface _RemoveCustomRoutingEndpointsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_custom_routing_endpoints: (
+      ?endpoint_ids: Array[String],
+      ?endpoint_group_arn: String
+    ) -> _RemoveCustomRoutingEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveCustomRoutingEndpointsResponse
+
+    interface _RemoveEndpointsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_endpoints: (
+      ?endpoint_identifiers: Array[
+        {
+          endpoint_id: String,
+          client_ip_preservation_enabled: bool
+        }
+      ],
+      ?endpoint_group_arn: String
+    ) -> _RemoveEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveEndpointsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAcceleratorResponse
+      include Smithy::Client::_Response[Types::UpdateAcceleratorResponse]
+      def accelerator: () -> Types::Accelerator?
+    end
+    def update_accelerator: (
+      ?accelerator_arn: String,
+      ?name: String,
+      ?ip_address_type: String,
+      ?ip_addresses: Array[String],
+      ?enabled: bool
+    ) -> _UpdateAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAcceleratorResponse
+
+    interface _UpdateAcceleratorAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateAcceleratorAttributesResponse]
+      def accelerator_attributes: () -> Types::AcceleratorAttributes?
+    end
+    def update_accelerator_attributes: (
+      ?accelerator_arn: String,
+      ?flow_logs_enabled: bool,
+      ?flow_logs_s3_bucket: String,
+      ?flow_logs_s3_prefix: String
+    ) -> _UpdateAcceleratorAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAcceleratorAttributesResponse
+
+    interface _UpdateCrossAccountAttachmentResponse
+      include Smithy::Client::_Response[Types::UpdateCrossAccountAttachmentResponse]
+      def cross_account_attachment: () -> Types::Attachment?
+    end
+    def update_cross_account_attachment: (
+      ?attachment_arn: String,
+      ?name: String,
+      ?add_principals: Array[String],
+      ?remove_principals: Array[String],
+      ?add_resources: Array[
+        {
+          endpoint_id: String,
+          cidr: untyped,
+          region: untyped
+        }
+      ],
+      ?remove_resources: Array[
+        {
+          endpoint_id: String,
+          cidr: untyped,
+          region: untyped
+        }
+      ]
+    ) -> _UpdateCrossAccountAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCrossAccountAttachmentResponse
+
+    interface _UpdateCustomRoutingAcceleratorResponse
+      include Smithy::Client::_Response[Types::UpdateCustomRoutingAcceleratorResponse]
+      def accelerator: () -> Types::CustomRoutingAccelerator?
+    end
+    def update_custom_routing_accelerator: (
+      ?accelerator_arn: String,
+      ?name: String,
+      ?ip_address_type: String,
+      ?ip_addresses: Array[String],
+      ?enabled: bool
+    ) -> _UpdateCustomRoutingAcceleratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomRoutingAcceleratorResponse
+
+    interface _UpdateCustomRoutingAcceleratorAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateCustomRoutingAcceleratorAttributesResponse]
+      def accelerator_attributes: () -> Types::CustomRoutingAcceleratorAttributes?
+    end
+    def update_custom_routing_accelerator_attributes: (
+      ?accelerator_arn: String,
+      ?flow_logs_enabled: bool,
+      ?flow_logs_s3_bucket: String,
+      ?flow_logs_s3_prefix: String
+    ) -> _UpdateCustomRoutingAcceleratorAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomRoutingAcceleratorAttributesResponse
+
+    interface _UpdateCustomRoutingListenerResponse
+      include Smithy::Client::_Response[Types::UpdateCustomRoutingListenerResponse]
+      def listener: () -> Types::CustomRoutingListener?
+    end
+    def update_custom_routing_listener: (
+      ?listener_arn: String,
+      ?port_ranges: Array[
+        {
+          from_port: Integer,
+          to_port: untyped
+        }
+      ]
+    ) -> _UpdateCustomRoutingListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomRoutingListenerResponse
+
+    interface _UpdateEndpointGroupResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointGroupResponse]
+      def endpoint_group: () -> Types::EndpointGroup?
+    end
+    def update_endpoint_group: (
+      ?endpoint_group_arn: String,
+      ?endpoint_configurations: Array[
+        {
+          endpoint_id: String,
+          weight: Integer,
+          client_ip_preservation_enabled: bool,
+          attachment_arn: untyped
+        }
+      ],
+      ?traffic_dial_percentage: Float,
+      ?health_check_port: Integer,
+      ?health_check_protocol: String,
+      ?health_check_path: String,
+      ?health_check_interval_seconds: Integer,
+      ?threshold_count: Integer,
+      ?port_overrides: Array[
+        {
+          listener_port: Integer,
+          endpoint_port: untyped
+        }
+      ]
+    ) -> _UpdateEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointGroupResponse
+
+    interface _UpdateListenerResponse
+      include Smithy::Client::_Response[Types::UpdateListenerResponse]
+      def listener: () -> Types::Listener?
+    end
+    def update_listener: (
+      ?listener_arn: String,
+      ?port_ranges: Array[
+        {
+          from_port: Integer,
+          to_port: untyped
+        }
+      ],
+      ?protocol: String,
+      ?client_affinity: String
+    ) -> _UpdateListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateListenerResponse
+
+    interface _WithdrawByoipCidrResponse
+      include Smithy::Client::_Response[Types::WithdrawByoipCidrResponse]
+      def byoip_cidr: () -> Types::ByoipCidr?
+    end
+    def withdraw_byoip_cidr: (
+      ?cidr: String
+    ) -> _WithdrawByoipCidrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _WithdrawByoipCidrResponse
+  end
+end

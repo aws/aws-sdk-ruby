@@ -1,0 +1,30 @@
+module Aws::TaxSettings
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentUploadException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CaseCreationLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def field_list: () -> Array[Types::ValidationExceptionField]?
+    end
+  end
+end

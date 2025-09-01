@@ -1,0 +1,3858 @@
+module Aws::EMR
+  module Types
+
+    module ActionOnFailure
+      TERMINATE_JOB_FLOW: String
+      TERMINATE_CLUSTER: String
+      CANCEL_AND_WAIT: String
+      CONTINUE: String
+    end
+
+    class AddInstanceFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_fleet: Types::InstanceFleetConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_fleet: Types::InstanceFleetConfig?
+    end
+
+    class AddInstanceFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_fleet_id: String,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_fleet_id: String?
+      attr_accessor cluster_arn: String?
+    end
+
+    class AddInstanceGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_groups: Array[Types::InstanceGroupConfig],
+        ?job_flow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_groups: Array[Types::InstanceGroupConfig]?
+      attr_accessor job_flow_id: String?
+    end
+
+    class AddInstanceGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_id: String,
+        ?instance_group_ids: Array[String],
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_id: String?
+      attr_accessor instance_group_ids: Array[String]?
+      attr_accessor cluster_arn: String?
+    end
+
+    class AddJobFlowStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_id: String,
+        ?steps: Array[Types::StepConfig],
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_id: String?
+      attr_accessor steps: Array[Types::StepConfig]?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class AddJobFlowStepsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_ids: Array[String]?
+    end
+
+    class AddTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AdjustmentType
+      CHANGE_IN_CAPACITY: String
+      PERCENT_CHANGE_IN_CAPACITY: String
+      EXACT_CAPACITY: String
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?args: Array[String],
+        ?additional_info: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor args: Array[String]?
+      attr_accessor additional_info: Hash[String, String]?
+    end
+
+    module AuthMode
+      SSO: String
+      IAM: String
+    end
+
+    class AutoScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraints: Types::ScalingConstraints,
+        ?rules: Array[Types::ScalingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraints: Types::ScalingConstraints?
+      attr_accessor rules: Array[Types::ScalingRule]?
+    end
+
+    class AutoScalingPolicyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::AutoScalingPolicyStatus,
+        ?constraints: Types::ScalingConstraints,
+        ?rules: Array[Types::ScalingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::AutoScalingPolicyStatus?
+      attr_accessor constraints: Types::ScalingConstraints?
+      attr_accessor rules: Array[Types::ScalingRule]?
+    end
+
+    module AutoScalingPolicyState
+      PENDING: String
+      ATTACHING: String
+      ATTACHED: String
+      DETACHING: String
+      DETACHED: String
+      FAILED: String
+    end
+
+    class AutoScalingPolicyStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module AutoScalingPolicyStateChangeReasonCode
+      USER_REQUEST: String
+      PROVISION_FAILURE: String
+      CLEANUP_FAILURE: String
+    end
+
+    class AutoScalingPolicyStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::AutoScalingPolicyStateChangeReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::AutoScalingPolicyStateChangeReason?
+    end
+
+    class AutoTerminationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idle_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idle_timeout: Integer?
+    end
+
+    class BlockPublicAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_public_security_group_rules: bool,
+        ?permitted_public_security_group_rule_ranges: Array[Types::PortRange],
+        ?classification: String,
+        ?configurations: Array[Types::Configuration],
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_public_security_group_rules: bool?
+      attr_accessor permitted_public_security_group_rule_ranges: Array[Types::PortRange]?
+      attr_accessor classification: String?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    class BlockPublicAccessConfigurationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?created_by_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor created_by_arn: String?
+    end
+
+    class BootstrapActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?script_bootstrap_action: Types::ScriptBootstrapActionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor script_bootstrap_action: Types::ScriptBootstrapActionConfig?
+    end
+
+    class BootstrapActionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_action_config: Types::BootstrapActionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_action_config: Types::BootstrapActionConfig?
+    end
+
+    class CancelStepsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class CancelStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?step_ids: Array[String],
+        ?step_cancellation_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor step_ids: Array[String]?
+      attr_accessor step_cancellation_option: String?
+    end
+
+    class CancelStepsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cancel_steps_info_list: Array[Types::CancelStepsInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cancel_steps_info_list: Array[Types::CancelStepsInfo]?
+    end
+
+    module CancelStepsRequestStatus
+      SUBMITTED: String
+      FAILED: String
+    end
+
+    class CloudWatchAlarmDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison_operator: String,
+        ?evaluation_periods: Integer,
+        ?metric_name: String,
+        ?namespace: String,
+        ?period: Integer,
+        ?statistic: String,
+        ?threshold: Float,
+        ?unit: String,
+        ?dimensions: Array[Types::MetricDimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison_operator: String?
+      attr_accessor evaluation_periods: Integer?
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+      attr_accessor period: Integer?
+      attr_accessor statistic: String?
+      attr_accessor threshold: Float?
+      attr_accessor unit: String?
+      attr_accessor dimensions: Array[Types::MetricDimension]?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: Types::ClusterStatus,
+        ?ec2_instance_attributes: Types::Ec2InstanceAttributes,
+        ?instance_collection_type: String,
+        ?log_uri: String,
+        ?log_encryption_kms_key_id: String,
+        ?requested_ami_version: String,
+        ?running_ami_version: String,
+        ?release_label: String,
+        ?auto_terminate: bool,
+        ?termination_protected: bool,
+        ?unhealthy_node_replacement: bool,
+        ?visible_to_all_users: bool,
+        ?applications: Array[Types::Application],
+        ?tags: Array[Types::Tag],
+        ?service_role: String,
+        ?normalized_instance_hours: Integer,
+        ?master_public_dns_name: String,
+        ?configurations: Array[Types::Configuration],
+        ?security_configuration: String,
+        ?auto_scaling_role: String,
+        ?scale_down_behavior: String,
+        ?custom_ami_id: String,
+        ?ebs_root_volume_size: Integer,
+        ?repo_upgrade_on_boot: String,
+        ?kerberos_attributes: Types::KerberosAttributes,
+        ?cluster_arn: String,
+        ?outpost_arn: String,
+        ?step_concurrency_level: Integer,
+        ?placement_groups: Array[Types::PlacementGroupConfig],
+        ?os_release_label: String,
+        ?ebs_root_volume_iops: Integer,
+        ?ebs_root_volume_throughput: Integer,
+        ?extended_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: Types::ClusterStatus?
+      attr_accessor ec2_instance_attributes: Types::Ec2InstanceAttributes?
+      attr_accessor instance_collection_type: String?
+      attr_accessor log_uri: String?
+      attr_accessor log_encryption_kms_key_id: String?
+      attr_accessor requested_ami_version: String?
+      attr_accessor running_ami_version: String?
+      attr_accessor release_label: String?
+      attr_accessor auto_terminate: bool?
+      attr_accessor termination_protected: bool?
+      attr_accessor unhealthy_node_replacement: bool?
+      attr_accessor visible_to_all_users: bool?
+      attr_accessor applications: Array[Types::Application]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor service_role: String?
+      attr_accessor normalized_instance_hours: Integer?
+      attr_accessor master_public_dns_name: String?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor security_configuration: String?
+      attr_accessor auto_scaling_role: String?
+      attr_accessor scale_down_behavior: String?
+      attr_accessor custom_ami_id: String?
+      attr_accessor ebs_root_volume_size: Integer?
+      attr_accessor repo_upgrade_on_boot: String?
+      attr_accessor kerberos_attributes: Types::KerberosAttributes?
+      attr_accessor cluster_arn: String?
+      attr_accessor outpost_arn: String?
+      attr_accessor step_concurrency_level: Integer?
+      attr_accessor placement_groups: Array[Types::PlacementGroupConfig]?
+      attr_accessor os_release_label: String?
+      attr_accessor ebs_root_volume_iops: Integer?
+      attr_accessor ebs_root_volume_throughput: Integer?
+      attr_accessor extended_support: bool?
+    end
+
+    module ClusterState
+      STARTING: String
+      BOOTSTRAPPING: String
+      RUNNING: String
+      WAITING: String
+      TERMINATING: String
+      TERMINATED: String
+      TERMINATED_WITH_ERRORS: String
+    end
+
+    class ClusterStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ClusterStateChangeReasonCode
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+      INSTANCE_FAILURE: String
+      INSTANCE_FLEET_TIMEOUT: String
+      BOOTSTRAP_FAILURE: String
+      USER_REQUEST: String
+      STEP_FAILURE: String
+      ALL_STEPS_COMPLETED: String
+    end
+
+    class ClusterStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::ClusterStateChangeReason,
+        ?timeline: Types::ClusterTimeline,
+        ?error_details: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::ClusterStateChangeReason?
+      attr_accessor timeline: Types::ClusterTimeline?
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+    end
+
+    class ClusterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: Types::ClusterStatus,
+        ?normalized_instance_hours: Integer,
+        ?cluster_arn: String,
+        ?outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: Types::ClusterStatus?
+      attr_accessor normalized_instance_hours: Integer?
+      attr_accessor cluster_arn: String?
+      attr_accessor outpost_arn: String?
+    end
+
+    class ClusterTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    class Command
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?script_path: String,
+        ?args: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor script_path: String?
+      attr_accessor args: Array[String]?
+    end
+
+    module ComparisonOperator
+      GREATER_THAN_OR_EQUAL: String
+      GREATER_THAN: String
+      LESS_THAN: String
+      LESS_THAN_OR_EQUAL: String
+    end
+
+    class ComputeLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit_type: String,
+        ?minimum_capacity_units: Integer,
+        ?maximum_capacity_units: Integer,
+        ?maximum_on_demand_capacity_units: Integer,
+        ?maximum_core_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit_type: String?
+      attr_accessor minimum_capacity_units: Integer?
+      attr_accessor maximum_capacity_units: Integer?
+      attr_accessor maximum_on_demand_capacity_units: Integer?
+      attr_accessor maximum_core_capacity_units: Integer?
+    end
+
+    module ComputeLimitsUnitType
+      InstanceFleetUnits: String
+      Instances: String
+      VCPU: String
+    end
+
+    class Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?classification: String,
+        ?configurations: Array[Types::Configuration],
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor classification: String?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    class CreatePersistentAppUIInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_resource_arn: String,
+        ?emr_containers_config: Types::EMRContainersConfig,
+        ?tags: Array[Types::Tag],
+        ?x_referer: String,
+        ?profiler_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_resource_arn: String?
+      attr_accessor emr_containers_config: Types::EMRContainersConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor x_referer: String?
+      attr_accessor profiler_type: String?
+    end
+
+    class CreatePersistentAppUIOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui_id: String,
+        ?runtime_role_enabled_cluster: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui_id: String?
+      attr_accessor runtime_role_enabled_cluster: bool?
+    end
+
+    class CreateSecurityConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?security_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor security_configuration: String?
+    end
+
+    class CreateSecurityConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creation_date_time: Time?
+    end
+
+    class CreateStudioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?auth_mode: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?service_role: String,
+        ?user_role: String,
+        ?workspace_security_group_id: String,
+        ?engine_security_group_id: String,
+        ?default_s3_location: String,
+        ?idp_auth_url: String,
+        ?idp_relay_state_parameter_name: String,
+        ?tags: Array[Types::Tag],
+        ?trusted_identity_propagation_enabled: bool,
+        ?idc_user_assignment: String,
+        ?idc_instance_arn: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor auth_mode: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor user_role: String?
+      attr_accessor workspace_security_group_id: String?
+      attr_accessor engine_security_group_id: String?
+      attr_accessor default_s3_location: String?
+      attr_accessor idp_auth_url: String?
+      attr_accessor idp_relay_state_parameter_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor trusted_identity_propagation_enabled: bool?
+      attr_accessor idc_user_assignment: String?
+      attr_accessor idc_instance_arn: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class CreateStudioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor url: String?
+    end
+
+    class CreateStudioSessionMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+        ?session_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+      attr_accessor session_policy_arn: String?
+    end
+
+    class Credentials
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?username_password: Types::UsernamePassword,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username_password: Types::UsernamePassword?
+
+      class UsernamePassword < Credentials
+      end
+      class Unknown < Credentials
+      end
+    end
+
+    class DeleteSecurityConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteSecurityConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStudioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+    end
+
+    class DeleteStudioSessionMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+    end
+
+    class DescribeClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class DescribeClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DescribeJobFlowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+        ?job_flow_ids: Array[String],
+        ?job_flow_states: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor job_flow_ids: Array[String]?
+      attr_accessor job_flow_states: Array[String]?
+    end
+
+    class DescribeJobFlowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flows: Array[Types::JobFlowDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flows: Array[Types::JobFlowDetail]?
+    end
+
+    class DescribeNotebookExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution_id: String?
+    end
+
+    class DescribeNotebookExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution: Types::NotebookExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution: Types::NotebookExecution?
+    end
+
+    class DescribePersistentAppUIInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui_id: String?
+    end
+
+    class DescribePersistentAppUIOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui: Types::PersistentAppUI,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui: Types::PersistentAppUI?
+    end
+
+    class DescribeReleaseLabelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_label: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_label: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeReleaseLabelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_label: String,
+        ?applications: Array[Types::SimplifiedApplication],
+        ?next_token: String,
+        ?available_os_releases: Array[Types::OSRelease],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_label: String?
+      attr_accessor applications: Array[Types::SimplifiedApplication]?
+      attr_accessor next_token: String?
+      attr_accessor available_os_releases: Array[Types::OSRelease]?
+    end
+
+    class DescribeSecurityConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeSecurityConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?security_configuration: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor security_configuration: String?
+      attr_accessor creation_date_time: Time?
+    end
+
+    class DescribeStepInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor step_id: String?
+    end
+
+    class DescribeStepOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step: Types::Step,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step: Types::Step?
+    end
+
+    class DescribeStudioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+    end
+
+    class DescribeStudioOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio: Types::Studio,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio: Types::Studio?
+    end
+
+    class EMRContainersConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_run_id: String?
+    end
+
+    class EbsBlockDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_specification: Types::VolumeSpecification,
+        ?device: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_specification: Types::VolumeSpecification?
+      attr_accessor device: String?
+    end
+
+    class EbsBlockDeviceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_specification: Types::VolumeSpecification,
+        ?volumes_per_instance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_specification: Types::VolumeSpecification?
+      attr_accessor volumes_per_instance: Integer?
+    end
+
+    class EbsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ebs_block_device_configs: Array[Types::EbsBlockDeviceConfig],
+        ?ebs_optimized: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ebs_block_device_configs: Array[Types::EbsBlockDeviceConfig]?
+      attr_accessor ebs_optimized: bool?
+    end
+
+    class EbsVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: String,
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: String?
+      attr_accessor volume_id: String?
+    end
+
+    class Ec2InstanceAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_key_name: String,
+        ?ec2_subnet_id: String,
+        ?requested_ec2_subnet_ids: Array[String],
+        ?ec2_availability_zone: String,
+        ?requested_ec2_availability_zones: Array[String],
+        ?iam_instance_profile: String,
+        ?emr_managed_master_security_group: String,
+        ?emr_managed_slave_security_group: String,
+        ?service_access_security_group: String,
+        ?additional_master_security_groups: Array[String],
+        ?additional_slave_security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_key_name: String?
+      attr_accessor ec2_subnet_id: String?
+      attr_accessor requested_ec2_subnet_ids: Array[String]?
+      attr_accessor ec2_availability_zone: String?
+      attr_accessor requested_ec2_availability_zones: Array[String]?
+      attr_accessor iam_instance_profile: String?
+      attr_accessor emr_managed_master_security_group: String?
+      attr_accessor emr_managed_slave_security_group: String?
+      attr_accessor service_access_security_group: String?
+      attr_accessor additional_master_security_groups: Array[String]?
+      attr_accessor additional_slave_security_groups: Array[String]?
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_data: Array[Hash[String, String]],
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_data: Array[Hash[String, String]]?
+      attr_accessor error_message: String?
+    end
+
+    class ExecutionEngineConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?master_instance_security_group_id: String,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor master_instance_security_group_id: String?
+      attr_accessor execution_role_arn: String?
+    end
+
+    module ExecutionEngineType
+      EMR: String
+    end
+
+    class FailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?message: String,
+        ?log_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor message: String?
+      attr_accessor log_file: String?
+    end
+
+    class GetAutoTerminationPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class GetAutoTerminationPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_termination_policy: Types::AutoTerminationPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy?
+    end
+
+    class GetBlockPublicAccessConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetBlockPublicAccessConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_public_access_configuration: Types::BlockPublicAccessConfiguration,
+        ?block_public_access_configuration_metadata: Types::BlockPublicAccessConfigurationMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_public_access_configuration: Types::BlockPublicAccessConfiguration?
+      attr_accessor block_public_access_configuration_metadata: Types::BlockPublicAccessConfigurationMetadata?
+    end
+
+    class GetClusterSessionCredentialsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class GetClusterSessionCredentialsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor expires_at: Time?
+    end
+
+    class GetManagedScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class GetManagedScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_scaling_policy: Types::ManagedScalingPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy?
+    end
+
+    class GetOnClusterAppUIPresignedURLInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?on_cluster_app_ui_type: String,
+        ?application_id: String,
+        ?dry_run: bool,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor on_cluster_app_ui_type: String?
+      attr_accessor application_id: String?
+      attr_accessor dry_run: bool?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class GetOnClusterAppUIPresignedURLOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?presigned_url_ready: bool,
+        ?presigned_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor presigned_url_ready: bool?
+      attr_accessor presigned_url: String?
+    end
+
+    class GetPersistentAppUIPresignedURLInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui_id: String,
+        ?persistent_app_ui_type: String,
+        ?application_id: String,
+        ?auth_proxy_call: bool,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui_id: String?
+      attr_accessor persistent_app_ui_type: String?
+      attr_accessor application_id: String?
+      attr_accessor auth_proxy_call: bool?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class GetPersistentAppUIPresignedURLOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?presigned_url_ready: bool,
+        ?presigned_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor presigned_url_ready: bool?
+      attr_accessor presigned_url: String?
+    end
+
+    class GetStudioSessionMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+    end
+
+    class GetStudioSessionMappingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_mapping: Types::SessionMappingDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_mapping: Types::SessionMappingDetail?
+    end
+
+    class HadoopJarStepConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?properties: Array[Types::KeyValue],
+        ?jar: String,
+        ?main_class: String,
+        ?args: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor properties: Array[Types::KeyValue]?
+      attr_accessor jar: String?
+      attr_accessor main_class: String?
+      attr_accessor args: Array[String]?
+    end
+
+    class HadoopStepConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jar: String,
+        ?properties: Hash[String, String],
+        ?main_class: String,
+        ?args: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jar: String?
+      attr_accessor properties: Hash[String, String]?
+      attr_accessor main_class: String?
+      attr_accessor args: Array[String]?
+    end
+
+    module IdcUserAssignment
+      REQUIRED: String
+      OPTIONAL: String
+    end
+
+    module IdentityType
+      USER: String
+      GROUP: String
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?ec2_instance_id: String,
+        ?public_dns_name: String,
+        ?public_ip_address: String,
+        ?private_dns_name: String,
+        ?private_ip_address: String,
+        ?status: Types::InstanceStatus,
+        ?instance_group_id: String,
+        ?instance_fleet_id: String,
+        ?market: String,
+        ?instance_type: String,
+        ?ebs_volumes: Array[Types::EbsVolume],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor public_dns_name: String?
+      attr_accessor public_ip_address: String?
+      attr_accessor private_dns_name: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor status: Types::InstanceStatus?
+      attr_accessor instance_group_id: String?
+      attr_accessor instance_fleet_id: String?
+      attr_accessor market: String?
+      attr_accessor instance_type: String?
+      attr_accessor ebs_volumes: Array[Types::EbsVolume]?
+    end
+
+    module InstanceCollectionType
+      INSTANCE_FLEET: String
+      INSTANCE_GROUP: String
+    end
+
+    class InstanceFleet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: Types::InstanceFleetStatus,
+        ?instance_fleet_type: String,
+        ?target_on_demand_capacity: Integer,
+        ?target_spot_capacity: Integer,
+        ?provisioned_on_demand_capacity: Integer,
+        ?provisioned_spot_capacity: Integer,
+        ?instance_type_specifications: Array[Types::InstanceTypeSpecification],
+        ?launch_specifications: Types::InstanceFleetProvisioningSpecifications,
+        ?resize_specifications: Types::InstanceFleetResizingSpecifications,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: Types::InstanceFleetStatus?
+      attr_accessor instance_fleet_type: String?
+      attr_accessor target_on_demand_capacity: Integer?
+      attr_accessor target_spot_capacity: Integer?
+      attr_accessor provisioned_on_demand_capacity: Integer?
+      attr_accessor provisioned_spot_capacity: Integer?
+      attr_accessor instance_type_specifications: Array[Types::InstanceTypeSpecification]?
+      attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications?
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications?
+      attr_accessor context: String?
+    end
+
+    class InstanceFleetConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?instance_fleet_type: String,
+        ?target_on_demand_capacity: Integer,
+        ?target_spot_capacity: Integer,
+        ?instance_type_configs: Array[Types::InstanceTypeConfig],
+        ?launch_specifications: Types::InstanceFleetProvisioningSpecifications,
+        ?resize_specifications: Types::InstanceFleetResizingSpecifications,
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor instance_fleet_type: String?
+      attr_accessor target_on_demand_capacity: Integer?
+      attr_accessor target_spot_capacity: Integer?
+      attr_accessor instance_type_configs: Array[Types::InstanceTypeConfig]?
+      attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications?
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications?
+      attr_accessor context: String?
+    end
+
+    class InstanceFleetModifyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_fleet_id: String,
+        ?target_on_demand_capacity: Integer,
+        ?target_spot_capacity: Integer,
+        ?resize_specifications: Types::InstanceFleetResizingSpecifications,
+        ?instance_type_configs: Array[Types::InstanceTypeConfig],
+        ?context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_fleet_id: String?
+      attr_accessor target_on_demand_capacity: Integer?
+      attr_accessor target_spot_capacity: Integer?
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications?
+      attr_accessor instance_type_configs: Array[Types::InstanceTypeConfig]?
+      attr_accessor context: String?
+    end
+
+    class InstanceFleetProvisioningSpecifications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spot_specification: Types::SpotProvisioningSpecification,
+        ?on_demand_specification: Types::OnDemandProvisioningSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spot_specification: Types::SpotProvisioningSpecification?
+      attr_accessor on_demand_specification: Types::OnDemandProvisioningSpecification?
+    end
+
+    class InstanceFleetResizingSpecifications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spot_resize_specification: Types::SpotResizingSpecification,
+        ?on_demand_resize_specification: Types::OnDemandResizingSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spot_resize_specification: Types::SpotResizingSpecification?
+      attr_accessor on_demand_resize_specification: Types::OnDemandResizingSpecification?
+    end
+
+    module InstanceFleetState
+      PROVISIONING: String
+      BOOTSTRAPPING: String
+      RUNNING: String
+      RESIZING: String
+      SUSPENDED: String
+      TERMINATING: String
+      TERMINATED: String
+    end
+
+    class InstanceFleetStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module InstanceFleetStateChangeReasonCode
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+      INSTANCE_FAILURE: String
+      CLUSTER_TERMINATED: String
+    end
+
+    class InstanceFleetStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::InstanceFleetStateChangeReason,
+        ?timeline: Types::InstanceFleetTimeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::InstanceFleetStateChangeReason?
+      attr_accessor timeline: Types::InstanceFleetTimeline?
+    end
+
+    class InstanceFleetTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    module InstanceFleetType
+      MASTER: String
+      CORE: String
+      TASK: String
+    end
+
+    class InstanceGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?market: String,
+        ?instance_group_type: String,
+        ?bid_price: String,
+        ?instance_type: String,
+        ?requested_instance_count: Integer,
+        ?running_instance_count: Integer,
+        ?status: Types::InstanceGroupStatus,
+        ?configurations: Array[Types::Configuration],
+        ?configurations_version: Integer,
+        ?last_successfully_applied_configurations: Array[Types::Configuration],
+        ?last_successfully_applied_configurations_version: Integer,
+        ?ebs_block_devices: Array[Types::EbsBlockDevice],
+        ?ebs_optimized: bool,
+        ?shrink_policy: Types::ShrinkPolicy,
+        ?auto_scaling_policy: Types::AutoScalingPolicyDescription,
+        ?custom_ami_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor market: String?
+      attr_accessor instance_group_type: String?
+      attr_accessor bid_price: String?
+      attr_accessor instance_type: String?
+      attr_accessor requested_instance_count: Integer?
+      attr_accessor running_instance_count: Integer?
+      attr_accessor status: Types::InstanceGroupStatus?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor configurations_version: Integer?
+      attr_accessor last_successfully_applied_configurations: Array[Types::Configuration]?
+      attr_accessor last_successfully_applied_configurations_version: Integer?
+      attr_accessor ebs_block_devices: Array[Types::EbsBlockDevice]?
+      attr_accessor ebs_optimized: bool?
+      attr_accessor shrink_policy: Types::ShrinkPolicy?
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicyDescription?
+      attr_accessor custom_ami_id: String?
+    end
+
+    class InstanceGroupConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?market: String,
+        ?instance_role: String,
+        ?bid_price: String,
+        ?instance_type: String,
+        ?instance_count: Integer,
+        ?configurations: Array[Types::Configuration],
+        ?ebs_configuration: Types::EbsConfiguration,
+        ?auto_scaling_policy: Types::AutoScalingPolicy,
+        ?custom_ami_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor market: String?
+      attr_accessor instance_role: String?
+      attr_accessor bid_price: String?
+      attr_accessor instance_type: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor ebs_configuration: Types::EbsConfiguration?
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicy?
+      attr_accessor custom_ami_id: String?
+    end
+
+    class InstanceGroupDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_group_id: String,
+        ?name: String,
+        ?market: String,
+        ?instance_role: String,
+        ?bid_price: String,
+        ?instance_type: String,
+        ?instance_request_count: Integer,
+        ?instance_running_count: Integer,
+        ?state: String,
+        ?last_state_change_reason: String,
+        ?creation_date_time: Time,
+        ?start_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+        ?custom_ami_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_group_id: String?
+      attr_accessor name: String?
+      attr_accessor market: String?
+      attr_accessor instance_role: String?
+      attr_accessor bid_price: String?
+      attr_accessor instance_type: String?
+      attr_accessor instance_request_count: Integer?
+      attr_accessor instance_running_count: Integer?
+      attr_accessor state: String?
+      attr_accessor last_state_change_reason: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor start_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+      attr_accessor custom_ami_id: String?
+    end
+
+    class InstanceGroupModifyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_group_id: String,
+        ?instance_count: Integer,
+        ?ec2_instance_ids_to_terminate: Array[String],
+        ?shrink_policy: Types::ShrinkPolicy,
+        ?reconfiguration_type: String,
+        ?configurations: Array[Types::Configuration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_group_id: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor ec2_instance_ids_to_terminate: Array[String]?
+      attr_accessor shrink_policy: Types::ShrinkPolicy?
+      attr_accessor reconfiguration_type: String?
+      attr_accessor configurations: Array[Types::Configuration]?
+    end
+
+    module InstanceGroupState
+      PROVISIONING: String
+      BOOTSTRAPPING: String
+      RUNNING: String
+      RECONFIGURING: String
+      RESIZING: String
+      SUSPENDED: String
+      TERMINATING: String
+      TERMINATED: String
+      ARRESTED: String
+      SHUTTING_DOWN: String
+      ENDED: String
+    end
+
+    class InstanceGroupStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module InstanceGroupStateChangeReasonCode
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+      INSTANCE_FAILURE: String
+      CLUSTER_TERMINATED: String
+    end
+
+    class InstanceGroupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::InstanceGroupStateChangeReason,
+        ?timeline: Types::InstanceGroupTimeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::InstanceGroupStateChangeReason?
+      attr_accessor timeline: Types::InstanceGroupTimeline?
+    end
+
+    class InstanceGroupTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    module InstanceGroupType
+      MASTER: String
+      CORE: String
+      TASK: String
+    end
+
+    class InstanceResizePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances_to_terminate: Array[String],
+        ?instances_to_protect: Array[String],
+        ?instance_termination_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances_to_terminate: Array[String]?
+      attr_accessor instances_to_protect: Array[String]?
+      attr_accessor instance_termination_timeout: Integer?
+    end
+
+    module InstanceRoleType
+      MASTER: String
+      CORE: String
+      TASK: String
+    end
+
+    module InstanceState
+      AWAITING_FULFILLMENT: String
+      PROVISIONING: String
+      BOOTSTRAPPING: String
+      RUNNING: String
+      TERMINATED: String
+    end
+
+    class InstanceStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module InstanceStateChangeReasonCode
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+      INSTANCE_FAILURE: String
+      BOOTSTRAP_FAILURE: String
+      CLUSTER_TERMINATED: String
+    end
+
+    class InstanceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::InstanceStateChangeReason,
+        ?timeline: Types::InstanceTimeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::InstanceStateChangeReason?
+      attr_accessor timeline: Types::InstanceTimeline?
+    end
+
+    class InstanceTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    class InstanceTypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?weighted_capacity: Integer,
+        ?bid_price: String,
+        ?bid_price_as_percentage_of_on_demand_price: Float,
+        ?ebs_configuration: Types::EbsConfiguration,
+        ?configurations: Array[Types::Configuration],
+        ?custom_ami_id: String,
+        ?priority: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor weighted_capacity: Integer?
+      attr_accessor bid_price: String?
+      attr_accessor bid_price_as_percentage_of_on_demand_price: Float?
+      attr_accessor ebs_configuration: Types::EbsConfiguration?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor custom_ami_id: String?
+      attr_accessor priority: Float?
+    end
+
+    class InstanceTypeSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?weighted_capacity: Integer,
+        ?bid_price: String,
+        ?bid_price_as_percentage_of_on_demand_price: Float,
+        ?configurations: Array[Types::Configuration],
+        ?ebs_block_devices: Array[Types::EbsBlockDevice],
+        ?ebs_optimized: bool,
+        ?custom_ami_id: String,
+        ?priority: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor weighted_capacity: Integer?
+      attr_accessor bid_price: String?
+      attr_accessor bid_price_as_percentage_of_on_demand_price: Float?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor ebs_block_devices: Array[Types::EbsBlockDevice]?
+      attr_accessor ebs_optimized: bool?
+      attr_accessor custom_ami_id: String?
+      attr_accessor priority: Float?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class JobFlowDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_id: String,
+        ?name: String,
+        ?log_uri: String,
+        ?log_encryption_kms_key_id: String,
+        ?ami_version: String,
+        ?execution_status_detail: Types::JobFlowExecutionStatusDetail,
+        ?instances: Types::JobFlowInstancesDetail,
+        ?steps: Array[Types::StepDetail],
+        ?bootstrap_actions: Array[Types::BootstrapActionDetail],
+        ?supported_products: Array[String],
+        ?visible_to_all_users: bool,
+        ?job_flow_role: String,
+        ?service_role: String,
+        ?auto_scaling_role: String,
+        ?scale_down_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_id: String?
+      attr_accessor name: String?
+      attr_accessor log_uri: String?
+      attr_accessor log_encryption_kms_key_id: String?
+      attr_accessor ami_version: String?
+      attr_accessor execution_status_detail: Types::JobFlowExecutionStatusDetail?
+      attr_accessor instances: Types::JobFlowInstancesDetail?
+      attr_accessor steps: Array[Types::StepDetail]?
+      attr_accessor bootstrap_actions: Array[Types::BootstrapActionDetail]?
+      attr_accessor supported_products: Array[String]?
+      attr_accessor visible_to_all_users: bool?
+      attr_accessor job_flow_role: String?
+      attr_accessor service_role: String?
+      attr_accessor auto_scaling_role: String?
+      attr_accessor scale_down_behavior: String?
+    end
+
+    module JobFlowExecutionState
+      STARTING: String
+      BOOTSTRAPPING: String
+      RUNNING: String
+      WAITING: String
+      SHUTTING_DOWN: String
+      TERMINATED: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class JobFlowExecutionStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?creation_date_time: Time,
+        ?start_date_time: Time,
+        ?ready_date_time: Time,
+        ?end_date_time: Time,
+        ?last_state_change_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor start_date_time: Time?
+      attr_accessor ready_date_time: Time?
+      attr_accessor end_date_time: Time?
+      attr_accessor last_state_change_reason: String?
+    end
+
+    class JobFlowInstancesConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?master_instance_type: String,
+        ?slave_instance_type: String,
+        ?instance_count: Integer,
+        ?instance_groups: Array[Types::InstanceGroupConfig],
+        ?instance_fleets: Array[Types::InstanceFleetConfig],
+        ?ec2_key_name: String,
+        ?placement: Types::PlacementType,
+        ?keep_job_flow_alive_when_no_steps: bool,
+        ?termination_protected: bool,
+        ?unhealthy_node_replacement: bool,
+        ?hadoop_version: String,
+        ?ec2_subnet_id: String,
+        ?ec2_subnet_ids: Array[String],
+        ?emr_managed_master_security_group: String,
+        ?emr_managed_slave_security_group: String,
+        ?service_access_security_group: String,
+        ?additional_master_security_groups: Array[String],
+        ?additional_slave_security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor master_instance_type: String?
+      attr_accessor slave_instance_type: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor instance_groups: Array[Types::InstanceGroupConfig]?
+      attr_accessor instance_fleets: Array[Types::InstanceFleetConfig]?
+      attr_accessor ec2_key_name: String?
+      attr_accessor placement: Types::PlacementType?
+      attr_accessor keep_job_flow_alive_when_no_steps: bool?
+      attr_accessor termination_protected: bool?
+      attr_accessor unhealthy_node_replacement: bool?
+      attr_accessor hadoop_version: String?
+      attr_accessor ec2_subnet_id: String?
+      attr_accessor ec2_subnet_ids: Array[String]?
+      attr_accessor emr_managed_master_security_group: String?
+      attr_accessor emr_managed_slave_security_group: String?
+      attr_accessor service_access_security_group: String?
+      attr_accessor additional_master_security_groups: Array[String]?
+      attr_accessor additional_slave_security_groups: Array[String]?
+    end
+
+    class JobFlowInstancesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?master_instance_type: String,
+        ?master_public_dns_name: String,
+        ?master_instance_id: String,
+        ?slave_instance_type: String,
+        ?instance_count: Integer,
+        ?instance_groups: Array[Types::InstanceGroupDetail],
+        ?normalized_instance_hours: Integer,
+        ?ec2_key_name: String,
+        ?ec2_subnet_id: String,
+        ?placement: Types::PlacementType,
+        ?keep_job_flow_alive_when_no_steps: bool,
+        ?termination_protected: bool,
+        ?unhealthy_node_replacement: bool,
+        ?hadoop_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor master_instance_type: String?
+      attr_accessor master_public_dns_name: String?
+      attr_accessor master_instance_id: String?
+      attr_accessor slave_instance_type: String?
+      attr_accessor instance_count: Integer?
+      attr_accessor instance_groups: Array[Types::InstanceGroupDetail]?
+      attr_accessor normalized_instance_hours: Integer?
+      attr_accessor ec2_key_name: String?
+      attr_accessor ec2_subnet_id: String?
+      attr_accessor placement: Types::PlacementType?
+      attr_accessor keep_job_flow_alive_when_no_steps: bool?
+      attr_accessor termination_protected: bool?
+      attr_accessor unhealthy_node_replacement: bool?
+      attr_accessor hadoop_version: String?
+    end
+
+    class KerberosAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?realm: String,
+        ?kdc_admin_password: String,
+        ?cross_realm_trust_principal_password: String,
+        ?ad_domain_join_user: String,
+        ?ad_domain_join_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor realm: String?
+      attr_accessor kdc_admin_password: String?
+      attr_accessor cross_realm_trust_principal_password: String?
+      attr_accessor ad_domain_join_user: String?
+      attr_accessor ad_domain_join_password: String?
+    end
+
+    class KeyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ListBootstrapActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor marker: String?
+    end
+
+    class ListBootstrapActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_actions: Array[Types::Command],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_actions: Array[Types::Command]?
+      attr_accessor marker: String?
+    end
+
+    class ListClustersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+        ?cluster_states: Array[String],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor cluster_states: Array[String]?
+      attr_accessor marker: String?
+    end
+
+    class ListClustersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[Types::ClusterSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[Types::ClusterSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListInstanceFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor marker: String?
+    end
+
+    class ListInstanceFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_fleets: Array[Types::InstanceFleet],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_fleets: Array[Types::InstanceFleet]?
+      attr_accessor marker: String?
+    end
+
+    class ListInstanceGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor marker: String?
+    end
+
+    class ListInstanceGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_groups: Array[Types::InstanceGroup],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_groups: Array[Types::InstanceGroup]?
+      attr_accessor marker: String?
+    end
+
+    class ListInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_group_id: String,
+        ?instance_group_types: Array[String],
+        ?instance_fleet_id: String,
+        ?instance_fleet_type: String,
+        ?instance_states: Array[String],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_group_id: String?
+      attr_accessor instance_group_types: Array[String]?
+      attr_accessor instance_fleet_id: String?
+      attr_accessor instance_fleet_type: String?
+      attr_accessor instance_states: Array[String]?
+      attr_accessor marker: String?
+    end
+
+    class ListInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::Instance],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor marker: String?
+    end
+
+    class ListNotebookExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?editor_id: String,
+        ?status: String,
+        ?from: Time,
+        ?to: Time,
+        ?marker: String,
+        ?execution_engine_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor editor_id: String?
+      attr_accessor status: String?
+      attr_accessor from: Time?
+      attr_accessor to: Time?
+      attr_accessor marker: String?
+      attr_accessor execution_engine_id: String?
+    end
+
+    class ListNotebookExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_executions: Array[Types::NotebookExecutionSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_executions: Array[Types::NotebookExecutionSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListReleaseLabelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ReleaseLabelFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ReleaseLabelFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReleaseLabelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_labels: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_labels: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+    end
+
+    class ListSecurityConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_configurations: Array[Types::SecurityConfigurationSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_configurations: Array[Types::SecurityConfigurationSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?step_states: Array[String],
+        ?step_ids: Array[String],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor step_states: Array[String]?
+      attr_accessor step_ids: Array[String]?
+      attr_accessor marker: String?
+    end
+
+    class ListStepsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::StepSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::StepSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListStudioSessionMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_type: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_type: String?
+      attr_accessor marker: String?
+    end
+
+    class ListStudioSessionMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_mappings: Array[Types::SessionMappingSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_mappings: Array[Types::SessionMappingSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListStudiosInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+    end
+
+    class ListStudiosOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studios: Array[Types::StudioSummary],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studios: Array[Types::StudioSummary]?
+      attr_accessor marker: String?
+    end
+
+    class ListSupportedInstanceTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?release_label: String,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor release_label: String?
+      attr_accessor marker: String?
+    end
+
+    class ListSupportedInstanceTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supported_instance_types: Array[Types::SupportedInstanceType],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supported_instance_types: Array[Types::SupportedInstanceType]?
+      attr_accessor marker: String?
+    end
+
+    class ManagedScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_limits: Types::ComputeLimits,
+        ?utilization_performance_index: Integer,
+        ?scaling_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_limits: Types::ComputeLimits?
+      attr_accessor utilization_performance_index: Integer?
+      attr_accessor scaling_strategy: String?
+    end
+
+    module MarketType
+      ON_DEMAND: String
+      SPOT: String
+    end
+
+    class MetricDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ModifyClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?step_concurrency_level: Integer,
+        ?extended_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor step_concurrency_level: Integer?
+      attr_accessor extended_support: bool?
+    end
+
+    class ModifyClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_concurrency_level: Integer,
+        ?extended_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_concurrency_level: Integer?
+      attr_accessor extended_support: bool?
+    end
+
+    class ModifyInstanceFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_fleet: Types::InstanceFleetModifyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_fleet: Types::InstanceFleetModifyConfig?
+    end
+
+    class ModifyInstanceGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_groups: Array[Types::InstanceGroupModifyConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_groups: Array[Types::InstanceGroupModifyConfig]?
+    end
+
+    class NotebookExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution_id: String,
+        ?editor_id: String,
+        ?execution_engine: Types::ExecutionEngineConfig,
+        ?notebook_execution_name: String,
+        ?notebook_params: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?arn: String,
+        ?output_notebook_uri: String,
+        ?last_state_change_reason: String,
+        ?notebook_instance_security_group_id: String,
+        ?tags: Array[Types::Tag],
+        ?notebook_s3_location: Types::NotebookS3LocationForOutput,
+        ?output_notebook_s3_location: Types::OutputNotebookS3LocationForOutput,
+        ?output_notebook_format: String,
+        ?environment_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution_id: String?
+      attr_accessor editor_id: String?
+      attr_accessor execution_engine: Types::ExecutionEngineConfig?
+      attr_accessor notebook_execution_name: String?
+      attr_accessor notebook_params: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor arn: String?
+      attr_accessor output_notebook_uri: String?
+      attr_accessor last_state_change_reason: String?
+      attr_accessor notebook_instance_security_group_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationForOutput?
+      attr_accessor output_notebook_s3_location: Types::OutputNotebookS3LocationForOutput?
+      attr_accessor output_notebook_format: String?
+      attr_accessor environment_variables: Hash[String, String]?
+    end
+
+    module NotebookExecutionStatus
+      START_PENDING: String
+      STARTING: String
+      RUNNING: String
+      FINISHING: String
+      FINISHED: String
+      FAILING: String
+      FAILED: String
+      STOP_PENDING: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class NotebookExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution_id: String,
+        ?editor_id: String,
+        ?notebook_execution_name: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?notebook_s3_location: Types::NotebookS3LocationForOutput,
+        ?execution_engine_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution_id: String?
+      attr_accessor editor_id: String?
+      attr_accessor notebook_execution_name: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationForOutput?
+      attr_accessor execution_engine_id: String?
+    end
+
+    class NotebookS3LocationForOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class NotebookS3LocationFromInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class OSRelease
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+    end
+
+    module OnClusterAppUIType
+      SparkHistoryServer: String
+      YarnTimelineService: String
+      TezUI: String
+      ApplicationMaster: String
+      JobHistoryServer: String
+      ResourceManager: String
+    end
+
+    class OnDemandCapacityReservationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_strategy: String,
+        ?capacity_reservation_preference: String,
+        ?capacity_reservation_resource_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_strategy: String?
+      attr_accessor capacity_reservation_preference: String?
+      attr_accessor capacity_reservation_resource_group_arn: String?
+    end
+
+    module OnDemandCapacityReservationPreference
+      OPEN: String
+      NONE: String
+    end
+
+    module OnDemandCapacityReservationUsageStrategy
+      USE_CAPACITY_RESERVATIONS_FIRST: String
+    end
+
+    module OnDemandProvisioningAllocationStrategy
+      LOWEST_PRICE: String
+      PRIORITIZED: String
+    end
+
+    class OnDemandProvisioningSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocation_strategy: String,
+        ?capacity_reservation_options: Types::OnDemandCapacityReservationOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocation_strategy: String?
+      attr_accessor capacity_reservation_options: Types::OnDemandCapacityReservationOptions?
+    end
+
+    class OnDemandResizingSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_duration_minutes: Integer,
+        ?allocation_strategy: String,
+        ?capacity_reservation_options: Types::OnDemandCapacityReservationOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_duration_minutes: Integer?
+      attr_accessor allocation_strategy: String?
+      attr_accessor capacity_reservation_options: Types::OnDemandCapacityReservationOptions?
+    end
+
+    module OutputNotebookFormat
+      HTML: String
+    end
+
+    class OutputNotebookS3LocationForOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class OutputNotebookS3LocationFromInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class PersistentAppUI
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?persistent_app_ui_id: String,
+        ?persistent_app_ui_type_list: Array[String],
+        ?persistent_app_ui_status: String,
+        ?author_id: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?last_state_change_reason: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor persistent_app_ui_id: String?
+      attr_accessor persistent_app_ui_type_list: Array[String]?
+      attr_accessor persistent_app_ui_status: String?
+      attr_accessor author_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_state_change_reason: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module PersistentAppUIType
+      SHS: String
+      TEZ: String
+      YTS: String
+    end
+
+    class PlacementGroupConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_role: String,
+        ?placement_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_role: String?
+      attr_accessor placement_strategy: String?
+    end
+
+    module PlacementGroupStrategy
+      SPREAD: String
+      PARTITION: String
+      CLUSTER: String
+      NONE: String
+    end
+
+    class PlacementType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class PortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_range: Integer,
+        ?max_range: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_range: Integer?
+      attr_accessor max_range: Integer?
+    end
+
+    module ProfilerType
+      SHS: String
+      TEZUI: String
+      YTS: String
+    end
+
+    class PutAutoScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_group_id: String,
+        ?auto_scaling_policy: Types::AutoScalingPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_group_id: String?
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicy?
+    end
+
+    class PutAutoScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_group_id: String,
+        ?auto_scaling_policy: Types::AutoScalingPolicyDescription,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_group_id: String?
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicyDescription?
+      attr_accessor cluster_arn: String?
+    end
+
+    class PutAutoTerminationPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?auto_termination_policy: Types::AutoTerminationPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy?
+    end
+
+    class PutAutoTerminationPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutBlockPublicAccessConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_public_access_configuration: Types::BlockPublicAccessConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_public_access_configuration: Types::BlockPublicAccessConfiguration?
+    end
+
+    class PutBlockPublicAccessConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutManagedScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?managed_scaling_policy: Types::ManagedScalingPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy?
+    end
+
+    class PutManagedScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ReconfigurationType
+      OVERWRITE: String
+      MERGE: String
+    end
+
+    class ReleaseLabelFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?application: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor application: String?
+    end
+
+    class RemoveAutoScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?instance_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor instance_group_id: String?
+    end
+
+    class RemoveAutoScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveAutoTerminationPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class RemoveAutoTerminationPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveManagedScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class RemoveManagedScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RepoUpgradeOnBoot
+      SECURITY: String
+      NONE: String
+    end
+
+    class RunJobFlowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?log_uri: String,
+        ?log_encryption_kms_key_id: String,
+        ?additional_info: String,
+        ?ami_version: String,
+        ?release_label: String,
+        ?instances: Types::JobFlowInstancesConfig,
+        ?steps: Array[Types::StepConfig],
+        ?bootstrap_actions: Array[Types::BootstrapActionConfig],
+        ?supported_products: Array[String],
+        ?new_supported_products: Array[Types::SupportedProductConfig],
+        ?applications: Array[Types::Application],
+        ?configurations: Array[Types::Configuration],
+        ?visible_to_all_users: bool,
+        ?job_flow_role: String,
+        ?service_role: String,
+        ?tags: Array[Types::Tag],
+        ?security_configuration: String,
+        ?auto_scaling_role: String,
+        ?scale_down_behavior: String,
+        ?custom_ami_id: String,
+        ?ebs_root_volume_size: Integer,
+        ?repo_upgrade_on_boot: String,
+        ?kerberos_attributes: Types::KerberosAttributes,
+        ?step_concurrency_level: Integer,
+        ?managed_scaling_policy: Types::ManagedScalingPolicy,
+        ?placement_group_configs: Array[Types::PlacementGroupConfig],
+        ?auto_termination_policy: Types::AutoTerminationPolicy,
+        ?os_release_label: String,
+        ?ebs_root_volume_iops: Integer,
+        ?ebs_root_volume_throughput: Integer,
+        ?extended_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor log_uri: String?
+      attr_accessor log_encryption_kms_key_id: String?
+      attr_accessor additional_info: String?
+      attr_accessor ami_version: String?
+      attr_accessor release_label: String?
+      attr_accessor instances: Types::JobFlowInstancesConfig?
+      attr_accessor steps: Array[Types::StepConfig]?
+      attr_accessor bootstrap_actions: Array[Types::BootstrapActionConfig]?
+      attr_accessor supported_products: Array[String]?
+      attr_accessor new_supported_products: Array[Types::SupportedProductConfig]?
+      attr_accessor applications: Array[Types::Application]?
+      attr_accessor configurations: Array[Types::Configuration]?
+      attr_accessor visible_to_all_users: bool?
+      attr_accessor job_flow_role: String?
+      attr_accessor service_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor security_configuration: String?
+      attr_accessor auto_scaling_role: String?
+      attr_accessor scale_down_behavior: String?
+      attr_accessor custom_ami_id: String?
+      attr_accessor ebs_root_volume_size: Integer?
+      attr_accessor repo_upgrade_on_boot: String?
+      attr_accessor kerberos_attributes: Types::KerberosAttributes?
+      attr_accessor step_concurrency_level: Integer?
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy?
+      attr_accessor placement_group_configs: Array[Types::PlacementGroupConfig]?
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy?
+      attr_accessor os_release_label: String?
+      attr_accessor ebs_root_volume_iops: Integer?
+      attr_accessor ebs_root_volume_throughput: Integer?
+      attr_accessor extended_support: bool?
+    end
+
+    class RunJobFlowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_id: String,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_id: String?
+      attr_accessor cluster_arn: String?
+    end
+
+    module ScaleDownBehavior
+      TERMINATE_AT_INSTANCE_HOUR: String
+      TERMINATE_AT_TASK_COMPLETION: String
+    end
+
+    class ScalingAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?market: String,
+        ?simple_scaling_policy_configuration: Types::SimpleScalingPolicyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor market: String?
+      attr_accessor simple_scaling_policy_configuration: Types::SimpleScalingPolicyConfiguration?
+    end
+
+    class ScalingConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_capacity: Integer,
+        ?max_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_capacity: Integer?
+      attr_accessor max_capacity: Integer?
+    end
+
+    class ScalingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?action: Types::ScalingAction,
+        ?trigger: Types::ScalingTrigger,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor action: Types::ScalingAction?
+      attr_accessor trigger: Types::ScalingTrigger?
+    end
+
+    module ScalingStrategy
+      DEFAULT: String
+      ADVANCED: String
+    end
+
+    class ScalingTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_alarm_definition: Types::CloudWatchAlarmDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_alarm_definition: Types::CloudWatchAlarmDefinition?
+    end
+
+    class ScriptBootstrapActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?args: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor args: Array[String]?
+    end
+
+    class SecurityConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creation_date_time: Time?
+    end
+
+    class SessionMappingDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+        ?session_policy_arn: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+      attr_accessor session_policy_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class SessionMappingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+        ?session_policy_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+      attr_accessor session_policy_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class SetKeepJobFlowAliveWhenNoStepsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_ids: Array[String],
+        ?keep_job_flow_alive_when_no_steps: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_ids: Array[String]?
+      attr_accessor keep_job_flow_alive_when_no_steps: bool?
+    end
+
+    class SetTerminationProtectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_ids: Array[String],
+        ?termination_protected: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_ids: Array[String]?
+      attr_accessor termination_protected: bool?
+    end
+
+    class SetUnhealthyNodeReplacementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_ids: Array[String],
+        ?unhealthy_node_replacement: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_ids: Array[String]?
+      attr_accessor unhealthy_node_replacement: bool?
+    end
+
+    class SetVisibleToAllUsersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_ids: Array[String],
+        ?visible_to_all_users: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_ids: Array[String]?
+      attr_accessor visible_to_all_users: bool?
+    end
+
+    class ShrinkPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decommission_timeout: Integer,
+        ?instance_resize_policy: Types::InstanceResizePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decommission_timeout: Integer?
+      attr_accessor instance_resize_policy: Types::InstanceResizePolicy?
+    end
+
+    class SimpleScalingPolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adjustment_type: String,
+        ?scaling_adjustment: Integer,
+        ?cool_down: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adjustment_type: String?
+      attr_accessor scaling_adjustment: Integer?
+      attr_accessor cool_down: Integer?
+    end
+
+    class SimplifiedApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    module SpotProvisioningAllocationStrategy
+      CAPACITY_OPTIMIZED: String
+      PRICE_CAPACITY_OPTIMIZED: String
+      LOWEST_PRICE: String
+      DIVERSIFIED: String
+      CAPACITY_OPTIMIZED_PRIORITIZED: String
+    end
+
+    class SpotProvisioningSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_duration_minutes: Integer,
+        ?timeout_action: String,
+        ?block_duration_minutes: Integer,
+        ?allocation_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_duration_minutes: Integer?
+      attr_accessor timeout_action: String?
+      attr_accessor block_duration_minutes: Integer?
+      attr_accessor allocation_strategy: String?
+    end
+
+    module SpotProvisioningTimeoutAction
+      SWITCH_TO_ON_DEMAND: String
+      TERMINATE_CLUSTER: String
+    end
+
+    class SpotResizingSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_duration_minutes: Integer,
+        ?allocation_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_duration_minutes: Integer?
+      attr_accessor allocation_strategy: String?
+    end
+
+    class StartNotebookExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?editor_id: String,
+        ?relative_path: String,
+        ?notebook_execution_name: String,
+        ?notebook_params: String,
+        ?execution_engine: Types::ExecutionEngineConfig,
+        ?service_role: String,
+        ?notebook_instance_security_group_id: String,
+        ?tags: Array[Types::Tag],
+        ?notebook_s3_location: Types::NotebookS3LocationFromInput,
+        ?output_notebook_s3_location: Types::OutputNotebookS3LocationFromInput,
+        ?output_notebook_format: String,
+        ?environment_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor editor_id: String?
+      attr_accessor relative_path: String?
+      attr_accessor notebook_execution_name: String?
+      attr_accessor notebook_params: String?
+      attr_accessor execution_engine: Types::ExecutionEngineConfig?
+      attr_accessor service_role: String?
+      attr_accessor notebook_instance_security_group_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationFromInput?
+      attr_accessor output_notebook_s3_location: Types::OutputNotebookS3LocationFromInput?
+      attr_accessor output_notebook_format: String?
+      attr_accessor environment_variables: Hash[String, String]?
+    end
+
+    class StartNotebookExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution_id: String?
+    end
+
+    module Statistic
+      SAMPLE_COUNT: String
+      AVERAGE: String
+      SUM: String
+      MINIMUM: String
+      MAXIMUM: String
+    end
+
+    class Step
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?config: Types::HadoopStepConfig,
+        ?action_on_failure: String,
+        ?status: Types::StepStatus,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor config: Types::HadoopStepConfig?
+      attr_accessor action_on_failure: String?
+      attr_accessor status: Types::StepStatus?
+      attr_accessor execution_role_arn: String?
+    end
+
+    module StepCancellationOption
+      SEND_INTERRUPT: String
+      TERMINATE_PROCESS: String
+    end
+
+    class StepConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action_on_failure: String,
+        ?hadoop_jar_step: Types::HadoopJarStepConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action_on_failure: String?
+      attr_accessor hadoop_jar_step: Types::HadoopJarStepConfig?
+    end
+
+    class StepDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_config: Types::StepConfig,
+        ?execution_status_detail: Types::StepExecutionStatusDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_config: Types::StepConfig?
+      attr_accessor execution_status_detail: Types::StepExecutionStatusDetail?
+    end
+
+    module StepExecutionState
+      PENDING: String
+      RUNNING: String
+      CONTINUE: String
+      COMPLETED: String
+      CANCELLED: String
+      FAILED: String
+      INTERRUPTED: String
+    end
+
+    class StepExecutionStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?creation_date_time: Time,
+        ?start_date_time: Time,
+        ?end_date_time: Time,
+        ?last_state_change_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor start_date_time: Time?
+      attr_accessor end_date_time: Time?
+      attr_accessor last_state_change_reason: String?
+    end
+
+    module StepState
+      PENDING: String
+      CANCEL_PENDING: String
+      RUNNING: String
+      COMPLETED: String
+      CANCELLED: String
+      FAILED: String
+      INTERRUPTED: String
+    end
+
+    class StepStateChangeReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module StepStateChangeReasonCode
+      NONE: String
+    end
+
+    class StepStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_change_reason: Types::StepStateChangeReason,
+        ?failure_details: Types::FailureDetails,
+        ?timeline: Types::StepTimeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_change_reason: Types::StepStateChangeReason?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor timeline: Types::StepTimeline?
+    end
+
+    class StepSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?config: Types::HadoopStepConfig,
+        ?action_on_failure: String,
+        ?status: Types::StepStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor config: Types::HadoopStepConfig?
+      attr_accessor action_on_failure: String?
+      attr_accessor status: Types::StepStatus?
+    end
+
+    class StepTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date_time: Time,
+        ?start_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date_time: Time?
+      attr_accessor start_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    class StopNotebookExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_execution_id: String?
+    end
+
+    class Studio
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?studio_arn: String,
+        ?name: String,
+        ?description: String,
+        ?auth_mode: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?service_role: String,
+        ?user_role: String,
+        ?workspace_security_group_id: String,
+        ?engine_security_group_id: String,
+        ?url: String,
+        ?creation_time: Time,
+        ?default_s3_location: String,
+        ?idp_auth_url: String,
+        ?idp_relay_state_parameter_name: String,
+        ?tags: Array[Types::Tag],
+        ?idc_instance_arn: String,
+        ?trusted_identity_propagation_enabled: bool,
+        ?idc_user_assignment: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor studio_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor auth_mode: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor user_role: String?
+      attr_accessor workspace_security_group_id: String?
+      attr_accessor engine_security_group_id: String?
+      attr_accessor url: String?
+      attr_accessor creation_time: Time?
+      attr_accessor default_s3_location: String?
+      attr_accessor idp_auth_url: String?
+      attr_accessor idp_relay_state_parameter_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor idc_instance_arn: String?
+      attr_accessor trusted_identity_propagation_enabled: bool?
+      attr_accessor idc_user_assignment: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class StudioSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?name: String,
+        ?vpc_id: String,
+        ?description: String,
+        ?url: String,
+        ?auth_mode: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor name: String?
+      attr_accessor vpc_id: String?
+      attr_accessor description: String?
+      attr_accessor url: String?
+      attr_accessor auth_mode: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class SupportedInstanceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?memory_gb: Float,
+        ?storage_gb: Integer,
+        ?vcpu: Integer,
+        ?is64_bits_only: bool,
+        ?instance_family_id: String,
+        ?ebs_optimized_available: bool,
+        ?ebs_optimized_by_default: bool,
+        ?number_of_disks: Integer,
+        ?ebs_storage_only: bool,
+        ?architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor memory_gb: Float?
+      attr_accessor storage_gb: Integer?
+      attr_accessor vcpu: Integer?
+      attr_accessor is64_bits_only: bool?
+      attr_accessor instance_family_id: String?
+      attr_accessor ebs_optimized_available: bool?
+      attr_accessor ebs_optimized_by_default: bool?
+      attr_accessor number_of_disks: Integer?
+      attr_accessor ebs_storage_only: bool?
+      attr_accessor architecture: String?
+    end
+
+    class SupportedProductConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?args: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor args: Array[String]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TerminateJobFlowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_flow_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_flow_ids: Array[String]?
+    end
+
+    module Unit
+      NONE: String
+      SECONDS: String
+      MICRO_SECONDS: String
+      MILLI_SECONDS: String
+      BYTES: String
+      KILO_BYTES: String
+      MEGA_BYTES: String
+      GIGA_BYTES: String
+      TERA_BYTES: String
+      BITS: String
+      KILO_BITS: String
+      MEGA_BITS: String
+      GIGA_BITS: String
+      TERA_BITS: String
+      PERCENT: String
+      COUNT: String
+      BYTES_PER_SECOND: String
+      KILO_BYTES_PER_SECOND: String
+      MEGA_BYTES_PER_SECOND: String
+      GIGA_BYTES_PER_SECOND: String
+      TERA_BYTES_PER_SECOND: String
+      BITS_PER_SECOND: String
+      KILO_BITS_PER_SECOND: String
+      MEGA_BITS_PER_SECOND: String
+      GIGA_BITS_PER_SECOND: String
+      TERA_BITS_PER_SECOND: String
+      COUNT_PER_SECOND: String
+    end
+
+    class UpdateStudioInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?name: String,
+        ?description: String,
+        ?subnet_ids: Array[String],
+        ?default_s3_location: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor default_s3_location: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class UpdateStudioSessionMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?studio_id: String,
+        ?identity_id: String,
+        ?identity_name: String,
+        ?identity_type: String,
+        ?session_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor studio_id: String?
+      attr_accessor identity_id: String?
+      attr_accessor identity_name: String?
+      attr_accessor identity_type: String?
+      attr_accessor session_policy_arn: String?
+    end
+
+    class UsernamePassword
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class VolumeSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_type: String,
+        ?iops: Integer,
+        ?size_in_gb: Integer,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor size_in_gb: Integer?
+      attr_accessor throughput: Integer?
+    end
+  end
+end

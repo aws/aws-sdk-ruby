@@ -1,0 +1,2880 @@
+module Aws::Pinpoint
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Pinpoint::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAppResponse
+      include Smithy::Client::_Response[Types::CreateAppResponse]
+      def application_response: () -> Types::ApplicationResponse?
+    end
+    def create_app: (
+      ?create_application_request: {
+        name: String,
+        tags: Hash[String, String]
+      }
+    ) -> _CreateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppResponse
+
+    interface _CreateCampaignResponse
+      include Smithy::Client::_Response[Types::CreateCampaignResponse]
+      def campaign_response: () -> Types::CampaignResponse?
+    end
+    def create_campaign: (
+      ?application_id: String,
+      ?write_campaign_request: {
+        additional_treatments: Array[
+          {
+            custom_delivery_configuration: {
+              delivery_uri: String,
+              endpoint_types: Array[String]
+            },
+            message_configuration: {
+              adm_message: {
+                action: String,
+                body: untyped,
+                image_icon_url: untyped,
+                image_small_icon_url: untyped,
+                image_url: untyped,
+                json_body: untyped,
+                media_url: untyped,
+                raw_content: untyped,
+                silent_push: bool,
+                time_to_live: Integer,
+                title: untyped,
+                url: untyped
+              },
+              apns_message: untyped,
+              baidu_message: untyped,
+              custom_message: {
+                data: untyped
+              },
+              default_message: untyped,
+              email_message: {
+                body: untyped,
+                from_address: untyped,
+                headers: Array[
+                  {
+                    name: untyped,
+                    value: untyped
+                  }
+                ],
+                html_body: untyped,
+                title: untyped
+              },
+              gcm_message: untyped,
+              sms_message: {
+                body: untyped,
+                message_type: String,
+                origination_number: untyped,
+                sender_id: untyped,
+                entity_id: untyped,
+                template_id: untyped
+              },
+              in_app_message: {
+                body: untyped,
+                content: Array[
+                  {
+                    background_color: untyped,
+                    body_config: {
+                      alignment: String,
+                      body: untyped,
+                      text_color: untyped
+                    },
+                    header_config: {
+                      alignment: untyped,
+                      header: untyped,
+                      text_color: untyped
+                    },
+                    image_url: untyped,
+                    primary_btn: {
+                      android: {
+                        button_action: String,
+                        link: untyped
+                      },
+                      default_config: {
+                        background_color: untyped,
+                        border_radius: untyped,
+                        button_action: untyped,
+                        link: untyped,
+                        text: untyped,
+                        text_color: untyped
+                      },
+                      ios: untyped,
+                      web: untyped
+                    },
+                    secondary_btn: untyped
+                  }
+                ],
+                custom_config: Hash[String, String],
+                layout: String
+              }
+            },
+            schedule: {
+              end_time: untyped,
+              event_filter: {
+                dimensions: {
+                  attributes: Hash[String,
+                    {
+                      attribute_type: String,
+                      values: Array[String]
+                    }
+                  ],
+                  event_type: {
+                    dimension_type: String,
+                    values: untyped
+                  },
+                  metrics: Hash[String,
+                    {
+                      comparison_operator: untyped,
+                      value: Float
+                    }
+                  ]
+                },
+                filter_type: String
+              },
+              frequency: String,
+              is_local_time: untyped,
+              quiet_time: {
+                end: untyped,
+                start: untyped
+              },
+              start_time: untyped,
+              timezone: untyped
+            },
+            size_percent: untyped,
+            template_configuration: {
+              email_template: {
+                name: untyped,
+                version: untyped
+              },
+              push_template: untyped,
+              sms_template: untyped,
+              voice_template: untyped,
+              in_app_template: untyped
+            },
+            treatment_description: untyped,
+            treatment_name: untyped
+          }
+        ],
+        custom_delivery_configuration: untyped,
+        description: untyped,
+        holdout_percent: untyped,
+        hook: {
+          lambda_function_name: untyped,
+          mode: String,
+          web_url: untyped
+        },
+        is_paused: untyped,
+        limits: {
+          daily: untyped,
+          maximum_duration: untyped,
+          messages_per_second: untyped,
+          total: untyped,
+          session: untyped
+        },
+        message_configuration: untyped,
+        name: untyped,
+        schedule: untyped,
+        segment_id: untyped,
+        segment_version: untyped,
+        tags: untyped,
+        template_configuration: untyped,
+        treatment_description: untyped,
+        treatment_name: untyped,
+        priority: untyped
+      }
+    ) -> _CreateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCampaignResponse
+
+    interface _CreateEmailTemplateResponse
+      include Smithy::Client::_Response[Types::CreateEmailTemplateResponse]
+      def create_template_message_body: () -> Types::CreateTemplateMessageBody?
+    end
+    def create_email_template: (
+      ?email_template_request: {
+        default_substitutions: String,
+        html_part: untyped,
+        recommender_id: untyped,
+        subject: untyped,
+        headers: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        tags: Hash[String, String],
+        template_description: untyped,
+        text_part: untyped
+      },
+      ?template_name: String
+    ) -> _CreateEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEmailTemplateResponse
+
+    interface _CreateExportJobResponse
+      include Smithy::Client::_Response[Types::CreateExportJobResponse]
+      def export_job_response: () -> Types::ExportJobResponse?
+    end
+    def create_export_job: (
+      ?application_id: String,
+      ?export_job_request: {
+        role_arn: String,
+        s3_url_prefix: untyped,
+        segment_id: untyped,
+        segment_version: Integer
+      }
+    ) -> _CreateExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExportJobResponse
+
+    interface _CreateImportJobResponse
+      include Smithy::Client::_Response[Types::CreateImportJobResponse]
+      def import_job_response: () -> Types::ImportJobResponse?
+    end
+    def create_import_job: (
+      ?application_id: String,
+      ?import_job_request: {
+        define_segment: bool,
+        external_id: String,
+        format: String,
+        register_endpoints: untyped,
+        role_arn: untyped,
+        s3_url: untyped,
+        segment_id: untyped,
+        segment_name: untyped
+      }
+    ) -> _CreateImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImportJobResponse
+
+    interface _CreateInAppTemplateResponse
+      include Smithy::Client::_Response[Types::CreateInAppTemplateResponse]
+      def template_create_message_body: () -> Types::TemplateCreateMessageBody?
+    end
+    def create_in_app_template: (
+      ?in_app_template_request: {
+        content: Array[
+          {
+            background_color: String,
+            body_config: {
+              alignment: String,
+              body: untyped,
+              text_color: untyped
+            },
+            header_config: {
+              alignment: untyped,
+              header: untyped,
+              text_color: untyped
+            },
+            image_url: untyped,
+            primary_btn: {
+              android: {
+                button_action: String,
+                link: untyped
+              },
+              default_config: {
+                background_color: untyped,
+                border_radius: Integer,
+                button_action: untyped,
+                link: untyped,
+                text: untyped,
+                text_color: untyped
+              },
+              ios: untyped,
+              web: untyped
+            },
+            secondary_btn: untyped
+          }
+        ],
+        custom_config: Hash[String, String],
+        layout: String,
+        tags: untyped,
+        template_description: untyped
+      },
+      ?template_name: String
+    ) -> _CreateInAppTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInAppTemplateResponse
+
+    interface _CreateJourneyResponse
+      include Smithy::Client::_Response[Types::CreateJourneyResponse]
+      def journey_response: () -> Types::JourneyResponse?
+    end
+    def create_journey: (
+      ?application_id: String,
+      ?write_journey_request: {
+        activities: Hash[String,
+          {
+            custom: {
+              delivery_uri: String,
+              endpoint_types: Array[String],
+              message_config: {
+                data: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            conditional_split: {
+              condition: {
+                conditions: Array[
+                  {
+                    event_condition: {
+                      dimensions: {
+                        attributes: Hash[String,
+                          {
+                            attribute_type: String,
+                            values: Array[String]
+                          }
+                        ],
+                        event_type: {
+                          dimension_type: String,
+                          values: untyped
+                        },
+                        metrics: Hash[String,
+                          {
+                            comparison_operator: untyped,
+                            value: Float
+                          }
+                        ]
+                      },
+                      message_activity: untyped
+                    },
+                    segment_condition: {
+                      segment_id: untyped
+                    },
+                    segment_dimensions: {
+                      attributes: untyped,
+                      behavior: {
+                        recency: {
+                          duration: String,
+                          recency_type: String
+                        }
+                      },
+                      demographic: {
+                        app_version: untyped,
+                        channel: untyped,
+                        device_type: untyped,
+                        make: untyped,
+                        model: untyped,
+                        platform: untyped
+                      },
+                      location: {
+                        country: untyped,
+                        gps_point: {
+                          coordinates: {
+                            latitude: untyped,
+                            longitude: untyped
+                          },
+                          range_in_kilometers: untyped
+                        }
+                      },
+                      metrics: untyped,
+                      user_attributes: untyped
+                    }
+                  }
+                ],
+                operator: String
+              },
+              evaluation_wait_time: {
+                wait_for: untyped,
+                wait_until: untyped
+              },
+              false_activity: untyped,
+              true_activity: untyped
+            },
+            description: untyped,
+            email: {
+              message_config: {
+                from_address: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            holdout: {
+              next_activity: untyped,
+              percentage: Integer
+            },
+            multi_condition: {
+              branches: Array[
+                {
+                  condition: {
+                    event_condition: untyped,
+                    segment_condition: untyped,
+                    segment_dimensions: untyped
+                  },
+                  next_activity: untyped
+                }
+              ],
+              default_activity: untyped,
+              evaluation_wait_time: untyped
+            },
+            push: {
+              message_config: {
+                time_to_live: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            random_split: {
+              branches: Array[
+                {
+                  next_activity: untyped,
+                  percentage: untyped
+                }
+              ]
+            },
+            sms: {
+              message_config: {
+                message_type: String,
+                origination_number: untyped,
+                sender_id: untyped,
+                entity_id: untyped,
+                template_id: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            wait: {
+              next_activity: untyped,
+              wait_time: untyped
+            },
+            contact_center: {
+              next_activity: untyped
+            }
+          }
+        ],
+        creation_date: untyped,
+        last_modified_date: untyped,
+        limits: {
+          daily_cap: untyped,
+          endpoint_reentry_cap: untyped,
+          messages_per_second: untyped,
+          endpoint_reentry_interval: untyped,
+          timeframe_cap: {
+            cap: untyped,
+            days: untyped
+          },
+          total_cap: untyped
+        },
+        local_time: bool,
+        name: untyped,
+        quiet_time: {
+          end: untyped,
+          start: untyped
+        },
+        refresh_frequency: untyped,
+        schedule: {
+          end_time: Time,
+          start_time: untyped,
+          timezone: untyped
+        },
+        start_activity: untyped,
+        start_condition: {
+          description: untyped,
+          event_start_condition: {
+            event_filter: {
+              dimensions: untyped,
+              filter_type: String
+            },
+            segment_id: untyped
+          },
+          segment_start_condition: untyped
+        },
+        state: String,
+        wait_for_quiet_time: untyped,
+        refresh_on_segment_update: untyped,
+        journey_channel_settings: {
+          connect_campaign_arn: untyped,
+          connect_campaign_execution_role_arn: untyped
+        },
+        sending_schedule: untyped,
+        open_hours: {
+          email: Hash[String,
+            Array[
+              {
+                start_time: untyped,
+                end_time: untyped
+              }
+            ]
+          ],
+          sms: untyped,
+          push: untyped,
+          voice: untyped,
+          custom: untyped
+        },
+        closed_days: {
+          email: Array[
+            {
+              name: untyped,
+              start_date_time: untyped,
+              end_date_time: untyped
+            }
+          ],
+          sms: untyped,
+          push: untyped,
+          voice: untyped,
+          custom: untyped
+        },
+        timezone_estimation_methods: Array[String]
+      }
+    ) -> _CreateJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJourneyResponse
+
+    interface _CreatePushTemplateResponse
+      include Smithy::Client::_Response[Types::CreatePushTemplateResponse]
+      def create_template_message_body: () -> Types::CreateTemplateMessageBody?
+    end
+    def create_push_template: (
+      ?push_notification_template_request: {
+        adm: {
+          action: String,
+          body: String,
+          image_icon_url: untyped,
+          image_url: untyped,
+          raw_content: untyped,
+          small_image_icon_url: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        apns: {
+          action: untyped,
+          body: untyped,
+          media_url: untyped,
+          raw_content: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        baidu: untyped,
+        default: {
+          action: untyped,
+          body: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        default_substitutions: untyped,
+        gcm: untyped,
+        recommender_id: untyped,
+        tags: Hash[String, String],
+        template_description: untyped
+      },
+      ?template_name: String
+    ) -> _CreatePushTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePushTemplateResponse
+
+    interface _CreateRecommenderConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateRecommenderConfigurationResponse]
+      def recommender_configuration_response: () -> Types::RecommenderConfigurationResponse?
+    end
+    def create_recommender_configuration: (
+      ?create_recommender_configuration: {
+        attributes: Hash[String, String],
+        description: String,
+        name: untyped,
+        recommendation_provider_id_type: untyped,
+        recommendation_provider_role_arn: untyped,
+        recommendation_provider_uri: untyped,
+        recommendation_transformer_uri: untyped,
+        recommendations_display_name: untyped,
+        recommendations_per_message: Integer
+      }
+    ) -> _CreateRecommenderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecommenderConfigurationResponse
+
+    interface _CreateSegmentResponse
+      include Smithy::Client::_Response[Types::CreateSegmentResponse]
+      def segment_response: () -> Types::SegmentResponse?
+    end
+    def create_segment: (
+      ?application_id: String,
+      ?write_segment_request: {
+        dimensions: {
+          attributes: Hash[String,
+            {
+              attribute_type: String,
+              values: Array[String]
+            }
+          ],
+          behavior: {
+            recency: {
+              duration: String,
+              recency_type: String
+            }
+          },
+          demographic: {
+            app_version: {
+              dimension_type: String,
+              values: untyped
+            },
+            channel: untyped,
+            device_type: untyped,
+            make: untyped,
+            model: untyped,
+            platform: untyped
+          },
+          location: {
+            country: untyped,
+            gps_point: {
+              coordinates: {
+                latitude: Float,
+                longitude: untyped
+              },
+              range_in_kilometers: untyped
+            }
+          },
+          metrics: Hash[String,
+            {
+              comparison_operator: String,
+              value: untyped
+            }
+          ],
+          user_attributes: untyped
+        },
+        name: untyped,
+        segment_groups: {
+          groups: Array[
+            {
+              dimensions: Array[
+                {
+                  attributes: untyped,
+                  behavior: untyped,
+                  demographic: untyped,
+                  location: untyped,
+                  metrics: untyped,
+                  user_attributes: untyped
+                }
+              ],
+              source_segments: Array[
+                {
+                  id: untyped,
+                  version: Integer
+                }
+              ],
+              source_type: String,
+              type: String
+            }
+          ],
+          include: String
+        },
+        tags: Hash[String, String]
+      }
+    ) -> _CreateSegmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSegmentResponse
+
+    interface _CreateSmsTemplateResponse
+      include Smithy::Client::_Response[Types::CreateSmsTemplateResponse]
+      def create_template_message_body: () -> Types::CreateTemplateMessageBody?
+    end
+    def create_sms_template: (
+      ?sms_template_request: {
+        body: String,
+        default_substitutions: untyped,
+        recommender_id: untyped,
+        tags: Hash[String, String],
+        template_description: untyped
+      },
+      ?template_name: String
+    ) -> _CreateSmsTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSmsTemplateResponse
+
+    interface _CreateVoiceTemplateResponse
+      include Smithy::Client::_Response[Types::CreateVoiceTemplateResponse]
+      def create_template_message_body: () -> Types::CreateTemplateMessageBody?
+    end
+    def create_voice_template: (
+      ?template_name: String,
+      ?voice_template_request: {
+        body: String,
+        default_substitutions: untyped,
+        language_code: untyped,
+        tags: Hash[String, String],
+        template_description: untyped,
+        voice_id: untyped
+      }
+    ) -> _CreateVoiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceTemplateResponse
+
+    interface _DeleteAdmChannelResponse
+      include Smithy::Client::_Response[Types::DeleteAdmChannelResponse]
+      def adm_channel_response: () -> Types::ADMChannelResponse?
+    end
+    def delete_adm_channel: (
+      ?application_id: String
+    ) -> _DeleteAdmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAdmChannelResponse
+
+    interface _DeleteApnsChannelResponse
+      include Smithy::Client::_Response[Types::DeleteApnsChannelResponse]
+      def apns_channel_response: () -> Types::APNSChannelResponse?
+    end
+    def delete_apns_channel: (
+      ?application_id: String
+    ) -> _DeleteApnsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApnsChannelResponse
+
+    interface _DeleteApnsSandboxChannelResponse
+      include Smithy::Client::_Response[Types::DeleteApnsSandboxChannelResponse]
+      def apns_sandbox_channel_response: () -> Types::APNSSandboxChannelResponse?
+    end
+    def delete_apns_sandbox_channel: (
+      ?application_id: String
+    ) -> _DeleteApnsSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApnsSandboxChannelResponse
+
+    interface _DeleteApnsVoipChannelResponse
+      include Smithy::Client::_Response[Types::DeleteApnsVoipChannelResponse]
+      def apns_voip_channel_response: () -> Types::APNSVoipChannelResponse?
+    end
+    def delete_apns_voip_channel: (
+      ?application_id: String
+    ) -> _DeleteApnsVoipChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApnsVoipChannelResponse
+
+    interface _DeleteApnsVoipSandboxChannelResponse
+      include Smithy::Client::_Response[Types::DeleteApnsVoipSandboxChannelResponse]
+      def apns_voip_sandbox_channel_response: () -> Types::APNSVoipSandboxChannelResponse?
+    end
+    def delete_apns_voip_sandbox_channel: (
+      ?application_id: String
+    ) -> _DeleteApnsVoipSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApnsVoipSandboxChannelResponse
+
+    interface _DeleteAppResponse
+      include Smithy::Client::_Response[Types::DeleteAppResponse]
+      def application_response: () -> Types::ApplicationResponse?
+    end
+    def delete_app: (
+      ?application_id: String
+    ) -> _DeleteAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppResponse
+
+    interface _DeleteBaiduChannelResponse
+      include Smithy::Client::_Response[Types::DeleteBaiduChannelResponse]
+      def baidu_channel_response: () -> Types::BaiduChannelResponse?
+    end
+    def delete_baidu_channel: (
+      ?application_id: String
+    ) -> _DeleteBaiduChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBaiduChannelResponse
+
+    interface _DeleteCampaignResponse
+      include Smithy::Client::_Response[Types::DeleteCampaignResponse]
+      def campaign_response: () -> Types::CampaignResponse?
+    end
+    def delete_campaign: (
+      ?application_id: String,
+      ?campaign_id: String
+    ) -> _DeleteCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignResponse
+
+    interface _DeleteEmailChannelResponse
+      include Smithy::Client::_Response[Types::DeleteEmailChannelResponse]
+      def email_channel_response: () -> Types::EmailChannelResponse?
+    end
+    def delete_email_channel: (
+      ?application_id: String
+    ) -> _DeleteEmailChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEmailChannelResponse
+
+    interface _DeleteEmailTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteEmailTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def delete_email_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _DeleteEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEmailTemplateResponse
+
+    interface _DeleteEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteEndpointResponse]
+      def endpoint_response: () -> Types::EndpointResponse?
+    end
+    def delete_endpoint: (
+      ?application_id: String,
+      ?endpoint_id: String
+    ) -> _DeleteEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointResponse
+
+    interface _DeleteEventStreamResponse
+      include Smithy::Client::_Response[Types::DeleteEventStreamResponse]
+      def event_stream: () -> Types::EventStream?
+    end
+    def delete_event_stream: (
+      ?application_id: String
+    ) -> _DeleteEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventStreamResponse
+
+    interface _DeleteGcmChannelResponse
+      include Smithy::Client::_Response[Types::DeleteGcmChannelResponse]
+      def gcm_channel_response: () -> Types::GCMChannelResponse?
+    end
+    def delete_gcm_channel: (
+      ?application_id: String
+    ) -> _DeleteGcmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGcmChannelResponse
+
+    interface _DeleteInAppTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteInAppTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def delete_in_app_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _DeleteInAppTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInAppTemplateResponse
+
+    interface _DeleteJourneyResponse
+      include Smithy::Client::_Response[Types::DeleteJourneyResponse]
+      def journey_response: () -> Types::JourneyResponse?
+    end
+    def delete_journey: (
+      ?application_id: String,
+      ?journey_id: String
+    ) -> _DeleteJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJourneyResponse
+
+    interface _DeletePushTemplateResponse
+      include Smithy::Client::_Response[Types::DeletePushTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def delete_push_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _DeletePushTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePushTemplateResponse
+
+    interface _DeleteRecommenderConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteRecommenderConfigurationResponse]
+      def recommender_configuration_response: () -> Types::RecommenderConfigurationResponse?
+    end
+    def delete_recommender_configuration: (
+      ?recommender_id: String
+    ) -> _DeleteRecommenderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecommenderConfigurationResponse
+
+    interface _DeleteSegmentResponse
+      include Smithy::Client::_Response[Types::DeleteSegmentResponse]
+      def segment_response: () -> Types::SegmentResponse?
+    end
+    def delete_segment: (
+      ?application_id: String,
+      ?segment_id: String
+    ) -> _DeleteSegmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSegmentResponse
+
+    interface _DeleteSmsChannelResponse
+      include Smithy::Client::_Response[Types::DeleteSmsChannelResponse]
+      def sms_channel_response: () -> Types::SMSChannelResponse?
+    end
+    def delete_sms_channel: (
+      ?application_id: String
+    ) -> _DeleteSmsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSmsChannelResponse
+
+    interface _DeleteSmsTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteSmsTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def delete_sms_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _DeleteSmsTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSmsTemplateResponse
+
+    interface _DeleteUserEndpointsResponse
+      include Smithy::Client::_Response[Types::DeleteUserEndpointsResponse]
+      def endpoints_response: () -> Types::EndpointsResponse?
+    end
+    def delete_user_endpoints: (
+      ?application_id: String,
+      ?user_id: String
+    ) -> _DeleteUserEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserEndpointsResponse
+
+    interface _DeleteVoiceChannelResponse
+      include Smithy::Client::_Response[Types::DeleteVoiceChannelResponse]
+      def voice_channel_response: () -> Types::VoiceChannelResponse?
+    end
+    def delete_voice_channel: (
+      ?application_id: String
+    ) -> _DeleteVoiceChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceChannelResponse
+
+    interface _DeleteVoiceTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteVoiceTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def delete_voice_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _DeleteVoiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceTemplateResponse
+
+    interface _GetAdmChannelResponse
+      include Smithy::Client::_Response[Types::GetAdmChannelResponse]
+      def adm_channel_response: () -> Types::ADMChannelResponse?
+    end
+    def get_adm_channel: (
+      ?application_id: String
+    ) -> _GetAdmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdmChannelResponse
+
+    interface _GetApnsChannelResponse
+      include Smithy::Client::_Response[Types::GetApnsChannelResponse]
+      def apns_channel_response: () -> Types::APNSChannelResponse?
+    end
+    def get_apns_channel: (
+      ?application_id: String
+    ) -> _GetApnsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApnsChannelResponse
+
+    interface _GetApnsSandboxChannelResponse
+      include Smithy::Client::_Response[Types::GetApnsSandboxChannelResponse]
+      def apns_sandbox_channel_response: () -> Types::APNSSandboxChannelResponse?
+    end
+    def get_apns_sandbox_channel: (
+      ?application_id: String
+    ) -> _GetApnsSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApnsSandboxChannelResponse
+
+    interface _GetApnsVoipChannelResponse
+      include Smithy::Client::_Response[Types::GetApnsVoipChannelResponse]
+      def apns_voip_channel_response: () -> Types::APNSVoipChannelResponse?
+    end
+    def get_apns_voip_channel: (
+      ?application_id: String
+    ) -> _GetApnsVoipChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApnsVoipChannelResponse
+
+    interface _GetApnsVoipSandboxChannelResponse
+      include Smithy::Client::_Response[Types::GetApnsVoipSandboxChannelResponse]
+      def apns_voip_sandbox_channel_response: () -> Types::APNSVoipSandboxChannelResponse?
+    end
+    def get_apns_voip_sandbox_channel: (
+      ?application_id: String
+    ) -> _GetApnsVoipSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApnsVoipSandboxChannelResponse
+
+    interface _GetAppResponse
+      include Smithy::Client::_Response[Types::GetAppResponse]
+      def application_response: () -> Types::ApplicationResponse?
+    end
+    def get_app: (
+      ?application_id: String
+    ) -> _GetAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppResponse
+
+    interface _GetApplicationDateRangeKpiResponse
+      include Smithy::Client::_Response[Types::GetApplicationDateRangeKpiResponse]
+      def application_date_range_kpi_response: () -> Types::ApplicationDateRangeKpiResponse?
+    end
+    def get_application_date_range_kpi: (
+      ?application_id: String,
+      ?end_time: Time,
+      ?kpi_name: String,
+      ?next_token: String,
+      ?page_size: String,
+      ?start_time: Time
+    ) -> _GetApplicationDateRangeKpiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationDateRangeKpiResponse
+
+    interface _GetApplicationSettingsResponse
+      include Smithy::Client::_Response[Types::GetApplicationSettingsResponse]
+      def application_settings_resource: () -> Types::ApplicationSettingsResource?
+    end
+    def get_application_settings: (
+      ?application_id: String
+    ) -> _GetApplicationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationSettingsResponse
+
+    interface _GetAppsResponse
+      include Smithy::Client::_Response[Types::GetAppsResponse]
+      def applications_response: () -> Types::ApplicationsResponse?
+    end
+    def get_apps: (
+      ?page_size: String,
+      ?token: String
+    ) -> _GetAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppsResponse
+
+    interface _GetBaiduChannelResponse
+      include Smithy::Client::_Response[Types::GetBaiduChannelResponse]
+      def baidu_channel_response: () -> Types::BaiduChannelResponse?
+    end
+    def get_baidu_channel: (
+      ?application_id: String
+    ) -> _GetBaiduChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBaiduChannelResponse
+
+    interface _GetCampaignResponse
+      include Smithy::Client::_Response[Types::GetCampaignResponse]
+      def campaign_response: () -> Types::CampaignResponse?
+    end
+    def get_campaign: (
+      ?application_id: String,
+      ?campaign_id: String
+    ) -> _GetCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignResponse
+
+    interface _GetCampaignActivitiesResponse
+      include Smithy::Client::_Response[Types::GetCampaignActivitiesResponse]
+      def activities_response: () -> Types::ActivitiesResponse?
+    end
+    def get_campaign_activities: (
+      ?application_id: String,
+      ?campaign_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetCampaignActivitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignActivitiesResponse
+
+    interface _GetCampaignDateRangeKpiResponse
+      include Smithy::Client::_Response[Types::GetCampaignDateRangeKpiResponse]
+      def campaign_date_range_kpi_response: () -> Types::CampaignDateRangeKpiResponse?
+    end
+    def get_campaign_date_range_kpi: (
+      ?application_id: String,
+      ?campaign_id: String,
+      ?end_time: Time,
+      ?kpi_name: String,
+      ?next_token: String,
+      ?page_size: String,
+      ?start_time: Time
+    ) -> _GetCampaignDateRangeKpiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignDateRangeKpiResponse
+
+    interface _GetCampaignVersionResponse
+      include Smithy::Client::_Response[Types::GetCampaignVersionResponse]
+      def campaign_response: () -> Types::CampaignResponse?
+    end
+    def get_campaign_version: (
+      ?application_id: String,
+      ?campaign_id: String,
+      ?version: String
+    ) -> _GetCampaignVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignVersionResponse
+
+    interface _GetCampaignVersionsResponse
+      include Smithy::Client::_Response[Types::GetCampaignVersionsResponse]
+      def campaigns_response: () -> Types::CampaignsResponse?
+    end
+    def get_campaign_versions: (
+      ?application_id: String,
+      ?campaign_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetCampaignVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignVersionsResponse
+
+    interface _GetCampaignsResponse
+      include Smithy::Client::_Response[Types::GetCampaignsResponse]
+      def campaigns_response: () -> Types::CampaignsResponse?
+    end
+    def get_campaigns: (
+      ?application_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetCampaignsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignsResponse
+
+    interface _GetChannelsResponse
+      include Smithy::Client::_Response[Types::GetChannelsResponse]
+      def channels_response: () -> Types::ChannelsResponse?
+    end
+    def get_channels: (
+      ?application_id: String
+    ) -> _GetChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelsResponse
+
+    interface _GetEmailChannelResponse
+      include Smithy::Client::_Response[Types::GetEmailChannelResponse]
+      def email_channel_response: () -> Types::EmailChannelResponse?
+    end
+    def get_email_channel: (
+      ?application_id: String
+    ) -> _GetEmailChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEmailChannelResponse
+
+    interface _GetEmailTemplateResponse
+      include Smithy::Client::_Response[Types::GetEmailTemplateResponse]
+      def email_template_response: () -> Types::EmailTemplateResponse?
+    end
+    def get_email_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _GetEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEmailTemplateResponse
+
+    interface _GetEndpointResponse
+      include Smithy::Client::_Response[Types::GetEndpointResponse]
+      def endpoint_response: () -> Types::EndpointResponse?
+    end
+    def get_endpoint: (
+      ?application_id: String,
+      ?endpoint_id: String
+    ) -> _GetEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEndpointResponse
+
+    interface _GetEventStreamResponse
+      include Smithy::Client::_Response[Types::GetEventStreamResponse]
+      def event_stream: () -> Types::EventStream?
+    end
+    def get_event_stream: (
+      ?application_id: String
+    ) -> _GetEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventStreamResponse
+
+    interface _GetExportJobResponse
+      include Smithy::Client::_Response[Types::GetExportJobResponse]
+      def export_job_response: () -> Types::ExportJobResponse?
+    end
+    def get_export_job: (
+      ?application_id: String,
+      ?job_id: String
+    ) -> _GetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportJobResponse
+
+    interface _GetExportJobsResponse
+      include Smithy::Client::_Response[Types::GetExportJobsResponse]
+      def export_jobs_response: () -> Types::ExportJobsResponse?
+    end
+    def get_export_jobs: (
+      ?application_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportJobsResponse
+
+    interface _GetGcmChannelResponse
+      include Smithy::Client::_Response[Types::GetGcmChannelResponse]
+      def gcm_channel_response: () -> Types::GCMChannelResponse?
+    end
+    def get_gcm_channel: (
+      ?application_id: String
+    ) -> _GetGcmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGcmChannelResponse
+
+    interface _GetImportJobResponse
+      include Smithy::Client::_Response[Types::GetImportJobResponse]
+      def import_job_response: () -> Types::ImportJobResponse?
+    end
+    def get_import_job: (
+      ?application_id: String,
+      ?job_id: String
+    ) -> _GetImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportJobResponse
+
+    interface _GetImportJobsResponse
+      include Smithy::Client::_Response[Types::GetImportJobsResponse]
+      def import_jobs_response: () -> Types::ImportJobsResponse?
+    end
+    def get_import_jobs: (
+      ?application_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportJobsResponse
+
+    interface _GetInAppMessagesResponse
+      include Smithy::Client::_Response[Types::GetInAppMessagesResponse]
+      def in_app_messages_response: () -> Types::InAppMessagesResponse?
+    end
+    def get_in_app_messages: (
+      ?application_id: String,
+      ?endpoint_id: String
+    ) -> _GetInAppMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInAppMessagesResponse
+
+    interface _GetInAppTemplateResponse
+      include Smithy::Client::_Response[Types::GetInAppTemplateResponse]
+      def in_app_template_response: () -> Types::InAppTemplateResponse?
+    end
+    def get_in_app_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _GetInAppTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInAppTemplateResponse
+
+    interface _GetJourneyResponse
+      include Smithy::Client::_Response[Types::GetJourneyResponse]
+      def journey_response: () -> Types::JourneyResponse?
+    end
+    def get_journey: (
+      ?application_id: String,
+      ?journey_id: String
+    ) -> _GetJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyResponse
+
+    interface _GetJourneyDateRangeKpiResponse
+      include Smithy::Client::_Response[Types::GetJourneyDateRangeKpiResponse]
+      def journey_date_range_kpi_response: () -> Types::JourneyDateRangeKpiResponse?
+    end
+    def get_journey_date_range_kpi: (
+      ?application_id: String,
+      ?end_time: Time,
+      ?journey_id: String,
+      ?kpi_name: String,
+      ?next_token: String,
+      ?page_size: String,
+      ?start_time: Time
+    ) -> _GetJourneyDateRangeKpiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyDateRangeKpiResponse
+
+    interface _GetJourneyExecutionActivityMetricsResponse
+      include Smithy::Client::_Response[Types::GetJourneyExecutionActivityMetricsResponse]
+      def journey_execution_activity_metrics_response: () -> Types::JourneyExecutionActivityMetricsResponse?
+    end
+    def get_journey_execution_activity_metrics: (
+      ?application_id: String,
+      ?journey_activity_id: String,
+      ?journey_id: String,
+      ?next_token: String,
+      ?page_size: String
+    ) -> _GetJourneyExecutionActivityMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyExecutionActivityMetricsResponse
+
+    interface _GetJourneyExecutionMetricsResponse
+      include Smithy::Client::_Response[Types::GetJourneyExecutionMetricsResponse]
+      def journey_execution_metrics_response: () -> Types::JourneyExecutionMetricsResponse?
+    end
+    def get_journey_execution_metrics: (
+      ?application_id: String,
+      ?journey_id: String,
+      ?next_token: String,
+      ?page_size: String
+    ) -> _GetJourneyExecutionMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyExecutionMetricsResponse
+
+    interface _GetJourneyRunExecutionActivityMetricsResponse
+      include Smithy::Client::_Response[Types::GetJourneyRunExecutionActivityMetricsResponse]
+      def journey_run_execution_activity_metrics_response: () -> Types::JourneyRunExecutionActivityMetricsResponse?
+    end
+    def get_journey_run_execution_activity_metrics: (
+      ?application_id: String,
+      ?journey_activity_id: String,
+      ?journey_id: String,
+      ?next_token: String,
+      ?page_size: String,
+      ?run_id: String
+    ) -> _GetJourneyRunExecutionActivityMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyRunExecutionActivityMetricsResponse
+
+    interface _GetJourneyRunExecutionMetricsResponse
+      include Smithy::Client::_Response[Types::GetJourneyRunExecutionMetricsResponse]
+      def journey_run_execution_metrics_response: () -> Types::JourneyRunExecutionMetricsResponse?
+    end
+    def get_journey_run_execution_metrics: (
+      ?application_id: String,
+      ?journey_id: String,
+      ?next_token: String,
+      ?page_size: String,
+      ?run_id: String
+    ) -> _GetJourneyRunExecutionMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyRunExecutionMetricsResponse
+
+    interface _GetJourneyRunsResponse
+      include Smithy::Client::_Response[Types::GetJourneyRunsResponse]
+      def journey_runs_response: () -> Types::JourneyRunsResponse?
+    end
+    def get_journey_runs: (
+      ?application_id: String,
+      ?journey_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetJourneyRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJourneyRunsResponse
+
+    interface _GetPushTemplateResponse
+      include Smithy::Client::_Response[Types::GetPushTemplateResponse]
+      def push_notification_template_response: () -> Types::PushNotificationTemplateResponse?
+    end
+    def get_push_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _GetPushTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPushTemplateResponse
+
+    interface _GetRecommenderConfigurationResponse
+      include Smithy::Client::_Response[Types::GetRecommenderConfigurationResponse]
+      def recommender_configuration_response: () -> Types::RecommenderConfigurationResponse?
+    end
+    def get_recommender_configuration: (
+      ?recommender_id: String
+    ) -> _GetRecommenderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommenderConfigurationResponse
+
+    interface _GetRecommenderConfigurationsResponse
+      include Smithy::Client::_Response[Types::GetRecommenderConfigurationsResponse]
+      def list_recommender_configurations_response: () -> Types::ListRecommenderConfigurationsResponse?
+    end
+    def get_recommender_configurations: (
+      ?page_size: String,
+      ?token: String
+    ) -> _GetRecommenderConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommenderConfigurationsResponse
+
+    interface _GetSegmentResponse
+      include Smithy::Client::_Response[Types::GetSegmentResponse]
+      def segment_response: () -> Types::SegmentResponse?
+    end
+    def get_segment: (
+      ?application_id: String,
+      ?segment_id: String
+    ) -> _GetSegmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentResponse
+
+    interface _GetSegmentExportJobsResponse
+      include Smithy::Client::_Response[Types::GetSegmentExportJobsResponse]
+      def export_jobs_response: () -> Types::ExportJobsResponse?
+    end
+    def get_segment_export_jobs: (
+      ?application_id: String,
+      ?page_size: String,
+      ?segment_id: String,
+      ?token: String
+    ) -> _GetSegmentExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentExportJobsResponse
+
+    interface _GetSegmentImportJobsResponse
+      include Smithy::Client::_Response[Types::GetSegmentImportJobsResponse]
+      def import_jobs_response: () -> Types::ImportJobsResponse?
+    end
+    def get_segment_import_jobs: (
+      ?application_id: String,
+      ?page_size: String,
+      ?segment_id: String,
+      ?token: String
+    ) -> _GetSegmentImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentImportJobsResponse
+
+    interface _GetSegmentVersionResponse
+      include Smithy::Client::_Response[Types::GetSegmentVersionResponse]
+      def segment_response: () -> Types::SegmentResponse?
+    end
+    def get_segment_version: (
+      ?application_id: String,
+      ?segment_id: String,
+      ?version: String
+    ) -> _GetSegmentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentVersionResponse
+
+    interface _GetSegmentVersionsResponse
+      include Smithy::Client::_Response[Types::GetSegmentVersionsResponse]
+      def segments_response: () -> Types::SegmentsResponse?
+    end
+    def get_segment_versions: (
+      ?application_id: String,
+      ?page_size: String,
+      ?segment_id: String,
+      ?token: String
+    ) -> _GetSegmentVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentVersionsResponse
+
+    interface _GetSegmentsResponse
+      include Smithy::Client::_Response[Types::GetSegmentsResponse]
+      def segments_response: () -> Types::SegmentsResponse?
+    end
+    def get_segments: (
+      ?application_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _GetSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentsResponse
+
+    interface _GetSmsChannelResponse
+      include Smithy::Client::_Response[Types::GetSmsChannelResponse]
+      def sms_channel_response: () -> Types::SMSChannelResponse?
+    end
+    def get_sms_channel: (
+      ?application_id: String
+    ) -> _GetSmsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSmsChannelResponse
+
+    interface _GetSmsTemplateResponse
+      include Smithy::Client::_Response[Types::GetSmsTemplateResponse]
+      def sms_template_response: () -> Types::SMSTemplateResponse?
+    end
+    def get_sms_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _GetSmsTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSmsTemplateResponse
+
+    interface _GetUserEndpointsResponse
+      include Smithy::Client::_Response[Types::GetUserEndpointsResponse]
+      def endpoints_response: () -> Types::EndpointsResponse?
+    end
+    def get_user_endpoints: (
+      ?application_id: String,
+      ?user_id: String
+    ) -> _GetUserEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserEndpointsResponse
+
+    interface _GetVoiceChannelResponse
+      include Smithy::Client::_Response[Types::GetVoiceChannelResponse]
+      def voice_channel_response: () -> Types::VoiceChannelResponse?
+    end
+    def get_voice_channel: (
+      ?application_id: String
+    ) -> _GetVoiceChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceChannelResponse
+
+    interface _GetVoiceTemplateResponse
+      include Smithy::Client::_Response[Types::GetVoiceTemplateResponse]
+      def voice_template_response: () -> Types::VoiceTemplateResponse?
+    end
+    def get_voice_template: (
+      ?template_name: String,
+      ?version: String
+    ) -> _GetVoiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceTemplateResponse
+
+    interface _ListJourneysResponse
+      include Smithy::Client::_Response[Types::ListJourneysResponse]
+      def journeys_response: () -> Types::JourneysResponse?
+    end
+    def list_journeys: (
+      ?application_id: String,
+      ?page_size: String,
+      ?token: String
+    ) -> _ListJourneysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJourneysResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags_model: () -> Types::TagsModel?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateVersionsResponse
+      include Smithy::Client::_Response[Types::ListTemplateVersionsResponse]
+      def template_versions_response: () -> Types::TemplateVersionsResponse?
+    end
+    def list_template_versions: (
+      ?next_token: String,
+      ?page_size: String,
+      ?template_name: String,
+      ?template_type: String
+    ) -> _ListTemplateVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateVersionsResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesResponse]
+      def templates_response: () -> Types::TemplatesResponse?
+    end
+    def list_templates: (
+      ?next_token: String,
+      ?page_size: String,
+      ?prefix: String,
+      ?template_type: String
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _PhoneNumberValidateResponse
+      include Smithy::Client::_Response[Types::PhoneNumberValidateResponse]
+      def number_validate_response: () -> Types::NumberValidateResponse?
+    end
+    def phone_number_validate: (
+      ?number_validate_request: {
+        iso_country_code: String,
+        phone_number: untyped
+      }
+    ) -> _PhoneNumberValidateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PhoneNumberValidateResponse
+
+    interface _PutEventStreamResponse
+      include Smithy::Client::_Response[Types::PutEventStreamResponse]
+      def event_stream: () -> Types::EventStream?
+    end
+    def put_event_stream: (
+      ?application_id: String,
+      ?write_event_stream: {
+        destination_stream_arn: String,
+        role_arn: untyped
+      }
+    ) -> _PutEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventStreamResponse
+
+    interface _PutEventsResponse
+      include Smithy::Client::_Response[Types::PutEventsResponse]
+      def events_response: () -> Types::EventsResponse?
+    end
+    def put_events: (
+      ?application_id: String,
+      ?events_request: {
+        batch_item: Hash[String,
+          {
+            endpoint: {
+              address: String,
+              attributes: Hash[String,
+                Array[String]
+              ],
+              channel_type: String,
+              demographic: {
+                app_version: untyped,
+                locale: untyped,
+                make: untyped,
+                model: untyped,
+                model_version: untyped,
+                platform: untyped,
+                platform_version: untyped,
+                timezone: untyped
+              },
+              effective_date: untyped,
+              endpoint_status: untyped,
+              location: {
+                city: untyped,
+                country: untyped,
+                latitude: Float,
+                longitude: untyped,
+                postal_code: untyped,
+                region: untyped
+              },
+              metrics: Hash[String, Float],
+              opt_out: untyped,
+              request_id: untyped,
+              user: {
+                user_attributes: untyped,
+                user_id: untyped
+              }
+            },
+            events: Hash[String,
+              {
+                app_package_name: untyped,
+                app_title: untyped,
+                app_version_code: untyped,
+                attributes: Hash[String, String],
+                client_sdk_version: untyped,
+                event_type: untyped,
+                metrics: untyped,
+                sdk_name: untyped,
+                session: {
+                  duration: Integer,
+                  id: untyped,
+                  start_timestamp: untyped,
+                  stop_timestamp: untyped
+                },
+                timestamp: untyped
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _PutEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventsResponse
+
+    interface _RemoveAttributesResponse
+      include Smithy::Client::_Response[Types::RemoveAttributesResponse]
+      def attributes_resource: () -> Types::AttributesResource?
+    end
+    def remove_attributes: (
+      ?application_id: String,
+      ?attribute_type: String,
+      ?update_attributes_request: {
+        blacklist: Array[String]
+      }
+    ) -> _RemoveAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAttributesResponse
+
+    interface _SendMessagesResponse
+      include Smithy::Client::_Response[Types::SendMessagesResponse]
+      def message_response: () -> Types::MessageResponse?
+    end
+    def send_messages: (
+      ?application_id: String,
+      ?message_request: {
+        addresses: Hash[String,
+          {
+            body_override: String,
+            channel_type: String,
+            context: Hash[String, String],
+            raw_content: untyped,
+            substitutions: Hash[String,
+              Array[String]
+            ],
+            title_override: untyped
+          }
+        ],
+        context: untyped,
+        endpoints: Hash[String,
+          {
+            body_override: untyped,
+            context: untyped,
+            raw_content: untyped,
+            substitutions: untyped,
+            title_override: untyped
+          }
+        ],
+        message_configuration: {
+          adm_message: {
+            action: String,
+            body: untyped,
+            consolidation_key: untyped,
+            data: untyped,
+            expires_after: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            md5: untyped,
+            raw_content: untyped,
+            silent_push: bool,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            title: untyped,
+            url: untyped
+          },
+          apns_message: {
+            apns_push_type: untyped,
+            action: untyped,
+            badge: Integer,
+            body: untyped,
+            category: untyped,
+            collapse_id: untyped,
+            data: untyped,
+            media_url: untyped,
+            preferred_authentication_method: untyped,
+            priority: untyped,
+            raw_content: untyped,
+            silent_push: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            thread_id: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          baidu_message: {
+            action: untyped,
+            body: untyped,
+            data: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            raw_content: untyped,
+            silent_push: untyped,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          default_message: {
+            body: untyped,
+            substitutions: untyped
+          },
+          default_push_notification_message: {
+            action: untyped,
+            body: untyped,
+            data: untyped,
+            silent_push: untyped,
+            substitutions: untyped,
+            title: untyped,
+            url: untyped
+          },
+          email_message: {
+            body: untyped,
+            feedback_forwarding_address: untyped,
+            from_address: untyped,
+            raw_email: {
+              data: String
+            },
+            reply_to_addresses: Array[String],
+            simple_email: {
+              html_part: {
+                charset: untyped,
+                data: untyped
+              },
+              subject: untyped,
+              text_part: untyped,
+              headers: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ]
+            },
+            substitutions: untyped
+          },
+          gcm_message: {
+            action: untyped,
+            body: untyped,
+            collapse_key: untyped,
+            data: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            preferred_authentication_method: untyped,
+            priority: untyped,
+            raw_content: untyped,
+            restricted_package_name: untyped,
+            silent_push: untyped,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          sms_message: {
+            body: untyped,
+            keyword: untyped,
+            media_url: untyped,
+            message_type: String,
+            origination_number: untyped,
+            sender_id: untyped,
+            substitutions: untyped,
+            entity_id: untyped,
+            template_id: untyped
+          },
+          voice_message: {
+            body: untyped,
+            language_code: untyped,
+            origination_number: untyped,
+            substitutions: untyped,
+            voice_id: untyped
+          }
+        },
+        template_configuration: {
+          email_template: {
+            name: untyped,
+            version: untyped
+          },
+          push_template: untyped,
+          sms_template: untyped,
+          voice_template: untyped,
+          in_app_template: untyped
+        },
+        trace_id: untyped
+      }
+    ) -> _SendMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessagesResponse
+
+    interface _SendOTPMessageResponse
+      include Smithy::Client::_Response[Types::SendOTPMessageResponse]
+      def message_response: () -> Types::MessageResponse?
+    end
+    def send_otp_message: (
+      ?application_id: String,
+      ?send_otp_message_request_parameters: {
+        allowed_attempts: Integer,
+        brand_name: String,
+        channel: untyped,
+        code_length: untyped,
+        destination_identity: untyped,
+        entity_id: untyped,
+        language: untyped,
+        origination_identity: untyped,
+        reference_id: untyped,
+        template_id: untyped,
+        validity_period: untyped
+      }
+    ) -> _SendOTPMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendOTPMessageResponse
+
+    interface _SendUsersMessagesResponse
+      include Smithy::Client::_Response[Types::SendUsersMessagesResponse]
+      def send_users_message_response: () -> Types::SendUsersMessageResponse?
+    end
+    def send_users_messages: (
+      ?application_id: String,
+      ?send_users_message_request: {
+        context: Hash[String, String],
+        message_configuration: {
+          adm_message: {
+            action: String,
+            body: String,
+            consolidation_key: untyped,
+            data: untyped,
+            expires_after: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            md5: untyped,
+            raw_content: untyped,
+            silent_push: bool,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: Hash[String,
+              Array[String]
+            ],
+            title: untyped,
+            url: untyped
+          },
+          apns_message: {
+            apns_push_type: untyped,
+            action: untyped,
+            badge: Integer,
+            body: untyped,
+            category: untyped,
+            collapse_id: untyped,
+            data: untyped,
+            media_url: untyped,
+            preferred_authentication_method: untyped,
+            priority: untyped,
+            raw_content: untyped,
+            silent_push: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            thread_id: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          baidu_message: {
+            action: untyped,
+            body: untyped,
+            data: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            raw_content: untyped,
+            silent_push: untyped,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          default_message: {
+            body: untyped,
+            substitutions: untyped
+          },
+          default_push_notification_message: {
+            action: untyped,
+            body: untyped,
+            data: untyped,
+            silent_push: untyped,
+            substitutions: untyped,
+            title: untyped,
+            url: untyped
+          },
+          email_message: {
+            body: untyped,
+            feedback_forwarding_address: untyped,
+            from_address: untyped,
+            raw_email: {
+              data: String
+            },
+            reply_to_addresses: Array[String],
+            simple_email: {
+              html_part: {
+                charset: untyped,
+                data: untyped
+              },
+              subject: untyped,
+              text_part: untyped,
+              headers: Array[
+                {
+                  name: untyped,
+                  value: untyped
+                }
+              ]
+            },
+            substitutions: untyped
+          },
+          gcm_message: {
+            action: untyped,
+            body: untyped,
+            collapse_key: untyped,
+            data: untyped,
+            icon_reference: untyped,
+            image_icon_url: untyped,
+            image_url: untyped,
+            preferred_authentication_method: untyped,
+            priority: untyped,
+            raw_content: untyped,
+            restricted_package_name: untyped,
+            silent_push: untyped,
+            small_image_icon_url: untyped,
+            sound: untyped,
+            substitutions: untyped,
+            time_to_live: untyped,
+            title: untyped,
+            url: untyped
+          },
+          sms_message: {
+            body: untyped,
+            keyword: untyped,
+            media_url: untyped,
+            message_type: String,
+            origination_number: untyped,
+            sender_id: untyped,
+            substitutions: untyped,
+            entity_id: untyped,
+            template_id: untyped
+          },
+          voice_message: {
+            body: untyped,
+            language_code: untyped,
+            origination_number: untyped,
+            substitutions: untyped,
+            voice_id: untyped
+          }
+        },
+        template_configuration: {
+          email_template: {
+            name: untyped,
+            version: untyped
+          },
+          push_template: untyped,
+          sms_template: untyped,
+          voice_template: untyped,
+          in_app_template: untyped
+        },
+        trace_id: untyped,
+        users: Hash[String,
+          {
+            body_override: untyped,
+            context: untyped,
+            raw_content: untyped,
+            substitutions: untyped,
+            title_override: untyped
+          }
+        ]
+      }
+    ) -> _SendUsersMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendUsersMessagesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags_model: {
+        tags: Hash[String, String]
+      }
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAdmChannelResponse
+      include Smithy::Client::_Response[Types::UpdateAdmChannelResponse]
+      def adm_channel_response: () -> Types::ADMChannelResponse?
+    end
+    def update_adm_channel: (
+      ?adm_channel_request: {
+        client_id: String,
+        client_secret: untyped,
+        enabled: bool
+      },
+      ?application_id: String
+    ) -> _UpdateAdmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAdmChannelResponse
+
+    interface _UpdateApnsChannelResponse
+      include Smithy::Client::_Response[Types::UpdateApnsChannelResponse]
+      def apns_channel_response: () -> Types::APNSChannelResponse?
+    end
+    def update_apns_channel: (
+      ?apns_channel_request: {
+        bundle_id: String,
+        certificate: untyped,
+        default_authentication_method: untyped,
+        enabled: bool,
+        private_key: untyped,
+        team_id: untyped,
+        token_key: untyped,
+        token_key_id: untyped
+      },
+      ?application_id: String
+    ) -> _UpdateApnsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApnsChannelResponse
+
+    interface _UpdateApnsSandboxChannelResponse
+      include Smithy::Client::_Response[Types::UpdateApnsSandboxChannelResponse]
+      def apns_sandbox_channel_response: () -> Types::APNSSandboxChannelResponse?
+    end
+    def update_apns_sandbox_channel: (
+      ?apns_sandbox_channel_request: {
+        bundle_id: String,
+        certificate: untyped,
+        default_authentication_method: untyped,
+        enabled: bool,
+        private_key: untyped,
+        team_id: untyped,
+        token_key: untyped,
+        token_key_id: untyped
+      },
+      ?application_id: String
+    ) -> _UpdateApnsSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApnsSandboxChannelResponse
+
+    interface _UpdateApnsVoipChannelResponse
+      include Smithy::Client::_Response[Types::UpdateApnsVoipChannelResponse]
+      def apns_voip_channel_response: () -> Types::APNSVoipChannelResponse?
+    end
+    def update_apns_voip_channel: (
+      ?apns_voip_channel_request: {
+        bundle_id: String,
+        certificate: untyped,
+        default_authentication_method: untyped,
+        enabled: bool,
+        private_key: untyped,
+        team_id: untyped,
+        token_key: untyped,
+        token_key_id: untyped
+      },
+      ?application_id: String
+    ) -> _UpdateApnsVoipChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApnsVoipChannelResponse
+
+    interface _UpdateApnsVoipSandboxChannelResponse
+      include Smithy::Client::_Response[Types::UpdateApnsVoipSandboxChannelResponse]
+      def apns_voip_sandbox_channel_response: () -> Types::APNSVoipSandboxChannelResponse?
+    end
+    def update_apns_voip_sandbox_channel: (
+      ?apns_voip_sandbox_channel_request: {
+        bundle_id: String,
+        certificate: untyped,
+        default_authentication_method: untyped,
+        enabled: bool,
+        private_key: untyped,
+        team_id: untyped,
+        token_key: untyped,
+        token_key_id: untyped
+      },
+      ?application_id: String
+    ) -> _UpdateApnsVoipSandboxChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApnsVoipSandboxChannelResponse
+
+    interface _UpdateApplicationSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationSettingsResponse]
+      def application_settings_resource: () -> Types::ApplicationSettingsResource?
+    end
+    def update_application_settings: (
+      ?application_id: String,
+      ?write_application_settings_request: {
+        campaign_hook: {
+          lambda_function_name: String,
+          mode: String,
+          web_url: untyped
+        },
+        cloud_watch_metrics_enabled: bool,
+        event_tagging_enabled: untyped,
+        limits: {
+          daily: Integer,
+          maximum_duration: untyped,
+          messages_per_second: untyped,
+          total: untyped,
+          session: untyped
+        },
+        quiet_time: {
+          end: untyped,
+          start: untyped
+        },
+        journey_limits: {
+          daily_cap: untyped,
+          timeframe_cap: {
+            cap: untyped,
+            days: untyped
+          },
+          total_cap: untyped
+        }
+      }
+    ) -> _UpdateApplicationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationSettingsResponse
+
+    interface _UpdateBaiduChannelResponse
+      include Smithy::Client::_Response[Types::UpdateBaiduChannelResponse]
+      def baidu_channel_response: () -> Types::BaiduChannelResponse?
+    end
+    def update_baidu_channel: (
+      ?application_id: String,
+      ?baidu_channel_request: {
+        api_key: String,
+        enabled: bool,
+        secret_key: untyped
+      }
+    ) -> _UpdateBaiduChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBaiduChannelResponse
+
+    interface _UpdateCampaignResponse
+      include Smithy::Client::_Response[Types::UpdateCampaignResponse]
+      def campaign_response: () -> Types::CampaignResponse?
+    end
+    def update_campaign: (
+      ?application_id: String,
+      ?campaign_id: String,
+      ?write_campaign_request: {
+        additional_treatments: Array[
+          {
+            custom_delivery_configuration: {
+              delivery_uri: String,
+              endpoint_types: Array[String]
+            },
+            message_configuration: {
+              adm_message: {
+                action: String,
+                body: untyped,
+                image_icon_url: untyped,
+                image_small_icon_url: untyped,
+                image_url: untyped,
+                json_body: untyped,
+                media_url: untyped,
+                raw_content: untyped,
+                silent_push: bool,
+                time_to_live: Integer,
+                title: untyped,
+                url: untyped
+              },
+              apns_message: untyped,
+              baidu_message: untyped,
+              custom_message: {
+                data: untyped
+              },
+              default_message: untyped,
+              email_message: {
+                body: untyped,
+                from_address: untyped,
+                headers: Array[
+                  {
+                    name: untyped,
+                    value: untyped
+                  }
+                ],
+                html_body: untyped,
+                title: untyped
+              },
+              gcm_message: untyped,
+              sms_message: {
+                body: untyped,
+                message_type: String,
+                origination_number: untyped,
+                sender_id: untyped,
+                entity_id: untyped,
+                template_id: untyped
+              },
+              in_app_message: {
+                body: untyped,
+                content: Array[
+                  {
+                    background_color: untyped,
+                    body_config: {
+                      alignment: String,
+                      body: untyped,
+                      text_color: untyped
+                    },
+                    header_config: {
+                      alignment: untyped,
+                      header: untyped,
+                      text_color: untyped
+                    },
+                    image_url: untyped,
+                    primary_btn: {
+                      android: {
+                        button_action: String,
+                        link: untyped
+                      },
+                      default_config: {
+                        background_color: untyped,
+                        border_radius: untyped,
+                        button_action: untyped,
+                        link: untyped,
+                        text: untyped,
+                        text_color: untyped
+                      },
+                      ios: untyped,
+                      web: untyped
+                    },
+                    secondary_btn: untyped
+                  }
+                ],
+                custom_config: Hash[String, String],
+                layout: String
+              }
+            },
+            schedule: {
+              end_time: untyped,
+              event_filter: {
+                dimensions: {
+                  attributes: Hash[String,
+                    {
+                      attribute_type: String,
+                      values: Array[String]
+                    }
+                  ],
+                  event_type: {
+                    dimension_type: String,
+                    values: untyped
+                  },
+                  metrics: Hash[String,
+                    {
+                      comparison_operator: untyped,
+                      value: Float
+                    }
+                  ]
+                },
+                filter_type: String
+              },
+              frequency: String,
+              is_local_time: untyped,
+              quiet_time: {
+                end: untyped,
+                start: untyped
+              },
+              start_time: untyped,
+              timezone: untyped
+            },
+            size_percent: untyped,
+            template_configuration: {
+              email_template: {
+                name: untyped,
+                version: untyped
+              },
+              push_template: untyped,
+              sms_template: untyped,
+              voice_template: untyped,
+              in_app_template: untyped
+            },
+            treatment_description: untyped,
+            treatment_name: untyped
+          }
+        ],
+        custom_delivery_configuration: untyped,
+        description: untyped,
+        holdout_percent: untyped,
+        hook: {
+          lambda_function_name: untyped,
+          mode: String,
+          web_url: untyped
+        },
+        is_paused: untyped,
+        limits: {
+          daily: untyped,
+          maximum_duration: untyped,
+          messages_per_second: untyped,
+          total: untyped,
+          session: untyped
+        },
+        message_configuration: untyped,
+        name: untyped,
+        schedule: untyped,
+        segment_id: untyped,
+        segment_version: untyped,
+        tags: untyped,
+        template_configuration: untyped,
+        treatment_description: untyped,
+        treatment_name: untyped,
+        priority: untyped
+      }
+    ) -> _UpdateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignResponse
+
+    interface _UpdateEmailChannelResponse
+      include Smithy::Client::_Response[Types::UpdateEmailChannelResponse]
+      def email_channel_response: () -> Types::EmailChannelResponse?
+    end
+    def update_email_channel: (
+      ?application_id: String,
+      ?email_channel_request: {
+        configuration_set: String,
+        enabled: bool,
+        from_address: untyped,
+        identity: untyped,
+        role_arn: untyped,
+        orchestration_sending_role_arn: untyped
+      }
+    ) -> _UpdateEmailChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEmailChannelResponse
+
+    interface _UpdateEmailTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateEmailTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_email_template: (
+      ?create_new_version: bool,
+      ?email_template_request: {
+        default_substitutions: String,
+        html_part: untyped,
+        recommender_id: untyped,
+        subject: untyped,
+        headers: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        tags: Hash[String, String],
+        template_description: untyped,
+        text_part: untyped
+      },
+      ?template_name: String,
+      ?version: String
+    ) -> _UpdateEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEmailTemplateResponse
+
+    interface _UpdateEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_endpoint: (
+      ?application_id: String,
+      ?endpoint_id: String,
+      ?endpoint_request: {
+        address: String,
+        attributes: Hash[String,
+          Array[String]
+        ],
+        channel_type: String,
+        demographic: {
+          app_version: untyped,
+          locale: untyped,
+          make: untyped,
+          model: untyped,
+          model_version: untyped,
+          platform: untyped,
+          platform_version: untyped,
+          timezone: untyped
+        },
+        effective_date: untyped,
+        endpoint_status: untyped,
+        location: {
+          city: untyped,
+          country: untyped,
+          latitude: Float,
+          longitude: untyped,
+          postal_code: untyped,
+          region: untyped
+        },
+        metrics: Hash[String, Float],
+        opt_out: untyped,
+        request_id: untyped,
+        user: {
+          user_attributes: untyped,
+          user_id: untyped
+        }
+      }
+    ) -> _UpdateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointResponse
+
+    interface _UpdateEndpointsBatchResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointsBatchResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_endpoints_batch: (
+      ?application_id: String,
+      ?endpoint_batch_request: {
+        item: Array[
+          {
+            address: String,
+            attributes: Hash[String,
+              Array[String]
+            ],
+            channel_type: String,
+            demographic: {
+              app_version: untyped,
+              locale: untyped,
+              make: untyped,
+              model: untyped,
+              model_version: untyped,
+              platform: untyped,
+              platform_version: untyped,
+              timezone: untyped
+            },
+            effective_date: untyped,
+            endpoint_status: untyped,
+            id: untyped,
+            location: {
+              city: untyped,
+              country: untyped,
+              latitude: Float,
+              longitude: untyped,
+              postal_code: untyped,
+              region: untyped
+            },
+            metrics: Hash[String, Float],
+            opt_out: untyped,
+            request_id: untyped,
+            user: {
+              user_attributes: untyped,
+              user_id: untyped
+            }
+          }
+        ]
+      }
+    ) -> _UpdateEndpointsBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointsBatchResponse
+
+    interface _UpdateGcmChannelResponse
+      include Smithy::Client::_Response[Types::UpdateGcmChannelResponse]
+      def gcm_channel_response: () -> Types::GCMChannelResponse?
+    end
+    def update_gcm_channel: (
+      ?application_id: String,
+      ?gcm_channel_request: {
+        api_key: String,
+        default_authentication_method: untyped,
+        enabled: bool,
+        service_json: untyped
+      }
+    ) -> _UpdateGcmChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGcmChannelResponse
+
+    interface _UpdateInAppTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateInAppTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_in_app_template: (
+      ?create_new_version: bool,
+      ?in_app_template_request: {
+        content: Array[
+          {
+            background_color: String,
+            body_config: {
+              alignment: String,
+              body: untyped,
+              text_color: untyped
+            },
+            header_config: {
+              alignment: untyped,
+              header: untyped,
+              text_color: untyped
+            },
+            image_url: untyped,
+            primary_btn: {
+              android: {
+                button_action: String,
+                link: untyped
+              },
+              default_config: {
+                background_color: untyped,
+                border_radius: Integer,
+                button_action: untyped,
+                link: untyped,
+                text: untyped,
+                text_color: untyped
+              },
+              ios: untyped,
+              web: untyped
+            },
+            secondary_btn: untyped
+          }
+        ],
+        custom_config: Hash[String, String],
+        layout: String,
+        tags: untyped,
+        template_description: untyped
+      },
+      ?template_name: String,
+      ?version: String
+    ) -> _UpdateInAppTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInAppTemplateResponse
+
+    interface _UpdateJourneyResponse
+      include Smithy::Client::_Response[Types::UpdateJourneyResponse]
+      def journey_response: () -> Types::JourneyResponse?
+    end
+    def update_journey: (
+      ?application_id: String,
+      ?journey_id: String,
+      ?write_journey_request: {
+        activities: Hash[String,
+          {
+            custom: {
+              delivery_uri: String,
+              endpoint_types: Array[String],
+              message_config: {
+                data: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            conditional_split: {
+              condition: {
+                conditions: Array[
+                  {
+                    event_condition: {
+                      dimensions: {
+                        attributes: Hash[String,
+                          {
+                            attribute_type: String,
+                            values: Array[String]
+                          }
+                        ],
+                        event_type: {
+                          dimension_type: String,
+                          values: untyped
+                        },
+                        metrics: Hash[String,
+                          {
+                            comparison_operator: untyped,
+                            value: Float
+                          }
+                        ]
+                      },
+                      message_activity: untyped
+                    },
+                    segment_condition: {
+                      segment_id: untyped
+                    },
+                    segment_dimensions: {
+                      attributes: untyped,
+                      behavior: {
+                        recency: {
+                          duration: String,
+                          recency_type: String
+                        }
+                      },
+                      demographic: {
+                        app_version: untyped,
+                        channel: untyped,
+                        device_type: untyped,
+                        make: untyped,
+                        model: untyped,
+                        platform: untyped
+                      },
+                      location: {
+                        country: untyped,
+                        gps_point: {
+                          coordinates: {
+                            latitude: untyped,
+                            longitude: untyped
+                          },
+                          range_in_kilometers: untyped
+                        }
+                      },
+                      metrics: untyped,
+                      user_attributes: untyped
+                    }
+                  }
+                ],
+                operator: String
+              },
+              evaluation_wait_time: {
+                wait_for: untyped,
+                wait_until: untyped
+              },
+              false_activity: untyped,
+              true_activity: untyped
+            },
+            description: untyped,
+            email: {
+              message_config: {
+                from_address: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            holdout: {
+              next_activity: untyped,
+              percentage: Integer
+            },
+            multi_condition: {
+              branches: Array[
+                {
+                  condition: {
+                    event_condition: untyped,
+                    segment_condition: untyped,
+                    segment_dimensions: untyped
+                  },
+                  next_activity: untyped
+                }
+              ],
+              default_activity: untyped,
+              evaluation_wait_time: untyped
+            },
+            push: {
+              message_config: {
+                time_to_live: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            random_split: {
+              branches: Array[
+                {
+                  next_activity: untyped,
+                  percentage: untyped
+                }
+              ]
+            },
+            sms: {
+              message_config: {
+                message_type: String,
+                origination_number: untyped,
+                sender_id: untyped,
+                entity_id: untyped,
+                template_id: untyped
+              },
+              next_activity: untyped,
+              template_name: untyped,
+              template_version: untyped
+            },
+            wait: {
+              next_activity: untyped,
+              wait_time: untyped
+            },
+            contact_center: {
+              next_activity: untyped
+            }
+          }
+        ],
+        creation_date: untyped,
+        last_modified_date: untyped,
+        limits: {
+          daily_cap: untyped,
+          endpoint_reentry_cap: untyped,
+          messages_per_second: untyped,
+          endpoint_reentry_interval: untyped,
+          timeframe_cap: {
+            cap: untyped,
+            days: untyped
+          },
+          total_cap: untyped
+        },
+        local_time: bool,
+        name: untyped,
+        quiet_time: {
+          end: untyped,
+          start: untyped
+        },
+        refresh_frequency: untyped,
+        schedule: {
+          end_time: Time,
+          start_time: untyped,
+          timezone: untyped
+        },
+        start_activity: untyped,
+        start_condition: {
+          description: untyped,
+          event_start_condition: {
+            event_filter: {
+              dimensions: untyped,
+              filter_type: String
+            },
+            segment_id: untyped
+          },
+          segment_start_condition: untyped
+        },
+        state: String,
+        wait_for_quiet_time: untyped,
+        refresh_on_segment_update: untyped,
+        journey_channel_settings: {
+          connect_campaign_arn: untyped,
+          connect_campaign_execution_role_arn: untyped
+        },
+        sending_schedule: untyped,
+        open_hours: {
+          email: Hash[String,
+            Array[
+              {
+                start_time: untyped,
+                end_time: untyped
+              }
+            ]
+          ],
+          sms: untyped,
+          push: untyped,
+          voice: untyped,
+          custom: untyped
+        },
+        closed_days: {
+          email: Array[
+            {
+              name: untyped,
+              start_date_time: untyped,
+              end_date_time: untyped
+            }
+          ],
+          sms: untyped,
+          push: untyped,
+          voice: untyped,
+          custom: untyped
+        },
+        timezone_estimation_methods: Array[String]
+      }
+    ) -> _UpdateJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJourneyResponse
+
+    interface _UpdateJourneyStateResponse
+      include Smithy::Client::_Response[Types::UpdateJourneyStateResponse]
+      def journey_response: () -> Types::JourneyResponse?
+    end
+    def update_journey_state: (
+      ?application_id: String,
+      ?journey_id: String,
+      ?journey_state_request: {
+        state: String
+      }
+    ) -> _UpdateJourneyStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJourneyStateResponse
+
+    interface _UpdatePushTemplateResponse
+      include Smithy::Client::_Response[Types::UpdatePushTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_push_template: (
+      ?create_new_version: bool,
+      ?push_notification_template_request: {
+        adm: {
+          action: String,
+          body: String,
+          image_icon_url: untyped,
+          image_url: untyped,
+          raw_content: untyped,
+          small_image_icon_url: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        apns: {
+          action: untyped,
+          body: untyped,
+          media_url: untyped,
+          raw_content: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        baidu: untyped,
+        default: {
+          action: untyped,
+          body: untyped,
+          sound: untyped,
+          title: untyped,
+          url: untyped
+        },
+        default_substitutions: untyped,
+        gcm: untyped,
+        recommender_id: untyped,
+        tags: Hash[String, String],
+        template_description: untyped
+      },
+      ?template_name: String,
+      ?version: String
+    ) -> _UpdatePushTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePushTemplateResponse
+
+    interface _UpdateRecommenderConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateRecommenderConfigurationResponse]
+      def recommender_configuration_response: () -> Types::RecommenderConfigurationResponse?
+    end
+    def update_recommender_configuration: (
+      ?recommender_id: String,
+      ?update_recommender_configuration: {
+        attributes: Hash[String, String],
+        description: String,
+        name: untyped,
+        recommendation_provider_id_type: untyped,
+        recommendation_provider_role_arn: untyped,
+        recommendation_provider_uri: untyped,
+        recommendation_transformer_uri: untyped,
+        recommendations_display_name: untyped,
+        recommendations_per_message: Integer
+      }
+    ) -> _UpdateRecommenderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecommenderConfigurationResponse
+
+    interface _UpdateSegmentResponse
+      include Smithy::Client::_Response[Types::UpdateSegmentResponse]
+      def segment_response: () -> Types::SegmentResponse?
+    end
+    def update_segment: (
+      ?application_id: String,
+      ?segment_id: String,
+      ?write_segment_request: {
+        dimensions: {
+          attributes: Hash[String,
+            {
+              attribute_type: String,
+              values: Array[String]
+            }
+          ],
+          behavior: {
+            recency: {
+              duration: String,
+              recency_type: String
+            }
+          },
+          demographic: {
+            app_version: {
+              dimension_type: String,
+              values: untyped
+            },
+            channel: untyped,
+            device_type: untyped,
+            make: untyped,
+            model: untyped,
+            platform: untyped
+          },
+          location: {
+            country: untyped,
+            gps_point: {
+              coordinates: {
+                latitude: Float,
+                longitude: untyped
+              },
+              range_in_kilometers: untyped
+            }
+          },
+          metrics: Hash[String,
+            {
+              comparison_operator: String,
+              value: untyped
+            }
+          ],
+          user_attributes: untyped
+        },
+        name: untyped,
+        segment_groups: {
+          groups: Array[
+            {
+              dimensions: Array[
+                {
+                  attributes: untyped,
+                  behavior: untyped,
+                  demographic: untyped,
+                  location: untyped,
+                  metrics: untyped,
+                  user_attributes: untyped
+                }
+              ],
+              source_segments: Array[
+                {
+                  id: untyped,
+                  version: Integer
+                }
+              ],
+              source_type: String,
+              type: String
+            }
+          ],
+          include: String
+        },
+        tags: Hash[String, String]
+      }
+    ) -> _UpdateSegmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSegmentResponse
+
+    interface _UpdateSmsChannelResponse
+      include Smithy::Client::_Response[Types::UpdateSmsChannelResponse]
+      def sms_channel_response: () -> Types::SMSChannelResponse?
+    end
+    def update_sms_channel: (
+      ?application_id: String,
+      ?sms_channel_request: {
+        enabled: bool,
+        sender_id: String,
+        short_code: untyped
+      }
+    ) -> _UpdateSmsChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSmsChannelResponse
+
+    interface _UpdateSmsTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateSmsTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_sms_template: (
+      ?create_new_version: bool,
+      ?sms_template_request: {
+        body: String,
+        default_substitutions: untyped,
+        recommender_id: untyped,
+        tags: Hash[String, String],
+        template_description: untyped
+      },
+      ?template_name: String,
+      ?version: String
+    ) -> _UpdateSmsTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSmsTemplateResponse
+
+    interface _UpdateTemplateActiveVersionResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateActiveVersionResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_template_active_version: (
+      ?template_active_version_request: {
+        version: String
+      },
+      ?template_name: String,
+      ?template_type: String
+    ) -> _UpdateTemplateActiveVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateActiveVersionResponse
+
+    interface _UpdateVoiceChannelResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceChannelResponse]
+      def voice_channel_response: () -> Types::VoiceChannelResponse?
+    end
+    def update_voice_channel: (
+      ?application_id: String,
+      ?voice_channel_request: {
+        enabled: bool
+      }
+    ) -> _UpdateVoiceChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceChannelResponse
+
+    interface _UpdateVoiceTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceTemplateResponse]
+      def message_body: () -> Types::MessageBody?
+    end
+    def update_voice_template: (
+      ?create_new_version: bool,
+      ?template_name: String,
+      ?version: String,
+      ?voice_template_request: {
+        body: String,
+        default_substitutions: untyped,
+        language_code: untyped,
+        tags: Hash[String, String],
+        template_description: untyped,
+        voice_id: untyped
+      }
+    ) -> _UpdateVoiceTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceTemplateResponse
+
+    interface _VerifyOTPMessageResponse
+      include Smithy::Client::_Response[Types::VerifyOTPMessageResponse]
+      def verification_response: () -> Types::VerificationResponse?
+    end
+    def verify_otp_message: (
+      ?application_id: String,
+      ?verify_otp_message_request_parameters: {
+        destination_identity: String,
+        otp: untyped,
+        reference_id: untyped
+      }
+    ) -> _VerifyOTPMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyOTPMessageResponse
+  end
+end

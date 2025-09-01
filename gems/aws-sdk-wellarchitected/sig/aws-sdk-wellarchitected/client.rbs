@@ -1,0 +1,933 @@
+module Aws::WellArchitected
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WellArchitected::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateLensesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_lenses: (
+      ?workload_id: String,
+      ?lens_aliases: Array[String]
+    ) -> _AssociateLensesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLensesResponse
+
+    interface _AssociateProfilesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_profiles: (
+      ?workload_id: String,
+      ?profile_arns: Array[String]
+    ) -> _AssociateProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProfilesResponse
+
+    interface _CreateLensShareResponse
+      include Smithy::Client::_Response[Types::CreateLensShareOutput]
+      def share_id: () -> String?
+    end
+    def create_lens_share: (
+      ?lens_alias: String,
+      ?shared_with: String,
+      ?client_request_token: String
+    ) -> _CreateLensShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLensShareResponse
+
+    interface _CreateLensVersionResponse
+      include Smithy::Client::_Response[Types::CreateLensVersionOutput]
+      def lens_arn: () -> String?
+      def lens_version: () -> String?
+    end
+    def create_lens_version: (
+      ?lens_alias: String,
+      ?lens_version: String,
+      ?is_major_version: bool,
+      ?client_request_token: String
+    ) -> _CreateLensVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLensVersionResponse
+
+    interface _CreateMilestoneResponse
+      include Smithy::Client::_Response[Types::CreateMilestoneOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+    end
+    def create_milestone: (
+      ?workload_id: String,
+      ?milestone_name: String,
+      ?client_request_token: String
+    ) -> _CreateMilestoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMilestoneResponse
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileOutput]
+      def profile_arn: () -> String?
+      def profile_version: () -> String?
+    end
+    def create_profile: (
+      ?profile_name: String,
+      ?profile_description: String,
+      ?profile_questions: Array[
+        {
+          question_id: String,
+          selected_choice_ids: Array[String]
+        }
+      ],
+      ?client_request_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _CreateProfileShareResponse
+      include Smithy::Client::_Response[Types::CreateProfileShareOutput]
+      def share_id: () -> String?
+      def profile_arn: () -> String?
+    end
+    def create_profile_share: (
+      ?profile_arn: String,
+      ?shared_with: String,
+      ?client_request_token: String
+    ) -> _CreateProfileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileShareResponse
+
+    interface _CreateReviewTemplateResponse
+      include Smithy::Client::_Response[Types::CreateReviewTemplateOutput]
+      def template_arn: () -> String?
+    end
+    def create_review_template: (
+      ?template_name: String,
+      ?description: String,
+      ?lenses: Array[String],
+      ?notes: String,
+      ?tags: Hash[String, String],
+      ?client_request_token: String
+    ) -> _CreateReviewTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReviewTemplateResponse
+
+    interface _CreateTemplateShareResponse
+      include Smithy::Client::_Response[Types::CreateTemplateShareOutput]
+      def template_arn: () -> String?
+      def share_id: () -> String?
+    end
+    def create_template_share: (
+      ?template_arn: String,
+      ?shared_with: String,
+      ?client_request_token: String
+    ) -> _CreateTemplateShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateShareResponse
+
+    interface _CreateWorkloadResponse
+      include Smithy::Client::_Response[Types::CreateWorkloadOutput]
+      def workload_id: () -> String?
+      def workload_arn: () -> String?
+    end
+    def create_workload: (
+      ?workload_name: String,
+      ?description: String,
+      ?environment: String,
+      ?account_ids: Array[String],
+      ?aws_regions: Array[String],
+      ?non_aws_regions: Array[String],
+      ?pillar_priorities: Array[String],
+      ?architectural_design: String,
+      ?review_owner: String,
+      ?industry_type: String,
+      ?industry: String,
+      ?lenses: Array[String],
+      ?notes: String,
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?discovery_config: {
+        trusted_advisor_integration_status: String,
+        workload_resource_definition: Array[String]
+      },
+      ?applications: Array[String],
+      ?profile_arns: Array[String],
+      ?review_template_arns: Array[String],
+      ?jira_configuration: {
+        issue_management_status: String,
+        issue_management_type: String,
+        jira_project_key: String
+      }
+    ) -> _CreateWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkloadResponse
+
+    interface _CreateWorkloadShareResponse
+      include Smithy::Client::_Response[Types::CreateWorkloadShareOutput]
+      def workload_id: () -> String?
+      def share_id: () -> String?
+    end
+    def create_workload_share: (
+      ?workload_id: String,
+      ?shared_with: String,
+      ?permission_type: String,
+      ?client_request_token: String
+    ) -> _CreateWorkloadShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkloadShareResponse
+
+    interface _DeleteLensResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_lens: (
+      ?lens_alias: String,
+      ?client_request_token: String,
+      ?lens_status: String
+    ) -> _DeleteLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLensResponse
+
+    interface _DeleteLensShareResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_lens_share: (
+      ?share_id: String,
+      ?lens_alias: String,
+      ?client_request_token: String
+    ) -> _DeleteLensShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLensShareResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_profile: (
+      ?profile_arn: String,
+      ?client_request_token: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DeleteProfileShareResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_profile_share: (
+      ?share_id: String,
+      ?profile_arn: String,
+      ?client_request_token: String
+    ) -> _DeleteProfileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileShareResponse
+
+    interface _DeleteReviewTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_review_template: (
+      ?template_arn: String,
+      ?client_request_token: String
+    ) -> _DeleteReviewTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReviewTemplateResponse
+
+    interface _DeleteTemplateShareResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_template_share: (
+      ?share_id: String,
+      ?template_arn: String,
+      ?client_request_token: String
+    ) -> _DeleteTemplateShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateShareResponse
+
+    interface _DeleteWorkloadResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workload: (
+      ?workload_id: String,
+      ?client_request_token: String
+    ) -> _DeleteWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkloadResponse
+
+    interface _DeleteWorkloadShareResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workload_share: (
+      ?share_id: String,
+      ?workload_id: String,
+      ?client_request_token: String
+    ) -> _DeleteWorkloadShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkloadShareResponse
+
+    interface _DisassociateLensesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_lenses: (
+      ?workload_id: String,
+      ?lens_aliases: Array[String]
+    ) -> _DisassociateLensesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLensesResponse
+
+    interface _DisassociateProfilesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_profiles: (
+      ?workload_id: String,
+      ?profile_arns: Array[String]
+    ) -> _DisassociateProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateProfilesResponse
+
+    interface _ExportLensResponse
+      include Smithy::Client::_Response[Types::ExportLensOutput]
+      def lens_json: () -> String?
+    end
+    def export_lens: (
+      ?lens_alias: String,
+      ?lens_version: String
+    ) -> _ExportLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportLensResponse
+
+    interface _GetAnswerResponse
+      include Smithy::Client::_Response[Types::GetAnswerOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_alias: () -> String?
+      def lens_arn: () -> String?
+      def answer: () -> Types::Answer?
+    end
+    def get_answer: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?question_id: String,
+      ?milestone_number: Integer
+    ) -> _GetAnswerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnswerResponse
+
+    interface _GetConsolidatedReportResponse
+      include Smithy::Client::_Response[Types::GetConsolidatedReportOutput]
+      def metrics: () -> Array[Types::ConsolidatedReportMetric]?
+      def next_token: () -> String?
+      def base64_string: () -> String?
+    end
+    def get_consolidated_report: (
+      ?format: String,
+      ?include_shared_resources: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetConsolidatedReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConsolidatedReportResponse
+
+    interface _GetGlobalSettingsResponse
+      include Smithy::Client::_Response[Types::GetGlobalSettingsOutput]
+      def organization_sharing_status: () -> String?
+      def discovery_integration_status: () -> String?
+      def jira_configuration: () -> Types::AccountJiraConfigurationOutput?
+    end
+    def get_global_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlobalSettingsResponse
+
+    interface _GetLensResponse
+      include Smithy::Client::_Response[Types::GetLensOutput]
+      def lens: () -> Types::Lens?
+    end
+    def get_lens: (
+      ?lens_alias: String,
+      ?lens_version: String
+    ) -> _GetLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLensResponse
+
+    interface _GetLensReviewResponse
+      include Smithy::Client::_Response[Types::GetLensReviewOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_review: () -> Types::LensReview?
+    end
+    def get_lens_review: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?milestone_number: Integer
+    ) -> _GetLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLensReviewResponse
+
+    interface _GetLensReviewReportResponse
+      include Smithy::Client::_Response[Types::GetLensReviewReportOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_review_report: () -> Types::LensReviewReport?
+    end
+    def get_lens_review_report: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?milestone_number: Integer
+    ) -> _GetLensReviewReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLensReviewReportResponse
+
+    interface _GetLensVersionDifferenceResponse
+      include Smithy::Client::_Response[Types::GetLensVersionDifferenceOutput]
+      def lens_alias: () -> String?
+      def lens_arn: () -> String?
+      def base_lens_version: () -> String?
+      def target_lens_version: () -> String?
+      def latest_lens_version: () -> String?
+      def version_differences: () -> Types::VersionDifferences?
+    end
+    def get_lens_version_difference: (
+      ?lens_alias: String,
+      ?base_lens_version: String,
+      ?target_lens_version: String
+    ) -> _GetLensVersionDifferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLensVersionDifferenceResponse
+
+    interface _GetMilestoneResponse
+      include Smithy::Client::_Response[Types::GetMilestoneOutput]
+      def workload_id: () -> String?
+      def milestone: () -> Types::Milestone?
+    end
+    def get_milestone: (
+      ?workload_id: String,
+      ?milestone_number: Integer
+    ) -> _GetMilestoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMilestoneResponse
+
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileOutput]
+      def profile: () -> Types::Profile?
+    end
+    def get_profile: (
+      ?profile_arn: String,
+      ?profile_version: String
+    ) -> _GetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
+    interface _GetProfileTemplateResponse
+      include Smithy::Client::_Response[Types::GetProfileTemplateOutput]
+      def profile_template: () -> Types::ProfileTemplate?
+    end
+    def get_profile_template: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileTemplateResponse
+
+    interface _GetReviewTemplateResponse
+      include Smithy::Client::_Response[Types::GetReviewTemplateOutput]
+      def review_template: () -> Types::ReviewTemplate?
+    end
+    def get_review_template: (
+      ?template_arn: String
+    ) -> _GetReviewTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReviewTemplateResponse
+
+    interface _GetReviewTemplateAnswerResponse
+      include Smithy::Client::_Response[Types::GetReviewTemplateAnswerOutput]
+      def template_arn: () -> String?
+      def lens_alias: () -> String?
+      def answer: () -> Types::ReviewTemplateAnswer?
+    end
+    def get_review_template_answer: (
+      ?template_arn: String,
+      ?lens_alias: String,
+      ?question_id: String
+    ) -> _GetReviewTemplateAnswerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReviewTemplateAnswerResponse
+
+    interface _GetReviewTemplateLensReviewResponse
+      include Smithy::Client::_Response[Types::GetReviewTemplateLensReviewOutput]
+      def template_arn: () -> String?
+      def lens_review: () -> Types::ReviewTemplateLensReview?
+    end
+    def get_review_template_lens_review: (
+      ?template_arn: String,
+      ?lens_alias: String
+    ) -> _GetReviewTemplateLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReviewTemplateLensReviewResponse
+
+    interface _GetWorkloadResponse
+      include Smithy::Client::_Response[Types::GetWorkloadOutput]
+      def workload: () -> Types::Workload?
+    end
+    def get_workload: (
+      ?workload_id: String
+    ) -> _GetWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadResponse
+
+    interface _ImportLensResponse
+      include Smithy::Client::_Response[Types::ImportLensOutput]
+      def lens_arn: () -> String?
+      def status: () -> String?
+    end
+    def import_lens: (
+      ?lens_alias: String,
+      ?json_string: String,
+      ?client_request_token: String,
+      ?tags: Hash[String, String]
+    ) -> _ImportLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportLensResponse
+
+    interface _ListAnswersResponse
+      include Smithy::Client::_Response[Types::ListAnswersOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_alias: () -> String?
+      def lens_arn: () -> String?
+      def answer_summaries: () -> Array[Types::AnswerSummary]?
+      def next_token: () -> String?
+    end
+    def list_answers: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?pillar_id: String,
+      ?milestone_number: Integer,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?question_priority: String
+    ) -> _ListAnswersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnswersResponse
+
+    interface _ListCheckDetailsResponse
+      include Smithy::Client::_Response[Types::ListCheckDetailsOutput]
+      def check_details: () -> Array[Types::CheckDetail]?
+      def next_token: () -> String?
+    end
+    def list_check_details: (
+      ?workload_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?lens_arn: String,
+      ?pillar_id: String,
+      ?question_id: String,
+      ?choice_id: String
+    ) -> _ListCheckDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCheckDetailsResponse
+
+    interface _ListCheckSummariesResponse
+      include Smithy::Client::_Response[Types::ListCheckSummariesOutput]
+      def check_summaries: () -> Array[Types::CheckSummary]?
+      def next_token: () -> String?
+    end
+    def list_check_summaries: (
+      ?workload_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?lens_arn: String,
+      ?pillar_id: String,
+      ?question_id: String,
+      ?choice_id: String
+    ) -> _ListCheckSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCheckSummariesResponse
+
+    interface _ListLensReviewImprovementsResponse
+      include Smithy::Client::_Response[Types::ListLensReviewImprovementsOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_alias: () -> String?
+      def lens_arn: () -> String?
+      def improvement_summaries: () -> Array[Types::ImprovementSummary]?
+      def next_token: () -> String?
+    end
+    def list_lens_review_improvements: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?pillar_id: String,
+      ?milestone_number: Integer,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?question_priority: String
+    ) -> _ListLensReviewImprovementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLensReviewImprovementsResponse
+
+    interface _ListLensReviewsResponse
+      include Smithy::Client::_Response[Types::ListLensReviewsOutput]
+      def workload_id: () -> String?
+      def milestone_number: () -> Integer?
+      def lens_review_summaries: () -> Array[Types::LensReviewSummary]?
+      def next_token: () -> String?
+    end
+    def list_lens_reviews: (
+      ?workload_id: String,
+      ?milestone_number: Integer,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLensReviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLensReviewsResponse
+
+    interface _ListLensSharesResponse
+      include Smithy::Client::_Response[Types::ListLensSharesOutput]
+      def lens_share_summaries: () -> Array[Types::LensShareSummary]?
+      def next_token: () -> String?
+    end
+    def list_lens_shares: (
+      ?lens_alias: String,
+      ?shared_with_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListLensSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLensSharesResponse
+
+    interface _ListLensesResponse
+      include Smithy::Client::_Response[Types::ListLensesOutput]
+      def lens_summaries: () -> Array[Types::LensSummary]?
+      def next_token: () -> String?
+    end
+    def list_lenses: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?lens_type: String,
+      ?lens_status: String,
+      ?lens_name: String
+    ) -> _ListLensesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLensesResponse
+
+    interface _ListMilestonesResponse
+      include Smithy::Client::_Response[Types::ListMilestonesOutput]
+      def workload_id: () -> String?
+      def milestone_summaries: () -> Array[Types::MilestoneSummary]?
+      def next_token: () -> String?
+    end
+    def list_milestones: (
+      ?workload_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMilestonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMilestonesResponse
+
+    interface _ListNotificationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationsOutput]
+      def notification_summaries: () -> Array[Types::NotificationSummary]?
+      def next_token: () -> String?
+    end
+    def list_notifications: (
+      ?workload_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_arn: String
+    ) -> _ListNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationsResponse
+
+    interface _ListProfileNotificationsResponse
+      include Smithy::Client::_Response[Types::ListProfileNotificationsOutput]
+      def notification_summaries: () -> Array[Types::ProfileNotificationSummary]?
+      def next_token: () -> String?
+    end
+    def list_profile_notifications: (
+      ?workload_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProfileNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileNotificationsResponse
+
+    interface _ListProfileSharesResponse
+      include Smithy::Client::_Response[Types::ListProfileSharesOutput]
+      def profile_share_summaries: () -> Array[Types::ProfileShareSummary]?
+      def next_token: () -> String?
+    end
+    def list_profile_shares: (
+      ?profile_arn: String,
+      ?shared_with_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListProfileSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileSharesResponse
+
+    interface _ListProfilesResponse
+      include Smithy::Client::_Response[Types::ListProfilesOutput]
+      def profile_summaries: () -> Array[Types::ProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_profiles: (
+      ?profile_name_prefix: String,
+      ?profile_owner_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilesResponse
+
+    interface _ListReviewTemplateAnswersResponse
+      include Smithy::Client::_Response[Types::ListReviewTemplateAnswersOutput]
+      def template_arn: () -> String?
+      def lens_alias: () -> String?
+      def answer_summaries: () -> Array[Types::ReviewTemplateAnswerSummary]?
+      def next_token: () -> String?
+    end
+    def list_review_template_answers: (
+      ?template_arn: String,
+      ?lens_alias: String,
+      ?pillar_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReviewTemplateAnswersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReviewTemplateAnswersResponse
+
+    interface _ListReviewTemplatesResponse
+      include Smithy::Client::_Response[Types::ListReviewTemplatesOutput]
+      def review_templates: () -> Array[Types::ReviewTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_review_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReviewTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReviewTemplatesResponse
+
+    interface _ListShareInvitationsResponse
+      include Smithy::Client::_Response[Types::ListShareInvitationsOutput]
+      def share_invitation_summaries: () -> Array[Types::ShareInvitationSummary]?
+      def next_token: () -> String?
+    end
+    def list_share_invitations: (
+      ?workload_name_prefix: String,
+      ?lens_name_prefix: String,
+      ?share_resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?profile_name_prefix: String,
+      ?template_name_prefix: String
+    ) -> _ListShareInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListShareInvitationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?workload_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateSharesResponse
+      include Smithy::Client::_Response[Types::ListTemplateSharesOutput]
+      def template_arn: () -> String?
+      def template_share_summaries: () -> Array[Types::TemplateShareSummary]?
+      def next_token: () -> String?
+    end
+    def list_template_shares: (
+      ?template_arn: String,
+      ?shared_with_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListTemplateSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateSharesResponse
+
+    interface _ListWorkloadSharesResponse
+      include Smithy::Client::_Response[Types::ListWorkloadSharesOutput]
+      def workload_id: () -> String?
+      def workload_share_summaries: () -> Array[Types::WorkloadShareSummary]?
+      def next_token: () -> String?
+    end
+    def list_workload_shares: (
+      ?workload_id: String,
+      ?shared_with_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListWorkloadSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadSharesResponse
+
+    interface _ListWorkloadsResponse
+      include Smithy::Client::_Response[Types::ListWorkloadsOutput]
+      def workload_summaries: () -> Array[Types::WorkloadSummary]?
+      def next_token: () -> String?
+    end
+    def list_workloads: (
+      ?workload_name_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkloadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?workload_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?workload_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnswerResponse
+      include Smithy::Client::_Response[Types::UpdateAnswerOutput]
+      def workload_id: () -> String?
+      def lens_alias: () -> String?
+      def lens_arn: () -> String?
+      def answer: () -> Types::Answer?
+    end
+    def update_answer: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?question_id: String,
+      ?selected_choices: Array[String],
+      ?choice_updates: Hash[String,
+        {
+          status: String,
+          reason: String,
+          notes: String
+        }
+      ],
+      ?notes: String,
+      ?is_applicable: bool,
+      ?reason: String
+    ) -> _UpdateAnswerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnswerResponse
+
+    interface _UpdateGlobalSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_global_settings: (
+      ?organization_sharing_status: String,
+      ?discovery_integration_status: String,
+      ?jira_configuration: {
+        issue_management_status: String,
+        issue_management_type: String,
+        jira_project_key: String,
+        integration_status: String
+      }
+    ) -> _UpdateGlobalSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalSettingsResponse
+
+    interface _UpdateIntegrationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_integration: (
+      ?workload_id: String,
+      ?client_request_token: String,
+      ?integrating_service: String
+    ) -> _UpdateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntegrationResponse
+
+    interface _UpdateLensReviewResponse
+      include Smithy::Client::_Response[Types::UpdateLensReviewOutput]
+      def workload_id: () -> String?
+      def lens_review: () -> Types::LensReview?
+    end
+    def update_lens_review: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?lens_notes: String,
+      ?pillar_notes: Hash[String, String],
+      ?jira_configuration: {
+        selected_pillars: Array[
+          {
+            pillar_id: String,
+            selected_question_ids: Array[String]
+          }
+        ]
+      }
+    ) -> _UpdateLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLensReviewResponse
+
+    interface _UpdateProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProfileOutput]
+      def profile: () -> Types::Profile?
+    end
+    def update_profile: (
+      ?profile_arn: String,
+      ?profile_description: String,
+      ?profile_questions: Array[
+        {
+          question_id: String,
+          selected_choice_ids: Array[String]
+        }
+      ]
+    ) -> _UpdateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResponse
+
+    interface _UpdateReviewTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateReviewTemplateOutput]
+      def review_template: () -> Types::ReviewTemplate?
+    end
+    def update_review_template: (
+      ?template_arn: String,
+      ?template_name: String,
+      ?description: String,
+      ?notes: String,
+      ?lenses_to_associate: Array[String],
+      ?lenses_to_disassociate: Array[String]
+    ) -> _UpdateReviewTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReviewTemplateResponse
+
+    interface _UpdateReviewTemplateAnswerResponse
+      include Smithy::Client::_Response[Types::UpdateReviewTemplateAnswerOutput]
+      def template_arn: () -> String?
+      def lens_alias: () -> String?
+      def answer: () -> Types::ReviewTemplateAnswer?
+    end
+    def update_review_template_answer: (
+      ?template_arn: String,
+      ?lens_alias: String,
+      ?question_id: String,
+      ?selected_choices: Array[String],
+      ?choice_updates: Hash[String,
+        {
+          status: String,
+          reason: String,
+          notes: String
+        }
+      ],
+      ?notes: String,
+      ?is_applicable: bool,
+      ?reason: String
+    ) -> _UpdateReviewTemplateAnswerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReviewTemplateAnswerResponse
+
+    interface _UpdateReviewTemplateLensReviewResponse
+      include Smithy::Client::_Response[Types::UpdateReviewTemplateLensReviewOutput]
+      def template_arn: () -> String?
+      def lens_review: () -> Types::ReviewTemplateLensReview?
+    end
+    def update_review_template_lens_review: (
+      ?template_arn: String,
+      ?lens_alias: String,
+      ?lens_notes: String,
+      ?pillar_notes: Hash[String, String]
+    ) -> _UpdateReviewTemplateLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReviewTemplateLensReviewResponse
+
+    interface _UpdateShareInvitationResponse
+      include Smithy::Client::_Response[Types::UpdateShareInvitationOutput]
+      def share_invitation: () -> Types::ShareInvitation?
+    end
+    def update_share_invitation: (
+      ?share_invitation_id: String,
+      ?share_invitation_action: String
+    ) -> _UpdateShareInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateShareInvitationResponse
+
+    interface _UpdateWorkloadResponse
+      include Smithy::Client::_Response[Types::UpdateWorkloadOutput]
+      def workload: () -> Types::Workload?
+    end
+    def update_workload: (
+      ?workload_id: String,
+      ?workload_name: String,
+      ?description: String,
+      ?environment: String,
+      ?account_ids: Array[String],
+      ?aws_regions: Array[String],
+      ?non_aws_regions: Array[String],
+      ?pillar_priorities: Array[String],
+      ?architectural_design: String,
+      ?review_owner: String,
+      ?is_review_owner_update_acknowledged: bool,
+      ?industry_type: String,
+      ?industry: String,
+      ?notes: String,
+      ?improvement_status: String,
+      ?discovery_config: {
+        trusted_advisor_integration_status: String,
+        workload_resource_definition: Array[String]
+      },
+      ?applications: Array[String],
+      ?jira_configuration: {
+        issue_management_status: String,
+        issue_management_type: String,
+        jira_project_key: String
+      }
+    ) -> _UpdateWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkloadResponse
+
+    interface _UpdateWorkloadShareResponse
+      include Smithy::Client::_Response[Types::UpdateWorkloadShareOutput]
+      def workload_id: () -> String?
+      def workload_share: () -> Types::WorkloadShare?
+    end
+    def update_workload_share: (
+      ?share_id: String,
+      ?workload_id: String,
+      ?permission_type: String
+    ) -> _UpdateWorkloadShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkloadShareResponse
+
+    interface _UpgradeLensReviewResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def upgrade_lens_review: (
+      ?workload_id: String,
+      ?lens_alias: String,
+      ?milestone_name: String,
+      ?client_request_token: String
+    ) -> _UpgradeLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeLensReviewResponse
+
+    interface _UpgradeProfileVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def upgrade_profile_version: (
+      ?workload_id: String,
+      ?profile_arn: String,
+      ?milestone_name: String,
+      ?client_request_token: String
+    ) -> _UpgradeProfileVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeProfileVersionResponse
+
+    interface _UpgradeReviewTemplateLensReviewResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def upgrade_review_template_lens_review: (
+      ?template_arn: String,
+      ?lens_alias: String,
+      ?client_request_token: String
+    ) -> _UpgradeReviewTemplateLensReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeReviewTemplateLensReviewResponse
+  end
+end

@@ -1,0 +1,2680 @@
+module Aws::WAFV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WAFV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateWebACLResponse
+      include Smithy::Client::_Response[Types::AssociateWebACLResponse]
+    end
+    def associate_web_acl: (
+      ?web_acl_arn: String,
+      ?resource_arn: String
+    ) -> _AssociateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWebACLResponse
+
+    interface _CheckCapacityResponse
+      include Smithy::Client::_Response[Types::CheckCapacityResponse]
+      def capacity: () -> Integer?
+    end
+    def check_capacity: (
+      ?scope: String,
+      ?rules: Array[
+        {
+          name: String,
+          priority: Integer,
+          statement: {
+            byte_match_statement: {
+              search_string: String,
+              field_to_match: {
+                single_header: {
+                  name: String
+                },
+                single_query_argument: {
+                  name: untyped
+                },
+                all_query_arguments: {
+                },
+                uri_path: {
+                },
+                query_string: {
+                },
+                body: {
+                  oversize_handling: String
+                },
+                method: {
+                },
+                json_body: {
+                  match_pattern: {
+                    all: {
+                    },
+                    included_paths: Array[String]
+                  },
+                  match_scope: String,
+                  invalid_fallback_behavior: String,
+                  oversize_handling: untyped
+                },
+                headers: {
+                  match_pattern: {
+                    all: untyped,
+                    included_headers: Array[String],
+                    excluded_headers: untyped
+                  },
+                  match_scope: String,
+                  oversize_handling: untyped
+                },
+                cookies: {
+                  match_pattern: {
+                    all: untyped,
+                    included_cookies: Array[String],
+                    excluded_cookies: untyped
+                  },
+                  match_scope: untyped,
+                  oversize_handling: untyped
+                },
+                header_order: {
+                  oversize_handling: untyped
+                },
+                ja3_fingerprint: {
+                  fallback_behavior: String
+                },
+                ja4_fingerprint: {
+                  fallback_behavior: untyped
+                },
+                uri_fragment: {
+                  fallback_behavior: untyped
+                }
+              },
+              text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
+              positional_constraint: String
+            },
+            sqli_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped,
+              sensitivity_level: String
+            },
+            xss_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            size_constraint_statement: {
+              field_to_match: untyped,
+              comparison_operator: String,
+              size: Integer,
+              text_transformations: untyped
+            },
+            geo_match_statement: {
+              country_codes: Array[String],
+              forwarded_ip_config: {
+                header_name: String,
+                fallback_behavior: untyped
+              }
+            },
+            rule_group_reference_statement: {
+              arn: String,
+              excluded_rules: Array[
+                {
+                  name: untyped
+                }
+              ],
+              rule_action_overrides: Array[
+                {
+                  name: untyped,
+                  action_to_use: {
+                    block: {
+                      custom_response: {
+                        response_code: Integer,
+                        custom_response_body_key: untyped,
+                        response_headers: Array[
+                          {
+                            name: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    allow: {
+                      custom_request_handling: {
+                        insert_headers: untyped
+                      }
+                    },
+                    count: {
+                      custom_request_handling: untyped
+                    },
+                    captcha: {
+                      custom_request_handling: untyped
+                    },
+                    challenge: {
+                      custom_request_handling: untyped
+                    }
+                  }
+                }
+              ]
+            },
+            ip_set_reference_statement: {
+              arn: untyped,
+              ip_set_forwarded_ip_config: {
+                header_name: untyped,
+                fallback_behavior: untyped,
+                position: String
+              }
+            },
+            regex_pattern_set_reference_statement: {
+              arn: untyped,
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            rate_based_statement: {
+              limit: Integer,
+              evaluation_window_sec: Integer,
+              aggregate_key_type: String,
+              scope_down_statement: untyped,
+              forwarded_ip_config: untyped,
+              custom_keys: Array[
+                {
+                  header: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  cookie: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_argument: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_string: {
+                    text_transformations: untyped
+                  },
+                  http_method: {
+                  },
+                  forwarded_ip: {
+                  },
+                  ip: {
+                  },
+                  label_namespace: {
+                    namespace: String
+                  },
+                  uri_path: {
+                    text_transformations: untyped
+                  },
+                  ja3_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  ja4_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  asn: {
+                  }
+                }
+              ]
+            },
+            and_statement: {
+              statements: Array[
+                {
+                  byte_match_statement: untyped,
+                  sqli_match_statement: untyped,
+                  xss_match_statement: untyped,
+                  size_constraint_statement: untyped,
+                  geo_match_statement: untyped,
+                  rule_group_reference_statement: untyped,
+                  ip_set_reference_statement: untyped,
+                  regex_pattern_set_reference_statement: untyped,
+                  rate_based_statement: untyped,
+                  and_statement: untyped,
+                  or_statement: {
+                    statements: untyped
+                  },
+                  not_statement: {
+                    statement: untyped
+                  },
+                  managed_rule_group_statement: {
+                    vendor_name: String,
+                    name: untyped,
+                    version: String,
+                    excluded_rules: untyped,
+                    scope_down_statement: untyped,
+                    managed_rule_group_configs: Array[
+                      {
+                        login_path: String,
+                        payload_type: String,
+                        username_field: {
+                          identifier: String
+                        },
+                        password_field: {
+                          identifier: untyped
+                        },
+                        aws_managed_rules_bot_control_rule_set: {
+                          inspection_level: String,
+                          enable_machine_learning: bool
+                        },
+                        aws_managed_rules_atp_rule_set: {
+                          login_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped
+                          },
+                          response_inspection: {
+                            status_code: {
+                              success_codes: Array[Integer],
+                              failure_codes: Array[Integer]
+                            },
+                            header: {
+                              name: String,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            },
+                            body_contains: {
+                              success_strings: Array[String],
+                              failure_strings: Array[String]
+                            },
+                            json: {
+                              identifier: untyped,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            }
+                          },
+                          enable_regex_in_path: bool
+                        },
+                        aws_managed_rules_acfp_rule_set: {
+                          creation_path: String,
+                          registration_page_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped,
+                            email_field: {
+                              identifier: untyped
+                            },
+                            phone_number_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ],
+                            address_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ]
+                          },
+                          response_inspection: untyped,
+                          enable_regex_in_path: untyped
+                        },
+                        aws_managed_rules_anti_d_do_s_rule_set: {
+                          client_side_action_config: {
+                            challenge: {
+                              usage_of_action: String,
+                              sensitivity: String,
+                              exempt_uri_regular_expressions: Array[
+                                {
+                                  regex_string: String
+                                }
+                              ]
+                            }
+                          },
+                          sensitivity_to_block: untyped
+                        }
+                      }
+                    ],
+                    rule_action_overrides: untyped
+                  },
+                  label_match_statement: {
+                    scope: String,
+                    key: String
+                  },
+                  regex_match_statement: {
+                    regex_string: untyped,
+                    field_to_match: untyped,
+                    text_transformations: untyped
+                  },
+                  asn_match_statement: {
+                    asn_list: Array[Integer],
+                    forwarded_ip_config: untyped
+                  }
+                }
+              ]
+            },
+            or_statement: untyped,
+            not_statement: untyped,
+            managed_rule_group_statement: untyped,
+            label_match_statement: untyped,
+            regex_match_statement: untyped,
+            asn_match_statement: untyped
+          },
+          action: untyped,
+          override_action: {
+            count: untyped,
+            none: {
+            }
+          },
+          rule_labels: Array[
+            {
+              name: String
+            }
+          ],
+          visibility_config: {
+            sampled_requests_enabled: untyped,
+            cloud_watch_metrics_enabled: untyped,
+            metric_name: String
+          },
+          captcha_config: {
+            immunity_time_property: {
+              immunity_time: Integer
+            }
+          },
+          challenge_config: {
+            immunity_time_property: untyped
+          }
+        }
+      ]
+    ) -> _CheckCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckCapacityResponse
+
+    interface _CreateAPIKeyResponse
+      include Smithy::Client::_Response[Types::CreateAPIKeyResponse]
+      def api_key: () -> String?
+    end
+    def create_api_key: (
+      ?scope: String,
+      ?token_domains: Array[String]
+    ) -> _CreateAPIKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAPIKeyResponse
+
+    interface _CreateIPSetResponse
+      include Smithy::Client::_Response[Types::CreateIPSetResponse]
+      def summary: () -> Types::IPSetSummary?
+    end
+    def create_ip_set: (
+      ?name: String,
+      ?scope: String,
+      ?description: String,
+      ?ip_address_version: String,
+      ?addresses: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIPSetResponse
+
+    interface _CreateRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::CreateRegexPatternSetResponse]
+      def summary: () -> Types::RegexPatternSetSummary?
+    end
+    def create_regex_pattern_set: (
+      ?name: String,
+      ?scope: String,
+      ?description: String,
+      ?regular_expression_list: Array[
+        {
+          regex_string: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegexPatternSetResponse
+
+    interface _CreateRuleGroupResponse
+      include Smithy::Client::_Response[Types::CreateRuleGroupResponse]
+      def summary: () -> Types::RuleGroupSummary?
+    end
+    def create_rule_group: (
+      ?name: String,
+      ?scope: String,
+      ?capacity: Integer,
+      ?description: String,
+      ?rules: Array[
+        {
+          name: String,
+          priority: Integer,
+          statement: {
+            byte_match_statement: {
+              search_string: String,
+              field_to_match: {
+                single_header: {
+                  name: String
+                },
+                single_query_argument: {
+                  name: untyped
+                },
+                all_query_arguments: {
+                },
+                uri_path: {
+                },
+                query_string: {
+                },
+                body: {
+                  oversize_handling: String
+                },
+                method: {
+                },
+                json_body: {
+                  match_pattern: {
+                    all: {
+                    },
+                    included_paths: Array[String]
+                  },
+                  match_scope: String,
+                  invalid_fallback_behavior: String,
+                  oversize_handling: untyped
+                },
+                headers: {
+                  match_pattern: {
+                    all: untyped,
+                    included_headers: Array[String],
+                    excluded_headers: untyped
+                  },
+                  match_scope: String,
+                  oversize_handling: untyped
+                },
+                cookies: {
+                  match_pattern: {
+                    all: untyped,
+                    included_cookies: Array[String],
+                    excluded_cookies: untyped
+                  },
+                  match_scope: untyped,
+                  oversize_handling: untyped
+                },
+                header_order: {
+                  oversize_handling: untyped
+                },
+                ja3_fingerprint: {
+                  fallback_behavior: String
+                },
+                ja4_fingerprint: {
+                  fallback_behavior: untyped
+                },
+                uri_fragment: {
+                  fallback_behavior: untyped
+                }
+              },
+              text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
+              positional_constraint: String
+            },
+            sqli_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped,
+              sensitivity_level: String
+            },
+            xss_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            size_constraint_statement: {
+              field_to_match: untyped,
+              comparison_operator: String,
+              size: Integer,
+              text_transformations: untyped
+            },
+            geo_match_statement: {
+              country_codes: Array[String],
+              forwarded_ip_config: {
+                header_name: String,
+                fallback_behavior: untyped
+              }
+            },
+            rule_group_reference_statement: {
+              arn: String,
+              excluded_rules: Array[
+                {
+                  name: untyped
+                }
+              ],
+              rule_action_overrides: Array[
+                {
+                  name: untyped,
+                  action_to_use: {
+                    block: {
+                      custom_response: {
+                        response_code: Integer,
+                        custom_response_body_key: untyped,
+                        response_headers: Array[
+                          {
+                            name: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    allow: {
+                      custom_request_handling: {
+                        insert_headers: untyped
+                      }
+                    },
+                    count: {
+                      custom_request_handling: untyped
+                    },
+                    captcha: {
+                      custom_request_handling: untyped
+                    },
+                    challenge: {
+                      custom_request_handling: untyped
+                    }
+                  }
+                }
+              ]
+            },
+            ip_set_reference_statement: {
+              arn: untyped,
+              ip_set_forwarded_ip_config: {
+                header_name: untyped,
+                fallback_behavior: untyped,
+                position: String
+              }
+            },
+            regex_pattern_set_reference_statement: {
+              arn: untyped,
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            rate_based_statement: {
+              limit: Integer,
+              evaluation_window_sec: Integer,
+              aggregate_key_type: String,
+              scope_down_statement: untyped,
+              forwarded_ip_config: untyped,
+              custom_keys: Array[
+                {
+                  header: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  cookie: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_argument: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_string: {
+                    text_transformations: untyped
+                  },
+                  http_method: {
+                  },
+                  forwarded_ip: {
+                  },
+                  ip: {
+                  },
+                  label_namespace: {
+                    namespace: String
+                  },
+                  uri_path: {
+                    text_transformations: untyped
+                  },
+                  ja3_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  ja4_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  asn: {
+                  }
+                }
+              ]
+            },
+            and_statement: {
+              statements: Array[
+                {
+                  byte_match_statement: untyped,
+                  sqli_match_statement: untyped,
+                  xss_match_statement: untyped,
+                  size_constraint_statement: untyped,
+                  geo_match_statement: untyped,
+                  rule_group_reference_statement: untyped,
+                  ip_set_reference_statement: untyped,
+                  regex_pattern_set_reference_statement: untyped,
+                  rate_based_statement: untyped,
+                  and_statement: untyped,
+                  or_statement: {
+                    statements: untyped
+                  },
+                  not_statement: {
+                    statement: untyped
+                  },
+                  managed_rule_group_statement: {
+                    vendor_name: String,
+                    name: untyped,
+                    version: String,
+                    excluded_rules: untyped,
+                    scope_down_statement: untyped,
+                    managed_rule_group_configs: Array[
+                      {
+                        login_path: String,
+                        payload_type: String,
+                        username_field: {
+                          identifier: String
+                        },
+                        password_field: {
+                          identifier: untyped
+                        },
+                        aws_managed_rules_bot_control_rule_set: {
+                          inspection_level: String,
+                          enable_machine_learning: bool
+                        },
+                        aws_managed_rules_atp_rule_set: {
+                          login_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped
+                          },
+                          response_inspection: {
+                            status_code: {
+                              success_codes: Array[Integer],
+                              failure_codes: Array[Integer]
+                            },
+                            header: {
+                              name: String,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            },
+                            body_contains: {
+                              success_strings: Array[String],
+                              failure_strings: Array[String]
+                            },
+                            json: {
+                              identifier: untyped,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            }
+                          },
+                          enable_regex_in_path: bool
+                        },
+                        aws_managed_rules_acfp_rule_set: {
+                          creation_path: String,
+                          registration_page_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped,
+                            email_field: {
+                              identifier: untyped
+                            },
+                            phone_number_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ],
+                            address_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ]
+                          },
+                          response_inspection: untyped,
+                          enable_regex_in_path: untyped
+                        },
+                        aws_managed_rules_anti_d_do_s_rule_set: {
+                          client_side_action_config: {
+                            challenge: {
+                              usage_of_action: String,
+                              sensitivity: String,
+                              exempt_uri_regular_expressions: Array[
+                                {
+                                  regex_string: String
+                                }
+                              ]
+                            }
+                          },
+                          sensitivity_to_block: untyped
+                        }
+                      }
+                    ],
+                    rule_action_overrides: untyped
+                  },
+                  label_match_statement: {
+                    scope: String,
+                    key: String
+                  },
+                  regex_match_statement: {
+                    regex_string: untyped,
+                    field_to_match: untyped,
+                    text_transformations: untyped
+                  },
+                  asn_match_statement: {
+                    asn_list: Array[Integer],
+                    forwarded_ip_config: untyped
+                  }
+                }
+              ]
+            },
+            or_statement: untyped,
+            not_statement: untyped,
+            managed_rule_group_statement: untyped,
+            label_match_statement: untyped,
+            regex_match_statement: untyped,
+            asn_match_statement: untyped
+          },
+          action: untyped,
+          override_action: {
+            count: untyped,
+            none: {
+            }
+          },
+          rule_labels: Array[
+            {
+              name: String
+            }
+          ],
+          visibility_config: {
+            sampled_requests_enabled: untyped,
+            cloud_watch_metrics_enabled: untyped,
+            metric_name: String
+          },
+          captcha_config: {
+            immunity_time_property: {
+              immunity_time: Integer
+            }
+          },
+          challenge_config: {
+            immunity_time_property: untyped
+          }
+        }
+      ],
+      ?visibility_config: {
+        sampled_requests_enabled: bool,
+        cloud_watch_metrics_enabled: untyped,
+        metric_name: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?custom_response_bodies: Hash[String,
+        {
+          content_type: String,
+          content: String
+        }
+      ]
+    ) -> _CreateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleGroupResponse
+
+    interface _CreateWebACLResponse
+      include Smithy::Client::_Response[Types::CreateWebACLResponse]
+      def summary: () -> Types::WebACLSummary?
+    end
+    def create_web_acl: (
+      ?name: String,
+      ?scope: String,
+      ?default_action: {
+        block: {
+          custom_response: {
+            response_code: Integer,
+            custom_response_body_key: String,
+            response_headers: Array[
+              {
+                name: String,
+                value: String
+              }
+            ]
+          }
+        },
+        allow: {
+          custom_request_handling: {
+            insert_headers: untyped
+          }
+        }
+      },
+      ?description: String,
+      ?rules: Array[
+        {
+          name: String,
+          priority: Integer,
+          statement: {
+            byte_match_statement: {
+              search_string: String,
+              field_to_match: {
+                single_header: {
+                  name: String
+                },
+                single_query_argument: {
+                  name: untyped
+                },
+                all_query_arguments: {
+                },
+                uri_path: {
+                },
+                query_string: {
+                },
+                body: {
+                  oversize_handling: String
+                },
+                method: {
+                },
+                json_body: {
+                  match_pattern: {
+                    all: {
+                    },
+                    included_paths: Array[String]
+                  },
+                  match_scope: String,
+                  invalid_fallback_behavior: String,
+                  oversize_handling: untyped
+                },
+                headers: {
+                  match_pattern: {
+                    all: untyped,
+                    included_headers: Array[String],
+                    excluded_headers: untyped
+                  },
+                  match_scope: String,
+                  oversize_handling: untyped
+                },
+                cookies: {
+                  match_pattern: {
+                    all: untyped,
+                    included_cookies: Array[String],
+                    excluded_cookies: untyped
+                  },
+                  match_scope: untyped,
+                  oversize_handling: untyped
+                },
+                header_order: {
+                  oversize_handling: untyped
+                },
+                ja3_fingerprint: {
+                  fallback_behavior: String
+                },
+                ja4_fingerprint: {
+                  fallback_behavior: untyped
+                },
+                uri_fragment: {
+                  fallback_behavior: untyped
+                }
+              },
+              text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
+              positional_constraint: String
+            },
+            sqli_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped,
+              sensitivity_level: String
+            },
+            xss_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            size_constraint_statement: {
+              field_to_match: untyped,
+              comparison_operator: String,
+              size: Integer,
+              text_transformations: untyped
+            },
+            geo_match_statement: {
+              country_codes: Array[String],
+              forwarded_ip_config: {
+                header_name: String,
+                fallback_behavior: untyped
+              }
+            },
+            rule_group_reference_statement: {
+              arn: String,
+              excluded_rules: Array[
+                {
+                  name: untyped
+                }
+              ],
+              rule_action_overrides: Array[
+                {
+                  name: untyped,
+                  action_to_use: {
+                    block: {
+                      custom_response: {
+                        response_code: Integer,
+                        custom_response_body_key: untyped,
+                        response_headers: Array[
+                          {
+                            name: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    allow: {
+                      custom_request_handling: {
+                        insert_headers: untyped
+                      }
+                    },
+                    count: {
+                      custom_request_handling: untyped
+                    },
+                    captcha: {
+                      custom_request_handling: untyped
+                    },
+                    challenge: {
+                      custom_request_handling: untyped
+                    }
+                  }
+                }
+              ]
+            },
+            ip_set_reference_statement: {
+              arn: untyped,
+              ip_set_forwarded_ip_config: {
+                header_name: untyped,
+                fallback_behavior: untyped,
+                position: String
+              }
+            },
+            regex_pattern_set_reference_statement: {
+              arn: untyped,
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            rate_based_statement: {
+              limit: Integer,
+              evaluation_window_sec: Integer,
+              aggregate_key_type: String,
+              scope_down_statement: untyped,
+              forwarded_ip_config: untyped,
+              custom_keys: Array[
+                {
+                  header: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  cookie: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_argument: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_string: {
+                    text_transformations: untyped
+                  },
+                  http_method: {
+                  },
+                  forwarded_ip: {
+                  },
+                  ip: {
+                  },
+                  label_namespace: {
+                    namespace: String
+                  },
+                  uri_path: {
+                    text_transformations: untyped
+                  },
+                  ja3_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  ja4_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  asn: {
+                  }
+                }
+              ]
+            },
+            and_statement: {
+              statements: Array[
+                {
+                  byte_match_statement: untyped,
+                  sqli_match_statement: untyped,
+                  xss_match_statement: untyped,
+                  size_constraint_statement: untyped,
+                  geo_match_statement: untyped,
+                  rule_group_reference_statement: untyped,
+                  ip_set_reference_statement: untyped,
+                  regex_pattern_set_reference_statement: untyped,
+                  rate_based_statement: untyped,
+                  and_statement: untyped,
+                  or_statement: {
+                    statements: untyped
+                  },
+                  not_statement: {
+                    statement: untyped
+                  },
+                  managed_rule_group_statement: {
+                    vendor_name: String,
+                    name: untyped,
+                    version: String,
+                    excluded_rules: untyped,
+                    scope_down_statement: untyped,
+                    managed_rule_group_configs: Array[
+                      {
+                        login_path: String,
+                        payload_type: String,
+                        username_field: {
+                          identifier: String
+                        },
+                        password_field: {
+                          identifier: untyped
+                        },
+                        aws_managed_rules_bot_control_rule_set: {
+                          inspection_level: String,
+                          enable_machine_learning: bool
+                        },
+                        aws_managed_rules_atp_rule_set: {
+                          login_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped
+                          },
+                          response_inspection: {
+                            status_code: {
+                              success_codes: Array[Integer],
+                              failure_codes: Array[Integer]
+                            },
+                            header: {
+                              name: String,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            },
+                            body_contains: {
+                              success_strings: Array[String],
+                              failure_strings: Array[String]
+                            },
+                            json: {
+                              identifier: untyped,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            }
+                          },
+                          enable_regex_in_path: bool
+                        },
+                        aws_managed_rules_acfp_rule_set: {
+                          creation_path: String,
+                          registration_page_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped,
+                            email_field: {
+                              identifier: untyped
+                            },
+                            phone_number_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ],
+                            address_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ]
+                          },
+                          response_inspection: untyped,
+                          enable_regex_in_path: untyped
+                        },
+                        aws_managed_rules_anti_d_do_s_rule_set: {
+                          client_side_action_config: {
+                            challenge: {
+                              usage_of_action: String,
+                              sensitivity: String,
+                              exempt_uri_regular_expressions: Array[
+                                {
+                                  regex_string: String
+                                }
+                              ]
+                            }
+                          },
+                          sensitivity_to_block: untyped
+                        }
+                      }
+                    ],
+                    rule_action_overrides: untyped
+                  },
+                  label_match_statement: {
+                    scope: String,
+                    key: String
+                  },
+                  regex_match_statement: {
+                    regex_string: untyped,
+                    field_to_match: untyped,
+                    text_transformations: untyped
+                  },
+                  asn_match_statement: {
+                    asn_list: Array[Integer],
+                    forwarded_ip_config: untyped
+                  }
+                }
+              ]
+            },
+            or_statement: untyped,
+            not_statement: untyped,
+            managed_rule_group_statement: untyped,
+            label_match_statement: untyped,
+            regex_match_statement: untyped,
+            asn_match_statement: untyped
+          },
+          action: untyped,
+          override_action: {
+            count: untyped,
+            none: {
+            }
+          },
+          rule_labels: Array[
+            {
+              name: String
+            }
+          ],
+          visibility_config: {
+            sampled_requests_enabled: untyped,
+            cloud_watch_metrics_enabled: untyped,
+            metric_name: String
+          },
+          captcha_config: {
+            immunity_time_property: {
+              immunity_time: Integer
+            }
+          },
+          challenge_config: {
+            immunity_time_property: untyped
+          }
+        }
+      ],
+      ?visibility_config: {
+        sampled_requests_enabled: bool,
+        cloud_watch_metrics_enabled: untyped,
+        metric_name: String
+      },
+      ?data_protection_config: {
+        data_protections: Array[
+          {
+            field: {
+              field_type: String,
+              field_keys: Array[String]
+            },
+            action: String,
+            exclude_rule_match_details: bool,
+            exclude_rate_based_details: untyped
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?custom_response_bodies: Hash[String,
+        {
+          content_type: String,
+          content: String
+        }
+      ],
+      ?captcha_config: {
+        immunity_time_property: {
+          immunity_time: Integer
+        }
+      },
+      ?challenge_config: {
+        immunity_time_property: {
+          immunity_time: Integer
+        }
+      },
+      ?token_domains: Array[String],
+      ?association_config: {
+        request_body: Hash[String,
+          {
+            default_size_inspection_limit: String
+          }
+        ]
+      },
+      ?on_source_d_do_s_protection_config: {
+        alb_low_reputation_mode: String
+      },
+      ?application_config: {
+        attributes: Array[
+          {
+            name: String,
+            values: Array[String]
+          }
+        ]
+      }
+    ) -> _CreateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebACLResponse
+
+    interface _DeleteAPIKeyResponse
+      include Smithy::Client::_Response[Types::DeleteAPIKeyResponse]
+    end
+    def delete_api_key: (
+      ?scope: String,
+      ?api_key: String
+    ) -> _DeleteAPIKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAPIKeyResponse
+
+    interface _DeleteFirewallManagerRuleGroupsResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallManagerRuleGroupsResponse]
+      def next_web_acl_lock_token: () -> String?
+    end
+    def delete_firewall_manager_rule_groups: (
+      ?web_acl_arn: String,
+      ?web_acl_lock_token: String
+    ) -> _DeleteFirewallManagerRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallManagerRuleGroupsResponse
+
+    interface _DeleteIPSetResponse
+      include Smithy::Client::_Response[Types::DeleteIPSetResponse]
+    end
+    def delete_ip_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String
+    ) -> _DeleteIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIPSetResponse
+
+    interface _DeleteLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteLoggingConfigurationResponse]
+    end
+    def delete_logging_configuration: (
+      ?resource_arn: String,
+      ?log_type: String,
+      ?log_scope: String
+    ) -> _DeleteLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoggingConfigurationResponse
+
+    interface _DeletePermissionPolicyResponse
+      include Smithy::Client::_Response[Types::DeletePermissionPolicyResponse]
+    end
+    def delete_permission_policy: (
+      ?resource_arn: String
+    ) -> _DeletePermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionPolicyResponse
+
+    interface _DeleteRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::DeleteRegexPatternSetResponse]
+    end
+    def delete_regex_pattern_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String
+    ) -> _DeleteRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegexPatternSetResponse
+
+    interface _DeleteRuleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteRuleGroupResponse]
+    end
+    def delete_rule_group: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String
+    ) -> _DeleteRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleGroupResponse
+
+    interface _DeleteWebACLResponse
+      include Smithy::Client::_Response[Types::DeleteWebACLResponse]
+    end
+    def delete_web_acl: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String
+    ) -> _DeleteWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebACLResponse
+
+    interface _DescribeAllManagedProductsResponse
+      include Smithy::Client::_Response[Types::DescribeAllManagedProductsResponse]
+      def managed_products: () -> Array[Types::ManagedProductDescriptor]?
+    end
+    def describe_all_managed_products: (
+      ?scope: String
+    ) -> _DescribeAllManagedProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAllManagedProductsResponse
+
+    interface _DescribeManagedProductsByVendorResponse
+      include Smithy::Client::_Response[Types::DescribeManagedProductsByVendorResponse]
+      def managed_products: () -> Array[Types::ManagedProductDescriptor]?
+    end
+    def describe_managed_products_by_vendor: (
+      ?vendor_name: String,
+      ?scope: String
+    ) -> _DescribeManagedProductsByVendorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeManagedProductsByVendorResponse
+
+    interface _DescribeManagedRuleGroupResponse
+      include Smithy::Client::_Response[Types::DescribeManagedRuleGroupResponse]
+      def version_name: () -> String?
+      def sns_topic_arn: () -> String?
+      def capacity: () -> Integer?
+      def rules: () -> Array[Types::RuleSummary]?
+      def label_namespace: () -> String?
+      def available_labels: () -> Array[Types::LabelSummary]?
+      def consumed_labels: () -> Array[Types::LabelSummary]?
+    end
+    def describe_managed_rule_group: (
+      ?vendor_name: String,
+      ?name: String,
+      ?scope: String,
+      ?version_name: String
+    ) -> _DescribeManagedRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeManagedRuleGroupResponse
+
+    interface _DisassociateWebACLResponse
+      include Smithy::Client::_Response[Types::DisassociateWebACLResponse]
+    end
+    def disassociate_web_acl: (
+      ?resource_arn: String
+    ) -> _DisassociateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWebACLResponse
+
+    interface _GenerateMobileSdkReleaseUrlResponse
+      include Smithy::Client::_Response[Types::GenerateMobileSdkReleaseUrlResponse]
+      def url: () -> String?
+    end
+    def generate_mobile_sdk_release_url: (
+      ?platform: String,
+      ?release_version: String
+    ) -> _GenerateMobileSdkReleaseUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMobileSdkReleaseUrlResponse
+
+    interface _GetDecryptedAPIKeyResponse
+      include Smithy::Client::_Response[Types::GetDecryptedAPIKeyResponse]
+      def token_domains: () -> Array[String]?
+      def creation_timestamp: () -> Time?
+    end
+    def get_decrypted_api_key: (
+      ?scope: String,
+      ?api_key: String
+    ) -> _GetDecryptedAPIKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDecryptedAPIKeyResponse
+
+    interface _GetIPSetResponse
+      include Smithy::Client::_Response[Types::GetIPSetResponse]
+      def ip_set: () -> Types::IPSet?
+      def lock_token: () -> String?
+    end
+    def get_ip_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String
+    ) -> _GetIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIPSetResponse
+
+    interface _GetLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def get_logging_configuration: (
+      ?resource_arn: String,
+      ?log_type: String,
+      ?log_scope: String
+    ) -> _GetLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoggingConfigurationResponse
+
+    interface _GetManagedRuleSetResponse
+      include Smithy::Client::_Response[Types::GetManagedRuleSetResponse]
+      def managed_rule_set: () -> Types::ManagedRuleSet?
+      def lock_token: () -> String?
+    end
+    def get_managed_rule_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String
+    ) -> _GetManagedRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedRuleSetResponse
+
+    interface _GetMobileSdkReleaseResponse
+      include Smithy::Client::_Response[Types::GetMobileSdkReleaseResponse]
+      def mobile_sdk_release: () -> Types::MobileSdkRelease?
+    end
+    def get_mobile_sdk_release: (
+      ?platform: String,
+      ?release_version: String
+    ) -> _GetMobileSdkReleaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMobileSdkReleaseResponse
+
+    interface _GetPermissionPolicyResponse
+      include Smithy::Client::_Response[Types::GetPermissionPolicyResponse]
+      def policy: () -> String?
+    end
+    def get_permission_policy: (
+      ?resource_arn: String
+    ) -> _GetPermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPermissionPolicyResponse
+
+    interface _GetRateBasedStatementManagedKeysResponse
+      include Smithy::Client::_Response[Types::GetRateBasedStatementManagedKeysResponse]
+      def managed_keys_ipv4: () -> Types::RateBasedStatementManagedKeysIPSet?
+      def managed_keys_ipv6: () -> Types::RateBasedStatementManagedKeysIPSet?
+    end
+    def get_rate_based_statement_managed_keys: (
+      ?scope: String,
+      ?web_acl_name: String,
+      ?web_acl_id: String,
+      ?rule_group_rule_name: String,
+      ?rule_name: String
+    ) -> _GetRateBasedStatementManagedKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRateBasedStatementManagedKeysResponse
+
+    interface _GetRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::GetRegexPatternSetResponse]
+      def regex_pattern_set: () -> Types::RegexPatternSet?
+      def lock_token: () -> String?
+    end
+    def get_regex_pattern_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String
+    ) -> _GetRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegexPatternSetResponse
+
+    interface _GetRuleGroupResponse
+      include Smithy::Client::_Response[Types::GetRuleGroupResponse]
+      def rule_group: () -> Types::RuleGroup?
+      def lock_token: () -> String?
+    end
+    def get_rule_group: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?arn: String
+    ) -> _GetRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleGroupResponse
+
+    interface _GetSampledRequestsResponse
+      include Smithy::Client::_Response[Types::GetSampledRequestsResponse]
+      def sampled_requests: () -> Array[Types::SampledHTTPRequest]?
+      def population_size: () -> Integer?
+      def time_window: () -> Types::TimeWindow?
+    end
+    def get_sampled_requests: (
+      ?web_acl_arn: String,
+      ?rule_metric_name: String,
+      ?scope: String,
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?max_items: Integer
+    ) -> _GetSampledRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSampledRequestsResponse
+
+    interface _GetWebACLResponse
+      include Smithy::Client::_Response[Types::GetWebACLResponse]
+      def web_acl: () -> Types::WebACL?
+      def lock_token: () -> String?
+      def application_integration_url: () -> String?
+    end
+    def get_web_acl: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?arn: String
+    ) -> _GetWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebACLResponse
+
+    interface _GetWebACLForResourceResponse
+      include Smithy::Client::_Response[Types::GetWebACLForResourceResponse]
+      def web_acl: () -> Types::WebACL?
+    end
+    def get_web_acl_for_resource: (
+      ?resource_arn: String
+    ) -> _GetWebACLForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebACLForResourceResponse
+
+    interface _ListAPIKeysResponse
+      include Smithy::Client::_Response[Types::ListAPIKeysResponse]
+      def next_marker: () -> String?
+      def api_key_summaries: () -> Array[Types::APIKeySummary]?
+      def application_integration_url: () -> String?
+    end
+    def list_api_keys: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListAPIKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAPIKeysResponse
+
+    interface _ListAvailableManagedRuleGroupVersionsResponse
+      include Smithy::Client::_Response[Types::ListAvailableManagedRuleGroupVersionsResponse]
+      def next_marker: () -> String?
+      def versions: () -> Array[Types::ManagedRuleGroupVersion]?
+      def current_default_version: () -> String?
+    end
+    def list_available_managed_rule_group_versions: (
+      ?vendor_name: String,
+      ?name: String,
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListAvailableManagedRuleGroupVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableManagedRuleGroupVersionsResponse
+
+    interface _ListAvailableManagedRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListAvailableManagedRuleGroupsResponse]
+      def next_marker: () -> String?
+      def managed_rule_groups: () -> Array[Types::ManagedRuleGroupSummary]?
+    end
+    def list_available_managed_rule_groups: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListAvailableManagedRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableManagedRuleGroupsResponse
+
+    interface _ListIPSetsResponse
+      include Smithy::Client::_Response[Types::ListIPSetsResponse]
+      def next_marker: () -> String?
+      def ip_sets: () -> Array[Types::IPSetSummary]?
+    end
+    def list_ip_sets: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListIPSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIPSetsResponse
+
+    interface _ListLoggingConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListLoggingConfigurationsResponse]
+      def logging_configurations: () -> Array[Types::LoggingConfiguration]?
+      def next_marker: () -> String?
+    end
+    def list_logging_configurations: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer,
+      ?log_scope: String
+    ) -> _ListLoggingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLoggingConfigurationsResponse
+
+    interface _ListManagedRuleSetsResponse
+      include Smithy::Client::_Response[Types::ListManagedRuleSetsResponse]
+      def next_marker: () -> String?
+      def managed_rule_sets: () -> Array[Types::ManagedRuleSetSummary]?
+    end
+    def list_managed_rule_sets: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListManagedRuleSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedRuleSetsResponse
+
+    interface _ListMobileSdkReleasesResponse
+      include Smithy::Client::_Response[Types::ListMobileSdkReleasesResponse]
+      def release_summaries: () -> Array[Types::ReleaseSummary]?
+      def next_marker: () -> String?
+    end
+    def list_mobile_sdk_releases: (
+      ?platform: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListMobileSdkReleasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMobileSdkReleasesResponse
+
+    interface _ListRegexPatternSetsResponse
+      include Smithy::Client::_Response[Types::ListRegexPatternSetsResponse]
+      def next_marker: () -> String?
+      def regex_pattern_sets: () -> Array[Types::RegexPatternSetSummary]?
+    end
+    def list_regex_pattern_sets: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRegexPatternSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegexPatternSetsResponse
+
+    interface _ListResourcesForWebACLResponse
+      include Smithy::Client::_Response[Types::ListResourcesForWebACLResponse]
+      def resource_arns: () -> Array[String]?
+    end
+    def list_resources_for_web_acl: (
+      ?web_acl_arn: String,
+      ?resource_type: String
+    ) -> _ListResourcesForWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesForWebACLResponse
+
+    interface _ListRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListRuleGroupsResponse]
+      def next_marker: () -> String?
+      def rule_groups: () -> Array[Types::RuleGroupSummary]?
+    end
+    def list_rule_groups: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def next_marker: () -> String?
+      def tag_info_for_resource: () -> Types::TagInfoForResource?
+    end
+    def list_tags_for_resource: (
+      ?next_marker: String,
+      ?limit: Integer,
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWebACLsResponse
+      include Smithy::Client::_Response[Types::ListWebACLsResponse]
+      def next_marker: () -> String?
+      def web_ac_ls: () -> Array[Types::WebACLSummary]?
+    end
+    def list_web_ac_ls: (
+      ?scope: String,
+      ?next_marker: String,
+      ?limit: Integer
+    ) -> _ListWebACLsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebACLsResponse
+
+    interface _PutLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def put_logging_configuration: (
+      ?logging_configuration: {
+        resource_arn: String,
+        log_destination_configs: Array[String],
+        redacted_fields: Array[
+          {
+            single_header: {
+              name: String
+            },
+            single_query_argument: {
+              name: untyped
+            },
+            all_query_arguments: {
+            },
+            uri_path: {
+            },
+            query_string: {
+            },
+            body: {
+              oversize_handling: String
+            },
+            method: {
+            },
+            json_body: {
+              match_pattern: {
+                all: {
+                },
+                included_paths: Array[String]
+              },
+              match_scope: String,
+              invalid_fallback_behavior: String,
+              oversize_handling: untyped
+            },
+            headers: {
+              match_pattern: {
+                all: untyped,
+                included_headers: Array[String],
+                excluded_headers: untyped
+              },
+              match_scope: String,
+              oversize_handling: untyped
+            },
+            cookies: {
+              match_pattern: {
+                all: untyped,
+                included_cookies: Array[String],
+                excluded_cookies: untyped
+              },
+              match_scope: untyped,
+              oversize_handling: untyped
+            },
+            header_order: {
+              oversize_handling: untyped
+            },
+            ja3_fingerprint: {
+              fallback_behavior: String
+            },
+            ja4_fingerprint: {
+              fallback_behavior: untyped
+            },
+            uri_fragment: {
+              fallback_behavior: untyped
+            }
+          }
+        ],
+        managed_by_firewall_manager: bool,
+        logging_filter: {
+          filters: Array[
+            {
+              behavior: String,
+              requirement: String,
+              conditions: Array[
+                {
+                  action_condition: {
+                    action: String
+                  },
+                  label_name_condition: {
+                    label_name: String
+                  }
+                }
+              ]
+            }
+          ],
+          default_behavior: untyped
+        },
+        log_type: String,
+        log_scope: String
+      }
+    ) -> _PutLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingConfigurationResponse
+
+    interface _PutManagedRuleSetVersionsResponse
+      include Smithy::Client::_Response[Types::PutManagedRuleSetVersionsResponse]
+      def next_lock_token: () -> String?
+    end
+    def put_managed_rule_set_versions: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String,
+      ?recommended_version: String,
+      ?versions_to_publish: Hash[String,
+        {
+          associated_rule_group_arn: String,
+          forecasted_lifetime: Integer
+        }
+      ]
+    ) -> _PutManagedRuleSetVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutManagedRuleSetVersionsResponse
+
+    interface _PutPermissionPolicyResponse
+      include Smithy::Client::_Response[Types::PutPermissionPolicyResponse]
+    end
+    def put_permission_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutPermissionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPermissionPolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIPSetResponse
+      include Smithy::Client::_Response[Types::UpdateIPSetResponse]
+      def next_lock_token: () -> String?
+    end
+    def update_ip_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?description: String,
+      ?addresses: Array[String],
+      ?lock_token: String
+    ) -> _UpdateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIPSetResponse
+
+    interface _UpdateManagedRuleSetVersionExpiryDateResponse
+      include Smithy::Client::_Response[Types::UpdateManagedRuleSetVersionExpiryDateResponse]
+      def expiring_version: () -> String?
+      def expiry_timestamp: () -> Time?
+      def next_lock_token: () -> String?
+    end
+    def update_managed_rule_set_version_expiry_date: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?lock_token: String,
+      ?version_to_expire: String,
+      ?expiry_timestamp: Time
+    ) -> _UpdateManagedRuleSetVersionExpiryDateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedRuleSetVersionExpiryDateResponse
+
+    interface _UpdateRegexPatternSetResponse
+      include Smithy::Client::_Response[Types::UpdateRegexPatternSetResponse]
+      def next_lock_token: () -> String?
+    end
+    def update_regex_pattern_set: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?description: String,
+      ?regular_expression_list: Array[
+        {
+          regex_string: String
+        }
+      ],
+      ?lock_token: String
+    ) -> _UpdateRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegexPatternSetResponse
+
+    interface _UpdateRuleGroupResponse
+      include Smithy::Client::_Response[Types::UpdateRuleGroupResponse]
+      def next_lock_token: () -> String?
+    end
+    def update_rule_group: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          name: String,
+          priority: Integer,
+          statement: {
+            byte_match_statement: {
+              search_string: String,
+              field_to_match: {
+                single_header: {
+                  name: String
+                },
+                single_query_argument: {
+                  name: untyped
+                },
+                all_query_arguments: {
+                },
+                uri_path: {
+                },
+                query_string: {
+                },
+                body: {
+                  oversize_handling: String
+                },
+                method: {
+                },
+                json_body: {
+                  match_pattern: {
+                    all: {
+                    },
+                    included_paths: Array[String]
+                  },
+                  match_scope: String,
+                  invalid_fallback_behavior: String,
+                  oversize_handling: untyped
+                },
+                headers: {
+                  match_pattern: {
+                    all: untyped,
+                    included_headers: Array[String],
+                    excluded_headers: untyped
+                  },
+                  match_scope: String,
+                  oversize_handling: untyped
+                },
+                cookies: {
+                  match_pattern: {
+                    all: untyped,
+                    included_cookies: Array[String],
+                    excluded_cookies: untyped
+                  },
+                  match_scope: untyped,
+                  oversize_handling: untyped
+                },
+                header_order: {
+                  oversize_handling: untyped
+                },
+                ja3_fingerprint: {
+                  fallback_behavior: String
+                },
+                ja4_fingerprint: {
+                  fallback_behavior: untyped
+                },
+                uri_fragment: {
+                  fallback_behavior: untyped
+                }
+              },
+              text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
+              positional_constraint: String
+            },
+            sqli_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped,
+              sensitivity_level: String
+            },
+            xss_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            size_constraint_statement: {
+              field_to_match: untyped,
+              comparison_operator: String,
+              size: Integer,
+              text_transformations: untyped
+            },
+            geo_match_statement: {
+              country_codes: Array[String],
+              forwarded_ip_config: {
+                header_name: String,
+                fallback_behavior: untyped
+              }
+            },
+            rule_group_reference_statement: {
+              arn: String,
+              excluded_rules: Array[
+                {
+                  name: untyped
+                }
+              ],
+              rule_action_overrides: Array[
+                {
+                  name: untyped,
+                  action_to_use: {
+                    block: {
+                      custom_response: {
+                        response_code: Integer,
+                        custom_response_body_key: untyped,
+                        response_headers: Array[
+                          {
+                            name: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    allow: {
+                      custom_request_handling: {
+                        insert_headers: untyped
+                      }
+                    },
+                    count: {
+                      custom_request_handling: untyped
+                    },
+                    captcha: {
+                      custom_request_handling: untyped
+                    },
+                    challenge: {
+                      custom_request_handling: untyped
+                    }
+                  }
+                }
+              ]
+            },
+            ip_set_reference_statement: {
+              arn: untyped,
+              ip_set_forwarded_ip_config: {
+                header_name: untyped,
+                fallback_behavior: untyped,
+                position: String
+              }
+            },
+            regex_pattern_set_reference_statement: {
+              arn: untyped,
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            rate_based_statement: {
+              limit: Integer,
+              evaluation_window_sec: Integer,
+              aggregate_key_type: String,
+              scope_down_statement: untyped,
+              forwarded_ip_config: untyped,
+              custom_keys: Array[
+                {
+                  header: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  cookie: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_argument: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_string: {
+                    text_transformations: untyped
+                  },
+                  http_method: {
+                  },
+                  forwarded_ip: {
+                  },
+                  ip: {
+                  },
+                  label_namespace: {
+                    namespace: String
+                  },
+                  uri_path: {
+                    text_transformations: untyped
+                  },
+                  ja3_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  ja4_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  asn: {
+                  }
+                }
+              ]
+            },
+            and_statement: {
+              statements: Array[
+                {
+                  byte_match_statement: untyped,
+                  sqli_match_statement: untyped,
+                  xss_match_statement: untyped,
+                  size_constraint_statement: untyped,
+                  geo_match_statement: untyped,
+                  rule_group_reference_statement: untyped,
+                  ip_set_reference_statement: untyped,
+                  regex_pattern_set_reference_statement: untyped,
+                  rate_based_statement: untyped,
+                  and_statement: untyped,
+                  or_statement: {
+                    statements: untyped
+                  },
+                  not_statement: {
+                    statement: untyped
+                  },
+                  managed_rule_group_statement: {
+                    vendor_name: String,
+                    name: untyped,
+                    version: String,
+                    excluded_rules: untyped,
+                    scope_down_statement: untyped,
+                    managed_rule_group_configs: Array[
+                      {
+                        login_path: String,
+                        payload_type: String,
+                        username_field: {
+                          identifier: String
+                        },
+                        password_field: {
+                          identifier: untyped
+                        },
+                        aws_managed_rules_bot_control_rule_set: {
+                          inspection_level: String,
+                          enable_machine_learning: bool
+                        },
+                        aws_managed_rules_atp_rule_set: {
+                          login_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped
+                          },
+                          response_inspection: {
+                            status_code: {
+                              success_codes: Array[Integer],
+                              failure_codes: Array[Integer]
+                            },
+                            header: {
+                              name: String,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            },
+                            body_contains: {
+                              success_strings: Array[String],
+                              failure_strings: Array[String]
+                            },
+                            json: {
+                              identifier: untyped,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            }
+                          },
+                          enable_regex_in_path: bool
+                        },
+                        aws_managed_rules_acfp_rule_set: {
+                          creation_path: String,
+                          registration_page_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped,
+                            email_field: {
+                              identifier: untyped
+                            },
+                            phone_number_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ],
+                            address_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ]
+                          },
+                          response_inspection: untyped,
+                          enable_regex_in_path: untyped
+                        },
+                        aws_managed_rules_anti_d_do_s_rule_set: {
+                          client_side_action_config: {
+                            challenge: {
+                              usage_of_action: String,
+                              sensitivity: String,
+                              exempt_uri_regular_expressions: Array[
+                                {
+                                  regex_string: String
+                                }
+                              ]
+                            }
+                          },
+                          sensitivity_to_block: untyped
+                        }
+                      }
+                    ],
+                    rule_action_overrides: untyped
+                  },
+                  label_match_statement: {
+                    scope: String,
+                    key: String
+                  },
+                  regex_match_statement: {
+                    regex_string: untyped,
+                    field_to_match: untyped,
+                    text_transformations: untyped
+                  },
+                  asn_match_statement: {
+                    asn_list: Array[Integer],
+                    forwarded_ip_config: untyped
+                  }
+                }
+              ]
+            },
+            or_statement: untyped,
+            not_statement: untyped,
+            managed_rule_group_statement: untyped,
+            label_match_statement: untyped,
+            regex_match_statement: untyped,
+            asn_match_statement: untyped
+          },
+          action: untyped,
+          override_action: {
+            count: untyped,
+            none: {
+            }
+          },
+          rule_labels: Array[
+            {
+              name: String
+            }
+          ],
+          visibility_config: {
+            sampled_requests_enabled: untyped,
+            cloud_watch_metrics_enabled: untyped,
+            metric_name: String
+          },
+          captcha_config: {
+            immunity_time_property: {
+              immunity_time: Integer
+            }
+          },
+          challenge_config: {
+            immunity_time_property: untyped
+          }
+        }
+      ],
+      ?visibility_config: {
+        sampled_requests_enabled: bool,
+        cloud_watch_metrics_enabled: untyped,
+        metric_name: String
+      },
+      ?lock_token: String,
+      ?custom_response_bodies: Hash[String,
+        {
+          content_type: String,
+          content: String
+        }
+      ]
+    ) -> _UpdateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleGroupResponse
+
+    interface _UpdateWebACLResponse
+      include Smithy::Client::_Response[Types::UpdateWebACLResponse]
+      def next_lock_token: () -> String?
+    end
+    def update_web_acl: (
+      ?name: String,
+      ?scope: String,
+      ?id: String,
+      ?default_action: {
+        block: {
+          custom_response: {
+            response_code: Integer,
+            custom_response_body_key: String,
+            response_headers: Array[
+              {
+                name: String,
+                value: String
+              }
+            ]
+          }
+        },
+        allow: {
+          custom_request_handling: {
+            insert_headers: untyped
+          }
+        }
+      },
+      ?description: String,
+      ?rules: Array[
+        {
+          name: String,
+          priority: Integer,
+          statement: {
+            byte_match_statement: {
+              search_string: String,
+              field_to_match: {
+                single_header: {
+                  name: String
+                },
+                single_query_argument: {
+                  name: untyped
+                },
+                all_query_arguments: {
+                },
+                uri_path: {
+                },
+                query_string: {
+                },
+                body: {
+                  oversize_handling: String
+                },
+                method: {
+                },
+                json_body: {
+                  match_pattern: {
+                    all: {
+                    },
+                    included_paths: Array[String]
+                  },
+                  match_scope: String,
+                  invalid_fallback_behavior: String,
+                  oversize_handling: untyped
+                },
+                headers: {
+                  match_pattern: {
+                    all: untyped,
+                    included_headers: Array[String],
+                    excluded_headers: untyped
+                  },
+                  match_scope: String,
+                  oversize_handling: untyped
+                },
+                cookies: {
+                  match_pattern: {
+                    all: untyped,
+                    included_cookies: Array[String],
+                    excluded_cookies: untyped
+                  },
+                  match_scope: untyped,
+                  oversize_handling: untyped
+                },
+                header_order: {
+                  oversize_handling: untyped
+                },
+                ja3_fingerprint: {
+                  fallback_behavior: String
+                },
+                ja4_fingerprint: {
+                  fallback_behavior: untyped
+                },
+                uri_fragment: {
+                  fallback_behavior: untyped
+                }
+              },
+              text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
+              positional_constraint: String
+            },
+            sqli_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped,
+              sensitivity_level: String
+            },
+            xss_match_statement: {
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            size_constraint_statement: {
+              field_to_match: untyped,
+              comparison_operator: String,
+              size: Integer,
+              text_transformations: untyped
+            },
+            geo_match_statement: {
+              country_codes: Array[String],
+              forwarded_ip_config: {
+                header_name: String,
+                fallback_behavior: untyped
+              }
+            },
+            rule_group_reference_statement: {
+              arn: String,
+              excluded_rules: Array[
+                {
+                  name: untyped
+                }
+              ],
+              rule_action_overrides: Array[
+                {
+                  name: untyped,
+                  action_to_use: {
+                    block: {
+                      custom_response: {
+                        response_code: Integer,
+                        custom_response_body_key: untyped,
+                        response_headers: Array[
+                          {
+                            name: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    allow: {
+                      custom_request_handling: {
+                        insert_headers: untyped
+                      }
+                    },
+                    count: {
+                      custom_request_handling: untyped
+                    },
+                    captcha: {
+                      custom_request_handling: untyped
+                    },
+                    challenge: {
+                      custom_request_handling: untyped
+                    }
+                  }
+                }
+              ]
+            },
+            ip_set_reference_statement: {
+              arn: untyped,
+              ip_set_forwarded_ip_config: {
+                header_name: untyped,
+                fallback_behavior: untyped,
+                position: String
+              }
+            },
+            regex_pattern_set_reference_statement: {
+              arn: untyped,
+              field_to_match: untyped,
+              text_transformations: untyped
+            },
+            rate_based_statement: {
+              limit: Integer,
+              evaluation_window_sec: Integer,
+              aggregate_key_type: String,
+              scope_down_statement: untyped,
+              forwarded_ip_config: untyped,
+              custom_keys: Array[
+                {
+                  header: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  cookie: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_argument: {
+                    name: untyped,
+                    text_transformations: untyped
+                  },
+                  query_string: {
+                    text_transformations: untyped
+                  },
+                  http_method: {
+                  },
+                  forwarded_ip: {
+                  },
+                  ip: {
+                  },
+                  label_namespace: {
+                    namespace: String
+                  },
+                  uri_path: {
+                    text_transformations: untyped
+                  },
+                  ja3_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  ja4_fingerprint: {
+                    fallback_behavior: untyped
+                  },
+                  asn: {
+                  }
+                }
+              ]
+            },
+            and_statement: {
+              statements: Array[
+                {
+                  byte_match_statement: untyped,
+                  sqli_match_statement: untyped,
+                  xss_match_statement: untyped,
+                  size_constraint_statement: untyped,
+                  geo_match_statement: untyped,
+                  rule_group_reference_statement: untyped,
+                  ip_set_reference_statement: untyped,
+                  regex_pattern_set_reference_statement: untyped,
+                  rate_based_statement: untyped,
+                  and_statement: untyped,
+                  or_statement: {
+                    statements: untyped
+                  },
+                  not_statement: {
+                    statement: untyped
+                  },
+                  managed_rule_group_statement: {
+                    vendor_name: String,
+                    name: untyped,
+                    version: String,
+                    excluded_rules: untyped,
+                    scope_down_statement: untyped,
+                    managed_rule_group_configs: Array[
+                      {
+                        login_path: String,
+                        payload_type: String,
+                        username_field: {
+                          identifier: String
+                        },
+                        password_field: {
+                          identifier: untyped
+                        },
+                        aws_managed_rules_bot_control_rule_set: {
+                          inspection_level: String,
+                          enable_machine_learning: bool
+                        },
+                        aws_managed_rules_atp_rule_set: {
+                          login_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped
+                          },
+                          response_inspection: {
+                            status_code: {
+                              success_codes: Array[Integer],
+                              failure_codes: Array[Integer]
+                            },
+                            header: {
+                              name: String,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            },
+                            body_contains: {
+                              success_strings: Array[String],
+                              failure_strings: Array[String]
+                            },
+                            json: {
+                              identifier: untyped,
+                              success_values: Array[String],
+                              failure_values: Array[String]
+                            }
+                          },
+                          enable_regex_in_path: bool
+                        },
+                        aws_managed_rules_acfp_rule_set: {
+                          creation_path: String,
+                          registration_page_path: String,
+                          request_inspection: {
+                            payload_type: untyped,
+                            username_field: untyped,
+                            password_field: untyped,
+                            email_field: {
+                              identifier: untyped
+                            },
+                            phone_number_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ],
+                            address_fields: Array[
+                              {
+                                identifier: untyped
+                              }
+                            ]
+                          },
+                          response_inspection: untyped,
+                          enable_regex_in_path: untyped
+                        },
+                        aws_managed_rules_anti_d_do_s_rule_set: {
+                          client_side_action_config: {
+                            challenge: {
+                              usage_of_action: String,
+                              sensitivity: String,
+                              exempt_uri_regular_expressions: Array[
+                                {
+                                  regex_string: String
+                                }
+                              ]
+                            }
+                          },
+                          sensitivity_to_block: untyped
+                        }
+                      }
+                    ],
+                    rule_action_overrides: untyped
+                  },
+                  label_match_statement: {
+                    scope: String,
+                    key: String
+                  },
+                  regex_match_statement: {
+                    regex_string: untyped,
+                    field_to_match: untyped,
+                    text_transformations: untyped
+                  },
+                  asn_match_statement: {
+                    asn_list: Array[Integer],
+                    forwarded_ip_config: untyped
+                  }
+                }
+              ]
+            },
+            or_statement: untyped,
+            not_statement: untyped,
+            managed_rule_group_statement: untyped,
+            label_match_statement: untyped,
+            regex_match_statement: untyped,
+            asn_match_statement: untyped
+          },
+          action: untyped,
+          override_action: {
+            count: untyped,
+            none: {
+            }
+          },
+          rule_labels: Array[
+            {
+              name: String
+            }
+          ],
+          visibility_config: {
+            sampled_requests_enabled: untyped,
+            cloud_watch_metrics_enabled: untyped,
+            metric_name: String
+          },
+          captcha_config: {
+            immunity_time_property: {
+              immunity_time: Integer
+            }
+          },
+          challenge_config: {
+            immunity_time_property: untyped
+          }
+        }
+      ],
+      ?visibility_config: {
+        sampled_requests_enabled: bool,
+        cloud_watch_metrics_enabled: untyped,
+        metric_name: String
+      },
+      ?data_protection_config: {
+        data_protections: Array[
+          {
+            field: {
+              field_type: String,
+              field_keys: Array[String]
+            },
+            action: String,
+            exclude_rule_match_details: bool,
+            exclude_rate_based_details: untyped
+          }
+        ]
+      },
+      ?lock_token: String,
+      ?custom_response_bodies: Hash[String,
+        {
+          content_type: String,
+          content: String
+        }
+      ],
+      ?captcha_config: {
+        immunity_time_property: {
+          immunity_time: Integer
+        }
+      },
+      ?challenge_config: {
+        immunity_time_property: {
+          immunity_time: Integer
+        }
+      },
+      ?token_domains: Array[String],
+      ?association_config: {
+        request_body: Hash[String,
+          {
+            default_size_inspection_limit: String
+          }
+        ]
+      },
+      ?on_source_d_do_s_protection_config: {
+        alb_low_reputation_mode: String
+      }
+    ) -> _UpdateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebACLResponse
+  end
+end

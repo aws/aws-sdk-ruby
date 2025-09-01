@@ -1,0 +1,440 @@
+module Aws::Mq
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Mq::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBrokerResponse
+      include Smithy::Client::_Response[Types::CreateBrokerResponse]
+      def broker_arn: () -> String?
+      def broker_id: () -> String?
+    end
+    def create_broker: (
+      ?authentication_strategy: String,
+      ?auto_minor_version_upgrade: bool,
+      ?broker_name: String,
+      ?configuration: {
+        id: String,
+        revision: Integer
+      },
+      ?creator_request_id: String,
+      ?deployment_mode: String,
+      ?encryption_options: {
+        kms_key_id: String,
+        use_aws_owned_key: bool
+      },
+      ?engine_type: String,
+      ?engine_version: String,
+      ?host_instance_type: String,
+      ?ldap_server_metadata: {
+        hosts: Array[String],
+        role_base: String,
+        role_name: untyped,
+        role_search_matching: untyped,
+        role_search_subtree: bool,
+        service_account_password: untyped,
+        service_account_username: untyped,
+        user_base: untyped,
+        user_role_name: untyped,
+        user_search_matching: untyped,
+        user_search_subtree: untyped
+      },
+      ?logs: {
+        audit: bool,
+        general: untyped
+      },
+      ?maintenance_window_start_time: {
+        day_of_week: String,
+        time_of_day: String,
+        time_zone: untyped
+      },
+      ?publicly_accessible: bool,
+      ?security_groups: Array[String],
+      ?storage_type: String,
+      ?subnet_ids: Array[String],
+      ?tags: Hash[String, String],
+      ?users: Array[
+        {
+          console_access: bool,
+          groups: Array[String],
+          password: String,
+          username: untyped,
+          replication_user: untyped
+        }
+      ],
+      ?data_replication_mode: String,
+      ?data_replication_primary_broker_arn: String
+    ) -> _CreateBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrokerResponse
+
+    interface _CreateConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationResponse]
+      def arn: () -> String?
+      def authentication_strategy: () -> String?
+      def created: () -> Time?
+      def id: () -> String?
+      def latest_revision: () -> Types::ConfigurationRevision?
+      def name: () -> String?
+    end
+    def create_configuration: (
+      ?authentication_strategy: String,
+      ?engine_type: String,
+      ?engine_version: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationResponse
+
+    interface _CreateTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_tags: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTagsResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+    end
+    def create_user: (
+      ?broker_id: String,
+      ?console_access: bool,
+      ?groups: Array[String],
+      ?password: String,
+      ?username: String,
+      ?replication_user: bool
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteBrokerResponse
+      include Smithy::Client::_Response[Types::DeleteBrokerResponse]
+      def broker_id: () -> String?
+    end
+    def delete_broker: (
+      ?broker_id: String
+    ) -> _DeleteBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrokerResponse
+
+    interface _DeleteConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationResponse]
+      def configuration_id: () -> String?
+    end
+    def delete_configuration: (
+      ?configuration_id: String
+    ) -> _DeleteConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_tags: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
+    end
+    def delete_user: (
+      ?broker_id: String,
+      ?username: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DescribeBrokerResponse
+      include Smithy::Client::_Response[Types::DescribeBrokerResponse]
+      def actions_required: () -> Array[Types::ActionRequired]?
+      def authentication_strategy: () -> String?
+      def auto_minor_version_upgrade: () -> bool?
+      def broker_arn: () -> String?
+      def broker_id: () -> String?
+      def broker_instances: () -> Array[Types::BrokerInstance]?
+      def broker_name: () -> String?
+      def broker_state: () -> String?
+      def configurations: () -> Types::Configurations?
+      def created: () -> Time?
+      def deployment_mode: () -> String?
+      def encryption_options: () -> Types::EncryptionOptions?
+      def engine_type: () -> String?
+      def engine_version: () -> String?
+      def host_instance_type: () -> String?
+      def ldap_server_metadata: () -> Types::LdapServerMetadataOutput?
+      def logs: () -> Types::LogsSummary?
+      def maintenance_window_start_time: () -> Types::WeeklyStartTime?
+      def pending_authentication_strategy: () -> String?
+      def pending_engine_version: () -> String?
+      def pending_host_instance_type: () -> String?
+      def pending_ldap_server_metadata: () -> Types::LdapServerMetadataOutput?
+      def pending_security_groups: () -> Array[String]?
+      def publicly_accessible: () -> bool?
+      def security_groups: () -> Array[String]?
+      def storage_type: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+      def users: () -> Array[Types::UserSummary]?
+      def data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
+      def data_replication_mode: () -> String?
+      def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
+      def pending_data_replication_mode: () -> String?
+    end
+    def describe_broker: (
+      ?broker_id: String
+    ) -> _DescribeBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBrokerResponse
+
+    interface _DescribeBrokerEngineTypesResponse
+      include Smithy::Client::_Response[Types::DescribeBrokerEngineTypesResponse]
+      def broker_engine_types: () -> Array[Types::BrokerEngineType]?
+      def max_results: () -> Integer?
+      def next_token: () -> String?
+    end
+    def describe_broker_engine_types: (
+      ?engine_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBrokerEngineTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBrokerEngineTypesResponse
+
+    interface _DescribeBrokerInstanceOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeBrokerInstanceOptionsResponse]
+      def broker_instance_options: () -> Array[Types::BrokerInstanceOption]?
+      def max_results: () -> Integer?
+      def next_token: () -> String?
+    end
+    def describe_broker_instance_options: (
+      ?engine_type: String,
+      ?host_instance_type: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?storage_type: String
+    ) -> _DescribeBrokerInstanceOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBrokerInstanceOptionsResponse
+
+    interface _DescribeConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationResponse]
+      def arn: () -> String?
+      def authentication_strategy: () -> String?
+      def created: () -> Time?
+      def description: () -> String?
+      def engine_type: () -> String?
+      def engine_version: () -> String?
+      def id: () -> String?
+      def latest_revision: () -> Types::ConfigurationRevision?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_configuration: (
+      ?configuration_id: String
+    ) -> _DescribeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationResponse
+
+    interface _DescribeConfigurationRevisionResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationRevisionResponse]
+      def configuration_id: () -> String?
+      def created: () -> Time?
+      def data: () -> String?
+      def description: () -> String?
+    end
+    def describe_configuration_revision: (
+      ?configuration_id: String,
+      ?configuration_revision: String
+    ) -> _DescribeConfigurationRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationRevisionResponse
+
+    interface _DescribeUserResponse
+      include Smithy::Client::_Response[Types::DescribeUserResponse]
+      def broker_id: () -> String?
+      def console_access: () -> bool?
+      def groups: () -> Array[String]?
+      def pending: () -> Types::UserPendingChanges?
+      def username: () -> String?
+      def replication_user: () -> bool?
+    end
+    def describe_user: (
+      ?broker_id: String,
+      ?username: String
+    ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
+
+    interface _ListBrokersResponse
+      include Smithy::Client::_Response[Types::ListBrokersResponse]
+      def broker_summaries: () -> Array[Types::BrokerSummary]?
+      def next_token: () -> String?
+    end
+    def list_brokers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBrokersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrokersResponse
+
+    interface _ListConfigurationRevisionsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationRevisionsResponse]
+      def configuration_id: () -> String?
+      def max_results: () -> Integer?
+      def next_token: () -> String?
+      def revisions: () -> Array[Types::ConfigurationRevision]?
+    end
+    def list_configuration_revisions: (
+      ?configuration_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationRevisionsResponse
+
+    interface _ListConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationsResponse]
+      def configurations: () -> Array[Types::Configuration]?
+      def max_results: () -> Integer?
+      def next_token: () -> String?
+    end
+    def list_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags: (
+      ?resource_arn: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def broker_id: () -> String?
+      def max_results: () -> Integer?
+      def next_token: () -> String?
+      def users: () -> Array[Types::UserSummary]?
+    end
+    def list_users: (
+      ?broker_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _PromoteResponse
+      include Smithy::Client::_Response[Types::PromoteResponse]
+      def broker_id: () -> String?
+    end
+    def promote: (
+      ?broker_id: String,
+      ?mode: String
+    ) -> _PromoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PromoteResponse
+
+    interface _RebootBrokerResponse
+      include Smithy::Client::_Response[Types::RebootBrokerResponse]
+    end
+    def reboot_broker: (
+      ?broker_id: String
+    ) -> _RebootBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootBrokerResponse
+
+    interface _UpdateBrokerResponse
+      include Smithy::Client::_Response[Types::UpdateBrokerResponse]
+      def authentication_strategy: () -> String?
+      def auto_minor_version_upgrade: () -> bool?
+      def broker_id: () -> String?
+      def configuration: () -> Types::ConfigurationId?
+      def engine_version: () -> String?
+      def host_instance_type: () -> String?
+      def ldap_server_metadata: () -> Types::LdapServerMetadataOutput?
+      def logs: () -> Types::Logs?
+      def maintenance_window_start_time: () -> Types::WeeklyStartTime?
+      def security_groups: () -> Array[String]?
+      def data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
+      def data_replication_mode: () -> String?
+      def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
+      def pending_data_replication_mode: () -> String?
+    end
+    def update_broker: (
+      ?authentication_strategy: String,
+      ?auto_minor_version_upgrade: bool,
+      ?broker_id: String,
+      ?configuration: {
+        id: String,
+        revision: Integer
+      },
+      ?engine_version: String,
+      ?host_instance_type: String,
+      ?ldap_server_metadata: {
+        hosts: Array[String],
+        role_base: String,
+        role_name: untyped,
+        role_search_matching: untyped,
+        role_search_subtree: bool,
+        service_account_password: untyped,
+        service_account_username: untyped,
+        user_base: untyped,
+        user_role_name: untyped,
+        user_search_matching: untyped,
+        user_search_subtree: untyped
+      },
+      ?logs: {
+        audit: bool,
+        general: untyped
+      },
+      ?maintenance_window_start_time: {
+        day_of_week: String,
+        time_of_day: String,
+        time_zone: untyped
+      },
+      ?security_groups: Array[String],
+      ?data_replication_mode: String
+    ) -> _UpdateBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerResponse
+
+    interface _UpdateConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationResponse]
+      def arn: () -> String?
+      def created: () -> Time?
+      def id: () -> String?
+      def latest_revision: () -> Types::ConfigurationRevision?
+      def name: () -> String?
+      def warnings: () -> Array[Types::SanitizationWarning]?
+    end
+    def update_configuration: (
+      ?configuration_id: String,
+      ?data: String,
+      ?description: String
+    ) -> _UpdateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+    end
+    def update_user: (
+      ?broker_id: String,
+      ?console_access: bool,
+      ?groups: Array[String],
+      ?password: String,
+      ?username: String,
+      ?replication_user: bool
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

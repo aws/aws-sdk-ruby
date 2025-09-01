@@ -1,0 +1,383 @@
+module Aws::SSOOIDC
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class AuthorizationPendingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class AwsAdditionalDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_context: String?
+    end
+
+    class CreateTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?grant_type: String,
+        ?device_code: String,
+        ?code: String,
+        ?refresh_token: String,
+        ?scope: Array[String],
+        ?redirect_uri: String,
+        ?code_verifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor grant_type: String?
+      attr_accessor device_code: String?
+      attr_accessor code: String?
+      attr_accessor refresh_token: String?
+      attr_accessor scope: Array[String]?
+      attr_accessor redirect_uri: String?
+      attr_accessor code_verifier: String?
+    end
+
+    class CreateTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?token_type: String,
+        ?expires_in: Integer,
+        ?refresh_token: String,
+        ?id_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor token_type: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor refresh_token: String?
+      attr_accessor id_token: String?
+    end
+
+    class CreateTokenWithIAMRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?grant_type: String,
+        ?code: String,
+        ?refresh_token: String,
+        ?assertion: String,
+        ?scope: Array[String],
+        ?redirect_uri: String,
+        ?subject_token: String,
+        ?subject_token_type: String,
+        ?requested_token_type: String,
+        ?code_verifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor grant_type: String?
+      attr_accessor code: String?
+      attr_accessor refresh_token: String?
+      attr_accessor assertion: String?
+      attr_accessor scope: Array[String]?
+      attr_accessor redirect_uri: String?
+      attr_accessor subject_token: String?
+      attr_accessor subject_token_type: String?
+      attr_accessor requested_token_type: String?
+      attr_accessor code_verifier: String?
+    end
+
+    class CreateTokenWithIAMResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?token_type: String,
+        ?expires_in: Integer,
+        ?refresh_token: String,
+        ?id_token: String,
+        ?issued_token_type: String,
+        ?scope: Array[String],
+        ?aws_additional_details: Types::AwsAdditionalDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor token_type: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor refresh_token: String?
+      attr_accessor id_token: String?
+      attr_accessor issued_token_type: String?
+      attr_accessor scope: Array[String]?
+      attr_accessor aws_additional_details: Types::AwsAdditionalDetails?
+    end
+
+    class ExpiredTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidClientMetadataException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidGrantException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidRedirectUriException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class InvalidRequestRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+        ?endpoint: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+      attr_accessor endpoint: String?
+      attr_accessor region: String?
+    end
+
+    class InvalidScopeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class RegisterClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_name: String,
+        ?client_type: String,
+        ?scopes: Array[String],
+        ?redirect_uris: Array[String],
+        ?grant_types: Array[String],
+        ?issuer_url: String,
+        ?entitled_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_name: String?
+      attr_accessor client_type: String?
+      attr_accessor scopes: Array[String]?
+      attr_accessor redirect_uris: Array[String]?
+      attr_accessor grant_types: Array[String]?
+      attr_accessor issuer_url: String?
+      attr_accessor entitled_application_arn: String?
+    end
+
+    class RegisterClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?client_id_issued_at: Integer,
+        ?client_secret_expires_at: Integer,
+        ?authorization_endpoint: String,
+        ?token_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor client_id_issued_at: Integer?
+      attr_accessor client_secret_expires_at: Integer?
+      attr_accessor authorization_endpoint: String?
+      attr_accessor token_endpoint: String?
+    end
+
+    class SlowDownException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class StartDeviceAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?start_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor start_url: String?
+    end
+
+    class StartDeviceAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_code: String,
+        ?user_code: String,
+        ?verification_uri: String,
+        ?verification_uri_complete: String,
+        ?expires_in: Integer,
+        ?interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_code: String?
+      attr_accessor user_code: String?
+      attr_accessor verification_uri: String?
+      attr_accessor verification_uri_complete: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor interval: Integer?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+
+    class UnsupportedGrantTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor error_description: String?
+    end
+  end
+end

@@ -1,0 +1,1269 @@
+module Aws::CleanRooms
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CleanRooms::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetCollaborationAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::BatchGetCollaborationAnalysisTemplateOperationOutput]
+      def collaboration_analysis_templates: () -> Array[Types::CollaborationAnalysisTemplate]?
+      def errors: () -> Array[Types::BatchGetCollaborationAnalysisTemplateError]?
+    end
+    def batch_get_collaboration_analysis_template: (
+      ?collaboration_identifier: String,
+      ?analysis_template_arns: Array[String]
+    ) -> _BatchGetCollaborationAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCollaborationAnalysisTemplateResponse
+
+    interface _BatchGetSchemaResponse
+      include Smithy::Client::_Response[Types::BatchGetSchemaOperationOutput]
+      def schemas: () -> Array[Types::Schema]?
+      def errors: () -> Array[Types::BatchGetSchemaError]?
+    end
+    def batch_get_schema: (
+      ?collaboration_identifier: String,
+      ?names: Array[String]
+    ) -> _BatchGetSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSchemaResponse
+
+    interface _BatchGetSchemaAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::BatchGetSchemaAnalysisRuleOutput]
+      def analysis_rules: () -> Array[Types::AnalysisRule]?
+      def errors: () -> Array[Types::BatchGetSchemaAnalysisRuleError]?
+    end
+    def batch_get_schema_analysis_rule: (
+      ?collaboration_identifier: String,
+      ?schema_analysis_rule_requests: Array[
+        {
+          name: String,
+          type: String
+        }
+      ]
+    ) -> _BatchGetSchemaAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSchemaAnalysisRuleResponse
+
+    interface _CreateAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::CreateAnalysisTemplateOperationOutput]
+      def analysis_template: () -> Types::AnalysisTemplate?
+    end
+    def create_analysis_template: (
+      ?description: String,
+      ?membership_identifier: String,
+      ?name: String,
+      ?format: String,
+      ?source: {
+        text: String,
+        artifacts: {
+          entry_point: {
+            location: {
+              bucket: String,
+              key: untyped
+            }
+          },
+          additional_artifacts: Array[
+            {
+              location: untyped
+            }
+          ],
+          role_arn: String
+        }
+      },
+      ?tags: Hash[String, String],
+      ?analysis_parameters: Array[
+        {
+          name: String,
+          type: String,
+          default_value: String
+        }
+      ],
+      ?schema: {
+        referenced_tables: Array[String]
+      }
+    ) -> _CreateAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnalysisTemplateResponse
+
+    interface _CreateCollaborationResponse
+      include Smithy::Client::_Response[Types::CreateCollaborationOperationOutput]
+      def collaboration: () -> Types::Collaboration?
+    end
+    def create_collaboration: (
+      ?members: Array[
+        {
+          account_id: String,
+          member_abilities: Array[String],
+          ml_member_abilities: {
+            custom_ml_member_abilities: Array[String]
+          },
+          display_name: String,
+          payment_configuration: {
+            query_compute: {
+              is_responsible: bool
+            },
+            machine_learning: {
+              model_training: {
+                is_responsible: untyped
+              },
+              model_inference: {
+                is_responsible: untyped
+              }
+            },
+            job_compute: {
+              is_responsible: untyped
+            }
+          }
+        }
+      ],
+      ?name: String,
+      ?description: String,
+      ?creator_member_abilities: Array[String],
+      ?creator_ml_member_abilities: {
+        custom_ml_member_abilities: Array[String]
+      },
+      ?creator_display_name: String,
+      ?data_encryption_metadata: {
+        allow_cleartext: bool,
+        allow_duplicates: untyped,
+        allow_joins_on_columns_with_different_names: untyped,
+        preserve_nulls: untyped
+      },
+      ?query_log_status: String,
+      ?job_log_status: String,
+      ?tags: Hash[String, String],
+      ?creator_payment_configuration: {
+        query_compute: {
+          is_responsible: bool
+        },
+        machine_learning: {
+          model_training: {
+            is_responsible: untyped
+          },
+          model_inference: {
+            is_responsible: untyped
+          }
+        },
+        job_compute: {
+          is_responsible: untyped
+        }
+      },
+      ?analytics_engine: String
+    ) -> _CreateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollaborationResponse
+
+    interface _CreateConfiguredAudienceModelAssociationResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredAudienceModelAssociationOutput]
+      def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation?
+    end
+    def create_configured_audience_model_association: (
+      ?membership_identifier: String,
+      ?configured_audience_model_arn: String,
+      ?configured_audience_model_association_name: String,
+      ?manage_resource_policies: bool,
+      ?tags: Hash[String, String],
+      ?description: String
+    ) -> _CreateConfiguredAudienceModelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredAudienceModelAssociationResponse
+
+    interface _CreateConfiguredTableResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredTableOperationOutput]
+      def configured_table: () -> Types::ConfiguredTable?
+    end
+    def create_configured_table: (
+      ?name: String,
+      ?description: String,
+      ?table_reference: {
+        glue: {
+          table_name: String,
+          database_name: String
+        },
+        snowflake: {
+          secret_arn: String,
+          account_identifier: String,
+          database_name: String,
+          table_name: String,
+          schema_name: String,
+          table_schema: {
+            v1: Array[
+              {
+                column_name: String,
+                column_type: String
+              }
+            ]
+          }
+        },
+        athena: {
+          work_group: String,
+          output_location: String,
+          database_name: String,
+          table_name: String
+        }
+      },
+      ?allowed_columns: Array[String],
+      ?analysis_method: String,
+      ?selected_analysis_methods: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateConfiguredTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredTableResponse
+
+    interface _CreateConfiguredTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredTableAnalysisRuleOperationOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAnalysisRule?
+    end
+    def create_configured_table_analysis_rule: (
+      ?configured_table_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          list: {
+            join_columns: Array[String],
+            allowed_join_operators: Array[String],
+            list_columns: untyped,
+            additional_analyses: String
+          },
+          aggregation: {
+            aggregate_columns: Array[
+              {
+                column_names: Array[String],
+                function: String
+              }
+            ],
+            join_columns: untyped,
+            join_required: String,
+            allowed_join_operators: untyped,
+            dimension_columns: untyped,
+            scalar_functions: Array[String],
+            output_constraints: Array[
+              {
+                column_name: String,
+                minimum: Integer,
+                type: String
+              }
+            ],
+            additional_analyses: untyped
+          },
+          custom: {
+            allowed_analyses: Array[String],
+            allowed_analysis_providers: Array[String],
+            additional_analyses: untyped,
+            disallowed_output_columns: untyped,
+            differential_privacy: {
+              columns: Array[
+                {
+                  name: String
+                }
+              ]
+            }
+          }
+        }
+      }
+    ) -> _CreateConfiguredTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredTableAnalysisRuleResponse
+
+    interface _CreateConfiguredTableAssociationResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredTableAssociationOperationOutput]
+      def configured_table_association: () -> Types::ConfiguredTableAssociation?
+    end
+    def create_configured_table_association: (
+      ?name: String,
+      ?description: String,
+      ?membership_identifier: String,
+      ?configured_table_identifier: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConfiguredTableAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredTableAssociationResponse
+
+    interface _CreateConfiguredTableAssociationAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::CreateConfiguredTableAssociationAnalysisRuleOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule?
+    end
+    def create_configured_table_association_analysis_rule: (
+      ?membership_identifier: String,
+      ?configured_table_association_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          list: {
+            allowed_result_receivers: Array[String],
+            allowed_additional_analyses: Array[String]
+          },
+          aggregation: {
+            allowed_result_receivers: untyped,
+            allowed_additional_analyses: untyped
+          },
+          custom: {
+            allowed_result_receivers: untyped,
+            allowed_additional_analyses: untyped
+          }
+        }
+      }
+    ) -> _CreateConfiguredTableAssociationAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfiguredTableAssociationAnalysisRuleResponse
+
+    interface _CreateIdMappingTableResponse
+      include Smithy::Client::_Response[Types::CreateIdMappingTableOutput]
+      def id_mapping_table: () -> Types::IdMappingTable?
+    end
+    def create_id_mapping_table: (
+      ?membership_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?input_reference_config: {
+        input_reference_arn: String,
+        manage_resource_policies: bool
+      },
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String
+    ) -> _CreateIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdMappingTableResponse
+
+    interface _CreateIdNamespaceAssociationResponse
+      include Smithy::Client::_Response[Types::CreateIdNamespaceAssociationOutput]
+      def id_namespace_association: () -> Types::IdNamespaceAssociation?
+    end
+    def create_id_namespace_association: (
+      ?membership_identifier: String,
+      ?input_reference_config: {
+        input_reference_arn: String,
+        manage_resource_policies: bool
+      },
+      ?tags: Hash[String, String],
+      ?name: String,
+      ?description: String,
+      ?id_mapping_config: {
+        allow_use_as_dimension_column: bool
+      }
+    ) -> _CreateIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdNamespaceAssociationResponse
+
+    interface _CreateMembershipResponse
+      include Smithy::Client::_Response[Types::CreateMembershipOperationOutput]
+      def membership: () -> Types::Membership?
+    end
+    def create_membership: (
+      ?collaboration_identifier: String,
+      ?query_log_status: String,
+      ?job_log_status: String,
+      ?tags: Hash[String, String],
+      ?default_result_configuration: {
+        output_configuration: {
+          s3: {
+            result_format: String,
+            bucket: String,
+            key_prefix: String,
+            single_file_output: bool
+          }
+        },
+        role_arn: String
+      },
+      ?default_job_result_configuration: {
+        output_configuration: {
+          s3: {
+            bucket: String,
+            key_prefix: String
+          }
+        },
+        role_arn: String
+      },
+      ?payment_configuration: {
+        query_compute: {
+          is_responsible: bool
+        },
+        machine_learning: {
+          model_training: {
+            is_responsible: untyped
+          },
+          model_inference: {
+            is_responsible: untyped
+          }
+        },
+        job_compute: {
+          is_responsible: untyped
+        }
+      }
+    ) -> _CreateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembershipResponse
+
+    interface _CreatePrivacyBudgetTemplateResponse
+      include Smithy::Client::_Response[Types::CreatePrivacyBudgetTemplateOutput]
+      def privacy_budget_template: () -> Types::PrivacyBudgetTemplate?
+    end
+    def create_privacy_budget_template: (
+      ?membership_identifier: String,
+      ?auto_refresh: String,
+      ?privacy_budget_type: String,
+      ?parameters: {
+        differential_privacy: {
+          epsilon: Integer,
+          users_noise_per_query: Integer
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreatePrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivacyBudgetTemplateResponse
+
+    interface _DeleteAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteAnalysisTemplateOperationOutput]
+    end
+    def delete_analysis_template: (
+      ?membership_identifier: String,
+      ?analysis_template_identifier: String
+    ) -> _DeleteAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnalysisTemplateResponse
+
+    interface _DeleteCollaborationResponse
+      include Smithy::Client::_Response[Types::DeleteCollaborationOperationOutput]
+    end
+    def delete_collaboration: (
+      ?collaboration_identifier: String
+    ) -> _DeleteCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCollaborationResponse
+
+    interface _DeleteConfiguredAudienceModelAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteConfiguredAudienceModelAssociationOutput]
+    end
+    def delete_configured_audience_model_association: (
+      ?configured_audience_model_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _DeleteConfiguredAudienceModelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredAudienceModelAssociationResponse
+
+    interface _DeleteConfiguredTableResponse
+      include Smithy::Client::_Response[Types::DeleteConfiguredTableOperationOutput]
+    end
+    def delete_configured_table: (
+      ?configured_table_identifier: String
+    ) -> _DeleteConfiguredTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredTableResponse
+
+    interface _DeleteConfiguredTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::DeleteConfiguredTableAnalysisRuleOperationOutput]
+    end
+    def delete_configured_table_analysis_rule: (
+      ?configured_table_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _DeleteConfiguredTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredTableAnalysisRuleResponse
+
+    interface _DeleteConfiguredTableAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteConfiguredTableAssociationOperationOutput]
+    end
+    def delete_configured_table_association: (
+      ?configured_table_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _DeleteConfiguredTableAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredTableAssociationResponse
+
+    interface _DeleteConfiguredTableAssociationAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::DeleteConfiguredTableAssociationAnalysisRuleOutput]
+    end
+    def delete_configured_table_association_analysis_rule: (
+      ?membership_identifier: String,
+      ?configured_table_association_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _DeleteConfiguredTableAssociationAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfiguredTableAssociationAnalysisRuleResponse
+
+    interface _DeleteIdMappingTableResponse
+      include Smithy::Client::_Response[Types::DeleteIdMappingTableOutput]
+    end
+    def delete_id_mapping_table: (
+      ?id_mapping_table_identifier: String,
+      ?membership_identifier: String
+    ) -> _DeleteIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdMappingTableResponse
+
+    interface _DeleteIdNamespaceAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteIdNamespaceAssociationOutput]
+    end
+    def delete_id_namespace_association: (
+      ?id_namespace_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _DeleteIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdNamespaceAssociationResponse
+
+    interface _DeleteMemberResponse
+      include Smithy::Client::_Response[Types::DeleteMemberOperationOutput]
+    end
+    def delete_member: (
+      ?collaboration_identifier: String,
+      ?account_id: String
+    ) -> _DeleteMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemberResponse
+
+    interface _DeleteMembershipResponse
+      include Smithy::Client::_Response[Types::DeleteMembershipOperationOutput]
+    end
+    def delete_membership: (
+      ?membership_identifier: String
+    ) -> _DeleteMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMembershipResponse
+
+    interface _DeletePrivacyBudgetTemplateResponse
+      include Smithy::Client::_Response[Types::DeletePrivacyBudgetTemplateOutput]
+    end
+    def delete_privacy_budget_template: (
+      ?membership_identifier: String,
+      ?privacy_budget_template_identifier: String
+    ) -> _DeletePrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrivacyBudgetTemplateResponse
+
+    interface _GetAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::GetAnalysisTemplateOperationOutput]
+      def analysis_template: () -> Types::AnalysisTemplate?
+    end
+    def get_analysis_template: (
+      ?membership_identifier: String,
+      ?analysis_template_identifier: String
+    ) -> _GetAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnalysisTemplateResponse
+
+    interface _GetCollaborationResponse
+      include Smithy::Client::_Response[Types::GetCollaborationOperationOutput]
+      def collaboration: () -> Types::Collaboration?
+    end
+    def get_collaboration: (
+      ?collaboration_identifier: String
+    ) -> _GetCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationResponse
+
+    interface _GetCollaborationAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::GetCollaborationAnalysisTemplateOperationOutput]
+      def collaboration_analysis_template: () -> Types::CollaborationAnalysisTemplate?
+    end
+    def get_collaboration_analysis_template: (
+      ?collaboration_identifier: String,
+      ?analysis_template_arn: String
+    ) -> _GetCollaborationAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationAnalysisTemplateResponse
+
+    interface _GetCollaborationConfiguredAudienceModelAssociationResponse
+      include Smithy::Client::_Response[Types::GetCollaborationConfiguredAudienceModelAssociationOutput]
+      def collaboration_configured_audience_model_association: () -> Types::CollaborationConfiguredAudienceModelAssociation?
+    end
+    def get_collaboration_configured_audience_model_association: (
+      ?collaboration_identifier: String,
+      ?configured_audience_model_association_identifier: String
+    ) -> _GetCollaborationConfiguredAudienceModelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationConfiguredAudienceModelAssociationResponse
+
+    interface _GetCollaborationIdNamespaceAssociationResponse
+      include Smithy::Client::_Response[Types::GetCollaborationIdNamespaceAssociationOutput]
+      def collaboration_id_namespace_association: () -> Types::CollaborationIdNamespaceAssociation?
+    end
+    def get_collaboration_id_namespace_association: (
+      ?collaboration_identifier: String,
+      ?id_namespace_association_identifier: String
+    ) -> _GetCollaborationIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationIdNamespaceAssociationResponse
+
+    interface _GetCollaborationPrivacyBudgetTemplateResponse
+      include Smithy::Client::_Response[Types::GetCollaborationPrivacyBudgetTemplateOutput]
+      def collaboration_privacy_budget_template: () -> Types::CollaborationPrivacyBudgetTemplate?
+    end
+    def get_collaboration_privacy_budget_template: (
+      ?collaboration_identifier: String,
+      ?privacy_budget_template_identifier: String
+    ) -> _GetCollaborationPrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationPrivacyBudgetTemplateResponse
+
+    interface _GetConfiguredAudienceModelAssociationResponse
+      include Smithy::Client::_Response[Types::GetConfiguredAudienceModelAssociationOutput]
+      def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation?
+    end
+    def get_configured_audience_model_association: (
+      ?configured_audience_model_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _GetConfiguredAudienceModelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredAudienceModelAssociationResponse
+
+    interface _GetConfiguredTableResponse
+      include Smithy::Client::_Response[Types::GetConfiguredTableOperationOutput]
+      def configured_table: () -> Types::ConfiguredTable?
+    end
+    def get_configured_table: (
+      ?configured_table_identifier: String
+    ) -> _GetConfiguredTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredTableResponse
+
+    interface _GetConfiguredTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::GetConfiguredTableAnalysisRuleOperationOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAnalysisRule?
+    end
+    def get_configured_table_analysis_rule: (
+      ?configured_table_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _GetConfiguredTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredTableAnalysisRuleResponse
+
+    interface _GetConfiguredTableAssociationResponse
+      include Smithy::Client::_Response[Types::GetConfiguredTableAssociationOperationOutput]
+      def configured_table_association: () -> Types::ConfiguredTableAssociation?
+    end
+    def get_configured_table_association: (
+      ?configured_table_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _GetConfiguredTableAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredTableAssociationResponse
+
+    interface _GetConfiguredTableAssociationAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::GetConfiguredTableAssociationAnalysisRuleOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule?
+    end
+    def get_configured_table_association_analysis_rule: (
+      ?membership_identifier: String,
+      ?configured_table_association_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _GetConfiguredTableAssociationAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfiguredTableAssociationAnalysisRuleResponse
+
+    interface _GetIdMappingTableResponse
+      include Smithy::Client::_Response[Types::GetIdMappingTableOutput]
+      def id_mapping_table: () -> Types::IdMappingTable?
+    end
+    def get_id_mapping_table: (
+      ?id_mapping_table_identifier: String,
+      ?membership_identifier: String
+    ) -> _GetIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdMappingTableResponse
+
+    interface _GetIdNamespaceAssociationResponse
+      include Smithy::Client::_Response[Types::GetIdNamespaceAssociationOutput]
+      def id_namespace_association: () -> Types::IdNamespaceAssociation?
+    end
+    def get_id_namespace_association: (
+      ?id_namespace_association_identifier: String,
+      ?membership_identifier: String
+    ) -> _GetIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdNamespaceAssociationResponse
+
+    interface _GetMembershipResponse
+      include Smithy::Client::_Response[Types::GetMembershipOperationOutput]
+      def membership: () -> Types::Membership?
+    end
+    def get_membership: (
+      ?membership_identifier: String
+    ) -> _GetMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMembershipResponse
+
+    interface _GetPrivacyBudgetTemplateResponse
+      include Smithy::Client::_Response[Types::GetPrivacyBudgetTemplateOutput]
+      def privacy_budget_template: () -> Types::PrivacyBudgetTemplate?
+    end
+    def get_privacy_budget_template: (
+      ?membership_identifier: String,
+      ?privacy_budget_template_identifier: String
+    ) -> _GetPrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrivacyBudgetTemplateResponse
+
+    interface _GetProtectedJobResponse
+      include Smithy::Client::_Response[Types::GetProtectedJobOutput]
+      def protected_job: () -> Types::ProtectedJob?
+    end
+    def get_protected_job: (
+      ?membership_identifier: String,
+      ?protected_job_identifier: String
+    ) -> _GetProtectedJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProtectedJobResponse
+
+    interface _GetProtectedQueryResponse
+      include Smithy::Client::_Response[Types::GetProtectedQueryOperationOutput]
+      def protected_query: () -> Types::ProtectedQuery?
+    end
+    def get_protected_query: (
+      ?membership_identifier: String,
+      ?protected_query_identifier: String
+    ) -> _GetProtectedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProtectedQueryResponse
+
+    interface _GetSchemaResponse
+      include Smithy::Client::_Response[Types::GetSchemaOperationOutput]
+      def schema: () -> Types::Schema?
+    end
+    def get_schema: (
+      ?collaboration_identifier: String,
+      ?name: String
+    ) -> _GetSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaResponse
+
+    interface _GetSchemaAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::GetSchemaAnalysisRuleOperationOutput]
+      def analysis_rule: () -> Types::AnalysisRule?
+    end
+    def get_schema_analysis_rule: (
+      ?collaboration_identifier: String,
+      ?name: String,
+      ?type: String
+    ) -> _GetSchemaAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaAnalysisRuleResponse
+
+    interface _ListAnalysisTemplatesResponse
+      include Smithy::Client::_Response[Types::ListAnalysisTemplatesOperationOutput]
+      def next_token: () -> String?
+      def analysis_template_summaries: () -> Array[Types::AnalysisTemplateSummary]?
+    end
+    def list_analysis_templates: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalysisTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalysisTemplatesResponse
+
+    interface _ListCollaborationAnalysisTemplatesResponse
+      include Smithy::Client::_Response[Types::ListCollaborationAnalysisTemplatesOperationOutput]
+      def next_token: () -> String?
+      def collaboration_analysis_template_summaries: () -> Array[Types::CollaborationAnalysisTemplateSummary]?
+    end
+    def list_collaboration_analysis_templates: (
+      ?collaboration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollaborationAnalysisTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationAnalysisTemplatesResponse
+
+    interface _ListCollaborationConfiguredAudienceModelAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationConfiguredAudienceModelAssociationsOutput]
+      def collaboration_configured_audience_model_association_summaries: () -> Array[Types::CollaborationConfiguredAudienceModelAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_collaboration_configured_audience_model_associations: (
+      ?collaboration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollaborationConfiguredAudienceModelAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationConfiguredAudienceModelAssociationsResponse
+
+    interface _ListCollaborationIdNamespaceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationIdNamespaceAssociationsOutput]
+      def next_token: () -> String?
+      def collaboration_id_namespace_association_summaries: () -> Array[Types::CollaborationIdNamespaceAssociationSummary]?
+    end
+    def list_collaboration_id_namespace_associations: (
+      ?collaboration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollaborationIdNamespaceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationIdNamespaceAssociationsResponse
+
+    interface _ListCollaborationPrivacyBudgetTemplatesResponse
+      include Smithy::Client::_Response[Types::ListCollaborationPrivacyBudgetTemplatesOutput]
+      def next_token: () -> String?
+      def collaboration_privacy_budget_template_summaries: () -> Array[Types::CollaborationPrivacyBudgetTemplateSummary]?
+    end
+    def list_collaboration_privacy_budget_templates: (
+      ?collaboration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollaborationPrivacyBudgetTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationPrivacyBudgetTemplatesResponse
+
+    interface _ListCollaborationPrivacyBudgetsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationPrivacyBudgetsOutput]
+      def collaboration_privacy_budget_summaries: () -> Array[Types::CollaborationPrivacyBudgetSummary]?
+      def next_token: () -> String?
+    end
+    def list_collaboration_privacy_budgets: (
+      ?collaboration_identifier: String,
+      ?privacy_budget_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCollaborationPrivacyBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationPrivacyBudgetsResponse
+
+    interface _ListCollaborationsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationsOperationOutput]
+      def next_token: () -> String?
+      def collaboration_list: () -> Array[Types::CollaborationSummary]?
+    end
+    def list_collaborations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?member_status: String
+    ) -> _ListCollaborationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationsResponse
+
+    interface _ListConfiguredAudienceModelAssociationsResponse
+      include Smithy::Client::_Response[Types::ListConfiguredAudienceModelAssociationsOutput]
+      def configured_audience_model_association_summaries: () -> Array[Types::ConfiguredAudienceModelAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_configured_audience_model_associations: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfiguredAudienceModelAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredAudienceModelAssociationsResponse
+
+    interface _ListConfiguredTableAssociationsResponse
+      include Smithy::Client::_Response[Types::ListConfiguredTableAssociationsOperationOutput]
+      def configured_table_association_summaries: () -> Array[Types::ConfiguredTableAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_configured_table_associations: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfiguredTableAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredTableAssociationsResponse
+
+    interface _ListConfiguredTablesResponse
+      include Smithy::Client::_Response[Types::ListConfiguredTablesOperationOutput]
+      def configured_table_summaries: () -> Array[Types::ConfiguredTableSummary]?
+      def next_token: () -> String?
+    end
+    def list_configured_tables: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfiguredTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfiguredTablesResponse
+
+    interface _ListIdMappingTablesResponse
+      include Smithy::Client::_Response[Types::ListIdMappingTablesOutput]
+      def id_mapping_table_summaries: () -> Array[Types::IdMappingTableSummary]?
+      def next_token: () -> String?
+    end
+    def list_id_mapping_tables: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdMappingTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdMappingTablesResponse
+
+    interface _ListIdNamespaceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListIdNamespaceAssociationsOutput]
+      def next_token: () -> String?
+      def id_namespace_association_summaries: () -> Array[Types::IdNamespaceAssociationSummary]?
+    end
+    def list_id_namespace_associations: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdNamespaceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdNamespaceAssociationsResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersOperationOutput]
+      def next_token: () -> String?
+      def member_summaries: () -> Array[Types::MemberSummary]?
+    end
+    def list_members: (
+      ?collaboration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListMembershipsResponse
+      include Smithy::Client::_Response[Types::ListMembershipsOperationOutput]
+      def next_token: () -> String?
+      def membership_summaries: () -> Array[Types::MembershipSummary]?
+    end
+    def list_memberships: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembershipsResponse
+
+    interface _ListPrivacyBudgetTemplatesResponse
+      include Smithy::Client::_Response[Types::ListPrivacyBudgetTemplatesOutput]
+      def next_token: () -> String?
+      def privacy_budget_template_summaries: () -> Array[Types::PrivacyBudgetTemplateSummary]?
+    end
+    def list_privacy_budget_templates: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPrivacyBudgetTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivacyBudgetTemplatesResponse
+
+    interface _ListPrivacyBudgetsResponse
+      include Smithy::Client::_Response[Types::ListPrivacyBudgetsOutput]
+      def privacy_budget_summaries: () -> Array[Types::PrivacyBudgetSummary]?
+      def next_token: () -> String?
+    end
+    def list_privacy_budgets: (
+      ?membership_identifier: String,
+      ?privacy_budget_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPrivacyBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivacyBudgetsResponse
+
+    interface _ListProtectedJobsResponse
+      include Smithy::Client::_Response[Types::ListProtectedJobsOutput]
+      def next_token: () -> String?
+      def protected_jobs: () -> Array[Types::ProtectedJobSummary]?
+    end
+    def list_protected_jobs: (
+      ?membership_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtectedJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectedJobsResponse
+
+    interface _ListProtectedQueriesResponse
+      include Smithy::Client::_Response[Types::ListProtectedQueriesOperationOutput]
+      def next_token: () -> String?
+      def protected_queries: () -> Array[Types::ProtectedQuerySummary]?
+    end
+    def list_protected_queries: (
+      ?membership_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtectedQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectedQueriesResponse
+
+    interface _ListSchemasResponse
+      include Smithy::Client::_Response[Types::ListSchemasOperationOutput]
+      def schema_summaries: () -> Array[Types::SchemaSummary]?
+      def next_token: () -> String?
+    end
+    def list_schemas: (
+      ?collaboration_identifier: String,
+      ?schema_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemasResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PopulateIdMappingTableResponse
+      include Smithy::Client::_Response[Types::PopulateIdMappingTableOutput]
+      def id_mapping_job_id: () -> String?
+    end
+    def populate_id_mapping_table: (
+      ?id_mapping_table_identifier: String,
+      ?membership_identifier: String
+    ) -> _PopulateIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PopulateIdMappingTableResponse
+
+    interface _PreviewPrivacyImpactResponse
+      include Smithy::Client::_Response[Types::PreviewPrivacyImpactOutput]
+      def privacy_impact: () -> Types::PrivacyImpact?
+    end
+    def preview_privacy_impact: (
+      ?membership_identifier: String,
+      ?parameters: {
+        differential_privacy: {
+          epsilon: Integer,
+          users_noise_per_query: Integer
+        }
+      }
+    ) -> _PreviewPrivacyImpactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PreviewPrivacyImpactResponse
+
+    interface _StartProtectedJobResponse
+      include Smithy::Client::_Response[Types::StartProtectedJobOutput]
+      def protected_job: () -> Types::ProtectedJob?
+    end
+    def start_protected_job: (
+      ?type: String,
+      ?membership_identifier: String,
+      ?job_parameters: {
+        analysis_template_arn: String
+      },
+      ?result_configuration: {
+        output_configuration: {
+          member: {
+            account_id: String
+          }
+        }
+      }
+    ) -> _StartProtectedJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProtectedJobResponse
+
+    interface _StartProtectedQueryResponse
+      include Smithy::Client::_Response[Types::StartProtectedQueryOperationOutput]
+      def protected_query: () -> Types::ProtectedQuery?
+    end
+    def start_protected_query: (
+      ?type: String,
+      ?membership_identifier: String,
+      ?sql_parameters: {
+        query_string: String,
+        analysis_template_arn: String,
+        parameters: Hash[String, String]
+      },
+      ?result_configuration: {
+        output_configuration: {
+          s3: {
+            result_format: String,
+            bucket: String,
+            key_prefix: String,
+            single_file_output: bool
+          },
+          member: {
+            account_id: String
+          },
+          distribute: {
+            locations: Array[
+              {
+                s3: untyped,
+                member: untyped
+              }
+            ]
+          }
+        }
+      },
+      ?compute_configuration: {
+        worker: {
+          type: String,
+          number: Integer
+        }
+      }
+    ) -> _StartProtectedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProtectedQueryResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnalysisTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateAnalysisTemplateOperationOutput]
+      def analysis_template: () -> Types::AnalysisTemplate?
+    end
+    def update_analysis_template: (
+      ?membership_identifier: String,
+      ?analysis_template_identifier: String,
+      ?description: String
+    ) -> _UpdateAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnalysisTemplateResponse
+
+    interface _UpdateCollaborationResponse
+      include Smithy::Client::_Response[Types::UpdateCollaborationOperationOutput]
+      def collaboration: () -> Types::Collaboration?
+    end
+    def update_collaboration: (
+      ?collaboration_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?analytics_engine: String
+    ) -> _UpdateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollaborationResponse
+
+    interface _UpdateConfiguredAudienceModelAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredAudienceModelAssociationOutput]
+      def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation?
+    end
+    def update_configured_audience_model_association: (
+      ?configured_audience_model_association_identifier: String,
+      ?membership_identifier: String,
+      ?description: String,
+      ?name: String
+    ) -> _UpdateConfiguredAudienceModelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredAudienceModelAssociationResponse
+
+    interface _UpdateConfiguredTableResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredTableOperationOutput]
+      def configured_table: () -> Types::ConfiguredTable?
+    end
+    def update_configured_table: (
+      ?configured_table_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?table_reference: {
+        glue: {
+          table_name: String,
+          database_name: String
+        },
+        snowflake: {
+          secret_arn: String,
+          account_identifier: String,
+          database_name: String,
+          table_name: String,
+          schema_name: String,
+          table_schema: {
+            v1: Array[
+              {
+                column_name: String,
+                column_type: String
+              }
+            ]
+          }
+        },
+        athena: {
+          work_group: String,
+          output_location: String,
+          database_name: String,
+          table_name: String
+        }
+      },
+      ?allowed_columns: Array[String],
+      ?analysis_method: String,
+      ?selected_analysis_methods: Array[String]
+    ) -> _UpdateConfiguredTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredTableResponse
+
+    interface _UpdateConfiguredTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredTableAnalysisRuleOperationOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAnalysisRule?
+    end
+    def update_configured_table_analysis_rule: (
+      ?configured_table_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          list: {
+            join_columns: Array[String],
+            allowed_join_operators: Array[String],
+            list_columns: untyped,
+            additional_analyses: String
+          },
+          aggregation: {
+            aggregate_columns: Array[
+              {
+                column_names: Array[String],
+                function: String
+              }
+            ],
+            join_columns: untyped,
+            join_required: String,
+            allowed_join_operators: untyped,
+            dimension_columns: untyped,
+            scalar_functions: Array[String],
+            output_constraints: Array[
+              {
+                column_name: String,
+                minimum: Integer,
+                type: String
+              }
+            ],
+            additional_analyses: untyped
+          },
+          custom: {
+            allowed_analyses: Array[String],
+            allowed_analysis_providers: Array[String],
+            additional_analyses: untyped,
+            disallowed_output_columns: untyped,
+            differential_privacy: {
+              columns: Array[
+                {
+                  name: String
+                }
+              ]
+            }
+          }
+        }
+      }
+    ) -> _UpdateConfiguredTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredTableAnalysisRuleResponse
+
+    interface _UpdateConfiguredTableAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredTableAssociationOperationOutput]
+      def configured_table_association: () -> Types::ConfiguredTableAssociation?
+    end
+    def update_configured_table_association: (
+      ?configured_table_association_identifier: String,
+      ?membership_identifier: String,
+      ?description: String,
+      ?role_arn: String
+    ) -> _UpdateConfiguredTableAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredTableAssociationResponse
+
+    interface _UpdateConfiguredTableAssociationAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::UpdateConfiguredTableAssociationAnalysisRuleOutput]
+      def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule?
+    end
+    def update_configured_table_association_analysis_rule: (
+      ?membership_identifier: String,
+      ?configured_table_association_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          list: {
+            allowed_result_receivers: Array[String],
+            allowed_additional_analyses: Array[String]
+          },
+          aggregation: {
+            allowed_result_receivers: untyped,
+            allowed_additional_analyses: untyped
+          },
+          custom: {
+            allowed_result_receivers: untyped,
+            allowed_additional_analyses: untyped
+          }
+        }
+      }
+    ) -> _UpdateConfiguredTableAssociationAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfiguredTableAssociationAnalysisRuleResponse
+
+    interface _UpdateIdMappingTableResponse
+      include Smithy::Client::_Response[Types::UpdateIdMappingTableOutput]
+      def id_mapping_table: () -> Types::IdMappingTable?
+    end
+    def update_id_mapping_table: (
+      ?id_mapping_table_identifier: String,
+      ?membership_identifier: String,
+      ?description: String,
+      ?kms_key_arn: String
+    ) -> _UpdateIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdMappingTableResponse
+
+    interface _UpdateIdNamespaceAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateIdNamespaceAssociationOutput]
+      def id_namespace_association: () -> Types::IdNamespaceAssociation?
+    end
+    def update_id_namespace_association: (
+      ?id_namespace_association_identifier: String,
+      ?membership_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?id_mapping_config: {
+        allow_use_as_dimension_column: bool
+      }
+    ) -> _UpdateIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdNamespaceAssociationResponse
+
+    interface _UpdateMembershipResponse
+      include Smithy::Client::_Response[Types::UpdateMembershipOperationOutput]
+      def membership: () -> Types::Membership?
+    end
+    def update_membership: (
+      ?membership_identifier: String,
+      ?query_log_status: String,
+      ?job_log_status: String,
+      ?default_result_configuration: {
+        output_configuration: {
+          s3: {
+            result_format: String,
+            bucket: String,
+            key_prefix: String,
+            single_file_output: bool
+          }
+        },
+        role_arn: String
+      },
+      ?default_job_result_configuration: {
+        output_configuration: {
+          s3: {
+            bucket: String,
+            key_prefix: String
+          }
+        },
+        role_arn: String
+      }
+    ) -> _UpdateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMembershipResponse
+
+    interface _UpdatePrivacyBudgetTemplateResponse
+      include Smithy::Client::_Response[Types::UpdatePrivacyBudgetTemplateOutput]
+      def privacy_budget_template: () -> Types::PrivacyBudgetTemplate?
+    end
+    def update_privacy_budget_template: (
+      ?membership_identifier: String,
+      ?privacy_budget_template_identifier: String,
+      ?privacy_budget_type: String,
+      ?parameters: {
+        differential_privacy: {
+          epsilon: Integer,
+          users_noise_per_query: Integer
+        }
+      }
+    ) -> _UpdatePrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrivacyBudgetTemplateResponse
+
+    interface _UpdateProtectedJobResponse
+      include Smithy::Client::_Response[Types::UpdateProtectedJobOutput]
+      def protected_job: () -> Types::ProtectedJob?
+    end
+    def update_protected_job: (
+      ?membership_identifier: String,
+      ?protected_job_identifier: String,
+      ?target_status: String
+    ) -> _UpdateProtectedJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProtectedJobResponse
+
+    interface _UpdateProtectedQueryResponse
+      include Smithy::Client::_Response[Types::UpdateProtectedQueryOperationOutput]
+      def protected_query: () -> Types::ProtectedQuery?
+    end
+    def update_protected_query: (
+      ?membership_identifier: String,
+      ?protected_query_identifier: String,
+      ?target_status: String
+    ) -> _UpdateProtectedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProtectedQueryResponse
+  end
+end

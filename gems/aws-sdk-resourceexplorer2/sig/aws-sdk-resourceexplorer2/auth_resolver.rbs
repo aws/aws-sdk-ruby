@@ -1,0 +1,5 @@
+module Aws::ResourceExplorer2
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

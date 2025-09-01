@@ -1,0 +1,769 @@
+module Aws::ElasticsearchService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ElasticsearchService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptInboundCrossClusterSearchConnectionResponse
+      include Smithy::Client::_Response[Types::AcceptInboundCrossClusterSearchConnectionResponse]
+      def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection?
+    end
+    def accept_inbound_cross_cluster_search_connection: (
+      ?cross_cluster_search_connection_id: String
+    ) -> _AcceptInboundCrossClusterSearchConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInboundCrossClusterSearchConnectionResponse
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags: (
+      ?arn: String,
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _AssociatePackageResponse
+      include Smithy::Client::_Response[Types::AssociatePackageResponse]
+      def domain_package_details: () -> Types::DomainPackageDetails?
+    end
+    def associate_package: (
+      ?package_id: String,
+      ?domain_name: String
+    ) -> _AssociatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePackageResponse
+
+    interface _AuthorizeVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::AuthorizeVpcEndpointAccessResponse]
+      def authorized_principal: () -> Types::AuthorizedPrincipal?
+    end
+    def authorize_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?account: String
+    ) -> _AuthorizeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AuthorizeVpcEndpointAccessResponse
+
+    interface _CancelDomainConfigChangeResponse
+      include Smithy::Client::_Response[Types::CancelDomainConfigChangeResponse]
+      def dry_run: () -> bool?
+      def cancelled_change_ids: () -> Array[String]?
+      def cancelled_change_properties: () -> Array[Types::CancelledChangeProperty]?
+    end
+    def cancel_domain_config_change: (
+      ?domain_name: String,
+      ?dry_run: bool
+    ) -> _CancelDomainConfigChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDomainConfigChangeResponse
+
+    interface _CancelElasticsearchServiceSoftwareUpdateResponse
+      include Smithy::Client::_Response[Types::CancelElasticsearchServiceSoftwareUpdateResponse]
+      def service_software_options: () -> Types::ServiceSoftwareOptions?
+    end
+    def cancel_elasticsearch_service_software_update: (
+      ?domain_name: String
+    ) -> _CancelElasticsearchServiceSoftwareUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelElasticsearchServiceSoftwareUpdateResponse
+
+    interface _CreateElasticsearchDomainResponse
+      include Smithy::Client::_Response[Types::CreateElasticsearchDomainResponse]
+      def domain_status: () -> Types::ElasticsearchDomainStatus?
+    end
+    def create_elasticsearch_domain: (
+      ?domain_name: String,
+      ?elasticsearch_version: String,
+      ?elasticsearch_cluster_config: {
+        instance_type: String,
+        instance_count: Integer,
+        dedicated_master_enabled: bool,
+        zone_awareness_enabled: untyped,
+        zone_awareness_config: {
+          availability_zone_count: untyped
+        },
+        dedicated_master_type: untyped,
+        dedicated_master_count: untyped,
+        warm_enabled: untyped,
+        warm_type: String,
+        warm_count: untyped,
+        cold_storage_options: {
+          enabled: untyped
+        }
+      },
+      ?ebs_options: {
+        ebs_enabled: bool,
+        volume_type: String,
+        volume_size: Integer,
+        iops: untyped,
+        throughput: untyped
+      },
+      ?access_policies: String,
+      ?snapshot_options: {
+        automated_snapshot_start_hour: Integer
+      },
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?cognito_options: {
+        enabled: bool,
+        user_pool_id: String,
+        identity_pool_id: String,
+        role_arn: String
+      },
+      ?encryption_at_rest_options: {
+        enabled: bool,
+        kms_key_id: String
+      },
+      ?node_to_node_encryption_options: {
+        enabled: bool
+      },
+      ?advanced_options: Hash[String, String],
+      ?log_publishing_options: Hash[String,
+        {
+          cloud_watch_logs_log_group_arn: String,
+          enabled: bool
+        }
+      ],
+      ?domain_endpoint_options: {
+        enforce_https: bool,
+        tls_security_policy: String,
+        custom_endpoint_enabled: untyped,
+        custom_endpoint: String,
+        custom_endpoint_certificate_arn: String
+      },
+      ?advanced_security_options: {
+        enabled: bool,
+        internal_user_database_enabled: untyped,
+        master_user_options: {
+          master_user_arn: String,
+          master_user_name: String,
+          master_user_password: String
+        },
+        saml_options: {
+          enabled: untyped,
+          idp: {
+            metadata_content: String,
+            entity_id: String
+          },
+          master_user_name: untyped,
+          master_backend_role: String,
+          subject_key: String,
+          roles_key: untyped,
+          session_timeout_minutes: Integer
+        },
+        anonymous_auth_enabled: untyped
+      },
+      ?auto_tune_options: {
+        desired_state: String,
+        maintenance_schedules: Array[
+          {
+            start_at: Time,
+            duration: {
+              value: Integer,
+              unit: String
+            },
+            cron_expression_for_recurrence: String
+          }
+        ]
+      },
+      ?tag_list: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateElasticsearchDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateElasticsearchDomainResponse
+
+    interface _CreateOutboundCrossClusterSearchConnectionResponse
+      include Smithy::Client::_Response[Types::CreateOutboundCrossClusterSearchConnectionResponse]
+      def source_domain_info: () -> Types::DomainInformation?
+      def destination_domain_info: () -> Types::DomainInformation?
+      def connection_alias: () -> String?
+      def connection_status: () -> Types::OutboundCrossClusterSearchConnectionStatus?
+      def cross_cluster_search_connection_id: () -> String?
+    end
+    def create_outbound_cross_cluster_search_connection: (
+      ?source_domain_info: {
+        owner_id: String,
+        domain_name: String,
+        region: String
+      },
+      ?destination_domain_info: {
+        owner_id: String,
+        domain_name: String,
+        region: String
+      },
+      ?connection_alias: String
+    ) -> _CreateOutboundCrossClusterSearchConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOutboundCrossClusterSearchConnectionResponse
+
+    interface _CreatePackageResponse
+      include Smithy::Client::_Response[Types::CreatePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def create_package: (
+      ?package_name: String,
+      ?package_type: String,
+      ?package_description: String,
+      ?package_source: {
+        s3_bucket_name: String,
+        s3_key: String
+      }
+    ) -> _CreatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackageResponse
+
+    interface _CreateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::CreateVpcEndpointResponse]
+      def vpc_endpoint: () -> Types::VpcEndpoint?
+    end
+    def create_vpc_endpoint: (
+      ?domain_arn: String,
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?client_token: String
+    ) -> _CreateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointResponse
+
+    interface _DeleteElasticsearchDomainResponse
+      include Smithy::Client::_Response[Types::DeleteElasticsearchDomainResponse]
+      def domain_status: () -> Types::ElasticsearchDomainStatus?
+    end
+    def delete_elasticsearch_domain: (
+      ?domain_name: String
+    ) -> _DeleteElasticsearchDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteElasticsearchDomainResponse
+
+    interface _DeleteElasticsearchServiceRoleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_elasticsearch_service_role: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteElasticsearchServiceRoleResponse
+
+    interface _DeleteInboundCrossClusterSearchConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteInboundCrossClusterSearchConnectionResponse]
+      def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection?
+    end
+    def delete_inbound_cross_cluster_search_connection: (
+      ?cross_cluster_search_connection_id: String
+    ) -> _DeleteInboundCrossClusterSearchConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInboundCrossClusterSearchConnectionResponse
+
+    interface _DeleteOutboundCrossClusterSearchConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteOutboundCrossClusterSearchConnectionResponse]
+      def cross_cluster_search_connection: () -> Types::OutboundCrossClusterSearchConnection?
+    end
+    def delete_outbound_cross_cluster_search_connection: (
+      ?cross_cluster_search_connection_id: String
+    ) -> _DeleteOutboundCrossClusterSearchConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutboundCrossClusterSearchConnectionResponse
+
+    interface _DeletePackageResponse
+      include Smithy::Client::_Response[Types::DeletePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def delete_package: (
+      ?package_id: String
+    ) -> _DeletePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageResponse
+
+    interface _DeleteVpcEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteVpcEndpointResponse]
+      def vpc_endpoint_summary: () -> Types::VpcEndpointSummary?
+    end
+    def delete_vpc_endpoint: (
+      ?vpc_endpoint_id: String
+    ) -> _DeleteVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointResponse
+
+    interface _DescribeDomainAutoTunesResponse
+      include Smithy::Client::_Response[Types::DescribeDomainAutoTunesResponse]
+      def auto_tunes: () -> Array[Types::AutoTune]?
+      def next_token: () -> String?
+    end
+    def describe_domain_auto_tunes: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDomainAutoTunesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainAutoTunesResponse
+
+    interface _DescribeDomainChangeProgressResponse
+      include Smithy::Client::_Response[Types::DescribeDomainChangeProgressResponse]
+      def change_progress_status: () -> Types::ChangeProgressStatusDetails?
+    end
+    def describe_domain_change_progress: (
+      ?domain_name: String,
+      ?change_id: String
+    ) -> _DescribeDomainChangeProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainChangeProgressResponse
+
+    interface _DescribeElasticsearchDomainResponse
+      include Smithy::Client::_Response[Types::DescribeElasticsearchDomainResponse]
+      def domain_status: () -> Types::ElasticsearchDomainStatus?
+    end
+    def describe_elasticsearch_domain: (
+      ?domain_name: String
+    ) -> _DescribeElasticsearchDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeElasticsearchDomainResponse
+
+    interface _DescribeElasticsearchDomainConfigResponse
+      include Smithy::Client::_Response[Types::DescribeElasticsearchDomainConfigResponse]
+      def domain_config: () -> Types::ElasticsearchDomainConfig?
+    end
+    def describe_elasticsearch_domain_config: (
+      ?domain_name: String
+    ) -> _DescribeElasticsearchDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeElasticsearchDomainConfigResponse
+
+    interface _DescribeElasticsearchDomainsResponse
+      include Smithy::Client::_Response[Types::DescribeElasticsearchDomainsResponse]
+      def domain_status_list: () -> Array[Types::ElasticsearchDomainStatus]?
+    end
+    def describe_elasticsearch_domains: (
+      ?domain_names: Array[String]
+    ) -> _DescribeElasticsearchDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeElasticsearchDomainsResponse
+
+    interface _DescribeElasticsearchInstanceTypeLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeElasticsearchInstanceTypeLimitsResponse]
+      def limits_by_role: () -> Hash[String, Types::Limits]?
+    end
+    def describe_elasticsearch_instance_type_limits: (
+      ?domain_name: String,
+      ?instance_type: String,
+      ?elasticsearch_version: String
+    ) -> _DescribeElasticsearchInstanceTypeLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeElasticsearchInstanceTypeLimitsResponse
+
+    interface _DescribeInboundCrossClusterSearchConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeInboundCrossClusterSearchConnectionsResponse]
+      def cross_cluster_search_connections: () -> Array[Types::InboundCrossClusterSearchConnection]?
+      def next_token: () -> String?
+    end
+    def describe_inbound_cross_cluster_search_connections: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeInboundCrossClusterSearchConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInboundCrossClusterSearchConnectionsResponse
+
+    interface _DescribeOutboundCrossClusterSearchConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeOutboundCrossClusterSearchConnectionsResponse]
+      def cross_cluster_search_connections: () -> Array[Types::OutboundCrossClusterSearchConnection]?
+      def next_token: () -> String?
+    end
+    def describe_outbound_cross_cluster_search_connections: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeOutboundCrossClusterSearchConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOutboundCrossClusterSearchConnectionsResponse
+
+    interface _DescribePackagesResponse
+      include Smithy::Client::_Response[Types::DescribePackagesResponse]
+      def package_details_list: () -> Array[Types::PackageDetails]?
+      def next_token: () -> String?
+    end
+    def describe_packages: (
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackagesResponse
+
+    interface _DescribeReservedElasticsearchInstanceOfferingsResponse
+      include Smithy::Client::_Response[Types::DescribeReservedElasticsearchInstanceOfferingsResponse]
+      def next_token: () -> String?
+      def reserved_elasticsearch_instance_offerings: () -> Array[Types::ReservedElasticsearchInstanceOffering]?
+    end
+    def describe_reserved_elasticsearch_instance_offerings: (
+      ?reserved_elasticsearch_instance_offering_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedElasticsearchInstanceOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedElasticsearchInstanceOfferingsResponse
+
+    interface _DescribeReservedElasticsearchInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeReservedElasticsearchInstancesResponse]
+      def next_token: () -> String?
+      def reserved_elasticsearch_instances: () -> Array[Types::ReservedElasticsearchInstance]?
+    end
+    def describe_reserved_elasticsearch_instances: (
+      ?reserved_elasticsearch_instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedElasticsearchInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedElasticsearchInstancesResponse
+
+    interface _DescribeVpcEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeVpcEndpointsResponse]
+      def vpc_endpoints: () -> Array[Types::VpcEndpoint]?
+      def vpc_endpoint_errors: () -> Array[Types::VpcEndpointError]?
+    end
+    def describe_vpc_endpoints: (
+      ?vpc_endpoint_ids: Array[String]
+    ) -> _DescribeVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEndpointsResponse
+
+    interface _DissociatePackageResponse
+      include Smithy::Client::_Response[Types::DissociatePackageResponse]
+      def domain_package_details: () -> Types::DomainPackageDetails?
+    end
+    def dissociate_package: (
+      ?package_id: String,
+      ?domain_name: String
+    ) -> _DissociatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DissociatePackageResponse
+
+    interface _GetCompatibleElasticsearchVersionsResponse
+      include Smithy::Client::_Response[Types::GetCompatibleElasticsearchVersionsResponse]
+      def compatible_elasticsearch_versions: () -> Array[Types::CompatibleVersionsMap]?
+    end
+    def get_compatible_elasticsearch_versions: (
+      ?domain_name: String
+    ) -> _GetCompatibleElasticsearchVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCompatibleElasticsearchVersionsResponse
+
+    interface _GetPackageVersionHistoryResponse
+      include Smithy::Client::_Response[Types::GetPackageVersionHistoryResponse]
+      def package_id: () -> String?
+      def package_version_history_list: () -> Array[Types::PackageVersionHistory]?
+      def next_token: () -> String?
+    end
+    def get_package_version_history: (
+      ?package_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetPackageVersionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPackageVersionHistoryResponse
+
+    interface _GetUpgradeHistoryResponse
+      include Smithy::Client::_Response[Types::GetUpgradeHistoryResponse]
+      def upgrade_histories: () -> Array[Types::UpgradeHistory]?
+      def next_token: () -> String?
+    end
+    def get_upgrade_history: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetUpgradeHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUpgradeHistoryResponse
+
+    interface _GetUpgradeStatusResponse
+      include Smithy::Client::_Response[Types::GetUpgradeStatusResponse]
+      def upgrade_step: () -> String?
+      def step_status: () -> String?
+      def upgrade_name: () -> String?
+    end
+    def get_upgrade_status: (
+      ?domain_name: String
+    ) -> _GetUpgradeStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUpgradeStatusResponse
+
+    interface _ListDomainNamesResponse
+      include Smithy::Client::_Response[Types::ListDomainNamesResponse]
+      def domain_names: () -> Array[Types::DomainInfo]?
+    end
+    def list_domain_names: (
+      ?engine_type: String
+    ) -> _ListDomainNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainNamesResponse
+
+    interface _ListDomainsForPackageResponse
+      include Smithy::Client::_Response[Types::ListDomainsForPackageResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+      def next_token: () -> String?
+    end
+    def list_domains_for_package: (
+      ?package_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsForPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsForPackageResponse
+
+    interface _ListElasticsearchInstanceTypesResponse
+      include Smithy::Client::_Response[Types::ListElasticsearchInstanceTypesResponse]
+      def elasticsearch_instance_types: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_elasticsearch_instance_types: (
+      ?elasticsearch_version: String,
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListElasticsearchInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListElasticsearchInstanceTypesResponse
+
+    interface _ListElasticsearchVersionsResponse
+      include Smithy::Client::_Response[Types::ListElasticsearchVersionsResponse]
+      def elasticsearch_versions: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_elasticsearch_versions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListElasticsearchVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListElasticsearchVersionsResponse
+
+    interface _ListPackagesForDomainResponse
+      include Smithy::Client::_Response[Types::ListPackagesForDomainResponse]
+      def domain_package_details_list: () -> Array[Types::DomainPackageDetails]?
+      def next_token: () -> String?
+    end
+    def list_packages_for_domain: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPackagesForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagesForDomainResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags: (
+      ?arn: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointAccessResponse]
+      def authorized_principal_list: () -> Array[Types::AuthorizedPrincipal]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?next_token: String
+    ) -> _ListVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointAccessResponse
+
+    interface _ListVpcEndpointsResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointsResponse]
+      def vpc_endpoint_summary_list: () -> Array[Types::VpcEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoints: (
+      ?next_token: String
+    ) -> _ListVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointsResponse
+
+    interface _ListVpcEndpointsForDomainResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointsForDomainResponse]
+      def vpc_endpoint_summary_list: () -> Array[Types::VpcEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoints_for_domain: (
+      ?domain_name: String,
+      ?next_token: String
+    ) -> _ListVpcEndpointsForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointsForDomainResponse
+
+    interface _PurchaseReservedElasticsearchInstanceOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseReservedElasticsearchInstanceOfferingResponse]
+      def reserved_elasticsearch_instance_id: () -> String?
+      def reservation_name: () -> String?
+    end
+    def purchase_reserved_elasticsearch_instance_offering: (
+      ?reserved_elasticsearch_instance_offering_id: String,
+      ?reservation_name: String,
+      ?instance_count: Integer
+    ) -> _PurchaseReservedElasticsearchInstanceOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseReservedElasticsearchInstanceOfferingResponse
+
+    interface _RejectInboundCrossClusterSearchConnectionResponse
+      include Smithy::Client::_Response[Types::RejectInboundCrossClusterSearchConnectionResponse]
+      def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection?
+    end
+    def reject_inbound_cross_cluster_search_connection: (
+      ?cross_cluster_search_connection_id: String
+    ) -> _RejectInboundCrossClusterSearchConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectInboundCrossClusterSearchConnectionResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _RevokeVpcEndpointAccessResponse
+      include Smithy::Client::_Response[Types::RevokeVpcEndpointAccessResponse]
+    end
+    def revoke_vpc_endpoint_access: (
+      ?domain_name: String,
+      ?account: String
+    ) -> _RevokeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeVpcEndpointAccessResponse
+
+    interface _StartElasticsearchServiceSoftwareUpdateResponse
+      include Smithy::Client::_Response[Types::StartElasticsearchServiceSoftwareUpdateResponse]
+      def service_software_options: () -> Types::ServiceSoftwareOptions?
+    end
+    def start_elasticsearch_service_software_update: (
+      ?domain_name: String
+    ) -> _StartElasticsearchServiceSoftwareUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartElasticsearchServiceSoftwareUpdateResponse
+
+    interface _UpdateElasticsearchDomainConfigResponse
+      include Smithy::Client::_Response[Types::UpdateElasticsearchDomainConfigResponse]
+      def domain_config: () -> Types::ElasticsearchDomainConfig?
+      def dry_run_results: () -> Types::DryRunResults?
+    end
+    def update_elasticsearch_domain_config: (
+      ?domain_name: String,
+      ?elasticsearch_cluster_config: {
+        instance_type: String,
+        instance_count: Integer,
+        dedicated_master_enabled: bool,
+        zone_awareness_enabled: untyped,
+        zone_awareness_config: {
+          availability_zone_count: untyped
+        },
+        dedicated_master_type: untyped,
+        dedicated_master_count: untyped,
+        warm_enabled: untyped,
+        warm_type: String,
+        warm_count: untyped,
+        cold_storage_options: {
+          enabled: untyped
+        }
+      },
+      ?ebs_options: {
+        ebs_enabled: bool,
+        volume_type: String,
+        volume_size: Integer,
+        iops: untyped,
+        throughput: untyped
+      },
+      ?snapshot_options: {
+        automated_snapshot_start_hour: Integer
+      },
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      },
+      ?cognito_options: {
+        enabled: bool,
+        user_pool_id: String,
+        identity_pool_id: String,
+        role_arn: String
+      },
+      ?advanced_options: Hash[String, String],
+      ?access_policies: String,
+      ?log_publishing_options: Hash[String,
+        {
+          cloud_watch_logs_log_group_arn: String,
+          enabled: bool
+        }
+      ],
+      ?domain_endpoint_options: {
+        enforce_https: bool,
+        tls_security_policy: String,
+        custom_endpoint_enabled: untyped,
+        custom_endpoint: String,
+        custom_endpoint_certificate_arn: String
+      },
+      ?advanced_security_options: {
+        enabled: bool,
+        internal_user_database_enabled: untyped,
+        master_user_options: {
+          master_user_arn: String,
+          master_user_name: String,
+          master_user_password: String
+        },
+        saml_options: {
+          enabled: untyped,
+          idp: {
+            metadata_content: String,
+            entity_id: String
+          },
+          master_user_name: untyped,
+          master_backend_role: String,
+          subject_key: String,
+          roles_key: untyped,
+          session_timeout_minutes: Integer
+        },
+        anonymous_auth_enabled: untyped
+      },
+      ?node_to_node_encryption_options: {
+        enabled: bool
+      },
+      ?encryption_at_rest_options: {
+        enabled: bool,
+        kms_key_id: String
+      },
+      ?auto_tune_options: {
+        desired_state: String,
+        rollback_on_disable: String,
+        maintenance_schedules: Array[
+          {
+            start_at: Time,
+            duration: {
+              value: Integer,
+              unit: String
+            },
+            cron_expression_for_recurrence: String
+          }
+        ]
+      },
+      ?dry_run: bool
+    ) -> _UpdateElasticsearchDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateElasticsearchDomainConfigResponse
+
+    interface _UpdatePackageResponse
+      include Smithy::Client::_Response[Types::UpdatePackageResponse]
+      def package_details: () -> Types::PackageDetails?
+    end
+    def update_package: (
+      ?package_id: String,
+      ?package_source: {
+        s3_bucket_name: String,
+        s3_key: String
+      },
+      ?package_description: String,
+      ?commit_message: String
+    ) -> _UpdatePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageResponse
+
+    interface _UpdateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateVpcEndpointResponse]
+      def vpc_endpoint: () -> Types::VpcEndpoint?
+    end
+    def update_vpc_endpoint: (
+      ?vpc_endpoint_id: String,
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: untyped
+      }
+    ) -> _UpdateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcEndpointResponse
+
+    interface _UpgradeElasticsearchDomainResponse
+      include Smithy::Client::_Response[Types::UpgradeElasticsearchDomainResponse]
+      def domain_name: () -> String?
+      def target_version: () -> String?
+      def perform_check_only: () -> bool?
+      def change_progress_details: () -> Types::ChangeProgressDetails?
+    end
+    def upgrade_elasticsearch_domain: (
+      ?domain_name: String,
+      ?target_version: String,
+      ?perform_check_only: bool
+    ) -> _UpgradeElasticsearchDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeElasticsearchDomainResponse
+  end
+end

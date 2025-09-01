@@ -1,0 +1,5 @@
+  module Aws
+    module OpenSearchServerless
+      VERSION: String
+    end
+  end

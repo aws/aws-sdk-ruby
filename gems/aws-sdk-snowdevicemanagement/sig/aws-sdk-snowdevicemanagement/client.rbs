@@ -1,0 +1,202 @@
+module Aws::SnowDeviceManagement
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SnowDeviceManagement::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelTaskResponse
+      include Smithy::Client::_Response[Types::CancelTaskOperationOutput]
+      def task_id: () -> String?
+    end
+    def cancel_task: (
+      ?task_id: String
+    ) -> _CancelTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTaskResponse
+
+    interface _CreateTaskResponse
+      include Smithy::Client::_Response[Types::CreateTaskOperationOutput]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+    end
+    def create_task: (
+      ?targets: Array[String],
+      ?command: {
+        unlock: {
+        },
+        reboot: {
+        }
+      },
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTaskResponse
+
+    interface _DescribeDeviceResponse
+      include Smithy::Client::_Response[Types::DescribeDeviceOperationOutput]
+      def last_reached_out_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def managed_device_id: () -> String?
+      def managed_device_arn: () -> String?
+      def device_type: () -> String?
+      def associated_with_job: () -> String?
+      def device_state: () -> String?
+      def physical_network_interfaces: () -> Array[Types::PhysicalNetworkInterface]?
+      def device_capacities: () -> Array[Types::Capacity]?
+      def software: () -> Types::SoftwareInformation?
+    end
+    def describe_device: (
+      ?managed_device_id: String
+    ) -> _DescribeDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeviceResponse
+
+    interface _DescribeDeviceEc2InstancesResponse
+      include Smithy::Client::_Response[Types::DescribeDeviceEc2InstancesOutput]
+      def instances: () -> Array[Types::InstanceSummary]?
+    end
+    def describe_device_ec2_instances: (
+      ?managed_device_id: String,
+      ?instance_ids: Array[String]
+    ) -> _DescribeDeviceEc2InstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeviceEc2InstancesResponse
+
+    interface _DescribeExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeExecutionOperationOutput]
+      def task_id: () -> String?
+      def execution_id: () -> String?
+      def managed_device_id: () -> String?
+      def state: () -> String?
+      def started_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def describe_execution: (
+      ?task_id: String,
+      ?managed_device_id: String
+    ) -> _DescribeExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExecutionResponse
+
+    interface _DescribeTaskResponse
+      include Smithy::Client::_Response[Types::DescribeTaskOperationOutput]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def targets: () -> Array[String]?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def completed_at: () -> Time?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_task: (
+      ?task_id: String
+    ) -> _DescribeTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTaskResponse
+
+    interface _ListDeviceResourcesResponse
+      include Smithy::Client::_Response[Types::ListDeviceResourcesOperationOutput]
+      def resources: () -> Array[Types::ResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_device_resources: (
+      ?managed_device_id: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeviceResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceResourcesResponse
+
+    interface _ListDevicesResponse
+      include Smithy::Client::_Response[Types::ListDevicesOperationOutput]
+      def devices: () -> Array[Types::DeviceSummary]?
+      def next_token: () -> String?
+    end
+    def list_devices: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesResponse
+
+    interface _ListExecutionsResponse
+      include Smithy::Client::_Response[Types::ListExecutionsOperationOutput]
+      def executions: () -> Array[Types::ExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_executions: (
+      ?task_id: String,
+      ?state: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTasksResponse
+      include Smithy::Client::_Response[Types::ListTasksOperationOutput]
+      def tasks: () -> Array[Types::TaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_tasks: (
+      ?state: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

@@ -1,0 +1,388 @@
+module Aws::SecurityIR
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SecurityIR::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetMemberAccountDetailsResponse
+      include Smithy::Client::_Response[Types::BatchGetMemberAccountDetailsResponse]
+      def items: () -> Array[Types::GetMembershipAccountDetailItem]?
+      def errors: () -> Array[Types::GetMembershipAccountDetailError]?
+    end
+    def batch_get_member_account_details: (
+      ?membership_id: String,
+      ?account_ids: Array[String]
+    ) -> _BatchGetMemberAccountDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetMemberAccountDetailsResponse
+
+    interface _CancelMembershipResponse
+      include Smithy::Client::_Response[Types::CancelMembershipResponse]
+      def membership_id: () -> String?
+    end
+    def cancel_membership: (
+      ?membership_id: String
+    ) -> _CancelMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMembershipResponse
+
+    interface _CloseCaseResponse
+      include Smithy::Client::_Response[Types::CloseCaseResponse]
+      def case_status: () -> String?
+      def closed_date: () -> Time?
+    end
+    def close_case: (
+      ?case_id: String
+    ) -> _CloseCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloseCaseResponse
+
+    interface _CreateCaseResponse
+      include Smithy::Client::_Response[Types::CreateCaseResponse]
+      def case_id: () -> String?
+    end
+    def create_case: (
+      ?client_token: String,
+      ?resolver_type: String,
+      ?title: String,
+      ?description: String,
+      ?engagement_type: String,
+      ?reported_incident_start_date: Time,
+      ?impacted_accounts: Array[String],
+      ?watchers: Array[
+        {
+          email: String,
+          name: String,
+          job_title: String
+        }
+      ],
+      ?threat_actor_ip_addresses: Array[
+        {
+          ip_address: String,
+          user_agent: String
+        }
+      ],
+      ?impacted_services: Array[String],
+      ?impacted_aws_regions: Array[
+        {
+          region: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseResponse
+
+    interface _CreateCaseCommentResponse
+      include Smithy::Client::_Response[Types::CreateCaseCommentResponse]
+      def comment_id: () -> String?
+    end
+    def create_case_comment: (
+      ?case_id: String,
+      ?client_token: String,
+      ?body: String
+    ) -> _CreateCaseCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseCommentResponse
+
+    interface _CreateMembershipResponse
+      include Smithy::Client::_Response[Types::CreateMembershipResponse]
+      def membership_id: () -> String?
+    end
+    def create_membership: (
+      ?client_token: String,
+      ?membership_name: String,
+      ?incident_response_team: Array[
+        {
+          name: String,
+          job_title: String,
+          email: String
+        }
+      ],
+      ?opt_in_features: Array[
+        {
+          feature_name: String,
+          is_enabled: bool
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?cover_entire_organization: bool
+    ) -> _CreateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembershipResponse
+
+    interface _GetCaseResponse
+      include Smithy::Client::_Response[Types::GetCaseResponse]
+      def title: () -> String?
+      def case_arn: () -> String?
+      def description: () -> String?
+      def case_status: () -> String?
+      def engagement_type: () -> String?
+      def reported_incident_start_date: () -> Time?
+      def actual_incident_start_date: () -> Time?
+      def impacted_aws_regions: () -> Array[Types::ImpactedAwsRegion]?
+      def threat_actor_ip_addresses: () -> Array[Types::ThreatActorIp]?
+      def pending_action: () -> String?
+      def impacted_accounts: () -> Array[String]?
+      def watchers: () -> Array[Types::Watcher]?
+      def created_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def closure_code: () -> String?
+      def resolver_type: () -> String?
+      def impacted_services: () -> Array[String]?
+      def case_attachments: () -> Array[Types::CaseAttachmentAttributes]?
+      def closed_date: () -> Time?
+    end
+    def get_case: (
+      ?case_id: String
+    ) -> _GetCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseResponse
+
+    interface _GetCaseAttachmentDownloadUrlResponse
+      include Smithy::Client::_Response[Types::GetCaseAttachmentDownloadUrlResponse]
+      def attachment_presigned_url: () -> String?
+    end
+    def get_case_attachment_download_url: (
+      ?case_id: String,
+      ?attachment_id: String
+    ) -> _GetCaseAttachmentDownloadUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseAttachmentDownloadUrlResponse
+
+    interface _GetCaseAttachmentUploadUrlResponse
+      include Smithy::Client::_Response[Types::GetCaseAttachmentUploadUrlResponse]
+      def attachment_presigned_url: () -> String?
+    end
+    def get_case_attachment_upload_url: (
+      ?case_id: String,
+      ?file_name: String,
+      ?content_length: Integer,
+      ?client_token: String
+    ) -> _GetCaseAttachmentUploadUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseAttachmentUploadUrlResponse
+
+    interface _GetMembershipResponse
+      include Smithy::Client::_Response[Types::GetMembershipResponse]
+      def membership_id: () -> String?
+      def account_id: () -> String?
+      def region: () -> String?
+      def membership_name: () -> String?
+      def membership_arn: () -> String?
+      def membership_status: () -> String?
+      def membership_activation_timestamp: () -> Time?
+      def membership_deactivation_timestamp: () -> Time?
+      def customer_type: () -> String?
+      def number_of_accounts_covered: () -> Integer?
+      def incident_response_team: () -> Array[Types::IncidentResponder]?
+      def opt_in_features: () -> Array[Types::OptInFeature]?
+      def membership_accounts_configurations: () -> Types::MembershipAccountsConfigurations?
+    end
+    def get_membership: (
+      ?membership_id: String
+    ) -> _GetMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMembershipResponse
+
+    interface _ListCaseEditsResponse
+      include Smithy::Client::_Response[Types::ListCaseEditsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::CaseEditItem]?
+      def total: () -> Integer?
+    end
+    def list_case_edits: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?case_id: String
+    ) -> _ListCaseEditsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCaseEditsResponse
+
+    interface _ListCasesResponse
+      include Smithy::Client::_Response[Types::ListCasesResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ListCasesItem]?
+      def total: () -> Integer?
+    end
+    def list_cases: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCasesResponse
+
+    interface _ListCommentsResponse
+      include Smithy::Client::_Response[Types::ListCommentsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ListCommentsItem]?
+      def total: () -> Integer?
+    end
+    def list_comments: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?case_id: String
+    ) -> _ListCommentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommentsResponse
+
+    interface _ListMembershipsResponse
+      include Smithy::Client::_Response[Types::ListMembershipsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ListMembershipItem]?
+    end
+    def list_memberships: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembershipsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCaseResponse
+      include Smithy::Client::_Response[Types::UpdateCaseResponse]
+    end
+    def update_case: (
+      ?case_id: String,
+      ?title: String,
+      ?description: String,
+      ?reported_incident_start_date: Time,
+      ?actual_incident_start_date: Time,
+      ?engagement_type: String,
+      ?watchers_to_add: Array[
+        {
+          email: String,
+          name: String,
+          job_title: String
+        }
+      ],
+      ?watchers_to_delete: Array[
+        {
+          email: String,
+          name: String,
+          job_title: String
+        }
+      ],
+      ?threat_actor_ip_addresses_to_add: Array[
+        {
+          ip_address: String,
+          user_agent: String
+        }
+      ],
+      ?threat_actor_ip_addresses_to_delete: Array[
+        {
+          ip_address: String,
+          user_agent: String
+        }
+      ],
+      ?impacted_services_to_add: Array[String],
+      ?impacted_services_to_delete: Array[String],
+      ?impacted_aws_regions_to_add: Array[
+        {
+          region: String
+        }
+      ],
+      ?impacted_aws_regions_to_delete: Array[
+        {
+          region: String
+        }
+      ],
+      ?impacted_accounts_to_add: Array[String],
+      ?impacted_accounts_to_delete: Array[String]
+    ) -> _UpdateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseResponse
+
+    interface _UpdateCaseCommentResponse
+      include Smithy::Client::_Response[Types::UpdateCaseCommentResponse]
+      def comment_id: () -> String?
+      def body: () -> String?
+    end
+    def update_case_comment: (
+      ?case_id: String,
+      ?comment_id: String,
+      ?body: String
+    ) -> _UpdateCaseCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseCommentResponse
+
+    interface _UpdateCaseStatusResponse
+      include Smithy::Client::_Response[Types::UpdateCaseStatusResponse]
+      def case_status: () -> String?
+    end
+    def update_case_status: (
+      ?case_id: String,
+      ?case_status: String
+    ) -> _UpdateCaseStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseStatusResponse
+
+    interface _UpdateMembershipResponse
+      include Smithy::Client::_Response[Types::UpdateMembershipResponse]
+    end
+    def update_membership: (
+      ?membership_id: String,
+      ?membership_name: String,
+      ?incident_response_team: Array[
+        {
+          name: String,
+          job_title: String,
+          email: String
+        }
+      ],
+      ?opt_in_features: Array[
+        {
+          feature_name: String,
+          is_enabled: bool
+        }
+      ],
+      ?membership_accounts_configurations_update: {
+        cover_entire_organization: bool,
+        organizational_units_to_add: Array[String],
+        organizational_units_to_remove: untyped
+      },
+      ?undo_membership_cancellation: bool
+    ) -> _UpdateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMembershipResponse
+
+    interface _UpdateResolverTypeResponse
+      include Smithy::Client::_Response[Types::UpdateResolverTypeResponse]
+      def case_id: () -> String?
+      def case_status: () -> String?
+      def resolver_type: () -> String?
+    end
+    def update_resolver_type: (
+      ?case_id: String,
+      ?resolver_type: String
+    ) -> _UpdateResolverTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverTypeResponse
+  end
+end

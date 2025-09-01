@@ -1,0 +1,32 @@
+module Aws::QLDB
+  module Errors
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def parameter_name: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def resource_name: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def resource_name: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def resource_name: () -> String?
+    end
+    class ResourcePreconditionNotMetException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def resource_name: () -> String?
+    end
+  end
+end

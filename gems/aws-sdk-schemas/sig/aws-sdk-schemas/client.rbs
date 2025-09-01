@@ -1,0 +1,413 @@
+module Aws::Schemas
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Schemas::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateDiscovererResponse
+      include Smithy::Client::_Response[Types::CreateDiscovererResponse]
+      def description: () -> String?
+      def discoverer_arn: () -> String?
+      def discoverer_id: () -> String?
+      def source_arn: () -> String?
+      def state: () -> String?
+      def cross_account: () -> bool?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_discoverer: (
+      ?description: String,
+      ?source_arn: String,
+      ?cross_account: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDiscovererResponse
+
+    interface _CreateRegistryResponse
+      include Smithy::Client::_Response[Types::CreateRegistryResponse]
+      def description: () -> String?
+      def registry_arn: () -> String?
+      def registry_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_registry: (
+      ?description: String,
+      ?registry_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistryResponse
+
+    interface _CreateSchemaResponse
+      include Smithy::Client::_Response[Types::CreateSchemaResponse]
+      def description: () -> String?
+      def last_modified: () -> Time?
+      def schema_arn: () -> String?
+      def schema_name: () -> String?
+      def schema_version: () -> String?
+      def tags: () -> Hash[String, String]?
+      def type: () -> String?
+      def version_created_date: () -> Time?
+    end
+    def create_schema: (
+      ?content: String,
+      ?description: String,
+      ?registry_name: String,
+      ?schema_name: String,
+      ?tags: Hash[String, String],
+      ?type: String
+    ) -> _CreateSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSchemaResponse
+
+    interface _DeleteDiscovererResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_discoverer: (
+      ?discoverer_id: String
+    ) -> _DeleteDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDiscovererResponse
+
+    interface _DeleteRegistryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_registry: (
+      ?registry_name: String
+    ) -> _DeleteRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistryResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?registry_name: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteSchemaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_schema: (
+      ?registry_name: String,
+      ?schema_name: String
+    ) -> _DeleteSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchemaResponse
+
+    interface _DeleteSchemaVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_schema_version: (
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String
+    ) -> _DeleteSchemaVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchemaVersionResponse
+
+    interface _DescribeCodeBindingResponse
+      include Smithy::Client::_Response[Types::DescribeCodeBindingResponse]
+      def creation_date: () -> Time?
+      def last_modified: () -> Time?
+      def schema_version: () -> String?
+      def status: () -> String?
+    end
+    def describe_code_binding: (
+      ?language: String,
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String
+    ) -> _DescribeCodeBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCodeBindingResponse
+
+    interface _DescribeDiscovererResponse
+      include Smithy::Client::_Response[Types::DescribeDiscovererResponse]
+      def description: () -> String?
+      def discoverer_arn: () -> String?
+      def discoverer_id: () -> String?
+      def source_arn: () -> String?
+      def state: () -> String?
+      def cross_account: () -> bool?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_discoverer: (
+      ?discoverer_id: String
+    ) -> _DescribeDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDiscovererResponse
+
+    interface _DescribeRegistryResponse
+      include Smithy::Client::_Response[Types::DescribeRegistryResponse]
+      def description: () -> String?
+      def registry_arn: () -> String?
+      def registry_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_registry: (
+      ?registry_name: String
+    ) -> _DescribeRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistryResponse
+
+    interface _DescribeSchemaResponse
+      include Smithy::Client::_Response[Types::DescribeSchemaResponse]
+      def content: () -> String?
+      def description: () -> String?
+      def last_modified: () -> Time?
+      def schema_arn: () -> String?
+      def schema_name: () -> String?
+      def schema_version: () -> String?
+      def tags: () -> Hash[String, String]?
+      def type: () -> String?
+      def version_created_date: () -> Time?
+    end
+    def describe_schema: (
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String
+    ) -> _DescribeSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSchemaResponse
+
+    interface _ExportSchemaResponse
+      include Smithy::Client::_Response[Types::ExportSchemaResponse]
+      def content: () -> String?
+      def schema_arn: () -> String?
+      def schema_name: () -> String?
+      def schema_version: () -> String?
+      def type: () -> String?
+    end
+    def export_schema: (
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String,
+      ?type: String
+    ) -> _ExportSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportSchemaResponse
+
+    interface _GetCodeBindingSourceResponse
+      include Smithy::Client::_Response[Types::GetCodeBindingSourceResponse]
+      def body: () -> String?
+    end
+    def get_code_binding_source: (
+      ?language: String,
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String
+    ) -> _GetCodeBindingSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeBindingSourceResponse
+
+    interface _GetDiscoveredSchemaResponse
+      include Smithy::Client::_Response[Types::GetDiscoveredSchemaResponse]
+      def content: () -> String?
+    end
+    def get_discovered_schema: (
+      ?events: Array[String],
+      ?type: String
+    ) -> _GetDiscoveredSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDiscoveredSchemaResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?registry_name: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListDiscoverersResponse
+      include Smithy::Client::_Response[Types::ListDiscoverersResponse]
+      def discoverers: () -> Array[Types::DiscovererSummary]?
+      def next_token: () -> String?
+    end
+    def list_discoverers: (
+      ?discoverer_id_prefix: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?source_arn_prefix: String
+    ) -> _ListDiscoverersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoverersResponse
+
+    interface _ListRegistriesResponse
+      include Smithy::Client::_Response[Types::ListRegistriesResponse]
+      def next_token: () -> String?
+      def registries: () -> Array[Types::RegistrySummary]?
+    end
+    def list_registries: (
+      ?limit: Integer,
+      ?next_token: String,
+      ?registry_name_prefix: String,
+      ?scope: String
+    ) -> _ListRegistriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistriesResponse
+
+    interface _ListSchemaVersionsResponse
+      include Smithy::Client::_Response[Types::ListSchemaVersionsResponse]
+      def next_token: () -> String?
+      def schema_versions: () -> Array[Types::SchemaVersionSummary]?
+    end
+    def list_schema_versions: (
+      ?limit: Integer,
+      ?next_token: String,
+      ?registry_name: String,
+      ?schema_name: String
+    ) -> _ListSchemaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemaVersionsResponse
+
+    interface _ListSchemasResponse
+      include Smithy::Client::_Response[Types::ListSchemasResponse]
+      def next_token: () -> String?
+      def schemas: () -> Array[Types::SchemaSummary]?
+    end
+    def list_schemas: (
+      ?limit: Integer,
+      ?next_token: String,
+      ?registry_name: String,
+      ?schema_name_prefix: String
+    ) -> _ListSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemasResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutCodeBindingResponse
+      include Smithy::Client::_Response[Types::PutCodeBindingResponse]
+      def creation_date: () -> Time?
+      def last_modified: () -> Time?
+      def schema_version: () -> String?
+      def status: () -> String?
+    end
+    def put_code_binding: (
+      ?language: String,
+      ?registry_name: String,
+      ?schema_name: String,
+      ?schema_version: String
+    ) -> _PutCodeBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCodeBindingResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?policy: String,
+      ?registry_name: String,
+      ?revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _SearchSchemasResponse
+      include Smithy::Client::_Response[Types::SearchSchemasResponse]
+      def next_token: () -> String?
+      def schemas: () -> Array[Types::SearchSchemaSummary]?
+    end
+    def search_schemas: (
+      ?keywords: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?registry_name: String
+    ) -> _SearchSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSchemasResponse
+
+    interface _StartDiscovererResponse
+      include Smithy::Client::_Response[Types::StartDiscovererResponse]
+      def discoverer_id: () -> String?
+      def state: () -> String?
+    end
+    def start_discoverer: (
+      ?discoverer_id: String
+    ) -> _StartDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDiscovererResponse
+
+    interface _StopDiscovererResponse
+      include Smithy::Client::_Response[Types::StopDiscovererResponse]
+      def discoverer_id: () -> String?
+      def state: () -> String?
+    end
+    def stop_discoverer: (
+      ?discoverer_id: String
+    ) -> _StopDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDiscovererResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDiscovererResponse
+      include Smithy::Client::_Response[Types::UpdateDiscovererResponse]
+      def description: () -> String?
+      def discoverer_arn: () -> String?
+      def discoverer_id: () -> String?
+      def source_arn: () -> String?
+      def state: () -> String?
+      def cross_account: () -> bool?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_discoverer: (
+      ?description: String,
+      ?discoverer_id: String,
+      ?cross_account: bool
+    ) -> _UpdateDiscovererResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDiscovererResponse
+
+    interface _UpdateRegistryResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryResponse]
+      def description: () -> String?
+      def registry_arn: () -> String?
+      def registry_name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_registry: (
+      ?description: String,
+      ?registry_name: String
+    ) -> _UpdateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryResponse
+
+    interface _UpdateSchemaResponse
+      include Smithy::Client::_Response[Types::UpdateSchemaResponse]
+      def description: () -> String?
+      def last_modified: () -> Time?
+      def schema_arn: () -> String?
+      def schema_name: () -> String?
+      def schema_version: () -> String?
+      def tags: () -> Hash[String, String]?
+      def type: () -> String?
+      def version_created_date: () -> Time?
+    end
+    def update_schema: (
+      ?client_token_id: String,
+      ?content: String,
+      ?description: String,
+      ?registry_name: String,
+      ?schema_name: String,
+      ?type: String
+    ) -> _UpdateSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSchemaResponse
+  end
+end

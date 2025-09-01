@@ -1,0 +1,22 @@
+module Aws::CloudTrailData
+  module Errors
+    class ChannelInsufficientPermission < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ChannelUnsupportedSchema < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicatedAuditEventId < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidChannelARN < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

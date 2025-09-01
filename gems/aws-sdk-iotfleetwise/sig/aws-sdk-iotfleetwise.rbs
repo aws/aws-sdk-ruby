@@ -1,0 +1,5 @@
+  module Aws
+    module IoTFleetWise
+      VERSION: String
+    end
+  end

@@ -1,0 +1,19 @@
+module Aws::DataPipeline
+  module Errors
+    class InternalServiceError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineDeletedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PipelineNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaskNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

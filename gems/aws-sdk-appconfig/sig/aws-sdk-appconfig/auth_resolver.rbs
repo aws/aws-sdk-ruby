@@ -1,0 +1,5 @@
+module Aws::AppConfig
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

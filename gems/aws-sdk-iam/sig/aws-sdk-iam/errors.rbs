@@ -1,0 +1,103 @@
+module Aws::IAM
+  module Errors
+    class AccountNotManagementOrDelegatedAdministratorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CallerIsNotManagementAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CredentialReportExpiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CredentialReportNotPresentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CredentialReportNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateSSHPublicKeyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityTemporarilyUnmodifiableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAuthenticationCodeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPublicKeyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidUserTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KeyPairMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OpenIdIdpCommunicationErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotInAllFeaturesModeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PasswordPolicyViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyEvaluationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotAttachableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReportGenerationLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceAccessNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnmodifiableEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnrecognizedPublicKeyEncodingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

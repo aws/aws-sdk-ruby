@@ -1,0 +1,737 @@
+module Aws::Scheduler
+  module Types
+
+    class AwsVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+        ?assign_public_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor assign_public_ip: String?
+    end
+
+    class CapacityProviderStrategyItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: String,
+        ?weight: Integer,
+        ?base: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: String?
+      attr_accessor weight: Integer?
+      attr_accessor base: Integer?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateScheduleGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateScheduleGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_group_arn: String?
+    end
+
+    class CreateScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?group_name: String,
+        ?schedule_expression: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?description: String,
+        ?schedule_expression_timezone: String,
+        ?state: String,
+        ?kms_key_arn: String,
+        ?target: Types::Target,
+        ?flexible_time_window: Types::FlexibleTimeWindow,
+        ?client_token: String,
+        ?action_after_completion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor group_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor description: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor state: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor target: Types::Target?
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow?
+      attr_accessor client_token: String?
+      attr_accessor action_after_completion: String?
+    end
+
+    class CreateScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_arn: String?
+    end
+
+    class DeadLetterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteScheduleGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteScheduleGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?group_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor group_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EcsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_definition_arn: String,
+        ?task_count: Integer,
+        ?launch_type: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?platform_version: String,
+        ?group: String,
+        ?capacity_provider_strategy: Array[Types::CapacityProviderStrategyItem],
+        ?enable_ecs_managed_tags: bool,
+        ?enable_execute_command: bool,
+        ?placement_constraints: Array[Types::PlacementConstraint],
+        ?placement_strategy: Array[Types::PlacementStrategy],
+        ?propagate_tags: String,
+        ?reference_id: String,
+        ?tags: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_definition_arn: String?
+      attr_accessor task_count: Integer?
+      attr_accessor launch_type: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor platform_version: String?
+      attr_accessor group: String?
+      attr_accessor capacity_provider_strategy: Array[Types::CapacityProviderStrategyItem]?
+      attr_accessor enable_ecs_managed_tags: bool?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor placement_constraints: Array[Types::PlacementConstraint]?
+      attr_accessor placement_strategy: Array[Types::PlacementStrategy]?
+      attr_accessor propagate_tags: String?
+      attr_accessor reference_id: String?
+      attr_accessor tags: Array[Hash[String, String]]?
+    end
+
+    class EventBridgeParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detail_type: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detail_type: String?
+      attr_accessor source: String?
+    end
+
+    class FlexibleTimeWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?maximum_window_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor maximum_window_in_minutes: Integer?
+    end
+
+    class GetScheduleGroupOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetScheduleGroupOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?creation_date: Time,
+        ?last_modification_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modification_date: Time?
+    end
+
+    class GetScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor group_name: String?
+    end
+
+    class GetScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?group_name: String,
+        ?name: String,
+        ?schedule_expression: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?description: String,
+        ?schedule_expression_timezone: String,
+        ?state: String,
+        ?creation_date: Time,
+        ?last_modification_date: Time,
+        ?kms_key_arn: String,
+        ?target: Types::Target,
+        ?flexible_time_window: Types::FlexibleTimeWindow,
+        ?action_after_completion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor group_name: String?
+      attr_accessor name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor description: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modification_date: Time?
+      attr_accessor kms_key_arn: String?
+      attr_accessor target: Types::Target?
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow?
+      attr_accessor action_after_completion: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KinesisParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_key: String?
+    end
+
+    class ListScheduleGroupsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListScheduleGroupsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?schedule_groups: Array[Types::ScheduleGroupSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor schedule_groups: Array[Types::ScheduleGroupSummary]?
+    end
+
+    class ListSchedulesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?name_prefix: String,
+        ?state: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor name_prefix: String?
+      attr_accessor state: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSchedulesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?schedules: Array[Types::ScheduleSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor schedules: Array[Types::ScheduleSummary]?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?awsvpc_configuration: Types::AwsVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor awsvpc_configuration: Types::AwsVpcConfiguration?
+    end
+
+    class PlacementConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor expression: String?
+    end
+
+    class PlacementStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor field: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_event_age_in_seconds: Integer,
+        ?maximum_retry_attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_event_age_in_seconds: Integer?
+      attr_accessor maximum_retry_attempts: Integer?
+    end
+
+    class SageMakerPipelineParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class SageMakerPipelineParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_parameter_list: Array[Types::SageMakerPipelineParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_parameter_list: Array[Types::SageMakerPipelineParameter]?
+    end
+
+    class ScheduleGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?creation_date: Time,
+        ?last_modification_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modification_date: Time?
+    end
+
+    class ScheduleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?group_name: String,
+        ?state: String,
+        ?creation_date: Time,
+        ?last_modification_date: Time,
+        ?target: Types::TargetSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor group_name: String?
+      attr_accessor state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modification_date: Time?
+      attr_accessor target: Types::TargetSummary?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SqsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_group_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?retry_policy: Types::RetryPolicy,
+        ?input: String,
+        ?ecs_parameters: Types::EcsParameters,
+        ?event_bridge_parameters: Types::EventBridgeParameters,
+        ?kinesis_parameters: Types::KinesisParameters,
+        ?sage_maker_pipeline_parameters: Types::SageMakerPipelineParameters,
+        ?sqs_parameters: Types::SqsParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor retry_policy: Types::RetryPolicy?
+      attr_accessor input: String?
+      attr_accessor ecs_parameters: Types::EcsParameters?
+      attr_accessor event_bridge_parameters: Types::EventBridgeParameters?
+      attr_accessor kinesis_parameters: Types::KinesisParameters?
+      attr_accessor sage_maker_pipeline_parameters: Types::SageMakerPipelineParameters?
+      attr_accessor sqs_parameters: Types::SqsParameters?
+    end
+
+    class TargetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateScheduleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?group_name: String,
+        ?schedule_expression: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?description: String,
+        ?schedule_expression_timezone: String,
+        ?state: String,
+        ?kms_key_arn: String,
+        ?target: Types::Target,
+        ?flexible_time_window: Types::FlexibleTimeWindow,
+        ?client_token: String,
+        ?action_after_completion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor group_name: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor description: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor state: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor target: Types::Target?
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow?
+      attr_accessor client_token: String?
+      attr_accessor action_after_completion: String?
+    end
+
+    class UpdateScheduleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

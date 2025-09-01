@@ -1,0 +1,5 @@
+  module Aws
+    module ACMPCA
+      VERSION: String
+    end
+  end

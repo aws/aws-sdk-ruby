@@ -1,0 +1,55 @@
+module Aws::NotificationsContacts
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ActivateEmailContactRequest: StructureShape
+    ActivateEmailContactResponse: StructureShape
+    ConflictException: StructureShape
+    CreateEmailContactRequest: StructureShape
+    CreateEmailContactResponse: StructureShape
+    CreationTime: TimestampShape
+    DeleteEmailContactRequest: StructureShape
+    DeleteEmailContactResponse: StructureShape
+    EmailContact: StructureShape
+    EmailContactAddress: StringShape
+    EmailContactArn: StringShape
+    EmailContactName: StringShape
+    EmailContactStatus: StringShape
+    EmailContacts: ListShape
+    ErrorMessage: StringShape
+    GetEmailContactRequest: StructureShape
+    GetEmailContactResponse: StructureShape
+    InternalServerException: StructureShape
+    ListEmailContactsRequest: StructureShape
+    ListEmailContactsResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    QuotaCode: StringShape
+    ResourceId: StringShape
+    ResourceNotFoundException: StructureShape
+    ResourceType: StringShape
+    SendActivationCodeRequest: StructureShape
+    SendActivationCodeResponse: StructureShape
+    SensitiveEmailContactAddress: StringShape
+    ServiceCode: StringShape
+    ServiceQuotaExceededException: StructureShape
+    TagKey: StringShape
+    TagKeys: ListShape
+    TagMap: MapShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    Token: StringShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateTime: TimestampShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: EnumShape
+
+    NotificationsContacts: ServiceShape
+  end
+end

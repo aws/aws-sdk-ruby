@@ -1,0 +1,5 @@
+  module Aws
+    module ApplicationAutoScaling
+      VERSION: String
+    end
+  end

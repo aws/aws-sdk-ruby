@@ -1,0 +1,583 @@
+module Aws::AppRunner
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppRunner::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateCustomDomainResponse
+      include Smithy::Client::_Response[Types::AssociateCustomDomainResponse]
+      def dns_target: () -> String?
+      def service_arn: () -> String?
+      def custom_domain: () -> Types::CustomDomain?
+      def vpc_dns_targets: () -> Array[Types::VpcDNSTarget]?
+    end
+    def associate_custom_domain: (
+      ?service_arn: String,
+      ?domain_name: String,
+      ?enable_www_subdomain: bool
+    ) -> _AssociateCustomDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateCustomDomainResponse
+
+    interface _CreateAutoScalingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateAutoScalingConfigurationResponse]
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+    end
+    def create_auto_scaling_configuration: (
+      ?auto_scaling_configuration_name: String,
+      ?max_concurrency: Integer,
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAutoScalingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutoScalingConfigurationResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def create_connection: (
+      ?connection_name: String,
+      ?provider_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateObservabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateObservabilityConfigurationResponse]
+      def observability_configuration: () -> Types::ObservabilityConfiguration?
+    end
+    def create_observability_configuration: (
+      ?observability_configuration_name: String,
+      ?trace_configuration: {
+        vendor: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateObservabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateObservabilityConfigurationResponse
+
+    interface _CreateServiceResponse
+      include Smithy::Client::_Response[Types::CreateServiceResponse]
+      def service: () -> Types::Service?
+      def operation_id: () -> String?
+    end
+    def create_service: (
+      ?service_name: String,
+      ?source_configuration: {
+        code_repository: {
+          repository_url: String,
+          source_code_version: {
+            type: String,
+            value: untyped
+          },
+          code_configuration: {
+            configuration_source: String,
+            code_configuration_values: {
+              runtime: String,
+              build_command: String,
+              start_command: String,
+              port: untyped,
+              runtime_environment_variables: Hash[String, String],
+              runtime_environment_secrets: Hash[String, String]
+            }
+          },
+          source_directory: String
+        },
+        image_repository: {
+          image_identifier: String,
+          image_configuration: {
+            runtime_environment_variables: untyped,
+            start_command: untyped,
+            port: untyped,
+            runtime_environment_secrets: untyped
+          },
+          image_repository_type: String
+        },
+        auto_deployments_enabled: bool,
+        authentication_configuration: {
+          connection_arn: String,
+          access_role_arn: String
+        }
+      },
+      ?instance_configuration: {
+        cpu: String,
+        memory: String,
+        instance_role_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?encryption_configuration: {
+        kms_key: String
+      },
+      ?health_check_configuration: {
+        protocol: String,
+        path: String,
+        interval: Integer,
+        timeout: Integer,
+        healthy_threshold: Integer,
+        unhealthy_threshold: Integer
+      },
+      ?auto_scaling_configuration_arn: String,
+      ?network_configuration: {
+        egress_configuration: {
+          egress_type: String,
+          vpc_connector_arn: String
+        },
+        ingress_configuration: {
+          is_publicly_accessible: bool
+        },
+        ip_address_type: String
+      },
+      ?observability_configuration: {
+        observability_enabled: bool,
+        observability_configuration_arn: String
+      }
+    ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
+
+    interface _CreateVpcConnectorResponse
+      include Smithy::Client::_Response[Types::CreateVpcConnectorResponse]
+      def vpc_connector: () -> Types::VpcConnector?
+    end
+    def create_vpc_connector: (
+      ?vpc_connector_name: String,
+      ?subnets: Array[String],
+      ?security_groups: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVpcConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcConnectorResponse
+
+    interface _CreateVpcIngressConnectionResponse
+      include Smithy::Client::_Response[Types::CreateVpcIngressConnectionResponse]
+      def vpc_ingress_connection: () -> Types::VpcIngressConnection?
+    end
+    def create_vpc_ingress_connection: (
+      ?service_arn: String,
+      ?vpc_ingress_connection_name: String,
+      ?ingress_vpc_configuration: {
+        vpc_id: String,
+        vpc_endpoint_id: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVpcIngressConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcIngressConnectionResponse
+
+    interface _DeleteAutoScalingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAutoScalingConfigurationResponse]
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+    end
+    def delete_auto_scaling_configuration: (
+      ?auto_scaling_configuration_arn: String,
+      ?delete_all_revisions: bool
+    ) -> _DeleteAutoScalingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutoScalingConfigurationResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def delete_connection: (
+      ?connection_arn: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteObservabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteObservabilityConfigurationResponse]
+      def observability_configuration: () -> Types::ObservabilityConfiguration?
+    end
+    def delete_observability_configuration: (
+      ?observability_configuration_arn: String
+    ) -> _DeleteObservabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObservabilityConfigurationResponse
+
+    interface _DeleteServiceResponse
+      include Smithy::Client::_Response[Types::DeleteServiceResponse]
+      def service: () -> Types::Service?
+      def operation_id: () -> String?
+    end
+    def delete_service: (
+      ?service_arn: String
+    ) -> _DeleteServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceResponse
+
+    interface _DeleteVpcConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteVpcConnectorResponse]
+      def vpc_connector: () -> Types::VpcConnector?
+    end
+    def delete_vpc_connector: (
+      ?vpc_connector_arn: String
+    ) -> _DeleteVpcConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcConnectorResponse
+
+    interface _DeleteVpcIngressConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteVpcIngressConnectionResponse]
+      def vpc_ingress_connection: () -> Types::VpcIngressConnection?
+    end
+    def delete_vpc_ingress_connection: (
+      ?vpc_ingress_connection_arn: String
+    ) -> _DeleteVpcIngressConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcIngressConnectionResponse
+
+    interface _DescribeAutoScalingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeAutoScalingConfigurationResponse]
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+    end
+    def describe_auto_scaling_configuration: (
+      ?auto_scaling_configuration_arn: String
+    ) -> _DescribeAutoScalingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutoScalingConfigurationResponse
+
+    interface _DescribeCustomDomainsResponse
+      include Smithy::Client::_Response[Types::DescribeCustomDomainsResponse]
+      def dns_target: () -> String?
+      def service_arn: () -> String?
+      def custom_domains: () -> Array[Types::CustomDomain]?
+      def vpc_dns_targets: () -> Array[Types::VpcDNSTarget]?
+      def next_token: () -> String?
+    end
+    def describe_custom_domains: (
+      ?service_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeCustomDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomDomainsResponse
+
+    interface _DescribeObservabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeObservabilityConfigurationResponse]
+      def observability_configuration: () -> Types::ObservabilityConfiguration?
+    end
+    def describe_observability_configuration: (
+      ?observability_configuration_arn: String
+    ) -> _DescribeObservabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeObservabilityConfigurationResponse
+
+    interface _DescribeServiceResponse
+      include Smithy::Client::_Response[Types::DescribeServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def describe_service: (
+      ?service_arn: String
+    ) -> _DescribeServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceResponse
+
+    interface _DescribeVpcConnectorResponse
+      include Smithy::Client::_Response[Types::DescribeVpcConnectorResponse]
+      def vpc_connector: () -> Types::VpcConnector?
+    end
+    def describe_vpc_connector: (
+      ?vpc_connector_arn: String
+    ) -> _DescribeVpcConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcConnectorResponse
+
+    interface _DescribeVpcIngressConnectionResponse
+      include Smithy::Client::_Response[Types::DescribeVpcIngressConnectionResponse]
+      def vpc_ingress_connection: () -> Types::VpcIngressConnection?
+    end
+    def describe_vpc_ingress_connection: (
+      ?vpc_ingress_connection_arn: String
+    ) -> _DescribeVpcIngressConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcIngressConnectionResponse
+
+    interface _DisassociateCustomDomainResponse
+      include Smithy::Client::_Response[Types::DisassociateCustomDomainResponse]
+      def dns_target: () -> String?
+      def service_arn: () -> String?
+      def custom_domain: () -> Types::CustomDomain?
+      def vpc_dns_targets: () -> Array[Types::VpcDNSTarget]?
+    end
+    def disassociate_custom_domain: (
+      ?service_arn: String,
+      ?domain_name: String
+    ) -> _DisassociateCustomDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateCustomDomainResponse
+
+    interface _ListAutoScalingConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListAutoScalingConfigurationsResponse]
+      def auto_scaling_configuration_summary_list: () -> Array[Types::AutoScalingConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_auto_scaling_configurations: (
+      ?auto_scaling_configuration_name: String,
+      ?latest_only: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutoScalingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutoScalingConfigurationsResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsResponse]
+      def connection_summary_list: () -> Array[Types::ConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?connection_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListObservabilityConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListObservabilityConfigurationsResponse]
+      def observability_configuration_summary_list: () -> Array[Types::ObservabilityConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_observability_configurations: (
+      ?observability_configuration_name: String,
+      ?latest_only: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListObservabilityConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObservabilityConfigurationsResponse
+
+    interface _ListOperationsResponse
+      include Smithy::Client::_Response[Types::ListOperationsResponse]
+      def operation_summary_list: () -> Array[Types::OperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_operations: (
+      ?service_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationsResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesResponse]
+      def service_summary_list: () -> Array[Types::ServiceSummary]?
+      def next_token: () -> String?
+    end
+    def list_services: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListServicesForAutoScalingConfigurationResponse
+      include Smithy::Client::_Response[Types::ListServicesForAutoScalingConfigurationResponse]
+      def service_arn_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_services_for_auto_scaling_configuration: (
+      ?auto_scaling_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServicesForAutoScalingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesForAutoScalingConfigurationResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVpcConnectorsResponse
+      include Smithy::Client::_Response[Types::ListVpcConnectorsResponse]
+      def vpc_connectors: () -> Array[Types::VpcConnector]?
+      def next_token: () -> String?
+    end
+    def list_vpc_connectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVpcConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcConnectorsResponse
+
+    interface _ListVpcIngressConnectionsResponse
+      include Smithy::Client::_Response[Types::ListVpcIngressConnectionsResponse]
+      def vpc_ingress_connection_summary_list: () -> Array[Types::VpcIngressConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_ingress_connections: (
+      ?filter: {
+        service_arn: String,
+        vpc_endpoint_id: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVpcIngressConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcIngressConnectionsResponse
+
+    interface _PauseServiceResponse
+      include Smithy::Client::_Response[Types::PauseServiceResponse]
+      def service: () -> Types::Service?
+      def operation_id: () -> String?
+    end
+    def pause_service: (
+      ?service_arn: String
+    ) -> _PauseServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PauseServiceResponse
+
+    interface _ResumeServiceResponse
+      include Smithy::Client::_Response[Types::ResumeServiceResponse]
+      def service: () -> Types::Service?
+      def operation_id: () -> String?
+    end
+    def resume_service: (
+      ?service_arn: String
+    ) -> _ResumeServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeServiceResponse
+
+    interface _StartDeploymentResponse
+      include Smithy::Client::_Response[Types::StartDeploymentResponse]
+      def operation_id: () -> String?
+    end
+    def start_deployment: (
+      ?service_arn: String
+    ) -> _StartDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeploymentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDefaultAutoScalingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateDefaultAutoScalingConfigurationResponse]
+      def auto_scaling_configuration: () -> Types::AutoScalingConfiguration?
+    end
+    def update_default_auto_scaling_configuration: (
+      ?auto_scaling_configuration_arn: String
+    ) -> _UpdateDefaultAutoScalingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDefaultAutoScalingConfigurationResponse
+
+    interface _UpdateServiceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceResponse]
+      def service: () -> Types::Service?
+      def operation_id: () -> String?
+    end
+    def update_service: (
+      ?service_arn: String,
+      ?source_configuration: {
+        code_repository: {
+          repository_url: String,
+          source_code_version: {
+            type: String,
+            value: untyped
+          },
+          code_configuration: {
+            configuration_source: String,
+            code_configuration_values: {
+              runtime: String,
+              build_command: String,
+              start_command: String,
+              port: untyped,
+              runtime_environment_variables: Hash[String, String],
+              runtime_environment_secrets: Hash[String, String]
+            }
+          },
+          source_directory: String
+        },
+        image_repository: {
+          image_identifier: String,
+          image_configuration: {
+            runtime_environment_variables: untyped,
+            start_command: untyped,
+            port: untyped,
+            runtime_environment_secrets: untyped
+          },
+          image_repository_type: String
+        },
+        auto_deployments_enabled: bool,
+        authentication_configuration: {
+          connection_arn: String,
+          access_role_arn: String
+        }
+      },
+      ?instance_configuration: {
+        cpu: String,
+        memory: String,
+        instance_role_arn: String
+      },
+      ?auto_scaling_configuration_arn: String,
+      ?health_check_configuration: {
+        protocol: String,
+        path: String,
+        interval: Integer,
+        timeout: Integer,
+        healthy_threshold: Integer,
+        unhealthy_threshold: Integer
+      },
+      ?network_configuration: {
+        egress_configuration: {
+          egress_type: String,
+          vpc_connector_arn: String
+        },
+        ingress_configuration: {
+          is_publicly_accessible: bool
+        },
+        ip_address_type: String
+      },
+      ?observability_configuration: {
+        observability_enabled: bool,
+        observability_configuration_arn: String
+      }
+    ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
+
+    interface _UpdateVpcIngressConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateVpcIngressConnectionResponse]
+      def vpc_ingress_connection: () -> Types::VpcIngressConnection?
+    end
+    def update_vpc_ingress_connection: (
+      ?vpc_ingress_connection_arn: String,
+      ?ingress_vpc_configuration: {
+        vpc_id: String,
+        vpc_endpoint_id: untyped
+      }
+    ) -> _UpdateVpcIngressConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcIngressConnectionResponse
+  end
+end

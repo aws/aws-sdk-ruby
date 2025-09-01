@@ -1,0 +1,5615 @@
+module Aws::CleanRooms
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AdditionalAnalyses
+      ALLOWED: String
+      REQUIRED: String
+      NOT_ALLOWED: String
+    end
+
+    class AggregateColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_names: Array[String],
+        ?function: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_names: Array[String]?
+      attr_accessor function: String?
+    end
+
+    class AggregationConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_name: String,
+        ?minimum: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_name: String?
+      attr_accessor minimum: Integer?
+      attr_accessor type: String?
+    end
+
+    module AnalysisFormat
+      SQL: String
+      PYSPARK_1_0: String
+    end
+
+    module AnalysisMethod
+      DIRECT_QUERY: String
+      DIRECT_JOB: String
+      MULTIPLE: String
+    end
+
+    class AnalysisParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor default_value: String?
+    end
+
+    class AnalysisRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_id: String,
+        ?type: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?policy: Types::AnalysisRulePolicy,
+        ?collaboration_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy,
+        ?consolidated_policy: Types::ConsolidatedPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_id: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor policy: Types::AnalysisRulePolicy?
+      attr_accessor collaboration_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy?
+      attr_accessor consolidated_policy: Types::ConsolidatedPolicy?
+    end
+
+    class AnalysisRuleAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_columns: Array[Types::AggregateColumn],
+        ?join_columns: Array[String],
+        ?join_required: String,
+        ?allowed_join_operators: Array[String],
+        ?dimension_columns: Array[String],
+        ?scalar_functions: Array[String],
+        ?output_constraints: Array[Types::AggregationConstraint],
+        ?additional_analyses: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_columns: Array[Types::AggregateColumn]?
+      attr_accessor join_columns: Array[String]?
+      attr_accessor join_required: String?
+      attr_accessor allowed_join_operators: Array[String]?
+      attr_accessor dimension_columns: Array[String]?
+      attr_accessor scalar_functions: Array[String]?
+      attr_accessor output_constraints: Array[Types::AggregationConstraint]?
+      attr_accessor additional_analyses: String?
+    end
+
+    class AnalysisRuleCustom
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_analyses: Array[String],
+        ?allowed_analysis_providers: Array[String],
+        ?additional_analyses: String,
+        ?disallowed_output_columns: Array[String],
+        ?differential_privacy: Types::DifferentialPrivacyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_analyses: Array[String]?
+      attr_accessor allowed_analysis_providers: Array[String]?
+      attr_accessor additional_analyses: String?
+      attr_accessor disallowed_output_columns: Array[String]?
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration?
+    end
+
+    class AnalysisRuleIdMappingTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?join_columns: Array[String],
+        ?query_constraints: Array[Types::QueryConstraint],
+        ?dimension_columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor join_columns: Array[String]?
+      attr_accessor query_constraints: Array[Types::QueryConstraint]?
+      attr_accessor dimension_columns: Array[String]?
+    end
+
+    class AnalysisRuleList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?join_columns: Array[String],
+        ?allowed_join_operators: Array[String],
+        ?list_columns: Array[String],
+        ?additional_analyses: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor join_columns: Array[String]?
+      attr_accessor allowed_join_operators: Array[String]?
+      attr_accessor list_columns: Array[String]?
+      attr_accessor additional_analyses: String?
+    end
+
+    class AnalysisRulePolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Types::AnalysisRulePolicyV1,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::AnalysisRulePolicyV1?
+
+      class V1 < AnalysisRulePolicy
+      end
+      class Unknown < AnalysisRulePolicy
+      end
+    end
+
+    class AnalysisRulePolicyV1
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?list: Types::AnalysisRuleList,
+        ?aggregation: Types::AnalysisRuleAggregation,
+        ?custom: Types::AnalysisRuleCustom,
+        ?id_mapping_table: Types::AnalysisRuleIdMappingTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list: Types::AnalysisRuleList?
+      attr_accessor aggregation: Types::AnalysisRuleAggregation?
+      attr_accessor custom: Types::AnalysisRuleCustom?
+      attr_accessor id_mapping_table: Types::AnalysisRuleIdMappingTable?
+
+      class List < AnalysisRulePolicyV1
+      end
+      class Aggregation < AnalysisRulePolicyV1
+      end
+      class Custom < AnalysisRulePolicyV1
+      end
+      class IdMappingTable < AnalysisRulePolicyV1
+      end
+      class Unknown < AnalysisRulePolicyV1
+      end
+    end
+
+    module AnalysisRuleType
+      AGGREGATION: String
+      LIST: String
+      CUSTOM: String
+      ID_MAPPING_TABLE: String
+    end
+
+    class AnalysisSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?referenced_tables: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor referenced_tables: Array[String]?
+    end
+
+    class AnalysisSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: String,
+        ?artifacts: Types::AnalysisTemplateArtifacts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor artifacts: Types::AnalysisTemplateArtifacts?
+
+      class Text < AnalysisSource
+      end
+      class Artifacts < AnalysisSource
+      end
+      class Unknown < AnalysisSource
+      end
+    end
+
+    class AnalysisSourceMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?artifacts: Types::AnalysisTemplateArtifactMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifacts: Types::AnalysisTemplateArtifactMetadata?
+
+      class Artifacts < AnalysisSourceMetadata
+      end
+      class Unknown < AnalysisSourceMetadata
+      end
+    end
+
+    class AnalysisTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?description: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?schema: Types::AnalysisSchema,
+        ?format: String,
+        ?source: Types::AnalysisSource,
+        ?source_metadata: Types::AnalysisSourceMetadata,
+        ?analysis_parameters: Array[Types::AnalysisParameter],
+        ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor schema: Types::AnalysisSchema?
+      attr_accessor format: String?
+      attr_accessor source: Types::AnalysisSource?
+      attr_accessor source_metadata: Types::AnalysisSourceMetadata?
+      attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
+      attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
+    end
+
+    class AnalysisTemplateArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: Types::S3Location?
+    end
+
+    class AnalysisTemplateArtifactMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point_hash: Types::Hash,
+        ?additional_artifact_hashes: Array[Types::Hash],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point_hash: Types::Hash?
+      attr_accessor additional_artifact_hashes: Array[Types::Hash]?
+    end
+
+    class AnalysisTemplateArtifacts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point: Types::AnalysisTemplateArtifact,
+        ?additional_artifacts: Array[Types::AnalysisTemplateArtifact],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point: Types::AnalysisTemplateArtifact?
+      attr_accessor additional_artifacts: Array[Types::AnalysisTemplateArtifact]?
+      attr_accessor role_arn: String?
+    end
+
+    class AnalysisTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?create_time: Time,
+        ?id: String,
+        ?name: String,
+        ?update_time: Time,
+        ?membership_arn: String,
+        ?membership_id: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor update_time: Time?
+      attr_accessor membership_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor description: String?
+    end
+
+    module AnalysisTemplateValidationStatus
+      VALID: String
+      INVALID: String
+      UNABLE_TO_VALIDATE: String
+    end
+
+    class AnalysisTemplateValidationStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+        ?reasons: Array[Types::AnalysisTemplateValidationStatusReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor reasons: Array[Types::AnalysisTemplateValidationStatusReason]?
+    end
+
+    class AnalysisTemplateValidationStatusReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AnalysisTemplateValidationType
+      DIFFERENTIAL_PRIVACY: String
+    end
+
+    module AnalysisType
+      DIRECT_ANALYSIS: String
+      ADDITIONAL_ANALYSIS: String
+    end
+
+    module AnalyticsEngine
+      SPARK: String
+      CLEAN_ROOMS_SQL: String
+    end
+
+    class AthenaTableReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_group: String,
+        ?output_location: String,
+        ?database_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_group: String?
+      attr_accessor output_location: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class BatchGetCollaborationAnalysisTemplateError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetCollaborationAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?analysis_template_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor analysis_template_arns: Array[String]?
+    end
+
+    class BatchGetCollaborationAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_analysis_templates: Array[Types::CollaborationAnalysisTemplate],
+        ?errors: Array[Types::BatchGetCollaborationAnalysisTemplateError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_analysis_templates: Array[Types::CollaborationAnalysisTemplate]?
+      attr_accessor errors: Array[Types::BatchGetCollaborationAnalysisTemplateError]?
+    end
+
+    class BatchGetSchemaAnalysisRuleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetSchemaAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?schema_analysis_rule_requests: Array[Types::SchemaAnalysisRuleRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor schema_analysis_rule_requests: Array[Types::SchemaAnalysisRuleRequest]?
+    end
+
+    class BatchGetSchemaAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rules: Array[Types::AnalysisRule],
+        ?errors: Array[Types::BatchGetSchemaAnalysisRuleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rules: Array[Types::AnalysisRule]?
+      attr_accessor errors: Array[Types::BatchGetSchemaAnalysisRuleError]?
+    end
+
+    class BatchGetSchemaError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetSchemaOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor names: Array[String]?
+    end
+
+    class BatchGetSchemaOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schemas: Array[Types::Schema],
+        ?errors: Array[Types::BatchGetSchemaError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schemas: Array[Types::Schema]?
+      attr_accessor errors: Array[Types::BatchGetSchemaError]?
+    end
+
+    class BilledJobResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?units: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor units: Float?
+    end
+
+    class BilledResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?units: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor units: Float?
+    end
+
+    class Collaboration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creator_account_id: String,
+        ?creator_display_name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?member_status: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?data_encryption_metadata: Types::DataEncryptionMetadata,
+        ?query_log_status: String,
+        ?job_log_status: String,
+        ?analytics_engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor creator_display_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor member_status: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata?
+      attr_accessor query_log_status: String?
+      attr_accessor job_log_status: String?
+      attr_accessor analytics_engine: String?
+    end
+
+    class CollaborationAnalysisTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?description: String,
+        ?creator_account_id: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?schema: Types::AnalysisSchema,
+        ?format: String,
+        ?source: Types::AnalysisSource,
+        ?source_metadata: Types::AnalysisSourceMetadata,
+        ?analysis_parameters: Array[Types::AnalysisParameter],
+        ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor schema: Types::AnalysisSchema?
+      attr_accessor format: String?
+      attr_accessor source: Types::AnalysisSource?
+      attr_accessor source_metadata: Types::AnalysisSourceMetadata?
+      attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
+      attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
+    end
+
+    class CollaborationAnalysisTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?create_time: Time,
+        ?id: String,
+        ?name: String,
+        ?update_time: Time,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?creator_account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor update_time: Time?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor description: String?
+    end
+
+    class CollaborationConfiguredAudienceModelAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?configured_audience_model_arn: String,
+        ?name: String,
+        ?description: String,
+        ?creator_account_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class CollaborationConfiguredAudienceModelAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?create_time: Time,
+        ?id: String,
+        ?name: String,
+        ?update_time: Time,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?creator_account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor update_time: Time?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor description: String?
+    end
+
+    class CollaborationIdNamespaceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?name: String,
+        ?description: String,
+        ?creator_account_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig,
+        ?input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties,
+        ?id_mapping_config: Types::IdMappingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig?
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties?
+      attr_accessor id_mapping_config: Types::IdMappingConfig?
+    end
+
+    class CollaborationIdNamespaceAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?create_time: Time,
+        ?id: String,
+        ?update_time: Time,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?creator_account_id: String,
+        ?input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig,
+        ?name: String,
+        ?description: String,
+        ?input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor id: String?
+      attr_accessor update_time: Time?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary?
+    end
+
+    module CollaborationJobLogStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class CollaborationPrivacyBudgetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?privacy_budget_template_id: String,
+        ?privacy_budget_template_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?creator_account_id: String,
+        ?type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?budget: Types::PrivacyBudget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor privacy_budget_template_id: String?
+      attr_accessor privacy_budget_template_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor budget: Types::PrivacyBudget?
+    end
+
+    class CollaborationPrivacyBudgetTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?creator_account_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?privacy_budget_type: String,
+        ?auto_refresh: String,
+        ?parameters: Types::PrivacyBudgetTemplateParametersOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor auto_refresh: String?
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput?
+    end
+
+    class CollaborationPrivacyBudgetTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?creator_account_id: String,
+        ?privacy_budget_type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    module CollaborationQueryLogStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class CollaborationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?creator_account_id: String,
+        ?creator_display_name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?member_status: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?analytics_engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor creator_display_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor member_status: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor analytics_engine: String?
+    end
+
+    class Column
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class ComputeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?worker: Types::WorkerComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker: Types::WorkerComputeConfiguration?
+
+      class Worker < ComputeConfiguration
+      end
+      class Unknown < ComputeConfiguration
+      end
+    end
+
+    class ConfigurationDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?direct_analysis_configuration_details: Types::DirectAnalysisConfigurationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_analysis_configuration_details: Types::DirectAnalysisConfigurationDetails?
+
+      class DirectAnalysisConfigurationDetails < ConfigurationDetails
+      end
+      class Unknown < ConfigurationDetails
+      end
+    end
+
+    class ConfiguredAudienceModelAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?configured_audience_model_arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?name: String,
+        ?manage_resource_policies: bool,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor name: String?
+      attr_accessor manage_resource_policies: bool?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ConfiguredAudienceModelAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?configured_audience_model_arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor description: String?
+    end
+
+    class ConfiguredTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?table_reference: Types::TableReference,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?analysis_rule_types: Array[String],
+        ?analysis_method: String,
+        ?allowed_columns: Array[String],
+        ?selected_analysis_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor table_reference: Types::TableReference?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor allowed_columns: Array[String]?
+      attr_accessor selected_analysis_methods: Array[String]?
+    end
+
+    class ConfiguredTableAnalysisRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_id: String,
+        ?configured_table_arn: String,
+        ?policy: Types::ConfiguredTableAnalysisRulePolicy,
+        ?type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_id: String?
+      attr_accessor configured_table_arn: String?
+      attr_accessor policy: Types::ConfiguredTableAnalysisRulePolicy?
+      attr_accessor type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ConfiguredTableAnalysisRulePolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Types::ConfiguredTableAnalysisRulePolicyV1,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::ConfiguredTableAnalysisRulePolicyV1?
+
+      class V1 < ConfiguredTableAnalysisRulePolicy
+      end
+      class Unknown < ConfiguredTableAnalysisRulePolicy
+      end
+    end
+
+    class ConfiguredTableAnalysisRulePolicyV1
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?list: Types::AnalysisRuleList,
+        ?aggregation: Types::AnalysisRuleAggregation,
+        ?custom: Types::AnalysisRuleCustom,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list: Types::AnalysisRuleList?
+      attr_accessor aggregation: Types::AnalysisRuleAggregation?
+      attr_accessor custom: Types::AnalysisRuleCustom?
+
+      class List < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Aggregation < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Custom < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Unknown < ConfiguredTableAnalysisRulePolicyV1
+      end
+    end
+
+    module ConfiguredTableAnalysisRuleType
+      AGGREGATION: String
+      LIST: String
+      CUSTOM: String
+    end
+
+    class ConfiguredTableAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?configured_table_id: String,
+        ?configured_table_arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?role_arn: String,
+        ?name: String,
+        ?description: String,
+        ?analysis_rule_types: Array[String],
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor configured_table_id: String?
+      attr_accessor configured_table_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ConfiguredTableAssociationAnalysisRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_table_association_id: String,
+        ?configured_table_association_arn: String,
+        ?policy: Types::ConfiguredTableAssociationAnalysisRulePolicy,
+        ?type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_association_id: String?
+      attr_accessor configured_table_association_arn: String?
+      attr_accessor policy: Types::ConfiguredTableAssociationAnalysisRulePolicy?
+      attr_accessor type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleCustom
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConfiguredTableAssociationAnalysisRulePolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Types::ConfiguredTableAssociationAnalysisRulePolicyV1,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::ConfiguredTableAssociationAnalysisRulePolicyV1?
+
+      class V1 < ConfiguredTableAssociationAnalysisRulePolicy
+      end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicy
+      end
+    end
+
+    class ConfiguredTableAssociationAnalysisRulePolicyV1
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?list: Types::ConfiguredTableAssociationAnalysisRuleList,
+        ?aggregation: Types::ConfiguredTableAssociationAnalysisRuleAggregation,
+        ?custom: Types::ConfiguredTableAssociationAnalysisRuleCustom,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list: Types::ConfiguredTableAssociationAnalysisRuleList?
+      attr_accessor aggregation: Types::ConfiguredTableAssociationAnalysisRuleAggregation?
+      attr_accessor custom: Types::ConfiguredTableAssociationAnalysisRuleCustom?
+
+      class List < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+    end
+
+    module ConfiguredTableAssociationAnalysisRuleType
+      AGGREGATION: String
+      LIST: String
+      CUSTOM: String
+    end
+
+    class ConfiguredTableAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?id: String,
+        ?arn: String,
+        ?analysis_rule_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor analysis_rule_types: Array[String]?
+    end
+
+    class ConfiguredTableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?analysis_rule_types: Array[String],
+        ?analysis_method: String,
+        ?selected_analysis_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor selected_analysis_methods: Array[String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor reason: String?
+    end
+
+    class ConsolidatedPolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Types::ConsolidatedPolicyV1,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::ConsolidatedPolicyV1?
+
+      class V1 < ConsolidatedPolicy
+      end
+      class Unknown < ConsolidatedPolicy
+      end
+    end
+
+    class ConsolidatedPolicyAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_columns: Array[Types::AggregateColumn],
+        ?join_columns: Array[String],
+        ?join_required: String,
+        ?allowed_join_operators: Array[String],
+        ?dimension_columns: Array[String],
+        ?scalar_functions: Array[String],
+        ?output_constraints: Array[Types::AggregationConstraint],
+        ?additional_analyses: String,
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_columns: Array[Types::AggregateColumn]?
+      attr_accessor join_columns: Array[String]?
+      attr_accessor join_required: String?
+      attr_accessor allowed_join_operators: Array[String]?
+      attr_accessor dimension_columns: Array[String]?
+      attr_accessor scalar_functions: Array[String]?
+      attr_accessor output_constraints: Array[Types::AggregationConstraint]?
+      attr_accessor additional_analyses: String?
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConsolidatedPolicyCustom
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_analyses: Array[String],
+        ?allowed_analysis_providers: Array[String],
+        ?additional_analyses: String,
+        ?disallowed_output_columns: Array[String],
+        ?differential_privacy: Types::DifferentialPrivacyConfiguration,
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_analyses: Array[String]?
+      attr_accessor allowed_analysis_providers: Array[String]?
+      attr_accessor additional_analyses: String?
+      attr_accessor disallowed_output_columns: Array[String]?
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration?
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConsolidatedPolicyList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?join_columns: Array[String],
+        ?allowed_join_operators: Array[String],
+        ?list_columns: Array[String],
+        ?additional_analyses: String,
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor join_columns: Array[String]?
+      attr_accessor allowed_join_operators: Array[String]?
+      attr_accessor list_columns: Array[String]?
+      attr_accessor additional_analyses: String?
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
+    end
+
+    class ConsolidatedPolicyV1
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?list: Types::ConsolidatedPolicyList,
+        ?aggregation: Types::ConsolidatedPolicyAggregation,
+        ?custom: Types::ConsolidatedPolicyCustom,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list: Types::ConsolidatedPolicyList?
+      attr_accessor aggregation: Types::ConsolidatedPolicyAggregation?
+      attr_accessor custom: Types::ConsolidatedPolicyCustom?
+
+      class List < ConsolidatedPolicyV1
+      end
+      class Aggregation < ConsolidatedPolicyV1
+      end
+      class Custom < ConsolidatedPolicyV1
+      end
+      class Unknown < ConsolidatedPolicyV1
+      end
+    end
+
+    class CreateAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?membership_identifier: String,
+        ?name: String,
+        ?format: String,
+        ?source: Types::AnalysisSource,
+        ?tags: Hash[String, String],
+        ?analysis_parameters: Array[Types::AnalysisParameter],
+        ?schema: Types::AnalysisSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor source: Types::AnalysisSource?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
+      attr_accessor schema: Types::AnalysisSchema?
+    end
+
+    class CreateAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_template: Types::AnalysisTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_template: Types::AnalysisTemplate?
+    end
+
+    class CreateCollaborationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::MemberSpecification],
+        ?name: String,
+        ?description: String,
+        ?creator_member_abilities: Array[String],
+        ?creator_ml_member_abilities: Types::MLMemberAbilities,
+        ?creator_display_name: String,
+        ?data_encryption_metadata: Types::DataEncryptionMetadata,
+        ?query_log_status: String,
+        ?job_log_status: String,
+        ?tags: Hash[String, String],
+        ?creator_payment_configuration: Types::PaymentConfiguration,
+        ?analytics_engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::MemberSpecification]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creator_member_abilities: Array[String]?
+      attr_accessor creator_ml_member_abilities: Types::MLMemberAbilities?
+      attr_accessor creator_display_name: String?
+      attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata?
+      attr_accessor query_log_status: String?
+      attr_accessor job_log_status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor creator_payment_configuration: Types::PaymentConfiguration?
+      attr_accessor analytics_engine: String?
+    end
+
+    class CreateCollaborationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration: Types::Collaboration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration: Types::Collaboration?
+    end
+
+    class CreateConfiguredAudienceModelAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_audience_model_arn: String,
+        ?configured_audience_model_association_name: String,
+        ?manage_resource_policies: bool,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor configured_audience_model_association_name: String?
+      attr_accessor manage_resource_policies: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class CreateConfiguredAudienceModelAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association: Types::ConfiguredAudienceModelAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation?
+    end
+
+    class CreateConfiguredTableAnalysisRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy?
+    end
+
+    class CreateConfiguredTableAnalysisRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule?
+    end
+
+    class CreateConfiguredTableAssociationAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_table_association_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy?
+    end
+
+    class CreateConfiguredTableAssociationAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAssociationAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule?
+    end
+
+    class CreateConfiguredTableAssociationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?membership_identifier: String,
+        ?configured_table_identifier: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfiguredTableAssociationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association: Types::ConfiguredTableAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation?
+    end
+
+    class CreateConfiguredTableOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?table_reference: Types::TableReference,
+        ?allowed_columns: Array[String],
+        ?analysis_method: String,
+        ?selected_analysis_methods: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor table_reference: Types::TableReference?
+      attr_accessor allowed_columns: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor selected_analysis_methods: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfiguredTableOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table: Types::ConfiguredTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table: Types::ConfiguredTable?
+    end
+
+    class CreateIdMappingTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?input_reference_config: Types::IdMappingTableInputReferenceConfig,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateIdMappingTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table: Types::IdMappingTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table: Types::IdMappingTable?
+    end
+
+    class CreateIdNamespaceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig,
+        ?tags: Hash[String, String],
+        ?name: String,
+        ?description: String,
+        ?id_mapping_config: Types::IdMappingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor id_mapping_config: Types::IdMappingConfig?
+    end
+
+    class CreateIdNamespaceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association: Types::IdNamespaceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
+    end
+
+    class CreateMembershipOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?query_log_status: String,
+        ?job_log_status: String,
+        ?tags: Hash[String, String],
+        ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
+        ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
+        ?payment_configuration: Types::MembershipPaymentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor query_log_status: String?
+      attr_accessor job_log_status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
+    end
+
+    class CreateMembershipOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership: Types::Membership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership: Types::Membership?
+    end
+
+    class CreatePrivacyBudgetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?auto_refresh: String,
+        ?privacy_budget_type: String,
+        ?parameters: Types::PrivacyBudgetTemplateParametersInput,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor auto_refresh: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersInput?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePrivacyBudgetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?privacy_budget_template: Types::PrivacyBudgetTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate?
+    end
+
+    module CustomMLMemberAbility
+      CAN_RECEIVE_MODEL_OUTPUT: String
+      CAN_RECEIVE_INFERENCE_OUTPUT: String
+    end
+
+    class DataEncryptionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_cleartext: bool,
+        ?allow_duplicates: bool,
+        ?allow_joins_on_columns_with_different_names: bool,
+        ?preserve_nulls: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_cleartext: bool?
+      attr_accessor allow_duplicates: bool?
+      attr_accessor allow_joins_on_columns_with_different_names: bool?
+      attr_accessor preserve_nulls: bool?
+    end
+
+    class DeleteAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_template_identifier: String?
+    end
+
+    class DeleteAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCollaborationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class DeleteCollaborationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfiguredAudienceModelAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteConfiguredAudienceModelAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfiguredTableAnalysisRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class DeleteConfiguredTableAnalysisRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfiguredTableAssociationAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_table_association_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class DeleteConfiguredTableAssociationAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfiguredTableAssociationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteConfiguredTableAssociationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfiguredTableOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+    end
+
+    class DeleteConfiguredTableOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIdMappingTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteIdMappingTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIdNamespaceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteIdNamespaceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMemberOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor account_id: String?
+    end
+
+    class DeleteMemberOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMembershipOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteMembershipOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePrivacyBudgetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?privacy_budget_template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor privacy_budget_template_identifier: String?
+    end
+
+    class DeletePrivacyBudgetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DifferentialPrivacyAggregationType
+      AVG: String
+      COUNT: String
+      COUNT_DISTINCT: String
+      SUM: String
+      STDDEV: String
+    end
+
+    class DifferentialPrivacyColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DifferentialPrivacyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[Types::DifferentialPrivacyColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[Types::DifferentialPrivacyColumn]?
+    end
+
+    class DifferentialPrivacyParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sensitivity_parameters: Array[Types::DifferentialPrivacySensitivityParameters],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sensitivity_parameters: Array[Types::DifferentialPrivacySensitivityParameters]?
+    end
+
+    class DifferentialPrivacyPreviewAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?max_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor max_count: Integer?
+    end
+
+    class DifferentialPrivacyPreviewParametersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Integer,
+        ?users_noise_per_query: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Integer?
+      attr_accessor users_noise_per_query: Integer?
+    end
+
+    class DifferentialPrivacyPrivacyBudget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregations: Array[Types::DifferentialPrivacyPrivacyBudgetAggregation],
+        ?epsilon: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregations: Array[Types::DifferentialPrivacyPrivacyBudgetAggregation]?
+      attr_accessor epsilon: Integer?
+    end
+
+    class DifferentialPrivacyPrivacyBudgetAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?max_count: Integer,
+        ?remaining_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor max_count: Integer?
+      attr_accessor remaining_count: Integer?
+    end
+
+    class DifferentialPrivacyPrivacyImpact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregations: Array[Types::DifferentialPrivacyPreviewAggregation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregations: Array[Types::DifferentialPrivacyPreviewAggregation]?
+    end
+
+    class DifferentialPrivacySensitivityParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_type: String,
+        ?aggregation_expression: String,
+        ?user_contribution_limit: Integer,
+        ?min_column_value: Float,
+        ?max_column_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_type: String?
+      attr_accessor aggregation_expression: String?
+      attr_accessor user_contribution_limit: Integer?
+      attr_accessor min_column_value: Float?
+      attr_accessor max_column_value: Float?
+    end
+
+    class DifferentialPrivacyTemplateParametersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Integer,
+        ?users_noise_per_query: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Integer?
+      attr_accessor users_noise_per_query: Integer?
+    end
+
+    class DifferentialPrivacyTemplateParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Integer,
+        ?users_noise_per_query: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Integer?
+      attr_accessor users_noise_per_query: Integer?
+    end
+
+    class DifferentialPrivacyTemplateUpdateParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Integer,
+        ?users_noise_per_query: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Integer?
+      attr_accessor users_noise_per_query: Integer?
+    end
+
+    class DirectAnalysisConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?receiver_account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor receiver_account_ids: Array[String]?
+    end
+
+    class GetAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_template_identifier: String?
+    end
+
+    class GetAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_template: Types::AnalysisTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_template: Types::AnalysisTemplate?
+    end
+
+    class GetCollaborationAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?analysis_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor analysis_template_arn: String?
+    end
+
+    class GetCollaborationAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_analysis_template: Types::CollaborationAnalysisTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_analysis_template: Types::CollaborationAnalysisTemplate?
+    end
+
+    class GetCollaborationConfiguredAudienceModelAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?configured_audience_model_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor configured_audience_model_association_identifier: String?
+    end
+
+    class GetCollaborationConfiguredAudienceModelAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_configured_audience_model_association: Types::CollaborationConfiguredAudienceModelAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_configured_audience_model_association: Types::CollaborationConfiguredAudienceModelAssociation?
+    end
+
+    class GetCollaborationIdNamespaceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?id_namespace_association_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor id_namespace_association_identifier: String?
+    end
+
+    class GetCollaborationIdNamespaceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_id_namespace_association: Types::CollaborationIdNamespaceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_id_namespace_association: Types::CollaborationIdNamespaceAssociation?
+    end
+
+    class GetCollaborationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class GetCollaborationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration: Types::Collaboration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration: Types::Collaboration?
+    end
+
+    class GetCollaborationPrivacyBudgetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?privacy_budget_template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor privacy_budget_template_identifier: String?
+    end
+
+    class GetCollaborationPrivacyBudgetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_privacy_budget_template: Types::CollaborationPrivacyBudgetTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_privacy_budget_template: Types::CollaborationPrivacyBudgetTemplate?
+    end
+
+    class GetConfiguredAudienceModelAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetConfiguredAudienceModelAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association: Types::ConfiguredAudienceModelAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation?
+    end
+
+    class GetConfiguredTableAnalysisRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class GetConfiguredTableAnalysisRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule?
+    end
+
+    class GetConfiguredTableAssociationAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_table_association_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class GetConfiguredTableAssociationAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAssociationAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule?
+    end
+
+    class GetConfiguredTableAssociationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetConfiguredTableAssociationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association: Types::ConfiguredTableAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation?
+    end
+
+    class GetConfiguredTableOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+    end
+
+    class GetConfiguredTableOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table: Types::ConfiguredTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table: Types::ConfiguredTable?
+    end
+
+    class GetIdMappingTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetIdMappingTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table: Types::IdMappingTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table: Types::IdMappingTable?
+    end
+
+    class GetIdNamespaceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetIdNamespaceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association: Types::IdNamespaceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
+    end
+
+    class GetMembershipOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetMembershipOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership: Types::Membership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership: Types::Membership?
+    end
+
+    class GetPrivacyBudgetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?privacy_budget_template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor privacy_budget_template_identifier: String?
+    end
+
+    class GetPrivacyBudgetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?privacy_budget_template: Types::PrivacyBudgetTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate?
+    end
+
+    class GetProtectedJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?protected_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor protected_job_identifier: String?
+    end
+
+    class GetProtectedJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_job: Types::ProtectedJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_job: Types::ProtectedJob?
+    end
+
+    class GetProtectedQueryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?protected_query_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor protected_query_identifier: String?
+    end
+
+    class GetProtectedQueryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_query: Types::ProtectedQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_query: Types::ProtectedQuery?
+    end
+
+    class GetSchemaAnalysisRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class GetSchemaAnalysisRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::AnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::AnalysisRule?
+    end
+
+    class GetSchemaOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor name: String?
+    end
+
+    class GetSchemaOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: Types::Schema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: Types::Schema?
+    end
+
+    class GlueTableReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?database_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor database_name: String?
+    end
+
+    class Hash
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sha256: String?
+    end
+
+    class IdMappingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_use_as_dimension_column: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_use_as_dimension_column: bool?
+    end
+
+    class IdMappingTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?input_reference_config: Types::IdMappingTableInputReferenceConfig,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?description: String,
+        ?name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?input_reference_properties: Types::IdMappingTableInputReferenceProperties,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor input_reference_properties: Types::IdMappingTableInputReferenceProperties?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class IdMappingTableInputReferenceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_reference_arn: String,
+        ?manage_resource_policies: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_reference_arn: String?
+      attr_accessor manage_resource_policies: bool?
+    end
+
+    class IdMappingTableInputReferenceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_input_source: Array[Types::IdMappingTableInputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_input_source: Array[Types::IdMappingTableInputSource]?
+    end
+
+    class IdMappingTableInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association_id: String?
+      attr_accessor type: String?
+    end
+
+    class IdMappingTableSchemaTypeProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_input_source: Array[Types::IdMappingTableInputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_input_source: Array[Types::IdMappingTableInputSource]?
+    end
+
+    class IdMappingTableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?input_reference_config: Types::IdMappingTableInputReferenceConfig,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig?
+      attr_accessor name: String?
+    end
+
+    class IdNamespaceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?name: String,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig,
+        ?input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties,
+        ?id_mapping_config: Types::IdMappingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig?
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties?
+      attr_accessor id_mapping_config: Types::IdMappingConfig?
+    end
+
+    class IdNamespaceAssociationInputReferenceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_reference_arn: String,
+        ?manage_resource_policies: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_reference_arn: String?
+      attr_accessor manage_resource_policies: bool?
+    end
+
+    class IdNamespaceAssociationInputReferenceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_type: String,
+        ?id_mapping_workflows_supported: Array[Smithy::Schema::document],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_type: String?
+      attr_accessor id_mapping_workflows_supported: Array[Smithy::Schema::document]?
+    end
+
+    class IdNamespaceAssociationInputReferencePropertiesSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_type: String?
+    end
+
+    class IdNamespaceAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?id: String,
+        ?arn: String,
+        ?input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig,
+        ?name: String,
+        ?description: String,
+        ?input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary?
+    end
+
+    module IdNamespaceType
+      SOURCE: String
+      TARGET: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobComputePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class ListAnalysisTemplatesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAnalysisTemplatesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?analysis_template_summaries: Array[Types::AnalysisTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor analysis_template_summaries: Array[Types::AnalysisTemplateSummary]?
+    end
+
+    class ListCollaborationAnalysisTemplatesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollaborationAnalysisTemplatesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_analysis_template_summaries: Array[Types::CollaborationAnalysisTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_analysis_template_summaries: Array[Types::CollaborationAnalysisTemplateSummary]?
+    end
+
+    class ListCollaborationConfiguredAudienceModelAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollaborationConfiguredAudienceModelAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_configured_audience_model_association_summaries: Array[Types::CollaborationConfiguredAudienceModelAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_configured_audience_model_association_summaries: Array[Types::CollaborationConfiguredAudienceModelAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCollaborationIdNamespaceAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollaborationIdNamespaceAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_id_namespace_association_summaries: Array[Types::CollaborationIdNamespaceAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_id_namespace_association_summaries: Array[Types::CollaborationIdNamespaceAssociationSummary]?
+    end
+
+    class ListCollaborationPrivacyBudgetTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollaborationPrivacyBudgetTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_privacy_budget_template_summaries: Array[Types::CollaborationPrivacyBudgetTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_privacy_budget_template_summaries: Array[Types::CollaborationPrivacyBudgetTemplateSummary]?
+    end
+
+    class ListCollaborationPrivacyBudgetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?privacy_budget_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCollaborationPrivacyBudgetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_privacy_budget_summaries: Array[Types::CollaborationPrivacyBudgetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_privacy_budget_summaries: Array[Types::CollaborationPrivacyBudgetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCollaborationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?member_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor member_status: String?
+    end
+
+    class ListCollaborationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_list: Array[Types::CollaborationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_list: Array[Types::CollaborationSummary]?
+    end
+
+    class ListConfiguredAudienceModelAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListConfiguredAudienceModelAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association_summaries: Array[Types::ConfiguredAudienceModelAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association_summaries: Array[Types::ConfiguredAudienceModelAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfiguredTableAssociationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListConfiguredTableAssociationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association_summaries: Array[Types::ConfiguredTableAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association_summaries: Array[Types::ConfiguredTableAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfiguredTablesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListConfiguredTablesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_summaries: Array[Types::ConfiguredTableSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_summaries: Array[Types::ConfiguredTableSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdMappingTablesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdMappingTablesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_summaries: Array[Types::IdMappingTableSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_summaries: Array[Types::IdMappingTableSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdNamespaceAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdNamespaceAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?id_namespace_association_summaries: Array[Types::IdNamespaceAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor id_namespace_association_summaries: Array[Types::IdNamespaceAssociationSummary]?
+    end
+
+    class ListMembersOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMembersOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?member_summaries: Array[Types::MemberSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor member_summaries: Array[Types::MemberSummary]?
+    end
+
+    class ListMembershipsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListMembershipsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?membership_summaries: Array[Types::MembershipSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor membership_summaries: Array[Types::MembershipSummary]?
+    end
+
+    class ListPrivacyBudgetTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPrivacyBudgetTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?privacy_budget_template_summaries: Array[Types::PrivacyBudgetTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor privacy_budget_template_summaries: Array[Types::PrivacyBudgetTemplateSummary]?
+    end
+
+    class ListPrivacyBudgetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?privacy_budget_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPrivacyBudgetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?privacy_budget_summaries: Array[Types::PrivacyBudgetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor privacy_budget_summaries: Array[Types::PrivacyBudgetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProtectedJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProtectedJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?protected_jobs: Array[Types::ProtectedJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor protected_jobs: Array[Types::ProtectedJobSummary]?
+    end
+
+    class ListProtectedQueriesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProtectedQueriesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?protected_queries: Array[Types::ProtectedQuerySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor protected_queries: Array[Types::ProtectedQuerySummary]?
+    end
+
+    class ListSchemasOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?schema_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor schema_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSchemasOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_summaries: Array[Types::SchemaSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_summaries: Array[Types::SchemaSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MLMemberAbilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_ml_member_abilities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_ml_member_abilities: Array[String]?
+    end
+
+    class MLPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_training: Types::ModelTrainingPaymentConfig,
+        ?model_inference: Types::ModelInferencePaymentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_training: Types::ModelTrainingPaymentConfig?
+      attr_accessor model_inference: Types::ModelInferencePaymentConfig?
+    end
+
+    module MemberAbility
+      CAN_QUERY: String
+      CAN_RECEIVE_RESULTS: String
+      CAN_RUN_JOB: String
+    end
+
+    class MemberSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?member_abilities: Array[String],
+        ?ml_member_abilities: Types::MLMemberAbilities,
+        ?display_name: String,
+        ?payment_configuration: Types::PaymentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor member_abilities: Array[String]?
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities?
+      attr_accessor display_name: String?
+      attr_accessor payment_configuration: Types::PaymentConfiguration?
+    end
+
+    class MemberSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?status: String,
+        ?display_name: String,
+        ?abilities: Array[String],
+        ?ml_abilities: Types::MLMemberAbilities,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?payment_configuration: Types::PaymentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+      attr_accessor display_name: String?
+      attr_accessor abilities: Array[String]?
+      attr_accessor ml_abilities: Types::MLMemberAbilities?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor payment_configuration: Types::PaymentConfiguration?
+    end
+
+    class Membership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_creator_account_id: String,
+        ?collaboration_creator_display_name: String,
+        ?collaboration_name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?member_abilities: Array[String],
+        ?ml_member_abilities: Types::MLMemberAbilities,
+        ?query_log_status: String,
+        ?job_log_status: String,
+        ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
+        ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
+        ?payment_configuration: Types::MembershipPaymentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_creator_account_id: String?
+      attr_accessor collaboration_creator_display_name: String?
+      attr_accessor collaboration_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor member_abilities: Array[String]?
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities?
+      attr_accessor query_log_status: String?
+      attr_accessor job_log_status: String?
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
+    end
+
+    class MembershipJobComputePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    module MembershipJobLogStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class MembershipMLPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_training: Types::MembershipModelTrainingPaymentConfig,
+        ?model_inference: Types::MembershipModelInferencePaymentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_training: Types::MembershipModelTrainingPaymentConfig?
+      attr_accessor model_inference: Types::MembershipModelInferencePaymentConfig?
+    end
+
+    class MembershipModelInferencePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class MembershipModelTrainingPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class MembershipPaymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_compute: Types::MembershipQueryComputePaymentConfig,
+        ?machine_learning: Types::MembershipMLPaymentConfig,
+        ?job_compute: Types::MembershipJobComputePaymentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_compute: Types::MembershipQueryComputePaymentConfig?
+      attr_accessor machine_learning: Types::MembershipMLPaymentConfig?
+      attr_accessor job_compute: Types::MembershipJobComputePaymentConfig?
+    end
+
+    class MembershipProtectedJobOutputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedJobS3OutputConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedJobS3OutputConfigurationInput?
+
+      class S3 < MembershipProtectedJobOutputConfiguration
+      end
+      class Unknown < MembershipProtectedJobOutputConfiguration
+      end
+    end
+
+    class MembershipProtectedJobResultConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::MembershipProtectedJobOutputConfiguration,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::MembershipProtectedJobOutputConfiguration?
+      attr_accessor role_arn: String?
+    end
+
+    class MembershipProtectedQueryOutputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedQueryS3OutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration?
+
+      class S3 < MembershipProtectedQueryOutputConfiguration
+      end
+      class Unknown < MembershipProtectedQueryOutputConfiguration
+      end
+    end
+
+    class MembershipProtectedQueryResultConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::MembershipProtectedQueryOutputConfiguration,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::MembershipProtectedQueryOutputConfiguration?
+      attr_accessor role_arn: String?
+    end
+
+    class MembershipQueryComputePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    module MembershipQueryLogStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class MembershipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_creator_account_id: String,
+        ?collaboration_creator_display_name: String,
+        ?collaboration_name: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?member_abilities: Array[String],
+        ?ml_member_abilities: Types::MLMemberAbilities,
+        ?payment_configuration: Types::MembershipPaymentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_creator_account_id: String?
+      attr_accessor collaboration_creator_display_name: String?
+      attr_accessor collaboration_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor member_abilities: Array[String]?
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities?
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
+    end
+
+    class ModelInferencePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class ModelTrainingPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    module ParameterType
+      SMALLINT: String
+      INTEGER: String
+      BIGINT: String
+      DECIMAL: String
+      REAL: String
+      DOUBLE_PRECISION: String
+      BOOLEAN: String
+      CHAR: String
+      VARCHAR: String
+      DATE: String
+      TIMESTAMP: String
+      TIMESTAMPTZ: String
+      TIME: String
+      TIMETZ: String
+      VARBYTE: String
+      BINARY: String
+      BYTE: String
+      CHARACTER: String
+      DOUBLE: String
+      FLOAT: String
+      INT: String
+      LONG: String
+      NUMERIC: String
+      SHORT: String
+      STRING: String
+      TIMESTAMP_LTZ: String
+      TIMESTAMP_NTZ: String
+      TINYINT: String
+    end
+
+    class PaymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_compute: Types::QueryComputePaymentConfig,
+        ?machine_learning: Types::MLPaymentConfig,
+        ?job_compute: Types::JobComputePaymentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_compute: Types::QueryComputePaymentConfig?
+      attr_accessor machine_learning: Types::MLPaymentConfig?
+      attr_accessor job_compute: Types::JobComputePaymentConfig?
+    end
+
+    class PopulateIdMappingTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class PopulateIdMappingTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_job_id: String?
+    end
+
+    class PreviewPrivacyImpactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?parameters: Types::PreviewPrivacyImpactParametersInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor parameters: Types::PreviewPrivacyImpactParametersInput?
+    end
+
+    class PreviewPrivacyImpactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?privacy_impact: Types::PrivacyImpact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor privacy_impact: Types::PrivacyImpact?
+    end
+
+    class PreviewPrivacyImpactParametersInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyPreviewParametersInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPreviewParametersInput?
+
+      class DifferentialPrivacy < PreviewPrivacyImpactParametersInput
+      end
+      class Unknown < PreviewPrivacyImpactParametersInput
+      end
+    end
+
+    class PrivacyBudget
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyPrivacyBudget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyBudget?
+
+      class DifferentialPrivacy < PrivacyBudget
+      end
+      class Unknown < PrivacyBudget
+      end
+    end
+
+    class PrivacyBudgetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?privacy_budget_template_id: String,
+        ?privacy_budget_template_arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?budget: Types::PrivacyBudget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor privacy_budget_template_id: String?
+      attr_accessor privacy_budget_template_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor budget: Types::PrivacyBudget?
+    end
+
+    class PrivacyBudgetTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?privacy_budget_type: String,
+        ?auto_refresh: String,
+        ?parameters: Types::PrivacyBudgetTemplateParametersOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor auto_refresh: String?
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput?
+    end
+
+    module PrivacyBudgetTemplateAutoRefresh
+      CALENDAR_MONTH: String
+      NONE: String
+    end
+
+    class PrivacyBudgetTemplateParametersInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyTemplateParametersInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersInput?
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput
+      end
+      class Unknown < PrivacyBudgetTemplateParametersInput
+      end
+    end
+
+    class PrivacyBudgetTemplateParametersOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput?
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput
+      end
+      class Unknown < PrivacyBudgetTemplateParametersOutput
+      end
+    end
+
+    class PrivacyBudgetTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?privacy_budget_type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class PrivacyBudgetTemplateUpdateParameters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters?
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters
+      end
+      class Unknown < PrivacyBudgetTemplateUpdateParameters
+      end
+    end
+
+    module PrivacyBudgetType
+      DIFFERENTIAL_PRIVACY: String
+    end
+
+    class PrivacyImpact
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?differential_privacy: Types::DifferentialPrivacyPrivacyImpact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyImpact?
+
+      class DifferentialPrivacy < PrivacyImpact
+      end
+      class Unknown < PrivacyImpact
+      end
+    end
+
+    class ProtectedJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?create_time: Time,
+        ?job_parameters: Types::ProtectedJobParameters,
+        ?status: String,
+        ?result_configuration: Types::ProtectedJobResultConfigurationOutput,
+        ?statistics: Types::ProtectedJobStatistics,
+        ?result: Types::ProtectedJobResult,
+        ?error: Types::ProtectedJobError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor job_parameters: Types::ProtectedJobParameters?
+      attr_accessor status: String?
+      attr_accessor result_configuration: Types::ProtectedJobResultConfigurationOutput?
+      attr_accessor statistics: Types::ProtectedJobStatistics?
+      attr_accessor result: Types::ProtectedJobResult?
+      attr_accessor error: Types::ProtectedJobError?
+    end
+
+    module ProtectedJobAnalysisType
+      DIRECT_ANALYSIS: String
+    end
+
+    class ProtectedJobConfigurationDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?direct_analysis_configuration_details: Types::ProtectedJobDirectAnalysisConfigurationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_analysis_configuration_details: Types::ProtectedJobDirectAnalysisConfigurationDetails?
+
+      class DirectAnalysisConfigurationDetails < ProtectedJobConfigurationDetails
+      end
+      class Unknown < ProtectedJobConfigurationDetails
+      end
+    end
+
+    class ProtectedJobDirectAnalysisConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?receiver_account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor receiver_account_ids: Array[String]?
+    end
+
+    class ProtectedJobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class ProtectedJobMemberOutputConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ProtectedJobMemberOutputConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ProtectedJobOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedJobS3Output,
+        ?member_list: Array[Types::ProtectedJobSingleMemberOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedJobS3Output?
+      attr_accessor member_list: Array[Types::ProtectedJobSingleMemberOutput]?
+
+      class S3 < ProtectedJobOutput
+      end
+      class MemberList < ProtectedJobOutput
+      end
+      class Unknown < ProtectedJobOutput
+      end
+    end
+
+    class ProtectedJobOutputConfigurationInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?member: Types::ProtectedJobMemberOutputConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::ProtectedJobMemberOutputConfigurationInput?
+
+      class Member < ProtectedJobOutputConfigurationInput
+      end
+      class Unknown < ProtectedJobOutputConfigurationInput
+      end
+    end
+
+    class ProtectedJobOutputConfigurationOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedJobS3OutputConfigurationOutput,
+        ?member: Types::ProtectedJobMemberOutputConfigurationOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedJobS3OutputConfigurationOutput?
+      attr_accessor member: Types::ProtectedJobMemberOutputConfigurationOutput?
+
+      class S3 < ProtectedJobOutputConfigurationOutput
+      end
+      class Member < ProtectedJobOutputConfigurationOutput
+      end
+      class Unknown < ProtectedJobOutputConfigurationOutput
+      end
+    end
+
+    class ProtectedJobParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_template_arn: String?
+    end
+
+    class ProtectedJobReceiverConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_type: String,
+        ?configuration_details: Types::ProtectedJobConfigurationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_type: String?
+      attr_accessor configuration_details: Types::ProtectedJobConfigurationDetails?
+    end
+
+    class ProtectedJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: Types::ProtectedJobOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: Types::ProtectedJobOutput?
+    end
+
+    class ProtectedJobResultConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::ProtectedJobOutputConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::ProtectedJobOutputConfigurationInput?
+    end
+
+    class ProtectedJobResultConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::ProtectedJobOutputConfigurationOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::ProtectedJobOutputConfigurationOutput?
+    end
+
+    class ProtectedJobS3Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    class ProtectedJobS3OutputConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+    end
+
+    class ProtectedJobS3OutputConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+    end
+
+    class ProtectedJobSingleMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ProtectedJobStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_duration_in_millis: Integer,
+        ?billed_resource_utilization: Types::BilledJobResourceUtilization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_duration_in_millis: Integer?
+      attr_accessor billed_resource_utilization: Types::BilledJobResourceUtilization?
+    end
+
+    module ProtectedJobStatus
+      SUBMITTED: String
+      STARTED: String
+      CANCELLED: String
+      CANCELLING: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    class ProtectedJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?create_time: Time,
+        ?status: String,
+        ?receiver_configurations: Array[Types::ProtectedJobReceiverConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor status: String?
+      attr_accessor receiver_configurations: Array[Types::ProtectedJobReceiverConfiguration]?
+    end
+
+    module ProtectedJobType
+      PYSPARK: String
+    end
+
+    class ProtectedQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?create_time: Time,
+        ?sql_parameters: Types::ProtectedQuerySQLParameters,
+        ?status: String,
+        ?result_configuration: Types::ProtectedQueryResultConfiguration,
+        ?statistics: Types::ProtectedQueryStatistics,
+        ?result: Types::ProtectedQueryResult,
+        ?error: Types::ProtectedQueryError,
+        ?differential_privacy: Types::DifferentialPrivacyParameters,
+        ?compute_configuration: Types::ComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters?
+      attr_accessor status: String?
+      attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration?
+      attr_accessor statistics: Types::ProtectedQueryStatistics?
+      attr_accessor result: Types::ProtectedQueryResult?
+      attr_accessor error: Types::ProtectedQueryError?
+      attr_accessor differential_privacy: Types::DifferentialPrivacyParameters?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+    end
+
+    class ProtectedQueryDistributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::ProtectedQueryS3Output,
+        ?member_list: Array[Types::ProtectedQuerySingleMemberOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedQueryS3Output?
+      attr_accessor member_list: Array[Types::ProtectedQuerySingleMemberOutput]?
+    end
+
+    class ProtectedQueryDistributeOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locations: Array[Types::ProtectedQueryDistributeOutputConfigurationLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locations: Array[Types::ProtectedQueryDistributeOutputConfigurationLocation]?
+    end
+
+    class ProtectedQueryDistributeOutputConfigurationLocation
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedQueryS3OutputConfiguration,
+        ?member: Types::ProtectedQueryMemberOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration?
+      attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration?
+
+      class S3 < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+      class Member < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+      class Unknown < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+    end
+
+    class ProtectedQueryError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class ProtectedQueryMemberOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ProtectedQueryOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedQueryS3Output,
+        ?member_list: Array[Types::ProtectedQuerySingleMemberOutput],
+        ?distribute: Types::ProtectedQueryDistributeOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedQueryS3Output?
+      attr_accessor member_list: Array[Types::ProtectedQuerySingleMemberOutput]?
+      attr_accessor distribute: Types::ProtectedQueryDistributeOutput?
+
+      class S3 < ProtectedQueryOutput
+      end
+      class MemberList < ProtectedQueryOutput
+      end
+      class Distribute < ProtectedQueryOutput
+      end
+      class Unknown < ProtectedQueryOutput
+      end
+    end
+
+    class ProtectedQueryOutputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::ProtectedQueryS3OutputConfiguration,
+        ?member: Types::ProtectedQueryMemberOutputConfiguration,
+        ?distribute: Types::ProtectedQueryDistributeOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration?
+      attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration?
+      attr_accessor distribute: Types::ProtectedQueryDistributeOutputConfiguration?
+
+      class S3 < ProtectedQueryOutputConfiguration
+      end
+      class Member < ProtectedQueryOutputConfiguration
+      end
+      class Distribute < ProtectedQueryOutputConfiguration
+      end
+      class Unknown < ProtectedQueryOutputConfiguration
+      end
+    end
+
+    class ProtectedQueryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output: Types::ProtectedQueryOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output: Types::ProtectedQueryOutput?
+    end
+
+    class ProtectedQueryResultConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::ProtectedQueryOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::ProtectedQueryOutputConfiguration?
+    end
+
+    class ProtectedQueryS3Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+    end
+
+    class ProtectedQueryS3OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_format: String,
+        ?bucket: String,
+        ?key_prefix: String,
+        ?single_file_output: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_format: String?
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+      attr_accessor single_file_output: bool?
+    end
+
+    class ProtectedQuerySQLParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?analysis_template_arn: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor analysis_template_arn: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class ProtectedQuerySingleMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ProtectedQueryStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_duration_in_millis: Integer,
+        ?billed_resource_utilization: Types::BilledResourceUtilization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_duration_in_millis: Integer?
+      attr_accessor billed_resource_utilization: Types::BilledResourceUtilization?
+    end
+
+    class ProtectedQuerySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
+        ?create_time: Time,
+        ?status: String,
+        ?receiver_configurations: Array[Types::ReceiverConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor status: String?
+      attr_accessor receiver_configurations: Array[Types::ReceiverConfiguration]?
+    end
+
+    class QueryComputePaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class QueryConstraint
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?require_overlap: Types::QueryConstraintRequireOverlap,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor require_overlap: Types::QueryConstraintRequireOverlap?
+
+      class RequireOverlap < QueryConstraint
+      end
+      class Unknown < QueryConstraint
+      end
+    end
+
+    class QueryConstraintRequireOverlap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[String]?
+    end
+
+    class ReceiverConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_type: String,
+        ?configuration_details: Types::ConfigurationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_type: String?
+      attr_accessor configuration_details: Types::ConfigurationDetails?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class Schema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[Types::Column],
+        ?partition_keys: Array[Types::Column],
+        ?analysis_rule_types: Array[String],
+        ?analysis_method: String,
+        ?selected_analysis_methods: Array[String],
+        ?creator_account_id: String,
+        ?name: String,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?type: String,
+        ?schema_status_details: Array[Types::SchemaStatusDetail],
+        ?schema_type_properties: Types::SchemaTypeProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[Types::Column]?
+      attr_accessor partition_keys: Array[Types::Column]?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor selected_analysis_methods: Array[String]?
+      attr_accessor creator_account_id: String?
+      attr_accessor name: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor type: String?
+      attr_accessor schema_status_details: Array[Types::SchemaStatusDetail]?
+      attr_accessor schema_type_properties: Types::SchemaTypeProperties?
+    end
+
+    class SchemaAnalysisRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module SchemaConfiguration
+      DIFFERENTIAL_PRIVACY: String
+    end
+
+    module SchemaStatus
+      READY: String
+      NOT_READY: String
+    end
+
+    class SchemaStatusDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reasons: Array[Types::SchemaStatusReason],
+        ?analysis_rule_type: String,
+        ?configurations: Array[String],
+        ?analysis_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reasons: Array[Types::SchemaStatusReason]?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor configurations: Array[String]?
+      attr_accessor analysis_type: String?
+    end
+
+    class SchemaStatusReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module SchemaStatusReasonCode
+      ANALYSIS_RULE_MISSING: String
+      ANALYSIS_TEMPLATES_NOT_CONFIGURED: String
+      ANALYSIS_PROVIDERS_NOT_CONFIGURED: String
+      DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED: String
+      ID_MAPPING_TABLE_NOT_POPULATED: String
+      COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED: String
+      ADDITIONAL_ANALYSES_NOT_CONFIGURED: String
+      RESULT_RECEIVERS_NOT_CONFIGURED: String
+      ADDITIONAL_ANALYSES_NOT_ALLOWED: String
+      RESULT_RECEIVERS_NOT_ALLOWED: String
+      ANALYSIS_RULE_TYPES_NOT_COMPATIBLE: String
+    end
+
+    class SchemaSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?creator_account_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?collaboration_id: String,
+        ?collaboration_arn: String,
+        ?analysis_rule_types: Array[String],
+        ?analysis_method: String,
+        ?selected_analysis_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor collaboration_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor selected_analysis_methods: Array[String]?
+    end
+
+    module SchemaType
+      TABLE: String
+      ID_MAPPING_TABLE: String
+    end
+
+    class SchemaTypeProperties
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?id_mapping_table: Types::IdMappingTableSchemaTypeProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table: Types::IdMappingTableSchemaTypeProperties?
+
+      class IdMappingTable < SchemaTypeProperties
+      end
+      class Unknown < SchemaTypeProperties
+      end
+    end
+
+    module SelectedAnalysisMethod
+      DIRECT_QUERY: String
+      DIRECT_JOB: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_name: String,
+        ?quota_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_name: String?
+      attr_accessor quota_value: Float?
+    end
+
+    class SnowflakeTableReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?account_identifier: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?schema_name: String,
+        ?table_schema: Types::SnowflakeTableSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor account_identifier: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor table_schema: Types::SnowflakeTableSchema?
+    end
+
+    class SnowflakeTableSchema
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Array[Types::SnowflakeTableSchemaV1],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Array[Types::SnowflakeTableSchemaV1]?
+
+      class V1 < SnowflakeTableSchema
+      end
+      class Unknown < SnowflakeTableSchema
+      end
+    end
+
+    class SnowflakeTableSchemaV1
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_name: String,
+        ?column_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_name: String?
+      attr_accessor column_type: String?
+    end
+
+    class StartProtectedJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?membership_identifier: String,
+        ?job_parameters: Types::ProtectedJobParameters,
+        ?result_configuration: Types::ProtectedJobResultConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor job_parameters: Types::ProtectedJobParameters?
+      attr_accessor result_configuration: Types::ProtectedJobResultConfigurationInput?
+    end
+
+    class StartProtectedJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_job: Types::ProtectedJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_job: Types::ProtectedJob?
+    end
+
+    class StartProtectedQueryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?membership_identifier: String,
+        ?sql_parameters: Types::ProtectedQuerySQLParameters,
+        ?result_configuration: Types::ProtectedQueryResultConfiguration,
+        ?compute_configuration: Types::ComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters?
+      attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+    end
+
+    class StartProtectedQueryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_query: Types::ProtectedQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_query: Types::ProtectedQuery?
+    end
+
+    class TableReference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?glue: Types::GlueTableReference,
+        ?snowflake: Types::SnowflakeTableReference,
+        ?athena: Types::AthenaTableReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue: Types::GlueTableReference?
+      attr_accessor snowflake: Types::SnowflakeTableReference?
+      attr_accessor athena: Types::AthenaTableReference?
+
+      class Glue < TableReference
+      end
+      class Snowflake < TableReference
+      end
+      class Athena < TableReference
+      end
+      class Unknown < TableReference
+      end
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetProtectedJobStatus
+      CANCELLED: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAnalysisTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_template_identifier: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_template_identifier: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateAnalysisTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_template: Types::AnalysisTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_template: Types::AnalysisTemplate?
+    end
+
+    class UpdateCollaborationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?analytics_engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor analytics_engine: String?
+    end
+
+    class UpdateCollaborationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration: Types::Collaboration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration: Types::Collaboration?
+    end
+
+    class UpdateConfiguredAudienceModelAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association_identifier: String,
+        ?membership_identifier: String,
+        ?description: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateConfiguredAudienceModelAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_association: Types::ConfiguredAudienceModelAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation?
+    end
+
+    class UpdateConfiguredTableAnalysisRuleOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy?
+    end
+
+    class UpdateConfiguredTableAnalysisRuleOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule?
+    end
+
+    class UpdateConfiguredTableAssociationAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_table_association_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy?
+    end
+
+    class UpdateConfiguredTableAssociationAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::ConfiguredTableAssociationAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule?
+    end
+
+    class UpdateConfiguredTableAssociationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association_identifier: String,
+        ?membership_identifier: String,
+        ?description: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateConfiguredTableAssociationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association: Types::ConfiguredTableAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation?
+    end
+
+    class UpdateConfiguredTableOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?table_reference: Types::TableReference,
+        ?allowed_columns: Array[String],
+        ?analysis_method: String,
+        ?selected_analysis_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor table_reference: Types::TableReference?
+      attr_accessor allowed_columns: Array[String]?
+      attr_accessor analysis_method: String?
+      attr_accessor selected_analysis_methods: Array[String]?
+    end
+
+    class UpdateConfiguredTableOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table: Types::ConfiguredTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table: Types::ConfiguredTable?
+    end
+
+    class UpdateIdMappingTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table_identifier: String,
+        ?membership_identifier: String,
+        ?description: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class UpdateIdMappingTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_table: Types::IdMappingTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_table: Types::IdMappingTable?
+    end
+
+    class UpdateIdNamespaceAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association_identifier: String,
+        ?membership_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?id_mapping_config: Types::IdMappingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor id_mapping_config: Types::IdMappingConfig?
+    end
+
+    class UpdateIdNamespaceAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_association: Types::IdNamespaceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
+    end
+
+    class UpdateMembershipOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?query_log_status: String,
+        ?job_log_status: String,
+        ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
+        ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor query_log_status: String?
+      attr_accessor job_log_status: String?
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
+    end
+
+    class UpdateMembershipOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership: Types::Membership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership: Types::Membership?
+    end
+
+    class UpdatePrivacyBudgetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?privacy_budget_template_identifier: String,
+        ?privacy_budget_type: String,
+        ?parameters: Types::PrivacyBudgetTemplateUpdateParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor privacy_budget_template_identifier: String?
+      attr_accessor privacy_budget_type: String?
+      attr_accessor parameters: Types::PrivacyBudgetTemplateUpdateParameters?
+    end
+
+    class UpdatePrivacyBudgetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?privacy_budget_template: Types::PrivacyBudgetTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate?
+    end
+
+    class UpdateProtectedJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?protected_job_identifier: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor protected_job_identifier: String?
+      attr_accessor target_status: String?
+    end
+
+    class UpdateProtectedJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_job: Types::ProtectedJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_job: Types::ProtectedJob?
+    end
+
+    class UpdateProtectedQueryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?protected_query_identifier: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor protected_query_identifier: String?
+      attr_accessor target_status: String?
+    end
+
+    class UpdateProtectedQueryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protected_query: Types::ProtectedQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_query: Types::ProtectedQuery?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class WorkerComputeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor number: Integer?
+    end
+
+    module WorkerComputeType
+      CR1X: String
+      CR4X: String
+    end
+  end
+end

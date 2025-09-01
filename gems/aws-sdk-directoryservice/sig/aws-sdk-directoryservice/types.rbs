@@ -1,0 +1,3573 @@
+module Aws::DirectoryService
+  module Types
+
+    class ADAssessmentLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class AcceptSharedDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory_id: String?
+    end
+
+    class AcceptSharedDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory: Types::SharedDirectory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory: Types::SharedDirectory?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class AddIpRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?ip_routes: Array[Types::IpRoute],
+        ?update_security_group_for_directory_controllers: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor ip_routes: Array[Types::IpRoute]?
+      attr_accessor update_security_group_for_directory_controllers: bool?
+    end
+
+    class AddIpRoutesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?region_name: String,
+        ?vpc_settings: Types::DirectoryVpcSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor region_name: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings?
+    end
+
+    class AddRegionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddTagsToResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsToResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Assessment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+        ?directory_id: String,
+        ?dns_name: String,
+        ?start_time: Time,
+        ?last_update_date_time: Time,
+        ?status: String,
+        ?status_code: String,
+        ?status_reason: String,
+        ?customer_dns_ips: Array[String],
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?self_managed_instance_ids: Array[String],
+        ?report_type: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor dns_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_date_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+      attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor self_managed_instance_ids: Array[String]?
+      attr_accessor report_type: String?
+      attr_accessor version: String?
+    end
+
+    class AssessmentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_dns_ips: Array[String],
+        ?dns_name: String,
+        ?vpc_settings: Types::DirectoryVpcSettings,
+        ?instance_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor dns_name: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings?
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class AssessmentReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_controller_ip: String,
+        ?validations: Array[Types::AssessmentValidation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_controller_ip: String?
+      attr_accessor validations: Array[Types::AssessmentValidation]?
+    end
+
+    class AssessmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+        ?directory_id: String,
+        ?dns_name: String,
+        ?start_time: Time,
+        ?last_update_date_time: Time,
+        ?status: String,
+        ?customer_dns_ips: Array[String],
+        ?report_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor dns_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_date_time: Time?
+      attr_accessor status: String?
+      attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor report_type: String?
+    end
+
+    class AssessmentValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?name: String,
+        ?status: String,
+        ?status_code: String,
+        ?status_reason: String,
+        ?start_time: Time,
+        ?last_update_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_date_time: Time?
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class AuthenticationFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class CancelSchemaExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?schema_extension_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor schema_extension_id: String?
+    end
+
+    class CancelSchemaExtensionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+        ?state: String,
+        ?state_reason: String,
+        ?common_name: String,
+        ?registered_date_time: Time,
+        ?expiry_date_time: Time,
+        ?type: String,
+        ?client_cert_auth_settings: Types::ClientCertAuthSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor common_name: String?
+      attr_accessor registered_date_time: Time?
+      attr_accessor expiry_date_time: Time?
+      attr_accessor type: String?
+      attr_accessor client_cert_auth_settings: Types::ClientCertAuthSettings?
+    end
+
+    class CertificateAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class CertificateDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class CertificateInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class CertificateInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+        ?common_name: String,
+        ?state: String,
+        ?expiry_date_time: Time,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+      attr_accessor common_name: String?
+      attr_accessor state: String?
+      attr_accessor expiry_date_time: Time?
+      attr_accessor type: String?
+    end
+
+    class CertificateLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module CertificateState
+      REGISTERING: String
+      REGISTERED: String
+      REGISTER_FAILED: String
+      DEREGISTERING: String
+      DEREGISTERED: String
+      DEREGISTER_FAILED: String
+    end
+
+    module CertificateType
+      CLIENT_CERT_AUTH: String
+      CLIENT_LDAPS: String
+    end
+
+    class ClientAuthenticationSettingInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    module ClientAuthenticationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ClientAuthenticationType
+      SMART_CARD: String
+      SMART_CARD_OR_PASSWORD: String
+    end
+
+    class ClientCertAuthSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ocsp_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ocsp_url: String?
+    end
+
+    class ClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class Computer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computer_id: String,
+        ?computer_name: String,
+        ?computer_attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computer_id: String?
+      attr_accessor computer_name: String?
+      attr_accessor computer_attributes: Array[Types::Attribute]?
+    end
+
+    class ConditionalForwarder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remote_domain_name: String,
+        ?dns_ip_addrs: Array[String],
+        ?replication_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remote_domain_name: String?
+      attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor replication_scope: String?
+    end
+
+    class ConnectDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?short_name: String,
+        ?password: String,
+        ?description: String,
+        ?size: String,
+        ?connect_settings: Types::DirectoryConnectSettings,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor short_name: String?
+      attr_accessor password: String?
+      attr_accessor description: String?
+      attr_accessor size: String?
+      attr_accessor connect_settings: Types::DirectoryConnectSettings?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ConnectDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class CreateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor alias: String?
+    end
+
+    class CreateAliasResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor alias: String?
+    end
+
+    class CreateComputerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?computer_name: String,
+        ?password: String,
+        ?organizational_unit_distinguished_name: String,
+        ?computer_attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor computer_name: String?
+      attr_accessor password: String?
+      attr_accessor organizational_unit_distinguished_name: String?
+      attr_accessor computer_attributes: Array[Types::Attribute]?
+    end
+
+    class CreateComputerResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?computer: Types::Computer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor computer: Types::Computer?
+    end
+
+    class CreateConditionalForwarderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?remote_domain_name: String,
+        ?dns_ip_addrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor remote_domain_name: String?
+      attr_accessor dns_ip_addrs: Array[String]?
+    end
+
+    class CreateConditionalForwarderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?short_name: String,
+        ?password: String,
+        ?description: String,
+        ?size: String,
+        ?vpc_settings: Types::DirectoryVpcSettings,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor short_name: String?
+      attr_accessor password: String?
+      attr_accessor description: String?
+      attr_accessor size: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class CreateHybridADRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?assessment_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor assessment_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateHybridADResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class CreateLogSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor log_group_name: String?
+    end
+
+    class CreateLogSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateMicrosoftADRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?short_name: String,
+        ?password: String,
+        ?description: String,
+        ?vpc_settings: Types::DirectoryVpcSettings,
+        ?edition: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor short_name: String?
+      attr_accessor password: String?
+      attr_accessor description: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings?
+      attr_accessor edition: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMicrosoftADResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class CreateSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor name: String?
+    end
+
+    class CreateSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+    end
+
+    class CreateTrustRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?remote_domain_name: String,
+        ?trust_password: String,
+        ?trust_direction: String,
+        ?trust_type: String,
+        ?conditional_forwarder_ip_addrs: Array[String],
+        ?selective_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor remote_domain_name: String?
+      attr_accessor trust_password: String?
+      attr_accessor trust_direction: String?
+      attr_accessor trust_type: String?
+      attr_accessor conditional_forwarder_ip_addrs: Array[String]?
+      attr_accessor selective_auth: String?
+    end
+
+    class CreateTrustResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+    end
+
+    module DataAccessStatus
+      DISABLED: String
+      DISABLING: String
+      ENABLED: String
+      ENABLING: String
+      FAILED: String
+    end
+
+    class DeleteADAssessmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class DeleteADAssessmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class DeleteConditionalForwarderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?remote_domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor remote_domain_name: String?
+    end
+
+    class DeleteConditionalForwarderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DeleteDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DeleteLogSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DeleteLogSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+    end
+
+    class DeleteSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+    end
+
+    class DeleteTrustRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+        ?delete_associated_conditional_forwarder: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+      attr_accessor delete_associated_conditional_forwarder: bool?
+    end
+
+    class DeleteTrustResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+    end
+
+    class DeregisterCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor certificate_id: String?
+    end
+
+    class DeregisterCertificateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterEventTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?topic_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor topic_name: String?
+    end
+
+    class DeregisterEventTopicResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeADAssessmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class DescribeADAssessmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment: Types::Assessment,
+        ?assessment_reports: Array[Types::AssessmentReport],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment: Types::Assessment?
+      attr_accessor assessment_reports: Array[Types::AssessmentReport]?
+    end
+
+    class DescribeCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor certificate_id: String?
+    end
+
+    class DescribeCertificateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: Types::Certificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: Types::Certificate?
+    end
+
+    class DescribeClientAuthenticationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeClientAuthenticationSettingsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_authentication_settings_info: Array[Types::ClientAuthenticationSettingInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_authentication_settings_info: Array[Types::ClientAuthenticationSettingInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConditionalForwardersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?remote_domain_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor remote_domain_names: Array[String]?
+    end
+
+    class DescribeConditionalForwardersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditional_forwarders: Array[Types::ConditionalForwarder],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditional_forwarders: Array[Types::ConditionalForwarder]?
+    end
+
+    class DescribeDirectoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_ids: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDirectoriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_descriptions: Array[Types::DirectoryDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_descriptions: Array[Types::DirectoryDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectoryDataAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DescribeDirectoryDataAccessResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_access_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_access_status: String?
+    end
+
+    class DescribeDomainControllersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?domain_controller_ids: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor domain_controller_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDomainControllersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_controllers: Array[Types::DomainController],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_controllers: Array[Types::DomainController]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventTopicsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?topic_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor topic_names: Array[String]?
+    end
+
+    class DescribeEventTopicsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_topics: Array[Types::EventTopic],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_topics: Array[Types::EventTopic]?
+    end
+
+    class DescribeHybridADUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?update_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor update_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeHybridADUpdateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_activities: Types::HybridUpdateActivities,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_activities: Types::HybridUpdateActivities?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLDAPSSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeLDAPSSettingsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ldaps_settings_info: Array[Types::LDAPSSettingInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ldaps_settings_info: Array[Types::LDAPSSettingInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?region_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor region_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions_description: Array[Types::RegionDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions_description: Array[Types::RegionDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?status: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSettingsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?setting_entries: Array[Types::SettingEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor setting_entries: Array[Types::SettingEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSharedDirectoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_directory_id: String,
+        ?shared_directory_ids: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_directory_id: String?
+      attr_accessor shared_directory_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeSharedDirectoriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directories: Array[Types::SharedDirectory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directories: Array[Types::SharedDirectory]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?snapshot_ids: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor snapshot_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeSnapshotsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshots: Array[Types::Snapshot],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshots: Array[Types::Snapshot]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTrustsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?trust_ids: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor trust_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeTrustsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusts: Array[Types::Trust],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusts: Array[Types::Trust]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUpdateDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?update_type: String,
+        ?region_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor update_type: String?
+      attr_accessor region_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeUpdateDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_activities: Array[Types::UpdateInfoEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_activities: Array[Types::UpdateInfoEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class DirectoryAlreadyInRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class DirectoryAlreadySharedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module DirectoryConfigurationStatus
+      REQUESTED: String
+      UPDATING: String
+      UPDATED: String
+      FAILED: String
+      DEFAULT: String
+    end
+
+    class DirectoryConnectSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?customer_dns_ips: Array[String],
+        ?customer_user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor customer_user_name: String?
+    end
+
+    class DirectoryConnectSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?customer_user_name: String,
+        ?security_group_id: String,
+        ?availability_zones: Array[String],
+        ?connect_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor customer_user_name: String?
+      attr_accessor security_group_id: String?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor connect_ips: Array[String]?
+    end
+
+    class DirectoryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?name: String,
+        ?short_name: String,
+        ?size: String,
+        ?edition: String,
+        ?alias: String,
+        ?access_url: String,
+        ?description: String,
+        ?dns_ip_addrs: Array[String],
+        ?stage: String,
+        ?share_status: String,
+        ?share_method: String,
+        ?share_notes: String,
+        ?launch_time: Time,
+        ?stage_last_updated_date_time: Time,
+        ?type: String,
+        ?vpc_settings: Types::DirectoryVpcSettingsDescription,
+        ?connect_settings: Types::DirectoryConnectSettingsDescription,
+        ?radius_settings: Types::RadiusSettings,
+        ?radius_status: String,
+        ?stage_reason: String,
+        ?sso_enabled: bool,
+        ?desired_number_of_domain_controllers: Integer,
+        ?owner_directory_description: Types::OwnerDirectoryDescription,
+        ?regions_info: Types::RegionsInfo,
+        ?os_version: String,
+        ?hybrid_settings: Types::HybridSettingsDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor name: String?
+      attr_accessor short_name: String?
+      attr_accessor size: String?
+      attr_accessor edition: String?
+      attr_accessor alias: String?
+      attr_accessor access_url: String?
+      attr_accessor description: String?
+      attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor stage: String?
+      attr_accessor share_status: String?
+      attr_accessor share_method: String?
+      attr_accessor share_notes: String?
+      attr_accessor launch_time: Time?
+      attr_accessor stage_last_updated_date_time: Time?
+      attr_accessor type: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription?
+      attr_accessor connect_settings: Types::DirectoryConnectSettingsDescription?
+      attr_accessor radius_settings: Types::RadiusSettings?
+      attr_accessor radius_status: String?
+      attr_accessor stage_reason: String?
+      attr_accessor sso_enabled: bool?
+      attr_accessor desired_number_of_domain_controllers: Integer?
+      attr_accessor owner_directory_description: Types::OwnerDirectoryDescription?
+      attr_accessor regions_info: Types::RegionsInfo?
+      attr_accessor os_version: String?
+      attr_accessor hybrid_settings: Types::HybridSettingsDescription?
+    end
+
+    class DirectoryDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module DirectoryEdition
+      ENTERPRISE: String
+      STANDARD: String
+    end
+
+    class DirectoryInDesiredStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class DirectoryLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class DirectoryLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_only_directories_limit: Integer,
+        ?cloud_only_directories_current_count: Integer,
+        ?cloud_only_directories_limit_reached: bool,
+        ?cloud_only_microsoft_ad_limit: Integer,
+        ?cloud_only_microsoft_ad_current_count: Integer,
+        ?cloud_only_microsoft_ad_limit_reached: bool,
+        ?connected_directories_limit: Integer,
+        ?connected_directories_current_count: Integer,
+        ?connected_directories_limit_reached: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_only_directories_limit: Integer?
+      attr_accessor cloud_only_directories_current_count: Integer?
+      attr_accessor cloud_only_directories_limit_reached: bool?
+      attr_accessor cloud_only_microsoft_ad_limit: Integer?
+      attr_accessor cloud_only_microsoft_ad_current_count: Integer?
+      attr_accessor cloud_only_microsoft_ad_limit_reached: bool?
+      attr_accessor connected_directories_limit: Integer?
+      attr_accessor connected_directories_current_count: Integer?
+      attr_accessor connected_directories_limit_reached: bool?
+    end
+
+    class DirectoryNotSharedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module DirectorySize
+      SMALL: String
+      LARGE: String
+    end
+
+    module DirectoryStage
+      REQUESTED: String
+      CREATING: String
+      CREATED: String
+      ACTIVE: String
+      INOPERABLE: String
+      IMPAIRED: String
+      RESTORING: String
+      RESTOREFAILED: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      UPDATING: String
+    end
+
+    module DirectoryType
+      SIMPLE_AD: String
+      AD_CONNECTOR: String
+      MICROSOFT_AD: String
+      SHARED_MICROSOFT_AD: String
+    end
+
+    class DirectoryUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class DirectoryVpcSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class DirectoryVpcSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_id: String,
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_id: String?
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class DisableClientAuthenticationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+    end
+
+    class DisableClientAuthenticationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableDirectoryDataAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DisableDirectoryDataAccessResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableLDAPSRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+    end
+
+    class DisableLDAPSResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableRadiusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DisableRadiusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableSsoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?user_name: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+    end
+
+    class DisableSsoResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DomainController
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?domain_controller_id: String,
+        ?dns_ip_addr: String,
+        ?vpc_id: String,
+        ?subnet_id: String,
+        ?availability_zone: String,
+        ?status: String,
+        ?status_reason: String,
+        ?launch_time: Time,
+        ?status_last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor domain_controller_id: String?
+      attr_accessor dns_ip_addr: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor availability_zone: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor launch_time: Time?
+      attr_accessor status_last_updated_date_time: Time?
+    end
+
+    class DomainControllerLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module DomainControllerStatus
+      CREATING: String
+      ACTIVE: String
+      IMPAIRED: String
+      RESTORING: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      UPDATING: String
+    end
+
+    class EnableClientAuthenticationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+    end
+
+    class EnableClientAuthenticationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableDirectoryDataAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class EnableDirectoryDataAccessResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableLDAPSRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor type: String?
+    end
+
+    class EnableLDAPSResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableRadiusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?radius_settings: Types::RadiusSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor radius_settings: Types::RadiusSettings?
+    end
+
+    class EnableRadiusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableSsoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?user_name: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+    end
+
+    class EnableSsoResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EntityAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class EntityDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class EventTopic
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?topic_name: String,
+        ?topic_arn: String,
+        ?created_date_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor topic_name: String?
+      attr_accessor topic_arn: String?
+      attr_accessor created_date_time: Time?
+      attr_accessor status: String?
+    end
+
+    class GetDirectoryLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDirectoryLimitsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_limits: Types::DirectoryLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_limits: Types::DirectoryLimits?
+    end
+
+    class GetSnapshotLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class GetSnapshotLimitsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_limits: Types::SnapshotLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_limits: Types::SnapshotLimits?
+    end
+
+    class HybridAdministratorAccountUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+    end
+
+    class HybridCustomerInstancesSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_dns_ips: Array[String],
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor instance_ids: Array[String]?
+    end
+
+    class HybridSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?self_managed_dns_ip_addrs: Array[String],
+        ?self_managed_instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_managed_dns_ip_addrs: Array[String]?
+      attr_accessor self_managed_instance_ids: Array[String]?
+    end
+
+    class HybridUpdateActivities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?self_managed_instances: Array[Types::HybridUpdateInfoEntry],
+        ?hybrid_administrator_account: Array[Types::HybridUpdateInfoEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_managed_instances: Array[Types::HybridUpdateInfoEntry]?
+      attr_accessor hybrid_administrator_account: Array[Types::HybridUpdateInfoEntry]?
+    end
+
+    class HybridUpdateInfoEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?initiated_by: String,
+        ?new_value: Types::HybridUpdateValue,
+        ?previous_value: Types::HybridUpdateValue,
+        ?start_time: Time,
+        ?last_updated_date_time: Time,
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor initiated_by: String?
+      attr_accessor new_value: Types::HybridUpdateValue?
+      attr_accessor previous_value: Types::HybridUpdateValue?
+      attr_accessor start_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor assessment_id: String?
+    end
+
+    module HybridUpdateType
+      SELF_MANAGED_INSTANCES: String
+      HYBRID_ADMINISTRATOR_ACCOUNT: String
+    end
+
+    class HybridUpdateValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?dns_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor dns_ips: Array[String]?
+    end
+
+    class IncompatibleSettingsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InsufficientPermissionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidCertificateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidClientAuthStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidLDAPSStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidPasswordException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class InvalidTargetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class IpRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_ip: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_ip: String?
+      attr_accessor description: String?
+    end
+
+    class IpRouteInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?cidr_ip: String,
+        ?ip_route_status_msg: String,
+        ?added_date_time: Time,
+        ?ip_route_status_reason: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor cidr_ip: String?
+      attr_accessor ip_route_status_msg: String?
+      attr_accessor added_date_time: Time?
+      attr_accessor ip_route_status_reason: String?
+      attr_accessor description: String?
+    end
+
+    class IpRouteLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module IpRouteStatusMsg
+      ADDING: String
+      ADDED: String
+      REMOVING: String
+      REMOVED: String
+      ADD_FAILED: String
+      REMOVE_FAILED: String
+    end
+
+    class LDAPSSettingInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ldaps_status: String,
+        ?ldaps_status_reason: String,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ldaps_status: String?
+      attr_accessor ldaps_status_reason: String?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    module LDAPSStatus
+      ENABLING: String
+      ENABLED: String
+      ENABLE_FAILED: String
+      DISABLED: String
+    end
+
+    module LDAPSType
+      CLIENT: String
+    end
+
+    class ListADAssessmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListADAssessmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessments: Array[Types::AssessmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessments: Array[Types::AssessmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListCertificatesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?certificates_info: Array[Types::CertificateInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor certificates_info: Array[Types::CertificateInfo]?
+    end
+
+    class ListIpRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListIpRoutesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_routes_info: Array[Types::IpRouteInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_routes_info: Array[Types::IpRouteInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListLogSubscriptionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_subscriptions: Array[Types::LogSubscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_subscriptions: Array[Types::LogSubscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchemaExtensionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListSchemaExtensionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_extensions_info: Array[Types::SchemaExtensionInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_extensions_info: Array[Types::SchemaExtensionInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTagsForResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class LogSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?log_group_name: String,
+        ?subscription_created_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor log_group_name: String?
+      attr_accessor subscription_created_date_time: Time?
+    end
+
+    class NoAvailableCertificateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class OSUpdateSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os_version: String?
+    end
+
+    module OSVersion
+      VERSION_2012: String
+      VERSION_2019: String
+    end
+
+    class OrganizationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class OwnerDirectoryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?account_id: String,
+        ?dns_ip_addrs: Array[String],
+        ?vpc_settings: Types::DirectoryVpcSettingsDescription,
+        ?radius_settings: Types::RadiusSettings,
+        ?radius_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor account_id: String?
+      attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription?
+      attr_accessor radius_settings: Types::RadiusSettings?
+      attr_accessor radius_status: String?
+    end
+
+    module RadiusAuthenticationProtocol
+      PAP: String
+      CHAP: String
+      MSCHAPV1: String
+      MSCHAPV2: String
+    end
+
+    class RadiusSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?radius_servers: Array[String],
+        ?radius_port: Integer,
+        ?radius_timeout: Integer,
+        ?radius_retries: Integer,
+        ?shared_secret: String,
+        ?authentication_protocol: String,
+        ?display_label: String,
+        ?use_same_username: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor radius_servers: Array[String]?
+      attr_accessor radius_port: Integer?
+      attr_accessor radius_timeout: Integer?
+      attr_accessor radius_retries: Integer?
+      attr_accessor shared_secret: String?
+      attr_accessor authentication_protocol: String?
+      attr_accessor display_label: String?
+      attr_accessor use_same_username: bool?
+    end
+
+    module RadiusStatus
+      CREATING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class RegionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?region_name: String,
+        ?region_type: String,
+        ?status: String,
+        ?vpc_settings: Types::DirectoryVpcSettings,
+        ?desired_number_of_domain_controllers: Integer,
+        ?launch_time: Time,
+        ?status_last_updated_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor region_name: String?
+      attr_accessor region_type: String?
+      attr_accessor status: String?
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings?
+      attr_accessor desired_number_of_domain_controllers: Integer?
+      attr_accessor launch_time: Time?
+      attr_accessor status_last_updated_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class RegionLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module RegionType
+      PRIMARY: String
+      ADDITIONAL: String
+    end
+
+    class RegionsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_region: String,
+        ?additional_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_region: String?
+      attr_accessor additional_regions: Array[String]?
+    end
+
+    class RegisterCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?certificate_data: String,
+        ?type: String,
+        ?client_cert_auth_settings: Types::ClientCertAuthSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor certificate_data: String?
+      attr_accessor type: String?
+      attr_accessor client_cert_auth_settings: Types::ClientCertAuthSettings?
+    end
+
+    class RegisterCertificateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+    end
+
+    class RegisterEventTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?topic_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor topic_name: String?
+    end
+
+    class RegisterEventTopicResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RejectSharedDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory_id: String?
+    end
+
+    class RejectSharedDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory_id: String?
+    end
+
+    class RemoveIpRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?cidr_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor cidr_ips: Array[String]?
+    end
+
+    class RemoveIpRoutesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class RemoveRegionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveTagsFromResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsFromResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ReplicationScope
+      Domain: String
+    end
+
+    class ResetUserPasswordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?user_name: String,
+        ?new_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor new_password: String?
+    end
+
+    class ResetUserPasswordResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RestoreFromSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+    end
+
+    class RestoreFromSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SchemaExtensionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?schema_extension_id: String,
+        ?description: String,
+        ?schema_extension_status: String,
+        ?schema_extension_status_reason: String,
+        ?start_date_time: Time,
+        ?end_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor schema_extension_id: String?
+      attr_accessor description: String?
+      attr_accessor schema_extension_status: String?
+      attr_accessor schema_extension_status_reason: String?
+      attr_accessor start_date_time: Time?
+      attr_accessor end_date_time: Time?
+    end
+
+    module SchemaExtensionStatus
+      INITIALIZING: String
+      CREATING_SNAPSHOT: String
+      UPDATING_SCHEMA: String
+      REPLICATING: String
+      CANCEL_IN_PROGRESS: String
+      ROLLBACK_IN_PROGRESS: String
+      CANCELLED: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    module SelectiveAuth
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class Setting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class SettingEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?allowed_values: String,
+        ?applied_value: String,
+        ?requested_value: String,
+        ?request_status: String,
+        ?request_detailed_status: Hash[String, String],
+        ?request_status_message: String,
+        ?last_updated_date_time: Time,
+        ?last_requested_date_time: Time,
+        ?data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor allowed_values: String?
+      attr_accessor applied_value: String?
+      attr_accessor requested_value: String?
+      attr_accessor request_status: String?
+      attr_accessor request_detailed_status: Hash[String, String]?
+      attr_accessor request_status_message: String?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor last_requested_date_time: Time?
+      attr_accessor data_type: String?
+    end
+
+    class ShareDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?share_notes: String,
+        ?share_target: Types::ShareTarget,
+        ?share_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor share_notes: String?
+      attr_accessor share_target: Types::ShareTarget?
+      attr_accessor share_method: String?
+    end
+
+    class ShareDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory_id: String?
+    end
+
+    class ShareLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module ShareMethod
+      ORGANIZATIONS: String
+      HANDSHAKE: String
+    end
+
+    module ShareStatus
+      SHARED: String
+      PENDING_ACCEPTANCE: String
+      REJECTED: String
+      REJECTING: String
+      REJECT_FAILED: String
+      SHARING: String
+      SHARE_FAILED: String
+      DELETED: String
+      DELETING: String
+    end
+
+    class ShareTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class SharedDirectory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account_id: String,
+        ?owner_directory_id: String,
+        ?share_method: String,
+        ?shared_account_id: String,
+        ?shared_directory_id: String,
+        ?share_status: String,
+        ?share_notes: String,
+        ?created_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account_id: String?
+      attr_accessor owner_directory_id: String?
+      attr_accessor share_method: String?
+      attr_accessor shared_account_id: String?
+      attr_accessor shared_directory_id: String?
+      attr_accessor share_status: String?
+      attr_accessor share_notes: String?
+      attr_accessor created_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class Snapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?snapshot_id: String,
+        ?type: String,
+        ?name: String,
+        ?status: String,
+        ?start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor snapshot_id: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+    end
+
+    class SnapshotLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class SnapshotLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manual_snapshots_limit: Integer,
+        ?manual_snapshots_current_count: Integer,
+        ?manual_snapshots_limit_reached: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manual_snapshots_limit: Integer?
+      attr_accessor manual_snapshots_current_count: Integer?
+      attr_accessor manual_snapshots_limit_reached: bool?
+    end
+
+    module SnapshotStatus
+      CREATING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module SnapshotType
+      AUTO: String
+      MANUAL: String
+    end
+
+    class StartADAssessmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_configuration: Types::AssessmentConfiguration,
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_configuration: Types::AssessmentConfiguration?
+      attr_accessor directory_id: String?
+    end
+
+    class StartADAssessmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_id: String?
+    end
+
+    class StartSchemaExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?create_snapshot_before_schema_extension: bool,
+        ?ldif_content: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor create_snapshot_before_schema_extension: bool?
+      attr_accessor ldif_content: String?
+      attr_accessor description: String?
+    end
+
+    class StartSchemaExtensionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_extension_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_extension_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module TargetType
+      ACCOUNT: String
+    end
+
+    module TopicStatus
+      REGISTERED: String
+      TOPIC_NOT_FOUND: String
+      FAILED: String
+      DELETED: String
+    end
+
+    class Trust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?trust_id: String,
+        ?remote_domain_name: String,
+        ?trust_type: String,
+        ?trust_direction: String,
+        ?trust_state: String,
+        ?created_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?state_last_updated_date_time: Time,
+        ?trust_state_reason: String,
+        ?selective_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor trust_id: String?
+      attr_accessor remote_domain_name: String?
+      attr_accessor trust_type: String?
+      attr_accessor trust_direction: String?
+      attr_accessor trust_state: String?
+      attr_accessor created_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor state_last_updated_date_time: Time?
+      attr_accessor trust_state_reason: String?
+      attr_accessor selective_auth: String?
+    end
+
+    module TrustDirection
+      ONE_WAY_OUTGOING: String
+      ONE_WAY_INCOMING: String
+      TWO_WAY: String
+    end
+
+    module TrustState
+      CREATING: String
+      CREATED: String
+      VERIFYING: String
+      VERIFY_FAILED: String
+      VERIFIED: String
+      UPDATING: String
+      UPDATE_FAILED: String
+      UPDATED: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+    end
+
+    module TrustType
+      FOREST: String
+      EXTERNAL: String
+    end
+
+    class UnshareDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?unshare_target: Types::UnshareTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor unshare_target: Types::UnshareTarget?
+    end
+
+    class UnshareDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_directory_id: String?
+    end
+
+    class UnshareTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class UnsupportedSettingsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class UpdateConditionalForwarderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?remote_domain_name: String,
+        ?dns_ip_addrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor remote_domain_name: String?
+      attr_accessor dns_ip_addrs: Array[String]?
+    end
+
+    class UpdateConditionalForwarderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDirectorySetupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?update_type: String,
+        ?os_update_settings: Types::OSUpdateSettings,
+        ?create_snapshot_before_update: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor update_type: String?
+      attr_accessor os_update_settings: Types::OSUpdateSettings?
+      attr_accessor create_snapshot_before_update: bool?
+    end
+
+    class UpdateDirectorySetupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateHybridADRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?hybrid_administrator_account_update: Types::HybridAdministratorAccountUpdate,
+        ?self_managed_instances_settings: Types::HybridCustomerInstancesSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor hybrid_administrator_account_update: Types::HybridAdministratorAccountUpdate?
+      attr_accessor self_managed_instances_settings: Types::HybridCustomerInstancesSettings?
+    end
+
+    class UpdateHybridADResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?assessment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor assessment_id: String?
+    end
+
+    class UpdateInfoEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?status: String,
+        ?status_reason: String,
+        ?initiated_by: String,
+        ?new_value: Types::UpdateValue,
+        ?previous_value: Types::UpdateValue,
+        ?start_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor initiated_by: String?
+      attr_accessor new_value: Types::UpdateValue?
+      attr_accessor previous_value: Types::UpdateValue?
+      attr_accessor start_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class UpdateNumberOfDomainControllersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?desired_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor desired_number: Integer?
+    end
+
+    class UpdateNumberOfDomainControllersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRadiusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?radius_settings: Types::RadiusSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor radius_settings: Types::RadiusSettings?
+    end
+
+    class UpdateRadiusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?settings: Array[Types::Setting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor settings: Array[Types::Setting]?
+    end
+
+    class UpdateSettingsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    module UpdateStatus
+      UPDATED: String
+      UPDATING: String
+      UPDATE_FAILED: String
+    end
+
+    class UpdateTrustRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+        ?selective_auth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+      attr_accessor selective_auth: String?
+    end
+
+    class UpdateTrustResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?trust_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor trust_id: String?
+    end
+
+    module UpdateType
+      OS: String
+    end
+
+    class UpdateValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os_update_settings: Types::OSUpdateSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os_update_settings: Types::OSUpdateSettings?
+    end
+
+    class UserDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class VerifyTrustRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+    end
+
+    class VerifyTrustResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_id: String?
+    end
+  end
+end

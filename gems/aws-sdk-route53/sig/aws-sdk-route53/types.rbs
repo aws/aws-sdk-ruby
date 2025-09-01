@@ -1,0 +1,3625 @@
+module Aws::Route53
+  module Types
+
+    class AccountLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module AccountLimitType
+      MAX_HEALTH_CHECKS_BY_OWNER: String
+      MAX_HOSTED_ZONES_BY_OWNER: String
+      MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER: String
+      MAX_REUSABLE_DELEGATION_SETS_BY_OWNER: String
+      MAX_TRAFFIC_POLICIES_BY_OWNER: String
+    end
+
+    class ActivateKeySigningKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+    end
+
+    class ActivateKeySigningKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class AlarmIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor name: String?
+    end
+
+    class AliasTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?dns_name: String,
+        ?evaluate_target_health: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor dns_name: String?
+      attr_accessor evaluate_target_health: bool?
+    end
+
+    class AssociateVPCWithHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?vpc: Types::VPC,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor vpc: Types::VPC?
+      attr_accessor comment: String?
+    end
+
+    class AssociateVPCWithHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class Change
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?resource_record_set: Types::ResourceRecordSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor resource_record_set: Types::ResourceRecordSet?
+    end
+
+    module ChangeAction
+      CREATE: String
+      DELETE: String
+      UPSERT: String
+    end
+
+    class ChangeBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: String,
+        ?changes: Array[Types::Change],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: String?
+      attr_accessor changes: Array[Types::Change]?
+    end
+
+    class ChangeCidrCollectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?collection_version: Integer,
+        ?changes: Array[Types::CidrCollectionChange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor collection_version: Integer?
+      attr_accessor changes: Array[Types::CidrCollectionChange]?
+    end
+
+    class ChangeCidrCollectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ChangeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?submitted_at: Time,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor submitted_at: Time?
+      attr_accessor comment: String?
+    end
+
+    class ChangeResourceRecordSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?change_batch: Types::ChangeBatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor change_batch: Types::ChangeBatch?
+    end
+
+    class ChangeResourceRecordSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    module ChangeStatus
+      PENDING: String
+      INSYNC: String
+    end
+
+    class ChangeTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?add_tags: Array[Types::Tag],
+        ?remove_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor add_tags: Array[Types::Tag]?
+      attr_accessor remove_tag_keys: Array[String]?
+    end
+
+    class ChangeTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CidrBlockInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CidrBlockSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_block: String,
+        ?location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_block: String?
+      attr_accessor location_name: String?
+    end
+
+    class CidrCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version: Integer?
+    end
+
+    class CidrCollectionAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CidrCollectionChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_name: String,
+        ?action: String,
+        ?cidr_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_name: String?
+      attr_accessor action: String?
+      attr_accessor cidr_list: Array[String]?
+    end
+
+    module CidrCollectionChangeAction
+      PUT: String
+      DELETE_IF_EXISTS: String
+    end
+
+    class CidrCollectionInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CidrCollectionVersionMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CidrRoutingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_id: String,
+        ?location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_id: String?
+      attr_accessor location_name: String?
+    end
+
+    class CloudWatchAlarmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation_periods: Integer,
+        ?threshold: Float,
+        ?comparison_operator: String,
+        ?period: Integer,
+        ?metric_name: String,
+        ?namespace: String,
+        ?statistic: String,
+        ?dimensions: Array[Types::Dimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation_periods: Integer?
+      attr_accessor threshold: Float?
+      attr_accessor comparison_operator: String?
+      attr_accessor period: Integer?
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+      attr_accessor statistic: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+    end
+
+    module CloudWatchRegion
+      us_east_1: String
+      us_east_2: String
+      us_west_1: String
+      us_west_2: String
+      ca_central_1: String
+      eu_central_1: String
+      eu_central_2: String
+      eu_west_1: String
+      eu_west_2: String
+      eu_west_3: String
+      ap_east_1: String
+      me_south_1: String
+      me_central_1: String
+      ap_south_1: String
+      ap_south_2: String
+      ap_southeast_1: String
+      ap_southeast_2: String
+      ap_southeast_3: String
+      ap_northeast_1: String
+      ap_northeast_2: String
+      ap_northeast_3: String
+      eu_north_1: String
+      sa_east_1: String
+      cn_northwest_1: String
+      cn_north_1: String
+      af_south_1: String
+      eu_south_1: String
+      eu_south_2: String
+      us_gov_west_1: String
+      us_gov_east_1: String
+      us_iso_east_1: String
+      us_iso_west_1: String
+      us_isob_east_1: String
+      ap_southeast_4: String
+      il_central_1: String
+      ca_west_1: String
+      ap_southeast_5: String
+      mx_central_1: String
+      us_isof_south_1: String
+      us_isof_east_1: String
+      ap_southeast_7: String
+      ap_east_2: String
+      eu_isoe_west_1: String
+    end
+
+    class CollectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version: Integer?
+    end
+
+    module ComparisonOperator
+      GreaterThanOrEqualToThreshold: String
+      GreaterThanThreshold: String
+      LessThanThreshold: String
+      LessThanOrEqualToThreshold: String
+    end
+
+    class ConcurrentModification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictingDomainExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictingTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Coordinates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latitude: String,
+        ?longitude: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latitude: String?
+      attr_accessor longitude: String?
+    end
+
+    class CreateCidrCollectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?caller_reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor caller_reference: String?
+    end
+
+    class CreateCidrCollectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection: Types::CidrCollection,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection: Types::CidrCollection?
+      attr_accessor location: String?
+    end
+
+    class CreateHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caller_reference: String,
+        ?health_check_config: Types::HealthCheckConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caller_reference: String?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+    end
+
+    class CreateHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check: Types::HealthCheck,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check: Types::HealthCheck?
+      attr_accessor location: String?
+    end
+
+    class CreateHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?vpc: Types::VPC,
+        ?caller_reference: String,
+        ?hosted_zone_config: Types::HostedZoneConfig,
+        ?delegation_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor vpc: Types::VPC?
+      attr_accessor caller_reference: String?
+      attr_accessor hosted_zone_config: Types::HostedZoneConfig?
+      attr_accessor delegation_set_id: String?
+    end
+
+    class CreateHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone: Types::HostedZone,
+        ?change_info: Types::ChangeInfo,
+        ?delegation_set: Types::DelegationSet,
+        ?vpc: Types::VPC,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone: Types::HostedZone?
+      attr_accessor change_info: Types::ChangeInfo?
+      attr_accessor delegation_set: Types::DelegationSet?
+      attr_accessor vpc: Types::VPC?
+      attr_accessor location: String?
+    end
+
+    class CreateKeySigningKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caller_reference: String,
+        ?hosted_zone_id: String,
+        ?key_management_service_arn: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caller_reference: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor key_management_service_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class CreateKeySigningKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+        ?key_signing_key: Types::KeySigningKey,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+      attr_accessor key_signing_key: Types::KeySigningKey?
+      attr_accessor location: String?
+    end
+
+    class CreateQueryLoggingConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?cloud_watch_logs_log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor cloud_watch_logs_log_group_arn: String?
+    end
+
+    class CreateQueryLoggingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_logging_config: Types::QueryLoggingConfig,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_logging_config: Types::QueryLoggingConfig?
+      attr_accessor location: String?
+    end
+
+    class CreateReusableDelegationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caller_reference: String,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caller_reference: String?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class CreateReusableDelegationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_set: Types::DelegationSet,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_set: Types::DelegationSet?
+      attr_accessor location: String?
+    end
+
+    class CreateTrafficPolicyInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?name: String,
+        ?ttl: Integer,
+        ?traffic_policy_id: String,
+        ?traffic_policy_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+      attr_accessor ttl: Integer?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_version: Integer?
+    end
+
+    class CreateTrafficPolicyInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instance: Types::TrafficPolicyInstance,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance?
+      attr_accessor location: String?
+    end
+
+    class CreateTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?document: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor document: String?
+      attr_accessor comment: String?
+    end
+
+    class CreateTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy: Types::TrafficPolicy,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy: Types::TrafficPolicy?
+      attr_accessor location: String?
+    end
+
+    class CreateTrafficPolicyVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?document: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor document: String?
+      attr_accessor comment: String?
+    end
+
+    class CreateTrafficPolicyVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy: Types::TrafficPolicy,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy: Types::TrafficPolicy?
+      attr_accessor location: String?
+    end
+
+    class CreateVPCAssociationAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?vpc: Types::VPC,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor vpc: Types::VPC?
+    end
+
+    class CreateVPCAssociationAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?vpc: Types::VPC,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor vpc: Types::VPC?
+    end
+
+    class DNSSECNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DNSSECStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serve_signature: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serve_signature: String?
+      attr_accessor status_message: String?
+    end
+
+    class DeactivateKeySigningKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeactivateKeySigningKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class DelegationSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?caller_reference: String,
+        ?name_servers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor caller_reference: String?
+      attr_accessor name_servers: Array[String]?
+    end
+
+    class DelegationSetAlreadyCreated
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DelegationSetAlreadyReusable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DelegationSetInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DelegationSetNotAvailable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DelegationSetNotReusable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteCidrCollectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteCidrCollectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_id: String?
+    end
+
+    class DeleteHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class DeleteKeySigningKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteKeySigningKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class DeleteQueryLoggingConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteQueryLoggingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteReusableDelegationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteReusableDelegationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrafficPolicyInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteTrafficPolicyInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: Integer?
+    end
+
+    class DeleteTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVPCAssociationAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?vpc: Types::VPC,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor vpc: Types::VPC?
+    end
+
+    class DeleteVPCAssociationAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class DisableHostedZoneDNSSECRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class DisableHostedZoneDNSSECResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class DisassociateVPCFromHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?vpc: Types::VPC,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor vpc: Types::VPC?
+      attr_accessor comment: String?
+    end
+
+    class DisassociateVPCFromHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class EnableHostedZoneDNSSECRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class EnableHostedZoneDNSSECResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class GeoLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continent_code: String,
+        ?country_code: String,
+        ?subdivision_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continent_code: String?
+      attr_accessor country_code: String?
+      attr_accessor subdivision_code: String?
+    end
+
+    class GeoLocationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continent_code: String,
+        ?continent_name: String,
+        ?country_code: String,
+        ?country_name: String,
+        ?subdivision_code: String,
+        ?subdivision_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continent_code: String?
+      attr_accessor continent_name: String?
+      attr_accessor country_code: String?
+      attr_accessor country_name: String?
+      attr_accessor subdivision_code: String?
+      attr_accessor subdivision_name: String?
+    end
+
+    class GeoProximityLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_region: String,
+        ?local_zone_group: String,
+        ?coordinates: Types::Coordinates,
+        ?bias: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_region: String?
+      attr_accessor local_zone_group: String?
+      attr_accessor coordinates: Types::Coordinates?
+      attr_accessor bias: Integer?
+    end
+
+    class GetAccountLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class GetAccountLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Types::AccountLimit,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Types::AccountLimit?
+      attr_accessor count: Integer?
+    end
+
+    class GetChangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetChangeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_info: Types::ChangeInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_info: Types::ChangeInfo?
+    end
+
+    class GetCheckerIpRangesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetCheckerIpRangesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checker_ip_ranges: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checker_ip_ranges: Array[String]?
+    end
+
+    class GetDNSSECRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class GetDNSSECResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::DNSSECStatus,
+        ?key_signing_keys: Array[Types::KeySigningKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::DNSSECStatus?
+      attr_accessor key_signing_keys: Array[Types::KeySigningKey]?
+    end
+
+    class GetGeoLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continent_code: String,
+        ?country_code: String,
+        ?subdivision_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continent_code: String?
+      attr_accessor country_code: String?
+      attr_accessor subdivision_code: String?
+    end
+
+    class GetGeoLocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geo_location_details: Types::GeoLocationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geo_location_details: Types::GeoLocationDetails?
+    end
+
+    class GetHealthCheckCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetHealthCheckCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_count: Integer?
+    end
+
+    class GetHealthCheckLastFailureReasonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_id: String?
+    end
+
+    class GetHealthCheckLastFailureReasonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_observations: Array[Types::HealthCheckObservation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_observations: Array[Types::HealthCheckObservation]?
+    end
+
+    class GetHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_id: String?
+    end
+
+    class GetHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check: Types::HealthCheck,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check: Types::HealthCheck?
+    end
+
+    class GetHealthCheckStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_id: String?
+    end
+
+    class GetHealthCheckStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_observations: Array[Types::HealthCheckObservation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_observations: Array[Types::HealthCheckObservation]?
+    end
+
+    class GetHostedZoneCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetHostedZoneCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_count: Integer?
+    end
+
+    class GetHostedZoneLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class GetHostedZoneLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Types::HostedZoneLimit,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Types::HostedZoneLimit?
+      attr_accessor count: Integer?
+    end
+
+    class GetHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone: Types::HostedZone,
+        ?delegation_set: Types::DelegationSet,
+        ?vp_cs: Array[Types::VPC],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone: Types::HostedZone?
+      attr_accessor delegation_set: Types::DelegationSet?
+      attr_accessor vp_cs: Array[Types::VPC]?
+    end
+
+    class GetQueryLoggingConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetQueryLoggingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_logging_config: Types::QueryLoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_logging_config: Types::QueryLoggingConfig?
+    end
+
+    class GetReusableDelegationSetLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?delegation_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor delegation_set_id: String?
+    end
+
+    class GetReusableDelegationSetLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Types::ReusableDelegationSetLimit,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Types::ReusableDelegationSetLimit?
+      attr_accessor count: Integer?
+    end
+
+    class GetReusableDelegationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetReusableDelegationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_set: Types::DelegationSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_set: Types::DelegationSet?
+    end
+
+    class GetTrafficPolicyInstanceCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetTrafficPolicyInstanceCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instance_count: Integer?
+    end
+
+    class GetTrafficPolicyInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetTrafficPolicyInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instance: Types::TrafficPolicyInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance?
+    end
+
+    class GetTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: Integer?
+    end
+
+    class GetTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy: Types::TrafficPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy: Types::TrafficPolicy?
+    end
+
+    class HealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?caller_reference: String,
+        ?linked_service: Types::LinkedService,
+        ?health_check_config: Types::HealthCheckConfig,
+        ?health_check_version: Integer,
+        ?cloud_watch_alarm_configuration: Types::CloudWatchAlarmConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor caller_reference: String?
+      attr_accessor linked_service: Types::LinkedService?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+      attr_accessor health_check_version: Integer?
+      attr_accessor cloud_watch_alarm_configuration: Types::CloudWatchAlarmConfiguration?
+    end
+
+    class HealthCheckAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HealthCheckConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?port: Integer,
+        ?type: String,
+        ?resource_path: String,
+        ?fully_qualified_domain_name: String,
+        ?search_string: String,
+        ?request_interval: Integer,
+        ?failure_threshold: Integer,
+        ?measure_latency: bool,
+        ?inverted: bool,
+        ?disabled: bool,
+        ?health_threshold: Integer,
+        ?child_health_checks: Array[String],
+        ?enable_sni: bool,
+        ?regions: Array[String],
+        ?alarm_identifier: Types::AlarmIdentifier,
+        ?insufficient_data_health_status: String,
+        ?routing_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor port: Integer?
+      attr_accessor type: String?
+      attr_accessor resource_path: String?
+      attr_accessor fully_qualified_domain_name: String?
+      attr_accessor search_string: String?
+      attr_accessor request_interval: Integer?
+      attr_accessor failure_threshold: Integer?
+      attr_accessor measure_latency: bool?
+      attr_accessor inverted: bool?
+      attr_accessor disabled: bool?
+      attr_accessor health_threshold: Integer?
+      attr_accessor child_health_checks: Array[String]?
+      attr_accessor enable_sni: bool?
+      attr_accessor regions: Array[String]?
+      attr_accessor alarm_identifier: Types::AlarmIdentifier?
+      attr_accessor insufficient_data_health_status: String?
+      attr_accessor routing_control_arn: String?
+    end
+
+    class HealthCheckInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HealthCheckObservation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?ip_address: String,
+        ?status_report: Types::StatusReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor ip_address: String?
+      attr_accessor status_report: Types::StatusReport?
+    end
+
+    module HealthCheckRegion
+      us_east_1: String
+      us_west_1: String
+      us_west_2: String
+      eu_west_1: String
+      ap_southeast_1: String
+      ap_southeast_2: String
+      ap_northeast_1: String
+      sa_east_1: String
+    end
+
+    module HealthCheckType
+      HTTP: String
+      HTTPS: String
+      HTTP_STR_MATCH: String
+      HTTPS_STR_MATCH: String
+      TCP: String
+      CALCULATED: String
+      CLOUDWATCH_METRIC: String
+      RECOVERY_CONTROL: String
+    end
+
+    class HealthCheckVersionMismatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?caller_reference: String,
+        ?config: Types::HostedZoneConfig,
+        ?resource_record_set_count: Integer,
+        ?linked_service: Types::LinkedService,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor caller_reference: String?
+      attr_accessor config: Types::HostedZoneConfig?
+      attr_accessor resource_record_set_count: Integer?
+      attr_accessor linked_service: Types::LinkedService?
+    end
+
+    class HostedZoneAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZoneConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: String,
+        ?private_zone: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: String?
+      attr_accessor private_zone: bool?
+    end
+
+    class HostedZoneLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module HostedZoneLimitType
+      MAX_RRSETS_BY_ZONE: String
+      MAX_VPCS_ASSOCIATED_BY_ZONE: String
+    end
+
+    class HostedZoneNotEmpty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZoneNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZoneNotPrivate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZoneOwner
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owning_account: String,
+        ?owning_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owning_account: String?
+      attr_accessor owning_service: String?
+    end
+
+    class HostedZonePartiallyDelegated
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HostedZoneSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?name: String,
+        ?owner: Types::HostedZoneOwner,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+      attr_accessor owner: Types::HostedZoneOwner?
+    end
+
+    module HostedZoneType
+      PRIVATE_HOSTED_ZONE: String
+    end
+
+    class IncompatibleVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientCloudWatchLogsResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InsufficientDataHealthStatus
+      Healthy: String
+      Unhealthy: String
+      LastKnownStatus: String
+    end
+
+    class InvalidArgument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidChangeBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[String],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[String]?
+      attr_accessor message: String?
+    end
+
+    class InvalidDomainName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKMSArn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKeySigningKeyName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKeySigningKeyStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPaginationToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSigningStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTrafficPolicyDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidVPCId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeySigningKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?kms_arn: String,
+        ?flag: Integer,
+        ?signing_algorithm_mnemonic: String,
+        ?signing_algorithm_type: Integer,
+        ?digest_algorithm_mnemonic: String,
+        ?digest_algorithm_type: Integer,
+        ?key_tag: Integer,
+        ?digest_value: String,
+        ?public_key: String,
+        ?ds_record: String,
+        ?dnskey_record: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor kms_arn: String?
+      attr_accessor flag: Integer?
+      attr_accessor signing_algorithm_mnemonic: String?
+      attr_accessor signing_algorithm_type: Integer?
+      attr_accessor digest_algorithm_mnemonic: String?
+      attr_accessor digest_algorithm_type: Integer?
+      attr_accessor key_tag: Integer?
+      attr_accessor digest_value: String?
+      attr_accessor public_key: String?
+      attr_accessor ds_record: String?
+      attr_accessor dnskey_record: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class KeySigningKeyAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeySigningKeyInParentDSRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeySigningKeyInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeySigningKeyWithActiveStatusNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastVPCAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitsExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LinkedService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor description: String?
+    end
+
+    class ListCidrBlocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_id: String,
+        ?location_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_id: String?
+      attr_accessor location_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCidrBlocksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cidr_blocks: Array[Types::CidrBlockSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cidr_blocks: Array[Types::CidrBlockSummary]?
+    end
+
+    class ListCidrCollectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCidrCollectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cidr_collections: Array[Types::CollectionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cidr_collections: Array[Types::CollectionSummary]?
+    end
+
+    class ListCidrLocationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCidrLocationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cidr_locations: Array[Types::LocationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cidr_locations: Array[Types::LocationSummary]?
+    end
+
+    class ListGeoLocationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_continent_code: String,
+        ?start_country_code: String,
+        ?start_subdivision_code: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_continent_code: String?
+      attr_accessor start_country_code: String?
+      attr_accessor start_subdivision_code: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListGeoLocationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geo_location_details_list: Array[Types::GeoLocationDetails],
+        ?is_truncated: bool,
+        ?next_continent_code: String,
+        ?next_country_code: String,
+        ?next_subdivision_code: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geo_location_details_list: Array[Types::GeoLocationDetails]?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_continent_code: String?
+      attr_accessor next_country_code: String?
+      attr_accessor next_subdivision_code: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListHealthChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListHealthChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_checks: Array[Types::HealthCheck],
+        ?marker: String,
+        ?is_truncated: bool,
+        ?next_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_checks: Array[Types::HealthCheck]?
+      attr_accessor marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListHostedZonesByNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_name: String,
+        ?hosted_zone_id: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListHostedZonesByNameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zones: Array[Types::HostedZone],
+        ?dns_name: String,
+        ?hosted_zone_id: String,
+        ?is_truncated: bool,
+        ?next_dns_name: String,
+        ?next_hosted_zone_id: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zones: Array[Types::HostedZone]?
+      attr_accessor dns_name: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_dns_name: String?
+      attr_accessor next_hosted_zone_id: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListHostedZonesByVPCRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?vpc_region: String,
+        ?max_items: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_region: String?
+      attr_accessor max_items: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostedZonesByVPCResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_summaries: Array[Types::HostedZoneSummary],
+        ?max_items: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_summaries: Array[Types::HostedZoneSummary]?
+      attr_accessor max_items: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostedZonesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+        ?delegation_set_id: String,
+        ?hosted_zone_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor delegation_set_id: String?
+      attr_accessor hosted_zone_type: String?
+    end
+
+    class ListHostedZonesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zones: Array[Types::HostedZone],
+        ?marker: String,
+        ?is_truncated: bool,
+        ?next_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zones: Array[Types::HostedZone]?
+      attr_accessor marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListQueryLoggingConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueryLoggingConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_logging_configs: Array[Types::QueryLoggingConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_logging_configs: Array[Types::QueryLoggingConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceRecordSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?start_record_name: String,
+        ?start_record_type: String,
+        ?start_record_identifier: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor start_record_name: String?
+      attr_accessor start_record_type: String?
+      attr_accessor start_record_identifier: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListResourceRecordSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_record_sets: Array[Types::ResourceRecordSet],
+        ?is_truncated: bool,
+        ?next_record_name: String,
+        ?next_record_type: String,
+        ?next_record_identifier: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_record_sets: Array[Types::ResourceRecordSet]?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_record_name: String?
+      attr_accessor next_record_type: String?
+      attr_accessor next_record_identifier: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListReusableDelegationSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListReusableDelegationSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_sets: Array[Types::DelegationSet],
+        ?marker: String,
+        ?is_truncated: bool,
+        ?next_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_sets: Array[Types::DelegationSet]?
+      attr_accessor marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tag_set: Types::ResourceTagSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tag_set: Types::ResourceTagSet?
+    end
+
+    class ListTagsForResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    class ListTagsForResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tag_sets: Array[Types::ResourceTagSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tag_sets: Array[Types::ResourceTagSet]?
+    end
+
+    class ListTrafficPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_summaries: Array[Types::TrafficPolicySummary],
+        ?is_truncated: bool,
+        ?traffic_policy_id_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_summaries: Array[Types::TrafficPolicySummary]?
+      attr_accessor is_truncated: bool?
+      attr_accessor traffic_policy_id_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesByHostedZoneRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesByHostedZoneResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instances: Array[Types::TrafficPolicyInstance],
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?is_truncated: bool,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instances: Array[Types::TrafficPolicyInstance]?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesByPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id: String,
+        ?traffic_policy_version: Integer,
+        ?hosted_zone_id_marker: String,
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_version: Integer?
+      attr_accessor hosted_zone_id_marker: String?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesByPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instances: Array[Types::TrafficPolicyInstance],
+        ?hosted_zone_id_marker: String,
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?is_truncated: bool,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instances: Array[Types::TrafficPolicyInstance]?
+      attr_accessor hosted_zone_id_marker: String?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id_marker: String,
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id_marker: String?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instances: Array[Types::TrafficPolicyInstance],
+        ?hosted_zone_id_marker: String,
+        ?traffic_policy_instance_name_marker: String,
+        ?traffic_policy_instance_type_marker: String,
+        ?is_truncated: bool,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instances: Array[Types::TrafficPolicyInstance]?
+      attr_accessor hosted_zone_id_marker: String?
+      attr_accessor traffic_policy_instance_name_marker: String?
+      attr_accessor traffic_policy_instance_type_marker: String?
+      attr_accessor is_truncated: bool?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?traffic_policy_version_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor traffic_policy_version_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrafficPolicyVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policies: Array[Types::TrafficPolicy],
+        ?is_truncated: bool,
+        ?traffic_policy_version_marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policies: Array[Types::TrafficPolicy]?
+      attr_accessor is_truncated: bool?
+      attr_accessor traffic_policy_version_marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListVPCAssociationAuthorizationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVPCAssociationAuthorizationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?next_token: String,
+        ?vp_cs: Array[Types::VPC],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor next_token: String?
+      attr_accessor vp_cs: Array[Types::VPC]?
+    end
+
+    class LocationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_name: String?
+    end
+
+    class NoSuchChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchCidrCollectionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchCidrLocationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchCloudWatchLogsLogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchDelegationSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchGeoLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchHealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchHostedZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchKeySigningKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchQueryLoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchTrafficPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchTrafficPolicyInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PriorRequestNotComplete
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PublicZoneVPCAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QueryLoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?hosted_zone_id: String,
+        ?cloud_watch_logs_log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor cloud_watch_logs_log_group_arn: String?
+    end
+
+    class QueryLoggingConfigAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RRType
+      SOA: String
+      A: String
+      TXT: String
+      NS: String
+      CNAME: String
+      MX: String
+      NAPTR: String
+      PTR: String
+      SRV: String
+      SPF: String
+      AAAA: String
+      CAA: String
+      DS: String
+      TLSA: String
+      SSHFP: String
+      SVCB: String
+      HTTPS: String
+    end
+
+    module ResettableElementName
+      FullyQualifiedDomainName: String
+      Regions: String
+      ResourcePath: String
+      ChildHealthChecks: String
+    end
+
+    class ResourceRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class ResourceRecordSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?set_identifier: String,
+        ?weight: Integer,
+        ?region: String,
+        ?geo_location: Types::GeoLocation,
+        ?failover: String,
+        ?multi_value_answer: bool,
+        ?ttl: Integer,
+        ?resource_records: Array[Types::ResourceRecord],
+        ?alias_target: Types::AliasTarget,
+        ?health_check_id: String,
+        ?traffic_policy_instance_id: String,
+        ?cidr_routing_config: Types::CidrRoutingConfig,
+        ?geo_proximity_location: Types::GeoProximityLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor set_identifier: String?
+      attr_accessor weight: Integer?
+      attr_accessor region: String?
+      attr_accessor geo_location: Types::GeoLocation?
+      attr_accessor failover: String?
+      attr_accessor multi_value_answer: bool?
+      attr_accessor ttl: Integer?
+      attr_accessor resource_records: Array[Types::ResourceRecord]?
+      attr_accessor alias_target: Types::AliasTarget?
+      attr_accessor health_check_id: String?
+      attr_accessor traffic_policy_instance_id: String?
+      attr_accessor cidr_routing_config: Types::CidrRoutingConfig?
+      attr_accessor geo_proximity_location: Types::GeoProximityLocation?
+    end
+
+    module ResourceRecordSetFailover
+      PRIMARY: String
+      SECONDARY: String
+    end
+
+    module ResourceRecordSetRegion
+      us_east_1: String
+      us_east_2: String
+      us_west_1: String
+      us_west_2: String
+      ca_central_1: String
+      eu_west_1: String
+      eu_west_2: String
+      eu_west_3: String
+      eu_central_1: String
+      eu_central_2: String
+      ap_southeast_1: String
+      ap_southeast_2: String
+      ap_southeast_3: String
+      ap_northeast_1: String
+      ap_northeast_2: String
+      ap_northeast_3: String
+      eu_north_1: String
+      sa_east_1: String
+      cn_north_1: String
+      cn_northwest_1: String
+      ap_east_1: String
+      me_south_1: String
+      me_central_1: String
+      ap_south_1: String
+      ap_south_2: String
+      af_south_1: String
+      eu_south_1: String
+      eu_south_2: String
+      ap_southeast_4: String
+      il_central_1: String
+      ca_west_1: String
+      ap_southeast_5: String
+      mx_central_1: String
+      ap_southeast_7: String
+      us_gov_east_1: String
+      us_gov_west_1: String
+      ap_east_2: String
+    end
+
+    class ResourceTagSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ReusableDelegationSetLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module ReusableDelegationSetLimitType
+      MAX_ZONES_BY_REUSABLE_DELEGATION_SET: String
+    end
+
+    module Statistic
+      Average: String
+      Sum: String
+      SampleCount: String
+      Maximum: String
+      Minimum: String
+    end
+
+    class StatusReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?checked_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor checked_time: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module TagResourceType
+      healthcheck: String
+      hostedzone: String
+    end
+
+    class TestDNSAnswerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?record_name: String,
+        ?record_type: String,
+        ?resolver_ip: String,
+        ?edns0_client_subnet_ip: String,
+        ?edns0_client_subnet_mask: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor record_name: String?
+      attr_accessor record_type: String?
+      attr_accessor resolver_ip: String?
+      attr_accessor edns0_client_subnet_ip: String?
+      attr_accessor edns0_client_subnet_mask: String?
+    end
+
+    class TestDNSAnswerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nameserver: String,
+        ?record_name: String,
+        ?record_type: String,
+        ?record_data: Array[String],
+        ?response_code: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nameserver: String?
+      attr_accessor record_name: String?
+      attr_accessor record_type: String?
+      attr_accessor record_data: Array[String]?
+      attr_accessor response_code: String?
+      attr_accessor protocol: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyHealthChecks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyHostedZones
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyKeySigningKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTrafficPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTrafficPolicyInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTrafficPolicyVersionsForCurrentPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyVPCAssociationAuthorizations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrafficPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: Integer,
+        ?name: String,
+        ?type: String,
+        ?document: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: Integer?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor document: String?
+      attr_accessor comment: String?
+    end
+
+    class TrafficPolicyAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrafficPolicyInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrafficPolicyInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?hosted_zone_id: String,
+        ?name: String,
+        ?ttl: Integer,
+        ?state: String,
+        ?message: String,
+        ?traffic_policy_id: String,
+        ?traffic_policy_version: Integer,
+        ?traffic_policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor name: String?
+      attr_accessor ttl: Integer?
+      attr_accessor state: String?
+      attr_accessor message: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_version: Integer?
+      attr_accessor traffic_policy_type: String?
+    end
+
+    class TrafficPolicyInstanceAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrafficPolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?type: String,
+        ?latest_version: Integer,
+        ?traffic_policy_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor latest_version: Integer?
+      attr_accessor traffic_policy_count: Integer?
+    end
+
+    class UpdateHealthCheckRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_id: String,
+        ?health_check_version: Integer,
+        ?ip_address: String,
+        ?port: Integer,
+        ?resource_path: String,
+        ?fully_qualified_domain_name: String,
+        ?search_string: String,
+        ?failure_threshold: Integer,
+        ?inverted: bool,
+        ?disabled: bool,
+        ?health_threshold: Integer,
+        ?child_health_checks: Array[String],
+        ?enable_sni: bool,
+        ?regions: Array[String],
+        ?alarm_identifier: Types::AlarmIdentifier,
+        ?insufficient_data_health_status: String,
+        ?reset_elements: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_id: String?
+      attr_accessor health_check_version: Integer?
+      attr_accessor ip_address: String?
+      attr_accessor port: Integer?
+      attr_accessor resource_path: String?
+      attr_accessor fully_qualified_domain_name: String?
+      attr_accessor search_string: String?
+      attr_accessor failure_threshold: Integer?
+      attr_accessor inverted: bool?
+      attr_accessor disabled: bool?
+      attr_accessor health_threshold: Integer?
+      attr_accessor child_health_checks: Array[String]?
+      attr_accessor enable_sni: bool?
+      attr_accessor regions: Array[String]?
+      attr_accessor alarm_identifier: Types::AlarmIdentifier?
+      attr_accessor insufficient_data_health_status: String?
+      attr_accessor reset_elements: Array[String]?
+    end
+
+    class UpdateHealthCheckResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check: Types::HealthCheck,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check: Types::HealthCheck?
+    end
+
+    class UpdateHostedZoneCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor comment: String?
+    end
+
+    class UpdateHostedZoneCommentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone: Types::HostedZone,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone: Types::HostedZone?
+    end
+
+    class UpdateTrafficPolicyCommentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: Integer,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: Integer?
+      attr_accessor comment: String?
+    end
+
+    class UpdateTrafficPolicyCommentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy: Types::TrafficPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy: Types::TrafficPolicy?
+    end
+
+    class UpdateTrafficPolicyInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?ttl: Integer,
+        ?traffic_policy_id: String,
+        ?traffic_policy_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor ttl: Integer?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_version: Integer?
+    end
+
+    class UpdateTrafficPolicyInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_instance: Types::TrafficPolicyInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance?
+    end
+
+    class VPC
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_region: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_region: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class VPCAssociationAuthorizationNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VPCAssociationNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VPCRegion
+      us_east_1: String
+      us_east_2: String
+      us_west_1: String
+      us_west_2: String
+      eu_west_1: String
+      eu_west_2: String
+      eu_west_3: String
+      eu_central_1: String
+      eu_central_2: String
+      ap_east_1: String
+      me_south_1: String
+      us_gov_west_1: String
+      us_gov_east_1: String
+      us_iso_east_1: String
+      us_iso_west_1: String
+      us_isob_east_1: String
+      me_central_1: String
+      ap_southeast_1: String
+      ap_southeast_2: String
+      ap_southeast_3: String
+      ap_south_1: String
+      ap_south_2: String
+      ap_northeast_1: String
+      ap_northeast_2: String
+      ap_northeast_3: String
+      eu_north_1: String
+      sa_east_1: String
+      ca_central_1: String
+      cn_north_1: String
+      cn_northwest_1: String
+      af_south_1: String
+      eu_south_1: String
+      eu_south_2: String
+      ap_southeast_4: String
+      il_central_1: String
+      ca_west_1: String
+      ap_southeast_5: String
+      mx_central_1: String
+      us_isof_south_1: String
+      us_isof_east_1: String
+      ap_southeast_7: String
+      ap_east_2: String
+      eu_isoe_west_1: String
+    end
+  end
+end

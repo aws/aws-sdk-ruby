@@ -1,0 +1,172 @@
+module Aws::ConfigService
+  module Errors
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConformancePackTemplateValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatch < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientDeliveryPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientPermissionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConfigurationRecorderNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeliveryChannelNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidExpressionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLimitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRecordingGroupException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResultTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRoleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3KeyPrefixException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3KmsKeyArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSNSTopicARNException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTimeRangeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LastDeliveryChannelDeleteFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxActiveResourcesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfConfigRulesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfConfigurationRecordersExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfConformancePacksExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfDeliveryChannelsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfOrganizationConfigRulesExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfOrganizationConformancePacksExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxNumberOfRetentionConfigurationsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoAvailableConfigurationRecorderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoAvailableDeliveryChannelException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoAvailableOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoRunningConfigurationRecorderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchBucketException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchConfigRuleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchConfigRuleInConformancePackException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchConfigurationAggregatorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchConfigurationRecorderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchConformancePackException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchDeliveryChannelException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchOrganizationConfigRuleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchOrganizationConformancePackException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchRemediationConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchRemediationExceptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchRetentionConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationAllFeaturesNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationConformancePackTemplateValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OversizedConfigurationItemException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RemediationInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotDiscoveredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnmodifiableEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

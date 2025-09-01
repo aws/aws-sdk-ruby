@@ -1,0 +1,5 @@
+  module Aws
+    module Connect
+      VERSION: String
+    end
+  end

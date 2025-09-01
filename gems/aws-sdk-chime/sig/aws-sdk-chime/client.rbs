@@ -1,0 +1,678 @@
+module Aws::Chime
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Chime::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociatePhoneNumberWithUserResponse
+      include Smithy::Client::_Response[Types::AssociatePhoneNumberWithUserResponse]
+    end
+    def associate_phone_number_with_user: (
+      ?account_id: String,
+      ?user_id: String,
+      ?e164_phone_number: String
+    ) -> _AssociatePhoneNumberWithUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePhoneNumberWithUserResponse
+
+    interface _AssociateSigninDelegateGroupsWithAccountResponse
+      include Smithy::Client::_Response[Types::AssociateSigninDelegateGroupsWithAccountResponse]
+    end
+    def associate_signin_delegate_groups_with_account: (
+      ?account_id: String,
+      ?signin_delegate_groups: Array[
+        {
+          group_name: String
+        }
+      ]
+    ) -> _AssociateSigninDelegateGroupsWithAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSigninDelegateGroupsWithAccountResponse
+
+    interface _BatchCreateRoomMembershipResponse
+      include Smithy::Client::_Response[Types::BatchCreateRoomMembershipResponse]
+      def errors: () -> Array[Types::MemberError]?
+    end
+    def batch_create_room_membership: (
+      ?account_id: String,
+      ?room_id: String,
+      ?membership_item_list: Array[
+        {
+          member_id: String,
+          role: String
+        }
+      ]
+    ) -> _BatchCreateRoomMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateRoomMembershipResponse
+
+    interface _BatchDeletePhoneNumberResponse
+      include Smithy::Client::_Response[Types::BatchDeletePhoneNumberResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def batch_delete_phone_number: (
+      ?phone_number_ids: Array[String]
+    ) -> _BatchDeletePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeletePhoneNumberResponse
+
+    interface _BatchSuspendUserResponse
+      include Smithy::Client::_Response[Types::BatchSuspendUserResponse]
+      def user_errors: () -> Array[Types::UserError]?
+    end
+    def batch_suspend_user: (
+      ?account_id: String,
+      ?user_id_list: Array[String]
+    ) -> _BatchSuspendUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchSuspendUserResponse
+
+    interface _BatchUnsuspendUserResponse
+      include Smithy::Client::_Response[Types::BatchUnsuspendUserResponse]
+      def user_errors: () -> Array[Types::UserError]?
+    end
+    def batch_unsuspend_user: (
+      ?account_id: String,
+      ?user_id_list: Array[String]
+    ) -> _BatchUnsuspendUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUnsuspendUserResponse
+
+    interface _BatchUpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::BatchUpdatePhoneNumberResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def batch_update_phone_number: (
+      ?update_phone_number_request_items: Array[
+        {
+          phone_number_id: String,
+          product_type: String,
+          calling_name: String
+        }
+      ]
+    ) -> _BatchUpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdatePhoneNumberResponse
+
+    interface _BatchUpdateUserResponse
+      include Smithy::Client::_Response[Types::BatchUpdateUserResponse]
+      def user_errors: () -> Array[Types::UserError]?
+    end
+    def batch_update_user: (
+      ?account_id: String,
+      ?update_user_request_items: Array[
+        {
+          user_id: String,
+          license_type: String,
+          user_type: String,
+          alexa_for_business_metadata: {
+            is_alexa_for_business_enabled: bool,
+            alexa_for_business_room_arn: String
+          }
+        }
+      ]
+    ) -> _BatchUpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateUserResponse
+
+    interface _CreateAccountResponse
+      include Smithy::Client::_Response[Types::CreateAccountResponse]
+      def account: () -> Types::Account?
+    end
+    def create_account: (
+      ?name: String
+    ) -> _CreateAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountResponse
+
+    interface _CreateBotResponse
+      include Smithy::Client::_Response[Types::CreateBotResponse]
+      def bot: () -> Types::Bot?
+    end
+    def create_bot: (
+      ?account_id: String,
+      ?display_name: String,
+      ?domain: String
+    ) -> _CreateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotResponse
+
+    interface _CreateMeetingDialOutResponse
+      include Smithy::Client::_Response[Types::CreateMeetingDialOutResponse]
+      def transaction_id: () -> String?
+    end
+    def create_meeting_dial_out: (
+      ?meeting_id: String,
+      ?from_phone_number: String,
+      ?to_phone_number: String,
+      ?join_token: String
+    ) -> _CreateMeetingDialOutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMeetingDialOutResponse
+
+    interface _CreatePhoneNumberOrderResponse
+      include Smithy::Client::_Response[Types::CreatePhoneNumberOrderResponse]
+      def phone_number_order: () -> Types::PhoneNumberOrder?
+    end
+    def create_phone_number_order: (
+      ?product_type: String,
+      ?e164_phone_numbers: Array[String]
+    ) -> _CreatePhoneNumberOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePhoneNumberOrderResponse
+
+    interface _CreateRoomResponse
+      include Smithy::Client::_Response[Types::CreateRoomResponse]
+      def room: () -> Types::Room?
+    end
+    def create_room: (
+      ?account_id: String,
+      ?name: String,
+      ?client_request_token: String
+    ) -> _CreateRoomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRoomResponse
+
+    interface _CreateRoomMembershipResponse
+      include Smithy::Client::_Response[Types::CreateRoomMembershipResponse]
+      def room_membership: () -> Types::RoomMembership?
+    end
+    def create_room_membership: (
+      ?account_id: String,
+      ?room_id: String,
+      ?member_id: String,
+      ?role: String
+    ) -> _CreateRoomMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRoomMembershipResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user: () -> Types::User?
+    end
+    def create_user: (
+      ?account_id: String,
+      ?username: String,
+      ?email: String,
+      ?user_type: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteAccountResponse
+      include Smithy::Client::_Response[Types::DeleteAccountResponse]
+    end
+    def delete_account: (
+      ?account_id: String
+    ) -> _DeleteAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountResponse
+
+    interface _DeleteEventsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_events_configuration: (
+      ?account_id: String,
+      ?bot_id: String
+    ) -> _DeleteEventsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventsConfigurationResponse
+
+    interface _DeletePhoneNumberResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_phone_number: (
+      ?phone_number_id: String
+    ) -> _DeletePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePhoneNumberResponse
+
+    interface _DeleteRoomResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_room: (
+      ?account_id: String,
+      ?room_id: String
+    ) -> _DeleteRoomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRoomResponse
+
+    interface _DeleteRoomMembershipResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_room_membership: (
+      ?account_id: String,
+      ?room_id: String,
+      ?member_id: String
+    ) -> _DeleteRoomMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRoomMembershipResponse
+
+    interface _DisassociatePhoneNumberFromUserResponse
+      include Smithy::Client::_Response[Types::DisassociatePhoneNumberFromUserResponse]
+    end
+    def disassociate_phone_number_from_user: (
+      ?account_id: String,
+      ?user_id: String
+    ) -> _DisassociatePhoneNumberFromUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePhoneNumberFromUserResponse
+
+    interface _DisassociateSigninDelegateGroupsFromAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateSigninDelegateGroupsFromAccountResponse]
+    end
+    def disassociate_signin_delegate_groups_from_account: (
+      ?account_id: String,
+      ?group_names: Array[String]
+    ) -> _DisassociateSigninDelegateGroupsFromAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSigninDelegateGroupsFromAccountResponse
+
+    interface _GetAccountResponse
+      include Smithy::Client::_Response[Types::GetAccountResponse]
+      def account: () -> Types::Account?
+    end
+    def get_account: (
+      ?account_id: String
+    ) -> _GetAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def get_account_settings: (
+      ?account_id: String
+    ) -> _GetAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetBotResponse
+      include Smithy::Client::_Response[Types::GetBotResponse]
+      def bot: () -> Types::Bot?
+    end
+    def get_bot: (
+      ?account_id: String,
+      ?bot_id: String
+    ) -> _GetBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotResponse
+
+    interface _GetEventsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEventsConfigurationResponse]
+      def events_configuration: () -> Types::EventsConfiguration?
+    end
+    def get_events_configuration: (
+      ?account_id: String,
+      ?bot_id: String
+    ) -> _GetEventsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventsConfigurationResponse
+
+    interface _GetGlobalSettingsResponse
+      include Smithy::Client::_Response[Types::GetGlobalSettingsResponse]
+      def business_calling: () -> Types::BusinessCallingSettings?
+      def voice_connector: () -> Types::VoiceConnectorSettings?
+    end
+    def get_global_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlobalSettingsResponse
+
+    interface _GetPhoneNumberResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def get_phone_number: (
+      ?phone_number_id: String
+    ) -> _GetPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberResponse
+
+    interface _GetPhoneNumberOrderResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberOrderResponse]
+      def phone_number_order: () -> Types::PhoneNumberOrder?
+    end
+    def get_phone_number_order: (
+      ?phone_number_order_id: String
+    ) -> _GetPhoneNumberOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberOrderResponse
+
+    interface _GetPhoneNumberSettingsResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberSettingsResponse]
+      def calling_name: () -> String?
+      def calling_name_updated_timestamp: () -> Time?
+    end
+    def get_phone_number_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberSettingsResponse
+
+    interface _GetRetentionSettingsResponse
+      include Smithy::Client::_Response[Types::GetRetentionSettingsResponse]
+      def retention_settings: () -> Types::RetentionSettings?
+      def initiate_deletion_timestamp: () -> Time?
+    end
+    def get_retention_settings: (
+      ?account_id: String
+    ) -> _GetRetentionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRetentionSettingsResponse
+
+    interface _GetRoomResponse
+      include Smithy::Client::_Response[Types::GetRoomResponse]
+      def room: () -> Types::Room?
+    end
+    def get_room: (
+      ?account_id: String,
+      ?room_id: String
+    ) -> _GetRoomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRoomResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def user: () -> Types::User?
+    end
+    def get_user: (
+      ?account_id: String,
+      ?user_id: String
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetUserSettingsResponse
+      include Smithy::Client::_Response[Types::GetUserSettingsResponse]
+      def user_settings: () -> Types::UserSettings?
+    end
+    def get_user_settings: (
+      ?account_id: String,
+      ?user_id: String
+    ) -> _GetUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserSettingsResponse
+
+    interface _InviteUsersResponse
+      include Smithy::Client::_Response[Types::InviteUsersResponse]
+      def invites: () -> Array[Types::Invite]?
+    end
+    def invite_users: (
+      ?account_id: String,
+      ?user_email_list: Array[String],
+      ?user_type: String
+    ) -> _InviteUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InviteUsersResponse
+
+    interface _ListAccountsResponse
+      include Smithy::Client::_Response[Types::ListAccountsResponse]
+      def accounts: () -> Array[Types::Account]?
+      def next_token: () -> String?
+    end
+    def list_accounts: (
+      ?name: String,
+      ?user_email: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsResponse
+
+    interface _ListBotsResponse
+      include Smithy::Client::_Response[Types::ListBotsResponse]
+      def bots: () -> Array[Types::Bot]?
+      def next_token: () -> String?
+    end
+    def list_bots: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotsResponse
+
+    interface _ListPhoneNumberOrdersResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumberOrdersResponse]
+      def phone_number_orders: () -> Array[Types::PhoneNumberOrder]?
+      def next_token: () -> String?
+    end
+    def list_phone_number_orders: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPhoneNumberOrdersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumberOrdersResponse
+
+    interface _ListPhoneNumbersResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumbersResponse]
+      def phone_numbers: () -> Array[Types::PhoneNumber]?
+      def next_token: () -> String?
+    end
+    def list_phone_numbers: (
+      ?status: String,
+      ?product_type: String,
+      ?filter_name: String,
+      ?filter_value: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumbersResponse
+
+    interface _ListRoomMembershipsResponse
+      include Smithy::Client::_Response[Types::ListRoomMembershipsResponse]
+      def room_memberships: () -> Array[Types::RoomMembership]?
+      def next_token: () -> String?
+    end
+    def list_room_memberships: (
+      ?account_id: String,
+      ?room_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRoomMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoomMembershipsResponse
+
+    interface _ListRoomsResponse
+      include Smithy::Client::_Response[Types::ListRoomsResponse]
+      def rooms: () -> Array[Types::Room]?
+      def next_token: () -> String?
+    end
+    def list_rooms: (
+      ?account_id: String,
+      ?member_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRoomsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoomsResponse
+
+    interface _ListSupportedPhoneNumberCountriesResponse
+      include Smithy::Client::_Response[Types::ListSupportedPhoneNumberCountriesResponse]
+      def phone_number_countries: () -> Array[Types::PhoneNumberCountry]?
+    end
+    def list_supported_phone_number_countries: (
+      ?product_type: String
+    ) -> _ListSupportedPhoneNumberCountriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportedPhoneNumberCountriesResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?account_id: String,
+      ?user_email: String,
+      ?user_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _LogoutUserResponse
+      include Smithy::Client::_Response[Types::LogoutUserResponse]
+    end
+    def logout_user: (
+      ?account_id: String,
+      ?user_id: String
+    ) -> _LogoutUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LogoutUserResponse
+
+    interface _PutEventsConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEventsConfigurationResponse]
+      def events_configuration: () -> Types::EventsConfiguration?
+    end
+    def put_events_configuration: (
+      ?account_id: String,
+      ?bot_id: String,
+      ?outbound_events_https_endpoint: String,
+      ?lambda_function_arn: String
+    ) -> _PutEventsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventsConfigurationResponse
+
+    interface _PutRetentionSettingsResponse
+      include Smithy::Client::_Response[Types::PutRetentionSettingsResponse]
+      def retention_settings: () -> Types::RetentionSettings?
+      def initiate_deletion_timestamp: () -> Time?
+    end
+    def put_retention_settings: (
+      ?account_id: String,
+      ?retention_settings: {
+        room_retention_settings: {
+          retention_days: Integer
+        },
+        conversation_retention_settings: {
+          retention_days: untyped
+        }
+      }
+    ) -> _PutRetentionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRetentionSettingsResponse
+
+    interface _RedactConversationMessageResponse
+      include Smithy::Client::_Response[Types::RedactConversationMessageResponse]
+    end
+    def redact_conversation_message: (
+      ?account_id: String,
+      ?conversation_id: String,
+      ?message_id: String
+    ) -> _RedactConversationMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RedactConversationMessageResponse
+
+    interface _RedactRoomMessageResponse
+      include Smithy::Client::_Response[Types::RedactRoomMessageResponse]
+    end
+    def redact_room_message: (
+      ?account_id: String,
+      ?room_id: String,
+      ?message_id: String
+    ) -> _RedactRoomMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RedactRoomMessageResponse
+
+    interface _RegenerateSecurityTokenResponse
+      include Smithy::Client::_Response[Types::RegenerateSecurityTokenResponse]
+      def bot: () -> Types::Bot?
+    end
+    def regenerate_security_token: (
+      ?account_id: String,
+      ?bot_id: String
+    ) -> _RegenerateSecurityTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegenerateSecurityTokenResponse
+
+    interface _ResetPersonalPINResponse
+      include Smithy::Client::_Response[Types::ResetPersonalPINResponse]
+      def user: () -> Types::User?
+    end
+    def reset_personal_pin: (
+      ?account_id: String,
+      ?user_id: String
+    ) -> _ResetPersonalPINResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetPersonalPINResponse
+
+    interface _RestorePhoneNumberResponse
+      include Smithy::Client::_Response[Types::RestorePhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def restore_phone_number: (
+      ?phone_number_id: String
+    ) -> _RestorePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestorePhoneNumberResponse
+
+    interface _SearchAvailablePhoneNumbersResponse
+      include Smithy::Client::_Response[Types::SearchAvailablePhoneNumbersResponse]
+      def e164_phone_numbers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def search_available_phone_numbers: (
+      ?area_code: String,
+      ?city: String,
+      ?country: String,
+      ?state: String,
+      ?toll_free_prefix: String,
+      ?phone_number_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchAvailablePhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAvailablePhoneNumbersResponse
+
+    interface _UpdateAccountResponse
+      include Smithy::Client::_Response[Types::UpdateAccountResponse]
+      def account: () -> Types::Account?
+    end
+    def update_account: (
+      ?account_id: String,
+      ?name: String,
+      ?default_license: String
+    ) -> _UpdateAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsResponse]
+    end
+    def update_account_settings: (
+      ?account_id: String,
+      ?account_settings: {
+        disable_remote_control: bool,
+        enable_dial_out: untyped
+      }
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateBotResponse
+      include Smithy::Client::_Response[Types::UpdateBotResponse]
+      def bot: () -> Types::Bot?
+    end
+    def update_bot: (
+      ?account_id: String,
+      ?bot_id: String,
+      ?disabled: bool
+    ) -> _UpdateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotResponse
+
+    interface _UpdateGlobalSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_global_settings: (
+      ?business_calling: {
+        cdr_bucket: String
+      },
+      ?voice_connector: {
+        cdr_bucket: String
+      }
+    ) -> _UpdateGlobalSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalSettingsResponse
+
+    interface _UpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::UpdatePhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def update_phone_number: (
+      ?phone_number_id: String,
+      ?product_type: String,
+      ?calling_name: String
+    ) -> _UpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberResponse
+
+    interface _UpdatePhoneNumberSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_phone_number_settings: (
+      ?calling_name: String
+    ) -> _UpdatePhoneNumberSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberSettingsResponse
+
+    interface _UpdateRoomResponse
+      include Smithy::Client::_Response[Types::UpdateRoomResponse]
+      def room: () -> Types::Room?
+    end
+    def update_room: (
+      ?account_id: String,
+      ?room_id: String,
+      ?name: String
+    ) -> _UpdateRoomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoomResponse
+
+    interface _UpdateRoomMembershipResponse
+      include Smithy::Client::_Response[Types::UpdateRoomMembershipResponse]
+      def room_membership: () -> Types::RoomMembership?
+    end
+    def update_room_membership: (
+      ?account_id: String,
+      ?room_id: String,
+      ?member_id: String,
+      ?role: String
+    ) -> _UpdateRoomMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoomMembershipResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def user: () -> Types::User?
+    end
+    def update_user: (
+      ?account_id: String,
+      ?user_id: String,
+      ?license_type: String,
+      ?user_type: String,
+      ?alexa_for_business_metadata: {
+        is_alexa_for_business_enabled: bool,
+        alexa_for_business_room_arn: String
+      }
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+
+    interface _UpdateUserSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_settings: (
+      ?account_id: String,
+      ?user_id: String,
+      ?user_settings: {
+        telephony: {
+          inbound_calling: bool,
+          outbound_calling: untyped,
+          sms: untyped
+        }
+      }
+    ) -> _UpdateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserSettingsResponse
+  end
+end

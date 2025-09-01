@@ -1,0 +1,596 @@
+module Aws::CodeCatalyst
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeCatalyst::EndpointProvider,
+      ?http_bearer_provider: Smithy::Client::HttpBearerProvider,
+      ?http_bearer_token: String,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccessTokenResponse
+      include Smithy::Client::_Response[Types::CreateAccessTokenResponse]
+      def secret: () -> String?
+      def name: () -> String?
+      def expires_time: () -> Time?
+      def access_token_id: () -> String?
+    end
+    def create_access_token: (
+      ?name: String,
+      ?expires_time: Time
+    ) -> _CreateAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessTokenResponse
+
+    interface _CreateDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateDevEnvironmentResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def vpc_connection_name: () -> String?
+    end
+    def create_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?repositories: Array[
+        {
+          repository_name: String,
+          branch_name: String
+        }
+      ],
+      ?client_token: String,
+      ?alias: String,
+      ?ides: Array[
+        {
+          runtime: String,
+          name: untyped
+        }
+      ],
+      ?instance_type: String,
+      ?inactivity_timeout_minutes: Integer,
+      ?persistent_storage: {
+        size_in_gi_b: Integer
+      },
+      ?vpc_connection_name: String
+    ) -> _CreateDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDevEnvironmentResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectResponse]
+      def space_name: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+    end
+    def create_project: (
+      ?space_name: String,
+      ?display_name: String,
+      ?description: String
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _CreateSourceRepositoryResponse
+      include Smithy::Client::_Response[Types::CreateSourceRepositoryResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def create_source_repository: (
+      ?space_name: String,
+      ?project_name: String,
+      ?name: String,
+      ?description: String
+    ) -> _CreateSourceRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSourceRepositoryResponse
+
+    interface _CreateSourceRepositoryBranchResponse
+      include Smithy::Client::_Response[Types::CreateSourceRepositoryBranchResponse]
+      def ref: () -> String?
+      def name: () -> String?
+      def last_updated_time: () -> Time?
+      def head_commit_id: () -> String?
+    end
+    def create_source_repository_branch: (
+      ?space_name: String,
+      ?project_name: String,
+      ?source_repository_name: String,
+      ?name: String,
+      ?head_commit_id: String
+    ) -> _CreateSourceRepositoryBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSourceRepositoryBranchResponse
+
+    interface _DeleteAccessTokenResponse
+      include Smithy::Client::_Response[Types::DeleteAccessTokenResponse]
+    end
+    def delete_access_token: (
+      ?id: String
+    ) -> _DeleteAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessTokenResponse
+
+    interface _DeleteDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteDevEnvironmentResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+    end
+    def delete_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String
+    ) -> _DeleteDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDevEnvironmentResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectResponse]
+      def space_name: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+    end
+    def delete_project: (
+      ?space_name: String,
+      ?name: String
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteSourceRepositoryResponse
+      include Smithy::Client::_Response[Types::DeleteSourceRepositoryResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def name: () -> String?
+    end
+    def delete_source_repository: (
+      ?space_name: String,
+      ?project_name: String,
+      ?name: String
+    ) -> _DeleteSourceRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSourceRepositoryResponse
+
+    interface _DeleteSpaceResponse
+      include Smithy::Client::_Response[Types::DeleteSpaceResponse]
+      def name: () -> String?
+      def display_name: () -> String?
+    end
+    def delete_space: (
+      ?name: String
+    ) -> _DeleteSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSpaceResponse
+
+    interface _GetDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetDevEnvironmentResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def last_updated_time: () -> Time?
+      def creator_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def repositories: () -> Array[Types::DevEnvironmentRepositorySummary]?
+      def alias: () -> String?
+      def ides: () -> Array[Types::Ide]?
+      def instance_type: () -> String?
+      def inactivity_timeout_minutes: () -> Integer?
+      def persistent_storage: () -> Types::PersistentStorage?
+      def vpc_connection_name: () -> String?
+    end
+    def get_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String
+    ) -> _GetDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevEnvironmentResponse
+
+    interface _GetProjectResponse
+      include Smithy::Client::_Response[Types::GetProjectResponse]
+      def space_name: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+    end
+    def get_project: (
+      ?space_name: String,
+      ?name: String
+    ) -> _GetProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProjectResponse
+
+    interface _GetSourceRepositoryResponse
+      include Smithy::Client::_Response[Types::GetSourceRepositoryResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def last_updated_time: () -> Time?
+      def created_time: () -> Time?
+    end
+    def get_source_repository: (
+      ?space_name: String,
+      ?project_name: String,
+      ?name: String
+    ) -> _GetSourceRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSourceRepositoryResponse
+
+    interface _GetSourceRepositoryCloneUrlsResponse
+      include Smithy::Client::_Response[Types::GetSourceRepositoryCloneUrlsResponse]
+      def https: () -> String?
+    end
+    def get_source_repository_clone_urls: (
+      ?space_name: String,
+      ?project_name: String,
+      ?source_repository_name: String
+    ) -> _GetSourceRepositoryCloneUrlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSourceRepositoryCloneUrlsResponse
+
+    interface _GetSpaceResponse
+      include Smithy::Client::_Response[Types::GetSpaceResponse]
+      def name: () -> String?
+      def region_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+    end
+    def get_space: (
+      ?name: String
+    ) -> _GetSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpaceResponse
+
+    interface _GetSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionResponse]
+      def subscription_type: () -> String?
+      def aws_account_name: () -> String?
+      def pending_subscription_type: () -> String?
+      def pending_subscription_start_time: () -> Time?
+    end
+    def get_subscription: (
+      ?space_name: String
+    ) -> _GetSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionResponse
+
+    interface _GetUserDetailsResponse
+      include Smithy::Client::_Response[Types::GetUserDetailsResponse]
+      def user_id: () -> String?
+      def user_name: () -> String?
+      def display_name: () -> String?
+      def primary_email: () -> Types::EmailAddress?
+      def version: () -> String?
+    end
+    def get_user_details: (
+      ?id: String,
+      ?user_name: String
+    ) -> _GetUserDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserDetailsResponse
+
+    interface _GetWorkflowResponse
+      include Smithy::Client::_Response[Types::GetWorkflowResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def source_repository_name: () -> String?
+      def source_branch_name: () -> String?
+      def definition: () -> Types::WorkflowDefinition?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def run_mode: () -> String?
+      def status: () -> String?
+    end
+    def get_workflow: (
+      ?space_name: String,
+      ?id: String,
+      ?project_name: String
+    ) -> _GetWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowResponse
+
+    interface _GetWorkflowRunResponse
+      include Smithy::Client::_Response[Types::GetWorkflowRunResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def workflow_id: () -> String?
+      def status: () -> String?
+      def status_reasons: () -> Array[Types::WorkflowRunStatusReason]?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def get_workflow_run: (
+      ?space_name: String,
+      ?id: String,
+      ?project_name: String
+    ) -> _GetWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowRunResponse
+
+    interface _ListAccessTokensResponse
+      include Smithy::Client::_Response[Types::ListAccessTokensResponse]
+      def items: () -> Array[Types::AccessTokenSummary]?
+      def next_token: () -> String?
+    end
+    def list_access_tokens: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccessTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessTokensResponse
+
+    interface _ListDevEnvironmentSessionsResponse
+      include Smithy::Client::_Response[Types::ListDevEnvironmentSessionsResponse]
+      def items: () -> Array[Types::DevEnvironmentSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_dev_environment_sessions: (
+      ?space_name: String,
+      ?project_name: String,
+      ?dev_environment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDevEnvironmentSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevEnvironmentSessionsResponse
+
+    interface _ListDevEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListDevEnvironmentsResponse]
+      def items: () -> Array[Types::DevEnvironmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_dev_environments: (
+      ?space_name: String,
+      ?project_name: String,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          comparison_operator: untyped
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDevEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevEnvironmentsResponse
+
+    interface _ListEventLogsResponse
+      include Smithy::Client::_Response[Types::ListEventLogsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::EventLogEntry]?
+    end
+    def list_event_logs: (
+      ?space_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?event_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventLogsResponse
+
+    interface _ListProjectsResponse
+      include Smithy::Client::_Response[Types::ListProjectsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ProjectSummary]?
+    end
+    def list_projects: (
+      ?space_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String],
+          comparison_operator: String
+        }
+      ]
+    ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
+
+    interface _ListSourceRepositoriesResponse
+      include Smithy::Client::_Response[Types::ListSourceRepositoriesResponse]
+      def items: () -> Array[Types::ListSourceRepositoriesItem]?
+      def next_token: () -> String?
+    end
+    def list_source_repositories: (
+      ?space_name: String,
+      ?project_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSourceRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceRepositoriesResponse
+
+    interface _ListSourceRepositoryBranchesResponse
+      include Smithy::Client::_Response[Types::ListSourceRepositoryBranchesResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ListSourceRepositoryBranchesItem]?
+    end
+    def list_source_repository_branches: (
+      ?space_name: String,
+      ?project_name: String,
+      ?source_repository_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSourceRepositoryBranchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceRepositoryBranchesResponse
+
+    interface _ListSpacesResponse
+      include Smithy::Client::_Response[Types::ListSpacesResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::SpaceSummary]?
+    end
+    def list_spaces: (
+      ?next_token: String
+    ) -> _ListSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpacesResponse
+
+    interface _ListWorkflowRunsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowRunsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::WorkflowRunSummary]?
+    end
+    def list_workflow_runs: (
+      ?space_name: String,
+      ?workflow_id: String,
+      ?project_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_by: Array[
+        {
+        }
+      ]
+    ) -> _ListWorkflowRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowRunsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::WorkflowSummary]?
+    end
+    def list_workflows: (
+      ?space_name: String,
+      ?project_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_by: Array[
+        {
+        }
+      ]
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _StartDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::StartDevEnvironmentResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def start_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String,
+      ?ides: Array[
+        {
+          runtime: String,
+          name: untyped
+        }
+      ],
+      ?instance_type: String,
+      ?inactivity_timeout_minutes: Integer
+    ) -> _StartDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDevEnvironmentResponse
+
+    interface _StartDevEnvironmentSessionResponse
+      include Smithy::Client::_Response[Types::StartDevEnvironmentSessionResponse]
+      def access_details: () -> Types::DevEnvironmentAccessDetails?
+      def session_id: () -> String?
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+    end
+    def start_dev_environment_session: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String,
+      ?session_configuration: {
+        session_type: String,
+        execute_command_session_configuration: {
+          command: String,
+          arguments: Array[String]
+        }
+      }
+    ) -> _StartDevEnvironmentSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDevEnvironmentSessionResponse
+
+    interface _StartWorkflowRunResponse
+      include Smithy::Client::_Response[Types::StartWorkflowRunResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def workflow_id: () -> String?
+    end
+    def start_workflow_run: (
+      ?space_name: String,
+      ?project_name: String,
+      ?workflow_id: String,
+      ?client_token: String
+    ) -> _StartWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkflowRunResponse
+
+    interface _StopDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::StopDevEnvironmentResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def stop_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String
+    ) -> _StopDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDevEnvironmentResponse
+
+    interface _StopDevEnvironmentSessionResponse
+      include Smithy::Client::_Response[Types::StopDevEnvironmentSessionResponse]
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def id: () -> String?
+      def session_id: () -> String?
+    end
+    def stop_dev_environment_session: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String,
+      ?session_id: String
+    ) -> _StopDevEnvironmentSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDevEnvironmentSessionResponse
+
+    interface _UpdateDevEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateDevEnvironmentResponse]
+      def id: () -> String?
+      def space_name: () -> String?
+      def project_name: () -> String?
+      def alias: () -> String?
+      def ides: () -> Array[Types::IdeConfiguration]?
+      def instance_type: () -> String?
+      def inactivity_timeout_minutes: () -> Integer?
+      def client_token: () -> String?
+    end
+    def update_dev_environment: (
+      ?space_name: String,
+      ?project_name: String,
+      ?id: String,
+      ?alias: String,
+      ?ides: Array[
+        {
+          runtime: String,
+          name: untyped
+        }
+      ],
+      ?instance_type: String,
+      ?inactivity_timeout_minutes: Integer,
+      ?client_token: String
+    ) -> _UpdateDevEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDevEnvironmentResponse
+
+    interface _UpdateProjectResponse
+      include Smithy::Client::_Response[Types::UpdateProjectResponse]
+      def space_name: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+    end
+    def update_project: (
+      ?space_name: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+
+    interface _UpdateSpaceResponse
+      include Smithy::Client::_Response[Types::UpdateSpaceResponse]
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+    end
+    def update_space: (
+      ?name: String,
+      ?description: String
+    ) -> _UpdateSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSpaceResponse
+
+    interface _VerifySessionResponse
+      include Smithy::Client::_Response[Types::VerifySessionResponse]
+      def identity: () -> String?
+    end
+    def verify_session: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifySessionResponse
+  end
+end

@@ -1,0 +1,55 @@
+module Aws::CodeStarconnections
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConditionalCheckFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RetryLatestCommitFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SyncBlockerDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SyncConfigurationStillExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedProviderTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateOutOfSyncException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

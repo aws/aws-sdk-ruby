@@ -1,0 +1,1257 @@
+module Aws::Synthetics
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ArtifactConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_encryption: Types::S3EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_encryption: Types::S3EncryptionConfig?
+    end
+
+    class ArtifactConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_encryption: Types::S3EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_encryption: Types::S3EncryptionConfig?
+    end
+
+    class AssociateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_identifier: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_identifier: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class AssociateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BaseScreenshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?screenshot_name: String,
+        ?ignore_coordinates: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor screenshot_name: String?
+      attr_accessor ignore_coordinates: Array[String]?
+    end
+
+    class Canary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?code: Types::CanaryCodeOutput,
+        ?execution_role_arn: String,
+        ?schedule: Types::CanaryScheduleOutput,
+        ?run_config: Types::CanaryRunConfigOutput,
+        ?success_retention_period_in_days: Integer,
+        ?failure_retention_period_in_days: Integer,
+        ?status: Types::CanaryStatus,
+        ?timeline: Types::CanaryTimeline,
+        ?artifact_s3_location: String,
+        ?engine_arn: String,
+        ?runtime_version: String,
+        ?vpc_config: Types::VpcConfigOutput,
+        ?visual_reference: Types::VisualReferenceOutput,
+        ?provisioned_resource_cleanup: String,
+        ?tags: Hash[String, String],
+        ?artifact_config: Types::ArtifactConfigOutput,
+        ?dry_run_config: Types::DryRunConfigOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor code: Types::CanaryCodeOutput?
+      attr_accessor execution_role_arn: String?
+      attr_accessor schedule: Types::CanaryScheduleOutput?
+      attr_accessor run_config: Types::CanaryRunConfigOutput?
+      attr_accessor success_retention_period_in_days: Integer?
+      attr_accessor failure_retention_period_in_days: Integer?
+      attr_accessor status: Types::CanaryStatus?
+      attr_accessor timeline: Types::CanaryTimeline?
+      attr_accessor artifact_s3_location: String?
+      attr_accessor engine_arn: String?
+      attr_accessor runtime_version: String?
+      attr_accessor vpc_config: Types::VpcConfigOutput?
+      attr_accessor visual_reference: Types::VisualReferenceOutput?
+      attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor artifact_config: Types::ArtifactConfigOutput?
+      attr_accessor dry_run_config: Types::DryRunConfigOutput?
+    end
+
+    class CanaryCodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_version: String,
+        ?zip_file: String,
+        ?handler: String,
+        ?dependencies: Array[Types::Dependency],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_version: String?
+      attr_accessor zip_file: String?
+      attr_accessor handler: String?
+      attr_accessor dependencies: Array[Types::Dependency]?
+    end
+
+    class CanaryCodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_arn: String,
+        ?handler: String,
+        ?dependencies: Array[Types::Dependency],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_arn: String?
+      attr_accessor handler: String?
+      attr_accessor dependencies: Array[Types::Dependency]?
+    end
+
+    class CanaryDryRunConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run_id: String?
+    end
+
+    class CanaryLastRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary_name: String,
+        ?last_run: Types::CanaryRun,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary_name: String?
+      attr_accessor last_run: Types::CanaryRun?
+    end
+
+    class CanaryRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?scheduled_run_id: String,
+        ?retry_attempt: Integer,
+        ?name: String,
+        ?status: Types::CanaryRunStatus,
+        ?timeline: Types::CanaryRunTimeline,
+        ?artifact_s3_location: String,
+        ?dry_run_config: Types::CanaryDryRunConfigOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor scheduled_run_id: String?
+      attr_accessor retry_attempt: Integer?
+      attr_accessor name: String?
+      attr_accessor status: Types::CanaryRunStatus?
+      attr_accessor timeline: Types::CanaryRunTimeline?
+      attr_accessor artifact_s3_location: String?
+      attr_accessor dry_run_config: Types::CanaryDryRunConfigOutput?
+    end
+
+    class CanaryRunConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_in_seconds: Integer,
+        ?memory_in_mb: Integer,
+        ?active_tracing: bool,
+        ?environment_variables: Hash[String, String],
+        ?ephemeral_storage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor memory_in_mb: Integer?
+      attr_accessor active_tracing: bool?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor ephemeral_storage: Integer?
+    end
+
+    class CanaryRunConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_in_seconds: Integer,
+        ?memory_in_mb: Integer,
+        ?active_tracing: bool,
+        ?ephemeral_storage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor memory_in_mb: Integer?
+      attr_accessor active_tracing: bool?
+      attr_accessor ephemeral_storage: Integer?
+    end
+
+    module CanaryRunState
+      RUNNING: String
+      PASSED: String
+      FAILED: String
+    end
+
+    module CanaryRunStateReasonCode
+      CANARY_FAILURE: String
+      EXECUTION_FAILURE: String
+    end
+
+    class CanaryRunStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+        ?test_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
+      attr_accessor test_result: String?
+    end
+
+    module CanaryRunTestResult
+      PASSED: String
+      FAILED: String
+      UNKNOWN: String
+    end
+
+    class CanaryRunTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?started: Time,
+        ?completed: Time,
+        ?metric_timestamp_for_run_and_retries: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor started: Time?
+      attr_accessor completed: Time?
+      attr_accessor metric_timestamp_for_run_and_retries: Time?
+    end
+
+    class CanaryScheduleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?duration_in_seconds: Integer,
+        ?retry_config: Types::RetryConfigInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor retry_config: Types::RetryConfigInput?
+    end
+
+    class CanaryScheduleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?duration_in_seconds: Integer,
+        ?retry_config: Types::RetryConfigOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor retry_config: Types::RetryConfigOutput?
+    end
+
+    module CanaryState
+      CREATING: String
+      READY: String
+      STARTING: String
+      RUNNING: String
+      UPDATING: String
+      STOPPING: String
+      STOPPED: String
+      ERROR: String
+      DELETING: String
+    end
+
+    module CanaryStateReasonCode
+      INVALID_PERMISSIONS: String
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      UPDATE_PENDING: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_COMPLETE: String
+      ROLLBACK_COMPLETE: String
+      ROLLBACK_FAILED: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+      SYNC_DELETE_IN_PROGRESS: String
+    end
+
+    class CanaryStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
+    end
+
+    class CanaryTimeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created: Time,
+        ?last_modified: Time,
+        ?last_started: Time,
+        ?last_stopped: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor last_started: Time?
+      attr_accessor last_stopped: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: Types::CanaryCodeInput,
+        ?artifact_s3_location: String,
+        ?execution_role_arn: String,
+        ?schedule: Types::CanaryScheduleInput,
+        ?run_config: Types::CanaryRunConfigInput,
+        ?success_retention_period_in_days: Integer,
+        ?failure_retention_period_in_days: Integer,
+        ?runtime_version: String,
+        ?vpc_config: Types::VpcConfigInput,
+        ?resources_to_replicate_tags: Array[String],
+        ?provisioned_resource_cleanup: String,
+        ?tags: Hash[String, String],
+        ?artifact_config: Types::ArtifactConfigInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: Types::CanaryCodeInput?
+      attr_accessor artifact_s3_location: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor schedule: Types::CanaryScheduleInput?
+      attr_accessor run_config: Types::CanaryRunConfigInput?
+      attr_accessor success_retention_period_in_days: Integer?
+      attr_accessor failure_retention_period_in_days: Integer?
+      attr_accessor runtime_version: String?
+      attr_accessor vpc_config: Types::VpcConfigInput?
+      attr_accessor resources_to_replicate_tags: Array[String]?
+      attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor artifact_config: Types::ArtifactConfigInput?
+    end
+
+    class CreateCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary: Types::Canary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary: Types::Canary?
+    end
+
+    class CreateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class DeleteCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?delete_lambda: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor delete_lambda: bool?
+    end
+
+    class DeleteCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_identifier: String?
+    end
+
+    class DeleteGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Dependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor reference: String?
+    end
+
+    module DependencyType
+      LambdaLayer: String
+    end
+
+    class DescribeCanariesLastRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor names: Array[String]?
+    end
+
+    class DescribeCanariesLastRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canaries_last_run: Array[Types::CanaryLastRun],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canaries_last_run: Array[Types::CanaryLastRun]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeCanariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor names: Array[String]?
+    end
+
+    class DescribeCanariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canaries: Array[Types::Canary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canaries: Array[Types::Canary]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRuntimeVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRuntimeVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_versions: Array[Types::RuntimeVersion],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_versions: Array[Types::RuntimeVersion]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_identifier: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_identifier: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DisassociateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DryRunConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run_id: String,
+        ?last_dry_run_execution_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run_id: String?
+      attr_accessor last_dry_run_execution_status: String?
+    end
+
+    module EncryptionMode
+      SSE_S3: String
+      SSE_KMS: String
+    end
+
+    class GetCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dry_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dry_run_id: String?
+    end
+
+    class GetCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary: Types::Canary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary: Types::Canary?
+    end
+
+    class GetCanaryRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?dry_run_id: String,
+        ?run_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor dry_run_id: String?
+      attr_accessor run_type: String?
+    end
+
+    class GetCanaryRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary_runs: Array[Types::CanaryRun],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary_runs: Array[Types::CanaryRun]?
+      attr_accessor next_token: String?
+    end
+
+    class GetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_identifier: String?
+    end
+
+    class GetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class GroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssociatedGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListAssociatedGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor group_identifier: String?
+    end
+
+    class ListGroupResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ProvisionedResourceCleanupSetting
+      AUTOMATIC: String
+      OFF: String
+    end
+
+    class RequestEntityTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceToTag
+      LAMBDA_FUNCTION: String
+    end
+
+    class RetryConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_retries: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_retries: Integer?
+    end
+
+    class RetryConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_retries: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_retries: Integer?
+    end
+
+    module RunType
+      CANARY_RUN: String
+      DRY_RUN: String
+    end
+
+    class RuntimeVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_name: String,
+        ?description: String,
+        ?release_date: Time,
+        ?deprecation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_name: String?
+      attr_accessor description: String?
+      attr_accessor release_date: Time?
+      attr_accessor deprecation_date: Time?
+    end
+
+    class S3EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_mode: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_mode: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartCanaryDryRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: Types::CanaryCodeInput,
+        ?runtime_version: String,
+        ?run_config: Types::CanaryRunConfigInput,
+        ?vpc_config: Types::VpcConfigInput,
+        ?execution_role_arn: String,
+        ?success_retention_period_in_days: Integer,
+        ?failure_retention_period_in_days: Integer,
+        ?visual_reference: Types::VisualReferenceInput,
+        ?artifact_s3_location: String,
+        ?artifact_config: Types::ArtifactConfigInput,
+        ?provisioned_resource_cleanup: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: Types::CanaryCodeInput?
+      attr_accessor runtime_version: String?
+      attr_accessor run_config: Types::CanaryRunConfigInput?
+      attr_accessor vpc_config: Types::VpcConfigInput?
+      attr_accessor execution_role_arn: String?
+      attr_accessor success_retention_period_in_days: Integer?
+      attr_accessor failure_retention_period_in_days: Integer?
+      attr_accessor visual_reference: Types::VisualReferenceInput?
+      attr_accessor artifact_s3_location: String?
+      attr_accessor artifact_config: Types::ArtifactConfigInput?
+      attr_accessor provisioned_resource_cleanup: String?
+    end
+
+    class StartCanaryDryRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run_config: Types::DryRunConfigOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run_config: Types::DryRunConfigOutput?
+    end
+
+    class StartCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StartCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StopCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCanaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: Types::CanaryCodeInput,
+        ?execution_role_arn: String,
+        ?runtime_version: String,
+        ?schedule: Types::CanaryScheduleInput,
+        ?run_config: Types::CanaryRunConfigInput,
+        ?success_retention_period_in_days: Integer,
+        ?failure_retention_period_in_days: Integer,
+        ?vpc_config: Types::VpcConfigInput,
+        ?visual_reference: Types::VisualReferenceInput,
+        ?artifact_s3_location: String,
+        ?artifact_config: Types::ArtifactConfigInput,
+        ?provisioned_resource_cleanup: String,
+        ?dry_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: Types::CanaryCodeInput?
+      attr_accessor execution_role_arn: String?
+      attr_accessor runtime_version: String?
+      attr_accessor schedule: Types::CanaryScheduleInput?
+      attr_accessor run_config: Types::CanaryRunConfigInput?
+      attr_accessor success_retention_period_in_days: Integer?
+      attr_accessor failure_retention_period_in_days: Integer?
+      attr_accessor vpc_config: Types::VpcConfigInput?
+      attr_accessor visual_reference: Types::VisualReferenceInput?
+      attr_accessor artifact_s3_location: String?
+      attr_accessor artifact_config: Types::ArtifactConfigInput?
+      attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor dry_run_id: String?
+    end
+
+    class UpdateCanaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VisualReferenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_screenshots: Array[Types::BaseScreenshot],
+        ?base_canary_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_screenshots: Array[Types::BaseScreenshot]?
+      attr_accessor base_canary_run_id: String?
+    end
+
+    class VisualReferenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_screenshots: Array[Types::BaseScreenshot],
+        ?base_canary_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_screenshots: Array[Types::BaseScreenshot]?
+      attr_accessor base_canary_run_id: String?
+    end
+
+    class VpcConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ipv6_allowed_for_dual_stack: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ipv6_allowed_for_dual_stack: bool?
+    end
+
+    class VpcConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ipv6_allowed_for_dual_stack: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ipv6_allowed_for_dual_stack: bool?
+    end
+  end
+end

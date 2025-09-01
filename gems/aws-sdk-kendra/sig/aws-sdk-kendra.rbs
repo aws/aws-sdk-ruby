@@ -1,0 +1,5 @@
+  module Aws
+    module Kendra
+      VERSION: String
+    end
+  end

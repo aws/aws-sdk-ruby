@@ -1,0 +1,173 @@
+module Aws::ConnectParticipant
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ConnectParticipant::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelParticipantAuthenticationResponse
+      include Smithy::Client::_Response[Types::CancelParticipantAuthenticationResponse]
+    end
+    def cancel_participant_authentication: (
+      ?session_id: String,
+      ?connection_token: String
+    ) -> _CancelParticipantAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelParticipantAuthenticationResponse
+
+    interface _CompleteAttachmentUploadResponse
+      include Smithy::Client::_Response[Types::CompleteAttachmentUploadResponse]
+    end
+    def complete_attachment_upload: (
+      ?attachment_ids: Array[String],
+      ?client_token: String,
+      ?connection_token: String
+    ) -> _CompleteAttachmentUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteAttachmentUploadResponse
+
+    interface _CreateParticipantConnectionResponse
+      include Smithy::Client::_Response[Types::CreateParticipantConnectionResponse]
+      def websocket: () -> Types::Websocket?
+      def connection_credentials: () -> Types::ConnectionCredentials?
+    end
+    def create_participant_connection: (
+      ?type: Array[String],
+      ?participant_token: String,
+      ?connect_participant: bool
+    ) -> _CreateParticipantConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParticipantConnectionResponse
+
+    interface _DescribeViewResponse
+      include Smithy::Client::_Response[Types::DescribeViewResponse]
+      def view: () -> Types::View?
+    end
+    def describe_view: (
+      ?view_token: String,
+      ?connection_token: String
+    ) -> _DescribeViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeViewResponse
+
+    interface _DisconnectParticipantResponse
+      include Smithy::Client::_Response[Types::DisconnectParticipantResponse]
+    end
+    def disconnect_participant: (
+      ?client_token: String,
+      ?connection_token: String
+    ) -> _DisconnectParticipantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectParticipantResponse
+
+    interface _GetAttachmentResponse
+      include Smithy::Client::_Response[Types::GetAttachmentResponse]
+      def url: () -> String?
+      def url_expiry: () -> String?
+      def attachment_size_in_bytes: () -> Integer?
+    end
+    def get_attachment: (
+      ?attachment_id: String,
+      ?connection_token: String,
+      ?url_expiry_in_seconds: Integer
+    ) -> _GetAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttachmentResponse
+
+    interface _GetAuthenticationUrlResponse
+      include Smithy::Client::_Response[Types::GetAuthenticationUrlResponse]
+      def authentication_url: () -> String?
+    end
+    def get_authentication_url: (
+      ?session_id: String,
+      ?redirect_uri: String,
+      ?connection_token: String
+    ) -> _GetAuthenticationUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAuthenticationUrlResponse
+
+    interface _GetTranscriptResponse
+      include Smithy::Client::_Response[Types::GetTranscriptResponse]
+      def initial_contact_id: () -> String?
+      def transcript: () -> Array[Types::Item]?
+      def next_token: () -> String?
+    end
+    def get_transcript: (
+      ?contact_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?scan_direction: String,
+      ?sort_order: String,
+      ?start_position: {
+        id: String,
+        absolute_time: String,
+        most_recent: Integer
+      },
+      ?connection_token: String
+    ) -> _GetTranscriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTranscriptResponse
+
+    interface _SendEventResponse
+      include Smithy::Client::_Response[Types::SendEventResponse]
+      def id: () -> String?
+      def absolute_time: () -> String?
+    end
+    def send_event: (
+      ?content_type: String,
+      ?content: String,
+      ?client_token: String,
+      ?connection_token: String
+    ) -> _SendEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendEventResponse
+
+    interface _SendMessageResponse
+      include Smithy::Client::_Response[Types::SendMessageResponse]
+      def id: () -> String?
+      def absolute_time: () -> String?
+    end
+    def send_message: (
+      ?content_type: String,
+      ?content: String,
+      ?client_token: String,
+      ?connection_token: String
+    ) -> _SendMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessageResponse
+
+    interface _StartAttachmentUploadResponse
+      include Smithy::Client::_Response[Types::StartAttachmentUploadResponse]
+      def attachment_id: () -> String?
+      def upload_metadata: () -> Types::UploadMetadata?
+    end
+    def start_attachment_upload: (
+      ?content_type: String,
+      ?attachment_size_in_bytes: Integer,
+      ?attachment_name: String,
+      ?client_token: String,
+      ?connection_token: String
+    ) -> _StartAttachmentUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAttachmentUploadResponse
+  end
+end

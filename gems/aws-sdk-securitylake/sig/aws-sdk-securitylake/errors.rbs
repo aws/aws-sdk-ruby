@@ -1,0 +1,33 @@
+module Aws::SecurityLake
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+      def resource_type: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+      def resource_type: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def service_code: () -> String?
+      def quota_code: () -> String?
+      def retry_after_seconds: () -> Integer?
+      def retryable?: () -> true
+      def throttling?: () -> true
+    end
+  end
+end

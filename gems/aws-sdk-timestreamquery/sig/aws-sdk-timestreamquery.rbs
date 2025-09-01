@@ -1,0 +1,5 @@
+  module Aws
+    module TimestreamQuery
+      VERSION: String
+    end
+  end

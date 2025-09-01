@@ -1,0 +1,4188 @@
+module Aws::CloudWatchLogs
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?last_updated_time: Integer,
+        ?policy_type: String,
+        ?scope: String,
+        ?selection_criteria: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor last_updated_time: Integer?
+      attr_accessor policy_type: String?
+      attr_accessor scope: String?
+      attr_accessor selection_criteria: String?
+      attr_accessor account_id: String?
+    end
+
+    class AddKeyEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?overwrite_if_exists: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor overwrite_if_exists: bool?
+    end
+
+    class AddKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::AddKeyEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::AddKeyEntry]?
+    end
+
+    class Anomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_id: String,
+        ?pattern_id: String,
+        ?anomaly_detector_arn: String,
+        ?pattern_string: String,
+        ?pattern_regex: String,
+        ?priority: String,
+        ?first_seen: Integer,
+        ?last_seen: Integer,
+        ?description: String,
+        ?active: bool,
+        ?state: String,
+        ?histogram: Hash[String, Integer],
+        ?log_samples: Array[Types::LogEvent],
+        ?pattern_tokens: Array[Types::PatternToken],
+        ?log_group_arn_list: Array[String],
+        ?suppressed: bool,
+        ?suppressed_date: Integer,
+        ?suppressed_until: Integer,
+        ?is_pattern_level_suppression: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_id: String?
+      attr_accessor pattern_id: String?
+      attr_accessor anomaly_detector_arn: String?
+      attr_accessor pattern_string: String?
+      attr_accessor pattern_regex: String?
+      attr_accessor priority: String?
+      attr_accessor first_seen: Integer?
+      attr_accessor last_seen: Integer?
+      attr_accessor description: String?
+      attr_accessor active: bool?
+      attr_accessor state: String?
+      attr_accessor histogram: Hash[String, Integer]?
+      attr_accessor log_samples: Array[Types::LogEvent]?
+      attr_accessor pattern_tokens: Array[Types::PatternToken]?
+      attr_accessor log_group_arn_list: Array[String]?
+      attr_accessor suppressed: bool?
+      attr_accessor suppressed_date: Integer?
+      attr_accessor suppressed_until: Integer?
+      attr_accessor is_pattern_level_suppression: bool?
+    end
+
+    class AnomalyDetector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+        ?detector_name: String,
+        ?log_group_arn_list: Array[String],
+        ?evaluation_frequency: String,
+        ?filter_pattern: String,
+        ?anomaly_detector_status: String,
+        ?kms_key_id: String,
+        ?creation_time_stamp: Integer,
+        ?last_modified_time_stamp: Integer,
+        ?anomaly_visibility_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+      attr_accessor detector_name: String?
+      attr_accessor log_group_arn_list: Array[String]?
+      attr_accessor evaluation_frequency: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor anomaly_detector_status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor creation_time_stamp: Integer?
+      attr_accessor last_modified_time_stamp: Integer?
+      attr_accessor anomaly_visibility_time: Integer?
+    end
+
+    module AnomalyDetectorStatus
+      INITIALIZING: String
+      TRAINING: String
+      ANALYZING: String
+      FAILED: String
+      DELETED: String
+      PAUSED: String
+    end
+
+    class AssociateKmsKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?kms_key_id: String,
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor resource_identifier: String?
+    end
+
+    class CSV
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_character: String,
+        ?delimiter: String,
+        ?columns: Array[String],
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_character: String?
+      attr_accessor delimiter: String?
+      attr_accessor columns: Array[String]?
+      attr_accessor source: String?
+    end
+
+    class CancelExportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class ConfigurationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?log_type: String,
+        ?resource_type: String,
+        ?delivery_destination_type: String,
+        ?default_delivery_config_values: Types::ConfigurationTemplateDeliveryConfigValues,
+        ?allowed_fields: Array[Types::RecordField],
+        ?allowed_output_formats: Array[String],
+        ?allowed_action_for_allow_vended_logs_delivery_for_resource: String,
+        ?allowed_field_delimiters: Array[String],
+        ?allowed_suffix_path_fields: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor log_type: String?
+      attr_accessor resource_type: String?
+      attr_accessor delivery_destination_type: String?
+      attr_accessor default_delivery_config_values: Types::ConfigurationTemplateDeliveryConfigValues?
+      attr_accessor allowed_fields: Array[Types::RecordField]?
+      attr_accessor allowed_output_formats: Array[String]?
+      attr_accessor allowed_action_for_allow_vended_logs_delivery_for_resource: String?
+      attr_accessor allowed_field_delimiters: Array[String]?
+      attr_accessor allowed_suffix_path_fields: Array[String]?
+    end
+
+    class ConfigurationTemplateDeliveryConfigValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_fields: Array[String],
+        ?field_delimiter: String,
+        ?s3_delivery_configuration: Types::S3DeliveryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_fields: Array[String]?
+      attr_accessor field_delimiter: String?
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CopyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::CopyValueEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::CopyValueEntry]?
+    end
+
+    class CopyValueEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?target: String,
+        ?overwrite_if_exists: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor overwrite_if_exists: bool?
+    end
+
+    class CreateDeliveryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_source_name: String,
+        ?delivery_destination_arn: String,
+        ?record_fields: Array[String],
+        ?field_delimiter: String,
+        ?s3_delivery_configuration: Types::S3DeliveryConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_source_name: String?
+      attr_accessor delivery_destination_arn: String?
+      attr_accessor record_fields: Array[String]?
+      attr_accessor field_delimiter: String?
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDeliveryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery: Types::Delivery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery: Types::Delivery?
+    end
+
+    class CreateExportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_name: String,
+        ?log_group_name: String,
+        ?log_stream_name_prefix: String,
+        ?from: Integer,
+        ?to: Integer,
+        ?destination: String,
+        ?destination_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_name: String?
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor from: Integer?
+      attr_accessor to: Integer?
+      attr_accessor destination: String?
+      attr_accessor destination_prefix: String?
+    end
+
+    class CreateExportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class CreateLogAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn_list: Array[String],
+        ?detector_name: String,
+        ?evaluation_frequency: String,
+        ?filter_pattern: String,
+        ?kms_key_id: String,
+        ?anomaly_visibility_time: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn_list: Array[String]?
+      attr_accessor detector_name: String?
+      attr_accessor evaluation_frequency: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor anomaly_visibility_time: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLogAnomalyDetectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+    end
+
+    class CreateLogGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+        ?log_group_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_group_class: String?
+    end
+
+    class CreateLogStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
+    end
+
+    class DataAlreadyAcceptedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expected_sequence_token: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expected_sequence_token: String?
+      attr_accessor message: String?
+    end
+
+    module DataProtectionStatus
+      ACTIVATED: String
+      DELETED: String
+      ARCHIVED: String
+      DISABLED: String
+    end
+
+    class DateTimeConverter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?target: String,
+        ?target_format: String,
+        ?match_patterns: Array[String],
+        ?source_timezone: String,
+        ?target_timezone: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor target_format: String?
+      attr_accessor match_patterns: Array[String]?
+      attr_accessor source_timezone: String?
+      attr_accessor target_timezone: String?
+      attr_accessor locale: String?
+    end
+
+    class DeleteAccountPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_type: String?
+    end
+
+    class DeleteDataProtectionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+    end
+
+    class DeleteDeliveryDestinationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination_name: String?
+    end
+
+    class DeleteDeliveryDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteDeliveryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteDeliverySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+    end
+
+    class DeleteIndexPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+    end
+
+    class DeleteIndexPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+      attr_accessor force: bool?
+    end
+
+    class DeleteIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?with_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor with_keys: Array[String]?
+    end
+
+    class DeleteLogAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+    end
+
+    class DeleteLogGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class DeleteLogStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
+    end
+
+    class DeleteMetricFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name: String?
+    end
+
+    class DeleteQueryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_definition_id: String?
+    end
+
+    class DeleteQueryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success: bool?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?resource_arn: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class DeleteRetentionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class DeleteSubscriptionFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name: String?
+    end
+
+    class DeleteTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+    end
+
+    class Delivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?delivery_source_name: String,
+        ?delivery_destination_arn: String,
+        ?delivery_destination_type: String,
+        ?record_fields: Array[String],
+        ?field_delimiter: String,
+        ?s3_delivery_configuration: Types::S3DeliveryConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor delivery_source_name: String?
+      attr_accessor delivery_destination_arn: String?
+      attr_accessor delivery_destination_type: String?
+      attr_accessor record_fields: Array[String]?
+      attr_accessor field_delimiter: String?
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeliveryDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?delivery_destination_type: String,
+        ?output_format: String,
+        ?delivery_destination_configuration: Types::DeliveryDestinationConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor delivery_destination_type: String?
+      attr_accessor output_format: String?
+      attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeliveryDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_resource_arn: String?
+    end
+
+    module DeliveryDestinationType
+      S3: String
+      CWL: String
+      FH: String
+      XRAY: String
+    end
+
+    class DeliverySource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?resource_arns: Array[String],
+        ?service: String,
+        ?log_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor service: String?
+      attr_accessor log_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeAccountPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type: String,
+        ?policy_name: String,
+        ?account_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor policy_name: String?
+      attr_accessor account_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAccountPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_policies: Array[Types::AccountPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_policies: Array[Types::AccountPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigurationTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?log_types: Array[String],
+        ?resource_types: Array[String],
+        ?delivery_destination_types: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor log_types: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor delivery_destination_types: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeConfigurationTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_templates: Array[Types::ConfigurationTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_templates: Array[Types::ConfigurationTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDeliveriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDeliveriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deliveries: Array[Types::Delivery],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deliveries: Array[Types::Delivery]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDeliveryDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDeliveryDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destinations: Array[Types::DeliveryDestination],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destinations: Array[Types::DeliveryDestination]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDeliverySourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDeliverySourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_sources: Array[Types::DeliverySource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_sources: Array[Types::DeliverySource]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name_prefix: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::Destination],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::Destination]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeExportTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status_code: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status_code: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeExportTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_tasks: Array[Types::ExportTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_tasks: Array[Types::ExportTask]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFieldIndexesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFieldIndexesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_indexes: Array[Types::FieldIndex],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_indexes: Array[Types::FieldIndex]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeIndexPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeIndexPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_policies: Array[Types::IndexPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_policies: Array[Types::IndexPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLogGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_identifiers: Array[String],
+        ?log_group_name_prefix: String,
+        ?log_group_name_pattern: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?include_linked_accounts: bool,
+        ?log_group_class: String,
+        ?log_group_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_identifiers: Array[String]?
+      attr_accessor log_group_name_prefix: String?
+      attr_accessor log_group_name_pattern: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor log_group_class: String?
+      attr_accessor log_group_identifiers: Array[String]?
+    end
+
+    class DescribeLogGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_groups: Array[Types::LogGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_groups: Array[Types::LogGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLogStreamsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_group_identifier: String,
+        ?log_stream_name_prefix: String,
+        ?order_by: String,
+        ?descending: bool,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_group_identifier: String?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor order_by: String?
+      attr_accessor descending: bool?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeLogStreamsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_streams: Array[Types::LogStream],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_streams: Array[Types::LogStream]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMetricFiltersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name_prefix: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?metric_name: String,
+        ?metric_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor metric_name: String?
+      attr_accessor metric_namespace: String?
+    end
+
+    class DescribeMetricFiltersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_filters: Array[Types::MetricFilter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_filters: Array[Types::MetricFilter]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?query_language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor query_language: String?
+    end
+
+    class DescribeQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::QueryInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::QueryInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeQueryDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?query_definition_name_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor query_definition_name_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeQueryDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_definitions: Array[Types::QueryDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_definitions: Array[Types::QueryDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeResourcePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?limit: Integer,
+        ?resource_arn: String,
+        ?policy_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor resource_arn: String?
+      attr_accessor policy_scope: String?
+    end
+
+    class DescribeResourcePoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policies: Array[Types::ResourcePolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policies: Array[Types::ResourcePolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSubscriptionFiltersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name_prefix: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class DescribeSubscriptionFiltersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_filters: Array[Types::SubscriptionFilter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_filters: Array[Types::SubscriptionFilter]?
+      attr_accessor next_token: String?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?target_arn: String,
+        ?role_arn: String,
+        ?access_policy: String,
+        ?arn: String,
+        ?creation_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor target_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor access_policy: String?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Integer?
+    end
+
+    class DisassociateKmsKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor resource_identifier: String?
+    end
+
+    module Distribution
+      Random: String
+      ByLogStream: String
+    end
+
+    class Entity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    module EntityRejectionErrorType
+      INVALID_ENTITY: String
+      INVALID_TYPE_VALUE: String
+      INVALID_KEY_ATTRIBUTE: String
+      INVALID_ATTRIBUTES: String
+      ENTITY_SIZE_TOO_LARGE: String
+      UNSUPPORTED_LOG_GROUP_TYPE: String
+      MISSING_REQUIRED_FIELDS: String
+    end
+
+    module EvaluationFrequency
+      ONE_MIN: String
+      FIVE_MIN: String
+      TEN_MIN: String
+      FIFTEEN_MIN: String
+      THIRTY_MIN: String
+      ONE_HOUR: String
+    end
+
+    module EventSource
+      CLOUD_TRAIL: String
+      ROUTE53_RESOLVER: String
+      VPC_FLOW: String
+      EKS_AUDIT: String
+      AWSWAF: String
+    end
+
+    class ExportTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_name: String,
+        ?log_group_name: String,
+        ?from: Integer,
+        ?to: Integer,
+        ?destination: String,
+        ?destination_prefix: String,
+        ?status: Types::ExportTaskStatus,
+        ?execution_info: Types::ExportTaskExecutionInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_name: String?
+      attr_accessor log_group_name: String?
+      attr_accessor from: Integer?
+      attr_accessor to: Integer?
+      attr_accessor destination: String?
+      attr_accessor destination_prefix: String?
+      attr_accessor status: Types::ExportTaskStatus?
+      attr_accessor execution_info: Types::ExportTaskExecutionInfo?
+    end
+
+    class ExportTaskExecutionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Integer,
+        ?completion_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Integer?
+      attr_accessor completion_time: Integer?
+    end
+
+    class ExportTaskStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ExportTaskStatusCode
+      CANCELLED: String
+      COMPLETED: String
+      FAILED: String
+      PENDING: String
+      PENDING_CANCEL: String
+      RUNNING: String
+    end
+
+    class FieldIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?field_index_name: String,
+        ?last_scan_time: Integer,
+        ?first_event_time: Integer,
+        ?last_event_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor field_index_name: String?
+      attr_accessor last_scan_time: Integer?
+      attr_accessor first_event_time: Integer?
+      attr_accessor last_event_time: Integer?
+    end
+
+    class FieldsData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+    end
+
+    class FilterLogEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_group_identifier: String,
+        ?log_stream_names: Array[String],
+        ?log_stream_name_prefix: String,
+        ?start_time: Integer,
+        ?end_time: Integer,
+        ?filter_pattern: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?interleaved: bool,
+        ?unmask: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_group_identifier: String?
+      attr_accessor log_stream_names: Array[String]?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor start_time: Integer?
+      attr_accessor end_time: Integer?
+      attr_accessor filter_pattern: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor interleaved: bool?
+      attr_accessor unmask: bool?
+    end
+
+    class FilterLogEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::FilteredLogEvent],
+        ?searched_log_streams: Array[Types::SearchedLogStream],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::FilteredLogEvent]?
+      attr_accessor searched_log_streams: Array[Types::SearchedLogStream]?
+      attr_accessor next_token: String?
+    end
+
+    class FilteredLogEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?timestamp: Integer,
+        ?message: String,
+        ?ingestion_time: Integer,
+        ?event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor timestamp: Integer?
+      attr_accessor message: String?
+      attr_accessor ingestion_time: Integer?
+      attr_accessor event_id: String?
+    end
+
+    module FlattenedElement
+      FIRST: String
+      LAST: String
+    end
+
+    class GetDataProtectionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+    end
+
+    class GetDataProtectionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?policy_document: String,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor policy_document: String?
+      attr_accessor last_updated_time: Integer?
+    end
+
+    class GetDeliveryDestinationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination_name: String?
+    end
+
+    class GetDeliveryDestinationPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::Policy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::Policy?
+    end
+
+    class GetDeliveryDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetDeliveryDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination: Types::DeliveryDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination: Types::DeliveryDestination?
+    end
+
+    class GetDeliveryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetDeliveryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery: Types::Delivery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery: Types::Delivery?
+    end
+
+    class GetDeliverySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetDeliverySourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_source: Types::DeliverySource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_source: Types::DeliverySource?
+    end
+
+    class GetIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+    end
+
+    class GetIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+        ?integration_type: String,
+        ?integration_status: String,
+        ?integration_details: Types::IntegrationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+      attr_accessor integration_type: String?
+      attr_accessor integration_status: String?
+      attr_accessor integration_details: Types::IntegrationDetails?
+    end
+
+    class GetLogAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+    end
+
+    class GetLogAnomalyDetectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_name: String,
+        ?log_group_arn_list: Array[String],
+        ?evaluation_frequency: String,
+        ?filter_pattern: String,
+        ?anomaly_detector_status: String,
+        ?kms_key_id: String,
+        ?creation_time_stamp: Integer,
+        ?last_modified_time_stamp: Integer,
+        ?anomaly_visibility_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_name: String?
+      attr_accessor log_group_arn_list: Array[String]?
+      attr_accessor evaluation_frequency: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor anomaly_detector_status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor creation_time_stamp: Integer?
+      attr_accessor last_modified_time_stamp: Integer?
+      attr_accessor anomaly_visibility_time: Integer?
+    end
+
+    class GetLogEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_group_identifier: String,
+        ?log_stream_name: String,
+        ?start_time: Integer,
+        ?end_time: Integer,
+        ?next_token: String,
+        ?limit: Integer,
+        ?start_from_head: bool,
+        ?unmask: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_group_identifier: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor start_time: Integer?
+      attr_accessor end_time: Integer?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor start_from_head: bool?
+      attr_accessor unmask: bool?
+    end
+
+    class GetLogEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::OutputLogEvent],
+        ?next_forward_token: String,
+        ?next_backward_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::OutputLogEvent]?
+      attr_accessor next_forward_token: String?
+      attr_accessor next_backward_token: String?
+    end
+
+    class GetLogGroupFieldsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?time: Integer,
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor time: Integer?
+      attr_accessor log_group_identifier: String?
+    end
+
+    class GetLogGroupFieldsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_fields: Array[Types::LogGroupField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_fields: Array[Types::LogGroupField]?
+    end
+
+    class GetLogObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unmask: bool,
+        ?log_object_pointer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unmask: bool?
+      attr_accessor log_object_pointer: String?
+    end
+
+    class GetLogObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_stream: Types::GetLogObjectResponseStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_stream: Types::GetLogObjectResponseStream?
+    end
+
+    class GetLogObjectResponseStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?fields: Types::FieldsData,
+        ?internal_streaming_exception: Types::InternalStreamingException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Types::FieldsData?
+      attr_accessor internal_streaming_exception: Types::InternalStreamingException?
+
+      class Fields < GetLogObjectResponseStream
+      end
+      class InternalStreamingException < GetLogObjectResponseStream
+      end
+      class Unknown < GetLogObjectResponseStream
+      end
+    end
+
+    class GetLogRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_record_pointer: String,
+        ?unmask: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_record_pointer: String?
+      attr_accessor unmask: bool?
+    end
+
+    class GetLogRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_record: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_record: Hash[String, String]?
+    end
+
+    class GetQueryResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?results: Array[Array[Types::ResultField]],
+        ?statistics: Types::QueryStatistics,
+        ?status: String,
+        ?encryption_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor results: Array[Array[Types::ResultField]]?
+      attr_accessor statistics: Types::QueryStatistics?
+      attr_accessor status: String?
+      attr_accessor encryption_key: String?
+    end
+
+    class GetTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+    end
+
+    class GetTransformerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?creation_time: Integer,
+        ?last_modified_time: Integer,
+        ?transformer_config: Array[Types::Processor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor transformer_config: Array[Types::Processor]?
+    end
+
+    class Grok
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor match: String?
+    end
+
+    class IndexPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?last_update_time: Integer,
+        ?policy_document: String,
+        ?policy_name: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor last_update_time: Integer?
+      attr_accessor policy_document: String?
+      attr_accessor policy_name: String?
+      attr_accessor source: String?
+    end
+
+    module IndexSource
+      ACCOUNT: String
+      LOG_GROUP: String
+    end
+
+    module InheritedProperty
+      ACCOUNT_DATA_PROTECTION: String
+    end
+
+    class InputLogEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Integer?
+      attr_accessor message: String?
+    end
+
+    class IntegrationDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?open_search_integration_details: Types::OpenSearchIntegrationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_search_integration_details: Types::OpenSearchIntegrationDetails?
+
+      class OpenSearchIntegrationDetails < IntegrationDetails
+      end
+      class Unknown < IntegrationDetails
+      end
+    end
+
+    module IntegrationStatus
+      PROVISIONING: String
+      ACTIVE: String
+      FAILED: String
+    end
+
+    class IntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+        ?integration_type: String,
+        ?integration_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+      attr_accessor integration_type: String?
+      attr_accessor integration_status: String?
+    end
+
+    module IntegrationType
+      OPENSEARCH: String
+    end
+
+    class InternalStreamingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSequenceTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expected_sequence_token: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expected_sequence_token: String?
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAnomaliesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+        ?suppression_state: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+      attr_accessor suppression_state: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnomaliesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomalies: Array[Types::Anomaly],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomalies: Array[Types::Anomaly]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIntegrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name_prefix: String,
+        ?integration_type: String,
+        ?integration_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name_prefix: String?
+      attr_accessor integration_type: String?
+      attr_accessor integration_status: String?
+    end
+
+    class ListIntegrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_summaries: Array[Types::IntegrationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_summaries: Array[Types::IntegrationSummary]?
+    end
+
+    class ListLogAnomalyDetectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_log_group_arn: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_log_group_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogAnomalyDetectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detectors: Array[Types::AnomalyDetector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detectors: Array[Types::AnomalyDetector]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogGroupsForQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLogGroupsForQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name_pattern: String,
+        ?log_group_class: String,
+        ?include_linked_accounts: bool,
+        ?account_identifiers: Array[String],
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name_pattern: String?
+      attr_accessor log_group_class: String?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor account_identifiers: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListLogGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_groups: Array[Types::LogGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_groups: Array[Types::LogGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsLogGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class ListTagsLogGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListToMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?key: String,
+        ?value_key: String,
+        ?target: String,
+        ?flatten: bool,
+        ?flattened_element: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor key: String?
+      attr_accessor value_key: String?
+      attr_accessor target: String?
+      attr_accessor flatten: bool?
+      attr_accessor flattened_element: String?
+    end
+
+    class LiveTailSessionLogEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?log_group_identifier: String,
+        ?message: String,
+        ?timestamp: Integer,
+        ?ingestion_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor log_group_identifier: String?
+      attr_accessor message: String?
+      attr_accessor timestamp: Integer?
+      attr_accessor ingestion_time: Integer?
+    end
+
+    class LiveTailSessionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampled: bool?
+    end
+
+    class LiveTailSessionStart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?session_id: String,
+        ?log_group_identifiers: Array[String],
+        ?log_stream_names: Array[String],
+        ?log_stream_name_prefixes: Array[String],
+        ?log_event_filter_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor session_id: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor log_stream_names: Array[String]?
+      attr_accessor log_stream_name_prefixes: Array[String]?
+      attr_accessor log_event_filter_pattern: String?
+    end
+
+    class LiveTailSessionUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_metadata: Types::LiveTailSessionMetadata,
+        ?session_results: Array[Types::LiveTailSessionLogEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_metadata: Types::LiveTailSessionMetadata?
+      attr_accessor session_results: Array[Types::LiveTailSessionLogEvent]?
+    end
+
+    class LogEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Integer?
+      attr_accessor message: String?
+    end
+
+    class LogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?creation_time: Integer,
+        ?retention_in_days: Integer,
+        ?metric_filter_count: Integer,
+        ?arn: String,
+        ?stored_bytes: Integer,
+        ?kms_key_id: String,
+        ?data_protection_status: String,
+        ?inherited_properties: Array[String],
+        ?log_group_class: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor metric_filter_count: Integer?
+      attr_accessor arn: String?
+      attr_accessor stored_bytes: Integer?
+      attr_accessor kms_key_id: String?
+      attr_accessor data_protection_status: String?
+      attr_accessor inherited_properties: Array[String]?
+      attr_accessor log_group_class: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    module LogGroupClass
+      STANDARD: String
+      INFREQUENT_ACCESS: String
+      DELIVERY: String
+    end
+
+    class LogGroupField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?percent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor percent: Integer?
+    end
+
+    class LogGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_group_arn: String,
+        ?log_group_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_group_arn: String?
+      attr_accessor log_group_class: String?
+    end
+
+    class LogStream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?creation_time: Integer,
+        ?first_event_timestamp: Integer,
+        ?last_event_timestamp: Integer,
+        ?last_ingestion_time: Integer,
+        ?upload_sequence_token: String,
+        ?arn: String,
+        ?stored_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor first_event_timestamp: Integer?
+      attr_accessor last_event_timestamp: Integer?
+      attr_accessor last_ingestion_time: Integer?
+      attr_accessor upload_sequence_token: String?
+      attr_accessor arn: String?
+      attr_accessor stored_bytes: Integer?
+    end
+
+    class LowerCaseString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?with_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor with_keys: Array[String]?
+    end
+
+    class MalformedQueryException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_compile_error: Types::QueryCompileError,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_compile_error: Types::QueryCompileError?
+      attr_accessor message: String?
+    end
+
+    class MetricFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_name: String,
+        ?filter_pattern: String,
+        ?metric_transformations: Array[Types::MetricTransformation],
+        ?creation_time: Integer,
+        ?log_group_name: String,
+        ?apply_on_transformed_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_name: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor metric_transformations: Array[Types::MetricTransformation]?
+      attr_accessor creation_time: Integer?
+      attr_accessor log_group_name: String?
+      attr_accessor apply_on_transformed_logs: bool?
+    end
+
+    class MetricFilterMatchRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_number: Integer,
+        ?event_message: String,
+        ?extracted_values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_number: Integer?
+      attr_accessor event_message: String?
+      attr_accessor extracted_values: Hash[String, String]?
+    end
+
+    class MetricTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?metric_namespace: String,
+        ?metric_value: String,
+        ?default_value: Float,
+        ?dimensions: Hash[String, String],
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor metric_namespace: String?
+      attr_accessor metric_value: String?
+      attr_accessor default_value: Float?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor unit: String?
+    end
+
+    class MoveKeyEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?target: String,
+        ?overwrite_if_exists: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor overwrite_if_exists: bool?
+    end
+
+    class MoveKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::MoveKeyEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::MoveKeyEntry]?
+    end
+
+    module OCSFVersion
+      V1_1: String
+    end
+
+    class OpenSearchApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_endpoint: String,
+        ?application_arn: String,
+        ?application_id: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_endpoint: String?
+      attr_accessor application_arn: String?
+      attr_accessor application_id: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_endpoint: String,
+        ?collection_arn: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_endpoint: String?
+      attr_accessor collection_arn: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchDataAccessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchEncryptionPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchIntegrationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::OpenSearchDataSource,
+        ?application: Types::OpenSearchApplication,
+        ?collection: Types::OpenSearchCollection,
+        ?workspace: Types::OpenSearchWorkspace,
+        ?encryption_policy: Types::OpenSearchEncryptionPolicy,
+        ?network_policy: Types::OpenSearchNetworkPolicy,
+        ?access_policy: Types::OpenSearchDataAccessPolicy,
+        ?lifecycle_policy: Types::OpenSearchLifecyclePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::OpenSearchDataSource?
+      attr_accessor application: Types::OpenSearchApplication?
+      attr_accessor collection: Types::OpenSearchCollection?
+      attr_accessor workspace: Types::OpenSearchWorkspace?
+      attr_accessor encryption_policy: Types::OpenSearchEncryptionPolicy?
+      attr_accessor network_policy: Types::OpenSearchNetworkPolicy?
+      attr_accessor access_policy: Types::OpenSearchDataAccessPolicy?
+      attr_accessor lifecycle_policy: Types::OpenSearchLifecyclePolicy?
+    end
+
+    class OpenSearchLifecyclePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchNetworkPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OpenSearchResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?data_source_role_arn: String,
+        ?dashboard_viewer_principals: Array[String],
+        ?application_arn: String,
+        ?retention_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor data_source_role_arn: String?
+      attr_accessor dashboard_viewer_principals: Array[String]?
+      attr_accessor application_arn: String?
+      attr_accessor retention_days: Integer?
+    end
+
+    class OpenSearchResourceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module OpenSearchResourceStatusType
+      ACTIVE: String
+      NOT_FOUND: String
+      ERROR: String
+    end
+
+    class OpenSearchWorkspace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?status: Types::OpenSearchResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor status: Types::OpenSearchResourceStatus?
+    end
+
+    class OperationAbortedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OrderBy
+      LogStreamName: String
+      LastEventTime: String
+    end
+
+    module OutputFormat
+      JSON: String
+      PLAIN: String
+      W3C: String
+      RAW: String
+      PARQUET: String
+    end
+
+    class OutputLogEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Integer,
+        ?message: String,
+        ?ingestion_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Integer?
+      attr_accessor message: String?
+      attr_accessor ingestion_time: Integer?
+    end
+
+    class ParseCloudfront
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class ParseJSON
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor destination: String?
+    end
+
+    class ParseKeyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?destination: String,
+        ?field_delimiter: String,
+        ?key_value_delimiter: String,
+        ?key_prefix: String,
+        ?non_match_value: String,
+        ?overwrite_if_exists: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor destination: String?
+      attr_accessor field_delimiter: String?
+      attr_accessor key_value_delimiter: String?
+      attr_accessor key_prefix: String?
+      attr_accessor non_match_value: String?
+      attr_accessor overwrite_if_exists: bool?
+    end
+
+    class ParsePostgres
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class ParseRoute53
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class ParseToOCSF
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?event_source: String,
+        ?ocsf_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor event_source: String?
+      attr_accessor ocsf_version: String?
+    end
+
+    class ParseVPC
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class ParseWAF
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class PatternToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_token_position: Integer,
+        ?is_dynamic: bool,
+        ?token_string: String,
+        ?enumerations: Hash[String, Integer],
+        ?inferred_token_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_token_position: Integer?
+      attr_accessor is_dynamic: bool?
+      attr_accessor token_string: String?
+      attr_accessor enumerations: Hash[String, Integer]?
+      attr_accessor inferred_token_name: String?
+    end
+
+    class Policy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination_policy: String?
+    end
+
+    module PolicyScope
+      ACCOUNT: String
+      RESOURCE: String
+    end
+
+    module PolicyType
+      DATA_PROTECTION_POLICY: String
+      SUBSCRIPTION_FILTER_POLICY: String
+      FIELD_INDEX_POLICY: String
+      TRANSFORMER_POLICY: String
+      METRIC_EXTRACTION_POLICY: String
+    end
+
+    class Processor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_keys: Types::AddKeys,
+        ?copy_value: Types::CopyValue,
+        ?csv: Types::CSV,
+        ?date_time_converter: Types::DateTimeConverter,
+        ?delete_keys: Types::DeleteKeys,
+        ?grok: Types::Grok,
+        ?list_to_map: Types::ListToMap,
+        ?lower_case_string: Types::LowerCaseString,
+        ?move_keys: Types::MoveKeys,
+        ?parse_cloudfront: Types::ParseCloudfront,
+        ?parse_json: Types::ParseJSON,
+        ?parse_key_value: Types::ParseKeyValue,
+        ?parse_route53: Types::ParseRoute53,
+        ?parse_to_ocsf: Types::ParseToOCSF,
+        ?parse_postgres: Types::ParsePostgres,
+        ?parse_vpc: Types::ParseVPC,
+        ?parse_waf: Types::ParseWAF,
+        ?rename_keys: Types::RenameKeys,
+        ?split_string: Types::SplitString,
+        ?substitute_string: Types::SubstituteString,
+        ?trim_string: Types::TrimString,
+        ?type_converter: Types::TypeConverter,
+        ?upper_case_string: Types::UpperCaseString,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_keys: Types::AddKeys?
+      attr_accessor copy_value: Types::CopyValue?
+      attr_accessor csv: Types::CSV?
+      attr_accessor date_time_converter: Types::DateTimeConverter?
+      attr_accessor delete_keys: Types::DeleteKeys?
+      attr_accessor grok: Types::Grok?
+      attr_accessor list_to_map: Types::ListToMap?
+      attr_accessor lower_case_string: Types::LowerCaseString?
+      attr_accessor move_keys: Types::MoveKeys?
+      attr_accessor parse_cloudfront: Types::ParseCloudfront?
+      attr_accessor parse_json: Types::ParseJSON?
+      attr_accessor parse_key_value: Types::ParseKeyValue?
+      attr_accessor parse_route53: Types::ParseRoute53?
+      attr_accessor parse_to_ocsf: Types::ParseToOCSF?
+      attr_accessor parse_postgres: Types::ParsePostgres?
+      attr_accessor parse_vpc: Types::ParseVPC?
+      attr_accessor parse_waf: Types::ParseWAF?
+      attr_accessor rename_keys: Types::RenameKeys?
+      attr_accessor split_string: Types::SplitString?
+      attr_accessor substitute_string: Types::SubstituteString?
+      attr_accessor trim_string: Types::TrimString?
+      attr_accessor type_converter: Types::TypeConverter?
+      attr_accessor upper_case_string: Types::UpperCaseString?
+    end
+
+    class PutAccountPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?policy_type: String,
+        ?scope: String,
+        ?selection_criteria: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_type: String?
+      attr_accessor scope: String?
+      attr_accessor selection_criteria: String?
+    end
+
+    class PutAccountPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_policy: Types::AccountPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_policy: Types::AccountPolicy?
+    end
+
+    class PutDataProtectionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor policy_document: String?
+    end
+
+    class PutDataProtectionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?policy_document: String,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor policy_document: String?
+      attr_accessor last_updated_time: Integer?
+    end
+
+    class PutDeliveryDestinationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination_name: String,
+        ?delivery_destination_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination_name: String?
+      attr_accessor delivery_destination_policy: String?
+    end
+
+    class PutDeliveryDestinationPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::Policy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::Policy?
+    end
+
+    class PutDeliveryDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?output_format: String,
+        ?delivery_destination_configuration: Types::DeliveryDestinationConfiguration,
+        ?delivery_destination_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor output_format: String?
+      attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration?
+      attr_accessor delivery_destination_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutDeliveryDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_destination: Types::DeliveryDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_destination: Types::DeliveryDestination?
+    end
+
+    class PutDeliverySourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource_arn: String,
+        ?log_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor log_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutDeliverySourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_source: Types::DeliverySource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_source: Types::DeliverySource?
+    end
+
+    class PutDestinationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?access_policy: String,
+        ?force_update: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor access_policy: String?
+      attr_accessor force_update: bool?
+    end
+
+    class PutDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+        ?target_arn: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
+      attr_accessor target_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::Destination?
+    end
+
+    class PutIndexPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor policy_document: String?
+    end
+
+    class PutIndexPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_policy: Types::IndexPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_policy: Types::IndexPolicy?
+    end
+
+    class PutIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+        ?resource_config: Types::ResourceConfig,
+        ?integration_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+      attr_accessor resource_config: Types::ResourceConfig?
+      attr_accessor integration_type: String?
+    end
+
+    class PutIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_name: String,
+        ?integration_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_name: String?
+      attr_accessor integration_status: String?
+    end
+
+    class PutLogEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?log_stream_name: String,
+        ?log_events: Array[Types::InputLogEvent],
+        ?sequence_token: String,
+        ?entity: Types::Entity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
+      attr_accessor log_events: Array[Types::InputLogEvent]?
+      attr_accessor sequence_token: String?
+      attr_accessor entity: Types::Entity?
+    end
+
+    class PutLogEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_sequence_token: String,
+        ?rejected_log_events_info: Types::RejectedLogEventsInfo,
+        ?rejected_entity_info: Types::RejectedEntityInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_sequence_token: String?
+      attr_accessor rejected_log_events_info: Types::RejectedLogEventsInfo?
+      attr_accessor rejected_entity_info: Types::RejectedEntityInfo?
+    end
+
+    class PutMetricFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name: String,
+        ?filter_pattern: String,
+        ?metric_transformations: Array[Types::MetricTransformation],
+        ?apply_on_transformed_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor metric_transformations: Array[Types::MetricTransformation]?
+      attr_accessor apply_on_transformed_logs: bool?
+    end
+
+    class PutQueryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?name: String,
+        ?query_definition_id: String,
+        ?log_group_names: Array[String],
+        ?query_string: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor name: String?
+      attr_accessor query_definition_id: String?
+      attr_accessor log_group_names: Array[String]?
+      attr_accessor query_string: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutQueryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_definition_id: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?resource_arn: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor resource_arn: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+      attr_accessor revision_id: String?
+    end
+
+    class PutRetentionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?retention_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor retention_in_days: Integer?
+    end
+
+    class PutSubscriptionFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?filter_name: String,
+        ?filter_pattern: String,
+        ?destination_arn: String,
+        ?role_arn: String,
+        ?distribution: String,
+        ?apply_on_transformed_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor filter_name: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor destination_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor distribution: String?
+      attr_accessor apply_on_transformed_logs: bool?
+    end
+
+    class PutTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?transformer_config: Array[Types::Processor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor transformer_config: Array[Types::Processor]?
+    end
+
+    class QueryCompileError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: Types::QueryCompileErrorLocation,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: Types::QueryCompileErrorLocation?
+      attr_accessor message: String?
+    end
+
+    class QueryCompileErrorLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_char_offset: Integer,
+        ?end_char_offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_char_offset: Integer?
+      attr_accessor end_char_offset: Integer?
+    end
+
+    class QueryDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?query_definition_id: String,
+        ?name: String,
+        ?query_string: String,
+        ?last_modified: Integer,
+        ?log_group_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor query_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor query_string: String?
+      attr_accessor last_modified: Integer?
+      attr_accessor log_group_names: Array[String]?
+    end
+
+    class QueryInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?query_id: String,
+        ?query_string: String,
+        ?status: String,
+        ?create_time: Integer,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor query_id: String?
+      attr_accessor query_string: String?
+      attr_accessor status: String?
+      attr_accessor create_time: Integer?
+      attr_accessor log_group_name: String?
+    end
+
+    module QueryLanguage
+      CWLI: String
+      SQL: String
+      PPL: String
+    end
+
+    class QueryStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records_matched: Float,
+        ?records_scanned: Float,
+        ?estimated_records_skipped: Float,
+        ?bytes_scanned: Float,
+        ?estimated_bytes_skipped: Float,
+        ?log_groups_scanned: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records_matched: Float?
+      attr_accessor records_scanned: Float?
+      attr_accessor estimated_records_skipped: Float?
+      attr_accessor bytes_scanned: Float?
+      attr_accessor estimated_bytes_skipped: Float?
+      attr_accessor log_groups_scanned: Float?
+    end
+
+    module QueryStatus
+      Scheduled: String
+      Running: String
+      Complete: String
+      Failed: String
+      Cancelled: String
+      Timeout: String
+      Unknown: String
+    end
+
+    class RecordField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?mandatory: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor mandatory: bool?
+    end
+
+    class RejectedEntityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_type: String?
+    end
+
+    class RejectedLogEventsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?too_new_log_event_start_index: Integer,
+        ?too_old_log_event_end_index: Integer,
+        ?expired_log_event_end_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor too_new_log_event_start_index: Integer?
+      attr_accessor too_old_log_event_end_index: Integer?
+      attr_accessor expired_log_event_end_index: Integer?
+    end
+
+    class RenameKeyEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?rename_to: String,
+        ?overwrite_if_exists: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor rename_to: String?
+      attr_accessor overwrite_if_exists: bool?
+    end
+
+    class RenameKeys
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::RenameKeyEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::RenameKeyEntry]?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?open_search_resource_config: Types::OpenSearchResourceConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_search_resource_config: Types::OpenSearchResourceConfig?
+
+      class OpenSearchResourceConfig < ResourceConfig
+      end
+      class Unknown < ResourceConfig
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?last_updated_time: Integer,
+        ?policy_scope: String,
+        ?resource_arn: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor last_updated_time: Integer?
+      attr_accessor policy_scope: String?
+      attr_accessor resource_arn: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ResultField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor value: String?
+    end
+
+    class S3DeliveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suffix_path: String,
+        ?enable_hive_compatible_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suffix_path: String?
+      attr_accessor enable_hive_compatible_path: bool?
+    end
+
+    module Scope
+      ALL: String
+    end
+
+    class SearchedLogStream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?searched_completely: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor searched_completely: bool?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SessionStreamingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SessionTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SplitString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::SplitStringEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::SplitStringEntry]?
+    end
+
+    class SplitStringEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?delimiter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor delimiter: String?
+    end
+
+    module StandardUnit
+      Seconds: String
+      Microseconds: String
+      Milliseconds: String
+      Bytes: String
+      Kilobytes: String
+      Megabytes: String
+      Gigabytes: String
+      Terabytes: String
+      Bits: String
+      Kilobits: String
+      Megabits: String
+      Gigabits: String
+      Terabits: String
+      Percent: String
+      Count: String
+      BytesSecond: String
+      KilobytesSecond: String
+      MegabytesSecond: String
+      GigabytesSecond: String
+      TerabytesSecond: String
+      BitsSecond: String
+      KilobitsSecond: String
+      MegabitsSecond: String
+      GigabitsSecond: String
+      TerabitsSecond: String
+      CountSecond: String
+      None: String
+    end
+
+    class StartLiveTailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifiers: Array[String],
+        ?log_stream_names: Array[String],
+        ?log_stream_name_prefixes: Array[String],
+        ?log_event_filter_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor log_stream_names: Array[String]?
+      attr_accessor log_stream_name_prefixes: Array[String]?
+      attr_accessor log_event_filter_pattern: String?
+    end
+
+    class StartLiveTailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_stream: Types::StartLiveTailResponseStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_stream: Types::StartLiveTailResponseStream?
+    end
+
+    class StartLiveTailResponseStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?session_start: Types::LiveTailSessionStart,
+        ?session_update: Types::LiveTailSessionUpdate,
+        ?session_timeout_exception: Types::SessionTimeoutException,
+        ?session_streaming_exception: Types::SessionStreamingException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_start: Types::LiveTailSessionStart?
+      attr_accessor session_update: Types::LiveTailSessionUpdate?
+      attr_accessor session_timeout_exception: Types::SessionTimeoutException?
+      attr_accessor session_streaming_exception: Types::SessionStreamingException?
+
+      class SessionStart < StartLiveTailResponseStream
+      end
+      class SessionUpdate < StartLiveTailResponseStream
+      end
+      class SessionTimeoutException < StartLiveTailResponseStream
+      end
+      class SessionStreamingException < StartLiveTailResponseStream
+      end
+      class Unknown < StartLiveTailResponseStream
+      end
+    end
+
+    class StartQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_language: String,
+        ?log_group_name: String,
+        ?log_group_names: Array[String],
+        ?log_group_identifiers: Array[String],
+        ?start_time: Integer,
+        ?end_time: Integer,
+        ?query_string: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_language: String?
+      attr_accessor log_group_name: String?
+      attr_accessor log_group_names: Array[String]?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor start_time: Integer?
+      attr_accessor end_time: Integer?
+      attr_accessor query_string: String?
+      attr_accessor limit: Integer?
+    end
+
+    class StartQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    module State
+      Active: String
+      Suppressed: String
+      Baseline: String
+    end
+
+    class StopQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class StopQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success: bool?
+    end
+
+    class SubscriptionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_name: String,
+        ?log_group_name: String,
+        ?filter_pattern: String,
+        ?destination_arn: String,
+        ?role_arn: String,
+        ?distribution: String,
+        ?apply_on_transformed_logs: bool,
+        ?creation_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_name: String?
+      attr_accessor log_group_name: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor destination_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor distribution: String?
+      attr_accessor apply_on_transformed_logs: bool?
+      attr_accessor creation_time: Integer?
+    end
+
+    class SubstituteString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::SubstituteStringEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::SubstituteStringEntry]?
+    end
+
+    class SubstituteStringEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?from: String,
+        ?to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor from: String?
+      attr_accessor to: String?
+    end
+
+    class SuppressionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?suppression_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor suppression_unit: String?
+    end
+
+    module SuppressionState
+      SUPPRESSED: String
+      UNSUPPRESSED: String
+    end
+
+    module SuppressionType
+      LIMITED: String
+      INFINITE: String
+    end
+
+    module SuppressionUnit
+      SECONDS: String
+      MINUTES: String
+      HOURS: String
+    end
+
+    class TagLogGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TestMetricFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_pattern: String,
+        ?log_event_messages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_pattern: String?
+      attr_accessor log_event_messages: Array[String]?
+    end
+
+    class TestMetricFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matches: Array[Types::MetricFilterMatchRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matches: Array[Types::MetricFilterMatchRecord]?
+    end
+
+    class TestTransformerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformer_config: Array[Types::Processor],
+        ?log_event_messages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformer_config: Array[Types::Processor]?
+      attr_accessor log_event_messages: Array[String]?
+    end
+
+    class TestTransformerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformed_logs: Array[Types::TransformedLogRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformed_logs: Array[Types::TransformedLogRecord]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class TransformedLogRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_number: Integer,
+        ?event_message: String,
+        ?transformed_event_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_number: Integer?
+      attr_accessor event_message: String?
+      attr_accessor transformed_event_message: String?
+    end
+
+    class TrimString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?with_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor with_keys: Array[String]?
+    end
+
+    module Type
+      BOOLEAN: String
+      INTEGER: String
+      DOUBLE: String
+      STRING: String
+    end
+
+    class TypeConverter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::TypeConverterEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::TypeConverterEntry]?
+    end
+
+    class TypeConverterEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor type: String?
+    end
+
+    class UnrecognizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagLogGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?tags: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor tags: Array[String]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAnomalyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_id: String,
+        ?pattern_id: String,
+        ?anomaly_detector_arn: String,
+        ?suppression_type: String,
+        ?suppression_period: Types::SuppressionPeriod,
+        ?baseline: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_id: String?
+      attr_accessor pattern_id: String?
+      attr_accessor anomaly_detector_arn: String?
+      attr_accessor suppression_type: String?
+      attr_accessor suppression_period: Types::SuppressionPeriod?
+      attr_accessor baseline: bool?
+    end
+
+    class UpdateDeliveryConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?record_fields: Array[String],
+        ?field_delimiter: String,
+        ?s3_delivery_configuration: Types::S3DeliveryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor record_fields: Array[String]?
+      attr_accessor field_delimiter: String?
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration?
+    end
+
+    class UpdateDeliveryConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLogAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_arn: String,
+        ?evaluation_frequency: String,
+        ?filter_pattern: String,
+        ?anomaly_visibility_time: Integer,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_arn: String?
+      attr_accessor evaluation_frequency: String?
+      attr_accessor filter_pattern: String?
+      attr_accessor anomaly_visibility_time: Integer?
+      attr_accessor enabled: bool?
+    end
+
+    class UpperCaseString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?with_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor with_keys: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

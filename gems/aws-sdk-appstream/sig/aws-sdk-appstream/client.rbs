@@ -1,0 +1,1090 @@
+module Aws::AppStream
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppStream::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAppBlockBuilderAppBlockResponse
+      include Smithy::Client::_Response[Types::AssociateAppBlockBuilderAppBlockResult]
+      def app_block_builder_app_block_association: () -> Types::AppBlockBuilderAppBlockAssociation?
+    end
+    def associate_app_block_builder_app_block: (
+      ?app_block_arn: String,
+      ?app_block_builder_name: String
+    ) -> _AssociateAppBlockBuilderAppBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAppBlockBuilderAppBlockResponse
+
+    interface _AssociateApplicationFleetResponse
+      include Smithy::Client::_Response[Types::AssociateApplicationFleetResult]
+      def application_fleet_association: () -> Types::ApplicationFleetAssociation?
+    end
+    def associate_application_fleet: (
+      ?fleet_name: String,
+      ?application_arn: String
+    ) -> _AssociateApplicationFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApplicationFleetResponse
+
+    interface _AssociateApplicationToEntitlementResponse
+      include Smithy::Client::_Response[Types::AssociateApplicationToEntitlementResult]
+    end
+    def associate_application_to_entitlement: (
+      ?stack_name: String,
+      ?entitlement_name: String,
+      ?application_identifier: String
+    ) -> _AssociateApplicationToEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApplicationToEntitlementResponse
+
+    interface _AssociateFleetResponse
+      include Smithy::Client::_Response[Types::AssociateFleetResult]
+    end
+    def associate_fleet: (
+      ?fleet_name: String,
+      ?stack_name: String
+    ) -> _AssociateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFleetResponse
+
+    interface _BatchAssociateUserStackResponse
+      include Smithy::Client::_Response[Types::BatchAssociateUserStackResult]
+      def errors: () -> Array[Types::UserStackAssociationError]?
+    end
+    def batch_associate_user_stack: (
+      ?user_stack_associations: Array[
+        {
+          stack_name: String,
+          user_name: String,
+          authentication_type: String,
+          send_email_notification: bool
+        }
+      ]
+    ) -> _BatchAssociateUserStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateUserStackResponse
+
+    interface _BatchDisassociateUserStackResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateUserStackResult]
+      def errors: () -> Array[Types::UserStackAssociationError]?
+    end
+    def batch_disassociate_user_stack: (
+      ?user_stack_associations: Array[
+        {
+          stack_name: String,
+          user_name: String,
+          authentication_type: String,
+          send_email_notification: bool
+        }
+      ]
+    ) -> _BatchDisassociateUserStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateUserStackResponse
+
+    interface _CopyImageResponse
+      include Smithy::Client::_Response[Types::CopyImageResponse]
+      def destination_image_name: () -> String?
+    end
+    def copy_image: (
+      ?source_image_name: String,
+      ?destination_image_name: String,
+      ?destination_region: String,
+      ?destination_image_description: String
+    ) -> _CopyImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyImageResponse
+
+    interface _CreateAppBlockResponse
+      include Smithy::Client::_Response[Types::CreateAppBlockResult]
+      def app_block: () -> Types::AppBlock?
+    end
+    def create_app_block: (
+      ?name: String,
+      ?description: String,
+      ?display_name: String,
+      ?source_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?setup_script_details: {
+        script_s3_location: {
+          s3_bucket: String,
+          s3_key: String
+        },
+        executable_path: String,
+        executable_parameters: untyped,
+        timeout_in_seconds: Integer
+      },
+      ?tags: Hash[String, String],
+      ?post_setup_script_details: {
+        script_s3_location: {
+          s3_bucket: String,
+          s3_key: String
+        },
+        executable_path: String,
+        executable_parameters: untyped,
+        timeout_in_seconds: Integer
+      },
+      ?packaging_type: String
+    ) -> _CreateAppBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppBlockResponse
+
+    interface _CreateAppBlockBuilderResponse
+      include Smithy::Client::_Response[Types::CreateAppBlockBuilderResult]
+      def app_block_builder: () -> Types::AppBlockBuilder?
+    end
+    def create_app_block_builder: (
+      ?name: String,
+      ?description: String,
+      ?display_name: String,
+      ?tags: Hash[String, String],
+      ?platform: String,
+      ?instance_type: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?enable_default_internet_access: bool,
+      ?iam_role_arn: String,
+      ?access_endpoints: Array[
+        {
+          endpoint_type: String,
+          vpce_id: String
+        }
+      ]
+    ) -> _CreateAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppBlockBuilderResponse
+
+    interface _CreateAppBlockBuilderStreamingURLResponse
+      include Smithy::Client::_Response[Types::CreateAppBlockBuilderStreamingURLResult]
+      def streaming_url: () -> String?
+      def expires: () -> Time?
+    end
+    def create_app_block_builder_streaming_url: (
+      ?app_block_builder_name: String,
+      ?validity: Integer
+    ) -> _CreateAppBlockBuilderStreamingURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppBlockBuilderStreamingURLResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResult]
+      def application: () -> Types::Application?
+    end
+    def create_application: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?icon_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?launch_path: String,
+      ?working_directory: String,
+      ?launch_parameters: String,
+      ?platforms: Array[String],
+      ?instance_families: Array[String],
+      ?app_block_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateDirectoryConfigResponse
+      include Smithy::Client::_Response[Types::CreateDirectoryConfigResult]
+      def directory_config: () -> Types::DirectoryConfig?
+    end
+    def create_directory_config: (
+      ?directory_name: String,
+      ?organizational_unit_distinguished_names: Array[String],
+      ?service_account_credentials: {
+        account_name: String,
+        account_password: String
+      },
+      ?certificate_based_auth_properties: {
+        status: String,
+        certificate_authority_arn: String
+      }
+    ) -> _CreateDirectoryConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectoryConfigResponse
+
+    interface _CreateEntitlementResponse
+      include Smithy::Client::_Response[Types::CreateEntitlementResult]
+      def entitlement: () -> Types::Entitlement?
+    end
+    def create_entitlement: (
+      ?name: String,
+      ?stack_name: String,
+      ?description: String,
+      ?app_visibility: String,
+      ?attributes: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEntitlementResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetResult]
+      def fleet: () -> Types::Fleet?
+    end
+    def create_fleet: (
+      ?name: String,
+      ?image_name: String,
+      ?image_arn: String,
+      ?instance_type: String,
+      ?fleet_type: String,
+      ?compute_capacity: {
+        desired_instances: Integer,
+        desired_sessions: untyped
+      },
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?max_user_duration_in_seconds: Integer,
+      ?disconnect_timeout_in_seconds: Integer,
+      ?description: String,
+      ?display_name: String,
+      ?enable_default_internet_access: bool,
+      ?domain_join_info: {
+        directory_name: String,
+        organizational_unit_distinguished_name: String
+      },
+      ?tags: Hash[String, String],
+      ?idle_disconnect_timeout_in_seconds: Integer,
+      ?iam_role_arn: String,
+      ?stream_view: String,
+      ?platform: String,
+      ?max_concurrent_sessions: Integer,
+      ?usb_device_filter_strings: Array[String],
+      ?session_script_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?max_sessions_per_instance: Integer
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateImageBuilderResponse
+      include Smithy::Client::_Response[Types::CreateImageBuilderResult]
+      def image_builder: () -> Types::ImageBuilder?
+    end
+    def create_image_builder: (
+      ?name: String,
+      ?image_name: String,
+      ?image_arn: String,
+      ?instance_type: String,
+      ?description: String,
+      ?display_name: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?iam_role_arn: String,
+      ?enable_default_internet_access: bool,
+      ?domain_join_info: {
+        directory_name: String,
+        organizational_unit_distinguished_name: String
+      },
+      ?appstream_agent_version: String,
+      ?tags: Hash[String, String],
+      ?access_endpoints: Array[
+        {
+          endpoint_type: String,
+          vpce_id: String
+        }
+      ]
+    ) -> _CreateImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageBuilderResponse
+
+    interface _CreateImageBuilderStreamingURLResponse
+      include Smithy::Client::_Response[Types::CreateImageBuilderStreamingURLResult]
+      def streaming_url: () -> String?
+      def expires: () -> Time?
+    end
+    def create_image_builder_streaming_url: (
+      ?name: String,
+      ?validity: Integer
+    ) -> _CreateImageBuilderStreamingURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageBuilderStreamingURLResponse
+
+    interface _CreateStackResponse
+      include Smithy::Client::_Response[Types::CreateStackResult]
+      def stack: () -> Types::Stack?
+    end
+    def create_stack: (
+      ?name: String,
+      ?description: String,
+      ?display_name: String,
+      ?storage_connectors: Array[
+        {
+          connector_type: String,
+          resource_identifier: String,
+          domains: Array[String],
+          domains_require_admin_consent: untyped
+        }
+      ],
+      ?redirect_url: String,
+      ?feedback_url: String,
+      ?user_settings: Array[
+        {
+          action: String,
+          permission: String,
+          maximum_length: Integer
+        }
+      ],
+      ?application_settings: {
+        enabled: bool,
+        settings_group: String
+      },
+      ?tags: Hash[String, String],
+      ?access_endpoints: Array[
+        {
+          endpoint_type: String,
+          vpce_id: String
+        }
+      ],
+      ?embed_host_domains: Array[String],
+      ?streaming_experience_settings: {
+        preferred_protocol: String
+      }
+    ) -> _CreateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackResponse
+
+    interface _CreateStreamingURLResponse
+      include Smithy::Client::_Response[Types::CreateStreamingURLResult]
+      def streaming_url: () -> String?
+      def expires: () -> Time?
+    end
+    def create_streaming_url: (
+      ?stack_name: String,
+      ?fleet_name: String,
+      ?user_id: String,
+      ?application_id: String,
+      ?validity: Integer,
+      ?session_context: String
+    ) -> _CreateStreamingURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamingURLResponse
+
+    interface _CreateThemeForStackResponse
+      include Smithy::Client::_Response[Types::CreateThemeForStackResult]
+      def theme: () -> Types::Theme?
+    end
+    def create_theme_for_stack: (
+      ?stack_name: String,
+      ?footer_links: Array[
+        {
+          display_name: String,
+          footer_link_url: String
+        }
+      ],
+      ?title_text: String,
+      ?theme_styling: String,
+      ?organization_logo_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?favicon_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      }
+    ) -> _CreateThemeForStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThemeForStackResponse
+
+    interface _CreateUpdatedImageResponse
+      include Smithy::Client::_Response[Types::CreateUpdatedImageResult]
+      def image: () -> Types::Image?
+      def can_update_image: () -> bool?
+    end
+    def create_updated_image: (
+      ?existing_image_name: String,
+      ?new_image_name: String,
+      ?new_image_description: String,
+      ?new_image_display_name: String,
+      ?new_image_tags: Hash[String, String],
+      ?dry_run: bool
+    ) -> _CreateUpdatedImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUpdatedImageResponse
+
+    interface _CreateUsageReportSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateUsageReportSubscriptionResult]
+      def s3_bucket_name: () -> String?
+      def schedule: () -> String?
+    end
+    def create_usage_report_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUsageReportSubscriptionResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResult]
+    end
+    def create_user: (
+      ?user_name: String,
+      ?message_action: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?authentication_type: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteAppBlockResponse
+      include Smithy::Client::_Response[Types::DeleteAppBlockResult]
+    end
+    def delete_app_block: (
+      ?name: String
+    ) -> _DeleteAppBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppBlockResponse
+
+    interface _DeleteAppBlockBuilderResponse
+      include Smithy::Client::_Response[Types::DeleteAppBlockBuilderResult]
+    end
+    def delete_app_block_builder: (
+      ?name: String
+    ) -> _DeleteAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppBlockBuilderResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResult]
+    end
+    def delete_application: (
+      ?name: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteDirectoryConfigResponse
+      include Smithy::Client::_Response[Types::DeleteDirectoryConfigResult]
+    end
+    def delete_directory_config: (
+      ?directory_name: String
+    ) -> _DeleteDirectoryConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectoryConfigResponse
+
+    interface _DeleteEntitlementResponse
+      include Smithy::Client::_Response[Types::DeleteEntitlementResult]
+    end
+    def delete_entitlement: (
+      ?name: String,
+      ?stack_name: String
+    ) -> _DeleteEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEntitlementResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Types::DeleteFleetResult]
+    end
+    def delete_fleet: (
+      ?name: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteImageResponse
+      include Smithy::Client::_Response[Types::DeleteImageResult]
+      def image: () -> Types::Image?
+    end
+    def delete_image: (
+      ?name: String
+    ) -> _DeleteImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImageResponse
+
+    interface _DeleteImageBuilderResponse
+      include Smithy::Client::_Response[Types::DeleteImageBuilderResult]
+      def image_builder: () -> Types::ImageBuilder?
+    end
+    def delete_image_builder: (
+      ?name: String
+    ) -> _DeleteImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImageBuilderResponse
+
+    interface _DeleteImagePermissionsResponse
+      include Smithy::Client::_Response[Types::DeleteImagePermissionsResult]
+    end
+    def delete_image_permissions: (
+      ?name: String,
+      ?shared_account_id: String
+    ) -> _DeleteImagePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImagePermissionsResponse
+
+    interface _DeleteStackResponse
+      include Smithy::Client::_Response[Types::DeleteStackResult]
+    end
+    def delete_stack: (
+      ?name: String
+    ) -> _DeleteStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStackResponse
+
+    interface _DeleteThemeForStackResponse
+      include Smithy::Client::_Response[Types::DeleteThemeForStackResult]
+    end
+    def delete_theme_for_stack: (
+      ?stack_name: String
+    ) -> _DeleteThemeForStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThemeForStackResponse
+
+    interface _DeleteUsageReportSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteUsageReportSubscriptionResult]
+    end
+    def delete_usage_report_subscription: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUsageReportSubscriptionResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResult]
+    end
+    def delete_user: (
+      ?user_name: String,
+      ?authentication_type: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DescribeAppBlockBuilderAppBlockAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeAppBlockBuilderAppBlockAssociationsResult]
+      def app_block_builder_app_block_associations: () -> Array[Types::AppBlockBuilderAppBlockAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_app_block_builder_app_block_associations: (
+      ?app_block_arn: String,
+      ?app_block_builder_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAppBlockBuilderAppBlockAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppBlockBuilderAppBlockAssociationsResponse
+
+    interface _DescribeAppBlockBuildersResponse
+      include Smithy::Client::_Response[Types::DescribeAppBlockBuildersResult]
+      def app_block_builders: () -> Array[Types::AppBlockBuilder]?
+      def next_token: () -> String?
+    end
+    def describe_app_block_builders: (
+      ?names: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeAppBlockBuildersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppBlockBuildersResponse
+
+    interface _DescribeAppBlocksResponse
+      include Smithy::Client::_Response[Types::DescribeAppBlocksResult]
+      def app_blocks: () -> Array[Types::AppBlock]?
+      def next_token: () -> String?
+    end
+    def describe_app_blocks: (
+      ?arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeAppBlocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppBlocksResponse
+
+    interface _DescribeApplicationFleetAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationFleetAssociationsResult]
+      def application_fleet_associations: () -> Array[Types::ApplicationFleetAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_application_fleet_associations: (
+      ?fleet_name: String,
+      ?application_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeApplicationFleetAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationFleetAssociationsResponse
+
+    interface _DescribeApplicationsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationsResult]
+      def applications: () -> Array[Types::Application]?
+      def next_token: () -> String?
+    end
+    def describe_applications: (
+      ?arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationsResponse
+
+    interface _DescribeDirectoryConfigsResponse
+      include Smithy::Client::_Response[Types::DescribeDirectoryConfigsResult]
+      def directory_configs: () -> Array[Types::DirectoryConfig]?
+      def next_token: () -> String?
+    end
+    def describe_directory_configs: (
+      ?directory_names: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDirectoryConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDirectoryConfigsResponse
+
+    interface _DescribeEntitlementsResponse
+      include Smithy::Client::_Response[Types::DescribeEntitlementsResult]
+      def entitlements: () -> Array[Types::Entitlement]?
+      def next_token: () -> String?
+    end
+    def describe_entitlements: (
+      ?name: String,
+      ?stack_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeEntitlementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEntitlementsResponse
+
+    interface _DescribeFleetsResponse
+      include Smithy::Client::_Response[Types::DescribeFleetsResult]
+      def fleets: () -> Array[Types::Fleet]?
+      def next_token: () -> String?
+    end
+    def describe_fleets: (
+      ?names: Array[String],
+      ?next_token: String
+    ) -> _DescribeFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetsResponse
+
+    interface _DescribeImageBuildersResponse
+      include Smithy::Client::_Response[Types::DescribeImageBuildersResult]
+      def image_builders: () -> Array[Types::ImageBuilder]?
+      def next_token: () -> String?
+    end
+    def describe_image_builders: (
+      ?names: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeImageBuildersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageBuildersResponse
+
+    interface _DescribeImagePermissionsResponse
+      include Smithy::Client::_Response[Types::DescribeImagePermissionsResult]
+      def name: () -> String?
+      def shared_image_permissions_list: () -> Array[Types::SharedImagePermissions]?
+      def next_token: () -> String?
+    end
+    def describe_image_permissions: (
+      ?name: String,
+      ?max_results: Integer,
+      ?shared_aws_account_ids: Array[String],
+      ?next_token: String
+    ) -> _DescribeImagePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImagePermissionsResponse
+
+    interface _DescribeImagesResponse
+      include Smithy::Client::_Response[Types::DescribeImagesResult]
+      def images: () -> Array[Types::Image]?
+      def next_token: () -> String?
+    end
+    def describe_images: (
+      ?names: Array[String],
+      ?arns: Array[String],
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImagesResponse
+
+    interface _DescribeSessionsResponse
+      include Smithy::Client::_Response[Types::DescribeSessionsResult]
+      def sessions: () -> Array[Types::Session]?
+      def next_token: () -> String?
+    end
+    def describe_sessions: (
+      ?stack_name: String,
+      ?fleet_name: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?authentication_type: String,
+      ?instance_id: String
+    ) -> _DescribeSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSessionsResponse
+
+    interface _DescribeStacksResponse
+      include Smithy::Client::_Response[Types::DescribeStacksResult]
+      def stacks: () -> Array[Types::Stack]?
+      def next_token: () -> String?
+    end
+    def describe_stacks: (
+      ?names: Array[String],
+      ?next_token: String
+    ) -> _DescribeStacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStacksResponse
+
+    interface _DescribeThemeForStackResponse
+      include Smithy::Client::_Response[Types::DescribeThemeForStackResult]
+      def theme: () -> Types::Theme?
+    end
+    def describe_theme_for_stack: (
+      ?stack_name: String
+    ) -> _DescribeThemeForStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeThemeForStackResponse
+
+    interface _DescribeUsageReportSubscriptionsResponse
+      include Smithy::Client::_Response[Types::DescribeUsageReportSubscriptionsResult]
+      def usage_report_subscriptions: () -> Array[Types::UsageReportSubscription]?
+      def next_token: () -> String?
+    end
+    def describe_usage_report_subscriptions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeUsageReportSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUsageReportSubscriptionsResponse
+
+    interface _DescribeUserStackAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeUserStackAssociationsResult]
+      def user_stack_associations: () -> Array[Types::UserStackAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_user_stack_associations: (
+      ?stack_name: String,
+      ?user_name: String,
+      ?authentication_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeUserStackAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserStackAssociationsResponse
+
+    interface _DescribeUsersResponse
+      include Smithy::Client::_Response[Types::DescribeUsersResult]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def describe_users: (
+      ?authentication_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUsersResponse
+
+    interface _DisableUserResponse
+      include Smithy::Client::_Response[Types::DisableUserResult]
+    end
+    def disable_user: (
+      ?user_name: String,
+      ?authentication_type: String
+    ) -> _DisableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableUserResponse
+
+    interface _DisassociateAppBlockBuilderAppBlockResponse
+      include Smithy::Client::_Response[Types::DisassociateAppBlockBuilderAppBlockResult]
+    end
+    def disassociate_app_block_builder_app_block: (
+      ?app_block_arn: String,
+      ?app_block_builder_name: String
+    ) -> _DisassociateAppBlockBuilderAppBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAppBlockBuilderAppBlockResponse
+
+    interface _DisassociateApplicationFleetResponse
+      include Smithy::Client::_Response[Types::DisassociateApplicationFleetResult]
+    end
+    def disassociate_application_fleet: (
+      ?fleet_name: String,
+      ?application_arn: String
+    ) -> _DisassociateApplicationFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApplicationFleetResponse
+
+    interface _DisassociateApplicationFromEntitlementResponse
+      include Smithy::Client::_Response[Types::DisassociateApplicationFromEntitlementResult]
+    end
+    def disassociate_application_from_entitlement: (
+      ?stack_name: String,
+      ?entitlement_name: String,
+      ?application_identifier: String
+    ) -> _DisassociateApplicationFromEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApplicationFromEntitlementResponse
+
+    interface _DisassociateFleetResponse
+      include Smithy::Client::_Response[Types::DisassociateFleetResult]
+    end
+    def disassociate_fleet: (
+      ?fleet_name: String,
+      ?stack_name: String
+    ) -> _DisassociateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFleetResponse
+
+    interface _EnableUserResponse
+      include Smithy::Client::_Response[Types::EnableUserResult]
+    end
+    def enable_user: (
+      ?user_name: String,
+      ?authentication_type: String
+    ) -> _EnableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableUserResponse
+
+    interface _ExpireSessionResponse
+      include Smithy::Client::_Response[Types::ExpireSessionResult]
+    end
+    def expire_session: (
+      ?session_id: String
+    ) -> _ExpireSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExpireSessionResponse
+
+    interface _ListAssociatedFleetsResponse
+      include Smithy::Client::_Response[Types::ListAssociatedFleetsResult]
+      def names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_associated_fleets: (
+      ?stack_name: String,
+      ?next_token: String
+    ) -> _ListAssociatedFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedFleetsResponse
+
+    interface _ListAssociatedStacksResponse
+      include Smithy::Client::_Response[Types::ListAssociatedStacksResult]
+      def names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_associated_stacks: (
+      ?fleet_name: String,
+      ?next_token: String
+    ) -> _ListAssociatedStacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedStacksResponse
+
+    interface _ListEntitledApplicationsResponse
+      include Smithy::Client::_Response[Types::ListEntitledApplicationsResult]
+      def entitled_applications: () -> Array[Types::EntitledApplication]?
+      def next_token: () -> String?
+    end
+    def list_entitled_applications: (
+      ?stack_name: String,
+      ?entitlement_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntitledApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitledApplicationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartAppBlockBuilderResponse
+      include Smithy::Client::_Response[Types::StartAppBlockBuilderResult]
+      def app_block_builder: () -> Types::AppBlockBuilder?
+    end
+    def start_app_block_builder: (
+      ?name: String
+    ) -> _StartAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAppBlockBuilderResponse
+
+    interface _StartFleetResponse
+      include Smithy::Client::_Response[Types::StartFleetResult]
+    end
+    def start_fleet: (
+      ?name: String
+    ) -> _StartFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFleetResponse
+
+    interface _StartImageBuilderResponse
+      include Smithy::Client::_Response[Types::StartImageBuilderResult]
+      def image_builder: () -> Types::ImageBuilder?
+    end
+    def start_image_builder: (
+      ?name: String,
+      ?appstream_agent_version: String
+    ) -> _StartImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImageBuilderResponse
+
+    interface _StopAppBlockBuilderResponse
+      include Smithy::Client::_Response[Types::StopAppBlockBuilderResult]
+      def app_block_builder: () -> Types::AppBlockBuilder?
+    end
+    def stop_app_block_builder: (
+      ?name: String
+    ) -> _StopAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAppBlockBuilderResponse
+
+    interface _StopFleetResponse
+      include Smithy::Client::_Response[Types::StopFleetResult]
+    end
+    def stop_fleet: (
+      ?name: String
+    ) -> _StopFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFleetResponse
+
+    interface _StopImageBuilderResponse
+      include Smithy::Client::_Response[Types::StopImageBuilderResult]
+      def image_builder: () -> Types::ImageBuilder?
+    end
+    def stop_image_builder: (
+      ?name: String
+    ) -> _StopImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopImageBuilderResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppBlockBuilderResponse
+      include Smithy::Client::_Response[Types::UpdateAppBlockBuilderResult]
+      def app_block_builder: () -> Types::AppBlockBuilder?
+    end
+    def update_app_block_builder: (
+      ?name: String,
+      ?description: String,
+      ?display_name: String,
+      ?platform: String,
+      ?instance_type: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?enable_default_internet_access: bool,
+      ?iam_role_arn: String,
+      ?access_endpoints: Array[
+        {
+          endpoint_type: String,
+          vpce_id: String
+        }
+      ],
+      ?attributes_to_delete: Array[String]
+    ) -> _UpdateAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppBlockBuilderResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResult]
+      def application: () -> Types::Application?
+    end
+    def update_application: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?icon_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?launch_path: String,
+      ?working_directory: String,
+      ?launch_parameters: String,
+      ?app_block_arn: String,
+      ?attributes_to_delete: Array[String]
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateDirectoryConfigResponse
+      include Smithy::Client::_Response[Types::UpdateDirectoryConfigResult]
+      def directory_config: () -> Types::DirectoryConfig?
+    end
+    def update_directory_config: (
+      ?directory_name: String,
+      ?organizational_unit_distinguished_names: Array[String],
+      ?service_account_credentials: {
+        account_name: String,
+        account_password: String
+      },
+      ?certificate_based_auth_properties: {
+        status: String,
+        certificate_authority_arn: String
+      }
+    ) -> _UpdateDirectoryConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectoryConfigResponse
+
+    interface _UpdateEntitlementResponse
+      include Smithy::Client::_Response[Types::UpdateEntitlementResult]
+      def entitlement: () -> Types::Entitlement?
+    end
+    def update_entitlement: (
+      ?name: String,
+      ?stack_name: String,
+      ?description: String,
+      ?app_visibility: String,
+      ?attributes: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ]
+    ) -> _UpdateEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEntitlementResponse
+
+    interface _UpdateFleetResponse
+      include Smithy::Client::_Response[Types::UpdateFleetResult]
+      def fleet: () -> Types::Fleet?
+    end
+    def update_fleet: (
+      ?image_name: String,
+      ?image_arn: String,
+      ?name: String,
+      ?instance_type: String,
+      ?compute_capacity: {
+        desired_instances: Integer,
+        desired_sessions: untyped
+      },
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?max_user_duration_in_seconds: Integer,
+      ?disconnect_timeout_in_seconds: Integer,
+      ?delete_vpc_config: bool,
+      ?description: String,
+      ?display_name: String,
+      ?enable_default_internet_access: bool,
+      ?domain_join_info: {
+        directory_name: String,
+        organizational_unit_distinguished_name: String
+      },
+      ?idle_disconnect_timeout_in_seconds: Integer,
+      ?attributes_to_delete: Array[String],
+      ?iam_role_arn: String,
+      ?stream_view: String,
+      ?platform: String,
+      ?max_concurrent_sessions: Integer,
+      ?usb_device_filter_strings: Array[String],
+      ?session_script_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?max_sessions_per_instance: Integer
+    ) -> _UpdateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetResponse
+
+    interface _UpdateImagePermissionsResponse
+      include Smithy::Client::_Response[Types::UpdateImagePermissionsResult]
+    end
+    def update_image_permissions: (
+      ?name: String,
+      ?shared_account_id: String,
+      ?image_permissions: {
+        allow_fleet: bool,
+        allow_image_builder: untyped
+      }
+    ) -> _UpdateImagePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImagePermissionsResponse
+
+    interface _UpdateStackResponse
+      include Smithy::Client::_Response[Types::UpdateStackResult]
+      def stack: () -> Types::Stack?
+    end
+    def update_stack: (
+      ?display_name: String,
+      ?description: String,
+      ?name: String,
+      ?storage_connectors: Array[
+        {
+          connector_type: String,
+          resource_identifier: String,
+          domains: Array[String],
+          domains_require_admin_consent: untyped
+        }
+      ],
+      ?delete_storage_connectors: bool,
+      ?redirect_url: String,
+      ?feedback_url: String,
+      ?attributes_to_delete: Array[String],
+      ?user_settings: Array[
+        {
+          action: String,
+          permission: String,
+          maximum_length: Integer
+        }
+      ],
+      ?application_settings: {
+        enabled: bool,
+        settings_group: String
+      },
+      ?access_endpoints: Array[
+        {
+          endpoint_type: String,
+          vpce_id: String
+        }
+      ],
+      ?embed_host_domains: Array[String],
+      ?streaming_experience_settings: {
+        preferred_protocol: String
+      }
+    ) -> _UpdateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackResponse
+
+    interface _UpdateThemeForStackResponse
+      include Smithy::Client::_Response[Types::UpdateThemeForStackResult]
+      def theme: () -> Types::Theme?
+    end
+    def update_theme_for_stack: (
+      ?stack_name: String,
+      ?footer_links: Array[
+        {
+          display_name: String,
+          footer_link_url: String
+        }
+      ],
+      ?title_text: String,
+      ?theme_styling: String,
+      ?organization_logo_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?favicon_s3_location: {
+        s3_bucket: String,
+        s3_key: String
+      },
+      ?state: String,
+      ?attributes_to_delete: Array[String]
+    ) -> _UpdateThemeForStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThemeForStackResponse
+  end
+end

@@ -1,0 +1,449 @@
+module Aws::SNS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SNS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddPermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_permission: (
+      ?topic_arn: String,
+      ?label: String,
+      ?aws_account_id: Array[String],
+      ?action_name: Array[String]
+    ) -> _AddPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPermissionResponse
+
+    interface _CheckIfPhoneNumberIsOptedOutResponse
+      include Smithy::Client::_Response[Types::CheckIfPhoneNumberIsOptedOutResponse]
+      def is_opted_out: () -> bool?
+    end
+    def check_if_phone_number_is_opted_out: (
+      ?phone_number: String
+    ) -> _CheckIfPhoneNumberIsOptedOutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckIfPhoneNumberIsOptedOutResponse
+
+    interface _ConfirmSubscriptionResponse
+      include Smithy::Client::_Response[Types::ConfirmSubscriptionResponse]
+      def subscription_arn: () -> String?
+    end
+    def confirm_subscription: (
+      ?topic_arn: String,
+      ?token: String,
+      ?authenticate_on_unsubscribe: String
+    ) -> _ConfirmSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmSubscriptionResponse
+
+    interface _CreatePlatformApplicationResponse
+      include Smithy::Client::_Response[Types::CreatePlatformApplicationResponse]
+      def platform_application_arn: () -> String?
+    end
+    def create_platform_application: (
+      ?name: String,
+      ?platform: String,
+      ?attributes: Hash[String, String]
+    ) -> _CreatePlatformApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlatformApplicationResponse
+
+    interface _CreatePlatformEndpointResponse
+      include Smithy::Client::_Response[Types::CreateEndpointResponse]
+      def endpoint_arn: () -> String?
+    end
+    def create_platform_endpoint: (
+      ?platform_application_arn: String,
+      ?token: String,
+      ?custom_user_data: String,
+      ?attributes: Hash[String, String]
+    ) -> _CreatePlatformEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlatformEndpointResponse
+
+    interface _CreateSMSSandboxPhoneNumberResponse
+      include Smithy::Client::_Response[Types::CreateSMSSandboxPhoneNumberResult]
+    end
+    def create_sms_sandbox_phone_number: (
+      ?phone_number: String,
+      ?language_code: String
+    ) -> _CreateSMSSandboxPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSMSSandboxPhoneNumberResponse
+
+    interface _CreateTopicResponse
+      include Smithy::Client::_Response[Types::CreateTopicResponse]
+      def topic_arn: () -> String?
+    end
+    def create_topic: (
+      ?name: String,
+      ?attributes: Hash[String, String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?data_protection_policy: String
+    ) -> _CreateTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTopicResponse
+
+    interface _DeleteEndpointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DeleteEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointResponse
+
+    interface _DeletePlatformApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_platform_application: (
+      ?platform_application_arn: String
+    ) -> _DeletePlatformApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePlatformApplicationResponse
+
+    interface _DeleteSMSSandboxPhoneNumberResponse
+      include Smithy::Client::_Response[Types::DeleteSMSSandboxPhoneNumberResult]
+    end
+    def delete_sms_sandbox_phone_number: (
+      ?phone_number: String
+    ) -> _DeleteSMSSandboxPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSMSSandboxPhoneNumberResponse
+
+    interface _DeleteTopicResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_topic: (
+      ?topic_arn: String
+    ) -> _DeleteTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTopicResponse
+
+    interface _GetDataProtectionPolicyResponse
+      include Smithy::Client::_Response[Types::GetDataProtectionPolicyResponse]
+      def data_protection_policy: () -> String?
+    end
+    def get_data_protection_policy: (
+      ?resource_arn: String
+    ) -> _GetDataProtectionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataProtectionPolicyResponse
+
+    interface _GetEndpointAttributesResponse
+      include Smithy::Client::_Response[Types::GetEndpointAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_endpoint_attributes: (
+      ?endpoint_arn: String
+    ) -> _GetEndpointAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEndpointAttributesResponse
+
+    interface _GetPlatformApplicationAttributesResponse
+      include Smithy::Client::_Response[Types::GetPlatformApplicationAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_platform_application_attributes: (
+      ?platform_application_arn: String
+    ) -> _GetPlatformApplicationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlatformApplicationAttributesResponse
+
+    interface _GetSMSAttributesResponse
+      include Smithy::Client::_Response[Types::GetSMSAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_sms_attributes: (
+      ?attributes: Array[String]
+    ) -> _GetSMSAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSMSAttributesResponse
+
+    interface _GetSMSSandboxAccountStatusResponse
+      include Smithy::Client::_Response[Types::GetSMSSandboxAccountStatusResult]
+      def is_in_sandbox: () -> bool?
+    end
+    def get_sms_sandbox_account_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSMSSandboxAccountStatusResponse
+
+    interface _GetSubscriptionAttributesResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_subscription_attributes: (
+      ?subscription_arn: String
+    ) -> _GetSubscriptionAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionAttributesResponse
+
+    interface _GetTopicAttributesResponse
+      include Smithy::Client::_Response[Types::GetTopicAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_topic_attributes: (
+      ?topic_arn: String
+    ) -> _GetTopicAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTopicAttributesResponse
+
+    interface _ListEndpointsByPlatformApplicationResponse
+      include Smithy::Client::_Response[Types::ListEndpointsByPlatformApplicationResponse]
+      def endpoints: () -> Array[Types::Endpoint]?
+      def next_token: () -> String?
+    end
+    def list_endpoints_by_platform_application: (
+      ?platform_application_arn: String,
+      ?next_token: String
+    ) -> _ListEndpointsByPlatformApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEndpointsByPlatformApplicationResponse
+
+    interface _ListOriginationNumbersResponse
+      include Smithy::Client::_Response[Types::ListOriginationNumbersResult]
+      def next_token: () -> String?
+      def phone_numbers: () -> Array[Types::PhoneNumberInformation]?
+    end
+    def list_origination_numbers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOriginationNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOriginationNumbersResponse
+
+    interface _ListPhoneNumbersOptedOutResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumbersOptedOutResponse]
+      def phone_numbers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_phone_numbers_opted_out: (
+      ?next_token: String
+    ) -> _ListPhoneNumbersOptedOutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumbersOptedOutResponse
+
+    interface _ListPlatformApplicationsResponse
+      include Smithy::Client::_Response[Types::ListPlatformApplicationsResponse]
+      def platform_applications: () -> Array[Types::PlatformApplication]?
+      def next_token: () -> String?
+    end
+    def list_platform_applications: (
+      ?next_token: String
+    ) -> _ListPlatformApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPlatformApplicationsResponse
+
+    interface _ListSMSSandboxPhoneNumbersResponse
+      include Smithy::Client::_Response[Types::ListSMSSandboxPhoneNumbersResult]
+      def phone_numbers: () -> Array[Types::SMSSandboxPhoneNumber]?
+      def next_token: () -> String?
+    end
+    def list_sms_sandbox_phone_numbers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSMSSandboxPhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSMSSandboxPhoneNumbersResponse
+
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsResponse]
+      def subscriptions: () -> Array[Types::Subscription]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions: (
+      ?next_token: String
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
+    interface _ListSubscriptionsByTopicResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsByTopicResponse]
+      def subscriptions: () -> Array[Types::Subscription]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions_by_topic: (
+      ?topic_arn: String,
+      ?next_token: String
+    ) -> _ListSubscriptionsByTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsByTopicResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTopicsResponse
+      include Smithy::Client::_Response[Types::ListTopicsResponse]
+      def topics: () -> Array[Types::Topic]?
+      def next_token: () -> String?
+    end
+    def list_topics: (
+      ?next_token: String
+    ) -> _ListTopicsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTopicsResponse
+
+    interface _OptInPhoneNumberResponse
+      include Smithy::Client::_Response[Types::OptInPhoneNumberResponse]
+    end
+    def opt_in_phone_number: (
+      ?phone_number: String
+    ) -> _OptInPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OptInPhoneNumberResponse
+
+    interface _PublishResponse
+      include Smithy::Client::_Response[Types::PublishResponse]
+      def message_id: () -> String?
+      def sequence_number: () -> String?
+    end
+    def publish: (
+      ?topic_arn: String,
+      ?target_arn: String,
+      ?phone_number: String,
+      ?message: String,
+      ?subject: String,
+      ?message_structure: String,
+      ?message_attributes: Hash[String,
+        {
+          data_type: String,
+          string_value: untyped,
+          binary_value: String
+        }
+      ],
+      ?message_deduplication_id: String,
+      ?message_group_id: String
+    ) -> _PublishResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishResponse
+
+    interface _PublishBatchResponse
+      include Smithy::Client::_Response[Types::PublishBatchResponse]
+      def successful: () -> Array[Types::PublishBatchResultEntry]?
+      def failed: () -> Array[Types::BatchResultErrorEntry]?
+    end
+    def publish_batch: (
+      ?topic_arn: String,
+      ?publish_batch_request_entries: Array[
+        {
+          id: String,
+          message: String,
+          subject: String,
+          message_structure: String,
+          message_attributes: Hash[String,
+            {
+              data_type: untyped,
+              string_value: untyped,
+              binary_value: String
+            }
+          ],
+          message_deduplication_id: untyped,
+          message_group_id: untyped
+        }
+      ]
+    ) -> _PublishBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishBatchResponse
+
+    interface _PutDataProtectionPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_data_protection_policy: (
+      ?resource_arn: String,
+      ?data_protection_policy: String
+    ) -> _PutDataProtectionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataProtectionPolicyResponse
+
+    interface _RemovePermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_permission: (
+      ?topic_arn: String,
+      ?label: String
+    ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _SetEndpointAttributesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_endpoint_attributes: (
+      ?endpoint_arn: String,
+      ?attributes: Hash[String, String]
+    ) -> _SetEndpointAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetEndpointAttributesResponse
+
+    interface _SetPlatformApplicationAttributesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_platform_application_attributes: (
+      ?platform_application_arn: String,
+      ?attributes: Hash[String, String]
+    ) -> _SetPlatformApplicationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetPlatformApplicationAttributesResponse
+
+    interface _SetSMSAttributesResponse
+      include Smithy::Client::_Response[Types::SetSMSAttributesResponse]
+    end
+    def set_sms_attributes: (
+      ?attributes: Hash[String, String]
+    ) -> _SetSMSAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSMSAttributesResponse
+
+    interface _SetSubscriptionAttributesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_subscription_attributes: (
+      ?subscription_arn: String,
+      ?attribute_name: String,
+      ?attribute_value: String
+    ) -> _SetSubscriptionAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSubscriptionAttributesResponse
+
+    interface _SetTopicAttributesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_topic_attributes: (
+      ?topic_arn: String,
+      ?attribute_name: String,
+      ?attribute_value: String
+    ) -> _SetTopicAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTopicAttributesResponse
+
+    interface _SubscribeResponse
+      include Smithy::Client::_Response[Types::SubscribeResponse]
+      def subscription_arn: () -> String?
+    end
+    def subscribe: (
+      ?topic_arn: String,
+      ?protocol: String,
+      ?endpoint: String,
+      ?attributes: Hash[String, String],
+      ?return_subscription_arn: bool
+    ) -> _SubscribeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubscribeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UnsubscribeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def unsubscribe: (
+      ?subscription_arn: String
+    ) -> _UnsubscribeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnsubscribeResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _VerifySMSSandboxPhoneNumberResponse
+      include Smithy::Client::_Response[Types::VerifySMSSandboxPhoneNumberResult]
+    end
+    def verify_sms_sandbox_phone_number: (
+      ?phone_number: String,
+      ?one_time_password: String
+    ) -> _VerifySMSSandboxPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifySMSSandboxPhoneNumberResponse
+  end
+end

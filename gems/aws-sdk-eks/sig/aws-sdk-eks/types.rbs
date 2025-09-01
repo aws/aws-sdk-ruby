@@ -1,0 +1,3727 @@
+module Aws::EKS
+  module Types
+
+    module AMITypes
+      AL2_x86_64: String
+      AL2_x86_64_GPU: String
+      AL2_ARM_64: String
+      CUSTOM: String
+      BOTTLEROCKET_ARM_64: String
+      BOTTLEROCKET_x86_64: String
+      BOTTLEROCKET_ARM_64_FIPS: String
+      BOTTLEROCKET_x86_64_FIPS: String
+      BOTTLEROCKET_ARM_64_NVIDIA: String
+      BOTTLEROCKET_x86_64_NVIDIA: String
+      WINDOWS_CORE_2019_x86_64: String
+      WINDOWS_FULL_2019_x86_64: String
+      WINDOWS_CORE_2022_x86_64: String
+      WINDOWS_FULL_2022_x86_64: String
+      AL2023_x86_64_STANDARD: String
+      AL2023_ARM_64_STANDARD: String
+      AL2023_x86_64_NEURON: String
+      AL2023_x86_64_NVIDIA: String
+      AL2023_ARM_64_NVIDIA: String
+    end
+
+    class AccessConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_cluster_creator_admin_permissions: bool,
+        ?authentication_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_cluster_creator_admin_permissions: bool?
+      attr_accessor authentication_mode: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?kubernetes_groups: Array[String],
+        ?access_entry_arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+        ?username: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor kubernetes_groups: Array[String]?
+      attr_accessor access_entry_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor username: String?
+      attr_accessor type: String?
+    end
+
+    class AccessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class AccessScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?namespaces: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor namespaces: Array[String]?
+    end
+
+    module AccessScopeType
+      cluster: String
+      namespace: String
+    end
+
+    class Addon
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_name: String,
+        ?cluster_name: String,
+        ?status: String,
+        ?addon_version: String,
+        ?health: Types::AddonHealth,
+        ?addon_arn: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?service_account_role_arn: String,
+        ?tags: Hash[String, String],
+        ?publisher: String,
+        ?owner: String,
+        ?marketplace_information: Types::MarketplaceInformation,
+        ?configuration_values: String,
+        ?pod_identity_associations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_name: String?
+      attr_accessor cluster_name: String?
+      attr_accessor status: String?
+      attr_accessor addon_version: String?
+      attr_accessor health: Types::AddonHealth?
+      attr_accessor addon_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor service_account_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor publisher: String?
+      attr_accessor owner: String?
+      attr_accessor marketplace_information: Types::MarketplaceInformation?
+      attr_accessor configuration_values: String?
+      attr_accessor pod_identity_associations: Array[String]?
+    end
+
+    class AddonCompatibilityDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?compatible_versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor compatible_versions: Array[String]?
+    end
+
+    class AddonHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issues: Array[Types::AddonIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Array[Types::AddonIssue]?
+    end
+
+    class AddonInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_name: String,
+        ?type: String,
+        ?addon_versions: Array[Types::AddonVersionInfo],
+        ?publisher: String,
+        ?owner: String,
+        ?marketplace_information: Types::MarketplaceInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_name: String?
+      attr_accessor type: String?
+      attr_accessor addon_versions: Array[Types::AddonVersionInfo]?
+      attr_accessor publisher: String?
+      attr_accessor owner: String?
+      attr_accessor marketplace_information: Types::MarketplaceInformation?
+    end
+
+    class AddonIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    module AddonIssueCode
+      ACCESS_DENIED: String
+      INTERNAL_FAILURE: String
+      CLUSTER_UNREACHABLE: String
+      INSUFFICIENT_NUMBER_OF_REPLICAS: String
+      CONFIGURATION_CONFLICT: String
+      ADMISSION_REQUEST_DENIED: String
+      UNSUPPORTED_ADDON_MODIFICATION: String
+      K8S_RESOURCE_NOT_FOUND: String
+      ADDON_SUBSCRIPTION_NEEDED: String
+      ADDON_PERMISSION_FAILURE: String
+    end
+
+    class AddonPodIdentityAssociations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account: String?
+      attr_accessor role_arn: String?
+    end
+
+    class AddonPodIdentityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account: String,
+        ?recommended_managed_policies: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account: String?
+      attr_accessor recommended_managed_policies: Array[String]?
+    end
+
+    module AddonStatus
+      CREATING: String
+      ACTIVE: String
+      CREATE_FAILED: String
+      UPDATING: String
+      DELETING: String
+      DELETE_FAILED: String
+      DEGRADED: String
+      UPDATE_FAILED: String
+    end
+
+    class AddonVersionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_version: String,
+        ?architecture: Array[String],
+        ?compute_types: Array[String],
+        ?compatibilities: Array[Types::Compatibility],
+        ?requires_configuration: bool,
+        ?requires_iam_permissions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_version: String?
+      attr_accessor architecture: Array[String]?
+      attr_accessor compute_types: Array[String]?
+      attr_accessor compatibilities: Array[Types::Compatibility]?
+      attr_accessor requires_configuration: bool?
+      attr_accessor requires_iam_permissions: bool?
+    end
+
+    class AssociateAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?policy_arn: String,
+        ?access_scope: Types::AccessScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor policy_arn: String?
+      attr_accessor access_scope: Types::AccessScope?
+    end
+
+    class AssociateAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?associated_access_policy: Types::AssociatedAccessPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor associated_access_policy: Types::AssociatedAccessPolicy?
+    end
+
+    class AssociateEncryptionConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?encryption_config: Array[Types::EncryptionConfig],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor encryption_config: Array[Types::EncryptionConfig]?
+      attr_accessor client_request_token: String?
+    end
+
+    class AssociateEncryptionConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class AssociateIdentityProviderConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?oidc: Types::OidcIdentityProviderConfigRequest,
+        ?tags: Hash[String, String],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor oidc: Types::OidcIdentityProviderConfigRequest?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_request_token: String?
+    end
+
+    class AssociateIdentityProviderConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AssociatedAccessPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?access_scope: Types::AccessScope,
+        ?associated_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor access_scope: Types::AccessScope?
+      attr_accessor associated_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    module AuthenticationMode
+      API: String
+      API_AND_CONFIG_MAP: String
+      CONFIG_MAP: String
+    end
+
+    class AutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlockStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    module CapacityTypes
+      ON_DEMAND: String
+      SPOT: String
+      CAPACITY_BLOCK: String
+    end
+
+    module Category
+      UPGRADE_READINESS: String
+      MISCONFIGURATION: String
+    end
+
+    class Certificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+    end
+
+    class ClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class ClientStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_agent: String,
+        ?number_of_requests_last30_days: Integer,
+        ?last_request_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_agent: String?
+      attr_accessor number_of_requests_last30_days: Integer?
+      attr_accessor last_request_time: Time?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?version: String,
+        ?endpoint: String,
+        ?role_arn: String,
+        ?resources_vpc_config: Types::VpcConfigResponse,
+        ?kubernetes_network_config: Types::KubernetesNetworkConfigResponse,
+        ?logging: Types::Logging,
+        ?identity: Types::Identity,
+        ?status: String,
+        ?certificate_authority: Types::Certificate,
+        ?client_request_token: String,
+        ?platform_version: String,
+        ?tags: Hash[String, String],
+        ?encryption_config: Array[Types::EncryptionConfig],
+        ?connector_config: Types::ConnectorConfigResponse,
+        ?id: String,
+        ?health: Types::ClusterHealth,
+        ?outpost_config: Types::OutpostConfigResponse,
+        ?access_config: Types::AccessConfigResponse,
+        ?upgrade_policy: Types::UpgradePolicyResponse,
+        ?zonal_shift_config: Types::ZonalShiftConfigResponse,
+        ?remote_network_config: Types::RemoteNetworkConfigResponse,
+        ?compute_config: Types::ComputeConfigResponse,
+        ?storage_config: Types::StorageConfigResponse,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor version: String?
+      attr_accessor endpoint: String?
+      attr_accessor role_arn: String?
+      attr_accessor resources_vpc_config: Types::VpcConfigResponse?
+      attr_accessor kubernetes_network_config: Types::KubernetesNetworkConfigResponse?
+      attr_accessor logging: Types::Logging?
+      attr_accessor identity: Types::Identity?
+      attr_accessor status: String?
+      attr_accessor certificate_authority: Types::Certificate?
+      attr_accessor client_request_token: String?
+      attr_accessor platform_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor encryption_config: Array[Types::EncryptionConfig]?
+      attr_accessor connector_config: Types::ConnectorConfigResponse?
+      attr_accessor id: String?
+      attr_accessor health: Types::ClusterHealth?
+      attr_accessor outpost_config: Types::OutpostConfigResponse?
+      attr_accessor access_config: Types::AccessConfigResponse?
+      attr_accessor upgrade_policy: Types::UpgradePolicyResponse?
+      attr_accessor zonal_shift_config: Types::ZonalShiftConfigResponse?
+      attr_accessor remote_network_config: Types::RemoteNetworkConfigResponse?
+      attr_accessor compute_config: Types::ComputeConfigResponse?
+      attr_accessor storage_config: Types::StorageConfigResponse?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class ClusterHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issues: Array[Types::ClusterIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Array[Types::ClusterIssue]?
+    end
+
+    class ClusterIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    module ClusterIssueCode
+      ACCESS_DENIED: String
+      CLUSTER_UNREACHABLE: String
+      CONFIGURATION_CONFLICT: String
+      INTERNAL_FAILURE: String
+      RESOURCE_LIMIT_EXCEEDED: String
+      RESOURCE_NOT_FOUND: String
+      IAM_ROLE_NOT_FOUND: String
+      VPC_NOT_FOUND: String
+      INSUFFICIENT_FREE_ADDRESSES: String
+      EC2_SERVICE_NOT_SUBSCRIBED: String
+      EC2_SUBNET_NOT_FOUND: String
+      EC2_SECURITY_GROUP_NOT_FOUND: String
+      KMS_GRANT_REVOKED: String
+      KMS_KEY_NOT_FOUND: String
+      KMS_KEY_MARKED_FOR_DELETION: String
+      KMS_KEY_DISABLED: String
+      STS_REGIONAL_ENDPOINT_DISABLED: String
+      UNSUPPORTED_VERSION: String
+      OTHER: String
+    end
+
+    module ClusterStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+      UPDATING: String
+      PENDING: String
+    end
+
+    class ClusterVersionInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_version: String,
+        ?cluster_type: String,
+        ?default_platform_version: String,
+        ?default_version: bool,
+        ?release_date: Time,
+        ?end_of_standard_support_date: Time,
+        ?end_of_extended_support_date: Time,
+        ?status: String,
+        ?version_status: String,
+        ?kubernetes_patch_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_version: String?
+      attr_accessor cluster_type: String?
+      attr_accessor default_platform_version: String?
+      attr_accessor default_version: bool?
+      attr_accessor release_date: Time?
+      attr_accessor end_of_standard_support_date: Time?
+      attr_accessor end_of_extended_support_date: Time?
+      attr_accessor status: String?
+      attr_accessor version_status: String?
+      attr_accessor kubernetes_patch_version: String?
+    end
+
+    module ClusterVersionStatus
+      unsupported: String
+      standard_support: String
+      extended_support: String
+    end
+
+    class Compatibility
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_version: String,
+        ?platform_versions: Array[String],
+        ?default_version: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_version: String?
+      attr_accessor platform_versions: Array[String]?
+      attr_accessor default_version: bool?
+    end
+
+    class ComputeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?node_pools: Array[String],
+        ?node_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor node_pools: Array[String]?
+      attr_accessor node_role_arn: String?
+    end
+
+    class ComputeConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?node_pools: Array[String],
+        ?node_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor node_pools: Array[String]?
+      attr_accessor node_role_arn: String?
+    end
+
+    module ConnectorConfigProvider
+      EKS_ANYWHERE: String
+      ANTHOS: String
+      GKE: String
+      AKS: String
+      OPENSHIFT: String
+      TANZU: String
+      RANCHER: String
+      EC2: String
+      OTHER: String
+    end
+
+    class ConnectorConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor provider: String?
+    end
+
+    class ConnectorConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_id: String,
+        ?activation_code: String,
+        ?activation_expiry: Time,
+        ?provider: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_id: String?
+      attr_accessor activation_code: String?
+      attr_accessor activation_expiry: Time?
+      attr_accessor provider: String?
+      attr_accessor role_arn: String?
+    end
+
+    class ControlPlanePlacementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+    end
+
+    class ControlPlanePlacementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+    end
+
+    class CreateAccessConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bootstrap_cluster_creator_admin_permissions: bool,
+        ?authentication_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bootstrap_cluster_creator_admin_permissions: bool?
+      attr_accessor authentication_mode: String?
+    end
+
+    class CreateAccessEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?kubernetes_groups: Array[String],
+        ?tags: Hash[String, String],
+        ?client_request_token: String,
+        ?username: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor kubernetes_groups: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_request_token: String?
+      attr_accessor username: String?
+      attr_accessor type: String?
+    end
+
+    class CreateAccessEntryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_entry: Types::AccessEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_entry: Types::AccessEntry?
+    end
+
+    class CreateAddonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?addon_name: String,
+        ?addon_version: String,
+        ?service_account_role_arn: String,
+        ?resolve_conflicts: String,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+        ?configuration_values: String,
+        ?pod_identity_associations: Array[Types::AddonPodIdentityAssociations],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor addon_version: String?
+      attr_accessor service_account_role_arn: String?
+      attr_accessor resolve_conflicts: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor configuration_values: String?
+      attr_accessor pod_identity_associations: Array[Types::AddonPodIdentityAssociations]?
+    end
+
+    class CreateAddonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon: Types::Addon,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon: Types::Addon?
+    end
+
+    class CreateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?role_arn: String,
+        ?resources_vpc_config: Types::VpcConfigRequest,
+        ?kubernetes_network_config: Types::KubernetesNetworkConfigRequest,
+        ?logging: Types::Logging,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+        ?encryption_config: Array[Types::EncryptionConfig],
+        ?outpost_config: Types::OutpostConfigRequest,
+        ?access_config: Types::CreateAccessConfigRequest,
+        ?bootstrap_self_managed_addons: bool,
+        ?upgrade_policy: Types::UpgradePolicyRequest,
+        ?zonal_shift_config: Types::ZonalShiftConfigRequest,
+        ?remote_network_config: Types::RemoteNetworkConfigRequest,
+        ?compute_config: Types::ComputeConfigRequest,
+        ?storage_config: Types::StorageConfigRequest,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor role_arn: String?
+      attr_accessor resources_vpc_config: Types::VpcConfigRequest?
+      attr_accessor kubernetes_network_config: Types::KubernetesNetworkConfigRequest?
+      attr_accessor logging: Types::Logging?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor encryption_config: Array[Types::EncryptionConfig]?
+      attr_accessor outpost_config: Types::OutpostConfigRequest?
+      attr_accessor access_config: Types::CreateAccessConfigRequest?
+      attr_accessor bootstrap_self_managed_addons: bool?
+      attr_accessor upgrade_policy: Types::UpgradePolicyRequest?
+      attr_accessor zonal_shift_config: Types::ZonalShiftConfigRequest?
+      attr_accessor remote_network_config: Types::RemoteNetworkConfigRequest?
+      attr_accessor compute_config: Types::ComputeConfigRequest?
+      attr_accessor storage_config: Types::StorageConfigRequest?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class CreateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateEksAnywhereSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?term: Types::EksAnywhereSubscriptionTerm,
+        ?license_quantity: Integer,
+        ?license_type: String,
+        ?auto_renew: bool,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor term: Types::EksAnywhereSubscriptionTerm?
+      attr_accessor license_quantity: Integer?
+      attr_accessor license_type: String?
+      attr_accessor auto_renew: bool?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEksAnywhereSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::EksAnywhereSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::EksAnywhereSubscription?
+    end
+
+    class CreateFargateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile_name: String,
+        ?cluster_name: String,
+        ?pod_execution_role_arn: String,
+        ?subnets: Array[String],
+        ?selectors: Array[Types::FargateProfileSelector],
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile_name: String?
+      attr_accessor cluster_name: String?
+      attr_accessor pod_execution_role_arn: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor selectors: Array[Types::FargateProfileSelector]?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFargateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile: Types::FargateProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile: Types::FargateProfile?
+    end
+
+    class CreateNodegroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?scaling_config: Types::NodegroupScalingConfig,
+        ?disk_size: Integer,
+        ?subnets: Array[String],
+        ?instance_types: Array[String],
+        ?ami_type: String,
+        ?remote_access: Types::RemoteAccessConfig,
+        ?node_role: String,
+        ?labels: Hash[String, String],
+        ?taints: Array[Types::Taint],
+        ?tags: Hash[String, String],
+        ?client_request_token: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?update_config: Types::NodegroupUpdateConfig,
+        ?node_repair_config: Types::NodeRepairConfig,
+        ?capacity_type: String,
+        ?version: String,
+        ?release_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor scaling_config: Types::NodegroupScalingConfig?
+      attr_accessor disk_size: Integer?
+      attr_accessor subnets: Array[String]?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor ami_type: String?
+      attr_accessor remote_access: Types::RemoteAccessConfig?
+      attr_accessor node_role: String?
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor taints: Array[Types::Taint]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_request_token: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor update_config: Types::NodegroupUpdateConfig?
+      attr_accessor node_repair_config: Types::NodeRepairConfig?
+      attr_accessor capacity_type: String?
+      attr_accessor version: String?
+      attr_accessor release_version: String?
+    end
+
+    class CreateNodegroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodegroup: Types::Nodegroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodegroup: Types::Nodegroup?
+    end
+
+    class CreatePodIdentityAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?namespace: String,
+        ?service_account: String,
+        ?role_arn: String,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+        ?disable_session_tags: bool,
+        ?target_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor namespace: String?
+      attr_accessor service_account: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor disable_session_tags: bool?
+      attr_accessor target_role_arn: String?
+    end
+
+    class CreatePodIdentityAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::PodIdentityAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::PodIdentityAssociation?
+    end
+
+    class DeleteAccessEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+    end
+
+    class DeleteAccessEntryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAddonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?addon_name: String,
+        ?preserve: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor preserve: bool?
+    end
+
+    class DeleteAddonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon: Types::Addon,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon: Types::Addon?
+    end
+
+    class DeleteClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DeleteEksAnywhereSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteEksAnywhereSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::EksAnywhereSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::EksAnywhereSubscription?
+    end
+
+    class DeleteFargateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?fargate_profile_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor fargate_profile_name: String?
+    end
+
+    class DeleteFargateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile: Types::FargateProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile: Types::FargateProfile?
+    end
+
+    class DeleteNodegroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+    end
+
+    class DeleteNodegroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodegroup: Types::Nodegroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodegroup: Types::Nodegroup?
+    end
+
+    class DeletePodIdentityAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor association_id: String?
+    end
+
+    class DeletePodIdentityAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::PodIdentityAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::PodIdentityAssociation?
+    end
+
+    class DeprecationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage: String,
+        ?replaced_with: String,
+        ?stop_serving_version: String,
+        ?start_serving_replacement_version: String,
+        ?client_stats: Array[Types::ClientStat],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage: String?
+      attr_accessor replaced_with: String?
+      attr_accessor stop_serving_version: String?
+      attr_accessor start_serving_replacement_version: String?
+      attr_accessor client_stats: Array[Types::ClientStat]?
+    end
+
+    class DeregisterClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeregisterClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DescribeAccessEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+    end
+
+    class DescribeAccessEntryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_entry: Types::AccessEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_entry: Types::AccessEntry?
+    end
+
+    class DescribeAddonConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_name: String,
+        ?addon_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_name: String?
+      attr_accessor addon_version: String?
+    end
+
+    class DescribeAddonConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_name: String,
+        ?addon_version: String,
+        ?configuration_schema: String,
+        ?pod_identity_configuration: Array[Types::AddonPodIdentityConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_name: String?
+      attr_accessor addon_version: String?
+      attr_accessor configuration_schema: String?
+      attr_accessor pod_identity_configuration: Array[Types::AddonPodIdentityConfiguration]?
+    end
+
+    class DescribeAddonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?addon_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor addon_name: String?
+    end
+
+    class DescribeAddonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon: Types::Addon,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon: Types::Addon?
+    end
+
+    class DescribeAddonVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kubernetes_version: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?addon_name: String,
+        ?types: Array[String],
+        ?publishers: Array[String],
+        ?owners: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kubernetes_version: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor addon_name: String?
+      attr_accessor types: Array[String]?
+      attr_accessor publishers: Array[String]?
+      attr_accessor owners: Array[String]?
+    end
+
+    class DescribeAddonVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addons: Array[Types::AddonInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addons: Array[Types::AddonInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DescribeClusterVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?default_only: bool,
+        ?include_all: bool,
+        ?cluster_versions: Array[String],
+        ?status: String,
+        ?version_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor default_only: bool?
+      attr_accessor include_all: bool?
+      attr_accessor cluster_versions: Array[String]?
+      attr_accessor status: String?
+      attr_accessor version_status: String?
+    end
+
+    class DescribeClusterVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cluster_versions: Array[Types::ClusterVersionInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cluster_versions: Array[Types::ClusterVersionInformation]?
+    end
+
+    class DescribeEksAnywhereSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeEksAnywhereSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::EksAnywhereSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::EksAnywhereSubscription?
+    end
+
+    class DescribeFargateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?fargate_profile_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor fargate_profile_name: String?
+    end
+
+    class DescribeFargateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile: Types::FargateProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile: Types::FargateProfile?
+    end
+
+    class DescribeIdentityProviderConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?identity_provider_config: Types::IdentityProviderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor identity_provider_config: Types::IdentityProviderConfig?
+    end
+
+    class DescribeIdentityProviderConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_config: Types::IdentityProviderConfigResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_config: Types::IdentityProviderConfigResponse?
+    end
+
+    class DescribeInsightRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeInsightResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight: Types::Insight,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight: Types::Insight?
+    end
+
+    class DescribeNodegroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+    end
+
+    class DescribeNodegroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodegroup: Types::Nodegroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodegroup: Types::Nodegroup?
+    end
+
+    class DescribePodIdentityAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor association_id: String?
+    end
+
+    class DescribePodIdentityAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::PodIdentityAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::PodIdentityAssociation?
+    end
+
+    class DescribeUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?update_id: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor update_id: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+    end
+
+    class DescribeUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class DisassociateAccessPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor policy_arn: String?
+    end
+
+    class DisassociateAccessPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateIdentityProviderConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?identity_provider_config: Types::IdentityProviderConfig,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor identity_provider_config: Types::IdentityProviderConfig?
+      attr_accessor client_request_token: String?
+    end
+
+    class DisassociateIdentityProviderConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class EksAnywhereSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?effective_date: Time,
+        ?expiration_date: Time,
+        ?license_quantity: Integer,
+        ?license_type: String,
+        ?term: Types::EksAnywhereSubscriptionTerm,
+        ?status: String,
+        ?auto_renew: bool,
+        ?license_arns: Array[String],
+        ?licenses: Array[Types::License],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor effective_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor license_quantity: Integer?
+      attr_accessor license_type: String?
+      attr_accessor term: Types::EksAnywhereSubscriptionTerm?
+      attr_accessor status: String?
+      attr_accessor auto_renew: bool?
+      attr_accessor license_arns: Array[String]?
+      attr_accessor licenses: Array[Types::License]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module EksAnywhereSubscriptionLicenseType
+      Cluster: String
+    end
+
+    module EksAnywhereSubscriptionStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      EXPIRING: String
+      EXPIRED: String
+      DELETING: String
+    end
+
+    class EksAnywhereSubscriptionTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor unit: String?
+    end
+
+    module EksAnywhereSubscriptionTermUnit
+      MONTHS: String
+    end
+
+    class ElasticLoadBalancing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[String],
+        ?provider: Types::Provider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[String]?
+      attr_accessor provider: Types::Provider?
+    end
+
+    module ErrorCode
+      SUBNET_NOT_FOUND: String
+      SECURITY_GROUP_NOT_FOUND: String
+      ENI_LIMIT_REACHED: String
+      IP_NOT_AVAILABLE: String
+      ACCESS_DENIED: String
+      OPERATION_NOT_PERMITTED: String
+      VPC_ID_NOT_FOUND: String
+      UNKNOWN: String
+      NODE_CREATION_FAILURE: String
+      POD_EVICTION_FAILURE: String
+      INSUFFICIENT_FREE_ADDRESSES: String
+      CLUSTER_UNREACHABLE: String
+      INSUFFICIENT_NUMBER_OF_REPLICAS: String
+      CONFIGURATION_CONFLICT: String
+      ADMISSION_REQUEST_DENIED: String
+      UNSUPPORTED_ADDON_MODIFICATION: String
+      K8S_RESOURCE_NOT_FOUND: String
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    class FargateProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile_name: String,
+        ?fargate_profile_arn: String,
+        ?cluster_name: String,
+        ?created_at: Time,
+        ?pod_execution_role_arn: String,
+        ?subnets: Array[String],
+        ?selectors: Array[Types::FargateProfileSelector],
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?health: Types::FargateProfileHealth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile_name: String?
+      attr_accessor fargate_profile_arn: String?
+      attr_accessor cluster_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor pod_execution_role_arn: String?
+      attr_accessor subnets: Array[String]?
+      attr_accessor selectors: Array[Types::FargateProfileSelector]?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor health: Types::FargateProfileHealth?
+    end
+
+    class FargateProfileHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issues: Array[Types::FargateProfileIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Array[Types::FargateProfileIssue]?
+    end
+
+    class FargateProfileIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    module FargateProfileIssueCode
+      POD_EXECUTION_ROLE_ALREADY_IN_USE: String
+      ACCESS_DENIED: String
+      CLUSTER_UNREACHABLE: String
+      INTERNAL_FAILURE: String
+    end
+
+    class FargateProfileSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?labels: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor labels: Hash[String, String]?
+    end
+
+    module FargateProfileStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oidc: Types::OIDC,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oidc: Types::OIDC?
+    end
+
+    class IdentityProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+    end
+
+    class IdentityProviderConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oidc: Types::OidcIdentityProviderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oidc: Types::OidcIdentityProviderConfig?
+    end
+
+    class Insight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?category: String,
+        ?kubernetes_version: String,
+        ?last_refresh_time: Time,
+        ?last_transition_time: Time,
+        ?description: String,
+        ?insight_status: Types::InsightStatus,
+        ?recommendation: String,
+        ?additional_info: Hash[String, String],
+        ?resources: Array[Types::InsightResourceDetail],
+        ?category_specific_summary: Types::InsightCategorySpecificSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor category: String?
+      attr_accessor kubernetes_version: String?
+      attr_accessor last_refresh_time: Time?
+      attr_accessor last_transition_time: Time?
+      attr_accessor description: String?
+      attr_accessor insight_status: Types::InsightStatus?
+      attr_accessor recommendation: String?
+      attr_accessor additional_info: Hash[String, String]?
+      attr_accessor resources: Array[Types::InsightResourceDetail]?
+      attr_accessor category_specific_summary: Types::InsightCategorySpecificSummary?
+    end
+
+    class InsightCategorySpecificSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deprecation_details: Array[Types::DeprecationDetail],
+        ?addon_compatibility_details: Array[Types::AddonCompatibilityDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deprecation_details: Array[Types::DeprecationDetail]?
+      attr_accessor addon_compatibility_details: Array[Types::AddonCompatibilityDetail]?
+    end
+
+    class InsightResourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_status: Types::InsightStatus,
+        ?kubernetes_resource_uri: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_status: Types::InsightStatus?
+      attr_accessor kubernetes_resource_uri: String?
+      attr_accessor arn: String?
+    end
+
+    class InsightStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    module InsightStatusValue
+      PASSING: String
+      WARNING: String
+      ERROR: String
+      UNKNOWN: String
+    end
+
+    class InsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?category: String,
+        ?kubernetes_version: String,
+        ?last_refresh_time: Time,
+        ?last_transition_time: Time,
+        ?description: String,
+        ?insight_status: Types::InsightStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor category: String?
+      attr_accessor kubernetes_version: String?
+      attr_accessor last_refresh_time: Time?
+      attr_accessor last_transition_time: Time?
+      attr_accessor description: String?
+      attr_accessor insight_status: Types::InsightStatus?
+    end
+
+    class InsightsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?categories: Array[String],
+        ?kubernetes_versions: Array[String],
+        ?statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor categories: Array[String]?
+      attr_accessor kubernetes_versions: Array[String]?
+      attr_accessor statuses: Array[String]?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?fargate_profile_name: String,
+        ?addon_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor fargate_profile_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor message: String?
+    end
+
+    module IpFamily
+      IPV4: String
+      IPV6: String
+    end
+
+    class Issue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    class KubernetesNetworkConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_ipv4_cidr: String,
+        ?ip_family: String,
+        ?elastic_load_balancing: Types::ElasticLoadBalancing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_ipv4_cidr: String?
+      attr_accessor ip_family: String?
+      attr_accessor elastic_load_balancing: Types::ElasticLoadBalancing?
+    end
+
+    class KubernetesNetworkConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_ipv4_cidr: String,
+        ?service_ipv6_cidr: String,
+        ?ip_family: String,
+        ?elastic_load_balancing: Types::ElasticLoadBalancing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_ipv4_cidr: String?
+      attr_accessor service_ipv6_cidr: String?
+      attr_accessor ip_family: String?
+      attr_accessor elastic_load_balancing: Types::ElasticLoadBalancing?
+    end
+
+    class LaunchTemplateSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor id: String?
+    end
+
+    class License
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor token: String?
+    end
+
+    class ListAccessEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?associated_policy_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor associated_policy_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccessEntriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_entries: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_entries: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccessPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccessPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_policies: Array[Types::AccessPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_policies: Array[Types::AccessPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAddonsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAddonsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addons: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addons: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedAccessPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedAccessPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?next_token: String,
+        ?associated_access_policies: Array[Types::AssociatedAccessPolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor associated_access_policies: Array[Types::AssociatedAccessPolicy]?
+    end
+
+    class ListClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include: Array[String]?
+    end
+
+    class ListClustersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEksAnywhereSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_status: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_status: Array[String]?
+    end
+
+    class ListEksAnywhereSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::EksAnywhereSubscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::EksAnywhereSubscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFargateProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFargateProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fargate_profile_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fargate_profile_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityProviderConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityProviderConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_configs: Array[Types::IdentityProviderConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_configs: Array[Types::IdentityProviderConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?filter: Types::InsightsFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor filter: Types::InsightsFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights: Array[Types::InsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights: Array[Types::InsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNodegroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNodegroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodegroups: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodegroups: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPodIdentityAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?namespace: String,
+        ?service_account: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor namespace: String?
+      attr_accessor service_account: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPodIdentityAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::PodIdentityAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::PodIdentityAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListUpdatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUpdatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class LogSetup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+      attr_accessor enabled: bool?
+    end
+
+    module LogType
+      API: String
+      AUDIT: String
+      AUTHENTICATOR: String
+      CONTROLLER_MANAGER: String
+      SCHEDULER: String
+    end
+
+    class Logging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_logging: Array[Types::LogSetup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_logging: Array[Types::LogSetup]?
+    end
+
+    class MarketplaceInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?product_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor product_url: String?
+    end
+
+    class NodeRepairConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class Nodegroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodegroup_name: String,
+        ?nodegroup_arn: String,
+        ?cluster_name: String,
+        ?version: String,
+        ?release_version: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?status: String,
+        ?capacity_type: String,
+        ?scaling_config: Types::NodegroupScalingConfig,
+        ?instance_types: Array[String],
+        ?subnets: Array[String],
+        ?remote_access: Types::RemoteAccessConfig,
+        ?ami_type: String,
+        ?node_role: String,
+        ?labels: Hash[String, String],
+        ?taints: Array[Types::Taint],
+        ?resources: Types::NodegroupResources,
+        ?disk_size: Integer,
+        ?health: Types::NodegroupHealth,
+        ?update_config: Types::NodegroupUpdateConfig,
+        ?node_repair_config: Types::NodeRepairConfig,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodegroup_name: String?
+      attr_accessor nodegroup_arn: String?
+      attr_accessor cluster_name: String?
+      attr_accessor version: String?
+      attr_accessor release_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor capacity_type: String?
+      attr_accessor scaling_config: Types::NodegroupScalingConfig?
+      attr_accessor instance_types: Array[String]?
+      attr_accessor subnets: Array[String]?
+      attr_accessor remote_access: Types::RemoteAccessConfig?
+      attr_accessor ami_type: String?
+      attr_accessor node_role: String?
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor taints: Array[Types::Taint]?
+      attr_accessor resources: Types::NodegroupResources?
+      attr_accessor disk_size: Integer?
+      attr_accessor health: Types::NodegroupHealth?
+      attr_accessor update_config: Types::NodegroupUpdateConfig?
+      attr_accessor node_repair_config: Types::NodeRepairConfig?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NodegroupHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issues: Array[Types::Issue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Array[Types::Issue]?
+    end
+
+    module NodegroupIssueCode
+      AUTO_SCALING_GROUP_NOT_FOUND: String
+      AUTO_SCALING_GROUP_INVALID_CONFIGURATION: String
+      EC2_SECURITY_GROUP_NOT_FOUND: String
+      EC2_SECURITY_GROUP_DELETION_FAILURE: String
+      EC2_LAUNCH_TEMPLATE_NOT_FOUND: String
+      EC2_LAUNCH_TEMPLATE_VERSION_MISMATCH: String
+      EC2_SUBNET_NOT_FOUND: String
+      EC2_SUBNET_INVALID_CONFIGURATION: String
+      IAM_INSTANCE_PROFILE_NOT_FOUND: String
+      EC2_SUBNET_MISSING_IPV6_ASSIGNMENT: String
+      IAM_LIMIT_EXCEEDED: String
+      IAM_NODE_ROLE_NOT_FOUND: String
+      NODE_CREATION_FAILURE: String
+      ASG_INSTANCE_LAUNCH_FAILURES: String
+      INSTANCE_LIMIT_EXCEEDED: String
+      INSUFFICIENT_FREE_ADDRESSES: String
+      ACCESS_DENIED: String
+      INTERNAL_FAILURE: String
+      CLUSTER_UNREACHABLE: String
+      AMI_ID_NOT_FOUND: String
+      AUTO_SCALING_GROUP_OPT_IN_REQUIRED: String
+      AUTO_SCALING_GROUP_RATE_LIMIT_EXCEEDED: String
+      EC2_LAUNCH_TEMPLATE_DELETION_FAILURE: String
+      EC2_LAUNCH_TEMPLATE_INVALID_CONFIGURATION: String
+      EC2_LAUNCH_TEMPLATE_MAX_LIMIT_EXCEEDED: String
+      EC2_SUBNET_LIST_TOO_LONG: String
+      IAM_THROTTLING: String
+      NODE_TERMINATION_FAILURE: String
+      POD_EVICTION_FAILURE: String
+      SOURCE_EC2_LAUNCH_TEMPLATE_NOT_FOUND: String
+      LIMIT_EXCEEDED: String
+      UNKNOWN: String
+      AUTO_SCALING_GROUP_INSTANCE_REFRESH_ACTIVE: String
+      KUBERNETES_LABEL_INVALID: String
+      EC2_LAUNCH_TEMPLATE_VERSION_MAX_LIMIT_EXCEEDED: String
+      EC2_INSTANCE_TYPE_DOES_NOT_EXIST: String
+    end
+
+    class NodegroupResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_groups: Array[Types::AutoScalingGroup],
+        ?remote_access_security_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_groups: Array[Types::AutoScalingGroup]?
+      attr_accessor remote_access_security_group: String?
+    end
+
+    class NodegroupScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_size: Integer?
+    end
+
+    module NodegroupStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+      DEGRADED: String
+    end
+
+    class NodegroupUpdateConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_unavailable: Integer,
+        ?max_unavailable_percentage: Integer,
+        ?update_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_unavailable: Integer?
+      attr_accessor max_unavailable_percentage: Integer?
+      attr_accessor update_strategy: String?
+    end
+
+    module NodegroupUpdateStrategies
+      DEFAULT: String
+      MINIMAL: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OIDC
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+    end
+
+    class OidcIdentityProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_config_name: String,
+        ?identity_provider_config_arn: String,
+        ?cluster_name: String,
+        ?issuer_url: String,
+        ?client_id: String,
+        ?username_claim: String,
+        ?username_prefix: String,
+        ?groups_claim: String,
+        ?groups_prefix: String,
+        ?required_claims: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_config_name: String?
+      attr_accessor identity_provider_config_arn: String?
+      attr_accessor cluster_name: String?
+      attr_accessor issuer_url: String?
+      attr_accessor client_id: String?
+      attr_accessor username_claim: String?
+      attr_accessor username_prefix: String?
+      attr_accessor groups_claim: String?
+      attr_accessor groups_prefix: String?
+      attr_accessor required_claims: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor status: String?
+    end
+
+    class OidcIdentityProviderConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_config_name: String,
+        ?issuer_url: String,
+        ?client_id: String,
+        ?username_claim: String,
+        ?username_prefix: String,
+        ?groups_claim: String,
+        ?groups_prefix: String,
+        ?required_claims: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_config_name: String?
+      attr_accessor issuer_url: String?
+      attr_accessor client_id: String?
+      attr_accessor username_claim: String?
+      attr_accessor username_prefix: String?
+      attr_accessor groups_claim: String?
+      attr_accessor groups_prefix: String?
+      attr_accessor required_claims: Hash[String, String]?
+    end
+
+    class OutpostConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_arns: Array[String],
+        ?control_plane_instance_type: String,
+        ?control_plane_placement: Types::ControlPlanePlacementRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_arns: Array[String]?
+      attr_accessor control_plane_instance_type: String?
+      attr_accessor control_plane_placement: Types::ControlPlanePlacementRequest?
+    end
+
+    class OutpostConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_arns: Array[String],
+        ?control_plane_instance_type: String,
+        ?control_plane_placement: Types::ControlPlanePlacementResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_arns: Array[String]?
+      attr_accessor control_plane_instance_type: String?
+      attr_accessor control_plane_placement: Types::ControlPlanePlacementResponse?
+    end
+
+    class PodIdentityAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?namespace: String,
+        ?service_account: String,
+        ?role_arn: String,
+        ?association_arn: String,
+        ?association_id: String,
+        ?tags: Hash[String, String],
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?owner_arn: String,
+        ?disable_session_tags: bool,
+        ?target_role_arn: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor namespace: String?
+      attr_accessor service_account: String?
+      attr_accessor role_arn: String?
+      attr_accessor association_arn: String?
+      attr_accessor association_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor owner_arn: String?
+      attr_accessor disable_session_tags: bool?
+      attr_accessor target_role_arn: String?
+      attr_accessor external_id: String?
+    end
+
+    class PodIdentityAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?namespace: String,
+        ?service_account: String,
+        ?association_arn: String,
+        ?association_id: String,
+        ?owner_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor namespace: String?
+      attr_accessor service_account: String?
+      attr_accessor association_arn: String?
+      attr_accessor association_id: String?
+      attr_accessor owner_arn: String?
+    end
+
+    class Provider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+    end
+
+    class RegisterClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?connector_config: Types::ConnectorConfigRequest,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor connector_config: Types::ConnectorConfigRequest?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class RemoteAccessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_ssh_key: String,
+        ?source_security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_ssh_key: String?
+      attr_accessor source_security_groups: Array[String]?
+    end
+
+    class RemoteNetworkConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remote_node_networks: Array[Types::RemoteNodeNetwork],
+        ?remote_pod_networks: Array[Types::RemotePodNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remote_node_networks: Array[Types::RemoteNodeNetwork]?
+      attr_accessor remote_pod_networks: Array[Types::RemotePodNetwork]?
+    end
+
+    class RemoteNetworkConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remote_node_networks: Array[Types::RemoteNodeNetwork],
+        ?remote_pod_networks: Array[Types::RemotePodNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remote_node_networks: Array[Types::RemoteNodeNetwork]?
+      attr_accessor remote_pod_networks: Array[Types::RemotePodNetwork]?
+    end
+
+    class RemoteNodeNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidrs: Array[String]?
+    end
+
+    class RemotePodNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidrs: Array[String]?
+    end
+
+    module ResolveConflicts
+      OVERWRITE: String
+      NONE: String
+      PRESERVE: String
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?fargate_profile_name: String,
+        ?addon_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor fargate_profile_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class ResourcePropagationDelayException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?addon_name: String,
+        ?subscription_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor subscription_id: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StorageConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_storage: Types::BlockStorage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_storage: Types::BlockStorage?
+    end
+
+    class StorageConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_storage: Types::BlockStorage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_storage: Types::BlockStorage?
+    end
+
+    module SupportType
+      STANDARD: String
+      EXTENDED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Taint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor effect: String?
+    end
+
+    module TaintEffect
+      NO_SCHEDULE: String
+      NO_EXECUTE: String
+      PREFER_NO_SCHEDULE: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor message: String?
+    end
+
+    class UnsupportedAvailabilityZoneException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?valid_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor valid_zones: Array[String]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Update
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?type: String,
+        ?params: Array[Types::UpdateParam],
+        ?created_at: Time,
+        ?errors: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor params: Array[Types::UpdateParam]?
+      attr_accessor created_at: Time?
+      attr_accessor errors: Array[Types::ErrorDetail]?
+    end
+
+    class UpdateAccessConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_mode: String?
+    end
+
+    class UpdateAccessEntryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?principal_arn: String,
+        ?kubernetes_groups: Array[String],
+        ?client_request_token: String,
+        ?username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor principal_arn: String?
+      attr_accessor kubernetes_groups: Array[String]?
+      attr_accessor client_request_token: String?
+      attr_accessor username: String?
+    end
+
+    class UpdateAccessEntryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_entry: Types::AccessEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_entry: Types::AccessEntry?
+    end
+
+    class UpdateAddonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?addon_name: String,
+        ?addon_version: String,
+        ?service_account_role_arn: String,
+        ?resolve_conflicts: String,
+        ?client_request_token: String,
+        ?configuration_values: String,
+        ?pod_identity_associations: Array[Types::AddonPodIdentityAssociations],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor addon_name: String?
+      attr_accessor addon_version: String?
+      attr_accessor service_account_role_arn: String?
+      attr_accessor resolve_conflicts: String?
+      attr_accessor client_request_token: String?
+      attr_accessor configuration_values: String?
+      attr_accessor pod_identity_associations: Array[Types::AddonPodIdentityAssociations]?
+    end
+
+    class UpdateAddonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class UpdateClusterConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resources_vpc_config: Types::VpcConfigRequest,
+        ?logging: Types::Logging,
+        ?client_request_token: String,
+        ?access_config: Types::UpdateAccessConfigRequest,
+        ?upgrade_policy: Types::UpgradePolicyRequest,
+        ?zonal_shift_config: Types::ZonalShiftConfigRequest,
+        ?compute_config: Types::ComputeConfigRequest,
+        ?kubernetes_network_config: Types::KubernetesNetworkConfigRequest,
+        ?storage_config: Types::StorageConfigRequest,
+        ?remote_network_config: Types::RemoteNetworkConfigRequest,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resources_vpc_config: Types::VpcConfigRequest?
+      attr_accessor logging: Types::Logging?
+      attr_accessor client_request_token: String?
+      attr_accessor access_config: Types::UpdateAccessConfigRequest?
+      attr_accessor upgrade_policy: Types::UpgradePolicyRequest?
+      attr_accessor zonal_shift_config: Types::ZonalShiftConfigRequest?
+      attr_accessor compute_config: Types::ComputeConfigRequest?
+      attr_accessor kubernetes_network_config: Types::KubernetesNetworkConfigRequest?
+      attr_accessor storage_config: Types::StorageConfigRequest?
+      attr_accessor remote_network_config: Types::RemoteNetworkConfigRequest?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class UpdateClusterConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class UpdateClusterVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+        ?client_request_token: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor client_request_token: String?
+      attr_accessor force: bool?
+    end
+
+    class UpdateClusterVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class UpdateEksAnywhereSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?auto_renew: bool,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor auto_renew: bool?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpdateEksAnywhereSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::EksAnywhereSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::EksAnywhereSubscription?
+    end
+
+    class UpdateLabelsPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_or_update_labels: Hash[String, String],
+        ?remove_labels: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_or_update_labels: Hash[String, String]?
+      attr_accessor remove_labels: Array[String]?
+    end
+
+    class UpdateNodegroupConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?labels: Types::UpdateLabelsPayload,
+        ?taints: Types::UpdateTaintsPayload,
+        ?scaling_config: Types::NodegroupScalingConfig,
+        ?update_config: Types::NodegroupUpdateConfig,
+        ?node_repair_config: Types::NodeRepairConfig,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor labels: Types::UpdateLabelsPayload?
+      attr_accessor taints: Types::UpdateTaintsPayload?
+      attr_accessor scaling_config: Types::NodegroupScalingConfig?
+      attr_accessor update_config: Types::NodegroupUpdateConfig?
+      attr_accessor node_repair_config: Types::NodeRepairConfig?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpdateNodegroupConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class UpdateNodegroupVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?nodegroup_name: String,
+        ?version: String,
+        ?release_version: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?force: bool,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor nodegroup_name: String?
+      attr_accessor version: String?
+      attr_accessor release_version: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor force: bool?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpdateNodegroupVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class UpdateParam
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module UpdateParamType
+      VERSION: String
+      PLATFORM_VERSION: String
+      ENDPOINT_PRIVATE_ACCESS: String
+      ENDPOINT_PUBLIC_ACCESS: String
+      CLUSTER_LOGGING: String
+      DESIRED_SIZE: String
+      LABELS_TO_ADD: String
+      LABELS_TO_REMOVE: String
+      TAINTS_TO_ADD: String
+      TAINTS_TO_REMOVE: String
+      MAX_SIZE: String
+      MIN_SIZE: String
+      RELEASE_VERSION: String
+      PUBLIC_ACCESS_CIDRS: String
+      LAUNCH_TEMPLATE_NAME: String
+      LAUNCH_TEMPLATE_VERSION: String
+      IDENTITY_PROVIDER_CONFIG: String
+      ENCRYPTION_CONFIG: String
+      ADDON_VERSION: String
+      SERVICE_ACCOUNT_ROLE_ARN: String
+      RESOLVE_CONFLICTS: String
+      MAX_UNAVAILABLE: String
+      MAX_UNAVAILABLE_PERCENTAGE: String
+      NODE_REPAIR_ENABLED: String
+      UPDATE_STRATEGY: String
+      CONFIGURATION_VALUES: String
+      SECURITY_GROUPS: String
+      SUBNETS: String
+      AUTHENTICATION_MODE: String
+      POD_IDENTITY_ASSOCIATIONS: String
+      UPGRADE_POLICY: String
+      ZONAL_SHIFT_CONFIG: String
+      COMPUTE_CONFIG: String
+      STORAGE_CONFIG: String
+      KUBERNETES_NETWORK_CONFIG: String
+      REMOTE_NETWORK_CONFIG: String
+      DELETION_PROTECTION: String
+    end
+
+    class UpdatePodIdentityAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?association_id: String,
+        ?role_arn: String,
+        ?client_request_token: String,
+        ?disable_session_tags: bool,
+        ?target_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor association_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor client_request_token: String?
+      attr_accessor disable_session_tags: bool?
+      attr_accessor target_role_arn: String?
+    end
+
+    class UpdatePodIdentityAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::PodIdentityAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::PodIdentityAssociation?
+    end
+
+    module UpdateStatus
+      IN_PROGRESS: String
+      FAILED: String
+      CANCELLED: String
+      SUCCESSFUL: String
+    end
+
+    class UpdateTaintsPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_or_update_taints: Array[Types::Taint],
+        ?remove_taints: Array[Types::Taint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_or_update_taints: Array[Types::Taint]?
+      attr_accessor remove_taints: Array[Types::Taint]?
+    end
+
+    module UpdateType
+      VERSION_UPDATE: String
+      ENDPOINT_ACCESS_UPDATE: String
+      LOGGING_UPDATE: String
+      CONFIG_UPDATE: String
+      ASSOCIATE_IDENTITY_PROVIDER_CONFIG: String
+      DISASSOCIATE_IDENTITY_PROVIDER_CONFIG: String
+      ASSOCIATE_ENCRYPTION_CONFIG: String
+      ADDON_UPDATE: String
+      VPC_CONFIG_UPDATE: String
+      ACCESS_CONFIG_UPDATE: String
+      UPGRADE_POLICY_UPDATE: String
+      ZONAL_SHIFT_CONFIG_UPDATE: String
+      AUTO_MODE_UPDATE: String
+      REMOTE_NETWORK_CONFIG_UPDATE: String
+      DELETION_PROTECTION_UPDATE: String
+    end
+
+    class UpgradePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_type: String?
+    end
+
+    class UpgradePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_type: String?
+    end
+
+    module VersionStatus
+      UNSUPPORTED: String
+      STANDARD_SUPPORT: String
+      EXTENDED_SUPPORT: String
+    end
+
+    class VpcConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?endpoint_public_access: bool,
+        ?endpoint_private_access: bool,
+        ?public_access_cidrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor endpoint_public_access: bool?
+      attr_accessor endpoint_private_access: bool?
+      attr_accessor public_access_cidrs: Array[String]?
+    end
+
+    class VpcConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?cluster_security_group_id: String,
+        ?vpc_id: String,
+        ?endpoint_public_access: bool,
+        ?endpoint_private_access: bool,
+        ?public_access_cidrs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor cluster_security_group_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor endpoint_public_access: bool?
+      attr_accessor endpoint_private_access: bool?
+      attr_accessor public_access_cidrs: Array[String]?
+    end
+
+    class ZonalShiftConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class ZonalShiftConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    module ConfigStatus
+      CREATING: String
+      DELETING: String
+      ACTIVE: String
+    end
+  end
+end

@@ -1,0 +1,1087 @@
+module Aws::AppIntegrations
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_association_arn: String,
+        ?application_arn: String,
+        ?client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_association_arn: String?
+      attr_accessor application_arn: String?
+      attr_accessor client_id: String?
+    end
+
+    class ApplicationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_handling: Types::ContactHandling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_handling: Types::ContactHandling?
+    end
+
+    class ApplicationSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_url_config: Types::ExternalUrlConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_url_config: Types::ExternalUrlConfig?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?namespace: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?is_service: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor namespace: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor is_service: bool?
+    end
+
+    class ContactHandling
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+    end
+
+    module ContactHandlingScope
+      CROSS_CONTACTS: String
+      PER_CONTACT: String
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?namespace: String,
+        ?description: String,
+        ?application_source_config: Types::ApplicationSourceConfig,
+        ?subscriptions: Array[Types::Subscription],
+        ?publications: Array[Types::Publication],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?permissions: Array[String],
+        ?is_service: bool,
+        ?initialization_timeout: Integer,
+        ?application_config: Types::ApplicationConfig,
+        ?iframe_config: Types::IframeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor namespace: String?
+      attr_accessor description: String?
+      attr_accessor application_source_config: Types::ApplicationSourceConfig?
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor publications: Array[Types::Publication]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor permissions: Array[String]?
+      attr_accessor is_service: bool?
+      attr_accessor initialization_timeout: Integer?
+      attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor iframe_config: Types::IframeConfig?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateDataIntegrationAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_identifier: String,
+        ?client_id: String,
+        ?object_configuration: Hash[String, Hash[String, Array[String]]],
+        ?destination_uri: String,
+        ?client_association_metadata: Hash[String, String],
+        ?client_token: String,
+        ?execution_configuration: Types::ExecutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_identifier: String?
+      attr_accessor client_id: String?
+      attr_accessor object_configuration: Hash[String, Hash[String, Array[String]]]?
+      attr_accessor destination_uri: String?
+      attr_accessor client_association_metadata: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor execution_configuration: Types::ExecutionConfiguration?
+    end
+
+    class CreateDataIntegrationAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_association_id: String,
+        ?data_integration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_association_id: String?
+      attr_accessor data_integration_arn: String?
+    end
+
+    class CreateDataIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?kms_key: String,
+        ?source_uri: String,
+        ?schedule_config: Types::ScheduleConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?file_configuration: Types::FileConfiguration,
+        ?object_configuration: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key: String?
+      attr_accessor source_uri: String?
+      attr_accessor schedule_config: Types::ScheduleConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor file_configuration: Types::FileConfiguration?
+      attr_accessor object_configuration: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class CreateDataIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?kms_key: String,
+        ?source_uri: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?file_configuration: Types::FileConfiguration,
+        ?object_configuration: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key: String?
+      attr_accessor source_uri: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor file_configuration: Types::FileConfiguration?
+      attr_accessor object_configuration: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class CreateEventIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?event_filter: Types::EventFilter,
+        ?event_bridge_bus: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor event_bridge_bus: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEventIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integration_arn: String?
+    end
+
+    class DataIntegrationAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_association_arn: String,
+        ?data_integration_arn: String,
+        ?client_id: String,
+        ?destination_uri: String,
+        ?last_execution_status: Types::LastExecutionStatus,
+        ?execution_configuration: Types::ExecutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_association_arn: String?
+      attr_accessor data_integration_arn: String?
+      attr_accessor client_id: String?
+      attr_accessor destination_uri: String?
+      attr_accessor last_execution_status: Types::LastExecutionStatus?
+      attr_accessor execution_configuration: Types::ExecutionConfiguration?
+    end
+
+    class DataIntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?source_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor source_uri: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_identifier: String?
+    end
+
+    class DeleteDataIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEventIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DuplicateResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EventFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+    end
+
+    class EventIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integration_arn: String,
+        ?name: String,
+        ?description: String,
+        ?event_filter: Types::EventFilter,
+        ?event_bridge_bus: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integration_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor event_bridge_bus: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class EventIntegrationAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integration_association_arn: String,
+        ?event_integration_association_id: String,
+        ?event_integration_name: String,
+        ?client_id: String,
+        ?event_bridge_rule_name: String,
+        ?client_association_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integration_association_arn: String?
+      attr_accessor event_integration_association_id: String?
+      attr_accessor event_integration_name: String?
+      attr_accessor client_id: String?
+      attr_accessor event_bridge_rule_name: String?
+      attr_accessor client_association_metadata: Hash[String, String]?
+    end
+
+    class ExecutionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_mode: String,
+        ?on_demand_configuration: Types::OnDemandConfiguration,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_mode: String?
+      attr_accessor on_demand_configuration: Types::OnDemandConfiguration?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+    end
+
+    module ExecutionMode
+      ON_DEMAND: String
+      SCHEDULED: String
+    end
+
+    module ExecutionStatus
+      COMPLETED: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class ExternalUrlConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_url: String,
+        ?approved_origins: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_url: String?
+      attr_accessor approved_origins: Array[String]?
+    end
+
+    class FileConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?folders: Array[String],
+        ?filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor folders: Array[String]?
+      attr_accessor filters: Hash[String, Array[String]]?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?namespace: String,
+        ?description: String,
+        ?application_source_config: Types::ApplicationSourceConfig,
+        ?subscriptions: Array[Types::Subscription],
+        ?publications: Array[Types::Publication],
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?tags: Hash[String, String],
+        ?permissions: Array[String],
+        ?is_service: bool,
+        ?initialization_timeout: Integer,
+        ?application_config: Types::ApplicationConfig,
+        ?iframe_config: Types::IframeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor namespace: String?
+      attr_accessor description: String?
+      attr_accessor application_source_config: Types::ApplicationSourceConfig?
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor publications: Array[Types::Publication]?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor permissions: Array[String]?
+      attr_accessor is_service: bool?
+      attr_accessor initialization_timeout: Integer?
+      attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor iframe_config: Types::IframeConfig?
+    end
+
+    class GetDataIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetDataIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?kms_key: String,
+        ?source_uri: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?tags: Hash[String, String],
+        ?file_configuration: Types::FileConfiguration,
+        ?object_configuration: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key: String?
+      attr_accessor source_uri: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor file_configuration: Types::FileConfiguration?
+      attr_accessor object_configuration: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class GetEventIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetEventIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?event_integration_arn: String,
+        ?event_bridge_bus: String,
+        ?event_filter: Types::EventFilter,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor event_integration_arn: String?
+      attr_accessor event_bridge_bus: String?
+      attr_accessor event_filter: Types::EventFilter?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class IframeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow: Array[String],
+        ?sandbox: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow: Array[String]?
+      attr_accessor sandbox: Array[String]?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ListApplicationAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_associations: Array[Types::ApplicationAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_associations: Array[Types::ApplicationAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataIntegrationAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataIntegrationAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_associations: Array[Types::DataIntegrationAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_associations: Array[Types::DataIntegrationAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataIntegrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataIntegrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integrations: Array[Types::DataIntegrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integrations: Array[Types::DataIntegrationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventIntegrationAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integration_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integration_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventIntegrationAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integration_associations: Array[Types::EventIntegrationAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integration_associations: Array[Types::EventIntegrationAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventIntegrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventIntegrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_integrations: Array[Types::EventIntegration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_integrations: Array[Types::EventIntegration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class OnDemandConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?end_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+    end
+
+    class Publication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?schema: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor schema: String?
+      attr_accessor description: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_execution_from: String,
+        ?object: String,
+        ?schedule_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_execution_from: String?
+      attr_accessor object: String?
+      attr_accessor schedule_expression: String?
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor description: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?application_source_config: Types::ApplicationSourceConfig,
+        ?subscriptions: Array[Types::Subscription],
+        ?publications: Array[Types::Publication],
+        ?permissions: Array[String],
+        ?is_service: bool,
+        ?initialization_timeout: Integer,
+        ?application_config: Types::ApplicationConfig,
+        ?iframe_config: Types::IframeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor application_source_config: Types::ApplicationSourceConfig?
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor publications: Array[Types::Publication]?
+      attr_accessor permissions: Array[String]?
+      attr_accessor is_service: bool?
+      attr_accessor initialization_timeout: Integer?
+      attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor iframe_config: Types::IframeConfig?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataIntegrationAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_integration_identifier: String,
+        ?data_integration_association_identifier: String,
+        ?execution_configuration: Types::ExecutionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_integration_identifier: String?
+      attr_accessor data_integration_association_identifier: String?
+      attr_accessor execution_configuration: Types::ExecutionConfiguration?
+    end
+
+    class UpdateDataIntegrationAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateDataIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateEventIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

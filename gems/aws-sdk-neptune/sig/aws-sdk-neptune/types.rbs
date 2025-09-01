@@ -1,0 +1,4008 @@
+module Aws::Neptune
+  module Types
+
+    class AddRoleToDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?role_arn: String,
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor feature_name: String?
+    end
+
+    class AddSourceIdentifierToSubscriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+        ?source_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+      attr_accessor source_identifier: String?
+    end
+
+    class AddSourceIdentifierToSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_subscription: Types::EventSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_subscription: Types::EventSubscription?
+    end
+
+    class AddTagsToResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ApplyMethod
+      immediate: String
+      pending_reboot: String
+    end
+
+    class ApplyPendingMaintenanceActionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?apply_action: String,
+        ?opt_in_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor apply_action: String?
+      attr_accessor opt_in_type: String?
+    end
+
+    class ApplyPendingMaintenanceActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_pending_maintenance_actions: Types::ResourcePendingMaintenanceActions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_pending_maintenance_actions: Types::ResourcePendingMaintenanceActions?
+    end
+
+    class AuthorizationNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AvailabilityZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CertificateNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CharacterSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?character_set_name: String,
+        ?character_set_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor character_set_name: String?
+      attr_accessor character_set_description: String?
+    end
+
+    class CloudwatchLogsExportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_log_types: Array[String],
+        ?disable_log_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_log_types: Array[String]?
+      attr_accessor disable_log_types: Array[String]?
+    end
+
+    class ClusterPendingModifiedValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports,
+        ?db_cluster_identifier: String,
+        ?iam_database_authentication_enabled: bool,
+        ?engine_version: String,
+        ?backup_retention_period: Integer,
+        ?storage_type: String,
+        ?allocated_storage: Integer,
+        ?iops: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor iam_database_authentication_enabled: bool?
+      attr_accessor engine_version: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor iops: Integer?
+    end
+
+    class CopyDBClusterParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_db_cluster_parameter_group_identifier: String,
+        ?target_db_cluster_parameter_group_identifier: String,
+        ?target_db_cluster_parameter_group_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_db_cluster_parameter_group_identifier: String?
+      attr_accessor target_db_cluster_parameter_group_identifier: String?
+      attr_accessor target_db_cluster_parameter_group_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyDBClusterParameterGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group: Types::DBClusterParameterGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group: Types::DBClusterParameterGroup?
+    end
+
+    class CopyDBClusterSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_db_cluster_snapshot_identifier: String,
+        ?target_db_cluster_snapshot_identifier: String,
+        ?kms_key_id: String,
+        ?pre_signed_url: String,
+        ?copy_tags: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_db_cluster_snapshot_identifier: String?
+      attr_accessor target_db_cluster_snapshot_identifier: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor pre_signed_url: String?
+      attr_accessor copy_tags: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyDBClusterSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot: Types::DBClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot?
+    end
+
+    class CopyDBParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_db_parameter_group_identifier: String,
+        ?target_db_parameter_group_identifier: String,
+        ?target_db_parameter_group_description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_db_parameter_group_identifier: String?
+      attr_accessor target_db_parameter_group_identifier: String?
+      attr_accessor target_db_parameter_group_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyDBParameterGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group: Types::DBParameterGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group: Types::DBParameterGroup?
+    end
+
+    class CreateDBClusterEndpointMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_identifier: String,
+        ?endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDBClusterEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_resource_identifier: String,
+        ?endpoint: String,
+        ?status: String,
+        ?endpoint_type: String,
+        ?custom_endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+        ?db_cluster_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_resource_identifier: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor custom_endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+      attr_accessor db_cluster_endpoint_arn: String?
+    end
+
+    class CreateDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+        ?backup_retention_period: Integer,
+        ?character_set_name: String,
+        ?copy_tags_to_snapshot: bool,
+        ?database_name: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_parameter_group_name: String,
+        ?vpc_security_group_ids: Array[String],
+        ?db_subnet_group_name: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?port: Integer,
+        ?master_username: String,
+        ?master_user_password: String,
+        ?option_group_name: String,
+        ?preferred_backup_window: String,
+        ?preferred_maintenance_window: String,
+        ?replication_source_identifier: String,
+        ?tags: Array[Types::Tag],
+        ?storage_encrypted: bool,
+        ?kms_key_id: String,
+        ?pre_signed_url: String,
+        ?enable_iam_database_authentication: bool,
+        ?enable_cloudwatch_logs_exports: Array[String],
+        ?deletion_protection: bool,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?global_cluster_identifier: String,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor character_set_name: String?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor database_name: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor port: Integer?
+      attr_accessor master_username: String?
+      attr_accessor master_user_password: String?
+      attr_accessor option_group_name: String?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor replication_source_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor pre_signed_url: String?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor enable_cloudwatch_logs_exports: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor storage_type: String?
+    end
+
+    class CreateDBClusterParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?db_parameter_group_family: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDBClusterParameterGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group: Types::DBClusterParameterGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group: Types::DBClusterParameterGroup?
+    end
+
+    class CreateDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class CreateDBClusterSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_identifier: String,
+        ?db_cluster_identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDBClusterSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot: Types::DBClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot?
+    end
+
+    class CreateDBInstanceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_name: String,
+        ?db_instance_identifier: String,
+        ?allocated_storage: Integer,
+        ?db_instance_class: String,
+        ?engine: String,
+        ?master_username: String,
+        ?master_user_password: String,
+        ?db_security_groups: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?availability_zone: String,
+        ?db_subnet_group_name: String,
+        ?preferred_maintenance_window: String,
+        ?db_parameter_group_name: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
+        ?port: Integer,
+        ?multi_az: bool,
+        ?engine_version: String,
+        ?auto_minor_version_upgrade: bool,
+        ?license_model: String,
+        ?iops: Integer,
+        ?option_group_name: String,
+        ?character_set_name: String,
+        ?publicly_accessible: bool,
+        ?tags: Array[Types::Tag],
+        ?db_cluster_identifier: String,
+        ?storage_type: String,
+        ?tde_credential_arn: String,
+        ?tde_credential_password: String,
+        ?storage_encrypted: bool,
+        ?kms_key_id: String,
+        ?domain: String,
+        ?copy_tags_to_snapshot: bool,
+        ?monitoring_interval: Integer,
+        ?monitoring_role_arn: String,
+        ?domain_iam_role_name: String,
+        ?promotion_tier: Integer,
+        ?timezone: String,
+        ?enable_iam_database_authentication: bool,
+        ?enable_performance_insights: bool,
+        ?performance_insights_kms_key_id: String,
+        ?enable_cloudwatch_logs_exports: Array[String],
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_name: String?
+      attr_accessor db_instance_identifier: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor db_instance_class: String?
+      attr_accessor engine: String?
+      attr_accessor master_username: String?
+      attr_accessor master_user_password: String?
+      attr_accessor db_security_groups: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor availability_zone: String?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor port: Integer?
+      attr_accessor multi_az: bool?
+      attr_accessor engine_version: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor license_model: String?
+      attr_accessor iops: Integer?
+      attr_accessor option_group_name: String?
+      attr_accessor character_set_name: String?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor storage_type: String?
+      attr_accessor tde_credential_arn: String?
+      attr_accessor tde_credential_password: String?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor domain: String?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor monitoring_interval: Integer?
+      attr_accessor monitoring_role_arn: String?
+      attr_accessor domain_iam_role_name: String?
+      attr_accessor promotion_tier: Integer?
+      attr_accessor timezone: String?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor enable_performance_insights: bool?
+      attr_accessor performance_insights_kms_key_id: String?
+      attr_accessor enable_cloudwatch_logs_exports: Array[String]?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class CreateDBInstanceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance: Types::DBInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance: Types::DBInstance?
+    end
+
+    class CreateDBParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?db_parameter_group_family: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDBParameterGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group: Types::DBParameterGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group: Types::DBParameterGroup?
+    end
+
+    class CreateDBSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group_name: String,
+        ?db_subnet_group_description: String,
+        ?subnet_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor db_subnet_group_description: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDBSubnetGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group: Types::DBSubnetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group: Types::DBSubnetGroup?
+    end
+
+    class CreateEventSubscriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+        ?sns_topic_arn: String,
+        ?source_type: String,
+        ?event_categories: Array[String],
+        ?source_ids: Array[String],
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor source_type: String?
+      attr_accessor event_categories: Array[String]?
+      attr_accessor source_ids: Array[String]?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateEventSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_subscription: Types::EventSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_subscription: Types::EventSubscription?
+    end
+
+    class CreateGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?source_db_cluster_identifier: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?deletion_protection: bool,
+        ?storage_encrypted: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor source_db_cluster_identifier: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor storage_encrypted: bool?
+    end
+
+    class CreateGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class DBCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocated_storage: Integer,
+        ?availability_zones: Array[String],
+        ?backup_retention_period: Integer,
+        ?character_set_name: String,
+        ?database_name: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_parameter_group: String,
+        ?db_subnet_group: String,
+        ?status: String,
+        ?percent_progress: String,
+        ?earliest_restorable_time: Time,
+        ?endpoint: String,
+        ?reader_endpoint: String,
+        ?multi_az: bool,
+        ?engine: String,
+        ?engine_version: String,
+        ?latest_restorable_time: Time,
+        ?port: Integer,
+        ?master_username: String,
+        ?db_cluster_option_group_memberships: Array[Types::DBClusterOptionGroupStatus],
+        ?preferred_backup_window: String,
+        ?preferred_maintenance_window: String,
+        ?replication_source_identifier: String,
+        ?read_replica_identifiers: Array[String],
+        ?db_cluster_members: Array[Types::DBClusterMember],
+        ?vpc_security_groups: Array[Types::VpcSecurityGroupMembership],
+        ?hosted_zone_id: String,
+        ?storage_encrypted: bool,
+        ?kms_key_id: String,
+        ?db_cluster_resource_id: String,
+        ?db_cluster_arn: String,
+        ?associated_roles: Array[Types::DBClusterRole],
+        ?iam_database_authentication_enabled: bool,
+        ?clone_group_id: String,
+        ?cluster_create_time: Time,
+        ?copy_tags_to_snapshot: bool,
+        ?enabled_cloudwatch_logs_exports: Array[String],
+        ?pending_modified_values: Types::ClusterPendingModifiedValues,
+        ?deletion_protection: bool,
+        ?cross_account_clone: bool,
+        ?automatic_restart_time: Time,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo,
+        ?global_cluster_identifier: String,
+        ?io_optimized_next_allowed_modification_time: Time,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocated_storage: Integer?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor character_set_name: String?
+      attr_accessor database_name: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_parameter_group: String?
+      attr_accessor db_subnet_group: String?
+      attr_accessor status: String?
+      attr_accessor percent_progress: String?
+      attr_accessor earliest_restorable_time: Time?
+      attr_accessor endpoint: String?
+      attr_accessor reader_endpoint: String?
+      attr_accessor multi_az: bool?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor latest_restorable_time: Time?
+      attr_accessor port: Integer?
+      attr_accessor master_username: String?
+      attr_accessor db_cluster_option_group_memberships: Array[Types::DBClusterOptionGroupStatus]?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor replication_source_identifier: String?
+      attr_accessor read_replica_identifiers: Array[String]?
+      attr_accessor db_cluster_members: Array[Types::DBClusterMember]?
+      attr_accessor vpc_security_groups: Array[Types::VpcSecurityGroupMembership]?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor db_cluster_resource_id: String?
+      attr_accessor db_cluster_arn: String?
+      attr_accessor associated_roles: Array[Types::DBClusterRole]?
+      attr_accessor iam_database_authentication_enabled: bool?
+      attr_accessor clone_group_id: String?
+      attr_accessor cluster_create_time: Time?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor enabled_cloudwatch_logs_exports: Array[String]?
+      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues?
+      attr_accessor deletion_protection: bool?
+      attr_accessor cross_account_clone: bool?
+      attr_accessor automatic_restart_time: Time?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor io_optimized_next_allowed_modification_time: Time?
+      attr_accessor storage_type: String?
+    end
+
+    class DBClusterAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_resource_identifier: String,
+        ?endpoint: String,
+        ?status: String,
+        ?endpoint_type: String,
+        ?custom_endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+        ?db_cluster_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_resource_identifier: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor custom_endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+      attr_accessor db_cluster_endpoint_arn: String?
+    end
+
+    class DBClusterEndpointAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterEndpointMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_cluster_endpoints: Array[Types::DBClusterEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_cluster_endpoints: Array[Types::DBClusterEndpoint]?
+    end
+
+    class DBClusterEndpointNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterEndpointQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?is_cluster_writer: bool,
+        ?db_cluster_parameter_group_status: String,
+        ?promotion_tier: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor is_cluster_writer: bool?
+      attr_accessor db_cluster_parameter_group_status: String?
+      attr_accessor promotion_tier: Integer?
+    end
+
+    class DBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_clusters: Array[Types::DBCluster],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_clusters: Array[Types::DBCluster]?
+    end
+
+    class DBClusterNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterOptionGroupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_option_group_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_option_group_name: String?
+      attr_accessor status: String?
+    end
+
+    class DBClusterParameterGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?db_parameter_group_family: String,
+        ?description: String,
+        ?db_cluster_parameter_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor db_cluster_parameter_group_arn: String?
+    end
+
+    class DBClusterParameterGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_cluster_parameter_groups: Array[Types::DBClusterParameterGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_cluster_parameter_groups: Array[Types::DBClusterParameterGroup]?
+    end
+
+    class DBClusterQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterRole
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?status: String,
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor feature_name: String?
+    end
+
+    class DBClusterRoleAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterRoleNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterRoleQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+        ?db_cluster_snapshot_identifier: String,
+        ?db_cluster_identifier: String,
+        ?snapshot_create_time: Time,
+        ?engine: String,
+        ?allocated_storage: Integer,
+        ?status: String,
+        ?port: Integer,
+        ?vpc_id: String,
+        ?cluster_create_time: Time,
+        ?master_username: String,
+        ?engine_version: String,
+        ?license_model: String,
+        ?snapshot_type: String,
+        ?percent_progress: Integer,
+        ?storage_encrypted: bool,
+        ?kms_key_id: String,
+        ?db_cluster_snapshot_arn: String,
+        ?source_db_cluster_snapshot_arn: String,
+        ?iam_database_authentication_enabled: bool,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor engine: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor status: String?
+      attr_accessor port: Integer?
+      attr_accessor vpc_id: String?
+      attr_accessor cluster_create_time: Time?
+      attr_accessor master_username: String?
+      attr_accessor engine_version: String?
+      attr_accessor license_model: String?
+      attr_accessor snapshot_type: String?
+      attr_accessor percent_progress: Integer?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor db_cluster_snapshot_arn: String?
+      attr_accessor source_db_cluster_snapshot_arn: String?
+      attr_accessor iam_database_authentication_enabled: bool?
+      attr_accessor storage_type: String?
+    end
+
+    class DBClusterSnapshotAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBClusterSnapshotAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_values: Array[String]?
+    end
+
+    class DBClusterSnapshotAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_identifier: String,
+        ?db_cluster_snapshot_attributes: Array[Types::DBClusterSnapshotAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor db_cluster_snapshot_attributes: Array[Types::DBClusterSnapshotAttribute]?
+    end
+
+    class DBClusterSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_cluster_snapshots: Array[Types::DBClusterSnapshot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_cluster_snapshots: Array[Types::DBClusterSnapshot]?
+    end
+
+    class DBClusterSnapshotNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBEngineVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?db_parameter_group_family: String,
+        ?db_engine_description: String,
+        ?db_engine_version_description: String,
+        ?default_character_set: Types::CharacterSet,
+        ?supported_character_sets: Array[Types::CharacterSet],
+        ?valid_upgrade_target: Array[Types::UpgradeTarget],
+        ?supported_timezones: Array[Types::Timezone],
+        ?exportable_log_types: Array[String],
+        ?supports_log_exports_to_cloudwatch_logs: bool,
+        ?supports_read_replica: bool,
+        ?supports_global_databases: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor db_engine_description: String?
+      attr_accessor db_engine_version_description: String?
+      attr_accessor default_character_set: Types::CharacterSet?
+      attr_accessor supported_character_sets: Array[Types::CharacterSet]?
+      attr_accessor valid_upgrade_target: Array[Types::UpgradeTarget]?
+      attr_accessor supported_timezones: Array[Types::Timezone]?
+      attr_accessor exportable_log_types: Array[String]?
+      attr_accessor supports_log_exports_to_cloudwatch_logs: bool?
+      attr_accessor supports_read_replica: bool?
+      attr_accessor supports_global_databases: bool?
+    end
+
+    class DBEngineVersionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_engine_versions: Array[Types::DBEngineVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_engine_versions: Array[Types::DBEngineVersion]?
+    end
+
+    class DBInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?db_instance_class: String,
+        ?engine: String,
+        ?db_instance_status: String,
+        ?master_username: String,
+        ?db_name: String,
+        ?endpoint: Types::Endpoint,
+        ?allocated_storage: Integer,
+        ?instance_create_time: Time,
+        ?preferred_backup_window: String,
+        ?backup_retention_period: Integer,
+        ?db_security_groups: Array[Types::DBSecurityGroupMembership],
+        ?vpc_security_groups: Array[Types::VpcSecurityGroupMembership],
+        ?db_parameter_groups: Array[Types::DBParameterGroupStatus],
+        ?availability_zone: String,
+        ?db_subnet_group: Types::DBSubnetGroup,
+        ?preferred_maintenance_window: String,
+        ?pending_modified_values: Types::PendingModifiedValues,
+        ?latest_restorable_time: Time,
+        ?multi_az: bool,
+        ?engine_version: String,
+        ?auto_minor_version_upgrade: bool,
+        ?read_replica_source_db_instance_identifier: String,
+        ?read_replica_db_instance_identifiers: Array[String],
+        ?read_replica_db_cluster_identifiers: Array[String],
+        ?license_model: String,
+        ?iops: Integer,
+        ?option_group_memberships: Array[Types::OptionGroupMembership],
+        ?character_set_name: String,
+        ?secondary_availability_zone: String,
+        ?publicly_accessible: bool,
+        ?status_infos: Array[Types::DBInstanceStatusInfo],
+        ?storage_type: String,
+        ?tde_credential_arn: String,
+        ?db_instance_port: Integer,
+        ?db_cluster_identifier: String,
+        ?storage_encrypted: bool,
+        ?kms_key_id: String,
+        ?dbi_resource_id: String,
+        ?ca_certificate_identifier: String,
+        ?domain_memberships: Array[Types::DomainMembership],
+        ?copy_tags_to_snapshot: bool,
+        ?monitoring_interval: Integer,
+        ?enhanced_monitoring_resource_arn: String,
+        ?monitoring_role_arn: String,
+        ?promotion_tier: Integer,
+        ?db_instance_arn: String,
+        ?timezone: String,
+        ?iam_database_authentication_enabled: bool,
+        ?performance_insights_enabled: bool,
+        ?performance_insights_kms_key_id: String,
+        ?enabled_cloudwatch_logs_exports: Array[String],
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor db_instance_class: String?
+      attr_accessor engine: String?
+      attr_accessor db_instance_status: String?
+      attr_accessor master_username: String?
+      attr_accessor db_name: String?
+      attr_accessor endpoint: Types::Endpoint?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor instance_create_time: Time?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor db_security_groups: Array[Types::DBSecurityGroupMembership]?
+      attr_accessor vpc_security_groups: Array[Types::VpcSecurityGroupMembership]?
+      attr_accessor db_parameter_groups: Array[Types::DBParameterGroupStatus]?
+      attr_accessor availability_zone: String?
+      attr_accessor db_subnet_group: Types::DBSubnetGroup?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor pending_modified_values: Types::PendingModifiedValues?
+      attr_accessor latest_restorable_time: Time?
+      attr_accessor multi_az: bool?
+      attr_accessor engine_version: String?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor read_replica_source_db_instance_identifier: String?
+      attr_accessor read_replica_db_instance_identifiers: Array[String]?
+      attr_accessor read_replica_db_cluster_identifiers: Array[String]?
+      attr_accessor license_model: String?
+      attr_accessor iops: Integer?
+      attr_accessor option_group_memberships: Array[Types::OptionGroupMembership]?
+      attr_accessor character_set_name: String?
+      attr_accessor secondary_availability_zone: String?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor status_infos: Array[Types::DBInstanceStatusInfo]?
+      attr_accessor storage_type: String?
+      attr_accessor tde_credential_arn: String?
+      attr_accessor db_instance_port: Integer?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor dbi_resource_id: String?
+      attr_accessor ca_certificate_identifier: String?
+      attr_accessor domain_memberships: Array[Types::DomainMembership]?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor monitoring_interval: Integer?
+      attr_accessor enhanced_monitoring_resource_arn: String?
+      attr_accessor monitoring_role_arn: String?
+      attr_accessor promotion_tier: Integer?
+      attr_accessor db_instance_arn: String?
+      attr_accessor timezone: String?
+      attr_accessor iam_database_authentication_enabled: bool?
+      attr_accessor performance_insights_enabled: bool?
+      attr_accessor performance_insights_kms_key_id: String?
+      attr_accessor enabled_cloudwatch_logs_exports: Array[String]?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class DBInstanceAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBInstanceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_instances: Array[Types::DBInstance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_instances: Array[Types::DBInstance]?
+    end
+
+    class DBInstanceNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBInstanceStatusInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_type: String,
+        ?normal: bool,
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_type: String?
+      attr_accessor normal: bool?
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    class DBParameterGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?db_parameter_group_family: String,
+        ?description: String,
+        ?db_parameter_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor description: String?
+      attr_accessor db_parameter_group_arn: String?
+    end
+
+    class DBParameterGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBParameterGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBParameterGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBParameterGroupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?parameter_apply_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor parameter_apply_status: String?
+    end
+
+    class DBParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_parameter_groups: Array[Types::DBParameterGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_parameter_groups: Array[Types::DBParameterGroup]?
+    end
+
+    class DBSecurityGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_security_group_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_security_group_name: String?
+      attr_accessor status: String?
+    end
+
+    class DBSecurityGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSnapshotAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSnapshotNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSubnetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group_name: String,
+        ?db_subnet_group_description: String,
+        ?vpc_id: String,
+        ?subnet_group_status: String,
+        ?subnets: Array[Types::Subnet],
+        ?db_subnet_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor db_subnet_group_description: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_group_status: String?
+      attr_accessor subnets: Array[Types::Subnet]?
+      attr_accessor db_subnet_group_arn: String?
+    end
+
+    class DBSubnetGroupAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSubnetGroupDoesNotCoverEnoughAZs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?db_subnet_groups: Array[Types::DBSubnetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor db_subnet_groups: Array[Types::DBSubnetGroup]?
+    end
+
+    class DBSubnetGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSubnetGroupQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBSubnetQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DBUpgradeDependencyFailureFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteDBClusterEndpointMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+    end
+
+    class DeleteDBClusterEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_resource_identifier: String,
+        ?endpoint: String,
+        ?status: String,
+        ?endpoint_type: String,
+        ?custom_endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+        ?db_cluster_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_resource_identifier: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor custom_endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+      attr_accessor db_cluster_endpoint_arn: String?
+    end
+
+    class DeleteDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?skip_final_snapshot: bool,
+        ?final_db_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor skip_final_snapshot: bool?
+      attr_accessor final_db_snapshot_identifier: String?
+    end
+
+    class DeleteDBClusterParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+    end
+
+    class DeleteDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class DeleteDBClusterSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_identifier: String?
+    end
+
+    class DeleteDBClusterSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot: Types::DBClusterSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot?
+    end
+
+    class DeleteDBInstanceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?skip_final_snapshot: bool,
+        ?final_db_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor skip_final_snapshot: bool?
+      attr_accessor final_db_snapshot_identifier: String?
+    end
+
+    class DeleteDBInstanceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance: Types::DBInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance: Types::DBInstance?
+    end
+
+    class DeleteDBParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+    end
+
+    class DeleteDBSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group_name: String?
+    end
+
+    class DeleteEventSubscriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+    end
+
+    class DeleteEventSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_subscription: Types::EventSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_subscription: Types::EventSubscription?
+    end
+
+    class DeleteGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+    end
+
+    class DeleteGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class DescribeDBClusterEndpointsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_identifier: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBClusterParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBClusterParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?source: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor source: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBClusterParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::Parameter],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBClusterSnapshotAttributesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_identifier: String?
+    end
+
+    class DescribeDBClusterSnapshotAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult?
+    end
+
+    class DescribeDBClusterSnapshotsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?db_cluster_snapshot_identifier: String,
+        ?snapshot_type: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+        ?include_shared: bool,
+        ?include_public: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor snapshot_type: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+      attr_accessor include_shared: bool?
+      attr_accessor include_public: bool?
+    end
+
+    class DescribeDBClustersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBEngineVersionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?db_parameter_group_family: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+        ?default_only: bool,
+        ?list_supported_character_sets: bool,
+        ?list_supported_timezones: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+      attr_accessor default_only: bool?
+      attr_accessor list_supported_character_sets: bool?
+      attr_accessor list_supported_timezones: bool?
+    end
+
+    class DescribeDBInstancesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBParameterGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?source: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor source: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::Parameter],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::Parameter]?
+      attr_accessor marker: String?
+    end
+
+    class DescribeDBSubnetGroupsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEngineDefaultClusterParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_family: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEngineDefaultClusterParametersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_defaults: Types::EngineDefaults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_defaults: Types::EngineDefaults?
+    end
+
+    class DescribeEngineDefaultParametersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_family: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEngineDefaultParametersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_defaults: Types::EngineDefaults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_defaults: Types::EngineDefaults?
+    end
+
+    class DescribeEventCategoriesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class DescribeEventSubscriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeEventsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_identifier: String,
+        ?source_type: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?duration: Integer,
+        ?event_categories: Array[String],
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_identifier: String?
+      attr_accessor source_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor duration: Integer?
+      attr_accessor event_categories: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeGlobalClustersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeOrderableDBInstanceOptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?db_instance_class: String,
+        ?license_model: String,
+        ?vpc: bool,
+        ?filters: Array[Types::Filter],
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor db_instance_class: String?
+      attr_accessor license_model: String?
+      attr_accessor vpc: bool?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribePendingMaintenanceActionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?filters: Array[Types::Filter],
+        ?marker: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor marker: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeValidDBInstanceModificationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+    end
+
+    class DescribeValidDBInstanceModificationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?valid_db_instance_modifications_message: Types::ValidDBInstanceModificationsMessage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor valid_db_instance_modifications_message: Types::ValidDBInstanceModificationsMessage?
+    end
+
+    class DomainMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?status: String,
+        ?fqdn: String,
+        ?iam_role_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor status: String?
+      attr_accessor fqdn: String?
+      attr_accessor iam_role_name: String?
+    end
+
+    class DomainNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DoubleRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: Float,
+        ?to: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: Float?
+      attr_accessor to: Float?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?port: Integer,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor port: Integer?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class EngineDefaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_family: String,
+        ?marker: String,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_family: String?
+      attr_accessor marker: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_identifier: String,
+        ?source_type: String,
+        ?message: String,
+        ?event_categories: Array[String],
+        ?date: Time,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_identifier: String?
+      attr_accessor source_type: String?
+      attr_accessor message: String?
+      attr_accessor event_categories: Array[String]?
+      attr_accessor date: Time?
+      attr_accessor source_arn: String?
+    end
+
+    class EventCategoriesMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?event_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor event_categories: Array[String]?
+    end
+
+    class EventCategoriesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_categories_map_list: Array[Types::EventCategoriesMap],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_categories_map_list: Array[Types::EventCategoriesMap]?
+    end
+
+    class EventSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_aws_id: String,
+        ?cust_subscription_id: String,
+        ?sns_topic_arn: String,
+        ?status: String,
+        ?subscription_creation_time: String,
+        ?source_type: String,
+        ?source_ids_list: Array[String],
+        ?event_categories_list: Array[String],
+        ?enabled: bool,
+        ?event_subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_aws_id: String?
+      attr_accessor cust_subscription_id: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor status: String?
+      attr_accessor subscription_creation_time: String?
+      attr_accessor source_type: String?
+      attr_accessor source_ids_list: Array[String]?
+      attr_accessor event_categories_list: Array[String]?
+      attr_accessor enabled: bool?
+      attr_accessor event_subscription_arn: String?
+    end
+
+    class EventSubscriptionQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EventSubscriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?event_subscriptions_list: Array[Types::EventSubscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor event_subscriptions_list: Array[Types::EventSubscription]?
+    end
+
+    class EventsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?events: Array[Types::Event],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor events: Array[Types::Event]?
+    end
+
+    class FailoverDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?target_db_instance_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor target_db_instance_identifier: String?
+    end
+
+    class FailoverDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class FailoverGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?target_db_cluster_identifier: String,
+        ?allow_data_loss: bool,
+        ?switchover: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor target_db_cluster_identifier: String?
+      attr_accessor allow_data_loss: bool?
+      attr_accessor switchover: bool?
+    end
+
+    class FailoverGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class FailoverState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?from_db_cluster_arn: String,
+        ?to_db_cluster_arn: String,
+        ?is_data_loss_allowed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor from_db_cluster_arn: String?
+      attr_accessor to_db_cluster_arn: String?
+      attr_accessor is_data_loss_allowed: bool?
+    end
+
+    module FailoverStatus
+      PENDING: String
+      FAILING_OVER: String
+      CANCELLING: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GlobalCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?global_cluster_resource_id: String,
+        ?global_cluster_arn: String,
+        ?status: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?storage_encrypted: bool,
+        ?deletion_protection: bool,
+        ?global_cluster_members: Array[Types::GlobalClusterMember],
+        ?failover_state: Types::FailoverState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor global_cluster_resource_id: String?
+      attr_accessor global_cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor storage_encrypted: bool?
+      attr_accessor deletion_protection: bool?
+      attr_accessor global_cluster_members: Array[Types::GlobalClusterMember]?
+      attr_accessor failover_state: Types::FailoverState?
+    end
+
+    class GlobalClusterAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GlobalClusterMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_arn: String,
+        ?readers: Array[String],
+        ?is_writer: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_arn: String?
+      attr_accessor readers: Array[String]?
+      attr_accessor is_writer: bool?
+    end
+
+    class GlobalClusterNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GlobalClusterQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GlobalClustersMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?global_clusters: Array[Types::GlobalCluster],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor global_clusters: Array[Types::GlobalCluster]?
+    end
+
+    class InstanceQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientDBClusterCapacityFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientDBInstanceCapacityFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InsufficientStorageClusterCapacityFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBClusterEndpointStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBClusterSnapshotStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBClusterStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBInstanceStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBParameterGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBSecurityGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBSnapshotStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBSubnetGroupStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDBSubnetStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEventSubscriptionStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGlobalClusterStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRestoreFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSubnet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidVPCNetworkStateFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSKeyNotAccessibleFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ModifyDBClusterEndpointMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+        ?endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+    end
+
+    class ModifyDBClusterEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_endpoint_identifier: String,
+        ?db_cluster_identifier: String,
+        ?db_cluster_endpoint_resource_identifier: String,
+        ?endpoint: String,
+        ?status: String,
+        ?endpoint_type: String,
+        ?custom_endpoint_type: String,
+        ?static_members: Array[String],
+        ?excluded_members: Array[String],
+        ?db_cluster_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_endpoint_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor db_cluster_endpoint_resource_identifier: String?
+      attr_accessor endpoint: String?
+      attr_accessor status: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor custom_endpoint_type: String?
+      attr_accessor static_members: Array[String]?
+      attr_accessor excluded_members: Array[String]?
+      attr_accessor db_cluster_endpoint_arn: String?
+    end
+
+    class ModifyDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?new_db_cluster_identifier: String,
+        ?apply_immediately: bool,
+        ?backup_retention_period: Integer,
+        ?db_cluster_parameter_group_name: String,
+        ?vpc_security_group_ids: Array[String],
+        ?port: Integer,
+        ?master_user_password: String,
+        ?option_group_name: String,
+        ?preferred_backup_window: String,
+        ?preferred_maintenance_window: String,
+        ?enable_iam_database_authentication: bool,
+        ?cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration,
+        ?engine_version: String,
+        ?allow_major_version_upgrade: bool,
+        ?db_instance_parameter_group_name: String,
+        ?deletion_protection: bool,
+        ?copy_tags_to_snapshot: bool,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor new_db_cluster_identifier: String?
+      attr_accessor apply_immediately: bool?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor port: Integer?
+      attr_accessor master_user_password: String?
+      attr_accessor option_group_name: String?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration?
+      attr_accessor engine_version: String?
+      attr_accessor allow_major_version_upgrade: bool?
+      attr_accessor db_instance_parameter_group_name: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor storage_type: String?
+    end
+
+    class ModifyDBClusterParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class ModifyDBClusterParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+    end
+
+    class ModifyDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class ModifyDBClusterSnapshotAttributeMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_identifier: String,
+        ?attribute_name: String,
+        ?values_to_add: Array[String],
+        ?values_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor attribute_name: String?
+      attr_accessor values_to_add: Array[String]?
+      attr_accessor values_to_remove: Array[String]?
+    end
+
+    class ModifyDBClusterSnapshotAttributeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult?
+    end
+
+    class ModifyDBInstanceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?allocated_storage: Integer,
+        ?db_instance_class: String,
+        ?db_subnet_group_name: String,
+        ?db_security_groups: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?apply_immediately: bool,
+        ?master_user_password: String,
+        ?db_parameter_group_name: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
+        ?preferred_maintenance_window: String,
+        ?multi_az: bool,
+        ?engine_version: String,
+        ?allow_major_version_upgrade: bool,
+        ?auto_minor_version_upgrade: bool,
+        ?license_model: String,
+        ?iops: Integer,
+        ?option_group_name: String,
+        ?new_db_instance_identifier: String,
+        ?storage_type: String,
+        ?tde_credential_arn: String,
+        ?tde_credential_password: String,
+        ?ca_certificate_identifier: String,
+        ?domain: String,
+        ?copy_tags_to_snapshot: bool,
+        ?monitoring_interval: Integer,
+        ?db_port_number: Integer,
+        ?publicly_accessible: bool,
+        ?monitoring_role_arn: String,
+        ?domain_iam_role_name: String,
+        ?promotion_tier: Integer,
+        ?enable_iam_database_authentication: bool,
+        ?enable_performance_insights: bool,
+        ?performance_insights_kms_key_id: String,
+        ?cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor db_instance_class: String?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor db_security_groups: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor apply_immediately: bool?
+      attr_accessor master_user_password: String?
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
+      attr_accessor preferred_maintenance_window: String?
+      attr_accessor multi_az: bool?
+      attr_accessor engine_version: String?
+      attr_accessor allow_major_version_upgrade: bool?
+      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor license_model: String?
+      attr_accessor iops: Integer?
+      attr_accessor option_group_name: String?
+      attr_accessor new_db_instance_identifier: String?
+      attr_accessor storage_type: String?
+      attr_accessor tde_credential_arn: String?
+      attr_accessor tde_credential_password: String?
+      attr_accessor ca_certificate_identifier: String?
+      attr_accessor domain: String?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor monitoring_interval: Integer?
+      attr_accessor db_port_number: Integer?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor monitoring_role_arn: String?
+      attr_accessor domain_iam_role_name: String?
+      attr_accessor promotion_tier: Integer?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor enable_performance_insights: bool?
+      attr_accessor performance_insights_kms_key_id: String?
+      attr_accessor cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class ModifyDBInstanceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance: Types::DBInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance: Types::DBInstance?
+    end
+
+    class ModifyDBParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class ModifyDBParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+    end
+
+    class ModifyDBSubnetGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group_name: String,
+        ?db_subnet_group_description: String,
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor db_subnet_group_description: String?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class ModifyDBSubnetGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_subnet_group: Types::DBSubnetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_subnet_group: Types::DBSubnetGroup?
+    end
+
+    class ModifyEventSubscriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+        ?sns_topic_arn: String,
+        ?source_type: String,
+        ?event_categories: Array[String],
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor source_type: String?
+      attr_accessor event_categories: Array[String]?
+      attr_accessor enabled: bool?
+    end
+
+    class ModifyEventSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_subscription: Types::EventSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_subscription: Types::EventSubscription?
+    end
+
+    class ModifyGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?new_global_cluster_identifier: String,
+        ?deletion_protection: bool,
+        ?engine_version: String,
+        ?allow_major_version_upgrade: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor new_global_cluster_identifier: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor engine_version: String?
+      attr_accessor allow_major_version_upgrade: bool?
+    end
+
+    class ModifyGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class OptionGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option_group_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option_group_name: String?
+      attr_accessor status: String?
+    end
+
+    class OptionGroupNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrderableDBInstanceOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?db_instance_class: String,
+        ?license_model: String,
+        ?availability_zones: Array[Types::AvailabilityZone],
+        ?multi_az_capable: bool,
+        ?read_replica_capable: bool,
+        ?vpc: bool,
+        ?supports_storage_encryption: bool,
+        ?storage_type: String,
+        ?supports_iops: bool,
+        ?supports_enhanced_monitoring: bool,
+        ?supports_iam_database_authentication: bool,
+        ?supports_performance_insights: bool,
+        ?min_storage_size: Integer,
+        ?max_storage_size: Integer,
+        ?min_iops_per_db_instance: Integer,
+        ?max_iops_per_db_instance: Integer,
+        ?min_iops_per_gib: Float,
+        ?max_iops_per_gib: Float,
+        ?supports_global_databases: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor db_instance_class: String?
+      attr_accessor license_model: String?
+      attr_accessor availability_zones: Array[Types::AvailabilityZone]?
+      attr_accessor multi_az_capable: bool?
+      attr_accessor read_replica_capable: bool?
+      attr_accessor vpc: bool?
+      attr_accessor supports_storage_encryption: bool?
+      attr_accessor storage_type: String?
+      attr_accessor supports_iops: bool?
+      attr_accessor supports_enhanced_monitoring: bool?
+      attr_accessor supports_iam_database_authentication: bool?
+      attr_accessor supports_performance_insights: bool?
+      attr_accessor min_storage_size: Integer?
+      attr_accessor max_storage_size: Integer?
+      attr_accessor min_iops_per_db_instance: Integer?
+      attr_accessor max_iops_per_db_instance: Integer?
+      attr_accessor min_iops_per_gib: Float?
+      attr_accessor max_iops_per_gib: Float?
+      attr_accessor supports_global_databases: bool?
+    end
+
+    class OrderableDBInstanceOptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?orderable_db_instance_options: Array[Types::OrderableDBInstanceOption],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor orderable_db_instance_options: Array[Types::OrderableDBInstanceOption]?
+      attr_accessor marker: String?
+    end
+
+    class Parameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+        ?description: String,
+        ?source: String,
+        ?apply_type: String,
+        ?data_type: String,
+        ?allowed_values: String,
+        ?is_modifiable: bool,
+        ?minimum_engine_version: String,
+        ?apply_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+      attr_accessor description: String?
+      attr_accessor source: String?
+      attr_accessor apply_type: String?
+      attr_accessor data_type: String?
+      attr_accessor allowed_values: String?
+      attr_accessor is_modifiable: bool?
+      attr_accessor minimum_engine_version: String?
+      attr_accessor apply_method: String?
+    end
+
+    class PendingCloudwatchLogsExports
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_types_to_enable: Array[String],
+        ?log_types_to_disable: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_types_to_enable: Array[String]?
+      attr_accessor log_types_to_disable: Array[String]?
+    end
+
+    class PendingMaintenanceAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?auto_applied_after_date: Time,
+        ?forced_apply_date: Time,
+        ?opt_in_status: String,
+        ?current_apply_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor auto_applied_after_date: Time?
+      attr_accessor forced_apply_date: Time?
+      attr_accessor opt_in_status: String?
+      attr_accessor current_apply_date: Time?
+      attr_accessor description: String?
+    end
+
+    class PendingMaintenanceActionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending_maintenance_actions: Array[Types::ResourcePendingMaintenanceActions],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending_maintenance_actions: Array[Types::ResourcePendingMaintenanceActions]?
+      attr_accessor marker: String?
+    end
+
+    class PendingModifiedValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_class: String,
+        ?allocated_storage: Integer,
+        ?master_user_password: String,
+        ?port: Integer,
+        ?backup_retention_period: Integer,
+        ?multi_az: bool,
+        ?engine_version: String,
+        ?license_model: String,
+        ?iops: Integer,
+        ?db_instance_identifier: String,
+        ?storage_type: String,
+        ?ca_certificate_identifier: String,
+        ?db_subnet_group_name: String,
+        ?pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_class: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor master_user_password: String?
+      attr_accessor port: Integer?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor multi_az: bool?
+      attr_accessor engine_version: String?
+      attr_accessor license_model: String?
+      attr_accessor iops: Integer?
+      attr_accessor db_instance_identifier: String?
+      attr_accessor storage_type: String?
+      attr_accessor ca_certificate_identifier: String?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports?
+    end
+
+    class PromoteReadReplicaDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+    end
+
+    class PromoteReadReplicaDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class ProvisionedIopsNotAvailableInAZFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Range
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: Integer,
+        ?to: Integer,
+        ?step: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: Integer?
+      attr_accessor to: Integer?
+      attr_accessor step: Integer?
+    end
+
+    class RebootDBInstanceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance_identifier: String,
+        ?force_failover: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance_identifier: String?
+      attr_accessor force_failover: bool?
+    end
+
+    class RebootDBInstanceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_instance: Types::DBInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_instance: Types::DBInstance?
+    end
+
+    class RemoveFromGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?db_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor db_cluster_identifier: String?
+    end
+
+    class RemoveFromGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class RemoveRoleFromDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?role_arn: String,
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor feature_name: String?
+    end
+
+    class RemoveSourceIdentifierFromSubscriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_name: String,
+        ?source_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_name: String?
+      attr_accessor source_identifier: String?
+    end
+
+    class RemoveSourceIdentifierFromSubscriptionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_subscription: Types::EventSubscription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_subscription: Types::EventSubscription?
+    end
+
+    class RemoveTagsFromResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class ResetDBClusterParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+        ?reset_all_parameters: bool,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor reset_all_parameters: bool?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class ResetDBClusterParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_parameter_group_name: String?
+    end
+
+    class ResetDBParameterGroupMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+        ?reset_all_parameters: bool,
+        ?parameters: Array[Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+      attr_accessor reset_all_parameters: bool?
+      attr_accessor parameters: Array[Types::Parameter]?
+    end
+
+    class ResetDBParameterGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_parameter_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_parameter_group_name: String?
+    end
+
+    class ResourceNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourcePendingMaintenanceActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?pending_maintenance_action_details: Array[Types::PendingMaintenanceAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor pending_maintenance_action_details: Array[Types::PendingMaintenanceAction]?
+    end
+
+    class RestoreDBClusterFromSnapshotMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+        ?db_cluster_identifier: String,
+        ?snapshot_identifier: String,
+        ?engine: String,
+        ?engine_version: String,
+        ?port: Integer,
+        ?db_subnet_group_name: String,
+        ?database_name: String,
+        ?option_group_name: String,
+        ?vpc_security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?kms_key_id: String,
+        ?enable_iam_database_authentication: bool,
+        ?enable_cloudwatch_logs_exports: Array[String],
+        ?db_cluster_parameter_group_name: String,
+        ?deletion_protection: bool,
+        ?copy_tags_to_snapshot: bool,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor snapshot_identifier: String?
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor port: Integer?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor database_name: String?
+      attr_accessor option_group_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor kms_key_id: String?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor enable_cloudwatch_logs_exports: Array[String]?
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor copy_tags_to_snapshot: bool?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor storage_type: String?
+    end
+
+    class RestoreDBClusterFromSnapshotResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class RestoreDBClusterToPointInTimeMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+        ?restore_type: String,
+        ?source_db_cluster_identifier: String,
+        ?restore_to_time: Time,
+        ?use_latest_restorable_time: bool,
+        ?port: Integer,
+        ?db_subnet_group_name: String,
+        ?option_group_name: String,
+        ?vpc_security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?kms_key_id: String,
+        ?enable_iam_database_authentication: bool,
+        ?enable_cloudwatch_logs_exports: Array[String],
+        ?db_cluster_parameter_group_name: String,
+        ?deletion_protection: bool,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+      attr_accessor restore_type: String?
+      attr_accessor source_db_cluster_identifier: String?
+      attr_accessor restore_to_time: Time?
+      attr_accessor use_latest_restorable_time: bool?
+      attr_accessor port: Integer?
+      attr_accessor db_subnet_group_name: String?
+      attr_accessor option_group_name: String?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor kms_key_id: String?
+      attr_accessor enable_iam_database_authentication: bool?
+      attr_accessor enable_cloudwatch_logs_exports: Array[String]?
+      attr_accessor db_cluster_parameter_group_name: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor storage_type: String?
+    end
+
+    class RestoreDBClusterToPointInTimeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class SNSInvalidTopicFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SNSNoAuthorizationFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SNSTopicArnNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerlessV2ScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_capacity: Float,
+        ?max_capacity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_capacity: Float?
+      attr_accessor max_capacity: Float?
+    end
+
+    class ServerlessV2ScalingConfigurationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_capacity: Float,
+        ?max_capacity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_capacity: Float?
+      attr_accessor max_capacity: Float?
+    end
+
+    class SharedSnapshotQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnapshotQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SourceType
+      db_instance: String
+      db_parameter_group: String
+      db_security_group: String
+      db_snapshot: String
+      db_cluster: String
+      db_cluster_snapshot: String
+    end
+
+    class StartDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+    end
+
+    class StartDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class StopDBClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_identifier: String?
+    end
+
+    class StopDBClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster: Types::DBCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster: Types::DBCluster?
+    end
+
+    class StorageQuotaExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StorageTypeNotSupportedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Subnet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_identifier: String,
+        ?subnet_availability_zone: Types::AvailabilityZone,
+        ?subnet_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_identifier: String?
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone?
+      attr_accessor subnet_status: String?
+    end
+
+    class SubnetAlreadyInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubscriptionAlreadyExistFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubscriptionCategoryNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubscriptionNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SwitchoverGlobalClusterMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster_identifier: String,
+        ?target_db_cluster_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor target_db_cluster_identifier: String?
+    end
+
+    class SwitchoverGlobalClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_cluster: Types::GlobalCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagListMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class Timezone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timezone_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timezone_name: String?
+    end
+
+    class UpgradeTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?engine_version: String,
+        ?description: String,
+        ?auto_upgrade: bool,
+        ?is_major_version_upgrade: bool,
+        ?supports_global_databases: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor engine_version: String?
+      attr_accessor description: String?
+      attr_accessor auto_upgrade: bool?
+      attr_accessor is_major_version_upgrade: bool?
+      attr_accessor supports_global_databases: bool?
+    end
+
+    class ValidDBInstanceModificationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage: Array[Types::ValidStorageOptions],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage: Array[Types::ValidStorageOptions]?
+    end
+
+    class ValidStorageOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?storage_size: Array[Types::Range],
+        ?provisioned_iops: Array[Types::Range],
+        ?iops_to_storage_ratio: Array[Types::DoubleRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor storage_size: Array[Types::Range]?
+      attr_accessor provisioned_iops: Array[Types::Range]?
+      attr_accessor iops_to_storage_ratio: Array[Types::DoubleRange]?
+    end
+
+    class VpcSecurityGroupMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_security_group_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_security_group_id: String?
+      attr_accessor status: String?
+    end
+  end
+end

@@ -1,0 +1,3279 @@
+module Aws::MailManager
+  module Types
+
+    module AcceptAction
+      ALLOW: String
+      DENY: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ActionFailurePolicy
+      CONTINUE: String
+      DROP: String
+    end
+
+    class AddHeaderAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header_name: String,
+        ?header_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header_name: String?
+      attr_accessor header_value: String?
+    end
+
+    class AddonInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_instance_id: String,
+        ?addon_subscription_id: String,
+        ?addon_name: String,
+        ?addon_instance_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_instance_id: String?
+      attr_accessor addon_subscription_id: String?
+      attr_accessor addon_name: String?
+      attr_accessor addon_instance_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class AddonSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscription_id: String,
+        ?addon_name: String,
+        ?addon_subscription_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscription_id: String?
+      attr_accessor addon_name: String?
+      attr_accessor addon_subscription_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class AddressFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_prefix: String?
+    end
+
+    class AddressList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?address_list_arn: String,
+        ?address_list_name: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor address_list_arn: String?
+      attr_accessor address_list_name: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class Analysis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analyzer: String,
+        ?result_field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analyzer: String?
+      attr_accessor result_field: String?
+    end
+
+    class Archive
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?archive_name: String,
+        ?archive_state: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor archive_name: String?
+      attr_accessor archive_state: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class ArchiveAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?target_archive: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor target_archive: String?
+    end
+
+    module ArchiveBooleanEmailAttribute
+      HAS_ATTACHMENTS: String
+    end
+
+    class ArchiveBooleanExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::ArchiveBooleanToEvaluate,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::ArchiveBooleanToEvaluate?
+      attr_accessor operator: String?
+    end
+
+    module ArchiveBooleanOperator
+      IS_TRUE: String
+      IS_FALSE: String
+    end
+
+    class ArchiveBooleanToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < ArchiveBooleanToEvaluate
+      end
+      class Unknown < ArchiveBooleanToEvaluate
+      end
+    end
+
+    class ArchiveFilterCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_expression: Types::ArchiveStringExpression,
+        ?boolean_expression: Types::ArchiveBooleanExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_expression: Types::ArchiveStringExpression?
+      attr_accessor boolean_expression: Types::ArchiveBooleanExpression?
+
+      class StringExpression < ArchiveFilterCondition
+      end
+      class BooleanExpression < ArchiveFilterCondition
+      end
+      class Unknown < ArchiveFilterCondition
+      end
+    end
+
+    class ArchiveFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include: Array[Types::ArchiveFilterCondition],
+        ?unless: Array[Types::ArchiveFilterCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include: Array[Types::ArchiveFilterCondition]?
+      attr_accessor unless: Array[Types::ArchiveFilterCondition]?
+    end
+
+    class ArchiveRetention
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?retention_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period: String?
+
+      class RetentionPeriod < ArchiveRetention
+      end
+      class Unknown < ArchiveRetention
+      end
+    end
+
+    module ArchiveState
+      ACTIVE: String
+      PENDING_DELETION: String
+    end
+
+    module ArchiveStringEmailAttribute
+      TO: String
+      FROM: String
+      CC: String
+      SUBJECT: String
+      ENVELOPE_TO: String
+      ENVELOPE_FROM: String
+    end
+
+    class ArchiveStringExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::ArchiveStringToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::ArchiveStringToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ArchiveStringOperator
+      CONTAINS: String
+    end
+
+    class ArchiveStringToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < ArchiveStringToEvaluate
+      end
+      class Unknown < ArchiveStringToEvaluate
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateAddonInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?addon_subscription_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor addon_subscription_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAddonInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_instance_id: String?
+    end
+
+    class CreateAddonSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?addon_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor addon_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAddonSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscription_id: String?
+    end
+
+    class CreateAddressListImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?address_list_id: String,
+        ?name: String,
+        ?import_data_format: Types::ImportDataFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor address_list_id: String?
+      attr_accessor name: String?
+      attr_accessor import_data_format: Types::ImportDataFormat?
+    end
+
+    class CreateAddressListImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?pre_signed_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor pre_signed_url: String?
+    end
+
+    class CreateAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?address_list_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor address_list_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+    end
+
+    class CreateArchiveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?archive_name: String,
+        ?retention: Types::ArchiveRetention,
+        ?kms_key_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor archive_name: String?
+      attr_accessor retention: Types::ArchiveRetention?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateArchiveResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+    end
+
+    class CreateIngressPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?ingress_point_name: String,
+        ?type: String,
+        ?rule_set_id: String,
+        ?traffic_policy_id: String,
+        ?ingress_point_configuration: Types::IngressPointConfiguration,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor ingress_point_name: String?
+      attr_accessor type: String?
+      attr_accessor rule_set_id: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor ingress_point_configuration: Types::IngressPointConfiguration?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIngressPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_id: String?
+    end
+
+    class CreateRelayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?relay_name: String,
+        ?server_name: String,
+        ?server_port: Integer,
+        ?authentication: Types::RelayAuthentication,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor relay_name: String?
+      attr_accessor server_name: String?
+      attr_accessor server_port: Integer?
+      attr_accessor authentication: Types::RelayAuthentication?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRelayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+    end
+
+    class CreateRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?rule_set_name: String,
+        ?rules: Array[Types::Rule],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor rule_set_name: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRuleSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+    end
+
+    class CreateTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?traffic_policy_name: String,
+        ?policy_statements: Array[Types::PolicyStatement],
+        ?default_action: String,
+        ?max_message_size_bytes: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor traffic_policy_name: String?
+      attr_accessor policy_statements: Array[Types::PolicyStatement]?
+      attr_accessor default_action: String?
+      attr_accessor max_message_size_bytes: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id: String?
+    end
+
+    class DeleteAddonInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_instance_id: String?
+    end
+
+    class DeleteAddonInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAddonSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscription_id: String?
+    end
+
+    class DeleteAddonSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+    end
+
+    class DeleteAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteArchiveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+    end
+
+    class DeleteArchiveResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIngressPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_id: String?
+    end
+
+    class DeleteIngressPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRelayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+    end
+
+    class DeleteRelayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+    end
+
+    class DeleteRuleSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id: String?
+    end
+
+    class DeleteTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeliverToMailboxAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?mailbox_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor mailbox_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class DeliverToQBusinessAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?application_id: String,
+        ?index_id: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor application_id: String?
+      attr_accessor index_id: String?
+      attr_accessor role_arn: String?
+    end
+
+    class DeregisterMemberFromAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor address: String?
+    end
+
+    class DeregisterMemberFromAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DropAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Envelope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?helo: String,
+        ?from: String,
+        ?to: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor helo: String?
+      attr_accessor from: String?
+      attr_accessor to: Array[String]?
+    end
+
+    class ExportDestinationConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::S3ExportDestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3ExportDestinationConfiguration?
+
+      class S3 < ExportDestinationConfiguration
+      end
+      class Unknown < ExportDestinationConfiguration
+      end
+    end
+
+    module ExportState
+      QUEUED: String
+      PREPROCESSING: String
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class ExportStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submission_timestamp: Time,
+        ?completion_timestamp: Time,
+        ?state: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submission_timestamp: Time?
+      attr_accessor completion_timestamp: Time?
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+    end
+
+    class ExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+        ?status: Types::ExportStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+      attr_accessor status: Types::ExportStatus?
+    end
+
+    class GetAddonInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_instance_id: String?
+    end
+
+    class GetAddonInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscription_id: String,
+        ?addon_name: String,
+        ?addon_instance_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscription_id: String?
+      attr_accessor addon_name: String?
+      attr_accessor addon_instance_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class GetAddonSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscription_id: String?
+    end
+
+    class GetAddonSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_name: String,
+        ?addon_subscription_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_name: String?
+      attr_accessor addon_subscription_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class GetAddressListImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetAddressListImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?name: String,
+        ?status: String,
+        ?pre_signed_url: String,
+        ?imported_items_count: Integer,
+        ?failed_items_count: Integer,
+        ?import_data_format: Types::ImportDataFormat,
+        ?address_list_id: String,
+        ?created_timestamp: Time,
+        ?start_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor pre_signed_url: String?
+      attr_accessor imported_items_count: Integer?
+      attr_accessor failed_items_count: Integer?
+      attr_accessor import_data_format: Types::ImportDataFormat?
+      attr_accessor address_list_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor start_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor error: String?
+    end
+
+    class GetAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+    end
+
+    class GetAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?address_list_arn: String,
+        ?address_list_name: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor address_list_arn: String?
+      attr_accessor address_list_name: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class GetArchiveExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    class GetArchiveExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?filters: Types::ArchiveFilters,
+        ?from_timestamp: Time,
+        ?to_timestamp: Time,
+        ?max_results: Integer,
+        ?export_destination_configuration: Types::ExportDestinationConfiguration,
+        ?status: Types::ExportStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor filters: Types::ArchiveFilters?
+      attr_accessor from_timestamp: Time?
+      attr_accessor to_timestamp: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration?
+      attr_accessor status: Types::ExportStatus?
+    end
+
+    class GetArchiveMessageContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archived_message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archived_message_id: String?
+    end
+
+    class GetArchiveMessageContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: Types::MessageBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: Types::MessageBody?
+    end
+
+    class GetArchiveMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archived_message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archived_message_id: String?
+    end
+
+    class GetArchiveMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_download_link: String,
+        ?metadata: Types::Metadata,
+        ?envelope: Types::Envelope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_download_link: String?
+      attr_accessor metadata: Types::Metadata?
+      attr_accessor envelope: Types::Envelope?
+    end
+
+    class GetArchiveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+    end
+
+    class GetArchiveResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?archive_name: String,
+        ?archive_arn: String,
+        ?archive_state: String,
+        ?retention: Types::ArchiveRetention,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor archive_name: String?
+      attr_accessor archive_arn: String?
+      attr_accessor archive_state: String?
+      attr_accessor retention: Types::ArchiveRetention?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class GetArchiveSearchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+    end
+
+    class GetArchiveSearchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?filters: Types::ArchiveFilters,
+        ?from_timestamp: Time,
+        ?to_timestamp: Time,
+        ?max_results: Integer,
+        ?status: Types::SearchStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor filters: Types::ArchiveFilters?
+      attr_accessor from_timestamp: Time?
+      attr_accessor to_timestamp: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor status: Types::SearchStatus?
+    end
+
+    class GetArchiveSearchResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+    end
+
+    class GetArchiveSearchResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rows: Array[Types::Row],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rows: Array[Types::Row]?
+    end
+
+    class GetIngressPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_id: String?
+    end
+
+    class GetIngressPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_id: String,
+        ?ingress_point_name: String,
+        ?ingress_point_arn: String,
+        ?status: String,
+        ?type: String,
+        ?a_record: String,
+        ?rule_set_id: String,
+        ?traffic_policy_id: String,
+        ?ingress_point_auth_configuration: Types::IngressPointAuthConfiguration,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_id: String?
+      attr_accessor ingress_point_name: String?
+      attr_accessor ingress_point_arn: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor a_record: String?
+      attr_accessor rule_set_id: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor ingress_point_auth_configuration: Types::IngressPointAuthConfiguration?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class GetMemberOfAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor address: String?
+    end
+
+    class GetMemberOfAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class GetRelayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+    end
+
+    class GetRelayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+        ?relay_arn: String,
+        ?relay_name: String,
+        ?server_name: String,
+        ?server_port: Integer,
+        ?authentication: Types::RelayAuthentication,
+        ?created_timestamp: Time,
+        ?last_modified_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+      attr_accessor relay_arn: String?
+      attr_accessor relay_name: String?
+      attr_accessor server_name: String?
+      attr_accessor server_port: Integer?
+      attr_accessor authentication: Types::RelayAuthentication?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_modified_timestamp: Time?
+    end
+
+    class GetRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+    end
+
+    class GetRuleSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+        ?rule_set_arn: String,
+        ?rule_set_name: String,
+        ?created_date: Time,
+        ?last_modification_date: Time,
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+      attr_accessor rule_set_arn: String?
+      attr_accessor rule_set_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modification_date: Time?
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class GetTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id: String?
+    end
+
+    class GetTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_name: String,
+        ?traffic_policy_id: String,
+        ?traffic_policy_arn: String,
+        ?policy_statements: Array[Types::PolicyStatement],
+        ?max_message_size_bytes: Integer,
+        ?default_action: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_name: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_arn: String?
+      attr_accessor policy_statements: Array[Types::PolicyStatement]?
+      attr_accessor max_message_size_bytes: Integer?
+      attr_accessor default_action: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class ImportDataFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_data_type: String?
+    end
+
+    module ImportDataType
+      CSV: String
+      JSON: String
+    end
+
+    class ImportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?name: String,
+        ?status: String,
+        ?pre_signed_url: String,
+        ?imported_items_count: Integer,
+        ?failed_items_count: Integer,
+        ?import_data_format: Types::ImportDataFormat,
+        ?address_list_id: String,
+        ?created_timestamp: Time,
+        ?start_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor pre_signed_url: String?
+      attr_accessor imported_items_count: Integer?
+      attr_accessor failed_items_count: Integer?
+      attr_accessor import_data_format: Types::ImportDataFormat?
+      attr_accessor address_list_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor start_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor error: String?
+    end
+
+    module ImportJobStatus
+      CREATED: String
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+      STOPPED: String
+    end
+
+    module IngressAddressListEmailAttribute
+      RECIPIENT: String
+    end
+
+    class IngressAnalysis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analyzer: String,
+        ?result_field: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analyzer: String?
+      attr_accessor result_field: String?
+    end
+
+    class IngressBooleanExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::IngressBooleanToEvaluate,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::IngressBooleanToEvaluate?
+      attr_accessor operator: String?
+    end
+
+    module IngressBooleanOperator
+      IS_TRUE: String
+      IS_FALSE: String
+    end
+
+    class IngressBooleanToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?analysis: Types::IngressAnalysis,
+        ?is_in_address_list: Types::IngressIsInAddressList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis: Types::IngressAnalysis?
+      attr_accessor is_in_address_list: Types::IngressIsInAddressList?
+
+      class Analysis < IngressBooleanToEvaluate
+      end
+      class IsInAddressList < IngressBooleanToEvaluate
+      end
+      class Unknown < IngressBooleanToEvaluate
+      end
+    end
+
+    module IngressIpOperator
+      CIDR_MATCHES: String
+      NOT_CIDR_MATCHES: String
+    end
+
+    class IngressIpToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < IngressIpToEvaluate
+      end
+      class Unknown < IngressIpToEvaluate
+      end
+    end
+
+    module IngressIpv4Attribute
+      SENDER_IP: String
+    end
+
+    class IngressIpv4Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::IngressIpToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::IngressIpToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module IngressIpv6Attribute
+      SENDER_IPV6: String
+    end
+
+    class IngressIpv6Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::IngressIpv6ToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::IngressIpv6ToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class IngressIpv6ToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < IngressIpv6ToEvaluate
+      end
+      class Unknown < IngressIpv6ToEvaluate
+      end
+    end
+
+    class IngressIsInAddressList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?address_lists: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor address_lists: Array[String]?
+    end
+
+    class IngressPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_name: String,
+        ?ingress_point_id: String,
+        ?status: String,
+        ?type: String,
+        ?a_record: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_name: String?
+      attr_accessor ingress_point_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor a_record: String?
+    end
+
+    class IngressPointAuthConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_password_configuration: Types::IngressPointPasswordConfiguration,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_password_configuration: Types::IngressPointPasswordConfiguration?
+      attr_accessor secret_arn: String?
+    end
+
+    class IngressPointConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?smtp_password: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor smtp_password: String?
+      attr_accessor secret_arn: String?
+
+      class SmtpPassword < IngressPointConfiguration
+      end
+      class SecretArn < IngressPointConfiguration
+      end
+      class Unknown < IngressPointConfiguration
+      end
+    end
+
+    class IngressPointPasswordConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?smtp_password_version: String,
+        ?previous_smtp_password_version: String,
+        ?previous_smtp_password_expiry_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor smtp_password_version: String?
+      attr_accessor previous_smtp_password_version: String?
+      attr_accessor previous_smtp_password_expiry_timestamp: Time?
+    end
+
+    module IngressPointStatus
+      PROVISIONING: String
+      DEPROVISIONING: String
+      UPDATING: String
+      ACTIVE: String
+      CLOSED: String
+      FAILED: String
+    end
+
+    module IngressPointStatusToUpdate
+      ACTIVE: String
+      CLOSED: String
+    end
+
+    module IngressPointType
+      OPEN: String
+      AUTH: String
+    end
+
+    module IngressStringEmailAttribute
+      RECIPIENT: String
+    end
+
+    class IngressStringExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::IngressStringToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::IngressStringToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module IngressStringOperator
+      EQUALS: String
+      NOT_EQUALS: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+    end
+
+    class IngressStringToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+        ?analysis: Types::IngressAnalysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor analysis: Types::IngressAnalysis?
+
+      class Attribute < IngressStringToEvaluate
+      end
+      class Analysis < IngressStringToEvaluate
+      end
+      class Unknown < IngressStringToEvaluate
+      end
+    end
+
+    module IngressTlsAttribute
+      TLS_PROTOCOL: String
+    end
+
+    module IngressTlsProtocolAttribute
+      TLS1_2: String
+      TLS1_3: String
+    end
+
+    class IngressTlsProtocolExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::IngressTlsProtocolToEvaluate,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::IngressTlsProtocolToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    module IngressTlsProtocolOperator
+      MINIMUM_TLS_VERSION: String
+      IS: String
+    end
+
+    class IngressTlsProtocolToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < IngressTlsProtocolToEvaluate
+      end
+      class Unknown < IngressTlsProtocolToEvaluate
+      end
+    end
+
+    module IpType
+      IPV4: String
+      DUAL_STACK: String
+    end
+
+    class ListAddonInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListAddonInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_instances: Array[Types::AddonInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_instances: Array[Types::AddonInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAddonSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListAddonSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addon_subscriptions: Array[Types::AddonSubscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addon_subscriptions: Array[Types::AddonSubscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAddressListImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListAddressListImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_jobs: Array[Types::ImportJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_jobs: Array[Types::ImportJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAddressListsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListAddressListsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_lists: Array[Types::AddressList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_lists: Array[Types::AddressList]?
+      attr_accessor next_token: String?
+    end
+
+    class ListArchiveExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListArchiveExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exports: Array[Types::ExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exports: Array[Types::ExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListArchiveSearchesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListArchiveSearchesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?searches: Array[Types::SearchSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor searches: Array[Types::SearchSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListArchivesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListArchivesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archives: Array[Types::Archive],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archives: Array[Types::Archive]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngressPointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngressPointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_points: Array[Types::IngressPoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_points: Array[Types::IngressPoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMembersOfAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?filter: Types::AddressFilter,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor filter: Types::AddressFilter?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListMembersOfAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addresses: Array[Types::SavedAddress],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addresses: Array[Types::SavedAddress]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRelaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRelaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relays: Array[Types::Relay],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relays: Array[Types::Relay]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListRuleSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_sets: Array[Types::RuleSet],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_sets: Array[Types::RuleSet]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTrafficPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrafficPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policies: Array[Types::TrafficPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policies: Array[Types::TrafficPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    module MailFrom
+      REPLACE: String
+      PRESERVE: String
+    end
+
+    class MessageBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?html: String,
+        ?message_malformed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor html: String?
+      attr_accessor message_malformed: bool?
+    end
+
+    class Metadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?ingress_point_id: String,
+        ?traffic_policy_id: String,
+        ?rule_set_id: String,
+        ?sender_hostname: String,
+        ?sender_ip_address: String,
+        ?tls_cipher_suite: String,
+        ?tls_protocol: String,
+        ?sending_method: String,
+        ?source_identity: String,
+        ?sending_pool: String,
+        ?configuration_set: String,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor ingress_point_id: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor rule_set_id: String?
+      attr_accessor sender_hostname: String?
+      attr_accessor sender_ip_address: String?
+      attr_accessor tls_cipher_suite: String?
+      attr_accessor tls_protocol: String?
+      attr_accessor sending_method: String?
+      attr_accessor source_identity: String?
+      attr_accessor sending_pool: String?
+      attr_accessor configuration_set: String?
+      attr_accessor source_arn: String?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?public_network_configuration: Types::PublicNetworkConfiguration,
+        ?private_network_configuration: Types::PrivateNetworkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_network_configuration: Types::PublicNetworkConfiguration?
+      attr_accessor private_network_configuration: Types::PrivateNetworkConfiguration?
+
+      class PublicNetworkConfiguration < NetworkConfiguration
+      end
+      class PrivateNetworkConfiguration < NetworkConfiguration
+      end
+      class Unknown < NetworkConfiguration
+      end
+    end
+
+    class NoAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PolicyCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_expression: Types::IngressStringExpression,
+        ?ip_expression: Types::IngressIpv4Expression,
+        ?ipv6_expression: Types::IngressIpv6Expression,
+        ?tls_expression: Types::IngressTlsProtocolExpression,
+        ?boolean_expression: Types::IngressBooleanExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_expression: Types::IngressStringExpression?
+      attr_accessor ip_expression: Types::IngressIpv4Expression?
+      attr_accessor ipv6_expression: Types::IngressIpv6Expression?
+      attr_accessor tls_expression: Types::IngressTlsProtocolExpression?
+      attr_accessor boolean_expression: Types::IngressBooleanExpression?
+
+      class StringExpression < PolicyCondition
+      end
+      class IpExpression < PolicyCondition
+      end
+      class Ipv6Expression < PolicyCondition
+      end
+      class TlsExpression < PolicyCondition
+      end
+      class BooleanExpression < PolicyCondition
+      end
+      class Unknown < PolicyCondition
+      end
+    end
+
+    class PolicyStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditions: Array[Types::PolicyCondition],
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditions: Array[Types::PolicyCondition]?
+      attr_accessor action: String?
+    end
+
+    class PrivateNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class PublicNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_type: String?
+    end
+
+    class RegisterMemberToAddressListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_list_id: String,
+        ?address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_list_id: String?
+      attr_accessor address: String?
+    end
+
+    class RegisterMemberToAddressListResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Relay
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+        ?relay_name: String,
+        ?last_modified_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+      attr_accessor relay_name: String?
+      attr_accessor last_modified_timestamp: Time?
+    end
+
+    class RelayAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?relay: String,
+        ?mail_from: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor relay: String?
+      attr_accessor mail_from: String?
+    end
+
+    class RelayAuthentication
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?secret_arn: String,
+        ?no_authentication: Types::NoAuthentication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor no_authentication: Types::NoAuthentication?
+
+      class SecretArn < RelayAuthentication
+      end
+      class NoAuthentication < RelayAuthentication
+      end
+      class Unknown < RelayAuthentication
+      end
+    end
+
+    class ReplaceRecipientAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replace_with: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replace_with: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RetentionPeriod
+      THREE_MONTHS: String
+      SIX_MONTHS: String
+      NINE_MONTHS: String
+      ONE_YEAR: String
+      EIGHTEEN_MONTHS: String
+      TWO_YEARS: String
+      THIRTY_MONTHS: String
+      THREE_YEARS: String
+      FOUR_YEARS: String
+      FIVE_YEARS: String
+      SIX_YEARS: String
+      SEVEN_YEARS: String
+      EIGHT_YEARS: String
+      NINE_YEARS: String
+      TEN_YEARS: String
+      PERMANENT: String
+    end
+
+    class Row
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archived_message_id: String,
+        ?received_timestamp: Time,
+        ?date: String,
+        ?to: String,
+        ?from: String,
+        ?cc: String,
+        ?subject: String,
+        ?message_id: String,
+        ?has_attachments: bool,
+        ?received_headers: Array[String],
+        ?in_reply_to: String,
+        ?x_mailer: String,
+        ?x_original_mailer: String,
+        ?x_priority: String,
+        ?ingress_point_id: String,
+        ?sender_hostname: String,
+        ?sender_ip_address: String,
+        ?envelope: Types::Envelope,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archived_message_id: String?
+      attr_accessor received_timestamp: Time?
+      attr_accessor date: String?
+      attr_accessor to: String?
+      attr_accessor from: String?
+      attr_accessor cc: String?
+      attr_accessor subject: String?
+      attr_accessor message_id: String?
+      attr_accessor has_attachments: bool?
+      attr_accessor received_headers: Array[String]?
+      attr_accessor in_reply_to: String?
+      attr_accessor x_mailer: String?
+      attr_accessor x_original_mailer: String?
+      attr_accessor x_priority: String?
+      attr_accessor ingress_point_id: String?
+      attr_accessor sender_hostname: String?
+      attr_accessor sender_ip_address: String?
+      attr_accessor envelope: Types::Envelope?
+      attr_accessor source_arn: String?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?conditions: Array[Types::RuleCondition],
+        ?unless: Array[Types::RuleCondition],
+        ?actions: Array[Types::RuleAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor conditions: Array[Types::RuleCondition]?
+      attr_accessor unless: Array[Types::RuleCondition]?
+      attr_accessor actions: Array[Types::RuleAction]?
+    end
+
+    class RuleAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?drop: Types::DropAction,
+        ?relay: Types::RelayAction,
+        ?archive: Types::ArchiveAction,
+        ?write_to_s3: Types::S3Action,
+        ?send: Types::SendAction,
+        ?add_header: Types::AddHeaderAction,
+        ?replace_recipient: Types::ReplaceRecipientAction,
+        ?deliver_to_mailbox: Types::DeliverToMailboxAction,
+        ?deliver_to_q_business: Types::DeliverToQBusinessAction,
+        ?publish_to_sns: Types::SnsAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor drop: Types::DropAction?
+      attr_accessor relay: Types::RelayAction?
+      attr_accessor archive: Types::ArchiveAction?
+      attr_accessor write_to_s3: Types::S3Action?
+      attr_accessor send: Types::SendAction?
+      attr_accessor add_header: Types::AddHeaderAction?
+      attr_accessor replace_recipient: Types::ReplaceRecipientAction?
+      attr_accessor deliver_to_mailbox: Types::DeliverToMailboxAction?
+      attr_accessor deliver_to_q_business: Types::DeliverToQBusinessAction?
+      attr_accessor publish_to_sns: Types::SnsAction?
+
+      class Drop < RuleAction
+      end
+      class Relay < RuleAction
+      end
+      class Archive < RuleAction
+      end
+      class WriteToS3 < RuleAction
+      end
+      class Send < RuleAction
+      end
+      class AddHeader < RuleAction
+      end
+      class ReplaceRecipient < RuleAction
+      end
+      class DeliverToMailbox < RuleAction
+      end
+      class DeliverToQBusiness < RuleAction
+      end
+      class PublishToSns < RuleAction
+      end
+      class Unknown < RuleAction
+      end
+    end
+
+    module RuleAddressListEmailAttribute
+      RECIPIENT: String
+      MAIL_FROM: String
+      SENDER: String
+      FROM: String
+      TO: String
+      CC: String
+    end
+
+    module RuleBooleanEmailAttribute
+      READ_RECEIPT_REQUESTED: String
+      TLS: String
+      TLS_WRAPPED: String
+    end
+
+    class RuleBooleanExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::RuleBooleanToEvaluate,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::RuleBooleanToEvaluate?
+      attr_accessor operator: String?
+    end
+
+    module RuleBooleanOperator
+      IS_TRUE: String
+      IS_FALSE: String
+    end
+
+    class RuleBooleanToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+        ?analysis: Types::Analysis,
+        ?is_in_address_list: Types::RuleIsInAddressList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor analysis: Types::Analysis?
+      attr_accessor is_in_address_list: Types::RuleIsInAddressList?
+
+      class Attribute < RuleBooleanToEvaluate
+      end
+      class Analysis < RuleBooleanToEvaluate
+      end
+      class IsInAddressList < RuleBooleanToEvaluate
+      end
+      class Unknown < RuleBooleanToEvaluate
+      end
+    end
+
+    class RuleCondition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?boolean_expression: Types::RuleBooleanExpression,
+        ?string_expression: Types::RuleStringExpression,
+        ?number_expression: Types::RuleNumberExpression,
+        ?ip_expression: Types::RuleIpExpression,
+        ?verdict_expression: Types::RuleVerdictExpression,
+        ?dmarc_expression: Types::RuleDmarcExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor boolean_expression: Types::RuleBooleanExpression?
+      attr_accessor string_expression: Types::RuleStringExpression?
+      attr_accessor number_expression: Types::RuleNumberExpression?
+      attr_accessor ip_expression: Types::RuleIpExpression?
+      attr_accessor verdict_expression: Types::RuleVerdictExpression?
+      attr_accessor dmarc_expression: Types::RuleDmarcExpression?
+
+      class BooleanExpression < RuleCondition
+      end
+      class StringExpression < RuleCondition
+      end
+      class NumberExpression < RuleCondition
+      end
+      class IpExpression < RuleCondition
+      end
+      class VerdictExpression < RuleCondition
+      end
+      class DmarcExpression < RuleCondition
+      end
+      class Unknown < RuleCondition
+      end
+    end
+
+    class RuleDmarcExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RuleDmarcOperator
+      EQUALS: String
+      NOT_EQUALS: String
+    end
+
+    module RuleDmarcPolicy
+      NONE: String
+      QUARANTINE: String
+      REJECT: String
+    end
+
+    module RuleIpEmailAttribute
+      SOURCE_IP: String
+    end
+
+    class RuleIpExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::RuleIpToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::RuleIpToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RuleIpOperator
+      CIDR_MATCHES: String
+      NOT_CIDR_MATCHES: String
+    end
+
+    class RuleIpToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < RuleIpToEvaluate
+      end
+      class Unknown < RuleIpToEvaluate
+      end
+    end
+
+    class RuleIsInAddressList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?address_lists: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor address_lists: Array[String]?
+    end
+
+    module RuleNumberEmailAttribute
+      MESSAGE_SIZE: String
+    end
+
+    class RuleNumberExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::RuleNumberToEvaluate,
+        ?operator: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::RuleNumberToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor value: Float?
+    end
+
+    module RuleNumberOperator
+      EQUALS: String
+      NOT_EQUALS: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      LESS_THAN_OR_EQUAL: String
+      GREATER_THAN_OR_EQUAL: String
+    end
+
+    class RuleNumberToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+
+      class Attribute < RuleNumberToEvaluate
+      end
+      class Unknown < RuleNumberToEvaluate
+      end
+    end
+
+    class RuleSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+        ?rule_set_name: String,
+        ?last_modification_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+      attr_accessor rule_set_name: String?
+      attr_accessor last_modification_date: Time?
+    end
+
+    module RuleStringEmailAttribute
+      MAIL_FROM: String
+      HELO: String
+      RECIPIENT: String
+      SENDER: String
+      FROM: String
+      SUBJECT: String
+      TO: String
+      CC: String
+    end
+
+    class RuleStringExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::RuleStringToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::RuleStringToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RuleStringOperator
+      EQUALS: String
+      NOT_EQUALS: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+    end
+
+    class RuleStringToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+        ?mime_header_attribute: String,
+        ?analysis: Types::Analysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor mime_header_attribute: String?
+      attr_accessor analysis: Types::Analysis?
+
+      class Attribute < RuleStringToEvaluate
+      end
+      class MimeHeaderAttribute < RuleStringToEvaluate
+      end
+      class Analysis < RuleStringToEvaluate
+      end
+      class Unknown < RuleStringToEvaluate
+      end
+    end
+
+    module RuleVerdict
+      PASS: String
+      FAIL: String
+      GRAY: String
+      PROCESSING_FAILED: String
+    end
+
+    module RuleVerdictAttribute
+      SPF: String
+      DKIM: String
+    end
+
+    class RuleVerdictExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluate: Types::RuleVerdictToEvaluate,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluate: Types::RuleVerdictToEvaluate?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RuleVerdictOperator
+      EQUALS: String
+      NOT_EQUALS: String
+    end
+
+    class RuleVerdictToEvaluate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?attribute: String,
+        ?analysis: Types::Analysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor analysis: Types::Analysis?
+
+      class Attribute < RuleVerdictToEvaluate
+      end
+      class Analysis < RuleVerdictToEvaluate
+      end
+      class Unknown < RuleVerdictToEvaluate
+      end
+    end
+
+    class S3Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?role_arn: String,
+        ?s3_bucket: String,
+        ?s3_prefix: String,
+        ?s3_sse_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor role_arn: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_prefix: String?
+      attr_accessor s3_sse_kms_key_id: String?
+    end
+
+    class S3ExportDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: String?
+    end
+
+    class SavedAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    module SearchState
+      QUEUED: String
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class SearchStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submission_timestamp: Time,
+        ?completion_timestamp: Time,
+        ?state: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submission_timestamp: Time?
+      attr_accessor completion_timestamp: Time?
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+    end
+
+    class SearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?status: Types::SearchStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor status: Types::SearchStatus?
+    end
+
+    class SendAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor role_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnsAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?topic_arn: String,
+        ?role_arn: String,
+        ?encoding: String,
+        ?payload_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor topic_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor encoding: String?
+      attr_accessor payload_type: String?
+    end
+
+    module SnsNotificationEncoding
+      UTF_8: String
+      BASE64: String
+    end
+
+    module SnsNotificationPayloadType
+      HEADERS: String
+      CONTENT: String
+    end
+
+    class StartAddressListImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartAddressListImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartArchiveExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?filters: Types::ArchiveFilters,
+        ?from_timestamp: Time,
+        ?to_timestamp: Time,
+        ?max_results: Integer,
+        ?export_destination_configuration: Types::ExportDestinationConfiguration,
+        ?include_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor filters: Types::ArchiveFilters?
+      attr_accessor from_timestamp: Time?
+      attr_accessor to_timestamp: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration?
+      attr_accessor include_metadata: bool?
+    end
+
+    class StartArchiveExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    class StartArchiveSearchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?filters: Types::ArchiveFilters,
+        ?from_timestamp: Time,
+        ?to_timestamp: Time,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor filters: Types::ArchiveFilters?
+      attr_accessor from_timestamp: Time?
+      attr_accessor to_timestamp: Time?
+      attr_accessor max_results: Integer?
+    end
+
+    class StartArchiveSearchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+    end
+
+    class StopAddressListImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopAddressListImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopArchiveExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    class StopArchiveExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopArchiveSearchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+    end
+
+    class StopArchiveSearchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrafficPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_name: String,
+        ?traffic_policy_id: String,
+        ?default_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_name: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor default_action: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateArchiveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archive_id: String,
+        ?archive_name: String,
+        ?retention: Types::ArchiveRetention,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archive_id: String?
+      attr_accessor archive_name: String?
+      attr_accessor retention: Types::ArchiveRetention?
+    end
+
+    class UpdateArchiveResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIngressPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_point_id: String,
+        ?ingress_point_name: String,
+        ?status_to_update: String,
+        ?rule_set_id: String,
+        ?traffic_policy_id: String,
+        ?ingress_point_configuration: Types::IngressPointConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_point_id: String?
+      attr_accessor ingress_point_name: String?
+      attr_accessor status_to_update: String?
+      attr_accessor rule_set_id: String?
+      attr_accessor traffic_policy_id: String?
+      attr_accessor ingress_point_configuration: Types::IngressPointConfiguration?
+    end
+
+    class UpdateIngressPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRelayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relay_id: String,
+        ?relay_name: String,
+        ?server_name: String,
+        ?server_port: Integer,
+        ?authentication: Types::RelayAuthentication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relay_id: String?
+      attr_accessor relay_name: String?
+      attr_accessor server_name: String?
+      attr_accessor server_port: Integer?
+      attr_accessor authentication: Types::RelayAuthentication?
+    end
+
+    class UpdateRelayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_set_id: String,
+        ?rule_set_name: String,
+        ?rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_set_id: String?
+      attr_accessor rule_set_name: String?
+      attr_accessor rules: Array[Types::Rule]?
+    end
+
+    class UpdateRuleSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTrafficPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_policy_id: String,
+        ?traffic_policy_name: String,
+        ?policy_statements: Array[Types::PolicyStatement],
+        ?default_action: String,
+        ?max_message_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_policy_id: String?
+      attr_accessor traffic_policy_name: String?
+      attr_accessor policy_statements: Array[Types::PolicyStatement]?
+      attr_accessor default_action: String?
+      attr_accessor max_message_size_bytes: Integer?
+    end
+
+    class UpdateTrafficPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,172 @@
+module Aws::ElasticLoadBalancingV2
+  module Errors
+    class ALPNPolicyNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AllocationIdNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AvailabilityZoneNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CaCertificatesBundleNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CapacityDecreaseRequestsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CapacityReservationPendingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CapacityUnitsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CertificateNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeleteAssociationSameAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateListenerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateLoadBalancerNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateTagKeysException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateTargetGroupNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateTrustStoreNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HealthUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleProtocolsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientCapacityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCaCertificatesBundleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConfigurationRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLoadBalancerActionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRevocationContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSchemeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSecurityGroupException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTargetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListenerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LoadBalancerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PriorRequestNotCompleteException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PriorityInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevocationContentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RevocationIdNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RuleNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SSLPolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetGroupAssociationLimitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetGroupNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyActionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyCertificatesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyListenersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyLoadBalancersException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRegistrationsForTargetIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRulesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTargetGroupsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTargetsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrustStoreRevocationEntriesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTrustStoresException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyUniqueTargetGroupsPerLoadBalancerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustStoreAssociationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustStoreInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustStoreNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrustStoreNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedProtocolException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

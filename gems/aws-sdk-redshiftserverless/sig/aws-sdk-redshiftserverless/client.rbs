@@ -1,0 +1,809 @@
+module Aws::RedshiftServerless
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RedshiftServerless::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ConvertRecoveryPointToSnapshotResponse
+      include Smithy::Client::_Response[Types::ConvertRecoveryPointToSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def convert_recovery_point_to_snapshot: (
+      ?recovery_point_id: String,
+      ?snapshot_name: String,
+      ?retention_period: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ConvertRecoveryPointToSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConvertRecoveryPointToSnapshotResponse
+
+    interface _CreateCustomDomainAssociationResponse
+      include Smithy::Client::_Response[Types::CreateCustomDomainAssociationResponse]
+      def custom_domain_name: () -> String?
+      def workgroup_name: () -> String?
+      def custom_domain_certificate_arn: () -> String?
+      def custom_domain_certificate_expiry_time: () -> Time?
+    end
+    def create_custom_domain_association: (
+      ?workgroup_name: String,
+      ?custom_domain_name: String,
+      ?custom_domain_certificate_arn: String
+    ) -> _CreateCustomDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomDomainAssociationResponse
+
+    interface _CreateEndpointAccessResponse
+      include Smithy::Client::_Response[Types::CreateEndpointAccessResponse]
+      def endpoint: () -> Types::EndpointAccess?
+    end
+    def create_endpoint_access: (
+      ?endpoint_name: String,
+      ?subnet_ids: Array[String],
+      ?workgroup_name: String,
+      ?vpc_security_group_ids: Array[String],
+      ?owner_account: String
+    ) -> _CreateEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointAccessResponse
+
+    interface _CreateNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateNamespaceResponse]
+      def namespace: () -> Types::Namespace?
+    end
+    def create_namespace: (
+      ?namespace_name: String,
+      ?admin_username: String,
+      ?admin_user_password: String,
+      ?db_name: String,
+      ?kms_key_id: String,
+      ?default_iam_role_arn: String,
+      ?iam_roles: Array[String],
+      ?log_exports: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?manage_admin_password: bool,
+      ?admin_password_secret_kms_key_id: String,
+      ?redshift_idc_application_arn: String
+    ) -> _CreateNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNamespaceResponse
+
+    interface _CreateReservationResponse
+      include Smithy::Client::_Response[Types::CreateReservationResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def create_reservation: (
+      ?capacity: Integer,
+      ?offering_id: String,
+      ?client_token: String
+    ) -> _CreateReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReservationResponse
+
+    interface _CreateScheduledActionResponse
+      include Smithy::Client::_Response[Types::CreateScheduledActionResponse]
+      def scheduled_action: () -> Types::ScheduledActionResponse?
+    end
+    def create_scheduled_action: (
+      ?scheduled_action_name: String,
+      ?target_action: {
+        create_snapshot: {
+          namespace_name: String,
+          snapshot_name_prefix: String,
+          retention_period: Integer,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      },
+      ?schedule: {
+        at: Time,
+        cron: String
+      },
+      ?role_arn: String,
+      ?namespace_name: String,
+      ?enabled: bool,
+      ?scheduled_action_description: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _CreateScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduledActionResponse
+
+    interface _CreateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def create_snapshot: (
+      ?namespace_name: String,
+      ?snapshot_name: String,
+      ?retention_period: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotResponse
+
+    interface _CreateSnapshotCopyConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotCopyConfigurationResponse]
+      def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration?
+    end
+    def create_snapshot_copy_configuration: (
+      ?namespace_name: String,
+      ?destination_region: String,
+      ?snapshot_retention_period: Integer,
+      ?destination_kms_key_id: String
+    ) -> _CreateSnapshotCopyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotCopyConfigurationResponse
+
+    interface _CreateUsageLimitResponse
+      include Smithy::Client::_Response[Types::CreateUsageLimitResponse]
+      def usage_limit: () -> Types::UsageLimit?
+    end
+    def create_usage_limit: (
+      ?resource_arn: String,
+      ?usage_type: String,
+      ?amount: Integer,
+      ?period: String,
+      ?breach_action: String
+    ) -> _CreateUsageLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUsageLimitResponse
+
+    interface _CreateWorkgroupResponse
+      include Smithy::Client::_Response[Types::CreateWorkgroupResponse]
+      def workgroup: () -> Types::Workgroup?
+    end
+    def create_workgroup: (
+      ?workgroup_name: String,
+      ?namespace_name: String,
+      ?base_capacity: Integer,
+      ?enhanced_vpc_routing: bool,
+      ?config_parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String
+        }
+      ],
+      ?security_group_ids: Array[String],
+      ?subnet_ids: Array[String],
+      ?publicly_accessible: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?port: Integer,
+      ?max_capacity: Integer,
+      ?price_performance_target: {
+        status: String,
+        level: Integer
+      },
+      ?ip_address_type: String,
+      ?track_name: String
+    ) -> _CreateWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkgroupResponse
+
+    interface _DeleteCustomDomainAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteCustomDomainAssociationResponse]
+    end
+    def delete_custom_domain_association: (
+      ?workgroup_name: String,
+      ?custom_domain_name: String
+    ) -> _DeleteCustomDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomDomainAssociationResponse
+
+    interface _DeleteEndpointAccessResponse
+      include Smithy::Client::_Response[Types::DeleteEndpointAccessResponse]
+      def endpoint: () -> Types::EndpointAccess?
+    end
+    def delete_endpoint_access: (
+      ?endpoint_name: String
+    ) -> _DeleteEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointAccessResponse
+
+    interface _DeleteNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteNamespaceResponse]
+      def namespace: () -> Types::Namespace?
+    end
+    def delete_namespace: (
+      ?namespace_name: String,
+      ?final_snapshot_name: String,
+      ?final_snapshot_retention_period: Integer
+    ) -> _DeleteNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNamespaceResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteScheduledActionResponse
+      include Smithy::Client::_Response[Types::DeleteScheduledActionResponse]
+      def scheduled_action: () -> Types::ScheduledActionResponse?
+    end
+    def delete_scheduled_action: (
+      ?scheduled_action_name: String
+    ) -> _DeleteScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduledActionResponse
+
+    interface _DeleteSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def delete_snapshot: (
+      ?snapshot_name: String
+    ) -> _DeleteSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotResponse
+
+    interface _DeleteSnapshotCopyConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotCopyConfigurationResponse]
+      def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration?
+    end
+    def delete_snapshot_copy_configuration: (
+      ?snapshot_copy_configuration_id: String
+    ) -> _DeleteSnapshotCopyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotCopyConfigurationResponse
+
+    interface _DeleteUsageLimitResponse
+      include Smithy::Client::_Response[Types::DeleteUsageLimitResponse]
+      def usage_limit: () -> Types::UsageLimit?
+    end
+    def delete_usage_limit: (
+      ?usage_limit_id: String
+    ) -> _DeleteUsageLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUsageLimitResponse
+
+    interface _DeleteWorkgroupResponse
+      include Smithy::Client::_Response[Types::DeleteWorkgroupResponse]
+      def workgroup: () -> Types::Workgroup?
+    end
+    def delete_workgroup: (
+      ?workgroup_name: String
+    ) -> _DeleteWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkgroupResponse
+
+    interface _GetCredentialsResponse
+      include Smithy::Client::_Response[Types::GetCredentialsResponse]
+      def db_user: () -> String?
+      def db_password: () -> String?
+      def expiration: () -> Time?
+      def next_refresh_time: () -> Time?
+    end
+    def get_credentials: (
+      ?db_name: String,
+      ?duration_seconds: Integer,
+      ?workgroup_name: String,
+      ?custom_domain_name: String
+    ) -> _GetCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCredentialsResponse
+
+    interface _GetCustomDomainAssociationResponse
+      include Smithy::Client::_Response[Types::GetCustomDomainAssociationResponse]
+      def custom_domain_name: () -> String?
+      def workgroup_name: () -> String?
+      def custom_domain_certificate_arn: () -> String?
+      def custom_domain_certificate_expiry_time: () -> Time?
+    end
+    def get_custom_domain_association: (
+      ?custom_domain_name: String,
+      ?workgroup_name: String
+    ) -> _GetCustomDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomDomainAssociationResponse
+
+    interface _GetEndpointAccessResponse
+      include Smithy::Client::_Response[Types::GetEndpointAccessResponse]
+      def endpoint: () -> Types::EndpointAccess?
+    end
+    def get_endpoint_access: (
+      ?endpoint_name: String
+    ) -> _GetEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEndpointAccessResponse
+
+    interface _GetNamespaceResponse
+      include Smithy::Client::_Response[Types::GetNamespaceResponse]
+      def namespace: () -> Types::Namespace?
+    end
+    def get_namespace: (
+      ?namespace_name: String
+    ) -> _GetNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNamespaceResponse
+
+    interface _GetRecoveryPointResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPointResponse]
+      def recovery_point: () -> Types::RecoveryPoint?
+    end
+    def get_recovery_point: (
+      ?recovery_point_id: String
+    ) -> _GetRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPointResponse
+
+    interface _GetReservationResponse
+      include Smithy::Client::_Response[Types::GetReservationResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def get_reservation: (
+      ?reservation_id: String
+    ) -> _GetReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReservationResponse
+
+    interface _GetReservationOfferingResponse
+      include Smithy::Client::_Response[Types::GetReservationOfferingResponse]
+      def reservation_offering: () -> Types::ReservationOffering?
+    end
+    def get_reservation_offering: (
+      ?offering_id: String
+    ) -> _GetReservationOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReservationOfferingResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_policy: () -> Types::ResourcePolicy?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetScheduledActionResponse
+      include Smithy::Client::_Response[Types::GetScheduledActionResponse]
+      def scheduled_action: () -> Types::ScheduledActionResponse?
+    end
+    def get_scheduled_action: (
+      ?scheduled_action_name: String
+    ) -> _GetScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduledActionResponse
+
+    interface _GetSnapshotResponse
+      include Smithy::Client::_Response[Types::GetSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def get_snapshot: (
+      ?snapshot_name: String,
+      ?owner_account: String,
+      ?snapshot_arn: String
+    ) -> _GetSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSnapshotResponse
+
+    interface _GetTableRestoreStatusResponse
+      include Smithy::Client::_Response[Types::GetTableRestoreStatusResponse]
+      def table_restore_status: () -> Types::TableRestoreStatus?
+    end
+    def get_table_restore_status: (
+      ?table_restore_request_id: String
+    ) -> _GetTableRestoreStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableRestoreStatusResponse
+
+    interface _GetTrackResponse
+      include Smithy::Client::_Response[Types::GetTrackResponse]
+      def track: () -> Types::ServerlessTrack?
+    end
+    def get_track: (
+      ?track_name: String
+    ) -> _GetTrackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrackResponse
+
+    interface _GetUsageLimitResponse
+      include Smithy::Client::_Response[Types::GetUsageLimitResponse]
+      def usage_limit: () -> Types::UsageLimit?
+    end
+    def get_usage_limit: (
+      ?usage_limit_id: String
+    ) -> _GetUsageLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsageLimitResponse
+
+    interface _GetWorkgroupResponse
+      include Smithy::Client::_Response[Types::GetWorkgroupResponse]
+      def workgroup: () -> Types::Workgroup?
+    end
+    def get_workgroup: (
+      ?workgroup_name: String
+    ) -> _GetWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkgroupResponse
+
+    interface _ListCustomDomainAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCustomDomainAssociationsResponse]
+      def next_token: () -> String?
+      def associations: () -> Array[Types::Association]?
+    end
+    def list_custom_domain_associations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?custom_domain_name: String,
+      ?custom_domain_certificate_arn: String
+    ) -> _ListCustomDomainAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomDomainAssociationsResponse
+
+    interface _ListEndpointAccessResponse
+      include Smithy::Client::_Response[Types::ListEndpointAccessResponse]
+      def next_token: () -> String?
+      def endpoints: () -> Array[Types::EndpointAccess]?
+    end
+    def list_endpoint_access: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workgroup_name: String,
+      ?vpc_id: String,
+      ?owner_account: String
+    ) -> _ListEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEndpointAccessResponse
+
+    interface _ListManagedWorkgroupsResponse
+      include Smithy::Client::_Response[Types::ListManagedWorkgroupsResponse]
+      def next_token: () -> String?
+      def managed_workgroups: () -> Array[Types::ManagedWorkgroupListItem]?
+    end
+    def list_managed_workgroups: (
+      ?source_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedWorkgroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedWorkgroupsResponse
+
+    interface _ListNamespacesResponse
+      include Smithy::Client::_Response[Types::ListNamespacesResponse]
+      def next_token: () -> String?
+      def namespaces: () -> Array[Types::Namespace]?
+    end
+    def list_namespaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNamespacesResponse
+
+    interface _ListRecoveryPointsResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPointsResponse]
+      def recovery_points: () -> Array[Types::RecoveryPoint]?
+      def next_token: () -> String?
+    end
+    def list_recovery_points: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?namespace_name: String,
+      ?namespace_arn: String
+    ) -> _ListRecoveryPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPointsResponse
+
+    interface _ListReservationOfferingsResponse
+      include Smithy::Client::_Response[Types::ListReservationOfferingsResponse]
+      def reservation_offerings_list: () -> Array[Types::ReservationOffering]?
+      def next_token: () -> String?
+    end
+    def list_reservation_offerings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReservationOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReservationOfferingsResponse
+
+    interface _ListReservationsResponse
+      include Smithy::Client::_Response[Types::ListReservationsResponse]
+      def reservations_list: () -> Array[Types::Reservation]?
+      def next_token: () -> String?
+    end
+    def list_reservations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReservationsResponse
+
+    interface _ListScheduledActionsResponse
+      include Smithy::Client::_Response[Types::ListScheduledActionsResponse]
+      def next_token: () -> String?
+      def scheduled_actions: () -> Array[Types::ScheduledActionAssociation]?
+    end
+    def list_scheduled_actions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace_name: String
+    ) -> _ListScheduledActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduledActionsResponse
+
+    interface _ListSnapshotCopyConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSnapshotCopyConfigurationsResponse]
+      def next_token: () -> String?
+      def snapshot_copy_configurations: () -> Array[Types::SnapshotCopyConfiguration]?
+    end
+    def list_snapshot_copy_configurations: (
+      ?namespace_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSnapshotCopyConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSnapshotCopyConfigurationsResponse
+
+    interface _ListSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListSnapshotsResponse]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::Snapshot]?
+    end
+    def list_snapshots: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace_name: String,
+      ?namespace_arn: String,
+      ?owner_account: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _ListSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSnapshotsResponse
+
+    interface _ListTableRestoreStatusResponse
+      include Smithy::Client::_Response[Types::ListTableRestoreStatusResponse]
+      def next_token: () -> String?
+      def table_restore_statuses: () -> Array[Types::TableRestoreStatus]?
+    end
+    def list_table_restore_status: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?namespace_name: String,
+      ?workgroup_name: String
+    ) -> _ListTableRestoreStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTableRestoreStatusResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTracksResponse
+      include Smithy::Client::_Response[Types::ListTracksResponse]
+      def tracks: () -> Array[Types::ServerlessTrack]?
+      def next_token: () -> String?
+    end
+    def list_tracks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTracksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTracksResponse
+
+    interface _ListUsageLimitsResponse
+      include Smithy::Client::_Response[Types::ListUsageLimitsResponse]
+      def usage_limits: () -> Array[Types::UsageLimit]?
+      def next_token: () -> String?
+    end
+    def list_usage_limits: (
+      ?resource_arn: String,
+      ?usage_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUsageLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsageLimitsResponse
+
+    interface _ListWorkgroupsResponse
+      include Smithy::Client::_Response[Types::ListWorkgroupsResponse]
+      def next_token: () -> String?
+      def workgroups: () -> Array[Types::Workgroup]?
+    end
+    def list_workgroups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?owner_account: String
+    ) -> _ListWorkgroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkgroupsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_policy: () -> Types::ResourcePolicy?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RestoreFromRecoveryPointResponse
+      include Smithy::Client::_Response[Types::RestoreFromRecoveryPointResponse]
+      def recovery_point_id: () -> String?
+      def namespace: () -> Types::Namespace?
+    end
+    def restore_from_recovery_point: (
+      ?recovery_point_id: String,
+      ?namespace_name: String,
+      ?workgroup_name: String
+    ) -> _RestoreFromRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromRecoveryPointResponse
+
+    interface _RestoreFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreFromSnapshotResponse]
+      def snapshot_name: () -> String?
+      def owner_account: () -> String?
+      def namespace: () -> Types::Namespace?
+    end
+    def restore_from_snapshot: (
+      ?namespace_name: String,
+      ?workgroup_name: String,
+      ?snapshot_name: String,
+      ?snapshot_arn: String,
+      ?owner_account: String,
+      ?manage_admin_password: bool,
+      ?admin_password_secret_kms_key_id: String
+    ) -> _RestoreFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromSnapshotResponse
+
+    interface _RestoreTableFromRecoveryPointResponse
+      include Smithy::Client::_Response[Types::RestoreTableFromRecoveryPointResponse]
+      def table_restore_status: () -> Types::TableRestoreStatus?
+    end
+    def restore_table_from_recovery_point: (
+      ?namespace_name: String,
+      ?workgroup_name: String,
+      ?recovery_point_id: String,
+      ?source_database_name: String,
+      ?source_schema_name: String,
+      ?source_table_name: String,
+      ?target_database_name: String,
+      ?target_schema_name: String,
+      ?new_table_name: String,
+      ?activate_case_sensitive_identifier: bool
+    ) -> _RestoreTableFromRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableFromRecoveryPointResponse
+
+    interface _RestoreTableFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreTableFromSnapshotResponse]
+      def table_restore_status: () -> Types::TableRestoreStatus?
+    end
+    def restore_table_from_snapshot: (
+      ?namespace_name: String,
+      ?workgroup_name: String,
+      ?snapshot_name: String,
+      ?source_database_name: String,
+      ?source_schema_name: String,
+      ?source_table_name: String,
+      ?target_database_name: String,
+      ?target_schema_name: String,
+      ?new_table_name: String,
+      ?activate_case_sensitive_identifier: bool
+    ) -> _RestoreTableFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableFromSnapshotResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCustomDomainAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateCustomDomainAssociationResponse]
+      def custom_domain_name: () -> String?
+      def workgroup_name: () -> String?
+      def custom_domain_certificate_arn: () -> String?
+      def custom_domain_certificate_expiry_time: () -> Time?
+    end
+    def update_custom_domain_association: (
+      ?workgroup_name: String,
+      ?custom_domain_name: String,
+      ?custom_domain_certificate_arn: String
+    ) -> _UpdateCustomDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomDomainAssociationResponse
+
+    interface _UpdateEndpointAccessResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointAccessResponse]
+      def endpoint: () -> Types::EndpointAccess?
+    end
+    def update_endpoint_access: (
+      ?endpoint_name: String,
+      ?vpc_security_group_ids: Array[String]
+    ) -> _UpdateEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointAccessResponse
+
+    interface _UpdateNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdateNamespaceResponse]
+      def namespace: () -> Types::Namespace?
+    end
+    def update_namespace: (
+      ?namespace_name: String,
+      ?admin_user_password: String,
+      ?admin_username: String,
+      ?kms_key_id: String,
+      ?default_iam_role_arn: String,
+      ?iam_roles: Array[String],
+      ?log_exports: Array[String],
+      ?manage_admin_password: bool,
+      ?admin_password_secret_kms_key_id: String
+    ) -> _UpdateNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNamespaceResponse
+
+    interface _UpdateScheduledActionResponse
+      include Smithy::Client::_Response[Types::UpdateScheduledActionResponse]
+      def scheduled_action: () -> Types::ScheduledActionResponse?
+    end
+    def update_scheduled_action: (
+      ?scheduled_action_name: String,
+      ?target_action: {
+        create_snapshot: {
+          namespace_name: String,
+          snapshot_name_prefix: String,
+          retention_period: Integer,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      },
+      ?schedule: {
+        at: Time,
+        cron: String
+      },
+      ?role_arn: String,
+      ?enabled: bool,
+      ?scheduled_action_description: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _UpdateScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduledActionResponse
+
+    interface _UpdateSnapshotResponse
+      include Smithy::Client::_Response[Types::UpdateSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def update_snapshot: (
+      ?snapshot_name: String,
+      ?retention_period: Integer
+    ) -> _UpdateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSnapshotResponse
+
+    interface _UpdateSnapshotCopyConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateSnapshotCopyConfigurationResponse]
+      def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration?
+    end
+    def update_snapshot_copy_configuration: (
+      ?snapshot_copy_configuration_id: String,
+      ?snapshot_retention_period: Integer
+    ) -> _UpdateSnapshotCopyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSnapshotCopyConfigurationResponse
+
+    interface _UpdateUsageLimitResponse
+      include Smithy::Client::_Response[Types::UpdateUsageLimitResponse]
+      def usage_limit: () -> Types::UsageLimit?
+    end
+    def update_usage_limit: (
+      ?usage_limit_id: String,
+      ?amount: Integer,
+      ?breach_action: String
+    ) -> _UpdateUsageLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUsageLimitResponse
+
+    interface _UpdateWorkgroupResponse
+      include Smithy::Client::_Response[Types::UpdateWorkgroupResponse]
+      def workgroup: () -> Types::Workgroup?
+    end
+    def update_workgroup: (
+      ?workgroup_name: String,
+      ?base_capacity: Integer,
+      ?enhanced_vpc_routing: bool,
+      ?config_parameters: Array[
+        {
+          parameter_key: String,
+          parameter_value: String
+        }
+      ],
+      ?publicly_accessible: bool,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?port: Integer,
+      ?max_capacity: Integer,
+      ?ip_address_type: String,
+      ?price_performance_target: {
+        status: String,
+        level: Integer
+      },
+      ?track_name: String
+    ) -> _UpdateWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkgroupResponse
+  end
+end

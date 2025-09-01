@@ -1,0 +1,401 @@
+module Aws::PinpointSMSVoice
+  module Types
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CallInstructionsMessageType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class CloudWatchLogsDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    class CreateConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination: Types::EventDestinationDefinition,
+        ?event_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination: Types::EventDestinationDefinition?
+      attr_accessor event_destination_name: String?
+    end
+
+    class CreateConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class CreateConfigurationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+    end
+
+    class DeleteConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DeleteConfigurationSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EventDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_destination: Types::CloudWatchLogsDestination,
+        ?enabled: bool,
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?matching_event_types: Array[String],
+        ?name: String,
+        ?sns_destination: Types::SnsDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination?
+      attr_accessor enabled: bool?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor name: String?
+      attr_accessor sns_destination: Types::SnsDestination?
+    end
+
+    class EventDestinationDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs_destination: Types::CloudWatchLogsDestination,
+        ?enabled: bool,
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?matching_event_types: Array[String],
+        ?sns_destination: Types::SnsDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination?
+      attr_accessor enabled: bool?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor sns_destination: Types::SnsDestination?
+    end
+
+    module EventType
+      INITIATED_CALL: String
+      RINGING: String
+      ANSWERED: String
+      COMPLETED_CALL: String
+      BUSY: String
+      FAILED: String
+      NO_ANSWER: String
+    end
+
+    class GetConfigurationSetEventDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class GetConfigurationSetEventDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_destinations: Array[Types::EventDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_destinations: Array[Types::EventDestination]?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KinesisFirehoseDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_arn: String,
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_arn: String?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListConfigurationSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: String?
+    end
+
+    class ListConfigurationSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_sets: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_sets: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PlainTextMessageType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?text: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor text: String?
+      attr_accessor voice_id: String?
+    end
+
+    class SSMLMessageType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?text: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor text: String?
+      attr_accessor voice_id: String?
+    end
+
+    class SendVoiceMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caller_id: String,
+        ?configuration_set_name: String,
+        ?content: Types::VoiceMessageContent,
+        ?destination_phone_number: String,
+        ?origination_phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caller_id: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor content: Types::VoiceMessageContent?
+      attr_accessor destination_phone_number: String?
+      attr_accessor origination_phone_number: String?
+    end
+
+    class SendVoiceMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SnsDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateConfigurationSetEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination: Types::EventDestinationDefinition,
+        ?event_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination: Types::EventDestinationDefinition?
+      attr_accessor event_destination_name: String?
+    end
+
+    class UpdateConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VoiceMessageContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_instructions_message: Types::CallInstructionsMessageType,
+        ?plain_text_message: Types::PlainTextMessageType,
+        ?ssml_message: Types::SSMLMessageType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_instructions_message: Types::CallInstructionsMessageType?
+      attr_accessor plain_text_message: Types::PlainTextMessageType?
+      attr_accessor ssml_message: Types::SSMLMessageType?
+    end
+  end
+end

@@ -1,0 +1,2079 @@
+module Aws::EntityResolution
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddPolicyStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?statement_id: String,
+        ?effect: String,
+        ?action: Array[String],
+        ?principal: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor statement_id: String?
+      attr_accessor effect: String?
+      attr_accessor action: Array[String]?
+      attr_accessor principal: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    class AddPolicyStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?token: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor token: String?
+      attr_accessor policy: String?
+    end
+
+    module AttributeMatchingModel
+      ONE_TO_ONE: String
+      MANY_TO_MANY: String
+    end
+
+    class BatchDeleteUniqueIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?input_source: String,
+        ?unique_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor input_source: String?
+      attr_accessor unique_ids: Array[String]?
+    end
+
+    class BatchDeleteUniqueIdOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?errors: Array[Types::DeleteUniqueIdError],
+        ?deleted: Array[Types::DeletedUniqueId],
+        ?disconnected_unique_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor errors: Array[Types::DeleteUniqueIdError]?
+      attr_accessor deleted: Array[Types::DeletedUniqueId]?
+      attr_accessor disconnected_unique_ids: Array[String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateIdMappingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
+        ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
+        ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
+      attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIdMappingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
+        ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
+        ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
+      attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor role_arn: String?
+    end
+
+    class CreateIdNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdNamespaceInputSource],
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties],
+        ?type: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdNamespaceInputSource]?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIdNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?id_namespace_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdNamespaceInputSource],
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties],
+        ?type: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor id_namespace_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdNamespaceInputSource]?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMatchingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::InputSource],
+        ?output_source_config: Array[Types::OutputSource],
+        ?resolution_techniques: Types::ResolutionTechniques,
+        ?incremental_run_config: Types::IncrementalRunConfig,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::InputSource]?
+      attr_accessor output_source_config: Array[Types::OutputSource]?
+      attr_accessor resolution_techniques: Types::ResolutionTechniques?
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMatchingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::InputSource],
+        ?output_source_config: Array[Types::OutputSource],
+        ?resolution_techniques: Types::ResolutionTechniques,
+        ?incremental_run_config: Types::IncrementalRunConfig,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::InputSource]?
+      attr_accessor output_source_config: Array[Types::OutputSource]?
+      attr_accessor resolution_techniques: Types::ResolutionTechniques?
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig?
+      attr_accessor role_arn: String?
+    end
+
+    class CreateSchemaMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?description: String,
+        ?mapped_input_fields: Array[Types::SchemaInputAttribute],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor description: String?
+      attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSchemaMappingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?schema_arn: String,
+        ?description: String,
+        ?mapped_input_fields: Array[Types::SchemaInputAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor description: String?
+      attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
+    end
+
+    class DeleteIdMappingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+    end
+
+    class DeleteIdMappingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteIdNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+    end
+
+    class DeleteIdNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteMatchingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+    end
+
+    class DeleteMatchingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeletePolicyStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor statement_id: String?
+    end
+
+    class DeletePolicyStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?token: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor token: String?
+      attr_accessor policy: String?
+    end
+
+    class DeleteSchemaMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+    end
+
+    class DeleteSchemaMappingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteUniqueIdError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unique_id: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unique_id: String?
+      attr_accessor error_type: String?
+    end
+
+    module DeleteUniqueIdErrorType
+      SERVICE_ERROR: String
+      VALIDATION_ERROR: String
+    end
+
+    module DeleteUniqueIdStatus
+      COMPLETED: String
+      ACCEPTED: String
+    end
+
+    class DeletedUniqueId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unique_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unique_id: String?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+    end
+
+    class ExceedsLimitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_name: String,
+        ?quota_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_name: String?
+      attr_accessor quota_value: Integer?
+    end
+
+    class FailedRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?unique_id: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor unique_id: String?
+      attr_accessor error_message: String?
+    end
+
+    class GenerateMatchIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?records: Array[Types::Record],
+        ?processing_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor records: Array[Types::Record]?
+      attr_accessor processing_type: String?
+    end
+
+    class GenerateMatchIdOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_groups: Array[Types::MatchGroup],
+        ?failed_records: Array[Types::FailedRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_groups: Array[Types::MatchGroup]?
+      attr_accessor failed_records: Array[Types::FailedRecord]?
+    end
+
+    class GetIdMappingJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetIdMappingJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metrics: Types::IdMappingJobMetrics,
+        ?error_details: Types::ErrorDetails,
+        ?output_source_config: Array[Types::IdMappingJobOutputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metrics: Types::IdMappingJobMetrics?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+    end
+
+    class GetIdMappingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+    end
+
+    class GetIdMappingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
+        ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
+        ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
+      attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetIdNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+    end
+
+    class GetIdNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?id_namespace_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdNamespaceInputSource],
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties],
+        ?type: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor id_namespace_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdNamespaceInputSource]?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetMatchIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?record: Hash[String, String],
+        ?apply_normalization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor record: Hash[String, String]?
+      attr_accessor apply_normalization: bool?
+    end
+
+    class GetMatchIdOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match_id: String,
+        ?match_rule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_id: String?
+      attr_accessor match_rule: String?
+    end
+
+    class GetMatchingJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetMatchingJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?metrics: Types::JobMetrics,
+        ?error_details: Types::ErrorDetails,
+        ?output_source_config: Array[Types::JobOutputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor metrics: Types::JobMetrics?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor output_source_config: Array[Types::JobOutputSource]?
+    end
+
+    class GetMatchingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+    end
+
+    class GetMatchingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::InputSource],
+        ?output_source_config: Array[Types::OutputSource],
+        ?resolution_techniques: Types::ResolutionTechniques,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?incremental_run_config: Types::IncrementalRunConfig,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::InputSource]?
+      attr_accessor output_source_config: Array[Types::OutputSource]?
+      attr_accessor resolution_techniques: Types::ResolutionTechniques?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?token: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor token: String?
+      attr_accessor policy: String?
+    end
+
+    class GetProviderServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_name: String,
+        ?provider_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_name: String?
+      attr_accessor provider_service_name: String?
+    end
+
+    class GetProviderServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_name: String,
+        ?provider_service_name: String,
+        ?provider_service_display_name: String,
+        ?provider_service_type: String,
+        ?provider_service_arn: String,
+        ?provider_configuration_definition: Smithy::Schema::document,
+        ?provider_id_name_space_configuration: Types::ProviderIdNameSpaceConfiguration,
+        ?provider_job_configuration: Smithy::Schema::document,
+        ?provider_endpoint_configuration: Types::ProviderEndpointConfiguration,
+        ?anonymized_output: bool,
+        ?provider_entity_output_definition: Smithy::Schema::document,
+        ?provider_intermediate_data_access_configuration: Types::ProviderIntermediateDataAccessConfiguration,
+        ?provider_component_schema: Types::ProviderComponentSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_name: String?
+      attr_accessor provider_service_name: String?
+      attr_accessor provider_service_display_name: String?
+      attr_accessor provider_service_type: String?
+      attr_accessor provider_service_arn: String?
+      attr_accessor provider_configuration_definition: Smithy::Schema::document?
+      attr_accessor provider_id_name_space_configuration: Types::ProviderIdNameSpaceConfiguration?
+      attr_accessor provider_job_configuration: Smithy::Schema::document?
+      attr_accessor provider_endpoint_configuration: Types::ProviderEndpointConfiguration?
+      attr_accessor anonymized_output: bool?
+      attr_accessor provider_entity_output_definition: Smithy::Schema::document?
+      attr_accessor provider_intermediate_data_access_configuration: Types::ProviderIntermediateDataAccessConfiguration?
+      attr_accessor provider_component_schema: Types::ProviderComponentSchema?
+    end
+
+    class GetSchemaMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+    end
+
+    class GetSchemaMappingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?schema_arn: String,
+        ?description: String,
+        ?mapped_input_fields: Array[Types::SchemaInputAttribute],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?has_workflows: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor description: String?
+      attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor has_workflows: bool?
+    end
+
+    class IdMappingJobMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_records: Integer,
+        ?total_records_processed: Integer,
+        ?records_not_processed: Integer,
+        ?total_mapped_records: Integer,
+        ?total_mapped_source_records: Integer,
+        ?total_mapped_target_records: Integer,
+        ?unique_records_loaded: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_records: Integer?
+      attr_accessor total_records_processed: Integer?
+      attr_accessor records_not_processed: Integer?
+      attr_accessor total_mapped_records: Integer?
+      attr_accessor total_mapped_source_records: Integer?
+      attr_accessor total_mapped_target_records: Integer?
+      attr_accessor unique_records_loaded: Integer?
+    end
+
+    class IdMappingJobOutputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?output_s3_path: String,
+        ?kms_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor output_s3_path: String?
+      attr_accessor kms_arn: String?
+    end
+
+    class IdMappingRuleBasedProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+        ?rule_definition_type: String,
+        ?attribute_matching_model: String,
+        ?record_matching_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor rule_definition_type: String?
+      attr_accessor attribute_matching_model: String?
+      attr_accessor record_matching_model: String?
+    end
+
+    class IdMappingTechniques
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_type: String,
+        ?rule_based_properties: Types::IdMappingRuleBasedProperties,
+        ?provider_properties: Types::ProviderProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_type: String?
+      attr_accessor rule_based_properties: Types::IdMappingRuleBasedProperties?
+      attr_accessor provider_properties: Types::ProviderProperties?
+    end
+
+    module IdMappingType
+      PROVIDER: String
+      RULE_BASED: String
+    end
+
+    class IdMappingWorkflowInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?schema_name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor type: String?
+    end
+
+    class IdMappingWorkflowOutputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_s3_path: String,
+        ?kms_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_s3_path: String?
+      attr_accessor kms_arn: String?
+    end
+
+    module IdMappingWorkflowRuleDefinitionType
+      SOURCE: String
+      TARGET: String
+    end
+
+    class IdMappingWorkflowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class IdNamespaceIdMappingWorkflowMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_type: String?
+    end
+
+    class IdNamespaceIdMappingWorkflowProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_mapping_type: String,
+        ?rule_based_properties: Types::NamespaceRuleBasedProperties,
+        ?provider_properties: Types::NamespaceProviderProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_mapping_type: String?
+      attr_accessor rule_based_properties: Types::NamespaceRuleBasedProperties?
+      attr_accessor provider_properties: Types::NamespaceProviderProperties?
+    end
+
+    class IdNamespaceInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor schema_name: String?
+    end
+
+    class IdNamespaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?id_namespace_arn: String,
+        ?description: String,
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowMetadata],
+        ?type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor id_namespace_arn: String?
+      attr_accessor description: String?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowMetadata]?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module IdNamespaceType
+      SOURCE: String
+      TARGET: String
+    end
+
+    class IncrementalRunConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incremental_run_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incremental_run_type: String?
+    end
+
+    module IncrementalRunType
+      IMMEDIATE: String
+    end
+
+    class InputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?schema_name: String,
+        ?apply_normalization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor apply_normalization: bool?
+    end
+
+    class IntermediateSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_s3_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_s3_path: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_records: Integer,
+        ?total_records_processed: Integer,
+        ?records_not_processed: Integer,
+        ?match_i_ds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_records: Integer?
+      attr_accessor total_records_processed: Integer?
+      attr_accessor records_not_processed: Integer?
+      attr_accessor match_i_ds: Integer?
+    end
+
+    class JobOutputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?output_s3_path: String,
+        ?kms_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor output_s3_path: String?
+      attr_accessor kms_arn: String?
+    end
+
+    module JobStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      QUEUED: String
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ListIdMappingJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdMappingJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdMappingWorkflowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdMappingWorkflowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_summaries: Array[Types::IdMappingWorkflowSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_summaries: Array[Types::IdMappingWorkflowSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdNamespacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIdNamespacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_summaries: Array[Types::IdNamespaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_summaries: Array[Types::IdNamespaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMatchingJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMatchingJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMatchingWorkflowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMatchingWorkflowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_summaries: Array[Types::MatchingWorkflowSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_summaries: Array[Types::MatchingWorkflowSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProviderServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor provider_name: String?
+    end
+
+    class ListProviderServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_service_summaries: Array[Types::ProviderServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_service_summaries: Array[Types::ProviderServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchemaMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSchemaMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_list: Array[Types::SchemaMappingSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_list: Array[Types::SchemaMappingSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MatchGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::MatchedRecord],
+        ?match_id: String,
+        ?match_rule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::MatchedRecord]?
+      attr_accessor match_id: String?
+      attr_accessor match_rule: String?
+    end
+
+    module MatchPurpose
+      IDENTIFIER_GENERATION: String
+      INDEXING: String
+    end
+
+    class MatchedRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?record_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor record_id: String?
+    end
+
+    class MatchingWorkflowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?resolution_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor resolution_type: String?
+    end
+
+    class NamespaceProviderProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_service_arn: String,
+        ?provider_configuration: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_service_arn: String?
+      attr_accessor provider_configuration: Smithy::Schema::document?
+    end
+
+    class NamespaceRuleBasedProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+        ?rule_definition_types: Array[String],
+        ?attribute_matching_model: String,
+        ?record_matching_models: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor rule_definition_types: Array[String]?
+      attr_accessor attribute_matching_model: String?
+      attr_accessor record_matching_models: Array[String]?
+    end
+
+    class OutputAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?hashed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor hashed: bool?
+    end
+
+    class OutputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_s3_path: String,
+        ?kms_arn: String,
+        ?output: Array[Types::OutputAttribute],
+        ?apply_normalization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_s3_path: String?
+      attr_accessor kms_arn: String?
+      attr_accessor output: Array[Types::OutputAttribute]?
+      attr_accessor apply_normalization: bool?
+    end
+
+    module ProcessingType
+      CONSISTENT: String
+      EVENTUAL: String
+      EVENTUAL_NO_LOOKUP: String
+    end
+
+    class ProviderComponentSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schemas: Array[Array[String]],
+        ?provider_schema_attributes: Array[Types::ProviderSchemaAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schemas: Array[Array[String]]?
+      attr_accessor provider_schema_attributes: Array[Types::ProviderSchemaAttribute]?
+    end
+
+    class ProviderEndpointConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?marketplace_configuration: Types::ProviderMarketplaceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_configuration: Types::ProviderMarketplaceConfiguration?
+
+      class MarketplaceConfiguration < ProviderEndpointConfiguration
+      end
+      class Unknown < ProviderEndpointConfiguration
+      end
+    end
+
+    class ProviderIdNameSpaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?provider_target_configuration_definition: Smithy::Schema::document,
+        ?provider_source_configuration_definition: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor provider_target_configuration_definition: Smithy::Schema::document?
+      attr_accessor provider_source_configuration_definition: Smithy::Schema::document?
+    end
+
+    class ProviderIntermediateDataAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_ids: Array[String],
+        ?required_bucket_actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_ids: Array[String]?
+      attr_accessor required_bucket_actions: Array[String]?
+    end
+
+    class ProviderMarketplaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_set_id: String,
+        ?revision_id: String,
+        ?asset_id: String,
+        ?listing_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_set_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor listing_id: String?
+    end
+
+    class ProviderProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_service_arn: String,
+        ?provider_configuration: Smithy::Schema::document,
+        ?intermediate_source_configuration: Types::IntermediateSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_service_arn: String?
+      attr_accessor provider_configuration: Smithy::Schema::document?
+      attr_accessor intermediate_source_configuration: Types::IntermediateSourceConfiguration?
+    end
+
+    class ProviderSchemaAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?type: String,
+        ?sub_type: String,
+        ?hashing: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor type: String?
+      attr_accessor sub_type: String?
+      attr_accessor hashing: bool?
+    end
+
+    class ProviderServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_service_arn: String,
+        ?provider_name: String,
+        ?provider_service_display_name: String,
+        ?provider_service_name: String,
+        ?provider_service_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_service_arn: String?
+      attr_accessor provider_name: String?
+      attr_accessor provider_service_display_name: String?
+      attr_accessor provider_service_name: String?
+      attr_accessor provider_service_type: String?
+    end
+
+    class PutPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?token: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor token: String?
+      attr_accessor policy: String?
+    end
+
+    class PutPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?token: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor token: String?
+      attr_accessor policy: String?
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_source_arn: String,
+        ?unique_id: String,
+        ?record_attribute_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_source_arn: String?
+      attr_accessor unique_id: String?
+      attr_accessor record_attribute_map: Hash[String, String]?
+    end
+
+    module RecordMatchingModel
+      ONE_SOURCE_TO_ONE_TARGET: String
+      MANY_SOURCE_TO_ONE_TARGET: String
+    end
+
+    class ResolutionTechniques
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolution_type: String,
+        ?rule_based_properties: Types::RuleBasedProperties,
+        ?rule_condition_properties: Types::RuleConditionProperties,
+        ?provider_properties: Types::ProviderProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolution_type: String?
+      attr_accessor rule_based_properties: Types::RuleBasedProperties?
+      attr_accessor rule_condition_properties: Types::RuleConditionProperties?
+      attr_accessor provider_properties: Types::ProviderProperties?
+    end
+
+    module ResolutionType
+      RULE_MATCHING: String
+      ML_MATCHING: String
+      PROVIDER: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?matching_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor matching_keys: Array[String]?
+    end
+
+    class RuleBasedProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::Rule],
+        ?attribute_matching_model: String,
+        ?match_purpose: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor attribute_matching_model: String?
+      attr_accessor match_purpose: String?
+    end
+
+    class RuleCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor condition: String?
+    end
+
+    class RuleConditionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::RuleCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::RuleCondition]?
+    end
+
+    module SchemaAttributeType
+      NAME: String
+      NAME_FIRST: String
+      NAME_MIDDLE: String
+      NAME_LAST: String
+      ADDRESS: String
+      ADDRESS_STREET1: String
+      ADDRESS_STREET2: String
+      ADDRESS_STREET3: String
+      ADDRESS_CITY: String
+      ADDRESS_STATE: String
+      ADDRESS_COUNTRY: String
+      ADDRESS_POSTALCODE: String
+      PHONE: String
+      PHONE_NUMBER: String
+      PHONE_COUNTRYCODE: String
+      EMAIL_ADDRESS: String
+      UNIQUE_ID: String
+      DATE: String
+      STRING: String
+      PROVIDER_ID: String
+      IPV4: String
+      IPV6: String
+      MAID: String
+    end
+
+    class SchemaInputAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?type: String,
+        ?group_name: String,
+        ?match_key: String,
+        ?sub_type: String,
+        ?hashed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor type: String?
+      attr_accessor group_name: String?
+      attr_accessor match_key: String?
+      attr_accessor sub_type: String?
+      attr_accessor hashed: bool?
+    end
+
+    class SchemaMappingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?schema_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?has_workflows: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor has_workflows: bool?
+    end
+
+    module ServiceType
+      ASSIGNMENT: String
+      ID_MAPPING: String
+    end
+
+    class StartIdMappingJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?output_source_config: Array[Types::IdMappingJobOutputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+    end
+
+    class StartIdMappingJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?output_source_config: Array[Types::IdMappingJobOutputSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+    end
+
+    class StartMatchingJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+    end
+
+    class StartMatchingJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    module StatementEffect
+      Allow: String
+      Deny: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIdMappingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
+        ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
+        ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
+      attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateIdMappingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?workflow_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
+        ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
+        ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
+      attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateIdNamespaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdNamespaceInputSource],
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdNamespaceInputSource]?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateIdNamespaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id_namespace_name: String,
+        ?id_namespace_arn: String,
+        ?description: String,
+        ?input_source_config: Array[Types::IdNamespaceInputSource],
+        ?id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties],
+        ?type: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id_namespace_name: String?
+      attr_accessor id_namespace_arn: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::IdNamespaceInputSource]?
+      attr_accessor id_mapping_workflow_properties: Array[Types::IdNamespaceIdMappingWorkflowProperties]?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateMatchingWorkflowInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::InputSource],
+        ?output_source_config: Array[Types::OutputSource],
+        ?resolution_techniques: Types::ResolutionTechniques,
+        ?incremental_run_config: Types::IncrementalRunConfig,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::InputSource]?
+      attr_accessor output_source_config: Array[Types::OutputSource]?
+      attr_accessor resolution_techniques: Types::ResolutionTechniques?
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateMatchingWorkflowOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_name: String,
+        ?description: String,
+        ?input_source_config: Array[Types::InputSource],
+        ?output_source_config: Array[Types::OutputSource],
+        ?resolution_techniques: Types::ResolutionTechniques,
+        ?incremental_run_config: Types::IncrementalRunConfig,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_name: String?
+      attr_accessor description: String?
+      attr_accessor input_source_config: Array[Types::InputSource]?
+      attr_accessor output_source_config: Array[Types::OutputSource]?
+      attr_accessor resolution_techniques: Types::ResolutionTechniques?
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateSchemaMappingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?description: String,
+        ?mapped_input_fields: Array[Types::SchemaInputAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor description: String?
+      attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
+    end
+
+    class UpdateSchemaMappingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_name: String,
+        ?schema_arn: String,
+        ?description: String,
+        ?mapped_input_fields: Array[Types::SchemaInputAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor description: String?
+      attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Kafka
+      VERSION: String
+    end
+  end

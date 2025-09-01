@@ -1,0 +1,6544 @@
+module Aws::Deadline
+  module Types
+
+    class AcceleratorCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selections: Array[Types::AcceleratorSelection],
+        ?count: Types::AcceleratorCountRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selections: Array[Types::AcceleratorSelection]?
+      attr_accessor count: Types::AcceleratorCountRange?
+    end
+
+    class AcceleratorCountRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorName
+      T4: String
+      A10G: String
+      L4: String
+      L40S: String
+    end
+
+    class AcceleratorSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?runtime: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor runtime: String?
+    end
+
+    class AcceleratorTotalMemoryMiBRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorType
+      GPU: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    class AcquiredLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_id: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_id: String?
+      attr_accessor count: Integer?
+    end
+
+    class AssignedEnvironmentEnterSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class AssignedEnvironmentExitSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class AssignedSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_actions: Array[Types::AssignedSessionAction],
+        ?log_configuration: Types::LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_actions: Array[Types::AssignedSessionAction]?
+      attr_accessor log_configuration: Types::LogConfiguration?
+    end
+
+    class AssignedSessionAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_action_id: String,
+        ?definition: Types::AssignedSessionActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_action_id: String?
+      attr_accessor definition: Types::AssignedSessionActionDefinition?
+    end
+
+    class AssignedSessionActionDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?env_enter: Types::AssignedEnvironmentEnterSessionActionDefinition,
+        ?env_exit: Types::AssignedEnvironmentExitSessionActionDefinition,
+        ?task_run: Types::AssignedTaskRunSessionActionDefinition,
+        ?sync_input_job_attachments: Types::AssignedSyncInputJobAttachmentsSessionActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor env_enter: Types::AssignedEnvironmentEnterSessionActionDefinition?
+      attr_accessor env_exit: Types::AssignedEnvironmentExitSessionActionDefinition?
+      attr_accessor task_run: Types::AssignedTaskRunSessionActionDefinition?
+      attr_accessor sync_input_job_attachments: Types::AssignedSyncInputJobAttachmentsSessionActionDefinition?
+
+      class EnvEnter < AssignedSessionActionDefinition
+      end
+      class EnvExit < AssignedSessionActionDefinition
+      end
+      class TaskRun < AssignedSessionActionDefinition
+      end
+      class SyncInputJobAttachments < AssignedSessionActionDefinition
+      end
+      class Unknown < AssignedSessionActionDefinition
+      end
+    end
+
+    class AssignedSyncInputJobAttachmentsSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+    end
+
+    class AssignedTaskRunSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?step_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor step_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+    end
+
+    class AssociateMemberToFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class AssociateMemberToFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateMemberToFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class AssociateMemberToFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateMemberToJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class AssociateMemberToJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateMemberToQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class AssociateMemberToQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssumeFleetRoleForReadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class AssumeFleetRoleForReadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+    end
+
+    class AssumeFleetRoleForWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+    end
+
+    class AssumeFleetRoleForWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+    end
+
+    class AssumeQueueRoleForReadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+    end
+
+    class AssumeQueueRoleForReadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+    end
+
+    class AssumeQueueRoleForUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+    end
+
+    class AssumeQueueRoleForUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+    end
+
+    class AssumeQueueRoleForWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor queue_id: String?
+    end
+
+    class AssumeQueueRoleForWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+    end
+
+    class Attachments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifests: Array[Types::ManifestProperties],
+        ?file_system: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifests: Array[Types::ManifestProperties]?
+      attr_accessor file_system: String?
+    end
+
+    module AutoScalingMode
+      NO_SCALING: String
+      EVENT_BASED_AUTO_SCALING: String
+    end
+
+    module AutoScalingStatus
+      GROWING: String
+      STEADY: String
+      SHRINKING: String
+    end
+
+    class AwsCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class BatchGetJobEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?identifiers: Array[Types::JobEntityIdentifiersUnion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor identifiers: Array[Types::JobEntityIdentifiersUnion]?
+    end
+
+    class BatchGetJobEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::JobEntity],
+        ?errors: Array[Types::GetJobEntityError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::JobEntity]?
+      attr_accessor errors: Array[Types::GetJobEntityError]?
+    end
+
+    class BudgetActionToAdd
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?threshold_percentage: Float,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor threshold_percentage: Float?
+      attr_accessor description: String?
+    end
+
+    class BudgetActionToRemove
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?threshold_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor threshold_percentage: Float?
+    end
+
+    module BudgetActionType
+      STOP_SCHEDULING_AND_COMPLETE_TASKS: String
+      STOP_SCHEDULING_AND_CANCEL_TASKS: String
+    end
+
+    class BudgetSchedule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?fixed: Types::FixedBudgetSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed: Types::FixedBudgetSchedule?
+
+      class Fixed < BudgetSchedule
+      end
+      class Unknown < BudgetSchedule
+      end
+    end
+
+    module BudgetStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class BudgetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_id: String,
+        ?usage_tracking_resource: Types::UsageTrackingResource,
+        ?status: String,
+        ?display_name: String,
+        ?description: String,
+        ?approximate_dollar_limit: Float,
+        ?usages: Types::ConsumedUsages,
+        ?created_by: String,
+        ?created_at: Time,
+        ?updated_by: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_id: String?
+      attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
+      attr_accessor status: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor approximate_dollar_limit: Float?
+      attr_accessor usages: Types::ConsumedUsages?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module ComparisonOperator
+      EQUAL: String
+      NOT_EQUAL: String
+      GREATER_THAN_EQUAL_TO: String
+      GREATER_THAN: String
+      LESS_THAN_EQUAL_TO: String
+      LESS_THAN: String
+    end
+
+    module CompletedStatus
+      SUCCEEDED: String
+      FAILED: String
+      INTERRUPTED: String
+      CANCELED: String
+      NEVER_ATTEMPTED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    module ConflictExceptionReason
+      CONFLICT_EXCEPTION: String
+      CONCURRENT_MODIFICATION: String
+      RESOURCE_ALREADY_EXISTS: String
+      RESOURCE_IN_USE: String
+      STATUS_CONFLICT: String
+    end
+
+    class ConsumedUsages
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_dollar_usage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_dollar_usage: Float?
+    end
+
+    class CopyJobTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?job_id: String,
+        ?queue_id: String,
+        ?target_s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor job_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor target_s3_location: Types::S3Location?
+    end
+
+    class CopyJobTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_type: String?
+    end
+
+    module CpuArchitectureType
+      X86_64: String
+      ARM64: String
+    end
+
+    class CreateBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?usage_tracking_resource: Types::UsageTrackingResource,
+        ?display_name: String,
+        ?description: String,
+        ?approximate_dollar_limit: Float,
+        ?actions: Array[Types::BudgetActionToAdd],
+        ?schedule: Types::BudgetSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor approximate_dollar_limit: Float?
+      attr_accessor actions: Array[Types::BudgetActionToAdd]?
+      attr_accessor schedule: Types::BudgetSchedule?
+    end
+
+    class CreateBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_id: String?
+    end
+
+    class CreateFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?display_name: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+    end
+
+    class CreateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?role_arn: String,
+        ?min_worker_count: Integer,
+        ?max_worker_count: Integer,
+        ?configuration: Types::FleetConfiguration,
+        ?tags: Hash[String, String],
+        ?host_configuration: Types::HostConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor configuration: Types::FleetConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor host_configuration: Types::HostConfiguration?
+    end
+
+    class CreateFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class CreateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?client_token: String,
+        ?template: String,
+        ?template_type: String,
+        ?priority: Integer,
+        ?parameters: Hash[String, Types::JobParameter],
+        ?attachments: Types::Attachments,
+        ?storage_profile_id: String,
+        ?target_task_run_status: String,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?max_worker_count: Integer,
+        ?source_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor client_token: String?
+      attr_accessor template: String?
+      attr_accessor template_type: String?
+      attr_accessor priority: Integer?
+      attr_accessor parameters: Hash[String, Types::JobParameter]?
+      attr_accessor attachments: Types::Attachments?
+      attr_accessor storage_profile_id: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor source_job_id: String?
+    end
+
+    class CreateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    module CreateJobTargetTaskRunStatus
+      READY: String
+      SUSPENDED: String
+    end
+
+    class CreateLicenseEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLicenseEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+    end
+
+    class CreateLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?display_name: String,
+        ?amount_requirement_name: String,
+        ?max_count: Integer,
+        ?farm_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor display_name: String?
+      attr_accessor amount_requirement_name: String?
+      attr_accessor max_count: Integer?
+      attr_accessor farm_id: String?
+      attr_accessor description: String?
+    end
+
+    class CreateLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_id: String?
+    end
+
+    class CreateMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?display_name: String,
+        ?identity_center_instance_arn: String,
+        ?subdomain: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor display_name: String?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor subdomain: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+        ?identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+      attr_accessor identity_center_application_arn: String?
+    end
+
+    class CreateQueueEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?priority: Integer,
+        ?template_type: String,
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor template_type: String?
+      attr_accessor template: String?
+    end
+
+    class CreateQueueEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_environment_id: String?
+    end
+
+    class CreateQueueFleetAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class CreateQueueFleetAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateQueueLimitAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+    end
+
+    class CreateQueueLimitAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?default_budget_action: String,
+        ?job_attachment_settings: Types::JobAttachmentSettings,
+        ?role_arn: String,
+        ?job_run_as_user: Types::JobRunAsUser,
+        ?required_file_system_location_names: Array[String],
+        ?allowed_storage_profile_ids: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor default_budget_action: String?
+      attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
+      attr_accessor role_arn: String?
+      attr_accessor job_run_as_user: Types::JobRunAsUser?
+      attr_accessor required_file_system_location_names: Array[String]?
+      attr_accessor allowed_storage_profile_ids: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+    end
+
+    class CreateStorageProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?display_name: String,
+        ?os_family: String,
+        ?file_system_locations: Array[Types::FileSystemLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor os_family: String?
+      attr_accessor file_system_locations: Array[Types::FileSystemLocation]?
+    end
+
+    class CreateStorageProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profile_id: String?
+    end
+
+    class CreateWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?host_properties: Types::HostPropertiesRequest,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor host_properties: Types::HostPropertiesRequest?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+    end
+
+    class CustomerManagedFleetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?worker_capabilities: Types::CustomerManagedWorkerCapabilities,
+        ?storage_profile_id: String,
+        ?tag_propagation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor worker_capabilities: Types::CustomerManagedWorkerCapabilities?
+      attr_accessor storage_profile_id: String?
+      attr_accessor tag_propagation_mode: String?
+    end
+
+    module CustomerManagedFleetOperatingSystemFamily
+      WINDOWS: String
+      LINUX: String
+      MACOS: String
+    end
+
+    class CustomerManagedWorkerCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu_count: Types::VCpuCountRange,
+        ?memory_mi_b: Types::MemoryMiBRange,
+        ?accelerator_types: Array[String],
+        ?accelerator_count: Types::AcceleratorCountRange,
+        ?accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRange,
+        ?os_family: String,
+        ?cpu_architecture_type: String,
+        ?custom_amounts: Array[Types::FleetAmountCapability],
+        ?custom_attributes: Array[Types::FleetAttributeCapability],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu_count: Types::VCpuCountRange?
+      attr_accessor memory_mi_b: Types::MemoryMiBRange?
+      attr_accessor accelerator_types: Array[String]?
+      attr_accessor accelerator_count: Types::AcceleratorCountRange?
+      attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRange?
+      attr_accessor os_family: String?
+      attr_accessor cpu_architecture_type: String?
+      attr_accessor custom_amounts: Array[Types::FleetAmountCapability]?
+      attr_accessor custom_attributes: Array[Types::FleetAttributeCapability]?
+    end
+
+    class DateTimeFilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?operator: String,
+        ?date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor operator: String?
+      attr_accessor date_time: Time?
+    end
+
+    module DeadlinePrincipalType
+      USER: String
+      GROUP: String
+    end
+
+    module DefaultQueueBudgetAction
+      NONE: String
+      STOP_SCHEDULING_AND_COMPLETE_TASKS: String
+      STOP_SCHEDULING_AND_CANCEL_TASKS: String
+    end
+
+    class DeleteBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?budget_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor budget_id: String?
+    end
+
+    class DeleteBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+    end
+
+    class DeleteFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLicenseEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+    end
+
+    class DeleteLicenseEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+    end
+
+    class DeleteLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMeteredProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+        ?product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+      attr_accessor product_id: String?
+    end
+
+    class DeleteMeteredProductResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+    end
+
+    class DeleteMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueueEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?queue_environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor queue_environment_id: String?
+    end
+
+    class DeleteQueueEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueueFleetAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteQueueFleetAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueueLimitAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+    end
+
+    class DeleteQueueLimitAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+    end
+
+    class DeleteQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStorageProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?storage_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor storage_profile_id: String?
+    end
+
+    class DeleteStorageProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+    end
+
+    class DeleteWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DependencyConsumerResolutionStatus
+      RESOLVED: String
+      UNRESOLVED: String
+    end
+
+    class DependencyCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dependencies_resolved: Integer,
+        ?dependencies_unresolved: Integer,
+        ?consumers_resolved: Integer,
+        ?consumers_unresolved: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dependencies_resolved: Integer?
+      attr_accessor dependencies_unresolved: Integer?
+      attr_accessor consumers_resolved: Integer?
+      attr_accessor consumers_unresolved: Integer?
+    end
+
+    module DesiredWorkerStatus
+      STOPPED: String
+    end
+
+    class DisassociateMemberFromFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+    end
+
+    class DisassociateMemberFromFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMemberFromFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor principal_id: String?
+    end
+
+    class DisassociateMemberFromFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMemberFromJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor principal_id: String?
+    end
+
+    class DisassociateMemberFromJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMemberFromQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor principal_id: String?
+    end
+
+    class DisassociateMemberFromQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Ec2EbsVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_gi_b: Integer,
+        ?iops: Integer,
+        ?throughput_mi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_gi_b: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor throughput_mi_b: Integer?
+    end
+
+    module Ec2MarketType
+      ON_DEMAND: String
+      SPOT: String
+      WAIT_AND_SAVE: String
+    end
+
+    class EnvironmentDetailsEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?environment_id: String,
+        ?schema_version: String,
+        ?template: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor schema_version: String?
+      attr_accessor template: Smithy::Schema::document?
+    end
+
+    class EnvironmentDetailsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?environment_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class EnvironmentDetailsIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor environment_id: String?
+    end
+
+    class EnvironmentEnterSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class EnvironmentEnterSessionActionDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class EnvironmentExitSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    class EnvironmentExitSessionActionDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+    end
+
+    module EnvironmentTemplateType
+      JSON: String
+      YAML: String
+    end
+
+    class FarmMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class FarmSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?display_name: String,
+        ?kms_key_arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class FieldSortExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor name: String?
+    end
+
+    class FileSystemLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?path: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor path: String?
+      attr_accessor type: String?
+    end
+
+    module FileSystemLocationType
+      SHARED: String
+      LOCAL: String
+    end
+
+    class FixedBudgetSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class FleetAmountCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class FleetAttributeCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class FleetCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amounts: Array[Types::FleetAmountCapability],
+        ?attributes: Array[Types::FleetAttributeCapability],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amounts: Array[Types::FleetAmountCapability]?
+      attr_accessor attributes: Array[Types::FleetAttributeCapability]?
+    end
+
+    class FleetConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_managed: Types::CustomerManagedFleetConfiguration,
+        ?service_managed_ec2: Types::ServiceManagedEc2FleetConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_managed: Types::CustomerManagedFleetConfiguration?
+      attr_accessor service_managed_ec2: Types::ServiceManagedEc2FleetConfiguration?
+
+      class CustomerManaged < FleetConfiguration
+      end
+      class ServiceManagedEc2 < FleetConfiguration
+      end
+      class Unknown < FleetConfiguration
+      end
+    end
+
+    class FleetMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    module FleetStatus
+      ACTIVE: String
+      CREATE_IN_PROGRESS: String
+      UPDATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+      SUSPENDED: String
+    end
+
+    class FleetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?farm_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_message: String,
+        ?auto_scaling_status: String,
+        ?target_worker_count: Integer,
+        ?worker_count: Integer,
+        ?min_worker_count: Integer,
+        ?max_worker_count: Integer,
+        ?configuration: Types::FleetConfiguration,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor auto_scaling_status: String?
+      attr_accessor target_worker_count: Integer?
+      attr_accessor worker_count: Integer?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor configuration: Types::FleetConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?budget_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor budget_id: String?
+    end
+
+    class GetBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_id: String,
+        ?usage_tracking_resource: Types::UsageTrackingResource,
+        ?status: String,
+        ?display_name: String,
+        ?description: String,
+        ?approximate_dollar_limit: Float,
+        ?usages: Types::ConsumedUsages,
+        ?actions: Array[Types::ResponseBudgetAction],
+        ?schedule: Types::BudgetSchedule,
+        ?created_by: String,
+        ?created_at: Time,
+        ?updated_by: String,
+        ?updated_at: Time,
+        ?queue_stopped_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_id: String?
+      attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
+      attr_accessor status: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor approximate_dollar_limit: Float?
+      attr_accessor usages: Types::ConsumedUsages?
+      attr_accessor actions: Array[Types::ResponseBudgetAction]?
+      attr_accessor schedule: Types::BudgetSchedule?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor queue_stopped_at: Time?
+    end
+
+    class GetFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+    end
+
+    class GetFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class GetFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?farm_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?auto_scaling_status: String,
+        ?target_worker_count: Integer,
+        ?worker_count: Integer,
+        ?min_worker_count: Integer,
+        ?max_worker_count: Integer,
+        ?configuration: Types::FleetConfiguration,
+        ?host_configuration: Types::HostConfiguration,
+        ?capabilities: Types::FleetCapabilities,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor auto_scaling_status: String?
+      attr_accessor target_worker_count: Integer?
+      attr_accessor worker_count: Integer?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor configuration: Types::FleetConfiguration?
+      attr_accessor host_configuration: Types::HostConfiguration?
+      attr_accessor capabilities: Types::FleetCapabilities?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetJobEntityError
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?job_details: Types::JobDetailsError,
+        ?job_attachment_details: Types::JobAttachmentDetailsError,
+        ?step_details: Types::StepDetailsError,
+        ?environment_details: Types::EnvironmentDetailsError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_details: Types::JobDetailsError?
+      attr_accessor job_attachment_details: Types::JobAttachmentDetailsError?
+      attr_accessor step_details: Types::StepDetailsError?
+      attr_accessor environment_details: Types::EnvironmentDetailsError?
+
+      class JobDetails < GetJobEntityError
+      end
+      class JobAttachmentDetails < GetJobEntityError
+      end
+      class StepDetails < GetJobEntityError
+      end
+      class EnvironmentDetails < GetJobEntityError
+      end
+      class Unknown < GetJobEntityError
+      end
+    end
+
+    class GetJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?priority: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?task_run_status: String,
+        ?target_task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?storage_profile_id: String,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?parameters: Hash[String, Types::JobParameter],
+        ?attachments: Types::Attachments,
+        ?description: String,
+        ?max_worker_count: Integer,
+        ?source_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor priority: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor task_run_status: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor storage_profile_id: String?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor parameters: Hash[String, Types::JobParameter]?
+      attr_accessor attachments: Types::Attachments?
+      attr_accessor description: String?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor source_job_id: String?
+    end
+
+    class GetLicenseEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+    end
+
+    class GetLicenseEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?vpc_id: String,
+        ?dns_name: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor vpc_id: String?
+      attr_accessor dns_name: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class GetLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+    end
+
+    class GetLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?amount_requirement_name: String,
+        ?max_count: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?farm_id: String,
+        ?limit_id: String,
+        ?current_count: Integer,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor amount_requirement_name: String?
+      attr_accessor max_count: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor current_count: Integer?
+      attr_accessor description: String?
+    end
+
+    class GetMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+    end
+
+    class GetMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+        ?display_name: String,
+        ?subdomain: String,
+        ?url: String,
+        ?role_arn: String,
+        ?identity_center_instance_arn: String,
+        ?identity_center_application_arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+      attr_accessor display_name: String?
+      attr_accessor subdomain: String?
+      attr_accessor url: String?
+      attr_accessor role_arn: String?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_application_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetQueueEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?queue_environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor queue_environment_id: String?
+    end
+
+    class GetQueueEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_environment_id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?template_type: String,
+        ?template: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_environment_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor template_type: String?
+      attr_accessor template: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetQueueFleetAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class GetQueueFleetAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?fleet_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetQueueLimitAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?limit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+    end
+
+    class GetQueueLimitAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?queue_id: String,
+        ?limit_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor status: String?
+    end
+
+    class GetQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+    end
+
+    class GetQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?farm_id: String,
+        ?status: String,
+        ?default_budget_action: String,
+        ?blocked_reason: String,
+        ?job_attachment_settings: Types::JobAttachmentSettings,
+        ?role_arn: String,
+        ?required_file_system_location_names: Array[String],
+        ?allowed_storage_profile_ids: Array[String],
+        ?job_run_as_user: Types::JobRunAsUser,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor farm_id: String?
+      attr_accessor status: String?
+      attr_accessor default_budget_action: String?
+      attr_accessor blocked_reason: String?
+      attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
+      attr_accessor role_arn: String?
+      attr_accessor required_file_system_location_names: Array[String]?
+      attr_accessor allowed_storage_profile_ids: Array[String]?
+      attr_accessor job_run_as_user: Types::JobRunAsUser?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class GetSessionActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_action_id: String?
+    end
+
+    class GetSessionActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_action_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?worker_updated_at: Time,
+        ?progress_percent: Float,
+        ?session_id: String,
+        ?process_exit_code: Integer,
+        ?progress_message: String,
+        ?definition: Types::SessionActionDefinition,
+        ?acquired_limits: Array[Types::AcquiredLimit],
+        ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_action_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor worker_updated_at: Time?
+      attr_accessor progress_percent: Float?
+      attr_accessor session_id: String?
+      attr_accessor process_exit_code: Integer?
+      attr_accessor progress_message: String?
+      attr_accessor definition: Types::SessionActionDefinition?
+      attr_accessor acquired_limits: Array[Types::AcquiredLimit]?
+      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?started_at: Time,
+        ?log: Types::LogConfiguration,
+        ?lifecycle_status: String,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?target_lifecycle_status: String,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?worker_log: Types::LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor started_at: Time?
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor lifecycle_status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor target_lifecycle_status: String?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor worker_log: Types::LogConfiguration?
+    end
+
+    class GetSessionsStatisticsAggregationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?aggregation_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor aggregation_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetSessionsStatisticsAggregationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statistics: Array[Types::Statistics],
+        ?next_token: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statistics: Array[Types::Statistics]?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class GetStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+    end
+
+    class GetStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?target_task_run_status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?dependency_counts: Types::DependencyCounts,
+        ?required_capabilities: Types::StepRequiredCapabilities,
+        ?parameter_space: Types::ParameterSpace,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor target_task_run_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor dependency_counts: Types::DependencyCounts?
+      attr_accessor required_capabilities: Types::StepRequiredCapabilities?
+      attr_accessor parameter_space: Types::ParameterSpace?
+      attr_accessor description: String?
+    end
+
+    class GetStorageProfileForQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?storage_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor storage_profile_id: String?
+    end
+
+    class GetStorageProfileForQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profile_id: String,
+        ?display_name: String,
+        ?os_family: String,
+        ?file_system_locations: Array[Types::FileSystemLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profile_id: String?
+      attr_accessor display_name: String?
+      attr_accessor os_family: String?
+      attr_accessor file_system_locations: Array[Types::FileSystemLocation]?
+    end
+
+    class GetStorageProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?storage_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor storage_profile_id: String?
+    end
+
+    class GetStorageProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profile_id: String,
+        ?display_name: String,
+        ?os_family: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?file_system_locations: Array[Types::FileSystemLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profile_id: String?
+      attr_accessor display_name: String?
+      attr_accessor os_family: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor file_system_locations: Array[Types::FileSystemLocation]?
+    end
+
+    class GetTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+    end
+
+    class GetTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?run_status: String,
+        ?target_run_status: String,
+        ?failure_retry_count: Integer,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?latest_session_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor run_status: String?
+      attr_accessor target_run_status: String?
+      attr_accessor failure_retry_count: Integer?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor latest_session_action_id: String?
+    end
+
+    class GetWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+    end
+
+    class GetWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?status: String,
+        ?log: Types::LogConfiguration,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor status: String?
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class HostConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_body: String,
+        ?script_timeout_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_body: String?
+      attr_accessor script_timeout_seconds: Integer?
+    end
+
+    class HostPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_addresses: Types::IpAddresses,
+        ?host_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_addresses: Types::IpAddresses?
+      attr_accessor host_name: String?
+    end
+
+    class HostPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_addresses: Types::IpAddresses,
+        ?host_name: String,
+        ?ec2_instance_arn: String,
+        ?ec2_instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_addresses: Types::IpAddresses?
+      attr_accessor host_name: String?
+      attr_accessor ec2_instance_arn: String?
+      attr_accessor ec2_instance_type: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class IpAddresses
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_v4_addresses: Array[String],
+        ?ip_v6_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_v4_addresses: Array[String]?
+      attr_accessor ip_v6_addresses: Array[String]?
+    end
+
+    class JobAttachmentDetailsEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?attachments: Types::Attachments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor attachments: Types::Attachments?
+    end
+
+    class JobAttachmentDetailsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class JobAttachmentDetailsIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class JobAttachmentSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?root_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor root_prefix: String?
+    end
+
+    module JobAttachmentsFileSystem
+      COPIED: String
+      VIRTUAL: String
+    end
+
+    class JobDetailsEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_attachment_settings: Types::JobAttachmentSettings,
+        ?job_run_as_user: Types::JobRunAsUser,
+        ?log_group_name: String,
+        ?queue_role_arn: String,
+        ?parameters: Hash[String, Types::JobParameter],
+        ?schema_version: String,
+        ?path_mapping_rules: Array[Types::PathMappingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
+      attr_accessor job_run_as_user: Types::JobRunAsUser?
+      attr_accessor log_group_name: String?
+      attr_accessor queue_role_arn: String?
+      attr_accessor parameters: Hash[String, Types::JobParameter]?
+      attr_accessor schema_version: String?
+      attr_accessor path_mapping_rules: Array[Types::PathMappingRule]?
+    end
+
+    class JobDetailsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class JobDetailsIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class JobEntity
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?job_details: Types::JobDetailsEntity,
+        ?job_attachment_details: Types::JobAttachmentDetailsEntity,
+        ?step_details: Types::StepDetailsEntity,
+        ?environment_details: Types::EnvironmentDetailsEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_details: Types::JobDetailsEntity?
+      attr_accessor job_attachment_details: Types::JobAttachmentDetailsEntity?
+      attr_accessor step_details: Types::StepDetailsEntity?
+      attr_accessor environment_details: Types::EnvironmentDetailsEntity?
+
+      class JobDetails < JobEntity
+      end
+      class JobAttachmentDetails < JobEntity
+      end
+      class StepDetails < JobEntity
+      end
+      class EnvironmentDetails < JobEntity
+      end
+      class Unknown < JobEntity
+      end
+    end
+
+    module JobEntityErrorCode
+      AccessDeniedException: String
+      InternalServerException: String
+      ValidationException: String
+      ResourceNotFoundException: String
+      MaxPayloadSizeExceeded: String
+      ConflictException: String
+    end
+
+    class JobEntityIdentifiersUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?job_details: Types::JobDetailsIdentifiers,
+        ?job_attachment_details: Types::JobAttachmentDetailsIdentifiers,
+        ?step_details: Types::StepDetailsIdentifiers,
+        ?environment_details: Types::EnvironmentDetailsIdentifiers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_details: Types::JobDetailsIdentifiers?
+      attr_accessor job_attachment_details: Types::JobAttachmentDetailsIdentifiers?
+      attr_accessor step_details: Types::StepDetailsIdentifiers?
+      attr_accessor environment_details: Types::EnvironmentDetailsIdentifiers?
+
+      class JobDetails < JobEntityIdentifiersUnion
+      end
+      class JobAttachmentDetails < JobEntityIdentifiersUnion
+      end
+      class StepDetails < JobEntityIdentifiersUnion
+      end
+      class EnvironmentDetails < JobEntityIdentifiersUnion
+      end
+      class Unknown < JobEntityIdentifiersUnion
+      end
+    end
+
+    module JobLifecycleStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      CREATE_COMPLETE: String
+      UPLOAD_IN_PROGRESS: String
+      UPLOAD_FAILED: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+      UPDATE_SUCCEEDED: String
+      ARCHIVED: String
+    end
+
+    class JobMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    class JobParameter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?int: String,
+        ?float: String,
+        ?string: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor int: String?
+      attr_accessor float: String?
+      attr_accessor string: String?
+      attr_accessor path: String?
+
+      class Int < JobParameter
+      end
+      class Float < JobParameter
+      end
+      class String < JobParameter
+      end
+      class Path < JobParameter
+      end
+      class Unknown < JobParameter
+      end
+    end
+
+    class JobRunAsUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?posix: Types::PosixUser,
+        ?windows: Types::WindowsUser,
+        ?run_as: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor posix: Types::PosixUser?
+      attr_accessor windows: Types::WindowsUser?
+      attr_accessor run_as: String?
+    end
+
+    class JobSearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?queue_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?task_run_status: String,
+        ?target_task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?priority: Integer,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?created_by: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?job_parameters: Hash[String, Types::JobParameter],
+        ?max_worker_count: Integer,
+        ?source_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor task_run_status: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor priority: Integer?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor job_parameters: Hash[String, Types::JobParameter]?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor source_job_id: String?
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?priority: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?task_run_status: String,
+        ?target_task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?max_worker_count: Integer,
+        ?source_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor priority: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor task_run_status: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor source_job_id: String?
+    end
+
+    module JobTargetTaskRunStatus
+      READY: String
+      FAILED: String
+      SUCCEEDED: String
+      CANCELED: String
+      SUSPENDED: String
+      PENDING: String
+    end
+
+    module JobTemplateType
+      JSON: String
+      YAML: String
+    end
+
+    module LicenseEndpointStatus
+      CREATE_IN_PROGRESS: String
+      DELETE_IN_PROGRESS: String
+      READY: String
+      NOT_READY: String
+    end
+
+    class LicenseEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class LimitSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?amount_requirement_name: String,
+        ?max_count: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?farm_id: String,
+        ?limit_id: String,
+        ?current_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor amount_requirement_name: String?
+      attr_accessor max_count: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor current_count: Integer?
+    end
+
+    class ListAvailableMeteredProductsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAvailableMeteredProductsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metered_products: Array[Types::MeteredProductSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metered_products: Array[Types::MeteredProductSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBudgetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?farm_id: String,
+        ?max_results: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+    end
+
+    class ListBudgetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?budgets: Array[Types::BudgetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor budgets: Array[Types::BudgetSummary]?
+    end
+
+    class ListFarmMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFarmMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::FarmMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::FarmMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFarmsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?principal_id: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor principal_id: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFarmsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?farms: Array[Types::FarmSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor farms: Array[Types::FarmSummary]?
+    end
+
+    class ListFleetMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFleetMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::FleetMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::FleetMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFleetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleets: Array[Types::FleetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleets: Array[Types::FleetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListJobMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::JobMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::JobMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobParameterDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?job_id: String,
+        ?queue_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor job_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListJobParameterDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_parameter_definitions: Array[Smithy::Schema::document],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_parameter_definitions: Array[Smithy::Schema::document]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+        ?queue_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLicenseEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoints: Array[Types::LicenseEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoints: Array[Types::LicenseEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLimitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limits: Array[Types::LimitSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limits: Array[Types::LimitSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMeteredProductsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMeteredProductsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metered_products: Array[Types::MeteredProductSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metered_products: Array[Types::MeteredProductSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMonitorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMonitorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?monitors: Array[Types::MonitorSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor monitors: Array[Types::MonitorSummary]?
+    end
+
+    class ListQueueEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueueEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::QueueEnvironmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::QueueEnvironmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueueFleetAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?fleet_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueueFleetAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_fleet_associations: Array[Types::QueueFleetAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_fleet_associations: Array[Types::QueueFleetAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueueLimitAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?limit_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueueLimitAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_limit_associations: Array[Types::QueueLimitAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_limit_associations: Array[Types::QueueLimitAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueueMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueueMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::QueueMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::QueueMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?principal_id: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queues: Array[Types::QueueSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queues: Array[Types::QueueSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+        ?task_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+      attr_accessor task_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSessionActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_actions: Array[Types::SessionActionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_actions: Array[Types::SessionActionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsForWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSessionsForWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::WorkerSessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::WorkerSessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::SessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::SessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStepConsumersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStepConsumersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumers: Array[Types::StepConsumer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumers: Array[Types::StepConsumer]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStepDependenciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStepDependenciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dependencies: Array[Types::StepDependency],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dependencies: Array[Types::StepDependency]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::StepSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::StepSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStorageProfilesForQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStorageProfilesForQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profiles: Array[Types::StorageProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profiles: Array[Types::StorageProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStorageProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStorageProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profiles: Array[Types::StorageProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profiles: Array[Types::StorageProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::TaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::TaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workers: Array[Types::WorkerSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workers: Array[Types::WorkerSummary]?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_driver: String,
+        ?options: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_driver: String?
+      attr_accessor options: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor error: String?
+    end
+
+    module LogicalOperator
+      AND: String
+      OR: String
+    end
+
+    class ManifestProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_location_name: String,
+        ?root_path: String,
+        ?root_path_format: String,
+        ?output_relative_directories: Array[String],
+        ?input_manifest_path: String,
+        ?input_manifest_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_location_name: String?
+      attr_accessor root_path: String?
+      attr_accessor root_path_format: String?
+      attr_accessor output_relative_directories: Array[String]?
+      attr_accessor input_manifest_path: String?
+      attr_accessor input_manifest_hash: String?
+    end
+
+    module MembershipLevel
+      VIEWER: String
+      CONTRIBUTOR: String
+      OWNER: String
+      MANAGER: String
+    end
+
+    class MemoryMiBRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class MeteredProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?family: String,
+        ?vendor: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor family: String?
+      attr_accessor vendor: String?
+      attr_accessor port: Integer?
+    end
+
+    class MonitorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+        ?display_name: String,
+        ?subdomain: String,
+        ?url: String,
+        ?role_arn: String,
+        ?identity_center_instance_arn: String,
+        ?identity_center_application_arn: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+      attr_accessor display_name: String?
+      attr_accessor subdomain: String?
+      attr_accessor url: String?
+      attr_accessor role_arn: String?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_application_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class ParameterFilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    class ParameterSortExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor name: String?
+    end
+
+    class ParameterSpace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::StepParameter],
+        ?combination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::StepParameter]?
+      attr_accessor combination: String?
+    end
+
+    module PathFormat
+      WINDOWS: String
+      POSIX: String
+    end
+
+    class PathMappingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_path_format: String,
+        ?source_path: String,
+        ?destination_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_path_format: String?
+      attr_accessor source_path: String?
+      attr_accessor destination_path: String?
+    end
+
+    module Period
+      HOURLY: String
+      DAILY: String
+      WEEKLY: String
+      MONTHLY: String
+    end
+
+    class PosixUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: String,
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: String?
+      attr_accessor group: String?
+    end
+
+    class PutMeteredProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_endpoint_id: String,
+        ?product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_endpoint_id: String?
+      attr_accessor product_id: String?
+    end
+
+    class PutMeteredProductResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module QueueBlockedReason
+      NO_BUDGET_CONFIGURED: String
+      BUDGET_THRESHOLD_REACHED: String
+    end
+
+    class QueueEnvironmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_environment_id: String,
+        ?name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_environment_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+    end
+
+    module QueueFleetAssociationStatus
+      ACTIVE: String
+      STOP_SCHEDULING_AND_COMPLETE_TASKS: String
+      STOP_SCHEDULING_AND_CANCEL_TASKS: String
+      STOPPED: String
+    end
+
+    class QueueFleetAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?fleet_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    module QueueLimitAssociationStatus
+      ACTIVE: String
+      STOP_LIMIT_USAGE_AND_COMPLETE_TASKS: String
+      STOP_LIMIT_USAGE_AND_CANCEL_TASKS: String
+      STOPPED: String
+    end
+
+    class QueueLimitAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?queue_id: String,
+        ?limit_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor status: String?
+    end
+
+    class QueueMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?identity_store_id: String,
+        ?membership_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor membership_level: String?
+    end
+
+    module QueueStatus
+      IDLE: String
+      SCHEDULING: String
+      SCHEDULING_BLOCKED: String
+    end
+
+    class QueueSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?default_budget_action: String,
+        ?blocked_reason: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor default_budget_action: String?
+      attr_accessor blocked_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    class ResponseBudgetAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?threshold_percentage: Float,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor threshold_percentage: Float?
+      attr_accessor description: String?
+    end
+
+    module RunAs
+      QUEUE_CONFIGURED_USER: String
+      WORKER_AGENT_USER: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+    end
+
+    class SearchFilterExpression
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?date_time_filter: Types::DateTimeFilterExpression,
+        ?parameter_filter: Types::ParameterFilterExpression,
+        ?search_term_filter: Types::SearchTermFilterExpression,
+        ?string_filter: Types::StringFilterExpression,
+        ?group_filter: Types::SearchGroupedFilterExpressions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_time_filter: Types::DateTimeFilterExpression?
+      attr_accessor parameter_filter: Types::ParameterFilterExpression?
+      attr_accessor search_term_filter: Types::SearchTermFilterExpression?
+      attr_accessor string_filter: Types::StringFilterExpression?
+      attr_accessor group_filter: Types::SearchGroupedFilterExpressions?
+
+      class DateTimeFilter < SearchFilterExpression
+      end
+      class ParameterFilter < SearchFilterExpression
+      end
+      class SearchTermFilter < SearchFilterExpression
+      end
+      class StringFilter < SearchFilterExpression
+      end
+      class GroupFilter < SearchFilterExpression
+      end
+      class Unknown < SearchFilterExpression
+      end
+    end
+
+    class SearchGroupedFilterExpressions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::SearchFilterExpression],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::SearchFilterExpression]?
+      attr_accessor operator: String?
+    end
+
+    class SearchJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_ids: Array[String],
+        ?filter_expressions: Types::SearchGroupedFilterExpressions,
+        ?sort_expressions: Array[Types::SearchSortExpression],
+        ?item_offset: Integer,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
+      attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
+      attr_accessor item_offset: Integer?
+      attr_accessor page_size: Integer?
+    end
+
+    class SearchJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSearchSummary],
+        ?next_item_offset: Integer,
+        ?total_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSearchSummary]?
+      attr_accessor next_item_offset: Integer?
+      attr_accessor total_results: Integer?
+    end
+
+    class SearchSortExpression
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user_jobs_first: Types::UserJobsFirst,
+        ?field_sort: Types::FieldSortExpression,
+        ?parameter_sort: Types::ParameterSortExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_jobs_first: Types::UserJobsFirst?
+      attr_accessor field_sort: Types::FieldSortExpression?
+      attr_accessor parameter_sort: Types::ParameterSortExpression?
+
+      class UserJobsFirst < SearchSortExpression
+      end
+      class FieldSort < SearchSortExpression
+      end
+      class ParameterSort < SearchSortExpression
+      end
+      class Unknown < SearchSortExpression
+      end
+    end
+
+    class SearchStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_ids: Array[String],
+        ?job_id: String,
+        ?filter_expressions: Types::SearchGroupedFilterExpressions,
+        ?sort_expressions: Array[Types::SearchSortExpression],
+        ?item_offset: Integer,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor job_id: String?
+      attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
+      attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
+      attr_accessor item_offset: Integer?
+      attr_accessor page_size: Integer?
+    end
+
+    class SearchStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::StepSearchSummary],
+        ?next_item_offset: Integer,
+        ?total_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::StepSearchSummary]?
+      attr_accessor next_item_offset: Integer?
+      attr_accessor total_results: Integer?
+    end
+
+    class SearchTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_ids: Array[String],
+        ?job_id: String,
+        ?filter_expressions: Types::SearchGroupedFilterExpressions,
+        ?sort_expressions: Array[Types::SearchSortExpression],
+        ?item_offset: Integer,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor job_id: String?
+      attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
+      attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
+      attr_accessor item_offset: Integer?
+      attr_accessor page_size: Integer?
+    end
+
+    class SearchTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::TaskSearchSummary],
+        ?next_item_offset: Integer,
+        ?total_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::TaskSearchSummary]?
+      attr_accessor next_item_offset: Integer?
+      attr_accessor total_results: Integer?
+    end
+
+    class SearchTermFilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_term: String,
+        ?match_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_term: String?
+      attr_accessor match_type: String?
+    end
+
+    module SearchTermMatchingType
+      FUZZY_MATCH: String
+      CONTAINS: String
+    end
+
+    class SearchWorkersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_ids: Array[String],
+        ?filter_expressions: Types::SearchGroupedFilterExpressions,
+        ?sort_expressions: Array[Types::SearchSortExpression],
+        ?item_offset: Integer,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_ids: Array[String]?
+      attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
+      attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
+      attr_accessor item_offset: Integer?
+      attr_accessor page_size: Integer?
+    end
+
+    class SearchWorkersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workers: Array[Types::WorkerSearchSummary],
+        ?next_item_offset: Integer,
+        ?total_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workers: Array[Types::WorkerSearchSummary]?
+      attr_accessor next_item_offset: Integer?
+      attr_accessor total_results: Integer?
+    end
+
+    class ServiceManagedEc2FleetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_capabilities: Types::ServiceManagedEc2InstanceCapabilities,
+        ?instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?storage_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_capabilities: Types::ServiceManagedEc2InstanceCapabilities?
+      attr_accessor instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor storage_profile_id: String?
+    end
+
+    class ServiceManagedEc2InstanceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu_count: Types::VCpuCountRange,
+        ?memory_mi_b: Types::MemoryMiBRange,
+        ?os_family: String,
+        ?cpu_architecture_type: String,
+        ?root_ebs_volume: Types::Ec2EbsVolume,
+        ?accelerator_capabilities: Types::AcceleratorCapabilities,
+        ?allowed_instance_types: Array[String],
+        ?excluded_instance_types: Array[String],
+        ?custom_amounts: Array[Types::FleetAmountCapability],
+        ?custom_attributes: Array[Types::FleetAttributeCapability],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu_count: Types::VCpuCountRange?
+      attr_accessor memory_mi_b: Types::MemoryMiBRange?
+      attr_accessor os_family: String?
+      attr_accessor cpu_architecture_type: String?
+      attr_accessor root_ebs_volume: Types::Ec2EbsVolume?
+      attr_accessor accelerator_capabilities: Types::AcceleratorCapabilities?
+      attr_accessor allowed_instance_types: Array[String]?
+      attr_accessor excluded_instance_types: Array[String]?
+      attr_accessor custom_amounts: Array[Types::FleetAmountCapability]?
+      attr_accessor custom_attributes: Array[Types::FleetAttributeCapability]?
+    end
+
+    class ServiceManagedEc2InstanceMarketOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module ServiceManagedFleetOperatingSystemFamily
+      WINDOWS: String
+      LINUX: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?resource_id: String,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor resource_id: String?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    module ServiceQuotaExceededExceptionReason
+      SERVICE_QUOTA_EXCEEDED_EXCEPTION: String
+      KMS_KEY_LIMIT_EXCEEDED: String
+      DEPENDENCY_LIMIT_EXCEEDED: String
+    end
+
+    class SessionActionDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?env_enter: Types::EnvironmentEnterSessionActionDefinition,
+        ?env_exit: Types::EnvironmentExitSessionActionDefinition,
+        ?task_run: Types::TaskRunSessionActionDefinition,
+        ?sync_input_job_attachments: Types::SyncInputJobAttachmentsSessionActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor env_enter: Types::EnvironmentEnterSessionActionDefinition?
+      attr_accessor env_exit: Types::EnvironmentExitSessionActionDefinition?
+      attr_accessor task_run: Types::TaskRunSessionActionDefinition?
+      attr_accessor sync_input_job_attachments: Types::SyncInputJobAttachmentsSessionActionDefinition?
+
+      class EnvEnter < SessionActionDefinition
+      end
+      class EnvExit < SessionActionDefinition
+      end
+      class TaskRun < SessionActionDefinition
+      end
+      class SyncInputJobAttachments < SessionActionDefinition
+      end
+      class Unknown < SessionActionDefinition
+      end
+    end
+
+    class SessionActionDefinitionSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?env_enter: Types::EnvironmentEnterSessionActionDefinitionSummary,
+        ?env_exit: Types::EnvironmentExitSessionActionDefinitionSummary,
+        ?task_run: Types::TaskRunSessionActionDefinitionSummary,
+        ?sync_input_job_attachments: Types::SyncInputJobAttachmentsSessionActionDefinitionSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor env_enter: Types::EnvironmentEnterSessionActionDefinitionSummary?
+      attr_accessor env_exit: Types::EnvironmentExitSessionActionDefinitionSummary?
+      attr_accessor task_run: Types::TaskRunSessionActionDefinitionSummary?
+      attr_accessor sync_input_job_attachments: Types::SyncInputJobAttachmentsSessionActionDefinitionSummary?
+
+      class EnvEnter < SessionActionDefinitionSummary
+      end
+      class EnvExit < SessionActionDefinitionSummary
+      end
+      class TaskRun < SessionActionDefinitionSummary
+      end
+      class SyncInputJobAttachments < SessionActionDefinitionSummary
+      end
+      class Unknown < SessionActionDefinitionSummary
+      end
+    end
+
+    module SessionActionStatus
+      ASSIGNED: String
+      RUNNING: String
+      CANCELING: String
+      SUCCEEDED: String
+      FAILED: String
+      INTERRUPTED: String
+      CANCELED: String
+      NEVER_ATTEMPTED: String
+      SCHEDULED: String
+      RECLAIMING: String
+      RECLAIMED: String
+    end
+
+    class SessionActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_action_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?worker_updated_at: Time,
+        ?progress_percent: Float,
+        ?definition: Types::SessionActionDefinitionSummary,
+        ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_action_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor worker_updated_at: Time?
+      attr_accessor progress_percent: Float?
+      attr_accessor definition: Types::SessionActionDefinitionSummary?
+      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
+    end
+
+    module SessionLifecycleStatus
+      STARTED: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_SUCCEEDED: String
+      UPDATE_FAILED: String
+      ENDED: String
+    end
+
+    module SessionLifecycleTargetStatus
+      ENDED: String
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?started_at: Time,
+        ?lifecycle_status: String,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?target_lifecycle_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor started_at: Time?
+      attr_accessor lifecycle_status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor target_lifecycle_status: String?
+    end
+
+    module SessionsStatisticsAggregationStatus
+      IN_PROGRESS: String
+      TIMEOUT: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class SessionsStatisticsResources
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?queue_ids: Array[String],
+        ?fleet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor fleet_ids: Array[String]?
+
+      class QueueIds < SessionsStatisticsResources
+      end
+      class FleetIds < SessionsStatisticsResources
+      end
+      class Unknown < SessionsStatisticsResources
+      end
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartSessionsStatisticsAggregationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?resource_ids: Types::SessionsStatisticsResources,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?timezone: String,
+        ?period: String,
+        ?group_by: Array[String],
+        ?statistics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor resource_ids: Types::SessionsStatisticsResources?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor timezone: String?
+      attr_accessor period: String?
+      attr_accessor group_by: Array[String]?
+      attr_accessor statistics: Array[String]?
+    end
+
+    class StartSessionsStatisticsAggregationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_id: String?
+    end
+
+    class Statistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?fleet_id: String,
+        ?job_id: String,
+        ?job_name: String,
+        ?user_id: String,
+        ?usage_type: String,
+        ?license_product: String,
+        ?instance_type: String,
+        ?count: Integer,
+        ?cost_in_usd: Types::Stats,
+        ?runtime_in_seconds: Types::Stats,
+        ?aggregation_start_time: Time,
+        ?aggregation_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor user_id: String?
+      attr_accessor usage_type: String?
+      attr_accessor license_product: String?
+      attr_accessor instance_type: String?
+      attr_accessor count: Integer?
+      attr_accessor cost_in_usd: Types::Stats?
+      attr_accessor runtime_in_seconds: Types::Stats?
+      attr_accessor aggregation_start_time: Time?
+      attr_accessor aggregation_end_time: Time?
+    end
+
+    class Stats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+        ?avg: Float,
+        ?sum: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor avg: Float?
+      attr_accessor sum: Float?
+    end
+
+    class StepAmountCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min: Float,
+        ?max: Float,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor value: Float?
+    end
+
+    class StepAttributeCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?any_of: Array[String],
+        ?all_of: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor any_of: Array[String]?
+      attr_accessor all_of: Array[String]?
+    end
+
+    class StepConsumer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor status: String?
+    end
+
+    class StepDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor status: String?
+    end
+
+    class StepDetailsEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?step_id: String,
+        ?schema_version: String,
+        ?template: Smithy::Schema::document,
+        ?dependencies: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor schema_version: String?
+      attr_accessor template: Smithy::Schema::document?
+      attr_accessor dependencies: Array[String]?
+    end
+
+    class StepDetailsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?step_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class StepDetailsIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+    end
+
+    module StepLifecycleStatus
+      CREATE_COMPLETE: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
+      UPDATE_SUCCEEDED: String
+    end
+
+    class StepParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module StepParameterType
+      INT: String
+      FLOAT: String
+      STRING: String
+      PATH: String
+      CHUNK_INT: String
+    end
+
+    class StepRequiredCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::StepAttributeCapability],
+        ?amounts: Array[Types::StepAmountCapability],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::StepAttributeCapability]?
+      attr_accessor amounts: Array[Types::StepAmountCapability]?
+    end
+
+    class StepSearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?job_id: String,
+        ?queue_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?task_run_status: String,
+        ?target_task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?parameter_space: Types::ParameterSpace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor job_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor task_run_status: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor parameter_space: Types::ParameterSpace?
+    end
+
+    class StepSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?target_task_run_status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?dependency_counts: Types::DependencyCounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor target_task_run_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor dependency_counts: Types::DependencyCounts?
+    end
+
+    module StepTargetTaskRunStatus
+      READY: String
+      FAILED: String
+      SUCCEEDED: String
+      CANCELED: String
+      SUSPENDED: String
+      PENDING: String
+    end
+
+    module StorageProfileOperatingSystemFamily
+      WINDOWS: String
+      LINUX: String
+      MACOS: String
+    end
+
+    class StorageProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_profile_id: String,
+        ?display_name: String,
+        ?os_family: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_profile_id: String?
+      attr_accessor display_name: String?
+      attr_accessor os_family: String?
+    end
+
+    class StringFilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    class SyncInputJobAttachmentsSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+    end
+
+    class SyncInputJobAttachmentsSessionActionDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_id: String?
+    end
+
+    module TagPropagationMode
+      NO_PROPAGATION: String
+      PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskParameterValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?int: String,
+        ?float: String,
+        ?string: String,
+        ?path: String,
+        ?chunk_int: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor int: String?
+      attr_accessor float: String?
+      attr_accessor string: String?
+      attr_accessor path: String?
+      attr_accessor chunk_int: String?
+
+      class Int < TaskParameterValue
+      end
+      class Float < TaskParameterValue
+      end
+      class String < TaskParameterValue
+      end
+      class Path < TaskParameterValue
+      end
+      class ChunkInt < TaskParameterValue
+      end
+      class Unknown < TaskParameterValue
+      end
+    end
+
+    class TaskRunManifestPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_manifest_path: String,
+        ?output_manifest_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_manifest_path: String?
+      attr_accessor output_manifest_hash: String?
+    end
+
+    class TaskRunManifestPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_manifest_path: String,
+        ?output_manifest_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_manifest_path: String?
+      attr_accessor output_manifest_hash: String?
+    end
+
+    class TaskRunSessionActionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?step_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor step_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+    end
+
+    class TaskRunSessionActionDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?step_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor step_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+    end
+
+    module TaskRunStatus
+      PENDING: String
+      READY: String
+      ASSIGNED: String
+      STARTING: String
+      SCHEDULED: String
+      INTERRUPTING: String
+      RUNNING: String
+      SUSPENDED: String
+      CANCELED: String
+      FAILED: String
+      SUCCEEDED: String
+      NOT_COMPATIBLE: String
+    end
+
+    class TaskSearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?step_id: String,
+        ?job_id: String,
+        ?queue_id: String,
+        ?run_status: String,
+        ?target_run_status: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+        ?failure_retry_count: Integer,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor step_id: String?
+      attr_accessor job_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor run_status: String?
+      attr_accessor target_run_status: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+      attr_accessor failure_retry_count: Integer?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class TaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?run_status: String,
+        ?target_run_status: String,
+        ?failure_retry_count: Integer,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?latest_session_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor run_status: String?
+      attr_accessor target_run_status: String?
+      attr_accessor failure_retry_count: Integer?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor latest_session_action_id: String?
+    end
+
+    module TaskTargetRunStatus
+      READY: String
+      FAILED: String
+      SUCCEEDED: String
+      CANCELED: String
+      SUSPENDED: String
+      PENDING: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBudgetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?budget_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?status: String,
+        ?approximate_dollar_limit: Float,
+        ?actions_to_add: Array[Types::BudgetActionToAdd],
+        ?actions_to_remove: Array[Types::BudgetActionToRemove],
+        ?schedule: Types::BudgetSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor budget_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor approximate_dollar_limit: Float?
+      attr_accessor actions_to_add: Array[Types::BudgetActionToAdd]?
+      attr_accessor actions_to_remove: Array[Types::BudgetActionToRemove]?
+      attr_accessor schedule: Types::BudgetSchedule?
+    end
+
+    class UpdateBudgetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFarmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?display_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateFarmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateFleetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?role_arn: String,
+        ?min_worker_count: Integer,
+        ?max_worker_count: Integer,
+        ?configuration: Types::FleetConfiguration,
+        ?host_configuration: Types::HostConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor min_worker_count: Integer?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor configuration: Types::FleetConfiguration?
+      attr_accessor host_configuration: Types::HostConfiguration?
+    end
+
+    class UpdateFleetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateJobLifecycleStatus
+      ARCHIVED: String
+    end
+
+    class UpdateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?target_task_run_status: String,
+        ?priority: Integer,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?lifecycle_status: String,
+        ?max_worker_count: Integer,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor priority: Integer?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor lifecycle_status: String?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class UpdateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?limit_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?max_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor max_count: Integer?
+    end
+
+    class UpdateLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+        ?subdomain: String,
+        ?display_name: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+      attr_accessor subdomain: String?
+      attr_accessor display_name: String?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateQueueEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?queue_environment_id: String,
+        ?priority: Integer,
+        ?template_type: String,
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor queue_environment_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor template_type: String?
+      attr_accessor template: String?
+    end
+
+    class UpdateQueueEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateQueueFleetAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?fleet_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateQueueFleetAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateQueueFleetAssociationStatus
+      ACTIVE: String
+      STOP_SCHEDULING_AND_COMPLETE_TASKS: String
+      STOP_SCHEDULING_AND_CANCEL_TASKS: String
+    end
+
+    class UpdateQueueLimitAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?limit_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateQueueLimitAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateQueueLimitAssociationStatus
+      ACTIVE: String
+      STOP_LIMIT_USAGE_AND_COMPLETE_TASKS: String
+      STOP_LIMIT_USAGE_AND_CANCEL_TASKS: String
+    end
+
+    class UpdateQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?display_name: String,
+        ?description: String,
+        ?default_budget_action: String,
+        ?job_attachment_settings: Types::JobAttachmentSettings,
+        ?role_arn: String,
+        ?job_run_as_user: Types::JobRunAsUser,
+        ?required_file_system_location_names_to_add: Array[String],
+        ?required_file_system_location_names_to_remove: Array[String],
+        ?allowed_storage_profile_ids_to_add: Array[String],
+        ?allowed_storage_profile_ids_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor default_budget_action: String?
+      attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
+      attr_accessor role_arn: String?
+      attr_accessor job_run_as_user: Types::JobRunAsUser?
+      attr_accessor required_file_system_location_names_to_add: Array[String]?
+      attr_accessor required_file_system_location_names_to_remove: Array[String]?
+      attr_accessor allowed_storage_profile_ids_to_add: Array[String]?
+      attr_accessor allowed_storage_profile_ids_to_remove: Array[String]?
+    end
+
+    class UpdateQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?target_lifecycle_status: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor target_lifecycle_status: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class UpdateSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_task_run_status: String,
+        ?client_token: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_task_run_status: String?
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+    end
+
+    class UpdateStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStorageProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?farm_id: String,
+        ?storage_profile_id: String,
+        ?display_name: String,
+        ?os_family: String,
+        ?file_system_locations_to_add: Array[Types::FileSystemLocation],
+        ?file_system_locations_to_remove: Array[Types::FileSystemLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor farm_id: String?
+      attr_accessor storage_profile_id: String?
+      attr_accessor display_name: String?
+      attr_accessor os_family: String?
+      attr_accessor file_system_locations_to_add: Array[Types::FileSystemLocation]?
+      attr_accessor file_system_locations_to_remove: Array[Types::FileSystemLocation]?
+    end
+
+    class UpdateStorageProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?target_run_status: String,
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor target_run_status: String?
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+    end
+
+    class UpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?status: String,
+        ?capabilities: Types::WorkerCapabilities,
+        ?host_properties: Types::HostPropertiesRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor status: String?
+      attr_accessor capabilities: Types::WorkerCapabilities?
+      attr_accessor host_properties: Types::HostPropertiesRequest?
+    end
+
+    class UpdateWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log: Types::LogConfiguration,
+        ?host_configuration: Types::HostConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor host_configuration: Types::HostConfiguration?
+    end
+
+    class UpdateWorkerScheduleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?updated_session_actions: Hash[String, Types::UpdatedSessionActionInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor updated_session_actions: Hash[String, Types::UpdatedSessionActionInfo]?
+    end
+
+    class UpdateWorkerScheduleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assigned_sessions: Hash[String, Types::AssignedSession],
+        ?cancel_session_actions: Hash[String, Array[String]],
+        ?desired_worker_status: String,
+        ?update_interval_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assigned_sessions: Hash[String, Types::AssignedSession]?
+      attr_accessor cancel_session_actions: Hash[String, Array[String]]?
+      attr_accessor desired_worker_status: String?
+      attr_accessor update_interval_seconds: Integer?
+    end
+
+    class UpdatedSessionActionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completed_status: String,
+        ?process_exit_code: Integer,
+        ?progress_message: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?progress_percent: Float,
+        ?manifests: Array[Types::TaskRunManifestPropertiesRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completed_status: String?
+      attr_accessor process_exit_code: Integer?
+      attr_accessor progress_message: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor progress_percent: Float?
+      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesRequest]?
+    end
+
+    module UpdatedWorkerStatus
+      STARTED: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    module UsageGroupByField
+      QUEUE_ID: String
+      FLEET_ID: String
+      JOB_ID: String
+      USER_ID: String
+      USAGE_TYPE: String
+      INSTANCE_TYPE: String
+      LICENSE_PRODUCT: String
+    end
+
+    module UsageStatistic
+      SUM: String
+      MIN: String
+      MAX: String
+      AVG: String
+    end
+
+    class UsageTrackingResource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?queue_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+
+      class QueueId < UsageTrackingResource
+      end
+      class Unknown < UsageTrackingResource
+      end
+    end
+
+    module UsageType
+      COMPUTE: String
+      LICENSE: String
+    end
+
+    class UserJobsFirst
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_identity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_identity_id: String?
+    end
+
+    class VCpuCountRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_arns: Array[String]?
+    end
+
+    class WindowsUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: String,
+        ?password_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: String?
+      attr_accessor password_arn: String?
+    end
+
+    class WorkerAmountCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+    end
+
+    class WorkerAttributeCapability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class WorkerCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amounts: Array[Types::WorkerAmountCapability],
+        ?attributes: Array[Types::WorkerAttributeCapability],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amounts: Array[Types::WorkerAmountCapability]?
+      attr_accessor attributes: Array[Types::WorkerAttributeCapability]?
+    end
+
+    class WorkerSearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?status: String,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?created_by: String,
+        ?created_at: Time,
+        ?updated_by: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor status: String?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class WorkerSessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?started_at: Time,
+        ?lifecycle_status: String,
+        ?ended_at: Time,
+        ?target_lifecycle_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor started_at: Time?
+      attr_accessor lifecycle_status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor target_lifecycle_status: String?
+    end
+
+    module WorkerStatus
+      CREATED: String
+      STARTED: String
+      STOPPING: String
+      STOPPED: String
+      NOT_RESPONDING: String
+      NOT_COMPATIBLE: String
+      RUNNING: String
+      IDLE: String
+    end
+
+    class WorkerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_id: String,
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?status: String,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?log: Types::LogConfiguration,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_id: String?
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor status: String?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+  end
+end

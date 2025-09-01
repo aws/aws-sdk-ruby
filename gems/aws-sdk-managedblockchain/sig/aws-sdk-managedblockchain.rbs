@@ -1,0 +1,5 @@
+  module Aws
+    module ManagedBlockchain
+      VERSION: String
+    end
+  end

@@ -1,0 +1,721 @@
+module Aws::GeoRoutes
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GeoRoutes::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CalculateIsolinesResponse
+      include Smithy::Client::_Response[Types::CalculateIsolinesResponse]
+      def arrival_time: () -> String?
+      def departure_time: () -> String?
+      def isoline_geometry_format: () -> String?
+      def isolines: () -> Array[Types::Isoline]?
+      def pricing_bucket: () -> String?
+      def snapped_destination: () -> Array[Float]?
+      def snapped_origin: () -> Array[Float]?
+    end
+    def calculate_isolines: (
+      ?allow: {
+        hot: bool,
+        hov: untyped
+      },
+      ?arrival_time: String,
+      ?avoid: {
+        areas: Array[
+          {
+            except: Array[
+              {
+                bounding_box: Array[Float],
+                corridor: {
+                  line_string: Array[
+                    Array[Float]
+                  ],
+                  radius: Integer
+                },
+                polygon: Array[
+                  Array[
+                    Array[Float]
+                  ]
+                ],
+                polyline_corridor: {
+                  polyline: String,
+                  radius: untyped
+                },
+                polyline_polygon: Array[String]
+              }
+            ],
+            geometry: {
+              bounding_box: untyped,
+              corridor: untyped,
+              polygon: untyped,
+              polyline_corridor: untyped,
+              polyline_polygon: untyped
+            }
+          }
+        ],
+        car_shuttle_trains: bool,
+        controlled_access_highways: untyped,
+        dirt_roads: untyped,
+        ferries: untyped,
+        seasonal_closure: untyped,
+        toll_roads: untyped,
+        toll_transponders: untyped,
+        truck_road_types: Array[String],
+        tunnels: untyped,
+        u_turns: untyped,
+        zone_categories: Array[
+          {
+            category: String
+          }
+        ]
+      },
+      ?depart_now: bool,
+      ?departure_time: String,
+      ?destination: Array[Float],
+      ?destination_options: {
+        avoid_actions_for_distance: Integer,
+        heading: Float,
+        matching: {
+          name_hint: String,
+          on_road_threshold: untyped,
+          radius: untyped,
+          strategy: String
+        },
+        side_of_street: {
+          position: Array[Float],
+          use_with: String
+        }
+      },
+      ?isoline_geometry_format: String,
+      ?isoline_granularity: {
+        max_points: Integer,
+        max_resolution: Integer
+      },
+      ?key: String,
+      ?optimize_isoline_for: String,
+      ?optimize_routing_for: String,
+      ?origin: Array[Float],
+      ?origin_options: {
+        avoid_actions_for_distance: Integer,
+        heading: Float,
+        matching: {
+          name_hint: String,
+          on_road_threshold: untyped,
+          radius: untyped,
+          strategy: String
+        },
+        side_of_street: {
+          position: Array[Float],
+          use_with: String
+        }
+      },
+      ?thresholds: {
+        distance: Array[Integer],
+        time: Array[Integer]
+      },
+      ?traffic: {
+        flow_event_threshold_override: Integer,
+        usage: String
+      },
+      ?travel_mode: String,
+      ?travel_mode_options: {
+        car: {
+          engine_type: String,
+          license_plate: {
+            last_character: String
+          },
+          max_speed: Float,
+          occupancy: Integer
+        },
+        scooter: {
+          engine_type: untyped,
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped
+        },
+        truck: {
+          axle_count: untyped,
+          engine_type: untyped,
+          gross_weight: Integer,
+          hazardous_cargos: Array[String],
+          height: Integer,
+          height_above_first_axle: untyped,
+          kpra_length: untyped,
+          length: untyped,
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped,
+          payload_capacity: untyped,
+          tire_count: untyped,
+          trailer: {
+            axle_count: untyped,
+            trailer_count: untyped
+          },
+          truck_type: String,
+          tunnel_restriction_code: String,
+          weight_per_axle: untyped,
+          weight_per_axle_group: {
+            single: untyped,
+            tandem: untyped,
+            triple: untyped,
+            quad: untyped,
+            quint: untyped
+          },
+          width: untyped
+        }
+      }
+    ) -> _CalculateIsolinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateIsolinesResponse
+
+    interface _CalculateRouteMatrixResponse
+      include Smithy::Client::_Response[Types::CalculateRouteMatrixResponse]
+      def error_count: () -> Integer?
+      def pricing_bucket: () -> String?
+      def route_matrix: () -> Array[Array[Types::RouteMatrixEntry]]?
+      def routing_boundary: () -> Types::RouteMatrixBoundary?
+    end
+    def calculate_route_matrix: (
+      ?allow: {
+        hot: bool,
+        hov: untyped
+      },
+      ?avoid: {
+        areas: Array[
+          {
+            geometry: {
+              bounding_box: Array[Float],
+              polygon: Array[
+                Array[
+                  Array[Float]
+                ]
+              ],
+              polyline_polygon: Array[String]
+            }
+          }
+        ],
+        car_shuttle_trains: bool,
+        controlled_access_highways: untyped,
+        dirt_roads: untyped,
+        ferries: untyped,
+        toll_roads: untyped,
+        toll_transponders: untyped,
+        truck_road_types: Array[String],
+        tunnels: untyped,
+        u_turns: untyped,
+        zone_categories: Array[
+          {
+            category: String
+          }
+        ]
+      },
+      ?depart_now: bool,
+      ?departure_time: String,
+      ?destinations: Array[
+        {
+          options: {
+            avoid_actions_for_distance: Integer,
+            heading: Float,
+            matching: {
+              name_hint: String,
+              on_road_threshold: untyped,
+              radius: untyped,
+              strategy: String
+            },
+            side_of_street: {
+              position: Array[Float],
+              use_with: String
+            }
+          },
+          position: untyped
+        }
+      ],
+      ?exclude: {
+        countries: Array[String]
+      },
+      ?key: String,
+      ?optimize_routing_for: String,
+      ?origins: Array[
+        {
+          options: {
+            avoid_actions_for_distance: Integer,
+            heading: Float,
+            matching: {
+              name_hint: String,
+              on_road_threshold: untyped,
+              radius: untyped,
+              strategy: String
+            },
+            side_of_street: {
+              position: Array[Float],
+              use_with: String
+            }
+          },
+          position: untyped
+        }
+      ],
+      ?routing_boundary: {
+        geometry: {
+          auto_circle: {
+            margin: Integer,
+            max_radius: untyped
+          },
+          circle: {
+            center: Array[Float],
+            radius: Float
+          },
+          bounding_box: Array[Float],
+          polygon: Array[
+            Array[
+              Array[Float]
+            ]
+          ]
+        },
+        unbounded: bool
+      },
+      ?traffic: {
+        flow_event_threshold_override: Integer,
+        usage: String
+      },
+      ?travel_mode: String,
+      ?travel_mode_options: {
+        car: {
+          license_plate: {
+            last_character: String
+          },
+          max_speed: Float,
+          occupancy: Integer
+        },
+        scooter: {
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped
+        },
+        truck: {
+          axle_count: untyped,
+          gross_weight: Integer,
+          hazardous_cargos: Array[String],
+          height: Integer,
+          kpra_length: untyped,
+          length: untyped,
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped,
+          payload_capacity: untyped,
+          trailer: {
+            trailer_count: untyped
+          },
+          truck_type: String,
+          tunnel_restriction_code: String,
+          weight_per_axle: untyped,
+          weight_per_axle_group: {
+            single: untyped,
+            tandem: untyped,
+            triple: untyped,
+            quad: untyped,
+            quint: untyped
+          },
+          width: untyped
+        }
+      }
+    ) -> _CalculateRouteMatrixResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateRouteMatrixResponse
+
+    interface _CalculateRoutesResponse
+      include Smithy::Client::_Response[Types::CalculateRoutesResponse]
+      def leg_geometry_format: () -> String?
+      def notices: () -> Array[Types::RouteResponseNotice]?
+      def pricing_bucket: () -> String?
+      def routes: () -> Array[Types::Route]?
+    end
+    def calculate_routes: (
+      ?allow: {
+        hot: bool,
+        hov: untyped
+      },
+      ?arrival_time: String,
+      ?avoid: {
+        areas: Array[
+          {
+            except: Array[
+              {
+                corridor: {
+                  line_string: Array[
+                    Array[Float]
+                  ],
+                  radius: Integer
+                },
+                bounding_box: Array[Float],
+                polygon: Array[
+                  Array[
+                    Array[Float]
+                  ]
+                ],
+                polyline_corridor: {
+                  polyline: String,
+                  radius: untyped
+                },
+                polyline_polygon: Array[String]
+              }
+            ],
+            geometry: {
+              corridor: untyped,
+              bounding_box: untyped,
+              polygon: untyped,
+              polyline_corridor: untyped,
+              polyline_polygon: untyped
+            }
+          }
+        ],
+        car_shuttle_trains: bool,
+        controlled_access_highways: untyped,
+        dirt_roads: untyped,
+        ferries: untyped,
+        seasonal_closure: untyped,
+        toll_roads: untyped,
+        toll_transponders: untyped,
+        truck_road_types: Array[String],
+        tunnels: untyped,
+        u_turns: untyped,
+        zone_categories: Array[
+          {
+            category: String
+          }
+        ]
+      },
+      ?depart_now: bool,
+      ?departure_time: String,
+      ?destination: Array[Float],
+      ?destination_options: {
+        avoid_actions_for_distance: Integer,
+        avoid_u_turns: bool,
+        heading: Float,
+        matching: {
+          name_hint: String,
+          on_road_threshold: untyped,
+          radius: untyped,
+          strategy: String
+        },
+        side_of_street: {
+          position: Array[Float],
+          use_with: String
+        },
+        stop_duration: Integer
+      },
+      ?driver: {
+        schedule: Array[
+          {
+            drive_duration: Integer,
+            rest_duration: untyped
+          }
+        ]
+      },
+      ?exclude: {
+        countries: Array[String]
+      },
+      ?instructions_measurement_system: String,
+      ?key: String,
+      ?languages: Array[String],
+      ?leg_additional_features: Array[String],
+      ?leg_geometry_format: String,
+      ?max_alternatives: Integer,
+      ?optimize_routing_for: String,
+      ?origin: Array[Float],
+      ?origin_options: {
+        avoid_actions_for_distance: Integer,
+        avoid_u_turns: bool,
+        heading: Float,
+        matching: {
+          name_hint: String,
+          on_road_threshold: untyped,
+          radius: untyped,
+          strategy: String
+        },
+        side_of_street: {
+          position: Array[Float],
+          use_with: String
+        }
+      },
+      ?span_additional_features: Array[String],
+      ?tolls: {
+        all_transponders: bool,
+        all_vignettes: untyped,
+        currency: String,
+        emission_type: {
+          co2_emission_class: String,
+          type: untyped
+        },
+        vehicle_category: String
+      },
+      ?traffic: {
+        flow_event_threshold_override: Integer,
+        usage: String
+      },
+      ?travel_mode: String,
+      ?travel_mode_options: {
+        car: {
+          engine_type: String,
+          license_plate: {
+            last_character: String
+          },
+          max_speed: Float,
+          occupancy: Integer
+        },
+        pedestrian: {
+          speed: untyped
+        },
+        scooter: {
+          engine_type: untyped,
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped
+        },
+        truck: {
+          axle_count: untyped,
+          engine_type: untyped,
+          gross_weight: Integer,
+          hazardous_cargos: Array[String],
+          height: Integer,
+          height_above_first_axle: untyped,
+          kpra_length: untyped,
+          length: untyped,
+          license_plate: untyped,
+          max_speed: untyped,
+          occupancy: untyped,
+          payload_capacity: untyped,
+          tire_count: untyped,
+          trailer: {
+            axle_count: untyped,
+            trailer_count: untyped
+          },
+          truck_type: String,
+          tunnel_restriction_code: String,
+          weight_per_axle: untyped,
+          weight_per_axle_group: {
+            single: untyped,
+            tandem: untyped,
+            triple: untyped,
+            quad: untyped,
+            quint: untyped
+          },
+          width: untyped
+        }
+      },
+      ?travel_step_type: String,
+      ?waypoints: Array[
+        {
+          avoid_actions_for_distance: Integer,
+          avoid_u_turns: bool,
+          heading: Float,
+          matching: {
+            name_hint: String,
+            on_road_threshold: untyped,
+            radius: untyped,
+            strategy: String
+          },
+          pass_through: untyped,
+          position: Array[Float],
+          side_of_street: {
+            position: untyped,
+            use_with: String
+          },
+          stop_duration: Integer
+        }
+      ]
+    ) -> _CalculateRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateRoutesResponse
+
+    interface _OptimizeWaypointsResponse
+      include Smithy::Client::_Response[Types::OptimizeWaypointsResponse]
+      def connections: () -> Array[Types::WaypointOptimizationConnection]?
+      def distance: () -> Integer?
+      def duration: () -> Integer?
+      def impeding_waypoints: () -> Array[Types::WaypointOptimizationImpedingWaypoint]?
+      def optimized_waypoints: () -> Array[Types::WaypointOptimizationOptimizedWaypoint]?
+      def pricing_bucket: () -> String?
+      def time_breakdown: () -> Types::WaypointOptimizationTimeBreakdown?
+    end
+    def optimize_waypoints: (
+      ?avoid: {
+        areas: Array[
+          {
+            geometry: {
+              bounding_box: Array[Float]
+            }
+          }
+        ],
+        car_shuttle_trains: bool,
+        controlled_access_highways: untyped,
+        dirt_roads: untyped,
+        ferries: untyped,
+        toll_roads: untyped,
+        tunnels: untyped,
+        u_turns: untyped
+      },
+      ?clustering: {
+        algorithm: String,
+        driving_distance_options: {
+          driving_distance: Integer
+        }
+      },
+      ?departure_time: String,
+      ?destination: Array[Float],
+      ?destination_options: {
+        access_hours: {
+          from: {
+            day_of_week: String,
+            time_of_day: String
+          },
+          to: untyped
+        },
+        appointment_time: String,
+        heading: Float,
+        id: String,
+        service_duration: Integer,
+        side_of_street: {
+          position: Array[Float],
+          use_with: String
+        }
+      },
+      ?driver: {
+        rest_cycles: {
+          long_cycle: {
+            rest_duration: Integer,
+            work_duration: untyped
+          },
+          short_cycle: untyped
+        },
+        rest_profile: {
+          profile: String
+        },
+        treat_service_time_as: String
+      },
+      ?exclude: {
+        countries: Array[String]
+      },
+      ?key: String,
+      ?optimize_sequencing_for: String,
+      ?origin: Array[Float],
+      ?origin_options: {
+        id: String
+      },
+      ?traffic: {
+        usage: String
+      },
+      ?travel_mode: String,
+      ?travel_mode_options: {
+        pedestrian: {
+          speed: Float
+        },
+        truck: {
+          gross_weight: Integer,
+          hazardous_cargos: Array[String],
+          height: Integer,
+          length: untyped,
+          trailer: {
+            trailer_count: Integer
+          },
+          truck_type: String,
+          tunnel_restriction_code: String,
+          weight_per_axle: untyped,
+          width: untyped
+        }
+      },
+      ?waypoints: Array[
+        {
+          access_hours: {
+            from: {
+              day_of_week: String,
+              time_of_day: String
+            },
+            to: untyped
+          },
+          appointment_time: String,
+          before: Array[Integer],
+          heading: Float,
+          id: String,
+          position: Array[Float],
+          service_duration: Integer,
+          side_of_street: {
+            position: untyped,
+            use_with: String
+          }
+        }
+      ]
+    ) -> _OptimizeWaypointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OptimizeWaypointsResponse
+
+    interface _SnapToRoadsResponse
+      include Smithy::Client::_Response[Types::SnapToRoadsResponse]
+      def notices: () -> Array[Types::RoadSnapNotice]?
+      def pricing_bucket: () -> String?
+      def snapped_geometry: () -> Types::RoadSnapSnappedGeometry?
+      def snapped_geometry_format: () -> String?
+      def snapped_trace_points: () -> Array[Types::RoadSnapSnappedTracePoint]?
+    end
+    def snap_to_roads: (
+      ?key: String,
+      ?snapped_geometry_format: String,
+      ?snap_radius: Integer,
+      ?trace_points: Array[
+        {
+          heading: Float,
+          position: Array[Float],
+          speed: Float,
+          timestamp: String
+        }
+      ],
+      ?travel_mode: String,
+      ?travel_mode_options: {
+        truck: {
+          gross_weight: Integer,
+          hazardous_cargos: Array[String],
+          height: Integer,
+          length: untyped,
+          trailer: {
+            trailer_count: Integer
+          },
+          tunnel_restriction_code: String,
+          width: untyped
+        }
+      }
+    ) -> _SnapToRoadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SnapToRoadsResponse
+  end
+end

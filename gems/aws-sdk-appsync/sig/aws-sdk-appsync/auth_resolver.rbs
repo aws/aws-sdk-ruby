@@ -1,0 +1,5 @@
+module Aws::AppSync
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

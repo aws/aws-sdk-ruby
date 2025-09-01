@@ -1,0 +1,67 @@
+module Aws::Polly
+  module Errors
+    class EngineNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLexiconException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3BucketException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidS3KeyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSampleRateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSnsTopicArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSsmlException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTaskIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LanguageNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LexiconNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LexiconSizeExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MarksNotSupportedForFormatException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxLexemeLengthExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaxLexiconsNumberExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SsmlMarksNotSupportedForTextTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SynthesisTaskNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TextLengthExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedPlsAlphabetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedPlsLanguageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,3260 @@
+module Aws::ChimeSDKVoice
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?street_name: String,
+        ?street_suffix: String,
+        ?post_directional: String,
+        ?pre_directional: String,
+        ?street_number: String,
+        ?city: String,
+        ?state: String,
+        ?postal_code: String,
+        ?postal_code_plus4: String,
+        ?country: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor street_name: String?
+      attr_accessor street_suffix: String?
+      attr_accessor post_directional: String?
+      attr_accessor pre_directional: String?
+      attr_accessor street_number: String?
+      attr_accessor city: String?
+      attr_accessor state: String?
+      attr_accessor postal_code: String?
+      attr_accessor postal_code_plus4: String?
+      attr_accessor country: String?
+    end
+
+    module AlexaSkillStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+        ?e164_phone_numbers: Array[String],
+        ?force_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+      attr_accessor force_associate: bool?
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?e164_phone_numbers: Array[String],
+        ?force_associate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+      attr_accessor force_associate: bool?
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchDeletePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_ids: Array[String]?
+    end
+
+    class BatchDeletePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class BatchUpdatePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_phone_number_request_items: Array[Types::UpdatePhoneNumberRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_phone_number_request_items: Array[Types::UpdatePhoneNumberRequestItem]?
+    end
+
+    class BatchUpdatePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class CallDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?transaction_id: String,
+        ?is_caller: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor transaction_id: String?
+      attr_accessor is_caller: bool?
+    end
+
+    module CallLegType
+      CALLER: String
+      CALLEE: String
+    end
+
+    module CallingNameStatus
+      Unassigned: String
+      UpdateInProgress: String
+      UpdateSucceeded: String
+      UpdateFailed: String
+    end
+
+    class CandidateAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?street_info: String,
+        ?street_number: String,
+        ?city: String,
+        ?state: String,
+        ?postal_code: String,
+        ?postal_code_plus4: String,
+        ?country: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor street_info: String?
+      attr_accessor street_number: String?
+      attr_accessor city: String?
+      attr_accessor state: String?
+      attr_accessor postal_code: String?
+      attr_accessor postal_code_plus4: String?
+      attr_accessor country: String?
+    end
+
+    module Capability
+      Voice: String
+      SMS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ContactCenterSystemType
+      GENESYS_ENGAGE_ON_PREMISES: String
+      AVAYA_AURA_CALL_CENTER_ELITE: String
+      AVAYA_AURA_CONTACT_CENTER: String
+      CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE: String
+    end
+
+    class CreatePhoneNumberOrderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_type: String,
+        ?e164_phone_numbers: Array[String],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_type: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+      attr_accessor name: String?
+    end
+
+    class CreatePhoneNumberOrderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order: Types::PhoneNumberOrder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order: Types::PhoneNumberOrder?
+    end
+
+    class CreateProxySessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?participant_phone_numbers: Array[String],
+        ?name: String,
+        ?expiry_minutes: Integer,
+        ?capabilities: Array[String],
+        ?number_selection_behavior: String,
+        ?geo_match_level: String,
+        ?geo_match_params: Types::GeoMatchParams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor participant_phone_numbers: Array[String]?
+      attr_accessor name: String?
+      attr_accessor expiry_minutes: Integer?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor number_selection_behavior: String?
+      attr_accessor geo_match_level: String?
+      attr_accessor geo_match_params: Types::GeoMatchParams?
+    end
+
+    class CreateProxySessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_session: Types::ProxySession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_session: Types::ProxySession?
+    end
+
+    class CreateSipMediaApplicationCallRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_phone_number: String,
+        ?to_phone_number: String,
+        ?sip_media_application_id: String,
+        ?sip_headers: Hash[String, String],
+        ?arguments_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_phone_number: String?
+      attr_accessor to_phone_number: String?
+      attr_accessor sip_media_application_id: String?
+      attr_accessor sip_headers: Hash[String, String]?
+      attr_accessor arguments_map: Hash[String, String]?
+    end
+
+    class CreateSipMediaApplicationCallResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_call: Types::SipMediaApplicationCall,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_call: Types::SipMediaApplicationCall?
+    end
+
+    class CreateSipMediaApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_region: String,
+        ?name: String,
+        ?endpoints: Array[Types::SipMediaApplicationEndpoint],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_region: String?
+      attr_accessor name: String?
+      attr_accessor endpoints: Array[Types::SipMediaApplicationEndpoint]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSipMediaApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application: Types::SipMediaApplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application: Types::SipMediaApplication?
+    end
+
+    class CreateSipRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?trigger_type: String,
+        ?trigger_value: String,
+        ?disabled: bool,
+        ?target_applications: Array[Types::SipRuleTargetApplication],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor trigger_type: String?
+      attr_accessor trigger_value: String?
+      attr_accessor disabled: bool?
+      attr_accessor target_applications: Array[Types::SipRuleTargetApplication]?
+    end
+
+    class CreateSipRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule: Types::SipRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule: Types::SipRule?
+    end
+
+    class CreateVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?voice_connector_items: Array[Types::VoiceConnectorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor voice_connector_items: Array[Types::VoiceConnectorItem]?
+    end
+
+    class CreateVoiceConnectorGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group: Types::VoiceConnectorGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup?
+    end
+
+    class CreateVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?aws_region: String,
+        ?require_encryption: bool,
+        ?tags: Array[Types::Tag],
+        ?integration_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor aws_region: String?
+      attr_accessor require_encryption: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor integration_type: String?
+    end
+
+    class CreateVoiceConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector: Types::VoiceConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector: Types::VoiceConnector?
+    end
+
+    class CreateVoiceProfileDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVoiceProfileDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain: Types::VoiceProfileDomain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain: Types::VoiceProfileDomain?
+    end
+
+    class CreateVoiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class CreateVoiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile: Types::VoiceProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile: Types::VoiceProfile?
+    end
+
+    class Credential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class DNISEmergencyCallingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_phone_number: String,
+        ?test_phone_number: String,
+        ?calling_country: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_phone_number: String?
+      attr_accessor test_phone_number: String?
+      attr_accessor calling_country: String?
+    end
+
+    class DeletePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class DeleteProxySessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?proxy_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor proxy_session_id: String?
+    end
+
+    class DeleteSipMediaApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+    end
+
+    class DeleteSipRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule_id: String?
+    end
+
+    class DeleteVoiceConnectorEmergencyCallingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorExternalSystemsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+    end
+
+    class DeleteVoiceConnectorOriginationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorStreamingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceConnectorTerminationCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?usernames: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor usernames: Array[String]?
+    end
+
+    class DeleteVoiceConnectorTerminationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class DeleteVoiceProfileDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+    end
+
+    class DeleteVoiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_id: String?
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+        ?e164_phone_numbers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?e164_phone_numbers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class EmergencyCallingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dnis: Array[Types::DNISEmergencyCallingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dnis: Array[Types::DNISEmergencyCallingConfiguration]?
+    end
+
+    module ErrorCode
+      BadRequest: String
+      Conflict: String
+      Forbidden: String
+      NotFound: String
+      PreconditionFailed: String
+      ResourceLimitExceeded: String
+      ServiceFailure: String
+      AccessDenied: String
+      ServiceUnavailable: String
+      Throttled: String
+      Throttling: String
+      Unauthorized: String
+      Unprocessable: String
+      VoiceConnectorGroupAssociationsExist: String
+      PhoneNumberAssociationsExist: String
+      Gone: String
+    end
+
+    class ExternalSystemsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_border_controller_types: Array[String],
+        ?contact_center_system_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_border_controller_types: Array[String]?
+      attr_accessor contact_center_system_types: Array[String]?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module GeoMatchLevel
+      Country: String
+      AreaCode: String
+    end
+
+    class GeoMatchParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?area_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor area_code: String?
+    end
+
+    class GetGlobalSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector: Types::VoiceConnectorSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector: Types::VoiceConnectorSettings?
+    end
+
+    class GetPhoneNumberOrderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order_id: String?
+    end
+
+    class GetPhoneNumberOrderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order: Types::PhoneNumberOrder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order: Types::PhoneNumberOrder?
+    end
+
+    class GetPhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class GetPhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class GetPhoneNumberSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calling_name: String,
+        ?calling_name_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calling_name: String?
+      attr_accessor calling_name_updated_timestamp: Time?
+    end
+
+    class GetProxySessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?proxy_session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor proxy_session_id: String?
+    end
+
+    class GetProxySessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_session: Types::ProxySession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_session: Types::ProxySession?
+    end
+
+    class GetSipMediaApplicationAlexaSkillConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+    end
+
+    class GetSipMediaApplicationAlexaSkillConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration?
+    end
+
+    class GetSipMediaApplicationLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+    end
+
+    class GetSipMediaApplicationLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration?
+    end
+
+    class GetSipMediaApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+    end
+
+    class GetSipMediaApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application: Types::SipMediaApplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application: Types::SipMediaApplication?
+    end
+
+    class GetSipRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule_id: String?
+    end
+
+    class GetSipRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule: Types::SipRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule: Types::SipRule?
+    end
+
+    class GetSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class GetSpeakerSearchTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task: Types::SpeakerSearchTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask?
+    end
+
+    class GetVoiceConnectorEmergencyCallingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorEmergencyCallingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_calling_configuration: Types::EmergencyCallingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration?
+    end
+
+    class GetVoiceConnectorExternalSystemsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorExternalSystemsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_systems_configuration: Types::ExternalSystemsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_systems_configuration: Types::ExternalSystemsConfiguration?
+    end
+
+    class GetVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+    end
+
+    class GetVoiceConnectorGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group: Types::VoiceConnectorGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup?
+    end
+
+    class GetVoiceConnectorLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class GetVoiceConnectorOriginationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorOriginationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination: Types::Origination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination: Types::Origination?
+    end
+
+    class GetVoiceConnectorProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy: Types::Proxy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy: Types::Proxy?
+    end
+
+    class GetVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector: Types::VoiceConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector: Types::VoiceConnector?
+    end
+
+    class GetVoiceConnectorStreamingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorStreamingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_configuration: Types::StreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_configuration: Types::StreamingConfiguration?
+    end
+
+    class GetVoiceConnectorTerminationHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorTerminationHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?termination_health: Types::TerminationHealth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor termination_health: Types::TerminationHealth?
+    end
+
+    class GetVoiceConnectorTerminationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class GetVoiceConnectorTerminationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?termination: Types::Termination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor termination: Types::Termination?
+    end
+
+    class GetVoiceProfileDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+    end
+
+    class GetVoiceProfileDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain: Types::VoiceProfileDomain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain: Types::VoiceProfileDomain?
+    end
+
+    class GetVoiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_id: String?
+    end
+
+    class GetVoiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile: Types::VoiceProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile: Types::VoiceProfile?
+    end
+
+    class GetVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?voice_tone_analysis_task_id: String,
+        ?is_caller: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor voice_tone_analysis_task_id: String?
+      attr_accessor is_caller: bool?
+    end
+
+    class GetVoiceToneAnalysisTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task: Types::VoiceToneAnalysisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask?
+    end
+
+    class GoneException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module LanguageCode
+      EN_US: String
+    end
+
+    class ListAvailableVoiceConnectorRegionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_regions: Array[String]?
+    end
+
+    class ListPhoneNumberOrdersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPhoneNumberOrdersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_orders: Array[Types::PhoneNumberOrder],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_orders: Array[Types::PhoneNumberOrder]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?product_type: String,
+        ?filter_name: String,
+        ?filter_value: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor product_type: String?
+      attr_accessor filter_name: String?
+      attr_accessor filter_value: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumbersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_numbers: Array[Types::PhoneNumber],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_numbers: Array[Types::PhoneNumber]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProxySessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProxySessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_sessions: Array[Types::ProxySession],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_sessions: Array[Types::ProxySession]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSipMediaApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSipMediaApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_applications: Array[Types::SipMediaApplication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_applications: Array[Types::SipMediaApplication]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSipRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSipRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rules: Array[Types::SipRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rules: Array[Types::SipRule]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSupportedPhoneNumberCountriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_type: String?
+    end
+
+    class ListSupportedPhoneNumberCountriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_countries: Array[Types::PhoneNumberCountry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_countries: Array[Types::PhoneNumberCountry]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListVoiceConnectorGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVoiceConnectorGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_groups: Array[Types::VoiceConnectorGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_groups: Array[Types::VoiceConnectorGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVoiceConnectorTerminationCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+    end
+
+    class ListVoiceConnectorTerminationCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usernames: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usernames: Array[String]?
+    end
+
+    class ListVoiceConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVoiceConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connectors: Array[Types::VoiceConnector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connectors: Array[Types::VoiceConnector]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVoiceProfileDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVoiceProfileDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domains: Array[Types::VoiceProfileDomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domains: Array[Types::VoiceProfileDomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVoiceProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVoiceProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profiles: Array[Types::VoiceProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profiles: Array[Types::VoiceProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_sip_logs: bool,
+        ?enable_media_metric_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_sip_logs: bool?
+      attr_accessor enable_media_metric_logs: bool?
+    end
+
+    class MediaInsightsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disabled: bool,
+        ?configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disabled: bool?
+      attr_accessor configuration_arn: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module NotificationTarget
+      EventBridge: String
+      SNS: String
+      SQS: String
+    end
+
+    module NumberSelectionBehavior
+      PreferSticky: String
+      AvoidSticky: String
+    end
+
+    class OrderedPhoneNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e164_phone_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e164_phone_number: String?
+      attr_accessor status: String?
+    end
+
+    module OrderedPhoneNumberStatus
+      Processing: String
+      Acquired: String
+      Failed: String
+    end
+
+    class Origination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routes: Array[Types::OriginationRoute],
+        ?disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routes: Array[Types::OriginationRoute]?
+      attr_accessor disabled: bool?
+    end
+
+    class OriginationRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?priority: Integer,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor priority: Integer?
+      attr_accessor weight: Integer?
+    end
+
+    module OriginationRouteProtocol
+      TCP: String
+      UDP: String
+    end
+
+    class Participant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+        ?proxy_phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+      attr_accessor proxy_phone_number: String?
+    end
+
+    class PhoneNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?e164_phone_number: String,
+        ?country: String,
+        ?type: String,
+        ?product_type: String,
+        ?status: String,
+        ?capabilities: Types::PhoneNumberCapabilities,
+        ?associations: Array[Types::PhoneNumberAssociation],
+        ?calling_name: String,
+        ?calling_name_status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?deletion_timestamp: Time,
+        ?order_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor e164_phone_number: String?
+      attr_accessor country: String?
+      attr_accessor type: String?
+      attr_accessor product_type: String?
+      attr_accessor status: String?
+      attr_accessor capabilities: Types::PhoneNumberCapabilities?
+      attr_accessor associations: Array[Types::PhoneNumberAssociation]?
+      attr_accessor calling_name: String?
+      attr_accessor calling_name_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor deletion_timestamp: Time?
+      attr_accessor order_id: String?
+      attr_accessor name: String?
+    end
+
+    class PhoneNumberAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?name: String,
+        ?associated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor name: String?
+      attr_accessor associated_timestamp: Time?
+    end
+
+    module PhoneNumberAssociationName
+      VoiceConnectorId: String
+      VoiceConnectorGroupId: String
+      SipRuleId: String
+    end
+
+    class PhoneNumberCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbound_call: bool,
+        ?outbound_call: bool,
+        ?inbound_sms: bool,
+        ?outbound_sms: bool,
+        ?inbound_mms: bool,
+        ?outbound_mms: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbound_call: bool?
+      attr_accessor outbound_call: bool?
+      attr_accessor inbound_sms: bool?
+      attr_accessor outbound_sms: bool?
+      attr_accessor inbound_mms: bool?
+      attr_accessor outbound_mms: bool?
+    end
+
+    class PhoneNumberCountry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country_code: String,
+        ?supported_phone_number_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country_code: String?
+      attr_accessor supported_phone_number_types: Array[String]?
+    end
+
+    class PhoneNumberError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class PhoneNumberOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order_id: String,
+        ?product_type: String,
+        ?status: String,
+        ?order_type: String,
+        ?ordered_phone_numbers: Array[Types::OrderedPhoneNumber],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?foc_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order_id: String?
+      attr_accessor product_type: String?
+      attr_accessor status: String?
+      attr_accessor order_type: String?
+      attr_accessor ordered_phone_numbers: Array[Types::OrderedPhoneNumber]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor foc_date: Time?
+    end
+
+    module PhoneNumberOrderStatus
+      Processing: String
+      Successful: String
+      Failed: String
+      Partial: String
+      PendingDocuments: String
+      Submitted: String
+      FOC: String
+      ChangeRequested: String
+      Exception: String
+      CancelRequested: String
+      Cancelled: String
+    end
+
+    module PhoneNumberOrderType
+      New: String
+      Porting: String
+    end
+
+    module PhoneNumberProductType
+      VoiceConnector: String
+      SipMediaApplicationDialIn: String
+    end
+
+    module PhoneNumberStatus
+      Cancelled: String
+      PortinCancelRequested: String
+      PortinInProgress: String
+      AcquireInProgress: String
+      AcquireFailed: String
+      Unassigned: String
+      Assigned: String
+      ReleaseInProgress: String
+      DeleteInProgress: String
+      ReleaseFailed: String
+      DeleteFailed: String
+    end
+
+    module PhoneNumberType
+      Local: String
+      TollFree: String
+    end
+
+    class Proxy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_session_expiry_minutes: Integer,
+        ?disabled: bool,
+        ?fall_back_phone_number: String,
+        ?phone_number_countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_session_expiry_minutes: Integer?
+      attr_accessor disabled: bool?
+      attr_accessor fall_back_phone_number: String?
+      attr_accessor phone_number_countries: Array[String]?
+    end
+
+    class ProxySession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?proxy_session_id: String,
+        ?name: String,
+        ?status: String,
+        ?expiry_minutes: Integer,
+        ?capabilities: Array[String],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?ended_timestamp: Time,
+        ?participants: Array[Types::Participant],
+        ?number_selection_behavior: String,
+        ?geo_match_level: String,
+        ?geo_match_params: Types::GeoMatchParams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor proxy_session_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor expiry_minutes: Integer?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor ended_timestamp: Time?
+      attr_accessor participants: Array[Types::Participant]?
+      attr_accessor number_selection_behavior: String?
+      attr_accessor geo_match_level: String?
+      attr_accessor geo_match_params: Types::GeoMatchParams?
+    end
+
+    module ProxySessionStatus
+      Open: String
+      InProgress: String
+      Closed: String
+    end
+
+    class PutSipMediaApplicationAlexaSkillConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration?
+    end
+
+    class PutSipMediaApplicationAlexaSkillConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_alexa_skill_configuration: Types::SipMediaApplicationAlexaSkillConfiguration?
+    end
+
+    class PutSipMediaApplicationLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration?
+    end
+
+    class PutSipMediaApplicationLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration?
+    end
+
+    class PutVoiceConnectorEmergencyCallingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?emergency_calling_configuration: Types::EmergencyCallingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration?
+    end
+
+    class PutVoiceConnectorEmergencyCallingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emergency_calling_configuration: Types::EmergencyCallingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration?
+    end
+
+    class PutVoiceConnectorExternalSystemsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?session_border_controller_types: Array[String],
+        ?contact_center_system_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor session_border_controller_types: Array[String]?
+      attr_accessor contact_center_system_types: Array[String]?
+    end
+
+    class PutVoiceConnectorExternalSystemsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_systems_configuration: Types::ExternalSystemsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_systems_configuration: Types::ExternalSystemsConfiguration?
+    end
+
+    class PutVoiceConnectorLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class PutVoiceConnectorLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_configuration: Types::LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+    end
+
+    class PutVoiceConnectorOriginationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?origination: Types::Origination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor origination: Types::Origination?
+    end
+
+    class PutVoiceConnectorOriginationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination: Types::Origination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination: Types::Origination?
+    end
+
+    class PutVoiceConnectorProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?default_session_expiry_minutes: Integer,
+        ?phone_number_pool_countries: Array[String],
+        ?fall_back_phone_number: String,
+        ?disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor default_session_expiry_minutes: Integer?
+      attr_accessor phone_number_pool_countries: Array[String]?
+      attr_accessor fall_back_phone_number: String?
+      attr_accessor disabled: bool?
+    end
+
+    class PutVoiceConnectorProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy: Types::Proxy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy: Types::Proxy?
+    end
+
+    class PutVoiceConnectorStreamingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?streaming_configuration: Types::StreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor streaming_configuration: Types::StreamingConfiguration?
+    end
+
+    class PutVoiceConnectorStreamingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_configuration: Types::StreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_configuration: Types::StreamingConfiguration?
+    end
+
+    class PutVoiceConnectorTerminationCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?credentials: Array[Types::Credential],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor credentials: Array[Types::Credential]?
+    end
+
+    class PutVoiceConnectorTerminationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?termination: Types::Termination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor termination: Types::Termination?
+    end
+
+    class PutVoiceConnectorTerminationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?termination: Types::Termination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor termination: Types::Termination?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class RestorePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class RestorePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class SearchAvailablePhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?area_code: String,
+        ?city: String,
+        ?country: String,
+        ?state: String,
+        ?toll_free_prefix: String,
+        ?phone_number_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor area_code: String?
+      attr_accessor city: String?
+      attr_accessor country: String?
+      attr_accessor state: String?
+      attr_accessor toll_free_prefix: String?
+      attr_accessor phone_number_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchAvailablePhoneNumbersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e164_phone_numbers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e164_phone_numbers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ServerSideEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module SessionBorderControllerType
+      RIBBON_SBC: String
+      ORACLE_ACME_PACKET_SBC: String
+      AVAYA_SBCE: String
+      CISCO_UNIFIED_BORDER_ELEMENT: String
+      AUDIOCODES_MEDIANT_SBC: String
+    end
+
+    class SipMediaApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?aws_region: String,
+        ?name: String,
+        ?endpoints: Array[Types::SipMediaApplicationEndpoint],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?sip_media_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor name: String?
+      attr_accessor endpoints: Array[Types::SipMediaApplicationEndpoint]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor sip_media_application_arn: String?
+    end
+
+    class SipMediaApplicationAlexaSkillConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alexa_skill_status: String,
+        ?alexa_skill_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alexa_skill_status: String?
+      attr_accessor alexa_skill_ids: Array[String]?
+    end
+
+    class SipMediaApplicationCall
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class SipMediaApplicationEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+    end
+
+    class SipMediaApplicationLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_sip_media_application_message_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_sip_media_application_message_logs: bool?
+    end
+
+    class SipRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule_id: String,
+        ?name: String,
+        ?disabled: bool,
+        ?trigger_type: String,
+        ?trigger_value: String,
+        ?target_applications: Array[Types::SipRuleTargetApplication],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor disabled: bool?
+      attr_accessor trigger_type: String?
+      attr_accessor trigger_value: String?
+      attr_accessor target_applications: Array[Types::SipRuleTargetApplication]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class SipRuleTargetApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?priority: Integer,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor aws_region: String?
+    end
+
+    module SipRuleTriggerType
+      ToPhoneNumber: String
+      RequestUriHostname: String
+    end
+
+    class SpeakerSearchDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::SpeakerSearchResult],
+        ?voiceprint_generation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::SpeakerSearchResult]?
+      attr_accessor voiceprint_generation_status: String?
+    end
+
+    class SpeakerSearchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence_score: Float,
+        ?voice_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence_score: Float?
+      attr_accessor voice_profile_id: String?
+    end
+
+    class SpeakerSearchTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task_id: String,
+        ?speaker_search_task_status: String,
+        ?call_details: Types::CallDetails,
+        ?speaker_search_details: Types::SpeakerSearchDetails,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?started_timestamp: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task_id: String?
+      attr_accessor speaker_search_task_status: String?
+      attr_accessor call_details: Types::CallDetails?
+      attr_accessor speaker_search_details: Types::SpeakerSearchDetails?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor started_timestamp: Time?
+      attr_accessor status_message: String?
+    end
+
+    class StartSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?transaction_id: String,
+        ?voice_profile_domain_id: String,
+        ?client_request_token: String,
+        ?call_leg: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor transaction_id: String?
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor call_leg: String?
+    end
+
+    class StartSpeakerSearchTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task: Types::SpeakerSearchTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask?
+    end
+
+    class StartVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?transaction_id: String,
+        ?language_code: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor transaction_id: String?
+      attr_accessor language_code: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class StartVoiceToneAnalysisTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task: Types::VoiceToneAnalysisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask?
+    end
+
+    class StopSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class StopVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?voice_tone_analysis_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor voice_tone_analysis_task_id: String?
+    end
+
+    class StreamingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_retention_in_hours: Integer,
+        ?disabled: bool,
+        ?streaming_notification_targets: Array[Types::StreamingNotificationTarget],
+        ?media_insights_configuration: Types::MediaInsightsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_retention_in_hours: Integer?
+      attr_accessor disabled: bool?
+      attr_accessor streaming_notification_targets: Array[Types::StreamingNotificationTarget]?
+      attr_accessor media_insights_configuration: Types::MediaInsightsConfiguration?
+    end
+
+    class StreamingNotificationTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_target: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Termination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cps_limit: Integer,
+        ?default_phone_number: String,
+        ?calling_regions: Array[String],
+        ?cidr_allowed_list: Array[String],
+        ?disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cps_limit: Integer?
+      attr_accessor default_phone_number: String?
+      attr_accessor calling_regions: Array[String]?
+      attr_accessor cidr_allowed_list: Array[String]?
+      attr_accessor disabled: bool?
+    end
+
+    class TerminationHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor source: String?
+    end
+
+    class ThrottledClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnprocessableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateGlobalSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector: Types::VoiceConnectorSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector: Types::VoiceConnectorSettings?
+    end
+
+    class UpdatePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?product_type: String,
+        ?calling_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor product_type: String?
+      attr_accessor calling_name: String?
+      attr_accessor name: String?
+    end
+
+    class UpdatePhoneNumberRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?product_type: String,
+        ?calling_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor product_type: String?
+      attr_accessor calling_name: String?
+      attr_accessor name: String?
+    end
+
+    class UpdatePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class UpdatePhoneNumberSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calling_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calling_name: String?
+    end
+
+    class UpdateProxySessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?proxy_session_id: String,
+        ?capabilities: Array[String],
+        ?expiry_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor proxy_session_id: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor expiry_minutes: Integer?
+    end
+
+    class UpdateProxySessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_session: Types::ProxySession,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_session: Types::ProxySession?
+    end
+
+    class UpdateSipMediaApplicationCallRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?transaction_id: String,
+        ?arguments: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor transaction_id: String?
+      attr_accessor arguments: Hash[String, String]?
+    end
+
+    class UpdateSipMediaApplicationCallResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_call: Types::SipMediaApplicationCall,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_call: Types::SipMediaApplicationCall?
+    end
+
+    class UpdateSipMediaApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application_id: String,
+        ?name: String,
+        ?endpoints: Array[Types::SipMediaApplicationEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application_id: String?
+      attr_accessor name: String?
+      attr_accessor endpoints: Array[Types::SipMediaApplicationEndpoint]?
+    end
+
+    class UpdateSipMediaApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_media_application: Types::SipMediaApplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_media_application: Types::SipMediaApplication?
+    end
+
+    class UpdateSipRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule_id: String,
+        ?name: String,
+        ?disabled: bool,
+        ?target_applications: Array[Types::SipRuleTargetApplication],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor disabled: bool?
+      attr_accessor target_applications: Array[Types::SipRuleTargetApplication]?
+    end
+
+    class UpdateSipRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sip_rule: Types::SipRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sip_rule: Types::SipRule?
+    end
+
+    class UpdateVoiceConnectorGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+        ?name: String,
+        ?voice_connector_items: Array[Types::VoiceConnectorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+      attr_accessor name: String?
+      attr_accessor voice_connector_items: Array[Types::VoiceConnectorItem]?
+    end
+
+    class UpdateVoiceConnectorGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group: Types::VoiceConnectorGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup?
+    end
+
+    class UpdateVoiceConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?name: String,
+        ?require_encryption: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor name: String?
+      attr_accessor require_encryption: bool?
+    end
+
+    class UpdateVoiceConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector: Types::VoiceConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector: Types::VoiceConnector?
+    end
+
+    class UpdateVoiceProfileDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateVoiceProfileDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain: Types::VoiceProfileDomain,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain: Types::VoiceProfileDomain?
+    end
+
+    class UpdateVoiceProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_id: String,
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_id: String?
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class UpdateVoiceProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile: Types::VoiceProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile: Types::VoiceProfile?
+    end
+
+    class ValidateE911AddressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?street_number: String,
+        ?street_info: String,
+        ?city: String,
+        ?state: String,
+        ?country: String,
+        ?postal_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor street_number: String?
+      attr_accessor street_info: String?
+      attr_accessor city: String?
+      attr_accessor state: String?
+      attr_accessor country: String?
+      attr_accessor postal_code: String?
+    end
+
+    class ValidateE911AddressResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_result: Integer,
+        ?address_external_id: String,
+        ?address: Types::Address,
+        ?candidate_address_list: Array[Types::CandidateAddress],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_result: Integer?
+      attr_accessor address_external_id: String?
+      attr_accessor address: Types::Address?
+      attr_accessor candidate_address_list: Array[Types::CandidateAddress]?
+    end
+
+    class VoiceConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?aws_region: String,
+        ?name: String,
+        ?outbound_host_name: String,
+        ?require_encryption: bool,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?voice_connector_arn: String,
+        ?integration_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor name: String?
+      attr_accessor outbound_host_name: String?
+      attr_accessor require_encryption: bool?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor voice_connector_arn: String?
+      attr_accessor integration_type: String?
+    end
+
+    module VoiceConnectorAwsRegion
+      US_EAST_1: String
+      US_WEST_2: String
+      CA_CENTRAL_1: String
+      EU_CENTRAL_1: String
+      EU_WEST_1: String
+      EU_WEST_2: String
+      AP_NORTHEAST_2: String
+      AP_NORTHEAST_1: String
+      AP_SOUTHEAST_1: String
+      AP_SOUTHEAST_2: String
+    end
+
+    class VoiceConnectorGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_group_id: String,
+        ?name: String,
+        ?voice_connector_items: Array[Types::VoiceConnectorItem],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?voice_connector_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_group_id: String?
+      attr_accessor name: String?
+      attr_accessor voice_connector_items: Array[Types::VoiceConnectorItem]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor voice_connector_group_arn: String?
+    end
+
+    module VoiceConnectorIntegrationType
+      CONNECT_CALL_TRANSFER_CONNECTOR: String
+      CONNECT_ANALYTICS_CONNECTOR: String
+    end
+
+    class VoiceConnectorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_connector_id: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_connector_id: String?
+      attr_accessor priority: Integer?
+    end
+
+    class VoiceConnectorSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cdr_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cdr_bucket: String?
+    end
+
+    class VoiceProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_id: String,
+        ?voice_profile_arn: String,
+        ?voice_profile_domain_id: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_id: String?
+      attr_accessor voice_profile_arn: String?
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class VoiceProfileDomain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+        ?voice_profile_domain_arn: String,
+        ?name: String,
+        ?description: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor voice_profile_domain_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class VoiceProfileDomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_domain_id: String,
+        ?voice_profile_domain_arn: String,
+        ?name: String,
+        ?description: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor voice_profile_domain_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class VoiceProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_profile_id: String,
+        ?voice_profile_arn: String,
+        ?voice_profile_domain_id: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_profile_id: String?
+      attr_accessor voice_profile_arn: String?
+      attr_accessor voice_profile_domain_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class VoiceToneAnalysisTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task_id: String,
+        ?voice_tone_analysis_task_status: String,
+        ?call_details: Types::CallDetails,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?started_timestamp: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task_id: String?
+      attr_accessor voice_tone_analysis_task_status: String?
+      attr_accessor call_details: Types::CallDetails?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor started_timestamp: Time?
+      attr_accessor status_message: String?
+    end
+  end
+end

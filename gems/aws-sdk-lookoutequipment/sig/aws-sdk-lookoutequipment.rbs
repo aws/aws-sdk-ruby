@@ -1,0 +1,5 @@
+  module Aws
+    module LookoutEquipment
+      VERSION: String
+    end
+  end

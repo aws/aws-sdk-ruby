@@ -1,0 +1,34 @@
+module Aws::Support
+  module Errors
+    class AttachmentIdNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentSetExpired < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentSetIdNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttachmentSetSizeLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CaseCreationLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CaseIdNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DescribeAttachmentLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

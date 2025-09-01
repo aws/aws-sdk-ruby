@@ -1,0 +1,112 @@
+module Aws::Artifact
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Artifact::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetReportResponse
+      include Smithy::Client::_Response[Types::GetReportResponse]
+      def document_presigned_url: () -> String?
+    end
+    def get_report: (
+      ?report_id: String,
+      ?report_version: Integer,
+      ?term_token: String
+    ) -> _GetReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReportResponse
+
+    interface _GetReportMetadataResponse
+      include Smithy::Client::_Response[Types::GetReportMetadataResponse]
+      def report_details: () -> Types::ReportDetail?
+    end
+    def get_report_metadata: (
+      ?report_id: String,
+      ?report_version: Integer
+    ) -> _GetReportMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReportMetadataResponse
+
+    interface _GetTermForReportResponse
+      include Smithy::Client::_Response[Types::GetTermForReportResponse]
+      def document_presigned_url: () -> String?
+      def term_token: () -> String?
+    end
+    def get_term_for_report: (
+      ?report_id: String,
+      ?report_version: Integer
+    ) -> _GetTermForReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTermForReportResponse
+
+    interface _ListCustomerAgreementsResponse
+      include Smithy::Client::_Response[Types::ListCustomerAgreementsResponse]
+      def customer_agreements: () -> Array[Types::CustomerAgreementSummary]?
+      def next_token: () -> String?
+    end
+    def list_customer_agreements: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomerAgreementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomerAgreementsResponse
+
+    interface _ListReportsResponse
+      include Smithy::Client::_Response[Types::ListReportsResponse]
+      def reports: () -> Array[Types::ReportSummary]?
+      def next_token: () -> String?
+    end
+    def list_reports: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportsResponse
+
+    interface _PutAccountSettingsResponse
+      include Smithy::Client::_Response[Types::PutAccountSettingsResponse]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def put_account_settings: (
+      ?notification_subscription_status: String
+    ) -> _PutAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountSettingsResponse
+  end
+end

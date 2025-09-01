@@ -1,0 +1,3291 @@
+module Aws::DirectConnect
+  module Types
+
+    class AcceptDirectConnectGatewayAssociationProposalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?proposal_id: String,
+        ?associated_gateway_owner_account: String,
+        ?override_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor proposal_id: String?
+      attr_accessor associated_gateway_owner_account: String?
+      attr_accessor override_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+    end
+
+    class AcceptDirectConnectGatewayAssociationProposalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association: Types::DirectConnectGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation?
+    end
+
+    module AddressFamily
+      IPv4: String
+      IPv6: String
+    end
+
+    class AllocateConnectionOnInterconnectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class AllocateConnectionOnInterconnectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth: String,
+        ?connection_name: String,
+        ?owner_account: String,
+        ?interconnect_id: String,
+        ?vlan: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth: String?
+      attr_accessor connection_name: String?
+      attr_accessor owner_account: String?
+      attr_accessor interconnect_id: String?
+      attr_accessor vlan: Integer?
+    end
+
+    class AllocateHostedConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class AllocateHostedConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?owner_account: String,
+        ?bandwidth: String,
+        ?connection_name: String,
+        ?vlan: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor bandwidth: String?
+      attr_accessor connection_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AllocatePrivateVirtualInterfaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class AllocatePrivateVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?owner_account: String,
+        ?new_private_virtual_interface_allocation: Types::NewPrivateVirtualInterfaceAllocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor new_private_virtual_interface_allocation: Types::NewPrivateVirtualInterfaceAllocation?
+    end
+
+    class AllocatePublicVirtualInterfaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class AllocatePublicVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?owner_account: String,
+        ?new_public_virtual_interface_allocation: Types::NewPublicVirtualInterfaceAllocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor new_public_virtual_interface_allocation: Types::NewPublicVirtualInterfaceAllocation?
+    end
+
+    class AllocateTransitVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?owner_account: String,
+        ?new_transit_virtual_interface_allocation: Types::NewTransitVirtualInterfaceAllocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor new_transit_virtual_interface_allocation: Types::NewTransitVirtualInterfaceAllocation?
+    end
+
+    class AllocateTransitVirtualInterfaceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface: Types::VirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface: Types::VirtualInterface?
+    end
+
+    class AssociateConnectionWithLagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class AssociateConnectionWithLagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?lag_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor lag_id: String?
+    end
+
+    class AssociateHostedConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class AssociateHostedConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?parent_connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor parent_connection_id: String?
+    end
+
+    class AssociateMacSecKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?secret_arn: String,
+        ?ckn: String,
+        ?cak: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor secret_arn: String?
+      attr_accessor ckn: String?
+      attr_accessor cak: String?
+    end
+
+    class AssociateMacSecKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class AssociateVirtualInterfaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class AssociateVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor connection_id: String?
+    end
+
+    class AssociatedCoreNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?owner_account: String,
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor owner_account: String?
+      attr_accessor attachment_id: String?
+    end
+
+    class AssociatedGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?owner_account: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor owner_account: String?
+      attr_accessor region: String?
+    end
+
+    class BGPPeer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bgp_peer_id: String,
+        ?asn: Integer,
+        ?auth_key: String,
+        ?address_family: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?bgp_peer_state: String,
+        ?bgp_status: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bgp_peer_id: String?
+      attr_accessor asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor address_family: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor bgp_peer_state: String?
+      attr_accessor bgp_status: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+    end
+
+    module BGPPeerState
+      Verifying: String
+      Pending: String
+      Available: String
+      Deleting: String
+      Deleted: String
+    end
+
+    module BGPStatus
+      Up: String
+      Down: String
+      Unknown: String
+    end
+
+    class ConfirmConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class ConfirmConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_state: String?
+    end
+
+    class ConfirmCustomerAgreementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_name: String?
+    end
+
+    class ConfirmCustomerAgreementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ConfirmPrivateVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+    end
+
+    class ConfirmPrivateVirtualInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_state: String?
+    end
+
+    class ConfirmPublicVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+    end
+
+    class ConfirmPublicVirtualInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_state: String?
+    end
+
+    class ConfirmTransitVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?direct_connect_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+    end
+
+    class ConfirmTransitVirtualInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_state: String?
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    module ConnectionState
+      ordering: String
+      requested: String
+      pending: String
+      available: String
+      down: String
+      deleting: String
+      deleted: String
+      rejected: String
+      unknown: String
+    end
+
+    class CreateBGPPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?new_bgp_peer: Types::NewBGPPeer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor new_bgp_peer: Types::NewBGPPeer?
+    end
+
+    class CreateBGPPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface: Types::VirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface: Types::VirtualInterface?
+    end
+
+    class CreateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class CreateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?bandwidth: String,
+        ?connection_name: String,
+        ?lag_id: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?request_mac_sec: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor connection_name: String?
+      attr_accessor lag_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor request_mac_sec: bool?
+    end
+
+    class CreateDirectConnectGatewayAssociationProposalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?direct_connect_gateway_owner_account: String,
+        ?gateway_id: String,
+        ?add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+        ?remove_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor direct_connect_gateway_owner_account: String?
+      attr_accessor gateway_id: String?
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+      attr_accessor remove_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+    end
+
+    class CreateDirectConnectGatewayAssociationProposalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal?
+    end
+
+    class CreateDirectConnectGatewayAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?gateway_id: String,
+        ?add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+        ?virtual_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor gateway_id: String?
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+      attr_accessor virtual_gateway_id: String?
+    end
+
+    class CreateDirectConnectGatewayAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association: Types::DirectConnectGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation?
+    end
+
+    class CreateDirectConnectGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_name: String,
+        ?tags: Array[Types::Tag],
+        ?amazon_side_asn: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor amazon_side_asn: Integer?
+    end
+
+    class CreateDirectConnectGatewayResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway: Types::DirectConnectGateway,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway?
+    end
+
+    class CreateInterconnectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+        ?interconnect_name: String,
+        ?interconnect_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+      attr_accessor interconnect_name: String?
+      attr_accessor interconnect_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class CreateInterconnectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_name: String,
+        ?bandwidth: String,
+        ?location: String,
+        ?lag_id: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?request_mac_sec: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_name: String?
+      attr_accessor bandwidth: String?
+      attr_accessor location: String?
+      attr_accessor lag_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor request_mac_sec: bool?
+    end
+
+    class CreateLagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections_bandwidth: String,
+        ?number_of_connections: Integer,
+        ?lag_id: String,
+        ?owner_account: String,
+        ?lag_name: String,
+        ?lag_state: String,
+        ?location: String,
+        ?region: String,
+        ?minimum_links: Integer,
+        ?aws_device: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?connections: Array[Types::Connection],
+        ?allows_hosted_connections: bool,
+        ?jumbo_frame_capable: bool,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections_bandwidth: String?
+      attr_accessor number_of_connections: Integer?
+      attr_accessor lag_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor lag_name: String?
+      attr_accessor lag_state: String?
+      attr_accessor location: String?
+      attr_accessor region: String?
+      attr_accessor minimum_links: Integer?
+      attr_accessor aws_device: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor allows_hosted_connections: bool?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class CreateLagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_connections: Integer,
+        ?location: String,
+        ?connections_bandwidth: String,
+        ?lag_name: String,
+        ?connection_id: String,
+        ?tags: Array[Types::Tag],
+        ?child_connection_tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?request_mac_sec: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_connections: Integer?
+      attr_accessor location: String?
+      attr_accessor connections_bandwidth: String?
+      attr_accessor lag_name: String?
+      attr_accessor connection_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor child_connection_tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor request_mac_sec: bool?
+    end
+
+    class CreatePrivateVirtualInterfaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class CreatePrivateVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?new_private_virtual_interface: Types::NewPrivateVirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor new_private_virtual_interface: Types::NewPrivateVirtualInterface?
+    end
+
+    class CreatePublicVirtualInterfaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class CreatePublicVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?new_public_virtual_interface: Types::NewPublicVirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor new_public_virtual_interface: Types::NewPublicVirtualInterface?
+    end
+
+    class CreateTransitVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?new_transit_virtual_interface: Types::NewTransitVirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor new_transit_virtual_interface: Types::NewTransitVirtualInterface?
+    end
+
+    class CreateTransitVirtualInterfaceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface: Types::VirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface: Types::VirtualInterface?
+    end
+
+    class CustomerAgreement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteBGPPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?asn: Integer,
+        ?customer_address: String,
+        ?bgp_peer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor asn: Integer?
+      attr_accessor customer_address: String?
+      attr_accessor bgp_peer_id: String?
+    end
+
+    class DeleteBGPPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface: Types::VirtualInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface: Types::VirtualInterface?
+    end
+
+    class DeleteConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class DeleteDirectConnectGatewayAssociationProposalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_id: String?
+    end
+
+    class DeleteDirectConnectGatewayAssociationProposalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal?
+    end
+
+    class DeleteDirectConnectGatewayAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?direct_connect_gateway_id: String,
+        ?virtual_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor virtual_gateway_id: String?
+    end
+
+    class DeleteDirectConnectGatewayAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association: Types::DirectConnectGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation?
+    end
+
+    class DeleteDirectConnectGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+    end
+
+    class DeleteDirectConnectGatewayResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway: Types::DirectConnectGateway,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway?
+    end
+
+    class DeleteInterconnectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+    end
+
+    class DeleteInterconnectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_state: String?
+    end
+
+    class DeleteLagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections_bandwidth: String,
+        ?number_of_connections: Integer,
+        ?lag_id: String,
+        ?owner_account: String,
+        ?lag_name: String,
+        ?lag_state: String,
+        ?location: String,
+        ?region: String,
+        ?minimum_links: Integer,
+        ?aws_device: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?connections: Array[Types::Connection],
+        ?allows_hosted_connections: bool,
+        ?jumbo_frame_capable: bool,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections_bandwidth: String?
+      attr_accessor number_of_connections: Integer?
+      attr_accessor lag_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor lag_name: String?
+      attr_accessor lag_state: String?
+      attr_accessor location: String?
+      attr_accessor region: String?
+      attr_accessor minimum_links: Integer?
+      attr_accessor aws_device: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor allows_hosted_connections: bool?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class DeleteLagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_id: String?
+    end
+
+    class DeleteVirtualInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+    end
+
+    class DeleteVirtualInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_state: String?
+    end
+
+    class DescribeConnectionLoaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?provider_name: String,
+        ?loa_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor provider_name: String?
+      attr_accessor loa_content_type: String?
+    end
+
+    class DescribeConnectionLoaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loa: Types::Loa,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loa: Types::Loa?
+    end
+
+    class DescribeConnectionsOnInterconnectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::Connection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::Connection]?
+    end
+
+    class DescribeConnectionsOnInterconnectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+    end
+
+    class DescribeConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::Connection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::Connection]?
+    end
+
+    class DescribeConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class DescribeCustomerMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreements: Array[Types::CustomerAgreement],
+        ?nni_partner_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreements: Array[Types::CustomerAgreement]?
+      attr_accessor nni_partner_type: String?
+    end
+
+    class DescribeDirectConnectGatewayAssociationProposalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?proposal_id: String,
+        ?associated_gateway_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor proposal_id: String?
+      attr_accessor associated_gateway_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewayAssociationProposalsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association_proposals: Array[Types::DirectConnectGatewayAssociationProposal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association_proposals: Array[Types::DirectConnectGatewayAssociationProposal]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewayAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?associated_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?virtual_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor associated_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor virtual_gateway_id: String?
+    end
+
+    class DescribeDirectConnectGatewayAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_associations: Array[Types::DirectConnectGatewayAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_associations: Array[Types::DirectConnectGatewayAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewayAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?virtual_interface_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewayAttachmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_attachments: Array[Types::DirectConnectGatewayAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_attachments: Array[Types::DirectConnectGatewayAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDirectConnectGatewaysResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateways: Array[Types::DirectConnectGateway],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateways: Array[Types::DirectConnectGateway]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeHostedConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::Connection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::Connection]?
+    end
+
+    class DescribeHostedConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class DescribeInterconnectLoaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+        ?provider_name: String,
+        ?loa_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+      attr_accessor provider_name: String?
+      attr_accessor loa_content_type: String?
+    end
+
+    class DescribeInterconnectLoaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loa: Types::Loa,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loa: Types::Loa?
+    end
+
+    class DescribeInterconnectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnects: Array[Types::Interconnect],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnects: Array[Types::Interconnect]?
+    end
+
+    class DescribeInterconnectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+    end
+
+    class DescribeLagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lags: Array[Types::Lag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lags: Array[Types::Lag]?
+    end
+
+    class DescribeLagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_id: String?
+    end
+
+    class DescribeLoaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loa_content: String,
+        ?loa_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loa_content: String?
+      attr_accessor loa_content_type: String?
+    end
+
+    class DescribeLoaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?provider_name: String,
+        ?loa_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor provider_name: String?
+      attr_accessor loa_content_type: String?
+    end
+
+    class DescribeLocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locations: Array[Types::Location],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locations: Array[Types::Location]?
+    end
+
+    class DescribeRouterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?router_type_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor router_type_identifier: String?
+    end
+
+    class DescribeRouterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_router_config: String,
+        ?router: Types::RouterType,
+        ?virtual_interface_id: String,
+        ?virtual_interface_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_router_config: String?
+      attr_accessor router: Types::RouterType?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor virtual_interface_name: String?
+    end
+
+    class DescribeTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+    end
+
+    class DescribeTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class DescribeVirtualGatewaysOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateways: Array[Types::VirtualGateway],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateways: Array[Types::VirtualGateway]?
+    end
+
+    class DescribeVirtualInterfacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interfaces: Array[Types::VirtualInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interfaces: Array[Types::VirtualInterface]?
+    end
+
+    class DescribeVirtualInterfacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?virtual_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_id: String?
+    end
+
+    class DirectConnectClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectConnectGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?direct_connect_gateway_name: String,
+        ?amazon_side_asn: Integer,
+        ?owner_account: String,
+        ?direct_connect_gateway_state: String,
+        ?state_change_error: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor direct_connect_gateway_name: String?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor owner_account: String?
+      attr_accessor direct_connect_gateway_state: String?
+      attr_accessor state_change_error: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DirectConnectGatewayAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?direct_connect_gateway_owner_account: String,
+        ?association_state: String,
+        ?state_change_error: String,
+        ?associated_gateway: Types::AssociatedGateway,
+        ?association_id: String,
+        ?allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+        ?associated_core_network: Types::AssociatedCoreNetwork,
+        ?virtual_gateway_id: String,
+        ?virtual_gateway_region: String,
+        ?virtual_gateway_owner_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor direct_connect_gateway_owner_account: String?
+      attr_accessor association_state: String?
+      attr_accessor state_change_error: String?
+      attr_accessor associated_gateway: Types::AssociatedGateway?
+      attr_accessor association_id: String?
+      attr_accessor allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+      attr_accessor associated_core_network: Types::AssociatedCoreNetwork?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor virtual_gateway_region: String?
+      attr_accessor virtual_gateway_owner_account: String?
+    end
+
+    class DirectConnectGatewayAssociationProposal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_id: String,
+        ?direct_connect_gateway_id: String,
+        ?direct_connect_gateway_owner_account: String,
+        ?proposal_state: String,
+        ?associated_gateway: Types::AssociatedGateway,
+        ?existing_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+        ?requested_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor direct_connect_gateway_owner_account: String?
+      attr_accessor proposal_state: String?
+      attr_accessor associated_gateway: Types::AssociatedGateway?
+      attr_accessor existing_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+      attr_accessor requested_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+    end
+
+    module DirectConnectGatewayAssociationProposalState
+      requested: String
+      accepted: String
+      deleted: String
+    end
+
+    module DirectConnectGatewayAssociationState
+      associating: String
+      associated: String
+      disassociating: String
+      disassociated: String
+      updating: String
+    end
+
+    class DirectConnectGatewayAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?virtual_interface_id: String,
+        ?virtual_interface_region: String,
+        ?virtual_interface_owner_account: String,
+        ?attachment_state: String,
+        ?attachment_type: String,
+        ?state_change_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor virtual_interface_region: String?
+      attr_accessor virtual_interface_owner_account: String?
+      attr_accessor attachment_state: String?
+      attr_accessor attachment_type: String?
+      attr_accessor state_change_error: String?
+    end
+
+    module DirectConnectGatewayAttachmentState
+      attaching: String
+      attached: String
+      detaching: String
+      detached: String
+    end
+
+    module DirectConnectGatewayAttachmentType
+      TransitVirtualInterface: String
+      PrivateVirtualInterface: String
+    end
+
+    module DirectConnectGatewayState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+    end
+
+    class DirectConnectServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisassociateConnectionFromLagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class DisassociateConnectionFromLagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?lag_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor lag_id: String?
+    end
+
+    class DisassociateMacSecKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor secret_arn: String?
+    end
+
+    class DisassociateMacSecKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class DuplicateTagKeysException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module GatewayType
+      VirtualPrivateGateway: String
+      TransitGateway: String
+    end
+
+    module HasLogicalRedundancy
+      Unknown: String
+      Yes: String
+      No: String
+    end
+
+    class Interconnect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interconnect_id: String,
+        ?interconnect_name: String,
+        ?interconnect_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interconnect_id: String?
+      attr_accessor interconnect_name: String?
+      attr_accessor interconnect_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    module InterconnectState
+      requested: String
+      pending: String
+      available: String
+      down: String
+      deleting: String
+      deleted: String
+      unknown: String
+    end
+
+    class Lag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections_bandwidth: String,
+        ?number_of_connections: Integer,
+        ?lag_id: String,
+        ?owner_account: String,
+        ?lag_name: String,
+        ?lag_state: String,
+        ?location: String,
+        ?region: String,
+        ?minimum_links: Integer,
+        ?aws_device: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?connections: Array[Types::Connection],
+        ?allows_hosted_connections: bool,
+        ?jumbo_frame_capable: bool,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections_bandwidth: String?
+      attr_accessor number_of_connections: Integer?
+      attr_accessor lag_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor lag_name: String?
+      attr_accessor lag_state: String?
+      attr_accessor location: String?
+      attr_accessor region: String?
+      attr_accessor minimum_links: Integer?
+      attr_accessor aws_device: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor allows_hosted_connections: bool?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    module LagState
+      requested: String
+      pending: String
+      available: String
+      down: String
+      deleting: String
+      deleted: String
+      unknown: String
+    end
+
+    class ListVirtualInterfaceTestHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_id: String,
+        ?virtual_interface_id: String,
+        ?bgp_peers: Array[String],
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_id: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor bgp_peers: Array[String]?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualInterfaceTestHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_test_history: Array[Types::VirtualInterfaceTestHistory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_test_history: Array[Types::VirtualInterfaceTestHistory]?
+      attr_accessor next_token: String?
+    end
+
+    class Loa
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loa_content: String,
+        ?loa_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loa_content: String?
+      attr_accessor loa_content_type: String?
+    end
+
+    module LoaContentType
+      PDF: String
+    end
+
+    class Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_code: String,
+        ?location_name: String,
+        ?region: String,
+        ?available_port_speeds: Array[String],
+        ?available_providers: Array[String],
+        ?available_mac_sec_port_speeds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_code: String?
+      attr_accessor location_name: String?
+      attr_accessor region: String?
+      attr_accessor available_port_speeds: Array[String]?
+      attr_accessor available_providers: Array[String]?
+      attr_accessor available_mac_sec_port_speeds: Array[String]?
+    end
+
+    class MacSecKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?ckn: String,
+        ?state: String,
+        ?start_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor ckn: String?
+      attr_accessor state: String?
+      attr_accessor start_on: String?
+    end
+
+    class NewBGPPeer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asn: Integer,
+        ?auth_key: String,
+        ?address_family: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor address_family: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+    end
+
+    class NewPrivateVirtualInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?mtu: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?tags: Array[Types::Tag],
+        ?enable_site_link: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor mtu: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor enable_site_link: bool?
+    end
+
+    class NewPrivateVirtualInterfaceAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?mtu: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?address_family: String,
+        ?customer_address: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor mtu: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor address_family: String?
+      attr_accessor customer_address: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NewPublicVirtualInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NewPublicVirtualInterfaceAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NewTransitVirtualInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?mtu: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?direct_connect_gateway_id: String,
+        ?tags: Array[Types::Tag],
+        ?enable_site_link: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor mtu: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor enable_site_link: bool?
+    end
+
+    class NewTransitVirtualInterfaceAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?mtu: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor mtu: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module NniPartnerType
+      V1: String
+      V2: String
+      NonPartner: String
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class RouteFilterPrefix
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class RouterType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor: String,
+        ?platform: String,
+        ?software: String,
+        ?xslt_template_name: String,
+        ?xslt_template_name_for_mac_sec: String,
+        ?router_type_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor: String?
+      attr_accessor platform: String?
+      attr_accessor software: String?
+      attr_accessor xslt_template_name: String?
+      attr_accessor xslt_template_name_for_mac_sec: String?
+      attr_accessor router_type_identifier: String?
+    end
+
+    class StartBgpFailoverTestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?bgp_peers: Array[String],
+        ?test_duration_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor bgp_peers: Array[String]?
+      attr_accessor test_duration_in_minutes: Integer?
+    end
+
+    class StartBgpFailoverTestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_test: Types::VirtualInterfaceTestHistory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_test: Types::VirtualInterfaceTestHistory?
+    end
+
+    class StopBgpFailoverTestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+    end
+
+    class StopBgpFailoverTestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_test: Types::VirtualInterfaceTestHistory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_test: Types::VirtualInterfaceTestHistory?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?connection_id: String,
+        ?connection_name: String,
+        ?connection_state: String,
+        ?region: String,
+        ?location: String,
+        ?bandwidth: String,
+        ?vlan: Integer,
+        ?partner_name: String,
+        ?loa_issue_time: Time,
+        ?lag_id: String,
+        ?aws_device: String,
+        ?jumbo_frame_capable: bool,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?port_encryption_status: String,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+        ?partner_interconnect_mac_sec_capable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor connection_state: String?
+      attr_accessor region: String?
+      attr_accessor location: String?
+      attr_accessor bandwidth: String?
+      attr_accessor vlan: Integer?
+      attr_accessor partner_name: String?
+      attr_accessor loa_issue_time: Time?
+      attr_accessor lag_id: String?
+      attr_accessor aws_device: String?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor port_encryption_status: String?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor partner_interconnect_mac_sec_capable: bool?
+    end
+
+    class UpdateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?connection_name: String,
+        ?encryption_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor encryption_mode: String?
+    end
+
+    class UpdateDirectConnectGatewayAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+        ?remove_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+      attr_accessor remove_allowed_prefixes_to_direct_connect_gateway: Array[Types::RouteFilterPrefix]?
+    end
+
+    class UpdateDirectConnectGatewayAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_association: Types::DirectConnectGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation?
+    end
+
+    class UpdateDirectConnectGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_id: String,
+        ?new_direct_connect_gateway_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor new_direct_connect_gateway_name: String?
+    end
+
+    class UpdateDirectConnectGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway: Types::DirectConnectGateway,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway?
+    end
+
+    class UpdateLagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections_bandwidth: String,
+        ?number_of_connections: Integer,
+        ?lag_id: String,
+        ?owner_account: String,
+        ?lag_name: String,
+        ?lag_state: String,
+        ?location: String,
+        ?region: String,
+        ?minimum_links: Integer,
+        ?aws_device: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?connections: Array[Types::Connection],
+        ?allows_hosted_connections: bool,
+        ?jumbo_frame_capable: bool,
+        ?has_logical_redundancy: String,
+        ?tags: Array[Types::Tag],
+        ?provider_name: String,
+        ?mac_sec_capable: bool,
+        ?encryption_mode: String,
+        ?mac_sec_keys: Array[Types::MacSecKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections_bandwidth: String?
+      attr_accessor number_of_connections: Integer?
+      attr_accessor lag_id: String?
+      attr_accessor owner_account: String?
+      attr_accessor lag_name: String?
+      attr_accessor lag_state: String?
+      attr_accessor location: String?
+      attr_accessor region: String?
+      attr_accessor minimum_links: Integer?
+      attr_accessor aws_device: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor allows_hosted_connections: bool?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor has_logical_redundancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provider_name: String?
+      attr_accessor mac_sec_capable: bool?
+      attr_accessor encryption_mode: String?
+      attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+    end
+
+    class UpdateLagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_id: String,
+        ?lag_name: String,
+        ?minimum_links: Integer,
+        ?encryption_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_id: String?
+      attr_accessor lag_name: String?
+      attr_accessor minimum_links: Integer?
+      attr_accessor encryption_mode: String?
+    end
+
+    class UpdateVirtualInterfaceAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    class UpdateVirtualInterfaceAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?mtu: Integer,
+        ?enable_site_link: bool,
+        ?virtual_interface_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor mtu: Integer?
+      attr_accessor enable_site_link: bool?
+      attr_accessor virtual_interface_name: String?
+    end
+
+    class VirtualGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway_id: String,
+        ?virtual_gateway_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor virtual_gateway_state: String?
+    end
+
+    class VirtualInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account: String,
+        ?virtual_interface_id: String,
+        ?location: String,
+        ?connection_id: String,
+        ?virtual_interface_type: String,
+        ?virtual_interface_name: String,
+        ?vlan: Integer,
+        ?asn: Integer,
+        ?amazon_side_asn: Integer,
+        ?auth_key: String,
+        ?amazon_address: String,
+        ?customer_address: String,
+        ?address_family: String,
+        ?virtual_interface_state: String,
+        ?customer_router_config: String,
+        ?mtu: Integer,
+        ?jumbo_frame_capable: bool,
+        ?virtual_gateway_id: String,
+        ?direct_connect_gateway_id: String,
+        ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
+        ?bgp_peers: Array[Types::BGPPeer],
+        ?region: String,
+        ?aws_device_v2: String,
+        ?aws_logical_device_id: String,
+        ?tags: Array[Types::Tag],
+        ?site_link_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor location: String?
+      attr_accessor connection_id: String?
+      attr_accessor virtual_interface_type: String?
+      attr_accessor virtual_interface_name: String?
+      attr_accessor vlan: Integer?
+      attr_accessor asn: Integer?
+      attr_accessor amazon_side_asn: Integer?
+      attr_accessor auth_key: String?
+      attr_accessor amazon_address: String?
+      attr_accessor customer_address: String?
+      attr_accessor address_family: String?
+      attr_accessor virtual_interface_state: String?
+      attr_accessor customer_router_config: String?
+      attr_accessor mtu: Integer?
+      attr_accessor jumbo_frame_capable: bool?
+      attr_accessor virtual_gateway_id: String?
+      attr_accessor direct_connect_gateway_id: String?
+      attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
+      attr_accessor bgp_peers: Array[Types::BGPPeer]?
+      attr_accessor region: String?
+      attr_accessor aws_device_v2: String?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor site_link_enabled: bool?
+    end
+
+    module VirtualInterfaceState
+      confirming: String
+      verifying: String
+      pending: String
+      available: String
+      down: String
+      testing: String
+      deleting: String
+      deleted: String
+      rejected: String
+      unknown: String
+    end
+
+    class VirtualInterfaceTestHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_id: String,
+        ?virtual_interface_id: String,
+        ?bgp_peers: Array[String],
+        ?status: String,
+        ?owner_account: String,
+        ?test_duration_in_minutes: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_id: String?
+      attr_accessor virtual_interface_id: String?
+      attr_accessor bgp_peers: Array[String]?
+      attr_accessor status: String?
+      attr_accessor owner_account: String?
+      attr_accessor test_duration_in_minutes: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+  end
+end

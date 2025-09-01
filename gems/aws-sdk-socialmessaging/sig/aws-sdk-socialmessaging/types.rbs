@@ -1,0 +1,1018 @@
+module Aws::SocialMessaging
+  module Types
+
+    class AccessDeniedByMetaException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateWhatsAppBusinessAccountInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signup_callback: Types::WhatsAppSignupCallback,
+        ?setup_finalization: Types::WhatsAppSetupFinalization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signup_callback: Types::WhatsAppSignupCallback?
+      attr_accessor setup_finalization: Types::WhatsAppSetupFinalization?
+    end
+
+    class AssociateWhatsAppBusinessAccountOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signup_callback_result: Types::WhatsAppSignupCallbackResult,
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signup_callback_result: Types::WhatsAppSignupCallbackResult?
+      attr_accessor status_code: Integer?
+    end
+
+    class CreateWhatsAppMessageTemplateFromLibraryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_library_template: Types::MetaLibraryTemplate,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_library_template: Types::MetaLibraryTemplate?
+      attr_accessor id: String?
+    end
+
+    class CreateWhatsAppMessageTemplateFromLibraryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_template_id: String,
+        ?template_status: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_template_id: String?
+      attr_accessor template_status: String?
+      attr_accessor category: String?
+    end
+
+    class CreateWhatsAppMessageTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_definition: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_definition: String?
+      attr_accessor id: String?
+    end
+
+    class CreateWhatsAppMessageTemplateMediaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?source_s3_file: Types::S3File,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor source_s3_file: Types::S3File?
+    end
+
+    class CreateWhatsAppMessageTemplateMediaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_header_handle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_header_handle: String?
+    end
+
+    class CreateWhatsAppMessageTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_template_id: String,
+        ?template_status: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_template_id: String?
+      attr_accessor template_status: String?
+      attr_accessor category: String?
+    end
+
+    class DeleteWhatsAppMessageMediaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_id: String,
+        ?origination_phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_id: String?
+      attr_accessor origination_phone_number_id: String?
+    end
+
+    class DeleteWhatsAppMessageMediaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success: bool?
+    end
+
+    class DeleteWhatsAppMessageTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_template_id: String,
+        ?delete_all_languages: bool,
+        ?id: String,
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_template_id: String?
+      attr_accessor delete_all_languages: bool?
+      attr_accessor id: String?
+      attr_accessor template_name: String?
+    end
+
+    class DeleteWhatsAppMessageTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisassociateWhatsAppBusinessAccountInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DisassociateWhatsAppBusinessAccountOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetLinkedWhatsAppBusinessAccountInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetLinkedWhatsAppBusinessAccountOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::LinkedWhatsAppBusinessAccount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::LinkedWhatsAppBusinessAccount?
+    end
+
+    class GetLinkedWhatsAppBusinessAccountPhoneNumberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::WhatsAppPhoneNumberDetail,
+        ?linked_whats_app_business_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::WhatsAppPhoneNumberDetail?
+      attr_accessor linked_whats_app_business_account_id: String?
+    end
+
+    class GetWhatsAppMessageMediaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_id: String,
+        ?origination_phone_number_id: String,
+        ?metadata_only: bool,
+        ?destination_s3_presigned_url: Types::S3PresignedUrl,
+        ?destination_s3_file: Types::S3File,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_id: String?
+      attr_accessor origination_phone_number_id: String?
+      attr_accessor metadata_only: bool?
+      attr_accessor destination_s3_presigned_url: Types::S3PresignedUrl?
+      attr_accessor destination_s3_file: Types::S3File?
+    end
+
+    class GetWhatsAppMessageMediaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mime_type: String,
+        ?file_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mime_type: String?
+      attr_accessor file_size: Integer?
+    end
+
+    class GetWhatsAppMessageTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_template_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_template_id: String?
+      attr_accessor id: String?
+    end
+
+    class GetWhatsAppMessageTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template: String?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParametersException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LibraryTemplateBodyInputs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_contact_number: bool,
+        ?add_learn_more_link: bool,
+        ?add_security_recommendation: bool,
+        ?add_track_package_link: bool,
+        ?code_expiration_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_contact_number: bool?
+      attr_accessor add_learn_more_link: bool?
+      attr_accessor add_security_recommendation: bool?
+      attr_accessor add_track_package_link: bool?
+      attr_accessor code_expiration_minutes: Integer?
+    end
+
+    class LibraryTemplateButtonInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?phone_number: String,
+        ?url: Hash[String, String],
+        ?otp_type: String,
+        ?zero_tap_terms_accepted: bool,
+        ?supported_apps: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor phone_number: String?
+      attr_accessor url: Hash[String, String]?
+      attr_accessor otp_type: String?
+      attr_accessor zero_tap_terms_accepted: bool?
+      attr_accessor supported_apps: Array[Hash[String, String]]?
+    end
+
+    class LibraryTemplateButtonList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?text: String,
+        ?phone_number: String,
+        ?url: String,
+        ?otp_type: String,
+        ?zero_tap_terms_accepted: bool,
+        ?supported_apps: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor text: String?
+      attr_accessor phone_number: String?
+      attr_accessor url: String?
+      attr_accessor otp_type: String?
+      attr_accessor zero_tap_terms_accepted: bool?
+      attr_accessor supported_apps: Array[Hash[String, String]]?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LinkedWhatsAppBusinessAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?waba_id: String,
+        ?registration_status: String,
+        ?link_date: Time,
+        ?waba_name: String,
+        ?event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination],
+        ?phone_numbers: Array[Types::WhatsAppPhoneNumberSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor waba_id: String?
+      attr_accessor registration_status: String?
+      attr_accessor link_date: Time?
+      attr_accessor waba_name: String?
+      attr_accessor event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination]?
+      attr_accessor phone_numbers: Array[Types::WhatsAppPhoneNumberSummary]?
+    end
+
+    class LinkedWhatsAppBusinessAccountIdMetaData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_name: String,
+        ?registration_status: String,
+        ?unregistered_whats_app_phone_numbers: Array[Types::WhatsAppPhoneNumberDetail],
+        ?waba_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_name: String?
+      attr_accessor registration_status: String?
+      attr_accessor unregistered_whats_app_phone_numbers: Array[Types::WhatsAppPhoneNumberDetail]?
+      attr_accessor waba_id: String?
+    end
+
+    class LinkedWhatsAppBusinessAccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?waba_id: String,
+        ?registration_status: String,
+        ?link_date: Time,
+        ?waba_name: String,
+        ?event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor waba_id: String?
+      attr_accessor registration_status: String?
+      attr_accessor link_date: Time?
+      attr_accessor waba_name: String?
+      attr_accessor event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination]?
+    end
+
+    class ListLinkedWhatsAppBusinessAccountsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLinkedWhatsAppBusinessAccountsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_accounts: Array[Types::LinkedWhatsAppBusinessAccountSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_accounts: Array[Types::LinkedWhatsAppBusinessAccountSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWhatsAppMessageTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWhatsAppMessageTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates: Array[Types::TemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates: Array[Types::TemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWhatsAppTemplateLibraryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?id: String,
+        ?filters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor id: String?
+      attr_accessor filters: Hash[String, String]?
+    end
+
+    class ListWhatsAppTemplateLibraryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meta_library_templates: Array[Types::MetaLibraryTemplateDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meta_library_templates: Array[Types::MetaLibraryTemplateDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class MetaLibraryTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?library_template_name: String,
+        ?template_category: String,
+        ?template_language: String,
+        ?library_template_button_inputs: Array[Types::LibraryTemplateButtonInput],
+        ?library_template_body_inputs: Types::LibraryTemplateBodyInputs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor library_template_name: String?
+      attr_accessor template_category: String?
+      attr_accessor template_language: String?
+      attr_accessor library_template_button_inputs: Array[Types::LibraryTemplateButtonInput]?
+      attr_accessor library_template_body_inputs: Types::LibraryTemplateBodyInputs?
+    end
+
+    class MetaLibraryTemplateDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_language: String,
+        ?template_category: String,
+        ?template_topic: String,
+        ?template_use_case: String,
+        ?template_industry: Array[String],
+        ?template_header: String,
+        ?template_body: String,
+        ?template_buttons: Array[Types::LibraryTemplateButtonList],
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_language: String?
+      attr_accessor template_category: String?
+      attr_accessor template_topic: String?
+      attr_accessor template_use_case: String?
+      attr_accessor template_industry: Array[String]?
+      attr_accessor template_header: String?
+      attr_accessor template_body: String?
+      attr_accessor template_buttons: Array[Types::LibraryTemplateButtonList]?
+      attr_accessor template_id: String?
+    end
+
+    class PostWhatsAppMessageMediaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_phone_number_id: String,
+        ?source_s3_presigned_url: Types::S3PresignedUrl,
+        ?source_s3_file: Types::S3File,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_phone_number_id: String?
+      attr_accessor source_s3_presigned_url: Types::S3PresignedUrl?
+      attr_accessor source_s3_file: Types::S3File?
+    end
+
+    class PostWhatsAppMessageMediaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_id: String?
+    end
+
+    class PutWhatsAppBusinessAccountEventDestinationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination]?
+    end
+
+    class PutWhatsAppBusinessAccountEventDestinationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RegistrationStatus
+      COMPLETE: String
+      INCOMPLETE: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3File
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+    end
+
+    class S3PresignedUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?headers: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor headers: Hash[String, String]?
+    end
+
+    class SendWhatsAppMessageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_phone_number_id: String,
+        ?message: String,
+        ?meta_api_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_phone_number_id: String?
+      attr_accessor message: String?
+      attr_accessor meta_api_version: String?
+    end
+
+    class SendWhatsAppMessageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?meta_template_id: String,
+        ?template_status: String,
+        ?template_quality_score: String,
+        ?template_language: String,
+        ?template_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor meta_template_id: String?
+      attr_accessor template_status: String?
+      attr_accessor template_quality_score: String?
+      attr_accessor template_language: String?
+      attr_accessor template_category: String?
+    end
+
+    class ThrottledRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
+    class UpdateWhatsAppMessageTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?meta_template_id: String,
+        ?template_category: String,
+        ?template_components: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor meta_template_id: String?
+      attr_accessor template_category: String?
+      attr_accessor template_components: String?
+    end
+
+    class UpdateWhatsAppMessageTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WabaPhoneNumberSetupFinalization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?two_factor_pin: String,
+        ?data_localization_region: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor two_factor_pin: String?
+      attr_accessor data_localization_region: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class WabaSetupFinalization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor event_destinations: Array[Types::WhatsAppBusinessAccountEventDestination]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class WhatsAppBusinessAccountEventDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_destination_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_destination_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class WhatsAppPhoneNumberDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?phone_number: String,
+        ?phone_number_id: String,
+        ?meta_phone_number_id: String,
+        ?display_phone_number_name: String,
+        ?display_phone_number: String,
+        ?quality_rating: String,
+        ?data_localization_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor phone_number: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor meta_phone_number_id: String?
+      attr_accessor display_phone_number_name: String?
+      attr_accessor display_phone_number: String?
+      attr_accessor quality_rating: String?
+      attr_accessor data_localization_region: String?
+    end
+
+    class WhatsAppPhoneNumberSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?phone_number: String,
+        ?phone_number_id: String,
+        ?meta_phone_number_id: String,
+        ?display_phone_number_name: String,
+        ?display_phone_number: String,
+        ?quality_rating: String,
+        ?data_localization_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor phone_number: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor meta_phone_number_id: String?
+      attr_accessor display_phone_number_name: String?
+      attr_accessor display_phone_number: String?
+      attr_accessor quality_rating: String?
+      attr_accessor data_localization_region: String?
+    end
+
+    class WhatsAppSetupFinalization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associate_in_progress_token: String,
+        ?phone_numbers: Array[Types::WabaPhoneNumberSetupFinalization],
+        ?phone_number_parent: String,
+        ?waba: Types::WabaSetupFinalization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associate_in_progress_token: String?
+      attr_accessor phone_numbers: Array[Types::WabaPhoneNumberSetupFinalization]?
+      attr_accessor phone_number_parent: String?
+      attr_accessor waba: Types::WabaSetupFinalization?
+    end
+
+    class WhatsAppSignupCallback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?callback_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor callback_url: String?
+    end
+
+    class WhatsAppSignupCallbackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associate_in_progress_token: String,
+        ?linked_accounts_with_incomplete_setup: Hash[String, Types::LinkedWhatsAppBusinessAccountIdMetaData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associate_in_progress_token: String?
+      attr_accessor linked_accounts_with_incomplete_setup: Hash[String, Types::LinkedWhatsAppBusinessAccountIdMetaData]?
+    end
+  end
+end

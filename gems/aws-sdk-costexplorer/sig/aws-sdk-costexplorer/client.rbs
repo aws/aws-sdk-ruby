@@ -1,0 +1,1494 @@
+module Aws::CostExplorer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CostExplorer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAnomalyMonitorResponse
+      include Smithy::Client::_Response[Types::CreateAnomalyMonitorResponse]
+      def monitor_arn: () -> String?
+    end
+    def create_anomaly_monitor: (
+      ?anomaly_monitor: {
+        monitor_arn: String,
+        monitor_name: untyped,
+        creation_date: String,
+        last_updated_date: untyped,
+        last_evaluated_date: untyped,
+        monitor_type: String,
+        monitor_dimension: String,
+        monitor_specification: {
+          or: Array[
+            {
+              or: untyped,
+              and: untyped,
+              not: untyped,
+              dimensions: {
+                key: String,
+                values: Array[String],
+                match_options: Array[String]
+              },
+              tags: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              },
+              cost_categories: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              }
+            }
+          ],
+          and: untyped,
+          not: untyped,
+          dimensions: untyped,
+          tags: untyped,
+          cost_categories: untyped
+        },
+        dimensional_value_count: Integer
+      },
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAnomalyMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnomalyMonitorResponse
+
+    interface _CreateAnomalySubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateAnomalySubscriptionResponse]
+      def subscription_arn: () -> String?
+    end
+    def create_anomaly_subscription: (
+      ?anomaly_subscription: {
+        subscription_arn: String,
+        account_id: untyped,
+        monitor_arn_list: Array[String],
+        subscribers: Array[
+          {
+            address: String,
+            type: String,
+            status: String
+          }
+        ],
+        threshold: Float,
+        frequency: String,
+        subscription_name: untyped,
+        threshold_expression: {
+          or: Array[
+            {
+              or: untyped,
+              and: untyped,
+              not: untyped,
+              dimensions: {
+                key: String,
+                values: Array[String],
+                match_options: Array[String]
+              },
+              tags: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              },
+              cost_categories: {
+                key: String,
+                values: untyped,
+                match_options: untyped
+              }
+            }
+          ],
+          and: untyped,
+          not: untyped,
+          dimensions: untyped,
+          tags: untyped,
+          cost_categories: untyped
+        }
+      },
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAnomalySubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnomalySubscriptionResponse
+
+    interface _CreateCostCategoryDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateCostCategoryDefinitionResponse]
+      def cost_category_arn: () -> String?
+      def effective_start: () -> String?
+    end
+    def create_cost_category_definition: (
+      ?name: String,
+      ?effective_start: String,
+      ?rule_version: String,
+      ?rules: Array[
+        {
+          value: String,
+          rule: {
+            or: Array[
+              {
+                or: untyped,
+                and: untyped,
+                not: untyped,
+                dimensions: {
+                  key: String,
+                  values: Array[String],
+                  match_options: Array[String]
+                },
+                tags: {
+                  key: String,
+                  values: untyped,
+                  match_options: untyped
+                },
+                cost_categories: {
+                  key: String,
+                  values: untyped,
+                  match_options: untyped
+                }
+              }
+            ],
+            and: untyped,
+            not: untyped,
+            dimensions: untyped,
+            tags: untyped,
+            cost_categories: untyped
+          },
+          inherited_value: {
+            dimension_name: String,
+            dimension_key: String
+          },
+          type: String
+        }
+      ],
+      ?default_value: String,
+      ?split_charge_rules: Array[
+        {
+          source: String,
+          targets: Array[String],
+          method: String,
+          parameters: Array[
+            {
+              type: String,
+              values: Array[String]
+            }
+          ]
+        }
+      ],
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCostCategoryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCostCategoryDefinitionResponse
+
+    interface _DeleteAnomalyMonitorResponse
+      include Smithy::Client::_Response[Types::DeleteAnomalyMonitorResponse]
+    end
+    def delete_anomaly_monitor: (
+      ?monitor_arn: String
+    ) -> _DeleteAnomalyMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnomalyMonitorResponse
+
+    interface _DeleteAnomalySubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteAnomalySubscriptionResponse]
+    end
+    def delete_anomaly_subscription: (
+      ?subscription_arn: String
+    ) -> _DeleteAnomalySubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnomalySubscriptionResponse
+
+    interface _DeleteCostCategoryDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteCostCategoryDefinitionResponse]
+      def cost_category_arn: () -> String?
+      def effective_end: () -> String?
+    end
+    def delete_cost_category_definition: (
+      ?cost_category_arn: String
+    ) -> _DeleteCostCategoryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCostCategoryDefinitionResponse
+
+    interface _DescribeCostCategoryDefinitionResponse
+      include Smithy::Client::_Response[Types::DescribeCostCategoryDefinitionResponse]
+      def cost_category: () -> Types::CostCategory?
+    end
+    def describe_cost_category_definition: (
+      ?cost_category_arn: String,
+      ?effective_on: String
+    ) -> _DescribeCostCategoryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCostCategoryDefinitionResponse
+
+    interface _GetAnomaliesResponse
+      include Smithy::Client::_Response[Types::GetAnomaliesResponse]
+      def anomalies: () -> Array[Types::Anomaly]?
+      def next_page_token: () -> String?
+    end
+    def get_anomalies: (
+      ?monitor_arn: String,
+      ?date_interval: {
+        start_date: String,
+        end_date: untyped
+      },
+      ?feedback: String,
+      ?total_impact: {
+        numeric_operator: String,
+        start_value: Float,
+        end_value: untyped
+      },
+      ?next_page_token: String,
+      ?max_results: Integer
+    ) -> _GetAnomaliesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnomaliesResponse
+
+    interface _GetAnomalyMonitorsResponse
+      include Smithy::Client::_Response[Types::GetAnomalyMonitorsResponse]
+      def anomaly_monitors: () -> Array[Types::AnomalyMonitor]?
+      def next_page_token: () -> String?
+    end
+    def get_anomaly_monitors: (
+      ?monitor_arn_list: Array[String],
+      ?next_page_token: String,
+      ?max_results: Integer
+    ) -> _GetAnomalyMonitorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnomalyMonitorsResponse
+
+    interface _GetAnomalySubscriptionsResponse
+      include Smithy::Client::_Response[Types::GetAnomalySubscriptionsResponse]
+      def anomaly_subscriptions: () -> Array[Types::AnomalySubscription]?
+      def next_page_token: () -> String?
+    end
+    def get_anomaly_subscriptions: (
+      ?subscription_arn_list: Array[String],
+      ?monitor_arn: String,
+      ?next_page_token: String,
+      ?max_results: Integer
+    ) -> _GetAnomalySubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnomalySubscriptionsResponse
+
+    interface _GetApproximateUsageRecordsResponse
+      include Smithy::Client::_Response[Types::GetApproximateUsageRecordsResponse]
+      def services: () -> Hash[String, Integer]?
+      def total_records: () -> Integer?
+      def lookback_period: () -> Types::DateInterval?
+    end
+    def get_approximate_usage_records: (
+      ?granularity: String,
+      ?services: Array[String],
+      ?approximation_dimension: String
+    ) -> _GetApproximateUsageRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApproximateUsageRecordsResponse
+
+    interface _GetCommitmentPurchaseAnalysisResponse
+      include Smithy::Client::_Response[Types::GetCommitmentPurchaseAnalysisResponse]
+      def estimated_completion_time: () -> String?
+      def analysis_completion_time: () -> String?
+      def analysis_started_time: () -> String?
+      def analysis_id: () -> String?
+      def analysis_status: () -> String?
+      def error_code: () -> String?
+      def analysis_details: () -> Types::AnalysisDetails?
+      def commitment_purchase_analysis_configuration: () -> Types::CommitmentPurchaseAnalysisConfiguration?
+    end
+    def get_commitment_purchase_analysis: (
+      ?analysis_id: String
+    ) -> _GetCommitmentPurchaseAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommitmentPurchaseAnalysisResponse
+
+    interface _GetCostAndUsageResponse
+      include Smithy::Client::_Response[Types::GetCostAndUsageResponse]
+      def next_page_token: () -> String?
+      def group_definitions: () -> Array[Types::GroupDefinition]?
+      def results_by_time: () -> Array[Types::ResultByTime]?
+      def dimension_value_attributes: () -> Array[Types::DimensionValuesWithAttributes]?
+    end
+    def get_cost_and_usage: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?metrics: Array[String],
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?billing_view_arn: String,
+      ?next_page_token: String
+    ) -> _GetCostAndUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostAndUsageResponse
+
+    interface _GetCostAndUsageComparisonsResponse
+      include Smithy::Client::_Response[Types::GetCostAndUsageComparisonsResponse]
+      def cost_and_usage_comparisons: () -> Array[Types::CostAndUsageComparison]?
+      def total_cost_and_usage: () -> Hash[String, Types::ComparisonMetricValue]?
+      def next_page_token: () -> String?
+    end
+    def get_cost_and_usage_comparisons: (
+      ?billing_view_arn: String,
+      ?baseline_time_period: {
+        start: String,
+        end: untyped
+      },
+      ?comparison_time_period: {
+        start: String,
+        end: untyped
+      },
+      ?metric_for_comparison: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_page_token: String
+    ) -> _GetCostAndUsageComparisonsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostAndUsageComparisonsResponse
+
+    interface _GetCostAndUsageWithResourcesResponse
+      include Smithy::Client::_Response[Types::GetCostAndUsageWithResourcesResponse]
+      def next_page_token: () -> String?
+      def group_definitions: () -> Array[Types::GroupDefinition]?
+      def results_by_time: () -> Array[Types::ResultByTime]?
+      def dimension_value_attributes: () -> Array[Types::DimensionValuesWithAttributes]?
+    end
+    def get_cost_and_usage_with_resources: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?metrics: Array[String],
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?billing_view_arn: String,
+      ?next_page_token: String
+    ) -> _GetCostAndUsageWithResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostAndUsageWithResourcesResponse
+
+    interface _GetCostCategoriesResponse
+      include Smithy::Client::_Response[Types::GetCostCategoriesResponse]
+      def next_page_token: () -> String?
+      def cost_category_names: () -> Array[String]?
+      def cost_category_values: () -> Array[String]?
+      def return_size: () -> Integer?
+      def total_size: () -> Integer?
+    end
+    def get_cost_categories: (
+      ?search_string: String,
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?cost_category_name: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?sort_by: Array[
+        {
+          key: String,
+          sort_order: String
+        }
+      ],
+      ?billing_view_arn: String,
+      ?max_results: Integer,
+      ?next_page_token: String
+    ) -> _GetCostCategoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostCategoriesResponse
+
+    interface _GetCostComparisonDriversResponse
+      include Smithy::Client::_Response[Types::GetCostComparisonDriversResponse]
+      def cost_comparison_drivers: () -> Array[Types::CostComparisonDriver]?
+      def next_page_token: () -> String?
+    end
+    def get_cost_comparison_drivers: (
+      ?billing_view_arn: String,
+      ?baseline_time_period: {
+        start: String,
+        end: untyped
+      },
+      ?comparison_time_period: {
+        start: String,
+        end: untyped
+      },
+      ?metric_for_comparison: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_page_token: String
+    ) -> _GetCostComparisonDriversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostComparisonDriversResponse
+
+    interface _GetCostForecastResponse
+      include Smithy::Client::_Response[Types::GetCostForecastResponse]
+      def total: () -> Types::MetricValue?
+      def forecast_results_by_time: () -> Array[Types::ForecastResult]?
+    end
+    def get_cost_forecast: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?metric: String,
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?billing_view_arn: String,
+      ?prediction_interval_level: Integer
+    ) -> _GetCostForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostForecastResponse
+
+    interface _GetDimensionValuesResponse
+      include Smithy::Client::_Response[Types::GetDimensionValuesResponse]
+      def dimension_values: () -> Array[Types::DimensionValuesWithAttributes]?
+      def return_size: () -> Integer?
+      def total_size: () -> Integer?
+      def next_page_token: () -> String?
+    end
+    def get_dimension_values: (
+      ?search_string: String,
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?dimension: String,
+      ?context: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?sort_by: Array[
+        {
+          key: String,
+          sort_order: String
+        }
+      ],
+      ?billing_view_arn: String,
+      ?max_results: Integer,
+      ?next_page_token: String
+    ) -> _GetDimensionValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDimensionValuesResponse
+
+    interface _GetReservationCoverageResponse
+      include Smithy::Client::_Response[Types::GetReservationCoverageResponse]
+      def coverages_by_time: () -> Array[Types::CoverageByTime]?
+      def total: () -> Types::Coverage?
+      def next_page_token: () -> String?
+    end
+    def get_reservation_coverage: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?metrics: Array[String],
+      ?next_page_token: String,
+      ?sort_by: {
+        key: String,
+        sort_order: String
+      },
+      ?max_results: Integer
+    ) -> _GetReservationCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReservationCoverageResponse
+
+    interface _GetReservationPurchaseRecommendationResponse
+      include Smithy::Client::_Response[Types::GetReservationPurchaseRecommendationResponse]
+      def metadata: () -> Types::ReservationPurchaseRecommendationMetadata?
+      def recommendations: () -> Array[Types::ReservationPurchaseRecommendation]?
+      def next_page_token: () -> String?
+    end
+    def get_reservation_purchase_recommendation: (
+      ?account_id: String,
+      ?service: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?account_scope: String,
+      ?lookback_period_in_days: String,
+      ?term_in_years: String,
+      ?payment_option: String,
+      ?service_specification: {
+        ec2_specification: {
+          offering_class: String
+        }
+      },
+      ?page_size: Integer,
+      ?next_page_token: String
+    ) -> _GetReservationPurchaseRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReservationPurchaseRecommendationResponse
+
+    interface _GetReservationUtilizationResponse
+      include Smithy::Client::_Response[Types::GetReservationUtilizationResponse]
+      def utilizations_by_time: () -> Array[Types::UtilizationByTime]?
+      def total: () -> Types::ReservationAggregates?
+      def next_page_token: () -> String?
+    end
+    def get_reservation_utilization: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?sort_by: {
+        key: String,
+        sort_order: String
+      },
+      ?next_page_token: String,
+      ?max_results: Integer
+    ) -> _GetReservationUtilizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReservationUtilizationResponse
+
+    interface _GetRightsizingRecommendationResponse
+      include Smithy::Client::_Response[Types::GetRightsizingRecommendationResponse]
+      def metadata: () -> Types::RightsizingRecommendationMetadata?
+      def summary: () -> Types::RightsizingRecommendationSummary?
+      def rightsizing_recommendations: () -> Array[Types::RightsizingRecommendation]?
+      def next_page_token: () -> String?
+      def configuration: () -> Types::RightsizingRecommendationConfiguration?
+    end
+    def get_rightsizing_recommendation: (
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?configuration: {
+        recommendation_target: String,
+        benefits_considered: bool
+      },
+      ?service: String,
+      ?page_size: Integer,
+      ?next_page_token: String
+    ) -> _GetRightsizingRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRightsizingRecommendationResponse
+
+    interface _GetSavingsPlanPurchaseRecommendationDetailsResponse
+      include Smithy::Client::_Response[Types::GetSavingsPlanPurchaseRecommendationDetailsResponse]
+      def recommendation_detail_id: () -> String?
+      def recommendation_detail_data: () -> Types::RecommendationDetailData?
+    end
+    def get_savings_plan_purchase_recommendation_details: (
+      ?recommendation_detail_id: String
+    ) -> _GetSavingsPlanPurchaseRecommendationDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlanPurchaseRecommendationDetailsResponse
+
+    interface _GetSavingsPlansCoverageResponse
+      include Smithy::Client::_Response[Types::GetSavingsPlansCoverageResponse]
+      def savings_plans_coverages: () -> Array[Types::SavingsPlansCoverage]?
+      def next_token: () -> String?
+    end
+    def get_savings_plans_coverage: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?group_by: Array[
+        {
+          type: String,
+          key: String
+        }
+      ],
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?metrics: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_by: {
+        key: String,
+        sort_order: String
+      }
+    ) -> _GetSavingsPlansCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlansCoverageResponse
+
+    interface _GetSavingsPlansPurchaseRecommendationResponse
+      include Smithy::Client::_Response[Types::GetSavingsPlansPurchaseRecommendationResponse]
+      def metadata: () -> Types::SavingsPlansPurchaseRecommendationMetadata?
+      def savings_plans_purchase_recommendation: () -> Types::SavingsPlansPurchaseRecommendation?
+      def next_page_token: () -> String?
+    end
+    def get_savings_plans_purchase_recommendation: (
+      ?savings_plans_type: String,
+      ?term_in_years: String,
+      ?payment_option: String,
+      ?account_scope: String,
+      ?next_page_token: String,
+      ?page_size: Integer,
+      ?lookback_period_in_days: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      }
+    ) -> _GetSavingsPlansPurchaseRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlansPurchaseRecommendationResponse
+
+    interface _GetSavingsPlansUtilizationResponse
+      include Smithy::Client::_Response[Types::GetSavingsPlansUtilizationResponse]
+      def savings_plans_utilizations_by_time: () -> Array[Types::SavingsPlansUtilizationByTime]?
+      def total: () -> Types::SavingsPlansUtilizationAggregates?
+    end
+    def get_savings_plans_utilization: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?sort_by: {
+        key: String,
+        sort_order: String
+      }
+    ) -> _GetSavingsPlansUtilizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlansUtilizationResponse
+
+    interface _GetSavingsPlansUtilizationDetailsResponse
+      include Smithy::Client::_Response[Types::GetSavingsPlansUtilizationDetailsResponse]
+      def savings_plans_utilization_details: () -> Array[Types::SavingsPlansUtilizationDetail]?
+      def total: () -> Types::SavingsPlansUtilizationAggregates?
+      def time_period: () -> Types::DateInterval?
+      def next_token: () -> String?
+    end
+    def get_savings_plans_utilization_details: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?data_type: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_by: {
+        key: String,
+        sort_order: String
+      }
+    ) -> _GetSavingsPlansUtilizationDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlansUtilizationDetailsResponse
+
+    interface _GetTagsResponse
+      include Smithy::Client::_Response[Types::GetTagsResponse]
+      def next_page_token: () -> String?
+      def tags: () -> Array[String]?
+      def return_size: () -> Integer?
+      def total_size: () -> Integer?
+    end
+    def get_tags: (
+      ?search_string: String,
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?tag_key: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?sort_by: Array[
+        {
+          key: String,
+          sort_order: String
+        }
+      ],
+      ?billing_view_arn: String,
+      ?max_results: Integer,
+      ?next_page_token: String
+    ) -> _GetTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTagsResponse
+
+    interface _GetUsageForecastResponse
+      include Smithy::Client::_Response[Types::GetUsageForecastResponse]
+      def total: () -> Types::MetricValue?
+      def forecast_results_by_time: () -> Array[Types::ForecastResult]?
+    end
+    def get_usage_forecast: (
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?metric: String,
+      ?granularity: String,
+      ?filter: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      },
+      ?billing_view_arn: String,
+      ?prediction_interval_level: Integer
+    ) -> _GetUsageForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsageForecastResponse
+
+    interface _ListCommitmentPurchaseAnalysesResponse
+      include Smithy::Client::_Response[Types::ListCommitmentPurchaseAnalysesResponse]
+      def analysis_summary_list: () -> Array[Types::AnalysisSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_commitment_purchase_analyses: (
+      ?analysis_status: String,
+      ?next_page_token: String,
+      ?page_size: Integer,
+      ?analysis_ids: Array[String]
+    ) -> _ListCommitmentPurchaseAnalysesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommitmentPurchaseAnalysesResponse
+
+    interface _ListCostAllocationTagBackfillHistoryResponse
+      include Smithy::Client::_Response[Types::ListCostAllocationTagBackfillHistoryResponse]
+      def backfill_requests: () -> Array[Types::CostAllocationTagBackfillRequest]?
+      def next_token: () -> String?
+    end
+    def list_cost_allocation_tag_backfill_history: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCostAllocationTagBackfillHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCostAllocationTagBackfillHistoryResponse
+
+    interface _ListCostAllocationTagsResponse
+      include Smithy::Client::_Response[Types::ListCostAllocationTagsResponse]
+      def cost_allocation_tags: () -> Array[Types::CostAllocationTag]?
+      def next_token: () -> String?
+    end
+    def list_cost_allocation_tags: (
+      ?status: String,
+      ?tag_keys: Array[String],
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCostAllocationTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCostAllocationTagsResponse
+
+    interface _ListCostCategoryDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListCostCategoryDefinitionsResponse]
+      def cost_category_references: () -> Array[Types::CostCategoryReference]?
+      def next_token: () -> String?
+    end
+    def list_cost_category_definitions: (
+      ?effective_on: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCostCategoryDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCostCategoryDefinitionsResponse
+
+    interface _ListSavingsPlansPurchaseRecommendationGenerationResponse
+      include Smithy::Client::_Response[Types::ListSavingsPlansPurchaseRecommendationGenerationResponse]
+      def generation_summary_list: () -> Array[Types::GenerationSummary]?
+      def next_page_token: () -> String?
+    end
+    def list_savings_plans_purchase_recommendation_generation: (
+      ?generation_status: String,
+      ?recommendation_ids: Array[String],
+      ?page_size: Integer,
+      ?next_page_token: String
+    ) -> _ListSavingsPlansPurchaseRecommendationGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSavingsPlansPurchaseRecommendationGenerationResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ProvideAnomalyFeedbackResponse
+      include Smithy::Client::_Response[Types::ProvideAnomalyFeedbackResponse]
+      def anomaly_id: () -> String?
+    end
+    def provide_anomaly_feedback: (
+      ?anomaly_id: String,
+      ?feedback: String
+    ) -> _ProvideAnomalyFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ProvideAnomalyFeedbackResponse
+
+    interface _StartCommitmentPurchaseAnalysisResponse
+      include Smithy::Client::_Response[Types::StartCommitmentPurchaseAnalysisResponse]
+      def analysis_id: () -> String?
+      def analysis_started_time: () -> String?
+      def estimated_completion_time: () -> String?
+    end
+    def start_commitment_purchase_analysis: (
+      ?commitment_purchase_analysis_configuration: {
+        savings_plans_purchase_analysis_configuration: {
+          account_scope: String,
+          account_id: String,
+          analysis_type: String,
+          savings_plans_to_add: Array[
+            {
+              payment_option: String,
+              savings_plans_type: String,
+              region: String,
+              instance_family: untyped,
+              term_in_years: String,
+              savings_plans_commitment: Float,
+              offering_id: untyped
+            }
+          ],
+          savings_plans_to_exclude: Array[String],
+          look_back_time_period: {
+            start: String,
+            end: untyped
+          }
+        }
+      }
+    ) -> _StartCommitmentPurchaseAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCommitmentPurchaseAnalysisResponse
+
+    interface _StartCostAllocationTagBackfillResponse
+      include Smithy::Client::_Response[Types::StartCostAllocationTagBackfillResponse]
+      def backfill_request: () -> Types::CostAllocationTagBackfillRequest?
+    end
+    def start_cost_allocation_tag_backfill: (
+      ?backfill_from: String
+    ) -> _StartCostAllocationTagBackfillResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCostAllocationTagBackfillResponse
+
+    interface _StartSavingsPlansPurchaseRecommendationGenerationResponse
+      include Smithy::Client::_Response[Types::StartSavingsPlansPurchaseRecommendationGenerationResponse]
+      def recommendation_id: () -> String?
+      def generation_started_time: () -> String?
+      def estimated_completion_time: () -> String?
+    end
+    def start_savings_plans_purchase_recommendation_generation: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSavingsPlansPurchaseRecommendationGenerationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?resource_tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnomalyMonitorResponse
+      include Smithy::Client::_Response[Types::UpdateAnomalyMonitorResponse]
+      def monitor_arn: () -> String?
+    end
+    def update_anomaly_monitor: (
+      ?monitor_arn: String,
+      ?monitor_name: String
+    ) -> _UpdateAnomalyMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnomalyMonitorResponse
+
+    interface _UpdateAnomalySubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateAnomalySubscriptionResponse]
+      def subscription_arn: () -> String?
+    end
+    def update_anomaly_subscription: (
+      ?subscription_arn: String,
+      ?threshold: Float,
+      ?frequency: String,
+      ?monitor_arn_list: Array[String],
+      ?subscribers: Array[
+        {
+          address: String,
+          type: String,
+          status: String
+        }
+      ],
+      ?subscription_name: String,
+      ?threshold_expression: {
+        or: Array[
+          {
+            or: untyped,
+            and: untyped,
+            not: untyped,
+            dimensions: {
+              key: String,
+              values: Array[String],
+              match_options: Array[String]
+            },
+            tags: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            },
+            cost_categories: {
+              key: String,
+              values: untyped,
+              match_options: untyped
+            }
+          }
+        ],
+        and: untyped,
+        not: untyped,
+        dimensions: untyped,
+        tags: untyped,
+        cost_categories: untyped
+      }
+    ) -> _UpdateAnomalySubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnomalySubscriptionResponse
+
+    interface _UpdateCostAllocationTagsStatusResponse
+      include Smithy::Client::_Response[Types::UpdateCostAllocationTagsStatusResponse]
+      def errors: () -> Array[Types::UpdateCostAllocationTagsStatusError]?
+    end
+    def update_cost_allocation_tags_status: (
+      ?cost_allocation_tags_status: Array[
+        {
+          tag_key: String,
+          status: String
+        }
+      ]
+    ) -> _UpdateCostAllocationTagsStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCostAllocationTagsStatusResponse
+
+    interface _UpdateCostCategoryDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateCostCategoryDefinitionResponse]
+      def cost_category_arn: () -> String?
+      def effective_start: () -> String?
+    end
+    def update_cost_category_definition: (
+      ?cost_category_arn: String,
+      ?effective_start: String,
+      ?rule_version: String,
+      ?rules: Array[
+        {
+          value: String,
+          rule: {
+            or: Array[
+              {
+                or: untyped,
+                and: untyped,
+                not: untyped,
+                dimensions: {
+                  key: String,
+                  values: Array[String],
+                  match_options: Array[String]
+                },
+                tags: {
+                  key: String,
+                  values: untyped,
+                  match_options: untyped
+                },
+                cost_categories: {
+                  key: String,
+                  values: untyped,
+                  match_options: untyped
+                }
+              }
+            ],
+            and: untyped,
+            not: untyped,
+            dimensions: untyped,
+            tags: untyped,
+            cost_categories: untyped
+          },
+          inherited_value: {
+            dimension_name: String,
+            dimension_key: String
+          },
+          type: String
+        }
+      ],
+      ?default_value: String,
+      ?split_charge_rules: Array[
+        {
+          source: String,
+          targets: Array[String],
+          method: String,
+          parameters: Array[
+            {
+              type: String,
+              values: Array[String]
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateCostCategoryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCostCategoryDefinitionResponse
+  end
+end

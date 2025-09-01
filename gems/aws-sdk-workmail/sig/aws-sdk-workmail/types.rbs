@@ -1,0 +1,3564 @@
+module Aws::WorkMail
+  module Types
+
+    class AccessControlRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?effect: String,
+        ?description: String,
+        ?ip_ranges: Array[String],
+        ?not_ip_ranges: Array[String],
+        ?actions: Array[String],
+        ?not_actions: Array[String],
+        ?user_ids: Array[String],
+        ?not_user_ids: Array[String],
+        ?date_created: Time,
+        ?date_modified: Time,
+        ?impersonation_role_ids: Array[String],
+        ?not_impersonation_role_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor effect: String?
+      attr_accessor description: String?
+      attr_accessor ip_ranges: Array[String]?
+      attr_accessor not_ip_ranges: Array[String]?
+      attr_accessor actions: Array[String]?
+      attr_accessor not_actions: Array[String]?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor not_user_ids: Array[String]?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+      attr_accessor impersonation_role_ids: Array[String]?
+      attr_accessor not_impersonation_role_ids: Array[String]?
+    end
+
+    module AccessControlRuleEffect
+      ALLOW: String
+      DENY: String
+    end
+
+    module AccessEffect
+      ALLOW: String
+      DENY: String
+    end
+
+    class AssociateDelegateToResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor entity_id: String?
+    end
+
+    class AssociateDelegateToResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateMemberToGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class AssociateMemberToGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssumeImpersonationRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?impersonation_role_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_id: String?
+    end
+
+    class AssumeImpersonationRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?expires_in: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor expires_in: Integer?
+    end
+
+    class AvailabilityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?provider_type: String,
+        ?ews_provider: Types::RedactedEwsAvailabilityProvider,
+        ?lambda_provider: Types::LambdaAvailabilityProvider,
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor provider_type: String?
+      attr_accessor ews_provider: Types::RedactedEwsAvailabilityProvider?
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    module AvailabilityProviderType
+      EWS: String
+      LAMBDA: String
+    end
+
+    class BookingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_accept_requests: bool,
+        ?auto_decline_recurring_requests: bool,
+        ?auto_decline_conflicting_requests: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_accept_requests: bool?
+      attr_accessor auto_decline_recurring_requests: bool?
+      attr_accessor auto_decline_conflicting_requests: bool?
+    end
+
+    class CancelMailboxExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?job_id: String,
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor job_id: String?
+      attr_accessor organization_id: String?
+    end
+
+    class CancelMailboxExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor alias: String?
+    end
+
+    class CreateAliasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateAvailabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?organization_id: String,
+        ?domain_name: String,
+        ?ews_provider: Types::EwsAvailabilityProvider,
+        ?lambda_provider: Types::LambdaAvailabilityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider?
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider?
+    end
+
+    class CreateAvailabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?name: String,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor name: String?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class CreateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class CreateIdentityCenterApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?instance_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor instance_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateIdentityCenterApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class CreateImpersonationRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?organization_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?rules: Array[Types::ImpersonationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::ImpersonationRule]?
+    end
+
+    class CreateImpersonationRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?impersonation_role_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor impersonation_role_id: String?
+    end
+
+    class CreateMobileDeviceAccessRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?effect: String,
+        ?device_types: Array[String],
+        ?not_device_types: Array[String],
+        ?device_models: Array[String],
+        ?not_device_models: Array[String],
+        ?device_operating_systems: Array[String],
+        ?not_device_operating_systems: Array[String],
+        ?device_user_agents: Array[String],
+        ?not_device_user_agents: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor effect: String?
+      attr_accessor device_types: Array[String]?
+      attr_accessor not_device_types: Array[String]?
+      attr_accessor device_models: Array[String]?
+      attr_accessor not_device_models: Array[String]?
+      attr_accessor device_operating_systems: Array[String]?
+      attr_accessor not_device_operating_systems: Array[String]?
+      attr_accessor device_user_agents: Array[String]?
+      attr_accessor not_device_user_agents: Array[String]?
+    end
+
+    class CreateMobileDeviceAccessRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mobile_device_access_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mobile_device_access_rule_id: String?
+    end
+
+    class CreateOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?alias: String,
+        ?client_token: String,
+        ?domains: Array[Types::Domain],
+        ?kms_key_arn: String,
+        ?enable_interoperability: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor alias: String?
+      attr_accessor client_token: String?
+      attr_accessor domains: Array[Types::Domain]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor enable_interoperability: bool?
+    end
+
+    class CreateOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class CreateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class CreateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?name: String,
+        ?display_name: String,
+        ?password: String,
+        ?role: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?hidden_from_global_address_list: bool,
+        ?identity_provider_user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor password: String?
+      attr_accessor role: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor hidden_from_global_address_list: bool?
+      attr_accessor identity_provider_user_id: String?
+    end
+
+    class CreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class Delegate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class DeleteAccessControlRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteAccessControlRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor alias: String?
+    end
+
+    class DeleteAliasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAvailabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DeleteAvailabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEmailMonitoringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DeleteEmailMonitoringConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class DeleteGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIdentityCenterApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class DeleteIdentityCenterApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIdentityProviderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DeleteIdentityProviderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteImpersonationRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?impersonation_role_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_id: String?
+    end
+
+    class DeleteImpersonationRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMailboxPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?grantee_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor grantee_id: String?
+    end
+
+    class DeleteMailboxPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMobileDeviceAccessOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+    end
+
+    class DeleteMobileDeviceAccessOverrideResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMobileDeviceAccessRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?mobile_device_access_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor mobile_device_access_rule_id: String?
+    end
+
+    class DeleteMobileDeviceAccessRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?organization_id: String,
+        ?delete_directory: bool,
+        ?force_delete: bool,
+        ?delete_identity_center_application: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor delete_directory: bool?
+      attr_accessor force_delete: bool?
+      attr_accessor delete_identity_center_application: bool?
+    end
+
+    class DeleteOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor state: String?
+    end
+
+    class DeletePersonalAccessTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?personal_access_token_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor personal_access_token_id: String?
+    end
+
+    class DeletePersonalAccessTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DeleteResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRetentionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteRetentionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class DeleteUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterFromWorkMailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+    end
+
+    class DeregisterFromWorkMailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterMailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DeregisterMailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEmailMonitoringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DescribeEmailMonitoringConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    class DescribeEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor email: String?
+    end
+
+    class DescribeEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class DescribeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class DescribeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?name: String,
+        ?email: String,
+        ?state: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor state: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class DescribeIdentityProviderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DescribeIdentityProviderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_mode: String,
+        ?identity_center_configuration: Types::IdentityCenterConfiguration,
+        ?personal_access_token_configuration: Types::PersonalAccessTokenConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_mode: String?
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
+      attr_accessor personal_access_token_configuration: Types::PersonalAccessTokenConfiguration?
+    end
+
+    class DescribeInboundDmarcSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DescribeInboundDmarcSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enforced: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enforced: bool?
+    end
+
+    class DescribeMailboxExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor organization_id: String?
+    end
+
+    class DescribeMailboxExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?description: String,
+        ?role_arn: String,
+        ?kms_key_arn: String,
+        ?s3_bucket_name: String,
+        ?s3_prefix: String,
+        ?s3_path: String,
+        ?estimated_progress: Integer,
+        ?state: String,
+        ?error_info: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_prefix: String?
+      attr_accessor s3_path: String?
+      attr_accessor estimated_progress: Integer?
+      attr_accessor state: String?
+      attr_accessor error_info: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class DescribeOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class DescribeOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?alias: String,
+        ?state: String,
+        ?directory_id: String,
+        ?directory_type: String,
+        ?default_mail_domain: String,
+        ?completed_date: Time,
+        ?error_message: String,
+        ?arn: String,
+        ?migration_admin: String,
+        ?interoperability_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor alias: String?
+      attr_accessor state: String?
+      attr_accessor directory_id: String?
+      attr_accessor directory_type: String?
+      attr_accessor default_mail_domain: String?
+      attr_accessor completed_date: Time?
+      attr_accessor error_message: String?
+      attr_accessor arn: String?
+      attr_accessor migration_admin: String?
+      attr_accessor interoperability_enabled: bool?
+    end
+
+    class DescribeResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DescribeResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?email: String,
+        ?name: String,
+        ?type: String,
+        ?booking_options: Types::BookingOptions,
+        ?state: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+        ?description: String,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor booking_options: Types::BookingOptions?
+      attr_accessor state: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+      attr_accessor description: String?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class DescribeUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class DescribeUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?name: String,
+        ?email: String,
+        ?display_name: String,
+        ?state: String,
+        ?user_role: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+        ?mailbox_provisioned_date: Time,
+        ?mailbox_deprovisioned_date: Time,
+        ?first_name: String,
+        ?last_name: String,
+        ?hidden_from_global_address_list: bool,
+        ?initials: String,
+        ?telephone: String,
+        ?street: String,
+        ?job_title: String,
+        ?city: String,
+        ?company: String,
+        ?zip_code: String,
+        ?department: String,
+        ?country: String,
+        ?office: String,
+        ?identity_provider_user_id: String,
+        ?identity_provider_identity_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor display_name: String?
+      attr_accessor state: String?
+      attr_accessor user_role: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+      attr_accessor mailbox_provisioned_date: Time?
+      attr_accessor mailbox_deprovisioned_date: Time?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor hidden_from_global_address_list: bool?
+      attr_accessor initials: String?
+      attr_accessor telephone: String?
+      attr_accessor street: String?
+      attr_accessor job_title: String?
+      attr_accessor city: String?
+      attr_accessor company: String?
+      attr_accessor zip_code: String?
+      attr_accessor department: String?
+      attr_accessor country: String?
+      attr_accessor office: String?
+      attr_accessor identity_provider_user_id: String?
+      attr_accessor identity_provider_identity_store_id: String?
+    end
+
+    class DirectoryInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectoryServiceAuthenticationFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectoryUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisassociateDelegateFromResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor entity_id: String?
+    end
+
+    class DisassociateDelegateFromResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateMemberFromGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class DisassociateMemberFromGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DnsRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?hostname: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor hostname: String?
+      attr_accessor value: String?
+    end
+
+    module DnsRecordVerificationStatus
+      PENDING: String
+      VERIFIED: String
+      FAILED: String
+    end
+
+    class Domain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class EmailAddressInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EntityAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EntityNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EntityState
+      ENABLED: String
+      DISABLED: String
+      DELETED: String
+    end
+
+    class EntityStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EntityType
+      GROUP: String
+      USER: String
+      RESOURCE: String
+    end
+
+    class EwsAvailabilityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ews_endpoint: String,
+        ?ews_username: String,
+        ?ews_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ews_endpoint: String?
+      attr_accessor ews_username: String?
+      attr_accessor ews_password: String?
+    end
+
+    class FolderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action: String,
+        ?period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action: String?
+      attr_accessor period: Integer?
+    end
+
+    module FolderName
+      INBOX: String
+      DELETED_ITEMS: String
+      SENT_ITEMS: String
+      DRAFTS: String
+      JUNK_EMAIL: String
+    end
+
+    class GetAccessControlEffectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?ip_address: String,
+        ?action: String,
+        ?user_id: String,
+        ?impersonation_role_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor ip_address: String?
+      attr_accessor action: String?
+      attr_accessor user_id: String?
+      attr_accessor impersonation_role_id: String?
+    end
+
+    class GetAccessControlEffectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effect: String,
+        ?matched_rules: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effect: String?
+      attr_accessor matched_rules: Array[String]?
+    end
+
+    class GetDefaultRetentionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class GetDefaultRetentionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?folder_configurations: Array[Types::FolderConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor folder_configurations: Array[Types::FolderConfiguration]?
+    end
+
+    class GetImpersonationRoleEffectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?impersonation_role_id: String,
+        ?target_user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_id: String?
+      attr_accessor target_user: String?
+    end
+
+    class GetImpersonationRoleEffectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?effect: String,
+        ?matched_rules: Array[Types::ImpersonationMatchedRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor effect: String?
+      attr_accessor matched_rules: Array[Types::ImpersonationMatchedRule]?
+    end
+
+    class GetImpersonationRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?impersonation_role_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_id: String?
+    end
+
+    class GetImpersonationRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?impersonation_role_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?rules: Array[Types::ImpersonationRule],
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor impersonation_role_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::ImpersonationRule]?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    class GetMailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class GetMailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::DnsRecord],
+        ?is_test_domain: bool,
+        ?is_default: bool,
+        ?ownership_verification_status: String,
+        ?dkim_verification_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::DnsRecord]?
+      attr_accessor is_test_domain: bool?
+      attr_accessor is_default: bool?
+      attr_accessor ownership_verification_status: String?
+      attr_accessor dkim_verification_status: String?
+    end
+
+    class GetMailboxDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class GetMailboxDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mailbox_quota: Integer,
+        ?mailbox_size: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mailbox_quota: Integer?
+      attr_accessor mailbox_size: Float?
+    end
+
+    class GetMobileDeviceAccessEffectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?device_type: String,
+        ?device_model: String,
+        ?device_operating_system: String,
+        ?device_user_agent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor device_type: String?
+      attr_accessor device_model: String?
+      attr_accessor device_operating_system: String?
+      attr_accessor device_user_agent: String?
+    end
+
+    class GetMobileDeviceAccessEffectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effect: String,
+        ?matched_rules: Array[Types::MobileDeviceAccessMatchedRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effect: String?
+      attr_accessor matched_rules: Array[Types::MobileDeviceAccessMatchedRule]?
+    end
+
+    class GetMobileDeviceAccessOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+    end
+
+    class GetMobileDeviceAccessOverrideResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?device_id: String,
+        ?effect: String,
+        ?description: String,
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+      attr_accessor effect: String?
+      attr_accessor description: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    class GetPersonalAccessTokenMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?personal_access_token_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor personal_access_token_id: String?
+    end
+
+    class GetPersonalAccessTokenMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?personal_access_token_id: String,
+        ?user_id: String,
+        ?name: String,
+        ?date_created: Time,
+        ?date_last_used: Time,
+        ?expires_time: Time,
+        ?scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor personal_access_token_id: String?
+      attr_accessor user_id: String?
+      attr_accessor name: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_last_used: Time?
+      attr_accessor expires_time: Time?
+      attr_accessor scopes: Array[String]?
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?email: String,
+        ?name: String,
+        ?state: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+    end
+
+    class GroupIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor group_name: String?
+    end
+
+    class IdentityCenterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor application_arn: String?
+    end
+
+    module IdentityProviderAuthenticationMode
+      IDENTITY_PROVIDER_ONLY: String
+      IDENTITY_PROVIDER_AND_DIRECTORY: String
+    end
+
+    class ImpersonationMatchedRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?impersonation_rule_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor impersonation_rule_id: String?
+      attr_accessor name: String?
+    end
+
+    class ImpersonationRole
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?impersonation_role_id: String,
+        ?name: String,
+        ?type: String,
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor impersonation_role_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    module ImpersonationRoleType
+      FULL_ACCESS: String
+      READ_ONLY: String
+    end
+
+    class ImpersonationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?impersonation_rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?effect: String,
+        ?target_users: Array[String],
+        ?not_target_users: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor impersonation_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor effect: String?
+      attr_accessor target_users: Array[String]?
+      attr_accessor not_target_users: Array[String]?
+    end
+
+    class InvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCustomSesConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPasswordException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaAvailabilityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAccessControlRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class ListAccessControlRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::AccessControlRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::AccessControlRule]?
+    end
+
+    class ListAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAvailabilityConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAvailabilityConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_configurations: Array[Types::AvailabilityConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_configurations: Array[Types::AvailabilityConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupMembersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::Member],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::Member]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?primary_email_prefix: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor primary_email_prefix: String?
+      attr_accessor state: String?
+    end
+
+    class ListGroupsForEntityFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name_prefix: String?
+    end
+
+    class ListGroupsForEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?filters: Types::ListGroupsForEntityFilters,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor filters: Types::ListGroupsForEntityFilters?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupsForEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupIdentifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Types::ListGroupsFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Types::ListGroupsFilters?
+    end
+
+    class ListGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::Group],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::Group]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImpersonationRolesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListImpersonationRolesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?roles: Array[Types::ImpersonationRole],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor roles: Array[Types::ImpersonationRole]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMailDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMailDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mail_domains: Array[Types::MailDomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mail_domains: Array[Types::MailDomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMailboxExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMailboxExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::MailboxExportJob],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::MailboxExportJob]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMailboxPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMailboxPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::Permission],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::Permission]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMobileDeviceAccessOverridesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?device_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMobileDeviceAccessOverridesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overrides: Array[Types::MobileDeviceAccessOverride],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overrides: Array[Types::MobileDeviceAccessOverride]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMobileDeviceAccessRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+    end
+
+    class ListMobileDeviceAccessRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::MobileDeviceAccessRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::MobileDeviceAccessRule]?
+    end
+
+    class ListOrganizationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOrganizationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_summaries: Array[Types::OrganizationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_summaries: Array[Types::OrganizationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPersonalAccessTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPersonalAccessTokensResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?personal_access_token_summaries: Array[Types::PersonalAccessTokenSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor personal_access_token_summaries: Array[Types::PersonalAccessTokenSummary]?
+    end
+
+    class ListResourceDelegatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourceDelegatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegates: Array[Types::Delegate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegates: Array[Types::Delegate]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?primary_email_prefix: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor primary_email_prefix: String?
+      attr_accessor state: String?
+    end
+
+    class ListResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Types::ListResourcesFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Types::ListResourcesFilters?
+    end
+
+    class ListResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListUsersFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username_prefix: String,
+        ?display_name_prefix: String,
+        ?primary_email_prefix: String,
+        ?state: String,
+        ?identity_provider_user_id_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username_prefix: String?
+      attr_accessor display_name_prefix: String?
+      attr_accessor primary_email_prefix: String?
+      attr_accessor state: String?
+      attr_accessor identity_provider_user_id_prefix: String?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Types::ListUsersFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Types::ListUsersFilters?
+    end
+
+    class ListUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class MailDomainInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MailDomainNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MailDomainStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MailDomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?default_domain: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor default_domain: bool?
+    end
+
+    class MailboxExportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?entity_id: String,
+        ?description: String,
+        ?s3_bucket_name: String,
+        ?s3_path: String,
+        ?estimated_progress: Integer,
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_path: String?
+      attr_accessor estimated_progress: Integer?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module MailboxExportJobState
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class Member
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?type: String,
+        ?state: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+    end
+
+    module MemberType
+      GROUP: String
+      USER: String
+    end
+
+    class MobileDeviceAccessMatchedRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mobile_device_access_rule_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mobile_device_access_rule_id: String?
+      attr_accessor name: String?
+    end
+
+    class MobileDeviceAccessOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?device_id: String,
+        ?effect: String,
+        ?description: String,
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+      attr_accessor effect: String?
+      attr_accessor description: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    class MobileDeviceAccessRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mobile_device_access_rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?effect: String,
+        ?device_types: Array[String],
+        ?not_device_types: Array[String],
+        ?device_models: Array[String],
+        ?not_device_models: Array[String],
+        ?device_operating_systems: Array[String],
+        ?not_device_operating_systems: Array[String],
+        ?device_user_agents: Array[String],
+        ?not_device_user_agents: Array[String],
+        ?date_created: Time,
+        ?date_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mobile_device_access_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor effect: String?
+      attr_accessor device_types: Array[String]?
+      attr_accessor not_device_types: Array[String]?
+      attr_accessor device_models: Array[String]?
+      attr_accessor not_device_models: Array[String]?
+      attr_accessor device_operating_systems: Array[String]?
+      attr_accessor not_device_operating_systems: Array[String]?
+      attr_accessor device_user_agents: Array[String]?
+      attr_accessor not_device_user_agents: Array[String]?
+      attr_accessor date_created: Time?
+      attr_accessor date_modified: Time?
+    end
+
+    module MobileDeviceAccessRuleEffect
+      ALLOW: String
+      DENY: String
+    end
+
+    class NameAvailabilityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?alias: String,
+        ?default_mail_domain: String,
+        ?error_message: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor alias: String?
+      attr_accessor default_mail_domain: String?
+      attr_accessor error_message: String?
+      attr_accessor state: String?
+    end
+
+    class Permission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grantee_id: String,
+        ?grantee_type: String,
+        ?permission_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grantee_id: String?
+      attr_accessor grantee_type: String?
+      attr_accessor permission_values: Array[String]?
+    end
+
+    module PermissionType
+      FULL_ACCESS: String
+      SEND_AS: String
+      SEND_ON_BEHALF: String
+    end
+
+    class PersonalAccessTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?lifetime_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor lifetime_in_days: Integer?
+    end
+
+    module PersonalAccessTokenConfigurationStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class PersonalAccessTokenSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?personal_access_token_id: String,
+        ?user_id: String,
+        ?name: String,
+        ?date_created: Time,
+        ?date_last_used: Time,
+        ?expires_time: Time,
+        ?scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor personal_access_token_id: String?
+      attr_accessor user_id: String?
+      attr_accessor name: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_last_used: Time?
+      attr_accessor expires_time: Time?
+      attr_accessor scopes: Array[String]?
+    end
+
+    class PutAccessControlRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?effect: String,
+        ?description: String,
+        ?ip_ranges: Array[String],
+        ?not_ip_ranges: Array[String],
+        ?actions: Array[String],
+        ?not_actions: Array[String],
+        ?user_ids: Array[String],
+        ?not_user_ids: Array[String],
+        ?organization_id: String,
+        ?impersonation_role_ids: Array[String],
+        ?not_impersonation_role_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor effect: String?
+      attr_accessor description: String?
+      attr_accessor ip_ranges: Array[String]?
+      attr_accessor not_ip_ranges: Array[String]?
+      attr_accessor actions: Array[String]?
+      attr_accessor not_actions: Array[String]?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor not_user_ids: Array[String]?
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_ids: Array[String]?
+      attr_accessor not_impersonation_role_ids: Array[String]?
+    end
+
+    class PutAccessControlRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutEmailMonitoringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?role_arn: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    class PutEmailMonitoringConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutIdentityProviderConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?authentication_mode: String,
+        ?identity_center_configuration: Types::IdentityCenterConfiguration,
+        ?personal_access_token_configuration: Types::PersonalAccessTokenConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor authentication_mode: String?
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
+      attr_accessor personal_access_token_configuration: Types::PersonalAccessTokenConfiguration?
+    end
+
+    class PutIdentityProviderConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutInboundDmarcSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?enforced: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor enforced: bool?
+    end
+
+    class PutInboundDmarcSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutMailboxPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?grantee_id: String,
+        ?permission_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor grantee_id: String?
+      attr_accessor permission_values: Array[String]?
+    end
+
+    class PutMailboxPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutMobileDeviceAccessOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?device_id: String,
+        ?effect: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor device_id: String?
+      attr_accessor effect: String?
+      attr_accessor description: String?
+    end
+
+    class PutMobileDeviceAccessOverrideResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutRetentionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?folder_configurations: Array[Types::FolderConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor folder_configurations: Array[Types::FolderConfiguration]?
+    end
+
+    class PutRetentionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RedactedEwsAvailabilityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ews_endpoint: String,
+        ?ews_username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ews_endpoint: String?
+      attr_accessor ews_username: String?
+    end
+
+    class RegisterMailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?organization_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class RegisterMailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterToWorkMailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor email: String?
+    end
+
+    class RegisterToWorkMailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReservedNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResetPasswordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor password: String?
+    end
+
+    class ResetPasswordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?email: String,
+        ?name: String,
+        ?type: String,
+        ?state: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+      attr_accessor description: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      ROOM: String
+      EQUIPMENT: String
+    end
+
+    module RetentionAction
+      NONE: String
+      DELETE: String
+      PERMANENTLY_DELETE: String
+    end
+
+    class StartMailboxExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?organization_id: String,
+        ?entity_id: String,
+        ?description: String,
+        ?role_arn: String,
+        ?kms_key_arn: String,
+        ?s3_bucket_name: String,
+        ?s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_prefix: String?
+    end
+
+    class StartMailboxExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TestAvailabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+        ?ews_provider: Types::EwsAvailabilityProvider,
+        ?lambda_provider: Types::LambdaAvailabilityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider?
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider?
+    end
+
+    class TestAvailabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?test_passed: bool,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor test_passed: bool?
+      attr_accessor failure_reason: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAvailabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+        ?ews_provider: Types::EwsAvailabilityProvider,
+        ?lambda_provider: Types::LambdaAvailabilityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider?
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider?
+    end
+
+    class UpdateAvailabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDefaultMailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor domain_name: String?
+    end
+
+    class UpdateDefaultMailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?group_id: String,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor group_id: String?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class UpdateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateImpersonationRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?impersonation_role_id: String,
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?rules: Array[Types::ImpersonationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor impersonation_role_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::ImpersonationRule]?
+    end
+
+    class UpdateImpersonationRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMailboxQuotaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?mailbox_quota: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor mailbox_quota: Integer?
+    end
+
+    class UpdateMailboxQuotaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMobileDeviceAccessRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?mobile_device_access_rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?effect: String,
+        ?device_types: Array[String],
+        ?not_device_types: Array[String],
+        ?device_models: Array[String],
+        ?not_device_models: Array[String],
+        ?device_operating_systems: Array[String],
+        ?not_device_operating_systems: Array[String],
+        ?device_user_agents: Array[String],
+        ?not_device_user_agents: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor mobile_device_access_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor effect: String?
+      attr_accessor device_types: Array[String]?
+      attr_accessor not_device_types: Array[String]?
+      attr_accessor device_models: Array[String]?
+      attr_accessor not_device_models: Array[String]?
+      attr_accessor device_operating_systems: Array[String]?
+      attr_accessor not_device_operating_systems: Array[String]?
+      attr_accessor device_user_agents: Array[String]?
+      attr_accessor not_device_user_agents: Array[String]?
+    end
+
+    class UpdateMobileDeviceAccessRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePrimaryEmailAddressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?entity_id: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor entity_id: String?
+      attr_accessor email: String?
+    end
+
+    class UpdatePrimaryEmailAddressResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?resource_id: String,
+        ?name: String,
+        ?booking_options: Types::BookingOptions,
+        ?description: String,
+        ?type: String,
+        ?hidden_from_global_address_list: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor name: String?
+      attr_accessor booking_options: Types::BookingOptions?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor hidden_from_global_address_list: bool?
+    end
+
+    class UpdateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?user_id: String,
+        ?role: String,
+        ?display_name: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?hidden_from_global_address_list: bool,
+        ?initials: String,
+        ?telephone: String,
+        ?street: String,
+        ?job_title: String,
+        ?city: String,
+        ?company: String,
+        ?zip_code: String,
+        ?department: String,
+        ?country: String,
+        ?office: String,
+        ?identity_provider_user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor user_id: String?
+      attr_accessor role: String?
+      attr_accessor display_name: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor hidden_from_global_address_list: bool?
+      attr_accessor initials: String?
+      attr_accessor telephone: String?
+      attr_accessor street: String?
+      attr_accessor job_title: String?
+      attr_accessor city: String?
+      attr_accessor company: String?
+      attr_accessor zip_code: String?
+      attr_accessor department: String?
+      attr_accessor country: String?
+      attr_accessor office: String?
+      attr_accessor identity_provider_user_id: String?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?email: String,
+        ?name: String,
+        ?display_name: String,
+        ?state: String,
+        ?user_role: String,
+        ?enabled_date: Time,
+        ?disabled_date: Time,
+        ?identity_provider_user_id: String,
+        ?identity_provider_identity_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor state: String?
+      attr_accessor user_role: String?
+      attr_accessor enabled_date: Time?
+      attr_accessor disabled_date: Time?
+      attr_accessor identity_provider_user_id: String?
+      attr_accessor identity_provider_identity_store_id: String?
+    end
+
+    module UserRole
+      USER: String
+      RESOURCE: String
+      SYSTEM_USER: String
+      REMOTE_USER: String
+    end
+  end
+end

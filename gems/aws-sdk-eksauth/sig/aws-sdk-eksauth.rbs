@@ -1,0 +1,5 @@
+  module Aws
+    module EKSAuth
+      VERSION: String
+    end
+  end

@@ -1,0 +1,1234 @@
+module Aws::MediaConnect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MediaConnect::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddBridgeOutputsResponse
+      include Smithy::Client::_Response[Types::AddBridgeOutputsResponse]
+      def bridge_arn: () -> String?
+      def outputs: () -> Array[Types::BridgeOutput]?
+    end
+    def add_bridge_outputs: (
+      ?bridge_arn: String,
+      ?outputs: Array[
+        {
+          network_output: {
+            ip_address: String,
+            name: untyped,
+            network_name: untyped,
+            port: Integer,
+            protocol: String,
+            ttl: untyped
+          }
+        }
+      ]
+    ) -> _AddBridgeOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddBridgeOutputsResponse
+
+    interface _AddBridgeSourcesResponse
+      include Smithy::Client::_Response[Types::AddBridgeSourcesResponse]
+      def bridge_arn: () -> String?
+      def sources: () -> Array[Types::BridgeSource]?
+    end
+    def add_bridge_sources: (
+      ?bridge_arn: String,
+      ?sources: Array[
+        {
+          flow_source: {
+            flow_arn: String,
+            flow_vpc_interface_attachment: {
+              vpc_interface_name: untyped
+            },
+            name: untyped
+          },
+          network_source: {
+            multicast_ip: untyped,
+            multicast_source_settings: {
+              multicast_source_ip: untyped
+            },
+            name: untyped,
+            network_name: untyped,
+            port: Integer,
+            protocol: String
+          }
+        }
+      ]
+    ) -> _AddBridgeSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddBridgeSourcesResponse
+
+    interface _AddFlowMediaStreamsResponse
+      include Smithy::Client::_Response[Types::AddFlowMediaStreamsResponse]
+      def flow_arn: () -> String?
+      def media_streams: () -> Array[Types::MediaStream]?
+    end
+    def add_flow_media_streams: (
+      ?flow_arn: String,
+      ?media_streams: Array[
+        {
+          attributes: {
+            fmtp: {
+              channel_order: String,
+              colorimetry: String,
+              exact_framerate: untyped,
+              par: untyped,
+              range: String,
+              scan_mode: String,
+              tcs: String
+            },
+            lang: untyped
+          },
+          clock_rate: Integer,
+          description: untyped,
+          media_stream_id: untyped,
+          media_stream_name: untyped,
+          media_stream_type: String,
+          video_format: untyped
+        }
+      ]
+    ) -> _AddFlowMediaStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowMediaStreamsResponse
+
+    interface _AddFlowOutputsResponse
+      include Smithy::Client::_Response[Types::AddFlowOutputsResponse]
+      def flow_arn: () -> String?
+      def outputs: () -> Array[Types::Output]?
+    end
+    def add_flow_outputs: (
+      ?flow_arn: String,
+      ?outputs: Array[
+        {
+          cidr_allow_list: Array[String],
+          description: String,
+          destination: untyped,
+          encryption: {
+            algorithm: String,
+            constant_initialization_vector: untyped,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          max_latency: Integer,
+          media_stream_output_configurations: Array[
+            {
+              destination_configurations: Array[
+                {
+                  destination_ip: untyped,
+                  destination_port: untyped,
+                  interface: {
+                    name: untyped
+                  }
+                }
+              ],
+              encoding_name: String,
+              encoding_parameters: {
+                compression_factor: Float,
+                encoder_profile: String
+              },
+              media_stream_name: untyped
+            }
+          ],
+          min_latency: untyped,
+          name: untyped,
+          port: untyped,
+          protocol: String,
+          remote_id: untyped,
+          sender_control_port: untyped,
+          smoothing_latency: untyped,
+          stream_id: untyped,
+          vpc_interface_attachment: {
+            vpc_interface_name: untyped
+          },
+          output_status: String,
+          ndi_speed_hq_quality: untyped,
+          ndi_program_name: untyped
+        }
+      ]
+    ) -> _AddFlowOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowOutputsResponse
+
+    interface _AddFlowSourcesResponse
+      include Smithy::Client::_Response[Types::AddFlowSourcesResponse]
+      def flow_arn: () -> String?
+      def sources: () -> Array[Types::Source]?
+    end
+    def add_flow_sources: (
+      ?flow_arn: String,
+      ?sources: Array[
+        {
+          decryption: {
+            algorithm: String,
+            constant_initialization_vector: String,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          description: untyped,
+          entitlement_arn: untyped,
+          ingest_port: Integer,
+          max_bitrate: untyped,
+          max_latency: untyped,
+          max_sync_buffer: untyped,
+          media_stream_source_configurations: Array[
+            {
+              encoding_name: String,
+              input_configurations: Array[
+                {
+                  input_port: untyped,
+                  interface: {
+                    name: untyped
+                  }
+                }
+              ],
+              media_stream_name: untyped
+            }
+          ],
+          min_latency: untyped,
+          name: untyped,
+          protocol: String,
+          sender_control_port: untyped,
+          sender_ip_address: untyped,
+          source_listener_address: untyped,
+          source_listener_port: untyped,
+          stream_id: untyped,
+          vpc_interface_name: untyped,
+          whitelist_cidr: untyped,
+          gateway_bridge_source: {
+            bridge_arn: untyped,
+            vpc_interface_attachment: {
+              vpc_interface_name: untyped
+            }
+          }
+        }
+      ]
+    ) -> _AddFlowSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowSourcesResponse
+
+    interface _AddFlowVpcInterfacesResponse
+      include Smithy::Client::_Response[Types::AddFlowVpcInterfacesResponse]
+      def flow_arn: () -> String?
+      def vpc_interfaces: () -> Array[Types::VpcInterface]?
+    end
+    def add_flow_vpc_interfaces: (
+      ?flow_arn: String,
+      ?vpc_interfaces: Array[
+        {
+          name: String,
+          network_interface_type: String,
+          role_arn: untyped,
+          security_group_ids: Array[String],
+          subnet_id: untyped
+        }
+      ]
+    ) -> _AddFlowVpcInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowVpcInterfacesResponse
+
+    interface _CreateBridgeResponse
+      include Smithy::Client::_Response[Types::CreateBridgeResponse]
+      def bridge: () -> Types::Bridge?
+    end
+    def create_bridge: (
+      ?egress_gateway_bridge: {
+        max_bitrate: Integer
+      },
+      ?ingress_gateway_bridge: {
+        max_bitrate: Integer,
+        max_outputs: untyped
+      },
+      ?name: String,
+      ?outputs: Array[
+        {
+          network_output: {
+            ip_address: String,
+            name: untyped,
+            network_name: untyped,
+            port: Integer,
+            protocol: String,
+            ttl: untyped
+          }
+        }
+      ],
+      ?placement_arn: String,
+      ?source_failover_config: {
+        failover_mode: String,
+        recovery_window: Integer,
+        source_priority: {
+          primary_source: String
+        },
+        state: String
+      },
+      ?sources: Array[
+        {
+          flow_source: {
+            flow_arn: String,
+            flow_vpc_interface_attachment: {
+              vpc_interface_name: untyped
+            },
+            name: untyped
+          },
+          network_source: {
+            multicast_ip: untyped,
+            multicast_source_settings: {
+              multicast_source_ip: untyped
+            },
+            name: untyped,
+            network_name: untyped,
+            port: Integer,
+            protocol: String
+          }
+        }
+      ]
+    ) -> _CreateBridgeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBridgeResponse
+
+    interface _CreateFlowResponse
+      include Smithy::Client::_Response[Types::CreateFlowResponse]
+      def flow: () -> Types::Flow?
+    end
+    def create_flow: (
+      ?availability_zone: String,
+      ?entitlements: Array[
+        {
+          data_transfer_subscriber_fee_percent: Integer,
+          description: String,
+          encryption: {
+            algorithm: String,
+            constant_initialization_vector: untyped,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          entitlement_status: String,
+          name: untyped,
+          subscribers: Array[String]
+        }
+      ],
+      ?media_streams: Array[
+        {
+          attributes: {
+            fmtp: {
+              channel_order: String,
+              colorimetry: String,
+              exact_framerate: untyped,
+              par: untyped,
+              range: String,
+              scan_mode: String,
+              tcs: String
+            },
+            lang: untyped
+          },
+          clock_rate: Integer,
+          description: untyped,
+          media_stream_id: untyped,
+          media_stream_name: untyped,
+          media_stream_type: String,
+          video_format: untyped
+        }
+      ],
+      ?name: String,
+      ?outputs: Array[
+        {
+          cidr_allow_list: Array[String],
+          description: String,
+          destination: untyped,
+          encryption: {
+            algorithm: String,
+            constant_initialization_vector: untyped,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          max_latency: Integer,
+          media_stream_output_configurations: Array[
+            {
+              destination_configurations: Array[
+                {
+                  destination_ip: untyped,
+                  destination_port: untyped,
+                  interface: {
+                    name: untyped
+                  }
+                }
+              ],
+              encoding_name: String,
+              encoding_parameters: {
+                compression_factor: Float,
+                encoder_profile: String
+              },
+              media_stream_name: untyped
+            }
+          ],
+          min_latency: untyped,
+          name: untyped,
+          port: untyped,
+          protocol: String,
+          remote_id: untyped,
+          sender_control_port: untyped,
+          smoothing_latency: untyped,
+          stream_id: untyped,
+          vpc_interface_attachment: {
+            vpc_interface_name: untyped
+          },
+          output_status: String,
+          ndi_speed_hq_quality: untyped,
+          ndi_program_name: untyped
+        }
+      ],
+      ?source: {
+        decryption: {
+          algorithm: String,
+          constant_initialization_vector: String,
+          device_id: untyped,
+          key_type: String,
+          region: untyped,
+          resource_id: untyped,
+          role_arn: untyped,
+          secret_arn: untyped,
+          url: untyped
+        },
+        description: untyped,
+        entitlement_arn: untyped,
+        ingest_port: Integer,
+        max_bitrate: untyped,
+        max_latency: untyped,
+        max_sync_buffer: untyped,
+        media_stream_source_configurations: Array[
+          {
+            encoding_name: String,
+            input_configurations: Array[
+              {
+                input_port: untyped,
+                interface: {
+                  name: untyped
+                }
+              }
+            ],
+            media_stream_name: untyped
+          }
+        ],
+        min_latency: untyped,
+        name: untyped,
+        protocol: String,
+        sender_control_port: untyped,
+        sender_ip_address: untyped,
+        source_listener_address: untyped,
+        source_listener_port: untyped,
+        stream_id: untyped,
+        vpc_interface_name: untyped,
+        whitelist_cidr: untyped,
+        gateway_bridge_source: {
+          bridge_arn: untyped,
+          vpc_interface_attachment: {
+            vpc_interface_name: untyped
+          }
+        }
+      },
+      ?source_failover_config: {
+        failover_mode: String,
+        recovery_window: Integer,
+        source_priority: {
+          primary_source: String
+        },
+        state: String
+      },
+      ?sources: Array[
+        {
+          decryption: {
+            algorithm: String,
+            constant_initialization_vector: String,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          description: untyped,
+          entitlement_arn: untyped,
+          ingest_port: Integer,
+          max_bitrate: untyped,
+          max_latency: untyped,
+          max_sync_buffer: untyped,
+          media_stream_source_configurations: Array[
+            {
+              encoding_name: String,
+              input_configurations: Array[
+                {
+                  input_port: untyped,
+                  interface: {
+                    name: untyped
+                  }
+                }
+              ],
+              media_stream_name: untyped
+            }
+          ],
+          min_latency: untyped,
+          name: untyped,
+          protocol: String,
+          sender_control_port: untyped,
+          sender_ip_address: untyped,
+          source_listener_address: untyped,
+          source_listener_port: untyped,
+          stream_id: untyped,
+          vpc_interface_name: untyped,
+          whitelist_cidr: untyped,
+          gateway_bridge_source: {
+            bridge_arn: untyped,
+            vpc_interface_attachment: {
+              vpc_interface_name: untyped
+            }
+          }
+        }
+      ],
+      ?vpc_interfaces: Array[
+        {
+          name: String,
+          network_interface_type: String,
+          role_arn: untyped,
+          security_group_ids: Array[String],
+          subnet_id: untyped
+        }
+      ],
+      ?maintenance: {
+        maintenance_day: String,
+        maintenance_start_hour: String
+      },
+      ?source_monitoring_config: {
+        thumbnail_state: String,
+        audio_monitoring_settings: Array[
+          {
+            silent_audio: {
+              state: String,
+              threshold_seconds: Integer
+            }
+          }
+        ],
+        content_quality_analysis_state: String,
+        video_monitoring_settings: Array[
+          {
+            black_frames: {
+              state: untyped,
+              threshold_seconds: untyped
+            },
+            frozen_frames: {
+              state: untyped,
+              threshold_seconds: untyped
+            }
+          }
+        ]
+      },
+      ?flow_size: String,
+      ?ndi_config: {
+        ndi_state: String,
+        machine_name: String,
+        ndi_discovery_servers: Array[
+          {
+            discovery_server_address: untyped,
+            discovery_server_port: Integer,
+            vpc_interface_adapter: untyped
+          }
+        ]
+      }
+    ) -> _CreateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowResponse
+
+    interface _CreateGatewayResponse
+      include Smithy::Client::_Response[Types::CreateGatewayResponse]
+      def gateway: () -> Types::Gateway?
+    end
+    def create_gateway: (
+      ?egress_cidr_blocks: Array[String],
+      ?name: String,
+      ?networks: Array[
+        {
+          cidr_block: String,
+          name: untyped
+        }
+      ]
+    ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _DeleteBridgeResponse
+      include Smithy::Client::_Response[Types::DeleteBridgeResponse]
+      def bridge_arn: () -> String?
+    end
+    def delete_bridge: (
+      ?bridge_arn: String
+    ) -> _DeleteBridgeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBridgeResponse
+
+    interface _DeleteFlowResponse
+      include Smithy::Client::_Response[Types::DeleteFlowResponse]
+      def flow_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_flow: (
+      ?flow_arn: String
+    ) -> _DeleteFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowResponse
+
+    interface _DeleteGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayResponse]
+      def gateway_arn: () -> String?
+    end
+    def delete_gateway: (
+      ?gateway_arn: String
+    ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeregisterGatewayInstanceResponse
+      include Smithy::Client::_Response[Types::DeregisterGatewayInstanceResponse]
+      def gateway_instance_arn: () -> String?
+      def instance_state: () -> String?
+    end
+    def deregister_gateway_instance: (
+      ?force: bool,
+      ?gateway_instance_arn: String
+    ) -> _DeregisterGatewayInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterGatewayInstanceResponse
+
+    interface _DescribeBridgeResponse
+      include Smithy::Client::_Response[Types::DescribeBridgeResponse]
+      def bridge: () -> Types::Bridge?
+    end
+    def describe_bridge: (
+      ?bridge_arn: String
+    ) -> _DescribeBridgeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBridgeResponse
+
+    interface _DescribeFlowResponse
+      include Smithy::Client::_Response[Types::DescribeFlowResponse]
+      def flow: () -> Types::Flow?
+      def messages: () -> Types::Messages?
+    end
+    def describe_flow: (
+      ?flow_arn: String
+    ) -> _DescribeFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowResponse
+
+    interface _DescribeFlowSourceMetadataResponse
+      include Smithy::Client::_Response[Types::DescribeFlowSourceMetadataResponse]
+      def flow_arn: () -> String?
+      def messages: () -> Array[Types::MessageDetail]?
+      def timestamp: () -> Time?
+      def transport_media_info: () -> Types::TransportMediaInfo?
+    end
+    def describe_flow_source_metadata: (
+      ?flow_arn: String
+    ) -> _DescribeFlowSourceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowSourceMetadataResponse
+
+    interface _DescribeFlowSourceThumbnailResponse
+      include Smithy::Client::_Response[Types::DescribeFlowSourceThumbnailResponse]
+      def thumbnail_details: () -> Types::ThumbnailDetails?
+    end
+    def describe_flow_source_thumbnail: (
+      ?flow_arn: String
+    ) -> _DescribeFlowSourceThumbnailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowSourceThumbnailResponse
+
+    interface _DescribeGatewayResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayResponse]
+      def gateway: () -> Types::Gateway?
+    end
+    def describe_gateway: (
+      ?gateway_arn: String
+    ) -> _DescribeGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayResponse
+
+    interface _DescribeGatewayInstanceResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayInstanceResponse]
+      def gateway_instance: () -> Types::GatewayInstance?
+    end
+    def describe_gateway_instance: (
+      ?gateway_instance_arn: String
+    ) -> _DescribeGatewayInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayInstanceResponse
+
+    interface _DescribeOfferingResponse
+      include Smithy::Client::_Response[Types::DescribeOfferingResponse]
+      def offering: () -> Types::Offering?
+    end
+    def describe_offering: (
+      ?offering_arn: String
+    ) -> _DescribeOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOfferingResponse
+
+    interface _DescribeReservationResponse
+      include Smithy::Client::_Response[Types::DescribeReservationResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def describe_reservation: (
+      ?reservation_arn: String
+    ) -> _DescribeReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservationResponse
+
+    interface _GrantFlowEntitlementsResponse
+      include Smithy::Client::_Response[Types::GrantFlowEntitlementsResponse]
+      def entitlements: () -> Array[Types::Entitlement]?
+      def flow_arn: () -> String?
+    end
+    def grant_flow_entitlements: (
+      ?entitlements: Array[
+        {
+          data_transfer_subscriber_fee_percent: Integer,
+          description: String,
+          encryption: {
+            algorithm: String,
+            constant_initialization_vector: untyped,
+            device_id: untyped,
+            key_type: String,
+            region: untyped,
+            resource_id: untyped,
+            role_arn: untyped,
+            secret_arn: untyped,
+            url: untyped
+          },
+          entitlement_status: String,
+          name: untyped,
+          subscribers: Array[String]
+        }
+      ],
+      ?flow_arn: String
+    ) -> _GrantFlowEntitlementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GrantFlowEntitlementsResponse
+
+    interface _ListBridgesResponse
+      include Smithy::Client::_Response[Types::ListBridgesResponse]
+      def bridges: () -> Array[Types::ListedBridge]?
+      def next_token: () -> String?
+    end
+    def list_bridges: (
+      ?filter_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBridgesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBridgesResponse
+
+    interface _ListEntitlementsResponse
+      include Smithy::Client::_Response[Types::ListEntitlementsResponse]
+      def entitlements: () -> Array[Types::ListedEntitlement]?
+      def next_token: () -> String?
+    end
+    def list_entitlements: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEntitlementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitlementsResponse
+
+    interface _ListFlowsResponse
+      include Smithy::Client::_Response[Types::ListFlowsResponse]
+      def flows: () -> Array[Types::ListedFlow]?
+      def next_token: () -> String?
+    end
+    def list_flows: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowsResponse
+
+    interface _ListGatewayInstancesResponse
+      include Smithy::Client::_Response[Types::ListGatewayInstancesResponse]
+      def instances: () -> Array[Types::ListedGatewayInstance]?
+      def next_token: () -> String?
+    end
+    def list_gateway_instances: (
+      ?filter_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewayInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewayInstancesResponse
+
+    interface _ListGatewaysResponse
+      include Smithy::Client::_Response[Types::ListGatewaysResponse]
+      def gateways: () -> Array[Types::ListedGateway]?
+      def next_token: () -> String?
+    end
+    def list_gateways: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
+
+    interface _ListOfferingsResponse
+      include Smithy::Client::_Response[Types::ListOfferingsResponse]
+      def next_token: () -> String?
+      def offerings: () -> Array[Types::Offering]?
+    end
+    def list_offerings: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOfferingsResponse
+
+    interface _ListReservationsResponse
+      include Smithy::Client::_Response[Types::ListReservationsResponse]
+      def next_token: () -> String?
+      def reservations: () -> Array[Types::Reservation]?
+    end
+    def list_reservations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReservationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PurchaseOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseOfferingResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def purchase_offering: (
+      ?offering_arn: String,
+      ?reservation_name: String,
+      ?start: String
+    ) -> _PurchaseOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseOfferingResponse
+
+    interface _RemoveBridgeOutputResponse
+      include Smithy::Client::_Response[Types::RemoveBridgeOutputResponse]
+      def bridge_arn: () -> String?
+      def output_name: () -> String?
+    end
+    def remove_bridge_output: (
+      ?bridge_arn: String,
+      ?output_name: String
+    ) -> _RemoveBridgeOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveBridgeOutputResponse
+
+    interface _RemoveBridgeSourceResponse
+      include Smithy::Client::_Response[Types::RemoveBridgeSourceResponse]
+      def bridge_arn: () -> String?
+      def source_name: () -> String?
+    end
+    def remove_bridge_source: (
+      ?bridge_arn: String,
+      ?source_name: String
+    ) -> _RemoveBridgeSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveBridgeSourceResponse
+
+    interface _RemoveFlowMediaStreamResponse
+      include Smithy::Client::_Response[Types::RemoveFlowMediaStreamResponse]
+      def flow_arn: () -> String?
+      def media_stream_name: () -> String?
+    end
+    def remove_flow_media_stream: (
+      ?flow_arn: String,
+      ?media_stream_name: String
+    ) -> _RemoveFlowMediaStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFlowMediaStreamResponse
+
+    interface _RemoveFlowOutputResponse
+      include Smithy::Client::_Response[Types::RemoveFlowOutputResponse]
+      def flow_arn: () -> String?
+      def output_arn: () -> String?
+    end
+    def remove_flow_output: (
+      ?flow_arn: String,
+      ?output_arn: String
+    ) -> _RemoveFlowOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFlowOutputResponse
+
+    interface _RemoveFlowSourceResponse
+      include Smithy::Client::_Response[Types::RemoveFlowSourceResponse]
+      def flow_arn: () -> String?
+      def source_arn: () -> String?
+    end
+    def remove_flow_source: (
+      ?flow_arn: String,
+      ?source_arn: String
+    ) -> _RemoveFlowSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFlowSourceResponse
+
+    interface _RemoveFlowVpcInterfaceResponse
+      include Smithy::Client::_Response[Types::RemoveFlowVpcInterfaceResponse]
+      def flow_arn: () -> String?
+      def non_deleted_network_interface_ids: () -> Array[String]?
+      def vpc_interface_name: () -> String?
+    end
+    def remove_flow_vpc_interface: (
+      ?flow_arn: String,
+      ?vpc_interface_name: String
+    ) -> _RemoveFlowVpcInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFlowVpcInterfaceResponse
+
+    interface _RevokeFlowEntitlementResponse
+      include Smithy::Client::_Response[Types::RevokeFlowEntitlementResponse]
+      def entitlement_arn: () -> String?
+      def flow_arn: () -> String?
+    end
+    def revoke_flow_entitlement: (
+      ?entitlement_arn: String,
+      ?flow_arn: String
+    ) -> _RevokeFlowEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeFlowEntitlementResponse
+
+    interface _StartFlowResponse
+      include Smithy::Client::_Response[Types::StartFlowResponse]
+      def flow_arn: () -> String?
+      def status: () -> String?
+    end
+    def start_flow: (
+      ?flow_arn: String
+    ) -> _StartFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlowResponse
+
+    interface _StopFlowResponse
+      include Smithy::Client::_Response[Types::StopFlowResponse]
+      def flow_arn: () -> String?
+      def status: () -> String?
+    end
+    def stop_flow: (
+      ?flow_arn: String
+    ) -> _StopFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFlowResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBridgeResponse
+      include Smithy::Client::_Response[Types::UpdateBridgeResponse]
+      def bridge: () -> Types::Bridge?
+    end
+    def update_bridge: (
+      ?bridge_arn: String,
+      ?egress_gateway_bridge: {
+        max_bitrate: Integer
+      },
+      ?ingress_gateway_bridge: {
+        max_bitrate: Integer,
+        max_outputs: untyped
+      },
+      ?source_failover_config: {
+        failover_mode: String,
+        recovery_window: Integer,
+        source_priority: {
+          primary_source: String
+        },
+        state: String
+      }
+    ) -> _UpdateBridgeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBridgeResponse
+
+    interface _UpdateBridgeOutputResponse
+      include Smithy::Client::_Response[Types::UpdateBridgeOutputResponse]
+      def bridge_arn: () -> String?
+      def output: () -> Types::BridgeOutput?
+    end
+    def update_bridge_output: (
+      ?bridge_arn: String,
+      ?network_output: {
+        ip_address: String,
+        network_name: untyped,
+        port: Integer,
+        protocol: String,
+        ttl: untyped
+      },
+      ?output_name: String
+    ) -> _UpdateBridgeOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBridgeOutputResponse
+
+    interface _UpdateBridgeSourceResponse
+      include Smithy::Client::_Response[Types::UpdateBridgeSourceResponse]
+      def bridge_arn: () -> String?
+      def source: () -> Types::BridgeSource?
+    end
+    def update_bridge_source: (
+      ?bridge_arn: String,
+      ?flow_source: {
+        flow_arn: String,
+        flow_vpc_interface_attachment: {
+          vpc_interface_name: untyped
+        }
+      },
+      ?network_source: {
+        multicast_ip: String,
+        multicast_source_settings: {
+          multicast_source_ip: untyped
+        },
+        network_name: untyped,
+        port: Integer,
+        protocol: String
+      },
+      ?source_name: String
+    ) -> _UpdateBridgeSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBridgeSourceResponse
+
+    interface _UpdateBridgeStateResponse
+      include Smithy::Client::_Response[Types::UpdateBridgeStateResponse]
+      def bridge_arn: () -> String?
+      def desired_state: () -> String?
+    end
+    def update_bridge_state: (
+      ?bridge_arn: String,
+      ?desired_state: String
+    ) -> _UpdateBridgeStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBridgeStateResponse
+
+    interface _UpdateFlowResponse
+      include Smithy::Client::_Response[Types::UpdateFlowResponse]
+      def flow: () -> Types::Flow?
+    end
+    def update_flow: (
+      ?flow_arn: String,
+      ?source_failover_config: {
+        failover_mode: String,
+        recovery_window: Integer,
+        source_priority: {
+          primary_source: String
+        },
+        state: String
+      },
+      ?maintenance: {
+        maintenance_day: String,
+        maintenance_scheduled_date: String,
+        maintenance_start_hour: untyped
+      },
+      ?source_monitoring_config: {
+        thumbnail_state: String,
+        audio_monitoring_settings: Array[
+          {
+            silent_audio: {
+              state: String,
+              threshold_seconds: Integer
+            }
+          }
+        ],
+        content_quality_analysis_state: String,
+        video_monitoring_settings: Array[
+          {
+            black_frames: {
+              state: untyped,
+              threshold_seconds: untyped
+            },
+            frozen_frames: {
+              state: untyped,
+              threshold_seconds: untyped
+            }
+          }
+        ]
+      },
+      ?ndi_config: {
+        ndi_state: String,
+        machine_name: String,
+        ndi_discovery_servers: Array[
+          {
+            discovery_server_address: untyped,
+            discovery_server_port: Integer,
+            vpc_interface_adapter: untyped
+          }
+        ]
+      }
+    ) -> _UpdateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowResponse
+
+    interface _UpdateFlowEntitlementResponse
+      include Smithy::Client::_Response[Types::UpdateFlowEntitlementResponse]
+      def entitlement: () -> Types::Entitlement?
+      def flow_arn: () -> String?
+    end
+    def update_flow_entitlement: (
+      ?description: String,
+      ?encryption: {
+        algorithm: String,
+        constant_initialization_vector: String,
+        device_id: untyped,
+        key_type: String,
+        region: untyped,
+        resource_id: untyped,
+        role_arn: untyped,
+        secret_arn: untyped,
+        url: untyped
+      },
+      ?entitlement_arn: String,
+      ?entitlement_status: String,
+      ?flow_arn: String,
+      ?subscribers: Array[String]
+    ) -> _UpdateFlowEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowEntitlementResponse
+
+    interface _UpdateFlowMediaStreamResponse
+      include Smithy::Client::_Response[Types::UpdateFlowMediaStreamResponse]
+      def flow_arn: () -> String?
+      def media_stream: () -> Types::MediaStream?
+    end
+    def update_flow_media_stream: (
+      ?attributes: {
+        fmtp: {
+          channel_order: String,
+          colorimetry: String,
+          exact_framerate: untyped,
+          par: untyped,
+          range: String,
+          scan_mode: String,
+          tcs: String
+        },
+        lang: untyped
+      },
+      ?clock_rate: Integer,
+      ?description: String,
+      ?flow_arn: String,
+      ?media_stream_name: String,
+      ?media_stream_type: String,
+      ?video_format: String
+    ) -> _UpdateFlowMediaStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowMediaStreamResponse
+
+    interface _UpdateFlowOutputResponse
+      include Smithy::Client::_Response[Types::UpdateFlowOutputResponse]
+      def flow_arn: () -> String?
+      def output: () -> Types::Output?
+    end
+    def update_flow_output: (
+      ?cidr_allow_list: Array[String],
+      ?description: String,
+      ?destination: String,
+      ?encryption: {
+        algorithm: String,
+        constant_initialization_vector: String,
+        device_id: untyped,
+        key_type: String,
+        region: untyped,
+        resource_id: untyped,
+        role_arn: untyped,
+        secret_arn: untyped,
+        url: untyped
+      },
+      ?flow_arn: String,
+      ?max_latency: Integer,
+      ?media_stream_output_configurations: Array[
+        {
+          destination_configurations: Array[
+            {
+              destination_ip: String,
+              destination_port: Integer,
+              interface: {
+                name: untyped
+              }
+            }
+          ],
+          encoding_name: String,
+          encoding_parameters: {
+            compression_factor: Float,
+            encoder_profile: String
+          },
+          media_stream_name: untyped
+        }
+      ],
+      ?min_latency: Integer,
+      ?output_arn: String,
+      ?port: Integer,
+      ?protocol: String,
+      ?remote_id: String,
+      ?sender_control_port: Integer,
+      ?sender_ip_address: String,
+      ?smoothing_latency: Integer,
+      ?stream_id: String,
+      ?vpc_interface_attachment: {
+        vpc_interface_name: String
+      },
+      ?output_status: String,
+      ?ndi_program_name: String,
+      ?ndi_speed_hq_quality: Integer
+    ) -> _UpdateFlowOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowOutputResponse
+
+    interface _UpdateFlowSourceResponse
+      include Smithy::Client::_Response[Types::UpdateFlowSourceResponse]
+      def flow_arn: () -> String?
+      def source: () -> Types::Source?
+    end
+    def update_flow_source: (
+      ?decryption: {
+        algorithm: String,
+        constant_initialization_vector: String,
+        device_id: untyped,
+        key_type: String,
+        region: untyped,
+        resource_id: untyped,
+        role_arn: untyped,
+        secret_arn: untyped,
+        url: untyped
+      },
+      ?description: String,
+      ?entitlement_arn: String,
+      ?flow_arn: String,
+      ?ingest_port: Integer,
+      ?max_bitrate: Integer,
+      ?max_latency: Integer,
+      ?max_sync_buffer: Integer,
+      ?media_stream_source_configurations: Array[
+        {
+          encoding_name: String,
+          input_configurations: Array[
+            {
+              input_port: Integer,
+              interface: {
+                name: String
+              }
+            }
+          ],
+          media_stream_name: untyped
+        }
+      ],
+      ?min_latency: Integer,
+      ?protocol: String,
+      ?sender_control_port: Integer,
+      ?sender_ip_address: String,
+      ?source_arn: String,
+      ?source_listener_address: String,
+      ?source_listener_port: Integer,
+      ?stream_id: String,
+      ?vpc_interface_name: String,
+      ?whitelist_cidr: String,
+      ?gateway_bridge_source: {
+        bridge_arn: String,
+        vpc_interface_attachment: {
+          vpc_interface_name: untyped
+        }
+      }
+    ) -> _UpdateFlowSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowSourceResponse
+
+    interface _UpdateGatewayInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayInstanceResponse]
+      def bridge_placement: () -> String?
+      def gateway_instance_arn: () -> String?
+    end
+    def update_gateway_instance: (
+      ?bridge_placement: String,
+      ?gateway_instance_arn: String
+    ) -> _UpdateGatewayInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayInstanceResponse
+  end
+end

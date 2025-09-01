@@ -1,0 +1,66 @@
+module Aws::KendraRanking
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AmazonResourceName: StringShape
+    BodyTokensList: ListShape
+    CapacityUnitsConfiguration: StructureShape
+    ClientTokenName: StringShape
+    ConflictException: StructureShape
+    CreateRescoreExecutionPlanRequest: StructureShape
+    CreateRescoreExecutionPlanResponse: StructureShape
+    DeleteRescoreExecutionPlanRequest: StructureShape
+    DescribeRescoreExecutionPlanRequest: StructureShape
+    DescribeRescoreExecutionPlanResponse: StructureShape
+    Description: StringShape
+    Document: StructureShape
+    DocumentBody: StringShape
+    DocumentId: StringShape
+    DocumentList: ListShape
+    DocumentTitle: StringShape
+    ErrorMessage: StringShape
+    Float: FloatShape
+    GroupId: StringShape
+    InternalServerException: StructureShape
+    ListRescoreExecutionPlansRequest: StructureShape
+    ListRescoreExecutionPlansResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    MaxResultsIntegerForListRescoreExecutionPlansRequest: IntegerShape
+    NextToken: StringShape
+    RescoreCapacityUnit: IntegerShape
+    RescoreExecutionPlanArn: StringShape
+    RescoreExecutionPlanId: StringShape
+    RescoreExecutionPlanName: StringShape
+    RescoreExecutionPlanStatus: EnumShape
+    RescoreExecutionPlanSummary: StructureShape
+    RescoreExecutionPlanSummaryList: ListShape
+    RescoreId: StringShape
+    RescoreRequest: StructureShape
+    RescoreResult: StructureShape
+    RescoreResultItem: StructureShape
+    RescoreResultItemList: ListShape
+    ResourceNotFoundException: StructureShape
+    ResourceUnavailableException: StructureShape
+    SearchQuery: StringShape
+    ServiceQuotaExceededException: StructureShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: TimestampShape
+    TitleTokensList: ListShape
+    Tokens: StringShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateRescoreExecutionPlanRequest: StructureShape
+    ValidationException: StructureShape
+
+    AWSKendraRerankingFrontendService: ServiceShape
+  end
+end

@@ -1,0 +1,2399 @@
+module Aws::Transcribe
+  module Types
+
+    class AbsoluteTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Integer,
+        ?end_time: Integer,
+        ?first: Integer,
+        ?last: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Integer?
+      attr_accessor end_time: Integer?
+      attr_accessor first: Integer?
+      attr_accessor last: Integer?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BaseModelName
+      NARROW_BAND: String
+      WIDE_BAND: String
+    end
+
+    module CLMLanguageCode
+      EN_US: String
+      HI_IN: String
+      ES_US: String
+      EN_GB: String
+      EN_AU: String
+      DE_DE: String
+      JA_JP: String
+    end
+
+    module CallAnalyticsFeature
+      GENERATIVE_SUMMARIZATION: String
+    end
+
+    class CallAnalyticsJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job_name: String,
+        ?call_analytics_job_status: String,
+        ?call_analytics_job_details: Types::CallAnalyticsJobDetails,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_format: String,
+        ?media: Types::Media,
+        ?transcript: Types::Transcript,
+        ?start_time: Time,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?failure_reason: String,
+        ?data_access_role_arn: String,
+        ?identified_language_score: Float,
+        ?settings: Types::CallAnalyticsJobSettings,
+        ?channel_definitions: Array[Types::ChannelDefinition],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job_name: String?
+      attr_accessor call_analytics_job_status: String?
+      attr_accessor call_analytics_job_details: Types::CallAnalyticsJobDetails?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_format: String?
+      attr_accessor media: Types::Media?
+      attr_accessor transcript: Types::Transcript?
+      attr_accessor start_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor identified_language_score: Float?
+      attr_accessor settings: Types::CallAnalyticsJobSettings?
+      attr_accessor channel_definitions: Array[Types::ChannelDefinition]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CallAnalyticsJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skipped: Array[Types::CallAnalyticsSkippedFeature],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skipped: Array[Types::CallAnalyticsSkippedFeature]?
+    end
+
+    class CallAnalyticsJobSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?language_model_name: String,
+        ?content_redaction: Types::ContentRedaction,
+        ?language_options: Array[String],
+        ?language_id_settings: Hash[String, Types::LanguageIdSettings],
+        ?summarization: Types::Summarization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor language_model_name: String?
+      attr_accessor content_redaction: Types::ContentRedaction?
+      attr_accessor language_options: Array[String]?
+      attr_accessor language_id_settings: Hash[String, Types::LanguageIdSettings]?
+      attr_accessor summarization: Types::Summarization?
+    end
+
+    module CallAnalyticsJobStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class CallAnalyticsJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job_name: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?language_code: String,
+        ?call_analytics_job_status: String,
+        ?call_analytics_job_details: Types::CallAnalyticsJobDetails,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor language_code: String?
+      attr_accessor call_analytics_job_status: String?
+      attr_accessor call_analytics_job_details: Types::CallAnalyticsJobDetails?
+      attr_accessor failure_reason: String?
+    end
+
+    class CallAnalyticsSkippedFeature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature: String,
+        ?reason_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature: String?
+      attr_accessor reason_code: String?
+      attr_accessor message: String?
+    end
+
+    module CallAnalyticsSkippedReasonCode
+      INSUFFICIENT_CONVERSATION_CONTENT: String
+      FAILED_SAFETY_GUIDELINES: String
+    end
+
+    class CategoryProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_name: String,
+        ?rules: Array[Types::Rule],
+        ?create_time: Time,
+        ?last_update_time: Time,
+        ?tags: Array[Types::Tag],
+        ?input_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_name: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor create_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor input_type: String?
+    end
+
+    class ChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class ClinicalNoteGenerationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note_template: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContentRedaction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redaction_type: String,
+        ?redaction_output: String,
+        ?pii_entity_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redaction_type: String?
+      attr_accessor redaction_output: String?
+      attr_accessor pii_entity_types: Array[String]?
+    end
+
+    class CreateCallAnalyticsCategoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_name: String,
+        ?rules: Array[Types::Rule],
+        ?tags: Array[Types::Tag],
+        ?input_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_name: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor input_type: String?
+    end
+
+    class CreateCallAnalyticsCategoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_properties: Types::CategoryProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_properties: Types::CategoryProperties?
+    end
+
+    class CreateLanguageModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?base_model_name: String,
+        ?model_name: String,
+        ?input_data_config: Types::InputDataConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor base_model_name: String?
+      attr_accessor model_name: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLanguageModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?base_model_name: String,
+        ?model_name: String,
+        ?input_data_config: Types::InputDataConfig,
+        ?model_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor base_model_name: String?
+      attr_accessor model_name: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor model_status: String?
+    end
+
+    class CreateMedicalVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_file_uri: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_file_uri: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMedicalVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_state: String,
+        ?last_modified_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_state: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class CreateVocabularyFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?language_code: String,
+        ?words: Array[String],
+        ?vocabulary_filter_file_uri: String,
+        ?tags: Array[Types::Tag],
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_code: String?
+      attr_accessor words: Array[String]?
+      attr_accessor vocabulary_filter_file_uri: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    class CreateVocabularyFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class CreateVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?phrases: Array[String],
+        ?vocabulary_file_uri: String,
+        ?tags: Array[Types::Tag],
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor phrases: Array[String]?
+      attr_accessor vocabulary_file_uri: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    class CreateVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_state: String,
+        ?last_modified_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_state: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class DeleteCallAnalyticsCategoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_name: String?
+    end
+
+    class DeleteCallAnalyticsCategoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCallAnalyticsJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job_name: String?
+    end
+
+    class DeleteCallAnalyticsJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLanguageModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DeleteMedicalScribeJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job_name: String?
+    end
+
+    class DeleteMedicalTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job_name: String?
+    end
+
+    class DeleteMedicalVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+    end
+
+    class DeleteTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job_name: String?
+    end
+
+    class DeleteVocabularyFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+    end
+
+    class DeleteVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+    end
+
+    class DescribeLanguageModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+    end
+
+    class DescribeLanguageModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_model: Types::LanguageModel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_model: Types::LanguageModel?
+    end
+
+    class GetCallAnalyticsCategoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_name: String?
+    end
+
+    class GetCallAnalyticsCategoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_properties: Types::CategoryProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_properties: Types::CategoryProperties?
+    end
+
+    class GetCallAnalyticsJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job_name: String?
+    end
+
+    class GetCallAnalyticsJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job: Types::CallAnalyticsJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job: Types::CallAnalyticsJob?
+    end
+
+    class GetMedicalScribeJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job_name: String?
+    end
+
+    class GetMedicalScribeJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job: Types::MedicalScribeJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job: Types::MedicalScribeJob?
+    end
+
+    class GetMedicalTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job_name: String?
+    end
+
+    class GetMedicalTranscriptionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job: Types::MedicalTranscriptionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job: Types::MedicalTranscriptionJob?
+    end
+
+    class GetMedicalVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+    end
+
+    class GetMedicalVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_state: String,
+        ?last_modified_time: Time,
+        ?failure_reason: String,
+        ?download_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_state: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor download_uri: String?
+    end
+
+    class GetTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job_name: String?
+    end
+
+    class GetTranscriptionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job: Types::TranscriptionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job: Types::TranscriptionJob?
+    end
+
+    class GetVocabularyFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+    end
+
+    class GetVocabularyFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+        ?download_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor download_uri: String?
+    end
+
+    class GetVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+    end
+
+    class GetVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_state: String,
+        ?last_modified_time: Time,
+        ?failure_reason: String,
+        ?download_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_state: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor download_uri: String?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?tuning_data_s3_uri: String,
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor tuning_data_s3_uri: String?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    module InputType
+      REAL_TIME: String
+      POST_CALL: String
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InterruptionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threshold: Integer,
+        ?participant_role: String,
+        ?absolute_time_range: Types::AbsoluteTimeRange,
+        ?relative_time_range: Types::RelativeTimeRange,
+        ?negate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threshold: Integer?
+      attr_accessor participant_role: String?
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange?
+      attr_accessor relative_time_range: Types::RelativeTimeRange?
+      attr_accessor negate: bool?
+    end
+
+    class JobExecutionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_deferred_execution: bool,
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_deferred_execution: bool?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    module LanguageCode
+      AF_ZA: String
+      AR_AE: String
+      AR_SA: String
+      DA_DK: String
+      DE_CH: String
+      DE_DE: String
+      EN_AB: String
+      EN_AU: String
+      EN_GB: String
+      EN_IE: String
+      EN_IN: String
+      EN_US: String
+      EN_WL: String
+      ES_ES: String
+      ES_US: String
+      FA_IR: String
+      FR_CA: String
+      FR_FR: String
+      HE_IL: String
+      HI_IN: String
+      ID_ID: String
+      IT_IT: String
+      JA_JP: String
+      KO_KR: String
+      MS_MY: String
+      NL_NL: String
+      PT_BR: String
+      PT_PT: String
+      RU_RU: String
+      TA_IN: String
+      TE_IN: String
+      TR_TR: String
+      ZH_CN: String
+      ZH_TW: String
+      TH_TH: String
+      EN_ZA: String
+      EN_NZ: String
+      VI_VN: String
+      SV_SE: String
+      AB_GE: String
+      AST_ES: String
+      AZ_AZ: String
+      BA_RU: String
+      BE_BY: String
+      BG_BG: String
+      BN_IN: String
+      BS_BA: String
+      CA_ES: String
+      CKB_IQ: String
+      CKB_IR: String
+      CS_CZ: String
+      CY_WL: String
+      EL_GR: String
+      ET_EE: String
+      ET_ET: String
+      EU_ES: String
+      FI_FI: String
+      GL_ES: String
+      GU_IN: String
+      HA_NG: String
+      HR_HR: String
+      HU_HU: String
+      HY_AM: String
+      IS_IS: String
+      KA_GE: String
+      KAB_DZ: String
+      KK_KZ: String
+      KN_IN: String
+      KY_KG: String
+      LG_IN: String
+      LT_LT: String
+      LV_LV: String
+      MHR_RU: String
+      MI_NZ: String
+      MK_MK: String
+      ML_IN: String
+      MN_MN: String
+      MR_IN: String
+      MT_MT: String
+      NO_NO: String
+      OR_IN: String
+      PA_IN: String
+      PL_PL: String
+      PS_AF: String
+      RO_RO: String
+      RW_RW: String
+      SI_LK: String
+      SK_SK: String
+      SL_SI: String
+      SO_SO: String
+      SR_RS: String
+      SU_ID: String
+      SW_BI: String
+      SW_KE: String
+      SW_RW: String
+      SW_TZ: String
+      SW_UG: String
+      TL_PH: String
+      TT_RU: String
+      UG_CN: String
+      UK_UA: String
+      UZ_UZ: String
+      WO_SN: String
+      ZH_HK: String
+      ZU_ZA: String
+    end
+
+    class LanguageCodeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?duration_in_seconds: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor duration_in_seconds: Float?
+    end
+
+    class LanguageIdSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?language_model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_model_name: String?
+    end
+
+    class LanguageModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?create_time: Time,
+        ?last_modified_time: Time,
+        ?language_code: String,
+        ?base_model_name: String,
+        ?model_status: String,
+        ?upgrade_availability: bool,
+        ?failure_reason: String,
+        ?input_data_config: Types::InputDataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor language_code: String?
+      attr_accessor base_model_name: String?
+      attr_accessor model_status: String?
+      attr_accessor upgrade_availability: bool?
+      attr_accessor failure_reason: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCallAnalyticsCategoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCallAnalyticsCategoriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?categories: Array[Types::CategoryProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor categories: Array[Types::CategoryProperties]?
+    end
+
+    class ListCallAnalyticsJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_name_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_name_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCallAnalyticsJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?call_analytics_job_summaries: Array[Types::CallAnalyticsJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor call_analytics_job_summaries: Array[Types::CallAnalyticsJobSummary]?
+    end
+
+    class ListLanguageModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_equals: String,
+        ?name_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_equals: String?
+      attr_accessor name_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLanguageModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?models: Array[Types::LanguageModel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor models: Array[Types::LanguageModel]?
+    end
+
+    class ListMedicalScribeJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_name_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_name_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMedicalScribeJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?medical_scribe_job_summaries: Array[Types::MedicalScribeJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor medical_scribe_job_summaries: Array[Types::MedicalScribeJobSummary]?
+    end
+
+    class ListMedicalTranscriptionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_name_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_name_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMedicalTranscriptionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?medical_transcription_job_summaries: Array[Types::MedicalTranscriptionJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor medical_transcription_job_summaries: Array[Types::MedicalTranscriptionJobSummary]?
+    end
+
+    class ListMedicalVocabulariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state_equals: String,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state_equals: String?
+      attr_accessor name_contains: String?
+    end
+
+    class ListMedicalVocabulariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?vocabularies: Array[Types::VocabularyInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor vocabularies: Array[Types::VocabularyInfo]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTranscriptionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_name_contains: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_name_contains: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTranscriptionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?transcription_job_summaries: Array[Types::TranscriptionJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor transcription_job_summaries: Array[Types::TranscriptionJobSummary]?
+    end
+
+    class ListVocabulariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state_equals: String,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state_equals: String?
+      attr_accessor name_contains: String?
+    end
+
+    class ListVocabulariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?next_token: String,
+        ?vocabularies: Array[Types::VocabularyInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor vocabularies: Array[Types::VocabularyInfo]?
+    end
+
+    class ListVocabularyFiltersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name_contains: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name_contains: String?
+    end
+
+    class ListVocabularyFiltersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?vocabulary_filters: Array[Types::VocabularyFilterInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor vocabulary_filters: Array[Types::VocabularyFilterInfo]?
+    end
+
+    class Media
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_file_uri: String,
+        ?redacted_media_file_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_file_uri: String?
+      attr_accessor redacted_media_file_uri: String?
+    end
+
+    module MediaFormat
+      MP3: String
+      MP4: String
+      WAV: String
+      FLAC: String
+      OGG: String
+      AMR: String
+      WEBM: String
+      M4A: String
+    end
+
+    module MedicalContentIdentificationType
+      PHI: String
+    end
+
+    class MedicalScribeChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class MedicalScribeContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?patient_context: Types::MedicalScribePatientContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor patient_context: Types::MedicalScribePatientContext?
+    end
+
+    class MedicalScribeJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job_name: String,
+        ?medical_scribe_job_status: String,
+        ?language_code: String,
+        ?media: Types::Media,
+        ?medical_scribe_output: Types::MedicalScribeOutput,
+        ?start_time: Time,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?failure_reason: String,
+        ?settings: Types::MedicalScribeSettings,
+        ?data_access_role_arn: String,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?medical_scribe_context_provided: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job_name: String?
+      attr_accessor medical_scribe_job_status: String?
+      attr_accessor language_code: String?
+      attr_accessor media: Types::Media?
+      attr_accessor medical_scribe_output: Types::MedicalScribeOutput?
+      attr_accessor start_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor settings: Types::MedicalScribeSettings?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor medical_scribe_context_provided: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module MedicalScribeJobStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class MedicalScribeJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job_name: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?language_code: String,
+        ?medical_scribe_job_status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor language_code: String?
+      attr_accessor medical_scribe_job_status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    module MedicalScribeLanguageCode
+      EN_US: String
+    end
+
+    module MedicalScribeNoteTemplate
+      HISTORY_AND_PHYSICAL: String
+      GIRPP: String
+      BIRP: String
+      SIRP: String
+      DAP: String
+      BEHAVIORAL_SOAP: String
+      PHYSICAL_SOAP: String
+    end
+
+    class MedicalScribeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_file_uri: String,
+        ?clinical_document_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_file_uri: String?
+      attr_accessor clinical_document_uri: String?
+    end
+
+    module MedicalScribeParticipantRole
+      PATIENT: String
+      CLINICIAN: String
+    end
+
+    class MedicalScribePatientContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pronouns: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pronouns: String?
+    end
+
+    class MedicalScribeSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?show_speaker_labels: bool,
+        ?max_speaker_labels: Integer,
+        ?channel_identification: bool,
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor show_speaker_labels: bool?
+      attr_accessor max_speaker_labels: Integer?
+      attr_accessor channel_identification: bool?
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings?
+    end
+
+    class MedicalTranscript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_file_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_file_uri: String?
+    end
+
+    class MedicalTranscriptionJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job_name: String,
+        ?transcription_job_status: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_format: String,
+        ?media: Types::Media,
+        ?transcript: Types::MedicalTranscript,
+        ?start_time: Time,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?failure_reason: String,
+        ?settings: Types::MedicalTranscriptionSetting,
+        ?content_identification_type: String,
+        ?specialty: String,
+        ?type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job_name: String?
+      attr_accessor transcription_job_status: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_format: String?
+      attr_accessor media: Types::Media?
+      attr_accessor transcript: Types::MedicalTranscript?
+      attr_accessor start_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor settings: Types::MedicalTranscriptionSetting?
+      attr_accessor content_identification_type: String?
+      attr_accessor specialty: String?
+      attr_accessor type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MedicalTranscriptionJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job_name: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?language_code: String,
+        ?transcription_job_status: String,
+        ?failure_reason: String,
+        ?output_location_type: String,
+        ?specialty: String,
+        ?content_identification_type: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor language_code: String?
+      attr_accessor transcription_job_status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor output_location_type: String?
+      attr_accessor specialty: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor type: String?
+    end
+
+    class MedicalTranscriptionSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?show_speaker_labels: bool,
+        ?max_speaker_labels: Integer,
+        ?channel_identification: bool,
+        ?show_alternatives: bool,
+        ?max_alternatives: Integer,
+        ?vocabulary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor show_speaker_labels: bool?
+      attr_accessor max_speaker_labels: Integer?
+      attr_accessor channel_identification: bool?
+      attr_accessor show_alternatives: bool?
+      attr_accessor max_alternatives: Integer?
+      attr_accessor vocabulary_name: String?
+    end
+
+    class ModelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_model_name: String?
+    end
+
+    module ModelStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class NonTalkTimeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threshold: Integer,
+        ?absolute_time_range: Types::AbsoluteTimeRange,
+        ?relative_time_range: Types::RelativeTimeRange,
+        ?negate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threshold: Integer?
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange?
+      attr_accessor relative_time_range: Types::RelativeTimeRange?
+      attr_accessor negate: bool?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OutputLocationType
+      CUSTOMER_BUCKET: String
+      SERVICE_BUCKET: String
+    end
+
+    module ParticipantRole
+      AGENT: String
+      CUSTOMER: String
+    end
+
+    module PiiEntityType
+      BANK_ACCOUNT_NUMBER: String
+      BANK_ROUTING: String
+      CREDIT_DEBIT_NUMBER: String
+      CREDIT_DEBIT_CVV: String
+      CREDIT_DEBIT_EXPIRY: String
+      PIN: String
+      EMAIL: String
+      ADDRESS: String
+      NAME: String
+      PHONE: String
+      SSN: String
+      ALL: String
+    end
+
+    module Pronouns
+      HE_HIM: String
+      SHE_HER: String
+      THEY_THEM: String
+    end
+
+    module RedactionOutput
+      REDACTED: String
+      REDACTED_AND_UNREDACTED: String
+    end
+
+    module RedactionType
+      PII: String
+    end
+
+    class RelativeTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_percentage: Integer,
+        ?end_percentage: Integer,
+        ?first: Integer,
+        ?last: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_percentage: Integer?
+      attr_accessor end_percentage: Integer?
+      attr_accessor first: Integer?
+      attr_accessor last: Integer?
+    end
+
+    class Rule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?non_talk_time_filter: Types::NonTalkTimeFilter,
+        ?interruption_filter: Types::InterruptionFilter,
+        ?transcript_filter: Types::TranscriptFilter,
+        ?sentiment_filter: Types::SentimentFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor non_talk_time_filter: Types::NonTalkTimeFilter?
+      attr_accessor interruption_filter: Types::InterruptionFilter?
+      attr_accessor transcript_filter: Types::TranscriptFilter?
+      attr_accessor sentiment_filter: Types::SentimentFilter?
+
+      class NonTalkTimeFilter < Rule
+      end
+      class InterruptionFilter < Rule
+      end
+      class TranscriptFilter < Rule
+      end
+      class SentimentFilter < Rule
+      end
+      class Unknown < Rule
+      end
+    end
+
+    class SentimentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sentiments: Array[String],
+        ?absolute_time_range: Types::AbsoluteTimeRange,
+        ?relative_time_range: Types::RelativeTimeRange,
+        ?participant_role: String,
+        ?negate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sentiments: Array[String]?
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange?
+      attr_accessor relative_time_range: Types::RelativeTimeRange?
+      attr_accessor participant_role: String?
+      attr_accessor negate: bool?
+    end
+
+    module SentimentValue
+      POSITIVE: String
+      NEGATIVE: String
+      NEUTRAL: String
+      MIXED: String
+    end
+
+    class Settings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?show_speaker_labels: bool,
+        ?max_speaker_labels: Integer,
+        ?channel_identification: bool,
+        ?show_alternatives: bool,
+        ?max_alternatives: Integer,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor show_speaker_labels: bool?
+      attr_accessor max_speaker_labels: Integer?
+      attr_accessor channel_identification: bool?
+      attr_accessor show_alternatives: bool?
+      attr_accessor max_alternatives: Integer?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+    end
+
+    module Specialty
+      PRIMARYCARE: String
+    end
+
+    class StartCallAnalyticsJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job_name: String,
+        ?media: Types::Media,
+        ?output_location: String,
+        ?output_encryption_kms_key_id: String,
+        ?data_access_role_arn: String,
+        ?settings: Types::CallAnalyticsJobSettings,
+        ?tags: Array[Types::Tag],
+        ?channel_definitions: Array[Types::ChannelDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job_name: String?
+      attr_accessor media: Types::Media?
+      attr_accessor output_location: String?
+      attr_accessor output_encryption_kms_key_id: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor settings: Types::CallAnalyticsJobSettings?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor channel_definitions: Array[Types::ChannelDefinition]?
+    end
+
+    class StartCallAnalyticsJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_analytics_job: Types::CallAnalyticsJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_analytics_job: Types::CallAnalyticsJob?
+    end
+
+    class StartMedicalScribeJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job_name: String,
+        ?media: Types::Media,
+        ?output_bucket_name: String,
+        ?output_encryption_kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+        ?data_access_role_arn: String,
+        ?settings: Types::MedicalScribeSettings,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?tags: Array[Types::Tag],
+        ?medical_scribe_context: Types::MedicalScribeContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job_name: String?
+      attr_accessor media: Types::Media?
+      attr_accessor output_bucket_name: String?
+      attr_accessor output_encryption_kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor settings: Types::MedicalScribeSettings?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor medical_scribe_context: Types::MedicalScribeContext?
+    end
+
+    class StartMedicalScribeJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_job: Types::MedicalScribeJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_job: Types::MedicalScribeJob?
+    end
+
+    class StartMedicalTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job_name: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_format: String,
+        ?media: Types::Media,
+        ?output_bucket_name: String,
+        ?output_key: String,
+        ?output_encryption_kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+        ?settings: Types::MedicalTranscriptionSetting,
+        ?content_identification_type: String,
+        ?specialty: String,
+        ?type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job_name: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_format: String?
+      attr_accessor media: Types::Media?
+      attr_accessor output_bucket_name: String?
+      attr_accessor output_key: String?
+      attr_accessor output_encryption_kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor settings: Types::MedicalTranscriptionSetting?
+      attr_accessor content_identification_type: String?
+      attr_accessor specialty: String?
+      attr_accessor type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartMedicalTranscriptionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_transcription_job: Types::MedicalTranscriptionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_transcription_job: Types::MedicalTranscriptionJob?
+    end
+
+    class StartTranscriptionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job_name: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_format: String,
+        ?media: Types::Media,
+        ?output_bucket_name: String,
+        ?output_key: String,
+        ?output_encryption_kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+        ?settings: Types::Settings,
+        ?model_settings: Types::ModelSettings,
+        ?job_execution_settings: Types::JobExecutionSettings,
+        ?content_redaction: Types::ContentRedaction,
+        ?identify_language: bool,
+        ?identify_multiple_languages: bool,
+        ?language_options: Array[String],
+        ?subtitles: Types::Subtitles,
+        ?tags: Array[Types::Tag],
+        ?language_id_settings: Hash[String, Types::LanguageIdSettings],
+        ?toxicity_detection: Array[Types::ToxicityDetectionSettings],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job_name: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_format: String?
+      attr_accessor media: Types::Media?
+      attr_accessor output_bucket_name: String?
+      attr_accessor output_key: String?
+      attr_accessor output_encryption_kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor settings: Types::Settings?
+      attr_accessor model_settings: Types::ModelSettings?
+      attr_accessor job_execution_settings: Types::JobExecutionSettings?
+      attr_accessor content_redaction: Types::ContentRedaction?
+      attr_accessor identify_language: bool?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor language_options: Array[String]?
+      attr_accessor subtitles: Types::Subtitles?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor language_id_settings: Hash[String, Types::LanguageIdSettings]?
+      attr_accessor toxicity_detection: Array[Types::ToxicityDetectionSettings]?
+    end
+
+    class StartTranscriptionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job: Types::TranscriptionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job: Types::TranscriptionJob?
+    end
+
+    module SubtitleFormat
+      VTT: String
+      SRT: String
+    end
+
+    class Subtitles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?formats: Array[String],
+        ?output_start_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor formats: Array[String]?
+      attr_accessor output_start_index: Integer?
+    end
+
+    class SubtitlesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?formats: Array[String],
+        ?subtitle_file_uris: Array[String],
+        ?output_start_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor formats: Array[String]?
+      attr_accessor subtitle_file_uris: Array[String]?
+      attr_accessor output_start_index: Integer?
+    end
+
+    class Summarization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generate_abstractive_summary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generate_abstractive_summary: bool?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ToxicityCategory
+      ALL: String
+    end
+
+    class ToxicityDetectionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?toxicity_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor toxicity_categories: Array[String]?
+    end
+
+    class Transcript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_file_uri: String,
+        ?redacted_transcript_file_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_file_uri: String?
+      attr_accessor redacted_transcript_file_uri: String?
+    end
+
+    class TranscriptFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_filter_type: String,
+        ?absolute_time_range: Types::AbsoluteTimeRange,
+        ?relative_time_range: Types::RelativeTimeRange,
+        ?participant_role: String,
+        ?negate: bool,
+        ?targets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_filter_type: String?
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange?
+      attr_accessor relative_time_range: Types::RelativeTimeRange?
+      attr_accessor participant_role: String?
+      attr_accessor negate: bool?
+      attr_accessor targets: Array[String]?
+    end
+
+    module TranscriptFilterType
+      EXACT: String
+    end
+
+    class TranscriptionJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job_name: String,
+        ?transcription_job_status: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_format: String,
+        ?media: Types::Media,
+        ?transcript: Types::Transcript,
+        ?start_time: Time,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?failure_reason: String,
+        ?settings: Types::Settings,
+        ?model_settings: Types::ModelSettings,
+        ?job_execution_settings: Types::JobExecutionSettings,
+        ?content_redaction: Types::ContentRedaction,
+        ?identify_language: bool,
+        ?identify_multiple_languages: bool,
+        ?language_options: Array[String],
+        ?identified_language_score: Float,
+        ?language_codes: Array[Types::LanguageCodeItem],
+        ?tags: Array[Types::Tag],
+        ?subtitles: Types::SubtitlesOutput,
+        ?language_id_settings: Hash[String, Types::LanguageIdSettings],
+        ?toxicity_detection: Array[Types::ToxicityDetectionSettings],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job_name: String?
+      attr_accessor transcription_job_status: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_format: String?
+      attr_accessor media: Types::Media?
+      attr_accessor transcript: Types::Transcript?
+      attr_accessor start_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor settings: Types::Settings?
+      attr_accessor model_settings: Types::ModelSettings?
+      attr_accessor job_execution_settings: Types::JobExecutionSettings?
+      attr_accessor content_redaction: Types::ContentRedaction?
+      attr_accessor identify_language: bool?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor language_options: Array[String]?
+      attr_accessor identified_language_score: Float?
+      attr_accessor language_codes: Array[Types::LanguageCodeItem]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor subtitles: Types::SubtitlesOutput?
+      attr_accessor language_id_settings: Hash[String, Types::LanguageIdSettings]?
+      attr_accessor toxicity_detection: Array[Types::ToxicityDetectionSettings]?
+    end
+
+    module TranscriptionJobStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class TranscriptionJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcription_job_name: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?completion_time: Time,
+        ?language_code: String,
+        ?transcription_job_status: String,
+        ?failure_reason: String,
+        ?output_location_type: String,
+        ?content_redaction: Types::ContentRedaction,
+        ?model_settings: Types::ModelSettings,
+        ?identify_language: bool,
+        ?identify_multiple_languages: bool,
+        ?identified_language_score: Float,
+        ?language_codes: Array[Types::LanguageCodeItem],
+        ?toxicity_detection: Array[Types::ToxicityDetectionSettings],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcription_job_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor language_code: String?
+      attr_accessor transcription_job_status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor output_location_type: String?
+      attr_accessor content_redaction: Types::ContentRedaction?
+      attr_accessor model_settings: Types::ModelSettings?
+      attr_accessor identify_language: bool?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor identified_language_score: Float?
+      attr_accessor language_codes: Array[Types::LanguageCodeItem]?
+      attr_accessor toxicity_detection: Array[Types::ToxicityDetectionSettings]?
+    end
+
+    module Type
+      CONVERSATION: String
+      DICTATION: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCallAnalyticsCategoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_name: String,
+        ?rules: Array[Types::Rule],
+        ?input_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_name: String?
+      attr_accessor rules: Array[Types::Rule]?
+      attr_accessor input_type: String?
+    end
+
+    class UpdateCallAnalyticsCategoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category_properties: Types::CategoryProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category_properties: Types::CategoryProperties?
+    end
+
+    class UpdateMedicalVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?vocabulary_file_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_file_uri: String?
+    end
+
+    class UpdateMedicalVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+        ?vocabulary_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor vocabulary_state: String?
+    end
+
+    class UpdateVocabularyFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?words: Array[String],
+        ?vocabulary_filter_file_uri: String,
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor words: Array[String]?
+      attr_accessor vocabulary_filter_file_uri: String?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    class UpdateVocabularyFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class UpdateVocabularyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?phrases: Array[String],
+        ?vocabulary_file_uri: String,
+        ?data_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor phrases: Array[String]?
+      attr_accessor vocabulary_file_uri: String?
+      attr_accessor data_access_role_arn: String?
+    end
+
+    class UpdateVocabularyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+        ?vocabulary_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor vocabulary_state: String?
+    end
+
+    class VocabularyFilterInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_filter_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    module VocabularyFilterMethod
+      REMOVE: String
+      MASK: String
+      TAG: String
+    end
+
+    class VocabularyInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vocabulary_name: String,
+        ?language_code: String,
+        ?last_modified_time: Time,
+        ?vocabulary_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary_name: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor vocabulary_state: String?
+    end
+
+    module VocabularyState
+      PENDING: String
+      READY: String
+      FAILED: String
+    end
+  end
+end

@@ -1,0 +1,5 @@
+module Aws::MediaStoreData
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

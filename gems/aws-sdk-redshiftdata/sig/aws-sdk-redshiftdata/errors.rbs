@@ -1,0 +1,34 @@
+module Aws::RedshiftData
+  module Errors
+    class ActiveSessionsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ActiveStatementsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchExecuteStatementException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def statement_id: () -> String?
+    end
+    class DatabaseConnectionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExecuteStatementException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def statement_id: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QueryTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

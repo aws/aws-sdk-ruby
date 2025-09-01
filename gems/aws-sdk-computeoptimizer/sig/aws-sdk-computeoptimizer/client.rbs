@@ -1,0 +1,577 @@
+module Aws::ComputeOptimizer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ComputeOptimizer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteRecommendationPreferencesResponse
+      include Smithy::Client::_Response[Types::DeleteRecommendationPreferencesResponse]
+    end
+    def delete_recommendation_preferences: (
+      ?resource_type: String,
+      ?scope: {
+        name: String,
+        value: String
+      },
+      ?recommendation_preference_names: Array[String]
+    ) -> _DeleteRecommendationPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecommendationPreferencesResponse
+
+    interface _DescribeRecommendationExportJobsResponse
+      include Smithy::Client::_Response[Types::DescribeRecommendationExportJobsResponse]
+      def recommendation_export_jobs: () -> Array[Types::RecommendationExportJob]?
+      def next_token: () -> String?
+    end
+    def describe_recommendation_export_jobs: (
+      ?job_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRecommendationExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecommendationExportJobsResponse
+
+    interface _ExportAutoScalingGroupRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportAutoScalingGroupRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_auto_scaling_group_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool,
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _ExportAutoScalingGroupRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportAutoScalingGroupRecommendationsResponse
+
+    interface _ExportEBSVolumeRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportEBSVolumeRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_ebs_volume_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool
+    ) -> _ExportEBSVolumeRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportEBSVolumeRecommendationsResponse
+
+    interface _ExportEC2InstanceRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportEC2InstanceRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_ec2_instance_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool,
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _ExportEC2InstanceRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportEC2InstanceRecommendationsResponse
+
+    interface _ExportECSServiceRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportECSServiceRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_ecs_service_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool
+    ) -> _ExportECSServiceRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportECSServiceRecommendationsResponse
+
+    interface _ExportIdleRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportIdleRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_idle_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool
+    ) -> _ExportIdleRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportIdleRecommendationsResponse
+
+    interface _ExportLambdaFunctionRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportLambdaFunctionRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_lambda_function_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool
+    ) -> _ExportLambdaFunctionRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportLambdaFunctionRecommendationsResponse
+
+    interface _ExportLicenseRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportLicenseRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_license_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool
+    ) -> _ExportLicenseRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportLicenseRecommendationsResponse
+
+    interface _ExportRDSDatabaseRecommendationsResponse
+      include Smithy::Client::_Response[Types::ExportRDSDatabaseRecommendationsResponse]
+      def job_id: () -> String?
+      def s3_destination: () -> Types::S3Destination?
+    end
+    def export_rds_database_recommendations: (
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?fields_to_export: Array[String],
+      ?s3_destination_config: {
+        bucket: String,
+        key_prefix: String
+      },
+      ?file_format: String,
+      ?include_member_accounts: bool,
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _ExportRDSDatabaseRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportRDSDatabaseRecommendationsResponse
+
+    interface _GetAutoScalingGroupRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetAutoScalingGroupRecommendationsResponse]
+      def next_token: () -> String?
+      def auto_scaling_group_recommendations: () -> Array[Types::AutoScalingGroupRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_auto_scaling_group_recommendations: (
+      ?account_ids: Array[String],
+      ?auto_scaling_group_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _GetAutoScalingGroupRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoScalingGroupRecommendationsResponse
+
+    interface _GetEBSVolumeRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetEBSVolumeRecommendationsResponse]
+      def next_token: () -> String?
+      def volume_recommendations: () -> Array[Types::VolumeRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_ebs_volume_recommendations: (
+      ?volume_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String]
+    ) -> _GetEBSVolumeRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEBSVolumeRecommendationsResponse
+
+    interface _GetEC2InstanceRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetEC2InstanceRecommendationsResponse]
+      def next_token: () -> String?
+      def instance_recommendations: () -> Array[Types::InstanceRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_ec2_instance_recommendations: (
+      ?instance_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String],
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _GetEC2InstanceRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEC2InstanceRecommendationsResponse
+
+    interface _GetEC2RecommendationProjectedMetricsResponse
+      include Smithy::Client::_Response[Types::GetEC2RecommendationProjectedMetricsResponse]
+      def recommended_option_projected_metrics: () -> Array[Types::RecommendedOptionProjectedMetric]?
+    end
+    def get_ec2_recommendation_projected_metrics: (
+      ?instance_arn: String,
+      ?stat: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _GetEC2RecommendationProjectedMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEC2RecommendationProjectedMetricsResponse
+
+    interface _GetECSServiceRecommendationProjectedMetricsResponse
+      include Smithy::Client::_Response[Types::GetECSServiceRecommendationProjectedMetricsResponse]
+      def recommended_option_projected_metrics: () -> Array[Types::ECSServiceRecommendedOptionProjectedMetric]?
+    end
+    def get_ecs_service_recommendation_projected_metrics: (
+      ?service_arn: String,
+      ?stat: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _GetECSServiceRecommendationProjectedMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetECSServiceRecommendationProjectedMetricsResponse
+
+    interface _GetECSServiceRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetECSServiceRecommendationsResponse]
+      def next_token: () -> String?
+      def ecs_service_recommendations: () -> Array[Types::ECSServiceRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_ecs_service_recommendations: (
+      ?service_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String]
+    ) -> _GetECSServiceRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetECSServiceRecommendationsResponse
+
+    interface _GetEffectiveRecommendationPreferencesResponse
+      include Smithy::Client::_Response[Types::GetEffectiveRecommendationPreferencesResponse]
+      def enhanced_infrastructure_metrics: () -> String?
+      def external_metrics_preference: () -> Types::ExternalMetricsPreference?
+      def look_back_period: () -> String?
+      def utilization_preferences: () -> Array[Types::UtilizationPreference]?
+      def preferred_resources: () -> Array[Types::EffectivePreferredResource]?
+    end
+    def get_effective_recommendation_preferences: (
+      ?resource_arn: String
+    ) -> _GetEffectiveRecommendationPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEffectiveRecommendationPreferencesResponse
+
+    interface _GetEnrollmentStatusResponse
+      include Smithy::Client::_Response[Types::GetEnrollmentStatusResponse]
+      def status: () -> String?
+      def status_reason: () -> String?
+      def member_accounts_enrolled: () -> bool?
+      def last_updated_timestamp: () -> Time?
+      def number_of_member_accounts_opted_in: () -> Integer?
+    end
+    def get_enrollment_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnrollmentStatusResponse
+
+    interface _GetEnrollmentStatusesForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetEnrollmentStatusesForOrganizationResponse]
+      def account_enrollment_statuses: () -> Array[Types::AccountEnrollmentStatus]?
+      def next_token: () -> String?
+    end
+    def get_enrollment_statuses_for_organization: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEnrollmentStatusesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnrollmentStatusesForOrganizationResponse
+
+    interface _GetIdleRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetIdleRecommendationsResponse]
+      def next_token: () -> String?
+      def idle_recommendations: () -> Array[Types::IdleRecommendation]?
+      def errors: () -> Array[Types::IdleRecommendationError]?
+    end
+    def get_idle_recommendations: (
+      ?resource_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String],
+      ?order_by: {
+        dimension: String,
+        order: String
+      }
+    ) -> _GetIdleRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdleRecommendationsResponse
+
+    interface _GetLambdaFunctionRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetLambdaFunctionRecommendationsResponse]
+      def next_token: () -> String?
+      def lambda_function_recommendations: () -> Array[Types::LambdaFunctionRecommendation]?
+    end
+    def get_lambda_function_recommendations: (
+      ?function_arns: Array[String],
+      ?account_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetLambdaFunctionRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLambdaFunctionRecommendationsResponse
+
+    interface _GetLicenseRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetLicenseRecommendationsResponse]
+      def next_token: () -> String?
+      def license_recommendations: () -> Array[Types::LicenseRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_license_recommendations: (
+      ?resource_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String]
+    ) -> _GetLicenseRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseRecommendationsResponse
+
+    interface _GetRDSDatabaseRecommendationProjectedMetricsResponse
+      include Smithy::Client::_Response[Types::GetRDSDatabaseRecommendationProjectedMetricsResponse]
+      def recommended_option_projected_metrics: () -> Array[Types::RDSDatabaseRecommendedOptionProjectedMetric]?
+    end
+    def get_rds_database_recommendation_projected_metrics: (
+      ?resource_arn: String,
+      ?stat: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _GetRDSDatabaseRecommendationProjectedMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRDSDatabaseRecommendationProjectedMetricsResponse
+
+    interface _GetRDSDatabaseRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetRDSDatabaseRecommendationsResponse]
+      def next_token: () -> String?
+      def rds_db_recommendations: () -> Array[Types::RDSDBRecommendation]?
+      def errors: () -> Array[Types::GetRecommendationError]?
+    end
+    def get_rds_database_recommendations: (
+      ?resource_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?account_ids: Array[String],
+      ?recommendation_preferences: {
+        cpu_vendor_architectures: Array[String]
+      }
+    ) -> _GetRDSDatabaseRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRDSDatabaseRecommendationsResponse
+
+    interface _GetRecommendationPreferencesResponse
+      include Smithy::Client::_Response[Types::GetRecommendationPreferencesResponse]
+      def next_token: () -> String?
+      def recommendation_preferences_details: () -> Array[Types::RecommendationPreferencesDetail]?
+    end
+    def get_recommendation_preferences: (
+      ?resource_type: String,
+      ?scope: {
+        name: String,
+        value: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetRecommendationPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationPreferencesResponse
+
+    interface _GetRecommendationSummariesResponse
+      include Smithy::Client::_Response[Types::GetRecommendationSummariesResponse]
+      def next_token: () -> String?
+      def recommendation_summaries: () -> Array[Types::RecommendationSummary]?
+    end
+    def get_recommendation_summaries: (
+      ?account_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetRecommendationSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationSummariesResponse
+
+    interface _PutRecommendationPreferencesResponse
+      include Smithy::Client::_Response[Types::PutRecommendationPreferencesResponse]
+    end
+    def put_recommendation_preferences: (
+      ?resource_type: String,
+      ?scope: {
+        name: String,
+        value: String
+      },
+      ?enhanced_infrastructure_metrics: String,
+      ?inferred_workload_types: String,
+      ?external_metrics_preference: {
+        source: String
+      },
+      ?look_back_period: String,
+      ?utilization_preferences: Array[
+        {
+          metric_name: String,
+          metric_parameters: {
+            threshold: String,
+            headroom: String
+          }
+        }
+      ],
+      ?preferred_resources: Array[
+        {
+          name: String,
+          include_list: Array[String],
+          exclude_list: untyped
+        }
+      ],
+      ?savings_estimation_mode: String
+    ) -> _PutRecommendationPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecommendationPreferencesResponse
+
+    interface _UpdateEnrollmentStatusResponse
+      include Smithy::Client::_Response[Types::UpdateEnrollmentStatusResponse]
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def update_enrollment_status: (
+      ?status: String,
+      ?include_member_accounts: bool
+    ) -> _UpdateEnrollmentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnrollmentStatusResponse
+  end
+end

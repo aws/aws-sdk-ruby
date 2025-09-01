@@ -1,0 +1,33 @@
+module Aws::MachineLearning
+  module Errors
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> Integer?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> Integer?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> Integer?
+    end
+    class InvalidTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> Integer?
+    end
+    class PredictorNotMountedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> Integer?
+    end
+    class TagLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

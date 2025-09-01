@@ -1,0 +1,688 @@
+module Aws::QApps
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::QApps::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateLibraryItemReviewResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_library_item_review: (
+      ?instance_id: String,
+      ?library_item_id: String
+    ) -> _AssociateLibraryItemReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLibraryItemReviewResponse
+
+    interface _AssociateQAppWithUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_q_app_with_user: (
+      ?instance_id: String,
+      ?app_id: String
+    ) -> _AssociateQAppWithUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateQAppWithUserResponse
+
+    interface _BatchCreateCategoryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def batch_create_category: (
+      ?instance_id: String,
+      ?categories: Array[
+        {
+          id: String,
+          title: String,
+          color: untyped
+        }
+      ]
+    ) -> _BatchCreateCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateCategoryResponse
+
+    interface _BatchDeleteCategoryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def batch_delete_category: (
+      ?instance_id: String,
+      ?categories: Array[String]
+    ) -> _BatchDeleteCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteCategoryResponse
+
+    interface _BatchUpdateCategoryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def batch_update_category: (
+      ?instance_id: String,
+      ?categories: Array[
+        {
+          id: String,
+          title: String,
+          color: untyped
+        }
+      ]
+    ) -> _BatchUpdateCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateCategoryResponse
+
+    interface _CreateLibraryItemResponse
+      include Smithy::Client::_Response[Types::CreateLibraryItemOutput]
+      def library_item_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def rating_count: () -> Integer?
+      def is_verified: () -> bool?
+    end
+    def create_library_item: (
+      ?instance_id: String,
+      ?app_id: String,
+      ?app_version: Integer,
+      ?categories: Array[String]
+    ) -> _CreateLibraryItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLibraryItemResponse
+
+    interface _CreatePresignedUrlResponse
+      include Smithy::Client::_Response[Types::CreatePresignedUrlOutput]
+      def file_id: () -> String?
+      def presigned_url: () -> String?
+      def presigned_url_fields: () -> Hash[String, String]?
+      def presigned_url_expiration: () -> Time?
+    end
+    def create_presigned_url: (
+      ?instance_id: String,
+      ?card_id: String,
+      ?app_id: String,
+      ?file_contents_sha256: String,
+      ?file_name: String,
+      ?scope: String,
+      ?session_id: String
+    ) -> _CreatePresignedUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePresignedUrlResponse
+
+    interface _CreateQAppResponse
+      include Smithy::Client::_Response[Types::CreateQAppOutput]
+      def app_id: () -> String?
+      def app_arn: () -> String?
+      def title: () -> String?
+      def description: () -> String?
+      def initial_prompt: () -> String?
+      def app_version: () -> Integer?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def required_capabilities: () -> Array[String]?
+    end
+    def create_q_app: (
+      ?instance_id: String,
+      ?title: String,
+      ?description: String,
+      ?app_definition: {
+        cards: Array[
+          {
+            text_input: {
+              title: String,
+              id: String,
+              type: String,
+              placeholder: String,
+              default_value: String
+            },
+            q_query: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              prompt: String,
+              output_source: String,
+              attribute_filter: {
+                and_all_filters: Array[
+                  {
+                    and_all_filters: untyped,
+                    or_all_filters: untyped,
+                    not_filter: untyped,
+                    equals_to: {
+                      name: String,
+                      value: {
+                        string_value: String,
+                        string_list_value: Array[String],
+                        long_value: Integer,
+                        date_value: Time
+                      }
+                    },
+                    contains_all: untyped,
+                    contains_any: untyped,
+                    greater_than: untyped,
+                    greater_than_or_equals: untyped,
+                    less_than: untyped,
+                    less_than_or_equals: untyped
+                  }
+                ],
+                or_all_filters: untyped,
+                not_filter: untyped,
+                equals_to: untyped,
+                contains_all: untyped,
+                contains_any: untyped,
+                greater_than: untyped,
+                greater_than_or_equals: untyped,
+                less_than: untyped,
+                less_than_or_equals: untyped
+              }
+            },
+            q_plugin: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              prompt: untyped,
+              plugin_id: String,
+              action_identifier: String
+            },
+            file_upload: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              filename: String,
+              file_id: untyped,
+              allow_override: bool
+            },
+            form_input: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              metadata: {
+                schema: Smithy::Schema::document
+              },
+              compute_mode: String
+            }
+          }
+        ],
+        initial_prompt: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateQAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQAppResponse
+
+    interface _DeleteLibraryItemResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_library_item: (
+      ?instance_id: String,
+      ?library_item_id: String
+    ) -> _DeleteLibraryItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLibraryItemResponse
+
+    interface _DeleteQAppResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_q_app: (
+      ?instance_id: String,
+      ?app_id: String
+    ) -> _DeleteQAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQAppResponse
+
+    interface _DescribeQAppPermissionsResponse
+      include Smithy::Client::_Response[Types::DescribeQAppPermissionsOutput]
+      def resource_arn: () -> String?
+      def app_id: () -> String?
+      def permissions: () -> Array[Types::PermissionOutput]?
+    end
+    def describe_q_app_permissions: (
+      ?instance_id: String,
+      ?app_id: String
+    ) -> _DescribeQAppPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQAppPermissionsResponse
+
+    interface _DisassociateLibraryItemReviewResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_library_item_review: (
+      ?instance_id: String,
+      ?library_item_id: String
+    ) -> _DisassociateLibraryItemReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLibraryItemReviewResponse
+
+    interface _DisassociateQAppFromUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_q_app_from_user: (
+      ?instance_id: String,
+      ?app_id: String
+    ) -> _DisassociateQAppFromUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateQAppFromUserResponse
+
+    interface _ExportQAppSessionDataResponse
+      include Smithy::Client::_Response[Types::ExportQAppSessionDataOutput]
+      def csv_file_link: () -> String?
+      def expires_at: () -> Time?
+      def session_arn: () -> String?
+    end
+    def export_q_app_session_data: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _ExportQAppSessionDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportQAppSessionDataResponse
+
+    interface _GetLibraryItemResponse
+      include Smithy::Client::_Response[Types::GetLibraryItemOutput]
+      def library_item_id: () -> String?
+      def app_id: () -> String?
+      def app_version: () -> Integer?
+      def categories: () -> Array[Types::Category]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def rating_count: () -> Integer?
+      def is_rated_by_user: () -> bool?
+      def user_count: () -> Integer?
+      def is_verified: () -> bool?
+    end
+    def get_library_item: (
+      ?instance_id: String,
+      ?library_item_id: String,
+      ?app_id: String
+    ) -> _GetLibraryItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLibraryItemResponse
+
+    interface _GetQAppResponse
+      include Smithy::Client::_Response[Types::GetQAppOutput]
+      def app_id: () -> String?
+      def app_arn: () -> String?
+      def title: () -> String?
+      def description: () -> String?
+      def initial_prompt: () -> String?
+      def app_version: () -> Integer?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def required_capabilities: () -> Array[String]?
+      def app_definition: () -> Types::AppDefinition?
+    end
+    def get_q_app: (
+      ?instance_id: String,
+      ?app_id: String,
+      ?app_version: Integer
+    ) -> _GetQAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQAppResponse
+
+    interface _GetQAppSessionResponse
+      include Smithy::Client::_Response[Types::GetQAppSessionOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+      def session_name: () -> String?
+      def app_version: () -> Integer?
+      def latest_published_app_version: () -> Integer?
+      def status: () -> String?
+      def card_status: () -> Hash[String, Types::CardStatus]?
+      def user_is_host: () -> bool?
+    end
+    def get_q_app_session: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _GetQAppSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQAppSessionResponse
+
+    interface _GetQAppSessionMetadataResponse
+      include Smithy::Client::_Response[Types::GetQAppSessionMetadataOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+      def session_name: () -> String?
+      def sharing_configuration: () -> Types::SessionSharingConfiguration?
+      def session_owner: () -> bool?
+    end
+    def get_q_app_session_metadata: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _GetQAppSessionMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQAppSessionMetadataResponse
+
+    interface _ImportDocumentResponse
+      include Smithy::Client::_Response[Types::ImportDocumentOutput]
+      def file_id: () -> String?
+    end
+    def import_document: (
+      ?instance_id: String,
+      ?card_id: String,
+      ?app_id: String,
+      ?file_contents_base64: String,
+      ?file_name: String,
+      ?scope: String,
+      ?session_id: String
+    ) -> _ImportDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportDocumentResponse
+
+    interface _ListCategoriesResponse
+      include Smithy::Client::_Response[Types::ListCategoriesOutput]
+      def categories: () -> Array[Types::Category]?
+    end
+    def list_categories: (
+      ?instance_id: String
+    ) -> _ListCategoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCategoriesResponse
+
+    interface _ListLibraryItemsResponse
+      include Smithy::Client::_Response[Types::ListLibraryItemsOutput]
+      def library_items: () -> Array[Types::LibraryItemMember]?
+      def next_token: () -> String?
+    end
+    def list_library_items: (
+      ?instance_id: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?category_id: String
+    ) -> _ListLibraryItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLibraryItemsResponse
+
+    interface _ListQAppSessionDataResponse
+      include Smithy::Client::_Response[Types::ListQAppSessionDataOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+      def session_data: () -> Array[Types::QAppSessionData]?
+      def next_token: () -> String?
+    end
+    def list_q_app_session_data: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _ListQAppSessionDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQAppSessionDataResponse
+
+    interface _ListQAppsResponse
+      include Smithy::Client::_Response[Types::ListQAppsOutput]
+      def apps: () -> Array[Types::UserAppItem]?
+      def next_token: () -> String?
+    end
+    def list_q_apps: (
+      ?instance_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListQAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQAppsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PredictQAppResponse
+      include Smithy::Client::_Response[Types::PredictQAppOutput]
+      def app: () -> Types::PredictAppDefinition?
+      def problem_statement: () -> String?
+    end
+    def predict_q_app: (
+      ?instance_id: String,
+      ?options: {
+        conversation: Array[
+          {
+            body: String,
+            type: String
+          }
+        ],
+        problem_statement: untyped
+      }
+    ) -> _PredictQAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PredictQAppResponse
+
+    interface _StartQAppSessionResponse
+      include Smithy::Client::_Response[Types::StartQAppSessionOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+    end
+    def start_q_app_session: (
+      ?instance_id: String,
+      ?app_id: String,
+      ?app_version: Integer,
+      ?initial_values: Array[
+        {
+          card_id: String,
+          value: String,
+          submission_mutation: {
+            submission_id: untyped,
+            mutation_type: String
+          }
+        }
+      ],
+      ?session_id: String,
+      ?tags: Hash[String, String]
+    ) -> _StartQAppSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQAppSessionResponse
+
+    interface _StopQAppSessionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_q_app_session: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _StopQAppSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopQAppSessionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateLibraryItemResponse
+      include Smithy::Client::_Response[Types::UpdateLibraryItemOutput]
+      def library_item_id: () -> String?
+      def app_id: () -> String?
+      def app_version: () -> Integer?
+      def categories: () -> Array[Types::Category]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def rating_count: () -> Integer?
+      def is_rated_by_user: () -> bool?
+      def user_count: () -> Integer?
+      def is_verified: () -> bool?
+    end
+    def update_library_item: (
+      ?instance_id: String,
+      ?library_item_id: String,
+      ?status: String,
+      ?categories: Array[String]
+    ) -> _UpdateLibraryItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLibraryItemResponse
+
+    interface _UpdateLibraryItemMetadataResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_library_item_metadata: (
+      ?instance_id: String,
+      ?library_item_id: String,
+      ?is_verified: bool
+    ) -> _UpdateLibraryItemMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLibraryItemMetadataResponse
+
+    interface _UpdateQAppResponse
+      include Smithy::Client::_Response[Types::UpdateQAppOutput]
+      def app_id: () -> String?
+      def app_arn: () -> String?
+      def title: () -> String?
+      def description: () -> String?
+      def initial_prompt: () -> String?
+      def app_version: () -> Integer?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def required_capabilities: () -> Array[String]?
+    end
+    def update_q_app: (
+      ?instance_id: String,
+      ?app_id: String,
+      ?title: String,
+      ?description: String,
+      ?app_definition: {
+        cards: Array[
+          {
+            text_input: {
+              title: String,
+              id: String,
+              type: String,
+              placeholder: String,
+              default_value: String
+            },
+            q_query: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              prompt: String,
+              output_source: String,
+              attribute_filter: {
+                and_all_filters: Array[
+                  {
+                    and_all_filters: untyped,
+                    or_all_filters: untyped,
+                    not_filter: untyped,
+                    equals_to: {
+                      name: String,
+                      value: {
+                        string_value: String,
+                        string_list_value: Array[String],
+                        long_value: Integer,
+                        date_value: Time
+                      }
+                    },
+                    contains_all: untyped,
+                    contains_any: untyped,
+                    greater_than: untyped,
+                    greater_than_or_equals: untyped,
+                    less_than: untyped,
+                    less_than_or_equals: untyped
+                  }
+                ],
+                or_all_filters: untyped,
+                not_filter: untyped,
+                equals_to: untyped,
+                contains_all: untyped,
+                contains_any: untyped,
+                greater_than: untyped,
+                greater_than_or_equals: untyped,
+                less_than: untyped,
+                less_than_or_equals: untyped
+              }
+            },
+            q_plugin: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              prompt: untyped,
+              plugin_id: String,
+              action_identifier: String
+            },
+            file_upload: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              filename: String,
+              file_id: untyped,
+              allow_override: bool
+            },
+            form_input: {
+              title: untyped,
+              id: untyped,
+              type: untyped,
+              metadata: {
+                schema: Smithy::Schema::document
+              },
+              compute_mode: String
+            }
+          }
+        ],
+        initial_prompt: String
+      }
+    ) -> _UpdateQAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQAppResponse
+
+    interface _UpdateQAppPermissionsResponse
+      include Smithy::Client::_Response[Types::UpdateQAppPermissionsOutput]
+      def resource_arn: () -> String?
+      def app_id: () -> String?
+      def permissions: () -> Array[Types::PermissionOutput]?
+    end
+    def update_q_app_permissions: (
+      ?instance_id: String,
+      ?app_id: String,
+      ?grant_permissions: Array[
+        {
+          action: String,
+          principal: String
+        }
+      ],
+      ?revoke_permissions: Array[
+        {
+          action: String,
+          principal: String
+        }
+      ]
+    ) -> _UpdateQAppPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQAppPermissionsResponse
+
+    interface _UpdateQAppSessionResponse
+      include Smithy::Client::_Response[Types::UpdateQAppSessionOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+    end
+    def update_q_app_session: (
+      ?instance_id: String,
+      ?session_id: String,
+      ?values: Array[
+        {
+          card_id: String,
+          value: String,
+          submission_mutation: {
+            submission_id: untyped,
+            mutation_type: String
+          }
+        }
+      ]
+    ) -> _UpdateQAppSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQAppSessionResponse
+
+    interface _UpdateQAppSessionMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateQAppSessionMetadataOutput]
+      def session_id: () -> String?
+      def session_arn: () -> String?
+      def session_name: () -> String?
+      def sharing_configuration: () -> Types::SessionSharingConfiguration?
+    end
+    def update_q_app_session_metadata: (
+      ?instance_id: String,
+      ?session_id: String,
+      ?session_name: String,
+      ?sharing_configuration: {
+        enabled: bool,
+        accept_responses: bool,
+        reveal_cards: bool
+      }
+    ) -> _UpdateQAppSessionMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQAppSessionMetadataResponse
+  end
+end

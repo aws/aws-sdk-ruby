@@ -1,0 +1,787 @@
+module Aws::Pipes
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Pipes::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreatePipeResponse
+      include Smithy::Client::_Response[Types::CreatePipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def create_pipe: (
+      ?name: String,
+      ?description: String,
+      ?desired_state: String,
+      ?source: String,
+      ?source_parameters: {
+        filter_criteria: {
+          filters: Array[
+            {
+              pattern: String
+            }
+          ]
+        },
+        kinesis_stream_parameters: {
+          batch_size: Integer,
+          dead_letter_config: {
+            arn: String
+          },
+          on_partial_batch_item_failure: String,
+          maximum_batching_window_in_seconds: Integer,
+          maximum_record_age_in_seconds: Integer,
+          maximum_retry_attempts: Integer,
+          parallelization_factor: Integer,
+          starting_position: String,
+          starting_position_timestamp: Time
+        },
+        dynamo_db_stream_parameters: {
+          batch_size: untyped,
+          dead_letter_config: untyped,
+          on_partial_batch_item_failure: untyped,
+          maximum_batching_window_in_seconds: untyped,
+          maximum_record_age_in_seconds: untyped,
+          maximum_retry_attempts: untyped,
+          parallelization_factor: untyped,
+          starting_position: String
+        },
+        sqs_queue_parameters: {
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        active_mq_broker_parameters: {
+          credentials: {
+            basic_auth: String
+          },
+          queue_name: String,
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        rabbit_mq_broker_parameters: {
+          credentials: untyped,
+          queue_name: untyped,
+          virtual_host: String,
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        managed_streaming_kafka_parameters: {
+          topic_name: String,
+          starting_position: String,
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped,
+          consumer_group_id: untyped,
+          credentials: {
+            sasl_scram512_auth: untyped,
+            client_certificate_tls_auth: untyped
+          }
+        },
+        self_managed_kafka_parameters: {
+          topic_name: untyped,
+          starting_position: String,
+          additional_bootstrap_servers: Array[String],
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped,
+          consumer_group_id: untyped,
+          credentials: {
+            basic_auth: untyped,
+            sasl_scram512_auth: untyped,
+            sasl_scram256_auth: untyped,
+            client_certificate_tls_auth: untyped
+          },
+          server_root_ca_certificate: untyped,
+          vpc: {
+            subnets: Array[String],
+            security_group: Array[String]
+          }
+        }
+      },
+      ?enrichment: String,
+      ?enrichment_parameters: {
+        input_template: String,
+        http_parameters: {
+          path_parameter_values: Array[String],
+          header_parameters: Hash[String, String],
+          query_string_parameters: Hash[String, String]
+        }
+      },
+      ?target: String,
+      ?target_parameters: {
+        input_template: String,
+        lambda_function_parameters: {
+          invocation_type: String
+        },
+        step_function_state_machine_parameters: {
+          invocation_type: untyped
+        },
+        kinesis_stream_parameters: {
+          partition_key: String
+        },
+        ecs_task_parameters: {
+          task_definition_arn: String,
+          task_count: Integer,
+          launch_type: String,
+          network_configuration: {
+            awsvpc_configuration: {
+              subnets: Array[String],
+              security_groups: Array[String],
+              assign_public_ip: String
+            }
+          },
+          platform_version: String,
+          group: untyped,
+          capacity_provider_strategy: Array[
+            {
+              capacity_provider: String,
+              weight: Integer,
+              base: Integer
+            }
+          ],
+          enable_ecs_managed_tags: bool,
+          enable_execute_command: untyped,
+          placement_constraints: Array[
+            {
+              type: String,
+              expression: String
+            }
+          ],
+          placement_strategy: Array[
+            {
+              type: String,
+              field: String
+            }
+          ],
+          propagate_tags: String,
+          reference_id: String,
+          overrides: {
+            container_overrides: Array[
+              {
+                command: Array[String],
+                cpu: Integer,
+                environment: Array[
+                  {
+                    name: untyped,
+                    value: untyped
+                  }
+                ],
+                environment_files: Array[
+                  {
+                    type: String,
+                    value: untyped
+                  }
+                ],
+                memory: untyped,
+                memory_reservation: untyped,
+                name: untyped,
+                resource_requirements: Array[
+                  {
+                    type: String,
+                    value: untyped
+                  }
+                ]
+              }
+            ],
+            cpu: untyped,
+            ephemeral_storage: {
+              size_in_gi_b: Integer
+            },
+            execution_role_arn: untyped,
+            inference_accelerator_overrides: Array[
+              {
+                device_name: untyped,
+                device_type: untyped
+              }
+            ],
+            memory: untyped,
+            task_role_arn: untyped
+          },
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        },
+        batch_job_parameters: {
+          job_definition: String,
+          job_name: untyped,
+          array_properties: {
+            size: Integer
+          },
+          retry_strategy: {
+            attempts: Integer
+          },
+          container_overrides: {
+            command: untyped,
+            environment: Array[
+              {
+                name: untyped,
+                value: untyped
+              }
+            ],
+            instance_type: untyped,
+            resource_requirements: Array[
+              {
+                type: String,
+                value: untyped
+              }
+            ]
+          },
+          depends_on: Array[
+            {
+              job_id: untyped,
+              type: String
+            }
+          ],
+          parameters: Hash[String, String]
+        },
+        sqs_queue_parameters: {
+          message_group_id: String,
+          message_deduplication_id: String
+        },
+        http_parameters: {
+          path_parameter_values: Array[String],
+          header_parameters: Hash[String, String],
+          query_string_parameters: Hash[String, String]
+        },
+        redshift_data_parameters: {
+          secret_manager_arn: String,
+          database: String,
+          db_user: String,
+          statement_name: String,
+          with_event: untyped,
+          sqls: Array[String]
+        },
+        sage_maker_pipeline_parameters: {
+          pipeline_parameter_list: Array[
+            {
+              name: String,
+              value: String
+            }
+          ]
+        },
+        event_bridge_event_bus_parameters: {
+          endpoint_id: String,
+          detail_type: String,
+          source: String,
+          resources: Array[String],
+          time: String
+        },
+        cloud_watch_logs_parameters: {
+          log_stream_name: String,
+          timestamp: untyped
+        },
+        timestream_parameters: {
+          time_value: String,
+          epoch_time_unit: String,
+          time_field_type: String,
+          timestamp_format: String,
+          version_value: String,
+          dimension_mappings: Array[
+            {
+              dimension_value: String,
+              dimension_value_type: String,
+              dimension_name: String
+            }
+          ],
+          single_measure_mappings: Array[
+            {
+              measure_value: String,
+              measure_value_type: String,
+              measure_name: String
+            }
+          ],
+          multi_measure_mappings: Array[
+            {
+              multi_measure_name: String,
+              multi_measure_attribute_mappings: Array[
+                {
+                  measure_value: untyped,
+                  measure_value_type: untyped,
+                  multi_measure_attribute_name: String
+                }
+              ]
+            }
+          ]
+        }
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?log_configuration: {
+        s3_log_destination: {
+          bucket_name: String,
+          bucket_owner: untyped,
+          output_format: String,
+          prefix: untyped
+        },
+        firehose_log_destination: {
+          delivery_stream_arn: String
+        },
+        cloudwatch_logs_log_destination: {
+          log_group_arn: String
+        },
+        level: String,
+        include_execution_data: Array[String]
+      },
+      ?kms_key_identifier: String
+    ) -> _CreatePipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipeResponse
+
+    interface _DeletePipeResponse
+      include Smithy::Client::_Response[Types::DeletePipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def delete_pipe: (
+      ?name: String
+    ) -> _DeletePipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipeResponse
+
+    interface _DescribePipeResponse
+      include Smithy::Client::_Response[Types::DescribePipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def state_reason: () -> String?
+      def source: () -> String?
+      def source_parameters: () -> Types::PipeSourceParameters?
+      def enrichment: () -> String?
+      def enrichment_parameters: () -> Types::PipeEnrichmentParameters?
+      def target: () -> String?
+      def target_parameters: () -> Types::PipeTargetParameters?
+      def role_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def log_configuration: () -> Types::PipeLogConfiguration?
+      def kms_key_identifier: () -> String?
+    end
+    def describe_pipe: (
+      ?name: String
+    ) -> _DescribePipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePipeResponse
+
+    interface _ListPipesResponse
+      include Smithy::Client::_Response[Types::ListPipesResponse]
+      def pipes: () -> Array[Types::Pipe]?
+      def next_token: () -> String?
+    end
+    def list_pipes: (
+      ?name_prefix: String,
+      ?desired_state: String,
+      ?current_state: String,
+      ?source_prefix: String,
+      ?target_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListPipesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartPipeResponse
+      include Smithy::Client::_Response[Types::StartPipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def start_pipe: (
+      ?name: String
+    ) -> _StartPipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipeResponse
+
+    interface _StopPipeResponse
+      include Smithy::Client::_Response[Types::StopPipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def stop_pipe: (
+      ?name: String
+    ) -> _StopPipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPipeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdatePipeResponse
+      include Smithy::Client::_Response[Types::UpdatePipeResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def desired_state: () -> String?
+      def current_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def update_pipe: (
+      ?name: String,
+      ?description: String,
+      ?desired_state: String,
+      ?source_parameters: {
+        filter_criteria: {
+          filters: Array[
+            {
+              pattern: String
+            }
+          ]
+        },
+        kinesis_stream_parameters: {
+          batch_size: Integer,
+          dead_letter_config: {
+            arn: String
+          },
+          on_partial_batch_item_failure: String,
+          maximum_batching_window_in_seconds: Integer,
+          maximum_record_age_in_seconds: Integer,
+          maximum_retry_attempts: Integer,
+          parallelization_factor: Integer
+        },
+        dynamo_db_stream_parameters: {
+          batch_size: untyped,
+          dead_letter_config: untyped,
+          on_partial_batch_item_failure: untyped,
+          maximum_batching_window_in_seconds: untyped,
+          maximum_record_age_in_seconds: untyped,
+          maximum_retry_attempts: untyped,
+          parallelization_factor: untyped
+        },
+        sqs_queue_parameters: {
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        active_mq_broker_parameters: {
+          credentials: {
+            basic_auth: String
+          },
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        rabbit_mq_broker_parameters: {
+          credentials: untyped,
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped
+        },
+        managed_streaming_kafka_parameters: {
+          batch_size: untyped,
+          credentials: {
+            sasl_scram512_auth: untyped,
+            client_certificate_tls_auth: untyped
+          },
+          maximum_batching_window_in_seconds: untyped
+        },
+        self_managed_kafka_parameters: {
+          batch_size: untyped,
+          maximum_batching_window_in_seconds: untyped,
+          credentials: {
+            basic_auth: untyped,
+            sasl_scram512_auth: untyped,
+            sasl_scram256_auth: untyped,
+            client_certificate_tls_auth: untyped
+          },
+          server_root_ca_certificate: untyped,
+          vpc: {
+            subnets: Array[String],
+            security_group: Array[String]
+          }
+        }
+      },
+      ?enrichment: String,
+      ?enrichment_parameters: {
+        input_template: String,
+        http_parameters: {
+          path_parameter_values: Array[String],
+          header_parameters: Hash[String, String],
+          query_string_parameters: Hash[String, String]
+        }
+      },
+      ?target: String,
+      ?target_parameters: {
+        input_template: String,
+        lambda_function_parameters: {
+          invocation_type: String
+        },
+        step_function_state_machine_parameters: {
+          invocation_type: untyped
+        },
+        kinesis_stream_parameters: {
+          partition_key: String
+        },
+        ecs_task_parameters: {
+          task_definition_arn: String,
+          task_count: Integer,
+          launch_type: String,
+          network_configuration: {
+            awsvpc_configuration: {
+              subnets: Array[String],
+              security_groups: Array[String],
+              assign_public_ip: String
+            }
+          },
+          platform_version: String,
+          group: untyped,
+          capacity_provider_strategy: Array[
+            {
+              capacity_provider: String,
+              weight: Integer,
+              base: Integer
+            }
+          ],
+          enable_ecs_managed_tags: bool,
+          enable_execute_command: untyped,
+          placement_constraints: Array[
+            {
+              type: String,
+              expression: String
+            }
+          ],
+          placement_strategy: Array[
+            {
+              type: String,
+              field: String
+            }
+          ],
+          propagate_tags: String,
+          reference_id: String,
+          overrides: {
+            container_overrides: Array[
+              {
+                command: Array[String],
+                cpu: Integer,
+                environment: Array[
+                  {
+                    name: untyped,
+                    value: untyped
+                  }
+                ],
+                environment_files: Array[
+                  {
+                    type: String,
+                    value: untyped
+                  }
+                ],
+                memory: untyped,
+                memory_reservation: untyped,
+                name: untyped,
+                resource_requirements: Array[
+                  {
+                    type: String,
+                    value: untyped
+                  }
+                ]
+              }
+            ],
+            cpu: untyped,
+            ephemeral_storage: {
+              size_in_gi_b: Integer
+            },
+            execution_role_arn: untyped,
+            inference_accelerator_overrides: Array[
+              {
+                device_name: untyped,
+                device_type: untyped
+              }
+            ],
+            memory: untyped,
+            task_role_arn: untyped
+          },
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        },
+        batch_job_parameters: {
+          job_definition: String,
+          job_name: untyped,
+          array_properties: {
+            size: Integer
+          },
+          retry_strategy: {
+            attempts: Integer
+          },
+          container_overrides: {
+            command: untyped,
+            environment: Array[
+              {
+                name: untyped,
+                value: untyped
+              }
+            ],
+            instance_type: untyped,
+            resource_requirements: Array[
+              {
+                type: String,
+                value: untyped
+              }
+            ]
+          },
+          depends_on: Array[
+            {
+              job_id: untyped,
+              type: String
+            }
+          ],
+          parameters: Hash[String, String]
+        },
+        sqs_queue_parameters: {
+          message_group_id: String,
+          message_deduplication_id: String
+        },
+        http_parameters: {
+          path_parameter_values: Array[String],
+          header_parameters: Hash[String, String],
+          query_string_parameters: Hash[String, String]
+        },
+        redshift_data_parameters: {
+          secret_manager_arn: String,
+          database: String,
+          db_user: String,
+          statement_name: String,
+          with_event: untyped,
+          sqls: Array[String]
+        },
+        sage_maker_pipeline_parameters: {
+          pipeline_parameter_list: Array[
+            {
+              name: String,
+              value: String
+            }
+          ]
+        },
+        event_bridge_event_bus_parameters: {
+          endpoint_id: String,
+          detail_type: String,
+          source: String,
+          resources: Array[String],
+          time: String
+        },
+        cloud_watch_logs_parameters: {
+          log_stream_name: String,
+          timestamp: untyped
+        },
+        timestream_parameters: {
+          time_value: String,
+          epoch_time_unit: String,
+          time_field_type: String,
+          timestamp_format: String,
+          version_value: String,
+          dimension_mappings: Array[
+            {
+              dimension_value: String,
+              dimension_value_type: String,
+              dimension_name: String
+            }
+          ],
+          single_measure_mappings: Array[
+            {
+              measure_value: String,
+              measure_value_type: String,
+              measure_name: String
+            }
+          ],
+          multi_measure_mappings: Array[
+            {
+              multi_measure_name: String,
+              multi_measure_attribute_mappings: Array[
+                {
+                  measure_value: untyped,
+                  measure_value_type: untyped,
+                  multi_measure_attribute_name: String
+                }
+              ]
+            }
+          ]
+        }
+      },
+      ?role_arn: String,
+      ?log_configuration: {
+        s3_log_destination: {
+          bucket_name: String,
+          bucket_owner: untyped,
+          output_format: String,
+          prefix: untyped
+        },
+        firehose_log_destination: {
+          delivery_stream_arn: String
+        },
+        cloudwatch_logs_log_destination: {
+          log_group_arn: String
+        },
+        level: String,
+        include_execution_data: Array[String]
+      },
+      ?kms_key_identifier: String
+    ) -> _UpdatePipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipeResponse
+  end
+end

@@ -1,0 +1,20 @@
+module Aws::AppConfigData
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def details: () -> Types::BadRequestDetails?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def referenced_by: () -> Hash[String, String]?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

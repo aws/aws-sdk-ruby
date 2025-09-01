@@ -1,0 +1,142 @@
+module Aws::ControlCatalog
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ControlCatalog::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetControlResponse
+      include Smithy::Client::_Response[Types::GetControlResponse]
+      def arn: () -> String?
+      def aliases: () -> Array[String]?
+      def name: () -> String?
+      def description: () -> String?
+      def behavior: () -> String?
+      def severity: () -> String?
+      def region_configuration: () -> Types::RegionConfiguration?
+      def implementation: () -> Types::ImplementationDetails?
+      def parameters: () -> Array[Types::ControlParameter]?
+      def create_time: () -> Time?
+      def governed_resources: () -> Array[String]?
+    end
+    def get_control: (
+      ?control_arn: String
+    ) -> _GetControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetControlResponse
+
+    interface _ListCommonControlsResponse
+      include Smithy::Client::_Response[Types::ListCommonControlsResponse]
+      def common_controls: () -> Array[Types::CommonControlSummary]?
+      def next_token: () -> String?
+    end
+    def list_common_controls: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?common_control_filter: {
+        objectives: Array[
+          {
+            arn: String
+          }
+        ]
+      }
+    ) -> _ListCommonControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommonControlsResponse
+
+    interface _ListControlMappingsResponse
+      include Smithy::Client::_Response[Types::ListControlMappingsResponse]
+      def control_mappings: () -> Array[Types::ControlMapping]?
+      def next_token: () -> String?
+    end
+    def list_control_mappings: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        control_arns: Array[String],
+        common_control_arns: Array[String],
+        mapping_types: Array[String]
+      }
+    ) -> _ListControlMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlMappingsResponse
+
+    interface _ListControlsResponse
+      include Smithy::Client::_Response[Types::ListControlsResponse]
+      def controls: () -> Array[Types::ControlSummary]?
+      def next_token: () -> String?
+    end
+    def list_controls: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        implementations: {
+          types: Array[String],
+          identifiers: Array[String]
+        }
+      }
+    ) -> _ListControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlsResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsResponse]
+      def domains: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListObjectivesResponse
+      include Smithy::Client::_Response[Types::ListObjectivesResponse]
+      def objectives: () -> Array[Types::ObjectiveSummary]?
+      def next_token: () -> String?
+    end
+    def list_objectives: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?objective_filter: {
+        domains: Array[
+          {
+            arn: String
+          }
+        ]
+      }
+    ) -> _ListObjectivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectivesResponse
+  end
+end

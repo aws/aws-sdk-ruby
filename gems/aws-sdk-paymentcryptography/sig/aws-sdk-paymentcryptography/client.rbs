@@ -1,0 +1,377 @@
+module Aws::PaymentCryptography
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PaymentCryptography::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Response[Types::CreateAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def create_alias: (
+      ?alias_name: String,
+      ?key_arn: String
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateKeyResponse
+      include Smithy::Client::_Response[Types::CreateKeyOutput]
+      def key: () -> Types::Key?
+    end
+    def create_key: (
+      ?key_attributes: {
+        key_usage: String,
+        key_class: String,
+        key_algorithm: String,
+        key_modes_of_use: {
+          encrypt: bool,
+          decrypt: untyped,
+          wrap: untyped,
+          unwrap: untyped,
+          generate: untyped,
+          sign: untyped,
+          verify: untyped,
+          derive_key: untyped,
+          no_restrictions: untyped
+        }
+      },
+      ?key_check_value_algorithm: String,
+      ?exportable: bool,
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?derive_key_usage: String
+    ) -> _CreateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyResponse
+
+    interface _DeleteAliasResponse
+      include Smithy::Client::_Response[Types::DeleteAliasOutput]
+    end
+    def delete_alias: (
+      ?alias_name: String
+    ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
+
+    interface _DeleteKeyResponse
+      include Smithy::Client::_Response[Types::DeleteKeyOutput]
+      def key: () -> Types::Key?
+    end
+    def delete_key: (
+      ?key_identifier: String,
+      ?delete_key_in_days: Integer
+    ) -> _DeleteKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyResponse
+
+    interface _ExportKeyResponse
+      include Smithy::Client::_Response[Types::ExportKeyOutput]
+      def wrapped_key: () -> Types::WrappedKey?
+    end
+    def export_key: (
+      ?key_material: {
+        tr31_key_block: {
+          wrapping_key_identifier: String,
+          key_block_headers: {
+            key_modes_of_use: {
+              encrypt: bool,
+              decrypt: untyped,
+              wrap: untyped,
+              unwrap: untyped,
+              generate: untyped,
+              sign: untyped,
+              verify: untyped,
+              derive_key: untyped,
+              no_restrictions: untyped
+            },
+            key_exportability: String,
+            key_version: String,
+            optional_blocks: Hash[String, String]
+          }
+        },
+        tr34_key_block: {
+          certificate_authority_public_key_identifier: untyped,
+          wrapping_key_certificate: String,
+          export_token: String,
+          key_block_format: String,
+          random_nonce: String,
+          key_block_headers: untyped
+        },
+        key_cryptogram: {
+          certificate_authority_public_key_identifier: untyped,
+          wrapping_key_certificate: untyped,
+          wrapping_spec: String
+        },
+        diffie_hellman_tr31_key_block: {
+          private_key_identifier: untyped,
+          certificate_authority_public_key_identifier: untyped,
+          public_key_certificate: untyped,
+          derive_key_algorithm: String,
+          key_derivation_function: String,
+          key_derivation_hash_algorithm: String,
+          derivation_data: {
+            shared_information: String
+          },
+          key_block_headers: untyped
+        }
+      },
+      ?export_key_identifier: String,
+      ?export_attributes: {
+        export_dukpt_initial_key: {
+          key_serial_number: String
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _ExportKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportKeyResponse
+
+    interface _GetAliasResponse
+      include Smithy::Client::_Response[Types::GetAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def get_alias: (
+      ?alias_name: String
+    ) -> _GetAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAliasResponse
+
+    interface _GetKeyResponse
+      include Smithy::Client::_Response[Types::GetKeyOutput]
+      def key: () -> Types::Key?
+    end
+    def get_key: (
+      ?key_identifier: String
+    ) -> _GetKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyResponse
+
+    interface _GetParametersForExportResponse
+      include Smithy::Client::_Response[Types::GetParametersForExportOutput]
+      def signing_key_certificate: () -> String?
+      def signing_key_certificate_chain: () -> String?
+      def signing_key_algorithm: () -> String?
+      def export_token: () -> String?
+      def parameters_valid_until_timestamp: () -> Time?
+    end
+    def get_parameters_for_export: (
+      ?key_material_type: String,
+      ?signing_key_algorithm: String
+    ) -> _GetParametersForExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersForExportResponse
+
+    interface _GetParametersForImportResponse
+      include Smithy::Client::_Response[Types::GetParametersForImportOutput]
+      def wrapping_key_certificate: () -> String?
+      def wrapping_key_certificate_chain: () -> String?
+      def wrapping_key_algorithm: () -> String?
+      def import_token: () -> String?
+      def parameters_valid_until_timestamp: () -> Time?
+    end
+    def get_parameters_for_import: (
+      ?key_material_type: String,
+      ?wrapping_key_algorithm: String
+    ) -> _GetParametersForImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersForImportResponse
+
+    interface _GetPublicKeyCertificateResponse
+      include Smithy::Client::_Response[Types::GetPublicKeyCertificateOutput]
+      def key_certificate: () -> String?
+      def key_certificate_chain: () -> String?
+    end
+    def get_public_key_certificate: (
+      ?key_identifier: String
+    ) -> _GetPublicKeyCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyCertificateResponse
+
+    interface _ImportKeyResponse
+      include Smithy::Client::_Response[Types::ImportKeyOutput]
+      def key: () -> Types::Key?
+    end
+    def import_key: (
+      ?key_material: {
+        root_certificate_public_key: {
+          key_attributes: {
+            key_usage: String,
+            key_class: String,
+            key_algorithm: String,
+            key_modes_of_use: {
+              encrypt: bool,
+              decrypt: untyped,
+              wrap: untyped,
+              unwrap: untyped,
+              generate: untyped,
+              sign: untyped,
+              verify: untyped,
+              derive_key: untyped,
+              no_restrictions: untyped
+            }
+          },
+          public_key_certificate: String
+        },
+        trusted_certificate_public_key: {
+          key_attributes: untyped,
+          public_key_certificate: untyped,
+          certificate_authority_public_key_identifier: String
+        },
+        tr31_key_block: {
+          wrapping_key_identifier: untyped,
+          wrapped_key_block: String
+        },
+        tr34_key_block: {
+          certificate_authority_public_key_identifier: untyped,
+          signing_key_certificate: untyped,
+          import_token: String,
+          wrapped_key_block: String,
+          key_block_format: String,
+          random_nonce: String
+        },
+        key_cryptogram: {
+          key_attributes: untyped,
+          exportable: bool,
+          wrapped_key_cryptogram: String,
+          import_token: untyped,
+          wrapping_spec: String
+        },
+        diffie_hellman_tr31_key_block: {
+          private_key_identifier: untyped,
+          certificate_authority_public_key_identifier: untyped,
+          public_key_certificate: untyped,
+          derive_key_algorithm: String,
+          key_derivation_function: String,
+          key_derivation_hash_algorithm: String,
+          derivation_data: {
+            shared_information: String
+          },
+          wrapped_key_block: untyped
+        }
+      },
+      ?key_check_value_algorithm: String,
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportKeyResponse
+
+    interface _ListAliasesResponse
+      include Smithy::Client::_Response[Types::ListAliasesOutput]
+      def aliases: () -> Array[Types::Alias]?
+      def next_token: () -> String?
+    end
+    def list_aliases: (
+      ?key_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
+
+    interface _ListKeysResponse
+      include Smithy::Client::_Response[Types::ListKeysOutput]
+      def keys: () -> Array[Types::KeySummary]?
+      def next_token: () -> String?
+    end
+    def list_keys: (
+      ?key_state: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeysResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RestoreKeyResponse
+      include Smithy::Client::_Response[Types::RestoreKeyOutput]
+      def key: () -> Types::Key?
+    end
+    def restore_key: (
+      ?key_identifier: String
+    ) -> _RestoreKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreKeyResponse
+
+    interface _StartKeyUsageResponse
+      include Smithy::Client::_Response[Types::StartKeyUsageOutput]
+      def key: () -> Types::Key?
+    end
+    def start_key_usage: (
+      ?key_identifier: String
+    ) -> _StartKeyUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartKeyUsageResponse
+
+    interface _StopKeyUsageResponse
+      include Smithy::Client::_Response[Types::StopKeyUsageOutput]
+      def key: () -> Types::Key?
+    end
+    def stop_key_usage: (
+      ?key_identifier: String
+    ) -> _StopKeyUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopKeyUsageResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAliasResponse
+      include Smithy::Client::_Response[Types::UpdateAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def update_alias: (
+      ?alias_name: String,
+      ?key_arn: String
+    ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
+  end
+end

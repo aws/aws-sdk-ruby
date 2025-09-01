@@ -1,0 +1,5 @@
+  module Aws
+    module CloudWatchLogs
+      VERSION: String
+    end
+  end

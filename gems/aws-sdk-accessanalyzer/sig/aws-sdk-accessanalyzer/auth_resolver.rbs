@@ -1,0 +1,5 @@
+module Aws::AccessAnalyzer
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

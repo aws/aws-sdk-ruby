@@ -1,0 +1,323 @@
+module Aws::SQS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SQS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddPermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_permission: (
+      ?queue_url: String,
+      ?label: String,
+      ?aws_account_ids: Array[String],
+      ?actions: Array[String]
+    ) -> _AddPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPermissionResponse
+
+    interface _CancelMessageMoveTaskResponse
+      include Smithy::Client::_Response[Types::CancelMessageMoveTaskResult]
+      def approximate_number_of_messages_moved: () -> Integer?
+    end
+    def cancel_message_move_task: (
+      ?task_handle: String
+    ) -> _CancelMessageMoveTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMessageMoveTaskResponse
+
+    interface _ChangeMessageVisibilityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def change_message_visibility: (
+      ?queue_url: String,
+      ?receipt_handle: String,
+      ?visibility_timeout: Integer
+    ) -> _ChangeMessageVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeMessageVisibilityResponse
+
+    interface _ChangeMessageVisibilityBatchResponse
+      include Smithy::Client::_Response[Types::ChangeMessageVisibilityBatchResult]
+      def successful: () -> Array[Types::ChangeMessageVisibilityBatchResultEntry]?
+      def failed: () -> Array[Types::BatchResultErrorEntry]?
+    end
+    def change_message_visibility_batch: (
+      ?queue_url: String,
+      ?entries: Array[
+        {
+          id: String,
+          receipt_handle: untyped,
+          visibility_timeout: Integer
+        }
+      ]
+    ) -> _ChangeMessageVisibilityBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeMessageVisibilityBatchResponse
+
+    interface _CreateQueueResponse
+      include Smithy::Client::_Response[Types::CreateQueueResult]
+      def queue_url: () -> String?
+    end
+    def create_queue: (
+      ?queue_name: String,
+      ?attributes: Hash[String, String],
+      ?tags: Hash[String, String]
+    ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
+
+    interface _DeleteMessageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_message: (
+      ?queue_url: String,
+      ?receipt_handle: String
+    ) -> _DeleteMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMessageResponse
+
+    interface _DeleteMessageBatchResponse
+      include Smithy::Client::_Response[Types::DeleteMessageBatchResult]
+      def successful: () -> Array[Types::DeleteMessageBatchResultEntry]?
+      def failed: () -> Array[Types::BatchResultErrorEntry]?
+    end
+    def delete_message_batch: (
+      ?queue_url: String,
+      ?entries: Array[
+        {
+          id: String,
+          receipt_handle: untyped
+        }
+      ]
+    ) -> _DeleteMessageBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMessageBatchResponse
+
+    interface _DeleteQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_queue: (
+      ?queue_url: String
+    ) -> _DeleteQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueResponse
+
+    interface _GetQueueAttributesResponse
+      include Smithy::Client::_Response[Types::GetQueueAttributesResult]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_queue_attributes: (
+      ?queue_url: String,
+      ?attribute_names: Array[String]
+    ) -> _GetQueueAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueAttributesResponse
+
+    interface _GetQueueUrlResponse
+      include Smithy::Client::_Response[Types::GetQueueUrlResult]
+      def queue_url: () -> String?
+    end
+    def get_queue_url: (
+      ?queue_name: String,
+      ?queue_owner_aws_account_id: String
+    ) -> _GetQueueUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueUrlResponse
+
+    interface _ListDeadLetterSourceQueuesResponse
+      include Smithy::Client::_Response[Types::ListDeadLetterSourceQueuesResult]
+      def queue_urls: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_dead_letter_source_queues: (
+      ?queue_url: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDeadLetterSourceQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeadLetterSourceQueuesResponse
+
+    interface _ListMessageMoveTasksResponse
+      include Smithy::Client::_Response[Types::ListMessageMoveTasksResult]
+      def results: () -> Array[Types::ListMessageMoveTasksResultEntry]?
+    end
+    def list_message_move_tasks: (
+      ?source_arn: String,
+      ?max_results: Integer
+    ) -> _ListMessageMoveTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMessageMoveTasksResponse
+
+    interface _ListQueueTagsResponse
+      include Smithy::Client::_Response[Types::ListQueueTagsResult]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_queue_tags: (
+      ?queue_url: String
+    ) -> _ListQueueTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueTagsResponse
+
+    interface _ListQueuesResponse
+      include Smithy::Client::_Response[Types::ListQueuesResult]
+      def queue_urls: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_queues: (
+      ?queue_name_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuesResponse
+
+    interface _PurgeQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def purge_queue: (
+      ?queue_url: String
+    ) -> _PurgeQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurgeQueueResponse
+
+    interface _ReceiveMessageResponse
+      include Smithy::Client::_Response[Types::ReceiveMessageResult]
+      def messages: () -> Array[Types::Message]?
+    end
+    def receive_message: (
+      ?queue_url: String,
+      ?attribute_names: Array[String],
+      ?message_system_attribute_names: Array[String],
+      ?message_attribute_names: Array[String],
+      ?max_number_of_messages: Integer,
+      ?visibility_timeout: Integer,
+      ?wait_time_seconds: Integer,
+      ?receive_request_attempt_id: String
+    ) -> _ReceiveMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReceiveMessageResponse
+
+    interface _RemovePermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_permission: (
+      ?queue_url: String,
+      ?label: String
+    ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _SendMessageResponse
+      include Smithy::Client::_Response[Types::SendMessageResult]
+      def md5_of_message_body: () -> String?
+      def md5_of_message_attributes: () -> String?
+      def md5_of_message_system_attributes: () -> String?
+      def message_id: () -> String?
+      def sequence_number: () -> String?
+    end
+    def send_message: (
+      ?queue_url: String,
+      ?message_body: String,
+      ?delay_seconds: Integer,
+      ?message_attributes: Hash[String,
+        {
+          string_value: String,
+          binary_value: String,
+          string_list_values: Array[String],
+          binary_list_values: Array[String],
+          data_type: untyped
+        }
+      ],
+      ?message_system_attributes: Hash[String,
+        {
+          string_value: String,
+          binary_value: String,
+          string_list_values: Array[String],
+          binary_list_values: Array[String],
+          data_type: untyped
+        }
+      ],
+      ?message_deduplication_id: String,
+      ?message_group_id: String
+    ) -> _SendMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessageResponse
+
+    interface _SendMessageBatchResponse
+      include Smithy::Client::_Response[Types::SendMessageBatchResult]
+      def successful: () -> Array[Types::SendMessageBatchResultEntry]?
+      def failed: () -> Array[Types::BatchResultErrorEntry]?
+    end
+    def send_message_batch: (
+      ?queue_url: String,
+      ?entries: Array[
+        {
+          id: String,
+          message_body: untyped,
+          delay_seconds: Integer,
+          message_attributes: Hash[String,
+            {
+              string_value: untyped,
+              binary_value: String,
+              string_list_values: Array[String],
+              binary_list_values: Array[String],
+              data_type: untyped
+            }
+          ],
+          message_system_attributes: Hash[String,
+            {
+              string_value: untyped,
+              binary_value: untyped,
+              string_list_values: untyped,
+              binary_list_values: untyped,
+              data_type: untyped
+            }
+          ],
+          message_deduplication_id: untyped,
+          message_group_id: untyped
+        }
+      ]
+    ) -> _SendMessageBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessageBatchResponse
+
+    interface _SetQueueAttributesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_queue_attributes: (
+      ?queue_url: String,
+      ?attributes: Hash[String, String]
+    ) -> _SetQueueAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetQueueAttributesResponse
+
+    interface _StartMessageMoveTaskResponse
+      include Smithy::Client::_Response[Types::StartMessageMoveTaskResult]
+      def task_handle: () -> String?
+    end
+    def start_message_move_task: (
+      ?source_arn: String,
+      ?destination_arn: String,
+      ?max_number_of_messages_per_second: Integer
+    ) -> _StartMessageMoveTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMessageMoveTaskResponse
+
+    interface _TagQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_queue: (
+      ?queue_url: String,
+      ?tags: Hash[String, String]
+    ) -> _TagQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagQueueResponse
+
+    interface _UntagQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_queue: (
+      ?queue_url: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagQueueResponse
+  end
+end

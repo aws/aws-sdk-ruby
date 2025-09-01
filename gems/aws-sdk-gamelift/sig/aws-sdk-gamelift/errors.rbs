@@ -1,0 +1,52 @@
+module Aws::GameLift
+  module Errors
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FleetCapacityExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GameSessionFullException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFleetStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGameSessionStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OutOfCapacityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaggingFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TerminalRoutingStrategyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

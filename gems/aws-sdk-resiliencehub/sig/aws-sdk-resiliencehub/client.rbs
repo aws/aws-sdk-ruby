@@ -1,0 +1,948 @@
+module Aws::Resiliencehub
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Resiliencehub::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptResourceGroupingRecommendationsResponse
+      include Smithy::Client::_Response[Types::AcceptResourceGroupingRecommendationsResponse]
+      def app_arn: () -> String?
+      def failed_entries: () -> Array[Types::FailedGroupingRecommendationEntry]?
+    end
+    def accept_resource_grouping_recommendations: (
+      ?app_arn: String,
+      ?entries: Array[
+        {
+          grouping_recommendation_id: String
+        }
+      ]
+    ) -> _AcceptResourceGroupingRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptResourceGroupingRecommendationsResponse
+
+    interface _AddDraftAppVersionResourceMappingsResponse
+      include Smithy::Client::_Response[Types::AddDraftAppVersionResourceMappingsOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def resource_mappings: () -> Array[Types::ResourceMapping]?
+    end
+    def add_draft_app_version_resource_mappings: (
+      ?app_arn: String,
+      ?resource_mappings: Array[
+        {
+          resource_name: String,
+          logical_stack_name: String,
+          app_registry_app_name: untyped,
+          resource_group_name: untyped,
+          mapping_type: String,
+          physical_resource_id: {
+            identifier: untyped,
+            type: String,
+            aws_region: String,
+            aws_account_id: String
+          },
+          terraform_source_name: untyped,
+          eks_source_name: untyped
+        }
+      ]
+    ) -> _AddDraftAppVersionResourceMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddDraftAppVersionResourceMappingsResponse
+
+    interface _BatchUpdateRecommendationStatusResponse
+      include Smithy::Client::_Response[Types::BatchUpdateRecommendationStatusResponse]
+      def app_arn: () -> String?
+      def successful_entries: () -> Array[Types::BatchUpdateRecommendationStatusSuccessfulEntry]?
+      def failed_entries: () -> Array[Types::BatchUpdateRecommendationStatusFailedEntry]?
+    end
+    def batch_update_recommendation_status: (
+      ?app_arn: String,
+      ?request_entries: Array[
+        {
+          entry_id: String,
+          reference_id: String,
+          item: {
+            resource_id: String,
+            target_account_id: String,
+            target_region: String
+          },
+          excluded: bool,
+          app_component_id: String,
+          exclude_reason: String
+        }
+      ]
+    ) -> _BatchUpdateRecommendationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateRecommendationStatusResponse
+
+    interface _CreateAppResponse
+      include Smithy::Client::_Response[Types::CreateAppOutput]
+      def app: () -> Types::App?
+    end
+    def create_app: (
+      ?name: String,
+      ?description: String,
+      ?policy_arn: String,
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?assessment_schedule: String,
+      ?permission_model: {
+        type: String,
+        invoker_role_name: String,
+        cross_account_role_arns: Array[String]
+      },
+      ?event_subscriptions: Array[
+        {
+          name: String,
+          event_type: String,
+          sns_topic_arn: String
+        }
+      ],
+      ?aws_application_arn: String
+    ) -> _CreateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppResponse
+
+    interface _CreateAppVersionAppComponentResponse
+      include Smithy::Client::_Response[Types::CreateAppVersionAppComponentOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_component: () -> Types::AppComponent?
+    end
+    def create_app_version_app_component: (
+      ?app_arn: String,
+      ?id: String,
+      ?name: String,
+      ?type: String,
+      ?additional_info: Hash[String,
+        Array[String]
+      ],
+      ?client_token: String
+    ) -> _CreateAppVersionAppComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppVersionAppComponentResponse
+
+    interface _CreateAppVersionResourceResponse
+      include Smithy::Client::_Response[Types::CreateAppVersionResourceOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def physical_resource: () -> Types::PhysicalResource?
+    end
+    def create_app_version_resource: (
+      ?app_arn: String,
+      ?resource_name: String,
+      ?logical_resource_id: {
+        identifier: String,
+        logical_stack_name: untyped,
+        resource_group_name: String,
+        terraform_source_name: untyped,
+        eks_source_name: untyped
+      },
+      ?physical_resource_id: String,
+      ?aws_region: String,
+      ?aws_account_id: String,
+      ?resource_type: String,
+      ?app_components: Array[String],
+      ?additional_info: Hash[String,
+        Array[String]
+      ],
+      ?client_token: String
+    ) -> _CreateAppVersionResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppVersionResourceResponse
+
+    interface _CreateRecommendationTemplateResponse
+      include Smithy::Client::_Response[Types::CreateRecommendationTemplateOutput]
+      def recommendation_template: () -> Types::RecommendationTemplate?
+    end
+    def create_recommendation_template: (
+      ?recommendation_ids: Array[String],
+      ?format: String,
+      ?recommendation_types: Array[String],
+      ?assessment_arn: String,
+      ?name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?bucket_name: String
+    ) -> _CreateRecommendationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecommendationTemplateResponse
+
+    interface _CreateResiliencyPolicyResponse
+      include Smithy::Client::_Response[Types::CreateResiliencyPolicyOutput]
+      def policy: () -> Types::ResiliencyPolicy?
+    end
+    def create_resiliency_policy: (
+      ?policy_name: String,
+      ?policy_description: String,
+      ?data_location_constraint: String,
+      ?tier: String,
+      ?policy: Hash[String,
+        {
+          rto_in_secs: Integer,
+          rpo_in_secs: untyped
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateResiliencyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResiliencyPolicyResponse
+
+    interface _DeleteAppResponse
+      include Smithy::Client::_Response[Types::DeleteAppOutput]
+      def app_arn: () -> String?
+    end
+    def delete_app: (
+      ?app_arn: String,
+      ?force_delete: bool,
+      ?client_token: String
+    ) -> _DeleteAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppResponse
+
+    interface _DeleteAppAssessmentResponse
+      include Smithy::Client::_Response[Types::DeleteAppAssessmentOutput]
+      def assessment_arn: () -> String?
+      def assessment_status: () -> String?
+    end
+    def delete_app_assessment: (
+      ?assessment_arn: String,
+      ?client_token: String
+    ) -> _DeleteAppAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppAssessmentResponse
+
+    interface _DeleteAppInputSourceResponse
+      include Smithy::Client::_Response[Types::DeleteAppInputSourceOutput]
+      def app_arn: () -> String?
+      def app_input_source: () -> Types::AppInputSource?
+    end
+    def delete_app_input_source: (
+      ?app_arn: String,
+      ?source_arn: String,
+      ?terraform_source: {
+        s3_state_file_url: String
+      },
+      ?client_token: String,
+      ?eks_source_cluster_namespace: {
+        eks_cluster_arn: String,
+        namespace: String
+      }
+    ) -> _DeleteAppInputSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppInputSourceResponse
+
+    interface _DeleteAppVersionAppComponentResponse
+      include Smithy::Client::_Response[Types::DeleteAppVersionAppComponentOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_component: () -> Types::AppComponent?
+    end
+    def delete_app_version_app_component: (
+      ?app_arn: String,
+      ?id: String,
+      ?client_token: String
+    ) -> _DeleteAppVersionAppComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppVersionAppComponentResponse
+
+    interface _DeleteAppVersionResourceResponse
+      include Smithy::Client::_Response[Types::DeleteAppVersionResourceOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def physical_resource: () -> Types::PhysicalResource?
+    end
+    def delete_app_version_resource: (
+      ?app_arn: String,
+      ?resource_name: String,
+      ?logical_resource_id: {
+        identifier: String,
+        logical_stack_name: untyped,
+        resource_group_name: String,
+        terraform_source_name: untyped,
+        eks_source_name: untyped
+      },
+      ?physical_resource_id: String,
+      ?aws_region: String,
+      ?aws_account_id: String,
+      ?client_token: String
+    ) -> _DeleteAppVersionResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppVersionResourceResponse
+
+    interface _DeleteRecommendationTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteRecommendationTemplateOutput]
+      def recommendation_template_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_recommendation_template: (
+      ?recommendation_template_arn: String,
+      ?client_token: String
+    ) -> _DeleteRecommendationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecommendationTemplateResponse
+
+    interface _DeleteResiliencyPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResiliencyPolicyOutput]
+      def policy_arn: () -> String?
+    end
+    def delete_resiliency_policy: (
+      ?policy_arn: String,
+      ?client_token: String
+    ) -> _DeleteResiliencyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResiliencyPolicyResponse
+
+    interface _DescribeAppResponse
+      include Smithy::Client::_Response[Types::DescribeAppOutput]
+      def app: () -> Types::App?
+    end
+    def describe_app: (
+      ?app_arn: String
+    ) -> _DescribeAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppResponse
+
+    interface _DescribeAppAssessmentResponse
+      include Smithy::Client::_Response[Types::DescribeAppAssessmentOutput]
+      def assessment: () -> Types::AppAssessment?
+    end
+    def describe_app_assessment: (
+      ?assessment_arn: String
+    ) -> _DescribeAppAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppAssessmentResponse
+
+    interface _DescribeAppVersionResponse
+      include Smithy::Client::_Response[Types::DescribeAppVersionOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def additional_info: () -> Hash[String, Array[String]]?
+    end
+    def describe_app_version: (
+      ?app_arn: String,
+      ?app_version: String
+    ) -> _DescribeAppVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppVersionResponse
+
+    interface _DescribeAppVersionAppComponentResponse
+      include Smithy::Client::_Response[Types::DescribeAppVersionAppComponentOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_component: () -> Types::AppComponent?
+    end
+    def describe_app_version_app_component: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?id: String
+    ) -> _DescribeAppVersionAppComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppVersionAppComponentResponse
+
+    interface _DescribeAppVersionResourceResponse
+      include Smithy::Client::_Response[Types::DescribeAppVersionResourceOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def physical_resource: () -> Types::PhysicalResource?
+    end
+    def describe_app_version_resource: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?resource_name: String,
+      ?logical_resource_id: {
+        identifier: String,
+        logical_stack_name: untyped,
+        resource_group_name: String,
+        terraform_source_name: untyped,
+        eks_source_name: untyped
+      },
+      ?physical_resource_id: String,
+      ?aws_region: String,
+      ?aws_account_id: String
+    ) -> _DescribeAppVersionResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppVersionResourceResponse
+
+    interface _DescribeAppVersionResourcesResolutionStatusResponse
+      include Smithy::Client::_Response[Types::DescribeAppVersionResourcesResolutionStatusOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def resolution_id: () -> String?
+      def status: () -> String?
+      def error_message: () -> String?
+    end
+    def describe_app_version_resources_resolution_status: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?resolution_id: String
+    ) -> _DescribeAppVersionResourcesResolutionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppVersionResourcesResolutionStatusResponse
+
+    interface _DescribeAppVersionTemplateResponse
+      include Smithy::Client::_Response[Types::DescribeAppVersionTemplateOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_template_body: () -> String?
+    end
+    def describe_app_version_template: (
+      ?app_arn: String,
+      ?app_version: String
+    ) -> _DescribeAppVersionTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppVersionTemplateResponse
+
+    interface _DescribeDraftAppVersionResourcesImportStatusResponse
+      include Smithy::Client::_Response[Types::DescribeDraftAppVersionResourcesImportStatusOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def status: () -> String?
+      def status_change_time: () -> Time?
+      def error_message: () -> String?
+      def error_details: () -> Array[Types::ErrorDetail]?
+    end
+    def describe_draft_app_version_resources_import_status: (
+      ?app_arn: String
+    ) -> _DescribeDraftAppVersionResourcesImportStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDraftAppVersionResourcesImportStatusResponse
+
+    interface _DescribeMetricsExportResponse
+      include Smithy::Client::_Response[Types::DescribeMetricsExportResponse]
+      def metrics_export_id: () -> String?
+      def status: () -> String?
+      def export_location: () -> Types::S3Location?
+      def error_message: () -> String?
+    end
+    def describe_metrics_export: (
+      ?metrics_export_id: String
+    ) -> _DescribeMetricsExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricsExportResponse
+
+    interface _DescribeResiliencyPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResiliencyPolicyOutput]
+      def policy: () -> Types::ResiliencyPolicy?
+    end
+    def describe_resiliency_policy: (
+      ?policy_arn: String
+    ) -> _DescribeResiliencyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResiliencyPolicyResponse
+
+    interface _DescribeResourceGroupingRecommendationTaskResponse
+      include Smithy::Client::_Response[Types::DescribeResourceGroupingRecommendationTaskResponse]
+      def grouping_id: () -> String?
+      def status: () -> String?
+      def error_message: () -> String?
+    end
+    def describe_resource_grouping_recommendation_task: (
+      ?app_arn: String,
+      ?grouping_id: String
+    ) -> _DescribeResourceGroupingRecommendationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceGroupingRecommendationTaskResponse
+
+    interface _ImportResourcesToDraftAppVersionResponse
+      include Smithy::Client::_Response[Types::ImportResourcesToDraftAppVersionOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def source_arns: () -> Array[String]?
+      def status: () -> String?
+      def terraform_sources: () -> Array[Types::TerraformSource]?
+      def eks_sources: () -> Array[Types::EksSource]?
+    end
+    def import_resources_to_draft_app_version: (
+      ?app_arn: String,
+      ?source_arns: Array[String],
+      ?terraform_sources: Array[
+        {
+          s3_state_file_url: String
+        }
+      ],
+      ?import_strategy: String,
+      ?eks_sources: Array[
+        {
+          eks_cluster_arn: String,
+          namespaces: Array[String]
+        }
+      ]
+    ) -> _ImportResourcesToDraftAppVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportResourcesToDraftAppVersionResponse
+
+    interface _ListAlarmRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListAlarmRecommendationsOutput]
+      def alarm_recommendations: () -> Array[Types::AlarmRecommendation]?
+      def next_token: () -> String?
+    end
+    def list_alarm_recommendations: (
+      ?assessment_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAlarmRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAlarmRecommendationsResponse
+
+    interface _ListAppAssessmentComplianceDriftsResponse
+      include Smithy::Client::_Response[Types::ListAppAssessmentComplianceDriftsResponse]
+      def compliance_drifts: () -> Array[Types::ComplianceDrift]?
+      def next_token: () -> String?
+    end
+    def list_app_assessment_compliance_drifts: (
+      ?assessment_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppAssessmentComplianceDriftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppAssessmentComplianceDriftsResponse
+
+    interface _ListAppAssessmentResourceDriftsResponse
+      include Smithy::Client::_Response[Types::ListAppAssessmentResourceDriftsResponse]
+      def resource_drifts: () -> Array[Types::ResourceDrift]?
+      def next_token: () -> String?
+    end
+    def list_app_assessment_resource_drifts: (
+      ?assessment_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppAssessmentResourceDriftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppAssessmentResourceDriftsResponse
+
+    interface _ListAppAssessmentsResponse
+      include Smithy::Client::_Response[Types::ListAppAssessmentsOutput]
+      def next_token: () -> String?
+      def assessment_summaries: () -> Array[Types::AppAssessmentSummary]?
+    end
+    def list_app_assessments: (
+      ?app_arn: String,
+      ?assessment_name: String,
+      ?assessment_status: Array[String],
+      ?compliance_status: String,
+      ?invoker: String,
+      ?reverse_order: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppAssessmentsResponse
+
+    interface _ListAppComponentCompliancesResponse
+      include Smithy::Client::_Response[Types::ListAppComponentCompliancesOutput]
+      def component_compliances: () -> Array[Types::AppComponentCompliance]?
+      def next_token: () -> String?
+    end
+    def list_app_component_compliances: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assessment_arn: String
+    ) -> _ListAppComponentCompliancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppComponentCompliancesResponse
+
+    interface _ListAppComponentRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListAppComponentRecommendationsOutput]
+      def component_recommendations: () -> Array[Types::ComponentRecommendation]?
+      def next_token: () -> String?
+    end
+    def list_app_component_recommendations: (
+      ?assessment_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppComponentRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppComponentRecommendationsResponse
+
+    interface _ListAppInputSourcesResponse
+      include Smithy::Client::_Response[Types::ListAppInputSourcesOutput]
+      def app_input_sources: () -> Array[Types::AppInputSource]?
+      def next_token: () -> String?
+    end
+    def list_app_input_sources: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppInputSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppInputSourcesResponse
+
+    interface _ListAppVersionAppComponentsResponse
+      include Smithy::Client::_Response[Types::ListAppVersionAppComponentsOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_components: () -> Array[Types::AppComponent]?
+      def next_token: () -> String?
+    end
+    def list_app_version_app_components: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppVersionAppComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppVersionAppComponentsResponse
+
+    interface _ListAppVersionResourceMappingsResponse
+      include Smithy::Client::_Response[Types::ListAppVersionResourceMappingsOutput]
+      def resource_mappings: () -> Array[Types::ResourceMapping]?
+      def next_token: () -> String?
+    end
+    def list_app_version_resource_mappings: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppVersionResourceMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppVersionResourceMappingsResponse
+
+    interface _ListAppVersionResourcesResponse
+      include Smithy::Client::_Response[Types::ListAppVersionResourcesOutput]
+      def physical_resources: () -> Array[Types::PhysicalResource]?
+      def resolution_id: () -> String?
+      def next_token: () -> String?
+    end
+    def list_app_version_resources: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?resolution_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppVersionResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppVersionResourcesResponse
+
+    interface _ListAppVersionsResponse
+      include Smithy::Client::_Response[Types::ListAppVersionsOutput]
+      def app_versions: () -> Array[Types::AppVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_app_versions: (
+      ?app_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _ListAppVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppVersionsResponse
+
+    interface _ListAppsResponse
+      include Smithy::Client::_Response[Types::ListAppsOutput]
+      def app_summaries: () -> Array[Types::AppSummary]?
+      def next_token: () -> String?
+    end
+    def list_apps: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name: String,
+      ?app_arn: String,
+      ?from_last_assessment_time: Time,
+      ?to_last_assessment_time: Time,
+      ?reverse_order: bool,
+      ?aws_application_arn: String
+    ) -> _ListAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppsResponse
+
+    interface _ListMetricsResponse
+      include Smithy::Client::_Response[Types::ListMetricsResponse]
+      def rows: () -> Array[Array[String]]?
+      def next_token: () -> String?
+    end
+    def list_metrics: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?fields: Array[
+        {
+          name: String,
+          aggregation: String
+        }
+      ],
+      ?data_source: String,
+      ?conditions: Array[
+        {
+          field: String,
+          operator: String,
+          value: untyped
+        }
+      ],
+      ?sorts: Array[
+        {
+          field: String,
+          ascending: bool
+        }
+      ]
+    ) -> _ListMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricsResponse
+
+    interface _ListRecommendationTemplatesResponse
+      include Smithy::Client::_Response[Types::ListRecommendationTemplatesOutput]
+      def next_token: () -> String?
+      def recommendation_templates: () -> Array[Types::RecommendationTemplate]?
+    end
+    def list_recommendation_templates: (
+      ?assessment_arn: String,
+      ?reverse_order: bool,
+      ?status: Array[String],
+      ?recommendation_template_arn: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRecommendationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationTemplatesResponse
+
+    interface _ListResiliencyPoliciesResponse
+      include Smithy::Client::_Response[Types::ListResiliencyPoliciesOutput]
+      def resiliency_policies: () -> Array[Types::ResiliencyPolicy]?
+      def next_token: () -> String?
+    end
+    def list_resiliency_policies: (
+      ?policy_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResiliencyPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResiliencyPoliciesResponse
+
+    interface _ListResourceGroupingRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListResourceGroupingRecommendationsResponse]
+      def grouping_recommendations: () -> Array[Types::GroupingRecommendation]?
+      def next_token: () -> String?
+    end
+    def list_resource_grouping_recommendations: (
+      ?app_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceGroupingRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceGroupingRecommendationsResponse
+
+    interface _ListSopRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListSopRecommendationsOutput]
+      def next_token: () -> String?
+      def sop_recommendations: () -> Array[Types::SopRecommendation]?
+    end
+    def list_sop_recommendations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assessment_arn: String
+    ) -> _ListSopRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSopRecommendationsResponse
+
+    interface _ListSuggestedResiliencyPoliciesResponse
+      include Smithy::Client::_Response[Types::ListSuggestedResiliencyPoliciesOutput]
+      def resiliency_policies: () -> Array[Types::ResiliencyPolicy]?
+      def next_token: () -> String?
+    end
+    def list_suggested_resiliency_policies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSuggestedResiliencyPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSuggestedResiliencyPoliciesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTestRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListTestRecommendationsOutput]
+      def next_token: () -> String?
+      def test_recommendations: () -> Array[Types::TestRecommendation]?
+    end
+    def list_test_recommendations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assessment_arn: String
+    ) -> _ListTestRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRecommendationsResponse
+
+    interface _ListUnsupportedAppVersionResourcesResponse
+      include Smithy::Client::_Response[Types::ListUnsupportedAppVersionResourcesOutput]
+      def unsupported_resources: () -> Array[Types::UnsupportedResource]?
+      def resolution_id: () -> String?
+      def next_token: () -> String?
+    end
+    def list_unsupported_app_version_resources: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?resolution_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUnsupportedAppVersionResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUnsupportedAppVersionResourcesResponse
+
+    interface _PublishAppVersionResponse
+      include Smithy::Client::_Response[Types::PublishAppVersionOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def identifier: () -> Integer?
+      def version_name: () -> String?
+    end
+    def publish_app_version: (
+      ?app_arn: String,
+      ?version_name: String
+    ) -> _PublishAppVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishAppVersionResponse
+
+    interface _PutDraftAppVersionTemplateResponse
+      include Smithy::Client::_Response[Types::PutDraftAppVersionTemplateOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+    end
+    def put_draft_app_version_template: (
+      ?app_arn: String,
+      ?app_template_body: String
+    ) -> _PutDraftAppVersionTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDraftAppVersionTemplateResponse
+
+    interface _RejectResourceGroupingRecommendationsResponse
+      include Smithy::Client::_Response[Types::RejectResourceGroupingRecommendationsResponse]
+      def app_arn: () -> String?
+      def failed_entries: () -> Array[Types::FailedGroupingRecommendationEntry]?
+    end
+    def reject_resource_grouping_recommendations: (
+      ?app_arn: String,
+      ?entries: Array[
+        {
+          grouping_recommendation_id: String,
+          rejection_reason: String
+        }
+      ]
+    ) -> _RejectResourceGroupingRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectResourceGroupingRecommendationsResponse
+
+    interface _RemoveDraftAppVersionResourceMappingsResponse
+      include Smithy::Client::_Response[Types::RemoveDraftAppVersionResourceMappingsOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+    end
+    def remove_draft_app_version_resource_mappings: (
+      ?app_arn: String,
+      ?resource_names: Array[String],
+      ?logical_stack_names: Array[String],
+      ?app_registry_app_names: Array[String],
+      ?resource_group_names: Array[String],
+      ?terraform_source_names: Array[String],
+      ?eks_source_names: Array[String]
+    ) -> _RemoveDraftAppVersionResourceMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveDraftAppVersionResourceMappingsResponse
+
+    interface _ResolveAppVersionResourcesResponse
+      include Smithy::Client::_Response[Types::ResolveAppVersionResourcesOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def resolution_id: () -> String?
+      def status: () -> String?
+    end
+    def resolve_app_version_resources: (
+      ?app_arn: String,
+      ?app_version: String
+    ) -> _ResolveAppVersionResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveAppVersionResourcesResponse
+
+    interface _StartAppAssessmentResponse
+      include Smithy::Client::_Response[Types::StartAppAssessmentOutput]
+      def assessment: () -> Types::AppAssessment?
+    end
+    def start_app_assessment: (
+      ?app_arn: String,
+      ?app_version: String,
+      ?assessment_name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _StartAppAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAppAssessmentResponse
+
+    interface _StartMetricsExportResponse
+      include Smithy::Client::_Response[Types::StartMetricsExportResponse]
+      def metrics_export_id: () -> String?
+      def status: () -> String?
+    end
+    def start_metrics_export: (
+      ?bucket_name: String,
+      ?client_token: String
+    ) -> _StartMetricsExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetricsExportResponse
+
+    interface _StartResourceGroupingRecommendationTaskResponse
+      include Smithy::Client::_Response[Types::StartResourceGroupingRecommendationTaskResponse]
+      def app_arn: () -> String?
+      def grouping_id: () -> String?
+      def status: () -> String?
+      def error_message: () -> String?
+    end
+    def start_resource_grouping_recommendation_task: (
+      ?app_arn: String
+    ) -> _StartResourceGroupingRecommendationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartResourceGroupingRecommendationTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppResponse
+      include Smithy::Client::_Response[Types::UpdateAppOutput]
+      def app: () -> Types::App?
+    end
+    def update_app: (
+      ?app_arn: String,
+      ?description: String,
+      ?policy_arn: String,
+      ?clear_resiliency_policy_arn: bool,
+      ?assessment_schedule: String,
+      ?permission_model: {
+        type: String,
+        invoker_role_name: String,
+        cross_account_role_arns: Array[String]
+      },
+      ?event_subscriptions: Array[
+        {
+          name: String,
+          event_type: String,
+          sns_topic_arn: String
+        }
+      ]
+    ) -> _UpdateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppResponse
+
+    interface _UpdateAppVersionResponse
+      include Smithy::Client::_Response[Types::UpdateAppVersionOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def additional_info: () -> Hash[String, Array[String]]?
+    end
+    def update_app_version: (
+      ?app_arn: String,
+      ?additional_info: Hash[String,
+        Array[String]
+      ]
+    ) -> _UpdateAppVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppVersionResponse
+
+    interface _UpdateAppVersionAppComponentResponse
+      include Smithy::Client::_Response[Types::UpdateAppVersionAppComponentOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def app_component: () -> Types::AppComponent?
+    end
+    def update_app_version_app_component: (
+      ?app_arn: String,
+      ?id: String,
+      ?name: String,
+      ?type: String,
+      ?additional_info: Hash[String,
+        Array[String]
+      ]
+    ) -> _UpdateAppVersionAppComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppVersionAppComponentResponse
+
+    interface _UpdateAppVersionResourceResponse
+      include Smithy::Client::_Response[Types::UpdateAppVersionResourceOutput]
+      def app_arn: () -> String?
+      def app_version: () -> String?
+      def physical_resource: () -> Types::PhysicalResource?
+    end
+    def update_app_version_resource: (
+      ?app_arn: String,
+      ?resource_name: String,
+      ?logical_resource_id: {
+        identifier: String,
+        logical_stack_name: untyped,
+        resource_group_name: String,
+        terraform_source_name: untyped,
+        eks_source_name: untyped
+      },
+      ?physical_resource_id: String,
+      ?aws_region: String,
+      ?aws_account_id: String,
+      ?resource_type: String,
+      ?app_components: Array[String],
+      ?additional_info: Hash[String,
+        Array[String]
+      ],
+      ?excluded: bool
+    ) -> _UpdateAppVersionResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppVersionResourceResponse
+
+    interface _UpdateResiliencyPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateResiliencyPolicyOutput]
+      def policy: () -> Types::ResiliencyPolicy?
+    end
+    def update_resiliency_policy: (
+      ?policy_arn: String,
+      ?policy_name: String,
+      ?policy_description: String,
+      ?data_location_constraint: String,
+      ?tier: String,
+      ?policy: Hash[String,
+        {
+          rto_in_secs: Integer,
+          rpo_in_secs: untyped
+        }
+      ]
+    ) -> _UpdateResiliencyPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResiliencyPolicyResponse
+  end
+end

@@ -1,0 +1,136 @@
+module Aws::IoTDataPlane
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTDataPlane::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connection: (
+      ?client_id: String,
+      ?clean_session: bool,
+      ?prevent_will_message: bool
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteThingShadowResponse
+      include Smithy::Client::_Response[Types::DeleteThingShadowResponse]
+      def payload: () -> String?
+    end
+    def delete_thing_shadow: (
+      ?thing_name: String,
+      ?shadow_name: String
+    ) -> _DeleteThingShadowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThingShadowResponse
+
+    interface _GetRetainedMessageResponse
+      include Smithy::Client::_Response[Types::GetRetainedMessageResponse]
+      def topic: () -> String?
+      def payload: () -> String?
+      def qos: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def user_properties: () -> String?
+    end
+    def get_retained_message: (
+      ?topic: String
+    ) -> _GetRetainedMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRetainedMessageResponse
+
+    interface _GetThingShadowResponse
+      include Smithy::Client::_Response[Types::GetThingShadowResponse]
+      def payload: () -> String?
+    end
+    def get_thing_shadow: (
+      ?thing_name: String,
+      ?shadow_name: String
+    ) -> _GetThingShadowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThingShadowResponse
+
+    interface _ListNamedShadowsForThingResponse
+      include Smithy::Client::_Response[Types::ListNamedShadowsForThingResponse]
+      def results: () -> Array[String]?
+      def next_token: () -> String?
+      def timestamp: () -> Integer?
+    end
+    def list_named_shadows_for_thing: (
+      ?thing_name: String,
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListNamedShadowsForThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNamedShadowsForThingResponse
+
+    interface _ListRetainedMessagesResponse
+      include Smithy::Client::_Response[Types::ListRetainedMessagesResponse]
+      def retained_topics: () -> Array[Types::RetainedMessageSummary]?
+      def next_token: () -> String?
+    end
+    def list_retained_messages: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRetainedMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetainedMessagesResponse
+
+    interface _PublishResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def publish: (
+      ?topic: String,
+      ?qos: Integer,
+      ?retain: bool,
+      ?payload: String,
+      ?user_properties: String,
+      ?payload_format_indicator: String,
+      ?content_type: String,
+      ?response_topic: String,
+      ?correlation_data: String,
+      ?message_expiry: Integer
+    ) -> _PublishResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishResponse
+
+    interface _UpdateThingShadowResponse
+      include Smithy::Client::_Response[Types::UpdateThingShadowResponse]
+      def payload: () -> String?
+    end
+    def update_thing_shadow: (
+      ?thing_name: String,
+      ?shadow_name: String,
+      ?payload: String
+    ) -> _UpdateThingShadowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThingShadowResponse
+  end
+end

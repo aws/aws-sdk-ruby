@@ -1,0 +1,5 @@
+module Aws::ElasticBeanstalk
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

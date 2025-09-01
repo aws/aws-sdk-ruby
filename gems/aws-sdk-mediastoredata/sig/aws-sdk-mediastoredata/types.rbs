@@ -1,0 +1,235 @@
+module Aws::MediaStoreData
+  module Types
+
+    class ContainerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+    end
+
+    class DeleteObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+    end
+
+    class DescribeObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e_tag: String,
+        ?content_type: String,
+        ?content_length: Integer,
+        ?cache_control: String,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e_tag: String?
+      attr_accessor content_type: String?
+      attr_accessor content_length: Integer?
+      attr_accessor cache_control: String?
+      attr_accessor last_modified: Time?
+    end
+
+    class GetObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor range: String?
+    end
+
+    class GetObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?cache_control: String,
+        ?content_range: String,
+        ?content_length: Integer,
+        ?content_type: String,
+        ?e_tag: String,
+        ?last_modified: Time,
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_range: String?
+      attr_accessor content_length: Integer?
+      attr_accessor content_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor last_modified: Time?
+      attr_accessor status_code: Integer?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?e_tag: String,
+        ?last_modified: Time,
+        ?content_type: String,
+        ?content_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor e_tag: String?
+      attr_accessor last_modified: Time?
+      attr_accessor content_type: String?
+      attr_accessor content_length: Integer?
+    end
+
+    module ItemType
+      OBJECT: String
+      FOLDER: String
+    end
+
+    class ListItemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListItemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Item],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Item]?
+      attr_accessor next_token: String?
+    end
+
+    class ObjectNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?path: String,
+        ?content_type: String,
+        ?cache_control: String,
+        ?storage_class: String,
+        ?upload_availability: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor path: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+      attr_accessor storage_class: String?
+      attr_accessor upload_availability: String?
+    end
+
+    class PutObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_sha256: String,
+        ?e_tag: String,
+        ?storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_sha256: String?
+      attr_accessor e_tag: String?
+      attr_accessor storage_class: String?
+    end
+
+    class RequestedRangeNotSatisfiableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StorageClass
+      TEMPORAL: String
+    end
+
+    module UploadAvailability
+      STANDARD: String
+      STREAMING: String
+    end
+  end
+end

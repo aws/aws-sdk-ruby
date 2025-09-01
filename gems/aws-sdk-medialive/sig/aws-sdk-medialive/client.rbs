@@ -1,0 +1,4347 @@
+module Aws::MediaLive
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MediaLive::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptInputDeviceTransferResponse
+      include Smithy::Client::_Response[Types::AcceptInputDeviceTransferResponse]
+    end
+    def accept_input_device_transfer: (
+      ?input_device_id: String
+    ) -> _AcceptInputDeviceTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInputDeviceTransferResponse
+
+    interface _BatchDeleteResponse
+      include Smithy::Client::_Response[Types::BatchDeleteResponse]
+      def failed: () -> Array[Types::BatchFailedResultModel]?
+      def successful: () -> Array[Types::BatchSuccessfulResultModel]?
+    end
+    def batch_delete: (
+      ?channel_ids: Array[String],
+      ?input_ids: Array[String],
+      ?input_security_group_ids: Array[String],
+      ?multiplex_ids: Array[String]
+    ) -> _BatchDeleteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteResponse
+
+    interface _BatchStartResponse
+      include Smithy::Client::_Response[Types::BatchStartResponse]
+      def failed: () -> Array[Types::BatchFailedResultModel]?
+      def successful: () -> Array[Types::BatchSuccessfulResultModel]?
+    end
+    def batch_start: (
+      ?channel_ids: Array[String],
+      ?multiplex_ids: Array[String]
+    ) -> _BatchStartResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStartResponse
+
+    interface _BatchStopResponse
+      include Smithy::Client::_Response[Types::BatchStopResponse]
+      def failed: () -> Array[Types::BatchFailedResultModel]?
+      def successful: () -> Array[Types::BatchSuccessfulResultModel]?
+    end
+    def batch_stop: (
+      ?channel_ids: Array[String],
+      ?multiplex_ids: Array[String]
+    ) -> _BatchStopResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStopResponse
+
+    interface _BatchUpdateScheduleResponse
+      include Smithy::Client::_Response[Types::BatchUpdateScheduleResponse]
+      def creates: () -> Types::BatchScheduleActionCreateResult?
+      def deletes: () -> Types::BatchScheduleActionDeleteResult?
+    end
+    def batch_update_schedule: (
+      ?channel_id: String,
+      ?creates: {
+        schedule_actions: Array[
+          {
+            action_name: String,
+            schedule_action_settings: {
+              hls_id3_segment_tagging_settings: {
+                tag: untyped,
+                id3: untyped
+              },
+              hls_timed_metadata_settings: {
+                id3: untyped
+              },
+              input_prepare_settings: {
+                input_attachment_name_reference: untyped,
+                input_clipping_settings: {
+                  input_timecode_source: String,
+                  start_timecode: {
+                    timecode: untyped
+                  },
+                  stop_timecode: {
+                    last_frame_clipping_behavior: String,
+                    timecode: untyped
+                  }
+                },
+                url_path: Array[String]
+              },
+              input_switch_settings: {
+                input_attachment_name_reference: untyped,
+                input_clipping_settings: untyped,
+                url_path: untyped
+              },
+              motion_graphics_image_activate_settings: {
+                duration: Integer,
+                password_param: untyped,
+                url: untyped,
+                username: untyped
+              },
+              motion_graphics_image_deactivate_settings: {
+              },
+              pause_state_settings: {
+                pipelines: Array[
+                  {
+                    pipeline_id: String
+                  }
+                ]
+              },
+              scte35_input_settings: {
+                input_attachment_name_reference: untyped,
+                mode: String
+              },
+              scte35_return_to_network_settings: {
+                splice_event_id: Integer
+              },
+              scte35_splice_insert_settings: {
+                duration: Integer,
+                splice_event_id: untyped
+              },
+              scte35_time_signal_settings: {
+                scte35_descriptors: Array[
+                  {
+                    scte35_descriptor_settings: {
+                      segmentation_descriptor_scte35_descriptor_settings: {
+                        delivery_restrictions: {
+                          archive_allowed_flag: String,
+                          device_restrictions: String,
+                          no_regional_blackout_flag: String,
+                          web_delivery_allowed_flag: String
+                        },
+                        segment_num: Integer,
+                        segmentation_cancel_indicator: String,
+                        segmentation_duration: Integer,
+                        segmentation_event_id: untyped,
+                        segmentation_type_id: untyped,
+                        segmentation_upid: untyped,
+                        segmentation_upid_type: untyped,
+                        segments_expected: untyped,
+                        sub_segment_num: untyped,
+                        sub_segments_expected: untyped
+                      }
+                    }
+                  }
+                ]
+              },
+              static_image_activate_settings: {
+                duration: Integer,
+                fade_in: untyped,
+                fade_out: untyped,
+                height: Integer,
+                image: {
+                  password_param: untyped,
+                  uri: String,
+                  username: untyped
+                },
+                image_x: untyped,
+                image_y: untyped,
+                layer: Integer,
+                opacity: Integer,
+                width: untyped
+              },
+              static_image_deactivate_settings: {
+                fade_out: untyped,
+                layer: untyped
+              },
+              static_image_output_activate_settings: {
+                duration: untyped,
+                fade_in: untyped,
+                fade_out: untyped,
+                height: untyped,
+                image: untyped,
+                image_x: untyped,
+                image_y: untyped,
+                layer: untyped,
+                opacity: untyped,
+                output_names: untyped,
+                width: untyped
+              },
+              static_image_output_deactivate_settings: {
+                fade_out: untyped,
+                layer: untyped,
+                output_names: untyped
+              },
+              id3_segment_tagging_settings: {
+                id3: untyped,
+                tag: untyped
+              },
+              timed_metadata_settings: {
+                id3: untyped
+              }
+            },
+            schedule_action_start_settings: {
+              fixed_mode_schedule_action_start_settings: {
+                time: untyped
+              },
+              follow_mode_schedule_action_start_settings: {
+                follow_point: String,
+                reference_action_name: untyped
+              },
+              immediate_mode_schedule_action_start_settings: {
+              }
+            }
+          }
+        ]
+      },
+      ?deletes: {
+        action_names: Array[String]
+      }
+    ) -> _BatchUpdateScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateScheduleResponse
+
+    interface _CancelInputDeviceTransferResponse
+      include Smithy::Client::_Response[Types::CancelInputDeviceTransferResponse]
+    end
+    def cancel_input_device_transfer: (
+      ?input_device_id: String
+    ) -> _CancelInputDeviceTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelInputDeviceTransferResponse
+
+    interface _ClaimDeviceResponse
+      include Smithy::Client::_Response[Types::ClaimDeviceResponse]
+    end
+    def claim_device: (
+      ?id: String
+    ) -> _ClaimDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ClaimDeviceResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def channel: () -> Types::Channel?
+    end
+    def create_channel: (
+      ?cdi_input_specification: {
+        resolution: String
+      },
+      ?channel_class: String,
+      ?destinations: Array[
+        {
+          id: String,
+          media_package_settings: Array[
+            {
+              channel_id: String,
+              channel_group: untyped,
+              channel_name: untyped
+            }
+          ],
+          multiplex_settings: {
+            multiplex_id: untyped,
+            program_name: untyped
+          },
+          settings: Array[
+            {
+              password_param: untyped,
+              stream_name: untyped,
+              url: untyped,
+              username: untyped
+            }
+          ],
+          srt_settings: Array[
+            {
+              encryption_passphrase_secret_arn: untyped,
+              stream_id: untyped,
+              url: untyped
+            }
+          ],
+          logical_interface_names: Array[String]
+        }
+      ],
+      ?encoder_settings: {
+        audio_descriptions: Array[
+          {
+            audio_normalization_settings: {
+              algorithm: String,
+              algorithm_control: String,
+              target_lkfs: Float
+            },
+            audio_selector_name: String,
+            audio_type: String,
+            audio_type_control: String,
+            audio_watermarking_settings: {
+              nielsen_watermarks_settings: {
+                nielsen_cbet_settings: {
+                  cbet_check_digit_string: String,
+                  cbet_stepaside: String,
+                  csid: String
+                },
+                nielsen_distribution_type: String,
+                nielsen_naes_ii_nw_settings: {
+                  check_digit_string: untyped,
+                  sid: Float,
+                  timezone: String
+                }
+              }
+            },
+            codec_settings: {
+              aac_settings: {
+                bitrate: Float,
+                coding_mode: String,
+                input_type: String,
+                profile: String,
+                rate_control_mode: String,
+                raw_format: String,
+                sample_rate: untyped,
+                spec: String,
+                vbr_quality: String
+              },
+              ac3_settings: {
+                bitrate: untyped,
+                bitstream_mode: String,
+                coding_mode: String,
+                dialnorm: Integer,
+                drc_profile: String,
+                lfe_filter: String,
+                metadata_control: String,
+                attenuation_control: String
+              },
+              eac3_atmos_settings: {
+                bitrate: untyped,
+                coding_mode: String,
+                dialnorm: untyped,
+                drc_line: String,
+                drc_rf: String,
+                height_trim: untyped,
+                surround_trim: untyped
+              },
+              eac3_settings: {
+                attenuation_control: String,
+                bitrate: untyped,
+                bitstream_mode: String,
+                coding_mode: String,
+                dc_filter: String,
+                dialnorm: untyped,
+                drc_line: String,
+                drc_rf: String,
+                lfe_control: String,
+                lfe_filter: String,
+                lo_ro_center_mix_level: untyped,
+                lo_ro_surround_mix_level: untyped,
+                lt_rt_center_mix_level: untyped,
+                lt_rt_surround_mix_level: untyped,
+                metadata_control: String,
+                passthrough_control: String,
+                phase_control: String,
+                stereo_downmix: String,
+                surround_ex_mode: String,
+                surround_mode: String
+              },
+              mp2_settings: {
+                bitrate: untyped,
+                coding_mode: String,
+                sample_rate: untyped
+              },
+              pass_through_settings: {
+              },
+              wav_settings: {
+                bit_depth: untyped,
+                coding_mode: String,
+                sample_rate: untyped
+              }
+            },
+            language_code: String,
+            language_code_control: String,
+            name: String,
+            remix_settings: {
+              channel_mappings: Array[
+                {
+                  input_channel_levels: Array[
+                    {
+                      gain: Integer,
+                      input_channel: Integer
+                    }
+                  ],
+                  output_channel: Integer
+                }
+              ],
+              channels_in: Integer,
+              channels_out: Integer
+            },
+            stream_name: untyped,
+            audio_dash_roles: Array[String],
+            dvb_dash_accessibility: String
+          }
+        ],
+        avail_blanking: {
+          avail_blanking_image: {
+            password_param: untyped,
+            uri: String,
+            username: untyped
+          },
+          state: String
+        },
+        avail_configuration: {
+          avail_settings: {
+            esam: {
+              acquisition_point_id: String,
+              ad_avail_offset: Integer,
+              password_param: untyped,
+              pois_endpoint: untyped,
+              username: untyped,
+              zone_identity: untyped
+            },
+            scte35_splice_insert: {
+              ad_avail_offset: untyped,
+              no_regional_blackout_flag: String,
+              web_delivery_allowed_flag: String
+            },
+            scte35_time_signal_apos: {
+              ad_avail_offset: untyped,
+              no_regional_blackout_flag: String,
+              web_delivery_allowed_flag: String
+            }
+          },
+          scte35_segmentation_scope: String
+        },
+        blackout_slate: {
+          blackout_slate_image: untyped,
+          network_end_blackout: String,
+          network_end_blackout_image: untyped,
+          network_id: String,
+          state: String
+        },
+        caption_descriptions: Array[
+          {
+            accessibility: String,
+            caption_selector_name: untyped,
+            destination_settings: {
+              arib_destination_settings: {
+              },
+              burn_in_destination_settings: {
+                alignment: String,
+                background_color: String,
+                background_opacity: Integer,
+                font: untyped,
+                font_color: String,
+                font_opacity: untyped,
+                font_resolution: Integer,
+                font_size: untyped,
+                outline_color: String,
+                outline_size: Integer,
+                shadow_color: String,
+                shadow_opacity: untyped,
+                shadow_x_offset: Integer,
+                shadow_y_offset: untyped,
+                teletext_grid_control: String,
+                x_position: Integer,
+                y_position: untyped
+              },
+              dvb_sub_destination_settings: {
+                alignment: String,
+                background_color: String,
+                background_opacity: untyped,
+                font: untyped,
+                font_color: String,
+                font_opacity: untyped,
+                font_resolution: untyped,
+                font_size: untyped,
+                outline_color: String,
+                outline_size: untyped,
+                shadow_color: String,
+                shadow_opacity: untyped,
+                shadow_x_offset: untyped,
+                shadow_y_offset: untyped,
+                teletext_grid_control: String,
+                x_position: untyped,
+                y_position: untyped
+              },
+              ebu_tt_d_destination_settings: {
+                copyright_holder: String,
+                fill_line_gap: String,
+                font_family: untyped,
+                style_control: String,
+                default_font_size: Integer,
+                default_line_height: Integer
+              },
+              embedded_destination_settings: {
+              },
+              embedded_plus_scte20_destination_settings: {
+              },
+              rtmp_caption_info_destination_settings: {
+              },
+              scte20_plus_embedded_destination_settings: {
+              },
+              scte27_destination_settings: {
+              },
+              smpte_tt_destination_settings: {
+              },
+              teletext_destination_settings: {
+              },
+              ttml_destination_settings: {
+                style_control: String
+              },
+              webvtt_destination_settings: {
+                style_control: String
+              }
+            },
+            language_code: untyped,
+            language_description: untyped,
+            name: untyped,
+            caption_dash_roles: Array[String],
+            dvb_dash_accessibility: untyped
+          }
+        ],
+        feature_activations: {
+          input_prepare_schedule_actions: String,
+          output_static_image_overlay_schedule_actions: String
+        },
+        global_configuration: {
+          initial_audio_gain: Integer,
+          input_end_action: String,
+          input_loss_behavior: {
+            black_frame_msec: Integer,
+            input_loss_image_color: String,
+            input_loss_image_slate: untyped,
+            input_loss_image_type: String,
+            repeat_frame_msec: untyped
+          },
+          output_locking_mode: String,
+          output_timing_source: String,
+          support_low_framerate_inputs: String,
+          output_locking_settings: {
+            epoch_locking_settings: {
+              custom_epoch: untyped,
+              jam_sync_time: untyped
+            },
+            pipeline_locking_settings: {
+            }
+          }
+        },
+        motion_graphics_configuration: {
+          motion_graphics_insertion: String,
+          motion_graphics_settings: {
+            html_motion_graphics_settings: {
+            }
+          }
+        },
+        nielsen_configuration: {
+          distributor_id: untyped,
+          nielsen_pcm_to_id3_tagging: String
+        },
+        output_groups: Array[
+          {
+            name: String,
+            output_group_settings: {
+              archive_group_settings: {
+                archive_cdn_settings: {
+                  archive_s3_settings: {
+                    canned_acl: String
+                  }
+                },
+                destination: {
+                  destination_ref_id: untyped
+                },
+                rollover_interval: Integer
+              },
+              frame_capture_group_settings: {
+                destination: untyped,
+                frame_capture_cdn_settings: {
+                  frame_capture_s3_settings: {
+                    canned_acl: untyped
+                  }
+                }
+              },
+              hls_group_settings: {
+                ad_markers: Array[String],
+                base_url_content: untyped,
+                base_url_content1: untyped,
+                base_url_manifest: untyped,
+                base_url_manifest1: untyped,
+                caption_language_mappings: Array[
+                  {
+                    caption_channel: Integer,
+                    language_code: String,
+                    language_description: String
+                  }
+                ],
+                caption_language_setting: String,
+                client_cache: String,
+                codec_specification: String,
+                constant_iv: String,
+                destination: untyped,
+                directory_structure: String,
+                discontinuity_tags: String,
+                encryption_type: String,
+                hls_cdn_settings: {
+                  hls_akamai_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: Integer,
+                    http_transfer_mode: String,
+                    num_retries: untyped,
+                    restart_delay: untyped,
+                    salt: untyped,
+                    token: untyped
+                  },
+                  hls_basic_put_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  },
+                  hls_media_store_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    media_store_storage_class: String,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  },
+                  hls_s3_settings: {
+                    canned_acl: untyped
+                  },
+                  hls_webdav_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    http_transfer_mode: String,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  }
+                },
+                hls_id3_segment_tagging: String,
+                i_frame_only_playlists: String,
+                incomplete_segment_behavior: String,
+                index_n_segments: Integer,
+                input_loss_action: String,
+                iv_in_manifest: String,
+                iv_source: String,
+                keep_segments: untyped,
+                key_format: untyped,
+                key_format_versions: untyped,
+                key_provider_settings: {
+                  static_key_settings: {
+                    key_provider_server: untyped,
+                    static_key_value: untyped
+                  }
+                },
+                manifest_compression: String,
+                manifest_duration_format: String,
+                min_segment_length: untyped,
+                mode: String,
+                output_selection: String,
+                program_date_time: String,
+                program_date_time_clock: String,
+                program_date_time_period: Integer,
+                redundant_manifest: String,
+                segment_length: untyped,
+                segmentation_mode: String,
+                segments_per_subdirectory: untyped,
+                stream_inf_resolution: String,
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped,
+                timestamp_delta_milliseconds: untyped,
+                ts_file_mode: String
+              },
+              media_package_group_settings: {
+                destination: untyped
+              },
+              ms_smooth_group_settings: {
+                acquisition_point_id: untyped,
+                audio_only_timecode_control: String,
+                certificate_mode: String,
+                connection_retry_interval: untyped,
+                destination: untyped,
+                event_id: untyped,
+                event_id_mode: String,
+                event_stop_behavior: String,
+                filecache_duration: untyped,
+                fragment_length: untyped,
+                input_loss_action: String,
+                num_retries: untyped,
+                restart_delay: untyped,
+                segmentation_mode: String,
+                send_delay_ms: Integer,
+                sparse_track_type: String,
+                stream_manifest_behavior: String,
+                timestamp_offset: untyped,
+                timestamp_offset_mode: String
+              },
+              multiplex_group_settings: {
+              },
+              rtmp_group_settings: {
+                ad_markers: Array[String],
+                authentication_scheme: String,
+                cache_full_behavior: String,
+                cache_length: Integer,
+                caption_data: String,
+                input_loss_action: String,
+                restart_delay: untyped,
+                include_filler_nal_units: String
+              },
+              udp_group_settings: {
+                input_loss_action: String,
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped
+              },
+              cmaf_ingest_group_settings: {
+                destination: untyped,
+                nielsen_id3_behavior: String,
+                scte35_type: String,
+                segment_length: untyped,
+                segment_length_units: String,
+                send_delay_ms: Integer,
+                klv_behavior: String,
+                klv_name_modifier: String,
+                nielsen_id3_name_modifier: untyped,
+                scte35_name_modifier: untyped,
+                id3_behavior: String,
+                id3_name_modifier: untyped,
+                caption_language_mappings: Array[
+                  {
+                    caption_channel: untyped,
+                    language_code: untyped
+                  }
+                ],
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped,
+                timed_metadata_passthrough: String
+              },
+              srt_group_settings: {
+                input_loss_action: untyped
+              }
+            },
+            outputs: Array[
+              {
+                audio_description_names: Array[String],
+                caption_description_names: untyped,
+                output_name: String,
+                output_settings: {
+                  archive_output_settings: {
+                    container_settings: {
+                      m2ts_settings: {
+                        absent_input_audio_behavior: String,
+                        arib: String,
+                        arib_captions_pid: untyped,
+                        arib_captions_pid_control: String,
+                        audio_buffer_model: String,
+                        audio_frames_per_pes: untyped,
+                        audio_pids: untyped,
+                        audio_stream_type: String,
+                        bitrate: untyped,
+                        buffer_model: String,
+                        cc_descriptor: String,
+                        dvb_nit_settings: {
+                          network_id: Integer,
+                          network_name: String,
+                          rep_interval: Integer
+                        },
+                        dvb_sdt_settings: {
+                          output_sdt: String,
+                          rep_interval: Integer,
+                          service_name: untyped,
+                          service_provider_name: untyped
+                        },
+                        dvb_sub_pids: untyped,
+                        dvb_tdt_settings: {
+                          rep_interval: Integer
+                        },
+                        dvb_teletext_pid: untyped,
+                        ebif: String,
+                        ebp_audio_interval: String,
+                        ebp_lookahead_ms: untyped,
+                        ebp_placement: String,
+                        ecm_pid: untyped,
+                        es_rate_in_pes: String,
+                        etv_platform_pid: untyped,
+                        etv_signal_pid: untyped,
+                        fragment_time: Float,
+                        klv: String,
+                        klv_data_pids: untyped,
+                        nielsen_id3_behavior: String,
+                        null_packet_bitrate: untyped,
+                        pat_interval: Integer,
+                        pcr_control: String,
+                        pcr_period: Integer,
+                        pcr_pid: untyped,
+                        pmt_interval: untyped,
+                        pmt_pid: untyped,
+                        program_num: Integer,
+                        rate_mode: String,
+                        scte27_pids: untyped,
+                        scte35_control: String,
+                        scte35_pid: untyped,
+                        segmentation_markers: String,
+                        segmentation_style: String,
+                        segmentation_time: Float,
+                        timed_metadata_behavior: String,
+                        timed_metadata_pid: untyped,
+                        transport_stream_id: untyped,
+                        video_pid: untyped,
+                        scte35_preroll_pullup_milliseconds: Float
+                      },
+                      raw_settings: {
+                      }
+                    },
+                    extension: untyped,
+                    name_modifier: untyped
+                  },
+                  frame_capture_output_settings: {
+                    name_modifier: untyped
+                  },
+                  hls_output_settings: {
+                    h265_packaging_type: String,
+                    hls_settings: {
+                      audio_only_hls_settings: {
+                        audio_group_id: untyped,
+                        audio_only_image: untyped,
+                        audio_track_type: String,
+                        segment_type: String
+                      },
+                      fmp4_hls_settings: {
+                        audio_rendition_sets: untyped,
+                        nielsen_id3_behavior: String,
+                        timed_metadata_behavior: String
+                      },
+                      frame_capture_hls_settings: {
+                      },
+                      standard_hls_settings: {
+                        audio_rendition_sets: untyped,
+                        m3u8_settings: {
+                          audio_frames_per_pes: untyped,
+                          audio_pids: untyped,
+                          ecm_pid: untyped,
+                          nielsen_id3_behavior: String,
+                          pat_interval: untyped,
+                          pcr_control: String,
+                          pcr_period: untyped,
+                          pcr_pid: untyped,
+                          pmt_interval: untyped,
+                          pmt_pid: untyped,
+                          program_num: untyped,
+                          scte35_behavior: String,
+                          scte35_pid: untyped,
+                          timed_metadata_behavior: String,
+                          timed_metadata_pid: untyped,
+                          transport_stream_id: untyped,
+                          video_pid: untyped,
+                          klv_behavior: String,
+                          klv_data_pids: untyped
+                        }
+                      }
+                    },
+                    name_modifier: untyped,
+                    segment_modifier: untyped
+                  },
+                  media_package_output_settings: {
+                  },
+                  ms_smooth_output_settings: {
+                    h265_packaging_type: String,
+                    name_modifier: untyped
+                  },
+                  multiplex_output_settings: {
+                    destination: untyped,
+                    container_settings: {
+                      multiplex_m2ts_settings: {
+                        absent_input_audio_behavior: untyped,
+                        arib: untyped,
+                        audio_buffer_model: untyped,
+                        audio_frames_per_pes: untyped,
+                        audio_stream_type: untyped,
+                        cc_descriptor: untyped,
+                        ebif: untyped,
+                        es_rate_in_pes: untyped,
+                        klv: untyped,
+                        nielsen_id3_behavior: untyped,
+                        pcr_control: untyped,
+                        pcr_period: untyped,
+                        scte35_control: untyped,
+                        scte35_preroll_pullup_milliseconds: untyped
+                      }
+                    }
+                  },
+                  rtmp_output_settings: {
+                    certificate_mode: String,
+                    connection_retry_interval: untyped,
+                    destination: untyped,
+                    num_retries: untyped
+                  },
+                  udp_output_settings: {
+                    buffer_msec: untyped,
+                    container_settings: {
+                      m2ts_settings: untyped
+                    },
+                    destination: untyped,
+                    fec_output_settings: {
+                      column_depth: Integer,
+                      include_fec: String,
+                      row_length: Integer
+                    }
+                  },
+                  cmaf_ingest_output_settings: {
+                    name_modifier: untyped
+                  },
+                  srt_output_settings: {
+                    buffer_msec: untyped,
+                    container_settings: untyped,
+                    destination: untyped,
+                    encryption_type: String,
+                    latency: Integer
+                  }
+                },
+                video_description_name: untyped
+              }
+            ]
+          }
+        ],
+        timecode_config: {
+          source: String,
+          sync_threshold: Integer
+        },
+        video_descriptions: Array[
+          {
+            codec_settings: {
+              frame_capture_settings: {
+                capture_interval: Integer,
+                capture_interval_units: String,
+                timecode_burnin_settings: {
+                  font_size: String,
+                  position: String,
+                  prefix: untyped
+                }
+              },
+              h264_settings: {
+                adaptive_quantization: String,
+                afd_signaling: String,
+                bitrate: Integer,
+                buf_fill_pct: Integer,
+                buf_size: untyped,
+                color_metadata: String,
+                color_space_settings: {
+                  color_space_passthrough_settings: {
+                  },
+                  rec601_settings: {
+                  },
+                  rec709_settings: {
+                  }
+                },
+                entropy_encoding: String,
+                filter_settings: {
+                  temporal_filter_settings: {
+                    post_filter_sharpening: String,
+                    strength: String
+                  },
+                  bandwidth_reduction_filter_settings: {
+                    post_filter_sharpening: String,
+                    strength: String
+                  }
+                },
+                fixed_afd: String,
+                flicker_aq: String,
+                force_field_pictures: String,
+                framerate_control: String,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_b_reference: String,
+                gop_closed_cadence: untyped,
+                gop_num_b_frames: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: untyped,
+                min_i_interval: Integer,
+                num_ref_frames: Integer,
+                par_control: String,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                profile: String,
+                quality_level: String,
+                qvbr_quality_level: Integer,
+                rate_control_mode: String,
+                scan_type: String,
+                scene_change_detect: String,
+                slices: Integer,
+                softness: Integer,
+                spatial_aq: String,
+                subgop_length: String,
+                syntax: String,
+                temporal_aq: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped,
+                min_qp: Integer
+              },
+              h265_settings: {
+                adaptive_quantization: String,
+                afd_signaling: untyped,
+                alternative_transfer_function: String,
+                bitrate: Integer,
+                buf_size: Integer,
+                color_metadata: String,
+                color_space_settings: {
+                  color_space_passthrough_settings: untyped,
+                  dolby_vision81_settings: {
+                  },
+                  hdr10_settings: {
+                    max_cll: Integer,
+                    max_fall: untyped
+                  },
+                  rec601_settings: untyped,
+                  rec709_settings: untyped
+                },
+                filter_settings: {
+                  temporal_filter_settings: untyped,
+                  bandwidth_reduction_filter_settings: untyped
+                },
+                fixed_afd: untyped,
+                flicker_aq: String,
+                framerate_denominator: Integer,
+                framerate_numerator: untyped,
+                gop_closed_cadence: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: untyped,
+                min_i_interval: untyped,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                profile: String,
+                qvbr_quality_level: untyped,
+                rate_control_mode: String,
+                scan_type: String,
+                scene_change_detect: String,
+                slices: untyped,
+                tier: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped,
+                mv_over_picture_boundaries: String,
+                mv_temporal_predictor: String,
+                tile_height: Integer,
+                tile_padding: String,
+                tile_width: Integer,
+                treeblock_size: String,
+                min_qp: untyped,
+                deblocking: String
+              },
+              mpeg2_settings: {
+                adaptive_quantization: String,
+                afd_signaling: untyped,
+                color_metadata: String,
+                color_space: String,
+                display_aspect_ratio: String,
+                filter_settings: {
+                  temporal_filter_settings: untyped
+                },
+                fixed_afd: untyped,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_closed_cadence: untyped,
+                gop_num_b_frames: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                scan_type: String,
+                subgop_length: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped
+              },
+              av1_settings: {
+                afd_signaling: untyped,
+                buf_size: Integer,
+                color_space_settings: {
+                  color_space_passthrough_settings: untyped,
+                  hdr10_settings: untyped,
+                  rec601_settings: untyped,
+                  rec709_settings: untyped
+                },
+                fixed_afd: untyped,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: Integer,
+                min_i_interval: untyped,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                qvbr_quality_level: untyped,
+                scene_change_detect: String,
+                timecode_burnin_settings: untyped,
+                bitrate: untyped,
+                rate_control_mode: String
+              }
+            },
+            height: untyped,
+            name: untyped,
+            respond_to_afd: String,
+            scaling_behavior: String,
+            sharpness: untyped,
+            width: untyped
+          }
+        ],
+        thumbnail_configuration: {
+          state: String
+        },
+        color_correction_settings: {
+          global_color_corrections: Array[
+            {
+              input_color_space: String,
+              output_color_space: untyped,
+              uri: untyped
+            }
+          ]
+        }
+      },
+      ?input_attachments: Array[
+        {
+          automatic_input_failover_settings: {
+            error_clear_time_msec: Integer,
+            failover_conditions: Array[
+              {
+                failover_condition_settings: {
+                  audio_silence_settings: {
+                    audio_selector_name: String,
+                    audio_silence_threshold_msec: Integer
+                  },
+                  input_loss_settings: {
+                    input_loss_threshold_msec: Integer
+                  },
+                  video_black_settings: {
+                    black_detect_threshold: Float,
+                    video_black_threshold_msec: untyped
+                  }
+                }
+              }
+            ],
+            input_preference: String,
+            secondary_input_id: untyped
+          },
+          input_attachment_name: untyped,
+          input_id: untyped,
+          input_settings: {
+            audio_selectors: Array[
+              {
+                name: String,
+                selector_settings: {
+                  audio_hls_rendition_selection: {
+                    group_id: untyped,
+                    name: untyped
+                  },
+                  audio_language_selection: {
+                    language_code: untyped,
+                    language_selection_policy: String
+                  },
+                  audio_pid_selection: {
+                    pid: Integer
+                  },
+                  audio_track_selection: {
+                    tracks: Array[
+                      {
+                        track: untyped
+                      }
+                    ],
+                    dolby_e_decode: {
+                      program_selection: String
+                    }
+                  }
+                }
+              }
+            ],
+            caption_selectors: Array[
+              {
+                language_code: untyped,
+                name: untyped,
+                selector_settings: {
+                  ancillary_source_settings: {
+                    source_ancillary_channel_number: Integer
+                  },
+                  arib_source_settings: {
+                  },
+                  dvb_sub_source_settings: {
+                    ocr_language: String,
+                    pid: untyped
+                  },
+                  embedded_source_settings: {
+                    convert608_to708: String,
+                    scte20_detection: String,
+                    source608_channel_number: untyped,
+                    source608_track_number: Integer
+                  },
+                  scte20_source_settings: {
+                    convert608_to708: String,
+                    source608_channel_number: untyped
+                  },
+                  scte27_source_settings: {
+                    ocr_language: String,
+                    pid: untyped
+                  },
+                  teletext_source_settings: {
+                    output_rectangle: {
+                      height: Float,
+                      left_offset: untyped,
+                      top_offset: untyped,
+                      width: untyped
+                    },
+                    page_number: untyped
+                  }
+                }
+              }
+            ],
+            deblock_filter: String,
+            denoise_filter: String,
+            filter_strength: untyped,
+            input_filter: String,
+            network_input_settings: {
+              hls_input_settings: {
+                bandwidth: Integer,
+                buffer_segments: untyped,
+                retries: untyped,
+                retry_interval: untyped,
+                scte35_source: String
+              },
+              server_validation: String,
+              multicast_input_settings: {
+                source_ip_address: untyped
+              }
+            },
+            scte35_pid: Integer,
+            smpte2038_data_preference: String,
+            source_end_behavior: String,
+            video_selector: {
+              color_space: String,
+              color_space_settings: {
+                hdr10_settings: {
+                  max_cll: Integer,
+                  max_fall: untyped
+                }
+              },
+              color_space_usage: String,
+              selector_settings: {
+                video_selector_pid: {
+                  pid: untyped
+                },
+                video_selector_program_id: {
+                  program_id: Integer
+                }
+              }
+            }
+          },
+          logical_interface_names: Array[String]
+        }
+      ],
+      ?input_specification: {
+        codec: String,
+        maximum_bitrate: String,
+        resolution: String
+      },
+      ?log_level: String,
+      ?maintenance: {
+        maintenance_day: String,
+        maintenance_start_time: String
+      },
+      ?name: String,
+      ?request_id: String,
+      ?reserved: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?vpc: {
+        public_address_allocation_ids: Array[String],
+        security_group_ids: untyped,
+        subnet_ids: untyped
+      },
+      ?anywhere_settings: {
+        channel_placement_group_id: String,
+        cluster_id: untyped
+      },
+      ?channel_engine_version: {
+        version: String
+      },
+      ?dry_run: bool
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateChannelPlacementGroupResponse
+      include Smithy::Client::_Response[Types::CreateChannelPlacementGroupResponse]
+      def arn: () -> String?
+      def channels: () -> Array[String]?
+      def cluster_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def nodes: () -> Array[String]?
+      def state: () -> String?
+    end
+    def create_channel_placement_group: (
+      ?cluster_id: String,
+      ?name: String,
+      ?nodes: Array[String],
+      ?request_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateChannelPlacementGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelPlacementGroupResponse
+
+    interface _CreateCloudWatchAlarmTemplateResponse
+      include Smithy::Client::_Response[Types::CreateCloudWatchAlarmTemplateResponse]
+      def arn: () -> String?
+      def comparison_operator: () -> String?
+      def created_at: () -> Time?
+      def datapoints_to_alarm: () -> Integer?
+      def description: () -> String?
+      def evaluation_periods: () -> Integer?
+      def group_id: () -> String?
+      def id: () -> String?
+      def metric_name: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def period: () -> Integer?
+      def statistic: () -> String?
+      def tags: () -> Hash[String, String]?
+      def target_resource_type: () -> String?
+      def threshold: () -> Float?
+      def treat_missing_data: () -> String?
+    end
+    def create_cloud_watch_alarm_template: (
+      ?comparison_operator: String,
+      ?datapoints_to_alarm: Integer,
+      ?description: String,
+      ?evaluation_periods: Integer,
+      ?group_identifier: String,
+      ?metric_name: String,
+      ?name: String,
+      ?period: Integer,
+      ?statistic: String,
+      ?tags: Hash[String, String],
+      ?target_resource_type: String,
+      ?threshold: Float,
+      ?treat_missing_data: String,
+      ?request_id: String
+    ) -> _CreateCloudWatchAlarmTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudWatchAlarmTemplateResponse
+
+    interface _CreateCloudWatchAlarmTemplateGroupResponse
+      include Smithy::Client::_Response[Types::CreateCloudWatchAlarmTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_cloud_watch_alarm_template_group: (
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?request_id: String
+    ) -> _CreateCloudWatchAlarmTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudWatchAlarmTemplateGroupResponse
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def arn: () -> String?
+      def channel_ids: () -> Array[String]?
+      def cluster_type: () -> String?
+      def id: () -> String?
+      def instance_role_arn: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::ClusterNetworkSettings?
+      def state: () -> String?
+    end
+    def create_cluster: (
+      ?cluster_type: String,
+      ?instance_role_arn: String,
+      ?name: String,
+      ?network_settings: {
+        default_route: String,
+        interface_mappings: Array[
+          {
+            logical_interface_name: untyped,
+            network_id: untyped
+          }
+        ]
+      },
+      ?request_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateEventBridgeRuleTemplateResponse
+      include Smithy::Client::_Response[Types::CreateEventBridgeRuleTemplateResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def event_targets: () -> Array[Types::EventBridgeRuleTemplateTarget]?
+      def event_type: () -> String?
+      def group_id: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_event_bridge_rule_template: (
+      ?description: String,
+      ?event_targets: Array[
+        {
+          arn: String
+        }
+      ],
+      ?event_type: String,
+      ?group_identifier: String,
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?request_id: String
+    ) -> _CreateEventBridgeRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventBridgeRuleTemplateResponse
+
+    interface _CreateEventBridgeRuleTemplateGroupResponse
+      include Smithy::Client::_Response[Types::CreateEventBridgeRuleTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_event_bridge_rule_template_group: (
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?request_id: String
+    ) -> _CreateEventBridgeRuleTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventBridgeRuleTemplateGroupResponse
+
+    interface _CreateInputResponse
+      include Smithy::Client::_Response[Types::CreateInputResponse]
+      def input: () -> Types::Input?
+    end
+    def create_input: (
+      ?destinations: Array[
+        {
+          stream_name: String,
+          network: untyped,
+          network_routes: Array[
+            {
+              cidr: untyped,
+              gateway: untyped
+            }
+          ],
+          static_ip_address: untyped
+        }
+      ],
+      ?input_devices: Array[
+        {
+          id: String
+        }
+      ],
+      ?input_security_groups: Array[String],
+      ?media_connect_flows: Array[
+        {
+          flow_arn: String
+        }
+      ],
+      ?name: String,
+      ?request_id: String,
+      ?role_arn: String,
+      ?sources: Array[
+        {
+          password_param: String,
+          url: untyped,
+          username: untyped
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?type: String,
+      ?vpc: {
+        security_group_ids: Array[String],
+        subnet_ids: untyped
+      },
+      ?srt_settings: {
+        srt_caller_sources: Array[
+          {
+            decryption: {
+              algorithm: String,
+              passphrase_secret_arn: String
+            },
+            minimum_latency: Integer,
+            srt_listener_address: untyped,
+            srt_listener_port: untyped,
+            stream_id: untyped
+          }
+        ]
+      },
+      ?input_network_location: String,
+      ?multicast_settings: {
+        sources: Array[
+          {
+            source_ip: String,
+            url: untyped
+          }
+        ]
+      },
+      ?smpte2110_receiver_group_settings: {
+        smpte2110_receiver_groups: Array[
+          {
+            sdp_settings: {
+              ancillary_sdps: Array[
+                {
+                  media_index: Integer,
+                  sdp_url: String
+                }
+              ],
+              audio_sdps: untyped,
+              video_sdp: {
+                media_index: untyped,
+                sdp_url: untyped
+              }
+            }
+          }
+        ]
+      },
+      ?sdi_sources: Array[String]
+    ) -> _CreateInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInputResponse
+
+    interface _CreateInputSecurityGroupResponse
+      include Smithy::Client::_Response[Types::CreateInputSecurityGroupResponse]
+      def security_group: () -> Types::InputSecurityGroup?
+    end
+    def create_input_security_group: (
+      ?tags: Hash[String, String],
+      ?whitelist_rules: Array[
+        {
+          cidr: String
+        }
+      ]
+    ) -> _CreateInputSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInputSecurityGroupResponse
+
+    interface _CreateMultiplexResponse
+      include Smithy::Client::_Response[Types::CreateMultiplexResponse]
+      def multiplex: () -> Types::Multiplex?
+    end
+    def create_multiplex: (
+      ?availability_zones: Array[String],
+      ?multiplex_settings: {
+        maximum_video_buffer_delay_milliseconds: Integer,
+        transport_stream_bitrate: Integer,
+        transport_stream_id: Integer,
+        transport_stream_reserved_bitrate: Integer
+      },
+      ?name: String,
+      ?request_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultiplexResponse
+
+    interface _CreateMultiplexProgramResponse
+      include Smithy::Client::_Response[Types::CreateMultiplexProgramResponse]
+      def multiplex_program: () -> Types::MultiplexProgram?
+    end
+    def create_multiplex_program: (
+      ?multiplex_id: String,
+      ?multiplex_program_settings: {
+        preferred_channel_pipeline: String,
+        program_number: Integer,
+        service_descriptor: {
+          provider_name: String,
+          service_name: untyped
+        },
+        video_settings: {
+          constant_bitrate: Integer,
+          statmux_settings: {
+            maximum_bitrate: untyped,
+            minimum_bitrate: untyped,
+            priority: Integer
+          }
+        }
+      },
+      ?program_name: String,
+      ?request_id: String
+    ) -> _CreateMultiplexProgramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultiplexProgramResponse
+
+    interface _CreateNetworkResponse
+      include Smithy::Client::_Response[Types::CreateNetworkResponse]
+      def arn: () -> String?
+      def associated_cluster_ids: () -> Array[String]?
+      def id: () -> String?
+      def ip_pools: () -> Array[Types::IpPool]?
+      def name: () -> String?
+      def routes: () -> Array[Types::Route]?
+      def state: () -> String?
+    end
+    def create_network: (
+      ?ip_pools: Array[
+        {
+          cidr: String
+        }
+      ],
+      ?name: String,
+      ?request_id: String,
+      ?routes: Array[
+        {
+          cidr: String,
+          gateway: untyped
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkResponse
+
+    interface _CreateNodeResponse
+      include Smithy::Client::_Response[Types::CreateNodeResponse]
+      def arn: () -> String?
+      def channel_placement_groups: () -> Array[String]?
+      def cluster_id: () -> String?
+      def connection_state: () -> String?
+      def id: () -> String?
+      def instance_arn: () -> String?
+      def name: () -> String?
+      def node_interface_mappings: () -> Array[Types::NodeInterfaceMapping]?
+      def role: () -> String?
+      def state: () -> String?
+      def sdi_source_mappings: () -> Array[Types::SdiSourceMapping]?
+    end
+    def create_node: (
+      ?cluster_id: String,
+      ?name: String,
+      ?node_interface_mappings: Array[
+        {
+          logical_interface_name: String,
+          network_interface_mode: String,
+          physical_interface_name: untyped
+        }
+      ],
+      ?request_id: String,
+      ?role: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodeResponse
+
+    interface _CreateNodeRegistrationScriptResponse
+      include Smithy::Client::_Response[Types::CreateNodeRegistrationScriptResponse]
+      def node_registration_script: () -> String?
+    end
+    def create_node_registration_script: (
+      ?cluster_id: String,
+      ?id: String,
+      ?name: String,
+      ?node_interface_mappings: Array[
+        {
+          logical_interface_name: String,
+          network_interface_mode: String,
+          physical_interface_name: untyped
+        }
+      ],
+      ?request_id: String,
+      ?role: String
+    ) -> _CreateNodeRegistrationScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodeRegistrationScriptResponse
+
+    interface _CreatePartnerInputResponse
+      include Smithy::Client::_Response[Types::CreatePartnerInputResponse]
+      def input: () -> Types::Input?
+    end
+    def create_partner_input: (
+      ?input_id: String,
+      ?request_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePartnerInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePartnerInputResponse
+
+    interface _CreateSdiSourceResponse
+      include Smithy::Client::_Response[Types::CreateSdiSourceResponse]
+      def sdi_source: () -> Types::SdiSource?
+    end
+    def create_sdi_source: (
+      ?mode: String,
+      ?name: String,
+      ?request_id: String,
+      ?tags: Hash[String, String],
+      ?type: String
+    ) -> _CreateSdiSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSdiSourceResponse
+
+    interface _CreateSignalMapResponse
+      include Smithy::Client::_Response[Types::CreateSignalMapResponse]
+      def arn: () -> String?
+      def cloud_watch_alarm_template_group_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def discovery_entry_point_arn: () -> String?
+      def error_message: () -> String?
+      def event_bridge_rule_template_group_ids: () -> Array[String]?
+      def failed_media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def id: () -> String?
+      def last_discovered_at: () -> Time?
+      def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment?
+      def media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def modified_at: () -> Time?
+      def monitor_changes_pending_deployment: () -> bool?
+      def monitor_deployment: () -> Types::MonitorDeployment?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_signal_map: (
+      ?cloud_watch_alarm_template_group_identifiers: Array[String],
+      ?description: String,
+      ?discovery_entry_point_arn: String,
+      ?event_bridge_rule_template_group_identifiers: Array[String],
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?request_id: String
+    ) -> _CreateSignalMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSignalMapResponse
+
+    interface _CreateTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_tags: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTagsResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Types::DeleteChannelResponse]
+      def arn: () -> String?
+      def cdi_input_specification: () -> Types::CdiInputSpecification?
+      def channel_class: () -> String?
+      def destinations: () -> Array[Types::OutputDestination]?
+      def egress_endpoints: () -> Array[Types::ChannelEgressEndpoint]?
+      def encoder_settings: () -> Types::EncoderSettings?
+      def id: () -> String?
+      def input_attachments: () -> Array[Types::InputAttachment]?
+      def input_specification: () -> Types::InputSpecification?
+      def log_level: () -> String?
+      def maintenance: () -> Types::MaintenanceStatus?
+      def name: () -> String?
+      def pipeline_details: () -> Array[Types::PipelineDetail]?
+      def pipelines_running_count: () -> Integer?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def vpc: () -> Types::VpcOutputSettingsDescription?
+      def anywhere_settings: () -> Types::DescribeAnywhereSettings?
+      def channel_engine_version: () -> Types::ChannelEngineVersionResponse?
+    end
+    def delete_channel: (
+      ?channel_id: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeleteChannelPlacementGroupResponse
+      include Smithy::Client::_Response[Types::DeleteChannelPlacementGroupResponse]
+      def arn: () -> String?
+      def channels: () -> Array[String]?
+      def cluster_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def nodes: () -> Array[String]?
+      def state: () -> String?
+    end
+    def delete_channel_placement_group: (
+      ?channel_placement_group_id: String,
+      ?cluster_id: String
+    ) -> _DeleteChannelPlacementGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelPlacementGroupResponse
+
+    interface _DeleteCloudWatchAlarmTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cloud_watch_alarm_template: (
+      ?identifier: String
+    ) -> _DeleteCloudWatchAlarmTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudWatchAlarmTemplateResponse
+
+    interface _DeleteCloudWatchAlarmTemplateGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cloud_watch_alarm_template_group: (
+      ?identifier: String
+    ) -> _DeleteCloudWatchAlarmTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudWatchAlarmTemplateGroupResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+      def arn: () -> String?
+      def channel_ids: () -> Array[String]?
+      def cluster_type: () -> String?
+      def id: () -> String?
+      def instance_role_arn: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::ClusterNetworkSettings?
+      def state: () -> String?
+    end
+    def delete_cluster: (
+      ?cluster_id: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteEventBridgeRuleTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_bridge_rule_template: (
+      ?identifier: String
+    ) -> _DeleteEventBridgeRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventBridgeRuleTemplateResponse
+
+    interface _DeleteEventBridgeRuleTemplateGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_bridge_rule_template_group: (
+      ?identifier: String
+    ) -> _DeleteEventBridgeRuleTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventBridgeRuleTemplateGroupResponse
+
+    interface _DeleteInputResponse
+      include Smithy::Client::_Response[Types::DeleteInputResponse]
+    end
+    def delete_input: (
+      ?input_id: String
+    ) -> _DeleteInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInputResponse
+
+    interface _DeleteInputSecurityGroupResponse
+      include Smithy::Client::_Response[Types::DeleteInputSecurityGroupResponse]
+    end
+    def delete_input_security_group: (
+      ?input_security_group_id: String
+    ) -> _DeleteInputSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInputSecurityGroupResponse
+
+    interface _DeleteMultiplexResponse
+      include Smithy::Client::_Response[Types::DeleteMultiplexResponse]
+      def arn: () -> String?
+      def availability_zones: () -> Array[String]?
+      def destinations: () -> Array[Types::MultiplexOutputDestination]?
+      def id: () -> String?
+      def multiplex_settings: () -> Types::MultiplexSettings?
+      def name: () -> String?
+      def pipelines_running_count: () -> Integer?
+      def program_count: () -> Integer?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def delete_multiplex: (
+      ?multiplex_id: String
+    ) -> _DeleteMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMultiplexResponse
+
+    interface _DeleteMultiplexProgramResponse
+      include Smithy::Client::_Response[Types::DeleteMultiplexProgramResponse]
+      def channel_id: () -> String?
+      def multiplex_program_settings: () -> Types::MultiplexProgramSettings?
+      def packet_identifiers_map: () -> Types::MultiplexProgramPacketIdentifiersMap?
+      def pipeline_details: () -> Array[Types::MultiplexProgramPipelineDetail]?
+      def program_name: () -> String?
+    end
+    def delete_multiplex_program: (
+      ?multiplex_id: String,
+      ?program_name: String
+    ) -> _DeleteMultiplexProgramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMultiplexProgramResponse
+
+    interface _DeleteNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkResponse]
+      def arn: () -> String?
+      def associated_cluster_ids: () -> Array[String]?
+      def id: () -> String?
+      def ip_pools: () -> Array[Types::IpPool]?
+      def name: () -> String?
+      def routes: () -> Array[Types::Route]?
+      def state: () -> String?
+    end
+    def delete_network: (
+      ?network_id: String
+    ) -> _DeleteNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkResponse
+
+    interface _DeleteNodeResponse
+      include Smithy::Client::_Response[Types::DeleteNodeResponse]
+      def arn: () -> String?
+      def channel_placement_groups: () -> Array[String]?
+      def cluster_id: () -> String?
+      def connection_state: () -> String?
+      def id: () -> String?
+      def instance_arn: () -> String?
+      def name: () -> String?
+      def node_interface_mappings: () -> Array[Types::NodeInterfaceMapping]?
+      def role: () -> String?
+      def state: () -> String?
+      def sdi_source_mappings: () -> Array[Types::SdiSourceMapping]?
+    end
+    def delete_node: (
+      ?cluster_id: String,
+      ?node_id: String
+    ) -> _DeleteNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNodeResponse
+
+    interface _DeleteReservationResponse
+      include Smithy::Client::_Response[Types::DeleteReservationResponse]
+      def arn: () -> String?
+      def count: () -> Integer?
+      def currency_code: () -> String?
+      def duration: () -> Integer?
+      def duration_units: () -> String?
+      def end: () -> String?
+      def fixed_price: () -> Float?
+      def name: () -> String?
+      def offering_description: () -> String?
+      def offering_id: () -> String?
+      def offering_type: () -> String?
+      def region: () -> String?
+      def renewal_settings: () -> Types::RenewalSettings?
+      def reservation_id: () -> String?
+      def resource_specification: () -> Types::ReservationResourceSpecification?
+      def start: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def usage_price: () -> Float?
+    end
+    def delete_reservation: (
+      ?reservation_id: String
+    ) -> _DeleteReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReservationResponse
+
+    interface _DeleteScheduleResponse
+      include Smithy::Client::_Response[Types::DeleteScheduleResponse]
+    end
+    def delete_schedule: (
+      ?channel_id: String
+    ) -> _DeleteScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduleResponse
+
+    interface _DeleteSdiSourceResponse
+      include Smithy::Client::_Response[Types::DeleteSdiSourceResponse]
+      def sdi_source: () -> Types::SdiSource?
+    end
+    def delete_sdi_source: (
+      ?sdi_source_id: String
+    ) -> _DeleteSdiSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSdiSourceResponse
+
+    interface _DeleteSignalMapResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_signal_map: (
+      ?identifier: String
+    ) -> _DeleteSignalMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSignalMapResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_tags: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DescribeAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeAccountConfigurationResponse]
+      def account_configuration: () -> Types::AccountConfiguration?
+    end
+    def describe_account_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountConfigurationResponse
+
+    interface _DescribeChannelResponse
+      include Smithy::Client::_Response[Types::DescribeChannelResponse]
+      def arn: () -> String?
+      def cdi_input_specification: () -> Types::CdiInputSpecification?
+      def channel_class: () -> String?
+      def destinations: () -> Array[Types::OutputDestination]?
+      def egress_endpoints: () -> Array[Types::ChannelEgressEndpoint]?
+      def encoder_settings: () -> Types::EncoderSettings?
+      def id: () -> String?
+      def input_attachments: () -> Array[Types::InputAttachment]?
+      def input_specification: () -> Types::InputSpecification?
+      def log_level: () -> String?
+      def maintenance: () -> Types::MaintenanceStatus?
+      def name: () -> String?
+      def pipeline_details: () -> Array[Types::PipelineDetail]?
+      def pipelines_running_count: () -> Integer?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def vpc: () -> Types::VpcOutputSettingsDescription?
+      def anywhere_settings: () -> Types::DescribeAnywhereSettings?
+      def channel_engine_version: () -> Types::ChannelEngineVersionResponse?
+    end
+    def describe_channel: (
+      ?channel_id: String
+    ) -> _DescribeChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelResponse
+
+    interface _DescribeChannelPlacementGroupResponse
+      include Smithy::Client::_Response[Types::DescribeChannelPlacementGroupResponse]
+      def arn: () -> String?
+      def channels: () -> Array[String]?
+      def cluster_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def nodes: () -> Array[String]?
+      def state: () -> String?
+    end
+    def describe_channel_placement_group: (
+      ?channel_placement_group_id: String,
+      ?cluster_id: String
+    ) -> _DescribeChannelPlacementGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelPlacementGroupResponse
+
+    interface _DescribeClusterResponse
+      include Smithy::Client::_Response[Types::DescribeClusterResponse]
+      def arn: () -> String?
+      def channel_ids: () -> Array[String]?
+      def cluster_type: () -> String?
+      def id: () -> String?
+      def instance_role_arn: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::ClusterNetworkSettings?
+      def state: () -> String?
+    end
+    def describe_cluster: (
+      ?cluster_id: String
+    ) -> _DescribeClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterResponse
+
+    interface _DescribeInputResponse
+      include Smithy::Client::_Response[Types::DescribeInputResponse]
+      def arn: () -> String?
+      def attached_channels: () -> Array[String]?
+      def destinations: () -> Array[Types::InputDestination]?
+      def id: () -> String?
+      def input_class: () -> String?
+      def input_devices: () -> Array[Types::InputDeviceSettings]?
+      def input_partner_ids: () -> Array[String]?
+      def input_source_type: () -> String?
+      def media_connect_flows: () -> Array[Types::MediaConnectFlow]?
+      def name: () -> String?
+      def role_arn: () -> String?
+      def security_groups: () -> Array[String]?
+      def sources: () -> Array[Types::InputSource]?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def type: () -> String?
+      def srt_settings: () -> Types::SrtSettings?
+      def input_network_location: () -> String?
+      def multicast_settings: () -> Types::MulticastSettings?
+      def smpte2110_receiver_group_settings: () -> Types::Smpte2110ReceiverGroupSettings?
+      def sdi_sources: () -> Array[String]?
+    end
+    def describe_input: (
+      ?input_id: String
+    ) -> _DescribeInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInputResponse
+
+    interface _DescribeInputDeviceResponse
+      include Smithy::Client::_Response[Types::DescribeInputDeviceResponse]
+      def arn: () -> String?
+      def connection_state: () -> String?
+      def device_settings_sync_state: () -> String?
+      def device_update_status: () -> String?
+      def hd_device_settings: () -> Types::InputDeviceHdSettings?
+      def id: () -> String?
+      def mac_address: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::InputDeviceNetworkSettings?
+      def serial_number: () -> String?
+      def type: () -> String?
+      def uhd_device_settings: () -> Types::InputDeviceUhdSettings?
+      def tags: () -> Hash[String, String]?
+      def availability_zone: () -> String?
+      def medialive_input_arns: () -> Array[String]?
+      def output_type: () -> String?
+    end
+    def describe_input_device: (
+      ?input_device_id: String
+    ) -> _DescribeInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInputDeviceResponse
+
+    interface _DescribeInputDeviceThumbnailResponse
+      include Smithy::Client::_Response[Types::DescribeInputDeviceThumbnailResponse]
+      def body: () -> String?
+      def content_type: () -> String?
+      def content_length: () -> Integer?
+      def e_tag: () -> String?
+      def last_modified: () -> Time?
+    end
+    def describe_input_device_thumbnail: (
+      ?input_device_id: String,
+      ?accept: String
+    ) -> _DescribeInputDeviceThumbnailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInputDeviceThumbnailResponse
+
+    interface _DescribeInputSecurityGroupResponse
+      include Smithy::Client::_Response[Types::DescribeInputSecurityGroupResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def inputs: () -> Array[String]?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def whitelist_rules: () -> Array[Types::InputWhitelistRule]?
+    end
+    def describe_input_security_group: (
+      ?input_security_group_id: String
+    ) -> _DescribeInputSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInputSecurityGroupResponse
+
+    interface _DescribeMultiplexResponse
+      include Smithy::Client::_Response[Types::DescribeMultiplexResponse]
+      def arn: () -> String?
+      def availability_zones: () -> Array[String]?
+      def destinations: () -> Array[Types::MultiplexOutputDestination]?
+      def id: () -> String?
+      def multiplex_settings: () -> Types::MultiplexSettings?
+      def name: () -> String?
+      def pipelines_running_count: () -> Integer?
+      def program_count: () -> Integer?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_multiplex: (
+      ?multiplex_id: String
+    ) -> _DescribeMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiplexResponse
+
+    interface _DescribeMultiplexProgramResponse
+      include Smithy::Client::_Response[Types::DescribeMultiplexProgramResponse]
+      def channel_id: () -> String?
+      def multiplex_program_settings: () -> Types::MultiplexProgramSettings?
+      def packet_identifiers_map: () -> Types::MultiplexProgramPacketIdentifiersMap?
+      def pipeline_details: () -> Array[Types::MultiplexProgramPipelineDetail]?
+      def program_name: () -> String?
+    end
+    def describe_multiplex_program: (
+      ?multiplex_id: String,
+      ?program_name: String
+    ) -> _DescribeMultiplexProgramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiplexProgramResponse
+
+    interface _DescribeNetworkResponse
+      include Smithy::Client::_Response[Types::DescribeNetworkResponse]
+      def arn: () -> String?
+      def associated_cluster_ids: () -> Array[String]?
+      def id: () -> String?
+      def ip_pools: () -> Array[Types::IpPool]?
+      def name: () -> String?
+      def routes: () -> Array[Types::Route]?
+      def state: () -> String?
+    end
+    def describe_network: (
+      ?network_id: String
+    ) -> _DescribeNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNetworkResponse
+
+    interface _DescribeNodeResponse
+      include Smithy::Client::_Response[Types::DescribeNodeResponse]
+      def arn: () -> String?
+      def channel_placement_groups: () -> Array[String]?
+      def cluster_id: () -> String?
+      def connection_state: () -> String?
+      def id: () -> String?
+      def instance_arn: () -> String?
+      def name: () -> String?
+      def node_interface_mappings: () -> Array[Types::NodeInterfaceMapping]?
+      def role: () -> String?
+      def state: () -> String?
+      def sdi_source_mappings: () -> Array[Types::SdiSourceMapping]?
+    end
+    def describe_node: (
+      ?cluster_id: String,
+      ?node_id: String
+    ) -> _DescribeNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNodeResponse
+
+    interface _DescribeOfferingResponse
+      include Smithy::Client::_Response[Types::DescribeOfferingResponse]
+      def arn: () -> String?
+      def currency_code: () -> String?
+      def duration: () -> Integer?
+      def duration_units: () -> String?
+      def fixed_price: () -> Float?
+      def offering_description: () -> String?
+      def offering_id: () -> String?
+      def offering_type: () -> String?
+      def region: () -> String?
+      def resource_specification: () -> Types::ReservationResourceSpecification?
+      def usage_price: () -> Float?
+    end
+    def describe_offering: (
+      ?offering_id: String
+    ) -> _DescribeOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOfferingResponse
+
+    interface _DescribeReservationResponse
+      include Smithy::Client::_Response[Types::DescribeReservationResponse]
+      def arn: () -> String?
+      def count: () -> Integer?
+      def currency_code: () -> String?
+      def duration: () -> Integer?
+      def duration_units: () -> String?
+      def end: () -> String?
+      def fixed_price: () -> Float?
+      def name: () -> String?
+      def offering_description: () -> String?
+      def offering_id: () -> String?
+      def offering_type: () -> String?
+      def region: () -> String?
+      def renewal_settings: () -> Types::RenewalSettings?
+      def reservation_id: () -> String?
+      def resource_specification: () -> Types::ReservationResourceSpecification?
+      def start: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def usage_price: () -> Float?
+    end
+    def describe_reservation: (
+      ?reservation_id: String
+    ) -> _DescribeReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservationResponse
+
+    interface _DescribeScheduleResponse
+      include Smithy::Client::_Response[Types::DescribeScheduleResponse]
+      def next_token: () -> String?
+      def schedule_actions: () -> Array[Types::ScheduleAction]?
+    end
+    def describe_schedule: (
+      ?channel_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScheduleResponse
+
+    interface _DescribeSdiSourceResponse
+      include Smithy::Client::_Response[Types::DescribeSdiSourceResponse]
+      def sdi_source: () -> Types::SdiSource?
+    end
+    def describe_sdi_source: (
+      ?sdi_source_id: String
+    ) -> _DescribeSdiSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSdiSourceResponse
+
+    interface _DescribeThumbnailsResponse
+      include Smithy::Client::_Response[Types::DescribeThumbnailsResponse]
+      def thumbnail_details: () -> Array[Types::ThumbnailDetail]?
+    end
+    def describe_thumbnails: (
+      ?channel_id: String,
+      ?pipeline_id: String,
+      ?thumbnail_type: String
+    ) -> _DescribeThumbnailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeThumbnailsResponse
+
+    interface _GetCloudWatchAlarmTemplateResponse
+      include Smithy::Client::_Response[Types::GetCloudWatchAlarmTemplateResponse]
+      def arn: () -> String?
+      def comparison_operator: () -> String?
+      def created_at: () -> Time?
+      def datapoints_to_alarm: () -> Integer?
+      def description: () -> String?
+      def evaluation_periods: () -> Integer?
+      def group_id: () -> String?
+      def id: () -> String?
+      def metric_name: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def period: () -> Integer?
+      def statistic: () -> String?
+      def tags: () -> Hash[String, String]?
+      def target_resource_type: () -> String?
+      def threshold: () -> Float?
+      def treat_missing_data: () -> String?
+    end
+    def get_cloud_watch_alarm_template: (
+      ?identifier: String
+    ) -> _GetCloudWatchAlarmTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudWatchAlarmTemplateResponse
+
+    interface _GetCloudWatchAlarmTemplateGroupResponse
+      include Smithy::Client::_Response[Types::GetCloudWatchAlarmTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_cloud_watch_alarm_template_group: (
+      ?identifier: String
+    ) -> _GetCloudWatchAlarmTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudWatchAlarmTemplateGroupResponse
+
+    interface _GetEventBridgeRuleTemplateResponse
+      include Smithy::Client::_Response[Types::GetEventBridgeRuleTemplateResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def event_targets: () -> Array[Types::EventBridgeRuleTemplateTarget]?
+      def event_type: () -> String?
+      def group_id: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_event_bridge_rule_template: (
+      ?identifier: String
+    ) -> _GetEventBridgeRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventBridgeRuleTemplateResponse
+
+    interface _GetEventBridgeRuleTemplateGroupResponse
+      include Smithy::Client::_Response[Types::GetEventBridgeRuleTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_event_bridge_rule_template_group: (
+      ?identifier: String
+    ) -> _GetEventBridgeRuleTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventBridgeRuleTemplateGroupResponse
+
+    interface _GetSignalMapResponse
+      include Smithy::Client::_Response[Types::GetSignalMapResponse]
+      def arn: () -> String?
+      def cloud_watch_alarm_template_group_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def discovery_entry_point_arn: () -> String?
+      def error_message: () -> String?
+      def event_bridge_rule_template_group_ids: () -> Array[String]?
+      def failed_media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def id: () -> String?
+      def last_discovered_at: () -> Time?
+      def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment?
+      def media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def modified_at: () -> Time?
+      def monitor_changes_pending_deployment: () -> bool?
+      def monitor_deployment: () -> Types::MonitorDeployment?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_signal_map: (
+      ?identifier: String
+    ) -> _GetSignalMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSignalMapResponse
+
+    interface _ListChannelPlacementGroupsResponse
+      include Smithy::Client::_Response[Types::ListChannelPlacementGroupsResponse]
+      def channel_placement_groups: () -> Array[Types::DescribeChannelPlacementGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_channel_placement_groups: (
+      ?cluster_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelPlacementGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelPlacementGroupsResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def channels: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListCloudWatchAlarmTemplateGroupsResponse
+      include Smithy::Client::_Response[Types::ListCloudWatchAlarmTemplateGroupsResponse]
+      def cloud_watch_alarm_template_groups: () -> Array[Types::CloudWatchAlarmTemplateGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_cloud_watch_alarm_template_groups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?scope: String,
+      ?signal_map_identifier: String
+    ) -> _ListCloudWatchAlarmTemplateGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudWatchAlarmTemplateGroupsResponse
+
+    interface _ListCloudWatchAlarmTemplatesResponse
+      include Smithy::Client::_Response[Types::ListCloudWatchAlarmTemplatesResponse]
+      def cloud_watch_alarm_templates: () -> Array[Types::CloudWatchAlarmTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_cloud_watch_alarm_templates: (
+      ?group_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?scope: String,
+      ?signal_map_identifier: String
+    ) -> _ListCloudWatchAlarmTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudWatchAlarmTemplatesResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersResponse]
+      def clusters: () -> Array[Types::DescribeClusterSummary]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListEventBridgeRuleTemplateGroupsResponse
+      include Smithy::Client::_Response[Types::ListEventBridgeRuleTemplateGroupsResponse]
+      def event_bridge_rule_template_groups: () -> Array[Types::EventBridgeRuleTemplateGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_bridge_rule_template_groups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?signal_map_identifier: String
+    ) -> _ListEventBridgeRuleTemplateGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventBridgeRuleTemplateGroupsResponse
+
+    interface _ListEventBridgeRuleTemplatesResponse
+      include Smithy::Client::_Response[Types::ListEventBridgeRuleTemplatesResponse]
+      def event_bridge_rule_templates: () -> Array[Types::EventBridgeRuleTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_bridge_rule_templates: (
+      ?group_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?signal_map_identifier: String
+    ) -> _ListEventBridgeRuleTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventBridgeRuleTemplatesResponse
+
+    interface _ListInputDeviceTransfersResponse
+      include Smithy::Client::_Response[Types::ListInputDeviceTransfersResponse]
+      def input_device_transfers: () -> Array[Types::TransferringInputDeviceSummary]?
+      def next_token: () -> String?
+    end
+    def list_input_device_transfers: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?transfer_type: String
+    ) -> _ListInputDeviceTransfersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInputDeviceTransfersResponse
+
+    interface _ListInputDevicesResponse
+      include Smithy::Client::_Response[Types::ListInputDevicesResponse]
+      def input_devices: () -> Array[Types::InputDeviceSummary]?
+      def next_token: () -> String?
+    end
+    def list_input_devices: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInputDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInputDevicesResponse
+
+    interface _ListInputSecurityGroupsResponse
+      include Smithy::Client::_Response[Types::ListInputSecurityGroupsResponse]
+      def input_security_groups: () -> Array[Types::InputSecurityGroup]?
+      def next_token: () -> String?
+    end
+    def list_input_security_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInputSecurityGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInputSecurityGroupsResponse
+
+    interface _ListInputsResponse
+      include Smithy::Client::_Response[Types::ListInputsResponse]
+      def inputs: () -> Array[Types::Input]?
+      def next_token: () -> String?
+    end
+    def list_inputs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInputsResponse
+
+    interface _ListMultiplexProgramsResponse
+      include Smithy::Client::_Response[Types::ListMultiplexProgramsResponse]
+      def multiplex_programs: () -> Array[Types::MultiplexProgramSummary]?
+      def next_token: () -> String?
+    end
+    def list_multiplex_programs: (
+      ?max_results: Integer,
+      ?multiplex_id: String,
+      ?next_token: String
+    ) -> _ListMultiplexProgramsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultiplexProgramsResponse
+
+    interface _ListMultiplexesResponse
+      include Smithy::Client::_Response[Types::ListMultiplexesResponse]
+      def multiplexes: () -> Array[Types::MultiplexSummary]?
+      def next_token: () -> String?
+    end
+    def list_multiplexes: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMultiplexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultiplexesResponse
+
+    interface _ListNetworksResponse
+      include Smithy::Client::_Response[Types::ListNetworksResponse]
+      def networks: () -> Array[Types::DescribeNetworkSummary]?
+      def next_token: () -> String?
+    end
+    def list_networks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworksResponse
+
+    interface _ListNodesResponse
+      include Smithy::Client::_Response[Types::ListNodesResponse]
+      def next_token: () -> String?
+      def nodes: () -> Array[Types::DescribeNodeSummary]?
+    end
+    def list_nodes: (
+      ?cluster_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNodesResponse
+
+    interface _ListOfferingsResponse
+      include Smithy::Client::_Response[Types::ListOfferingsResponse]
+      def next_token: () -> String?
+      def offerings: () -> Array[Types::Offering]?
+    end
+    def list_offerings: (
+      ?channel_class: String,
+      ?channel_configuration: String,
+      ?codec: String,
+      ?duration: String,
+      ?max_results: Integer,
+      ?maximum_bitrate: String,
+      ?maximum_framerate: String,
+      ?next_token: String,
+      ?resolution: String,
+      ?resource_type: String,
+      ?special_feature: String,
+      ?video_quality: String
+    ) -> _ListOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOfferingsResponse
+
+    interface _ListReservationsResponse
+      include Smithy::Client::_Response[Types::ListReservationsResponse]
+      def next_token: () -> String?
+      def reservations: () -> Array[Types::Reservation]?
+    end
+    def list_reservations: (
+      ?channel_class: String,
+      ?codec: String,
+      ?max_results: Integer,
+      ?maximum_bitrate: String,
+      ?maximum_framerate: String,
+      ?next_token: String,
+      ?resolution: String,
+      ?resource_type: String,
+      ?special_feature: String,
+      ?video_quality: String
+    ) -> _ListReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReservationsResponse
+
+    interface _ListSdiSourcesResponse
+      include Smithy::Client::_Response[Types::ListSdiSourcesResponse]
+      def next_token: () -> String?
+      def sdi_sources: () -> Array[Types::SdiSourceSummary]?
+    end
+    def list_sdi_sources: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSdiSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSdiSourcesResponse
+
+    interface _ListSignalMapsResponse
+      include Smithy::Client::_Response[Types::ListSignalMapsResponse]
+      def next_token: () -> String?
+      def signal_maps: () -> Array[Types::SignalMapSummary]?
+    end
+    def list_signal_maps: (
+      ?cloud_watch_alarm_template_group_identifier: String,
+      ?event_bridge_rule_template_group_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSignalMapsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSignalMapsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVersionsResponse
+      include Smithy::Client::_Response[Types::ListVersionsResponse]
+      def versions: () -> Array[Types::ChannelEngineVersionResponse]?
+    end
+    def list_versions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVersionsResponse
+
+    interface _PurchaseOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseOfferingResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def purchase_offering: (
+      ?count: Integer,
+      ?name: String,
+      ?offering_id: String,
+      ?renewal_settings: {
+        automatic_renewal: String,
+        renewal_count: Integer
+      },
+      ?request_id: String,
+      ?start: String,
+      ?tags: Hash[String, String]
+    ) -> _PurchaseOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseOfferingResponse
+
+    interface _RebootInputDeviceResponse
+      include Smithy::Client::_Response[Types::RebootInputDeviceResponse]
+    end
+    def reboot_input_device: (
+      ?force: String,
+      ?input_device_id: String
+    ) -> _RebootInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootInputDeviceResponse
+
+    interface _RejectInputDeviceTransferResponse
+      include Smithy::Client::_Response[Types::RejectInputDeviceTransferResponse]
+    end
+    def reject_input_device_transfer: (
+      ?input_device_id: String
+    ) -> _RejectInputDeviceTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectInputDeviceTransferResponse
+
+    interface _RestartChannelPipelinesResponse
+      include Smithy::Client::_Response[Types::RestartChannelPipelinesResponse]
+      def arn: () -> String?
+      def cdi_input_specification: () -> Types::CdiInputSpecification?
+      def channel_class: () -> String?
+      def destinations: () -> Array[Types::OutputDestination]?
+      def egress_endpoints: () -> Array[Types::ChannelEgressEndpoint]?
+      def encoder_settings: () -> Types::EncoderSettings?
+      def id: () -> String?
+      def input_attachments: () -> Array[Types::InputAttachment]?
+      def input_specification: () -> Types::InputSpecification?
+      def log_level: () -> String?
+      def maintenance: () -> Types::MaintenanceStatus?
+      def maintenance_status: () -> String?
+      def name: () -> String?
+      def pipeline_details: () -> Array[Types::PipelineDetail]?
+      def pipelines_running_count: () -> Integer?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def vpc: () -> Types::VpcOutputSettingsDescription?
+      def anywhere_settings: () -> Types::DescribeAnywhereSettings?
+      def channel_engine_version: () -> Types::ChannelEngineVersionResponse?
+    end
+    def restart_channel_pipelines: (
+      ?channel_id: String,
+      ?pipeline_ids: Array[String]
+    ) -> _RestartChannelPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestartChannelPipelinesResponse
+
+    interface _StartChannelResponse
+      include Smithy::Client::_Response[Types::StartChannelResponse]
+      def arn: () -> String?
+      def cdi_input_specification: () -> Types::CdiInputSpecification?
+      def channel_class: () -> String?
+      def destinations: () -> Array[Types::OutputDestination]?
+      def egress_endpoints: () -> Array[Types::ChannelEgressEndpoint]?
+      def encoder_settings: () -> Types::EncoderSettings?
+      def id: () -> String?
+      def input_attachments: () -> Array[Types::InputAttachment]?
+      def input_specification: () -> Types::InputSpecification?
+      def log_level: () -> String?
+      def maintenance: () -> Types::MaintenanceStatus?
+      def name: () -> String?
+      def pipeline_details: () -> Array[Types::PipelineDetail]?
+      def pipelines_running_count: () -> Integer?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def vpc: () -> Types::VpcOutputSettingsDescription?
+      def anywhere_settings: () -> Types::DescribeAnywhereSettings?
+      def channel_engine_version: () -> Types::ChannelEngineVersionResponse?
+    end
+    def start_channel: (
+      ?channel_id: String
+    ) -> _StartChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartChannelResponse
+
+    interface _StartDeleteMonitorDeploymentResponse
+      include Smithy::Client::_Response[Types::StartDeleteMonitorDeploymentResponse]
+      def arn: () -> String?
+      def cloud_watch_alarm_template_group_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def discovery_entry_point_arn: () -> String?
+      def error_message: () -> String?
+      def event_bridge_rule_template_group_ids: () -> Array[String]?
+      def failed_media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def id: () -> String?
+      def last_discovered_at: () -> Time?
+      def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment?
+      def media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def modified_at: () -> Time?
+      def monitor_changes_pending_deployment: () -> bool?
+      def monitor_deployment: () -> Types::MonitorDeployment?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_delete_monitor_deployment: (
+      ?identifier: String
+    ) -> _StartDeleteMonitorDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeleteMonitorDeploymentResponse
+
+    interface _StartInputDeviceResponse
+      include Smithy::Client::_Response[Types::StartInputDeviceResponse]
+    end
+    def start_input_device: (
+      ?input_device_id: String
+    ) -> _StartInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInputDeviceResponse
+
+    interface _StartInputDeviceMaintenanceWindowResponse
+      include Smithy::Client::_Response[Types::StartInputDeviceMaintenanceWindowResponse]
+    end
+    def start_input_device_maintenance_window: (
+      ?input_device_id: String
+    ) -> _StartInputDeviceMaintenanceWindowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInputDeviceMaintenanceWindowResponse
+
+    interface _StartMonitorDeploymentResponse
+      include Smithy::Client::_Response[Types::StartMonitorDeploymentResponse]
+      def arn: () -> String?
+      def cloud_watch_alarm_template_group_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def discovery_entry_point_arn: () -> String?
+      def error_message: () -> String?
+      def event_bridge_rule_template_group_ids: () -> Array[String]?
+      def failed_media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def id: () -> String?
+      def last_discovered_at: () -> Time?
+      def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment?
+      def media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def modified_at: () -> Time?
+      def monitor_changes_pending_deployment: () -> bool?
+      def monitor_deployment: () -> Types::MonitorDeployment?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_monitor_deployment: (
+      ?dry_run: bool,
+      ?identifier: String
+    ) -> _StartMonitorDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMonitorDeploymentResponse
+
+    interface _StartMultiplexResponse
+      include Smithy::Client::_Response[Types::StartMultiplexResponse]
+      def arn: () -> String?
+      def availability_zones: () -> Array[String]?
+      def destinations: () -> Array[Types::MultiplexOutputDestination]?
+      def id: () -> String?
+      def multiplex_settings: () -> Types::MultiplexSettings?
+      def name: () -> String?
+      def pipelines_running_count: () -> Integer?
+      def program_count: () -> Integer?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_multiplex: (
+      ?multiplex_id: String
+    ) -> _StartMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMultiplexResponse
+
+    interface _StartUpdateSignalMapResponse
+      include Smithy::Client::_Response[Types::StartUpdateSignalMapResponse]
+      def arn: () -> String?
+      def cloud_watch_alarm_template_group_ids: () -> Array[String]?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def discovery_entry_point_arn: () -> String?
+      def error_message: () -> String?
+      def event_bridge_rule_template_group_ids: () -> Array[String]?
+      def failed_media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def id: () -> String?
+      def last_discovered_at: () -> Time?
+      def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment?
+      def media_resource_map: () -> Hash[String, Types::MediaResource]?
+      def modified_at: () -> Time?
+      def monitor_changes_pending_deployment: () -> bool?
+      def monitor_deployment: () -> Types::MonitorDeployment?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_update_signal_map: (
+      ?cloud_watch_alarm_template_group_identifiers: Array[String],
+      ?description: String,
+      ?discovery_entry_point_arn: String,
+      ?event_bridge_rule_template_group_identifiers: Array[String],
+      ?force_rediscovery: bool,
+      ?identifier: String,
+      ?name: String
+    ) -> _StartUpdateSignalMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartUpdateSignalMapResponse
+
+    interface _StopChannelResponse
+      include Smithy::Client::_Response[Types::StopChannelResponse]
+      def arn: () -> String?
+      def cdi_input_specification: () -> Types::CdiInputSpecification?
+      def channel_class: () -> String?
+      def destinations: () -> Array[Types::OutputDestination]?
+      def egress_endpoints: () -> Array[Types::ChannelEgressEndpoint]?
+      def encoder_settings: () -> Types::EncoderSettings?
+      def id: () -> String?
+      def input_attachments: () -> Array[Types::InputAttachment]?
+      def input_specification: () -> Types::InputSpecification?
+      def log_level: () -> String?
+      def maintenance: () -> Types::MaintenanceStatus?
+      def name: () -> String?
+      def pipeline_details: () -> Array[Types::PipelineDetail]?
+      def pipelines_running_count: () -> Integer?
+      def role_arn: () -> String?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+      def vpc: () -> Types::VpcOutputSettingsDescription?
+      def anywhere_settings: () -> Types::DescribeAnywhereSettings?
+      def channel_engine_version: () -> Types::ChannelEngineVersionResponse?
+    end
+    def stop_channel: (
+      ?channel_id: String
+    ) -> _StopChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopChannelResponse
+
+    interface _StopInputDeviceResponse
+      include Smithy::Client::_Response[Types::StopInputDeviceResponse]
+    end
+    def stop_input_device: (
+      ?input_device_id: String
+    ) -> _StopInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopInputDeviceResponse
+
+    interface _StopMultiplexResponse
+      include Smithy::Client::_Response[Types::StopMultiplexResponse]
+      def arn: () -> String?
+      def availability_zones: () -> Array[String]?
+      def destinations: () -> Array[Types::MultiplexOutputDestination]?
+      def id: () -> String?
+      def multiplex_settings: () -> Types::MultiplexSettings?
+      def name: () -> String?
+      def pipelines_running_count: () -> Integer?
+      def program_count: () -> Integer?
+      def state: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def stop_multiplex: (
+      ?multiplex_id: String
+    ) -> _StopMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMultiplexResponse
+
+    interface _TransferInputDeviceResponse
+      include Smithy::Client::_Response[Types::TransferInputDeviceResponse]
+    end
+    def transfer_input_device: (
+      ?input_device_id: String,
+      ?target_customer_id: String,
+      ?target_region: String,
+      ?transfer_message: String
+    ) -> _TransferInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransferInputDeviceResponse
+
+    interface _UpdateAccountConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAccountConfigurationResponse]
+      def account_configuration: () -> Types::AccountConfiguration?
+    end
+    def update_account_configuration: (
+      ?account_configuration: {
+        kms_key_id: String
+      }
+    ) -> _UpdateAccountConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountConfigurationResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def channel: () -> Types::Channel?
+    end
+    def update_channel: (
+      ?cdi_input_specification: {
+        resolution: String
+      },
+      ?channel_id: String,
+      ?destinations: Array[
+        {
+          id: String,
+          media_package_settings: Array[
+            {
+              channel_id: String,
+              channel_group: untyped,
+              channel_name: untyped
+            }
+          ],
+          multiplex_settings: {
+            multiplex_id: untyped,
+            program_name: untyped
+          },
+          settings: Array[
+            {
+              password_param: untyped,
+              stream_name: untyped,
+              url: untyped,
+              username: untyped
+            }
+          ],
+          srt_settings: Array[
+            {
+              encryption_passphrase_secret_arn: untyped,
+              stream_id: untyped,
+              url: untyped
+            }
+          ],
+          logical_interface_names: Array[String]
+        }
+      ],
+      ?encoder_settings: {
+        audio_descriptions: Array[
+          {
+            audio_normalization_settings: {
+              algorithm: String,
+              algorithm_control: String,
+              target_lkfs: Float
+            },
+            audio_selector_name: String,
+            audio_type: String,
+            audio_type_control: String,
+            audio_watermarking_settings: {
+              nielsen_watermarks_settings: {
+                nielsen_cbet_settings: {
+                  cbet_check_digit_string: String,
+                  cbet_stepaside: String,
+                  csid: String
+                },
+                nielsen_distribution_type: String,
+                nielsen_naes_ii_nw_settings: {
+                  check_digit_string: untyped,
+                  sid: Float,
+                  timezone: String
+                }
+              }
+            },
+            codec_settings: {
+              aac_settings: {
+                bitrate: Float,
+                coding_mode: String,
+                input_type: String,
+                profile: String,
+                rate_control_mode: String,
+                raw_format: String,
+                sample_rate: untyped,
+                spec: String,
+                vbr_quality: String
+              },
+              ac3_settings: {
+                bitrate: untyped,
+                bitstream_mode: String,
+                coding_mode: String,
+                dialnorm: Integer,
+                drc_profile: String,
+                lfe_filter: String,
+                metadata_control: String,
+                attenuation_control: String
+              },
+              eac3_atmos_settings: {
+                bitrate: untyped,
+                coding_mode: String,
+                dialnorm: untyped,
+                drc_line: String,
+                drc_rf: String,
+                height_trim: untyped,
+                surround_trim: untyped
+              },
+              eac3_settings: {
+                attenuation_control: String,
+                bitrate: untyped,
+                bitstream_mode: String,
+                coding_mode: String,
+                dc_filter: String,
+                dialnorm: untyped,
+                drc_line: String,
+                drc_rf: String,
+                lfe_control: String,
+                lfe_filter: String,
+                lo_ro_center_mix_level: untyped,
+                lo_ro_surround_mix_level: untyped,
+                lt_rt_center_mix_level: untyped,
+                lt_rt_surround_mix_level: untyped,
+                metadata_control: String,
+                passthrough_control: String,
+                phase_control: String,
+                stereo_downmix: String,
+                surround_ex_mode: String,
+                surround_mode: String
+              },
+              mp2_settings: {
+                bitrate: untyped,
+                coding_mode: String,
+                sample_rate: untyped
+              },
+              pass_through_settings: {
+              },
+              wav_settings: {
+                bit_depth: untyped,
+                coding_mode: String,
+                sample_rate: untyped
+              }
+            },
+            language_code: String,
+            language_code_control: String,
+            name: String,
+            remix_settings: {
+              channel_mappings: Array[
+                {
+                  input_channel_levels: Array[
+                    {
+                      gain: Integer,
+                      input_channel: Integer
+                    }
+                  ],
+                  output_channel: Integer
+                }
+              ],
+              channels_in: Integer,
+              channels_out: Integer
+            },
+            stream_name: untyped,
+            audio_dash_roles: Array[String],
+            dvb_dash_accessibility: String
+          }
+        ],
+        avail_blanking: {
+          avail_blanking_image: {
+            password_param: untyped,
+            uri: String,
+            username: untyped
+          },
+          state: String
+        },
+        avail_configuration: {
+          avail_settings: {
+            esam: {
+              acquisition_point_id: String,
+              ad_avail_offset: Integer,
+              password_param: untyped,
+              pois_endpoint: untyped,
+              username: untyped,
+              zone_identity: untyped
+            },
+            scte35_splice_insert: {
+              ad_avail_offset: untyped,
+              no_regional_blackout_flag: String,
+              web_delivery_allowed_flag: String
+            },
+            scte35_time_signal_apos: {
+              ad_avail_offset: untyped,
+              no_regional_blackout_flag: String,
+              web_delivery_allowed_flag: String
+            }
+          },
+          scte35_segmentation_scope: String
+        },
+        blackout_slate: {
+          blackout_slate_image: untyped,
+          network_end_blackout: String,
+          network_end_blackout_image: untyped,
+          network_id: String,
+          state: String
+        },
+        caption_descriptions: Array[
+          {
+            accessibility: String,
+            caption_selector_name: untyped,
+            destination_settings: {
+              arib_destination_settings: {
+              },
+              burn_in_destination_settings: {
+                alignment: String,
+                background_color: String,
+                background_opacity: Integer,
+                font: untyped,
+                font_color: String,
+                font_opacity: untyped,
+                font_resolution: Integer,
+                font_size: untyped,
+                outline_color: String,
+                outline_size: Integer,
+                shadow_color: String,
+                shadow_opacity: untyped,
+                shadow_x_offset: Integer,
+                shadow_y_offset: untyped,
+                teletext_grid_control: String,
+                x_position: Integer,
+                y_position: untyped
+              },
+              dvb_sub_destination_settings: {
+                alignment: String,
+                background_color: String,
+                background_opacity: untyped,
+                font: untyped,
+                font_color: String,
+                font_opacity: untyped,
+                font_resolution: untyped,
+                font_size: untyped,
+                outline_color: String,
+                outline_size: untyped,
+                shadow_color: String,
+                shadow_opacity: untyped,
+                shadow_x_offset: untyped,
+                shadow_y_offset: untyped,
+                teletext_grid_control: String,
+                x_position: untyped,
+                y_position: untyped
+              },
+              ebu_tt_d_destination_settings: {
+                copyright_holder: String,
+                fill_line_gap: String,
+                font_family: untyped,
+                style_control: String,
+                default_font_size: Integer,
+                default_line_height: Integer
+              },
+              embedded_destination_settings: {
+              },
+              embedded_plus_scte20_destination_settings: {
+              },
+              rtmp_caption_info_destination_settings: {
+              },
+              scte20_plus_embedded_destination_settings: {
+              },
+              scte27_destination_settings: {
+              },
+              smpte_tt_destination_settings: {
+              },
+              teletext_destination_settings: {
+              },
+              ttml_destination_settings: {
+                style_control: String
+              },
+              webvtt_destination_settings: {
+                style_control: String
+              }
+            },
+            language_code: untyped,
+            language_description: untyped,
+            name: untyped,
+            caption_dash_roles: Array[String],
+            dvb_dash_accessibility: untyped
+          }
+        ],
+        feature_activations: {
+          input_prepare_schedule_actions: String,
+          output_static_image_overlay_schedule_actions: String
+        },
+        global_configuration: {
+          initial_audio_gain: Integer,
+          input_end_action: String,
+          input_loss_behavior: {
+            black_frame_msec: Integer,
+            input_loss_image_color: String,
+            input_loss_image_slate: untyped,
+            input_loss_image_type: String,
+            repeat_frame_msec: untyped
+          },
+          output_locking_mode: String,
+          output_timing_source: String,
+          support_low_framerate_inputs: String,
+          output_locking_settings: {
+            epoch_locking_settings: {
+              custom_epoch: untyped,
+              jam_sync_time: untyped
+            },
+            pipeline_locking_settings: {
+            }
+          }
+        },
+        motion_graphics_configuration: {
+          motion_graphics_insertion: String,
+          motion_graphics_settings: {
+            html_motion_graphics_settings: {
+            }
+          }
+        },
+        nielsen_configuration: {
+          distributor_id: untyped,
+          nielsen_pcm_to_id3_tagging: String
+        },
+        output_groups: Array[
+          {
+            name: String,
+            output_group_settings: {
+              archive_group_settings: {
+                archive_cdn_settings: {
+                  archive_s3_settings: {
+                    canned_acl: String
+                  }
+                },
+                destination: {
+                  destination_ref_id: untyped
+                },
+                rollover_interval: Integer
+              },
+              frame_capture_group_settings: {
+                destination: untyped,
+                frame_capture_cdn_settings: {
+                  frame_capture_s3_settings: {
+                    canned_acl: untyped
+                  }
+                }
+              },
+              hls_group_settings: {
+                ad_markers: Array[String],
+                base_url_content: untyped,
+                base_url_content1: untyped,
+                base_url_manifest: untyped,
+                base_url_manifest1: untyped,
+                caption_language_mappings: Array[
+                  {
+                    caption_channel: Integer,
+                    language_code: String,
+                    language_description: String
+                  }
+                ],
+                caption_language_setting: String,
+                client_cache: String,
+                codec_specification: String,
+                constant_iv: String,
+                destination: untyped,
+                directory_structure: String,
+                discontinuity_tags: String,
+                encryption_type: String,
+                hls_cdn_settings: {
+                  hls_akamai_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: Integer,
+                    http_transfer_mode: String,
+                    num_retries: untyped,
+                    restart_delay: untyped,
+                    salt: untyped,
+                    token: untyped
+                  },
+                  hls_basic_put_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  },
+                  hls_media_store_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    media_store_storage_class: String,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  },
+                  hls_s3_settings: {
+                    canned_acl: untyped
+                  },
+                  hls_webdav_settings: {
+                    connection_retry_interval: untyped,
+                    filecache_duration: untyped,
+                    http_transfer_mode: String,
+                    num_retries: untyped,
+                    restart_delay: untyped
+                  }
+                },
+                hls_id3_segment_tagging: String,
+                i_frame_only_playlists: String,
+                incomplete_segment_behavior: String,
+                index_n_segments: Integer,
+                input_loss_action: String,
+                iv_in_manifest: String,
+                iv_source: String,
+                keep_segments: untyped,
+                key_format: untyped,
+                key_format_versions: untyped,
+                key_provider_settings: {
+                  static_key_settings: {
+                    key_provider_server: untyped,
+                    static_key_value: untyped
+                  }
+                },
+                manifest_compression: String,
+                manifest_duration_format: String,
+                min_segment_length: untyped,
+                mode: String,
+                output_selection: String,
+                program_date_time: String,
+                program_date_time_clock: String,
+                program_date_time_period: Integer,
+                redundant_manifest: String,
+                segment_length: untyped,
+                segmentation_mode: String,
+                segments_per_subdirectory: untyped,
+                stream_inf_resolution: String,
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped,
+                timestamp_delta_milliseconds: untyped,
+                ts_file_mode: String
+              },
+              media_package_group_settings: {
+                destination: untyped
+              },
+              ms_smooth_group_settings: {
+                acquisition_point_id: untyped,
+                audio_only_timecode_control: String,
+                certificate_mode: String,
+                connection_retry_interval: untyped,
+                destination: untyped,
+                event_id: untyped,
+                event_id_mode: String,
+                event_stop_behavior: String,
+                filecache_duration: untyped,
+                fragment_length: untyped,
+                input_loss_action: String,
+                num_retries: untyped,
+                restart_delay: untyped,
+                segmentation_mode: String,
+                send_delay_ms: Integer,
+                sparse_track_type: String,
+                stream_manifest_behavior: String,
+                timestamp_offset: untyped,
+                timestamp_offset_mode: String
+              },
+              multiplex_group_settings: {
+              },
+              rtmp_group_settings: {
+                ad_markers: Array[String],
+                authentication_scheme: String,
+                cache_full_behavior: String,
+                cache_length: Integer,
+                caption_data: String,
+                input_loss_action: String,
+                restart_delay: untyped,
+                include_filler_nal_units: String
+              },
+              udp_group_settings: {
+                input_loss_action: String,
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped
+              },
+              cmaf_ingest_group_settings: {
+                destination: untyped,
+                nielsen_id3_behavior: String,
+                scte35_type: String,
+                segment_length: untyped,
+                segment_length_units: String,
+                send_delay_ms: Integer,
+                klv_behavior: String,
+                klv_name_modifier: String,
+                nielsen_id3_name_modifier: untyped,
+                scte35_name_modifier: untyped,
+                id3_behavior: String,
+                id3_name_modifier: untyped,
+                caption_language_mappings: Array[
+                  {
+                    caption_channel: untyped,
+                    language_code: untyped
+                  }
+                ],
+                timed_metadata_id3_frame: String,
+                timed_metadata_id3_period: untyped,
+                timed_metadata_passthrough: String
+              },
+              srt_group_settings: {
+                input_loss_action: untyped
+              }
+            },
+            outputs: Array[
+              {
+                audio_description_names: Array[String],
+                caption_description_names: untyped,
+                output_name: String,
+                output_settings: {
+                  archive_output_settings: {
+                    container_settings: {
+                      m2ts_settings: {
+                        absent_input_audio_behavior: String,
+                        arib: String,
+                        arib_captions_pid: untyped,
+                        arib_captions_pid_control: String,
+                        audio_buffer_model: String,
+                        audio_frames_per_pes: untyped,
+                        audio_pids: untyped,
+                        audio_stream_type: String,
+                        bitrate: untyped,
+                        buffer_model: String,
+                        cc_descriptor: String,
+                        dvb_nit_settings: {
+                          network_id: Integer,
+                          network_name: String,
+                          rep_interval: Integer
+                        },
+                        dvb_sdt_settings: {
+                          output_sdt: String,
+                          rep_interval: Integer,
+                          service_name: untyped,
+                          service_provider_name: untyped
+                        },
+                        dvb_sub_pids: untyped,
+                        dvb_tdt_settings: {
+                          rep_interval: Integer
+                        },
+                        dvb_teletext_pid: untyped,
+                        ebif: String,
+                        ebp_audio_interval: String,
+                        ebp_lookahead_ms: untyped,
+                        ebp_placement: String,
+                        ecm_pid: untyped,
+                        es_rate_in_pes: String,
+                        etv_platform_pid: untyped,
+                        etv_signal_pid: untyped,
+                        fragment_time: Float,
+                        klv: String,
+                        klv_data_pids: untyped,
+                        nielsen_id3_behavior: String,
+                        null_packet_bitrate: untyped,
+                        pat_interval: Integer,
+                        pcr_control: String,
+                        pcr_period: Integer,
+                        pcr_pid: untyped,
+                        pmt_interval: untyped,
+                        pmt_pid: untyped,
+                        program_num: Integer,
+                        rate_mode: String,
+                        scte27_pids: untyped,
+                        scte35_control: String,
+                        scte35_pid: untyped,
+                        segmentation_markers: String,
+                        segmentation_style: String,
+                        segmentation_time: Float,
+                        timed_metadata_behavior: String,
+                        timed_metadata_pid: untyped,
+                        transport_stream_id: untyped,
+                        video_pid: untyped,
+                        scte35_preroll_pullup_milliseconds: Float
+                      },
+                      raw_settings: {
+                      }
+                    },
+                    extension: untyped,
+                    name_modifier: untyped
+                  },
+                  frame_capture_output_settings: {
+                    name_modifier: untyped
+                  },
+                  hls_output_settings: {
+                    h265_packaging_type: String,
+                    hls_settings: {
+                      audio_only_hls_settings: {
+                        audio_group_id: untyped,
+                        audio_only_image: untyped,
+                        audio_track_type: String,
+                        segment_type: String
+                      },
+                      fmp4_hls_settings: {
+                        audio_rendition_sets: untyped,
+                        nielsen_id3_behavior: String,
+                        timed_metadata_behavior: String
+                      },
+                      frame_capture_hls_settings: {
+                      },
+                      standard_hls_settings: {
+                        audio_rendition_sets: untyped,
+                        m3u8_settings: {
+                          audio_frames_per_pes: untyped,
+                          audio_pids: untyped,
+                          ecm_pid: untyped,
+                          nielsen_id3_behavior: String,
+                          pat_interval: untyped,
+                          pcr_control: String,
+                          pcr_period: untyped,
+                          pcr_pid: untyped,
+                          pmt_interval: untyped,
+                          pmt_pid: untyped,
+                          program_num: untyped,
+                          scte35_behavior: String,
+                          scte35_pid: untyped,
+                          timed_metadata_behavior: String,
+                          timed_metadata_pid: untyped,
+                          transport_stream_id: untyped,
+                          video_pid: untyped,
+                          klv_behavior: String,
+                          klv_data_pids: untyped
+                        }
+                      }
+                    },
+                    name_modifier: untyped,
+                    segment_modifier: untyped
+                  },
+                  media_package_output_settings: {
+                  },
+                  ms_smooth_output_settings: {
+                    h265_packaging_type: String,
+                    name_modifier: untyped
+                  },
+                  multiplex_output_settings: {
+                    destination: untyped,
+                    container_settings: {
+                      multiplex_m2ts_settings: {
+                        absent_input_audio_behavior: untyped,
+                        arib: untyped,
+                        audio_buffer_model: untyped,
+                        audio_frames_per_pes: untyped,
+                        audio_stream_type: untyped,
+                        cc_descriptor: untyped,
+                        ebif: untyped,
+                        es_rate_in_pes: untyped,
+                        klv: untyped,
+                        nielsen_id3_behavior: untyped,
+                        pcr_control: untyped,
+                        pcr_period: untyped,
+                        scte35_control: untyped,
+                        scte35_preroll_pullup_milliseconds: untyped
+                      }
+                    }
+                  },
+                  rtmp_output_settings: {
+                    certificate_mode: String,
+                    connection_retry_interval: untyped,
+                    destination: untyped,
+                    num_retries: untyped
+                  },
+                  udp_output_settings: {
+                    buffer_msec: untyped,
+                    container_settings: {
+                      m2ts_settings: untyped
+                    },
+                    destination: untyped,
+                    fec_output_settings: {
+                      column_depth: Integer,
+                      include_fec: String,
+                      row_length: Integer
+                    }
+                  },
+                  cmaf_ingest_output_settings: {
+                    name_modifier: untyped
+                  },
+                  srt_output_settings: {
+                    buffer_msec: untyped,
+                    container_settings: untyped,
+                    destination: untyped,
+                    encryption_type: String,
+                    latency: Integer
+                  }
+                },
+                video_description_name: untyped
+              }
+            ]
+          }
+        ],
+        timecode_config: {
+          source: String,
+          sync_threshold: Integer
+        },
+        video_descriptions: Array[
+          {
+            codec_settings: {
+              frame_capture_settings: {
+                capture_interval: Integer,
+                capture_interval_units: String,
+                timecode_burnin_settings: {
+                  font_size: String,
+                  position: String,
+                  prefix: untyped
+                }
+              },
+              h264_settings: {
+                adaptive_quantization: String,
+                afd_signaling: String,
+                bitrate: Integer,
+                buf_fill_pct: Integer,
+                buf_size: untyped,
+                color_metadata: String,
+                color_space_settings: {
+                  color_space_passthrough_settings: {
+                  },
+                  rec601_settings: {
+                  },
+                  rec709_settings: {
+                  }
+                },
+                entropy_encoding: String,
+                filter_settings: {
+                  temporal_filter_settings: {
+                    post_filter_sharpening: String,
+                    strength: String
+                  },
+                  bandwidth_reduction_filter_settings: {
+                    post_filter_sharpening: String,
+                    strength: String
+                  }
+                },
+                fixed_afd: String,
+                flicker_aq: String,
+                force_field_pictures: String,
+                framerate_control: String,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_b_reference: String,
+                gop_closed_cadence: untyped,
+                gop_num_b_frames: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: untyped,
+                min_i_interval: Integer,
+                num_ref_frames: Integer,
+                par_control: String,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                profile: String,
+                quality_level: String,
+                qvbr_quality_level: Integer,
+                rate_control_mode: String,
+                scan_type: String,
+                scene_change_detect: String,
+                slices: Integer,
+                softness: Integer,
+                spatial_aq: String,
+                subgop_length: String,
+                syntax: String,
+                temporal_aq: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped,
+                min_qp: Integer
+              },
+              h265_settings: {
+                adaptive_quantization: String,
+                afd_signaling: untyped,
+                alternative_transfer_function: String,
+                bitrate: Integer,
+                buf_size: Integer,
+                color_metadata: String,
+                color_space_settings: {
+                  color_space_passthrough_settings: untyped,
+                  dolby_vision81_settings: {
+                  },
+                  hdr10_settings: {
+                    max_cll: Integer,
+                    max_fall: untyped
+                  },
+                  rec601_settings: untyped,
+                  rec709_settings: untyped
+                },
+                filter_settings: {
+                  temporal_filter_settings: untyped,
+                  bandwidth_reduction_filter_settings: untyped
+                },
+                fixed_afd: untyped,
+                flicker_aq: String,
+                framerate_denominator: Integer,
+                framerate_numerator: untyped,
+                gop_closed_cadence: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: untyped,
+                min_i_interval: untyped,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                profile: String,
+                qvbr_quality_level: untyped,
+                rate_control_mode: String,
+                scan_type: String,
+                scene_change_detect: String,
+                slices: untyped,
+                tier: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped,
+                mv_over_picture_boundaries: String,
+                mv_temporal_predictor: String,
+                tile_height: Integer,
+                tile_padding: String,
+                tile_width: Integer,
+                treeblock_size: String,
+                min_qp: untyped,
+                deblocking: String
+              },
+              mpeg2_settings: {
+                adaptive_quantization: String,
+                afd_signaling: untyped,
+                color_metadata: String,
+                color_space: String,
+                display_aspect_ratio: String,
+                filter_settings: {
+                  temporal_filter_settings: untyped
+                },
+                fixed_afd: untyped,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_closed_cadence: untyped,
+                gop_num_b_frames: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                scan_type: String,
+                subgop_length: String,
+                timecode_insertion: String,
+                timecode_burnin_settings: untyped
+              },
+              av1_settings: {
+                afd_signaling: untyped,
+                buf_size: Integer,
+                color_space_settings: {
+                  color_space_passthrough_settings: untyped,
+                  hdr10_settings: untyped,
+                  rec601_settings: untyped,
+                  rec709_settings: untyped
+                },
+                fixed_afd: untyped,
+                framerate_denominator: untyped,
+                framerate_numerator: untyped,
+                gop_size: untyped,
+                gop_size_units: String,
+                level: String,
+                look_ahead_rate_control: String,
+                max_bitrate: Integer,
+                min_i_interval: untyped,
+                par_denominator: untyped,
+                par_numerator: untyped,
+                qvbr_quality_level: untyped,
+                scene_change_detect: String,
+                timecode_burnin_settings: untyped,
+                bitrate: untyped,
+                rate_control_mode: String
+              }
+            },
+            height: untyped,
+            name: untyped,
+            respond_to_afd: String,
+            scaling_behavior: String,
+            sharpness: untyped,
+            width: untyped
+          }
+        ],
+        thumbnail_configuration: {
+          state: String
+        },
+        color_correction_settings: {
+          global_color_corrections: Array[
+            {
+              input_color_space: String,
+              output_color_space: untyped,
+              uri: untyped
+            }
+          ]
+        }
+      },
+      ?input_attachments: Array[
+        {
+          automatic_input_failover_settings: {
+            error_clear_time_msec: Integer,
+            failover_conditions: Array[
+              {
+                failover_condition_settings: {
+                  audio_silence_settings: {
+                    audio_selector_name: String,
+                    audio_silence_threshold_msec: Integer
+                  },
+                  input_loss_settings: {
+                    input_loss_threshold_msec: Integer
+                  },
+                  video_black_settings: {
+                    black_detect_threshold: Float,
+                    video_black_threshold_msec: untyped
+                  }
+                }
+              }
+            ],
+            input_preference: String,
+            secondary_input_id: untyped
+          },
+          input_attachment_name: untyped,
+          input_id: untyped,
+          input_settings: {
+            audio_selectors: Array[
+              {
+                name: String,
+                selector_settings: {
+                  audio_hls_rendition_selection: {
+                    group_id: untyped,
+                    name: untyped
+                  },
+                  audio_language_selection: {
+                    language_code: untyped,
+                    language_selection_policy: String
+                  },
+                  audio_pid_selection: {
+                    pid: Integer
+                  },
+                  audio_track_selection: {
+                    tracks: Array[
+                      {
+                        track: untyped
+                      }
+                    ],
+                    dolby_e_decode: {
+                      program_selection: String
+                    }
+                  }
+                }
+              }
+            ],
+            caption_selectors: Array[
+              {
+                language_code: untyped,
+                name: untyped,
+                selector_settings: {
+                  ancillary_source_settings: {
+                    source_ancillary_channel_number: Integer
+                  },
+                  arib_source_settings: {
+                  },
+                  dvb_sub_source_settings: {
+                    ocr_language: String,
+                    pid: untyped
+                  },
+                  embedded_source_settings: {
+                    convert608_to708: String,
+                    scte20_detection: String,
+                    source608_channel_number: untyped,
+                    source608_track_number: Integer
+                  },
+                  scte20_source_settings: {
+                    convert608_to708: String,
+                    source608_channel_number: untyped
+                  },
+                  scte27_source_settings: {
+                    ocr_language: String,
+                    pid: untyped
+                  },
+                  teletext_source_settings: {
+                    output_rectangle: {
+                      height: Float,
+                      left_offset: untyped,
+                      top_offset: untyped,
+                      width: untyped
+                    },
+                    page_number: untyped
+                  }
+                }
+              }
+            ],
+            deblock_filter: String,
+            denoise_filter: String,
+            filter_strength: untyped,
+            input_filter: String,
+            network_input_settings: {
+              hls_input_settings: {
+                bandwidth: Integer,
+                buffer_segments: untyped,
+                retries: untyped,
+                retry_interval: untyped,
+                scte35_source: String
+              },
+              server_validation: String,
+              multicast_input_settings: {
+                source_ip_address: untyped
+              }
+            },
+            scte35_pid: Integer,
+            smpte2038_data_preference: String,
+            source_end_behavior: String,
+            video_selector: {
+              color_space: String,
+              color_space_settings: {
+                hdr10_settings: {
+                  max_cll: Integer,
+                  max_fall: untyped
+                }
+              },
+              color_space_usage: String,
+              selector_settings: {
+                video_selector_pid: {
+                  pid: untyped
+                },
+                video_selector_program_id: {
+                  program_id: Integer
+                }
+              }
+            }
+          },
+          logical_interface_names: Array[String]
+        }
+      ],
+      ?input_specification: {
+        codec: String,
+        maximum_bitrate: String,
+        resolution: String
+      },
+      ?log_level: String,
+      ?maintenance: {
+        maintenance_day: String,
+        maintenance_scheduled_date: String,
+        maintenance_start_time: String
+      },
+      ?name: String,
+      ?role_arn: String,
+      ?channel_engine_version: {
+        version: String
+      },
+      ?dry_run: bool,
+      ?anywhere_settings: {
+        channel_placement_group_id: String,
+        cluster_id: untyped
+      }
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateChannelClassResponse
+      include Smithy::Client::_Response[Types::UpdateChannelClassResponse]
+      def channel: () -> Types::Channel?
+    end
+    def update_channel_class: (
+      ?channel_class: String,
+      ?channel_id: String,
+      ?destinations: Array[
+        {
+          id: String,
+          media_package_settings: Array[
+            {
+              channel_id: String,
+              channel_group: untyped,
+              channel_name: untyped
+            }
+          ],
+          multiplex_settings: {
+            multiplex_id: untyped,
+            program_name: untyped
+          },
+          settings: Array[
+            {
+              password_param: untyped,
+              stream_name: untyped,
+              url: untyped,
+              username: untyped
+            }
+          ],
+          srt_settings: Array[
+            {
+              encryption_passphrase_secret_arn: untyped,
+              stream_id: untyped,
+              url: untyped
+            }
+          ],
+          logical_interface_names: Array[String]
+        }
+      ]
+    ) -> _UpdateChannelClassResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelClassResponse
+
+    interface _UpdateChannelPlacementGroupResponse
+      include Smithy::Client::_Response[Types::UpdateChannelPlacementGroupResponse]
+      def arn: () -> String?
+      def channels: () -> Array[String]?
+      def cluster_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def nodes: () -> Array[String]?
+      def state: () -> String?
+    end
+    def update_channel_placement_group: (
+      ?channel_placement_group_id: String,
+      ?cluster_id: String,
+      ?name: String,
+      ?nodes: Array[String]
+    ) -> _UpdateChannelPlacementGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelPlacementGroupResponse
+
+    interface _UpdateCloudWatchAlarmTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateCloudWatchAlarmTemplateResponse]
+      def arn: () -> String?
+      def comparison_operator: () -> String?
+      def created_at: () -> Time?
+      def datapoints_to_alarm: () -> Integer?
+      def description: () -> String?
+      def evaluation_periods: () -> Integer?
+      def group_id: () -> String?
+      def id: () -> String?
+      def metric_name: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def period: () -> Integer?
+      def statistic: () -> String?
+      def tags: () -> Hash[String, String]?
+      def target_resource_type: () -> String?
+      def threshold: () -> Float?
+      def treat_missing_data: () -> String?
+    end
+    def update_cloud_watch_alarm_template: (
+      ?comparison_operator: String,
+      ?datapoints_to_alarm: Integer,
+      ?description: String,
+      ?evaluation_periods: Integer,
+      ?group_identifier: String,
+      ?identifier: String,
+      ?metric_name: String,
+      ?name: String,
+      ?period: Integer,
+      ?statistic: String,
+      ?target_resource_type: String,
+      ?threshold: Float,
+      ?treat_missing_data: String
+    ) -> _UpdateCloudWatchAlarmTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudWatchAlarmTemplateResponse
+
+    interface _UpdateCloudWatchAlarmTemplateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateCloudWatchAlarmTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_cloud_watch_alarm_template_group: (
+      ?description: String,
+      ?identifier: String
+    ) -> _UpdateCloudWatchAlarmTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudWatchAlarmTemplateGroupResponse
+
+    interface _UpdateClusterResponse
+      include Smithy::Client::_Response[Types::UpdateClusterResponse]
+      def arn: () -> String?
+      def channel_ids: () -> Array[String]?
+      def cluster_type: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::ClusterNetworkSettings?
+      def state: () -> String?
+    end
+    def update_cluster: (
+      ?cluster_id: String,
+      ?name: String,
+      ?network_settings: {
+        default_route: String,
+        interface_mappings: Array[
+          {
+            logical_interface_name: untyped,
+            network_id: untyped
+          }
+        ]
+      }
+    ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
+
+    interface _UpdateEventBridgeRuleTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateEventBridgeRuleTemplateResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def event_targets: () -> Array[Types::EventBridgeRuleTemplateTarget]?
+      def event_type: () -> String?
+      def group_id: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_event_bridge_rule_template: (
+      ?description: String,
+      ?event_targets: Array[
+        {
+          arn: String
+        }
+      ],
+      ?event_type: String,
+      ?group_identifier: String,
+      ?identifier: String,
+      ?name: String
+    ) -> _UpdateEventBridgeRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventBridgeRuleTemplateResponse
+
+    interface _UpdateEventBridgeRuleTemplateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateEventBridgeRuleTemplateGroupResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def id: () -> String?
+      def modified_at: () -> Time?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_event_bridge_rule_template_group: (
+      ?description: String,
+      ?identifier: String
+    ) -> _UpdateEventBridgeRuleTemplateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventBridgeRuleTemplateGroupResponse
+
+    interface _UpdateInputResponse
+      include Smithy::Client::_Response[Types::UpdateInputResponse]
+      def input: () -> Types::Input?
+    end
+    def update_input: (
+      ?destinations: Array[
+        {
+          stream_name: String,
+          network: untyped,
+          network_routes: Array[
+            {
+              cidr: untyped,
+              gateway: untyped
+            }
+          ],
+          static_ip_address: untyped
+        }
+      ],
+      ?input_devices: Array[
+        {
+          id: String
+        }
+      ],
+      ?input_id: String,
+      ?input_security_groups: Array[String],
+      ?media_connect_flows: Array[
+        {
+          flow_arn: String
+        }
+      ],
+      ?name: String,
+      ?role_arn: String,
+      ?sources: Array[
+        {
+          password_param: String,
+          url: untyped,
+          username: untyped
+        }
+      ],
+      ?srt_settings: {
+        srt_caller_sources: Array[
+          {
+            decryption: {
+              algorithm: String,
+              passphrase_secret_arn: String
+            },
+            minimum_latency: Integer,
+            srt_listener_address: untyped,
+            srt_listener_port: untyped,
+            stream_id: untyped
+          }
+        ]
+      },
+      ?multicast_settings: {
+        sources: Array[
+          {
+            source_ip: String,
+            url: untyped
+          }
+        ]
+      },
+      ?smpte2110_receiver_group_settings: {
+        smpte2110_receiver_groups: Array[
+          {
+            sdp_settings: {
+              ancillary_sdps: Array[
+                {
+                  media_index: Integer,
+                  sdp_url: String
+                }
+              ],
+              audio_sdps: untyped,
+              video_sdp: {
+                media_index: untyped,
+                sdp_url: untyped
+              }
+            }
+          }
+        ]
+      },
+      ?sdi_sources: Array[String]
+    ) -> _UpdateInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInputResponse
+
+    interface _UpdateInputDeviceResponse
+      include Smithy::Client::_Response[Types::UpdateInputDeviceResponse]
+      def arn: () -> String?
+      def connection_state: () -> String?
+      def device_settings_sync_state: () -> String?
+      def device_update_status: () -> String?
+      def hd_device_settings: () -> Types::InputDeviceHdSettings?
+      def id: () -> String?
+      def mac_address: () -> String?
+      def name: () -> String?
+      def network_settings: () -> Types::InputDeviceNetworkSettings?
+      def serial_number: () -> String?
+      def type: () -> String?
+      def uhd_device_settings: () -> Types::InputDeviceUhdSettings?
+      def tags: () -> Hash[String, String]?
+      def availability_zone: () -> String?
+      def medialive_input_arns: () -> Array[String]?
+      def output_type: () -> String?
+    end
+    def update_input_device: (
+      ?hd_device_settings: {
+        configured_input: String,
+        max_bitrate: Integer,
+        latency_ms: untyped,
+        codec: String,
+        mediaconnect_settings: {
+          flow_arn: String,
+          role_arn: untyped,
+          secret_arn: untyped,
+          source_name: untyped
+        },
+        audio_channel_pairs: Array[
+          {
+            id: untyped,
+            profile: String
+          }
+        ],
+        input_resolution: untyped
+      },
+      ?input_device_id: String,
+      ?name: String,
+      ?uhd_device_settings: {
+        configured_input: String,
+        max_bitrate: Integer,
+        latency_ms: untyped,
+        codec: String,
+        mediaconnect_settings: {
+          flow_arn: String,
+          role_arn: untyped,
+          secret_arn: untyped,
+          source_name: untyped
+        },
+        audio_channel_pairs: Array[
+          {
+            id: untyped,
+            profile: String
+          }
+        ],
+        input_resolution: untyped
+      },
+      ?availability_zone: String
+    ) -> _UpdateInputDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInputDeviceResponse
+
+    interface _UpdateInputSecurityGroupResponse
+      include Smithy::Client::_Response[Types::UpdateInputSecurityGroupResponse]
+      def security_group: () -> Types::InputSecurityGroup?
+    end
+    def update_input_security_group: (
+      ?input_security_group_id: String,
+      ?tags: Hash[String, String],
+      ?whitelist_rules: Array[
+        {
+          cidr: String
+        }
+      ]
+    ) -> _UpdateInputSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInputSecurityGroupResponse
+
+    interface _UpdateMultiplexResponse
+      include Smithy::Client::_Response[Types::UpdateMultiplexResponse]
+      def multiplex: () -> Types::Multiplex?
+    end
+    def update_multiplex: (
+      ?multiplex_id: String,
+      ?multiplex_settings: {
+        maximum_video_buffer_delay_milliseconds: Integer,
+        transport_stream_bitrate: Integer,
+        transport_stream_id: Integer,
+        transport_stream_reserved_bitrate: Integer
+      },
+      ?name: String,
+      ?packet_identifiers_mapping: Hash[String,
+        {
+          audio_pids: Array[Integer],
+          dvb_sub_pids: untyped,
+          dvb_teletext_pid: Integer,
+          etv_platform_pid: untyped,
+          etv_signal_pid: untyped,
+          klv_data_pids: untyped,
+          pcr_pid: untyped,
+          pmt_pid: untyped,
+          private_metadata_pid: untyped,
+          scte27_pids: untyped,
+          scte35_pid: untyped,
+          timed_metadata_pid: untyped,
+          video_pid: untyped,
+          arib_captions_pid: untyped,
+          dvb_teletext_pids: untyped,
+          ecm_pid: untyped,
+          smpte2038_pid: untyped
+        }
+      ]
+    ) -> _UpdateMultiplexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMultiplexResponse
+
+    interface _UpdateMultiplexProgramResponse
+      include Smithy::Client::_Response[Types::UpdateMultiplexProgramResponse]
+      def multiplex_program: () -> Types::MultiplexProgram?
+    end
+    def update_multiplex_program: (
+      ?multiplex_id: String,
+      ?multiplex_program_settings: {
+        preferred_channel_pipeline: String,
+        program_number: Integer,
+        service_descriptor: {
+          provider_name: String,
+          service_name: untyped
+        },
+        video_settings: {
+          constant_bitrate: Integer,
+          statmux_settings: {
+            maximum_bitrate: untyped,
+            minimum_bitrate: untyped,
+            priority: Integer
+          }
+        }
+      },
+      ?program_name: String
+    ) -> _UpdateMultiplexProgramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMultiplexProgramResponse
+
+    interface _UpdateNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkResponse]
+      def arn: () -> String?
+      def associated_cluster_ids: () -> Array[String]?
+      def id: () -> String?
+      def ip_pools: () -> Array[Types::IpPool]?
+      def name: () -> String?
+      def routes: () -> Array[Types::Route]?
+      def state: () -> String?
+    end
+    def update_network: (
+      ?ip_pools: Array[
+        {
+          cidr: String
+        }
+      ],
+      ?name: String,
+      ?network_id: String,
+      ?routes: Array[
+        {
+          cidr: String,
+          gateway: untyped
+        }
+      ]
+    ) -> _UpdateNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkResponse
+
+    interface _UpdateNodeResponse
+      include Smithy::Client::_Response[Types::UpdateNodeResponse]
+      def arn: () -> String?
+      def channel_placement_groups: () -> Array[String]?
+      def cluster_id: () -> String?
+      def connection_state: () -> String?
+      def id: () -> String?
+      def instance_arn: () -> String?
+      def name: () -> String?
+      def node_interface_mappings: () -> Array[Types::NodeInterfaceMapping]?
+      def role: () -> String?
+      def state: () -> String?
+      def sdi_source_mappings: () -> Array[Types::SdiSourceMapping]?
+    end
+    def update_node: (
+      ?cluster_id: String,
+      ?name: String,
+      ?node_id: String,
+      ?role: String,
+      ?sdi_source_mappings: Array[
+        {
+          card_number: Integer,
+          channel_number: untyped,
+          sdi_source: String
+        }
+      ]
+    ) -> _UpdateNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodeResponse
+
+    interface _UpdateNodeStateResponse
+      include Smithy::Client::_Response[Types::UpdateNodeStateResponse]
+      def arn: () -> String?
+      def channel_placement_groups: () -> Array[String]?
+      def cluster_id: () -> String?
+      def connection_state: () -> String?
+      def id: () -> String?
+      def instance_arn: () -> String?
+      def name: () -> String?
+      def node_interface_mappings: () -> Array[Types::NodeInterfaceMapping]?
+      def role: () -> String?
+      def state: () -> String?
+      def sdi_source_mappings: () -> Array[Types::SdiSourceMapping]?
+    end
+    def update_node_state: (
+      ?cluster_id: String,
+      ?node_id: String,
+      ?state: String
+    ) -> _UpdateNodeStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodeStateResponse
+
+    interface _UpdateReservationResponse
+      include Smithy::Client::_Response[Types::UpdateReservationResponse]
+      def reservation: () -> Types::Reservation?
+    end
+    def update_reservation: (
+      ?name: String,
+      ?renewal_settings: {
+        automatic_renewal: String,
+        renewal_count: Integer
+      },
+      ?reservation_id: String
+    ) -> _UpdateReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReservationResponse
+
+    interface _UpdateSdiSourceResponse
+      include Smithy::Client::_Response[Types::UpdateSdiSourceResponse]
+      def sdi_source: () -> Types::SdiSource?
+    end
+    def update_sdi_source: (
+      ?mode: String,
+      ?name: String,
+      ?sdi_source_id: String,
+      ?type: String
+    ) -> _UpdateSdiSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSdiSourceResponse
+  end
+end

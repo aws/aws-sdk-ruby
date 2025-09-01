@@ -1,0 +1,57 @@
+module Aws::BedrockDataAutomationRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AssetProcessingConfiguration: StructureShape
+    AutomationJobStatus: EnumShape
+    Blueprint: StructureShape
+    BlueprintArn: StringShape
+    BlueprintList: ListShape
+    BlueprintStage: EnumShape
+    BlueprintVersion: StringShape
+    DataAutomationArn: StringShape
+    DataAutomationConfiguration: StructureShape
+    DataAutomationProfileArn: StringShape
+    DataAutomationStage: EnumShape
+    EncryptionConfiguration: StructureShape
+    EncryptionContextKey: StringShape
+    EncryptionContextMap: MapShape
+    EncryptionContextValue: StringShape
+    EventBridgeConfiguration: StructureShape
+    GetDataAutomationStatusRequest: StructureShape
+    GetDataAutomationStatusResponse: StructureShape
+    IdempotencyToken: StringShape
+    InputConfiguration: StructureShape
+    InternalServerException: StructureShape
+    InvocationArn: StringShape
+    InvokeDataAutomationAsyncRequest: StructureShape
+    InvokeDataAutomationAsyncResponse: StructureShape
+    KMSKeyId: StringShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    NonBlankString: StringShape
+    NotificationConfiguration: StructureShape
+    OutputConfiguration: StructureShape
+    ResourceNotFoundException: StructureShape
+    S3Uri: StringShape
+    ServiceQuotaExceededException: StructureShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    TaggableResourceArn: StringShape
+    ThrottlingException: StructureShape
+    TimestampSegment: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    ValidationException: StructureShape
+    VideoAssetProcessingConfiguration: StructureShape
+    VideoSegmentConfiguration: UnionShape
+
+    AmazonBedrockKeystoneRuntimeService: ServiceShape
+  end
+end

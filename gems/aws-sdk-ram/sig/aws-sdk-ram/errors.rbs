@@ -1,0 +1,88 @@
+module Aws::RAM
+  module Errors
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidClientTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidMaxResultsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateTransitionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyTemplateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingRequiredParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionVersionsLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceArnNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceShareInvitationAlreadyAcceptedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceShareInvitationAlreadyRejectedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceShareInvitationArnNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceShareInvitationExpiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceShareLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerInternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagPolicyViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnknownResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnmatchedPolicyPermissionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

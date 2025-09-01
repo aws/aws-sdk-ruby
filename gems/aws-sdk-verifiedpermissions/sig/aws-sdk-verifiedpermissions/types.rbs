@@ -1,0 +1,2250 @@
+module Aws::VerifiedPermissions
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor action_id: String?
+    end
+
+    class AttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?boolean: bool,
+        ?entity_identifier: Types::EntityIdentifier,
+        ?long: Integer,
+        ?string: String,
+        ?set: Array[Types::AttributeValue],
+        ?record: Hash[String, Types::AttributeValue],
+        ?ipaddr: String,
+        ?decimal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor boolean: bool?
+      attr_accessor entity_identifier: Types::EntityIdentifier?
+      attr_accessor long: Integer?
+      attr_accessor string: String?
+      attr_accessor set: Array[Types::AttributeValue]?
+      attr_accessor record: Hash[String, Types::AttributeValue]?
+      attr_accessor ipaddr: String?
+      attr_accessor decimal: String?
+
+      class Boolean < AttributeValue
+      end
+      class EntityIdentifier < AttributeValue
+      end
+      class Long < AttributeValue
+      end
+      class String < AttributeValue
+      end
+      class Set < AttributeValue
+      end
+      class Record < AttributeValue
+      end
+      class Ipaddr < AttributeValue
+      end
+      class Decimal < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    module BatchGetPolicyErrorCode
+      POLICY_STORE_NOT_FOUND: String
+      POLICY_NOT_FOUND: String
+    end
+
+    class BatchGetPolicyErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requests: Array[Types::BatchGetPolicyInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requests: Array[Types::BatchGetPolicyInputItem]?
+    end
+
+    class BatchGetPolicyInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+    end
+
+    class BatchGetPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::BatchGetPolicyOutputItem],
+        ?errors: Array[Types::BatchGetPolicyErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::BatchGetPolicyOutputItem]?
+      attr_accessor errors: Array[Types::BatchGetPolicyErrorItem]?
+    end
+
+    class BatchGetPolicyOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?policy_type: String,
+        ?definition: Types::PolicyDefinitionDetail,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor definition: Types::PolicyDefinitionDetail?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class BatchIsAuthorizedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?entities: Types::EntitiesDefinition,
+        ?requests: Array[Types::BatchIsAuthorizedInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor entities: Types::EntitiesDefinition?
+      attr_accessor requests: Array[Types::BatchIsAuthorizedInputItem]?
+    end
+
+    class BatchIsAuthorizedInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::EntityIdentifier,
+        ?action: Types::ActionIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?context: Types::ContextDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor action: Types::ActionIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor context: Types::ContextDefinition?
+    end
+
+    class BatchIsAuthorizedOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::BatchIsAuthorizedOutputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::BatchIsAuthorizedOutputItem]?
+    end
+
+    class BatchIsAuthorizedOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request: Types::BatchIsAuthorizedInputItem,
+        ?decision: String,
+        ?determining_policies: Array[Types::DeterminingPolicyItem],
+        ?errors: Array[Types::EvaluationErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request: Types::BatchIsAuthorizedInputItem?
+      attr_accessor decision: String?
+      attr_accessor determining_policies: Array[Types::DeterminingPolicyItem]?
+      attr_accessor errors: Array[Types::EvaluationErrorItem]?
+    end
+
+    class BatchIsAuthorizedWithTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?identity_token: String,
+        ?access_token: String,
+        ?entities: Types::EntitiesDefinition,
+        ?requests: Array[Types::BatchIsAuthorizedWithTokenInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor identity_token: String?
+      attr_accessor access_token: String?
+      attr_accessor entities: Types::EntitiesDefinition?
+      attr_accessor requests: Array[Types::BatchIsAuthorizedWithTokenInputItem]?
+    end
+
+    class BatchIsAuthorizedWithTokenInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::ActionIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?context: Types::ContextDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::ActionIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor context: Types::ContextDefinition?
+    end
+
+    class BatchIsAuthorizedWithTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::EntityIdentifier,
+        ?results: Array[Types::BatchIsAuthorizedWithTokenOutputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor results: Array[Types::BatchIsAuthorizedWithTokenOutputItem]?
+    end
+
+    class BatchIsAuthorizedWithTokenOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request: Types::BatchIsAuthorizedWithTokenInputItem,
+        ?decision: String,
+        ?determining_policies: Array[Types::DeterminingPolicyItem],
+        ?errors: Array[Types::EvaluationErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request: Types::BatchIsAuthorizedWithTokenInputItem?
+      attr_accessor decision: String?
+      attr_accessor determining_policies: Array[Types::DeterminingPolicyItem]?
+      attr_accessor errors: Array[Types::EvaluationErrorItem]?
+    end
+
+    module CedarVersion
+      CEDAR_2: String
+      CEDAR_4: String
+    end
+
+    class CognitoGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_entity_type: String?
+    end
+
+    class CognitoGroupConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_entity_type: String?
+    end
+
+    class CognitoGroupConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_entity_type: String?
+    end
+
+    class CognitoUserPoolConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_arn: String,
+        ?client_ids: Array[String],
+        ?group_configuration: Types::CognitoGroupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_arn: String?
+      attr_accessor client_ids: Array[String]?
+      attr_accessor group_configuration: Types::CognitoGroupConfiguration?
+    end
+
+    class CognitoUserPoolConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_arn: String,
+        ?client_ids: Array[String],
+        ?issuer: String,
+        ?group_configuration: Types::CognitoGroupConfigurationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_arn: String?
+      attr_accessor client_ids: Array[String]?
+      attr_accessor issuer: String?
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationDetail?
+    end
+
+    class CognitoUserPoolConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_arn: String,
+        ?client_ids: Array[String],
+        ?issuer: String,
+        ?group_configuration: Types::CognitoGroupConfigurationItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_arn: String?
+      attr_accessor client_ids: Array[String]?
+      attr_accessor issuer: String?
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationItem?
+    end
+
+    class Configuration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cognito_user_pool_configuration: Types::CognitoUserPoolConfiguration,
+        ?open_id_connect_configuration: Types::OpenIdConnectConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfiguration?
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfiguration?
+
+      class CognitoUserPoolConfiguration < Configuration
+      end
+      class OpenIdConnectConfiguration < Configuration
+      end
+      class Unknown < Configuration
+      end
+    end
+
+    class ConfigurationDetail
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationDetail,
+        ?open_id_connect_configuration: Types::OpenIdConnectConfigurationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationDetail?
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfigurationDetail?
+
+      class CognitoUserPoolConfiguration < ConfigurationDetail
+      end
+      class OpenIdConnectConfiguration < ConfigurationDetail
+      end
+      class Unknown < ConfigurationDetail
+      end
+    end
+
+    class ConfigurationItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationItem,
+        ?open_id_connect_configuration: Types::OpenIdConnectConfigurationItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationItem?
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfigurationItem?
+
+      class CognitoUserPoolConfiguration < ConfigurationItem
+      end
+      class OpenIdConnectConfiguration < ConfigurationItem
+      end
+      class Unknown < ConfigurationItem
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resources: Array[Types::ResourceConflict],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resources: Array[Types::ResourceConflict]?
+    end
+
+    class ContextDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?context_map: Hash[String, Types::AttributeValue],
+        ?cedar_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context_map: Hash[String, Types::AttributeValue]?
+      attr_accessor cedar_json: String?
+
+      class ContextMap < ContextDefinition
+      end
+      class CedarJson < ContextDefinition
+      end
+      class Unknown < ContextDefinition
+      end
+    end
+
+    class CreateIdentitySourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?policy_store_id: String,
+        ?configuration: Types::Configuration,
+        ?principal_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor configuration: Types::Configuration?
+      attr_accessor principal_entity_type: String?
+    end
+
+    class CreateIdentitySourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_date: Time,
+        ?identity_source_id: String,
+        ?last_updated_date: Time,
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_date: Time?
+      attr_accessor identity_source_id: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor policy_store_id: String?
+    end
+
+    class CreatePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?policy_store_id: String,
+        ?definition: Types::PolicyDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor definition: Types::PolicyDefinition?
+    end
+
+    class CreatePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?policy_type: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?actions: Array[Types::ActionIdentifier],
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor actions: Array[Types::ActionIdentifier]?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor effect: String?
+    end
+
+    class CreatePolicyStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?validation_settings: Types::ValidationSettings,
+        ?description: String,
+        ?deletion_protection: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor validation_settings: Types::ValidationSettings?
+      attr_accessor description: String?
+      attr_accessor deletion_protection: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePolicyStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?arn: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor arn: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class CreatePolicyTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?policy_store_id: String,
+        ?description: String,
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor description: String?
+      attr_accessor statement: String?
+    end
+
+    class CreatePolicyTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    module Decision
+      ALLOW: String
+      DENY: String
+    end
+
+    class DeleteIdentitySourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?identity_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor identity_source_id: String?
+    end
+
+    class DeleteIdentitySourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+    end
+
+    class DeletePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePolicyStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+    end
+
+    class DeletePolicyStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePolicyTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+    end
+
+    class DeletePolicyTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DeletionProtection
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class DeterminingPolicyItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class EntitiesDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?entity_list: Array[Types::EntityItem],
+        ?cedar_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_list: Array[Types::EntityItem]?
+      attr_accessor cedar_json: String?
+
+      class EntityList < EntitiesDefinition
+      end
+      class CedarJson < EntitiesDefinition
+      end
+      class Unknown < EntitiesDefinition
+      end
+    end
+
+    class EntityIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+    end
+
+    class EntityItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: Types::EntityIdentifier,
+        ?attributes: Hash[String, Types::AttributeValue],
+        ?parents: Array[Types::EntityIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: Types::EntityIdentifier?
+      attr_accessor attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor parents: Array[Types::EntityIdentifier]?
+    end
+
+    class EntityReference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?unspecified: bool,
+        ?identifier: Types::EntityIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unspecified: bool?
+      attr_accessor identifier: Types::EntityIdentifier?
+
+      class Unspecified < EntityReference
+      end
+      class Identifier < EntityReference
+      end
+      class Unknown < EntityReference
+      end
+    end
+
+    class EvaluationErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_description: String?
+    end
+
+    class GetIdentitySourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?identity_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor identity_source_id: String?
+    end
+
+    class GetIdentitySourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_date: Time,
+        ?details: Types::IdentitySourceDetails,
+        ?identity_source_id: String,
+        ?last_updated_date: Time,
+        ?policy_store_id: String,
+        ?principal_entity_type: String,
+        ?configuration: Types::ConfigurationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_date: Time?
+      attr_accessor details: Types::IdentitySourceDetails?
+      attr_accessor identity_source_id: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor policy_store_id: String?
+      attr_accessor principal_entity_type: String?
+      attr_accessor configuration: Types::ConfigurationDetail?
+    end
+
+    class GetPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+    end
+
+    class GetPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?policy_type: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?actions: Array[Types::ActionIdentifier],
+        ?definition: Types::PolicyDefinitionDetail,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor actions: Array[Types::ActionIdentifier]?
+      attr_accessor definition: Types::PolicyDefinitionDetail?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor effect: String?
+    end
+
+    class GetPolicyStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor tags: bool?
+    end
+
+    class GetPolicyStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?arn: String,
+        ?validation_settings: Types::ValidationSettings,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?description: String,
+        ?deletion_protection: String,
+        ?cedar_version: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor arn: String?
+      attr_accessor validation_settings: Types::ValidationSettings?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor description: String?
+      attr_accessor deletion_protection: String?
+      attr_accessor cedar_version: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetPolicyTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+    end
+
+    class GetPolicyTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+        ?description: String,
+        ?statement: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+      attr_accessor description: String?
+      attr_accessor statement: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class GetSchemaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+    end
+
+    class GetSchemaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?schema: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?namespaces: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor schema: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor namespaces: Array[String]?
+    end
+
+    class IdentitySourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_ids: Array[String],
+        ?user_pool_arn: String,
+        ?discovery_url: String,
+        ?open_id_issuer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_ids: Array[String]?
+      attr_accessor user_pool_arn: String?
+      attr_accessor discovery_url: String?
+      attr_accessor open_id_issuer: String?
+    end
+
+    class IdentitySourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_entity_type: String?
+    end
+
+    class IdentitySourceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_date: Time,
+        ?details: Types::IdentitySourceItemDetails,
+        ?identity_source_id: String,
+        ?last_updated_date: Time,
+        ?policy_store_id: String,
+        ?principal_entity_type: String,
+        ?configuration: Types::ConfigurationItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_date: Time?
+      attr_accessor details: Types::IdentitySourceItemDetails?
+      attr_accessor identity_source_id: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor policy_store_id: String?
+      attr_accessor principal_entity_type: String?
+      attr_accessor configuration: Types::ConfigurationItem?
+    end
+
+    class IdentitySourceItemDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_ids: Array[String],
+        ?user_pool_arn: String,
+        ?discovery_url: String,
+        ?open_id_issuer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_ids: Array[String]?
+      attr_accessor user_pool_arn: String?
+      attr_accessor discovery_url: String?
+      attr_accessor open_id_issuer: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IsAuthorizedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?principal: Types::EntityIdentifier,
+        ?action: Types::ActionIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?context: Types::ContextDefinition,
+        ?entities: Types::EntitiesDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor action: Types::ActionIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor context: Types::ContextDefinition?
+      attr_accessor entities: Types::EntitiesDefinition?
+    end
+
+    class IsAuthorizedOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decision: String,
+        ?determining_policies: Array[Types::DeterminingPolicyItem],
+        ?errors: Array[Types::EvaluationErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decision: String?
+      attr_accessor determining_policies: Array[Types::DeterminingPolicyItem]?
+      attr_accessor errors: Array[Types::EvaluationErrorItem]?
+    end
+
+    class IsAuthorizedWithTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?identity_token: String,
+        ?access_token: String,
+        ?action: Types::ActionIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?context: Types::ContextDefinition,
+        ?entities: Types::EntitiesDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor identity_token: String?
+      attr_accessor access_token: String?
+      attr_accessor action: Types::ActionIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor context: Types::ContextDefinition?
+      attr_accessor entities: Types::EntitiesDefinition?
+    end
+
+    class IsAuthorizedWithTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decision: String,
+        ?determining_policies: Array[Types::DeterminingPolicyItem],
+        ?errors: Array[Types::EvaluationErrorItem],
+        ?principal: Types::EntityIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decision: String?
+      attr_accessor determining_policies: Array[Types::DeterminingPolicyItem]?
+      attr_accessor errors: Array[Types::EvaluationErrorItem]?
+      attr_accessor principal: Types::EntityIdentifier?
+    end
+
+    class ListIdentitySourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::IdentitySourceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::IdentitySourceFilter]?
+    end
+
+    class ListIdentitySourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?identity_sources: Array[Types::IdentitySourceItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor identity_sources: Array[Types::IdentitySourceItem]?
+    end
+
+    class ListPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::PolicyFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::PolicyFilter?
+    end
+
+    class ListPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policies: Array[Types::PolicyItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policies: Array[Types::PolicyItem]?
+    end
+
+    class ListPolicyStoresInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPolicyStoresOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policy_stores: Array[Types::PolicyStoreItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policy_stores: Array[Types::PolicyStoreItem]?
+    end
+
+    class ListPolicyTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPolicyTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policy_templates: Array[Types::PolicyTemplateItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policy_templates: Array[Types::PolicyTemplateItem]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class OpenIdConnectAccessTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class OpenIdConnectAccessTokenConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class OpenIdConnectAccessTokenConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class OpenIdConnectConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?entity_id_prefix: String,
+        ?group_configuration: Types::OpenIdConnectGroupConfiguration,
+        ?token_selection: Types::OpenIdConnectTokenSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor entity_id_prefix: String?
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfiguration?
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelection?
+    end
+
+    class OpenIdConnectConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?entity_id_prefix: String,
+        ?group_configuration: Types::OpenIdConnectGroupConfigurationDetail,
+        ?token_selection: Types::OpenIdConnectTokenSelectionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor entity_id_prefix: String?
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfigurationDetail?
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelectionDetail?
+    end
+
+    class OpenIdConnectConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?entity_id_prefix: String,
+        ?group_configuration: Types::OpenIdConnectGroupConfigurationItem,
+        ?token_selection: Types::OpenIdConnectTokenSelectionItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor entity_id_prefix: String?
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfigurationItem?
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelectionItem?
+    end
+
+    class OpenIdConnectGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_claim: String,
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_claim: String?
+      attr_accessor group_entity_type: String?
+    end
+
+    class OpenIdConnectGroupConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_claim: String,
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_claim: String?
+      attr_accessor group_entity_type: String?
+    end
+
+    class OpenIdConnectGroupConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_claim: String,
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_claim: String?
+      attr_accessor group_entity_type: String?
+    end
+
+    class OpenIdConnectIdentityTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?client_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor client_ids: Array[String]?
+    end
+
+    class OpenIdConnectIdentityTokenConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?client_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor client_ids: Array[String]?
+    end
+
+    class OpenIdConnectIdentityTokenConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?client_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor client_ids: Array[String]?
+    end
+
+    class OpenIdConnectTokenSelection
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?access_token_only: Types::OpenIdConnectAccessTokenConfiguration,
+        ?identity_token_only: Types::OpenIdConnectIdentityTokenConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfiguration?
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfiguration?
+
+      class AccessTokenOnly < OpenIdConnectTokenSelection
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelection
+      end
+      class Unknown < OpenIdConnectTokenSelection
+      end
+    end
+
+    class OpenIdConnectTokenSelectionDetail
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?access_token_only: Types::OpenIdConnectAccessTokenConfigurationDetail,
+        ?identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfigurationDetail?
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationDetail?
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionDetail
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionDetail
+      end
+      class Unknown < OpenIdConnectTokenSelectionDetail
+      end
+    end
+
+    class OpenIdConnectTokenSelectionItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?access_token_only: Types::OpenIdConnectAccessTokenConfigurationItem,
+        ?identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfigurationItem?
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationItem?
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionItem
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionItem
+      end
+      class Unknown < OpenIdConnectTokenSelectionItem
+      end
+    end
+
+    module OpenIdIssuer
+      COGNITO: String
+    end
+
+    class PolicyDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?static: Types::StaticPolicyDefinition,
+        ?template_linked: Types::TemplateLinkedPolicyDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor static: Types::StaticPolicyDefinition?
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinition?
+
+      class Static < PolicyDefinition
+      end
+      class TemplateLinked < PolicyDefinition
+      end
+      class Unknown < PolicyDefinition
+      end
+    end
+
+    class PolicyDefinitionDetail
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?static: Types::StaticPolicyDefinitionDetail,
+        ?template_linked: Types::TemplateLinkedPolicyDefinitionDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor static: Types::StaticPolicyDefinitionDetail?
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinitionDetail?
+
+      class Static < PolicyDefinitionDetail
+      end
+      class TemplateLinked < PolicyDefinitionDetail
+      end
+      class Unknown < PolicyDefinitionDetail
+      end
+    end
+
+    class PolicyDefinitionItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?static: Types::StaticPolicyDefinitionItem,
+        ?template_linked: Types::TemplateLinkedPolicyDefinitionItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor static: Types::StaticPolicyDefinitionItem?
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinitionItem?
+
+      class Static < PolicyDefinitionItem
+      end
+      class TemplateLinked < PolicyDefinitionItem
+      end
+      class Unknown < PolicyDefinitionItem
+      end
+    end
+
+    module PolicyEffect
+      PERMIT: String
+      FORBID: String
+    end
+
+    class PolicyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::EntityReference,
+        ?resource: Types::EntityReference,
+        ?policy_type: String,
+        ?policy_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::EntityReference?
+      attr_accessor resource: Types::EntityReference?
+      attr_accessor policy_type: String?
+      attr_accessor policy_template_id: String?
+    end
+
+    class PolicyItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?policy_type: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?actions: Array[Types::ActionIdentifier],
+        ?definition: Types::PolicyDefinitionItem,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor actions: Array[Types::ActionIdentifier]?
+      attr_accessor definition: Types::PolicyDefinitionItem?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor effect: String?
+    end
+
+    class PolicyStoreItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?arn: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor arn: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor description: String?
+    end
+
+    class PolicyTemplateItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+        ?description: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+      attr_accessor description: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    module PolicyType
+      STATIC: String
+      TEMPLATE_LINKED: String
+    end
+
+    class PutSchemaInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?definition: Types::SchemaDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor definition: Types::SchemaDefinition?
+    end
+
+    class PutSchemaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?namespaces: Array[String],
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor namespaces: Array[String]?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class ResourceConflict
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      IDENTITY_SOURCE: String
+      POLICY_STORE: String
+      POLICY: String
+      POLICY_TEMPLATE: String
+      SCHEMA: String
+    end
+
+    class SchemaDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cedar_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cedar_json: String?
+
+      class CedarJson < SchemaDefinition
+      end
+      class Unknown < SchemaDefinition
+      end
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class StaticPolicyDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor statement: String?
+    end
+
+    class StaticPolicyDefinitionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor statement: String?
+    end
+
+    class StaticPolicyDefinitionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateLinkedPolicyDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_template_id: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_template_id: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+    end
+
+    class TemplateLinkedPolicyDefinitionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_template_id: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_template_id: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+    end
+
+    class TemplateLinkedPolicyDefinitionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_template_id: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_template_id: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCognitoGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_entity_type: String?
+    end
+
+    class UpdateCognitoUserPoolConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_arn: String,
+        ?client_ids: Array[String],
+        ?group_configuration: Types::UpdateCognitoGroupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_arn: String?
+      attr_accessor client_ids: Array[String]?
+      attr_accessor group_configuration: Types::UpdateCognitoGroupConfiguration?
+    end
+
+    class UpdateConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cognito_user_pool_configuration: Types::UpdateCognitoUserPoolConfiguration,
+        ?open_id_connect_configuration: Types::UpdateOpenIdConnectConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_user_pool_configuration: Types::UpdateCognitoUserPoolConfiguration?
+      attr_accessor open_id_connect_configuration: Types::UpdateOpenIdConnectConfiguration?
+
+      class CognitoUserPoolConfiguration < UpdateConfiguration
+      end
+      class OpenIdConnectConfiguration < UpdateConfiguration
+      end
+      class Unknown < UpdateConfiguration
+      end
+    end
+
+    class UpdateIdentitySourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?identity_source_id: String,
+        ?update_configuration: Types::UpdateConfiguration,
+        ?principal_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor identity_source_id: String?
+      attr_accessor update_configuration: Types::UpdateConfiguration?
+      attr_accessor principal_entity_type: String?
+    end
+
+    class UpdateIdentitySourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_date: Time,
+        ?identity_source_id: String,
+        ?last_updated_date: Time,
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_date: Time?
+      attr_accessor identity_source_id: String?
+      attr_accessor last_updated_date: Time?
+      attr_accessor policy_store_id: String?
+    end
+
+    class UpdateOpenIdConnectAccessTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor audiences: Array[String]?
+    end
+
+    class UpdateOpenIdConnectConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: String,
+        ?entity_id_prefix: String,
+        ?group_configuration: Types::UpdateOpenIdConnectGroupConfiguration,
+        ?token_selection: Types::UpdateOpenIdConnectTokenSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: String?
+      attr_accessor entity_id_prefix: String?
+      attr_accessor group_configuration: Types::UpdateOpenIdConnectGroupConfiguration?
+      attr_accessor token_selection: Types::UpdateOpenIdConnectTokenSelection?
+    end
+
+    class UpdateOpenIdConnectGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_claim: String,
+        ?group_entity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_claim: String?
+      attr_accessor group_entity_type: String?
+    end
+
+    class UpdateOpenIdConnectIdentityTokenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_id_claim: String,
+        ?client_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_id_claim: String?
+      attr_accessor client_ids: Array[String]?
+    end
+
+    class UpdateOpenIdConnectTokenSelection
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?access_token_only: Types::UpdateOpenIdConnectAccessTokenConfiguration,
+        ?identity_token_only: Types::UpdateOpenIdConnectIdentityTokenConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_only: Types::UpdateOpenIdConnectAccessTokenConfiguration?
+      attr_accessor identity_token_only: Types::UpdateOpenIdConnectIdentityTokenConfiguration?
+
+      class AccessTokenOnly < UpdateOpenIdConnectTokenSelection
+      end
+      class IdentityTokenOnly < UpdateOpenIdConnectTokenSelection
+      end
+      class Unknown < UpdateOpenIdConnectTokenSelection
+      end
+    end
+
+    class UpdatePolicyDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?static: Types::UpdateStaticPolicyDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor static: Types::UpdateStaticPolicyDefinition?
+
+      class Static < UpdatePolicyDefinition
+      end
+      class Unknown < UpdatePolicyDefinition
+      end
+    end
+
+    class UpdatePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?definition: Types::UpdatePolicyDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor definition: Types::UpdatePolicyDefinition?
+    end
+
+    class UpdatePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_id: String,
+        ?policy_type: String,
+        ?principal: Types::EntityIdentifier,
+        ?resource: Types::EntityIdentifier,
+        ?actions: Array[Types::ActionIdentifier],
+        ?created_date: Time,
+        ?last_updated_date: Time,
+        ?effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor principal: Types::EntityIdentifier?
+      attr_accessor resource: Types::EntityIdentifier?
+      attr_accessor actions: Array[Types::ActionIdentifier]?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor effect: String?
+    end
+
+    class UpdatePolicyStoreInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?validation_settings: Types::ValidationSettings,
+        ?deletion_protection: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor validation_settings: Types::ValidationSettings?
+      attr_accessor deletion_protection: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePolicyStoreOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?arn: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor arn: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class UpdatePolicyTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+        ?description: String,
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+      attr_accessor description: String?
+      attr_accessor statement: String?
+    end
+
+    class UpdatePolicyTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+        ?policy_template_id: String,
+        ?created_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+      attr_accessor policy_template_id: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class UpdateStaticPolicyDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor statement: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationMode
+      OFF: String
+      STRICT: String
+    end
+
+    class ValidationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+  end
+end

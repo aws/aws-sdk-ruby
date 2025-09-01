@@ -1,0 +1,5 @@
+  module Aws
+    module WellArchitected
+      VERSION: String
+    end
+  end

@@ -1,0 +1,63 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+require 'aws-sdk-core'
+require 'smithy-json'
+require 'smithy-client'
+
+
+Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
+Aws.const_set('AutoScalingPlans', Module.new) unless Aws.const_defined?('AutoScalingPlans')
+
+# @title AWS Auto Scaling Plans
+# <fullname>AWS Auto Scaling</fullname>
+# 
+#       
+#          <p>Use AWS Auto Scaling to create scaling plans for your applications to
+#          automatically scale your scalable AWS resources. </p>
+#          <p>
+#             <b>API Summary</b>
+#          </p>
+#          <p>You can use the AWS Auto Scaling service API to accomplish the following tasks:</p>
+#          <ul>
+#             <li>
+#                <p>Create and manage scaling plans</p>
+#             </li>
+#             <li>
+#                <p>Define target tracking scaling policies to dynamically scale your resources based
+#                on utilization</p>
+#             </li>
+#             <li>
+#                <p>Scale Amazon EC2 Auto Scaling groups using predictive scaling and dynamic scaling to scale your
+#                Amazon EC2 capacity faster</p>
+#             </li>
+#             <li>
+#                <p>Set minimum and maximum capacity limits</p>
+#             </li>
+#             <li>
+#                <p>Retrieve information on existing scaling plans</p>
+#             </li>
+#             <li>
+#                <p>Access current forecast data and historical forecast data for up to 56 days
+#                previous</p>
+#             </li>
+#          </ul>
+#       
+#          <p>To learn more about AWS Auto Scaling, including information about granting IAM users required
+#          permissions for AWS Auto Scaling actions, see the <a href="https://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html">AWS Auto Scaling User Guide</a>. </p>
+module Aws::AutoScalingPlans
+  VERSION = '2.0.0.pre0'
+end
+
+require_relative 'aws-sdk-autoscalingplans/types'
+require_relative 'aws-sdk-autoscalingplans/paginators'
+require_relative 'aws-sdk-autoscalingplans/schema'
+require_relative 'aws-sdk-autoscalingplans/auth_parameters'
+require_relative 'aws-sdk-autoscalingplans/auth_resolver'
+require_relative 'aws-sdk-autoscalingplans/client'
+require_relative 'aws-sdk-autoscalingplans/customizations'
+require_relative 'aws-sdk-autoscalingplans/errors'
+require_relative 'aws-sdk-autoscalingplans/endpoint_parameters'
+require_relative 'aws-sdk-autoscalingplans/endpoint_provider'
+require_relative 'aws-sdk-autoscalingplans/waiters'

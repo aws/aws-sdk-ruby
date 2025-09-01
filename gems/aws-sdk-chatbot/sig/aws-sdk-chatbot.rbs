@@ -1,0 +1,5 @@
+  module Aws
+    module Chatbot
+      VERSION: String
+    end
+  end

@@ -1,0 +1,5 @@
+  module Aws
+    module Translate
+      VERSION: String
+    end
+  end

@@ -1,0 +1,16 @@
+module Aws::StorageGateway
+  module Errors
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error: () -> Types::StorageGatewayError?
+    end
+    class InvalidGatewayRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error: () -> Types::StorageGatewayError?
+    end
+    class ServiceUnavailableError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error: () -> Types::StorageGatewayError?
+    end
+  end
+end

@@ -1,0 +1,156 @@
+module Aws::DirectoryService
+  module Errors
+    class ADAssessmentLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class AuthenticationFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class CertificateAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class CertificateDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class CertificateInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class CertificateLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryAlreadyInRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryAlreadySharedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryInDesiredStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryNotSharedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DirectoryUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class DomainControllerLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class EntityAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class EntityDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class IncompatibleSettingsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InsufficientPermissionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidClientAuthStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidLDAPSStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidPasswordException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidTargetException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class IpRouteLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class NoAvailableCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class OrganizationsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class RegionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ShareLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class SnapshotLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class TagLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnsupportedSettingsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UserDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+  end
+end

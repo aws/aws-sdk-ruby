@@ -1,0 +1,621 @@
+module Aws::MemoryDB
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MemoryDB::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchUpdateClusterResponse
+      include Smithy::Client::_Response[Types::BatchUpdateClusterResponse]
+      def processed_clusters: () -> Array[Types::Cluster]?
+      def unprocessed_clusters: () -> Array[Types::UnprocessedCluster]?
+    end
+    def batch_update_cluster: (
+      ?cluster_names: Array[String],
+      ?service_update: {
+        service_update_name_to_apply: String
+      }
+    ) -> _BatchUpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateClusterResponse
+
+    interface _CopySnapshotResponse
+      include Smithy::Client::_Response[Types::CopySnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def copy_snapshot: (
+      ?source_snapshot_name: String,
+      ?target_snapshot_name: String,
+      ?target_bucket: String,
+      ?kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CopySnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopySnapshotResponse
+
+    interface _CreateACLResponse
+      include Smithy::Client::_Response[Types::CreateACLResponse]
+      def acl: () -> Types::ACL?
+    end
+    def create_acl: (
+      ?acl_name: String,
+      ?user_names: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateACLResponse
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def create_cluster: (
+      ?cluster_name: String,
+      ?node_type: String,
+      ?multi_region_cluster_name: String,
+      ?parameter_group_name: String,
+      ?description: String,
+      ?num_shards: Integer,
+      ?num_replicas_per_shard: Integer,
+      ?subnet_group_name: String,
+      ?security_group_ids: Array[String],
+      ?maintenance_window: String,
+      ?port: Integer,
+      ?sns_topic_arn: String,
+      ?tls_enabled: bool,
+      ?kms_key_id: String,
+      ?snapshot_arns: Array[String],
+      ?snapshot_name: String,
+      ?snapshot_retention_limit: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?snapshot_window: String,
+      ?acl_name: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?auto_minor_version_upgrade: bool,
+      ?data_tiering: bool,
+      ?network_type: String,
+      ?ip_discovery: String
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateMultiRegionClusterResponse
+      include Smithy::Client::_Response[Types::CreateMultiRegionClusterResponse]
+      def multi_region_cluster: () -> Types::MultiRegionCluster?
+    end
+    def create_multi_region_cluster: (
+      ?multi_region_cluster_name_suffix: String,
+      ?description: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?node_type: String,
+      ?multi_region_parameter_group_name: String,
+      ?num_shards: Integer,
+      ?tls_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateMultiRegionClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultiRegionClusterResponse
+
+    interface _CreateParameterGroupResponse
+      include Smithy::Client::_Response[Types::CreateParameterGroupResponse]
+      def parameter_group: () -> Types::ParameterGroup?
+    end
+    def create_parameter_group: (
+      ?parameter_group_name: String,
+      ?family: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParameterGroupResponse
+
+    interface _CreateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def create_snapshot: (
+      ?cluster_name: String,
+      ?snapshot_name: String,
+      ?kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotResponse
+
+    interface _CreateSubnetGroupResponse
+      include Smithy::Client::_Response[Types::CreateSubnetGroupResponse]
+      def subnet_group: () -> Types::SubnetGroup?
+    end
+    def create_subnet_group: (
+      ?subnet_group_name: String,
+      ?description: String,
+      ?subnet_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubnetGroupResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user: () -> Types::User?
+    end
+    def create_user: (
+      ?user_name: String,
+      ?authentication_mode: {
+        type: String,
+        passwords: Array[String]
+      },
+      ?access_string: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteACLResponse
+      include Smithy::Client::_Response[Types::DeleteACLResponse]
+      def acl: () -> Types::ACL?
+    end
+    def delete_acl: (
+      ?acl_name: String
+    ) -> _DeleteACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteACLResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def delete_cluster: (
+      ?cluster_name: String,
+      ?multi_region_cluster_name: String,
+      ?final_snapshot_name: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteMultiRegionClusterResponse
+      include Smithy::Client::_Response[Types::DeleteMultiRegionClusterResponse]
+      def multi_region_cluster: () -> Types::MultiRegionCluster?
+    end
+    def delete_multi_region_cluster: (
+      ?multi_region_cluster_name: String
+    ) -> _DeleteMultiRegionClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMultiRegionClusterResponse
+
+    interface _DeleteParameterGroupResponse
+      include Smithy::Client::_Response[Types::DeleteParameterGroupResponse]
+      def parameter_group: () -> Types::ParameterGroup?
+    end
+    def delete_parameter_group: (
+      ?parameter_group_name: String
+    ) -> _DeleteParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteParameterGroupResponse
+
+    interface _DeleteSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def delete_snapshot: (
+      ?snapshot_name: String
+    ) -> _DeleteSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotResponse
+
+    interface _DeleteSubnetGroupResponse
+      include Smithy::Client::_Response[Types::DeleteSubnetGroupResponse]
+      def subnet_group: () -> Types::SubnetGroup?
+    end
+    def delete_subnet_group: (
+      ?subnet_group_name: String
+    ) -> _DeleteSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubnetGroupResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
+      def user: () -> Types::User?
+    end
+    def delete_user: (
+      ?user_name: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DescribeACLsResponse
+      include Smithy::Client::_Response[Types::DescribeACLsResponse]
+      def ac_ls: () -> Array[Types::ACL]?
+      def next_token: () -> String?
+    end
+    def describe_ac_ls: (
+      ?acl_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeACLsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeACLsResponse
+
+    interface _DescribeClustersResponse
+      include Smithy::Client::_Response[Types::DescribeClustersResponse]
+      def next_token: () -> String?
+      def clusters: () -> Array[Types::Cluster]?
+    end
+    def describe_clusters: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?show_shard_details: bool
+    ) -> _DescribeClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClustersResponse
+
+    interface _DescribeEngineVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeEngineVersionsResponse]
+      def next_token: () -> String?
+      def engine_versions: () -> Array[Types::EngineVersionInfo]?
+    end
+    def describe_engine_versions: (
+      ?engine: String,
+      ?engine_version: String,
+      ?parameter_group_family: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?default_only: bool
+    ) -> _DescribeEngineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEngineVersionsResponse
+
+    interface _DescribeEventsResponse
+      include Smithy::Client::_Response[Types::DescribeEventsResponse]
+      def next_token: () -> String?
+      def events: () -> Array[Types::Event]?
+    end
+    def describe_events: (
+      ?source_name: String,
+      ?source_type: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?duration: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventsResponse
+
+    interface _DescribeMultiRegionClustersResponse
+      include Smithy::Client::_Response[Types::DescribeMultiRegionClustersResponse]
+      def next_token: () -> String?
+      def multi_region_clusters: () -> Array[Types::MultiRegionCluster]?
+    end
+    def describe_multi_region_clusters: (
+      ?multi_region_cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?show_cluster_details: bool
+    ) -> _DescribeMultiRegionClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiRegionClustersResponse
+
+    interface _DescribeParameterGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeParameterGroupsResponse]
+      def next_token: () -> String?
+      def parameter_groups: () -> Array[Types::ParameterGroup]?
+    end
+    def describe_parameter_groups: (
+      ?parameter_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeParameterGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeParameterGroupsResponse
+
+    interface _DescribeParametersResponse
+      include Smithy::Client::_Response[Types::DescribeParametersResponse]
+      def next_token: () -> String?
+      def parameters: () -> Array[Types::Parameter]?
+    end
+    def describe_parameters: (
+      ?parameter_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeParametersResponse
+
+    interface _DescribeReservedNodesResponse
+      include Smithy::Client::_Response[Types::DescribeReservedNodesResponse]
+      def next_token: () -> String?
+      def reserved_nodes: () -> Array[Types::ReservedNode]?
+    end
+    def describe_reserved_nodes: (
+      ?reservation_id: String,
+      ?reserved_nodes_offering_id: String,
+      ?node_type: String,
+      ?duration: String,
+      ?offering_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedNodesResponse
+
+    interface _DescribeReservedNodesOfferingsResponse
+      include Smithy::Client::_Response[Types::DescribeReservedNodesOfferingsResponse]
+      def next_token: () -> String?
+      def reserved_nodes_offerings: () -> Array[Types::ReservedNodesOffering]?
+    end
+    def describe_reserved_nodes_offerings: (
+      ?reserved_nodes_offering_id: String,
+      ?node_type: String,
+      ?duration: String,
+      ?offering_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReservedNodesOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedNodesOfferingsResponse
+
+    interface _DescribeServiceUpdatesResponse
+      include Smithy::Client::_Response[Types::DescribeServiceUpdatesResponse]
+      def next_token: () -> String?
+      def service_updates: () -> Array[Types::ServiceUpdate]?
+    end
+    def describe_service_updates: (
+      ?service_update_name: String,
+      ?cluster_names: Array[String],
+      ?status: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeServiceUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceUpdatesResponse
+
+    interface _DescribeSnapshotsResponse
+      include Smithy::Client::_Response[Types::DescribeSnapshotsResponse]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::Snapshot]?
+    end
+    def describe_snapshots: (
+      ?cluster_name: String,
+      ?snapshot_name: String,
+      ?source: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?show_detail: bool
+    ) -> _DescribeSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSnapshotsResponse
+
+    interface _DescribeSubnetGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeSubnetGroupsResponse]
+      def next_token: () -> String?
+      def subnet_groups: () -> Array[Types::SubnetGroup]?
+    end
+    def describe_subnet_groups: (
+      ?subnet_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSubnetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSubnetGroupsResponse
+
+    interface _DescribeUsersResponse
+      include Smithy::Client::_Response[Types::DescribeUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def describe_users: (
+      ?user_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUsersResponse
+
+    interface _FailoverShardResponse
+      include Smithy::Client::_Response[Types::FailoverShardResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def failover_shard: (
+      ?cluster_name: String,
+      ?shard_name: String
+    ) -> _FailoverShardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FailoverShardResponse
+
+    interface _ListAllowedMultiRegionClusterUpdatesResponse
+      include Smithy::Client::_Response[Types::ListAllowedMultiRegionClusterUpdatesResponse]
+      def scale_up_node_types: () -> Array[String]?
+      def scale_down_node_types: () -> Array[String]?
+    end
+    def list_allowed_multi_region_cluster_updates: (
+      ?multi_region_cluster_name: String
+    ) -> _ListAllowedMultiRegionClusterUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAllowedMultiRegionClusterUpdatesResponse
+
+    interface _ListAllowedNodeTypeUpdatesResponse
+      include Smithy::Client::_Response[Types::ListAllowedNodeTypeUpdatesResponse]
+      def scale_up_node_types: () -> Array[String]?
+      def scale_down_node_types: () -> Array[String]?
+    end
+    def list_allowed_node_type_updates: (
+      ?cluster_name: String
+    ) -> _ListAllowedNodeTypeUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAllowedNodeTypeUpdatesResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags: (
+      ?resource_arn: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _PurchaseReservedNodesOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseReservedNodesOfferingResponse]
+      def reserved_node: () -> Types::ReservedNode?
+    end
+    def purchase_reserved_nodes_offering: (
+      ?reserved_nodes_offering_id: String,
+      ?reservation_id: String,
+      ?node_count: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _PurchaseReservedNodesOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseReservedNodesOfferingResponse
+
+    interface _ResetParameterGroupResponse
+      include Smithy::Client::_Response[Types::ResetParameterGroupResponse]
+      def parameter_group: () -> Types::ParameterGroup?
+    end
+    def reset_parameter_group: (
+      ?parameter_group_name: String,
+      ?all_parameters: bool,
+      ?parameter_names: Array[String]
+    ) -> _ResetParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetParameterGroupResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateACLResponse
+      include Smithy::Client::_Response[Types::UpdateACLResponse]
+      def acl: () -> Types::ACL?
+    end
+    def update_acl: (
+      ?acl_name: String,
+      ?user_names_to_add: Array[String],
+      ?user_names_to_remove: Array[String]
+    ) -> _UpdateACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateACLResponse
+
+    interface _UpdateClusterResponse
+      include Smithy::Client::_Response[Types::UpdateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def update_cluster: (
+      ?cluster_name: String,
+      ?description: String,
+      ?security_group_ids: Array[String],
+      ?maintenance_window: String,
+      ?sns_topic_arn: String,
+      ?sns_topic_status: String,
+      ?parameter_group_name: String,
+      ?snapshot_window: String,
+      ?snapshot_retention_limit: Integer,
+      ?node_type: String,
+      ?engine: String,
+      ?engine_version: String,
+      ?replica_configuration: {
+        replica_count: Integer
+      },
+      ?shard_configuration: {
+        shard_count: Integer
+      },
+      ?acl_name: String,
+      ?ip_discovery: String
+    ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
+
+    interface _UpdateMultiRegionClusterResponse
+      include Smithy::Client::_Response[Types::UpdateMultiRegionClusterResponse]
+      def multi_region_cluster: () -> Types::MultiRegionCluster?
+    end
+    def update_multi_region_cluster: (
+      ?multi_region_cluster_name: String,
+      ?node_type: String,
+      ?description: String,
+      ?engine_version: String,
+      ?shard_configuration: {
+        shard_count: Integer
+      },
+      ?multi_region_parameter_group_name: String,
+      ?update_strategy: String
+    ) -> _UpdateMultiRegionClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMultiRegionClusterResponse
+
+    interface _UpdateParameterGroupResponse
+      include Smithy::Client::_Response[Types::UpdateParameterGroupResponse]
+      def parameter_group: () -> Types::ParameterGroup?
+    end
+    def update_parameter_group: (
+      ?parameter_group_name: String,
+      ?parameter_name_values: Array[
+        {
+          parameter_name: String,
+          parameter_value: untyped
+        }
+      ]
+    ) -> _UpdateParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateParameterGroupResponse
+
+    interface _UpdateSubnetGroupResponse
+      include Smithy::Client::_Response[Types::UpdateSubnetGroupResponse]
+      def subnet_group: () -> Types::SubnetGroup?
+    end
+    def update_subnet_group: (
+      ?subnet_group_name: String,
+      ?description: String,
+      ?subnet_ids: Array[String]
+    ) -> _UpdateSubnetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubnetGroupResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def user: () -> Types::User?
+    end
+    def update_user: (
+      ?user_name: String,
+      ?authentication_mode: {
+        type: String,
+        passwords: Array[String]
+      },
+      ?access_string: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

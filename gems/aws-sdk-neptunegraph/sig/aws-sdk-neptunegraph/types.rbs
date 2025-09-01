@@ -1,0 +1,1762 @@
+module Aws::NeptuneGraph
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BlankNodeHandling
+      CONVERT_TO_IRI: String
+    end
+
+    class CancelExportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_identifier: String?
+    end
+
+    class CancelExportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?role_arn: String,
+        ?task_id: String,
+        ?status: String,
+        ?format: String,
+        ?destination: String,
+        ?kms_key_identifier: String,
+        ?parquet_type: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor format: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor parquet_type: String?
+      attr_accessor status_reason: String?
+    end
+
+    class CancelImportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_identifier: String?
+    end
+
+    class CancelImportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?task_id: String,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?role_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor task_id: String?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+    end
+
+    class CancelQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor query_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ConflictExceptionReason
+      CONCURRENT_MODIFICATION: String
+    end
+
+    class CreateGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_name: String,
+        ?tags: Hash[String, String],
+        ?public_connectivity: bool,
+        ?kms_key_identifier: String,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?deletion_protection: bool,
+        ?provisioned_memory: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor public_connectivity: bool?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor deletion_protection: bool?
+      attr_accessor provisioned_memory: Integer?
+    end
+
+    class CreateGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class CreateGraphSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?snapshot_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor snapshot_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateGraphSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?source_graph_id: String,
+        ?snapshot_create_time: Time,
+        ?status: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor source_graph_id: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor status: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class CreateGraphUsingImportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_name: String,
+        ?tags: Hash[String, String],
+        ?public_connectivity: bool,
+        ?kms_key_identifier: String,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?deletion_protection: bool,
+        ?import_options: Types::ImportOptions,
+        ?max_provisioned_memory: Integer,
+        ?min_provisioned_memory: Integer,
+        ?fail_on_error: bool,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?blank_node_handling: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor public_connectivity: bool?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor deletion_protection: bool?
+      attr_accessor import_options: Types::ImportOptions?
+      attr_accessor max_provisioned_memory: Integer?
+      attr_accessor min_provisioned_memory: Integer?
+      attr_accessor fail_on_error: bool?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor blank_node_handling: String?
+      attr_accessor role_arn: String?
+    end
+
+    class CreateGraphUsingImportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?task_id: String,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?role_arn: String,
+        ?status: String,
+        ?import_options: Types::ImportOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor task_id: String?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor import_options: Types::ImportOptions?
+    end
+
+    class CreatePrivateGraphEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?vpc_security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+    end
+
+    class CreatePrivateGraphEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class DeleteGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?skip_snapshot: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor skip_snapshot: bool?
+    end
+
+    class DeleteGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class DeleteGraphSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_identifier: String?
+    end
+
+    class DeleteGraphSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?source_graph_id: String,
+        ?snapshot_create_time: Time,
+        ?status: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor source_graph_id: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor status: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class DeletePrivateGraphEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class DeletePrivateGraphEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class EdgeStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?edge_properties: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor edge_properties: Array[String]?
+    end
+
+    class ExecuteQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?query_string: String,
+        ?language: String,
+        ?parameters: Hash[String, Smithy::Schema::document],
+        ?plan_cache: String,
+        ?explain_mode: String,
+        ?query_timeout_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor query_string: String?
+      attr_accessor language: String?
+      attr_accessor parameters: Hash[String, Smithy::Schema::document]?
+      attr_accessor plan_cache: String?
+      attr_accessor explain_mode: String?
+      attr_accessor query_timeout_milliseconds: Integer?
+    end
+
+    class ExecuteQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    module ExplainMode
+      STATIC: String
+      DETAILS: String
+    end
+
+    class ExportFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vertex_filter: Hash[String, Types::ExportFilterElement],
+        ?edge_filter: Hash[String, Types::ExportFilterElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vertex_filter: Hash[String, Types::ExportFilterElement]?
+      attr_accessor edge_filter: Hash[String, Types::ExportFilterElement]?
+    end
+
+    class ExportFilterElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?properties: Hash[String, Types::ExportFilterPropertyAttributes],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor properties: Hash[String, Types::ExportFilterPropertyAttributes]?
+    end
+
+    class ExportFilterPropertyAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_type: String,
+        ?source_property_name: String,
+        ?multi_value_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_type: String?
+      attr_accessor source_property_name: String?
+      attr_accessor multi_value_handling: String?
+    end
+
+    module ExportFormat
+      PARQUET: String
+      CSV: String
+    end
+
+    class ExportTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?time_elapsed_seconds: Integer,
+        ?progress_percentage: Integer,
+        ?num_vertices_written: Integer,
+        ?num_edges_written: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor time_elapsed_seconds: Integer?
+      attr_accessor progress_percentage: Integer?
+      attr_accessor num_vertices_written: Integer?
+      attr_accessor num_edges_written: Integer?
+    end
+
+    module ExportTaskStatus
+      INITIALIZING: String
+      EXPORTING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLING: String
+      CANCELLED: String
+      DELETED: String
+    end
+
+    class ExportTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?role_arn: String,
+        ?task_id: String,
+        ?status: String,
+        ?format: String,
+        ?destination: String,
+        ?kms_key_identifier: String,
+        ?parquet_type: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor format: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor parquet_type: String?
+      attr_accessor status_reason: String?
+    end
+
+    module Format
+      CSV: String
+      OPEN_CYPHER: String
+      PARQUET: String
+      NTRIPLES: String
+    end
+
+    class GetExportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_identifier: String?
+    end
+
+    class GetExportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?role_arn: String,
+        ?task_id: String,
+        ?status: String,
+        ?format: String,
+        ?destination: String,
+        ?kms_key_identifier: String,
+        ?parquet_type: String,
+        ?status_reason: String,
+        ?export_task_details: Types::ExportTaskDetails,
+        ?export_filter: Types::ExportFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor format: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor parquet_type: String?
+      attr_accessor status_reason: String?
+      attr_accessor export_task_details: Types::ExportTaskDetails?
+      attr_accessor export_filter: Types::ExportFilter?
+    end
+
+    class GetGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+    end
+
+    class GetGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class GetGraphSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_identifier: String?
+    end
+
+    class GetGraphSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?source_graph_id: String,
+        ?snapshot_create_time: Time,
+        ?status: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor source_graph_id: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor status: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class GetGraphSummaryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor mode: String?
+    end
+
+    class GetGraphSummaryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?last_statistics_computation_time: Time,
+        ?graph_summary: Types::GraphDataSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor last_statistics_computation_time: Time?
+      attr_accessor graph_summary: Types::GraphDataSummary?
+    end
+
+    class GetImportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_identifier: String?
+    end
+
+    class GetImportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?task_id: String,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?role_arn: String,
+        ?status: String,
+        ?import_options: Types::ImportOptions,
+        ?import_task_details: Types::ImportTaskDetails,
+        ?attempt_number: Integer,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor task_id: String?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor import_options: Types::ImportOptions?
+      attr_accessor import_task_details: Types::ImportTaskDetails?
+      attr_accessor attempt_number: Integer?
+      attr_accessor status_reason: String?
+    end
+
+    class GetPrivateGraphEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class GetPrivateGraphEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class GetQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?query_string: String,
+        ?waited: Integer,
+        ?elapsed: Integer,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor query_string: String?
+      attr_accessor waited: Integer?
+      attr_accessor elapsed: Integer?
+      attr_accessor state: String?
+    end
+
+    class GraphDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?num_nodes: Integer,
+        ?num_edges: Integer,
+        ?num_node_labels: Integer,
+        ?num_edge_labels: Integer,
+        ?node_labels: Array[String],
+        ?edge_labels: Array[String],
+        ?num_node_properties: Integer,
+        ?num_edge_properties: Integer,
+        ?node_properties: Array[Hash[String, Integer]],
+        ?edge_properties: Array[Hash[String, Integer]],
+        ?total_node_property_values: Integer,
+        ?total_edge_property_values: Integer,
+        ?node_structures: Array[Types::NodeStructure],
+        ?edge_structures: Array[Types::EdgeStructure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor num_nodes: Integer?
+      attr_accessor num_edges: Integer?
+      attr_accessor num_node_labels: Integer?
+      attr_accessor num_edge_labels: Integer?
+      attr_accessor node_labels: Array[String]?
+      attr_accessor edge_labels: Array[String]?
+      attr_accessor num_node_properties: Integer?
+      attr_accessor num_edge_properties: Integer?
+      attr_accessor node_properties: Array[Hash[String, Integer]]?
+      attr_accessor edge_properties: Array[Hash[String, Integer]]?
+      attr_accessor total_node_property_values: Integer?
+      attr_accessor total_edge_property_values: Integer?
+      attr_accessor node_structures: Array[Types::NodeStructure]?
+      attr_accessor edge_structures: Array[Types::EdgeStructure]?
+    end
+
+    class GraphSnapshotSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?source_graph_id: String,
+        ?snapshot_create_time: Time,
+        ?status: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor source_graph_id: String?
+      attr_accessor snapshot_create_time: Time?
+      attr_accessor status: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    module GraphStatus
+      CREATING: String
+      AVAILABLE: String
+      DELETING: String
+      RESETTING: String
+      UPDATING: String
+      SNAPSHOTTING: String
+      FAILED: String
+      IMPORTING: String
+    end
+
+    class GraphSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?provisioned_memory: Integer,
+        ?public_connectivity: bool,
+        ?endpoint: String,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor public_connectivity: bool?
+      attr_accessor endpoint: String?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor deletion_protection: bool?
+    end
+
+    module GraphSummaryMode
+      BASIC: String
+      DETAILED: String
+    end
+
+    class ImportOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?neptune: Types::NeptuneImportOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor neptune: Types::NeptuneImportOptions?
+
+      class Neptune < ImportOptions
+      end
+      class Unknown < ImportOptions
+      end
+    end
+
+    class ImportTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?start_time: Time,
+        ?time_elapsed_seconds: Integer,
+        ?progress_percentage: Integer,
+        ?error_count: Integer,
+        ?error_details: String,
+        ?statement_count: Integer,
+        ?dictionary_entry_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor time_elapsed_seconds: Integer?
+      attr_accessor progress_percentage: Integer?
+      attr_accessor error_count: Integer?
+      attr_accessor error_details: String?
+      attr_accessor statement_count: Integer?
+      attr_accessor dictionary_entry_count: Integer?
+    end
+
+    module ImportTaskStatus
+      INITIALIZING: String
+      EXPORTING: String
+      ANALYZING_DATA: String
+      IMPORTING: String
+      REPROVISIONING: String
+      ROLLING_BACK: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLING: String
+      CANCELLED: String
+      DELETED: String
+    end
+
+    class ImportTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?task_id: String,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?role_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor task_id: String?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListExportTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListExportTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::ExportTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::ExportTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGraphSnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGraphSnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_snapshots: Array[Types::GraphSnapshotSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_snapshots: Array[Types::GraphSnapshotSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGraphsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGraphsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graphs: Array[Types::GraphSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graphs: Array[Types::GraphSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListImportTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::ImportTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::ImportTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPrivateGraphEndpointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPrivateGraphEndpointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_graph_endpoints: Array[Types::PrivateGraphEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_graph_endpoints: Array[Types::PrivateGraphEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?max_results: Integer,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state: String?
+    end
+
+    class ListQueriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::QuerySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::QuerySummary]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MultiValueHandlingType
+      TO_LIST: String
+      PICK_FIRST: String
+    end
+
+    class NeptuneImportOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_export_path: String,
+        ?s3_export_kms_key_id: String,
+        ?preserve_default_vertex_labels: bool,
+        ?preserve_edge_ids: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_export_path: String?
+      attr_accessor s3_export_kms_key_id: String?
+      attr_accessor preserve_default_vertex_labels: bool?
+      attr_accessor preserve_edge_ids: bool?
+    end
+
+    class NodeStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+        ?node_properties: Array[String],
+        ?distinct_outgoing_edge_labels: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+      attr_accessor node_properties: Array[String]?
+      attr_accessor distinct_outgoing_edge_labels: Array[String]?
+    end
+
+    module ParquetType
+      COLUMNAR: String
+    end
+
+    module PlanCacheType
+      ENABLED: String
+      DISABLED: String
+      AUTO: String
+    end
+
+    module PrivateGraphEndpointStatus
+      CREATING: String
+      AVAILABLE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class PrivateGraphEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    module QueryLanguage
+      OPEN_CYPHER: String
+    end
+
+    module QueryState
+      RUNNING: String
+      WAITING: String
+      CANCELLING: String
+    end
+
+    module QueryStateInput
+      ALL: String
+      RUNNING: String
+      WAITING: String
+      CANCELLING: String
+    end
+
+    class QuerySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?query_string: String,
+        ?waited: Integer,
+        ?elapsed: Integer,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor query_string: String?
+      attr_accessor waited: Integer?
+      attr_accessor elapsed: Integer?
+      attr_accessor state: String?
+    end
+
+    class ResetGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?skip_snapshot: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor skip_snapshot: bool?
+    end
+
+    class ResetGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestoreGraphFromSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_identifier: String,
+        ?graph_name: String,
+        ?provisioned_memory: Integer,
+        ?deletion_protection: bool,
+        ?tags: Hash[String, String],
+        ?replica_count: Integer,
+        ?public_connectivity: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_identifier: String?
+      attr_accessor graph_name: String?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor deletion_protection: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor replica_count: Integer?
+      attr_accessor public_connectivity: bool?
+    end
+
+    class RestoreGraphFromSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    module SnapshotStatus
+      CREATING: String
+      AVAILABLE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class StartExportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?role_arn: String,
+        ?format: String,
+        ?destination: String,
+        ?kms_key_identifier: String,
+        ?parquet_type: String,
+        ?export_filter: Types::ExportFilter,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor format: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor parquet_type: String?
+      attr_accessor export_filter: Types::ExportFilter?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartExportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?role_arn: String,
+        ?task_id: String,
+        ?status: String,
+        ?format: String,
+        ?destination: String,
+        ?kms_key_identifier: String,
+        ?parquet_type: String,
+        ?status_reason: String,
+        ?export_filter: Types::ExportFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor format: String?
+      attr_accessor destination: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor parquet_type: String?
+      attr_accessor status_reason: String?
+      attr_accessor export_filter: Types::ExportFilter?
+    end
+
+    class StartImportTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_options: Types::ImportOptions,
+        ?fail_on_error: bool,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?blank_node_handling: String,
+        ?graph_identifier: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_options: Types::ImportOptions?
+      attr_accessor fail_on_error: bool?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor blank_node_handling: String?
+      attr_accessor graph_identifier: String?
+      attr_accessor role_arn: String?
+    end
+
+    class StartImportTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_id: String,
+        ?task_id: String,
+        ?source: String,
+        ?format: String,
+        ?parquet_type: String,
+        ?role_arn: String,
+        ?status: String,
+        ?import_options: Types::ImportOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_id: String?
+      attr_accessor task_id: String?
+      attr_accessor source: String?
+      attr_accessor format: String?
+      attr_accessor parquet_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor import_options: Types::ImportOptions?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnprocessableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module UnprocessableExceptionReason
+      QUERY_TIMEOUT: String
+      INTERNAL_LIMIT_EXCEEDED: String
+      MEMORY_LIMIT_EXCEEDED: String
+      STORAGE_LIMIT_EXCEEDED: String
+      PARTITION_FULL: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+        ?public_connectivity: bool,
+        ?provisioned_memory: Integer,
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class UpdateGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      CONSTRAINT_VIOLATION: String
+      ILLEGAL_ARGUMENT: String
+      MALFORMED_QUERY: String
+      QUERY_CANCELLED: String
+      QUERY_TOO_LARGE: String
+      UNSUPPORTED_OPERATION: String
+      BAD_REQUEST: String
+    end
+
+    class VectorSearchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension: Integer?
+    end
+  end
+end

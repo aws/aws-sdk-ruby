@@ -1,0 +1,2313 @@
+module Aws::XRay
+  module Types
+
+    class Alias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?names: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class AnnotationValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?number_value: Float,
+        ?boolean_value: bool,
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor string_value: String?
+
+      class NumberValue < AnnotationValue
+      end
+      class BooleanValue < AnnotationValue
+      end
+      class StringValue < AnnotationValue
+      end
+      class Unknown < AnnotationValue
+      end
+    end
+
+    class AnomalousService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: Types::ServiceId,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: Types::ServiceId?
+    end
+
+    class AvailabilityZoneDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class BackendConnectionErrors
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_count: Integer,
+        ?connection_refused_count: Integer,
+        ?http_code4_xx_count: Integer,
+        ?http_code5_xx_count: Integer,
+        ?unknown_host_count: Integer,
+        ?other_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_count: Integer?
+      attr_accessor connection_refused_count: Integer?
+      attr_accessor http_code4_xx_count: Integer?
+      attr_accessor http_code5_xx_count: Integer?
+      attr_accessor unknown_host_count: Integer?
+      attr_accessor other_count: Integer?
+    end
+
+    class BatchGetTracesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetTracesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traces: Array[Types::Trace],
+        ?unprocessed_trace_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traces: Array[Types::Trace]?
+      attr_accessor unprocessed_trace_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class CancelTraceRetrievalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_token: String?
+    end
+
+    class CancelTraceRetrievalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?filter_expression: String,
+        ?insights_configuration: Types::InsightsConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor filter_expression: String?
+      attr_accessor insights_configuration: Types::InsightsConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class CreateSamplingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule: Types::SamplingRule,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule: Types::SamplingRule?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSamplingRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule_record: Types::SamplingRuleRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord?
+    end
+
+    class DeleteGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+    end
+
+    class DeleteGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class DeleteResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSamplingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+    end
+
+    class DeleteSamplingRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule_record: Types::SamplingRuleRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord?
+    end
+
+    class Edge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?summary_statistics: Types::EdgeStatistics,
+        ?response_time_histogram: Array[Types::HistogramEntry],
+        ?aliases: Array[Types::Alias],
+        ?edge_type: String,
+        ?received_event_age_histogram: Array[Types::HistogramEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor summary_statistics: Types::EdgeStatistics?
+      attr_accessor response_time_histogram: Array[Types::HistogramEntry]?
+      attr_accessor aliases: Array[Types::Alias]?
+      attr_accessor edge_type: String?
+      attr_accessor received_event_age_histogram: Array[Types::HistogramEntry]?
+    end
+
+    class EdgeStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ok_count: Integer,
+        ?error_statistics: Types::ErrorStatistics,
+        ?fault_statistics: Types::FaultStatistics,
+        ?total_count: Integer,
+        ?total_response_time: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ok_count: Integer?
+      attr_accessor error_statistics: Types::ErrorStatistics?
+      attr_accessor fault_statistics: Types::FaultStatistics?
+      attr_accessor total_count: Integer?
+      attr_accessor total_response_time: Float?
+    end
+
+    class EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?status: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+    end
+
+    module EncryptionStatus
+      UPDATING: String
+      ACTIVE: String
+    end
+
+    module EncryptionType
+      NONE: String
+      KMS: String
+    end
+
+    class ErrorRootCause
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::ErrorRootCauseService],
+        ?client_impacting: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::ErrorRootCauseService]?
+      attr_accessor client_impacting: bool?
+    end
+
+    class ErrorRootCauseEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?exceptions: Array[Types::RootCauseException],
+        ?remote: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor exceptions: Array[Types::RootCauseException]?
+      attr_accessor remote: bool?
+    end
+
+    class ErrorRootCauseService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?names: Array[String],
+        ?type: String,
+        ?account_id: String,
+        ?entity_path: Array[Types::ErrorRootCauseEntity],
+        ?inferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor type: String?
+      attr_accessor account_id: String?
+      attr_accessor entity_path: Array[Types::ErrorRootCauseEntity]?
+      attr_accessor inferred: bool?
+    end
+
+    class ErrorStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?throttle_count: Integer,
+        ?other_count: Integer,
+        ?total_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor throttle_count: Integer?
+      attr_accessor other_count: Integer?
+      attr_accessor total_count: Integer?
+    end
+
+    class FaultRootCause
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::FaultRootCauseService],
+        ?client_impacting: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::FaultRootCauseService]?
+      attr_accessor client_impacting: bool?
+    end
+
+    class FaultRootCauseEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?exceptions: Array[Types::RootCauseException],
+        ?remote: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor exceptions: Array[Types::RootCauseException]?
+      attr_accessor remote: bool?
+    end
+
+    class FaultRootCauseService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?names: Array[String],
+        ?type: String,
+        ?account_id: String,
+        ?entity_path: Array[Types::FaultRootCauseEntity],
+        ?inferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor type: String?
+      attr_accessor account_id: String?
+      attr_accessor entity_path: Array[Types::FaultRootCauseEntity]?
+      attr_accessor inferred: bool?
+    end
+
+    class FaultStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?other_count: Integer,
+        ?total_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor other_count: Integer?
+      attr_accessor total_count: Integer?
+    end
+
+    class ForecastStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fault_count_high: Integer,
+        ?fault_count_low: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fault_count_high: Integer?
+      attr_accessor fault_count_low: Integer?
+    end
+
+    class GetEncryptionConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetEncryptionConfigResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_config: Types::EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_config: Types::EncryptionConfig?
+    end
+
+    class GetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+    end
+
+    class GetGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class GetGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class GetGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?groups: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor groups: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetIndexingRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class GetIndexingRulesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexing_rules: Array[Types::IndexingRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexing_rules: Array[Types::IndexingRule]?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightEventsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_events: Array[Types::InsightEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_events: Array[Types::InsightEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightImpactGraphRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightImpactGraphResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_graph_start_time: Time,
+        ?service_graph_end_time: Time,
+        ?services: Array[Types::InsightImpactGraphService],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_graph_start_time: Time?
+      attr_accessor service_graph_end_time: Time?
+      attr_accessor services: Array[Types::InsightImpactGraphService]?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+    end
+
+    class GetInsightResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight: Types::Insight,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight: Types::Insight?
+    end
+
+    class GetInsightSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?states: Array[String],
+        ?group_arn: String,
+        ?group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor states: Array[String]?
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetInsightSummariesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_summaries: Array[Types::InsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_summaries: Array[Types::InsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetRetrievedTracesGraphRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_token: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_token: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetRetrievedTracesGraphResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_status: String,
+        ?services: Array[Types::RetrievedService],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_status: String?
+      attr_accessor services: Array[Types::RetrievedService]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSamplingRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class GetSamplingRulesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule_records: Array[Types::SamplingRuleRecord],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule_records: Array[Types::SamplingRuleRecord]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSamplingStatisticSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class GetSamplingStatisticSummariesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_statistic_summaries: Array[Types::SamplingStatisticSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_statistic_summaries: Array[Types::SamplingStatisticSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSamplingTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_statistics_documents: Array[Types::SamplingStatisticsDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_statistics_documents: Array[Types::SamplingStatisticsDocument]?
+    end
+
+    class GetSamplingTargetsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_target_documents: Array[Types::SamplingTargetDocument],
+        ?last_rule_modification: Time,
+        ?unprocessed_statistics: Array[Types::UnprocessedStatistics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_target_documents: Array[Types::SamplingTargetDocument]?
+      attr_accessor last_rule_modification: Time?
+      attr_accessor unprocessed_statistics: Array[Types::UnprocessedStatistics]?
+    end
+
+    class GetServiceGraphRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?group_name: String,
+        ?group_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetServiceGraphResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?services: Array[Types::Service],
+        ?contains_old_group_versions: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor services: Array[Types::Service]?
+      attr_accessor contains_old_group_versions: bool?
+      attr_accessor next_token: String?
+    end
+
+    class GetTimeSeriesServiceStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?group_name: String,
+        ?group_arn: String,
+        ?entity_selector_expression: String,
+        ?period: Integer,
+        ?forecast_statistics: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor entity_selector_expression: String?
+      attr_accessor period: Integer?
+      attr_accessor forecast_statistics: bool?
+      attr_accessor next_token: String?
+    end
+
+    class GetTimeSeriesServiceStatisticsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_service_statistics: Array[Types::TimeSeriesServiceStatistics],
+        ?contains_old_group_versions: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_service_statistics: Array[Types::TimeSeriesServiceStatistics]?
+      attr_accessor contains_old_group_versions: bool?
+      attr_accessor next_token: String?
+    end
+
+    class GetTraceGraphRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTraceGraphResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::Service],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::Service]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTraceSegmentDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetTraceSegmentDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor status: String?
+    end
+
+    class GetTraceSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?time_range_type: String,
+        ?sampling: bool,
+        ?sampling_strategy: Types::SamplingStrategy,
+        ?filter_expression: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor time_range_type: String?
+      attr_accessor sampling: bool?
+      attr_accessor sampling_strategy: Types::SamplingStrategy?
+      attr_accessor filter_expression: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetTraceSummariesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_summaries: Array[Types::TraceSummary],
+        ?approximate_time: Time,
+        ?traces_processed_count: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_summaries: Array[Types::TraceSummary]?
+      attr_accessor approximate_time: Time?
+      attr_accessor traces_processed_count: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GraphLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_type: String,
+        ?source_trace_id: String,
+        ?destination_trace_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_type: String?
+      attr_accessor source_trace_id: String?
+      attr_accessor destination_trace_ids: Array[String]?
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+        ?filter_expression: String,
+        ?insights_configuration: Types::InsightsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor filter_expression: String?
+      attr_accessor insights_configuration: Types::InsightsConfiguration?
+    end
+
+    class GroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+        ?filter_expression: String,
+        ?insights_configuration: Types::InsightsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor filter_expression: String?
+      attr_accessor insights_configuration: Types::InsightsConfiguration?
+    end
+
+    class HistogramEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor count: Integer?
+    end
+
+    class Http
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_url: String,
+        ?http_status: Integer,
+        ?http_method: String,
+        ?user_agent: String,
+        ?client_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_url: String?
+      attr_accessor http_status: Integer?
+      attr_accessor http_method: String?
+      attr_accessor user_agent: String?
+      attr_accessor client_ip: String?
+    end
+
+    class IndexingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?modified_at: Time,
+        ?rule: Types::IndexingRuleValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor modified_at: Time?
+      attr_accessor rule: Types::IndexingRuleValue?
+    end
+
+    class IndexingRuleValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?probabilistic: Types::ProbabilisticRuleValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probabilistic: Types::ProbabilisticRuleValue?
+
+      class Probabilistic < IndexingRuleValue
+      end
+      class Unknown < IndexingRuleValue
+      end
+    end
+
+    class IndexingRuleValueUpdate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?probabilistic: Types::ProbabilisticRuleValueUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probabilistic: Types::ProbabilisticRuleValueUpdate?
+
+      class Probabilistic < IndexingRuleValueUpdate
+      end
+      class Unknown < IndexingRuleValueUpdate
+      end
+    end
+
+    class Insight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?group_arn: String,
+        ?group_name: String,
+        ?root_cause_service_id: Types::ServiceId,
+        ?categories: Array[String],
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?summary: String,
+        ?client_request_impact_statistics: Types::RequestImpactStatistics,
+        ?root_cause_service_request_impact_statistics: Types::RequestImpactStatistics,
+        ?top_anomalous_services: Array[Types::AnomalousService],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor root_cause_service_id: Types::ServiceId?
+      attr_accessor categories: Array[String]?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor summary: String?
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor top_anomalous_services: Array[Types::AnomalousService]?
+    end
+
+    module InsightCategory
+      FAULT: String
+    end
+
+    class InsightEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: String,
+        ?event_time: Time,
+        ?client_request_impact_statistics: Types::RequestImpactStatistics,
+        ?root_cause_service_request_impact_statistics: Types::RequestImpactStatistics,
+        ?top_anomalous_services: Array[Types::AnomalousService],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: String?
+      attr_accessor event_time: Time?
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor top_anomalous_services: Array[Types::AnomalousService]?
+    end
+
+    class InsightImpactGraphEdge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: Integer?
+    end
+
+    class InsightImpactGraphService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: Integer,
+        ?type: String,
+        ?name: String,
+        ?names: Array[String],
+        ?account_id: String,
+        ?edges: Array[Types::InsightImpactGraphEdge],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: Integer?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor account_id: String?
+      attr_accessor edges: Array[Types::InsightImpactGraphEdge]?
+    end
+
+    module InsightState
+      ACTIVE: String
+      CLOSED: String
+    end
+
+    class InsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?group_arn: String,
+        ?group_name: String,
+        ?root_cause_service_id: Types::ServiceId,
+        ?categories: Array[String],
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?summary: String,
+        ?client_request_impact_statistics: Types::RequestImpactStatistics,
+        ?root_cause_service_request_impact_statistics: Types::RequestImpactStatistics,
+        ?top_anomalous_services: Array[Types::AnomalousService],
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor root_cause_service_id: Types::ServiceId?
+      attr_accessor categories: Array[String]?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor summary: String?
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics?
+      attr_accessor top_anomalous_services: Array[Types::AnomalousService]?
+      attr_accessor last_update_time: Time?
+    end
+
+    class InsightsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_enabled: bool,
+        ?notifications_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_enabled: bool?
+      attr_accessor notifications_enabled: bool?
+    end
+
+    class InstanceIdDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class InvalidPolicyRevisionIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListResourcePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcePoliciesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policies: Array[Types::ResourcePolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policies: Array[Types::ResourcePolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRetrievedTracesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_token: String,
+        ?trace_format: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_token: String?
+      attr_accessor trace_format: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListRetrievedTracesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_status: String,
+        ?trace_format: String,
+        ?traces: Array[Types::RetrievedTrace],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_status: String?
+      attr_accessor trace_format: String?
+      attr_accessor traces: Array[Types::RetrievedTrace]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class LockoutPreventionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyCountLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicySizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ProbabilisticRuleValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_sampling_percentage: Float,
+        ?actual_sampling_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_sampling_percentage: Float?
+      attr_accessor actual_sampling_percentage: Float?
+    end
+
+    class ProbabilisticRuleValueUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_sampling_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_sampling_percentage: Float?
+    end
+
+    class PutEncryptionConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor type: String?
+    end
+
+    class PutEncryptionConfigResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_config: Types::EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_config: Types::EncryptionConfig?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?policy_revision_id: String,
+        ?bypass_policy_lockout_check: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_revision_id: String?
+      attr_accessor bypass_policy_lockout_check: bool?
+    end
+
+    class PutResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+    end
+
+    class PutTelemetryRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_records: Array[Types::TelemetryRecord],
+        ?ec2_instance_id: String,
+        ?hostname: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_records: Array[Types::TelemetryRecord]?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor hostname: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class PutTelemetryRecordsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutTraceSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_segment_documents: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_segment_documents: Array[String]?
+    end
+
+    class PutTraceSegmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unprocessed_trace_segments: Array[Types::UnprocessedTraceSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unprocessed_trace_segments: Array[Types::UnprocessedTraceSegment]?
+    end
+
+    class RequestImpactStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fault_count: Integer,
+        ?ok_count: Integer,
+        ?total_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fault_count: Integer?
+      attr_accessor ok_count: Integer?
+      attr_accessor total_count: Integer?
+    end
+
+    class ResourceARNDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+        ?policy_revision_id: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_revision_id: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class ResponseTimeRootCause
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::ResponseTimeRootCauseService],
+        ?client_impacting: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::ResponseTimeRootCauseService]?
+      attr_accessor client_impacting: bool?
+    end
+
+    class ResponseTimeRootCauseEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?coverage: Float,
+        ?remote: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor coverage: Float?
+      attr_accessor remote: bool?
+    end
+
+    class ResponseTimeRootCauseService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?names: Array[String],
+        ?type: String,
+        ?account_id: String,
+        ?entity_path: Array[Types::ResponseTimeRootCauseEntity],
+        ?inferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor type: String?
+      attr_accessor account_id: String?
+      attr_accessor entity_path: Array[Types::ResponseTimeRootCauseEntity]?
+      attr_accessor inferred: bool?
+    end
+
+    module RetrievalStatus
+      SCHEDULED: String
+      RUNNING: String
+      COMPLETE: String
+      FAILED: String
+      CANCELLED: String
+      TIMEOUT: String
+    end
+
+    class RetrievedService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?links: Array[Types::GraphLink],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor links: Array[Types::GraphLink]?
+    end
+
+    class RetrievedTrace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?duration: Float,
+        ?spans: Array[Types::Span],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor duration: Float?
+      attr_accessor spans: Array[Types::Span]?
+    end
+
+    class RootCauseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class RuleLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SamplingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?resource_arn: String,
+        ?priority: Integer,
+        ?fixed_rate: Float,
+        ?reservoir_size: Integer,
+        ?service_name: String,
+        ?service_type: String,
+        ?host: String,
+        ?http_method: String,
+        ?url_path: String,
+        ?version: Integer,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor priority: Integer?
+      attr_accessor fixed_rate: Float?
+      attr_accessor reservoir_size: Integer?
+      attr_accessor service_name: String?
+      attr_accessor service_type: String?
+      attr_accessor host: String?
+      attr_accessor http_method: String?
+      attr_accessor url_path: String?
+      attr_accessor version: Integer?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SamplingRuleRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule: Types::SamplingRule,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule: Types::SamplingRule?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class SamplingRuleUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?resource_arn: String,
+        ?priority: Integer,
+        ?fixed_rate: Float,
+        ?reservoir_size: Integer,
+        ?host: String,
+        ?service_name: String,
+        ?service_type: String,
+        ?http_method: String,
+        ?url_path: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor priority: Integer?
+      attr_accessor fixed_rate: Float?
+      attr_accessor reservoir_size: Integer?
+      attr_accessor host: String?
+      attr_accessor service_name: String?
+      attr_accessor service_type: String?
+      attr_accessor http_method: String?
+      attr_accessor url_path: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class SamplingStatisticSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?timestamp: Time,
+        ?request_count: Integer,
+        ?borrow_count: Integer,
+        ?sampled_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor request_count: Integer?
+      attr_accessor borrow_count: Integer?
+      attr_accessor sampled_count: Integer?
+    end
+
+    class SamplingStatisticsDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?client_id: String,
+        ?timestamp: Time,
+        ?request_count: Integer,
+        ?sampled_count: Integer,
+        ?borrow_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor client_id: String?
+      attr_accessor timestamp: Time?
+      attr_accessor request_count: Integer?
+      attr_accessor sampled_count: Integer?
+      attr_accessor borrow_count: Integer?
+    end
+
+    class SamplingStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Float?
+    end
+
+    module SamplingStrategyName
+      PartialScan: String
+      FixedRate: String
+    end
+
+    class SamplingTargetDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?fixed_rate: Float,
+        ?reservoir_quota: Integer,
+        ?reservoir_quota_ttl: Time,
+        ?interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor fixed_rate: Float?
+      attr_accessor reservoir_quota: Integer?
+      attr_accessor reservoir_quota_ttl: Time?
+      attr_accessor interval: Integer?
+    end
+
+    class Segment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor document: String?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: Integer,
+        ?name: String,
+        ?names: Array[String],
+        ?root: bool,
+        ?account_id: String,
+        ?type: String,
+        ?state: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?edges: Array[Types::Edge],
+        ?summary_statistics: Types::ServiceStatistics,
+        ?duration_histogram: Array[Types::HistogramEntry],
+        ?response_time_histogram: Array[Types::HistogramEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: Integer?
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor root: bool?
+      attr_accessor account_id: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor edges: Array[Types::Edge]?
+      attr_accessor summary_statistics: Types::ServiceStatistics?
+      attr_accessor duration_histogram: Array[Types::HistogramEntry]?
+      attr_accessor response_time_histogram: Array[Types::HistogramEntry]?
+    end
+
+    class ServiceId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?names: Array[String],
+        ?account_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor names: Array[String]?
+      attr_accessor account_id: String?
+      attr_accessor type: String?
+    end
+
+    class ServiceStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ok_count: Integer,
+        ?error_statistics: Types::ErrorStatistics,
+        ?fault_statistics: Types::FaultStatistics,
+        ?total_count: Integer,
+        ?total_response_time: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ok_count: Integer?
+      attr_accessor error_statistics: Types::ErrorStatistics?
+      attr_accessor fault_statistics: Types::FaultStatistics?
+      attr_accessor total_count: Integer?
+      attr_accessor total_response_time: Float?
+    end
+
+    class Span
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor document: String?
+    end
+
+    class StartTraceRetrievalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trace_ids: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trace_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class StartTraceRetrievalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieval_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieval_token: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TelemetryRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?segments_received_count: Integer,
+        ?segments_sent_count: Integer,
+        ?segments_spillover_count: Integer,
+        ?segments_rejected_count: Integer,
+        ?backend_connection_errors: Types::BackendConnectionErrors,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor segments_received_count: Integer?
+      attr_accessor segments_sent_count: Integer?
+      attr_accessor segments_spillover_count: Integer?
+      attr_accessor segments_rejected_count: Integer?
+      attr_accessor backend_connection_errors: Types::BackendConnectionErrors?
+    end
+
+    class ThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TimeRangeType
+      TraceId: String
+      Event: String
+      Service: String
+    end
+
+    class TimeSeriesServiceStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?edge_summary_statistics: Types::EdgeStatistics,
+        ?service_summary_statistics: Types::ServiceStatistics,
+        ?service_forecast_statistics: Types::ForecastStatistics,
+        ?response_time_histogram: Array[Types::HistogramEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor edge_summary_statistics: Types::EdgeStatistics?
+      attr_accessor service_summary_statistics: Types::ServiceStatistics?
+      attr_accessor service_forecast_statistics: Types::ForecastStatistics?
+      attr_accessor response_time_histogram: Array[Types::HistogramEntry]?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class Trace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?duration: Float,
+        ?limit_exceeded: bool,
+        ?segments: Array[Types::Segment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor duration: Float?
+      attr_accessor limit_exceeded: bool?
+      attr_accessor segments: Array[Types::Segment]?
+    end
+
+    module TraceFormatType
+      XRAY: String
+      OTEL: String
+    end
+
+    module TraceSegmentDestination
+      XRay: String
+      CloudWatchLogs: String
+    end
+
+    module TraceSegmentDestinationStatus
+      PENDING: String
+      ACTIVE: String
+    end
+
+    class TraceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?start_time: Time,
+        ?duration: Float,
+        ?response_time: Float,
+        ?has_fault: bool,
+        ?has_error: bool,
+        ?has_throttle: bool,
+        ?is_partial: bool,
+        ?http: Types::Http,
+        ?annotations: Hash[String, Array[Types::ValueWithServiceIds]],
+        ?users: Array[Types::TraceUser],
+        ?service_ids: Array[Types::ServiceId],
+        ?resource_ar_ns: Array[Types::ResourceARNDetail],
+        ?instance_ids: Array[Types::InstanceIdDetail],
+        ?availability_zones: Array[Types::AvailabilityZoneDetail],
+        ?entry_point: Types::ServiceId,
+        ?fault_root_causes: Array[Types::FaultRootCause],
+        ?error_root_causes: Array[Types::ErrorRootCause],
+        ?response_time_root_causes: Array[Types::ResponseTimeRootCause],
+        ?revision: Integer,
+        ?matched_event_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor start_time: Time?
+      attr_accessor duration: Float?
+      attr_accessor response_time: Float?
+      attr_accessor has_fault: bool?
+      attr_accessor has_error: bool?
+      attr_accessor has_throttle: bool?
+      attr_accessor is_partial: bool?
+      attr_accessor http: Types::Http?
+      attr_accessor annotations: Hash[String, Array[Types::ValueWithServiceIds]]?
+      attr_accessor users: Array[Types::TraceUser]?
+      attr_accessor service_ids: Array[Types::ServiceId]?
+      attr_accessor resource_ar_ns: Array[Types::ResourceARNDetail]?
+      attr_accessor instance_ids: Array[Types::InstanceIdDetail]?
+      attr_accessor availability_zones: Array[Types::AvailabilityZoneDetail]?
+      attr_accessor entry_point: Types::ServiceId?
+      attr_accessor fault_root_causes: Array[Types::FaultRootCause]?
+      attr_accessor error_root_causes: Array[Types::ErrorRootCause]?
+      attr_accessor response_time_root_causes: Array[Types::ResponseTimeRootCause]?
+      attr_accessor revision: Integer?
+      attr_accessor matched_event_time: Time?
+    end
+
+    class TraceUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?service_ids: Array[Types::ServiceId],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor service_ids: Array[Types::ServiceId]?
+    end
+
+    class UnprocessedStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class UnprocessedTraceSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+        ?filter_expression: String,
+        ?insights_configuration: Types::InsightsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor filter_expression: String?
+      attr_accessor insights_configuration: Types::InsightsConfiguration?
+    end
+
+    class UpdateGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class UpdateIndexingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?rule: Types::IndexingRuleValueUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor rule: Types::IndexingRuleValueUpdate?
+    end
+
+    class UpdateIndexingRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexing_rule: Types::IndexingRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexing_rule: Types::IndexingRule?
+    end
+
+    class UpdateSamplingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule_update: Types::SamplingRuleUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule_update: Types::SamplingRuleUpdate?
+    end
+
+    class UpdateSamplingRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling_rule_record: Types::SamplingRuleRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord?
+    end
+
+    class UpdateTraceSegmentDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+    end
+
+    class UpdateTraceSegmentDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor status: String?
+    end
+
+    class ValueWithServiceIds
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_value: Types::AnnotationValue,
+        ?service_ids: Array[Types::ServiceId],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_value: Types::AnnotationValue?
+      attr_accessor service_ids: Array[Types::ServiceId]?
+    end
+  end
+end

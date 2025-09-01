@@ -1,0 +1,646 @@
+module Aws::GroundStation
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GroundStation::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelContactResponse
+      include Smithy::Client::_Response[Types::CancelContactOutput]
+      def contact_id: () -> String?
+    end
+    def cancel_contact: (
+      ?contact_id: String
+    ) -> _CancelContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelContactResponse
+
+    interface _CreateConfigResponse
+      include Smithy::Client::_Response[Types::CreateConfigOutput]
+      def config_id: () -> String?
+      def config_type: () -> String?
+      def config_arn: () -> String?
+    end
+    def create_config: (
+      ?name: String,
+      ?config_data: {
+        antenna_downlink_config: {
+          spectrum_config: {
+            center_frequency: {
+              value: Float,
+              units: String
+            },
+            bandwidth: {
+              value: untyped,
+              units: String
+            },
+            polarization: String
+          }
+        },
+        tracking_config: {
+          autotrack: String
+        },
+        dataflow_endpoint_config: {
+          dataflow_endpoint_name: String,
+          dataflow_endpoint_region: untyped
+        },
+        antenna_downlink_demod_decode_config: {
+          spectrum_config: untyped,
+          demodulation_config: {
+            unvalidated_json: String
+          },
+          decode_config: {
+            unvalidated_json: untyped
+          }
+        },
+        antenna_uplink_config: {
+          transmit_disabled: bool,
+          spectrum_config: {
+            center_frequency: untyped,
+            polarization: untyped
+          },
+          target_eirp: {
+            value: untyped,
+            units: String
+          }
+        },
+        uplink_echo_config: {
+          enabled: untyped,
+          antenna_uplink_config_arn: String
+        },
+        s3_recording_config: {
+          bucket_arn: String,
+          role_arn: String,
+          prefix: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigResponse
+
+    interface _CreateDataflowEndpointGroupResponse
+      include Smithy::Client::_Response[Types::CreateDataflowEndpointGroupOutput]
+      def dataflow_endpoint_group_id: () -> String?
+    end
+    def create_dataflow_endpoint_group: (
+      ?endpoint_details: Array[
+        {
+          security_details: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String],
+            role_arn: String
+          },
+          endpoint: {
+            name: String,
+            address: {
+              name: String,
+              port: Integer
+            },
+            status: String,
+            mtu: untyped
+          },
+          aws_ground_station_agent_endpoint: {
+            name: untyped,
+            egress_address: {
+              socket_address: untyped,
+              mtu: untyped
+            },
+            ingress_address: {
+              socket_address: {
+                name: String,
+                port_range: {
+                  minimum: untyped,
+                  maximum: untyped
+                }
+              },
+              mtu: untyped
+            },
+            agent_status: String,
+            audit_results: String
+          },
+          health_status: String,
+          health_reasons: Array[String]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?contact_pre_pass_duration_seconds: Integer,
+      ?contact_post_pass_duration_seconds: Integer
+    ) -> _CreateDataflowEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataflowEndpointGroupResponse
+
+    interface _CreateEphemerisResponse
+      include Smithy::Client::_Response[Types::CreateEphemerisOutput]
+      def ephemeris_id: () -> String?
+    end
+    def create_ephemeris: (
+      ?satellite_id: String,
+      ?enabled: bool,
+      ?priority: Integer,
+      ?expiration_time: Time,
+      ?name: String,
+      ?kms_key_arn: String,
+      ?ephemeris: {
+        tle: {
+          s3_object: {
+            bucket: String,
+            key: String,
+            version: String
+          },
+          tle_data: Array[
+            {
+              tle_line1: String,
+              tle_line2: String,
+              valid_time_range: {
+                start_time: Time,
+                end_time: untyped
+              }
+            }
+          ]
+        },
+        oem: {
+          s3_object: untyped,
+          oem_data: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateEphemerisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEphemerisResponse
+
+    interface _CreateMissionProfileResponse
+      include Smithy::Client::_Response[Types::CreateMissionProfileOutput]
+      def mission_profile_id: () -> String?
+    end
+    def create_mission_profile: (
+      ?name: String,
+      ?contact_pre_pass_duration_seconds: Integer,
+      ?contact_post_pass_duration_seconds: Integer,
+      ?minimum_viable_contact_duration_seconds: Integer,
+      ?dataflow_edges: Array[
+        Array[String]
+      ],
+      ?tracking_config_arn: String,
+      ?tags: Hash[String, String],
+      ?streams_kms_key: {
+        kms_key_arn: String,
+        kms_alias_arn: String,
+        kms_alias_name: String
+      },
+      ?streams_kms_role: String
+    ) -> _CreateMissionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMissionProfileResponse
+
+    interface _DeleteConfigResponse
+      include Smithy::Client::_Response[Types::DeleteConfigOutput]
+      def config_id: () -> String?
+      def config_type: () -> String?
+      def config_arn: () -> String?
+    end
+    def delete_config: (
+      ?config_id: String,
+      ?config_type: String
+    ) -> _DeleteConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigResponse
+
+    interface _DeleteDataflowEndpointGroupResponse
+      include Smithy::Client::_Response[Types::DeleteDataflowEndpointGroupOutput]
+      def dataflow_endpoint_group_id: () -> String?
+    end
+    def delete_dataflow_endpoint_group: (
+      ?dataflow_endpoint_group_id: String
+    ) -> _DeleteDataflowEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataflowEndpointGroupResponse
+
+    interface _DeleteEphemerisResponse
+      include Smithy::Client::_Response[Types::DeleteEphemerisOutput]
+      def ephemeris_id: () -> String?
+    end
+    def delete_ephemeris: (
+      ?ephemeris_id: String
+    ) -> _DeleteEphemerisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEphemerisResponse
+
+    interface _DeleteMissionProfileResponse
+      include Smithy::Client::_Response[Types::DeleteMissionProfileOutput]
+      def mission_profile_id: () -> String?
+    end
+    def delete_mission_profile: (
+      ?mission_profile_id: String
+    ) -> _DeleteMissionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMissionProfileResponse
+
+    interface _DescribeContactResponse
+      include Smithy::Client::_Response[Types::DescribeContactOutput]
+      def contact_id: () -> String?
+      def mission_profile_arn: () -> String?
+      def satellite_arn: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def pre_pass_start_time: () -> Time?
+      def post_pass_end_time: () -> Time?
+      def ground_station: () -> String?
+      def contact_status: () -> String?
+      def error_message: () -> String?
+      def maximum_elevation: () -> Types::Elevation?
+      def tags: () -> Hash[String, String]?
+      def region: () -> String?
+      def dataflow_list: () -> Array[Types::DataflowDetail]?
+      def visibility_start_time: () -> Time?
+      def visibility_end_time: () -> Time?
+    end
+    def describe_contact: (
+      ?contact_id: String
+    ) -> _DescribeContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactResponse
+
+    interface _DescribeEphemerisResponse
+      include Smithy::Client::_Response[Types::DescribeEphemerisOutput]
+      def ephemeris_id: () -> String?
+      def satellite_id: () -> String?
+      def status: () -> String?
+      def priority: () -> Integer?
+      def creation_time: () -> Time?
+      def enabled: () -> bool?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+      def supplied_data: () -> Types::EphemerisTypeDescription?
+      def invalid_reason: () -> String?
+    end
+    def describe_ephemeris: (
+      ?ephemeris_id: String
+    ) -> _DescribeEphemerisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEphemerisResponse
+
+    interface _GetAgentConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAgentConfigurationOutput]
+      def agent_id: () -> String?
+      def tasking_document: () -> String?
+    end
+    def get_agent_configuration: (
+      ?agent_id: String
+    ) -> _GetAgentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentConfigurationResponse
+
+    interface _GetConfigResponse
+      include Smithy::Client::_Response[Types::GetConfigOutput]
+      def config_id: () -> String?
+      def config_arn: () -> String?
+      def name: () -> String?
+      def config_type: () -> String?
+      def config_data: () -> Types::ConfigTypeData?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_config: (
+      ?config_id: String,
+      ?config_type: String
+    ) -> _GetConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigResponse
+
+    interface _GetDataflowEndpointGroupResponse
+      include Smithy::Client::_Response[Types::GetDataflowEndpointGroupOutput]
+      def dataflow_endpoint_group_id: () -> String?
+      def dataflow_endpoint_group_arn: () -> String?
+      def endpoints_details: () -> Array[Types::EndpointDetails]?
+      def tags: () -> Hash[String, String]?
+      def contact_pre_pass_duration_seconds: () -> Integer?
+      def contact_post_pass_duration_seconds: () -> Integer?
+    end
+    def get_dataflow_endpoint_group: (
+      ?dataflow_endpoint_group_id: String
+    ) -> _GetDataflowEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataflowEndpointGroupResponse
+
+    interface _GetMinuteUsageResponse
+      include Smithy::Client::_Response[Types::GetMinuteUsageOutput]
+      def is_reserved_minutes_customer: () -> bool?
+      def total_reserved_minute_allocation: () -> Integer?
+      def upcoming_minutes_scheduled: () -> Integer?
+      def total_scheduled_minutes: () -> Integer?
+      def estimated_minutes_remaining: () -> Integer?
+    end
+    def get_minute_usage: (
+      ?month: Integer,
+      ?year: Integer
+    ) -> _GetMinuteUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMinuteUsageResponse
+
+    interface _GetMissionProfileResponse
+      include Smithy::Client::_Response[Types::GetMissionProfileOutput]
+      def mission_profile_id: () -> String?
+      def mission_profile_arn: () -> String?
+      def name: () -> String?
+      def region: () -> String?
+      def contact_pre_pass_duration_seconds: () -> Integer?
+      def contact_post_pass_duration_seconds: () -> Integer?
+      def minimum_viable_contact_duration_seconds: () -> Integer?
+      def dataflow_edges: () -> Array[Array[String]]?
+      def tracking_config_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def streams_kms_key: () -> Types::KmsKey?
+      def streams_kms_role: () -> String?
+    end
+    def get_mission_profile: (
+      ?mission_profile_id: String
+    ) -> _GetMissionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMissionProfileResponse
+
+    interface _GetSatelliteResponse
+      include Smithy::Client::_Response[Types::GetSatelliteOutput]
+      def satellite_id: () -> String?
+      def satellite_arn: () -> String?
+      def norad_satellite_id: () -> Integer?
+      def ground_stations: () -> Array[String]?
+      def current_ephemeris: () -> Types::EphemerisMetaData?
+    end
+    def get_satellite: (
+      ?satellite_id: String
+    ) -> _GetSatelliteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSatelliteResponse
+
+    interface _ListConfigsResponse
+      include Smithy::Client::_Response[Types::ListConfigsOutput]
+      def next_token: () -> String?
+      def config_list: () -> Array[Types::ConfigListItem]?
+    end
+    def list_configs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigsResponse
+
+    interface _ListContactsResponse
+      include Smithy::Client::_Response[Types::ListContactsOutput]
+      def next_token: () -> String?
+      def contact_list: () -> Array[Types::ContactData]?
+    end
+    def list_contacts: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status_list: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?ground_station: String,
+      ?satellite_arn: String,
+      ?mission_profile_arn: String
+    ) -> _ListContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactsResponse
+
+    interface _ListDataflowEndpointGroupsResponse
+      include Smithy::Client::_Response[Types::ListDataflowEndpointGroupsOutput]
+      def next_token: () -> String?
+      def dataflow_endpoint_group_list: () -> Array[Types::DataflowEndpointListItem]?
+    end
+    def list_dataflow_endpoint_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataflowEndpointGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataflowEndpointGroupsResponse
+
+    interface _ListEphemeridesResponse
+      include Smithy::Client::_Response[Types::ListEphemeridesOutput]
+      def next_token: () -> String?
+      def ephemerides: () -> Array[Types::EphemerisItem]?
+    end
+    def list_ephemerides: (
+      ?satellite_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?status_list: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEphemeridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEphemeridesResponse
+
+    interface _ListGroundStationsResponse
+      include Smithy::Client::_Response[Types::ListGroundStationsOutput]
+      def next_token: () -> String?
+      def ground_station_list: () -> Array[Types::GroundStationData]?
+    end
+    def list_ground_stations: (
+      ?satellite_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGroundStationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroundStationsResponse
+
+    interface _ListMissionProfilesResponse
+      include Smithy::Client::_Response[Types::ListMissionProfilesOutput]
+      def next_token: () -> String?
+      def mission_profile_list: () -> Array[Types::MissionProfileListItem]?
+    end
+    def list_mission_profiles: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMissionProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMissionProfilesResponse
+
+    interface _ListSatellitesResponse
+      include Smithy::Client::_Response[Types::ListSatellitesOutput]
+      def next_token: () -> String?
+      def satellites: () -> Array[Types::SatelliteListItem]?
+    end
+    def list_satellites: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSatellitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSatellitesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterAgentResponse
+      include Smithy::Client::_Response[Types::RegisterAgentOutput]
+      def agent_id: () -> String?
+    end
+    def register_agent: (
+      ?discovery_data: {
+        public_ip_addresses: Array[String],
+        private_ip_addresses: untyped,
+        capability_arns: Array[String]
+      },
+      ?agent_details: {
+        agent_version: String,
+        instance_id: String,
+        instance_type: String,
+        reserved_cpu_cores: Array[Integer],
+        agent_cpu_cores: untyped,
+        component_versions: Array[
+          {
+            component_type: String,
+            versions: Array[String]
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _RegisterAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAgentResponse
+
+    interface _ReserveContactResponse
+      include Smithy::Client::_Response[Types::ReserveContactOutput]
+      def contact_id: () -> String?
+    end
+    def reserve_contact: (
+      ?mission_profile_arn: String,
+      ?satellite_arn: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?ground_station: String,
+      ?tags: Hash[String, String]
+    ) -> _ReserveContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReserveContactResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAgentStatusOutput]
+      def agent_id: () -> String?
+    end
+    def update_agent_status: (
+      ?agent_id: String,
+      ?task_id: String,
+      ?aggregate_status: {
+        status: String,
+        signature_map: Hash[String, bool]
+      },
+      ?component_statuses: Array[
+        {
+          component_type: String,
+          capability_arn: String,
+          status: String,
+          bytes_sent: Integer,
+          bytes_received: untyped,
+          packets_dropped: untyped,
+          dataflow_id: String
+        }
+      ]
+    ) -> _UpdateAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentStatusResponse
+
+    interface _UpdateConfigResponse
+      include Smithy::Client::_Response[Types::UpdateConfigOutput]
+      def config_id: () -> String?
+      def config_type: () -> String?
+      def config_arn: () -> String?
+    end
+    def update_config: (
+      ?config_id: String,
+      ?name: String,
+      ?config_type: String,
+      ?config_data: {
+        antenna_downlink_config: {
+          spectrum_config: {
+            center_frequency: {
+              value: Float,
+              units: String
+            },
+            bandwidth: {
+              value: untyped,
+              units: String
+            },
+            polarization: String
+          }
+        },
+        tracking_config: {
+          autotrack: String
+        },
+        dataflow_endpoint_config: {
+          dataflow_endpoint_name: String,
+          dataflow_endpoint_region: untyped
+        },
+        antenna_downlink_demod_decode_config: {
+          spectrum_config: untyped,
+          demodulation_config: {
+            unvalidated_json: String
+          },
+          decode_config: {
+            unvalidated_json: untyped
+          }
+        },
+        antenna_uplink_config: {
+          transmit_disabled: bool,
+          spectrum_config: {
+            center_frequency: untyped,
+            polarization: untyped
+          },
+          target_eirp: {
+            value: untyped,
+            units: String
+          }
+        },
+        uplink_echo_config: {
+          enabled: untyped,
+          antenna_uplink_config_arn: String
+        },
+        s3_recording_config: {
+          bucket_arn: String,
+          role_arn: String,
+          prefix: String
+        }
+      }
+    ) -> _UpdateConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigResponse
+
+    interface _UpdateEphemerisResponse
+      include Smithy::Client::_Response[Types::UpdateEphemerisOutput]
+      def ephemeris_id: () -> String?
+    end
+    def update_ephemeris: (
+      ?ephemeris_id: String,
+      ?enabled: bool,
+      ?name: String,
+      ?priority: Integer
+    ) -> _UpdateEphemerisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEphemerisResponse
+
+    interface _UpdateMissionProfileResponse
+      include Smithy::Client::_Response[Types::UpdateMissionProfileOutput]
+      def mission_profile_id: () -> String?
+    end
+    def update_mission_profile: (
+      ?mission_profile_id: String,
+      ?name: String,
+      ?contact_pre_pass_duration_seconds: Integer,
+      ?contact_post_pass_duration_seconds: Integer,
+      ?minimum_viable_contact_duration_seconds: Integer,
+      ?dataflow_edges: Array[
+        Array[String]
+      ],
+      ?tracking_config_arn: String,
+      ?streams_kms_key: {
+        kms_key_arn: String,
+        kms_alias_arn: String,
+        kms_alias_name: String
+      },
+      ?streams_kms_role: String
+    ) -> _UpdateMissionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMissionProfileResponse
+  end
+end

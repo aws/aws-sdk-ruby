@@ -1,0 +1,5 @@
+  module Aws
+    module Pipes
+      VERSION: String
+    end
+  end

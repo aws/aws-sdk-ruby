@@ -1,0 +1,346 @@
+module Aws::IoTSecureTunneling
+  module Types
+
+    module ClientMode
+      SOURCE: String
+      DESTINATION: String
+      ALL: String
+    end
+
+    class CloseTunnelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+        ?delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+      attr_accessor delete: bool?
+    end
+
+    class CloseTunnelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConnectionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    module ConnectionStatus
+      CONNECTED: String
+      DISCONNECTED: String
+    end
+
+    class DescribeTunnelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+    end
+
+    class DescribeTunnelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel: Types::Tunnel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel: Types::Tunnel?
+    end
+
+    class DestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor services: Array[String]?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTunnelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTunnelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_summaries: Array[Types::TunnelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_summaries: Array[Types::TunnelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class OpenTunnelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?destination_config: Types::DestinationConfig,
+        ?timeout_config: Types::TimeoutConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor destination_config: Types::DestinationConfig?
+      attr_accessor timeout_config: Types::TimeoutConfig?
+    end
+
+    class OpenTunnelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+        ?tunnel_arn: String,
+        ?source_access_token: String,
+        ?destination_access_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+      attr_accessor tunnel_arn: String?
+      attr_accessor source_access_token: String?
+      attr_accessor destination_access_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RotateTunnelAccessTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+        ?client_mode: String,
+        ?destination_config: Types::DestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+      attr_accessor client_mode: String?
+      attr_accessor destination_config: Types::DestinationConfig?
+    end
+
+    class RotateTunnelAccessTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_arn: String,
+        ?source_access_token: String,
+        ?destination_access_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_arn: String?
+      attr_accessor source_access_token: String?
+      attr_accessor destination_access_token: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TimeoutConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_lifetime_timeout_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_lifetime_timeout_minutes: Integer?
+    end
+
+    class Tunnel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+        ?tunnel_arn: String,
+        ?status: String,
+        ?source_connection_state: Types::ConnectionState,
+        ?destination_connection_state: Types::ConnectionState,
+        ?description: String,
+        ?destination_config: Types::DestinationConfig,
+        ?timeout_config: Types::TimeoutConfig,
+        ?tags: Array[Types::Tag],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+      attr_accessor tunnel_arn: String?
+      attr_accessor status: String?
+      attr_accessor source_connection_state: Types::ConnectionState?
+      attr_accessor destination_connection_state: Types::ConnectionState?
+      attr_accessor description: String?
+      attr_accessor destination_config: Types::DestinationConfig?
+      attr_accessor timeout_config: Types::TimeoutConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    module TunnelStatus
+      OPEN: String
+      CLOSED: String
+    end
+
+    class TunnelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tunnel_id: String,
+        ?tunnel_arn: String,
+        ?status: String,
+        ?description: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tunnel_id: String?
+      attr_accessor tunnel_arn: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

@@ -1,0 +1,618 @@
+module Aws::M2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::M2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelBatchJobExecutionResponse
+      include Smithy::Client::_Response[Types::CancelBatchJobExecutionOutput]
+    end
+    def cancel_batch_job_execution: (
+      ?application_id: String,
+      ?execution_id: String,
+      ?auth_secrets_manager_arn: String
+    ) -> _CancelBatchJobExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelBatchJobExecutionResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def application_arn: () -> String?
+      def application_id: () -> String?
+      def application_version: () -> Integer?
+    end
+    def create_application: (
+      ?name: String,
+      ?description: String,
+      ?engine_type: String,
+      ?definition: {
+        s3_location: String,
+        content: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?kms_key_id: String,
+      ?role_arn: String
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateDataSetExportTaskResponse
+      include Smithy::Client::_Response[Types::CreateDataSetExportTaskResponse]
+      def task_id: () -> String?
+    end
+    def create_data_set_export_task: (
+      ?application_id: String,
+      ?export_config: {
+        s3_location: String,
+        data_sets: Array[
+          {
+            dataset_name: String,
+            external_location: {
+              s3_location: String
+            }
+          }
+        ]
+      },
+      ?client_token: String,
+      ?kms_key_id: String
+    ) -> _CreateDataSetExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSetExportTaskResponse
+
+    interface _CreateDataSetImportTaskResponse
+      include Smithy::Client::_Response[Types::CreateDataSetImportTaskOutput]
+      def task_id: () -> String?
+    end
+    def create_data_set_import_task: (
+      ?application_id: String,
+      ?import_config: {
+        s3_location: String,
+        data_sets: Array[
+          {
+            data_set: {
+              storage_type: String,
+              dataset_name: untyped,
+              dataset_org: {
+                vsam: {
+                  format: untyped,
+                  encoding: untyped,
+                  compressed: bool,
+                  primary_key: {
+                    name: untyped,
+                    offset: Integer,
+                    length: untyped
+                  },
+                  alternate_keys: Array[
+                    {
+                      name: untyped,
+                      offset: untyped,
+                      length: untyped,
+                      allow_duplicates: untyped
+                    }
+                  ]
+                },
+                gdg: {
+                  limit: untyped,
+                  roll_disposition: untyped
+                },
+                po: {
+                  format: untyped,
+                  encoding: untyped,
+                  member_file_extensions: Array[String]
+                },
+                ps: {
+                  format: untyped,
+                  encoding: untyped
+                }
+              },
+              relative_path: untyped,
+              record_length: {
+                min: untyped,
+                max: untyped
+              }
+            },
+            external_location: {
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _CreateDataSetImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSetImportTaskResponse
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentOutput]
+      def deployment_id: () -> String?
+    end
+    def create_deployment: (
+      ?environment_id: String,
+      ?application_id: String,
+      ?application_version: Integer,
+      ?client_token: String
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentOutput]
+      def environment_id: () -> String?
+    end
+    def create_environment: (
+      ?name: String,
+      ?instance_type: String,
+      ?description: String,
+      ?engine_type: String,
+      ?engine_version: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?storage_configurations: Array[
+        {
+          efs: {
+            file_system_id: String,
+            mount_point: untyped
+          },
+          fsx: {
+            file_system_id: untyped,
+            mount_point: untyped
+          }
+        }
+      ],
+      ?publicly_accessible: bool,
+      ?high_availability_config: {
+        desired_capacity: Integer
+      },
+      ?tags: Hash[String, String],
+      ?preferred_maintenance_window: String,
+      ?network_type: String,
+      ?client_token: String,
+      ?kms_key_id: String
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationOutput]
+    end
+    def delete_application: (
+      ?application_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteApplicationFromEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationFromEnvironmentOutput]
+    end
+    def delete_application_from_environment: (
+      ?application_id: String,
+      ?environment_id: String
+    ) -> _DeleteApplicationFromEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationFromEnvironmentResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentOutput]
+    end
+    def delete_environment: (
+      ?environment_id: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOutput]
+      def name: () -> String?
+      def description: () -> String?
+      def application_id: () -> String?
+      def application_arn: () -> String?
+      def status: () -> String?
+      def latest_version: () -> Types::ApplicationVersionSummary?
+      def deployed_version: () -> Types::DeployedVersionSummary?
+      def engine_type: () -> String?
+      def log_groups: () -> Array[Types::LogGroupSummary]?
+      def creation_time: () -> Time?
+      def last_start_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def environment_id: () -> String?
+      def target_group_arns: () -> Array[String]?
+      def listener_arns: () -> Array[String]?
+      def listener_ports: () -> Array[Integer]?
+      def load_balancer_dns_name: () -> String?
+      def status_reason: () -> String?
+      def kms_key_id: () -> String?
+      def role_arn: () -> String?
+    end
+    def get_application: (
+      ?application_id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetApplicationVersionResponse
+      include Smithy::Client::_Response[Types::GetApplicationVersionOutput]
+      def name: () -> String?
+      def application_version: () -> Integer?
+      def description: () -> String?
+      def definition_content: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def status_reason: () -> String?
+    end
+    def get_application_version: (
+      ?application_id: String,
+      ?application_version: Integer
+    ) -> _GetApplicationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationVersionResponse
+
+    interface _GetBatchJobExecutionResponse
+      include Smithy::Client::_Response[Types::GetBatchJobExecutionOutput]
+      def execution_id: () -> String?
+      def application_id: () -> String?
+      def job_id: () -> String?
+      def job_name: () -> String?
+      def job_user: () -> String?
+      def job_type: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def status_reason: () -> String?
+      def return_code: () -> String?
+      def batch_job_identifier: () -> Types::BatchJobIdentifier?
+      def job_step_restart_marker: () -> Types::JobStepRestartMarker?
+    end
+    def get_batch_job_execution: (
+      ?application_id: String,
+      ?execution_id: String
+    ) -> _GetBatchJobExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchJobExecutionResponse
+
+    interface _GetDataSetDetailsResponse
+      include Smithy::Client::_Response[Types::GetDataSetDetailsResponse]
+      def data_set_name: () -> String?
+      def data_set_org: () -> Types::DatasetDetailOrgAttributes?
+      def record_length: () -> Integer?
+      def location: () -> String?
+      def blocksize: () -> Integer?
+      def creation_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def last_referenced_time: () -> Time?
+      def file_size: () -> Integer?
+    end
+    def get_data_set_details: (
+      ?application_id: String,
+      ?data_set_name: String
+    ) -> _GetDataSetDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSetDetailsResponse
+
+    interface _GetDataSetExportTaskResponse
+      include Smithy::Client::_Response[Types::GetDataSetExportTaskResponse]
+      def task_id: () -> String?
+      def status: () -> String?
+      def summary: () -> Types::DataSetExportSummary?
+      def status_reason: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def get_data_set_export_task: (
+      ?application_id: String,
+      ?task_id: String
+    ) -> _GetDataSetExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSetExportTaskResponse
+
+    interface _GetDataSetImportTaskResponse
+      include Smithy::Client::_Response[Types::GetDataSetImportTaskOutput]
+      def task_id: () -> String?
+      def status: () -> String?
+      def summary: () -> Types::DataSetImportSummary?
+    end
+    def get_data_set_import_task: (
+      ?application_id: String,
+      ?task_id: String
+    ) -> _GetDataSetImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSetImportTaskResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentOutput]
+      def deployment_id: () -> String?
+      def application_id: () -> String?
+      def environment_id: () -> String?
+      def application_version: () -> Integer?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def status_reason: () -> String?
+    end
+    def get_deployment: (
+      ?deployment_id: String,
+      ?application_id: String
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentOutput]
+      def name: () -> String?
+      def description: () -> String?
+      def environment_arn: () -> String?
+      def environment_id: () -> String?
+      def instance_type: () -> String?
+      def status: () -> String?
+      def engine_type: () -> String?
+      def engine_version: () -> String?
+      def vpc_id: () -> String?
+      def subnet_ids: () -> Array[String]?
+      def security_group_ids: () -> Array[String]?
+      def creation_time: () -> Time?
+      def storage_configurations: () -> Array[Types::StorageConfiguration]?
+      def tags: () -> Hash[String, String]?
+      def high_availability_config: () -> Types::HighAvailabilityConfig?
+      def publicly_accessible: () -> bool?
+      def actual_capacity: () -> Integer?
+      def load_balancer_arn: () -> String?
+      def status_reason: () -> String?
+      def preferred_maintenance_window: () -> String?
+      def pending_maintenance: () -> Types::PendingMaintenance?
+      def kms_key_id: () -> String?
+      def network_type: () -> String?
+    end
+    def get_environment: (
+      ?environment_id: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetSignedBluinsightsUrlResponse
+      include Smithy::Client::_Response[Types::GetSignedBluinsightsUrlResponse]
+      def signed_bi_url: () -> String?
+    end
+    def get_signed_bluinsights_url: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSignedBluinsightsUrlResponse
+
+    interface _ListApplicationVersionsResponse
+      include Smithy::Client::_Response[Types::ListApplicationVersionsResponse]
+      def application_versions: () -> Array[Types::ApplicationVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_application_versions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String
+    ) -> _ListApplicationVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationVersionsResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def applications: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?names: Array[String],
+      ?environment_id: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListBatchJobDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListBatchJobDefinitionsResponse]
+      def batch_job_definitions: () -> Array[Types::BatchJobDefinition]?
+      def next_token: () -> String?
+    end
+    def list_batch_job_definitions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String,
+      ?prefix: String
+    ) -> _ListBatchJobDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchJobDefinitionsResponse
+
+    interface _ListBatchJobExecutionsResponse
+      include Smithy::Client::_Response[Types::ListBatchJobExecutionsOutput]
+      def batch_job_executions: () -> Array[Types::BatchJobExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_batch_job_executions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String,
+      ?execution_ids: Array[String],
+      ?job_name: String,
+      ?status: String,
+      ?started_after: Time,
+      ?started_before: Time
+    ) -> _ListBatchJobExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchJobExecutionsResponse
+
+    interface _ListBatchJobRestartPointsResponse
+      include Smithy::Client::_Response[Types::ListBatchJobRestartPointsResponse]
+      def batch_job_steps: () -> Array[Types::JobStep]?
+    end
+    def list_batch_job_restart_points: (
+      ?application_id: String,
+      ?execution_id: String,
+      ?auth_secrets_manager_arn: String
+    ) -> _ListBatchJobRestartPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchJobRestartPointsResponse
+
+    interface _ListDataSetExportHistoryResponse
+      include Smithy::Client::_Response[Types::ListDataSetExportHistoryResponse]
+      def data_set_export_tasks: () -> Array[Types::DataSetExportTask]?
+      def next_token: () -> String?
+    end
+    def list_data_set_export_history: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String
+    ) -> _ListDataSetExportHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSetExportHistoryResponse
+
+    interface _ListDataSetImportHistoryResponse
+      include Smithy::Client::_Response[Types::ListDataSetImportHistoryResponse]
+      def data_set_import_tasks: () -> Array[Types::DataSetImportTask]?
+      def next_token: () -> String?
+    end
+    def list_data_set_import_history: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String
+    ) -> _ListDataSetImportHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSetImportHistoryResponse
+
+    interface _ListDataSetsResponse
+      include Smithy::Client::_Response[Types::ListDataSetsResponse]
+      def data_sets: () -> Array[Types::DataSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_sets: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?prefix: String,
+      ?name_filter: String
+    ) -> _ListDataSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSetsResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsResponse]
+      def deployments: () -> Array[Types::DeploymentSummary]?
+      def next_token: () -> String?
+    end
+    def list_deployments: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?application_id: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListEngineVersionsResponse
+      include Smithy::Client::_Response[Types::ListEngineVersionsOutput]
+      def engine_versions: () -> Array[Types::EngineVersionsSummary]?
+      def next_token: () -> String?
+    end
+    def list_engine_versions: (
+      ?engine_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEngineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngineVersionsResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsResponse]
+      def environments: () -> Array[Types::EnvironmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?names: Array[String],
+      ?engine_type: String
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartApplicationResponse
+      include Smithy::Client::_Response[Types::StartApplicationOutput]
+    end
+    def start_application: (
+      ?application_id: String
+    ) -> _StartApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationResponse
+
+    interface _StartBatchJobResponse
+      include Smithy::Client::_Response[Types::StartBatchJobOutput]
+      def execution_id: () -> String?
+    end
+    def start_batch_job: (
+      ?application_id: String,
+      ?batch_job_identifier: {
+        file_batch_job_identifier: {
+          file_name: String,
+          folder_path: untyped
+        },
+        script_batch_job_identifier: {
+          script_name: untyped
+        },
+        s3_batch_job_identifier: {
+          bucket: untyped,
+          key_prefix: untyped,
+          identifier: {
+            file_name: untyped,
+            script_name: untyped
+          }
+        },
+        restart_batch_job_identifier: {
+          execution_id: String,
+          job_step_restart_marker: {
+            from_step: untyped,
+            from_proc_step: untyped,
+            to_step: untyped,
+            to_proc_step: untyped,
+            step_checkpoint: Integer,
+            skip: bool
+          }
+        }
+      },
+      ?job_params: Hash[String, String],
+      ?auth_secrets_manager_arn: String
+    ) -> _StartBatchJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBatchJobResponse
+
+    interface _StopApplicationResponse
+      include Smithy::Client::_Response[Types::StopApplicationOutput]
+    end
+    def stop_application: (
+      ?application_id: String,
+      ?force_stop: bool
+    ) -> _StopApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopApplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationOutput]
+      def application_version: () -> Integer?
+    end
+    def update_application: (
+      ?application_id: String,
+      ?description: String,
+      ?current_application_version: Integer,
+      ?definition: {
+        s3_location: String,
+        content: String
+      }
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentOutput]
+      def environment_id: () -> String?
+    end
+    def update_environment: (
+      ?environment_id: String,
+      ?desired_capacity: Integer,
+      ?instance_type: String,
+      ?engine_version: String,
+      ?preferred_maintenance_window: String,
+      ?apply_during_maintenance_window: bool,
+      ?force_update: bool
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+  end
+end

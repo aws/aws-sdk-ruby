@@ -1,0 +1,1347 @@
+module Aws::Mgn
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Mgn::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ArchiveApplicationResponse
+      include Smithy::Client::_Response[Types::ArchiveApplicationOutput]
+      def application_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def application_aggregated_status: () -> Types::ApplicationAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+      def wave_id: () -> String?
+    end
+    def archive_application: (
+      ?application_id: String,
+      ?account_id: String
+    ) -> _ArchiveApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ArchiveApplicationResponse
+
+    interface _ArchiveWaveResponse
+      include Smithy::Client::_Response[Types::ArchiveWaveOutput]
+      def wave_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def wave_aggregated_status: () -> Types::WaveAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def archive_wave: (
+      ?wave_id: String,
+      ?account_id: String
+    ) -> _ArchiveWaveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ArchiveWaveResponse
+
+    interface _AssociateApplicationsResponse
+      include Smithy::Client::_Response[Types::AssociateApplicationsOutput]
+    end
+    def associate_applications: (
+      ?wave_id: String,
+      ?application_i_ds: Array[String],
+      ?account_id: String
+    ) -> _AssociateApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApplicationsResponse
+
+    interface _AssociateSourceServersResponse
+      include Smithy::Client::_Response[Types::AssociateSourceServersOutput]
+    end
+    def associate_source_servers: (
+      ?application_id: String,
+      ?source_server_i_ds: Array[String],
+      ?account_id: String
+    ) -> _AssociateSourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceServersResponse
+
+    interface _ChangeServerLifeCycleStateResponse
+      include Smithy::Client::_Response[Types::ChangeServerLifeCycleStateOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def change_server_life_cycle_state: (
+      ?source_server_id: String,
+      ?life_cycle: {
+        state: String
+      },
+      ?account_id: String
+    ) -> _ChangeServerLifeCycleStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangeServerLifeCycleStateResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def application_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def application_aggregated_status: () -> Types::ApplicationAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+      def wave_id: () -> String?
+    end
+    def create_application: (
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?account_id: String
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorOutput]
+      def connector_id: () -> String?
+      def name: () -> String?
+      def ssm_instance_id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def ssm_command_config: () -> Types::ConnectorSsmCommandConfig?
+    end
+    def create_connector: (
+      ?name: String,
+      ?ssm_instance_id: String,
+      ?tags: Hash[String, String],
+      ?ssm_command_config: {
+        s3_output_enabled: bool,
+        output_s3_bucket_name: String,
+        cloud_watch_output_enabled: untyped,
+        cloud_watch_log_group_name: String
+      }
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
+    interface _CreateLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::CreateLaunchConfigurationTemplateOutput]
+      def launch_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def post_launch_actions: () -> Types::PostLaunchActions?
+      def enable_map_auto_tagging: () -> bool?
+      def map_auto_tagging_mpe_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def associate_public_ip_address: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def boot_mode: () -> String?
+      def small_volume_max_size: () -> Integer?
+      def small_volume_conf: () -> Types::LaunchTemplateDiskConf?
+      def large_volume_conf: () -> Types::LaunchTemplateDiskConf?
+    end
+    def create_launch_configuration_template: (
+      ?post_launch_actions: {
+        deployment: String,
+        s3_log_bucket: String,
+        s3_output_key_prefix: String,
+        cloud_watch_log_group_name: String,
+        ssm_documents: Array[
+          {
+            action_name: untyped,
+            ssm_document_name: String,
+            timeout_seconds: Integer,
+            must_succeed_for_cutover: bool,
+            parameters: Hash[String,
+              Array[
+                {
+                  parameter_type: String,
+                  parameter_name: String
+                }
+              ]
+            ],
+            external_parameters: Hash[String,
+              {
+                dynamic_path: String
+              }
+            ]
+          }
+        ]
+      },
+      ?enable_map_auto_tagging: bool,
+      ?map_auto_tagging_mpe_id: String,
+      ?tags: Hash[String, String],
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?associate_public_ip_address: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?boot_mode: String,
+      ?small_volume_max_size: Integer,
+      ?small_volume_conf: {
+        volume_type: String,
+        iops: Integer,
+        throughput: Integer
+      },
+      ?large_volume_conf: {
+        volume_type: String,
+        iops: Integer,
+        throughput: Integer
+      }
+    ) -> _CreateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchConfigurationTemplateResponse
+
+    interface _CreateReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::CreateReplicationConfigurationTemplateOutput]
+      def replication_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def use_fips_endpoint: () -> bool?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_replication_configuration_template: (
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?use_fips_endpoint: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigurationTemplateResponse
+
+    interface _CreateWaveResponse
+      include Smithy::Client::_Response[Types::CreateWaveOutput]
+      def wave_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def wave_aggregated_status: () -> Types::WaveAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_wave: (
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?account_id: String
+    ) -> _CreateWaveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWaveResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationOutput]
+    end
+    def delete_application: (
+      ?application_id: String,
+      ?account_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector: (
+      ?connector_id: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
+    interface _DeleteJobResponse
+      include Smithy::Client::_Response[Types::DeleteJobOutput]
+    end
+    def delete_job: (
+      ?job_id: String,
+      ?account_id: String
+    ) -> _DeleteJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobResponse
+
+    interface _DeleteLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteLaunchConfigurationTemplateOutput]
+    end
+    def delete_launch_configuration_template: (
+      ?launch_configuration_template_id: String
+    ) -> _DeleteLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLaunchConfigurationTemplateResponse
+
+    interface _DeleteReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationConfigurationTemplateOutput]
+    end
+    def delete_replication_configuration_template: (
+      ?replication_configuration_template_id: String
+    ) -> _DeleteReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationConfigurationTemplateResponse
+
+    interface _DeleteSourceServerResponse
+      include Smithy::Client::_Response[Types::DeleteSourceServerOutput]
+    end
+    def delete_source_server: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _DeleteSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSourceServerResponse
+
+    interface _DeleteVcenterClientResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vcenter_client: (
+      ?vcenter_client_id: String
+    ) -> _DeleteVcenterClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVcenterClientResponse
+
+    interface _DeleteWaveResponse
+      include Smithy::Client::_Response[Types::DeleteWaveOutput]
+    end
+    def delete_wave: (
+      ?wave_id: String,
+      ?account_id: String
+    ) -> _DeleteWaveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWaveResponse
+
+    interface _DescribeJobLogItemsResponse
+      include Smithy::Client::_Response[Types::DescribeJobLogItemsOutput]
+      def items: () -> Array[Types::JobLog]?
+      def next_token: () -> String?
+    end
+    def describe_job_log_items: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _DescribeJobLogItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobLogItemsResponse
+
+    interface _DescribeJobsResponse
+      include Smithy::Client::_Response[Types::DescribeJobsOutput]
+      def items: () -> Array[Types::Job]?
+      def next_token: () -> String?
+    end
+    def describe_jobs: (
+      ?filters: {
+        job_i_ds: Array[String],
+        from_date: String,
+        to_date: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _DescribeJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobsResponse
+
+    interface _DescribeLaunchConfigurationTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeLaunchConfigurationTemplatesOutput]
+      def items: () -> Array[Types::LaunchConfigurationTemplate]?
+      def next_token: () -> String?
+    end
+    def describe_launch_configuration_templates: (
+      ?launch_configuration_template_i_ds: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeLaunchConfigurationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLaunchConfigurationTemplatesResponse
+
+    interface _DescribeReplicationConfigurationTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationConfigurationTemplatesOutput]
+      def items: () -> Array[Types::ReplicationConfigurationTemplate]?
+      def next_token: () -> String?
+    end
+    def describe_replication_configuration_templates: (
+      ?replication_configuration_template_i_ds: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeReplicationConfigurationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationConfigurationTemplatesResponse
+
+    interface _DescribeSourceServersResponse
+      include Smithy::Client::_Response[Types::DescribeSourceServersOutput]
+      def items: () -> Array[Types::SourceServer]?
+      def next_token: () -> String?
+    end
+    def describe_source_servers: (
+      ?filters: {
+        source_server_i_ds: Array[String],
+        is_archived: bool,
+        replication_types: Array[String],
+        life_cycle_states: Array[String],
+        application_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _DescribeSourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSourceServersResponse
+
+    interface _DescribeVcenterClientsResponse
+      include Smithy::Client::_Response[Types::DescribeVcenterClientsOutput]
+      def items: () -> Array[Types::VcenterClient]?
+      def next_token: () -> String?
+    end
+    def describe_vcenter_clients: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeVcenterClientsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVcenterClientsResponse
+
+    interface _DisassociateApplicationsResponse
+      include Smithy::Client::_Response[Types::DisassociateApplicationsOutput]
+    end
+    def disassociate_applications: (
+      ?wave_id: String,
+      ?application_i_ds: Array[String],
+      ?account_id: String
+    ) -> _DisassociateApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApplicationsResponse
+
+    interface _DisassociateSourceServersResponse
+      include Smithy::Client::_Response[Types::DisassociateSourceServersOutput]
+    end
+    def disassociate_source_servers: (
+      ?application_id: String,
+      ?source_server_i_ds: Array[String],
+      ?account_id: String
+    ) -> _DisassociateSourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceServersResponse
+
+    interface _DisconnectFromServiceResponse
+      include Smithy::Client::_Response[Types::DisconnectFromServiceOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def disconnect_from_service: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _DisconnectFromServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisconnectFromServiceResponse
+
+    interface _FinalizeCutoverResponse
+      include Smithy::Client::_Response[Types::FinalizeCutoverOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def finalize_cutover: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _FinalizeCutoverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FinalizeCutoverResponse
+
+    interface _GetLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLaunchConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def boot_mode: () -> String?
+      def post_launch_actions: () -> Types::PostLaunchActions?
+      def enable_map_auto_tagging: () -> bool?
+      def map_auto_tagging_mpe_id: () -> String?
+    end
+    def get_launch_configuration: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _GetLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLaunchConfigurationResponse
+
+    interface _GetReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetReplicationConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def replicated_disks: () -> Array[Types::ReplicationConfigurationReplicatedDisk]?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def use_fips_endpoint: () -> bool?
+    end
+    def get_replication_configuration: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _GetReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReplicationConfigurationResponse
+
+    interface _InitializeServiceResponse
+      include Smithy::Client::_Response[Types::InitializeServiceOutput]
+    end
+    def initialize_service: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitializeServiceResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOutput]
+      def items: () -> Array[Types::Application]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?filters: {
+        application_i_ds: Array[String],
+        is_archived: bool,
+        wave_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def items: () -> Array[Types::Connector]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?filters: {
+        connector_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListExportErrorsResponse
+      include Smithy::Client::_Response[Types::ListExportErrorsOutput]
+      def items: () -> Array[Types::ExportTaskError]?
+      def next_token: () -> String?
+    end
+    def list_export_errors: (
+      ?export_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportErrorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportErrorsResponse
+
+    interface _ListExportsResponse
+      include Smithy::Client::_Response[Types::ListExportsOutput]
+      def items: () -> Array[Types::ExportTask]?
+      def next_token: () -> String?
+    end
+    def list_exports: (
+      ?filters: {
+        export_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportsResponse
+
+    interface _ListImportErrorsResponse
+      include Smithy::Client::_Response[Types::ListImportErrorsOutput]
+      def items: () -> Array[Types::ImportTaskError]?
+      def next_token: () -> String?
+    end
+    def list_import_errors: (
+      ?import_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListImportErrorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportErrorsResponse
+
+    interface _ListImportsResponse
+      include Smithy::Client::_Response[Types::ListImportsOutput]
+      def items: () -> Array[Types::ImportTask]?
+      def next_token: () -> String?
+    end
+    def list_imports: (
+      ?filters: {
+        import_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
+
+    interface _ListManagedAccountsResponse
+      include Smithy::Client::_Response[Types::ListManagedAccountsResponse]
+      def items: () -> Array[Types::ManagedAccount]?
+      def next_token: () -> String?
+    end
+    def list_managed_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListManagedAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedAccountsResponse
+
+    interface _ListSourceServerActionsResponse
+      include Smithy::Client::_Response[Types::ListSourceServerActionsOutput]
+      def items: () -> Array[Types::SourceServerActionDocument]?
+      def next_token: () -> String?
+    end
+    def list_source_server_actions: (
+      ?source_server_id: String,
+      ?filters: {
+        action_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListSourceServerActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceServerActionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateActionsResponse
+      include Smithy::Client::_Response[Types::ListTemplateActionsOutput]
+      def items: () -> Array[Types::TemplateActionDocument]?
+      def next_token: () -> String?
+    end
+    def list_template_actions: (
+      ?launch_configuration_template_id: String,
+      ?filters: {
+        action_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTemplateActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateActionsResponse
+
+    interface _ListWavesResponse
+      include Smithy::Client::_Response[Types::ListWavesOutput]
+      def items: () -> Array[Types::Wave]?
+      def next_token: () -> String?
+    end
+    def list_waves: (
+      ?filters: {
+        wave_i_ds: Array[String],
+        is_archived: bool
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListWavesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWavesResponse
+
+    interface _MarkAsArchivedResponse
+      include Smithy::Client::_Response[Types::MarkAsArchivedOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def mark_as_archived: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _MarkAsArchivedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MarkAsArchivedResponse
+
+    interface _PauseReplicationResponse
+      include Smithy::Client::_Response[Types::PauseReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def pause_replication: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _PauseReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PauseReplicationResponse
+
+    interface _PutSourceServerActionResponse
+      include Smithy::Client::_Response[Types::PutSourceServerActionOutput]
+      def action_id: () -> String?
+      def action_name: () -> String?
+      def document_identifier: () -> String?
+      def order: () -> Integer?
+      def document_version: () -> String?
+      def active: () -> bool?
+      def timeout_seconds: () -> Integer?
+      def must_succeed_for_cutover: () -> bool?
+      def parameters: () -> Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      def external_parameters: () -> Hash[String, Types::SsmExternalParameter]?
+      def description: () -> String?
+      def category: () -> String?
+    end
+    def put_source_server_action: (
+      ?source_server_id: String,
+      ?action_name: String,
+      ?document_identifier: String,
+      ?order: Integer,
+      ?action_id: String,
+      ?document_version: String,
+      ?active: bool,
+      ?timeout_seconds: Integer,
+      ?must_succeed_for_cutover: bool,
+      ?parameters: Hash[String,
+        Array[
+          {
+            parameter_type: String,
+            parameter_name: String
+          }
+        ]
+      ],
+      ?external_parameters: Hash[String,
+        {
+          dynamic_path: String
+        }
+      ],
+      ?description: String,
+      ?category: String,
+      ?account_id: String
+    ) -> _PutSourceServerActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSourceServerActionResponse
+
+    interface _PutTemplateActionResponse
+      include Smithy::Client::_Response[Types::PutTemplateActionOutput]
+      def action_id: () -> String?
+      def action_name: () -> String?
+      def document_identifier: () -> String?
+      def order: () -> Integer?
+      def document_version: () -> String?
+      def active: () -> bool?
+      def timeout_seconds: () -> Integer?
+      def must_succeed_for_cutover: () -> bool?
+      def parameters: () -> Hash[String, Array[Types::SsmParameterStoreParameter]]?
+      def operating_system: () -> String?
+      def external_parameters: () -> Hash[String, Types::SsmExternalParameter]?
+      def description: () -> String?
+      def category: () -> String?
+    end
+    def put_template_action: (
+      ?launch_configuration_template_id: String,
+      ?action_name: String,
+      ?document_identifier: String,
+      ?order: Integer,
+      ?action_id: String,
+      ?document_version: String,
+      ?active: bool,
+      ?timeout_seconds: Integer,
+      ?must_succeed_for_cutover: bool,
+      ?parameters: Hash[String,
+        Array[
+          {
+            parameter_type: String,
+            parameter_name: String
+          }
+        ]
+      ],
+      ?operating_system: String,
+      ?external_parameters: Hash[String,
+        {
+          dynamic_path: String
+        }
+      ],
+      ?description: String,
+      ?category: String
+    ) -> _PutTemplateActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTemplateActionResponse
+
+    interface _RemoveSourceServerActionResponse
+      include Smithy::Client::_Response[Types::RemoveSourceServerActionOutput]
+    end
+    def remove_source_server_action: (
+      ?source_server_id: String,
+      ?action_id: String,
+      ?account_id: String
+    ) -> _RemoveSourceServerActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveSourceServerActionResponse
+
+    interface _RemoveTemplateActionResponse
+      include Smithy::Client::_Response[Types::RemoveTemplateActionOutput]
+    end
+    def remove_template_action: (
+      ?launch_configuration_template_id: String,
+      ?action_id: String
+    ) -> _RemoveTemplateActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTemplateActionResponse
+
+    interface _ResumeReplicationResponse
+      include Smithy::Client::_Response[Types::ResumeReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def resume_replication: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _ResumeReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeReplicationResponse
+
+    interface _RetryDataReplicationResponse
+      include Smithy::Client::_Response[Types::RetryDataReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def retry_data_replication: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _RetryDataReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryDataReplicationResponse
+
+    interface _StartCutoverResponse
+      include Smithy::Client::_Response[Types::StartCutoverOutput]
+      def job: () -> Types::Job?
+    end
+    def start_cutover: (
+      ?source_server_i_ds: Array[String],
+      ?tags: Hash[String, String],
+      ?account_id: String
+    ) -> _StartCutoverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCutoverResponse
+
+    interface _StartExportResponse
+      include Smithy::Client::_Response[Types::StartExportOutput]
+      def export_task: () -> Types::ExportTask?
+    end
+    def start_export: (
+      ?s3_bucket: String,
+      ?s3_key: String,
+      ?s3_bucket_owner: String
+    ) -> _StartExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExportResponse
+
+    interface _StartImportResponse
+      include Smithy::Client::_Response[Types::StartImportOutput]
+      def import_task: () -> Types::ImportTask?
+    end
+    def start_import: (
+      ?client_token: String,
+      ?s3_bucket_source: {
+        s3_bucket: String,
+        s3_key: String,
+        s3_bucket_owner: String
+      }
+    ) -> _StartImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportResponse
+
+    interface _StartReplicationResponse
+      include Smithy::Client::_Response[Types::StartReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def start_replication: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _StartReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplicationResponse
+
+    interface _StartTestResponse
+      include Smithy::Client::_Response[Types::StartTestOutput]
+      def job: () -> Types::Job?
+    end
+    def start_test: (
+      ?source_server_i_ds: Array[String],
+      ?tags: Hash[String, String],
+      ?account_id: String
+    ) -> _StartTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestResponse
+
+    interface _StopReplicationResponse
+      include Smithy::Client::_Response[Types::StopReplicationOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def stop_replication: (
+      ?source_server_id: String,
+      ?account_id: String
+    ) -> _StopReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopReplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateTargetInstancesResponse
+      include Smithy::Client::_Response[Types::TerminateTargetInstancesOutput]
+      def job: () -> Types::Job?
+    end
+    def terminate_target_instances: (
+      ?source_server_i_ds: Array[String],
+      ?tags: Hash[String, String],
+      ?account_id: String
+    ) -> _TerminateTargetInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateTargetInstancesResponse
+
+    interface _UnarchiveApplicationResponse
+      include Smithy::Client::_Response[Types::UnarchiveApplicationOutput]
+      def application_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def application_aggregated_status: () -> Types::ApplicationAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+      def wave_id: () -> String?
+    end
+    def unarchive_application: (
+      ?application_id: String,
+      ?account_id: String
+    ) -> _UnarchiveApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnarchiveApplicationResponse
+
+    interface _UnarchiveWaveResponse
+      include Smithy::Client::_Response[Types::UnarchiveWaveOutput]
+      def wave_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def wave_aggregated_status: () -> Types::WaveAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def unarchive_wave: (
+      ?wave_id: String,
+      ?account_id: String
+    ) -> _UnarchiveWaveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnarchiveWaveResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationOutput]
+      def application_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def application_aggregated_status: () -> Types::ApplicationAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+      def wave_id: () -> String?
+    end
+    def update_application: (
+      ?application_id: String,
+      ?name: String,
+      ?description: String,
+      ?account_id: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorOutput]
+      def connector_id: () -> String?
+      def name: () -> String?
+      def ssm_instance_id: () -> String?
+      def arn: () -> String?
+      def tags: () -> Hash[String, String]?
+      def ssm_command_config: () -> Types::ConnectorSsmCommandConfig?
+    end
+    def update_connector: (
+      ?connector_id: String,
+      ?name: String,
+      ?ssm_command_config: {
+        s3_output_enabled: bool,
+        output_s3_bucket_name: String,
+        cloud_watch_output_enabled: untyped,
+        cloud_watch_log_group_name: String
+      }
+    ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
+
+    interface _UpdateLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLaunchConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def boot_mode: () -> String?
+      def post_launch_actions: () -> Types::PostLaunchActions?
+      def enable_map_auto_tagging: () -> bool?
+      def map_auto_tagging_mpe_id: () -> String?
+    end
+    def update_launch_configuration: (
+      ?source_server_id: String,
+      ?name: String,
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?boot_mode: String,
+      ?post_launch_actions: {
+        deployment: String,
+        s3_log_bucket: String,
+        s3_output_key_prefix: String,
+        cloud_watch_log_group_name: String,
+        ssm_documents: Array[
+          {
+            action_name: untyped,
+            ssm_document_name: String,
+            timeout_seconds: Integer,
+            must_succeed_for_cutover: bool,
+            parameters: Hash[String,
+              Array[
+                {
+                  parameter_type: String,
+                  parameter_name: String
+                }
+              ]
+            ],
+            external_parameters: Hash[String,
+              {
+                dynamic_path: String
+              }
+            ]
+          }
+        ]
+      },
+      ?enable_map_auto_tagging: bool,
+      ?map_auto_tagging_mpe_id: String,
+      ?account_id: String
+    ) -> _UpdateLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationResponse
+
+    interface _UpdateLaunchConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateLaunchConfigurationTemplateOutput]
+      def launch_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def post_launch_actions: () -> Types::PostLaunchActions?
+      def enable_map_auto_tagging: () -> bool?
+      def map_auto_tagging_mpe_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def ec2_launch_template_id: () -> String?
+      def launch_disposition: () -> String?
+      def target_instance_type_right_sizing_method: () -> String?
+      def copy_private_ip: () -> bool?
+      def associate_public_ip_address: () -> bool?
+      def copy_tags: () -> bool?
+      def licensing: () -> Types::Licensing?
+      def boot_mode: () -> String?
+      def small_volume_max_size: () -> Integer?
+      def small_volume_conf: () -> Types::LaunchTemplateDiskConf?
+      def large_volume_conf: () -> Types::LaunchTemplateDiskConf?
+    end
+    def update_launch_configuration_template: (
+      ?launch_configuration_template_id: String,
+      ?post_launch_actions: {
+        deployment: String,
+        s3_log_bucket: String,
+        s3_output_key_prefix: String,
+        cloud_watch_log_group_name: String,
+        ssm_documents: Array[
+          {
+            action_name: untyped,
+            ssm_document_name: String,
+            timeout_seconds: Integer,
+            must_succeed_for_cutover: bool,
+            parameters: Hash[String,
+              Array[
+                {
+                  parameter_type: String,
+                  parameter_name: String
+                }
+              ]
+            ],
+            external_parameters: Hash[String,
+              {
+                dynamic_path: String
+              }
+            ]
+          }
+        ]
+      },
+      ?enable_map_auto_tagging: bool,
+      ?map_auto_tagging_mpe_id: String,
+      ?launch_disposition: String,
+      ?target_instance_type_right_sizing_method: String,
+      ?copy_private_ip: bool,
+      ?associate_public_ip_address: bool,
+      ?copy_tags: bool,
+      ?licensing: {
+        os_byol: bool
+      },
+      ?boot_mode: String,
+      ?small_volume_max_size: Integer,
+      ?small_volume_conf: {
+        volume_type: String,
+        iops: Integer,
+        throughput: Integer
+      },
+      ?large_volume_conf: {
+        volume_type: String,
+        iops: Integer,
+        throughput: Integer
+      }
+    ) -> _UpdateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationTemplateResponse
+
+    interface _UpdateReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationConfigurationOutput]
+      def source_server_id: () -> String?
+      def name: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def replicated_disks: () -> Array[Types::ReplicationConfigurationReplicatedDisk]?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def use_fips_endpoint: () -> bool?
+    end
+    def update_replication_configuration: (
+      ?source_server_id: String,
+      ?name: String,
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?replicated_disks: Array[
+        {
+          device_name: String,
+          is_boot_disk: bool,
+          staging_disk_type: String,
+          iops: Integer,
+          throughput: untyped
+        }
+      ],
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?use_fips_endpoint: bool,
+      ?account_id: String
+    ) -> _UpdateReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationResponse
+
+    interface _UpdateReplicationConfigurationTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationConfigurationTemplateOutput]
+      def replication_configuration_template_id: () -> String?
+      def arn: () -> String?
+      def staging_area_subnet_id: () -> String?
+      def associate_default_security_group: () -> bool?
+      def replication_servers_security_groups_i_ds: () -> Array[String]?
+      def replication_server_instance_type: () -> String?
+      def use_dedicated_replication_server: () -> bool?
+      def default_large_staging_disk_type: () -> String?
+      def ebs_encryption: () -> String?
+      def ebs_encryption_key_arn: () -> String?
+      def bandwidth_throttling: () -> Integer?
+      def data_plane_routing: () -> String?
+      def create_public_ip: () -> bool?
+      def staging_area_tags: () -> Hash[String, String]?
+      def use_fips_endpoint: () -> bool?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_replication_configuration_template: (
+      ?replication_configuration_template_id: String,
+      ?arn: String,
+      ?staging_area_subnet_id: String,
+      ?associate_default_security_group: bool,
+      ?replication_servers_security_groups_i_ds: Array[String],
+      ?replication_server_instance_type: String,
+      ?use_dedicated_replication_server: bool,
+      ?default_large_staging_disk_type: String,
+      ?ebs_encryption: String,
+      ?ebs_encryption_key_arn: String,
+      ?bandwidth_throttling: Integer,
+      ?data_plane_routing: String,
+      ?create_public_ip: bool,
+      ?staging_area_tags: Hash[String, String],
+      ?use_fips_endpoint: bool
+    ) -> _UpdateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationTemplateResponse
+
+    interface _UpdateSourceServerResponse
+      include Smithy::Client::_Response[Types::UpdateSourceServerOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def update_source_server: (
+      ?account_id: String,
+      ?source_server_id: String,
+      ?connector_action: {
+        credentials_secret_arn: String,
+        connector_arn: String
+      }
+    ) -> _UpdateSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSourceServerResponse
+
+    interface _UpdateSourceServerReplicationTypeResponse
+      include Smithy::Client::_Response[Types::UpdateSourceServerReplicationTypeOutput]
+      def source_server_id: () -> String?
+      def arn: () -> String?
+      def is_archived: () -> bool?
+      def tags: () -> Hash[String, String]?
+      def launched_instance: () -> Types::LaunchedInstance?
+      def data_replication_info: () -> Types::DataReplicationInfo?
+      def life_cycle: () -> Types::LifeCycle?
+      def source_properties: () -> Types::SourceProperties?
+      def replication_type: () -> String?
+      def vcenter_client_id: () -> String?
+      def application_id: () -> String?
+      def user_provided_id: () -> String?
+      def fqdn_for_action_framework: () -> String?
+      def connector_action: () -> Types::SourceServerConnectorAction?
+    end
+    def update_source_server_replication_type: (
+      ?source_server_id: String,
+      ?replication_type: String,
+      ?account_id: String
+    ) -> _UpdateSourceServerReplicationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSourceServerReplicationTypeResponse
+
+    interface _UpdateWaveResponse
+      include Smithy::Client::_Response[Types::UpdateWaveOutput]
+      def wave_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def is_archived: () -> bool?
+      def wave_aggregated_status: () -> Types::WaveAggregatedStatus?
+      def creation_date_time: () -> String?
+      def last_modified_date_time: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_wave: (
+      ?wave_id: String,
+      ?name: String,
+      ?description: String,
+      ?account_id: String
+    ) -> _UpdateWaveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWaveResponse
+  end
+end

@@ -1,0 +1,52 @@
+module Aws::S3Outposts
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AwsAccountId: StringShape
+    CapacityInBytes: IntegerShape
+    CidrBlock: StringShape
+    ConflictException: StructureShape
+    CreateEndpointRequest: StructureShape
+    CreateEndpointResult: StructureShape
+    CreationTime: TimestampShape
+    CustomerOwnedIpv4Pool: StringShape
+    DeleteEndpointRequest: StructureShape
+    Endpoint: StructureShape
+    EndpointAccessType: EnumShape
+    EndpointArn: StringShape
+    EndpointId: StringShape
+    EndpointStatus: EnumShape
+    Endpoints: ListShape
+    ErrorCode: StringShape
+    ErrorMessage: StringShape
+    FailedReason: StructureShape
+    InternalServerException: StructureShape
+    ListEndpointsRequest: StructureShape
+    ListEndpointsResult: StructureShape
+    ListOutpostsWithS3Request: StructureShape
+    ListOutpostsWithS3Result: StructureShape
+    ListSharedEndpointsRequest: StructureShape
+    ListSharedEndpointsResult: StructureShape
+    MaxResults: IntegerShape
+    Message: StringShape
+    NetworkInterface: StructureShape
+    NetworkInterfaceId: StringShape
+    NetworkInterfaces: ListShape
+    NextToken: StringShape
+    Outpost: StructureShape
+    OutpostArn: StringShape
+    OutpostId: StringShape
+    OutpostOfflineException: StructureShape
+    Outposts: ListShape
+    ResourceNotFoundException: StructureShape
+    S3OutpostArn: StringShape
+    SecurityGroupId: StringShape
+    SubnetId: StringShape
+    ThrottlingException: StructureShape
+    ValidationException: StructureShape
+    VpcId: StringShape
+
+    S3Outposts: ServiceShape
+  end
+end

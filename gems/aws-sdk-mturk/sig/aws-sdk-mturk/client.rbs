@@ -1,0 +1,573 @@
+module Aws::MTurk
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MTurk::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptQualificationRequestResponse
+      include Smithy::Client::_Response[Types::AcceptQualificationRequestResponse]
+    end
+    def accept_qualification_request: (
+      ?qualification_request_id: String,
+      ?integer_value: Integer
+    ) -> _AcceptQualificationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptQualificationRequestResponse
+
+    interface _ApproveAssignmentResponse
+      include Smithy::Client::_Response[Types::ApproveAssignmentResponse]
+    end
+    def approve_assignment: (
+      ?assignment_id: String,
+      ?requester_feedback: String,
+      ?override_rejection: bool
+    ) -> _ApproveAssignmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApproveAssignmentResponse
+
+    interface _AssociateQualificationWithWorkerResponse
+      include Smithy::Client::_Response[Types::AssociateQualificationWithWorkerResponse]
+    end
+    def associate_qualification_with_worker: (
+      ?qualification_type_id: String,
+      ?worker_id: String,
+      ?integer_value: Integer,
+      ?send_notification: bool
+    ) -> _AssociateQualificationWithWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateQualificationWithWorkerResponse
+
+    interface _CreateAdditionalAssignmentsForHITResponse
+      include Smithy::Client::_Response[Types::CreateAdditionalAssignmentsForHITResponse]
+    end
+    def create_additional_assignments_for_hit: (
+      ?hit_id: String,
+      ?number_of_additional_assignments: Integer,
+      ?unique_request_token: String
+    ) -> _CreateAdditionalAssignmentsForHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAdditionalAssignmentsForHITResponse
+
+    interface _CreateHITResponse
+      include Smithy::Client::_Response[Types::CreateHITResponse]
+      def hit: () -> Types::HIT?
+    end
+    def create_hit: (
+      ?max_assignments: Integer,
+      ?auto_approval_delay_in_seconds: Integer,
+      ?lifetime_in_seconds: Integer,
+      ?assignment_duration_in_seconds: Integer,
+      ?reward: String,
+      ?title: String,
+      ?keywords: String,
+      ?description: String,
+      ?question: String,
+      ?requester_annotation: String,
+      ?qualification_requirements: Array[
+        {
+          qualification_type_id: String,
+          comparator: String,
+          integer_values: Array[Integer],
+          locale_values: Array[
+            {
+              country: String,
+              subdivision: untyped
+            }
+          ],
+          required_to_preview: bool,
+          actions_guarded: String
+        }
+      ],
+      ?unique_request_token: String,
+      ?assignment_review_policy: {
+        policy_name: String,
+        parameters: Array[
+          {
+            key: untyped,
+            values: Array[String],
+            map_entries: Array[
+              {
+                key: untyped,
+                values: untyped
+              }
+            ]
+          }
+        ]
+      },
+      ?hit_review_policy: {
+        policy_name: String,
+        parameters: Array[
+          {
+            key: untyped,
+            values: Array[String],
+            map_entries: Array[
+              {
+                key: untyped,
+                values: untyped
+              }
+            ]
+          }
+        ]
+      },
+      ?hit_layout_id: String,
+      ?hit_layout_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHITResponse
+
+    interface _CreateHITTypeResponse
+      include Smithy::Client::_Response[Types::CreateHITTypeResponse]
+      def hit_type_id: () -> String?
+    end
+    def create_hit_type: (
+      ?auto_approval_delay_in_seconds: Integer,
+      ?assignment_duration_in_seconds: Integer,
+      ?reward: String,
+      ?title: String,
+      ?keywords: String,
+      ?description: String,
+      ?qualification_requirements: Array[
+        {
+          qualification_type_id: String,
+          comparator: String,
+          integer_values: Array[Integer],
+          locale_values: Array[
+            {
+              country: String,
+              subdivision: untyped
+            }
+          ],
+          required_to_preview: bool,
+          actions_guarded: String
+        }
+      ]
+    ) -> _CreateHITTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHITTypeResponse
+
+    interface _CreateHITWithHITTypeResponse
+      include Smithy::Client::_Response[Types::CreateHITWithHITTypeResponse]
+      def hit: () -> Types::HIT?
+    end
+    def create_hit_with_hit_type: (
+      ?hit_type_id: String,
+      ?max_assignments: Integer,
+      ?lifetime_in_seconds: Integer,
+      ?question: String,
+      ?requester_annotation: String,
+      ?unique_request_token: String,
+      ?assignment_review_policy: {
+        policy_name: String,
+        parameters: Array[
+          {
+            key: untyped,
+            values: Array[String],
+            map_entries: Array[
+              {
+                key: untyped,
+                values: untyped
+              }
+            ]
+          }
+        ]
+      },
+      ?hit_review_policy: {
+        policy_name: String,
+        parameters: Array[
+          {
+            key: untyped,
+            values: Array[String],
+            map_entries: Array[
+              {
+                key: untyped,
+                values: untyped
+              }
+            ]
+          }
+        ]
+      },
+      ?hit_layout_id: String,
+      ?hit_layout_parameters: Array[
+        {
+          name: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateHITWithHITTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHITWithHITTypeResponse
+
+    interface _CreateQualificationTypeResponse
+      include Smithy::Client::_Response[Types::CreateQualificationTypeResponse]
+      def qualification_type: () -> Types::QualificationType?
+    end
+    def create_qualification_type: (
+      ?name: String,
+      ?keywords: String,
+      ?description: String,
+      ?qualification_type_status: String,
+      ?retry_delay_in_seconds: Integer,
+      ?test: String,
+      ?answer_key: String,
+      ?test_duration_in_seconds: Integer,
+      ?auto_granted: bool,
+      ?auto_granted_value: Integer
+    ) -> _CreateQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQualificationTypeResponse
+
+    interface _CreateWorkerBlockResponse
+      include Smithy::Client::_Response[Types::CreateWorkerBlockResponse]
+    end
+    def create_worker_block: (
+      ?worker_id: String,
+      ?reason: String
+    ) -> _CreateWorkerBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkerBlockResponse
+
+    interface _DeleteHITResponse
+      include Smithy::Client::_Response[Types::DeleteHITResponse]
+    end
+    def delete_hit: (
+      ?hit_id: String
+    ) -> _DeleteHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHITResponse
+
+    interface _DeleteQualificationTypeResponse
+      include Smithy::Client::_Response[Types::DeleteQualificationTypeResponse]
+    end
+    def delete_qualification_type: (
+      ?qualification_type_id: String
+    ) -> _DeleteQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQualificationTypeResponse
+
+    interface _DeleteWorkerBlockResponse
+      include Smithy::Client::_Response[Types::DeleteWorkerBlockResponse]
+    end
+    def delete_worker_block: (
+      ?worker_id: String,
+      ?reason: String
+    ) -> _DeleteWorkerBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkerBlockResponse
+
+    interface _DisassociateQualificationFromWorkerResponse
+      include Smithy::Client::_Response[Types::DisassociateQualificationFromWorkerResponse]
+    end
+    def disassociate_qualification_from_worker: (
+      ?worker_id: String,
+      ?qualification_type_id: String,
+      ?reason: String
+    ) -> _DisassociateQualificationFromWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateQualificationFromWorkerResponse
+
+    interface _GetAccountBalanceResponse
+      include Smithy::Client::_Response[Types::GetAccountBalanceResponse]
+      def available_balance: () -> String?
+      def on_hold_balance: () -> String?
+    end
+    def get_account_balance: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountBalanceResponse
+
+    interface _GetAssignmentResponse
+      include Smithy::Client::_Response[Types::GetAssignmentResponse]
+      def assignment: () -> Types::Assignment?
+      def hit: () -> Types::HIT?
+    end
+    def get_assignment: (
+      ?assignment_id: String
+    ) -> _GetAssignmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssignmentResponse
+
+    interface _GetFileUploadURLResponse
+      include Smithy::Client::_Response[Types::GetFileUploadURLResponse]
+      def file_upload_url: () -> String?
+    end
+    def get_file_upload_url: (
+      ?assignment_id: String,
+      ?question_identifier: String
+    ) -> _GetFileUploadURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFileUploadURLResponse
+
+    interface _GetHITResponse
+      include Smithy::Client::_Response[Types::GetHITResponse]
+      def hit: () -> Types::HIT?
+    end
+    def get_hit: (
+      ?hit_id: String
+    ) -> _GetHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHITResponse
+
+    interface _GetQualificationScoreResponse
+      include Smithy::Client::_Response[Types::GetQualificationScoreResponse]
+      def qualification: () -> Types::Qualification?
+    end
+    def get_qualification_score: (
+      ?qualification_type_id: String,
+      ?worker_id: String
+    ) -> _GetQualificationScoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQualificationScoreResponse
+
+    interface _GetQualificationTypeResponse
+      include Smithy::Client::_Response[Types::GetQualificationTypeResponse]
+      def qualification_type: () -> Types::QualificationType?
+    end
+    def get_qualification_type: (
+      ?qualification_type_id: String
+    ) -> _GetQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQualificationTypeResponse
+
+    interface _ListAssignmentsForHITResponse
+      include Smithy::Client::_Response[Types::ListAssignmentsForHITResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def assignments: () -> Array[Types::Assignment]?
+    end
+    def list_assignments_for_hit: (
+      ?hit_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?assignment_statuses: Array[String]
+    ) -> _ListAssignmentsForHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssignmentsForHITResponse
+
+    interface _ListBonusPaymentsResponse
+      include Smithy::Client::_Response[Types::ListBonusPaymentsResponse]
+      def num_results: () -> Integer?
+      def next_token: () -> String?
+      def bonus_payments: () -> Array[Types::BonusPayment]?
+    end
+    def list_bonus_payments: (
+      ?hit_id: String,
+      ?assignment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBonusPaymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBonusPaymentsResponse
+
+    interface _ListHITsResponse
+      include Smithy::Client::_Response[Types::ListHITsResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def hi_ts: () -> Array[Types::HIT]?
+    end
+    def list_hi_ts: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHITsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHITsResponse
+
+    interface _ListHITsForQualificationTypeResponse
+      include Smithy::Client::_Response[Types::ListHITsForQualificationTypeResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def hi_ts: () -> Array[Types::HIT]?
+    end
+    def list_hi_ts_for_qualification_type: (
+      ?qualification_type_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHITsForQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHITsForQualificationTypeResponse
+
+    interface _ListQualificationRequestsResponse
+      include Smithy::Client::_Response[Types::ListQualificationRequestsResponse]
+      def num_results: () -> Integer?
+      def next_token: () -> String?
+      def qualification_requests: () -> Array[Types::QualificationRequest]?
+    end
+    def list_qualification_requests: (
+      ?qualification_type_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQualificationRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQualificationRequestsResponse
+
+    interface _ListQualificationTypesResponse
+      include Smithy::Client::_Response[Types::ListQualificationTypesResponse]
+      def num_results: () -> Integer?
+      def next_token: () -> String?
+      def qualification_types: () -> Array[Types::QualificationType]?
+    end
+    def list_qualification_types: (
+      ?query: String,
+      ?must_be_requestable: bool,
+      ?must_be_owned_by_caller: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQualificationTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQualificationTypesResponse
+
+    interface _ListReviewPolicyResultsForHITResponse
+      include Smithy::Client::_Response[Types::ListReviewPolicyResultsForHITResponse]
+      def hit_id: () -> String?
+      def assignment_review_policy: () -> Types::ReviewPolicy?
+      def hit_review_policy: () -> Types::ReviewPolicy?
+      def assignment_review_report: () -> Types::ReviewReport?
+      def hit_review_report: () -> Types::ReviewReport?
+      def next_token: () -> String?
+    end
+    def list_review_policy_results_for_hit: (
+      ?hit_id: String,
+      ?policy_levels: Array[String],
+      ?retrieve_actions: bool,
+      ?retrieve_results: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReviewPolicyResultsForHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReviewPolicyResultsForHITResponse
+
+    interface _ListReviewableHITsResponse
+      include Smithy::Client::_Response[Types::ListReviewableHITsResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def hi_ts: () -> Array[Types::HIT]?
+    end
+    def list_reviewable_hi_ts: (
+      ?hit_type_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReviewableHITsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReviewableHITsResponse
+
+    interface _ListWorkerBlocksResponse
+      include Smithy::Client::_Response[Types::ListWorkerBlocksResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def worker_blocks: () -> Array[Types::WorkerBlock]?
+    end
+    def list_worker_blocks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkerBlocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkerBlocksResponse
+
+    interface _ListWorkersWithQualificationTypeResponse
+      include Smithy::Client::_Response[Types::ListWorkersWithQualificationTypeResponse]
+      def next_token: () -> String?
+      def num_results: () -> Integer?
+      def qualifications: () -> Array[Types::Qualification]?
+    end
+    def list_workers_with_qualification_type: (
+      ?qualification_type_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkersWithQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkersWithQualificationTypeResponse
+
+    interface _NotifyWorkersResponse
+      include Smithy::Client::_Response[Types::NotifyWorkersResponse]
+      def notify_workers_failure_statuses: () -> Array[Types::NotifyWorkersFailureStatus]?
+    end
+    def notify_workers: (
+      ?subject: String,
+      ?message_text: String,
+      ?worker_ids: Array[String]
+    ) -> _NotifyWorkersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyWorkersResponse
+
+    interface _RejectAssignmentResponse
+      include Smithy::Client::_Response[Types::RejectAssignmentResponse]
+    end
+    def reject_assignment: (
+      ?assignment_id: String,
+      ?requester_feedback: String
+    ) -> _RejectAssignmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAssignmentResponse
+
+    interface _RejectQualificationRequestResponse
+      include Smithy::Client::_Response[Types::RejectQualificationRequestResponse]
+    end
+    def reject_qualification_request: (
+      ?qualification_request_id: String,
+      ?reason: String
+    ) -> _RejectQualificationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectQualificationRequestResponse
+
+    interface _SendBonusResponse
+      include Smithy::Client::_Response[Types::SendBonusResponse]
+    end
+    def send_bonus: (
+      ?worker_id: String,
+      ?bonus_amount: String,
+      ?assignment_id: String,
+      ?reason: String,
+      ?unique_request_token: String
+    ) -> _SendBonusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendBonusResponse
+
+    interface _SendTestEventNotificationResponse
+      include Smithy::Client::_Response[Types::SendTestEventNotificationResponse]
+    end
+    def send_test_event_notification: (
+      ?notification: {
+        destination: String,
+        transport: String,
+        version: untyped,
+        event_types: Array[String]
+      },
+      ?test_event_type: String
+    ) -> _SendTestEventNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTestEventNotificationResponse
+
+    interface _UpdateExpirationForHITResponse
+      include Smithy::Client::_Response[Types::UpdateExpirationForHITResponse]
+    end
+    def update_expiration_for_hit: (
+      ?hit_id: String,
+      ?expire_at: Time
+    ) -> _UpdateExpirationForHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExpirationForHITResponse
+
+    interface _UpdateHITReviewStatusResponse
+      include Smithy::Client::_Response[Types::UpdateHITReviewStatusResponse]
+    end
+    def update_hit_review_status: (
+      ?hit_id: String,
+      ?revert: bool
+    ) -> _UpdateHITReviewStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHITReviewStatusResponse
+
+    interface _UpdateHITTypeOfHITResponse
+      include Smithy::Client::_Response[Types::UpdateHITTypeOfHITResponse]
+    end
+    def update_hit_type_of_hit: (
+      ?hit_id: String,
+      ?hit_type_id: String
+    ) -> _UpdateHITTypeOfHITResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHITTypeOfHITResponse
+
+    interface _UpdateNotificationSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationSettingsResponse]
+    end
+    def update_notification_settings: (
+      ?hit_type_id: String,
+      ?notification: {
+        destination: String,
+        transport: String,
+        version: untyped,
+        event_types: Array[String]
+      },
+      ?active: bool
+    ) -> _UpdateNotificationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationSettingsResponse
+
+    interface _UpdateQualificationTypeResponse
+      include Smithy::Client::_Response[Types::UpdateQualificationTypeResponse]
+      def qualification_type: () -> Types::QualificationType?
+    end
+    def update_qualification_type: (
+      ?qualification_type_id: String,
+      ?description: String,
+      ?qualification_type_status: String,
+      ?test: String,
+      ?answer_key: String,
+      ?test_duration_in_seconds: Integer,
+      ?retry_delay_in_seconds: Integer,
+      ?auto_granted: bool,
+      ?auto_granted_value: Integer
+    ) -> _UpdateQualificationTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQualificationTypeResponse
+  end
+end

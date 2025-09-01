@@ -1,0 +1,5 @@
+  module Aws
+    module QApps
+      VERSION: String
+    end
+  end

@@ -1,0 +1,110 @@
+module Aws::MediaStoreData
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MediaStoreData::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteObjectResponse
+      include Smithy::Client::_Response[Types::DeleteObjectResponse]
+    end
+    def delete_object: (
+      ?path: String
+    ) -> _DeleteObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectResponse
+
+    interface _DescribeObjectResponse
+      include Smithy::Client::_Response[Types::DescribeObjectResponse]
+      def e_tag: () -> String?
+      def content_type: () -> String?
+      def content_length: () -> Integer?
+      def cache_control: () -> String?
+      def last_modified: () -> Time?
+    end
+    def describe_object: (
+      ?path: String
+    ) -> _DescribeObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeObjectResponse
+
+    interface _GetObjectResponse
+      include Smithy::Client::_Response[Types::GetObjectResponse]
+      def body: () -> String?
+      def cache_control: () -> String?
+      def content_range: () -> String?
+      def content_length: () -> Integer?
+      def content_type: () -> String?
+      def e_tag: () -> String?
+      def last_modified: () -> Time?
+      def status_code: () -> Integer?
+    end
+    def get_object: (
+      ?path: String,
+      ?range: String
+    ) -> _GetObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectResponse
+
+    interface _ListItemsResponse
+      include Smithy::Client::_Response[Types::ListItemsResponse]
+      def items: () -> Array[Types::Item]?
+      def next_token: () -> String?
+    end
+    def list_items: (
+      ?path: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListItemsResponse
+
+    interface _PutObjectResponse
+      include Smithy::Client::_Response[Types::PutObjectResponse]
+      def content_sha256: () -> String?
+      def e_tag: () -> String?
+      def storage_class: () -> String?
+    end
+    def put_object: (
+      ?body: String,
+      ?path: String,
+      ?content_type: String,
+      ?cache_control: String,
+      ?storage_class: String,
+      ?upload_availability: String
+    ) -> _PutObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module EMRcontainers
+      VERSION: String
+    end
+  end

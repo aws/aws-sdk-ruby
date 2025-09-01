@@ -1,0 +1,526 @@
+module Aws::KinesisVideoArchivedMedia
+  module Types
+
+    class ClientLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ClipFragmentSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_selector_type: String,
+        ?timestamp_range: Types::ClipTimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_selector_type: String?
+      attr_accessor timestamp_range: Types::ClipTimestampRange?
+    end
+
+    module ClipFragmentSelectorType
+      PRODUCER_TIMESTAMP: String
+      SERVER_TIMESTAMP: String
+    end
+
+    class ClipTimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    module ContainerFormat
+      FRAGMENTED_MP4: String
+      MPEG_TS: String
+    end
+
+    module DASHDisplayFragmentNumber
+      ALWAYS: String
+      NEVER: String
+    end
+
+    module DASHDisplayFragmentTimestamp
+      ALWAYS: String
+      NEVER: String
+    end
+
+    class DASHFragmentSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_selector_type: String,
+        ?timestamp_range: Types::DASHTimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_selector_type: String?
+      attr_accessor timestamp_range: Types::DASHTimestampRange?
+    end
+
+    module DASHFragmentSelectorType
+      PRODUCER_TIMESTAMP: String
+      SERVER_TIMESTAMP: String
+    end
+
+    module DASHPlaybackMode
+      LIVE: String
+      LIVE_REPLAY: String
+      ON_DEMAND: String
+    end
+
+    class DASHTimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    module Format
+      JPEG: String
+      PNG: String
+    end
+
+    module FormatConfigKey
+      JPEGQuality: String
+    end
+
+    class Fragment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_number: String,
+        ?fragment_size_in_bytes: Integer,
+        ?producer_timestamp: Time,
+        ?server_timestamp: Time,
+        ?fragment_length_in_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_number: String?
+      attr_accessor fragment_size_in_bytes: Integer?
+      attr_accessor producer_timestamp: Time?
+      attr_accessor server_timestamp: Time?
+      attr_accessor fragment_length_in_milliseconds: Integer?
+    end
+
+    class FragmentSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_selector_type: String,
+        ?timestamp_range: Types::TimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_selector_type: String?
+      attr_accessor timestamp_range: Types::TimestampRange?
+    end
+
+    module FragmentSelectorType
+      PRODUCER_TIMESTAMP: String
+      SERVER_TIMESTAMP: String
+    end
+
+    class GetClipInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?clip_fragment_selector: Types::ClipFragmentSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor clip_fragment_selector: Types::ClipFragmentSelector?
+    end
+
+    class GetClipOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor payload: String?
+    end
+
+    class GetDASHStreamingSessionURLInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?playback_mode: String,
+        ?display_fragment_timestamp: String,
+        ?display_fragment_number: String,
+        ?dash_fragment_selector: Types::DASHFragmentSelector,
+        ?expires: Integer,
+        ?max_manifest_fragment_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor playback_mode: String?
+      attr_accessor display_fragment_timestamp: String?
+      attr_accessor display_fragment_number: String?
+      attr_accessor dash_fragment_selector: Types::DASHFragmentSelector?
+      attr_accessor expires: Integer?
+      attr_accessor max_manifest_fragment_results: Integer?
+    end
+
+    class GetDASHStreamingSessionURLOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dash_streaming_session_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dash_streaming_session_url: String?
+    end
+
+    class GetHLSStreamingSessionURLInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?playback_mode: String,
+        ?hls_fragment_selector: Types::HLSFragmentSelector,
+        ?container_format: String,
+        ?discontinuity_mode: String,
+        ?display_fragment_timestamp: String,
+        ?expires: Integer,
+        ?max_media_playlist_fragment_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor playback_mode: String?
+      attr_accessor hls_fragment_selector: Types::HLSFragmentSelector?
+      attr_accessor container_format: String?
+      attr_accessor discontinuity_mode: String?
+      attr_accessor display_fragment_timestamp: String?
+      attr_accessor expires: Integer?
+      attr_accessor max_media_playlist_fragment_results: Integer?
+    end
+
+    class GetHLSStreamingSessionURLOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hls_streaming_session_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hls_streaming_session_url: String?
+    end
+
+    class GetImagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?image_selector_type: String,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?sampling_interval: Integer,
+        ?format: String,
+        ?format_config: Hash[String, String],
+        ?width_pixels: Integer,
+        ?height_pixels: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor image_selector_type: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor sampling_interval: Integer?
+      attr_accessor format: String?
+      attr_accessor format_config: Hash[String, String]?
+      attr_accessor width_pixels: Integer?
+      attr_accessor height_pixels: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetImagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?images: Array[Types::Image],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor images: Array[Types::Image]?
+      attr_accessor next_token: String?
+    end
+
+    class GetMediaForFragmentListInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?fragments: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor fragments: Array[String]?
+    end
+
+    class GetMediaForFragmentListOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor payload: String?
+    end
+
+    module HLSDiscontinuityMode
+      ALWAYS: String
+      NEVER: String
+      ON_DISCONTINUITY: String
+    end
+
+    module HLSDisplayFragmentTimestamp
+      ALWAYS: String
+      NEVER: String
+    end
+
+    class HLSFragmentSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_selector_type: String,
+        ?timestamp_range: Types::HLSTimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_selector_type: String?
+      attr_accessor timestamp_range: Types::HLSTimestampRange?
+    end
+
+    module HLSFragmentSelectorType
+      PRODUCER_TIMESTAMP: String
+      SERVER_TIMESTAMP: String
+    end
+
+    module HLSPlaybackMode
+      LIVE: String
+      LIVE_REPLAY: String
+      ON_DEMAND: String
+    end
+
+    class HLSTimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    class Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_stamp: Time,
+        ?error: String,
+        ?image_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_stamp: Time?
+      attr_accessor error: String?
+      attr_accessor image_content: String?
+    end
+
+    module ImageError
+      NO_MEDIA: String
+      MEDIA_ERROR: String
+    end
+
+    module ImageSelectorType
+      PRODUCER_TIMESTAMP: String
+      SERVER_TIMESTAMP: String
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCodecPrivateDataException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMediaFrameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListFragmentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?fragment_selector: Types::FragmentSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor fragment_selector: Types::FragmentSelector?
+    end
+
+    class ListFragmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragments: Array[Types::Fragment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragments: Array[Types::Fragment]?
+      attr_accessor next_token: String?
+    end
+
+    class MissingCodecPrivateDataException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoDataRetentionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    class UnsupportedStreamMediaTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module ServiceDiscovery
+      VERSION: String
+    end
+  end

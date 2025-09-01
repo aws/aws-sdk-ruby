@@ -1,0 +1,49 @@
+module Aws::ChimeSDKMediaPipelines
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ServiceFailureException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ThrottledClientException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnauthorizedClientException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module MigrationHubRefactorSpaces
+      VERSION: String
+    end
+  end

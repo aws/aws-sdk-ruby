@@ -1,0 +1,238 @@
+module Aws::SagemakerEdge
+  module Types
+
+    class Checksum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?sum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor sum: String?
+    end
+
+    module ChecksumType
+      Sha1: String
+    end
+
+    class Definition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_handle: String,
+        ?s3_url: String,
+        ?checksum: Types::Checksum,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_handle: String?
+      attr_accessor s3_url: String?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor state: String?
+    end
+
+    class DeploymentModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_handle: String,
+        ?model_name: String,
+        ?model_version: String,
+        ?desired_state: String,
+        ?state: String,
+        ?status: String,
+        ?status_reason: String,
+        ?rollback_failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_handle: String?
+      attr_accessor model_name: String?
+      attr_accessor model_version: String?
+      attr_accessor desired_state: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor rollback_failure_reason: String?
+    end
+
+    class DeploymentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_name: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?deployment_start_time: Time,
+        ?deployment_end_time: Time,
+        ?deployment_models: Array[Types::DeploymentModel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor deployment_start_time: Time?
+      attr_accessor deployment_end_time: Time?
+      attr_accessor deployment_models: Array[Types::DeploymentModel]?
+    end
+
+    module DeploymentStatus
+      Success: String
+      Fail: String
+    end
+
+    module DeploymentType
+      Model: String
+    end
+
+    class EdgeDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_name: String,
+        ?type: String,
+        ?failure_handling_policy: String,
+        ?definitions: Array[Types::Definition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_name: String?
+      attr_accessor type: String?
+      attr_accessor failure_handling_policy: String?
+      attr_accessor definitions: Array[Types::Definition]?
+    end
+
+    class EdgeMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension: String,
+        ?metric_name: String,
+        ?value: Float,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension: String?
+      attr_accessor metric_name: String?
+      attr_accessor value: Float?
+      attr_accessor timestamp: Time?
+    end
+
+    module FailureHandlingPolicy
+      RollbackOnFailure: String
+      DoNothing: String
+    end
+
+    class GetDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?device_fleet_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor device_fleet_name: String?
+    end
+
+    class GetDeploymentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[Types::EdgeDeployment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[Types::EdgeDeployment]?
+    end
+
+    class GetDeviceRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?device_fleet_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor device_fleet_name: String?
+    end
+
+    class GetDeviceRegistrationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_registration: String,
+        ?cache_ttl: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_registration: String?
+      attr_accessor cache_ttl: String?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Model
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_version: String,
+        ?latest_sample_time: Time,
+        ?latest_inference: Time,
+        ?model_metrics: Array[Types::EdgeMetric],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_version: String?
+      attr_accessor latest_sample_time: Time?
+      attr_accessor latest_inference: Time?
+      attr_accessor model_metrics: Array[Types::EdgeMetric]?
+    end
+
+    module ModelState
+      Deploy: String
+      Undeploy: String
+    end
+
+    class SendHeartbeatRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_metrics: Array[Types::EdgeMetric],
+        ?models: Array[Types::Model],
+        ?agent_version: String,
+        ?device_name: String,
+        ?device_fleet_name: String,
+        ?deployment_result: Types::DeploymentResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_metrics: Array[Types::EdgeMetric]?
+      attr_accessor models: Array[Types::Model]?
+      attr_accessor agent_version: String?
+      attr_accessor device_name: String?
+      attr_accessor device_fleet_name: String?
+      attr_accessor deployment_result: Types::DeploymentResult?
+    end
+  end
+end

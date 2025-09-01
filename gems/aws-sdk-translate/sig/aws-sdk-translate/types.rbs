@@ -1,0 +1,1116 @@
+module Aws::Translate
+  module Types
+
+    class AppliedTerminology
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?terms: Array[Types::Term],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor terms: Array[Types::Term]?
+    end
+
+    module Brevity
+      ON: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateParallelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?parallel_data_config: Types::ParallelDataConfig,
+        ?encryption_key: Types::EncryptionKey,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor parallel_data_config: Types::ParallelDataConfig?
+      attr_accessor encryption_key: Types::EncryptionKey?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateParallelDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteParallelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteParallelDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteTerminologyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeTextTranslationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeTextTranslationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_translation_job_properties: Types::TextTranslationJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_translation_job_properties: Types::TextTranslationJobProperties?
+    end
+
+    class DetectedLanguageLowConfidenceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?detected_language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor detected_language_code: String?
+    end
+
+    module Directionality
+      UNI: String
+      MULTI: String
+    end
+
+    module DisplayLanguageCode
+      DE: String
+      EN: String
+      ES: String
+      FR: String
+      IT: String
+      JA: String
+      KO: String
+      PT: String
+      ZH: String
+      ZH_TW: String
+    end
+
+    class Document
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor content_type: String?
+    end
+
+    class EncryptionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+    end
+
+    module EncryptionKeyType
+      KMS: String
+    end
+
+    module Formality
+      FORMAL: String
+      INFORMAL: String
+    end
+
+    class GetParallelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetParallelDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parallel_data_properties: Types::ParallelDataProperties,
+        ?data_location: Types::ParallelDataDataLocation,
+        ?auxiliary_data_location: Types::ParallelDataDataLocation,
+        ?latest_update_attempt_auxiliary_data_location: Types::ParallelDataDataLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parallel_data_properties: Types::ParallelDataProperties?
+      attr_accessor data_location: Types::ParallelDataDataLocation?
+      attr_accessor auxiliary_data_location: Types::ParallelDataDataLocation?
+      attr_accessor latest_update_attempt_auxiliary_data_location: Types::ParallelDataDataLocation?
+    end
+
+    class GetTerminologyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?terminology_data_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor terminology_data_format: String?
+    end
+
+    class GetTerminologyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminology_properties: Types::TerminologyProperties,
+        ?terminology_data_location: Types::TerminologyDataLocation,
+        ?auxiliary_data_location: Types::TerminologyDataLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminology_properties: Types::TerminologyProperties?
+      attr_accessor terminology_data_location: Types::TerminologyDataLocation?
+      attr_accessor auxiliary_data_location: Types::TerminologyDataLocation?
+    end
+
+    class ImportTerminologyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?merge_strategy: String,
+        ?description: String,
+        ?terminology_data: Types::TerminologyData,
+        ?encryption_key: Types::EncryptionKey,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor merge_strategy: String?
+      attr_accessor description: String?
+      attr_accessor terminology_data: Types::TerminologyData?
+      attr_accessor encryption_key: Types::EncryptionKey?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportTerminologyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminology_properties: Types::TerminologyProperties,
+        ?auxiliary_data_location: Types::TerminologyDataLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminology_properties: Types::TerminologyProperties?
+      attr_accessor auxiliary_data_location: Types::TerminologyDataLocation?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor content_type: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFilterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?translated_documents_count: Integer,
+        ?documents_with_errors_count: Integer,
+        ?input_documents_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor translated_documents_count: Integer?
+      attr_accessor documents_with_errors_count: Integer?
+      attr_accessor input_documents_count: Integer?
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      COMPLETED_WITH_ERROR: String
+      FAILED: String
+      STOP_REQUESTED: String
+      STOPPED: String
+    end
+
+    class Language
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_name: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_name: String?
+      attr_accessor language_code: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListLanguagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_language_code: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_language_code: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLanguagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?languages: Array[Types::Language],
+        ?display_language_code: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor languages: Array[Types::Language]?
+      attr_accessor display_language_code: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListParallelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListParallelDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parallel_data_properties_list: Array[Types::ParallelDataProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parallel_data_properties_list: Array[Types::ParallelDataProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTerminologiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTerminologiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminology_properties_list: Array[Types::TerminologyProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminology_properties_list: Array[Types::TerminologyProperties]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTextTranslationJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::TextTranslationJobFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::TextTranslationJobFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTextTranslationJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_translation_job_properties_list: Array[Types::TextTranslationJobProperties],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_translation_job_properties_list: Array[Types::TextTranslationJobProperties]?
+      attr_accessor next_token: String?
+    end
+
+    module MergeStrategy
+      OVERWRITE: String
+    end
+
+    class OutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?encryption_key: Types::EncryptionKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor encryption_key: Types::EncryptionKey?
+    end
+
+    class ParallelDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor format: String?
+    end
+
+    class ParallelDataDataLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_type: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_type: String?
+      attr_accessor location: String?
+    end
+
+    module ParallelDataFormat
+      TSV: String
+      CSV: String
+      TMX: String
+    end
+
+    class ParallelDataProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?status: String,
+        ?source_language_code: String,
+        ?target_language_codes: Array[String],
+        ?parallel_data_config: Types::ParallelDataConfig,
+        ?message: String,
+        ?imported_data_size: Integer,
+        ?imported_record_count: Integer,
+        ?failed_record_count: Integer,
+        ?skipped_record_count: Integer,
+        ?encryption_key: Types::EncryptionKey,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?latest_update_attempt_status: String,
+        ?latest_update_attempt_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_codes: Array[String]?
+      attr_accessor parallel_data_config: Types::ParallelDataConfig?
+      attr_accessor message: String?
+      attr_accessor imported_data_size: Integer?
+      attr_accessor imported_record_count: Integer?
+      attr_accessor failed_record_count: Integer?
+      attr_accessor skipped_record_count: Integer?
+      attr_accessor encryption_key: Types::EncryptionKey?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor latest_update_attempt_status: String?
+      attr_accessor latest_update_attempt_at: Time?
+    end
+
+    module ParallelDataStatus
+      CREATING: String
+      UPDATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    module Profanity
+      MASK: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartTextTranslationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?source_language_code: String,
+        ?target_language_codes: Array[String],
+        ?terminology_names: Array[String],
+        ?parallel_data_names: Array[String],
+        ?client_token: String,
+        ?settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_codes: Array[String]?
+      attr_accessor terminology_names: Array[String]?
+      attr_accessor parallel_data_names: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor settings: Types::TranslationSettings?
+    end
+
+    class StartTextTranslationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+    end
+
+    class StopTextTranslationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StopTextTranslationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Term
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_text: String,
+        ?target_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_text: String?
+      attr_accessor target_text: String?
+    end
+
+    class TerminologyData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file: String,
+        ?format: String,
+        ?directionality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: String?
+      attr_accessor format: String?
+      attr_accessor directionality: String?
+    end
+
+    module TerminologyDataFormat
+      CSV: String
+      TMX: String
+      TSV: String
+    end
+
+    class TerminologyDataLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_type: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_type: String?
+      attr_accessor location: String?
+    end
+
+    class TerminologyProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?arn: String,
+        ?source_language_code: String,
+        ?target_language_codes: Array[String],
+        ?encryption_key: Types::EncryptionKey,
+        ?size_bytes: Integer,
+        ?term_count: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?directionality: String,
+        ?message: String,
+        ?skipped_term_count: Integer,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_codes: Array[String]?
+      attr_accessor encryption_key: Types::EncryptionKey?
+      attr_accessor size_bytes: Integer?
+      attr_accessor term_count: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor directionality: String?
+      attr_accessor message: String?
+      attr_accessor skipped_term_count: Integer?
+      attr_accessor format: String?
+    end
+
+    class TextSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TextTranslationJobFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_status: String,
+        ?submitted_before_time: Time,
+        ?submitted_after_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor submitted_before_time: Time?
+      attr_accessor submitted_after_time: Time?
+    end
+
+    class TextTranslationJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?job_details: Types::JobDetails,
+        ?source_language_code: String,
+        ?target_language_codes: Array[String],
+        ?terminology_names: Array[String],
+        ?parallel_data_names: Array[String],
+        ?message: String,
+        ?submitted_time: Time,
+        ?end_time: Time,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?data_access_role_arn: String,
+        ?settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor job_details: Types::JobDetails?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_codes: Array[String]?
+      attr_accessor terminology_names: Array[String]?
+      attr_accessor parallel_data_names: Array[String]?
+      attr_accessor message: String?
+      attr_accessor submitted_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor settings: Types::TranslationSettings?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class TranslateDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::Document,
+        ?terminology_names: Array[String],
+        ?source_language_code: String,
+        ?target_language_code: String,
+        ?settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::Document?
+      attr_accessor terminology_names: Array[String]?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_code: String?
+      attr_accessor settings: Types::TranslationSettings?
+    end
+
+    class TranslateDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?translated_document: Types::TranslatedDocument,
+        ?source_language_code: String,
+        ?target_language_code: String,
+        ?applied_terminologies: Array[Types::AppliedTerminology],
+        ?applied_settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor translated_document: Types::TranslatedDocument?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_code: String?
+      attr_accessor applied_terminologies: Array[Types::AppliedTerminology]?
+      attr_accessor applied_settings: Types::TranslationSettings?
+    end
+
+    class TranslateTextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?terminology_names: Array[String],
+        ?source_language_code: String,
+        ?target_language_code: String,
+        ?settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor terminology_names: Array[String]?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_code: String?
+      attr_accessor settings: Types::TranslationSettings?
+    end
+
+    class TranslateTextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?translated_text: String,
+        ?source_language_code: String,
+        ?target_language_code: String,
+        ?applied_terminologies: Array[Types::AppliedTerminology],
+        ?applied_settings: Types::TranslationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor translated_text: String?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_code: String?
+      attr_accessor applied_terminologies: Array[Types::AppliedTerminology]?
+      attr_accessor applied_settings: Types::TranslationSettings?
+    end
+
+    class TranslatedDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+    end
+
+    class TranslationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?formality: String,
+        ?profanity: String,
+        ?brevity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor formality: String?
+      attr_accessor profanity: String?
+      attr_accessor brevity: String?
+    end
+
+    class UnsupportedDisplayLanguageCodeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?display_language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor display_language_code: String?
+    end
+
+    class UnsupportedLanguagePairException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?source_language_code: String,
+        ?target_language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor source_language_code: String?
+      attr_accessor target_language_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateParallelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?parallel_data_config: Types::ParallelDataConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor parallel_data_config: Types::ParallelDataConfig?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateParallelDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?latest_update_attempt_status: String,
+        ?latest_update_attempt_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor latest_update_attempt_status: String?
+      attr_accessor latest_update_attempt_at: Time?
+    end
+  end
+end

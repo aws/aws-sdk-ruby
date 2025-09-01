@@ -1,0 +1,26 @@
+module Aws::Route53Domains
+  module Errors
+    class DnssecLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DomainLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateRequest < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+    end
+    class InvalidInput < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TLDRulesViolation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedTLD < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

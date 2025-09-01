@@ -1,0 +1,853 @@
+module Aws::MediaPackageV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MediaPackageV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelHarvestJobResponse
+      include Smithy::Client::_Response[Types::CancelHarvestJobResponse]
+    end
+    def cancel_harvest_job: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?harvest_job_name: String,
+      ?e_tag: String
+    ) -> _CancelHarvestJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelHarvestJobResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def arn: () -> String?
+      def channel_name: () -> String?
+      def channel_group_name: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def ingest_endpoints: () -> Array[Types::IngestEndpoint]?
+      def input_type: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+      def input_switch_configuration: () -> Types::InputSwitchConfiguration?
+      def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+    end
+    def create_channel: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?client_token: String,
+      ?input_type: String,
+      ?description: String,
+      ?input_switch_configuration: {
+        mqcs_input_switching: bool,
+        preferred_input: Integer
+      },
+      ?output_header_configuration: {
+        publish_mqcs: bool
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateChannelGroupResponse
+      include Smithy::Client::_Response[Types::CreateChannelGroupResponse]
+      def channel_group_name: () -> String?
+      def arn: () -> String?
+      def egress_domain: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def e_tag: () -> String?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_channel_group: (
+      ?channel_group_name: String,
+      ?client_token: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateChannelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelGroupResponse
+
+    interface _CreateHarvestJobResponse
+      include Smithy::Client::_Response[Types::CreateHarvestJobResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def destination: () -> Types::Destination?
+      def harvest_job_name: () -> String?
+      def harvested_manifests: () -> Types::HarvestedManifests?
+      def description: () -> String?
+      def schedule_configuration: () -> Types::HarvesterScheduleConfiguration?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def status: () -> String?
+      def error_message: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_harvest_job: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?description: String,
+      ?harvested_manifests: {
+        hls_manifests: Array[
+          {
+            manifest_name: String
+          }
+        ],
+        dash_manifests: Array[
+          {
+            manifest_name: untyped
+          }
+        ],
+        low_latency_hls_manifests: Array[
+          {
+            manifest_name: untyped
+          }
+        ]
+      },
+      ?schedule_configuration: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?destination: {
+        s3_destination: {
+          bucket_name: String,
+          destination_path: String
+        }
+      },
+      ?client_token: String,
+      ?harvest_job_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateHarvestJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHarvestJobResponse
+
+    interface _CreateOriginEndpointResponse
+      include Smithy::Client::_Response[Types::CreateOriginEndpointResponse]
+      def arn: () -> String?
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def container_type: () -> String?
+      def segment: () -> Types::Segment?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def startover_window_seconds: () -> Integer?
+      def hls_manifests: () -> Array[Types::GetHlsManifestConfiguration]?
+      def low_latency_hls_manifests: () -> Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
+      def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
+      def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_origin_endpoint: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?container_type: String,
+      ?segment: {
+        segment_duration_seconds: Integer,
+        segment_name: String,
+        ts_use_audio_rendition_group: bool,
+        include_iframe_only_streams: untyped,
+        ts_include_dvb_subtitles: untyped,
+        scte: {
+          scte_filter: Array[String]
+        },
+        encryption: {
+          constant_initialization_vector: untyped,
+          encryption_method: {
+            ts_encryption_method: String,
+            cmaf_encryption_method: String,
+            ism_encryption_method: String
+          },
+          key_rotation_interval_seconds: untyped,
+          cmaf_exclude_segment_drm_metadata: untyped,
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            resource_id: untyped,
+            drm_systems: Array[String],
+            role_arn: untyped,
+            url: untyped
+          }
+        }
+      },
+      ?client_token: String,
+      ?description: String,
+      ?startover_window_seconds: Integer,
+      ?hls_manifests: Array[
+        {
+          manifest_name: String,
+          child_manifest_name: untyped,
+          scte_hls: {
+            ad_marker_hls: String
+          },
+          start_tag: {
+            time_offset: Float,
+            precise: bool
+          },
+          manifest_window_seconds: Integer,
+          program_date_time_interval_seconds: untyped,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          url_encode_child_manifest: untyped
+        }
+      ],
+      ?low_latency_hls_manifests: Array[
+        {
+          manifest_name: String,
+          child_manifest_name: untyped,
+          scte_hls: {
+            ad_marker_hls: String
+          },
+          start_tag: {
+            time_offset: Float,
+            precise: bool
+          },
+          manifest_window_seconds: Integer,
+          program_date_time_interval_seconds: untyped,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          url_encode_child_manifest: untyped
+        }
+      ],
+      ?dash_manifests: Array[
+        {
+          manifest_name: String,
+          manifest_window_seconds: Integer,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          min_update_period_seconds: untyped,
+          min_buffer_time_seconds: untyped,
+          suggested_presentation_delay_seconds: untyped,
+          segment_template_format: String,
+          period_triggers: Array[String],
+          scte_dash: {
+            ad_marker_dash: String
+          },
+          drm_signaling: String,
+          utc_timing: {
+            timing_mode: String,
+            timing_source: untyped
+          },
+          profiles: Array[String],
+          base_urls: Array[
+            {
+              url: untyped,
+              service_location: untyped,
+              dvb_priority: untyped,
+              dvb_weight: untyped
+            }
+          ],
+          program_information: {
+            title: untyped,
+            source: untyped,
+            copyright: untyped,
+            language_code: untyped,
+            more_information_url: untyped
+          },
+          dvb_settings: {
+            font_download: {
+              url: untyped,
+              mime_type: untyped,
+              font_family: untyped
+            },
+            error_metrics: Array[
+              {
+                reporting_url: untyped,
+                probability: untyped
+              }
+            ]
+          },
+          compactness: String,
+          subtitle_configuration: {
+            ttml_configuration: {
+              ttml_profile: String
+            }
+          }
+        }
+      ],
+      ?mss_manifests: Array[
+        {
+          manifest_name: String,
+          manifest_window_seconds: Integer,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          manifest_layout: String
+        }
+      ],
+      ?force_endpoint_error_configuration: {
+        endpoint_error_conditions: Array[String]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOriginEndpointResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Types::DeleteChannelResponse]
+    end
+    def delete_channel: (
+      ?channel_group_name: String,
+      ?channel_name: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeleteChannelGroupResponse
+      include Smithy::Client::_Response[Types::DeleteChannelGroupResponse]
+    end
+    def delete_channel_group: (
+      ?channel_group_name: String
+    ) -> _DeleteChannelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelGroupResponse
+
+    interface _DeleteChannelPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteChannelPolicyResponse]
+    end
+    def delete_channel_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String
+    ) -> _DeleteChannelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelPolicyResponse
+
+    interface _DeleteOriginEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteOriginEndpointResponse]
+    end
+    def delete_origin_endpoint: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String
+    ) -> _DeleteOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOriginEndpointResponse
+
+    interface _DeleteOriginEndpointPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteOriginEndpointPolicyResponse]
+    end
+    def delete_origin_endpoint_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String
+    ) -> _DeleteOriginEndpointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOriginEndpointPolicyResponse
+
+    interface _GetChannelResponse
+      include Smithy::Client::_Response[Types::GetChannelResponse]
+      def arn: () -> String?
+      def channel_name: () -> String?
+      def channel_group_name: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def reset_at: () -> Time?
+      def description: () -> String?
+      def ingest_endpoints: () -> Array[Types::IngestEndpoint]?
+      def input_type: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+      def input_switch_configuration: () -> Types::InputSwitchConfiguration?
+      def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+    end
+    def get_channel: (
+      ?channel_group_name: String,
+      ?channel_name: String
+    ) -> _GetChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelResponse
+
+    interface _GetChannelGroupResponse
+      include Smithy::Client::_Response[Types::GetChannelGroupResponse]
+      def channel_group_name: () -> String?
+      def arn: () -> String?
+      def egress_domain: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_channel_group: (
+      ?channel_group_name: String
+    ) -> _GetChannelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelGroupResponse
+
+    interface _GetChannelPolicyResponse
+      include Smithy::Client::_Response[Types::GetChannelPolicyResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def policy: () -> String?
+    end
+    def get_channel_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String
+    ) -> _GetChannelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelPolicyResponse
+
+    interface _GetHarvestJobResponse
+      include Smithy::Client::_Response[Types::GetHarvestJobResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def destination: () -> Types::Destination?
+      def harvest_job_name: () -> String?
+      def harvested_manifests: () -> Types::HarvestedManifests?
+      def description: () -> String?
+      def schedule_configuration: () -> Types::HarvesterScheduleConfiguration?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def status: () -> String?
+      def error_message: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_harvest_job: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?harvest_job_name: String
+    ) -> _GetHarvestJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHarvestJobResponse
+
+    interface _GetOriginEndpointResponse
+      include Smithy::Client::_Response[Types::GetOriginEndpointResponse]
+      def arn: () -> String?
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def container_type: () -> String?
+      def segment: () -> Types::Segment?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def reset_at: () -> Time?
+      def description: () -> String?
+      def startover_window_seconds: () -> Integer?
+      def hls_manifests: () -> Array[Types::GetHlsManifestConfiguration]?
+      def low_latency_hls_manifests: () -> Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
+      def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
+      def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_origin_endpoint: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String
+    ) -> _GetOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginEndpointResponse
+
+    interface _GetOriginEndpointPolicyResponse
+      include Smithy::Client::_Response[Types::GetOriginEndpointPolicyResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def policy: () -> String?
+      def cdn_auth_configuration: () -> Types::CdnAuthConfiguration?
+    end
+    def get_origin_endpoint_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String
+    ) -> _GetOriginEndpointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOriginEndpointPolicyResponse
+
+    interface _ListChannelGroupsResponse
+      include Smithy::Client::_Response[Types::ListChannelGroupsResponse]
+      def items: () -> Array[Types::ChannelGroupListConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_channel_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelGroupsResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def items: () -> Array[Types::ChannelListConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?channel_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListHarvestJobsResponse
+      include Smithy::Client::_Response[Types::ListHarvestJobsResponse]
+      def items: () -> Array[Types::HarvestJob]?
+      def next_token: () -> String?
+    end
+    def list_harvest_jobs: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHarvestJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHarvestJobsResponse
+
+    interface _ListOriginEndpointsResponse
+      include Smithy::Client::_Response[Types::ListOriginEndpointsResponse]
+      def items: () -> Array[Types::OriginEndpointListConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_origin_endpoints: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOriginEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOriginEndpointsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutChannelPolicyResponse
+      include Smithy::Client::_Response[Types::PutChannelPolicyResponse]
+    end
+    def put_channel_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?policy: String
+    ) -> _PutChannelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutChannelPolicyResponse
+
+    interface _PutOriginEndpointPolicyResponse
+      include Smithy::Client::_Response[Types::PutOriginEndpointPolicyResponse]
+    end
+    def put_origin_endpoint_policy: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?policy: String,
+      ?cdn_auth_configuration: {
+        cdn_identifier_secret_arns: Array[String],
+        secrets_role_arn: String
+      }
+    ) -> _PutOriginEndpointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOriginEndpointPolicyResponse
+
+    interface _ResetChannelStateResponse
+      include Smithy::Client::_Response[Types::ResetChannelStateResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def arn: () -> String?
+      def reset_at: () -> Time?
+    end
+    def reset_channel_state: (
+      ?channel_group_name: String,
+      ?channel_name: String
+    ) -> _ResetChannelStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetChannelStateResponse
+
+    interface _ResetOriginEndpointStateResponse
+      include Smithy::Client::_Response[Types::ResetOriginEndpointStateResponse]
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def arn: () -> String?
+      def reset_at: () -> Time?
+    end
+    def reset_origin_endpoint_state: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String
+    ) -> _ResetOriginEndpointStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetOriginEndpointStateResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def arn: () -> String?
+      def channel_name: () -> String?
+      def channel_group_name: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def ingest_endpoints: () -> Array[Types::IngestEndpoint]?
+      def input_type: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+      def input_switch_configuration: () -> Types::InputSwitchConfiguration?
+      def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+    end
+    def update_channel: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?e_tag: String,
+      ?description: String,
+      ?input_switch_configuration: {
+        mqcs_input_switching: bool,
+        preferred_input: Integer
+      },
+      ?output_header_configuration: {
+        publish_mqcs: bool
+      }
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateChannelGroupResponse
+      include Smithy::Client::_Response[Types::UpdateChannelGroupResponse]
+      def channel_group_name: () -> String?
+      def arn: () -> String?
+      def egress_domain: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_channel_group: (
+      ?channel_group_name: String,
+      ?e_tag: String,
+      ?description: String
+    ) -> _UpdateChannelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelGroupResponse
+
+    interface _UpdateOriginEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateOriginEndpointResponse]
+      def arn: () -> String?
+      def channel_group_name: () -> String?
+      def channel_name: () -> String?
+      def origin_endpoint_name: () -> String?
+      def container_type: () -> String?
+      def segment: () -> Types::Segment?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def description: () -> String?
+      def startover_window_seconds: () -> Integer?
+      def hls_manifests: () -> Array[Types::GetHlsManifestConfiguration]?
+      def low_latency_hls_manifests: () -> Array[Types::GetLowLatencyHlsManifestConfiguration]?
+      def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
+      def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def e_tag: () -> String?
+      def tags: () -> Hash[String, String]?
+      def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
+    end
+    def update_origin_endpoint: (
+      ?channel_group_name: String,
+      ?channel_name: String,
+      ?origin_endpoint_name: String,
+      ?container_type: String,
+      ?segment: {
+        segment_duration_seconds: Integer,
+        segment_name: String,
+        ts_use_audio_rendition_group: bool,
+        include_iframe_only_streams: untyped,
+        ts_include_dvb_subtitles: untyped,
+        scte: {
+          scte_filter: Array[String]
+        },
+        encryption: {
+          constant_initialization_vector: untyped,
+          encryption_method: {
+            ts_encryption_method: String,
+            cmaf_encryption_method: String,
+            ism_encryption_method: String
+          },
+          key_rotation_interval_seconds: untyped,
+          cmaf_exclude_segment_drm_metadata: untyped,
+          speke_key_provider: {
+            encryption_contract_configuration: {
+              preset_speke20_audio: String,
+              preset_speke20_video: String
+            },
+            resource_id: untyped,
+            drm_systems: Array[String],
+            role_arn: untyped,
+            url: untyped
+          }
+        }
+      },
+      ?description: String,
+      ?startover_window_seconds: Integer,
+      ?hls_manifests: Array[
+        {
+          manifest_name: String,
+          child_manifest_name: untyped,
+          scte_hls: {
+            ad_marker_hls: String
+          },
+          start_tag: {
+            time_offset: Float,
+            precise: bool
+          },
+          manifest_window_seconds: Integer,
+          program_date_time_interval_seconds: untyped,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          url_encode_child_manifest: untyped
+        }
+      ],
+      ?low_latency_hls_manifests: Array[
+        {
+          manifest_name: String,
+          child_manifest_name: untyped,
+          scte_hls: {
+            ad_marker_hls: String
+          },
+          start_tag: {
+            time_offset: Float,
+            precise: bool
+          },
+          manifest_window_seconds: Integer,
+          program_date_time_interval_seconds: untyped,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          url_encode_child_manifest: untyped
+        }
+      ],
+      ?dash_manifests: Array[
+        {
+          manifest_name: String,
+          manifest_window_seconds: Integer,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          min_update_period_seconds: untyped,
+          min_buffer_time_seconds: untyped,
+          suggested_presentation_delay_seconds: untyped,
+          segment_template_format: String,
+          period_triggers: Array[String],
+          scte_dash: {
+            ad_marker_dash: String
+          },
+          drm_signaling: String,
+          utc_timing: {
+            timing_mode: String,
+            timing_source: untyped
+          },
+          profiles: Array[String],
+          base_urls: Array[
+            {
+              url: untyped,
+              service_location: untyped,
+              dvb_priority: untyped,
+              dvb_weight: untyped
+            }
+          ],
+          program_information: {
+            title: untyped,
+            source: untyped,
+            copyright: untyped,
+            language_code: untyped,
+            more_information_url: untyped
+          },
+          dvb_settings: {
+            font_download: {
+              url: untyped,
+              mime_type: untyped,
+              font_family: untyped
+            },
+            error_metrics: Array[
+              {
+                reporting_url: untyped,
+                probability: untyped
+              }
+            ]
+          },
+          compactness: String,
+          subtitle_configuration: {
+            ttml_configuration: {
+              ttml_profile: String
+            }
+          }
+        }
+      ],
+      ?mss_manifests: Array[
+        {
+          manifest_name: String,
+          manifest_window_seconds: Integer,
+          filter_configuration: {
+            manifest_filter: String,
+            start: Time,
+            end: untyped,
+            time_delay_seconds: untyped,
+            clip_start_time: untyped
+          },
+          manifest_layout: String
+        }
+      ],
+      ?force_endpoint_error_configuration: {
+        endpoint_error_conditions: Array[String]
+      },
+      ?e_tag: String
+    ) -> _UpdateOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOriginEndpointResponse
+  end
+end

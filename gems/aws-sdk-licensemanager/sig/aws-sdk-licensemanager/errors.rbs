@@ -1,0 +1,57 @@
+module Aws::LicenseManager
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AuthorizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntitlementNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FailedDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class FilterLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LicenseUsageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoEntitlementsAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RateLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RedirectException < Smithy::Client::ServiceError
+      def location: () -> String?
+      def message: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerInternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedDigitalSignatureMethodException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,185 @@
+module Aws::PersonalizeRuntime
+  module Types
+
+    class GetActionRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+        ?user_id: String,
+        ?num_results: Integer,
+        ?filter_arn: String,
+        ?filter_values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+      attr_accessor user_id: String?
+      attr_accessor num_results: Integer?
+      attr_accessor filter_arn: String?
+      attr_accessor filter_values: Hash[String, String]?
+    end
+
+    class GetActionRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_list: Array[Types::PredictedAction],
+        ?recommendation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_list: Array[Types::PredictedAction]?
+      attr_accessor recommendation_id: String?
+    end
+
+    class GetPersonalizedRankingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+        ?input_list: Array[String],
+        ?user_id: String,
+        ?context: Hash[String, String],
+        ?filter_arn: String,
+        ?filter_values: Hash[String, String],
+        ?metadata_columns: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+      attr_accessor input_list: Array[String]?
+      attr_accessor user_id: String?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor filter_arn: String?
+      attr_accessor filter_values: Hash[String, String]?
+      attr_accessor metadata_columns: Hash[String, Array[String]]?
+    end
+
+    class GetPersonalizedRankingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?personalized_ranking: Array[Types::PredictedItem],
+        ?recommendation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor personalized_ranking: Array[Types::PredictedItem]?
+      attr_accessor recommendation_id: String?
+    end
+
+    class GetRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+        ?item_id: String,
+        ?user_id: String,
+        ?num_results: Integer,
+        ?context: Hash[String, String],
+        ?filter_arn: String,
+        ?filter_values: Hash[String, String],
+        ?recommender_arn: String,
+        ?promotions: Array[Types::Promotion],
+        ?metadata_columns: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+      attr_accessor item_id: String?
+      attr_accessor user_id: String?
+      attr_accessor num_results: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor filter_arn: String?
+      attr_accessor filter_values: Hash[String, String]?
+      attr_accessor recommender_arn: String?
+      attr_accessor promotions: Array[Types::Promotion]?
+      attr_accessor metadata_columns: Hash[String, Array[String]]?
+    end
+
+    class GetRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_list: Array[Types::PredictedItem],
+        ?recommendation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_list: Array[Types::PredictedItem]?
+      attr_accessor recommendation_id: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PredictedAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor score: Float?
+    end
+
+    class PredictedItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_id: String,
+        ?score: Float,
+        ?promotion_name: String,
+        ?metadata: Hash[String, String],
+        ?reason: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_id: String?
+      attr_accessor score: Float?
+      attr_accessor promotion_name: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor reason: Array[String]?
+    end
+
+    class Promotion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?percent_promoted_items: Integer,
+        ?filter_arn: String,
+        ?filter_values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor percent_promoted_items: Integer?
+      attr_accessor filter_arn: String?
+      attr_accessor filter_values: Hash[String, String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

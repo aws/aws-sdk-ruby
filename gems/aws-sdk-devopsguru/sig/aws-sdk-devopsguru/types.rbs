@@ -1,0 +1,2601 @@
+module Aws::DevOpsGuru
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?insight: Types::AccountInsightHealth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor insight: Types::AccountInsightHealth?
+    end
+
+    class AccountInsightHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_proactive_insights: Integer,
+        ?open_reactive_insights: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_proactive_insights: Integer?
+      attr_accessor open_reactive_insights: Integer?
+    end
+
+    class AddNotificationChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config: Types::NotificationChannelConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config: Types::NotificationChannelConfig?
+    end
+
+    class AddNotificationChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class AmazonCodeGuruProfilerIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class AnomalousLogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+        ?impact_start_time: Time,
+        ?impact_end_time: Time,
+        ?number_of_log_lines_scanned: Integer,
+        ?log_anomaly_showcases: Array[Types::LogAnomalyShowcase],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+      attr_accessor impact_start_time: Time?
+      attr_accessor impact_end_time: Time?
+      attr_accessor number_of_log_lines_scanned: Integer?
+      attr_accessor log_anomaly_showcases: Array[Types::LogAnomalyShowcase]?
+    end
+
+    class AnomalyReportedTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_time: Time,
+        ?close_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_time: Time?
+      attr_accessor close_time: Time?
+    end
+
+    class AnomalyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module AnomalySeverity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class AnomalySourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_metrics: Array[Types::CloudWatchMetricsDetail],
+        ?performance_insights_metrics: Array[Types::PerformanceInsightsMetricsDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_metrics: Array[Types::CloudWatchMetricsDetail]?
+      attr_accessor performance_insights_metrics: Array[Types::PerformanceInsightsMetricsDetail]?
+    end
+
+    class AnomalySourceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?source_resource_name: String,
+        ?source_resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor source_resource_name: String?
+      attr_accessor source_resource_type: String?
+    end
+
+    module AnomalyStatus
+      ONGOING: String
+      CLOSED: String
+    end
+
+    class AnomalyTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module AnomalyType
+      CAUSAL: String
+      CONTEXTUAL: String
+    end
+
+    class CloudFormationCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_names: Array[String]?
+    end
+
+    class CloudFormationCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_names: Array[String]?
+    end
+
+    class CloudFormationCostEstimationResourceCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_names: Array[String]?
+    end
+
+    class CloudFormationHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?insight: Types::InsightHealth,
+        ?analyzed_resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor insight: Types::InsightHealth?
+      attr_accessor analyzed_resource_count: Integer?
+    end
+
+    module CloudWatchMetricDataStatusCode
+      COMPLETE: String
+      INTERNAL_ERROR: String
+      PARTIAL_DATA: String
+    end
+
+    class CloudWatchMetricsDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp_metric_value_pair_list: Array[Types::TimestampMetricValuePair],
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp_metric_value_pair_list: Array[Types::TimestampMetricValuePair]?
+      attr_accessor status_code: String?
+    end
+
+    class CloudWatchMetricsDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?namespace: String,
+        ?dimensions: Array[Types::CloudWatchMetricsDimension],
+        ?stat: String,
+        ?unit: String,
+        ?period: Integer,
+        ?metric_data_summary: Types::CloudWatchMetricsDataSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+      attr_accessor dimensions: Array[Types::CloudWatchMetricsDimension]?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+      attr_accessor period: Integer?
+      attr_accessor metric_data_summary: Types::CloudWatchMetricsDataSummary?
+    end
+
+    class CloudWatchMetricsDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module CloudWatchMetricsStat
+      SUM: String
+      AVERAGE: String
+      SAMPLE_COUNT: String
+      MINIMUM: String
+      MAXIMUM: String
+      P99: String
+      P90: String
+      P50: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CostEstimationResourceCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Types::CloudFormationCostEstimationResourceCollectionFilter,
+        ?tags: Array[Types::TagCostEstimationResourceCollectionFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Types::CloudFormationCostEstimationResourceCollectionFilter?
+      attr_accessor tags: Array[Types::TagCostEstimationResourceCollectionFilter]?
+    end
+
+    module CostEstimationServiceResourceState
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module CostEstimationStatus
+      ONGOING: String
+      COMPLETED: String
+    end
+
+    class CostEstimationTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class DeleteInsightRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteInsightResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_reactive_insights: Integer,
+        ?open_proactive_insights: Integer,
+        ?metrics_analyzed: Integer,
+        ?resource_hours: Integer,
+        ?analyzed_resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_reactive_insights: Integer?
+      attr_accessor open_proactive_insights: Integer?
+      attr_accessor metrics_analyzed: Integer?
+      attr_accessor resource_hours: Integer?
+      attr_accessor analyzed_resource_count: Integer?
+    end
+
+    class DescribeAccountOverviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_time: Time,
+        ?to_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_time: Time?
+      attr_accessor to_time: Time?
+    end
+
+    class DescribeAccountOverviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reactive_insights: Integer,
+        ?proactive_insights: Integer,
+        ?mean_time_to_recover_in_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reactive_insights: Integer?
+      attr_accessor proactive_insights: Integer?
+      attr_accessor mean_time_to_recover_in_milliseconds: Integer?
+    end
+
+    class DescribeAnomalyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeAnomalyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_anomaly: Types::ProactiveAnomaly,
+        ?reactive_anomaly: Types::ReactiveAnomaly,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_anomaly: Types::ProactiveAnomaly?
+      attr_accessor reactive_anomaly: Types::ReactiveAnomaly?
+    end
+
+    class DescribeEventSourcesConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEventSourcesConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_sources: Types::EventSourcesConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_sources: Types::EventSourcesConfig?
+    end
+
+    class DescribeFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+    end
+
+    class DescribeFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_feedback: Types::InsightFeedback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_feedback: Types::InsightFeedback?
+    end
+
+    class DescribeInsightRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeInsightResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_insight: Types::ProactiveInsight,
+        ?reactive_insight: Types::ReactiveInsight,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_insight: Types::ProactiveInsight?
+      attr_accessor reactive_insight: Types::ReactiveInsight?
+    end
+
+    class DescribeOrganizationHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?organizational_unit_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor organizational_unit_ids: Array[String]?
+    end
+
+    class DescribeOrganizationHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_reactive_insights: Integer,
+        ?open_proactive_insights: Integer,
+        ?metrics_analyzed: Integer,
+        ?resource_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_reactive_insights: Integer?
+      attr_accessor open_proactive_insights: Integer?
+      attr_accessor metrics_analyzed: Integer?
+      attr_accessor resource_hours: Integer?
+    end
+
+    class DescribeOrganizationOverviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_time: Time,
+        ?to_time: Time,
+        ?account_ids: Array[String],
+        ?organizational_unit_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_time: Time?
+      attr_accessor to_time: Time?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor organizational_unit_ids: Array[String]?
+    end
+
+    class DescribeOrganizationOverviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reactive_insights: Integer,
+        ?proactive_insights: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reactive_insights: Integer?
+      attr_accessor proactive_insights: Integer?
+    end
+
+    class DescribeOrganizationResourceCollectionHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_resource_collection_type: String,
+        ?account_ids: Array[String],
+        ?organizational_unit_ids: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_resource_collection_type: String?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor organizational_unit_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeOrganizationResourceCollectionHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Array[Types::CloudFormationHealth],
+        ?service: Array[Types::ServiceHealth],
+        ?account: Array[Types::AccountHealth],
+        ?next_token: String,
+        ?tags: Array[Types::TagHealth],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Array[Types::CloudFormationHealth]?
+      attr_accessor service: Array[Types::ServiceHealth]?
+      attr_accessor account: Array[Types::AccountHealth]?
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::TagHealth]?
+    end
+
+    class DescribeResourceCollectionHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeResourceCollectionHealthResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Array[Types::CloudFormationHealth],
+        ?service: Array[Types::ServiceHealth],
+        ?next_token: String,
+        ?tags: Array[Types::TagHealth],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Array[Types::CloudFormationHealth]?
+      attr_accessor service: Array[Types::ServiceHealth]?
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::TagHealth]?
+    end
+
+    class DescribeServiceIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeServiceIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_integration: Types::ServiceIntegrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_integration: Types::ServiceIntegrationConfig?
+    end
+
+    class EndTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_time: Time,
+        ?to_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_time: Time?
+      attr_accessor to_time: Time?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection: Types::ResourceCollection,
+        ?id: String,
+        ?time: Time,
+        ?event_source: String,
+        ?name: String,
+        ?data_source: String,
+        ?event_class: String,
+        ?resources: Array[Types::EventResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor id: String?
+      attr_accessor time: Time?
+      attr_accessor event_source: String?
+      attr_accessor name: String?
+      attr_accessor data_source: String?
+      attr_accessor event_class: String?
+      attr_accessor resources: Array[Types::EventResource]?
+    end
+
+    module EventClass
+      INFRASTRUCTURE: String
+      DEPLOYMENT: String
+      SECURITY_CHANGE: String
+      CONFIG_CHANGE: String
+      SCHEMA_CHANGE: String
+    end
+
+    module EventDataSource
+      AWS_CLOUD_TRAIL: String
+      AWS_CODE_DEPLOY: String
+    end
+
+    class EventResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    module EventSourceOptInStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EventSourcesConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amazon_code_guru_profiler: Types::AmazonCodeGuruProfilerIntegration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amazon_code_guru_profiler: Types::AmazonCodeGuruProfilerIntegration?
+    end
+
+    class EventTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_time: Time,
+        ?to_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_time: Time?
+      attr_accessor to_time: Time?
+    end
+
+    class GetCostEstimationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class GetCostEstimationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection: Types::CostEstimationResourceCollectionFilter,
+        ?status: String,
+        ?costs: Array[Types::ServiceResourceCost],
+        ?time_range: Types::CostEstimationTimeRange,
+        ?total_cost: Float,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection: Types::CostEstimationResourceCollectionFilter?
+      attr_accessor status: String?
+      attr_accessor costs: Array[Types::ServiceResourceCost]?
+      attr_accessor time_range: Types::CostEstimationTimeRange?
+      attr_accessor total_cost: Float?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceCollectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceCollectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection: Types::ResourceCollectionFilter,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection: Types::ResourceCollectionFilter?
+      attr_accessor next_token: String?
+    end
+
+    class InsightFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor feedback: String?
+    end
+
+    module InsightFeedbackOption
+      VALID_COLLECTION: String
+      RECOMMENDATION_USEFUL: String
+      ALERT_TOO_SENSITIVE: String
+      DATA_NOISY_ANOMALY: String
+      DATA_INCORRECT: String
+    end
+
+    class InsightHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_proactive_insights: Integer,
+        ?open_reactive_insights: Integer,
+        ?mean_time_to_recover_in_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_proactive_insights: Integer?
+      attr_accessor open_reactive_insights: Integer?
+      attr_accessor mean_time_to_recover_in_milliseconds: Integer?
+    end
+
+    module InsightSeverity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    module InsightStatus
+      ONGOING: String
+      CLOSED: String
+    end
+
+    class InsightTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module InsightType
+      REACTIVE: String
+      PROACTIVE: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class KMSServerSideEncryptionIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?opt_in_status: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor opt_in_status: String?
+      attr_accessor type: String?
+    end
+
+    class KMSServerSideEncryptionIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?opt_in_status: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor opt_in_status: String?
+      attr_accessor type: String?
+    end
+
+    class ListAnomaliesForInsightFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_collection: Types::ServiceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_collection: Types::ServiceCollection?
+    end
+
+    class ListAnomaliesForInsightRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?start_time_range: Types::StartTimeRange,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+        ?filters: Types::ListAnomaliesForInsightFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor start_time_range: Types::StartTimeRange?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+      attr_accessor filters: Types::ListAnomaliesForInsightFilters?
+    end
+
+    class ListAnomaliesForInsightResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_anomalies: Array[Types::ProactiveAnomalySummary],
+        ?reactive_anomalies: Array[Types::ReactiveAnomalySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_anomalies: Array[Types::ProactiveAnomalySummary]?
+      attr_accessor reactive_anomalies: Array[Types::ReactiveAnomalySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnomalousLogGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnomalousLogGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?anomalous_log_groups: Array[Types::AnomalousLogGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor anomalous_log_groups: Array[Types::AnomalousLogGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?event_time_range: Types::EventTimeRange,
+        ?event_class: String,
+        ?event_source: String,
+        ?data_source: String,
+        ?resource_collection: Types::ResourceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor event_time_range: Types::EventTimeRange?
+      attr_accessor event_class: String?
+      attr_accessor event_source: String?
+      attr_accessor data_source: String?
+      attr_accessor resource_collection: Types::ResourceCollection?
+    end
+
+    class ListEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListEventsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListEventsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsAnyStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?start_time_range: Types::StartTimeRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor start_time_range: Types::StartTimeRange?
+    end
+
+    class ListInsightsClosedStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?end_time_range: Types::EndTimeRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor end_time_range: Types::EndTimeRange?
+    end
+
+    class ListInsightsOngoingStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class ListInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_filter: Types::ListInsightsStatusFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_filter: Types::ListInsightsStatusFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_insights: Array[Types::ProactiveInsightSummary],
+        ?reactive_insights: Array[Types::ReactiveInsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_insights: Array[Types::ProactiveInsightSummary]?
+      attr_accessor reactive_insights: Array[Types::ReactiveInsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ongoing: Types::ListInsightsOngoingStatusFilter,
+        ?closed: Types::ListInsightsClosedStatusFilter,
+        ?any: Types::ListInsightsAnyStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ongoing: Types::ListInsightsOngoingStatusFilter?
+      attr_accessor closed: Types::ListInsightsClosedStatusFilter?
+      attr_accessor any: Types::ListInsightsAnyStatusFilter?
+    end
+
+    class ListMonitoredResourcesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_permission: String,
+        ?resource_type_filters: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_permission: String?
+      attr_accessor resource_type_filters: Array[String]?
+    end
+
+    class ListMonitoredResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListMonitoredResourcesFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListMonitoredResourcesFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMonitoredResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitored_resource_identifiers: Array[Types::MonitoredResourceIdentifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitored_resource_identifiers: Array[Types::MonitoredResourceIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::NotificationChannel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::NotificationChannel]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_filter: Types::ListInsightsStatusFilter,
+        ?max_results: Integer,
+        ?account_ids: Array[String],
+        ?organizational_unit_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_filter: Types::ListInsightsStatusFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor organizational_unit_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_insights: Array[Types::ProactiveOrganizationInsightSummary],
+        ?reactive_insights: Array[Types::ReactiveOrganizationInsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_insights: Array[Types::ProactiveOrganizationInsightSummary]?
+      attr_accessor reactive_insights: Array[Types::ReactiveOrganizationInsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?next_token: String,
+        ?locale: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor next_token: String?
+      attr_accessor locale: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendations: Array[Types::Recommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendations: Array[Types::Recommendation]?
+      attr_accessor next_token: String?
+    end
+
+    module Locale
+      DE_DE: String
+      EN_US: String
+      EN_GB: String
+      ES_ES: String
+      FR_FR: String
+      IT_IT: String
+      JA_JP: String
+      KO_KR: String
+      PT_BR: String
+      ZH_CN: String
+      ZH_TW: String
+    end
+
+    class LogAnomalyClass
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_name: String,
+        ?log_anomaly_type: String,
+        ?log_anomaly_token: String,
+        ?log_event_id: String,
+        ?explanation: String,
+        ?number_of_log_lines_occurrences: Integer,
+        ?log_event_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_name: String?
+      attr_accessor log_anomaly_type: String?
+      attr_accessor log_anomaly_token: String?
+      attr_accessor log_event_id: String?
+      attr_accessor explanation: String?
+      attr_accessor number_of_log_lines_occurrences: Integer?
+      attr_accessor log_event_timestamp: Time?
+    end
+
+    class LogAnomalyShowcase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_anomaly_classes: Array[Types::LogAnomalyClass],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_anomaly_classes: Array[Types::LogAnomalyClass]?
+    end
+
+    module LogAnomalyType
+      KEYWORD: String
+      KEYWORD_TOKEN: String
+      FORMAT: String
+      HTTP_CODE: String
+      BLOCK_FORMAT: String
+      NUMERICAL_POINT: String
+      NUMERICAL_NAN: String
+      NEW_FIELD_NAME: String
+    end
+
+    class LogsAnomalyDetectionIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_in_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_in_status: String?
+    end
+
+    class LogsAnomalyDetectionIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_in_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_in_status: String?
+    end
+
+    class MonitoredResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitored_resource_name: String,
+        ?type: String,
+        ?resource_permission: String,
+        ?last_updated: Time,
+        ?resource_collection: Types::ResourceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitored_resource_name: String?
+      attr_accessor type: String?
+      attr_accessor resource_permission: String?
+      attr_accessor last_updated: Time?
+      attr_accessor resource_collection: Types::ResourceCollection?
+    end
+
+    class NotificationChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?config: Types::NotificationChannelConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor config: Types::NotificationChannelConfig?
+    end
+
+    class NotificationChannelConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns: Types::SnsChannelConfig,
+        ?filters: Types::NotificationFilterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns: Types::SnsChannelConfig?
+      attr_accessor filters: Types::NotificationFilterConfig?
+    end
+
+    class NotificationFilterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severities: Array[String],
+        ?message_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severities: Array[String]?
+      attr_accessor message_types: Array[String]?
+    end
+
+    module NotificationMessageType
+      NEW_INSIGHT: String
+      CLOSED_INSIGHT: String
+      NEW_ASSOCIATION: String
+      SEVERITY_UPGRADED: String
+      NEW_RECOMMENDATION: String
+    end
+
+    class OpsCenterIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_in_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_in_status: String?
+    end
+
+    class OpsCenterIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_in_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_in_status: String?
+    end
+
+    module OptInStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module OrganizationResourceCollectionType
+      AWS_CLOUD_FORMATION: String
+      AWS_SERVICE: String
+      AWS_ACCOUNT: String
+      AWS_TAGS: String
+    end
+
+    class PerformanceInsightsMetricDimensionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?dimensions: Array[String],
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor dimensions: Array[String]?
+      attr_accessor limit: Integer?
+    end
+
+    class PerformanceInsightsMetricQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?group_by: Types::PerformanceInsightsMetricDimensionGroup,
+        ?filter: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor group_by: Types::PerformanceInsightsMetricDimensionGroup?
+      attr_accessor filter: Hash[String, String]?
+    end
+
+    class PerformanceInsightsMetricsDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_display_name: String,
+        ?unit: String,
+        ?metric_query: Types::PerformanceInsightsMetricQuery,
+        ?reference_data: Array[Types::PerformanceInsightsReferenceData],
+        ?stats_at_anomaly: Array[Types::PerformanceInsightsStat],
+        ?stats_at_baseline: Array[Types::PerformanceInsightsStat],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_display_name: String?
+      attr_accessor unit: String?
+      attr_accessor metric_query: Types::PerformanceInsightsMetricQuery?
+      attr_accessor reference_data: Array[Types::PerformanceInsightsReferenceData]?
+      attr_accessor stats_at_anomaly: Array[Types::PerformanceInsightsStat]?
+      attr_accessor stats_at_baseline: Array[Types::PerformanceInsightsStat]?
+    end
+
+    class PerformanceInsightsReferenceComparisonValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_scalar: Types::PerformanceInsightsReferenceScalar,
+        ?reference_metric: Types::PerformanceInsightsReferenceMetric,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_scalar: Types::PerformanceInsightsReferenceScalar?
+      attr_accessor reference_metric: Types::PerformanceInsightsReferenceMetric?
+    end
+
+    class PerformanceInsightsReferenceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?comparison_values: Types::PerformanceInsightsReferenceComparisonValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor comparison_values: Types::PerformanceInsightsReferenceComparisonValues?
+    end
+
+    class PerformanceInsightsReferenceMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_query: Types::PerformanceInsightsMetricQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_query: Types::PerformanceInsightsMetricQuery?
+    end
+
+    class PerformanceInsightsReferenceScalar
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+    end
+
+    class PerformanceInsightsStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Float?
+    end
+
+    class PredictionTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ProactiveAnomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?severity: String,
+        ?status: String,
+        ?update_time: Time,
+        ?anomaly_time_range: Types::AnomalyTimeRange,
+        ?anomaly_reported_time_range: Types::AnomalyReportedTimeRange,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?source_details: Types::AnomalySourceDetails,
+        ?associated_insight_id: String,
+        ?resource_collection: Types::ResourceCollection,
+        ?limit: Float,
+        ?source_metadata: Types::AnomalySourceMetadata,
+        ?anomaly_resources: Array[Types::AnomalyResource],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor update_time: Time?
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange?
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor source_details: Types::AnomalySourceDetails?
+      attr_accessor associated_insight_id: String?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor limit: Float?
+      attr_accessor source_metadata: Types::AnomalySourceMetadata?
+      attr_accessor anomaly_resources: Array[Types::AnomalyResource]?
+      attr_accessor description: String?
+    end
+
+    class ProactiveAnomalySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?severity: String,
+        ?status: String,
+        ?update_time: Time,
+        ?anomaly_time_range: Types::AnomalyTimeRange,
+        ?anomaly_reported_time_range: Types::AnomalyReportedTimeRange,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?source_details: Types::AnomalySourceDetails,
+        ?associated_insight_id: String,
+        ?resource_collection: Types::ResourceCollection,
+        ?limit: Float,
+        ?source_metadata: Types::AnomalySourceMetadata,
+        ?anomaly_resources: Array[Types::AnomalyResource],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor update_time: Time?
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange?
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor source_details: Types::AnomalySourceDetails?
+      attr_accessor associated_insight_id: String?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor limit: Float?
+      attr_accessor source_metadata: Types::AnomalySourceMetadata?
+      attr_accessor anomaly_resources: Array[Types::AnomalyResource]?
+      attr_accessor description: String?
+    end
+
+    class ProactiveInsight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?ssm_ops_item_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor ssm_ops_item_id: String?
+      attr_accessor description: String?
+    end
+
+    class ProactiveInsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+        ?associated_resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+      attr_accessor associated_resource_arns: Array[String]?
+    end
+
+    class ProactiveOrganizationInsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?account_id: String,
+        ?organizational_unit_id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?prediction_time_range: Types::PredictionTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor account_id: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor prediction_time_range: Types::PredictionTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+    end
+
+    class PutFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_feedback: Types::InsightFeedback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_feedback: Types::InsightFeedback?
+    end
+
+    class PutFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReactiveAnomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?severity: String,
+        ?status: String,
+        ?anomaly_time_range: Types::AnomalyTimeRange,
+        ?anomaly_reported_time_range: Types::AnomalyReportedTimeRange,
+        ?source_details: Types::AnomalySourceDetails,
+        ?associated_insight_id: String,
+        ?resource_collection: Types::ResourceCollection,
+        ?type: String,
+        ?name: String,
+        ?description: String,
+        ?causal_anomaly_id: String,
+        ?anomaly_resources: Array[Types::AnomalyResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange?
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange?
+      attr_accessor source_details: Types::AnomalySourceDetails?
+      attr_accessor associated_insight_id: String?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor causal_anomaly_id: String?
+      attr_accessor anomaly_resources: Array[Types::AnomalyResource]?
+    end
+
+    class ReactiveAnomalySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?severity: String,
+        ?status: String,
+        ?anomaly_time_range: Types::AnomalyTimeRange,
+        ?anomaly_reported_time_range: Types::AnomalyReportedTimeRange,
+        ?source_details: Types::AnomalySourceDetails,
+        ?associated_insight_id: String,
+        ?resource_collection: Types::ResourceCollection,
+        ?type: String,
+        ?name: String,
+        ?description: String,
+        ?causal_anomaly_id: String,
+        ?anomaly_resources: Array[Types::AnomalyResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange?
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange?
+      attr_accessor source_details: Types::AnomalySourceDetails?
+      attr_accessor associated_insight_id: String?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor causal_anomaly_id: String?
+      attr_accessor anomaly_resources: Array[Types::AnomalyResource]?
+    end
+
+    class ReactiveInsight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?ssm_ops_item_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor ssm_ops_item_id: String?
+      attr_accessor description: String?
+    end
+
+    class ReactiveInsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+        ?associated_resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+      attr_accessor associated_resource_arns: Array[String]?
+    end
+
+    class ReactiveOrganizationInsightSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?account_id: String,
+        ?organizational_unit_id: String,
+        ?name: String,
+        ?severity: String,
+        ?status: String,
+        ?insight_time_range: Types::InsightTimeRange,
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor account_id: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor name: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor insight_time_range: Types::InsightTimeRange?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?link: String,
+        ?name: String,
+        ?reason: String,
+        ?related_events: Array[Types::RecommendationRelatedEvent],
+        ?related_anomalies: Array[Types::RecommendationRelatedAnomaly],
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor link: String?
+      attr_accessor name: String?
+      attr_accessor reason: String?
+      attr_accessor related_events: Array[Types::RecommendationRelatedEvent]?
+      attr_accessor related_anomalies: Array[Types::RecommendationRelatedAnomaly]?
+      attr_accessor category: String?
+    end
+
+    class RecommendationRelatedAnomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::RecommendationRelatedAnomalyResource],
+        ?source_details: Array[Types::RecommendationRelatedAnomalySourceDetail],
+        ?anomaly_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::RecommendationRelatedAnomalyResource]?
+      attr_accessor source_details: Array[Types::RecommendationRelatedAnomalySourceDetail]?
+      attr_accessor anomaly_id: String?
+    end
+
+    class RecommendationRelatedAnomalyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class RecommendationRelatedAnomalySourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_metrics: Array[Types::RecommendationRelatedCloudWatchMetricsSourceDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_metrics: Array[Types::RecommendationRelatedCloudWatchMetricsSourceDetail]?
+    end
+
+    class RecommendationRelatedCloudWatchMetricsSourceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+    end
+
+    class RecommendationRelatedEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resources: Array[Types::RecommendationRelatedEventResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resources: Array[Types::RecommendationRelatedEventResource]?
+    end
+
+    class RecommendationRelatedEventResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class RemoveNotificationChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class RemoveNotificationChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Types::CloudFormationCollection,
+        ?tags: Array[Types::TagCollection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Types::CloudFormationCollection?
+      attr_accessor tags: Array[Types::TagCollection]?
+    end
+
+    class ResourceCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Types::CloudFormationCollectionFilter,
+        ?tags: Array[Types::TagCollectionFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Types::CloudFormationCollectionFilter?
+      attr_accessor tags: Array[Types::TagCollectionFilter]?
+    end
+
+    module ResourceCollectionType
+      AWS_CLOUD_FORMATION: String
+      AWS_SERVICE: String
+      AWS_TAGS: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourcePermission
+      FULL_PERMISSION: String
+      MISSING_PERMISSION: String
+    end
+
+    module ResourceTypeFilter
+      LOG_GROUPS: String
+      CLOUDFRONT_DISTRIBUTION: String
+      DYNAMODB_TABLE: String
+      EC2_NAT_GATEWAY: String
+      ECS_CLUSTER: String
+      ECS_SERVICE: String
+      EKS_CLUSTER: String
+      ELASTIC_BEANSTALK_ENVIRONMENT: String
+      ELASTIC_LOAD_BALANCER_LOAD_BALANCER: String
+      ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER: String
+      ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP: String
+      ELASTICACHE_CACHE_CLUSTER: String
+      ELASTICSEARCH_DOMAIN: String
+      KINESIS_STREAM: String
+      LAMBDA_FUNCTION: String
+      OPEN_SEARCH_SERVICE_DOMAIN: String
+      RDS_DB_INSTANCE: String
+      RDS_DB_CLUSTER: String
+      REDSHIFT_CLUSTER: String
+      ROUTE53_HOSTED_ZONE: String
+      ROUTE53_HEALTH_CHECK: String
+      S3_BUCKET: String
+      SAGEMAKER_ENDPOINT: String
+      SNS_TOPIC: String
+      SQS_QUEUE: String
+      STEP_FUNCTIONS_ACTIVITY: String
+      STEP_FUNCTIONS_STATE_MACHINE: String
+    end
+
+    class SearchInsightsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severities: Array[String],
+        ?statuses: Array[String],
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severities: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+    end
+
+    class SearchInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time_range: Types::StartTimeRange,
+        ?filters: Types::SearchInsightsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time_range: Types::StartTimeRange?
+      attr_accessor filters: Types::SearchInsightsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor type: String?
+    end
+
+    class SearchInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_insights: Array[Types::ProactiveInsightSummary],
+        ?reactive_insights: Array[Types::ReactiveInsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_insights: Array[Types::ProactiveInsightSummary]?
+      attr_accessor reactive_insights: Array[Types::ReactiveInsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchOrganizationInsightsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severities: Array[String],
+        ?statuses: Array[String],
+        ?resource_collection: Types::ResourceCollection,
+        ?service_collection: Types::ServiceCollection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severities: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor resource_collection: Types::ResourceCollection?
+      attr_accessor service_collection: Types::ServiceCollection?
+    end
+
+    class SearchOrganizationInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?start_time_range: Types::StartTimeRange,
+        ?filters: Types::SearchOrganizationInsightsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor start_time_range: Types::StartTimeRange?
+      attr_accessor filters: Types::SearchOrganizationInsightsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor type: String?
+    end
+
+    class SearchOrganizationInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proactive_insights: Array[Types::ProactiveInsightSummary],
+        ?reactive_insights: Array[Types::ReactiveInsightSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proactive_insights: Array[Types::ProactiveInsightSummary]?
+      attr_accessor reactive_insights: Array[Types::ReactiveInsightSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ServerSideEncryptionType
+      CUSTOMER_MANAGED_KEY: String
+      AWS_OWNED_KMS_KEY: String
+    end
+
+    class ServiceCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_names: Array[String]?
+    end
+
+    class ServiceHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?insight: Types::ServiceInsightHealth,
+        ?analyzed_resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor insight: Types::ServiceInsightHealth?
+      attr_accessor analyzed_resource_count: Integer?
+    end
+
+    class ServiceInsightHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_proactive_insights: Integer,
+        ?open_reactive_insights: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_proactive_insights: Integer?
+      attr_accessor open_reactive_insights: Integer?
+    end
+
+    class ServiceIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ops_center: Types::OpsCenterIntegration,
+        ?logs_anomaly_detection: Types::LogsAnomalyDetectionIntegration,
+        ?kms_server_side_encryption: Types::KMSServerSideEncryptionIntegration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ops_center: Types::OpsCenterIntegration?
+      attr_accessor logs_anomaly_detection: Types::LogsAnomalyDetectionIntegration?
+      attr_accessor kms_server_side_encryption: Types::KMSServerSideEncryptionIntegration?
+    end
+
+    module ServiceName
+      API_GATEWAY: String
+      APPLICATION_ELB: String
+      AUTO_SCALING_GROUP: String
+      CLOUD_FRONT: String
+      DYNAMO_DB: String
+      EC2: String
+      ECS: String
+      EKS: String
+      ELASTIC_BEANSTALK: String
+      ELASTI_CACHE: String
+      ELB: String
+      ES: String
+      KINESIS: String
+      LAMBDA: String
+      NAT_GATEWAY: String
+      NETWORK_ELB: String
+      RDS: String
+      REDSHIFT: String
+      ROUTE_53: String
+      S3: String
+      SAGE_MAKER: String
+      SNS: String
+      SQS: String
+      STEP_FUNCTIONS: String
+      SWF: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceResourceCost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?state: String,
+        ?count: Integer,
+        ?unit_cost: Float,
+        ?cost: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor count: Integer?
+      attr_accessor unit_cost: Float?
+      attr_accessor cost: Float?
+    end
+
+    class SnsChannelConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class StartCostEstimationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_collection: Types::CostEstimationResourceCollectionFilter,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_collection: Types::CostEstimationResourceCollectionFilter?
+      attr_accessor client_token: String?
+    end
+
+    class StartCostEstimationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_time: Time,
+        ?to_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_time: Time?
+      attr_accessor to_time: Time?
+    end
+
+    class TagCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_boundary_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_boundary_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class TagCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_boundary_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_boundary_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class TagCostEstimationResourceCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_boundary_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_boundary_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class TagHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_boundary_key: String,
+        ?tag_value: String,
+        ?insight: Types::InsightHealth,
+        ?analyzed_resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_boundary_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor insight: Types::InsightHealth?
+      attr_accessor analyzed_resource_count: Integer?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TimestampMetricValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?metric_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor metric_value: Float?
+    end
+
+    class UpdateCloudFormationCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_names: Array[String]?
+    end
+
+    class UpdateEventSourcesConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_sources: Types::EventSourcesConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_sources: Types::EventSourcesConfig?
+    end
+
+    class UpdateEventSourcesConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateResourceCollectionAction
+      ADD: String
+      REMOVE: String
+    end
+
+    class UpdateResourceCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_formation: Types::UpdateCloudFormationCollectionFilter,
+        ?tags: Array[Types::UpdateTagCollectionFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_formation: Types::UpdateCloudFormationCollectionFilter?
+      attr_accessor tags: Array[Types::UpdateTagCollectionFilter]?
+    end
+
+    class UpdateResourceCollectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?resource_collection: Types::UpdateResourceCollectionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor resource_collection: Types::UpdateResourceCollectionFilter?
+    end
+
+    class UpdateResourceCollectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServiceIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ops_center: Types::OpsCenterIntegrationConfig,
+        ?logs_anomaly_detection: Types::LogsAnomalyDetectionIntegrationConfig,
+        ?kms_server_side_encryption: Types::KMSServerSideEncryptionIntegrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ops_center: Types::OpsCenterIntegrationConfig?
+      attr_accessor logs_anomaly_detection: Types::LogsAnomalyDetectionIntegrationConfig?
+      attr_accessor kms_server_side_encryption: Types::KMSServerSideEncryptionIntegrationConfig?
+    end
+
+    class UpdateServiceIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_integration: Types::UpdateServiceIntegrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_integration: Types::UpdateServiceIntegrationConfig?
+    end
+
+    class UpdateServiceIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTagCollectionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_boundary_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_boundary_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      INVALID_PARAMETER_COMBINATION: String
+      PARAMETER_INCONSISTENT_WITH_SERVICE_STATE: String
+    end
+  end
+end

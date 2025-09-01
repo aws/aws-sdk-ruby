@@ -1,0 +1,5 @@
+  module Aws
+    module ControlTower
+      VERSION: String
+    end
+  end

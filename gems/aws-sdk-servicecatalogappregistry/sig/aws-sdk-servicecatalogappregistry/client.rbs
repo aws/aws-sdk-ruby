@@ -1,0 +1,306 @@
+module Aws::ServiceCatalogAppRegistry
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ServiceCatalogAppRegistry::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAttributeGroupResponse
+      include Smithy::Client::_Response[Types::AssociateAttributeGroupResponse]
+      def application_arn: () -> String?
+      def attribute_group_arn: () -> String?
+    end
+    def associate_attribute_group: (
+      ?application: String,
+      ?attribute_group: String
+    ) -> _AssociateAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAttributeGroupResponse
+
+    interface _AssociateResourceResponse
+      include Smithy::Client::_Response[Types::AssociateResourceResponse]
+      def application_arn: () -> String?
+      def resource_arn: () -> String?
+      def options: () -> Array[String]?
+    end
+    def associate_resource: (
+      ?application: String,
+      ?resource_type: String,
+      ?resource: String,
+      ?options: Array[String]
+    ) -> _AssociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def application: () -> Types::Application?
+    end
+    def create_application: (
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateAttributeGroupResponse
+      include Smithy::Client::_Response[Types::CreateAttributeGroupResponse]
+      def attribute_group: () -> Types::AttributeGroup?
+    end
+    def create_attribute_group: (
+      ?name: String,
+      ?description: String,
+      ?attributes: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAttributeGroupResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+      def application: () -> Types::ApplicationSummary?
+    end
+    def delete_application: (
+      ?application: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteAttributeGroupResponse
+      include Smithy::Client::_Response[Types::DeleteAttributeGroupResponse]
+      def attribute_group: () -> Types::AttributeGroupSummary?
+    end
+    def delete_attribute_group: (
+      ?attribute_group: String
+    ) -> _DeleteAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttributeGroupResponse
+
+    interface _DisassociateAttributeGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateAttributeGroupResponse]
+      def application_arn: () -> String?
+      def attribute_group_arn: () -> String?
+    end
+    def disassociate_attribute_group: (
+      ?application: String,
+      ?attribute_group: String
+    ) -> _DisassociateAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAttributeGroupResponse
+
+    interface _DisassociateResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceResponse]
+      def application_arn: () -> String?
+      def resource_arn: () -> String?
+    end
+    def disassociate_resource: (
+      ?application: String,
+      ?resource_type: String,
+      ?resource: String
+    ) -> _DisassociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def creation_time: () -> Time?
+      def last_update_time: () -> Time?
+      def associated_resource_count: () -> Integer?
+      def tags: () -> Hash[String, String]?
+      def integrations: () -> Types::Integrations?
+      def application_tag: () -> Hash[String, String]?
+    end
+    def get_application: (
+      ?application: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetAssociatedResourceResponse
+      include Smithy::Client::_Response[Types::GetAssociatedResourceResponse]
+      def resource: () -> Types::Resource?
+      def options: () -> Array[String]?
+      def application_tag_result: () -> Types::ApplicationTagResult?
+    end
+    def get_associated_resource: (
+      ?application: String,
+      ?resource_type: String,
+      ?resource: String,
+      ?next_token: String,
+      ?resource_tag_status: Array[String],
+      ?max_results: Integer
+    ) -> _GetAssociatedResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssociatedResourceResponse
+
+    interface _GetAttributeGroupResponse
+      include Smithy::Client::_Response[Types::GetAttributeGroupResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def attributes: () -> String?
+      def creation_time: () -> Time?
+      def last_update_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def created_by: () -> String?
+    end
+    def get_attribute_group: (
+      ?attribute_group: String
+    ) -> _GetAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttributeGroupResponse
+
+    interface _GetConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationResponse]
+      def configuration: () -> Types::AppRegistryConfiguration?
+    end
+    def get_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def applications: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListAssociatedAttributeGroupsResponse
+      include Smithy::Client::_Response[Types::ListAssociatedAttributeGroupsResponse]
+      def attribute_groups: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_associated_attribute_groups: (
+      ?application: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssociatedAttributeGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedAttributeGroupsResponse
+
+    interface _ListAssociatedResourcesResponse
+      include Smithy::Client::_Response[Types::ListAssociatedResourcesResponse]
+      def resources: () -> Array[Types::ResourceInfo]?
+      def next_token: () -> String?
+    end
+    def list_associated_resources: (
+      ?application: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssociatedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedResourcesResponse
+
+    interface _ListAttributeGroupsResponse
+      include Smithy::Client::_Response[Types::ListAttributeGroupsResponse]
+      def attribute_groups: () -> Array[Types::AttributeGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_attribute_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAttributeGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttributeGroupsResponse
+
+    interface _ListAttributeGroupsForApplicationResponse
+      include Smithy::Client::_Response[Types::ListAttributeGroupsForApplicationResponse]
+      def attribute_groups_details: () -> Array[Types::AttributeGroupDetails]?
+      def next_token: () -> String?
+    end
+    def list_attribute_groups_for_application: (
+      ?application: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAttributeGroupsForApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttributeGroupsForApplicationResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_configuration: (
+      ?configuration: {
+        tag_query_configuration: {
+          tag_key: String
+        }
+      }
+    ) -> _PutConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigurationResponse
+
+    interface _SyncResourceResponse
+      include Smithy::Client::_Response[Types::SyncResourceResponse]
+      def application_arn: () -> String?
+      def resource_arn: () -> String?
+      def action_taken: () -> String?
+    end
+    def sync_resource: (
+      ?resource_type: String,
+      ?resource: String
+    ) -> _SyncResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SyncResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+      def application: () -> Types::Application?
+    end
+    def update_application: (
+      ?application: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateAttributeGroupResponse
+      include Smithy::Client::_Response[Types::UpdateAttributeGroupResponse]
+      def attribute_group: () -> Types::AttributeGroup?
+    end
+    def update_attribute_group: (
+      ?attribute_group: String,
+      ?name: String,
+      ?description: String,
+      ?attributes: String
+    ) -> _UpdateAttributeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAttributeGroupResponse
+  end
+end

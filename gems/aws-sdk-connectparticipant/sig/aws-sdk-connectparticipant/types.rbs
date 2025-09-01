@@ -1,0 +1,614 @@
+module Aws::ConnectParticipant
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ArtifactStatus
+      APPROVED: String
+      REJECTED: String
+      IN_PROGRESS: String
+    end
+
+    class AttachmentItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?attachment_id: String,
+        ?attachment_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor attachment_id: String?
+      attr_accessor attachment_name: String?
+      attr_accessor status: String?
+    end
+
+    class CancelParticipantAuthenticationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor connection_token: String?
+    end
+
+    class CancelParticipantAuthenticationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ChatItemType
+      TYPING: String
+      PARTICIPANT_JOINED: String
+      PARTICIPANT_LEFT: String
+      CHAT_ENDED: String
+      TRANSFER_SUCCEEDED: String
+      TRANSFER_FAILED: String
+      MESSAGE: String
+      EVENT: String
+      ATTACHMENT: String
+      CONNECTION_ACK: String
+      MESSAGE_DELIVERED: String
+      MESSAGE_READ: String
+    end
+
+    class CompleteAttachmentUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_ids: Array[String],
+        ?client_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_ids: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class CompleteAttachmentUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectionCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_token: String,
+        ?expiry: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_token: String?
+      attr_accessor expiry: String?
+    end
+
+    module ConnectionType
+      WEBSOCKET: String
+      CONNECTION_CREDENTIALS: String
+    end
+
+    class CreateParticipantConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Array[String],
+        ?participant_token: String,
+        ?connect_participant: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Array[String]?
+      attr_accessor participant_token: String?
+      attr_accessor connect_participant: bool?
+    end
+
+    class CreateParticipantConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?websocket: Types::Websocket,
+        ?connection_credentials: Types::ConnectionCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor websocket: Types::Websocket?
+      attr_accessor connection_credentials: Types::ConnectionCredentials?
+    end
+
+    class DescribeViewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class DescribeViewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view: Types::View,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view: Types::View?
+    end
+
+    class DisconnectParticipantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class DisconnectParticipantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?connection_token: String,
+        ?url_expiry_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor connection_token: String?
+      attr_accessor url_expiry_in_seconds: Integer?
+    end
+
+    class GetAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?url_expiry: String,
+        ?attachment_size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor url_expiry: String?
+      attr_accessor attachment_size_in_bytes: Integer?
+    end
+
+    class GetAuthenticationUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?redirect_uri: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor redirect_uri: String?
+      attr_accessor connection_token: String?
+    end
+
+    class GetAuthenticationUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_url: String?
+    end
+
+    class GetTranscriptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?scan_direction: String,
+        ?sort_order: String,
+        ?start_position: Types::StartPosition,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor scan_direction: String?
+      attr_accessor sort_order: String?
+      attr_accessor start_position: Types::StartPosition?
+      attr_accessor connection_token: String?
+    end
+
+    class GetTranscriptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initial_contact_id: String,
+        ?transcript: Array[Types::Item],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initial_contact_id: String?
+      attr_accessor transcript: Array[Types::Item]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?absolute_time: String,
+        ?content: String,
+        ?content_type: String,
+        ?id: String,
+        ?type: String,
+        ?participant_id: String,
+        ?display_name: String,
+        ?participant_role: String,
+        ?attachments: Array[Types::AttachmentItem],
+        ?message_metadata: Types::MessageMetadata,
+        ?related_contact_id: String,
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor absolute_time: String?
+      attr_accessor content: String?
+      attr_accessor content_type: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor participant_id: String?
+      attr_accessor display_name: String?
+      attr_accessor participant_role: String?
+      attr_accessor attachments: Array[Types::AttachmentItem]?
+      attr_accessor message_metadata: Types::MessageMetadata?
+      attr_accessor related_contact_id: String?
+      attr_accessor contact_id: String?
+    end
+
+    class MessageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?receipts: Array[Types::Receipt],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor receipts: Array[Types::Receipt]?
+    end
+
+    module ParticipantRole
+      AGENT: String
+      CUSTOMER: String
+      SYSTEM: String
+      CUSTOM_BOT: String
+      SUPERVISOR: String
+    end
+
+    class Receipt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivered_timestamp: String,
+        ?read_timestamp: String,
+        ?recipient_participant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivered_timestamp: String?
+      attr_accessor read_timestamp: String?
+      attr_accessor recipient_participant_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      CONTACT: String
+      CONTACT_FLOW: String
+      INSTANCE: String
+      PARTICIPANT: String
+      HIERARCHY_LEVEL: String
+      HIERARCHY_GROUP: String
+      USER: String
+      PHONE_NUMBER: String
+    end
+
+    module ScanDirection
+      FORWARD: String
+      BACKWARD: String
+    end
+
+    class SendEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?content: String,
+        ?client_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor content: String?
+      attr_accessor client_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class SendEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?absolute_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor absolute_time: String?
+    end
+
+    class SendMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?content: String,
+        ?client_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor content: String?
+      attr_accessor client_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class SendMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?absolute_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor absolute_time: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SortKey
+      DESCENDING: String
+      ASCENDING: String
+    end
+
+    class StartAttachmentUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?attachment_size_in_bytes: Integer,
+        ?attachment_name: String,
+        ?client_token: String,
+        ?connection_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor attachment_size_in_bytes: Integer?
+      attr_accessor attachment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor connection_token: String?
+    end
+
+    class StartAttachmentUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?upload_metadata: Types::UploadMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor upload_metadata: Types::UploadMetadata?
+    end
+
+    class StartPosition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?absolute_time: String,
+        ?most_recent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor absolute_time: String?
+      attr_accessor most_recent: Integer?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UploadMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?url_expiry: String,
+        ?headers_to_include: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor url_expiry: String?
+      attr_accessor headers_to_include: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class View
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?version: Integer,
+        ?content: Types::ViewContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version: Integer?
+      attr_accessor content: Types::ViewContent?
+    end
+
+    class ViewContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_schema: String,
+        ?template: String,
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_schema: String?
+      attr_accessor template: String?
+      attr_accessor actions: Array[String]?
+    end
+
+    class Websocket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?connection_expiry: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor connection_expiry: String?
+    end
+  end
+end

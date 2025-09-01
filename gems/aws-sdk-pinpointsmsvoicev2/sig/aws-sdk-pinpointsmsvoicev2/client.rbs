@@ -1,0 +1,1425 @@
+module Aws::PinpointSMSVoiceV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PinpointSMSVoiceV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateOriginationIdentityResponse
+      include Smithy::Client::_Response[Types::AssociateOriginationIdentityResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def origination_identity_arn: () -> String?
+      def origination_identity: () -> String?
+      def iso_country_code: () -> String?
+    end
+    def associate_origination_identity: (
+      ?pool_id: String,
+      ?origination_identity: String,
+      ?iso_country_code: String,
+      ?client_token: String
+    ) -> _AssociateOriginationIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateOriginationIdentityResponse
+
+    interface _AssociateProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::AssociateProtectConfigurationResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+    end
+    def associate_protect_configuration: (
+      ?protect_configuration_id: String,
+      ?configuration_set_name: String
+    ) -> _AssociateProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProtectConfigurationResponse
+
+    interface _CreateConfigurationSetResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationSetResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_configuration_set: (
+      ?configuration_set_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationSetResponse
+
+    interface _CreateEventDestinationResponse
+      include Smithy::Client::_Response[Types::CreateEventDestinationResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def event_destination: () -> Types::EventDestination?
+    end
+    def create_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination_name: String,
+      ?matching_event_types: Array[String],
+      ?cloud_watch_logs_destination: {
+        iam_role_arn: String,
+        log_group_arn: String
+      },
+      ?kinesis_firehose_destination: {
+        iam_role_arn: String,
+        delivery_stream_arn: String
+      },
+      ?sns_destination: {
+        topic_arn: String
+      },
+      ?client_token: String
+    ) -> _CreateEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventDestinationResponse
+
+    interface _CreateOptOutListResponse
+      include Smithy::Client::_Response[Types::CreateOptOutListResult]
+      def opt_out_list_arn: () -> String?
+      def opt_out_list_name: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_opt_out_list: (
+      ?opt_out_list_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateOptOutListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOptOutListResponse
+
+    interface _CreatePoolResponse
+      include Smithy::Client::_Response[Types::CreatePoolResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def status: () -> String?
+      def message_type: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def shared_routes_enabled: () -> bool?
+      def deletion_protection_enabled: () -> bool?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_pool: (
+      ?origination_identity: String,
+      ?iso_country_code: String,
+      ?message_type: String,
+      ?deletion_protection_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreatePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePoolResponse
+
+    interface _CreateProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateProtectConfigurationResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def created_timestamp: () -> Time?
+      def account_default: () -> bool?
+      def deletion_protection_enabled: () -> bool?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_protect_configuration: (
+      ?client_token: String,
+      ?deletion_protection_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProtectConfigurationResponse
+
+    interface _CreateRegistrationResponse
+      include Smithy::Client::_Response[Types::CreateRegistrationResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def registration_type: () -> String?
+      def registration_status: () -> String?
+      def current_version_number: () -> Integer?
+      def additional_attributes: () -> Hash[String, String]?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_registration: (
+      ?registration_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistrationResponse
+
+    interface _CreateRegistrationAssociationResponse
+      include Smithy::Client::_Response[Types::CreateRegistrationAssociationResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def registration_type: () -> String?
+      def resource_arn: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+      def iso_country_code: () -> String?
+      def phone_number: () -> String?
+    end
+    def create_registration_association: (
+      ?registration_id: String,
+      ?resource_id: String
+    ) -> _CreateRegistrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistrationAssociationResponse
+
+    interface _CreateRegistrationAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateRegistrationAttachmentResult]
+      def registration_attachment_arn: () -> String?
+      def registration_attachment_id: () -> String?
+      def attachment_status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_registration_attachment: (
+      ?attachment_body: String,
+      ?attachment_url: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateRegistrationAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistrationAttachmentResponse
+
+    interface _CreateRegistrationVersionResponse
+      include Smithy::Client::_Response[Types::CreateRegistrationVersionResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def registration_version_status: () -> String?
+      def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory?
+    end
+    def create_registration_version: (
+      ?registration_id: String
+    ) -> _CreateRegistrationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistrationVersionResponse
+
+    interface _CreateVerifiedDestinationNumberResponse
+      include Smithy::Client::_Response[Types::CreateVerifiedDestinationNumberResult]
+      def verified_destination_number_arn: () -> String?
+      def verified_destination_number_id: () -> String?
+      def destination_phone_number: () -> String?
+      def status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_verified_destination_number: (
+      ?destination_phone_number: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateVerifiedDestinationNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVerifiedDestinationNumberResponse
+
+    interface _DeleteAccountDefaultProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAccountDefaultProtectConfigurationResult]
+      def default_protect_configuration_arn: () -> String?
+      def default_protect_configuration_id: () -> String?
+    end
+    def delete_account_default_protect_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountDefaultProtectConfigurationResponse
+
+    interface _DeleteConfigurationSetResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationSetResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def event_destinations: () -> Array[Types::EventDestination]?
+      def default_message_type: () -> String?
+      def default_sender_id: () -> String?
+      def default_message_feedback_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+    end
+    def delete_configuration_set: (
+      ?configuration_set_name: String
+    ) -> _DeleteConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationSetResponse
+
+    interface _DeleteDefaultMessageTypeResponse
+      include Smithy::Client::_Response[Types::DeleteDefaultMessageTypeResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def message_type: () -> String?
+    end
+    def delete_default_message_type: (
+      ?configuration_set_name: String
+    ) -> _DeleteDefaultMessageTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDefaultMessageTypeResponse
+
+    interface _DeleteDefaultSenderIdResponse
+      include Smithy::Client::_Response[Types::DeleteDefaultSenderIdResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def sender_id: () -> String?
+    end
+    def delete_default_sender_id: (
+      ?configuration_set_name: String
+    ) -> _DeleteDefaultSenderIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDefaultSenderIdResponse
+
+    interface _DeleteEventDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteEventDestinationResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def event_destination: () -> Types::EventDestination?
+    end
+    def delete_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination_name: String
+    ) -> _DeleteEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventDestinationResponse
+
+    interface _DeleteKeywordResponse
+      include Smithy::Client::_Response[Types::DeleteKeywordResult]
+      def origination_identity_arn: () -> String?
+      def origination_identity: () -> String?
+      def keyword: () -> String?
+      def keyword_message: () -> String?
+      def keyword_action: () -> String?
+    end
+    def delete_keyword: (
+      ?origination_identity: String,
+      ?keyword: String
+    ) -> _DeleteKeywordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeywordResponse
+
+    interface _DeleteMediaMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteMediaMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def delete_media_message_spend_limit_override: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMediaMessageSpendLimitOverrideResponse
+
+    interface _DeleteOptOutListResponse
+      include Smithy::Client::_Response[Types::DeleteOptOutListResult]
+      def opt_out_list_arn: () -> String?
+      def opt_out_list_name: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def delete_opt_out_list: (
+      ?opt_out_list_name: String
+    ) -> _DeleteOptOutListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOptOutListResponse
+
+    interface _DeleteOptedOutNumberResponse
+      include Smithy::Client::_Response[Types::DeleteOptedOutNumberResult]
+      def opt_out_list_arn: () -> String?
+      def opt_out_list_name: () -> String?
+      def opted_out_number: () -> String?
+      def opted_out_timestamp: () -> Time?
+      def end_user_opted_out: () -> bool?
+    end
+    def delete_opted_out_number: (
+      ?opt_out_list_name: String,
+      ?opted_out_number: String
+    ) -> _DeleteOptedOutNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOptedOutNumberResponse
+
+    interface _DeletePoolResponse
+      include Smithy::Client::_Response[Types::DeletePoolResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def status: () -> String?
+      def message_type: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def shared_routes_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+    end
+    def delete_pool: (
+      ?pool_id: String
+    ) -> _DeletePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePoolResponse
+
+    interface _DeleteProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteProtectConfigurationResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def created_timestamp: () -> Time?
+      def account_default: () -> bool?
+      def deletion_protection_enabled: () -> bool?
+    end
+    def delete_protect_configuration: (
+      ?protect_configuration_id: String
+    ) -> _DeleteProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProtectConfigurationResponse
+
+    interface _DeleteProtectConfigurationRuleSetNumberOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteProtectConfigurationRuleSetNumberOverrideResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def destination_phone_number: () -> String?
+      def created_timestamp: () -> Time?
+      def action: () -> String?
+      def iso_country_code: () -> String?
+      def expiration_timestamp: () -> Time?
+    end
+    def delete_protect_configuration_rule_set_number_override: (
+      ?protect_configuration_id: String,
+      ?destination_phone_number: String
+    ) -> _DeleteProtectConfigurationRuleSetNumberOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProtectConfigurationRuleSetNumberOverrideResponse
+
+    interface _DeleteRegistrationResponse
+      include Smithy::Client::_Response[Types::DeleteRegistrationResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def registration_type: () -> String?
+      def registration_status: () -> String?
+      def current_version_number: () -> Integer?
+      def approved_version_number: () -> Integer?
+      def latest_denied_version_number: () -> Integer?
+      def additional_attributes: () -> Hash[String, String]?
+      def created_timestamp: () -> Time?
+    end
+    def delete_registration: (
+      ?registration_id: String
+    ) -> _DeleteRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistrationResponse
+
+    interface _DeleteRegistrationAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteRegistrationAttachmentResult]
+      def registration_attachment_arn: () -> String?
+      def registration_attachment_id: () -> String?
+      def attachment_status: () -> String?
+      def attachment_upload_error_reason: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def delete_registration_attachment: (
+      ?registration_attachment_id: String
+    ) -> _DeleteRegistrationAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistrationAttachmentResponse
+
+    interface _DeleteRegistrationFieldValueResponse
+      include Smithy::Client::_Response[Types::DeleteRegistrationFieldValueResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def field_path: () -> String?
+      def select_choices: () -> Array[String]?
+      def text_value: () -> String?
+      def registration_attachment_id: () -> String?
+    end
+    def delete_registration_field_value: (
+      ?registration_id: String,
+      ?field_path: String
+    ) -> _DeleteRegistrationFieldValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistrationFieldValueResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResult]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteTextMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteTextMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def delete_text_message_spend_limit_override: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTextMessageSpendLimitOverrideResponse
+
+    interface _DeleteVerifiedDestinationNumberResponse
+      include Smithy::Client::_Response[Types::DeleteVerifiedDestinationNumberResult]
+      def verified_destination_number_arn: () -> String?
+      def verified_destination_number_id: () -> String?
+      def destination_phone_number: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def delete_verified_destination_number: (
+      ?verified_destination_number_id: String
+    ) -> _DeleteVerifiedDestinationNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVerifiedDestinationNumberResponse
+
+    interface _DeleteVoiceMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteVoiceMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def delete_voice_message_spend_limit_override: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceMessageSpendLimitOverrideResponse
+
+    interface _DescribeAccountAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeAccountAttributesResult]
+      def account_attributes: () -> Array[Types::AccountAttribute]?
+      def next_token: () -> String?
+    end
+    def describe_account_attributes: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeAccountAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountAttributesResponse
+
+    interface _DescribeAccountLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountLimitsResult]
+      def account_limits: () -> Array[Types::AccountLimit]?
+      def next_token: () -> String?
+    end
+    def describe_account_limits: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeAccountLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountLimitsResponse
+
+    interface _DescribeConfigurationSetsResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationSetsResult]
+      def configuration_sets: () -> Array[Types::ConfigurationSetInformation]?
+      def next_token: () -> String?
+    end
+    def describe_configuration_sets: (
+      ?configuration_set_names: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeConfigurationSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationSetsResponse
+
+    interface _DescribeKeywordsResponse
+      include Smithy::Client::_Response[Types::DescribeKeywordsResult]
+      def origination_identity_arn: () -> String?
+      def origination_identity: () -> String?
+      def keywords: () -> Array[Types::KeywordInformation]?
+      def next_token: () -> String?
+    end
+    def describe_keywords: (
+      ?origination_identity: String,
+      ?keywords: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeKeywordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeywordsResponse
+
+    interface _DescribeOptOutListsResponse
+      include Smithy::Client::_Response[Types::DescribeOptOutListsResult]
+      def opt_out_lists: () -> Array[Types::OptOutListInformation]?
+      def next_token: () -> String?
+    end
+    def describe_opt_out_lists: (
+      ?opt_out_list_names: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?owner: String
+    ) -> _DescribeOptOutListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOptOutListsResponse
+
+    interface _DescribeOptedOutNumbersResponse
+      include Smithy::Client::_Response[Types::DescribeOptedOutNumbersResult]
+      def opt_out_list_arn: () -> String?
+      def opt_out_list_name: () -> String?
+      def opted_out_numbers: () -> Array[Types::OptedOutNumberInformation]?
+      def next_token: () -> String?
+    end
+    def describe_opted_out_numbers: (
+      ?opt_out_list_name: String,
+      ?opted_out_numbers: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeOptedOutNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOptedOutNumbersResponse
+
+    interface _DescribePhoneNumbersResponse
+      include Smithy::Client::_Response[Types::DescribePhoneNumbersResult]
+      def phone_numbers: () -> Array[Types::PhoneNumberInformation]?
+      def next_token: () -> String?
+    end
+    def describe_phone_numbers: (
+      ?phone_number_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?owner: String
+    ) -> _DescribePhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePhoneNumbersResponse
+
+    interface _DescribePoolsResponse
+      include Smithy::Client::_Response[Types::DescribePoolsResult]
+      def pools: () -> Array[Types::PoolInformation]?
+      def next_token: () -> String?
+    end
+    def describe_pools: (
+      ?pool_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?owner: String
+    ) -> _DescribePoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePoolsResponse
+
+    interface _DescribeProtectConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeProtectConfigurationsResult]
+      def protect_configurations: () -> Array[Types::ProtectConfigurationInformation]?
+      def next_token: () -> String?
+    end
+    def describe_protect_configurations: (
+      ?protect_configuration_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeProtectConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProtectConfigurationsResponse
+
+    interface _DescribeRegistrationAttachmentsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationAttachmentsResult]
+      def registration_attachments: () -> Array[Types::RegistrationAttachmentsInformation]?
+      def next_token: () -> String?
+    end
+    def describe_registration_attachments: (
+      ?registration_attachment_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationAttachmentsResponse
+
+    interface _DescribeRegistrationFieldDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationFieldDefinitionsResult]
+      def registration_type: () -> String?
+      def registration_field_definitions: () -> Array[Types::RegistrationFieldDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_registration_field_definitions: (
+      ?registration_type: String,
+      ?section_path: String,
+      ?field_paths: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationFieldDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationFieldDefinitionsResponse
+
+    interface _DescribeRegistrationFieldValuesResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationFieldValuesResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def registration_field_values: () -> Array[Types::RegistrationFieldValueInformation]?
+      def next_token: () -> String?
+    end
+    def describe_registration_field_values: (
+      ?registration_id: String,
+      ?version_number: Integer,
+      ?section_path: String,
+      ?field_paths: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationFieldValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationFieldValuesResponse
+
+    interface _DescribeRegistrationSectionDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationSectionDefinitionsResult]
+      def registration_type: () -> String?
+      def registration_section_definitions: () -> Array[Types::RegistrationSectionDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_registration_section_definitions: (
+      ?registration_type: String,
+      ?section_paths: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationSectionDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationSectionDefinitionsResponse
+
+    interface _DescribeRegistrationTypeDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationTypeDefinitionsResult]
+      def registration_type_definitions: () -> Array[Types::RegistrationTypeDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_registration_type_definitions: (
+      ?registration_types: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationTypeDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationTypeDefinitionsResponse
+
+    interface _DescribeRegistrationVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationVersionsResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def registration_versions: () -> Array[Types::RegistrationVersionInformation]?
+      def next_token: () -> String?
+    end
+    def describe_registration_versions: (
+      ?registration_id: String,
+      ?version_numbers: Array[Integer],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationVersionsResponse
+
+    interface _DescribeRegistrationsResponse
+      include Smithy::Client::_Response[Types::DescribeRegistrationsResult]
+      def registrations: () -> Array[Types::RegistrationInformation]?
+      def next_token: () -> String?
+    end
+    def describe_registrations: (
+      ?registration_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistrationsResponse
+
+    interface _DescribeSenderIdsResponse
+      include Smithy::Client::_Response[Types::DescribeSenderIdsResult]
+      def sender_ids: () -> Array[Types::SenderIdInformation]?
+      def next_token: () -> String?
+    end
+    def describe_sender_ids: (
+      ?sender_ids: Array[
+        {
+          sender_id: String,
+          iso_country_code: String
+        }
+      ],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?owner: String
+    ) -> _DescribeSenderIdsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSenderIdsResponse
+
+    interface _DescribeSpendLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeSpendLimitsResult]
+      def spend_limits: () -> Array[Types::SpendLimit]?
+      def next_token: () -> String?
+    end
+    def describe_spend_limits: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeSpendLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSpendLimitsResponse
+
+    interface _DescribeVerifiedDestinationNumbersResponse
+      include Smithy::Client::_Response[Types::DescribeVerifiedDestinationNumbersResult]
+      def verified_destination_numbers: () -> Array[Types::VerifiedDestinationNumberInformation]?
+      def next_token: () -> String?
+    end
+    def describe_verified_destination_numbers: (
+      ?verified_destination_number_ids: Array[String],
+      ?destination_phone_numbers: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeVerifiedDestinationNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVerifiedDestinationNumbersResponse
+
+    interface _DisassociateOriginationIdentityResponse
+      include Smithy::Client::_Response[Types::DisassociateOriginationIdentityResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def origination_identity_arn: () -> String?
+      def origination_identity: () -> String?
+      def iso_country_code: () -> String?
+    end
+    def disassociate_origination_identity: (
+      ?pool_id: String,
+      ?origination_identity: String,
+      ?iso_country_code: String,
+      ?client_token: String
+    ) -> _DisassociateOriginationIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateOriginationIdentityResponse
+
+    interface _DisassociateProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::DisassociateProtectConfigurationResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+    end
+    def disassociate_protect_configuration: (
+      ?protect_configuration_id: String,
+      ?configuration_set_name: String
+    ) -> _DisassociateProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateProtectConfigurationResponse
+
+    interface _DiscardRegistrationVersionResponse
+      include Smithy::Client::_Response[Types::DiscardRegistrationVersionResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def registration_version_status: () -> String?
+      def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory?
+    end
+    def discard_registration_version: (
+      ?registration_id: String
+    ) -> _DiscardRegistrationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscardRegistrationVersionResponse
+
+    interface _GetProtectConfigurationCountryRuleSetResponse
+      include Smithy::Client::_Response[Types::GetProtectConfigurationCountryRuleSetResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def number_capability: () -> String?
+      def country_rule_set: () -> Hash[String, Types::ProtectConfigurationCountryRuleSetInformation]?
+    end
+    def get_protect_configuration_country_rule_set: (
+      ?protect_configuration_id: String,
+      ?number_capability: String
+    ) -> _GetProtectConfigurationCountryRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProtectConfigurationCountryRuleSetResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResult]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListPoolOriginationIdentitiesResponse
+      include Smithy::Client::_Response[Types::ListPoolOriginationIdentitiesResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def origination_identities: () -> Array[Types::OriginationIdentityMetadata]?
+      def next_token: () -> String?
+    end
+    def list_pool_origination_identities: (
+      ?pool_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPoolOriginationIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoolOriginationIdentitiesResponse
+
+    interface _ListProtectConfigurationRuleSetNumberOverridesResponse
+      include Smithy::Client::_Response[Types::ListProtectConfigurationRuleSetNumberOverridesResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def rule_set_number_overrides: () -> Array[Types::ProtectConfigurationRuleSetNumberOverride]?
+      def next_token: () -> String?
+    end
+    def list_protect_configuration_rule_set_number_overrides: (
+      ?protect_configuration_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtectConfigurationRuleSetNumberOverridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectConfigurationRuleSetNumberOverridesResponse
+
+    interface _ListRegistrationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListRegistrationAssociationsResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def registration_type: () -> String?
+      def registration_associations: () -> Array[Types::RegistrationAssociationMetadata]?
+      def next_token: () -> String?
+    end
+    def list_registration_associations: (
+      ?registration_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRegistrationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistrationAssociationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def resource_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutKeywordResponse
+      include Smithy::Client::_Response[Types::PutKeywordResult]
+      def origination_identity_arn: () -> String?
+      def origination_identity: () -> String?
+      def keyword: () -> String?
+      def keyword_message: () -> String?
+      def keyword_action: () -> String?
+    end
+    def put_keyword: (
+      ?origination_identity: String,
+      ?keyword: String,
+      ?keyword_message: String,
+      ?keyword_action: String
+    ) -> _PutKeywordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutKeywordResponse
+
+    interface _PutMessageFeedbackResponse
+      include Smithy::Client::_Response[Types::PutMessageFeedbackResult]
+      def message_id: () -> String?
+      def message_feedback_status: () -> String?
+    end
+    def put_message_feedback: (
+      ?message_id: String,
+      ?message_feedback_status: String
+    ) -> _PutMessageFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMessageFeedbackResponse
+
+    interface _PutOptedOutNumberResponse
+      include Smithy::Client::_Response[Types::PutOptedOutNumberResult]
+      def opt_out_list_arn: () -> String?
+      def opt_out_list_name: () -> String?
+      def opted_out_number: () -> String?
+      def opted_out_timestamp: () -> Time?
+      def end_user_opted_out: () -> bool?
+    end
+    def put_opted_out_number: (
+      ?opt_out_list_name: String,
+      ?opted_out_number: String
+    ) -> _PutOptedOutNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOptedOutNumberResponse
+
+    interface _PutProtectConfigurationRuleSetNumberOverrideResponse
+      include Smithy::Client::_Response[Types::PutProtectConfigurationRuleSetNumberOverrideResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def destination_phone_number: () -> String?
+      def created_timestamp: () -> Time?
+      def action: () -> String?
+      def iso_country_code: () -> String?
+      def expiration_timestamp: () -> Time?
+    end
+    def put_protect_configuration_rule_set_number_override: (
+      ?client_token: String,
+      ?protect_configuration_id: String,
+      ?destination_phone_number: String,
+      ?action: String,
+      ?expiration_timestamp: Time
+    ) -> _PutProtectConfigurationRuleSetNumberOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProtectConfigurationRuleSetNumberOverrideResponse
+
+    interface _PutRegistrationFieldValueResponse
+      include Smithy::Client::_Response[Types::PutRegistrationFieldValueResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def field_path: () -> String?
+      def select_choices: () -> Array[String]?
+      def text_value: () -> String?
+      def registration_attachment_id: () -> String?
+    end
+    def put_registration_field_value: (
+      ?registration_id: String,
+      ?field_path: String,
+      ?select_choices: Array[String],
+      ?text_value: String,
+      ?registration_attachment_id: String
+    ) -> _PutRegistrationFieldValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRegistrationFieldValueResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResult]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _ReleasePhoneNumberResponse
+      include Smithy::Client::_Response[Types::ReleasePhoneNumberResult]
+      def phone_number_arn: () -> String?
+      def phone_number_id: () -> String?
+      def phone_number: () -> String?
+      def status: () -> String?
+      def iso_country_code: () -> String?
+      def message_type: () -> String?
+      def number_capabilities: () -> Array[String]?
+      def number_type: () -> String?
+      def monthly_leasing_price: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def registration_id: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def release_phone_number: (
+      ?phone_number_id: String
+    ) -> _ReleasePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReleasePhoneNumberResponse
+
+    interface _ReleaseSenderIdResponse
+      include Smithy::Client::_Response[Types::ReleaseSenderIdResult]
+      def sender_id_arn: () -> String?
+      def sender_id: () -> String?
+      def iso_country_code: () -> String?
+      def message_types: () -> Array[String]?
+      def monthly_leasing_price: () -> String?
+      def registered: () -> bool?
+      def registration_id: () -> String?
+    end
+    def release_sender_id: (
+      ?sender_id: String,
+      ?iso_country_code: String
+    ) -> _ReleaseSenderIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReleaseSenderIdResponse
+
+    interface _RequestPhoneNumberResponse
+      include Smithy::Client::_Response[Types::RequestPhoneNumberResult]
+      def phone_number_arn: () -> String?
+      def phone_number_id: () -> String?
+      def phone_number: () -> String?
+      def status: () -> String?
+      def iso_country_code: () -> String?
+      def message_type: () -> String?
+      def number_capabilities: () -> Array[String]?
+      def number_type: () -> String?
+      def monthly_leasing_price: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def pool_id: () -> String?
+      def registration_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def request_phone_number: (
+      ?iso_country_code: String,
+      ?message_type: String,
+      ?number_capabilities: Array[String],
+      ?number_type: String,
+      ?opt_out_list_name: String,
+      ?pool_id: String,
+      ?registration_id: String,
+      ?deletion_protection_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _RequestPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RequestPhoneNumberResponse
+
+    interface _RequestSenderIdResponse
+      include Smithy::Client::_Response[Types::RequestSenderIdResult]
+      def sender_id_arn: () -> String?
+      def sender_id: () -> String?
+      def iso_country_code: () -> String?
+      def message_types: () -> Array[String]?
+      def monthly_leasing_price: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def registered: () -> bool?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def request_sender_id: (
+      ?sender_id: String,
+      ?iso_country_code: String,
+      ?message_types: Array[String],
+      ?deletion_protection_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _RequestSenderIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RequestSenderIdResponse
+
+    interface _SendDestinationNumberVerificationCodeResponse
+      include Smithy::Client::_Response[Types::SendDestinationNumberVerificationCodeResult]
+      def message_id: () -> String?
+    end
+    def send_destination_number_verification_code: (
+      ?verified_destination_number_id: String,
+      ?verification_channel: String,
+      ?language_code: String,
+      ?origination_identity: String,
+      ?configuration_set_name: String,
+      ?context: Hash[String, String],
+      ?destination_country_parameters: Hash[String, String]
+    ) -> _SendDestinationNumberVerificationCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDestinationNumberVerificationCodeResponse
+
+    interface _SendMediaMessageResponse
+      include Smithy::Client::_Response[Types::SendMediaMessageResult]
+      def message_id: () -> String?
+    end
+    def send_media_message: (
+      ?destination_phone_number: String,
+      ?origination_identity: String,
+      ?message_body: String,
+      ?media_urls: Array[String],
+      ?configuration_set_name: String,
+      ?max_price: String,
+      ?time_to_live: Integer,
+      ?context: Hash[String, String],
+      ?dry_run: bool,
+      ?protect_configuration_id: String,
+      ?message_feedback_enabled: bool
+    ) -> _SendMediaMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMediaMessageResponse
+
+    interface _SendTextMessageResponse
+      include Smithy::Client::_Response[Types::SendTextMessageResult]
+      def message_id: () -> String?
+    end
+    def send_text_message: (
+      ?destination_phone_number: String,
+      ?origination_identity: String,
+      ?message_body: String,
+      ?message_type: String,
+      ?keyword: String,
+      ?configuration_set_name: String,
+      ?max_price: String,
+      ?time_to_live: Integer,
+      ?context: Hash[String, String],
+      ?destination_country_parameters: Hash[String, String],
+      ?dry_run: bool,
+      ?protect_configuration_id: String,
+      ?message_feedback_enabled: bool
+    ) -> _SendTextMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendTextMessageResponse
+
+    interface _SendVoiceMessageResponse
+      include Smithy::Client::_Response[Types::SendVoiceMessageResult]
+      def message_id: () -> String?
+    end
+    def send_voice_message: (
+      ?destination_phone_number: String,
+      ?origination_identity: String,
+      ?message_body: String,
+      ?message_body_text_type: String,
+      ?voice_id: String,
+      ?configuration_set_name: String,
+      ?max_price_per_minute: String,
+      ?time_to_live: Integer,
+      ?context: Hash[String, String],
+      ?dry_run: bool,
+      ?protect_configuration_id: String,
+      ?message_feedback_enabled: bool
+    ) -> _SendVoiceMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendVoiceMessageResponse
+
+    interface _SetAccountDefaultProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::SetAccountDefaultProtectConfigurationResult]
+      def default_protect_configuration_arn: () -> String?
+      def default_protect_configuration_id: () -> String?
+    end
+    def set_account_default_protect_configuration: (
+      ?protect_configuration_id: String
+    ) -> _SetAccountDefaultProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetAccountDefaultProtectConfigurationResponse
+
+    interface _SetDefaultMessageFeedbackEnabledResponse
+      include Smithy::Client::_Response[Types::SetDefaultMessageFeedbackEnabledResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def message_feedback_enabled: () -> bool?
+    end
+    def set_default_message_feedback_enabled: (
+      ?configuration_set_name: String,
+      ?message_feedback_enabled: bool
+    ) -> _SetDefaultMessageFeedbackEnabledResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDefaultMessageFeedbackEnabledResponse
+
+    interface _SetDefaultMessageTypeResponse
+      include Smithy::Client::_Response[Types::SetDefaultMessageTypeResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def message_type: () -> String?
+    end
+    def set_default_message_type: (
+      ?configuration_set_name: String,
+      ?message_type: String
+    ) -> _SetDefaultMessageTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDefaultMessageTypeResponse
+
+    interface _SetDefaultSenderIdResponse
+      include Smithy::Client::_Response[Types::SetDefaultSenderIdResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def sender_id: () -> String?
+    end
+    def set_default_sender_id: (
+      ?configuration_set_name: String,
+      ?sender_id: String
+    ) -> _SetDefaultSenderIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDefaultSenderIdResponse
+
+    interface _SetMediaMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::SetMediaMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def set_media_message_spend_limit_override: (
+      ?monthly_limit: Integer
+    ) -> _SetMediaMessageSpendLimitOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetMediaMessageSpendLimitOverrideResponse
+
+    interface _SetTextMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::SetTextMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def set_text_message_spend_limit_override: (
+      ?monthly_limit: Integer
+    ) -> _SetTextMessageSpendLimitOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTextMessageSpendLimitOverrideResponse
+
+    interface _SetVoiceMessageSpendLimitOverrideResponse
+      include Smithy::Client::_Response[Types::SetVoiceMessageSpendLimitOverrideResult]
+      def monthly_limit: () -> Integer?
+    end
+    def set_voice_message_spend_limit_override: (
+      ?monthly_limit: Integer
+    ) -> _SetVoiceMessageSpendLimitOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetVoiceMessageSpendLimitOverrideResponse
+
+    interface _SubmitRegistrationVersionResponse
+      include Smithy::Client::_Response[Types::SubmitRegistrationVersionResult]
+      def registration_arn: () -> String?
+      def registration_id: () -> String?
+      def version_number: () -> Integer?
+      def registration_version_status: () -> String?
+      def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory?
+    end
+    def submit_registration_version: (
+      ?registration_id: String
+    ) -> _SubmitRegistrationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitRegistrationVersionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEventDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateEventDestinationResult]
+      def configuration_set_arn: () -> String?
+      def configuration_set_name: () -> String?
+      def event_destination: () -> Types::EventDestination?
+    end
+    def update_event_destination: (
+      ?configuration_set_name: String,
+      ?event_destination_name: String,
+      ?enabled: bool,
+      ?matching_event_types: Array[String],
+      ?cloud_watch_logs_destination: {
+        iam_role_arn: String,
+        log_group_arn: String
+      },
+      ?kinesis_firehose_destination: {
+        iam_role_arn: String,
+        delivery_stream_arn: String
+      },
+      ?sns_destination: {
+        topic_arn: String
+      }
+    ) -> _UpdateEventDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventDestinationResponse
+
+    interface _UpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::UpdatePhoneNumberResult]
+      def phone_number_arn: () -> String?
+      def phone_number_id: () -> String?
+      def phone_number: () -> String?
+      def status: () -> String?
+      def iso_country_code: () -> String?
+      def message_type: () -> String?
+      def number_capabilities: () -> Array[String]?
+      def number_type: () -> String?
+      def monthly_leasing_price: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def registration_id: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def update_phone_number: (
+      ?phone_number_id: String,
+      ?two_way_enabled: bool,
+      ?two_way_channel_arn: String,
+      ?two_way_channel_role: String,
+      ?self_managed_opt_outs_enabled: bool,
+      ?opt_out_list_name: String,
+      ?deletion_protection_enabled: bool
+    ) -> _UpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberResponse
+
+    interface _UpdatePoolResponse
+      include Smithy::Client::_Response[Types::UpdatePoolResult]
+      def pool_arn: () -> String?
+      def pool_id: () -> String?
+      def status: () -> String?
+      def message_type: () -> String?
+      def two_way_enabled: () -> bool?
+      def two_way_channel_arn: () -> String?
+      def two_way_channel_role: () -> String?
+      def self_managed_opt_outs_enabled: () -> bool?
+      def opt_out_list_name: () -> String?
+      def shared_routes_enabled: () -> bool?
+      def deletion_protection_enabled: () -> bool?
+      def created_timestamp: () -> Time?
+    end
+    def update_pool: (
+      ?pool_id: String,
+      ?two_way_enabled: bool,
+      ?two_way_channel_arn: String,
+      ?two_way_channel_role: String,
+      ?self_managed_opt_outs_enabled: bool,
+      ?opt_out_list_name: String,
+      ?shared_routes_enabled: bool,
+      ?deletion_protection_enabled: bool
+    ) -> _UpdatePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePoolResponse
+
+    interface _UpdateProtectConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateProtectConfigurationResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def created_timestamp: () -> Time?
+      def account_default: () -> bool?
+      def deletion_protection_enabled: () -> bool?
+    end
+    def update_protect_configuration: (
+      ?protect_configuration_id: String,
+      ?deletion_protection_enabled: bool
+    ) -> _UpdateProtectConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProtectConfigurationResponse
+
+    interface _UpdateProtectConfigurationCountryRuleSetResponse
+      include Smithy::Client::_Response[Types::UpdateProtectConfigurationCountryRuleSetResult]
+      def protect_configuration_arn: () -> String?
+      def protect_configuration_id: () -> String?
+      def number_capability: () -> String?
+      def country_rule_set: () -> Hash[String, Types::ProtectConfigurationCountryRuleSetInformation]?
+    end
+    def update_protect_configuration_country_rule_set: (
+      ?protect_configuration_id: String,
+      ?number_capability: String,
+      ?country_rule_set_updates: Hash[String,
+        {
+          protect_status: String
+        }
+      ]
+    ) -> _UpdateProtectConfigurationCountryRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProtectConfigurationCountryRuleSetResponse
+
+    interface _UpdateSenderIdResponse
+      include Smithy::Client::_Response[Types::UpdateSenderIdResult]
+      def sender_id_arn: () -> String?
+      def sender_id: () -> String?
+      def iso_country_code: () -> String?
+      def message_types: () -> Array[String]?
+      def monthly_leasing_price: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def registered: () -> bool?
+      def registration_id: () -> String?
+    end
+    def update_sender_id: (
+      ?sender_id: String,
+      ?iso_country_code: String,
+      ?deletion_protection_enabled: bool
+    ) -> _UpdateSenderIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSenderIdResponse
+
+    interface _VerifyDestinationNumberResponse
+      include Smithy::Client::_Response[Types::VerifyDestinationNumberResult]
+      def verified_destination_number_arn: () -> String?
+      def verified_destination_number_id: () -> String?
+      def destination_phone_number: () -> String?
+      def status: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def verify_destination_number: (
+      ?verified_destination_number_id: String,
+      ?verification_code: String
+    ) -> _VerifyDestinationNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyDestinationNumberResponse
+  end
+end

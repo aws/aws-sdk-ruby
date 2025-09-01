@@ -1,0 +1,64 @@
+module Aws::DynamoDBStreams
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AttributeMap: MapShape
+    AttributeName: StringShape
+    AttributeValue: UnionShape
+    BinaryAttributeValue: BlobShape
+    BinarySetAttributeValue: ListShape
+    BooleanAttributeValue: BooleanShape
+    Date: TimestampShape
+    DescribeStreamInput: StructureShape
+    DescribeStreamOutput: StructureShape
+    ErrorMessage: StringShape
+    ExpiredIteratorException: StructureShape
+    GetRecordsInput: StructureShape
+    GetRecordsOutput: StructureShape
+    GetShardIteratorInput: StructureShape
+    GetShardIteratorOutput: StructureShape
+    Identity: StructureShape
+    InternalServerError: StructureShape
+    KeySchema: ListShape
+    KeySchemaAttributeName: StringShape
+    KeySchemaElement: StructureShape
+    KeyType: EnumShape
+    LimitExceededException: StructureShape
+    ListAttributeValue: ListShape
+    ListStreamsInput: StructureShape
+    ListStreamsOutput: StructureShape
+    MapAttributeValue: MapShape
+    NullAttributeValue: BooleanShape
+    NumberAttributeValue: StringShape
+    NumberSetAttributeValue: ListShape
+    OperationType: EnumShape
+    PositiveIntegerObject: IntegerShape
+    PositiveLongObject: IntegerShape
+    Record: StructureShape
+    RecordList: ListShape
+    ResourceNotFoundException: StructureShape
+    SequenceNumber: StringShape
+    SequenceNumberRange: StructureShape
+    Shard: StructureShape
+    ShardDescriptionList: ListShape
+    ShardFilter: StructureShape
+    ShardFilterType: EnumShape
+    ShardId: StringShape
+    ShardIterator: StringShape
+    ShardIteratorType: EnumShape
+    Stream: StructureShape
+    StreamArn: StringShape
+    StreamDescription: StructureShape
+    StreamList: ListShape
+    StreamRecord: StructureShape
+    StreamStatus: EnumShape
+    StreamViewType: EnumShape
+    String: StringShape
+    StringAttributeValue: StringShape
+    StringSetAttributeValue: ListShape
+    TableName: StringShape
+    TrimmedDataAccessException: StructureShape
+
+    DynamoDBStreams20120810: ServiceShape
+  end
+end

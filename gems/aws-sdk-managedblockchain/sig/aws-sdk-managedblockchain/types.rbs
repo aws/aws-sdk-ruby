@@ -1,0 +1,1546 @@
+module Aws::ManagedBlockchain
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Accessor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?billing_token: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor billing_token: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor network_type: String?
+    end
+
+    module AccessorNetworkType
+      ETHEREUM_GOERLI: String
+      ETHEREUM_MAINNET: String
+      ETHEREUM_MAINNET_AND_GOERLI: String
+      POLYGON_MAINNET: String
+      POLYGON_MUMBAI: String
+    end
+
+    module AccessorStatus
+      AVAILABLE: String
+      PENDING_DELETION: String
+      DELETED: String
+    end
+
+    class AccessorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?arn: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor arn: String?
+      attr_accessor network_type: String?
+    end
+
+    module AccessorType
+      BILLING_TOKEN: String
+    end
+
+    class ApprovalThresholdPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threshold_percentage: Integer,
+        ?proposal_duration_in_hours: Integer,
+        ?threshold_comparator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threshold_percentage: Integer?
+      attr_accessor proposal_duration_in_hours: Integer?
+      attr_accessor threshold_comparator: String?
+    end
+
+    class CreateAccessorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?accessor_type: String,
+        ?tags: Hash[String, String],
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor accessor_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor network_type: String?
+    end
+
+    class CreateAccessorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessor_id: String,
+        ?billing_token: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessor_id: String?
+      attr_accessor billing_token: String?
+      attr_accessor network_type: String?
+    end
+
+    class CreateMemberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?invitation_id: String,
+        ?network_id: String,
+        ?member_configuration: Types::MemberConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor invitation_id: String?
+      attr_accessor network_id: String?
+      attr_accessor member_configuration: Types::MemberConfiguration?
+    end
+
+    class CreateMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_id: String?
+    end
+
+    class CreateNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+        ?description: String,
+        ?framework: String,
+        ?framework_version: String,
+        ?framework_configuration: Types::NetworkFrameworkConfiguration,
+        ?voting_policy: Types::VotingPolicy,
+        ?member_configuration: Types::MemberConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor framework: String?
+      attr_accessor framework_version: String?
+      attr_accessor framework_configuration: Types::NetworkFrameworkConfiguration?
+      attr_accessor voting_policy: Types::VotingPolicy?
+      attr_accessor member_configuration: Types::MemberConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class CreateNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?network_id: String,
+        ?member_id: String,
+        ?node_configuration: Types::NodeConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor node_configuration: Types::NodeConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_id: String?
+    end
+
+    class CreateProposalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?network_id: String,
+        ?member_id: String,
+        ?actions: Types::ProposalActions,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor actions: Types::ProposalActions?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProposalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_id: String?
+    end
+
+    class DeleteAccessorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessor_id: String?
+    end
+
+    class DeleteAccessorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMemberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class DeleteMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor node_id: String?
+    end
+
+    class DeleteNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Edition
+      STARTER: String
+      STANDARD: String
+    end
+
+    module Framework
+      HYPERLEDGER_FABRIC: String
+      ETHEREUM: String
+    end
+
+    class GetAccessorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessor_id: String?
+    end
+
+    class GetAccessorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessor: Types::Accessor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessor: Types::Accessor?
+    end
+
+    class GetMemberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class GetMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member: Types::Member,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::Member?
+    end
+
+    class GetNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network: Types::Network,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network: Types::Network?
+    end
+
+    class GetNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor node_id: String?
+    end
+
+    class GetNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node: Types::Node,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node: Types::Node?
+    end
+
+    class GetProposalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?proposal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor proposal_id: String?
+    end
+
+    class GetProposalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal: Types::Proposal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal: Types::Proposal?
+    end
+
+    class IllegalActionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Invitation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invitation_id: String,
+        ?creation_date: Time,
+        ?expiration_date: Time,
+        ?status: String,
+        ?network_summary: Types::NetworkSummary,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invitation_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor status: String?
+      attr_accessor network_summary: Types::NetworkSummary?
+      attr_accessor arn: String?
+    end
+
+    module InvitationStatus
+      PENDING: String
+      ACCEPTED: String
+      ACCEPTING: String
+      REJECTED: String
+      EXPIRED: String
+    end
+
+    class InviteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: String?
+    end
+
+    class ListAccessorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor network_type: String?
+    end
+
+    class ListAccessorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessors: Array[Types::AccessorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessors: Array[Types::AccessorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInvitationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInvitationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invitations: Array[Types::Invitation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invitations: Array[Types::Invitation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMembersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?name: String,
+        ?status: String,
+        ?is_owned: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor is_owned: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMembersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::MemberSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::MemberSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?framework: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor framework: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?networks: Array[Types::NetworkSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor networks: Array[Types::NetworkSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNodesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNodesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodes: Array[Types::NodeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodes: Array[Types::NodeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProposalVotesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?proposal_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor proposal_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProposalVotesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_votes: Array[Types::VoteSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_votes: Array[Types::VoteSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProposalsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProposalsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposals: Array[Types::ProposalSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposals: Array[Types::ProposalSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class LogConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloudwatch: Types::LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloudwatch: Types::LogConfiguration?
+    end
+
+    class Member
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?framework_attributes: Types::MemberFrameworkAttributes,
+        ?log_publishing_configuration: Types::MemberLogPublishingConfiguration,
+        ?status: String,
+        ?creation_date: Time,
+        ?tags: Hash[String, String],
+        ?arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor framework_attributes: Types::MemberFrameworkAttributes?
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class MemberConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?framework_configuration: Types::MemberFrameworkConfiguration,
+        ?log_publishing_configuration: Types::MemberLogPublishingConfiguration,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor framework_configuration: Types::MemberFrameworkConfiguration?
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class MemberFabricAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin_username: String,
+        ?ca_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin_username: String?
+      attr_accessor ca_endpoint: String?
+    end
+
+    class MemberFabricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin_username: String,
+        ?admin_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin_username: String?
+      attr_accessor admin_password: String?
+    end
+
+    class MemberFabricLogPublishingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ca_logs: Types::LogConfigurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ca_logs: Types::LogConfigurations?
+    end
+
+    class MemberFrameworkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::MemberFabricAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::MemberFabricAttributes?
+    end
+
+    class MemberFrameworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::MemberFabricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::MemberFabricConfiguration?
+    end
+
+    class MemberLogPublishingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::MemberFabricLogPublishingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::MemberFabricLogPublishingConfiguration?
+    end
+
+    module MemberStatus
+      CREATING: String
+      AVAILABLE: String
+      CREATE_FAILED: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      INACCESSIBLE_ENCRYPTION_KEY: String
+    end
+
+    class MemberSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?is_owned: bool,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor is_owned: bool?
+      attr_accessor arn: String?
+    end
+
+    class Network
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?framework: String,
+        ?framework_version: String,
+        ?framework_attributes: Types::NetworkFrameworkAttributes,
+        ?vpc_endpoint_service_name: String,
+        ?voting_policy: Types::VotingPolicy,
+        ?status: String,
+        ?creation_date: Time,
+        ?tags: Hash[String, String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor framework: String?
+      attr_accessor framework_version: String?
+      attr_accessor framework_attributes: Types::NetworkFrameworkAttributes?
+      attr_accessor vpc_endpoint_service_name: String?
+      attr_accessor voting_policy: Types::VotingPolicy?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor arn: String?
+    end
+
+    class NetworkEthereumAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chain_id: String?
+    end
+
+    class NetworkFabricAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ordering_service_endpoint: String,
+        ?edition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ordering_service_endpoint: String?
+      attr_accessor edition: String?
+    end
+
+    class NetworkFabricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edition: String?
+    end
+
+    class NetworkFrameworkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::NetworkFabricAttributes,
+        ?ethereum: Types::NetworkEthereumAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::NetworkFabricAttributes?
+      attr_accessor ethereum: Types::NetworkEthereumAttributes?
+    end
+
+    class NetworkFrameworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::NetworkFabricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::NetworkFabricConfiguration?
+    end
+
+    module NetworkStatus
+      CREATING: String
+      AVAILABLE: String
+      CREATE_FAILED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class NetworkSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?framework: String,
+        ?framework_version: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor framework: String?
+      attr_accessor framework_version: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor arn: String?
+    end
+
+    class Node
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?id: String,
+        ?instance_type: String,
+        ?availability_zone: String,
+        ?framework_attributes: Types::NodeFrameworkAttributes,
+        ?log_publishing_configuration: Types::NodeLogPublishingConfiguration,
+        ?state_db: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?tags: Hash[String, String],
+        ?arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor id: String?
+      attr_accessor instance_type: String?
+      attr_accessor availability_zone: String?
+      attr_accessor framework_attributes: Types::NodeFrameworkAttributes?
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration?
+      attr_accessor state_db: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class NodeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?availability_zone: String,
+        ?log_publishing_configuration: Types::NodeLogPublishingConfiguration,
+        ?state_db: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor availability_zone: String?
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration?
+      attr_accessor state_db: String?
+    end
+
+    class NodeEthereumAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_endpoint: String,
+        ?web_socket_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_endpoint: String?
+      attr_accessor web_socket_endpoint: String?
+    end
+
+    class NodeFabricAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peer_endpoint: String,
+        ?peer_event_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peer_endpoint: String?
+      attr_accessor peer_event_endpoint: String?
+    end
+
+    class NodeFabricLogPublishingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chaincode_logs: Types::LogConfigurations,
+        ?peer_logs: Types::LogConfigurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chaincode_logs: Types::LogConfigurations?
+      attr_accessor peer_logs: Types::LogConfigurations?
+    end
+
+    class NodeFrameworkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::NodeFabricAttributes,
+        ?ethereum: Types::NodeEthereumAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::NodeFabricAttributes?
+      attr_accessor ethereum: Types::NodeEthereumAttributes?
+    end
+
+    class NodeLogPublishingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fabric: Types::NodeFabricLogPublishingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fabric: Types::NodeFabricLogPublishingConfiguration?
+    end
+
+    module NodeStatus
+      CREATING: String
+      AVAILABLE: String
+      UNHEALTHY: String
+      CREATE_FAILED: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      INACCESSIBLE_ENCRYPTION_KEY: String
+    end
+
+    class NodeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?availability_zone: String,
+        ?instance_type: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor availability_zone: String?
+      attr_accessor instance_type: String?
+      attr_accessor arn: String?
+    end
+
+    class Proposal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_id: String,
+        ?network_id: String,
+        ?description: String,
+        ?actions: Types::ProposalActions,
+        ?proposed_by_member_id: String,
+        ?proposed_by_member_name: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?expiration_date: Time,
+        ?yes_vote_count: Integer,
+        ?no_vote_count: Integer,
+        ?outstanding_vote_count: Integer,
+        ?tags: Hash[String, String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_id: String?
+      attr_accessor network_id: String?
+      attr_accessor description: String?
+      attr_accessor actions: Types::ProposalActions?
+      attr_accessor proposed_by_member_id: String?
+      attr_accessor proposed_by_member_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor yes_vote_count: Integer?
+      attr_accessor no_vote_count: Integer?
+      attr_accessor outstanding_vote_count: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor arn: String?
+    end
+
+    class ProposalActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invitations: Array[Types::InviteAction],
+        ?removals: Array[Types::RemoveAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invitations: Array[Types::InviteAction]?
+      attr_accessor removals: Array[Types::RemoveAction]?
+    end
+
+    module ProposalStatus
+      IN_PROGRESS: String
+      APPROVED: String
+      REJECTED: String
+      EXPIRED: String
+      ACTION_FAILED: String
+    end
+
+    class ProposalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proposal_id: String,
+        ?description: String,
+        ?proposed_by_member_id: String,
+        ?proposed_by_member_name: String,
+        ?status: String,
+        ?creation_date: Time,
+        ?expiration_date: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proposal_id: String?
+      attr_accessor description: String?
+      attr_accessor proposed_by_member_id: String?
+      attr_accessor proposed_by_member_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor arn: String?
+    end
+
+    class RejectInvitationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invitation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invitation_id: String?
+    end
+
+    class RejectInvitationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_id: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourceNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StateDBType
+      LevelDB: String
+      CouchDB: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ThresholdComparator
+      GREATER_THAN: String
+      GREATER_THAN_OR_EQUAL_TO: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMemberInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?log_publishing_configuration: Types::MemberLogPublishingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration?
+    end
+
+    class UpdateMemberOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?member_id: String,
+        ?node_id: String,
+        ?log_publishing_configuration: Types::NodeLogPublishingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor member_id: String?
+      attr_accessor node_id: String?
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration?
+    end
+
+    class UpdateNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VoteOnProposalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?proposal_id: String,
+        ?voter_member_id: String,
+        ?vote: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor proposal_id: String?
+      attr_accessor voter_member_id: String?
+      attr_accessor vote: String?
+    end
+
+    class VoteOnProposalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VoteSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vote: String,
+        ?member_name: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vote: String?
+      attr_accessor member_name: String?
+      attr_accessor member_id: String?
+    end
+
+    module VoteValue
+      YES: String
+      NO: String
+    end
+
+    class VotingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_threshold_policy: Types::ApprovalThresholdPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_threshold_policy: Types::ApprovalThresholdPolicy?
+    end
+  end
+end

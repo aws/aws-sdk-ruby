@@ -1,0 +1,376 @@
+module Aws::FreeTier
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccountPlanStatus
+      NOT_STARTED: String
+      ACTIVE: String
+      EXPIRED: String
+    end
+
+    module AccountPlanType
+      FREE: String
+      PAID: String
+    end
+
+    class ActivityReward
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?credit: Types::MonetaryAmount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credit: Types::MonetaryAmount?
+
+      class Credit < ActivityReward
+      end
+      class Unknown < ActivityReward
+      end
+    end
+
+    module ActivityStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      EXPIRING: String
+    end
+
+    class ActivitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?title: String,
+        ?reward: Types::ActivityReward,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor title: String?
+      attr_accessor reward: Types::ActivityReward?
+      attr_accessor status: String?
+    end
+
+    module CurrencyCode
+      USD: String
+    end
+
+    module Dimension
+      SERVICE: String
+      OPERATION: String
+      USAGE_TYPE: String
+      REGION: String
+      FREE_TIER_TYPE: String
+      DESCRIPTION: String
+      USAGE_PERCENTAGE: String
+    end
+
+    class DimensionValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?or: Array[Types::Expression],
+        ?and: Array[Types::Expression],
+        ?not: Types::Expression,
+        ?dimensions: Types::DimensionValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor or: Array[Types::Expression]?
+      attr_accessor and: Array[Types::Expression]?
+      attr_accessor not: Types::Expression?
+      attr_accessor dimensions: Types::DimensionValues?
+    end
+
+    class FreeTierUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?operation: String,
+        ?usage_type: String,
+        ?region: String,
+        ?actual_usage_amount: Float,
+        ?forecasted_usage_amount: Float,
+        ?limit: Float,
+        ?unit: String,
+        ?description: String,
+        ?free_tier_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor operation: String?
+      attr_accessor usage_type: String?
+      attr_accessor region: String?
+      attr_accessor actual_usage_amount: Float?
+      attr_accessor forecasted_usage_amount: Float?
+      attr_accessor limit: Float?
+      attr_accessor unit: String?
+      attr_accessor description: String?
+      attr_accessor free_tier_type: String?
+    end
+
+    class GetAccountActivityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor language_code: String?
+    end
+
+    class GetAccountActivityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?title: String,
+        ?description: String,
+        ?status: String,
+        ?instructions_url: String,
+        ?reward: Types::ActivityReward,
+        ?estimated_time_to_complete_in_minutes: Integer,
+        ?expires_at: Time,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor instructions_url: String?
+      attr_accessor reward: Types::ActivityReward?
+      attr_accessor estimated_time_to_complete_in_minutes: Integer?
+      attr_accessor expires_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+    end
+
+    class GetAccountPlanStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountPlanStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?account_plan_type: String,
+        ?account_plan_status: String,
+        ?account_plan_remaining_credits: Types::MonetaryAmount,
+        ?account_plan_expiration_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor account_plan_type: String?
+      attr_accessor account_plan_status: String?
+      attr_accessor account_plan_remaining_credits: Types::MonetaryAmount?
+      attr_accessor account_plan_expiration_date: Time?
+    end
+
+    class GetFreeTierUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::Expression,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::Expression?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetFreeTierUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?free_tier_usages: Array[Types::FreeTierUsage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor free_tier_usages: Array[Types::FreeTierUsage]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LanguageCode
+      EN_US: String
+      EN_GB: String
+      ID_ID: String
+      DE_DE: String
+      ES_ES: String
+      FR_FR: String
+      JA_JP: String
+      IT_IT: String
+      PT_PT: String
+      KO_KR: String
+      ZH_CN: String
+      ZH_TW: String
+      TR_TR: String
+    end
+
+    class ListAccountActivitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_activity_statuses: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_activity_statuses: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor language_code: String?
+    end
+
+    class ListAccountActivitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::ActivitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::ActivitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    module MatchOption
+      EQUALS: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+      GREATER_THAN_OR_EQUAL: String
+    end
+
+    class MonetaryAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: Float?
+      attr_accessor unit: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpgradeAccountPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_plan_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_plan_type: String?
+    end
+
+    class UpgradeAccountPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?account_plan_type: String,
+        ?account_plan_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor account_plan_type: String?
+      attr_accessor account_plan_status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

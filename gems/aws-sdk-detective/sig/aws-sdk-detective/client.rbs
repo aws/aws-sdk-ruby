@@ -1,0 +1,341 @@
+module Aws::Detective
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Detective::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptInvitationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def accept_invitation: (
+      ?graph_arn: String
+    ) -> _AcceptInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInvitationResponse
+
+    interface _BatchGetGraphMemberDatasourcesResponse
+      include Smithy::Client::_Response[Types::BatchGetGraphMemberDatasourcesResponse]
+      def member_datasources: () -> Array[Types::MembershipDatasources]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def batch_get_graph_member_datasources: (
+      ?graph_arn: String,
+      ?account_ids: Array[String]
+    ) -> _BatchGetGraphMemberDatasourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetGraphMemberDatasourcesResponse
+
+    interface _BatchGetMembershipDatasourcesResponse
+      include Smithy::Client::_Response[Types::BatchGetMembershipDatasourcesResponse]
+      def membership_datasources: () -> Array[Types::MembershipDatasources]?
+      def unprocessed_graphs: () -> Array[Types::UnprocessedGraph]?
+    end
+    def batch_get_membership_datasources: (
+      ?graph_arns: Array[String]
+    ) -> _BatchGetMembershipDatasourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetMembershipDatasourcesResponse
+
+    interface _CreateGraphResponse
+      include Smithy::Client::_Response[Types::CreateGraphResponse]
+      def graph_arn: () -> String?
+    end
+    def create_graph: (
+      ?tags: Hash[String, String]
+    ) -> _CreateGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGraphResponse
+
+    interface _CreateMembersResponse
+      include Smithy::Client::_Response[Types::CreateMembersResponse]
+      def members: () -> Array[Types::MemberDetail]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def create_members: (
+      ?graph_arn: String,
+      ?message: String,
+      ?disable_email_notification: bool,
+      ?accounts: Array[
+        {
+          account_id: String,
+          email_address: String
+        }
+      ]
+    ) -> _CreateMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembersResponse
+
+    interface _DeleteGraphResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_graph: (
+      ?graph_arn: String
+    ) -> _DeleteGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGraphResponse
+
+    interface _DeleteMembersResponse
+      include Smithy::Client::_Response[Types::DeleteMembersResponse]
+      def account_ids: () -> Array[String]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def delete_members: (
+      ?graph_arn: String,
+      ?account_ids: Array[String]
+    ) -> _DeleteMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMembersResponse
+
+    interface _DescribeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigurationResponse]
+      def auto_enable: () -> bool?
+    end
+    def describe_organization_configuration: (
+      ?graph_arn: String
+    ) -> _DescribeOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigurationResponse
+
+    interface _DisableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_organization_admin_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationAdminAccountResponse
+
+    interface _DisassociateMembershipResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_membership: (
+      ?graph_arn: String
+    ) -> _DisassociateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMembershipResponse
+
+    interface _EnableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_organization_admin_account: (
+      ?account_id: String
+    ) -> _EnableOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationAdminAccountResponse
+
+    interface _GetInvestigationResponse
+      include Smithy::Client::_Response[Types::GetInvestigationResponse]
+      def graph_arn: () -> String?
+      def investigation_id: () -> String?
+      def entity_arn: () -> String?
+      def entity_type: () -> String?
+      def created_time: () -> Time?
+      def scope_start_time: () -> Time?
+      def scope_end_time: () -> Time?
+      def status: () -> String?
+      def severity: () -> String?
+      def state: () -> String?
+    end
+    def get_investigation: (
+      ?graph_arn: String,
+      ?investigation_id: String
+    ) -> _GetInvestigationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvestigationResponse
+
+    interface _GetMembersResponse
+      include Smithy::Client::_Response[Types::GetMembersResponse]
+      def member_details: () -> Array[Types::MemberDetail]?
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def get_members: (
+      ?graph_arn: String,
+      ?account_ids: Array[String]
+    ) -> _GetMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMembersResponse
+
+    interface _ListDatasourcePackagesResponse
+      include Smithy::Client::_Response[Types::ListDatasourcePackagesResponse]
+      def datasource_packages: () -> Hash[String, Types::DatasourcePackageIngestDetail]?
+      def next_token: () -> String?
+    end
+    def list_datasource_packages: (
+      ?graph_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasourcePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasourcePackagesResponse
+
+    interface _ListGraphsResponse
+      include Smithy::Client::_Response[Types::ListGraphsResponse]
+      def graph_list: () -> Array[Types::Graph]?
+      def next_token: () -> String?
+    end
+    def list_graphs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGraphsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGraphsResponse
+
+    interface _ListIndicatorsResponse
+      include Smithy::Client::_Response[Types::ListIndicatorsResponse]
+      def graph_arn: () -> String?
+      def investigation_id: () -> String?
+      def next_token: () -> String?
+      def indicators: () -> Array[Types::Indicator]?
+    end
+    def list_indicators: (
+      ?graph_arn: String,
+      ?investigation_id: String,
+      ?indicator_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIndicatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndicatorsResponse
+
+    interface _ListInvestigationsResponse
+      include Smithy::Client::_Response[Types::ListInvestigationsResponse]
+      def investigation_details: () -> Array[Types::InvestigationDetail]?
+      def next_token: () -> String?
+    end
+    def list_investigations: (
+      ?graph_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter_criteria: {
+        severity: {
+          value: String
+        },
+        status: untyped,
+        state: untyped,
+        entity_arn: untyped,
+        created_time: {
+          start_inclusive: Time,
+          end_inclusive: untyped
+        }
+      },
+      ?sort_criteria: {
+        field: String,
+        sort_order: String
+      }
+    ) -> _ListInvestigationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvestigationsResponse
+
+    interface _ListInvitationsResponse
+      include Smithy::Client::_Response[Types::ListInvitationsResponse]
+      def invitations: () -> Array[Types::MemberDetail]?
+      def next_token: () -> String?
+    end
+    def list_invitations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvitationsResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersResponse]
+      def member_details: () -> Array[Types::MemberDetail]?
+      def next_token: () -> String?
+    end
+    def list_members: (
+      ?graph_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListOrganizationAdminAccountsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationAdminAccountsResponse]
+      def administrators: () -> Array[Types::Administrator]?
+      def next_token: () -> String?
+    end
+    def list_organization_admin_accounts: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOrganizationAdminAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationAdminAccountsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RejectInvitationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def reject_invitation: (
+      ?graph_arn: String
+    ) -> _RejectInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectInvitationResponse
+
+    interface _StartInvestigationResponse
+      include Smithy::Client::_Response[Types::StartInvestigationResponse]
+      def investigation_id: () -> String?
+    end
+    def start_investigation: (
+      ?graph_arn: String,
+      ?entity_arn: String,
+      ?scope_start_time: Time,
+      ?scope_end_time: Time
+    ) -> _StartInvestigationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInvestigationResponse
+
+    interface _StartMonitoringMemberResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_monitoring_member: (
+      ?graph_arn: String,
+      ?account_id: String
+    ) -> _StartMonitoringMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMonitoringMemberResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDatasourcePackagesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_datasource_packages: (
+      ?graph_arn: String,
+      ?datasource_packages: Array[String]
+    ) -> _UpdateDatasourcePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasourcePackagesResponse
+
+    interface _UpdateInvestigationStateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_investigation_state: (
+      ?graph_arn: String,
+      ?investigation_id: String,
+      ?state: String
+    ) -> _UpdateInvestigationStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInvestigationStateResponse
+
+    interface _UpdateOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_organization_configuration: (
+      ?graph_arn: String,
+      ?auto_enable: bool
+    ) -> _UpdateOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrganizationConfigurationResponse
+  end
+end

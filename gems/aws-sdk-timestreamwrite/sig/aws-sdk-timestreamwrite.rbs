@@ -1,0 +1,5 @@
+  module Aws
+    module TimestreamWrite
+      VERSION: String
+    end
+  end

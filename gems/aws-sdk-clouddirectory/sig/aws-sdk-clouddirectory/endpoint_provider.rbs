@@ -1,0 +1,5 @@
+module Aws::CloudDirectory
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

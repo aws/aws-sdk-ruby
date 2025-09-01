@@ -1,0 +1,419 @@
+module Aws::EMRServerless
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EMRServerless::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelJobRunResponse
+      include Smithy::Client::_Response[Types::CancelJobRunOutput]
+      def application_id: () -> String?
+      def job_run_id: () -> String?
+    end
+    def cancel_job_run: (
+      ?application_id: String,
+      ?job_run_id: String,
+      ?shutdown_grace_period_in_seconds: Integer
+    ) -> _CancelJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobRunResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def application_id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_application: (
+      ?name: String,
+      ?release_label: String,
+      ?type: String,
+      ?client_token: String,
+      ?initial_capacity: Hash[String,
+        {
+          worker_count: Integer,
+          worker_configuration: {
+            cpu: String,
+            memory: String,
+            disk: String,
+            disk_type: String
+          }
+        }
+      ],
+      ?maximum_capacity: {
+        cpu: String,
+        memory: String,
+        disk: String
+      },
+      ?tags: Hash[String, String],
+      ?auto_start_configuration: {
+        enabled: bool
+      },
+      ?auto_stop_configuration: {
+        enabled: bool,
+        idle_timeout_minutes: Integer
+      },
+      ?network_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?architecture: String,
+      ?image_configuration: {
+        image_uri: String
+      },
+      ?worker_type_specifications: Hash[String,
+        {
+          image_configuration: {
+            image_uri: String
+          }
+        }
+      ],
+      ?runtime_configuration: Array[
+        {
+          classification: String,
+          properties: Hash[String, String],
+          configurations: untyped
+        }
+      ],
+      ?monitoring_configuration: {
+        s3_monitoring_configuration: {
+          log_uri: String,
+          encryption_key_arn: String
+        },
+        managed_persistence_monitoring_configuration: {
+          enabled: bool,
+          encryption_key_arn: untyped
+        },
+        cloud_watch_logging_configuration: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name_prefix: String,
+          encryption_key_arn: untyped,
+          log_types: Hash[String,
+            Array[String]
+          ]
+        },
+        prometheus_monitoring_configuration: {
+          remote_write_url: String
+        }
+      },
+      ?interactive_configuration: {
+        studio_enabled: bool,
+        livy_endpoint_enabled: untyped
+      },
+      ?scheduler_configuration: {
+        queue_timeout_minutes: Integer,
+        max_concurrent_runs: untyped
+      },
+      ?identity_center_configuration: {
+        identity_center_instance_arn: String
+      }
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationOutput]
+    end
+    def delete_application: (
+      ?application_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOutput]
+      def application: () -> Types::Application?
+    end
+    def get_application: (
+      ?application_id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetDashboardForJobRunResponse
+      include Smithy::Client::_Response[Types::GetDashboardForJobRunOutput]
+      def url: () -> String?
+    end
+    def get_dashboard_for_job_run: (
+      ?application_id: String,
+      ?job_run_id: String,
+      ?attempt: Integer,
+      ?access_system_profile_logs: bool
+    ) -> _GetDashboardForJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDashboardForJobRunResponse
+
+    interface _GetJobRunResponse
+      include Smithy::Client::_Response[Types::GetJobRunOutput]
+      def job_run: () -> Types::JobRun?
+    end
+    def get_job_run: (
+      ?application_id: String,
+      ?job_run_id: String,
+      ?attempt: Integer
+    ) -> _GetJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobRunResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOutput]
+      def applications: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?states: Array[String]
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListJobRunAttemptsResponse
+      include Smithy::Client::_Response[Types::ListJobRunAttemptsResponse]
+      def job_run_attempts: () -> Array[Types::JobRunAttemptSummary]?
+      def next_token: () -> String?
+    end
+    def list_job_run_attempts: (
+      ?application_id: String,
+      ?job_run_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobRunAttemptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobRunAttemptsResponse
+
+    interface _ListJobRunsResponse
+      include Smithy::Client::_Response[Types::ListJobRunsOutput]
+      def job_runs: () -> Array[Types::JobRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_job_runs: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?created_at_after: Time,
+      ?created_at_before: Time,
+      ?states: Array[String],
+      ?mode: String
+    ) -> _ListJobRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobRunsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartApplicationResponse
+      include Smithy::Client::_Response[Types::StartApplicationOutput]
+    end
+    def start_application: (
+      ?application_id: String
+    ) -> _StartApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationResponse
+
+    interface _StartJobRunResponse
+      include Smithy::Client::_Response[Types::StartJobRunOutput]
+      def application_id: () -> String?
+      def job_run_id: () -> String?
+      def arn: () -> String?
+    end
+    def start_job_run: (
+      ?application_id: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?execution_iam_policy: {
+        policy: String,
+        policy_arns: Array[String]
+      },
+      ?job_driver: {
+        spark_submit: {
+          entry_point: String,
+          entry_point_arguments: Array[String],
+          spark_submit_parameters: String
+        },
+        hive: {
+          query: String,
+          init_query_file: String,
+          parameters: String
+        }
+      },
+      ?configuration_overrides: {
+        application_configuration: Array[
+          {
+            classification: String,
+            properties: Hash[String, String],
+            configurations: untyped
+          }
+        ],
+        monitoring_configuration: {
+          s3_monitoring_configuration: {
+            log_uri: String,
+            encryption_key_arn: String
+          },
+          managed_persistence_monitoring_configuration: {
+            enabled: bool,
+            encryption_key_arn: untyped
+          },
+          cloud_watch_logging_configuration: {
+            enabled: untyped,
+            log_group_name: String,
+            log_stream_name_prefix: String,
+            encryption_key_arn: untyped,
+            log_types: Hash[String,
+              Array[String]
+            ]
+          },
+          prometheus_monitoring_configuration: {
+            remote_write_url: String
+          }
+        }
+      },
+      ?tags: Hash[String, String],
+      ?execution_timeout_minutes: Integer,
+      ?name: String,
+      ?mode: String,
+      ?retry_policy: {
+        max_attempts: Integer,
+        max_failed_attempts_per_hour: Integer
+      }
+    ) -> _StartJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartJobRunResponse
+
+    interface _StopApplicationResponse
+      include Smithy::Client::_Response[Types::StopApplicationOutput]
+    end
+    def stop_application: (
+      ?application_id: String
+    ) -> _StopApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopApplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationOutput]
+      def application: () -> Types::Application?
+    end
+    def update_application: (
+      ?application_id: String,
+      ?client_token: String,
+      ?initial_capacity: Hash[String,
+        {
+          worker_count: Integer,
+          worker_configuration: {
+            cpu: String,
+            memory: String,
+            disk: String,
+            disk_type: String
+          }
+        }
+      ],
+      ?maximum_capacity: {
+        cpu: String,
+        memory: String,
+        disk: String
+      },
+      ?auto_start_configuration: {
+        enabled: bool
+      },
+      ?auto_stop_configuration: {
+        enabled: bool,
+        idle_timeout_minutes: Integer
+      },
+      ?network_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?architecture: String,
+      ?image_configuration: {
+        image_uri: String
+      },
+      ?worker_type_specifications: Hash[String,
+        {
+          image_configuration: {
+            image_uri: String
+          }
+        }
+      ],
+      ?interactive_configuration: {
+        studio_enabled: bool,
+        livy_endpoint_enabled: untyped
+      },
+      ?release_label: String,
+      ?runtime_configuration: Array[
+        {
+          classification: String,
+          properties: Hash[String, String],
+          configurations: untyped
+        }
+      ],
+      ?monitoring_configuration: {
+        s3_monitoring_configuration: {
+          log_uri: String,
+          encryption_key_arn: String
+        },
+        managed_persistence_monitoring_configuration: {
+          enabled: bool,
+          encryption_key_arn: untyped
+        },
+        cloud_watch_logging_configuration: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name_prefix: String,
+          encryption_key_arn: untyped,
+          log_types: Hash[String,
+            Array[String]
+          ]
+        },
+        prometheus_monitoring_configuration: {
+          remote_write_url: String
+        }
+      },
+      ?scheduler_configuration: {
+        queue_timeout_minutes: Integer,
+        max_concurrent_runs: untyped
+      },
+      ?identity_center_configuration: {
+        identity_center_instance_arn: String
+      }
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+  end
+end

@@ -1,0 +1,1290 @@
+module Aws::CloudWatchLogs
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudWatchLogs::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateKmsKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_kms_key: (
+      ?log_group_name: String,
+      ?kms_key_id: String,
+      ?resource_identifier: String
+    ) -> _AssociateKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateKmsKeyResponse
+
+    interface _CancelExportTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def cancel_export_task: (
+      ?task_id: String
+    ) -> _CancelExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelExportTaskResponse
+
+    interface _CreateDeliveryResponse
+      include Smithy::Client::_Response[Types::CreateDeliveryResponse]
+      def delivery: () -> Types::Delivery?
+    end
+    def create_delivery: (
+      ?delivery_source_name: String,
+      ?delivery_destination_arn: String,
+      ?record_fields: Array[String],
+      ?field_delimiter: String,
+      ?s3_delivery_configuration: {
+        suffix_path: String,
+        enable_hive_compatible_path: bool
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateDeliveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeliveryResponse
+
+    interface _CreateExportTaskResponse
+      include Smithy::Client::_Response[Types::CreateExportTaskResponse]
+      def task_id: () -> String?
+    end
+    def create_export_task: (
+      ?task_name: String,
+      ?log_group_name: String,
+      ?log_stream_name_prefix: String,
+      ?from: Integer,
+      ?to: Integer,
+      ?destination: String,
+      ?destination_prefix: String
+    ) -> _CreateExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExportTaskResponse
+
+    interface _CreateLogAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::CreateLogAnomalyDetectorResponse]
+      def anomaly_detector_arn: () -> String?
+    end
+    def create_log_anomaly_detector: (
+      ?log_group_arn_list: Array[String],
+      ?detector_name: String,
+      ?evaluation_frequency: String,
+      ?filter_pattern: String,
+      ?kms_key_id: String,
+      ?anomaly_visibility_time: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateLogAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogAnomalyDetectorResponse
+
+    interface _CreateLogGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_log_group: (
+      ?log_group_name: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?log_group_class: String
+    ) -> _CreateLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogGroupResponse
+
+    interface _CreateLogStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_log_stream: (
+      ?log_group_name: String,
+      ?log_stream_name: String
+    ) -> _CreateLogStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogStreamResponse
+
+    interface _DeleteAccountPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_account_policy: (
+      ?policy_name: String,
+      ?policy_type: String
+    ) -> _DeleteAccountPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountPolicyResponse
+
+    interface _DeleteDataProtectionPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_data_protection_policy: (
+      ?log_group_identifier: String
+    ) -> _DeleteDataProtectionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataProtectionPolicyResponse
+
+    interface _DeleteDeliveryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_delivery: (
+      ?id: String
+    ) -> _DeleteDeliveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliveryResponse
+
+    interface _DeleteDeliveryDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_delivery_destination: (
+      ?name: String
+    ) -> _DeleteDeliveryDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliveryDestinationResponse
+
+    interface _DeleteDeliveryDestinationPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_delivery_destination_policy: (
+      ?delivery_destination_name: String
+    ) -> _DeleteDeliveryDestinationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliveryDestinationPolicyResponse
+
+    interface _DeleteDeliverySourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_delivery_source: (
+      ?name: String
+    ) -> _DeleteDeliverySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliverySourceResponse
+
+    interface _DeleteDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_destination: (
+      ?destination_name: String
+    ) -> _DeleteDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDestinationResponse
+
+    interface _DeleteIndexPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteIndexPolicyResponse]
+    end
+    def delete_index_policy: (
+      ?log_group_identifier: String
+    ) -> _DeleteIndexPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexPolicyResponse
+
+    interface _DeleteIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteIntegrationResponse]
+    end
+    def delete_integration: (
+      ?integration_name: String,
+      ?force: bool
+    ) -> _DeleteIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResponse
+
+    interface _DeleteLogAnomalyDetectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_log_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _DeleteLogAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogAnomalyDetectorResponse
+
+    interface _DeleteLogGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_log_group: (
+      ?log_group_name: String
+    ) -> _DeleteLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogGroupResponse
+
+    interface _DeleteLogStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_log_stream: (
+      ?log_group_name: String,
+      ?log_stream_name: String
+    ) -> _DeleteLogStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogStreamResponse
+
+    interface _DeleteMetricFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_metric_filter: (
+      ?log_group_name: String,
+      ?filter_name: String
+    ) -> _DeleteMetricFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricFilterResponse
+
+    interface _DeleteQueryDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteQueryDefinitionResponse]
+      def success: () -> bool?
+    end
+    def delete_query_definition: (
+      ?query_definition_id: String
+    ) -> _DeleteQueryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueryDefinitionResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?policy_name: String,
+      ?resource_arn: String,
+      ?expected_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteRetentionPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_retention_policy: (
+      ?log_group_name: String
+    ) -> _DeleteRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetentionPolicyResponse
+
+    interface _DeleteSubscriptionFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_subscription_filter: (
+      ?log_group_name: String,
+      ?filter_name: String
+    ) -> _DeleteSubscriptionFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionFilterResponse
+
+    interface _DeleteTransformerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_transformer: (
+      ?log_group_identifier: String
+    ) -> _DeleteTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransformerResponse
+
+    interface _DescribeAccountPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeAccountPoliciesResponse]
+      def account_policies: () -> Array[Types::AccountPolicy]?
+      def next_token: () -> String?
+    end
+    def describe_account_policies: (
+      ?policy_type: String,
+      ?policy_name: String,
+      ?account_identifiers: Array[String],
+      ?next_token: String
+    ) -> _DescribeAccountPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountPoliciesResponse
+
+    interface _DescribeConfigurationTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeConfigurationTemplatesResponse]
+      def configuration_templates: () -> Array[Types::ConfigurationTemplate]?
+      def next_token: () -> String?
+    end
+    def describe_configuration_templates: (
+      ?service: String,
+      ?log_types: Array[String],
+      ?resource_types: Array[String],
+      ?delivery_destination_types: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeConfigurationTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationTemplatesResponse
+
+    interface _DescribeDeliveriesResponse
+      include Smithy::Client::_Response[Types::DescribeDeliveriesResponse]
+      def deliveries: () -> Array[Types::Delivery]?
+      def next_token: () -> String?
+    end
+    def describe_deliveries: (
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDeliveriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliveriesResponse
+
+    interface _DescribeDeliveryDestinationsResponse
+      include Smithy::Client::_Response[Types::DescribeDeliveryDestinationsResponse]
+      def delivery_destinations: () -> Array[Types::DeliveryDestination]?
+      def next_token: () -> String?
+    end
+    def describe_delivery_destinations: (
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDeliveryDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliveryDestinationsResponse
+
+    interface _DescribeDeliverySourcesResponse
+      include Smithy::Client::_Response[Types::DescribeDeliverySourcesResponse]
+      def delivery_sources: () -> Array[Types::DeliverySource]?
+      def next_token: () -> String?
+    end
+    def describe_delivery_sources: (
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDeliverySourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliverySourcesResponse
+
+    interface _DescribeDestinationsResponse
+      include Smithy::Client::_Response[Types::DescribeDestinationsResponse]
+      def destinations: () -> Array[Types::Destination]?
+      def next_token: () -> String?
+    end
+    def describe_destinations: (
+      ?destination_name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDestinationsResponse
+
+    interface _DescribeExportTasksResponse
+      include Smithy::Client::_Response[Types::DescribeExportTasksResponse]
+      def export_tasks: () -> Array[Types::ExportTask]?
+      def next_token: () -> String?
+    end
+    def describe_export_tasks: (
+      ?task_id: String,
+      ?status_code: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeExportTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExportTasksResponse
+
+    interface _DescribeFieldIndexesResponse
+      include Smithy::Client::_Response[Types::DescribeFieldIndexesResponse]
+      def field_indexes: () -> Array[Types::FieldIndex]?
+      def next_token: () -> String?
+    end
+    def describe_field_indexes: (
+      ?log_group_identifiers: Array[String],
+      ?next_token: String
+    ) -> _DescribeFieldIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFieldIndexesResponse
+
+    interface _DescribeIndexPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeIndexPoliciesResponse]
+      def index_policies: () -> Array[Types::IndexPolicy]?
+      def next_token: () -> String?
+    end
+    def describe_index_policies: (
+      ?log_group_identifiers: Array[String],
+      ?next_token: String
+    ) -> _DescribeIndexPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIndexPoliciesResponse
+
+    interface _DescribeLogGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeLogGroupsResponse]
+      def log_groups: () -> Array[Types::LogGroup]?
+      def next_token: () -> String?
+    end
+    def describe_log_groups: (
+      ?account_identifiers: Array[String],
+      ?log_group_name_prefix: String,
+      ?log_group_name_pattern: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?include_linked_accounts: bool,
+      ?log_group_class: String,
+      ?log_group_identifiers: Array[String]
+    ) -> _DescribeLogGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLogGroupsResponse
+
+    interface _DescribeLogStreamsResponse
+      include Smithy::Client::_Response[Types::DescribeLogStreamsResponse]
+      def log_streams: () -> Array[Types::LogStream]?
+      def next_token: () -> String?
+    end
+    def describe_log_streams: (
+      ?log_group_name: String,
+      ?log_group_identifier: String,
+      ?log_stream_name_prefix: String,
+      ?order_by: String,
+      ?descending: bool,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeLogStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLogStreamsResponse
+
+    interface _DescribeMetricFiltersResponse
+      include Smithy::Client::_Response[Types::DescribeMetricFiltersResponse]
+      def metric_filters: () -> Array[Types::MetricFilter]?
+      def next_token: () -> String?
+    end
+    def describe_metric_filters: (
+      ?log_group_name: String,
+      ?filter_name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?metric_name: String,
+      ?metric_namespace: String
+    ) -> _DescribeMetricFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricFiltersResponse
+
+    interface _DescribeQueriesResponse
+      include Smithy::Client::_Response[Types::DescribeQueriesResponse]
+      def queries: () -> Array[Types::QueryInfo]?
+      def next_token: () -> String?
+    end
+    def describe_queries: (
+      ?log_group_name: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?query_language: String
+    ) -> _DescribeQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueriesResponse
+
+    interface _DescribeQueryDefinitionsResponse
+      include Smithy::Client::_Response[Types::DescribeQueryDefinitionsResponse]
+      def query_definitions: () -> Array[Types::QueryDefinition]?
+      def next_token: () -> String?
+    end
+    def describe_query_definitions: (
+      ?query_language: String,
+      ?query_definition_name_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeQueryDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueryDefinitionsResponse
+
+    interface _DescribeResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePoliciesResponse]
+      def resource_policies: () -> Array[Types::ResourcePolicy]?
+      def next_token: () -> String?
+    end
+    def describe_resource_policies: (
+      ?next_token: String,
+      ?limit: Integer,
+      ?resource_arn: String,
+      ?policy_scope: String
+    ) -> _DescribeResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePoliciesResponse
+
+    interface _DescribeSubscriptionFiltersResponse
+      include Smithy::Client::_Response[Types::DescribeSubscriptionFiltersResponse]
+      def subscription_filters: () -> Array[Types::SubscriptionFilter]?
+      def next_token: () -> String?
+    end
+    def describe_subscription_filters: (
+      ?log_group_name: String,
+      ?filter_name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _DescribeSubscriptionFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSubscriptionFiltersResponse
+
+    interface _DisassociateKmsKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_kms_key: (
+      ?log_group_name: String,
+      ?resource_identifier: String
+    ) -> _DisassociateKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateKmsKeyResponse
+
+    interface _FilterLogEventsResponse
+      include Smithy::Client::_Response[Types::FilterLogEventsResponse]
+      def events: () -> Array[Types::FilteredLogEvent]?
+      def searched_log_streams: () -> Array[Types::SearchedLogStream]?
+      def next_token: () -> String?
+    end
+    def filter_log_events: (
+      ?log_group_name: String,
+      ?log_group_identifier: String,
+      ?log_stream_names: Array[String],
+      ?log_stream_name_prefix: String,
+      ?start_time: Integer,
+      ?end_time: Integer,
+      ?filter_pattern: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?interleaved: bool,
+      ?unmask: bool
+    ) -> _FilterLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FilterLogEventsResponse
+
+    interface _GetDataProtectionPolicyResponse
+      include Smithy::Client::_Response[Types::GetDataProtectionPolicyResponse]
+      def log_group_identifier: () -> String?
+      def policy_document: () -> String?
+      def last_updated_time: () -> Integer?
+    end
+    def get_data_protection_policy: (
+      ?log_group_identifier: String
+    ) -> _GetDataProtectionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataProtectionPolicyResponse
+
+    interface _GetDeliveryResponse
+      include Smithy::Client::_Response[Types::GetDeliveryResponse]
+      def delivery: () -> Types::Delivery?
+    end
+    def get_delivery: (
+      ?id: String
+    ) -> _GetDeliveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeliveryResponse
+
+    interface _GetDeliveryDestinationResponse
+      include Smithy::Client::_Response[Types::GetDeliveryDestinationResponse]
+      def delivery_destination: () -> Types::DeliveryDestination?
+    end
+    def get_delivery_destination: (
+      ?name: String
+    ) -> _GetDeliveryDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeliveryDestinationResponse
+
+    interface _GetDeliveryDestinationPolicyResponse
+      include Smithy::Client::_Response[Types::GetDeliveryDestinationPolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def get_delivery_destination_policy: (
+      ?delivery_destination_name: String
+    ) -> _GetDeliveryDestinationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeliveryDestinationPolicyResponse
+
+    interface _GetDeliverySourceResponse
+      include Smithy::Client::_Response[Types::GetDeliverySourceResponse]
+      def delivery_source: () -> Types::DeliverySource?
+    end
+    def get_delivery_source: (
+      ?name: String
+    ) -> _GetDeliverySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeliverySourceResponse
+
+    interface _GetIntegrationResponse
+      include Smithy::Client::_Response[Types::GetIntegrationResponse]
+      def integration_name: () -> String?
+      def integration_type: () -> String?
+      def integration_status: () -> String?
+      def integration_details: () -> Types::IntegrationDetails?
+    end
+    def get_integration: (
+      ?integration_name: String
+    ) -> _GetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntegrationResponse
+
+    interface _GetLogAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::GetLogAnomalyDetectorResponse]
+      def detector_name: () -> String?
+      def log_group_arn_list: () -> Array[String]?
+      def evaluation_frequency: () -> String?
+      def filter_pattern: () -> String?
+      def anomaly_detector_status: () -> String?
+      def kms_key_id: () -> String?
+      def creation_time_stamp: () -> Integer?
+      def last_modified_time_stamp: () -> Integer?
+      def anomaly_visibility_time: () -> Integer?
+    end
+    def get_log_anomaly_detector: (
+      ?anomaly_detector_arn: String
+    ) -> _GetLogAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogAnomalyDetectorResponse
+
+    interface _GetLogEventsResponse
+      include Smithy::Client::_Response[Types::GetLogEventsResponse]
+      def events: () -> Array[Types::OutputLogEvent]?
+      def next_forward_token: () -> String?
+      def next_backward_token: () -> String?
+    end
+    def get_log_events: (
+      ?log_group_name: String,
+      ?log_group_identifier: String,
+      ?log_stream_name: String,
+      ?start_time: Integer,
+      ?end_time: Integer,
+      ?next_token: String,
+      ?limit: Integer,
+      ?start_from_head: bool,
+      ?unmask: bool
+    ) -> _GetLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogEventsResponse
+
+    interface _GetLogGroupFieldsResponse
+      include Smithy::Client::_Response[Types::GetLogGroupFieldsResponse]
+      def log_group_fields: () -> Array[Types::LogGroupField]?
+    end
+    def get_log_group_fields: (
+      ?log_group_name: String,
+      ?time: Integer,
+      ?log_group_identifier: String
+    ) -> _GetLogGroupFieldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogGroupFieldsResponse
+
+    interface _GetLogObjectResponse
+      include Smithy::Client::_Response[Types::GetLogObjectResponse]
+      def field_stream: () -> Types::GetLogObjectResponseStream?
+    end
+    def get_log_object: (
+      ?unmask: bool,
+      ?log_object_pointer: String
+    ) -> _GetLogObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogObjectResponse
+
+    interface _GetLogRecordResponse
+      include Smithy::Client::_Response[Types::GetLogRecordResponse]
+      def log_record: () -> Hash[String, String]?
+    end
+    def get_log_record: (
+      ?log_record_pointer: String,
+      ?unmask: bool
+    ) -> _GetLogRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogRecordResponse
+
+    interface _GetQueryResultsResponse
+      include Smithy::Client::_Response[Types::GetQueryResultsResponse]
+      def query_language: () -> String?
+      def results: () -> Array[Array[Types::ResultField]]?
+      def statistics: () -> Types::QueryStatistics?
+      def status: () -> String?
+      def encryption_key: () -> String?
+    end
+    def get_query_results: (
+      ?query_id: String
+    ) -> _GetQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResultsResponse
+
+    interface _GetTransformerResponse
+      include Smithy::Client::_Response[Types::GetTransformerResponse]
+      def log_group_identifier: () -> String?
+      def creation_time: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def transformer_config: () -> Array[Types::Processor]?
+    end
+    def get_transformer: (
+      ?log_group_identifier: String
+    ) -> _GetTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransformerResponse
+
+    interface _ListAnomaliesResponse
+      include Smithy::Client::_Response[Types::ListAnomaliesResponse]
+      def anomalies: () -> Array[Types::Anomaly]?
+      def next_token: () -> String?
+    end
+    def list_anomalies: (
+      ?anomaly_detector_arn: String,
+      ?suppression_state: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListAnomaliesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomaliesResponse
+
+    interface _ListIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListIntegrationsResponse]
+      def integration_summaries: () -> Array[Types::IntegrationSummary]?
+    end
+    def list_integrations: (
+      ?integration_name_prefix: String,
+      ?integration_type: String,
+      ?integration_status: String
+    ) -> _ListIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationsResponse
+
+    interface _ListLogAnomalyDetectorsResponse
+      include Smithy::Client::_Response[Types::ListLogAnomalyDetectorsResponse]
+      def anomaly_detectors: () -> Array[Types::AnomalyDetector]?
+      def next_token: () -> String?
+    end
+    def list_log_anomaly_detectors: (
+      ?filter_log_group_arn: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListLogAnomalyDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogAnomalyDetectorsResponse
+
+    interface _ListLogGroupsResponse
+      include Smithy::Client::_Response[Types::ListLogGroupsResponse]
+      def log_groups: () -> Array[Types::LogGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_log_groups: (
+      ?log_group_name_pattern: String,
+      ?log_group_class: String,
+      ?include_linked_accounts: bool,
+      ?account_identifiers: Array[String],
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListLogGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogGroupsResponse
+
+    interface _ListLogGroupsForQueryResponse
+      include Smithy::Client::_Response[Types::ListLogGroupsForQueryResponse]
+      def log_group_identifiers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_log_groups_for_query: (
+      ?query_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLogGroupsForQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogGroupsForQueryResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTagsLogGroupResponse
+      include Smithy::Client::_Response[Types::ListTagsLogGroupResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_log_group: (
+      ?log_group_name: String
+    ) -> _ListTagsLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsLogGroupResponse
+
+    interface _PutAccountPolicyResponse
+      include Smithy::Client::_Response[Types::PutAccountPolicyResponse]
+      def account_policy: () -> Types::AccountPolicy?
+    end
+    def put_account_policy: (
+      ?policy_name: String,
+      ?policy_document: String,
+      ?policy_type: String,
+      ?scope: String,
+      ?selection_criteria: String
+    ) -> _PutAccountPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountPolicyResponse
+
+    interface _PutDataProtectionPolicyResponse
+      include Smithy::Client::_Response[Types::PutDataProtectionPolicyResponse]
+      def log_group_identifier: () -> String?
+      def policy_document: () -> String?
+      def last_updated_time: () -> Integer?
+    end
+    def put_data_protection_policy: (
+      ?log_group_identifier: String,
+      ?policy_document: String
+    ) -> _PutDataProtectionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataProtectionPolicyResponse
+
+    interface _PutDeliveryDestinationResponse
+      include Smithy::Client::_Response[Types::PutDeliveryDestinationResponse]
+      def delivery_destination: () -> Types::DeliveryDestination?
+    end
+    def put_delivery_destination: (
+      ?name: String,
+      ?output_format: String,
+      ?delivery_destination_configuration: {
+        destination_resource_arn: String
+      },
+      ?delivery_destination_type: String,
+      ?tags: Hash[String, String]
+    ) -> _PutDeliveryDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliveryDestinationResponse
+
+    interface _PutDeliveryDestinationPolicyResponse
+      include Smithy::Client::_Response[Types::PutDeliveryDestinationPolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def put_delivery_destination_policy: (
+      ?delivery_destination_name: String,
+      ?delivery_destination_policy: String
+    ) -> _PutDeliveryDestinationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliveryDestinationPolicyResponse
+
+    interface _PutDeliverySourceResponse
+      include Smithy::Client::_Response[Types::PutDeliverySourceResponse]
+      def delivery_source: () -> Types::DeliverySource?
+    end
+    def put_delivery_source: (
+      ?name: String,
+      ?resource_arn: String,
+      ?log_type: String,
+      ?tags: Hash[String, String]
+    ) -> _PutDeliverySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliverySourceResponse
+
+    interface _PutDestinationResponse
+      include Smithy::Client::_Response[Types::PutDestinationResponse]
+      def destination: () -> Types::Destination?
+    end
+    def put_destination: (
+      ?destination_name: String,
+      ?target_arn: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _PutDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDestinationResponse
+
+    interface _PutDestinationPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_destination_policy: (
+      ?destination_name: String,
+      ?access_policy: String,
+      ?force_update: bool
+    ) -> _PutDestinationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDestinationPolicyResponse
+
+    interface _PutIndexPolicyResponse
+      include Smithy::Client::_Response[Types::PutIndexPolicyResponse]
+      def index_policy: () -> Types::IndexPolicy?
+    end
+    def put_index_policy: (
+      ?log_group_identifier: String,
+      ?policy_document: String
+    ) -> _PutIndexPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIndexPolicyResponse
+
+    interface _PutIntegrationResponse
+      include Smithy::Client::_Response[Types::PutIntegrationResponse]
+      def integration_name: () -> String?
+      def integration_status: () -> String?
+    end
+    def put_integration: (
+      ?integration_name: String,
+      ?resource_config: {
+        open_search_resource_config: {
+          kms_key_arn: String,
+          data_source_role_arn: untyped,
+          dashboard_viewer_principals: Array[String],
+          application_arn: untyped,
+          retention_days: Integer
+        }
+      },
+      ?integration_type: String
+    ) -> _PutIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIntegrationResponse
+
+    interface _PutLogEventsResponse
+      include Smithy::Client::_Response[Types::PutLogEventsResponse]
+      def next_sequence_token: () -> String?
+      def rejected_log_events_info: () -> Types::RejectedLogEventsInfo?
+      def rejected_entity_info: () -> Types::RejectedEntityInfo?
+    end
+    def put_log_events: (
+      ?log_group_name: String,
+      ?log_stream_name: String,
+      ?log_events: Array[
+        {
+          timestamp: Integer,
+          message: String
+        }
+      ],
+      ?sequence_token: String,
+      ?entity: {
+        key_attributes: Hash[String, String],
+        attributes: Hash[String, String]
+      }
+    ) -> _PutLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLogEventsResponse
+
+    interface _PutMetricFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_metric_filter: (
+      ?log_group_name: String,
+      ?filter_name: String,
+      ?filter_pattern: String,
+      ?metric_transformations: Array[
+        {
+          metric_name: String,
+          metric_namespace: String,
+          metric_value: String,
+          default_value: Float,
+          dimensions: Hash[String, String],
+          unit: String
+        }
+      ],
+      ?apply_on_transformed_logs: bool
+    ) -> _PutMetricFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricFilterResponse
+
+    interface _PutQueryDefinitionResponse
+      include Smithy::Client::_Response[Types::PutQueryDefinitionResponse]
+      def query_definition_id: () -> String?
+    end
+    def put_query_definition: (
+      ?query_language: String,
+      ?name: String,
+      ?query_definition_id: String,
+      ?log_group_names: Array[String],
+      ?query_string: String,
+      ?client_token: String
+    ) -> _PutQueryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutQueryDefinitionResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_policy: () -> Types::ResourcePolicy?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?policy_name: String,
+      ?policy_document: String,
+      ?resource_arn: String,
+      ?expected_revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _PutRetentionPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_retention_policy: (
+      ?log_group_name: String,
+      ?retention_in_days: Integer
+    ) -> _PutRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRetentionPolicyResponse
+
+    interface _PutSubscriptionFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_subscription_filter: (
+      ?log_group_name: String,
+      ?filter_name: String,
+      ?filter_pattern: String,
+      ?destination_arn: String,
+      ?role_arn: String,
+      ?distribution: String,
+      ?apply_on_transformed_logs: bool
+    ) -> _PutSubscriptionFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSubscriptionFilterResponse
+
+    interface _PutTransformerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_transformer: (
+      ?log_group_identifier: String,
+      ?transformer_config: Array[
+        {
+          add_keys: {
+            entries: Array[
+              {
+                key: String,
+                value: String,
+                overwrite_if_exists: bool
+              }
+            ]
+          },
+          copy_value: {
+            entries: Array[
+              {
+                source: String,
+                target: String,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          csv: {
+            quote_character: String,
+            delimiter: String,
+            columns: Array[String],
+            source: untyped
+          },
+          date_time_converter: {
+            source: untyped,
+            target: untyped,
+            target_format: String,
+            match_patterns: Array[String],
+            source_timezone: String,
+            target_timezone: String,
+            locale: String
+          },
+          delete_keys: {
+            with_keys: Array[String]
+          },
+          grok: {
+            source: untyped,
+            match: String
+          },
+          list_to_map: {
+            source: untyped,
+            key: untyped,
+            value_key: String,
+            target: untyped,
+            flatten: bool,
+            flattened_element: String
+          },
+          lower_case_string: {
+            with_keys: Array[String]
+          },
+          move_keys: {
+            entries: Array[
+              {
+                source: untyped,
+                target: untyped,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          parse_cloudfront: {
+            source: untyped
+          },
+          parse_json: {
+            source: untyped,
+            destination: String
+          },
+          parse_key_value: {
+            source: untyped,
+            destination: untyped,
+            field_delimiter: String,
+            key_value_delimiter: String,
+            key_prefix: String,
+            non_match_value: String,
+            overwrite_if_exists: untyped
+          },
+          parse_route53: {
+            source: untyped
+          },
+          parse_to_ocsf: {
+            source: untyped,
+            event_source: String,
+            ocsf_version: String
+          },
+          parse_postgres: {
+            source: untyped
+          },
+          parse_vpc: {
+            source: untyped
+          },
+          parse_waf: {
+            source: untyped
+          },
+          rename_keys: {
+            entries: Array[
+              {
+                key: untyped,
+                rename_to: String,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          split_string: {
+            entries: Array[
+              {
+                source: untyped,
+                delimiter: String
+              }
+            ]
+          },
+          substitute_string: {
+            entries: Array[
+              {
+                source: untyped,
+                from: String,
+                to: String
+              }
+            ]
+          },
+          trim_string: {
+            with_keys: Array[String]
+          },
+          type_converter: {
+            entries: Array[
+              {
+                key: untyped,
+                type: String
+              }
+            ]
+          },
+          upper_case_string: {
+            with_keys: Array[String]
+          }
+        }
+      ]
+    ) -> _PutTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTransformerResponse
+
+    interface _StartLiveTailResponse
+      include Smithy::Client::_Response[Types::StartLiveTailResponse]
+      def response_stream: () -> Types::StartLiveTailResponseStream?
+    end
+    def start_live_tail: (
+      ?log_group_identifiers: Array[String],
+      ?log_stream_names: Array[String],
+      ?log_stream_name_prefixes: Array[String],
+      ?log_event_filter_pattern: String
+    ) -> _StartLiveTailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLiveTailResponse
+
+    interface _StartQueryResponse
+      include Smithy::Client::_Response[Types::StartQueryResponse]
+      def query_id: () -> String?
+    end
+    def start_query: (
+      ?query_language: String,
+      ?log_group_name: String,
+      ?log_group_names: Array[String],
+      ?log_group_identifiers: Array[String],
+      ?start_time: Integer,
+      ?end_time: Integer,
+      ?query_string: String,
+      ?limit: Integer
+    ) -> _StartQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryResponse
+
+    interface _StopQueryResponse
+      include Smithy::Client::_Response[Types::StopQueryResponse]
+      def success: () -> bool?
+    end
+    def stop_query: (
+      ?query_id: String
+    ) -> _StopQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopQueryResponse
+
+    interface _TagLogGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_log_group: (
+      ?log_group_name: String,
+      ?tags: Hash[String, String]
+    ) -> _TagLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagLogGroupResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestMetricFilterResponse
+      include Smithy::Client::_Response[Types::TestMetricFilterResponse]
+      def matches: () -> Array[Types::MetricFilterMatchRecord]?
+    end
+    def test_metric_filter: (
+      ?filter_pattern: String,
+      ?log_event_messages: Array[String]
+    ) -> _TestMetricFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestMetricFilterResponse
+
+    interface _TestTransformerResponse
+      include Smithy::Client::_Response[Types::TestTransformerResponse]
+      def transformed_logs: () -> Array[Types::TransformedLogRecord]?
+    end
+    def test_transformer: (
+      ?transformer_config: Array[
+        {
+          add_keys: {
+            entries: Array[
+              {
+                key: String,
+                value: String,
+                overwrite_if_exists: bool
+              }
+            ]
+          },
+          copy_value: {
+            entries: Array[
+              {
+                source: String,
+                target: String,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          csv: {
+            quote_character: String,
+            delimiter: String,
+            columns: Array[String],
+            source: untyped
+          },
+          date_time_converter: {
+            source: untyped,
+            target: untyped,
+            target_format: String,
+            match_patterns: Array[String],
+            source_timezone: String,
+            target_timezone: String,
+            locale: String
+          },
+          delete_keys: {
+            with_keys: Array[String]
+          },
+          grok: {
+            source: untyped,
+            match: String
+          },
+          list_to_map: {
+            source: untyped,
+            key: untyped,
+            value_key: String,
+            target: untyped,
+            flatten: bool,
+            flattened_element: String
+          },
+          lower_case_string: {
+            with_keys: Array[String]
+          },
+          move_keys: {
+            entries: Array[
+              {
+                source: untyped,
+                target: untyped,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          parse_cloudfront: {
+            source: untyped
+          },
+          parse_json: {
+            source: untyped,
+            destination: String
+          },
+          parse_key_value: {
+            source: untyped,
+            destination: untyped,
+            field_delimiter: String,
+            key_value_delimiter: String,
+            key_prefix: String,
+            non_match_value: String,
+            overwrite_if_exists: untyped
+          },
+          parse_route53: {
+            source: untyped
+          },
+          parse_to_ocsf: {
+            source: untyped,
+            event_source: String,
+            ocsf_version: String
+          },
+          parse_postgres: {
+            source: untyped
+          },
+          parse_vpc: {
+            source: untyped
+          },
+          parse_waf: {
+            source: untyped
+          },
+          rename_keys: {
+            entries: Array[
+              {
+                key: untyped,
+                rename_to: String,
+                overwrite_if_exists: untyped
+              }
+            ]
+          },
+          split_string: {
+            entries: Array[
+              {
+                source: untyped,
+                delimiter: String
+              }
+            ]
+          },
+          substitute_string: {
+            entries: Array[
+              {
+                source: untyped,
+                from: String,
+                to: String
+              }
+            ]
+          },
+          trim_string: {
+            with_keys: Array[String]
+          },
+          type_converter: {
+            entries: Array[
+              {
+                key: untyped,
+                type: String
+              }
+            ]
+          },
+          upper_case_string: {
+            with_keys: Array[String]
+          }
+        }
+      ],
+      ?log_event_messages: Array[String]
+    ) -> _TestTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestTransformerResponse
+
+    interface _UntagLogGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_log_group: (
+      ?log_group_name: String,
+      ?tags: Array[String]
+    ) -> _UntagLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagLogGroupResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAnomalyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_anomaly: (
+      ?anomaly_id: String,
+      ?pattern_id: String,
+      ?anomaly_detector_arn: String,
+      ?suppression_type: String,
+      ?suppression_period: {
+        value: Integer,
+        suppression_unit: String
+      },
+      ?baseline: bool
+    ) -> _UpdateAnomalyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnomalyResponse
+
+    interface _UpdateDeliveryConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateDeliveryConfigurationResponse]
+    end
+    def update_delivery_configuration: (
+      ?id: String,
+      ?record_fields: Array[String],
+      ?field_delimiter: String,
+      ?s3_delivery_configuration: {
+        suffix_path: String,
+        enable_hive_compatible_path: bool
+      }
+    ) -> _UpdateDeliveryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeliveryConfigurationResponse
+
+    interface _UpdateLogAnomalyDetectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_log_anomaly_detector: (
+      ?anomaly_detector_arn: String,
+      ?evaluation_frequency: String,
+      ?filter_pattern: String,
+      ?anomaly_visibility_time: Integer,
+      ?enabled: bool
+    ) -> _UpdateLogAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLogAnomalyDetectorResponse
+  end
+end

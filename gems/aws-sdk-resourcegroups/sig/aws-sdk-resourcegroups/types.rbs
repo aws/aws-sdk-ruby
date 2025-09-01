@@ -1,0 +1,1085 @@
+module Aws::ResourceGroups
+  module Types
+
+    class AccountSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_lifecycle_events_desired_status: String,
+        ?group_lifecycle_events_status: String,
+        ?group_lifecycle_events_status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_lifecycle_events_desired_status: String?
+      attr_accessor group_lifecycle_events_status: String?
+      attr_accessor group_lifecycle_events_status_message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelTagSyncTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+    end
+
+    class CreateGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?resource_query: Types::ResourceQuery,
+        ?tags: Hash[String, String],
+        ?configuration: Array[Types::GroupConfigurationItem],
+        ?criticality: Integer,
+        ?owner: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor configuration: Array[Types::GroupConfigurationItem]?
+      attr_accessor criticality: Integer?
+      attr_accessor owner: String?
+      attr_accessor display_name: String?
+    end
+
+    class CreateGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+        ?resource_query: Types::ResourceQuery,
+        ?tags: Hash[String, String],
+        ?group_configuration: Types::GroupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor group_configuration: Types::GroupConfiguration?
+    end
+
+    class DeleteGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+    end
+
+    class DeleteGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class FailedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class GetGroupConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+    end
+
+    class GetGroupConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_configuration: Types::GroupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_configuration: Types::GroupConfiguration?
+    end
+
+    class GetGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+    end
+
+    class GetGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class GetGroupQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+    end
+
+    class GetGroupQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_query: Types::GroupQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_query: Types::GroupQuery?
+    end
+
+    class GetTagSyncTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+    end
+
+    class GetTagSyncTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+        ?group_name: String,
+        ?task_arn: String,
+        ?tag_key: String,
+        ?tag_value: String,
+        ?resource_query: Types::ResourceQuery,
+        ?role_arn: String,
+        ?status: String,
+        ?error_message: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor task_arn: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor created_at: Time?
+    end
+
+    class GetTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+        ?name: String,
+        ?description: String,
+        ?criticality: Integer,
+        ?owner: String,
+        ?display_name: String,
+        ?application_tag: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor criticality: Integer?
+      attr_accessor owner: String?
+      attr_accessor display_name: String?
+      attr_accessor application_tag: Hash[String, String]?
+    end
+
+    class GroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Array[Types::GroupConfigurationItem],
+        ?proposed_configuration: Array[Types::GroupConfigurationItem],
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Array[Types::GroupConfigurationItem]?
+      attr_accessor proposed_configuration: Array[Types::GroupConfigurationItem]?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GroupConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Array[Types::GroupConfigurationParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Array[Types::GroupConfigurationParameter]?
+    end
+
+    class GroupConfigurationParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module GroupConfigurationStatus
+      UPDATING: String
+      UPDATE_COMPLETE: String
+      UPDATE_FAILED: String
+    end
+
+    class GroupFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module GroupFilterName
+      ResourceType: String
+      ConfigurationType: String
+      Owner: String
+      DisplayName: String
+      Criticality: String
+    end
+
+    class GroupIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_arn: String,
+        ?description: String,
+        ?criticality: Integer,
+        ?owner: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_arn: String?
+      attr_accessor description: String?
+      attr_accessor criticality: Integer?
+      attr_accessor owner: String?
+      attr_accessor display_name: String?
+    end
+
+    module GroupLifecycleEventsDesiredStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module GroupLifecycleEventsStatus
+      ACTIVE: String
+      INACTIVE: String
+      IN_PROGRESS: String
+      ERROR: String
+    end
+
+    class GroupQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?resource_query: Types::ResourceQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+    end
+
+    class GroupResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor resource_arns: Array[String]?
+    end
+
+    class GroupResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?succeeded: Array[String],
+        ?failed: Array[Types::FailedResource],
+        ?pending: Array[Types::PendingResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor succeeded: Array[String]?
+      attr_accessor failed: Array[Types::FailedResource]?
+      attr_accessor pending: Array[Types::PendingResource]?
+    end
+
+    module GroupingStatus
+      SUCCESS: String
+      FAILED: String
+      IN_PROGRESS: String
+      SKIPPED: String
+    end
+
+    class GroupingStatusesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?action: String,
+        ?status: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor action: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module GroupingType
+      GROUP: String
+      UNGROUP: String
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListGroupResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+        ?filters: Array[Types::ResourceFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+      attr_accessor filters: Array[Types::ResourceFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupResourcesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: Types::ResourceIdentifier,
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: Types::ResourceIdentifier?
+      attr_accessor status: Types::ResourceStatus?
+    end
+
+    class ListGroupResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::ListGroupResourcesItem],
+        ?resource_identifiers: Array[Types::ResourceIdentifier],
+        ?next_token: String,
+        ?query_errors: Array[Types::QueryError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::ListGroupResourcesItem]?
+      attr_accessor resource_identifiers: Array[Types::ResourceIdentifier]?
+      attr_accessor next_token: String?
+      attr_accessor query_errors: Array[Types::QueryError]?
+    end
+
+    class ListGroupingStatusesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ListGroupingStatusesFilterName
+      Status: String
+      ResourceArn: String
+    end
+
+    class ListGroupingStatusesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::ListGroupingStatusesFilter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::ListGroupingStatusesFilter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupingStatusesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?grouping_statuses: Array[Types::GroupingStatusesItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor grouping_statuses: Array[Types::GroupingStatusesItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::GroupFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::GroupFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_identifiers: Array[Types::GroupIdentifier],
+        ?groups: Array[Types::Group],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_identifiers: Array[Types::GroupIdentifier]?
+      attr_accessor groups: Array[Types::Group]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagSyncTasksFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+    end
+
+    class ListTagSyncTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::ListTagSyncTasksFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::ListTagSyncTasksFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagSyncTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_sync_tasks: Array[Types::TagSyncTaskItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_sync_tasks: Array[Types::TagSyncTaskItem]?
+      attr_accessor next_token: String?
+    end
+
+    class MethodNotAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PendingResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class PutGroupConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?configuration: Array[Types::GroupConfigurationItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor configuration: Array[Types::GroupConfigurationItem]?
+    end
+
+    class PutGroupConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    module QueryErrorCode
+      CLOUDFORMATION_STACK_INACTIVE: String
+      CLOUDFORMATION_STACK_NOT_EXISTING: String
+      CLOUDFORMATION_STACK_UNASSUMABLE_ROLE: String
+      RESOURCE_TYPE_NOT_SUPPORTED: String
+    end
+
+    module QueryType
+      TAG_FILTERS_1_0: String
+      CLOUDFORMATION_STACK_1_0: String
+    end
+
+    class ResourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ResourceFilterName
+      ResourceType: String
+    end
+
+    class ResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?query: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor query: String?
+    end
+
+    class ResourceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module ResourceStatusValue
+      Pending: String
+    end
+
+    class SearchResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_query: Types::ResourceQuery,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifiers: Array[Types::ResourceIdentifier],
+        ?next_token: String,
+        ?query_errors: Array[Types::QueryError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifiers: Array[Types::ResourceIdentifier]?
+      attr_accessor next_token: String?
+      attr_accessor query_errors: Array[Types::QueryError]?
+    end
+
+    class StartTagSyncTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?tag_key: String,
+        ?tag_value: String,
+        ?resource_query: Types::ResourceQuery,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor role_arn: String?
+    end
+
+    class StartTagSyncTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+        ?group_name: String,
+        ?task_arn: String,
+        ?tag_key: String,
+        ?tag_value: String,
+        ?resource_query: Types::ResourceQuery,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor task_arn: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor role_arn: String?
+    end
+
+    class TagInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagSyncTaskItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_arn: String,
+        ?group_name: String,
+        ?task_arn: String,
+        ?tag_key: String,
+        ?tag_value: String,
+        ?resource_query: Types::ResourceQuery,
+        ?role_arn: String,
+        ?status: String,
+        ?error_message: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_arn: String?
+      attr_accessor group_name: String?
+      attr_accessor task_arn: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+      attr_accessor created_at: Time?
+    end
+
+    module TagSyncTaskStatus
+      ACTIVE: String
+      ERROR: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UngroupResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: String,
+        ?resource_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: String?
+      attr_accessor resource_arns: Array[String]?
+    end
+
+    class UngroupResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?succeeded: Array[String],
+        ?failed: Array[Types::FailedResource],
+        ?pending: Array[Types::PendingResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor succeeded: Array[String]?
+      attr_accessor failed: Array[Types::FailedResource]?
+      attr_accessor pending: Array[Types::PendingResource]?
+    end
+
+    class UntagInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor keys: Array[String]?
+    end
+
+    class UntagOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor keys: Array[String]?
+    end
+
+    class UpdateAccountSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_lifecycle_events_desired_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_lifecycle_events_desired_status: String?
+    end
+
+    class UpdateAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class UpdateGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+        ?description: String,
+        ?criticality: Integer,
+        ?owner: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+      attr_accessor description: String?
+      attr_accessor criticality: Integer?
+      attr_accessor owner: String?
+      attr_accessor display_name: String?
+    end
+
+    class UpdateGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group: Types::Group,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group: Types::Group?
+    end
+
+    class UpdateGroupQueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group: String,
+        ?resource_query: Types::ResourceQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group: String?
+      attr_accessor resource_query: Types::ResourceQuery?
+    end
+
+    class UpdateGroupQueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_query: Types::GroupQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_query: Types::GroupQuery?
+    end
+  end
+end

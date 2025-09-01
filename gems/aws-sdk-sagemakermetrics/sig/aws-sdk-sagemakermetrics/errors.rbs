@@ -1,0 +1,4 @@
+module Aws::SageMakerMetrics
+  module Errors
+  end
+end

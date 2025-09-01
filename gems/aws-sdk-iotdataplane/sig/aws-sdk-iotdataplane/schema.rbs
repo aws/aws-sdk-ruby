@@ -1,0 +1,59 @@
+module Aws::IoTDataPlane
+  module Schema
+    include Smithy::Schema::Shapes
+
+    CleanSession: BooleanShape
+    ClientId: StringShape
+    ConflictException: StructureShape
+    ContentType: StringShape
+    CorrelationData: StringShape
+    DeleteConnectionRequest: StructureShape
+    DeleteThingShadowRequest: StructureShape
+    DeleteThingShadowResponse: StructureShape
+    ForbiddenException: StructureShape
+    GetRetainedMessageRequest: StructureShape
+    GetRetainedMessageResponse: StructureShape
+    GetThingShadowRequest: StructureShape
+    GetThingShadowResponse: StructureShape
+    InternalFailureException: StructureShape
+    InvalidRequestException: StructureShape
+    JsonDocument: BlobShape
+    ListNamedShadowsForThingRequest: StructureShape
+    ListNamedShadowsForThingResponse: StructureShape
+    ListRetainedMessagesRequest: StructureShape
+    ListRetainedMessagesResponse: StructureShape
+    MaxResults: IntegerShape
+    MessageExpiry: IntegerShape
+    MethodNotAllowedException: StructureShape
+    NamedShadowList: ListShape
+    NextToken: StringShape
+    PageSize: IntegerShape
+    Payload: BlobShape
+    PayloadFormatIndicator: EnumShape
+    PayloadSize: IntegerShape
+    PreventWillMessage: BooleanShape
+    PublishRequest: StructureShape
+    Qos: IntegerShape
+    RequestEntityTooLargeException: StructureShape
+    ResourceNotFoundException: StructureShape
+    ResponseTopic: StringShape
+    Retain: BooleanShape
+    RetainedMessageList: ListShape
+    RetainedMessageSummary: StructureShape
+    ServiceUnavailableException: StructureShape
+    ShadowName: StringShape
+    SynthesizedJsonUserProperties: StringShape
+    ThingName: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: IntegerShape
+    Topic: StringShape
+    UnauthorizedException: StructureShape
+    UnsupportedDocumentEncodingException: StructureShape
+    UpdateThingShadowRequest: StructureShape
+    UpdateThingShadowResponse: StructureShape
+    UserPropertiesBlob: BlobShape
+    ErrorMessage: StringShape
+
+    IotMoonrakerService: ServiceShape
+  end
+end

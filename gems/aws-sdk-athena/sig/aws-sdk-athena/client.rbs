@@ -1,0 +1,864 @@
+module Aws::Athena
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Athena::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetNamedQueryResponse
+      include Smithy::Client::_Response[Types::BatchGetNamedQueryOutput]
+      def named_queries: () -> Array[Types::NamedQuery]?
+      def unprocessed_named_query_ids: () -> Array[Types::UnprocessedNamedQueryId]?
+    end
+    def batch_get_named_query: (
+      ?named_query_ids: Array[String]
+    ) -> _BatchGetNamedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetNamedQueryResponse
+
+    interface _BatchGetPreparedStatementResponse
+      include Smithy::Client::_Response[Types::BatchGetPreparedStatementOutput]
+      def prepared_statements: () -> Array[Types::PreparedStatement]?
+      def unprocessed_prepared_statement_names: () -> Array[Types::UnprocessedPreparedStatementName]?
+    end
+    def batch_get_prepared_statement: (
+      ?prepared_statement_names: Array[String],
+      ?work_group: String
+    ) -> _BatchGetPreparedStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPreparedStatementResponse
+
+    interface _BatchGetQueryExecutionResponse
+      include Smithy::Client::_Response[Types::BatchGetQueryExecutionOutput]
+      def query_executions: () -> Array[Types::QueryExecution]?
+      def unprocessed_query_execution_ids: () -> Array[Types::UnprocessedQueryExecutionId]?
+    end
+    def batch_get_query_execution: (
+      ?query_execution_ids: Array[String]
+    ) -> _BatchGetQueryExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetQueryExecutionResponse
+
+    interface _CancelCapacityReservationResponse
+      include Smithy::Client::_Response[Types::CancelCapacityReservationOutput]
+    end
+    def cancel_capacity_reservation: (
+      ?name: String
+    ) -> _CancelCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelCapacityReservationResponse
+
+    interface _CreateCapacityReservationResponse
+      include Smithy::Client::_Response[Types::CreateCapacityReservationOutput]
+    end
+    def create_capacity_reservation: (
+      ?target_dpus: Integer,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityReservationResponse
+
+    interface _CreateDataCatalogResponse
+      include Smithy::Client::_Response[Types::CreateDataCatalogOutput]
+      def data_catalog: () -> Types::DataCatalog?
+    end
+    def create_data_catalog: (
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?parameters: Hash[String, String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataCatalogResponse
+
+    interface _CreateNamedQueryResponse
+      include Smithy::Client::_Response[Types::CreateNamedQueryOutput]
+      def named_query_id: () -> String?
+    end
+    def create_named_query: (
+      ?name: String,
+      ?description: String,
+      ?database: String,
+      ?query_string: String,
+      ?client_request_token: String,
+      ?work_group: String
+    ) -> _CreateNamedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNamedQueryResponse
+
+    interface _CreateNotebookResponse
+      include Smithy::Client::_Response[Types::CreateNotebookOutput]
+      def notebook_id: () -> String?
+    end
+    def create_notebook: (
+      ?work_group: String,
+      ?name: String,
+      ?client_request_token: String
+    ) -> _CreateNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotebookResponse
+
+    interface _CreatePreparedStatementResponse
+      include Smithy::Client::_Response[Types::CreatePreparedStatementOutput]
+    end
+    def create_prepared_statement: (
+      ?statement_name: String,
+      ?work_group: String,
+      ?query_statement: String,
+      ?description: String
+    ) -> _CreatePreparedStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePreparedStatementResponse
+
+    interface _CreatePresignedNotebookUrlResponse
+      include Smithy::Client::_Response[Types::CreatePresignedNotebookUrlResponse]
+      def notebook_url: () -> String?
+      def auth_token: () -> String?
+      def auth_token_expiration_time: () -> Integer?
+    end
+    def create_presigned_notebook_url: (
+      ?session_id: String
+    ) -> _CreatePresignedNotebookUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePresignedNotebookUrlResponse
+
+    interface _CreateWorkGroupResponse
+      include Smithy::Client::_Response[Types::CreateWorkGroupOutput]
+    end
+    def create_work_group: (
+      ?name: String,
+      ?configuration: {
+        result_configuration: {
+          output_location: String,
+          encryption_configuration: {
+            encryption_option: String,
+            kms_key: String
+          },
+          expected_bucket_owner: String,
+          acl_configuration: {
+            s3_acl_option: String
+          }
+        },
+        managed_query_results_configuration: {
+          enabled: bool,
+          encryption_configuration: {
+            kms_key: String
+          }
+        },
+        enforce_work_group_configuration: bool,
+        publish_cloud_watch_metrics_enabled: untyped,
+        bytes_scanned_cutoff_per_query: Integer,
+        requester_pays_enabled: untyped,
+        engine_version: {
+          selected_engine_version: String,
+          effective_engine_version: untyped
+        },
+        additional_configuration: untyped,
+        execution_role: String,
+        customer_content_encryption_configuration: {
+          kms_key: untyped
+        },
+        enable_minimum_encryption_configuration: untyped,
+        identity_center_configuration: {
+          enable_identity_center: untyped,
+          identity_center_instance_arn: String
+        },
+        query_results_s3_access_grants_configuration: {
+          enable_s3_access_grants: untyped,
+          create_user_level_prefix: untyped,
+          authentication_type: String
+        }
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWorkGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkGroupResponse
+
+    interface _DeleteCapacityReservationResponse
+      include Smithy::Client::_Response[Types::DeleteCapacityReservationOutput]
+    end
+    def delete_capacity_reservation: (
+      ?name: String
+    ) -> _DeleteCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityReservationResponse
+
+    interface _DeleteDataCatalogResponse
+      include Smithy::Client::_Response[Types::DeleteDataCatalogOutput]
+      def data_catalog: () -> Types::DataCatalog?
+    end
+    def delete_data_catalog: (
+      ?name: String,
+      ?delete_catalog_only: bool
+    ) -> _DeleteDataCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataCatalogResponse
+
+    interface _DeleteNamedQueryResponse
+      include Smithy::Client::_Response[Types::DeleteNamedQueryOutput]
+    end
+    def delete_named_query: (
+      ?named_query_id: String
+    ) -> _DeleteNamedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNamedQueryResponse
+
+    interface _DeleteNotebookResponse
+      include Smithy::Client::_Response[Types::DeleteNotebookOutput]
+    end
+    def delete_notebook: (
+      ?notebook_id: String
+    ) -> _DeleteNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotebookResponse
+
+    interface _DeletePreparedStatementResponse
+      include Smithy::Client::_Response[Types::DeletePreparedStatementOutput]
+    end
+    def delete_prepared_statement: (
+      ?statement_name: String,
+      ?work_group: String
+    ) -> _DeletePreparedStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePreparedStatementResponse
+
+    interface _DeleteWorkGroupResponse
+      include Smithy::Client::_Response[Types::DeleteWorkGroupOutput]
+    end
+    def delete_work_group: (
+      ?work_group: String,
+      ?recursive_delete_option: bool
+    ) -> _DeleteWorkGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkGroupResponse
+
+    interface _ExportNotebookResponse
+      include Smithy::Client::_Response[Types::ExportNotebookOutput]
+      def notebook_metadata: () -> Types::NotebookMetadata?
+      def payload: () -> String?
+    end
+    def export_notebook: (
+      ?notebook_id: String
+    ) -> _ExportNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportNotebookResponse
+
+    interface _GetCalculationExecutionResponse
+      include Smithy::Client::_Response[Types::GetCalculationExecutionResponse]
+      def calculation_execution_id: () -> String?
+      def session_id: () -> String?
+      def description: () -> String?
+      def working_directory: () -> String?
+      def status: () -> Types::CalculationStatus?
+      def statistics: () -> Types::CalculationStatistics?
+      def result: () -> Types::CalculationResult?
+    end
+    def get_calculation_execution: (
+      ?calculation_execution_id: String
+    ) -> _GetCalculationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalculationExecutionResponse
+
+    interface _GetCalculationExecutionCodeResponse
+      include Smithy::Client::_Response[Types::GetCalculationExecutionCodeResponse]
+      def code_block: () -> String?
+    end
+    def get_calculation_execution_code: (
+      ?calculation_execution_id: String
+    ) -> _GetCalculationExecutionCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalculationExecutionCodeResponse
+
+    interface _GetCalculationExecutionStatusResponse
+      include Smithy::Client::_Response[Types::GetCalculationExecutionStatusResponse]
+      def status: () -> Types::CalculationStatus?
+      def statistics: () -> Types::CalculationStatistics?
+    end
+    def get_calculation_execution_status: (
+      ?calculation_execution_id: String
+    ) -> _GetCalculationExecutionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalculationExecutionStatusResponse
+
+    interface _GetCapacityAssignmentConfigurationResponse
+      include Smithy::Client::_Response[Types::GetCapacityAssignmentConfigurationOutput]
+      def capacity_assignment_configuration: () -> Types::CapacityAssignmentConfiguration?
+    end
+    def get_capacity_assignment_configuration: (
+      ?capacity_reservation_name: String
+    ) -> _GetCapacityAssignmentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityAssignmentConfigurationResponse
+
+    interface _GetCapacityReservationResponse
+      include Smithy::Client::_Response[Types::GetCapacityReservationOutput]
+      def capacity_reservation: () -> Types::CapacityReservation?
+    end
+    def get_capacity_reservation: (
+      ?name: String
+    ) -> _GetCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityReservationResponse
+
+    interface _GetDataCatalogResponse
+      include Smithy::Client::_Response[Types::GetDataCatalogOutput]
+      def data_catalog: () -> Types::DataCatalog?
+    end
+    def get_data_catalog: (
+      ?name: String,
+      ?work_group: String
+    ) -> _GetDataCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataCatalogResponse
+
+    interface _GetDatabaseResponse
+      include Smithy::Client::_Response[Types::GetDatabaseOutput]
+      def database: () -> Types::Database?
+    end
+    def get_database: (
+      ?catalog_name: String,
+      ?database_name: String,
+      ?work_group: String
+    ) -> _GetDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatabaseResponse
+
+    interface _GetNamedQueryResponse
+      include Smithy::Client::_Response[Types::GetNamedQueryOutput]
+      def named_query: () -> Types::NamedQuery?
+    end
+    def get_named_query: (
+      ?named_query_id: String
+    ) -> _GetNamedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNamedQueryResponse
+
+    interface _GetNotebookMetadataResponse
+      include Smithy::Client::_Response[Types::GetNotebookMetadataOutput]
+      def notebook_metadata: () -> Types::NotebookMetadata?
+    end
+    def get_notebook_metadata: (
+      ?notebook_id: String
+    ) -> _GetNotebookMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotebookMetadataResponse
+
+    interface _GetPreparedStatementResponse
+      include Smithy::Client::_Response[Types::GetPreparedStatementOutput]
+      def prepared_statement: () -> Types::PreparedStatement?
+    end
+    def get_prepared_statement: (
+      ?statement_name: String,
+      ?work_group: String
+    ) -> _GetPreparedStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPreparedStatementResponse
+
+    interface _GetQueryExecutionResponse
+      include Smithy::Client::_Response[Types::GetQueryExecutionOutput]
+      def query_execution: () -> Types::QueryExecution?
+    end
+    def get_query_execution: (
+      ?query_execution_id: String
+    ) -> _GetQueryExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryExecutionResponse
+
+    interface _GetQueryResultsResponse
+      include Smithy::Client::_Response[Types::GetQueryResultsOutput]
+      def update_count: () -> Integer?
+      def result_set: () -> Types::ResultSet?
+      def next_token: () -> String?
+    end
+    def get_query_results: (
+      ?query_execution_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?query_result_type: String
+    ) -> _GetQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResultsResponse
+
+    interface _GetQueryRuntimeStatisticsResponse
+      include Smithy::Client::_Response[Types::GetQueryRuntimeStatisticsOutput]
+      def query_runtime_statistics: () -> Types::QueryRuntimeStatistics?
+    end
+    def get_query_runtime_statistics: (
+      ?query_execution_id: String
+    ) -> _GetQueryRuntimeStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryRuntimeStatisticsResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session_id: () -> String?
+      def description: () -> String?
+      def work_group: () -> String?
+      def engine_version: () -> String?
+      def engine_configuration: () -> Types::EngineConfiguration?
+      def notebook_version: () -> String?
+      def session_configuration: () -> Types::SessionConfiguration?
+      def status: () -> Types::SessionStatus?
+      def statistics: () -> Types::SessionStatistics?
+    end
+    def get_session: (
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionStatusResponse
+      include Smithy::Client::_Response[Types::GetSessionStatusResponse]
+      def session_id: () -> String?
+      def status: () -> Types::SessionStatus?
+    end
+    def get_session_status: (
+      ?session_id: String
+    ) -> _GetSessionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionStatusResponse
+
+    interface _GetTableMetadataResponse
+      include Smithy::Client::_Response[Types::GetTableMetadataOutput]
+      def table_metadata: () -> Types::TableMetadata?
+    end
+    def get_table_metadata: (
+      ?catalog_name: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?work_group: String
+    ) -> _GetTableMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableMetadataResponse
+
+    interface _GetWorkGroupResponse
+      include Smithy::Client::_Response[Types::GetWorkGroupOutput]
+      def work_group: () -> Types::WorkGroup?
+    end
+    def get_work_group: (
+      ?work_group: String
+    ) -> _GetWorkGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkGroupResponse
+
+    interface _ImportNotebookResponse
+      include Smithy::Client::_Response[Types::ImportNotebookOutput]
+      def notebook_id: () -> String?
+    end
+    def import_notebook: (
+      ?work_group: String,
+      ?name: String,
+      ?payload: String,
+      ?type: String,
+      ?notebook_s3_location_uri: String,
+      ?client_request_token: String
+    ) -> _ImportNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportNotebookResponse
+
+    interface _ListApplicationDPUSizesResponse
+      include Smithy::Client::_Response[Types::ListApplicationDPUSizesOutput]
+      def application_dpu_sizes: () -> Array[Types::ApplicationDPUSizes]?
+      def next_token: () -> String?
+    end
+    def list_application_dpu_sizes: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationDPUSizesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationDPUSizesResponse
+
+    interface _ListCalculationExecutionsResponse
+      include Smithy::Client::_Response[Types::ListCalculationExecutionsResponse]
+      def next_token: () -> String?
+      def calculations: () -> Array[Types::CalculationSummary]?
+    end
+    def list_calculation_executions: (
+      ?session_id: String,
+      ?state_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCalculationExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCalculationExecutionsResponse
+
+    interface _ListCapacityReservationsResponse
+      include Smithy::Client::_Response[Types::ListCapacityReservationsOutput]
+      def next_token: () -> String?
+      def capacity_reservations: () -> Array[Types::CapacityReservation]?
+    end
+    def list_capacity_reservations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCapacityReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapacityReservationsResponse
+
+    interface _ListDataCatalogsResponse
+      include Smithy::Client::_Response[Types::ListDataCatalogsOutput]
+      def data_catalogs_summary: () -> Array[Types::DataCatalogSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_catalogs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListDataCatalogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataCatalogsResponse
+
+    interface _ListDatabasesResponse
+      include Smithy::Client::_Response[Types::ListDatabasesOutput]
+      def database_list: () -> Array[Types::Database]?
+      def next_token: () -> String?
+    end
+    def list_databases: (
+      ?catalog_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatabasesResponse
+
+    interface _ListEngineVersionsResponse
+      include Smithy::Client::_Response[Types::ListEngineVersionsOutput]
+      def engine_versions: () -> Array[Types::EngineVersion]?
+      def next_token: () -> String?
+    end
+    def list_engine_versions: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEngineVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngineVersionsResponse
+
+    interface _ListExecutorsResponse
+      include Smithy::Client::_Response[Types::ListExecutorsResponse]
+      def session_id: () -> String?
+      def next_token: () -> String?
+      def executors_summary: () -> Array[Types::ExecutorsSummary]?
+    end
+    def list_executors: (
+      ?session_id: String,
+      ?executor_state_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExecutorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutorsResponse
+
+    interface _ListNamedQueriesResponse
+      include Smithy::Client::_Response[Types::ListNamedQueriesOutput]
+      def named_query_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_named_queries: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListNamedQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNamedQueriesResponse
+
+    interface _ListNotebookMetadataResponse
+      include Smithy::Client::_Response[Types::ListNotebookMetadataOutput]
+      def next_token: () -> String?
+      def notebook_metadata_list: () -> Array[Types::NotebookMetadata]?
+    end
+    def list_notebook_metadata: (
+      ?filters: {
+        name: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListNotebookMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotebookMetadataResponse
+
+    interface _ListNotebookSessionsResponse
+      include Smithy::Client::_Response[Types::ListNotebookSessionsResponse]
+      def notebook_sessions_list: () -> Array[Types::NotebookSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_notebook_sessions: (
+      ?notebook_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotebookSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotebookSessionsResponse
+
+    interface _ListPreparedStatementsResponse
+      include Smithy::Client::_Response[Types::ListPreparedStatementsOutput]
+      def prepared_statements: () -> Array[Types::PreparedStatementSummary]?
+      def next_token: () -> String?
+    end
+    def list_prepared_statements: (
+      ?work_group: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPreparedStatementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPreparedStatementsResponse
+
+    interface _ListQueryExecutionsResponse
+      include Smithy::Client::_Response[Types::ListQueryExecutionsOutput]
+      def query_execution_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_query_executions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListQueryExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueryExecutionsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def next_token: () -> String?
+      def sessions: () -> Array[Types::SessionSummary]?
+    end
+    def list_sessions: (
+      ?work_group: String,
+      ?state_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ListTableMetadataResponse
+      include Smithy::Client::_Response[Types::ListTableMetadataOutput]
+      def table_metadata_list: () -> Array[Types::TableMetadata]?
+      def next_token: () -> String?
+    end
+    def list_table_metadata: (
+      ?catalog_name: String,
+      ?database_name: String,
+      ?expression: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?work_group: String
+    ) -> _ListTableMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTableMetadataResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkGroupsResponse
+      include Smithy::Client::_Response[Types::ListWorkGroupsOutput]
+      def work_groups: () -> Array[Types::WorkGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_work_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkGroupsResponse
+
+    interface _PutCapacityAssignmentConfigurationResponse
+      include Smithy::Client::_Response[Types::PutCapacityAssignmentConfigurationOutput]
+    end
+    def put_capacity_assignment_configuration: (
+      ?capacity_reservation_name: String,
+      ?capacity_assignments: Array[
+        {
+          work_group_names: Array[String]
+        }
+      ]
+    ) -> _PutCapacityAssignmentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCapacityAssignmentConfigurationResponse
+
+    interface _StartCalculationExecutionResponse
+      include Smithy::Client::_Response[Types::StartCalculationExecutionResponse]
+      def calculation_execution_id: () -> String?
+      def state: () -> String?
+    end
+    def start_calculation_execution: (
+      ?session_id: String,
+      ?description: String,
+      ?calculation_configuration: {
+        code_block: String
+      },
+      ?code_block: String,
+      ?client_request_token: String
+    ) -> _StartCalculationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCalculationExecutionResponse
+
+    interface _StartQueryExecutionResponse
+      include Smithy::Client::_Response[Types::StartQueryExecutionOutput]
+      def query_execution_id: () -> String?
+    end
+    def start_query_execution: (
+      ?query_string: String,
+      ?client_request_token: String,
+      ?query_execution_context: {
+        database: String,
+        catalog: String
+      },
+      ?result_configuration: {
+        output_location: String,
+        encryption_configuration: {
+          encryption_option: String,
+          kms_key: String
+        },
+        expected_bucket_owner: String,
+        acl_configuration: {
+          s3_acl_option: String
+        }
+      },
+      ?work_group: String,
+      ?execution_parameters: Array[String],
+      ?result_reuse_configuration: {
+        result_reuse_by_age_configuration: {
+          enabled: bool,
+          max_age_in_minutes: Integer
+        }
+      }
+    ) -> _StartQueryExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryExecutionResponse
+
+    interface _StartSessionResponse
+      include Smithy::Client::_Response[Types::StartSessionResponse]
+      def session_id: () -> String?
+      def state: () -> String?
+    end
+    def start_session: (
+      ?description: String,
+      ?work_group: String,
+      ?engine_configuration: {
+        coordinator_dpu_size: Integer,
+        max_concurrent_dpus: Integer,
+        default_executor_dpu_size: Integer,
+        additional_configs: Hash[String, String],
+        spark_properties: untyped
+      },
+      ?notebook_version: String,
+      ?session_idle_timeout_in_minutes: Integer,
+      ?client_request_token: String
+    ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
+
+    interface _StopCalculationExecutionResponse
+      include Smithy::Client::_Response[Types::StopCalculationExecutionResponse]
+      def state: () -> String?
+    end
+    def stop_calculation_execution: (
+      ?calculation_execution_id: String
+    ) -> _StopCalculationExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCalculationExecutionResponse
+
+    interface _StopQueryExecutionResponse
+      include Smithy::Client::_Response[Types::StopQueryExecutionOutput]
+    end
+    def stop_query_execution: (
+      ?query_execution_id: String
+    ) -> _StopQueryExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopQueryExecutionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateSessionResponse
+      include Smithy::Client::_Response[Types::TerminateSessionResponse]
+      def state: () -> String?
+    end
+    def terminate_session: (
+      ?session_id: String
+    ) -> _TerminateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateSessionResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCapacityReservationResponse
+      include Smithy::Client::_Response[Types::UpdateCapacityReservationOutput]
+    end
+    def update_capacity_reservation: (
+      ?target_dpus: Integer,
+      ?name: String
+    ) -> _UpdateCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityReservationResponse
+
+    interface _UpdateDataCatalogResponse
+      include Smithy::Client::_Response[Types::UpdateDataCatalogOutput]
+    end
+    def update_data_catalog: (
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?parameters: Hash[String, String]
+    ) -> _UpdateDataCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataCatalogResponse
+
+    interface _UpdateNamedQueryResponse
+      include Smithy::Client::_Response[Types::UpdateNamedQueryOutput]
+    end
+    def update_named_query: (
+      ?named_query_id: String,
+      ?name: String,
+      ?description: String,
+      ?query_string: String
+    ) -> _UpdateNamedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNamedQueryResponse
+
+    interface _UpdateNotebookResponse
+      include Smithy::Client::_Response[Types::UpdateNotebookOutput]
+    end
+    def update_notebook: (
+      ?notebook_id: String,
+      ?payload: String,
+      ?type: String,
+      ?session_id: String,
+      ?client_request_token: String
+    ) -> _UpdateNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotebookResponse
+
+    interface _UpdateNotebookMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateNotebookMetadataOutput]
+    end
+    def update_notebook_metadata: (
+      ?notebook_id: String,
+      ?client_request_token: String,
+      ?name: String
+    ) -> _UpdateNotebookMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotebookMetadataResponse
+
+    interface _UpdatePreparedStatementResponse
+      include Smithy::Client::_Response[Types::UpdatePreparedStatementOutput]
+    end
+    def update_prepared_statement: (
+      ?statement_name: String,
+      ?work_group: String,
+      ?query_statement: String,
+      ?description: String
+    ) -> _UpdatePreparedStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePreparedStatementResponse
+
+    interface _UpdateWorkGroupResponse
+      include Smithy::Client::_Response[Types::UpdateWorkGroupOutput]
+    end
+    def update_work_group: (
+      ?work_group: String,
+      ?description: String,
+      ?configuration_updates: {
+        enforce_work_group_configuration: bool,
+        result_configuration_updates: {
+          output_location: String,
+          remove_output_location: untyped,
+          encryption_configuration: {
+            encryption_option: String,
+            kms_key: String
+          },
+          remove_encryption_configuration: untyped,
+          expected_bucket_owner: String,
+          remove_expected_bucket_owner: untyped,
+          acl_configuration: {
+            s3_acl_option: String
+          },
+          remove_acl_configuration: untyped
+        },
+        managed_query_results_configuration_updates: {
+          enabled: untyped,
+          encryption_configuration: {
+            kms_key: String
+          },
+          remove_encryption_configuration: untyped
+        },
+        publish_cloud_watch_metrics_enabled: untyped,
+        bytes_scanned_cutoff_per_query: Integer,
+        remove_bytes_scanned_cutoff_per_query: untyped,
+        requester_pays_enabled: untyped,
+        engine_version: {
+          selected_engine_version: String,
+          effective_engine_version: untyped
+        },
+        remove_customer_content_encryption_configuration: untyped,
+        additional_configuration: untyped,
+        execution_role: String,
+        customer_content_encryption_configuration: {
+          kms_key: untyped
+        },
+        enable_minimum_encryption_configuration: untyped,
+        query_results_s3_access_grants_configuration: {
+          enable_s3_access_grants: untyped,
+          create_user_level_prefix: untyped,
+          authentication_type: String
+        }
+      },
+      ?state: String
+    ) -> _UpdateWorkGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkGroupResponse
+  end
+end

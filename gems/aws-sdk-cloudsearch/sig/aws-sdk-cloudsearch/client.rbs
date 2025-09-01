@@ -1,0 +1,391 @@
+module Aws::CloudSearch
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudSearch::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BuildSuggestersResponse
+      include Smithy::Client::_Response[Types::BuildSuggestersResponse]
+      def field_names: () -> Array[String]?
+    end
+    def build_suggesters: (
+      ?domain_name: String
+    ) -> _BuildSuggestersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BuildSuggestersResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainResponse]
+      def domain_status: () -> Types::DomainStatus?
+    end
+    def create_domain: (
+      ?domain_name: String
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _DefineAnalysisSchemeResponse
+      include Smithy::Client::_Response[Types::DefineAnalysisSchemeResponse]
+      def analysis_scheme: () -> Types::AnalysisSchemeStatus?
+    end
+    def define_analysis_scheme: (
+      ?domain_name: String,
+      ?analysis_scheme: {
+        analysis_scheme_name: String,
+        analysis_scheme_language: String,
+        analysis_options: {
+          synonyms: String,
+          stopwords: untyped,
+          stemming_dictionary: untyped,
+          japanese_tokenization_dictionary: untyped,
+          algorithmic_stemming: String
+        }
+      }
+    ) -> _DefineAnalysisSchemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DefineAnalysisSchemeResponse
+
+    interface _DefineExpressionResponse
+      include Smithy::Client::_Response[Types::DefineExpressionResponse]
+      def expression: () -> Types::ExpressionStatus?
+    end
+    def define_expression: (
+      ?domain_name: String,
+      ?expression: {
+        expression_name: String,
+        expression_value: String
+      }
+    ) -> _DefineExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DefineExpressionResponse
+
+    interface _DefineIndexFieldResponse
+      include Smithy::Client::_Response[Types::DefineIndexFieldResponse]
+      def index_field: () -> Types::IndexFieldStatus?
+    end
+    def define_index_field: (
+      ?domain_name: String,
+      ?index_field: {
+        index_field_name: String,
+        index_field_type: String,
+        int_options: {
+          default_value: Integer,
+          source_field: String,
+          facet_enabled: bool,
+          search_enabled: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped
+        },
+        double_options: {
+          default_value: Float,
+          source_field: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped
+        },
+        literal_options: {
+          default_value: String,
+          source_field: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped
+        },
+        text_options: {
+          default_value: untyped,
+          source_field: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped,
+          highlight_enabled: untyped,
+          analysis_scheme: String
+        },
+        date_options: {
+          default_value: untyped,
+          source_field: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped
+        },
+        lat_lon_options: {
+          default_value: untyped,
+          source_field: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped,
+          sort_enabled: untyped
+        },
+        int_array_options: {
+          default_value: untyped,
+          source_fields: String,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped
+        },
+        double_array_options: {
+          default_value: untyped,
+          source_fields: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped
+        },
+        literal_array_options: {
+          default_value: untyped,
+          source_fields: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped
+        },
+        text_array_options: {
+          default_value: untyped,
+          source_fields: untyped,
+          return_enabled: untyped,
+          highlight_enabled: untyped,
+          analysis_scheme: untyped
+        },
+        date_array_options: {
+          default_value: untyped,
+          source_fields: untyped,
+          facet_enabled: untyped,
+          search_enabled: untyped,
+          return_enabled: untyped
+        }
+      }
+    ) -> _DefineIndexFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DefineIndexFieldResponse
+
+    interface _DefineSuggesterResponse
+      include Smithy::Client::_Response[Types::DefineSuggesterResponse]
+      def suggester: () -> Types::SuggesterStatus?
+    end
+    def define_suggester: (
+      ?domain_name: String,
+      ?suggester: {
+        suggester_name: String,
+        document_suggester_options: {
+          source_field: String,
+          fuzzy_matching: String,
+          sort_expression: String
+        }
+      }
+    ) -> _DefineSuggesterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DefineSuggesterResponse
+
+    interface _DeleteAnalysisSchemeResponse
+      include Smithy::Client::_Response[Types::DeleteAnalysisSchemeResponse]
+      def analysis_scheme: () -> Types::AnalysisSchemeStatus?
+    end
+    def delete_analysis_scheme: (
+      ?domain_name: String,
+      ?analysis_scheme_name: String
+    ) -> _DeleteAnalysisSchemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnalysisSchemeResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResponse]
+      def domain_status: () -> Types::DomainStatus?
+    end
+    def delete_domain: (
+      ?domain_name: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteExpressionResponse
+      include Smithy::Client::_Response[Types::DeleteExpressionResponse]
+      def expression: () -> Types::ExpressionStatus?
+    end
+    def delete_expression: (
+      ?domain_name: String,
+      ?expression_name: String
+    ) -> _DeleteExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExpressionResponse
+
+    interface _DeleteIndexFieldResponse
+      include Smithy::Client::_Response[Types::DeleteIndexFieldResponse]
+      def index_field: () -> Types::IndexFieldStatus?
+    end
+    def delete_index_field: (
+      ?domain_name: String,
+      ?index_field_name: String
+    ) -> _DeleteIndexFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexFieldResponse
+
+    interface _DeleteSuggesterResponse
+      include Smithy::Client::_Response[Types::DeleteSuggesterResponse]
+      def suggester: () -> Types::SuggesterStatus?
+    end
+    def delete_suggester: (
+      ?domain_name: String,
+      ?suggester_name: String
+    ) -> _DeleteSuggesterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSuggesterResponse
+
+    interface _DescribeAnalysisSchemesResponse
+      include Smithy::Client::_Response[Types::DescribeAnalysisSchemesResponse]
+      def analysis_schemes: () -> Array[Types::AnalysisSchemeStatus]?
+    end
+    def describe_analysis_schemes: (
+      ?domain_name: String,
+      ?analysis_scheme_names: Array[String],
+      ?deployed: bool
+    ) -> _DescribeAnalysisSchemesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnalysisSchemesResponse
+
+    interface _DescribeAvailabilityOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeAvailabilityOptionsResponse]
+      def availability_options: () -> Types::AvailabilityOptionsStatus?
+    end
+    def describe_availability_options: (
+      ?domain_name: String,
+      ?deployed: bool
+    ) -> _DescribeAvailabilityOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAvailabilityOptionsResponse
+
+    interface _DescribeDomainEndpointOptionsResponse
+      include Smithy::Client::_Response[Types::DescribeDomainEndpointOptionsResponse]
+      def domain_endpoint_options: () -> Types::DomainEndpointOptionsStatus?
+    end
+    def describe_domain_endpoint_options: (
+      ?domain_name: String,
+      ?deployed: bool
+    ) -> _DescribeDomainEndpointOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainEndpointOptionsResponse
+
+    interface _DescribeDomainsResponse
+      include Smithy::Client::_Response[Types::DescribeDomainsResponse]
+      def domain_status_list: () -> Array[Types::DomainStatus]?
+    end
+    def describe_domains: (
+      ?domain_names: Array[String]
+    ) -> _DescribeDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainsResponse
+
+    interface _DescribeExpressionsResponse
+      include Smithy::Client::_Response[Types::DescribeExpressionsResponse]
+      def expressions: () -> Array[Types::ExpressionStatus]?
+    end
+    def describe_expressions: (
+      ?domain_name: String,
+      ?expression_names: Array[String],
+      ?deployed: bool
+    ) -> _DescribeExpressionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExpressionsResponse
+
+    interface _DescribeIndexFieldsResponse
+      include Smithy::Client::_Response[Types::DescribeIndexFieldsResponse]
+      def index_fields: () -> Array[Types::IndexFieldStatus]?
+    end
+    def describe_index_fields: (
+      ?domain_name: String,
+      ?field_names: Array[String],
+      ?deployed: bool
+    ) -> _DescribeIndexFieldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIndexFieldsResponse
+
+    interface _DescribeScalingParametersResponse
+      include Smithy::Client::_Response[Types::DescribeScalingParametersResponse]
+      def scaling_parameters: () -> Types::ScalingParametersStatus?
+    end
+    def describe_scaling_parameters: (
+      ?domain_name: String
+    ) -> _DescribeScalingParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScalingParametersResponse
+
+    interface _DescribeServiceAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeServiceAccessPoliciesResponse]
+      def access_policies: () -> Types::AccessPoliciesStatus?
+    end
+    def describe_service_access_policies: (
+      ?domain_name: String,
+      ?deployed: bool
+    ) -> _DescribeServiceAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceAccessPoliciesResponse
+
+    interface _DescribeSuggestersResponse
+      include Smithy::Client::_Response[Types::DescribeSuggestersResponse]
+      def suggesters: () -> Array[Types::SuggesterStatus]?
+    end
+    def describe_suggesters: (
+      ?domain_name: String,
+      ?suggester_names: Array[String],
+      ?deployed: bool
+    ) -> _DescribeSuggestersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSuggestersResponse
+
+    interface _IndexDocumentsResponse
+      include Smithy::Client::_Response[Types::IndexDocumentsResponse]
+      def field_names: () -> Array[String]?
+    end
+    def index_documents: (
+      ?domain_name: String
+    ) -> _IndexDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IndexDocumentsResponse
+
+    interface _ListDomainNamesResponse
+      include Smithy::Client::_Response[Types::ListDomainNamesResponse]
+      def domain_names: () -> Hash[String, String]?
+    end
+    def list_domain_names: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainNamesResponse
+
+    interface _UpdateAvailabilityOptionsResponse
+      include Smithy::Client::_Response[Types::UpdateAvailabilityOptionsResponse]
+      def availability_options: () -> Types::AvailabilityOptionsStatus?
+    end
+    def update_availability_options: (
+      ?domain_name: String,
+      ?multi_az: bool
+    ) -> _UpdateAvailabilityOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAvailabilityOptionsResponse
+
+    interface _UpdateDomainEndpointOptionsResponse
+      include Smithy::Client::_Response[Types::UpdateDomainEndpointOptionsResponse]
+      def domain_endpoint_options: () -> Types::DomainEndpointOptionsStatus?
+    end
+    def update_domain_endpoint_options: (
+      ?domain_name: String,
+      ?domain_endpoint_options: {
+        enforce_https: bool,
+        tls_security_policy: String
+      }
+    ) -> _UpdateDomainEndpointOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainEndpointOptionsResponse
+
+    interface _UpdateScalingParametersResponse
+      include Smithy::Client::_Response[Types::UpdateScalingParametersResponse]
+      def scaling_parameters: () -> Types::ScalingParametersStatus?
+    end
+    def update_scaling_parameters: (
+      ?domain_name: String,
+      ?scaling_parameters: {
+        desired_instance_type: String,
+        desired_replication_count: Integer,
+        desired_partition_count: untyped
+      }
+    ) -> _UpdateScalingParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScalingParametersResponse
+
+    interface _UpdateServiceAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::UpdateServiceAccessPoliciesResponse]
+      def access_policies: () -> Types::AccessPoliciesStatus?
+    end
+    def update_service_access_policies: (
+      ?domain_name: String,
+      ?access_policies: String
+    ) -> _UpdateServiceAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceAccessPoliciesResponse
+  end
+end

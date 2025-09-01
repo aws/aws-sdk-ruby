@@ -1,0 +1,96 @@
+module Aws::CloudSearchDomain
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudSearchDomain::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _SearchResponse
+      include Smithy::Client::_Response[Types::SearchResponse]
+      def status: () -> Types::SearchStatus?
+      def hits: () -> Types::Hits?
+      def facets: () -> Hash[String, Types::BucketInfo]?
+      def stats: () -> Hash[String, Types::FieldStats]?
+    end
+    def search: (
+      ?cursor: String,
+      ?expr: String,
+      ?facet: String,
+      ?filter_query: String,
+      ?highlight: String,
+      ?partial: bool,
+      ?query: String,
+      ?query_options: String,
+      ?query_parser: String,
+      ?return: String,
+      ?size: Integer,
+      ?sort: String,
+      ?start: Integer,
+      ?stats: String
+    ) -> _SearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchResponse
+
+    interface _SuggestResponse
+      include Smithy::Client::_Response[Types::SuggestResponse]
+      def status: () -> Types::SuggestStatus?
+      def suggest: () -> Types::SuggestModel?
+    end
+    def suggest: (
+      ?query: String,
+      ?suggester: String,
+      ?size: Integer
+    ) -> _SuggestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuggestResponse
+
+    interface _UploadDocumentsResponse
+      include Smithy::Client::_Response[Types::UploadDocumentsResponse]
+      def status: () -> String?
+      def adds: () -> Integer?
+      def deletes: () -> Integer?
+      def warnings: () -> Array[Types::DocumentServiceWarning]?
+    end
+    def upload_documents: (
+      ?documents: String,
+      ?content_type: String
+    ) -> _UploadDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadDocumentsResponse
+  end
+end

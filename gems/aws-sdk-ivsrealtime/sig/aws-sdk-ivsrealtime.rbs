@@ -1,0 +1,5 @@
+  module Aws
+    module IVSRealTime
+      VERSION: String
+    end
+  end

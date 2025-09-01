@@ -1,0 +1,1105 @@
+module Aws::Schemas
+  module Types
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module CodeGenerationStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?source_arn: String,
+        ?cross_account: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor source_arn: String?
+      attr_accessor cross_account: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDiscovererResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?discoverer_arn: String,
+        ?discoverer_id: String,
+        ?source_arn: String,
+        ?state: String,
+        ?cross_account: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor discoverer_arn: String?
+      attr_accessor discoverer_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor state: String?
+      attr_accessor cross_account: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?registry_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor registry_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?registry_arn: String,
+        ?registry_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor registry_arn: String?
+      attr_accessor registry_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?description: String,
+        ?registry_name: String,
+        ?schema_name: String,
+        ?tags: Hash[String, String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor description: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+    end
+
+    class CreateSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?last_modified: Time,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?tags: Hash[String, String],
+        ?type: String,
+        ?version_created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor last_modified: Time?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor version_created_date: Time?
+    end
+
+    class DeleteDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+    end
+
+    class DeleteRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+    end
+
+    class DeleteSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+        ?schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+    end
+
+    class DeleteSchemaVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+    end
+
+    class DescribeCodeBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+    end
+
+    class DescribeCodeBindingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?last_modified: Time,
+        ?schema_version: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor schema_version: String?
+      attr_accessor status: String?
+    end
+
+    class DescribeDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+    end
+
+    class DescribeDiscovererResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?discoverer_arn: String,
+        ?discoverer_id: String,
+        ?source_arn: String,
+        ?state: String,
+        ?cross_account: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor discoverer_arn: String?
+      attr_accessor discoverer_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor state: String?
+      attr_accessor cross_account: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+    end
+
+    class DescribeRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?registry_arn: String,
+        ?registry_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor registry_arn: String?
+      attr_accessor registry_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+    end
+
+    class DescribeSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?description: String,
+        ?last_modified: Time,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?tags: Hash[String, String],
+        ?type: String,
+        ?version_created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor description: String?
+      attr_accessor last_modified: Time?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor version_created_date: Time?
+    end
+
+    module DiscovererState
+      STARTED: String
+      STOPPED: String
+    end
+
+    class DiscovererSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_arn: String,
+        ?discoverer_id: String,
+        ?source_arn: String,
+        ?state: String,
+        ?cross_account: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_arn: String?
+      attr_accessor discoverer_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor state: String?
+      attr_accessor cross_account: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ExportSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor type: String?
+    end
+
+    class ExportSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor type: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetCodeBindingSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+    end
+
+    class GetCodeBindingSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+    end
+
+    class GetDiscoveredSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class GetDiscoveredSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GoneException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ListDiscoverersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id_prefix: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?source_arn_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id_prefix: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor source_arn_prefix: String?
+    end
+
+    class ListDiscoverersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverers: Array[Types::DiscovererSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverers: Array[Types::DiscovererSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegistriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+        ?registry_name_prefix: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor registry_name_prefix: String?
+      attr_accessor scope: String?
+    end
+
+    class ListRegistriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?registries: Array[Types::RegistrySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor registries: Array[Types::RegistrySummary]?
+    end
+
+    class ListSchemaVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+        ?registry_name: String,
+        ?schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+    end
+
+    class ListSchemaVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?schema_versions: Array[Types::SchemaVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor schema_versions: Array[Types::SchemaVersionSummary]?
+    end
+
+    class ListSchemasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?next_token: String,
+        ?registry_name: String,
+        ?schema_name_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name_prefix: String?
+    end
+
+    class ListSchemasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?schemas: Array[Types::SchemaSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor schemas: Array[Types::SchemaSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class PreconditionFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class PutCodeBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?registry_name: String,
+        ?schema_name: String,
+        ?schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+    end
+
+    class PutCodeBindingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?last_modified: Time,
+        ?schema_version: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified: Time?
+      attr_accessor schema_version: String?
+      attr_accessor status: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?registry_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor registry_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RegistrySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?registry_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor registry_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class SchemaSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_modified: Time,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?tags: Hash[String, String],
+        ?version_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_modified: Time?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor version_count: Integer?
+    end
+
+    class SchemaVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor type: String?
+    end
+
+    class SearchSchemaSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_name: String,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_versions: Array[Types::SearchSchemaVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_versions: Array[Types::SearchSchemaVersionSummary]?
+    end
+
+    class SearchSchemaVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_date: Time,
+        ?schema_version: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_date: Time?
+      attr_accessor schema_version: String?
+      attr_accessor type: String?
+    end
+
+    class SearchSchemasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keywords: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keywords: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor registry_name: String?
+    end
+
+    class SearchSchemasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?schemas: Array[Types::SearchSchemaSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor schemas: Array[Types::SearchSchemaSummary]?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class StartDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+    end
+
+    class StartDiscovererResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+      attr_accessor state: String?
+    end
+
+    class StopDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+    end
+
+    class StopDiscovererResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discoverer_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discoverer_id: String?
+      attr_accessor state: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module Type
+      OpenApi3: String
+      JSONSchemaDraft4: String
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateDiscovererRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?discoverer_id: String,
+        ?cross_account: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor discoverer_id: String?
+      attr_accessor cross_account: bool?
+    end
+
+    class UpdateDiscovererResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?discoverer_arn: String,
+        ?discoverer_id: String,
+        ?source_arn: String,
+        ?state: String,
+        ?cross_account: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor discoverer_arn: String?
+      attr_accessor discoverer_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor state: String?
+      attr_accessor cross_account: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?registry_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor registry_name: String?
+    end
+
+    class UpdateRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?registry_arn: String,
+        ?registry_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor registry_arn: String?
+      attr_accessor registry_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token_id: String,
+        ?content: String,
+        ?description: String,
+        ?registry_name: String,
+        ?schema_name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token_id: String?
+      attr_accessor content: String?
+      attr_accessor description: String?
+      attr_accessor registry_name: String?
+      attr_accessor schema_name: String?
+      attr_accessor type: String?
+    end
+
+    class UpdateSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?last_modified: Time,
+        ?schema_arn: String,
+        ?schema_name: String,
+        ?schema_version: String,
+        ?tags: Hash[String, String],
+        ?type: String,
+        ?version_created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor last_modified: Time?
+      attr_accessor schema_arn: String?
+      attr_accessor schema_name: String?
+      attr_accessor schema_version: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor version_created_date: Time?
+    end
+  end
+end

@@ -1,0 +1,548 @@
+module Aws::SSMIncidents
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSMIncidents::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetIncidentFindingsResponse
+      include Smithy::Client::_Response[Types::BatchGetIncidentFindingsOutput]
+      def findings: () -> Array[Types::Finding]?
+      def errors: () -> Array[Types::BatchGetIncidentFindingsError]?
+    end
+    def batch_get_incident_findings: (
+      ?incident_record_arn: String,
+      ?finding_ids: Array[String]
+    ) -> _BatchGetIncidentFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetIncidentFindingsResponse
+
+    interface _CreateReplicationSetResponse
+      include Smithy::Client::_Response[Types::CreateReplicationSetOperationOutput]
+      def arn: () -> String?
+    end
+    def create_replication_set: (
+      ?regions: Hash[String,
+        {
+          sse_kms_key_id: String
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateReplicationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationSetResponse
+
+    interface _CreateResponsePlanResponse
+      include Smithy::Client::_Response[Types::CreateResponsePlanOperationOutput]
+      def arn: () -> String?
+    end
+    def create_response_plan: (
+      ?client_token: String,
+      ?name: String,
+      ?display_name: String,
+      ?incident_template: {
+        title: String,
+        impact: Integer,
+        summary: String,
+        dedupe_string: String,
+        notification_targets: Array[
+          {
+            sns_topic_arn: String
+          }
+        ],
+        incident_tags: Hash[String, String]
+      },
+      ?chat_channel: {
+        empty: {
+        },
+        chatbot_sns: Array[String]
+      },
+      ?engagements: Array[String],
+      ?actions: Array[
+        {
+          ssm_automation: {
+            role_arn: String,
+            document_name: String,
+            document_version: untyped,
+            target_account: String,
+            parameters: Hash[String,
+              Array[String]
+            ],
+            dynamic_parameters: Hash[String,
+              {
+                variable: String
+              }
+            ]
+          }
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?integrations: Array[
+        {
+          pager_duty_configuration: {
+            name: String,
+            secret_id: untyped,
+            pager_duty_incident_configuration: {
+              service_id: untyped
+            }
+          }
+        }
+      ]
+    ) -> _CreateResponsePlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResponsePlanResponse
+
+    interface _CreateTimelineEventResponse
+      include Smithy::Client::_Response[Types::CreateTimelineEventOperationOutput]
+      def incident_record_arn: () -> String?
+      def event_id: () -> String?
+    end
+    def create_timeline_event: (
+      ?client_token: String,
+      ?incident_record_arn: String,
+      ?event_time: Time,
+      ?event_type: String,
+      ?event_data: String,
+      ?event_references: Array[
+        {
+          resource: String,
+          related_item_id: String
+        }
+      ]
+    ) -> _CreateTimelineEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTimelineEventResponse
+
+    interface _DeleteIncidentRecordResponse
+      include Smithy::Client::_Response[Types::DeleteIncidentRecordOperationOutput]
+    end
+    def delete_incident_record: (
+      ?arn: String
+    ) -> _DeleteIncidentRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIncidentRecordResponse
+
+    interface _DeleteReplicationSetResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationSetOperationOutput]
+    end
+    def delete_replication_set: (
+      ?arn: String
+    ) -> _DeleteReplicationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationSetResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyOperationOutput]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?policy_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteResponsePlanResponse
+      include Smithy::Client::_Response[Types::DeleteResponsePlanOperationOutput]
+    end
+    def delete_response_plan: (
+      ?arn: String
+    ) -> _DeleteResponsePlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResponsePlanResponse
+
+    interface _DeleteTimelineEventResponse
+      include Smithy::Client::_Response[Types::DeleteTimelineEventOperationOutput]
+    end
+    def delete_timeline_event: (
+      ?incident_record_arn: String,
+      ?event_id: String
+    ) -> _DeleteTimelineEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTimelineEventResponse
+
+    interface _GetIncidentRecordResponse
+      include Smithy::Client::_Response[Types::GetIncidentRecordOperationOutput]
+      def incident_record: () -> Types::IncidentRecord?
+    end
+    def get_incident_record: (
+      ?arn: String
+    ) -> _GetIncidentRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIncidentRecordResponse
+
+    interface _GetReplicationSetResponse
+      include Smithy::Client::_Response[Types::GetReplicationSetOperationOutput]
+      def replication_set: () -> Types::ReplicationSet?
+    end
+    def get_replication_set: (
+      ?arn: String
+    ) -> _GetReplicationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReplicationSetResponse
+
+    interface _GetResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::GetResourcePoliciesOperationOutput]
+      def resource_policies: () -> Array[Types::ResourcePolicy]?
+      def next_token: () -> String?
+    end
+    def get_resource_policies: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePoliciesResponse
+
+    interface _GetResponsePlanResponse
+      include Smithy::Client::_Response[Types::GetResponsePlanOperationOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def incident_template: () -> Types::IncidentTemplate?
+      def chat_channel: () -> Types::ChatChannel?
+      def engagements: () -> Array[String]?
+      def actions: () -> Array[Types::Action]?
+      def integrations: () -> Array[Types::Integration]?
+    end
+    def get_response_plan: (
+      ?arn: String
+    ) -> _GetResponsePlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResponsePlanResponse
+
+    interface _GetTimelineEventResponse
+      include Smithy::Client::_Response[Types::GetTimelineEventOperationOutput]
+      def event: () -> Types::TimelineEvent?
+    end
+    def get_timeline_event: (
+      ?incident_record_arn: String,
+      ?event_id: String
+    ) -> _GetTimelineEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTimelineEventResponse
+
+    interface _ListIncidentFindingsResponse
+      include Smithy::Client::_Response[Types::ListIncidentFindingsOutput]
+      def findings: () -> Array[Types::FindingSummary]?
+      def next_token: () -> String?
+    end
+    def list_incident_findings: (
+      ?incident_record_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIncidentFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIncidentFindingsResponse
+
+    interface _ListIncidentRecordsResponse
+      include Smithy::Client::_Response[Types::ListIncidentRecordsOperationOutput]
+      def incident_record_summaries: () -> Array[Types::IncidentRecordSummary]?
+      def next_token: () -> String?
+    end
+    def list_incident_records: (
+      ?filters: Array[
+        {
+          key: String,
+          condition: {
+            before: Time,
+            after: untyped,
+            equals: {
+              string_values: Array[String],
+              integer_values: Array[Integer]
+            }
+          }
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIncidentRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIncidentRecordsResponse
+
+    interface _ListRelatedItemsResponse
+      include Smithy::Client::_Response[Types::ListRelatedItemsOperationOutput]
+      def related_items: () -> Array[Types::RelatedItem]?
+      def next_token: () -> String?
+    end
+    def list_related_items: (
+      ?incident_record_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRelatedItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRelatedItemsResponse
+
+    interface _ListReplicationSetsResponse
+      include Smithy::Client::_Response[Types::ListReplicationSetsOperationOutput]
+      def replication_set_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_replication_sets: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReplicationSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReplicationSetsResponse
+
+    interface _ListResponsePlansResponse
+      include Smithy::Client::_Response[Types::ListResponsePlansOperationOutput]
+      def response_plan_summaries: () -> Array[Types::ResponsePlanSummary]?
+      def next_token: () -> String?
+    end
+    def list_response_plans: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResponsePlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResponsePlansResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTimelineEventsResponse
+      include Smithy::Client::_Response[Types::ListTimelineEventsOperationOutput]
+      def event_summaries: () -> Array[Types::EventSummary]?
+      def next_token: () -> String?
+    end
+    def list_timeline_events: (
+      ?incident_record_arn: String,
+      ?filters: Array[
+        {
+          key: String,
+          condition: {
+            before: Time,
+            after: untyped,
+            equals: {
+              string_values: Array[String],
+              integer_values: Array[Integer]
+            }
+          }
+        }
+      ],
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTimelineEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTimelineEventsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyOperationOutput]
+      def policy_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _StartIncidentResponse
+      include Smithy::Client::_Response[Types::StartIncidentOperationOutput]
+      def incident_record_arn: () -> String?
+    end
+    def start_incident: (
+      ?client_token: String,
+      ?response_plan_arn: String,
+      ?title: String,
+      ?impact: Integer,
+      ?trigger_details: {
+        source: String,
+        trigger_arn: String,
+        timestamp: Time,
+        raw_data: String
+      },
+      ?related_items: Array[
+        {
+          identifier: {
+            value: {
+              arn: String,
+              url: String,
+              metric_definition: String,
+              pager_duty_incident_detail: {
+                id: String,
+                auto_resolve: bool,
+                secret_id: untyped
+              }
+            },
+            type: String
+          },
+          title: untyped,
+          generated_id: String
+        }
+      ]
+    ) -> _StartIncidentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartIncidentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDeletionProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateDeletionProtectionOperationOutput]
+    end
+    def update_deletion_protection: (
+      ?arn: String,
+      ?deletion_protected: bool,
+      ?client_token: String
+    ) -> _UpdateDeletionProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeletionProtectionResponse
+
+    interface _UpdateIncidentRecordResponse
+      include Smithy::Client::_Response[Types::UpdateIncidentRecordOperationOutput]
+    end
+    def update_incident_record: (
+      ?client_token: String,
+      ?arn: String,
+      ?title: String,
+      ?summary: String,
+      ?impact: Integer,
+      ?status: String,
+      ?chat_channel: {
+        empty: {
+        },
+        chatbot_sns: Array[String]
+      },
+      ?notification_targets: Array[
+        {
+          sns_topic_arn: String
+        }
+      ]
+    ) -> _UpdateIncidentRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIncidentRecordResponse
+
+    interface _UpdateRelatedItemsResponse
+      include Smithy::Client::_Response[Types::UpdateRelatedItemsOperationOutput]
+    end
+    def update_related_items: (
+      ?client_token: String,
+      ?incident_record_arn: String,
+      ?related_items_update: {
+        item_to_add: {
+          identifier: {
+            value: {
+              arn: String,
+              url: String,
+              metric_definition: String,
+              pager_duty_incident_detail: {
+                id: String,
+                auto_resolve: bool,
+                secret_id: untyped
+              }
+            },
+            type: String
+          },
+          title: untyped,
+          generated_id: String
+        },
+        item_to_remove: untyped
+      }
+    ) -> _UpdateRelatedItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelatedItemsResponse
+
+    interface _UpdateReplicationSetResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationSetOperationOutput]
+    end
+    def update_replication_set: (
+      ?arn: String,
+      ?actions: Array[
+        {
+          add_region_action: {
+            region_name: String,
+            sse_kms_key_id: String
+          },
+          delete_region_action: {
+            region_name: untyped
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateReplicationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationSetResponse
+
+    interface _UpdateResponsePlanResponse
+      include Smithy::Client::_Response[Types::UpdateResponsePlanOperationOutput]
+    end
+    def update_response_plan: (
+      ?client_token: String,
+      ?arn: String,
+      ?display_name: String,
+      ?incident_template_title: String,
+      ?incident_template_impact: Integer,
+      ?incident_template_summary: String,
+      ?incident_template_dedupe_string: String,
+      ?incident_template_notification_targets: Array[
+        {
+          sns_topic_arn: String
+        }
+      ],
+      ?chat_channel: {
+        empty: {
+        },
+        chatbot_sns: Array[String]
+      },
+      ?engagements: Array[String],
+      ?actions: Array[
+        {
+          ssm_automation: {
+            role_arn: String,
+            document_name: String,
+            document_version: untyped,
+            target_account: String,
+            parameters: Hash[String,
+              Array[String]
+            ],
+            dynamic_parameters: Hash[String,
+              {
+                variable: String
+              }
+            ]
+          }
+        }
+      ],
+      ?incident_template_tags: Hash[String, String],
+      ?integrations: Array[
+        {
+          pager_duty_configuration: {
+            name: String,
+            secret_id: untyped,
+            pager_duty_incident_configuration: {
+              service_id: untyped
+            }
+          }
+        }
+      ]
+    ) -> _UpdateResponsePlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResponsePlanResponse
+
+    interface _UpdateTimelineEventResponse
+      include Smithy::Client::_Response[Types::UpdateTimelineEventOperationOutput]
+    end
+    def update_timeline_event: (
+      ?client_token: String,
+      ?incident_record_arn: String,
+      ?event_id: String,
+      ?event_time: Time,
+      ?event_type: String,
+      ?event_data: String,
+      ?event_references: Array[
+        {
+          resource: String,
+          related_item_id: String
+        }
+      ]
+    ) -> _UpdateTimelineEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTimelineEventResponse
+  end
+end

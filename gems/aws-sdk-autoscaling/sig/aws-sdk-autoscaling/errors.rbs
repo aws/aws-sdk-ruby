@@ -1,0 +1,34 @@
+module Aws::AutoScaling
+  module Errors
+    class ActiveInstanceRefreshNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceRefreshInProgressFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IrreversibleInstanceRefreshFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceContentionFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ScalingActivityInProgressFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceLinkedRoleFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

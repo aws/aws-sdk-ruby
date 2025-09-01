@@ -1,0 +1,994 @@
+module Aws::CodeGuruReviewer
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AnalysisType
+      SECURITY: String
+      CODE_QUALITY: String
+    end
+
+    class AssociateRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+        ?client_request_token: String,
+        ?tags: Hash[String, String],
+        ?kms_key_details: Types::KMSKeyDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_details: Types::KMSKeyDetails?
+    end
+
+    class AssociateRepositoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_association: Types::RepositoryAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_association: Types::RepositoryAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class BranchDiffSourceCodeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_branch_name: String,
+        ?destination_branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_branch_name: String?
+      attr_accessor destination_branch_name: String?
+    end
+
+    class CodeArtifacts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_code_artifacts_object_key: String,
+        ?build_artifacts_object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_code_artifacts_object_key: String?
+      attr_accessor build_artifacts_object_key: String?
+    end
+
+    class CodeCommitRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CodeReview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code_review_arn: String,
+        ?repository_name: String,
+        ?owner: String,
+        ?provider_type: String,
+        ?state: String,
+        ?state_reason: String,
+        ?created_time_stamp: Time,
+        ?last_updated_time_stamp: Time,
+        ?type: String,
+        ?pull_request_id: String,
+        ?source_code_type: Types::SourceCodeType,
+        ?association_arn: String,
+        ?metrics: Types::Metrics,
+        ?analysis_types: Array[String],
+        ?config_file_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code_review_arn: String?
+      attr_accessor repository_name: String?
+      attr_accessor owner: String?
+      attr_accessor provider_type: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_time_stamp: Time?
+      attr_accessor last_updated_time_stamp: Time?
+      attr_accessor type: String?
+      attr_accessor pull_request_id: String?
+      attr_accessor source_code_type: Types::SourceCodeType?
+      attr_accessor association_arn: String?
+      attr_accessor metrics: Types::Metrics?
+      attr_accessor analysis_types: Array[String]?
+      attr_accessor config_file_state: String?
+    end
+
+    class CodeReviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code_review_arn: String,
+        ?repository_name: String,
+        ?owner: String,
+        ?provider_type: String,
+        ?state: String,
+        ?created_time_stamp: Time,
+        ?last_updated_time_stamp: Time,
+        ?type: String,
+        ?pull_request_id: String,
+        ?metrics_summary: Types::MetricsSummary,
+        ?source_code_type: Types::SourceCodeType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code_review_arn: String?
+      attr_accessor repository_name: String?
+      attr_accessor owner: String?
+      attr_accessor provider_type: String?
+      attr_accessor state: String?
+      attr_accessor created_time_stamp: Time?
+      attr_accessor last_updated_time_stamp: Time?
+      attr_accessor type: String?
+      attr_accessor pull_request_id: String?
+      attr_accessor metrics_summary: Types::MetricsSummary?
+      attr_accessor source_code_type: Types::SourceCodeType?
+    end
+
+    class CodeReviewType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_analysis: Types::RepositoryAnalysis,
+        ?analysis_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_analysis: Types::RepositoryAnalysis?
+      attr_accessor analysis_types: Array[String]?
+    end
+
+    class CommitDiffSourceCodeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_commit: String,
+        ?destination_commit: String,
+        ?merge_base_commit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_commit: String?
+      attr_accessor destination_commit: String?
+      attr_accessor merge_base_commit: String?
+    end
+
+    module ConfigFileState
+      PRESENT: String
+      ABSENT: String
+      PRESENT_WITH_ERRORS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCodeReviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?repository_association_arn: String,
+        ?type: Types::CodeReviewType,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor repository_association_arn: String?
+      attr_accessor type: Types::CodeReviewType?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateCodeReviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review: Types::CodeReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review: Types::CodeReview?
+    end
+
+    class DescribeCodeReviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_arn: String?
+    end
+
+    class DescribeCodeReviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review: Types::CodeReview,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review: Types::CodeReview?
+    end
+
+    class DescribeRecommendationFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_arn: String,
+        ?recommendation_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_arn: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class DescribeRecommendationFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_feedback: Types::RecommendationFeedback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_feedback: Types::RecommendationFeedback?
+    end
+
+    class DescribeRepositoryAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_arn: String?
+    end
+
+    class DescribeRepositoryAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_association: Types::RepositoryAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_association: Types::RepositoryAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DisassociateRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_arn: String?
+    end
+
+    class DisassociateRepositoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_association: Types::RepositoryAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_association: Types::RepositoryAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module EncryptionOption
+      AoCmk: String
+      CmCmk: String
+    end
+
+    class EventInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobState
+      COMPLETED: String
+      PENDING: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class KMSKeyDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?encryption_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor encryption_option: String?
+    end
+
+    class ListCodeReviewsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_types: Array[String],
+        ?states: Array[String],
+        ?repository_names: Array[String],
+        ?type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_types: Array[String]?
+      attr_accessor states: Array[String]?
+      attr_accessor repository_names: Array[String]?
+      attr_accessor type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_summaries: Array[Types::CodeReviewSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_summaries: Array[Types::CodeReviewSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?code_review_arn: String,
+        ?user_ids: Array[String],
+        ?recommendation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor code_review_arn: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor recommendation_ids: Array[String]?
+    end
+
+    class ListRecommendationFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_feedback_summaries: Array[Types::RecommendationFeedbackSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_feedback_summaries: Array[Types::RecommendationFeedbackSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?code_review_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor code_review_arn: String?
+    end
+
+    class ListRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_summaries: Array[Types::RecommendationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_summaries: Array[Types::RecommendationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoryAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_types: Array[String],
+        ?states: Array[String],
+        ?names: Array[String],
+        ?owners: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_types: Array[String]?
+      attr_accessor states: Array[String]?
+      attr_accessor names: Array[String]?
+      attr_accessor owners: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoryAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_association_summaries: Array[Types::RepositoryAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_association_summaries: Array[Types::RepositoryAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Metrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metered_lines_of_code_count: Integer,
+        ?suppressed_lines_of_code_count: Integer,
+        ?findings_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metered_lines_of_code_count: Integer?
+      attr_accessor suppressed_lines_of_code_count: Integer?
+      attr_accessor findings_count: Integer?
+    end
+
+    class MetricsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metered_lines_of_code_count: Integer,
+        ?suppressed_lines_of_code_count: Integer,
+        ?findings_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metered_lines_of_code_count: Integer?
+      attr_accessor suppressed_lines_of_code_count: Integer?
+      attr_accessor findings_count: Integer?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ProviderType
+      CODE_COMMIT: String
+      GIT_HUB: String
+      BITBUCKET: String
+      GIT_HUB_ENTERPRISE_SERVER: String
+      S3_BUCKET: String
+    end
+
+    class PutRecommendationFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_arn: String,
+        ?recommendation_id: String,
+        ?reactions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_arn: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor reactions: Array[String]?
+    end
+
+    class PutRecommendationFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Reaction
+      THUMBS_UP: String
+      THUMBS_DOWN: String
+    end
+
+    module RecommendationCategory
+      AWS_BEST_PRACTICES: String
+      AWS_CLOUDFORMATION_ISSUES: String
+      DUPLICATE_CODE: String
+      CODE_MAINTENANCE_ISSUES: String
+      CONCURRENCY_ISSUES: String
+      INPUT_VALIDATIONS: String
+      PYTHON_BEST_PRACTICES: String
+      JAVA_BEST_PRACTICES: String
+      RESOURCE_LEAKS: String
+      SECURITY_ISSUES: String
+      CODE_INCONSISTENCIES: String
+    end
+
+    class RecommendationFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_arn: String,
+        ?recommendation_id: String,
+        ?reactions: Array[String],
+        ?user_id: String,
+        ?created_time_stamp: Time,
+        ?last_updated_time_stamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_arn: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor reactions: Array[String]?
+      attr_accessor user_id: String?
+      attr_accessor created_time_stamp: Time?
+      attr_accessor last_updated_time_stamp: Time?
+    end
+
+    class RecommendationFeedbackSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?reactions: Array[String],
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor reactions: Array[String]?
+      attr_accessor user_id: String?
+    end
+
+    class RecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?recommendation_id: String,
+        ?start_line: Integer,
+        ?end_line: Integer,
+        ?description: String,
+        ?recommendation_category: String,
+        ?rule_metadata: Types::RuleMetadata,
+        ?severity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor start_line: Integer?
+      attr_accessor end_line: Integer?
+      attr_accessor description: String?
+      attr_accessor recommendation_category: String?
+      attr_accessor rule_metadata: Types::RuleMetadata?
+      attr_accessor severity: String?
+    end
+
+    class Repository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_commit: Types::CodeCommitRepository,
+        ?bitbucket: Types::ThirdPartySourceRepository,
+        ?git_hub_enterprise_server: Types::ThirdPartySourceRepository,
+        ?s3_bucket: Types::S3Repository,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_commit: Types::CodeCommitRepository?
+      attr_accessor bitbucket: Types::ThirdPartySourceRepository?
+      attr_accessor git_hub_enterprise_server: Types::ThirdPartySourceRepository?
+      attr_accessor s3_bucket: Types::S3Repository?
+    end
+
+    class RepositoryAnalysis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_head: Types::RepositoryHeadSourceCodeType,
+        ?source_code_type: Types::SourceCodeType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_head: Types::RepositoryHeadSourceCodeType?
+      attr_accessor source_code_type: Types::SourceCodeType?
+    end
+
+    class RepositoryAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?association_arn: String,
+        ?connection_arn: String,
+        ?name: String,
+        ?owner: String,
+        ?provider_type: String,
+        ?state: String,
+        ?state_reason: String,
+        ?last_updated_time_stamp: Time,
+        ?created_time_stamp: Time,
+        ?kms_key_details: Types::KMSKeyDetails,
+        ?s3_repository_details: Types::S3RepositoryDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor association_arn: String?
+      attr_accessor connection_arn: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor provider_type: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor last_updated_time_stamp: Time?
+      attr_accessor created_time_stamp: Time?
+      attr_accessor kms_key_details: Types::KMSKeyDetails?
+      attr_accessor s3_repository_details: Types::S3RepositoryDetails?
+    end
+
+    module RepositoryAssociationState
+      ASSOCIATED: String
+      ASSOCIATING: String
+      FAILED: String
+      DISASSOCIATING: String
+      DISASSOCIATED: String
+    end
+
+    class RepositoryAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_arn: String,
+        ?connection_arn: String,
+        ?last_updated_time_stamp: Time,
+        ?association_id: String,
+        ?name: String,
+        ?owner: String,
+        ?provider_type: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_arn: String?
+      attr_accessor connection_arn: String?
+      attr_accessor last_updated_time_stamp: Time?
+      attr_accessor association_id: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor provider_type: String?
+      attr_accessor state: String?
+    end
+
+    class RepositoryHeadSourceCodeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch_name: String?
+    end
+
+    class RequestMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?requester: String,
+        ?event_info: Types::EventInfo,
+        ?vendor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor requester: String?
+      attr_accessor event_info: Types::EventInfo?
+      attr_accessor vendor_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RuleMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_name: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?rule_tags: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor rule_tags: Array[String]?
+    end
+
+    class S3BucketRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?details: Types::S3RepositoryDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor details: Types::S3RepositoryDetails?
+    end
+
+    class S3Repository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor bucket_name: String?
+    end
+
+    class S3RepositoryDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?code_artifacts: Types::CodeArtifacts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor code_artifacts: Types::CodeArtifacts?
+    end
+
+    module Severity
+      INFO: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
+    class SourceCodeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_diff: Types::CommitDiffSourceCodeType,
+        ?repository_head: Types::RepositoryHeadSourceCodeType,
+        ?branch_diff: Types::BranchDiffSourceCodeType,
+        ?s3_bucket_repository: Types::S3BucketRepository,
+        ?request_metadata: Types::RequestMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_diff: Types::CommitDiffSourceCodeType?
+      attr_accessor repository_head: Types::RepositoryHeadSourceCodeType?
+      attr_accessor branch_diff: Types::BranchDiffSourceCodeType?
+      attr_accessor s3_bucket_repository: Types::S3BucketRepository?
+      attr_accessor request_metadata: Types::RequestMetadata?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThirdPartySourceRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?connection_arn: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor owner: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Type
+      PULL_REQUEST: String
+      REPOSITORY_ANALYSIS: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VendorName
+      GITHUB: String
+      GITLAB: String
+      NATIVE_S3: String
+    end
+  end
+end

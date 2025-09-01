@@ -1,0 +1,5 @@
+  module Aws
+    module EMR
+      VERSION: String
+    end
+  end

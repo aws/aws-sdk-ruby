@@ -1,0 +1,3406 @@
+module Aws::Resiliencehub
+  module Types
+
+    class AcceptGroupingRecommendationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_recommendation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_recommendation_id: String?
+    end
+
+    class AcceptResourceGroupingRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?entries: Array[Types::AcceptGroupingRecommendationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor entries: Array[Types::AcceptGroupingRecommendationEntry]?
+    end
+
+    class AcceptResourceGroupingRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?failed_entries: Array[Types::FailedGroupingRecommendationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor failed_entries: Array[Types::FailedGroupingRecommendationEntry]?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddDraftAppVersionResourceMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?resource_mappings: Array[Types::ResourceMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor resource_mappings: Array[Types::ResourceMapping]?
+    end
+
+    class AddDraftAppVersionResourceMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resource_mappings: Array[Types::ResourceMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resource_mappings: Array[Types::ResourceMapping]?
+    end
+
+    class Alarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_arn: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_arn: String?
+      attr_accessor source: String?
+    end
+
+    class AlarmRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?reference_id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?app_component_name: String,
+        ?items: Array[Types::RecommendationItem],
+        ?prerequisite: String,
+        ?app_component_names: Array[String],
+        ?recommendation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor reference_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor app_component_name: String?
+      attr_accessor items: Array[Types::RecommendationItem]?
+      attr_accessor prerequisite: String?
+      attr_accessor app_component_names: Array[String]?
+      attr_accessor recommendation_status: String?
+    end
+
+    module AlarmType
+      METRIC: String
+      COMPOSITE: String
+      CANARY: String
+      LOGS: String
+      EVENT: String
+    end
+
+    class App
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?name: String,
+        ?description: String,
+        ?policy_arn: String,
+        ?creation_time: Time,
+        ?status: String,
+        ?compliance_status: String,
+        ?last_app_compliance_evaluation_time: Time,
+        ?resiliency_score: Float,
+        ?last_resiliency_score_evaluation_time: Time,
+        ?tags: Hash[String, String],
+        ?assessment_schedule: String,
+        ?permission_model: Types::PermissionModel,
+        ?event_subscriptions: Array[Types::EventSubscription],
+        ?drift_status: String,
+        ?last_drift_evaluation_time: Time,
+        ?rto_in_secs: Integer,
+        ?rpo_in_secs: Integer,
+        ?aws_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor policy_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor compliance_status: String?
+      attr_accessor last_app_compliance_evaluation_time: Time?
+      attr_accessor resiliency_score: Float?
+      attr_accessor last_resiliency_score_evaluation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor assessment_schedule: String?
+      attr_accessor permission_model: Types::PermissionModel?
+      attr_accessor event_subscriptions: Array[Types::EventSubscription]?
+      attr_accessor drift_status: String?
+      attr_accessor last_drift_evaluation_time: Time?
+      attr_accessor rto_in_secs: Integer?
+      attr_accessor rpo_in_secs: Integer?
+      attr_accessor aws_application_arn: String?
+    end
+
+    class AppAssessment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?invoker: String,
+        ?cost: Types::Cost,
+        ?resiliency_score: Types::ResiliencyScore,
+        ?compliance: Hash[String, Types::DisruptionCompliance],
+        ?compliance_status: String,
+        ?assessment_status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?message: String,
+        ?assessment_name: String,
+        ?assessment_arn: String,
+        ?policy: Types::ResiliencyPolicy,
+        ?tags: Hash[String, String],
+        ?resource_errors_details: Types::ResourceErrorsDetails,
+        ?version_name: String,
+        ?drift_status: String,
+        ?summary: Types::AssessmentSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor invoker: String?
+      attr_accessor cost: Types::Cost?
+      attr_accessor resiliency_score: Types::ResiliencyScore?
+      attr_accessor compliance: Hash[String, Types::DisruptionCompliance]?
+      attr_accessor compliance_status: String?
+      attr_accessor assessment_status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor message: String?
+      attr_accessor assessment_name: String?
+      attr_accessor assessment_arn: String?
+      attr_accessor policy: Types::ResiliencyPolicy?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor resource_errors_details: Types::ResourceErrorsDetails?
+      attr_accessor version_name: String?
+      attr_accessor drift_status: String?
+      attr_accessor summary: Types::AssessmentSummary?
+    end
+
+    module AppAssessmentScheduleType
+      DISABLED: String
+      DAILY: String
+    end
+
+    class AppAssessmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?assessment_status: String,
+        ?invoker: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?message: String,
+        ?assessment_name: String,
+        ?assessment_arn: String,
+        ?compliance_status: String,
+        ?cost: Types::Cost,
+        ?resiliency_score: Float,
+        ?version_name: String,
+        ?drift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor assessment_status: String?
+      attr_accessor invoker: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor message: String?
+      attr_accessor assessment_name: String?
+      attr_accessor assessment_arn: String?
+      attr_accessor compliance_status: String?
+      attr_accessor cost: Types::Cost?
+      attr_accessor resiliency_score: Float?
+      attr_accessor version_name: String?
+      attr_accessor drift_status: String?
+    end
+
+    module AppComplianceStatusType
+      POLICY_BREACHED: String
+      POLICY_MET: String
+      NOT_ASSESSED: String
+      CHANGES_DETECTED: String
+      NOT_APPLICABLE: String
+      MISSING_POLICY: String
+    end
+
+    class AppComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?id: String,
+        ?additional_info: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+    end
+
+    class AppComponentCompliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost: Types::Cost,
+        ?app_component_name: String,
+        ?compliance: Hash[String, Types::DisruptionCompliance],
+        ?message: String,
+        ?status: String,
+        ?resiliency_score: Types::ResiliencyScore,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost: Types::Cost?
+      attr_accessor app_component_name: String?
+      attr_accessor compliance: Hash[String, Types::DisruptionCompliance]?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor resiliency_score: Types::ResiliencyScore?
+    end
+
+    module AppDriftStatusType
+      NOT_CHECKED: String
+      NOT_DETECTED: String
+      DETECTED: String
+    end
+
+    class AppInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?import_type: String,
+        ?source_arn: String,
+        ?terraform_source: Types::TerraformSource,
+        ?resource_count: Integer,
+        ?eks_source_cluster_namespace: Types::EksSourceClusterNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor import_type: String?
+      attr_accessor source_arn: String?
+      attr_accessor terraform_source: Types::TerraformSource?
+      attr_accessor resource_count: Integer?
+      attr_accessor eks_source_cluster_namespace: Types::EksSourceClusterNamespace?
+    end
+
+    module AppStatusType
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class AppSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?compliance_status: String,
+        ?resiliency_score: Float,
+        ?assessment_schedule: String,
+        ?status: String,
+        ?drift_status: String,
+        ?last_app_compliance_evaluation_time: Time,
+        ?rto_in_secs: Integer,
+        ?rpo_in_secs: Integer,
+        ?aws_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor compliance_status: String?
+      attr_accessor resiliency_score: Float?
+      attr_accessor assessment_schedule: String?
+      attr_accessor status: String?
+      attr_accessor drift_status: String?
+      attr_accessor last_app_compliance_evaluation_time: Time?
+      attr_accessor rto_in_secs: Integer?
+      attr_accessor rpo_in_secs: Integer?
+      attr_accessor aws_application_arn: String?
+    end
+
+    class AppVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_version: String,
+        ?identifier: Integer,
+        ?creation_time: Time,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_version: String?
+      attr_accessor identifier: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor version_name: String?
+    end
+
+    module AssessmentInvoker
+      USER: String
+      SYSTEM: String
+    end
+
+    class AssessmentRiskRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?risk: String,
+        ?recommendation: String,
+        ?app_components: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor risk: String?
+      attr_accessor recommendation: String?
+      attr_accessor app_components: Array[String]?
+    end
+
+    module AssessmentStatus
+      PENDING: String
+      INPROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    class AssessmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: String,
+        ?risk_recommendations: Array[Types::AssessmentRiskRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: String?
+      attr_accessor risk_recommendations: Array[Types::AssessmentRiskRecommendation]?
+    end
+
+    class BatchUpdateRecommendationStatusFailedEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchUpdateRecommendationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?request_entries: Array[Types::UpdateRecommendationStatusRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor request_entries: Array[Types::UpdateRecommendationStatusRequestEntry]?
+    end
+
+    class BatchUpdateRecommendationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?successful_entries: Array[Types::BatchUpdateRecommendationStatusSuccessfulEntry],
+        ?failed_entries: Array[Types::BatchUpdateRecommendationStatusFailedEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor successful_entries: Array[Types::BatchUpdateRecommendationStatusSuccessfulEntry]?
+      attr_accessor failed_entries: Array[Types::BatchUpdateRecommendationStatusFailedEntry]?
+    end
+
+    class BatchUpdateRecommendationStatusSuccessfulEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?reference_id: String,
+        ?item: Types::UpdateRecommendationStatusItem,
+        ?excluded: bool,
+        ?app_component_id: String,
+        ?exclude_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor reference_id: String?
+      attr_accessor item: Types::UpdateRecommendationStatusItem?
+      attr_accessor excluded: bool?
+      attr_accessor app_component_id: String?
+      attr_accessor exclude_reason: String?
+    end
+
+    class ComplianceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?entity_type: String,
+        ?drift_type: String,
+        ?app_id: String,
+        ?app_version: String,
+        ?expected_reference_id: String,
+        ?expected_value: Hash[String, Types::DisruptionCompliance],
+        ?actual_reference_id: String,
+        ?actual_value: Hash[String, Types::DisruptionCompliance],
+        ?diff_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor entity_type: String?
+      attr_accessor drift_type: String?
+      attr_accessor app_id: String?
+      attr_accessor app_version: String?
+      attr_accessor expected_reference_id: String?
+      attr_accessor expected_value: Hash[String, Types::DisruptionCompliance]?
+      attr_accessor actual_reference_id: String?
+      attr_accessor actual_value: Hash[String, Types::DisruptionCompliance]?
+      attr_accessor diff_type: String?
+    end
+
+    module ComplianceStatus
+      POLICY_BREACHED: String
+      POLICY_MET: String
+      NOT_APPLICABLE: String
+      MISSING_POLICY: String
+    end
+
+    class ComponentRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_component_name: String,
+        ?recommendation_status: String,
+        ?config_recommendations: Array[Types::ConfigRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_component_name: String?
+      attr_accessor recommendation_status: String?
+      attr_accessor config_recommendations: Array[Types::ConfigRecommendation]?
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?operator: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor operator: String?
+      attr_accessor value: String?
+    end
+
+    module ConditionOperatorType
+      EQUALS: String
+      NOT_EQUALS: String
+      GREATER_THEN: String
+      GREATER_OR_EQUALS: String
+      LESS_THEN: String
+      LESS_OR_EQUALS: String
+    end
+
+    class ConfigRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost: Types::Cost,
+        ?app_component_name: String,
+        ?compliance: Hash[String, Types::DisruptionCompliance],
+        ?recommendation_compliance: Hash[String, Types::RecommendationDisruptionCompliance],
+        ?optimization_type: String,
+        ?name: String,
+        ?description: String,
+        ?suggested_changes: Array[String],
+        ?ha_architecture: String,
+        ?reference_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost: Types::Cost?
+      attr_accessor app_component_name: String?
+      attr_accessor compliance: Hash[String, Types::DisruptionCompliance]?
+      attr_accessor recommendation_compliance: Hash[String, Types::RecommendationDisruptionCompliance]?
+      attr_accessor optimization_type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor suggested_changes: Array[String]?
+      attr_accessor ha_architecture: String?
+      attr_accessor reference_id: String?
+    end
+
+    module ConfigRecommendationOptimizationType
+      LEAST_COST: String
+      LEAST_CHANGE: String
+      BEST_AZ_RECOVERY: String
+      LEAST_ERRORS: String
+      BEST_ATTAINABLE: String
+      BEST_REGION_RECOVERY: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class Cost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: Float,
+        ?currency: String,
+        ?frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: Float?
+      attr_accessor currency: String?
+      attr_accessor frequency: String?
+    end
+
+    module CostFrequency
+      HOURLY: String
+      DAILY: String
+      MONTHLY: String
+      YEARLY: String
+    end
+
+    class CreateAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?policy_arn: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?assessment_schedule: String,
+        ?permission_model: Types::PermissionModel,
+        ?event_subscriptions: Array[Types::EventSubscription],
+        ?aws_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor policy_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor assessment_schedule: String?
+      attr_accessor permission_model: Types::PermissionModel?
+      attr_accessor event_subscriptions: Array[Types::EventSubscription]?
+      attr_accessor aws_application_arn: String?
+    end
+
+    class CreateAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class CreateAppVersionAppComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?id: String,
+        ?name: String,
+        ?type: String,
+        ?additional_info: Hash[String, Array[String]],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAppVersionAppComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_component: Types::AppComponent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_component: Types::AppComponent?
+    end
+
+    class CreateAppVersionResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?resource_name: String,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: String,
+        ?aws_region: String,
+        ?aws_account_id: String,
+        ?resource_type: String,
+        ?app_components: Array[String],
+        ?additional_info: Hash[String, Array[String]],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor app_components: Array[String]?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAppVersionResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?physical_resource: Types::PhysicalResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor physical_resource: Types::PhysicalResource?
+    end
+
+    class CreateRecommendationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_ids: Array[String],
+        ?format: String,
+        ?recommendation_types: Array[String],
+        ?assessment_arn: String,
+        ?name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_ids: Array[String]?
+      attr_accessor format: String?
+      attr_accessor recommendation_types: Array[String]?
+      attr_accessor assessment_arn: String?
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor bucket_name: String?
+    end
+
+    class CreateRecommendationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_template: Types::RecommendationTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_template: Types::RecommendationTemplate?
+    end
+
+    class CreateResiliencyPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_description: String,
+        ?data_location_constraint: String,
+        ?tier: String,
+        ?policy: Hash[String, Types::FailurePolicy],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor data_location_constraint: String?
+      attr_accessor tier: String?
+      attr_accessor policy: Hash[String, Types::FailurePolicy]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateResiliencyPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResiliencyPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResiliencyPolicy?
+    end
+
+    module DataLocationConstraint
+      ANY_LOCATION: String
+      SAME_CONTINENT: String
+      SAME_COUNTRY: String
+    end
+
+    class DeleteAppAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAppAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?assessment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor assessment_status: String?
+    end
+
+    class DeleteAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?force_delete: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor force_delete: bool?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAppInputSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?source_arn: String,
+        ?terraform_source: Types::TerraformSource,
+        ?client_token: String,
+        ?eks_source_cluster_namespace: Types::EksSourceClusterNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor source_arn: String?
+      attr_accessor terraform_source: Types::TerraformSource?
+      attr_accessor client_token: String?
+      attr_accessor eks_source_cluster_namespace: Types::EksSourceClusterNamespace?
+    end
+
+    class DeleteAppInputSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_input_source: Types::AppInputSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_input_source: Types::AppInputSource?
+    end
+
+    class DeleteAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+    end
+
+    class DeleteAppVersionAppComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAppVersionAppComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_component: Types::AppComponent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_component: Types::AppComponent?
+    end
+
+    class DeleteAppVersionResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?resource_name: String,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: String,
+        ?aws_region: String,
+        ?aws_account_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAppVersionResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?physical_resource: Types::PhysicalResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor physical_resource: Types::PhysicalResource?
+    end
+
+    class DeleteRecommendationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_template_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_template_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteRecommendationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_template_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_template_arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteResiliencyPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteResiliencyPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+    end
+
+    class DescribeAppAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+    end
+
+    class DescribeAppAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment: Types::AppAssessment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment: Types::AppAssessment?
+    end
+
+    class DescribeAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+    end
+
+    class DescribeAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class DescribeAppVersionAppComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeAppVersionAppComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_component: Types::AppComponent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_component: Types::AppComponent?
+    end
+
+    class DescribeAppVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+    end
+
+    class DescribeAppVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?additional_info: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+    end
+
+    class DescribeAppVersionResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resource_name: String,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: String,
+        ?aws_region: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resource_name: String?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class DescribeAppVersionResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?physical_resource: Types::PhysicalResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor physical_resource: Types::PhysicalResource?
+    end
+
+    class DescribeAppVersionResourcesResolutionStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resolution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resolution_id: String?
+    end
+
+    class DescribeAppVersionResourcesResolutionStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resolution_id: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resolution_id: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    class DescribeAppVersionTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+    end
+
+    class DescribeAppVersionTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_template_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_template_body: String?
+    end
+
+    class DescribeDraftAppVersionResourcesImportStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+    end
+
+    class DescribeDraftAppVersionResourcesImportStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?status: String,
+        ?status_change_time: Time,
+        ?error_message: String,
+        ?error_details: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor status: String?
+      attr_accessor status_change_time: Time?
+      attr_accessor error_message: String?
+      attr_accessor error_details: Array[Types::ErrorDetail]?
+    end
+
+    class DescribeMetricsExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_export_id: String?
+    end
+
+    class DescribeMetricsExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_export_id: String,
+        ?status: String,
+        ?export_location: Types::S3Location,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_export_id: String?
+      attr_accessor status: String?
+      attr_accessor export_location: Types::S3Location?
+      attr_accessor error_message: String?
+    end
+
+    class DescribeResiliencyPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+    end
+
+    class DescribeResiliencyPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResiliencyPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResiliencyPolicy?
+    end
+
+    class DescribeResourceGroupingRecommendationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?grouping_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor grouping_id: String?
+    end
+
+    class DescribeResourceGroupingRecommendationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_id: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_id: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    module DifferenceType
+      NOT_EQUAL: String
+      ADDED: String
+      REMOVED: String
+    end
+
+    class DisruptionCompliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?achievable_rto_in_secs: Integer,
+        ?current_rto_in_secs: Integer,
+        ?rto_reference_id: String,
+        ?rto_description: String,
+        ?current_rpo_in_secs: Integer,
+        ?rpo_reference_id: String,
+        ?rpo_description: String,
+        ?compliance_status: String,
+        ?achievable_rpo_in_secs: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor achievable_rto_in_secs: Integer?
+      attr_accessor current_rto_in_secs: Integer?
+      attr_accessor rto_reference_id: String?
+      attr_accessor rto_description: String?
+      attr_accessor current_rpo_in_secs: Integer?
+      attr_accessor rpo_reference_id: String?
+      attr_accessor rpo_description: String?
+      attr_accessor compliance_status: String?
+      attr_accessor achievable_rpo_in_secs: Integer?
+      attr_accessor message: String?
+    end
+
+    module DisruptionType
+      SOFTWARE: String
+      HARDWARE: String
+      AZ: String
+      REGION: String
+    end
+
+    module DriftStatus
+      NOT_CHECKED: String
+      NOT_DETECTED: String
+      DETECTED: String
+    end
+
+    module DriftType
+      APPLICATION_COMPLIANCE: String
+      APP_COMPONENT_RESILIENCY_COMPLIANCE_STATUS: String
+    end
+
+    class EksSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eks_cluster_arn: String,
+        ?namespaces: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks_cluster_arn: String?
+      attr_accessor namespaces: Array[String]?
+    end
+
+    class EksSourceClusterNamespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eks_cluster_arn: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks_cluster_arn: String?
+      attr_accessor namespace: String?
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+    end
+
+    module EstimatedCostTier
+      L1: String
+      L2: String
+      L3: String
+      L4: String
+    end
+
+    class EventSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_type: String,
+        ?sns_topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_type: String?
+      attr_accessor sns_topic_arn: String?
+    end
+
+    module EventType
+      SCHEDULED_ASSESSMENT_FAILURE: String
+      DRIFT_DETECTED: String
+    end
+
+    module ExcludeRecommendationReason
+      ALREADY_IMPLEMENTED: String
+      NOT_RELEVANT: String
+      COMPLEXITY_OF_IMPLEMENTATION: String
+    end
+
+    class Experiment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_arn: String,
+        ?experiment_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_arn: String?
+      attr_accessor experiment_template_id: String?
+    end
+
+    class FailedGroupingRecommendationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_recommendation_id: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_recommendation_id: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailurePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rto_in_secs: Integer,
+        ?rpo_in_secs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rto_in_secs: Integer?
+      attr_accessor rpo_in_secs: Integer?
+    end
+
+    class Field
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?aggregation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor aggregation: String?
+    end
+
+    module FieldAggregationType
+      MIN: String
+      MAX: String
+      SUM: String
+      AVG: String
+      COUNT: String
+    end
+
+    class GroupingAppComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_component_id: String,
+        ?app_component_type: String,
+        ?app_component_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_component_id: String?
+      attr_accessor app_component_type: String?
+      attr_accessor app_component_name: String?
+    end
+
+    class GroupingRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_recommendation_id: String,
+        ?grouping_app_component: Types::GroupingAppComponent,
+        ?resources: Array[Types::GroupingResource],
+        ?score: Float,
+        ?recommendation_reasons: Array[String],
+        ?status: String,
+        ?confidence_level: String,
+        ?creation_time: Time,
+        ?rejection_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_recommendation_id: String?
+      attr_accessor grouping_app_component: Types::GroupingAppComponent?
+      attr_accessor resources: Array[Types::GroupingResource]?
+      attr_accessor score: Float?
+      attr_accessor recommendation_reasons: Array[String]?
+      attr_accessor status: String?
+      attr_accessor confidence_level: String?
+      attr_accessor creation_time: Time?
+      attr_accessor rejection_reason: String?
+    end
+
+    module GroupingRecommendationConfidenceLevel
+      HIGH: String
+      MEDIUM: String
+    end
+
+    module GroupingRecommendationRejectionReason
+      DISTINCT_BUSINESS_PURPOSE: String
+      SEPARATE_DATA_CONCERN: String
+      DISTINCT_USER_GROUP_HANDLING: String
+      OTHER: String
+    end
+
+    module GroupingRecommendationStatusType
+      ACCEPTED: String
+      REJECTED: String
+      PENDING_DECISION: String
+    end
+
+    class GroupingResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?resource_type: String,
+        ?physical_resource_id: Types::PhysicalResourceId,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?source_app_component_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor physical_resource_id: Types::PhysicalResourceId?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor source_app_component_ids: Array[String]?
+    end
+
+    module HaArchitecture
+      MULTI_SITE: String
+      WARM_STANDBY: String
+      PILOT_LIGHT: String
+      BACKUP_AND_RESTORE: String
+      NO_RECOVERY_PLAN: String
+    end
+
+    class ImportResourcesToDraftAppVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?source_arns: Array[String],
+        ?terraform_sources: Array[Types::TerraformSource],
+        ?import_strategy: String,
+        ?eks_sources: Array[Types::EksSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor source_arns: Array[String]?
+      attr_accessor terraform_sources: Array[Types::TerraformSource]?
+      attr_accessor import_strategy: String?
+      attr_accessor eks_sources: Array[Types::EksSource]?
+    end
+
+    class ImportResourcesToDraftAppVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?source_arns: Array[String],
+        ?status: String,
+        ?terraform_sources: Array[Types::TerraformSource],
+        ?eks_sources: Array[Types::EksSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor source_arns: Array[String]?
+      attr_accessor status: String?
+      attr_accessor terraform_sources: Array[Types::TerraformSource]?
+      attr_accessor eks_sources: Array[Types::EksSource]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAlarmRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAlarmRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_recommendations: Array[Types::AlarmRecommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_recommendations: Array[Types::AlarmRecommendation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppAssessmentComplianceDriftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppAssessmentComplianceDriftsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_drifts: Array[Types::ComplianceDrift],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_drifts: Array[Types::ComplianceDrift]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppAssessmentResourceDriftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppAssessmentResourceDriftsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_drifts: Array[Types::ResourceDrift],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_drifts: Array[Types::ResourceDrift]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppAssessmentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?assessment_name: String,
+        ?assessment_status: Array[String],
+        ?compliance_status: String,
+        ?invoker: String,
+        ?reverse_order: bool,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor assessment_name: String?
+      attr_accessor assessment_status: Array[String]?
+      attr_accessor compliance_status: String?
+      attr_accessor invoker: String?
+      attr_accessor reverse_order: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppAssessmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?assessment_summaries: Array[Types::AppAssessmentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor assessment_summaries: Array[Types::AppAssessmentSummary]?
+    end
+
+    class ListAppComponentCompliancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assessment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assessment_arn: String?
+    end
+
+    class ListAppComponentCompliancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_compliances: Array[Types::AppComponentCompliance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_compliances: Array[Types::AppComponentCompliance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppComponentRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppComponentRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_recommendations: Array[Types::ComponentRecommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_recommendations: Array[Types::ComponentRecommendation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInputSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppInputSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_input_sources: Array[Types::AppInputSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_input_sources: Array[Types::AppInputSource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppVersionAppComponentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppVersionAppComponentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_components: Array[Types::AppComponent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_components: Array[Types::AppComponent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppVersionResourceMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppVersionResourceMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_mappings: Array[Types::ResourceMapping],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_mappings: Array[Types::ResourceMapping]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppVersionResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resolution_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resolution_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppVersionResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?physical_resources: Array[Types::PhysicalResource],
+        ?resolution_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor physical_resources: Array[Types::PhysicalResource]?
+      attr_accessor resolution_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ListAppVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_versions: Array[Types::AppVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_versions: Array[Types::AppVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?name: String,
+        ?app_arn: String,
+        ?from_last_assessment_time: Time,
+        ?to_last_assessment_time: Time,
+        ?reverse_order: bool,
+        ?aws_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor name: String?
+      attr_accessor app_arn: String?
+      attr_accessor from_last_assessment_time: Time?
+      attr_accessor to_last_assessment_time: Time?
+      attr_accessor reverse_order: bool?
+      attr_accessor aws_application_arn: String?
+    end
+
+    class ListAppsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_summaries: Array[Types::AppSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_summaries: Array[Types::AppSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?fields: Array[Types::Field],
+        ?data_source: String,
+        ?conditions: Array[Types::Condition],
+        ?sorts: Array[Types::Sort],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor fields: Array[Types::Field]?
+      attr_accessor data_source: String?
+      attr_accessor conditions: Array[Types::Condition]?
+      attr_accessor sorts: Array[Types::Sort]?
+    end
+
+    class ListMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rows: Array[Array[String]],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rows: Array[Array[String]]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendationTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?reverse_order: bool,
+        ?status: Array[String],
+        ?recommendation_template_arn: String,
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor reverse_order: bool?
+      attr_accessor status: Array[String]?
+      attr_accessor recommendation_template_arn: String?
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRecommendationTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_templates: Array[Types::RecommendationTemplate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_templates: Array[Types::RecommendationTemplate]?
+    end
+
+    class ListResiliencyPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResiliencyPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_policies: Array[Types::ResiliencyPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_policies: Array[Types::ResiliencyPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceGroupingRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourceGroupingRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_recommendations: Array[Types::GroupingRecommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_recommendations: Array[Types::GroupingRecommendation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSopRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assessment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assessment_arn: String?
+    end
+
+    class ListSopRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sop_recommendations: Array[Types::SopRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sop_recommendations: Array[Types::SopRecommendation]?
+    end
+
+    class ListSuggestedResiliencyPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSuggestedResiliencyPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_policies: Array[Types::ResiliencyPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_policies: Array[Types::ResiliencyPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTestRecommendationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?assessment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor assessment_arn: String?
+    end
+
+    class ListTestRecommendationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?test_recommendations: Array[Types::TestRecommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor test_recommendations: Array[Types::TestRecommendation]?
+    end
+
+    class ListUnsupportedAppVersionResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resolution_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resolution_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUnsupportedAppVersionResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unsupported_resources: Array[Types::UnsupportedResource],
+        ?resolution_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unsupported_resources: Array[Types::UnsupportedResource]?
+      attr_accessor resolution_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class LogicalResourceId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?logical_stack_name: String,
+        ?resource_group_name: String,
+        ?terraform_source_name: String,
+        ?eks_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor logical_stack_name: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor terraform_source_name: String?
+      attr_accessor eks_source_name: String?
+    end
+
+    module MetricsExportStatusType
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    class PermissionModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?invoker_role_name: String,
+        ?cross_account_role_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor invoker_role_name: String?
+      attr_accessor cross_account_role_arns: Array[String]?
+    end
+
+    module PermissionModelType
+      LEGACY_IAM_USER: String
+      ROLE_BASED: String
+    end
+
+    module PhysicalIdentifierType
+      ARN: String
+      NATIVE: String
+    end
+
+    class PhysicalResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: Types::PhysicalResourceId,
+        ?resource_type: String,
+        ?app_components: Array[Types::AppComponent],
+        ?additional_info: Hash[String, Array[String]],
+        ?excluded: bool,
+        ?source_type: String,
+        ?parent_resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: Types::PhysicalResourceId?
+      attr_accessor resource_type: String?
+      attr_accessor app_components: Array[Types::AppComponent]?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+      attr_accessor excluded: bool?
+      attr_accessor source_type: String?
+      attr_accessor parent_resource_name: String?
+    end
+
+    class PhysicalResourceId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?type: String,
+        ?aws_region: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor type: String?
+      attr_accessor aws_region: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class PublishAppVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor version_name: String?
+    end
+
+    class PublishAppVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?identifier: Integer,
+        ?version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor identifier: Integer?
+      attr_accessor version_name: String?
+    end
+
+    class PutDraftAppVersionTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_template_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_template_body: String?
+    end
+
+    class PutDraftAppVersionTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+    end
+
+    module RecommendationComplianceStatus
+      BREACHED_UNATTAINABLE: String
+      BREACHED_CAN_MEET: String
+      MET_CAN_IMPROVE: String
+      MISSING_POLICY: String
+    end
+
+    class RecommendationDisruptionCompliance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expected_compliance_status: String,
+        ?expected_rto_in_secs: Integer,
+        ?expected_rto_description: String,
+        ?expected_rpo_in_secs: Integer,
+        ?expected_rpo_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expected_compliance_status: String?
+      attr_accessor expected_rto_in_secs: Integer?
+      attr_accessor expected_rto_description: String?
+      attr_accessor expected_rpo_in_secs: Integer?
+      attr_accessor expected_rpo_description: String?
+    end
+
+    class RecommendationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?target_account_id: String,
+        ?target_region: String,
+        ?already_implemented: bool,
+        ?excluded: bool,
+        ?exclude_reason: String,
+        ?latest_discovered_experiment: Types::Experiment,
+        ?discovered_alarm: Types::Alarm,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor target_account_id: String?
+      attr_accessor target_region: String?
+      attr_accessor already_implemented: bool?
+      attr_accessor excluded: bool?
+      attr_accessor exclude_reason: String?
+      attr_accessor latest_discovered_experiment: Types::Experiment?
+      attr_accessor discovered_alarm: Types::Alarm?
+    end
+
+    module RecommendationStatus
+      IMPLEMENTED: String
+      INACTIVE: String
+      NOT_IMPLEMENTED: String
+      EXCLUDED: String
+    end
+
+    class RecommendationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates_location: Types::S3Location,
+        ?assessment_arn: String,
+        ?app_arn: String,
+        ?recommendation_ids: Array[String],
+        ?recommendation_types: Array[String],
+        ?format: String,
+        ?recommendation_template_arn: String,
+        ?message: String,
+        ?status: String,
+        ?name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?tags: Hash[String, String],
+        ?needs_replacements: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates_location: Types::S3Location?
+      attr_accessor assessment_arn: String?
+      attr_accessor app_arn: String?
+      attr_accessor recommendation_ids: Array[String]?
+      attr_accessor recommendation_types: Array[String]?
+      attr_accessor format: String?
+      attr_accessor recommendation_template_arn: String?
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor needs_replacements: bool?
+    end
+
+    module RecommendationTemplateStatus
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    class RejectGroupingRecommendationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_recommendation_id: String,
+        ?rejection_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_recommendation_id: String?
+      attr_accessor rejection_reason: String?
+    end
+
+    class RejectResourceGroupingRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?entries: Array[Types::RejectGroupingRecommendationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor entries: Array[Types::RejectGroupingRecommendationEntry]?
+    end
+
+    class RejectResourceGroupingRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?failed_entries: Array[Types::FailedGroupingRecommendationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor failed_entries: Array[Types::FailedGroupingRecommendationEntry]?
+    end
+
+    class RemoveDraftAppVersionResourceMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?resource_names: Array[String],
+        ?logical_stack_names: Array[String],
+        ?app_registry_app_names: Array[String],
+        ?resource_group_names: Array[String],
+        ?terraform_source_names: Array[String],
+        ?eks_source_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor resource_names: Array[String]?
+      attr_accessor logical_stack_names: Array[String]?
+      attr_accessor app_registry_app_names: Array[String]?
+      attr_accessor resource_group_names: Array[String]?
+      attr_accessor terraform_source_names: Array[String]?
+      attr_accessor eks_source_names: Array[String]?
+    end
+
+    class RemoveDraftAppVersionResourceMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+    end
+
+    module RenderRecommendationType
+      ALARM: String
+      SOP: String
+      TEST: String
+    end
+
+    class ResiliencyPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?data_location_constraint: String,
+        ?tier: String,
+        ?estimated_cost_tier: String,
+        ?policy: Hash[String, Types::FailurePolicy],
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor data_location_constraint: String?
+      attr_accessor tier: String?
+      attr_accessor estimated_cost_tier: String?
+      attr_accessor policy: Hash[String, Types::FailurePolicy]?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ResiliencyPolicyTier
+      MISSION_CRITICAL: String
+      CRITICAL: String
+      IMPORTANT: String
+      CORE_SERVICES: String
+      NON_CRITICAL: String
+      NOT_APPLICABLE: String
+    end
+
+    class ResiliencyScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: Float,
+        ?disruption_score: Hash[String, Float],
+        ?component_score: Hash[String, Types::ScoringComponentResiliencyScore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: Float?
+      attr_accessor disruption_score: Hash[String, Float]?
+      attr_accessor component_score: Hash[String, Types::ScoringComponentResiliencyScore]?
+    end
+
+    module ResiliencyScoreType
+      COMPLIANCE: String
+      TEST: String
+      ALARM: String
+      SOP: String
+    end
+
+    class ResolveAppVersionResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+    end
+
+    class ResolveAppVersionResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?resolution_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor resolution_id: String?
+      attr_accessor status: String?
+    end
+
+    class ResourceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?reference_id: String,
+        ?resource_identifier: Types::ResourceIdentifier,
+        ?diff_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor reference_id: String?
+      attr_accessor resource_identifier: Types::ResourceIdentifier?
+      attr_accessor diff_type: String?
+    end
+
+    class ResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor reason: String?
+    end
+
+    class ResourceErrorsDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_errors: Array[Types::ResourceError],
+        ?has_more_errors: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_errors: Array[Types::ResourceError]?
+      attr_accessor has_more_errors: bool?
+    end
+
+    class ResourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceImportStatusType
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    module ResourceImportStrategyType
+      ADD_ONLY: String
+      REPLACE_ALL: String
+    end
+
+    class ResourceMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?logical_stack_name: String,
+        ?app_registry_app_name: String,
+        ?resource_group_name: String,
+        ?mapping_type: String,
+        ?physical_resource_id: Types::PhysicalResourceId,
+        ?terraform_source_name: String,
+        ?eks_source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor logical_stack_name: String?
+      attr_accessor app_registry_app_name: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor mapping_type: String?
+      attr_accessor physical_resource_id: Types::PhysicalResourceId?
+      attr_accessor terraform_source_name: String?
+      attr_accessor eks_source_name: String?
+    end
+
+    module ResourceMappingType
+      CFN_STACK: String
+      RESOURCE: String
+      APP_REGISTRY_APP: String
+      RESOURCE_GROUP: String
+      TERRAFORM: String
+      EKS: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceResolutionStatusType
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    module ResourceSourceType
+      APP_TEMPLATE: String
+      DISCOVERED: String
+    end
+
+    module ResourcesGroupingRecGenStatusType
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESS: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class ScoringComponentResiliencyScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: Float,
+        ?possible_score: Float,
+        ?outstanding_count: Integer,
+        ?excluded_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: Float?
+      attr_accessor possible_score: Float?
+      attr_accessor outstanding_count: Integer?
+      attr_accessor excluded_count: Integer?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SopRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?app_component_name: String,
+        ?description: String,
+        ?recommendation_id: String,
+        ?name: String,
+        ?items: Array[Types::RecommendationItem],
+        ?reference_id: String,
+        ?prerequisite: String,
+        ?recommendation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor app_component_name: String?
+      attr_accessor description: String?
+      attr_accessor recommendation_id: String?
+      attr_accessor name: String?
+      attr_accessor items: Array[Types::RecommendationItem]?
+      attr_accessor reference_id: String?
+      attr_accessor prerequisite: String?
+      attr_accessor recommendation_status: String?
+    end
+
+    module SopServiceType
+      SSM: String
+    end
+
+    class Sort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?ascending: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor ascending: bool?
+    end
+
+    class StartAppAssessmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?assessment_name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor assessment_name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartAppAssessmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment: Types::AppAssessment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment: Types::AppAssessment?
+    end
+
+    class StartMetricsExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartMetricsExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_export_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_export_id: String?
+      attr_accessor status: String?
+    end
+
+    class StartResourceGroupingRecommendationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+    end
+
+    class StartResourceGroupingRecommendationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?grouping_id: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor grouping_id: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TemplateFormat
+      CFN_YAML: String
+      CFN_JSON: String
+    end
+
+    class TerraformSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_state_file_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_state_file_url: String?
+    end
+
+    class TestRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?reference_id: String,
+        ?app_component_id: String,
+        ?app_component_name: String,
+        ?name: String,
+        ?intent: String,
+        ?risk: String,
+        ?type: String,
+        ?description: String,
+        ?items: Array[Types::RecommendationItem],
+        ?prerequisite: String,
+        ?depends_on_alarms: Array[String],
+        ?recommendation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor reference_id: String?
+      attr_accessor app_component_id: String?
+      attr_accessor app_component_name: String?
+      attr_accessor name: String?
+      attr_accessor intent: String?
+      attr_accessor risk: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor items: Array[Types::RecommendationItem]?
+      attr_accessor prerequisite: String?
+      attr_accessor depends_on_alarms: Array[String]?
+      attr_accessor recommendation_status: String?
+    end
+
+    module TestRisk
+      SMALL: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    module TestType
+      SOFTWARE: String
+      HARDWARE: String
+      AZ: String
+      REGION: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UnsupportedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: Types::PhysicalResourceId,
+        ?resource_type: String,
+        ?unsupported_resource_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: Types::PhysicalResourceId?
+      attr_accessor resource_type: String?
+      attr_accessor unsupported_resource_status: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAppInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?description: String,
+        ?policy_arn: String,
+        ?clear_resiliency_policy_arn: bool,
+        ?assessment_schedule: String,
+        ?permission_model: Types::PermissionModel,
+        ?event_subscriptions: Array[Types::EventSubscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor description: String?
+      attr_accessor policy_arn: String?
+      attr_accessor clear_resiliency_policy_arn: bool?
+      attr_accessor assessment_schedule: String?
+      attr_accessor permission_model: Types::PermissionModel?
+      attr_accessor event_subscriptions: Array[Types::EventSubscription]?
+    end
+
+    class UpdateAppOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: Types::App,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: Types::App?
+    end
+
+    class UpdateAppVersionAppComponentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?id: String,
+        ?name: String,
+        ?type: String,
+        ?additional_info: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+    end
+
+    class UpdateAppVersionAppComponentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?app_component: Types::AppComponent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor app_component: Types::AppComponent?
+    end
+
+    class UpdateAppVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?additional_info: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+    end
+
+    class UpdateAppVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?additional_info: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+    end
+
+    class UpdateAppVersionResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?resource_name: String,
+        ?logical_resource_id: Types::LogicalResourceId,
+        ?physical_resource_id: String,
+        ?aws_region: String,
+        ?aws_account_id: String,
+        ?resource_type: String,
+        ?app_components: Array[String],
+        ?additional_info: Hash[String, Array[String]],
+        ?excluded: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor logical_resource_id: Types::LogicalResourceId?
+      attr_accessor physical_resource_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor app_components: Array[String]?
+      attr_accessor additional_info: Hash[String, Array[String]]?
+      attr_accessor excluded: bool?
+    end
+
+    class UpdateAppVersionResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_arn: String,
+        ?app_version: String,
+        ?physical_resource: Types::PhysicalResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_arn: String?
+      attr_accessor app_version: String?
+      attr_accessor physical_resource: Types::PhysicalResource?
+    end
+
+    class UpdateRecommendationStatusItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?target_account_id: String,
+        ?target_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor target_account_id: String?
+      attr_accessor target_region: String?
+    end
+
+    class UpdateRecommendationStatusRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?reference_id: String,
+        ?item: Types::UpdateRecommendationStatusItem,
+        ?excluded: bool,
+        ?app_component_id: String,
+        ?exclude_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor reference_id: String?
+      attr_accessor item: Types::UpdateRecommendationStatusItem?
+      attr_accessor excluded: bool?
+      attr_accessor app_component_id: String?
+      attr_accessor exclude_reason: String?
+    end
+
+    class UpdateResiliencyPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?data_location_constraint: String,
+        ?tier: String,
+        ?policy: Hash[String, Types::FailurePolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor data_location_constraint: String?
+      attr_accessor tier: String?
+      attr_accessor policy: Hash[String, Types::FailurePolicy]?
+    end
+
+    class UpdateResiliencyPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResiliencyPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResiliencyPolicy?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

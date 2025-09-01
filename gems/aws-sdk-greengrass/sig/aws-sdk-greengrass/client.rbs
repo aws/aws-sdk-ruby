@@ -1,0 +1,1339 @@
+module Aws::Greengrass
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Greengrass::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateRoleToGroupResponse
+      include Smithy::Client::_Response[Types::AssociateRoleToGroupResponse]
+      def associated_at: () -> String?
+    end
+    def associate_role_to_group: (
+      ?group_id: String,
+      ?role_arn: String
+    ) -> _AssociateRoleToGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateRoleToGroupResponse
+
+    interface _AssociateServiceRoleToAccountResponse
+      include Smithy::Client::_Response[Types::AssociateServiceRoleToAccountResponse]
+      def associated_at: () -> String?
+    end
+    def associate_service_role_to_account: (
+      ?role_arn: String
+    ) -> _AssociateServiceRoleToAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateServiceRoleToAccountResponse
+
+    interface _CreateConnectorDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateConnectorDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_connector_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        connectors: Array[
+          {
+            connector_arn: String,
+            id: untyped,
+            parameters: Hash[String, String]
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConnectorDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorDefinitionResponse
+
+    interface _CreateConnectorDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateConnectorDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_connector_definition_version: (
+      ?amzn_client_token: String,
+      ?connector_definition_id: String,
+      ?connectors: Array[
+        {
+          connector_arn: String,
+          id: untyped,
+          parameters: Hash[String, String]
+        }
+      ]
+    ) -> _CreateConnectorDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorDefinitionVersionResponse
+
+    interface _CreateCoreDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateCoreDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_core_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        cores: Array[
+          {
+            certificate_arn: String,
+            id: untyped,
+            sync_shadow: bool,
+            thing_arn: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateCoreDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCoreDefinitionResponse
+
+    interface _CreateCoreDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateCoreDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_core_definition_version: (
+      ?amzn_client_token: String,
+      ?core_definition_id: String,
+      ?cores: Array[
+        {
+          certificate_arn: String,
+          id: untyped,
+          sync_shadow: bool,
+          thing_arn: untyped
+        }
+      ]
+    ) -> _CreateCoreDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCoreDefinitionVersionResponse
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentResponse]
+      def deployment_arn: () -> String?
+      def deployment_id: () -> String?
+    end
+    def create_deployment: (
+      ?amzn_client_token: String,
+      ?deployment_id: String,
+      ?deployment_type: String,
+      ?group_id: String,
+      ?group_version_id: String
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _CreateDeviceDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateDeviceDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_device_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        devices: Array[
+          {
+            certificate_arn: String,
+            id: untyped,
+            sync_shadow: bool,
+            thing_arn: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDeviceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeviceDefinitionResponse
+
+    interface _CreateDeviceDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateDeviceDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_device_definition_version: (
+      ?amzn_client_token: String,
+      ?device_definition_id: String,
+      ?devices: Array[
+        {
+          certificate_arn: String,
+          id: untyped,
+          sync_shadow: bool,
+          thing_arn: untyped
+        }
+      ]
+    ) -> _CreateDeviceDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeviceDefinitionVersionResponse
+
+    interface _CreateFunctionDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateFunctionDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_function_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        default_config: {
+          execution: {
+            isolation_mode: String,
+            run_as: {
+              gid: Integer,
+              uid: untyped
+            }
+          }
+        },
+        functions: Array[
+          {
+            function_arn: String,
+            function_configuration: {
+              encoding_type: String,
+              environment: {
+                access_sysfs: bool,
+                execution: {
+                  isolation_mode: untyped,
+                  run_as: untyped
+                },
+                resource_access_policies: Array[
+                  {
+                    permission: String,
+                    resource_id: untyped
+                  }
+                ],
+                variables: Hash[String, String]
+              },
+              exec_args: untyped,
+              executable: untyped,
+              memory_size: untyped,
+              pinned: untyped,
+              timeout: untyped,
+              function_runtime_override: untyped
+            },
+            id: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFunctionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionDefinitionResponse
+
+    interface _CreateFunctionDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateFunctionDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_function_definition_version: (
+      ?amzn_client_token: String,
+      ?default_config: {
+        execution: {
+          isolation_mode: String,
+          run_as: {
+            gid: Integer,
+            uid: untyped
+          }
+        }
+      },
+      ?function_definition_id: String,
+      ?functions: Array[
+        {
+          function_arn: String,
+          function_configuration: {
+            encoding_type: String,
+            environment: {
+              access_sysfs: bool,
+              execution: {
+                isolation_mode: String,
+                run_as: {
+                  gid: Integer,
+                  uid: untyped
+                }
+              },
+              resource_access_policies: Array[
+                {
+                  permission: String,
+                  resource_id: untyped
+                }
+              ],
+              variables: Hash[String, String]
+            },
+            exec_args: untyped,
+            executable: untyped,
+            memory_size: untyped,
+            pinned: untyped,
+            timeout: untyped,
+            function_runtime_override: untyped
+          },
+          id: untyped
+        }
+      ]
+    ) -> _CreateFunctionDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionDefinitionVersionResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_group: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        connector_definition_version_arn: String,
+        core_definition_version_arn: untyped,
+        device_definition_version_arn: untyped,
+        function_definition_version_arn: untyped,
+        logger_definition_version_arn: untyped,
+        resource_definition_version_arn: untyped,
+        subscription_definition_version_arn: untyped
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateGroupCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::CreateGroupCertificateAuthorityResponse]
+      def group_certificate_authority_arn: () -> String?
+    end
+    def create_group_certificate_authority: (
+      ?amzn_client_token: String,
+      ?group_id: String
+    ) -> _CreateGroupCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupCertificateAuthorityResponse
+
+    interface _CreateGroupVersionResponse
+      include Smithy::Client::_Response[Types::CreateGroupVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_group_version: (
+      ?amzn_client_token: String,
+      ?connector_definition_version_arn: String,
+      ?core_definition_version_arn: String,
+      ?device_definition_version_arn: String,
+      ?function_definition_version_arn: String,
+      ?group_id: String,
+      ?logger_definition_version_arn: String,
+      ?resource_definition_version_arn: String,
+      ?subscription_definition_version_arn: String
+    ) -> _CreateGroupVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupVersionResponse
+
+    interface _CreateLoggerDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateLoggerDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_logger_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        loggers: Array[
+          {
+            component: String,
+            id: String,
+            level: String,
+            space: Integer,
+            type: String
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateLoggerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoggerDefinitionResponse
+
+    interface _CreateLoggerDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateLoggerDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_logger_definition_version: (
+      ?amzn_client_token: String,
+      ?logger_definition_id: String,
+      ?loggers: Array[
+        {
+          component: String,
+          id: String,
+          level: String,
+          space: Integer,
+          type: String
+        }
+      ]
+    ) -> _CreateLoggerDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoggerDefinitionVersionResponse
+
+    interface _CreateResourceDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateResourceDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_resource_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        resources: Array[
+          {
+            id: String,
+            name: untyped,
+            resource_data_container: {
+              local_device_resource_data: {
+                group_owner_setting: {
+                  auto_add_group_owner: bool,
+                  group_owner: untyped
+                },
+                source_path: untyped
+              },
+              local_volume_resource_data: {
+                destination_path: untyped,
+                group_owner_setting: untyped,
+                source_path: untyped
+              },
+              s3_machine_learning_model_resource_data: {
+                destination_path: untyped,
+                owner_setting: {
+                  group_owner: untyped,
+                  group_permission: String
+                },
+                s3_uri: untyped
+              },
+              sage_maker_machine_learning_model_resource_data: {
+                destination_path: untyped,
+                owner_setting: untyped,
+                sage_maker_job_arn: untyped
+              },
+              secrets_manager_secret_resource_data: {
+                arn: untyped,
+                additional_staging_labels_to_download: Array[String]
+              }
+            }
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateResourceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceDefinitionResponse
+
+    interface _CreateResourceDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateResourceDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_resource_definition_version: (
+      ?amzn_client_token: String,
+      ?resource_definition_id: String,
+      ?resources: Array[
+        {
+          id: String,
+          name: untyped,
+          resource_data_container: {
+            local_device_resource_data: {
+              group_owner_setting: {
+                auto_add_group_owner: bool,
+                group_owner: untyped
+              },
+              source_path: untyped
+            },
+            local_volume_resource_data: {
+              destination_path: untyped,
+              group_owner_setting: untyped,
+              source_path: untyped
+            },
+            s3_machine_learning_model_resource_data: {
+              destination_path: untyped,
+              owner_setting: {
+                group_owner: untyped,
+                group_permission: String
+              },
+              s3_uri: untyped
+            },
+            sage_maker_machine_learning_model_resource_data: {
+              destination_path: untyped,
+              owner_setting: untyped,
+              sage_maker_job_arn: untyped
+            },
+            secrets_manager_secret_resource_data: {
+              arn: untyped,
+              additional_staging_labels_to_download: Array[String]
+            }
+          }
+        }
+      ]
+    ) -> _CreateResourceDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceDefinitionVersionResponse
+
+    interface _CreateSoftwareUpdateJobResponse
+      include Smithy::Client::_Response[Types::CreateSoftwareUpdateJobResponse]
+      def iot_job_arn: () -> String?
+      def iot_job_id: () -> String?
+      def platform_software_version: () -> String?
+    end
+    def create_software_update_job: (
+      ?amzn_client_token: String,
+      ?s3_url_signer_role: String,
+      ?software_to_update: String,
+      ?update_agent_log_level: String,
+      ?update_targets: Array[String],
+      ?update_targets_architecture: String,
+      ?update_targets_operating_system: String
+    ) -> _CreateSoftwareUpdateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSoftwareUpdateJobResponse
+
+    interface _CreateSubscriptionDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+    end
+    def create_subscription_definition: (
+      ?amzn_client_token: String,
+      ?initial_version: {
+        subscriptions: Array[
+          {
+            id: String,
+            source: untyped,
+            subject: untyped,
+            target: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSubscriptionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionDefinitionResponse
+
+    interface _CreateSubscriptionDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def create_subscription_definition_version: (
+      ?amzn_client_token: String,
+      ?subscription_definition_id: String,
+      ?subscriptions: Array[
+        {
+          id: String,
+          source: untyped,
+          subject: untyped,
+          target: untyped
+        }
+      ]
+    ) -> _CreateSubscriptionDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionDefinitionVersionResponse
+
+    interface _DeleteConnectorDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectorDefinitionResponse]
+    end
+    def delete_connector_definition: (
+      ?connector_definition_id: String
+    ) -> _DeleteConnectorDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorDefinitionResponse
+
+    interface _DeleteCoreDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteCoreDefinitionResponse]
+    end
+    def delete_core_definition: (
+      ?core_definition_id: String
+    ) -> _DeleteCoreDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreDefinitionResponse
+
+    interface _DeleteDeviceDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteDeviceDefinitionResponse]
+    end
+    def delete_device_definition: (
+      ?device_definition_id: String
+    ) -> _DeleteDeviceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeviceDefinitionResponse
+
+    interface _DeleteFunctionDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteFunctionDefinitionResponse]
+    end
+    def delete_function_definition: (
+      ?function_definition_id: String
+    ) -> _DeleteFunctionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionDefinitionResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResponse]
+    end
+    def delete_group: (
+      ?group_id: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteLoggerDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteLoggerDefinitionResponse]
+    end
+    def delete_logger_definition: (
+      ?logger_definition_id: String
+    ) -> _DeleteLoggerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoggerDefinitionResponse
+
+    interface _DeleteResourceDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteResourceDefinitionResponse]
+    end
+    def delete_resource_definition: (
+      ?resource_definition_id: String
+    ) -> _DeleteResourceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceDefinitionResponse
+
+    interface _DeleteSubscriptionDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteSubscriptionDefinitionResponse]
+    end
+    def delete_subscription_definition: (
+      ?subscription_definition_id: String
+    ) -> _DeleteSubscriptionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionDefinitionResponse
+
+    interface _DisassociateRoleFromGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateRoleFromGroupResponse]
+      def disassociated_at: () -> String?
+    end
+    def disassociate_role_from_group: (
+      ?group_id: String
+    ) -> _DisassociateRoleFromGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateRoleFromGroupResponse
+
+    interface _DisassociateServiceRoleFromAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateServiceRoleFromAccountResponse]
+      def disassociated_at: () -> String?
+    end
+    def disassociate_service_role_from_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateServiceRoleFromAccountResponse
+
+    interface _GetAssociatedRoleResponse
+      include Smithy::Client::_Response[Types::GetAssociatedRoleResponse]
+      def associated_at: () -> String?
+      def role_arn: () -> String?
+    end
+    def get_associated_role: (
+      ?group_id: String
+    ) -> _GetAssociatedRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssociatedRoleResponse
+
+    interface _GetBulkDeploymentStatusResponse
+      include Smithy::Client::_Response[Types::GetBulkDeploymentStatusResponse]
+      def bulk_deployment_metrics: () -> Types::BulkDeploymentMetrics?
+      def bulk_deployment_status: () -> String?
+      def created_at: () -> String?
+      def error_details: () -> Array[Types::ErrorDetail]?
+      def error_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_bulk_deployment_status: (
+      ?bulk_deployment_id: String
+    ) -> _GetBulkDeploymentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBulkDeploymentStatusResponse
+
+    interface _GetConnectivityInfoResponse
+      include Smithy::Client::_Response[Types::GetConnectivityInfoResponse]
+      def connectivity_info: () -> Array[Types::ConnectivityInfo]?
+      def message: () -> String?
+    end
+    def get_connectivity_info: (
+      ?thing_name: String
+    ) -> _GetConnectivityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectivityInfoResponse
+
+    interface _GetConnectorDefinitionResponse
+      include Smithy::Client::_Response[Types::GetConnectorDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_connector_definition: (
+      ?connector_definition_id: String
+    ) -> _GetConnectorDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorDefinitionResponse
+
+    interface _GetConnectorDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetConnectorDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::ConnectorDefinitionVersion?
+      def id: () -> String?
+      def next_token: () -> String?
+      def version: () -> String?
+    end
+    def get_connector_definition_version: (
+      ?connector_definition_id: String,
+      ?connector_definition_version_id: String,
+      ?next_token: String
+    ) -> _GetConnectorDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorDefinitionVersionResponse
+
+    interface _GetCoreDefinitionResponse
+      include Smithy::Client::_Response[Types::GetCoreDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_core_definition: (
+      ?core_definition_id: String
+    ) -> _GetCoreDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreDefinitionResponse
+
+    interface _GetCoreDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetCoreDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::CoreDefinitionVersion?
+      def id: () -> String?
+      def next_token: () -> String?
+      def version: () -> String?
+    end
+    def get_core_definition_version: (
+      ?core_definition_id: String,
+      ?core_definition_version_id: String
+    ) -> _GetCoreDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreDefinitionVersionResponse
+
+    interface _GetDeploymentStatusResponse
+      include Smithy::Client::_Response[Types::GetDeploymentStatusResponse]
+      def deployment_status: () -> String?
+      def deployment_type: () -> String?
+      def error_details: () -> Array[Types::ErrorDetail]?
+      def error_message: () -> String?
+      def updated_at: () -> String?
+    end
+    def get_deployment_status: (
+      ?deployment_id: String,
+      ?group_id: String
+    ) -> _GetDeploymentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentStatusResponse
+
+    interface _GetDeviceDefinitionResponse
+      include Smithy::Client::_Response[Types::GetDeviceDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_device_definition: (
+      ?device_definition_id: String
+    ) -> _GetDeviceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceDefinitionResponse
+
+    interface _GetDeviceDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetDeviceDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::DeviceDefinitionVersion?
+      def id: () -> String?
+      def next_token: () -> String?
+      def version: () -> String?
+    end
+    def get_device_definition_version: (
+      ?device_definition_id: String,
+      ?device_definition_version_id: String,
+      ?next_token: String
+    ) -> _GetDeviceDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceDefinitionVersionResponse
+
+    interface _GetFunctionDefinitionResponse
+      include Smithy::Client::_Response[Types::GetFunctionDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_function_definition: (
+      ?function_definition_id: String
+    ) -> _GetFunctionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionDefinitionResponse
+
+    interface _GetFunctionDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetFunctionDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::FunctionDefinitionVersion?
+      def id: () -> String?
+      def next_token: () -> String?
+      def version: () -> String?
+    end
+    def get_function_definition_version: (
+      ?function_definition_id: String,
+      ?function_definition_version_id: String,
+      ?next_token: String
+    ) -> _GetFunctionDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionDefinitionVersionResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_group: (
+      ?group_id: String
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _GetGroupCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::GetGroupCertificateAuthorityResponse]
+      def group_certificate_authority_arn: () -> String?
+      def group_certificate_authority_id: () -> String?
+      def pem_encoded_certificate: () -> String?
+    end
+    def get_group_certificate_authority: (
+      ?certificate_authority_id: String,
+      ?group_id: String
+    ) -> _GetGroupCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupCertificateAuthorityResponse
+
+    interface _GetGroupCertificateConfigurationResponse
+      include Smithy::Client::_Response[Types::GetGroupCertificateConfigurationResponse]
+      def certificate_authority_expiry_in_milliseconds: () -> String?
+      def certificate_expiry_in_milliseconds: () -> String?
+      def group_id: () -> String?
+    end
+    def get_group_certificate_configuration: (
+      ?group_id: String
+    ) -> _GetGroupCertificateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupCertificateConfigurationResponse
+
+    interface _GetGroupVersionResponse
+      include Smithy::Client::_Response[Types::GetGroupVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::GroupVersion?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def get_group_version: (
+      ?group_id: String,
+      ?group_version_id: String
+    ) -> _GetGroupVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupVersionResponse
+
+    interface _GetLoggerDefinitionResponse
+      include Smithy::Client::_Response[Types::GetLoggerDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_logger_definition: (
+      ?logger_definition_id: String
+    ) -> _GetLoggerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoggerDefinitionResponse
+
+    interface _GetLoggerDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetLoggerDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::LoggerDefinitionVersion?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def get_logger_definition_version: (
+      ?logger_definition_id: String,
+      ?logger_definition_version_id: String,
+      ?next_token: String
+    ) -> _GetLoggerDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoggerDefinitionVersionResponse
+
+    interface _GetResourceDefinitionResponse
+      include Smithy::Client::_Response[Types::GetResourceDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_resource_definition: (
+      ?resource_definition_id: String
+    ) -> _GetResourceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceDefinitionResponse
+
+    interface _GetResourceDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetResourceDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::ResourceDefinitionVersion?
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def get_resource_definition_version: (
+      ?resource_definition_id: String,
+      ?resource_definition_version_id: String
+    ) -> _GetResourceDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceDefinitionVersionResponse
+
+    interface _GetServiceRoleForAccountResponse
+      include Smithy::Client::_Response[Types::GetServiceRoleForAccountResponse]
+      def associated_at: () -> String?
+      def role_arn: () -> String?
+    end
+    def get_service_role_for_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceRoleForAccountResponse
+
+    interface _GetSubscriptionDefinitionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionDefinitionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def id: () -> String?
+      def last_updated_timestamp: () -> String?
+      def latest_version: () -> String?
+      def latest_version_arn: () -> String?
+      def name: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_subscription_definition: (
+      ?subscription_definition_id: String
+    ) -> _GetSubscriptionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionDefinitionResponse
+
+    interface _GetSubscriptionDefinitionVersionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionDefinitionVersionResponse]
+      def arn: () -> String?
+      def creation_timestamp: () -> String?
+      def definition: () -> Types::SubscriptionDefinitionVersion?
+      def id: () -> String?
+      def next_token: () -> String?
+      def version: () -> String?
+    end
+    def get_subscription_definition_version: (
+      ?next_token: String,
+      ?subscription_definition_id: String,
+      ?subscription_definition_version_id: String
+    ) -> _GetSubscriptionDefinitionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionDefinitionVersionResponse
+
+    interface _GetThingRuntimeConfigurationResponse
+      include Smithy::Client::_Response[Types::GetThingRuntimeConfigurationResponse]
+      def runtime_configuration: () -> Types::RuntimeConfiguration?
+    end
+    def get_thing_runtime_configuration: (
+      ?thing_name: String
+    ) -> _GetThingRuntimeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThingRuntimeConfigurationResponse
+
+    interface _ListBulkDeploymentDetailedReportsResponse
+      include Smithy::Client::_Response[Types::ListBulkDeploymentDetailedReportsResponse]
+      def deployments: () -> Array[Types::BulkDeploymentResult]?
+      def next_token: () -> String?
+    end
+    def list_bulk_deployment_detailed_reports: (
+      ?bulk_deployment_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListBulkDeploymentDetailedReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBulkDeploymentDetailedReportsResponse
+
+    interface _ListBulkDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListBulkDeploymentsResponse]
+      def bulk_deployments: () -> Array[Types::BulkDeployment]?
+      def next_token: () -> String?
+    end
+    def list_bulk_deployments: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListBulkDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBulkDeploymentsResponse
+
+    interface _ListConnectorDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListConnectorDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_connector_definition_versions: (
+      ?connector_definition_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListConnectorDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorDefinitionVersionsResponse
+
+    interface _ListConnectorDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListConnectorDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_connector_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListConnectorDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorDefinitionsResponse
+
+    interface _ListCoreDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListCoreDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_core_definition_versions: (
+      ?core_definition_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListCoreDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreDefinitionVersionsResponse
+
+    interface _ListCoreDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListCoreDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_core_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListCoreDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreDefinitionsResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsResponse]
+      def deployments: () -> Array[Types::Deployment]?
+      def next_token: () -> String?
+    end
+    def list_deployments: (
+      ?group_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListDeviceDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListDeviceDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_device_definition_versions: (
+      ?device_definition_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListDeviceDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceDefinitionVersionsResponse
+
+    interface _ListDeviceDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListDeviceDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_device_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListDeviceDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceDefinitionsResponse
+
+    interface _ListFunctionDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListFunctionDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_function_definition_versions: (
+      ?function_definition_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListFunctionDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionDefinitionVersionsResponse
+
+    interface _ListFunctionDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListFunctionDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_function_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListFunctionDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionDefinitionsResponse
+
+    interface _ListGroupCertificateAuthoritiesResponse
+      include Smithy::Client::_Response[Types::ListGroupCertificateAuthoritiesResponse]
+      def group_certificate_authorities: () -> Array[Types::GroupCertificateAuthorityProperties]?
+    end
+    def list_group_certificate_authorities: (
+      ?group_id: String
+    ) -> _ListGroupCertificateAuthoritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupCertificateAuthoritiesResponse
+
+    interface _ListGroupVersionsResponse
+      include Smithy::Client::_Response[Types::ListGroupVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_group_versions: (
+      ?group_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListGroupVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupVersionsResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def groups: () -> Array[Types::GroupInformation]?
+      def next_token: () -> String?
+    end
+    def list_groups: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListLoggerDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListLoggerDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_logger_definition_versions: (
+      ?logger_definition_id: String,
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListLoggerDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLoggerDefinitionVersionsResponse
+
+    interface _ListLoggerDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListLoggerDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_logger_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListLoggerDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLoggerDefinitionsResponse
+
+    interface _ListResourceDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListResourceDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_resource_definition_versions: (
+      ?max_results: String,
+      ?next_token: String,
+      ?resource_definition_id: String
+    ) -> _ListResourceDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceDefinitionVersionsResponse
+
+    interface _ListResourceDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListResourceDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_resource_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListResourceDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceDefinitionsResponse
+
+    interface _ListSubscriptionDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionDefinitionVersionsResponse]
+      def next_token: () -> String?
+      def versions: () -> Array[Types::VersionInformation]?
+    end
+    def list_subscription_definition_versions: (
+      ?max_results: String,
+      ?next_token: String,
+      ?subscription_definition_id: String
+    ) -> _ListSubscriptionDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionDefinitionVersionsResponse
+
+    interface _ListSubscriptionDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionDefinitionsResponse]
+      def definitions: () -> Array[Types::DefinitionInformation]?
+      def next_token: () -> String?
+    end
+    def list_subscription_definitions: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListSubscriptionDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionDefinitionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ResetDeploymentsResponse
+      include Smithy::Client::_Response[Types::ResetDeploymentsResponse]
+      def deployment_arn: () -> String?
+      def deployment_id: () -> String?
+    end
+    def reset_deployments: (
+      ?amzn_client_token: String,
+      ?force: bool,
+      ?group_id: String
+    ) -> _ResetDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetDeploymentsResponse
+
+    interface _StartBulkDeploymentResponse
+      include Smithy::Client::_Response[Types::StartBulkDeploymentResponse]
+      def bulk_deployment_arn: () -> String?
+      def bulk_deployment_id: () -> String?
+    end
+    def start_bulk_deployment: (
+      ?amzn_client_token: String,
+      ?execution_role_arn: String,
+      ?input_file_uri: String,
+      ?tags: Hash[String, String]
+    ) -> _StartBulkDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBulkDeploymentResponse
+
+    interface _StopBulkDeploymentResponse
+      include Smithy::Client::_Response[Types::StopBulkDeploymentResponse]
+    end
+    def stop_bulk_deployment: (
+      ?bulk_deployment_id: String
+    ) -> _StopBulkDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBulkDeploymentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectivityInfoResponse
+      include Smithy::Client::_Response[Types::UpdateConnectivityInfoResponse]
+      def message: () -> String?
+      def version: () -> String?
+    end
+    def update_connectivity_info: (
+      ?connectivity_info: Array[
+        {
+          host_address: String,
+          id: untyped,
+          metadata: untyped,
+          port_number: Integer
+        }
+      ],
+      ?thing_name: String
+    ) -> _UpdateConnectivityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectivityInfoResponse
+
+    interface _UpdateConnectorDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorDefinitionResponse]
+    end
+    def update_connector_definition: (
+      ?connector_definition_id: String,
+      ?name: String
+    ) -> _UpdateConnectorDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorDefinitionResponse
+
+    interface _UpdateCoreDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateCoreDefinitionResponse]
+    end
+    def update_core_definition: (
+      ?core_definition_id: String,
+      ?name: String
+    ) -> _UpdateCoreDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCoreDefinitionResponse
+
+    interface _UpdateDeviceDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateDeviceDefinitionResponse]
+    end
+    def update_device_definition: (
+      ?device_definition_id: String,
+      ?name: String
+    ) -> _UpdateDeviceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeviceDefinitionResponse
+
+    interface _UpdateFunctionDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateFunctionDefinitionResponse]
+    end
+    def update_function_definition: (
+      ?function_definition_id: String,
+      ?name: String
+    ) -> _UpdateFunctionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionDefinitionResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGroupResponse]
+    end
+    def update_group: (
+      ?group_id: String,
+      ?name: String
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateGroupCertificateConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateGroupCertificateConfigurationResponse]
+      def certificate_authority_expiry_in_milliseconds: () -> String?
+      def certificate_expiry_in_milliseconds: () -> String?
+      def group_id: () -> String?
+    end
+    def update_group_certificate_configuration: (
+      ?certificate_expiry_in_milliseconds: String,
+      ?group_id: String
+    ) -> _UpdateGroupCertificateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupCertificateConfigurationResponse
+
+    interface _UpdateLoggerDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateLoggerDefinitionResponse]
+    end
+    def update_logger_definition: (
+      ?logger_definition_id: String,
+      ?name: String
+    ) -> _UpdateLoggerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoggerDefinitionResponse
+
+    interface _UpdateResourceDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateResourceDefinitionResponse]
+    end
+    def update_resource_definition: (
+      ?name: String,
+      ?resource_definition_id: String
+    ) -> _UpdateResourceDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceDefinitionResponse
+
+    interface _UpdateSubscriptionDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionDefinitionResponse]
+    end
+    def update_subscription_definition: (
+      ?name: String,
+      ?subscription_definition_id: String
+    ) -> _UpdateSubscriptionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionDefinitionResponse
+
+    interface _UpdateThingRuntimeConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateThingRuntimeConfigurationResponse]
+    end
+    def update_thing_runtime_configuration: (
+      ?telemetry_configuration: {
+        telemetry: String
+      },
+      ?thing_name: String
+    ) -> _UpdateThingRuntimeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThingRuntimeConfigurationResponse
+  end
+end

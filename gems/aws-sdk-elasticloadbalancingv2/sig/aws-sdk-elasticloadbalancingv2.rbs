@@ -1,0 +1,5 @@
+  module Aws
+    module ElasticLoadBalancingV2
+      VERSION: String
+    end
+  end

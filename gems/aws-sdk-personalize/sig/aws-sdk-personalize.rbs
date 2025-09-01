@@ -1,0 +1,5 @@
+  module Aws
+    module Personalize
+      VERSION: String
+    end
+  end

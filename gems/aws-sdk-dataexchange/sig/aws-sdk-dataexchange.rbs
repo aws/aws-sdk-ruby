@@ -1,0 +1,5 @@
+  module Aws
+    module DataExchange
+      VERSION: String
+    end
+  end

@@ -1,0 +1,48 @@
+module Aws::Chime
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ServiceFailureException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class ThrottledClientException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class UnauthorizedClientException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+    class UnprocessableEntityException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+    end
+  end
+end

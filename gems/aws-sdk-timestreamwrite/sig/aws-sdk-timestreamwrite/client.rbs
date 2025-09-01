@@ -1,0 +1,383 @@
+module Aws::TimestreamWrite
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::TimestreamWrite::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBatchLoadTaskResponse
+      include Smithy::Client::_Response[Types::CreateBatchLoadTaskResponse]
+      def task_id: () -> String?
+    end
+    def create_batch_load_task: (
+      ?client_token: String,
+      ?data_model_configuration: {
+        data_model: {
+          time_column: String,
+          time_unit: String,
+          dimension_mappings: Array[
+            {
+              source_column: String,
+              destination_column: untyped
+            }
+          ],
+          multi_measure_mappings: {
+            target_multi_measure_name: untyped,
+            multi_measure_attribute_mappings: Array[
+              {
+                source_column: untyped,
+                target_multi_measure_attribute_name: untyped,
+                measure_value_type: String
+              }
+            ]
+          },
+          mixed_measure_mappings: Array[
+            {
+              measure_name: untyped,
+              source_column: untyped,
+              target_measure_name: untyped,
+              measure_value_type: String,
+              multi_measure_attribute_mappings: untyped
+            }
+          ],
+          measure_name_column: untyped
+        },
+        data_model_s3_configuration: {
+          bucket_name: String,
+          object_key: String
+        }
+      },
+      ?data_source_configuration: {
+        data_source_s3_configuration: {
+          bucket_name: String,
+          object_key_prefix: String
+        },
+        csv_configuration: {
+          column_separator: String,
+          escape_char: untyped,
+          quote_char: untyped,
+          null_value: String,
+          trim_white_space: bool
+        },
+        data_format: String
+      },
+      ?report_configuration: {
+        report_s3_configuration: {
+          bucket_name: String,
+          object_key_prefix: String,
+          encryption_option: String,
+          kms_key_id: String
+        }
+      },
+      ?target_database_name: String,
+      ?target_table_name: String,
+      ?record_version: Integer
+    ) -> _CreateBatchLoadTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBatchLoadTaskResponse
+
+    interface _CreateDatabaseResponse
+      include Smithy::Client::_Response[Types::CreateDatabaseResponse]
+      def database: () -> Types::Database?
+    end
+    def create_database: (
+      ?database_name: String,
+      ?kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatabaseResponse
+
+    interface _CreateTableResponse
+      include Smithy::Client::_Response[Types::CreateTableResponse]
+      def table: () -> Types::Table?
+    end
+    def create_table: (
+      ?database_name: String,
+      ?table_name: String,
+      ?retention_properties: {
+        memory_store_retention_period_in_hours: Integer,
+        magnetic_store_retention_period_in_days: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?magnetic_store_write_properties: {
+        enable_magnetic_store_writes: bool,
+        magnetic_store_rejected_data_location: {
+          s3_configuration: {
+            bucket_name: String,
+            object_key_prefix: String,
+            encryption_option: String,
+            kms_key_id: String
+          }
+        }
+      },
+      ?schema: {
+        composite_partition_key: Array[
+          {
+            type: String,
+            name: String,
+            enforcement_in_record: String
+          }
+        ]
+      }
+    ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
+
+    interface _DeleteDatabaseResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_database: (
+      ?database_name: String
+    ) -> _DeleteDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatabaseResponse
+
+    interface _DeleteTableResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table: (
+      ?database_name: String,
+      ?table_name: String
+    ) -> _DeleteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableResponse
+
+    interface _DescribeBatchLoadTaskResponse
+      include Smithy::Client::_Response[Types::DescribeBatchLoadTaskResponse]
+      def batch_load_task_description: () -> Types::BatchLoadTaskDescription?
+    end
+    def describe_batch_load_task: (
+      ?task_id: String
+    ) -> _DescribeBatchLoadTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBatchLoadTaskResponse
+
+    interface _DescribeDatabaseResponse
+      include Smithy::Client::_Response[Types::DescribeDatabaseResponse]
+      def database: () -> Types::Database?
+    end
+    def describe_database: (
+      ?database_name: String
+    ) -> _DescribeDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatabaseResponse
+
+    interface _DescribeEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointsResponse]
+      def endpoints: () -> Array[Types::Endpoint]?
+    end
+    def describe_endpoints: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointsResponse
+
+    interface _DescribeTableResponse
+      include Smithy::Client::_Response[Types::DescribeTableResponse]
+      def table: () -> Types::Table?
+    end
+    def describe_table: (
+      ?database_name: String,
+      ?table_name: String
+    ) -> _DescribeTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTableResponse
+
+    interface _ListBatchLoadTasksResponse
+      include Smithy::Client::_Response[Types::ListBatchLoadTasksResponse]
+      def next_token: () -> String?
+      def batch_load_tasks: () -> Array[Types::BatchLoadTask]?
+    end
+    def list_batch_load_tasks: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?task_status: String
+    ) -> _ListBatchLoadTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchLoadTasksResponse
+
+    interface _ListDatabasesResponse
+      include Smithy::Client::_Response[Types::ListDatabasesResponse]
+      def databases: () -> Array[Types::Database]?
+      def next_token: () -> String?
+    end
+    def list_databases: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatabasesResponse
+
+    interface _ListTablesResponse
+      include Smithy::Client::_Response[Types::ListTablesResponse]
+      def tables: () -> Array[Types::Table]?
+      def next_token: () -> String?
+    end
+    def list_tables: (
+      ?database_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ResumeBatchLoadTaskResponse
+      include Smithy::Client::_Response[Types::ResumeBatchLoadTaskResponse]
+    end
+    def resume_batch_load_task: (
+      ?task_id: String
+    ) -> _ResumeBatchLoadTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeBatchLoadTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDatabaseResponse
+      include Smithy::Client::_Response[Types::UpdateDatabaseResponse]
+      def database: () -> Types::Database?
+    end
+    def update_database: (
+      ?database_name: String,
+      ?kms_key_id: String
+    ) -> _UpdateDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatabaseResponse
+
+    interface _UpdateTableResponse
+      include Smithy::Client::_Response[Types::UpdateTableResponse]
+      def table: () -> Types::Table?
+    end
+    def update_table: (
+      ?database_name: String,
+      ?table_name: String,
+      ?retention_properties: {
+        memory_store_retention_period_in_hours: Integer,
+        magnetic_store_retention_period_in_days: Integer
+      },
+      ?magnetic_store_write_properties: {
+        enable_magnetic_store_writes: bool,
+        magnetic_store_rejected_data_location: {
+          s3_configuration: {
+            bucket_name: String,
+            object_key_prefix: String,
+            encryption_option: String,
+            kms_key_id: String
+          }
+        }
+      },
+      ?schema: {
+        composite_partition_key: Array[
+          {
+            type: String,
+            name: String,
+            enforcement_in_record: String
+          }
+        ]
+      }
+    ) -> _UpdateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableResponse
+
+    interface _WriteRecordsResponse
+      include Smithy::Client::_Response[Types::WriteRecordsResponse]
+      def records_ingested: () -> Types::RecordsIngested?
+    end
+    def write_records: (
+      ?database_name: String,
+      ?table_name: String,
+      ?common_attributes: {
+        dimensions: Array[
+          {
+            name: String,
+            value: String,
+            dimension_value_type: String
+          }
+        ],
+        measure_name: untyped,
+        measure_value: String,
+        measure_value_type: String,
+        time: String,
+        time_unit: String,
+        version: Integer,
+        measure_values: Array[
+          {
+            name: untyped,
+            value: untyped,
+            type: untyped
+          }
+        ]
+      },
+      ?records: Array[
+        {
+          dimensions: Array[
+            {
+              name: String,
+              value: String,
+              dimension_value_type: String
+            }
+          ],
+          measure_name: untyped,
+          measure_value: String,
+          measure_value_type: String,
+          time: String,
+          time_unit: String,
+          version: Integer,
+          measure_values: Array[
+            {
+              name: untyped,
+              value: untyped,
+              type: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _WriteRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _WriteRecordsResponse
+  end
+end

@@ -1,0 +1,60 @@
+module Aws::LakeFormation
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlueEncryptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionTypeMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNumberLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StatisticsNotReadyYetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottledException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+      def throttling?: () -> true
+    end
+    class TransactionCanceledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransactionCommitInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransactionCommittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WorkUnitsNotReadyYetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

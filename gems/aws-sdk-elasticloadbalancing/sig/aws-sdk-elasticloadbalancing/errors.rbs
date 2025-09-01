@@ -1,0 +1,70 @@
+module Aws::ElasticLoadBalancing
+  module Errors
+    class AccessPointNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CertificateNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DependencyThrottleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateAccessPointNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateListenerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicatePolicyNameException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateTagKeysException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConfigurationRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEndPointException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSchemeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSecurityGroupException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ListenerNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LoadBalancerAttributeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyTypeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyAccessPointsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyPoliciesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedProtocolException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

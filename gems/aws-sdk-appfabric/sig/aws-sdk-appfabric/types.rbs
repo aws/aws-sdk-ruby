@@ -1,0 +1,1235 @@
+module Aws::AppFabric
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApiKeyCredential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+    end
+
+    class AppAuthorization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization_arn: String,
+        ?app_bundle_arn: String,
+        ?app: String,
+        ?tenant: Types::Tenant,
+        ?auth_type: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?persona: String,
+        ?auth_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization_arn: String?
+      attr_accessor app_bundle_arn: String?
+      attr_accessor app: String?
+      attr_accessor tenant: Types::Tenant?
+      attr_accessor auth_type: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor persona: String?
+      attr_accessor auth_url: String?
+    end
+
+    module AppAuthorizationStatus
+      PENDING_CONNECT: String
+      CONNECTED: String
+      CONNECTION_VALIDATION_FAILED: String
+      TOKEN_AUTO_ROTATION_FAILED: String
+    end
+
+    class AppAuthorizationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization_arn: String,
+        ?app_bundle_arn: String,
+        ?app: String,
+        ?tenant: Types::Tenant,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization_arn: String?
+      attr_accessor app_bundle_arn: String?
+      attr_accessor app: String?
+      attr_accessor tenant: Types::Tenant?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class AppBundle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?customer_managed_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor customer_managed_key_arn: String?
+    end
+
+    class AppBundleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class AuditLogDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::Destination?
+    end
+
+    class AuditLogProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: String?
+      attr_accessor format: String?
+    end
+
+    class AuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redirect_uri: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redirect_uri: String?
+      attr_accessor code: String?
+    end
+
+    module AuthType
+      OAUTH2: String
+      API_KEY: String
+    end
+
+    class BatchGetUserAccessTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?task_id_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor task_id_list: Array[String]?
+    end
+
+    class BatchGetUserAccessTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_results_list: Array[Types::UserAccessResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_results_list: Array[Types::UserAccessResultItem]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConnectAppAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app_authorization_identifier: String,
+        ?auth_request: Types::AuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app_authorization_identifier: String?
+      attr_accessor auth_request: Types::AuthRequest?
+    end
+
+    class ConnectAppAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization_summary: Types::AppAuthorizationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization_summary: Types::AppAuthorizationSummary?
+    end
+
+    class CreateAppAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app: String,
+        ?credential: Types::Credential,
+        ?tenant: Types::Tenant,
+        ?auth_type: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app: String?
+      attr_accessor credential: Types::Credential?
+      attr_accessor tenant: Types::Tenant?
+      attr_accessor auth_type: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAppAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization: Types::AppAuthorization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization: Types::AppAuthorization?
+    end
+
+    class CreateAppBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?customer_managed_key_identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor customer_managed_key_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAppBundleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle: Types::AppBundle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle: Types::AppBundle?
+    end
+
+    class CreateIngestionDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIngestionDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_destination: Types::IngestionDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_destination: Types::IngestionDestination?
+    end
+
+    class CreateIngestionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app: String,
+        ?tenant_id: String,
+        ?ingestion_type: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app: String?
+      attr_accessor tenant_id: String?
+      attr_accessor ingestion_type: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIngestionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion: Types::Ingestion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion: Types::Ingestion?
+    end
+
+    class Credential
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?oauth2_credential: Types::Oauth2Credential,
+        ?api_key_credential: Types::ApiKeyCredential,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oauth2_credential: Types::Oauth2Credential?
+      attr_accessor api_key_credential: Types::ApiKeyCredential?
+
+      class Oauth2Credential < Credential
+      end
+      class ApiKeyCredential < Credential
+      end
+      class Unknown < Credential
+      end
+    end
+
+    class DeleteAppAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app_authorization_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app_authorization_identifier: String?
+    end
+
+    class DeleteAppAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAppBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+    end
+
+    class DeleteAppBundleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIngestionDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+        ?ingestion_destination_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+      attr_accessor ingestion_destination_identifier: String?
+    end
+
+    class DeleteIngestionDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIngestionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+    end
+
+    class DeleteIngestionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Destination
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_bucket: Types::S3Bucket,
+        ?firehose_stream: Types::FirehoseStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: Types::S3Bucket?
+      attr_accessor firehose_stream: Types::FirehoseStream?
+
+      class S3Bucket < Destination
+      end
+      class FirehoseStream < Destination
+      end
+      class Unknown < Destination
+      end
+    end
+
+    class DestinationConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audit_log: Types::AuditLogDestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_log: Types::AuditLogDestinationConfiguration?
+
+      class AuditLog < DestinationConfiguration
+      end
+      class Unknown < DestinationConfiguration
+      end
+    end
+
+    class FirehoseStream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+    end
+
+    module Format
+      JSON: String
+      PARQUET: String
+    end
+
+    class GetAppAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app_authorization_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app_authorization_identifier: String?
+    end
+
+    class GetAppAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization: Types::AppAuthorization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization: Types::AppAuthorization?
+    end
+
+    class GetAppBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+    end
+
+    class GetAppBundleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle: Types::AppBundle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle: Types::AppBundle?
+    end
+
+    class GetIngestionDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+        ?ingestion_destination_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+      attr_accessor ingestion_destination_identifier: String?
+    end
+
+    class GetIngestionDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_destination: Types::IngestionDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_destination: Types::IngestionDestination?
+    end
+
+    class GetIngestionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+    end
+
+    class GetIngestionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion: Types::Ingestion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion: Types::Ingestion?
+    end
+
+    class Ingestion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?app_bundle_arn: String,
+        ?app: String,
+        ?tenant_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?state: String,
+        ?ingestion_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor app_bundle_arn: String?
+      attr_accessor app: String?
+      attr_accessor tenant_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor state: String?
+      attr_accessor ingestion_type: String?
+    end
+
+    class IngestionDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?ingestion_arn: String,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor ingestion_arn: String?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module IngestionDestinationStatus
+      ACTIVE: String
+      FAILED: String
+    end
+
+    class IngestionDestinationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    module IngestionState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class IngestionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?app: String,
+        ?tenant_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor app: String?
+      attr_accessor tenant_id: String?
+      attr_accessor state: String?
+    end
+
+    module IngestionType
+      AUDIT_LOG: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListAppAuthorizationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppAuthorizationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization_summary_list: Array[Types::AppAuthorizationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization_summary_list: Array[Types::AppAuthorizationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppBundlesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppBundlesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_summary_list: Array[Types::AppBundleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_summary_list: Array[Types::AppBundleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngestionDestinationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngestionDestinationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_destinations: Array[Types::IngestionDestinationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_destinations: Array[Types::IngestionDestinationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngestionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIngestionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestions: Array[Types::IngestionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestions: Array[Types::IngestionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Oauth2Credential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+    end
+
+    module Persona
+      ADMIN: String
+      ENDUSER: String
+    end
+
+    class ProcessingConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audit_log: Types::AuditLogProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_log: Types::AuditLogProcessingConfiguration?
+
+      class AuditLog < ProcessingConfiguration
+      end
+      class Unknown < ProcessingConfiguration
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResultStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      EXPIRED: String
+    end
+
+    class S3Bucket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+    end
+
+    module Schema
+      OCSF: String
+      RAW: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class StartIngestionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_identifier: String,
+        ?app_bundle_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_identifier: String?
+      attr_accessor app_bundle_identifier: String?
+    end
+
+    class StartIngestionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartUserAccessTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor email: String?
+    end
+
+    class StartUserAccessTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_access_tasks_list: Array[Types::UserAccessTaskItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_access_tasks_list: Array[Types::UserAccessTaskItem]?
+    end
+
+    class StopIngestionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_identifier: String,
+        ?app_bundle_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_identifier: String?
+      attr_accessor app_bundle_identifier: String?
+    end
+
+    class StopIngestionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class Tenant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_identifier: String,
+        ?tenant_display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_identifier: String?
+      attr_accessor tenant_display_name: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAppAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?app_authorization_identifier: String,
+        ?credential: Types::Credential,
+        ?tenant: Types::Tenant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor app_authorization_identifier: String?
+      attr_accessor credential: Types::Credential?
+      attr_accessor tenant: Types::Tenant?
+    end
+
+    class UpdateAppAuthorizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_authorization: Types::AppAuthorization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_authorization: Types::AppAuthorization?
+    end
+
+    class UpdateIngestionDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_bundle_identifier: String,
+        ?ingestion_identifier: String,
+        ?ingestion_destination_identifier: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_bundle_identifier: String?
+      attr_accessor ingestion_identifier: String?
+      attr_accessor ingestion_destination_identifier: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+    end
+
+    class UpdateIngestionDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingestion_destination: Types::IngestionDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingestion_destination: Types::IngestionDestination?
+    end
+
+    class UserAccessResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: String,
+        ?tenant_id: String,
+        ?tenant_display_name: String,
+        ?task_id: String,
+        ?result_status: String,
+        ?email: String,
+        ?user_id: String,
+        ?user_full_name: String,
+        ?user_first_name: String,
+        ?user_last_name: String,
+        ?user_status: String,
+        ?task_error: Types::TaskError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: String?
+      attr_accessor tenant_id: String?
+      attr_accessor tenant_display_name: String?
+      attr_accessor task_id: String?
+      attr_accessor result_status: String?
+      attr_accessor email: String?
+      attr_accessor user_id: String?
+      attr_accessor user_full_name: String?
+      attr_accessor user_first_name: String?
+      attr_accessor user_last_name: String?
+      attr_accessor user_status: String?
+      attr_accessor task_error: Types::TaskError?
+    end
+
+    class UserAccessTaskItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app: String,
+        ?tenant_id: String,
+        ?task_id: String,
+        ?error: Types::TaskError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app: String?
+      attr_accessor tenant_id: String?
+      attr_accessor task_id: String?
+      attr_accessor error: Types::TaskError?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

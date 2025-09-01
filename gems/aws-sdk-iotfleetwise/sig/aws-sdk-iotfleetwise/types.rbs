@@ -1,0 +1,3392 @@
+module Aws::IoTFleetWise
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Actuator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?data_type: String,
+        ?description: String,
+        ?unit: String,
+        ?allowed_values: Array[String],
+        ?min: Float,
+        ?max: Float,
+        ?assigned_value: String,
+        ?deprecation_message: String,
+        ?comment: String,
+        ?struct_fully_qualified_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor data_type: String?
+      attr_accessor description: String?
+      attr_accessor unit: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor assigned_value: String?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+      attr_accessor struct_fully_qualified_name: String?
+    end
+
+    class AssociateVehicleFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class AssociateVehicleFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?data_type: String,
+        ?description: String,
+        ?unit: String,
+        ?allowed_values: Array[String],
+        ?min: Float,
+        ?max: Float,
+        ?assigned_value: String,
+        ?default_value: String,
+        ?deprecation_message: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor data_type: String?
+      attr_accessor description: String?
+      attr_accessor unit: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor assigned_value: String?
+      attr_accessor default_value: String?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+    end
+
+    class BatchCreateVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicles: Array[Types::CreateVehicleRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicles: Array[Types::CreateVehicleRequestItem]?
+    end
+
+    class BatchCreateVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicles: Array[Types::CreateVehicleResponseItem],
+        ?errors: Array[Types::CreateVehicleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicles: Array[Types::CreateVehicleResponseItem]?
+      attr_accessor errors: Array[Types::CreateVehicleError]?
+    end
+
+    class BatchUpdateVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicles: Array[Types::UpdateVehicleRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicles: Array[Types::UpdateVehicleRequestItem]?
+    end
+
+    class BatchUpdateVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicles: Array[Types::UpdateVehicleResponseItem],
+        ?errors: Array[Types::UpdateVehicleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicles: Array[Types::UpdateVehicleResponseItem]?
+      attr_accessor errors: Array[Types::UpdateVehicleError]?
+    end
+
+    class Branch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?description: String,
+        ?deprecation_message: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor description: String?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+    end
+
+    module CampaignStatus
+      CREATING: String
+      WAITING_FOR_APPROVAL: String
+      RUNNING: String
+      SUSPENDED: String
+    end
+
+    class CampaignSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?target_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class CanDbcDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface: String,
+        ?can_dbc_files: Array[String],
+        ?signals_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface: String?
+      attr_accessor can_dbc_files: Array[String]?
+      attr_accessor signals_map: Hash[String, String]?
+    end
+
+    class CanInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?protocol_name: String,
+        ?protocol_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor protocol_name: String?
+      attr_accessor protocol_version: String?
+    end
+
+    class CanSignal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: Integer,
+        ?is_big_endian: bool,
+        ?is_signed: bool,
+        ?start_bit: Integer,
+        ?offset: Float,
+        ?factor: Float,
+        ?length: Integer,
+        ?name: String,
+        ?signal_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: Integer?
+      attr_accessor is_big_endian: bool?
+      attr_accessor is_signed: bool?
+      attr_accessor start_bit: Integer?
+      attr_accessor offset: Float?
+      attr_accessor factor: Float?
+      attr_accessor length: Integer?
+      attr_accessor name: String?
+      attr_accessor signal_value_type: String?
+    end
+
+    class CloudWatchLogDeliveryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor log_group_name: String?
+    end
+
+    class CollectionScheme
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?time_based_collection_scheme: Types::TimeBasedCollectionScheme,
+        ?condition_based_collection_scheme: Types::ConditionBasedCollectionScheme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_based_collection_scheme: Types::TimeBasedCollectionScheme?
+      attr_accessor condition_based_collection_scheme: Types::ConditionBasedCollectionScheme?
+
+      class TimeBasedCollectionScheme < CollectionScheme
+      end
+      class ConditionBasedCollectionScheme < CollectionScheme
+      end
+      class Unknown < CollectionScheme
+      end
+    end
+
+    module Compression
+      OFF: String
+      SNAPPY: String
+    end
+
+    class ConditionBasedCollectionScheme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?minimum_trigger_interval_ms: Integer,
+        ?trigger_mode: String,
+        ?condition_language_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor minimum_trigger_interval_ms: Integer?
+      attr_accessor trigger_mode: String?
+      attr_accessor condition_language_version: Integer?
+    end
+
+    class ConditionBasedSignalFetchConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_expression: String,
+        ?trigger_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_expression: String?
+      attr_accessor trigger_mode: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateCampaignInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?target_arn: String,
+        ?start_time: Time,
+        ?expiry_time: Time,
+        ?post_trigger_collection_duration: Integer,
+        ?diagnostics_mode: String,
+        ?spooling_mode: String,
+        ?compression: String,
+        ?priority: Integer,
+        ?signals_to_collect: Array[Types::SignalInformation],
+        ?collection_scheme: Types::CollectionScheme,
+        ?data_extra_dimensions: Array[String],
+        ?tags: Array[Types::Tag],
+        ?data_destination_configs: Array[Types::DataDestinationConfig],
+        ?data_partitions: Array[Types::DataPartition],
+        ?signals_to_fetch: Array[Types::SignalFetchInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor expiry_time: Time?
+      attr_accessor post_trigger_collection_duration: Integer?
+      attr_accessor diagnostics_mode: String?
+      attr_accessor spooling_mode: String?
+      attr_accessor compression: String?
+      attr_accessor priority: Integer?
+      attr_accessor signals_to_collect: Array[Types::SignalInformation]?
+      attr_accessor collection_scheme: Types::CollectionScheme?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor data_destination_configs: Array[Types::DataDestinationConfig]?
+      attr_accessor data_partitions: Array[Types::DataPartition]?
+      attr_accessor signals_to_fetch: Array[Types::SignalFetchInformation]?
+    end
+
+    class CreateCampaignOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateDecoderManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?model_manifest_arn: String,
+        ?signal_decoders: Array[Types::SignalDecoder],
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?default_for_unmapped_signals: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor signal_decoders: Array[Types::SignalDecoder]?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor default_for_unmapped_signals: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDecoderManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateModelManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?nodes: Array[String],
+        ?signal_catalog_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor nodes: Array[String]?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateModelManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateSignalCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?nodes: Array[Types::Node],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor nodes: Array[Types::Node]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSignalCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateStateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?state_template_properties: Array[String],
+        ?data_extra_dimensions: Array[String],
+        ?metadata_extra_dimensions: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor state_template_properties: Array[String]?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor metadata_extra_dimensions: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateStateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateVehicleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?attributes: Hash[String, String],
+        ?association_behavior: String,
+        ?tags: Array[Types::Tag],
+        ?state_templates: Array[Types::StateTemplateAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor association_behavior: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor state_templates: Array[Types::StateTemplateAssociation]?
+    end
+
+    class CreateVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+      attr_accessor thing_arn: String?
+    end
+
+    class CreateVehicleRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?attributes: Hash[String, String],
+        ?association_behavior: String,
+        ?tags: Array[Types::Tag],
+        ?state_templates: Array[Types::StateTemplateAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor association_behavior: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor state_templates: Array[Types::StateTemplateAssociation]?
+    end
+
+    class CreateVehicleResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+        ?thing_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+      attr_accessor thing_arn: String?
+    end
+
+    class CustomDecodingInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CustomDecodingSignal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CustomProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?data_type: String,
+        ?data_encoding: String,
+        ?description: String,
+        ?deprecation_message: String,
+        ?comment: String,
+        ?struct_fully_qualified_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor data_type: String?
+      attr_accessor data_encoding: String?
+      attr_accessor description: String?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+      attr_accessor struct_fully_qualified_name: String?
+    end
+
+    class CustomStruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?description: String,
+        ?deprecation_message: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor description: String?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+    end
+
+    class DataDestinationConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_config: Types::S3Config,
+        ?timestream_config: Types::TimestreamConfig,
+        ?mqtt_topic_config: Types::MqttTopicConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_config: Types::S3Config?
+      attr_accessor timestream_config: Types::TimestreamConfig?
+      attr_accessor mqtt_topic_config: Types::MqttTopicConfig?
+
+      class S3Config < DataDestinationConfig
+      end
+      class TimestreamConfig < DataDestinationConfig
+      end
+      class MqttTopicConfig < DataDestinationConfig
+      end
+      class Unknown < DataDestinationConfig
+      end
+    end
+
+    module DataFormat
+      JSON: String
+      PARQUET: String
+    end
+
+    class DataPartition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?storage_options: Types::DataPartitionStorageOptions,
+        ?upload_options: Types::DataPartitionUploadOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor storage_options: Types::DataPartitionStorageOptions?
+      attr_accessor upload_options: Types::DataPartitionUploadOptions?
+    end
+
+    class DataPartitionStorageOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_size: Types::StorageMaximumSize,
+        ?storage_location: String,
+        ?minimum_time_to_live: Types::StorageMinimumTimeToLive,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_size: Types::StorageMaximumSize?
+      attr_accessor storage_location: String?
+      attr_accessor minimum_time_to_live: Types::StorageMinimumTimeToLive?
+    end
+
+    class DataPartitionUploadOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?condition_language_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor condition_language_version: Integer?
+    end
+
+    class DecoderManifestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?model_manifest_arn: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor message: String?
+    end
+
+    class DecoderManifestValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_signals: Array[Types::InvalidSignalDecoder],
+        ?invalid_network_interfaces: Array[Types::InvalidNetworkInterface],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_signals: Array[Types::InvalidSignalDecoder]?
+      attr_accessor invalid_network_interfaces: Array[Types::InvalidNetworkInterface]?
+      attr_accessor message: String?
+    end
+
+    module DefaultForUnmappedSignalsType
+      CUSTOM_DECODING: String
+    end
+
+    class DeleteCampaignInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteCampaignOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteDecoderManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteDecoderManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class DeleteFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteModelManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteModelManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteSignalCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteSignalCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class DeleteStateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteStateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+    end
+
+    class DeleteVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+    end
+
+    module DiagnosticsMode
+      OFF: String
+      SEND_ACTIVE_DTCS: String
+    end
+
+    class DisassociateVehicleFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor fleet_id: String?
+    end
+
+    class DisassociateVehicleFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module EncryptionStatus
+      PENDING: String
+      SUCCESS: String
+      FAILURE: String
+    end
+
+    module EncryptionType
+      KMS_BASED_ENCRYPTION: String
+      FLEETWISE_DEFAULT_ENCRYPTION: String
+    end
+
+    class FleetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class FormattedVss
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vss_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vss_json: String?
+
+      class VssJson < FormattedVss
+      end
+      class Unknown < FormattedVss
+      end
+    end
+
+    class GetCampaignInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetCampaignOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?target_arn: String,
+        ?status: String,
+        ?start_time: Time,
+        ?expiry_time: Time,
+        ?post_trigger_collection_duration: Integer,
+        ?diagnostics_mode: String,
+        ?spooling_mode: String,
+        ?compression: String,
+        ?priority: Integer,
+        ?signals_to_collect: Array[Types::SignalInformation],
+        ?collection_scheme: Types::CollectionScheme,
+        ?data_extra_dimensions: Array[String],
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?data_destination_configs: Array[Types::DataDestinationConfig],
+        ?data_partitions: Array[Types::DataPartition],
+        ?signals_to_fetch: Array[Types::SignalFetchInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor expiry_time: Time?
+      attr_accessor post_trigger_collection_duration: Integer?
+      attr_accessor diagnostics_mode: String?
+      attr_accessor spooling_mode: String?
+      attr_accessor compression: String?
+      attr_accessor priority: Integer?
+      attr_accessor signals_to_collect: Array[Types::SignalInformation]?
+      attr_accessor collection_scheme: Types::CollectionScheme?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor data_destination_configs: Array[Types::DataDestinationConfig]?
+      attr_accessor data_partitions: Array[Types::DataPartition]?
+      attr_accessor signals_to_fetch: Array[Types::SignalFetchInformation]?
+    end
+
+    class GetDecoderManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetDecoderManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?model_manifest_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor message: String?
+    end
+
+    class GetEncryptionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetEncryptionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?encryption_status: String,
+        ?encryption_type: String,
+        ?error_message: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor encryption_status: String?
+      attr_accessor encryption_type: String?
+      attr_accessor error_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+    end
+
+    class GetFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetLoggingOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetLoggingOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions?
+    end
+
+    class GetModelManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetModelManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetRegisterAccountStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetRegisterAccountStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_account_id: String,
+        ?account_status: String,
+        ?timestream_registration_response: Types::TimestreamRegistrationResponse,
+        ?iam_registration_response: Types::IamRegistrationResponse,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_account_id: String?
+      attr_accessor account_status: String?
+      attr_accessor timestream_registration_response: Types::TimestreamRegistrationResponse?
+      attr_accessor iam_registration_response: Types::IamRegistrationResponse?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetSignalCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetSignalCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?node_counts: Types::NodeCounts,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor node_counts: Types::NodeCounts?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetStateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetStateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?signal_catalog_arn: String,
+        ?state_template_properties: Array[String],
+        ?data_extra_dimensions: Array[String],
+        ?metadata_extra_dimensions: Array[String],
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor state_template_properties: Array[String]?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor metadata_extra_dimensions: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor id: String?
+    end
+
+    class GetVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+    end
+
+    class GetVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?attributes: Hash[String, String],
+        ?state_templates: Array[Types::StateTemplateAssociation],
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor state_templates: Array[Types::StateTemplateAssociation]?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class GetVehicleStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?vehicle_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor vehicle_name: String?
+    end
+
+    class GetVehicleStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaigns: Array[Types::VehicleStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaigns: Array[Types::VehicleStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class IamRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?registration_status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor registration_status: String?
+      attr_accessor error_message: String?
+    end
+
+    class IamResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class ImportDecoderManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?network_file_definitions: Array[Types::NetworkFileDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor network_file_definitions: Array[Types::NetworkFileDefinition]?
+    end
+
+    class ImportDecoderManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class ImportSignalCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?vss: Types::FormattedVss,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor vss: Types::FormattedVss?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportSignalCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class InvalidNetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_id: String?
+      attr_accessor reason: String?
+    end
+
+    class InvalidNodeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_nodes: Array[Types::Node],
+        ?reason: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_nodes: Array[Types::Node]?
+      attr_accessor reason: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidSignal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor reason: String?
+    end
+
+    class InvalidSignalDecoder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?reason: String,
+        ?hint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor reason: String?
+      attr_accessor hint: String?
+    end
+
+    class InvalidSignalsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?invalid_signals: Array[Types::InvalidSignal],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor invalid_signals: Array[Types::InvalidSignal]?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListCampaignsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?status: String,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor status: String?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListCampaignsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_summaries: Array[Types::CampaignSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_summaries: Array[Types::CampaignSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDecoderManifestNetworkInterfacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDecoderManifestNetworkInterfacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDecoderManifestSignalsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDecoderManifestSignalsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signal_decoders: Array[Types::SignalDecoder],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signal_decoders: Array[Types::SignalDecoder]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDecoderManifestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_manifest_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_manifest_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListDecoderManifestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::DecoderManifestSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::DecoderManifestSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetsForVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFleetsForVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleets: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleets: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFleetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListFleetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_summaries: Array[Types::FleetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_summaries: Array[Types::FleetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListModelManifestNodesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListModelManifestNodesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodes: Array[Types::Node],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodes: Array[Types::Node]?
+      attr_accessor next_token: String?
+    end
+
+    class ListModelManifestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signal_catalog_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListModelManifestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::ModelManifestSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::ModelManifestSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListResponseScope
+      METADATA_ONLY: String
+    end
+
+    class ListSignalCatalogNodesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?signal_node_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor signal_node_type: String?
+    end
+
+    class ListSignalCatalogNodesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodes: Array[Types::Node],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodes: Array[Types::Node]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSignalCatalogsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSignalCatalogsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::SignalCatalogSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::SignalCatalogSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStateTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListStateTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summaries: Array[Types::StateTemplateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summaries: Array[Types::StateTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListVehiclesInFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVehiclesInFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicles: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicles: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVehiclesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_manifest_arn: String,
+        ?attribute_names: Array[String],
+        ?attribute_values: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?list_response_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_manifest_arn: String?
+      attr_accessor attribute_names: Array[String]?
+      attr_accessor attribute_values: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor list_response_scope: String?
+    end
+
+    class ListVehiclesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_summaries: Array[Types::VehicleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_summaries: Array[Types::VehicleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module LogType
+      OFF: String
+      ERROR: String
+    end
+
+    module ManifestStatus
+      ACTIVE: String
+      DRAFT: String
+      INVALID: String
+      VALIDATING: String
+    end
+
+    class MessageSignal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_name: String,
+        ?structured_message: Types::StructuredMessage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_name: String?
+      attr_accessor structured_message: Types::StructuredMessage?
+    end
+
+    class ModelManifestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?signal_catalog_arn: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class MqttTopicConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mqtt_topic_arn: String,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mqtt_topic_arn: String?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class NetworkFileDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?can_dbc: Types::CanDbcDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor can_dbc: Types::CanDbcDefinition?
+
+      class CanDbc < NetworkFileDefinition
+      end
+      class Unknown < NetworkFileDefinition
+      end
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interface_id: String,
+        ?type: String,
+        ?can_interface: Types::CanInterface,
+        ?obd_interface: Types::ObdInterface,
+        ?vehicle_middleware: Types::VehicleMiddleware,
+        ?custom_decoding_interface: Types::CustomDecodingInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interface_id: String?
+      attr_accessor type: String?
+      attr_accessor can_interface: Types::CanInterface?
+      attr_accessor obd_interface: Types::ObdInterface?
+      attr_accessor vehicle_middleware: Types::VehicleMiddleware?
+      attr_accessor custom_decoding_interface: Types::CustomDecodingInterface?
+    end
+
+    module NetworkInterfaceFailureReason
+      DUPLICATE_INTERFACE: String
+      CONFLICTING_NETWORK_INTERFACE: String
+      NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS: String
+      CAN_NETWORK_INTERFACE_INFO_IS_NULL: String
+      OBD_NETWORK_INTERFACE_INFO_IS_NULL: String
+      NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS: String
+      VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL: String
+      CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL: String
+    end
+
+    module NetworkInterfaceType
+      CAN_INTERFACE: String
+      OBD_INTERFACE: String
+      VEHICLE_MIDDLEWARE: String
+      CUSTOM_DECODING_INTERFACE: String
+    end
+
+    class Node
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?branch: Types::Branch,
+        ?sensor: Types::Sensor,
+        ?actuator: Types::Actuator,
+        ?attribute: Types::Attribute,
+        ?struct: Types::CustomStruct,
+        ?property: Types::CustomProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::Branch?
+      attr_accessor sensor: Types::Sensor?
+      attr_accessor actuator: Types::Actuator?
+      attr_accessor attribute: Types::Attribute?
+      attr_accessor struct: Types::CustomStruct?
+      attr_accessor property: Types::CustomProperty?
+
+      class Branch < Node
+      end
+      class Sensor < Node
+      end
+      class Actuator < Node
+      end
+      class Attribute < Node
+      end
+      class Struct < Node
+      end
+      class Property < Node
+      end
+      class Unknown < Node
+      end
+    end
+
+    class NodeCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_nodes: Integer,
+        ?total_branches: Integer,
+        ?total_sensors: Integer,
+        ?total_attributes: Integer,
+        ?total_actuators: Integer,
+        ?total_structs: Integer,
+        ?total_properties: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_nodes: Integer?
+      attr_accessor total_branches: Integer?
+      attr_accessor total_sensors: Integer?
+      attr_accessor total_attributes: Integer?
+      attr_accessor total_actuators: Integer?
+      attr_accessor total_structs: Integer?
+      attr_accessor total_properties: Integer?
+    end
+
+    module NodeDataEncoding
+      BINARY: String
+      TYPED: String
+    end
+
+    module NodeDataType
+      INT8: String
+      UINT8: String
+      INT16: String
+      UINT16: String
+      INT32: String
+      UINT32: String
+      INT64: String
+      UINT64: String
+      BOOLEAN: String
+      FLOAT: String
+      DOUBLE: String
+      STRING: String
+      UNIX_TIMESTAMP: String
+      INT8_ARRAY: String
+      UINT8_ARRAY: String
+      INT16_ARRAY: String
+      UINT16_ARRAY: String
+      INT32_ARRAY: String
+      UINT32_ARRAY: String
+      INT64_ARRAY: String
+      UINT64_ARRAY: String
+      BOOLEAN_ARRAY: String
+      FLOAT_ARRAY: String
+      DOUBLE_ARRAY: String
+      STRING_ARRAY: String
+      UNIX_TIMESTAMP_ARRAY: String
+      UNKNOWN: String
+      STRUCT: String
+      STRUCT_ARRAY: String
+    end
+
+    class ObdInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?request_message_id: Integer,
+        ?obd_standard: String,
+        ?pid_request_interval_seconds: Integer,
+        ?dtc_request_interval_seconds: Integer,
+        ?use_extended_ids: bool,
+        ?has_transmission_ecu: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor request_message_id: Integer?
+      attr_accessor obd_standard: String?
+      attr_accessor pid_request_interval_seconds: Integer?
+      attr_accessor dtc_request_interval_seconds: Integer?
+      attr_accessor use_extended_ids: bool?
+      attr_accessor has_transmission_ecu: bool?
+    end
+
+    class ObdSignal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pid_response_length: Integer,
+        ?service_mode: Integer,
+        ?pid: Integer,
+        ?scaling: Float,
+        ?offset: Float,
+        ?start_byte: Integer,
+        ?byte_length: Integer,
+        ?bit_right_shift: Integer,
+        ?bit_mask_length: Integer,
+        ?is_signed: bool,
+        ?signal_value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pid_response_length: Integer?
+      attr_accessor service_mode: Integer?
+      attr_accessor pid: Integer?
+      attr_accessor scaling: Float?
+      attr_accessor offset: Float?
+      attr_accessor start_byte: Integer?
+      attr_accessor byte_length: Integer?
+      attr_accessor bit_right_shift: Integer?
+      attr_accessor bit_mask_length: Integer?
+      attr_accessor is_signed: bool?
+      attr_accessor signal_value_type: String?
+    end
+
+    class OnChangeStateTemplateUpdateStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PeriodicStateTemplateUpdateStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_template_update_rate: Types::TimePeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_template_update_rate: Types::TimePeriod?
+    end
+
+    class PrimitiveMessageDefinition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ros2_primitive_message_definition: Types::ROS2PrimitiveMessageDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ros2_primitive_message_definition: Types::ROS2PrimitiveMessageDefinition?
+
+      class Ros2PrimitiveMessageDefinition < PrimitiveMessageDefinition
+      end
+      class Unknown < PrimitiveMessageDefinition
+      end
+    end
+
+    class PutEncryptionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?encryption_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor encryption_type: String?
+    end
+
+    class PutEncryptionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?encryption_status: String,
+        ?encryption_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor encryption_status: String?
+      attr_accessor encryption_type: String?
+    end
+
+    class PutLoggingOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions?
+    end
+
+    class PutLoggingOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ROS2PrimitiveMessageDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primitive_type: String,
+        ?offset: Float,
+        ?scaling: Float,
+        ?upper_bound: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primitive_type: String?
+      attr_accessor offset: Float?
+      attr_accessor scaling: Float?
+      attr_accessor upper_bound: Integer?
+    end
+
+    module ROS2PrimitiveType
+      BOOL: String
+      BYTE: String
+      CHAR: String
+      FLOAT32: String
+      FLOAT64: String
+      INT8: String
+      UINT8: String
+      INT16: String
+      UINT16: String
+      INT32: String
+      UINT32: String
+      INT64: String
+      UINT64: String
+      STRING: String
+      WSTRING: String
+    end
+
+    class RegisterAccountInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_resources: Types::TimestreamResources,
+        ?iam_resources: Types::IamResources,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_resources: Types::TimestreamResources?
+      attr_accessor iam_resources: Types::IamResources?
+    end
+
+    class RegisterAccountOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?register_account_status: String,
+        ?timestream_resources: Types::TimestreamResources,
+        ?iam_resources: Types::IamResources,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor register_account_status: String?
+      attr_accessor timestream_resources: Types::TimestreamResources?
+      attr_accessor iam_resources: Types::IamResources?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    module RegistrationStatus
+      REGISTRATION_PENDING: String
+      REGISTRATION_SUCCESS: String
+      REGISTRATION_FAILURE: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class S3Config
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?data_format: String,
+        ?storage_compression_format: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor data_format: String?
+      attr_accessor storage_compression_format: String?
+      attr_accessor prefix: String?
+    end
+
+    class Sensor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?data_type: String,
+        ?description: String,
+        ?unit: String,
+        ?allowed_values: Array[String],
+        ?min: Float,
+        ?max: Float,
+        ?deprecation_message: String,
+        ?comment: String,
+        ?struct_fully_qualified_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor data_type: String?
+      attr_accessor description: String?
+      attr_accessor unit: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+      attr_accessor deprecation_message: String?
+      attr_accessor comment: String?
+      attr_accessor struct_fully_qualified_name: String?
+    end
+
+    class SignalCatalogSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+    end
+
+    class SignalDecoder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?type: String,
+        ?interface_id: String,
+        ?can_signal: Types::CanSignal,
+        ?obd_signal: Types::ObdSignal,
+        ?message_signal: Types::MessageSignal,
+        ?custom_decoding_signal: Types::CustomDecodingSignal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor type: String?
+      attr_accessor interface_id: String?
+      attr_accessor can_signal: Types::CanSignal?
+      attr_accessor obd_signal: Types::ObdSignal?
+      attr_accessor message_signal: Types::MessageSignal?
+      attr_accessor custom_decoding_signal: Types::CustomDecodingSignal?
+    end
+
+    module SignalDecoderFailureReason
+      DUPLICATE_SIGNAL: String
+      CONFLICTING_SIGNAL: String
+      SIGNAL_TO_ADD_ALREADY_EXISTS: String
+      SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE: String
+      NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE: String
+      SIGNAL_NOT_IN_MODEL: String
+      CAN_SIGNAL_INFO_IS_NULL: String
+      OBD_SIGNAL_INFO_IS_NULL: String
+      NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL: String
+      MESSAGE_SIGNAL_INFO_IS_NULL: String
+      SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE: String
+      STRUCT_SIZE_MISMATCH: String
+      NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL: String
+      SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG: String
+      EMPTY_MESSAGE_SIGNAL: String
+      CUSTOM_DECODING_SIGNAL_INFO_IS_NULL: String
+    end
+
+    module SignalDecoderType
+      CAN_SIGNAL: String
+      OBD_SIGNAL: String
+      MESSAGE_SIGNAL: String
+      CUSTOM_DECODING_SIGNAL: String
+    end
+
+    class SignalFetchConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?time_based: Types::TimeBasedSignalFetchConfig,
+        ?condition_based: Types::ConditionBasedSignalFetchConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_based: Types::TimeBasedSignalFetchConfig?
+      attr_accessor condition_based: Types::ConditionBasedSignalFetchConfig?
+
+      class TimeBased < SignalFetchConfig
+      end
+      class ConditionBased < SignalFetchConfig
+      end
+      class Unknown < SignalFetchConfig
+      end
+    end
+
+    class SignalFetchInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fully_qualified_name: String,
+        ?signal_fetch_config: Types::SignalFetchConfig,
+        ?condition_language_version: Integer,
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fully_qualified_name: String?
+      attr_accessor signal_fetch_config: Types::SignalFetchConfig?
+      attr_accessor condition_language_version: Integer?
+      attr_accessor actions: Array[String]?
+    end
+
+    class SignalInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_sample_count: Integer,
+        ?minimum_sampling_interval_ms: Integer,
+        ?data_partition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_sample_count: Integer?
+      attr_accessor minimum_sampling_interval_ms: Integer?
+      attr_accessor data_partition_id: String?
+    end
+
+    module SignalNodeType
+      SENSOR: String
+      ACTUATOR: String
+      ATTRIBUTE: String
+      BRANCH: String
+      CUSTOM_STRUCT: String
+      CUSTOM_PROPERTY: String
+    end
+
+    module SignalValueType
+      INTEGER: String
+      FLOATING_POINT: String
+    end
+
+    module SpoolingMode
+      OFF: String
+      TO_DISK: String
+    end
+
+    class StateTemplateAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?state_template_update_strategy: Types::StateTemplateUpdateStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor state_template_update_strategy: Types::StateTemplateUpdateStrategy?
+    end
+
+    class StateTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?signal_catalog_arn: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor signal_catalog_arn: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor id: String?
+    end
+
+    class StateTemplateUpdateStrategy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?periodic: Types::PeriodicStateTemplateUpdateStrategy,
+        ?on_change: Types::OnChangeStateTemplateUpdateStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor periodic: Types::PeriodicStateTemplateUpdateStrategy?
+      attr_accessor on_change: Types::OnChangeStateTemplateUpdateStrategy?
+
+      class Periodic < StateTemplateUpdateStrategy
+      end
+      class OnChange < StateTemplateUpdateStrategy
+      end
+      class Unknown < StateTemplateUpdateStrategy
+      end
+    end
+
+    module StorageCompressionFormat
+      NONE: String
+      GZIP: String
+    end
+
+    class StorageMaximumSize
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Integer?
+    end
+
+    module StorageMaximumSizeUnit
+      MB: String
+      GB: String
+      TB: String
+    end
+
+    class StorageMinimumTimeToLive
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Integer?
+    end
+
+    module StorageMinimumTimeToLiveUnit
+      HOURS: String
+      DAYS: String
+      WEEKS: String
+    end
+
+    class StructuredMessage
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?primitive_message_definition: Types::PrimitiveMessageDefinition,
+        ?structured_message_list_definition: Types::StructuredMessageListDefinition,
+        ?structured_message_definition: Array[Types::StructuredMessageFieldNameAndDataTypePair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primitive_message_definition: Types::PrimitiveMessageDefinition?
+      attr_accessor structured_message_list_definition: Types::StructuredMessageListDefinition?
+      attr_accessor structured_message_definition: Array[Types::StructuredMessageFieldNameAndDataTypePair]?
+
+      class PrimitiveMessageDefinition < StructuredMessage
+      end
+      class StructuredMessageListDefinition < StructuredMessage
+      end
+      class StructuredMessageDefinition < StructuredMessage
+      end
+      class Unknown < StructuredMessage
+      end
+    end
+
+    class StructuredMessageFieldNameAndDataTypePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?data_type: Types::StructuredMessage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor data_type: Types::StructuredMessage?
+    end
+
+    class StructuredMessageListDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?member_type: Types::StructuredMessage,
+        ?list_type: String,
+        ?capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor member_type: Types::StructuredMessage?
+      attr_accessor list_type: String?
+      attr_accessor capacity: Integer?
+    end
+
+    module StructuredMessageListType
+      FIXED_CAPACITY: String
+      DYNAMIC_UNBOUNDED_CAPACITY: String
+      DYNAMIC_BOUNDED_CAPACITY: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TimeBasedCollectionScheme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?period_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor period_ms: Integer?
+    end
+
+    class TimeBasedSignalFetchConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_frequency_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_frequency_ms: Integer?
+    end
+
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Integer?
+    end
+
+    module TimeUnit
+      MILLISECOND: String
+      SECOND: String
+      MINUTE: String
+      HOUR: String
+    end
+
+    class TimestreamConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_table_arn: String,
+        ?execution_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_table_arn: String?
+      attr_accessor execution_role_arn: String?
+    end
+
+    class TimestreamRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_database_name: String,
+        ?timestream_table_name: String,
+        ?timestream_database_arn: String,
+        ?timestream_table_arn: String,
+        ?registration_status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_database_name: String?
+      attr_accessor timestream_table_name: String?
+      attr_accessor timestream_database_arn: String?
+      attr_accessor timestream_table_arn: String?
+      attr_accessor registration_status: String?
+      attr_accessor error_message: String?
+    end
+
+    class TimestreamResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestream_database_name: String,
+        ?timestream_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestream_database_name: String?
+      attr_accessor timestream_table_name: String?
+    end
+
+    module TriggerMode
+      ALWAYS: String
+      RISING_EDGE: String
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateCampaignAction
+      APPROVE: String
+      SUSPEND: String
+      RESUME: String
+      UPDATE: String
+    end
+
+    class UpdateCampaignInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?data_extra_dimensions: Array[String],
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor action: String?
+    end
+
+    class UpdateCampaignOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateDecoderManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?signal_decoders_to_add: Array[Types::SignalDecoder],
+        ?signal_decoders_to_update: Array[Types::SignalDecoder],
+        ?signal_decoders_to_remove: Array[String],
+        ?network_interfaces_to_add: Array[Types::NetworkInterface],
+        ?network_interfaces_to_update: Array[Types::NetworkInterface],
+        ?network_interfaces_to_remove: Array[String],
+        ?status: String,
+        ?default_for_unmapped_signals: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor signal_decoders_to_add: Array[Types::SignalDecoder]?
+      attr_accessor signal_decoders_to_update: Array[Types::SignalDecoder]?
+      attr_accessor signal_decoders_to_remove: Array[String]?
+      attr_accessor network_interfaces_to_add: Array[Types::NetworkInterface]?
+      attr_accessor network_interfaces_to_update: Array[Types::NetworkInterface]?
+      attr_accessor network_interfaces_to_remove: Array[String]?
+      attr_accessor status: String?
+      attr_accessor default_for_unmapped_signals: String?
+    end
+
+    class UpdateDecoderManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class UpdateFleetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateFleetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    module UpdateMode
+      OVERWRITE: String
+      MERGE: String
+    end
+
+    class UpdateModelManifestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?nodes_to_add: Array[String],
+        ?nodes_to_remove: Array[String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor nodes_to_add: Array[String]?
+      attr_accessor nodes_to_remove: Array[String]?
+      attr_accessor status: String?
+    end
+
+    class UpdateModelManifestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class UpdateSignalCatalogInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?nodes_to_add: Array[Types::Node],
+        ?nodes_to_update: Array[Types::Node],
+        ?nodes_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor nodes_to_add: Array[Types::Node]?
+      attr_accessor nodes_to_update: Array[Types::Node]?
+      attr_accessor nodes_to_remove: Array[String]?
+    end
+
+    class UpdateSignalCatalogOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class UpdateStateTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?state_template_properties_to_add: Array[String],
+        ?state_template_properties_to_remove: Array[String],
+        ?data_extra_dimensions: Array[String],
+        ?metadata_extra_dimensions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor state_template_properties_to_add: Array[String]?
+      attr_accessor state_template_properties_to_remove: Array[String]?
+      attr_accessor data_extra_dimensions: Array[String]?
+      attr_accessor metadata_extra_dimensions: Array[String]?
+    end
+
+    class UpdateStateTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class UpdateVehicleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class UpdateVehicleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?attributes: Hash[String, String],
+        ?attribute_update_mode: String,
+        ?state_templates_to_add: Array[Types::StateTemplateAssociation],
+        ?state_templates_to_remove: Array[String],
+        ?state_templates_to_update: Array[Types::StateTemplateAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor attribute_update_mode: String?
+      attr_accessor state_templates_to_add: Array[Types::StateTemplateAssociation]?
+      attr_accessor state_templates_to_remove: Array[String]?
+      attr_accessor state_templates_to_update: Array[Types::StateTemplateAssociation]?
+    end
+
+    class UpdateVehicleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+    end
+
+    class UpdateVehicleRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?attributes: Hash[String, String],
+        ?attribute_update_mode: String,
+        ?state_templates_to_add: Array[Types::StateTemplateAssociation],
+        ?state_templates_to_remove: Array[String],
+        ?state_templates_to_update: Array[Types::StateTemplateAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor attribute_update_mode: String?
+      attr_accessor state_templates_to_add: Array[Types::StateTemplateAssociation]?
+      attr_accessor state_templates_to_remove: Array[String]?
+      attr_accessor state_templates_to_update: Array[Types::StateTemplateAssociation]?
+    end
+
+    class UpdateVehicleResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    module VehicleAssociationBehavior
+      CREATE_IOT_THING: String
+      VALIDATE_IOT_THING_EXISTS: String
+    end
+
+    class VehicleMiddleware
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?protocol_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor protocol_name: String?
+    end
+
+    module VehicleMiddlewareProtocol
+      ROS_2: String
+    end
+
+    module VehicleState
+      CREATED: String
+      READY: String
+      HEALTHY: String
+      SUSPENDED: String
+      DELETING: String
+      READY_FOR_CHECKIN: String
+    end
+
+    class VehicleStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_name: String,
+        ?vehicle_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_name: String?
+      attr_accessor vehicle_name: String?
+      attr_accessor status: String?
+    end
+
+    class VehicleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vehicle_name: String,
+        ?arn: String,
+        ?model_manifest_arn: String,
+        ?decoder_manifest_arn: String,
+        ?creation_time: Time,
+        ?last_modification_time: Time,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vehicle_name: String?
+      attr_accessor arn: String?
+      attr_accessor model_manifest_arn: String?
+      attr_accessor decoder_manifest_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modification_time: Time?
+      attr_accessor attributes: Hash[String, String]?
+    end
+  end
+end

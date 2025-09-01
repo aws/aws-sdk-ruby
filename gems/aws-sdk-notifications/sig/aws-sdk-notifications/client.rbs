@@ -1,0 +1,411 @@
+module Aws::Notifications
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Notifications::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateChannelResponse
+      include Smithy::Client::_Response[Types::AssociateChannelResponse]
+    end
+    def associate_channel: (
+      ?arn: String,
+      ?notification_configuration_arn: String
+    ) -> _AssociateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateChannelResponse
+
+    interface _AssociateManagedNotificationAccountContactResponse
+      include Smithy::Client::_Response[Types::AssociateManagedNotificationAccountContactResponse]
+    end
+    def associate_managed_notification_account_contact: (
+      ?contact_identifier: String,
+      ?managed_notification_configuration_arn: String
+    ) -> _AssociateManagedNotificationAccountContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateManagedNotificationAccountContactResponse
+
+    interface _AssociateManagedNotificationAdditionalChannelResponse
+      include Smithy::Client::_Response[Types::AssociateManagedNotificationAdditionalChannelResponse]
+    end
+    def associate_managed_notification_additional_channel: (
+      ?channel_arn: String,
+      ?managed_notification_configuration_arn: String
+    ) -> _AssociateManagedNotificationAdditionalChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateManagedNotificationAdditionalChannelResponse
+
+    interface _CreateEventRuleResponse
+      include Smithy::Client::_Response[Types::CreateEventRuleResponse]
+      def arn: () -> String?
+      def notification_configuration_arn: () -> String?
+      def status_summary_by_region: () -> Hash[String, Types::EventRuleStatusSummary]?
+    end
+    def create_event_rule: (
+      ?notification_configuration_arn: String,
+      ?source: String,
+      ?event_type: String,
+      ?event_pattern: String,
+      ?regions: Array[String]
+    ) -> _CreateEventRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventRuleResponse
+
+    interface _CreateNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateNotificationConfigurationResponse]
+      def arn: () -> String?
+      def status: () -> String?
+    end
+    def create_notification_configuration: (
+      ?name: String,
+      ?description: String,
+      ?aggregation_duration: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotificationConfigurationResponse
+
+    interface _DeleteEventRuleResponse
+      include Smithy::Client::_Response[Types::DeleteEventRuleResponse]
+    end
+    def delete_event_rule: (
+      ?arn: String
+    ) -> _DeleteEventRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventRuleResponse
+
+    interface _DeleteNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteNotificationConfigurationResponse]
+    end
+    def delete_notification_configuration: (
+      ?arn: String
+    ) -> _DeleteNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationConfigurationResponse
+
+    interface _DeregisterNotificationHubResponse
+      include Smithy::Client::_Response[Types::DeregisterNotificationHubResponse]
+      def notification_hub_region: () -> String?
+      def status_summary: () -> Types::NotificationHubStatusSummary?
+    end
+    def deregister_notification_hub: (
+      ?notification_hub_region: String
+    ) -> _DeregisterNotificationHubResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterNotificationHubResponse
+
+    interface _DisableNotificationsAccessForOrganizationResponse
+      include Smithy::Client::_Response[Types::DisableNotificationsAccessForOrganizationResponse]
+    end
+    def disable_notifications_access_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableNotificationsAccessForOrganizationResponse
+
+    interface _DisassociateChannelResponse
+      include Smithy::Client::_Response[Types::DisassociateChannelResponse]
+    end
+    def disassociate_channel: (
+      ?arn: String,
+      ?notification_configuration_arn: String
+    ) -> _DisassociateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateChannelResponse
+
+    interface _DisassociateManagedNotificationAccountContactResponse
+      include Smithy::Client::_Response[Types::DisassociateManagedNotificationAccountContactResponse]
+    end
+    def disassociate_managed_notification_account_contact: (
+      ?contact_identifier: String,
+      ?managed_notification_configuration_arn: String
+    ) -> _DisassociateManagedNotificationAccountContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateManagedNotificationAccountContactResponse
+
+    interface _DisassociateManagedNotificationAdditionalChannelResponse
+      include Smithy::Client::_Response[Types::DisassociateManagedNotificationAdditionalChannelResponse]
+    end
+    def disassociate_managed_notification_additional_channel: (
+      ?channel_arn: String,
+      ?managed_notification_configuration_arn: String
+    ) -> _DisassociateManagedNotificationAdditionalChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateManagedNotificationAdditionalChannelResponse
+
+    interface _EnableNotificationsAccessForOrganizationResponse
+      include Smithy::Client::_Response[Types::EnableNotificationsAccessForOrganizationResponse]
+    end
+    def enable_notifications_access_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableNotificationsAccessForOrganizationResponse
+
+    interface _GetEventRuleResponse
+      include Smithy::Client::_Response[Types::GetEventRuleResponse]
+      def arn: () -> String?
+      def notification_configuration_arn: () -> String?
+      def creation_time: () -> Time?
+      def source: () -> String?
+      def event_type: () -> String?
+      def event_pattern: () -> String?
+      def regions: () -> Array[String]?
+      def managed_rules: () -> Array[String]?
+      def status_summary_by_region: () -> Hash[String, Types::EventRuleStatusSummary]?
+    end
+    def get_event_rule: (
+      ?arn: String
+    ) -> _GetEventRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventRuleResponse
+
+    interface _GetManagedNotificationChildEventResponse
+      include Smithy::Client::_Response[Types::GetManagedNotificationChildEventResponse]
+      def arn: () -> String?
+      def managed_notification_configuration_arn: () -> String?
+      def creation_time: () -> Time?
+      def content: () -> Types::ManagedNotificationChildEvent?
+    end
+    def get_managed_notification_child_event: (
+      ?arn: String,
+      ?locale: String
+    ) -> _GetManagedNotificationChildEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedNotificationChildEventResponse
+
+    interface _GetManagedNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetManagedNotificationConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def category: () -> String?
+      def sub_category: () -> String?
+    end
+    def get_managed_notification_configuration: (
+      ?arn: String
+    ) -> _GetManagedNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedNotificationConfigurationResponse
+
+    interface _GetManagedNotificationEventResponse
+      include Smithy::Client::_Response[Types::GetManagedNotificationEventResponse]
+      def arn: () -> String?
+      def managed_notification_configuration_arn: () -> String?
+      def creation_time: () -> Time?
+      def content: () -> Types::ManagedNotificationEvent?
+    end
+    def get_managed_notification_event: (
+      ?arn: String,
+      ?locale: String
+    ) -> _GetManagedNotificationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedNotificationEventResponse
+
+    interface _GetNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetNotificationConfigurationResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def aggregation_duration: () -> String?
+    end
+    def get_notification_configuration: (
+      ?arn: String
+    ) -> _GetNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationConfigurationResponse
+
+    interface _GetNotificationEventResponse
+      include Smithy::Client::_Response[Types::GetNotificationEventResponse]
+      def arn: () -> String?
+      def notification_configuration_arn: () -> String?
+      def creation_time: () -> Time?
+      def content: () -> Types::NotificationEventSchema?
+    end
+    def get_notification_event: (
+      ?arn: String,
+      ?locale: String
+    ) -> _GetNotificationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationEventResponse
+
+    interface _GetNotificationsAccessForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetNotificationsAccessForOrganizationResponse]
+      def notifications_access_for_organization: () -> Types::NotificationsAccessForOrganization?
+    end
+    def get_notifications_access_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationsAccessForOrganizationResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def next_token: () -> String?
+      def channels: () -> Array[String]?
+    end
+    def list_channels: (
+      ?notification_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListEventRulesResponse
+      include Smithy::Client::_Response[Types::ListEventRulesResponse]
+      def next_token: () -> String?
+      def event_rules: () -> Array[Types::EventRuleStructure]?
+    end
+    def list_event_rules: (
+      ?notification_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEventRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventRulesResponse
+
+    interface _ListManagedNotificationChannelAssociationsResponse
+      include Smithy::Client::_Response[Types::ListManagedNotificationChannelAssociationsResponse]
+      def next_token: () -> String?
+      def channel_associations: () -> Array[Types::ManagedNotificationChannelAssociationSummary]?
+    end
+    def list_managed_notification_channel_associations: (
+      ?managed_notification_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListManagedNotificationChannelAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationChannelAssociationsResponse
+
+    interface _ListManagedNotificationChildEventsResponse
+      include Smithy::Client::_Response[Types::ListManagedNotificationChildEventsResponse]
+      def next_token: () -> String?
+      def managed_notification_child_events: () -> Array[Types::ManagedNotificationChildEventOverview]?
+    end
+    def list_managed_notification_child_events: (
+      ?aggregate_managed_notification_event_arn: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?locale: String,
+      ?max_results: Integer,
+      ?related_account: String,
+      ?organizational_unit_id: String,
+      ?next_token: String
+    ) -> _ListManagedNotificationChildEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationChildEventsResponse
+
+    interface _ListManagedNotificationConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListManagedNotificationConfigurationsResponse]
+      def next_token: () -> String?
+      def managed_notification_configurations: () -> Array[Types::ManagedNotificationConfigurationStructure]?
+    end
+    def list_managed_notification_configurations: (
+      ?channel_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListManagedNotificationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationConfigurationsResponse
+
+    interface _ListManagedNotificationEventsResponse
+      include Smithy::Client::_Response[Types::ListManagedNotificationEventsResponse]
+      def next_token: () -> String?
+      def managed_notification_events: () -> Array[Types::ManagedNotificationEventOverview]?
+    end
+    def list_managed_notification_events: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?locale: String,
+      ?source: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?organizational_unit_id: String,
+      ?related_account: String
+    ) -> _ListManagedNotificationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationEventsResponse
+
+    interface _ListNotificationConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationConfigurationsResponse]
+      def next_token: () -> String?
+      def notification_configurations: () -> Array[Types::NotificationConfigurationStructure]?
+    end
+    def list_notification_configurations: (
+      ?event_rule_source: String,
+      ?channel_arn: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotificationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationConfigurationsResponse
+
+    interface _ListNotificationEventsResponse
+      include Smithy::Client::_Response[Types::ListNotificationEventsResponse]
+      def next_token: () -> String?
+      def notification_events: () -> Array[Types::NotificationEventOverview]?
+    end
+    def list_notification_events: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?locale: String,
+      ?source: String,
+      ?include_child_events: bool,
+      ?aggregate_notification_event_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotificationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationEventsResponse
+
+    interface _ListNotificationHubsResponse
+      include Smithy::Client::_Response[Types::ListNotificationHubsResponse]
+      def notification_hubs: () -> Array[Types::NotificationHubOverview]?
+      def next_token: () -> String?
+    end
+    def list_notification_hubs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotificationHubsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationHubsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterNotificationHubResponse
+      include Smithy::Client::_Response[Types::RegisterNotificationHubResponse]
+      def notification_hub_region: () -> String?
+      def status_summary: () -> Types::NotificationHubStatusSummary?
+      def creation_time: () -> Time?
+      def last_activation_time: () -> Time?
+    end
+    def register_notification_hub: (
+      ?notification_hub_region: String
+    ) -> _RegisterNotificationHubResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterNotificationHubResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEventRuleResponse
+      include Smithy::Client::_Response[Types::UpdateEventRuleResponse]
+      def arn: () -> String?
+      def notification_configuration_arn: () -> String?
+      def status_summary_by_region: () -> Hash[String, Types::EventRuleStatusSummary]?
+    end
+    def update_event_rule: (
+      ?arn: String,
+      ?event_pattern: String,
+      ?regions: Array[String]
+    ) -> _UpdateEventRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventRuleResponse
+
+    interface _UpdateNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationConfigurationResponse]
+      def arn: () -> String?
+    end
+    def update_notification_configuration: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?aggregation_duration: String
+    ) -> _UpdateNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationConfigurationResponse
+  end
+end

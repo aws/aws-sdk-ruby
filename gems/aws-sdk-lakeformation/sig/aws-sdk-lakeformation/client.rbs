@@ -1,0 +1,1462 @@
+module Aws::LakeFormation
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LakeFormation::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddLFTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddLFTagsToResourceResponse]
+      def failures: () -> Array[Types::LFTagError]?
+    end
+    def add_lf_tags_to_resource: (
+      ?catalog_id: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?lf_tags: Array[
+        {
+          catalog_id: String,
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _AddLFTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddLFTagsToResourceResponse
+
+    interface _AssumeDecoratedRoleWithSAMLResponse
+      include Smithy::Client::_Response[Types::AssumeDecoratedRoleWithSAMLResponse]
+      def access_key_id: () -> String?
+      def secret_access_key: () -> String?
+      def session_token: () -> String?
+      def expiration: () -> Time?
+    end
+    def assume_decorated_role_with_saml: (
+      ?saml_assertion: String,
+      ?role_arn: String,
+      ?principal_arn: String,
+      ?duration_seconds: Integer
+    ) -> _AssumeDecoratedRoleWithSAMLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeDecoratedRoleWithSAMLResponse
+
+    interface _BatchGrantPermissionsResponse
+      include Smithy::Client::_Response[Types::BatchGrantPermissionsResponse]
+      def failures: () -> Array[Types::BatchPermissionsFailureEntry]?
+    end
+    def batch_grant_permissions: (
+      ?catalog_id: String,
+      ?entries: Array[
+        {
+          id: String,
+          principal: {
+            data_lake_principal_identifier: String
+          },
+          resource: {
+            catalog: {
+              id: String
+            },
+            database: {
+              catalog_id: untyped,
+              name: String
+            },
+            table: {
+              catalog_id: untyped,
+              database_name: untyped,
+              name: untyped,
+              table_wildcard: {
+              }
+            },
+            table_with_columns: {
+              catalog_id: untyped,
+              database_name: untyped,
+              name: untyped,
+              column_names: Array[String],
+              column_wildcard: {
+                excluded_column_names: untyped
+              }
+            },
+            data_location: {
+              catalog_id: untyped,
+              resource_arn: String
+            },
+            data_cells_filter: {
+              table_catalog_id: untyped,
+              database_name: untyped,
+              table_name: untyped,
+              name: untyped
+            },
+            lf_tag: {
+              catalog_id: untyped,
+              tag_key: untyped,
+              tag_values: Array[String]
+            },
+            lf_tag_policy: {
+              catalog_id: untyped,
+              resource_type: String,
+              expression: Array[
+                {
+                  tag_key: String,
+                  tag_values: untyped
+                }
+              ],
+              expression_name: untyped
+            },
+            lf_tag_expression: {
+              catalog_id: untyped,
+              name: untyped
+            }
+          },
+          permissions: Array[String],
+          condition: {
+            expression: String
+          },
+          permissions_with_grant_option: untyped
+        }
+      ]
+    ) -> _BatchGrantPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGrantPermissionsResponse
+
+    interface _BatchRevokePermissionsResponse
+      include Smithy::Client::_Response[Types::BatchRevokePermissionsResponse]
+      def failures: () -> Array[Types::BatchPermissionsFailureEntry]?
+    end
+    def batch_revoke_permissions: (
+      ?catalog_id: String,
+      ?entries: Array[
+        {
+          id: String,
+          principal: {
+            data_lake_principal_identifier: String
+          },
+          resource: {
+            catalog: {
+              id: String
+            },
+            database: {
+              catalog_id: untyped,
+              name: String
+            },
+            table: {
+              catalog_id: untyped,
+              database_name: untyped,
+              name: untyped,
+              table_wildcard: {
+              }
+            },
+            table_with_columns: {
+              catalog_id: untyped,
+              database_name: untyped,
+              name: untyped,
+              column_names: Array[String],
+              column_wildcard: {
+                excluded_column_names: untyped
+              }
+            },
+            data_location: {
+              catalog_id: untyped,
+              resource_arn: String
+            },
+            data_cells_filter: {
+              table_catalog_id: untyped,
+              database_name: untyped,
+              table_name: untyped,
+              name: untyped
+            },
+            lf_tag: {
+              catalog_id: untyped,
+              tag_key: untyped,
+              tag_values: Array[String]
+            },
+            lf_tag_policy: {
+              catalog_id: untyped,
+              resource_type: String,
+              expression: Array[
+                {
+                  tag_key: String,
+                  tag_values: untyped
+                }
+              ],
+              expression_name: untyped
+            },
+            lf_tag_expression: {
+              catalog_id: untyped,
+              name: untyped
+            }
+          },
+          permissions: Array[String],
+          condition: {
+            expression: String
+          },
+          permissions_with_grant_option: untyped
+        }
+      ]
+    ) -> _BatchRevokePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchRevokePermissionsResponse
+
+    interface _CancelTransactionResponse
+      include Smithy::Client::_Response[Types::CancelTransactionResponse]
+    end
+    def cancel_transaction: (
+      ?transaction_id: String
+    ) -> _CancelTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTransactionResponse
+
+    interface _CommitTransactionResponse
+      include Smithy::Client::_Response[Types::CommitTransactionResponse]
+      def transaction_status: () -> String?
+    end
+    def commit_transaction: (
+      ?transaction_id: String
+    ) -> _CommitTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CommitTransactionResponse
+
+    interface _CreateDataCellsFilterResponse
+      include Smithy::Client::_Response[Types::CreateDataCellsFilterResponse]
+    end
+    def create_data_cells_filter: (
+      ?table_data: {
+        table_catalog_id: String,
+        database_name: String,
+        table_name: untyped,
+        name: untyped,
+        row_filter: {
+          filter_expression: String,
+          all_rows_wildcard: {
+          }
+        },
+        column_names: Array[String],
+        column_wildcard: {
+          excluded_column_names: untyped
+        },
+        version_id: String
+      }
+    ) -> _CreateDataCellsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataCellsFilterResponse
+
+    interface _CreateLFTagResponse
+      include Smithy::Client::_Response[Types::CreateLFTagResponse]
+    end
+    def create_lf_tag: (
+      ?catalog_id: String,
+      ?tag_key: String,
+      ?tag_values: Array[String]
+    ) -> _CreateLFTagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLFTagResponse
+
+    interface _CreateLFTagExpressionResponse
+      include Smithy::Client::_Response[Types::CreateLFTagExpressionResponse]
+    end
+    def create_lf_tag_expression: (
+      ?name: String,
+      ?description: String,
+      ?catalog_id: String,
+      ?expression: Array[
+        {
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _CreateLFTagExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLFTagExpressionResponse
+
+    interface _CreateLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateLakeFormationIdentityCenterConfigurationResponse]
+      def application_arn: () -> String?
+    end
+    def create_lake_formation_identity_center_configuration: (
+      ?catalog_id: String,
+      ?instance_arn: String,
+      ?external_filtering: {
+        status: String,
+        authorized_targets: Array[String]
+      },
+      ?share_recipients: Array[
+        {
+          data_lake_principal_identifier: String
+        }
+      ]
+    ) -> _CreateLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLakeFormationIdentityCenterConfigurationResponse
+
+    interface _CreateLakeFormationOptInResponse
+      include Smithy::Client::_Response[Types::CreateLakeFormationOptInResponse]
+    end
+    def create_lake_formation_opt_in: (
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?condition: {
+        expression: String
+      }
+    ) -> _CreateLakeFormationOptInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLakeFormationOptInResponse
+
+    interface _DeleteDataCellsFilterResponse
+      include Smithy::Client::_Response[Types::DeleteDataCellsFilterResponse]
+    end
+    def delete_data_cells_filter: (
+      ?table_catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?name: String
+    ) -> _DeleteDataCellsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataCellsFilterResponse
+
+    interface _DeleteLFTagResponse
+      include Smithy::Client::_Response[Types::DeleteLFTagResponse]
+    end
+    def delete_lf_tag: (
+      ?catalog_id: String,
+      ?tag_key: String
+    ) -> _DeleteLFTagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLFTagResponse
+
+    interface _DeleteLFTagExpressionResponse
+      include Smithy::Client::_Response[Types::DeleteLFTagExpressionResponse]
+    end
+    def delete_lf_tag_expression: (
+      ?name: String,
+      ?catalog_id: String
+    ) -> _DeleteLFTagExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLFTagExpressionResponse
+
+    interface _DeleteLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteLakeFormationIdentityCenterConfigurationResponse]
+    end
+    def delete_lake_formation_identity_center_configuration: (
+      ?catalog_id: String
+    ) -> _DeleteLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLakeFormationIdentityCenterConfigurationResponse
+
+    interface _DeleteLakeFormationOptInResponse
+      include Smithy::Client::_Response[Types::DeleteLakeFormationOptInResponse]
+    end
+    def delete_lake_formation_opt_in: (
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?condition: {
+        expression: String
+      }
+    ) -> _DeleteLakeFormationOptInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLakeFormationOptInResponse
+
+    interface _DeleteObjectsOnCancelResponse
+      include Smithy::Client::_Response[Types::DeleteObjectsOnCancelResponse]
+    end
+    def delete_objects_on_cancel: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?transaction_id: String,
+      ?objects: Array[
+        {
+          uri: String,
+          e_tag: String
+        }
+      ]
+    ) -> _DeleteObjectsOnCancelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectsOnCancelResponse
+
+    interface _DeregisterResourceResponse
+      include Smithy::Client::_Response[Types::DeregisterResourceResponse]
+    end
+    def deregister_resource: (
+      ?resource_arn: String
+    ) -> _DeregisterResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterResourceResponse
+
+    interface _DescribeLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeLakeFormationIdentityCenterConfigurationResponse]
+      def catalog_id: () -> String?
+      def instance_arn: () -> String?
+      def application_arn: () -> String?
+      def external_filtering: () -> Types::ExternalFilteringConfiguration?
+      def share_recipients: () -> Array[Types::DataLakePrincipal]?
+      def resource_share: () -> String?
+    end
+    def describe_lake_formation_identity_center_configuration: (
+      ?catalog_id: String
+    ) -> _DescribeLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLakeFormationIdentityCenterConfigurationResponse
+
+    interface _DescribeResourceResponse
+      include Smithy::Client::_Response[Types::DescribeResourceResponse]
+      def resource_info: () -> Types::ResourceInfo?
+    end
+    def describe_resource: (
+      ?resource_arn: String
+    ) -> _DescribeResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceResponse
+
+    interface _DescribeTransactionResponse
+      include Smithy::Client::_Response[Types::DescribeTransactionResponse]
+      def transaction_description: () -> Types::TransactionDescription?
+    end
+    def describe_transaction: (
+      ?transaction_id: String
+    ) -> _DescribeTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTransactionResponse
+
+    interface _ExtendTransactionResponse
+      include Smithy::Client::_Response[Types::ExtendTransactionResponse]
+    end
+    def extend_transaction: (
+      ?transaction_id: String
+    ) -> _ExtendTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExtendTransactionResponse
+
+    interface _GetDataCellsFilterResponse
+      include Smithy::Client::_Response[Types::GetDataCellsFilterResponse]
+      def data_cells_filter: () -> Types::DataCellsFilter?
+    end
+    def get_data_cells_filter: (
+      ?table_catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?name: String
+    ) -> _GetDataCellsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataCellsFilterResponse
+
+    interface _GetDataLakePrincipalResponse
+      include Smithy::Client::_Response[Types::GetDataLakePrincipalResponse]
+      def identity: () -> String?
+    end
+    def get_data_lake_principal: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakePrincipalResponse
+
+    interface _GetDataLakeSettingsResponse
+      include Smithy::Client::_Response[Types::GetDataLakeSettingsResponse]
+      def data_lake_settings: () -> Types::DataLakeSettings?
+    end
+    def get_data_lake_settings: (
+      ?catalog_id: String
+    ) -> _GetDataLakeSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeSettingsResponse
+
+    interface _GetEffectivePermissionsForPathResponse
+      include Smithy::Client::_Response[Types::GetEffectivePermissionsForPathResponse]
+      def permissions: () -> Array[Types::PrincipalResourcePermissions]?
+      def next_token: () -> String?
+    end
+    def get_effective_permissions_for_path: (
+      ?catalog_id: String,
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEffectivePermissionsForPathResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEffectivePermissionsForPathResponse
+
+    interface _GetLFTagResponse
+      include Smithy::Client::_Response[Types::GetLFTagResponse]
+      def catalog_id: () -> String?
+      def tag_key: () -> String?
+      def tag_values: () -> Array[String]?
+    end
+    def get_lf_tag: (
+      ?catalog_id: String,
+      ?tag_key: String
+    ) -> _GetLFTagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLFTagResponse
+
+    interface _GetLFTagExpressionResponse
+      include Smithy::Client::_Response[Types::GetLFTagExpressionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def catalog_id: () -> String?
+      def expression: () -> Array[Types::LFTag]?
+    end
+    def get_lf_tag_expression: (
+      ?name: String,
+      ?catalog_id: String
+    ) -> _GetLFTagExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLFTagExpressionResponse
+
+    interface _GetQueryStateResponse
+      include Smithy::Client::_Response[Types::GetQueryStateResponse]
+      def error: () -> String?
+      def state: () -> String?
+    end
+    def get_query_state: (
+      ?query_id: String
+    ) -> _GetQueryStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryStateResponse
+
+    interface _GetQueryStatisticsResponse
+      include Smithy::Client::_Response[Types::GetQueryStatisticsResponse]
+      def execution_statistics: () -> Types::ExecutionStatistics?
+      def planning_statistics: () -> Types::PlanningStatistics?
+      def query_submission_time: () -> Time?
+    end
+    def get_query_statistics: (
+      ?query_id: String
+    ) -> _GetQueryStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryStatisticsResponse
+
+    interface _GetResourceLFTagsResponse
+      include Smithy::Client::_Response[Types::GetResourceLFTagsResponse]
+      def lf_tag_on_database: () -> Array[Types::LFTagPair]?
+      def lf_tags_on_table: () -> Array[Types::LFTagPair]?
+      def lf_tags_on_columns: () -> Array[Types::ColumnLFTag]?
+    end
+    def get_resource_lf_tags: (
+      ?catalog_id: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?show_assigned_lf_tags: bool
+    ) -> _GetResourceLFTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceLFTagsResponse
+
+    interface _GetTableObjectsResponse
+      include Smithy::Client::_Response[Types::GetTableObjectsResponse]
+      def objects: () -> Array[Types::PartitionObjects]?
+      def next_token: () -> String?
+    end
+    def get_table_objects: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?transaction_id: String,
+      ?query_as_of_time: Time,
+      ?partition_predicate: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetTableObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableObjectsResponse
+
+    interface _GetTemporaryGluePartitionCredentialsResponse
+      include Smithy::Client::_Response[Types::GetTemporaryGluePartitionCredentialsResponse]
+      def access_key_id: () -> String?
+      def secret_access_key: () -> String?
+      def session_token: () -> String?
+      def expiration: () -> Time?
+    end
+    def get_temporary_glue_partition_credentials: (
+      ?table_arn: String,
+      ?partition: {
+        values: Array[String]
+      },
+      ?permissions: Array[String],
+      ?duration_seconds: Integer,
+      ?audit_context: {
+        additional_audit_context: String
+      },
+      ?supported_permission_types: Array[String]
+    ) -> _GetTemporaryGluePartitionCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemporaryGluePartitionCredentialsResponse
+
+    interface _GetTemporaryGlueTableCredentialsResponse
+      include Smithy::Client::_Response[Types::GetTemporaryGlueTableCredentialsResponse]
+      def access_key_id: () -> String?
+      def secret_access_key: () -> String?
+      def session_token: () -> String?
+      def expiration: () -> Time?
+      def vended_s3_path: () -> Array[String]?
+    end
+    def get_temporary_glue_table_credentials: (
+      ?table_arn: String,
+      ?permissions: Array[String],
+      ?duration_seconds: Integer,
+      ?audit_context: {
+        additional_audit_context: String
+      },
+      ?supported_permission_types: Array[String],
+      ?s3_path: String,
+      ?query_session_context: {
+        query_id: String,
+        query_start_time: Time,
+        cluster_id: String,
+        query_authorization_id: untyped,
+        additional_context: Hash[String, String]
+      }
+    ) -> _GetTemporaryGlueTableCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemporaryGlueTableCredentialsResponse
+
+    interface _GetWorkUnitResultsResponse
+      include Smithy::Client::_Response[Types::GetWorkUnitResultsResponse]
+      def result_stream: () -> String?
+    end
+    def get_work_unit_results: (
+      ?query_id: String,
+      ?work_unit_id: Integer,
+      ?work_unit_token: String
+    ) -> _GetWorkUnitResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkUnitResultsResponse
+
+    interface _GetWorkUnitsResponse
+      include Smithy::Client::_Response[Types::GetWorkUnitsResponse]
+      def next_token: () -> String?
+      def query_id: () -> String?
+      def work_unit_ranges: () -> Array[Types::WorkUnitRange]?
+    end
+    def get_work_units: (
+      ?next_token: String,
+      ?page_size: Integer,
+      ?query_id: String
+    ) -> _GetWorkUnitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkUnitsResponse
+
+    interface _GrantPermissionsResponse
+      include Smithy::Client::_Response[Types::GrantPermissionsResponse]
+    end
+    def grant_permissions: (
+      ?catalog_id: String,
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?permissions: Array[String],
+      ?condition: {
+        expression: String
+      },
+      ?permissions_with_grant_option: Array[String]
+    ) -> _GrantPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GrantPermissionsResponse
+
+    interface _ListDataCellsFilterResponse
+      include Smithy::Client::_Response[Types::ListDataCellsFilterResponse]
+      def data_cells_filters: () -> Array[Types::DataCellsFilter]?
+      def next_token: () -> String?
+    end
+    def list_data_cells_filter: (
+      ?table: {
+        catalog_id: String,
+        database_name: String,
+        name: untyped,
+        table_wildcard: {
+        }
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataCellsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataCellsFilterResponse
+
+    interface _ListLFTagExpressionsResponse
+      include Smithy::Client::_Response[Types::ListLFTagExpressionsResponse]
+      def lf_tag_expressions: () -> Array[Types::LFTagExpression]?
+      def next_token: () -> String?
+    end
+    def list_lf_tag_expressions: (
+      ?catalog_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLFTagExpressionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLFTagExpressionsResponse
+
+    interface _ListLFTagsResponse
+      include Smithy::Client::_Response[Types::ListLFTagsResponse]
+      def lf_tags: () -> Array[Types::LFTagPair]?
+      def next_token: () -> String?
+    end
+    def list_lf_tags: (
+      ?catalog_id: String,
+      ?resource_share_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLFTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLFTagsResponse
+
+    interface _ListLakeFormationOptInsResponse
+      include Smithy::Client::_Response[Types::ListLakeFormationOptInsResponse]
+      def lake_formation_opt_ins_info_list: () -> Array[Types::LakeFormationOptInsInfo]?
+      def next_token: () -> String?
+    end
+    def list_lake_formation_opt_ins: (
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLakeFormationOptInsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLakeFormationOptInsResponse
+
+    interface _ListPermissionsResponse
+      include Smithy::Client::_Response[Types::ListPermissionsResponse]
+      def principal_resource_permissions: () -> Array[Types::PrincipalResourcePermissions]?
+      def next_token: () -> String?
+    end
+    def list_permissions: (
+      ?catalog_id: String,
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource_type: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_related: String
+    ) -> _ListPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionsResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesResponse]
+      def resource_info_list: () -> Array[Types::ResourceInfo]?
+      def next_token: () -> String?
+    end
+    def list_resources: (
+      ?filter_condition_list: Array[
+        {
+          field: String,
+          comparison_operator: String,
+          string_value_list: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListTableStorageOptimizersResponse
+      include Smithy::Client::_Response[Types::ListTableStorageOptimizersResponse]
+      def storage_optimizer_list: () -> Array[Types::StorageOptimizer]?
+      def next_token: () -> String?
+    end
+    def list_table_storage_optimizers: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?storage_optimizer_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTableStorageOptimizersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTableStorageOptimizersResponse
+
+    interface _ListTransactionsResponse
+      include Smithy::Client::_Response[Types::ListTransactionsResponse]
+      def transactions: () -> Array[Types::TransactionDescription]?
+      def next_token: () -> String?
+    end
+    def list_transactions: (
+      ?catalog_id: String,
+      ?status_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTransactionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTransactionsResponse
+
+    interface _PutDataLakeSettingsResponse
+      include Smithy::Client::_Response[Types::PutDataLakeSettingsResponse]
+    end
+    def put_data_lake_settings: (
+      ?catalog_id: String,
+      ?data_lake_settings: {
+        data_lake_admins: Array[
+          {
+            data_lake_principal_identifier: String
+          }
+        ],
+        read_only_admins: untyped,
+        create_database_default_permissions: Array[
+          {
+            principal: {
+              data_lake_principal_identifier: untyped
+            },
+            permissions: Array[String]
+          }
+        ],
+        create_table_default_permissions: untyped,
+        parameters: Hash[String, String],
+        trusted_resource_owners: Array[String],
+        allow_external_data_filtering: bool,
+        allow_full_table_external_data_access: untyped,
+        external_data_filtering_allow_list: untyped,
+        authorized_session_tag_value_list: Array[String]
+      }
+    ) -> _PutDataLakeSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataLakeSettingsResponse
+
+    interface _RegisterResourceResponse
+      include Smithy::Client::_Response[Types::RegisterResourceResponse]
+    end
+    def register_resource: (
+      ?resource_arn: String,
+      ?use_service_linked_role: bool,
+      ?role_arn: String,
+      ?with_federation: bool,
+      ?hybrid_access_enabled: bool,
+      ?with_privileged_access: bool
+    ) -> _RegisterResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterResourceResponse
+
+    interface _RemoveLFTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveLFTagsFromResourceResponse]
+      def failures: () -> Array[Types::LFTagError]?
+    end
+    def remove_lf_tags_from_resource: (
+      ?catalog_id: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?lf_tags: Array[
+        {
+          catalog_id: String,
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _RemoveLFTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveLFTagsFromResourceResponse
+
+    interface _RevokePermissionsResponse
+      include Smithy::Client::_Response[Types::RevokePermissionsResponse]
+    end
+    def revoke_permissions: (
+      ?catalog_id: String,
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?permissions: Array[String],
+      ?condition: {
+        expression: String
+      },
+      ?permissions_with_grant_option: Array[String]
+    ) -> _RevokePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokePermissionsResponse
+
+    interface _SearchDatabasesByLFTagsResponse
+      include Smithy::Client::_Response[Types::SearchDatabasesByLFTagsResponse]
+      def next_token: () -> String?
+      def database_list: () -> Array[Types::TaggedDatabase]?
+    end
+    def search_databases_by_lf_tags: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?catalog_id: String,
+      ?expression: Array[
+        {
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _SearchDatabasesByLFTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchDatabasesByLFTagsResponse
+
+    interface _SearchTablesByLFTagsResponse
+      include Smithy::Client::_Response[Types::SearchTablesByLFTagsResponse]
+      def next_token: () -> String?
+      def table_list: () -> Array[Types::TaggedTable]?
+    end
+    def search_tables_by_lf_tags: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?catalog_id: String,
+      ?expression: Array[
+        {
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _SearchTablesByLFTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTablesByLFTagsResponse
+
+    interface _StartQueryPlanningResponse
+      include Smithy::Client::_Response[Types::StartQueryPlanningResponse]
+      def query_id: () -> String?
+    end
+    def start_query_planning: (
+      ?query_planning_context: {
+        catalog_id: String,
+        database_name: String,
+        query_as_of_time: Time,
+        query_parameters: Hash[String, String],
+        transaction_id: String
+      },
+      ?query_string: String
+    ) -> _StartQueryPlanningResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryPlanningResponse
+
+    interface _StartTransactionResponse
+      include Smithy::Client::_Response[Types::StartTransactionResponse]
+      def transaction_id: () -> String?
+    end
+    def start_transaction: (
+      ?transaction_type: String
+    ) -> _StartTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTransactionResponse
+
+    interface _UpdateDataCellsFilterResponse
+      include Smithy::Client::_Response[Types::UpdateDataCellsFilterResponse]
+    end
+    def update_data_cells_filter: (
+      ?table_data: {
+        table_catalog_id: String,
+        database_name: String,
+        table_name: untyped,
+        name: untyped,
+        row_filter: {
+          filter_expression: String,
+          all_rows_wildcard: {
+          }
+        },
+        column_names: Array[String],
+        column_wildcard: {
+          excluded_column_names: untyped
+        },
+        version_id: String
+      }
+    ) -> _UpdateDataCellsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataCellsFilterResponse
+
+    interface _UpdateLFTagResponse
+      include Smithy::Client::_Response[Types::UpdateLFTagResponse]
+    end
+    def update_lf_tag: (
+      ?catalog_id: String,
+      ?tag_key: String,
+      ?tag_values_to_delete: Array[String],
+      ?tag_values_to_add: Array[String]
+    ) -> _UpdateLFTagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLFTagResponse
+
+    interface _UpdateLFTagExpressionResponse
+      include Smithy::Client::_Response[Types::UpdateLFTagExpressionResponse]
+    end
+    def update_lf_tag_expression: (
+      ?name: String,
+      ?description: String,
+      ?catalog_id: String,
+      ?expression: Array[
+        {
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ]
+    ) -> _UpdateLFTagExpressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLFTagExpressionResponse
+
+    interface _UpdateLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLakeFormationIdentityCenterConfigurationResponse]
+    end
+    def update_lake_formation_identity_center_configuration: (
+      ?catalog_id: String,
+      ?share_recipients: Array[
+        {
+          data_lake_principal_identifier: String
+        }
+      ],
+      ?application_status: String,
+      ?external_filtering: {
+        status: String,
+        authorized_targets: Array[String]
+      }
+    ) -> _UpdateLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLakeFormationIdentityCenterConfigurationResponse
+
+    interface _UpdateResourceResponse
+      include Smithy::Client::_Response[Types::UpdateResourceResponse]
+    end
+    def update_resource: (
+      ?role_arn: String,
+      ?resource_arn: String,
+      ?with_federation: bool,
+      ?hybrid_access_enabled: bool
+    ) -> _UpdateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceResponse
+
+    interface _UpdateTableObjectsResponse
+      include Smithy::Client::_Response[Types::UpdateTableObjectsResponse]
+    end
+    def update_table_objects: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?transaction_id: String,
+      ?write_operations: Array[
+        {
+          add_object: {
+            uri: String,
+            e_tag: String,
+            size: Integer,
+            partition_values: Array[String]
+          },
+          delete_object: {
+            uri: untyped,
+            e_tag: untyped,
+            partition_values: untyped
+          }
+        }
+      ]
+    ) -> _UpdateTableObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableObjectsResponse
+
+    interface _UpdateTableStorageOptimizerResponse
+      include Smithy::Client::_Response[Types::UpdateTableStorageOptimizerResponse]
+      def result: () -> String?
+    end
+    def update_table_storage_optimizer: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?storage_optimizer_config: Hash[String,
+        Hash[String, String]
+      ]
+    ) -> _UpdateTableStorageOptimizerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableStorageOptimizerResponse
+  end
+end

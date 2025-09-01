@@ -1,0 +1,650 @@
+module Aws::Route53Profiles
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?resource_id: String,
+        ?name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AssociateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_association: Types::ProfileAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_association: Types::ProfileAssociation?
+    end
+
+    class AssociateResourceToProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?resource_arn: String,
+        ?name: String,
+        ?resource_properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor name: String?
+      attr_accessor resource_properties: String?
+    end
+
+    class AssociateResourceToProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association: Types::ProfileResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::Profile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::Profile?
+    end
+
+    class DeleteProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DeleteProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::Profile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::Profile?
+    end
+
+    class DisassociateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DisassociateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_association: Types::ProfileAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_association: Types::ProfileAssociation?
+    end
+
+    class DisassociateResourceFromProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DisassociateResourceFromProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association: Types::ProfileResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation?
+    end
+
+    class GetProfileAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_association_id: String?
+    end
+
+    class GetProfileAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_association: Types::ProfileAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_association: Types::ProfileAssociation?
+    end
+
+    class GetProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class GetProfileResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association_id: String?
+    end
+
+    class GetProfileResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association: Types::ProfileResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation?
+    end
+
+    class GetProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::Profile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::Profile?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_name: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListProfileAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?profile_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor profile_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_associations: Array[Types::ProfileAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_associations: Array[Types::ProfileAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileResourceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?resource_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfileResourceAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_associations: Array[Types::ProfileResourceAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_associations: Array[Types::ProfileResourceAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_summaries: Array[Types::ProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_summaries: Array[Types::ProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Profile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?owner_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?share_status: String,
+        ?creation_time: Time,
+        ?modification_time: Time,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor owner_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor share_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor modification_time: Time?
+      attr_accessor client_token: String?
+    end
+
+    class ProfileAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owner_id: String,
+        ?profile_id: String,
+        ?resource_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owner_id: String?
+      attr_accessor profile_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor modification_time: Time?
+    end
+
+    class ProfileResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owner_id: String,
+        ?profile_id: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?resource_properties: String,
+        ?status: String,
+        ?status_message: String,
+        ?creation_time: Time,
+        ?modification_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owner_id: String?
+      attr_accessor profile_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_properties: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor creation_time: Time?
+      attr_accessor modification_time: Time?
+    end
+
+    module ProfileStatus
+      COMPLETE: String
+      DELETING: String
+      UPDATING: String
+      CREATING: String
+      DELETED: String
+      FAILED: String
+    end
+
+    class ProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?share_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor share_status: String?
+    end
+
+    class ResourceExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ShareStatus
+      NOT_SHARED: String
+      SHARED_WITH_ME: String
+      SHARED_BY_ME: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateProfileResourceAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association_id: String,
+        ?name: String,
+        ?resource_properties: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association_id: String?
+      attr_accessor name: String?
+      attr_accessor resource_properties: String?
+    end
+
+    class UpdateProfileResourceAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_resource_association: Types::ProfileResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

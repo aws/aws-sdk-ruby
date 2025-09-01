@@ -1,0 +1,1050 @@
+module Aws::EventBridge
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EventBridge::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateEventSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def activate_event_source: (
+      ?name: String
+    ) -> _ActivateEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateEventSourceResponse
+
+    interface _CancelReplayResponse
+      include Smithy::Client::_Response[Types::CancelReplayResponse]
+      def replay_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+    end
+    def cancel_replay: (
+      ?replay_name: String
+    ) -> _CancelReplayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelReplayResponse
+
+    interface _CreateApiDestinationResponse
+      include Smithy::Client::_Response[Types::CreateApiDestinationResponse]
+      def api_destination_arn: () -> String?
+      def api_destination_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def create_api_destination: (
+      ?name: String,
+      ?description: String,
+      ?connection_arn: String,
+      ?invocation_endpoint: String,
+      ?http_method: String,
+      ?invocation_rate_limit_per_second: Integer
+    ) -> _CreateApiDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiDestinationResponse
+
+    interface _CreateArchiveResponse
+      include Smithy::Client::_Response[Types::CreateArchiveResponse]
+      def archive_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_archive: (
+      ?archive_name: String,
+      ?event_source_arn: String,
+      ?description: String,
+      ?event_pattern: String,
+      ?retention_days: Integer,
+      ?kms_key_identifier: String
+    ) -> _CreateArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateArchiveResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionResponse]
+      def connection_arn: () -> String?
+      def connection_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def create_connection: (
+      ?name: String,
+      ?description: String,
+      ?authorization_type: String,
+      ?auth_parameters: {
+        basic_auth_parameters: {
+          username: String,
+          password: String
+        },
+        o_auth_parameters: {
+          client_parameters: {
+            client_id: untyped,
+            client_secret: untyped
+          },
+          authorization_endpoint: String,
+          http_method: String,
+          o_auth_http_parameters: {
+            header_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: bool
+              }
+            ],
+            query_string_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: untyped
+              }
+            ],
+            body_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: untyped
+              }
+            ]
+          }
+        },
+        api_key_auth_parameters: {
+          api_key_name: untyped,
+          api_key_value: untyped
+        },
+        invocation_http_parameters: untyped,
+        connectivity_parameters: {
+          resource_parameters: {
+            resource_configuration_arn: String
+          }
+        }
+      },
+      ?invocation_connectivity_parameters: {
+        resource_parameters: {
+          resource_configuration_arn: String
+        }
+      },
+      ?kms_key_identifier: String
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateEndpointResponse
+      include Smithy::Client::_Response[Types::CreateEndpointResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def routing_config: () -> Types::RoutingConfig?
+      def replication_config: () -> Types::ReplicationConfig?
+      def event_buses: () -> Array[Types::EndpointEventBus]?
+      def role_arn: () -> String?
+      def state: () -> String?
+    end
+    def create_endpoint: (
+      ?name: String,
+      ?description: String,
+      ?routing_config: {
+        failover_config: {
+          primary: {
+            health_check: String
+          },
+          secondary: {
+            route: String
+          }
+        }
+      },
+      ?replication_config: {
+        state: String
+      },
+      ?event_buses: Array[
+        {
+          event_bus_arn: String
+        }
+      ],
+      ?role_arn: String
+    ) -> _CreateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointResponse
+
+    interface _CreateEventBusResponse
+      include Smithy::Client::_Response[Types::CreateEventBusResponse]
+      def event_bus_arn: () -> String?
+      def description: () -> String?
+      def kms_key_identifier: () -> String?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def log_config: () -> Types::LogConfig?
+    end
+    def create_event_bus: (
+      ?name: String,
+      ?event_source_name: String,
+      ?description: String,
+      ?kms_key_identifier: String,
+      ?dead_letter_config: {
+        arn: String
+      },
+      ?log_config: {
+        include_detail: String,
+        level: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateEventBusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventBusResponse
+
+    interface _CreatePartnerEventSourceResponse
+      include Smithy::Client::_Response[Types::CreatePartnerEventSourceResponse]
+      def event_source_arn: () -> String?
+    end
+    def create_partner_event_source: (
+      ?name: String,
+      ?account: String
+    ) -> _CreatePartnerEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePartnerEventSourceResponse
+
+    interface _DeactivateEventSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deactivate_event_source: (
+      ?name: String
+    ) -> _DeactivateEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateEventSourceResponse
+
+    interface _DeauthorizeConnectionResponse
+      include Smithy::Client::_Response[Types::DeauthorizeConnectionResponse]
+      def connection_arn: () -> String?
+      def connection_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def last_authorized_time: () -> Time?
+    end
+    def deauthorize_connection: (
+      ?name: String
+    ) -> _DeauthorizeConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeauthorizeConnectionResponse
+
+    interface _DeleteApiDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteApiDestinationResponse]
+    end
+    def delete_api_destination: (
+      ?name: String
+    ) -> _DeleteApiDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApiDestinationResponse
+
+    interface _DeleteArchiveResponse
+      include Smithy::Client::_Response[Types::DeleteArchiveResponse]
+    end
+    def delete_archive: (
+      ?archive_name: String
+    ) -> _DeleteArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArchiveResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionResponse]
+      def connection_arn: () -> String?
+      def connection_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def last_authorized_time: () -> Time?
+    end
+    def delete_connection: (
+      ?name: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteEndpointResponse]
+    end
+    def delete_endpoint: (
+      ?name: String
+    ) -> _DeleteEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEndpointResponse
+
+    interface _DeleteEventBusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_bus: (
+      ?name: String
+    ) -> _DeleteEventBusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventBusResponse
+
+    interface _DeletePartnerEventSourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_partner_event_source: (
+      ?name: String,
+      ?account: String
+    ) -> _DeletePartnerEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePartnerEventSourceResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_rule: (
+      ?name: String,
+      ?event_bus_name: String,
+      ?force: bool
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DescribeApiDestinationResponse
+      include Smithy::Client::_Response[Types::DescribeApiDestinationResponse]
+      def api_destination_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def api_destination_state: () -> String?
+      def connection_arn: () -> String?
+      def invocation_endpoint: () -> String?
+      def http_method: () -> String?
+      def invocation_rate_limit_per_second: () -> Integer?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def describe_api_destination: (
+      ?name: String
+    ) -> _DescribeApiDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApiDestinationResponse
+
+    interface _DescribeArchiveResponse
+      include Smithy::Client::_Response[Types::DescribeArchiveResponse]
+      def archive_arn: () -> String?
+      def archive_name: () -> String?
+      def event_source_arn: () -> String?
+      def description: () -> String?
+      def event_pattern: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def kms_key_identifier: () -> String?
+      def retention_days: () -> Integer?
+      def size_bytes: () -> Integer?
+      def event_count: () -> Integer?
+      def creation_time: () -> Time?
+    end
+    def describe_archive: (
+      ?archive_name: String
+    ) -> _DescribeArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeArchiveResponse
+
+    interface _DescribeConnectionResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionResponse]
+      def connection_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def invocation_connectivity_parameters: () -> Types::DescribeConnectionConnectivityParameters?
+      def connection_state: () -> String?
+      def state_reason: () -> String?
+      def authorization_type: () -> String?
+      def secret_arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def auth_parameters: () -> Types::ConnectionAuthResponseParameters?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def last_authorized_time: () -> Time?
+    end
+    def describe_connection: (
+      ?name: String
+    ) -> _DescribeConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionResponse
+
+    interface _DescribeEndpointResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def arn: () -> String?
+      def routing_config: () -> Types::RoutingConfig?
+      def replication_config: () -> Types::ReplicationConfig?
+      def event_buses: () -> Array[Types::EndpointEventBus]?
+      def role_arn: () -> String?
+      def endpoint_id: () -> String?
+      def endpoint_url: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def describe_endpoint: (
+      ?name: String,
+      ?home_region: String
+    ) -> _DescribeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointResponse
+
+    interface _DescribeEventBusResponse
+      include Smithy::Client::_Response[Types::DescribeEventBusResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def kms_key_identifier: () -> String?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def policy: () -> String?
+      def log_config: () -> Types::LogConfig?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def describe_event_bus: (
+      ?name: String
+    ) -> _DescribeEventBusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventBusResponse
+
+    interface _DescribeEventSourceResponse
+      include Smithy::Client::_Response[Types::DescribeEventSourceResponse]
+      def arn: () -> String?
+      def created_by: () -> String?
+      def creation_time: () -> Time?
+      def expiration_time: () -> Time?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def describe_event_source: (
+      ?name: String
+    ) -> _DescribeEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventSourceResponse
+
+    interface _DescribePartnerEventSourceResponse
+      include Smithy::Client::_Response[Types::DescribePartnerEventSourceResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def describe_partner_event_source: (
+      ?name: String
+    ) -> _DescribePartnerEventSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePartnerEventSourceResponse
+
+    interface _DescribeReplayResponse
+      include Smithy::Client::_Response[Types::DescribeReplayResponse]
+      def replay_name: () -> String?
+      def replay_arn: () -> String?
+      def description: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def event_source_arn: () -> String?
+      def destination: () -> Types::ReplayDestination?
+      def event_start_time: () -> Time?
+      def event_end_time: () -> Time?
+      def event_last_replayed_time: () -> Time?
+      def replay_start_time: () -> Time?
+      def replay_end_time: () -> Time?
+    end
+    def describe_replay: (
+      ?replay_name: String
+    ) -> _DescribeReplayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplayResponse
+
+    interface _DescribeRuleResponse
+      include Smithy::Client::_Response[Types::DescribeRuleResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def event_pattern: () -> String?
+      def schedule_expression: () -> String?
+      def state: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def managed_by: () -> String?
+      def event_bus_name: () -> String?
+      def created_by: () -> String?
+    end
+    def describe_rule: (
+      ?name: String,
+      ?event_bus_name: String
+    ) -> _DescribeRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleResponse
+
+    interface _DisableRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_rule: (
+      ?name: String,
+      ?event_bus_name: String
+    ) -> _DisableRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableRuleResponse
+
+    interface _EnableRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_rule: (
+      ?name: String,
+      ?event_bus_name: String
+    ) -> _EnableRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableRuleResponse
+
+    interface _ListApiDestinationsResponse
+      include Smithy::Client::_Response[Types::ListApiDestinationsResponse]
+      def api_destinations: () -> Array[Types::ApiDestination]?
+      def next_token: () -> String?
+    end
+    def list_api_destinations: (
+      ?name_prefix: String,
+      ?connection_arn: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListApiDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApiDestinationsResponse
+
+    interface _ListArchivesResponse
+      include Smithy::Client::_Response[Types::ListArchivesResponse]
+      def archives: () -> Array[Types::Archive]?
+      def next_token: () -> String?
+    end
+    def list_archives: (
+      ?name_prefix: String,
+      ?event_source_arn: String,
+      ?state: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListArchivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArchivesResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsResponse]
+      def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?name_prefix: String,
+      ?connection_state: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListEndpointsResponse
+      include Smithy::Client::_Response[Types::ListEndpointsResponse]
+      def endpoints: () -> Array[Types::Endpoint]?
+      def next_token: () -> String?
+    end
+    def list_endpoints: (
+      ?name_prefix: String,
+      ?home_region: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEndpointsResponse
+
+    interface _ListEventBusesResponse
+      include Smithy::Client::_Response[Types::ListEventBusesResponse]
+      def event_buses: () -> Array[Types::EventBus]?
+      def next_token: () -> String?
+    end
+    def list_event_buses: (
+      ?name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListEventBusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventBusesResponse
+
+    interface _ListEventSourcesResponse
+      include Smithy::Client::_Response[Types::ListEventSourcesResponse]
+      def event_sources: () -> Array[Types::EventSource]?
+      def next_token: () -> String?
+    end
+    def list_event_sources: (
+      ?name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListEventSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventSourcesResponse
+
+    interface _ListPartnerEventSourceAccountsResponse
+      include Smithy::Client::_Response[Types::ListPartnerEventSourceAccountsResponse]
+      def partner_event_source_accounts: () -> Array[Types::PartnerEventSourceAccount]?
+      def next_token: () -> String?
+    end
+    def list_partner_event_source_accounts: (
+      ?event_source_name: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListPartnerEventSourceAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartnerEventSourceAccountsResponse
+
+    interface _ListPartnerEventSourcesResponse
+      include Smithy::Client::_Response[Types::ListPartnerEventSourcesResponse]
+      def partner_event_sources: () -> Array[Types::PartnerEventSource]?
+      def next_token: () -> String?
+    end
+    def list_partner_event_sources: (
+      ?name_prefix: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListPartnerEventSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartnerEventSourcesResponse
+
+    interface _ListReplaysResponse
+      include Smithy::Client::_Response[Types::ListReplaysResponse]
+      def replays: () -> Array[Types::Replay]?
+      def next_token: () -> String?
+    end
+    def list_replays: (
+      ?name_prefix: String,
+      ?state: String,
+      ?event_source_arn: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListReplaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReplaysResponse
+
+    interface _ListRuleNamesByTargetResponse
+      include Smithy::Client::_Response[Types::ListRuleNamesByTargetResponse]
+      def rule_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_rule_names_by_target: (
+      ?target_arn: String,
+      ?event_bus_name: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListRuleNamesByTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleNamesByTargetResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesResponse]
+      def rules: () -> Array[Types::Rule]?
+      def next_token: () -> String?
+    end
+    def list_rules: (
+      ?name_prefix: String,
+      ?event_bus_name: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetsByRuleResponse
+      include Smithy::Client::_Response[Types::ListTargetsByRuleResponse]
+      def targets: () -> Array[Types::Target]?
+      def next_token: () -> String?
+    end
+    def list_targets_by_rule: (
+      ?rule: String,
+      ?event_bus_name: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListTargetsByRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetsByRuleResponse
+
+    interface _PutEventsResponse
+      include Smithy::Client::_Response[Types::PutEventsResponse]
+      def failed_entry_count: () -> Integer?
+      def entries: () -> Array[Types::PutEventsResultEntry]?
+    end
+    def put_events: (
+      ?entries: Array[
+        {
+          time: Time,
+          source: String,
+          resources: Array[String],
+          detail_type: untyped,
+          detail: untyped,
+          event_bus_name: String,
+          trace_header: String
+        }
+      ],
+      ?endpoint_id: String
+    ) -> _PutEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventsResponse
+
+    interface _PutPartnerEventsResponse
+      include Smithy::Client::_Response[Types::PutPartnerEventsResponse]
+      def failed_entry_count: () -> Integer?
+      def entries: () -> Array[Types::PutPartnerEventsResultEntry]?
+    end
+    def put_partner_events: (
+      ?entries: Array[
+        {
+          time: Time,
+          source: String,
+          resources: Array[String],
+          detail_type: String,
+          detail: untyped
+        }
+      ]
+    ) -> _PutPartnerEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPartnerEventsResponse
+
+    interface _PutPermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_permission: (
+      ?event_bus_name: String,
+      ?action: String,
+      ?principal: String,
+      ?statement_id: String,
+      ?condition: {
+        type: String,
+        key: untyped,
+        value: untyped
+      },
+      ?policy: String
+    ) -> _PutPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPermissionResponse
+
+    interface _PutRuleResponse
+      include Smithy::Client::_Response[Types::PutRuleResponse]
+      def rule_arn: () -> String?
+    end
+    def put_rule: (
+      ?name: String,
+      ?schedule_expression: String,
+      ?event_pattern: String,
+      ?state: String,
+      ?description: String,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?event_bus_name: String
+    ) -> _PutRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRuleResponse
+
+    interface _PutTargetsResponse
+      include Smithy::Client::_Response[Types::PutTargetsResponse]
+      def failed_entry_count: () -> Integer?
+      def failed_entries: () -> Array[Types::PutTargetsResultEntry]?
+    end
+    def put_targets: (
+      ?rule: String,
+      ?event_bus_name: String,
+      ?targets: Array[
+        {
+          id: String,
+          arn: String,
+          role_arn: String,
+          input: String,
+          input_path: String,
+          input_transformer: {
+            input_paths_map: Hash[String, String],
+            input_template: String
+          },
+          kinesis_parameters: {
+            partition_key_path: String
+          },
+          run_command_parameters: {
+            run_command_targets: Array[
+              {
+                key: String,
+                values: Array[String]
+              }
+            ]
+          },
+          ecs_parameters: {
+            task_definition_arn: String,
+            task_count: Integer,
+            launch_type: String,
+            network_configuration: {
+              awsvpc_configuration: {
+                subnets: Array[String],
+                security_groups: untyped,
+                assign_public_ip: String
+              }
+            },
+            platform_version: String,
+            group: untyped,
+            capacity_provider_strategy: Array[
+              {
+                capacity_provider: String,
+                weight: Integer,
+                base: Integer
+              }
+            ],
+            enable_ecs_managed_tags: bool,
+            enable_execute_command: untyped,
+            placement_constraints: Array[
+              {
+                type: String,
+                expression: String
+              }
+            ],
+            placement_strategy: Array[
+              {
+                type: String,
+                field: String
+              }
+            ],
+            propagate_tags: String,
+            reference_id: String,
+            tags: Array[
+              {
+                key: String,
+                value: String
+              }
+            ]
+          },
+          batch_parameters: {
+            job_definition: untyped,
+            job_name: untyped,
+            array_properties: {
+              size: Integer
+            },
+            retry_strategy: {
+              attempts: untyped
+            }
+          },
+          sqs_parameters: {
+            message_group_id: String
+          },
+          http_parameters: {
+            path_parameter_values: Array[String],
+            header_parameters: Hash[String, String],
+            query_string_parameters: Hash[String, String]
+          },
+          redshift_data_parameters: {
+            secret_manager_arn: String,
+            database: String,
+            db_user: String,
+            sql: String,
+            statement_name: String,
+            with_event: untyped,
+            sqls: Array[String]
+          },
+          sage_maker_pipeline_parameters: {
+            pipeline_parameter_list: Array[
+              {
+                name: String,
+                value: String
+              }
+            ]
+          },
+          dead_letter_config: {
+            arn: String
+          },
+          retry_policy: {
+            maximum_retry_attempts: Integer,
+            maximum_event_age_in_seconds: Integer
+          },
+          app_sync_parameters: {
+            graph_ql_operation: String
+          }
+        }
+      ]
+    ) -> _PutTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTargetsResponse
+
+    interface _RemovePermissionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_permission: (
+      ?statement_id: String,
+      ?remove_all_permissions: bool,
+      ?event_bus_name: String
+    ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _RemoveTargetsResponse
+      include Smithy::Client::_Response[Types::RemoveTargetsResponse]
+      def failed_entry_count: () -> Integer?
+      def failed_entries: () -> Array[Types::RemoveTargetsResultEntry]?
+    end
+    def remove_targets: (
+      ?rule: String,
+      ?event_bus_name: String,
+      ?ids: Array[String],
+      ?force: bool
+    ) -> _RemoveTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTargetsResponse
+
+    interface _StartReplayResponse
+      include Smithy::Client::_Response[Types::StartReplayResponse]
+      def replay_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def replay_start_time: () -> Time?
+    end
+    def start_replay: (
+      ?replay_name: String,
+      ?description: String,
+      ?event_source_arn: String,
+      ?event_start_time: Time,
+      ?event_end_time: Time,
+      ?destination: {
+        arn: String,
+        filter_arns: Array[String]
+      }
+    ) -> _StartReplayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReplayResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestEventPatternResponse
+      include Smithy::Client::_Response[Types::TestEventPatternResponse]
+      def result: () -> bool?
+    end
+    def test_event_pattern: (
+      ?event_pattern: String,
+      ?event: String
+    ) -> _TestEventPatternResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestEventPatternResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApiDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateApiDestinationResponse]
+      def api_destination_arn: () -> String?
+      def api_destination_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def update_api_destination: (
+      ?name: String,
+      ?description: String,
+      ?connection_arn: String,
+      ?invocation_endpoint: String,
+      ?http_method: String,
+      ?invocation_rate_limit_per_second: Integer
+    ) -> _UpdateApiDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiDestinationResponse
+
+    interface _UpdateArchiveResponse
+      include Smithy::Client::_Response[Types::UpdateArchiveResponse]
+      def archive_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def creation_time: () -> Time?
+    end
+    def update_archive: (
+      ?archive_name: String,
+      ?description: String,
+      ?event_pattern: String,
+      ?retention_days: Integer,
+      ?kms_key_identifier: String
+    ) -> _UpdateArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateArchiveResponse
+
+    interface _UpdateConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionResponse]
+      def connection_arn: () -> String?
+      def connection_state: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def last_authorized_time: () -> Time?
+    end
+    def update_connection: (
+      ?name: String,
+      ?description: String,
+      ?authorization_type: String,
+      ?auth_parameters: {
+        basic_auth_parameters: {
+          username: String,
+          password: String
+        },
+        o_auth_parameters: {
+          client_parameters: {
+            client_id: untyped,
+            client_secret: untyped
+          },
+          authorization_endpoint: String,
+          http_method: String,
+          o_auth_http_parameters: {
+            header_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: bool
+              }
+            ],
+            query_string_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: untyped
+              }
+            ],
+            body_parameters: Array[
+              {
+                key: String,
+                value: String,
+                is_value_secret: untyped
+              }
+            ]
+          }
+        },
+        api_key_auth_parameters: {
+          api_key_name: untyped,
+          api_key_value: untyped
+        },
+        invocation_http_parameters: untyped,
+        connectivity_parameters: {
+          resource_parameters: {
+            resource_configuration_arn: String
+          }
+        }
+      },
+      ?invocation_connectivity_parameters: {
+        resource_parameters: {
+          resource_configuration_arn: String
+        }
+      },
+      ?kms_key_identifier: String
+    ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
+
+    interface _UpdateEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateEndpointResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def routing_config: () -> Types::RoutingConfig?
+      def replication_config: () -> Types::ReplicationConfig?
+      def event_buses: () -> Array[Types::EndpointEventBus]?
+      def role_arn: () -> String?
+      def endpoint_id: () -> String?
+      def endpoint_url: () -> String?
+      def state: () -> String?
+    end
+    def update_endpoint: (
+      ?name: String,
+      ?description: String,
+      ?routing_config: {
+        failover_config: {
+          primary: {
+            health_check: String
+          },
+          secondary: {
+            route: String
+          }
+        }
+      },
+      ?replication_config: {
+        state: String
+      },
+      ?event_buses: Array[
+        {
+          event_bus_arn: String
+        }
+      ],
+      ?role_arn: String
+    ) -> _UpdateEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointResponse
+
+    interface _UpdateEventBusResponse
+      include Smithy::Client::_Response[Types::UpdateEventBusResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def kms_key_identifier: () -> String?
+      def description: () -> String?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def log_config: () -> Types::LogConfig?
+    end
+    def update_event_bus: (
+      ?name: String,
+      ?kms_key_identifier: String,
+      ?description: String,
+      ?dead_letter_config: {
+        arn: String
+      },
+      ?log_config: {
+        include_detail: String,
+        level: String
+      }
+    ) -> _UpdateEventBusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventBusResponse
+  end
+end

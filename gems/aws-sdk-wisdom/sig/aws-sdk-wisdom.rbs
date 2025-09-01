@@ -1,0 +1,5 @@
+  module Aws
+    module Wisdom
+      VERSION: String
+    end
+  end

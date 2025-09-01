@@ -1,0 +1,1166 @@
+module Aws::BedrockDataAutomation
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AudioExtractionCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module AudioExtractionCategoryType
+      AUDIO_CONTENT_MODERATION: String
+      TRANSCRIPT: String
+      TOPIC_CONTENT_MODERATION: String
+    end
+
+    class AudioOverrideConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?modality_processing: Types::ModalityProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+    end
+
+    class AudioStandardExtraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: Types::AudioExtractionCategory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: Types::AudioExtractionCategory?
+    end
+
+    class AudioStandardGenerativeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module AudioStandardGenerativeFieldType
+      AUDIO_SUMMARY: String
+      IAB: String
+      TOPIC_SUMMARY: String
+    end
+
+    class AudioStandardOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extraction: Types::AudioStandardExtraction,
+        ?generative_field: Types::AudioStandardGenerativeField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extraction: Types::AudioStandardExtraction?
+      attr_accessor generative_field: Types::AudioStandardGenerativeField?
+    end
+
+    class Blueprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?schema: String,
+        ?type: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?blueprint_name: String,
+        ?blueprint_version: String,
+        ?blueprint_stage: String,
+        ?kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor schema: String?
+      attr_accessor type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor blueprint_name: String?
+      attr_accessor blueprint_version: String?
+      attr_accessor blueprint_stage: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+    end
+
+    class BlueprintFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?blueprint_version: String,
+        ?blueprint_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor blueprint_version: String?
+      attr_accessor blueprint_stage: String?
+    end
+
+    class BlueprintItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?blueprint_version: String,
+        ?blueprint_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor blueprint_version: String?
+      attr_accessor blueprint_stage: String?
+    end
+
+    module BlueprintStage
+      DEVELOPMENT: String
+      LIVE: String
+    end
+
+    module BlueprintStageFilter
+      DEVELOPMENT: String
+      LIVE: String
+      ALL: String
+    end
+
+    class BlueprintSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?blueprint_version: String,
+        ?blueprint_stage: String,
+        ?blueprint_name: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor blueprint_version: String?
+      attr_accessor blueprint_stage: String?
+      attr_accessor blueprint_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateBlueprintRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_name: String,
+        ?type: String,
+        ?blueprint_stage: String,
+        ?schema: String,
+        ?client_token: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_name: String?
+      attr_accessor type: String?
+      attr_accessor blueprint_stage: String?
+      attr_accessor schema: String?
+      attr_accessor client_token: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBlueprintResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint: Types::Blueprint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint: Types::Blueprint?
+    end
+
+    class CreateBlueprintVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateBlueprintVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint: Types::Blueprint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint: Types::Blueprint?
+    end
+
+    class CreateDataAutomationProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_name: String,
+        ?project_description: String,
+        ?project_stage: String,
+        ?standard_output_configuration: Types::StandardOutputConfiguration,
+        ?custom_output_configuration: Types::CustomOutputConfiguration,
+        ?override_configuration: Types::OverrideConfiguration,
+        ?client_token: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_name: String?
+      attr_accessor project_description: String?
+      attr_accessor project_stage: String?
+      attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
+      attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
+      attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataAutomationProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+      attr_accessor status: String?
+    end
+
+    class CustomOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprints: Array[Types::BlueprintItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprints: Array[Types::BlueprintItem]?
+    end
+
+    class DataAutomationProject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?project_name: String,
+        ?project_stage: String,
+        ?project_description: String,
+        ?standard_output_configuration: Types::StandardOutputConfiguration,
+        ?custom_output_configuration: Types::CustomOutputConfiguration,
+        ?override_configuration: Types::OverrideConfiguration,
+        ?status: String,
+        ?kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor project_name: String?
+      attr_accessor project_stage: String?
+      attr_accessor project_description: String?
+      attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
+      attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
+      attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+    end
+
+    class DataAutomationProjectFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+    end
+
+    module DataAutomationProjectStage
+      DEVELOPMENT: String
+      LIVE: String
+    end
+
+    module DataAutomationProjectStageFilter
+      DEVELOPMENT: String
+      LIVE: String
+      ALL: String
+    end
+
+    module DataAutomationProjectStatus
+      COMPLETED: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class DataAutomationProjectSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+        ?project_name: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+      attr_accessor project_name: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class DeleteBlueprintRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?blueprint_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor blueprint_version: String?
+    end
+
+    class DeleteBlueprintResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataAutomationProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+    end
+
+    class DeleteDataAutomationProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor status: String?
+    end
+
+    module DesiredModality
+      IMAGE: String
+      DOCUMENT: String
+      AUDIO: String
+      VIDEO: String
+    end
+
+    class DocumentBoundingBox
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class DocumentExtractionGranularity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+    end
+
+    module DocumentExtractionGranularityType
+      DOCUMENT: String
+      PAGE: String
+      ELEMENT: String
+      WORD: String
+      LINE: String
+    end
+
+    class DocumentOutputAdditionalFileFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class DocumentOutputFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_format: Types::DocumentOutputTextFormat,
+        ?additional_file_format: Types::DocumentOutputAdditionalFileFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_format: Types::DocumentOutputTextFormat?
+      attr_accessor additional_file_format: Types::DocumentOutputAdditionalFileFormat?
+    end
+
+    class DocumentOutputTextFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+    end
+
+    module DocumentOutputTextFormatType
+      PLAIN_TEXT: String
+      MARKDOWN: String
+      HTML: String
+      CSV: String
+    end
+
+    class DocumentOverrideConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?splitter: Types::SplitterConfiguration,
+        ?modality_processing: Types::ModalityProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor splitter: Types::SplitterConfiguration?
+      attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+    end
+
+    class DocumentStandardExtraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?granularity: Types::DocumentExtractionGranularity,
+        ?bounding_box: Types::DocumentBoundingBox,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor granularity: Types::DocumentExtractionGranularity?
+      attr_accessor bounding_box: Types::DocumentBoundingBox?
+    end
+
+    class DocumentStandardGenerativeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class DocumentStandardOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extraction: Types::DocumentStandardExtraction,
+        ?generative_field: Types::DocumentStandardGenerativeField,
+        ?output_format: Types::DocumentOutputFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extraction: Types::DocumentStandardExtraction?
+      attr_accessor generative_field: Types::DocumentStandardGenerativeField?
+      attr_accessor output_format: Types::DocumentOutputFormat?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+    end
+
+    class GetBlueprintRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?blueprint_version: String,
+        ?blueprint_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor blueprint_version: String?
+      attr_accessor blueprint_stage: String?
+    end
+
+    class GetBlueprintResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint: Types::Blueprint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint: Types::Blueprint?
+    end
+
+    class GetDataAutomationProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+    end
+
+    class GetDataAutomationProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project: Types::DataAutomationProject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project: Types::DataAutomationProject?
+    end
+
+    class ImageBoundingBox
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class ImageExtractionCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module ImageExtractionCategoryType
+      CONTENT_MODERATION: String
+      TEXT_DETECTION: String
+      LOGOS: String
+    end
+
+    class ImageOverrideConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?modality_processing: Types::ModalityProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+    end
+
+    class ImageStandardExtraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: Types::ImageExtractionCategory,
+        ?bounding_box: Types::ImageBoundingBox,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: Types::ImageExtractionCategory?
+      attr_accessor bounding_box: Types::ImageBoundingBox?
+    end
+
+    class ImageStandardGenerativeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module ImageStandardGenerativeFieldType
+      IMAGE_SUMMARY: String
+      IAB: String
+    end
+
+    class ImageStandardOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extraction: Types::ImageStandardExtraction,
+        ?generative_field: Types::ImageStandardGenerativeField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extraction: Types::ImageStandardExtraction?
+      attr_accessor generative_field: Types::ImageStandardGenerativeField?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListBlueprintsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?resource_owner: String,
+        ?blueprint_stage_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?project_filter: Types::DataAutomationProjectFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor resource_owner: String?
+      attr_accessor blueprint_stage_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor project_filter: Types::DataAutomationProjectFilter?
+    end
+
+    class ListBlueprintsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprints: Array[Types::BlueprintSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprints: Array[Types::BlueprintSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataAutomationProjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?project_stage_filter: String,
+        ?blueprint_filter: Types::BlueprintFilter,
+        ?resource_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor project_stage_filter: String?
+      attr_accessor blueprint_filter: Types::BlueprintFilter?
+      attr_accessor resource_owner: String?
+    end
+
+    class ListDataAutomationProjectsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?projects: Array[Types::DataAutomationProjectSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor projects: Array[Types::DataAutomationProjectSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ModalityProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class ModalityRoutingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jpeg: String,
+        ?png: String,
+        ?mp4: String,
+        ?mov: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jpeg: String?
+      attr_accessor png: String?
+      attr_accessor mp4: String?
+      attr_accessor mov: String?
+    end
+
+    class OverrideConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::DocumentOverrideConfiguration,
+        ?image: Types::ImageOverrideConfiguration,
+        ?video: Types::VideoOverrideConfiguration,
+        ?audio: Types::AudioOverrideConfiguration,
+        ?modality_routing: Types::ModalityRoutingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::DocumentOverrideConfiguration?
+      attr_accessor image: Types::ImageOverrideConfiguration?
+      attr_accessor video: Types::VideoOverrideConfiguration?
+      attr_accessor audio: Types::AudioOverrideConfiguration?
+      attr_accessor modality_routing: Types::ModalityRoutingConfiguration?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceOwner
+      SERVICE: String
+      ACCOUNT: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SplitterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class StandardOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::DocumentStandardOutputConfiguration,
+        ?image: Types::ImageStandardOutputConfiguration,
+        ?video: Types::VideoStandardOutputConfiguration,
+        ?audio: Types::AudioStandardOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::DocumentStandardOutputConfiguration?
+      attr_accessor image: Types::ImageStandardOutputConfiguration?
+      attr_accessor video: Types::VideoStandardOutputConfiguration?
+      attr_accessor audio: Types::AudioStandardOutputConfiguration?
+    end
+
+    module State
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Type
+      DOCUMENT: String
+      IMAGE: String
+      AUDIO: String
+      VIDEO: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBlueprintRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?schema: String,
+        ?blueprint_stage: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor schema: String?
+      attr_accessor blueprint_stage: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateBlueprintResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint: Types::Blueprint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint: Types::Blueprint?
+    end
+
+    class UpdateDataAutomationProjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+        ?project_description: String,
+        ?standard_output_configuration: Types::StandardOutputConfiguration,
+        ?custom_output_configuration: Types::CustomOutputConfiguration,
+        ?override_configuration: Types::OverrideConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+      attr_accessor project_description: String?
+      attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
+      attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
+      attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateDataAutomationProjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_arn: String,
+        ?project_stage: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_arn: String?
+      attr_accessor project_stage: String?
+      attr_accessor status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class VideoBoundingBox
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class VideoExtractionCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module VideoExtractionCategoryType
+      CONTENT_MODERATION: String
+      TEXT_DETECTION: String
+      TRANSCRIPT: String
+      LOGOS: String
+    end
+
+    class VideoOverrideConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?modality_processing: Types::ModalityProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+    end
+
+    class VideoStandardExtraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: Types::VideoExtractionCategory,
+        ?bounding_box: Types::VideoBoundingBox,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: Types::VideoExtractionCategory?
+      attr_accessor bounding_box: Types::VideoBoundingBox?
+    end
+
+    class VideoStandardGenerativeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor types: Array[String]?
+    end
+
+    module VideoStandardGenerativeFieldType
+      VIDEO_SUMMARY: String
+      IAB: String
+      CHAPTER_SUMMARY: String
+    end
+
+    class VideoStandardOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extraction: Types::VideoStandardExtraction,
+        ?generative_field: Types::VideoStandardGenerativeField,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extraction: Types::VideoStandardExtraction?
+      attr_accessor generative_field: Types::VideoStandardGenerativeField?
+    end
+  end
+end

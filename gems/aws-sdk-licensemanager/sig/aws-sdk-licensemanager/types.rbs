@@ -1,0 +1,2570 @@
+module Aws::LicenseManager
+  module Types
+
+    class AcceptGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+    end
+
+    class AcceptGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ActivationOverrideBehavior
+      DISTRIBUTED_GRANTS_ONLY: String
+      ALL_GRANTS_PERMITTED_BY_ISSUER: String
+    end
+
+    module AllowedOperation
+      CREATE_GRANT: String
+      CHECKOUT_LICENSE: String
+      CHECKOUT_BORROW_LICENSE: String
+      CHECK_IN_LICENSE: String
+      EXTEND_CONSUMPTION_LICENSE: String
+      LIST_PURCHASED_LICENSES: String
+      CREATE_TOKEN: String
+    end
+
+    class AuthorizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AutomatedDiscoveryInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_run_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_run_time: Time?
+    end
+
+    class BorrowConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_early_check_in: bool,
+        ?max_time_to_live_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_early_check_in: bool?
+      attr_accessor max_time_to_live_in_minutes: Integer?
+    end
+
+    class CheckInLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_consumption_token: String,
+        ?beneficiary: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_consumption_token: String?
+      attr_accessor beneficiary: String?
+    end
+
+    class CheckInLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CheckoutBorrowLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?entitlements: Array[Types::EntitlementData],
+        ?digital_signature_method: String,
+        ?node_id: String,
+        ?checkout_metadata: Array[Types::Metadata],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor entitlements: Array[Types::EntitlementData]?
+      attr_accessor digital_signature_method: String?
+      attr_accessor node_id: String?
+      attr_accessor checkout_metadata: Array[Types::Metadata]?
+      attr_accessor client_token: String?
+    end
+
+    class CheckoutBorrowLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?license_consumption_token: String,
+        ?entitlements_allowed: Array[Types::EntitlementData],
+        ?node_id: String,
+        ?signed_token: String,
+        ?issued_at: String,
+        ?expiration: String,
+        ?checkout_metadata: Array[Types::Metadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor license_consumption_token: String?
+      attr_accessor entitlements_allowed: Array[Types::EntitlementData]?
+      attr_accessor node_id: String?
+      attr_accessor signed_token: String?
+      attr_accessor issued_at: String?
+      attr_accessor expiration: String?
+      attr_accessor checkout_metadata: Array[Types::Metadata]?
+    end
+
+    class CheckoutLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_sku: String,
+        ?checkout_type: String,
+        ?key_fingerprint: String,
+        ?entitlements: Array[Types::EntitlementData],
+        ?client_token: String,
+        ?beneficiary: String,
+        ?node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_sku: String?
+      attr_accessor checkout_type: String?
+      attr_accessor key_fingerprint: String?
+      attr_accessor entitlements: Array[Types::EntitlementData]?
+      attr_accessor client_token: String?
+      attr_accessor beneficiary: String?
+      attr_accessor node_id: String?
+    end
+
+    class CheckoutLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checkout_type: String,
+        ?license_consumption_token: String,
+        ?entitlements_allowed: Array[Types::EntitlementData],
+        ?signed_token: String,
+        ?node_id: String,
+        ?issued_at: String,
+        ?expiration: String,
+        ?license_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checkout_type: String?
+      attr_accessor license_consumption_token: String?
+      attr_accessor entitlements_allowed: Array[Types::EntitlementData]?
+      attr_accessor signed_token: String?
+      attr_accessor node_id: String?
+      attr_accessor issued_at: String?
+      attr_accessor expiration: String?
+      attr_accessor license_arn: String?
+    end
+
+    module CheckoutType
+      PROVISIONAL: String
+      PERPETUAL: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConsumedLicenseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?consumed_licenses: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor consumed_licenses: Integer?
+    end
+
+    class ConsumptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?renew_type: String,
+        ?provisional_configuration: Types::ProvisionalConfiguration,
+        ?borrow_configuration: Types::BorrowConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor renew_type: String?
+      attr_accessor provisional_configuration: Types::ProvisionalConfiguration?
+      attr_accessor borrow_configuration: Types::BorrowConfiguration?
+    end
+
+    class CreateGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?grant_name: String,
+        ?license_arn: String,
+        ?principals: Array[String],
+        ?home_region: String,
+        ?allowed_operations: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor grant_name: String?
+      attr_accessor license_arn: String?
+      attr_accessor principals: Array[String]?
+      attr_accessor home_region: String?
+      attr_accessor allowed_operations: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    class CreateGrantVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?grant_arn: String,
+        ?grant_name: String,
+        ?allowed_operations: Array[String],
+        ?status: String,
+        ?status_reason: String,
+        ?source_version: String,
+        ?options: Types::Options,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor grant_arn: String?
+      attr_accessor grant_name: String?
+      attr_accessor allowed_operations: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor source_version: String?
+      attr_accessor options: Types::Options?
+    end
+
+    class CreateGrantVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    class CreateLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?license_counting_type: String,
+        ?license_count: Integer,
+        ?license_count_hard_limit: bool,
+        ?license_rules: Array[String],
+        ?tags: Array[Types::Tag],
+        ?disassociate_when_not_found: bool,
+        ?product_information_list: Array[Types::ProductInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_counting_type: String?
+      attr_accessor license_count: Integer?
+      attr_accessor license_count_hard_limit: bool?
+      attr_accessor license_rules: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor disassociate_when_not_found: bool?
+      attr_accessor product_information_list: Array[Types::ProductInformation]?
+    end
+
+    class CreateLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+    end
+
+    class CreateLicenseConversionTaskForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?source_license_context: Types::LicenseConversionContext,
+        ?destination_license_context: Types::LicenseConversionContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor source_license_context: Types::LicenseConversionContext?
+      attr_accessor destination_license_context: Types::LicenseConversionContext?
+    end
+
+    class CreateLicenseConversionTaskForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_conversion_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_conversion_task_id: String?
+    end
+
+    class CreateLicenseManagerReportGeneratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_generator_name: String,
+        ?type: Array[String],
+        ?report_context: Types::ReportContext,
+        ?report_frequency: Types::ReportFrequency,
+        ?client_token: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_generator_name: String?
+      attr_accessor type: Array[String]?
+      attr_accessor report_context: Types::ReportContext?
+      attr_accessor report_frequency: Types::ReportFrequency?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLicenseManagerReportGeneratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_manager_report_generator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_manager_report_generator_arn: String?
+    end
+
+    class CreateLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_name: String,
+        ?product_name: String,
+        ?product_sku: String,
+        ?issuer: Types::Issuer,
+        ?home_region: String,
+        ?validity: Types::DatetimeRange,
+        ?entitlements: Array[Types::Entitlement],
+        ?beneficiary: String,
+        ?consumption_configuration: Types::ConsumptionConfiguration,
+        ?license_metadata: Array[Types::Metadata],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_name: String?
+      attr_accessor product_name: String?
+      attr_accessor product_sku: String?
+      attr_accessor issuer: Types::Issuer?
+      attr_accessor home_region: String?
+      attr_accessor validity: Types::DatetimeRange?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor beneficiary: String?
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration?
+      attr_accessor license_metadata: Array[Types::Metadata]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    class CreateLicenseVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?license_name: String,
+        ?product_name: String,
+        ?issuer: Types::Issuer,
+        ?home_region: String,
+        ?validity: Types::DatetimeRange,
+        ?license_metadata: Array[Types::Metadata],
+        ?entitlements: Array[Types::Entitlement],
+        ?consumption_configuration: Types::ConsumptionConfiguration,
+        ?status: String,
+        ?client_token: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor license_name: String?
+      attr_accessor product_name: String?
+      attr_accessor issuer: Types::Issuer?
+      attr_accessor home_region: String?
+      attr_accessor validity: Types::DatetimeRange?
+      attr_accessor license_metadata: Array[Types::Metadata]?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration?
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+      attr_accessor source_version: String?
+    end
+
+    class CreateLicenseVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?version: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor version: String?
+      attr_accessor status: String?
+    end
+
+    class CreateTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?role_arns: Array[String],
+        ?expiration_in_days: Integer,
+        ?token_properties: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor role_arns: Array[String]?
+      attr_accessor expiration_in_days: Integer?
+      attr_accessor token_properties: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: String,
+        ?token_type: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: String?
+      attr_accessor token_type: String?
+      attr_accessor token: String?
+    end
+
+    class DatetimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin: String,
+        ?end: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin: String?
+      attr_accessor end: String?
+    end
+
+    class DeleteGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status_reason: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status_reason: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    class DeleteLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+    end
+
+    class DeleteLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLicenseManagerReportGeneratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_manager_report_generator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_manager_report_generator_arn: String?
+    end
+
+    class DeleteLicenseManagerReportGeneratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor source_version: String?
+    end
+
+    class DeleteLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?deletion_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor deletion_date: String?
+    end
+
+    class DeleteTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: String?
+    end
+
+    class DeleteTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DigitalSignatureMethod
+      JWT_PS384: String
+    end
+
+    class Entitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?max_count: Integer,
+        ?overage: bool,
+        ?unit: String,
+        ?allow_check_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor max_count: Integer?
+      attr_accessor overage: bool?
+      attr_accessor unit: String?
+      attr_accessor allow_check_in: bool?
+    end
+
+    class EntitlementData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor unit: String?
+    end
+
+    module EntitlementDataUnit
+      COUNT: String
+      NONE: String
+      SECONDS: String
+      MICROSECONDS: String
+      MILLISECONDS: String
+      BYTES: String
+      KILOBYTES: String
+      MEGABYTES: String
+      GIGABYTES: String
+      TERABYTES: String
+      BITS: String
+      KILOBITS: String
+      MEGABITS: String
+      GIGABITS: String
+      TERABITS: String
+      PERCENT: String
+      BYTES_PER_SECOND: String
+      KILOBYTES_PER_SECOND: String
+      MEGABYTES_PER_SECOND: String
+      GIGABYTES_PER_SECOND: String
+      TERABYTES_PER_SECOND: String
+      BITS_PER_SECOND: String
+      KILOBITS_PER_SECOND: String
+      MEGABITS_PER_SECOND: String
+      GIGABITS_PER_SECOND: String
+      TERABITS_PER_SECOND: String
+      COUNT_PER_SECOND: String
+    end
+
+    class EntitlementNotAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EntitlementUnit
+      COUNT: String
+      NONE: String
+      SECONDS: String
+      MICROSECONDS: String
+      MILLISECONDS: String
+      BYTES: String
+      KILOBYTES: String
+      MEGABYTES: String
+      GIGABYTES: String
+      TERABYTES: String
+      BITS: String
+      KILOBITS: String
+      MEGABITS: String
+      GIGABITS: String
+      TERABITS: String
+      PERCENT: String
+      BYTES_PER_SECOND: String
+      KILOBYTES_PER_SECOND: String
+      MEGABYTES_PER_SECOND: String
+      GIGABYTES_PER_SECOND: String
+      TERABYTES_PER_SECOND: String
+      BITS_PER_SECOND: String
+      KILOBITS_PER_SECOND: String
+      MEGABITS_PER_SECOND: String
+      GIGABITS_PER_SECOND: String
+      TERABITS_PER_SECOND: String
+      COUNT_PER_SECOND: String
+    end
+
+    class EntitlementUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?consumed_value: String,
+        ?max_count: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor consumed_value: String?
+      attr_accessor max_count: String?
+      attr_accessor unit: String?
+    end
+
+    class ExtendLicenseConsumptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_consumption_token: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_consumption_token: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class ExtendLicenseConsumptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_consumption_token: String,
+        ?expiration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_consumption_token: String?
+      attr_accessor expiration: String?
+    end
+
+    class FailedDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class FilterLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAccessTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?token_properties: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor token_properties: Array[String]?
+    end
+
+    class GetAccessTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+    end
+
+    class GetGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor version: String?
+    end
+
+    class GetGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant: Types::Grant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant: Types::Grant?
+    end
+
+    class GetLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+    end
+
+    class GetLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_id: String,
+        ?license_configuration_arn: String,
+        ?name: String,
+        ?description: String,
+        ?license_counting_type: String,
+        ?license_rules: Array[String],
+        ?license_count: Integer,
+        ?license_count_hard_limit: bool,
+        ?consumed_licenses: Integer,
+        ?status: String,
+        ?owner_account_id: String,
+        ?consumed_license_summary_list: Array[Types::ConsumedLicenseSummary],
+        ?managed_resource_summary_list: Array[Types::ManagedResourceSummary],
+        ?tags: Array[Types::Tag],
+        ?product_information_list: Array[Types::ProductInformation],
+        ?automated_discovery_information: Types::AutomatedDiscoveryInformation,
+        ?disassociate_when_not_found: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_id: String?
+      attr_accessor license_configuration_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_counting_type: String?
+      attr_accessor license_rules: Array[String]?
+      attr_accessor license_count: Integer?
+      attr_accessor license_count_hard_limit: bool?
+      attr_accessor consumed_licenses: Integer?
+      attr_accessor status: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor consumed_license_summary_list: Array[Types::ConsumedLicenseSummary]?
+      attr_accessor managed_resource_summary_list: Array[Types::ManagedResourceSummary]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor product_information_list: Array[Types::ProductInformation]?
+      attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation?
+      attr_accessor disassociate_when_not_found: bool?
+    end
+
+    class GetLicenseConversionTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_conversion_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_conversion_task_id: String?
+    end
+
+    class GetLicenseConversionTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_conversion_task_id: String,
+        ?resource_arn: String,
+        ?source_license_context: Types::LicenseConversionContext,
+        ?destination_license_context: Types::LicenseConversionContext,
+        ?status_message: String,
+        ?status: String,
+        ?start_time: Time,
+        ?license_conversion_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_conversion_task_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor source_license_context: Types::LicenseConversionContext?
+      attr_accessor destination_license_context: Types::LicenseConversionContext?
+      attr_accessor status_message: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor license_conversion_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class GetLicenseManagerReportGeneratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_manager_report_generator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_manager_report_generator_arn: String?
+    end
+
+    class GetLicenseManagerReportGeneratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_generator: Types::ReportGenerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_generator: Types::ReportGenerator?
+    end
+
+    class GetLicenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor version: String?
+    end
+
+    class GetLicenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license: Types::License,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license: Types::License?
+    end
+
+    class GetLicenseUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+    end
+
+    class GetLicenseUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_usage: Types::LicenseUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_usage: Types::LicenseUsage?
+    end
+
+    class GetServiceSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetServiceSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_arn: String,
+        ?sns_topic_arn: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?enable_cross_accounts_discovery: bool,
+        ?license_manager_resource_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor enable_cross_accounts_discovery: bool?
+      attr_accessor license_manager_resource_share_arn: String?
+    end
+
+    class Grant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?grant_name: String,
+        ?parent_arn: String,
+        ?license_arn: String,
+        ?grantee_principal_arn: String,
+        ?home_region: String,
+        ?grant_status: String,
+        ?status_reason: String,
+        ?version: String,
+        ?granted_operations: Array[String],
+        ?options: Types::Options,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor grant_name: String?
+      attr_accessor parent_arn: String?
+      attr_accessor license_arn: String?
+      attr_accessor grantee_principal_arn: String?
+      attr_accessor home_region: String?
+      attr_accessor grant_status: String?
+      attr_accessor status_reason: String?
+      attr_accessor version: String?
+      attr_accessor granted_operations: Array[String]?
+      attr_accessor options: Types::Options?
+    end
+
+    module GrantStatus
+      PENDING_WORKFLOW: String
+      PENDING_ACCEPT: String
+      REJECTED: String
+      ACTIVE: String
+      FAILED_WORKFLOW: String
+      DELETED: String
+      PENDING_DELETE: String
+      DISABLED: String
+      WORKFLOW_COMPLETED: String
+    end
+
+    class GrantedLicense
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?license_name: String,
+        ?product_name: String,
+        ?product_sku: String,
+        ?issuer: Types::IssuerDetails,
+        ?home_region: String,
+        ?status: String,
+        ?validity: Types::DatetimeRange,
+        ?beneficiary: String,
+        ?entitlements: Array[Types::Entitlement],
+        ?consumption_configuration: Types::ConsumptionConfiguration,
+        ?license_metadata: Array[Types::Metadata],
+        ?create_time: String,
+        ?version: String,
+        ?received_metadata: Types::ReceivedMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor license_name: String?
+      attr_accessor product_name: String?
+      attr_accessor product_sku: String?
+      attr_accessor issuer: Types::IssuerDetails?
+      attr_accessor home_region: String?
+      attr_accessor status: String?
+      attr_accessor validity: Types::DatetimeRange?
+      attr_accessor beneficiary: String?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration?
+      attr_accessor license_metadata: Array[Types::Metadata]?
+      attr_accessor create_time: String?
+      attr_accessor version: String?
+      attr_accessor received_metadata: Types::ReceivedMetadata?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InventoryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?condition: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor condition: String?
+      attr_accessor value: String?
+    end
+
+    module InventoryFilterCondition
+      EQUALS: String
+      NOT_EQUALS: String
+      BEGINS_WITH: String
+      CONTAINS: String
+    end
+
+    class Issuer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sign_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sign_key: String?
+    end
+
+    class IssuerDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sign_key: String,
+        ?key_fingerprint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sign_key: String?
+      attr_accessor key_fingerprint: String?
+    end
+
+    class License
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?license_name: String,
+        ?product_name: String,
+        ?product_sku: String,
+        ?issuer: Types::IssuerDetails,
+        ?home_region: String,
+        ?status: String,
+        ?validity: Types::DatetimeRange,
+        ?beneficiary: String,
+        ?entitlements: Array[Types::Entitlement],
+        ?consumption_configuration: Types::ConsumptionConfiguration,
+        ?license_metadata: Array[Types::Metadata],
+        ?create_time: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor license_name: String?
+      attr_accessor product_name: String?
+      attr_accessor product_sku: String?
+      attr_accessor issuer: Types::IssuerDetails?
+      attr_accessor home_region: String?
+      attr_accessor status: String?
+      attr_accessor validity: Types::DatetimeRange?
+      attr_accessor beneficiary: String?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration?
+      attr_accessor license_metadata: Array[Types::Metadata]?
+      attr_accessor create_time: String?
+      attr_accessor version: String?
+    end
+
+    class LicenseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_id: String,
+        ?license_configuration_arn: String,
+        ?name: String,
+        ?description: String,
+        ?license_counting_type: String,
+        ?license_rules: Array[String],
+        ?license_count: Integer,
+        ?license_count_hard_limit: bool,
+        ?disassociate_when_not_found: bool,
+        ?consumed_licenses: Integer,
+        ?status: String,
+        ?owner_account_id: String,
+        ?consumed_license_summary_list: Array[Types::ConsumedLicenseSummary],
+        ?managed_resource_summary_list: Array[Types::ManagedResourceSummary],
+        ?product_information_list: Array[Types::ProductInformation],
+        ?automated_discovery_information: Types::AutomatedDiscoveryInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_id: String?
+      attr_accessor license_configuration_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_counting_type: String?
+      attr_accessor license_rules: Array[String]?
+      attr_accessor license_count: Integer?
+      attr_accessor license_count_hard_limit: bool?
+      attr_accessor disassociate_when_not_found: bool?
+      attr_accessor consumed_licenses: Integer?
+      attr_accessor status: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor consumed_license_summary_list: Array[Types::ConsumedLicenseSummary]?
+      attr_accessor managed_resource_summary_list: Array[Types::ManagedResourceSummary]?
+      attr_accessor product_information_list: Array[Types::ProductInformation]?
+      attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation?
+    end
+
+    class LicenseConfigurationAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?resource_owner_id: String,
+        ?association_time: Time,
+        ?ami_association_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_owner_id: String?
+      attr_accessor association_time: Time?
+      attr_accessor ami_association_scope: String?
+    end
+
+    module LicenseConfigurationStatus
+      AVAILABLE: String
+      DISABLED: String
+    end
+
+    class LicenseConfigurationUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?resource_status: String,
+        ?resource_owner_id: String,
+        ?association_time: Time,
+        ?consumed_licenses: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_status: String?
+      attr_accessor resource_owner_id: String?
+      attr_accessor association_time: Time?
+      attr_accessor consumed_licenses: Integer?
+    end
+
+    class LicenseConversionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_operation: String,
+        ?product_codes: Array[Types::ProductCodeListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_operation: String?
+      attr_accessor product_codes: Array[Types::ProductCodeListItem]?
+    end
+
+    class LicenseConversionTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_conversion_task_id: String,
+        ?resource_arn: String,
+        ?source_license_context: Types::LicenseConversionContext,
+        ?destination_license_context: Types::LicenseConversionContext,
+        ?status: String,
+        ?status_message: String,
+        ?start_time: Time,
+        ?license_conversion_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_conversion_task_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor source_license_context: Types::LicenseConversionContext?
+      attr_accessor destination_license_context: Types::LicenseConversionContext?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor start_time: Time?
+      attr_accessor license_conversion_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module LicenseConversionTaskStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module LicenseCountingType
+      VCPU: String
+      INSTANCE: String
+      CORE: String
+      SOCKET: String
+    end
+
+    module LicenseDeletionStatus
+      PENDING_DELETE: String
+      DELETED: String
+    end
+
+    class LicenseOperationFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?error_message: String,
+        ?failure_time: Time,
+        ?operation_name: String,
+        ?resource_owner_id: String,
+        ?operation_requested_by: String,
+        ?metadata_list: Array[Types::Metadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor error_message: String?
+      attr_accessor failure_time: Time?
+      attr_accessor operation_name: String?
+      attr_accessor resource_owner_id: String?
+      attr_accessor operation_requested_by: String?
+      attr_accessor metadata_list: Array[Types::Metadata]?
+    end
+
+    class LicenseSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+        ?ami_association_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+      attr_accessor ami_association_scope: String?
+    end
+
+    module LicenseStatus
+      AVAILABLE: String
+      PENDING_AVAILABLE: String
+      DEACTIVATED: String
+      SUSPENDED: String
+      EXPIRED: String
+      PENDING_DELETE: String
+      DELETED: String
+    end
+
+    class LicenseUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement_usages: Array[Types::EntitlementUsage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement_usages: Array[Types::EntitlementUsage]?
+    end
+
+    class LicenseUsageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssociationsForLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociationsForLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_associations: Array[Types::LicenseConfigurationAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_associations: Array[Types::LicenseConfigurationAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDistributedGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arns: Array[String],
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arns: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDistributedGrantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::Grant],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::Grant]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFailuresForLicenseConfigurationOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFailuresForLicenseConfigurationOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_operation_failure_list: Array[Types::LicenseOperationFailure],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_operation_failure_list: Array[Types::LicenseOperationFailure]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListLicenseConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configurations: Array[Types::LicenseConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configurations: Array[Types::LicenseConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseConversionTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListLicenseConversionTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_conversion_tasks: Array[Types::LicenseConversionTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_conversion_tasks: Array[Types::LicenseConversionTask]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseManagerReportGeneratorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLicenseManagerReportGeneratorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_generators: Array[Types::ReportGenerator],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_generators: Array[Types::ReportGenerator]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseSpecificationsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseSpecificationsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_specifications: Array[Types::LicenseSpecification],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_specifications: Array[Types::LicenseSpecification]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLicenseVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?licenses: Array[Types::License],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor licenses: Array[Types::License]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicensesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arns: Array[String],
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arns: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLicensesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?licenses: Array[Types::License],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor licenses: Array[Types::License]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReceivedGrantsForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReceivedGrantsForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::Grant],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::Grant]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReceivedGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arns: Array[String],
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arns: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReceivedGrantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::Grant],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::Grant]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReceivedLicensesForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReceivedLicensesForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?licenses: Array[Types::GrantedLicense],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor licenses: Array[Types::GrantedLicense]?
+      attr_accessor next_token: String?
+    end
+
+    class ListReceivedLicensesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arns: Array[String],
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arns: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListReceivedLicensesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?licenses: Array[Types::GrantedLicense],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor licenses: Array[Types::GrantedLicense]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceInventoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::InventoryFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::InventoryFilter]?
+    end
+
+    class ListResourceInventoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_inventory_list: Array[Types::ResourceInventory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_inventory_list: Array[Types::ResourceInventory]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTokensResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tokens: Array[Types::TokenData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tokens: Array[Types::TokenData]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsageForLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListUsageForLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_usage_list: Array[Types::LicenseConfigurationUsage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_usage_list: Array[Types::LicenseConfigurationUsage]?
+      attr_accessor next_token: String?
+    end
+
+    class ManagedResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?association_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor association_count: Integer?
+    end
+
+    class Metadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class NoEntitlementsAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Options
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_override_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_override_behavior: String?
+    end
+
+    class OrganizationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_integration: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_integration: bool?
+    end
+
+    class ProductCodeListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code_id: String,
+        ?product_code_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code_id: String?
+      attr_accessor product_code_type: String?
+    end
+
+    module ProductCodeType
+      MARKETPLACE: String
+    end
+
+    class ProductInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?product_information_filter_list: Array[Types::ProductInformationFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor product_information_filter_list: Array[Types::ProductInformationFilter]?
+    end
+
+    class ProductInformationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_information_filter_name: String,
+        ?product_information_filter_value: Array[String],
+        ?product_information_filter_comparator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_information_filter_name: String?
+      attr_accessor product_information_filter_value: Array[String]?
+      attr_accessor product_information_filter_comparator: String?
+    end
+
+    class ProvisionalConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_time_to_live_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_time_to_live_in_minutes: Integer?
+    end
+
+    class RateLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReceivedMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?received_status: String,
+        ?received_status_reason: String,
+        ?allowed_operations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor received_status: String?
+      attr_accessor received_status_reason: String?
+      attr_accessor allowed_operations: Array[String]?
+    end
+
+    module ReceivedStatus
+      PENDING_WORKFLOW: String
+      PENDING_ACCEPT: String
+      REJECTED: String
+      ACTIVE: String
+      FAILED_WORKFLOW: String
+      DELETED: String
+      DISABLED: String
+      WORKFLOW_COMPLETED: String
+    end
+
+    class RedirectException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor message: String?
+    end
+
+    class RejectGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+    end
+
+    class RejectGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_arn: String,
+        ?status: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+    end
+
+    module RenewType
+      NONE: String
+      WEEKLY: String
+      MONTHLY: String
+    end
+
+    class ReportContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arns: Array[String]?
+    end
+
+    class ReportFrequency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor period: String?
+    end
+
+    module ReportFrequencyType
+      DAY: String
+      WEEK: String
+      MONTH: String
+    end
+
+    class ReportGenerator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_generator_name: String,
+        ?report_type: Array[String],
+        ?report_context: Types::ReportContext,
+        ?report_frequency: Types::ReportFrequency,
+        ?license_manager_report_generator_arn: String,
+        ?last_run_status: String,
+        ?last_run_failure_reason: String,
+        ?last_report_generation_time: String,
+        ?report_creator_account: String,
+        ?description: String,
+        ?s3_location: Types::S3Location,
+        ?create_time: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_generator_name: String?
+      attr_accessor report_type: Array[String]?
+      attr_accessor report_context: Types::ReportContext?
+      attr_accessor report_frequency: Types::ReportFrequency?
+      attr_accessor license_manager_report_generator_arn: String?
+      attr_accessor last_run_status: String?
+      attr_accessor last_run_failure_reason: String?
+      attr_accessor last_report_generation_time: String?
+      attr_accessor report_creator_account: String?
+      attr_accessor description: String?
+      attr_accessor s3_location: Types::S3Location?
+      attr_accessor create_time: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ReportType
+      LICENSE_CONFIGURATION_SUMMARY_REPORT: String
+      LICENSE_CONFIGURATION_USAGE_REPORT: String
+    end
+
+    class ResourceInventory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?resource_arn: String,
+        ?platform: String,
+        ?platform_version: String,
+        ?resource_owning_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor platform: String?
+      attr_accessor platform_version: String?
+      attr_accessor resource_owning_account_id: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      EC2_INSTANCE: String
+      EC2_HOST: String
+      EC2_AMI: String
+      RDS: String
+      SYSTEMS_MANAGER_MANAGED_INSTANCE: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+    end
+
+    class ServerInternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TokenData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: String,
+        ?token_type: String,
+        ?license_arn: String,
+        ?expiration_time: String,
+        ?token_properties: Array[String],
+        ?role_arns: Array[String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: String?
+      attr_accessor token_type: String?
+      attr_accessor license_arn: String?
+      attr_accessor expiration_time: String?
+      attr_accessor token_properties: Array[String]?
+      attr_accessor role_arns: Array[String]?
+      attr_accessor status: String?
+    end
+
+    module TokenType
+      REFRESH_TOKEN: String
+    end
+
+    class UnsupportedDigitalSignatureMethodException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLicenseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arn: String,
+        ?license_configuration_status: String,
+        ?license_rules: Array[String],
+        ?license_count: Integer,
+        ?license_count_hard_limit: bool,
+        ?name: String,
+        ?description: String,
+        ?product_information_list: Array[Types::ProductInformation],
+        ?disassociate_when_not_found: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arn: String?
+      attr_accessor license_configuration_status: String?
+      attr_accessor license_rules: Array[String]?
+      attr_accessor license_count: Integer?
+      attr_accessor license_count_hard_limit: bool?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor product_information_list: Array[Types::ProductInformation]?
+      attr_accessor disassociate_when_not_found: bool?
+    end
+
+    class UpdateLicenseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLicenseManagerReportGeneratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_manager_report_generator_arn: String,
+        ?report_generator_name: String,
+        ?type: Array[String],
+        ?report_context: Types::ReportContext,
+        ?report_frequency: Types::ReportFrequency,
+        ?client_token: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_manager_report_generator_arn: String?
+      attr_accessor report_generator_name: String?
+      attr_accessor type: Array[String]?
+      attr_accessor report_context: Types::ReportContext?
+      attr_accessor report_frequency: Types::ReportFrequency?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateLicenseManagerReportGeneratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLicenseSpecificationsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?add_license_specifications: Array[Types::LicenseSpecification],
+        ?remove_license_specifications: Array[Types::LicenseSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor add_license_specifications: Array[Types::LicenseSpecification]?
+      attr_accessor remove_license_specifications: Array[Types::LicenseSpecification]?
+    end
+
+    class UpdateLicenseSpecificationsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServiceSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_arn: String,
+        ?sns_topic_arn: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?enable_cross_accounts_discovery: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor enable_cross_accounts_discovery: bool?
+    end
+
+    class UpdateServiceSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

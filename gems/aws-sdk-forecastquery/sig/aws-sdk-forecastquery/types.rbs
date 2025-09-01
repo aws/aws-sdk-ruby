@@ -1,0 +1,143 @@
+module Aws::Forecastquery
+  module Types
+
+    class DataPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: String?
+      attr_accessor value: Float?
+    end
+
+    class Forecast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predictions: Hash[String, Array[Types::DataPoint]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predictions: Hash[String, Array[Types::DataPoint]]?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QueryForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast_arn: String,
+        ?start_date: String,
+        ?end_date: String,
+        ?filters: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast_arn: String?
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+      attr_accessor filters: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class QueryForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast: Types::Forecast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast: Types::Forecast?
+    end
+
+    class QueryWhatIfForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?what_if_forecast_arn: String,
+        ?start_date: String,
+        ?end_date: String,
+        ?filters: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor what_if_forecast_arn: String?
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+      attr_accessor filters: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class QueryWhatIfForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecast: Types::Forecast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecast: Types::Forecast?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

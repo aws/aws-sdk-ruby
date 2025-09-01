@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceMetering
+      VERSION: String
+    end
+  end

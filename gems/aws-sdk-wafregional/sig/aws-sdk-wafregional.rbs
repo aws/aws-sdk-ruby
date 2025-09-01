@@ -1,0 +1,5 @@
+  module Aws
+    module WAFRegional
+      VERSION: String
+    end
+  end

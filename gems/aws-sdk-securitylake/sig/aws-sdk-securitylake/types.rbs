@@ -1,0 +1,1293 @@
+module Aws::SecurityLake
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    module AccessType
+      LAKEFORMATION: String
+      S3: String
+    end
+
+    class AwsIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: String?
+      attr_accessor external_id: String?
+    end
+
+    class AwsLogSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?regions: Array[String],
+        ?source_name: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor source_name: String?
+      attr_accessor source_version: String?
+    end
+
+    module AwsLogSourceName
+      ROUTE53: String
+      VPC_FLOW: String
+      SH_FINDINGS: String
+      CLOUD_TRAIL_MGMT: String
+      LAMBDA_EXECUTION: String
+      S3_DATA: String
+      EKS_AUDIT: String
+      WAF: String
+    end
+
+    class AwsLogSourceResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor source_version: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAwsLogSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::AwsLogSourceConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::AwsLogSourceConfiguration]?
+    end
+
+    class CreateAwsLogSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed: Array[String]?
+    end
+
+    class CreateCustomLogSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?source_version: String,
+        ?event_classes: Array[String],
+        ?configuration: Types::CustomLogSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor source_version: String?
+      attr_accessor event_classes: Array[String]?
+      attr_accessor configuration: Types::CustomLogSourceConfiguration?
+    end
+
+    class CreateCustomLogSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::CustomLogSourceResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::CustomLogSourceResource?
+    end
+
+    class CreateDataLakeExceptionSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_protocol: String,
+        ?notification_endpoint: String,
+        ?exception_time_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_protocol: String?
+      attr_accessor notification_endpoint: String?
+      attr_accessor exception_time_to_live: Integer?
+    end
+
+    class CreateDataLakeExceptionSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDataLakeOrganizationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration]?
+    end
+
+    class CreateDataLakeOrganizationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateDataLakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Types::DataLakeConfiguration],
+        ?meta_store_manager_role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Types::DataLakeConfiguration]?
+      attr_accessor meta_store_manager_role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataLakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lakes: Array[Types::DataLakeResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lakes: Array[Types::DataLakeResource]?
+    end
+
+    class CreateSubscriberNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+        ?configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+      attr_accessor configuration: Types::NotificationConfiguration?
+    end
+
+    class CreateSubscriberNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_endpoint: String?
+    end
+
+    class CreateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_identity: Types::AwsIdentity,
+        ?subscriber_name: String,
+        ?subscriber_description: String,
+        ?sources: Array[Types::LogSourceResource],
+        ?access_types: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_identity: Types::AwsIdentity?
+      attr_accessor subscriber_name: String?
+      attr_accessor subscriber_description: String?
+      attr_accessor sources: Array[Types::LogSourceResource]?
+      attr_accessor access_types: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber: Types::SubscriberResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber: Types::SubscriberResource?
+    end
+
+    class CustomLogSourceAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawler_arn: String,
+        ?database_arn: String,
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawler_arn: String?
+      attr_accessor database_arn: String?
+      attr_accessor table_arn: String?
+    end
+
+    class CustomLogSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crawler_configuration: Types::CustomLogSourceCrawlerConfiguration,
+        ?provider_identity: Types::AwsIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crawler_configuration: Types::CustomLogSourceCrawlerConfiguration?
+      attr_accessor provider_identity: Types::AwsIdentity?
+    end
+
+    class CustomLogSourceCrawlerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class CustomLogSourceProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor location: String?
+    end
+
+    class CustomLogSourceResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?source_version: String,
+        ?provider: Types::CustomLogSourceProvider,
+        ?attributes: Types::CustomLogSourceAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor source_version: String?
+      attr_accessor provider: Types::CustomLogSourceProvider?
+      attr_accessor attributes: Types::CustomLogSourceAttributes?
+    end
+
+    class DataLakeAutoEnableNewAccountConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?sources: Array[Types::AwsLogSourceResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor sources: Array[Types::AwsLogSourceResource]?
+    end
+
+    class DataLakeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?encryption_configuration: Types::DataLakeEncryptionConfiguration,
+        ?lifecycle_configuration: Types::DataLakeLifecycleConfiguration,
+        ?replication_configuration: Types::DataLakeReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor encryption_configuration: Types::DataLakeEncryptionConfiguration?
+      attr_accessor lifecycle_configuration: Types::DataLakeLifecycleConfiguration?
+      attr_accessor replication_configuration: Types::DataLakeReplicationConfiguration?
+    end
+
+    class DataLakeEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+    end
+
+    class DataLakeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?exception: String,
+        ?remediation: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor exception: String?
+      attr_accessor remediation: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class DataLakeLifecycleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration: Types::DataLakeLifecycleExpiration,
+        ?transitions: Array[Types::DataLakeLifecycleTransition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration: Types::DataLakeLifecycleExpiration?
+      attr_accessor transitions: Array[Types::DataLakeLifecycleTransition]?
+    end
+
+    class DataLakeLifecycleExpiration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+    end
+
+    class DataLakeLifecycleTransition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class: String,
+        ?days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class: String?
+      attr_accessor days: Integer?
+    end
+
+    class DataLakeReplicationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor role_arn: String?
+    end
+
+    class DataLakeResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lake_arn: String,
+        ?region: String,
+        ?s3_bucket_arn: String,
+        ?encryption_configuration: Types::DataLakeEncryptionConfiguration,
+        ?lifecycle_configuration: Types::DataLakeLifecycleConfiguration,
+        ?replication_configuration: Types::DataLakeReplicationConfiguration,
+        ?create_status: String,
+        ?update_status: Types::DataLakeUpdateStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lake_arn: String?
+      attr_accessor region: String?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor encryption_configuration: Types::DataLakeEncryptionConfiguration?
+      attr_accessor lifecycle_configuration: Types::DataLakeLifecycleConfiguration?
+      attr_accessor replication_configuration: Types::DataLakeReplicationConfiguration?
+      attr_accessor create_status: String?
+      attr_accessor update_status: Types::DataLakeUpdateStatus?
+    end
+
+    class DataLakeSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: String,
+        ?source_name: String,
+        ?event_classes: Array[String],
+        ?source_statuses: Array[Types::DataLakeSourceStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: String?
+      attr_accessor source_name: String?
+      attr_accessor event_classes: Array[String]?
+      attr_accessor source_statuses: Array[Types::DataLakeSourceStatus]?
+    end
+
+    class DataLakeSourceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor status: String?
+    end
+
+    module DataLakeStatus
+      INITIALIZED: String
+      PENDING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class DataLakeUpdateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor code: String?
+    end
+
+    class DataLakeUpdateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?status: String,
+        ?exception: Types::DataLakeUpdateException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor status: String?
+      attr_accessor exception: Types::DataLakeUpdateException?
+    end
+
+    class DeleteAwsLogSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::AwsLogSourceConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::AwsLogSourceConfiguration]?
+    end
+
+    class DeleteAwsLogSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed: Array[String]?
+    end
+
+    class DeleteCustomLogSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?source_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor source_version: String?
+    end
+
+    class DeleteCustomLogSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataLakeExceptionSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataLakeExceptionSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataLakeOrganizationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration]?
+    end
+
+    class DeleteDataLakeOrganizationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDataLakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+    end
+
+    class DeleteDataLakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriberNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+    end
+
+    class DeleteSubscriberNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+    end
+
+    class DeleteSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterDataLakeDelegatedAdministratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterDataLakeDelegatedAdministratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDataLakeExceptionSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDataLakeExceptionSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_protocol: String,
+        ?notification_endpoint: String,
+        ?exception_time_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_protocol: String?
+      attr_accessor notification_endpoint: String?
+      attr_accessor exception_time_to_live: Integer?
+    end
+
+    class GetDataLakeOrganizationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDataLakeOrganizationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_enable_new_account: Array[Types::DataLakeAutoEnableNewAccountConfiguration]?
+    end
+
+    class GetDataLakeSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDataLakeSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lake_arn: String,
+        ?data_lake_sources: Array[Types::DataLakeSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lake_arn: String?
+      attr_accessor data_lake_sources: Array[Types::DataLakeSource]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+    end
+
+    class GetSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber: Types::SubscriberResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber: Types::SubscriberResource?
+    end
+
+    module HttpMethod
+      POST: String
+      PUT: String
+    end
+
+    class HttpsNotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?authorization_api_key_name: String,
+        ?authorization_api_key_value: String,
+        ?http_method: String,
+        ?target_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor authorization_api_key_name: String?
+      attr_accessor authorization_api_key_value: String?
+      attr_accessor http_method: String?
+      attr_accessor target_role_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDataLakeExceptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataLakeExceptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exceptions: Array[Types::DataLakeException],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exceptions: Array[Types::DataLakeException]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataLakesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+    end
+
+    class ListDataLakesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lakes: Array[Types::DataLakeResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lakes: Array[Types::DataLakeResource]?
+    end
+
+    class ListLogSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?regions: Array[String],
+        ?sources: Array[Types::LogSourceResource],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor sources: Array[Types::LogSourceResource]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::LogSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::LogSource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscribersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSubscribersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscribers: Array[Types::SubscriberResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscribers: Array[Types::SubscriberResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LogSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: String,
+        ?region: String,
+        ?sources: Array[Types::LogSourceResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: String?
+      attr_accessor region: String?
+      attr_accessor sources: Array[Types::LogSourceResource]?
+    end
+
+    class LogSourceResource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?aws_log_source: Types::AwsLogSourceResource,
+        ?custom_log_source: Types::CustomLogSourceResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_log_source: Types::AwsLogSourceResource?
+      attr_accessor custom_log_source: Types::CustomLogSourceResource?
+
+      class AwsLogSource < LogSourceResource
+      end
+      class CustomLogSource < LogSourceResource
+      end
+      class Unknown < LogSourceResource
+      end
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sqs_notification_configuration: Types::SqsNotificationConfiguration,
+        ?https_notification_configuration: Types::HttpsNotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sqs_notification_configuration: Types::SqsNotificationConfiguration?
+      attr_accessor https_notification_configuration: Types::HttpsNotificationConfiguration?
+
+      class SqsNotificationConfiguration < NotificationConfiguration
+      end
+      class HttpsNotificationConfiguration < NotificationConfiguration
+      end
+      class Unknown < NotificationConfiguration
+      end
+    end
+
+    class RegisterDataLakeDelegatedAdministratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class RegisterDataLakeDelegatedAdministratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+    end
+
+    module SourceCollectionStatus
+      COLLECTING: String
+      MISCONFIGURED: String
+      NOT_COLLECTING: String
+    end
+
+    class SqsNotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SubscriberResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+        ?subscriber_arn: String,
+        ?subscriber_identity: Types::AwsIdentity,
+        ?subscriber_name: String,
+        ?subscriber_description: String,
+        ?sources: Array[Types::LogSourceResource],
+        ?access_types: Array[String],
+        ?role_arn: String,
+        ?s3_bucket_arn: String,
+        ?subscriber_endpoint: String,
+        ?subscriber_status: String,
+        ?resource_share_arn: String,
+        ?resource_share_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+      attr_accessor subscriber_arn: String?
+      attr_accessor subscriber_identity: Types::AwsIdentity?
+      attr_accessor subscriber_name: String?
+      attr_accessor subscriber_description: String?
+      attr_accessor sources: Array[Types::LogSourceResource]?
+      attr_accessor access_types: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor subscriber_endpoint: String?
+      attr_accessor subscriber_status: String?
+      attr_accessor resource_share_arn: String?
+      attr_accessor resource_share_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module SubscriberStatus
+      ACTIVE: String
+      DEACTIVATED: String
+      PENDING: String
+      READY: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataLakeExceptionSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_protocol: String,
+        ?notification_endpoint: String,
+        ?exception_time_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_protocol: String?
+      attr_accessor notification_endpoint: String?
+      attr_accessor exception_time_to_live: Integer?
+    end
+
+    class UpdateDataLakeExceptionSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataLakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Types::DataLakeConfiguration],
+        ?meta_store_manager_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Types::DataLakeConfiguration]?
+      attr_accessor meta_store_manager_role_arn: String?
+    end
+
+    class UpdateDataLakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lakes: Array[Types::DataLakeResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lakes: Array[Types::DataLakeResource]?
+    end
+
+    class UpdateSubscriberNotificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+        ?configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+      attr_accessor configuration: Types::NotificationConfiguration?
+    end
+
+    class UpdateSubscriberNotificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_endpoint: String?
+    end
+
+    class UpdateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_id: String,
+        ?subscriber_identity: Types::AwsIdentity,
+        ?subscriber_name: String,
+        ?subscriber_description: String,
+        ?sources: Array[Types::LogSourceResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_id: String?
+      attr_accessor subscriber_identity: Types::AwsIdentity?
+      attr_accessor subscriber_name: String?
+      attr_accessor subscriber_description: String?
+      attr_accessor sources: Array[Types::LogSourceResource]?
+    end
+
+    class UpdateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber: Types::SubscriberResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber: Types::SubscriberResource?
+    end
+  end
+end

@@ -1,0 +1,61 @@
+module Aws::AIOps
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ChatConfigurationArn: StringShape
+    ChatConfigurationArns: ListShape
+    ChatbotNotificationChannel: MapShape
+    ConflictException: StructureShape
+    CreateInvestigationGroupInput: StructureShape
+    CreateInvestigationGroupOutput: StructureShape
+    CrossAccountConfiguration: StructureShape
+    CrossAccountConfigurations: ListShape
+    DeleteInvestigationGroupPolicyOutput: StructureShape
+    DeleteInvestigationGroupPolicyRequest: StructureShape
+    DeleteInvestigationGroupRequest: StructureShape
+    EncryptionConfiguration: StructureShape
+    EncryptionConfigurationType: EnumShape
+    ForbiddenException: StructureShape
+    GetInvestigationGroupPolicyRequest: StructureShape
+    GetInvestigationGroupPolicyResponse: StructureShape
+    GetInvestigationGroupRequest: StructureShape
+    GetInvestigationGroupResponse: StructureShape
+    IdentifierStringWithPatternAndLengthLimits: StringShape
+    InternalServerException: StructureShape
+    InvestigationGroupArn: StringShape
+    InvestigationGroupIdentifier: StringShape
+    InvestigationGroupPolicyDocument: StringShape
+    InvestigationGroups: ListShape
+    KmsKeyId: StringShape
+    ListInvestigationGroupsInput: StructureShape
+    ListInvestigationGroupsModel: StructureShape
+    ListInvestigationGroupsOutput: StructureShape
+    ListTagsForResourceOutput: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    PutInvestigationGroupPolicyRequest: StructureShape
+    PutInvestigationGroupPolicyResponse: StructureShape
+    ResourceNotFoundException: StructureShape
+    Retention: IntegerShape
+    RoleArn: StringShape
+    SNSTopicArn: StringShape
+    SensitiveStringWithLengthLimits: StringShape
+    ServiceQuotaExceededException: StructureShape
+    StringWithPatternAndLengthLimits: StringShape
+    TagKey: StringShape
+    TagKeyBoundaries: ListShape
+    TagKeys: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    Tags: MapShape
+    ThrottlingException: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateInvestigationGroupOutput: StructureShape
+    UpdateInvestigationGroupRequest: StructureShape
+    ValidationException: StructureShape
+
+    AIOps: ServiceShape
+  end
+end

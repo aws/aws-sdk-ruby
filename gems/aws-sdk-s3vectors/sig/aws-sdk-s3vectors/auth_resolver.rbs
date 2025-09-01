@@ -1,0 +1,5 @@
+module Aws::S3Vectors
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

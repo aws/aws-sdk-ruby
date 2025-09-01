@@ -1,0 +1,1033 @@
+module Aws::ChimeSDKVoice
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ChimeSDKVoice::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociatePhoneNumbersWithVoiceConnectorResponse
+      include Smithy::Client::_Response[Types::AssociatePhoneNumbersWithVoiceConnectorResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def associate_phone_numbers_with_voice_connector: (
+      ?voice_connector_id: String,
+      ?e164_phone_numbers: Array[String],
+      ?force_associate: bool
+    ) -> _AssociatePhoneNumbersWithVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePhoneNumbersWithVoiceConnectorResponse
+
+    interface _AssociatePhoneNumbersWithVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def associate_phone_numbers_with_voice_connector_group: (
+      ?voice_connector_group_id: String,
+      ?e164_phone_numbers: Array[String],
+      ?force_associate: bool
+    ) -> _AssociatePhoneNumbersWithVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePhoneNumbersWithVoiceConnectorGroupResponse
+
+    interface _BatchDeletePhoneNumberResponse
+      include Smithy::Client::_Response[Types::BatchDeletePhoneNumberResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def batch_delete_phone_number: (
+      ?phone_number_ids: Array[String]
+    ) -> _BatchDeletePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeletePhoneNumberResponse
+
+    interface _BatchUpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::BatchUpdatePhoneNumberResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def batch_update_phone_number: (
+      ?update_phone_number_request_items: Array[
+        {
+          phone_number_id: String,
+          product_type: String,
+          calling_name: String,
+          name: String
+        }
+      ]
+    ) -> _BatchUpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdatePhoneNumberResponse
+
+    interface _CreatePhoneNumberOrderResponse
+      include Smithy::Client::_Response[Types::CreatePhoneNumberOrderResponse]
+      def phone_number_order: () -> Types::PhoneNumberOrder?
+    end
+    def create_phone_number_order: (
+      ?product_type: String,
+      ?e164_phone_numbers: Array[String],
+      ?name: String
+    ) -> _CreatePhoneNumberOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePhoneNumberOrderResponse
+
+    interface _CreateProxySessionResponse
+      include Smithy::Client::_Response[Types::CreateProxySessionResponse]
+      def proxy_session: () -> Types::ProxySession?
+    end
+    def create_proxy_session: (
+      ?voice_connector_id: String,
+      ?participant_phone_numbers: Array[String],
+      ?name: String,
+      ?expiry_minutes: Integer,
+      ?capabilities: Array[String],
+      ?number_selection_behavior: String,
+      ?geo_match_level: String,
+      ?geo_match_params: {
+        country: String,
+        area_code: String
+      }
+    ) -> _CreateProxySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProxySessionResponse
+
+    interface _CreateSipMediaApplicationResponse
+      include Smithy::Client::_Response[Types::CreateSipMediaApplicationResponse]
+      def sip_media_application: () -> Types::SipMediaApplication?
+    end
+    def create_sip_media_application: (
+      ?aws_region: String,
+      ?name: String,
+      ?endpoints: Array[
+        {
+          lambda_arn: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSipMediaApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSipMediaApplicationResponse
+
+    interface _CreateSipMediaApplicationCallResponse
+      include Smithy::Client::_Response[Types::CreateSipMediaApplicationCallResponse]
+      def sip_media_application_call: () -> Types::SipMediaApplicationCall?
+    end
+    def create_sip_media_application_call: (
+      ?from_phone_number: String,
+      ?to_phone_number: String,
+      ?sip_media_application_id: String,
+      ?sip_headers: Hash[String, String],
+      ?arguments_map: Hash[String, String]
+    ) -> _CreateSipMediaApplicationCallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSipMediaApplicationCallResponse
+
+    interface _CreateSipRuleResponse
+      include Smithy::Client::_Response[Types::CreateSipRuleResponse]
+      def sip_rule: () -> Types::SipRule?
+    end
+    def create_sip_rule: (
+      ?name: String,
+      ?trigger_type: String,
+      ?trigger_value: String,
+      ?disabled: bool,
+      ?target_applications: Array[
+        {
+          sip_media_application_id: String,
+          priority: Integer,
+          aws_region: String
+        }
+      ]
+    ) -> _CreateSipRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSipRuleResponse
+
+    interface _CreateVoiceConnectorResponse
+      include Smithy::Client::_Response[Types::CreateVoiceConnectorResponse]
+      def voice_connector: () -> Types::VoiceConnector?
+    end
+    def create_voice_connector: (
+      ?name: String,
+      ?aws_region: String,
+      ?require_encryption: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?integration_type: String
+    ) -> _CreateVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceConnectorResponse
+
+    interface _CreateVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Types::CreateVoiceConnectorGroupResponse]
+      def voice_connector_group: () -> Types::VoiceConnectorGroup?
+    end
+    def create_voice_connector_group: (
+      ?name: String,
+      ?voice_connector_items: Array[
+        {
+          voice_connector_id: String,
+          priority: Integer
+        }
+      ]
+    ) -> _CreateVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceConnectorGroupResponse
+
+    interface _CreateVoiceProfileResponse
+      include Smithy::Client::_Response[Types::CreateVoiceProfileResponse]
+      def voice_profile: () -> Types::VoiceProfile?
+    end
+    def create_voice_profile: (
+      ?speaker_search_task_id: String
+    ) -> _CreateVoiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceProfileResponse
+
+    interface _CreateVoiceProfileDomainResponse
+      include Smithy::Client::_Response[Types::CreateVoiceProfileDomainResponse]
+      def voice_profile_domain: () -> Types::VoiceProfileDomain?
+    end
+    def create_voice_profile_domain: (
+      ?name: String,
+      ?description: String,
+      ?server_side_encryption_configuration: {
+        kms_key_arn: String
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVoiceProfileDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceProfileDomainResponse
+
+    interface _DeletePhoneNumberResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_phone_number: (
+      ?phone_number_id: String
+    ) -> _DeletePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePhoneNumberResponse
+
+    interface _DeleteProxySessionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_proxy_session: (
+      ?voice_connector_id: String,
+      ?proxy_session_id: String
+    ) -> _DeleteProxySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProxySessionResponse
+
+    interface _DeleteSipMediaApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_sip_media_application: (
+      ?sip_media_application_id: String
+    ) -> _DeleteSipMediaApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSipMediaApplicationResponse
+
+    interface _DeleteSipRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_sip_rule: (
+      ?sip_rule_id: String
+    ) -> _DeleteSipRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSipRuleResponse
+
+    interface _DeleteVoiceConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorResponse
+
+    interface _DeleteVoiceConnectorEmergencyCallingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_emergency_calling_configuration: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorEmergencyCallingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorEmergencyCallingConfigurationResponse
+
+    interface _DeleteVoiceConnectorExternalSystemsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_external_systems_configuration: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorExternalSystemsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorExternalSystemsConfigurationResponse
+
+    interface _DeleteVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_group: (
+      ?voice_connector_group_id: String
+    ) -> _DeleteVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorGroupResponse
+
+    interface _DeleteVoiceConnectorOriginationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_origination: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorOriginationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorOriginationResponse
+
+    interface _DeleteVoiceConnectorProxyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_proxy: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorProxyResponse
+
+    interface _DeleteVoiceConnectorStreamingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_streaming_configuration: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorStreamingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorStreamingConfigurationResponse
+
+    interface _DeleteVoiceConnectorTerminationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_termination: (
+      ?voice_connector_id: String
+    ) -> _DeleteVoiceConnectorTerminationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorTerminationResponse
+
+    interface _DeleteVoiceConnectorTerminationCredentialsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_connector_termination_credentials: (
+      ?voice_connector_id: String,
+      ?usernames: Array[String]
+    ) -> _DeleteVoiceConnectorTerminationCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceConnectorTerminationCredentialsResponse
+
+    interface _DeleteVoiceProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_profile: (
+      ?voice_profile_id: String
+    ) -> _DeleteVoiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceProfileResponse
+
+    interface _DeleteVoiceProfileDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_voice_profile_domain: (
+      ?voice_profile_domain_id: String
+    ) -> _DeleteVoiceProfileDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVoiceProfileDomainResponse
+
+    interface _DisassociatePhoneNumbersFromVoiceConnectorResponse
+      include Smithy::Client::_Response[Types::DisassociatePhoneNumbersFromVoiceConnectorResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def disassociate_phone_numbers_from_voice_connector: (
+      ?voice_connector_id: String,
+      ?e164_phone_numbers: Array[String]
+    ) -> _DisassociatePhoneNumbersFromVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePhoneNumbersFromVoiceConnectorResponse
+
+    interface _DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse]
+      def phone_number_errors: () -> Array[Types::PhoneNumberError]?
+    end
+    def disassociate_phone_numbers_from_voice_connector_group: (
+      ?voice_connector_group_id: String,
+      ?e164_phone_numbers: Array[String]
+    ) -> _DisassociatePhoneNumbersFromVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
+
+    interface _GetGlobalSettingsResponse
+      include Smithy::Client::_Response[Types::GetGlobalSettingsResponse]
+      def voice_connector: () -> Types::VoiceConnectorSettings?
+    end
+    def get_global_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlobalSettingsResponse
+
+    interface _GetPhoneNumberResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def get_phone_number: (
+      ?phone_number_id: String
+    ) -> _GetPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberResponse
+
+    interface _GetPhoneNumberOrderResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberOrderResponse]
+      def phone_number_order: () -> Types::PhoneNumberOrder?
+    end
+    def get_phone_number_order: (
+      ?phone_number_order_id: String
+    ) -> _GetPhoneNumberOrderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberOrderResponse
+
+    interface _GetPhoneNumberSettingsResponse
+      include Smithy::Client::_Response[Types::GetPhoneNumberSettingsResponse]
+      def calling_name: () -> String?
+      def calling_name_updated_timestamp: () -> Time?
+    end
+    def get_phone_number_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPhoneNumberSettingsResponse
+
+    interface _GetProxySessionResponse
+      include Smithy::Client::_Response[Types::GetProxySessionResponse]
+      def proxy_session: () -> Types::ProxySession?
+    end
+    def get_proxy_session: (
+      ?voice_connector_id: String,
+      ?proxy_session_id: String
+    ) -> _GetProxySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProxySessionResponse
+
+    interface _GetSipMediaApplicationResponse
+      include Smithy::Client::_Response[Types::GetSipMediaApplicationResponse]
+      def sip_media_application: () -> Types::SipMediaApplication?
+    end
+    def get_sip_media_application: (
+      ?sip_media_application_id: String
+    ) -> _GetSipMediaApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSipMediaApplicationResponse
+
+    interface _GetSipMediaApplicationAlexaSkillConfigurationResponse
+      include Smithy::Client::_Response[Types::GetSipMediaApplicationAlexaSkillConfigurationResponse]
+      def sip_media_application_alexa_skill_configuration: () -> Types::SipMediaApplicationAlexaSkillConfiguration?
+    end
+    def get_sip_media_application_alexa_skill_configuration: (
+      ?sip_media_application_id: String
+    ) -> _GetSipMediaApplicationAlexaSkillConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSipMediaApplicationAlexaSkillConfigurationResponse
+
+    interface _GetSipMediaApplicationLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetSipMediaApplicationLoggingConfigurationResponse]
+      def sip_media_application_logging_configuration: () -> Types::SipMediaApplicationLoggingConfiguration?
+    end
+    def get_sip_media_application_logging_configuration: (
+      ?sip_media_application_id: String
+    ) -> _GetSipMediaApplicationLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSipMediaApplicationLoggingConfigurationResponse
+
+    interface _GetSipRuleResponse
+      include Smithy::Client::_Response[Types::GetSipRuleResponse]
+      def sip_rule: () -> Types::SipRule?
+    end
+    def get_sip_rule: (
+      ?sip_rule_id: String
+    ) -> _GetSipRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSipRuleResponse
+
+    interface _GetSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Types::GetSpeakerSearchTaskResponse]
+      def speaker_search_task: () -> Types::SpeakerSearchTask?
+    end
+    def get_speaker_search_task: (
+      ?voice_connector_id: String,
+      ?speaker_search_task_id: String
+    ) -> _GetSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpeakerSearchTaskResponse
+
+    interface _GetVoiceConnectorResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorResponse]
+      def voice_connector: () -> Types::VoiceConnector?
+    end
+    def get_voice_connector: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorResponse
+
+    interface _GetVoiceConnectorEmergencyCallingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorEmergencyCallingConfigurationResponse]
+      def emergency_calling_configuration: () -> Types::EmergencyCallingConfiguration?
+    end
+    def get_voice_connector_emergency_calling_configuration: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorEmergencyCallingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorEmergencyCallingConfigurationResponse
+
+    interface _GetVoiceConnectorExternalSystemsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorExternalSystemsConfigurationResponse]
+      def external_systems_configuration: () -> Types::ExternalSystemsConfiguration?
+    end
+    def get_voice_connector_external_systems_configuration: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorExternalSystemsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorExternalSystemsConfigurationResponse
+
+    interface _GetVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorGroupResponse]
+      def voice_connector_group: () -> Types::VoiceConnectorGroup?
+    end
+    def get_voice_connector_group: (
+      ?voice_connector_group_id: String
+    ) -> _GetVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorGroupResponse
+
+    interface _GetVoiceConnectorLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def get_voice_connector_logging_configuration: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorLoggingConfigurationResponse
+
+    interface _GetVoiceConnectorOriginationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorOriginationResponse]
+      def origination: () -> Types::Origination?
+    end
+    def get_voice_connector_origination: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorOriginationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorOriginationResponse
+
+    interface _GetVoiceConnectorProxyResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorProxyResponse]
+      def proxy: () -> Types::Proxy?
+    end
+    def get_voice_connector_proxy: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorProxyResponse
+
+    interface _GetVoiceConnectorStreamingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorStreamingConfigurationResponse]
+      def streaming_configuration: () -> Types::StreamingConfiguration?
+    end
+    def get_voice_connector_streaming_configuration: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorStreamingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorStreamingConfigurationResponse
+
+    interface _GetVoiceConnectorTerminationResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorTerminationResponse]
+      def termination: () -> Types::Termination?
+    end
+    def get_voice_connector_termination: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorTerminationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorTerminationResponse
+
+    interface _GetVoiceConnectorTerminationHealthResponse
+      include Smithy::Client::_Response[Types::GetVoiceConnectorTerminationHealthResponse]
+      def termination_health: () -> Types::TerminationHealth?
+    end
+    def get_voice_connector_termination_health: (
+      ?voice_connector_id: String
+    ) -> _GetVoiceConnectorTerminationHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceConnectorTerminationHealthResponse
+
+    interface _GetVoiceProfileResponse
+      include Smithy::Client::_Response[Types::GetVoiceProfileResponse]
+      def voice_profile: () -> Types::VoiceProfile?
+    end
+    def get_voice_profile: (
+      ?voice_profile_id: String
+    ) -> _GetVoiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceProfileResponse
+
+    interface _GetVoiceProfileDomainResponse
+      include Smithy::Client::_Response[Types::GetVoiceProfileDomainResponse]
+      def voice_profile_domain: () -> Types::VoiceProfileDomain?
+    end
+    def get_voice_profile_domain: (
+      ?voice_profile_domain_id: String
+    ) -> _GetVoiceProfileDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceProfileDomainResponse
+
+    interface _GetVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Types::GetVoiceToneAnalysisTaskResponse]
+      def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask?
+    end
+    def get_voice_tone_analysis_task: (
+      ?voice_connector_id: String,
+      ?voice_tone_analysis_task_id: String,
+      ?is_caller: bool
+    ) -> _GetVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVoiceToneAnalysisTaskResponse
+
+    interface _ListAvailableVoiceConnectorRegionsResponse
+      include Smithy::Client::_Response[Types::ListAvailableVoiceConnectorRegionsResponse]
+      def voice_connector_regions: () -> Array[String]?
+    end
+    def list_available_voice_connector_regions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableVoiceConnectorRegionsResponse
+
+    interface _ListPhoneNumberOrdersResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumberOrdersResponse]
+      def phone_number_orders: () -> Array[Types::PhoneNumberOrder]?
+      def next_token: () -> String?
+    end
+    def list_phone_number_orders: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPhoneNumberOrdersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumberOrdersResponse
+
+    interface _ListPhoneNumbersResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumbersResponse]
+      def phone_numbers: () -> Array[Types::PhoneNumber]?
+      def next_token: () -> String?
+    end
+    def list_phone_numbers: (
+      ?status: String,
+      ?product_type: String,
+      ?filter_name: String,
+      ?filter_value: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumbersResponse
+
+    interface _ListProxySessionsResponse
+      include Smithy::Client::_Response[Types::ListProxySessionsResponse]
+      def proxy_sessions: () -> Array[Types::ProxySession]?
+      def next_token: () -> String?
+    end
+    def list_proxy_sessions: (
+      ?voice_connector_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProxySessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProxySessionsResponse
+
+    interface _ListSipMediaApplicationsResponse
+      include Smithy::Client::_Response[Types::ListSipMediaApplicationsResponse]
+      def sip_media_applications: () -> Array[Types::SipMediaApplication]?
+      def next_token: () -> String?
+    end
+    def list_sip_media_applications: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSipMediaApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSipMediaApplicationsResponse
+
+    interface _ListSipRulesResponse
+      include Smithy::Client::_Response[Types::ListSipRulesResponse]
+      def sip_rules: () -> Array[Types::SipRule]?
+      def next_token: () -> String?
+    end
+    def list_sip_rules: (
+      ?sip_media_application_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSipRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSipRulesResponse
+
+    interface _ListSupportedPhoneNumberCountriesResponse
+      include Smithy::Client::_Response[Types::ListSupportedPhoneNumberCountriesResponse]
+      def phone_number_countries: () -> Array[Types::PhoneNumberCountry]?
+    end
+    def list_supported_phone_number_countries: (
+      ?product_type: String
+    ) -> _ListSupportedPhoneNumberCountriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportedPhoneNumberCountriesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVoiceConnectorGroupsResponse
+      include Smithy::Client::_Response[Types::ListVoiceConnectorGroupsResponse]
+      def voice_connector_groups: () -> Array[Types::VoiceConnectorGroup]?
+      def next_token: () -> String?
+    end
+    def list_voice_connector_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVoiceConnectorGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVoiceConnectorGroupsResponse
+
+    interface _ListVoiceConnectorTerminationCredentialsResponse
+      include Smithy::Client::_Response[Types::ListVoiceConnectorTerminationCredentialsResponse]
+      def usernames: () -> Array[String]?
+    end
+    def list_voice_connector_termination_credentials: (
+      ?voice_connector_id: String
+    ) -> _ListVoiceConnectorTerminationCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVoiceConnectorTerminationCredentialsResponse
+
+    interface _ListVoiceConnectorsResponse
+      include Smithy::Client::_Response[Types::ListVoiceConnectorsResponse]
+      def voice_connectors: () -> Array[Types::VoiceConnector]?
+      def next_token: () -> String?
+    end
+    def list_voice_connectors: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVoiceConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVoiceConnectorsResponse
+
+    interface _ListVoiceProfileDomainsResponse
+      include Smithy::Client::_Response[Types::ListVoiceProfileDomainsResponse]
+      def voice_profile_domains: () -> Array[Types::VoiceProfileDomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_voice_profile_domains: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVoiceProfileDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVoiceProfileDomainsResponse
+
+    interface _ListVoiceProfilesResponse
+      include Smithy::Client::_Response[Types::ListVoiceProfilesResponse]
+      def voice_profiles: () -> Array[Types::VoiceProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_voice_profiles: (
+      ?voice_profile_domain_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVoiceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVoiceProfilesResponse
+
+    interface _PutSipMediaApplicationAlexaSkillConfigurationResponse
+      include Smithy::Client::_Response[Types::PutSipMediaApplicationAlexaSkillConfigurationResponse]
+      def sip_media_application_alexa_skill_configuration: () -> Types::SipMediaApplicationAlexaSkillConfiguration?
+    end
+    def put_sip_media_application_alexa_skill_configuration: (
+      ?sip_media_application_id: String,
+      ?sip_media_application_alexa_skill_configuration: {
+        alexa_skill_status: String,
+        alexa_skill_ids: Array[String]
+      }
+    ) -> _PutSipMediaApplicationAlexaSkillConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSipMediaApplicationAlexaSkillConfigurationResponse
+
+    interface _PutSipMediaApplicationLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutSipMediaApplicationLoggingConfigurationResponse]
+      def sip_media_application_logging_configuration: () -> Types::SipMediaApplicationLoggingConfiguration?
+    end
+    def put_sip_media_application_logging_configuration: (
+      ?sip_media_application_id: String,
+      ?sip_media_application_logging_configuration: {
+        enable_sip_media_application_message_logs: bool
+      }
+    ) -> _PutSipMediaApplicationLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSipMediaApplicationLoggingConfigurationResponse
+
+    interface _PutVoiceConnectorEmergencyCallingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorEmergencyCallingConfigurationResponse]
+      def emergency_calling_configuration: () -> Types::EmergencyCallingConfiguration?
+    end
+    def put_voice_connector_emergency_calling_configuration: (
+      ?voice_connector_id: String,
+      ?emergency_calling_configuration: {
+        dnis: Array[
+          {
+            emergency_phone_number: String,
+            test_phone_number: untyped,
+            calling_country: String
+          }
+        ]
+      }
+    ) -> _PutVoiceConnectorEmergencyCallingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorEmergencyCallingConfigurationResponse
+
+    interface _PutVoiceConnectorExternalSystemsConfigurationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorExternalSystemsConfigurationResponse]
+      def external_systems_configuration: () -> Types::ExternalSystemsConfiguration?
+    end
+    def put_voice_connector_external_systems_configuration: (
+      ?voice_connector_id: String,
+      ?session_border_controller_types: Array[String],
+      ?contact_center_system_types: Array[String]
+    ) -> _PutVoiceConnectorExternalSystemsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorExternalSystemsConfigurationResponse
+
+    interface _PutVoiceConnectorLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorLoggingConfigurationResponse]
+      def logging_configuration: () -> Types::LoggingConfiguration?
+    end
+    def put_voice_connector_logging_configuration: (
+      ?voice_connector_id: String,
+      ?logging_configuration: {
+        enable_sip_logs: bool,
+        enable_media_metric_logs: untyped
+      }
+    ) -> _PutVoiceConnectorLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorLoggingConfigurationResponse
+
+    interface _PutVoiceConnectorOriginationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorOriginationResponse]
+      def origination: () -> Types::Origination?
+    end
+    def put_voice_connector_origination: (
+      ?voice_connector_id: String,
+      ?origination: {
+        routes: Array[
+          {
+            host: String,
+            port: Integer,
+            protocol: String,
+            priority: Integer,
+            weight: Integer
+          }
+        ],
+        disabled: bool
+      }
+    ) -> _PutVoiceConnectorOriginationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorOriginationResponse
+
+    interface _PutVoiceConnectorProxyResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorProxyResponse]
+      def proxy: () -> Types::Proxy?
+    end
+    def put_voice_connector_proxy: (
+      ?voice_connector_id: String,
+      ?default_session_expiry_minutes: Integer,
+      ?phone_number_pool_countries: Array[String],
+      ?fall_back_phone_number: String,
+      ?disabled: bool
+    ) -> _PutVoiceConnectorProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorProxyResponse
+
+    interface _PutVoiceConnectorStreamingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorStreamingConfigurationResponse]
+      def streaming_configuration: () -> Types::StreamingConfiguration?
+    end
+    def put_voice_connector_streaming_configuration: (
+      ?voice_connector_id: String,
+      ?streaming_configuration: {
+        data_retention_in_hours: Integer,
+        disabled: bool,
+        streaming_notification_targets: Array[
+          {
+            notification_target: String
+          }
+        ],
+        media_insights_configuration: {
+          disabled: untyped,
+          configuration_arn: String
+        }
+      }
+    ) -> _PutVoiceConnectorStreamingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorStreamingConfigurationResponse
+
+    interface _PutVoiceConnectorTerminationResponse
+      include Smithy::Client::_Response[Types::PutVoiceConnectorTerminationResponse]
+      def termination: () -> Types::Termination?
+    end
+    def put_voice_connector_termination: (
+      ?voice_connector_id: String,
+      ?termination: {
+        cps_limit: Integer,
+        default_phone_number: String,
+        calling_regions: Array[String],
+        cidr_allowed_list: Array[String],
+        disabled: bool
+      }
+    ) -> _PutVoiceConnectorTerminationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorTerminationResponse
+
+    interface _PutVoiceConnectorTerminationCredentialsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_voice_connector_termination_credentials: (
+      ?voice_connector_id: String,
+      ?credentials: Array[
+        {
+          username: String,
+          password: untyped
+        }
+      ]
+    ) -> _PutVoiceConnectorTerminationCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVoiceConnectorTerminationCredentialsResponse
+
+    interface _RestorePhoneNumberResponse
+      include Smithy::Client::_Response[Types::RestorePhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def restore_phone_number: (
+      ?phone_number_id: String
+    ) -> _RestorePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestorePhoneNumberResponse
+
+    interface _SearchAvailablePhoneNumbersResponse
+      include Smithy::Client::_Response[Types::SearchAvailablePhoneNumbersResponse]
+      def e164_phone_numbers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def search_available_phone_numbers: (
+      ?area_code: String,
+      ?city: String,
+      ?country: String,
+      ?state: String,
+      ?toll_free_prefix: String,
+      ?phone_number_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchAvailablePhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAvailablePhoneNumbersResponse
+
+    interface _StartSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Types::StartSpeakerSearchTaskResponse]
+      def speaker_search_task: () -> Types::SpeakerSearchTask?
+    end
+    def start_speaker_search_task: (
+      ?voice_connector_id: String,
+      ?transaction_id: String,
+      ?voice_profile_domain_id: String,
+      ?client_request_token: String,
+      ?call_leg: String
+    ) -> _StartSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSpeakerSearchTaskResponse
+
+    interface _StartVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Types::StartVoiceToneAnalysisTaskResponse]
+      def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask?
+    end
+    def start_voice_tone_analysis_task: (
+      ?voice_connector_id: String,
+      ?transaction_id: String,
+      ?language_code: String,
+      ?client_request_token: String
+    ) -> _StartVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVoiceToneAnalysisTaskResponse
+
+    interface _StopSpeakerSearchTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_speaker_search_task: (
+      ?voice_connector_id: String,
+      ?speaker_search_task_id: String
+    ) -> _StopSpeakerSearchTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopSpeakerSearchTaskResponse
+
+    interface _StopVoiceToneAnalysisTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_voice_tone_analysis_task: (
+      ?voice_connector_id: String,
+      ?voice_tone_analysis_task_id: String
+    ) -> _StopVoiceToneAnalysisTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopVoiceToneAnalysisTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGlobalSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_global_settings: (
+      ?voice_connector: {
+        cdr_bucket: String
+      }
+    ) -> _UpdateGlobalSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalSettingsResponse
+
+    interface _UpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::UpdatePhoneNumberResponse]
+      def phone_number: () -> Types::PhoneNumber?
+    end
+    def update_phone_number: (
+      ?phone_number_id: String,
+      ?product_type: String,
+      ?calling_name: String,
+      ?name: String
+    ) -> _UpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberResponse
+
+    interface _UpdatePhoneNumberSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_phone_number_settings: (
+      ?calling_name: String
+    ) -> _UpdatePhoneNumberSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberSettingsResponse
+
+    interface _UpdateProxySessionResponse
+      include Smithy::Client::_Response[Types::UpdateProxySessionResponse]
+      def proxy_session: () -> Types::ProxySession?
+    end
+    def update_proxy_session: (
+      ?voice_connector_id: String,
+      ?proxy_session_id: String,
+      ?capabilities: Array[String],
+      ?expiry_minutes: Integer
+    ) -> _UpdateProxySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxySessionResponse
+
+    interface _UpdateSipMediaApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateSipMediaApplicationResponse]
+      def sip_media_application: () -> Types::SipMediaApplication?
+    end
+    def update_sip_media_application: (
+      ?sip_media_application_id: String,
+      ?name: String,
+      ?endpoints: Array[
+        {
+          lambda_arn: String
+        }
+      ]
+    ) -> _UpdateSipMediaApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSipMediaApplicationResponse
+
+    interface _UpdateSipMediaApplicationCallResponse
+      include Smithy::Client::_Response[Types::UpdateSipMediaApplicationCallResponse]
+      def sip_media_application_call: () -> Types::SipMediaApplicationCall?
+    end
+    def update_sip_media_application_call: (
+      ?sip_media_application_id: String,
+      ?transaction_id: String,
+      ?arguments: Hash[String, String]
+    ) -> _UpdateSipMediaApplicationCallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSipMediaApplicationCallResponse
+
+    interface _UpdateSipRuleResponse
+      include Smithy::Client::_Response[Types::UpdateSipRuleResponse]
+      def sip_rule: () -> Types::SipRule?
+    end
+    def update_sip_rule: (
+      ?sip_rule_id: String,
+      ?name: String,
+      ?disabled: bool,
+      ?target_applications: Array[
+        {
+          sip_media_application_id: String,
+          priority: Integer,
+          aws_region: String
+        }
+      ]
+    ) -> _UpdateSipRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSipRuleResponse
+
+    interface _UpdateVoiceConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceConnectorResponse]
+      def voice_connector: () -> Types::VoiceConnector?
+    end
+    def update_voice_connector: (
+      ?voice_connector_id: String,
+      ?name: String,
+      ?require_encryption: bool
+    ) -> _UpdateVoiceConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceConnectorResponse
+
+    interface _UpdateVoiceConnectorGroupResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceConnectorGroupResponse]
+      def voice_connector_group: () -> Types::VoiceConnectorGroup?
+    end
+    def update_voice_connector_group: (
+      ?voice_connector_group_id: String,
+      ?name: String,
+      ?voice_connector_items: Array[
+        {
+          voice_connector_id: String,
+          priority: Integer
+        }
+      ]
+    ) -> _UpdateVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceConnectorGroupResponse
+
+    interface _UpdateVoiceProfileResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceProfileResponse]
+      def voice_profile: () -> Types::VoiceProfile?
+    end
+    def update_voice_profile: (
+      ?voice_profile_id: String,
+      ?speaker_search_task_id: String
+    ) -> _UpdateVoiceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceProfileResponse
+
+    interface _UpdateVoiceProfileDomainResponse
+      include Smithy::Client::_Response[Types::UpdateVoiceProfileDomainResponse]
+      def voice_profile_domain: () -> Types::VoiceProfileDomain?
+    end
+    def update_voice_profile_domain: (
+      ?voice_profile_domain_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateVoiceProfileDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceProfileDomainResponse
+
+    interface _ValidateE911AddressResponse
+      include Smithy::Client::_Response[Types::ValidateE911AddressResponse]
+      def validation_result: () -> Integer?
+      def address_external_id: () -> String?
+      def address: () -> Types::Address?
+      def candidate_address_list: () -> Array[Types::CandidateAddress]?
+    end
+    def validate_e911_address: (
+      ?aws_account_id: String,
+      ?street_number: String,
+      ?street_info: String,
+      ?city: String,
+      ?state: String,
+      ?country: String,
+      ?postal_code: String
+    ) -> _ValidateE911AddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateE911AddressResponse
+  end
+end

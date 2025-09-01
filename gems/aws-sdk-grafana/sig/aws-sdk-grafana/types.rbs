@@ -1,0 +1,1188 @@
+module Aws::Grafana
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssertionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?login: String,
+        ?email: String,
+        ?groups: String,
+        ?role: String,
+        ?org: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor login: String?
+      attr_accessor email: String?
+      attr_accessor groups: String?
+      attr_accessor role: String?
+      attr_accessor org: String?
+    end
+
+    class AssociateLicenseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?license_type: String,
+        ?grafana_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor license_type: String?
+      attr_accessor grafana_token: String?
+    end
+
+    class AssociateLicenseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class AuthenticationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?providers: Array[String],
+        ?saml: Types::SamlAuthentication,
+        ?aws_sso: Types::AwsSsoAuthentication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor providers: Array[String]?
+      attr_accessor saml: Types::SamlAuthentication?
+      attr_accessor aws_sso: Types::AwsSsoAuthentication?
+    end
+
+    class AuthenticationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?providers: Array[String],
+        ?saml_configuration_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor providers: Array[String]?
+      attr_accessor saml_configuration_status: String?
+    end
+
+    class AwsSsoAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sso_client_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sso_client_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateWorkspaceApiKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?key_role: String,
+        ?seconds_to_live: Integer,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor key_role: String?
+      attr_accessor seconds_to_live: Integer?
+      attr_accessor workspace_id: String?
+    end
+
+    class CreateWorkspaceApiKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?key: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor key: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class CreateWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_access_type: String,
+        ?client_token: String,
+        ?organization_role_name: String,
+        ?permission_type: String,
+        ?stack_set_name: String,
+        ?workspace_data_sources: Array[String],
+        ?workspace_description: String,
+        ?workspace_name: String,
+        ?workspace_notification_destinations: Array[String],
+        ?workspace_organizational_units: Array[String],
+        ?workspace_role_arn: String,
+        ?authentication_providers: Array[String],
+        ?tags: Hash[String, String],
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?configuration: String,
+        ?network_access_control: Types::NetworkAccessConfiguration,
+        ?grafana_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_access_type: String?
+      attr_accessor client_token: String?
+      attr_accessor organization_role_name: String?
+      attr_accessor permission_type: String?
+      attr_accessor stack_set_name: String?
+      attr_accessor workspace_data_sources: Array[String]?
+      attr_accessor workspace_description: String?
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_notification_destinations: Array[String]?
+      attr_accessor workspace_organizational_units: Array[String]?
+      attr_accessor workspace_role_arn: String?
+      attr_accessor authentication_providers: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor configuration: String?
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration?
+      attr_accessor grafana_version: String?
+    end
+
+    class CreateWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class CreateWorkspaceServiceAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?grafana_role: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor grafana_role: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class CreateWorkspaceServiceAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?grafana_role: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor grafana_role: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class CreateWorkspaceServiceAccountTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?seconds_to_live: Integer,
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor seconds_to_live: Integer?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class CreateWorkspaceServiceAccountTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account_token: Types::ServiceAccountTokenSummaryWithKey,
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account_token: Types::ServiceAccountTokenSummaryWithKey?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceApiKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceApiKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class DeleteWorkspaceServiceAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceServiceAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceServiceAccountTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: String,
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: String?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DeleteWorkspaceServiceAccountTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: String,
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: String?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceAuthenticationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceAuthenticationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication: Types::AuthenticationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication: Types::AuthenticationDescription?
+    end
+
+    class DescribeWorkspaceConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: String,
+        ?grafana_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: String?
+      attr_accessor grafana_version: String?
+    end
+
+    class DescribeWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class DisassociateLicenseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?license_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor license_type: String?
+    end
+
+    class DisassociateLicenseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class IdpMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?url: String,
+        ?xml: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor xml: String?
+
+      class Url < IdpMetadata
+      end
+      class Xml < IdpMetadata
+      end
+      class Unknown < IdpMetadata
+      end
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListPermissionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?user_type: String,
+        ?user_id: String,
+        ?group_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor user_type: String?
+      attr_accessor user_id: String?
+      attr_accessor group_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListPermissionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?permissions: Array[Types::PermissionEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor permissions: Array[Types::PermissionEntry]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?grafana_versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor grafana_versions: Array[String]?
+    end
+
+    class ListWorkspaceServiceAccountTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListWorkspaceServiceAccountTokensResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?service_account_tokens: Array[Types::ServiceAccountTokenSummary],
+        ?service_account_id: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor service_account_tokens: Array[Types::ServiceAccountTokenSummary]?
+      attr_accessor service_account_id: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListWorkspaceServiceAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListWorkspaceServiceAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?service_accounts: Array[Types::ServiceAccountSummary],
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor service_accounts: Array[Types::ServiceAccountSummary]?
+      attr_accessor workspace_id: String?
+    end
+
+    class ListWorkspacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkspacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces: Array[Types::WorkspaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces: Array[Types::WorkspaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class NetworkAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix_list_ids: Array[String],
+        ?vpce_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix_list_ids: Array[String]?
+      attr_accessor vpce_ids: Array[String]?
+    end
+
+    class PermissionEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+      attr_accessor role: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RoleValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?editor: Array[String],
+        ?admin: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor editor: Array[String]?
+      attr_accessor admin: Array[String]?
+    end
+
+    class SamlAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?configuration: Types::SamlConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor configuration: Types::SamlConfiguration?
+    end
+
+    class SamlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idp_metadata: Types::IdpMetadata,
+        ?assertion_attributes: Types::AssertionAttributes,
+        ?role_values: Types::RoleValues,
+        ?allowed_organizations: Array[String],
+        ?login_validity_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idp_metadata: Types::IdpMetadata?
+      attr_accessor assertion_attributes: Types::AssertionAttributes?
+      attr_accessor role_values: Types::RoleValues?
+      attr_accessor allowed_organizations: Array[String]?
+      attr_accessor login_validity_duration: Integer?
+    end
+
+    class ServiceAccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?is_disabled: String,
+        ?grafana_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor is_disabled: String?
+      attr_accessor grafana_role: String?
+    end
+
+    class ServiceAccountTokenSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?last_used_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor last_used_at: Time?
+    end
+
+    class ServiceAccountTokenSummaryWithKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor key: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: Integer,
+        ?message: String,
+        ?caused_by: Types::UpdateInstruction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+      attr_accessor caused_by: Types::UpdateInstruction?
+    end
+
+    class UpdateInstruction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?role: String,
+        ?users: Array[Types::User],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor role: String?
+      attr_accessor users: Array[Types::User]?
+    end
+
+    class UpdatePermissionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_instruction_batch: Array[Types::UpdateInstruction],
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_instruction_batch: Array[Types::UpdateInstruction]?
+      attr_accessor workspace_id: String?
+    end
+
+    class UpdatePermissionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::UpdateError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::UpdateError]?
+    end
+
+    class UpdateWorkspaceAuthenticationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?authentication_providers: Array[String],
+        ?saml_configuration: Types::SamlConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor authentication_providers: Array[String]?
+      attr_accessor saml_configuration: Types::SamlConfiguration?
+    end
+
+    class UpdateWorkspaceAuthenticationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication: Types::AuthenticationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication: Types::AuthenticationDescription?
+    end
+
+    class UpdateWorkspaceConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: String,
+        ?workspace_id: String,
+        ?grafana_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: String?
+      attr_accessor workspace_id: String?
+      attr_accessor grafana_version: String?
+    end
+
+    class UpdateWorkspaceConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkspaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_access_type: String,
+        ?organization_role_name: String,
+        ?permission_type: String,
+        ?stack_set_name: String,
+        ?workspace_data_sources: Array[String],
+        ?workspace_description: String,
+        ?workspace_id: String,
+        ?workspace_name: String,
+        ?workspace_notification_destinations: Array[String],
+        ?workspace_organizational_units: Array[String],
+        ?workspace_role_arn: String,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?remove_vpc_configuration: bool,
+        ?network_access_control: Types::NetworkAccessConfiguration,
+        ?remove_network_access_configuration: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_access_type: String?
+      attr_accessor organization_role_name: String?
+      attr_accessor permission_type: String?
+      attr_accessor stack_set_name: String?
+      attr_accessor workspace_data_sources: Array[String]?
+      attr_accessor workspace_description: String?
+      attr_accessor workspace_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_notification_destinations: Array[String]?
+      attr_accessor workspace_organizational_units: Array[String]?
+      attr_accessor workspace_role_arn: String?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor remove_vpc_configuration: bool?
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration?
+      attr_accessor remove_network_access_configuration: bool?
+    end
+
+    class UpdateWorkspaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace: Types::WorkspaceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace: Types::WorkspaceDescription?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class WorkspaceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_access_type: String,
+        ?created: Time,
+        ?data_sources: Array[String],
+        ?description: String,
+        ?endpoint: String,
+        ?grafana_version: String,
+        ?id: String,
+        ?modified: Time,
+        ?name: String,
+        ?organization_role_name: String,
+        ?notification_destinations: Array[String],
+        ?organizational_units: Array[String],
+        ?permission_type: String,
+        ?stack_set_name: String,
+        ?status: String,
+        ?workspace_role_arn: String,
+        ?license_type: String,
+        ?free_trial_consumed: bool,
+        ?license_expiration: Time,
+        ?free_trial_expiration: Time,
+        ?authentication: Types::AuthenticationSummary,
+        ?tags: Hash[String, String],
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?network_access_control: Types::NetworkAccessConfiguration,
+        ?grafana_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_access_type: String?
+      attr_accessor created: Time?
+      attr_accessor data_sources: Array[String]?
+      attr_accessor description: String?
+      attr_accessor endpoint: String?
+      attr_accessor grafana_version: String?
+      attr_accessor id: String?
+      attr_accessor modified: Time?
+      attr_accessor name: String?
+      attr_accessor organization_role_name: String?
+      attr_accessor notification_destinations: Array[String]?
+      attr_accessor organizational_units: Array[String]?
+      attr_accessor permission_type: String?
+      attr_accessor stack_set_name: String?
+      attr_accessor status: String?
+      attr_accessor workspace_role_arn: String?
+      attr_accessor license_type: String?
+      attr_accessor free_trial_consumed: bool?
+      attr_accessor license_expiration: Time?
+      attr_accessor free_trial_expiration: Time?
+      attr_accessor authentication: Types::AuthenticationSummary?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration?
+      attr_accessor grafana_token: String?
+    end
+
+    class WorkspaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created: Time,
+        ?description: String,
+        ?endpoint: String,
+        ?grafana_version: String,
+        ?id: String,
+        ?modified: Time,
+        ?name: String,
+        ?notification_destinations: Array[String],
+        ?status: String,
+        ?authentication: Types::AuthenticationSummary,
+        ?tags: Hash[String, String],
+        ?license_type: String,
+        ?grafana_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created: Time?
+      attr_accessor description: String?
+      attr_accessor endpoint: String?
+      attr_accessor grafana_version: String?
+      attr_accessor id: String?
+      attr_accessor modified: Time?
+      attr_accessor name: String?
+      attr_accessor notification_destinations: Array[String]?
+      attr_accessor status: String?
+      attr_accessor authentication: Types::AuthenticationSummary?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor license_type: String?
+      attr_accessor grafana_token: String?
+    end
+  end
+end

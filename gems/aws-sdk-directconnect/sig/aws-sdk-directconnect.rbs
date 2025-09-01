@@ -1,0 +1,5 @@
+  module Aws
+    module DirectConnect
+      VERSION: String
+    end
+  end

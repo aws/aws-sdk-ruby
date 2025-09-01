@@ -1,0 +1,1822 @@
+module Aws::GameLift
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GameLift::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptMatchResponse
+      include Smithy::Client::_Response[Types::AcceptMatchOutput]
+    end
+    def accept_match: (
+      ?ticket_id: String,
+      ?player_ids: Array[String],
+      ?acceptance_type: String
+    ) -> _AcceptMatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptMatchResponse
+
+    interface _ClaimGameServerResponse
+      include Smithy::Client::_Response[Types::ClaimGameServerOutput]
+      def game_server: () -> Types::GameServer?
+    end
+    def claim_game_server: (
+      ?game_server_group_name: String,
+      ?game_server_id: String,
+      ?game_server_data: String,
+      ?filter_option: {
+        instance_statuses: Array[String]
+      }
+    ) -> _ClaimGameServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ClaimGameServerResponse
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Response[Types::CreateAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def create_alias: (
+      ?name: String,
+      ?description: String,
+      ?routing_strategy: {
+        type: String,
+        fleet_id: String,
+        message: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateBuildResponse
+      include Smithy::Client::_Response[Types::CreateBuildOutput]
+      def build: () -> Types::Build?
+      def upload_credentials: () -> Types::AwsCredentials?
+      def storage_location: () -> Types::S3Location?
+    end
+    def create_build: (
+      ?name: String,
+      ?version: String,
+      ?storage_location: {
+        bucket: String,
+        key: untyped,
+        role_arn: untyped,
+        object_version: untyped
+      },
+      ?operating_system: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?server_sdk_version: String
+    ) -> _CreateBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBuildResponse
+
+    interface _CreateContainerFleetResponse
+      include Smithy::Client::_Response[Types::CreateContainerFleetOutput]
+      def container_fleet: () -> Types::ContainerFleet?
+    end
+    def create_container_fleet: (
+      ?fleet_role_arn: String,
+      ?description: String,
+      ?game_server_container_group_definition_name: String,
+      ?per_instance_container_group_definition_name: String,
+      ?instance_connection_port_range: {
+        from_port: Integer,
+        to_port: untyped
+      },
+      ?instance_inbound_permissions: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ],
+      ?game_server_container_groups_per_instance: Integer,
+      ?instance_type: String,
+      ?billing_type: String,
+      ?locations: Array[
+        {
+          location: String
+        }
+      ],
+      ?metric_groups: Array[String],
+      ?new_game_session_protection_policy: String,
+      ?game_session_creation_limit_policy: {
+        new_game_sessions_per_creator: Integer,
+        policy_period_in_minutes: untyped
+      },
+      ?log_configuration: {
+        log_destination: String,
+        s3_bucket_name: String,
+        log_group_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateContainerFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerFleetResponse
+
+    interface _CreateContainerGroupDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateContainerGroupDefinitionOutput]
+      def container_group_definition: () -> Types::ContainerGroupDefinition?
+    end
+    def create_container_group_definition: (
+      ?name: String,
+      ?container_group_type: String,
+      ?total_memory_limit_mebibytes: Integer,
+      ?total_vcpu_limit: Float,
+      ?game_server_container_definition: {
+        container_name: String,
+        depends_on: Array[
+          {
+            container_name: untyped,
+            condition: String
+          }
+        ],
+        mount_points: Array[
+          {
+            instance_path: String,
+            container_path: String,
+            access_level: String
+          }
+        ],
+        environment_override: Array[
+          {
+            name: String,
+            value: untyped
+          }
+        ],
+        image_uri: String,
+        port_configuration: {
+          container_port_ranges: Array[
+            {
+              from_port: Integer,
+              to_port: untyped,
+              protocol: String
+            }
+          ]
+        },
+        server_sdk_version: String
+      },
+      ?support_container_definitions: Array[
+        {
+          container_name: String,
+          depends_on: Array[
+            {
+              container_name: untyped,
+              condition: String
+            }
+          ],
+          mount_points: Array[
+            {
+              instance_path: String,
+              container_path: String,
+              access_level: String
+            }
+          ],
+          environment_override: Array[
+            {
+              name: String,
+              value: untyped
+            }
+          ],
+          essential: bool,
+          health_check: {
+            command: Array[String],
+            interval: Integer,
+            retries: Integer,
+            start_period: Integer,
+            timeout: Integer
+          },
+          image_uri: String,
+          memory_hard_limit_mebibytes: Integer,
+          port_configuration: {
+            container_port_ranges: Array[
+              {
+                from_port: Integer,
+                to_port: untyped,
+                protocol: String
+              }
+            ]
+          },
+          vcpu: Float
+        }
+      ],
+      ?operating_system: String,
+      ?version_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerGroupDefinitionResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetOutput]
+      def fleet_attributes: () -> Types::FleetAttributes?
+      def location_states: () -> Array[Types::LocationState]?
+    end
+    def create_fleet: (
+      ?name: String,
+      ?description: String,
+      ?build_id: String,
+      ?script_id: String,
+      ?server_launch_path: String,
+      ?server_launch_parameters: String,
+      ?log_paths: Array[String],
+      ?ec2_instance_type: String,
+      ?ec2_inbound_permissions: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ],
+      ?new_game_session_protection_policy: String,
+      ?runtime_configuration: {
+        server_processes: Array[
+          {
+            launch_path: String,
+            parameters: String,
+            concurrent_executions: Integer
+          }
+        ],
+        max_concurrent_game_session_activations: Integer,
+        game_session_activation_timeout_seconds: Integer
+      },
+      ?resource_creation_limit_policy: {
+        new_game_sessions_per_creator: Integer,
+        policy_period_in_minutes: untyped
+      },
+      ?metric_groups: Array[String],
+      ?peer_vpc_aws_account_id: String,
+      ?peer_vpc_id: String,
+      ?fleet_type: String,
+      ?instance_role_arn: String,
+      ?certificate_configuration: {
+        certificate_type: String
+      },
+      ?locations: Array[
+        {
+          location: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?compute_type: String,
+      ?anywhere_configuration: {
+        cost: String
+      },
+      ?instance_role_credentials_provider: String
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateFleetLocationsResponse
+      include Smithy::Client::_Response[Types::CreateFleetLocationsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def location_states: () -> Array[Types::LocationState]?
+    end
+    def create_fleet_locations: (
+      ?fleet_id: String,
+      ?locations: Array[
+        {
+          location: String
+        }
+      ]
+    ) -> _CreateFleetLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetLocationsResponse
+
+    interface _CreateGameServerGroupResponse
+      include Smithy::Client::_Response[Types::CreateGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def create_game_server_group: (
+      ?game_server_group_name: String,
+      ?role_arn: String,
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?launch_template: {
+        launch_template_id: String,
+        launch_template_name: String,
+        version: String
+      },
+      ?instance_definitions: Array[
+        {
+          instance_type: String,
+          weighted_capacity: String
+        }
+      ],
+      ?auto_scaling_policy: {
+        estimated_instance_warmup: Integer,
+        target_tracking_configuration: {
+          target_value: Float
+        }
+      },
+      ?balancing_strategy: String,
+      ?game_server_protection_policy: String,
+      ?vpc_subnets: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGameServerGroupResponse
+
+    interface _CreateGameSessionResponse
+      include Smithy::Client::_Response[Types::CreateGameSessionOutput]
+      def game_session: () -> Types::GameSession?
+    end
+    def create_game_session: (
+      ?fleet_id: String,
+      ?alias_id: String,
+      ?maximum_player_session_count: Integer,
+      ?name: String,
+      ?game_properties: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?creator_id: String,
+      ?game_session_id: String,
+      ?idempotency_token: String,
+      ?game_session_data: String,
+      ?location: String
+    ) -> _CreateGameSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGameSessionResponse
+
+    interface _CreateGameSessionQueueResponse
+      include Smithy::Client::_Response[Types::CreateGameSessionQueueOutput]
+      def game_session_queue: () -> Types::GameSessionQueue?
+    end
+    def create_game_session_queue: (
+      ?name: String,
+      ?timeout_in_seconds: Integer,
+      ?player_latency_policies: Array[
+        {
+          maximum_individual_player_latency_milliseconds: Integer,
+          policy_duration_seconds: untyped
+        }
+      ],
+      ?destinations: Array[
+        {
+          destination_arn: String
+        }
+      ],
+      ?filter_configuration: {
+        allowed_locations: Array[String]
+      },
+      ?priority_configuration: {
+        priority_order: Array[String],
+        location_order: Array[String]
+      },
+      ?custom_event_data: String,
+      ?notification_target: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGameSessionQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGameSessionQueueResponse
+
+    interface _CreateLocationResponse
+      include Smithy::Client::_Response[Types::CreateLocationOutput]
+      def location: () -> Types::LocationModel?
+    end
+    def create_location: (
+      ?location_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationResponse
+
+    interface _CreateMatchmakingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateMatchmakingConfigurationOutput]
+      def configuration: () -> Types::MatchmakingConfiguration?
+    end
+    def create_matchmaking_configuration: (
+      ?name: String,
+      ?description: String,
+      ?game_session_queue_arns: Array[String],
+      ?request_timeout_seconds: Integer,
+      ?acceptance_timeout_seconds: Integer,
+      ?acceptance_required: bool,
+      ?rule_set_name: String,
+      ?notification_target: String,
+      ?additional_player_count: Integer,
+      ?custom_event_data: String,
+      ?game_properties: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?game_session_data: String,
+      ?backfill_mode: String,
+      ?flex_match_mode: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMatchmakingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMatchmakingConfigurationResponse
+
+    interface _CreateMatchmakingRuleSetResponse
+      include Smithy::Client::_Response[Types::CreateMatchmakingRuleSetOutput]
+      def rule_set: () -> Types::MatchmakingRuleSet?
+    end
+    def create_matchmaking_rule_set: (
+      ?name: String,
+      ?rule_set_body: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMatchmakingRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMatchmakingRuleSetResponse
+
+    interface _CreatePlayerSessionResponse
+      include Smithy::Client::_Response[Types::CreatePlayerSessionOutput]
+      def player_session: () -> Types::PlayerSession?
+    end
+    def create_player_session: (
+      ?game_session_id: String,
+      ?player_id: String,
+      ?player_data: String
+    ) -> _CreatePlayerSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlayerSessionResponse
+
+    interface _CreatePlayerSessionsResponse
+      include Smithy::Client::_Response[Types::CreatePlayerSessionsOutput]
+      def player_sessions: () -> Array[Types::PlayerSession]?
+    end
+    def create_player_sessions: (
+      ?game_session_id: String,
+      ?player_ids: Array[String],
+      ?player_data_map: Hash[String, String]
+    ) -> _CreatePlayerSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlayerSessionsResponse
+
+    interface _CreateScriptResponse
+      include Smithy::Client::_Response[Types::CreateScriptOutput]
+      def script: () -> Types::Script?
+    end
+    def create_script: (
+      ?name: String,
+      ?version: String,
+      ?storage_location: {
+        bucket: String,
+        key: untyped,
+        role_arn: untyped,
+        object_version: untyped
+      },
+      ?zip_file: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScriptResponse
+
+    interface _CreateVpcPeeringAuthorizationResponse
+      include Smithy::Client::_Response[Types::CreateVpcPeeringAuthorizationOutput]
+      def vpc_peering_authorization: () -> Types::VpcPeeringAuthorization?
+    end
+    def create_vpc_peering_authorization: (
+      ?game_lift_aws_account_id: String,
+      ?peer_vpc_id: String
+    ) -> _CreateVpcPeeringAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcPeeringAuthorizationResponse
+
+    interface _CreateVpcPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::CreateVpcPeeringConnectionOutput]
+    end
+    def create_vpc_peering_connection: (
+      ?fleet_id: String,
+      ?peer_vpc_aws_account_id: String,
+      ?peer_vpc_id: String
+    ) -> _CreateVpcPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcPeeringConnectionResponse
+
+    interface _DeleteAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alias: (
+      ?alias_id: String
+    ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
+
+    interface _DeleteBuildResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_build: (
+      ?build_id: String
+    ) -> _DeleteBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBuildResponse
+
+    interface _DeleteContainerFleetResponse
+      include Smithy::Client::_Response[Types::DeleteContainerFleetOutput]
+    end
+    def delete_container_fleet: (
+      ?fleet_id: String
+    ) -> _DeleteContainerFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContainerFleetResponse
+
+    interface _DeleteContainerGroupDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteContainerGroupDefinitionOutput]
+    end
+    def delete_container_group_definition: (
+      ?name: String,
+      ?version_number: Integer,
+      ?version_count_to_retain: Integer
+    ) -> _DeleteContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContainerGroupDefinitionResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_fleet: (
+      ?fleet_id: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteFleetLocationsResponse
+      include Smithy::Client::_Response[Types::DeleteFleetLocationsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def location_states: () -> Array[Types::LocationState]?
+    end
+    def delete_fleet_locations: (
+      ?fleet_id: String,
+      ?locations: Array[String]
+    ) -> _DeleteFleetLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetLocationsResponse
+
+    interface _DeleteGameServerGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def delete_game_server_group: (
+      ?game_server_group_name: String,
+      ?delete_option: String
+    ) -> _DeleteGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGameServerGroupResponse
+
+    interface _DeleteGameSessionQueueResponse
+      include Smithy::Client::_Response[Types::DeleteGameSessionQueueOutput]
+    end
+    def delete_game_session_queue: (
+      ?name: String
+    ) -> _DeleteGameSessionQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGameSessionQueueResponse
+
+    interface _DeleteLocationResponse
+      include Smithy::Client::_Response[Types::DeleteLocationOutput]
+    end
+    def delete_location: (
+      ?location_name: String
+    ) -> _DeleteLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLocationResponse
+
+    interface _DeleteMatchmakingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteMatchmakingConfigurationOutput]
+    end
+    def delete_matchmaking_configuration: (
+      ?name: String
+    ) -> _DeleteMatchmakingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMatchmakingConfigurationResponse
+
+    interface _DeleteMatchmakingRuleSetResponse
+      include Smithy::Client::_Response[Types::DeleteMatchmakingRuleSetOutput]
+    end
+    def delete_matchmaking_rule_set: (
+      ?name: String
+    ) -> _DeleteMatchmakingRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMatchmakingRuleSetResponse
+
+    interface _DeleteScalingPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_scaling_policy: (
+      ?name: String,
+      ?fleet_id: String
+    ) -> _DeleteScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScalingPolicyResponse
+
+    interface _DeleteScriptResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_script: (
+      ?script_id: String
+    ) -> _DeleteScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScriptResponse
+
+    interface _DeleteVpcPeeringAuthorizationResponse
+      include Smithy::Client::_Response[Types::DeleteVpcPeeringAuthorizationOutput]
+    end
+    def delete_vpc_peering_authorization: (
+      ?game_lift_aws_account_id: String,
+      ?peer_vpc_id: String
+    ) -> _DeleteVpcPeeringAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcPeeringAuthorizationResponse
+
+    interface _DeleteVpcPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteVpcPeeringConnectionOutput]
+    end
+    def delete_vpc_peering_connection: (
+      ?fleet_id: String,
+      ?vpc_peering_connection_id: String
+    ) -> _DeleteVpcPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcPeeringConnectionResponse
+
+    interface _DeregisterComputeResponse
+      include Smithy::Client::_Response[Types::DeregisterComputeOutput]
+    end
+    def deregister_compute: (
+      ?fleet_id: String,
+      ?compute_name: String
+    ) -> _DeregisterComputeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterComputeResponse
+
+    interface _DeregisterGameServerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_game_server: (
+      ?game_server_group_name: String,
+      ?game_server_id: String
+    ) -> _DeregisterGameServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterGameServerResponse
+
+    interface _DescribeAliasResponse
+      include Smithy::Client::_Response[Types::DescribeAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def describe_alias: (
+      ?alias_id: String
+    ) -> _DescribeAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAliasResponse
+
+    interface _DescribeBuildResponse
+      include Smithy::Client::_Response[Types::DescribeBuildOutput]
+      def build: () -> Types::Build?
+    end
+    def describe_build: (
+      ?build_id: String
+    ) -> _DescribeBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBuildResponse
+
+    interface _DescribeComputeResponse
+      include Smithy::Client::_Response[Types::DescribeComputeOutput]
+      def compute: () -> Types::Compute?
+    end
+    def describe_compute: (
+      ?fleet_id: String,
+      ?compute_name: String
+    ) -> _DescribeComputeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComputeResponse
+
+    interface _DescribeContainerFleetResponse
+      include Smithy::Client::_Response[Types::DescribeContainerFleetOutput]
+      def container_fleet: () -> Types::ContainerFleet?
+    end
+    def describe_container_fleet: (
+      ?fleet_id: String
+    ) -> _DescribeContainerFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerFleetResponse
+
+    interface _DescribeContainerGroupDefinitionResponse
+      include Smithy::Client::_Response[Types::DescribeContainerGroupDefinitionOutput]
+      def container_group_definition: () -> Types::ContainerGroupDefinition?
+    end
+    def describe_container_group_definition: (
+      ?name: String,
+      ?version_number: Integer
+    ) -> _DescribeContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerGroupDefinitionResponse
+
+    interface _DescribeEC2InstanceLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeEC2InstanceLimitsOutput]
+      def ec2_instance_limits: () -> Array[Types::EC2InstanceLimit]?
+    end
+    def describe_ec2_instance_limits: (
+      ?ec2_instance_type: String,
+      ?location: String
+    ) -> _DescribeEC2InstanceLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEC2InstanceLimitsResponse
+
+    interface _DescribeFleetAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeFleetAttributesOutput]
+      def fleet_attributes: () -> Array[Types::FleetAttributes]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_attributes: (
+      ?fleet_ids: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetAttributesResponse
+
+    interface _DescribeFleetCapacityResponse
+      include Smithy::Client::_Response[Types::DescribeFleetCapacityOutput]
+      def fleet_capacity: () -> Array[Types::FleetCapacity]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_capacity: (
+      ?fleet_ids: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetCapacityResponse
+
+    interface _DescribeFleetDeploymentResponse
+      include Smithy::Client::_Response[Types::DescribeFleetDeploymentOutput]
+      def fleet_deployment: () -> Types::FleetDeployment?
+      def locational_deployments: () -> Hash[String, Types::LocationalDeployment]?
+    end
+    def describe_fleet_deployment: (
+      ?fleet_id: String,
+      ?deployment_id: String
+    ) -> _DescribeFleetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetDeploymentResponse
+
+    interface _DescribeFleetEventsResponse
+      include Smithy::Client::_Response[Types::DescribeFleetEventsOutput]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_events: (
+      ?fleet_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetEventsResponse
+
+    interface _DescribeFleetLocationAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeFleetLocationAttributesOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def location_attributes: () -> Array[Types::LocationAttributes]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_location_attributes: (
+      ?fleet_id: String,
+      ?locations: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetLocationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetLocationAttributesResponse
+
+    interface _DescribeFleetLocationCapacityResponse
+      include Smithy::Client::_Response[Types::DescribeFleetLocationCapacityOutput]
+      def fleet_capacity: () -> Types::FleetCapacity?
+    end
+    def describe_fleet_location_capacity: (
+      ?fleet_id: String,
+      ?location: String
+    ) -> _DescribeFleetLocationCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetLocationCapacityResponse
+
+    interface _DescribeFleetLocationUtilizationResponse
+      include Smithy::Client::_Response[Types::DescribeFleetLocationUtilizationOutput]
+      def fleet_utilization: () -> Types::FleetUtilization?
+    end
+    def describe_fleet_location_utilization: (
+      ?fleet_id: String,
+      ?location: String
+    ) -> _DescribeFleetLocationUtilizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetLocationUtilizationResponse
+
+    interface _DescribeFleetPortSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeFleetPortSettingsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def inbound_permissions: () -> Array[Types::IpPermission]?
+      def update_status: () -> String?
+      def location: () -> String?
+    end
+    def describe_fleet_port_settings: (
+      ?fleet_id: String,
+      ?location: String
+    ) -> _DescribeFleetPortSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetPortSettingsResponse
+
+    interface _DescribeFleetUtilizationResponse
+      include Smithy::Client::_Response[Types::DescribeFleetUtilizationOutput]
+      def fleet_utilization: () -> Array[Types::FleetUtilization]?
+      def next_token: () -> String?
+    end
+    def describe_fleet_utilization: (
+      ?fleet_ids: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeFleetUtilizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFleetUtilizationResponse
+
+    interface _DescribeGameServerResponse
+      include Smithy::Client::_Response[Types::DescribeGameServerOutput]
+      def game_server: () -> Types::GameServer?
+    end
+    def describe_game_server: (
+      ?game_server_group_name: String,
+      ?game_server_id: String
+    ) -> _DescribeGameServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameServerResponse
+
+    interface _DescribeGameServerGroupResponse
+      include Smithy::Client::_Response[Types::DescribeGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def describe_game_server_group: (
+      ?game_server_group_name: String
+    ) -> _DescribeGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameServerGroupResponse
+
+    interface _DescribeGameServerInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeGameServerInstancesOutput]
+      def game_server_instances: () -> Array[Types::GameServerInstance]?
+      def next_token: () -> String?
+    end
+    def describe_game_server_instances: (
+      ?game_server_group_name: String,
+      ?instance_ids: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeGameServerInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameServerInstancesResponse
+
+    interface _DescribeGameSessionDetailsResponse
+      include Smithy::Client::_Response[Types::DescribeGameSessionDetailsOutput]
+      def game_session_details: () -> Array[Types::GameSessionDetail]?
+      def next_token: () -> String?
+    end
+    def describe_game_session_details: (
+      ?fleet_id: String,
+      ?game_session_id: String,
+      ?alias_id: String,
+      ?location: String,
+      ?status_filter: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeGameSessionDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameSessionDetailsResponse
+
+    interface _DescribeGameSessionPlacementResponse
+      include Smithy::Client::_Response[Types::DescribeGameSessionPlacementOutput]
+      def game_session_placement: () -> Types::GameSessionPlacement?
+    end
+    def describe_game_session_placement: (
+      ?placement_id: String
+    ) -> _DescribeGameSessionPlacementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameSessionPlacementResponse
+
+    interface _DescribeGameSessionQueuesResponse
+      include Smithy::Client::_Response[Types::DescribeGameSessionQueuesOutput]
+      def game_session_queues: () -> Array[Types::GameSessionQueue]?
+      def next_token: () -> String?
+    end
+    def describe_game_session_queues: (
+      ?names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeGameSessionQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameSessionQueuesResponse
+
+    interface _DescribeGameSessionsResponse
+      include Smithy::Client::_Response[Types::DescribeGameSessionsOutput]
+      def game_sessions: () -> Array[Types::GameSession]?
+      def next_token: () -> String?
+    end
+    def describe_game_sessions: (
+      ?fleet_id: String,
+      ?game_session_id: String,
+      ?alias_id: String,
+      ?location: String,
+      ?status_filter: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeGameSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGameSessionsResponse
+
+    interface _DescribeInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeInstancesOutput]
+      def instances: () -> Array[Types::Instance]?
+      def next_token: () -> String?
+    end
+    def describe_instances: (
+      ?fleet_id: String,
+      ?instance_id: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?location: String
+    ) -> _DescribeInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstancesResponse
+
+    interface _DescribeMatchmakingResponse
+      include Smithy::Client::_Response[Types::DescribeMatchmakingOutput]
+      def ticket_list: () -> Array[Types::MatchmakingTicket]?
+    end
+    def describe_matchmaking: (
+      ?ticket_ids: Array[String]
+    ) -> _DescribeMatchmakingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMatchmakingResponse
+
+    interface _DescribeMatchmakingConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeMatchmakingConfigurationsOutput]
+      def configurations: () -> Array[Types::MatchmakingConfiguration]?
+      def next_token: () -> String?
+    end
+    def describe_matchmaking_configurations: (
+      ?names: Array[String],
+      ?rule_set_name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeMatchmakingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMatchmakingConfigurationsResponse
+
+    interface _DescribeMatchmakingRuleSetsResponse
+      include Smithy::Client::_Response[Types::DescribeMatchmakingRuleSetsOutput]
+      def rule_sets: () -> Array[Types::MatchmakingRuleSet]?
+      def next_token: () -> String?
+    end
+    def describe_matchmaking_rule_sets: (
+      ?names: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeMatchmakingRuleSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMatchmakingRuleSetsResponse
+
+    interface _DescribePlayerSessionsResponse
+      include Smithy::Client::_Response[Types::DescribePlayerSessionsOutput]
+      def player_sessions: () -> Array[Types::PlayerSession]?
+      def next_token: () -> String?
+    end
+    def describe_player_sessions: (
+      ?game_session_id: String,
+      ?player_id: String,
+      ?player_session_id: String,
+      ?player_session_status_filter: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribePlayerSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePlayerSessionsResponse
+
+    interface _DescribeRuntimeConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeRuntimeConfigurationOutput]
+      def runtime_configuration: () -> Types::RuntimeConfiguration?
+    end
+    def describe_runtime_configuration: (
+      ?fleet_id: String
+    ) -> _DescribeRuntimeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuntimeConfigurationResponse
+
+    interface _DescribeScalingPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeScalingPoliciesOutput]
+      def scaling_policies: () -> Array[Types::ScalingPolicy]?
+      def next_token: () -> String?
+    end
+    def describe_scaling_policies: (
+      ?fleet_id: String,
+      ?status_filter: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?location: String
+    ) -> _DescribeScalingPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScalingPoliciesResponse
+
+    interface _DescribeScriptResponse
+      include Smithy::Client::_Response[Types::DescribeScriptOutput]
+      def script: () -> Types::Script?
+    end
+    def describe_script: (
+      ?script_id: String
+    ) -> _DescribeScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScriptResponse
+
+    interface _DescribeVpcPeeringAuthorizationsResponse
+      include Smithy::Client::_Response[Types::DescribeVpcPeeringAuthorizationsOutput]
+      def vpc_peering_authorizations: () -> Array[Types::VpcPeeringAuthorization]?
+    end
+    def describe_vpc_peering_authorizations: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcPeeringAuthorizationsResponse
+
+    interface _DescribeVpcPeeringConnectionsResponse
+      include Smithy::Client::_Response[Types::DescribeVpcPeeringConnectionsOutput]
+      def vpc_peering_connections: () -> Array[Types::VpcPeeringConnection]?
+    end
+    def describe_vpc_peering_connections: (
+      ?fleet_id: String
+    ) -> _DescribeVpcPeeringConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcPeeringConnectionsResponse
+
+    interface _GetComputeAccessResponse
+      include Smithy::Client::_Response[Types::GetComputeAccessOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def compute_name: () -> String?
+      def compute_arn: () -> String?
+      def credentials: () -> Types::AwsCredentials?
+      def target: () -> String?
+      def container_identifiers: () -> Array[Types::ContainerIdentifier]?
+    end
+    def get_compute_access: (
+      ?fleet_id: String,
+      ?compute_name: String
+    ) -> _GetComputeAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComputeAccessResponse
+
+    interface _GetComputeAuthTokenResponse
+      include Smithy::Client::_Response[Types::GetComputeAuthTokenOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def compute_name: () -> String?
+      def compute_arn: () -> String?
+      def auth_token: () -> String?
+      def expiration_timestamp: () -> Time?
+    end
+    def get_compute_auth_token: (
+      ?fleet_id: String,
+      ?compute_name: String
+    ) -> _GetComputeAuthTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComputeAuthTokenResponse
+
+    interface _GetGameSessionLogUrlResponse
+      include Smithy::Client::_Response[Types::GetGameSessionLogUrlOutput]
+      def pre_signed_url: () -> String?
+    end
+    def get_game_session_log_url: (
+      ?game_session_id: String
+    ) -> _GetGameSessionLogUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGameSessionLogUrlResponse
+
+    interface _GetInstanceAccessResponse
+      include Smithy::Client::_Response[Types::GetInstanceAccessOutput]
+      def instance_access: () -> Types::InstanceAccess?
+    end
+    def get_instance_access: (
+      ?fleet_id: String,
+      ?instance_id: String
+    ) -> _GetInstanceAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceAccessResponse
+
+    interface _ListAliasesResponse
+      include Smithy::Client::_Response[Types::ListAliasesOutput]
+      def aliases: () -> Array[Types::Alias]?
+      def next_token: () -> String?
+    end
+    def list_aliases: (
+      ?routing_strategy_type: String,
+      ?name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
+
+    interface _ListBuildsResponse
+      include Smithy::Client::_Response[Types::ListBuildsOutput]
+      def builds: () -> Array[Types::Build]?
+      def next_token: () -> String?
+    end
+    def list_builds: (
+      ?status: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListBuildsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuildsResponse
+
+    interface _ListComputeResponse
+      include Smithy::Client::_Response[Types::ListComputeOutput]
+      def compute_list: () -> Array[Types::Compute]?
+      def next_token: () -> String?
+    end
+    def list_compute: (
+      ?fleet_id: String,
+      ?location: String,
+      ?container_group_definition_name: String,
+      ?compute_status: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListComputeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComputeResponse
+
+    interface _ListContainerFleetsResponse
+      include Smithy::Client::_Response[Types::ListContainerFleetsOutput]
+      def container_fleets: () -> Array[Types::ContainerFleet]?
+      def next_token: () -> String?
+    end
+    def list_container_fleets: (
+      ?container_group_definition_name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListContainerFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContainerFleetsResponse
+
+    interface _ListContainerGroupDefinitionVersionsResponse
+      include Smithy::Client::_Response[Types::ListContainerGroupDefinitionVersionsOutput]
+      def container_group_definitions: () -> Array[Types::ContainerGroupDefinition]?
+      def next_token: () -> String?
+    end
+    def list_container_group_definition_versions: (
+      ?name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListContainerGroupDefinitionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContainerGroupDefinitionVersionsResponse
+
+    interface _ListContainerGroupDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListContainerGroupDefinitionsOutput]
+      def container_group_definitions: () -> Array[Types::ContainerGroupDefinition]?
+      def next_token: () -> String?
+    end
+    def list_container_group_definitions: (
+      ?container_group_type: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListContainerGroupDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContainerGroupDefinitionsResponse
+
+    interface _ListFleetDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListFleetDeploymentsOutput]
+      def fleet_deployments: () -> Array[Types::FleetDeployment]?
+      def next_token: () -> String?
+    end
+    def list_fleet_deployments: (
+      ?fleet_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListFleetDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetDeploymentsResponse
+
+    interface _ListFleetsResponse
+      include Smithy::Client::_Response[Types::ListFleetsOutput]
+      def fleet_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_fleets: (
+      ?build_id: String,
+      ?script_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
+
+    interface _ListGameServerGroupsResponse
+      include Smithy::Client::_Response[Types::ListGameServerGroupsOutput]
+      def game_server_groups: () -> Array[Types::GameServerGroup]?
+      def next_token: () -> String?
+    end
+    def list_game_server_groups: (
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListGameServerGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGameServerGroupsResponse
+
+    interface _ListGameServersResponse
+      include Smithy::Client::_Response[Types::ListGameServersOutput]
+      def game_servers: () -> Array[Types::GameServer]?
+      def next_token: () -> String?
+    end
+    def list_game_servers: (
+      ?game_server_group_name: String,
+      ?sort_order: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListGameServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGameServersResponse
+
+    interface _ListLocationsResponse
+      include Smithy::Client::_Response[Types::ListLocationsOutput]
+      def locations: () -> Array[Types::LocationModel]?
+      def next_token: () -> String?
+    end
+    def list_locations: (
+      ?filters: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLocationsResponse
+
+    interface _ListScriptsResponse
+      include Smithy::Client::_Response[Types::ListScriptsOutput]
+      def scripts: () -> Array[Types::Script]?
+      def next_token: () -> String?
+    end
+    def list_scripts: (
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListScriptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScriptsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutScalingPolicyResponse
+      include Smithy::Client::_Response[Types::PutScalingPolicyOutput]
+      def name: () -> String?
+    end
+    def put_scaling_policy: (
+      ?name: String,
+      ?fleet_id: String,
+      ?scaling_adjustment: Integer,
+      ?scaling_adjustment_type: String,
+      ?threshold: Float,
+      ?comparison_operator: String,
+      ?evaluation_periods: Integer,
+      ?metric_name: String,
+      ?policy_type: String,
+      ?target_configuration: {
+        target_value: Float
+      }
+    ) -> _PutScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutScalingPolicyResponse
+
+    interface _RegisterComputeResponse
+      include Smithy::Client::_Response[Types::RegisterComputeOutput]
+      def compute: () -> Types::Compute?
+    end
+    def register_compute: (
+      ?fleet_id: String,
+      ?compute_name: String,
+      ?certificate_path: String,
+      ?dns_name: String,
+      ?ip_address: String,
+      ?location: String
+    ) -> _RegisterComputeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterComputeResponse
+
+    interface _RegisterGameServerResponse
+      include Smithy::Client::_Response[Types::RegisterGameServerOutput]
+      def game_server: () -> Types::GameServer?
+    end
+    def register_game_server: (
+      ?game_server_group_name: String,
+      ?game_server_id: String,
+      ?instance_id: String,
+      ?connection_info: String,
+      ?game_server_data: String
+    ) -> _RegisterGameServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterGameServerResponse
+
+    interface _RequestUploadCredentialsResponse
+      include Smithy::Client::_Response[Types::RequestUploadCredentialsOutput]
+      def upload_credentials: () -> Types::AwsCredentials?
+      def storage_location: () -> Types::S3Location?
+    end
+    def request_upload_credentials: (
+      ?build_id: String
+    ) -> _RequestUploadCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RequestUploadCredentialsResponse
+
+    interface _ResolveAliasResponse
+      include Smithy::Client::_Response[Types::ResolveAliasOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+    end
+    def resolve_alias: (
+      ?alias_id: String
+    ) -> _ResolveAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveAliasResponse
+
+    interface _ResumeGameServerGroupResponse
+      include Smithy::Client::_Response[Types::ResumeGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def resume_game_server_group: (
+      ?game_server_group_name: String,
+      ?resume_actions: Array[String]
+    ) -> _ResumeGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeGameServerGroupResponse
+
+    interface _SearchGameSessionsResponse
+      include Smithy::Client::_Response[Types::SearchGameSessionsOutput]
+      def game_sessions: () -> Array[Types::GameSession]?
+      def next_token: () -> String?
+    end
+    def search_game_sessions: (
+      ?fleet_id: String,
+      ?alias_id: String,
+      ?location: String,
+      ?filter_expression: String,
+      ?sort_expression: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _SearchGameSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchGameSessionsResponse
+
+    interface _StartFleetActionsResponse
+      include Smithy::Client::_Response[Types::StartFleetActionsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+    end
+    def start_fleet_actions: (
+      ?fleet_id: String,
+      ?actions: Array[String],
+      ?location: String
+    ) -> _StartFleetActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFleetActionsResponse
+
+    interface _StartGameSessionPlacementResponse
+      include Smithy::Client::_Response[Types::StartGameSessionPlacementOutput]
+      def game_session_placement: () -> Types::GameSessionPlacement?
+    end
+    def start_game_session_placement: (
+      ?placement_id: String,
+      ?game_session_queue_name: String,
+      ?game_properties: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?maximum_player_session_count: Integer,
+      ?game_session_name: String,
+      ?player_latencies: Array[
+        {
+          player_id: String,
+          region_identifier: String,
+          latency_in_milliseconds: Float
+        }
+      ],
+      ?desired_player_sessions: Array[
+        {
+          player_id: String,
+          player_data: String
+        }
+      ],
+      ?game_session_data: String,
+      ?priority_configuration_override: {
+        placement_fallback_strategy: String,
+        location_order: Array[String]
+      }
+    ) -> _StartGameSessionPlacementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartGameSessionPlacementResponse
+
+    interface _StartMatchBackfillResponse
+      include Smithy::Client::_Response[Types::StartMatchBackfillOutput]
+      def matchmaking_ticket: () -> Types::MatchmakingTicket?
+    end
+    def start_match_backfill: (
+      ?ticket_id: String,
+      ?configuration_name: String,
+      ?game_session_arn: String,
+      ?players: Array[
+        {
+          player_id: String,
+          player_attributes: Hash[String,
+            {
+              s: String,
+              n: Float,
+              sl: Array[String],
+              sdm: Hash[String, Float]
+            }
+          ],
+          team: String,
+          latency_in_ms: Hash[String, Integer]
+        }
+      ]
+    ) -> _StartMatchBackfillResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMatchBackfillResponse
+
+    interface _StartMatchmakingResponse
+      include Smithy::Client::_Response[Types::StartMatchmakingOutput]
+      def matchmaking_ticket: () -> Types::MatchmakingTicket?
+    end
+    def start_matchmaking: (
+      ?ticket_id: String,
+      ?configuration_name: String,
+      ?players: Array[
+        {
+          player_id: String,
+          player_attributes: Hash[String,
+            {
+              s: String,
+              n: Float,
+              sl: Array[String],
+              sdm: Hash[String, Float]
+            }
+          ],
+          team: String,
+          latency_in_ms: Hash[String, Integer]
+        }
+      ]
+    ) -> _StartMatchmakingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMatchmakingResponse
+
+    interface _StopFleetActionsResponse
+      include Smithy::Client::_Response[Types::StopFleetActionsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+    end
+    def stop_fleet_actions: (
+      ?fleet_id: String,
+      ?actions: Array[String],
+      ?location: String
+    ) -> _StopFleetActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFleetActionsResponse
+
+    interface _StopGameSessionPlacementResponse
+      include Smithy::Client::_Response[Types::StopGameSessionPlacementOutput]
+      def game_session_placement: () -> Types::GameSessionPlacement?
+    end
+    def stop_game_session_placement: (
+      ?placement_id: String
+    ) -> _StopGameSessionPlacementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopGameSessionPlacementResponse
+
+    interface _StopMatchmakingResponse
+      include Smithy::Client::_Response[Types::StopMatchmakingOutput]
+    end
+    def stop_matchmaking: (
+      ?ticket_id: String
+    ) -> _StopMatchmakingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMatchmakingResponse
+
+    interface _SuspendGameServerGroupResponse
+      include Smithy::Client::_Response[Types::SuspendGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def suspend_game_server_group: (
+      ?game_server_group_name: String,
+      ?suspend_actions: Array[String]
+    ) -> _SuspendGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuspendGameServerGroupResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateGameSessionResponse
+      include Smithy::Client::_Response[Types::TerminateGameSessionOutput]
+      def game_session: () -> Types::GameSession?
+    end
+    def terminate_game_session: (
+      ?game_session_id: String,
+      ?termination_mode: String
+    ) -> _TerminateGameSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateGameSessionResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAliasResponse
+      include Smithy::Client::_Response[Types::UpdateAliasOutput]
+      def alias: () -> Types::Alias?
+    end
+    def update_alias: (
+      ?alias_id: String,
+      ?name: String,
+      ?description: String,
+      ?routing_strategy: {
+        type: String,
+        fleet_id: String,
+        message: String
+      }
+    ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
+
+    interface _UpdateBuildResponse
+      include Smithy::Client::_Response[Types::UpdateBuildOutput]
+      def build: () -> Types::Build?
+    end
+    def update_build: (
+      ?build_id: String,
+      ?name: String,
+      ?version: String
+    ) -> _UpdateBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBuildResponse
+
+    interface _UpdateContainerFleetResponse
+      include Smithy::Client::_Response[Types::UpdateContainerFleetOutput]
+      def container_fleet: () -> Types::ContainerFleet?
+    end
+    def update_container_fleet: (
+      ?fleet_id: String,
+      ?game_server_container_group_definition_name: String,
+      ?per_instance_container_group_definition_name: String,
+      ?game_server_container_groups_per_instance: Integer,
+      ?instance_connection_port_range: {
+        from_port: Integer,
+        to_port: untyped
+      },
+      ?instance_inbound_permission_authorizations: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ],
+      ?instance_inbound_permission_revocations: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ],
+      ?deployment_configuration: {
+        protection_strategy: String,
+        minimum_healthy_percentage: Integer,
+        impairment_strategy: String
+      },
+      ?description: String,
+      ?metric_groups: Array[String],
+      ?new_game_session_protection_policy: String,
+      ?game_session_creation_limit_policy: {
+        new_game_sessions_per_creator: Integer,
+        policy_period_in_minutes: untyped
+      },
+      ?log_configuration: {
+        log_destination: String,
+        s3_bucket_name: String,
+        log_group_arn: String
+      },
+      ?remove_attributes: Array[String]
+    ) -> _UpdateContainerFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerFleetResponse
+
+    interface _UpdateContainerGroupDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateContainerGroupDefinitionOutput]
+      def container_group_definition: () -> Types::ContainerGroupDefinition?
+    end
+    def update_container_group_definition: (
+      ?name: String,
+      ?game_server_container_definition: {
+        container_name: String,
+        depends_on: Array[
+          {
+            container_name: untyped,
+            condition: String
+          }
+        ],
+        mount_points: Array[
+          {
+            instance_path: String,
+            container_path: String,
+            access_level: String
+          }
+        ],
+        environment_override: Array[
+          {
+            name: String,
+            value: untyped
+          }
+        ],
+        image_uri: String,
+        port_configuration: {
+          container_port_ranges: Array[
+            {
+              from_port: Integer,
+              to_port: untyped,
+              protocol: String
+            }
+          ]
+        },
+        server_sdk_version: String
+      },
+      ?support_container_definitions: Array[
+        {
+          container_name: String,
+          depends_on: Array[
+            {
+              container_name: untyped,
+              condition: String
+            }
+          ],
+          mount_points: Array[
+            {
+              instance_path: String,
+              container_path: String,
+              access_level: String
+            }
+          ],
+          environment_override: Array[
+            {
+              name: String,
+              value: untyped
+            }
+          ],
+          essential: bool,
+          health_check: {
+            command: Array[String],
+            interval: Integer,
+            retries: Integer,
+            start_period: Integer,
+            timeout: Integer
+          },
+          image_uri: String,
+          memory_hard_limit_mebibytes: Integer,
+          port_configuration: {
+            container_port_ranges: Array[
+              {
+                from_port: Integer,
+                to_port: untyped,
+                protocol: String
+              }
+            ]
+          },
+          vcpu: Float
+        }
+      ],
+      ?total_memory_limit_mebibytes: Integer,
+      ?total_vcpu_limit: Float,
+      ?version_description: String,
+      ?source_version_number: Integer,
+      ?operating_system: String
+    ) -> _UpdateContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerGroupDefinitionResponse
+
+    interface _UpdateFleetAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateFleetAttributesOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+    end
+    def update_fleet_attributes: (
+      ?fleet_id: String,
+      ?name: String,
+      ?description: String,
+      ?new_game_session_protection_policy: String,
+      ?resource_creation_limit_policy: {
+        new_game_sessions_per_creator: Integer,
+        policy_period_in_minutes: untyped
+      },
+      ?metric_groups: Array[String],
+      ?anywhere_configuration: {
+        cost: String
+      }
+    ) -> _UpdateFleetAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetAttributesResponse
+
+    interface _UpdateFleetCapacityResponse
+      include Smithy::Client::_Response[Types::UpdateFleetCapacityOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def location: () -> String?
+    end
+    def update_fleet_capacity: (
+      ?fleet_id: String,
+      ?desired_instances: Integer,
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?location: String
+    ) -> _UpdateFleetCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetCapacityResponse
+
+    interface _UpdateFleetPortSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateFleetPortSettingsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+    end
+    def update_fleet_port_settings: (
+      ?fleet_id: String,
+      ?inbound_permission_authorizations: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ],
+      ?inbound_permission_revocations: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          ip_range: String,
+          protocol: String
+        }
+      ]
+    ) -> _UpdateFleetPortSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetPortSettingsResponse
+
+    interface _UpdateGameServerResponse
+      include Smithy::Client::_Response[Types::UpdateGameServerOutput]
+      def game_server: () -> Types::GameServer?
+    end
+    def update_game_server: (
+      ?game_server_group_name: String,
+      ?game_server_id: String,
+      ?game_server_data: String,
+      ?utilization_status: String,
+      ?health_check: String
+    ) -> _UpdateGameServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGameServerResponse
+
+    interface _UpdateGameServerGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGameServerGroupOutput]
+      def game_server_group: () -> Types::GameServerGroup?
+    end
+    def update_game_server_group: (
+      ?game_server_group_name: String,
+      ?role_arn: String,
+      ?instance_definitions: Array[
+        {
+          instance_type: String,
+          weighted_capacity: String
+        }
+      ],
+      ?game_server_protection_policy: String,
+      ?balancing_strategy: String
+    ) -> _UpdateGameServerGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGameServerGroupResponse
+
+    interface _UpdateGameSessionResponse
+      include Smithy::Client::_Response[Types::UpdateGameSessionOutput]
+      def game_session: () -> Types::GameSession?
+    end
+    def update_game_session: (
+      ?game_session_id: String,
+      ?maximum_player_session_count: Integer,
+      ?name: String,
+      ?player_session_creation_policy: String,
+      ?protection_policy: String,
+      ?game_properties: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateGameSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGameSessionResponse
+
+    interface _UpdateGameSessionQueueResponse
+      include Smithy::Client::_Response[Types::UpdateGameSessionQueueOutput]
+      def game_session_queue: () -> Types::GameSessionQueue?
+    end
+    def update_game_session_queue: (
+      ?name: String,
+      ?timeout_in_seconds: Integer,
+      ?player_latency_policies: Array[
+        {
+          maximum_individual_player_latency_milliseconds: Integer,
+          policy_duration_seconds: untyped
+        }
+      ],
+      ?destinations: Array[
+        {
+          destination_arn: String
+        }
+      ],
+      ?filter_configuration: {
+        allowed_locations: Array[String]
+      },
+      ?priority_configuration: {
+        priority_order: Array[String],
+        location_order: Array[String]
+      },
+      ?custom_event_data: String,
+      ?notification_target: String
+    ) -> _UpdateGameSessionQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGameSessionQueueResponse
+
+    interface _UpdateMatchmakingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateMatchmakingConfigurationOutput]
+      def configuration: () -> Types::MatchmakingConfiguration?
+    end
+    def update_matchmaking_configuration: (
+      ?name: String,
+      ?description: String,
+      ?game_session_queue_arns: Array[String],
+      ?request_timeout_seconds: Integer,
+      ?acceptance_timeout_seconds: Integer,
+      ?acceptance_required: bool,
+      ?rule_set_name: String,
+      ?notification_target: String,
+      ?additional_player_count: Integer,
+      ?custom_event_data: String,
+      ?game_properties: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?game_session_data: String,
+      ?backfill_mode: String,
+      ?flex_match_mode: String
+    ) -> _UpdateMatchmakingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMatchmakingConfigurationResponse
+
+    interface _UpdateRuntimeConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateRuntimeConfigurationOutput]
+      def runtime_configuration: () -> Types::RuntimeConfiguration?
+    end
+    def update_runtime_configuration: (
+      ?fleet_id: String,
+      ?runtime_configuration: {
+        server_processes: Array[
+          {
+            launch_path: String,
+            parameters: String,
+            concurrent_executions: Integer
+          }
+        ],
+        max_concurrent_game_session_activations: Integer,
+        game_session_activation_timeout_seconds: Integer
+      }
+    ) -> _UpdateRuntimeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuntimeConfigurationResponse
+
+    interface _UpdateScriptResponse
+      include Smithy::Client::_Response[Types::UpdateScriptOutput]
+      def script: () -> Types::Script?
+    end
+    def update_script: (
+      ?script_id: String,
+      ?name: String,
+      ?version: String,
+      ?storage_location: {
+        bucket: String,
+        key: untyped,
+        role_arn: untyped,
+        object_version: untyped
+      },
+      ?zip_file: String
+    ) -> _UpdateScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScriptResponse
+
+    interface _ValidateMatchmakingRuleSetResponse
+      include Smithy::Client::_Response[Types::ValidateMatchmakingRuleSetOutput]
+      def valid: () -> bool?
+    end
+    def validate_matchmaking_rule_set: (
+      ?rule_set_body: String
+    ) -> _ValidateMatchmakingRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateMatchmakingRuleSetResponse
+  end
+end

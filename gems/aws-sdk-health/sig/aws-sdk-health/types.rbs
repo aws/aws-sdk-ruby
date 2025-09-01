@@ -1,0 +1,788 @@
+module Aws::Health
+  module Types
+
+    class AccountEntityAggregate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?count: Integer,
+        ?statuses: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor count: Integer?
+      attr_accessor statuses: Hash[String, Integer]?
+    end
+
+    class AffectedEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_arn: String,
+        ?event_arn: String,
+        ?entity_value: String,
+        ?entity_url: String,
+        ?aws_account_id: String,
+        ?last_updated_time: Time,
+        ?status_code: String,
+        ?tags: Hash[String, String],
+        ?entity_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_arn: String?
+      attr_accessor event_arn: String?
+      attr_accessor entity_value: String?
+      attr_accessor entity_url: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor status_code: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor entity_metadata: Hash[String, String]?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DateTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: Time,
+        ?to: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: Time?
+      attr_accessor to: Time?
+    end
+
+    class DescribeAffectedAccountsForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAffectedAccountsForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?affected_accounts: Array[String],
+        ?event_scope_code: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor affected_accounts: Array[String]?
+      attr_accessor event_scope_code: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAffectedEntitiesForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_entity_filters: Array[Types::EventAccountFilter],
+        ?locale: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?organization_entity_account_filters: Array[Types::EntityAccountFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_entity_filters: Array[Types::EventAccountFilter]?
+      attr_accessor locale: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor organization_entity_account_filters: Array[Types::EntityAccountFilter]?
+    end
+
+    class DescribeAffectedEntitiesForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::AffectedEntity],
+        ?failed_set: Array[Types::OrganizationAffectedEntitiesErrorItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::AffectedEntity]?
+      attr_accessor failed_set: Array[Types::OrganizationAffectedEntitiesErrorItem]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAffectedEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::EntityFilter,
+        ?locale: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::EntityFilter?
+      attr_accessor locale: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAffectedEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::AffectedEntity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::AffectedEntity]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEntityAggregatesForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arns: Array[String],
+        ?aws_account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arns: Array[String]?
+      attr_accessor aws_account_ids: Array[String]?
+    end
+
+    class DescribeEntityAggregatesForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_entity_aggregates: Array[Types::OrganizationEntityAggregate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_entity_aggregates: Array[Types::OrganizationEntityAggregate]?
+    end
+
+    class DescribeEntityAggregatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arns: Array[String]?
+    end
+
+    class DescribeEntityAggregatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_aggregates: Array[Types::EntityAggregate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_aggregates: Array[Types::EntityAggregate]?
+    end
+
+    class DescribeEventAggregatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::EventFilter,
+        ?aggregate_field: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::EventFilter?
+      attr_accessor aggregate_field: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventAggregatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_aggregates: Array[Types::EventAggregate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_aggregates: Array[Types::EventAggregate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventDetailsForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_event_detail_filters: Array[Types::EventAccountFilter],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_event_detail_filters: Array[Types::EventAccountFilter]?
+      attr_accessor locale: String?
+    end
+
+    class DescribeEventDetailsForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_set: Array[Types::OrganizationEventDetails],
+        ?failed_set: Array[Types::OrganizationEventDetailsErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_set: Array[Types::OrganizationEventDetails]?
+      attr_accessor failed_set: Array[Types::OrganizationEventDetailsErrorItem]?
+    end
+
+    class DescribeEventDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arns: Array[String],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arns: Array[String]?
+      attr_accessor locale: String?
+    end
+
+    class DescribeEventDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_set: Array[Types::EventDetails],
+        ?failed_set: Array[Types::EventDetailsErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_set: Array[Types::EventDetails]?
+      attr_accessor failed_set: Array[Types::EventDetailsErrorItem]?
+    end
+
+    class DescribeEventTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::EventTypeFilter,
+        ?locale: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::EventTypeFilter?
+      attr_accessor locale: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeEventTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_types: Array[Types::EventType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_types: Array[Types::EventType]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventsForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::OrganizationEventFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::OrganizationEventFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor locale: String?
+    end
+
+    class DescribeEventsForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::OrganizationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::OrganizationEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::EventFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::EventFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor locale: String?
+    end
+
+    class DescribeEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeHealthServiceStatusForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_service_access_status_for_organization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_service_access_status_for_organization: String?
+    end
+
+    class EntityAccountFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?aws_account_id: String,
+        ?status_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor status_codes: Array[String]?
+    end
+
+    class EntityAggregate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?count: Integer,
+        ?statuses: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor count: Integer?
+      attr_accessor statuses: Hash[String, Integer]?
+    end
+
+    class EntityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arns: Array[String],
+        ?entity_arns: Array[String],
+        ?entity_values: Array[String],
+        ?last_updated_times: Array[Types::DateTimeRange],
+        ?tags: Array[Hash[String, String]],
+        ?status_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arns: Array[String]?
+      attr_accessor entity_arns: Array[String]?
+      attr_accessor entity_values: Array[String]?
+      attr_accessor last_updated_times: Array[Types::DateTimeRange]?
+      attr_accessor tags: Array[Hash[String, String]]?
+      attr_accessor status_codes: Array[String]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?service: String,
+        ?event_type_code: String,
+        ?event_type_category: String,
+        ?region: String,
+        ?availability_zone: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?last_updated_time: Time,
+        ?status_code: String,
+        ?event_scope_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor service: String?
+      attr_accessor event_type_code: String?
+      attr_accessor event_type_category: String?
+      attr_accessor region: String?
+      attr_accessor availability_zone: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor status_code: String?
+      attr_accessor event_scope_code: String?
+    end
+
+    class EventAccountFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class EventAggregate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_value: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_value: String?
+      attr_accessor count: Integer?
+    end
+
+    class EventDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_description: String?
+    end
+
+    class EventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: Types::Event,
+        ?event_description: Types::EventDescription,
+        ?event_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: Types::Event?
+      attr_accessor event_description: Types::EventDescription?
+      attr_accessor event_metadata: Hash[String, String]?
+    end
+
+    class EventDetailsErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?error_name: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor error_name: String?
+      attr_accessor error_message: String?
+    end
+
+    class EventFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arns: Array[String],
+        ?event_type_codes: Array[String],
+        ?services: Array[String],
+        ?regions: Array[String],
+        ?availability_zones: Array[String],
+        ?start_times: Array[Types::DateTimeRange],
+        ?end_times: Array[Types::DateTimeRange],
+        ?last_updated_times: Array[Types::DateTimeRange],
+        ?entity_arns: Array[String],
+        ?entity_values: Array[String],
+        ?event_type_categories: Array[String],
+        ?tags: Array[Hash[String, String]],
+        ?event_status_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arns: Array[String]?
+      attr_accessor event_type_codes: Array[String]?
+      attr_accessor services: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor start_times: Array[Types::DateTimeRange]?
+      attr_accessor end_times: Array[Types::DateTimeRange]?
+      attr_accessor last_updated_times: Array[Types::DateTimeRange]?
+      attr_accessor entity_arns: Array[String]?
+      attr_accessor entity_values: Array[String]?
+      attr_accessor event_type_categories: Array[String]?
+      attr_accessor tags: Array[Hash[String, String]]?
+      attr_accessor event_status_codes: Array[String]?
+    end
+
+    class EventType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?code: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor code: String?
+      attr_accessor category: String?
+    end
+
+    class EventTypeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_codes: Array[String],
+        ?services: Array[String],
+        ?event_type_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_codes: Array[String]?
+      attr_accessor services: Array[String]?
+      attr_accessor event_type_categories: Array[String]?
+    end
+
+    class InvalidPaginationToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationAffectedEntitiesErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?event_arn: String,
+        ?error_name: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor event_arn: String?
+      attr_accessor error_name: String?
+      attr_accessor error_message: String?
+    end
+
+    class OrganizationEntityAggregate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_arn: String,
+        ?count: Integer,
+        ?statuses: Hash[String, Integer],
+        ?accounts: Array[Types::AccountEntityAggregate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_arn: String?
+      attr_accessor count: Integer?
+      attr_accessor statuses: Hash[String, Integer]?
+      attr_accessor accounts: Array[Types::AccountEntityAggregate]?
+    end
+
+    class OrganizationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?service: String,
+        ?event_type_code: String,
+        ?event_type_category: String,
+        ?event_scope_code: String,
+        ?region: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?last_updated_time: Time,
+        ?status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor service: String?
+      attr_accessor event_type_code: String?
+      attr_accessor event_type_category: String?
+      attr_accessor event_scope_code: String?
+      attr_accessor region: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor status_code: String?
+    end
+
+    class OrganizationEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?event: Types::Event,
+        ?event_description: Types::EventDescription,
+        ?event_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor event: Types::Event?
+      attr_accessor event_description: Types::EventDescription?
+      attr_accessor event_metadata: Hash[String, String]?
+    end
+
+    class OrganizationEventDetailsErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?event_arn: String,
+        ?error_name: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor event_arn: String?
+      attr_accessor error_name: String?
+      attr_accessor error_message: String?
+    end
+
+    class OrganizationEventFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_codes: Array[String],
+        ?aws_account_ids: Array[String],
+        ?services: Array[String],
+        ?regions: Array[String],
+        ?start_time: Types::DateTimeRange,
+        ?end_time: Types::DateTimeRange,
+        ?last_updated_time: Types::DateTimeRange,
+        ?entity_arns: Array[String],
+        ?entity_values: Array[String],
+        ?event_type_categories: Array[String],
+        ?event_status_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_codes: Array[String]?
+      attr_accessor aws_account_ids: Array[String]?
+      attr_accessor services: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor start_time: Types::DateTimeRange?
+      attr_accessor end_time: Types::DateTimeRange?
+      attr_accessor last_updated_time: Types::DateTimeRange?
+      attr_accessor entity_arns: Array[String]?
+      attr_accessor entity_values: Array[String]?
+      attr_accessor event_type_categories: Array[String]?
+      attr_accessor event_status_codes: Array[String]?
+    end
+
+    class UnsupportedLocale
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EntityStatusCode
+      IMPAIRED: String
+      UNIMPAIRED: String
+      UNKNOWN: String
+      PENDING: String
+      RESOLVED: String
+    end
+
+    module EventAggregateField
+      EventTypeCategory: String
+    end
+
+    module EventScopeCode
+      PUBLIC: String
+      ACCOUNT_SPECIFIC: String
+      NONE: String
+    end
+
+    module EventStatusCode
+      OPEN: String
+      CLOSED: String
+      UPCOMING: String
+    end
+
+    module EventTypeCategory
+      ISSUE: String
+      ACCOUNT_NOTIFICATION: String
+      SCHEDULED_CHANGE: String
+      INVESTIGATION: String
+    end
+  end
+end

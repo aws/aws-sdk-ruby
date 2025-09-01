@@ -1,0 +1,537 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::Health
+  # This module contains a schema composed of shapes used by the client.
+  module Schema
+
+    AccountEntityAggregate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#AccountEntityAggregate', name: 'AccountEntityAggregate')
+    AccountEntityAggregatesList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#AccountEntityAggregatesList', name: 'AccountEntityAggregatesList')
+    AffectedEntity = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#AffectedEntity', name: 'AffectedEntity')
+    ConcurrentModificationException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#ConcurrentModificationException', name: 'ConcurrentModificationException', traits: {"smithy.api#error" => "client"})
+    DateTimeRange = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DateTimeRange', name: 'DateTimeRange')
+    DescribeAffectedAccountsForOrganizationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedAccountsForOrganizationRequest', name: 'DescribeAffectedAccountsForOrganizationRequest')
+    DescribeAffectedAccountsForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedAccountsForOrganizationResponse', name: 'DescribeAffectedAccountsForOrganizationResponse')
+    DescribeAffectedEntitiesForOrganizationFailedSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#DescribeAffectedEntitiesForOrganizationFailedSet', name: 'DescribeAffectedEntitiesForOrganizationFailedSet')
+    DescribeAffectedEntitiesForOrganizationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedEntitiesForOrganizationRequest', name: 'DescribeAffectedEntitiesForOrganizationRequest')
+    DescribeAffectedEntitiesForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedEntitiesForOrganizationResponse', name: 'DescribeAffectedEntitiesForOrganizationResponse')
+    DescribeAffectedEntitiesRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedEntitiesRequest', name: 'DescribeAffectedEntitiesRequest')
+    DescribeAffectedEntitiesResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeAffectedEntitiesResponse', name: 'DescribeAffectedEntitiesResponse')
+    DescribeEntityAggregatesForOrganizationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEntityAggregatesForOrganizationRequest', name: 'DescribeEntityAggregatesForOrganizationRequest')
+    DescribeEntityAggregatesForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEntityAggregatesForOrganizationResponse', name: 'DescribeEntityAggregatesForOrganizationResponse')
+    DescribeEntityAggregatesRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEntityAggregatesRequest', name: 'DescribeEntityAggregatesRequest')
+    DescribeEntityAggregatesResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEntityAggregatesResponse', name: 'DescribeEntityAggregatesResponse')
+    DescribeEventAggregatesRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventAggregatesRequest', name: 'DescribeEventAggregatesRequest')
+    DescribeEventAggregatesResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventAggregatesResponse', name: 'DescribeEventAggregatesResponse')
+    DescribeEventDetailsFailedSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#DescribeEventDetailsFailedSet', name: 'DescribeEventDetailsFailedSet')
+    DescribeEventDetailsForOrganizationFailedSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#DescribeEventDetailsForOrganizationFailedSet', name: 'DescribeEventDetailsForOrganizationFailedSet')
+    DescribeEventDetailsForOrganizationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventDetailsForOrganizationRequest', name: 'DescribeEventDetailsForOrganizationRequest')
+    DescribeEventDetailsForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventDetailsForOrganizationResponse', name: 'DescribeEventDetailsForOrganizationResponse')
+    DescribeEventDetailsForOrganizationSuccessfulSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#DescribeEventDetailsForOrganizationSuccessfulSet', name: 'DescribeEventDetailsForOrganizationSuccessfulSet')
+    DescribeEventDetailsRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventDetailsRequest', name: 'DescribeEventDetailsRequest')
+    DescribeEventDetailsResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventDetailsResponse', name: 'DescribeEventDetailsResponse')
+    DescribeEventDetailsSuccessfulSet = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#DescribeEventDetailsSuccessfulSet', name: 'DescribeEventDetailsSuccessfulSet')
+    DescribeEventTypesRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventTypesRequest', name: 'DescribeEventTypesRequest')
+    DescribeEventTypesResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventTypesResponse', name: 'DescribeEventTypesResponse')
+    DescribeEventsForOrganizationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventsForOrganizationRequest', name: 'DescribeEventsForOrganizationRequest')
+    DescribeEventsForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventsForOrganizationResponse', name: 'DescribeEventsForOrganizationResponse')
+    DescribeEventsRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventsRequest', name: 'DescribeEventsRequest')
+    DescribeEventsResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeEventsResponse', name: 'DescribeEventsResponse')
+    DescribeHealthServiceStatusForOrganizationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#DescribeHealthServiceStatusForOrganizationResponse', name: 'DescribeHealthServiceStatusForOrganizationResponse')
+    EntityAccountFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EntityAccountFilter', name: 'EntityAccountFilter')
+    EntityAggregate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EntityAggregate', name: 'EntityAggregate')
+    EntityAggregateList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EntityAggregateList', name: 'EntityAggregateList')
+    EntityFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EntityFilter', name: 'EntityFilter')
+    EntityList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EntityList', name: 'EntityList')
+    Event = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#Event', name: 'Event')
+    EventAccountFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventAccountFilter', name: 'EventAccountFilter')
+    EventAggregate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventAggregate', name: 'EventAggregate')
+    EventAggregateList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventAggregateList', name: 'EventAggregateList')
+    EventArnsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventArnsList', name: 'EventArnsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    EventDescription = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventDescription', name: 'EventDescription')
+    EventDescription2 = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#EventDescription2', name: 'EventDescription2')
+    EventDetails = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventDetails', name: 'EventDetails')
+    EventDetailsErrorItem = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventDetailsErrorItem', name: 'EventDetailsErrorItem')
+    EventFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventFilter', name: 'EventFilter')
+    EventList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventList', name: 'EventList')
+    EventType = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventType', name: 'EventType')
+    EventType2 = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#EventType2', name: 'EventType2', traits: {"smithy.api#length" => {"min" => 3, "max" => 100}, "smithy.api#pattern" => "^[^:/]{3,100}$"})
+    EventTypeCategoryList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventTypeCategoryList', name: 'EventTypeCategoryList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EventTypeCodeList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventTypeCodeList', name: 'EventTypeCodeList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EventTypeFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#EventTypeFilter', name: 'EventTypeFilter')
+    EventTypeList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#EventTypeList', name: 'EventTypeList')
+    InvalidPaginationToken = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#InvalidPaginationToken', name: 'InvalidPaginationToken', traits: {"smithy.api#error" => "client"})
+    OrganizationAccountIdsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationAccountIdsList', name: 'OrganizationAccountIdsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
+    OrganizationAffectedEntitiesErrorItem = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationAffectedEntitiesErrorItem', name: 'OrganizationAffectedEntitiesErrorItem')
+    OrganizationEntityAccountFiltersList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEntityAccountFiltersList', name: 'OrganizationEntityAccountFiltersList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OrganizationEntityAggregate = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationEntityAggregate', name: 'OrganizationEntityAggregate')
+    OrganizationEntityAggregatesList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEntityAggregatesList', name: 'OrganizationEntityAggregatesList')
+    OrganizationEntityFiltersList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEntityFiltersList', name: 'OrganizationEntityFiltersList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OrganizationEvent = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationEvent', name: 'OrganizationEvent')
+    OrganizationEventArnsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEventArnsList', name: 'OrganizationEventArnsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
+    OrganizationEventDetailFiltersList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEventDetailFiltersList', name: 'OrganizationEventDetailFiltersList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OrganizationEventDetails = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationEventDetails', name: 'OrganizationEventDetails')
+    OrganizationEventDetailsErrorItem = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationEventDetailsErrorItem', name: 'OrganizationEventDetailsErrorItem')
+    OrganizationEventFilter = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#OrganizationEventFilter', name: 'OrganizationEventFilter')
+    OrganizationEventList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#OrganizationEventList', name: 'OrganizationEventList')
+    UnsupportedLocale = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.health#UnsupportedLocale', name: 'UnsupportedLocale', traits: {"smithy.api#error" => "client"})
+    AccountId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#accountId', name: 'AccountId', traits: {"smithy.api#length" => {"min" => 0, "max" => 12}, "smithy.api#pattern" => "^\\S+$"})
+    AffectedAccountsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#affectedAccountsList', name: 'AffectedAccountsList')
+    AggregateValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#aggregateValue', name: 'AggregateValue')
+    AvailabilityZone = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#availabilityZone', name: 'AvailabilityZone', traits: {"smithy.api#length" => {"min" => 6, "max" => 18}, "smithy.api#pattern" => "^[a-z]{2}\\-[0-9a-z\\-]{4,16}$"})
+    AvailabilityZones = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#availabilityZones', name: 'AvailabilityZones')
+    AwsAccountIdsList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#awsAccountIdsList', name: 'AwsAccountIdsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    Count = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.health#count', name: 'Count', traits: {"smithy.api#default" => 0})
+    DateTimeRangeList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#dateTimeRangeList', name: 'DateTimeRangeList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EntityArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#entityArn', name: 'EntityArn', traits: {"smithy.api#length" => {"min" => 0, "max" => 1600}, "smithy.api#pattern" => "^.{0,1600}$"})
+    EntityArnList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#entityArnList', name: 'EntityArnList', traits: {"smithy.api#length" => {"min" => 1, "max" => 99}})
+    EntityMetadata = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.health#entityMetadata', name: 'EntityMetadata')
+    EntityMetadataKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#entityMetadataKey', name: 'EntityMetadataKey', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    EntityMetadataValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#entityMetadataValue', name: 'EntityMetadataValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    EntityStatusCode = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.health#entityStatusCode', name: 'EntityStatusCode')
+    EntityStatusCodeList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#entityStatusCodeList', name: 'EntityStatusCodeList', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    EntityStatuses = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.health#entityStatuses', name: 'EntityStatuses')
+    EntityUrl = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#entityUrl', name: 'EntityUrl')
+    EntityValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#entityValue', name: 'EntityValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 1224}, "smithy.api#pattern" => "^.{0,1224}$"})
+    EntityValueList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#entityValueList', name: 'EntityValueList', traits: {"smithy.api#length" => {"min" => 1, "max" => 99}})
+    EventAggregateField = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.health#eventAggregateField', name: 'EventAggregateField')
+    EventArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#eventArn', name: 'EventArn', traits: {"smithy.api#length" => {"min" => 0, "max" => 1600}, "smithy.api#pattern" => "^arn:aws(-[a-z]+(-[a-z]+)?)?:health:[^:]*:[^:]*:event(?:/[\\w-]+){3}$"})
+    EventArnList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#eventArnList', name: 'EventArnList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EventMetadata = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.health#eventMetadata', name: 'EventMetadata')
+    EventScopeCode = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.health#eventScopeCode', name: 'EventScopeCode')
+    EventStatusCode = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.health#eventStatusCode', name: 'EventStatusCode')
+    EventStatusCodeList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#eventStatusCodeList', name: 'EventStatusCodeList', traits: {"smithy.api#length" => {"min" => 1, "max" => 6}})
+    EventTypeCategory = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.health#eventTypeCategory', name: 'EventTypeCategory', traits: {"smithy.api#length" => {"min" => 3, "max" => 255}})
+    EventTypeCategoryList2 = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#eventTypeCategoryList2', name: 'EventTypeCategoryList2', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EventTypeCode = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#eventTypeCode', name: 'EventTypeCode', traits: {"smithy.api#length" => {"min" => 3, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9\\_\\-]{3,100}$"})
+    EventTypeList2 = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#eventTypeList2', name: 'EventTypeList2', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    HealthServiceAccessStatusForOrganization = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#healthServiceAccessStatusForOrganization', name: 'HealthServiceAccessStatusForOrganization')
+    Locale = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#locale', name: 'Locale', traits: {"smithy.api#length" => {"min" => 2, "max" => 256}, "smithy.api#pattern" => "^.{2,256}$"})
+    MaxResults = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.health#maxResults', name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 10, "max" => 100}})
+    MaxResultsLowerRange = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.health#maxResultsLowerRange', name: 'MaxResultsLowerRange', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MetadataKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#metadataKey', name: 'MetadataKey', traits: {"smithy.api#length" => {"min" => 0, "max" => 32766}})
+    MetadataValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#metadataValue', name: 'MetadataValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 32766}})
+    NextToken = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#nextToken', name: 'NextToken', traits: {"smithy.api#length" => {"min" => 4, "max" => 10000}, "smithy.api#pattern" => "^[a-zA-Z0-9=/+_.-]{4,10000}$"})
+    Region = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#region', name: 'Region', traits: {"smithy.api#length" => {"min" => 2, "max" => 25}, "smithy.api#pattern" => "^[^:/]{2,25}$"})
+    RegionList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#regionList', name: 'RegionList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    Service = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#service', name: 'Service', traits: {"smithy.api#length" => {"min" => 2, "max" => 30}, "smithy.api#pattern" => "^[^:/]{2,30}$"})
+    ServiceList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#serviceList', name: 'ServiceList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    String = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#string', name: 'String')
+    TagFilter = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.health#tagFilter', name: 'TagFilter', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#tagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 0, "max" => 127}, "smithy.api#pattern" => "^.{0,127}$"})
+    TagSet = Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.health#tagSet', name: 'TagSet', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.health#tagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^.{0,255}$"})
+    Timestamp = Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.health#timestamp', name: 'Timestamp')
+
+    AccountEntityAggregate.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'accountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    AccountEntityAggregate.add_member(:count, Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: 'count', traits: {"smithy.api#default" => 0, "smithy.api#documentation" => "<p>The number of entities that match the filter criteria for the specified events.</p>"}))
+    AccountEntityAggregate.add_member(:statuses, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatuses, location_name: 'statuses', traits: {"smithy.api#documentation" => "<p>The number of affected entities aggregated by the entity status codes.</p>"}))
+    AccountEntityAggregate.type = Types::AccountEntityAggregate
+    AccountEntityAggregatesList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AccountEntityAggregate)
+    AffectedEntity.add_member(:entity_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityArn, location_name: 'entityArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the entity. Format: <code>arn:aws:health:<i>entity-region</i>:<i>aws-account</i>:entity/<i>entity-id</i>\n            </code>. Example: <code>arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K</code>\n         </p>"}))
+    AffectedEntity.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    AffectedEntity.add_member(:entity_value, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityValue, location_name: 'entityValue', traits: {"smithy.api#documentation" => "<p>The ID of the affected entity.</p>"}))
+    AffectedEntity.add_member(:entity_url, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityUrl, location_name: 'entityUrl', traits: {"smithy.api#documentation" => "<p>The URL of the affected entity.</p>"}))
+    AffectedEntity.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account number that contains the affected entity.</p>"}))
+    AffectedEntity.add_member(:last_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'lastUpdatedTime', traits: {"smithy.api#documentation" => "<p>The most recent time that the entity was updated.</p>"}))
+    AffectedEntity.add_member(:status_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatusCode, location_name: 'statusCode', traits: {"smithy.api#documentation" => "<p>The most recent status of the entity affected by the event. The possible values are\n            <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.</p>"}))
+    AffectedEntity.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"}))
+    AffectedEntity.add_member(:entity_metadata, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityMetadata, location_name: 'entityMetadata', traits: {"smithy.api#documentation" => "<p>Additional metadata about the affected entity.</p>"}))
+    AffectedEntity.type = Types::AffectedEntity
+    ConcurrentModificationException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
+    ConcurrentModificationException.type = Types::ConcurrentModificationException
+    DateTimeRange.add_member(:from, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'from', traits: {"smithy.api#documentation" => "<p>The starting date and time of a time range.</p>"}))
+    DateTimeRange.add_member(:to, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'to', traits: {"smithy.api#documentation" => "<p>The ending date and time of a time range.</p>"}))
+    DateTimeRange.type = Types::DateTimeRange
+    DescribeAffectedAccountsForOrganizationRequest.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>", "smithy.api#required" => {}}))
+    DescribeAffectedAccountsForOrganizationRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedAccountsForOrganizationRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeAffectedAccountsForOrganizationRequest.type = Types::DescribeAffectedAccountsForOrganizationRequest
+    DescribeAffectedAccountsForOrganizationResponse.add_member(:affected_accounts, Smithy::Schema::Shapes::ShapeRef.new(shape: AffectedAccountsList, location_name: 'affectedAccounts', traits: {"smithy.api#documentation" => "<p>A JSON set of elements of the affected accounts.</p>"}))
+    DescribeAffectedAccountsForOrganizationResponse.add_member(:event_scope_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventScopeCode, location_name: 'eventScopeCode', traits: {"smithy.api#documentation" => "<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have Amazon Web Services accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"}))
+    DescribeAffectedAccountsForOrganizationResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedAccountsForOrganizationResponse.type = Types::DescribeAffectedAccountsForOrganizationResponse
+    DescribeAffectedEntitiesForOrganizationFailedSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAffectedEntitiesErrorItem)
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:organization_entity_filters, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEntityFiltersList, location_name: 'organizationEntityFilters', traits: {"smithy.api#deprecated" => {"message" => "This property is deprecated, use organizationEntityAccountFilters instead."}, "smithy.api#documentation" => "<p>A JSON set of elements including the <code>awsAccountId</code> and the\n            <code>eventArn</code>.</p>"}))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsLowerRange, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:organization_entity_account_filters, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEntityAccountFiltersList, location_name: 'organizationEntityAccountFilters', traits: {"smithy.api#documentation" => "<p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>"}))
+    DescribeAffectedEntitiesForOrganizationRequest.type = Types::DescribeAffectedEntitiesForOrganizationRequest
+    DescribeAffectedEntitiesForOrganizationResponse.add_member(:entities, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityList, location_name: 'entities', traits: {"smithy.api#documentation" => "<p>A JSON set of elements including the <code>awsAccountId</code> and its\n            <code>entityArn</code>, <code>entityValue</code> and its <code>entityArn</code>,\n            <code>lastUpdatedTime</code>, and <code>statusCode</code>.</p>"}))
+    DescribeAffectedEntitiesForOrganizationResponse.add_member(:failed_set, Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesForOrganizationFailedSet, location_name: 'failedSet', traits: {"smithy.api#documentation" => "<p>A JSON set of elements of the failed response, including the <code>awsAccountId</code>,\n            <code>errorMessage</code>, <code>errorName</code>, and <code>eventArn</code>.</p>"}))
+    DescribeAffectedEntitiesForOrganizationResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedEntitiesForOrganizationResponse.type = Types::DescribeAffectedEntitiesForOrganizationResponse
+    DescribeAffectedEntitiesRequest.add_member(:filter, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityFilter, location_name: 'filter', traits: {"smithy.api#documentation" => "<p>Values to narrow the results returned. At least one event ARN is required.</p>", "smithy.api#required" => {}}))
+    DescribeAffectedEntitiesRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeAffectedEntitiesRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedEntitiesRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeAffectedEntitiesRequest.type = Types::DescribeAffectedEntitiesRequest
+    DescribeAffectedEntitiesResponse.add_member(:entities, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityList, location_name: 'entities', traits: {"smithy.api#documentation" => "<p>The entities that match the filter criteria.</p>"}))
+    DescribeAffectedEntitiesResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeAffectedEntitiesResponse.type = Types::DescribeAffectedEntitiesResponse
+    DescribeEntityAggregatesForOrganizationRequest.add_member(:event_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventArnsList, location_name: 'eventArns', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>", "smithy.api#required" => {}}))
+    DescribeEntityAggregatesForOrganizationRequest.add_member(:aws_account_ids, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccountIdsList, location_name: 'awsAccountIds', traits: {"smithy.api#documentation" => "<p>A list of 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    DescribeEntityAggregatesForOrganizationRequest.type = Types::DescribeEntityAggregatesForOrganizationRequest
+    DescribeEntityAggregatesForOrganizationResponse.add_member(:organization_entity_aggregates, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEntityAggregatesList, location_name: 'organizationEntityAggregates', traits: {"smithy.api#documentation" => "<p>The list of entity aggregates for each of the specified accounts that are affected by each of the specified events.</p>"}))
+    DescribeEntityAggregatesForOrganizationResponse.type = Types::DescribeEntityAggregatesForOrganizationResponse
+    DescribeEntityAggregatesRequest.add_member(:event_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArnsList, location_name: 'eventArns', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"}))
+    DescribeEntityAggregatesRequest.type = Types::DescribeEntityAggregatesRequest
+    DescribeEntityAggregatesResponse.add_member(:entity_aggregates, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAggregateList, location_name: 'entityAggregates', traits: {"smithy.api#documentation" => "<p>The number of entities that are affected by each of the specified events.</p>"}))
+    DescribeEntityAggregatesResponse.type = Types::DescribeEntityAggregatesResponse
+    DescribeEventAggregatesRequest.add_member(:filter, Smithy::Schema::Shapes::ShapeRef.new(shape: EventFilter, location_name: 'filter', traits: {"smithy.api#documentation" => "<p>Values to narrow the results returned.</p>"}))
+    DescribeEventAggregatesRequest.add_member(:aggregate_field, Smithy::Schema::Shapes::ShapeRef.new(shape: EventAggregateField, location_name: 'aggregateField', traits: {"smithy.api#documentation" => "<p>The only currently supported value is <code>eventTypeCategory</code>.</p>", "smithy.api#required" => {}}))
+    DescribeEventAggregatesRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeEventAggregatesRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventAggregatesRequest.type = Types::DescribeEventAggregatesRequest
+    DescribeEventAggregatesResponse.add_member(:event_aggregates, Smithy::Schema::Shapes::ShapeRef.new(shape: EventAggregateList, location_name: 'eventAggregates', traits: {"smithy.api#documentation" => "<p>The number of events in each category that meet the optional filter criteria.</p>"}))
+    DescribeEventAggregatesResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventAggregatesResponse.type = Types::DescribeEventAggregatesResponse
+    DescribeEventDetailsFailedSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventDetailsErrorItem)
+    DescribeEventDetailsForOrganizationFailedSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventDetailsErrorItem)
+    DescribeEventDetailsForOrganizationRequest.add_member(:organization_event_detail_filters, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventDetailFiltersList, location_name: 'organizationEventDetailFilters', traits: {"smithy.api#documentation" => "<p>A set of JSON elements that includes the <code>awsAccountId</code> and the\n            <code>eventArn</code>.</p>", "smithy.api#required" => {}}))
+    DescribeEventDetailsForOrganizationRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeEventDetailsForOrganizationRequest.type = Types::DescribeEventDetailsForOrganizationRequest
+    DescribeEventDetailsForOrganizationResponse.add_member(:successful_set, Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsForOrganizationSuccessfulSet, location_name: 'successfulSet', traits: {"smithy.api#documentation" => "<p>Information about the events that could be retrieved.</p>"}))
+    DescribeEventDetailsForOrganizationResponse.add_member(:failed_set, Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsForOrganizationFailedSet, location_name: 'failedSet', traits: {"smithy.api#documentation" => "<p>Error messages for any events that could not be retrieved.</p>"}))
+    DescribeEventDetailsForOrganizationResponse.type = Types::DescribeEventDetailsForOrganizationResponse
+    DescribeEventDetailsForOrganizationSuccessfulSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventDetails)
+    DescribeEventDetailsRequest.add_member(:event_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArnList, location_name: 'eventArns', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>", "smithy.api#required" => {}}))
+    DescribeEventDetailsRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeEventDetailsRequest.type = Types::DescribeEventDetailsRequest
+    DescribeEventDetailsResponse.add_member(:successful_set, Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsSuccessfulSet, location_name: 'successfulSet', traits: {"smithy.api#documentation" => "<p>Information about the events that could be retrieved.</p>"}))
+    DescribeEventDetailsResponse.add_member(:failed_set, Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsFailedSet, location_name: 'failedSet', traits: {"smithy.api#documentation" => "<p>Error messages for any events that could not be retrieved.</p>"}))
+    DescribeEventDetailsResponse.type = Types::DescribeEventDetailsResponse
+    DescribeEventDetailsSuccessfulSet.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventDetails)
+    DescribeEventTypesRequest.add_member(:filter, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeFilter, location_name: 'filter', traits: {"smithy.api#documentation" => "<p>Values to narrow the results returned.</p>"}))
+    DescribeEventTypesRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeEventTypesRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventTypesRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>\n         <note>\n            <p>If you don't specify the <code>maxResults</code> parameter, this operation returns a\n            maximum of 30 items by default.</p>\n         </note>"}))
+    DescribeEventTypesRequest.type = Types::DescribeEventTypesRequest
+    DescribeEventTypesResponse.add_member(:event_types, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList, location_name: 'eventTypes', traits: {"smithy.api#documentation" => "<p>A list of event types that match the filter criteria. Event types have a category\n            (<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>),\n         a service (for example, <code>EC2</code>, <code>RDS</code>, <code>DATAPIPELINE</code>,\n            <code>BILLING</code>), and a code (in the format\n               <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>\n            </code>; for\n         example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).</p>"}))
+    DescribeEventTypesResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventTypesResponse.type = Types::DescribeEventTypesResponse
+    DescribeEventsForOrganizationRequest.add_member(:filter, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventFilter, location_name: 'filter', traits: {"smithy.api#documentation" => "<p>Values to narrow the results returned.</p>"}))
+    DescribeEventsForOrganizationRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventsForOrganizationRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsLowerRange, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeEventsForOrganizationRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeEventsForOrganizationRequest.type = Types::DescribeEventsForOrganizationRequest
+    DescribeEventsForOrganizationResponse.add_member(:events, Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEventList, location_name: 'events', traits: {"smithy.api#documentation" => "<p>The events that match the specified filter criteria.</p>"}))
+    DescribeEventsForOrganizationResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventsForOrganizationResponse.type = Types::DescribeEventsForOrganizationResponse
+    DescribeEventsRequest.add_member(:filter, Smithy::Schema::Shapes::ShapeRef.new(shape: EventFilter, location_name: 'filter', traits: {"smithy.api#documentation" => "<p>Values to narrow the results returned.</p>"}))
+    DescribeEventsRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventsRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#documentation" => "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"}))
+    DescribeEventsRequest.add_member(:locale, Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: 'locale', traits: {"smithy.api#documentation" => "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"}))
+    DescribeEventsRequest.type = Types::DescribeEventsRequest
+    DescribeEventsResponse.add_member(:events, Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: 'events', traits: {"smithy.api#documentation" => "<p>The events that match the specified filter criteria.</p>"}))
+    DescribeEventsResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#documentation" => "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"}))
+    DescribeEventsResponse.type = Types::DescribeEventsResponse
+    DescribeHealthServiceStatusForOrganizationResponse.add_member(:health_service_access_status_for_organization, Smithy::Schema::Shapes::ShapeRef.new(shape: HealthServiceAccessStatusForOrganization, location_name: 'healthServiceAccessStatusForOrganization', traits: {"smithy.api#documentation" => "<p>Information about the status of enabling or disabling the Health organizational\n         view feature in your organization.</p>\n         <p>Valid values are <code>ENABLED | DISABLED | PENDING</code>. </p>"}))
+    DescribeHealthServiceStatusForOrganizationResponse.type = Types::DescribeHealthServiceStatusForOrganizationResponse
+    EntityAccountFilter.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>", "smithy.api#required" => {}}))
+    EntityAccountFilter.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    EntityAccountFilter.add_member(:status_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatusCodeList, location_name: 'statusCodes', traits: {"smithy.api#documentation" => "<p>A list of entity status codes.</p>"}))
+    EntityAccountFilter.type = Types::EntityAccountFilter
+    EntityAggregate.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    EntityAggregate.add_member(:count, Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: 'count', traits: {"smithy.api#default" => 0, "smithy.api#documentation" => "<p>The number of entities that match the criteria for the specified events.</p>"}))
+    EntityAggregate.add_member(:statuses, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatuses, location_name: 'statuses', traits: {"smithy.api#documentation" => "<p>The number of affected entities aggregated by the entity status codes.</p>"}))
+    EntityAggregate.type = Types::EntityAggregate
+    EntityAggregateList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAggregate)
+    EntityFilter.add_member(:event_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArnList, location_name: 'eventArns', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>", "smithy.api#required" => {}}))
+    EntityFilter.add_member(:entity_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityArnList, location_name: 'entityArns', traits: {"smithy.api#documentation" => "<p>A list of entity ARNs (unique identifiers).</p>"}))
+    EntityFilter.add_member(:entity_values, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityValueList, location_name: 'entityValues', traits: {"smithy.api#documentation" => "<p>A list of IDs for affected entities.</p>"}))
+    EntityFilter.add_member(:last_updated_times, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRangeList, location_name: 'lastUpdatedTimes', traits: {"smithy.api#documentation" => "<p>A list of the most recent dates and times that the entity was updated.</p>"}))
+    EntityFilter.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"}))
+    EntityFilter.add_member(:status_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatusCodeList, location_name: 'statusCodes', traits: {"smithy.api#documentation" => "<p>A list of entity status codes (<code>IMPAIRED</code>, <code>UNIMPAIRED</code>, or\n            <code>UNKNOWN</code>).</p>"}))
+    EntityFilter.type = Types::EntityFilter
+    EntityList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AffectedEntity)
+    Event.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    Event.add_member(:service, Smithy::Schema::Shapes::ShapeRef.new(shape: Service, location_name: 'service', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"}))
+    Event.add_member(:event_type_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCode, location_name: 'eventTypeCode', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>\n            </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"}))
+    Event.add_member(:event_type_category, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategory, location_name: 'eventTypeCategory', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    Event.add_member(:region, Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'region', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services Region name of the event.</p>"}))
+    Event.add_member(:availability_zone, Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: 'availabilityZone', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services Availability Zone of the event. For example, us-east-1a.</p>"}))
+    Event.add_member(:start_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'startTime', traits: {"smithy.api#documentation" => "<p>The date and time that the event began.</p>"}))
+    Event.add_member(:end_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'endTime', traits: {"smithy.api#documentation" => "<p>The date and time that the event ended.</p>"}))
+    Event.add_member(:last_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'lastUpdatedTime', traits: {"smithy.api#documentation" => "<p>The most recent date and time that the event was updated.</p>"}))
+    Event.add_member(:status_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventStatusCode, location_name: 'statusCode', traits: {"smithy.api#documentation" => "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"}))
+    Event.add_member(:event_scope_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventScopeCode, location_name: 'eventScopeCode', traits: {"smithy.api#documentation" => "<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have Amazon Web Services accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"}))
+    Event.type = Types::Event
+    EventAccountFilter.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>", "smithy.api#required" => {}}))
+    EventAccountFilter.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    EventAccountFilter.type = Types::EventAccountFilter
+    EventAggregate.add_member(:aggregate_value, Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateValue, location_name: 'aggregateValue', traits: {"smithy.api#documentation" => "<p>The issue type for the associated count.</p>"}))
+    EventAggregate.add_member(:count, Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: 'count', traits: {"smithy.api#default" => 0, "smithy.api#documentation" => "<p>The number of events of the associated issue type.</p>"}))
+    EventAggregate.type = Types::EventAggregate
+    EventAggregateList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventAggregate)
+    EventArnsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn)
+    EventDescription.add_member(:latest_description, Smithy::Schema::Shapes::ShapeRef.new(shape: EventDescription2, location_name: 'latestDescription', traits: {"smithy.api#documentation" => "<p>The most recent description of the event.</p>"}))
+    EventDescription.type = Types::EventDescription
+    EventDetails.add_member(:event, Smithy::Schema::Shapes::ShapeRef.new(shape: Event, location_name: 'event', traits: {"smithy.api#documentation" => "<p>Summary information about the event.</p>"}))
+    EventDetails.add_member(:event_description, Smithy::Schema::Shapes::ShapeRef.new(shape: EventDescription, location_name: 'eventDescription', traits: {"smithy.api#documentation" => "<p>The most recent description of the event.</p>"}))
+    EventDetails.add_member(:event_metadata, Smithy::Schema::Shapes::ShapeRef.new(shape: EventMetadata, location_name: 'eventMetadata', traits: {"smithy.api#documentation" => "<p>Additional metadata about the event.</p>"}))
+    EventDetails.type = Types::EventDetails
+    EventDetailsErrorItem.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    EventDetailsErrorItem.add_member(:error_name, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorName', traits: {"smithy.api#documentation" => "<p>The name of the error.</p>"}))
+    EventDetailsErrorItem.add_member(:error_message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorMessage', traits: {"smithy.api#documentation" => "<p>A message that describes the error.</p>"}))
+    EventDetailsErrorItem.type = Types::EventDetailsErrorItem
+    EventFilter.add_member(:event_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArnList, location_name: 'eventArns', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"}))
+    EventFilter.add_member(:event_type_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList2, location_name: 'eventTypeCodes', traits: {"smithy.api#documentation" => "<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>\n         </p>"}))
+    EventFilter.add_member(:services, Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceList, location_name: 'services', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"}))
+    EventFilter.add_member(:regions, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: 'regions', traits: {"smithy.api#documentation" => "<p>A list of Amazon Web Services Regions.</p>"}))
+    EventFilter.add_member(:availability_zones, Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: 'availabilityZones', traits: {"smithy.api#documentation" => "<p>A list of Amazon Web Services Availability Zones.</p>"}))
+    EventFilter.add_member(:start_times, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRangeList, location_name: 'startTimes', traits: {"smithy.api#documentation" => "<p>A list of dates and times that the event began.</p>"}))
+    EventFilter.add_member(:end_times, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRangeList, location_name: 'endTimes', traits: {"smithy.api#documentation" => "<p>A list of dates and times that the event ended.</p>"}))
+    EventFilter.add_member(:last_updated_times, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRangeList, location_name: 'lastUpdatedTimes', traits: {"smithy.api#documentation" => "<p>A list of dates and times that the event was last updated.</p>"}))
+    EventFilter.add_member(:entity_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityArnList, location_name: 'entityArns', traits: {"smithy.api#documentation" => "<p>A list of entity ARNs (unique identifiers).</p>"}))
+    EventFilter.add_member(:entity_values, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityValueList, location_name: 'entityValues', traits: {"smithy.api#documentation" => "<p>A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or EBS\n         volumes (<code>vol-426ab23e</code>).</p>"}))
+    EventFilter.add_member(:event_type_categories, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategoryList2, location_name: 'eventTypeCategories', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    EventFilter.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter, location_name: 'tags', traits: {"smithy.api#documentation" => "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"}))
+    EventFilter.add_member(:event_status_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EventStatusCodeList, location_name: 'eventStatusCodes', traits: {"smithy.api#documentation" => "<p>A list of event status codes.</p>"}))
+    EventFilter.type = Types::EventFilter
+    EventList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Event)
+    EventType.add_member(:service, Smithy::Schema::Shapes::ShapeRef.new(shape: Service, location_name: 'service', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"}))
+    EventType.add_member(:code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCode, location_name: 'code', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>\n            </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"}))
+    EventType.add_member(:category, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategory, location_name: 'category', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    EventType.type = Types::EventType
+    EventTypeCategoryList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategory)
+    EventTypeCodeList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCode)
+    EventTypeFilter.add_member(:event_type_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCodeList, location_name: 'eventTypeCodes', traits: {"smithy.api#documentation" => "<p>A list of event type codes.</p>"}))
+    EventTypeFilter.add_member(:services, Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceList, location_name: 'services', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"}))
+    EventTypeFilter.add_member(:event_type_categories, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategoryList, location_name: 'eventTypeCategories', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    EventTypeFilter.type = Types::EventTypeFilter
+    EventTypeList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventType)
+    InvalidPaginationToken.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
+    InvalidPaginationToken.type = Types::InvalidPaginationToken
+    OrganizationAccountIdsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
+    OrganizationAffectedEntitiesErrorItem.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    OrganizationAffectedEntitiesErrorItem.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    OrganizationAffectedEntitiesErrorItem.add_member(:error_name, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorName', traits: {"smithy.api#documentation" => "<p>The name of the error.</p>"}))
+    OrganizationAffectedEntitiesErrorItem.add_member(:error_message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorMessage', traits: {"smithy.api#documentation" => "<p>A message that describes the error. Follow the error message and retry your request.</p>\n         <p>For example, the <code>InvalidAccountInputError</code> error message appears if\n         you call the <code>DescribeAffectedEntitiesForOrganization</code> operation and specify the\n            <code>AccountSpecific</code> value for the <code>EventScopeCode</code> parameter, but\n         don't specify an Amazon Web Services account.</p>"}))
+    OrganizationAffectedEntitiesErrorItem.type = Types::OrganizationAffectedEntitiesErrorItem
+    OrganizationEntityAccountFiltersList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAccountFilter)
+    OrganizationEntityAggregate.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"}))
+    OrganizationEntityAggregate.add_member(:count, Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: 'count', traits: {"smithy.api#default" => 0, "smithy.api#documentation" => "<p>The number of entities for the organization that match the filter criteria for the specified events.</p>"}))
+    OrganizationEntityAggregate.add_member(:statuses, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatuses, location_name: 'statuses', traits: {"smithy.api#documentation" => "<p>The number of affected entities aggregated by the entitiy status codes.</p>"}))
+    OrganizationEntityAggregate.add_member(:accounts, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountEntityAggregatesList, location_name: 'accounts', traits: {"smithy.api#documentation" => "<p>A list of entity aggregates for each of the specified accounts in your organization that are affected by\n         a specific event. If there are no <code>awsAccountIds</code> provided in the request, this field will be empty in the response.</p>"}))
+    OrganizationEntityAggregate.type = Types::OrganizationEntityAggregate
+    OrganizationEntityAggregatesList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEntityAggregate)
+    OrganizationEntityFiltersList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventAccountFilter)
+    OrganizationEvent.add_member(:arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'arn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    OrganizationEvent.add_member(:service, Smithy::Schema::Shapes::ShapeRef.new(shape: Service, location_name: 'service', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services service that is affected by the event, such as EC2 and RDS.</p>"}))
+    OrganizationEvent.add_member(:event_type_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCode, location_name: 'eventTypeCode', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event type. The format is\n            <code>AWS_SERVICE_DESCRIPTION</code>. For example,\n            <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"}))
+    OrganizationEvent.add_member(:event_type_category, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategory, location_name: 'eventTypeCategory', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    OrganizationEvent.add_member(:event_scope_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventScopeCode, location_name: 'eventScopeCode', traits: {"smithy.api#documentation" => "<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have Amazon Web Services accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"}))
+    OrganizationEvent.add_member(:region, Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'region', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services Region name of the event.</p>"}))
+    OrganizationEvent.add_member(:start_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'startTime', traits: {"smithy.api#documentation" => "<p>The date and time that the event began.</p>"}))
+    OrganizationEvent.add_member(:end_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'endTime', traits: {"smithy.api#documentation" => "<p>The date and time that the event ended.</p>"}))
+    OrganizationEvent.add_member(:last_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'lastUpdatedTime', traits: {"smithy.api#documentation" => "<p>The most recent date and time that the event was updated.</p>"}))
+    OrganizationEvent.add_member(:status_code, Smithy::Schema::Shapes::ShapeRef.new(shape: EventStatusCode, location_name: 'statusCode', traits: {"smithy.api#documentation" => "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"}))
+    OrganizationEvent.type = Types::OrganizationEvent
+    OrganizationEventArnsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn)
+    OrganizationEventDetailFiltersList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventAccountFilter)
+    OrganizationEventDetails.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    OrganizationEventDetails.add_member(:event, Smithy::Schema::Shapes::ShapeRef.new(shape: Event, location_name: 'event'))
+    OrganizationEventDetails.add_member(:event_description, Smithy::Schema::Shapes::ShapeRef.new(shape: EventDescription, location_name: 'eventDescription'))
+    OrganizationEventDetails.add_member(:event_metadata, Smithy::Schema::Shapes::ShapeRef.new(shape: EventMetadata, location_name: 'eventMetadata', traits: {"smithy.api#documentation" => "<p>Additional metadata about the event.</p>"}))
+    OrganizationEventDetails.type = Types::OrganizationEventDetails
+    OrganizationEventDetailsErrorItem.add_member(:aws_account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'awsAccountId', traits: {"smithy.api#documentation" => "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> operation can't find a specified\n         event.</p>"}))
+    OrganizationEventDetailsErrorItem.add_member(:event_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn, location_name: 'eventArn', traits: {"smithy.api#documentation" => "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"}))
+    OrganizationEventDetailsErrorItem.add_member(:error_name, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorName', traits: {"smithy.api#documentation" => "<p>The name of the error.</p>"}))
+    OrganizationEventDetailsErrorItem.add_member(:error_message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'errorMessage', traits: {"smithy.api#documentation" => "<p>A message that describes the error.</p>\n         <p>If you call the <code>DescribeEventDetailsForOrganization</code> operation and receive one of the following errors, follow the recommendations in the message:</p>\n         <ul>\n            <li>\n               <p>We couldn't find a public event that matches your request. To find an event that is account specific, you must enter an Amazon Web Services account ID in the request.</p>\n            </li>\n            <li>\n               <p>We couldn't find an account specific event for the specified Amazon Web Services account. To find an event that is public, you must enter a null value for the Amazon Web Services account ID in the request.</p>\n            </li>\n            <li>\n               <p>Your Amazon Web Services account doesn't include the Amazon Web Services Support plan required to use the\nHealth API. You must have either a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>\n            </li>\n         </ul>"}))
+    OrganizationEventDetailsErrorItem.type = Types::OrganizationEventDetailsErrorItem
+    OrganizationEventFilter.add_member(:event_type_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList2, location_name: 'eventTypeCodes', traits: {"smithy.api#documentation" => "<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>\n         </p>"}))
+    OrganizationEventFilter.add_member(:aws_account_ids, Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountIdsList, location_name: 'awsAccountIds', traits: {"smithy.api#documentation" => "<p>A list of 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"}))
+    OrganizationEventFilter.add_member(:services, Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceList, location_name: 'services', traits: {"smithy.api#documentation" => "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"}))
+    OrganizationEventFilter.add_member(:regions, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: 'regions', traits: {"smithy.api#documentation" => "<p>A list of Amazon Web Services Regions.</p>"}))
+    OrganizationEventFilter.add_member(:start_time, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRange, location_name: 'startTime'))
+    OrganizationEventFilter.add_member(:end_time, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRange, location_name: 'endTime'))
+    OrganizationEventFilter.add_member(:last_updated_time, Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRange, location_name: 'lastUpdatedTime'))
+    OrganizationEventFilter.add_member(:entity_arns, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityArnList, location_name: 'entityArns', traits: {"smithy.api#documentation" => "<p>A list of entity ARNs (unique identifiers).</p>"}))
+    OrganizationEventFilter.add_member(:entity_values, Smithy::Schema::Shapes::ShapeRef.new(shape: EntityValueList, location_name: 'entityValues', traits: {"smithy.api#documentation" => "<p>A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS volumes (vol-426ab23e).</p>"}))
+    OrganizationEventFilter.add_member(:event_type_categories, Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategoryList2, location_name: 'eventTypeCategories', traits: {"smithy.api#documentation" => "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"}))
+    OrganizationEventFilter.add_member(:event_status_codes, Smithy::Schema::Shapes::ShapeRef.new(shape: EventStatusCodeList, location_name: 'eventStatusCodes', traits: {"smithy.api#documentation" => "<p>A list of event status codes.</p>"}))
+    OrganizationEventFilter.type = Types::OrganizationEventFilter
+    OrganizationEventList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationEvent)
+    UnsupportedLocale.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
+    UnsupportedLocale.type = Types::UnsupportedLocale
+    AffectedAccountsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
+    AvailabilityZones.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
+    AwsAccountIdsList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
+    DateTimeRangeList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeRange)
+    EntityArnList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityArn)
+    EntityMetadata.key = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityMetadataKey)
+    EntityMetadata.value = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityMetadataValue)
+    EntityStatusCode.add_member(:impaired, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMPAIRED', traits: {"smithy.api#enumValue" => "IMPAIRED"}))
+    EntityStatusCode.add_member(:unimpaired, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNIMPAIRED', traits: {"smithy.api#enumValue" => "UNIMPAIRED"}))
+    EntityStatusCode.add_member(:unknown, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNKNOWN', traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    EntityStatusCode.add_member(:pending, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING', traits: {"smithy.api#enumValue" => "PENDING"}))
+    EntityStatusCode.add_member(:resolved, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RESOLVED', traits: {"smithy.api#enumValue" => "RESOLVED"}))
+    EntityStatusCodeList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatusCode)
+    EntityStatuses.key = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatusCode)
+    EntityStatuses.value = Smithy::Schema::Shapes::ShapeRef.new(shape: Count)
+    EntityValueList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EntityValue)
+    EventAggregateField.add_member(:event_type_category, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EventTypeCategory', traits: {"smithy.api#enumValue" => "eventTypeCategory"}))
+    EventArnList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventArn)
+    EventMetadata.key = Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataKey)
+    EventMetadata.value = Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataValue)
+    EventScopeCode.add_member(:public, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PUBLIC', traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    EventScopeCode.add_member(:account_specific, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACCOUNT_SPECIFIC', traits: {"smithy.api#enumValue" => "ACCOUNT_SPECIFIC"}))
+    EventScopeCode.add_member(:none, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
+    EventStatusCode.add_member(:open, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OPEN', traits: {"smithy.api#enumValue" => "open"}))
+    EventStatusCode.add_member(:closed, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CLOSED', traits: {"smithy.api#enumValue" => "closed"}))
+    EventStatusCode.add_member(:upcoming, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPCOMING', traits: {"smithy.api#enumValue" => "upcoming"}))
+    EventStatusCodeList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventStatusCode)
+    EventTypeCategory.add_member(:issue, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISSUE', traits: {"smithy.api#enumValue" => "issue"}))
+    EventTypeCategory.add_member(:account_notification, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACCOUNT_NOTIFICATION', traits: {"smithy.api#enumValue" => "accountNotification"}))
+    EventTypeCategory.add_member(:scheduled_change, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SCHEDULED_CHANGE', traits: {"smithy.api#enumValue" => "scheduledChange"}))
+    EventTypeCategory.add_member(:investigation, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INVESTIGATION', traits: {"smithy.api#enumValue" => "investigation"}))
+    EventTypeCategoryList2.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeCategory)
+    EventTypeList2.member = Smithy::Schema::Shapes::ShapeRef.new(shape: EventType2)
+    RegionList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
+    ServiceList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Service)
+    TagFilter.member = Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet)
+    TagSet.key = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagSet.value = Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
+
+    AWSHealth20160804 = Smithy::Schema::Shapes::ServiceShape.new do |service|
+      service.id = "com.amazonaws.health#AWSHealth_20160804"
+      service.name = "AWSHealth20160804"
+      service.version = "2016-08-04"
+      service.traits = {"aws.api#service" => {"sdkId" => "Health", "arnNamespace" => "health", "cloudFormationName" => "Health", "cloudTrailEventSource" => "health.amazonaws.com", "endpointPrefix" => "health"}, "aws.auth#sigv4" => {"name" => "health"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Health APIs and Notifications"}
+      service.add_operation(:describe_affected_accounts_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeAffectedAccountsForOrganization"
+        operation.name = "DescribeAffectedAccountsForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedAccountsForOrganizationRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedAccountsForOrganizationResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeAffectedAccountsForOrganization.new
+      end)
+      service.add_operation(:describe_affected_entities, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeAffectedEntities"
+        operation.name = "DescribeAffectedEntities"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeAffectedEntities.new
+      end)
+      service.add_operation(:describe_affected_entities_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeAffectedEntitiesForOrganization"
+        operation.name = "DescribeAffectedEntitiesForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesForOrganizationRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesForOrganizationResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeAffectedEntitiesForOrganization.new
+      end)
+      service.add_operation(:describe_entity_aggregates, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEntityAggregates"
+        operation.name = "DescribeEntityAggregates"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityAggregatesRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityAggregatesResponse)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_entity_aggregates_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEntityAggregatesForOrganization"
+        operation.name = "DescribeEntityAggregatesForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityAggregatesForOrganizationRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityAggregatesForOrganizationResponse)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_event_aggregates, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEventAggregates"
+        operation.name = "DescribeEventAggregates"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventAggregatesRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventAggregatesResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeEventAggregates.new
+      end)
+      service.add_operation(:describe_event_details, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEventDetails"
+        operation.name = "DescribeEventDetails"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_event_details_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEventDetailsForOrganization"
+        operation.name = "DescribeEventDetailsForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsForOrganizationRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventDetailsForOrganizationResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_event_types, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEventTypes"
+        operation.name = "DescribeEventTypes"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventTypesRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventTypesResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeEventTypes.new
+      end)
+      service.add_operation(:describe_events, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEvents"
+        operation.name = "DescribeEvents"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeEvents.new
+      end)
+      service.add_operation(:describe_events_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeEventsForOrganization"
+        operation.name = "DescribeEventsForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsForOrganizationRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsForOrganizationResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLocale)
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::DescribeEventsForOrganization.new
+      end)
+      service.add_operation(:describe_health_service_status_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DescribeHealthServiceStatusForOrganization"
+        operation.name = "DescribeHealthServiceStatusForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHealthServiceStatusForOrganizationResponse)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:disable_health_service_access_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#DisableHealthServiceAccessForOrganization"
+        operation.name = "DisableHealthServiceAccessForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:enable_health_service_access_for_organization, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.health#EnableHealthServiceAccessForOrganization"
+        operation.name = "EnableHealthServiceAccessForOrganization"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+
+    end
+
+    class << self
+      def type_registry
+        return @type_registry if @type_registry
+
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = Smithy::Schema::TypeRegistry.new(shapes)
+      end
+    end
+  end
+end

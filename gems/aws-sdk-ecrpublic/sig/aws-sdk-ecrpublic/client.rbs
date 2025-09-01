@@ -1,0 +1,324 @@
+module Aws::ECRPUBLIC
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ECRPUBLIC::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCheckLayerAvailabilityResponse
+      include Smithy::Client::_Response[Types::BatchCheckLayerAvailabilityResponse]
+      def layers: () -> Array[Types::Layer]?
+      def failures: () -> Array[Types::LayerFailure]?
+    end
+    def batch_check_layer_availability: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?layer_digests: Array[String]
+    ) -> _BatchCheckLayerAvailabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCheckLayerAvailabilityResponse
+
+    interface _BatchDeleteImageResponse
+      include Smithy::Client::_Response[Types::BatchDeleteImageResponse]
+      def image_ids: () -> Array[Types::ImageIdentifier]?
+      def failures: () -> Array[Types::ImageFailure]?
+    end
+    def batch_delete_image: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?image_ids: Array[
+        {
+          image_digest: String,
+          image_tag: String
+        }
+      ]
+    ) -> _BatchDeleteImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteImageResponse
+
+    interface _CompleteLayerUploadResponse
+      include Smithy::Client::_Response[Types::CompleteLayerUploadResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def upload_id: () -> String?
+      def layer_digest: () -> String?
+    end
+    def complete_layer_upload: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?upload_id: String,
+      ?layer_digests: Array[String]
+    ) -> _CompleteLayerUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteLayerUploadResponse
+
+    interface _CreateRepositoryResponse
+      include Smithy::Client::_Response[Types::CreateRepositoryResponse]
+      def repository: () -> Types::Repository?
+      def catalog_data: () -> Types::RepositoryCatalogData?
+    end
+    def create_repository: (
+      ?repository_name: String,
+      ?catalog_data: {
+        description: String,
+        architectures: Array[String],
+        operating_systems: Array[String],
+        logo_image_blob: String,
+        about_text: String,
+        usage_text: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRepositoryResponse
+
+    interface _DeleteRepositoryResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryResponse]
+      def repository: () -> Types::Repository?
+    end
+    def delete_repository: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?force: bool
+    ) -> _DeleteRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryResponse
+
+    interface _DeleteRepositoryPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryPolicyResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def policy_text: () -> String?
+    end
+    def delete_repository_policy: (
+      ?registry_id: String,
+      ?repository_name: String
+    ) -> _DeleteRepositoryPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryPolicyResponse
+
+    interface _DescribeImageTagsResponse
+      include Smithy::Client::_Response[Types::DescribeImageTagsResponse]
+      def image_tag_details: () -> Array[Types::ImageTagDetail]?
+      def next_token: () -> String?
+    end
+    def describe_image_tags: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeImageTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageTagsResponse
+
+    interface _DescribeImagesResponse
+      include Smithy::Client::_Response[Types::DescribeImagesResponse]
+      def image_details: () -> Array[Types::ImageDetail]?
+      def next_token: () -> String?
+    end
+    def describe_images: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?image_ids: Array[
+        {
+          image_digest: String,
+          image_tag: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImagesResponse
+
+    interface _DescribeRegistriesResponse
+      include Smithy::Client::_Response[Types::DescribeRegistriesResponse]
+      def registries: () -> Array[Types::Registry]?
+      def next_token: () -> String?
+    end
+    def describe_registries: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRegistriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegistriesResponse
+
+    interface _DescribeRepositoriesResponse
+      include Smithy::Client::_Response[Types::DescribeRepositoriesResponse]
+      def repositories: () -> Array[Types::Repository]?
+      def next_token: () -> String?
+    end
+    def describe_repositories: (
+      ?registry_id: String,
+      ?repository_names: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRepositoriesResponse
+
+    interface _GetAuthorizationTokenResponse
+      include Smithy::Client::_Response[Types::GetAuthorizationTokenResponse]
+      def authorization_data: () -> Types::AuthorizationData?
+    end
+    def get_authorization_token: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAuthorizationTokenResponse
+
+    interface _GetRegistryCatalogDataResponse
+      include Smithy::Client::_Response[Types::GetRegistryCatalogDataResponse]
+      def registry_catalog_data: () -> Types::RegistryCatalogData?
+    end
+    def get_registry_catalog_data: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegistryCatalogDataResponse
+
+    interface _GetRepositoryCatalogDataResponse
+      include Smithy::Client::_Response[Types::GetRepositoryCatalogDataResponse]
+      def catalog_data: () -> Types::RepositoryCatalogData?
+    end
+    def get_repository_catalog_data: (
+      ?registry_id: String,
+      ?repository_name: String
+    ) -> _GetRepositoryCatalogDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryCatalogDataResponse
+
+    interface _GetRepositoryPolicyResponse
+      include Smithy::Client::_Response[Types::GetRepositoryPolicyResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def policy_text: () -> String?
+    end
+    def get_repository_policy: (
+      ?registry_id: String,
+      ?repository_name: String
+    ) -> _GetRepositoryPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryPolicyResponse
+
+    interface _InitiateLayerUploadResponse
+      include Smithy::Client::_Response[Types::InitiateLayerUploadResponse]
+      def upload_id: () -> String?
+      def part_size: () -> Integer?
+    end
+    def initiate_layer_upload: (
+      ?registry_id: String,
+      ?repository_name: String
+    ) -> _InitiateLayerUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateLayerUploadResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutImageResponse
+      include Smithy::Client::_Response[Types::PutImageResponse]
+      def image: () -> Types::Image?
+    end
+    def put_image: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?image_manifest: String,
+      ?image_manifest_media_type: String,
+      ?image_tag: String,
+      ?image_digest: String
+    ) -> _PutImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutImageResponse
+
+    interface _PutRegistryCatalogDataResponse
+      include Smithy::Client::_Response[Types::PutRegistryCatalogDataResponse]
+      def registry_catalog_data: () -> Types::RegistryCatalogData?
+    end
+    def put_registry_catalog_data: (
+      ?display_name: String
+    ) -> _PutRegistryCatalogDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRegistryCatalogDataResponse
+
+    interface _PutRepositoryCatalogDataResponse
+      include Smithy::Client::_Response[Types::PutRepositoryCatalogDataResponse]
+      def catalog_data: () -> Types::RepositoryCatalogData?
+    end
+    def put_repository_catalog_data: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?catalog_data: {
+        description: String,
+        architectures: Array[String],
+        operating_systems: Array[String],
+        logo_image_blob: String,
+        about_text: String,
+        usage_text: String
+      }
+    ) -> _PutRepositoryCatalogDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRepositoryCatalogDataResponse
+
+    interface _SetRepositoryPolicyResponse
+      include Smithy::Client::_Response[Types::SetRepositoryPolicyResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def policy_text: () -> String?
+    end
+    def set_repository_policy: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?policy_text: String,
+      ?force: bool
+    ) -> _SetRepositoryPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetRepositoryPolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UploadLayerPartResponse
+      include Smithy::Client::_Response[Types::UploadLayerPartResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def upload_id: () -> String?
+      def last_byte_received: () -> Integer?
+    end
+    def upload_layer_part: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?upload_id: String,
+      ?part_first_byte: Integer,
+      ?part_last_byte: Integer,
+      ?layer_part_blob: String
+    ) -> _UploadLayerPartResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadLayerPartResponse
+  end
+end

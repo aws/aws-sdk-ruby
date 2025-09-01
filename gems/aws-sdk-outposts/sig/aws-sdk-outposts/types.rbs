@@ -1,0 +1,1774 @@
+module Aws::Outposts
+  module Types
+
+    module AWSServiceName
+      AWS: String
+      EC2: String
+      ELASTICACHE: String
+      ELB: String
+      RDS: String
+      ROUTE53: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_name: String,
+        ?contact_phone_number: String,
+        ?address_line1: String,
+        ?address_line2: String,
+        ?address_line3: String,
+        ?city: String,
+        ?state_or_region: String,
+        ?district_or_county: String,
+        ?postal_code: String,
+        ?country_code: String,
+        ?municipality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_name: String?
+      attr_accessor contact_phone_number: String?
+      attr_accessor address_line1: String?
+      attr_accessor address_line2: String?
+      attr_accessor address_line3: String?
+      attr_accessor city: String?
+      attr_accessor state_or_region: String?
+      attr_accessor district_or_county: String?
+      attr_accessor postal_code: String?
+      attr_accessor country_code: String?
+      attr_accessor municipality: String?
+    end
+
+    module AddressType
+      SHIPPING_ADDRESS: String
+      OPERATING_ADDRESS: String
+    end
+
+    class AssetInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?rack_id: String,
+        ?asset_type: String,
+        ?compute_attributes: Types::ComputeAttributes,
+        ?asset_location: Types::AssetLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor rack_id: String?
+      attr_accessor asset_type: String?
+      attr_accessor compute_attributes: Types::ComputeAttributes?
+      attr_accessor asset_location: Types::AssetLocation?
+    end
+
+    class AssetInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?instance_type: String,
+        ?asset_id: String,
+        ?account_id: String,
+        ?aws_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor asset_id: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_service_name: String?
+    end
+
+    class AssetInstanceTypeCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class AssetLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rack_elevation: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rack_elevation: Float?
+    end
+
+    module AssetState
+      ACTIVE: String
+      RETIRING: String
+      ISOLATED: String
+    end
+
+    module AssetType
+      COMPUTE: String
+    end
+
+    class BlockingInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?account_id: String,
+        ?aws_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor account_id: String?
+      attr_accessor aws_service_name: String?
+    end
+
+    class CancelCapacityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_task_id: String,
+        ?outpost_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_task_id: String?
+      attr_accessor outpost_identifier: String?
+    end
+
+    class CancelCapacityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelOrderInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order_id: String?
+    end
+
+    class CancelOrderOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CapacityTaskFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor type: String?
+    end
+
+    module CapacityTaskFailureType
+      UNSUPPORTED_CAPACITY_CONFIGURATION: String
+      UNEXPECTED_ASSET_STATE: String
+      BLOCKING_INSTANCES_NOT_EVACUATED: String
+      INTERNAL_SERVER_ERROR: String
+      RESOURCE_NOT_FOUND: String
+    end
+
+    module CapacityTaskStatus
+      REQUESTED: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+      WAITING_FOR_EVACUATION: String
+      CANCELLATION_IN_PROGRESS: String
+      CANCELLED: String
+    end
+
+    class CapacityTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_task_id: String,
+        ?outpost_id: String,
+        ?order_id: String,
+        ?asset_id: String,
+        ?capacity_task_status: String,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_task_id: String?
+      attr_accessor outpost_id: String?
+      attr_accessor order_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor capacity_task_status: String?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    class CatalogItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item_id: String,
+        ?item_status: String,
+        ?ec2_capacities: Array[Types::EC2Capacity],
+        ?power_kva: Float,
+        ?weight_lbs: Integer,
+        ?supported_uplink_gbps: Array[Integer],
+        ?supported_storage: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item_id: String?
+      attr_accessor item_status: String?
+      attr_accessor ec2_capacities: Array[Types::EC2Capacity]?
+      attr_accessor power_kva: Float?
+      attr_accessor weight_lbs: Integer?
+      attr_accessor supported_uplink_gbps: Array[Integer]?
+      attr_accessor supported_storage: Array[String]?
+    end
+
+    module CatalogItemClass
+      RACK: String
+      SERVER: String
+    end
+
+    module CatalogItemStatus
+      AVAILABLE: String
+      DISCONTINUED: String
+    end
+
+    module ComputeAssetState
+      ACTIVE: String
+      ISOLATED: String
+      RETIRING: String
+    end
+
+    class ComputeAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_id: String,
+        ?state: String,
+        ?instance_families: Array[String],
+        ?instance_type_capacities: Array[Types::AssetInstanceTypeCapacity],
+        ?max_vcpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_id: String?
+      attr_accessor state: String?
+      attr_accessor instance_families: Array[String]?
+      attr_accessor instance_type_capacities: Array[Types::AssetInstanceTypeCapacity]?
+      attr_accessor max_vcpus: Integer?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConnectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_public_key: String,
+        ?server_public_key: String,
+        ?server_endpoint: String,
+        ?client_tunnel_address: String,
+        ?server_tunnel_address: String,
+        ?allowed_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_public_key: String?
+      attr_accessor server_public_key: String?
+      attr_accessor server_endpoint: String?
+      attr_accessor client_tunnel_address: String?
+      attr_accessor server_tunnel_address: String?
+      attr_accessor allowed_ips: Array[String]?
+    end
+
+    class CreateOrderInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?line_items: Array[Types::LineItemRequest],
+        ?payment_option: String,
+        ?payment_term: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor line_items: Array[Types::LineItemRequest]?
+      attr_accessor payment_option: String?
+      attr_accessor payment_term: String?
+    end
+
+    class CreateOrderOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order: Types::Order,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order: Types::Order?
+    end
+
+    class CreateOutpostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?site_id: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?tags: Hash[String, String],
+        ?supported_hardware_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor site_id: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor supported_hardware_type: String?
+    end
+
+    class CreateOutpostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost: Types::Outpost,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost: Types::Outpost?
+    end
+
+    class CreateSiteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?notes: String,
+        ?tags: Hash[String, String],
+        ?operating_address: Types::Address,
+        ?shipping_address: Types::Address,
+        ?rack_physical_properties: Types::RackPhysicalProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor notes: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor operating_address: Types::Address?
+      attr_accessor shipping_address: Types::Address?
+      attr_accessor rack_physical_properties: Types::RackPhysicalProperties?
+    end
+
+    class CreateSiteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class DeleteOutpostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+    end
+
+    class DeleteOutpostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSiteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+    end
+
+    class DeleteSiteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EC2Capacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?max_size: String,
+        ?quantity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor max_size: String?
+      attr_accessor quantity: String?
+    end
+
+    module FiberOpticCableType
+      SINGLE_MODE: String
+      MULTI_MODE: String
+    end
+
+    class GetCapacityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_task_id: String,
+        ?outpost_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_task_id: String?
+      attr_accessor outpost_identifier: String?
+    end
+
+    class GetCapacityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_task_id: String,
+        ?outpost_id: String,
+        ?order_id: String,
+        ?asset_id: String,
+        ?requested_instance_pools: Array[Types::InstanceTypeCapacity],
+        ?instances_to_exclude: Types::InstancesToExclude,
+        ?dry_run: bool,
+        ?capacity_task_status: String,
+        ?failed: Types::CapacityTaskFailure,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?last_modified_date: Time,
+        ?task_action_on_blocking_instances: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_task_id: String?
+      attr_accessor outpost_id: String?
+      attr_accessor order_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor requested_instance_pools: Array[Types::InstanceTypeCapacity]?
+      attr_accessor instances_to_exclude: Types::InstancesToExclude?
+      attr_accessor dry_run: bool?
+      attr_accessor capacity_task_status: String?
+      attr_accessor failed: Types::CapacityTaskFailure?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor task_action_on_blocking_instances: String?
+    end
+
+    class GetCatalogItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item_id: String?
+    end
+
+    class GetCatalogItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item: Types::CatalogItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item: Types::CatalogItem?
+    end
+
+    class GetConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+    end
+
+    class GetConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?connection_details: Types::ConnectionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor connection_details: Types::ConnectionDetails?
+    end
+
+    class GetOrderInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order_id: String?
+    end
+
+    class GetOrderOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order: Types::Order,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order: Types::Order?
+    end
+
+    class GetOutpostBillingInformationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?outpost_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor outpost_identifier: String?
+    end
+
+    class GetOutpostBillingInformationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?subscriptions: Array[Types::Subscription],
+        ?contract_end_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor contract_end_date: String?
+    end
+
+    class GetOutpostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+    end
+
+    class GetOutpostInstanceTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetOutpostInstanceTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_types: Array[Types::InstanceTypeItem],
+        ?next_token: String,
+        ?outpost_id: String,
+        ?outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_types: Array[Types::InstanceTypeItem]?
+      attr_accessor next_token: String?
+      attr_accessor outpost_id: String?
+      attr_accessor outpost_arn: String?
+    end
+
+    class GetOutpostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost: Types::Outpost,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost: Types::Outpost?
+    end
+
+    class GetOutpostSupportedInstanceTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?order_id: String,
+        ?asset_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor order_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetOutpostSupportedInstanceTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_types: Array[Types::InstanceTypeItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_types: Array[Types::InstanceTypeItem]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSiteAddressInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor address_type: String?
+    end
+
+    class GetSiteAddressOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?address_type: String,
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor address_type: String?
+      attr_accessor address: Types::Address?
+    end
+
+    class GetSiteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+    end
+
+    class GetSiteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class InstanceTypeCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class InstanceTypeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?vcp_us: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor vcp_us: Integer?
+    end
+
+    class InstancesToExclude
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[String],
+        ?account_ids: Array[String],
+        ?services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[String]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor services: Array[String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LineItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item_id: String,
+        ?line_item_id: String,
+        ?quantity: Integer,
+        ?status: String,
+        ?shipment_information: Types::ShipmentInformation,
+        ?asset_information_list: Array[Types::LineItemAssetInformation],
+        ?previous_line_item_id: String,
+        ?previous_order_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item_id: String?
+      attr_accessor line_item_id: String?
+      attr_accessor quantity: Integer?
+      attr_accessor status: String?
+      attr_accessor shipment_information: Types::ShipmentInformation?
+      attr_accessor asset_information_list: Array[Types::LineItemAssetInformation]?
+      attr_accessor previous_line_item_id: String?
+      attr_accessor previous_order_id: String?
+    end
+
+    class LineItemAssetInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?mac_address_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor mac_address_list: Array[String]?
+    end
+
+    class LineItemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item_id: String,
+        ?quantity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item_id: String?
+      attr_accessor quantity: Integer?
+    end
+
+    module LineItemStatus
+      PREPARING: String
+      BUILDING: String
+      SHIPPED: String
+      DELIVERED: String
+      INSTALLING: String
+      INSTALLED: String
+      ERROR: String
+      CANCELLED: String
+      REPLACED: String
+    end
+
+    class ListAssetInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?asset_id_filter: Array[String],
+        ?instance_type_filter: Array[String],
+        ?account_id_filter: Array[String],
+        ?aws_service_filter: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor asset_id_filter: Array[String]?
+      attr_accessor instance_type_filter: Array[String]?
+      attr_accessor account_id_filter: Array[String]?
+      attr_accessor aws_service_filter: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_instances: Array[Types::AssetInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_instances: Array[Types::AssetInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?host_id_filter: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor host_id_filter: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status_filter: Array[String]?
+    end
+
+    class ListAssetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assets: Array[Types::AssetInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assets: Array[Types::AssetInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBlockingInstancesForCapacityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?capacity_task_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor capacity_task_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBlockingInstancesForCapacityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blocking_instances: Array[Types::BlockingInstance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blocking_instances: Array[Types::BlockingInstance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCapacityTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?capacity_task_status_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor capacity_task_status_filter: Array[String]?
+    end
+
+    class ListCapacityTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_tasks: Array[Types::CapacityTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_tasks: Array[Types::CapacityTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCatalogItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?item_class_filter: Array[String],
+        ?supported_storage_filter: Array[String],
+        ?ec2_family_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor item_class_filter: Array[String]?
+      attr_accessor supported_storage_filter: Array[String]?
+      attr_accessor ec2_family_filter: Array[String]?
+    end
+
+    class ListCatalogItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_items: Array[Types::CatalogItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_items: Array[Types::CatalogItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrdersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier_filter: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier_filter: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOrdersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?orders: Array[Types::OrderSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor orders: Array[Types::OrderSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOutpostsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?life_cycle_status_filter: Array[String],
+        ?availability_zone_filter: Array[String],
+        ?availability_zone_id_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor life_cycle_status_filter: Array[String]?
+      attr_accessor availability_zone_filter: Array[String]?
+      attr_accessor availability_zone_id_filter: Array[String]?
+    end
+
+    class ListOutpostsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outposts: Array[Types::Outpost],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outposts: Array[Types::Outpost]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSitesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?operating_address_country_code_filter: Array[String],
+        ?operating_address_state_or_region_filter: Array[String],
+        ?operating_address_city_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor operating_address_country_code_filter: Array[String]?
+      attr_accessor operating_address_state_or_region_filter: Array[String]?
+      attr_accessor operating_address_city_filter: Array[String]?
+    end
+
+    class ListSitesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sites: Array[Types::Site],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sites: Array[Types::Site]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MaximumSupportedWeightLbs
+      NO_LIMIT: String
+      MAX_1400_LBS: String
+      MAX_1600_LBS: String
+      MAX_1800_LBS: String
+      MAX_2000_LBS: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OpticalStandard
+      OPTIC_10GBASE_SR: String
+      OPTIC_10GBASE_IR: String
+      OPTIC_10GBASE_LR: String
+      OPTIC_40GBASE_SR: String
+      OPTIC_40GBASE_ESR: String
+      OPTIC_40GBASE_IR4_LR4L: String
+      OPTIC_40GBASE_LR4: String
+      OPTIC_100GBASE_SR4: String
+      OPTIC_100GBASE_CWDM4: String
+      OPTIC_100GBASE_LR4: String
+      OPTIC_100G_PSM4_MSA: String
+      OPTIC_1000BASE_LX: String
+      OPTIC_1000BASE_SX: String
+    end
+
+    class Order
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?order_id: String,
+        ?status: String,
+        ?line_items: Array[Types::LineItem],
+        ?payment_option: String,
+        ?order_submission_date: Time,
+        ?order_fulfilled_date: Time,
+        ?payment_term: String,
+        ?order_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor order_id: String?
+      attr_accessor status: String?
+      attr_accessor line_items: Array[Types::LineItem]?
+      attr_accessor payment_option: String?
+      attr_accessor order_submission_date: Time?
+      attr_accessor order_fulfilled_date: Time?
+      attr_accessor payment_term: String?
+      attr_accessor order_type: String?
+    end
+
+    module OrderStatus
+      RECEIVED: String
+      PENDING: String
+      PROCESSING: String
+      INSTALLING: String
+      FULFILLED: String
+      CANCELLED: String
+      PREPARING: String
+      IN_PROGRESS: String
+      DELIVERED: String
+      COMPLETED: String
+      ERROR: String
+    end
+
+    class OrderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?order_id: String,
+        ?order_type: String,
+        ?status: String,
+        ?line_item_counts_by_status: Hash[String, Integer],
+        ?order_submission_date: Time,
+        ?order_fulfilled_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor order_id: String?
+      attr_accessor order_type: String?
+      attr_accessor status: String?
+      attr_accessor line_item_counts_by_status: Hash[String, Integer]?
+      attr_accessor order_submission_date: Time?
+      attr_accessor order_fulfilled_date: Time?
+    end
+
+    module OrderType
+      OUTPOST: String
+      REPLACEMENT: String
+    end
+
+    class Outpost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?owner_id: String,
+        ?outpost_arn: String,
+        ?site_id: String,
+        ?name: String,
+        ?description: String,
+        ?life_cycle_status: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?tags: Hash[String, String],
+        ?site_arn: String,
+        ?supported_hardware_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor outpost_arn: String?
+      attr_accessor site_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor life_cycle_status: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor site_arn: String?
+      attr_accessor supported_hardware_type: String?
+    end
+
+    module PaymentOption
+      ALL_UPFRONT: String
+      NO_UPFRONT: String
+      PARTIAL_UPFRONT: String
+    end
+
+    module PaymentTerm
+      THREE_YEARS: String
+      ONE_YEAR: String
+      FIVE_YEARS: String
+    end
+
+    module PowerConnector
+      L6_30P: String
+      IEC309: String
+      AH530P7W: String
+      AH532P6W: String
+      CS8365C: String
+    end
+
+    module PowerDrawKva
+      POWER_5_KVA: String
+      POWER_10_KVA: String
+      POWER_15_KVA: String
+      POWER_30_KVA: String
+    end
+
+    module PowerFeedDrop
+      ABOVE_RACK: String
+      BELOW_RACK: String
+    end
+
+    module PowerPhase
+      SINGLE_PHASE: String
+      THREE_PHASE: String
+    end
+
+    class RackPhysicalProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?power_draw_kva: String,
+        ?power_phase: String,
+        ?power_connector: String,
+        ?power_feed_drop: String,
+        ?uplink_gbps: String,
+        ?uplink_count: String,
+        ?fiber_optic_cable_type: String,
+        ?optical_standard: String,
+        ?maximum_supported_weight_lbs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor power_draw_kva: String?
+      attr_accessor power_phase: String?
+      attr_accessor power_connector: String?
+      attr_accessor power_feed_drop: String?
+      attr_accessor uplink_gbps: String?
+      attr_accessor uplink_count: String?
+      attr_accessor fiber_optic_cable_type: String?
+      attr_accessor optical_standard: String?
+      attr_accessor maximum_supported_weight_lbs: String?
+    end
+
+    module ResourceType
+      OUTPOST: String
+      ORDER: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ShipmentCarrier
+      DHL: String
+      DBS: String
+      FEDEX: String
+      UPS: String
+      EXPEDITORS: String
+    end
+
+    class ShipmentInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shipment_tracking_number: String,
+        ?shipment_carrier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shipment_tracking_number: String?
+      attr_accessor shipment_carrier: String?
+    end
+
+    class Site
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?account_id: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?site_arn: String,
+        ?notes: String,
+        ?operating_address_country_code: String,
+        ?operating_address_state_or_region: String,
+        ?operating_address_city: String,
+        ?rack_physical_properties: Types::RackPhysicalProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor account_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor site_arn: String?
+      attr_accessor notes: String?
+      attr_accessor operating_address_country_code: String?
+      attr_accessor operating_address_state_or_region: String?
+      attr_accessor operating_address_city: String?
+      attr_accessor rack_physical_properties: Types::RackPhysicalProperties?
+    end
+
+    class StartCapacityTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?order_id: String,
+        ?asset_id: String,
+        ?instance_pools: Array[Types::InstanceTypeCapacity],
+        ?instances_to_exclude: Types::InstancesToExclude,
+        ?dry_run: bool,
+        ?task_action_on_blocking_instances: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor order_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor instance_pools: Array[Types::InstanceTypeCapacity]?
+      attr_accessor instances_to_exclude: Types::InstancesToExclude?
+      attr_accessor dry_run: bool?
+      attr_accessor task_action_on_blocking_instances: String?
+    end
+
+    class StartCapacityTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_task_id: String,
+        ?outpost_id: String,
+        ?order_id: String,
+        ?asset_id: String,
+        ?requested_instance_pools: Array[Types::InstanceTypeCapacity],
+        ?instances_to_exclude: Types::InstancesToExclude,
+        ?dry_run: bool,
+        ?capacity_task_status: String,
+        ?failed: Types::CapacityTaskFailure,
+        ?creation_date: Time,
+        ?completion_date: Time,
+        ?last_modified_date: Time,
+        ?task_action_on_blocking_instances: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_task_id: String?
+      attr_accessor outpost_id: String?
+      attr_accessor order_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor requested_instance_pools: Array[Types::InstanceTypeCapacity]?
+      attr_accessor instances_to_exclude: Types::InstancesToExclude?
+      attr_accessor dry_run: bool?
+      attr_accessor capacity_task_status: String?
+      attr_accessor failed: Types::CapacityTaskFailure?
+      attr_accessor creation_date: Time?
+      attr_accessor completion_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor task_action_on_blocking_instances: String?
+    end
+
+    class StartConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_serial_number: String,
+        ?asset_id: String,
+        ?client_public_key: String,
+        ?network_interface_device_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_serial_number: String?
+      attr_accessor asset_id: String?
+      attr_accessor client_public_key: String?
+      attr_accessor network_interface_device_index: Integer?
+    end
+
+    class StartConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?underlay_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor underlay_ip_address: String?
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_id: String,
+        ?subscription_type: String,
+        ?subscription_status: String,
+        ?order_ids: Array[String],
+        ?begin_date: Time,
+        ?end_date: Time,
+        ?monthly_recurring_price: Float,
+        ?upfront_price: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_id: String?
+      attr_accessor subscription_type: String?
+      attr_accessor subscription_status: String?
+      attr_accessor order_ids: Array[String]?
+      attr_accessor begin_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor monthly_recurring_price: Float?
+      attr_accessor upfront_price: Float?
+    end
+
+    module SubscriptionStatus
+      ACTIVE: String
+      INACTIVE: String
+      CANCELLED: String
+    end
+
+    module SubscriptionType
+      ORIGINAL: String
+      RENEWAL: String
+      CAPACITY_INCREASE: String
+    end
+
+    module SupportedHardwareType
+      RACK: String
+      SERVER: String
+    end
+
+    module SupportedStorageEnum
+      EBS: String
+      S3: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TaskActionOnBlockingInstances
+      WAIT_FOR_EVACUATION: String
+      FAIL_TASK: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateOutpostInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?name: String,
+        ?description: String,
+        ?supported_hardware_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor supported_hardware_type: String?
+    end
+
+    class UpdateOutpostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost: Types::Outpost,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost: Types::Outpost?
+    end
+
+    class UpdateSiteAddressInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?address_type: String,
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor address_type: String?
+      attr_accessor address: Types::Address?
+    end
+
+    class UpdateSiteAddressOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_type: String,
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_type: String?
+      attr_accessor address: Types::Address?
+    end
+
+    class UpdateSiteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?name: String,
+        ?description: String,
+        ?notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor notes: String?
+    end
+
+    class UpdateSiteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class UpdateSiteRackPhysicalPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?power_draw_kva: String,
+        ?power_phase: String,
+        ?power_connector: String,
+        ?power_feed_drop: String,
+        ?uplink_gbps: String,
+        ?uplink_count: String,
+        ?fiber_optic_cable_type: String,
+        ?optical_standard: String,
+        ?maximum_supported_weight_lbs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor power_draw_kva: String?
+      attr_accessor power_phase: String?
+      attr_accessor power_connector: String?
+      attr_accessor power_feed_drop: String?
+      attr_accessor uplink_gbps: String?
+      attr_accessor uplink_count: String?
+      attr_accessor fiber_optic_cable_type: String?
+      attr_accessor optical_standard: String?
+      attr_accessor maximum_supported_weight_lbs: String?
+    end
+
+    class UpdateSiteRackPhysicalPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    module UplinkCount
+      UPLINK_COUNT_1: String
+      UPLINK_COUNT_2: String
+      UPLINK_COUNT_3: String
+      UPLINK_COUNT_4: String
+      UPLINK_COUNT_5: String
+      UPLINK_COUNT_6: String
+      UPLINK_COUNT_7: String
+      UPLINK_COUNT_8: String
+      UPLINK_COUNT_12: String
+      UPLINK_COUNT_16: String
+    end
+
+    module UplinkGbps
+      UPLINK_1G: String
+      UPLINK_10G: String
+      UPLINK_40G: String
+      UPLINK_100G: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

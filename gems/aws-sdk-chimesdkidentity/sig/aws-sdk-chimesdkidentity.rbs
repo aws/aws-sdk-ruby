@@ -1,0 +1,5 @@
+  module Aws
+    module ChimeSDKIdentity
+      VERSION: String
+    end
+  end

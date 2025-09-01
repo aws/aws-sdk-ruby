@@ -1,0 +1,141 @@
+module Aws::AppConfigData
+  module Types
+
+    class BadRequestDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?invalid_parameters: Hash[String, Types::InvalidParameterDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameters: Hash[String, Types::InvalidParameterDetail]?
+
+      class InvalidParameters < BadRequestDetails
+      end
+      class Unknown < BadRequestDetails
+      end
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?details: Types::BadRequestDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor details: Types::BadRequestDetails?
+    end
+
+    class GetLatestConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_token: String?
+    end
+
+    class GetLatestConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_poll_configuration_token: String,
+        ?next_poll_interval_in_seconds: Integer,
+        ?content_type: String,
+        ?configuration: String,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_poll_configuration_token: String?
+      attr_accessor next_poll_interval_in_seconds: Integer?
+      attr_accessor content_type: String?
+      attr_accessor configuration: String?
+      attr_accessor version_label: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?referenced_by: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor referenced_by: Hash[String, String]?
+    end
+
+    class StartConfigurationSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?environment_identifier: String,
+        ?configuration_profile_identifier: String,
+        ?required_minimum_poll_interval_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor environment_identifier: String?
+      attr_accessor configuration_profile_identifier: String?
+      attr_accessor required_minimum_poll_interval_in_seconds: Integer?
+    end
+
+    class StartConfigurationSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initial_configuration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initial_configuration_token: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

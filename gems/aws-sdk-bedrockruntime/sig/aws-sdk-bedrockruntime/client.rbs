@@ -1,0 +1,577 @@
+module Aws::BedrockRuntime
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BedrockRuntime::EndpointProvider,
+      ?http_bearer_provider: Smithy::Client::HttpBearerProvider,
+      ?http_bearer_token: String,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ApplyGuardrailResponse
+      include Smithy::Client::_Response[Types::ApplyGuardrailResponse]
+      def usage: () -> Types::GuardrailUsage?
+      def action: () -> String?
+      def action_reason: () -> String?
+      def outputs: () -> Array[Types::GuardrailOutputContent]?
+      def assessments: () -> Array[Types::GuardrailAssessment]?
+      def guardrail_coverage: () -> Types::GuardrailCoverage?
+    end
+    def apply_guardrail: (
+      ?guardrail_identifier: String,
+      ?guardrail_version: String,
+      ?source: String,
+      ?content: Array[
+        {
+          text: {
+            text: String,
+            qualifiers: Array[String]
+          },
+          image: {
+            format: String,
+            source: {
+              bytes: String
+            }
+          }
+        }
+      ],
+      ?output_scope: String
+    ) -> _ApplyGuardrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplyGuardrailResponse
+
+    interface _ConverseResponse
+      include Smithy::Client::_Response[Types::ConverseResponse]
+      def output: () -> Types::ConverseOutput?
+      def stop_reason: () -> String?
+      def usage: () -> Types::TokenUsage?
+      def metrics: () -> Types::ConverseMetrics?
+      def additional_model_response_fields: () -> Smithy::Schema::document?
+      def trace: () -> Types::ConverseTrace?
+      def performance_config: () -> Types::PerformanceConfiguration?
+    end
+    def converse: (
+      ?model_id: String,
+      ?messages: Array[
+        {
+          role: String,
+          content: Array[
+            {
+              text: String,
+              image: {
+                format: String,
+                source: {
+                  bytes: String,
+                  s3_location: {
+                    uri: String,
+                    bucket_owner: String
+                  }
+                }
+              },
+              document: {
+                format: String,
+                name: untyped,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped,
+                  text: untyped,
+                  content: Array[
+                    {
+                      text: untyped
+                    }
+                  ]
+                },
+                context: untyped,
+                citations: {
+                  enabled: bool
+                }
+              },
+              video: {
+                format: String,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped
+                }
+              },
+              tool_use: {
+                tool_use_id: String,
+                name: String,
+                input: Smithy::Schema::document
+              },
+              tool_result: {
+                tool_use_id: untyped,
+                content: Array[
+                  {
+                    json: untyped,
+                    text: untyped,
+                    image: untyped,
+                    document: untyped,
+                    video: untyped
+                  }
+                ],
+                status: String
+              },
+              guard_content: {
+                text: {
+                  text: untyped,
+                  qualifiers: Array[String]
+                },
+                image: {
+                  format: String,
+                  source: {
+                    bytes: untyped
+                  }
+                }
+              },
+              cache_point: {
+                type: String
+              },
+              reasoning_content: {
+                reasoning_text: {
+                  text: untyped,
+                  signature: untyped
+                },
+                redacted_content: untyped
+              },
+              citations_content: {
+                content: Array[
+                  {
+                    text: untyped
+                  }
+                ],
+                citations: Array[
+                  {
+                    title: untyped,
+                    source_content: Array[
+                      {
+                        text: untyped
+                      }
+                    ],
+                    location: {
+                      document_char: {
+                        document_index: Integer,
+                        start: untyped,
+                        end: untyped
+                      },
+                      document_page: {
+                        document_index: untyped,
+                        start: untyped,
+                        end: untyped
+                      },
+                      document_chunk: {
+                        document_index: untyped,
+                        start: untyped,
+                        end: untyped
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      ?system: Array[
+        {
+          text: String,
+          guard_content: {
+            text: {
+              text: String,
+              qualifiers: Array[String]
+            },
+            image: {
+              format: String,
+              source: {
+                bytes: String
+              }
+            }
+          },
+          cache_point: {
+            type: String
+          }
+        }
+      ],
+      ?inference_config: {
+        max_tokens: Integer,
+        temperature: Float,
+        top_p: untyped,
+        stop_sequences: Array[String]
+      },
+      ?tool_config: {
+        tools: Array[
+          {
+            tool_spec: {
+              name: String,
+              description: String,
+              input_schema: {
+                json: Smithy::Schema::document
+              }
+            },
+            cache_point: {
+              type: String
+            }
+          }
+        ],
+        tool_choice: {
+          auto: {
+          },
+          any: {
+          },
+          tool: {
+            name: untyped
+          }
+        }
+      },
+      ?guardrail_config: {
+        guardrail_identifier: String,
+        guardrail_version: String,
+        trace: String
+      },
+      ?additional_model_request_fields: Smithy::Schema::document,
+      ?prompt_variables: Hash[String,
+        {
+          text: String
+        }
+      ],
+      ?additional_model_response_field_paths: Array[String],
+      ?request_metadata: Hash[String, String],
+      ?performance_config: {
+        latency: String
+      }
+    ) -> _ConverseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConverseResponse
+
+    interface _ConverseStreamResponse
+      include Smithy::Client::_Response[Types::ConverseStreamResponse]
+      def stream: () -> Types::ConverseStreamOutput?
+    end
+    def converse_stream: (
+      ?model_id: String,
+      ?messages: Array[
+        {
+          role: String,
+          content: Array[
+            {
+              text: String,
+              image: {
+                format: String,
+                source: {
+                  bytes: String,
+                  s3_location: {
+                    uri: String,
+                    bucket_owner: String
+                  }
+                }
+              },
+              document: {
+                format: String,
+                name: untyped,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped,
+                  text: untyped,
+                  content: Array[
+                    {
+                      text: untyped
+                    }
+                  ]
+                },
+                context: untyped,
+                citations: {
+                  enabled: bool
+                }
+              },
+              video: {
+                format: String,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped
+                }
+              },
+              tool_use: {
+                tool_use_id: String,
+                name: String,
+                input: Smithy::Schema::document
+              },
+              tool_result: {
+                tool_use_id: untyped,
+                content: Array[
+                  {
+                    json: untyped,
+                    text: untyped,
+                    image: untyped,
+                    document: untyped,
+                    video: untyped
+                  }
+                ],
+                status: String
+              },
+              guard_content: {
+                text: {
+                  text: untyped,
+                  qualifiers: Array[String]
+                },
+                image: {
+                  format: String,
+                  source: {
+                    bytes: untyped
+                  }
+                }
+              },
+              cache_point: {
+                type: String
+              },
+              reasoning_content: {
+                reasoning_text: {
+                  text: untyped,
+                  signature: untyped
+                },
+                redacted_content: untyped
+              },
+              citations_content: {
+                content: Array[
+                  {
+                    text: untyped
+                  }
+                ],
+                citations: Array[
+                  {
+                    title: untyped,
+                    source_content: Array[
+                      {
+                        text: untyped
+                      }
+                    ],
+                    location: {
+                      document_char: {
+                        document_index: Integer,
+                        start: untyped,
+                        end: untyped
+                      },
+                      document_page: {
+                        document_index: untyped,
+                        start: untyped,
+                        end: untyped
+                      },
+                      document_chunk: {
+                        document_index: untyped,
+                        start: untyped,
+                        end: untyped
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      ?system: Array[
+        {
+          text: String,
+          guard_content: {
+            text: {
+              text: String,
+              qualifiers: Array[String]
+            },
+            image: {
+              format: String,
+              source: {
+                bytes: String
+              }
+            }
+          },
+          cache_point: {
+            type: String
+          }
+        }
+      ],
+      ?inference_config: {
+        max_tokens: Integer,
+        temperature: Float,
+        top_p: untyped,
+        stop_sequences: Array[String]
+      },
+      ?tool_config: {
+        tools: Array[
+          {
+            tool_spec: {
+              name: String,
+              description: String,
+              input_schema: {
+                json: Smithy::Schema::document
+              }
+            },
+            cache_point: {
+              type: String
+            }
+          }
+        ],
+        tool_choice: {
+          auto: {
+          },
+          any: {
+          },
+          tool: {
+            name: untyped
+          }
+        }
+      },
+      ?guardrail_config: {
+        guardrail_identifier: String,
+        guardrail_version: String,
+        trace: String,
+        stream_processing_mode: String
+      },
+      ?additional_model_request_fields: Smithy::Schema::document,
+      ?prompt_variables: Hash[String,
+        {
+          text: String
+        }
+      ],
+      ?additional_model_response_field_paths: Array[String],
+      ?request_metadata: Hash[String, String],
+      ?performance_config: {
+        latency: String
+      }
+    ) -> _ConverseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConverseStreamResponse
+
+    interface _GetAsyncInvokeResponse
+      include Smithy::Client::_Response[Types::GetAsyncInvokeResponse]
+      def invocation_arn: () -> String?
+      def model_arn: () -> String?
+      def client_request_token: () -> String?
+      def status: () -> String?
+      def failure_message: () -> String?
+      def submit_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def output_data_config: () -> Types::AsyncInvokeOutputDataConfig?
+    end
+    def get_async_invoke: (
+      ?invocation_arn: String
+    ) -> _GetAsyncInvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAsyncInvokeResponse
+
+    interface _InvokeModelResponse
+      include Smithy::Client::_Response[Types::InvokeModelResponse]
+      def body: () -> String?
+      def content_type: () -> String?
+      def performance_config_latency: () -> String?
+    end
+    def invoke_model: (
+      ?body: String,
+      ?content_type: String,
+      ?accept: String,
+      ?model_id: String,
+      ?trace: String,
+      ?guardrail_identifier: String,
+      ?guardrail_version: String,
+      ?performance_config_latency: String
+    ) -> _InvokeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeModelResponse
+
+    interface _InvokeModelWithBidirectionalStreamResponse
+      include Smithy::Client::_Response[Types::InvokeModelWithBidirectionalStreamResponse]
+      def body: () -> Types::InvokeModelWithBidirectionalStreamOutput?
+    end
+    def invoke_model_with_bidirectional_stream: (
+      ?model_id: String,
+      ?body: {
+        chunk: {
+          bytes: String
+        }
+      }
+    ) -> _InvokeModelWithBidirectionalStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeModelWithBidirectionalStreamResponse
+
+    interface _InvokeModelWithResponseStreamResponse
+      include Smithy::Client::_Response[Types::InvokeModelWithResponseStreamResponse]
+      def body: () -> Types::ResponseStream?
+      def content_type: () -> String?
+      def performance_config_latency: () -> String?
+    end
+    def invoke_model_with_response_stream: (
+      ?body: String,
+      ?content_type: String,
+      ?accept: String,
+      ?model_id: String,
+      ?trace: String,
+      ?guardrail_identifier: String,
+      ?guardrail_version: String,
+      ?performance_config_latency: String
+    ) -> _InvokeModelWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeModelWithResponseStreamResponse
+
+    interface _ListAsyncInvokesResponse
+      include Smithy::Client::_Response[Types::ListAsyncInvokesResponse]
+      def next_token: () -> String?
+      def async_invoke_summaries: () -> Array[Types::AsyncInvokeSummary]?
+    end
+    def list_async_invokes: (
+      ?submit_time_after: Time,
+      ?submit_time_before: Time,
+      ?status_equals: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListAsyncInvokesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAsyncInvokesResponse
+
+    interface _StartAsyncInvokeResponse
+      include Smithy::Client::_Response[Types::StartAsyncInvokeResponse]
+      def invocation_arn: () -> String?
+    end
+    def start_async_invoke: (
+      ?client_request_token: String,
+      ?model_id: String,
+      ?model_input: Smithy::Schema::document,
+      ?output_data_config: {
+        s3_output_data_config: {
+          s3_uri: String,
+          kms_key_id: String,
+          bucket_owner: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartAsyncInvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAsyncInvokeResponse
+  end
+end

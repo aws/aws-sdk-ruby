@@ -1,0 +1,5 @@
+  module Aws
+    module OSIS
+      VERSION: String
+    end
+  end

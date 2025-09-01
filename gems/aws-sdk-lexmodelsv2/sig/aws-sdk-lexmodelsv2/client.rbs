@@ -1,0 +1,3864 @@
+module Aws::LexModelsV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LexModelsV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCreateCustomVocabularyItemResponse
+      include Smithy::Client::_Response[Types::BatchCreateCustomVocabularyItemResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def errors: () -> Array[Types::FailedCustomVocabularyItem]?
+      def resources: () -> Array[Types::CustomVocabularyItem]?
+    end
+    def batch_create_custom_vocabulary_item: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?custom_vocabulary_item_list: Array[
+        {
+          phrase: String,
+          weight: Integer,
+          display_as: untyped
+        }
+      ]
+    ) -> _BatchCreateCustomVocabularyItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateCustomVocabularyItemResponse
+
+    interface _BatchDeleteCustomVocabularyItemResponse
+      include Smithy::Client::_Response[Types::BatchDeleteCustomVocabularyItemResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def errors: () -> Array[Types::FailedCustomVocabularyItem]?
+      def resources: () -> Array[Types::CustomVocabularyItem]?
+    end
+    def batch_delete_custom_vocabulary_item: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?custom_vocabulary_item_list: Array[
+        {
+          item_id: String
+        }
+      ]
+    ) -> _BatchDeleteCustomVocabularyItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteCustomVocabularyItemResponse
+
+    interface _BatchUpdateCustomVocabularyItemResponse
+      include Smithy::Client::_Response[Types::BatchUpdateCustomVocabularyItemResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def errors: () -> Array[Types::FailedCustomVocabularyItem]?
+      def resources: () -> Array[Types::CustomVocabularyItem]?
+    end
+    def batch_update_custom_vocabulary_item: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?custom_vocabulary_item_list: Array[
+        {
+          item_id: String,
+          phrase: String,
+          weight: Integer,
+          display_as: untyped
+        }
+      ]
+    ) -> _BatchUpdateCustomVocabularyItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateCustomVocabularyItemResponse
+
+    interface _BuildBotLocaleResponse
+      include Smithy::Client::_Response[Types::BuildBotLocaleResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_locale_status: () -> String?
+      def last_build_submitted_date_time: () -> Time?
+    end
+    def build_bot_locale: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _BuildBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BuildBotLocaleResponse
+
+    interface _CreateBotResponse
+      include Smithy::Client::_Response[Types::CreateBotResponse]
+      def bot_id: () -> String?
+      def bot_name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def data_privacy: () -> Types::DataPrivacy?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def bot_status: () -> String?
+      def creation_date_time: () -> Time?
+      def bot_tags: () -> Hash[String, String]?
+      def test_bot_alias_tags: () -> Hash[String, String]?
+      def bot_type: () -> String?
+      def bot_members: () -> Array[Types::BotMember]?
+      def error_log_settings: () -> Types::ErrorLogSettings?
+    end
+    def create_bot: (
+      ?bot_name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?data_privacy: {
+        child_directed: bool
+      },
+      ?idle_session_ttl_in_seconds: Integer,
+      ?bot_tags: Hash[String, String],
+      ?test_bot_alias_tags: Hash[String, String],
+      ?bot_type: String,
+      ?bot_members: Array[
+        {
+          bot_member_id: String,
+          bot_member_name: String,
+          bot_member_alias_id: String,
+          bot_member_alias_name: String,
+          bot_member_version: String
+        }
+      ],
+      ?error_log_settings: {
+        enabled: bool
+      }
+    ) -> _CreateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotResponse
+
+    interface _CreateBotAliasResponse
+      include Smithy::Client::_Response[Types::CreateBotAliasResponse]
+      def bot_alias_id: () -> String?
+      def bot_alias_name: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_alias_locale_settings: () -> Hash[String, Types::BotAliasLocaleSettings]?
+      def conversation_log_settings: () -> Types::ConversationLogSettings?
+      def sentiment_analysis_settings: () -> Types::SentimentAnalysisSettings?
+      def bot_alias_status: () -> String?
+      def bot_id: () -> String?
+      def creation_date_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_bot_alias: (
+      ?bot_alias_name: String,
+      ?description: String,
+      ?bot_version: String,
+      ?bot_alias_locale_settings: Hash[String,
+        {
+          enabled: bool,
+          code_hook_specification: {
+            lambda_code_hook: {
+              lambda_arn: String,
+              code_hook_interface_version: String
+            }
+          }
+        }
+      ],
+      ?conversation_log_settings: {
+        text_log_settings: Array[
+          {
+            enabled: bool,
+            destination: {
+              cloud_watch: {
+                cloud_watch_log_group_arn: String,
+                log_prefix: String
+              }
+            },
+            selective_logging_enabled: bool
+          }
+        ],
+        audio_log_settings: Array[
+          {
+            enabled: untyped,
+            destination: {
+              s3_bucket: {
+                kms_key_arn: String,
+                s3_bucket_arn: String,
+                log_prefix: untyped
+              }
+            },
+            selective_logging_enabled: untyped
+          }
+        ]
+      },
+      ?sentiment_analysis_settings: {
+        detect_sentiment: bool
+      },
+      ?bot_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotAliasResponse
+
+    interface _CreateBotLocaleResponse
+      include Smithy::Client::_Response[Types::CreateBotLocaleResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_name: () -> String?
+      def locale_id: () -> String?
+      def description: () -> String?
+      def nlu_intent_confidence_threshold: () -> Float?
+      def voice_settings: () -> Types::VoiceSettings?
+      def bot_locale_status: () -> String?
+      def creation_date_time: () -> Time?
+      def generative_ai_settings: () -> Types::GenerativeAISettings?
+    end
+    def create_bot_locale: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?description: String,
+      ?nlu_intent_confidence_threshold: Float,
+      ?voice_settings: {
+        voice_id: String,
+        engine: String
+      },
+      ?generative_ai_settings: {
+        runtime_settings: {
+          slot_resolution_improvement: {
+            enabled: bool,
+            bedrock_model_specification: {
+              model_arn: String,
+              guardrail: {
+                identifier: String,
+                version: String
+              },
+              trace_status: String,
+              custom_prompt: String
+            }
+          },
+          nlu_improvement: {
+            enabled: untyped
+          }
+        },
+        buildtime_settings: {
+          descriptive_bot_builder: {
+            enabled: bool,
+            bedrock_model_specification: untyped
+          },
+          sample_utterance_generation: {
+            enabled: untyped,
+            bedrock_model_specification: untyped
+          }
+        }
+      }
+    ) -> _CreateBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotLocaleResponse
+
+    interface _CreateBotReplicaResponse
+      include Smithy::Client::_Response[Types::CreateBotReplicaResponse]
+      def bot_id: () -> String?
+      def replica_region: () -> String?
+      def source_region: () -> String?
+      def creation_date_time: () -> Time?
+      def bot_replica_status: () -> String?
+    end
+    def create_bot_replica: (
+      ?bot_id: String,
+      ?replica_region: String
+    ) -> _CreateBotReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotReplicaResponse
+
+    interface _CreateBotVersionResponse
+      include Smithy::Client::_Response[Types::CreateBotVersionResponse]
+      def bot_id: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_version_locale_specification: () -> Hash[String, Types::BotVersionLocaleDetails]?
+      def bot_status: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def create_bot_version: (
+      ?bot_id: String,
+      ?description: String,
+      ?bot_version_locale_specification: Hash[String,
+        {
+          source_bot_version: String
+        }
+      ]
+    ) -> _CreateBotVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotVersionResponse
+
+    interface _CreateExportResponse
+      include Smithy::Client::_Response[Types::CreateExportResponse]
+      def export_id: () -> String?
+      def resource_specification: () -> Types::ExportResourceSpecification?
+      def file_format: () -> String?
+      def export_status: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def create_export: (
+      ?resource_specification: {
+        bot_export_specification: {
+          bot_id: String,
+          bot_version: String
+        },
+        bot_locale_export_specification: {
+          bot_id: untyped,
+          bot_version: untyped,
+          locale_id: String
+        },
+        custom_vocabulary_export_specification: {
+          bot_id: untyped,
+          bot_version: untyped,
+          locale_id: untyped
+        },
+        test_set_export_specification: {
+          test_set_id: untyped
+        }
+      },
+      ?file_format: String,
+      ?file_password: String
+    ) -> _CreateExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExportResponse
+
+    interface _CreateIntentResponse
+      include Smithy::Client::_Response[Types::CreateIntentResponse]
+      def intent_id: () -> String?
+      def intent_name: () -> String?
+      def description: () -> String?
+      def parent_intent_signature: () -> String?
+      def sample_utterances: () -> Array[Types::SampleUtterance]?
+      def dialog_code_hook: () -> Types::DialogCodeHookSettings?
+      def fulfillment_code_hook: () -> Types::FulfillmentCodeHookSettings?
+      def intent_confirmation_setting: () -> Types::IntentConfirmationSetting?
+      def intent_closing_setting: () -> Types::IntentClosingSetting?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def initial_response_setting: () -> Types::InitialResponseSetting?
+      def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration?
+      def q_in_connect_intent_configuration: () -> Types::QInConnectIntentConfiguration?
+    end
+    def create_intent: (
+      ?intent_name: String,
+      ?description: String,
+      ?parent_intent_signature: String,
+      ?sample_utterances: Array[
+        {
+          utterance: String
+        }
+      ],
+      ?dialog_code_hook: {
+        enabled: bool
+      },
+      ?fulfillment_code_hook: {
+        enabled: bool,
+        post_fulfillment_status_specification: {
+          success_response: {
+            message_groups: Array[
+              {
+                message: {
+                  plain_text_message: {
+                    value: String
+                  },
+                  custom_payload: {
+                    value: String
+                  },
+                  ssml_message: {
+                    value: String
+                  },
+                  image_response_card: {
+                    title: String,
+                    subtitle: untyped,
+                    image_url: String,
+                    buttons: Array[
+                      {
+                        text: String,
+                        value: String
+                      }
+                    ]
+                  }
+                },
+                variations: Array[
+                  {
+                    plain_text_message: untyped,
+                    custom_payload: untyped,
+                    ssml_message: untyped,
+                    image_response_card: untyped
+                  }
+                ]
+              }
+            ],
+            allow_interrupt: bool
+          },
+          failure_response: untyped,
+          timeout_response: untyped,
+          success_next_step: {
+            dialog_action: {
+              type: String,
+              slot_to_elicit: String,
+              suppress_next_message: untyped
+            },
+            intent: {
+              name: untyped,
+              slots: Hash[String,
+                {
+                  shape: String,
+                  value: {
+                    interpreted_value: String
+                  },
+                  values: Array[
+                    {
+                      shape: untyped,
+                      value: untyped,
+                      values: untyped
+                    }
+                  ]
+                }
+              ]
+            },
+            session_attributes: Hash[String, String]
+          },
+          success_conditional: {
+            active: untyped,
+            conditional_branches: Array[
+              {
+                name: untyped,
+                condition: {
+                  expression_string: String
+                },
+                next_step: untyped,
+                response: untyped
+              }
+            ],
+            default_branch: {
+              next_step: untyped,
+              response: untyped
+            }
+          },
+          failure_next_step: untyped,
+          failure_conditional: untyped,
+          timeout_next_step: untyped,
+          timeout_conditional: untyped
+        },
+        fulfillment_updates_specification: {
+          active: untyped,
+          start_response: {
+            delay_in_seconds: Integer,
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          update_response: {
+            frequency_in_seconds: Integer,
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          timeout_in_seconds: Integer
+        },
+        active: untyped
+      },
+      ?intent_confirmation_setting: {
+        prompt_specification: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          max_retries: Integer,
+          allow_interrupt: bool,
+          message_selection_strategy: String,
+          prompt_attempts_specification: Hash[String,
+            {
+              allow_interrupt: untyped,
+              allowed_input_types: {
+                allow_audio_input: untyped,
+                allow_dtmf_input: untyped
+              },
+              audio_and_dtmf_input_specification: {
+                start_timeout_ms: Integer,
+                audio_specification: {
+                  max_length_ms: untyped,
+                  end_timeout_ms: untyped
+                },
+                dtmf_specification: {
+                  max_length: Integer,
+                  end_timeout_ms: untyped,
+                  deletion_character: String,
+                  end_character: untyped
+                }
+              },
+              text_input_specification: {
+                start_timeout_ms: untyped
+              }
+            }
+          ]
+        },
+        declination_response: {
+          message_groups: untyped,
+          allow_interrupt: untyped
+        },
+        active: untyped,
+        confirmation_response: untyped,
+        confirmation_next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        confirmation_conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        },
+        declination_next_step: untyped,
+        declination_conditional: untyped,
+        failure_response: untyped,
+        failure_next_step: untyped,
+        failure_conditional: untyped,
+        code_hook: {
+          enable_code_hook_invocation: untyped,
+          active: untyped,
+          invocation_label: untyped,
+          post_code_hook_specification: {
+            success_response: untyped,
+            success_next_step: untyped,
+            success_conditional: untyped,
+            failure_response: untyped,
+            failure_next_step: untyped,
+            failure_conditional: untyped,
+            timeout_response: untyped,
+            timeout_next_step: untyped,
+            timeout_conditional: untyped
+          }
+        },
+        elicitation_code_hook: {
+          enable_code_hook_invocation: untyped,
+          invocation_label: untyped
+        }
+      },
+      ?intent_closing_setting: {
+        closing_response: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          allow_interrupt: bool
+        },
+        active: untyped,
+        next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        }
+      },
+      ?input_contexts: Array[
+        {
+          name: String
+        }
+      ],
+      ?output_contexts: Array[
+        {
+          name: String,
+          time_to_live_in_seconds: Integer,
+          turns_to_live: Integer
+        }
+      ],
+      ?kendra_configuration: {
+        kendra_index: String,
+        query_filter_string_enabled: bool,
+        query_filter_string: String
+      },
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?initial_response_setting: {
+        initial_response: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          allow_interrupt: bool
+        },
+        next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        },
+        code_hook: {
+          enable_code_hook_invocation: untyped,
+          active: untyped,
+          invocation_label: untyped,
+          post_code_hook_specification: {
+            success_response: untyped,
+            success_next_step: untyped,
+            success_conditional: untyped,
+            failure_response: untyped,
+            failure_next_step: untyped,
+            failure_conditional: untyped,
+            timeout_response: untyped,
+            timeout_next_step: untyped,
+            timeout_conditional: untyped
+          }
+        }
+      },
+      ?qn_a_intent_configuration: {
+        data_source_configuration: {
+          opensearch_configuration: {
+            domain_endpoint: String,
+            index_name: String,
+            exact_response: bool,
+            exact_response_fields: {
+              question_field: String,
+              answer_field: String
+            },
+            include_fields: Array[String]
+          },
+          kendra_configuration: {
+            kendra_index: String,
+            query_filter_string_enabled: untyped,
+            query_filter_string: String,
+            exact_response: untyped
+          },
+          bedrock_knowledge_store_configuration: {
+            bedrock_knowledge_base_arn: String,
+            exact_response: untyped,
+            exact_response_fields: {
+              answer_field: untyped
+            }
+          }
+        },
+        bedrock_model_configuration: {
+          model_arn: String,
+          guardrail: {
+            identifier: String,
+            version: String
+          },
+          trace_status: String,
+          custom_prompt: String
+        }
+      },
+      ?q_in_connect_intent_configuration: {
+        q_in_connect_assistant_configuration: {
+          assistant_arn: String
+        }
+      }
+    ) -> _CreateIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntentResponse
+
+    interface _CreateResourcePolicyResponse
+      include Smithy::Client::_Response[Types::CreateResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def create_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _CreateResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourcePolicyResponse
+
+    interface _CreateResourcePolicyStatementResponse
+      include Smithy::Client::_Response[Types::CreateResourcePolicyStatementResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def create_resource_policy_statement: (
+      ?resource_arn: String,
+      ?statement_id: String,
+      ?effect: String,
+      ?principal: Array[
+        {
+          service: String,
+          arn: String
+        }
+      ],
+      ?action: Array[String],
+      ?condition: Hash[String,
+        Hash[String, String]
+      ],
+      ?expected_revision_id: String
+    ) -> _CreateResourcePolicyStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourcePolicyStatementResponse
+
+    interface _CreateSlotResponse
+      include Smithy::Client::_Response[Types::CreateSlotResponse]
+      def slot_id: () -> String?
+      def slot_name: () -> String?
+      def description: () -> String?
+      def slot_type_id: () -> String?
+      def value_elicitation_setting: () -> Types::SlotValueElicitationSetting?
+      def obfuscation_setting: () -> Types::ObfuscationSetting?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_id: () -> String?
+      def creation_date_time: () -> Time?
+      def multiple_values_setting: () -> Types::MultipleValuesSetting?
+      def sub_slot_setting: () -> Types::SubSlotSetting?
+    end
+    def create_slot: (
+      ?slot_name: String,
+      ?description: String,
+      ?slot_type_id: String,
+      ?value_elicitation_setting: {
+        default_value_specification: {
+          default_value_list: Array[
+            {
+              default_value: String
+            }
+          ]
+        },
+        slot_constraint: String,
+        prompt_specification: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          max_retries: Integer,
+          allow_interrupt: bool,
+          message_selection_strategy: String,
+          prompt_attempts_specification: Hash[String,
+            {
+              allow_interrupt: untyped,
+              allowed_input_types: {
+                allow_audio_input: untyped,
+                allow_dtmf_input: untyped
+              },
+              audio_and_dtmf_input_specification: {
+                start_timeout_ms: Integer,
+                audio_specification: {
+                  max_length_ms: untyped,
+                  end_timeout_ms: untyped
+                },
+                dtmf_specification: {
+                  max_length: Integer,
+                  end_timeout_ms: untyped,
+                  deletion_character: String,
+                  end_character: untyped
+                }
+              },
+              text_input_specification: {
+                start_timeout_ms: untyped
+              }
+            }
+          ]
+        },
+        sample_utterances: Array[
+          {
+            utterance: String
+          }
+        ],
+        wait_and_continue_specification: {
+          waiting_response: {
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          continue_response: untyped,
+          still_waiting_response: {
+            message_groups: untyped,
+            frequency_in_seconds: Integer,
+            timeout_in_seconds: Integer,
+            allow_interrupt: untyped
+          },
+          active: untyped
+        },
+        slot_capture_setting: {
+          capture_response: untyped,
+          capture_next_step: {
+            dialog_action: {
+              type: String,
+              slot_to_elicit: String,
+              suppress_next_message: untyped
+            },
+            intent: {
+              name: untyped,
+              slots: Hash[String,
+                {
+                  shape: String,
+                  value: {
+                    interpreted_value: String
+                  },
+                  values: Array[
+                    {
+                      shape: untyped,
+                      value: untyped,
+                      values: untyped
+                    }
+                  ]
+                }
+              ]
+            },
+            session_attributes: Hash[String, String]
+          },
+          capture_conditional: {
+            active: untyped,
+            conditional_branches: Array[
+              {
+                name: untyped,
+                condition: {
+                  expression_string: String
+                },
+                next_step: untyped,
+                response: untyped
+              }
+            ],
+            default_branch: {
+              next_step: untyped,
+              response: untyped
+            }
+          },
+          failure_response: untyped,
+          failure_next_step: untyped,
+          failure_conditional: untyped,
+          code_hook: {
+            enable_code_hook_invocation: untyped,
+            active: untyped,
+            invocation_label: untyped,
+            post_code_hook_specification: {
+              success_response: untyped,
+              success_next_step: untyped,
+              success_conditional: untyped,
+              failure_response: untyped,
+              failure_next_step: untyped,
+              failure_conditional: untyped,
+              timeout_response: untyped,
+              timeout_next_step: untyped,
+              timeout_conditional: untyped
+            }
+          },
+          elicitation_code_hook: {
+            enable_code_hook_invocation: untyped,
+            invocation_label: untyped
+          }
+        },
+        slot_resolution_setting: {
+          slot_resolution_strategy: String
+        }
+      },
+      ?obfuscation_setting: {
+        obfuscation_setting_type: String
+      },
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?intent_id: String,
+      ?multiple_values_setting: {
+        allow_multiple_values: bool
+      },
+      ?sub_slot_setting: {
+        expression: String,
+        slot_specifications: Hash[String,
+          {
+            slot_type_id: String,
+            value_elicitation_setting: {
+              default_value_specification: {
+                default_value_list: Array[
+                  {
+                    default_value: String
+                  }
+                ]
+              },
+              prompt_specification: {
+                message_groups: Array[
+                  {
+                    message: {
+                      plain_text_message: {
+                        value: String
+                      },
+                      custom_payload: {
+                        value: String
+                      },
+                      ssml_message: {
+                        value: String
+                      },
+                      image_response_card: {
+                        title: String,
+                        subtitle: untyped,
+                        image_url: String,
+                        buttons: Array[
+                          {
+                            text: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    variations: Array[
+                      {
+                        plain_text_message: untyped,
+                        custom_payload: untyped,
+                        ssml_message: untyped,
+                        image_response_card: untyped
+                      }
+                    ]
+                  }
+                ],
+                max_retries: Integer,
+                allow_interrupt: bool,
+                message_selection_strategy: String,
+                prompt_attempts_specification: Hash[String,
+                  {
+                    allow_interrupt: untyped,
+                    allowed_input_types: {
+                      allow_audio_input: untyped,
+                      allow_dtmf_input: untyped
+                    },
+                    audio_and_dtmf_input_specification: {
+                      start_timeout_ms: Integer,
+                      audio_specification: {
+                        max_length_ms: untyped,
+                        end_timeout_ms: untyped
+                      },
+                      dtmf_specification: {
+                        max_length: Integer,
+                        end_timeout_ms: untyped,
+                        deletion_character: String,
+                        end_character: untyped
+                      }
+                    },
+                    text_input_specification: {
+                      start_timeout_ms: untyped
+                    }
+                  }
+                ]
+              },
+              sample_utterances: Array[
+                {
+                  utterance: String
+                }
+              ],
+              wait_and_continue_specification: {
+                waiting_response: {
+                  message_groups: untyped,
+                  allow_interrupt: untyped
+                },
+                continue_response: untyped,
+                still_waiting_response: {
+                  message_groups: untyped,
+                  frequency_in_seconds: Integer,
+                  timeout_in_seconds: Integer,
+                  allow_interrupt: untyped
+                },
+                active: untyped
+              }
+            }
+          }
+        ]
+      }
+    ) -> _CreateSlotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSlotResponse
+
+    interface _CreateSlotTypeResponse
+      include Smithy::Client::_Response[Types::CreateSlotTypeResponse]
+      def slot_type_id: () -> String?
+      def slot_type_name: () -> String?
+      def description: () -> String?
+      def slot_type_values: () -> Array[Types::SlotTypeValue]?
+      def value_selection_setting: () -> Types::SlotValueSelectionSetting?
+      def parent_slot_type_signature: () -> String?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def external_source_setting: () -> Types::ExternalSourceSetting?
+      def composite_slot_type_setting: () -> Types::CompositeSlotTypeSetting?
+    end
+    def create_slot_type: (
+      ?slot_type_name: String,
+      ?description: String,
+      ?slot_type_values: Array[
+        {
+          sample_value: {
+            value: String
+          },
+          synonyms: Array[
+            {
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?value_selection_setting: {
+        resolution_strategy: String,
+        regex_filter: {
+          pattern: String
+        },
+        advanced_recognition_setting: {
+          audio_recognition_strategy: String
+        }
+      },
+      ?parent_slot_type_signature: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?external_source_setting: {
+        grammar_slot_type_setting: {
+          source: {
+            s3_bucket_name: String,
+            s3_object_key: String,
+            kms_key_arn: String
+          }
+        }
+      },
+      ?composite_slot_type_setting: {
+        sub_slots: Array[
+          {
+            name: String,
+            slot_type_id: String
+          }
+        ]
+      }
+    ) -> _CreateSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSlotTypeResponse
+
+    interface _CreateTestSetDiscrepancyReportResponse
+      include Smithy::Client::_Response[Types::CreateTestSetDiscrepancyReportResponse]
+      def test_set_discrepancy_report_id: () -> String?
+      def creation_date_time: () -> Time?
+      def test_set_id: () -> String?
+      def target: () -> Types::TestSetDiscrepancyReportResourceTarget?
+    end
+    def create_test_set_discrepancy_report: (
+      ?test_set_id: String,
+      ?target: {
+        bot_alias_target: {
+          bot_id: String,
+          bot_alias_id: String,
+          locale_id: String
+        }
+      }
+    ) -> _CreateTestSetDiscrepancyReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTestSetDiscrepancyReportResponse
+
+    interface _CreateUploadUrlResponse
+      include Smithy::Client::_Response[Types::CreateUploadUrlResponse]
+      def import_id: () -> String?
+      def upload_url: () -> String?
+    end
+    def create_upload_url: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUploadUrlResponse
+
+    interface _DeleteBotResponse
+      include Smithy::Client::_Response[Types::DeleteBotResponse]
+      def bot_id: () -> String?
+      def bot_status: () -> String?
+    end
+    def delete_bot: (
+      ?bot_id: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotResponse
+
+    interface _DeleteBotAliasResponse
+      include Smithy::Client::_Response[Types::DeleteBotAliasResponse]
+      def bot_alias_id: () -> String?
+      def bot_id: () -> String?
+      def bot_alias_status: () -> String?
+    end
+    def delete_bot_alias: (
+      ?bot_alias_id: String,
+      ?bot_id: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotAliasResponse
+
+    interface _DeleteBotLocaleResponse
+      include Smithy::Client::_Response[Types::DeleteBotLocaleResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_locale_status: () -> String?
+    end
+    def delete_bot_locale: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DeleteBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotLocaleResponse
+
+    interface _DeleteBotReplicaResponse
+      include Smithy::Client::_Response[Types::DeleteBotReplicaResponse]
+      def bot_id: () -> String?
+      def replica_region: () -> String?
+      def bot_replica_status: () -> String?
+    end
+    def delete_bot_replica: (
+      ?bot_id: String,
+      ?replica_region: String
+    ) -> _DeleteBotReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotReplicaResponse
+
+    interface _DeleteBotVersionResponse
+      include Smithy::Client::_Response[Types::DeleteBotVersionResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def bot_status: () -> String?
+    end
+    def delete_bot_version: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteBotVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotVersionResponse
+
+    interface _DeleteCustomVocabularyResponse
+      include Smithy::Client::_Response[Types::DeleteCustomVocabularyResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def custom_vocabulary_status: () -> String?
+    end
+    def delete_custom_vocabulary: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DeleteCustomVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomVocabularyResponse
+
+    interface _DeleteExportResponse
+      include Smithy::Client::_Response[Types::DeleteExportResponse]
+      def export_id: () -> String?
+      def export_status: () -> String?
+    end
+    def delete_export: (
+      ?export_id: String
+    ) -> _DeleteExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExportResponse
+
+    interface _DeleteImportResponse
+      include Smithy::Client::_Response[Types::DeleteImportResponse]
+      def import_id: () -> String?
+      def import_status: () -> String?
+    end
+    def delete_import: (
+      ?import_id: String
+    ) -> _DeleteImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImportResponse
+
+    interface _DeleteIntentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_intent: (
+      ?intent_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DeleteIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntentResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?expected_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteResourcePolicyStatementResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyStatementResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def delete_resource_policy_statement: (
+      ?resource_arn: String,
+      ?statement_id: String,
+      ?expected_revision_id: String
+    ) -> _DeleteResourcePolicyStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyStatementResponse
+
+    interface _DeleteSlotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_slot: (
+      ?slot_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?intent_id: String
+    ) -> _DeleteSlotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlotResponse
+
+    interface _DeleteSlotTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_slot_type: (
+      ?slot_type_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlotTypeResponse
+
+    interface _DeleteTestSetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_test_set: (
+      ?test_set_id: String
+    ) -> _DeleteTestSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTestSetResponse
+
+    interface _DeleteUtterancesResponse
+      include Smithy::Client::_Response[Types::DeleteUtterancesResponse]
+    end
+    def delete_utterances: (
+      ?bot_id: String,
+      ?locale_id: String,
+      ?session_id: String
+    ) -> _DeleteUtterancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUtterancesResponse
+
+    interface _DescribeBotResponse
+      include Smithy::Client::_Response[Types::DescribeBotResponse]
+      def bot_id: () -> String?
+      def bot_name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def data_privacy: () -> Types::DataPrivacy?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def bot_status: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def bot_type: () -> String?
+      def bot_members: () -> Array[Types::BotMember]?
+      def failure_reasons: () -> Array[String]?
+      def error_log_settings: () -> Types::ErrorLogSettings?
+    end
+    def describe_bot: (
+      ?bot_id: String
+    ) -> _DescribeBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotResponse
+
+    interface _DescribeBotAliasResponse
+      include Smithy::Client::_Response[Types::DescribeBotAliasResponse]
+      def bot_alias_id: () -> String?
+      def bot_alias_name: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_alias_locale_settings: () -> Hash[String, Types::BotAliasLocaleSettings]?
+      def conversation_log_settings: () -> Types::ConversationLogSettings?
+      def sentiment_analysis_settings: () -> Types::SentimentAnalysisSettings?
+      def bot_alias_history_events: () -> Array[Types::BotAliasHistoryEvent]?
+      def bot_alias_status: () -> String?
+      def bot_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def parent_bot_networks: () -> Array[Types::ParentBotNetwork]?
+    end
+    def describe_bot_alias: (
+      ?bot_alias_id: String,
+      ?bot_id: String
+    ) -> _DescribeBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotAliasResponse
+
+    interface _DescribeBotLocaleResponse
+      include Smithy::Client::_Response[Types::DescribeBotLocaleResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def locale_name: () -> String?
+      def description: () -> String?
+      def nlu_intent_confidence_threshold: () -> Float?
+      def voice_settings: () -> Types::VoiceSettings?
+      def intents_count: () -> Integer?
+      def slot_types_count: () -> Integer?
+      def bot_locale_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def last_build_submitted_date_time: () -> Time?
+      def bot_locale_history_events: () -> Array[Types::BotLocaleHistoryEvent]?
+      def recommended_actions: () -> Array[String]?
+      def generative_ai_settings: () -> Types::GenerativeAISettings?
+    end
+    def describe_bot_locale: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DescribeBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotLocaleResponse
+
+    interface _DescribeBotRecommendationResponse
+      include Smithy::Client::_Response[Types::DescribeBotRecommendationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_status: () -> String?
+      def bot_recommendation_id: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def transcript_source_setting: () -> Types::TranscriptSourceSetting?
+      def encryption_setting: () -> Types::EncryptionSetting?
+      def bot_recommendation_results: () -> Types::BotRecommendationResults?
+    end
+    def describe_bot_recommendation: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?bot_recommendation_id: String
+    ) -> _DescribeBotRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotRecommendationResponse
+
+    interface _DescribeBotReplicaResponse
+      include Smithy::Client::_Response[Types::DescribeBotReplicaResponse]
+      def bot_id: () -> String?
+      def replica_region: () -> String?
+      def source_region: () -> String?
+      def creation_date_time: () -> Time?
+      def bot_replica_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+    end
+    def describe_bot_replica: (
+      ?bot_id: String,
+      ?replica_region: String
+    ) -> _DescribeBotReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotReplicaResponse
+
+    interface _DescribeBotResourceGenerationResponse
+      include Smithy::Client::_Response[Types::DescribeBotResourceGenerationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def generation_id: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def generation_status: () -> String?
+      def generation_input_prompt: () -> String?
+      def generated_bot_locale_url: () -> String?
+      def creation_date_time: () -> Time?
+      def model_arn: () -> String?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_bot_resource_generation: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?generation_id: String
+    ) -> _DescribeBotResourceGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotResourceGenerationResponse
+
+    interface _DescribeBotVersionResponse
+      include Smithy::Client::_Response[Types::DescribeBotVersionResponse]
+      def bot_id: () -> String?
+      def bot_name: () -> String?
+      def bot_version: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def data_privacy: () -> Types::DataPrivacy?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def bot_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def creation_date_time: () -> Time?
+      def parent_bot_networks: () -> Array[Types::ParentBotNetwork]?
+      def bot_type: () -> String?
+      def bot_members: () -> Array[Types::BotMember]?
+    end
+    def describe_bot_version: (
+      ?bot_id: String,
+      ?bot_version: String
+    ) -> _DescribeBotVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotVersionResponse
+
+    interface _DescribeCustomVocabularyMetadataResponse
+      include Smithy::Client::_Response[Types::DescribeCustomVocabularyMetadataResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def custom_vocabulary_status: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_custom_vocabulary_metadata: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DescribeCustomVocabularyMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCustomVocabularyMetadataResponse
+
+    interface _DescribeExportResponse
+      include Smithy::Client::_Response[Types::DescribeExportResponse]
+      def export_id: () -> String?
+      def resource_specification: () -> Types::ExportResourceSpecification?
+      def file_format: () -> String?
+      def export_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def download_url: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_export: (
+      ?export_id: String
+    ) -> _DescribeExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExportResponse
+
+    interface _DescribeImportResponse
+      include Smithy::Client::_Response[Types::DescribeImportResponse]
+      def import_id: () -> String?
+      def resource_specification: () -> Types::ImportResourceSpecification?
+      def imported_resource_id: () -> String?
+      def imported_resource_name: () -> String?
+      def merge_strategy: () -> String?
+      def import_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_import: (
+      ?import_id: String
+    ) -> _DescribeImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImportResponse
+
+    interface _DescribeIntentResponse
+      include Smithy::Client::_Response[Types::DescribeIntentResponse]
+      def intent_id: () -> String?
+      def intent_name: () -> String?
+      def description: () -> String?
+      def parent_intent_signature: () -> String?
+      def sample_utterances: () -> Array[Types::SampleUtterance]?
+      def dialog_code_hook: () -> Types::DialogCodeHookSettings?
+      def fulfillment_code_hook: () -> Types::FulfillmentCodeHookSettings?
+      def slot_priorities: () -> Array[Types::SlotPriority]?
+      def intent_confirmation_setting: () -> Types::IntentConfirmationSetting?
+      def intent_closing_setting: () -> Types::IntentClosingSetting?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def initial_response_setting: () -> Types::InitialResponseSetting?
+      def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration?
+      def q_in_connect_intent_configuration: () -> Types::QInConnectIntentConfiguration?
+    end
+    def describe_intent: (
+      ?intent_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DescribeIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIntentResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def describe_resource_policy: (
+      ?resource_arn: String
+    ) -> _DescribeResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
+
+    interface _DescribeSlotResponse
+      include Smithy::Client::_Response[Types::DescribeSlotResponse]
+      def slot_id: () -> String?
+      def slot_name: () -> String?
+      def description: () -> String?
+      def slot_type_id: () -> String?
+      def value_elicitation_setting: () -> Types::SlotValueElicitationSetting?
+      def obfuscation_setting: () -> Types::ObfuscationSetting?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def multiple_values_setting: () -> Types::MultipleValuesSetting?
+      def sub_slot_setting: () -> Types::SubSlotSetting?
+    end
+    def describe_slot: (
+      ?slot_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?intent_id: String
+    ) -> _DescribeSlotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSlotResponse
+
+    interface _DescribeSlotTypeResponse
+      include Smithy::Client::_Response[Types::DescribeSlotTypeResponse]
+      def slot_type_id: () -> String?
+      def slot_type_name: () -> String?
+      def description: () -> String?
+      def slot_type_values: () -> Array[Types::SlotTypeValue]?
+      def value_selection_setting: () -> Types::SlotValueSelectionSetting?
+      def parent_slot_type_signature: () -> String?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def external_source_setting: () -> Types::ExternalSourceSetting?
+      def composite_slot_type_setting: () -> Types::CompositeSlotTypeSetting?
+    end
+    def describe_slot_type: (
+      ?slot_type_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _DescribeSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSlotTypeResponse
+
+    interface _DescribeTestExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeTestExecutionResponse]
+      def test_execution_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def test_execution_status: () -> String?
+      def test_set_id: () -> String?
+      def test_set_name: () -> String?
+      def target: () -> Types::TestExecutionTarget?
+      def api_mode: () -> String?
+      def test_execution_modality: () -> String?
+      def failure_reasons: () -> Array[String]?
+    end
+    def describe_test_execution: (
+      ?test_execution_id: String
+    ) -> _DescribeTestExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestExecutionResponse
+
+    interface _DescribeTestSetResponse
+      include Smithy::Client::_Response[Types::DescribeTestSetResponse]
+      def test_set_id: () -> String?
+      def test_set_name: () -> String?
+      def description: () -> String?
+      def modality: () -> String?
+      def status: () -> String?
+      def role_arn: () -> String?
+      def num_turns: () -> Integer?
+      def storage_location: () -> Types::TestSetStorageLocation?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_test_set: (
+      ?test_set_id: String
+    ) -> _DescribeTestSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestSetResponse
+
+    interface _DescribeTestSetDiscrepancyReportResponse
+      include Smithy::Client::_Response[Types::DescribeTestSetDiscrepancyReportResponse]
+      def test_set_discrepancy_report_id: () -> String?
+      def test_set_id: () -> String?
+      def creation_date_time: () -> Time?
+      def target: () -> Types::TestSetDiscrepancyReportResourceTarget?
+      def test_set_discrepancy_report_status: () -> String?
+      def last_updated_data_time: () -> Time?
+      def test_set_discrepancy_top_errors: () -> Types::TestSetDiscrepancyErrors?
+      def test_set_discrepancy_raw_output_url: () -> String?
+      def failure_reasons: () -> Array[String]?
+    end
+    def describe_test_set_discrepancy_report: (
+      ?test_set_discrepancy_report_id: String
+    ) -> _DescribeTestSetDiscrepancyReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestSetDiscrepancyReportResponse
+
+    interface _DescribeTestSetGenerationResponse
+      include Smithy::Client::_Response[Types::DescribeTestSetGenerationResponse]
+      def test_set_generation_id: () -> String?
+      def test_set_generation_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def test_set_id: () -> String?
+      def test_set_name: () -> String?
+      def description: () -> String?
+      def storage_location: () -> Types::TestSetStorageLocation?
+      def generation_data_source: () -> Types::TestSetGenerationDataSource?
+      def role_arn: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def describe_test_set_generation: (
+      ?test_set_generation_id: String
+    ) -> _DescribeTestSetGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestSetGenerationResponse
+
+    interface _GenerateBotElementResponse
+      include Smithy::Client::_Response[Types::GenerateBotElementResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_id: () -> String?
+      def sample_utterances: () -> Array[Types::SampleUtterance]?
+    end
+    def generate_bot_element: (
+      ?intent_id: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _GenerateBotElementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateBotElementResponse
+
+    interface _GetTestExecutionArtifactsUrlResponse
+      include Smithy::Client::_Response[Types::GetTestExecutionArtifactsUrlResponse]
+      def test_execution_id: () -> String?
+      def download_artifacts_url: () -> String?
+    end
+    def get_test_execution_artifacts_url: (
+      ?test_execution_id: String
+    ) -> _GetTestExecutionArtifactsUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestExecutionArtifactsUrlResponse
+
+    interface _ListAggregatedUtterancesResponse
+      include Smithy::Client::_Response[Types::ListAggregatedUtterancesResponse]
+      def bot_id: () -> String?
+      def bot_alias_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def aggregation_duration: () -> Types::UtteranceAggregationDuration?
+      def aggregation_window_start_time: () -> Time?
+      def aggregation_window_end_time: () -> Time?
+      def aggregation_last_refreshed_date_time: () -> Time?
+      def aggregated_utterances_summaries: () -> Array[Types::AggregatedUtterancesSummary]?
+      def next_token: () -> String?
+    end
+    def list_aggregated_utterances: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?aggregation_duration: {
+        relative_aggregation_duration: {
+          time_dimension: String,
+          time_value: Integer
+        }
+      },
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAggregatedUtterancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAggregatedUtterancesResponse
+
+    interface _ListBotAliasReplicasResponse
+      include Smithy::Client::_Response[Types::ListBotAliasReplicasResponse]
+      def bot_id: () -> String?
+      def source_region: () -> String?
+      def replica_region: () -> String?
+      def bot_alias_replica_summaries: () -> Array[Types::BotAliasReplicaSummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_alias_replicas: (
+      ?bot_id: String,
+      ?replica_region: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotAliasReplicasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotAliasReplicasResponse
+
+    interface _ListBotAliasesResponse
+      include Smithy::Client::_Response[Types::ListBotAliasesResponse]
+      def bot_alias_summaries: () -> Array[Types::BotAliasSummary]?
+      def next_token: () -> String?
+      def bot_id: () -> String?
+    end
+    def list_bot_aliases: (
+      ?bot_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotAliasesResponse
+
+    interface _ListBotLocalesResponse
+      include Smithy::Client::_Response[Types::ListBotLocalesResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def next_token: () -> String?
+      def bot_locale_summaries: () -> Array[Types::BotLocaleSummary]?
+    end
+    def list_bot_locales: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotLocalesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotLocalesResponse
+
+    interface _ListBotRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListBotRecommendationsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_summaries: () -> Array[Types::BotRecommendationSummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_recommendations: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotRecommendationsResponse
+
+    interface _ListBotReplicasResponse
+      include Smithy::Client::_Response[Types::ListBotReplicasResponse]
+      def bot_id: () -> String?
+      def source_region: () -> String?
+      def bot_replica_summaries: () -> Array[Types::BotReplicaSummary]?
+    end
+    def list_bot_replicas: (
+      ?bot_id: String
+    ) -> _ListBotReplicasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotReplicasResponse
+
+    interface _ListBotResourceGenerationsResponse
+      include Smithy::Client::_Response[Types::ListBotResourceGenerationsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def generation_summaries: () -> Array[Types::GenerationSummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_resource_generations: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotResourceGenerationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotResourceGenerationsResponse
+
+    interface _ListBotVersionReplicasResponse
+      include Smithy::Client::_Response[Types::ListBotVersionReplicasResponse]
+      def bot_id: () -> String?
+      def source_region: () -> String?
+      def replica_region: () -> String?
+      def bot_version_replica_summaries: () -> Array[Types::BotVersionReplicaSummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_version_replicas: (
+      ?bot_id: String,
+      ?replica_region: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      }
+    ) -> _ListBotVersionReplicasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotVersionReplicasResponse
+
+    interface _ListBotVersionsResponse
+      include Smithy::Client::_Response[Types::ListBotVersionsResponse]
+      def bot_id: () -> String?
+      def bot_version_summaries: () -> Array[Types::BotVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_versions: (
+      ?bot_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotVersionsResponse
+
+    interface _ListBotsResponse
+      include Smithy::Client::_Response[Types::ListBotsResponse]
+      def bot_summaries: () -> Array[Types::BotSummary]?
+      def next_token: () -> String?
+    end
+    def list_bots: (
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotsResponse
+
+    interface _ListBuiltInIntentsResponse
+      include Smithy::Client::_Response[Types::ListBuiltInIntentsResponse]
+      def built_in_intent_summaries: () -> Array[Types::BuiltInIntentSummary]?
+      def next_token: () -> String?
+      def locale_id: () -> String?
+    end
+    def list_built_in_intents: (
+      ?locale_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBuiltInIntentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuiltInIntentsResponse
+
+    interface _ListBuiltInSlotTypesResponse
+      include Smithy::Client::_Response[Types::ListBuiltInSlotTypesResponse]
+      def built_in_slot_type_summaries: () -> Array[Types::BuiltInSlotTypeSummary]?
+      def next_token: () -> String?
+      def locale_id: () -> String?
+    end
+    def list_built_in_slot_types: (
+      ?locale_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBuiltInSlotTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBuiltInSlotTypesResponse
+
+    interface _ListCustomVocabularyItemsResponse
+      include Smithy::Client::_Response[Types::ListCustomVocabularyItemsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def custom_vocabulary_items: () -> Array[Types::CustomVocabularyItem]?
+      def next_token: () -> String?
+    end
+    def list_custom_vocabulary_items: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomVocabularyItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomVocabularyItemsResponse
+
+    interface _ListExportsResponse
+      include Smithy::Client::_Response[Types::ListExportsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def export_summaries: () -> Array[Types::ExportSummary]?
+      def next_token: () -> String?
+      def locale_id: () -> String?
+    end
+    def list_exports: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?locale_id: String
+    ) -> _ListExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportsResponse
+
+    interface _ListImportsResponse
+      include Smithy::Client::_Response[Types::ListImportsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def import_summaries: () -> Array[Types::ImportSummary]?
+      def next_token: () -> String?
+      def locale_id: () -> String?
+    end
+    def list_imports: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?locale_id: String
+    ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
+
+    interface _ListIntentMetricsResponse
+      include Smithy::Client::_Response[Types::ListIntentMetricsResponse]
+      def bot_id: () -> String?
+      def results: () -> Array[Types::AnalyticsIntentResult]?
+      def next_token: () -> String?
+    end
+    def list_intent_metrics: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?metrics: Array[
+        {
+          name: String,
+          statistic: String,
+          order: String
+        }
+      ],
+      ?bin_by: Array[
+        {
+          name: String,
+          interval: String,
+          order: String
+        }
+      ],
+      ?group_by: Array[
+        {
+          name: String
+        }
+      ],
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIntentMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntentMetricsResponse
+
+    interface _ListIntentPathsResponse
+      include Smithy::Client::_Response[Types::ListIntentPathsResponse]
+      def node_summaries: () -> Array[Types::AnalyticsIntentNodeSummary]?
+    end
+    def list_intent_paths: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?intent_path: String,
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListIntentPathsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntentPathsResponse
+
+    interface _ListIntentStageMetricsResponse
+      include Smithy::Client::_Response[Types::ListIntentStageMetricsResponse]
+      def bot_id: () -> String?
+      def results: () -> Array[Types::AnalyticsIntentStageResult]?
+      def next_token: () -> String?
+    end
+    def list_intent_stage_metrics: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?metrics: Array[
+        {
+          name: String,
+          statistic: String,
+          order: String
+        }
+      ],
+      ?bin_by: Array[
+        {
+          name: String,
+          interval: String,
+          order: String
+        }
+      ],
+      ?group_by: Array[
+        {
+          name: String
+        }
+      ],
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIntentStageMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntentStageMetricsResponse
+
+    interface _ListIntentsResponse
+      include Smithy::Client::_Response[Types::ListIntentsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_summaries: () -> Array[Types::IntentSummary]?
+      def next_token: () -> String?
+    end
+    def list_intents: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIntentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntentsResponse
+
+    interface _ListRecommendedIntentsResponse
+      include Smithy::Client::_Response[Types::ListRecommendedIntentsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_id: () -> String?
+      def summary_list: () -> Array[Types::RecommendedIntentSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommended_intents: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?bot_recommendation_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRecommendedIntentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendedIntentsResponse
+
+    interface _ListSessionAnalyticsDataResponse
+      include Smithy::Client::_Response[Types::ListSessionAnalyticsDataResponse]
+      def bot_id: () -> String?
+      def next_token: () -> String?
+      def sessions: () -> Array[Types::SessionSpecification]?
+    end
+    def list_session_analytics_data: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?sort_by: {
+        name: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSessionAnalyticsDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionAnalyticsDataResponse
+
+    interface _ListSessionMetricsResponse
+      include Smithy::Client::_Response[Types::ListSessionMetricsResponse]
+      def bot_id: () -> String?
+      def results: () -> Array[Types::AnalyticsSessionResult]?
+      def next_token: () -> String?
+    end
+    def list_session_metrics: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?metrics: Array[
+        {
+          name: String,
+          statistic: String,
+          order: String
+        }
+      ],
+      ?bin_by: Array[
+        {
+          name: String,
+          interval: String,
+          order: String
+        }
+      ],
+      ?group_by: Array[
+        {
+          name: String
+        }
+      ],
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSessionMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionMetricsResponse
+
+    interface _ListSlotTypesResponse
+      include Smithy::Client::_Response[Types::ListSlotTypesResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def slot_type_summaries: () -> Array[Types::SlotTypeSummary]?
+      def next_token: () -> String?
+    end
+    def list_slot_types: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSlotTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSlotTypesResponse
+
+    interface _ListSlotsResponse
+      include Smithy::Client::_Response[Types::ListSlotsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_id: () -> String?
+      def slot_summaries: () -> Array[Types::SlotSummary]?
+      def next_token: () -> String?
+    end
+    def list_slots: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?intent_id: String,
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSlotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSlotsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTestExecutionResultItemsResponse
+      include Smithy::Client::_Response[Types::ListTestExecutionResultItemsResponse]
+      def test_execution_results: () -> Types::TestExecutionResultItems?
+      def next_token: () -> String?
+    end
+    def list_test_execution_result_items: (
+      ?test_execution_id: String,
+      ?result_filter_by: {
+        result_type_filter: String,
+        conversation_level_test_results_filter_by: {
+          end_to_end_result: String
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestExecutionResultItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestExecutionResultItemsResponse
+
+    interface _ListTestExecutionsResponse
+      include Smithy::Client::_Response[Types::ListTestExecutionsResponse]
+      def test_executions: () -> Array[Types::TestExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_executions: (
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestExecutionsResponse
+
+    interface _ListTestSetRecordsResponse
+      include Smithy::Client::_Response[Types::ListTestSetRecordsResponse]
+      def test_set_records: () -> Array[Types::TestSetTurnRecord]?
+      def next_token: () -> String?
+    end
+    def list_test_set_records: (
+      ?test_set_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestSetRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestSetRecordsResponse
+
+    interface _ListTestSetsResponse
+      include Smithy::Client::_Response[Types::ListTestSetsResponse]
+      def test_sets: () -> Array[Types::TestSetSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_sets: (
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestSetsResponse
+
+    interface _ListUtteranceAnalyticsDataResponse
+      include Smithy::Client::_Response[Types::ListUtteranceAnalyticsDataResponse]
+      def bot_id: () -> String?
+      def next_token: () -> String?
+      def utterances: () -> Array[Types::UtteranceSpecification]?
+    end
+    def list_utterance_analytics_data: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?sort_by: {
+        name: String,
+        order: String
+      },
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUtteranceAnalyticsDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUtteranceAnalyticsDataResponse
+
+    interface _ListUtteranceMetricsResponse
+      include Smithy::Client::_Response[Types::ListUtteranceMetricsResponse]
+      def bot_id: () -> String?
+      def results: () -> Array[Types::AnalyticsUtteranceResult]?
+      def next_token: () -> String?
+    end
+    def list_utterance_metrics: (
+      ?bot_id: String,
+      ?start_date_time: Time,
+      ?end_date_time: Time,
+      ?metrics: Array[
+        {
+          name: String,
+          statistic: String,
+          order: String
+        }
+      ],
+      ?bin_by: Array[
+        {
+          name: String,
+          interval: String,
+          order: String
+        }
+      ],
+      ?group_by: Array[
+        {
+          name: String
+        }
+      ],
+      ?attributes: Array[
+        {
+          name: String
+        }
+      ],
+      ?filters: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUtteranceMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUtteranceMetricsResponse
+
+    interface _SearchAssociatedTranscriptsResponse
+      include Smithy::Client::_Response[Types::SearchAssociatedTranscriptsResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_id: () -> String?
+      def next_index: () -> Integer?
+      def associated_transcripts: () -> Array[Types::AssociatedTranscript]?
+      def total_results: () -> Integer?
+    end
+    def search_associated_transcripts: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?bot_recommendation_id: String,
+      ?search_order: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_index: Integer
+    ) -> _SearchAssociatedTranscriptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAssociatedTranscriptsResponse
+
+    interface _StartBotRecommendationResponse
+      include Smithy::Client::_Response[Types::StartBotRecommendationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_status: () -> String?
+      def bot_recommendation_id: () -> String?
+      def creation_date_time: () -> Time?
+      def transcript_source_setting: () -> Types::TranscriptSourceSetting?
+      def encryption_setting: () -> Types::EncryptionSetting?
+    end
+    def start_bot_recommendation: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?transcript_source_setting: {
+        s3_bucket_transcript_source: {
+          s3_bucket_name: String,
+          path_format: {
+            object_prefixes: Array[String]
+          },
+          transcript_format: String,
+          transcript_filter: {
+            lex_transcript_filter: {
+              date_range_filter: {
+                start_date_time: Time,
+                end_date_time: untyped
+              }
+            }
+          },
+          kms_key_arn: String
+        }
+      },
+      ?encryption_setting: {
+        kms_key_arn: String,
+        bot_locale_export_password: String,
+        associated_transcripts_password: untyped
+      }
+    ) -> _StartBotRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBotRecommendationResponse
+
+    interface _StartBotResourceGenerationResponse
+      include Smithy::Client::_Response[Types::StartBotResourceGenerationResponse]
+      def generation_input_prompt: () -> String?
+      def generation_id: () -> String?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def generation_status: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def start_bot_resource_generation: (
+      ?generation_input_prompt: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String
+    ) -> _StartBotResourceGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBotResourceGenerationResponse
+
+    interface _StartImportResponse
+      include Smithy::Client::_Response[Types::StartImportResponse]
+      def import_id: () -> String?
+      def resource_specification: () -> Types::ImportResourceSpecification?
+      def merge_strategy: () -> String?
+      def import_status: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def start_import: (
+      ?import_id: String,
+      ?resource_specification: {
+        bot_import_specification: {
+          bot_name: String,
+          role_arn: String,
+          data_privacy: {
+            child_directed: bool
+          },
+          error_log_settings: {
+            enabled: bool
+          },
+          idle_session_ttl_in_seconds: Integer,
+          bot_tags: Hash[String, String],
+          test_bot_alias_tags: untyped
+        },
+        bot_locale_import_specification: {
+          bot_id: String,
+          bot_version: String,
+          locale_id: String,
+          nlu_intent_confidence_threshold: Float,
+          voice_settings: {
+            voice_id: String,
+            engine: String
+          }
+        },
+        custom_vocabulary_import_specification: {
+          bot_id: untyped,
+          bot_version: untyped,
+          locale_id: untyped
+        },
+        test_set_import_resource_specification: {
+          test_set_name: untyped,
+          description: String,
+          role_arn: untyped,
+          storage_location: {
+            s3_bucket_name: String,
+            s3_path: String,
+            kms_key_arn: String
+          },
+          import_input_location: {
+            s3_bucket_name: untyped,
+            s3_path: untyped
+          },
+          modality: String,
+          test_set_tags: untyped
+        }
+      },
+      ?merge_strategy: String,
+      ?file_password: String
+    ) -> _StartImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportResponse
+
+    interface _StartTestExecutionResponse
+      include Smithy::Client::_Response[Types::StartTestExecutionResponse]
+      def test_execution_id: () -> String?
+      def creation_date_time: () -> Time?
+      def test_set_id: () -> String?
+      def target: () -> Types::TestExecutionTarget?
+      def api_mode: () -> String?
+      def test_execution_modality: () -> String?
+    end
+    def start_test_execution: (
+      ?test_set_id: String,
+      ?target: {
+        bot_alias_target: {
+          bot_id: String,
+          bot_alias_id: String,
+          locale_id: String
+        }
+      },
+      ?api_mode: String,
+      ?test_execution_modality: String
+    ) -> _StartTestExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestExecutionResponse
+
+    interface _StartTestSetGenerationResponse
+      include Smithy::Client::_Response[Types::StartTestSetGenerationResponse]
+      def test_set_generation_id: () -> String?
+      def creation_date_time: () -> Time?
+      def test_set_generation_status: () -> String?
+      def test_set_name: () -> String?
+      def description: () -> String?
+      def storage_location: () -> Types::TestSetStorageLocation?
+      def generation_data_source: () -> Types::TestSetGenerationDataSource?
+      def role_arn: () -> String?
+      def test_set_tags: () -> Hash[String, String]?
+    end
+    def start_test_set_generation: (
+      ?test_set_name: String,
+      ?description: String,
+      ?storage_location: {
+        s3_bucket_name: String,
+        s3_path: String,
+        kms_key_arn: String
+      },
+      ?generation_data_source: {
+        conversation_logs_data_source: {
+          bot_id: String,
+          bot_alias_id: String,
+          locale_id: String,
+          filter: {
+            start_time: Time,
+            end_time: untyped,
+            input_mode: String
+          }
+        }
+      },
+      ?role_arn: String,
+      ?test_set_tags: Hash[String, String]
+    ) -> _StartTestSetGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestSetGenerationResponse
+
+    interface _StopBotRecommendationResponse
+      include Smithy::Client::_Response[Types::StopBotRecommendationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_status: () -> String?
+      def bot_recommendation_id: () -> String?
+    end
+    def stop_bot_recommendation: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?bot_recommendation_id: String
+    ) -> _StopBotRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBotRecommendationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBotResponse
+      include Smithy::Client::_Response[Types::UpdateBotResponse]
+      def bot_id: () -> String?
+      def bot_name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def data_privacy: () -> Types::DataPrivacy?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def bot_status: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def bot_type: () -> String?
+      def bot_members: () -> Array[Types::BotMember]?
+      def error_log_settings: () -> Types::ErrorLogSettings?
+    end
+    def update_bot: (
+      ?bot_id: String,
+      ?bot_name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?data_privacy: {
+        child_directed: bool
+      },
+      ?idle_session_ttl_in_seconds: Integer,
+      ?bot_type: String,
+      ?bot_members: Array[
+        {
+          bot_member_id: String,
+          bot_member_name: String,
+          bot_member_alias_id: String,
+          bot_member_alias_name: String,
+          bot_member_version: String
+        }
+      ],
+      ?error_log_settings: {
+        enabled: bool
+      }
+    ) -> _UpdateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotResponse
+
+    interface _UpdateBotAliasResponse
+      include Smithy::Client::_Response[Types::UpdateBotAliasResponse]
+      def bot_alias_id: () -> String?
+      def bot_alias_name: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_alias_locale_settings: () -> Hash[String, Types::BotAliasLocaleSettings]?
+      def conversation_log_settings: () -> Types::ConversationLogSettings?
+      def sentiment_analysis_settings: () -> Types::SentimentAnalysisSettings?
+      def bot_alias_status: () -> String?
+      def bot_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def update_bot_alias: (
+      ?bot_alias_id: String,
+      ?bot_alias_name: String,
+      ?description: String,
+      ?bot_version: String,
+      ?bot_alias_locale_settings: Hash[String,
+        {
+          enabled: bool,
+          code_hook_specification: {
+            lambda_code_hook: {
+              lambda_arn: String,
+              code_hook_interface_version: String
+            }
+          }
+        }
+      ],
+      ?conversation_log_settings: {
+        text_log_settings: Array[
+          {
+            enabled: bool,
+            destination: {
+              cloud_watch: {
+                cloud_watch_log_group_arn: String,
+                log_prefix: String
+              }
+            },
+            selective_logging_enabled: bool
+          }
+        ],
+        audio_log_settings: Array[
+          {
+            enabled: untyped,
+            destination: {
+              s3_bucket: {
+                kms_key_arn: String,
+                s3_bucket_arn: String,
+                log_prefix: untyped
+              }
+            },
+            selective_logging_enabled: untyped
+          }
+        ]
+      },
+      ?sentiment_analysis_settings: {
+        detect_sentiment: bool
+      },
+      ?bot_id: String
+    ) -> _UpdateBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotAliasResponse
+
+    interface _UpdateBotLocaleResponse
+      include Smithy::Client::_Response[Types::UpdateBotLocaleResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def locale_name: () -> String?
+      def description: () -> String?
+      def nlu_intent_confidence_threshold: () -> Float?
+      def voice_settings: () -> Types::VoiceSettings?
+      def bot_locale_status: () -> String?
+      def failure_reasons: () -> Array[String]?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def recommended_actions: () -> Array[String]?
+      def generative_ai_settings: () -> Types::GenerativeAISettings?
+    end
+    def update_bot_locale: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?description: String,
+      ?nlu_intent_confidence_threshold: Float,
+      ?voice_settings: {
+        voice_id: String,
+        engine: String
+      },
+      ?generative_ai_settings: {
+        runtime_settings: {
+          slot_resolution_improvement: {
+            enabled: bool,
+            bedrock_model_specification: {
+              model_arn: String,
+              guardrail: {
+                identifier: String,
+                version: String
+              },
+              trace_status: String,
+              custom_prompt: String
+            }
+          },
+          nlu_improvement: {
+            enabled: untyped
+          }
+        },
+        buildtime_settings: {
+          descriptive_bot_builder: {
+            enabled: bool,
+            bedrock_model_specification: untyped
+          },
+          sample_utterance_generation: {
+            enabled: untyped,
+            bedrock_model_specification: untyped
+          }
+        }
+      }
+    ) -> _UpdateBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotLocaleResponse
+
+    interface _UpdateBotRecommendationResponse
+      include Smithy::Client::_Response[Types::UpdateBotRecommendationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_recommendation_status: () -> String?
+      def bot_recommendation_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def transcript_source_setting: () -> Types::TranscriptSourceSetting?
+      def encryption_setting: () -> Types::EncryptionSetting?
+    end
+    def update_bot_recommendation: (
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?bot_recommendation_id: String,
+      ?encryption_setting: {
+        kms_key_arn: String,
+        bot_locale_export_password: String,
+        associated_transcripts_password: untyped
+      }
+    ) -> _UpdateBotRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotRecommendationResponse
+
+    interface _UpdateExportResponse
+      include Smithy::Client::_Response[Types::UpdateExportResponse]
+      def export_id: () -> String?
+      def resource_specification: () -> Types::ExportResourceSpecification?
+      def file_format: () -> String?
+      def export_status: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def update_export: (
+      ?export_id: String,
+      ?file_password: String
+    ) -> _UpdateExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExportResponse
+
+    interface _UpdateIntentResponse
+      include Smithy::Client::_Response[Types::UpdateIntentResponse]
+      def intent_id: () -> String?
+      def intent_name: () -> String?
+      def description: () -> String?
+      def parent_intent_signature: () -> String?
+      def sample_utterances: () -> Array[Types::SampleUtterance]?
+      def dialog_code_hook: () -> Types::DialogCodeHookSettings?
+      def fulfillment_code_hook: () -> Types::FulfillmentCodeHookSettings?
+      def slot_priorities: () -> Array[Types::SlotPriority]?
+      def intent_confirmation_setting: () -> Types::IntentConfirmationSetting?
+      def intent_closing_setting: () -> Types::IntentClosingSetting?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def initial_response_setting: () -> Types::InitialResponseSetting?
+      def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration?
+      def q_in_connect_intent_configuration: () -> Types::QInConnectIntentConfiguration?
+    end
+    def update_intent: (
+      ?intent_id: String,
+      ?intent_name: String,
+      ?description: String,
+      ?parent_intent_signature: String,
+      ?sample_utterances: Array[
+        {
+          utterance: String
+        }
+      ],
+      ?dialog_code_hook: {
+        enabled: bool
+      },
+      ?fulfillment_code_hook: {
+        enabled: bool,
+        post_fulfillment_status_specification: {
+          success_response: {
+            message_groups: Array[
+              {
+                message: {
+                  plain_text_message: {
+                    value: String
+                  },
+                  custom_payload: {
+                    value: String
+                  },
+                  ssml_message: {
+                    value: String
+                  },
+                  image_response_card: {
+                    title: String,
+                    subtitle: untyped,
+                    image_url: String,
+                    buttons: Array[
+                      {
+                        text: String,
+                        value: String
+                      }
+                    ]
+                  }
+                },
+                variations: Array[
+                  {
+                    plain_text_message: untyped,
+                    custom_payload: untyped,
+                    ssml_message: untyped,
+                    image_response_card: untyped
+                  }
+                ]
+              }
+            ],
+            allow_interrupt: bool
+          },
+          failure_response: untyped,
+          timeout_response: untyped,
+          success_next_step: {
+            dialog_action: {
+              type: String,
+              slot_to_elicit: String,
+              suppress_next_message: untyped
+            },
+            intent: {
+              name: untyped,
+              slots: Hash[String,
+                {
+                  shape: String,
+                  value: {
+                    interpreted_value: String
+                  },
+                  values: Array[
+                    {
+                      shape: untyped,
+                      value: untyped,
+                      values: untyped
+                    }
+                  ]
+                }
+              ]
+            },
+            session_attributes: Hash[String, String]
+          },
+          success_conditional: {
+            active: untyped,
+            conditional_branches: Array[
+              {
+                name: untyped,
+                condition: {
+                  expression_string: String
+                },
+                next_step: untyped,
+                response: untyped
+              }
+            ],
+            default_branch: {
+              next_step: untyped,
+              response: untyped
+            }
+          },
+          failure_next_step: untyped,
+          failure_conditional: untyped,
+          timeout_next_step: untyped,
+          timeout_conditional: untyped
+        },
+        fulfillment_updates_specification: {
+          active: untyped,
+          start_response: {
+            delay_in_seconds: Integer,
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          update_response: {
+            frequency_in_seconds: Integer,
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          timeout_in_seconds: Integer
+        },
+        active: untyped
+      },
+      ?slot_priorities: Array[
+        {
+          priority: Integer,
+          slot_id: String
+        }
+      ],
+      ?intent_confirmation_setting: {
+        prompt_specification: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          max_retries: Integer,
+          allow_interrupt: bool,
+          message_selection_strategy: String,
+          prompt_attempts_specification: Hash[String,
+            {
+              allow_interrupt: untyped,
+              allowed_input_types: {
+                allow_audio_input: untyped,
+                allow_dtmf_input: untyped
+              },
+              audio_and_dtmf_input_specification: {
+                start_timeout_ms: Integer,
+                audio_specification: {
+                  max_length_ms: untyped,
+                  end_timeout_ms: untyped
+                },
+                dtmf_specification: {
+                  max_length: Integer,
+                  end_timeout_ms: untyped,
+                  deletion_character: String,
+                  end_character: untyped
+                }
+              },
+              text_input_specification: {
+                start_timeout_ms: untyped
+              }
+            }
+          ]
+        },
+        declination_response: {
+          message_groups: untyped,
+          allow_interrupt: untyped
+        },
+        active: untyped,
+        confirmation_response: untyped,
+        confirmation_next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        confirmation_conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        },
+        declination_next_step: untyped,
+        declination_conditional: untyped,
+        failure_response: untyped,
+        failure_next_step: untyped,
+        failure_conditional: untyped,
+        code_hook: {
+          enable_code_hook_invocation: untyped,
+          active: untyped,
+          invocation_label: untyped,
+          post_code_hook_specification: {
+            success_response: untyped,
+            success_next_step: untyped,
+            success_conditional: untyped,
+            failure_response: untyped,
+            failure_next_step: untyped,
+            failure_conditional: untyped,
+            timeout_response: untyped,
+            timeout_next_step: untyped,
+            timeout_conditional: untyped
+          }
+        },
+        elicitation_code_hook: {
+          enable_code_hook_invocation: untyped,
+          invocation_label: untyped
+        }
+      },
+      ?intent_closing_setting: {
+        closing_response: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          allow_interrupt: bool
+        },
+        active: untyped,
+        next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        }
+      },
+      ?input_contexts: Array[
+        {
+          name: String
+        }
+      ],
+      ?output_contexts: Array[
+        {
+          name: String,
+          time_to_live_in_seconds: Integer,
+          turns_to_live: Integer
+        }
+      ],
+      ?kendra_configuration: {
+        kendra_index: String,
+        query_filter_string_enabled: bool,
+        query_filter_string: String
+      },
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?initial_response_setting: {
+        initial_response: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          allow_interrupt: bool
+        },
+        next_step: {
+          dialog_action: {
+            type: String,
+            slot_to_elicit: String,
+            suppress_next_message: untyped
+          },
+          intent: {
+            name: untyped,
+            slots: Hash[String,
+              {
+                shape: String,
+                value: {
+                  interpreted_value: String
+                },
+                values: Array[
+                  {
+                    shape: untyped,
+                    value: untyped,
+                    values: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          session_attributes: Hash[String, String]
+        },
+        conditional: {
+          active: untyped,
+          conditional_branches: Array[
+            {
+              name: untyped,
+              condition: {
+                expression_string: String
+              },
+              next_step: untyped,
+              response: untyped
+            }
+          ],
+          default_branch: {
+            next_step: untyped,
+            response: untyped
+          }
+        },
+        code_hook: {
+          enable_code_hook_invocation: untyped,
+          active: untyped,
+          invocation_label: untyped,
+          post_code_hook_specification: {
+            success_response: untyped,
+            success_next_step: untyped,
+            success_conditional: untyped,
+            failure_response: untyped,
+            failure_next_step: untyped,
+            failure_conditional: untyped,
+            timeout_response: untyped,
+            timeout_next_step: untyped,
+            timeout_conditional: untyped
+          }
+        }
+      },
+      ?qn_a_intent_configuration: {
+        data_source_configuration: {
+          opensearch_configuration: {
+            domain_endpoint: String,
+            index_name: String,
+            exact_response: bool,
+            exact_response_fields: {
+              question_field: String,
+              answer_field: String
+            },
+            include_fields: Array[String]
+          },
+          kendra_configuration: {
+            kendra_index: String,
+            query_filter_string_enabled: untyped,
+            query_filter_string: String,
+            exact_response: untyped
+          },
+          bedrock_knowledge_store_configuration: {
+            bedrock_knowledge_base_arn: String,
+            exact_response: untyped,
+            exact_response_fields: {
+              answer_field: untyped
+            }
+          }
+        },
+        bedrock_model_configuration: {
+          model_arn: String,
+          guardrail: {
+            identifier: String,
+            version: String
+          },
+          trace_status: String,
+          custom_prompt: String
+        }
+      },
+      ?q_in_connect_intent_configuration: {
+        q_in_connect_assistant_configuration: {
+          assistant_arn: String
+        }
+      }
+    ) -> _UpdateIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntentResponse
+
+    interface _UpdateResourcePolicyResponse
+      include Smithy::Client::_Response[Types::UpdateResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def update_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?expected_revision_id: String
+    ) -> _UpdateResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourcePolicyResponse
+
+    interface _UpdateSlotResponse
+      include Smithy::Client::_Response[Types::UpdateSlotResponse]
+      def slot_id: () -> String?
+      def slot_name: () -> String?
+      def description: () -> String?
+      def slot_type_id: () -> String?
+      def value_elicitation_setting: () -> Types::SlotValueElicitationSetting?
+      def obfuscation_setting: () -> Types::ObfuscationSetting?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def intent_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def multiple_values_setting: () -> Types::MultipleValuesSetting?
+      def sub_slot_setting: () -> Types::SubSlotSetting?
+    end
+    def update_slot: (
+      ?slot_id: String,
+      ?slot_name: String,
+      ?description: String,
+      ?slot_type_id: String,
+      ?value_elicitation_setting: {
+        default_value_specification: {
+          default_value_list: Array[
+            {
+              default_value: String
+            }
+          ]
+        },
+        slot_constraint: String,
+        prompt_specification: {
+          message_groups: Array[
+            {
+              message: {
+                plain_text_message: {
+                  value: String
+                },
+                custom_payload: {
+                  value: String
+                },
+                ssml_message: {
+                  value: String
+                },
+                image_response_card: {
+                  title: String,
+                  subtitle: untyped,
+                  image_url: String,
+                  buttons: Array[
+                    {
+                      text: String,
+                      value: String
+                    }
+                  ]
+                }
+              },
+              variations: Array[
+                {
+                  plain_text_message: untyped,
+                  custom_payload: untyped,
+                  ssml_message: untyped,
+                  image_response_card: untyped
+                }
+              ]
+            }
+          ],
+          max_retries: Integer,
+          allow_interrupt: bool,
+          message_selection_strategy: String,
+          prompt_attempts_specification: Hash[String,
+            {
+              allow_interrupt: untyped,
+              allowed_input_types: {
+                allow_audio_input: untyped,
+                allow_dtmf_input: untyped
+              },
+              audio_and_dtmf_input_specification: {
+                start_timeout_ms: Integer,
+                audio_specification: {
+                  max_length_ms: untyped,
+                  end_timeout_ms: untyped
+                },
+                dtmf_specification: {
+                  max_length: Integer,
+                  end_timeout_ms: untyped,
+                  deletion_character: String,
+                  end_character: untyped
+                }
+              },
+              text_input_specification: {
+                start_timeout_ms: untyped
+              }
+            }
+          ]
+        },
+        sample_utterances: Array[
+          {
+            utterance: String
+          }
+        ],
+        wait_and_continue_specification: {
+          waiting_response: {
+            message_groups: untyped,
+            allow_interrupt: untyped
+          },
+          continue_response: untyped,
+          still_waiting_response: {
+            message_groups: untyped,
+            frequency_in_seconds: Integer,
+            timeout_in_seconds: Integer,
+            allow_interrupt: untyped
+          },
+          active: untyped
+        },
+        slot_capture_setting: {
+          capture_response: untyped,
+          capture_next_step: {
+            dialog_action: {
+              type: String,
+              slot_to_elicit: String,
+              suppress_next_message: untyped
+            },
+            intent: {
+              name: untyped,
+              slots: Hash[String,
+                {
+                  shape: String,
+                  value: {
+                    interpreted_value: String
+                  },
+                  values: Array[
+                    {
+                      shape: untyped,
+                      value: untyped,
+                      values: untyped
+                    }
+                  ]
+                }
+              ]
+            },
+            session_attributes: Hash[String, String]
+          },
+          capture_conditional: {
+            active: untyped,
+            conditional_branches: Array[
+              {
+                name: untyped,
+                condition: {
+                  expression_string: String
+                },
+                next_step: untyped,
+                response: untyped
+              }
+            ],
+            default_branch: {
+              next_step: untyped,
+              response: untyped
+            }
+          },
+          failure_response: untyped,
+          failure_next_step: untyped,
+          failure_conditional: untyped,
+          code_hook: {
+            enable_code_hook_invocation: untyped,
+            active: untyped,
+            invocation_label: untyped,
+            post_code_hook_specification: {
+              success_response: untyped,
+              success_next_step: untyped,
+              success_conditional: untyped,
+              failure_response: untyped,
+              failure_next_step: untyped,
+              failure_conditional: untyped,
+              timeout_response: untyped,
+              timeout_next_step: untyped,
+              timeout_conditional: untyped
+            }
+          },
+          elicitation_code_hook: {
+            enable_code_hook_invocation: untyped,
+            invocation_label: untyped
+          }
+        },
+        slot_resolution_setting: {
+          slot_resolution_strategy: String
+        }
+      },
+      ?obfuscation_setting: {
+        obfuscation_setting_type: String
+      },
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?intent_id: String,
+      ?multiple_values_setting: {
+        allow_multiple_values: bool
+      },
+      ?sub_slot_setting: {
+        expression: String,
+        slot_specifications: Hash[String,
+          {
+            slot_type_id: String,
+            value_elicitation_setting: {
+              default_value_specification: {
+                default_value_list: Array[
+                  {
+                    default_value: String
+                  }
+                ]
+              },
+              prompt_specification: {
+                message_groups: Array[
+                  {
+                    message: {
+                      plain_text_message: {
+                        value: String
+                      },
+                      custom_payload: {
+                        value: String
+                      },
+                      ssml_message: {
+                        value: String
+                      },
+                      image_response_card: {
+                        title: String,
+                        subtitle: untyped,
+                        image_url: String,
+                        buttons: Array[
+                          {
+                            text: String,
+                            value: String
+                          }
+                        ]
+                      }
+                    },
+                    variations: Array[
+                      {
+                        plain_text_message: untyped,
+                        custom_payload: untyped,
+                        ssml_message: untyped,
+                        image_response_card: untyped
+                      }
+                    ]
+                  }
+                ],
+                max_retries: Integer,
+                allow_interrupt: bool,
+                message_selection_strategy: String,
+                prompt_attempts_specification: Hash[String,
+                  {
+                    allow_interrupt: untyped,
+                    allowed_input_types: {
+                      allow_audio_input: untyped,
+                      allow_dtmf_input: untyped
+                    },
+                    audio_and_dtmf_input_specification: {
+                      start_timeout_ms: Integer,
+                      audio_specification: {
+                        max_length_ms: untyped,
+                        end_timeout_ms: untyped
+                      },
+                      dtmf_specification: {
+                        max_length: Integer,
+                        end_timeout_ms: untyped,
+                        deletion_character: String,
+                        end_character: untyped
+                      }
+                    },
+                    text_input_specification: {
+                      start_timeout_ms: untyped
+                    }
+                  }
+                ]
+              },
+              sample_utterances: Array[
+                {
+                  utterance: String
+                }
+              ],
+              wait_and_continue_specification: {
+                waiting_response: {
+                  message_groups: untyped,
+                  allow_interrupt: untyped
+                },
+                continue_response: untyped,
+                still_waiting_response: {
+                  message_groups: untyped,
+                  frequency_in_seconds: Integer,
+                  timeout_in_seconds: Integer,
+                  allow_interrupt: untyped
+                },
+                active: untyped
+              }
+            }
+          }
+        ]
+      }
+    ) -> _UpdateSlotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSlotResponse
+
+    interface _UpdateSlotTypeResponse
+      include Smithy::Client::_Response[Types::UpdateSlotTypeResponse]
+      def slot_type_id: () -> String?
+      def slot_type_name: () -> String?
+      def description: () -> String?
+      def slot_type_values: () -> Array[Types::SlotTypeValue]?
+      def value_selection_setting: () -> Types::SlotValueSelectionSetting?
+      def parent_slot_type_signature: () -> String?
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+      def external_source_setting: () -> Types::ExternalSourceSetting?
+      def composite_slot_type_setting: () -> Types::CompositeSlotTypeSetting?
+    end
+    def update_slot_type: (
+      ?slot_type_id: String,
+      ?slot_type_name: String,
+      ?description: String,
+      ?slot_type_values: Array[
+        {
+          sample_value: {
+            value: String
+          },
+          synonyms: Array[
+            {
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?value_selection_setting: {
+        resolution_strategy: String,
+        regex_filter: {
+          pattern: String
+        },
+        advanced_recognition_setting: {
+          audio_recognition_strategy: String
+        }
+      },
+      ?parent_slot_type_signature: String,
+      ?bot_id: String,
+      ?bot_version: String,
+      ?locale_id: String,
+      ?external_source_setting: {
+        grammar_slot_type_setting: {
+          source: {
+            s3_bucket_name: String,
+            s3_object_key: String,
+            kms_key_arn: String
+          }
+        }
+      },
+      ?composite_slot_type_setting: {
+        sub_slots: Array[
+          {
+            name: String,
+            slot_type_id: String
+          }
+        ]
+      }
+    ) -> _UpdateSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSlotTypeResponse
+
+    interface _UpdateTestSetResponse
+      include Smithy::Client::_Response[Types::UpdateTestSetResponse]
+      def test_set_id: () -> String?
+      def test_set_name: () -> String?
+      def description: () -> String?
+      def modality: () -> String?
+      def status: () -> String?
+      def role_arn: () -> String?
+      def num_turns: () -> Integer?
+      def storage_location: () -> Types::TestSetStorageLocation?
+      def creation_date_time: () -> Time?
+      def last_updated_date_time: () -> Time?
+    end
+    def update_test_set: (
+      ?test_set_id: String,
+      ?test_set_name: String,
+      ?description: String
+    ) -> _UpdateTestSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTestSetResponse
+  end
+end

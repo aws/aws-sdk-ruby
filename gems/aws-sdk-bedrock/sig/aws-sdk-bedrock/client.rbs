@@ -1,0 +1,2081 @@
+module Aws::Bedrock
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Bedrock::EndpointProvider,
+      ?http_bearer_provider: Smithy::Client::HttpBearerProvider,
+      ?http_bearer_token: String,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchDeleteEvaluationJobResponse
+      include Smithy::Client::_Response[Types::BatchDeleteEvaluationJobResponse]
+      def errors: () -> Array[Types::BatchDeleteEvaluationJobError]?
+      def evaluation_jobs: () -> Array[Types::BatchDeleteEvaluationJobItem]?
+    end
+    def batch_delete_evaluation_job: (
+      ?job_identifiers: Array[String]
+    ) -> _BatchDeleteEvaluationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteEvaluationJobResponse
+
+    interface _CancelAutomatedReasoningPolicyBuildWorkflowResponse
+      include Smithy::Client::_Response[Types::CancelAutomatedReasoningPolicyBuildWorkflowResponse]
+    end
+    def cancel_automated_reasoning_policy_build_workflow: (
+      ?policy_arn: String,
+      ?build_workflow_id: String
+    ) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponse
+
+    interface _CreateAutomatedReasoningPolicyResponse
+      include Smithy::Client::_Response[Types::CreateAutomatedReasoningPolicyResponse]
+      def policy_arn: () -> String?
+      def version: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def definition_hash: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_automated_reasoning_policy: (
+      ?name: String,
+      ?description: String,
+      ?client_request_token: String,
+      ?policy_definition: {
+        version: String,
+        types: Array[
+          {
+            name: String,
+            description: String,
+            values: Array[
+              {
+                value: String,
+                description: String
+              }
+            ]
+          }
+        ],
+        rules: Array[
+          {
+            id: String,
+            expression: String,
+            alternate_expression: String
+          }
+        ],
+        variables: Array[
+          {
+            name: String,
+            type: untyped,
+            description: String
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAutomatedReasoningPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutomatedReasoningPolicyResponse
+
+    interface _CreateAutomatedReasoningPolicyTestCaseResponse
+      include Smithy::Client::_Response[Types::CreateAutomatedReasoningPolicyTestCaseResponse]
+      def policy_arn: () -> String?
+      def test_case_id: () -> String?
+    end
+    def create_automated_reasoning_policy_test_case: (
+      ?policy_arn: String,
+      ?guard_content: String,
+      ?query_content: String,
+      ?expected_aggregated_findings_result: String,
+      ?client_request_token: String,
+      ?confidence_threshold: Float
+    ) -> _CreateAutomatedReasoningPolicyTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutomatedReasoningPolicyTestCaseResponse
+
+    interface _CreateAutomatedReasoningPolicyVersionResponse
+      include Smithy::Client::_Response[Types::CreateAutomatedReasoningPolicyVersionResponse]
+      def policy_arn: () -> String?
+      def version: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def definition_hash: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_automated_reasoning_policy_version: (
+      ?policy_arn: String,
+      ?client_request_token: String,
+      ?last_updated_definition_hash: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAutomatedReasoningPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutomatedReasoningPolicyVersionResponse
+
+    interface _CreateCustomModelResponse
+      include Smithy::Client::_Response[Types::CreateCustomModelResponse]
+      def model_arn: () -> String?
+    end
+    def create_custom_model: (
+      ?model_name: String,
+      ?model_source_config: {
+        s3_data_source: {
+          s3_uri: String
+        }
+      },
+      ?model_kms_key_arn: String,
+      ?role_arn: String,
+      ?model_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateCustomModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomModelResponse
+
+    interface _CreateCustomModelDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateCustomModelDeploymentResponse]
+      def custom_model_deployment_arn: () -> String?
+    end
+    def create_custom_model_deployment: (
+      ?model_deployment_name: String,
+      ?model_arn: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateCustomModelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomModelDeploymentResponse
+
+    interface _CreateEvaluationJobResponse
+      include Smithy::Client::_Response[Types::CreateEvaluationJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_evaluation_job: (
+      ?job_name: String,
+      ?job_description: String,
+      ?client_request_token: String,
+      ?role_arn: String,
+      ?customer_encryption_key_id: String,
+      ?job_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?application_type: String,
+      ?evaluation_config: {
+        automated: {
+          dataset_metric_configs: Array[
+            {
+              task_type: String,
+              dataset: {
+                name: String,
+                dataset_location: {
+                  s3_uri: String
+                }
+              },
+              metric_names: Array[String]
+            }
+          ],
+          evaluator_model_config: {
+            bedrock_evaluator_models: Array[
+              {
+                model_identifier: String
+              }
+            ]
+          },
+          custom_metric_config: {
+            custom_metrics: Array[
+              {
+                custom_metric_definition: {
+                  name: String,
+                  instructions: String,
+                  rating_scale: Array[
+                    {
+                      definition: String,
+                      value: {
+                        string_value: String,
+                        float_value: Float
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            evaluator_model_config: {
+              bedrock_evaluator_models: Array[
+                {
+                  model_identifier: untyped
+                }
+              ]
+            }
+          }
+        },
+        human: {
+          human_workflow_config: {
+            flow_definition_arn: String,
+            instructions: String
+          },
+          custom_metrics: Array[
+            {
+              name: String,
+              description: String,
+              rating_method: String
+            }
+          ],
+          dataset_metric_configs: untyped
+        }
+      },
+      ?inference_config: {
+        models: Array[
+          {
+            bedrock_model: {
+              model_identifier: String,
+              inference_params: String,
+              performance_config: {
+                latency: String
+              }
+            },
+            precomputed_inference_source: {
+              inference_source_identifier: String
+            }
+          }
+        ],
+        rag_configs: Array[
+          {
+            knowledge_base_config: {
+              retrieve_config: {
+                knowledge_base_id: String,
+                knowledge_base_retrieval_configuration: {
+                  vector_search_configuration: {
+                    number_of_results: Integer,
+                    override_search_type: String,
+                    filter: {
+                      equals: {
+                        key: String,
+                        value: Smithy::Schema::document
+                      },
+                      not_equals: untyped,
+                      greater_than: untyped,
+                      greater_than_or_equals: untyped,
+                      less_than: untyped,
+                      less_than_or_equals: untyped,
+                      in: untyped,
+                      not_in: untyped,
+                      starts_with: untyped,
+                      list_contains: untyped,
+                      string_contains: untyped,
+                      and_all: Array[
+                        {
+                          equals: untyped,
+                          not_equals: untyped,
+                          greater_than: untyped,
+                          greater_than_or_equals: untyped,
+                          less_than: untyped,
+                          less_than_or_equals: untyped,
+                          in: untyped,
+                          not_in: untyped,
+                          starts_with: untyped,
+                          list_contains: untyped,
+                          string_contains: untyped,
+                          and_all: untyped,
+                          or_all: untyped
+                        }
+                      ],
+                      or_all: untyped
+                    },
+                    implicit_filter_configuration: {
+                      metadata_attributes: Array[
+                        {
+                          key: String,
+                          type: String,
+                          description: untyped
+                        }
+                      ],
+                      model_arn: String
+                    },
+                    reranking_configuration: {
+                      type: String,
+                      bedrock_reranking_configuration: {
+                        model_configuration: {
+                          model_arn: String,
+                          additional_model_request_fields: Hash[String, Smithy::Schema::document]
+                        },
+                        number_of_reranked_results: untyped,
+                        metadata_configuration: {
+                          selection_mode: String,
+                          selective_mode_configuration: {
+                            fields_to_include: Array[
+                              {
+                                field_name: untyped
+                              }
+                            ],
+                            fields_to_exclude: untyped
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              retrieve_and_generate_config: {
+                type: String,
+                knowledge_base_configuration: {
+                  knowledge_base_id: untyped,
+                  model_arn: untyped,
+                  retrieval_configuration: untyped,
+                  generation_configuration: {
+                    prompt_template: {
+                      text_prompt_template: String
+                    },
+                    guardrail_configuration: {
+                      guardrail_id: untyped,
+                      guardrail_version: untyped
+                    },
+                    kb_inference_config: {
+                      text_inference_config: {
+                        temperature: Float,
+                        top_p: Float,
+                        max_tokens: Integer,
+                        stop_sequences: Array[String]
+                      }
+                    },
+                    additional_model_request_fields: untyped
+                  },
+                  orchestration_configuration: {
+                    query_transformation_configuration: {
+                      type: String
+                    }
+                  }
+                },
+                external_sources_configuration: {
+                  model_arn: untyped,
+                  sources: Array[
+                    {
+                      source_type: String,
+                      s3_location: {
+                        uri: String
+                      },
+                      byte_content: {
+                        identifier: String,
+                        content_type: String,
+                        data: String
+                      }
+                    }
+                  ],
+                  generation_configuration: {
+                    prompt_template: untyped,
+                    guardrail_configuration: untyped,
+                    kb_inference_config: untyped,
+                    additional_model_request_fields: untyped
+                  }
+                }
+              }
+            },
+            precomputed_rag_source_config: {
+              retrieve_source_config: {
+                rag_source_identifier: String
+              },
+              retrieve_and_generate_source_config: {
+                rag_source_identifier: untyped
+              }
+            }
+          }
+        ]
+      },
+      ?output_data_config: {
+        s3_uri: String
+      }
+    ) -> _CreateEvaluationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEvaluationJobResponse
+
+    interface _CreateFoundationModelAgreementResponse
+      include Smithy::Client::_Response[Types::CreateFoundationModelAgreementResponse]
+      def model_id: () -> String?
+    end
+    def create_foundation_model_agreement: (
+      ?offer_token: String,
+      ?model_id: String
+    ) -> _CreateFoundationModelAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFoundationModelAgreementResponse
+
+    interface _CreateGuardrailResponse
+      include Smithy::Client::_Response[Types::CreateGuardrailResponse]
+      def guardrail_id: () -> String?
+      def guardrail_arn: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_guardrail: (
+      ?name: String,
+      ?description: String,
+      ?topic_policy_config: {
+        topics_config: Array[
+          {
+            name: String,
+            definition: String,
+            examples: Array[String],
+            type: String,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        tier_config: {
+          tier_name: String
+        }
+      },
+      ?content_policy_config: {
+        filters_config: Array[
+          {
+            type: String,
+            input_strength: String,
+            output_strength: untyped,
+            input_modalities: Array[String],
+            output_modalities: untyped,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        tier_config: {
+          tier_name: String
+        }
+      },
+      ?word_policy_config: {
+        words_config: Array[
+          {
+            text: String,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        managed_word_lists_config: Array[
+          {
+            type: String,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: untyped,
+            output_enabled: untyped
+          }
+        ]
+      },
+      ?sensitive_information_policy_config: {
+        pii_entities_config: Array[
+          {
+            type: String,
+            action: String,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        regexes_config: Array[
+          {
+            name: String,
+            description: untyped,
+            pattern: untyped,
+            action: untyped,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: untyped,
+            output_enabled: untyped
+          }
+        ]
+      },
+      ?contextual_grounding_policy_config: {
+        filters_config: Array[
+          {
+            type: String,
+            threshold: Float,
+            action: String,
+            enabled: bool
+          }
+        ]
+      },
+      ?automated_reasoning_policy_config: {
+        policies: Array[String],
+        confidence_threshold: Float
+      },
+      ?cross_region_config: {
+        guardrail_profile_identifier: String
+      },
+      ?blocked_input_messaging: String,
+      ?blocked_outputs_messaging: String,
+      ?kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateGuardrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGuardrailResponse
+
+    interface _CreateGuardrailVersionResponse
+      include Smithy::Client::_Response[Types::CreateGuardrailVersionResponse]
+      def guardrail_id: () -> String?
+      def version: () -> String?
+    end
+    def create_guardrail_version: (
+      ?guardrail_identifier: String,
+      ?description: String,
+      ?client_request_token: String
+    ) -> _CreateGuardrailVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGuardrailVersionResponse
+
+    interface _CreateInferenceProfileResponse
+      include Smithy::Client::_Response[Types::CreateInferenceProfileResponse]
+      def inference_profile_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_inference_profile: (
+      ?inference_profile_name: String,
+      ?description: String,
+      ?client_request_token: String,
+      ?model_source: {
+        copy_from: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateInferenceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInferenceProfileResponse
+
+    interface _CreateMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::CreateMarketplaceModelEndpointResponse]
+      def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint?
+    end
+    def create_marketplace_model_endpoint: (
+      ?model_source_identifier: String,
+      ?endpoint_config: {
+        sage_maker: {
+          initial_instance_count: Integer,
+          instance_type: String,
+          execution_role: String,
+          kms_encryption_key: String,
+          vpc: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String]
+          }
+        }
+      },
+      ?accept_eula: bool,
+      ?endpoint_name: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMarketplaceModelEndpointResponse
+
+    interface _CreateModelCopyJobResponse
+      include Smithy::Client::_Response[Types::CreateModelCopyJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_model_copy_job: (
+      ?source_model_arn: String,
+      ?target_model_name: String,
+      ?model_kms_key_id: String,
+      ?target_model_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateModelCopyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelCopyJobResponse
+
+    interface _CreateModelCustomizationJobResponse
+      include Smithy::Client::_Response[Types::CreateModelCustomizationJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_model_customization_job: (
+      ?job_name: String,
+      ?custom_model_name: String,
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?base_model_identifier: String,
+      ?customization_type: String,
+      ?custom_model_kms_key_id: String,
+      ?job_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?custom_model_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?training_data_config: {
+        s3_uri: String,
+        invocation_logs_config: {
+          use_prompt_response: bool,
+          invocation_log_source: {
+            s3_uri: untyped
+          },
+          request_metadata_filters: {
+            equals: Hash[String, String],
+            not_equals: untyped,
+            and_all: Array[
+              {
+                equals: untyped,
+                not_equals: untyped
+              }
+            ],
+            or_all: untyped
+          }
+        }
+      },
+      ?validation_data_config: {
+        validators: Array[
+          {
+            s3_uri: String
+          }
+        ]
+      },
+      ?output_data_config: {
+        s3_uri: String
+      },
+      ?hyper_parameters: Hash[String, String],
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?customization_config: {
+        distillation_config: {
+          teacher_model_config: {
+            teacher_model_identifier: String,
+            max_response_length_for_inference: Integer
+          }
+        }
+      }
+    ) -> _CreateModelCustomizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelCustomizationJobResponse
+
+    interface _CreateModelImportJobResponse
+      include Smithy::Client::_Response[Types::CreateModelImportJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_model_import_job: (
+      ?job_name: String,
+      ?imported_model_name: String,
+      ?role_arn: String,
+      ?model_data_source: {
+        s3_data_source: {
+          s3_uri: String
+        }
+      },
+      ?job_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?imported_model_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?imported_model_kms_key_id: String
+    ) -> _CreateModelImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelImportJobResponse
+
+    interface _CreateModelInvocationJobResponse
+      include Smithy::Client::_Response[Types::CreateModelInvocationJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_model_invocation_job: (
+      ?job_name: String,
+      ?role_arn: String,
+      ?client_request_token: String,
+      ?model_id: String,
+      ?input_data_config: {
+        s3_input_data_config: {
+          s3_input_format: String,
+          s3_uri: String,
+          s3_bucket_owner: String
+        }
+      },
+      ?output_data_config: {
+        s3_output_data_config: {
+          s3_uri: String,
+          s3_encryption_key_id: String,
+          s3_bucket_owner: String
+        }
+      },
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?timeout_duration_in_hours: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateModelInvocationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelInvocationJobResponse
+
+    interface _CreatePromptRouterResponse
+      include Smithy::Client::_Response[Types::CreatePromptRouterResponse]
+      def prompt_router_arn: () -> String?
+    end
+    def create_prompt_router: (
+      ?client_request_token: String,
+      ?prompt_router_name: String,
+      ?models: Array[
+        {
+          model_arn: String
+        }
+      ],
+      ?description: String,
+      ?routing_criteria: {
+        response_quality_difference: Float
+      },
+      ?fallback_model: {
+        model_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePromptRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePromptRouterResponse
+
+    interface _CreateProvisionedModelThroughputResponse
+      include Smithy::Client::_Response[Types::CreateProvisionedModelThroughputResponse]
+      def provisioned_model_arn: () -> String?
+    end
+    def create_provisioned_model_throughput: (
+      ?client_request_token: String,
+      ?model_units: Integer,
+      ?provisioned_model_name: String,
+      ?model_id: String,
+      ?commitment_duration: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProvisionedModelThroughputResponse
+
+    interface _DeleteAutomatedReasoningPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteAutomatedReasoningPolicyResponse]
+    end
+    def delete_automated_reasoning_policy: (
+      ?policy_arn: String
+    ) -> _DeleteAutomatedReasoningPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomatedReasoningPolicyResponse
+
+    interface _DeleteAutomatedReasoningPolicyBuildWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteAutomatedReasoningPolicyBuildWorkflowResponse]
+    end
+    def delete_automated_reasoning_policy_build_workflow: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?last_updated_at: Time
+    ) -> _DeleteAutomatedReasoningPolicyBuildWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomatedReasoningPolicyBuildWorkflowResponse
+
+    interface _DeleteAutomatedReasoningPolicyTestCaseResponse
+      include Smithy::Client::_Response[Types::DeleteAutomatedReasoningPolicyTestCaseResponse]
+    end
+    def delete_automated_reasoning_policy_test_case: (
+      ?policy_arn: String,
+      ?test_case_id: String,
+      ?last_updated_at: Time
+    ) -> _DeleteAutomatedReasoningPolicyTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomatedReasoningPolicyTestCaseResponse
+
+    interface _DeleteCustomModelResponse
+      include Smithy::Client::_Response[Types::DeleteCustomModelResponse]
+    end
+    def delete_custom_model: (
+      ?model_identifier: String
+    ) -> _DeleteCustomModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomModelResponse
+
+    interface _DeleteCustomModelDeploymentResponse
+      include Smithy::Client::_Response[Types::DeleteCustomModelDeploymentResponse]
+    end
+    def delete_custom_model_deployment: (
+      ?custom_model_deployment_identifier: String
+    ) -> _DeleteCustomModelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomModelDeploymentResponse
+
+    interface _DeleteFoundationModelAgreementResponse
+      include Smithy::Client::_Response[Types::DeleteFoundationModelAgreementResponse]
+    end
+    def delete_foundation_model_agreement: (
+      ?model_id: String
+    ) -> _DeleteFoundationModelAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFoundationModelAgreementResponse
+
+    interface _DeleteGuardrailResponse
+      include Smithy::Client::_Response[Types::DeleteGuardrailResponse]
+    end
+    def delete_guardrail: (
+      ?guardrail_identifier: String,
+      ?guardrail_version: String
+    ) -> _DeleteGuardrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGuardrailResponse
+
+    interface _DeleteImportedModelResponse
+      include Smithy::Client::_Response[Types::DeleteImportedModelResponse]
+    end
+    def delete_imported_model: (
+      ?model_identifier: String
+    ) -> _DeleteImportedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImportedModelResponse
+
+    interface _DeleteInferenceProfileResponse
+      include Smithy::Client::_Response[Types::DeleteInferenceProfileResponse]
+    end
+    def delete_inference_profile: (
+      ?inference_profile_identifier: String
+    ) -> _DeleteInferenceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInferenceProfileResponse
+
+    interface _DeleteMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteMarketplaceModelEndpointResponse]
+    end
+    def delete_marketplace_model_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DeleteMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMarketplaceModelEndpointResponse
+
+    interface _DeleteModelInvocationLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteModelInvocationLoggingConfigurationResponse]
+    end
+    def delete_model_invocation_logging_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelInvocationLoggingConfigurationResponse
+
+    interface _DeletePromptRouterResponse
+      include Smithy::Client::_Response[Types::DeletePromptRouterResponse]
+    end
+    def delete_prompt_router: (
+      ?prompt_router_arn: String
+    ) -> _DeletePromptRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePromptRouterResponse
+
+    interface _DeleteProvisionedModelThroughputResponse
+      include Smithy::Client::_Response[Types::DeleteProvisionedModelThroughputResponse]
+    end
+    def delete_provisioned_model_throughput: (
+      ?provisioned_model_id: String
+    ) -> _DeleteProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedModelThroughputResponse
+
+    interface _DeregisterMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::DeregisterMarketplaceModelEndpointResponse]
+    end
+    def deregister_marketplace_model_endpoint: (
+      ?endpoint_arn: String
+    ) -> _DeregisterMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterMarketplaceModelEndpointResponse
+
+    interface _ExportAutomatedReasoningPolicyVersionResponse
+      include Smithy::Client::_Response[Types::ExportAutomatedReasoningPolicyVersionResponse]
+      def policy_definition: () -> Types::AutomatedReasoningPolicyDefinition?
+    end
+    def export_automated_reasoning_policy_version: (
+      ?policy_arn: String
+    ) -> _ExportAutomatedReasoningPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportAutomatedReasoningPolicyVersionResponse
+
+    interface _GetAutomatedReasoningPolicyResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyResponse]
+      def policy_arn: () -> String?
+      def name: () -> String?
+      def version: () -> String?
+      def policy_id: () -> String?
+      def description: () -> String?
+      def definition_hash: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_automated_reasoning_policy: (
+      ?policy_arn: String
+    ) -> _GetAutomatedReasoningPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyResponse
+
+    interface _GetAutomatedReasoningPolicyAnnotationsResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyAnnotationsResponse]
+      def policy_arn: () -> String?
+      def name: () -> String?
+      def build_workflow_id: () -> String?
+      def annotations: () -> Array[Types::AutomatedReasoningPolicyAnnotation]?
+      def annotation_set_hash: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_automated_reasoning_policy_annotations: (
+      ?policy_arn: String,
+      ?build_workflow_id: String
+    ) -> _GetAutomatedReasoningPolicyAnnotationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyAnnotationsResponse
+
+    interface _GetAutomatedReasoningPolicyBuildWorkflowResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyBuildWorkflowResponse]
+      def policy_arn: () -> String?
+      def build_workflow_id: () -> String?
+      def status: () -> String?
+      def build_workflow_type: () -> String?
+      def document_name: () -> String?
+      def document_content_type: () -> String?
+      def document_description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_automated_reasoning_policy_build_workflow: (
+      ?policy_arn: String,
+      ?build_workflow_id: String
+    ) -> _GetAutomatedReasoningPolicyBuildWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyBuildWorkflowResponse
+
+    interface _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse]
+      def policy_arn: () -> String?
+      def build_workflow_id: () -> String?
+      def build_workflow_assets: () -> Types::AutomatedReasoningPolicyBuildResultAssets?
+    end
+    def get_automated_reasoning_policy_build_workflow_result_assets: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?asset_type: String
+    ) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse
+
+    interface _GetAutomatedReasoningPolicyNextScenarioResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyNextScenarioResponse]
+      def policy_arn: () -> String?
+      def scenario: () -> Types::AutomatedReasoningPolicyScenario?
+    end
+    def get_automated_reasoning_policy_next_scenario: (
+      ?policy_arn: String,
+      ?build_workflow_id: String
+    ) -> _GetAutomatedReasoningPolicyNextScenarioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyNextScenarioResponse
+
+    interface _GetAutomatedReasoningPolicyTestCaseResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyTestCaseResponse]
+      def policy_arn: () -> String?
+      def test_case: () -> Types::AutomatedReasoningPolicyTestCase?
+    end
+    def get_automated_reasoning_policy_test_case: (
+      ?policy_arn: String,
+      ?test_case_id: String
+    ) -> _GetAutomatedReasoningPolicyTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyTestCaseResponse
+
+    interface _GetAutomatedReasoningPolicyTestResultResponse
+      include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyTestResultResponse]
+      def test_result: () -> Types::AutomatedReasoningPolicyTestResult?
+    end
+    def get_automated_reasoning_policy_test_result: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?test_case_id: String
+    ) -> _GetAutomatedReasoningPolicyTestResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyTestResultResponse
+
+    interface _GetCustomModelResponse
+      include Smithy::Client::_Response[Types::GetCustomModelResponse]
+      def model_arn: () -> String?
+      def model_name: () -> String?
+      def job_name: () -> String?
+      def job_arn: () -> String?
+      def base_model_arn: () -> String?
+      def customization_type: () -> String?
+      def model_kms_key_arn: () -> String?
+      def hyper_parameters: () -> Hash[String, String]?
+      def training_data_config: () -> Types::TrainingDataConfig?
+      def validation_data_config: () -> Types::ValidationDataConfig?
+      def output_data_config: () -> Types::OutputDataConfig?
+      def training_metrics: () -> Types::TrainingMetrics?
+      def validation_metrics: () -> Array[Types::ValidatorMetric]?
+      def creation_time: () -> Time?
+      def customization_config: () -> Types::CustomizationConfig?
+      def model_status: () -> String?
+      def failure_message: () -> String?
+    end
+    def get_custom_model: (
+      ?model_identifier: String
+    ) -> _GetCustomModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomModelResponse
+
+    interface _GetCustomModelDeploymentResponse
+      include Smithy::Client::_Response[Types::GetCustomModelDeploymentResponse]
+      def custom_model_deployment_arn: () -> String?
+      def model_deployment_name: () -> String?
+      def model_arn: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def description: () -> String?
+      def failure_message: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def get_custom_model_deployment: (
+      ?custom_model_deployment_identifier: String
+    ) -> _GetCustomModelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomModelDeploymentResponse
+
+    interface _GetEvaluationJobResponse
+      include Smithy::Client::_Response[Types::GetEvaluationJobResponse]
+      def job_name: () -> String?
+      def status: () -> String?
+      def job_arn: () -> String?
+      def job_description: () -> String?
+      def role_arn: () -> String?
+      def customer_encryption_key_id: () -> String?
+      def job_type: () -> String?
+      def application_type: () -> String?
+      def evaluation_config: () -> Types::EvaluationConfig?
+      def inference_config: () -> Types::EvaluationInferenceConfig?
+      def output_data_config: () -> Types::EvaluationOutputDataConfig?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def failure_messages: () -> Array[String]?
+    end
+    def get_evaluation_job: (
+      ?job_identifier: String
+    ) -> _GetEvaluationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvaluationJobResponse
+
+    interface _GetFoundationModelResponse
+      include Smithy::Client::_Response[Types::GetFoundationModelResponse]
+      def model_details: () -> Types::FoundationModelDetails?
+    end
+    def get_foundation_model: (
+      ?model_identifier: String
+    ) -> _GetFoundationModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFoundationModelResponse
+
+    interface _GetFoundationModelAvailabilityResponse
+      include Smithy::Client::_Response[Types::GetFoundationModelAvailabilityResponse]
+      def model_id: () -> String?
+      def agreement_availability: () -> Types::AgreementAvailability?
+      def authorization_status: () -> String?
+      def entitlement_availability: () -> String?
+      def region_availability: () -> String?
+    end
+    def get_foundation_model_availability: (
+      ?model_id: String
+    ) -> _GetFoundationModelAvailabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFoundationModelAvailabilityResponse
+
+    interface _GetGuardrailResponse
+      include Smithy::Client::_Response[Types::GetGuardrailResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def guardrail_id: () -> String?
+      def guardrail_arn: () -> String?
+      def version: () -> String?
+      def status: () -> String?
+      def topic_policy: () -> Types::GuardrailTopicPolicy?
+      def content_policy: () -> Types::GuardrailContentPolicy?
+      def word_policy: () -> Types::GuardrailWordPolicy?
+      def sensitive_information_policy: () -> Types::GuardrailSensitiveInformationPolicy?
+      def contextual_grounding_policy: () -> Types::GuardrailContextualGroundingPolicy?
+      def automated_reasoning_policy: () -> Types::GuardrailAutomatedReasoningPolicy?
+      def cross_region_details: () -> Types::GuardrailCrossRegionDetails?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status_reasons: () -> Array[String]?
+      def failure_recommendations: () -> Array[String]?
+      def blocked_input_messaging: () -> String?
+      def blocked_outputs_messaging: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def get_guardrail: (
+      ?guardrail_identifier: String,
+      ?guardrail_version: String
+    ) -> _GetGuardrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGuardrailResponse
+
+    interface _GetImportedModelResponse
+      include Smithy::Client::_Response[Types::GetImportedModelResponse]
+      def model_arn: () -> String?
+      def model_name: () -> String?
+      def job_name: () -> String?
+      def job_arn: () -> String?
+      def model_data_source: () -> Types::ModelDataSource?
+      def creation_time: () -> Time?
+      def model_architecture: () -> String?
+      def model_kms_key_arn: () -> String?
+      def instruct_supported: () -> bool?
+      def custom_model_units: () -> Types::CustomModelUnits?
+    end
+    def get_imported_model: (
+      ?model_identifier: String
+    ) -> _GetImportedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportedModelResponse
+
+    interface _GetInferenceProfileResponse
+      include Smithy::Client::_Response[Types::GetInferenceProfileResponse]
+      def inference_profile_name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def inference_profile_arn: () -> String?
+      def models: () -> Array[Types::InferenceProfileModel]?
+      def inference_profile_id: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+    end
+    def get_inference_profile: (
+      ?inference_profile_identifier: String
+    ) -> _GetInferenceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInferenceProfileResponse
+
+    interface _GetMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::GetMarketplaceModelEndpointResponse]
+      def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint?
+    end
+    def get_marketplace_model_endpoint: (
+      ?endpoint_arn: String
+    ) -> _GetMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMarketplaceModelEndpointResponse
+
+    interface _GetModelCopyJobResponse
+      include Smithy::Client::_Response[Types::GetModelCopyJobResponse]
+      def job_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def target_model_arn: () -> String?
+      def target_model_name: () -> String?
+      def source_account_id: () -> String?
+      def source_model_arn: () -> String?
+      def target_model_kms_key_arn: () -> String?
+      def target_model_tags: () -> Array[Types::Tag]?
+      def failure_message: () -> String?
+      def source_model_name: () -> String?
+    end
+    def get_model_copy_job: (
+      ?job_arn: String
+    ) -> _GetModelCopyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelCopyJobResponse
+
+    interface _GetModelCustomizationJobResponse
+      include Smithy::Client::_Response[Types::GetModelCustomizationJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def output_model_name: () -> String?
+      def output_model_arn: () -> String?
+      def client_request_token: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def status_details: () -> Types::StatusDetails?
+      def failure_message: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def base_model_arn: () -> String?
+      def hyper_parameters: () -> Hash[String, String]?
+      def training_data_config: () -> Types::TrainingDataConfig?
+      def validation_data_config: () -> Types::ValidationDataConfig?
+      def output_data_config: () -> Types::OutputDataConfig?
+      def customization_type: () -> String?
+      def output_model_kms_key_arn: () -> String?
+      def training_metrics: () -> Types::TrainingMetrics?
+      def validation_metrics: () -> Array[Types::ValidatorMetric]?
+      def vpc_config: () -> Types::VpcConfig?
+      def customization_config: () -> Types::CustomizationConfig?
+    end
+    def get_model_customization_job: (
+      ?job_identifier: String
+    ) -> _GetModelCustomizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelCustomizationJobResponse
+
+    interface _GetModelImportJobResponse
+      include Smithy::Client::_Response[Types::GetModelImportJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def imported_model_name: () -> String?
+      def imported_model_arn: () -> String?
+      def role_arn: () -> String?
+      def model_data_source: () -> Types::ModelDataSource?
+      def status: () -> String?
+      def failure_message: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def vpc_config: () -> Types::VpcConfig?
+      def imported_model_kms_key_arn: () -> String?
+    end
+    def get_model_import_job: (
+      ?job_identifier: String
+    ) -> _GetModelImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelImportJobResponse
+
+    interface _GetModelInvocationJobResponse
+      include Smithy::Client::_Response[Types::GetModelInvocationJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def model_id: () -> String?
+      def client_request_token: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def message: () -> String?
+      def submit_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def input_data_config: () -> Types::ModelInvocationJobInputDataConfig?
+      def output_data_config: () -> Types::ModelInvocationJobOutputDataConfig?
+      def vpc_config: () -> Types::VpcConfig?
+      def timeout_duration_in_hours: () -> Integer?
+      def job_expiration_time: () -> Time?
+    end
+    def get_model_invocation_job: (
+      ?job_identifier: String
+    ) -> _GetModelInvocationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelInvocationJobResponse
+
+    interface _GetModelInvocationLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetModelInvocationLoggingConfigurationResponse]
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def get_model_invocation_logging_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelInvocationLoggingConfigurationResponse
+
+    interface _GetPromptRouterResponse
+      include Smithy::Client::_Response[Types::GetPromptRouterResponse]
+      def prompt_router_name: () -> String?
+      def routing_criteria: () -> Types::RoutingCriteria?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def prompt_router_arn: () -> String?
+      def models: () -> Array[Types::PromptRouterTargetModel]?
+      def fallback_model: () -> Types::PromptRouterTargetModel?
+      def status: () -> String?
+      def type: () -> String?
+    end
+    def get_prompt_router: (
+      ?prompt_router_arn: String
+    ) -> _GetPromptRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPromptRouterResponse
+
+    interface _GetProvisionedModelThroughputResponse
+      include Smithy::Client::_Response[Types::GetProvisionedModelThroughputResponse]
+      def model_units: () -> Integer?
+      def desired_model_units: () -> Integer?
+      def provisioned_model_name: () -> String?
+      def provisioned_model_arn: () -> String?
+      def model_arn: () -> String?
+      def desired_model_arn: () -> String?
+      def foundation_model_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def failure_message: () -> String?
+      def commitment_duration: () -> String?
+      def commitment_expiration_time: () -> Time?
+    end
+    def get_provisioned_model_throughput: (
+      ?provisioned_model_id: String
+    ) -> _GetProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedModelThroughputResponse
+
+    interface _GetUseCaseForModelAccessResponse
+      include Smithy::Client::_Response[Types::GetUseCaseForModelAccessResponse]
+      def form_data: () -> String?
+    end
+    def get_use_case_for_model_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUseCaseForModelAccessResponse
+
+    interface _ListAutomatedReasoningPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAutomatedReasoningPoliciesResponse]
+      def automated_reasoning_policy_summaries: () -> Array[Types::AutomatedReasoningPolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_automated_reasoning_policies: (
+      ?policy_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAutomatedReasoningPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomatedReasoningPoliciesResponse
+
+    interface _ListAutomatedReasoningPolicyBuildWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListAutomatedReasoningPolicyBuildWorkflowsResponse]
+      def automated_reasoning_policy_build_workflow_summaries: () -> Array[Types::AutomatedReasoningPolicyBuildWorkflowSummary]?
+      def next_token: () -> String?
+    end
+    def list_automated_reasoning_policy_build_workflows: (
+      ?policy_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAutomatedReasoningPolicyBuildWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomatedReasoningPolicyBuildWorkflowsResponse
+
+    interface _ListAutomatedReasoningPolicyTestCasesResponse
+      include Smithy::Client::_Response[Types::ListAutomatedReasoningPolicyTestCasesResponse]
+      def test_cases: () -> Array[Types::AutomatedReasoningPolicyTestCase]?
+      def next_token: () -> String?
+    end
+    def list_automated_reasoning_policy_test_cases: (
+      ?policy_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAutomatedReasoningPolicyTestCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomatedReasoningPolicyTestCasesResponse
+
+    interface _ListAutomatedReasoningPolicyTestResultsResponse
+      include Smithy::Client::_Response[Types::ListAutomatedReasoningPolicyTestResultsResponse]
+      def test_results: () -> Array[Types::AutomatedReasoningPolicyTestResult]?
+      def next_token: () -> String?
+    end
+    def list_automated_reasoning_policy_test_results: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAutomatedReasoningPolicyTestResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomatedReasoningPolicyTestResultsResponse
+
+    interface _ListCustomModelDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListCustomModelDeploymentsResponse]
+      def next_token: () -> String?
+      def model_deployment_summaries: () -> Array[Types::CustomModelDeploymentSummary]?
+    end
+    def list_custom_model_deployments: (
+      ?created_before: Time,
+      ?created_after: Time,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?status_equals: String,
+      ?model_arn_equals: String
+    ) -> _ListCustomModelDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomModelDeploymentsResponse
+
+    interface _ListCustomModelsResponse
+      include Smithy::Client::_Response[Types::ListCustomModelsResponse]
+      def next_token: () -> String?
+      def model_summaries: () -> Array[Types::CustomModelSummary]?
+    end
+    def list_custom_models: (
+      ?creation_time_before: Time,
+      ?creation_time_after: Time,
+      ?name_contains: String,
+      ?base_model_arn_equals: String,
+      ?foundation_model_arn_equals: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?is_owned: bool,
+      ?model_status: String
+    ) -> _ListCustomModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomModelsResponse
+
+    interface _ListEvaluationJobsResponse
+      include Smithy::Client::_Response[Types::ListEvaluationJobsResponse]
+      def next_token: () -> String?
+      def job_summaries: () -> Array[Types::EvaluationSummary]?
+    end
+    def list_evaluation_jobs: (
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?status_equals: String,
+      ?application_type_equals: String,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListEvaluationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluationJobsResponse
+
+    interface _ListFoundationModelAgreementOffersResponse
+      include Smithy::Client::_Response[Types::ListFoundationModelAgreementOffersResponse]
+      def model_id: () -> String?
+      def offers: () -> Array[Types::Offer]?
+    end
+    def list_foundation_model_agreement_offers: (
+      ?model_id: String,
+      ?offer_type: String
+    ) -> _ListFoundationModelAgreementOffersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFoundationModelAgreementOffersResponse
+
+    interface _ListFoundationModelsResponse
+      include Smithy::Client::_Response[Types::ListFoundationModelsResponse]
+      def model_summaries: () -> Array[Types::FoundationModelSummary]?
+    end
+    def list_foundation_models: (
+      ?by_provider: String,
+      ?by_customization_type: String,
+      ?by_output_modality: String,
+      ?by_inference_type: String
+    ) -> _ListFoundationModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFoundationModelsResponse
+
+    interface _ListGuardrailsResponse
+      include Smithy::Client::_Response[Types::ListGuardrailsResponse]
+      def guardrails: () -> Array[Types::GuardrailSummary]?
+      def next_token: () -> String?
+    end
+    def list_guardrails: (
+      ?guardrail_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGuardrailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGuardrailsResponse
+
+    interface _ListImportedModelsResponse
+      include Smithy::Client::_Response[Types::ListImportedModelsResponse]
+      def next_token: () -> String?
+      def model_summaries: () -> Array[Types::ImportedModelSummary]?
+    end
+    def list_imported_models: (
+      ?creation_time_before: Time,
+      ?creation_time_after: Time,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListImportedModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportedModelsResponse
+
+    interface _ListInferenceProfilesResponse
+      include Smithy::Client::_Response[Types::ListInferenceProfilesResponse]
+      def inference_profile_summaries: () -> Array[Types::InferenceProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_inference_profiles: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type_equals: String
+    ) -> _ListInferenceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInferenceProfilesResponse
+
+    interface _ListMarketplaceModelEndpointsResponse
+      include Smithy::Client::_Response[Types::ListMarketplaceModelEndpointsResponse]
+      def marketplace_model_endpoints: () -> Array[Types::MarketplaceModelEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_marketplace_model_endpoints: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?model_source_equals: String
+    ) -> _ListMarketplaceModelEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMarketplaceModelEndpointsResponse
+
+    interface _ListModelCopyJobsResponse
+      include Smithy::Client::_Response[Types::ListModelCopyJobsResponse]
+      def next_token: () -> String?
+      def model_copy_job_summaries: () -> Array[Types::ModelCopyJobSummary]?
+    end
+    def list_model_copy_jobs: (
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?status_equals: String,
+      ?source_account_equals: String,
+      ?source_model_arn_equals: String,
+      ?target_model_name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListModelCopyJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelCopyJobsResponse
+
+    interface _ListModelCustomizationJobsResponse
+      include Smithy::Client::_Response[Types::ListModelCustomizationJobsResponse]
+      def next_token: () -> String?
+      def model_customization_job_summaries: () -> Array[Types::ModelCustomizationJobSummary]?
+    end
+    def list_model_customization_jobs: (
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?status_equals: String,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListModelCustomizationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelCustomizationJobsResponse
+
+    interface _ListModelImportJobsResponse
+      include Smithy::Client::_Response[Types::ListModelImportJobsResponse]
+      def next_token: () -> String?
+      def model_import_job_summaries: () -> Array[Types::ModelImportJobSummary]?
+    end
+    def list_model_import_jobs: (
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?status_equals: String,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListModelImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelImportJobsResponse
+
+    interface _ListModelInvocationJobsResponse
+      include Smithy::Client::_Response[Types::ListModelInvocationJobsResponse]
+      def next_token: () -> String?
+      def invocation_job_summaries: () -> Array[Types::ModelInvocationJobSummary]?
+    end
+    def list_model_invocation_jobs: (
+      ?submit_time_after: Time,
+      ?submit_time_before: Time,
+      ?status_equals: String,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListModelInvocationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelInvocationJobsResponse
+
+    interface _ListPromptRoutersResponse
+      include Smithy::Client::_Response[Types::ListPromptRoutersResponse]
+      def prompt_router_summaries: () -> Array[Types::PromptRouterSummary]?
+      def next_token: () -> String?
+    end
+    def list_prompt_routers: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _ListPromptRoutersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPromptRoutersResponse
+
+    interface _ListProvisionedModelThroughputsResponse
+      include Smithy::Client::_Response[Types::ListProvisionedModelThroughputsResponse]
+      def next_token: () -> String?
+      def provisioned_model_summaries: () -> Array[Types::ProvisionedModelSummary]?
+    end
+    def list_provisioned_model_throughputs: (
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?status_equals: String,
+      ?model_arn_equals: String,
+      ?name_contains: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListProvisionedModelThroughputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisionedModelThroughputsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutModelInvocationLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutModelInvocationLoggingConfigurationResponse]
+    end
+    def put_model_invocation_logging_configuration: (
+      ?logging_config: {
+        cloud_watch_config: {
+          log_group_name: String,
+          role_arn: String,
+          large_data_delivery_s3_config: {
+            bucket_name: String,
+            key_prefix: String
+          }
+        },
+        s3_config: untyped,
+        text_data_delivery_enabled: bool,
+        image_data_delivery_enabled: untyped,
+        embedding_data_delivery_enabled: untyped,
+        video_data_delivery_enabled: untyped
+      }
+    ) -> _PutModelInvocationLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutModelInvocationLoggingConfigurationResponse
+
+    interface _PutUseCaseForModelAccessResponse
+      include Smithy::Client::_Response[Types::PutUseCaseForModelAccessResponse]
+    end
+    def put_use_case_for_model_access: (
+      ?form_data: String
+    ) -> _PutUseCaseForModelAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutUseCaseForModelAccessResponse
+
+    interface _RegisterMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::RegisterMarketplaceModelEndpointResponse]
+      def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint?
+    end
+    def register_marketplace_model_endpoint: (
+      ?endpoint_identifier: String,
+      ?model_source_identifier: String
+    ) -> _RegisterMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterMarketplaceModelEndpointResponse
+
+    interface _StartAutomatedReasoningPolicyBuildWorkflowResponse
+      include Smithy::Client::_Response[Types::StartAutomatedReasoningPolicyBuildWorkflowResponse]
+      def policy_arn: () -> String?
+      def build_workflow_id: () -> String?
+    end
+    def start_automated_reasoning_policy_build_workflow: (
+      ?policy_arn: String,
+      ?build_workflow_type: String,
+      ?client_request_token: String,
+      ?source_content: {
+        policy_definition: {
+          version: String,
+          types: Array[
+            {
+              name: String,
+              description: String,
+              values: Array[
+                {
+                  value: String,
+                  description: String
+                }
+              ]
+            }
+          ],
+          rules: Array[
+            {
+              id: String,
+              expression: String,
+              alternate_expression: String
+            }
+          ],
+          variables: Array[
+            {
+              name: String,
+              type: untyped,
+              description: String
+            }
+          ]
+        },
+        workflow_content: {
+          documents: Array[
+            {
+              document: String,
+              document_content_type: String,
+              document_name: String,
+              document_description: String
+            }
+          ],
+          policy_repair_assets: {
+            annotations: Array[
+              {
+                add_type: {
+                  name: untyped,
+                  description: untyped,
+                  values: untyped
+                },
+                update_type: {
+                  name: untyped,
+                  new_name: untyped,
+                  description: untyped,
+                  values: Array[
+                    {
+                      add_type_value: {
+                        value: untyped,
+                        description: untyped
+                      },
+                      update_type_value: {
+                        value: untyped,
+                        new_value: untyped,
+                        description: untyped
+                      },
+                      delete_type_value: {
+                        value: untyped
+                      }
+                    }
+                  ]
+                },
+                delete_type: {
+                  name: untyped
+                },
+                add_variable: {
+                  name: untyped,
+                  type: untyped,
+                  description: untyped
+                },
+                update_variable: {
+                  name: untyped,
+                  new_name: untyped,
+                  description: untyped
+                },
+                delete_variable: {
+                  name: untyped
+                },
+                add_rule: {
+                  expression: untyped
+                },
+                update_rule: {
+                  rule_id: untyped,
+                  expression: untyped
+                },
+                delete_rule: {
+                  rule_id: untyped
+                },
+                add_rule_from_natural_language: {
+                  natural_language: String
+                },
+                update_from_rules_feedback: {
+                  rule_ids: Array[String],
+                  feedback: String
+                },
+                update_from_scenario_feedback: {
+                  rule_ids: untyped,
+                  scenario_expression: String,
+                  feedback: untyped
+                },
+                ingest_content: {
+                  content: String
+                }
+              }
+            ]
+          }
+        }
+      }
+    ) -> _StartAutomatedReasoningPolicyBuildWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutomatedReasoningPolicyBuildWorkflowResponse
+
+    interface _StartAutomatedReasoningPolicyTestWorkflowResponse
+      include Smithy::Client::_Response[Types::StartAutomatedReasoningPolicyTestWorkflowResponse]
+      def policy_arn: () -> String?
+    end
+    def start_automated_reasoning_policy_test_workflow: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?test_case_ids: Array[String],
+      ?client_request_token: String
+    ) -> _StartAutomatedReasoningPolicyTestWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutomatedReasoningPolicyTestWorkflowResponse
+
+    interface _StopEvaluationJobResponse
+      include Smithy::Client::_Response[Types::StopEvaluationJobResponse]
+    end
+    def stop_evaluation_job: (
+      ?job_identifier: String
+    ) -> _StopEvaluationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEvaluationJobResponse
+
+    interface _StopModelCustomizationJobResponse
+      include Smithy::Client::_Response[Types::StopModelCustomizationJobResponse]
+    end
+    def stop_model_customization_job: (
+      ?job_identifier: String
+    ) -> _StopModelCustomizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopModelCustomizationJobResponse
+
+    interface _StopModelInvocationJobResponse
+      include Smithy::Client::_Response[Types::StopModelInvocationJobResponse]
+    end
+    def stop_model_invocation_job: (
+      ?job_identifier: String
+    ) -> _StopModelInvocationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopModelInvocationJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAutomatedReasoningPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateAutomatedReasoningPolicyResponse]
+      def policy_arn: () -> String?
+      def name: () -> String?
+      def definition_hash: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_automated_reasoning_policy: (
+      ?policy_arn: String,
+      ?policy_definition: {
+        version: String,
+        types: Array[
+          {
+            name: String,
+            description: String,
+            values: Array[
+              {
+                value: String,
+                description: String
+              }
+            ]
+          }
+        ],
+        rules: Array[
+          {
+            id: String,
+            expression: String,
+            alternate_expression: String
+          }
+        ],
+        variables: Array[
+          {
+            name: String,
+            type: untyped,
+            description: String
+          }
+        ]
+      },
+      ?name: String,
+      ?description: String
+    ) -> _UpdateAutomatedReasoningPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomatedReasoningPolicyResponse
+
+    interface _UpdateAutomatedReasoningPolicyAnnotationsResponse
+      include Smithy::Client::_Response[Types::UpdateAutomatedReasoningPolicyAnnotationsResponse]
+      def policy_arn: () -> String?
+      def build_workflow_id: () -> String?
+      def annotation_set_hash: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_automated_reasoning_policy_annotations: (
+      ?policy_arn: String,
+      ?build_workflow_id: String,
+      ?annotations: Array[
+        {
+          add_type: {
+            name: String,
+            description: String,
+            values: Array[
+              {
+                value: String,
+                description: String
+              }
+            ]
+          },
+          update_type: {
+            name: untyped,
+            new_name: untyped,
+            description: untyped,
+            values: Array[
+              {
+                add_type_value: {
+                  value: untyped,
+                  description: untyped
+                },
+                update_type_value: {
+                  value: untyped,
+                  new_value: untyped,
+                  description: untyped
+                },
+                delete_type_value: {
+                  value: untyped
+                }
+              }
+            ]
+          },
+          delete_type: {
+            name: untyped
+          },
+          add_variable: {
+            name: String,
+            type: untyped,
+            description: String
+          },
+          update_variable: {
+            name: untyped,
+            new_name: untyped,
+            description: untyped
+          },
+          delete_variable: {
+            name: untyped
+          },
+          add_rule: {
+            expression: String
+          },
+          update_rule: {
+            rule_id: String,
+            expression: untyped
+          },
+          delete_rule: {
+            rule_id: untyped
+          },
+          add_rule_from_natural_language: {
+            natural_language: String
+          },
+          update_from_rules_feedback: {
+            rule_ids: Array[String],
+            feedback: String
+          },
+          update_from_scenario_feedback: {
+            rule_ids: untyped,
+            scenario_expression: String,
+            feedback: untyped
+          },
+          ingest_content: {
+            content: String
+          }
+        }
+      ],
+      ?last_updated_annotation_set_hash: String
+    ) -> _UpdateAutomatedReasoningPolicyAnnotationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomatedReasoningPolicyAnnotationsResponse
+
+    interface _UpdateAutomatedReasoningPolicyTestCaseResponse
+      include Smithy::Client::_Response[Types::UpdateAutomatedReasoningPolicyTestCaseResponse]
+      def policy_arn: () -> String?
+      def test_case_id: () -> String?
+    end
+    def update_automated_reasoning_policy_test_case: (
+      ?policy_arn: String,
+      ?test_case_id: String,
+      ?guard_content: String,
+      ?query_content: String,
+      ?last_updated_at: Time,
+      ?expected_aggregated_findings_result: String,
+      ?confidence_threshold: Float,
+      ?kms_key_arn: String,
+      ?client_request_token: String
+    ) -> _UpdateAutomatedReasoningPolicyTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomatedReasoningPolicyTestCaseResponse
+
+    interface _UpdateGuardrailResponse
+      include Smithy::Client::_Response[Types::UpdateGuardrailResponse]
+      def guardrail_id: () -> String?
+      def guardrail_arn: () -> String?
+      def version: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_guardrail: (
+      ?guardrail_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?topic_policy_config: {
+        topics_config: Array[
+          {
+            name: String,
+            definition: String,
+            examples: Array[String],
+            type: String,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        tier_config: {
+          tier_name: String
+        }
+      },
+      ?content_policy_config: {
+        filters_config: Array[
+          {
+            type: String,
+            input_strength: String,
+            output_strength: untyped,
+            input_modalities: Array[String],
+            output_modalities: untyped,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        tier_config: {
+          tier_name: String
+        }
+      },
+      ?word_policy_config: {
+        words_config: Array[
+          {
+            text: String,
+            input_action: String,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        managed_word_lists_config: Array[
+          {
+            type: String,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: untyped,
+            output_enabled: untyped
+          }
+        ]
+      },
+      ?sensitive_information_policy_config: {
+        pii_entities_config: Array[
+          {
+            type: String,
+            action: String,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: bool,
+            output_enabled: untyped
+          }
+        ],
+        regexes_config: Array[
+          {
+            name: String,
+            description: untyped,
+            pattern: untyped,
+            action: untyped,
+            input_action: untyped,
+            output_action: untyped,
+            input_enabled: untyped,
+            output_enabled: untyped
+          }
+        ]
+      },
+      ?contextual_grounding_policy_config: {
+        filters_config: Array[
+          {
+            type: String,
+            threshold: Float,
+            action: String,
+            enabled: bool
+          }
+        ]
+      },
+      ?automated_reasoning_policy_config: {
+        policies: Array[String],
+        confidence_threshold: Float
+      },
+      ?cross_region_config: {
+        guardrail_profile_identifier: String
+      },
+      ?blocked_input_messaging: String,
+      ?blocked_outputs_messaging: String,
+      ?kms_key_id: String
+    ) -> _UpdateGuardrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGuardrailResponse
+
+    interface _UpdateMarketplaceModelEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateMarketplaceModelEndpointResponse]
+      def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint?
+    end
+    def update_marketplace_model_endpoint: (
+      ?endpoint_arn: String,
+      ?endpoint_config: {
+        sage_maker: {
+          initial_instance_count: Integer,
+          instance_type: String,
+          execution_role: String,
+          kms_encryption_key: String,
+          vpc: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String]
+          }
+        }
+      },
+      ?client_request_token: String
+    ) -> _UpdateMarketplaceModelEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMarketplaceModelEndpointResponse
+
+    interface _UpdateProvisionedModelThroughputResponse
+      include Smithy::Client::_Response[Types::UpdateProvisionedModelThroughputResponse]
+    end
+    def update_provisioned_model_throughput: (
+      ?provisioned_model_id: String,
+      ?desired_provisioned_model_name: String,
+      ?desired_model_id: String
+    ) -> _UpdateProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProvisionedModelThroughputResponse
+  end
+end

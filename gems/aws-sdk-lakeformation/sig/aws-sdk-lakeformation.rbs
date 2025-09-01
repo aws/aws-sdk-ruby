@@ -1,0 +1,5 @@
+  module Aws
+    module LakeFormation
+      VERSION: String
+    end
+  end

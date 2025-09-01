@@ -1,0 +1,5 @@
+  module Aws
+    module FraudDetector
+      VERSION: String
+    end
+  end

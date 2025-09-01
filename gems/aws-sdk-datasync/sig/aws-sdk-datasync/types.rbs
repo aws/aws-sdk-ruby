@@ -1,0 +1,2633 @@
+module Aws::DataSync
+  module Types
+
+    class AgentListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+        ?name: String,
+        ?status: String,
+        ?platform: Types::Platform,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor platform: Types::Platform?
+    end
+
+    module AgentStatus
+      ONLINE: String
+      OFFLINE: String
+    end
+
+    module Atime
+      NONE: String
+      BEST_EFFORT: String
+    end
+
+    module AzureAccessTier
+      HOT: String
+      COOL: String
+      ARCHIVE: String
+    end
+
+    module AzureBlobAuthenticationType
+      SAS: String
+      NONE: String
+    end
+
+    class AzureBlobSasConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+    end
+
+    module AzureBlobType
+      BLOCK: String
+    end
+
+    class CancelTaskExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+    end
+
+    class CancelTaskExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CmkSecretConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_key: String,
+        ?agent_name: String,
+        ?tags: Array[Types::TagListEntry],
+        ?vpc_endpoint_id: String,
+        ?subnet_arns: Array[String],
+        ?security_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_key: String?
+      attr_accessor agent_name: String?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor subnet_arns: Array[String]?
+      attr_accessor security_group_arns: Array[String]?
+    end
+
+    class CreateAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+    end
+
+    class CreateLocationAzureBlobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_url: String,
+        ?authentication_type: String,
+        ?sas_configuration: Types::AzureBlobSasConfiguration,
+        ?blob_type: String,
+        ?access_tier: String,
+        ?subdirectory: String,
+        ?agent_arns: Array[String],
+        ?tags: Array[Types::TagListEntry],
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_url: String?
+      attr_accessor authentication_type: String?
+      attr_accessor sas_configuration: Types::AzureBlobSasConfiguration?
+      attr_accessor blob_type: String?
+      attr_accessor access_tier: String?
+      attr_accessor subdirectory: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class CreateLocationAzureBlobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationEfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?efs_filesystem_arn: String,
+        ?ec2_config: Types::Ec2Config,
+        ?tags: Array[Types::TagListEntry],
+        ?access_point_arn: String,
+        ?file_system_access_role_arn: String,
+        ?in_transit_encryption: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor efs_filesystem_arn: String?
+      attr_accessor ec2_config: Types::Ec2Config?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor access_point_arn: String?
+      attr_accessor file_system_access_role_arn: String?
+      attr_accessor in_transit_encryption: String?
+    end
+
+    class CreateLocationEfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationFsxLustreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fsx_filesystem_arn: String,
+        ?security_group_arns: Array[String],
+        ?subdirectory: String,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fsx_filesystem_arn: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor subdirectory: String?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationFsxLustreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationFsxOntapRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: Types::FsxProtocol,
+        ?security_group_arns: Array[String],
+        ?storage_virtual_machine_arn: String,
+        ?subdirectory: String,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: Types::FsxProtocol?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor storage_virtual_machine_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationFsxOntapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationFsxOpenZfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fsx_filesystem_arn: String,
+        ?protocol: Types::FsxProtocol,
+        ?security_group_arns: Array[String],
+        ?subdirectory: String,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fsx_filesystem_arn: String?
+      attr_accessor protocol: Types::FsxProtocol?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor subdirectory: String?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationFsxOpenZfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationFsxWindowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?fsx_filesystem_arn: String,
+        ?security_group_arns: Array[String],
+        ?tags: Array[Types::TagListEntry],
+        ?user: String,
+        ?domain: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor fsx_filesystem_arn: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor user: String?
+      attr_accessor domain: String?
+      attr_accessor password: String?
+    end
+
+    class CreateLocationFsxWindowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationHdfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?name_nodes: Array[Types::HdfsNameNode],
+        ?block_size: Integer,
+        ?replication_factor: Integer,
+        ?kms_key_provider_uri: String,
+        ?qop_configuration: Types::QopConfiguration,
+        ?authentication_type: String,
+        ?simple_user: String,
+        ?kerberos_principal: String,
+        ?kerberos_keytab: String,
+        ?kerberos_krb5_conf: String,
+        ?agent_arns: Array[String],
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor name_nodes: Array[Types::HdfsNameNode]?
+      attr_accessor block_size: Integer?
+      attr_accessor replication_factor: Integer?
+      attr_accessor kms_key_provider_uri: String?
+      attr_accessor qop_configuration: Types::QopConfiguration?
+      attr_accessor authentication_type: String?
+      attr_accessor simple_user: String?
+      attr_accessor kerberos_principal: String?
+      attr_accessor kerberos_keytab: String?
+      attr_accessor kerberos_krb5_conf: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationHdfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationNfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?server_hostname: String,
+        ?on_prem_config: Types::OnPremConfig,
+        ?mount_options: Types::NfsMountOptions,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor server_hostname: String?
+      attr_accessor on_prem_config: Types::OnPremConfig?
+      attr_accessor mount_options: Types::NfsMountOptions?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationNfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationObjectStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_hostname: String,
+        ?server_port: Integer,
+        ?server_protocol: String,
+        ?subdirectory: String,
+        ?bucket_name: String,
+        ?access_key: String,
+        ?secret_key: String,
+        ?agent_arns: Array[String],
+        ?tags: Array[Types::TagListEntry],
+        ?server_certificate: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_hostname: String?
+      attr_accessor server_port: Integer?
+      attr_accessor server_protocol: String?
+      attr_accessor subdirectory: String?
+      attr_accessor bucket_name: String?
+      attr_accessor access_key: String?
+      attr_accessor secret_key: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor server_certificate: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class CreateLocationObjectStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationS3Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?s3_bucket_arn: String,
+        ?s3_storage_class: String,
+        ?s3_config: Types::S3Config,
+        ?agent_arns: Array[String],
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor s3_storage_class: String?
+      attr_accessor s3_config: Types::S3Config?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class CreateLocationS3Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateLocationSmbRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?server_hostname: String,
+        ?user: String,
+        ?domain: String,
+        ?password: String,
+        ?agent_arns: Array[String],
+        ?mount_options: Types::SmbMountOptions,
+        ?tags: Array[Types::TagListEntry],
+        ?authentication_type: String,
+        ?dns_ip_addresses: Array[String],
+        ?kerberos_principal: String,
+        ?kerberos_keytab: String,
+        ?kerberos_krb5_conf: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor server_hostname: String?
+      attr_accessor user: String?
+      attr_accessor domain: String?
+      attr_accessor password: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor mount_options: Types::SmbMountOptions?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor authentication_type: String?
+      attr_accessor dns_ip_addresses: Array[String]?
+      attr_accessor kerberos_principal: String?
+      attr_accessor kerberos_keytab: String?
+      attr_accessor kerberos_krb5_conf: String?
+    end
+
+    class CreateLocationSmbResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class CreateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_location_arn: String,
+        ?destination_location_arn: String,
+        ?cloud_watch_log_group_arn: String,
+        ?name: String,
+        ?options: Types::Options,
+        ?excludes: Array[Types::FilterRule],
+        ?schedule: Types::TaskSchedule,
+        ?tags: Array[Types::TagListEntry],
+        ?includes: Array[Types::FilterRule],
+        ?manifest_config: Types::ManifestConfig,
+        ?task_report_config: Types::TaskReportConfig,
+        ?task_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_location_arn: String?
+      attr_accessor destination_location_arn: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor name: String?
+      attr_accessor options: Types::Options?
+      attr_accessor excludes: Array[Types::FilterRule]?
+      attr_accessor schedule: Types::TaskSchedule?
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor includes: Array[Types::FilterRule]?
+      attr_accessor manifest_config: Types::ManifestConfig?
+      attr_accessor task_report_config: Types::TaskReportConfig?
+      attr_accessor task_mode: String?
+    end
+
+    class CreateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+    end
+
+    class CustomSecretConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?secret_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor secret_access_role_arn: String?
+    end
+
+    class DeleteAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+    end
+
+    class DeleteAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DeleteLocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+    end
+
+    class DeleteTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+    end
+
+    class DescribeAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+        ?name: String,
+        ?status: String,
+        ?last_connection_time: Time,
+        ?creation_time: Time,
+        ?endpoint_type: String,
+        ?private_link_config: Types::PrivateLinkConfig,
+        ?platform: Types::Platform,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor last_connection_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor endpoint_type: String?
+      attr_accessor private_link_config: Types::PrivateLinkConfig?
+      attr_accessor platform: Types::Platform?
+    end
+
+    class DescribeLocationAzureBlobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationAzureBlobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?authentication_type: String,
+        ?blob_type: String,
+        ?access_tier: String,
+        ?agent_arns: Array[String],
+        ?creation_time: Time,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor authentication_type: String?
+      attr_accessor blob_type: String?
+      attr_accessor access_tier: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class DescribeLocationEfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationEfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?ec2_config: Types::Ec2Config,
+        ?creation_time: Time,
+        ?access_point_arn: String,
+        ?file_system_access_role_arn: String,
+        ?in_transit_encryption: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor ec2_config: Types::Ec2Config?
+      attr_accessor creation_time: Time?
+      attr_accessor access_point_arn: String?
+      attr_accessor file_system_access_role_arn: String?
+      attr_accessor in_transit_encryption: String?
+    end
+
+    class DescribeLocationFsxLustreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationFsxLustreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?security_group_arns: Array[String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class DescribeLocationFsxOntapRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationFsxOntapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?location_arn: String,
+        ?location_uri: String,
+        ?protocol: Types::FsxProtocol,
+        ?security_group_arns: Array[String],
+        ?storage_virtual_machine_arn: String,
+        ?fsx_filesystem_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor protocol: Types::FsxProtocol?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor storage_virtual_machine_arn: String?
+      attr_accessor fsx_filesystem_arn: String?
+    end
+
+    class DescribeLocationFsxOpenZfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationFsxOpenZfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?security_group_arns: Array[String],
+        ?protocol: Types::FsxProtocol,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor protocol: Types::FsxProtocol?
+      attr_accessor creation_time: Time?
+    end
+
+    class DescribeLocationFsxWindowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationFsxWindowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?security_group_arns: Array[String],
+        ?creation_time: Time,
+        ?user: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor user: String?
+      attr_accessor domain: String?
+    end
+
+    class DescribeLocationHdfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationHdfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?name_nodes: Array[Types::HdfsNameNode],
+        ?block_size: Integer,
+        ?replication_factor: Integer,
+        ?kms_key_provider_uri: String,
+        ?qop_configuration: Types::QopConfiguration,
+        ?authentication_type: String,
+        ?simple_user: String,
+        ?kerberos_principal: String,
+        ?agent_arns: Array[String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor name_nodes: Array[Types::HdfsNameNode]?
+      attr_accessor block_size: Integer?
+      attr_accessor replication_factor: Integer?
+      attr_accessor kms_key_provider_uri: String?
+      attr_accessor qop_configuration: Types::QopConfiguration?
+      attr_accessor authentication_type: String?
+      attr_accessor simple_user: String?
+      attr_accessor kerberos_principal: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class DescribeLocationNfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationNfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?on_prem_config: Types::OnPremConfig,
+        ?mount_options: Types::NfsMountOptions,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor on_prem_config: Types::OnPremConfig?
+      attr_accessor mount_options: Types::NfsMountOptions?
+      attr_accessor creation_time: Time?
+    end
+
+    class DescribeLocationObjectStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationObjectStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?access_key: String,
+        ?server_port: Integer,
+        ?server_protocol: String,
+        ?agent_arns: Array[String],
+        ?creation_time: Time,
+        ?server_certificate: String,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor access_key: String?
+      attr_accessor server_port: Integer?
+      attr_accessor server_protocol: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor creation_time: Time?
+      attr_accessor server_certificate: String?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class DescribeLocationS3Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationS3Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?s3_storage_class: String,
+        ?s3_config: Types::S3Config,
+        ?agent_arns: Array[String],
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor s3_storage_class: String?
+      attr_accessor s3_config: Types::S3Config?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor creation_time: Time?
+    end
+
+    class DescribeLocationSmbRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+    end
+
+    class DescribeLocationSmbResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+        ?agent_arns: Array[String],
+        ?user: String,
+        ?domain: String,
+        ?mount_options: Types::SmbMountOptions,
+        ?creation_time: Time,
+        ?dns_ip_addresses: Array[String],
+        ?kerberos_principal: String,
+        ?authentication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor user: String?
+      attr_accessor domain: String?
+      attr_accessor mount_options: Types::SmbMountOptions?
+      attr_accessor creation_time: Time?
+      attr_accessor dns_ip_addresses: Array[String]?
+      attr_accessor kerberos_principal: String?
+      attr_accessor authentication_type: String?
+    end
+
+    class DescribeTaskExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+    end
+
+    class DescribeTaskExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+        ?status: String,
+        ?options: Types::Options,
+        ?excludes: Array[Types::FilterRule],
+        ?includes: Array[Types::FilterRule],
+        ?manifest_config: Types::ManifestConfig,
+        ?start_time: Time,
+        ?estimated_files_to_transfer: Integer,
+        ?estimated_bytes_to_transfer: Integer,
+        ?files_transferred: Integer,
+        ?bytes_written: Integer,
+        ?bytes_transferred: Integer,
+        ?bytes_compressed: Integer,
+        ?result: Types::TaskExecutionResultDetail,
+        ?task_report_config: Types::TaskReportConfig,
+        ?files_deleted: Integer,
+        ?files_skipped: Integer,
+        ?files_verified: Integer,
+        ?report_result: Types::ReportResult,
+        ?estimated_files_to_delete: Integer,
+        ?task_mode: String,
+        ?files_prepared: Integer,
+        ?files_listed: Types::TaskExecutionFilesListedDetail,
+        ?files_failed: Types::TaskExecutionFilesFailedDetail,
+        ?launch_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+      attr_accessor status: String?
+      attr_accessor options: Types::Options?
+      attr_accessor excludes: Array[Types::FilterRule]?
+      attr_accessor includes: Array[Types::FilterRule]?
+      attr_accessor manifest_config: Types::ManifestConfig?
+      attr_accessor start_time: Time?
+      attr_accessor estimated_files_to_transfer: Integer?
+      attr_accessor estimated_bytes_to_transfer: Integer?
+      attr_accessor files_transferred: Integer?
+      attr_accessor bytes_written: Integer?
+      attr_accessor bytes_transferred: Integer?
+      attr_accessor bytes_compressed: Integer?
+      attr_accessor result: Types::TaskExecutionResultDetail?
+      attr_accessor task_report_config: Types::TaskReportConfig?
+      attr_accessor files_deleted: Integer?
+      attr_accessor files_skipped: Integer?
+      attr_accessor files_verified: Integer?
+      attr_accessor report_result: Types::ReportResult?
+      attr_accessor estimated_files_to_delete: Integer?
+      attr_accessor task_mode: String?
+      attr_accessor files_prepared: Integer?
+      attr_accessor files_listed: Types::TaskExecutionFilesListedDetail?
+      attr_accessor files_failed: Types::TaskExecutionFilesFailedDetail?
+      attr_accessor launch_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class DescribeTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+    end
+
+    class DescribeTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+        ?status: String,
+        ?name: String,
+        ?current_task_execution_arn: String,
+        ?source_location_arn: String,
+        ?destination_location_arn: String,
+        ?cloud_watch_log_group_arn: String,
+        ?source_network_interface_arns: Array[String],
+        ?destination_network_interface_arns: Array[String],
+        ?options: Types::Options,
+        ?excludes: Array[Types::FilterRule],
+        ?schedule: Types::TaskSchedule,
+        ?error_code: String,
+        ?error_detail: String,
+        ?creation_time: Time,
+        ?includes: Array[Types::FilterRule],
+        ?manifest_config: Types::ManifestConfig,
+        ?task_report_config: Types::TaskReportConfig,
+        ?schedule_details: Types::TaskScheduleDetails,
+        ?task_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor current_task_execution_arn: String?
+      attr_accessor source_location_arn: String?
+      attr_accessor destination_location_arn: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor source_network_interface_arns: Array[String]?
+      attr_accessor destination_network_interface_arns: Array[String]?
+      attr_accessor options: Types::Options?
+      attr_accessor excludes: Array[Types::FilterRule]?
+      attr_accessor schedule: Types::TaskSchedule?
+      attr_accessor error_code: String?
+      attr_accessor error_detail: String?
+      attr_accessor creation_time: Time?
+      attr_accessor includes: Array[Types::FilterRule]?
+      attr_accessor manifest_config: Types::ManifestConfig?
+      attr_accessor task_report_config: Types::TaskReportConfig?
+      attr_accessor schedule_details: Types::TaskScheduleDetails?
+      attr_accessor task_mode: String?
+    end
+
+    class Ec2Config
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_arn: String,
+        ?security_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_arn: String?
+      attr_accessor security_group_arns: Array[String]?
+    end
+
+    module EfsInTransitEncryption
+      NONE: String
+      TLS1_2: String
+    end
+
+    module EndpointType
+      PUBLIC: String
+      PRIVATE_LINK: String
+      FIPS: String
+    end
+
+    class FilterRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_type: String?
+      attr_accessor value: String?
+    end
+
+    module FilterType
+      SIMPLE_PATTERN: String
+    end
+
+    class FsxProtocol
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nfs: Types::FsxProtocolNfs,
+        ?smb: Types::FsxProtocolSmb,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nfs: Types::FsxProtocolNfs?
+      attr_accessor smb: Types::FsxProtocolSmb?
+    end
+
+    class FsxProtocolNfs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mount_options: Types::NfsMountOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mount_options: Types::NfsMountOptions?
+    end
+
+    class FsxProtocolSmb
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?mount_options: Types::SmbMountOptions,
+        ?password: String,
+        ?user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor mount_options: Types::SmbMountOptions?
+      attr_accessor password: String?
+      attr_accessor user: String?
+    end
+
+    class FsxUpdateProtocol
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nfs: Types::FsxProtocolNfs,
+        ?smb: Types::FsxUpdateProtocolSmb,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nfs: Types::FsxProtocolNfs?
+      attr_accessor smb: Types::FsxUpdateProtocolSmb?
+    end
+
+    class FsxUpdateProtocolSmb
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?mount_options: Types::SmbMountOptions,
+        ?password: String,
+        ?user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor mount_options: Types::SmbMountOptions?
+      attr_accessor password: String?
+      attr_accessor user: String?
+    end
+
+    module Gid
+      NONE: String
+      INT_VALUE: String
+      NAME: String
+      BOTH: String
+    end
+
+    module HdfsAuthenticationType
+      SIMPLE: String
+      KERBEROS: String
+    end
+
+    module HdfsDataTransferProtection
+      DISABLED: String
+      AUTHENTICATION: String
+      INTEGRITY: String
+      PRIVACY: String
+    end
+
+    class HdfsNameNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor port: Integer?
+    end
+
+    module HdfsRpcProtection
+      DISABLED: String
+      AUTHENTICATION: String
+      INTEGRITY: String
+      PRIVACY: String
+    end
+
+    class InternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?datasync_error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor datasync_error_code: String?
+    end
+
+    class ListAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agents: Array[Types::AgentListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agents: Array[Types::AgentListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLocationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::LocationFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::LocationFilter]?
+    end
+
+    class ListLocationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locations: Array[Types::LocationListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locations: Array[Types::LocationListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::TagListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaskExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaskExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_executions: Array[Types::TaskExecutionListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_executions: Array[Types::TaskExecutionListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::TaskFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::TaskFilter]?
+    end
+
+    class ListTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::TaskListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::TaskListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class LocationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    module LocationFilterName
+      LocationUri: String
+      LocationType: String
+      CreationTime: String
+    end
+
+    class LocationListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?location_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor location_uri: String?
+    end
+
+    module LogLevel
+      OFF: String
+      BASIC: String
+      TRANSFER: String
+    end
+
+    class ManagedSecretConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+    end
+
+    module ManifestAction
+      TRANSFER: String
+    end
+
+    class ManifestConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?format: String,
+        ?source: Types::SourceManifestConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor format: String?
+      attr_accessor source: Types::SourceManifestConfig?
+    end
+
+    module ManifestFormat
+      CSV: String
+    end
+
+    module Mtime
+      NONE: String
+      PRESERVE: String
+    end
+
+    class NfsMountOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    module NfsVersion
+      AUTOMATIC: String
+      NFS3: String
+      NFS4_0: String
+      NFS4_1: String
+    end
+
+    module ObjectStorageServerProtocol
+      HTTPS: String
+      HTTP: String
+    end
+
+    module ObjectTags
+      PRESERVE: String
+      NONE: String
+    end
+
+    module ObjectVersionIds
+      INCLUDE: String
+      NONE: String
+    end
+
+    class OnPremConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arns: Array[String]?
+    end
+
+    module Operator
+      EQ: String
+      NE: String
+      IN: String
+      LE: String
+      LT: String
+      GE: String
+      GT: String
+      CONTAINS: String
+      NOT_CONTAINS: String
+      BEGINS_WITH: String
+    end
+
+    class Options
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verify_mode: String,
+        ?overwrite_mode: String,
+        ?atime: String,
+        ?mtime: String,
+        ?uid: String,
+        ?gid: String,
+        ?preserve_deleted_files: String,
+        ?preserve_devices: String,
+        ?posix_permissions: String,
+        ?bytes_per_second: Integer,
+        ?task_queueing: String,
+        ?log_level: String,
+        ?transfer_mode: String,
+        ?security_descriptor_copy_flags: String,
+        ?object_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verify_mode: String?
+      attr_accessor overwrite_mode: String?
+      attr_accessor atime: String?
+      attr_accessor mtime: String?
+      attr_accessor uid: String?
+      attr_accessor gid: String?
+      attr_accessor preserve_deleted_files: String?
+      attr_accessor preserve_devices: String?
+      attr_accessor posix_permissions: String?
+      attr_accessor bytes_per_second: Integer?
+      attr_accessor task_queueing: String?
+      attr_accessor log_level: String?
+      attr_accessor transfer_mode: String?
+      attr_accessor security_descriptor_copy_flags: String?
+      attr_accessor object_tags: String?
+    end
+
+    module OverwriteMode
+      ALWAYS: String
+      NEVER: String
+    end
+
+    module PhaseStatus
+      PENDING: String
+      SUCCESS: String
+      ERROR: String
+    end
+
+    class Platform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    module PosixPermissions
+      NONE: String
+      PRESERVE: String
+    end
+
+    module PreserveDeletedFiles
+      PRESERVE: String
+      REMOVE: String
+    end
+
+    module PreserveDevices
+      NONE: String
+      PRESERVE: String
+    end
+
+    class PrivateLinkConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?private_link_endpoint: String,
+        ?subnet_arns: Array[String],
+        ?security_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor private_link_endpoint: String?
+      attr_accessor subnet_arns: Array[String]?
+      attr_accessor security_group_arns: Array[String]?
+    end
+
+    class QopConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rpc_protection: String,
+        ?data_transfer_protection: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rpc_protection: String?
+      attr_accessor data_transfer_protection: String?
+    end
+
+    class ReportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::ReportDestinationS3,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::ReportDestinationS3?
+    end
+
+    class ReportDestinationS3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subdirectory: String,
+        ?s3_bucket_arn: String,
+        ?bucket_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subdirectory: String?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor bucket_access_role_arn: String?
+    end
+
+    module ReportLevel
+      ERRORS_ONLY: String
+      SUCCESSES_AND_ERRORS: String
+    end
+
+    module ReportOutputType
+      SUMMARY_ONLY: String
+      STANDARD: String
+    end
+
+    class ReportOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_level: String?
+    end
+
+    class ReportOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transferred: Types::ReportOverride,
+        ?verified: Types::ReportOverride,
+        ?deleted: Types::ReportOverride,
+        ?skipped: Types::ReportOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transferred: Types::ReportOverride?
+      attr_accessor verified: Types::ReportOverride?
+      attr_accessor deleted: Types::ReportOverride?
+      attr_accessor skipped: Types::ReportOverride?
+    end
+
+    class ReportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?error_code: String,
+        ?error_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_detail: String?
+    end
+
+    class S3Config
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_access_role_arn: String?
+    end
+
+    class S3ManifestConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_object_path: String,
+        ?bucket_access_role_arn: String,
+        ?s3_bucket_arn: String,
+        ?manifest_object_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_object_path: String?
+      attr_accessor bucket_access_role_arn: String?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor manifest_object_version_id: String?
+    end
+
+    module S3StorageClass
+      STANDARD: String
+      STANDARD_IA: String
+      ONEZONE_IA: String
+      INTELLIGENT_TIERING: String
+      GLACIER: String
+      DEEP_ARCHIVE: String
+      OUTPOSTS: String
+      GLACIER_INSTANT_RETRIEVAL: String
+    end
+
+    module ScheduleDisabledBy
+      USER: String
+      SERVICE: String
+    end
+
+    module ScheduleStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module SmbAuthenticationType
+      NTLM: String
+      KERBEROS: String
+    end
+
+    class SmbMountOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    module SmbSecurityDescriptorCopyFlags
+      NONE: String
+      OWNER_DACL: String
+      OWNER_DACL_SACL: String
+    end
+
+    module SmbVersion
+      AUTOMATIC: String
+      SMB2: String
+      SMB3: String
+      SMB1: String
+      SMB2_0: String
+    end
+
+    class SourceManifestConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3ManifestConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3ManifestConfig?
+    end
+
+    class StartTaskExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+        ?override_options: Types::Options,
+        ?includes: Array[Types::FilterRule],
+        ?excludes: Array[Types::FilterRule],
+        ?manifest_config: Types::ManifestConfig,
+        ?task_report_config: Types::TaskReportConfig,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+      attr_accessor override_options: Types::Options?
+      attr_accessor includes: Array[Types::FilterRule]?
+      attr_accessor excludes: Array[Types::FilterRule]?
+      attr_accessor manifest_config: Types::ManifestConfig?
+      attr_accessor task_report_config: Types::TaskReportConfig?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class StartTaskExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+    end
+
+    class TagListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::TagListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::TagListEntry]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskExecutionFilesFailedDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepare: Integer,
+        ?transfer: Integer,
+        ?verify: Integer,
+        ?delete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepare: Integer?
+      attr_accessor transfer: Integer?
+      attr_accessor verify: Integer?
+      attr_accessor delete: Integer?
+    end
+
+    class TaskExecutionFilesListedDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?at_source: Integer,
+        ?at_destination_for_delete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor at_source: Integer?
+      attr_accessor at_destination_for_delete: Integer?
+    end
+
+    class TaskExecutionListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+        ?status: String,
+        ?task_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+      attr_accessor status: String?
+      attr_accessor task_mode: String?
+    end
+
+    class TaskExecutionResultDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prepare_duration: Integer,
+        ?prepare_status: String,
+        ?total_duration: Integer,
+        ?transfer_duration: Integer,
+        ?transfer_status: String,
+        ?verify_duration: Integer,
+        ?verify_status: String,
+        ?error_code: String,
+        ?error_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prepare_duration: Integer?
+      attr_accessor prepare_status: String?
+      attr_accessor total_duration: Integer?
+      attr_accessor transfer_duration: Integer?
+      attr_accessor transfer_status: String?
+      attr_accessor verify_duration: Integer?
+      attr_accessor verify_status: String?
+      attr_accessor error_code: String?
+      attr_accessor error_detail: String?
+    end
+
+    module TaskExecutionStatus
+      QUEUED: String
+      CANCELLING: String
+      LAUNCHING: String
+      PREPARING: String
+      TRANSFERRING: String
+      VERIFYING: String
+      SUCCESS: String
+      ERROR: String
+    end
+
+    class TaskFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    module TaskFilterName
+      LocationId: String
+      CreationTime: String
+    end
+
+    class TaskListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+        ?status: String,
+        ?name: String,
+        ?task_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor task_mode: String?
+    end
+
+    module TaskMode
+      BASIC: String
+      ENHANCED: String
+    end
+
+    module TaskQueueing
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TaskReportConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::ReportDestination,
+        ?output_type: String,
+        ?report_level: String,
+        ?object_version_ids: String,
+        ?overrides: Types::ReportOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::ReportDestination?
+      attr_accessor output_type: String?
+      attr_accessor report_level: String?
+      attr_accessor object_version_ids: String?
+      attr_accessor overrides: Types::ReportOverrides?
+    end
+
+    class TaskSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor status: String?
+    end
+
+    class TaskScheduleDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_update_time: Time,
+        ?disabled_reason: String,
+        ?disabled_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_update_time: Time?
+      attr_accessor disabled_reason: String?
+      attr_accessor disabled_by: String?
+    end
+
+    module TaskStatus
+      AVAILABLE: String
+      CREATING: String
+      QUEUED: String
+      RUNNING: String
+      UNAVAILABLE: String
+    end
+
+    module TransferMode
+      CHANGED: String
+      ALL: String
+    end
+
+    module Uid
+      NONE: String
+      INT_VALUE: String
+      NAME: String
+      BOTH: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_arn: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationAzureBlobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?authentication_type: String,
+        ?sas_configuration: Types::AzureBlobSasConfiguration,
+        ?blob_type: String,
+        ?access_tier: String,
+        ?agent_arns: Array[String],
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor authentication_type: String?
+      attr_accessor sas_configuration: Types::AzureBlobSasConfiguration?
+      attr_accessor blob_type: String?
+      attr_accessor access_tier: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class UpdateLocationAzureBlobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationEfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?access_point_arn: String,
+        ?file_system_access_role_arn: String,
+        ?in_transit_encryption: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor access_point_arn: String?
+      attr_accessor file_system_access_role_arn: String?
+      attr_accessor in_transit_encryption: String?
+    end
+
+    class UpdateLocationEfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationFsxLustreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+    end
+
+    class UpdateLocationFsxLustreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationFsxOntapRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?protocol: Types::FsxUpdateProtocol,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor protocol: Types::FsxUpdateProtocol?
+      attr_accessor subdirectory: String?
+    end
+
+    class UpdateLocationFsxOntapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationFsxOpenZfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?protocol: Types::FsxProtocol,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor protocol: Types::FsxProtocol?
+      attr_accessor subdirectory: String?
+    end
+
+    class UpdateLocationFsxOpenZfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationFsxWindowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?domain: String,
+        ?user: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor domain: String?
+      attr_accessor user: String?
+      attr_accessor password: String?
+    end
+
+    class UpdateLocationFsxWindowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationHdfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?name_nodes: Array[Types::HdfsNameNode],
+        ?block_size: Integer,
+        ?replication_factor: Integer,
+        ?kms_key_provider_uri: String,
+        ?qop_configuration: Types::QopConfiguration,
+        ?authentication_type: String,
+        ?simple_user: String,
+        ?kerberos_principal: String,
+        ?kerberos_keytab: String,
+        ?kerberos_krb5_conf: String,
+        ?agent_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor name_nodes: Array[Types::HdfsNameNode]?
+      attr_accessor block_size: Integer?
+      attr_accessor replication_factor: Integer?
+      attr_accessor kms_key_provider_uri: String?
+      attr_accessor qop_configuration: Types::QopConfiguration?
+      attr_accessor authentication_type: String?
+      attr_accessor simple_user: String?
+      attr_accessor kerberos_principal: String?
+      attr_accessor kerberos_keytab: String?
+      attr_accessor kerberos_krb5_conf: String?
+      attr_accessor agent_arns: Array[String]?
+    end
+
+    class UpdateLocationHdfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationNfsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?server_hostname: String,
+        ?on_prem_config: Types::OnPremConfig,
+        ?mount_options: Types::NfsMountOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor server_hostname: String?
+      attr_accessor on_prem_config: Types::OnPremConfig?
+      attr_accessor mount_options: Types::NfsMountOptions?
+    end
+
+    class UpdateLocationNfsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationObjectStorageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?server_port: Integer,
+        ?server_protocol: String,
+        ?subdirectory: String,
+        ?server_hostname: String,
+        ?access_key: String,
+        ?secret_key: String,
+        ?agent_arns: Array[String],
+        ?server_certificate: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor server_port: Integer?
+      attr_accessor server_protocol: String?
+      attr_accessor subdirectory: String?
+      attr_accessor server_hostname: String?
+      attr_accessor access_key: String?
+      attr_accessor secret_key: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor server_certificate: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
+    end
+
+    class UpdateLocationObjectStorageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationS3Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?s3_storage_class: String,
+        ?s3_config: Types::S3Config,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor s3_storage_class: String?
+      attr_accessor s3_config: Types::S3Config?
+    end
+
+    class UpdateLocationS3Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLocationSmbRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_arn: String,
+        ?subdirectory: String,
+        ?server_hostname: String,
+        ?user: String,
+        ?domain: String,
+        ?password: String,
+        ?agent_arns: Array[String],
+        ?mount_options: Types::SmbMountOptions,
+        ?authentication_type: String,
+        ?dns_ip_addresses: Array[String],
+        ?kerberos_principal: String,
+        ?kerberos_keytab: String,
+        ?kerberos_krb5_conf: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_arn: String?
+      attr_accessor subdirectory: String?
+      attr_accessor server_hostname: String?
+      attr_accessor user: String?
+      attr_accessor domain: String?
+      attr_accessor password: String?
+      attr_accessor agent_arns: Array[String]?
+      attr_accessor mount_options: Types::SmbMountOptions?
+      attr_accessor authentication_type: String?
+      attr_accessor dns_ip_addresses: Array[String]?
+      attr_accessor kerberos_principal: String?
+      attr_accessor kerberos_keytab: String?
+      attr_accessor kerberos_krb5_conf: String?
+    end
+
+    class UpdateLocationSmbResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTaskExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_execution_arn: String,
+        ?options: Types::Options,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_execution_arn: String?
+      attr_accessor options: Types::Options?
+    end
+
+    class UpdateTaskExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_arn: String,
+        ?options: Types::Options,
+        ?excludes: Array[Types::FilterRule],
+        ?schedule: Types::TaskSchedule,
+        ?name: String,
+        ?cloud_watch_log_group_arn: String,
+        ?includes: Array[Types::FilterRule],
+        ?manifest_config: Types::ManifestConfig,
+        ?task_report_config: Types::TaskReportConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_arn: String?
+      attr_accessor options: Types::Options?
+      attr_accessor excludes: Array[Types::FilterRule]?
+      attr_accessor schedule: Types::TaskSchedule?
+      attr_accessor name: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor includes: Array[Types::FilterRule]?
+      attr_accessor manifest_config: Types::ManifestConfig?
+      attr_accessor task_report_config: Types::TaskReportConfig?
+    end
+
+    class UpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module VerifyMode
+      POINT_IN_TIME_CONSISTENT: String
+      ONLY_FILES_TRANSFERRED: String
+      NONE: String
+    end
+  end
+end

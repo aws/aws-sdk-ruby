@@ -1,0 +1,188 @@
+module Aws::Savingsplans
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Savingsplans::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateSavingsPlanResponse
+      include Smithy::Client::_Response[Types::CreateSavingsPlanResponse]
+      def savings_plan_id: () -> String?
+    end
+    def create_savings_plan: (
+      ?savings_plan_offering_id: String,
+      ?commitment: String,
+      ?upfront_payment_amount: String,
+      ?purchase_time: Time,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSavingsPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSavingsPlanResponse
+
+    interface _DeleteQueuedSavingsPlanResponse
+      include Smithy::Client::_Response[Types::DeleteQueuedSavingsPlanResponse]
+    end
+    def delete_queued_savings_plan: (
+      ?savings_plan_id: String
+    ) -> _DeleteQueuedSavingsPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueuedSavingsPlanResponse
+
+    interface _DescribeSavingsPlanRatesResponse
+      include Smithy::Client::_Response[Types::DescribeSavingsPlanRatesResponse]
+      def savings_plan_id: () -> String?
+      def search_results: () -> Array[Types::SavingsPlanRate]?
+      def next_token: () -> String?
+    end
+    def describe_savings_plan_rates: (
+      ?savings_plan_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeSavingsPlanRatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSavingsPlanRatesResponse
+
+    interface _DescribeSavingsPlansResponse
+      include Smithy::Client::_Response[Types::DescribeSavingsPlansResponse]
+      def savings_plans: () -> Array[Types::SavingsPlan]?
+      def next_token: () -> String?
+    end
+    def describe_savings_plans: (
+      ?savings_plan_arns: Array[String],
+      ?savings_plan_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?states: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeSavingsPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSavingsPlansResponse
+
+    interface _DescribeSavingsPlansOfferingRatesResponse
+      include Smithy::Client::_Response[Types::DescribeSavingsPlansOfferingRatesResponse]
+      def search_results: () -> Array[Types::SavingsPlanOfferingRate]?
+      def next_token: () -> String?
+    end
+    def describe_savings_plans_offering_rates: (
+      ?savings_plan_offering_ids: Array[String],
+      ?savings_plan_payment_options: Array[String],
+      ?savings_plan_types: Array[String],
+      ?products: Array[String],
+      ?service_codes: Array[String],
+      ?usage_types: Array[String],
+      ?operations: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeSavingsPlansOfferingRatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSavingsPlansOfferingRatesResponse
+
+    interface _DescribeSavingsPlansOfferingsResponse
+      include Smithy::Client::_Response[Types::DescribeSavingsPlansOfferingsResponse]
+      def search_results: () -> Array[Types::SavingsPlanOffering]?
+      def next_token: () -> String?
+    end
+    def describe_savings_plans_offerings: (
+      ?offering_ids: Array[String],
+      ?payment_options: Array[String],
+      ?product_type: String,
+      ?plan_types: Array[String],
+      ?durations: Array[Integer],
+      ?currencies: Array[String],
+      ?descriptions: Array[String],
+      ?service_codes: Array[String],
+      ?usage_types: Array[String],
+      ?operations: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeSavingsPlansOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSavingsPlansOfferingsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ReturnSavingsPlanResponse
+      include Smithy::Client::_Response[Types::ReturnSavingsPlanResponse]
+      def savings_plan_id: () -> String?
+    end
+    def return_savings_plan: (
+      ?savings_plan_id: String,
+      ?client_token: String
+    ) -> _ReturnSavingsPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReturnSavingsPlanResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

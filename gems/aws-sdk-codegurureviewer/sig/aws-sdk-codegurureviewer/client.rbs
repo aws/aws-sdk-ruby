@@ -1,0 +1,248 @@
+module Aws::CodeGuruReviewer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeGuruReviewer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateRepositoryResponse
+      include Smithy::Client::_Response[Types::AssociateRepositoryResponse]
+      def repository_association: () -> Types::RepositoryAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def associate_repository: (
+      ?repository: {
+        code_commit: {
+          name: String
+        },
+        bitbucket: {
+          name: untyped,
+          connection_arn: String,
+          owner: String
+        },
+        git_hub_enterprise_server: untyped,
+        s3_bucket: {
+          name: untyped,
+          bucket_name: String
+        }
+      },
+      ?client_request_token: String,
+      ?tags: Hash[String, String],
+      ?kms_key_details: {
+        kms_key_id: String,
+        encryption_option: String
+      }
+    ) -> _AssociateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateRepositoryResponse
+
+    interface _CreateCodeReviewResponse
+      include Smithy::Client::_Response[Types::CreateCodeReviewResponse]
+      def code_review: () -> Types::CodeReview?
+    end
+    def create_code_review: (
+      ?name: String,
+      ?repository_association_arn: String,
+      ?type: {
+        repository_analysis: {
+          repository_head: {
+            branch_name: String
+          },
+          source_code_type: {
+            commit_diff: {
+              source_commit: String,
+              destination_commit: untyped,
+              merge_base_commit: untyped
+            },
+            repository_head: untyped,
+            branch_diff: {
+              source_branch_name: untyped,
+              destination_branch_name: untyped
+            },
+            s3_bucket_repository: {
+              name: String,
+              details: {
+                bucket_name: String,
+                code_artifacts: {
+                  source_code_artifacts_object_key: String,
+                  build_artifacts_object_key: String
+                }
+              }
+            },
+            request_metadata: {
+              request_id: String,
+              requester: String,
+              event_info: {
+                name: String,
+                state: String
+              },
+              vendor_name: String
+            }
+          }
+        },
+        analysis_types: Array[String]
+      },
+      ?client_request_token: String
+    ) -> _CreateCodeReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeReviewResponse
+
+    interface _DescribeCodeReviewResponse
+      include Smithy::Client::_Response[Types::DescribeCodeReviewResponse]
+      def code_review: () -> Types::CodeReview?
+    end
+    def describe_code_review: (
+      ?code_review_arn: String
+    ) -> _DescribeCodeReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCodeReviewResponse
+
+    interface _DescribeRecommendationFeedbackResponse
+      include Smithy::Client::_Response[Types::DescribeRecommendationFeedbackResponse]
+      def recommendation_feedback: () -> Types::RecommendationFeedback?
+    end
+    def describe_recommendation_feedback: (
+      ?code_review_arn: String,
+      ?recommendation_id: String,
+      ?user_id: String
+    ) -> _DescribeRecommendationFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecommendationFeedbackResponse
+
+    interface _DescribeRepositoryAssociationResponse
+      include Smithy::Client::_Response[Types::DescribeRepositoryAssociationResponse]
+      def repository_association: () -> Types::RepositoryAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_repository_association: (
+      ?association_arn: String
+    ) -> _DescribeRepositoryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRepositoryAssociationResponse
+
+    interface _DisassociateRepositoryResponse
+      include Smithy::Client::_Response[Types::DisassociateRepositoryResponse]
+      def repository_association: () -> Types::RepositoryAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def disassociate_repository: (
+      ?association_arn: String
+    ) -> _DisassociateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateRepositoryResponse
+
+    interface _ListCodeReviewsResponse
+      include Smithy::Client::_Response[Types::ListCodeReviewsResponse]
+      def code_review_summaries: () -> Array[Types::CodeReviewSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_reviews: (
+      ?provider_types: Array[String],
+      ?states: Array[String],
+      ?repository_names: Array[String],
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCodeReviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeReviewsResponse
+
+    interface _ListRecommendationFeedbackResponse
+      include Smithy::Client::_Response[Types::ListRecommendationFeedbackResponse]
+      def recommendation_feedback_summaries: () -> Array[Types::RecommendationFeedbackSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommendation_feedback: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?code_review_arn: String,
+      ?user_ids: Array[String],
+      ?recommendation_ids: Array[String]
+    ) -> _ListRecommendationFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationFeedbackResponse
+
+    interface _ListRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsResponse]
+      def recommendation_summaries: () -> Array[Types::RecommendationSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommendations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?code_review_arn: String
+    ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
+
+    interface _ListRepositoryAssociationsResponse
+      include Smithy::Client::_Response[Types::ListRepositoryAssociationsResponse]
+      def repository_association_summaries: () -> Array[Types::RepositoryAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_repository_associations: (
+      ?provider_types: Array[String],
+      ?states: Array[String],
+      ?names: Array[String],
+      ?owners: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRepositoryAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoryAssociationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutRecommendationFeedbackResponse
+      include Smithy::Client::_Response[Types::PutRecommendationFeedbackResponse]
+    end
+    def put_recommendation_feedback: (
+      ?code_review_arn: String,
+      ?recommendation_id: String,
+      ?reactions: Array[String]
+    ) -> _PutRecommendationFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecommendationFeedbackResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

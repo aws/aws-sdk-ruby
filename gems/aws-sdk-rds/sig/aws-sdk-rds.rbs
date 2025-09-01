@@ -1,0 +1,5 @@
+  module Aws
+    module RDS
+      VERSION: String
+    end
+  end

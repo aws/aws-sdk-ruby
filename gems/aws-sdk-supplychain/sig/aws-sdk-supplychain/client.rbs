@@ -1,0 +1,516 @@
+module Aws::SupplyChain
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SupplyChain::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBillOfMaterialsImportJobResponse
+      include Smithy::Client::_Response[Types::CreateBillOfMaterialsImportJobResponse]
+      def job_id: () -> String?
+    end
+    def create_bill_of_materials_import_job: (
+      ?instance_id: String,
+      ?s3uri: String,
+      ?client_token: String
+    ) -> _CreateBillOfMaterialsImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBillOfMaterialsImportJobResponse
+
+    interface _CreateDataIntegrationFlowResponse
+      include Smithy::Client::_Response[Types::CreateDataIntegrationFlowResponse]
+      def instance_id: () -> String?
+      def name: () -> String?
+    end
+    def create_data_integration_flow: (
+      ?instance_id: String,
+      ?name: String,
+      ?sources: Array[
+        {
+          source_type: String,
+          source_name: String,
+          s3_source: {
+            bucket_name: String,
+            prefix: String,
+            options: {
+              file_type: String
+            }
+          },
+          dataset_source: {
+            dataset_identifier: String,
+            options: {
+              load_type: String,
+              dedupe_records: bool,
+              dedupe_strategy: {
+                type: String,
+                field_priority: {
+                  fields: Array[
+                    {
+                      name: String,
+                      sort_order: String
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ],
+      ?transformation: {
+        transformation_type: String,
+        sql_transformation: {
+          query: String
+        }
+      },
+      ?target: {
+        target_type: String,
+        s3_target: {
+          bucket_name: String,
+          prefix: String,
+          options: {
+            file_type: String
+          }
+        },
+        dataset_target: {
+          dataset_identifier: String,
+          options: {
+            load_type: String,
+            dedupe_records: bool,
+            dedupe_strategy: {
+              type: String,
+              field_priority: {
+                fields: Array[
+                  {
+                    name: String,
+                    sort_order: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateDataIntegrationFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataIntegrationFlowResponse
+
+    interface _CreateDataLakeDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDataLakeDatasetResponse]
+      def dataset: () -> Types::DataLakeDataset?
+    end
+    def create_data_lake_dataset: (
+      ?instance_id: String,
+      ?namespace: String,
+      ?name: String,
+      ?schema: {
+        name: String,
+        fields: Array[
+          {
+            name: String,
+            type: String,
+            is_required: bool
+          }
+        ],
+        primary_keys: Array[
+          {
+            name: untyped
+          }
+        ]
+      },
+      ?description: String,
+      ?partition_spec: {
+        fields: Array[
+          {
+            name: String,
+            transform: {
+              type: String
+            }
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateDataLakeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataLakeDatasetResponse
+
+    interface _CreateDataLakeNamespaceResponse
+      include Smithy::Client::_Response[Types::CreateDataLakeNamespaceResponse]
+      def namespace: () -> Types::DataLakeNamespace?
+    end
+    def create_data_lake_namespace: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDataLakeNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataLakeNamespaceResponse
+
+    interface _CreateInstanceResponse
+      include Smithy::Client::_Response[Types::CreateInstanceResponse]
+      def instance: () -> Types::Instance?
+    end
+    def create_instance: (
+      ?instance_name: String,
+      ?instance_description: String,
+      ?kms_key_arn: String,
+      ?web_app_dns_domain: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceResponse
+
+    interface _DeleteDataIntegrationFlowResponse
+      include Smithy::Client::_Response[Types::DeleteDataIntegrationFlowResponse]
+      def instance_id: () -> String?
+      def name: () -> String?
+    end
+    def delete_data_integration_flow: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _DeleteDataIntegrationFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataIntegrationFlowResponse
+
+    interface _DeleteDataLakeDatasetResponse
+      include Smithy::Client::_Response[Types::DeleteDataLakeDatasetResponse]
+      def instance_id: () -> String?
+      def namespace: () -> String?
+      def name: () -> String?
+    end
+    def delete_data_lake_dataset: (
+      ?instance_id: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _DeleteDataLakeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataLakeDatasetResponse
+
+    interface _DeleteDataLakeNamespaceResponse
+      include Smithy::Client::_Response[Types::DeleteDataLakeNamespaceResponse]
+      def instance_id: () -> String?
+      def name: () -> String?
+    end
+    def delete_data_lake_namespace: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _DeleteDataLakeNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataLakeNamespaceResponse
+
+    interface _DeleteInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteInstanceResponse]
+      def instance: () -> Types::Instance?
+    end
+    def delete_instance: (
+      ?instance_id: String
+    ) -> _DeleteInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceResponse
+
+    interface _GetBillOfMaterialsImportJobResponse
+      include Smithy::Client::_Response[Types::GetBillOfMaterialsImportJobResponse]
+      def job: () -> Types::BillOfMaterialsImportJob?
+    end
+    def get_bill_of_materials_import_job: (
+      ?instance_id: String,
+      ?job_id: String
+    ) -> _GetBillOfMaterialsImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillOfMaterialsImportJobResponse
+
+    interface _GetDataIntegrationEventResponse
+      include Smithy::Client::_Response[Types::GetDataIntegrationEventResponse]
+      def event: () -> Types::DataIntegrationEvent?
+    end
+    def get_data_integration_event: (
+      ?instance_id: String,
+      ?event_id: String
+    ) -> _GetDataIntegrationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataIntegrationEventResponse
+
+    interface _GetDataIntegrationFlowResponse
+      include Smithy::Client::_Response[Types::GetDataIntegrationFlowResponse]
+      def flow: () -> Types::DataIntegrationFlow?
+    end
+    def get_data_integration_flow: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _GetDataIntegrationFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataIntegrationFlowResponse
+
+    interface _GetDataIntegrationFlowExecutionResponse
+      include Smithy::Client::_Response[Types::GetDataIntegrationFlowExecutionResponse]
+      def flow_execution: () -> Types::DataIntegrationFlowExecution?
+    end
+    def get_data_integration_flow_execution: (
+      ?instance_id: String,
+      ?flow_name: String,
+      ?execution_id: String
+    ) -> _GetDataIntegrationFlowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataIntegrationFlowExecutionResponse
+
+    interface _GetDataLakeDatasetResponse
+      include Smithy::Client::_Response[Types::GetDataLakeDatasetResponse]
+      def dataset: () -> Types::DataLakeDataset?
+    end
+    def get_data_lake_dataset: (
+      ?instance_id: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetDataLakeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeDatasetResponse
+
+    interface _GetDataLakeNamespaceResponse
+      include Smithy::Client::_Response[Types::GetDataLakeNamespaceResponse]
+      def namespace: () -> Types::DataLakeNamespace?
+    end
+    def get_data_lake_namespace: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _GetDataLakeNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataLakeNamespaceResponse
+
+    interface _GetInstanceResponse
+      include Smithy::Client::_Response[Types::GetInstanceResponse]
+      def instance: () -> Types::Instance?
+    end
+    def get_instance: (
+      ?instance_id: String
+    ) -> _GetInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceResponse
+
+    interface _ListDataIntegrationEventsResponse
+      include Smithy::Client::_Response[Types::ListDataIntegrationEventsResponse]
+      def events: () -> Array[Types::DataIntegrationEvent]?
+      def next_token: () -> String?
+    end
+    def list_data_integration_events: (
+      ?instance_id: String,
+      ?event_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataIntegrationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIntegrationEventsResponse
+
+    interface _ListDataIntegrationFlowExecutionsResponse
+      include Smithy::Client::_Response[Types::ListDataIntegrationFlowExecutionsResponse]
+      def flow_executions: () -> Array[Types::DataIntegrationFlowExecution]?
+      def next_token: () -> String?
+    end
+    def list_data_integration_flow_executions: (
+      ?instance_id: String,
+      ?flow_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataIntegrationFlowExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIntegrationFlowExecutionsResponse
+
+    interface _ListDataIntegrationFlowsResponse
+      include Smithy::Client::_Response[Types::ListDataIntegrationFlowsResponse]
+      def flows: () -> Array[Types::DataIntegrationFlow]?
+      def next_token: () -> String?
+    end
+    def list_data_integration_flows: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataIntegrationFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIntegrationFlowsResponse
+
+    interface _ListDataLakeDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDataLakeDatasetsResponse]
+      def datasets: () -> Array[Types::DataLakeDataset]?
+      def next_token: () -> String?
+    end
+    def list_data_lake_datasets: (
+      ?instance_id: String,
+      ?namespace: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataLakeDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataLakeDatasetsResponse
+
+    interface _ListDataLakeNamespacesResponse
+      include Smithy::Client::_Response[Types::ListDataLakeNamespacesResponse]
+      def namespaces: () -> Array[Types::DataLakeNamespace]?
+      def next_token: () -> String?
+    end
+    def list_data_lake_namespaces: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataLakeNamespacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataLakeNamespacesResponse
+
+    interface _ListInstancesResponse
+      include Smithy::Client::_Response[Types::ListInstancesResponse]
+      def instances: () -> Array[Types::Instance]?
+      def next_token: () -> String?
+    end
+    def list_instances: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?instance_name_filter: Array[String],
+      ?instance_state_filter: Array[String]
+    ) -> _ListInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstancesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SendDataIntegrationEventResponse
+      include Smithy::Client::_Response[Types::SendDataIntegrationEventResponse]
+      def event_id: () -> String?
+    end
+    def send_data_integration_event: (
+      ?instance_id: String,
+      ?event_type: String,
+      ?data: String,
+      ?event_group_id: String,
+      ?event_timestamp: Time,
+      ?client_token: String,
+      ?dataset_target: {
+        dataset_identifier: String,
+        operation_type: String
+      }
+    ) -> _SendDataIntegrationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDataIntegrationEventResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDataIntegrationFlowResponse
+      include Smithy::Client::_Response[Types::UpdateDataIntegrationFlowResponse]
+      def flow: () -> Types::DataIntegrationFlow?
+    end
+    def update_data_integration_flow: (
+      ?instance_id: String,
+      ?name: String,
+      ?sources: Array[
+        {
+          source_type: String,
+          source_name: String,
+          s3_source: {
+            bucket_name: String,
+            prefix: String,
+            options: {
+              file_type: String
+            }
+          },
+          dataset_source: {
+            dataset_identifier: String,
+            options: {
+              load_type: String,
+              dedupe_records: bool,
+              dedupe_strategy: {
+                type: String,
+                field_priority: {
+                  fields: Array[
+                    {
+                      name: String,
+                      sort_order: String
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ],
+      ?transformation: {
+        transformation_type: String,
+        sql_transformation: {
+          query: String
+        }
+      },
+      ?target: {
+        target_type: String,
+        s3_target: {
+          bucket_name: String,
+          prefix: String,
+          options: {
+            file_type: String
+          }
+        },
+        dataset_target: {
+          dataset_identifier: String,
+          options: {
+            load_type: String,
+            dedupe_records: bool,
+            dedupe_strategy: {
+              type: String,
+              field_priority: {
+                fields: Array[
+                  {
+                    name: String,
+                    sort_order: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ) -> _UpdateDataIntegrationFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataIntegrationFlowResponse
+
+    interface _UpdateDataLakeDatasetResponse
+      include Smithy::Client::_Response[Types::UpdateDataLakeDatasetResponse]
+      def dataset: () -> Types::DataLakeDataset?
+    end
+    def update_data_lake_dataset: (
+      ?instance_id: String,
+      ?namespace: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateDataLakeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataLakeDatasetResponse
+
+    interface _UpdateDataLakeNamespaceResponse
+      include Smithy::Client::_Response[Types::UpdateDataLakeNamespaceResponse]
+      def namespace: () -> Types::DataLakeNamespace?
+    end
+    def update_data_lake_namespace: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateDataLakeNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataLakeNamespaceResponse
+
+    interface _UpdateInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateInstanceResponse]
+      def instance: () -> Types::Instance?
+    end
+    def update_instance: (
+      ?instance_id: String,
+      ?instance_name: String,
+      ?instance_description: String
+    ) -> _UpdateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceResponse
+  end
+end

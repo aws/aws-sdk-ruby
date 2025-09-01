@@ -1,0 +1,3276 @@
+module Aws::CleanRoomsML
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AudienceDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_destination: Types::S3ConfigMap,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_destination: Types::S3ConfigMap?
+    end
+
+    module AudienceExportJobStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+    end
+
+    class AudienceExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?audience_generation_job_arn: String,
+        ?audience_size: Types::AudienceSize,
+        ?description: String,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?output_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor audience_generation_job_arn: String?
+      attr_accessor audience_size: Types::AudienceSize?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor output_location: String?
+    end
+
+    class AudienceGenerationJobDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::S3ConfigMap,
+        ?role_arn: String,
+        ?sql_parameters: Types::ProtectedQuerySQLParameters,
+        ?sql_compute_configuration: Types::ComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::S3ConfigMap?
+      attr_accessor role_arn: String?
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters?
+      attr_accessor sql_compute_configuration: Types::ComputeConfiguration?
+    end
+
+    module AudienceGenerationJobStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETE_PENDING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+    end
+
+    class AudienceGenerationJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?audience_generation_job_arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?configured_audience_model_arn: String,
+        ?collaboration_id: String,
+        ?started_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor audience_generation_job_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor started_by: String?
+    end
+
+    module AudienceModelStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETE_PENDING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+    end
+
+    class AudienceModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?audience_model_arn: String,
+        ?name: String,
+        ?training_dataset_arn: String,
+        ?status: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor audience_model_arn: String?
+      attr_accessor name: String?
+      attr_accessor training_dataset_arn: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+    end
+
+    class AudienceQualityMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relevance_metrics: Array[Types::RelevanceMetric],
+        ?recall_metric: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relevance_metrics: Array[Types::RelevanceMetric]?
+      attr_accessor recall_metric: Float?
+    end
+
+    class AudienceSize
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    class AudienceSizeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_size_type: String,
+        ?audience_size_bins: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_size_type: String?
+      attr_accessor audience_size_bins: Array[Integer]?
+    end
+
+    module AudienceSizeType
+      ABSOLUTE: String
+      PERCENTAGE: String
+    end
+
+    class CancelTrainedModelInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?trained_model_inference_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_inference_job_arn: String?
+    end
+
+    class CancelTrainedModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+    end
+
+    class CollaborationConfiguredModelAlgorithmAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_association_arn: String,
+        ?name: String,
+        ?description: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?configured_model_algorithm_arn: String,
+        ?creator_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor creator_account_id: String?
+    end
+
+    class CollaborationMLInputChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?name: String,
+        ?configured_model_algorithm_associations: Array[String],
+        ?ml_input_channel_arn: String,
+        ?status: String,
+        ?creator_account_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor name: String?
+      attr_accessor configured_model_algorithm_associations: Array[String]?
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor status: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor description: String?
+    end
+
+    class CollaborationTrainedModelExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?output_configuration: Types::TrainedModelExportOutputConfiguration,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?description: String,
+        ?creator_account_id: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor output_configuration: Types::TrainedModelExportOutputConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class CollaborationTrainedModelInferenceJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_inference_job_arn: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?collaboration_identifier: String,
+        ?status: String,
+        ?output_configuration: Types::InferenceOutputConfiguration,
+        ?name: String,
+        ?description: String,
+        ?metrics_status: String,
+        ?metrics_status_details: String,
+        ?logs_status: String,
+        ?logs_status_details: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?creator_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_inference_job_arn: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor status: String?
+      attr_accessor output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor metrics_status: String?
+      attr_accessor metrics_status_details: String?
+      attr_accessor logs_status: String?
+      attr_accessor logs_status_details: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor creator_account_id: String?
+    end
+
+    class CollaborationTrainedModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?trained_model_arn: String,
+        ?name: String,
+        ?version_identifier: String,
+        ?incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput],
+        ?description: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?status: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?creator_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor trained_model_arn: String?
+      attr_accessor name: String?
+      attr_accessor version_identifier: String?
+      attr_accessor incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput]?
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor status: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor creator_account_id: String?
+    end
+
+    class ColumnSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_name: String,
+        ?column_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_name: String?
+      attr_accessor column_types: Array[String]?
+    end
+
+    module ColumnType
+      USER_ID: String
+      ITEM_ID: String
+      TIMESTAMP: String
+      CATEGORICAL_FEATURE: String
+      NUMERICAL_FEATURE: String
+    end
+
+    class ComputeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?worker: Types::WorkerComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker: Types::WorkerComputeConfiguration?
+
+      class Worker < ComputeConfiguration
+      end
+      class Unknown < ComputeConfiguration
+      end
+    end
+
+    class ConfiguredAudienceModelOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::AudienceDestination,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::AudienceDestination?
+      attr_accessor role_arn: String?
+    end
+
+    module ConfiguredAudienceModelStatus
+      ACTIVE: String
+    end
+
+    class ConfiguredAudienceModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?name: String,
+        ?audience_model_arn: String,
+        ?output_config: Types::ConfiguredAudienceModelOutputConfig,
+        ?description: String,
+        ?configured_audience_model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor name: String?
+      attr_accessor audience_model_arn: String?
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig?
+      attr_accessor description: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor status: String?
+    end
+
+    class ConfiguredModelAlgorithmAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_association_arn: String,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?description: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class ConfiguredModelAlgorithmSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContainerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_uri: String,
+        ?entrypoint: Array[String],
+        ?arguments: Array[String],
+        ?metric_definitions: Array[Types::MetricDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_uri: String?
+      attr_accessor entrypoint: Array[String]?
+      attr_accessor arguments: Array[String]?
+      attr_accessor metric_definitions: Array[Types::MetricDefinition]?
+    end
+
+    class CreateAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_data_start_time: Time,
+        ?training_data_end_time: Time,
+        ?name: String,
+        ?training_dataset_arn: String,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_data_start_time: Time?
+      attr_accessor training_data_end_time: Time?
+      attr_accessor name: String?
+      attr_accessor training_dataset_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class CreateAudienceModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_model_arn: String?
+    end
+
+    class CreateConfiguredAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?audience_model_arn: String,
+        ?output_config: Types::ConfiguredAudienceModelOutputConfig,
+        ?description: String,
+        ?shared_audience_metrics: Array[String],
+        ?min_matching_seed_size: Integer,
+        ?audience_size_config: Types::AudienceSizeConfig,
+        ?tags: Hash[String, String],
+        ?child_resource_tag_on_create_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor audience_model_arn: String?
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig?
+      attr_accessor description: String?
+      attr_accessor shared_audience_metrics: Array[String]?
+      attr_accessor min_matching_seed_size: Integer?
+      attr_accessor audience_size_config: Types::AudienceSizeConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor child_resource_tag_on_create_policy: String?
+    end
+
+    class CreateConfiguredAudienceModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class CreateConfiguredModelAlgorithmAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?description: String,
+        ?privacy_configuration: Types::PrivacyConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor privacy_configuration: Types::PrivacyConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_association_arn: String?
+    end
+
+    class CreateConfiguredModelAlgorithmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?role_arn: String,
+        ?training_container_config: Types::ContainerConfig,
+        ?inference_container_config: Types::InferenceContainerConfig,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor role_arn: String?
+      attr_accessor training_container_config: Types::ContainerConfig?
+      attr_accessor inference_container_config: Types::InferenceContainerConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateConfiguredModelAlgorithmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_arn: String?
+    end
+
+    class CreateMLInputChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?configured_model_algorithm_associations: Array[String],
+        ?input_channel: Types::InputChannel,
+        ?name: String,
+        ?retention_in_days: Integer,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor configured_model_algorithm_associations: Array[String]?
+      attr_accessor input_channel: Types::InputChannel?
+      attr_accessor name: String?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMLInputChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+    end
+
+    class CreateTrainedModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?name: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?hyperparameters: Hash[String, String],
+        ?environment: Hash[String, String],
+        ?resource_config: Types::ResourceConfig,
+        ?stopping_condition: Types::StoppingCondition,
+        ?incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannel],
+        ?data_channels: Array[Types::ModelTrainingDataChannel],
+        ?training_input_mode: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor hyperparameters: Hash[String, String]?
+      attr_accessor environment: Hash[String, String]?
+      attr_accessor resource_config: Types::ResourceConfig?
+      attr_accessor stopping_condition: Types::StoppingCondition?
+      attr_accessor incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannel]?
+      attr_accessor data_channels: Array[Types::ModelTrainingDataChannel]?
+      attr_accessor training_input_mode: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTrainedModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+    end
+
+    class CreateTrainingDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?role_arn: String,
+        ?training_data: Array[Types::Dataset],
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor training_data: Array[Types::Dataset]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class CreateTrainingDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_dataset_arn: String?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glue_data_source: Types::GlueDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue_data_source: Types::GlueDataSource?
+    end
+
+    class Dataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?input_config: Types::DatasetInputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor input_config: Types::DatasetInputConfig?
+    end
+
+    class DatasetInputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: Array[Types::ColumnSchema],
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: Array[Types::ColumnSchema]?
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    module DatasetType
+      INTERACTIONS: String
+    end
+
+    class DeleteAudienceGenerationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_generation_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_generation_job_arn: String?
+    end
+
+    class DeleteAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_model_arn: String?
+    end
+
+    class DeleteConfiguredAudienceModelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class DeleteConfiguredAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class DeleteConfiguredModelAlgorithmAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteConfiguredModelAlgorithmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_arn: String?
+    end
+
+    class DeleteMLConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteMLInputChannelDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class DeleteTrainedModelOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_arn: String,
+        ?membership_identifier: String,
+        ?version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor version_identifier: String?
+    end
+
+    class DeleteTrainingDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_dataset_arn: String?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_destination: Types::S3ConfigMap,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_destination: Types::S3ConfigMap?
+    end
+
+    class GetAudienceGenerationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_generation_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_generation_job_arn: String?
+    end
+
+    class GetAudienceGenerationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?audience_generation_job_arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?configured_audience_model_arn: String,
+        ?seed_audience: Types::AudienceGenerationJobDataSource,
+        ?include_seed_in_output: bool,
+        ?collaboration_id: String,
+        ?metrics: Types::AudienceQualityMetrics,
+        ?started_by: String,
+        ?tags: Hash[String, String],
+        ?protected_query_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor audience_generation_job_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor seed_audience: Types::AudienceGenerationJobDataSource?
+      attr_accessor include_seed_in_output: bool?
+      attr_accessor collaboration_id: String?
+      attr_accessor metrics: Types::AudienceQualityMetrics?
+      attr_accessor started_by: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor protected_query_identifier: String?
+    end
+
+    class GetAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_model_arn: String?
+    end
+
+    class GetAudienceModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?training_data_start_time: Time,
+        ?training_data_end_time: Time,
+        ?audience_model_arn: String,
+        ?name: String,
+        ?training_dataset_arn: String,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor training_data_start_time: Time?
+      attr_accessor training_data_end_time: Time?
+      attr_accessor audience_model_arn: String?
+      attr_accessor name: String?
+      attr_accessor training_dataset_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class GetCollaborationConfiguredModelAlgorithmAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_association_arn: String,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class GetCollaborationConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?description: String,
+        ?creator_account_id: String,
+        ?privacy_configuration: Types::PrivacyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor privacy_configuration: Types::PrivacyConfiguration?
+    end
+
+    class GetCollaborationMLInputChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class GetCollaborationMLInputChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?creator_account_id: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?ml_input_channel_arn: String,
+        ?name: String,
+        ?configured_model_algorithm_associations: Array[String],
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?retention_in_days: Integer,
+        ?number_of_records: Integer,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor creator_account_id: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor name: String?
+      attr_accessor configured_model_algorithm_associations: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor number_of_records: Integer?
+      attr_accessor description: String?
+    end
+
+    class GetCollaborationTrainedModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_arn: String,
+        ?collaboration_identifier: String,
+        ?version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_arn: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor version_identifier: String?
+    end
+
+    class GetCollaborationTrainedModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+        ?incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput],
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?configured_model_algorithm_association_arn: String,
+        ?resource_config: Types::ResourceConfig,
+        ?training_input_mode: String,
+        ?stopping_condition: Types::StoppingCondition,
+        ?metrics_status: String,
+        ?metrics_status_details: String,
+        ?logs_status: String,
+        ?logs_status_details: String,
+        ?training_container_image_digest: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?creator_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+      attr_accessor incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor resource_config: Types::ResourceConfig?
+      attr_accessor training_input_mode: String?
+      attr_accessor stopping_condition: Types::StoppingCondition?
+      attr_accessor metrics_status: String?
+      attr_accessor metrics_status_details: String?
+      attr_accessor logs_status: String?
+      attr_accessor logs_status_details: String?
+      attr_accessor training_container_image_digest: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor creator_account_id: String?
+    end
+
+    class GetConfiguredAudienceModelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class GetConfiguredAudienceModelPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+        ?configured_audience_model_policy: String,
+        ?policy_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor configured_audience_model_policy: String?
+      attr_accessor policy_hash: String?
+    end
+
+    class GetConfiguredAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class GetConfiguredAudienceModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_audience_model_arn: String,
+        ?name: String,
+        ?audience_model_arn: String,
+        ?output_config: Types::ConfiguredAudienceModelOutputConfig,
+        ?description: String,
+        ?status: String,
+        ?shared_audience_metrics: Array[String],
+        ?min_matching_seed_size: Integer,
+        ?audience_size_config: Types::AudienceSizeConfig,
+        ?tags: Hash[String, String],
+        ?child_resource_tag_on_create_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor name: String?
+      attr_accessor audience_model_arn: String?
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor shared_audience_metrics: Array[String]?
+      attr_accessor min_matching_seed_size: Integer?
+      attr_accessor audience_size_config: Types::AudienceSizeConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor child_resource_tag_on_create_policy: String?
+    end
+
+    class GetConfiguredModelAlgorithmAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetConfiguredModelAlgorithmAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?privacy_configuration: Types::PrivacyConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor privacy_configuration: Types::PrivacyConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetConfiguredModelAlgorithmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_model_algorithm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_model_algorithm_arn: String?
+    end
+
+    class GetConfiguredModelAlgorithmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?configured_model_algorithm_arn: String,
+        ?name: String,
+        ?training_container_config: Types::ContainerConfig,
+        ?inference_container_config: Types::InferenceContainerConfig,
+        ?role_arn: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor configured_model_algorithm_arn: String?
+      attr_accessor name: String?
+      attr_accessor training_container_config: Types::ContainerConfig?
+      attr_accessor inference_container_config: Types::InferenceContainerConfig?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class GetMLConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetMLConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?default_output_location: Types::MLOutputConfiguration,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor default_output_location: Types::MLOutputConfiguration?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class GetMLInputChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetMLInputChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?input_channel: Types::InputChannel,
+        ?protected_query_identifier: String,
+        ?ml_input_channel_arn: String,
+        ?name: String,
+        ?configured_model_algorithm_associations: Array[String],
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?retention_in_days: Integer,
+        ?number_of_records: Integer,
+        ?number_of_files: Float,
+        ?size_in_gb: Float,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor input_channel: Types::InputChannel?
+      attr_accessor protected_query_identifier: String?
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor name: String?
+      attr_accessor configured_model_algorithm_associations: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor number_of_records: Integer?
+      attr_accessor number_of_files: Float?
+      attr_accessor size_in_gb: Float?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetTrainedModelInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?trained_model_inference_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_inference_job_arn: String?
+    end
+
+    class GetTrainedModelInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?trained_model_inference_job_arn: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?name: String,
+        ?status: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?resource_config: Types::InferenceResourceConfig,
+        ?output_configuration: Types::InferenceOutputConfiguration,
+        ?membership_identifier: String,
+        ?data_source: Types::ModelInferenceDataSource,
+        ?container_execution_parameters: Types::InferenceContainerExecutionParameters,
+        ?status_details: Types::StatusDetails,
+        ?description: String,
+        ?inference_container_image_digest: String,
+        ?environment: Hash[String, String],
+        ?kms_key_arn: String,
+        ?metrics_status: String,
+        ?metrics_status_details: String,
+        ?logs_status: String,
+        ?logs_status_details: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor trained_model_inference_job_arn: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor resource_config: Types::InferenceResourceConfig?
+      attr_accessor output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor membership_identifier: String?
+      attr_accessor data_source: Types::ModelInferenceDataSource?
+      attr_accessor container_execution_parameters: Types::InferenceContainerExecutionParameters?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor description: String?
+      attr_accessor inference_container_image_digest: String?
+      attr_accessor environment: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_status: String?
+      attr_accessor metrics_status_details: String?
+      attr_accessor logs_status: String?
+      attr_accessor logs_status_details: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetTrainedModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_arn: String,
+        ?membership_identifier: String,
+        ?version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor version_identifier: String?
+    end
+
+    class GetTrainedModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+        ?incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput],
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_details: Types::StatusDetails,
+        ?configured_model_algorithm_association_arn: String,
+        ?resource_config: Types::ResourceConfig,
+        ?training_input_mode: String,
+        ?stopping_condition: Types::StoppingCondition,
+        ?metrics_status: String,
+        ?metrics_status_details: String,
+        ?logs_status: String,
+        ?logs_status_details: String,
+        ?training_container_image_digest: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?hyperparameters: Hash[String, String],
+        ?environment: Hash[String, String],
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+        ?data_channels: Array[Types::ModelTrainingDataChannel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+      attr_accessor incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Types::StatusDetails?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor resource_config: Types::ResourceConfig?
+      attr_accessor training_input_mode: String?
+      attr_accessor stopping_condition: Types::StoppingCondition?
+      attr_accessor metrics_status: String?
+      attr_accessor metrics_status_details: String?
+      attr_accessor logs_status: String?
+      attr_accessor logs_status_details: String?
+      attr_accessor training_container_image_digest: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor hyperparameters: Hash[String, String]?
+      attr_accessor environment: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor data_channels: Array[Types::ModelTrainingDataChannel]?
+    end
+
+    class GetTrainingDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_dataset_arn: String?
+    end
+
+    class GetTrainingDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?training_dataset_arn: String,
+        ?name: String,
+        ?training_data: Array[Types::Dataset],
+        ?status: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor training_dataset_arn: String?
+      attr_accessor name: String?
+      attr_accessor training_data: Array[Types::Dataset]?
+      attr_accessor status: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor description: String?
+    end
+
+    class GlueDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?database_name: String,
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor database_name: String?
+      attr_accessor catalog_id: String?
+    end
+
+    class IncrementalTrainingDataChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+        ?channel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+      attr_accessor channel_name: String?
+    end
+
+    class IncrementalTrainingDataChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?version_identifier: String,
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor version_identifier: String?
+      attr_accessor model_name: String?
+    end
+
+    class InferenceContainerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_uri: String?
+    end
+
+    class InferenceContainerExecutionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_payload_in_mb: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_payload_in_mb: Integer?
+    end
+
+    module InferenceInstanceType
+      ML_R7I_48XLARGE: String
+      ML_R6I_16XLARGE: String
+      ML_M6I_XLARGE: String
+      ML_M5_4XLARGE: String
+      ML_P2_XLARGE: String
+      ML_M4_16XLARGE: String
+      ML_R7I_16XLARGE: String
+      ML_M7I_XLARGE: String
+      ML_M6I_12XLARGE: String
+      ML_R7I_8XLARGE: String
+      ML_R7I_LARGE: String
+      ML_M7I_12XLARGE: String
+      ML_M6I_24XLARGE: String
+      ML_M7I_24XLARGE: String
+      ML_R6I_8XLARGE: String
+      ML_R6I_LARGE: String
+      ML_G5_2XLARGE: String
+      ML_M5_LARGE: String
+      ML_P3_16XLARGE: String
+      ML_M7I_48XLARGE: String
+      ML_M6I_16XLARGE: String
+      ML_P2_16XLARGE: String
+      ML_G5_4XLARGE: String
+      ML_M7I_16XLARGE: String
+      ML_C4_2XLARGE: String
+      ML_C5_2XLARGE: String
+      ML_C6I_32XLARGE: String
+      ML_C4_4XLARGE: String
+      ML_G5_8XLARGE: String
+      ML_C6I_XLARGE: String
+      ML_C5_4XLARGE: String
+      ML_G4DN_XLARGE: String
+      ML_C7I_XLARGE: String
+      ML_C6I_12XLARGE: String
+      ML_G4DN_12XLARGE: String
+      ML_C7I_12XLARGE: String
+      ML_C6I_24XLARGE: String
+      ML_G4DN_2XLARGE: String
+      ML_C7I_24XLARGE: String
+      ML_C7I_2XLARGE: String
+      ML_C4_8XLARGE: String
+      ML_C6I_2XLARGE: String
+      ML_G4DN_4XLARGE: String
+      ML_C7I_48XLARGE: String
+      ML_C7I_4XLARGE: String
+      ML_C6I_16XLARGE: String
+      ML_C5_9XLARGE: String
+      ML_G4DN_16XLARGE: String
+      ML_C7I_16XLARGE: String
+      ML_C6I_4XLARGE: String
+      ML_C5_XLARGE: String
+      ML_C4_XLARGE: String
+      ML_G4DN_8XLARGE: String
+      ML_C7I_8XLARGE: String
+      ML_C7I_LARGE: String
+      ML_G5_XLARGE: String
+      ML_C6I_8XLARGE: String
+      ML_C6I_LARGE: String
+      ML_G5_12XLARGE: String
+      ML_G5_24XLARGE: String
+      ML_M7I_2XLARGE: String
+      ML_C5_18XLARGE: String
+      ML_G5_48XLARGE: String
+      ML_M6I_2XLARGE: String
+      ML_G5_16XLARGE: String
+      ML_M7I_4XLARGE: String
+      ML_P3_2XLARGE: String
+      ML_R6I_32XLARGE: String
+      ML_M6I_4XLARGE: String
+      ML_M5_XLARGE: String
+      ML_M4_10XLARGE: String
+      ML_R6I_XLARGE: String
+      ML_M5_12XLARGE: String
+      ML_M4_XLARGE: String
+      ML_R7I_2XLARGE: String
+      ML_R7I_XLARGE: String
+      ML_R6I_12XLARGE: String
+      ML_M5_24XLARGE: String
+      ML_R7I_12XLARGE: String
+      ML_M7I_8XLARGE: String
+      ML_M7I_LARGE: String
+      ML_R6I_24XLARGE: String
+      ML_R6I_2XLARGE: String
+      ML_M4_2XLARGE: String
+      ML_R7I_24XLARGE: String
+      ML_R7I_4XLARGE: String
+      ML_M6I_8XLARGE: String
+      ML_M6I_LARGE: String
+      ML_M5_2XLARGE: String
+      ML_P2_8XLARGE: String
+      ML_R6I_4XLARGE: String
+      ML_M6I_32XLARGE: String
+      ML_P3_8XLARGE: String
+      ML_M4_4XLARGE: String
+    end
+
+    class InferenceOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accept: String,
+        ?members: Array[Types::InferenceReceiverMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accept: String?
+      attr_accessor members: Array[Types::InferenceReceiverMember]?
+    end
+
+    class InferenceReceiverMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class InferenceResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor instance_count: Integer?
+    end
+
+    class InputChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::InputChannelDataSource,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::InputChannelDataSource?
+      attr_accessor role_arn: String?
+    end
+
+    class InputChannelDataSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?protected_query_input_parameters: Types::ProtectedQueryInputParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protected_query_input_parameters: Types::ProtectedQueryInputParameters?
+
+      class ProtectedQueryInputParameters < InputChannelDataSource
+      end
+      class Unknown < InputChannelDataSource
+      end
+    end
+
+    module InstanceType
+      ML_M4_XLARGE: String
+      ML_M4_2XLARGE: String
+      ML_M4_4XLARGE: String
+      ML_M4_10XLARGE: String
+      ML_M4_16XLARGE: String
+      ML_G4DN_XLARGE: String
+      ML_G4DN_2XLARGE: String
+      ML_G4DN_4XLARGE: String
+      ML_G4DN_8XLARGE: String
+      ML_G4DN_12XLARGE: String
+      ML_G4DN_16XLARGE: String
+      ML_M5_LARGE: String
+      ML_M5_XLARGE: String
+      ML_M5_2XLARGE: String
+      ML_M5_4XLARGE: String
+      ML_M5_12XLARGE: String
+      ML_M5_24XLARGE: String
+      ML_C4_XLARGE: String
+      ML_C4_2XLARGE: String
+      ML_C4_4XLARGE: String
+      ML_C4_8XLARGE: String
+      ML_P2_XLARGE: String
+      ML_P2_8XLARGE: String
+      ML_P2_16XLARGE: String
+      ML_P3_2XLARGE: String
+      ML_P3_8XLARGE: String
+      ML_P3_16XLARGE: String
+      ML_P3DN_24XLARGE: String
+      ML_P4D_24XLARGE: String
+      ML_P4DE_24XLARGE: String
+      ML_P5_48XLARGE: String
+      ML_C5_XLARGE: String
+      ML_C5_2XLARGE: String
+      ML_C5_4XLARGE: String
+      ML_C5_9XLARGE: String
+      ML_C5_18XLARGE: String
+      ML_C5N_XLARGE: String
+      ML_C5N_2XLARGE: String
+      ML_C5N_4XLARGE: String
+      ML_C5N_9XLARGE: String
+      ML_C5N_18XLARGE: String
+      ML_G5_XLARGE: String
+      ML_G5_2XLARGE: String
+      ML_G5_4XLARGE: String
+      ML_G5_8XLARGE: String
+      ML_G5_16XLARGE: String
+      ML_G5_12XLARGE: String
+      ML_G5_24XLARGE: String
+      ML_G5_48XLARGE: String
+      ML_TRN1_2XLARGE: String
+      ML_TRN1_32XLARGE: String
+      ML_TRN1N_32XLARGE: String
+      ML_M6I_LARGE: String
+      ML_M6I_XLARGE: String
+      ML_M6I_2XLARGE: String
+      ML_M6I_4XLARGE: String
+      ML_M6I_8XLARGE: String
+      ML_M6I_12XLARGE: String
+      ML_M6I_16XLARGE: String
+      ML_M6I_24XLARGE: String
+      ML_M6I_32XLARGE: String
+      ML_C6I_XLARGE: String
+      ML_C6I_2XLARGE: String
+      ML_C6I_8XLARGE: String
+      ML_C6I_4XLARGE: String
+      ML_C6I_12XLARGE: String
+      ML_C6I_16XLARGE: String
+      ML_C6I_24XLARGE: String
+      ML_C6I_32XLARGE: String
+      ML_R5D_LARGE: String
+      ML_R5D_XLARGE: String
+      ML_R5D_2XLARGE: String
+      ML_R5D_4XLARGE: String
+      ML_R5D_8XLARGE: String
+      ML_R5D_12XLARGE: String
+      ML_R5D_16XLARGE: String
+      ML_R5D_24XLARGE: String
+      ML_T3_MEDIUM: String
+      ML_T3_LARGE: String
+      ML_T3_XLARGE: String
+      ML_T3_2XLARGE: String
+      ML_R5_LARGE: String
+      ML_R5_XLARGE: String
+      ML_R5_2XLARGE: String
+      ML_R5_4XLARGE: String
+      ML_R5_8XLARGE: String
+      ML_R5_12XLARGE: String
+      ML_R5_16XLARGE: String
+      ML_R5_24XLARGE: String
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAudienceExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?audience_generation_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor audience_generation_job_arn: String?
+    end
+
+    class ListAudienceExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?audience_export_jobs: Array[Types::AudienceExportJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor audience_export_jobs: Array[Types::AudienceExportJobSummary]?
+    end
+
+    class ListAudienceGenerationJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?configured_audience_model_arn: String,
+        ?collaboration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor collaboration_id: String?
+    end
+
+    class ListAudienceGenerationJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?audience_generation_jobs: Array[Types::AudienceGenerationJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor audience_generation_jobs: Array[Types::AudienceGenerationJobSummary]?
+    end
+
+    class ListAudienceModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAudienceModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?audience_models: Array[Types::AudienceModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor audience_models: Array[Types::AudienceModelSummary]?
+    end
+
+    class ListCollaborationConfiguredModelAlgorithmAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class ListCollaborationConfiguredModelAlgorithmAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_configured_model_algorithm_associations: Array[Types::CollaborationConfiguredModelAlgorithmAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_configured_model_algorithm_associations: Array[Types::CollaborationConfiguredModelAlgorithmAssociationSummary]?
+    end
+
+    class ListCollaborationMLInputChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class ListCollaborationMLInputChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_ml_input_channels_list: Array[Types::CollaborationMLInputChannelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_ml_input_channels_list: Array[Types::CollaborationMLInputChannelSummary]?
+    end
+
+    class ListCollaborationTrainedModelExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?collaboration_identifier: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+    end
+
+    class ListCollaborationTrainedModelExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_trained_model_export_jobs: Array[Types::CollaborationTrainedModelExportJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_trained_model_export_jobs: Array[Types::CollaborationTrainedModelExportJobSummary]?
+    end
+
+    class ListCollaborationTrainedModelInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?collaboration_identifier: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+    end
+
+    class ListCollaborationTrainedModelInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_trained_model_inference_jobs: Array[Types::CollaborationTrainedModelInferenceJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_trained_model_inference_jobs: Array[Types::CollaborationTrainedModelInferenceJobSummary]?
+    end
+
+    class ListCollaborationTrainedModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?collaboration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor collaboration_identifier: String?
+    end
+
+    class ListCollaborationTrainedModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?collaboration_trained_models: Array[Types::CollaborationTrainedModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor collaboration_trained_models: Array[Types::CollaborationTrainedModelSummary]?
+    end
+
+    class ListConfiguredAudienceModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListConfiguredAudienceModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?configured_audience_models: Array[Types::ConfiguredAudienceModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor configured_audience_models: Array[Types::ConfiguredAudienceModelSummary]?
+    end
+
+    class ListConfiguredModelAlgorithmAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor membership_identifier: String?
+    end
+
+    class ListConfiguredModelAlgorithmAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?configured_model_algorithm_associations: Array[Types::ConfiguredModelAlgorithmAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor configured_model_algorithm_associations: Array[Types::ConfiguredModelAlgorithmAssociationSummary]?
+    end
+
+    class ListConfiguredModelAlgorithmsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListConfiguredModelAlgorithmsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?configured_model_algorithms: Array[Types::ConfiguredModelAlgorithmSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor configured_model_algorithms: Array[Types::ConfiguredModelAlgorithmSummary]?
+    end
+
+    class ListMLInputChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor membership_identifier: String?
+    end
+
+    class ListMLInputChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?ml_input_channels_list: Array[Types::MLInputChannelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor ml_input_channels_list: Array[Types::MLInputChannelSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTrainedModelInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?membership_identifier: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+    end
+
+    class ListTrainedModelInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?trained_model_inference_jobs: Array[Types::TrainedModelInferenceJobSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor trained_model_inference_jobs: Array[Types::TrainedModelInferenceJobSummary]?
+    end
+
+    class ListTrainedModelVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?membership_identifier: String,
+        ?trained_model_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor status: String?
+    end
+
+    class ListTrainedModelVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?trained_models: Array[Types::TrainedModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor trained_models: Array[Types::TrainedModelSummary]?
+    end
+
+    class ListTrainedModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor membership_identifier: String?
+    end
+
+    class ListTrainedModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?trained_models: Array[Types::TrainedModelSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor trained_models: Array[Types::TrainedModelSummary]?
+    end
+
+    class ListTrainingDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTrainingDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?training_datasets: Array[Types::TrainingDatasetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor training_datasets: Array[Types::TrainingDatasetSummary]?
+    end
+
+    class LogsConfigurationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_account_ids: Array[String],
+        ?filter_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_account_ids: Array[String]?
+      attr_accessor filter_pattern: String?
+    end
+
+    module LogsStatus
+      PUBLISH_SUCCEEDED: String
+      PUBLISH_FAILED: String
+    end
+
+    module MLInputChannelStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETE_PENDING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+      INACTIVE: String
+    end
+
+    class MLInputChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?name: String,
+        ?configured_model_algorithm_associations: Array[String],
+        ?protected_query_identifier: String,
+        ?ml_input_channel_arn: String,
+        ?status: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor name: String?
+      attr_accessor configured_model_algorithm_associations: Array[String]?
+      attr_accessor protected_query_identifier: String?
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+    end
+
+    class MLOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::Destination,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::Destination?
+      attr_accessor role_arn: String?
+    end
+
+    class MetricDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor regex: String?
+    end
+
+    class MetricsConfigurationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?noise_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor noise_level: String?
+    end
+
+    module MetricsStatus
+      PUBLISH_SUCCEEDED: String
+      PUBLISH_FAILED: String
+    end
+
+    class ModelInferenceDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+    end
+
+    class ModelTrainingDataChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ml_input_channel_arn: String,
+        ?channel_name: String,
+        ?s3_data_distribution_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_input_channel_arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor s3_data_distribution_type: String?
+    end
+
+    module NoiseLevelType
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      NONE: String
+    end
+
+    module PolicyExistenceCondition
+      POLICY_MUST_EXIST: String
+      POLICY_MUST_NOT_EXIST: String
+    end
+
+    class PrivacyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Types::PrivacyConfigurationPolicies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Types::PrivacyConfigurationPolicies?
+    end
+
+    class PrivacyConfigurationPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_models: Types::TrainedModelsConfigurationPolicy,
+        ?trained_model_exports: Types::TrainedModelExportsConfigurationPolicy,
+        ?trained_model_inference_jobs: Types::TrainedModelInferenceJobsConfigurationPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_models: Types::TrainedModelsConfigurationPolicy?
+      attr_accessor trained_model_exports: Types::TrainedModelExportsConfigurationPolicy?
+      attr_accessor trained_model_inference_jobs: Types::TrainedModelInferenceJobsConfigurationPolicy?
+    end
+
+    class ProtectedQueryInputParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sql_parameters: Types::ProtectedQuerySQLParameters,
+        ?compute_configuration: Types::ComputeConfiguration,
+        ?result_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters?
+      attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor result_format: String?
+    end
+
+    class ProtectedQuerySQLParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?analysis_template_arn: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor analysis_template_arn: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class PutConfiguredAudienceModelPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+        ?configured_audience_model_policy: String,
+        ?previous_policy_hash: String,
+        ?policy_existence_condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor configured_audience_model_policy: String?
+      attr_accessor previous_policy_hash: String?
+      attr_accessor policy_existence_condition: String?
+    end
+
+    class PutConfiguredAudienceModelPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_policy: String,
+        ?policy_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_policy: String?
+      attr_accessor policy_hash: String?
+    end
+
+    class PutMLConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?default_output_location: Types::MLOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor default_output_location: Types::MLOutputConfiguration?
+    end
+
+    class RelevanceMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_size: Types::AudienceSize,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_size: Types::AudienceSize?
+      attr_accessor score: Float?
+    end
+
+    class ResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_count: Integer,
+        ?instance_type: String,
+        ?volume_size_in_gb: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_count: Integer?
+      attr_accessor instance_type: String?
+      attr_accessor volume_size_in_gb: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResultFormat
+      CSV: String
+      PARQUET: String
+    end
+
+    class S3ConfigMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    module S3DataDistributionType
+      FULLY_REPLICATED: String
+      SHARDED_BY_S3_KEY: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_name: String,
+        ?quota_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_name: String?
+      attr_accessor quota_value: Float?
+    end
+
+    module SharedAudienceMetrics
+      ALL: String
+      NONE: String
+    end
+
+    class StartAudienceExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?audience_generation_job_arn: String,
+        ?audience_size: Types::AudienceSize,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor audience_generation_job_arn: String?
+      attr_accessor audience_size: Types::AudienceSize?
+      attr_accessor description: String?
+    end
+
+    class StartAudienceGenerationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configured_audience_model_arn: String,
+        ?seed_audience: Types::AudienceGenerationJobDataSource,
+        ?include_seed_in_output: bool,
+        ?collaboration_id: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor seed_audience: Types::AudienceGenerationJobDataSource?
+      attr_accessor include_seed_in_output: bool?
+      attr_accessor collaboration_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartAudienceGenerationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience_generation_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience_generation_job_arn: String?
+    end
+
+    class StartTrainedModelExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?membership_identifier: String,
+        ?output_configuration: Types::TrainedModelExportOutputConfiguration,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor output_configuration: Types::TrainedModelExportOutputConfiguration?
+      attr_accessor description: String?
+    end
+
+    class StartTrainedModelInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?name: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?resource_config: Types::InferenceResourceConfig,
+        ?output_configuration: Types::InferenceOutputConfiguration,
+        ?data_source: Types::ModelInferenceDataSource,
+        ?description: String,
+        ?container_execution_parameters: Types::InferenceContainerExecutionParameters,
+        ?environment: Hash[String, String],
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor resource_config: Types::InferenceResourceConfig?
+      attr_accessor output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor data_source: Types::ModelInferenceDataSource?
+      attr_accessor description: String?
+      attr_accessor container_execution_parameters: Types::InferenceContainerExecutionParameters?
+      attr_accessor environment: Hash[String, String]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartTrainedModelInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_inference_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_inference_job_arn: String?
+    end
+
+    class StatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor message: String?
+    end
+
+    class StoppingCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_runtime_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_runtime_in_seconds: Integer?
+    end
+
+    module TagOnCreatePolicy
+      FROM_PARENT_RESOURCE: String
+      NONE: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrainedModelArtifactMaxSize
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Float?
+    end
+
+    module TrainedModelArtifactMaxSizeUnitType
+      GB: String
+    end
+
+    module TrainedModelExportFileType
+      MODEL: String
+      OUTPUT: String
+    end
+
+    module TrainedModelExportJobStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+    end
+
+    class TrainedModelExportOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?members: Array[Types::TrainedModelExportReceiverMember],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor members: Array[Types::TrainedModelExportReceiverMember]?
+    end
+
+    class TrainedModelExportReceiverMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class TrainedModelExportsConfigurationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_size: Types::TrainedModelExportsMaxSize,
+        ?files_to_export: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_size: Types::TrainedModelExportsMaxSize?
+      attr_accessor files_to_export: Array[String]?
+    end
+
+    class TrainedModelExportsMaxSize
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Float?
+    end
+
+    module TrainedModelExportsMaxSizeUnitType
+      GB: String
+    end
+
+    module TrainedModelInferenceJobStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      CANCEL_PENDING: String
+      CANCEL_IN_PROGRESS: String
+      CANCEL_FAILED: String
+      INACTIVE: String
+    end
+
+    class TrainedModelInferenceJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trained_model_inference_job_arn: String,
+        ?configured_model_algorithm_association_arn: String,
+        ?membership_identifier: String,
+        ?trained_model_arn: String,
+        ?trained_model_version_identifier: String,
+        ?collaboration_identifier: String,
+        ?status: String,
+        ?output_configuration: Types::InferenceOutputConfiguration,
+        ?name: String,
+        ?description: String,
+        ?metrics_status: String,
+        ?metrics_status_details: String,
+        ?logs_status: String,
+        ?logs_status_details: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trained_model_inference_job_arn: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor trained_model_arn: String?
+      attr_accessor trained_model_version_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor status: String?
+      attr_accessor output_configuration: Types::InferenceOutputConfiguration?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor metrics_status: String?
+      attr_accessor metrics_status_details: String?
+      attr_accessor logs_status: String?
+      attr_accessor logs_status_details: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class TrainedModelInferenceJobsConfigurationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_logs: Array[Types::LogsConfigurationPolicy],
+        ?max_output_size: Types::TrainedModelInferenceMaxOutputSize,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_logs: Array[Types::LogsConfigurationPolicy]?
+      attr_accessor max_output_size: Types::TrainedModelInferenceMaxOutputSize?
+    end
+
+    class TrainedModelInferenceMaxOutputSize
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Float?
+    end
+
+    module TrainedModelInferenceMaxOutputSizeUnitType
+      GB: String
+    end
+
+    module TrainedModelStatus
+      CREATE_PENDING: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      DELETE_PENDING: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+      INACTIVE: String
+      CANCEL_PENDING: String
+      CANCEL_IN_PROGRESS: String
+      CANCEL_FAILED: String
+    end
+
+    class TrainedModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?trained_model_arn: String,
+        ?version_identifier: String,
+        ?incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput],
+        ?name: String,
+        ?description: String,
+        ?membership_identifier: String,
+        ?collaboration_identifier: String,
+        ?status: String,
+        ?configured_model_algorithm_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor trained_model_arn: String?
+      attr_accessor version_identifier: String?
+      attr_accessor incremental_training_data_channels: Array[Types::IncrementalTrainingDataChannelOutput]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor collaboration_identifier: String?
+      attr_accessor status: String?
+      attr_accessor configured_model_algorithm_association_arn: String?
+    end
+
+    class TrainedModelsConfigurationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_logs: Array[Types::LogsConfigurationPolicy],
+        ?container_metrics: Types::MetricsConfigurationPolicy,
+        ?max_artifact_size: Types::TrainedModelArtifactMaxSize,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_logs: Array[Types::LogsConfigurationPolicy]?
+      attr_accessor container_metrics: Types::MetricsConfigurationPolicy?
+      attr_accessor max_artifact_size: Types::TrainedModelArtifactMaxSize?
+    end
+
+    module TrainingDatasetStatus
+      ACTIVE: String
+    end
+
+    class TrainingDatasetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?update_time: Time,
+        ?training_dataset_arn: String,
+        ?name: String,
+        ?status: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor training_dataset_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+    end
+
+    module TrainingInputMode
+      FILE: String
+      FAST_FILE: String
+      PIPE: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConfiguredAudienceModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+        ?output_config: Types::ConfiguredAudienceModelOutputConfig,
+        ?audience_model_arn: String,
+        ?shared_audience_metrics: Array[String],
+        ?min_matching_seed_size: Integer,
+        ?audience_size_config: Types::AudienceSizeConfig,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig?
+      attr_accessor audience_model_arn: String?
+      attr_accessor shared_audience_metrics: Array[String]?
+      attr_accessor min_matching_seed_size: Integer?
+      attr_accessor audience_size_config: Types::AudienceSizeConfig?
+      attr_accessor description: String?
+    end
+
+    class UpdateConfiguredAudienceModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_audience_model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_audience_model_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WorkerComputeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor number: Integer?
+    end
+
+    module WorkerComputeType
+      CR1X: String
+      CR4X: String
+    end
+  end
+end

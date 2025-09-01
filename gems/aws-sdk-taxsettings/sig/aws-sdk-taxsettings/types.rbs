@@ -1,0 +1,1360 @@
+module Aws::TaxSettings
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?tax_registration: Types::TaxRegistrationWithJurisdiction,
+        ?tax_inheritance_details: Types::TaxInheritanceDetails,
+        ?account_meta_data: Types::AccountMetaData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor tax_registration: Types::TaxRegistrationWithJurisdiction?
+      attr_accessor tax_inheritance_details: Types::TaxInheritanceDetails?
+      attr_accessor account_meta_data: Types::AccountMetaData?
+    end
+
+    class AccountMetaData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_name: String,
+        ?seller: String,
+        ?address: Types::Address,
+        ?address_type: String,
+        ?address_role_map: Hash[String, Types::Jurisdiction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_name: String?
+      attr_accessor seller: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_type: String?
+      attr_accessor address_role_map: Hash[String, Types::Jurisdiction]?
+    end
+
+    class AdditionalInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?malaysia_additional_info: Types::MalaysiaAdditionalInfo,
+        ?israel_additional_info: Types::IsraelAdditionalInfo,
+        ?estonia_additional_info: Types::EstoniaAdditionalInfo,
+        ?canada_additional_info: Types::CanadaAdditionalInfo,
+        ?spain_additional_info: Types::SpainAdditionalInfo,
+        ?kenya_additional_info: Types::KenyaAdditionalInfo,
+        ?south_korea_additional_info: Types::SouthKoreaAdditionalInfo,
+        ?turkey_additional_info: Types::TurkeyAdditionalInfo,
+        ?georgia_additional_info: Types::GeorgiaAdditionalInfo,
+        ?italy_additional_info: Types::ItalyAdditionalInfo,
+        ?romania_additional_info: Types::RomaniaAdditionalInfo,
+        ?ukraine_additional_info: Types::UkraineAdditionalInfo,
+        ?poland_additional_info: Types::PolandAdditionalInfo,
+        ?saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo,
+        ?indonesia_additional_info: Types::IndonesiaAdditionalInfo,
+        ?vietnam_additional_info: Types::VietnamAdditionalInfo,
+        ?egypt_additional_info: Types::EgyptAdditionalInfo,
+        ?greece_additional_info: Types::GreeceAdditionalInfo,
+        ?uzbekistan_additional_info: Types::UzbekistanAdditionalInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor malaysia_additional_info: Types::MalaysiaAdditionalInfo?
+      attr_accessor israel_additional_info: Types::IsraelAdditionalInfo?
+      attr_accessor estonia_additional_info: Types::EstoniaAdditionalInfo?
+      attr_accessor canada_additional_info: Types::CanadaAdditionalInfo?
+      attr_accessor spain_additional_info: Types::SpainAdditionalInfo?
+      attr_accessor kenya_additional_info: Types::KenyaAdditionalInfo?
+      attr_accessor south_korea_additional_info: Types::SouthKoreaAdditionalInfo?
+      attr_accessor turkey_additional_info: Types::TurkeyAdditionalInfo?
+      attr_accessor georgia_additional_info: Types::GeorgiaAdditionalInfo?
+      attr_accessor italy_additional_info: Types::ItalyAdditionalInfo?
+      attr_accessor romania_additional_info: Types::RomaniaAdditionalInfo?
+      attr_accessor ukraine_additional_info: Types::UkraineAdditionalInfo?
+      attr_accessor poland_additional_info: Types::PolandAdditionalInfo?
+      attr_accessor saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo?
+      attr_accessor indonesia_additional_info: Types::IndonesiaAdditionalInfo?
+      attr_accessor vietnam_additional_info: Types::VietnamAdditionalInfo?
+      attr_accessor egypt_additional_info: Types::EgyptAdditionalInfo?
+      attr_accessor greece_additional_info: Types::GreeceAdditionalInfo?
+      attr_accessor uzbekistan_additional_info: Types::UzbekistanAdditionalInfo?
+    end
+
+    class AdditionalInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?malaysia_additional_info: Types::MalaysiaAdditionalInfo,
+        ?israel_additional_info: Types::IsraelAdditionalInfo,
+        ?estonia_additional_info: Types::EstoniaAdditionalInfo,
+        ?canada_additional_info: Types::CanadaAdditionalInfo,
+        ?brazil_additional_info: Types::BrazilAdditionalInfo,
+        ?spain_additional_info: Types::SpainAdditionalInfo,
+        ?kenya_additional_info: Types::KenyaAdditionalInfo,
+        ?south_korea_additional_info: Types::SouthKoreaAdditionalInfo,
+        ?turkey_additional_info: Types::TurkeyAdditionalInfo,
+        ?georgia_additional_info: Types::GeorgiaAdditionalInfo,
+        ?italy_additional_info: Types::ItalyAdditionalInfo,
+        ?romania_additional_info: Types::RomaniaAdditionalInfo,
+        ?ukraine_additional_info: Types::UkraineAdditionalInfo,
+        ?poland_additional_info: Types::PolandAdditionalInfo,
+        ?saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo,
+        ?india_additional_info: Types::IndiaAdditionalInfo,
+        ?indonesia_additional_info: Types::IndonesiaAdditionalInfo,
+        ?vietnam_additional_info: Types::VietnamAdditionalInfo,
+        ?egypt_additional_info: Types::EgyptAdditionalInfo,
+        ?greece_additional_info: Types::GreeceAdditionalInfo,
+        ?uzbekistan_additional_info: Types::UzbekistanAdditionalInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor malaysia_additional_info: Types::MalaysiaAdditionalInfo?
+      attr_accessor israel_additional_info: Types::IsraelAdditionalInfo?
+      attr_accessor estonia_additional_info: Types::EstoniaAdditionalInfo?
+      attr_accessor canada_additional_info: Types::CanadaAdditionalInfo?
+      attr_accessor brazil_additional_info: Types::BrazilAdditionalInfo?
+      attr_accessor spain_additional_info: Types::SpainAdditionalInfo?
+      attr_accessor kenya_additional_info: Types::KenyaAdditionalInfo?
+      attr_accessor south_korea_additional_info: Types::SouthKoreaAdditionalInfo?
+      attr_accessor turkey_additional_info: Types::TurkeyAdditionalInfo?
+      attr_accessor georgia_additional_info: Types::GeorgiaAdditionalInfo?
+      attr_accessor italy_additional_info: Types::ItalyAdditionalInfo?
+      attr_accessor romania_additional_info: Types::RomaniaAdditionalInfo?
+      attr_accessor ukraine_additional_info: Types::UkraineAdditionalInfo?
+      attr_accessor poland_additional_info: Types::PolandAdditionalInfo?
+      attr_accessor saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo?
+      attr_accessor india_additional_info: Types::IndiaAdditionalInfo?
+      attr_accessor indonesia_additional_info: Types::IndonesiaAdditionalInfo?
+      attr_accessor vietnam_additional_info: Types::VietnamAdditionalInfo?
+      attr_accessor egypt_additional_info: Types::EgyptAdditionalInfo?
+      attr_accessor greece_additional_info: Types::GreeceAdditionalInfo?
+      attr_accessor uzbekistan_additional_info: Types::UzbekistanAdditionalInfo?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_line1: String,
+        ?address_line2: String,
+        ?address_line3: String,
+        ?district_or_county: String,
+        ?city: String,
+        ?state_or_region: String,
+        ?postal_code: String,
+        ?country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_line1: String?
+      attr_accessor address_line2: String?
+      attr_accessor address_line3: String?
+      attr_accessor district_or_county: String?
+      attr_accessor city: String?
+      attr_accessor state_or_region: String?
+      attr_accessor postal_code: String?
+      attr_accessor country_code: String?
+    end
+
+    module AddressRoleType
+      TAX_ADDRESS: String
+      BILLING_ADDRESS: String
+      CONTACT_ADDRESS: String
+    end
+
+    class AttachmentUploadException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Authority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor state: String?
+    end
+
+    class BatchDeleteTaxRegistrationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class BatchDeleteTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class BatchDeleteTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteTaxRegistrationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteTaxRegistrationError]?
+    end
+
+    class BatchGetTaxExemptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class BatchGetTaxExemptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_exemption_details_map: Hash[String, Types::TaxExemptionDetails],
+        ?failed_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_exemption_details_map: Hash[String, Types::TaxExemptionDetails]?
+      attr_accessor failed_accounts: Array[String]?
+    end
+
+    class BatchPutTaxRegistrationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class BatchPutTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?tax_registration_entry: Types::TaxRegistrationEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor tax_registration_entry: Types::TaxRegistrationEntry?
+    end
+
+    class BatchPutTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?errors: Array[Types::BatchPutTaxRegistrationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor errors: Array[Types::BatchPutTaxRegistrationError]?
+    end
+
+    class BrazilAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ccm_code: String,
+        ?legal_nature_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ccm_code: String?
+      attr_accessor legal_nature_code: String?
+    end
+
+    class CanadaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provincial_sales_tax_id: String,
+        ?canada_quebec_sales_tax_number: String,
+        ?canada_retail_sales_tax_number: String,
+        ?is_reseller_account: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provincial_sales_tax_id: String?
+      attr_accessor canada_quebec_sales_tax_number: String?
+      attr_accessor canada_retail_sales_tax_number: String?
+      attr_accessor is_reseller_account: bool?
+    end
+
+    class CaseCreationLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class DeleteSupplementalTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authority_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authority_id: String?
+    end
+
+    class DeleteSupplementalTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class DeleteTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DestinationS3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    class EgyptAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unique_identification_number: String,
+        ?unique_identification_number_expiration_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unique_identification_number: String?
+      attr_accessor unique_identification_number_expiration_date: String?
+    end
+
+    module EntityExemptionAccountStatus
+      None: String
+      Valid: String
+      Expired: String
+      Pending: String
+    end
+
+    class EstoniaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_commercial_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_commercial_code: String?
+    end
+
+    class ExemptionCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_name: String,
+        ?document_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_name: String?
+      attr_accessor document_file: String?
+    end
+
+    class GeorgiaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?person_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor person_type: String?
+    end
+
+    class GetTaxExemptionTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetTaxExemptionTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_exemption_types: Array[Types::TaxExemptionType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_exemption_types: Array[Types::TaxExemptionType]?
+    end
+
+    class GetTaxInheritanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetTaxInheritanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?heritage_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor heritage_status: String?
+    end
+
+    class GetTaxRegistrationDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_s3_location: Types::DestinationS3Location,
+        ?tax_document_metadata: Types::TaxDocumentMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_s3_location: Types::DestinationS3Location?
+      attr_accessor tax_document_metadata: Types::TaxDocumentMetadata?
+    end
+
+    class GetTaxRegistrationDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_file_path: String,
+        ?presigned_s3_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_file_path: String?
+      attr_accessor presigned_s3_url: String?
+    end
+
+    class GetTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration: Types::TaxRegistration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration: Types::TaxRegistration?
+    end
+
+    class GreeceAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contracting_authority_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contracting_authority_code: String?
+    end
+
+    module HeritageStatus
+      OptIn: String
+      OptOut: String
+    end
+
+    class IndiaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pan: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pan: String?
+    end
+
+    class IndonesiaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration_number_type: String,
+        ?ppn_exception_designation_code: String,
+        ?decision_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration_number_type: String?
+      attr_accessor ppn_exception_designation_code: String?
+      attr_accessor decision_number: String?
+    end
+
+    module IndonesiaTaxRegistrationNumberType
+      NIK: String
+      PASSPORT_NUMBER: String
+      NPWP: String
+      NITKU: String
+    end
+
+    module Industries
+      CIRCULATING_ORG: String
+      PROFESSIONAL_ORG: String
+      BANKS: String
+      INSURANCE: String
+      PENSION_AND_BENEFIT_FUNDS: String
+      DEVELOPMENT_AGENCIES: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class IsraelAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dealer_type: String,
+        ?customer_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dealer_type: String?
+      attr_accessor customer_type: String?
+    end
+
+    module IsraelCustomerType
+      BUSINESS: String
+      INDIVIDUAL: String
+    end
+
+    module IsraelDealerType
+      AUTHORIZED: String
+      NON_AUTHORIZED: String
+    end
+
+    class ItalyAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sdi_account_id: String,
+        ?cig_number: String,
+        ?cup_number: String,
+        ?tax_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sdi_account_id: String?
+      attr_accessor cig_number: String?
+      attr_accessor cup_number: String?
+      attr_accessor tax_code: String?
+    end
+
+    class Jurisdiction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_or_region: String,
+        ?country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_or_region: String?
+      attr_accessor country_code: String?
+    end
+
+    class KenyaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?person_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor person_type: String?
+    end
+
+    class ListSupplementalTaxRegistrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSupplementalTaxRegistrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registrations: Array[Types::SupplementalTaxRegistration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registrations: Array[Types::SupplementalTaxRegistration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaxExemptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaxExemptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tax_exemption_details_map: Hash[String, Types::TaxExemptionDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tax_exemption_details_map: Hash[String, Types::TaxExemptionDetails]?
+    end
+
+    class ListTaxRegistrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaxRegistrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_details: Array[Types::AccountDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_details: Array[Types::AccountDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class MalaysiaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_tax_codes: Array[String],
+        ?tax_information_number: String,
+        ?business_registration_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_tax_codes: Array[String]?
+      attr_accessor tax_information_number: String?
+      attr_accessor business_registration_number: String?
+    end
+
+    module MalaysiaServiceTaxCode
+      CONSULTANCY: String
+      DIGITAL_SVC_ELECTRONIC_MEDIUM: String
+      IT_SERVICES: String
+      TRAINING_OR_COACHING: String
+    end
+
+    module PersonType
+      LEGAL_PERSON: String
+      PHYSICAL_PERSON: String
+      BUSINESS: String
+    end
+
+    class PolandAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?individual_registration_number: String,
+        ?is_group_vat_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor individual_registration_number: String?
+      attr_accessor is_group_vat_enabled: bool?
+    end
+
+    class PutSupplementalTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration_entry: Types::SupplementalTaxRegistrationEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration_entry: Types::SupplementalTaxRegistrationEntry?
+    end
+
+    class PutSupplementalTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authority_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authority_id: String?
+      attr_accessor status: String?
+    end
+
+    class PutTaxExemptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?authority: Types::Authority,
+        ?exemption_type: String,
+        ?exemption_certificate: Types::ExemptionCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor authority: Types::Authority?
+      attr_accessor exemption_type: String?
+      attr_accessor exemption_certificate: Types::ExemptionCertificate?
+    end
+
+    class PutTaxExemptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class PutTaxInheritanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?heritage_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor heritage_status: String?
+    end
+
+    class PutTaxInheritanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutTaxRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?tax_registration_entry: Types::TaxRegistrationEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor tax_registration_entry: Types::TaxRegistrationEntry?
+    end
+
+    class PutTaxRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module RegistrationType
+      INTRA_EU: String
+      LOCAL: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class RomaniaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration_number_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration_number_type: String?
+    end
+
+    class SaudiArabiaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration_number_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration_number_type: String?
+    end
+
+    module SaudiArabiaTaxRegistrationNumberType
+      TAX_REGISTRATION_NUMBER: String
+      TAX_IDENTIFICATION_NUMBER: String
+      COMMERCIAL_REGISTRATION_NUMBER: String
+    end
+
+    module Sector
+      BUSINESS: String
+      INDIVIDUAL: String
+      PUBLIC_INSTITUTIONS: String
+    end
+
+    class SourceS3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class SouthKoreaAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_representative_name: String,
+        ?line_of_business: String,
+        ?item_of_business: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_representative_name: String?
+      attr_accessor line_of_business: String?
+      attr_accessor item_of_business: String?
+    end
+
+    class SpainAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+    end
+
+    class SupplementalTaxRegistration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?legal_name: String,
+        ?address: Types::Address,
+        ?authority_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor legal_name: String?
+      attr_accessor address: Types::Address?
+      attr_accessor authority_id: String?
+      attr_accessor status: String?
+    end
+
+    class SupplementalTaxRegistrationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?legal_name: String,
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor legal_name: String?
+      attr_accessor address: Types::Address?
+    end
+
+    module SupplementalTaxRegistrationType
+      VAT: String
+    end
+
+    class TaxDocumentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_document_access_token: String,
+        ?tax_document_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_document_access_token: String?
+      attr_accessor tax_document_name: String?
+    end
+
+    class TaxExemption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authority: Types::Authority,
+        ?tax_exemption_type: Types::TaxExemptionType,
+        ?effective_date: Time,
+        ?expiration_date: Time,
+        ?system_effective_date: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authority: Types::Authority?
+      attr_accessor tax_exemption_type: Types::TaxExemptionType?
+      attr_accessor effective_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor system_effective_date: Time?
+      attr_accessor status: String?
+    end
+
+    class TaxExemptionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_exemptions: Array[Types::TaxExemption],
+        ?heritage_obtained_details: bool,
+        ?heritage_obtained_parent_entity: String,
+        ?heritage_obtained_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_exemptions: Array[Types::TaxExemption]?
+      attr_accessor heritage_obtained_details: bool?
+      attr_accessor heritage_obtained_parent_entity: String?
+      attr_accessor heritage_obtained_reason: String?
+    end
+
+    class TaxExemptionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?applicable_jurisdictions: Array[Types::Authority],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor applicable_jurisdictions: Array[Types::Authority]?
+    end
+
+    class TaxInheritanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_entity_id: String,
+        ?inheritance_obtained_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_entity_id: String?
+      attr_accessor inheritance_obtained_reason: String?
+    end
+
+    class TaxRegistration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?legal_name: String,
+        ?status: String,
+        ?sector: String,
+        ?tax_document_metadatas: Array[Types::TaxDocumentMetadata],
+        ?certified_email_id: String,
+        ?additional_tax_information: Types::AdditionalInfoResponse,
+        ?legal_address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor legal_name: String?
+      attr_accessor status: String?
+      attr_accessor sector: String?
+      attr_accessor tax_document_metadatas: Array[Types::TaxDocumentMetadata]?
+      attr_accessor certified_email_id: String?
+      attr_accessor additional_tax_information: Types::AdditionalInfoResponse?
+      attr_accessor legal_address: Types::Address?
+    end
+
+    class TaxRegistrationDocFile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_name: String,
+        ?file_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_name: String?
+      attr_accessor file_content: String?
+    end
+
+    class TaxRegistrationDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: Types::SourceS3Location,
+        ?file: Types::TaxRegistrationDocFile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: Types::SourceS3Location?
+      attr_accessor file: Types::TaxRegistrationDocFile?
+    end
+
+    class TaxRegistrationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?legal_name: String,
+        ?legal_address: Types::Address,
+        ?sector: String,
+        ?additional_tax_information: Types::AdditionalInfoRequest,
+        ?verification_details: Types::VerificationDetails,
+        ?certified_email_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor legal_name: String?
+      attr_accessor legal_address: Types::Address?
+      attr_accessor sector: String?
+      attr_accessor additional_tax_information: Types::AdditionalInfoRequest?
+      attr_accessor verification_details: Types::VerificationDetails?
+      attr_accessor certified_email_id: String?
+    end
+
+    module TaxRegistrationNumberType
+      TAX_REGISTRATION_NUMBER: String
+      LOCAL_REGISTRATION_NUMBER: String
+    end
+
+    module TaxRegistrationStatus
+      VERIFIED: String
+      PENDING: String
+      DELETED: String
+      REJECTED: String
+    end
+
+    module TaxRegistrationType
+      VAT: String
+      GST: String
+      CPF: String
+      CNPJ: String
+      SST: String
+      TIN: String
+      NRIC: String
+    end
+
+    class TaxRegistrationWithJurisdiction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?legal_name: String,
+        ?status: String,
+        ?sector: String,
+        ?tax_document_metadatas: Array[Types::TaxDocumentMetadata],
+        ?certified_email_id: String,
+        ?additional_tax_information: Types::AdditionalInfoResponse,
+        ?jurisdiction: Types::Jurisdiction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor legal_name: String?
+      attr_accessor status: String?
+      attr_accessor sector: String?
+      attr_accessor tax_document_metadatas: Array[Types::TaxDocumentMetadata]?
+      attr_accessor certified_email_id: String?
+      attr_accessor additional_tax_information: Types::AdditionalInfoResponse?
+      attr_accessor jurisdiction: Types::Jurisdiction?
+    end
+
+    class TurkeyAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_office: String,
+        ?kep_email_id: String,
+        ?secondary_tax_id: String,
+        ?industries: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_office: String?
+      attr_accessor kep_email_id: String?
+      attr_accessor secondary_tax_id: String?
+      attr_accessor industries: String?
+    end
+
+    class UkraineAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ukraine_trn_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ukraine_trn_type: String?
+    end
+
+    module UkraineTrnType
+      BUSINESS: String
+      INDIVIDUAL: String
+    end
+
+    class UzbekistanAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_registration_number_type: String,
+        ?vat_registration_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_registration_number_type: String?
+      attr_accessor vat_registration_number: String?
+    end
+
+    module UzbekistanTaxRegistrationNumberType
+      BUSINESS: String
+      INDIVIDUAL: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    module ValidationExceptionErrorCode
+      MALFORMED_TOKEN: String
+      EXPIRED_TOKEN: String
+      INVALID_TOKEN: String
+      FIELD_VALIDATION_FAILED: String
+      MISSING_INPUT: String
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class VerificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_of_birth: String,
+        ?tax_registration_documents: Array[Types::TaxRegistrationDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_of_birth: String?
+      attr_accessor tax_registration_documents: Array[Types::TaxRegistrationDocument]?
+    end
+
+    class VietnamAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enterprise_identification_number: String,
+        ?electronic_transaction_code_number: String,
+        ?payment_voucher_number: String,
+        ?payment_voucher_number_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enterprise_identification_number: String?
+      attr_accessor electronic_transaction_code_number: String?
+      attr_accessor payment_voucher_number: String?
+      attr_accessor payment_voucher_number_date: String?
+    end
+  end
+end

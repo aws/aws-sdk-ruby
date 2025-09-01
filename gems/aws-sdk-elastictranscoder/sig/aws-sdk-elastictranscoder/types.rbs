@@ -1,0 +1,1206 @@
+module Aws::ElasticTranscoder
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Artwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_key: String,
+        ?max_width: String,
+        ?max_height: String,
+        ?sizing_policy: String,
+        ?padding_policy: String,
+        ?album_art_format: String,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_key: String?
+      attr_accessor max_width: String?
+      attr_accessor max_height: String?
+      attr_accessor sizing_policy: String?
+      attr_accessor padding_policy: String?
+      attr_accessor album_art_format: String?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class AudioCodecOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: String,
+        ?bit_depth: String,
+        ?bit_order: String,
+        ?signed: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: String?
+      attr_accessor bit_depth: String?
+      attr_accessor bit_order: String?
+      attr_accessor signed: String?
+    end
+
+    class AudioParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?codec: String,
+        ?sample_rate: String,
+        ?bit_rate: String,
+        ?channels: String,
+        ?audio_packing_mode: String,
+        ?codec_options: Types::AudioCodecOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor codec: String?
+      attr_accessor sample_rate: String?
+      attr_accessor bit_rate: String?
+      attr_accessor channels: String?
+      attr_accessor audio_packing_mode: String?
+      attr_accessor codec_options: Types::AudioCodecOptions?
+    end
+
+    class CancelJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CancelJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CaptionFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?pattern: String,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor pattern: String?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class CaptionSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?language: String,
+        ?time_offset: String,
+        ?label: String,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor language: String?
+      attr_accessor time_offset: String?
+      attr_accessor label: String?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class Captions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_policy: String,
+        ?caption_sources: Array[Types::CaptionSource],
+        ?caption_formats: Array[Types::CaptionFormat],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_policy: String?
+      attr_accessor caption_sources: Array[Types::CaptionSource]?
+      attr_accessor caption_formats: Array[Types::CaptionFormat]?
+    end
+
+    class Clip
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_span: Types::TimeSpan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_span: Types::TimeSpan?
+    end
+
+    class CreateJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?thumbnail_pattern: String,
+        ?thumbnail_encryption: Types::Encryption,
+        ?rotate: String,
+        ?preset_id: String,
+        ?segment_duration: String,
+        ?watermarks: Array[Types::JobWatermark],
+        ?album_art: Types::JobAlbumArt,
+        ?composition: Array[Types::Clip],
+        ?captions: Types::Captions,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor thumbnail_pattern: String?
+      attr_accessor thumbnail_encryption: Types::Encryption?
+      attr_accessor rotate: String?
+      attr_accessor preset_id: String?
+      attr_accessor segment_duration: String?
+      attr_accessor watermarks: Array[Types::JobWatermark]?
+      attr_accessor album_art: Types::JobAlbumArt?
+      attr_accessor composition: Array[Types::Clip]?
+      attr_accessor captions: Types::Captions?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class CreateJobPlaylist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?format: String,
+        ?output_keys: Array[String],
+        ?hls_content_protection: Types::HlsContentProtection,
+        ?play_ready_drm: Types::PlayReadyDrm,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor output_keys: Array[String]?
+      attr_accessor hls_content_protection: Types::HlsContentProtection?
+      attr_accessor play_ready_drm: Types::PlayReadyDrm?
+    end
+
+    class CreateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?input: Types::JobInput,
+        ?inputs: Array[Types::JobInput],
+        ?output: Types::CreateJobOutput,
+        ?outputs: Array[Types::CreateJobOutput],
+        ?output_key_prefix: String,
+        ?playlists: Array[Types::CreateJobPlaylist],
+        ?user_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor input: Types::JobInput?
+      attr_accessor inputs: Array[Types::JobInput]?
+      attr_accessor output: Types::CreateJobOutput?
+      attr_accessor outputs: Array[Types::CreateJobOutput]?
+      attr_accessor output_key_prefix: String?
+      attr_accessor playlists: Array[Types::CreateJobPlaylist]?
+      attr_accessor user_metadata: Hash[String, String]?
+    end
+
+    class CreateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class CreatePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?input_bucket: String,
+        ?output_bucket: String,
+        ?role: String,
+        ?aws_kms_key_arn: String,
+        ?notifications: Types::Notifications,
+        ?content_config: Types::PipelineOutputConfig,
+        ?thumbnail_config: Types::PipelineOutputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor input_bucket: String?
+      attr_accessor output_bucket: String?
+      attr_accessor role: String?
+      attr_accessor aws_kms_key_arn: String?
+      attr_accessor notifications: Types::Notifications?
+      attr_accessor content_config: Types::PipelineOutputConfig?
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig?
+    end
+
+    class CreatePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::Pipeline,
+        ?warnings: Array[Types::Warning],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::Pipeline?
+      attr_accessor warnings: Array[Types::Warning]?
+    end
+
+    class CreatePresetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?container: String,
+        ?video: Types::VideoParameters,
+        ?audio: Types::AudioParameters,
+        ?thumbnails: Types::Thumbnails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor container: String?
+      attr_accessor video: Types::VideoParameters?
+      attr_accessor audio: Types::AudioParameters?
+      attr_accessor thumbnails: Types::Thumbnails?
+    end
+
+    class CreatePresetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preset: Types::Preset,
+        ?warning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preset: Types::Preset?
+      attr_accessor warning: String?
+    end
+
+    class DeletePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeletePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePresetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeletePresetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetectedProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?width: Integer,
+        ?height: Integer,
+        ?frame_rate: String,
+        ?file_size: Integer,
+        ?duration_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+      attr_accessor frame_rate: String?
+      attr_accessor file_size: Integer?
+      attr_accessor duration_millis: Integer?
+    end
+
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?key: String,
+        ?key_md5: String,
+        ?initialization_vector: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor key: String?
+      attr_accessor key_md5: String?
+      attr_accessor initialization_vector: String?
+    end
+
+    class HlsContentProtection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?method: String,
+        ?key: String,
+        ?key_md5: String,
+        ?initialization_vector: String,
+        ?license_acquisition_url: String,
+        ?key_storage_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor method: String?
+      attr_accessor key: String?
+      attr_accessor key_md5: String?
+      attr_accessor initialization_vector: String?
+      attr_accessor license_acquisition_url: String?
+      attr_accessor key_storage_policy: String?
+    end
+
+    class IncompatibleVersionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InputCaptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_policy: String,
+        ?caption_sources: Array[Types::CaptionSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_policy: String?
+      attr_accessor caption_sources: Array[Types::CaptionSource]?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?pipeline_id: String,
+        ?input: Types::JobInput,
+        ?inputs: Array[Types::JobInput],
+        ?output: Types::JobOutput,
+        ?outputs: Array[Types::JobOutput],
+        ?output_key_prefix: String,
+        ?playlists: Array[Types::Playlist],
+        ?status: String,
+        ?user_metadata: Hash[String, String],
+        ?timing: Types::Timing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor pipeline_id: String?
+      attr_accessor input: Types::JobInput?
+      attr_accessor inputs: Array[Types::JobInput]?
+      attr_accessor output: Types::JobOutput?
+      attr_accessor outputs: Array[Types::JobOutput]?
+      attr_accessor output_key_prefix: String?
+      attr_accessor playlists: Array[Types::Playlist]?
+      attr_accessor status: String?
+      attr_accessor user_metadata: Hash[String, String]?
+      attr_accessor timing: Types::Timing?
+    end
+
+    class JobAlbumArt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_policy: String,
+        ?artwork: Array[Types::Artwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_policy: String?
+      attr_accessor artwork: Array[Types::Artwork]?
+    end
+
+    class JobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?frame_rate: String,
+        ?resolution: String,
+        ?aspect_ratio: String,
+        ?interlaced: String,
+        ?container: String,
+        ?encryption: Types::Encryption,
+        ?time_span: Types::TimeSpan,
+        ?input_captions: Types::InputCaptions,
+        ?detected_properties: Types::DetectedProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor frame_rate: String?
+      attr_accessor resolution: String?
+      attr_accessor aspect_ratio: String?
+      attr_accessor interlaced: String?
+      attr_accessor container: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor time_span: Types::TimeSpan?
+      attr_accessor input_captions: Types::InputCaptions?
+      attr_accessor detected_properties: Types::DetectedProperties?
+    end
+
+    class JobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?key: String,
+        ?thumbnail_pattern: String,
+        ?thumbnail_encryption: Types::Encryption,
+        ?rotate: String,
+        ?preset_id: String,
+        ?segment_duration: String,
+        ?status: String,
+        ?status_detail: String,
+        ?duration: Integer,
+        ?width: Integer,
+        ?height: Integer,
+        ?frame_rate: String,
+        ?file_size: Integer,
+        ?duration_millis: Integer,
+        ?watermarks: Array[Types::JobWatermark],
+        ?album_art: Types::JobAlbumArt,
+        ?composition: Array[Types::Clip],
+        ?captions: Types::Captions,
+        ?encryption: Types::Encryption,
+        ?applied_color_space_conversion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor key: String?
+      attr_accessor thumbnail_pattern: String?
+      attr_accessor thumbnail_encryption: Types::Encryption?
+      attr_accessor rotate: String?
+      attr_accessor preset_id: String?
+      attr_accessor segment_duration: String?
+      attr_accessor status: String?
+      attr_accessor status_detail: String?
+      attr_accessor duration: Integer?
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+      attr_accessor frame_rate: String?
+      attr_accessor file_size: Integer?
+      attr_accessor duration_millis: Integer?
+      attr_accessor watermarks: Array[Types::JobWatermark]?
+      attr_accessor album_art: Types::JobAlbumArt?
+      attr_accessor composition: Array[Types::Clip]?
+      attr_accessor captions: Types::Captions?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor applied_color_space_conversion: String?
+    end
+
+    class JobWatermark
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preset_watermark_id: String,
+        ?input_key: String,
+        ?encryption: Types::Encryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preset_watermark_id: String?
+      attr_accessor input_key: String?
+      attr_accessor encryption: Types::Encryption?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListJobsByPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?ascending: String,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor ascending: String?
+      attr_accessor page_token: String?
+    end
+
+    class ListJobsByPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::Job],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::Job]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListJobsByStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?ascending: String,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor ascending: String?
+      attr_accessor page_token: String?
+    end
+
+    class ListJobsByStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::Job],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::Job]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPipelinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ascending: String,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ascending: String?
+      attr_accessor page_token: String?
+    end
+
+    class ListPipelinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipelines: Array[Types::Pipeline],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipelines: Array[Types::Pipeline]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListPresetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ascending: String,
+        ?page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ascending: String?
+      attr_accessor page_token: String?
+    end
+
+    class ListPresetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?presets: Array[Types::Preset],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor presets: Array[Types::Preset]?
+      attr_accessor next_page_token: String?
+    end
+
+    class Notifications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progressing: String,
+        ?completed: String,
+        ?warning: String,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progressing: String?
+      attr_accessor completed: String?
+      attr_accessor warning: String?
+      attr_accessor error: String?
+    end
+
+    class Permission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grantee_type: String,
+        ?grantee: String,
+        ?access: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grantee_type: String?
+      attr_accessor grantee: String?
+      attr_accessor access: Array[String]?
+    end
+
+    class Pipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?input_bucket: String,
+        ?output_bucket: String,
+        ?role: String,
+        ?aws_kms_key_arn: String,
+        ?notifications: Types::Notifications,
+        ?content_config: Types::PipelineOutputConfig,
+        ?thumbnail_config: Types::PipelineOutputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor input_bucket: String?
+      attr_accessor output_bucket: String?
+      attr_accessor role: String?
+      attr_accessor aws_kms_key_arn: String?
+      attr_accessor notifications: Types::Notifications?
+      attr_accessor content_config: Types::PipelineOutputConfig?
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig?
+    end
+
+    class PipelineOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?storage_class: String,
+        ?permissions: Array[Types::Permission],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor storage_class: String?
+      attr_accessor permissions: Array[Types::Permission]?
+    end
+
+    class PlayReadyDrm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?key: String,
+        ?key_md5: String,
+        ?key_id: String,
+        ?initialization_vector: String,
+        ?license_acquisition_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor key: String?
+      attr_accessor key_md5: String?
+      attr_accessor key_id: String?
+      attr_accessor initialization_vector: String?
+      attr_accessor license_acquisition_url: String?
+    end
+
+    class Playlist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?format: String,
+        ?output_keys: Array[String],
+        ?hls_content_protection: Types::HlsContentProtection,
+        ?play_ready_drm: Types::PlayReadyDrm,
+        ?status: String,
+        ?status_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor output_keys: Array[String]?
+      attr_accessor hls_content_protection: Types::HlsContentProtection?
+      attr_accessor play_ready_drm: Types::PlayReadyDrm?
+      attr_accessor status: String?
+      attr_accessor status_detail: String?
+    end
+
+    class Preset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?container: String,
+        ?audio: Types::AudioParameters,
+        ?video: Types::VideoParameters,
+        ?thumbnails: Types::Thumbnails,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor container: String?
+      attr_accessor audio: Types::AudioParameters?
+      attr_accessor video: Types::VideoParameters?
+      attr_accessor thumbnails: Types::Thumbnails?
+      attr_accessor type: String?
+    end
+
+    class PresetWatermark
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?max_width: String,
+        ?max_height: String,
+        ?sizing_policy: String,
+        ?horizontal_align: String,
+        ?horizontal_offset: String,
+        ?vertical_align: String,
+        ?vertical_offset: String,
+        ?opacity: String,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor max_width: String?
+      attr_accessor max_height: String?
+      attr_accessor sizing_policy: String?
+      attr_accessor horizontal_align: String?
+      attr_accessor horizontal_offset: String?
+      attr_accessor vertical_align: String?
+      attr_accessor vertical_offset: String?
+      attr_accessor opacity: String?
+      attr_accessor target: String?
+    end
+
+    class ReadJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ReadJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class ReadPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ReadPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::Pipeline,
+        ?warnings: Array[Types::Warning],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::Pipeline?
+      attr_accessor warnings: Array[Types::Warning]?
+    end
+
+    class ReadPresetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ReadPresetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preset: Types::Preset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preset: Types::Preset?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TestRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?input_bucket: String,
+        ?output_bucket: String,
+        ?topics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor input_bucket: String?
+      attr_accessor output_bucket: String?
+      attr_accessor topics: Array[String]?
+    end
+
+    class TestRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?success: String,
+        ?messages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor success: String?
+      attr_accessor messages: Array[String]?
+    end
+
+    class Thumbnails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?interval: String,
+        ?resolution: String,
+        ?aspect_ratio: String,
+        ?max_width: String,
+        ?max_height: String,
+        ?sizing_policy: String,
+        ?padding_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor interval: String?
+      attr_accessor resolution: String?
+      attr_accessor aspect_ratio: String?
+      attr_accessor max_width: String?
+      attr_accessor max_height: String?
+      attr_accessor sizing_policy: String?
+      attr_accessor padding_policy: String?
+    end
+
+    class TimeSpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor duration: String?
+    end
+
+    class Timing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submit_time_millis: Integer,
+        ?start_time_millis: Integer,
+        ?finish_time_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submit_time_millis: Integer?
+      attr_accessor start_time_millis: Integer?
+      attr_accessor finish_time_millis: Integer?
+    end
+
+    class UpdatePipelineNotificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?notifications: Types::Notifications,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor notifications: Types::Notifications?
+    end
+
+    class UpdatePipelineNotificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::Pipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::Pipeline?
+    end
+
+    class UpdatePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?input_bucket: String,
+        ?role: String,
+        ?aws_kms_key_arn: String,
+        ?notifications: Types::Notifications,
+        ?content_config: Types::PipelineOutputConfig,
+        ?thumbnail_config: Types::PipelineOutputConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor input_bucket: String?
+      attr_accessor role: String?
+      attr_accessor aws_kms_key_arn: String?
+      attr_accessor notifications: Types::Notifications?
+      attr_accessor content_config: Types::PipelineOutputConfig?
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig?
+    end
+
+    class UpdatePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::Pipeline,
+        ?warnings: Array[Types::Warning],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::Pipeline?
+      attr_accessor warnings: Array[Types::Warning]?
+    end
+
+    class UpdatePipelineStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdatePipelineStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::Pipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::Pipeline?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VideoParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?codec: String,
+        ?codec_options: Hash[String, String],
+        ?keyframes_max_dist: String,
+        ?fixed_gop: String,
+        ?bit_rate: String,
+        ?frame_rate: String,
+        ?max_frame_rate: String,
+        ?resolution: String,
+        ?aspect_ratio: String,
+        ?max_width: String,
+        ?max_height: String,
+        ?display_aspect_ratio: String,
+        ?sizing_policy: String,
+        ?padding_policy: String,
+        ?watermarks: Array[Types::PresetWatermark],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor codec: String?
+      attr_accessor codec_options: Hash[String, String]?
+      attr_accessor keyframes_max_dist: String?
+      attr_accessor fixed_gop: String?
+      attr_accessor bit_rate: String?
+      attr_accessor frame_rate: String?
+      attr_accessor max_frame_rate: String?
+      attr_accessor resolution: String?
+      attr_accessor aspect_ratio: String?
+      attr_accessor max_width: String?
+      attr_accessor max_height: String?
+      attr_accessor display_aspect_ratio: String?
+      attr_accessor sizing_policy: String?
+      attr_accessor padding_policy: String?
+      attr_accessor watermarks: Array[Types::PresetWatermark]?
+    end
+
+    class Warning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+  end
+end

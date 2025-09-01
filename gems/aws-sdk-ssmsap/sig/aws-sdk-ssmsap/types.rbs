@@ -1,0 +1,1129 @@
+module Aws::SsmSap
+  module Types
+
+    module AllocationType
+      VPC_SUBNET: String
+      ELASTIC_IP: String
+      OVERLAY: String
+      UNKNOWN: String
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?arn: String,
+        ?app_registry_arn: String,
+        ?status: String,
+        ?discovery_status: String,
+        ?components: Array[String],
+        ?last_updated: Time,
+        ?status_message: String,
+        ?associated_application_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor arn: String?
+      attr_accessor app_registry_arn: String?
+      attr_accessor status: String?
+      attr_accessor discovery_status: String?
+      attr_accessor components: Array[String]?
+      attr_accessor last_updated: Time?
+      attr_accessor status_message: String?
+      attr_accessor associated_application_arns: Array[String]?
+    end
+
+    class ApplicationCredential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?credential_type: String,
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor credential_type: String?
+      attr_accessor secret_id: String?
+    end
+
+    module ApplicationDiscoveryStatus
+      SUCCESS: String
+      REGISTRATION_FAILED: String
+      REFRESH_FAILED: String
+      REGISTERING: String
+      DELETING: String
+    end
+
+    module ApplicationStatus
+      ACTIVATED: String
+      STARTING: String
+      STOPPED: String
+      STOPPING: String
+      FAILED: String
+      REGISTERING: String
+      DELETING: String
+      UNKNOWN: String
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?discovery_status: String,
+        ?type: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor discovery_status: String?
+      attr_accessor type: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ApplicationType
+      HANA: String
+      SAP_ABAP: String
+    end
+
+    class AssociatedHost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?ec2_instance_id: String,
+        ?ip_addresses: Array[Types::IpAddressMember],
+        ?os_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor ip_addresses: Array[Types::IpAddressMember]?
+      attr_accessor os_version: String?
+    end
+
+    class BackintConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backint_mode: String,
+        ?ensure_no_backup_in_process: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backint_mode: String?
+      attr_accessor ensure_no_backup_in_process: bool?
+    end
+
+    module BackintMode
+      AWSBackup: String
+    end
+
+    module ClusterStatus
+      ONLINE: String
+      STANDBY: String
+      MAINTENANCE: String
+      OFFLINE: String
+      NONE: String
+    end
+
+    class Component
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_id: String,
+        ?sid: String,
+        ?system_number: String,
+        ?parent_component: String,
+        ?child_components: Array[String],
+        ?application_id: String,
+        ?component_type: String,
+        ?status: String,
+        ?sap_hostname: String,
+        ?sap_feature: String,
+        ?sap_kernel_version: String,
+        ?hdb_version: String,
+        ?resilience: Types::Resilience,
+        ?associated_host: Types::AssociatedHost,
+        ?databases: Array[String],
+        ?hosts: Array[Types::Host],
+        ?primary_host: String,
+        ?database_connection: Types::DatabaseConnection,
+        ?last_updated: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_id: String?
+      attr_accessor sid: String?
+      attr_accessor system_number: String?
+      attr_accessor parent_component: String?
+      attr_accessor child_components: Array[String]?
+      attr_accessor application_id: String?
+      attr_accessor component_type: String?
+      attr_accessor status: String?
+      attr_accessor sap_hostname: String?
+      attr_accessor sap_feature: String?
+      attr_accessor sap_kernel_version: String?
+      attr_accessor hdb_version: String?
+      attr_accessor resilience: Types::Resilience?
+      attr_accessor associated_host: Types::AssociatedHost?
+      attr_accessor databases: Array[String]?
+      attr_accessor hosts: Array[Types::Host]?
+      attr_accessor primary_host: String?
+      attr_accessor database_connection: Types::DatabaseConnection?
+      attr_accessor last_updated: Time?
+      attr_accessor arn: String?
+    end
+
+    class ComponentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_type: String,
+        ?sid: String,
+        ?ec2_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_type: String?
+      attr_accessor sid: String?
+      attr_accessor ec2_instance_id: String?
+    end
+
+    module ComponentStatus
+      ACTIVATED: String
+      STARTING: String
+      STOPPED: String
+      STOPPING: String
+      RUNNING: String
+      RUNNING_WITH_ERROR: String
+      UNDEFINED: String
+    end
+
+    class ComponentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+        ?component_type: String,
+        ?tags: Hash[String, String],
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+      attr_accessor component_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor arn: String?
+    end
+
+    module ComponentType
+      HANA: String
+      HANA_NODE: String
+      ABAP: String
+      ASCS: String
+      DIALOG: String
+      WEBDISP: String
+      WD: String
+      ERS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectedEntityType
+      DBMS: String
+    end
+
+    module CredentialType
+      ADMIN: String
+    end
+
+    class Database
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+        ?credentials: Array[Types::ApplicationCredential],
+        ?database_id: String,
+        ?database_name: String,
+        ?database_type: String,
+        ?arn: String,
+        ?status: String,
+        ?primary_host: String,
+        ?sql_port: Integer,
+        ?last_updated: Time,
+        ?connected_component_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+      attr_accessor credentials: Array[Types::ApplicationCredential]?
+      attr_accessor database_id: String?
+      attr_accessor database_name: String?
+      attr_accessor database_type: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor primary_host: String?
+      attr_accessor sql_port: Integer?
+      attr_accessor last_updated: Time?
+      attr_accessor connected_component_arns: Array[String]?
+    end
+
+    class DatabaseConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_connection_method: String,
+        ?database_arn: String,
+        ?connection_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_connection_method: String?
+      attr_accessor database_arn: String?
+      attr_accessor connection_ip: String?
+    end
+
+    module DatabaseConnectionMethod
+      DIRECT: String
+      OVERLAY: String
+    end
+
+    module DatabaseStatus
+      RUNNING: String
+      STARTING: String
+      STOPPED: String
+      WARNING: String
+      UNKNOWN: String
+      ERROR: String
+    end
+
+    class DatabaseSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+        ?database_id: String,
+        ?database_type: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+      attr_accessor database_id: String?
+      attr_accessor database_type: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module DatabaseType
+      SYSTEM: String
+      TENANT: String
+    end
+
+    class DeleteResourcePermissionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?source_resource_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePermissionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class DeregisterApplicationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class DeregisterApplicationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor operator: String?
+    end
+
+    module FilterOperator
+      EQUALS: String
+      GREATER_THAN_OR_EQUALS: String
+      LESS_THAN_OR_EQUALS: String
+    end
+
+    class GetApplicationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?application_arn: String,
+        ?app_registry_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor application_arn: String?
+      attr_accessor app_registry_arn: String?
+    end
+
+    class GetApplicationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetComponentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+    end
+
+    class GetComponentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDatabaseOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+        ?database_id: String,
+        ?database_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+      attr_accessor database_id: String?
+      attr_accessor database_arn: String?
+    end
+
+    class GetDatabaseOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::Database,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::Database?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetOperationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class GetOperationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation: Types::Operation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation: Types::Operation?
+    end
+
+    class GetResourcePermissionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePermissionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class Host
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?host_ip: String,
+        ?ec2_instance_id: String,
+        ?instance_id: String,
+        ?host_role: String,
+        ?os_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor host_ip: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor host_role: String?
+      attr_accessor os_version: String?
+    end
+
+    module HostRole
+      LEADER: String
+      WORKER: String
+      STANDBY: String
+      UNKNOWN: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IpAddressMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?primary: bool,
+        ?allocation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor primary: bool?
+      attr_accessor allocation_type: String?
+    end
+
+    class ListApplicationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListApplicationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComponentsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?components: Array[Types::ComponentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor components: Array[Types::ComponentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatabasesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?component_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor component_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatabasesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?databases: Array[Types::DatabaseSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor databases: Array[Types::DatabaseSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOperationEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListOperationEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_events: Array[Types::OperationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_events: Array[Types::OperationEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOperationsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListOperationsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::Operation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::Operation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Operation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?status_message: String,
+        ?properties: Hash[String, String?],
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor properties: Hash[String, String?]?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class OperationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?resource: Types::Resource,
+        ?status: String,
+        ?status_message: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module OperationEventStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module OperationMode
+      PRIMARY: String
+      LOGREPLAY: String
+      DELTA_DATASHIPPING: String
+      LOGREPLAY_READACCESS: String
+      NONE: String
+    end
+
+    module OperationStatus
+      INPROGRESS: String
+      SUCCESS: String
+      ERROR: String
+    end
+
+    module PermissionActionType
+      RESTORE: String
+    end
+
+    class PutResourcePermissionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?source_resource_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class PutResourcePermissionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class RegisterApplicationOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?application_type: String,
+        ?instances: Array[String],
+        ?sap_instance_number: String,
+        ?sid: String,
+        ?tags: Hash[String, String],
+        ?credentials: Array[Types::ApplicationCredential],
+        ?database_arn: String,
+        ?components_info: Array[Types::ComponentInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor application_type: String?
+      attr_accessor instances: Array[String]?
+      attr_accessor sap_instance_number: String?
+      attr_accessor sid: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor credentials: Array[Types::ApplicationCredential]?
+      attr_accessor database_arn: String?
+      attr_accessor components_info: Array[Types::ComponentInfo]?
+    end
+
+    class RegisterApplicationOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+      attr_accessor operation_id: String?
+    end
+
+    module ReplicationMode
+      PRIMARY: String
+      NONE: String
+      SYNC: String
+      SYNCMEM: String
+      ASYNC: String
+    end
+
+    class Resilience
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsr_tier: String,
+        ?hsr_replication_mode: String,
+        ?hsr_operation_mode: String,
+        ?cluster_status: String,
+        ?enqueue_replication: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsr_tier: String?
+      attr_accessor hsr_replication_mode: String?
+      attr_accessor hsr_operation_mode: String?
+      attr_accessor cluster_status: String?
+      attr_accessor enqueue_replication: bool?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class StartApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class StartApplicationRefreshInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class StartApplicationRefreshOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class StopApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?stop_connected_entity: String,
+        ?include_ec2_instance_shutdown: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor stop_connected_entity: String?
+      attr_accessor include_ec2_instance_shutdown: bool?
+    end
+
+    class StopApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationSettingsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?credentials_to_add_or_update: Array[Types::ApplicationCredential],
+        ?credentials_to_remove: Array[Types::ApplicationCredential],
+        ?backint: Types::BackintConfig,
+        ?database_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor credentials_to_add_or_update: Array[Types::ApplicationCredential]?
+      attr_accessor credentials_to_remove: Array[Types::ApplicationCredential]?
+      attr_accessor backint: Types::BackintConfig?
+      attr_accessor database_arn: String?
+    end
+
+    class UpdateApplicationSettingsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?operation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor operation_ids: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

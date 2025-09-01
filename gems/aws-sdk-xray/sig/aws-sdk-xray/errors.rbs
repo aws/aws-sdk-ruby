@@ -1,0 +1,36 @@
+module Aws::XRay
+  module Errors
+    class InvalidPolicyRevisionIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LockoutPreventionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyCountLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicySizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class RuleLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+  end
+end

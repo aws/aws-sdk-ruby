@@ -1,0 +1,1200 @@
+module Aws::ECRPUBLIC
+  module Types
+
+    class AuthorizationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_token: String,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_token: String?
+      attr_accessor expires_at: Time?
+    end
+
+    class BatchCheckLayerAvailabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?layer_digests: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor layer_digests: Array[String]?
+    end
+
+    class BatchCheckLayerAvailabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layers: Array[Types::Layer],
+        ?failures: Array[Types::LayerFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layers: Array[Types::Layer]?
+      attr_accessor failures: Array[Types::LayerFailure]?
+    end
+
+    class BatchDeleteImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_ids: Array[Types::ImageIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_ids: Array[Types::ImageIdentifier]?
+    end
+
+    class BatchDeleteImageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_ids: Array[Types::ImageIdentifier],
+        ?failures: Array[Types::ImageFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_ids: Array[Types::ImageIdentifier]?
+      attr_accessor failures: Array[Types::ImageFailure]?
+    end
+
+    class CompleteLayerUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?upload_id: String,
+        ?layer_digests: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor layer_digests: Array[String]?
+    end
+
+    class CompleteLayerUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?upload_id: String,
+        ?layer_digest: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor layer_digest: String?
+    end
+
+    class CreateRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?catalog_data: Types::RepositoryCatalogDataInput,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor catalog_data: Types::RepositoryCatalogDataInput?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRepositoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+        ?catalog_data: Types::RepositoryCatalogData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+      attr_accessor catalog_data: Types::RepositoryCatalogData?
+    end
+
+    class DeleteRepositoryPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+    end
+
+    class DeleteRepositoryPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?policy_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor policy_text: String?
+    end
+
+    class DeleteRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor force: bool?
+    end
+
+    class DeleteRepositoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+    end
+
+    class DescribeImageTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImageTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_tag_details: Array[Types::ImageTagDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_tag_details: Array[Types::ImageTagDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_ids: Array[Types::ImageIdentifier],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_ids: Array[Types::ImageIdentifier]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_details: Array[Types::ImageDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_details: Array[Types::ImageDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registries: Array[Types::Registry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registries: Array[Types::Registry]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRepositoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_names: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRepositoriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repositories: Array[Types::Repository],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repositories: Array[Types::Repository]?
+      attr_accessor next_token: String?
+    end
+
+    class EmptyUploadException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAuthorizationTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAuthorizationTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_data: Types::AuthorizationData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_data: Types::AuthorizationData?
+    end
+
+    class GetRegistryCatalogDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetRegistryCatalogDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_catalog_data: Types::RegistryCatalogData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_catalog_data: Types::RegistryCatalogData?
+    end
+
+    class GetRepositoryCatalogDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+    end
+
+    class GetRepositoryCatalogDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_data: Types::RepositoryCatalogData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_data: Types::RepositoryCatalogData?
+    end
+
+    class GetRepositoryPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+    end
+
+    class GetRepositoryPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?policy_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor policy_text: String?
+    end
+
+    class Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_id: Types::ImageIdentifier,
+        ?image_manifest: String,
+        ?image_manifest_media_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor image_manifest: String?
+      attr_accessor image_manifest_media_type: String?
+    end
+
+    class ImageAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImageDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_digest: String,
+        ?image_tags: Array[String],
+        ?image_size_in_bytes: Integer,
+        ?image_pushed_at: Time,
+        ?image_manifest_media_type: String,
+        ?artifact_media_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_digest: String?
+      attr_accessor image_tags: Array[String]?
+      attr_accessor image_size_in_bytes: Integer?
+      attr_accessor image_pushed_at: Time?
+      attr_accessor image_manifest_media_type: String?
+      attr_accessor artifact_media_type: String?
+    end
+
+    class ImageDigestDoesNotMatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImageFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: Types::ImageIdentifier,
+        ?failure_code: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor failure_code: String?
+      attr_accessor failure_reason: String?
+    end
+
+    module ImageFailureCode
+      InvalidImageDigest: String
+      InvalidImageTag: String
+      ImageTagDoesNotMatchDigest: String
+      ImageNotFound: String
+      MissingDigestAndTag: String
+      ImageReferencedByManifestList: String
+      KmsError: String
+    end
+
+    class ImageIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_digest: String,
+        ?image_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_digest: String?
+      attr_accessor image_tag: String?
+    end
+
+    class ImageNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImageTagAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImageTagDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_tag: String,
+        ?created_at: Time,
+        ?image_detail: Types::ReferencedImageDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_tag: String?
+      attr_accessor created_at: Time?
+      attr_accessor image_detail: Types::ReferencedImageDetail?
+    end
+
+    class InitiateLayerUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+    end
+
+    class InitiateLayerUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?part_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor part_size: Integer?
+    end
+
+    class InvalidLayerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLayerPartException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?upload_id: String,
+        ?last_valid_byte_received: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor last_valid_byte_received: Integer?
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Layer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_digest: String,
+        ?layer_availability: String,
+        ?layer_size: Integer,
+        ?media_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_digest: String?
+      attr_accessor layer_availability: String?
+      attr_accessor layer_size: Integer?
+      attr_accessor media_type: String?
+    end
+
+    class LayerAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LayerAvailability
+      AVAILABLE: String
+      UNAVAILABLE: String
+    end
+
+    class LayerFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_digest: String,
+        ?failure_code: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_digest: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_reason: String?
+    end
+
+    module LayerFailureCode
+      InvalidLayerDigest: String
+      MissingLayerDigest: String
+    end
+
+    class LayerPartTooSmallException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LayersNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_manifest: String,
+        ?image_manifest_media_type: String,
+        ?image_tag: String,
+        ?image_digest: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_manifest: String?
+      attr_accessor image_manifest_media_type: String?
+      attr_accessor image_tag: String?
+      attr_accessor image_digest: String?
+    end
+
+    class PutImageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: Types::Image,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: Types::Image?
+    end
+
+    class PutRegistryCatalogDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+    end
+
+    class PutRegistryCatalogDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_catalog_data: Types::RegistryCatalogData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_catalog_data: Types::RegistryCatalogData?
+    end
+
+    class PutRepositoryCatalogDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?catalog_data: Types::RepositoryCatalogDataInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor catalog_data: Types::RepositoryCatalogDataInput?
+    end
+
+    class PutRepositoryCatalogDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_data: Types::RepositoryCatalogData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_data: Types::RepositoryCatalogData?
+    end
+
+    class ReferencedImageDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_digest: String,
+        ?image_size_in_bytes: Integer,
+        ?image_pushed_at: Time,
+        ?image_manifest_media_type: String,
+        ?artifact_media_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_digest: String?
+      attr_accessor image_size_in_bytes: Integer?
+      attr_accessor image_pushed_at: Time?
+      attr_accessor image_manifest_media_type: String?
+      attr_accessor artifact_media_type: String?
+    end
+
+    class ReferencedImagesNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Registry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?registry_arn: String,
+        ?registry_uri: String,
+        ?verified: bool,
+        ?aliases: Array[Types::RegistryAlias],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor registry_arn: String?
+      attr_accessor registry_uri: String?
+      attr_accessor verified: bool?
+      attr_accessor aliases: Array[Types::RegistryAlias]?
+    end
+
+    class RegistryAlias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?primary_registry_alias: bool,
+        ?default_registry_alias: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor primary_registry_alias: bool?
+      attr_accessor default_registry_alias: bool?
+    end
+
+    module RegistryAliasStatus
+      ACTIVE: String
+      PENDING: String
+      REJECTED: String
+    end
+
+    class RegistryCatalogData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+    end
+
+    class RegistryNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Repository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_arn: String,
+        ?registry_id: String,
+        ?repository_name: String,
+        ?repository_uri: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_arn: String?
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor repository_uri: String?
+      attr_accessor created_at: Time?
+    end
+
+    class RepositoryAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryCatalogData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?architectures: Array[String],
+        ?operating_systems: Array[String],
+        ?logo_url: String,
+        ?about_text: String,
+        ?usage_text: String,
+        ?marketplace_certified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor operating_systems: Array[String]?
+      attr_accessor logo_url: String?
+      attr_accessor about_text: String?
+      attr_accessor usage_text: String?
+      attr_accessor marketplace_certified: bool?
+    end
+
+    class RepositoryCatalogDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?architectures: Array[String],
+        ?operating_systems: Array[String],
+        ?logo_image_blob: String,
+        ?about_text: String,
+        ?usage_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor operating_systems: Array[String]?
+      attr_accessor logo_image_blob: String?
+      attr_accessor about_text: String?
+      attr_accessor usage_text: String?
+    end
+
+    class RepositoryCatalogDataNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryNotEmptyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryPolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetRepositoryPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?policy_text: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor policy_text: String?
+      attr_accessor force: bool?
+    end
+
+    class SetRepositoryPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?policy_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor policy_text: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedCommandException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UploadLayerPartRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?upload_id: String,
+        ?part_first_byte: Integer,
+        ?part_last_byte: Integer,
+        ?layer_part_blob: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor part_first_byte: Integer?
+      attr_accessor part_last_byte: Integer?
+      attr_accessor layer_part_blob: String?
+    end
+
+    class UploadLayerPartResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?upload_id: String,
+        ?last_byte_received: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor upload_id: String?
+      attr_accessor last_byte_received: Integer?
+    end
+
+    class UploadNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

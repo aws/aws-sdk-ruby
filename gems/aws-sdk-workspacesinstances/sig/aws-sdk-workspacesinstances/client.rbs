@@ -1,0 +1,360 @@
+module Aws::WorkspacesInstances
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WorkspacesInstances::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateVolumeResponse
+      include Smithy::Client::_Response[Types::AssociateVolumeResponse]
+    end
+    def associate_volume: (
+      ?workspace_instance_id: String,
+      ?volume_id: String,
+      ?device: String
+    ) -> _AssociateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateVolumeResponse
+
+    interface _CreateVolumeResponse
+      include Smithy::Client::_Response[Types::CreateVolumeResponse]
+      def volume_id: () -> String?
+    end
+    def create_volume: (
+      ?availability_zone: String,
+      ?client_token: String,
+      ?encrypted: bool,
+      ?iops: Integer,
+      ?kms_key_id: String,
+      ?size_in_gb: Integer,
+      ?snapshot_id: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      ],
+      ?throughput: Integer,
+      ?volume_type: String
+    ) -> _CreateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVolumeResponse
+
+    interface _CreateWorkspaceInstanceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceInstanceResponse]
+      def workspace_instance_id: () -> String?
+    end
+    def create_workspace_instance: (
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?managed_instance: {
+        block_device_mappings: Array[
+          {
+            device_name: String,
+            ebs: {
+              volume_type: String,
+              encrypted: bool,
+              kms_key_id: String,
+              iops: Integer,
+              throughput: untyped,
+              volume_size: untyped
+            },
+            no_device: untyped,
+            virtual_name: String
+          }
+        ],
+        capacity_reservation_specification: {
+          capacity_reservation_preference: String,
+          capacity_reservation_target: {
+            capacity_reservation_id: String,
+            capacity_reservation_resource_group_arn: String
+          }
+        },
+        cpu_options: {
+          amd_sev_snp: String,
+          core_count: untyped,
+          threads_per_core: untyped
+        },
+        credit_specification: {
+          cpu_credits: String
+        },
+        disable_api_stop: untyped,
+        ebs_optimized: untyped,
+        enable_primary_ipv6: untyped,
+        enclave_options: {
+          enabled: untyped
+        },
+        hibernation_options: {
+          configured: untyped
+        },
+        iam_instance_profile: {
+          arn: untyped,
+          name: String
+        },
+        image_id: String,
+        instance_market_options: {
+          market_type: String,
+          spot_options: {
+            block_duration_minutes: untyped,
+            instance_interruption_behavior: String,
+            max_price: untyped,
+            spot_instance_type: String,
+            valid_until_utc: Time
+          }
+        },
+        instance_type: String,
+        ipv6_addresses: Array[
+          {
+            ipv6_address: String,
+            is_primary_ipv6: untyped
+          }
+        ],
+        ipv6_address_count: untyped,
+        kernel_id: untyped,
+        key_name: untyped,
+        license_specifications: Array[
+          {
+            license_configuration_arn: untyped
+          }
+        ],
+        maintenance_options: {
+          auto_recovery: String
+        },
+        metadata_options: {
+          http_endpoint: String,
+          http_protocol_ipv6: String,
+          http_put_response_hop_limit: Integer,
+          http_tokens: String,
+          instance_metadata_tags: String
+        },
+        monitoring: {
+          enabled: untyped
+        },
+        network_interfaces: Array[
+          {
+            associate_carrier_ip_address: untyped,
+            associate_public_ip_address: untyped,
+            connection_tracking_specification: {
+              tcp_established_timeout: untyped,
+              udp_stream_timeout: untyped,
+              udp_timeout: untyped
+            },
+            description: String,
+            device_index: untyped,
+            ena_srd_specification: {
+              ena_srd_enabled: untyped,
+              ena_srd_udp_specification: {
+                ena_srd_udp_enabled: untyped
+              }
+            },
+            interface_type: String,
+            ipv4_prefixes: Array[
+              {
+                ipv4_prefix: String
+              }
+            ],
+            ipv4_prefix_count: untyped,
+            ipv6_address_count: untyped,
+            ipv6_addresses: untyped,
+            ipv6_prefixes: Array[
+              {
+                ipv6_prefix: String
+              }
+            ],
+            ipv6_prefix_count: untyped,
+            network_card_index: untyped,
+            network_interface_id: String,
+            primary_ipv6: untyped,
+            private_ip_address: String,
+            private_ip_addresses: Array[
+              {
+                primary: untyped,
+                private_ip_address: untyped
+              }
+            ],
+            secondary_private_ip_address_count: untyped,
+            groups: Array[String],
+            subnet_id: String
+          }
+        ],
+        network_performance_options: {
+          bandwidth_weighting: String
+        },
+        placement: {
+          affinity: untyped,
+          availability_zone: String,
+          group_id: String,
+          group_name: untyped,
+          host_id: String,
+          host_resource_group_arn: untyped,
+          partition_number: untyped,
+          tenancy: String
+        },
+        private_dns_name_options: {
+          hostname_type: String,
+          enable_resource_name_dns_a_record: untyped,
+          enable_resource_name_dns_aaaa_record: untyped
+        },
+        private_ip_address: untyped,
+        ramdisk_id: untyped,
+        security_group_ids: untyped,
+        security_groups: Array[String],
+        subnet_id: untyped,
+        tag_specifications: Array[
+          {
+            resource_type: String,
+            tags: Array[
+              {
+                key: String,
+                value: String
+              }
+            ]
+          }
+        ],
+        user_data: String
+      }
+    ) -> _CreateWorkspaceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceInstanceResponse
+
+    interface _DeleteVolumeResponse
+      include Smithy::Client::_Response[Types::DeleteVolumeResponse]
+    end
+    def delete_volume: (
+      ?volume_id: String
+    ) -> _DeleteVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVolumeResponse
+
+    interface _DeleteWorkspaceInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceInstanceResponse]
+    end
+    def delete_workspace_instance: (
+      ?workspace_instance_id: String
+    ) -> _DeleteWorkspaceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceInstanceResponse
+
+    interface _DisassociateVolumeResponse
+      include Smithy::Client::_Response[Types::DisassociateVolumeResponse]
+    end
+    def disassociate_volume: (
+      ?workspace_instance_id: String,
+      ?volume_id: String,
+      ?device: String,
+      ?disassociate_mode: String
+    ) -> _DisassociateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateVolumeResponse
+
+    interface _GetWorkspaceInstanceResponse
+      include Smithy::Client::_Response[Types::GetWorkspaceInstanceResponse]
+      def workspace_instance_errors: () -> Array[Types::WorkspaceInstanceError]?
+      def ec2_instance_errors: () -> Array[Types::EC2InstanceError]?
+      def provision_state: () -> String?
+      def workspace_instance_id: () -> String?
+      def ec2_managed_instance: () -> Types::EC2ManagedInstance?
+    end
+    def get_workspace_instance: (
+      ?workspace_instance_id: String
+    ) -> _GetWorkspaceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkspaceInstanceResponse
+
+    interface _ListInstanceTypesResponse
+      include Smithy::Client::_Response[Types::ListInstanceTypesResponse]
+      def instance_types: () -> Array[Types::InstanceTypeInfo]?
+      def next_token: () -> String?
+    end
+    def list_instance_types: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceTypesResponse
+
+    interface _ListRegionsResponse
+      include Smithy::Client::_Response[Types::ListRegionsResponse]
+      def regions: () -> Array[Types::Region]?
+      def next_token: () -> String?
+    end
+    def list_regions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?workspace_instance_id: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkspaceInstancesResponse
+      include Smithy::Client::_Response[Types::ListWorkspaceInstancesResponse]
+      def workspace_instances: () -> Array[Types::WorkspaceInstance]?
+      def next_token: () -> String?
+    end
+    def list_workspace_instances: (
+      ?provision_states: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWorkspaceInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspaceInstancesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?workspace_instance_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?workspace_instance_id: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

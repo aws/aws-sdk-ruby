@@ -1,0 +1,1199 @@
+module Aws::ChimeSDKIdentity
+  module Types
+
+    module AllowMessages
+      ALL: String
+      NONE: String
+    end
+
+    class AppInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?name: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor metadata: String?
+    end
+
+    class AppInstanceAdmin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin: Types::Identity,
+        ?app_instance_arn: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin: Types::Identity?
+      attr_accessor app_instance_arn: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class AppInstanceAdminSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin: Types::Identity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin: Types::Identity?
+    end
+
+    class AppInstanceBot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+        ?name: String,
+        ?configuration: Types::Configuration,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::Configuration?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor metadata: String?
+    end
+
+    class AppInstanceBotSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+        ?name: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+    end
+
+    class AppInstanceRetentionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_retention_settings: Types::ChannelRetentionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_retention_settings: Types::ChannelRetentionSettings?
+    end
+
+    class AppInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?name: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+    end
+
+    class AppInstanceUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?name: String,
+        ?metadata: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class AppInstanceUserEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+        ?name: String,
+        ?type: String,
+        ?resource_arn: String,
+        ?endpoint_attributes: Types::EndpointAttributes,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+        ?allow_messages: String,
+        ?endpoint_state: Types::EndpointState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor endpoint_attributes: Types::EndpointAttributes?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor allow_messages: String?
+      attr_accessor endpoint_state: Types::EndpointState?
+    end
+
+    class AppInstanceUserEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+        ?name: String,
+        ?type: String,
+        ?allow_messages: String,
+        ?endpoint_state: Types::EndpointState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor allow_messages: String?
+      attr_accessor endpoint_state: Types::EndpointState?
+    end
+
+    module AppInstanceUserEndpointType
+      APNS: String
+      APNS_SANDBOX: String
+      GCM: String
+    end
+
+    class AppInstanceUserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?name: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ChannelRetentionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_days: Integer?
+    end
+
+    class Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lex: Types::LexConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lex: Types::LexConfiguration?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateAppInstanceAdminRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_admin_arn: String,
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_admin_arn: String?
+      attr_accessor app_instance_arn: String?
+    end
+
+    class CreateAppInstanceAdminResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_admin: Types::Identity,
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_admin: Types::Identity?
+      attr_accessor app_instance_arn: String?
+    end
+
+    class CreateAppInstanceBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?name: String,
+        ?metadata: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?configuration: Types::Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor configuration: Types::Configuration?
+    end
+
+    class CreateAppInstanceBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+    end
+
+    class CreateAppInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?metadata: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAppInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class CreateAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?app_instance_user_id: String,
+        ?name: String,
+        ?metadata: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor app_instance_user_id: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class CreateAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+    end
+
+    class DeleteAppInstanceAdminRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_admin_arn: String,
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_admin_arn: String?
+      attr_accessor app_instance_arn: String?
+    end
+
+    class DeleteAppInstanceBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+    end
+
+    class DeleteAppInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class DeleteAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+    end
+
+    class DeregisterAppInstanceUserEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+    end
+
+    class DescribeAppInstanceAdminRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_admin_arn: String,
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_admin_arn: String?
+      attr_accessor app_instance_arn: String?
+    end
+
+    class DescribeAppInstanceAdminResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_admin: Types::AppInstanceAdmin,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_admin: Types::AppInstanceAdmin?
+    end
+
+    class DescribeAppInstanceBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+    end
+
+    class DescribeAppInstanceBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot: Types::AppInstanceBot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot: Types::AppInstanceBot?
+    end
+
+    class DescribeAppInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class DescribeAppInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance: Types::AppInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance: Types::AppInstance?
+    end
+
+    class DescribeAppInstanceUserEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+    end
+
+    class DescribeAppInstanceUserEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_endpoint: Types::AppInstanceUserEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_endpoint: Types::AppInstanceUserEndpoint?
+    end
+
+    class DescribeAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+    end
+
+    class DescribeAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user: Types::AppInstanceUser,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user: Types::AppInstanceUser?
+    end
+
+    class EndpointAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_token: String,
+        ?voip_device_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_token: String?
+      attr_accessor voip_device_token: String?
+    end
+
+    class EndpointState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    module EndpointStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module EndpointStatusReason
+      INVALID_DEVICE_TOKEN: String
+      INVALID_PINPOINT_ARN: String
+    end
+
+    module ErrorCode
+      BadRequest: String
+      Conflict: String
+      Forbidden: String
+      NotFound: String
+      PreconditionFailed: String
+      ResourceLimitExceeded: String
+      ServiceFailure: String
+      AccessDenied: String
+      ServiceUnavailable: String
+      Throttled: String
+      Throttling: String
+      Unauthorized: String
+      Unprocessable: String
+      VoiceConnectorGroupAssociationsExist: String
+      PhoneNumberAssociationsExist: String
+    end
+
+    module ExpirationCriterion
+      CREATED_TIMESTAMP: String
+    end
+
+    class ExpirationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration_days: Integer,
+        ?expiration_criterion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration_days: Integer?
+      attr_accessor expiration_criterion: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetAppInstanceRetentionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class GetAppInstanceRetentionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_retention_settings: Types::AppInstanceRetentionSettings,
+        ?initiate_deletion_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings?
+      attr_accessor initiate_deletion_timestamp: Time?
+    end
+
+    class Identity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class InvokedBy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standard_messages: String,
+        ?targeted_messages: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard_messages: String?
+      attr_accessor targeted_messages: String?
+    end
+
+    class LexConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responds_to: String,
+        ?invoked_by: Types::InvokedBy,
+        ?lex_bot_alias_arn: String,
+        ?locale_id: String,
+        ?welcome_intent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responds_to: String?
+      attr_accessor invoked_by: Types::InvokedBy?
+      attr_accessor lex_bot_alias_arn: String?
+      attr_accessor locale_id: String?
+      attr_accessor welcome_intent: String?
+    end
+
+    class ListAppInstanceAdminsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceAdminsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?app_instance_admins: Array[Types::AppInstanceAdminSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor app_instance_admins: Array[Types::AppInstanceAdminSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceBotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceBotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?app_instance_bots: Array[Types::AppInstanceBotSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor app_instance_bots: Array[Types::AppInstanceBotSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceUserEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceUserEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_endpoints: Array[Types::AppInstanceUserEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_endpoints: Array[Types::AppInstanceUserEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstanceUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?app_instance_users: Array[Types::AppInstanceUserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor app_instance_users: Array[Types::AppInstanceUserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instances: Array[Types::AppInstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instances: Array[Types::AppInstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class PutAppInstanceRetentionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?app_instance_retention_settings: Types::AppInstanceRetentionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings?
+    end
+
+    class PutAppInstanceRetentionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_retention_settings: Types::AppInstanceRetentionSettings,
+        ?initiate_deletion_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings?
+      attr_accessor initiate_deletion_timestamp: Time?
+    end
+
+    class PutAppInstanceUserExpirationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class PutAppInstanceUserExpirationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?expiration_settings: Types::ExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor expiration_settings: Types::ExpirationSettings?
+    end
+
+    class RegisterAppInstanceUserEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?name: String,
+        ?type: String,
+        ?resource_arn: String,
+        ?endpoint_attributes: Types::EndpointAttributes,
+        ?client_request_token: String,
+        ?allow_messages: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor endpoint_attributes: Types::EndpointAttributes?
+      attr_accessor client_request_token: String?
+      attr_accessor allow_messages: String?
+    end
+
+    class RegisterAppInstanceUserEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module RespondsTo
+      STANDARD_MESSAGES: String
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module StandardMessages
+      AUTO: String
+      ALL: String
+      MENTIONS: String
+      NONE: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module TargetedMessages
+      ALL: String
+      NONE: String
+    end
+
+    class ThrottledClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAppInstanceBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+        ?name: String,
+        ?metadata: String,
+        ?configuration: Types::Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+      attr_accessor configuration: Types::Configuration?
+    end
+
+    class UpdateAppInstanceBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_bot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_bot_arn: String?
+    end
+
+    class UpdateAppInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+        ?name: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+    end
+
+    class UpdateAppInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_arn: String?
+    end
+
+    class UpdateAppInstanceUserEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+        ?name: String,
+        ?allow_messages: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor name: String?
+      attr_accessor allow_messages: String?
+    end
+
+    class UpdateAppInstanceUserEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor endpoint_id: String?
+    end
+
+    class UpdateAppInstanceUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+        ?name: String,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+      attr_accessor name: String?
+      attr_accessor metadata: String?
+    end
+
+    class UpdateAppInstanceUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_instance_user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_instance_user_arn: String?
+    end
+  end
+end

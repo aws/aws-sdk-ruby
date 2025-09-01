@@ -1,0 +1,371 @@
+module Aws::MarketplaceMetering
+  module Types
+
+    class BatchMeterUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_records: Array[Types::UsageRecord],
+        ?product_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_records: Array[Types::UsageRecord]?
+      attr_accessor product_code: String?
+    end
+
+    class BatchMeterUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::UsageRecordResult],
+        ?unprocessed_records: Array[Types::UsageRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::UsageRecordResult]?
+      attr_accessor unprocessed_records: Array[Types::UsageRecord]?
+    end
+
+    class CustomerNotEntitledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisabledApiException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExpiredTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCustomerIdentifierException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndpointRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidProductCodeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPublicKeyVersionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidUsageAllocationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidUsageDimensionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MeterUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code: String,
+        ?timestamp: Time,
+        ?usage_dimension: String,
+        ?usage_quantity: Integer,
+        ?dry_run: bool,
+        ?usage_allocations: Array[Types::UsageAllocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code: String?
+      attr_accessor timestamp: Time?
+      attr_accessor usage_dimension: String?
+      attr_accessor usage_quantity: Integer?
+      attr_accessor dry_run: bool?
+      attr_accessor usage_allocations: Array[Types::UsageAllocation]?
+    end
+
+    class MeterUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metering_record_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metering_record_id: String?
+    end
+
+    class PlatformNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RegisterUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code: String,
+        ?public_key_version: Integer,
+        ?nonce: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code: String?
+      attr_accessor public_key_version: Integer?
+      attr_accessor nonce: String?
+    end
+
+    class RegisterUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_key_rotation_timestamp: Time,
+        ?signature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_key_rotation_timestamp: Time?
+      attr_accessor signature: String?
+    end
+
+    class ResolveCustomerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_token: String?
+    end
+
+    class ResolveCustomerResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_identifier: String,
+        ?product_code: String,
+        ?customer_aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_identifier: String?
+      attr_accessor product_code: String?
+      attr_accessor customer_aws_account_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimestampOutOfBoundsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UsageAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocated_usage_quantity: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocated_usage_quantity: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UsageRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?customer_identifier: String,
+        ?dimension: String,
+        ?quantity: Integer,
+        ?usage_allocations: Array[Types::UsageAllocation],
+        ?customer_aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor customer_identifier: String?
+      attr_accessor dimension: String?
+      attr_accessor quantity: Integer?
+      attr_accessor usage_allocations: Array[Types::UsageAllocation]?
+      attr_accessor customer_aws_account_id: String?
+    end
+
+    class UsageRecordResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_record: Types::UsageRecord,
+        ?metering_record_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_record: Types::UsageRecord?
+      attr_accessor metering_record_id: String?
+      attr_accessor status: String?
+    end
+
+    module UsageRecordResultStatus
+      SUCCESS: String
+      CUSTOMER_NOT_SUBSCRIBED: String
+      DUPLICATE_RECORD: String
+    end
+  end
+end

@@ -1,0 +1,3362 @@
+module Aws::AutoScaling
+  module Types
+
+    class AcceleratorCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorManufacturer
+      NVIDIA: String
+      AMD: String
+      AMAZON_WEB_SERVICES: String
+      XILINX: String
+    end
+
+    module AcceleratorName
+      A100: String
+      V100: String
+      K80: String
+      T4: String
+      M60: String
+      RADEON_PRO_V520: String
+      VU9P: String
+    end
+
+    class AcceleratorTotalMemoryMiBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorType
+      GPU: String
+      FPGA: String
+      INFERENCE: String
+    end
+
+    class ActiveInstanceRefreshNotFoundFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Activity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_id: String,
+        ?auto_scaling_group_name: String,
+        ?description: String,
+        ?cause: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status_code: String,
+        ?status_message: String,
+        ?progress: Integer,
+        ?details: String,
+        ?auto_scaling_group_state: String,
+        ?auto_scaling_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_id: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor description: String?
+      attr_accessor cause: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_code: String?
+      attr_accessor status_message: String?
+      attr_accessor progress: Integer?
+      attr_accessor details: String?
+      attr_accessor auto_scaling_group_state: String?
+      attr_accessor auto_scaling_group_arn: String?
+    end
+
+    class AdjustmentType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adjustment_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adjustment_type: String?
+    end
+
+    class Alarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?alarm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor alarm_arn: String?
+    end
+
+    class AlarmSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarms: Array[String]?
+    end
+
+    class AlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+    end
+
+    class AttachLoadBalancerTargetGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?target_group_ar_ns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor target_group_ar_ns: Array[String]?
+    end
+
+    class AttachLoadBalancerTargetGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttachLoadBalancersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?load_balancer_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor load_balancer_names: Array[String]?
+    end
+
+    class AttachLoadBalancersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttachTrafficSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?traffic_sources: Array[Types::TrafficSourceIdentifier],
+        ?skip_zonal_shift_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor traffic_sources: Array[Types::TrafficSourceIdentifier]?
+      attr_accessor skip_zonal_shift_validation: bool?
+    end
+
+    class AttachTrafficSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?auto_scaling_group_arn: String,
+        ?launch_configuration_name: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?mixed_instances_policy: Types::MixedInstancesPolicy,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?predicted_capacity: Integer,
+        ?default_cooldown: Integer,
+        ?availability_zones: Array[String],
+        ?load_balancer_names: Array[String],
+        ?target_group_ar_ns: Array[String],
+        ?health_check_type: String,
+        ?health_check_grace_period: Integer,
+        ?instances: Array[Types::Instance],
+        ?created_time: Time,
+        ?suspended_processes: Array[Types::SuspendedProcess],
+        ?placement_group: String,
+        ?vpc_zone_identifier: String,
+        ?enabled_metrics: Array[Types::EnabledMetric],
+        ?status: String,
+        ?tags: Array[Types::TagDescription],
+        ?termination_policies: Array[String],
+        ?new_instances_protected_from_scale_in: bool,
+        ?service_linked_role_arn: String,
+        ?max_instance_lifetime: Integer,
+        ?capacity_rebalance: bool,
+        ?warm_pool_configuration: Types::WarmPoolConfiguration,
+        ?warm_pool_size: Integer,
+        ?context: String,
+        ?desired_capacity_type: String,
+        ?default_instance_warmup: Integer,
+        ?traffic_sources: Array[Types::TrafficSourceIdentifier],
+        ?instance_maintenance_policy: Types::InstanceMaintenancePolicy,
+        ?availability_zone_distribution: Types::AvailabilityZoneDistribution,
+        ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
+        ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor auto_scaling_group_arn: String?
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor predicted_capacity: Integer?
+      attr_accessor default_cooldown: Integer?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor load_balancer_names: Array[String]?
+      attr_accessor target_group_ar_ns: Array[String]?
+      attr_accessor health_check_type: String?
+      attr_accessor health_check_grace_period: Integer?
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor created_time: Time?
+      attr_accessor suspended_processes: Array[Types::SuspendedProcess]?
+      attr_accessor placement_group: String?
+      attr_accessor vpc_zone_identifier: String?
+      attr_accessor enabled_metrics: Array[Types::EnabledMetric]?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::TagDescription]?
+      attr_accessor termination_policies: Array[String]?
+      attr_accessor new_instances_protected_from_scale_in: bool?
+      attr_accessor service_linked_role_arn: String?
+      attr_accessor max_instance_lifetime: Integer?
+      attr_accessor capacity_rebalance: bool?
+      attr_accessor warm_pool_configuration: Types::WarmPoolConfiguration?
+      attr_accessor warm_pool_size: Integer?
+      attr_accessor context: String?
+      attr_accessor desired_capacity_type: String?
+      attr_accessor default_instance_warmup: Integer?
+      attr_accessor traffic_sources: Array[Types::TrafficSourceIdentifier]?
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy?
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution?
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+    end
+
+    class AutoScalingInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?instance_type: String,
+        ?auto_scaling_group_name: String,
+        ?availability_zone: String,
+        ?lifecycle_state: String,
+        ?health_status: String,
+        ?launch_configuration_name: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?protected_from_scale_in: bool,
+        ?weighted_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor lifecycle_state: String?
+      attr_accessor health_status: String?
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor protected_from_scale_in: bool?
+      attr_accessor weighted_capacity: String?
+    end
+
+    class AvailabilityZoneDistribution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_distribution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_distribution_strategy: String?
+    end
+
+    class AvailabilityZoneImpairmentPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zonal_shift_enabled: bool,
+        ?impaired_zone_health_check_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zonal_shift_enabled: bool?
+      attr_accessor impaired_zone_health_check_behavior: String?
+    end
+
+    module BareMetal
+      INCLUDED: String
+      EXCLUDED: String
+      REQUIRED: String
+    end
+
+    class BaselineEbsBandwidthMbpsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class BaselinePerformanceFactorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu: Types::CpuPerformanceFactorRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu: Types::CpuPerformanceFactorRequest?
+    end
+
+    class BatchDeleteScheduledActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_action_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_action_names: Array[String]?
+    end
+
+    class BatchDeleteScheduledActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_scheduled_actions: Array[Types::FailedScheduledUpdateGroupActionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_scheduled_actions: Array[Types::FailedScheduledUpdateGroupActionRequest]?
+    end
+
+    class BatchPutScheduledUpdateGroupActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_update_group_actions: Array[Types::ScheduledUpdateGroupActionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_update_group_actions: Array[Types::ScheduledUpdateGroupActionRequest]?
+    end
+
+    class BatchPutScheduledUpdateGroupActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_scheduled_update_group_actions: Array[Types::FailedScheduledUpdateGroupActionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_scheduled_update_group_actions: Array[Types::FailedScheduledUpdateGroupActionRequest]?
+    end
+
+    class BlockDeviceMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_name: String,
+        ?device_name: String,
+        ?ebs: Types::Ebs,
+        ?no_device: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_name: String?
+      attr_accessor device_name: String?
+      attr_accessor ebs: Types::Ebs?
+      attr_accessor no_device: bool?
+    end
+
+    module BurstablePerformance
+      INCLUDED: String
+      EXCLUDED: String
+      REQUIRED: String
+    end
+
+    class CancelInstanceRefreshInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+    end
+
+    class CancelInstanceRefreshOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_refresh_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_refresh_id: String?
+    end
+
+    module CapacityDistributionStrategy
+      BALANCED_ONLY: String
+      BALANCED_BEST_EFFORT: String
+    end
+
+    class CapacityForecast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+    end
+
+    module CapacityReservationPreference
+      CapacityReservationsOnly: String
+      CapacityReservationsFirst: String
+      None: String
+      Default: String
+    end
+
+    class CapacityReservationSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_preference: String,
+        ?capacity_reservation_target: Types::CapacityReservationTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_preference: String?
+      attr_accessor capacity_reservation_target: Types::CapacityReservationTarget?
+    end
+
+    class CapacityReservationTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_reservation_ids: Array[String],
+        ?capacity_reservation_resource_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_reservation_ids: Array[String]?
+      attr_accessor capacity_reservation_resource_group_arns: Array[String]?
+    end
+
+    class CompleteLifecycleActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?auto_scaling_group_name: String,
+        ?lifecycle_action_token: String,
+        ?lifecycle_action_result: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor lifecycle_action_token: String?
+      attr_accessor lifecycle_action_result: String?
+      attr_accessor instance_id: String?
+    end
+
+    class CompleteLifecycleActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module CpuManufacturer
+      INTEL: String
+      AMD: String
+      AMAZON_WEB_SERVICES: String
+      APPLE: String
+    end
+
+    class CpuPerformanceFactorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?references: Array[Types::PerformanceFactorReferenceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor references: Array[Types::PerformanceFactorReferenceRequest]?
+    end
+
+    class CreateAutoScalingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?launch_configuration_name: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?mixed_instances_policy: Types::MixedInstancesPolicy,
+        ?instance_id: String,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?default_cooldown: Integer,
+        ?availability_zones: Array[String],
+        ?load_balancer_names: Array[String],
+        ?target_group_ar_ns: Array[String],
+        ?health_check_type: String,
+        ?health_check_grace_period: Integer,
+        ?placement_group: String,
+        ?vpc_zone_identifier: String,
+        ?termination_policies: Array[String],
+        ?new_instances_protected_from_scale_in: bool,
+        ?capacity_rebalance: bool,
+        ?lifecycle_hook_specification_list: Array[Types::LifecycleHookSpecification],
+        ?tags: Array[Types::Tag],
+        ?service_linked_role_arn: String,
+        ?max_instance_lifetime: Integer,
+        ?context: String,
+        ?desired_capacity_type: String,
+        ?default_instance_warmup: Integer,
+        ?traffic_sources: Array[Types::TrafficSourceIdentifier],
+        ?instance_maintenance_policy: Types::InstanceMaintenancePolicy,
+        ?availability_zone_distribution: Types::AvailabilityZoneDistribution,
+        ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
+        ?skip_zonal_shift_validation: bool,
+        ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy?
+      attr_accessor instance_id: String?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor default_cooldown: Integer?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor load_balancer_names: Array[String]?
+      attr_accessor target_group_ar_ns: Array[String]?
+      attr_accessor health_check_type: String?
+      attr_accessor health_check_grace_period: Integer?
+      attr_accessor placement_group: String?
+      attr_accessor vpc_zone_identifier: String?
+      attr_accessor termination_policies: Array[String]?
+      attr_accessor new_instances_protected_from_scale_in: bool?
+      attr_accessor capacity_rebalance: bool?
+      attr_accessor lifecycle_hook_specification_list: Array[Types::LifecycleHookSpecification]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor service_linked_role_arn: String?
+      attr_accessor max_instance_lifetime: Integer?
+      attr_accessor context: String?
+      attr_accessor desired_capacity_type: String?
+      attr_accessor default_instance_warmup: Integer?
+      attr_accessor traffic_sources: Array[Types::TrafficSourceIdentifier]?
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy?
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution?
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
+      attr_accessor skip_zonal_shift_validation: bool?
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+    end
+
+    class CreateLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_name: String,
+        ?image_id: String,
+        ?key_name: String,
+        ?security_groups: Array[String],
+        ?classic_link_vpc_id: String,
+        ?classic_link_vpc_security_groups: Array[String],
+        ?user_data: String,
+        ?instance_id: String,
+        ?instance_type: String,
+        ?kernel_id: String,
+        ?ramdisk_id: String,
+        ?block_device_mappings: Array[Types::BlockDeviceMapping],
+        ?instance_monitoring: Types::InstanceMonitoring,
+        ?spot_price: String,
+        ?iam_instance_profile: String,
+        ?ebs_optimized: bool,
+        ?associate_public_ip_address: bool,
+        ?placement_tenancy: String,
+        ?metadata_options: Types::InstanceMetadataOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_name: String?
+      attr_accessor image_id: String?
+      attr_accessor key_name: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor classic_link_vpc_id: String?
+      attr_accessor classic_link_vpc_security_groups: Array[String]?
+      attr_accessor user_data: String?
+      attr_accessor instance_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor kernel_id: String?
+      attr_accessor ramdisk_id: String?
+      attr_accessor block_device_mappings: Array[Types::BlockDeviceMapping]?
+      attr_accessor instance_monitoring: Types::InstanceMonitoring?
+      attr_accessor spot_price: String?
+      attr_accessor iam_instance_profile: String?
+      attr_accessor ebs_optimized: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor placement_tenancy: String?
+      attr_accessor metadata_options: Types::InstanceMetadataOptions?
+    end
+
+    class CreateOrUpdateTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CustomizedMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?namespace: String,
+        ?dimensions: Array[Types::MetricDimension],
+        ?statistic: String,
+        ?unit: String,
+        ?period: Integer,
+        ?metrics: Array[Types::TargetTrackingMetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor namespace: String?
+      attr_accessor dimensions: Array[Types::MetricDimension]?
+      attr_accessor statistic: String?
+      attr_accessor unit: String?
+      attr_accessor period: Integer?
+      attr_accessor metrics: Array[Types::TargetTrackingMetricDataQuery]?
+    end
+
+    class DeleteAutoScalingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_name: String?
+    end
+
+    class DeleteLifecycleHookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?auto_scaling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor auto_scaling_group_name: String?
+    end
+
+    class DeleteLifecycleHookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotificationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor topic_arn: String?
+    end
+
+    class DeletePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_name: String?
+    end
+
+    class DeleteScheduledActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_action_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_action_name: String?
+    end
+
+    class DeleteTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DeleteWarmPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteWarmPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_number_of_auto_scaling_groups: Integer,
+        ?max_number_of_launch_configurations: Integer,
+        ?number_of_auto_scaling_groups: Integer,
+        ?number_of_launch_configurations: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_number_of_auto_scaling_groups: Integer?
+      attr_accessor max_number_of_launch_configurations: Integer?
+      attr_accessor number_of_auto_scaling_groups: Integer?
+      attr_accessor number_of_launch_configurations: Integer?
+    end
+
+    class DescribeAdjustmentTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adjustment_types: Array[Types::AdjustmentType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adjustment_types: Array[Types::AdjustmentType]?
+    end
+
+    class DescribeAutoScalingGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_names: Array[String],
+        ?include_instances: bool,
+        ?next_token: String,
+        ?max_records: Integer,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_names: Array[String]?
+      attr_accessor include_instances: bool?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class DescribeAutoScalingGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_groups: Array[Types::AutoScalingGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_groups: Array[Types::AutoScalingGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAutoScalingInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAutoScalingInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_instances: Array[Types::AutoScalingInstanceDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_instances: Array[Types::AutoScalingInstanceDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAutoScalingNotificationTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_notification_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_notification_types: Array[String]?
+    end
+
+    class DescribeInstanceRefreshesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?instance_refresh_ids: Array[String],
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor instance_refresh_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeInstanceRefreshesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_refreshes: Array[Types::InstanceRefresh],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_refreshes: Array[Types::InstanceRefresh]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLaunchConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_names: Array[String],
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeLaunchConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configurations: Array[Types::LaunchConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configurations: Array[Types::LaunchConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLifecycleHookTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_types: Array[String]?
+    end
+
+    class DescribeLifecycleHooksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?lifecycle_hook_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor lifecycle_hook_names: Array[String]?
+    end
+
+    class DescribeLifecycleHooksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hooks: Array[Types::LifecycleHook],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hooks: Array[Types::LifecycleHook]?
+    end
+
+    class DescribeLoadBalancerTargetGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeLoadBalancerTargetGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_target_groups: Array[Types::LoadBalancerTargetGroupState],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_target_groups: Array[Types::LoadBalancerTargetGroupState]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLoadBalancersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeLoadBalancersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancers: Array[Types::LoadBalancerState],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancers: Array[Types::LoadBalancerState]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMetricCollectionTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[Types::MetricCollectionType],
+        ?granularities: Array[Types::MetricGranularityType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[Types::MetricCollectionType]?
+      attr_accessor granularities: Array[Types::MetricGranularityType]?
+    end
+
+    class DescribeNotificationConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_names: Array[String],
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeNotificationConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configurations: Array[Types::NotificationConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configurations: Array[Types::NotificationConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_names: Array[String],
+        ?policy_types: Array[String],
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_names: Array[String]?
+      attr_accessor policy_types: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribePoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scaling_policies: Array[Types::ScalingPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scaling_policies: Array[Types::ScalingPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingActivitiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity_ids: Array[String],
+        ?auto_scaling_group_name: String,
+        ?include_deleted_groups: bool,
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor include_deleted_groups: bool?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingActivitiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::Activity],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::Activity]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeScalingProcessTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?processes: Array[Types::ProcessType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor processes: Array[Types::ProcessType]?
+    end
+
+    class DescribeScheduledActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_action_names: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_action_names: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeScheduledActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_update_group_actions: Array[Types::ScheduledUpdateGroupAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_update_group_actions: Array[Types::ScheduledUpdateGroupAction]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::TagDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::TagDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTerminationPolicyTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?termination_policy_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor termination_policy_types: Array[String]?
+    end
+
+    class DescribeTrafficSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?traffic_source_type: String,
+        ?next_token: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor traffic_source_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeTrafficSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_sources: Array[Types::TrafficSourceState],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_sources: Array[Types::TrafficSourceState]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWarmPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWarmPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?warm_pool_configuration: Types::WarmPoolConfiguration,
+        ?instances: Array[Types::Instance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor warm_pool_configuration: Types::WarmPoolConfiguration?
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor next_token: String?
+    end
+
+    class DesiredConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?mixed_instances_policy: Types::MixedInstancesPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy?
+    end
+
+    class DetachInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
+        ?should_decrement_desired_capacity: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor should_decrement_desired_capacity: bool?
+    end
+
+    class DetachInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::Activity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::Activity]?
+    end
+
+    class DetachLoadBalancerTargetGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?target_group_ar_ns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor target_group_ar_ns: Array[String]?
+    end
+
+    class DetachLoadBalancerTargetGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetachLoadBalancersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?load_balancer_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor load_balancer_names: Array[String]?
+    end
+
+    class DetachLoadBalancersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetachTrafficSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?traffic_sources: Array[Types::TrafficSourceIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor traffic_sources: Array[Types::TrafficSourceIdentifier]?
+    end
+
+    class DetachTrafficSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableMetricsCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?metrics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor metrics: Array[String]?
+    end
+
+    class Ebs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?volume_size: Integer,
+        ?volume_type: String,
+        ?delete_on_termination: bool,
+        ?iops: Integer,
+        ?encrypted: bool,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor volume_size: Integer?
+      attr_accessor volume_type: String?
+      attr_accessor delete_on_termination: bool?
+      attr_accessor iops: Integer?
+      attr_accessor encrypted: bool?
+      attr_accessor throughput: Integer?
+    end
+
+    class EnableMetricsCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?metrics: Array[String],
+        ?granularity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor metrics: Array[String]?
+      attr_accessor granularity: String?
+    end
+
+    class EnabledMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+        ?granularity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+      attr_accessor granularity: String?
+    end
+
+    class EnterStandbyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
+        ?should_decrement_desired_capacity: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor should_decrement_desired_capacity: bool?
+    end
+
+    class EnterStandbyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::Activity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::Activity]?
+    end
+
+    class ExecutePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_name: String,
+        ?honor_cooldown: bool,
+        ?metric_value: Float,
+        ?breach_threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor honor_cooldown: bool?
+      attr_accessor metric_value: Float?
+      attr_accessor breach_threshold: Float?
+    end
+
+    class ExitStandbyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+    end
+
+    class ExitStandbyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activities: Array[Types::Activity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activities: Array[Types::Activity]?
+    end
+
+    class FailedScheduledUpdateGroupActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GetPredictiveScalingForecastInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class GetPredictiveScalingForecastOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_forecast: Array[Types::LoadForecast],
+        ?capacity_forecast: Types::CapacityForecast,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_forecast: Array[Types::LoadForecast]?
+      attr_accessor capacity_forecast: Types::CapacityForecast?
+      attr_accessor update_time: Time?
+    end
+
+    module ImpairedZoneHealthCheckBehavior
+      ReplaceUnhealthy: String
+      IgnoreUnhealthy: String
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?instance_type: String,
+        ?availability_zone: String,
+        ?lifecycle_state: String,
+        ?health_status: String,
+        ?launch_configuration_name: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?protected_from_scale_in: bool,
+        ?weighted_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor availability_zone: String?
+      attr_accessor lifecycle_state: String?
+      attr_accessor health_status: String?
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor protected_from_scale_in: bool?
+      attr_accessor weighted_capacity: String?
+    end
+
+    module InstanceGeneration
+      CURRENT: String
+      PREVIOUS: String
+    end
+
+    class InstanceMaintenancePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_healthy_percentage: Integer,
+        ?max_healthy_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_healthy_percentage: Integer?
+      attr_accessor max_healthy_percentage: Integer?
+    end
+
+    module InstanceMetadataEndpointState
+      Disabled: String
+      Enabled: String
+    end
+
+    module InstanceMetadataHttpTokensState
+      Optional: String
+      Required: String
+    end
+
+    class InstanceMetadataOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_tokens: String,
+        ?http_put_response_hop_limit: Integer,
+        ?http_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_tokens: String?
+      attr_accessor http_put_response_hop_limit: Integer?
+      attr_accessor http_endpoint: String?
+    end
+
+    class InstanceMonitoring
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class InstanceRefresh
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_refresh_id: String,
+        ?auto_scaling_group_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?percentage_complete: Integer,
+        ?instances_to_update: Integer,
+        ?progress_details: Types::InstanceRefreshProgressDetails,
+        ?preferences: Types::RefreshPreferences,
+        ?desired_configuration: Types::DesiredConfiguration,
+        ?rollback_details: Types::RollbackDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_refresh_id: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor percentage_complete: Integer?
+      attr_accessor instances_to_update: Integer?
+      attr_accessor progress_details: Types::InstanceRefreshProgressDetails?
+      attr_accessor preferences: Types::RefreshPreferences?
+      attr_accessor desired_configuration: Types::DesiredConfiguration?
+      attr_accessor rollback_details: Types::RollbackDetails?
+    end
+
+    class InstanceRefreshInProgressFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceRefreshLivePoolProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percentage_complete: Integer,
+        ?instances_to_update: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percentage_complete: Integer?
+      attr_accessor instances_to_update: Integer?
+    end
+
+    class InstanceRefreshProgressDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?live_pool_progress: Types::InstanceRefreshLivePoolProgress,
+        ?warm_pool_progress: Types::InstanceRefreshWarmPoolProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor live_pool_progress: Types::InstanceRefreshLivePoolProgress?
+      attr_accessor warm_pool_progress: Types::InstanceRefreshWarmPoolProgress?
+    end
+
+    module InstanceRefreshStatus
+      Pending: String
+      InProgress: String
+      Successful: String
+      Failed: String
+      Cancelling: String
+      Cancelled: String
+      RollbackInProgress: String
+      RollbackFailed: String
+      RollbackSuccessful: String
+      Baking: String
+    end
+
+    class InstanceRefreshWarmPoolProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?percentage_complete: Integer,
+        ?instances_to_update: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percentage_complete: Integer?
+      attr_accessor instances_to_update: Integer?
+    end
+
+    class InstanceRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu_count: Types::VCpuCountRequest,
+        ?memory_mi_b: Types::MemoryMiBRequest,
+        ?cpu_manufacturers: Array[String],
+        ?memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest,
+        ?excluded_instance_types: Array[String],
+        ?instance_generations: Array[String],
+        ?spot_max_price_percentage_over_lowest_price: Integer,
+        ?max_spot_price_as_percentage_of_optimal_on_demand_price: Integer,
+        ?on_demand_max_price_percentage_over_lowest_price: Integer,
+        ?bare_metal: String,
+        ?burstable_performance: String,
+        ?require_hibernate_support: bool,
+        ?network_interface_count: Types::NetworkInterfaceCountRequest,
+        ?local_storage: String,
+        ?local_storage_types: Array[String],
+        ?total_local_storage_gb: Types::TotalLocalStorageGBRequest,
+        ?baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest,
+        ?accelerator_types: Array[String],
+        ?accelerator_count: Types::AcceleratorCountRequest,
+        ?accelerator_manufacturers: Array[String],
+        ?accelerator_names: Array[String],
+        ?accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest,
+        ?network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest,
+        ?allowed_instance_types: Array[String],
+        ?baseline_performance_factors: Types::BaselinePerformanceFactorsRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu_count: Types::VCpuCountRequest?
+      attr_accessor memory_mi_b: Types::MemoryMiBRequest?
+      attr_accessor cpu_manufacturers: Array[String]?
+      attr_accessor memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest?
+      attr_accessor excluded_instance_types: Array[String]?
+      attr_accessor instance_generations: Array[String]?
+      attr_accessor spot_max_price_percentage_over_lowest_price: Integer?
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: Integer?
+      attr_accessor on_demand_max_price_percentage_over_lowest_price: Integer?
+      attr_accessor bare_metal: String?
+      attr_accessor burstable_performance: String?
+      attr_accessor require_hibernate_support: bool?
+      attr_accessor network_interface_count: Types::NetworkInterfaceCountRequest?
+      attr_accessor local_storage: String?
+      attr_accessor local_storage_types: Array[String]?
+      attr_accessor total_local_storage_gb: Types::TotalLocalStorageGBRequest?
+      attr_accessor baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest?
+      attr_accessor accelerator_types: Array[String]?
+      attr_accessor accelerator_count: Types::AcceleratorCountRequest?
+      attr_accessor accelerator_manufacturers: Array[String]?
+      attr_accessor accelerator_names: Array[String]?
+      attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest?
+      attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest?
+      attr_accessor allowed_instance_types: Array[String]?
+      attr_accessor baseline_performance_factors: Types::BaselinePerformanceFactorsRequest?
+    end
+
+    class InstanceReusePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reuse_on_scale_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reuse_on_scale_in: bool?
+    end
+
+    class InstancesDistribution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_demand_allocation_strategy: String,
+        ?on_demand_base_capacity: Integer,
+        ?on_demand_percentage_above_base_capacity: Integer,
+        ?spot_allocation_strategy: String,
+        ?spot_instance_pools: Integer,
+        ?spot_max_price: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_demand_allocation_strategy: String?
+      attr_accessor on_demand_base_capacity: Integer?
+      attr_accessor on_demand_percentage_above_base_capacity: Integer?
+      attr_accessor spot_allocation_strategy: String?
+      attr_accessor spot_instance_pools: Integer?
+      attr_accessor spot_max_price: String?
+    end
+
+    class InvalidNextToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IrreversibleInstanceRefreshFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LaunchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_name: String,
+        ?launch_configuration_arn: String,
+        ?image_id: String,
+        ?key_name: String,
+        ?security_groups: Array[String],
+        ?classic_link_vpc_id: String,
+        ?classic_link_vpc_security_groups: Array[String],
+        ?user_data: String,
+        ?instance_type: String,
+        ?kernel_id: String,
+        ?ramdisk_id: String,
+        ?block_device_mappings: Array[Types::BlockDeviceMapping],
+        ?instance_monitoring: Types::InstanceMonitoring,
+        ?spot_price: String,
+        ?iam_instance_profile: String,
+        ?created_time: Time,
+        ?ebs_optimized: bool,
+        ?associate_public_ip_address: bool,
+        ?placement_tenancy: String,
+        ?metadata_options: Types::InstanceMetadataOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_configuration_arn: String?
+      attr_accessor image_id: String?
+      attr_accessor key_name: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor classic_link_vpc_id: String?
+      attr_accessor classic_link_vpc_security_groups: Array[String]?
+      attr_accessor user_data: String?
+      attr_accessor instance_type: String?
+      attr_accessor kernel_id: String?
+      attr_accessor ramdisk_id: String?
+      attr_accessor block_device_mappings: Array[Types::BlockDeviceMapping]?
+      attr_accessor instance_monitoring: Types::InstanceMonitoring?
+      attr_accessor spot_price: String?
+      attr_accessor iam_instance_profile: String?
+      attr_accessor created_time: Time?
+      attr_accessor ebs_optimized: bool?
+      attr_accessor associate_public_ip_address: bool?
+      attr_accessor placement_tenancy: String?
+      attr_accessor metadata_options: Types::InstanceMetadataOptions?
+    end
+
+    class LaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template_specification: Types::LaunchTemplateSpecification,
+        ?overrides: Array[Types::LaunchTemplateOverrides],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template_specification: Types::LaunchTemplateSpecification?
+      attr_accessor overrides: Array[Types::LaunchTemplateOverrides]?
+    end
+
+    class LaunchTemplateOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?weighted_capacity: String,
+        ?launch_template_specification: Types::LaunchTemplateSpecification,
+        ?instance_requirements: Types::InstanceRequirements,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor weighted_capacity: String?
+      attr_accessor launch_template_specification: Types::LaunchTemplateSpecification?
+      attr_accessor instance_requirements: Types::InstanceRequirements?
+    end
+
+    class LaunchTemplateSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template_id: String,
+        ?launch_template_name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template_id: String?
+      attr_accessor launch_template_name: String?
+      attr_accessor version: String?
+    end
+
+    class LifecycleHook
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?auto_scaling_group_name: String,
+        ?lifecycle_transition: String,
+        ?notification_target_arn: String,
+        ?role_arn: String,
+        ?notification_metadata: String,
+        ?heartbeat_timeout: Integer,
+        ?global_timeout: Integer,
+        ?default_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor lifecycle_transition: String?
+      attr_accessor notification_target_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor notification_metadata: String?
+      attr_accessor heartbeat_timeout: Integer?
+      attr_accessor global_timeout: Integer?
+      attr_accessor default_result: String?
+    end
+
+    class LifecycleHookSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?lifecycle_transition: String,
+        ?notification_metadata: String,
+        ?heartbeat_timeout: Integer,
+        ?default_result: String,
+        ?notification_target_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor lifecycle_transition: String?
+      attr_accessor notification_metadata: String?
+      attr_accessor heartbeat_timeout: Integer?
+      attr_accessor default_result: String?
+      attr_accessor notification_target_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    module LifecycleState
+      PENDING: String
+      PENDING_WAIT: String
+      PENDING_PROCEED: String
+      QUARANTINED: String
+      IN_SERVICE: String
+      TERMINATING: String
+      TERMINATING_WAIT: String
+      TERMINATING_PROCEED: String
+      TERMINATED: String
+      DETACHING: String
+      DETACHED: String
+      ENTERING_STANDBY: String
+      STANDBY: String
+      WARMED_PENDING: String
+      WARMED_PENDING_WAIT: String
+      WARMED_PENDING_PROCEED: String
+      WARMED_TERMINATING: String
+      WARMED_TERMINATING_WAIT: String
+      WARMED_TERMINATING_PROCEED: String
+      WARMED_TERMINATED: String
+      WARMED_STOPPED: String
+      WARMED_RUNNING: String
+      WARMED_HIBERNATED: String
+    end
+
+    class LimitExceededFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LoadBalancerState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor state: String?
+    end
+
+    class LoadBalancerTargetGroupState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_target_group_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_target_group_arn: String?
+      attr_accessor state: String?
+    end
+
+    class LoadForecast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamps: Array[Time],
+        ?values: Array[Float],
+        ?metric_specification: Types::PredictiveScalingMetricSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamps: Array[Time]?
+      attr_accessor values: Array[Float]?
+      attr_accessor metric_specification: Types::PredictiveScalingMetricSpecification?
+    end
+
+    module LocalStorage
+      INCLUDED: String
+      EXCLUDED: String
+      REQUIRED: String
+    end
+
+    module LocalStorageType
+      HDD: String
+      SSD: String
+    end
+
+    class MemoryGiBPerVCpuRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class MemoryMiBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class Metric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?metric_name: String,
+        ?dimensions: Array[Types::MetricDimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor metric_name: String?
+      attr_accessor dimensions: Array[Types::MetricDimension]?
+    end
+
+    class MetricCollectionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: String?
+    end
+
+    class MetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?expression: String,
+        ?metric_stat: Types::MetricStat,
+        ?label: String,
+        ?return_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor expression: String?
+      attr_accessor metric_stat: Types::MetricStat?
+      attr_accessor label: String?
+      attr_accessor return_data: bool?
+    end
+
+    class MetricDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class MetricGranularityType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?granularity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor granularity: String?
+    end
+
+    class MetricStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::Metric,
+        ?stat: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::Metric?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+    end
+
+    module MetricStatistic
+      Average: String
+      Minimum: String
+      Maximum: String
+      SampleCount: String
+      Sum: String
+    end
+
+    module MetricType
+      ASGAverageCPUUtilization: String
+      ASGAverageNetworkIn: String
+      ASGAverageNetworkOut: String
+      ALBRequestCountPerTarget: String
+    end
+
+    class MixedInstancesPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_template: Types::LaunchTemplate,
+        ?instances_distribution: Types::InstancesDistribution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_template: Types::LaunchTemplate?
+      attr_accessor instances_distribution: Types::InstancesDistribution?
+    end
+
+    class NetworkBandwidthGbpsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class NetworkInterfaceCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?topic_arn: String,
+        ?notification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor topic_arn: String?
+      attr_accessor notification_type: String?
+    end
+
+    class PerformanceFactorReferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_family: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_family: String?
+    end
+
+    module PredefinedLoadMetricType
+      ASGTotalCPUUtilization: String
+      ASGTotalNetworkIn: String
+      ASGTotalNetworkOut: String
+      ALBTargetGroupRequestCount: String
+    end
+
+    module PredefinedMetricPairType
+      ASGCPUUtilization: String
+      ASGNetworkIn: String
+      ASGNetworkOut: String
+      ALBRequestCount: String
+    end
+
+    class PredefinedMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    module PredefinedScalingMetricType
+      ASGAverageCPUUtilization: String
+      ASGAverageNetworkIn: String
+      ASGAverageNetworkOut: String
+      ALBRequestCountPerTarget: String
+    end
+
+    class PredictiveScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_specifications: Array[Types::PredictiveScalingMetricSpecification],
+        ?mode: String,
+        ?scheduling_buffer_time: Integer,
+        ?max_capacity_breach_behavior: String,
+        ?max_capacity_buffer: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_specifications: Array[Types::PredictiveScalingMetricSpecification]?
+      attr_accessor mode: String?
+      attr_accessor scheduling_buffer_time: Integer?
+      attr_accessor max_capacity_breach_behavior: String?
+      attr_accessor max_capacity_buffer: Integer?
+    end
+
+    class PredictiveScalingCustomizedCapacityMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+    end
+
+    class PredictiveScalingCustomizedLoadMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+    end
+
+    class PredictiveScalingCustomizedScalingMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+    end
+
+    module PredictiveScalingMaxCapacityBreachBehavior
+      HonorMaxCapacity: String
+      IncreaseMaxCapacity: String
+    end
+
+    class PredictiveScalingMetricSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_value: Float,
+        ?predefined_metric_pair_specification: Types::PredictiveScalingPredefinedMetricPair,
+        ?predefined_scaling_metric_specification: Types::PredictiveScalingPredefinedScalingMetric,
+        ?predefined_load_metric_specification: Types::PredictiveScalingPredefinedLoadMetric,
+        ?customized_scaling_metric_specification: Types::PredictiveScalingCustomizedScalingMetric,
+        ?customized_load_metric_specification: Types::PredictiveScalingCustomizedLoadMetric,
+        ?customized_capacity_metric_specification: Types::PredictiveScalingCustomizedCapacityMetric,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_value: Float?
+      attr_accessor predefined_metric_pair_specification: Types::PredictiveScalingPredefinedMetricPair?
+      attr_accessor predefined_scaling_metric_specification: Types::PredictiveScalingPredefinedScalingMetric?
+      attr_accessor predefined_load_metric_specification: Types::PredictiveScalingPredefinedLoadMetric?
+      attr_accessor customized_scaling_metric_specification: Types::PredictiveScalingCustomizedScalingMetric?
+      attr_accessor customized_load_metric_specification: Types::PredictiveScalingCustomizedLoadMetric?
+      attr_accessor customized_capacity_metric_specification: Types::PredictiveScalingCustomizedCapacityMetric?
+    end
+
+    module PredictiveScalingMode
+      ForecastAndScale: String
+      ForecastOnly: String
+    end
+
+    class PredictiveScalingPredefinedLoadMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PredictiveScalingPredefinedMetricPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class PredictiveScalingPredefinedScalingMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?resource_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor resource_label: String?
+    end
+
+    class ProcessType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?process_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor process_name: String?
+    end
+
+    class PutLifecycleHookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?auto_scaling_group_name: String,
+        ?lifecycle_transition: String,
+        ?role_arn: String,
+        ?notification_target_arn: String,
+        ?notification_metadata: String,
+        ?heartbeat_timeout: Integer,
+        ?default_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor lifecycle_transition: String?
+      attr_accessor role_arn: String?
+      attr_accessor notification_target_arn: String?
+      attr_accessor notification_metadata: String?
+      attr_accessor heartbeat_timeout: Integer?
+      attr_accessor default_result: String?
+    end
+
+    class PutLifecycleHookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutNotificationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?topic_arn: String,
+        ?notification_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor topic_arn: String?
+      attr_accessor notification_types: Array[String]?
+    end
+
+    class PutScalingPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_name: String,
+        ?policy_type: String,
+        ?adjustment_type: String,
+        ?min_adjustment_step: Integer,
+        ?min_adjustment_magnitude: Integer,
+        ?scaling_adjustment: Integer,
+        ?cooldown: Integer,
+        ?metric_aggregation_type: String,
+        ?step_adjustments: Array[Types::StepAdjustment],
+        ?estimated_instance_warmup: Integer,
+        ?target_tracking_configuration: Types::TargetTrackingConfiguration,
+        ?enabled: bool,
+        ?predictive_scaling_configuration: Types::PredictiveScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_type: String?
+      attr_accessor adjustment_type: String?
+      attr_accessor min_adjustment_step: Integer?
+      attr_accessor min_adjustment_magnitude: Integer?
+      attr_accessor scaling_adjustment: Integer?
+      attr_accessor cooldown: Integer?
+      attr_accessor metric_aggregation_type: String?
+      attr_accessor step_adjustments: Array[Types::StepAdjustment]?
+      attr_accessor estimated_instance_warmup: Integer?
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration?
+      attr_accessor enabled: bool?
+      attr_accessor predictive_scaling_configuration: Types::PredictiveScalingConfiguration?
+    end
+
+    class PutScalingPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+        ?alarms: Array[Types::Alarm],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+      attr_accessor alarms: Array[Types::Alarm]?
+    end
+
+    class PutScheduledUpdateGroupActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_action_name: String,
+        ?time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recurrence: String,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_action_name: String?
+      attr_accessor time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recurrence: String?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor time_zone: String?
+    end
+
+    class PutWarmPoolInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?max_group_prepared_capacity: Integer,
+        ?min_size: Integer,
+        ?pool_state: String,
+        ?instance_reuse_policy: Types::InstanceReusePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor max_group_prepared_capacity: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor pool_state: String?
+      attr_accessor instance_reuse_policy: Types::InstanceReusePolicy?
+    end
+
+    class PutWarmPoolOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RecordLifecycleActionHeartbeatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_hook_name: String,
+        ?auto_scaling_group_name: String,
+        ?lifecycle_action_token: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_hook_name: String?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor lifecycle_action_token: String?
+      attr_accessor instance_id: String?
+    end
+
+    class RecordLifecycleActionHeartbeatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RefreshPreferences
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_healthy_percentage: Integer,
+        ?instance_warmup: Integer,
+        ?checkpoint_percentages: Array[Integer],
+        ?checkpoint_delay: Integer,
+        ?skip_matching: bool,
+        ?auto_rollback: bool,
+        ?scale_in_protected_instances: String,
+        ?standby_instances: String,
+        ?alarm_specification: Types::AlarmSpecification,
+        ?max_healthy_percentage: Integer,
+        ?bake_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_healthy_percentage: Integer?
+      attr_accessor instance_warmup: Integer?
+      attr_accessor checkpoint_percentages: Array[Integer]?
+      attr_accessor checkpoint_delay: Integer?
+      attr_accessor skip_matching: bool?
+      attr_accessor auto_rollback: bool?
+      attr_accessor scale_in_protected_instances: String?
+      attr_accessor standby_instances: String?
+      attr_accessor alarm_specification: Types::AlarmSpecification?
+      attr_accessor max_healthy_percentage: Integer?
+      attr_accessor bake_time: Integer?
+    end
+
+    module RefreshStrategy
+      Rolling: String
+    end
+
+    class ResourceContentionFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResumeProcessesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scaling_processes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scaling_processes: Array[String]?
+    end
+
+    class RollbackDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rollback_reason: String,
+        ?rollback_start_time: Time,
+        ?percentage_complete_on_rollback: Integer,
+        ?instances_to_update_on_rollback: Integer,
+        ?progress_details_on_rollback: Types::InstanceRefreshProgressDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rollback_reason: String?
+      attr_accessor rollback_start_time: Time?
+      attr_accessor percentage_complete_on_rollback: Integer?
+      attr_accessor instances_to_update_on_rollback: Integer?
+      attr_accessor progress_details_on_rollback: Types::InstanceRefreshProgressDetails?
+    end
+
+    class RollbackInstanceRefreshInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+    end
+
+    class RollbackInstanceRefreshOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_refresh_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_refresh_id: String?
+    end
+
+    module ScaleInProtectedInstances
+      Refresh: String
+      Ignore: String
+      Wait: String
+    end
+
+    class ScalingActivityInProgressFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ScalingActivityStatusCode
+      PendingSpotBidPlacement: String
+      WaitingForSpotInstanceRequestId: String
+      WaitingForSpotInstanceId: String
+      WaitingForInstanceId: String
+      PreInService: String
+      InProgress: String
+      WaitingForELBConnectionDraining: String
+      MidLifecycleAction: String
+      WaitingForInstanceWarmup: String
+      Successful: String
+      Failed: String
+      Cancelled: String
+      WaitingForConnectionDraining: String
+    end
+
+    class ScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?policy_name: String,
+        ?policy_arn: String,
+        ?policy_type: String,
+        ?adjustment_type: String,
+        ?min_adjustment_step: Integer,
+        ?min_adjustment_magnitude: Integer,
+        ?scaling_adjustment: Integer,
+        ?cooldown: Integer,
+        ?step_adjustments: Array[Types::StepAdjustment],
+        ?metric_aggregation_type: String,
+        ?estimated_instance_warmup: Integer,
+        ?alarms: Array[Types::Alarm],
+        ?target_tracking_configuration: Types::TargetTrackingConfiguration,
+        ?enabled: bool,
+        ?predictive_scaling_configuration: Types::PredictiveScalingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_type: String?
+      attr_accessor adjustment_type: String?
+      attr_accessor min_adjustment_step: Integer?
+      attr_accessor min_adjustment_magnitude: Integer?
+      attr_accessor scaling_adjustment: Integer?
+      attr_accessor cooldown: Integer?
+      attr_accessor step_adjustments: Array[Types::StepAdjustment]?
+      attr_accessor metric_aggregation_type: String?
+      attr_accessor estimated_instance_warmup: Integer?
+      attr_accessor alarms: Array[Types::Alarm]?
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration?
+      attr_accessor enabled: bool?
+      attr_accessor predictive_scaling_configuration: Types::PredictiveScalingConfiguration?
+    end
+
+    class ScheduledUpdateGroupAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scheduled_action_name: String,
+        ?scheduled_action_arn: String,
+        ?time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recurrence: String,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scheduled_action_name: String?
+      attr_accessor scheduled_action_arn: String?
+      attr_accessor time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recurrence: String?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor time_zone: String?
+    end
+
+    class ScheduledUpdateGroupActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_action_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?recurrence: String,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_action_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor recurrence: String?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor time_zone: String?
+    end
+
+    class ServiceLinkedRoleFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetDesiredCapacityInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?desired_capacity: Integer,
+        ?honor_cooldown: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor honor_cooldown: bool?
+    end
+
+    class SetInstanceHealthInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?health_status: String,
+        ?should_respect_grace_period: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor health_status: String?
+      attr_accessor should_respect_grace_period: bool?
+    end
+
+    class SetInstanceProtectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
+        ?protected_from_scale_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor protected_from_scale_in: bool?
+    end
+
+    class SetInstanceProtectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module StandbyInstances
+      Terminate: String
+      Ignore: String
+      Wait: String
+    end
+
+    class StartInstanceRefreshInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?strategy: String,
+        ?desired_configuration: Types::DesiredConfiguration,
+        ?preferences: Types::RefreshPreferences,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor strategy: String?
+      attr_accessor desired_configuration: Types::DesiredConfiguration?
+      attr_accessor preferences: Types::RefreshPreferences?
+    end
+
+    class StartInstanceRefreshOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_refresh_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_refresh_id: String?
+    end
+
+    class StepAdjustment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_interval_lower_bound: Float,
+        ?metric_interval_upper_bound: Float,
+        ?scaling_adjustment: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_interval_lower_bound: Float?
+      attr_accessor metric_interval_upper_bound: Float?
+      attr_accessor scaling_adjustment: Integer?
+    end
+
+    class SuspendProcessesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?scaling_processes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor scaling_processes: Array[String]?
+    end
+
+    class SuspendedProcess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?process_name: String,
+        ?suspension_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor process_name: String?
+      attr_accessor suspension_reason: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?key: String,
+        ?value: String,
+        ?propagate_at_launch: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor propagate_at_launch: bool?
+    end
+
+    class TagDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?key: String,
+        ?value: String,
+        ?propagate_at_launch: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor propagate_at_launch: bool?
+    end
+
+    class TargetTrackingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_specification: Types::PredefinedMetricSpecification,
+        ?customized_metric_specification: Types::CustomizedMetricSpecification,
+        ?target_value: Float,
+        ?disable_scale_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_specification: Types::PredefinedMetricSpecification?
+      attr_accessor customized_metric_specification: Types::CustomizedMetricSpecification?
+      attr_accessor target_value: Float?
+      attr_accessor disable_scale_in: bool?
+    end
+
+    class TargetTrackingMetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?expression: String,
+        ?metric_stat: Types::TargetTrackingMetricStat,
+        ?label: String,
+        ?period: Integer,
+        ?return_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor expression: String?
+      attr_accessor metric_stat: Types::TargetTrackingMetricStat?
+      attr_accessor label: String?
+      attr_accessor period: Integer?
+      attr_accessor return_data: bool?
+    end
+
+    class TargetTrackingMetricStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::Metric,
+        ?stat: String,
+        ?unit: String,
+        ?period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::Metric?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+      attr_accessor period: Integer?
+    end
+
+    class TerminateInstanceInAutoScalingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?should_decrement_desired_capacity: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor should_decrement_desired_capacity: bool?
+    end
+
+    class TerminateInstanceInAutoScalingGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activity: Types::Activity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activity: Types::Activity?
+    end
+
+    class TotalLocalStorageGBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class TrafficSourceIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor type: String?
+    end
+
+    class TrafficSourceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?traffic_source: String,
+        ?state: String,
+        ?identifier: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor traffic_source: String?
+      attr_accessor state: String?
+      attr_accessor identifier: String?
+      attr_accessor type: String?
+    end
+
+    class UpdateAutoScalingGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?launch_configuration_name: String,
+        ?launch_template: Types::LaunchTemplateSpecification,
+        ?mixed_instances_policy: Types::MixedInstancesPolicy,
+        ?min_size: Integer,
+        ?max_size: Integer,
+        ?desired_capacity: Integer,
+        ?default_cooldown: Integer,
+        ?availability_zones: Array[String],
+        ?health_check_type: String,
+        ?health_check_grace_period: Integer,
+        ?placement_group: String,
+        ?vpc_zone_identifier: String,
+        ?termination_policies: Array[String],
+        ?new_instances_protected_from_scale_in: bool,
+        ?service_linked_role_arn: String,
+        ?max_instance_lifetime: Integer,
+        ?capacity_rebalance: bool,
+        ?context: String,
+        ?desired_capacity_type: String,
+        ?default_instance_warmup: Integer,
+        ?instance_maintenance_policy: Types::InstanceMaintenancePolicy,
+        ?availability_zone_distribution: Types::AvailabilityZoneDistribution,
+        ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
+        ?skip_zonal_shift_validation: bool,
+        ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor launch_configuration_name: String?
+      attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy?
+      attr_accessor min_size: Integer?
+      attr_accessor max_size: Integer?
+      attr_accessor desired_capacity: Integer?
+      attr_accessor default_cooldown: Integer?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor health_check_type: String?
+      attr_accessor health_check_grace_period: Integer?
+      attr_accessor placement_group: String?
+      attr_accessor vpc_zone_identifier: String?
+      attr_accessor termination_policies: Array[String]?
+      attr_accessor new_instances_protected_from_scale_in: bool?
+      attr_accessor service_linked_role_arn: String?
+      attr_accessor max_instance_lifetime: Integer?
+      attr_accessor capacity_rebalance: bool?
+      attr_accessor context: String?
+      attr_accessor desired_capacity_type: String?
+      attr_accessor default_instance_warmup: Integer?
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy?
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution?
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
+      attr_accessor skip_zonal_shift_validation: bool?
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+    end
+
+    class VCpuCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class WarmPoolConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_group_prepared_capacity: Integer,
+        ?min_size: Integer,
+        ?pool_state: String,
+        ?status: String,
+        ?instance_reuse_policy: Types::InstanceReusePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_group_prepared_capacity: Integer?
+      attr_accessor min_size: Integer?
+      attr_accessor pool_state: String?
+      attr_accessor status: String?
+      attr_accessor instance_reuse_policy: Types::InstanceReusePolicy?
+    end
+
+    module WarmPoolState
+      Stopped: String
+      Running: String
+      Hibernated: String
+    end
+
+    module WarmPoolStatus
+      PendingDelete: String
+    end
+  end
+end

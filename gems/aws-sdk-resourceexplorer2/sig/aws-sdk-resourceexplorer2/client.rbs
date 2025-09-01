@@ -1,0 +1,296 @@
+module Aws::ResourceExplorer2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ResourceExplorer2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateDefaultViewResponse
+      include Smithy::Client::_Response[Types::AssociateDefaultViewOperationOutput]
+      def view_arn: () -> String?
+    end
+    def associate_default_view: (
+      ?view_arn: String
+    ) -> _AssociateDefaultViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDefaultViewResponse
+
+    interface _BatchGetViewResponse
+      include Smithy::Client::_Response[Types::BatchGetViewOperationOutput]
+      def views: () -> Array[Types::View]?
+      def errors: () -> Array[Types::BatchGetViewError]?
+    end
+    def batch_get_view: (
+      ?view_arns: Array[String]
+    ) -> _BatchGetViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetViewResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexOperationOutput]
+      def arn: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_index: (
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
+
+    interface _CreateViewResponse
+      include Smithy::Client::_Response[Types::CreateViewOperationOutput]
+      def view: () -> Types::View?
+    end
+    def create_view: (
+      ?client_token: String,
+      ?view_name: String,
+      ?included_properties: Array[
+        {
+          name: String
+        }
+      ],
+      ?scope: String,
+      ?filters: {
+        filter_string: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateViewResponse
+
+    interface _DeleteIndexResponse
+      include Smithy::Client::_Response[Types::DeleteIndexOperationOutput]
+      def arn: () -> String?
+      def state: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def delete_index: (
+      ?arn: String
+    ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
+    interface _DeleteViewResponse
+      include Smithy::Client::_Response[Types::DeleteViewOperationOutput]
+      def view_arn: () -> String?
+    end
+    def delete_view: (
+      ?view_arn: String
+    ) -> _DeleteViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteViewResponse
+
+    interface _DisassociateDefaultViewResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_default_view: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDefaultViewResponse
+
+    interface _GetAccountLevelServiceConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAccountLevelServiceConfigurationOutput]
+      def org_configuration: () -> Types::OrgConfiguration?
+    end
+    def get_account_level_service_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountLevelServiceConfigurationResponse
+
+    interface _GetDefaultViewResponse
+      include Smithy::Client::_Response[Types::GetDefaultViewOperationOutput]
+      def view_arn: () -> String?
+    end
+    def get_default_view: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultViewResponse
+
+    interface _GetIndexResponse
+      include Smithy::Client::_Response[Types::GetIndexOperationOutput]
+      def arn: () -> String?
+      def type: () -> String?
+      def state: () -> String?
+      def replicating_from: () -> Array[String]?
+      def replicating_to: () -> Array[String]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_index: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIndexResponse
+
+    interface _GetManagedViewResponse
+      include Smithy::Client::_Response[Types::GetManagedViewOutput]
+      def managed_view: () -> Types::ManagedView?
+    end
+    def get_managed_view: (
+      ?managed_view_arn: String
+    ) -> _GetManagedViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedViewResponse
+
+    interface _GetViewResponse
+      include Smithy::Client::_Response[Types::GetViewOperationOutput]
+      def view: () -> Types::View?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_view: (
+      ?view_arn: String
+    ) -> _GetViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetViewResponse
+
+    interface _ListIndexesResponse
+      include Smithy::Client::_Response[Types::ListIndexesOperationOutput]
+      def indexes: () -> Array[Types::Index]?
+      def next_token: () -> String?
+    end
+    def list_indexes: (
+      ?type: String,
+      ?regions: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndexesResponse
+
+    interface _ListIndexesForMembersResponse
+      include Smithy::Client::_Response[Types::ListIndexesForMembersOutput]
+      def indexes: () -> Array[Types::MemberIndex]?
+      def next_token: () -> String?
+    end
+    def list_indexes_for_members: (
+      ?account_id_list: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIndexesForMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndexesForMembersResponse
+
+    interface _ListManagedViewsResponse
+      include Smithy::Client::_Response[Types::ListManagedViewsOutput]
+      def next_token: () -> String?
+      def managed_views: () -> Array[String]?
+    end
+    def list_managed_views: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?service_principal: String
+    ) -> _ListManagedViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedViewsResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesOutput]
+      def resources: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+      def view_arn: () -> String?
+    end
+    def list_resources: (
+      ?filters: {
+        filter_string: String
+      },
+      ?max_results: Integer,
+      ?view_arn: String,
+      ?next_token: String
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListSupportedResourceTypesResponse
+      include Smithy::Client::_Response[Types::ListSupportedResourceTypesOperationOutput]
+      def resource_types: () -> Array[Types::SupportedResourceType]?
+      def next_token: () -> String?
+    end
+    def list_supported_resource_types: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSupportedResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportedResourceTypesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListViewsResponse
+      include Smithy::Client::_Response[Types::ListViewsOperationOutput]
+      def views: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_views: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListViewsResponse
+
+    interface _SearchResponse
+      include Smithy::Client::_Response[Types::SearchOperationOutput]
+      def resources: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+      def view_arn: () -> String?
+      def count: () -> Types::ResourceCount?
+    end
+    def search: (
+      ?query_string: String,
+      ?max_results: Integer,
+      ?view_arn: String,
+      ?next_token: String
+    ) -> _SearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIndexTypeResponse
+      include Smithy::Client::_Response[Types::UpdateIndexTypeOperationOutput]
+      def arn: () -> String?
+      def type: () -> String?
+      def state: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def update_index_type: (
+      ?arn: String,
+      ?type: String
+    ) -> _UpdateIndexTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexTypeResponse
+
+    interface _UpdateViewResponse
+      include Smithy::Client::_Response[Types::UpdateViewOperationOutput]
+      def view: () -> Types::View?
+    end
+    def update_view: (
+      ?view_arn: String,
+      ?included_properties: Array[
+        {
+          name: String
+        }
+      ],
+      ?filters: {
+        filter_string: String
+      }
+    ) -> _UpdateViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateViewResponse
+  end
+end

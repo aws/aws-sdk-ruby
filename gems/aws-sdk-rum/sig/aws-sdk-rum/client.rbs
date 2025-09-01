@@ -1,0 +1,332 @@
+module Aws::RUM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RUM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCreateRumMetricDefinitionsResponse
+      include Smithy::Client::_Response[Types::BatchCreateRumMetricDefinitionsOutput]
+      def errors: () -> Array[Types::BatchCreateRumMetricDefinitionsError]?
+      def metric_definitions: () -> Array[Types::MetricDefinition]?
+    end
+    def batch_create_rum_metric_definitions: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String,
+      ?metric_definitions: Array[
+        {
+          name: String,
+          value_key: String,
+          unit_label: String,
+          dimension_keys: Hash[String, String],
+          event_pattern: String,
+          namespace: String
+        }
+      ]
+    ) -> _BatchCreateRumMetricDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateRumMetricDefinitionsResponse
+
+    interface _BatchDeleteRumMetricDefinitionsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteRumMetricDefinitionsOutput]
+      def errors: () -> Array[Types::BatchDeleteRumMetricDefinitionsError]?
+      def metric_definition_ids: () -> Array[String]?
+    end
+    def batch_delete_rum_metric_definitions: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String,
+      ?metric_definition_ids: Array[String]
+    ) -> _BatchDeleteRumMetricDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteRumMetricDefinitionsResponse
+
+    interface _BatchGetRumMetricDefinitionsResponse
+      include Smithy::Client::_Response[Types::BatchGetRumMetricDefinitionsOutput]
+      def metric_definitions: () -> Array[Types::MetricDefinition]?
+      def next_token: () -> String?
+    end
+    def batch_get_rum_metric_definitions: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _BatchGetRumMetricDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRumMetricDefinitionsResponse
+
+    interface _CreateAppMonitorResponse
+      include Smithy::Client::_Response[Types::CreateAppMonitorOutput]
+      def id: () -> String?
+    end
+    def create_app_monitor: (
+      ?name: String,
+      ?domain: String,
+      ?domain_list: Array[String],
+      ?tags: Hash[String, String],
+      ?app_monitor_configuration: {
+        identity_pool_id: String,
+        excluded_pages: Array[String],
+        included_pages: untyped,
+        favorite_pages: Array[String],
+        session_sample_rate: Float,
+        guest_role_arn: String,
+        allow_cookies: bool,
+        telemetries: Array[String],
+        enable_x_ray: untyped
+      },
+      ?cw_log_enabled: bool,
+      ?custom_events: {
+        status: String
+      },
+      ?deobfuscation_configuration: {
+        java_script_source_maps: {
+          status: String,
+          s3_uri: String
+        }
+      }
+    ) -> _CreateAppMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppMonitorResponse
+
+    interface _DeleteAppMonitorResponse
+      include Smithy::Client::_Response[Types::DeleteAppMonitorOutput]
+    end
+    def delete_app_monitor: (
+      ?name: String
+    ) -> _DeleteAppMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppMonitorResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+      def policy_revision_id: () -> String?
+    end
+    def delete_resource_policy: (
+      ?name: String,
+      ?policy_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteRumMetricsDestinationResponse
+      include Smithy::Client::_Response[Types::DeleteRumMetricsDestinationOutput]
+    end
+    def delete_rum_metrics_destination: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String
+    ) -> _DeleteRumMetricsDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRumMetricsDestinationResponse
+
+    interface _GetAppMonitorResponse
+      include Smithy::Client::_Response[Types::GetAppMonitorOutput]
+      def app_monitor: () -> Types::AppMonitor?
+    end
+    def get_app_monitor: (
+      ?name: String
+    ) -> _GetAppMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppMonitorResponse
+
+    interface _GetAppMonitorDataResponse
+      include Smithy::Client::_Response[Types::GetAppMonitorDataOutput]
+      def events: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def get_app_monitor_data: (
+      ?name: String,
+      ?time_range: {
+        after: Integer,
+        before: untyped
+      },
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetAppMonitorDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppMonitorDataResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy_document: () -> String?
+      def policy_revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?name: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListAppMonitorsResponse
+      include Smithy::Client::_Response[Types::ListAppMonitorsOutput]
+      def next_token: () -> String?
+      def app_monitor_summaries: () -> Array[Types::AppMonitorSummary]?
+    end
+    def list_app_monitors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAppMonitorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppMonitorsResponse
+
+    interface _ListRumMetricsDestinationsResponse
+      include Smithy::Client::_Response[Types::ListRumMetricsDestinationsOutput]
+      def destinations: () -> Array[Types::MetricDestinationSummary]?
+      def next_token: () -> String?
+    end
+    def list_rum_metrics_destinations: (
+      ?app_monitor_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRumMetricsDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRumMetricsDestinationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def resource_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy_document: () -> String?
+      def policy_revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?name: String,
+      ?policy_document: String,
+      ?policy_revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _PutRumEventsResponse
+      include Smithy::Client::_Response[Types::PutRumEventsOutput]
+    end
+    def put_rum_events: (
+      ?id: String,
+      ?batch_id: String,
+      ?app_monitor_details: {
+        name: String,
+        id: untyped,
+        version: untyped
+      },
+      ?user_details: {
+        user_id: String,
+        session_id: untyped
+      },
+      ?rum_events: Array[
+        {
+          id: String,
+          timestamp: Time,
+          type: untyped,
+          metadata: String,
+          details: untyped
+        }
+      ],
+      ?alias: String
+    ) -> _PutRumEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRumEventsResponse
+
+    interface _PutRumMetricsDestinationResponse
+      include Smithy::Client::_Response[Types::PutRumMetricsDestinationOutput]
+    end
+    def put_rum_metrics_destination: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String,
+      ?iam_role_arn: String
+    ) -> _PutRumMetricsDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRumMetricsDestinationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppMonitorResponse
+      include Smithy::Client::_Response[Types::UpdateAppMonitorOutput]
+    end
+    def update_app_monitor: (
+      ?name: String,
+      ?domain: String,
+      ?domain_list: Array[String],
+      ?app_monitor_configuration: {
+        identity_pool_id: String,
+        excluded_pages: Array[String],
+        included_pages: untyped,
+        favorite_pages: Array[String],
+        session_sample_rate: Float,
+        guest_role_arn: String,
+        allow_cookies: bool,
+        telemetries: Array[String],
+        enable_x_ray: untyped
+      },
+      ?cw_log_enabled: bool,
+      ?custom_events: {
+        status: String
+      },
+      ?deobfuscation_configuration: {
+        java_script_source_maps: {
+          status: String,
+          s3_uri: String
+        }
+      }
+    ) -> _UpdateAppMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppMonitorResponse
+
+    interface _UpdateRumMetricDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateRumMetricDefinitionOutput]
+    end
+    def update_rum_metric_definition: (
+      ?app_monitor_name: String,
+      ?destination: String,
+      ?destination_arn: String,
+      ?metric_definition: {
+        name: String,
+        value_key: String,
+        unit_label: String,
+        dimension_keys: Hash[String, String],
+        event_pattern: String,
+        namespace: String
+      },
+      ?metric_definition_id: String
+    ) -> _UpdateRumMetricDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRumMetricDefinitionResponse
+  end
+end

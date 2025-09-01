@@ -1,0 +1,28 @@
+module Aws::SSMGuiConnect
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccountId: StringShape
+    BucketName: StringShape
+    ClientToken: StringShape
+    ConflictException: StructureShape
+    ConnectionRecordingPreferences: StructureShape
+    DeleteConnectionRecordingPreferencesRequest: StructureShape
+    DeleteConnectionRecordingPreferencesResponse: StructureShape
+    ErrorMessage: StringShape
+    GetConnectionRecordingPreferencesResponse: StructureShape
+    InternalServerException: StructureShape
+    RecordingDestinations: StructureShape
+    ResourceNotFoundException: StructureShape
+    S3Bucket: StructureShape
+    S3Buckets: ListShape
+    ServiceQuotaExceededException: StructureShape
+    ThrottlingException: StructureShape
+    UpdateConnectionRecordingPreferencesRequest: StructureShape
+    UpdateConnectionRecordingPreferencesResponse: StructureShape
+    ValidationException: StructureShape
+
+    SSMGuiConnect: ServiceShape
+  end
+end

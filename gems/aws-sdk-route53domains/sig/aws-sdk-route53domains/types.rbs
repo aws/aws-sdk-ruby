@@ -1,0 +1,1661 @@
+module Aws::Route53Domains
+  module Types
+
+    class AcceptDomainTransferFromAnotherAwsAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor password: String?
+    end
+
+    class AcceptDomainTransferFromAnotherAwsAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class AssociateDelegationSignerToDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?signing_attributes: Types::DnssecSigningAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor signing_attributes: Types::DnssecSigningAttributes?
+    end
+
+    class AssociateDelegationSignerToDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class BillingRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?operation: String,
+        ?invoice_id: String,
+        ?bill_date: Time,
+        ?price: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor operation: String?
+      attr_accessor invoice_id: String?
+      attr_accessor bill_date: Time?
+      attr_accessor price: Float?
+    end
+
+    class CancelDomainTransferToAnotherAwsAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class CancelDomainTransferToAnotherAwsAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class CheckDomainAvailabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?idn_lang_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor idn_lang_code: String?
+    end
+
+    class CheckDomainAvailabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability: String?
+    end
+
+    class CheckDomainTransferabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?auth_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor auth_code: String?
+    end
+
+    class CheckDomainTransferabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transferability: Types::DomainTransferability,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transferability: Types::DomainTransferability?
+      attr_accessor message: String?
+    end
+
+    class Consent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_price: Float,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_price: Float?
+      attr_accessor currency: String?
+    end
+
+    class ContactDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_name: String,
+        ?last_name: String,
+        ?contact_type: String,
+        ?organization_name: String,
+        ?address_line1: String,
+        ?address_line2: String,
+        ?city: String,
+        ?state: String,
+        ?country_code: String,
+        ?zip_code: String,
+        ?phone_number: String,
+        ?email: String,
+        ?fax: String,
+        ?extra_params: Array[Types::ExtraParam],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor contact_type: String?
+      attr_accessor organization_name: String?
+      attr_accessor address_line1: String?
+      attr_accessor address_line2: String?
+      attr_accessor city: String?
+      attr_accessor state: String?
+      attr_accessor country_code: String?
+      attr_accessor zip_code: String?
+      attr_accessor phone_number: String?
+      attr_accessor email: String?
+      attr_accessor fax: String?
+      attr_accessor extra_params: Array[Types::ExtraParam]?
+    end
+
+    module ContactType
+      PERSON: String
+      COMPANY: String
+      ASSOCIATION: String
+      PUBLIC_BODY: String
+      RESELLER: String
+    end
+
+    module CountryCode
+      AC: String
+      AD: String
+      AE: String
+      AF: String
+      AG: String
+      AI: String
+      AL: String
+      AM: String
+      AN: String
+      AO: String
+      AQ: String
+      AR: String
+      AS: String
+      AT: String
+      AU: String
+      AW: String
+      AX: String
+      AZ: String
+      BA: String
+      BB: String
+      BD: String
+      BE: String
+      BF: String
+      BG: String
+      BH: String
+      BI: String
+      BJ: String
+      BL: String
+      BM: String
+      BN: String
+      BO: String
+      BQ: String
+      BR: String
+      BS: String
+      BT: String
+      BV: String
+      BW: String
+      BY: String
+      BZ: String
+      CA: String
+      CC: String
+      CD: String
+      CF: String
+      CG: String
+      CH: String
+      CI: String
+      CK: String
+      CL: String
+      CM: String
+      CN: String
+      CO: String
+      CR: String
+      CU: String
+      CV: String
+      CW: String
+      CX: String
+      CY: String
+      CZ: String
+      DE: String
+      DJ: String
+      DK: String
+      DM: String
+      DO: String
+      DZ: String
+      EC: String
+      EE: String
+      EG: String
+      EH: String
+      ER: String
+      ES: String
+      ET: String
+      FI: String
+      FJ: String
+      FK: String
+      FM: String
+      FO: String
+      FR: String
+      GA: String
+      GB: String
+      GD: String
+      GE: String
+      GF: String
+      GG: String
+      GH: String
+      GI: String
+      GL: String
+      GM: String
+      GN: String
+      GP: String
+      GQ: String
+      GR: String
+      GS: String
+      GT: String
+      GU: String
+      GW: String
+      GY: String
+      HK: String
+      HM: String
+      HN: String
+      HR: String
+      HT: String
+      HU: String
+      ID: String
+      IE: String
+      IL: String
+      IM: String
+      IN: String
+      IO: String
+      IQ: String
+      IR: String
+      IS: String
+      IT: String
+      JE: String
+      JM: String
+      JO: String
+      JP: String
+      KE: String
+      KG: String
+      KH: String
+      KI: String
+      KM: String
+      KN: String
+      KP: String
+      KR: String
+      KW: String
+      KY: String
+      KZ: String
+      LA: String
+      LB: String
+      LC: String
+      LI: String
+      LK: String
+      LR: String
+      LS: String
+      LT: String
+      LU: String
+      LV: String
+      LY: String
+      MA: String
+      MC: String
+      MD: String
+      ME: String
+      MF: String
+      MG: String
+      MH: String
+      MK: String
+      ML: String
+      MM: String
+      MN: String
+      MO: String
+      MP: String
+      MQ: String
+      MR: String
+      MS: String
+      MT: String
+      MU: String
+      MV: String
+      MW: String
+      MX: String
+      MY: String
+      MZ: String
+      NA: String
+      NC: String
+      NE: String
+      NF: String
+      NG: String
+      NI: String
+      NL: String
+      NO: String
+      NP: String
+      NR: String
+      NU: String
+      NZ: String
+      OM: String
+      PA: String
+      PE: String
+      PF: String
+      PG: String
+      PH: String
+      PK: String
+      PL: String
+      PM: String
+      PN: String
+      PR: String
+      PS: String
+      PT: String
+      PW: String
+      PY: String
+      QA: String
+      RE: String
+      RO: String
+      RS: String
+      RU: String
+      RW: String
+      SA: String
+      SB: String
+      SC: String
+      SD: String
+      SE: String
+      SG: String
+      SH: String
+      SI: String
+      SJ: String
+      SK: String
+      SL: String
+      SM: String
+      SN: String
+      SO: String
+      SR: String
+      SS: String
+      ST: String
+      SV: String
+      SX: String
+      SY: String
+      SZ: String
+      TC: String
+      TD: String
+      TF: String
+      TG: String
+      TH: String
+      TJ: String
+      TK: String
+      TL: String
+      TM: String
+      TN: String
+      TO: String
+      TP: String
+      TR: String
+      TT: String
+      TV: String
+      TW: String
+      TZ: String
+      UA: String
+      UG: String
+      US: String
+      UY: String
+      UZ: String
+      VA: String
+      VC: String
+      VE: String
+      VG: String
+      VI: String
+      VN: String
+      VU: String
+      WF: String
+      WS: String
+      YE: String
+      YT: String
+      ZA: String
+      ZM: String
+      ZW: String
+    end
+
+    class DeleteDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DeleteDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DeleteTagsForDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?tags_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor tags_to_delete: Array[String]?
+    end
+
+    class DeleteTagsForDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableDomainAutoRenewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DisableDomainAutoRenewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableDomainTransferLockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DisableDomainTransferLockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DisassociateDelegationSignerFromDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor id: String?
+    end
+
+    class DisassociateDelegationSignerFromDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class DnssecKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: Integer,
+        ?flags: Integer,
+        ?public_key: String,
+        ?digest_type: Integer,
+        ?digest: String,
+        ?key_tag: Integer,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: Integer?
+      attr_accessor flags: Integer?
+      attr_accessor public_key: String?
+      attr_accessor digest_type: Integer?
+      attr_accessor digest: String?
+      attr_accessor key_tag: Integer?
+      attr_accessor id: String?
+    end
+
+    class DnssecLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DnssecSigningAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: Integer,
+        ?flags: Integer,
+        ?public_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: Integer?
+      attr_accessor flags: Integer?
+      attr_accessor public_key: String?
+    end
+
+    module DomainAvailability
+      AVAILABLE: String
+      AVAILABLE_RESERVED: String
+      AVAILABLE_PREORDER: String
+      UNAVAILABLE: String
+      UNAVAILABLE_PREMIUM: String
+      UNAVAILABLE_RESTRICTED: String
+      RESERVED: String
+      DONT_KNOW: String
+      INVALID_NAME_FOR_TLD: String
+      PENDING: String
+    end
+
+    class DomainLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DomainPrice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?registration_price: Types::PriceWithCurrency,
+        ?transfer_price: Types::PriceWithCurrency,
+        ?renewal_price: Types::PriceWithCurrency,
+        ?change_ownership_price: Types::PriceWithCurrency,
+        ?restoration_price: Types::PriceWithCurrency,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor registration_price: Types::PriceWithCurrency?
+      attr_accessor transfer_price: Types::PriceWithCurrency?
+      attr_accessor renewal_price: Types::PriceWithCurrency?
+      attr_accessor change_ownership_price: Types::PriceWithCurrency?
+      attr_accessor restoration_price: Types::PriceWithCurrency?
+    end
+
+    class DomainSuggestion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?availability: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor availability: String?
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?auto_renew: bool,
+        ?transfer_lock: bool,
+        ?expiry: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor auto_renew: bool?
+      attr_accessor transfer_lock: bool?
+      attr_accessor expiry: Time?
+    end
+
+    class DomainTransferability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transferable: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transferable: String?
+    end
+
+    class DuplicateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+    end
+
+    class EnableDomainAutoRenewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class EnableDomainAutoRenewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableDomainTransferLockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class EnableDomainTransferLockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class ExtraParam
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module ExtraParamName
+      DUNS_NUMBER: String
+      BRAND_NUMBER: String
+      BIRTH_DEPARTMENT: String
+      BIRTH_DATE_IN_YYYY_MM_DD: String
+      BIRTH_COUNTRY: String
+      BIRTH_CITY: String
+      DOCUMENT_NUMBER: String
+      AU_ID_NUMBER: String
+      AU_ID_TYPE: String
+      CA_LEGAL_TYPE: String
+      CA_BUSINESS_ENTITY_TYPE: String
+      CA_LEGAL_REPRESENTATIVE: String
+      CA_LEGAL_REPRESENTATIVE_CAPACITY: String
+      ES_IDENTIFICATION: String
+      ES_IDENTIFICATION_TYPE: String
+      ES_LEGAL_FORM: String
+      FI_BUSINESS_NUMBER: String
+      ONWER_FI_ID_NUMBER: String
+      FI_NATIONALITY: String
+      FI_ORGANIZATION_TYPE: String
+      IT_NATIONALITY: String
+      IT_PIN: String
+      IT_REGISTRANT_ENTITY_TYPE: String
+      RU_PASSPORT_DATA: String
+      SE_ID_NUMBER: String
+      SG_ID_NUMBER: String
+      VAT_NUMBER: String
+      UK_CONTACT_TYPE: String
+      UK_COMPANY_NUMBER: String
+      EU_COUNTRY_OF_CITIZENSHIP: String
+      AU_PRIORITY_TOKEN: String
+    end
+
+    class FilterCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class GetContactReachabilityStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetContactReachabilityStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor status: String?
+    end
+
+    class GetDomainDetailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetDomainDetailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?nameservers: Array[Types::Nameserver],
+        ?auto_renew: bool,
+        ?admin_contact: Types::ContactDetail,
+        ?registrant_contact: Types::ContactDetail,
+        ?tech_contact: Types::ContactDetail,
+        ?admin_privacy: bool,
+        ?registrant_privacy: bool,
+        ?tech_privacy: bool,
+        ?registrar_name: String,
+        ?who_is_server: String,
+        ?registrar_url: String,
+        ?abuse_contact_email: String,
+        ?abuse_contact_phone: String,
+        ?registry_domain_id: String,
+        ?creation_date: Time,
+        ?updated_date: Time,
+        ?expiration_date: Time,
+        ?reseller: String,
+        ?dns_sec: String,
+        ?status_list: Array[String],
+        ?dnssec_keys: Array[Types::DnssecKey],
+        ?billing_contact: Types::ContactDetail,
+        ?billing_privacy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor nameservers: Array[Types::Nameserver]?
+      attr_accessor auto_renew: bool?
+      attr_accessor admin_contact: Types::ContactDetail?
+      attr_accessor registrant_contact: Types::ContactDetail?
+      attr_accessor tech_contact: Types::ContactDetail?
+      attr_accessor admin_privacy: bool?
+      attr_accessor registrant_privacy: bool?
+      attr_accessor tech_privacy: bool?
+      attr_accessor registrar_name: String?
+      attr_accessor who_is_server: String?
+      attr_accessor registrar_url: String?
+      attr_accessor abuse_contact_email: String?
+      attr_accessor abuse_contact_phone: String?
+      attr_accessor registry_domain_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor updated_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor reseller: String?
+      attr_accessor dns_sec: String?
+      attr_accessor status_list: Array[String]?
+      attr_accessor dnssec_keys: Array[Types::DnssecKey]?
+      attr_accessor billing_contact: Types::ContactDetail?
+      attr_accessor billing_privacy: bool?
+    end
+
+    class GetDomainSuggestionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?suggestion_count: Integer,
+        ?only_available: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor suggestion_count: Integer?
+      attr_accessor only_available: bool?
+    end
+
+    class GetDomainSuggestionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suggestions_list: Array[Types::DomainSuggestion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suggestions_list: Array[Types::DomainSuggestion]?
+    end
+
+    class GetOperationDetailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class GetOperationDetailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?status: String,
+        ?message: String,
+        ?domain_name: String,
+        ?type: String,
+        ?submitted_date: Time,
+        ?last_updated_date: Time,
+        ?status_flag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor domain_name: String?
+      attr_accessor type: String?
+      attr_accessor submitted_date: Time?
+      attr_accessor last_updated_date: Time?
+      attr_accessor status_flag: String?
+    end
+
+    class InvalidInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ListDomainsAttributeName
+      DomainName: String
+      Expiry: String
+    end
+
+    class ListDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_conditions: Array[Types::FilterCondition],
+        ?sort_condition: Types::SortCondition,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_conditions: Array[Types::FilterCondition]?
+      attr_accessor sort_condition: Types::SortCondition?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainSummary],
+        ?next_page_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainSummary]?
+      attr_accessor next_page_marker: String?
+    end
+
+    class ListOperationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submitted_since: Time,
+        ?marker: String,
+        ?max_items: Integer,
+        ?status: Array[String],
+        ?type: Array[String],
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submitted_since: Time?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor status: Array[String]?
+      attr_accessor type: Array[String]?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListOperationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::OperationSummary],
+        ?next_page_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::OperationSummary]?
+      attr_accessor next_page_marker: String?
+    end
+
+    module ListOperationsSortAttributeName
+      SubmittedDate: String
+    end
+
+    class ListPricesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tld: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tld: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListPricesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prices: Array[Types::DomainPrice],
+        ?next_page_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prices: Array[Types::DomainPrice]?
+      attr_accessor next_page_marker: String?
+    end
+
+    class ListTagsForDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class ListTagsForDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class Nameserver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?glue_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor glue_ips: Array[String]?
+    end
+
+    class OperationLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OperationStatus
+      SUBMITTED: String
+      IN_PROGRESS: String
+      ERROR: String
+      SUCCESSFUL: String
+      FAILED: String
+    end
+
+    class OperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?status: String,
+        ?type: String,
+        ?submitted_date: Time,
+        ?domain_name: String,
+        ?message: String,
+        ?status_flag: String,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor submitted_date: Time?
+      attr_accessor domain_name: String?
+      attr_accessor message: String?
+      attr_accessor status_flag: String?
+      attr_accessor last_updated_date: Time?
+    end
+
+    module OperationType
+      REGISTER_DOMAIN: String
+      DELETE_DOMAIN: String
+      TRANSFER_IN_DOMAIN: String
+      UPDATE_DOMAIN_CONTACT: String
+      UPDATE_NAMESERVER: String
+      CHANGE_PRIVACY_PROTECTION: String
+      DOMAIN_LOCK: String
+      ENABLE_AUTORENEW: String
+      DISABLE_AUTORENEW: String
+      ADD_DNSSEC: String
+      REMOVE_DNSSEC: String
+      EXPIRE_DOMAIN: String
+      TRANSFER_OUT_DOMAIN: String
+      CHANGE_DOMAIN_OWNER: String
+      RENEW_DOMAIN: String
+      PUSH_DOMAIN: String
+      INTERNAL_TRANSFER_OUT_DOMAIN: String
+      INTERNAL_TRANSFER_IN_DOMAIN: String
+      RELEASE_TO_GANDI: String
+      TRANSFER_ON_RENEW: String
+      RESTORE_DOMAIN: String
+    end
+
+    module Operator
+      LE: String
+      GE: String
+      BEGINS_WITH: String
+    end
+
+    class PriceWithCurrency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?price: Float,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor price: Float?
+      attr_accessor currency: String?
+    end
+
+    class PushDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor target: String?
+    end
+
+    module ReachabilityStatus
+      PENDING: String
+      DONE: String
+      EXPIRED: String
+    end
+
+    class RegisterDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?idn_lang_code: String,
+        ?duration_in_years: Integer,
+        ?auto_renew: bool,
+        ?admin_contact: Types::ContactDetail,
+        ?registrant_contact: Types::ContactDetail,
+        ?tech_contact: Types::ContactDetail,
+        ?privacy_protect_admin_contact: bool,
+        ?privacy_protect_registrant_contact: bool,
+        ?privacy_protect_tech_contact: bool,
+        ?billing_contact: Types::ContactDetail,
+        ?privacy_protect_billing_contact: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor idn_lang_code: String?
+      attr_accessor duration_in_years: Integer?
+      attr_accessor auto_renew: bool?
+      attr_accessor admin_contact: Types::ContactDetail?
+      attr_accessor registrant_contact: Types::ContactDetail?
+      attr_accessor tech_contact: Types::ContactDetail?
+      attr_accessor privacy_protect_admin_contact: bool?
+      attr_accessor privacy_protect_registrant_contact: bool?
+      attr_accessor privacy_protect_tech_contact: bool?
+      attr_accessor billing_contact: Types::ContactDetail?
+      attr_accessor privacy_protect_billing_contact: bool?
+    end
+
+    class RegisterDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class RejectDomainTransferFromAnotherAwsAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class RejectDomainTransferFromAnotherAwsAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class RenewDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?duration_in_years: Integer,
+        ?current_expiry_year: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor duration_in_years: Integer?
+      attr_accessor current_expiry_year: Integer?
+    end
+
+    class RenewDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class ResendContactReachabilityEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class ResendContactReachabilityEmailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?email_address: String,
+        ?is_already_verified: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor email_address: String?
+      attr_accessor is_already_verified: bool?
+    end
+
+    class ResendOperationAuthorizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class RetrieveDomainAuthCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class RetrieveDomainAuthCodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_code: String?
+    end
+
+    class SortCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SortOrder
+      ASC: String
+      DESC: String
+    end
+
+    module StatusFlag
+      PENDING_ACCEPTANCE: String
+      PENDING_CUSTOMER_ACTION: String
+      PENDING_AUTHORIZATION: String
+      PENDING_PAYMENT_VERIFICATION: String
+      PENDING_SUPPORT_CASE: String
+    end
+
+    class TLDRulesViolation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TransferDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?idn_lang_code: String,
+        ?duration_in_years: Integer,
+        ?nameservers: Array[Types::Nameserver],
+        ?auth_code: String,
+        ?auto_renew: bool,
+        ?admin_contact: Types::ContactDetail,
+        ?registrant_contact: Types::ContactDetail,
+        ?tech_contact: Types::ContactDetail,
+        ?privacy_protect_admin_contact: bool,
+        ?privacy_protect_registrant_contact: bool,
+        ?privacy_protect_tech_contact: bool,
+        ?billing_contact: Types::ContactDetail,
+        ?privacy_protect_billing_contact: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor idn_lang_code: String?
+      attr_accessor duration_in_years: Integer?
+      attr_accessor nameservers: Array[Types::Nameserver]?
+      attr_accessor auth_code: String?
+      attr_accessor auto_renew: bool?
+      attr_accessor admin_contact: Types::ContactDetail?
+      attr_accessor registrant_contact: Types::ContactDetail?
+      attr_accessor tech_contact: Types::ContactDetail?
+      attr_accessor privacy_protect_admin_contact: bool?
+      attr_accessor privacy_protect_registrant_contact: bool?
+      attr_accessor privacy_protect_tech_contact: bool?
+      attr_accessor billing_contact: Types::ContactDetail?
+      attr_accessor privacy_protect_billing_contact: bool?
+    end
+
+    class TransferDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class TransferDomainToAnotherAwsAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class TransferDomainToAnotherAwsAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor password: String?
+    end
+
+    module Transferable
+      TRANSFERABLE: String
+      UNTRANSFERABLE: String
+      DONT_KNOW: String
+      DOMAIN_IN_OWN_ACCOUNT: String
+      DOMAIN_IN_ANOTHER_ACCOUNT: String
+      PREMIUM_DOMAIN: String
+    end
+
+    class UnsupportedTLD
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateDomainContactPrivacyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?admin_privacy: bool,
+        ?registrant_privacy: bool,
+        ?tech_privacy: bool,
+        ?billing_privacy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor admin_privacy: bool?
+      attr_accessor registrant_privacy: bool?
+      attr_accessor tech_privacy: bool?
+      attr_accessor billing_privacy: bool?
+    end
+
+    class UpdateDomainContactPrivacyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateDomainContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?admin_contact: Types::ContactDetail,
+        ?registrant_contact: Types::ContactDetail,
+        ?tech_contact: Types::ContactDetail,
+        ?consent: Types::Consent,
+        ?billing_contact: Types::ContactDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor admin_contact: Types::ContactDetail?
+      attr_accessor registrant_contact: Types::ContactDetail?
+      attr_accessor tech_contact: Types::ContactDetail?
+      attr_accessor consent: Types::Consent?
+      attr_accessor billing_contact: Types::ContactDetail?
+    end
+
+    class UpdateDomainContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateDomainNameserversRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?fi_auth_key: String,
+        ?nameservers: Array[Types::Nameserver],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor fi_auth_key: String?
+      attr_accessor nameservers: Array[Types::Nameserver]?
+    end
+
+    class UpdateDomainNameserversResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class UpdateTagsForDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?tags_to_update: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor tags_to_update: Array[Types::Tag]?
+    end
+
+    class UpdateTagsForDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ViewBillingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ViewBillingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_marker: String,
+        ?billing_records: Array[Types::BillingRecord],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_marker: String?
+      attr_accessor billing_records: Array[Types::BillingRecord]?
+    end
+  end
+end

@@ -1,0 +1,275 @@
+module Aws::Route53RecoveryCluster
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class EndpointTemporarilyUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetRoutingControlStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+    end
+
+    class GetRoutingControlStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+        ?routing_control_state: String,
+        ?routing_control_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+      attr_accessor routing_control_state: String?
+      attr_accessor routing_control_name: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListRoutingControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRoutingControlsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_controls: Array[Types::RoutingControl],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_controls: Array[Types::RoutingControl]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RoutingControl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?control_panel_name: String,
+        ?routing_control_arn: String,
+        ?routing_control_name: String,
+        ?routing_control_state: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor control_panel_name: String?
+      attr_accessor routing_control_arn: String?
+      attr_accessor routing_control_name: String?
+      attr_accessor routing_control_state: String?
+      attr_accessor owner: String?
+    end
+
+    module RoutingControlState
+      On: String
+      Off: String
+    end
+
+    class ServiceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?limit_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor limit_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UpdateRoutingControlStateEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+        ?routing_control_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+      attr_accessor routing_control_state: String?
+    end
+
+    class UpdateRoutingControlStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+        ?routing_control_state: String,
+        ?safety_rules_to_override: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+      attr_accessor routing_control_state: String?
+      attr_accessor safety_rules_to_override: Array[String]?
+    end
+
+    class UpdateRoutingControlStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRoutingControlStatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_routing_control_state_entries: Array[Types::UpdateRoutingControlStateEntry],
+        ?safety_rules_to_override: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_routing_control_state_entries: Array[Types::UpdateRoutingControlStateEntry]?
+      attr_accessor safety_rules_to_override: Array[String]?
+    end
+
+    class UpdateRoutingControlStatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

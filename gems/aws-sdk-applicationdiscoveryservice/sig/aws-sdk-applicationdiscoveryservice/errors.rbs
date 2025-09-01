@@ -1,0 +1,34 @@
+module Aws::ApplicationDiscoveryService
+  module Errors
+    class AuthorizationErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HomeRegionNotSetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerInternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

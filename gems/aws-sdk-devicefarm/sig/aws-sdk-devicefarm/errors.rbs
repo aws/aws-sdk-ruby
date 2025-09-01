@@ -1,0 +1,43 @@
+module Aws::DeviceFarm
+  module Errors
+    class ArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CannotDeleteException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotEligibleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class TagPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+  end
+end

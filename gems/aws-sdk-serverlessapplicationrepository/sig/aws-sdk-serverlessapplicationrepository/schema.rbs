@@ -1,0 +1,66 @@
+module Aws::ServerlessApplicationRepository
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ApplicationDependencySummary: StructureShape
+    ApplicationPolicyStatement: StructureShape
+    ApplicationSummary: StructureShape
+    BadRequestException: StructureShape
+    Capability: EnumShape
+    ConflictException: StructureShape
+    CreateApplicationRequest: StructureShape
+    CreateApplicationResponse: StructureShape
+    CreateApplicationVersionRequest: StructureShape
+    CreateApplicationVersionResponse: StructureShape
+    CreateCloudFormationChangeSetRequest: StructureShape
+    CreateCloudFormationChangeSetResponse: StructureShape
+    CreateCloudFormationTemplateRequest: StructureShape
+    CreateCloudFormationTemplateResponse: StructureShape
+    DeleteApplicationRequest: StructureShape
+    ForbiddenException: StructureShape
+    GetApplicationPolicyRequest: StructureShape
+    GetApplicationPolicyResponse: StructureShape
+    GetApplicationRequest: StructureShape
+    GetApplicationResponse: StructureShape
+    GetCloudFormationTemplateRequest: StructureShape
+    GetCloudFormationTemplateResponse: StructureShape
+    InternalServerErrorException: StructureShape
+    ListApplicationDependenciesRequest: StructureShape
+    ListApplicationDependenciesResponse: StructureShape
+    ListApplicationVersionsRequest: StructureShape
+    ListApplicationVersionsResponse: StructureShape
+    ListApplicationsRequest: StructureShape
+    ListApplicationsResponse: StructureShape
+    MaxItems: IntegerShape
+    NotFoundException: StructureShape
+    ParameterDefinition: StructureShape
+    ParameterValue: StructureShape
+    PutApplicationPolicyRequest: StructureShape
+    PutApplicationPolicyResponse: StructureShape
+    RollbackConfiguration: StructureShape
+    RollbackTrigger: StructureShape
+    Status: EnumShape
+    Tag: StructureShape
+    TooManyRequestsException: StructureShape
+    UnshareApplicationRequest: StructureShape
+    UpdateApplicationRequest: StructureShape
+    UpdateApplicationResponse: StructureShape
+    Version: StructureShape
+    VersionSummary: StructureShape
+    Boolean: BooleanShape
+    Integer: IntegerShape
+    Listofapplicationdependencysummary: ListShape
+    Listofapplicationpolicystatement: ListShape
+    Listofapplicationsummary: ListShape
+    Listofcapability: ListShape
+    Listofparameterdefinition: ListShape
+    Listofparametervalue: ListShape
+    Listofrollbacktrigger: ListShape
+    Listoftag: ListShape
+    Listofversionsummary: ListShape
+    ListofString: ListShape
+    String: StringShape
+
+    ServerlessApplicationRepository: ServiceShape
+  end
+end

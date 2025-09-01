@@ -1,0 +1,43 @@
+module Aws::CognitoSync
+  module Errors
+    class AlreadyStreamedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLambdaFunctionOutputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LambdaThrottledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,2735 @@
+module Aws::SSOAdmin
+  module Types
+
+    class AccessControlAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Types::AccessControlAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Types::AccessControlAttributeValue?
+    end
+
+    class AccessControlAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Array[String]?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountAssignment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?permission_set_arn: String,
+        ?principal_type: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor principal_type: String?
+      attr_accessor principal_id: String?
+    end
+
+    class AccountAssignmentForPrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?permission_set_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class AccountAssignmentOperationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?request_id: String,
+        ?failure_reason: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?permission_set_arn: String,
+        ?principal_type: String,
+        ?principal_id: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor request_id: String?
+      attr_accessor failure_reason: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor principal_type: String?
+      attr_accessor principal_id: String?
+      attr_accessor created_date: Time?
+    end
+
+    class AccountAssignmentOperationStatusMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?request_id: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor request_id: String?
+      attr_accessor created_date: Time?
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?application_provider_arn: String,
+        ?name: String,
+        ?application_account: String,
+        ?instance_arn: String,
+        ?status: String,
+        ?portal_options: Types::PortalOptions,
+        ?description: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor application_provider_arn: String?
+      attr_accessor name: String?
+      attr_accessor application_account: String?
+      attr_accessor instance_arn: String?
+      attr_accessor status: String?
+      attr_accessor portal_options: Types::PortalOptions?
+      attr_accessor description: String?
+      attr_accessor created_date: Time?
+    end
+
+    class ApplicationAssignment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class ApplicationAssignmentForPrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class ApplicationProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_provider_arn: String,
+        ?federation_protocol: String,
+        ?display_data: Types::DisplayData,
+        ?resource_server_config: Types::ResourceServerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_provider_arn: String?
+      attr_accessor federation_protocol: String?
+      attr_accessor display_data: Types::DisplayData?
+      attr_accessor resource_server_config: Types::ResourceServerConfig?
+    end
+
+    module ApplicationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ApplicationVisibility
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AttachCustomerManagedPolicyReferenceToPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?customer_managed_policy_reference: Types::CustomerManagedPolicyReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference?
+    end
+
+    class AttachCustomerManagedPolicyReferenceToPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttachManagedPolicyToPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?managed_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor managed_policy_arn: String?
+    end
+
+    class AttachManagedPolicyToPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttachedManagedPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class AuthenticationMethod
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iam: Types::IamAuthenticationMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam: Types::IamAuthenticationMethod?
+
+      class Iam < AuthenticationMethod
+      end
+      class Unknown < AuthenticationMethod
+      end
+    end
+
+    class AuthenticationMethodItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_method_type: String,
+        ?authentication_method: Types::AuthenticationMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_method_type: String?
+      attr_accessor authentication_method: Types::AuthenticationMethod?
+    end
+
+    module AuthenticationMethodType
+      IAM: String
+    end
+
+    class AuthorizationCodeGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redirect_uris: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redirect_uris: Array[String]?
+    end
+
+    class AuthorizedTokenIssuer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+        ?authorized_audiences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+      attr_accessor authorized_audiences: Array[String]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateAccountAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?permission_set_arn: String,
+        ?principal_type: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor principal_type: String?
+      attr_accessor principal_id: String?
+    end
+
+    class CreateAccountAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignment_creation_status: Types::AccountAssignmentOperationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignment_creation_status: Types::AccountAssignmentOperationStatus?
+    end
+
+    class CreateApplicationAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class CreateApplicationAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?application_provider_arn: String,
+        ?name: String,
+        ?description: String,
+        ?portal_options: Types::PortalOptions,
+        ?tags: Array[Types::Tag],
+        ?status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor application_provider_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor portal_options: Types::PortalOptions?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class CreateInstanceAccessControlAttributeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration?
+    end
+
+    class CreateInstanceAccessControlAttributeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class CreatePermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?instance_arn: String,
+        ?session_duration: String,
+        ?relay_state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor instance_arn: String?
+      attr_accessor session_duration: String?
+      attr_accessor relay_state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_set: Types::PermissionSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_set: Types::PermissionSet?
+    end
+
+    class CreateTrustedTokenIssuerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?name: String,
+        ?trusted_token_issuer_type: String,
+        ?trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor name: String?
+      attr_accessor trusted_token_issuer_type: String?
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTrustedTokenIssuerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+    end
+
+    class CustomerManagedPolicyReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor path: String?
+    end
+
+    class DeleteAccountAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?target_id: String,
+        ?target_type: String,
+        ?permission_set_arn: String,
+        ?principal_type: String,
+        ?principal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor principal_type: String?
+      attr_accessor principal_id: String?
+    end
+
+    class DeleteAccountAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignment_deletion_status: Types::AccountAssignmentOperationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignment_deletion_status: Types::AccountAssignmentOperationStatus?
+    end
+
+    class DeleteApplicationAccessScopeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor scope: String?
+    end
+
+    class DeleteApplicationAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class DeleteApplicationAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationAuthenticationMethodRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?authentication_method_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor authentication_method_type: String?
+    end
+
+    class DeleteApplicationGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?grant_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor grant_type: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteInlinePolicyFromPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class DeleteInlinePolicyFromPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteInstanceAccessControlAttributeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class DeleteInstanceAccessControlAttributeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class DeleteInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class DeletePermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePermissionsBoundaryFromPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class DeletePermissionsBoundaryFromPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrustedTokenIssuerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+    end
+
+    class DeleteTrustedTokenIssuerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountAssignmentCreationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?account_assignment_creation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor account_assignment_creation_request_id: String?
+    end
+
+    class DescribeAccountAssignmentCreationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignment_creation_status: Types::AccountAssignmentOperationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignment_creation_status: Types::AccountAssignmentOperationStatus?
+    end
+
+    class DescribeAccountAssignmentDeletionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?account_assignment_deletion_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor account_assignment_deletion_request_id: String?
+    end
+
+    class DescribeAccountAssignmentDeletionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignment_deletion_status: Types::AccountAssignmentOperationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignment_deletion_status: Types::AccountAssignmentOperationStatus?
+    end
+
+    class DescribeApplicationAssignmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+    end
+
+    class DescribeApplicationAssignmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_type: String,
+        ?principal_id: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_type: String?
+      attr_accessor principal_id: String?
+      attr_accessor application_arn: String?
+    end
+
+    class DescribeApplicationProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_provider_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_provider_arn: String?
+    end
+
+    class DescribeApplicationProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_provider_arn: String,
+        ?federation_protocol: String,
+        ?display_data: Types::DisplayData,
+        ?resource_server_config: Types::ResourceServerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_provider_arn: String?
+      attr_accessor federation_protocol: String?
+      attr_accessor display_data: Types::DisplayData?
+      attr_accessor resource_server_config: Types::ResourceServerConfig?
+    end
+
+    class DescribeApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class DescribeApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?application_provider_arn: String,
+        ?name: String,
+        ?application_account: String,
+        ?instance_arn: String,
+        ?status: String,
+        ?portal_options: Types::PortalOptions,
+        ?description: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor application_provider_arn: String?
+      attr_accessor name: String?
+      attr_accessor application_account: String?
+      attr_accessor instance_arn: String?
+      attr_accessor status: String?
+      attr_accessor portal_options: Types::PortalOptions?
+      attr_accessor description: String?
+      attr_accessor created_date: Time?
+    end
+
+    class DescribeInstanceAccessControlAttributeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class DescribeInstanceAccessControlAttributeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration?
+    end
+
+    class DescribeInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class DescribeInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?identity_store_id: String,
+        ?owner_account_id: String,
+        ?name: String,
+        ?created_date: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor name: String?
+      attr_accessor created_date: Time?
+      attr_accessor status: String?
+    end
+
+    class DescribePermissionSetProvisioningStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?provision_permission_set_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor provision_permission_set_request_id: String?
+    end
+
+    class DescribePermissionSetProvisioningStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_set_provisioning_status: Types::PermissionSetProvisioningStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_set_provisioning_status: Types::PermissionSetProvisioningStatus?
+    end
+
+    class DescribePermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class DescribePermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_set: Types::PermissionSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_set: Types::PermissionSet?
+    end
+
+    class DescribeTrustedTokenIssuerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+    end
+
+    class DescribeTrustedTokenIssuerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+        ?name: String,
+        ?trusted_token_issuer_type: String,
+        ?trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+      attr_accessor name: String?
+      attr_accessor trusted_token_issuer_type: String?
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration?
+    end
+
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?customer_managed_policy_reference: Types::CustomerManagedPolicyReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference?
+    end
+
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetachManagedPolicyFromPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?managed_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor managed_policy_arn: String?
+    end
+
+    class DetachManagedPolicyFromPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisplayData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?icon_url: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor icon_url: String?
+      attr_accessor description: String?
+    end
+
+    module FederationProtocol
+      SAML: String
+      OAUTH: String
+    end
+
+    class GetApplicationAccessScopeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor scope: String?
+    end
+
+    class GetApplicationAccessScopeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?authorized_targets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor authorized_targets: Array[String]?
+    end
+
+    class GetApplicationAssignmentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class GetApplicationAssignmentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assignment_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assignment_required: bool?
+    end
+
+    class GetApplicationAuthenticationMethodRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?authentication_method_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor authentication_method_type: String?
+    end
+
+    class GetApplicationAuthenticationMethodResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_method: Types::AuthenticationMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_method: Types::AuthenticationMethod?
+    end
+
+    class GetApplicationGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?grant_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor grant_type: String?
+    end
+
+    class GetApplicationGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant: Types::Grant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant: Types::Grant?
+    end
+
+    class GetApplicationSessionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class GetApplicationSessionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_background_session_application_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_background_session_application_status: String?
+    end
+
+    class GetInlinePolicyForPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class GetInlinePolicyForPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_policy: String?
+    end
+
+    class GetPermissionsBoundaryForPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+    end
+
+    class GetPermissionsBoundaryForPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions_boundary: Types::PermissionsBoundary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions_boundary: Types::PermissionsBoundary?
+    end
+
+    class Grant
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?authorization_code: Types::AuthorizationCodeGrant,
+        ?jwt_bearer: Types::JwtBearerGrant,
+        ?refresh_token: Types::RefreshTokenGrant,
+        ?token_exchange: Types::TokenExchangeGrant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_code: Types::AuthorizationCodeGrant?
+      attr_accessor jwt_bearer: Types::JwtBearerGrant?
+      attr_accessor refresh_token: Types::RefreshTokenGrant?
+      attr_accessor token_exchange: Types::TokenExchangeGrant?
+
+      class AuthorizationCode < Grant
+      end
+      class JwtBearer < Grant
+      end
+      class RefreshToken < Grant
+      end
+      class TokenExchange < Grant
+      end
+      class Unknown < Grant
+      end
+    end
+
+    class GrantItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_type: String,
+        ?grant: Types::Grant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_type: String?
+      attr_accessor grant: Types::Grant?
+    end
+
+    module GrantType
+      AUTHORIZATION_CODE: String
+      REFRESH_TOKEN: String
+      JWT_BEARER: String
+      TOKEN_EXCHANGE: String
+    end
+
+    class IamAuthenticationMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actor_policy: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actor_policy: Smithy::Schema::document?
+    end
+
+    class InstanceAccessControlAttributeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_attributes: Array[Types::AccessControlAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_attributes: Array[Types::AccessControlAttribute]?
+    end
+
+    module InstanceAccessControlAttributeConfigurationStatus
+      ENABLED: String
+      CREATION_IN_PROGRESS: String
+      CREATION_FAILED: String
+    end
+
+    class InstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?identity_store_id: String,
+        ?owner_account_id: String,
+        ?name: String,
+        ?created_date: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor name: String?
+      attr_accessor created_date: Time?
+      attr_accessor status: String?
+    end
+
+    module InstanceStatus
+      CREATE_IN_PROGRESS: String
+      DELETE_IN_PROGRESS: String
+      ACTIVE: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JwksRetrievalOption
+      OPEN_ID_DISCOVERY: String
+    end
+
+    class JwtBearerGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorized_token_issuers: Array[Types::AuthorizedTokenIssuer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorized_token_issuers: Array[Types::AuthorizedTokenIssuer]?
+    end
+
+    class ListAccountAssignmentCreationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::OperationStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::OperationStatusFilter?
+    end
+
+    class ListAccountAssignmentCreationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignments_creation_status: Array[Types::AccountAssignmentOperationStatusMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignments_creation_status: Array[Types::AccountAssignmentOperationStatusMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountAssignmentDeletionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::OperationStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::OperationStatusFilter?
+    end
+
+    class ListAccountAssignmentDeletionStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignments_deletion_status: Array[Types::AccountAssignmentOperationStatusMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignments_deletion_status: Array[Types::AccountAssignmentOperationStatusMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountAssignmentsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ListAccountAssignmentsForPrincipalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?filter: Types::ListAccountAssignmentsFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor filter: Types::ListAccountAssignmentsFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountAssignmentsForPrincipalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignments: Array[Types::AccountAssignmentForPrincipal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignments: Array[Types::AccountAssignmentForPrincipal]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountAssignmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?account_id: String,
+        ?permission_set_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountAssignmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_assignments: Array[Types::AccountAssignment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_assignments: Array[Types::AccountAssignment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsForProvisionedPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?provisioning_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor provisioning_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsForProvisionedPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAccessScopesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAccessScopesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scopes: Array[Types::ScopeDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scopes: Array[Types::ScopeDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAssignmentsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class ListApplicationAssignmentsForPrincipalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?principal_id: String,
+        ?principal_type: String,
+        ?filter: Types::ListApplicationAssignmentsFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor principal_id: String?
+      attr_accessor principal_type: String?
+      attr_accessor filter: Types::ListApplicationAssignmentsFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationAssignmentsForPrincipalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_assignments: Array[Types::ApplicationAssignmentForPrincipal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_assignments: Array[Types::ApplicationAssignmentForPrincipal]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAssignmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAssignmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_assignments: Array[Types::ApplicationAssignment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_assignments: Array[Types::ApplicationAssignment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAuthenticationMethodsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationAuthenticationMethodsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_methods: Array[Types::AuthenticationMethodItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_methods: Array[Types::AuthenticationMethodItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationGrantsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::GrantItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::GrantItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationProvidersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationProvidersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_providers: Array[Types::ApplicationProvider],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_providers: Array[Types::ApplicationProvider]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_account: String,
+        ?application_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_account: String?
+      attr_accessor application_provider: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ListApplicationsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ListApplicationsFilter?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::Application],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::Application]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomerManagedPolicyReferencesInPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomerManagedPolicyReferencesInPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_managed_policy_references: Array[Types::CustomerManagedPolicyReference],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_managed_policy_references: Array[Types::CustomerManagedPolicyReference]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::InstanceMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::InstanceMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedPoliciesInPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedPoliciesInPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_managed_policies: Array[Types::AttachedManagedPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_managed_policies: Array[Types::AttachedManagedPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionSetProvisioningStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::OperationStatusFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::OperationStatusFilter?
+    end
+
+    class ListPermissionSetProvisioningStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_sets_provisioning_status: Array[Types::PermissionSetProvisioningStatusMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_sets_provisioning_status: Array[Types::PermissionSetProvisioningStatusMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionSetsProvisionedToAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?account_id: String,
+        ?provisioning_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor provisioning_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionSetsProvisionedToAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?permission_sets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor permission_sets: Array[String]?
+    end
+
+    class ListPermissionSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPermissionSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_sets: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_sets: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrustedTokenIssuersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrustedTokenIssuersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuers: Array[Types::TrustedTokenIssuerMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuers: Array[Types::TrustedTokenIssuerMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class OidcJwtConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer_url: String,
+        ?claim_attribute_path: String,
+        ?identity_store_attribute_path: String,
+        ?jwks_retrieval_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer_url: String?
+      attr_accessor claim_attribute_path: String?
+      attr_accessor identity_store_attribute_path: String?
+      attr_accessor jwks_retrieval_option: String?
+    end
+
+    class OidcJwtUpdateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?claim_attribute_path: String,
+        ?identity_store_attribute_path: String,
+        ?jwks_retrieval_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor claim_attribute_path: String?
+      attr_accessor identity_store_attribute_path: String?
+      attr_accessor jwks_retrieval_option: String?
+    end
+
+    class OperationStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class PermissionSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?permission_set_arn: String,
+        ?description: String,
+        ?created_date: Time,
+        ?session_duration: String,
+        ?relay_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor description: String?
+      attr_accessor created_date: Time?
+      attr_accessor session_duration: String?
+      attr_accessor relay_state: String?
+    end
+
+    class PermissionSetProvisioningStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?request_id: String,
+        ?account_id: String,
+        ?permission_set_arn: String,
+        ?failure_reason: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor request_id: String?
+      attr_accessor account_id: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor created_date: Time?
+    end
+
+    class PermissionSetProvisioningStatusMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?request_id: String,
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor request_id: String?
+      attr_accessor created_date: Time?
+    end
+
+    class PermissionsBoundary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_managed_policy_reference: Types::CustomerManagedPolicyReference,
+        ?managed_policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference?
+      attr_accessor managed_policy_arn: String?
+    end
+
+    class PortalOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sign_in_options: Types::SignInOptions,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sign_in_options: Types::SignInOptions?
+      attr_accessor visibility: String?
+    end
+
+    module PrincipalType
+      USER: String
+      GROUP: String
+    end
+
+    class ProvisionPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?target_id: String,
+        ?target_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+    end
+
+    class ProvisionPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_set_provisioning_status: Types::PermissionSetProvisioningStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_set_provisioning_status: Types::PermissionSetProvisioningStatus?
+    end
+
+    module ProvisionTargetType
+      AWS_ACCOUNT: String
+      ALL_PROVISIONED_ACCOUNTS: String
+    end
+
+    module ProvisioningStatus
+      LATEST_PERMISSION_SET_PROVISIONED: String
+      LATEST_PERMISSION_SET_NOT_PROVISIONED: String
+    end
+
+    class PutApplicationAccessScopeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?authorized_targets: Array[String],
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor authorized_targets: Array[String]?
+      attr_accessor application_arn: String?
+    end
+
+    class PutApplicationAssignmentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?assignment_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor assignment_required: bool?
+    end
+
+    class PutApplicationAssignmentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutApplicationAuthenticationMethodRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?authentication_method_type: String,
+        ?authentication_method: Types::AuthenticationMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor authentication_method_type: String?
+      attr_accessor authentication_method: Types::AuthenticationMethod?
+    end
+
+    class PutApplicationGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?grant_type: String,
+        ?grant: Types::Grant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor grant_type: String?
+      attr_accessor grant: Types::Grant?
+    end
+
+    class PutApplicationSessionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?user_background_session_application_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor user_background_session_application_status: String?
+    end
+
+    class PutApplicationSessionConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutInlinePolicyToPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?inline_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor inline_policy: String?
+    end
+
+    class PutInlinePolicyToPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutPermissionsBoundaryToPermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?permissions_boundary: Types::PermissionsBoundary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor permissions_boundary: Types::PermissionsBoundary?
+    end
+
+    class PutPermissionsBoundaryToPermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RefreshTokenGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceServerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scopes: Hash[String, Types::ResourceServerScopeDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scopes: Hash[String, Types::ResourceServerScopeDetails]?
+    end
+
+    class ResourceServerScopeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_description: String,
+        ?detailed_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_description: String?
+      attr_accessor detailed_title: String?
+    end
+
+    class ScopeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?authorized_targets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor authorized_targets: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SignInOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origin: String,
+        ?application_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origin: String?
+      attr_accessor application_url: String?
+    end
+
+    module SignInOrigin
+      IDENTITY_CENTER: String
+      APPLICATION: String
+    end
+
+    module StatusValues
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TargetType
+      AWS_ACCOUNT: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TokenExchangeGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TrustedTokenIssuerConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?oidc_jwt_configuration: Types::OidcJwtConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oidc_jwt_configuration: Types::OidcJwtConfiguration?
+
+      class OidcJwtConfiguration < TrustedTokenIssuerConfiguration
+      end
+      class Unknown < TrustedTokenIssuerConfiguration
+      end
+    end
+
+    class TrustedTokenIssuerMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+        ?name: String,
+        ?trusted_token_issuer_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+      attr_accessor name: String?
+      attr_accessor trusted_token_issuer_type: String?
+    end
+
+    module TrustedTokenIssuerType
+      OIDC_JWT: String
+    end
+
+    class TrustedTokenIssuerUpdateConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?oidc_jwt_configuration: Types::OidcJwtUpdateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oidc_jwt_configuration: Types::OidcJwtUpdateConfiguration?
+
+      class OidcJwtConfiguration < TrustedTokenIssuerUpdateConfiguration
+      end
+      class Unknown < TrustedTokenIssuerUpdateConfiguration
+      end
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationPortalOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sign_in_options: Types::SignInOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sign_in_options: Types::SignInOptions?
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?portal_options: Types::UpdateApplicationPortalOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor portal_options: Types::UpdateApplicationPortalOptions?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateInstanceAccessControlAttributeConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration?
+    end
+
+    class UpdateInstanceAccessControlAttributeConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor instance_arn: String?
+    end
+
+    class UpdateInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePermissionSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?permission_set_arn: String,
+        ?description: String,
+        ?session_duration: String,
+        ?relay_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor permission_set_arn: String?
+      attr_accessor description: String?
+      attr_accessor session_duration: String?
+      attr_accessor relay_state: String?
+    end
+
+    class UpdatePermissionSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTrustedTokenIssuerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_token_issuer_arn: String,
+        ?name: String,
+        ?trusted_token_issuer_configuration: Types::TrustedTokenIssuerUpdateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_token_issuer_arn: String?
+      attr_accessor name: String?
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerUpdateConfiguration?
+    end
+
+    class UpdateTrustedTokenIssuerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UserBackgroundSessionApplicationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

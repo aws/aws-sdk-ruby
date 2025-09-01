@@ -1,0 +1,703 @@
+module Aws::MarketplaceAgreement
+  module Types
+
+    class AcceptedTerm
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?legal_term: Types::LegalTerm,
+        ?support_term: Types::SupportTerm,
+        ?renewal_term: Types::RenewalTerm,
+        ?usage_based_pricing_term: Types::UsageBasedPricingTerm,
+        ?configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm,
+        ?byol_pricing_term: Types::ByolPricingTerm,
+        ?recurring_payment_term: Types::RecurringPaymentTerm,
+        ?validity_term: Types::ValidityTerm,
+        ?payment_schedule_term: Types::PaymentScheduleTerm,
+        ?free_trial_pricing_term: Types::FreeTrialPricingTerm,
+        ?fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_term: Types::LegalTerm?
+      attr_accessor support_term: Types::SupportTerm?
+      attr_accessor renewal_term: Types::RenewalTerm?
+      attr_accessor usage_based_pricing_term: Types::UsageBasedPricingTerm?
+      attr_accessor configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm?
+      attr_accessor byol_pricing_term: Types::ByolPricingTerm?
+      attr_accessor recurring_payment_term: Types::RecurringPaymentTerm?
+      attr_accessor validity_term: Types::ValidityTerm?
+      attr_accessor payment_schedule_term: Types::PaymentScheduleTerm?
+      attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm?
+      attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm?
+
+      class LegalTerm < AcceptedTerm
+      end
+      class SupportTerm < AcceptedTerm
+      end
+      class RenewalTerm < AcceptedTerm
+      end
+      class UsageBasedPricingTerm < AcceptedTerm
+      end
+      class ConfigurableUpfrontPricingTerm < AcceptedTerm
+      end
+      class ByolPricingTerm < AcceptedTerm
+      end
+      class RecurringPaymentTerm < AcceptedTerm
+      end
+      class ValidityTerm < AcceptedTerm
+      end
+      class PaymentScheduleTerm < AcceptedTerm
+      end
+      class FreeTrialPricingTerm < AcceptedTerm
+      end
+      class FixedUpfrontPricingTerm < AcceptedTerm
+      end
+      class Unknown < AcceptedTerm
+      end
+    end
+
+    class Acceptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+    end
+
+    module AgreementStatus
+      ACTIVE: String
+      ARCHIVED: String
+      CANCELLED: String
+      EXPIRED: String
+      RENEWED: String
+      REPLACED: String
+      ROLLED_BACK: String
+      SUPERSEDED: String
+      TERMINATED: String
+    end
+
+    class AgreementViewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?acceptance_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?agreement_type: String,
+        ?acceptor: Types::Acceptor,
+        ?proposer: Types::Proposer,
+        ?proposal_summary: Types::ProposalSummary,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor acceptance_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor agreement_type: String?
+      attr_accessor acceptor: Types::Acceptor?
+      attr_accessor proposer: Types::Proposer?
+      attr_accessor proposal_summary: Types::ProposalSummary?
+      attr_accessor status: String?
+    end
+
+    class ByolPricingTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class ConfigurableUpfrontPricingTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?currency_code: String,
+        ?rate_cards: Array[Types::ConfigurableUpfrontRateCardItem],
+        ?configuration: Types::ConfigurableUpfrontPricingTermConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor currency_code: String?
+      attr_accessor rate_cards: Array[Types::ConfigurableUpfrontRateCardItem]?
+      attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration?
+    end
+
+    class ConfigurableUpfrontPricingTermConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selector_value: String,
+        ?dimensions: Array[Types::Dimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selector_value: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+    end
+
+    class ConfigurableUpfrontRateCardItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selector: Types::Selector,
+        ?constraints: Types::Constraints,
+        ?rate_card: Array[Types::RateCardItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selector: Types::Selector?
+      attr_accessor constraints: Types::Constraints?
+      attr_accessor rate_card: Array[Types::RateCardItem]?
+    end
+
+    class Constraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multiple_dimension_selection: String,
+        ?quantity_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multiple_dimension_selection: String?
+      attr_accessor quantity_configuration: String?
+    end
+
+    class DescribeAgreementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
+    class DescribeAgreementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?acceptor: Types::Acceptor,
+        ?proposer: Types::Proposer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?acceptance_time: Time,
+        ?agreement_type: String,
+        ?estimated_charges: Types::EstimatedCharges,
+        ?proposal_summary: Types::ProposalSummary,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor acceptor: Types::Acceptor?
+      attr_accessor proposer: Types::Proposer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor acceptance_time: Time?
+      attr_accessor agreement_type: String?
+      attr_accessor estimated_charges: Types::EstimatedCharges?
+      attr_accessor proposal_summary: Types::ProposalSummary?
+      attr_accessor status: String?
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_key: String,
+        ?dimension_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_key: String?
+      attr_accessor dimension_value: Integer?
+    end
+
+    class DocumentItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?url: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor url: String?
+      attr_accessor version: String?
+    end
+
+    class EstimatedCharges
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?agreement_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor agreement_value: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class FixedUpfrontPricingTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?currency_code: String,
+        ?duration: String,
+        ?price: String,
+        ?grants: Array[Types::GrantItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor currency_code: String?
+      attr_accessor duration: String?
+      attr_accessor price: String?
+      attr_accessor grants: Array[Types::GrantItem]?
+    end
+
+    class FreeTrialPricingTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?duration: String,
+        ?grants: Array[Types::GrantItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor duration: String?
+      attr_accessor grants: Array[Types::GrantItem]?
+    end
+
+    class GetAgreementTermsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAgreementTermsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accepted_terms: Array[Types::AcceptedTerm],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accepted_terms: Array[Types::AcceptedTerm]?
+      attr_accessor next_token: String?
+    end
+
+    class GrantItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_key: String,
+        ?max_quantity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_key: String?
+      attr_accessor max_quantity: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+    end
+
+    class LegalTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?documents: Array[Types::DocumentItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor documents: Array[Types::DocumentItem]?
+    end
+
+    class PaymentScheduleTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?currency_code: String,
+        ?schedule: Array[Types::ScheduleItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor currency_code: String?
+      attr_accessor schedule: Array[Types::ScheduleItem]?
+    end
+
+    class ProposalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::Resource],
+        ?offer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor offer_id: String?
+    end
+
+    class Proposer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class RateCardItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_key: String,
+        ?price: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_key: String?
+      attr_accessor price: String?
+    end
+
+    class RecurringPaymentTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?currency_code: String,
+        ?billing_period: String,
+        ?price: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor currency_code: String?
+      attr_accessor billing_period: String?
+      attr_accessor price: String?
+    end
+
+    class RenewalTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?configuration: Types::RenewalTermConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor configuration: Types::RenewalTermConfiguration?
+    end
+
+    class RenewalTermConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_auto_renew: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_auto_renew: bool?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      AGREEMENT: String
+    end
+
+    class ScheduleItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_date: Time,
+        ?charge_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_date: Time?
+      attr_accessor charge_amount: String?
+    end
+
+    class SearchAgreementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?filters: Array[Types::Filter],
+        ?sort: Types::Sort,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor sort: Types::Sort?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchAgreementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_view_summaries: Array[Types::AgreementViewSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_view_summaries: Array[Types::AgreementViewSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class Selector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class Sort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class SupportTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?refund_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor refund_policy: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+    end
+
+    class UsageBasedPricingTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?currency_code: String,
+        ?rate_cards: Array[Types::UsageBasedRateCardItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor currency_code: String?
+      attr_accessor rate_cards: Array[Types::UsageBasedRateCardItem]?
+    end
+
+    class UsageBasedRateCardItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rate_card: Array[Types::RateCardItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rate_card: Array[Types::RateCardItem]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      INVALID_AGREEMENT_ID: String
+      MISSING_AGREEMENT_ID: String
+      INVALID_CATALOG: String
+      INVALID_FILTER_NAME: String
+      INVALID_FILTER_VALUES: String
+      INVALID_SORT_BY: String
+      INVALID_SORT_ORDER: String
+      INVALID_NEXT_TOKEN: String
+      INVALID_MAX_RESULTS: String
+      UNSUPPORTED_FILTERS: String
+      OTHER: String
+    end
+
+    class ValidityTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?agreement_duration: String,
+        ?agreement_start_date: Time,
+        ?agreement_end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor agreement_duration: String?
+      attr_accessor agreement_start_date: Time?
+      attr_accessor agreement_end_date: Time?
+    end
+  end
+end

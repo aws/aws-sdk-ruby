@@ -1,0 +1,1454 @@
+module Aws::Firehose
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Firehose::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::CreateDeliveryStreamOutput]
+      def delivery_stream_arn: () -> String?
+    end
+    def create_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?delivery_stream_type: String,
+      ?direct_put_source_configuration: {
+        throughput_hint_in_m_bs: Integer
+      },
+      ?kinesis_stream_source_configuration: {
+        kinesis_stream_arn: String,
+        role_arn: String
+      },
+      ?delivery_stream_encryption_configuration_input: {
+        key_arn: String,
+        key_type: String
+      },
+      ?s3_destination_configuration: {
+        role_arn: String,
+        bucket_arn: String,
+        prefix: String,
+        error_output_prefix: String,
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        compression_format: String,
+        encryption_configuration: {
+          no_encryption_config: String,
+          kms_encryption_config: {
+            awskms_key_arn: String
+          }
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        }
+      },
+      ?extended_s3_destination_configuration: {
+        role_arn: String,
+        bucket_arn: String,
+        prefix: String,
+        error_output_prefix: String,
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        compression_format: String,
+        encryption_configuration: {
+          no_encryption_config: String,
+          kms_encryption_config: {
+            awskms_key_arn: String
+          }
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        s3_backup_configuration: {
+          role_arn: untyped,
+          bucket_arn: untyped,
+          prefix: untyped,
+          error_output_prefix: untyped,
+          buffering_hints: untyped,
+          compression_format: untyped,
+          encryption_configuration: untyped,
+          cloud_watch_logging_options: untyped
+        },
+        data_format_conversion_configuration: {
+          schema_configuration: {
+            role_arn: String,
+            catalog_id: untyped,
+            database_name: untyped,
+            table_name: untyped,
+            region: untyped,
+            version_id: untyped
+          },
+          input_format_configuration: {
+            deserializer: {
+              open_x_json_ser_de: {
+                convert_dots_in_json_keys_to_underscores: untyped,
+                case_insensitive: untyped,
+                column_to_json_key_mappings: Hash[String, String]
+              },
+              hive_json_ser_de: {
+                timestamp_formats: Array[String]
+              }
+            }
+          },
+          output_format_configuration: {
+            serializer: {
+              parquet_ser_de: {
+                block_size_bytes: Integer,
+                page_size_bytes: Integer,
+                compression: String,
+                enable_dictionary_compression: untyped,
+                max_padding_bytes: Integer,
+                writer_version: String
+              },
+              orc_ser_de: {
+                stripe_size_bytes: Integer,
+                block_size_bytes: untyped,
+                row_index_stride: Integer,
+                enable_padding: untyped,
+                padding_tolerance: Float,
+                compression: String,
+                bloom_filter_columns: Array[String],
+                bloom_filter_false_positive_probability: untyped,
+                dictionary_key_threshold: untyped,
+                format_version: String
+              }
+            }
+          },
+          enabled: untyped
+        },
+        dynamic_partitioning_configuration: {
+          retry_options: {
+            duration_in_seconds: Integer
+          },
+          enabled: untyped
+        },
+        file_extension: String,
+        custom_time_zone: String
+      },
+      ?redshift_destination_configuration: {
+        role_arn: String,
+        cluster_jdbcurl: String,
+        copy_command: {
+          data_table_name: String,
+          data_table_columns: String,
+          copy_options: String
+        },
+        username: String,
+        password: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        s3_backup_configuration: untyped,
+        cloud_watch_logging_options: untyped,
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?elasticsearch_destination_configuration: {
+        role_arn: String,
+        domain_arn: String,
+        cluster_endpoint: String,
+        index_name: String,
+        type_name: String,
+        index_rotation_period: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        vpc_configuration: {
+          subnet_ids: Array[String],
+          role_arn: untyped,
+          security_group_ids: Array[String]
+        },
+        document_id_options: {
+          default_document_id_format: String
+        }
+      },
+      ?amazonopensearchservice_destination_configuration: {
+        role_arn: String,
+        domain_arn: String,
+        cluster_endpoint: String,
+        index_name: String,
+        type_name: String,
+        index_rotation_period: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        vpc_configuration: {
+          subnet_ids: Array[String],
+          role_arn: untyped,
+          security_group_ids: Array[String]
+        },
+        document_id_options: {
+          default_document_id_format: String
+        }
+      },
+      ?splunk_destination_configuration: {
+        hec_endpoint: String,
+        hec_endpoint_type: String,
+        hec_token: String,
+        hec_acknowledgment_timeout_in_seconds: Integer,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: String,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?http_endpoint_destination_configuration: {
+        endpoint_configuration: {
+          url: String,
+          name: String,
+          access_key: String
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        request_configuration: {
+          content_encoding: String,
+          common_attributes: Array[
+            {
+              attribute_name: String,
+              attribute_value: String
+            }
+          ]
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        role_arn: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?amazon_open_search_serverless_destination_configuration: {
+        role_arn: String,
+        collection_endpoint: String,
+        index_name: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        vpc_configuration: {
+          subnet_ids: Array[String],
+          role_arn: untyped,
+          security_group_ids: Array[String]
+        }
+      },
+      ?msk_source_configuration: {
+        msk_cluster_arn: String,
+        topic_name: String,
+        authentication_configuration: {
+          role_arn: String,
+          connectivity: String
+        },
+        read_from_timestamp: Time
+      },
+      ?snowflake_destination_configuration: {
+        account_url: String,
+        private_key: String,
+        key_passphrase: String,
+        user: String,
+        database: String,
+        schema: String,
+        table: String,
+        snowflake_role_configuration: {
+          enabled: bool,
+          snowflake_role: String
+        },
+        data_loading_option: String,
+        meta_data_column_name: String,
+        content_column_name: String,
+        snowflake_vpc_configuration: {
+          private_link_vpce_id: String
+        },
+        cloud_watch_logging_options: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        role_arn: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        }
+      },
+      ?iceberg_destination_configuration: {
+        destination_table_configuration_list: Array[
+          {
+            destination_table_name: String,
+            destination_database_name: untyped,
+            unique_keys: Array[String],
+            partition_spec: {
+              identity: Array[
+                {
+                  source_name: String
+                }
+              ]
+            },
+            s3_error_output_prefix: String
+          }
+        ],
+        schema_evolution_configuration: {
+          enabled: bool
+        },
+        table_creation_configuration: {
+          enabled: untyped
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        cloud_watch_logging_options: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        role_arn: String,
+        append_only: untyped,
+        catalog_configuration: {
+          catalog_arn: String,
+          warehouse_location: String
+        },
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: untyped,
+          buffering_hints: untyped,
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        }
+      },
+      ?database_source_configuration: {
+        type: String,
+        endpoint: String,
+        port: Integer,
+        ssl_mode: String,
+        databases: {
+          include: Array[String],
+          exclude: untyped
+        },
+        tables: {
+          include: Array[String],
+          exclude: untyped
+        },
+        columns: {
+          include: Array[String],
+          exclude: untyped
+        },
+        surrogate_keys: Array[String],
+        snapshot_watermark_table: String,
+        database_source_authentication_configuration: {
+          secrets_manager_configuration: {
+            secret_arn: String,
+            role_arn: String,
+            enabled: bool
+          }
+        },
+        database_source_vpc_configuration: {
+          vpc_endpoint_service_name: String
+        }
+      }
+    ) -> _CreateDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeliveryStreamResponse
+
+    interface _DeleteDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::DeleteDeliveryStreamOutput]
+    end
+    def delete_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?allow_force_delete: bool
+    ) -> _DeleteDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeliveryStreamResponse
+
+    interface _DescribeDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::DescribeDeliveryStreamOutput]
+      def delivery_stream_description: () -> Types::DeliveryStreamDescription?
+    end
+    def describe_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?limit: Integer,
+      ?exclusive_start_destination_id: String
+    ) -> _DescribeDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDeliveryStreamResponse
+
+    interface _ListDeliveryStreamsResponse
+      include Smithy::Client::_Response[Types::ListDeliveryStreamsOutput]
+      def delivery_stream_names: () -> Array[String]?
+      def has_more_delivery_streams: () -> bool?
+    end
+    def list_delivery_streams: (
+      ?limit: Integer,
+      ?delivery_stream_type: String,
+      ?exclusive_start_delivery_stream_name: String
+    ) -> _ListDeliveryStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeliveryStreamsResponse
+
+    interface _ListTagsForDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::ListTagsForDeliveryStreamOutput]
+      def tags: () -> Array[Types::Tag]?
+      def has_more_tags: () -> bool?
+    end
+    def list_tags_for_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?exclusive_start_tag_key: String,
+      ?limit: Integer
+    ) -> _ListTagsForDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForDeliveryStreamResponse
+
+    interface _PutRecordResponse
+      include Smithy::Client::_Response[Types::PutRecordOutput]
+      def record_id: () -> String?
+      def encrypted: () -> bool?
+    end
+    def put_record: (
+      ?delivery_stream_name: String,
+      ?record: {
+        data: String
+      }
+    ) -> _PutRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordResponse
+
+    interface _PutRecordBatchResponse
+      include Smithy::Client::_Response[Types::PutRecordBatchOutput]
+      def failed_put_count: () -> Integer?
+      def encrypted: () -> bool?
+      def request_responses: () -> Array[Types::PutRecordBatchResponseEntry]?
+    end
+    def put_record_batch: (
+      ?delivery_stream_name: String,
+      ?records: Array[
+        {
+          data: String
+        }
+      ]
+    ) -> _PutRecordBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordBatchResponse
+
+    interface _StartDeliveryStreamEncryptionResponse
+      include Smithy::Client::_Response[Types::StartDeliveryStreamEncryptionOutput]
+    end
+    def start_delivery_stream_encryption: (
+      ?delivery_stream_name: String,
+      ?delivery_stream_encryption_configuration_input: {
+        key_arn: String,
+        key_type: String
+      }
+    ) -> _StartDeliveryStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeliveryStreamEncryptionResponse
+
+    interface _StopDeliveryStreamEncryptionResponse
+      include Smithy::Client::_Response[Types::StopDeliveryStreamEncryptionOutput]
+    end
+    def stop_delivery_stream_encryption: (
+      ?delivery_stream_name: String
+    ) -> _StopDeliveryStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDeliveryStreamEncryptionResponse
+
+    interface _TagDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::TagDeliveryStreamOutput]
+    end
+    def tag_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagDeliveryStreamResponse
+
+    interface _UntagDeliveryStreamResponse
+      include Smithy::Client::_Response[Types::UntagDeliveryStreamOutput]
+    end
+    def untag_delivery_stream: (
+      ?delivery_stream_name: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagDeliveryStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagDeliveryStreamResponse
+
+    interface _UpdateDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateDestinationOutput]
+    end
+    def update_destination: (
+      ?delivery_stream_name: String,
+      ?current_delivery_stream_version_id: String,
+      ?destination_id: String,
+      ?s3_destination_update: {
+        role_arn: String,
+        bucket_arn: String,
+        prefix: String,
+        error_output_prefix: String,
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        compression_format: String,
+        encryption_configuration: {
+          no_encryption_config: String,
+          kms_encryption_config: {
+            awskms_key_arn: String
+          }
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        }
+      },
+      ?extended_s3_destination_update: {
+        role_arn: String,
+        bucket_arn: String,
+        prefix: String,
+        error_output_prefix: String,
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        compression_format: String,
+        encryption_configuration: {
+          no_encryption_config: String,
+          kms_encryption_config: {
+            awskms_key_arn: String
+          }
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        s3_backup_update: {
+          role_arn: untyped,
+          bucket_arn: untyped,
+          prefix: untyped,
+          error_output_prefix: untyped,
+          buffering_hints: untyped,
+          compression_format: untyped,
+          encryption_configuration: untyped,
+          cloud_watch_logging_options: untyped
+        },
+        data_format_conversion_configuration: {
+          schema_configuration: {
+            role_arn: String,
+            catalog_id: untyped,
+            database_name: untyped,
+            table_name: untyped,
+            region: untyped,
+            version_id: untyped
+          },
+          input_format_configuration: {
+            deserializer: {
+              open_x_json_ser_de: {
+                convert_dots_in_json_keys_to_underscores: untyped,
+                case_insensitive: untyped,
+                column_to_json_key_mappings: Hash[String, String]
+              },
+              hive_json_ser_de: {
+                timestamp_formats: Array[String]
+              }
+            }
+          },
+          output_format_configuration: {
+            serializer: {
+              parquet_ser_de: {
+                block_size_bytes: Integer,
+                page_size_bytes: Integer,
+                compression: String,
+                enable_dictionary_compression: untyped,
+                max_padding_bytes: Integer,
+                writer_version: String
+              },
+              orc_ser_de: {
+                stripe_size_bytes: Integer,
+                block_size_bytes: untyped,
+                row_index_stride: Integer,
+                enable_padding: untyped,
+                padding_tolerance: Float,
+                compression: String,
+                bloom_filter_columns: Array[String],
+                bloom_filter_false_positive_probability: untyped,
+                dictionary_key_threshold: untyped,
+                format_version: String
+              }
+            }
+          },
+          enabled: untyped
+        },
+        dynamic_partitioning_configuration: {
+          retry_options: {
+            duration_in_seconds: Integer
+          },
+          enabled: untyped
+        },
+        file_extension: String,
+        custom_time_zone: String
+      },
+      ?redshift_destination_update: {
+        role_arn: String,
+        cluster_jdbcurl: String,
+        copy_command: {
+          data_table_name: String,
+          data_table_columns: String,
+          copy_options: String
+        },
+        username: String,
+        password: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        s3_backup_update: untyped,
+        cloud_watch_logging_options: untyped,
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?elasticsearch_destination_update: {
+        role_arn: String,
+        domain_arn: String,
+        cluster_endpoint: String,
+        index_name: String,
+        type_name: String,
+        index_rotation_period: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        document_id_options: {
+          default_document_id_format: String
+        }
+      },
+      ?amazonopensearchservice_destination_update: {
+        role_arn: String,
+        domain_arn: String,
+        cluster_endpoint: String,
+        index_name: String,
+        type_name: String,
+        index_rotation_period: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        document_id_options: {
+          default_document_id_format: String
+        }
+      },
+      ?splunk_destination_update: {
+        hec_endpoint: String,
+        hec_endpoint_type: String,
+        hec_token: String,
+        hec_acknowledgment_timeout_in_seconds: Integer,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_update: {
+          role_arn: String,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?http_endpoint_destination_update: {
+        endpoint_configuration: {
+          url: String,
+          name: String,
+          access_key: String
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        cloud_watch_logging_options: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        request_configuration: {
+          content_encoding: String,
+          common_attributes: Array[
+            {
+              attribute_name: String,
+              attribute_value: String
+            }
+          ]
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        role_arn: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        }
+      },
+      ?amazon_open_search_serverless_destination_update: {
+        role_arn: String,
+        collection_endpoint: String,
+        index_name: String,
+        buffering_hints: {
+          interval_in_seconds: Integer,
+          size_in_m_bs: Integer
+        },
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: {
+            enabled: bool,
+            log_group_name: String,
+            log_stream_name: String
+          }
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        cloud_watch_logging_options: untyped
+      },
+      ?snowflake_destination_update: {
+        account_url: String,
+        private_key: String,
+        key_passphrase: String,
+        user: String,
+        database: String,
+        schema: String,
+        table: String,
+        snowflake_role_configuration: {
+          enabled: bool,
+          snowflake_role: String
+        },
+        data_loading_option: String,
+        meta_data_column_name: String,
+        content_column_name: String,
+        cloud_watch_logging_options: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        role_arn: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        s3_backup_mode: String,
+        s3_update: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: String,
+          buffering_hints: {
+            size_in_m_bs: Integer,
+            interval_in_seconds: Integer
+          },
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        },
+        secrets_manager_configuration: {
+          secret_arn: String,
+          role_arn: untyped,
+          enabled: untyped
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        }
+      },
+      ?iceberg_destination_update: {
+        destination_table_configuration_list: Array[
+          {
+            destination_table_name: String,
+            destination_database_name: untyped,
+            unique_keys: Array[String],
+            partition_spec: {
+              identity: Array[
+                {
+                  source_name: String
+                }
+              ]
+            },
+            s3_error_output_prefix: String
+          }
+        ],
+        schema_evolution_configuration: {
+          enabled: bool
+        },
+        table_creation_configuration: {
+          enabled: untyped
+        },
+        buffering_hints: {
+          size_in_m_bs: Integer,
+          interval_in_seconds: Integer
+        },
+        cloud_watch_logging_options: {
+          enabled: untyped,
+          log_group_name: String,
+          log_stream_name: String
+        },
+        processing_configuration: {
+          enabled: untyped,
+          processors: Array[
+            {
+              type: String,
+              parameters: Array[
+                {
+                  parameter_name: String,
+                  parameter_value: String
+                }
+              ]
+            }
+          ]
+        },
+        s3_backup_mode: String,
+        retry_options: {
+          duration_in_seconds: Integer
+        },
+        role_arn: String,
+        append_only: untyped,
+        catalog_configuration: {
+          catalog_arn: String,
+          warehouse_location: String
+        },
+        s3_configuration: {
+          role_arn: untyped,
+          bucket_arn: String,
+          prefix: String,
+          error_output_prefix: untyped,
+          buffering_hints: untyped,
+          compression_format: String,
+          encryption_configuration: {
+            no_encryption_config: String,
+            kms_encryption_config: {
+              awskms_key_arn: String
+            }
+          },
+          cloud_watch_logging_options: untyped
+        }
+      }
+    ) -> _UpdateDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDestinationResponse
+  end
+end

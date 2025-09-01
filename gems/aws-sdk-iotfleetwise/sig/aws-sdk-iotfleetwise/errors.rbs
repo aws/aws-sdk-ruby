@@ -1,0 +1,51 @@
+module Aws::IoTFleetWise
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource: () -> String?
+      def resource_type: () -> String?
+    end
+    class DecoderManifestValidationException < Smithy::Client::ServiceError
+      def invalid_signals: () -> Array[Types::InvalidSignalDecoder]?
+      def invalid_network_interfaces: () -> Array[Types::InvalidNetworkInterface]?
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retry_after_seconds: () -> Integer?
+    end
+    class InvalidNodeException < Smithy::Client::ServiceError
+      def invalid_nodes: () -> Array[Types::Node]?
+      def reason: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSignalsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def invalid_signals: () -> Array[Types::InvalidSignal]?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+      def retry_after_seconds: () -> Integer?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def field_list: () -> Array[Types::ValidationExceptionField]?
+    end
+  end
+end

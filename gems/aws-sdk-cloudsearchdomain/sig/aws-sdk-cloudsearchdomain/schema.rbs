@@ -1,0 +1,59 @@
+module Aws::CloudSearchDomain
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Adds: IntegerShape
+    Blob: BlobShape
+    Bucket: StructureShape
+    BucketInfo: StructureShape
+    BucketList: ListShape
+    ContentType: EnumShape
+    Cursor: StringShape
+    Deletes: IntegerShape
+    DocumentServiceException: StructureShape
+    DocumentServiceWarning: StructureShape
+    DocumentServiceWarnings: ListShape
+    Double: FloatShape
+    Expr: StringShape
+    Exprs: MapShape
+    Facet: StringShape
+    Facets: MapShape
+    FieldStats: StructureShape
+    FieldValue: ListShape
+    Fields: MapShape
+    FilterQuery: StringShape
+    Highlight: StringShape
+    Highlights: MapShape
+    Hit: StructureShape
+    HitList: ListShape
+    Hits: StructureShape
+    Long: IntegerShape
+    Partial: BooleanShape
+    Query: StringShape
+    QueryOptions: StringShape
+    QueryParser: EnumShape
+    Return: StringShape
+    SearchException: StructureShape
+    SearchRequest: StructureShape
+    SearchResponse: StructureShape
+    SearchStatus: StructureShape
+    Size: IntegerShape
+    Sort: StringShape
+    Start: IntegerShape
+    Stat: StringShape
+    Stats: MapShape
+    String: StringShape
+    SuggestModel: StructureShape
+    SuggestRequest: StructureShape
+    SuggestResponse: StructureShape
+    SuggestStatus: StructureShape
+    Suggester: StringShape
+    SuggestionMatch: StructureShape
+    Suggestions: ListShape
+    SuggestionsSize: IntegerShape
+    UploadDocumentsRequest: StructureShape
+    UploadDocumentsResponse: StructureShape
+
+    AmazonCloudSearch2013: ServiceShape
+  end
+end

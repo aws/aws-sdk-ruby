@@ -1,0 +1,67 @@
+module Aws::CloudControl
+  module Errors
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientTokenConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GeneralServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HandlerFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HandlerInternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidCredentialsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NetworkFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotStabilizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotUpdatableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PrivateTypeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestTokenNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceInternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedActionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

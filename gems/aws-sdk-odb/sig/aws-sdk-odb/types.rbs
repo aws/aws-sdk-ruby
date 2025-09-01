@@ -1,0 +1,2716 @@
+module Aws::Odb
+  module Types
+
+    class AcceptMarketplaceRegistrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_registration_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_registration_token: String?
+    end
+
+    class AcceptMarketplaceRegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module Access
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AutonomousVirtualMachineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?autonomous_virtual_machine_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?vm_name: String,
+        ?db_server_id: String,
+        ?db_server_display_name: String,
+        ?cpu_core_count: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?client_ip_address: String,
+        ?cloud_autonomous_vm_cluster_id: String,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor autonomous_virtual_machine_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor vm_name: String?
+      attr_accessor db_server_id: String?
+      attr_accessor db_server_display_name: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor client_ip_address: String?
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+    end
+
+    class CloudAutonomousVmCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster_id: String,
+        ?cloud_autonomous_vm_cluster_arn: String,
+        ?odb_network_id: String,
+        ?oci_resource_anchor_name: String,
+        ?percent_progress: Float,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_id: String,
+        ?autonomous_data_storage_percentage: Float,
+        ?autonomous_data_storage_size_in_t_bs: Float,
+        ?available_autonomous_data_storage_size_in_t_bs: Float,
+        ?available_container_databases: Integer,
+        ?available_cpus: Float,
+        ?compute_model: String,
+        ?cpu_core_count: Integer,
+        ?cpu_core_count_per_node: Integer,
+        ?cpu_percentage: Float,
+        ?data_storage_size_in_g_bs: Float,
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_servers: Array[String],
+        ?description: String,
+        ?domain: String,
+        ?exadata_storage_in_t_bs_lowest_scaled_value: Float,
+        ?hostname: String,
+        ?ocid: String,
+        ?oci_url: String,
+        ?is_mtls_enabled_vm_cluster: bool,
+        ?license_model: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?max_acds_lowest_scaled_value: Integer,
+        ?memory_per_oracle_compute_unit_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?node_count: Integer,
+        ?non_provisionable_autonomous_container_databases: Integer,
+        ?provisionable_autonomous_container_databases: Integer,
+        ?provisioned_autonomous_container_databases: Integer,
+        ?provisioned_cpus: Float,
+        ?reclaimable_cpus: Float,
+        ?reserved_cpus: Float,
+        ?scan_listener_port_non_tls: Integer,
+        ?scan_listener_port_tls: Integer,
+        ?shape: String,
+        ?created_at: Time,
+        ?time_database_ssl_certificate_expires: Time,
+        ?time_ords_certificate_expires: Time,
+        ?time_zone: String,
+        ?total_container_databases: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+      attr_accessor cloud_autonomous_vm_cluster_arn: String?
+      attr_accessor odb_network_id: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor percent_progress: Float?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor autonomous_data_storage_percentage: Float?
+      attr_accessor autonomous_data_storage_size_in_t_bs: Float?
+      attr_accessor available_autonomous_data_storage_size_in_t_bs: Float?
+      attr_accessor available_container_databases: Integer?
+      attr_accessor available_cpus: Float?
+      attr_accessor compute_model: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor cpu_core_count_per_node: Integer?
+      attr_accessor cpu_percentage: Float?
+      attr_accessor data_storage_size_in_g_bs: Float?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor exadata_storage_in_t_bs_lowest_scaled_value: Float?
+      attr_accessor hostname: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_url: String?
+      attr_accessor is_mtls_enabled_vm_cluster: bool?
+      attr_accessor license_model: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor max_acds_lowest_scaled_value: Integer?
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor node_count: Integer?
+      attr_accessor non_provisionable_autonomous_container_databases: Integer?
+      attr_accessor provisionable_autonomous_container_databases: Integer?
+      attr_accessor provisioned_autonomous_container_databases: Integer?
+      attr_accessor provisioned_cpus: Float?
+      attr_accessor reclaimable_cpus: Float?
+      attr_accessor reserved_cpus: Float?
+      attr_accessor scan_listener_port_non_tls: Integer?
+      attr_accessor scan_listener_port_tls: Integer?
+      attr_accessor shape: String?
+      attr_accessor created_at: Time?
+      attr_accessor time_database_ssl_certificate_expires: Time?
+      attr_accessor time_ords_certificate_expires: Time?
+      attr_accessor time_zone: String?
+      attr_accessor total_container_databases: Integer?
+    end
+
+    class CloudAutonomousVmClusterResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster_id: String,
+        ?unallocated_adb_storage_in_t_bs: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+      attr_accessor unallocated_adb_storage_in_t_bs: Float?
+    end
+
+    class CloudAutonomousVmClusterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster_id: String,
+        ?cloud_autonomous_vm_cluster_arn: String,
+        ?odb_network_id: String,
+        ?oci_resource_anchor_name: String,
+        ?percent_progress: Float,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_id: String,
+        ?autonomous_data_storage_percentage: Float,
+        ?autonomous_data_storage_size_in_t_bs: Float,
+        ?available_autonomous_data_storage_size_in_t_bs: Float,
+        ?available_container_databases: Integer,
+        ?available_cpus: Float,
+        ?compute_model: String,
+        ?cpu_core_count: Integer,
+        ?cpu_core_count_per_node: Integer,
+        ?cpu_percentage: Float,
+        ?data_storage_size_in_g_bs: Float,
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_servers: Array[String],
+        ?description: String,
+        ?domain: String,
+        ?exadata_storage_in_t_bs_lowest_scaled_value: Float,
+        ?hostname: String,
+        ?ocid: String,
+        ?oci_url: String,
+        ?is_mtls_enabled_vm_cluster: bool,
+        ?license_model: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?max_acds_lowest_scaled_value: Integer,
+        ?memory_per_oracle_compute_unit_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?node_count: Integer,
+        ?non_provisionable_autonomous_container_databases: Integer,
+        ?provisionable_autonomous_container_databases: Integer,
+        ?provisioned_autonomous_container_databases: Integer,
+        ?provisioned_cpus: Float,
+        ?reclaimable_cpus: Float,
+        ?reserved_cpus: Float,
+        ?scan_listener_port_non_tls: Integer,
+        ?scan_listener_port_tls: Integer,
+        ?shape: String,
+        ?created_at: Time,
+        ?time_database_ssl_certificate_expires: Time,
+        ?time_ords_certificate_expires: Time,
+        ?time_zone: String,
+        ?total_container_databases: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+      attr_accessor cloud_autonomous_vm_cluster_arn: String?
+      attr_accessor odb_network_id: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor percent_progress: Float?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor autonomous_data_storage_percentage: Float?
+      attr_accessor autonomous_data_storage_size_in_t_bs: Float?
+      attr_accessor available_autonomous_data_storage_size_in_t_bs: Float?
+      attr_accessor available_container_databases: Integer?
+      attr_accessor available_cpus: Float?
+      attr_accessor compute_model: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor cpu_core_count_per_node: Integer?
+      attr_accessor cpu_percentage: Float?
+      attr_accessor data_storage_size_in_g_bs: Float?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor exadata_storage_in_t_bs_lowest_scaled_value: Float?
+      attr_accessor hostname: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_url: String?
+      attr_accessor is_mtls_enabled_vm_cluster: bool?
+      attr_accessor license_model: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor max_acds_lowest_scaled_value: Integer?
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor node_count: Integer?
+      attr_accessor non_provisionable_autonomous_container_databases: Integer?
+      attr_accessor provisionable_autonomous_container_databases: Integer?
+      attr_accessor provisioned_autonomous_container_databases: Integer?
+      attr_accessor provisioned_cpus: Float?
+      attr_accessor reclaimable_cpus: Float?
+      attr_accessor reserved_cpus: Float?
+      attr_accessor scan_listener_port_non_tls: Integer?
+      attr_accessor scan_listener_port_tls: Integer?
+      attr_accessor shape: String?
+      attr_accessor created_at: Time?
+      attr_accessor time_database_ssl_certificate_expires: Time?
+      attr_accessor time_ords_certificate_expires: Time?
+      attr_accessor time_zone: String?
+      attr_accessor total_container_databases: Integer?
+    end
+
+    class CloudExadataInfrastructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_arn: String,
+        ?activated_storage_count: Integer,
+        ?additional_storage_count: Integer,
+        ?available_storage_size_in_g_bs: Integer,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?compute_count: Integer,
+        ?cpu_count: Integer,
+        ?customer_contacts_to_send_to_oci: Array[Types::CustomerContact],
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_version: String,
+        ?last_maintenance_run_id: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?max_cpu_count: Integer,
+        ?max_data_storage_in_t_bs: Float,
+        ?max_db_node_storage_size_in_g_bs: Integer,
+        ?max_memory_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?monthly_db_server_version: String,
+        ?monthly_storage_server_version: String,
+        ?next_maintenance_run_id: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_url: String,
+        ?ocid: String,
+        ?shape: String,
+        ?storage_count: Integer,
+        ?storage_server_version: String,
+        ?created_at: Time,
+        ?total_storage_size_in_g_bs: Integer,
+        ?percent_progress: Float,
+        ?database_server_type: String,
+        ?storage_server_type: String,
+        ?compute_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_arn: String?
+      attr_accessor activated_storage_count: Integer?
+      attr_accessor additional_storage_count: Integer?
+      attr_accessor available_storage_size_in_g_bs: Integer?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor compute_count: Integer?
+      attr_accessor cpu_count: Integer?
+      attr_accessor customer_contacts_to_send_to_oci: Array[Types::CustomerContact]?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_version: String?
+      attr_accessor last_maintenance_run_id: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor max_cpu_count: Integer?
+      attr_accessor max_data_storage_in_t_bs: Float?
+      attr_accessor max_db_node_storage_size_in_g_bs: Integer?
+      attr_accessor max_memory_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor monthly_db_server_version: String?
+      attr_accessor monthly_storage_server_version: String?
+      attr_accessor next_maintenance_run_id: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_url: String?
+      attr_accessor ocid: String?
+      attr_accessor shape: String?
+      attr_accessor storage_count: Integer?
+      attr_accessor storage_server_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor total_storage_size_in_g_bs: Integer?
+      attr_accessor percent_progress: Float?
+      attr_accessor database_server_type: String?
+      attr_accessor storage_server_type: String?
+      attr_accessor compute_model: String?
+    end
+
+    class CloudExadataInfrastructureSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_arn: String,
+        ?activated_storage_count: Integer,
+        ?additional_storage_count: Integer,
+        ?available_storage_size_in_g_bs: Integer,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?compute_count: Integer,
+        ?cpu_count: Integer,
+        ?customer_contacts_to_send_to_oci: Array[Types::CustomerContact],
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_version: String,
+        ?last_maintenance_run_id: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?max_cpu_count: Integer,
+        ?max_data_storage_in_t_bs: Float,
+        ?max_db_node_storage_size_in_g_bs: Integer,
+        ?max_memory_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?monthly_db_server_version: String,
+        ?monthly_storage_server_version: String,
+        ?next_maintenance_run_id: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_url: String,
+        ?ocid: String,
+        ?shape: String,
+        ?storage_count: Integer,
+        ?storage_server_version: String,
+        ?created_at: Time,
+        ?total_storage_size_in_g_bs: Integer,
+        ?percent_progress: Float,
+        ?database_server_type: String,
+        ?storage_server_type: String,
+        ?compute_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_arn: String?
+      attr_accessor activated_storage_count: Integer?
+      attr_accessor additional_storage_count: Integer?
+      attr_accessor available_storage_size_in_g_bs: Integer?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor compute_count: Integer?
+      attr_accessor cpu_count: Integer?
+      attr_accessor customer_contacts_to_send_to_oci: Array[Types::CustomerContact]?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_version: String?
+      attr_accessor last_maintenance_run_id: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor max_cpu_count: Integer?
+      attr_accessor max_data_storage_in_t_bs: Float?
+      attr_accessor max_db_node_storage_size_in_g_bs: Integer?
+      attr_accessor max_memory_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor monthly_db_server_version: String?
+      attr_accessor monthly_storage_server_version: String?
+      attr_accessor next_maintenance_run_id: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_url: String?
+      attr_accessor ocid: String?
+      attr_accessor shape: String?
+      attr_accessor storage_count: Integer?
+      attr_accessor storage_server_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor total_storage_size_in_g_bs: Integer?
+      attr_accessor percent_progress: Float?
+      attr_accessor database_server_type: String?
+      attr_accessor storage_server_type: String?
+      attr_accessor compute_model: String?
+    end
+
+    class CloudExadataInfrastructureUnallocatedResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_clusters: Array[Types::CloudAutonomousVmClusterResourceDetails],
+        ?cloud_exadata_infrastructure_display_name: String,
+        ?exadata_storage_in_t_bs: Float,
+        ?cloud_exadata_infrastructure_id: String,
+        ?local_storage_in_g_bs: Integer,
+        ?memory_in_g_bs: Integer,
+        ?ocpus: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_clusters: Array[Types::CloudAutonomousVmClusterResourceDetails]?
+      attr_accessor cloud_exadata_infrastructure_display_name: String?
+      attr_accessor exadata_storage_in_t_bs: Float?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor local_storage_in_g_bs: Integer?
+      attr_accessor memory_in_g_bs: Integer?
+      attr_accessor ocpus: Integer?
+    end
+
+    class CloudVmCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_vm_cluster_arn: String,
+        ?cloud_exadata_infrastructure_id: String,
+        ?cluster_name: String,
+        ?cpu_core_count: Integer,
+        ?data_collection_options: Types::DataCollectionOptions,
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_servers: Array[String],
+        ?disk_redundancy: String,
+        ?gi_version: String,
+        ?hostname: String,
+        ?iorm_config_cache: Types::ExadataIormConfig,
+        ?is_local_backup_enabled: bool,
+        ?is_sparse_diskgroup_enabled: bool,
+        ?last_update_history_entry_id: String,
+        ?license_model: String,
+        ?listener_port: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?node_count: Integer,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_url: String,
+        ?domain: String,
+        ?scan_dns_name: String,
+        ?scan_dns_record_id: String,
+        ?scan_ip_ids: Array[String],
+        ?shape: String,
+        ?ssh_public_keys: Array[String],
+        ?storage_size_in_g_bs: Integer,
+        ?system_version: String,
+        ?created_at: Time,
+        ?time_zone: String,
+        ?vip_ids: Array[String],
+        ?odb_network_id: String,
+        ?percent_progress: Float,
+        ?compute_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_vm_cluster_arn: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor cluster_name: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor data_collection_options: Types::DataCollectionOptions?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor disk_redundancy: String?
+      attr_accessor gi_version: String?
+      attr_accessor hostname: String?
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig?
+      attr_accessor is_local_backup_enabled: bool?
+      attr_accessor is_sparse_diskgroup_enabled: bool?
+      attr_accessor last_update_history_entry_id: String?
+      attr_accessor license_model: String?
+      attr_accessor listener_port: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor node_count: Integer?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_url: String?
+      attr_accessor domain: String?
+      attr_accessor scan_dns_name: String?
+      attr_accessor scan_dns_record_id: String?
+      attr_accessor scan_ip_ids: Array[String]?
+      attr_accessor shape: String?
+      attr_accessor ssh_public_keys: Array[String]?
+      attr_accessor storage_size_in_g_bs: Integer?
+      attr_accessor system_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor time_zone: String?
+      attr_accessor vip_ids: Array[String]?
+      attr_accessor odb_network_id: String?
+      attr_accessor percent_progress: Float?
+      attr_accessor compute_model: String?
+    end
+
+    class CloudVmClusterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_vm_cluster_arn: String,
+        ?cloud_exadata_infrastructure_id: String,
+        ?cluster_name: String,
+        ?cpu_core_count: Integer,
+        ?data_collection_options: Types::DataCollectionOptions,
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_servers: Array[String],
+        ?disk_redundancy: String,
+        ?gi_version: String,
+        ?hostname: String,
+        ?iorm_config_cache: Types::ExadataIormConfig,
+        ?is_local_backup_enabled: bool,
+        ?is_sparse_diskgroup_enabled: bool,
+        ?last_update_history_entry_id: String,
+        ?license_model: String,
+        ?listener_port: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?node_count: Integer,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_url: String,
+        ?domain: String,
+        ?scan_dns_name: String,
+        ?scan_dns_record_id: String,
+        ?scan_ip_ids: Array[String],
+        ?shape: String,
+        ?ssh_public_keys: Array[String],
+        ?storage_size_in_g_bs: Integer,
+        ?system_version: String,
+        ?created_at: Time,
+        ?time_zone: String,
+        ?vip_ids: Array[String],
+        ?odb_network_id: String,
+        ?percent_progress: Float,
+        ?compute_model: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_vm_cluster_arn: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor cluster_name: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor data_collection_options: Types::DataCollectionOptions?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor disk_redundancy: String?
+      attr_accessor gi_version: String?
+      attr_accessor hostname: String?
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig?
+      attr_accessor is_local_backup_enabled: bool?
+      attr_accessor is_sparse_diskgroup_enabled: bool?
+      attr_accessor last_update_history_entry_id: String?
+      attr_accessor license_model: String?
+      attr_accessor listener_port: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor node_count: Integer?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_url: String?
+      attr_accessor domain: String?
+      attr_accessor scan_dns_name: String?
+      attr_accessor scan_dns_record_id: String?
+      attr_accessor scan_ip_ids: Array[String]?
+      attr_accessor shape: String?
+      attr_accessor ssh_public_keys: Array[String]?
+      attr_accessor storage_size_in_g_bs: Integer?
+      attr_accessor system_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor time_zone: String?
+      attr_accessor vip_ids: Array[String]?
+      attr_accessor odb_network_id: String?
+      attr_accessor percent_progress: Float?
+      attr_accessor compute_model: String?
+    end
+
+    module ComputeModel
+      ECPU: String
+      OCPU: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateCloudAutonomousVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?odb_network_id: String,
+        ?display_name: String,
+        ?client_token: String,
+        ?autonomous_data_storage_size_in_t_bs: Float,
+        ?cpu_core_count_per_node: Integer,
+        ?db_servers: Array[String],
+        ?description: String,
+        ?is_mtls_enabled_vm_cluster: bool,
+        ?license_model: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?memory_per_oracle_compute_unit_in_g_bs: Integer,
+        ?scan_listener_port_non_tls: Integer,
+        ?scan_listener_port_tls: Integer,
+        ?tags: Hash[String, String],
+        ?time_zone: String,
+        ?total_container_databases: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor odb_network_id: String?
+      attr_accessor display_name: String?
+      attr_accessor client_token: String?
+      attr_accessor autonomous_data_storage_size_in_t_bs: Float?
+      attr_accessor cpu_core_count_per_node: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor description: String?
+      attr_accessor is_mtls_enabled_vm_cluster: bool?
+      attr_accessor license_model: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: Integer?
+      attr_accessor scan_listener_port_non_tls: Integer?
+      attr_accessor scan_listener_port_tls: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor time_zone: String?
+      attr_accessor total_container_databases: Integer?
+    end
+
+    class CreateCloudAutonomousVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_autonomous_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+    end
+
+    class CreateCloudExadataInfrastructureInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?shape: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?tags: Hash[String, String],
+        ?compute_count: Integer,
+        ?customer_contacts_to_send_to_oci: Array[Types::CustomerContact],
+        ?maintenance_window: Types::MaintenanceWindow,
+        ?storage_count: Integer,
+        ?client_token: String,
+        ?database_server_type: String,
+        ?storage_server_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor shape: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor compute_count: Integer?
+      attr_accessor customer_contacts_to_send_to_oci: Array[Types::CustomerContact]?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+      attr_accessor storage_count: Integer?
+      attr_accessor client_token: String?
+      attr_accessor database_server_type: String?
+      attr_accessor storage_server_type: String?
+    end
+
+    class CreateCloudExadataInfrastructureOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class CreateCloudVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?cpu_core_count: Integer,
+        ?display_name: String,
+        ?gi_version: String,
+        ?hostname: String,
+        ?ssh_public_keys: Array[String],
+        ?odb_network_id: String,
+        ?cluster_name: String,
+        ?data_collection_options: Types::DataCollectionOptions,
+        ?data_storage_size_in_t_bs: Float,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_servers: Array[String],
+        ?tags: Hash[String, String],
+        ?is_local_backup_enabled: bool,
+        ?is_sparse_diskgroup_enabled: bool,
+        ?license_model: String,
+        ?memory_size_in_g_bs: Integer,
+        ?system_version: String,
+        ?time_zone: String,
+        ?client_token: String,
+        ?scan_listener_port_tcp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor display_name: String?
+      attr_accessor gi_version: String?
+      attr_accessor hostname: String?
+      attr_accessor ssh_public_keys: Array[String]?
+      attr_accessor odb_network_id: String?
+      attr_accessor cluster_name: String?
+      attr_accessor data_collection_options: Types::DataCollectionOptions?
+      attr_accessor data_storage_size_in_t_bs: Float?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_servers: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor is_local_backup_enabled: bool?
+      attr_accessor is_sparse_diskgroup_enabled: bool?
+      attr_accessor license_model: String?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor system_version: String?
+      attr_accessor time_zone: String?
+      attr_accessor client_token: String?
+      attr_accessor scan_listener_port_tcp: Integer?
+    end
+
+    class CreateCloudVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_vm_cluster_id: String?
+    end
+
+    class CreateOdbNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?client_subnet_cidr: String,
+        ?backup_subnet_cidr: String,
+        ?custom_domain_name: String,
+        ?default_dns_prefix: String,
+        ?client_token: String,
+        ?s3_access: String,
+        ?zero_etl_access: String,
+        ?s3_policy_document: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor client_subnet_cidr: String?
+      attr_accessor backup_subnet_cidr: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor default_dns_prefix: String?
+      attr_accessor client_token: String?
+      attr_accessor s3_access: String?
+      attr_accessor zero_etl_access: String?
+      attr_accessor s3_policy_document: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateOdbNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_network_id: String?
+    end
+
+    class CreateOdbPeeringConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+        ?peer_network_id: String,
+        ?display_name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+      attr_accessor peer_network_id: String?
+      attr_accessor display_name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateOdbPeeringConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_peering_connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_peering_connection_id: String?
+    end
+
+    class CustomerContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+    end
+
+    class DataCollectionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_diagnostics_events_enabled: bool,
+        ?is_health_monitoring_enabled: bool,
+        ?is_incident_logs_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_diagnostics_events_enabled: bool?
+      attr_accessor is_health_monitoring_enabled: bool?
+      attr_accessor is_incident_logs_enabled: bool?
+    end
+
+    class DayOfWeek
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module DayOfWeekName
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
+      SUNDAY: String
+    end
+
+    class DbIormConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_name: String,
+        ?flash_cache_limit: String,
+        ?share: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_name: String?
+      attr_accessor flash_cache_limit: String?
+      attr_accessor share: Integer?
+    end
+
+    class DbNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node_id: String,
+        ?db_node_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?additional_details: String,
+        ?backup_ip_id: String,
+        ?backup_vnic2_id: String,
+        ?backup_vnic_id: String,
+        ?cpu_core_count: Integer,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_id: String,
+        ?db_system_id: String,
+        ?fault_domain: String,
+        ?host_ip_id: String,
+        ?hostname: String,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?maintenance_type: String,
+        ?memory_size_in_g_bs: Integer,
+        ?software_storage_size_in_gb: Integer,
+        ?created_at: Time,
+        ?time_maintenance_window_end: String,
+        ?time_maintenance_window_start: String,
+        ?total_cpu_core_count: Integer,
+        ?vnic2_id: String,
+        ?vnic_id: String,
+        ?private_ip_address: String,
+        ?floating_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node_id: String?
+      attr_accessor db_node_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor additional_details: String?
+      attr_accessor backup_ip_id: String?
+      attr_accessor backup_vnic2_id: String?
+      attr_accessor backup_vnic_id: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_id: String?
+      attr_accessor db_system_id: String?
+      attr_accessor fault_domain: String?
+      attr_accessor host_ip_id: String?
+      attr_accessor hostname: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor maintenance_type: String?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor software_storage_size_in_gb: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor time_maintenance_window_end: String?
+      attr_accessor time_maintenance_window_start: String?
+      attr_accessor total_cpu_core_count: Integer?
+      attr_accessor vnic2_id: String?
+      attr_accessor vnic_id: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor floating_ip_address: String?
+    end
+
+    module DbNodeMaintenanceType
+      VMDB_REBOOT_MIGRATION: String
+    end
+
+    module DbNodeResourceStatus
+      AVAILABLE: String
+      FAILED: String
+      PROVISIONING: String
+      TERMINATED: String
+      TERMINATING: String
+      UPDATING: String
+      STOPPING: String
+      STOPPED: String
+      STARTING: String
+    end
+
+    class DbNodeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node_id: String,
+        ?db_node_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?additional_details: String,
+        ?backup_ip_id: String,
+        ?backup_vnic2_id: String,
+        ?backup_vnic_id: String,
+        ?cpu_core_count: Integer,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_id: String,
+        ?db_system_id: String,
+        ?fault_domain: String,
+        ?host_ip_id: String,
+        ?hostname: String,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?maintenance_type: String,
+        ?memory_size_in_g_bs: Integer,
+        ?software_storage_size_in_gb: Integer,
+        ?created_at: Time,
+        ?time_maintenance_window_end: String,
+        ?time_maintenance_window_start: String,
+        ?total_cpu_core_count: Integer,
+        ?vnic2_id: String,
+        ?vnic_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node_id: String?
+      attr_accessor db_node_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor additional_details: String?
+      attr_accessor backup_ip_id: String?
+      attr_accessor backup_vnic2_id: String?
+      attr_accessor backup_vnic_id: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_id: String?
+      attr_accessor db_system_id: String?
+      attr_accessor fault_domain: String?
+      attr_accessor host_ip_id: String?
+      attr_accessor hostname: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor maintenance_type: String?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor software_storage_size_in_gb: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor time_maintenance_window_end: String?
+      attr_accessor time_maintenance_window_start: String?
+      attr_accessor total_cpu_core_count: Integer?
+      attr_accessor vnic2_id: String?
+      attr_accessor vnic_id: String?
+    end
+
+    class DbServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_server_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cpu_core_count: Integer,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_patching_details: Types::DbServerPatchingDetails,
+        ?display_name: String,
+        ?exadata_infrastructure_id: String,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?max_cpu_count: Integer,
+        ?max_db_node_storage_in_g_bs: Integer,
+        ?max_memory_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?shape: String,
+        ?created_at: Time,
+        ?vm_cluster_ids: Array[String],
+        ?compute_model: String,
+        ?autonomous_vm_cluster_ids: Array[String],
+        ?autonomous_virtual_machine_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_server_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_patching_details: Types::DbServerPatchingDetails?
+      attr_accessor display_name: String?
+      attr_accessor exadata_infrastructure_id: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor max_cpu_count: Integer?
+      attr_accessor max_db_node_storage_in_g_bs: Integer?
+      attr_accessor max_memory_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor shape: String?
+      attr_accessor created_at: Time?
+      attr_accessor vm_cluster_ids: Array[String]?
+      attr_accessor compute_model: String?
+      attr_accessor autonomous_vm_cluster_ids: Array[String]?
+      attr_accessor autonomous_virtual_machine_ids: Array[String]?
+    end
+
+    class DbServerPatchingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_patch_duration: Integer,
+        ?patching_status: String,
+        ?time_patching_ended: String,
+        ?time_patching_started: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_patch_duration: Integer?
+      attr_accessor patching_status: String?
+      attr_accessor time_patching_ended: String?
+      attr_accessor time_patching_started: String?
+    end
+
+    module DbServerPatchingStatus
+      COMPLETE: String
+      FAILED: String
+      MAINTENANCE_IN_PROGRESS: String
+      SCHEDULED: String
+    end
+
+    class DbServerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_server_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cpu_core_count: Integer,
+        ?db_node_storage_size_in_g_bs: Integer,
+        ?db_server_patching_details: Types::DbServerPatchingDetails,
+        ?display_name: String,
+        ?exadata_infrastructure_id: String,
+        ?ocid: String,
+        ?oci_resource_anchor_name: String,
+        ?max_cpu_count: Integer,
+        ?max_db_node_storage_in_g_bs: Integer,
+        ?max_memory_in_g_bs: Integer,
+        ?memory_size_in_g_bs: Integer,
+        ?shape: String,
+        ?created_at: Time,
+        ?vm_cluster_ids: Array[String],
+        ?compute_model: String,
+        ?autonomous_vm_cluster_ids: Array[String],
+        ?autonomous_virtual_machine_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_server_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cpu_core_count: Integer?
+      attr_accessor db_node_storage_size_in_g_bs: Integer?
+      attr_accessor db_server_patching_details: Types::DbServerPatchingDetails?
+      attr_accessor display_name: String?
+      attr_accessor exadata_infrastructure_id: String?
+      attr_accessor ocid: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor max_cpu_count: Integer?
+      attr_accessor max_db_node_storage_in_g_bs: Integer?
+      attr_accessor max_memory_in_g_bs: Integer?
+      attr_accessor memory_size_in_g_bs: Integer?
+      attr_accessor shape: String?
+      attr_accessor created_at: Time?
+      attr_accessor vm_cluster_ids: Array[String]?
+      attr_accessor compute_model: String?
+      attr_accessor autonomous_vm_cluster_ids: Array[String]?
+      attr_accessor autonomous_virtual_machine_ids: Array[String]?
+    end
+
+    class DbSystemShapeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_core_count: Integer,
+        ?available_core_count_per_node: Integer,
+        ?available_data_storage_in_t_bs: Integer,
+        ?available_data_storage_per_server_in_t_bs: Integer,
+        ?available_db_node_per_node_in_g_bs: Integer,
+        ?available_db_node_storage_in_g_bs: Integer,
+        ?available_memory_in_g_bs: Integer,
+        ?available_memory_per_node_in_g_bs: Integer,
+        ?core_count_increment: Integer,
+        ?max_storage_count: Integer,
+        ?maximum_node_count: Integer,
+        ?min_core_count_per_node: Integer,
+        ?min_data_storage_in_t_bs: Integer,
+        ?min_db_node_storage_per_node_in_g_bs: Integer,
+        ?min_memory_per_node_in_g_bs: Integer,
+        ?min_storage_count: Integer,
+        ?minimum_core_count: Integer,
+        ?minimum_node_count: Integer,
+        ?runtime_minimum_core_count: Integer,
+        ?shape_family: String,
+        ?shape_type: String,
+        ?name: String,
+        ?compute_model: String,
+        ?are_server_types_supported: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_core_count: Integer?
+      attr_accessor available_core_count_per_node: Integer?
+      attr_accessor available_data_storage_in_t_bs: Integer?
+      attr_accessor available_data_storage_per_server_in_t_bs: Integer?
+      attr_accessor available_db_node_per_node_in_g_bs: Integer?
+      attr_accessor available_db_node_storage_in_g_bs: Integer?
+      attr_accessor available_memory_in_g_bs: Integer?
+      attr_accessor available_memory_per_node_in_g_bs: Integer?
+      attr_accessor core_count_increment: Integer?
+      attr_accessor max_storage_count: Integer?
+      attr_accessor maximum_node_count: Integer?
+      attr_accessor min_core_count_per_node: Integer?
+      attr_accessor min_data_storage_in_t_bs: Integer?
+      attr_accessor min_db_node_storage_per_node_in_g_bs: Integer?
+      attr_accessor min_memory_per_node_in_g_bs: Integer?
+      attr_accessor min_storage_count: Integer?
+      attr_accessor minimum_core_count: Integer?
+      attr_accessor minimum_node_count: Integer?
+      attr_accessor runtime_minimum_core_count: Integer?
+      attr_accessor shape_family: String?
+      attr_accessor shape_type: String?
+      attr_accessor name: String?
+      attr_accessor compute_model: String?
+      attr_accessor are_server_types_supported: bool?
+    end
+
+    class DeleteCloudAutonomousVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+    end
+
+    class DeleteCloudAutonomousVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCloudExadataInfrastructureInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class DeleteCloudExadataInfrastructureOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCloudVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+    end
+
+    class DeleteCloudVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOdbNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+        ?delete_associated_resources: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+      attr_accessor delete_associated_resources: bool?
+    end
+
+    class DeleteOdbNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOdbPeeringConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_peering_connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_peering_connection_id: String?
+    end
+
+    class DeleteOdbPeeringConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DiskRedundancy
+      HIGH: String
+      NORMAL: String
+    end
+
+    class ExadataIormConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_plans: Array[Types::DbIormConfig],
+        ?lifecycle_details: String,
+        ?lifecycle_state: String,
+        ?objective: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_plans: Array[Types::DbIormConfig]?
+      attr_accessor lifecycle_details: String?
+      attr_accessor lifecycle_state: String?
+      attr_accessor objective: String?
+    end
+
+    class GetCloudAutonomousVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+    end
+
+    class GetCloudAutonomousVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_autonomous_vm_cluster: Types::CloudAutonomousVmCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_autonomous_vm_cluster: Types::CloudAutonomousVmCluster?
+    end
+
+    class GetCloudExadataInfrastructureInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class GetCloudExadataInfrastructureOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure: Types::CloudExadataInfrastructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure: Types::CloudExadataInfrastructure?
+    end
+
+    class GetCloudExadataInfrastructureUnallocatedResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?db_servers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor db_servers: Array[String]?
+    end
+
+    class GetCloudExadataInfrastructureUnallocatedResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_unallocated_resources: Types::CloudExadataInfrastructureUnallocatedResources,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_unallocated_resources: Types::CloudExadataInfrastructureUnallocatedResources?
+    end
+
+    class GetCloudVmClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+    end
+
+    class GetCloudVmClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster: Types::CloudVmCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster: Types::CloudVmCluster?
+    end
+
+    class GetDbNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?db_node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor db_node_id: String?
+    end
+
+    class GetDbNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node: Types::DbNode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node: Types::DbNode?
+    end
+
+    class GetDbServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?db_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor db_server_id: String?
+    end
+
+    class GetDbServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_server: Types::DbServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_server: Types::DbServer?
+    end
+
+    class GetOciOnboardingStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetOciOnboardingStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?existing_tenancy_activation_link: String,
+        ?new_tenancy_activation_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor existing_tenancy_activation_link: String?
+      attr_accessor new_tenancy_activation_link: String?
+    end
+
+    class GetOdbNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+    end
+
+    class GetOdbNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network: Types::OdbNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network: Types::OdbNetwork?
+    end
+
+    class GetOdbPeeringConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_peering_connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_peering_connection_id: String?
+    end
+
+    class GetOdbPeeringConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_peering_connection: Types::OdbPeeringConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_peering_connection: Types::OdbPeeringConnection?
+    end
+
+    class GiVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    class InitializeServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InitializeServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module IormLifecycleState
+      BOOTSTRAPPING: String
+      DISABLED: String
+      ENABLED: String
+      FAILED: String
+      UPDATING: String
+    end
+
+    module LicenseModel
+      BRING_YOUR_OWN_LICENSE: String
+      LICENSE_INCLUDED: String
+    end
+
+    class ListAutonomousVirtualMachinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?cloud_autonomous_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor cloud_autonomous_vm_cluster_id: String?
+    end
+
+    class ListAutonomousVirtualMachinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?autonomous_virtual_machines: Array[Types::AutonomousVirtualMachineSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor autonomous_virtual_machines: Array[Types::AutonomousVirtualMachineSummary]?
+    end
+
+    class ListCloudAutonomousVmClustersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class ListCloudAutonomousVmClustersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cloud_autonomous_vm_clusters: Array[Types::CloudAutonomousVmClusterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cloud_autonomous_vm_clusters: Array[Types::CloudAutonomousVmClusterSummary]?
+    end
+
+    class ListCloudExadataInfrastructuresInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCloudExadataInfrastructuresOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cloud_exadata_infrastructures: Array[Types::CloudExadataInfrastructureSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cloud_exadata_infrastructures: Array[Types::CloudExadataInfrastructureSummary]?
+    end
+
+    class ListCloudVmClustersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class ListCloudVmClustersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?cloud_vm_clusters: Array[Types::CloudVmClusterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor cloud_vm_clusters: Array[Types::CloudVmClusterSummary]?
+    end
+
+    class ListDbNodesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?cloud_vm_cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor cloud_vm_cluster_id: String?
+    end
+
+    class ListDbNodesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?db_nodes: Array[Types::DbNodeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor db_nodes: Array[Types::DbNodeSummary]?
+    end
+
+    class ListDbServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDbServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?db_servers: Array[Types::DbServerSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor db_servers: Array[Types::DbServerSummary]?
+    end
+
+    class ListDbSystemShapesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+    end
+
+    class ListDbSystemShapesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?db_system_shapes: Array[Types::DbSystemShapeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor db_system_shapes: Array[Types::DbSystemShapeSummary]?
+    end
+
+    class ListGiVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?shape: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor shape: String?
+    end
+
+    class ListGiVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?gi_versions: Array[Types::GiVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor gi_versions: Array[Types::GiVersionSummary]?
+    end
+
+    class ListOdbNetworksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOdbNetworksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?odb_networks: Array[Types::OdbNetworkSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor odb_networks: Array[Types::OdbNetworkSummary]?
+    end
+
+    class ListOdbPeeringConnectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?odb_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor odb_network_id: String?
+    end
+
+    class ListOdbPeeringConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?odb_peering_connections: Array[Types::OdbPeeringConnectionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor odb_peering_connections: Array[Types::OdbPeeringConnectionSummary]?
+    end
+
+    class ListSystemVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?gi_version: String,
+        ?shape: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor gi_version: String?
+      attr_accessor shape: String?
+    end
+
+    class ListSystemVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?system_versions: Array[Types::SystemVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor system_versions: Array[Types::SystemVersionSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MaintenanceWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_action_timeout_in_mins: Integer,
+        ?days_of_week: Array[Types::DayOfWeek],
+        ?hours_of_day: Array[Integer],
+        ?is_custom_action_timeout_enabled: bool,
+        ?lead_time_in_weeks: Integer,
+        ?months: Array[Types::Month],
+        ?patching_mode: String,
+        ?preference: String,
+        ?skip_ru: bool,
+        ?weeks_of_month: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_timeout_in_mins: Integer?
+      attr_accessor days_of_week: Array[Types::DayOfWeek]?
+      attr_accessor hours_of_day: Array[Integer]?
+      attr_accessor is_custom_action_timeout_enabled: bool?
+      attr_accessor lead_time_in_weeks: Integer?
+      attr_accessor months: Array[Types::Month]?
+      attr_accessor patching_mode: String?
+      attr_accessor preference: String?
+      attr_accessor skip_ru: bool?
+      attr_accessor weeks_of_month: Array[Integer]?
+    end
+
+    module ManagedResourceStatus
+      ENABLED: String
+      ENABLING: String
+      DISABLED: String
+      DISABLING: String
+    end
+
+    class ManagedS3BackupAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+    end
+
+    class ManagedServices
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_network_arn: String,
+        ?resource_gateway_arn: String,
+        ?managed_services_ipv4_cidrs: Array[String],
+        ?service_network_endpoint: Types::ServiceNetworkEndpoint,
+        ?managed_s3_backup_access: Types::ManagedS3BackupAccess,
+        ?zero_etl_access: Types::ZeroEtlAccess,
+        ?s3_access: Types::S3Access,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_network_arn: String?
+      attr_accessor resource_gateway_arn: String?
+      attr_accessor managed_services_ipv4_cidrs: Array[String]?
+      attr_accessor service_network_endpoint: Types::ServiceNetworkEndpoint?
+      attr_accessor managed_s3_backup_access: Types::ManagedS3BackupAccess?
+      attr_accessor zero_etl_access: Types::ZeroEtlAccess?
+      attr_accessor s3_access: Types::S3Access?
+    end
+
+    class Month
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module MonthName
+      JANUARY: String
+      FEBRUARY: String
+      MARCH: String
+      APRIL: String
+      MAY: String
+      JUNE: String
+      JULY: String
+      AUGUST: String
+      SEPTEMBER: String
+      OCTOBER: String
+      NOVEMBER: String
+      DECEMBER: String
+    end
+
+    module Objective
+      AUTO: String
+      BALANCED: String
+      BASIC: String
+      HIGH_THROUGHPUT: String
+      LOW_LATENCY: String
+    end
+
+    class OciDnsForwardingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?oci_dns_listener_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor oci_dns_listener_ip: String?
+    end
+
+    module OciOnboardingStatus
+      NOT_STARTED: String
+      PENDING_LINK_GENERATION: String
+      PENDING_CUSTOMER_ACTION: String
+      PENDING_INITIALIZATION: String
+      ACTIVATING: String
+      ACTIVE_IN_HOME_REGION: String
+      ACTIVE: String
+      ACTIVE_LIMITED: String
+      FAILED: String
+      PUBLIC_OFFER_UNSUPPORTED: String
+      SUSPENDED: String
+      CANCELED: String
+    end
+
+    class OdbNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_network_arn: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?client_subnet_cidr: String,
+        ?backup_subnet_cidr: String,
+        ?custom_domain_name: String,
+        ?default_dns_prefix: String,
+        ?peered_cidrs: Array[String],
+        ?oci_network_anchor_id: String,
+        ?oci_network_anchor_url: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_vcn_id: String,
+        ?oci_vcn_url: String,
+        ?oci_dns_forwarding_configs: Array[Types::OciDnsForwardingConfig],
+        ?created_at: Time,
+        ?percent_progress: Float,
+        ?managed_services: Types::ManagedServices,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_network_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor client_subnet_cidr: String?
+      attr_accessor backup_subnet_cidr: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor default_dns_prefix: String?
+      attr_accessor peered_cidrs: Array[String]?
+      attr_accessor oci_network_anchor_id: String?
+      attr_accessor oci_network_anchor_url: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_vcn_id: String?
+      attr_accessor oci_vcn_url: String?
+      attr_accessor oci_dns_forwarding_configs: Array[Types::OciDnsForwardingConfig]?
+      attr_accessor created_at: Time?
+      attr_accessor percent_progress: Float?
+      attr_accessor managed_services: Types::ManagedServices?
+    end
+
+    class OdbNetworkSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_network_arn: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?client_subnet_cidr: String,
+        ?backup_subnet_cidr: String,
+        ?custom_domain_name: String,
+        ?default_dns_prefix: String,
+        ?peered_cidrs: Array[String],
+        ?oci_network_anchor_id: String,
+        ?oci_network_anchor_url: String,
+        ?oci_resource_anchor_name: String,
+        ?oci_vcn_id: String,
+        ?oci_vcn_url: String,
+        ?oci_dns_forwarding_configs: Array[Types::OciDnsForwardingConfig],
+        ?created_at: Time,
+        ?percent_progress: Float,
+        ?managed_services: Types::ManagedServices,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_network_arn: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor client_subnet_cidr: String?
+      attr_accessor backup_subnet_cidr: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor default_dns_prefix: String?
+      attr_accessor peered_cidrs: Array[String]?
+      attr_accessor oci_network_anchor_id: String?
+      attr_accessor oci_network_anchor_url: String?
+      attr_accessor oci_resource_anchor_name: String?
+      attr_accessor oci_vcn_id: String?
+      attr_accessor oci_vcn_url: String?
+      attr_accessor oci_dns_forwarding_configs: Array[Types::OciDnsForwardingConfig]?
+      attr_accessor created_at: Time?
+      attr_accessor percent_progress: Float?
+      attr_accessor managed_services: Types::ManagedServices?
+    end
+
+    class OdbPeeringConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_peering_connection_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_peering_connection_arn: String,
+        ?odb_network_arn: String,
+        ?peer_network_arn: String,
+        ?odb_peering_connection_type: String,
+        ?created_at: Time,
+        ?percent_progress: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_peering_connection_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_peering_connection_arn: String?
+      attr_accessor odb_network_arn: String?
+      attr_accessor peer_network_arn: String?
+      attr_accessor odb_peering_connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor percent_progress: Float?
+    end
+
+    class OdbPeeringConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_peering_connection_id: String,
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_peering_connection_arn: String,
+        ?odb_network_arn: String,
+        ?peer_network_arn: String,
+        ?odb_peering_connection_type: String,
+        ?created_at: Time,
+        ?percent_progress: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_peering_connection_id: String?
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_peering_connection_arn: String?
+      attr_accessor odb_network_arn: String?
+      attr_accessor peer_network_arn: String?
+      attr_accessor odb_peering_connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor percent_progress: Float?
+    end
+
+    module PatchingModeType
+      ROLLING: String
+      NONROLLING: String
+    end
+
+    module PreferenceType
+      NO_PREFERENCE: String
+      CUSTOM_PREFERENCE: String
+    end
+
+    class RebootDbNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?db_node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor db_node_id: String?
+    end
+
+    class RebootDbNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node_id: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceStatus
+      AVAILABLE: String
+      FAILED: String
+      PROVISIONING: String
+      TERMINATED: String
+      TERMINATING: String
+      UPDATING: String
+      MAINTENANCE_IN_PROGRESS: String
+    end
+
+    class S3Access
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+        ?domain_name: String,
+        ?s3_policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor domain_name: String?
+      attr_accessor s3_policy_document: String?
+    end
+
+    class ServiceNetworkEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_id: String,
+        ?vpc_endpoint_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_endpoint_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+    end
+
+    module ShapeType
+      AMD: String
+      INTEL: String
+      INTEL_FLEX_X9: String
+      AMPERE_FLEX_A1: String
+    end
+
+    class StartDbNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?db_node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor db_node_id: String?
+    end
+
+    class StartDbNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node_id: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class StopDbNodeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_vm_cluster_id: String,
+        ?db_node_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_vm_cluster_id: String?
+      attr_accessor db_node_id: String?
+    end
+
+    class StopDbNodeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_node_id: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_node_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class SystemVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gi_version: String,
+        ?shape: String,
+        ?system_versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gi_version: String?
+      attr_accessor shape: String?
+      attr_accessor system_versions: Array[String]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCloudExadataInfrastructureInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_exadata_infrastructure_id: String,
+        ?maintenance_window: Types::MaintenanceWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_exadata_infrastructure_id: String?
+      attr_accessor maintenance_window: Types::MaintenanceWindow?
+    end
+
+    class UpdateCloudExadataInfrastructureOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?cloud_exadata_infrastructure_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor cloud_exadata_infrastructure_id: String?
+    end
+
+    class UpdateOdbNetworkInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?odb_network_id: String,
+        ?display_name: String,
+        ?peered_cidrs_to_be_added: Array[String],
+        ?peered_cidrs_to_be_removed: Array[String],
+        ?s3_access: String,
+        ?zero_etl_access: String,
+        ?s3_policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor odb_network_id: String?
+      attr_accessor display_name: String?
+      attr_accessor peered_cidrs_to_be_added: Array[String]?
+      attr_accessor peered_cidrs_to_be_removed: Array[String]?
+      attr_accessor s3_access: String?
+      attr_accessor zero_etl_access: String?
+      attr_accessor s3_policy_document: String?
+    end
+
+    class UpdateOdbNetworkOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?status: String,
+        ?status_reason: String,
+        ?odb_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor odb_network_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    module VpcEndpointType
+      SERVICENETWORK: String
+    end
+
+    class ZeroEtlAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor cidr: String?
+    end
+  end
+end

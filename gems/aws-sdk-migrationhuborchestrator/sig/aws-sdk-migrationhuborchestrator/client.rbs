@@ -1,0 +1,576 @@
+module Aws::MigrationHubOrchestrator
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MigrationHubOrchestrator::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTemplateResponse]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_template: (
+      ?template_name: String,
+      ?template_description: String,
+      ?template_source: {
+        workflow_id: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
+
+    interface _CreateWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def template_id: () -> String?
+      def ads_application_configuration_id: () -> String?
+      def workflow_inputs: () -> Hash[String, Types::StepInput]?
+      def step_targets: () -> Array[String]?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_workflow: (
+      ?name: String,
+      ?description: String,
+      ?template_id: String,
+      ?application_configuration_id: String,
+      ?input_parameters: Hash[String,
+        {
+          integer_value: Integer,
+          string_value: String,
+          list_of_strings_value: Array[String],
+          map_of_string_value: Hash[String, String]
+        }
+      ],
+      ?step_targets: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
+
+    interface _CreateWorkflowStepResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowStepOutput]
+      def id: () -> String?
+      def step_group_id: () -> String?
+      def workflow_id: () -> String?
+      def name: () -> String?
+    end
+    def create_workflow_step: (
+      ?name: String,
+      ?step_group_id: String,
+      ?workflow_id: String,
+      ?step_action_type: String,
+      ?description: String,
+      ?workflow_step_automation_configuration: {
+        script_location_s3_bucket: String,
+        script_location_s3_key: {
+          linux: String,
+          windows: untyped
+        },
+        command: {
+          linux: String,
+          windows: untyped
+        },
+        run_environment: String,
+        target_type: String
+      },
+      ?step_target: Array[String],
+      ?outputs: Array[
+        {
+          name: String,
+          data_type: String,
+          required: bool,
+          value: {
+            integer_value: Integer,
+            string_value: String,
+            list_of_string_value: Array[String]
+          }
+        }
+      ],
+      ?previous: Array[String],
+      ?next: Array[String]
+    ) -> _CreateWorkflowStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowStepResponse
+
+    interface _CreateWorkflowStepGroupResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowStepGroupOutput]
+      def workflow_id: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def tools: () -> Array[Types::Tool]?
+      def next: () -> Array[String]?
+      def previous: () -> Array[String]?
+      def creation_time: () -> Time?
+    end
+    def create_workflow_step_group: (
+      ?workflow_id: String,
+      ?name: String,
+      ?description: String,
+      ?next: Array[String],
+      ?previous: Array[String]
+    ) -> _CreateWorkflowStepGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowStepGroupResponse
+
+    interface _DeleteTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteTemplateResponse]
+    end
+    def delete_template: (
+      ?id: String
+    ) -> _DeleteTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateResponse
+
+    interface _DeleteWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_workflow: (
+      ?id: String
+    ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
+
+    interface _DeleteWorkflowStepResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowStepOutput]
+    end
+    def delete_workflow_step: (
+      ?id: String,
+      ?step_group_id: String,
+      ?workflow_id: String
+    ) -> _DeleteWorkflowStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowStepResponse
+
+    interface _DeleteWorkflowStepGroupResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowStepGroupOutput]
+    end
+    def delete_workflow_step_group: (
+      ?workflow_id: String,
+      ?id: String
+    ) -> _DeleteWorkflowStepGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowStepGroupResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateOutput]
+      def id: () -> String?
+      def template_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def inputs: () -> Array[Types::TemplateInput]?
+      def tools: () -> Array[Types::Tool]?
+      def creation_time: () -> Time?
+      def owner: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def template_class: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_template: (
+      ?id: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _GetTemplateStepResponse
+      include Smithy::Client::_Response[Types::GetTemplateStepOutput]
+      def id: () -> String?
+      def step_group_id: () -> String?
+      def template_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def step_action_type: () -> String?
+      def creation_time: () -> String?
+      def previous: () -> Array[String]?
+      def next: () -> Array[String]?
+      def outputs: () -> Array[Types::StepOutput]?
+      def step_automation_configuration: () -> Types::StepAutomationConfiguration?
+    end
+    def get_template_step: (
+      ?id: String,
+      ?template_id: String,
+      ?step_group_id: String
+    ) -> _GetTemplateStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateStepResponse
+
+    interface _GetTemplateStepGroupResponse
+      include Smithy::Client::_Response[Types::GetTemplateStepGroupOutput]
+      def template_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def tools: () -> Array[Types::Tool]?
+      def previous: () -> Array[String]?
+      def next: () -> Array[String]?
+    end
+    def get_template_step_group: (
+      ?template_id: String,
+      ?id: String
+    ) -> _GetTemplateStepGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateStepGroupResponse
+
+    interface _GetWorkflowResponse
+      include Smithy::Client::_Response[Types::GetWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def template_id: () -> String?
+      def ads_application_configuration_id: () -> String?
+      def ads_application_name: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_time: () -> Time?
+      def last_start_time: () -> Time?
+      def last_stop_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def tools: () -> Array[Types::Tool]?
+      def total_steps: () -> Integer?
+      def completed_steps: () -> Integer?
+      def workflow_inputs: () -> Hash[String, Types::StepInput]?
+      def tags: () -> Hash[String, String]?
+      def workflow_bucket: () -> String?
+    end
+    def get_workflow: (
+      ?id: String
+    ) -> _GetWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowResponse
+
+    interface _GetWorkflowStepResponse
+      include Smithy::Client::_Response[Types::GetWorkflowStepOutput]
+      def name: () -> String?
+      def step_group_id: () -> String?
+      def workflow_id: () -> String?
+      def step_id: () -> String?
+      def description: () -> String?
+      def step_action_type: () -> String?
+      def owner: () -> String?
+      def workflow_step_automation_configuration: () -> Types::WorkflowStepAutomationConfiguration?
+      def step_target: () -> Array[String]?
+      def outputs: () -> Array[Types::WorkflowStepOutput]?
+      def previous: () -> Array[String]?
+      def next: () -> Array[String]?
+      def status: () -> String?
+      def status_message: () -> String?
+      def script_output_location: () -> String?
+      def creation_time: () -> Time?
+      def last_start_time: () -> Time?
+      def end_time: () -> Time?
+      def no_of_srv_completed: () -> Integer?
+      def no_of_srv_failed: () -> Integer?
+      def total_no_of_srv: () -> Integer?
+    end
+    def get_workflow_step: (
+      ?workflow_id: String,
+      ?step_group_id: String,
+      ?id: String
+    ) -> _GetWorkflowStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowStepResponse
+
+    interface _GetWorkflowStepGroupResponse
+      include Smithy::Client::_Response[Types::GetWorkflowStepGroupOutput]
+      def id: () -> String?
+      def workflow_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def owner: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def tools: () -> Array[Types::Tool]?
+      def previous: () -> Array[String]?
+      def next: () -> Array[String]?
+    end
+    def get_workflow_step_group: (
+      ?id: String,
+      ?workflow_id: String
+    ) -> _GetWorkflowStepGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowStepGroupResponse
+
+    interface _ListPluginsResponse
+      include Smithy::Client::_Response[Types::ListPluginsOutput]
+      def next_token: () -> String?
+      def plugins: () -> Array[Types::PluginSummary]?
+    end
+    def list_plugins: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPluginsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPluginsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateStepGroupsResponse
+      include Smithy::Client::_Response[Types::ListTemplateStepGroupsOutput]
+      def next_token: () -> String?
+      def template_step_group_summary: () -> Array[Types::TemplateStepGroupSummary]?
+    end
+    def list_template_step_groups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?template_id: String
+    ) -> _ListTemplateStepGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateStepGroupsResponse
+
+    interface _ListTemplateStepsResponse
+      include Smithy::Client::_Response[Types::ListTemplateStepsOutput]
+      def next_token: () -> String?
+      def template_step_summary_list: () -> Array[Types::TemplateStepSummary]?
+    end
+    def list_template_steps: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?template_id: String,
+      ?step_group_id: String
+    ) -> _ListTemplateStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateStepsResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesOutput]
+      def next_token: () -> String?
+      def template_summary: () -> Array[Types::TemplateSummary]?
+    end
+    def list_templates: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name: String
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _ListWorkflowStepGroupsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowStepGroupsOutput]
+      def next_token: () -> String?
+      def workflow_step_groups_summary: () -> Array[Types::WorkflowStepGroupSummary]?
+    end
+    def list_workflow_step_groups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workflow_id: String
+    ) -> _ListWorkflowStepGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowStepGroupsResponse
+
+    interface _ListWorkflowStepsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowStepsOutput]
+      def next_token: () -> String?
+      def workflow_steps_summary: () -> Array[Types::WorkflowStepSummary]?
+    end
+    def list_workflow_steps: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workflow_id: String,
+      ?step_group_id: String
+    ) -> _ListWorkflowStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowStepsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsOutput]
+      def next_token: () -> String?
+      def migration_workflow_summary: () -> Array[Types::MigrationWorkflowSummary]?
+    end
+    def list_workflows: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?template_id: String,
+      ?ads_application_configuration_name: String,
+      ?status: String,
+      ?name: String
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _RetryWorkflowStepResponse
+      include Smithy::Client::_Response[Types::RetryWorkflowStepOutput]
+      def step_group_id: () -> String?
+      def workflow_id: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def retry_workflow_step: (
+      ?workflow_id: String,
+      ?step_group_id: String,
+      ?id: String
+    ) -> _RetryWorkflowStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryWorkflowStepResponse
+
+    interface _StartWorkflowResponse
+      include Smithy::Client::_Response[Types::StartWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def last_start_time: () -> Time?
+    end
+    def start_workflow: (
+      ?id: String
+    ) -> _StartWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkflowResponse
+
+    interface _StopWorkflowResponse
+      include Smithy::Client::_Response[Types::StopWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def last_stop_time: () -> Time?
+    end
+    def stop_workflow: (
+      ?id: String
+    ) -> _StopWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopWorkflowResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateResponse]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_template: (
+      ?id: String,
+      ?template_name: String,
+      ?template_description: String,
+      ?client_token: String
+    ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse
+
+    interface _UpdateWorkflowResponse
+      include Smithy::Client::_Response[Types::UpdateWorkflowOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def template_id: () -> String?
+      def ads_application_configuration_id: () -> String?
+      def workflow_inputs: () -> Hash[String, Types::StepInput]?
+      def step_targets: () -> Array[String]?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_workflow: (
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?input_parameters: Hash[String,
+        {
+          integer_value: Integer,
+          string_value: String,
+          list_of_strings_value: Array[String],
+          map_of_string_value: Hash[String, String]
+        }
+      ],
+      ?step_targets: Array[String]
+    ) -> _UpdateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowResponse
+
+    interface _UpdateWorkflowStepResponse
+      include Smithy::Client::_Response[Types::UpdateWorkflowStepOutput]
+      def id: () -> String?
+      def step_group_id: () -> String?
+      def workflow_id: () -> String?
+      def name: () -> String?
+    end
+    def update_workflow_step: (
+      ?id: String,
+      ?step_group_id: String,
+      ?workflow_id: String,
+      ?name: String,
+      ?description: String,
+      ?step_action_type: String,
+      ?workflow_step_automation_configuration: {
+        script_location_s3_bucket: String,
+        script_location_s3_key: {
+          linux: String,
+          windows: untyped
+        },
+        command: {
+          linux: String,
+          windows: untyped
+        },
+        run_environment: String,
+        target_type: String
+      },
+      ?step_target: Array[String],
+      ?outputs: Array[
+        {
+          name: String,
+          data_type: String,
+          required: bool,
+          value: {
+            integer_value: Integer,
+            string_value: String,
+            list_of_string_value: Array[String]
+          }
+        }
+      ],
+      ?previous: Array[String],
+      ?next: Array[String],
+      ?status: String
+    ) -> _UpdateWorkflowStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowStepResponse
+
+    interface _UpdateWorkflowStepGroupResponse
+      include Smithy::Client::_Response[Types::UpdateWorkflowStepGroupOutput]
+      def workflow_id: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def description: () -> String?
+      def tools: () -> Array[Types::Tool]?
+      def next: () -> Array[String]?
+      def previous: () -> Array[String]?
+      def last_modified_time: () -> Time?
+    end
+    def update_workflow_step_group: (
+      ?workflow_id: String,
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?next: Array[String],
+      ?previous: Array[String]
+    ) -> _UpdateWorkflowStepGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowStepGroupResponse
+  end
+end

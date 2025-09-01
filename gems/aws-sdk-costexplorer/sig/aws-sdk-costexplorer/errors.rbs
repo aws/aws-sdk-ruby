@@ -1,0 +1,48 @@
+module Aws::CostExplorer
+  module Errors
+    class AnalysisNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BackfillLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BillExpirationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DataUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GenerationExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestChangedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_name: () -> String?
+    end
+    class UnknownMonitorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnknownSubscriptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnresolvableUsageUnitException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

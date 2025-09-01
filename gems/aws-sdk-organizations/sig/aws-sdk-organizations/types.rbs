@@ -1,0 +1,2325 @@
+module Aws::Organizations
+  module Types
+
+    class AWSOrganizationsNotInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AcceptHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_id: String?
+    end
+
+    class AcceptHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessDeniedForDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedForDependencyExceptionReason
+      ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE: String
+    end
+
+    class Account
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?email: String,
+        ?name: String,
+        ?status: String,
+        ?joined_method: String,
+        ?joined_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor joined_method: String?
+      attr_accessor joined_timestamp: Time?
+    end
+
+    class AccountAlreadyClosedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccountJoinedMethod
+      INVITED: String
+      CREATED: String
+    end
+
+    class AccountNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountNotRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountOwnerNotVerifiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccountStatus
+      ACTIVE: String
+      SUSPENDED: String
+      PENDING_CLOSURE: String
+    end
+
+    module ActionType
+      INVITE_ACCOUNT_TO_ORGANIZATION: String
+      ENABLE_ALL_FEATURES: String
+      APPROVE_ALL_FEATURES: String
+      ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE: String
+    end
+
+    class AlreadyInOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor target_id: String?
+    end
+
+    class CancelHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_id: String?
+    end
+
+    class CancelHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class Child
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class ChildNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ChildType
+      ACCOUNT: String
+      ORGANIZATIONAL_UNIT: String
+    end
+
+    class CloseAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConstraintViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ConstraintViolationExceptionReason
+      ACCOUNT_NUMBER_LIMIT_EXCEEDED: String
+      HANDSHAKE_RATE_LIMIT_EXCEEDED: String
+      OU_NUMBER_LIMIT_EXCEEDED: String
+      OU_DEPTH_LIMIT_EXCEEDED: String
+      POLICY_NUMBER_LIMIT_EXCEEDED: String
+      POLICY_CONTENT_LIMIT_EXCEEDED: String
+      MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: String
+      MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: String
+      ACCOUNT_CANNOT_LEAVE_ORGANIZATION: String
+      ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: String
+      ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: String
+      MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: String
+      MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: String
+      ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: String
+      MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: String
+      MASTER_ACCOUNT_MISSING_CONTACT_INFO: String
+      MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: String
+      ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: String
+      CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: String
+      EMAIL_VERIFICATION_CODE_EXPIRED: String
+      WAIT_PERIOD_ACTIVE: String
+      MAX_TAG_LIMIT_EXCEEDED: String
+      TAG_POLICY_VIOLATION: String
+      MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: String
+      CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: String
+      CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: String
+      DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: String
+      POLICY_TYPE_ENABLED_FOR_THIS_SERVICE: String
+      MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: String
+      CANNOT_CLOSE_MANAGEMENT_ACCOUNT: String
+      CLOSE_ACCOUNT_QUOTA_EXCEEDED: String
+      CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED: String
+      SERVICE_ACCESS_NOT_ENABLED: String
+      INVALID_PAYMENT_INSTRUMENT: String
+      ACCOUNT_CREATION_NOT_COMPLETE: String
+      CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR: String
+      ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED: String
+    end
+
+    module CreateAccountFailureReason
+      ACCOUNT_LIMIT_EXCEEDED: String
+      EMAIL_ALREADY_EXISTS: String
+      INVALID_ADDRESS: String
+      INVALID_EMAIL: String
+      CONCURRENT_ACCOUNT_MODIFICATION: String
+      INTERNAL_FAILURE: String
+      GOVCLOUD_ACCOUNT_ALREADY_EXISTS: String
+      MISSING_BUSINESS_VALIDATION: String
+      FAILED_BUSINESS_VALIDATION: String
+      PENDING_BUSINESS_VALIDATIONv: String
+      INVALID_IDENTITY_FOR_BUSINESS_VALIDATION: String
+      UNKNOWN_BUSINESS_VALIDATION: String
+      MISSING_PAYMENT_INSTRUMENT: String
+      INVALID_PAYMENT_INSTRUMENT: String
+      UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED: String
+    end
+
+    class CreateAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?account_name: String,
+        ?role_name: String,
+        ?iam_user_access_to_billing: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor account_name: String?
+      attr_accessor role_name: String?
+      attr_accessor iam_user_access_to_billing: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_account_status: Types::CreateAccountStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_account_status: Types::CreateAccountStatus?
+    end
+
+    module CreateAccountState
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class CreateAccountStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?account_name: String,
+        ?state: String,
+        ?requested_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?account_id: String,
+        ?gov_cloud_account_id: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor account_name: String?
+      attr_accessor state: String?
+      attr_accessor requested_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor account_id: String?
+      attr_accessor gov_cloud_account_id: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class CreateAccountStatusNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateGovCloudAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?account_name: String,
+        ?role_name: String,
+        ?iam_user_access_to_billing: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor account_name: String?
+      attr_accessor role_name: String?
+      attr_accessor iam_user_access_to_billing: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGovCloudAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_account_status: Types::CreateAccountStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_account_status: Types::CreateAccountStatus?
+    end
+
+    class CreateOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_set: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_set: String?
+    end
+
+    class CreateOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization: Types::Organization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization: Types::Organization?
+    end
+
+    class CreateOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_id: String,
+        ?name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_id: String?
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateOrganizationalUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit: Types::OrganizationalUnit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit: Types::OrganizationalUnit?
+    end
+
+    class CreatePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?description: String,
+        ?name: String,
+        ?type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::Policy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::Policy?
+    end
+
+    class DeclineHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_id: String?
+    end
+
+    class DeclineHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class DelegatedAdministrator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?email: String,
+        ?name: String,
+        ?status: String,
+        ?joined_method: String,
+        ?joined_timestamp: Time,
+        ?delegation_enabled_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor email: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor joined_method: String?
+      attr_accessor joined_timestamp: Time?
+      attr_accessor delegation_enabled_date: Time?
+    end
+
+    class DelegatedService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?delegation_enabled_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor delegation_enabled_date: Time?
+    end
+
+    class DeleteOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+    end
+
+    class DeletePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class DeregisterDelegatedAdministratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor service_principal: String?
+    end
+
+    class DescribeAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class DescribeAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::Account,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::Account?
+    end
+
+    class DescribeCreateAccountStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_account_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_account_request_id: String?
+    end
+
+    class DescribeCreateAccountStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_account_status: Types::CreateAccountStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_account_status: Types::CreateAccountStatus?
+    end
+
+    class DescribeEffectivePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type: String,
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor target_id: String?
+    end
+
+    class DescribeEffectivePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effective_policy: Types::EffectivePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effective_policy: Types::EffectivePolicy?
+    end
+
+    class DescribeHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_id: String?
+    end
+
+    class DescribeHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class DescribeOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization: Types::Organization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization: Types::Organization?
+    end
+
+    class DescribeOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+    end
+
+    class DescribeOrganizationalUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit: Types::OrganizationalUnit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit: Types::OrganizationalUnit?
+    end
+
+    class DescribePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+    end
+
+    class DescribePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::Policy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::Policy?
+    end
+
+    class DescribeResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+    end
+
+    class DestinationParentNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DetachPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor target_id: String?
+    end
+
+    class DisableAWSServiceAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+    end
+
+    class DisablePolicyTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?root_id: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root_id: String?
+      attr_accessor policy_type: String?
+    end
+
+    class DisablePolicyTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?root: Types::Root,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root: Types::Root?
+    end
+
+    class DuplicateAccountException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateHandshakeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicateOrganizationalUnitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicatePolicyAttachmentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DuplicatePolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EffectivePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_content: String,
+        ?last_updated_timestamp: Time,
+        ?target_id: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_content: String?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor target_id: String?
+      attr_accessor policy_type: String?
+    end
+
+    class EffectivePolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module EffectivePolicyType
+      TAG_POLICY: String
+      BACKUP_POLICY: String
+      AISERVICES_OPT_OUT_POLICY: String
+      CHATBOT_POLICY: String
+      DECLARATIVE_POLICY_EC2: String
+      SECURITYHUB_POLICY: String
+    end
+
+    class EffectivePolicyValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+        ?path_to_error: String,
+        ?contributing_policies: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor path_to_error: String?
+      attr_accessor contributing_policies: Array[String]?
+    end
+
+    class EnableAWSServiceAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+    end
+
+    class EnableAllFeaturesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableAllFeaturesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class EnablePolicyTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?root_id: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root_id: String?
+      attr_accessor policy_type: String?
+    end
+
+    class EnablePolicyTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?root: Types::Root,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root: Types::Root?
+    end
+
+    class EnabledServicePrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?date_enabled: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor date_enabled: Time?
+    end
+
+    class FinalizingOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Handshake
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?parties: Array[Types::HandshakeParty],
+        ?state: String,
+        ?requested_timestamp: Time,
+        ?expiration_timestamp: Time,
+        ?action: String,
+        ?resources: Array[Types::HandshakeResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor parties: Array[Types::HandshakeParty]?
+      attr_accessor state: String?
+      attr_accessor requested_timestamp: Time?
+      attr_accessor expiration_timestamp: Time?
+      attr_accessor action: String?
+      attr_accessor resources: Array[Types::HandshakeResource]?
+    end
+
+    class HandshakeAlreadyInStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HandshakeConstraintViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module HandshakeConstraintViolationExceptionReason
+      ACCOUNT_NUMBER_LIMIT_EXCEEDED: String
+      HANDSHAKE_RATE_LIMIT_EXCEEDED: String
+      ALREADY_IN_AN_ORGANIZATION: String
+      ORGANIZATION_ALREADY_HAS_ALL_FEATURES: String
+      ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: String
+      INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: String
+      PAYMENT_INSTRUMENT_REQUIRED: String
+      ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: String
+      ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: String
+      MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED: String
+    end
+
+    class HandshakeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?parent_handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor parent_handshake_id: String?
+    end
+
+    class HandshakeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HandshakeParty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    module HandshakePartyType
+      ACCOUNT: String
+      ORGANIZATION: String
+      EMAIL: String
+    end
+
+    class HandshakeResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?type: String,
+        ?resources: Array[Types::HandshakeResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor type: String?
+      attr_accessor resources: Array[Types::HandshakeResource]?
+    end
+
+    module HandshakeResourceType
+      ACCOUNT: String
+      ORGANIZATION: String
+      ORGANIZATION_FEATURE_SET: String
+      EMAIL: String
+      MASTER_EMAIL: String
+      MASTER_NAME: String
+      NOTES: String
+      PARENT_HANDSHAKE: String
+    end
+
+    module HandshakeState
+      REQUESTED: String
+      OPEN: String
+      CANCELED: String
+      ACCEPTED: String
+      DECLINED: String
+      EXPIRED: String
+    end
+
+    module IAMUserAccessToBilling
+      ALLOW: String
+      DENY: String
+    end
+
+    class InvalidHandshakeTransitionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module InvalidInputExceptionReason
+      INVALID_PARTY_TYPE_TARGET: String
+      INVALID_SYNTAX_ORGANIZATION: String
+      INVALID_SYNTAX_POLICY: String
+      INVALID_ENUM: String
+      INVALID_ENUM_POLICY_TYPE: String
+      INVALID_LIST_MEMBER: String
+      MAX_LENGTH_EXCEEDED: String
+      MAX_VALUE_EXCEEDED: String
+      MIN_LENGTH_EXCEEDED: String
+      MIN_VALUE_EXCEEDED: String
+      IMMUTABLE_POLICY: String
+      INVALID_PATTERN: String
+      INVALID_PATTERN_TARGET_ID: String
+      INPUT_REQUIRED: String
+      INVALID_PAGINATION_TOKEN: String
+      MAX_FILTER_LIMIT_EXCEEDED: String
+      MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: String
+      INVALID_FULL_NAME_TARGET: String
+      UNRECOGNIZED_SERVICE_PRINCIPAL: String
+      INVALID_ROLE_NAME: String
+      INVALID_SYSTEM_TAGS_PARAMETER: String
+      DUPLICATE_TAG_KEY: String
+      TARGET_NOT_SUPPORTED: String
+      INVALID_EMAIL_ADDRESS_TARGET: String
+      INVALID_RESOURCE_POLICY_JSON: String
+      INVALID_PRINCIPAL: String
+      UNSUPPORTED_ACTION_IN_RESOURCE_POLICY: String
+      UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY: String
+      UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY: String
+      NON_DETACHABLE_POLICY: String
+    end
+
+    class InviteAccountToOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::HandshakeParty,
+        ?notes: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::HandshakeParty?
+      attr_accessor notes: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InviteAccountToOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class ListAWSServiceAccessForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAWSServiceAccessForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_service_principals: Array[Types::EnabledServicePrincipal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_service_principals: Array[Types::EnabledServicePrincipal]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsForParentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountsForParentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::Account],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::Account]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::Account],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::Account]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsWithInvalidEffectivePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountsWithInvalidEffectivePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::Account],
+        ?policy_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::Account]?
+      attr_accessor policy_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListChildrenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_id: String,
+        ?child_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_id: String?
+      attr_accessor child_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListChildrenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?children: Array[Types::Child],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor children: Array[Types::Child]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCreateAccountStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?states: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor states: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCreateAccountStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_account_statuses: Array[Types::CreateAccountStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_account_statuses: Array[Types::CreateAccountStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDelegatedAdministratorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDelegatedAdministratorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegated_administrators: Array[Types::DelegatedAdministrator],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegated_administrators: Array[Types::DelegatedAdministrator]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDelegatedServicesForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDelegatedServicesForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegated_services: Array[Types::DelegatedService],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegated_services: Array[Types::DelegatedService]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEffectivePolicyValidationErrorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?policy_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEffectivePolicyValidationErrorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?policy_type: String,
+        ?path: String,
+        ?evaluation_timestamp: Time,
+        ?next_token: String,
+        ?effective_policy_validation_errors: Array[Types::EffectivePolicyValidationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor policy_type: String?
+      attr_accessor path: String?
+      attr_accessor evaluation_timestamp: Time?
+      attr_accessor next_token: String?
+      attr_accessor effective_policy_validation_errors: Array[Types::EffectivePolicyValidationError]?
+    end
+
+    class ListHandshakesForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::HandshakeFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::HandshakeFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListHandshakesForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshakes: Array[Types::Handshake],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshakes: Array[Types::Handshake]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHandshakesForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::HandshakeFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::HandshakeFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListHandshakesForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshakes: Array[Types::Handshake],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshakes: Array[Types::Handshake]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationalUnitsForParentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOrganizationalUnitsForParentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_units: Array[Types::OrganizationalUnit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_units: Array[Types::OrganizationalUnit]?
+      attr_accessor next_token: String?
+    end
+
+    class ListParentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?child_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor child_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListParentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parents: Array[Types::Parent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parents: Array[Types::Parent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPoliciesForTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?filter: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor filter: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPoliciesForTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Array[Types::PolicySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Array[Types::PolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policies: Array[Types::PolicySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policies: Array[Types::PolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRootsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRootsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?roots: Array[Types::Root],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor roots: Array[Types::Root]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTargetsForPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTargetsForPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?targets: Array[Types::PolicyTargetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor targets: Array[Types::PolicyTargetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MasterCannotLeaveOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MoveAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?source_parent_id: String,
+        ?destination_parent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor source_parent_id: String?
+      attr_accessor destination_parent_id: String?
+    end
+
+    class Organization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?feature_set: String,
+        ?master_account_arn: String,
+        ?master_account_id: String,
+        ?master_account_email: String,
+        ?available_policy_types: Array[Types::PolicyTypeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor feature_set: String?
+      attr_accessor master_account_arn: String?
+      attr_accessor master_account_id: String?
+      attr_accessor master_account_email: String?
+      attr_accessor available_policy_types: Array[Types::PolicyTypeSummary]?
+    end
+
+    module OrganizationFeatureSet
+      ALL: String
+      CONSOLIDATED_BILLING: String
+    end
+
+    class OrganizationNotEmptyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationalUnit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class OrganizationalUnitNotEmptyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationalUnitNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Parent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    class ParentNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ParentType
+      ROOT: String
+      ORGANIZATIONAL_UNIT: String
+    end
+
+    class Policy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_summary: Types::PolicySummary,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_summary: Types::PolicySummary?
+      attr_accessor content: String?
+    end
+
+    class PolicyChangesInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyNotAttachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?aws_managed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor aws_managed: bool?
+    end
+
+    class PolicyTargetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?arn: String,
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module PolicyType
+      SERVICE_CONTROL_POLICY: String
+      RESOURCE_CONTROL_POLICY: String
+      TAG_POLICY: String
+      BACKUP_POLICY: String
+      AISERVICES_OPT_OUT_POLICY: String
+      CHATBOT_POLICY: String
+      DECLARATIVE_POLICY_EC2: String
+      SECURITYHUB_POLICY: String
+    end
+
+    class PolicyTypeAlreadyEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyTypeNotAvailableForOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyTypeNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PolicyTypeStatus
+      ENABLED: String
+      PENDING_ENABLE: String
+      PENDING_DISABLE: String
+    end
+
+    class PolicyTypeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: Types::ResourcePolicy?
+    end
+
+    class RegisterDelegatedAdministratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor service_principal: String?
+    end
+
+    class RemoveAccountFromOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class ResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy_summary: Types::ResourcePolicySummary,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy_summary: Types::ResourcePolicySummary?
+      attr_accessor content: String?
+    end
+
+    class ResourcePolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourcePolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class Root
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?policy_types: Array[Types::PolicyTypeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor policy_types: Array[Types::PolicyTypeSummary]?
+    end
+
+    class RootNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceParentNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TargetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TargetType
+      ACCOUNT: String
+      ORGANIZATIONAL_UNIT: String
+      ROOT: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class UnsupportedAPIEndpointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateOrganizationalUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit: Types::OrganizationalUnit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit: Types::OrganizationalUnit?
+    end
+
+    class UpdatePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?name: String,
+        ?description: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor content: String?
+    end
+
+    class UpdatePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::Policy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::Policy?
+    end
+  end
+end

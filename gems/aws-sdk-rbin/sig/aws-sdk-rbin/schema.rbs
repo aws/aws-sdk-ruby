@@ -1,0 +1,66 @@
+module Aws::Rbin
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ConflictException: StructureShape
+    ConflictExceptionReason: EnumShape
+    CreateRuleRequest: StructureShape
+    CreateRuleResponse: StructureShape
+    DeleteRuleRequest: StructureShape
+    DeleteRuleResponse: StructureShape
+    Description: StringShape
+    ErrorMessage: StringShape
+    ExcludeResourceTags: ListShape
+    GetRuleRequest: StructureShape
+    GetRuleResponse: StructureShape
+    InternalServerException: StructureShape
+    ListRulesRequest: StructureShape
+    ListRulesResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    LockConfiguration: StructureShape
+    LockRuleRequest: StructureShape
+    LockRuleResponse: StructureShape
+    LockState: EnumShape
+    MaxResults: IntegerShape
+    NextToken: StringShape
+    ResourceNotFoundException: StructureShape
+    ResourceNotFoundExceptionReason: EnumShape
+    ResourceTag: StructureShape
+    ResourceTagKey: StringShape
+    ResourceTagValue: StringShape
+    ResourceTags: ListShape
+    ResourceType: EnumShape
+    RetentionPeriod: StructureShape
+    RetentionPeriodUnit: EnumShape
+    RetentionPeriodValue: IntegerShape
+    RuleArn: StringShape
+    RuleIdentifier: StringShape
+    RuleStatus: EnumShape
+    RuleSummary: StructureShape
+    RuleSummaryList: ListShape
+    ServiceQuotaExceededException: StructureShape
+    ServiceQuotaExceededExceptionReason: EnumShape
+    Tag: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    TimeStamp: TimestampShape
+    UnlockDelay: StructureShape
+    UnlockDelayUnit: EnumShape
+    UnlockDelayValue: IntegerShape
+    UnlockRuleRequest: StructureShape
+    UnlockRuleResponse: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateRuleRequest: StructureShape
+    UpdateRuleResponse: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionReason: EnumShape
+
+    AmazonRecycleBin: ServiceShape
+  end
+end

@@ -1,0 +1,37 @@
+module Aws::CognitoIdentity
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DeveloperUserAlreadyRegisteredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIdentityPoolConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAuthorizedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

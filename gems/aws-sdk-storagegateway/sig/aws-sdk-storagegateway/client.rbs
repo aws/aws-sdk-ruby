@@ -1,0 +1,1261 @@
+module Aws::StorageGateway
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::StorageGateway::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateGatewayResponse
+      include Smithy::Client::_Response[Types::ActivateGatewayOutput]
+      def gateway_arn: () -> String?
+    end
+    def activate_gateway: (
+      ?activation_key: String,
+      ?gateway_name: String,
+      ?gateway_timezone: String,
+      ?gateway_region: String,
+      ?gateway_type: String,
+      ?tape_drive_type: String,
+      ?medium_changer_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ActivateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateGatewayResponse
+
+    interface _AddCacheResponse
+      include Smithy::Client::_Response[Types::AddCacheOutput]
+      def gateway_arn: () -> String?
+    end
+    def add_cache: (
+      ?gateway_arn: String,
+      ?disk_ids: Array[String]
+    ) -> _AddCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCacheResponse
+
+    interface _AddTagsToResourceResponse
+      include Smithy::Client::_Response[Types::AddTagsToResourceOutput]
+      def resource_arn: () -> String?
+    end
+    def add_tags_to_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToResourceResponse
+
+    interface _AddUploadBufferResponse
+      include Smithy::Client::_Response[Types::AddUploadBufferOutput]
+      def gateway_arn: () -> String?
+    end
+    def add_upload_buffer: (
+      ?gateway_arn: String,
+      ?disk_ids: Array[String]
+    ) -> _AddUploadBufferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddUploadBufferResponse
+
+    interface _AddWorkingStorageResponse
+      include Smithy::Client::_Response[Types::AddWorkingStorageOutput]
+      def gateway_arn: () -> String?
+    end
+    def add_working_storage: (
+      ?gateway_arn: String,
+      ?disk_ids: Array[String]
+    ) -> _AddWorkingStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddWorkingStorageResponse
+
+    interface _AssignTapePoolResponse
+      include Smithy::Client::_Response[Types::AssignTapePoolOutput]
+      def tape_arn: () -> String?
+    end
+    def assign_tape_pool: (
+      ?tape_arn: String,
+      ?pool_id: String,
+      ?bypass_governance_retention: bool
+    ) -> _AssignTapePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssignTapePoolResponse
+
+    interface _AssociateFileSystemResponse
+      include Smithy::Client::_Response[Types::AssociateFileSystemOutput]
+      def file_system_association_arn: () -> String?
+    end
+    def associate_file_system: (
+      ?user_name: String,
+      ?password: String,
+      ?client_token: String,
+      ?gateway_arn: String,
+      ?location_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?audit_destination_arn: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      },
+      ?endpoint_network_configuration: {
+        ip_addresses: Array[String]
+      }
+    ) -> _AssociateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFileSystemResponse
+
+    interface _AttachVolumeResponse
+      include Smithy::Client::_Response[Types::AttachVolumeOutput]
+      def volume_arn: () -> String?
+      def target_arn: () -> String?
+    end
+    def attach_volume: (
+      ?gateway_arn: String,
+      ?target_name: String,
+      ?volume_arn: String,
+      ?network_interface_id: String,
+      ?disk_id: String
+    ) -> _AttachVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachVolumeResponse
+
+    interface _CancelArchivalResponse
+      include Smithy::Client::_Response[Types::CancelArchivalOutput]
+      def tape_arn: () -> String?
+    end
+    def cancel_archival: (
+      ?gateway_arn: String,
+      ?tape_arn: String
+    ) -> _CancelArchivalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelArchivalResponse
+
+    interface _CancelCacheReportResponse
+      include Smithy::Client::_Response[Types::CancelCacheReportOutput]
+      def cache_report_arn: () -> String?
+    end
+    def cancel_cache_report: (
+      ?cache_report_arn: String
+    ) -> _CancelCacheReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelCacheReportResponse
+
+    interface _CancelRetrievalResponse
+      include Smithy::Client::_Response[Types::CancelRetrievalOutput]
+      def tape_arn: () -> String?
+    end
+    def cancel_retrieval: (
+      ?gateway_arn: String,
+      ?tape_arn: String
+    ) -> _CancelRetrievalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelRetrievalResponse
+
+    interface _CreateCachediSCSIVolumeResponse
+      include Smithy::Client::_Response[Types::CreateCachediSCSIVolumeOutput]
+      def volume_arn: () -> String?
+      def target_arn: () -> String?
+    end
+    def create_cachedi_scsi_volume: (
+      ?gateway_arn: String,
+      ?volume_size_in_bytes: Integer,
+      ?snapshot_id: String,
+      ?target_name: String,
+      ?source_volume_arn: String,
+      ?network_interface_id: String,
+      ?client_token: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCachediSCSIVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCachediSCSIVolumeResponse
+
+    interface _CreateNFSFileShareResponse
+      include Smithy::Client::_Response[Types::CreateNFSFileShareOutput]
+      def file_share_arn: () -> String?
+    end
+    def create_nfs_file_share: (
+      ?client_token: String,
+      ?nfs_file_share_defaults: {
+        file_mode: String,
+        directory_mode: untyped,
+        group_id: Integer,
+        owner_id: untyped
+      },
+      ?gateway_arn: String,
+      ?encryption_type: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?role: String,
+      ?location_arn: String,
+      ?default_storage_class: String,
+      ?object_acl: String,
+      ?client_list: Array[String],
+      ?squash: String,
+      ?read_only: bool,
+      ?guess_mime_type_enabled: bool,
+      ?requester_pays: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_share_name: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      },
+      ?notification_policy: String,
+      ?vpc_endpoint_dns_name: String,
+      ?bucket_region: String,
+      ?audit_destination_arn: String
+    ) -> _CreateNFSFileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNFSFileShareResponse
+
+    interface _CreateSMBFileShareResponse
+      include Smithy::Client::_Response[Types::CreateSMBFileShareOutput]
+      def file_share_arn: () -> String?
+    end
+    def create_smb_file_share: (
+      ?client_token: String,
+      ?gateway_arn: String,
+      ?encryption_type: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?role: String,
+      ?location_arn: String,
+      ?default_storage_class: String,
+      ?object_acl: String,
+      ?read_only: bool,
+      ?guess_mime_type_enabled: bool,
+      ?requester_pays: bool,
+      ?smbacl_enabled: bool,
+      ?access_based_enumeration: bool,
+      ?admin_user_list: Array[String],
+      ?valid_user_list: Array[String],
+      ?invalid_user_list: Array[String],
+      ?audit_destination_arn: String,
+      ?authentication: String,
+      ?case_sensitivity: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_share_name: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      },
+      ?notification_policy: String,
+      ?vpc_endpoint_dns_name: String,
+      ?bucket_region: String,
+      ?oplocks_enabled: bool
+    ) -> _CreateSMBFileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSMBFileShareResponse
+
+    interface _CreateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotOutput]
+      def volume_arn: () -> String?
+      def snapshot_id: () -> String?
+    end
+    def create_snapshot: (
+      ?volume_arn: String,
+      ?snapshot_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotResponse
+
+    interface _CreateSnapshotFromVolumeRecoveryPointResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotFromVolumeRecoveryPointOutput]
+      def snapshot_id: () -> String?
+      def volume_arn: () -> String?
+      def volume_recovery_point_time: () -> String?
+    end
+    def create_snapshot_from_volume_recovery_point: (
+      ?volume_arn: String,
+      ?snapshot_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSnapshotFromVolumeRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotFromVolumeRecoveryPointResponse
+
+    interface _CreateStorediSCSIVolumeResponse
+      include Smithy::Client::_Response[Types::CreateStorediSCSIVolumeOutput]
+      def volume_arn: () -> String?
+      def volume_size_in_bytes: () -> Integer?
+      def target_arn: () -> String?
+    end
+    def create_storedi_scsi_volume: (
+      ?gateway_arn: String,
+      ?disk_id: String,
+      ?snapshot_id: String,
+      ?preserve_existing_data: bool,
+      ?target_name: String,
+      ?network_interface_id: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateStorediSCSIVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStorediSCSIVolumeResponse
+
+    interface _CreateTapePoolResponse
+      include Smithy::Client::_Response[Types::CreateTapePoolOutput]
+      def pool_arn: () -> String?
+    end
+    def create_tape_pool: (
+      ?pool_name: String,
+      ?storage_class: String,
+      ?retention_lock_type: String,
+      ?retention_lock_time_in_days: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTapePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTapePoolResponse
+
+    interface _CreateTapeWithBarcodeResponse
+      include Smithy::Client::_Response[Types::CreateTapeWithBarcodeOutput]
+      def tape_arn: () -> String?
+    end
+    def create_tape_with_barcode: (
+      ?gateway_arn: String,
+      ?tape_size_in_bytes: Integer,
+      ?tape_barcode: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?pool_id: String,
+      ?worm: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTapeWithBarcodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTapeWithBarcodeResponse
+
+    interface _CreateTapesResponse
+      include Smithy::Client::_Response[Types::CreateTapesOutput]
+      def tape_ar_ns: () -> Array[String]?
+    end
+    def create_tapes: (
+      ?gateway_arn: String,
+      ?tape_size_in_bytes: Integer,
+      ?client_token: String,
+      ?num_tapes_to_create: Integer,
+      ?tape_barcode_prefix: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?pool_id: String,
+      ?worm: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTapesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTapesResponse
+
+    interface _DeleteAutomaticTapeCreationPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteAutomaticTapeCreationPolicyOutput]
+      def gateway_arn: () -> String?
+    end
+    def delete_automatic_tape_creation_policy: (
+      ?gateway_arn: String
+    ) -> _DeleteAutomaticTapeCreationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomaticTapeCreationPolicyResponse
+
+    interface _DeleteBandwidthRateLimitResponse
+      include Smithy::Client::_Response[Types::DeleteBandwidthRateLimitOutput]
+      def gateway_arn: () -> String?
+    end
+    def delete_bandwidth_rate_limit: (
+      ?gateway_arn: String,
+      ?bandwidth_type: String
+    ) -> _DeleteBandwidthRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBandwidthRateLimitResponse
+
+    interface _DeleteCacheReportResponse
+      include Smithy::Client::_Response[Types::DeleteCacheReportOutput]
+      def cache_report_arn: () -> String?
+    end
+    def delete_cache_report: (
+      ?cache_report_arn: String
+    ) -> _DeleteCacheReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCacheReportResponse
+
+    interface _DeleteChapCredentialsResponse
+      include Smithy::Client::_Response[Types::DeleteChapCredentialsOutput]
+      def target_arn: () -> String?
+      def initiator_name: () -> String?
+    end
+    def delete_chap_credentials: (
+      ?target_arn: String,
+      ?initiator_name: String
+    ) -> _DeleteChapCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChapCredentialsResponse
+
+    interface _DeleteFileShareResponse
+      include Smithy::Client::_Response[Types::DeleteFileShareOutput]
+      def file_share_arn: () -> String?
+    end
+    def delete_file_share: (
+      ?file_share_arn: String,
+      ?force_delete: bool
+    ) -> _DeleteFileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileShareResponse
+
+    interface _DeleteGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayOutput]
+      def gateway_arn: () -> String?
+    end
+    def delete_gateway: (
+      ?gateway_arn: String
+    ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeleteSnapshotScheduleResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotScheduleOutput]
+      def volume_arn: () -> String?
+    end
+    def delete_snapshot_schedule: (
+      ?volume_arn: String
+    ) -> _DeleteSnapshotScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotScheduleResponse
+
+    interface _DeleteTapeResponse
+      include Smithy::Client::_Response[Types::DeleteTapeOutput]
+      def tape_arn: () -> String?
+    end
+    def delete_tape: (
+      ?gateway_arn: String,
+      ?tape_arn: String,
+      ?bypass_governance_retention: bool
+    ) -> _DeleteTapeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTapeResponse
+
+    interface _DeleteTapeArchiveResponse
+      include Smithy::Client::_Response[Types::DeleteTapeArchiveOutput]
+      def tape_arn: () -> String?
+    end
+    def delete_tape_archive: (
+      ?tape_arn: String,
+      ?bypass_governance_retention: bool
+    ) -> _DeleteTapeArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTapeArchiveResponse
+
+    interface _DeleteTapePoolResponse
+      include Smithy::Client::_Response[Types::DeleteTapePoolOutput]
+      def pool_arn: () -> String?
+    end
+    def delete_tape_pool: (
+      ?pool_arn: String
+    ) -> _DeleteTapePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTapePoolResponse
+
+    interface _DeleteVolumeResponse
+      include Smithy::Client::_Response[Types::DeleteVolumeOutput]
+      def volume_arn: () -> String?
+    end
+    def delete_volume: (
+      ?volume_arn: String
+    ) -> _DeleteVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVolumeResponse
+
+    interface _DescribeAvailabilityMonitorTestResponse
+      include Smithy::Client::_Response[Types::DescribeAvailabilityMonitorTestOutput]
+      def gateway_arn: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+    end
+    def describe_availability_monitor_test: (
+      ?gateway_arn: String
+    ) -> _DescribeAvailabilityMonitorTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAvailabilityMonitorTestResponse
+
+    interface _DescribeBandwidthRateLimitResponse
+      include Smithy::Client::_Response[Types::DescribeBandwidthRateLimitOutput]
+      def gateway_arn: () -> String?
+      def average_upload_rate_limit_in_bits_per_sec: () -> Integer?
+      def average_download_rate_limit_in_bits_per_sec: () -> Integer?
+    end
+    def describe_bandwidth_rate_limit: (
+      ?gateway_arn: String
+    ) -> _DescribeBandwidthRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBandwidthRateLimitResponse
+
+    interface _DescribeBandwidthRateLimitScheduleResponse
+      include Smithy::Client::_Response[Types::DescribeBandwidthRateLimitScheduleOutput]
+      def gateway_arn: () -> String?
+      def bandwidth_rate_limit_intervals: () -> Array[Types::BandwidthRateLimitInterval]?
+    end
+    def describe_bandwidth_rate_limit_schedule: (
+      ?gateway_arn: String
+    ) -> _DescribeBandwidthRateLimitScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBandwidthRateLimitScheduleResponse
+
+    interface _DescribeCacheResponse
+      include Smithy::Client::_Response[Types::DescribeCacheOutput]
+      def gateway_arn: () -> String?
+      def disk_ids: () -> Array[String]?
+      def cache_allocated_in_bytes: () -> Integer?
+      def cache_used_percentage: () -> Float?
+      def cache_dirty_percentage: () -> Float?
+      def cache_hit_percentage: () -> Float?
+      def cache_miss_percentage: () -> Float?
+    end
+    def describe_cache: (
+      ?gateway_arn: String
+    ) -> _DescribeCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCacheResponse
+
+    interface _DescribeCacheReportResponse
+      include Smithy::Client::_Response[Types::DescribeCacheReportOutput]
+      def cache_report_info: () -> Types::CacheReportInfo?
+    end
+    def describe_cache_report: (
+      ?cache_report_arn: String
+    ) -> _DescribeCacheReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCacheReportResponse
+
+    interface _DescribeCachediSCSIVolumesResponse
+      include Smithy::Client::_Response[Types::DescribeCachediSCSIVolumesOutput]
+      def cachedi_scsi_volumes: () -> Array[Types::CachediSCSIVolume]?
+    end
+    def describe_cachedi_scsi_volumes: (
+      ?volume_ar_ns: Array[String]
+    ) -> _DescribeCachediSCSIVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCachediSCSIVolumesResponse
+
+    interface _DescribeChapCredentialsResponse
+      include Smithy::Client::_Response[Types::DescribeChapCredentialsOutput]
+      def chap_credentials: () -> Array[Types::ChapInfo]?
+    end
+    def describe_chap_credentials: (
+      ?target_arn: String
+    ) -> _DescribeChapCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChapCredentialsResponse
+
+    interface _DescribeFileSystemAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeFileSystemAssociationsOutput]
+      def file_system_association_info_list: () -> Array[Types::FileSystemAssociationInfo]?
+    end
+    def describe_file_system_associations: (
+      ?file_system_association_arn_list: Array[String]
+    ) -> _DescribeFileSystemAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileSystemAssociationsResponse
+
+    interface _DescribeGatewayInformationResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayInformationOutput]
+      def gateway_arn: () -> String?
+      def gateway_id: () -> String?
+      def gateway_name: () -> String?
+      def gateway_timezone: () -> String?
+      def gateway_state: () -> String?
+      def gateway_network_interfaces: () -> Array[Types::NetworkInterface]?
+      def gateway_type: () -> String?
+      def next_update_availability_date: () -> String?
+      def last_software_update: () -> String?
+      def ec2_instance_id: () -> String?
+      def ec2_instance_region: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def vpc_endpoint: () -> String?
+      def cloud_watch_log_group_arn: () -> String?
+      def host_environment: () -> String?
+      def endpoint_type: () -> String?
+      def software_updates_end_date: () -> String?
+      def deprecation_date: () -> String?
+      def gateway_capacity: () -> String?
+      def supported_gateway_capacities: () -> Array[String]?
+      def host_environment_id: () -> String?
+      def software_version: () -> String?
+    end
+    def describe_gateway_information: (
+      ?gateway_arn: String
+    ) -> _DescribeGatewayInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayInformationResponse
+
+    interface _DescribeMaintenanceStartTimeResponse
+      include Smithy::Client::_Response[Types::DescribeMaintenanceStartTimeOutput]
+      def gateway_arn: () -> String?
+      def hour_of_day: () -> Integer?
+      def minute_of_hour: () -> Integer?
+      def day_of_week: () -> Integer?
+      def day_of_month: () -> Integer?
+      def timezone: () -> String?
+      def software_update_preferences: () -> Types::SoftwareUpdatePreferences?
+    end
+    def describe_maintenance_start_time: (
+      ?gateway_arn: String
+    ) -> _DescribeMaintenanceStartTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMaintenanceStartTimeResponse
+
+    interface _DescribeNFSFileSharesResponse
+      include Smithy::Client::_Response[Types::DescribeNFSFileSharesOutput]
+      def nfs_file_share_info_list: () -> Array[Types::NFSFileShareInfo]?
+    end
+    def describe_nfs_file_shares: (
+      ?file_share_arn_list: Array[String]
+    ) -> _DescribeNFSFileSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNFSFileSharesResponse
+
+    interface _DescribeSMBFileSharesResponse
+      include Smithy::Client::_Response[Types::DescribeSMBFileSharesOutput]
+      def smb_file_share_info_list: () -> Array[Types::SMBFileShareInfo]?
+    end
+    def describe_smb_file_shares: (
+      ?file_share_arn_list: Array[String]
+    ) -> _DescribeSMBFileSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSMBFileSharesResponse
+
+    interface _DescribeSMBSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeSMBSettingsOutput]
+      def gateway_arn: () -> String?
+      def domain_name: () -> String?
+      def active_directory_status: () -> String?
+      def smb_guest_password_set: () -> bool?
+      def smb_security_strategy: () -> String?
+      def file_shares_visible: () -> bool?
+      def smb_local_groups: () -> Types::SMBLocalGroups?
+    end
+    def describe_smb_settings: (
+      ?gateway_arn: String
+    ) -> _DescribeSMBSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSMBSettingsResponse
+
+    interface _DescribeSnapshotScheduleResponse
+      include Smithy::Client::_Response[Types::DescribeSnapshotScheduleOutput]
+      def volume_arn: () -> String?
+      def start_at: () -> Integer?
+      def recurrence_in_hours: () -> Integer?
+      def description: () -> String?
+      def timezone: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_snapshot_schedule: (
+      ?volume_arn: String
+    ) -> _DescribeSnapshotScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSnapshotScheduleResponse
+
+    interface _DescribeStorediSCSIVolumesResponse
+      include Smithy::Client::_Response[Types::DescribeStorediSCSIVolumesOutput]
+      def storedi_scsi_volumes: () -> Array[Types::StorediSCSIVolume]?
+    end
+    def describe_storedi_scsi_volumes: (
+      ?volume_ar_ns: Array[String]
+    ) -> _DescribeStorediSCSIVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStorediSCSIVolumesResponse
+
+    interface _DescribeTapeArchivesResponse
+      include Smithy::Client::_Response[Types::DescribeTapeArchivesOutput]
+      def tape_archives: () -> Array[Types::TapeArchive]?
+      def marker: () -> String?
+    end
+    def describe_tape_archives: (
+      ?tape_ar_ns: Array[String],
+      ?marker: String,
+      ?limit: Integer
+    ) -> _DescribeTapeArchivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTapeArchivesResponse
+
+    interface _DescribeTapeRecoveryPointsResponse
+      include Smithy::Client::_Response[Types::DescribeTapeRecoveryPointsOutput]
+      def gateway_arn: () -> String?
+      def tape_recovery_point_infos: () -> Array[Types::TapeRecoveryPointInfo]?
+      def marker: () -> String?
+    end
+    def describe_tape_recovery_points: (
+      ?gateway_arn: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _DescribeTapeRecoveryPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTapeRecoveryPointsResponse
+
+    interface _DescribeTapesResponse
+      include Smithy::Client::_Response[Types::DescribeTapesOutput]
+      def tapes: () -> Array[Types::Tape]?
+      def marker: () -> String?
+    end
+    def describe_tapes: (
+      ?gateway_arn: String,
+      ?tape_ar_ns: Array[String],
+      ?marker: String,
+      ?limit: Integer
+    ) -> _DescribeTapesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTapesResponse
+
+    interface _DescribeUploadBufferResponse
+      include Smithy::Client::_Response[Types::DescribeUploadBufferOutput]
+      def gateway_arn: () -> String?
+      def disk_ids: () -> Array[String]?
+      def upload_buffer_used_in_bytes: () -> Integer?
+      def upload_buffer_allocated_in_bytes: () -> Integer?
+    end
+    def describe_upload_buffer: (
+      ?gateway_arn: String
+    ) -> _DescribeUploadBufferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUploadBufferResponse
+
+    interface _DescribeVTLDevicesResponse
+      include Smithy::Client::_Response[Types::DescribeVTLDevicesOutput]
+      def gateway_arn: () -> String?
+      def vtl_devices: () -> Array[Types::VTLDevice]?
+      def marker: () -> String?
+    end
+    def describe_vtl_devices: (
+      ?gateway_arn: String,
+      ?vtl_device_ar_ns: Array[String],
+      ?marker: String,
+      ?limit: Integer
+    ) -> _DescribeVTLDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVTLDevicesResponse
+
+    interface _DescribeWorkingStorageResponse
+      include Smithy::Client::_Response[Types::DescribeWorkingStorageOutput]
+      def gateway_arn: () -> String?
+      def disk_ids: () -> Array[String]?
+      def working_storage_used_in_bytes: () -> Integer?
+      def working_storage_allocated_in_bytes: () -> Integer?
+    end
+    def describe_working_storage: (
+      ?gateway_arn: String
+    ) -> _DescribeWorkingStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkingStorageResponse
+
+    interface _DetachVolumeResponse
+      include Smithy::Client::_Response[Types::DetachVolumeOutput]
+      def volume_arn: () -> String?
+    end
+    def detach_volume: (
+      ?volume_arn: String,
+      ?force_detach: bool
+    ) -> _DetachVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachVolumeResponse
+
+    interface _DisableGatewayResponse
+      include Smithy::Client::_Response[Types::DisableGatewayOutput]
+      def gateway_arn: () -> String?
+    end
+    def disable_gateway: (
+      ?gateway_arn: String
+    ) -> _DisableGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableGatewayResponse
+
+    interface _DisassociateFileSystemResponse
+      include Smithy::Client::_Response[Types::DisassociateFileSystemOutput]
+      def file_system_association_arn: () -> String?
+    end
+    def disassociate_file_system: (
+      ?file_system_association_arn: String,
+      ?force_delete: bool
+    ) -> _DisassociateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFileSystemResponse
+
+    interface _EvictFilesFailingUploadResponse
+      include Smithy::Client::_Response[Types::EvictFilesFailingUploadOutput]
+      def notification_id: () -> String?
+    end
+    def evict_files_failing_upload: (
+      ?file_share_arn: String,
+      ?force_remove: bool
+    ) -> _EvictFilesFailingUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvictFilesFailingUploadResponse
+
+    interface _JoinDomainResponse
+      include Smithy::Client::_Response[Types::JoinDomainOutput]
+      def gateway_arn: () -> String?
+      def active_directory_status: () -> String?
+    end
+    def join_domain: (
+      ?gateway_arn: String,
+      ?domain_name: String,
+      ?organizational_unit: String,
+      ?domain_controllers: Array[String],
+      ?timeout_in_seconds: Integer,
+      ?user_name: String,
+      ?password: String
+    ) -> _JoinDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _JoinDomainResponse
+
+    interface _ListAutomaticTapeCreationPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAutomaticTapeCreationPoliciesOutput]
+      def automatic_tape_creation_policy_infos: () -> Array[Types::AutomaticTapeCreationPolicyInfo]?
+    end
+    def list_automatic_tape_creation_policies: (
+      ?gateway_arn: String
+    ) -> _ListAutomaticTapeCreationPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomaticTapeCreationPoliciesResponse
+
+    interface _ListCacheReportsResponse
+      include Smithy::Client::_Response[Types::ListCacheReportsOutput]
+      def cache_report_list: () -> Array[Types::CacheReportInfo]?
+      def marker: () -> String?
+    end
+    def list_cache_reports: (
+      ?marker: String
+    ) -> _ListCacheReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCacheReportsResponse
+
+    interface _ListFileSharesResponse
+      include Smithy::Client::_Response[Types::ListFileSharesOutput]
+      def marker: () -> String?
+      def next_marker: () -> String?
+      def file_share_info_list: () -> Array[Types::FileShareInfo]?
+    end
+    def list_file_shares: (
+      ?gateway_arn: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListFileSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFileSharesResponse
+
+    interface _ListFileSystemAssociationsResponse
+      include Smithy::Client::_Response[Types::ListFileSystemAssociationsOutput]
+      def marker: () -> String?
+      def next_marker: () -> String?
+      def file_system_association_summary_list: () -> Array[Types::FileSystemAssociationSummary]?
+    end
+    def list_file_system_associations: (
+      ?gateway_arn: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListFileSystemAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFileSystemAssociationsResponse
+
+    interface _ListGatewaysResponse
+      include Smithy::Client::_Response[Types::ListGatewaysOutput]
+      def gateways: () -> Array[Types::GatewayInfo]?
+      def marker: () -> String?
+    end
+    def list_gateways: (
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
+
+    interface _ListLocalDisksResponse
+      include Smithy::Client::_Response[Types::ListLocalDisksOutput]
+      def gateway_arn: () -> String?
+      def disks: () -> Array[Types::Disk]?
+    end
+    def list_local_disks: (
+      ?gateway_arn: String
+    ) -> _ListLocalDisksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLocalDisksResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def resource_arn: () -> String?
+      def marker: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTapePoolsResponse
+      include Smithy::Client::_Response[Types::ListTapePoolsOutput]
+      def pool_infos: () -> Array[Types::PoolInfo]?
+      def marker: () -> String?
+    end
+    def list_tape_pools: (
+      ?pool_ar_ns: Array[String],
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListTapePoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTapePoolsResponse
+
+    interface _ListTapesResponse
+      include Smithy::Client::_Response[Types::ListTapesOutput]
+      def tape_infos: () -> Array[Types::TapeInfo]?
+      def marker: () -> String?
+    end
+    def list_tapes: (
+      ?tape_ar_ns: Array[String],
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListTapesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTapesResponse
+
+    interface _ListVolumeInitiatorsResponse
+      include Smithy::Client::_Response[Types::ListVolumeInitiatorsOutput]
+      def initiators: () -> Array[String]?
+    end
+    def list_volume_initiators: (
+      ?volume_arn: String
+    ) -> _ListVolumeInitiatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVolumeInitiatorsResponse
+
+    interface _ListVolumeRecoveryPointsResponse
+      include Smithy::Client::_Response[Types::ListVolumeRecoveryPointsOutput]
+      def gateway_arn: () -> String?
+      def volume_recovery_point_infos: () -> Array[Types::VolumeRecoveryPointInfo]?
+    end
+    def list_volume_recovery_points: (
+      ?gateway_arn: String
+    ) -> _ListVolumeRecoveryPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVolumeRecoveryPointsResponse
+
+    interface _ListVolumesResponse
+      include Smithy::Client::_Response[Types::ListVolumesOutput]
+      def gateway_arn: () -> String?
+      def marker: () -> String?
+      def volume_infos: () -> Array[Types::VolumeInfo]?
+    end
+    def list_volumes: (
+      ?gateway_arn: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVolumesResponse
+
+    interface _NotifyWhenUploadedResponse
+      include Smithy::Client::_Response[Types::NotifyWhenUploadedOutput]
+      def file_share_arn: () -> String?
+      def notification_id: () -> String?
+    end
+    def notify_when_uploaded: (
+      ?file_share_arn: String
+    ) -> _NotifyWhenUploadedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyWhenUploadedResponse
+
+    interface _RefreshCacheResponse
+      include Smithy::Client::_Response[Types::RefreshCacheOutput]
+      def file_share_arn: () -> String?
+      def notification_id: () -> String?
+    end
+    def refresh_cache: (
+      ?file_share_arn: String,
+      ?folder_list: Array[String],
+      ?recursive: bool
+    ) -> _RefreshCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RefreshCacheResponse
+
+    interface _RemoveTagsFromResourceResponse
+      include Smithy::Client::_Response[Types::RemoveTagsFromResourceOutput]
+      def resource_arn: () -> String?
+    end
+    def remove_tags_from_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromResourceResponse
+
+    interface _ResetCacheResponse
+      include Smithy::Client::_Response[Types::ResetCacheOutput]
+      def gateway_arn: () -> String?
+    end
+    def reset_cache: (
+      ?gateway_arn: String
+    ) -> _ResetCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetCacheResponse
+
+    interface _RetrieveTapeArchiveResponse
+      include Smithy::Client::_Response[Types::RetrieveTapeArchiveOutput]
+      def tape_arn: () -> String?
+    end
+    def retrieve_tape_archive: (
+      ?tape_arn: String,
+      ?gateway_arn: String
+    ) -> _RetrieveTapeArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveTapeArchiveResponse
+
+    interface _RetrieveTapeRecoveryPointResponse
+      include Smithy::Client::_Response[Types::RetrieveTapeRecoveryPointOutput]
+      def tape_arn: () -> String?
+    end
+    def retrieve_tape_recovery_point: (
+      ?tape_arn: String,
+      ?gateway_arn: String
+    ) -> _RetrieveTapeRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveTapeRecoveryPointResponse
+
+    interface _SetLocalConsolePasswordResponse
+      include Smithy::Client::_Response[Types::SetLocalConsolePasswordOutput]
+      def gateway_arn: () -> String?
+    end
+    def set_local_console_password: (
+      ?gateway_arn: String,
+      ?local_console_password: String
+    ) -> _SetLocalConsolePasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetLocalConsolePasswordResponse
+
+    interface _SetSMBGuestPasswordResponse
+      include Smithy::Client::_Response[Types::SetSMBGuestPasswordOutput]
+      def gateway_arn: () -> String?
+    end
+    def set_smb_guest_password: (
+      ?gateway_arn: String,
+      ?password: String
+    ) -> _SetSMBGuestPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetSMBGuestPasswordResponse
+
+    interface _ShutdownGatewayResponse
+      include Smithy::Client::_Response[Types::ShutdownGatewayOutput]
+      def gateway_arn: () -> String?
+    end
+    def shutdown_gateway: (
+      ?gateway_arn: String
+    ) -> _ShutdownGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ShutdownGatewayResponse
+
+    interface _StartAvailabilityMonitorTestResponse
+      include Smithy::Client::_Response[Types::StartAvailabilityMonitorTestOutput]
+      def gateway_arn: () -> String?
+    end
+    def start_availability_monitor_test: (
+      ?gateway_arn: String
+    ) -> _StartAvailabilityMonitorTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAvailabilityMonitorTestResponse
+
+    interface _StartCacheReportResponse
+      include Smithy::Client::_Response[Types::StartCacheReportOutput]
+      def cache_report_arn: () -> String?
+    end
+    def start_cache_report: (
+      ?file_share_arn: String,
+      ?role: String,
+      ?location_arn: String,
+      ?bucket_region: String,
+      ?vpc_endpoint_dns_name: String,
+      ?inclusion_filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?exclusion_filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartCacheReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCacheReportResponse
+
+    interface _StartGatewayResponse
+      include Smithy::Client::_Response[Types::StartGatewayOutput]
+      def gateway_arn: () -> String?
+    end
+    def start_gateway: (
+      ?gateway_arn: String
+    ) -> _StartGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartGatewayResponse
+
+    interface _UpdateAutomaticTapeCreationPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateAutomaticTapeCreationPolicyOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_automatic_tape_creation_policy: (
+      ?automatic_tape_creation_rules: Array[
+        {
+          tape_barcode_prefix: String,
+          pool_id: String,
+          tape_size_in_bytes: Integer,
+          minimum_num_tapes: Integer,
+          worm: bool
+        }
+      ],
+      ?gateway_arn: String
+    ) -> _UpdateAutomaticTapeCreationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomaticTapeCreationPolicyResponse
+
+    interface _UpdateBandwidthRateLimitResponse
+      include Smithy::Client::_Response[Types::UpdateBandwidthRateLimitOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_bandwidth_rate_limit: (
+      ?gateway_arn: String,
+      ?average_upload_rate_limit_in_bits_per_sec: Integer,
+      ?average_download_rate_limit_in_bits_per_sec: Integer
+    ) -> _UpdateBandwidthRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBandwidthRateLimitResponse
+
+    interface _UpdateBandwidthRateLimitScheduleResponse
+      include Smithy::Client::_Response[Types::UpdateBandwidthRateLimitScheduleOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_bandwidth_rate_limit_schedule: (
+      ?gateway_arn: String,
+      ?bandwidth_rate_limit_intervals: Array[
+        {
+          start_hour_of_day: Integer,
+          start_minute_of_hour: Integer,
+          end_hour_of_day: untyped,
+          end_minute_of_hour: untyped,
+          days_of_week: Array[Integer],
+          average_upload_rate_limit_in_bits_per_sec: Integer,
+          average_download_rate_limit_in_bits_per_sec: Integer
+        }
+      ]
+    ) -> _UpdateBandwidthRateLimitScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBandwidthRateLimitScheduleResponse
+
+    interface _UpdateChapCredentialsResponse
+      include Smithy::Client::_Response[Types::UpdateChapCredentialsOutput]
+      def target_arn: () -> String?
+      def initiator_name: () -> String?
+    end
+    def update_chap_credentials: (
+      ?target_arn: String,
+      ?secret_to_authenticate_initiator: String,
+      ?initiator_name: String,
+      ?secret_to_authenticate_target: String
+    ) -> _UpdateChapCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChapCredentialsResponse
+
+    interface _UpdateFileSystemAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateFileSystemAssociationOutput]
+      def file_system_association_arn: () -> String?
+    end
+    def update_file_system_association: (
+      ?file_system_association_arn: String,
+      ?user_name: String,
+      ?password: String,
+      ?audit_destination_arn: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      }
+    ) -> _UpdateFileSystemAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFileSystemAssociationResponse
+
+    interface _UpdateGatewayInformationResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayInformationOutput]
+      def gateway_arn: () -> String?
+      def gateway_name: () -> String?
+    end
+    def update_gateway_information: (
+      ?gateway_arn: String,
+      ?gateway_name: String,
+      ?gateway_timezone: String,
+      ?cloud_watch_log_group_arn: String,
+      ?gateway_capacity: String
+    ) -> _UpdateGatewayInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayInformationResponse
+
+    interface _UpdateGatewaySoftwareNowResponse
+      include Smithy::Client::_Response[Types::UpdateGatewaySoftwareNowOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_gateway_software_now: (
+      ?gateway_arn: String
+    ) -> _UpdateGatewaySoftwareNowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewaySoftwareNowResponse
+
+    interface _UpdateMaintenanceStartTimeResponse
+      include Smithy::Client::_Response[Types::UpdateMaintenanceStartTimeOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_maintenance_start_time: (
+      ?gateway_arn: String,
+      ?hour_of_day: Integer,
+      ?minute_of_hour: Integer,
+      ?day_of_week: Integer,
+      ?day_of_month: Integer,
+      ?software_update_preferences: {
+        automatic_update_policy: String
+      }
+    ) -> _UpdateMaintenanceStartTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMaintenanceStartTimeResponse
+
+    interface _UpdateNFSFileShareResponse
+      include Smithy::Client::_Response[Types::UpdateNFSFileShareOutput]
+      def file_share_arn: () -> String?
+    end
+    def update_nfs_file_share: (
+      ?file_share_arn: String,
+      ?encryption_type: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?nfs_file_share_defaults: {
+        file_mode: String,
+        directory_mode: untyped,
+        group_id: Integer,
+        owner_id: untyped
+      },
+      ?default_storage_class: String,
+      ?object_acl: String,
+      ?client_list: Array[String],
+      ?squash: String,
+      ?read_only: bool,
+      ?guess_mime_type_enabled: bool,
+      ?requester_pays: bool,
+      ?file_share_name: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      },
+      ?notification_policy: String,
+      ?audit_destination_arn: String
+    ) -> _UpdateNFSFileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNFSFileShareResponse
+
+    interface _UpdateSMBFileShareResponse
+      include Smithy::Client::_Response[Types::UpdateSMBFileShareOutput]
+      def file_share_arn: () -> String?
+    end
+    def update_smb_file_share: (
+      ?file_share_arn: String,
+      ?encryption_type: String,
+      ?kms_encrypted: bool,
+      ?kms_key: String,
+      ?default_storage_class: String,
+      ?object_acl: String,
+      ?read_only: bool,
+      ?guess_mime_type_enabled: bool,
+      ?requester_pays: bool,
+      ?smbacl_enabled: bool,
+      ?access_based_enumeration: bool,
+      ?admin_user_list: Array[String],
+      ?valid_user_list: Array[String],
+      ?invalid_user_list: Array[String],
+      ?audit_destination_arn: String,
+      ?case_sensitivity: String,
+      ?file_share_name: String,
+      ?cache_attributes: {
+        cache_stale_timeout_in_seconds: Integer
+      },
+      ?notification_policy: String,
+      ?oplocks_enabled: bool
+    ) -> _UpdateSMBFileShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSMBFileShareResponse
+
+    interface _UpdateSMBFileShareVisibilityResponse
+      include Smithy::Client::_Response[Types::UpdateSMBFileShareVisibilityOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_smb_file_share_visibility: (
+      ?gateway_arn: String,
+      ?file_shares_visible: bool
+    ) -> _UpdateSMBFileShareVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSMBFileShareVisibilityResponse
+
+    interface _UpdateSMBLocalGroupsResponse
+      include Smithy::Client::_Response[Types::UpdateSMBLocalGroupsOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_smb_local_groups: (
+      ?gateway_arn: String,
+      ?smb_local_groups: {
+        gateway_admins: Array[String]
+      }
+    ) -> _UpdateSMBLocalGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSMBLocalGroupsResponse
+
+    interface _UpdateSMBSecurityStrategyResponse
+      include Smithy::Client::_Response[Types::UpdateSMBSecurityStrategyOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_smb_security_strategy: (
+      ?gateway_arn: String,
+      ?smb_security_strategy: String
+    ) -> _UpdateSMBSecurityStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSMBSecurityStrategyResponse
+
+    interface _UpdateSnapshotScheduleResponse
+      include Smithy::Client::_Response[Types::UpdateSnapshotScheduleOutput]
+      def volume_arn: () -> String?
+    end
+    def update_snapshot_schedule: (
+      ?volume_arn: String,
+      ?start_at: Integer,
+      ?recurrence_in_hours: Integer,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateSnapshotScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSnapshotScheduleResponse
+
+    interface _UpdateVTLDeviceTypeResponse
+      include Smithy::Client::_Response[Types::UpdateVTLDeviceTypeOutput]
+      def vtl_device_arn: () -> String?
+    end
+    def update_vtl_device_type: (
+      ?vtl_device_arn: String,
+      ?device_type: String
+    ) -> _UpdateVTLDeviceTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVTLDeviceTypeResponse
+  end
+end

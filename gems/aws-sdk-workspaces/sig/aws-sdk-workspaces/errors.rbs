@@ -1,0 +1,73 @@
+module Aws::WorkSpaces
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ApplicationNotSupportedException < Smithy::Client::ServiceError
+    end
+    class ComputeNotCompatibleException < Smithy::Client::ServiceError
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IncompatibleApplicationsException < Smithy::Client::ServiceError
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValuesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperatingSystemNotCompatibleException < Smithy::Client::ServiceError
+    end
+    class OperationInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAssociatedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceCreationFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+    end
+    class ResourceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+    end
+    class ResourceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+    end
+    class UnsupportedNetworkConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedWorkspaceConfigurationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WorkspacesDefaultRoleNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

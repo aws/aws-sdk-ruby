@@ -1,0 +1,1354 @@
+module Aws::Rekognition
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Rekognition::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateFacesResponse
+      include Smithy::Client::_Response[Types::AssociateFacesResponse]
+      def associated_faces: () -> Array[Types::AssociatedFace]?
+      def unsuccessful_face_associations: () -> Array[Types::UnsuccessfulFaceAssociation]?
+      def user_status: () -> String?
+    end
+    def associate_faces: (
+      ?collection_id: String,
+      ?user_id: String,
+      ?face_ids: Array[String],
+      ?user_match_threshold: Float,
+      ?client_request_token: String
+    ) -> _AssociateFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFacesResponse
+
+    interface _CompareFacesResponse
+      include Smithy::Client::_Response[Types::CompareFacesResponse]
+      def source_image_face: () -> Types::ComparedSourceImageFace?
+      def face_matches: () -> Array[Types::CompareFacesMatch]?
+      def unmatched_faces: () -> Array[Types::ComparedFace]?
+      def source_image_orientation_correction: () -> String?
+      def target_image_orientation_correction: () -> String?
+    end
+    def compare_faces: (
+      ?source_image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?target_image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?similarity_threshold: Float,
+      ?quality_filter: String
+    ) -> _CompareFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompareFacesResponse
+
+    interface _CopyProjectVersionResponse
+      include Smithy::Client::_Response[Types::CopyProjectVersionResponse]
+      def project_version_arn: () -> String?
+    end
+    def copy_project_version: (
+      ?source_project_arn: String,
+      ?source_project_version_arn: String,
+      ?destination_project_arn: String,
+      ?version_name: String,
+      ?output_config: {
+        s3_bucket: String,
+        s3_key_prefix: String
+      },
+      ?tags: Hash[String, String],
+      ?kms_key_id: String
+    ) -> _CopyProjectVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyProjectVersionResponse
+
+    interface _CreateCollectionResponse
+      include Smithy::Client::_Response[Types::CreateCollectionResponse]
+      def status_code: () -> Integer?
+      def collection_arn: () -> String?
+      def face_model_version: () -> String?
+    end
+    def create_collection: (
+      ?collection_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollectionResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_arn: () -> String?
+    end
+    def create_dataset: (
+      ?dataset_source: {
+        ground_truth_manifest: {
+          s3_object: {
+            bucket: String,
+            name: String,
+            version: String
+          }
+        },
+        dataset_arn: String
+      },
+      ?dataset_type: String,
+      ?project_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateFaceLivenessSessionResponse
+      include Smithy::Client::_Response[Types::CreateFaceLivenessSessionResponse]
+      def session_id: () -> String?
+    end
+    def create_face_liveness_session: (
+      ?kms_key_id: String,
+      ?settings: {
+        output_config: {
+          s3_bucket: String,
+          s3_key_prefix: String
+        },
+        audit_images_limit: Integer,
+        challenge_preferences: Array[
+          {
+            type: String,
+            versions: {
+              minimum: String,
+              maximum: untyped
+            }
+          }
+        ]
+      },
+      ?client_request_token: String
+    ) -> _CreateFaceLivenessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFaceLivenessSessionResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectResponse]
+      def project_arn: () -> String?
+    end
+    def create_project: (
+      ?project_name: String,
+      ?feature: String,
+      ?auto_update: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _CreateProjectVersionResponse
+      include Smithy::Client::_Response[Types::CreateProjectVersionResponse]
+      def project_version_arn: () -> String?
+    end
+    def create_project_version: (
+      ?project_arn: String,
+      ?version_name: String,
+      ?output_config: {
+        s3_bucket: String,
+        s3_key_prefix: String
+      },
+      ?training_data: {
+        assets: Array[
+          {
+            ground_truth_manifest: {
+              s3_object: {
+                bucket: String,
+                name: String,
+                version: String
+              }
+            }
+          }
+        ]
+      },
+      ?testing_data: {
+        assets: Array[
+          {
+            ground_truth_manifest: {
+              s3_object: {
+                bucket: String,
+                name: String,
+                version: String
+              }
+            }
+          }
+        ],
+        auto_create: bool
+      },
+      ?tags: Hash[String, String],
+      ?kms_key_id: String,
+      ?version_description: String,
+      ?feature_config: {
+        content_moderation: {
+          confidence_threshold: Float
+        }
+      }
+    ) -> _CreateProjectVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectVersionResponse
+
+    interface _CreateStreamProcessorResponse
+      include Smithy::Client::_Response[Types::CreateStreamProcessorResponse]
+      def stream_processor_arn: () -> String?
+    end
+    def create_stream_processor: (
+      ?input: {
+        kinesis_video_stream: {
+          arn: String
+        }
+      },
+      ?output: {
+        kinesis_data_stream: {
+          arn: String
+        },
+        s3_destination: {
+          bucket: String,
+          key_prefix: String
+        }
+      },
+      ?name: String,
+      ?settings: {
+        face_search: {
+          collection_id: String,
+          face_match_threshold: Float
+        },
+        connected_home: {
+          labels: Array[String],
+          min_confidence: untyped
+        }
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?notification_channel: {
+        sns_topic_arn: String
+      },
+      ?kms_key_id: String,
+      ?regions_of_interest: Array[
+        {
+          bounding_box: {
+            width: Float,
+            height: untyped,
+            left: untyped,
+            top: untyped
+          },
+          polygon: Array[
+            {
+              x: untyped,
+              y: untyped
+            }
+          ]
+        }
+      ],
+      ?data_sharing_preference: {
+        opt_in: bool
+      }
+    ) -> _CreateStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamProcessorResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+    end
+    def create_user: (
+      ?collection_id: String,
+      ?user_id: String,
+      ?client_request_token: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteCollectionResponse
+      include Smithy::Client::_Response[Types::DeleteCollectionResponse]
+      def status_code: () -> Integer?
+    end
+    def delete_collection: (
+      ?collection_id: String
+    ) -> _DeleteCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCollectionResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Types::DeleteDatasetResponse]
+    end
+    def delete_dataset: (
+      ?dataset_arn: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteFacesResponse
+      include Smithy::Client::_Response[Types::DeleteFacesResponse]
+      def deleted_faces: () -> Array[String]?
+      def unsuccessful_face_deletions: () -> Array[Types::UnsuccessfulFaceDeletion]?
+    end
+    def delete_faces: (
+      ?collection_id: String,
+      ?face_ids: Array[String]
+    ) -> _DeleteFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFacesResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectResponse]
+      def status: () -> String?
+    end
+    def delete_project: (
+      ?project_arn: String
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteProjectPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteProjectPolicyResponse]
+    end
+    def delete_project_policy: (
+      ?project_arn: String,
+      ?policy_name: String,
+      ?policy_revision_id: String
+    ) -> _DeleteProjectPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectPolicyResponse
+
+    interface _DeleteProjectVersionResponse
+      include Smithy::Client::_Response[Types::DeleteProjectVersionResponse]
+      def status: () -> String?
+    end
+    def delete_project_version: (
+      ?project_version_arn: String
+    ) -> _DeleteProjectVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectVersionResponse
+
+    interface _DeleteStreamProcessorResponse
+      include Smithy::Client::_Response[Types::DeleteStreamProcessorResponse]
+    end
+    def delete_stream_processor: (
+      ?name: String
+    ) -> _DeleteStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamProcessorResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
+    end
+    def delete_user: (
+      ?collection_id: String,
+      ?user_id: String,
+      ?client_request_token: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DescribeCollectionResponse
+      include Smithy::Client::_Response[Types::DescribeCollectionResponse]
+      def face_count: () -> Integer?
+      def face_model_version: () -> String?
+      def collection_arn: () -> String?
+      def creation_timestamp: () -> Time?
+      def user_count: () -> Integer?
+    end
+    def describe_collection: (
+      ?collection_id: String
+    ) -> _DescribeCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCollectionResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset_description: () -> Types::DatasetDescription?
+    end
+    def describe_dataset: (
+      ?dataset_arn: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeProjectVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeProjectVersionsResponse]
+      def project_version_descriptions: () -> Array[Types::ProjectVersionDescription]?
+      def next_token: () -> String?
+    end
+    def describe_project_versions: (
+      ?project_arn: String,
+      ?version_names: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeProjectVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProjectVersionsResponse
+
+    interface _DescribeProjectsResponse
+      include Smithy::Client::_Response[Types::DescribeProjectsResponse]
+      def project_descriptions: () -> Array[Types::ProjectDescription]?
+      def next_token: () -> String?
+    end
+    def describe_projects: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?project_names: Array[String],
+      ?features: Array[String]
+    ) -> _DescribeProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProjectsResponse
+
+    interface _DescribeStreamProcessorResponse
+      include Smithy::Client::_Response[Types::DescribeStreamProcessorResponse]
+      def name: () -> String?
+      def stream_processor_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_timestamp: () -> Time?
+      def last_update_timestamp: () -> Time?
+      def input: () -> Types::StreamProcessorInput?
+      def output: () -> Types::StreamProcessorOutput?
+      def role_arn: () -> String?
+      def settings: () -> Types::StreamProcessorSettings?
+      def notification_channel: () -> Types::StreamProcessorNotificationChannel?
+      def kms_key_id: () -> String?
+      def regions_of_interest: () -> Array[Types::RegionOfInterest]?
+      def data_sharing_preference: () -> Types::StreamProcessorDataSharingPreference?
+    end
+    def describe_stream_processor: (
+      ?name: String
+    ) -> _DescribeStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamProcessorResponse
+
+    interface _DetectCustomLabelsResponse
+      include Smithy::Client::_Response[Types::DetectCustomLabelsResponse]
+      def custom_labels: () -> Array[Types::CustomLabel]?
+    end
+    def detect_custom_labels: (
+      ?project_version_arn: String,
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?max_results: Integer,
+      ?min_confidence: Float
+    ) -> _DetectCustomLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectCustomLabelsResponse
+
+    interface _DetectFacesResponse
+      include Smithy::Client::_Response[Types::DetectFacesResponse]
+      def face_details: () -> Array[Types::FaceDetail]?
+      def orientation_correction: () -> String?
+    end
+    def detect_faces: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?attributes: Array[String]
+    ) -> _DetectFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectFacesResponse
+
+    interface _DetectLabelsResponse
+      include Smithy::Client::_Response[Types::DetectLabelsResponse]
+      def labels: () -> Array[Types::Label]?
+      def orientation_correction: () -> String?
+      def label_model_version: () -> String?
+      def image_properties: () -> Types::DetectLabelsImageProperties?
+    end
+    def detect_labels: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?max_labels: Integer,
+      ?min_confidence: Float,
+      ?features: Array[String],
+      ?settings: {
+        general_labels: {
+          label_inclusion_filters: Array[String],
+          label_exclusion_filters: untyped,
+          label_category_inclusion_filters: untyped,
+          label_category_exclusion_filters: untyped
+        },
+        image_properties: {
+          max_dominant_colors: Integer
+        }
+      }
+    ) -> _DetectLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectLabelsResponse
+
+    interface _DetectModerationLabelsResponse
+      include Smithy::Client::_Response[Types::DetectModerationLabelsResponse]
+      def moderation_labels: () -> Array[Types::ModerationLabel]?
+      def moderation_model_version: () -> String?
+      def human_loop_activation_output: () -> Types::HumanLoopActivationOutput?
+      def project_version: () -> String?
+      def content_types: () -> Array[Types::ContentType]?
+    end
+    def detect_moderation_labels: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?min_confidence: Float,
+      ?human_loop_config: {
+        human_loop_name: String,
+        flow_definition_arn: String,
+        data_attributes: {
+          content_classifiers: Array[String]
+        }
+      },
+      ?project_version: String
+    ) -> _DetectModerationLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectModerationLabelsResponse
+
+    interface _DetectProtectiveEquipmentResponse
+      include Smithy::Client::_Response[Types::DetectProtectiveEquipmentResponse]
+      def protective_equipment_model_version: () -> String?
+      def persons: () -> Array[Types::ProtectiveEquipmentPerson]?
+      def summary: () -> Types::ProtectiveEquipmentSummary?
+    end
+    def detect_protective_equipment: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?summarization_attributes: {
+        min_confidence: Float,
+        required_equipment_types: Array[String]
+      }
+    ) -> _DetectProtectiveEquipmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectProtectiveEquipmentResponse
+
+    interface _DetectTextResponse
+      include Smithy::Client::_Response[Types::DetectTextResponse]
+      def text_detections: () -> Array[Types::TextDetection]?
+      def text_model_version: () -> String?
+    end
+    def detect_text: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?filters: {
+        word_filter: {
+          min_confidence: Float,
+          min_bounding_box_height: Float,
+          min_bounding_box_width: Float
+        },
+        regions_of_interest: Array[
+          {
+            bounding_box: {
+              width: Float,
+              height: untyped,
+              left: untyped,
+              top: untyped
+            },
+            polygon: Array[
+              {
+                x: untyped,
+                y: untyped
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _DetectTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectTextResponse
+
+    interface _DisassociateFacesResponse
+      include Smithy::Client::_Response[Types::DisassociateFacesResponse]
+      def disassociated_faces: () -> Array[Types::DisassociatedFace]?
+      def unsuccessful_face_disassociations: () -> Array[Types::UnsuccessfulFaceDisassociation]?
+      def user_status: () -> String?
+    end
+    def disassociate_faces: (
+      ?collection_id: String,
+      ?user_id: String,
+      ?client_request_token: String,
+      ?face_ids: Array[String]
+    ) -> _DisassociateFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFacesResponse
+
+    interface _DistributeDatasetEntriesResponse
+      include Smithy::Client::_Response[Types::DistributeDatasetEntriesResponse]
+    end
+    def distribute_dataset_entries: (
+      ?datasets: Array[
+        {
+          arn: String
+        }
+      ]
+    ) -> _DistributeDatasetEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DistributeDatasetEntriesResponse
+
+    interface _GetCelebrityInfoResponse
+      include Smithy::Client::_Response[Types::GetCelebrityInfoResponse]
+      def urls: () -> Array[String]?
+      def name: () -> String?
+      def known_gender: () -> Types::KnownGender?
+    end
+    def get_celebrity_info: (
+      ?id: String
+    ) -> _GetCelebrityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCelebrityInfoResponse
+
+    interface _GetCelebrityRecognitionResponse
+      include Smithy::Client::_Response[Types::GetCelebrityRecognitionResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def next_token: () -> String?
+      def celebrities: () -> Array[Types::CelebrityRecognition]?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_celebrity_recognition: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String
+    ) -> _GetCelebrityRecognitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCelebrityRecognitionResponse
+
+    interface _GetContentModerationResponse
+      include Smithy::Client::_Response[Types::GetContentModerationResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def moderation_labels: () -> Array[Types::ContentModerationDetection]?
+      def next_token: () -> String?
+      def moderation_model_version: () -> String?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+      def get_request_metadata: () -> Types::GetContentModerationRequestMetadata?
+    end
+    def get_content_moderation: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?aggregate_by: String
+    ) -> _GetContentModerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContentModerationResponse
+
+    interface _GetFaceDetectionResponse
+      include Smithy::Client::_Response[Types::GetFaceDetectionResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def next_token: () -> String?
+      def faces: () -> Array[Types::FaceDetection]?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_face_detection: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetFaceDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFaceDetectionResponse
+
+    interface _GetFaceLivenessSessionResultsResponse
+      include Smithy::Client::_Response[Types::GetFaceLivenessSessionResultsResponse]
+      def session_id: () -> String?
+      def status: () -> String?
+      def confidence: () -> Float?
+      def reference_image: () -> Types::AuditImage?
+      def audit_images: () -> Array[Types::AuditImage]?
+      def challenge: () -> Types::Challenge?
+    end
+    def get_face_liveness_session_results: (
+      ?session_id: String
+    ) -> _GetFaceLivenessSessionResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFaceLivenessSessionResultsResponse
+
+    interface _GetFaceSearchResponse
+      include Smithy::Client::_Response[Types::GetFaceSearchResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def next_token: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def persons: () -> Array[Types::PersonMatch]?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_face_search: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String
+    ) -> _GetFaceSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFaceSearchResponse
+
+    interface _GetLabelDetectionResponse
+      include Smithy::Client::_Response[Types::GetLabelDetectionResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def next_token: () -> String?
+      def labels: () -> Array[Types::LabelDetection]?
+      def label_model_version: () -> String?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+      def get_request_metadata: () -> Types::GetLabelDetectionRequestMetadata?
+    end
+    def get_label_detection: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?aggregate_by: String
+    ) -> _GetLabelDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLabelDetectionResponse
+
+    interface _GetMediaAnalysisJobResponse
+      include Smithy::Client::_Response[Types::GetMediaAnalysisJobResponse]
+      def job_id: () -> String?
+      def job_name: () -> String?
+      def operations_config: () -> Types::MediaAnalysisOperationsConfig?
+      def status: () -> String?
+      def failure_details: () -> Types::MediaAnalysisJobFailureDetails?
+      def creation_timestamp: () -> Time?
+      def completion_timestamp: () -> Time?
+      def input: () -> Types::MediaAnalysisInput?
+      def output_config: () -> Types::MediaAnalysisOutputConfig?
+      def kms_key_id: () -> String?
+      def results: () -> Types::MediaAnalysisResults?
+      def manifest_summary: () -> Types::MediaAnalysisManifestSummary?
+    end
+    def get_media_analysis_job: (
+      ?job_id: String
+    ) -> _GetMediaAnalysisJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMediaAnalysisJobResponse
+
+    interface _GetPersonTrackingResponse
+      include Smithy::Client::_Response[Types::GetPersonTrackingResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def next_token: () -> String?
+      def persons: () -> Array[Types::PersonDetection]?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_person_tracking: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String
+    ) -> _GetPersonTrackingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPersonTrackingResponse
+
+    interface _GetSegmentDetectionResponse
+      include Smithy::Client::_Response[Types::GetSegmentDetectionResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Array[Types::VideoMetadata]?
+      def audio_metadata: () -> Array[Types::AudioMetadata]?
+      def next_token: () -> String?
+      def segments: () -> Array[Types::SegmentDetection]?
+      def selected_segment_types: () -> Array[Types::SegmentTypeInfo]?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_segment_detection: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetSegmentDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentDetectionResponse
+
+    interface _GetTextDetectionResponse
+      include Smithy::Client::_Response[Types::GetTextDetectionResponse]
+      def job_status: () -> String?
+      def status_message: () -> String?
+      def video_metadata: () -> Types::VideoMetadata?
+      def text_detections: () -> Array[Types::TextDetectionResult]?
+      def next_token: () -> String?
+      def text_model_version: () -> String?
+      def job_id: () -> String?
+      def video: () -> Types::Video?
+      def job_tag: () -> String?
+    end
+    def get_text_detection: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetTextDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTextDetectionResponse
+
+    interface _IndexFacesResponse
+      include Smithy::Client::_Response[Types::IndexFacesResponse]
+      def face_records: () -> Array[Types::FaceRecord]?
+      def orientation_correction: () -> String?
+      def face_model_version: () -> String?
+      def unindexed_faces: () -> Array[Types::UnindexedFace]?
+    end
+    def index_faces: (
+      ?collection_id: String,
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?external_image_id: String,
+      ?detection_attributes: Array[String],
+      ?max_faces: Integer,
+      ?quality_filter: String
+    ) -> _IndexFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IndexFacesResponse
+
+    interface _ListCollectionsResponse
+      include Smithy::Client::_Response[Types::ListCollectionsResponse]
+      def collection_ids: () -> Array[String]?
+      def next_token: () -> String?
+      def face_model_versions: () -> Array[String]?
+    end
+    def list_collections: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollectionsResponse
+
+    interface _ListDatasetEntriesResponse
+      include Smithy::Client::_Response[Types::ListDatasetEntriesResponse]
+      def dataset_entries: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_dataset_entries: (
+      ?dataset_arn: String,
+      ?contains_labels: Array[String],
+      ?labeled: bool,
+      ?source_ref_contains: String,
+      ?has_errors: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetEntriesResponse
+
+    interface _ListDatasetLabelsResponse
+      include Smithy::Client::_Response[Types::ListDatasetLabelsResponse]
+      def dataset_label_descriptions: () -> Array[Types::DatasetLabelDescription]?
+      def next_token: () -> String?
+    end
+    def list_dataset_labels: (
+      ?dataset_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetLabelsResponse
+
+    interface _ListFacesResponse
+      include Smithy::Client::_Response[Types::ListFacesResponse]
+      def faces: () -> Array[Types::Face]?
+      def next_token: () -> String?
+      def face_model_version: () -> String?
+    end
+    def list_faces: (
+      ?collection_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?user_id: String,
+      ?face_ids: Array[String]
+    ) -> _ListFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFacesResponse
+
+    interface _ListMediaAnalysisJobsResponse
+      include Smithy::Client::_Response[Types::ListMediaAnalysisJobsResponse]
+      def next_token: () -> String?
+      def media_analysis_jobs: () -> Array[Types::MediaAnalysisJobDescription]?
+    end
+    def list_media_analysis_jobs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMediaAnalysisJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMediaAnalysisJobsResponse
+
+    interface _ListProjectPoliciesResponse
+      include Smithy::Client::_Response[Types::ListProjectPoliciesResponse]
+      def project_policies: () -> Array[Types::ProjectPolicy]?
+      def next_token: () -> String?
+    end
+    def list_project_policies: (
+      ?project_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProjectPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectPoliciesResponse
+
+    interface _ListStreamProcessorsResponse
+      include Smithy::Client::_Response[Types::ListStreamProcessorsResponse]
+      def next_token: () -> String?
+      def stream_processors: () -> Array[Types::StreamProcessor]?
+    end
+    def list_stream_processors: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamProcessorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamProcessorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?collection_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _PutProjectPolicyResponse
+      include Smithy::Client::_Response[Types::PutProjectPolicyResponse]
+      def policy_revision_id: () -> String?
+    end
+    def put_project_policy: (
+      ?project_arn: String,
+      ?policy_name: String,
+      ?policy_revision_id: String,
+      ?policy_document: String
+    ) -> _PutProjectPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProjectPolicyResponse
+
+    interface _RecognizeCelebritiesResponse
+      include Smithy::Client::_Response[Types::RecognizeCelebritiesResponse]
+      def celebrity_faces: () -> Array[Types::Celebrity]?
+      def unrecognized_faces: () -> Array[Types::ComparedFace]?
+      def orientation_correction: () -> String?
+    end
+    def recognize_celebrities: (
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      }
+    ) -> _RecognizeCelebritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecognizeCelebritiesResponse
+
+    interface _SearchFacesResponse
+      include Smithy::Client::_Response[Types::SearchFacesResponse]
+      def searched_face_id: () -> String?
+      def face_matches: () -> Array[Types::FaceMatch]?
+      def face_model_version: () -> String?
+    end
+    def search_faces: (
+      ?collection_id: String,
+      ?face_id: String,
+      ?max_faces: Integer,
+      ?face_match_threshold: Float
+    ) -> _SearchFacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFacesResponse
+
+    interface _SearchFacesByImageResponse
+      include Smithy::Client::_Response[Types::SearchFacesByImageResponse]
+      def searched_face_bounding_box: () -> Types::BoundingBox?
+      def searched_face_confidence: () -> Float?
+      def face_matches: () -> Array[Types::FaceMatch]?
+      def face_model_version: () -> String?
+    end
+    def search_faces_by_image: (
+      ?collection_id: String,
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?max_faces: Integer,
+      ?face_match_threshold: Float,
+      ?quality_filter: String
+    ) -> _SearchFacesByImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFacesByImageResponse
+
+    interface _SearchUsersResponse
+      include Smithy::Client::_Response[Types::SearchUsersResponse]
+      def user_matches: () -> Array[Types::UserMatch]?
+      def face_model_version: () -> String?
+      def searched_face: () -> Types::SearchedFace?
+      def searched_user: () -> Types::SearchedUser?
+    end
+    def search_users: (
+      ?collection_id: String,
+      ?user_id: String,
+      ?face_id: String,
+      ?user_match_threshold: Float,
+      ?max_users: Integer
+    ) -> _SearchUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUsersResponse
+
+    interface _SearchUsersByImageResponse
+      include Smithy::Client::_Response[Types::SearchUsersByImageResponse]
+      def user_matches: () -> Array[Types::UserMatch]?
+      def face_model_version: () -> String?
+      def searched_face: () -> Types::SearchedFaceDetails?
+      def unsearched_faces: () -> Array[Types::UnsearchedFace]?
+    end
+    def search_users_by_image: (
+      ?collection_id: String,
+      ?image: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?user_match_threshold: Float,
+      ?max_users: Integer,
+      ?quality_filter: String
+    ) -> _SearchUsersByImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUsersByImageResponse
+
+    interface _StartCelebrityRecognitionResponse
+      include Smithy::Client::_Response[Types::StartCelebrityRecognitionResponse]
+      def job_id: () -> String?
+    end
+    def start_celebrity_recognition: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String
+    ) -> _StartCelebrityRecognitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCelebrityRecognitionResponse
+
+    interface _StartContentModerationResponse
+      include Smithy::Client::_Response[Types::StartContentModerationResponse]
+      def job_id: () -> String?
+    end
+    def start_content_moderation: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?min_confidence: Float,
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String
+    ) -> _StartContentModerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContentModerationResponse
+
+    interface _StartFaceDetectionResponse
+      include Smithy::Client::_Response[Types::StartFaceDetectionResponse]
+      def job_id: () -> String?
+    end
+    def start_face_detection: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?face_attributes: String,
+      ?job_tag: String
+    ) -> _StartFaceDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFaceDetectionResponse
+
+    interface _StartFaceSearchResponse
+      include Smithy::Client::_Response[Types::StartFaceSearchResponse]
+      def job_id: () -> String?
+    end
+    def start_face_search: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?face_match_threshold: Float,
+      ?collection_id: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String
+    ) -> _StartFaceSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFaceSearchResponse
+
+    interface _StartLabelDetectionResponse
+      include Smithy::Client::_Response[Types::StartLabelDetectionResponse]
+      def job_id: () -> String?
+    end
+    def start_label_detection: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?min_confidence: Float,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String,
+      ?features: Array[String],
+      ?settings: {
+        general_labels: {
+          label_inclusion_filters: Array[String],
+          label_exclusion_filters: untyped,
+          label_category_inclusion_filters: untyped,
+          label_category_exclusion_filters: untyped
+        }
+      }
+    ) -> _StartLabelDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLabelDetectionResponse
+
+    interface _StartMediaAnalysisJobResponse
+      include Smithy::Client::_Response[Types::StartMediaAnalysisJobResponse]
+      def job_id: () -> String?
+    end
+    def start_media_analysis_job: (
+      ?client_request_token: String,
+      ?job_name: String,
+      ?operations_config: {
+        detect_moderation_labels: {
+          min_confidence: Float,
+          project_version: String
+        }
+      },
+      ?input: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?output_config: {
+        s3_bucket: String,
+        s3_key_prefix: String
+      },
+      ?kms_key_id: String
+    ) -> _StartMediaAnalysisJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMediaAnalysisJobResponse
+
+    interface _StartPersonTrackingResponse
+      include Smithy::Client::_Response[Types::StartPersonTrackingResponse]
+      def job_id: () -> String?
+    end
+    def start_person_tracking: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String
+    ) -> _StartPersonTrackingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPersonTrackingResponse
+
+    interface _StartProjectVersionResponse
+      include Smithy::Client::_Response[Types::StartProjectVersionResponse]
+      def status: () -> String?
+    end
+    def start_project_version: (
+      ?project_version_arn: String,
+      ?min_inference_units: Integer,
+      ?max_inference_units: Integer
+    ) -> _StartProjectVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProjectVersionResponse
+
+    interface _StartSegmentDetectionResponse
+      include Smithy::Client::_Response[Types::StartSegmentDetectionResponse]
+      def job_id: () -> String?
+    end
+    def start_segment_detection: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String,
+      ?filters: {
+        technical_cue_filter: {
+          min_segment_confidence: Float,
+          black_frame: {
+            max_pixel_threshold: Float,
+            min_coverage_percentage: Float
+          }
+        },
+        shot_filter: {
+          min_segment_confidence: untyped
+        }
+      },
+      ?segment_types: Array[String]
+    ) -> _StartSegmentDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSegmentDetectionResponse
+
+    interface _StartStreamProcessorResponse
+      include Smithy::Client::_Response[Types::StartStreamProcessorResponse]
+      def session_id: () -> String?
+    end
+    def start_stream_processor: (
+      ?name: String,
+      ?start_selector: {
+        kvs_stream_start_selector: {
+          producer_timestamp: Integer,
+          fragment_number: String
+        }
+      },
+      ?stop_selector: {
+        max_duration_in_seconds: Integer
+      }
+    ) -> _StartStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamProcessorResponse
+
+    interface _StartTextDetectionResponse
+      include Smithy::Client::_Response[Types::StartTextDetectionResponse]
+      def job_id: () -> String?
+    end
+    def start_text_detection: (
+      ?video: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?job_tag: String,
+      ?filters: {
+        word_filter: {
+          min_confidence: Float,
+          min_bounding_box_height: Float,
+          min_bounding_box_width: Float
+        },
+        regions_of_interest: Array[
+          {
+            bounding_box: {
+              width: Float,
+              height: untyped,
+              left: untyped,
+              top: untyped
+            },
+            polygon: Array[
+              {
+                x: untyped,
+                y: untyped
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _StartTextDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTextDetectionResponse
+
+    interface _StopProjectVersionResponse
+      include Smithy::Client::_Response[Types::StopProjectVersionResponse]
+      def status: () -> String?
+    end
+    def stop_project_version: (
+      ?project_version_arn: String
+    ) -> _StopProjectVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopProjectVersionResponse
+
+    interface _StopStreamProcessorResponse
+      include Smithy::Client::_Response[Types::StopStreamProcessorResponse]
+    end
+    def stop_stream_processor: (
+      ?name: String
+    ) -> _StopStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopStreamProcessorResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDatasetEntriesResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetEntriesResponse]
+    end
+    def update_dataset_entries: (
+      ?dataset_arn: String,
+      ?changes: {
+        ground_truth: String
+      }
+    ) -> _UpdateDatasetEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetEntriesResponse
+
+    interface _UpdateStreamProcessorResponse
+      include Smithy::Client::_Response[Types::UpdateStreamProcessorResponse]
+    end
+    def update_stream_processor: (
+      ?name: String,
+      ?settings_for_update: {
+        connected_home_for_update: {
+          labels: Array[String],
+          min_confidence: Float
+        }
+      },
+      ?regions_of_interest_for_update: Array[
+        {
+          bounding_box: {
+            width: Float,
+            height: untyped,
+            left: untyped,
+            top: untyped
+          },
+          polygon: Array[
+            {
+              x: untyped,
+              y: untyped
+            }
+          ]
+        }
+      ],
+      ?data_sharing_preference_for_update: {
+        opt_in: bool
+      },
+      ?parameters_to_delete: Array[String]
+    ) -> _UpdateStreamProcessorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamProcessorResponse
+  end
+end

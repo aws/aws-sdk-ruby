@@ -1,0 +1,662 @@
+module Aws::PaymentCryptographyData
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PaymentCryptographyData::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DecryptDataResponse
+      include Smithy::Client::_Response[Types::DecryptDataOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def plain_text: () -> String?
+    end
+    def decrypt_data: (
+      ?key_identifier: String,
+      ?cipher_text: String,
+      ?decryption_attributes: {
+        symmetric: {
+          mode: String,
+          initialization_vector: String,
+          padding_type: String
+        },
+        asymmetric: {
+          padding_type: untyped
+        },
+        dukpt: {
+          key_serial_number: String,
+          mode: String,
+          dukpt_key_derivation_type: String,
+          dukpt_key_variant: String,
+          initialization_vector: untyped
+        },
+        emv: {
+          major_key_derivation_mode: String,
+          primary_account_number: String,
+          pan_sequence_number: String,
+          session_derivation_data: String,
+          mode: String,
+          initialization_vector: untyped
+        }
+      },
+      ?wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _DecryptDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecryptDataResponse
+
+    interface _EncryptDataResponse
+      include Smithy::Client::_Response[Types::EncryptDataOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def cipher_text: () -> String?
+    end
+    def encrypt_data: (
+      ?key_identifier: String,
+      ?plain_text: String,
+      ?encryption_attributes: {
+        symmetric: {
+          mode: String,
+          initialization_vector: String,
+          padding_type: String
+        },
+        asymmetric: {
+          padding_type: untyped
+        },
+        dukpt: {
+          key_serial_number: String,
+          mode: String,
+          dukpt_key_derivation_type: String,
+          dukpt_key_variant: String,
+          initialization_vector: untyped
+        },
+        emv: {
+          major_key_derivation_mode: String,
+          primary_account_number: String,
+          pan_sequence_number: String,
+          session_derivation_data: String,
+          mode: String,
+          initialization_vector: untyped
+        }
+      },
+      ?wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _EncryptDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EncryptDataResponse
+
+    interface _GenerateCardValidationDataResponse
+      include Smithy::Client::_Response[Types::GenerateCardValidationDataOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def validation_data: () -> String?
+    end
+    def generate_card_validation_data: (
+      ?key_identifier: String,
+      ?primary_account_number: String,
+      ?generation_attributes: {
+        amex_card_security_code_version1: {
+          card_expiry_date: String
+        },
+        amex_card_security_code_version2: {
+          card_expiry_date: untyped,
+          service_code: String
+        },
+        card_verification_value1: {
+          card_expiry_date: untyped,
+          service_code: untyped
+        },
+        card_verification_value2: {
+          card_expiry_date: untyped
+        },
+        card_holder_verification_value: {
+          unpredictable_number: String,
+          pan_sequence_number: String,
+          application_transaction_counter: String
+        },
+        dynamic_card_verification_code: {
+          unpredictable_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped,
+          track_data: String
+        },
+        dynamic_card_verification_value: {
+          pan_sequence_number: untyped,
+          card_expiry_date: untyped,
+          service_code: untyped,
+          application_transaction_counter: untyped
+        }
+      },
+      ?validation_data_length: Integer
+    ) -> _GenerateCardValidationDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateCardValidationDataResponse
+
+    interface _GenerateMacResponse
+      include Smithy::Client::_Response[Types::GenerateMacOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def mac: () -> String?
+    end
+    def generate_mac: (
+      ?key_identifier: String,
+      ?message_data: String,
+      ?generation_attributes: {
+        algorithm: String,
+        emv_mac: {
+          major_key_derivation_mode: String,
+          primary_account_number: String,
+          pan_sequence_number: String,
+          session_key_derivation_mode: String,
+          session_key_derivation_value: {
+            application_cryptogram: String,
+            application_transaction_counter: String
+          }
+        },
+        dukpt_iso9797_algorithm1: {
+          key_serial_number: String,
+          dukpt_key_variant: String,
+          dukpt_derivation_type: String
+        },
+        dukpt_iso9797_algorithm3: untyped,
+        dukpt_cmac: untyped
+      },
+      ?mac_length: Integer
+    ) -> _GenerateMacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMacResponse
+
+    interface _GenerateMacEmvPinChangeResponse
+      include Smithy::Client::_Response[Types::GenerateMacEmvPinChangeOutput]
+      def new_pin_pek_arn: () -> String?
+      def secure_messaging_integrity_key_arn: () -> String?
+      def secure_messaging_confidentiality_key_arn: () -> String?
+      def mac: () -> String?
+      def encrypted_pin_block: () -> String?
+      def new_pin_pek_key_check_value: () -> String?
+      def secure_messaging_integrity_key_check_value: () -> String?
+      def secure_messaging_confidentiality_key_check_value: () -> String?
+      def visa_amex_derivation_outputs: () -> Types::VisaAmexDerivationOutputs?
+    end
+    def generate_mac_emv_pin_change: (
+      ?new_pin_pek_identifier: String,
+      ?new_encrypted_pin_block: String,
+      ?pin_block_format: String,
+      ?secure_messaging_integrity_key_identifier: String,
+      ?secure_messaging_confidentiality_key_identifier: String,
+      ?message_data: String,
+      ?derivation_method_attributes: {
+        emv_common: {
+          major_key_derivation_mode: String,
+          primary_account_number: String,
+          pan_sequence_number: String,
+          application_cryptogram: String,
+          mode: String,
+          pin_block_padding_type: String,
+          pin_block_length_position: String
+        },
+        amex: {
+          major_key_derivation_mode: untyped,
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: String,
+          authorization_request_key_identifier: String,
+          current_pin_attributes: {
+            current_pin_pek_identifier: untyped,
+            current_encrypted_pin_block: String
+          }
+        },
+        visa: {
+          major_key_derivation_mode: untyped,
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped,
+          authorization_request_key_identifier: untyped,
+          current_pin_attributes: untyped
+        },
+        emv2000: {
+          major_key_derivation_mode: untyped,
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped
+        },
+        mastercard: {
+          major_key_derivation_mode: untyped,
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_cryptogram: untyped
+        }
+      }
+    ) -> _GenerateMacEmvPinChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMacEmvPinChangeResponse
+
+    interface _GeneratePinDataResponse
+      include Smithy::Client::_Response[Types::GeneratePinDataOutput]
+      def generation_key_arn: () -> String?
+      def generation_key_check_value: () -> String?
+      def encryption_key_arn: () -> String?
+      def encryption_key_check_value: () -> String?
+      def encrypted_pin_block: () -> String?
+      def pin_data: () -> Types::PinData?
+    end
+    def generate_pin_data: (
+      ?generation_key_identifier: String,
+      ?encryption_key_identifier: String,
+      ?generation_attributes: {
+        visa_pin: {
+          pin_verification_key_index: Integer
+        },
+        visa_pin_verification_value: {
+          encrypted_pin_block: String,
+          pin_verification_key_index: untyped
+        },
+        ibm3624_pin_offset: {
+          encrypted_pin_block: untyped,
+          decimalization_table: String,
+          pin_validation_data_pad_character: String,
+          pin_validation_data: String
+        },
+        ibm3624_natural_pin: {
+          decimalization_table: untyped,
+          pin_validation_data_pad_character: untyped,
+          pin_validation_data: untyped
+        },
+        ibm3624_random_pin: {
+          decimalization_table: untyped,
+          pin_validation_data_pad_character: untyped,
+          pin_validation_data: untyped
+        },
+        ibm3624_pin_from_offset: {
+          decimalization_table: untyped,
+          pin_validation_data_pad_character: untyped,
+          pin_validation_data: untyped,
+          pin_offset: String
+        }
+      },
+      ?pin_data_length: Integer,
+      ?primary_account_number: String,
+      ?pin_block_format: String,
+      ?encryption_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _GeneratePinDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GeneratePinDataResponse
+
+    interface _ReEncryptDataResponse
+      include Smithy::Client::_Response[Types::ReEncryptDataOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def cipher_text: () -> String?
+    end
+    def re_encrypt_data: (
+      ?incoming_key_identifier: String,
+      ?outgoing_key_identifier: String,
+      ?cipher_text: String,
+      ?incoming_encryption_attributes: {
+        symmetric: {
+          mode: String,
+          initialization_vector: String,
+          padding_type: String
+        },
+        dukpt: {
+          key_serial_number: String,
+          mode: String,
+          dukpt_key_derivation_type: String,
+          dukpt_key_variant: String,
+          initialization_vector: untyped
+        }
+      },
+      ?outgoing_encryption_attributes: {
+        symmetric: {
+          mode: String,
+          initialization_vector: String,
+          padding_type: String
+        },
+        dukpt: {
+          key_serial_number: String,
+          mode: String,
+          dukpt_key_derivation_type: String,
+          dukpt_key_variant: String,
+          initialization_vector: untyped
+        }
+      },
+      ?incoming_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      },
+      ?outgoing_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _ReEncryptDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReEncryptDataResponse
+
+    interface _TranslatePinDataResponse
+      include Smithy::Client::_Response[Types::TranslatePinDataOutput]
+      def pin_block: () -> String?
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+    end
+    def translate_pin_data: (
+      ?incoming_key_identifier: String,
+      ?outgoing_key_identifier: String,
+      ?incoming_translation_attributes: {
+        iso_format0: {
+          primary_account_number: String
+        },
+        iso_format1: {
+        },
+        iso_format3: untyped,
+        iso_format4: untyped
+      },
+      ?outgoing_translation_attributes: {
+        iso_format0: {
+          primary_account_number: String
+        },
+        iso_format1: {
+        },
+        iso_format3: untyped,
+        iso_format4: untyped
+      },
+      ?encrypted_pin_block: String,
+      ?incoming_dukpt_attributes: {
+        key_serial_number: String,
+        dukpt_key_derivation_type: String,
+        dukpt_key_variant: String
+      },
+      ?outgoing_dukpt_attributes: {
+        key_serial_number: String,
+        dukpt_key_derivation_type: String,
+        dukpt_key_variant: String
+      },
+      ?incoming_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      },
+      ?outgoing_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _TranslatePinDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TranslatePinDataResponse
+
+    interface _VerifyAuthRequestCryptogramResponse
+      include Smithy::Client::_Response[Types::VerifyAuthRequestCryptogramOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def auth_response_value: () -> String?
+    end
+    def verify_auth_request_cryptogram: (
+      ?key_identifier: String,
+      ?transaction_data: String,
+      ?auth_request_cryptogram: String,
+      ?major_key_derivation_mode: String,
+      ?session_key_derivation_attributes: {
+        emv_common: {
+          primary_account_number: String,
+          pan_sequence_number: String,
+          application_transaction_counter: String
+        },
+        mastercard: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped,
+          unpredictable_number: String
+        },
+        emv2000: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped
+        },
+        amex: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped
+        },
+        visa: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped
+        }
+      },
+      ?auth_response_attributes: {
+        arpc_method1: {
+          auth_response_code: String
+        },
+        arpc_method2: {
+          card_status_update: String,
+          proprietary_authentication_data: String
+        }
+      }
+    ) -> _VerifyAuthRequestCryptogramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyAuthRequestCryptogramResponse
+
+    interface _VerifyCardValidationDataResponse
+      include Smithy::Client::_Response[Types::VerifyCardValidationDataOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+    end
+    def verify_card_validation_data: (
+      ?key_identifier: String,
+      ?primary_account_number: String,
+      ?verification_attributes: {
+        amex_card_security_code_version1: {
+          card_expiry_date: String
+        },
+        amex_card_security_code_version2: {
+          card_expiry_date: untyped,
+          service_code: String
+        },
+        card_verification_value1: {
+          card_expiry_date: untyped,
+          service_code: untyped
+        },
+        card_verification_value2: {
+          card_expiry_date: untyped
+        },
+        card_holder_verification_value: {
+          unpredictable_number: String,
+          pan_sequence_number: String,
+          application_transaction_counter: String
+        },
+        dynamic_card_verification_code: {
+          unpredictable_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped,
+          track_data: String
+        },
+        dynamic_card_verification_value: {
+          pan_sequence_number: untyped,
+          card_expiry_date: untyped,
+          service_code: untyped,
+          application_transaction_counter: untyped
+        },
+        discover_dynamic_card_verification_code: {
+          card_expiry_date: untyped,
+          unpredictable_number: untyped,
+          application_transaction_counter: untyped
+        }
+      },
+      ?validation_data: String
+    ) -> _VerifyCardValidationDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyCardValidationDataResponse
+
+    interface _VerifyMacResponse
+      include Smithy::Client::_Response[Types::VerifyMacOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+    end
+    def verify_mac: (
+      ?key_identifier: String,
+      ?message_data: String,
+      ?mac: String,
+      ?verification_attributes: {
+        algorithm: String,
+        emv_mac: {
+          major_key_derivation_mode: String,
+          primary_account_number: String,
+          pan_sequence_number: String,
+          session_key_derivation_mode: String,
+          session_key_derivation_value: {
+            application_cryptogram: String,
+            application_transaction_counter: String
+          }
+        },
+        dukpt_iso9797_algorithm1: {
+          key_serial_number: String,
+          dukpt_key_variant: String,
+          dukpt_derivation_type: String
+        },
+        dukpt_iso9797_algorithm3: untyped,
+        dukpt_cmac: untyped
+      },
+      ?mac_length: Integer
+    ) -> _VerifyMacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyMacResponse
+
+    interface _VerifyPinDataResponse
+      include Smithy::Client::_Response[Types::VerifyPinDataOutput]
+      def verification_key_arn: () -> String?
+      def verification_key_check_value: () -> String?
+      def encryption_key_arn: () -> String?
+      def encryption_key_check_value: () -> String?
+    end
+    def verify_pin_data: (
+      ?verification_key_identifier: String,
+      ?encryption_key_identifier: String,
+      ?verification_attributes: {
+        visa_pin: {
+          pin_verification_key_index: Integer,
+          verification_value: String
+        },
+        ibm3624_pin: {
+          decimalization_table: String,
+          pin_validation_data_pad_character: String,
+          pin_validation_data: String,
+          pin_offset: String
+        }
+      },
+      ?encrypted_pin_block: String,
+      ?primary_account_number: String,
+      ?pin_block_format: String,
+      ?pin_data_length: Integer,
+      ?dukpt_attributes: {
+        key_serial_number: String,
+        dukpt_derivation_type: String
+      },
+      ?encryption_wrapped_key: {
+        wrapped_key_material: {
+          tr31_key_block: String,
+          diffie_hellman_symmetric_key: {
+            certificate_authority_public_key_identifier: String,
+            public_key_certificate: String,
+            key_algorithm: String,
+            key_derivation_function: String,
+            key_derivation_hash_algorithm: String,
+            shared_information: String
+          }
+        },
+        key_check_value_algorithm: String
+      }
+    ) -> _VerifyPinDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyPinDataResponse
+  end
+end

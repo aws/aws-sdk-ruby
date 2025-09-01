@@ -1,0 +1,191 @@
+module Aws::CostOptimizationHub
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CostOptimizationHub::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetPreferencesResponse
+      include Smithy::Client::_Response[Types::GetPreferencesResponse]
+      def savings_estimation_mode: () -> String?
+      def member_account_discount_visibility: () -> String?
+      def preferred_commitment: () -> Types::PreferredCommitment?
+    end
+    def get_preferences: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPreferencesResponse
+
+    interface _GetRecommendationResponse
+      include Smithy::Client::_Response[Types::GetRecommendationResponse]
+      def recommendation_id: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+      def account_id: () -> String?
+      def currency_code: () -> String?
+      def recommendation_lookback_period_in_days: () -> Integer?
+      def cost_calculation_lookback_period_in_days: () -> Integer?
+      def estimated_savings_percentage: () -> Float?
+      def estimated_savings_over_cost_calculation_lookback_period: () -> Float?
+      def current_resource_type: () -> String?
+      def recommended_resource_type: () -> String?
+      def region: () -> String?
+      def source: () -> String?
+      def last_refresh_timestamp: () -> Time?
+      def estimated_monthly_savings: () -> Float?
+      def estimated_monthly_cost: () -> Float?
+      def implementation_effort: () -> String?
+      def restart_needed: () -> bool?
+      def action_type: () -> String?
+      def rollback_possible: () -> bool?
+      def current_resource_details: () -> Types::ResourceDetails?
+      def recommended_resource_details: () -> Types::ResourceDetails?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def get_recommendation: (
+      ?recommendation_id: String
+    ) -> _GetRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationResponse
+
+    interface _ListEnrollmentStatusesResponse
+      include Smithy::Client::_Response[Types::ListEnrollmentStatusesResponse]
+      def items: () -> Array[Types::AccountEnrollmentStatus]?
+      def include_member_accounts: () -> bool?
+      def next_token: () -> String?
+    end
+    def list_enrollment_statuses: (
+      ?include_organization_info: bool,
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnrollmentStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnrollmentStatusesResponse
+
+    interface _ListRecommendationSummariesResponse
+      include Smithy::Client::_Response[Types::ListRecommendationSummariesResponse]
+      def estimated_total_deduped_savings: () -> Float?
+      def items: () -> Array[Types::RecommendationSummary]?
+      def group_by: () -> String?
+      def currency_code: () -> String?
+      def metrics: () -> Types::SummaryMetricsResult?
+      def next_token: () -> String?
+    end
+    def list_recommendation_summaries: (
+      ?filter: {
+        restart_needed: bool,
+        rollback_possible: untyped,
+        implementation_efforts: Array[String],
+        account_ids: Array[String],
+        regions: Array[String],
+        resource_types: Array[String],
+        action_types: Array[String],
+        tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        resource_ids: Array[String],
+        resource_arns: Array[String],
+        recommendation_ids: Array[String]
+      },
+      ?group_by: String,
+      ?max_results: Integer,
+      ?metrics: Array[String],
+      ?next_token: String
+    ) -> _ListRecommendationSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationSummariesResponse
+
+    interface _ListRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsResponse]
+      def items: () -> Array[Types::Recommendation]?
+      def next_token: () -> String?
+    end
+    def list_recommendations: (
+      ?filter: {
+        restart_needed: bool,
+        rollback_possible: untyped,
+        implementation_efforts: Array[String],
+        account_ids: Array[String],
+        regions: Array[String],
+        resource_types: Array[String],
+        action_types: Array[String],
+        tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        resource_ids: Array[String],
+        resource_arns: Array[String],
+        recommendation_ids: Array[String]
+      },
+      ?order_by: {
+        dimension: String,
+        order: String
+      },
+      ?include_all_recommendations: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
+
+    interface _UpdateEnrollmentStatusResponse
+      include Smithy::Client::_Response[Types::UpdateEnrollmentStatusResponse]
+      def status: () -> String?
+    end
+    def update_enrollment_status: (
+      ?status: String,
+      ?include_member_accounts: bool
+    ) -> _UpdateEnrollmentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnrollmentStatusResponse
+
+    interface _UpdatePreferencesResponse
+      include Smithy::Client::_Response[Types::UpdatePreferencesResponse]
+      def savings_estimation_mode: () -> String?
+      def member_account_discount_visibility: () -> String?
+      def preferred_commitment: () -> Types::PreferredCommitment?
+    end
+    def update_preferences: (
+      ?savings_estimation_mode: String,
+      ?member_account_discount_visibility: String,
+      ?preferred_commitment: {
+        term: String,
+        payment_option: String
+      }
+    ) -> _UpdatePreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePreferencesResponse
+  end
+end

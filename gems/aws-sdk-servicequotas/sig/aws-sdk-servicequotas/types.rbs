@@ -1,0 +1,927 @@
+module Aws::ServiceQuotas
+  module Types
+
+    class AWSServiceAccessNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AppliedLevelEnum
+      ACCOUNT: String
+      RESOURCE: String
+      ALL: String
+    end
+
+    class AssociateServiceQuotaTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateServiceQuotaTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateSupportCaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+    end
+
+    class CreateSupportCaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteServiceQuotaIncreaseRequestFromTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor aws_region: String?
+    end
+
+    class DeleteServiceQuotaIncreaseRequestFromTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependencyAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisassociateServiceQuotaTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateServiceQuotaTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ErrorCode
+      DEPENDENCY_ACCESS_DENIED_ERROR: String
+      DEPENDENCY_THROTTLING_ERROR: String
+      DEPENDENCY_SERVICE_ERROR: String
+      SERVICE_QUOTA_NOT_AVAILABLE_ERROR: String
+    end
+
+    class ErrorReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class GetAWSDefaultServiceQuotaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class GetAWSDefaultServiceQuotaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota: Types::ServiceQuota,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota: Types::ServiceQuota?
+    end
+
+    class GetAssociationForServiceQuotaTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAssociationForServiceQuotaTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_quota_template_association_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_quota_template_association_status: String?
+    end
+
+    class GetRequestedServiceQuotaChangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+    end
+
+    class GetRequestedServiceQuotaChangeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requested_quota: Types::RequestedServiceQuotaChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requested_quota: Types::RequestedServiceQuotaChange?
+    end
+
+    class GetServiceQuotaIncreaseRequestFromTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+        ?aws_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor aws_region: String?
+    end
+
+    class GetServiceQuotaIncreaseRequestFromTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate?
+    end
+
+    class GetServiceQuotaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor context_id: String?
+    end
+
+    class GetServiceQuotaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota: Types::ServiceQuota,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota: Types::ServiceQuota?
+    end
+
+    class IllegalArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPaginationTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAWSDefaultServiceQuotasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAWSDefaultServiceQuotasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?quotas: Array[Types::ServiceQuota],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor quotas: Array[Types::ServiceQuota]?
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryByQuotaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?quota_requested_at_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor quota_requested_at_level: String?
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryByQuotaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?requested_quotas: Array[Types::RequestedServiceQuotaChange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor requested_quotas: Array[Types::RequestedServiceQuotaChange]?
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?quota_requested_at_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor quota_requested_at_level: String?
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?requested_quotas: Array[Types::RequestedServiceQuotaChange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor requested_quotas: Array[Types::RequestedServiceQuotaChange]?
+    end
+
+    class ListServiceQuotaIncreaseRequestsInTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?aws_region: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor aws_region: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServiceQuotaIncreaseRequestsInTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_quota_increase_request_in_template_list: Array[Types::ServiceQuotaIncreaseRequestInTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_quota_increase_request_in_template_list: Array[Types::ServiceQuotaIncreaseRequestInTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceQuotasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?quota_code: String,
+        ?quota_applied_at_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor quota_code: String?
+      attr_accessor quota_applied_at_level: String?
+    end
+
+    class ListServiceQuotasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?quotas: Array[Types::ServiceQuota],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor quotas: Array[Types::ServiceQuota]?
+    end
+
+    class ListServicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?services: Array[Types::ServiceInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor services: Array[Types::ServiceInfo]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MetricInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_namespace: String,
+        ?metric_name: String,
+        ?metric_dimensions: Hash[String, String],
+        ?metric_statistic_recommendation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_namespace: String?
+      attr_accessor metric_name: String?
+      attr_accessor metric_dimensions: Hash[String, String]?
+      attr_accessor metric_statistic_recommendation: String?
+    end
+
+    class NoAvailableOrganizationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationNotInAllFeaturesModeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PeriodUnit
+      MICROSECOND: String
+      MILLISECOND: String
+      SECOND: String
+      MINUTE: String
+      HOUR: String
+      DAY: String
+      WEEK: String
+    end
+
+    class PutServiceQuotaIncreaseRequestIntoTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_code: String,
+        ?service_code: String,
+        ?aws_region: String,
+        ?desired_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor aws_region: String?
+      attr_accessor desired_value: Float?
+    end
+
+    class PutServiceQuotaIncreaseRequestIntoTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate?
+    end
+
+    class QuotaContextInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context_scope: String,
+        ?context_scope_type: String,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context_scope: String?
+      attr_accessor context_scope_type: String?
+      attr_accessor context_id: String?
+    end
+
+    module QuotaContextScope
+      RESOURCE: String
+      ACCOUNT: String
+    end
+
+    class QuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QuotaPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?period_value: Integer,
+        ?period_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor period_value: Integer?
+      attr_accessor period_unit: String?
+    end
+
+    class RequestServiceQuotaIncreaseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?quota_code: String,
+        ?desired_value: Float,
+        ?context_id: String,
+        ?support_case_allowed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor desired_value: Float?
+      attr_accessor context_id: String?
+      attr_accessor support_case_allowed: bool?
+    end
+
+    class RequestServiceQuotaIncreaseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requested_quota: Types::RequestedServiceQuotaChange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requested_quota: Types::RequestedServiceQuotaChange?
+    end
+
+    module RequestStatus
+      PENDING: String
+      CASE_OPENED: String
+      APPROVED: String
+      DENIED: String
+      CASE_CLOSED: String
+      NOT_APPROVED: String
+      INVALID_REQUEST: String
+    end
+
+    class RequestedServiceQuotaChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?case_id: String,
+        ?service_code: String,
+        ?service_name: String,
+        ?quota_code: String,
+        ?quota_name: String,
+        ?desired_value: Float,
+        ?status: String,
+        ?created: Time,
+        ?last_updated: Time,
+        ?requester: String,
+        ?quota_arn: String,
+        ?global_quota: bool,
+        ?unit: String,
+        ?quota_requested_at_level: String,
+        ?quota_context: Types::QuotaContextInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor case_id: String?
+      attr_accessor service_code: String?
+      attr_accessor service_name: String?
+      attr_accessor quota_code: String?
+      attr_accessor quota_name: String?
+      attr_accessor desired_value: Float?
+      attr_accessor status: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated: Time?
+      attr_accessor requester: String?
+      attr_accessor quota_arn: String?
+      attr_accessor global_quota: bool?
+      attr_accessor unit: String?
+      attr_accessor quota_requested_at_level: String?
+      attr_accessor quota_context: Types::QuotaContextInfo?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor service_name: String?
+    end
+
+    class ServiceQuota
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?service_name: String,
+        ?quota_arn: String,
+        ?quota_code: String,
+        ?quota_name: String,
+        ?value: Float,
+        ?unit: String,
+        ?adjustable: bool,
+        ?global_quota: bool,
+        ?usage_metric: Types::MetricInfo,
+        ?period: Types::QuotaPeriod,
+        ?error_reason: Types::ErrorReason,
+        ?quota_applied_at_level: String,
+        ?quota_context: Types::QuotaContextInfo,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor service_name: String?
+      attr_accessor quota_arn: String?
+      attr_accessor quota_code: String?
+      attr_accessor quota_name: String?
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+      attr_accessor adjustable: bool?
+      attr_accessor global_quota: bool?
+      attr_accessor usage_metric: Types::MetricInfo?
+      attr_accessor period: Types::QuotaPeriod?
+      attr_accessor error_reason: Types::ErrorReason?
+      attr_accessor quota_applied_at_level: String?
+      attr_accessor quota_context: Types::QuotaContextInfo?
+      attr_accessor description: String?
+    end
+
+    class ServiceQuotaIncreaseRequestInTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?service_name: String,
+        ?quota_code: String,
+        ?quota_name: String,
+        ?desired_value: Float,
+        ?aws_region: String,
+        ?unit: String,
+        ?global_quota: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor service_name: String?
+      attr_accessor quota_code: String?
+      attr_accessor quota_name: String?
+      attr_accessor desired_value: Float?
+      attr_accessor aws_region: String?
+      attr_accessor unit: String?
+      attr_accessor global_quota: bool?
+    end
+
+    module ServiceQuotaTemplateAssociationStatus
+      ASSOCIATED: String
+      DISASSOCIATED: String
+    end
+
+    class ServiceQuotaTemplateNotInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagPolicyViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplatesNotAvailableInRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

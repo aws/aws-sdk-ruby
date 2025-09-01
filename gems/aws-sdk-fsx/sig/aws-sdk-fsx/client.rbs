@@ -1,0 +1,1281 @@
+module Aws::FSx
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::FSx::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateFileSystemAliasesResponse
+      include Smithy::Client::_Response[Types::AssociateFileSystemAliasesResponse]
+      def aliases: () -> Array[Types::Alias]?
+    end
+    def associate_file_system_aliases: (
+      ?client_request_token: String,
+      ?file_system_id: String,
+      ?aliases: Array[String]
+    ) -> _AssociateFileSystemAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFileSystemAliasesResponse
+
+    interface _CancelDataRepositoryTaskResponse
+      include Smithy::Client::_Response[Types::CancelDataRepositoryTaskResponse]
+      def lifecycle: () -> String?
+      def task_id: () -> String?
+    end
+    def cancel_data_repository_task: (
+      ?task_id: String
+    ) -> _CancelDataRepositoryTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDataRepositoryTaskResponse
+
+    interface _CopyBackupResponse
+      include Smithy::Client::_Response[Types::CopyBackupResponse]
+      def backup: () -> Types::Backup?
+    end
+    def copy_backup: (
+      ?client_request_token: String,
+      ?source_backup_id: String,
+      ?source_region: String,
+      ?kms_key_id: String,
+      ?copy_tags: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CopyBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyBackupResponse
+
+    interface _CopySnapshotAndUpdateVolumeResponse
+      include Smithy::Client::_Response[Types::CopySnapshotAndUpdateVolumeResponse]
+      def volume_id: () -> String?
+      def lifecycle: () -> String?
+      def administrative_actions: () -> Array[Types::AdministrativeAction]?
+    end
+    def copy_snapshot_and_update_volume: (
+      ?client_request_token: String,
+      ?volume_id: String,
+      ?source_snapshot_arn: String,
+      ?copy_strategy: String,
+      ?options: Array[String]
+    ) -> _CopySnapshotAndUpdateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopySnapshotAndUpdateVolumeResponse
+
+    interface _CreateAndAttachS3AccessPointResponse
+      include Smithy::Client::_Response[Types::CreateAndAttachS3AccessPointResponse]
+      def s3_access_point_attachment: () -> Types::S3AccessPointAttachment?
+    end
+    def create_and_attach_s3_access_point: (
+      ?client_request_token: String,
+      ?name: String,
+      ?type: String,
+      ?open_zfs_configuration: {
+        volume_id: String,
+        file_system_identity: {
+          type: String,
+          posix_user: {
+            uid: Integer,
+            gid: Integer,
+            secondary_gids: Array[Integer]
+          }
+        }
+      },
+      ?s3_access_point: {
+        vpc_configuration: {
+          vpc_id: String
+        },
+        policy: String
+      }
+    ) -> _CreateAndAttachS3AccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAndAttachS3AccessPointResponse
+
+    interface _CreateBackupResponse
+      include Smithy::Client::_Response[Types::CreateBackupResponse]
+      def backup: () -> Types::Backup?
+    end
+    def create_backup: (
+      ?file_system_id: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?volume_id: String
+    ) -> _CreateBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupResponse
+
+    interface _CreateDataRepositoryAssociationResponse
+      include Smithy::Client::_Response[Types::CreateDataRepositoryAssociationResponse]
+      def association: () -> Types::DataRepositoryAssociation?
+    end
+    def create_data_repository_association: (
+      ?file_system_id: String,
+      ?file_system_path: String,
+      ?data_repository_path: String,
+      ?batch_import_meta_data_on_create: bool,
+      ?imported_file_chunk_size: Integer,
+      ?s3: {
+        auto_import_policy: {
+          events: Array[String]
+        },
+        auto_export_policy: {
+          events: untyped
+        }
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataRepositoryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataRepositoryAssociationResponse
+
+    interface _CreateDataRepositoryTaskResponse
+      include Smithy::Client::_Response[Types::CreateDataRepositoryTaskResponse]
+      def data_repository_task: () -> Types::DataRepositoryTask?
+    end
+    def create_data_repository_task: (
+      ?type: String,
+      ?paths: Array[String],
+      ?file_system_id: String,
+      ?report: {
+        enabled: bool,
+        path: String,
+        format: String,
+        scope: String
+      },
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?capacity_to_release: Integer,
+      ?release_configuration: {
+        duration_since_last_access: {
+          unit: String,
+          value: Integer
+        }
+      }
+    ) -> _CreateDataRepositoryTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataRepositoryTaskResponse
+
+    interface _CreateFileCacheResponse
+      include Smithy::Client::_Response[Types::CreateFileCacheResponse]
+      def file_cache: () -> Types::FileCacheCreating?
+    end
+    def create_file_cache: (
+      ?client_request_token: String,
+      ?file_cache_type: String,
+      ?file_cache_type_version: String,
+      ?storage_capacity: Integer,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?copy_tags_to_data_repository_associations: bool,
+      ?kms_key_id: String,
+      ?lustre_configuration: {
+        per_unit_storage_throughput: Integer,
+        deployment_type: String,
+        weekly_maintenance_start_time: String,
+        metadata_configuration: {
+          storage_capacity: Integer
+        }
+      },
+      ?data_repository_associations: Array[
+        {
+          file_cache_path: String,
+          data_repository_path: String,
+          data_repository_subdirectories: Array[String],
+          nfs: {
+            version: String,
+            dns_ips: Array[String]
+          }
+        }
+      ]
+    ) -> _CreateFileCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFileCacheResponse
+
+    interface _CreateFileSystemResponse
+      include Smithy::Client::_Response[Types::CreateFileSystemResponse]
+      def file_system: () -> Types::FileSystem?
+    end
+    def create_file_system: (
+      ?client_request_token: String,
+      ?file_system_type: String,
+      ?storage_capacity: Integer,
+      ?storage_type: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?kms_key_id: String,
+      ?windows_configuration: {
+        active_directory_id: String,
+        self_managed_active_directory_configuration: {
+          domain_name: String,
+          organizational_unit_distinguished_name: String,
+          file_system_administrators_group: String,
+          user_name: String,
+          password: String,
+          dns_ips: Array[String]
+        },
+        deployment_type: String,
+        preferred_subnet_id: String,
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        aliases: Array[String],
+        audit_log_configuration: {
+          file_access_audit_log_level: String,
+          file_share_access_audit_log_level: untyped,
+          audit_log_destination: String
+        },
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        }
+      },
+      ?lustre_configuration: {
+        weekly_maintenance_start_time: String,
+        import_path: String,
+        export_path: untyped,
+        imported_file_chunk_size: Integer,
+        deployment_type: String,
+        auto_import_policy: String,
+        per_unit_storage_throughput: Integer,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        drive_cache_type: String,
+        data_compression_type: String,
+        efa_enabled: untyped,
+        log_configuration: {
+          level: String,
+          destination: String
+        },
+        root_squash_configuration: {
+          root_squash: String,
+          no_squash_nids: Array[String]
+        },
+        metadata_configuration: {
+          iops: Integer,
+          mode: String
+        },
+        throughput_capacity: Integer,
+        data_read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        }
+      },
+      ?ontap_configuration: {
+        automatic_backup_retention_days: Integer,
+        daily_automatic_backup_start_time: String,
+        deployment_type: String,
+        endpoint_ip_address_range: String,
+        fsx_admin_password: String,
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        },
+        preferred_subnet_id: String,
+        route_table_ids: Array[String],
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        ha_pairs: Integer,
+        throughput_capacity_per_ha_pair: Integer
+      },
+      ?file_system_type_version: String,
+      ?open_zfs_configuration: {
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        copy_tags_to_volumes: untyped,
+        daily_automatic_backup_start_time: String,
+        deployment_type: String,
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        },
+        root_volume_configuration: {
+          record_size_ki_b: Integer,
+          data_compression_type: String,
+          nfs_exports: Array[
+            {
+              client_configurations: Array[
+                {
+                  clients: String,
+                  options: Array[String]
+                }
+              ]
+            }
+          ],
+          user_and_group_quotas: Array[
+            {
+              type: String,
+              id: Integer,
+              storage_capacity_quota_gi_b: untyped
+            }
+          ],
+          copy_tags_to_snapshots: untyped,
+          read_only: bool
+        },
+        preferred_subnet_id: String,
+        endpoint_ip_address_range: String,
+        endpoint_ipv6_address_range: String,
+        route_table_ids: Array[String],
+        read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        }
+      },
+      ?network_type: String
+    ) -> _CreateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFileSystemResponse
+
+    interface _CreateFileSystemFromBackupResponse
+      include Smithy::Client::_Response[Types::CreateFileSystemFromBackupResponse]
+      def file_system: () -> Types::FileSystem?
+    end
+    def create_file_system_from_backup: (
+      ?backup_id: String,
+      ?client_request_token: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?windows_configuration: {
+        active_directory_id: String,
+        self_managed_active_directory_configuration: {
+          domain_name: String,
+          organizational_unit_distinguished_name: String,
+          file_system_administrators_group: String,
+          user_name: String,
+          password: String,
+          dns_ips: Array[String]
+        },
+        deployment_type: String,
+        preferred_subnet_id: String,
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        aliases: Array[String],
+        audit_log_configuration: {
+          file_access_audit_log_level: String,
+          file_share_access_audit_log_level: untyped,
+          audit_log_destination: String
+        },
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        }
+      },
+      ?lustre_configuration: {
+        weekly_maintenance_start_time: String,
+        import_path: String,
+        export_path: untyped,
+        imported_file_chunk_size: Integer,
+        deployment_type: String,
+        auto_import_policy: String,
+        per_unit_storage_throughput: Integer,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        drive_cache_type: String,
+        data_compression_type: String,
+        efa_enabled: untyped,
+        log_configuration: {
+          level: String,
+          destination: String
+        },
+        root_squash_configuration: {
+          root_squash: String,
+          no_squash_nids: Array[String]
+        },
+        metadata_configuration: {
+          iops: Integer,
+          mode: String
+        },
+        throughput_capacity: Integer,
+        data_read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        }
+      },
+      ?storage_type: String,
+      ?kms_key_id: String,
+      ?file_system_type_version: String,
+      ?open_zfs_configuration: {
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        copy_tags_to_volumes: untyped,
+        daily_automatic_backup_start_time: String,
+        deployment_type: String,
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        },
+        root_volume_configuration: {
+          record_size_ki_b: Integer,
+          data_compression_type: String,
+          nfs_exports: Array[
+            {
+              client_configurations: Array[
+                {
+                  clients: String,
+                  options: Array[String]
+                }
+              ]
+            }
+          ],
+          user_and_group_quotas: Array[
+            {
+              type: String,
+              id: Integer,
+              storage_capacity_quota_gi_b: untyped
+            }
+          ],
+          copy_tags_to_snapshots: untyped,
+          read_only: bool
+        },
+        preferred_subnet_id: String,
+        endpoint_ip_address_range: String,
+        endpoint_ipv6_address_range: String,
+        route_table_ids: Array[String],
+        read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        }
+      },
+      ?storage_capacity: Integer,
+      ?network_type: String
+    ) -> _CreateFileSystemFromBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFileSystemFromBackupResponse
+
+    interface _CreateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def create_snapshot: (
+      ?client_request_token: String,
+      ?name: String,
+      ?volume_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSnapshotResponse
+
+    interface _CreateStorageVirtualMachineResponse
+      include Smithy::Client::_Response[Types::CreateStorageVirtualMachineResponse]
+      def storage_virtual_machine: () -> Types::StorageVirtualMachine?
+    end
+    def create_storage_virtual_machine: (
+      ?active_directory_configuration: {
+        net_bios_name: String,
+        self_managed_active_directory_configuration: {
+          domain_name: String,
+          organizational_unit_distinguished_name: String,
+          file_system_administrators_group: String,
+          user_name: String,
+          password: String,
+          dns_ips: Array[String]
+        }
+      },
+      ?client_request_token: String,
+      ?file_system_id: String,
+      ?name: String,
+      ?svm_admin_password: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?root_volume_security_style: String
+    ) -> _CreateStorageVirtualMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStorageVirtualMachineResponse
+
+    interface _CreateVolumeResponse
+      include Smithy::Client::_Response[Types::CreateVolumeResponse]
+      def volume: () -> Types::Volume?
+    end
+    def create_volume: (
+      ?client_request_token: String,
+      ?volume_type: String,
+      ?name: String,
+      ?ontap_configuration: {
+        junction_path: String,
+        security_style: String,
+        size_in_megabytes: Integer,
+        storage_efficiency_enabled: bool,
+        storage_virtual_machine_id: String,
+        tiering_policy: {
+          cooling_period: Integer,
+          name: String
+        },
+        ontap_volume_type: String,
+        snapshot_policy: String,
+        copy_tags_to_backups: untyped,
+        snaplock_configuration: {
+          audit_log_volume: untyped,
+          autocommit_period: {
+            type: String,
+            value: Integer
+          },
+          privileged_delete: String,
+          retention_period: {
+            default_retention: {
+              type: String,
+              value: Integer
+            },
+            minimum_retention: untyped,
+            maximum_retention: untyped
+          },
+          snaplock_type: String,
+          volume_append_mode_enabled: untyped
+        },
+        volume_style: String,
+        aggregate_configuration: {
+          aggregates: Array[String],
+          constituents_per_aggregate: Integer
+        },
+        size_in_bytes: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?open_zfs_configuration: {
+        parent_volume_id: String,
+        storage_capacity_reservation_gi_b: Integer,
+        storage_capacity_quota_gi_b: untyped,
+        record_size_ki_b: Integer,
+        data_compression_type: String,
+        copy_tags_to_snapshots: bool,
+        origin_snapshot: {
+          snapshot_arn: String,
+          copy_strategy: String
+        },
+        read_only: bool,
+        nfs_exports: Array[
+          {
+            client_configurations: Array[
+              {
+                clients: String,
+                options: Array[String]
+              }
+            ]
+          }
+        ],
+        user_and_group_quotas: Array[
+          {
+            type: String,
+            id: Integer,
+            storage_capacity_quota_gi_b: untyped
+          }
+        ]
+      }
+    ) -> _CreateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVolumeResponse
+
+    interface _CreateVolumeFromBackupResponse
+      include Smithy::Client::_Response[Types::CreateVolumeFromBackupResponse]
+      def volume: () -> Types::Volume?
+    end
+    def create_volume_from_backup: (
+      ?backup_id: String,
+      ?client_request_token: String,
+      ?name: String,
+      ?ontap_configuration: {
+        junction_path: String,
+        security_style: String,
+        size_in_megabytes: Integer,
+        storage_efficiency_enabled: bool,
+        storage_virtual_machine_id: String,
+        tiering_policy: {
+          cooling_period: Integer,
+          name: String
+        },
+        ontap_volume_type: String,
+        snapshot_policy: String,
+        copy_tags_to_backups: untyped,
+        snaplock_configuration: {
+          audit_log_volume: untyped,
+          autocommit_period: {
+            type: String,
+            value: Integer
+          },
+          privileged_delete: String,
+          retention_period: {
+            default_retention: {
+              type: String,
+              value: Integer
+            },
+            minimum_retention: untyped,
+            maximum_retention: untyped
+          },
+          snaplock_type: String,
+          volume_append_mode_enabled: untyped
+        },
+        volume_style: String,
+        aggregate_configuration: {
+          aggregates: Array[String],
+          constituents_per_aggregate: Integer
+        },
+        size_in_bytes: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVolumeFromBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVolumeFromBackupResponse
+
+    interface _DeleteBackupResponse
+      include Smithy::Client::_Response[Types::DeleteBackupResponse]
+      def backup_id: () -> String?
+      def lifecycle: () -> String?
+    end
+    def delete_backup: (
+      ?backup_id: String,
+      ?client_request_token: String
+    ) -> _DeleteBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupResponse
+
+    interface _DeleteDataRepositoryAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteDataRepositoryAssociationResponse]
+      def association_id: () -> String?
+      def lifecycle: () -> String?
+      def delete_data_in_file_system: () -> bool?
+    end
+    def delete_data_repository_association: (
+      ?association_id: String,
+      ?client_request_token: String,
+      ?delete_data_in_file_system: bool
+    ) -> _DeleteDataRepositoryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataRepositoryAssociationResponse
+
+    interface _DeleteFileCacheResponse
+      include Smithy::Client::_Response[Types::DeleteFileCacheResponse]
+      def file_cache_id: () -> String?
+      def lifecycle: () -> String?
+    end
+    def delete_file_cache: (
+      ?file_cache_id: String,
+      ?client_request_token: String
+    ) -> _DeleteFileCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileCacheResponse
+
+    interface _DeleteFileSystemResponse
+      include Smithy::Client::_Response[Types::DeleteFileSystemResponse]
+      def file_system_id: () -> String?
+      def lifecycle: () -> String?
+      def windows_response: () -> Types::DeleteFileSystemWindowsResponse?
+      def lustre_response: () -> Types::DeleteFileSystemLustreResponse?
+      def open_zfs_response: () -> Types::DeleteFileSystemOpenZFSResponse?
+    end
+    def delete_file_system: (
+      ?file_system_id: String,
+      ?client_request_token: String,
+      ?windows_configuration: {
+        skip_final_backup: bool,
+        final_backup_tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?lustre_configuration: {
+        skip_final_backup: bool,
+        final_backup_tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?open_zfs_configuration: {
+        skip_final_backup: bool,
+        final_backup_tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        options: Array[String]
+      }
+    ) -> _DeleteFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileSystemResponse
+
+    interface _DeleteSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteSnapshotResponse]
+      def snapshot_id: () -> String?
+      def lifecycle: () -> String?
+    end
+    def delete_snapshot: (
+      ?client_request_token: String,
+      ?snapshot_id: String
+    ) -> _DeleteSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSnapshotResponse
+
+    interface _DeleteStorageVirtualMachineResponse
+      include Smithy::Client::_Response[Types::DeleteStorageVirtualMachineResponse]
+      def storage_virtual_machine_id: () -> String?
+      def lifecycle: () -> String?
+    end
+    def delete_storage_virtual_machine: (
+      ?client_request_token: String,
+      ?storage_virtual_machine_id: String
+    ) -> _DeleteStorageVirtualMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageVirtualMachineResponse
+
+    interface _DeleteVolumeResponse
+      include Smithy::Client::_Response[Types::DeleteVolumeResponse]
+      def volume_id: () -> String?
+      def lifecycle: () -> String?
+      def ontap_response: () -> Types::DeleteVolumeOntapResponse?
+    end
+    def delete_volume: (
+      ?client_request_token: String,
+      ?volume_id: String,
+      ?ontap_configuration: {
+        skip_final_backup: bool,
+        final_backup_tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        bypass_snaplock_enterprise_retention: untyped
+      },
+      ?open_zfs_configuration: {
+        options: Array[String]
+      }
+    ) -> _DeleteVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVolumeResponse
+
+    interface _DescribeBackupsResponse
+      include Smithy::Client::_Response[Types::DescribeBackupsResponse]
+      def backups: () -> Array[Types::Backup]?
+      def next_token: () -> String?
+    end
+    def describe_backups: (
+      ?backup_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupsResponse
+
+    interface _DescribeDataRepositoryAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeDataRepositoryAssociationsResponse]
+      def associations: () -> Array[Types::DataRepositoryAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_data_repository_associations: (
+      ?association_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDataRepositoryAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataRepositoryAssociationsResponse
+
+    interface _DescribeDataRepositoryTasksResponse
+      include Smithy::Client::_Response[Types::DescribeDataRepositoryTasksResponse]
+      def data_repository_tasks: () -> Array[Types::DataRepositoryTask]?
+      def next_token: () -> String?
+    end
+    def describe_data_repository_tasks: (
+      ?task_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeDataRepositoryTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataRepositoryTasksResponse
+
+    interface _DescribeFileCachesResponse
+      include Smithy::Client::_Response[Types::DescribeFileCachesResponse]
+      def file_caches: () -> Array[Types::FileCache]?
+      def next_token: () -> String?
+    end
+    def describe_file_caches: (
+      ?file_cache_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeFileCachesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileCachesResponse
+
+    interface _DescribeFileSystemAliasesResponse
+      include Smithy::Client::_Response[Types::DescribeFileSystemAliasesResponse]
+      def aliases: () -> Array[Types::Alias]?
+      def next_token: () -> String?
+    end
+    def describe_file_system_aliases: (
+      ?client_request_token: String,
+      ?file_system_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeFileSystemAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileSystemAliasesResponse
+
+    interface _DescribeFileSystemsResponse
+      include Smithy::Client::_Response[Types::DescribeFileSystemsResponse]
+      def file_systems: () -> Array[Types::FileSystem]?
+      def next_token: () -> String?
+    end
+    def describe_file_systems: (
+      ?file_system_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeFileSystemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileSystemsResponse
+
+    interface _DescribeS3AccessPointAttachmentsResponse
+      include Smithy::Client::_Response[Types::DescribeS3AccessPointAttachmentsResponse]
+      def s3_access_point_attachments: () -> Array[Types::S3AccessPointAttachment]?
+      def next_token: () -> String?
+    end
+    def describe_s3_access_point_attachments: (
+      ?names: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeS3AccessPointAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeS3AccessPointAttachmentsResponse
+
+    interface _DescribeSharedVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeSharedVpcConfigurationResponse]
+      def enable_fsx_route_table_updates_from_participant_accounts: () -> String?
+    end
+    def describe_shared_vpc_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSharedVpcConfigurationResponse
+
+    interface _DescribeSnapshotsResponse
+      include Smithy::Client::_Response[Types::DescribeSnapshotsResponse]
+      def snapshots: () -> Array[Types::Snapshot]?
+      def next_token: () -> String?
+    end
+    def describe_snapshots: (
+      ?snapshot_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include_shared: bool
+    ) -> _DescribeSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSnapshotsResponse
+
+    interface _DescribeStorageVirtualMachinesResponse
+      include Smithy::Client::_Response[Types::DescribeStorageVirtualMachinesResponse]
+      def storage_virtual_machines: () -> Array[Types::StorageVirtualMachine]?
+      def next_token: () -> String?
+    end
+    def describe_storage_virtual_machines: (
+      ?storage_virtual_machine_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeStorageVirtualMachinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStorageVirtualMachinesResponse
+
+    interface _DescribeVolumesResponse
+      include Smithy::Client::_Response[Types::DescribeVolumesResponse]
+      def volumes: () -> Array[Types::Volume]?
+      def next_token: () -> String?
+    end
+    def describe_volumes: (
+      ?volume_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVolumesResponse
+
+    interface _DetachAndDeleteS3AccessPointResponse
+      include Smithy::Client::_Response[Types::DetachAndDeleteS3AccessPointResponse]
+      def lifecycle: () -> String?
+      def name: () -> String?
+    end
+    def detach_and_delete_s3_access_point: (
+      ?client_request_token: String,
+      ?name: String
+    ) -> _DetachAndDeleteS3AccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachAndDeleteS3AccessPointResponse
+
+    interface _DisassociateFileSystemAliasesResponse
+      include Smithy::Client::_Response[Types::DisassociateFileSystemAliasesResponse]
+      def aliases: () -> Array[Types::Alias]?
+    end
+    def disassociate_file_system_aliases: (
+      ?client_request_token: String,
+      ?file_system_id: String,
+      ?aliases: Array[String]
+    ) -> _DisassociateFileSystemAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFileSystemAliasesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ReleaseFileSystemNfsV3LocksResponse
+      include Smithy::Client::_Response[Types::ReleaseFileSystemNfsV3LocksResponse]
+      def file_system: () -> Types::FileSystem?
+    end
+    def release_file_system_nfs_v3_locks: (
+      ?file_system_id: String,
+      ?client_request_token: String
+    ) -> _ReleaseFileSystemNfsV3LocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReleaseFileSystemNfsV3LocksResponse
+
+    interface _RestoreVolumeFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreVolumeFromSnapshotResponse]
+      def volume_id: () -> String?
+      def lifecycle: () -> String?
+      def administrative_actions: () -> Array[Types::AdministrativeAction]?
+    end
+    def restore_volume_from_snapshot: (
+      ?client_request_token: String,
+      ?volume_id: String,
+      ?snapshot_id: String,
+      ?options: Array[String]
+    ) -> _RestoreVolumeFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreVolumeFromSnapshotResponse
+
+    interface _StartMisconfiguredStateRecoveryResponse
+      include Smithy::Client::_Response[Types::StartMisconfiguredStateRecoveryResponse]
+      def file_system: () -> Types::FileSystem?
+    end
+    def start_misconfigured_state_recovery: (
+      ?client_request_token: String,
+      ?file_system_id: String
+    ) -> _StartMisconfiguredStateRecoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMisconfiguredStateRecoveryResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDataRepositoryAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateDataRepositoryAssociationResponse]
+      def association: () -> Types::DataRepositoryAssociation?
+    end
+    def update_data_repository_association: (
+      ?association_id: String,
+      ?client_request_token: String,
+      ?imported_file_chunk_size: Integer,
+      ?s3: {
+        auto_import_policy: {
+          events: Array[String]
+        },
+        auto_export_policy: {
+          events: untyped
+        }
+      }
+    ) -> _UpdateDataRepositoryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataRepositoryAssociationResponse
+
+    interface _UpdateFileCacheResponse
+      include Smithy::Client::_Response[Types::UpdateFileCacheResponse]
+      def file_cache: () -> Types::FileCache?
+    end
+    def update_file_cache: (
+      ?file_cache_id: String,
+      ?client_request_token: String,
+      ?lustre_configuration: {
+        weekly_maintenance_start_time: String
+      }
+    ) -> _UpdateFileCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFileCacheResponse
+
+    interface _UpdateFileSystemResponse
+      include Smithy::Client::_Response[Types::UpdateFileSystemResponse]
+      def file_system: () -> Types::FileSystem?
+    end
+    def update_file_system: (
+      ?file_system_id: String,
+      ?client_request_token: String,
+      ?storage_capacity: Integer,
+      ?windows_configuration: {
+        weekly_maintenance_start_time: String,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        throughput_capacity: Integer,
+        self_managed_active_directory_configuration: {
+          user_name: String,
+          password: String,
+          dns_ips: Array[String],
+          domain_name: String,
+          organizational_unit_distinguished_name: String,
+          file_system_administrators_group: String
+        },
+        audit_log_configuration: {
+          file_access_audit_log_level: String,
+          file_share_access_audit_log_level: untyped,
+          audit_log_destination: String
+        },
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        }
+      },
+      ?lustre_configuration: {
+        weekly_maintenance_start_time: String,
+        daily_automatic_backup_start_time: String,
+        automatic_backup_retention_days: Integer,
+        auto_import_policy: String,
+        data_compression_type: String,
+        log_configuration: {
+          level: String,
+          destination: String
+        },
+        root_squash_configuration: {
+          root_squash: String,
+          no_squash_nids: Array[String]
+        },
+        per_unit_storage_throughput: Integer,
+        metadata_configuration: {
+          iops: Integer,
+          mode: String
+        },
+        throughput_capacity: Integer,
+        data_read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        }
+      },
+      ?ontap_configuration: {
+        automatic_backup_retention_days: Integer,
+        daily_automatic_backup_start_time: String,
+        fsx_admin_password: String,
+        weekly_maintenance_start_time: String,
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        },
+        throughput_capacity: Integer,
+        add_route_table_ids: Array[String],
+        remove_route_table_ids: untyped,
+        throughput_capacity_per_ha_pair: Integer,
+        ha_pairs: Integer
+      },
+      ?open_zfs_configuration: {
+        automatic_backup_retention_days: Integer,
+        copy_tags_to_backups: bool,
+        copy_tags_to_volumes: untyped,
+        daily_automatic_backup_start_time: String,
+        throughput_capacity: Integer,
+        weekly_maintenance_start_time: String,
+        disk_iops_configuration: {
+          mode: String,
+          iops: Integer
+        },
+        add_route_table_ids: Array[String],
+        remove_route_table_ids: untyped,
+        read_cache_configuration: {
+          sizing_mode: String,
+          size_gi_b: Integer
+        },
+        endpoint_ipv6_address_range: String
+      },
+      ?storage_type: String,
+      ?file_system_type_version: String,
+      ?network_type: String
+    ) -> _UpdateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFileSystemResponse
+
+    interface _UpdateSharedVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateSharedVpcConfigurationResponse]
+      def enable_fsx_route_table_updates_from_participant_accounts: () -> String?
+    end
+    def update_shared_vpc_configuration: (
+      ?enable_fsx_route_table_updates_from_participant_accounts: String,
+      ?client_request_token: String
+    ) -> _UpdateSharedVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSharedVpcConfigurationResponse
+
+    interface _UpdateSnapshotResponse
+      include Smithy::Client::_Response[Types::UpdateSnapshotResponse]
+      def snapshot: () -> Types::Snapshot?
+    end
+    def update_snapshot: (
+      ?client_request_token: String,
+      ?name: String,
+      ?snapshot_id: String
+    ) -> _UpdateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSnapshotResponse
+
+    interface _UpdateStorageVirtualMachineResponse
+      include Smithy::Client::_Response[Types::UpdateStorageVirtualMachineResponse]
+      def storage_virtual_machine: () -> Types::StorageVirtualMachine?
+    end
+    def update_storage_virtual_machine: (
+      ?active_directory_configuration: {
+        self_managed_active_directory_configuration: {
+          user_name: String,
+          password: String,
+          dns_ips: Array[String],
+          domain_name: String,
+          organizational_unit_distinguished_name: String,
+          file_system_administrators_group: String
+        },
+        net_bios_name: String
+      },
+      ?client_request_token: String,
+      ?storage_virtual_machine_id: String,
+      ?svm_admin_password: String
+    ) -> _UpdateStorageVirtualMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStorageVirtualMachineResponse
+
+    interface _UpdateVolumeResponse
+      include Smithy::Client::_Response[Types::UpdateVolumeResponse]
+      def volume: () -> Types::Volume?
+    end
+    def update_volume: (
+      ?client_request_token: String,
+      ?volume_id: String,
+      ?ontap_configuration: {
+        junction_path: String,
+        security_style: String,
+        size_in_megabytes: Integer,
+        storage_efficiency_enabled: bool,
+        tiering_policy: {
+          cooling_period: Integer,
+          name: String
+        },
+        snapshot_policy: String,
+        copy_tags_to_backups: untyped,
+        snaplock_configuration: {
+          audit_log_volume: untyped,
+          autocommit_period: {
+            type: String,
+            value: Integer
+          },
+          privileged_delete: String,
+          retention_period: {
+            default_retention: {
+              type: String,
+              value: Integer
+            },
+            minimum_retention: untyped,
+            maximum_retention: untyped
+          },
+          volume_append_mode_enabled: untyped
+        },
+        size_in_bytes: Integer
+      },
+      ?name: String,
+      ?open_zfs_configuration: {
+        storage_capacity_reservation_gi_b: Integer,
+        storage_capacity_quota_gi_b: untyped,
+        record_size_ki_b: Integer,
+        data_compression_type: String,
+        nfs_exports: Array[
+          {
+            client_configurations: Array[
+              {
+                clients: String,
+                options: Array[String]
+              }
+            ]
+          }
+        ],
+        user_and_group_quotas: Array[
+          {
+            type: String,
+            id: Integer,
+            storage_capacity_quota_gi_b: untyped
+          }
+        ],
+        read_only: bool
+      }
+    ) -> _UpdateVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVolumeResponse
+  end
+end

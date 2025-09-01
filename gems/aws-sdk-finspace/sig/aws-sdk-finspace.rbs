@@ -1,0 +1,5 @@
+  module Aws
+    module Finspace
+      VERSION: String
+    end
+  end

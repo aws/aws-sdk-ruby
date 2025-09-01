@@ -1,0 +1,1433 @@
+module Aws::KinesisAnalytics
+  module Types
+
+    class AddApplicationCloudWatchLoggingOptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?cloud_watch_logging_option: Types::CloudWatchLoggingOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor cloud_watch_logging_option: Types::CloudWatchLoggingOption?
+    end
+
+    class AddApplicationCloudWatchLoggingOptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddApplicationInputProcessingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?input_id: String,
+        ?input_processing_configuration: Types::InputProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor input_id: String?
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration?
+    end
+
+    class AddApplicationInputProcessingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddApplicationInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?input: Types::Input,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor input: Types::Input?
+    end
+
+    class AddApplicationInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddApplicationOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?output: Types::Output,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor output: Types::Output?
+    end
+
+    class AddApplicationOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddApplicationReferenceDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?reference_data_source: Types::ReferenceDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor reference_data_source: Types::ReferenceDataSource?
+    end
+
+    class AddApplicationReferenceDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ApplicationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?application_description: String,
+        ?application_arn: String,
+        ?application_status: String,
+        ?create_timestamp: Time,
+        ?last_update_timestamp: Time,
+        ?input_descriptions: Array[Types::InputDescription],
+        ?output_descriptions: Array[Types::OutputDescription],
+        ?reference_data_source_descriptions: Array[Types::ReferenceDataSourceDescription],
+        ?cloud_watch_logging_option_descriptions: Array[Types::CloudWatchLoggingOptionDescription],
+        ?application_code: String,
+        ?application_version_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor application_description: String?
+      attr_accessor application_arn: String?
+      attr_accessor application_status: String?
+      attr_accessor create_timestamp: Time?
+      attr_accessor last_update_timestamp: Time?
+      attr_accessor input_descriptions: Array[Types::InputDescription]?
+      attr_accessor output_descriptions: Array[Types::OutputDescription]?
+      attr_accessor reference_data_source_descriptions: Array[Types::ReferenceDataSourceDescription]?
+      attr_accessor cloud_watch_logging_option_descriptions: Array[Types::CloudWatchLoggingOptionDescription]?
+      attr_accessor application_code: String?
+      attr_accessor application_version_id: Integer?
+    end
+
+    module ApplicationStatus
+      DELETING: String
+      STARTING: String
+      STOPPING: String
+      READY: String
+      RUNNING: String
+      UPDATING: String
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?application_arn: String,
+        ?application_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor application_arn: String?
+      attr_accessor application_status: String?
+    end
+
+    class ApplicationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_updates: Array[Types::InputUpdate],
+        ?application_code_update: String,
+        ?output_updates: Array[Types::OutputUpdate],
+        ?reference_data_source_updates: Array[Types::ReferenceDataSourceUpdate],
+        ?cloud_watch_logging_option_updates: Array[Types::CloudWatchLoggingOptionUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_updates: Array[Types::InputUpdate]?
+      attr_accessor application_code_update: String?
+      attr_accessor output_updates: Array[Types::OutputUpdate]?
+      attr_accessor reference_data_source_updates: Array[Types::ReferenceDataSourceUpdate]?
+      attr_accessor cloud_watch_logging_option_updates: Array[Types::CloudWatchLoggingOptionUpdate]?
+    end
+
+    class CSVMappingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_row_delimiter: String,
+        ?record_column_delimiter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_row_delimiter: String?
+      attr_accessor record_column_delimiter: String?
+    end
+
+    class CloudWatchLoggingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_stream_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_stream_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class CloudWatchLoggingOptionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logging_option_id: String,
+        ?log_stream_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logging_option_id: String?
+      attr_accessor log_stream_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class CloudWatchLoggingOptionUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logging_option_id: String,
+        ?log_stream_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logging_option_id: String?
+      attr_accessor log_stream_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class CodeValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?application_description: String,
+        ?inputs: Array[Types::Input],
+        ?outputs: Array[Types::Output],
+        ?cloud_watch_logging_options: Array[Types::CloudWatchLoggingOption],
+        ?application_code: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor application_description: String?
+      attr_accessor inputs: Array[Types::Input]?
+      attr_accessor outputs: Array[Types::Output]?
+      attr_accessor cloud_watch_logging_options: Array[Types::CloudWatchLoggingOption]?
+      attr_accessor application_code: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_summary: Types::ApplicationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_summary: Types::ApplicationSummary?
+    end
+
+    class DeleteApplicationCloudWatchLoggingOptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?cloud_watch_logging_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor cloud_watch_logging_option_id: String?
+    end
+
+    class DeleteApplicationCloudWatchLoggingOptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationInputProcessingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?input_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor input_id: String?
+    end
+
+    class DeleteApplicationInputProcessingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?output_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor output_id: String?
+    end
+
+    class DeleteApplicationOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationReferenceDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?reference_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor reference_id: String?
+    end
+
+    class DeleteApplicationReferenceDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?create_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor create_timestamp: Time?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+    end
+
+    class DescribeApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_detail: Types::ApplicationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_detail: Types::ApplicationDetail?
+    end
+
+    class DestinationSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_format_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_format_type: String?
+    end
+
+    class DiscoverInputSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+        ?input_starting_position_configuration: Types::InputStartingPositionConfiguration,
+        ?s3_configuration: Types::S3Configuration,
+        ?input_processing_configuration: Types::InputProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration?
+      attr_accessor s3_configuration: Types::S3Configuration?
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration?
+    end
+
+    class DiscoverInputSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_schema: Types::SourceSchema,
+        ?parsed_input_records: Array[Array[String]],
+        ?processed_input_records: Array[String],
+        ?raw_input_records: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_schema: Types::SourceSchema?
+      attr_accessor parsed_input_records: Array[Array[String]]?
+      attr_accessor processed_input_records: Array[String]?
+      attr_accessor raw_input_records: Array[String]?
+    end
+
+    class Input
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?input_processing_configuration: Types::InputProcessingConfiguration,
+        ?kinesis_streams_input: Types::KinesisStreamsInput,
+        ?kinesis_firehose_input: Types::KinesisFirehoseInput,
+        ?input_parallelism: Types::InputParallelism,
+        ?input_schema: Types::SourceSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration?
+      attr_accessor kinesis_streams_input: Types::KinesisStreamsInput?
+      attr_accessor kinesis_firehose_input: Types::KinesisFirehoseInput?
+      attr_accessor input_parallelism: Types::InputParallelism?
+      attr_accessor input_schema: Types::SourceSchema?
+    end
+
+    class InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?input_starting_position_configuration: Types::InputStartingPositionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration?
+    end
+
+    class InputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_id: String,
+        ?name_prefix: String,
+        ?in_app_stream_names: Array[String],
+        ?input_processing_configuration_description: Types::InputProcessingConfigurationDescription,
+        ?kinesis_streams_input_description: Types::KinesisStreamsInputDescription,
+        ?kinesis_firehose_input_description: Types::KinesisFirehoseInputDescription,
+        ?input_schema: Types::SourceSchema,
+        ?input_parallelism: Types::InputParallelism,
+        ?input_starting_position_configuration: Types::InputStartingPositionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_id: String?
+      attr_accessor name_prefix: String?
+      attr_accessor in_app_stream_names: Array[String]?
+      attr_accessor input_processing_configuration_description: Types::InputProcessingConfigurationDescription?
+      attr_accessor kinesis_streams_input_description: Types::KinesisStreamsInputDescription?
+      attr_accessor kinesis_firehose_input_description: Types::KinesisFirehoseInputDescription?
+      attr_accessor input_schema: Types::SourceSchema?
+      attr_accessor input_parallelism: Types::InputParallelism?
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration?
+    end
+
+    class InputLambdaProcessor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class InputLambdaProcessorDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class InputLambdaProcessorUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class InputParallelism
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count: Integer?
+    end
+
+    class InputParallelismUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?count_update: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor count_update: Integer?
+    end
+
+    class InputProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_lambda_processor: Types::InputLambdaProcessor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_lambda_processor: Types::InputLambdaProcessor?
+    end
+
+    class InputProcessingConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_lambda_processor_description: Types::InputLambdaProcessorDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_lambda_processor_description: Types::InputLambdaProcessorDescription?
+    end
+
+    class InputProcessingConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_lambda_processor_update: Types::InputLambdaProcessorUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_lambda_processor_update: Types::InputLambdaProcessorUpdate?
+    end
+
+    class InputSchemaUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_format_update: Types::RecordFormat,
+        ?record_encoding_update: String,
+        ?record_column_updates: Array[Types::RecordColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_format_update: Types::RecordFormat?
+      attr_accessor record_encoding_update: String?
+      attr_accessor record_column_updates: Array[Types::RecordColumn]?
+    end
+
+    module InputStartingPosition
+      NOW: String
+      TRIM_HORIZON: String
+      LAST_STOPPED_POINT: String
+    end
+
+    class InputStartingPositionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_starting_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_starting_position: String?
+    end
+
+    class InputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_id: String,
+        ?name_prefix_update: String,
+        ?input_processing_configuration_update: Types::InputProcessingConfigurationUpdate,
+        ?kinesis_streams_input_update: Types::KinesisStreamsInputUpdate,
+        ?kinesis_firehose_input_update: Types::KinesisFirehoseInputUpdate,
+        ?input_schema_update: Types::InputSchemaUpdate,
+        ?input_parallelism_update: Types::InputParallelismUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_id: String?
+      attr_accessor name_prefix_update: String?
+      attr_accessor input_processing_configuration_update: Types::InputProcessingConfigurationUpdate?
+      attr_accessor kinesis_streams_input_update: Types::KinesisStreamsInputUpdate?
+      attr_accessor kinesis_firehose_input_update: Types::KinesisFirehoseInputUpdate?
+      attr_accessor input_schema_update: Types::InputSchemaUpdate?
+      attr_accessor input_parallelism_update: Types::InputParallelismUpdate?
+    end
+
+    class InvalidApplicationConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JSONMappingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_row_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_row_path: String?
+    end
+
+    class KinesisFirehoseInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisFirehoseInputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisFirehoseInputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class KinesisFirehoseOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisFirehoseOutputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisFirehoseOutputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class KinesisStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisStreamsInputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisStreamsInputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class KinesisStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisStreamsOutputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisStreamsOutputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class LambdaOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class LambdaOutputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class LambdaOutputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn_update: String,
+        ?role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn_update: String?
+      attr_accessor role_arn_update: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?exclusive_start_application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor exclusive_start_application_name: String?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_summaries: Array[Types::ApplicationSummary],
+        ?has_more_applications: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_summaries: Array[Types::ApplicationSummary]?
+      attr_accessor has_more_applications: bool?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MappingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?json_mapping_parameters: Types::JSONMappingParameters,
+        ?csv_mapping_parameters: Types::CSVMappingParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor json_mapping_parameters: Types::JSONMappingParameters?
+      attr_accessor csv_mapping_parameters: Types::CSVMappingParameters?
+    end
+
+    class Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?kinesis_streams_output: Types::KinesisStreamsOutput,
+        ?kinesis_firehose_output: Types::KinesisFirehoseOutput,
+        ?lambda_output: Types::LambdaOutput,
+        ?destination_schema: Types::DestinationSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor kinesis_streams_output: Types::KinesisStreamsOutput?
+      attr_accessor kinesis_firehose_output: Types::KinesisFirehoseOutput?
+      attr_accessor lambda_output: Types::LambdaOutput?
+      attr_accessor destination_schema: Types::DestinationSchema?
+    end
+
+    class OutputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_id: String,
+        ?name: String,
+        ?kinesis_streams_output_description: Types::KinesisStreamsOutputDescription,
+        ?kinesis_firehose_output_description: Types::KinesisFirehoseOutputDescription,
+        ?lambda_output_description: Types::LambdaOutputDescription,
+        ?destination_schema: Types::DestinationSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_id: String?
+      attr_accessor name: String?
+      attr_accessor kinesis_streams_output_description: Types::KinesisStreamsOutputDescription?
+      attr_accessor kinesis_firehose_output_description: Types::KinesisFirehoseOutputDescription?
+      attr_accessor lambda_output_description: Types::LambdaOutputDescription?
+      attr_accessor destination_schema: Types::DestinationSchema?
+    end
+
+    class OutputUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_id: String,
+        ?name_update: String,
+        ?kinesis_streams_output_update: Types::KinesisStreamsOutputUpdate,
+        ?kinesis_firehose_output_update: Types::KinesisFirehoseOutputUpdate,
+        ?lambda_output_update: Types::LambdaOutputUpdate,
+        ?destination_schema_update: Types::DestinationSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_id: String?
+      attr_accessor name_update: String?
+      attr_accessor kinesis_streams_output_update: Types::KinesisStreamsOutputUpdate?
+      attr_accessor kinesis_firehose_output_update: Types::KinesisFirehoseOutputUpdate?
+      attr_accessor lambda_output_update: Types::LambdaOutputUpdate?
+      attr_accessor destination_schema_update: Types::DestinationSchema?
+    end
+
+    class RecordColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?mapping: String,
+        ?sql_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor mapping: String?
+      attr_accessor sql_type: String?
+    end
+
+    class RecordFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_format_type: String,
+        ?mapping_parameters: Types::MappingParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_format_type: String?
+      attr_accessor mapping_parameters: Types::MappingParameters?
+    end
+
+    module RecordFormatType
+      JSON: String
+      CSV: String
+    end
+
+    class ReferenceDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?s3_reference_data_source: Types::S3ReferenceDataSource,
+        ?reference_schema: Types::SourceSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor s3_reference_data_source: Types::S3ReferenceDataSource?
+      attr_accessor reference_schema: Types::SourceSchema?
+    end
+
+    class ReferenceDataSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: String,
+        ?table_name: String,
+        ?s3_reference_data_source_description: Types::S3ReferenceDataSourceDescription,
+        ?reference_schema: Types::SourceSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: String?
+      attr_accessor table_name: String?
+      attr_accessor s3_reference_data_source_description: Types::S3ReferenceDataSourceDescription?
+      attr_accessor reference_schema: Types::SourceSchema?
+    end
+
+    class ReferenceDataSourceUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reference_id: String,
+        ?table_name_update: String,
+        ?s3_reference_data_source_update: Types::S3ReferenceDataSourceUpdate,
+        ?reference_schema_update: Types::SourceSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reference_id: String?
+      attr_accessor table_name_update: String?
+      attr_accessor s3_reference_data_source_update: Types::S3ReferenceDataSourceUpdate?
+      attr_accessor reference_schema_update: Types::SourceSchema?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceProvisionedThroughputExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?file_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor file_key: String?
+    end
+
+    class S3ReferenceDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?file_key: String,
+        ?reference_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor file_key: String?
+      attr_accessor reference_role_arn: String?
+    end
+
+    class S3ReferenceDataSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?file_key: String,
+        ?reference_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor file_key: String?
+      attr_accessor reference_role_arn: String?
+    end
+
+    class S3ReferenceDataSourceUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn_update: String,
+        ?file_key_update: String,
+        ?reference_role_arn_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn_update: String?
+      attr_accessor file_key_update: String?
+      attr_accessor reference_role_arn_update: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_format: Types::RecordFormat,
+        ?record_encoding: String,
+        ?record_columns: Array[Types::RecordColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_format: Types::RecordFormat?
+      attr_accessor record_encoding: String?
+      attr_accessor record_columns: Array[Types::RecordColumn]?
+    end
+
+    class StartApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?input_configurations: Array[Types::InputConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor input_configurations: Array[Types::InputConfiguration]?
+    end
+
+    class StartApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+    end
+
+    class StopApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnableToDetectSchemaException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?raw_input_records: Array[String],
+        ?processed_input_records: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor raw_input_records: Array[String]?
+      attr_accessor processed_input_records: Array[String]?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_application_version_id: Integer,
+        ?application_update: Types::ApplicationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_application_version_id: Integer?
+      attr_accessor application_update: Types::ApplicationUpdate?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

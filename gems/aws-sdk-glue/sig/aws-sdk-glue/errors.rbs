@@ -1,0 +1,143 @@
+module Aws::Glue
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ColumnStatisticsTaskNotRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ColumnStatisticsTaskRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ColumnStatisticsTaskStoppingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentRunsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConditionCheckFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CrawlerNotRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CrawlerRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CrawlerStoppingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EntityNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def from_federation_source: () -> bool?
+    end
+    class FederatedResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def associated_glue_resource: () -> String?
+    end
+    class FederationSourceException < Smithy::Client::ServiceError
+      def federation_source_error_code: () -> String?
+      def message: () -> String?
+    end
+    class FederationSourceRetryableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlueEncryptionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalBlueprintStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalSessionStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalWorkflowStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IntegrationConflictOperationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IntegrationNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IntegrationQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def from_federation_source: () -> bool?
+    end
+    class InvalidIntegrationStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MLTransformNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoScheduleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotSupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionTypeMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNumberLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SchedulerNotRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SchedulerRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SchedulerTransitioningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetResourceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VersionMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

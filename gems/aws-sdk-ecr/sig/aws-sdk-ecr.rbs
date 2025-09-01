@@ -1,0 +1,5 @@
+  module Aws
+    module ECR
+      VERSION: String
+    end
+  end

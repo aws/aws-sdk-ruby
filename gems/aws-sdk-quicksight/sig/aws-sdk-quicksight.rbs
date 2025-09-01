@@ -1,0 +1,5 @@
+  module Aws
+    module QuickSight
+      VERSION: String
+    end
+  end

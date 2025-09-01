@@ -1,0 +1,425 @@
+module Aws::BedrockAgentCore
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BedrockAgentCore::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateEventResponse
+      include Smithy::Client::_Response[Types::CreateEventOutput]
+      def event: () -> Types::Event?
+    end
+    def create_event: (
+      ?memory_id: String,
+      ?actor_id: String,
+      ?session_id: String,
+      ?event_timestamp: Time,
+      ?payload: Array[
+        {
+          conversational: {
+            content: {
+              text: String
+            },
+            role: String
+          },
+          blob: Smithy::Schema::document
+        }
+      ],
+      ?branch: {
+        root_event_id: String,
+        name: String
+      },
+      ?client_token: String
+    ) -> _CreateEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventResponse
+
+    interface _DeleteEventResponse
+      include Smithy::Client::_Response[Types::DeleteEventOutput]
+      def event_id: () -> String?
+    end
+    def delete_event: (
+      ?memory_id: String,
+      ?session_id: String,
+      ?event_id: String,
+      ?actor_id: String
+    ) -> _DeleteEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventResponse
+
+    interface _DeleteMemoryRecordResponse
+      include Smithy::Client::_Response[Types::DeleteMemoryRecordOutput]
+      def memory_record_id: () -> String?
+    end
+    def delete_memory_record: (
+      ?memory_id: String,
+      ?memory_record_id: String
+    ) -> _DeleteMemoryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemoryRecordResponse
+
+    interface _GetBrowserSessionResponse
+      include Smithy::Client::_Response[Types::GetBrowserSessionResponse]
+      def browser_identifier: () -> String?
+      def session_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def view_port: () -> Types::ViewPort?
+      def session_timeout_seconds: () -> Integer?
+      def status: () -> String?
+      def streams: () -> Types::BrowserSessionStream?
+      def session_replay_artifact: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def get_browser_session: (
+      ?browser_identifier: String,
+      ?session_id: String
+    ) -> _GetBrowserSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrowserSessionResponse
+
+    interface _GetCodeInterpreterSessionResponse
+      include Smithy::Client::_Response[Types::GetCodeInterpreterSessionResponse]
+      def code_interpreter_identifier: () -> String?
+      def session_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def session_timeout_seconds: () -> Integer?
+      def status: () -> String?
+    end
+    def get_code_interpreter_session: (
+      ?code_interpreter_identifier: String,
+      ?session_id: String
+    ) -> _GetCodeInterpreterSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeInterpreterSessionResponse
+
+    interface _GetEventResponse
+      include Smithy::Client::_Response[Types::GetEventOutput]
+      def event: () -> Types::Event?
+    end
+    def get_event: (
+      ?memory_id: String,
+      ?session_id: String,
+      ?actor_id: String,
+      ?event_id: String
+    ) -> _GetEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventResponse
+
+    interface _GetMemoryRecordResponse
+      include Smithy::Client::_Response[Types::GetMemoryRecordOutput]
+      def memory_record: () -> Types::MemoryRecord?
+    end
+    def get_memory_record: (
+      ?memory_id: String,
+      ?memory_record_id: String
+    ) -> _GetMemoryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemoryRecordResponse
+
+    interface _GetResourceApiKeyResponse
+      include Smithy::Client::_Response[Types::GetResourceApiKeyResponse]
+      def api_key: () -> String?
+    end
+    def get_resource_api_key: (
+      ?workload_identity_token: String,
+      ?resource_credential_provider_name: String
+    ) -> _GetResourceApiKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceApiKeyResponse
+
+    interface _GetResourceOauth2TokenResponse
+      include Smithy::Client::_Response[Types::GetResourceOauth2TokenResponse]
+      def authorization_url: () -> String?
+      def access_token: () -> String?
+    end
+    def get_resource_oauth2_token: (
+      ?workload_identity_token: String,
+      ?resource_credential_provider_name: String,
+      ?scopes: Array[String],
+      ?oauth2_flow: String,
+      ?resource_oauth2_return_url: String,
+      ?force_authentication: bool,
+      ?custom_parameters: Hash[String, String]
+    ) -> _GetResourceOauth2TokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceOauth2TokenResponse
+
+    interface _GetWorkloadAccessTokenResponse
+      include Smithy::Client::_Response[Types::GetWorkloadAccessTokenResponse]
+      def workload_access_token: () -> String?
+    end
+    def get_workload_access_token: (
+      ?workload_name: String
+    ) -> _GetWorkloadAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadAccessTokenResponse
+
+    interface _GetWorkloadAccessTokenForJWTResponse
+      include Smithy::Client::_Response[Types::GetWorkloadAccessTokenForJWTResponse]
+      def workload_access_token: () -> String?
+    end
+    def get_workload_access_token_for_jwt: (
+      ?workload_name: String,
+      ?user_token: String
+    ) -> _GetWorkloadAccessTokenForJWTResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadAccessTokenForJWTResponse
+
+    interface _GetWorkloadAccessTokenForUserIdResponse
+      include Smithy::Client::_Response[Types::GetWorkloadAccessTokenForUserIdResponse]
+      def workload_access_token: () -> String?
+    end
+    def get_workload_access_token_for_user_id: (
+      ?workload_name: String,
+      ?user_id: String
+    ) -> _GetWorkloadAccessTokenForUserIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadAccessTokenForUserIdResponse
+
+    interface _InvokeAgentRuntimeResponse
+      include Smithy::Client::_Response[Types::InvokeAgentRuntimeResponse]
+      def runtime_session_id: () -> String?
+      def mcp_session_id: () -> String?
+      def mcp_protocol_version: () -> String?
+      def trace_id: () -> String?
+      def trace_parent: () -> String?
+      def trace_state: () -> String?
+      def baggage: () -> String?
+      def content_type: () -> String?
+      def response: () -> String?
+      def status_code: () -> Integer?
+    end
+    def invoke_agent_runtime: (
+      ?content_type: String,
+      ?accept: String,
+      ?mcp_session_id: String,
+      ?runtime_session_id: String,
+      ?mcp_protocol_version: String,
+      ?runtime_user_id: String,
+      ?trace_id: String,
+      ?trace_parent: String,
+      ?trace_state: String,
+      ?baggage: String,
+      ?agent_runtime_arn: String,
+      ?qualifier: String,
+      ?payload: String
+    ) -> _InvokeAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAgentRuntimeResponse
+
+    interface _InvokeCodeInterpreterResponse
+      include Smithy::Client::_Response[Types::InvokeCodeInterpreterResponse]
+      def session_id: () -> String?
+      def stream: () -> Types::CodeInterpreterStreamOutput?
+    end
+    def invoke_code_interpreter: (
+      ?code_interpreter_identifier: String,
+      ?session_id: String,
+      ?name: String,
+      ?arguments: {
+        code: String,
+        language: String,
+        clear_context: bool,
+        command: untyped,
+        path: untyped,
+        paths: Array[String],
+        content: Array[
+          {
+            path: untyped,
+            text: untyped,
+            blob: String
+          }
+        ],
+        directory_path: untyped,
+        task_id: untyped
+      }
+    ) -> _InvokeCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeCodeInterpreterResponse
+
+    interface _ListActorsResponse
+      include Smithy::Client::_Response[Types::ListActorsOutput]
+      def actor_summaries: () -> Array[Types::ActorSummary]?
+      def next_token: () -> String?
+    end
+    def list_actors: (
+      ?memory_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListActorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActorsResponse
+
+    interface _ListBrowserSessionsResponse
+      include Smithy::Client::_Response[Types::ListBrowserSessionsResponse]
+      def items: () -> Array[Types::BrowserSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_browser_sessions: (
+      ?browser_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListBrowserSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrowserSessionsResponse
+
+    interface _ListCodeInterpreterSessionsResponse
+      include Smithy::Client::_Response[Types::ListCodeInterpreterSessionsResponse]
+      def items: () -> Array[Types::CodeInterpreterSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_interpreter_sessions: (
+      ?code_interpreter_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListCodeInterpreterSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeInterpreterSessionsResponse
+
+    interface _ListEventsResponse
+      include Smithy::Client::_Response[Types::ListEventsOutput]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def list_events: (
+      ?memory_id: String,
+      ?session_id: String,
+      ?actor_id: String,
+      ?include_payloads: bool,
+      ?filter: {
+        branch: {
+          name: String,
+          include_parent_branches: bool
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventsResponse
+
+    interface _ListMemoryRecordsResponse
+      include Smithy::Client::_Response[Types::ListMemoryRecordsOutput]
+      def memory_record_summaries: () -> Array[Types::MemoryRecordSummary]?
+      def next_token: () -> String?
+    end
+    def list_memory_records: (
+      ?memory_id: String,
+      ?namespace: String,
+      ?memory_strategy_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemoryRecordsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsOutput]
+      def session_summaries: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?memory_id: String,
+      ?actor_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _RetrieveMemoryRecordsResponse
+      include Smithy::Client::_Response[Types::RetrieveMemoryRecordsOutput]
+      def memory_record_summaries: () -> Array[Types::MemoryRecordSummary]?
+      def next_token: () -> String?
+    end
+    def retrieve_memory_records: (
+      ?memory_id: String,
+      ?namespace: String,
+      ?search_criteria: {
+        search_query: String,
+        memory_strategy_id: String,
+        top_k: Integer
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _RetrieveMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveMemoryRecordsResponse
+
+    interface _StartBrowserSessionResponse
+      include Smithy::Client::_Response[Types::StartBrowserSessionResponse]
+      def browser_identifier: () -> String?
+      def session_id: () -> String?
+      def created_at: () -> Time?
+      def streams: () -> Types::BrowserSessionStream?
+    end
+    def start_browser_session: (
+      ?browser_identifier: String,
+      ?name: String,
+      ?session_timeout_seconds: Integer,
+      ?view_port: {
+        width: Integer,
+        height: Integer
+      },
+      ?client_token: String
+    ) -> _StartBrowserSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBrowserSessionResponse
+
+    interface _StartCodeInterpreterSessionResponse
+      include Smithy::Client::_Response[Types::StartCodeInterpreterSessionResponse]
+      def code_interpreter_identifier: () -> String?
+      def session_id: () -> String?
+      def created_at: () -> Time?
+    end
+    def start_code_interpreter_session: (
+      ?code_interpreter_identifier: String,
+      ?name: String,
+      ?session_timeout_seconds: Integer,
+      ?client_token: String
+    ) -> _StartCodeInterpreterSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodeInterpreterSessionResponse
+
+    interface _StopBrowserSessionResponse
+      include Smithy::Client::_Response[Types::StopBrowserSessionResponse]
+      def browser_identifier: () -> String?
+      def session_id: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def stop_browser_session: (
+      ?browser_identifier: String,
+      ?session_id: String,
+      ?client_token: String
+    ) -> _StopBrowserSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBrowserSessionResponse
+
+    interface _StopCodeInterpreterSessionResponse
+      include Smithy::Client::_Response[Types::StopCodeInterpreterSessionResponse]
+      def code_interpreter_identifier: () -> String?
+      def session_id: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def stop_code_interpreter_session: (
+      ?code_interpreter_identifier: String,
+      ?session_id: String,
+      ?client_token: String
+    ) -> _StopCodeInterpreterSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCodeInterpreterSessionResponse
+
+    interface _UpdateBrowserStreamResponse
+      include Smithy::Client::_Response[Types::UpdateBrowserStreamResponse]
+      def browser_identifier: () -> String?
+      def session_id: () -> String?
+      def streams: () -> Types::BrowserSessionStream?
+      def updated_at: () -> Time?
+    end
+    def update_browser_stream: (
+      ?browser_identifier: String,
+      ?session_id: String,
+      ?stream_update: {
+        automation_stream_update: {
+          stream_status: String
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateBrowserStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrowserStreamResponse
+  end
+end

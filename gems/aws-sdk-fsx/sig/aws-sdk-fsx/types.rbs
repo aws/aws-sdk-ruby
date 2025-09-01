@@ -1,0 +1,4552 @@
+module Aws::FSx
+  module Types
+
+    class AccessPointAlreadyOwnedByYou
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ActiveDirectoryBackupAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?active_directory_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor active_directory_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ActiveDirectoryError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_id: String,
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_id: String?
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module ActiveDirectoryErrorType
+      DOMAIN_NOT_FOUND: String
+      INCOMPATIBLE_DOMAIN_MODE: String
+      WRONG_VPC: String
+      INVALID_DOMAIN_STAGE: String
+    end
+
+    class AdministrativeAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?administrative_action_type: String,
+        ?progress_percent: Integer,
+        ?request_time: Time,
+        ?status: String,
+        ?target_file_system_values: Types::FileSystem,
+        ?failure_details: Types::AdministrativeActionFailureDetails,
+        ?target_volume_values: Types::Volume,
+        ?target_snapshot_values: Types::Snapshot,
+        ?total_transfer_bytes: Integer,
+        ?remaining_transfer_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor administrative_action_type: String?
+      attr_accessor progress_percent: Integer?
+      attr_accessor request_time: Time?
+      attr_accessor status: String?
+      attr_accessor target_file_system_values: Types::FileSystem?
+      attr_accessor failure_details: Types::AdministrativeActionFailureDetails?
+      attr_accessor target_volume_values: Types::Volume?
+      attr_accessor target_snapshot_values: Types::Snapshot?
+      attr_accessor total_transfer_bytes: Integer?
+      attr_accessor remaining_transfer_bytes: Integer?
+    end
+
+    class AdministrativeActionFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AdministrativeActionType
+      FILE_SYSTEM_UPDATE: String
+      STORAGE_OPTIMIZATION: String
+      FILE_SYSTEM_ALIAS_ASSOCIATION: String
+      FILE_SYSTEM_ALIAS_DISASSOCIATION: String
+      VOLUME_UPDATE: String
+      SNAPSHOT_UPDATE: String
+      RELEASE_NFS_V3_LOCKS: String
+      VOLUME_RESTORE: String
+      THROUGHPUT_OPTIMIZATION: String
+      IOPS_OPTIMIZATION: String
+      STORAGE_TYPE_OPTIMIZATION: String
+      MISCONFIGURED_STATE_RECOVERY: String
+      VOLUME_UPDATE_WITH_SNAPSHOT: String
+      VOLUME_INITIALIZE_WITH_SNAPSHOT: String
+      DOWNLOAD_DATA_FROM_BACKUP: String
+    end
+
+    class AggregateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregates: Array[String],
+        ?total_constituents: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregates: Array[String]?
+      attr_accessor total_constituents: Integer?
+    end
+
+    class Alias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor lifecycle: String?
+    end
+
+    module AliasLifecycle
+      AVAILABLE: String
+      CREATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+    end
+
+    class AssociateFileSystemAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_system_id: String,
+        ?aliases: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor aliases: Array[String]?
+    end
+
+    class AssociateFileSystemAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::Alias],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::Alias]?
+    end
+
+    class AutoExportPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+    end
+
+    class AutoImportPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+    end
+
+    module AutoImportPolicyType
+      NONE: String
+      NEW: String
+      NEW_CHANGED: String
+      NEW_CHANGED_DELETED: String
+    end
+
+    class AutocommitPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module AutocommitPeriodType
+      MINUTES: String
+      HOURS: String
+      DAYS: String
+      MONTHS: String
+      YEARS: String
+      NONE: String
+    end
+
+    class Backup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?lifecycle: String,
+        ?failure_details: Types::BackupFailureDetails,
+        ?type: String,
+        ?progress_percent: Integer,
+        ?creation_time: Time,
+        ?kms_key_id: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?file_system: Types::FileSystem,
+        ?directory_information: Types::ActiveDirectoryBackupAttributes,
+        ?owner_id: String,
+        ?source_backup_id: String,
+        ?source_backup_region: String,
+        ?resource_type: String,
+        ?volume: Types::Volume,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor failure_details: Types::BackupFailureDetails?
+      attr_accessor type: String?
+      attr_accessor progress_percent: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor kms_key_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_system: Types::FileSystem?
+      attr_accessor directory_information: Types::ActiveDirectoryBackupAttributes?
+      attr_accessor owner_id: String?
+      attr_accessor source_backup_id: String?
+      attr_accessor source_backup_region: String?
+      attr_accessor resource_type: String?
+      attr_accessor volume: Types::Volume?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    class BackupBeingCopied
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?backup_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor backup_id: String?
+    end
+
+    class BackupFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BackupInProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BackupLifecycle
+      AVAILABLE: String
+      CREATING: String
+      TRANSFERRING: String
+      DELETED: String
+      FAILED: String
+      PENDING: String
+      COPYING: String
+    end
+
+    class BackupNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BackupRestoring
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor file_system_id: String?
+    end
+
+    module BackupType
+      AUTOMATIC: String
+      USER_INITIATED: String
+      AWS_BACKUP: String
+    end
+
+    class BadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelDataRepositoryTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class CancelDataRepositoryTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle: String?
+      attr_accessor task_id: String?
+    end
+
+    class CompletionReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?path: String,
+        ?format: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor path: String?
+      attr_accessor format: String?
+      attr_accessor scope: String?
+    end
+
+    class CopyBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?source_backup_id: String,
+        ?source_region: String,
+        ?kms_key_id: String,
+        ?copy_tags: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor source_backup_id: String?
+      attr_accessor source_region: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor copy_tags: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup: Types::Backup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup: Types::Backup?
+    end
+
+    class CopySnapshotAndUpdateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?volume_id: String,
+        ?source_snapshot_arn: String,
+        ?copy_strategy: String,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor volume_id: String?
+      attr_accessor source_snapshot_arn: String?
+      attr_accessor copy_strategy: String?
+      attr_accessor options: Array[String]?
+    end
+
+    class CopySnapshotAndUpdateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?lifecycle: String,
+        ?administrative_actions: Array[Types::AdministrativeAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor administrative_actions: Array[Types::AdministrativeAction]?
+    end
+
+    class CreateAggregateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregates: Array[String],
+        ?constituents_per_aggregate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregates: Array[String]?
+      attr_accessor constituents_per_aggregate: Integer?
+    end
+
+    class CreateAndAttachS3AccessPointOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?file_system_identity: Types::OpenZFSFileSystemIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor file_system_identity: Types::OpenZFSFileSystemIdentity?
+    end
+
+    class CreateAndAttachS3AccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+        ?type: String,
+        ?open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration,
+        ?s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration?
+      attr_accessor s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration?
+    end
+
+    class CreateAndAttachS3AccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_attachment: Types::S3AccessPointAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_attachment: Types::S3AccessPointAttachment?
+    end
+
+    class CreateAndAttachS3AccessPointS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration: Types::S3AccessPointVpcConfiguration,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration: Types::S3AccessPointVpcConfiguration?
+      attr_accessor policy: String?
+    end
+
+    class CreateBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor volume_id: String?
+    end
+
+    class CreateBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup: Types::Backup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup: Types::Backup?
+    end
+
+    class CreateDataRepositoryAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?file_system_path: String,
+        ?data_repository_path: String,
+        ?batch_import_meta_data_on_create: bool,
+        ?imported_file_chunk_size: Integer,
+        ?s3: Types::S3DataRepositoryConfiguration,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor file_system_path: String?
+      attr_accessor data_repository_path: String?
+      attr_accessor batch_import_meta_data_on_create: bool?
+      attr_accessor imported_file_chunk_size: Integer?
+      attr_accessor s3: Types::S3DataRepositoryConfiguration?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataRepositoryAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::DataRepositoryAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::DataRepositoryAssociation?
+    end
+
+    class CreateDataRepositoryTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?paths: Array[String],
+        ?file_system_id: String,
+        ?report: Types::CompletionReport,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?capacity_to_release: Integer,
+        ?release_configuration: Types::ReleaseConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor paths: Array[String]?
+      attr_accessor file_system_id: String?
+      attr_accessor report: Types::CompletionReport?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor capacity_to_release: Integer?
+      attr_accessor release_configuration: Types::ReleaseConfiguration?
+    end
+
+    class CreateDataRepositoryTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_repository_task: Types::DataRepositoryTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_repository_task: Types::DataRepositoryTask?
+    end
+
+    class CreateFileCacheLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_unit_storage_throughput: Integer,
+        ?deployment_type: String,
+        ?weekly_maintenance_start_time: String,
+        ?metadata_configuration: Types::FileCacheLustreMetadataConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_unit_storage_throughput: Integer?
+      attr_accessor deployment_type: String?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor metadata_configuration: Types::FileCacheLustreMetadataConfiguration?
+    end
+
+    class CreateFileCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_cache_type: String,
+        ?file_cache_type_version: String,
+        ?storage_capacity: Integer,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?copy_tags_to_data_repository_associations: bool,
+        ?kms_key_id: String,
+        ?lustre_configuration: Types::CreateFileCacheLustreConfiguration,
+        ?data_repository_associations: Array[Types::FileCacheDataRepositoryAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_cache_type: String?
+      attr_accessor file_cache_type_version: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor copy_tags_to_data_repository_associations: bool?
+      attr_accessor kms_key_id: String?
+      attr_accessor lustre_configuration: Types::CreateFileCacheLustreConfiguration?
+      attr_accessor data_repository_associations: Array[Types::FileCacheDataRepositoryAssociation]?
+    end
+
+    class CreateFileCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache: Types::FileCacheCreating,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache: Types::FileCacheCreating?
+    end
+
+    class CreateFileSystemFromBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?client_request_token: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?windows_configuration: Types::CreateFileSystemWindowsConfiguration,
+        ?lustre_configuration: Types::CreateFileSystemLustreConfiguration,
+        ?storage_type: String,
+        ?kms_key_id: String,
+        ?file_system_type_version: String,
+        ?open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration,
+        ?storage_capacity: Integer,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor windows_configuration: Types::CreateFileSystemWindowsConfiguration?
+      attr_accessor lustre_configuration: Types::CreateFileSystemLustreConfiguration?
+      attr_accessor storage_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor file_system_type_version: String?
+      attr_accessor open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor network_type: String?
+    end
+
+    class CreateFileSystemFromBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system: Types::FileSystem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system: Types::FileSystem?
+    end
+
+    class CreateFileSystemLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weekly_maintenance_start_time: String,
+        ?import_path: String,
+        ?export_path: String,
+        ?imported_file_chunk_size: Integer,
+        ?deployment_type: String,
+        ?auto_import_policy: String,
+        ?per_unit_storage_throughput: Integer,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?drive_cache_type: String,
+        ?data_compression_type: String,
+        ?efa_enabled: bool,
+        ?log_configuration: Types::LustreLogCreateConfiguration,
+        ?root_squash_configuration: Types::LustreRootSquashConfiguration,
+        ?metadata_configuration: Types::CreateFileSystemLustreMetadataConfiguration,
+        ?throughput_capacity: Integer,
+        ?data_read_cache_configuration: Types::LustreReadCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor import_path: String?
+      attr_accessor export_path: String?
+      attr_accessor imported_file_chunk_size: Integer?
+      attr_accessor deployment_type: String?
+      attr_accessor auto_import_policy: String?
+      attr_accessor per_unit_storage_throughput: Integer?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor drive_cache_type: String?
+      attr_accessor data_compression_type: String?
+      attr_accessor efa_enabled: bool?
+      attr_accessor log_configuration: Types::LustreLogCreateConfiguration?
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration?
+      attr_accessor metadata_configuration: Types::CreateFileSystemLustreMetadataConfiguration?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration?
+    end
+
+    class CreateFileSystemLustreMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iops: Integer,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iops: Integer?
+      attr_accessor mode: String?
+    end
+
+    class CreateFileSystemOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?daily_automatic_backup_start_time: String,
+        ?deployment_type: String,
+        ?endpoint_ip_address_range: String,
+        ?fsx_admin_password: String,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?preferred_subnet_id: String,
+        ?route_table_ids: Array[String],
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?ha_pairs: Integer,
+        ?throughput_capacity_per_ha_pair: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor deployment_type: String?
+      attr_accessor endpoint_ip_address_range: String?
+      attr_accessor fsx_admin_password: String?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor route_table_ids: Array[String]?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor ha_pairs: Integer?
+      attr_accessor throughput_capacity_per_ha_pair: Integer?
+    end
+
+    class CreateFileSystemOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?copy_tags_to_volumes: bool,
+        ?daily_automatic_backup_start_time: String,
+        ?deployment_type: String,
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?root_volume_configuration: Types::OpenZFSCreateRootVolumeConfiguration,
+        ?preferred_subnet_id: String,
+        ?endpoint_ip_address_range: String,
+        ?endpoint_ipv6_address_range: String,
+        ?route_table_ids: Array[String],
+        ?read_cache_configuration: Types::OpenZFSReadCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor copy_tags_to_volumes: bool?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor deployment_type: String?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor root_volume_configuration: Types::OpenZFSCreateRootVolumeConfiguration?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor endpoint_ip_address_range: String?
+      attr_accessor endpoint_ipv6_address_range: String?
+      attr_accessor route_table_ids: Array[String]?
+      attr_accessor read_cache_configuration: Types::OpenZFSReadCacheConfiguration?
+    end
+
+    class CreateFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_system_type: String,
+        ?storage_capacity: Integer,
+        ?storage_type: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?tags: Array[Types::Tag],
+        ?kms_key_id: String,
+        ?windows_configuration: Types::CreateFileSystemWindowsConfiguration,
+        ?lustre_configuration: Types::CreateFileSystemLustreConfiguration,
+        ?ontap_configuration: Types::CreateFileSystemOntapConfiguration,
+        ?file_system_type_version: String,
+        ?open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_type: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor storage_type: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor kms_key_id: String?
+      attr_accessor windows_configuration: Types::CreateFileSystemWindowsConfiguration?
+      attr_accessor lustre_configuration: Types::CreateFileSystemLustreConfiguration?
+      attr_accessor ontap_configuration: Types::CreateFileSystemOntapConfiguration?
+      attr_accessor file_system_type_version: String?
+      attr_accessor open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration?
+      attr_accessor network_type: String?
+    end
+
+    class CreateFileSystemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system: Types::FileSystem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system: Types::FileSystem?
+    end
+
+    class CreateFileSystemWindowsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_id: String,
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration,
+        ?deployment_type: String,
+        ?preferred_subnet_id: String,
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?aliases: Array[String],
+        ?audit_log_configuration: Types::WindowsAuditLogCreateConfiguration,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_id: String?
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration?
+      attr_accessor deployment_type: String?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor aliases: Array[String]?
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+    end
+
+    class CreateOntapVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?junction_path: String,
+        ?security_style: String,
+        ?size_in_megabytes: Integer,
+        ?storage_efficiency_enabled: bool,
+        ?storage_virtual_machine_id: String,
+        ?tiering_policy: Types::TieringPolicy,
+        ?ontap_volume_type: String,
+        ?snapshot_policy: String,
+        ?copy_tags_to_backups: bool,
+        ?snaplock_configuration: Types::CreateSnaplockConfiguration,
+        ?volume_style: String,
+        ?aggregate_configuration: Types::CreateAggregateConfiguration,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor junction_path: String?
+      attr_accessor security_style: String?
+      attr_accessor size_in_megabytes: Integer?
+      attr_accessor storage_efficiency_enabled: bool?
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor tiering_policy: Types::TieringPolicy?
+      attr_accessor ontap_volume_type: String?
+      attr_accessor snapshot_policy: String?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor snaplock_configuration: Types::CreateSnaplockConfiguration?
+      attr_accessor volume_style: String?
+      attr_accessor aggregate_configuration: Types::CreateAggregateConfiguration?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    class CreateOpenZFSOriginSnapshotConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+        ?copy_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+      attr_accessor copy_strategy: String?
+    end
+
+    class CreateOpenZFSVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_volume_id: String,
+        ?storage_capacity_reservation_gi_b: Integer,
+        ?storage_capacity_quota_gi_b: Integer,
+        ?record_size_ki_b: Integer,
+        ?data_compression_type: String,
+        ?copy_tags_to_snapshots: bool,
+        ?origin_snapshot: Types::CreateOpenZFSOriginSnapshotConfiguration,
+        ?read_only: bool,
+        ?nfs_exports: Array[Types::OpenZFSNfsExport],
+        ?user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_volume_id: String?
+      attr_accessor storage_capacity_reservation_gi_b: Integer?
+      attr_accessor storage_capacity_quota_gi_b: Integer?
+      attr_accessor record_size_ki_b: Integer?
+      attr_accessor data_compression_type: String?
+      attr_accessor copy_tags_to_snapshots: bool?
+      attr_accessor origin_snapshot: Types::CreateOpenZFSOriginSnapshotConfiguration?
+      attr_accessor read_only: bool?
+      attr_accessor nfs_exports: Array[Types::OpenZFSNfsExport]?
+      attr_accessor user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota]?
+    end
+
+    class CreateSnaplockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_log_volume: bool,
+        ?autocommit_period: Types::AutocommitPeriod,
+        ?privileged_delete: String,
+        ?retention_period: Types::SnaplockRetentionPeriod,
+        ?snaplock_type: String,
+        ?volume_append_mode_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_log_volume: bool?
+      attr_accessor autocommit_period: Types::AutocommitPeriod?
+      attr_accessor privileged_delete: String?
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod?
+      attr_accessor snaplock_type: String?
+      attr_accessor volume_append_mode_enabled: bool?
+    end
+
+    class CreateSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+        ?volume_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor volume_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class CreateStorageVirtualMachineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_configuration: Types::CreateSvmActiveDirectoryConfiguration,
+        ?client_request_token: String,
+        ?file_system_id: String,
+        ?name: String,
+        ?svm_admin_password: String,
+        ?tags: Array[Types::Tag],
+        ?root_volume_security_style: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_configuration: Types::CreateSvmActiveDirectoryConfiguration?
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor name: String?
+      attr_accessor svm_admin_password: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor root_volume_security_style: String?
+    end
+
+    class CreateStorageVirtualMachineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machine: Types::StorageVirtualMachine,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machine: Types::StorageVirtualMachine?
+    end
+
+    class CreateSvmActiveDirectoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?net_bios_name: String,
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor net_bios_name: String?
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration?
+    end
+
+    class CreateVolumeFromBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?client_request_token: String,
+        ?name: String,
+        ?ontap_configuration: Types::CreateOntapVolumeConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor ontap_configuration: Types::CreateOntapVolumeConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateVolumeFromBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume: Types::Volume,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume: Types::Volume?
+    end
+
+    class CreateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?volume_type: String,
+        ?name: String,
+        ?ontap_configuration: Types::CreateOntapVolumeConfiguration,
+        ?tags: Array[Types::Tag],
+        ?open_zfs_configuration: Types::CreateOpenZFSVolumeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor volume_type: String?
+      attr_accessor name: String?
+      attr_accessor ontap_configuration: Types::CreateOntapVolumeConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor open_zfs_configuration: Types::CreateOpenZFSVolumeConfiguration?
+    end
+
+    class CreateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume: Types::Volume,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume: Types::Volume?
+    end
+
+    module DataCompressionType
+      NONE: String
+      LZ4: String
+    end
+
+    class DataRepositoryAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?resource_arn: String,
+        ?file_system_id: String,
+        ?lifecycle: String,
+        ?failure_details: Types::DataRepositoryFailureDetails,
+        ?file_system_path: String,
+        ?data_repository_path: String,
+        ?batch_import_meta_data_on_create: bool,
+        ?imported_file_chunk_size: Integer,
+        ?s3: Types::S3DataRepositoryConfiguration,
+        ?tags: Array[Types::Tag],
+        ?creation_time: Time,
+        ?file_cache_id: String,
+        ?file_cache_path: String,
+        ?data_repository_subdirectories: Array[String],
+        ?nfs: Types::NFSDataRepositoryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor file_system_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor failure_details: Types::DataRepositoryFailureDetails?
+      attr_accessor file_system_path: String?
+      attr_accessor data_repository_path: String?
+      attr_accessor batch_import_meta_data_on_create: bool?
+      attr_accessor imported_file_chunk_size: Integer?
+      attr_accessor s3: Types::S3DataRepositoryConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor creation_time: Time?
+      attr_accessor file_cache_id: String?
+      attr_accessor file_cache_path: String?
+      attr_accessor data_repository_subdirectories: Array[String]?
+      attr_accessor nfs: Types::NFSDataRepositoryConfiguration?
+    end
+
+    class DataRepositoryAssociationNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataRepositoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle: String,
+        ?import_path: String,
+        ?export_path: String,
+        ?imported_file_chunk_size: Integer,
+        ?auto_import_policy: String,
+        ?failure_details: Types::DataRepositoryFailureDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle: String?
+      attr_accessor import_path: String?
+      attr_accessor export_path: String?
+      attr_accessor imported_file_chunk_size: Integer?
+      attr_accessor auto_import_policy: String?
+      attr_accessor failure_details: Types::DataRepositoryFailureDetails?
+    end
+
+    class DataRepositoryFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DataRepositoryLifecycle
+      CREATING: String
+      AVAILABLE: String
+      MISCONFIGURED: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class DataRepositoryTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?lifecycle: String,
+        ?type: String,
+        ?creation_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?file_system_id: String,
+        ?paths: Array[String],
+        ?failure_details: Types::DataRepositoryTaskFailureDetails,
+        ?status: Types::DataRepositoryTaskStatus,
+        ?report: Types::CompletionReport,
+        ?capacity_to_release: Integer,
+        ?file_cache_id: String,
+        ?release_configuration: Types::ReleaseConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_system_id: String?
+      attr_accessor paths: Array[String]?
+      attr_accessor failure_details: Types::DataRepositoryTaskFailureDetails?
+      attr_accessor status: Types::DataRepositoryTaskStatus?
+      attr_accessor report: Types::CompletionReport?
+      attr_accessor capacity_to_release: Integer?
+      attr_accessor file_cache_id: String?
+      attr_accessor release_configuration: Types::ReleaseConfiguration?
+    end
+
+    class DataRepositoryTaskEnded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataRepositoryTaskExecuting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataRepositoryTaskFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataRepositoryTaskFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module DataRepositoryTaskFilterName
+      FILE_SYSTEM_ID: String
+      TASK_LIFECYCLE: String
+      DATA_REPO_ASSOCIATION_ID: String
+      FILE_CACHE_ID: String
+    end
+
+    module DataRepositoryTaskLifecycle
+      PENDING: String
+      EXECUTING: String
+      FAILED: String
+      SUCCEEDED: String
+      CANCELED: String
+      CANCELING: String
+    end
+
+    class DataRepositoryTaskNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DataRepositoryTaskStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_count: Integer,
+        ?succeeded_count: Integer,
+        ?failed_count: Integer,
+        ?last_updated_time: Time,
+        ?released_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_count: Integer?
+      attr_accessor succeeded_count: Integer?
+      attr_accessor failed_count: Integer?
+      attr_accessor last_updated_time: Time?
+      attr_accessor released_capacity: Integer?
+    end
+
+    module DataRepositoryTaskType
+      EXPORT: String
+      IMPORT: String
+      EVICTION: String
+      AUTO_TRIGGERED_EVICTION: String
+    end
+
+    class DeleteBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor lifecycle: String?
+    end
+
+    class DeleteDataRepositoryAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?client_request_token: String,
+        ?delete_data_in_file_system: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor delete_data_in_file_system: bool?
+    end
+
+    class DeleteDataRepositoryAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?lifecycle: String,
+        ?delete_data_in_file_system: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor delete_data_in_file_system: bool?
+    end
+
+    class DeleteFileCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteFileCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache_id: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache_id: String?
+      attr_accessor lifecycle: String?
+    end
+
+    class DeleteFileSystemLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skip_final_backup: bool,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skip_final_backup: bool?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    class DeleteFileSystemLustreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?final_backup_id: String,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor final_backup_id: String?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    class DeleteFileSystemOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skip_final_backup: bool,
+        ?final_backup_tags: Array[Types::Tag],
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skip_final_backup: bool?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+      attr_accessor options: Array[String]?
+    end
+
+    module DeleteFileSystemOpenZFSOption
+      DELETE_CHILD_VOLUMES_AND_SNAPSHOTS: String
+    end
+
+    class DeleteFileSystemOpenZFSResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?final_backup_id: String,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor final_backup_id: String?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    class DeleteFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?client_request_token: String,
+        ?windows_configuration: Types::DeleteFileSystemWindowsConfiguration,
+        ?lustre_configuration: Types::DeleteFileSystemLustreConfiguration,
+        ?open_zfs_configuration: Types::DeleteFileSystemOpenZFSConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor windows_configuration: Types::DeleteFileSystemWindowsConfiguration?
+      attr_accessor lustre_configuration: Types::DeleteFileSystemLustreConfiguration?
+      attr_accessor open_zfs_configuration: Types::DeleteFileSystemOpenZFSConfiguration?
+    end
+
+    class DeleteFileSystemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?lifecycle: String,
+        ?windows_response: Types::DeleteFileSystemWindowsResponse,
+        ?lustre_response: Types::DeleteFileSystemLustreResponse,
+        ?open_zfs_response: Types::DeleteFileSystemOpenZFSResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor windows_response: Types::DeleteFileSystemWindowsResponse?
+      attr_accessor lustre_response: Types::DeleteFileSystemLustreResponse?
+      attr_accessor open_zfs_response: Types::DeleteFileSystemOpenZFSResponse?
+    end
+
+    class DeleteFileSystemWindowsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skip_final_backup: bool,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skip_final_backup: bool?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    class DeleteFileSystemWindowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?final_backup_id: String,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor final_backup_id: String?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    module DeleteOpenZFSVolumeOption
+      DELETE_CHILD_VOLUMES_AND_SNAPSHOTS: String
+    end
+
+    class DeleteSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor snapshot_id: String?
+    end
+
+    class DeleteSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor lifecycle: String?
+    end
+
+    class DeleteStorageVirtualMachineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?storage_virtual_machine_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor storage_virtual_machine_id: String?
+    end
+
+    class DeleteStorageVirtualMachineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machine_id: String,
+        ?lifecycle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor lifecycle: String?
+    end
+
+    class DeleteVolumeOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skip_final_backup: bool,
+        ?final_backup_tags: Array[Types::Tag],
+        ?bypass_snaplock_enterprise_retention: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skip_final_backup: bool?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+      attr_accessor bypass_snaplock_enterprise_retention: bool?
+    end
+
+    class DeleteVolumeOntapResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?final_backup_id: String,
+        ?final_backup_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor final_backup_id: String?
+      attr_accessor final_backup_tags: Array[Types::Tag]?
+    end
+
+    class DeleteVolumeOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Array[String]?
+    end
+
+    class DeleteVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?volume_id: String,
+        ?ontap_configuration: Types::DeleteVolumeOntapConfiguration,
+        ?open_zfs_configuration: Types::DeleteVolumeOpenZFSConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor volume_id: String?
+      attr_accessor ontap_configuration: Types::DeleteVolumeOntapConfiguration?
+      attr_accessor open_zfs_configuration: Types::DeleteVolumeOpenZFSConfiguration?
+    end
+
+    class DeleteVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?lifecycle: String,
+        ?ontap_response: Types::DeleteVolumeOntapResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor ontap_response: Types::DeleteVolumeOntapResponse?
+    end
+
+    class DescribeBackupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBackupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backups: Array[Types::Backup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backups: Array[Types::Backup]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDataRepositoryAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_ids: Array[String],
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_ids: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDataRepositoryAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::DataRepositoryAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::DataRepositoryAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDataRepositoryTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_ids: Array[String],
+        ?filters: Array[Types::DataRepositoryTaskFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_ids: Array[String]?
+      attr_accessor filters: Array[Types::DataRepositoryTaskFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeDataRepositoryTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_repository_tasks: Array[Types::DataRepositoryTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_repository_tasks: Array[Types::DataRepositoryTask]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileCachesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileCachesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_caches: Array[Types::FileCache],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_caches: Array[Types::FileCache]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileSystemAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_system_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileSystemAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::Alias],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::Alias]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileSystemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFileSystemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_systems: Array[Types::FileSystem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_systems: Array[Types::FileSystem]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeS3AccessPointAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[String],
+        ?filters: Array[Types::S3AccessPointAttachmentsFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[String]?
+      attr_accessor filters: Array[Types::S3AccessPointAttachmentsFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeS3AccessPointAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_access_point_attachments: Array[Types::S3AccessPointAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point_attachments: Array[Types::S3AccessPointAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSharedVpcConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeSharedVpcConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_fsx_route_table_updates_from_participant_accounts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: String?
+    end
+
+    class DescribeSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_ids: Array[String],
+        ?filters: Array[Types::SnapshotFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_shared: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_ids: Array[String]?
+      attr_accessor filters: Array[Types::SnapshotFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_shared: bool?
+    end
+
+    class DescribeSnapshotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshots: Array[Types::Snapshot],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshots: Array[Types::Snapshot]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStorageVirtualMachinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machine_ids: Array[String],
+        ?filters: Array[Types::StorageVirtualMachineFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machine_ids: Array[String]?
+      attr_accessor filters: Array[Types::StorageVirtualMachineFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeStorageVirtualMachinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machines: Array[Types::StorageVirtualMachine],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machines: Array[Types::StorageVirtualMachine]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeVolumesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_ids: Array[String],
+        ?filters: Array[Types::VolumeFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_ids: Array[String]?
+      attr_accessor filters: Array[Types::VolumeFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeVolumesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volumes: Array[Types::Volume],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volumes: Array[Types::Volume]?
+      attr_accessor next_token: String?
+    end
+
+    class DetachAndDeleteS3AccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+    end
+
+    class DetachAndDeleteS3AccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle: String?
+      attr_accessor name: String?
+    end
+
+    class DisassociateFileSystemAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_system_id: String,
+        ?aliases: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor aliases: Array[String]?
+    end
+
+    class DisassociateFileSystemAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::Alias],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::Alias]?
+    end
+
+    class DiskIopsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?iops: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor iops: Integer?
+    end
+
+    module DiskIopsConfigurationMode
+      AUTOMATIC: String
+      USER_PROVISIONED: String
+    end
+
+    module DriveCacheType
+      NONE: String
+      READ: String
+    end
+
+    class DurationSinceLastAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor value: Integer?
+    end
+
+    module EventType
+      NEW: String
+      CHANGED: String
+      DELETED: String
+    end
+
+    class FileCache
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?creation_time: Time,
+        ?file_cache_id: String,
+        ?file_cache_type: String,
+        ?file_cache_type_version: String,
+        ?lifecycle: String,
+        ?failure_details: Types::FileCacheFailureDetails,
+        ?storage_capacity: Integer,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?network_interface_ids: Array[String],
+        ?dns_name: String,
+        ?kms_key_id: String,
+        ?resource_arn: String,
+        ?lustre_configuration: Types::FileCacheLustreConfiguration,
+        ?data_repository_association_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor file_cache_id: String?
+      attr_accessor file_cache_type: String?
+      attr_accessor file_cache_type_version: String?
+      attr_accessor lifecycle: String?
+      attr_accessor failure_details: Types::FileCacheFailureDetails?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor network_interface_ids: Array[String]?
+      attr_accessor dns_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor lustre_configuration: Types::FileCacheLustreConfiguration?
+      attr_accessor data_repository_association_ids: Array[String]?
+    end
+
+    class FileCacheCreating
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?creation_time: Time,
+        ?file_cache_id: String,
+        ?file_cache_type: String,
+        ?file_cache_type_version: String,
+        ?lifecycle: String,
+        ?failure_details: Types::FileCacheFailureDetails,
+        ?storage_capacity: Integer,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?network_interface_ids: Array[String],
+        ?dns_name: String,
+        ?kms_key_id: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?copy_tags_to_data_repository_associations: bool,
+        ?lustre_configuration: Types::FileCacheLustreConfiguration,
+        ?data_repository_association_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor file_cache_id: String?
+      attr_accessor file_cache_type: String?
+      attr_accessor file_cache_type_version: String?
+      attr_accessor lifecycle: String?
+      attr_accessor failure_details: Types::FileCacheFailureDetails?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor network_interface_ids: Array[String]?
+      attr_accessor dns_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor copy_tags_to_data_repository_associations: bool?
+      attr_accessor lustre_configuration: Types::FileCacheLustreConfiguration?
+      attr_accessor data_repository_association_ids: Array[String]?
+    end
+
+    class FileCacheDataRepositoryAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache_path: String,
+        ?data_repository_path: String,
+        ?data_repository_subdirectories: Array[String],
+        ?nfs: Types::FileCacheNFSConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache_path: String?
+      attr_accessor data_repository_path: String?
+      attr_accessor data_repository_subdirectories: Array[String]?
+      attr_accessor nfs: Types::FileCacheNFSConfiguration?
+    end
+
+    class FileCacheFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FileCacheLifecycle
+      AVAILABLE: String
+      CREATING: String
+      DELETING: String
+      UPDATING: String
+      FAILED: String
+    end
+
+    class FileCacheLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_unit_storage_throughput: Integer,
+        ?deployment_type: String,
+        ?mount_name: String,
+        ?weekly_maintenance_start_time: String,
+        ?metadata_configuration: Types::FileCacheLustreMetadataConfiguration,
+        ?log_configuration: Types::LustreLogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_unit_storage_throughput: Integer?
+      attr_accessor deployment_type: String?
+      attr_accessor mount_name: String?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor metadata_configuration: Types::FileCacheLustreMetadataConfiguration?
+      attr_accessor log_configuration: Types::LustreLogConfiguration?
+    end
+
+    module FileCacheLustreDeploymentType
+      CACHE_1: String
+    end
+
+    class FileCacheLustreMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_capacity: Integer?
+    end
+
+    class FileCacheNFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?dns_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor dns_ips: Array[String]?
+    end
+
+    class FileCacheNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FileCacheType
+      LUSTRE: String
+    end
+
+    class FileSystem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?creation_time: Time,
+        ?file_system_id: String,
+        ?file_system_type: String,
+        ?lifecycle: String,
+        ?failure_details: Types::FileSystemFailureDetails,
+        ?storage_capacity: Integer,
+        ?storage_type: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?network_interface_ids: Array[String],
+        ?dns_name: String,
+        ?kms_key_id: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?windows_configuration: Types::WindowsFileSystemConfiguration,
+        ?lustre_configuration: Types::LustreFileSystemConfiguration,
+        ?administrative_actions: Array[Types::AdministrativeAction],
+        ?ontap_configuration: Types::OntapFileSystemConfiguration,
+        ?file_system_type_version: String,
+        ?open_zfs_configuration: Types::OpenZFSFileSystemConfiguration,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor file_system_id: String?
+      attr_accessor file_system_type: String?
+      attr_accessor lifecycle: String?
+      attr_accessor failure_details: Types::FileSystemFailureDetails?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor storage_type: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor network_interface_ids: Array[String]?
+      attr_accessor dns_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor windows_configuration: Types::WindowsFileSystemConfiguration?
+      attr_accessor lustre_configuration: Types::LustreFileSystemConfiguration?
+      attr_accessor administrative_actions: Array[Types::AdministrativeAction]?
+      attr_accessor ontap_configuration: Types::OntapFileSystemConfiguration?
+      attr_accessor file_system_type_version: String?
+      attr_accessor open_zfs_configuration: Types::OpenZFSFileSystemConfiguration?
+      attr_accessor network_type: String?
+    end
+
+    class FileSystemEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_name: String,
+        ?ip_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: String?
+      attr_accessor ip_addresses: Array[String]?
+    end
+
+    class FileSystemEndpoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intercluster: Types::FileSystemEndpoint,
+        ?management: Types::FileSystemEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intercluster: Types::FileSystemEndpoint?
+      attr_accessor management: Types::FileSystemEndpoint?
+    end
+
+    class FileSystemFailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FileSystemLifecycle
+      AVAILABLE: String
+      CREATING: String
+      FAILED: String
+      DELETING: String
+      MISCONFIGURED: String
+      UPDATING: String
+      MISCONFIGURED_UNAVAILABLE: String
+    end
+
+    class FileSystemLustreMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iops: Integer,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iops: Integer?
+      attr_accessor mode: String?
+    end
+
+    module FileSystemMaintenanceOperation
+      PATCHING: String
+      BACKING_UP: String
+    end
+
+    class FileSystemNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FileSystemType
+      WINDOWS: String
+      LUSTRE: String
+      ONTAP: String
+      OPENZFS: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module FilterName
+      FILE_SYSTEM_ID: String
+      BACKUP_TYPE: String
+      FILE_SYSTEM_TYPE: String
+      VOLUME_ID: String
+      DATA_REPOSITORY_TYPE: String
+      FILE_CACHE_ID: String
+      FILE_CACHE_TYPE: String
+    end
+
+    module FlexCacheEndpointType
+      NONE: String
+      ORIGIN: String
+      CACHE: String
+    end
+
+    class IncompatibleParameterError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter: String?
+      attr_accessor message: String?
+    end
+
+    class IncompatibleRegionForMultiAZ
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InputOntapVolumeType
+      RW: String
+      DP: String
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAccessPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidDataRepositoryType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDestinationKmsKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidExportPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidImportPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNetworkSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?invalid_subnet_id: String,
+        ?invalid_security_group_id: String,
+        ?invalid_route_table_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor invalid_subnet_id: String?
+      attr_accessor invalid_security_group_id: String?
+      attr_accessor invalid_route_table_id: String?
+    end
+
+    class InvalidPerUnitStorageThroughput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRegion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidSourceKmsKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LifecycleTransitionReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    module LustreAccessAuditLogLevel
+      DISABLED: String
+      WARN_ONLY: String
+      ERROR_ONLY: String
+      WARN_ERROR: String
+    end
+
+    module LustreDeploymentType
+      SCRATCH_1: String
+      SCRATCH_2: String
+      PERSISTENT_1: String
+      PERSISTENT_2: String
+    end
+
+    class LustreFileSystemConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weekly_maintenance_start_time: String,
+        ?data_repository_configuration: Types::DataRepositoryConfiguration,
+        ?deployment_type: String,
+        ?per_unit_storage_throughput: Integer,
+        ?mount_name: String,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?drive_cache_type: String,
+        ?data_compression_type: String,
+        ?log_configuration: Types::LustreLogConfiguration,
+        ?root_squash_configuration: Types::LustreRootSquashConfiguration,
+        ?metadata_configuration: Types::FileSystemLustreMetadataConfiguration,
+        ?efa_enabled: bool,
+        ?throughput_capacity: Integer,
+        ?data_read_cache_configuration: Types::LustreReadCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor data_repository_configuration: Types::DataRepositoryConfiguration?
+      attr_accessor deployment_type: String?
+      attr_accessor per_unit_storage_throughput: Integer?
+      attr_accessor mount_name: String?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor drive_cache_type: String?
+      attr_accessor data_compression_type: String?
+      attr_accessor log_configuration: Types::LustreLogConfiguration?
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration?
+      attr_accessor metadata_configuration: Types::FileSystemLustreMetadataConfiguration?
+      attr_accessor efa_enabled: bool?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration?
+    end
+
+    class LustreLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level: String,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level: String?
+      attr_accessor destination: String?
+    end
+
+    class LustreLogCreateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level: String,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level: String?
+      attr_accessor destination: String?
+    end
+
+    class LustreReadCacheConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sizing_mode: String,
+        ?size_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sizing_mode: String?
+      attr_accessor size_gi_b: Integer?
+    end
+
+    module LustreReadCacheSizingMode
+      NO_CACHE: String
+      USER_PROVISIONED: String
+      PROPORTIONAL_TO_THROUGHPUT_CAPACITY: String
+    end
+
+    class LustreRootSquashConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?root_squash: String,
+        ?no_squash_nids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor root_squash: String?
+      attr_accessor no_squash_nids: Array[String]?
+    end
+
+    module MetadataConfigurationMode
+      AUTOMATIC: String
+      USER_PROVISIONED: String
+    end
+
+    class MissingFileCacheConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MissingFileSystemConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MissingVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NFSDataRepositoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?dns_ips: Array[String],
+        ?auto_export_policy: Types::AutoExportPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor dns_ips: Array[String]?
+      attr_accessor auto_export_policy: Types::AutoExportPolicy?
+    end
+
+    module NetworkType
+      IPV4: String
+      DUAL: String
+    end
+
+    module NfsVersion
+      NFS3: String
+    end
+
+    class NotServiceResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor message: String?
+    end
+
+    module OntapDeploymentType
+      MULTI_AZ_1: String
+      SINGLE_AZ_1: String
+      SINGLE_AZ_2: String
+      MULTI_AZ_2: String
+    end
+
+    class OntapFileSystemConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?daily_automatic_backup_start_time: String,
+        ?deployment_type: String,
+        ?endpoint_ip_address_range: String,
+        ?endpoints: Types::FileSystemEndpoints,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?preferred_subnet_id: String,
+        ?route_table_ids: Array[String],
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?fsx_admin_password: String,
+        ?ha_pairs: Integer,
+        ?throughput_capacity_per_ha_pair: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor deployment_type: String?
+      attr_accessor endpoint_ip_address_range: String?
+      attr_accessor endpoints: Types::FileSystemEndpoints?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor route_table_ids: Array[String]?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor fsx_admin_password: String?
+      attr_accessor ha_pairs: Integer?
+      attr_accessor throughput_capacity_per_ha_pair: Integer?
+    end
+
+    class OntapVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flex_cache_endpoint_type: String,
+        ?junction_path: String,
+        ?security_style: String,
+        ?size_in_megabytes: Integer,
+        ?storage_efficiency_enabled: bool,
+        ?storage_virtual_machine_id: String,
+        ?storage_virtual_machine_root: bool,
+        ?tiering_policy: Types::TieringPolicy,
+        ?uuid: String,
+        ?ontap_volume_type: String,
+        ?snapshot_policy: String,
+        ?copy_tags_to_backups: bool,
+        ?snaplock_configuration: Types::SnaplockConfiguration,
+        ?volume_style: String,
+        ?aggregate_configuration: Types::AggregateConfiguration,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flex_cache_endpoint_type: String?
+      attr_accessor junction_path: String?
+      attr_accessor security_style: String?
+      attr_accessor size_in_megabytes: Integer?
+      attr_accessor storage_efficiency_enabled: bool?
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor storage_virtual_machine_root: bool?
+      attr_accessor tiering_policy: Types::TieringPolicy?
+      attr_accessor uuid: String?
+      attr_accessor ontap_volume_type: String?
+      attr_accessor snapshot_policy: String?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor snaplock_configuration: Types::SnaplockConfiguration?
+      attr_accessor volume_style: String?
+      attr_accessor aggregate_configuration: Types::AggregateConfiguration?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    module OntapVolumeType
+      RW: String
+      DP: String
+      LS: String
+    end
+
+    class OpenZFSClientConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clients: String,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clients: String?
+      attr_accessor options: Array[String]?
+    end
+
+    module OpenZFSCopyStrategy
+      CLONE: String
+      FULL_COPY: String
+      INCREMENTAL_COPY: String
+    end
+
+    class OpenZFSCreateRootVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_size_ki_b: Integer,
+        ?data_compression_type: String,
+        ?nfs_exports: Array[Types::OpenZFSNfsExport],
+        ?user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota],
+        ?copy_tags_to_snapshots: bool,
+        ?read_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_size_ki_b: Integer?
+      attr_accessor data_compression_type: String?
+      attr_accessor nfs_exports: Array[Types::OpenZFSNfsExport]?
+      attr_accessor user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota]?
+      attr_accessor copy_tags_to_snapshots: bool?
+      attr_accessor read_only: bool?
+    end
+
+    module OpenZFSDataCompressionType
+      NONE: String
+      ZSTD: String
+      LZ4: String
+    end
+
+    module OpenZFSDeploymentType
+      SINGLE_AZ_1: String
+      SINGLE_AZ_2: String
+      SINGLE_AZ_HA_1: String
+      SINGLE_AZ_HA_2: String
+      MULTI_AZ_1: String
+    end
+
+    class OpenZFSFileSystemConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?copy_tags_to_volumes: bool,
+        ?daily_automatic_backup_start_time: String,
+        ?deployment_type: String,
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?root_volume_id: String,
+        ?preferred_subnet_id: String,
+        ?endpoint_ip_address_range: String,
+        ?endpoint_ipv6_address_range: String,
+        ?route_table_ids: Array[String],
+        ?endpoint_ip_address: String,
+        ?endpoint_ipv6_address: String,
+        ?read_cache_configuration: Types::OpenZFSReadCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor copy_tags_to_volumes: bool?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor deployment_type: String?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor root_volume_id: String?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor endpoint_ip_address_range: String?
+      attr_accessor endpoint_ipv6_address_range: String?
+      attr_accessor route_table_ids: Array[String]?
+      attr_accessor endpoint_ip_address: String?
+      attr_accessor endpoint_ipv6_address: String?
+      attr_accessor read_cache_configuration: Types::OpenZFSReadCacheConfiguration?
+    end
+
+    class OpenZFSFileSystemIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?posix_user: Types::OpenZFSPosixFileSystemUser,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor posix_user: Types::OpenZFSPosixFileSystemUser?
+    end
+
+    module OpenZFSFileSystemUserType
+      POSIX: String
+    end
+
+    class OpenZFSNfsExport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_configurations: Array[Types::OpenZFSClientConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_configurations: Array[Types::OpenZFSClientConfiguration]?
+    end
+
+    class OpenZFSOriginSnapshotConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+        ?copy_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+      attr_accessor copy_strategy: String?
+    end
+
+    class OpenZFSPosixFileSystemUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uid: Integer,
+        ?gid: Integer,
+        ?secondary_gids: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uid: Integer?
+      attr_accessor gid: Integer?
+      attr_accessor secondary_gids: Array[Integer]?
+    end
+
+    module OpenZFSQuotaType
+      USER: String
+      GROUP: String
+    end
+
+    class OpenZFSReadCacheConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sizing_mode: String,
+        ?size_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sizing_mode: String?
+      attr_accessor size_gi_b: Integer?
+    end
+
+    module OpenZFSReadCacheSizingMode
+      NO_CACHE: String
+      USER_PROVISIONED: String
+      PROPORTIONAL_TO_THROUGHPUT_CAPACITY: String
+    end
+
+    class OpenZFSUserOrGroupQuota
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: Integer,
+        ?storage_capacity_quota_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: Integer?
+      attr_accessor storage_capacity_quota_gi_b: Integer?
+    end
+
+    class OpenZFSVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_volume_id: String,
+        ?volume_path: String,
+        ?storage_capacity_reservation_gi_b: Integer,
+        ?storage_capacity_quota_gi_b: Integer,
+        ?record_size_ki_b: Integer,
+        ?data_compression_type: String,
+        ?copy_tags_to_snapshots: bool,
+        ?origin_snapshot: Types::OpenZFSOriginSnapshotConfiguration,
+        ?read_only: bool,
+        ?nfs_exports: Array[Types::OpenZFSNfsExport],
+        ?user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota],
+        ?restore_to_snapshot: String,
+        ?delete_intermediate_snaphots: bool,
+        ?delete_cloned_volumes: bool,
+        ?delete_intermediate_data: bool,
+        ?source_snapshot_arn: String,
+        ?destination_snapshot: String,
+        ?copy_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_volume_id: String?
+      attr_accessor volume_path: String?
+      attr_accessor storage_capacity_reservation_gi_b: Integer?
+      attr_accessor storage_capacity_quota_gi_b: Integer?
+      attr_accessor record_size_ki_b: Integer?
+      attr_accessor data_compression_type: String?
+      attr_accessor copy_tags_to_snapshots: bool?
+      attr_accessor origin_snapshot: Types::OpenZFSOriginSnapshotConfiguration?
+      attr_accessor read_only: bool?
+      attr_accessor nfs_exports: Array[Types::OpenZFSNfsExport]?
+      attr_accessor user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota]?
+      attr_accessor restore_to_snapshot: String?
+      attr_accessor delete_intermediate_snaphots: bool?
+      attr_accessor delete_cloned_volumes: bool?
+      attr_accessor delete_intermediate_data: bool?
+      attr_accessor source_snapshot_arn: String?
+      attr_accessor destination_snapshot: String?
+      attr_accessor copy_strategy: String?
+    end
+
+    module PrivilegedDelete
+      DISABLED: String
+      ENABLED: String
+      PERMANENTLY_DISABLED: String
+    end
+
+    class ReleaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_since_last_access: Types::DurationSinceLastAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_since_last_access: Types::DurationSinceLastAccess?
+    end
+
+    class ReleaseFileSystemNfsV3LocksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class ReleaseFileSystemNfsV3LocksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system: Types::FileSystem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system: Types::FileSystem?
+    end
+
+    module ReportFormat
+      REPORT_CSV_20191124: String
+    end
+
+    module ReportScope
+      FAILED_FILES_ONLY: String
+    end
+
+    class ResourceDoesNotSupportTagging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      FILE_SYSTEM: String
+      VOLUME: String
+    end
+
+    module RestoreOpenZFSVolumeOption
+      DELETE_INTERMEDIATE_SNAPSHOTS: String
+      DELETE_CLONED_VOLUMES: String
+    end
+
+    class RestoreVolumeFromSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?volume_id: String,
+        ?snapshot_id: String,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor volume_id: String?
+      attr_accessor snapshot_id: String?
+      attr_accessor options: Array[String]?
+    end
+
+    class RestoreVolumeFromSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?lifecycle: String,
+        ?administrative_actions: Array[Types::AdministrativeAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor administrative_actions: Array[Types::AdministrativeAction]?
+    end
+
+    class RetentionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module RetentionPeriodType
+      SECONDS: String
+      MINUTES: String
+      HOURS: String
+      DAYS: String
+      MONTHS: String
+      YEARS: String
+      INFINITE: String
+      UNSPECIFIED: String
+    end
+
+    class S3AccessPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?alias: String,
+        ?vpc_configuration: Types::S3AccessPointVpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor alias: String?
+      attr_accessor vpc_configuration: Types::S3AccessPointVpcConfiguration?
+    end
+
+    class S3AccessPointAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle: String,
+        ?lifecycle_transition_reason: Types::LifecycleTransitionReason,
+        ?creation_time: Time,
+        ?name: String,
+        ?type: String,
+        ?open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration,
+        ?s3_access_point: Types::S3AccessPoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle: String?
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason?
+      attr_accessor creation_time: Time?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration?
+      attr_accessor s3_access_point: Types::S3AccessPoint?
+    end
+
+    module S3AccessPointAttachmentLifecycle
+      AVAILABLE: String
+      CREATING: String
+      DELETING: String
+      UPDATING: String
+      FAILED: String
+    end
+
+    class S3AccessPointAttachmentNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module S3AccessPointAttachmentType
+      OPENZFS: String
+    end
+
+    class S3AccessPointAttachmentsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module S3AccessPointAttachmentsFilterName
+      FILE_SYSTEM_ID: String
+      VOLUME_ID: String
+      TYPE: String
+    end
+
+    class S3AccessPointOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?file_system_identity: Types::OpenZFSFileSystemIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor file_system_identity: Types::OpenZFSFileSystemIdentity?
+    end
+
+    class S3AccessPointVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+    end
+
+    class S3DataRepositoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_import_policy: Types::AutoImportPolicy,
+        ?auto_export_policy: Types::AutoExportPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_import_policy: Types::AutoImportPolicy?
+      attr_accessor auto_export_policy: Types::AutoExportPolicy?
+    end
+
+    module SecurityStyle
+      UNIX: String
+      NTFS: String
+      MIXED: String
+    end
+
+    class SelfManagedActiveDirectoryAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?organizational_unit_distinguished_name: String,
+        ?file_system_administrators_group: String,
+        ?user_name: String,
+        ?dns_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor organizational_unit_distinguished_name: String?
+      attr_accessor file_system_administrators_group: String?
+      attr_accessor user_name: String?
+      attr_accessor dns_ips: Array[String]?
+    end
+
+    class SelfManagedActiveDirectoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?organizational_unit_distinguished_name: String,
+        ?file_system_administrators_group: String,
+        ?user_name: String,
+        ?password: String,
+        ?dns_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor organizational_unit_distinguished_name: String?
+      attr_accessor file_system_administrators_group: String?
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+      attr_accessor dns_ips: Array[String]?
+    end
+
+    class SelfManagedActiveDirectoryConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?password: String,
+        ?dns_ips: Array[String],
+        ?domain_name: String,
+        ?organizational_unit_distinguished_name: String,
+        ?file_system_administrators_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor password: String?
+      attr_accessor dns_ips: Array[String]?
+      attr_accessor domain_name: String?
+      attr_accessor organizational_unit_distinguished_name: String?
+      attr_accessor file_system_administrators_group: String?
+    end
+
+    module ServiceLimit
+      FILE_SYSTEM_COUNT: String
+      TOTAL_THROUGHPUT_CAPACITY: String
+      TOTAL_STORAGE: String
+      TOTAL_USER_INITIATED_BACKUPS: String
+      TOTAL_USER_TAGS: String
+      TOTAL_IN_PROGRESS_COPY_BACKUPS: String
+      STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM: String
+      VOLUMES_PER_FILE_SYSTEM: String
+      TOTAL_SSD_IOPS: String
+      FILE_CACHE_COUNT: String
+    end
+
+    class ServiceLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: String?
+      attr_accessor message: String?
+    end
+
+    class SnaplockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_log_volume: bool,
+        ?autocommit_period: Types::AutocommitPeriod,
+        ?privileged_delete: String,
+        ?retention_period: Types::SnaplockRetentionPeriod,
+        ?snaplock_type: String,
+        ?volume_append_mode_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_log_volume: bool?
+      attr_accessor autocommit_period: Types::AutocommitPeriod?
+      attr_accessor privileged_delete: String?
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod?
+      attr_accessor snaplock_type: String?
+      attr_accessor volume_append_mode_enabled: bool?
+    end
+
+    class SnaplockRetentionPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_retention: Types::RetentionPeriod,
+        ?minimum_retention: Types::RetentionPeriod,
+        ?maximum_retention: Types::RetentionPeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_retention: Types::RetentionPeriod?
+      attr_accessor minimum_retention: Types::RetentionPeriod?
+      attr_accessor maximum_retention: Types::RetentionPeriod?
+    end
+
+    module SnaplockType
+      COMPLIANCE: String
+      ENTERPRISE: String
+    end
+
+    class Snapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?snapshot_id: String,
+        ?name: String,
+        ?volume_id: String,
+        ?creation_time: Time,
+        ?lifecycle: String,
+        ?lifecycle_transition_reason: Types::LifecycleTransitionReason,
+        ?tags: Array[Types::Tag],
+        ?administrative_actions: Array[Types::AdministrativeAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor snapshot_id: String?
+      attr_accessor name: String?
+      attr_accessor volume_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor lifecycle: String?
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor administrative_actions: Array[Types::AdministrativeAction]?
+    end
+
+    class SnapshotFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module SnapshotFilterName
+      FILE_SYSTEM_ID: String
+      VOLUME_ID: String
+    end
+
+    module SnapshotLifecycle
+      PENDING: String
+      CREATING: String
+      DELETING: String
+      AVAILABLE: String
+    end
+
+    class SnapshotNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceBackupUnavailable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?backup_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor backup_id: String?
+    end
+
+    class StartMisconfiguredStateRecoveryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor file_system_id: String?
+    end
+
+    class StartMisconfiguredStateRecoveryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system: Types::FileSystem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system: Types::FileSystem?
+    end
+
+    module Status
+      FAILED: String
+      IN_PROGRESS: String
+      PENDING: String
+      COMPLETED: String
+      UPDATED_OPTIMIZING: String
+      OPTIMIZING: String
+    end
+
+    module StorageType
+      SSD: String
+      HDD: String
+      INTELLIGENT_TIERING: String
+    end
+
+    class StorageVirtualMachine
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_configuration: Types::SvmActiveDirectoryConfiguration,
+        ?creation_time: Time,
+        ?endpoints: Types::SvmEndpoints,
+        ?file_system_id: String,
+        ?lifecycle: String,
+        ?name: String,
+        ?resource_arn: String,
+        ?storage_virtual_machine_id: String,
+        ?subtype: String,
+        ?uuid: String,
+        ?tags: Array[Types::Tag],
+        ?lifecycle_transition_reason: Types::LifecycleTransitionReason,
+        ?root_volume_security_style: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_configuration: Types::SvmActiveDirectoryConfiguration?
+      attr_accessor creation_time: Time?
+      attr_accessor endpoints: Types::SvmEndpoints?
+      attr_accessor file_system_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor subtype: String?
+      attr_accessor uuid: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason?
+      attr_accessor root_volume_security_style: String?
+    end
+
+    class StorageVirtualMachineFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module StorageVirtualMachineFilterName
+      FILE_SYSTEM_ID: String
+    end
+
+    module StorageVirtualMachineLifecycle
+      CREATED: String
+      CREATING: String
+      DELETING: String
+      FAILED: String
+      MISCONFIGURED: String
+      PENDING: String
+    end
+
+    class StorageVirtualMachineNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StorageVirtualMachineRootVolumeSecurityStyle
+      UNIX: String
+      NTFS: String
+      MIXED: String
+    end
+
+    module StorageVirtualMachineSubtype
+      DEFAULT: String
+      DP_DESTINATION: String
+      SYNC_DESTINATION: String
+      SYNC_SOURCE: String
+    end
+
+    class SvmActiveDirectoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?net_bios_name: String,
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor net_bios_name: String?
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes?
+    end
+
+    class SvmEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_name: String,
+        ?ip_addresses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: String?
+      attr_accessor ip_addresses: Array[String]?
+    end
+
+    class SvmEndpoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iscsi: Types::SvmEndpoint,
+        ?management: Types::SvmEndpoint,
+        ?nfs: Types::SvmEndpoint,
+        ?smb: Types::SvmEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iscsi: Types::SvmEndpoint?
+      attr_accessor management: Types::SvmEndpoint?
+      attr_accessor nfs: Types::SvmEndpoint?
+      attr_accessor smb: Types::SvmEndpoint?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TieringPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cooling_period: Integer,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cooling_period: Integer?
+      attr_accessor name: String?
+    end
+
+    module TieringPolicyName
+      SNAPSHOT_ONLY: String
+      AUTO: String
+      ALL: String
+      NONE: String
+    end
+
+    class TooManyAccessPoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    module Unit
+      DAYS: String
+    end
+
+    class UnsupportedOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataRepositoryAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?client_request_token: String,
+        ?imported_file_chunk_size: Integer,
+        ?s3: Types::S3DataRepositoryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor imported_file_chunk_size: Integer?
+      attr_accessor s3: Types::S3DataRepositoryConfiguration?
+    end
+
+    class UpdateDataRepositoryAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::DataRepositoryAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::DataRepositoryAssociation?
+    end
+
+    class UpdateFileCacheLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weekly_maintenance_start_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weekly_maintenance_start_time: String?
+    end
+
+    class UpdateFileCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache_id: String,
+        ?client_request_token: String,
+        ?lustre_configuration: Types::UpdateFileCacheLustreConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor lustre_configuration: Types::UpdateFileCacheLustreConfiguration?
+    end
+
+    class UpdateFileCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_cache: Types::FileCache,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_cache: Types::FileCache?
+    end
+
+    class UpdateFileSystemLustreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weekly_maintenance_start_time: String,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?auto_import_policy: String,
+        ?data_compression_type: String,
+        ?log_configuration: Types::LustreLogCreateConfiguration,
+        ?root_squash_configuration: Types::LustreRootSquashConfiguration,
+        ?per_unit_storage_throughput: Integer,
+        ?metadata_configuration: Types::UpdateFileSystemLustreMetadataConfiguration,
+        ?throughput_capacity: Integer,
+        ?data_read_cache_configuration: Types::LustreReadCacheConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor auto_import_policy: String?
+      attr_accessor data_compression_type: String?
+      attr_accessor log_configuration: Types::LustreLogCreateConfiguration?
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration?
+      attr_accessor per_unit_storage_throughput: Integer?
+      attr_accessor metadata_configuration: Types::UpdateFileSystemLustreMetadataConfiguration?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration?
+    end
+
+    class UpdateFileSystemLustreMetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iops: Integer,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iops: Integer?
+      attr_accessor mode: String?
+    end
+
+    class UpdateFileSystemOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?daily_automatic_backup_start_time: String,
+        ?fsx_admin_password: String,
+        ?weekly_maintenance_start_time: String,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?throughput_capacity: Integer,
+        ?add_route_table_ids: Array[String],
+        ?remove_route_table_ids: Array[String],
+        ?throughput_capacity_per_ha_pair: Integer,
+        ?ha_pairs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor fsx_admin_password: String?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor add_route_table_ids: Array[String]?
+      attr_accessor remove_route_table_ids: Array[String]?
+      attr_accessor throughput_capacity_per_ha_pair: Integer?
+      attr_accessor ha_pairs: Integer?
+    end
+
+    class UpdateFileSystemOpenZFSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?copy_tags_to_volumes: bool,
+        ?daily_automatic_backup_start_time: String,
+        ?throughput_capacity: Integer,
+        ?weekly_maintenance_start_time: String,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?add_route_table_ids: Array[String],
+        ?remove_route_table_ids: Array[String],
+        ?read_cache_configuration: Types::OpenZFSReadCacheConfiguration,
+        ?endpoint_ipv6_address_range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor copy_tags_to_volumes: bool?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor add_route_table_ids: Array[String]?
+      attr_accessor remove_route_table_ids: Array[String]?
+      attr_accessor read_cache_configuration: Types::OpenZFSReadCacheConfiguration?
+      attr_accessor endpoint_ipv6_address_range: String?
+    end
+
+    class UpdateFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?client_request_token: String,
+        ?storage_capacity: Integer,
+        ?windows_configuration: Types::UpdateFileSystemWindowsConfiguration,
+        ?lustre_configuration: Types::UpdateFileSystemLustreConfiguration,
+        ?ontap_configuration: Types::UpdateFileSystemOntapConfiguration,
+        ?open_zfs_configuration: Types::UpdateFileSystemOpenZFSConfiguration,
+        ?storage_type: String,
+        ?file_system_type_version: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor windows_configuration: Types::UpdateFileSystemWindowsConfiguration?
+      attr_accessor lustre_configuration: Types::UpdateFileSystemLustreConfiguration?
+      attr_accessor ontap_configuration: Types::UpdateFileSystemOntapConfiguration?
+      attr_accessor open_zfs_configuration: Types::UpdateFileSystemOpenZFSConfiguration?
+      attr_accessor storage_type: String?
+      attr_accessor file_system_type_version: String?
+      attr_accessor network_type: String?
+    end
+
+    class UpdateFileSystemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system: Types::FileSystem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system: Types::FileSystem?
+    end
+
+    class UpdateFileSystemWindowsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weekly_maintenance_start_time: String,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?throughput_capacity: Integer,
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates,
+        ?audit_log_configuration: Types::WindowsAuditLogCreateConfiguration,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates?
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+    end
+
+    class UpdateOntapVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?junction_path: String,
+        ?security_style: String,
+        ?size_in_megabytes: Integer,
+        ?storage_efficiency_enabled: bool,
+        ?tiering_policy: Types::TieringPolicy,
+        ?snapshot_policy: String,
+        ?copy_tags_to_backups: bool,
+        ?snaplock_configuration: Types::UpdateSnaplockConfiguration,
+        ?size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor junction_path: String?
+      attr_accessor security_style: String?
+      attr_accessor size_in_megabytes: Integer?
+      attr_accessor storage_efficiency_enabled: bool?
+      attr_accessor tiering_policy: Types::TieringPolicy?
+      attr_accessor snapshot_policy: String?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor snaplock_configuration: Types::UpdateSnaplockConfiguration?
+      attr_accessor size_in_bytes: Integer?
+    end
+
+    class UpdateOpenZFSVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_capacity_reservation_gi_b: Integer,
+        ?storage_capacity_quota_gi_b: Integer,
+        ?record_size_ki_b: Integer,
+        ?data_compression_type: String,
+        ?nfs_exports: Array[Types::OpenZFSNfsExport],
+        ?user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota],
+        ?read_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_capacity_reservation_gi_b: Integer?
+      attr_accessor storage_capacity_quota_gi_b: Integer?
+      attr_accessor record_size_ki_b: Integer?
+      attr_accessor data_compression_type: String?
+      attr_accessor nfs_exports: Array[Types::OpenZFSNfsExport]?
+      attr_accessor user_and_group_quotas: Array[Types::OpenZFSUserOrGroupQuota]?
+      attr_accessor read_only: bool?
+    end
+
+    module UpdateOpenZFSVolumeOption
+      DELETE_INTERMEDIATE_SNAPSHOTS: String
+      DELETE_CLONED_VOLUMES: String
+      DELETE_INTERMEDIATE_DATA: String
+    end
+
+    class UpdateSharedVpcConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_fsx_route_table_updates_from_participant_accounts: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class UpdateSharedVpcConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_fsx_route_table_updates_from_participant_accounts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: String?
+    end
+
+    class UpdateSnaplockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_log_volume: bool,
+        ?autocommit_period: Types::AutocommitPeriod,
+        ?privileged_delete: String,
+        ?retention_period: Types::SnaplockRetentionPeriod,
+        ?volume_append_mode_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_log_volume: bool?
+      attr_accessor autocommit_period: Types::AutocommitPeriod?
+      attr_accessor privileged_delete: String?
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod?
+      attr_accessor volume_append_mode_enabled: bool?
+    end
+
+    class UpdateSnapshotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?name: String,
+        ?snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor name: String?
+      attr_accessor snapshot_id: String?
+    end
+
+    class UpdateSnapshotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot: Types::Snapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot: Types::Snapshot?
+    end
+
+    class UpdateStorageVirtualMachineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_configuration: Types::UpdateSvmActiveDirectoryConfiguration,
+        ?client_request_token: String,
+        ?storage_virtual_machine_id: String,
+        ?svm_admin_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_configuration: Types::UpdateSvmActiveDirectoryConfiguration?
+      attr_accessor client_request_token: String?
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor svm_admin_password: String?
+    end
+
+    class UpdateStorageVirtualMachineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machine: Types::StorageVirtualMachine,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machine: Types::StorageVirtualMachine?
+    end
+
+    class UpdateSvmActiveDirectoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates,
+        ?net_bios_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates?
+      attr_accessor net_bios_name: String?
+    end
+
+    class UpdateVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_request_token: String,
+        ?volume_id: String,
+        ?ontap_configuration: Types::UpdateOntapVolumeConfiguration,
+        ?name: String,
+        ?open_zfs_configuration: Types::UpdateOpenZFSVolumeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_request_token: String?
+      attr_accessor volume_id: String?
+      attr_accessor ontap_configuration: Types::UpdateOntapVolumeConfiguration?
+      attr_accessor name: String?
+      attr_accessor open_zfs_configuration: Types::UpdateOpenZFSVolumeConfiguration?
+    end
+
+    class UpdateVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume: Types::Volume,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume: Types::Volume?
+    end
+
+    class Volume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?file_system_id: String,
+        ?lifecycle: String,
+        ?name: String,
+        ?ontap_configuration: Types::OntapVolumeConfiguration,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?volume_id: String,
+        ?volume_type: String,
+        ?lifecycle_transition_reason: Types::LifecycleTransitionReason,
+        ?administrative_actions: Array[Types::AdministrativeAction],
+        ?open_zfs_configuration: Types::OpenZFSVolumeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor file_system_id: String?
+      attr_accessor lifecycle: String?
+      attr_accessor name: String?
+      attr_accessor ontap_configuration: Types::OntapVolumeConfiguration?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor volume_id: String?
+      attr_accessor volume_type: String?
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason?
+      attr_accessor administrative_actions: Array[Types::AdministrativeAction]?
+      attr_accessor open_zfs_configuration: Types::OpenZFSVolumeConfiguration?
+    end
+
+    class VolumeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module VolumeFilterName
+      FILE_SYSTEM_ID: String
+      STORAGE_VIRTUAL_MACHINE_ID: String
+    end
+
+    module VolumeLifecycle
+      CREATING: String
+      CREATED: String
+      DELETING: String
+      FAILED: String
+      MISCONFIGURED: String
+      PENDING: String
+      AVAILABLE: String
+    end
+
+    class VolumeNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VolumeStyle
+      FLEXVOL: String
+      FLEXGROUP: String
+    end
+
+    module VolumeType
+      ONTAP: String
+      OPENZFS: String
+    end
+
+    module WindowsAccessAuditLogLevel
+      DISABLED: String
+      SUCCESS_ONLY: String
+      FAILURE_ONLY: String
+      SUCCESS_AND_FAILURE: String
+    end
+
+    class WindowsAuditLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_access_audit_log_level: String,
+        ?file_share_access_audit_log_level: String,
+        ?audit_log_destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_access_audit_log_level: String?
+      attr_accessor file_share_access_audit_log_level: String?
+      attr_accessor audit_log_destination: String?
+    end
+
+    class WindowsAuditLogCreateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_access_audit_log_level: String,
+        ?file_share_access_audit_log_level: String,
+        ?audit_log_destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_access_audit_log_level: String?
+      attr_accessor file_share_access_audit_log_level: String?
+      attr_accessor audit_log_destination: String?
+    end
+
+    module WindowsDeploymentType
+      MULTI_AZ_1: String
+      SINGLE_AZ_1: String
+      SINGLE_AZ_2: String
+    end
+
+    class WindowsFileSystemConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_directory_id: String,
+        ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes,
+        ?deployment_type: String,
+        ?remote_administration_endpoint: String,
+        ?preferred_subnet_id: String,
+        ?preferred_file_server_ip: String,
+        ?throughput_capacity: Integer,
+        ?maintenance_operations_in_progress: Array[String],
+        ?weekly_maintenance_start_time: String,
+        ?daily_automatic_backup_start_time: String,
+        ?automatic_backup_retention_days: Integer,
+        ?copy_tags_to_backups: bool,
+        ?aliases: Array[Types::Alias],
+        ?audit_log_configuration: Types::WindowsAuditLogConfiguration,
+        ?disk_iops_configuration: Types::DiskIopsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_directory_id: String?
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes?
+      attr_accessor deployment_type: String?
+      attr_accessor remote_administration_endpoint: String?
+      attr_accessor preferred_subnet_id: String?
+      attr_accessor preferred_file_server_ip: String?
+      attr_accessor throughput_capacity: Integer?
+      attr_accessor maintenance_operations_in_progress: Array[String]?
+      attr_accessor weekly_maintenance_start_time: String?
+      attr_accessor daily_automatic_backup_start_time: String?
+      attr_accessor automatic_backup_retention_days: Integer?
+      attr_accessor copy_tags_to_backups: bool?
+      attr_accessor aliases: Array[Types::Alias]?
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration?
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+    end
+  end
+end

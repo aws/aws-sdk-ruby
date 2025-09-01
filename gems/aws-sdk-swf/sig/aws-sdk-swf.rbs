@@ -1,0 +1,5 @@
+  module Aws
+    module SWF
+      VERSION: String
+    end
+  end

@@ -1,0 +1,448 @@
+module Aws::Account
+  module Types
+
+    class AcceptPrimaryEmailUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?primary_email: String,
+        ?otp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor primary_email: String?
+      attr_accessor otp: String?
+    end
+
+    class AcceptPrimaryEmailUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class AlternateContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?title: String,
+        ?email_address: String,
+        ?phone_number: String,
+        ?alternate_contact_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor title: String?
+      attr_accessor email_address: String?
+      attr_accessor phone_number: String?
+      attr_accessor alternate_contact_type: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class ContactInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?full_name: String,
+        ?address_line1: String,
+        ?address_line2: String,
+        ?address_line3: String,
+        ?city: String,
+        ?state_or_region: String,
+        ?district_or_county: String,
+        ?postal_code: String,
+        ?country_code: String,
+        ?phone_number: String,
+        ?company_name: String,
+        ?website_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor full_name: String?
+      attr_accessor address_line1: String?
+      attr_accessor address_line2: String?
+      attr_accessor address_line3: String?
+      attr_accessor city: String?
+      attr_accessor state_or_region: String?
+      attr_accessor district_or_county: String?
+      attr_accessor postal_code: String?
+      attr_accessor country_code: String?
+      attr_accessor phone_number: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+    end
+
+    class DeleteAlternateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alternate_contact_type: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alternate_contact_type: String?
+      attr_accessor account_id: String?
+    end
+
+    class DisableRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor region_name: String?
+    end
+
+    class EnableRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor region_name: String?
+    end
+
+    class GetAccountInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetAccountInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?account_name: String,
+        ?account_created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor account_name: String?
+      attr_accessor account_created_date: Time?
+    end
+
+    class GetAlternateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alternate_contact_type: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alternate_contact_type: String?
+      attr_accessor account_id: String?
+    end
+
+    class GetAlternateContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alternate_contact: Types::AlternateContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alternate_contact: Types::AlternateContact?
+    end
+
+    class GetContactInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetContactInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_information: Types::ContactInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_information: Types::ContactInformation?
+    end
+
+    class GetPrimaryEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetPrimaryEmailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_email: String?
+    end
+
+    class GetRegionOptStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor region_name: String?
+    end
+
+    class GetRegionOptStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?region_opt_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor region_opt_status: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class ListRegionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?region_opt_status_contains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor region_opt_status_contains: Array[String]?
+    end
+
+    class ListRegionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?regions: Array[Types::Region],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor regions: Array[Types::Region]?
+    end
+
+    class PutAccountNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class PutAlternateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?title: String,
+        ?email_address: String,
+        ?phone_number: String,
+        ?alternate_contact_type: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor title: String?
+      attr_accessor email_address: String?
+      attr_accessor phone_number: String?
+      attr_accessor alternate_contact_type: String?
+      attr_accessor account_id: String?
+    end
+
+    class PutContactInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_information: Types::ContactInformation,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_information: Types::ContactInformation?
+      attr_accessor account_id: String?
+    end
+
+    class Region
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?region_opt_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor region_opt_status: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class StartPrimaryEmailUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?primary_email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor primary_email: String?
+    end
+
+    class StartPrimaryEmailUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

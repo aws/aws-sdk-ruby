@@ -1,0 +1,712 @@
+module Aws::ChimeSDKMessaging
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ChimeSDKMessaging::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateChannelFlowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_channel_flow: (
+      ?channel_arn: String,
+      ?channel_flow_arn: String,
+      ?chime_bearer: String
+    ) -> _AssociateChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateChannelFlowResponse
+
+    interface _BatchCreateChannelMembershipResponse
+      include Smithy::Client::_Response[Types::BatchCreateChannelMembershipResponse]
+      def batch_channel_memberships: () -> Types::BatchChannelMemberships?
+      def errors: () -> Array[Types::BatchCreateChannelMembershipError]?
+    end
+    def batch_create_channel_membership: (
+      ?channel_arn: String,
+      ?type: String,
+      ?member_arns: Array[String],
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _BatchCreateChannelMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateChannelMembershipResponse
+
+    interface _ChannelFlowCallbackResponse
+      include Smithy::Client::_Response[Types::ChannelFlowCallbackResponse]
+      def channel_arn: () -> String?
+      def callback_id: () -> String?
+    end
+    def channel_flow_callback: (
+      ?callback_id: String,
+      ?channel_arn: String,
+      ?delete_resource: bool,
+      ?channel_message: {
+        message_id: String,
+        content: String,
+        metadata: String,
+        push_notification: {
+          title: String,
+          body: String,
+          type: String
+        },
+        message_attributes: Hash[String,
+          {
+            string_values: Array[String]
+          }
+        ],
+        sub_channel_id: String,
+        content_type: String
+      }
+    ) -> _ChannelFlowCallbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChannelFlowCallbackResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def channel_arn: () -> String?
+    end
+    def create_channel: (
+      ?app_instance_arn: String,
+      ?name: String,
+      ?mode: String,
+      ?privacy: String,
+      ?metadata: String,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?chime_bearer: String,
+      ?channel_id: String,
+      ?member_arns: Array[String],
+      ?moderator_arns: Array[String],
+      ?elastic_channel_configuration: {
+        maximum_sub_channels: Integer,
+        target_memberships_per_sub_channel: Integer,
+        minimum_membership_percentage: Integer
+      },
+      ?expiration_settings: {
+        expiration_days: Integer,
+        expiration_criterion: String
+      }
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreateChannelBanResponse
+      include Smithy::Client::_Response[Types::CreateChannelBanResponse]
+      def channel_arn: () -> String?
+      def member: () -> Types::Identity?
+    end
+    def create_channel_ban: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String
+    ) -> _CreateChannelBanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelBanResponse
+
+    interface _CreateChannelFlowResponse
+      include Smithy::Client::_Response[Types::CreateChannelFlowResponse]
+      def channel_flow_arn: () -> String?
+    end
+    def create_channel_flow: (
+      ?app_instance_arn: String,
+      ?processors: Array[
+        {
+          name: String,
+          configuration: {
+            lambda: {
+              resource_arn: String,
+              invocation_type: String
+            }
+          },
+          execution_order: Integer,
+          fallback_action: String
+        }
+      ],
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreateChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelFlowResponse
+
+    interface _CreateChannelMembershipResponse
+      include Smithy::Client::_Response[Types::CreateChannelMembershipResponse]
+      def channel_arn: () -> String?
+      def member: () -> Types::Identity?
+      def sub_channel_id: () -> String?
+    end
+    def create_channel_membership: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?type: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _CreateChannelMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelMembershipResponse
+
+    interface _CreateChannelModeratorResponse
+      include Smithy::Client::_Response[Types::CreateChannelModeratorResponse]
+      def channel_arn: () -> String?
+      def channel_moderator: () -> Types::Identity?
+    end
+    def create_channel_moderator: (
+      ?channel_arn: String,
+      ?channel_moderator_arn: String,
+      ?chime_bearer: String
+    ) -> _CreateChannelModeratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelModeratorResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel: (
+      ?channel_arn: String,
+      ?chime_bearer: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeleteChannelBanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel_ban: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String
+    ) -> _DeleteChannelBanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelBanResponse
+
+    interface _DeleteChannelFlowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel_flow: (
+      ?channel_flow_arn: String
+    ) -> _DeleteChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelFlowResponse
+
+    interface _DeleteChannelMembershipResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel_membership: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _DeleteChannelMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelMembershipResponse
+
+    interface _DeleteChannelMessageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel_message: (
+      ?channel_arn: String,
+      ?message_id: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _DeleteChannelMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelMessageResponse
+
+    interface _DeleteChannelModeratorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel_moderator: (
+      ?channel_arn: String,
+      ?channel_moderator_arn: String,
+      ?chime_bearer: String
+    ) -> _DeleteChannelModeratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelModeratorResponse
+
+    interface _DeleteMessagingStreamingConfigurationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_messaging_streaming_configurations: (
+      ?app_instance_arn: String
+    ) -> _DeleteMessagingStreamingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMessagingStreamingConfigurationsResponse
+
+    interface _DescribeChannelResponse
+      include Smithy::Client::_Response[Types::DescribeChannelResponse]
+      def channel: () -> Types::Channel?
+    end
+    def describe_channel: (
+      ?channel_arn: String,
+      ?chime_bearer: String
+    ) -> _DescribeChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelResponse
+
+    interface _DescribeChannelBanResponse
+      include Smithy::Client::_Response[Types::DescribeChannelBanResponse]
+      def channel_ban: () -> Types::ChannelBan?
+    end
+    def describe_channel_ban: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String
+    ) -> _DescribeChannelBanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelBanResponse
+
+    interface _DescribeChannelFlowResponse
+      include Smithy::Client::_Response[Types::DescribeChannelFlowResponse]
+      def channel_flow: () -> Types::ChannelFlow?
+    end
+    def describe_channel_flow: (
+      ?channel_flow_arn: String
+    ) -> _DescribeChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelFlowResponse
+
+    interface _DescribeChannelMembershipResponse
+      include Smithy::Client::_Response[Types::DescribeChannelMembershipResponse]
+      def channel_membership: () -> Types::ChannelMembership?
+    end
+    def describe_channel_membership: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _DescribeChannelMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelMembershipResponse
+
+    interface _DescribeChannelMembershipForAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::DescribeChannelMembershipForAppInstanceUserResponse]
+      def channel_membership: () -> Types::ChannelMembershipForAppInstanceUserSummary?
+    end
+    def describe_channel_membership_for_app_instance_user: (
+      ?channel_arn: String,
+      ?app_instance_user_arn: String,
+      ?chime_bearer: String
+    ) -> _DescribeChannelMembershipForAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelMembershipForAppInstanceUserResponse
+
+    interface _DescribeChannelModeratedByAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::DescribeChannelModeratedByAppInstanceUserResponse]
+      def channel: () -> Types::ChannelModeratedByAppInstanceUserSummary?
+    end
+    def describe_channel_moderated_by_app_instance_user: (
+      ?channel_arn: String,
+      ?app_instance_user_arn: String,
+      ?chime_bearer: String
+    ) -> _DescribeChannelModeratedByAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelModeratedByAppInstanceUserResponse
+
+    interface _DescribeChannelModeratorResponse
+      include Smithy::Client::_Response[Types::DescribeChannelModeratorResponse]
+      def channel_moderator: () -> Types::ChannelModerator?
+    end
+    def describe_channel_moderator: (
+      ?channel_arn: String,
+      ?channel_moderator_arn: String,
+      ?chime_bearer: String
+    ) -> _DescribeChannelModeratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelModeratorResponse
+
+    interface _DisassociateChannelFlowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_channel_flow: (
+      ?channel_arn: String,
+      ?channel_flow_arn: String,
+      ?chime_bearer: String
+    ) -> _DisassociateChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateChannelFlowResponse
+
+    interface _GetChannelMembershipPreferencesResponse
+      include Smithy::Client::_Response[Types::GetChannelMembershipPreferencesResponse]
+      def channel_arn: () -> String?
+      def member: () -> Types::Identity?
+      def preferences: () -> Types::ChannelMembershipPreferences?
+    end
+    def get_channel_membership_preferences: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String
+    ) -> _GetChannelMembershipPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelMembershipPreferencesResponse
+
+    interface _GetChannelMessageResponse
+      include Smithy::Client::_Response[Types::GetChannelMessageResponse]
+      def channel_message: () -> Types::ChannelMessage?
+    end
+    def get_channel_message: (
+      ?channel_arn: String,
+      ?message_id: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _GetChannelMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelMessageResponse
+
+    interface _GetChannelMessageStatusResponse
+      include Smithy::Client::_Response[Types::GetChannelMessageStatusResponse]
+      def status: () -> Types::ChannelMessageStatusStructure?
+    end
+    def get_channel_message_status: (
+      ?channel_arn: String,
+      ?message_id: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _GetChannelMessageStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelMessageStatusResponse
+
+    interface _GetMessagingSessionEndpointResponse
+      include Smithy::Client::_Response[Types::GetMessagingSessionEndpointResponse]
+      def endpoint: () -> Types::MessagingSessionEndpoint?
+    end
+    def get_messaging_session_endpoint: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMessagingSessionEndpointResponse
+
+    interface _GetMessagingStreamingConfigurationsResponse
+      include Smithy::Client::_Response[Types::GetMessagingStreamingConfigurationsResponse]
+      def streaming_configurations: () -> Array[Types::StreamingConfiguration]?
+    end
+    def get_messaging_streaming_configurations: (
+      ?app_instance_arn: String
+    ) -> _GetMessagingStreamingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMessagingStreamingConfigurationsResponse
+
+    interface _ListChannelBansResponse
+      include Smithy::Client::_Response[Types::ListChannelBansResponse]
+      def channel_arn: () -> String?
+      def next_token: () -> String?
+      def channel_bans: () -> Array[Types::ChannelBanSummary]?
+    end
+    def list_channel_bans: (
+      ?channel_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String
+    ) -> _ListChannelBansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelBansResponse
+
+    interface _ListChannelFlowsResponse
+      include Smithy::Client::_Response[Types::ListChannelFlowsResponse]
+      def channel_flows: () -> Array[Types::ChannelFlowSummary]?
+      def next_token: () -> String?
+    end
+    def list_channel_flows: (
+      ?app_instance_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelFlowsResponse
+
+    interface _ListChannelMembershipsResponse
+      include Smithy::Client::_Response[Types::ListChannelMembershipsResponse]
+      def channel_arn: () -> String?
+      def channel_memberships: () -> Array[Types::ChannelMembershipSummary]?
+      def next_token: () -> String?
+    end
+    def list_channel_memberships: (
+      ?channel_arn: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _ListChannelMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelMembershipsResponse
+
+    interface _ListChannelMembershipsForAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::ListChannelMembershipsForAppInstanceUserResponse]
+      def channel_memberships: () -> Array[Types::ChannelMembershipForAppInstanceUserSummary]?
+      def next_token: () -> String?
+    end
+    def list_channel_memberships_for_app_instance_user: (
+      ?app_instance_user_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String
+    ) -> _ListChannelMembershipsForAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelMembershipsForAppInstanceUserResponse
+
+    interface _ListChannelMessagesResponse
+      include Smithy::Client::_Response[Types::ListChannelMessagesResponse]
+      def channel_arn: () -> String?
+      def next_token: () -> String?
+      def channel_messages: () -> Array[Types::ChannelMessageSummary]?
+      def sub_channel_id: () -> String?
+    end
+    def list_channel_messages: (
+      ?channel_arn: String,
+      ?sort_order: String,
+      ?not_before: Time,
+      ?not_after: Time,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _ListChannelMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelMessagesResponse
+
+    interface _ListChannelModeratorsResponse
+      include Smithy::Client::_Response[Types::ListChannelModeratorsResponse]
+      def channel_arn: () -> String?
+      def next_token: () -> String?
+      def channel_moderators: () -> Array[Types::ChannelModeratorSummary]?
+    end
+    def list_channel_moderators: (
+      ?channel_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String
+    ) -> _ListChannelModeratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelModeratorsResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def channels: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?app_instance_arn: String,
+      ?privacy: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListChannelsAssociatedWithChannelFlowResponse
+      include Smithy::Client::_Response[Types::ListChannelsAssociatedWithChannelFlowResponse]
+      def channels: () -> Array[Types::ChannelAssociatedWithFlowSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels_associated_with_channel_flow: (
+      ?channel_flow_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsAssociatedWithChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsAssociatedWithChannelFlowResponse
+
+    interface _ListChannelsModeratedByAppInstanceUserResponse
+      include Smithy::Client::_Response[Types::ListChannelsModeratedByAppInstanceUserResponse]
+      def channels: () -> Array[Types::ChannelModeratedByAppInstanceUserSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels_moderated_by_app_instance_user: (
+      ?app_instance_user_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chime_bearer: String
+    ) -> _ListChannelsModeratedByAppInstanceUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsModeratedByAppInstanceUserResponse
+
+    interface _ListSubChannelsResponse
+      include Smithy::Client::_Response[Types::ListSubChannelsResponse]
+      def channel_arn: () -> String?
+      def sub_channels: () -> Array[Types::SubChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_sub_channels: (
+      ?channel_arn: String,
+      ?chime_bearer: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubChannelsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutChannelExpirationSettingsResponse
+      include Smithy::Client::_Response[Types::PutChannelExpirationSettingsResponse]
+      def channel_arn: () -> String?
+      def expiration_settings: () -> Types::ExpirationSettings?
+    end
+    def put_channel_expiration_settings: (
+      ?channel_arn: String,
+      ?chime_bearer: String,
+      ?expiration_settings: {
+        expiration_days: Integer,
+        expiration_criterion: String
+      }
+    ) -> _PutChannelExpirationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutChannelExpirationSettingsResponse
+
+    interface _PutChannelMembershipPreferencesResponse
+      include Smithy::Client::_Response[Types::PutChannelMembershipPreferencesResponse]
+      def channel_arn: () -> String?
+      def member: () -> Types::Identity?
+      def preferences: () -> Types::ChannelMembershipPreferences?
+    end
+    def put_channel_membership_preferences: (
+      ?channel_arn: String,
+      ?member_arn: String,
+      ?chime_bearer: String,
+      ?preferences: {
+        push_notifications: {
+          allow_notifications: String,
+          filter_rule: String
+        }
+      }
+    ) -> _PutChannelMembershipPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutChannelMembershipPreferencesResponse
+
+    interface _PutMessagingStreamingConfigurationsResponse
+      include Smithy::Client::_Response[Types::PutMessagingStreamingConfigurationsResponse]
+      def streaming_configurations: () -> Array[Types::StreamingConfiguration]?
+    end
+    def put_messaging_streaming_configurations: (
+      ?app_instance_arn: String,
+      ?streaming_configurations: Array[
+        {
+          data_type: String,
+          resource_arn: String
+        }
+      ]
+    ) -> _PutMessagingStreamingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMessagingStreamingConfigurationsResponse
+
+    interface _RedactChannelMessageResponse
+      include Smithy::Client::_Response[Types::RedactChannelMessageResponse]
+      def channel_arn: () -> String?
+      def message_id: () -> String?
+      def sub_channel_id: () -> String?
+    end
+    def redact_channel_message: (
+      ?channel_arn: String,
+      ?message_id: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String
+    ) -> _RedactChannelMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RedactChannelMessageResponse
+
+    interface _SearchChannelsResponse
+      include Smithy::Client::_Response[Types::SearchChannelsResponse]
+      def channels: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def search_channels: (
+      ?chime_bearer: String,
+      ?fields: Array[
+        {
+          key: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchChannelsResponse
+
+    interface _SendChannelMessageResponse
+      include Smithy::Client::_Response[Types::SendChannelMessageResponse]
+      def channel_arn: () -> String?
+      def message_id: () -> String?
+      def status: () -> Types::ChannelMessageStatusStructure?
+      def sub_channel_id: () -> String?
+    end
+    def send_channel_message: (
+      ?channel_arn: String,
+      ?content: String,
+      ?type: String,
+      ?persistence: String,
+      ?metadata: String,
+      ?client_request_token: String,
+      ?chime_bearer: String,
+      ?push_notification: {
+        title: String,
+        body: String,
+        type: String
+      },
+      ?message_attributes: Hash[String,
+        {
+          string_values: Array[String]
+        }
+      ],
+      ?sub_channel_id: String,
+      ?content_type: String,
+      ?target: Array[
+        {
+          member_arn: String
+        }
+      ]
+    ) -> _SendChannelMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendChannelMessageResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def channel_arn: () -> String?
+    end
+    def update_channel: (
+      ?channel_arn: String,
+      ?name: String,
+      ?mode: String,
+      ?metadata: String,
+      ?chime_bearer: String
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateChannelFlowResponse
+      include Smithy::Client::_Response[Types::UpdateChannelFlowResponse]
+      def channel_flow_arn: () -> String?
+    end
+    def update_channel_flow: (
+      ?channel_flow_arn: String,
+      ?processors: Array[
+        {
+          name: String,
+          configuration: {
+            lambda: {
+              resource_arn: String,
+              invocation_type: String
+            }
+          },
+          execution_order: Integer,
+          fallback_action: String
+        }
+      ],
+      ?name: String
+    ) -> _UpdateChannelFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelFlowResponse
+
+    interface _UpdateChannelMessageResponse
+      include Smithy::Client::_Response[Types::UpdateChannelMessageResponse]
+      def channel_arn: () -> String?
+      def message_id: () -> String?
+      def status: () -> Types::ChannelMessageStatusStructure?
+      def sub_channel_id: () -> String?
+    end
+    def update_channel_message: (
+      ?channel_arn: String,
+      ?message_id: String,
+      ?content: String,
+      ?metadata: String,
+      ?chime_bearer: String,
+      ?sub_channel_id: String,
+      ?content_type: String
+    ) -> _UpdateChannelMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelMessageResponse
+
+    interface _UpdateChannelReadMarkerResponse
+      include Smithy::Client::_Response[Types::UpdateChannelReadMarkerResponse]
+      def channel_arn: () -> String?
+    end
+    def update_channel_read_marker: (
+      ?channel_arn: String,
+      ?chime_bearer: String
+    ) -> _UpdateChannelReadMarkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelReadMarkerResponse
+  end
+end

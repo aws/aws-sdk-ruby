@@ -1,0 +1,1114 @@
+module Aws::CodeCommit
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeCommit::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateApprovalRuleTemplateWithRepositoryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_approval_rule_template_with_repository: (
+      ?approval_rule_template_name: String,
+      ?repository_name: String
+    ) -> _AssociateApprovalRuleTemplateWithRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApprovalRuleTemplateWithRepositoryResponse
+
+    interface _BatchAssociateApprovalRuleTemplateWithRepositoriesResponse
+      include Smithy::Client::_Response[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput]
+      def associated_repository_names: () -> Array[String]?
+      def errors: () -> Array[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError]?
+    end
+    def batch_associate_approval_rule_template_with_repositories: (
+      ?approval_rule_template_name: String,
+      ?repository_names: Array[String]
+    ) -> _BatchAssociateApprovalRuleTemplateWithRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateApprovalRuleTemplateWithRepositoriesResponse
+
+    interface _BatchDescribeMergeConflictsResponse
+      include Smithy::Client::_Response[Types::BatchDescribeMergeConflictsOutput]
+      def conflicts: () -> Array[Types::Conflict]?
+      def next_token: () -> String?
+      def errors: () -> Array[Types::BatchDescribeMergeConflictsError]?
+      def destination_commit_id: () -> String?
+      def source_commit_id: () -> String?
+      def base_commit_id: () -> String?
+    end
+    def batch_describe_merge_conflicts: (
+      ?repository_name: String,
+      ?destination_commit_specifier: String,
+      ?source_commit_specifier: String,
+      ?merge_option: String,
+      ?max_merge_hunks: Integer,
+      ?max_conflict_files: Integer,
+      ?file_paths: Array[String],
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?next_token: String
+    ) -> _BatchDescribeMergeConflictsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDescribeMergeConflictsResponse
+
+    interface _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput]
+      def disassociated_repository_names: () -> Array[String]?
+      def errors: () -> Array[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError]?
+    end
+    def batch_disassociate_approval_rule_template_from_repositories: (
+      ?approval_rule_template_name: String,
+      ?repository_names: Array[String]
+    ) -> _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse
+
+    interface _BatchGetCommitsResponse
+      include Smithy::Client::_Response[Types::BatchGetCommitsOutput]
+      def commits: () -> Array[Types::Commit]?
+      def errors: () -> Array[Types::BatchGetCommitsError]?
+    end
+    def batch_get_commits: (
+      ?commit_ids: Array[String],
+      ?repository_name: String
+    ) -> _BatchGetCommitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCommitsResponse
+
+    interface _BatchGetRepositoriesResponse
+      include Smithy::Client::_Response[Types::BatchGetRepositoriesOutput]
+      def repositories: () -> Array[Types::RepositoryMetadata]?
+      def repositories_not_found: () -> Array[String]?
+      def errors: () -> Array[Types::BatchGetRepositoriesError]?
+    end
+    def batch_get_repositories: (
+      ?repository_names: Array[String]
+    ) -> _BatchGetRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRepositoriesResponse
+
+    interface _CreateApprovalRuleTemplateResponse
+      include Smithy::Client::_Response[Types::CreateApprovalRuleTemplateOutput]
+      def approval_rule_template: () -> Types::ApprovalRuleTemplate?
+    end
+    def create_approval_rule_template: (
+      ?approval_rule_template_name: String,
+      ?approval_rule_template_content: String,
+      ?approval_rule_template_description: String
+    ) -> _CreateApprovalRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApprovalRuleTemplateResponse
+
+    interface _CreateBranchResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_branch: (
+      ?repository_name: String,
+      ?branch_name: String,
+      ?commit_id: String
+    ) -> _CreateBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBranchResponse
+
+    interface _CreateCommitResponse
+      include Smithy::Client::_Response[Types::CreateCommitOutput]
+      def commit_id: () -> String?
+      def tree_id: () -> String?
+      def files_added: () -> Array[Types::FileMetadata]?
+      def files_updated: () -> Array[Types::FileMetadata]?
+      def files_deleted: () -> Array[Types::FileMetadata]?
+    end
+    def create_commit: (
+      ?repository_name: String,
+      ?branch_name: String,
+      ?parent_commit_id: String,
+      ?author_name: String,
+      ?email: String,
+      ?commit_message: String,
+      ?keep_empty_folders: bool,
+      ?put_files: Array[
+        {
+          file_path: String,
+          file_mode: String,
+          file_content: String,
+          source_file: {
+            file_path: untyped,
+            is_move: bool
+          }
+        }
+      ],
+      ?delete_files: Array[
+        {
+          file_path: String
+        }
+      ],
+      ?set_file_modes: Array[
+        {
+          file_path: String,
+          file_mode: String
+        }
+      ]
+    ) -> _CreateCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCommitResponse
+
+    interface _CreatePullRequestResponse
+      include Smithy::Client::_Response[Types::CreatePullRequestOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def create_pull_request: (
+      ?title: String,
+      ?description: String,
+      ?targets: Array[
+        {
+          repository_name: String,
+          source_reference: String,
+          destination_reference: untyped
+        }
+      ],
+      ?client_request_token: String
+    ) -> _CreatePullRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePullRequestResponse
+
+    interface _CreatePullRequestApprovalRuleResponse
+      include Smithy::Client::_Response[Types::CreatePullRequestApprovalRuleOutput]
+      def approval_rule: () -> Types::ApprovalRule?
+    end
+    def create_pull_request_approval_rule: (
+      ?pull_request_id: String,
+      ?approval_rule_name: String,
+      ?approval_rule_content: String
+    ) -> _CreatePullRequestApprovalRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePullRequestApprovalRuleResponse
+
+    interface _CreateRepositoryResponse
+      include Smithy::Client::_Response[Types::CreateRepositoryOutput]
+      def repository_metadata: () -> Types::RepositoryMetadata?
+    end
+    def create_repository: (
+      ?repository_name: String,
+      ?repository_description: String,
+      ?tags: Hash[String, String],
+      ?kms_key_id: String
+    ) -> _CreateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRepositoryResponse
+
+    interface _CreateUnreferencedMergeCommitResponse
+      include Smithy::Client::_Response[Types::CreateUnreferencedMergeCommitOutput]
+      def commit_id: () -> String?
+      def tree_id: () -> String?
+    end
+    def create_unreferenced_merge_commit: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?merge_option: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?author_name: String,
+      ?email: String,
+      ?commit_message: String,
+      ?keep_empty_folders: bool,
+      ?conflict_resolution: {
+        replace_contents: Array[
+          {
+            file_path: String,
+            replacement_type: String,
+            content: String,
+            file_mode: String
+          }
+        ],
+        delete_files: Array[
+          {
+            file_path: untyped
+          }
+        ],
+        set_file_modes: Array[
+          {
+            file_path: untyped,
+            file_mode: untyped
+          }
+        ]
+      }
+    ) -> _CreateUnreferencedMergeCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUnreferencedMergeCommitResponse
+
+    interface _DeleteApprovalRuleTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteApprovalRuleTemplateOutput]
+      def approval_rule_template_id: () -> String?
+    end
+    def delete_approval_rule_template: (
+      ?approval_rule_template_name: String
+    ) -> _DeleteApprovalRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApprovalRuleTemplateResponse
+
+    interface _DeleteBranchResponse
+      include Smithy::Client::_Response[Types::DeleteBranchOutput]
+      def deleted_branch: () -> Types::BranchInfo?
+    end
+    def delete_branch: (
+      ?repository_name: String,
+      ?branch_name: String
+    ) -> _DeleteBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBranchResponse
+
+    interface _DeleteCommentContentResponse
+      include Smithy::Client::_Response[Types::DeleteCommentContentOutput]
+      def comment: () -> Types::Comment?
+    end
+    def delete_comment_content: (
+      ?comment_id: String
+    ) -> _DeleteCommentContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCommentContentResponse
+
+    interface _DeleteFileResponse
+      include Smithy::Client::_Response[Types::DeleteFileOutput]
+      def commit_id: () -> String?
+      def blob_id: () -> String?
+      def tree_id: () -> String?
+      def file_path: () -> String?
+    end
+    def delete_file: (
+      ?repository_name: String,
+      ?branch_name: String,
+      ?file_path: String,
+      ?parent_commit_id: String,
+      ?keep_empty_folders: bool,
+      ?commit_message: String,
+      ?name: String,
+      ?email: String
+    ) -> _DeleteFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileResponse
+
+    interface _DeletePullRequestApprovalRuleResponse
+      include Smithy::Client::_Response[Types::DeletePullRequestApprovalRuleOutput]
+      def approval_rule_id: () -> String?
+    end
+    def delete_pull_request_approval_rule: (
+      ?pull_request_id: String,
+      ?approval_rule_name: String
+    ) -> _DeletePullRequestApprovalRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePullRequestApprovalRuleResponse
+
+    interface _DeleteRepositoryResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryOutput]
+      def repository_id: () -> String?
+    end
+    def delete_repository: (
+      ?repository_name: String
+    ) -> _DeleteRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryResponse
+
+    interface _DescribeMergeConflictsResponse
+      include Smithy::Client::_Response[Types::DescribeMergeConflictsOutput]
+      def conflict_metadata: () -> Types::ConflictMetadata?
+      def merge_hunks: () -> Array[Types::MergeHunk]?
+      def next_token: () -> String?
+      def destination_commit_id: () -> String?
+      def source_commit_id: () -> String?
+      def base_commit_id: () -> String?
+    end
+    def describe_merge_conflicts: (
+      ?repository_name: String,
+      ?destination_commit_specifier: String,
+      ?source_commit_specifier: String,
+      ?merge_option: String,
+      ?max_merge_hunks: Integer,
+      ?file_path: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?next_token: String
+    ) -> _DescribeMergeConflictsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMergeConflictsResponse
+
+    interface _DescribePullRequestEventsResponse
+      include Smithy::Client::_Response[Types::DescribePullRequestEventsOutput]
+      def pull_request_events: () -> Array[Types::PullRequestEvent]?
+      def next_token: () -> String?
+    end
+    def describe_pull_request_events: (
+      ?pull_request_id: String,
+      ?pull_request_event_type: String,
+      ?actor_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribePullRequestEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePullRequestEventsResponse
+
+    interface _DisassociateApprovalRuleTemplateFromRepositoryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_approval_rule_template_from_repository: (
+      ?approval_rule_template_name: String,
+      ?repository_name: String
+    ) -> _DisassociateApprovalRuleTemplateFromRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApprovalRuleTemplateFromRepositoryResponse
+
+    interface _EvaluatePullRequestApprovalRulesResponse
+      include Smithy::Client::_Response[Types::EvaluatePullRequestApprovalRulesOutput]
+      def evaluation: () -> Types::Evaluation?
+    end
+    def evaluate_pull_request_approval_rules: (
+      ?pull_request_id: String,
+      ?revision_id: String
+    ) -> _EvaluatePullRequestApprovalRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluatePullRequestApprovalRulesResponse
+
+    interface _GetApprovalRuleTemplateResponse
+      include Smithy::Client::_Response[Types::GetApprovalRuleTemplateOutput]
+      def approval_rule_template: () -> Types::ApprovalRuleTemplate?
+    end
+    def get_approval_rule_template: (
+      ?approval_rule_template_name: String
+    ) -> _GetApprovalRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApprovalRuleTemplateResponse
+
+    interface _GetBlobResponse
+      include Smithy::Client::_Response[Types::GetBlobOutput]
+      def content: () -> String?
+    end
+    def get_blob: (
+      ?repository_name: String,
+      ?blob_id: String
+    ) -> _GetBlobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlobResponse
+
+    interface _GetBranchResponse
+      include Smithy::Client::_Response[Types::GetBranchOutput]
+      def branch: () -> Types::BranchInfo?
+    end
+    def get_branch: (
+      ?repository_name: String,
+      ?branch_name: String
+    ) -> _GetBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBranchResponse
+
+    interface _GetCommentResponse
+      include Smithy::Client::_Response[Types::GetCommentOutput]
+      def comment: () -> Types::Comment?
+    end
+    def get_comment: (
+      ?comment_id: String
+    ) -> _GetCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommentResponse
+
+    interface _GetCommentReactionsResponse
+      include Smithy::Client::_Response[Types::GetCommentReactionsOutput]
+      def reactions_for_comment: () -> Array[Types::ReactionForComment]?
+      def next_token: () -> String?
+    end
+    def get_comment_reactions: (
+      ?comment_id: String,
+      ?reaction_user_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCommentReactionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommentReactionsResponse
+
+    interface _GetCommentsForComparedCommitResponse
+      include Smithy::Client::_Response[Types::GetCommentsForComparedCommitOutput]
+      def comments_for_compared_commit_data: () -> Array[Types::CommentsForComparedCommit]?
+      def next_token: () -> String?
+    end
+    def get_comments_for_compared_commit: (
+      ?repository_name: String,
+      ?before_commit_id: String,
+      ?after_commit_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCommentsForComparedCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommentsForComparedCommitResponse
+
+    interface _GetCommentsForPullRequestResponse
+      include Smithy::Client::_Response[Types::GetCommentsForPullRequestOutput]
+      def comments_for_pull_request_data: () -> Array[Types::CommentsForPullRequest]?
+      def next_token: () -> String?
+    end
+    def get_comments_for_pull_request: (
+      ?pull_request_id: String,
+      ?repository_name: String,
+      ?before_commit_id: String,
+      ?after_commit_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCommentsForPullRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommentsForPullRequestResponse
+
+    interface _GetCommitResponse
+      include Smithy::Client::_Response[Types::GetCommitOutput]
+      def commit: () -> Types::Commit?
+    end
+    def get_commit: (
+      ?repository_name: String,
+      ?commit_id: String
+    ) -> _GetCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCommitResponse
+
+    interface _GetDifferencesResponse
+      include Smithy::Client::_Response[Types::GetDifferencesOutput]
+      def differences: () -> Array[Types::Difference]?
+      def next_token: () -> String?
+    end
+    def get_differences: (
+      ?repository_name: String,
+      ?before_commit_specifier: String,
+      ?after_commit_specifier: String,
+      ?before_path: String,
+      ?after_path: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetDifferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDifferencesResponse
+
+    interface _GetFileResponse
+      include Smithy::Client::_Response[Types::GetFileOutput]
+      def commit_id: () -> String?
+      def blob_id: () -> String?
+      def file_path: () -> String?
+      def file_mode: () -> String?
+      def file_size: () -> Integer?
+      def file_content: () -> String?
+    end
+    def get_file: (
+      ?repository_name: String,
+      ?commit_specifier: String,
+      ?file_path: String
+    ) -> _GetFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFileResponse
+
+    interface _GetFolderResponse
+      include Smithy::Client::_Response[Types::GetFolderOutput]
+      def commit_id: () -> String?
+      def folder_path: () -> String?
+      def tree_id: () -> String?
+      def sub_folders: () -> Array[Types::Folder]?
+      def files: () -> Array[Types::File]?
+      def symbolic_links: () -> Array[Types::SymbolicLink]?
+      def sub_modules: () -> Array[Types::SubModule]?
+    end
+    def get_folder: (
+      ?repository_name: String,
+      ?commit_specifier: String,
+      ?folder_path: String
+    ) -> _GetFolderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFolderResponse
+
+    interface _GetMergeCommitResponse
+      include Smithy::Client::_Response[Types::GetMergeCommitOutput]
+      def source_commit_id: () -> String?
+      def destination_commit_id: () -> String?
+      def base_commit_id: () -> String?
+      def merged_commit_id: () -> String?
+    end
+    def get_merge_commit: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String
+    ) -> _GetMergeCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMergeCommitResponse
+
+    interface _GetMergeConflictsResponse
+      include Smithy::Client::_Response[Types::GetMergeConflictsOutput]
+      def mergeable: () -> bool?
+      def destination_commit_id: () -> String?
+      def source_commit_id: () -> String?
+      def base_commit_id: () -> String?
+      def conflict_metadata_list: () -> Array[Types::ConflictMetadata]?
+      def next_token: () -> String?
+    end
+    def get_merge_conflicts: (
+      ?repository_name: String,
+      ?destination_commit_specifier: String,
+      ?source_commit_specifier: String,
+      ?merge_option: String,
+      ?conflict_detail_level: String,
+      ?max_conflict_files: Integer,
+      ?conflict_resolution_strategy: String,
+      ?next_token: String
+    ) -> _GetMergeConflictsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMergeConflictsResponse
+
+    interface _GetMergeOptionsResponse
+      include Smithy::Client::_Response[Types::GetMergeOptionsOutput]
+      def merge_options: () -> Array[String]?
+      def source_commit_id: () -> String?
+      def destination_commit_id: () -> String?
+      def base_commit_id: () -> String?
+    end
+    def get_merge_options: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String
+    ) -> _GetMergeOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMergeOptionsResponse
+
+    interface _GetPullRequestResponse
+      include Smithy::Client::_Response[Types::GetPullRequestOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def get_pull_request: (
+      ?pull_request_id: String
+    ) -> _GetPullRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPullRequestResponse
+
+    interface _GetPullRequestApprovalStatesResponse
+      include Smithy::Client::_Response[Types::GetPullRequestApprovalStatesOutput]
+      def approvals: () -> Array[Types::Approval]?
+    end
+    def get_pull_request_approval_states: (
+      ?pull_request_id: String,
+      ?revision_id: String
+    ) -> _GetPullRequestApprovalStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPullRequestApprovalStatesResponse
+
+    interface _GetPullRequestOverrideStateResponse
+      include Smithy::Client::_Response[Types::GetPullRequestOverrideStateOutput]
+      def overridden: () -> bool?
+      def overrider: () -> String?
+    end
+    def get_pull_request_override_state: (
+      ?pull_request_id: String,
+      ?revision_id: String
+    ) -> _GetPullRequestOverrideStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPullRequestOverrideStateResponse
+
+    interface _GetRepositoryResponse
+      include Smithy::Client::_Response[Types::GetRepositoryOutput]
+      def repository_metadata: () -> Types::RepositoryMetadata?
+    end
+    def get_repository: (
+      ?repository_name: String
+    ) -> _GetRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryResponse
+
+    interface _GetRepositoryTriggersResponse
+      include Smithy::Client::_Response[Types::GetRepositoryTriggersOutput]
+      def configuration_id: () -> String?
+      def triggers: () -> Array[Types::RepositoryTrigger]?
+    end
+    def get_repository_triggers: (
+      ?repository_name: String
+    ) -> _GetRepositoryTriggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryTriggersResponse
+
+    interface _ListApprovalRuleTemplatesResponse
+      include Smithy::Client::_Response[Types::ListApprovalRuleTemplatesOutput]
+      def approval_rule_template_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_approval_rule_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApprovalRuleTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApprovalRuleTemplatesResponse
+
+    interface _ListAssociatedApprovalRuleTemplatesForRepositoryResponse
+      include Smithy::Client::_Response[Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput]
+      def approval_rule_template_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_associated_approval_rule_templates_for_repository: (
+      ?repository_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssociatedApprovalRuleTemplatesForRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedApprovalRuleTemplatesForRepositoryResponse
+
+    interface _ListBranchesResponse
+      include Smithy::Client::_Response[Types::ListBranchesOutput]
+      def branches: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_branches: (
+      ?repository_name: String,
+      ?next_token: String
+    ) -> _ListBranchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBranchesResponse
+
+    interface _ListFileCommitHistoryResponse
+      include Smithy::Client::_Response[Types::ListFileCommitHistoryResponse]
+      def revision_dag: () -> Array[Types::FileVersion]?
+      def next_token: () -> String?
+    end
+    def list_file_commit_history: (
+      ?repository_name: String,
+      ?commit_specifier: String,
+      ?file_path: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFileCommitHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFileCommitHistoryResponse
+
+    interface _ListPullRequestsResponse
+      include Smithy::Client::_Response[Types::ListPullRequestsOutput]
+      def pull_request_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_pull_requests: (
+      ?repository_name: String,
+      ?author_arn: String,
+      ?pull_request_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPullRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPullRequestsResponse
+
+    interface _ListRepositoriesResponse
+      include Smithy::Client::_Response[Types::ListRepositoriesOutput]
+      def repositories: () -> Array[Types::RepositoryNameIdPair]?
+      def next_token: () -> String?
+    end
+    def list_repositories: (
+      ?next_token: String,
+      ?sort_by: String,
+      ?order: String
+    ) -> _ListRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoriesResponse
+
+    interface _ListRepositoriesForApprovalRuleTemplateResponse
+      include Smithy::Client::_Response[Types::ListRepositoriesForApprovalRuleTemplateOutput]
+      def repository_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_repositories_for_approval_rule_template: (
+      ?approval_rule_template_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRepositoriesForApprovalRuleTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoriesForApprovalRuleTemplateResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _MergeBranchesByFastForwardResponse
+      include Smithy::Client::_Response[Types::MergeBranchesByFastForwardOutput]
+      def commit_id: () -> String?
+      def tree_id: () -> String?
+    end
+    def merge_branches_by_fast_forward: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?target_branch: String
+    ) -> _MergeBranchesByFastForwardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeBranchesByFastForwardResponse
+
+    interface _MergeBranchesBySquashResponse
+      include Smithy::Client::_Response[Types::MergeBranchesBySquashOutput]
+      def commit_id: () -> String?
+      def tree_id: () -> String?
+    end
+    def merge_branches_by_squash: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?target_branch: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?author_name: String,
+      ?email: String,
+      ?commit_message: String,
+      ?keep_empty_folders: bool,
+      ?conflict_resolution: {
+        replace_contents: Array[
+          {
+            file_path: String,
+            replacement_type: String,
+            content: String,
+            file_mode: String
+          }
+        ],
+        delete_files: Array[
+          {
+            file_path: untyped
+          }
+        ],
+        set_file_modes: Array[
+          {
+            file_path: untyped,
+            file_mode: untyped
+          }
+        ]
+      }
+    ) -> _MergeBranchesBySquashResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeBranchesBySquashResponse
+
+    interface _MergeBranchesByThreeWayResponse
+      include Smithy::Client::_Response[Types::MergeBranchesByThreeWayOutput]
+      def commit_id: () -> String?
+      def tree_id: () -> String?
+    end
+    def merge_branches_by_three_way: (
+      ?repository_name: String,
+      ?source_commit_specifier: String,
+      ?destination_commit_specifier: String,
+      ?target_branch: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?author_name: String,
+      ?email: String,
+      ?commit_message: String,
+      ?keep_empty_folders: bool,
+      ?conflict_resolution: {
+        replace_contents: Array[
+          {
+            file_path: String,
+            replacement_type: String,
+            content: String,
+            file_mode: String
+          }
+        ],
+        delete_files: Array[
+          {
+            file_path: untyped
+          }
+        ],
+        set_file_modes: Array[
+          {
+            file_path: untyped,
+            file_mode: untyped
+          }
+        ]
+      }
+    ) -> _MergeBranchesByThreeWayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeBranchesByThreeWayResponse
+
+    interface _MergePullRequestByFastForwardResponse
+      include Smithy::Client::_Response[Types::MergePullRequestByFastForwardOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def merge_pull_request_by_fast_forward: (
+      ?pull_request_id: String,
+      ?repository_name: String,
+      ?source_commit_id: String
+    ) -> _MergePullRequestByFastForwardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergePullRequestByFastForwardResponse
+
+    interface _MergePullRequestBySquashResponse
+      include Smithy::Client::_Response[Types::MergePullRequestBySquashOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def merge_pull_request_by_squash: (
+      ?pull_request_id: String,
+      ?repository_name: String,
+      ?source_commit_id: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?commit_message: String,
+      ?author_name: String,
+      ?email: String,
+      ?keep_empty_folders: bool,
+      ?conflict_resolution: {
+        replace_contents: Array[
+          {
+            file_path: String,
+            replacement_type: String,
+            content: String,
+            file_mode: String
+          }
+        ],
+        delete_files: Array[
+          {
+            file_path: untyped
+          }
+        ],
+        set_file_modes: Array[
+          {
+            file_path: untyped,
+            file_mode: untyped
+          }
+        ]
+      }
+    ) -> _MergePullRequestBySquashResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergePullRequestBySquashResponse
+
+    interface _MergePullRequestByThreeWayResponse
+      include Smithy::Client::_Response[Types::MergePullRequestByThreeWayOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def merge_pull_request_by_three_way: (
+      ?pull_request_id: String,
+      ?repository_name: String,
+      ?source_commit_id: String,
+      ?conflict_detail_level: String,
+      ?conflict_resolution_strategy: String,
+      ?commit_message: String,
+      ?author_name: String,
+      ?email: String,
+      ?keep_empty_folders: bool,
+      ?conflict_resolution: {
+        replace_contents: Array[
+          {
+            file_path: String,
+            replacement_type: String,
+            content: String,
+            file_mode: String
+          }
+        ],
+        delete_files: Array[
+          {
+            file_path: untyped
+          }
+        ],
+        set_file_modes: Array[
+          {
+            file_path: untyped,
+            file_mode: untyped
+          }
+        ]
+      }
+    ) -> _MergePullRequestByThreeWayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergePullRequestByThreeWayResponse
+
+    interface _OverridePullRequestApprovalRulesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def override_pull_request_approval_rules: (
+      ?pull_request_id: String,
+      ?revision_id: String,
+      ?override_status: String
+    ) -> _OverridePullRequestApprovalRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OverridePullRequestApprovalRulesResponse
+
+    interface _PostCommentForComparedCommitResponse
+      include Smithy::Client::_Response[Types::PostCommentForComparedCommitOutput]
+      def repository_name: () -> String?
+      def before_commit_id: () -> String?
+      def after_commit_id: () -> String?
+      def before_blob_id: () -> String?
+      def after_blob_id: () -> String?
+      def location: () -> Types::Location?
+      def comment: () -> Types::Comment?
+    end
+    def post_comment_for_compared_commit: (
+      ?repository_name: String,
+      ?before_commit_id: String,
+      ?after_commit_id: String,
+      ?location: {
+        file_path: String,
+        file_position: Integer,
+        relative_file_version: String
+      },
+      ?content: String,
+      ?client_request_token: String
+    ) -> _PostCommentForComparedCommitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostCommentForComparedCommitResponse
+
+    interface _PostCommentForPullRequestResponse
+      include Smithy::Client::_Response[Types::PostCommentForPullRequestOutput]
+      def repository_name: () -> String?
+      def pull_request_id: () -> String?
+      def before_commit_id: () -> String?
+      def after_commit_id: () -> String?
+      def before_blob_id: () -> String?
+      def after_blob_id: () -> String?
+      def location: () -> Types::Location?
+      def comment: () -> Types::Comment?
+    end
+    def post_comment_for_pull_request: (
+      ?pull_request_id: String,
+      ?repository_name: String,
+      ?before_commit_id: String,
+      ?after_commit_id: String,
+      ?location: {
+        file_path: String,
+        file_position: Integer,
+        relative_file_version: String
+      },
+      ?content: String,
+      ?client_request_token: String
+    ) -> _PostCommentForPullRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostCommentForPullRequestResponse
+
+    interface _PostCommentReplyResponse
+      include Smithy::Client::_Response[Types::PostCommentReplyOutput]
+      def comment: () -> Types::Comment?
+    end
+    def post_comment_reply: (
+      ?in_reply_to: String,
+      ?client_request_token: String,
+      ?content: String
+    ) -> _PostCommentReplyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostCommentReplyResponse
+
+    interface _PutCommentReactionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_comment_reaction: (
+      ?comment_id: String,
+      ?reaction_value: String
+    ) -> _PutCommentReactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCommentReactionResponse
+
+    interface _PutFileResponse
+      include Smithy::Client::_Response[Types::PutFileOutput]
+      def commit_id: () -> String?
+      def blob_id: () -> String?
+      def tree_id: () -> String?
+    end
+    def put_file: (
+      ?repository_name: String,
+      ?branch_name: String,
+      ?file_content: String,
+      ?file_path: String,
+      ?file_mode: String,
+      ?parent_commit_id: String,
+      ?commit_message: String,
+      ?name: String,
+      ?email: String
+    ) -> _PutFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFileResponse
+
+    interface _PutRepositoryTriggersResponse
+      include Smithy::Client::_Response[Types::PutRepositoryTriggersOutput]
+      def configuration_id: () -> String?
+    end
+    def put_repository_triggers: (
+      ?repository_name: String,
+      ?triggers: Array[
+        {
+          name: String,
+          destination_arn: String,
+          custom_data: String,
+          branches: Array[String],
+          events: Array[String]
+        }
+      ]
+    ) -> _PutRepositoryTriggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRepositoryTriggersResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestRepositoryTriggersResponse
+      include Smithy::Client::_Response[Types::TestRepositoryTriggersOutput]
+      def successful_executions: () -> Array[String]?
+      def failed_executions: () -> Array[Types::RepositoryTriggerExecutionFailure]?
+    end
+    def test_repository_triggers: (
+      ?repository_name: String,
+      ?triggers: Array[
+        {
+          name: String,
+          destination_arn: String,
+          custom_data: String,
+          branches: Array[String],
+          events: Array[String]
+        }
+      ]
+    ) -> _TestRepositoryTriggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestRepositoryTriggersResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApprovalRuleTemplateContentResponse
+      include Smithy::Client::_Response[Types::UpdateApprovalRuleTemplateContentOutput]
+      def approval_rule_template: () -> Types::ApprovalRuleTemplate?
+    end
+    def update_approval_rule_template_content: (
+      ?approval_rule_template_name: String,
+      ?new_rule_content: String,
+      ?existing_rule_content_sha256: String
+    ) -> _UpdateApprovalRuleTemplateContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalRuleTemplateContentResponse
+
+    interface _UpdateApprovalRuleTemplateDescriptionResponse
+      include Smithy::Client::_Response[Types::UpdateApprovalRuleTemplateDescriptionOutput]
+      def approval_rule_template: () -> Types::ApprovalRuleTemplate?
+    end
+    def update_approval_rule_template_description: (
+      ?approval_rule_template_name: String,
+      ?approval_rule_template_description: String
+    ) -> _UpdateApprovalRuleTemplateDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalRuleTemplateDescriptionResponse
+
+    interface _UpdateApprovalRuleTemplateNameResponse
+      include Smithy::Client::_Response[Types::UpdateApprovalRuleTemplateNameOutput]
+      def approval_rule_template: () -> Types::ApprovalRuleTemplate?
+    end
+    def update_approval_rule_template_name: (
+      ?old_approval_rule_template_name: String,
+      ?new_approval_rule_template_name: String
+    ) -> _UpdateApprovalRuleTemplateNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalRuleTemplateNameResponse
+
+    interface _UpdateCommentResponse
+      include Smithy::Client::_Response[Types::UpdateCommentOutput]
+      def comment: () -> Types::Comment?
+    end
+    def update_comment: (
+      ?comment_id: String,
+      ?content: String
+    ) -> _UpdateCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCommentResponse
+
+    interface _UpdateDefaultBranchResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_default_branch: (
+      ?repository_name: String,
+      ?default_branch_name: String
+    ) -> _UpdateDefaultBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDefaultBranchResponse
+
+    interface _UpdatePullRequestApprovalRuleContentResponse
+      include Smithy::Client::_Response[Types::UpdatePullRequestApprovalRuleContentOutput]
+      def approval_rule: () -> Types::ApprovalRule?
+    end
+    def update_pull_request_approval_rule_content: (
+      ?pull_request_id: String,
+      ?approval_rule_name: String,
+      ?existing_rule_content_sha256: String,
+      ?new_rule_content: String
+    ) -> _UpdatePullRequestApprovalRuleContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePullRequestApprovalRuleContentResponse
+
+    interface _UpdatePullRequestApprovalStateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_pull_request_approval_state: (
+      ?pull_request_id: String,
+      ?revision_id: String,
+      ?approval_state: String
+    ) -> _UpdatePullRequestApprovalStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePullRequestApprovalStateResponse
+
+    interface _UpdatePullRequestDescriptionResponse
+      include Smithy::Client::_Response[Types::UpdatePullRequestDescriptionOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def update_pull_request_description: (
+      ?pull_request_id: String,
+      ?description: String
+    ) -> _UpdatePullRequestDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePullRequestDescriptionResponse
+
+    interface _UpdatePullRequestStatusResponse
+      include Smithy::Client::_Response[Types::UpdatePullRequestStatusOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def update_pull_request_status: (
+      ?pull_request_id: String,
+      ?pull_request_status: String
+    ) -> _UpdatePullRequestStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePullRequestStatusResponse
+
+    interface _UpdatePullRequestTitleResponse
+      include Smithy::Client::_Response[Types::UpdatePullRequestTitleOutput]
+      def pull_request: () -> Types::PullRequest?
+    end
+    def update_pull_request_title: (
+      ?pull_request_id: String,
+      ?title: String
+    ) -> _UpdatePullRequestTitleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePullRequestTitleResponse
+
+    interface _UpdateRepositoryDescriptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_repository_description: (
+      ?repository_name: String,
+      ?repository_description: String
+    ) -> _UpdateRepositoryDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRepositoryDescriptionResponse
+
+    interface _UpdateRepositoryEncryptionKeyResponse
+      include Smithy::Client::_Response[Types::UpdateRepositoryEncryptionKeyOutput]
+      def repository_id: () -> String?
+      def kms_key_id: () -> String?
+      def original_kms_key_id: () -> String?
+    end
+    def update_repository_encryption_key: (
+      ?repository_name: String,
+      ?kms_key_id: String
+    ) -> _UpdateRepositoryEncryptionKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRepositoryEncryptionKeyResponse
+
+    interface _UpdateRepositoryNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_repository_name: (
+      ?old_name: String,
+      ?new_name: String
+    ) -> _UpdateRepositoryNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRepositoryNameResponse
+  end
+end

@@ -1,0 +1,493 @@
+module Aws::Glacier
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Glacier::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AbortMultipartUploadResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def abort_multipart_upload: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?upload_id: String
+    ) -> _AbortMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AbortMultipartUploadResponse
+
+    interface _AbortVaultLockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def abort_vault_lock: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _AbortVaultLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AbortVaultLockResponse
+
+    interface _AddTagsToVaultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags_to_vault: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?tags: Hash[String, String]
+    ) -> _AddTagsToVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToVaultResponse
+
+    interface _CompleteMultipartUploadResponse
+      include Smithy::Client::_Response[Types::CompleteMultipartUploadOutput]
+      def location: () -> String?
+      def checksum: () -> String?
+      def archive_id: () -> String?
+    end
+    def complete_multipart_upload: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?upload_id: String,
+      ?archive_size: String,
+      ?checksum: String
+    ) -> _CompleteMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteMultipartUploadResponse
+
+    interface _CompleteVaultLockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def complete_vault_lock: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?lock_id: String
+    ) -> _CompleteVaultLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteVaultLockResponse
+
+    interface _CreateVaultResponse
+      include Smithy::Client::_Response[Types::CreateVaultOutput]
+      def location: () -> String?
+    end
+    def create_vault: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _CreateVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVaultResponse
+
+    interface _DeleteArchiveResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_archive: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?archive_id: String
+    ) -> _DeleteArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArchiveResponse
+
+    interface _DeleteVaultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vault: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _DeleteVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVaultResponse
+
+    interface _DeleteVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vault_access_policy: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _DeleteVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVaultAccessPolicyResponse
+
+    interface _DeleteVaultNotificationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vault_notifications: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _DeleteVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVaultNotificationsResponse
+
+    interface _DescribeJobResponse
+      include Smithy::Client::_Response[Types::DescribeJobOutput]
+      def job_id: () -> String?
+      def job_description: () -> String?
+      def action: () -> String?
+      def archive_id: () -> String?
+      def vault_arn: () -> String?
+      def creation_date: () -> String?
+      def completed: () -> bool?
+      def status_code: () -> String?
+      def status_message: () -> String?
+      def archive_size_in_bytes: () -> Integer?
+      def inventory_size_in_bytes: () -> Integer?
+      def sns_topic: () -> String?
+      def completion_date: () -> String?
+      def sha256_tree_hash: () -> String?
+      def archive_sha256_tree_hash: () -> String?
+      def retrieval_byte_range: () -> String?
+      def tier: () -> String?
+      def inventory_retrieval_parameters: () -> Types::InventoryRetrievalJobDescription?
+      def job_output_path: () -> String?
+      def select_parameters: () -> Types::SelectParameters?
+      def output_location: () -> Types::OutputLocation?
+    end
+    def describe_job: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?job_id: String
+    ) -> _DescribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobResponse
+
+    interface _DescribeVaultResponse
+      include Smithy::Client::_Response[Types::DescribeVaultOperationOutput]
+      def vault_arn: () -> String?
+      def vault_name: () -> String?
+      def creation_date: () -> String?
+      def last_inventory_date: () -> String?
+      def number_of_archives: () -> Integer?
+      def size_in_bytes: () -> Integer?
+    end
+    def describe_vault: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _DescribeVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVaultResponse
+
+    interface _GetDataRetrievalPolicyResponse
+      include Smithy::Client::_Response[Types::GetDataRetrievalPolicyOutput]
+      def policy: () -> Types::DataRetrievalPolicy?
+    end
+    def get_data_retrieval_policy: (
+      ?account_id: String
+    ) -> _GetDataRetrievalPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataRetrievalPolicyResponse
+
+    interface _GetJobOutputResponse
+      include Smithy::Client::_Response[Types::GetJobOutputOutput]
+      def body: () -> String?
+      def checksum: () -> String?
+      def status: () -> Integer?
+      def content_range: () -> String?
+      def accept_ranges: () -> String?
+      def content_type: () -> String?
+      def archive_description: () -> String?
+    end
+    def get_job_output: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?job_id: String,
+      ?range: String
+    ) -> _GetJobOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobOutputResponse
+
+    interface _GetVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Types::GetVaultAccessPolicyOutput]
+      def policy: () -> Types::VaultAccessPolicy?
+    end
+    def get_vault_access_policy: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _GetVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVaultAccessPolicyResponse
+
+    interface _GetVaultLockResponse
+      include Smithy::Client::_Response[Types::GetVaultLockOutput]
+      def policy: () -> String?
+      def state: () -> String?
+      def expiration_date: () -> String?
+      def creation_date: () -> String?
+    end
+    def get_vault_lock: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _GetVaultLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVaultLockResponse
+
+    interface _GetVaultNotificationsResponse
+      include Smithy::Client::_Response[Types::GetVaultNotificationsOutput]
+      def vault_notification_config: () -> Types::VaultNotificationConfig?
+    end
+    def get_vault_notifications: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _GetVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVaultNotificationsResponse
+
+    interface _InitiateJobResponse
+      include Smithy::Client::_Response[Types::InitiateJobOutput]
+      def location: () -> String?
+      def job_id: () -> String?
+      def job_output_path: () -> String?
+    end
+    def initiate_job: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?job_parameters: {
+        format: String,
+        type: untyped,
+        archive_id: untyped,
+        description: untyped,
+        sns_topic: untyped,
+        retrieval_byte_range: untyped,
+        tier: untyped,
+        inventory_retrieval_parameters: {
+          start_date: untyped,
+          end_date: untyped,
+          limit: untyped,
+          marker: untyped
+        },
+        select_parameters: {
+          input_serialization: {
+            csv: {
+              file_header_info: String,
+              comments: untyped,
+              quote_escape_character: untyped,
+              record_delimiter: untyped,
+              field_delimiter: untyped,
+              quote_character: untyped
+            }
+          },
+          expression_type: String,
+          expression: untyped,
+          output_serialization: {
+            csv: {
+              quote_fields: String,
+              quote_escape_character: untyped,
+              record_delimiter: untyped,
+              field_delimiter: untyped,
+              quote_character: untyped
+            }
+          }
+        },
+        output_location: {
+          s3: {
+            bucket_name: untyped,
+            prefix: untyped,
+            encryption: {
+              encryption_type: String,
+              kms_key_id: untyped,
+              kms_context: untyped
+            },
+            canned_acl: String,
+            access_control_list: Array[
+              {
+                grantee: {
+                  type: String,
+                  display_name: untyped,
+                  uri: untyped,
+                  id: untyped,
+                  email_address: untyped
+                },
+                permission: String
+              }
+            ],
+            tagging: Hash[String, String],
+            user_metadata: untyped,
+            storage_class: String
+          }
+        }
+      }
+    ) -> _InitiateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateJobResponse
+
+    interface _InitiateMultipartUploadResponse
+      include Smithy::Client::_Response[Types::InitiateMultipartUploadOutput]
+      def location: () -> String?
+      def upload_id: () -> String?
+    end
+    def initiate_multipart_upload: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?archive_description: String,
+      ?part_size: String
+    ) -> _InitiateMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateMultipartUploadResponse
+
+    interface _InitiateVaultLockResponse
+      include Smithy::Client::_Response[Types::InitiateVaultLockOutput]
+      def lock_id: () -> String?
+    end
+    def initiate_vault_lock: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?policy: {
+        policy: String
+      }
+    ) -> _InitiateVaultLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateVaultLockResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsOutput]
+      def job_list: () -> Array[Types::GlacierJobDescription]?
+      def marker: () -> String?
+    end
+    def list_jobs: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?limit: Integer,
+      ?marker: String,
+      ?statuscode: String,
+      ?completed: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListMultipartUploadsResponse
+      include Smithy::Client::_Response[Types::ListMultipartUploadsOutput]
+      def uploads_list: () -> Array[Types::UploadListElement]?
+      def marker: () -> String?
+    end
+    def list_multipart_uploads: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?limit: Integer,
+      ?marker: String
+    ) -> _ListMultipartUploadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultipartUploadsResponse
+
+    interface _ListPartsResponse
+      include Smithy::Client::_Response[Types::ListPartsOutput]
+      def multipart_upload_id: () -> String?
+      def vault_arn: () -> String?
+      def archive_description: () -> String?
+      def part_size_in_bytes: () -> Integer?
+      def creation_date: () -> String?
+      def parts: () -> Array[Types::PartListElement]?
+      def marker: () -> String?
+    end
+    def list_parts: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?upload_id: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListPartsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartsResponse
+
+    interface _ListProvisionedCapacityResponse
+      include Smithy::Client::_Response[Types::ListProvisionedCapacityOutput]
+      def provisioned_capacity_list: () -> Array[Types::ProvisionedCapacityDescription]?
+    end
+    def list_provisioned_capacity: (
+      ?account_id: String
+    ) -> _ListProvisionedCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisionedCapacityResponse
+
+    interface _ListTagsForVaultResponse
+      include Smithy::Client::_Response[Types::ListTagsForVaultOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_vault: (
+      ?account_id: String,
+      ?vault_name: String
+    ) -> _ListTagsForVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForVaultResponse
+
+    interface _ListVaultsResponse
+      include Smithy::Client::_Response[Types::ListVaultsOutput]
+      def vault_list: () -> Array[Types::DescribeVaultOutput]?
+      def marker: () -> String?
+    end
+    def list_vaults: (
+      ?account_id: String,
+      ?marker: String,
+      ?limit: Integer
+    ) -> _ListVaultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVaultsResponse
+
+    interface _PurchaseProvisionedCapacityResponse
+      include Smithy::Client::_Response[Types::PurchaseProvisionedCapacityOutput]
+      def capacity_id: () -> String?
+    end
+    def purchase_provisioned_capacity: (
+      ?account_id: String
+    ) -> _PurchaseProvisionedCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseProvisionedCapacityResponse
+
+    interface _RemoveTagsFromVaultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags_from_vault: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsFromVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromVaultResponse
+
+    interface _SetDataRetrievalPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_data_retrieval_policy: (
+      ?account_id: String,
+      ?policy: {
+        rules: Array[
+          {
+            strategy: String,
+            bytes_per_hour: Integer
+          }
+        ]
+      }
+    ) -> _SetDataRetrievalPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDataRetrievalPolicyResponse
+
+    interface _SetVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_vault_access_policy: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?policy: {
+        policy: String
+      }
+    ) -> _SetVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetVaultAccessPolicyResponse
+
+    interface _SetVaultNotificationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_vault_notifications: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?vault_notification_config: {
+        sns_topic: String,
+        events: Array[String]
+      }
+    ) -> _SetVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetVaultNotificationsResponse
+
+    interface _UploadArchiveResponse
+      include Smithy::Client::_Response[Types::UploadArchiveOutput]
+      def location: () -> String?
+      def checksum: () -> String?
+      def archive_id: () -> String?
+    end
+    def upload_archive: (
+      ?vault_name: String,
+      ?account_id: String,
+      ?archive_description: String,
+      ?checksum: String,
+      ?body: String
+    ) -> _UploadArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadArchiveResponse
+
+    interface _UploadMultipartPartResponse
+      include Smithy::Client::_Response[Types::UploadMultipartPartOutput]
+      def checksum: () -> String?
+    end
+    def upload_multipart_part: (
+      ?account_id: String,
+      ?vault_name: String,
+      ?upload_id: String,
+      ?checksum: String,
+      ?range: String,
+      ?body: String
+    ) -> _UploadMultipartPartResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadMultipartPartResponse
+  end
+end

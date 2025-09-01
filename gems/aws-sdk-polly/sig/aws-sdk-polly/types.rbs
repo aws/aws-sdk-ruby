@@ -1,0 +1,786 @@
+module Aws::Polly
+  module Types
+
+    class DeleteLexiconInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteLexiconOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeVoicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?language_code: String,
+        ?include_additional_language_codes: bool,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor language_code: String?
+      attr_accessor include_additional_language_codes: bool?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeVoicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voices: Array[Types::Voice],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voices: Array[Types::Voice]?
+      attr_accessor next_token: String?
+    end
+
+    module Engine
+      STANDARD: String
+      NEURAL: String
+      LONG_FORM: String
+      GENERATIVE: String
+    end
+
+    class EngineNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Gender
+      Female: String
+      Male: String
+    end
+
+    class GetLexiconInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetLexiconOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lexicon: Types::Lexicon,
+        ?lexicon_attributes: Types::LexiconAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lexicon: Types::Lexicon?
+      attr_accessor lexicon_attributes: Types::LexiconAttributes?
+    end
+
+    class GetSpeechSynthesisTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class GetSpeechSynthesisTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?synthesis_task: Types::SynthesisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor synthesis_task: Types::SynthesisTask?
+    end
+
+    class InvalidLexiconException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidS3BucketException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidS3KeyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSampleRateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSnsTopicArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSsmlException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTaskIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LanguageCode
+      arb: String
+      cmn_CN: String
+      cy_GB: String
+      da_DK: String
+      de_DE: String
+      en_AU: String
+      en_GB: String
+      en_GB_WLS: String
+      en_IN: String
+      en_US: String
+      es_ES: String
+      es_MX: String
+      es_US: String
+      fr_CA: String
+      fr_FR: String
+      is_IS: String
+      it_IT: String
+      ja_JP: String
+      hi_IN: String
+      ko_KR: String
+      nb_NO: String
+      nl_NL: String
+      pl_PL: String
+      pt_BR: String
+      pt_PT: String
+      ro_RO: String
+      ru_RU: String
+      sv_SE: String
+      tr_TR: String
+      en_NZ: String
+      en_ZA: String
+      ca_ES: String
+      de_AT: String
+      yue_CN: String
+      ar_AE: String
+      fi_FI: String
+      en_IE: String
+      nl_BE: String
+      fr_BE: String
+      cs_CZ: String
+      de_CH: String
+      en_SG: String
+    end
+
+    class LanguageNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Lexicon
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor name: String?
+    end
+
+    class LexiconAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alphabet: String,
+        ?language_code: String,
+        ?last_modified: Time,
+        ?lexicon_arn: String,
+        ?lexemes_count: Integer,
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alphabet: String?
+      attr_accessor language_code: String?
+      attr_accessor last_modified: Time?
+      attr_accessor lexicon_arn: String?
+      attr_accessor lexemes_count: Integer?
+      attr_accessor size: Integer?
+    end
+
+    class LexiconDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attributes: Types::LexiconAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attributes: Types::LexiconAttributes?
+    end
+
+    class LexiconNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LexiconSizeExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListLexiconsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListLexiconsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lexicons: Array[Types::LexiconDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lexicons: Array[Types::LexiconDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpeechSynthesisTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListSpeechSynthesisTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?synthesis_tasks: Array[Types::SynthesisTask],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor synthesis_tasks: Array[Types::SynthesisTask]?
+    end
+
+    class MarksNotSupportedForFormatException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxLexemeLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxLexiconsNumberExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OutputFormat
+      JSON: String
+      MP3: String
+      OGG_VORBIS: String
+      PCM: String
+    end
+
+    class PutLexiconInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor content: String?
+    end
+
+    class PutLexiconOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SpeechMarkType
+      SENTENCE: String
+      SSML: String
+      VISEME: String
+      WORD: String
+    end
+
+    class SsmlMarksNotSupportedForTextTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartSpeechSynthesisTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?language_code: String,
+        ?lexicon_names: Array[String],
+        ?output_format: String,
+        ?output_s3_bucket_name: String,
+        ?output_s3_key_prefix: String,
+        ?sample_rate: String,
+        ?sns_topic_arn: String,
+        ?speech_mark_types: Array[String],
+        ?text: String,
+        ?text_type: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor language_code: String?
+      attr_accessor lexicon_names: Array[String]?
+      attr_accessor output_format: String?
+      attr_accessor output_s3_bucket_name: String?
+      attr_accessor output_s3_key_prefix: String?
+      attr_accessor sample_rate: String?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor speech_mark_types: Array[String]?
+      attr_accessor text: String?
+      attr_accessor text_type: String?
+      attr_accessor voice_id: String?
+    end
+
+    class StartSpeechSynthesisTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?synthesis_task: Types::SynthesisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor synthesis_task: Types::SynthesisTask?
+    end
+
+    class SynthesisTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?task_id: String,
+        ?task_status: String,
+        ?task_status_reason: String,
+        ?output_uri: String,
+        ?creation_time: Time,
+        ?request_characters: Integer,
+        ?sns_topic_arn: String,
+        ?lexicon_names: Array[String],
+        ?output_format: String,
+        ?sample_rate: String,
+        ?speech_mark_types: Array[String],
+        ?text_type: String,
+        ?voice_id: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor task_id: String?
+      attr_accessor task_status: String?
+      attr_accessor task_status_reason: String?
+      attr_accessor output_uri: String?
+      attr_accessor creation_time: Time?
+      attr_accessor request_characters: Integer?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor lexicon_names: Array[String]?
+      attr_accessor output_format: String?
+      attr_accessor sample_rate: String?
+      attr_accessor speech_mark_types: Array[String]?
+      attr_accessor text_type: String?
+      attr_accessor voice_id: String?
+      attr_accessor language_code: String?
+    end
+
+    class SynthesisTaskNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SynthesizeSpeechInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?language_code: String,
+        ?lexicon_names: Array[String],
+        ?output_format: String,
+        ?sample_rate: String,
+        ?speech_mark_types: Array[String],
+        ?text: String,
+        ?text_type: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor language_code: String?
+      attr_accessor lexicon_names: Array[String]?
+      attr_accessor output_format: String?
+      attr_accessor sample_rate: String?
+      attr_accessor speech_mark_types: Array[String]?
+      attr_accessor text: String?
+      attr_accessor text_type: String?
+      attr_accessor voice_id: String?
+    end
+
+    class SynthesizeSpeechOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_stream: String,
+        ?content_type: String,
+        ?request_characters: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_stream: String?
+      attr_accessor content_type: String?
+      attr_accessor request_characters: Integer?
+    end
+
+    module TaskStatus
+      SCHEDULED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class TextLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TextType
+      SSML: String
+      TEXT: String
+    end
+
+    class UnsupportedPlsAlphabetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedPlsLanguageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Voice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gender: String,
+        ?id: String,
+        ?language_code: String,
+        ?language_name: String,
+        ?name: String,
+        ?additional_language_codes: Array[String],
+        ?supported_engines: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gender: String?
+      attr_accessor id: String?
+      attr_accessor language_code: String?
+      attr_accessor language_name: String?
+      attr_accessor name: String?
+      attr_accessor additional_language_codes: Array[String]?
+      attr_accessor supported_engines: Array[String]?
+    end
+
+    module VoiceId
+      Aditi: String
+      Amy: String
+      Astrid: String
+      Bianca: String
+      Brian: String
+      Camila: String
+      Carla: String
+      Carmen: String
+      Celine: String
+      Chantal: String
+      Conchita: String
+      Cristiano: String
+      Dora: String
+      Emma: String
+      Enrique: String
+      Ewa: String
+      Filiz: String
+      Gabrielle: String
+      Geraint: String
+      Giorgio: String
+      Gwyneth: String
+      Hans: String
+      Ines: String
+      Ivy: String
+      Jacek: String
+      Jan: String
+      Joanna: String
+      Joey: String
+      Justin: String
+      Karl: String
+      Kendra: String
+      Kevin: String
+      Kimberly: String
+      Lea: String
+      Liv: String
+      Lotte: String
+      Lucia: String
+      Lupe: String
+      Mads: String
+      Maja: String
+      Marlene: String
+      Mathieu: String
+      Matthew: String
+      Maxim: String
+      Mia: String
+      Miguel: String
+      Mizuki: String
+      Naja: String
+      Nicole: String
+      Olivia: String
+      Penelope: String
+      Raveena: String
+      Ricardo: String
+      Ruben: String
+      Russell: String
+      Salli: String
+      Seoyeon: String
+      Takumi: String
+      Tatyana: String
+      Vicki: String
+      Vitoria: String
+      Zeina: String
+      Zhiyu: String
+      Aria: String
+      Ayanda: String
+      Arlet: String
+      Hannah: String
+      Arthur: String
+      Daniel: String
+      Liam: String
+      Pedro: String
+      Kajal: String
+      Hiujin: String
+      Laura: String
+      Elin: String
+      Ida: String
+      Suvi: String
+      Ola: String
+      Hala: String
+      Andres: String
+      Sergio: String
+      Remi: String
+      Adriano: String
+      Thiago: String
+      Ruth: String
+      Stephen: String
+      Kazuha: String
+      Tomoko: String
+      Niamh: String
+      Sofie: String
+      Lisa: String
+      Isabelle: String
+      Zayd: String
+      Danielle: String
+      Gregory: String
+      Burcu: String
+      Jitka: String
+      Sabrina: String
+      Jasmine: String
+      Jihye: String
+    end
+  end
+end

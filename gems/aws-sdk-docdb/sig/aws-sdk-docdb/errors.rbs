@@ -1,0 +1,175 @@
+module Aws::DocDB
+  module Errors
+    class AuthorizationNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CertificateNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterParameterGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterSnapshotAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBClusterSnapshotNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBInstanceAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBInstanceNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBParameterGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBParameterGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSecurityGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSnapshotAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSnapshotNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSubnetGroupAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSubnetGroupNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBSubnetQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DBUpgradeDependencyFailureFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EventSubscriptionQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalClusterAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalClusterNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalClusterQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InstanceQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientDBClusterCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientDBInstanceCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InsufficientStorageClusterCapacityFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBClusterSnapshotStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBClusterStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBInstanceStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBParameterGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBSecurityGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBSnapshotStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBSubnetGroupStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDBSubnetStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventSubscriptionStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidGlobalClusterStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRestoreFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSubnet < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidVPCNetworkStateFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SNSInvalidTopicFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SNSNoAuthorizationFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SNSTopicArnNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SharedSnapshotQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SnapshotQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SourceNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StorageQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StorageTypeNotSupportedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubnetAlreadyInUse < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubscriptionAlreadyExistFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubscriptionCategoryNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubscriptionNotFoundFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

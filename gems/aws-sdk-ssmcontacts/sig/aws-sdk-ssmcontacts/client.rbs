@@ -1,0 +1,639 @@
+module Aws::SSMContacts
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSMContacts::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptPageResponse
+      include Smithy::Client::_Response[Types::AcceptPageResult]
+    end
+    def accept_page: (
+      ?page_id: String,
+      ?contact_channel_id: String,
+      ?accept_type: String,
+      ?note: String,
+      ?accept_code: String,
+      ?accept_code_validation: String
+    ) -> _AcceptPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptPageResponse
+
+    interface _ActivateContactChannelResponse
+      include Smithy::Client::_Response[Types::ActivateContactChannelResult]
+    end
+    def activate_contact_channel: (
+      ?contact_channel_id: String,
+      ?activation_code: String
+    ) -> _ActivateContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateContactChannelResponse
+
+    interface _CreateContactResponse
+      include Smithy::Client::_Response[Types::CreateContactResult]
+      def contact_arn: () -> String?
+    end
+    def create_contact: (
+      ?alias: String,
+      ?display_name: String,
+      ?type: String,
+      ?plan: {
+        stages: Array[
+          {
+            duration_in_minutes: Integer,
+            targets: Array[
+              {
+                channel_target_info: {
+                  contact_channel_id: String,
+                  retry_interval_in_minutes: Integer
+                },
+                contact_target_info: {
+                  contact_id: untyped,
+                  is_essential: bool
+                }
+              }
+            ]
+          }
+        ],
+        rotation_ids: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _CreateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactResponse
+
+    interface _CreateContactChannelResponse
+      include Smithy::Client::_Response[Types::CreateContactChannelResult]
+      def contact_channel_arn: () -> String?
+    end
+    def create_contact_channel: (
+      ?contact_id: String,
+      ?name: String,
+      ?type: String,
+      ?delivery_address: {
+        simple_address: String
+      },
+      ?defer_activation: bool,
+      ?idempotency_token: String
+    ) -> _CreateContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactChannelResponse
+
+    interface _CreateRotationResponse
+      include Smithy::Client::_Response[Types::CreateRotationResult]
+      def rotation_arn: () -> String?
+    end
+    def create_rotation: (
+      ?name: String,
+      ?contact_ids: Array[String],
+      ?start_time: Time,
+      ?time_zone_id: String,
+      ?recurrence: {
+        monthly_settings: Array[
+          {
+            day_of_month: Integer,
+            hand_off_time: {
+              hour_of_day: Integer,
+              minute_of_hour: Integer
+            }
+          }
+        ],
+        weekly_settings: Array[
+          {
+            day_of_week: String,
+            hand_off_time: untyped
+          }
+        ],
+        daily_settings: Array[
+          {
+            hour_of_day: untyped,
+            minute_of_hour: untyped
+          }
+        ],
+        number_of_on_calls: Integer,
+        shift_coverages: Hash[String,
+          Array[
+            {
+              start: untyped,
+              end: untyped
+            }
+          ]
+        ],
+        recurrence_multiplier: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _CreateRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRotationResponse
+
+    interface _CreateRotationOverrideResponse
+      include Smithy::Client::_Response[Types::CreateRotationOverrideResult]
+      def rotation_override_id: () -> String?
+    end
+    def create_rotation_override: (
+      ?rotation_id: String,
+      ?new_contact_ids: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?idempotency_token: String
+    ) -> _CreateRotationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRotationOverrideResponse
+
+    interface _DeactivateContactChannelResponse
+      include Smithy::Client::_Response[Types::DeactivateContactChannelResult]
+    end
+    def deactivate_contact_channel: (
+      ?contact_channel_id: String
+    ) -> _DeactivateContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateContactChannelResponse
+
+    interface _DeleteContactResponse
+      include Smithy::Client::_Response[Types::DeleteContactResult]
+    end
+    def delete_contact: (
+      ?contact_id: String
+    ) -> _DeleteContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactResponse
+
+    interface _DeleteContactChannelResponse
+      include Smithy::Client::_Response[Types::DeleteContactChannelResult]
+    end
+    def delete_contact_channel: (
+      ?contact_channel_id: String
+    ) -> _DeleteContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactChannelResponse
+
+    interface _DeleteRotationResponse
+      include Smithy::Client::_Response[Types::DeleteRotationResult]
+    end
+    def delete_rotation: (
+      ?rotation_id: String
+    ) -> _DeleteRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRotationResponse
+
+    interface _DeleteRotationOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteRotationOverrideResult]
+    end
+    def delete_rotation_override: (
+      ?rotation_id: String,
+      ?rotation_override_id: String
+    ) -> _DeleteRotationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRotationOverrideResponse
+
+    interface _DescribeEngagementResponse
+      include Smithy::Client::_Response[Types::DescribeEngagementResult]
+      def contact_arn: () -> String?
+      def engagement_arn: () -> String?
+      def sender: () -> String?
+      def subject: () -> String?
+      def content: () -> String?
+      def public_subject: () -> String?
+      def public_content: () -> String?
+      def incident_id: () -> String?
+      def start_time: () -> Time?
+      def stop_time: () -> Time?
+    end
+    def describe_engagement: (
+      ?engagement_id: String
+    ) -> _DescribeEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEngagementResponse
+
+    interface _DescribePageResponse
+      include Smithy::Client::_Response[Types::DescribePageResult]
+      def page_arn: () -> String?
+      def engagement_arn: () -> String?
+      def contact_arn: () -> String?
+      def sender: () -> String?
+      def subject: () -> String?
+      def content: () -> String?
+      def public_subject: () -> String?
+      def public_content: () -> String?
+      def incident_id: () -> String?
+      def sent_time: () -> Time?
+      def read_time: () -> Time?
+      def delivery_time: () -> Time?
+    end
+    def describe_page: (
+      ?page_id: String
+    ) -> _DescribePageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePageResponse
+
+    interface _GetContactResponse
+      include Smithy::Client::_Response[Types::GetContactResult]
+      def contact_arn: () -> String?
+      def alias: () -> String?
+      def display_name: () -> String?
+      def type: () -> String?
+      def plan: () -> Types::Plan?
+    end
+    def get_contact: (
+      ?contact_id: String
+    ) -> _GetContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactResponse
+
+    interface _GetContactChannelResponse
+      include Smithy::Client::_Response[Types::GetContactChannelResult]
+      def contact_arn: () -> String?
+      def contact_channel_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def delivery_address: () -> Types::ContactChannelAddress?
+      def activation_status: () -> String?
+    end
+    def get_contact_channel: (
+      ?contact_channel_id: String
+    ) -> _GetContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactChannelResponse
+
+    interface _GetContactPolicyResponse
+      include Smithy::Client::_Response[Types::GetContactPolicyResult]
+      def contact_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_contact_policy: (
+      ?contact_arn: String
+    ) -> _GetContactPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactPolicyResponse
+
+    interface _GetRotationResponse
+      include Smithy::Client::_Response[Types::GetRotationResult]
+      def rotation_arn: () -> String?
+      def name: () -> String?
+      def contact_ids: () -> Array[String]?
+      def start_time: () -> Time?
+      def time_zone_id: () -> String?
+      def recurrence: () -> Types::RecurrenceSettings?
+    end
+    def get_rotation: (
+      ?rotation_id: String
+    ) -> _GetRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRotationResponse
+
+    interface _GetRotationOverrideResponse
+      include Smithy::Client::_Response[Types::GetRotationOverrideResult]
+      def rotation_override_id: () -> String?
+      def rotation_arn: () -> String?
+      def new_contact_ids: () -> Array[String]?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def create_time: () -> Time?
+    end
+    def get_rotation_override: (
+      ?rotation_id: String,
+      ?rotation_override_id: String
+    ) -> _GetRotationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRotationOverrideResponse
+
+    interface _ListContactChannelsResponse
+      include Smithy::Client::_Response[Types::ListContactChannelsResult]
+      def next_token: () -> String?
+      def contact_channels: () -> Array[Types::ContactChannel]?
+    end
+    def list_contact_channels: (
+      ?contact_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactChannelsResponse
+
+    interface _ListContactsResponse
+      include Smithy::Client::_Response[Types::ListContactsResult]
+      def next_token: () -> String?
+      def contacts: () -> Array[Types::Contact]?
+    end
+    def list_contacts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?alias_prefix: String,
+      ?type: String
+    ) -> _ListContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactsResponse
+
+    interface _ListEngagementsResponse
+      include Smithy::Client::_Response[Types::ListEngagementsResult]
+      def next_token: () -> String?
+      def engagements: () -> Array[Types::Engagement]?
+    end
+    def list_engagements: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?incident_id: String,
+      ?time_range_value: {
+        start_time: Time,
+        end_time: untyped
+      }
+    ) -> _ListEngagementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementsResponse
+
+    interface _ListPageReceiptsResponse
+      include Smithy::Client::_Response[Types::ListPageReceiptsResult]
+      def next_token: () -> String?
+      def receipts: () -> Array[Types::Receipt]?
+    end
+    def list_page_receipts: (
+      ?page_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPageReceiptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPageReceiptsResponse
+
+    interface _ListPageResolutionsResponse
+      include Smithy::Client::_Response[Types::ListPageResolutionsResult]
+      def next_token: () -> String?
+      def page_resolutions: () -> Array[Types::ResolutionContact]?
+    end
+    def list_page_resolutions: (
+      ?next_token: String,
+      ?page_id: String
+    ) -> _ListPageResolutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPageResolutionsResponse
+
+    interface _ListPagesByContactResponse
+      include Smithy::Client::_Response[Types::ListPagesByContactResult]
+      def next_token: () -> String?
+      def pages: () -> Array[Types::Page]?
+    end
+    def list_pages_by_contact: (
+      ?contact_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPagesByContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPagesByContactResponse
+
+    interface _ListPagesByEngagementResponse
+      include Smithy::Client::_Response[Types::ListPagesByEngagementResult]
+      def next_token: () -> String?
+      def pages: () -> Array[Types::Page]?
+    end
+    def list_pages_by_engagement: (
+      ?engagement_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPagesByEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPagesByEngagementResponse
+
+    interface _ListPreviewRotationShiftsResponse
+      include Smithy::Client::_Response[Types::ListPreviewRotationShiftsResult]
+      def rotation_shifts: () -> Array[Types::RotationShift]?
+      def next_token: () -> String?
+    end
+    def list_preview_rotation_shifts: (
+      ?rotation_start_time: Time,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?members: Array[String],
+      ?time_zone_id: String,
+      ?recurrence: {
+        monthly_settings: Array[
+          {
+            day_of_month: Integer,
+            hand_off_time: {
+              hour_of_day: Integer,
+              minute_of_hour: Integer
+            }
+          }
+        ],
+        weekly_settings: Array[
+          {
+            day_of_week: String,
+            hand_off_time: untyped
+          }
+        ],
+        daily_settings: Array[
+          {
+            hour_of_day: untyped,
+            minute_of_hour: untyped
+          }
+        ],
+        number_of_on_calls: Integer,
+        shift_coverages: Hash[String,
+          Array[
+            {
+              start: untyped,
+              end: untyped
+            }
+          ]
+        ],
+        recurrence_multiplier: Integer
+      },
+      ?overrides: Array[
+        {
+          new_members: Array[String],
+          start_time: Time,
+          end_time: untyped
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPreviewRotationShiftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPreviewRotationShiftsResponse
+
+    interface _ListRotationOverridesResponse
+      include Smithy::Client::_Response[Types::ListRotationOverridesResult]
+      def rotation_overrides: () -> Array[Types::RotationOverride]?
+      def next_token: () -> String?
+    end
+    def list_rotation_overrides: (
+      ?rotation_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRotationOverridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRotationOverridesResponse
+
+    interface _ListRotationShiftsResponse
+      include Smithy::Client::_Response[Types::ListRotationShiftsResult]
+      def rotation_shifts: () -> Array[Types::RotationShift]?
+      def next_token: () -> String?
+    end
+    def list_rotation_shifts: (
+      ?rotation_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRotationShiftsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRotationShiftsResponse
+
+    interface _ListRotationsResponse
+      include Smithy::Client::_Response[Types::ListRotationsResult]
+      def next_token: () -> String?
+      def rotations: () -> Array[Types::Rotation]?
+    end
+    def list_rotations: (
+      ?rotation_name_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRotationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRotationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutContactPolicyResponse
+      include Smithy::Client::_Response[Types::PutContactPolicyResult]
+    end
+    def put_contact_policy: (
+      ?contact_arn: String,
+      ?policy: String
+    ) -> _PutContactPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutContactPolicyResponse
+
+    interface _SendActivationCodeResponse
+      include Smithy::Client::_Response[Types::SendActivationCodeResult]
+    end
+    def send_activation_code: (
+      ?contact_channel_id: String
+    ) -> _SendActivationCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendActivationCodeResponse
+
+    interface _StartEngagementResponse
+      include Smithy::Client::_Response[Types::StartEngagementResult]
+      def engagement_arn: () -> String?
+    end
+    def start_engagement: (
+      ?contact_id: String,
+      ?sender: String,
+      ?subject: String,
+      ?content: String,
+      ?public_subject: String,
+      ?public_content: String,
+      ?incident_id: String,
+      ?idempotency_token: String
+    ) -> _StartEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEngagementResponse
+
+    interface _StopEngagementResponse
+      include Smithy::Client::_Response[Types::StopEngagementResult]
+    end
+    def stop_engagement: (
+      ?engagement_id: String,
+      ?reason: String
+    ) -> _StopEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopEngagementResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateContactResponse
+      include Smithy::Client::_Response[Types::UpdateContactResult]
+    end
+    def update_contact: (
+      ?contact_id: String,
+      ?display_name: String,
+      ?plan: {
+        stages: Array[
+          {
+            duration_in_minutes: Integer,
+            targets: Array[
+              {
+                channel_target_info: {
+                  contact_channel_id: String,
+                  retry_interval_in_minutes: Integer
+                },
+                contact_target_info: {
+                  contact_id: untyped,
+                  is_essential: bool
+                }
+              }
+            ]
+          }
+        ],
+        rotation_ids: Array[String]
+      }
+    ) -> _UpdateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactResponse
+
+    interface _UpdateContactChannelResponse
+      include Smithy::Client::_Response[Types::UpdateContactChannelResult]
+    end
+    def update_contact_channel: (
+      ?contact_channel_id: String,
+      ?name: String,
+      ?delivery_address: {
+        simple_address: String
+      }
+    ) -> _UpdateContactChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactChannelResponse
+
+    interface _UpdateRotationResponse
+      include Smithy::Client::_Response[Types::UpdateRotationResult]
+    end
+    def update_rotation: (
+      ?rotation_id: String,
+      ?contact_ids: Array[String],
+      ?start_time: Time,
+      ?time_zone_id: String,
+      ?recurrence: {
+        monthly_settings: Array[
+          {
+            day_of_month: Integer,
+            hand_off_time: {
+              hour_of_day: Integer,
+              minute_of_hour: Integer
+            }
+          }
+        ],
+        weekly_settings: Array[
+          {
+            day_of_week: String,
+            hand_off_time: untyped
+          }
+        ],
+        daily_settings: Array[
+          {
+            hour_of_day: untyped,
+            minute_of_hour: untyped
+          }
+        ],
+        number_of_on_calls: Integer,
+        shift_coverages: Hash[String,
+          Array[
+            {
+              start: untyped,
+              end: untyped
+            }
+          ]
+        ],
+        recurrence_multiplier: Integer
+      }
+    ) -> _UpdateRotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRotationResponse
+  end
+end

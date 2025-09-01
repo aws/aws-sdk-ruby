@@ -1,0 +1,1101 @@
+module Aws::Macie2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Macie2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptInvitationResponse]
+    end
+    def accept_invitation: (
+      ?administrator_account_id: String,
+      ?invitation_id: String,
+      ?master_account: String
+    ) -> _AcceptInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptInvitationResponse
+
+    interface _BatchGetCustomDataIdentifiersResponse
+      include Smithy::Client::_Response[Types::BatchGetCustomDataIdentifiersResponse]
+      def custom_data_identifiers: () -> Array[Types::BatchGetCustomDataIdentifierSummary]?
+      def not_found_identifier_ids: () -> Array[String]?
+    end
+    def batch_get_custom_data_identifiers: (
+      ?ids: Array[String]
+    ) -> _BatchGetCustomDataIdentifiersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCustomDataIdentifiersResponse
+
+    interface _BatchUpdateAutomatedDiscoveryAccountsResponse
+      include Smithy::Client::_Response[Types::BatchUpdateAutomatedDiscoveryAccountsResponse]
+      def errors: () -> Array[Types::AutomatedDiscoveryAccountUpdateError]?
+    end
+    def batch_update_automated_discovery_accounts: (
+      ?accounts: Array[
+        {
+          account_id: String,
+          status: String
+        }
+      ]
+    ) -> _BatchUpdateAutomatedDiscoveryAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateAutomatedDiscoveryAccountsResponse
+
+    interface _CreateAllowListResponse
+      include Smithy::Client::_Response[Types::CreateAllowListResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_allow_list: (
+      ?client_token: String,
+      ?criteria: {
+        regex: String,
+        s3_words_list: {
+          bucket_name: String,
+          object_key: String
+        }
+      },
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAllowListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAllowListResponse
+
+    interface _CreateClassificationJobResponse
+      include Smithy::Client::_Response[Types::CreateClassificationJobResponse]
+      def job_arn: () -> String?
+      def job_id: () -> String?
+    end
+    def create_classification_job: (
+      ?allow_list_ids: Array[String],
+      ?client_token: String,
+      ?custom_data_identifier_ids: Array[String],
+      ?description: String,
+      ?initial_run: bool,
+      ?job_type: String,
+      ?managed_data_identifier_ids: Array[String],
+      ?managed_data_identifier_selector: String,
+      ?name: String,
+      ?s3_job_definition: {
+        bucket_criteria: {
+          excludes: {
+            and: Array[
+              {
+                simple_criterion: {
+                  comparator: String,
+                  key: String,
+                  values: Array[String]
+                },
+                tag_criterion: {
+                  comparator: untyped,
+                  tag_values: Array[
+                    {
+                      key: String,
+                      value: untyped
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          includes: untyped
+        },
+        bucket_definitions: Array[
+          {
+            account_id: untyped,
+            buckets: untyped
+          }
+        ],
+        scoping: {
+          excludes: {
+            and: Array[
+              {
+                simple_scope_term: {
+                  comparator: untyped,
+                  key: String,
+                  values: untyped
+                },
+                tag_scope_term: {
+                  comparator: untyped,
+                  key: untyped,
+                  tag_values: Array[
+                    {
+                      key: untyped,
+                      value: untyped
+                    }
+                  ],
+                  target: String
+                }
+              }
+            ]
+          },
+          includes: untyped
+        }
+      },
+      ?sampling_percentage: Integer,
+      ?schedule_frequency: {
+        daily_schedule: {
+        },
+        monthly_schedule: {
+          day_of_month: Integer
+        },
+        weekly_schedule: {
+          day_of_week: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateClassificationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClassificationJobResponse
+
+    interface _CreateCustomDataIdentifierResponse
+      include Smithy::Client::_Response[Types::CreateCustomDataIdentifierResponse]
+      def custom_data_identifier_id: () -> String?
+    end
+    def create_custom_data_identifier: (
+      ?client_token: String,
+      ?description: String,
+      ?ignore_words: Array[String],
+      ?keywords: Array[String],
+      ?maximum_match_distance: Integer,
+      ?name: String,
+      ?regex: String,
+      ?severity_levels: Array[
+        {
+          occurrences_threshold: Integer,
+          severity: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateCustomDataIdentifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomDataIdentifierResponse
+
+    interface _CreateFindingsFilterResponse
+      include Smithy::Client::_Response[Types::CreateFindingsFilterResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_findings_filter: (
+      ?action: String,
+      ?client_token: String,
+      ?description: String,
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            eq_exact_match: untyped,
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            neq: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?position: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateFindingsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFindingsFilterResponse
+
+    interface _CreateInvitationsResponse
+      include Smithy::Client::_Response[Types::CreateInvitationsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def create_invitations: (
+      ?account_ids: Array[String],
+      ?disable_email_notification: bool,
+      ?message: String
+    ) -> _CreateInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvitationsResponse
+
+    interface _CreateMemberResponse
+      include Smithy::Client::_Response[Types::CreateMemberResponse]
+      def arn: () -> String?
+    end
+    def create_member: (
+      ?account: {
+        account_id: String,
+        email: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMemberResponse
+
+    interface _CreateSampleFindingsResponse
+      include Smithy::Client::_Response[Types::CreateSampleFindingsResponse]
+    end
+    def create_sample_findings: (
+      ?finding_types: Array[String]
+    ) -> _CreateSampleFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSampleFindingsResponse
+
+    interface _DeclineInvitationsResponse
+      include Smithy::Client::_Response[Types::DeclineInvitationsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def decline_invitations: (
+      ?account_ids: Array[String]
+    ) -> _DeclineInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeclineInvitationsResponse
+
+    interface _DeleteAllowListResponse
+      include Smithy::Client::_Response[Types::DeleteAllowListResponse]
+    end
+    def delete_allow_list: (
+      ?id: String,
+      ?ignore_job_checks: String
+    ) -> _DeleteAllowListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAllowListResponse
+
+    interface _DeleteCustomDataIdentifierResponse
+      include Smithy::Client::_Response[Types::DeleteCustomDataIdentifierResponse]
+    end
+    def delete_custom_data_identifier: (
+      ?id: String
+    ) -> _DeleteCustomDataIdentifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomDataIdentifierResponse
+
+    interface _DeleteFindingsFilterResponse
+      include Smithy::Client::_Response[Types::DeleteFindingsFilterResponse]
+    end
+    def delete_findings_filter: (
+      ?id: String
+    ) -> _DeleteFindingsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFindingsFilterResponse
+
+    interface _DeleteInvitationsResponse
+      include Smithy::Client::_Response[Types::DeleteInvitationsResponse]
+      def unprocessed_accounts: () -> Array[Types::UnprocessedAccount]?
+    end
+    def delete_invitations: (
+      ?account_ids: Array[String]
+    ) -> _DeleteInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInvitationsResponse
+
+    interface _DeleteMemberResponse
+      include Smithy::Client::_Response[Types::DeleteMemberResponse]
+    end
+    def delete_member: (
+      ?id: String
+    ) -> _DeleteMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemberResponse
+
+    interface _DescribeBucketsResponse
+      include Smithy::Client::_Response[Types::DescribeBucketsResponse]
+      def buckets: () -> Array[Types::BucketMetadata]?
+      def next_token: () -> String?
+    end
+    def describe_buckets: (
+      ?criteria: Hash[String,
+        {
+          eq: Array[String],
+          gt: Integer,
+          gte: untyped,
+          lt: untyped,
+          lte: untyped,
+          neq: untyped,
+          prefix: String
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _DescribeBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBucketsResponse
+
+    interface _DescribeClassificationJobResponse
+      include Smithy::Client::_Response[Types::DescribeClassificationJobResponse]
+      def allow_list_ids: () -> Array[String]?
+      def client_token: () -> String?
+      def created_at: () -> Time?
+      def custom_data_identifier_ids: () -> Array[String]?
+      def description: () -> String?
+      def initial_run: () -> bool?
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def job_status: () -> String?
+      def job_type: () -> String?
+      def last_run_error_status: () -> Types::LastRunErrorStatus?
+      def last_run_time: () -> Time?
+      def managed_data_identifier_ids: () -> Array[String]?
+      def managed_data_identifier_selector: () -> String?
+      def name: () -> String?
+      def s3_job_definition: () -> Types::S3JobDefinition?
+      def sampling_percentage: () -> Integer?
+      def schedule_frequency: () -> Types::JobScheduleFrequency?
+      def statistics: () -> Types::Statistics?
+      def tags: () -> Hash[String, String]?
+      def user_paused_details: () -> Types::UserPausedDetails?
+    end
+    def describe_classification_job: (
+      ?job_id: String
+    ) -> _DescribeClassificationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClassificationJobResponse
+
+    interface _DescribeOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationConfigurationResponse]
+      def auto_enable: () -> bool?
+      def max_account_limit_reached: () -> bool?
+    end
+    def describe_organization_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationConfigurationResponse
+
+    interface _DisableMacieResponse
+      include Smithy::Client::_Response[Types::DisableMacieResponse]
+    end
+    def disable_macie: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableMacieResponse
+
+    interface _DisableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::DisableOrganizationAdminAccountResponse]
+    end
+    def disable_organization_admin_account: (
+      ?admin_account_id: String
+    ) -> _DisableOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationAdminAccountResponse
+
+    interface _DisassociateFromAdministratorAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateFromAdministratorAccountResponse]
+    end
+    def disassociate_from_administrator_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFromAdministratorAccountResponse
+
+    interface _DisassociateFromMasterAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateFromMasterAccountResponse]
+    end
+    def disassociate_from_master_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFromMasterAccountResponse
+
+    interface _DisassociateMemberResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberResponse]
+    end
+    def disassociate_member: (
+      ?id: String
+    ) -> _DisassociateMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberResponse
+
+    interface _EnableMacieResponse
+      include Smithy::Client::_Response[Types::EnableMacieResponse]
+    end
+    def enable_macie: (
+      ?client_token: String,
+      ?finding_publishing_frequency: String,
+      ?status: String
+    ) -> _EnableMacieResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableMacieResponse
+
+    interface _EnableOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::EnableOrganizationAdminAccountResponse]
+    end
+    def enable_organization_admin_account: (
+      ?admin_account_id: String,
+      ?client_token: String
+    ) -> _EnableOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationAdminAccountResponse
+
+    interface _GetAdministratorAccountResponse
+      include Smithy::Client::_Response[Types::GetAdministratorAccountResponse]
+      def administrator: () -> Types::Invitation?
+    end
+    def get_administrator_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdministratorAccountResponse
+
+    interface _GetAllowListResponse
+      include Smithy::Client::_Response[Types::GetAllowListResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def criteria: () -> Types::AllowListCriteria?
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> Types::AllowListStatus?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def get_allow_list: (
+      ?id: String
+    ) -> _GetAllowListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAllowListResponse
+
+    interface _GetAutomatedDiscoveryConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAutomatedDiscoveryConfigurationResponse]
+      def auto_enable_organization_members: () -> String?
+      def classification_scope_id: () -> String?
+      def disabled_at: () -> Time?
+      def first_enabled_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def sensitivity_inspection_template_id: () -> String?
+      def status: () -> String?
+    end
+    def get_automated_discovery_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedDiscoveryConfigurationResponse
+
+    interface _GetBucketStatisticsResponse
+      include Smithy::Client::_Response[Types::GetBucketStatisticsResponse]
+      def bucket_count: () -> Integer?
+      def bucket_count_by_effective_permission: () -> Types::BucketCountByEffectivePermission?
+      def bucket_count_by_encryption_type: () -> Types::BucketCountByEncryptionType?
+      def bucket_count_by_object_encryption_requirement: () -> Types::BucketCountPolicyAllowsUnencryptedObjectUploads?
+      def bucket_count_by_shared_access_type: () -> Types::BucketCountBySharedAccessType?
+      def bucket_statistics_by_sensitivity: () -> Types::BucketStatisticsBySensitivity?
+      def classifiable_object_count: () -> Integer?
+      def classifiable_size_in_bytes: () -> Integer?
+      def last_updated: () -> Time?
+      def object_count: () -> Integer?
+      def size_in_bytes: () -> Integer?
+      def size_in_bytes_compressed: () -> Integer?
+      def unclassifiable_object_count: () -> Types::ObjectLevelStatistics?
+      def unclassifiable_object_size_in_bytes: () -> Types::ObjectLevelStatistics?
+    end
+    def get_bucket_statistics: (
+      ?account_id: String
+    ) -> _GetBucketStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketStatisticsResponse
+
+    interface _GetClassificationExportConfigurationResponse
+      include Smithy::Client::_Response[Types::GetClassificationExportConfigurationResponse]
+      def configuration: () -> Types::ClassificationExportConfiguration?
+    end
+    def get_classification_export_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClassificationExportConfigurationResponse
+
+    interface _GetClassificationScopeResponse
+      include Smithy::Client::_Response[Types::GetClassificationScopeResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def s3: () -> Types::S3ClassificationScope?
+    end
+    def get_classification_scope: (
+      ?id: String
+    ) -> _GetClassificationScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClassificationScopeResponse
+
+    interface _GetCustomDataIdentifierResponse
+      include Smithy::Client::_Response[Types::GetCustomDataIdentifierResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def deleted: () -> bool?
+      def description: () -> String?
+      def id: () -> String?
+      def ignore_words: () -> Array[String]?
+      def keywords: () -> Array[String]?
+      def maximum_match_distance: () -> Integer?
+      def name: () -> String?
+      def regex: () -> String?
+      def severity_levels: () -> Array[Types::SeverityLevel]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_custom_data_identifier: (
+      ?id: String
+    ) -> _GetCustomDataIdentifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomDataIdentifierResponse
+
+    interface _GetFindingStatisticsResponse
+      include Smithy::Client::_Response[Types::GetFindingStatisticsResponse]
+      def counts_by_group: () -> Array[Types::GroupCount]?
+    end
+    def get_finding_statistics: (
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            eq_exact_match: untyped,
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            neq: untyped
+          }
+        ]
+      },
+      ?group_by: String,
+      ?size: Integer,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _GetFindingStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingStatisticsResponse
+
+    interface _GetFindingsResponse
+      include Smithy::Client::_Response[Types::GetFindingsResponse]
+      def findings: () -> Array[Types::Finding]?
+    end
+    def get_findings: (
+      ?finding_ids: Array[String],
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _GetFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsResponse
+
+    interface _GetFindingsFilterResponse
+      include Smithy::Client::_Response[Types::GetFindingsFilterResponse]
+      def action: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def finding_criteria: () -> Types::FindingCriteria?
+      def id: () -> String?
+      def name: () -> String?
+      def position: () -> Integer?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_findings_filter: (
+      ?id: String
+    ) -> _GetFindingsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsFilterResponse
+
+    interface _GetFindingsPublicationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetFindingsPublicationConfigurationResponse]
+      def security_hub_configuration: () -> Types::SecurityHubConfiguration?
+    end
+    def get_findings_publication_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsPublicationConfigurationResponse
+
+    interface _GetInvitationsCountResponse
+      include Smithy::Client::_Response[Types::GetInvitationsCountResponse]
+      def invitations_count: () -> Integer?
+    end
+    def get_invitations_count: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvitationsCountResponse
+
+    interface _GetMacieSessionResponse
+      include Smithy::Client::_Response[Types::GetMacieSessionResponse]
+      def created_at: () -> Time?
+      def finding_publishing_frequency: () -> String?
+      def service_role: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_macie_session: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMacieSessionResponse
+
+    interface _GetMasterAccountResponse
+      include Smithy::Client::_Response[Types::GetMasterAccountResponse]
+      def master: () -> Types::Invitation?
+    end
+    def get_master_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMasterAccountResponse
+
+    interface _GetMemberResponse
+      include Smithy::Client::_Response[Types::GetMemberResponse]
+      def account_id: () -> String?
+      def administrator_account_id: () -> String?
+      def arn: () -> String?
+      def email: () -> String?
+      def invited_at: () -> Time?
+      def master_account_id: () -> String?
+      def relationship_status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def get_member: (
+      ?id: String
+    ) -> _GetMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemberResponse
+
+    interface _GetResourceProfileResponse
+      include Smithy::Client::_Response[Types::GetResourceProfileResponse]
+      def profile_updated_at: () -> Time?
+      def sensitivity_score: () -> Integer?
+      def sensitivity_score_overridden: () -> bool?
+      def statistics: () -> Types::ResourceStatistics?
+    end
+    def get_resource_profile: (
+      ?resource_arn: String
+    ) -> _GetResourceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceProfileResponse
+
+    interface _GetRevealConfigurationResponse
+      include Smithy::Client::_Response[Types::GetRevealConfigurationResponse]
+      def configuration: () -> Types::RevealConfiguration?
+      def retrieval_configuration: () -> Types::RetrievalConfiguration?
+    end
+    def get_reveal_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevealConfigurationResponse
+
+    interface _GetSensitiveDataOccurrencesResponse
+      include Smithy::Client::_Response[Types::GetSensitiveDataOccurrencesResponse]
+      def error: () -> String?
+      def sensitive_data_occurrences: () -> Hash[String, Array[Types::DetectedDataDetails]]?
+      def status: () -> String?
+    end
+    def get_sensitive_data_occurrences: (
+      ?finding_id: String
+    ) -> _GetSensitiveDataOccurrencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSensitiveDataOccurrencesResponse
+
+    interface _GetSensitiveDataOccurrencesAvailabilityResponse
+      include Smithy::Client::_Response[Types::GetSensitiveDataOccurrencesAvailabilityResponse]
+      def code: () -> String?
+      def reasons: () -> Array[String]?
+    end
+    def get_sensitive_data_occurrences_availability: (
+      ?finding_id: String
+    ) -> _GetSensitiveDataOccurrencesAvailabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSensitiveDataOccurrencesAvailabilityResponse
+
+    interface _GetSensitivityInspectionTemplateResponse
+      include Smithy::Client::_Response[Types::GetSensitivityInspectionTemplateResponse]
+      def description: () -> String?
+      def excludes: () -> Types::SensitivityInspectionTemplateExcludes?
+      def includes: () -> Types::SensitivityInspectionTemplateIncludes?
+      def name: () -> String?
+      def sensitivity_inspection_template_id: () -> String?
+    end
+    def get_sensitivity_inspection_template: (
+      ?id: String
+    ) -> _GetSensitivityInspectionTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSensitivityInspectionTemplateResponse
+
+    interface _GetUsageStatisticsResponse
+      include Smithy::Client::_Response[Types::GetUsageStatisticsResponse]
+      def next_token: () -> String?
+      def records: () -> Array[Types::UsageRecord]?
+      def time_range: () -> String?
+    end
+    def get_usage_statistics: (
+      ?filter_by: Array[
+        {
+          comparator: String,
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: {
+        key: String,
+        order_by: String
+      },
+      ?time_range: String
+    ) -> _GetUsageStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsageStatisticsResponse
+
+    interface _GetUsageTotalsResponse
+      include Smithy::Client::_Response[Types::GetUsageTotalsResponse]
+      def time_range: () -> String?
+      def usage_totals: () -> Array[Types::UsageTotal]?
+    end
+    def get_usage_totals: (
+      ?time_range: String
+    ) -> _GetUsageTotalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsageTotalsResponse
+
+    interface _ListAllowListsResponse
+      include Smithy::Client::_Response[Types::ListAllowListsResponse]
+      def allow_lists: () -> Array[Types::AllowListSummary]?
+      def next_token: () -> String?
+    end
+    def list_allow_lists: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAllowListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAllowListsResponse
+
+    interface _ListAutomatedDiscoveryAccountsResponse
+      include Smithy::Client::_Response[Types::ListAutomatedDiscoveryAccountsResponse]
+      def items: () -> Array[Types::AutomatedDiscoveryAccount]?
+      def next_token: () -> String?
+    end
+    def list_automated_discovery_accounts: (
+      ?account_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomatedDiscoveryAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomatedDiscoveryAccountsResponse
+
+    interface _ListClassificationJobsResponse
+      include Smithy::Client::_Response[Types::ListClassificationJobsResponse]
+      def items: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_classification_jobs: (
+      ?filter_criteria: {
+        excludes: Array[
+          {
+            comparator: String,
+            key: String,
+            values: Array[String]
+          }
+        ],
+        includes: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _ListClassificationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClassificationJobsResponse
+
+    interface _ListClassificationScopesResponse
+      include Smithy::Client::_Response[Types::ListClassificationScopesResponse]
+      def classification_scopes: () -> Array[Types::ClassificationScopeSummary]?
+      def next_token: () -> String?
+    end
+    def list_classification_scopes: (
+      ?name: String,
+      ?next_token: String
+    ) -> _ListClassificationScopesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClassificationScopesResponse
+
+    interface _ListCustomDataIdentifiersResponse
+      include Smithy::Client::_Response[Types::ListCustomDataIdentifiersResponse]
+      def items: () -> Array[Types::CustomDataIdentifierSummary]?
+      def next_token: () -> String?
+    end
+    def list_custom_data_identifiers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomDataIdentifiersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomDataIdentifiersResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsResponse]
+      def finding_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_findings: (
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            eq_exact_match: untyped,
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            neq: untyped
+          }
+        ]
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListFindingsFiltersResponse
+      include Smithy::Client::_Response[Types::ListFindingsFiltersResponse]
+      def findings_filter_list_items: () -> Array[Types::FindingsFilterListItem]?
+      def next_token: () -> String?
+    end
+    def list_findings_filters: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFindingsFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsFiltersResponse
+
+    interface _ListInvitationsResponse
+      include Smithy::Client::_Response[Types::ListInvitationsResponse]
+      def invitations: () -> Array[Types::Invitation]?
+      def next_token: () -> String?
+    end
+    def list_invitations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvitationsResponse
+
+    interface _ListManagedDataIdentifiersResponse
+      include Smithy::Client::_Response[Types::ListManagedDataIdentifiersResponse]
+      def items: () -> Array[Types::ManagedDataIdentifierSummary]?
+      def next_token: () -> String?
+    end
+    def list_managed_data_identifiers: (
+      ?next_token: String
+    ) -> _ListManagedDataIdentifiersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedDataIdentifiersResponse
+
+    interface _ListMembersResponse
+      include Smithy::Client::_Response[Types::ListMembersResponse]
+      def members: () -> Array[Types::Member]?
+      def next_token: () -> String?
+    end
+    def list_members: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?only_associated: String
+    ) -> _ListMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersResponse
+
+    interface _ListOrganizationAdminAccountsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationAdminAccountsResponse]
+      def admin_accounts: () -> Array[Types::AdminAccount]?
+      def next_token: () -> String?
+    end
+    def list_organization_admin_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOrganizationAdminAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationAdminAccountsResponse
+
+    interface _ListResourceProfileArtifactsResponse
+      include Smithy::Client::_Response[Types::ListResourceProfileArtifactsResponse]
+      def artifacts: () -> Array[Types::ResourceProfileArtifact]?
+      def next_token: () -> String?
+    end
+    def list_resource_profile_artifacts: (
+      ?next_token: String,
+      ?resource_arn: String
+    ) -> _ListResourceProfileArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceProfileArtifactsResponse
+
+    interface _ListResourceProfileDetectionsResponse
+      include Smithy::Client::_Response[Types::ListResourceProfileDetectionsResponse]
+      def detections: () -> Array[Types::Detection]?
+      def next_token: () -> String?
+    end
+    def list_resource_profile_detections: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_arn: String
+    ) -> _ListResourceProfileDetectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceProfileDetectionsResponse
+
+    interface _ListSensitivityInspectionTemplatesResponse
+      include Smithy::Client::_Response[Types::ListSensitivityInspectionTemplatesResponse]
+      def next_token: () -> String?
+      def sensitivity_inspection_templates: () -> Array[Types::SensitivityInspectionTemplatesEntry]?
+    end
+    def list_sensitivity_inspection_templates: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSensitivityInspectionTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSensitivityInspectionTemplatesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutClassificationExportConfigurationResponse
+      include Smithy::Client::_Response[Types::PutClassificationExportConfigurationResponse]
+      def configuration: () -> Types::ClassificationExportConfiguration?
+    end
+    def put_classification_export_configuration: (
+      ?configuration: {
+        s3_destination: {
+          bucket_name: String,
+          key_prefix: untyped,
+          kms_key_arn: untyped
+        }
+      }
+    ) -> _PutClassificationExportConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutClassificationExportConfigurationResponse
+
+    interface _PutFindingsPublicationConfigurationResponse
+      include Smithy::Client::_Response[Types::PutFindingsPublicationConfigurationResponse]
+    end
+    def put_findings_publication_configuration: (
+      ?client_token: String,
+      ?security_hub_configuration: {
+        publish_classification_findings: bool,
+        publish_policy_findings: untyped
+      }
+    ) -> _PutFindingsPublicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFindingsPublicationConfigurationResponse
+
+    interface _SearchResourcesResponse
+      include Smithy::Client::_Response[Types::SearchResourcesResponse]
+      def matching_resources: () -> Array[Types::MatchingResource]?
+      def next_token: () -> String?
+    end
+    def search_resources: (
+      ?bucket_criteria: {
+        excludes: {
+          and: Array[
+            {
+              simple_criterion: {
+                comparator: String,
+                key: String,
+                values: Array[String]
+              },
+              tag_criterion: {
+                comparator: untyped,
+                tag_values: Array[
+                  {
+                    key: String,
+                    value: untyped
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        includes: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _SearchResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchResourcesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestCustomDataIdentifierResponse
+      include Smithy::Client::_Response[Types::TestCustomDataIdentifierResponse]
+      def match_count: () -> Integer?
+    end
+    def test_custom_data_identifier: (
+      ?ignore_words: Array[String],
+      ?keywords: Array[String],
+      ?maximum_match_distance: Integer,
+      ?regex: String,
+      ?sample_text: String
+    ) -> _TestCustomDataIdentifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestCustomDataIdentifierResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAllowListResponse
+      include Smithy::Client::_Response[Types::UpdateAllowListResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def update_allow_list: (
+      ?criteria: {
+        regex: String,
+        s3_words_list: {
+          bucket_name: String,
+          object_key: String
+        }
+      },
+      ?description: String,
+      ?id: String,
+      ?name: String
+    ) -> _UpdateAllowListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAllowListResponse
+
+    interface _UpdateAutomatedDiscoveryConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAutomatedDiscoveryConfigurationResponse]
+    end
+    def update_automated_discovery_configuration: (
+      ?auto_enable_organization_members: String,
+      ?status: String
+    ) -> _UpdateAutomatedDiscoveryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomatedDiscoveryConfigurationResponse
+
+    interface _UpdateClassificationJobResponse
+      include Smithy::Client::_Response[Types::UpdateClassificationJobResponse]
+    end
+    def update_classification_job: (
+      ?job_id: String,
+      ?job_status: String
+    ) -> _UpdateClassificationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClassificationJobResponse
+
+    interface _UpdateClassificationScopeResponse
+      include Smithy::Client::_Response[Types::UpdateClassificationScopeResponse]
+    end
+    def update_classification_scope: (
+      ?id: String,
+      ?s3: {
+        excludes: {
+          bucket_names: Array[String],
+          operation: String
+        }
+      }
+    ) -> _UpdateClassificationScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClassificationScopeResponse
+
+    interface _UpdateFindingsFilterResponse
+      include Smithy::Client::_Response[Types::UpdateFindingsFilterResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def update_findings_filter: (
+      ?action: String,
+      ?client_token: String,
+      ?description: String,
+      ?finding_criteria: {
+        criterion: Hash[String,
+          {
+            eq: Array[String],
+            eq_exact_match: untyped,
+            gt: Integer,
+            gte: untyped,
+            lt: untyped,
+            lte: untyped,
+            neq: untyped
+          }
+        ]
+      },
+      ?id: String,
+      ?name: String,
+      ?position: Integer
+    ) -> _UpdateFindingsFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFindingsFilterResponse
+
+    interface _UpdateMacieSessionResponse
+      include Smithy::Client::_Response[Types::UpdateMacieSessionResponse]
+    end
+    def update_macie_session: (
+      ?finding_publishing_frequency: String,
+      ?status: String
+    ) -> _UpdateMacieSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMacieSessionResponse
+
+    interface _UpdateMemberSessionResponse
+      include Smithy::Client::_Response[Types::UpdateMemberSessionResponse]
+    end
+    def update_member_session: (
+      ?id: String,
+      ?status: String
+    ) -> _UpdateMemberSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMemberSessionResponse
+
+    interface _UpdateOrganizationConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateOrganizationConfigurationResponse]
+    end
+    def update_organization_configuration: (
+      ?auto_enable: bool
+    ) -> _UpdateOrganizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOrganizationConfigurationResponse
+
+    interface _UpdateResourceProfileResponse
+      include Smithy::Client::_Response[Types::UpdateResourceProfileResponse]
+    end
+    def update_resource_profile: (
+      ?resource_arn: String,
+      ?sensitivity_score_override: Integer
+    ) -> _UpdateResourceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceProfileResponse
+
+    interface _UpdateResourceProfileDetectionsResponse
+      include Smithy::Client::_Response[Types::UpdateResourceProfileDetectionsResponse]
+    end
+    def update_resource_profile_detections: (
+      ?resource_arn: String,
+      ?suppress_data_identifiers: Array[
+        {
+          id: String,
+          type: String
+        }
+      ]
+    ) -> _UpdateResourceProfileDetectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceProfileDetectionsResponse
+
+    interface _UpdateRevealConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateRevealConfigurationResponse]
+      def configuration: () -> Types::RevealConfiguration?
+      def retrieval_configuration: () -> Types::RetrievalConfiguration?
+    end
+    def update_reveal_configuration: (
+      ?configuration: {
+        kms_key_id: String,
+        status: String
+      },
+      ?retrieval_configuration: {
+        retrieval_mode: String,
+        role_name: String
+      }
+    ) -> _UpdateRevealConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRevealConfigurationResponse
+
+    interface _UpdateSensitivityInspectionTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateSensitivityInspectionTemplateResponse]
+    end
+    def update_sensitivity_inspection_template: (
+      ?description: String,
+      ?excludes: {
+        managed_data_identifier_ids: Array[String]
+      },
+      ?id: String,
+      ?includes: {
+        allow_list_ids: Array[String],
+        custom_data_identifier_ids: untyped,
+        managed_data_identifier_ids: untyped
+      }
+    ) -> _UpdateSensitivityInspectionTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSensitivityInspectionTemplateResponse
+  end
+end

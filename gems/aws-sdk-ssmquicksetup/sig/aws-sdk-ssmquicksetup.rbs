@@ -1,0 +1,5 @@
+  module Aws
+    module SSMQuickSetup
+      VERSION: String
+    end
+  end

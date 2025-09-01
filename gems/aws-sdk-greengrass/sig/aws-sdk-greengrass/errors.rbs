@@ -1,0 +1,12 @@
+module Aws::Greengrass
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def error_details: () -> Array[Types::ErrorDetail]?
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def error_details: () -> Array[Types::ErrorDetail]?
+      def message: () -> String?
+    end
+  end
+end

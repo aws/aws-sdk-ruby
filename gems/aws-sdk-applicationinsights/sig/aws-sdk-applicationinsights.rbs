@@ -1,0 +1,5 @@
+  module Aws
+    module ApplicationInsights
+      VERSION: String
+    end
+  end

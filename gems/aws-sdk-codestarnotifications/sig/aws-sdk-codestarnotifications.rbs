@@ -1,0 +1,5 @@
+  module Aws
+    module Codestarnotifications
+      VERSION: String
+    end
+  end

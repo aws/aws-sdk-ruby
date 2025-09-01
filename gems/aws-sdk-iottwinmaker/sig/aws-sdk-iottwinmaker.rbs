@@ -1,0 +1,5 @@
+  module Aws
+    module IoTTwinMaker
+      VERSION: String
+    end
+  end

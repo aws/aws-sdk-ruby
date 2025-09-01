@@ -1,0 +1,256 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::CostandUsageReportService
+  # This module contains a schema composed of shapes used by the client.
+  module Schema
+
+    AWSRegion = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#AWSRegion', name: 'AWSRegion')
+    AdditionalArtifact = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#AdditionalArtifact', name: 'AdditionalArtifact')
+    AdditionalArtifactList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.costandusagereportservice#AdditionalArtifactList', name: 'AdditionalArtifactList')
+    BillingViewArn = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#BillingViewArn', name: 'BillingViewArn', traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}$"})
+    CompressionFormat = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#CompressionFormat', name: 'CompressionFormat')
+    DeleteReportDefinitionRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#DeleteReportDefinitionRequest', name: 'DeleteReportDefinitionRequest')
+    DeleteReportDefinitionResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#DeleteReportDefinitionResponse', name: 'DeleteReportDefinitionResponse')
+    DeleteResponseMessage = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#DeleteResponseMessage', name: 'DeleteResponseMessage')
+    DescribeReportDefinitionsRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#DescribeReportDefinitionsRequest', name: 'DescribeReportDefinitionsRequest')
+    DescribeReportDefinitionsResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#DescribeReportDefinitionsResponse', name: 'DescribeReportDefinitionsResponse')
+    DuplicateReportNameException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#DuplicateReportNameException', name: 'DuplicateReportNameException', traits: {"smithy.api#error" => "client"})
+    ErrorMessage = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#ErrorMessage', name: 'ErrorMessage')
+    GenericString = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#GenericString', name: 'GenericString', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_\\.\\-=]*$"})
+    InternalErrorException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#InternalErrorException', name: 'InternalErrorException', traits: {"smithy.api#error" => "server"})
+    LastDelivery = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#LastDelivery', name: 'LastDelivery', traits: {"smithy.api#length" => {"min" => 16, "max" => 20}, "smithy.api#pattern" => "^[0-9]{8}[T][0-9]{6}([Z]|[+-][0-9]{4})$"})
+    LastStatus = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#LastStatus', name: 'LastStatus')
+    ListTagsForResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
+    MaxResults = Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.costandusagereportservice#MaxResults', name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 5, "max" => 5}})
+    ModifyReportDefinitionRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ModifyReportDefinitionRequest', name: 'ModifyReportDefinitionRequest')
+    ModifyReportDefinitionResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ModifyReportDefinitionResponse', name: 'ModifyReportDefinitionResponse')
+    PutReportDefinitionRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#PutReportDefinitionRequest', name: 'PutReportDefinitionRequest')
+    PutReportDefinitionResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#PutReportDefinitionResponse', name: 'PutReportDefinitionResponse')
+    RefreshClosedReports = Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.costandusagereportservice#RefreshClosedReports', name: 'RefreshClosedReports')
+    ReportDefinition = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ReportDefinition', name: 'ReportDefinition')
+    ReportDefinitionList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.costandusagereportservice#ReportDefinitionList', name: 'ReportDefinitionList')
+    ReportFormat = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#ReportFormat', name: 'ReportFormat')
+    ReportLimitReachedException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ReportLimitReachedException', name: 'ReportLimitReachedException', traits: {"smithy.api#error" => "client"})
+    ReportName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#ReportName', name: 'ReportName', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[0-9A-Za-z!\\-_.*\\'()]+$"})
+    ReportStatus = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ReportStatus', name: 'ReportStatus')
+    ReportVersioning = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#ReportVersioning', name: 'ReportVersioning')
+    ResourceNotFoundException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client"})
+    S3Bucket = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#S3Bucket', name: 'S3Bucket', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_\\.\\-]+$"})
+    S3Prefix = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#S3Prefix', name: 'S3Prefix', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[0-9A-Za-z!\\-_.*\\'()/]*$"})
+    SchemaElement = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#SchemaElement', name: 'SchemaElement')
+    SchemaElementList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.costandusagereportservice#SchemaElementList', name: 'SchemaElementList')
+    Tag = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#Tag', name: 'Tag')
+    TagKey = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => ".*"})
+    TagKeyList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.costandusagereportservice#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    TagList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.costandusagereportservice#TagList', name: 'TagList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    TagResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#TagResourceRequest', name: 'TagResourceRequest')
+    TagResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#TagResourceResponse', name: 'TagResourceResponse')
+    TagValue = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costandusagereportservice#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
+    TimeUnit = Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.costandusagereportservice#TimeUnit', name: 'TimeUnit')
+    UntagResourceRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#UntagResourceRequest', name: 'UntagResourceRequest')
+    UntagResourceResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#UntagResourceResponse', name: 'UntagResourceResponse')
+    ValidationException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costandusagereportservice#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client"})
+
+    AWSRegion.add_member(:cape_town, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CAPE_TOWN', traits: {"smithy.api#enumValue" => "af-south-1"}))
+    AWSRegion.add_member(:hong_kong, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HONG_KONG', traits: {"smithy.api#enumValue" => "ap-east-1"}))
+    AWSRegion.add_member(:mumbai, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MUMBAI', traits: {"smithy.api#enumValue" => "ap-south-1"}))
+    AWSRegion.add_member(:hyderabad, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HYDERABAD', traits: {"smithy.api#enumValue" => "ap-south-2"}))
+    AWSRegion.add_member(:singapore, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SINGAPORE', traits: {"smithy.api#enumValue" => "ap-southeast-1"}))
+    AWSRegion.add_member(:sydney, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SYDNEY', traits: {"smithy.api#enumValue" => "ap-southeast-2"}))
+    AWSRegion.add_member(:jakarta, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'JAKARTA', traits: {"smithy.api#enumValue" => "ap-southeast-3"}))
+    AWSRegion.add_member(:tokyo, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TOKYO', traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
+    AWSRegion.add_member(:seoul, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SEOUL', traits: {"smithy.api#enumValue" => "ap-northeast-2"}))
+    AWSRegion.add_member(:osaka, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OSAKA', traits: {"smithy.api#enumValue" => "ap-northeast-3"}))
+    AWSRegion.add_member(:canada_central, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CANADA_CENTRAL', traits: {"smithy.api#enumValue" => "ca-central-1"}))
+    AWSRegion.add_member(:frankfurt, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FRANKFURT', traits: {"smithy.api#enumValue" => "eu-central-1"}))
+    AWSRegion.add_member(:zurich, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ZURICH', traits: {"smithy.api#enumValue" => "eu-central-2"}))
+    AWSRegion.add_member(:ireland, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IRELAND', traits: {"smithy.api#enumValue" => "eu-west-1"}))
+    AWSRegion.add_member(:london, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LONDON', traits: {"smithy.api#enumValue" => "eu-west-2"}))
+    AWSRegion.add_member(:paris, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PARIS', traits: {"smithy.api#enumValue" => "eu-west-3"}))
+    AWSRegion.add_member(:stockholm, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STOCKHOLM', traits: {"smithy.api#enumValue" => "eu-north-1"}))
+    AWSRegion.add_member(:milano, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MILANO', traits: {"smithy.api#enumValue" => "eu-south-1"}))
+    AWSRegion.add_member(:spain, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SPAIN', traits: {"smithy.api#enumValue" => "eu-south-2"}))
+    AWSRegion.add_member(:uae, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UAE', traits: {"smithy.api#enumValue" => "me-central-1"}))
+    AWSRegion.add_member(:bahrain, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BAHRAIN', traits: {"smithy.api#enumValue" => "me-south-1"}))
+    AWSRegion.add_member(:sao_paulo, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAO_PAULO', traits: {"smithy.api#enumValue" => "sa-east-1"}))
+    AWSRegion.add_member(:us_standard, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'US_STANDARD', traits: {"smithy.api#enumValue" => "us-east-1"}))
+    AWSRegion.add_member(:ohio, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OHIO', traits: {"smithy.api#enumValue" => "us-east-2"}))
+    AWSRegion.add_member(:northern_california, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NORTHERN_CALIFORNIA', traits: {"smithy.api#enumValue" => "us-west-1"}))
+    AWSRegion.add_member(:oregon, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OREGON', traits: {"smithy.api#enumValue" => "us-west-2"}))
+    AWSRegion.add_member(:beijing, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BEIJING', traits: {"smithy.api#enumValue" => "cn-north-1"}))
+    AWSRegion.add_member(:ningxia, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NINGXIA', traits: {"smithy.api#enumValue" => "cn-northwest-1"}))
+    AdditionalArtifact.add_member(:redshift, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REDSHIFT', traits: {"smithy.api#enumValue" => "REDSHIFT"}))
+    AdditionalArtifact.add_member(:quicksight, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'QUICKSIGHT', traits: {"smithy.api#enumValue" => "QUICKSIGHT"}))
+    AdditionalArtifact.add_member(:athena, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ATHENA', traits: {"smithy.api#enumValue" => "ATHENA"}))
+    AdditionalArtifactList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalArtifact)
+    CompressionFormat.add_member(:zip, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ZIP', traits: {"smithy.api#enumValue" => "ZIP"}))
+    CompressionFormat.add_member(:gzip, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'GZIP', traits: {"smithy.api#enumValue" => "GZIP"}))
+    CompressionFormat.add_member(:parquet, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Parquet', traits: {"smithy.api#enumValue" => "Parquet"}))
+    DeleteReportDefinitionRequest.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#documentation" => "<p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>", "smithy.api#required" => {}}))
+    DeleteReportDefinitionRequest.type = Types::DeleteReportDefinitionRequest
+    DeleteReportDefinitionResponse.add_member(:response_message, Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResponseMessage, location_name: 'ResponseMessage'))
+    DeleteReportDefinitionResponse.type = Types::DeleteReportDefinitionResponse
+    DescribeReportDefinitionsRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults'))
+    DescribeReportDefinitionsRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: 'NextToken'))
+    DescribeReportDefinitionsRequest.type = Types::DescribeReportDefinitionsRequest
+    DescribeReportDefinitionsResponse.add_member(:report_definitions, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDefinitionList, location_name: 'ReportDefinitions', traits: {"smithy.api#documentation" => "<p>An Amazon Web Services Cost and Usage Report list owned by the account.</p>"}))
+    DescribeReportDefinitionsResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: 'NextToken'))
+    DescribeReportDefinitionsResponse.type = Types::DescribeReportDefinitionsResponse
+    DuplicateReportNameException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    DuplicateReportNameException.type = Types::DuplicateReportNameException
+    InternalErrorException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    InternalErrorException.type = Types::InternalErrorException
+    LastStatus.add_member(:success, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUCCESS', traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    LastStatus.add_member(:error_permissions, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERROR_PERMISSIONS', traits: {"smithy.api#enumValue" => "ERROR_PERMISSIONS"}))
+    LastStatus.add_member(:error_no_bucket, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERROR_NO_BUCKET', traits: {"smithy.api#enumValue" => "ERROR_NO_BUCKET"}))
+    ListTagsForResourceRequest.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#documentation" => "<p>The report name of the report definition that tags are to be returned for.</p>", "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
+    ListTagsForResourceResponse.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"smithy.api#documentation" => "<p>The tags assigned to the report definition resource.</p>"}))
+    ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ModifyReportDefinitionRequest.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#required" => {}}))
+    ModifyReportDefinitionRequest.add_member(:report_definition, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDefinition, location_name: 'ReportDefinition', traits: {"smithy.api#required" => {}}))
+    ModifyReportDefinitionRequest.type = Types::ModifyReportDefinitionRequest
+    ModifyReportDefinitionResponse.type = Types::ModifyReportDefinitionResponse
+    PutReportDefinitionRequest.add_member(:report_definition, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDefinition, location_name: 'ReportDefinition', traits: {"smithy.api#documentation" => "<p>Represents the output of the PutReportDefinition operation. The content consists of the detailed \n      metadata and data file information. </p>", "smithy.api#required" => {}}))
+    PutReportDefinitionRequest.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"smithy.api#documentation" => "<p>The tags to be assigned to the report definition resource.</p>"}))
+    PutReportDefinitionRequest.type = Types::PutReportDefinitionRequest
+    PutReportDefinitionResponse.type = Types::PutReportDefinitionResponse
+    ReportDefinition.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:time_unit, Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnit, location_name: 'TimeUnit', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:format, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFormat, location_name: 'Format', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:compression, Smithy::Schema::Shapes::ShapeRef.new(shape: CompressionFormat, location_name: 'Compression', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:additional_schema_elements, Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaElementList, location_name: 'AdditionalSchemaElements', traits: {"smithy.api#documentation" => "<p>A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs. </p>", "smithy.api#required" => {}}))
+    ReportDefinition.add_member(:s3_bucket, Smithy::Schema::Shapes::ShapeRef.new(shape: S3Bucket, location_name: 'S3Bucket', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:s3_prefix, Smithy::Schema::Shapes::ShapeRef.new(shape: S3Prefix, location_name: 'S3Prefix', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:s3_region, Smithy::Schema::Shapes::ShapeRef.new(shape: AWSRegion, location_name: 'S3Region', traits: {"smithy.api#required" => {}}))
+    ReportDefinition.add_member(:additional_artifacts, Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalArtifactList, location_name: 'AdditionalArtifacts', traits: {"smithy.api#documentation" => "<p>A list of manifests that you want Amazon Web Services to create for this report.</p>"}))
+    ReportDefinition.add_member(:refresh_closed_reports, Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshClosedReports, location_name: 'RefreshClosedReports', traits: {"smithy.api#documentation" => "<p>Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to \n      previous months. These charges can include refunds, credits, or support fees.</p>"}))
+    ReportDefinition.add_member(:report_versioning, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportVersioning, location_name: 'ReportVersioning', traits: {"smithy.api#documentation" => "<p>Whether you want Amazon Web Services to overwrite the previous version of each report or \n         to deliver the report in addition to the previous versions.</p>"}))
+    ReportDefinition.add_member(:billing_view_arn, Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'BillingViewArn', traits: {"smithy.api#documentation" => "<p>\n      The Amazon resource name of the billing view. The <code>BillingViewArn</code> is needed to create Amazon Web Services Cost and Usage Report for each billing group maintained in the Amazon Web Services Billing Conductor service. The <code>BillingViewArn</code> for a billing group can be constructed as: <code>arn:aws:billing::payer-account-id:billingview/billing-group-primary-account-id</code>\n         </p>"}))
+    ReportDefinition.add_member(:report_status, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportStatus, location_name: 'ReportStatus', traits: {"smithy.api#documentation" => "<p>The status of the report.</p>"}))
+    ReportDefinition.type = Types::ReportDefinition
+    ReportDefinitionList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDefinition)
+    ReportFormat.add_member(:csv, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CSV', traits: {"smithy.api#enumValue" => "textORcsv"}))
+    ReportFormat.add_member(:parquet, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Parquet', traits: {"smithy.api#enumValue" => "Parquet"}))
+    ReportLimitReachedException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    ReportLimitReachedException.type = Types::ReportLimitReachedException
+    ReportStatus.add_member(:last_delivery, Smithy::Schema::Shapes::ShapeRef.new(shape: LastDelivery, location_name: 'lastDelivery', traits: {"smithy.api#documentation" => "<p>A timestamp that gives the date of a report delivery.</p>"}))
+    ReportStatus.add_member(:last_status, Smithy::Schema::Shapes::ShapeRef.new(shape: LastStatus, location_name: 'lastStatus', traits: {"smithy.api#documentation" => "<p>An enum that gives the status of a report delivery.</p>"}))
+    ReportStatus.type = Types::ReportStatus
+    ReportVersioning.add_member(:create_new_report, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_NEW_REPORT', traits: {"smithy.api#enumValue" => "CREATE_NEW_REPORT"}))
+    ReportVersioning.add_member(:overwrite_report, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OVERWRITE_REPORT', traits: {"smithy.api#enumValue" => "OVERWRITE_REPORT"}))
+    ResourceNotFoundException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    ResourceNotFoundException.type = Types::ResourceNotFoundException
+    SchemaElement.add_member(:resources, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RESOURCES', traits: {"smithy.api#enumValue" => "RESOURCES"}))
+    SchemaElement.add_member(:split_cost_allocation_data, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SPLIT_COST_ALLOCATION_DATA', traits: {"smithy.api#enumValue" => "SPLIT_COST_ALLOCATION_DATA"}))
+    SchemaElement.add_member(:manual_discount_compatibility, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MANUAL_DISCOUNT_COMPATIBILITY', traits: {"smithy.api#enumValue" => "MANUAL_DISCOUNT_COMPATIBILITY"}))
+    SchemaElementList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaElement)
+    Tag.add_member(:key, Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: 'Key', traits: {"smithy.api#documentation" => "<p>The key of the tag. Tag keys are case sensitive. Each report definition can only have up\n      to one tag with the same key. If you try to add an existing tag with the same key, the\n      existing tag value will be updated to the new value.</p>", "smithy.api#required" => {}}))
+    Tag.add_member(:value, Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: 'Value', traits: {"smithy.api#documentation" => "<p>The value of the tag. Tag values are case-sensitive. This can be an empty string.</p>", "smithy.api#required" => {}}))
+    Tag.type = Types::Tag
+    TagKeyList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
+    TagResourceRequest.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#documentation" => "<p>The report name of the report definition that tags are to be associated with.</p>", "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"smithy.api#documentation" => "<p>The tags to be assigned to the report definition resource.</p>", "smithy.api#required" => {}}))
+    TagResourceRequest.type = Types::TagResourceRequest
+    TagResourceResponse.type = Types::TagResourceResponse
+    TimeUnit.add_member(:hourly, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HOURLY', traits: {"smithy.api#enumValue" => "HOURLY"}))
+    TimeUnit.add_member(:daily, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DAILY', traits: {"smithy.api#enumValue" => "DAILY"}))
+    TimeUnit.add_member(:monthly, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MONTHLY', traits: {"smithy.api#enumValue" => "MONTHLY"}))
+    UntagResourceRequest.add_member(:report_name, Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: 'ReportName', traits: {"smithy.api#documentation" => "<p>The report name of the report definition that tags are to be disassociated\n      from.</p>", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'TagKeys', traits: {"smithy.api#documentation" => "<p>The tags to be disassociated from the report definition resource.</p>", "smithy.api#required" => {}}))
+    UntagResourceRequest.type = Types::UntagResourceRequest
+    UntagResourceResponse.type = Types::UntagResourceResponse
+    ValidationException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    ValidationException.type = Types::ValidationException
+
+    AWSOrigamiServiceGatewayService = Smithy::Schema::Shapes::ServiceShape.new do |service|
+      service.id = "com.amazonaws.costandusagereportservice#AWSOrigamiServiceGatewayService"
+      service.name = "AWSOrigamiServiceGatewayService"
+      service.version = "2017-01-06"
+      service.traits = {"aws.api#service" => {"sdkId" => "Cost and Usage Report Service", "arnNamespace" => "cur", "cloudFormationName" => "CostandUsageReportService", "cloudTrailEventSource" => "costandusagereportservice.amazonaws.com", "docId" => "cur-2017-01-06", "endpointPrefix" => "cur"}, "aws.auth#sigv4" => {"name" => "cur"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Cost and Usage Report Service"}
+      service.add_operation(:delete_report_definition, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#DeleteReportDefinition"
+        operation.name = "DeleteReportDefinition"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReportDefinitionRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReportDefinitionResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_report_definitions, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#DescribeReportDefinitions"
+        operation.name = "DescribeReportDefinitions"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReportDefinitionsRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReportDefinitionsResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.traits = {"smithy.test#smokeTests" => [{"id" => "DescribeReportDefinitionsSuccess", "params" => {}, "vendorParams" => {"region" => "us-east-1"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
+        operation[:paginator] = Paginators::DescribeReportDefinitions.new
+      end)
+      service.add_operation(:list_tags_for_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#ListTagsForResource"
+        operation.name = "ListTagsForResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:modify_report_definition, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#ModifyReportDefinition"
+        operation.name = "ModifyReportDefinition"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyReportDefinitionRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyReportDefinitionResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:put_report_definition, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#PutReportDefinition"
+        operation.name = "PutReportDefinition"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: PutReportDefinitionRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: PutReportDefinitionResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateReportNameException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ReportLimitReachedException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:tag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#TagResource"
+        operation.name = "TagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:untag_resource, Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costandusagereportservice#UntagResource"
+        operation.name = "UntagResource"
+        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+
+    end
+
+    class << self
+      def type_registry
+        return @type_registry if @type_registry
+
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = Smithy::Schema::TypeRegistry.new(shapes)
+      end
+    end
+  end
+end

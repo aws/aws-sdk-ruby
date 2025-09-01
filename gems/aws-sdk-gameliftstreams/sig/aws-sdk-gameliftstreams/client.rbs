@@ -1,0 +1,418 @@
+module Aws::GameLiftStreams
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GameLiftStreams::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddStreamGroupLocationsResponse
+      include Smithy::Client::_Response[Types::AddStreamGroupLocationsOutput]
+      def identifier: () -> String?
+      def locations: () -> Array[Types::LocationState]?
+    end
+    def add_stream_group_locations: (
+      ?identifier: String,
+      ?location_configurations: Array[
+        {
+          location_name: String,
+          always_on_capacity: Integer,
+          on_demand_capacity: Integer
+        }
+      ]
+    ) -> _AddStreamGroupLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddStreamGroupLocationsResponse
+
+    interface _AssociateApplicationsResponse
+      include Smithy::Client::_Response[Types::AssociateApplicationsOutput]
+      def arn: () -> String?
+      def application_arns: () -> Array[String]?
+    end
+    def associate_applications: (
+      ?identifier: String,
+      ?application_identifiers: Array[String]
+    ) -> _AssociateApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApplicationsResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def runtime_environment: () -> Types::RuntimeEnvironment?
+      def executable_path: () -> String?
+      def application_log_paths: () -> Array[String]?
+      def application_log_output_uri: () -> String?
+      def application_source_uri: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def replication_statuses: () -> Array[Types::ReplicationStatus]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def associated_stream_groups: () -> Array[String]?
+    end
+    def create_application: (
+      ?description: String,
+      ?runtime_environment: {
+        type: String,
+        version: String
+      },
+      ?executable_path: String,
+      ?application_source_uri: String,
+      ?application_log_paths: Array[String],
+      ?application_log_output_uri: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateStreamGroupResponse
+      include Smithy::Client::_Response[Types::CreateStreamGroupOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def default_application: () -> Types::DefaultApplication?
+      def location_states: () -> Array[Types::LocationState]?
+      def stream_class: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def associated_applications: () -> Array[String]?
+    end
+    def create_stream_group: (
+      ?description: String,
+      ?stream_class: String,
+      ?default_application_identifier: String,
+      ?location_configurations: Array[
+        {
+          location_name: String,
+          always_on_capacity: Integer,
+          on_demand_capacity: Integer
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamGroupResponse
+
+    interface _CreateStreamSessionConnectionResponse
+      include Smithy::Client::_Response[Types::CreateStreamSessionConnectionOutput]
+      def signal_response: () -> String?
+    end
+    def create_stream_session_connection: (
+      ?client_token: String,
+      ?identifier: String,
+      ?stream_session_identifier: String,
+      ?signal_request: String
+    ) -> _CreateStreamSessionConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamSessionConnectionResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_application: (
+      ?identifier: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteStreamGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_stream_group: (
+      ?identifier: String
+    ) -> _DeleteStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamGroupResponse
+
+    interface _DisassociateApplicationsResponse
+      include Smithy::Client::_Response[Types::DisassociateApplicationsOutput]
+      def arn: () -> String?
+      def application_arns: () -> Array[String]?
+    end
+    def disassociate_applications: (
+      ?identifier: String,
+      ?application_identifiers: Array[String]
+    ) -> _DisassociateApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApplicationsResponse
+
+    interface _ExportStreamSessionFilesResponse
+      include Smithy::Client::_Response[Types::ExportStreamSessionFilesOutput]
+    end
+    def export_stream_session_files: (
+      ?identifier: String,
+      ?stream_session_identifier: String,
+      ?output_uri: String
+    ) -> _ExportStreamSessionFilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportStreamSessionFilesResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def runtime_environment: () -> Types::RuntimeEnvironment?
+      def executable_path: () -> String?
+      def application_log_paths: () -> Array[String]?
+      def application_log_output_uri: () -> String?
+      def application_source_uri: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def replication_statuses: () -> Array[Types::ReplicationStatus]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def associated_stream_groups: () -> Array[String]?
+    end
+    def get_application: (
+      ?identifier: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetStreamGroupResponse
+      include Smithy::Client::_Response[Types::GetStreamGroupOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def default_application: () -> Types::DefaultApplication?
+      def location_states: () -> Array[Types::LocationState]?
+      def stream_class: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def associated_applications: () -> Array[String]?
+    end
+    def get_stream_group: (
+      ?identifier: String
+    ) -> _GetStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamGroupResponse
+
+    interface _GetStreamSessionResponse
+      include Smithy::Client::_Response[Types::GetStreamSessionOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def stream_group_id: () -> String?
+      def user_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def protocol: () -> String?
+      def location: () -> String?
+      def signal_request: () -> String?
+      def signal_response: () -> String?
+      def connection_timeout_seconds: () -> Integer?
+      def session_length_seconds: () -> Integer?
+      def additional_launch_args: () -> Array[String]?
+      def additional_environment_variables: () -> Hash[String, String]?
+      def log_file_location_uri: () -> String?
+      def web_sdk_protocol_url: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def application_arn: () -> String?
+      def export_files_metadata: () -> Types::ExportFilesMetadata?
+    end
+    def get_stream_session: (
+      ?identifier: String,
+      ?stream_session_identifier: String
+    ) -> _GetStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamSessionResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOutput]
+      def items: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListStreamGroupsResponse
+      include Smithy::Client::_Response[Types::ListStreamGroupsOutput]
+      def items: () -> Array[Types::StreamGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamGroupsResponse
+
+    interface _ListStreamSessionsResponse
+      include Smithy::Client::_Response[Types::ListStreamSessionsOutput]
+      def items: () -> Array[Types::StreamSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_sessions: (
+      ?status: String,
+      ?export_files_status: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?identifier: String
+    ) -> _ListStreamSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamSessionsResponse
+
+    interface _ListStreamSessionsByAccountResponse
+      include Smithy::Client::_Response[Types::ListStreamSessionsByAccountOutput]
+      def items: () -> Array[Types::StreamSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_sessions_by_account: (
+      ?status: String,
+      ?export_files_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamSessionsByAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamSessionsByAccountResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RemoveStreamGroupLocationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_stream_group_locations: (
+      ?identifier: String,
+      ?locations: Array[String]
+    ) -> _RemoveStreamGroupLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveStreamGroupLocationsResponse
+
+    interface _StartStreamSessionResponse
+      include Smithy::Client::_Response[Types::StartStreamSessionOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def stream_group_id: () -> String?
+      def user_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def protocol: () -> String?
+      def location: () -> String?
+      def signal_request: () -> String?
+      def signal_response: () -> String?
+      def connection_timeout_seconds: () -> Integer?
+      def session_length_seconds: () -> Integer?
+      def additional_launch_args: () -> Array[String]?
+      def additional_environment_variables: () -> Hash[String, String]?
+      def log_file_location_uri: () -> String?
+      def web_sdk_protocol_url: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def application_arn: () -> String?
+      def export_files_metadata: () -> Types::ExportFilesMetadata?
+    end
+    def start_stream_session: (
+      ?client_token: String,
+      ?description: String,
+      ?identifier: String,
+      ?protocol: String,
+      ?signal_request: String,
+      ?application_identifier: String,
+      ?user_id: String,
+      ?locations: Array[String],
+      ?connection_timeout_seconds: Integer,
+      ?session_length_seconds: Integer,
+      ?additional_launch_args: Array[String],
+      ?additional_environment_variables: Hash[String, String]
+    ) -> _StartStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamSessionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateStreamSessionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def terminate_stream_session: (
+      ?identifier: String,
+      ?stream_session_identifier: String
+    ) -> _TerminateStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateStreamSessionResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def runtime_environment: () -> Types::RuntimeEnvironment?
+      def executable_path: () -> String?
+      def application_log_paths: () -> Array[String]?
+      def application_log_output_uri: () -> String?
+      def application_source_uri: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def replication_statuses: () -> Array[Types::ReplicationStatus]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def associated_stream_groups: () -> Array[String]?
+    end
+    def update_application: (
+      ?identifier: String,
+      ?description: String,
+      ?application_log_paths: Array[String],
+      ?application_log_output_uri: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateStreamGroupResponse
+      include Smithy::Client::_Response[Types::UpdateStreamGroupOutput]
+      def arn: () -> String?
+      def description: () -> String?
+      def default_application: () -> Types::DefaultApplication?
+      def location_states: () -> Array[Types::LocationState]?
+      def stream_class: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_updated_at: () -> Time?
+      def created_at: () -> Time?
+      def associated_applications: () -> Array[String]?
+    end
+    def update_stream_group: (
+      ?identifier: String,
+      ?location_configurations: Array[
+        {
+          location_name: String,
+          always_on_capacity: Integer,
+          on_demand_capacity: Integer
+        }
+      ],
+      ?description: String
+    ) -> _UpdateStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamGroupResponse
+  end
+end

@@ -1,0 +1,4021 @@
+module Aws::PinpointSMSVoiceV2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class AccountAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class AccountLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?used: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor used: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class AssociateOriginationIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?origination_identity: String,
+        ?iso_country_code: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateOriginationIdentityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?iso_country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+    end
+
+    class AssociateProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor configuration_set_name: String?
+    end
+
+    class AssociateProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+    end
+
+    class CloudWatchLogsDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor log_group_arn: String?
+    end
+
+    class ConfigurationSetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ConfigurationSetInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?event_destinations: Array[Types::EventDestination],
+        ?default_message_type: String,
+        ?default_sender_id: String,
+        ?default_message_feedback_enabled: bool,
+        ?created_timestamp: Time,
+        ?protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destinations: Array[Types::EventDestination]?
+      attr_accessor default_message_type: String?
+      attr_accessor default_sender_id: String?
+      attr_accessor default_message_feedback_enabled: bool?
+      attr_accessor created_timestamp: Time?
+      attr_accessor protect_configuration_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class CreateConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateConfigurationSetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class CreateEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+        ?matching_event_types: Array[String],
+        ?cloud_watch_logs_destination: Types::CloudWatchLogsDestination,
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?sns_destination: Types::SnsDestination,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor sns_destination: Types::SnsDestination?
+      attr_accessor client_token: String?
+    end
+
+    class CreateEventDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?event_destination: Types::EventDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination: Types::EventDestination?
+    end
+
+    class CreateOptOutListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_name: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateOptOutListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class CreatePoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity: String,
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreatePoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?status: String,
+        ?message_type: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?shared_routes_enabled: bool,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor status: String?
+      attr_accessor message_type: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor shared_routes_enabled: bool?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class CreateProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?created_timestamp: Time,
+        ?account_default: bool,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor account_default: bool?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRegistrationAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class CreateRegistrationAssociationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_type: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?iso_country_code: String,
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor phone_number: String?
+    end
+
+    class CreateRegistrationAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_body: String,
+        ?attachment_url: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_body: String?
+      attr_accessor attachment_url: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRegistrationAttachmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachment_arn: String,
+        ?registration_attachment_id: String,
+        ?attachment_status: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachment_arn: String?
+      attr_accessor registration_attachment_id: String?
+      attr_accessor attachment_status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class CreateRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRegistrationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_type: String,
+        ?registration_status: String,
+        ?current_version_number: Integer,
+        ?additional_attributes: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor registration_status: String?
+      attr_accessor current_version_number: Integer?
+      attr_accessor additional_attributes: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class CreateRegistrationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+    end
+
+    class CreateRegistrationVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?registration_version_status: String,
+        ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor registration_version_status: String?
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
+    end
+
+    class CreateVerifiedDestinationNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateVerifiedDestinationNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_arn: String,
+        ?verified_destination_number_id: String,
+        ?destination_phone_number: String,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_arn: String?
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteAccountDefaultProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAccountDefaultProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_protect_configuration_arn: String,
+        ?default_protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_protect_configuration_arn: String?
+      attr_accessor default_protect_configuration_id: String?
+    end
+
+    class DeleteConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DeleteConfigurationSetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?event_destinations: Array[Types::EventDestination],
+        ?default_message_type: String,
+        ?default_sender_id: String,
+        ?default_message_feedback_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destinations: Array[Types::EventDestination]?
+      attr_accessor default_message_type: String?
+      attr_accessor default_sender_id: String?
+      attr_accessor default_message_feedback_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteDefaultMessageTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DeleteDefaultMessageTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?message_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_type: String?
+    end
+
+    class DeleteDefaultSenderIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DeleteDefaultSenderIdResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?sender_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor sender_id: String?
+    end
+
+    class DeleteEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+    end
+
+    class DeleteEventDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?event_destination: Types::EventDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination: Types::EventDestination?
+    end
+
+    class DeleteKeywordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity: String,
+        ?keyword: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity: String?
+      attr_accessor keyword: String?
+    end
+
+    class DeleteKeywordResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?keyword: String,
+        ?keyword_message: String,
+        ?keyword_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor keyword: String?
+      attr_accessor keyword_message: String?
+      attr_accessor keyword_action: String?
+    end
+
+    class DeleteMediaMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMediaMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class DeleteOptOutListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_name: String?
+    end
+
+    class DeleteOptOutListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteOptedOutNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_name: String,
+        ?opted_out_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_number: String?
+    end
+
+    class DeleteOptedOutNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?opted_out_number: String,
+        ?opted_out_timestamp: Time,
+        ?end_user_opted_out: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_number: String?
+      attr_accessor opted_out_timestamp: Time?
+      attr_accessor end_user_opted_out: bool?
+    end
+
+    class DeletePoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+    end
+
+    class DeletePoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?status: String,
+        ?message_type: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?shared_routes_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor status: String?
+      attr_accessor message_type: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor shared_routes_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+    end
+
+    class DeleteProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?created_timestamp: Time,
+        ?account_default: bool,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor account_default: bool?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class DeleteProtectConfigurationRuleSetNumberOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?destination_phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+    end
+
+    class DeleteProtectConfigurationRuleSetNumberOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?destination_phone_number: String,
+        ?created_timestamp: Time,
+        ?action: String,
+        ?iso_country_code: String,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor action: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class DeleteRegistrationAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachment_id: String?
+    end
+
+    class DeleteRegistrationAttachmentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachment_arn: String,
+        ?registration_attachment_id: String,
+        ?attachment_status: String,
+        ?attachment_upload_error_reason: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachment_arn: String?
+      attr_accessor registration_attachment_id: String?
+      attr_accessor attachment_status: String?
+      attr_accessor attachment_upload_error_reason: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteRegistrationFieldValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?field_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor field_path: String?
+    end
+
+    class DeleteRegistrationFieldValueResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?field_path: String,
+        ?select_choices: Array[String],
+        ?text_value: String,
+        ?registration_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor field_path: String?
+      attr_accessor select_choices: Array[String]?
+      attr_accessor text_value: String?
+      attr_accessor registration_attachment_id: String?
+    end
+
+    class DeleteRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+    end
+
+    class DeleteRegistrationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_type: String,
+        ?registration_status: String,
+        ?current_version_number: Integer,
+        ?approved_version_number: Integer,
+        ?latest_denied_version_number: Integer,
+        ?additional_attributes: Hash[String, String],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor registration_status: String?
+      attr_accessor current_version_number: Integer?
+      attr_accessor approved_version_number: Integer?
+      attr_accessor latest_denied_version_number: Integer?
+      attr_accessor additional_attributes: Hash[String, String]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteTextMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTextMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class DeleteVerifiedDestinationNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_id: String?
+    end
+
+    class DeleteVerifiedDestinationNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_arn: String,
+        ?verified_destination_number_id: String,
+        ?destination_phone_number: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_arn: String?
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteVoiceMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVoiceMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class DescribeAccountAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAccountAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_attributes: Array[Types::AccountAttribute],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_attributes: Array[Types::AccountAttribute]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAccountLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeAccountLimitsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_limits: Array[Types::AccountLimit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_limits: Array[Types::AccountLimit]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConfigurationSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_names: Array[String],
+        ?filters: Array[Types::ConfigurationSetFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_names: Array[String]?
+      attr_accessor filters: Array[Types::ConfigurationSetFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeConfigurationSetsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_sets: Array[Types::ConfigurationSetInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_sets: Array[Types::ConfigurationSetInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeKeywordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity: String,
+        ?keywords: Array[String],
+        ?filters: Array[Types::KeywordFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity: String?
+      attr_accessor keywords: Array[String]?
+      attr_accessor filters: Array[Types::KeywordFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeKeywordsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?keywords: Array[Types::KeywordInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor keywords: Array[Types::KeywordInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOptOutListsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_names: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_names: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor owner: String?
+    end
+
+    class DescribeOptOutListsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_lists: Array[Types::OptOutListInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_lists: Array[Types::OptOutListInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeOptedOutNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_name: String,
+        ?opted_out_numbers: Array[String],
+        ?filters: Array[Types::OptedOutFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_numbers: Array[String]?
+      attr_accessor filters: Array[Types::OptedOutFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeOptedOutNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?opted_out_numbers: Array[Types::OptedOutNumberInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_numbers: Array[Types::OptedOutNumberInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_ids: Array[String],
+        ?filters: Array[Types::PhoneNumberFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_ids: Array[String]?
+      attr_accessor filters: Array[Types::PhoneNumberFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor owner: String?
+    end
+
+    class DescribePhoneNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_numbers: Array[Types::PhoneNumberInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_numbers: Array[Types::PhoneNumberInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePoolsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_ids: Array[String],
+        ?filters: Array[Types::PoolFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_ids: Array[String]?
+      attr_accessor filters: Array[Types::PoolFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor owner: String?
+    end
+
+    class DescribePoolsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pools: Array[Types::PoolInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pools: Array[Types::PoolInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeProtectConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_ids: Array[String],
+        ?filters: Array[Types::ProtectConfigurationFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_ids: Array[String]?
+      attr_accessor filters: Array[Types::ProtectConfigurationFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeProtectConfigurationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configurations: Array[Types::ProtectConfigurationInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configurations: Array[Types::ProtectConfigurationInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachment_ids: Array[String],
+        ?filters: Array[Types::RegistrationAttachmentFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachment_ids: Array[String]?
+      attr_accessor filters: Array[Types::RegistrationAttachmentFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationAttachmentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachments: Array[Types::RegistrationAttachmentsInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachments: Array[Types::RegistrationAttachmentsInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationFieldDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?section_path: String,
+        ?field_paths: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor section_path: String?
+      attr_accessor field_paths: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationFieldDefinitionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?registration_field_definitions: Array[Types::RegistrationFieldDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor registration_field_definitions: Array[Types::RegistrationFieldDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationFieldValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?section_path: String,
+        ?field_paths: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor section_path: String?
+      attr_accessor field_paths: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationFieldValuesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?registration_field_values: Array[Types::RegistrationFieldValueInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor registration_field_values: Array[Types::RegistrationFieldValueInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationSectionDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?section_paths: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor section_paths: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationSectionDefinitionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?registration_section_definitions: Array[Types::RegistrationSectionDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor registration_section_definitions: Array[Types::RegistrationSectionDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationTypeDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_types: Array[String],
+        ?filters: Array[Types::RegistrationTypeFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_types: Array[String]?
+      attr_accessor filters: Array[Types::RegistrationTypeFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationTypeDefinitionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type_definitions: Array[Types::RegistrationTypeDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type_definitions: Array[Types::RegistrationTypeDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?version_numbers: Array[Integer],
+        ?filters: Array[Types::RegistrationVersionFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor version_numbers: Array[Integer]?
+      attr_accessor filters: Array[Types::RegistrationVersionFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_versions: Array[Types::RegistrationVersionInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_versions: Array[Types::RegistrationVersionInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRegistrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_ids: Array[String],
+        ?filters: Array[Types::RegistrationFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_ids: Array[String]?
+      attr_accessor filters: Array[Types::RegistrationFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRegistrationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registrations: Array[Types::RegistrationInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registrations: Array[Types::RegistrationInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSenderIdsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_ids: Array[Types::SenderIdAndCountry],
+        ?filters: Array[Types::SenderIdFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_ids: Array[Types::SenderIdAndCountry]?
+      attr_accessor filters: Array[Types::SenderIdFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor owner: String?
+    end
+
+    class DescribeSenderIdsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_ids: Array[Types::SenderIdInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_ids: Array[Types::SenderIdInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSpendLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeSpendLimitsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spend_limits: Array[Types::SpendLimit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spend_limits: Array[Types::SpendLimit]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeVerifiedDestinationNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_ids: Array[String],
+        ?destination_phone_numbers: Array[String],
+        ?filters: Array[Types::VerifiedDestinationNumberFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_ids: Array[String]?
+      attr_accessor destination_phone_numbers: Array[String]?
+      attr_accessor filters: Array[Types::VerifiedDestinationNumberFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeVerifiedDestinationNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_numbers: Array[Types::VerifiedDestinationNumberInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_numbers: Array[Types::VerifiedDestinationNumberInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateOriginationIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?origination_identity: String,
+        ?iso_country_code: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateOriginationIdentityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?iso_country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+    end
+
+    class DisassociateProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?configuration_set_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor configuration_set_name: String?
+    end
+
+    class DisassociateProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+    end
+
+    class DiscardRegistrationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+    end
+
+    class DiscardRegistrationVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?registration_version_status: String,
+        ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor registration_version_status: String?
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
+    end
+
+    class EventDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_destination_name: String,
+        ?enabled: bool,
+        ?matching_event_types: Array[String],
+        ?cloud_watch_logs_destination: Types::CloudWatchLogsDestination,
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?sns_destination: Types::SnsDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_destination_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor sns_destination: Types::SnsDestination?
+    end
+
+    class GetProtectConfigurationCountryRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?number_capability: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor number_capability: String?
+    end
+
+    class GetProtectConfigurationCountryRuleSetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?number_capability: String,
+        ?country_rule_set: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor number_capability: String?
+      attr_accessor country_rule_set: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation]?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class KeywordFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class KeywordInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyword: String,
+        ?keyword_message: String,
+        ?keyword_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyword: String?
+      attr_accessor keyword_message: String?
+      attr_accessor keyword_action: String?
+    end
+
+    class KinesisFirehoseDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iam_role_arn: String,
+        ?delivery_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iam_role_arn: String?
+      attr_accessor delivery_stream_arn: String?
+    end
+
+    class ListPoolOriginationIdentitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?filters: Array[Types::PoolOriginationIdentitiesFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor filters: Array[Types::PoolOriginationIdentitiesFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPoolOriginationIdentitiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?origination_identities: Array[Types::OriginationIdentityMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor origination_identities: Array[Types::OriginationIdentityMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProtectConfigurationRuleSetNumberOverridesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?filters: Array[Types::ProtectConfigurationRuleSetNumberOverrideFilterItem],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor filters: Array[Types::ProtectConfigurationRuleSetNumberOverrideFilterItem]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProtectConfigurationRuleSetNumberOverridesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?rule_set_number_overrides: Array[Types::ProtectConfigurationRuleSetNumberOverride],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor rule_set_number_overrides: Array[Types::ProtectConfigurationRuleSetNumberOverride]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegistrationAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?filters: Array[Types::RegistrationAssociationFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor filters: Array[Types::RegistrationAssociationFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRegistrationAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_type: String,
+        ?registration_associations: Array[Types::RegistrationAssociationMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor registration_associations: Array[Types::RegistrationAssociationMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class OptOutListInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class OptedOutFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class OptedOutNumberInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opted_out_number: String,
+        ?opted_out_timestamp: Time,
+        ?end_user_opted_out: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opted_out_number: String?
+      attr_accessor opted_out_timestamp: Time?
+      attr_accessor end_user_opted_out: bool?
+    end
+
+    class OriginationIdentityMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?iso_country_code: String,
+        ?number_capabilities: Array[String],
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor phone_number: String?
+    end
+
+    class PhoneNumberFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class PhoneNumberInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_arn: String,
+        ?phone_number_id: String,
+        ?phone_number: String,
+        ?status: String,
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?monthly_leasing_price: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?deletion_protection_enabled: bool,
+        ?pool_id: String,
+        ?registration_id: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_arn: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor pool_id: String?
+      attr_accessor registration_id: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class PoolFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class PoolInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?status: String,
+        ?message_type: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?shared_routes_enabled: bool,
+        ?deletion_protection_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor status: String?
+      attr_accessor message_type: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor shared_routes_enabled: bool?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class PoolOriginationIdentitiesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ProtectConfigurationCountryRuleSetInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_status: String?
+    end
+
+    class ProtectConfigurationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ProtectConfigurationInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?created_timestamp: Time,
+        ?account_default: bool,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor account_default: bool?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class ProtectConfigurationRuleSetNumberOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?created_timestamp: Time,
+        ?action: String,
+        ?iso_country_code: String,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor action: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class ProtectConfigurationRuleSetNumberOverrideFilterItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class PutKeywordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity: String,
+        ?keyword: String,
+        ?keyword_message: String,
+        ?keyword_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity: String?
+      attr_accessor keyword: String?
+      attr_accessor keyword_message: String?
+      attr_accessor keyword_action: String?
+    end
+
+    class PutKeywordResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origination_identity_arn: String,
+        ?origination_identity: String,
+        ?keyword: String,
+        ?keyword_message: String,
+        ?keyword_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origination_identity_arn: String?
+      attr_accessor origination_identity: String?
+      attr_accessor keyword: String?
+      attr_accessor keyword_message: String?
+      attr_accessor keyword_action: String?
+    end
+
+    class PutMessageFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?message_feedback_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor message_feedback_status: String?
+    end
+
+    class PutMessageFeedbackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?message_feedback_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor message_feedback_status: String?
+    end
+
+    class PutOptedOutNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_name: String,
+        ?opted_out_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_number: String?
+    end
+
+    class PutOptedOutNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?opt_out_list_arn: String,
+        ?opt_out_list_name: String,
+        ?opted_out_number: String,
+        ?opted_out_timestamp: Time,
+        ?end_user_opted_out: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor opt_out_list_arn: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor opted_out_number: String?
+      attr_accessor opted_out_timestamp: Time?
+      attr_accessor end_user_opted_out: bool?
+    end
+
+    class PutProtectConfigurationRuleSetNumberOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?protect_configuration_id: String,
+        ?destination_phone_number: String,
+        ?action: String,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor action: String?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class PutProtectConfigurationRuleSetNumberOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?destination_phone_number: String,
+        ?created_timestamp: Time,
+        ?action: String,
+        ?iso_country_code: String,
+        ?expiration_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor action: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor expiration_timestamp: Time?
+    end
+
+    class PutRegistrationFieldValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?field_path: String,
+        ?select_choices: Array[String],
+        ?text_value: String,
+        ?registration_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor field_path: String?
+      attr_accessor select_choices: Array[String]?
+      attr_accessor text_value: String?
+      attr_accessor registration_attachment_id: String?
+    end
+
+    class PutRegistrationFieldValueResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?field_path: String,
+        ?select_choices: Array[String],
+        ?text_value: String,
+        ?registration_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor field_path: String?
+      attr_accessor select_choices: Array[String]?
+      attr_accessor text_value: String?
+      attr_accessor registration_attachment_id: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class RegistrationAssociationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RegistrationAssociationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?iso_country_code: String,
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor phone_number: String?
+    end
+
+    class RegistrationAttachmentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RegistrationAttachmentsInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_attachment_arn: String,
+        ?registration_attachment_id: String,
+        ?attachment_status: String,
+        ?attachment_upload_error_reason: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_attachment_arn: String?
+      attr_accessor registration_attachment_id: String?
+      attr_accessor attachment_status: String?
+      attr_accessor attachment_upload_error_reason: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class RegistrationDeniedReasonInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?documentation_title: String,
+        ?documentation_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor documentation_title: String?
+      attr_accessor documentation_link: String?
+    end
+
+    class RegistrationFieldDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?section_path: String,
+        ?field_path: String,
+        ?field_type: String,
+        ?field_requirement: String,
+        ?select_validation: Types::SelectValidation,
+        ?text_validation: Types::TextValidation,
+        ?display_hints: Types::RegistrationFieldDisplayHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor section_path: String?
+      attr_accessor field_path: String?
+      attr_accessor field_type: String?
+      attr_accessor field_requirement: String?
+      attr_accessor select_validation: Types::SelectValidation?
+      attr_accessor text_validation: Types::TextValidation?
+      attr_accessor display_hints: Types::RegistrationFieldDisplayHints?
+    end
+
+    class RegistrationFieldDisplayHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?documentation_title: String,
+        ?documentation_link: String,
+        ?select_option_descriptions: Array[Types::SelectOptionDescription],
+        ?text_validation_description: String,
+        ?example_text_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor documentation_title: String?
+      attr_accessor documentation_link: String?
+      attr_accessor select_option_descriptions: Array[Types::SelectOptionDescription]?
+      attr_accessor text_validation_description: String?
+      attr_accessor example_text_value: String?
+    end
+
+    class RegistrationFieldValueInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_path: String,
+        ?select_choices: Array[String],
+        ?text_value: String,
+        ?registration_attachment_id: String,
+        ?denied_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_path: String?
+      attr_accessor select_choices: Array[String]?
+      attr_accessor text_value: String?
+      attr_accessor registration_attachment_id: String?
+      attr_accessor denied_reason: String?
+    end
+
+    class RegistrationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RegistrationInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?registration_type: String,
+        ?registration_status: String,
+        ?current_version_number: Integer,
+        ?approved_version_number: Integer,
+        ?latest_denied_version_number: Integer,
+        ?additional_attributes: Hash[String, String],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor registration_status: String?
+      attr_accessor current_version_number: Integer?
+      attr_accessor approved_version_number: Integer?
+      attr_accessor latest_denied_version_number: Integer?
+      attr_accessor additional_attributes: Hash[String, String]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class RegistrationSectionDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?section_path: String,
+        ?display_hints: Types::RegistrationSectionDisplayHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor section_path: String?
+      attr_accessor display_hints: Types::RegistrationSectionDisplayHints?
+    end
+
+    class RegistrationSectionDisplayHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?documentation_title: String,
+        ?documentation_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor documentation_title: String?
+      attr_accessor documentation_link: String?
+    end
+
+    class RegistrationTypeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_type: String,
+        ?supported_associations: Array[Types::SupportedAssociation],
+        ?display_hints: Types::RegistrationTypeDisplayHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_type: String?
+      attr_accessor supported_associations: Array[Types::SupportedAssociation]?
+      attr_accessor display_hints: Types::RegistrationTypeDisplayHints?
+    end
+
+    class RegistrationTypeDisplayHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?documentation_title: String,
+        ?documentation_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor documentation_title: String?
+      attr_accessor documentation_link: String?
+    end
+
+    class RegistrationTypeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RegistrationVersionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RegistrationVersionInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_number: Integer,
+        ?registration_version_status: String,
+        ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
+        ?denied_reasons: Array[Types::RegistrationDeniedReasonInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_number: Integer?
+      attr_accessor registration_version_status: String?
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
+      attr_accessor denied_reasons: Array[Types::RegistrationDeniedReasonInformation]?
+    end
+
+    class RegistrationVersionStatusHistory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?draft_timestamp: Time,
+        ?submitted_timestamp: Time,
+        ?reviewing_timestamp: Time,
+        ?requires_authentication_timestamp: Time,
+        ?approved_timestamp: Time,
+        ?discarded_timestamp: Time,
+        ?denied_timestamp: Time,
+        ?revoked_timestamp: Time,
+        ?archived_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor draft_timestamp: Time?
+      attr_accessor submitted_timestamp: Time?
+      attr_accessor reviewing_timestamp: Time?
+      attr_accessor requires_authentication_timestamp: Time?
+      attr_accessor approved_timestamp: Time?
+      attr_accessor discarded_timestamp: Time?
+      attr_accessor denied_timestamp: Time?
+      attr_accessor revoked_timestamp: Time?
+      attr_accessor archived_timestamp: Time?
+    end
+
+    class ReleasePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class ReleasePhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_arn: String,
+        ?phone_number_id: String,
+        ?phone_number: String,
+        ?status: String,
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?monthly_leasing_price: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?registration_id: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_arn: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor registration_id: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class ReleaseSenderIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id: String,
+        ?iso_country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+    end
+
+    class ReleaseSenderIdResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id_arn: String,
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?message_types: Array[String],
+        ?monthly_leasing_price: String,
+        ?registered: bool,
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id_arn: String?
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_types: Array[String]?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor registered: bool?
+      attr_accessor registration_id: String?
+    end
+
+    class RequestPhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?opt_out_list_name: String,
+        ?pool_id: String,
+        ?registration_id: String,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor pool_id: String?
+      attr_accessor registration_id: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class RequestPhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_arn: String,
+        ?phone_number_id: String,
+        ?phone_number: String,
+        ?status: String,
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?monthly_leasing_price: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?deletion_protection_enabled: bool,
+        ?pool_id: String,
+        ?registration_id: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_arn: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor pool_id: String?
+      attr_accessor registration_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class RequestSenderIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?message_types: Array[String],
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_types: Array[String]?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class RequestSenderIdResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id_arn: String,
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?message_types: Array[String],
+        ?monthly_leasing_price: String,
+        ?deletion_protection_enabled: bool,
+        ?registered: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id_arn: String?
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_types: Array[String]?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor registered: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class SelectOptionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option: String,
+        ?title: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+    end
+
+    class SelectValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_choices: Integer,
+        ?max_choices: Integer,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_choices: Integer?
+      attr_accessor max_choices: Integer?
+      attr_accessor options: Array[String]?
+    end
+
+    class SendDestinationNumberVerificationCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_id: String,
+        ?verification_channel: String,
+        ?language_code: String,
+        ?origination_identity: String,
+        ?configuration_set_name: String,
+        ?context: Hash[String, String],
+        ?destination_country_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor verification_channel: String?
+      attr_accessor language_code: String?
+      attr_accessor origination_identity: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor destination_country_parameters: Hash[String, String]?
+    end
+
+    class SendDestinationNumberVerificationCodeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendMediaMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?origination_identity: String,
+        ?message_body: String,
+        ?media_urls: Array[String],
+        ?configuration_set_name: String,
+        ?max_price: String,
+        ?time_to_live: Integer,
+        ?context: Hash[String, String],
+        ?dry_run: bool,
+        ?protect_configuration_id: String,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor origination_identity: String?
+      attr_accessor message_body: String?
+      attr_accessor media_urls: Array[String]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor max_price: String?
+      attr_accessor time_to_live: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor dry_run: bool?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendMediaMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendTextMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?origination_identity: String,
+        ?message_body: String,
+        ?message_type: String,
+        ?keyword: String,
+        ?configuration_set_name: String,
+        ?max_price: String,
+        ?time_to_live: Integer,
+        ?context: Hash[String, String],
+        ?destination_country_parameters: Hash[String, String],
+        ?dry_run: bool,
+        ?protect_configuration_id: String,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor origination_identity: String?
+      attr_accessor message_body: String?
+      attr_accessor message_type: String?
+      attr_accessor keyword: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor max_price: String?
+      attr_accessor time_to_live: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor destination_country_parameters: Hash[String, String]?
+      attr_accessor dry_run: bool?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendTextMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SendVoiceMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?origination_identity: String,
+        ?message_body: String,
+        ?message_body_text_type: String,
+        ?voice_id: String,
+        ?configuration_set_name: String,
+        ?max_price_per_minute: String,
+        ?time_to_live: Integer,
+        ?context: Hash[String, String],
+        ?dry_run: bool,
+        ?protect_configuration_id: String,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor origination_identity: String?
+      attr_accessor message_body: String?
+      attr_accessor message_body_text_type: String?
+      attr_accessor voice_id: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor max_price_per_minute: String?
+      attr_accessor time_to_live: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor dry_run: bool?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendVoiceMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
+    class SenderIdAndCountry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id: String,
+        ?iso_country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+    end
+
+    class SenderIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SenderIdInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id_arn: String,
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?message_types: Array[String],
+        ?monthly_leasing_price: String,
+        ?deletion_protection_enabled: bool,
+        ?registered: bool,
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id_arn: String?
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_types: Array[String]?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor registered: bool?
+      attr_accessor registration_id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class SetAccountDefaultProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+    end
+
+    class SetAccountDefaultProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_protect_configuration_arn: String,
+        ?default_protect_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_protect_configuration_arn: String?
+      attr_accessor default_protect_configuration_id: String?
+    end
+
+    class SetDefaultMessageFeedbackEnabledRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SetDefaultMessageFeedbackEnabledResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SetDefaultMessageTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?message_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_type: String?
+    end
+
+    class SetDefaultMessageTypeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?message_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_type: String?
+    end
+
+    class SetDefaultSenderIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?sender_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor sender_id: String?
+    end
+
+    class SetDefaultSenderIdResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?sender_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor sender_id: String?
+    end
+
+    class SetMediaMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetMediaMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetTextMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetTextMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetVoiceMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetVoiceMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SnsDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+    end
+
+    class SpendLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?enforced_limit: Integer,
+        ?max_limit: Integer,
+        ?overridden: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor enforced_limit: Integer?
+      attr_accessor max_limit: Integer?
+      attr_accessor overridden: bool?
+    end
+
+    class SubmitRegistrationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+    end
+
+    class SubmitRegistrationVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_arn: String,
+        ?registration_id: String,
+        ?version_number: Integer,
+        ?registration_version_status: String,
+        ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_arn: String?
+      attr_accessor registration_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor registration_version_status: String?
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
+    end
+
+    class SupportedAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?iso_country_code: String,
+        ?association_behavior: String,
+        ?disassociation_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor association_behavior: String?
+      attr_accessor disassociation_behavior: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_length: Integer,
+        ?max_length: Integer,
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_length: Integer?
+      attr_accessor max_length: Integer?
+      attr_accessor pattern: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?event_destination_name: String,
+        ?enabled: bool,
+        ?matching_event_types: Array[String],
+        ?cloud_watch_logs_destination: Types::CloudWatchLogsDestination,
+        ?kinesis_firehose_destination: Types::KinesisFirehoseDestination,
+        ?sns_destination: Types::SnsDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor matching_event_types: Array[String]?
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination?
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination?
+      attr_accessor sns_destination: Types::SnsDestination?
+    end
+
+    class UpdateEventDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_arn: String,
+        ?configuration_set_name: String,
+        ?event_destination: Types::EventDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_arn: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor event_destination: Types::EventDestination?
+    end
+
+    class UpdatePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdatePhoneNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_arn: String,
+        ?phone_number_id: String,
+        ?phone_number: String,
+        ?status: String,
+        ?iso_country_code: String,
+        ?message_type: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?monthly_leasing_price: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?deletion_protection_enabled: bool,
+        ?registration_id: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_arn: String?
+      attr_accessor phone_number_id: String?
+      attr_accessor phone_number: String?
+      attr_accessor status: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_type: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor registration_id: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class UpdatePoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?shared_routes_enabled: bool,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor shared_routes_enabled: bool?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdatePoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_id: String,
+        ?status: String,
+        ?message_type: String,
+        ?two_way_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?opt_out_list_name: String,
+        ?shared_routes_enabled: bool,
+        ?deletion_protection_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_id: String?
+      attr_accessor status: String?
+      attr_accessor message_type: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor shared_routes_enabled: bool?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class UpdateProtectConfigurationCountryRuleSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?number_capability: String,
+        ?country_rule_set_updates: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor number_capability: String?
+      attr_accessor country_rule_set_updates: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation]?
+    end
+
+    class UpdateProtectConfigurationCountryRuleSetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?number_capability: String,
+        ?country_rule_set: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor number_capability: String?
+      attr_accessor country_rule_set: Hash[String, Types::ProtectConfigurationCountryRuleSetInformation]?
+    end
+
+    class UpdateProtectConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_id: String,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_id: String?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateProtectConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protect_configuration_arn: String,
+        ?protect_configuration_id: String,
+        ?created_timestamp: Time,
+        ?account_default: bool,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protect_configuration_arn: String?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor account_default: bool?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateSenderIdRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateSenderIdResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id_arn: String,
+        ?sender_id: String,
+        ?iso_country_code: String,
+        ?message_types: Array[String],
+        ?monthly_leasing_price: String,
+        ?deletion_protection_enabled: bool,
+        ?registered: bool,
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id_arn: String?
+      attr_accessor sender_id: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor message_types: Array[String]?
+      attr_accessor monthly_leasing_price: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor registered: bool?
+      attr_accessor registration_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class VerifiedDestinationNumberFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class VerifiedDestinationNumberInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_arn: String,
+        ?verified_destination_number_id: String,
+        ?destination_phone_number: String,
+        ?status: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_arn: String?
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class VerifyDestinationNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_id: String,
+        ?verification_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor verification_code: String?
+    end
+
+    class VerifyDestinationNumberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verified_destination_number_arn: String,
+        ?verified_destination_number_id: String,
+        ?destination_phone_number: String,
+        ?status: String,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verified_destination_number_arn: String?
+      attr_accessor verified_destination_number_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+    end
+  end
+end

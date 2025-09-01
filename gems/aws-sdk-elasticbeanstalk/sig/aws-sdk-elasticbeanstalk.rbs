@@ -1,0 +1,5 @@
+  module Aws
+    module ElasticBeanstalk
+      VERSION: String
+    end
+  end

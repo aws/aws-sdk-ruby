@@ -1,0 +1,5 @@
+  module Aws
+    module SNS
+      VERSION: String
+    end
+  end

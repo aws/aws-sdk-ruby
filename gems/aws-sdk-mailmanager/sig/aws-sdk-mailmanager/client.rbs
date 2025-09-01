@@ -1,0 +1,1108 @@
+module Aws::MailManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MailManager::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAddonInstanceResponse
+      include Smithy::Client::_Response[Types::CreateAddonInstanceResponse]
+      def addon_instance_id: () -> String?
+    end
+    def create_addon_instance: (
+      ?client_token: String,
+      ?addon_subscription_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAddonInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddonInstanceResponse
+
+    interface _CreateAddonSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateAddonSubscriptionResponse]
+      def addon_subscription_id: () -> String?
+    end
+    def create_addon_subscription: (
+      ?client_token: String,
+      ?addon_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAddonSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddonSubscriptionResponse
+
+    interface _CreateAddressListResponse
+      include Smithy::Client::_Response[Types::CreateAddressListResponse]
+      def address_list_id: () -> String?
+    end
+    def create_address_list: (
+      ?client_token: String,
+      ?address_list_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddressListResponse
+
+    interface _CreateAddressListImportJobResponse
+      include Smithy::Client::_Response[Types::CreateAddressListImportJobResponse]
+      def job_id: () -> String?
+      def pre_signed_url: () -> String?
+    end
+    def create_address_list_import_job: (
+      ?client_token: String,
+      ?address_list_id: String,
+      ?name: String,
+      ?import_data_format: {
+        import_data_type: String
+      }
+    ) -> _CreateAddressListImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddressListImportJobResponse
+
+    interface _CreateArchiveResponse
+      include Smithy::Client::_Response[Types::CreateArchiveResponse]
+      def archive_id: () -> String?
+    end
+    def create_archive: (
+      ?client_token: String,
+      ?archive_name: String,
+      ?retention: {
+        retention_period: String
+      },
+      ?kms_key_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateArchiveResponse
+
+    interface _CreateIngressPointResponse
+      include Smithy::Client::_Response[Types::CreateIngressPointResponse]
+      def ingress_point_id: () -> String?
+    end
+    def create_ingress_point: (
+      ?client_token: String,
+      ?ingress_point_name: String,
+      ?type: String,
+      ?rule_set_id: String,
+      ?traffic_policy_id: String,
+      ?ingress_point_configuration: {
+        smtp_password: String,
+        secret_arn: String
+      },
+      ?network_configuration: {
+        public_network_configuration: {
+          ip_type: String
+        },
+        private_network_configuration: {
+          vpc_endpoint_id: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIngressPointResponse
+
+    interface _CreateRelayResponse
+      include Smithy::Client::_Response[Types::CreateRelayResponse]
+      def relay_id: () -> String?
+    end
+    def create_relay: (
+      ?client_token: String,
+      ?relay_name: String,
+      ?server_name: String,
+      ?server_port: Integer,
+      ?authentication: {
+        secret_arn: String,
+        no_authentication: {
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRelayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelayResponse
+
+    interface _CreateRuleSetResponse
+      include Smithy::Client::_Response[Types::CreateRuleSetResponse]
+      def rule_set_id: () -> String?
+    end
+    def create_rule_set: (
+      ?client_token: String,
+      ?rule_set_name: String,
+      ?rules: Array[
+        {
+          name: String,
+          conditions: Array[
+            {
+              boolean_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: {
+                    analyzer: String,
+                    result_field: String
+                  },
+                  is_in_address_list: {
+                    attribute: String,
+                    address_lists: Array[String]
+                  }
+                },
+                operator: String
+              },
+              string_expression: {
+                evaluate: {
+                  attribute: String,
+                  mime_header_attribute: String,
+                  analysis: untyped
+                },
+                operator: String,
+                values: Array[String]
+              },
+              number_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                value: Float
+              },
+              ip_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                values: Array[String]
+              },
+              verdict_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: untyped
+                },
+                operator: String,
+                values: Array[String]
+              },
+              dmarc_expression: {
+                operator: String,
+                values: Array[String]
+              }
+            }
+          ],
+          unless: untyped,
+          actions: Array[
+            {
+              drop: {
+              },
+              relay: {
+                action_failure_policy: String,
+                relay: String,
+                mail_from: String
+              },
+              archive: {
+                action_failure_policy: untyped,
+                target_archive: String
+              },
+              write_to_s3: {
+                action_failure_policy: untyped,
+                role_arn: String,
+                s3_bucket: String,
+                s3_prefix: String,
+                s3_sse_kms_key_id: String
+              },
+              send: {
+                action_failure_policy: untyped,
+                role_arn: untyped
+              },
+              add_header: {
+                header_name: String,
+                header_value: String
+              },
+              replace_recipient: {
+                replace_with: Array[String]
+              },
+              deliver_to_mailbox: {
+                action_failure_policy: untyped,
+                mailbox_arn: untyped,
+                role_arn: untyped
+              },
+              deliver_to_q_business: {
+                action_failure_policy: untyped,
+                application_id: String,
+                index_id: String,
+                role_arn: untyped
+              },
+              publish_to_sns: {
+                action_failure_policy: untyped,
+                topic_arn: String,
+                role_arn: untyped,
+                encoding: String,
+                payload_type: String
+              }
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleSetResponse
+
+    interface _CreateTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::CreateTrafficPolicyResponse]
+      def traffic_policy_id: () -> String?
+    end
+    def create_traffic_policy: (
+      ?client_token: String,
+      ?traffic_policy_name: String,
+      ?policy_statements: Array[
+        {
+          conditions: Array[
+            {
+              string_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: {
+                    analyzer: String,
+                    result_field: String
+                  }
+                },
+                operator: String,
+                values: Array[String]
+              },
+              ip_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                values: Array[String]
+              },
+              ipv6_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: untyped,
+                values: Array[String]
+              },
+              tls_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                value: String
+              },
+              boolean_expression: {
+                evaluate: {
+                  analysis: untyped,
+                  is_in_address_list: {
+                    attribute: String,
+                    address_lists: Array[String]
+                  }
+                },
+                operator: String
+              }
+            }
+          ],
+          action: String
+        }
+      ],
+      ?default_action: String,
+      ?max_message_size_bytes: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrafficPolicyResponse
+
+    interface _DeleteAddonInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteAddonInstanceResponse]
+    end
+    def delete_addon_instance: (
+      ?addon_instance_id: String
+    ) -> _DeleteAddonInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAddonInstanceResponse
+
+    interface _DeleteAddonSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeleteAddonSubscriptionResponse]
+    end
+    def delete_addon_subscription: (
+      ?addon_subscription_id: String
+    ) -> _DeleteAddonSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAddonSubscriptionResponse
+
+    interface _DeleteAddressListResponse
+      include Smithy::Client::_Response[Types::DeleteAddressListResponse]
+    end
+    def delete_address_list: (
+      ?address_list_id: String
+    ) -> _DeleteAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAddressListResponse
+
+    interface _DeleteArchiveResponse
+      include Smithy::Client::_Response[Types::DeleteArchiveResponse]
+    end
+    def delete_archive: (
+      ?archive_id: String
+    ) -> _DeleteArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArchiveResponse
+
+    interface _DeleteIngressPointResponse
+      include Smithy::Client::_Response[Types::DeleteIngressPointResponse]
+    end
+    def delete_ingress_point: (
+      ?ingress_point_id: String
+    ) -> _DeleteIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIngressPointResponse
+
+    interface _DeleteRelayResponse
+      include Smithy::Client::_Response[Types::DeleteRelayResponse]
+    end
+    def delete_relay: (
+      ?relay_id: String
+    ) -> _DeleteRelayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRelayResponse
+
+    interface _DeleteRuleSetResponse
+      include Smithy::Client::_Response[Types::DeleteRuleSetResponse]
+    end
+    def delete_rule_set: (
+      ?rule_set_id: String
+    ) -> _DeleteRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleSetResponse
+
+    interface _DeleteTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteTrafficPolicyResponse]
+    end
+    def delete_traffic_policy: (
+      ?traffic_policy_id: String
+    ) -> _DeleteTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrafficPolicyResponse
+
+    interface _DeregisterMemberFromAddressListResponse
+      include Smithy::Client::_Response[Types::DeregisterMemberFromAddressListResponse]
+    end
+    def deregister_member_from_address_list: (
+      ?address_list_id: String,
+      ?address: String
+    ) -> _DeregisterMemberFromAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterMemberFromAddressListResponse
+
+    interface _GetAddonInstanceResponse
+      include Smithy::Client::_Response[Types::GetAddonInstanceResponse]
+      def addon_subscription_id: () -> String?
+      def addon_name: () -> String?
+      def addon_instance_arn: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def get_addon_instance: (
+      ?addon_instance_id: String
+    ) -> _GetAddonInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAddonInstanceResponse
+
+    interface _GetAddonSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetAddonSubscriptionResponse]
+      def addon_name: () -> String?
+      def addon_subscription_arn: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def get_addon_subscription: (
+      ?addon_subscription_id: String
+    ) -> _GetAddonSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAddonSubscriptionResponse
+
+    interface _GetAddressListResponse
+      include Smithy::Client::_Response[Types::GetAddressListResponse]
+      def address_list_id: () -> String?
+      def address_list_arn: () -> String?
+      def address_list_name: () -> String?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+    end
+    def get_address_list: (
+      ?address_list_id: String
+    ) -> _GetAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAddressListResponse
+
+    interface _GetAddressListImportJobResponse
+      include Smithy::Client::_Response[Types::GetAddressListImportJobResponse]
+      def job_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def pre_signed_url: () -> String?
+      def imported_items_count: () -> Integer?
+      def failed_items_count: () -> Integer?
+      def import_data_format: () -> Types::ImportDataFormat?
+      def address_list_id: () -> String?
+      def created_timestamp: () -> Time?
+      def start_timestamp: () -> Time?
+      def completed_timestamp: () -> Time?
+      def error: () -> String?
+    end
+    def get_address_list_import_job: (
+      ?job_id: String
+    ) -> _GetAddressListImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAddressListImportJobResponse
+
+    interface _GetArchiveResponse
+      include Smithy::Client::_Response[Types::GetArchiveResponse]
+      def archive_id: () -> String?
+      def archive_name: () -> String?
+      def archive_arn: () -> String?
+      def archive_state: () -> String?
+      def retention: () -> Types::ArchiveRetention?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+      def kms_key_arn: () -> String?
+    end
+    def get_archive: (
+      ?archive_id: String
+    ) -> _GetArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveResponse
+
+    interface _GetArchiveExportResponse
+      include Smithy::Client::_Response[Types::GetArchiveExportResponse]
+      def archive_id: () -> String?
+      def filters: () -> Types::ArchiveFilters?
+      def from_timestamp: () -> Time?
+      def to_timestamp: () -> Time?
+      def max_results: () -> Integer?
+      def export_destination_configuration: () -> Types::ExportDestinationConfiguration?
+      def status: () -> Types::ExportStatus?
+    end
+    def get_archive_export: (
+      ?export_id: String
+    ) -> _GetArchiveExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveExportResponse
+
+    interface _GetArchiveMessageResponse
+      include Smithy::Client::_Response[Types::GetArchiveMessageResponse]
+      def message_download_link: () -> String?
+      def metadata: () -> Types::Metadata?
+      def envelope: () -> Types::Envelope?
+    end
+    def get_archive_message: (
+      ?archived_message_id: String
+    ) -> _GetArchiveMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveMessageResponse
+
+    interface _GetArchiveMessageContentResponse
+      include Smithy::Client::_Response[Types::GetArchiveMessageContentResponse]
+      def body: () -> Types::MessageBody?
+    end
+    def get_archive_message_content: (
+      ?archived_message_id: String
+    ) -> _GetArchiveMessageContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveMessageContentResponse
+
+    interface _GetArchiveSearchResponse
+      include Smithy::Client::_Response[Types::GetArchiveSearchResponse]
+      def archive_id: () -> String?
+      def filters: () -> Types::ArchiveFilters?
+      def from_timestamp: () -> Time?
+      def to_timestamp: () -> Time?
+      def max_results: () -> Integer?
+      def status: () -> Types::SearchStatus?
+    end
+    def get_archive_search: (
+      ?search_id: String
+    ) -> _GetArchiveSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveSearchResponse
+
+    interface _GetArchiveSearchResultsResponse
+      include Smithy::Client::_Response[Types::GetArchiveSearchResultsResponse]
+      def rows: () -> Array[Types::Row]?
+    end
+    def get_archive_search_results: (
+      ?search_id: String
+    ) -> _GetArchiveSearchResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArchiveSearchResultsResponse
+
+    interface _GetIngressPointResponse
+      include Smithy::Client::_Response[Types::GetIngressPointResponse]
+      def ingress_point_id: () -> String?
+      def ingress_point_name: () -> String?
+      def ingress_point_arn: () -> String?
+      def status: () -> String?
+      def type: () -> String?
+      def a_record: () -> String?
+      def rule_set_id: () -> String?
+      def traffic_policy_id: () -> String?
+      def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration?
+      def network_configuration: () -> Types::NetworkConfiguration?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+    end
+    def get_ingress_point: (
+      ?ingress_point_id: String
+    ) -> _GetIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngressPointResponse
+
+    interface _GetMemberOfAddressListResponse
+      include Smithy::Client::_Response[Types::GetMemberOfAddressListResponse]
+      def address: () -> String?
+      def created_timestamp: () -> Time?
+    end
+    def get_member_of_address_list: (
+      ?address_list_id: String,
+      ?address: String
+    ) -> _GetMemberOfAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemberOfAddressListResponse
+
+    interface _GetRelayResponse
+      include Smithy::Client::_Response[Types::GetRelayResponse]
+      def relay_id: () -> String?
+      def relay_arn: () -> String?
+      def relay_name: () -> String?
+      def server_name: () -> String?
+      def server_port: () -> Integer?
+      def authentication: () -> Types::RelayAuthentication?
+      def created_timestamp: () -> Time?
+      def last_modified_timestamp: () -> Time?
+    end
+    def get_relay: (
+      ?relay_id: String
+    ) -> _GetRelayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelayResponse
+
+    interface _GetRuleSetResponse
+      include Smithy::Client::_Response[Types::GetRuleSetResponse]
+      def rule_set_id: () -> String?
+      def rule_set_arn: () -> String?
+      def rule_set_name: () -> String?
+      def created_date: () -> Time?
+      def last_modification_date: () -> Time?
+      def rules: () -> Array[Types::Rule]?
+    end
+    def get_rule_set: (
+      ?rule_set_id: String
+    ) -> _GetRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleSetResponse
+
+    interface _GetTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::GetTrafficPolicyResponse]
+      def traffic_policy_name: () -> String?
+      def traffic_policy_id: () -> String?
+      def traffic_policy_arn: () -> String?
+      def policy_statements: () -> Array[Types::PolicyStatement]?
+      def max_message_size_bytes: () -> Integer?
+      def default_action: () -> String?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+    end
+    def get_traffic_policy: (
+      ?traffic_policy_id: String
+    ) -> _GetTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrafficPolicyResponse
+
+    interface _ListAddonInstancesResponse
+      include Smithy::Client::_Response[Types::ListAddonInstancesResponse]
+      def addon_instances: () -> Array[Types::AddonInstance]?
+      def next_token: () -> String?
+    end
+    def list_addon_instances: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListAddonInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAddonInstancesResponse
+
+    interface _ListAddonSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListAddonSubscriptionsResponse]
+      def addon_subscriptions: () -> Array[Types::AddonSubscription]?
+      def next_token: () -> String?
+    end
+    def list_addon_subscriptions: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListAddonSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAddonSubscriptionsResponse
+
+    interface _ListAddressListImportJobsResponse
+      include Smithy::Client::_Response[Types::ListAddressListImportJobsResponse]
+      def import_jobs: () -> Array[Types::ImportJob]?
+      def next_token: () -> String?
+    end
+    def list_address_list_import_jobs: (
+      ?address_list_id: String,
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListAddressListImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAddressListImportJobsResponse
+
+    interface _ListAddressListsResponse
+      include Smithy::Client::_Response[Types::ListAddressListsResponse]
+      def address_lists: () -> Array[Types::AddressList]?
+      def next_token: () -> String?
+    end
+    def list_address_lists: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListAddressListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAddressListsResponse
+
+    interface _ListArchiveExportsResponse
+      include Smithy::Client::_Response[Types::ListArchiveExportsResponse]
+      def exports: () -> Array[Types::ExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_archive_exports: (
+      ?archive_id: String,
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListArchiveExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArchiveExportsResponse
+
+    interface _ListArchiveSearchesResponse
+      include Smithy::Client::_Response[Types::ListArchiveSearchesResponse]
+      def searches: () -> Array[Types::SearchSummary]?
+      def next_token: () -> String?
+    end
+    def list_archive_searches: (
+      ?archive_id: String,
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListArchiveSearchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArchiveSearchesResponse
+
+    interface _ListArchivesResponse
+      include Smithy::Client::_Response[Types::ListArchivesResponse]
+      def archives: () -> Array[Types::Archive]?
+      def next_token: () -> String?
+    end
+    def list_archives: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListArchivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArchivesResponse
+
+    interface _ListIngressPointsResponse
+      include Smithy::Client::_Response[Types::ListIngressPointsResponse]
+      def ingress_points: () -> Array[Types::IngressPoint]?
+      def next_token: () -> String?
+    end
+    def list_ingress_points: (
+      ?page_size: Integer,
+      ?next_token: String
+    ) -> _ListIngressPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIngressPointsResponse
+
+    interface _ListMembersOfAddressListResponse
+      include Smithy::Client::_Response[Types::ListMembersOfAddressListResponse]
+      def addresses: () -> Array[Types::SavedAddress]?
+      def next_token: () -> String?
+    end
+    def list_members_of_address_list: (
+      ?address_list_id: String,
+      ?filter: {
+        address_prefix: String
+      },
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListMembersOfAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembersOfAddressListResponse
+
+    interface _ListRelaysResponse
+      include Smithy::Client::_Response[Types::ListRelaysResponse]
+      def relays: () -> Array[Types::Relay]?
+      def next_token: () -> String?
+    end
+    def list_relays: (
+      ?page_size: Integer,
+      ?next_token: String
+    ) -> _ListRelaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRelaysResponse
+
+    interface _ListRuleSetsResponse
+      include Smithy::Client::_Response[Types::ListRuleSetsResponse]
+      def rule_sets: () -> Array[Types::RuleSet]?
+      def next_token: () -> String?
+    end
+    def list_rule_sets: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListRuleSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleSetsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTrafficPoliciesResponse
+      include Smithy::Client::_Response[Types::ListTrafficPoliciesResponse]
+      def traffic_policies: () -> Array[Types::TrafficPolicy]?
+      def next_token: () -> String?
+    end
+    def list_traffic_policies: (
+      ?page_size: Integer,
+      ?next_token: String
+    ) -> _ListTrafficPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficPoliciesResponse
+
+    interface _RegisterMemberToAddressListResponse
+      include Smithy::Client::_Response[Types::RegisterMemberToAddressListResponse]
+    end
+    def register_member_to_address_list: (
+      ?address_list_id: String,
+      ?address: String
+    ) -> _RegisterMemberToAddressListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterMemberToAddressListResponse
+
+    interface _StartAddressListImportJobResponse
+      include Smithy::Client::_Response[Types::StartAddressListImportJobResponse]
+    end
+    def start_address_list_import_job: (
+      ?job_id: String
+    ) -> _StartAddressListImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAddressListImportJobResponse
+
+    interface _StartArchiveExportResponse
+      include Smithy::Client::_Response[Types::StartArchiveExportResponse]
+      def export_id: () -> String?
+    end
+    def start_archive_export: (
+      ?archive_id: String,
+      ?filters: {
+        include: Array[
+          {
+            string_expression: {
+              evaluate: {
+                attribute: String
+              },
+              operator: String,
+              values: Array[String]
+            },
+            boolean_expression: {
+              evaluate: {
+                attribute: String
+              },
+              operator: String
+            }
+          }
+        ],
+        unless: untyped
+      },
+      ?from_timestamp: Time,
+      ?to_timestamp: Time,
+      ?max_results: Integer,
+      ?export_destination_configuration: {
+        s3: {
+          s3_location: String
+        }
+      },
+      ?include_metadata: bool
+    ) -> _StartArchiveExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartArchiveExportResponse
+
+    interface _StartArchiveSearchResponse
+      include Smithy::Client::_Response[Types::StartArchiveSearchResponse]
+      def search_id: () -> String?
+    end
+    def start_archive_search: (
+      ?archive_id: String,
+      ?filters: {
+        include: Array[
+          {
+            string_expression: {
+              evaluate: {
+                attribute: String
+              },
+              operator: String,
+              values: Array[String]
+            },
+            boolean_expression: {
+              evaluate: {
+                attribute: String
+              },
+              operator: String
+            }
+          }
+        ],
+        unless: untyped
+      },
+      ?from_timestamp: Time,
+      ?to_timestamp: Time,
+      ?max_results: Integer
+    ) -> _StartArchiveSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartArchiveSearchResponse
+
+    interface _StopAddressListImportJobResponse
+      include Smithy::Client::_Response[Types::StopAddressListImportJobResponse]
+    end
+    def stop_address_list_import_job: (
+      ?job_id: String
+    ) -> _StopAddressListImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAddressListImportJobResponse
+
+    interface _StopArchiveExportResponse
+      include Smithy::Client::_Response[Types::StopArchiveExportResponse]
+    end
+    def stop_archive_export: (
+      ?export_id: String
+    ) -> _StopArchiveExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopArchiveExportResponse
+
+    interface _StopArchiveSearchResponse
+      include Smithy::Client::_Response[Types::StopArchiveSearchResponse]
+    end
+    def stop_archive_search: (
+      ?search_id: String
+    ) -> _StopArchiveSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopArchiveSearchResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateArchiveResponse
+      include Smithy::Client::_Response[Types::UpdateArchiveResponse]
+    end
+    def update_archive: (
+      ?archive_id: String,
+      ?archive_name: String,
+      ?retention: {
+        retention_period: String
+      }
+    ) -> _UpdateArchiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateArchiveResponse
+
+    interface _UpdateIngressPointResponse
+      include Smithy::Client::_Response[Types::UpdateIngressPointResponse]
+    end
+    def update_ingress_point: (
+      ?ingress_point_id: String,
+      ?ingress_point_name: String,
+      ?status_to_update: String,
+      ?rule_set_id: String,
+      ?traffic_policy_id: String,
+      ?ingress_point_configuration: {
+        smtp_password: String,
+        secret_arn: String
+      }
+    ) -> _UpdateIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIngressPointResponse
+
+    interface _UpdateRelayResponse
+      include Smithy::Client::_Response[Types::UpdateRelayResponse]
+    end
+    def update_relay: (
+      ?relay_id: String,
+      ?relay_name: String,
+      ?server_name: String,
+      ?server_port: Integer,
+      ?authentication: {
+        secret_arn: String,
+        no_authentication: {
+        }
+      }
+    ) -> _UpdateRelayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelayResponse
+
+    interface _UpdateRuleSetResponse
+      include Smithy::Client::_Response[Types::UpdateRuleSetResponse]
+    end
+    def update_rule_set: (
+      ?rule_set_id: String,
+      ?rule_set_name: String,
+      ?rules: Array[
+        {
+          name: String,
+          conditions: Array[
+            {
+              boolean_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: {
+                    analyzer: String,
+                    result_field: String
+                  },
+                  is_in_address_list: {
+                    attribute: String,
+                    address_lists: Array[String]
+                  }
+                },
+                operator: String
+              },
+              string_expression: {
+                evaluate: {
+                  attribute: String,
+                  mime_header_attribute: String,
+                  analysis: untyped
+                },
+                operator: String,
+                values: Array[String]
+              },
+              number_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                value: Float
+              },
+              ip_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                values: Array[String]
+              },
+              verdict_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: untyped
+                },
+                operator: String,
+                values: Array[String]
+              },
+              dmarc_expression: {
+                operator: String,
+                values: Array[String]
+              }
+            }
+          ],
+          unless: untyped,
+          actions: Array[
+            {
+              drop: {
+              },
+              relay: {
+                action_failure_policy: String,
+                relay: String,
+                mail_from: String
+              },
+              archive: {
+                action_failure_policy: untyped,
+                target_archive: String
+              },
+              write_to_s3: {
+                action_failure_policy: untyped,
+                role_arn: String,
+                s3_bucket: String,
+                s3_prefix: String,
+                s3_sse_kms_key_id: String
+              },
+              send: {
+                action_failure_policy: untyped,
+                role_arn: untyped
+              },
+              add_header: {
+                header_name: String,
+                header_value: String
+              },
+              replace_recipient: {
+                replace_with: Array[String]
+              },
+              deliver_to_mailbox: {
+                action_failure_policy: untyped,
+                mailbox_arn: untyped,
+                role_arn: untyped
+              },
+              deliver_to_q_business: {
+                action_failure_policy: untyped,
+                application_id: String,
+                index_id: String,
+                role_arn: untyped
+              },
+              publish_to_sns: {
+                action_failure_policy: untyped,
+                topic_arn: String,
+                role_arn: untyped,
+                encoding: String,
+                payload_type: String
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateRuleSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleSetResponse
+
+    interface _UpdateTrafficPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateTrafficPolicyResponse]
+    end
+    def update_traffic_policy: (
+      ?traffic_policy_id: String,
+      ?traffic_policy_name: String,
+      ?policy_statements: Array[
+        {
+          conditions: Array[
+            {
+              string_expression: {
+                evaluate: {
+                  attribute: String,
+                  analysis: {
+                    analyzer: String,
+                    result_field: String
+                  }
+                },
+                operator: String,
+                values: Array[String]
+              },
+              ip_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                values: Array[String]
+              },
+              ipv6_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: untyped,
+                values: Array[String]
+              },
+              tls_expression: {
+                evaluate: {
+                  attribute: String
+                },
+                operator: String,
+                value: String
+              },
+              boolean_expression: {
+                evaluate: {
+                  analysis: untyped,
+                  is_in_address_list: {
+                    attribute: String,
+                    address_lists: Array[String]
+                  }
+                },
+                operator: String
+              }
+            }
+          ],
+          action: String
+        }
+      ],
+      ?default_action: String,
+      ?max_message_size_bytes: Integer
+    ) -> _UpdateTrafficPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrafficPolicyResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module MTurk
+      VERSION: String
+    end
+  end

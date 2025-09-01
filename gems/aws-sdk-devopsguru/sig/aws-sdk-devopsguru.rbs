@@ -1,0 +1,5 @@
+  module Aws
+    module DevOpsGuru
+      VERSION: String
+    end
+  end

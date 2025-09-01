@@ -1,0 +1,1659 @@
+module Aws::Notifications
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccessStatus
+      ENABLED: String
+      DISABLED: String
+      PENDING: String
+    end
+
+    class AggregationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summarization_dimensions: Array[Types::SummarizationDimensionDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summarization_dimensions: Array[Types::SummarizationDimensionDetail]?
+    end
+
+    class AggregationKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class AggregationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_count: Integer,
+        ?aggregated_by: Array[Types::AggregationKey],
+        ?aggregated_accounts: Types::SummarizationDimensionOverview,
+        ?aggregated_regions: Types::SummarizationDimensionOverview,
+        ?aggregated_organizational_units: Types::SummarizationDimensionOverview,
+        ?additional_summarization_dimensions: Array[Types::SummarizationDimensionOverview],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_count: Integer?
+      attr_accessor aggregated_by: Array[Types::AggregationKey]?
+      attr_accessor aggregated_accounts: Types::SummarizationDimensionOverview?
+      attr_accessor aggregated_regions: Types::SummarizationDimensionOverview?
+      attr_accessor aggregated_organizational_units: Types::SummarizationDimensionOverview?
+      attr_accessor additional_summarization_dimensions: Array[Types::SummarizationDimensionOverview]?
+    end
+
+    class AssociateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+    end
+
+    class AssociateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateManagedNotificationAccountContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_identifier: String,
+        ?managed_notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_identifier: String?
+      attr_accessor managed_notification_configuration_arn: String?
+    end
+
+    class AssociateManagedNotificationAccountContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateManagedNotificationAdditionalChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?managed_notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+    end
+
+    class AssociateManagedNotificationAdditionalChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class CreateEventRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?source: String,
+        ?event_type: String,
+        ?event_pattern: String,
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor source: String?
+      attr_accessor event_type: String?
+      attr_accessor event_pattern: String?
+      attr_accessor regions: Array[String]?
+    end
+
+    class CreateEventRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?status_summary_by_region: Hash[String, Types::EventRuleStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor status_summary_by_region: Hash[String, Types::EventRuleStatusSummary]?
+    end
+
+    class CreateNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?aggregation_duration: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aggregation_duration: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateNotificationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteEventRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteEventRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteNotificationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterNotificationHubRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hub_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hub_region: String?
+    end
+
+    class DeregisterNotificationHubResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hub_region: String,
+        ?status_summary: Types::NotificationHubStatusSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hub_region: String?
+      attr_accessor status_summary: Types::NotificationHubStatusSummary?
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class DisableNotificationsAccessForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableNotificationsAccessForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+    end
+
+    class DisassociateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateManagedNotificationAccountContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_identifier: String,
+        ?managed_notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_identifier: String?
+      attr_accessor managed_notification_configuration_arn: String?
+    end
+
+    class DisassociateManagedNotificationAccountContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateManagedNotificationAdditionalChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?managed_notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+    end
+
+    class DisassociateManagedNotificationAdditionalChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableNotificationsAccessForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EnableNotificationsAccessForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EventRuleStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class EventRuleStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?creation_time: Time,
+        ?source: String,
+        ?event_type: String,
+        ?event_pattern: String,
+        ?regions: Array[String],
+        ?managed_rules: Array[String],
+        ?status_summary_by_region: Hash[String, Types::EventRuleStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor source: String?
+      attr_accessor event_type: String?
+      attr_accessor event_pattern: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor managed_rules: Array[String]?
+      attr_accessor status_summary_by_region: Hash[String, Types::EventRuleStatusSummary]?
+    end
+
+    class GetEventRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetEventRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?creation_time: Time,
+        ?source: String,
+        ?event_type: String,
+        ?event_pattern: String,
+        ?regions: Array[String],
+        ?managed_rules: Array[String],
+        ?status_summary_by_region: Hash[String, Types::EventRuleStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor source: String?
+      attr_accessor event_type: String?
+      attr_accessor event_pattern: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor managed_rules: Array[String]?
+      attr_accessor status_summary_by_region: Hash[String, Types::EventRuleStatusSummary]?
+    end
+
+    class GetManagedNotificationChildEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor locale: String?
+    end
+
+    class GetManagedNotificationChildEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?managed_notification_configuration_arn: String,
+        ?creation_time: Time,
+        ?content: Types::ManagedNotificationChildEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor content: Types::ManagedNotificationChildEvent?
+    end
+
+    class GetManagedNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetManagedNotificationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?category: String,
+        ?sub_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor sub_category: String?
+    end
+
+    class GetManagedNotificationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor locale: String?
+    end
+
+    class GetManagedNotificationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?managed_notification_configuration_arn: String,
+        ?creation_time: Time,
+        ?content: Types::ManagedNotificationEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor content: Types::ManagedNotificationEvent?
+    end
+
+    class GetNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetNotificationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?aggregation_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor aggregation_duration: String?
+    end
+
+    class GetNotificationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor locale: String?
+    end
+
+    class GetNotificationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?creation_time: Time,
+        ?content: Types::NotificationEventSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor content: Types::NotificationEventSchema?
+    end
+
+    class GetNotificationsAccessForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetNotificationsAccessForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notifications_access_for_organization: Types::NotificationsAccessForOrganization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notifications_access_for_organization: Types::NotificationsAccessForOrganization?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?channels: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor channels: Array[String]?
+    end
+
+    class ListEventRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?event_rules: Array[Types::EventRuleStructure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor event_rules: Array[Types::EventRuleStructure]?
+    end
+
+    class ListManagedNotificationChannelAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_notification_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedNotificationChannelAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?channel_associations: Array[Types::ManagedNotificationChannelAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor channel_associations: Array[Types::ManagedNotificationChannelAssociationSummary]?
+    end
+
+    class ListManagedNotificationChildEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_managed_notification_event_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?locale: String,
+        ?max_results: Integer,
+        ?related_account: String,
+        ?organizational_unit_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_managed_notification_event_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor locale: String?
+      attr_accessor max_results: Integer?
+      attr_accessor related_account: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedNotificationChildEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_notification_child_events: Array[Types::ManagedNotificationChildEventOverview],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_notification_child_events: Array[Types::ManagedNotificationChildEventOverview]?
+    end
+
+    class ListManagedNotificationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedNotificationConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_notification_configurations: Array[Types::ManagedNotificationConfigurationStructure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_notification_configurations: Array[Types::ManagedNotificationConfigurationStructure]?
+    end
+
+    class ListManagedNotificationEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?locale: String,
+        ?source: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?organizational_unit_id: String,
+        ?related_account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor locale: String?
+      attr_accessor source: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor related_account: String?
+    end
+
+    class ListManagedNotificationEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_notification_events: Array[Types::ManagedNotificationEventOverview],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_notification_events: Array[Types::ManagedNotificationEventOverview]?
+    end
+
+    class ListNotificationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_rule_source: String,
+        ?channel_arn: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_rule_source: String?
+      attr_accessor channel_arn: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?notification_configurations: Array[Types::NotificationConfigurationStructure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor notification_configurations: Array[Types::NotificationConfigurationStructure]?
+    end
+
+    class ListNotificationEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?locale: String,
+        ?source: String,
+        ?include_child_events: bool,
+        ?aggregate_notification_event_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor locale: String?
+      attr_accessor source: String?
+      attr_accessor include_child_events: bool?
+      attr_accessor aggregate_notification_event_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?notification_events: Array[Types::NotificationEventOverview],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor notification_events: Array[Types::NotificationEventOverview]?
+    end
+
+    class ListNotificationHubsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotificationHubsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hubs: Array[Types::NotificationHubOverview],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hubs: Array[Types::NotificationHubOverview]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ManagedNotificationChannelAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_identifier: String,
+        ?channel_type: String,
+        ?override_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_identifier: String?
+      attr_accessor channel_type: String?
+      attr_accessor override_option: String?
+    end
+
+    class ManagedNotificationChildEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?id: String,
+        ?message_components: Types::MessageComponents,
+        ?source_event_detail_url: String,
+        ?source_event_detail_url_display_text: String,
+        ?notification_type: String,
+        ?event_status: String,
+        ?aggregate_managed_notification_event_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?text_parts: Hash[String, Types::TextPartValue],
+        ?organizational_unit_id: String,
+        ?aggregation_detail: Types::AggregationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor id: String?
+      attr_accessor message_components: Types::MessageComponents?
+      attr_accessor source_event_detail_url: String?
+      attr_accessor source_event_detail_url_display_text: String?
+      attr_accessor notification_type: String?
+      attr_accessor event_status: String?
+      attr_accessor aggregate_managed_notification_event_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor text_parts: Hash[String, Types::TextPartValue]?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor aggregation_detail: Types::AggregationDetail?
+    end
+
+    class ManagedNotificationChildEventOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?managed_notification_configuration_arn: String,
+        ?related_account: String,
+        ?creation_time: Time,
+        ?child_event: Types::ManagedNotificationChildEventSummary,
+        ?aggregate_managed_notification_event_arn: String,
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor related_account: String?
+      attr_accessor creation_time: Time?
+      attr_accessor child_event: Types::ManagedNotificationChildEventSummary?
+      attr_accessor aggregate_managed_notification_event_arn: String?
+      attr_accessor organizational_unit_id: String?
+    end
+
+    class ManagedNotificationChildEventSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?source_event_metadata: Types::ManagedSourceEventMetadataSummary,
+        ?message_components: Types::MessageComponentsSummary,
+        ?aggregation_detail: Types::AggregationDetail,
+        ?event_status: String,
+        ?notification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor source_event_metadata: Types::ManagedSourceEventMetadataSummary?
+      attr_accessor message_components: Types::MessageComponentsSummary?
+      attr_accessor aggregation_detail: Types::AggregationDetail?
+      attr_accessor event_status: String?
+      attr_accessor notification_type: String?
+    end
+
+    class ManagedNotificationConfigurationStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class ManagedNotificationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?id: String,
+        ?message_components: Types::MessageComponents,
+        ?source_event_detail_url: String,
+        ?source_event_detail_url_display_text: String,
+        ?notification_type: String,
+        ?event_status: String,
+        ?aggregation_event_type: String,
+        ?aggregation_summary: Types::AggregationSummary,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?text_parts: Hash[String, Types::TextPartValue],
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor id: String?
+      attr_accessor message_components: Types::MessageComponents?
+      attr_accessor source_event_detail_url: String?
+      attr_accessor source_event_detail_url_display_text: String?
+      attr_accessor notification_type: String?
+      attr_accessor event_status: String?
+      attr_accessor aggregation_event_type: String?
+      attr_accessor aggregation_summary: Types::AggregationSummary?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor text_parts: Hash[String, Types::TextPartValue]?
+      attr_accessor organizational_unit_id: String?
+    end
+
+    class ManagedNotificationEventOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?managed_notification_configuration_arn: String,
+        ?related_account: String,
+        ?creation_time: Time,
+        ?notification_event: Types::ManagedNotificationEventSummary,
+        ?aggregation_event_type: String,
+        ?organizational_unit_id: String,
+        ?aggregation_summary: Types::AggregationSummary,
+        ?aggregated_notification_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor related_account: String?
+      attr_accessor creation_time: Time?
+      attr_accessor notification_event: Types::ManagedNotificationEventSummary?
+      attr_accessor aggregation_event_type: String?
+      attr_accessor organizational_unit_id: String?
+      attr_accessor aggregation_summary: Types::AggregationSummary?
+      attr_accessor aggregated_notification_regions: Array[String]?
+    end
+
+    class ManagedNotificationEventSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?source_event_metadata: Types::ManagedSourceEventMetadataSummary,
+        ?message_components: Types::MessageComponentsSummary,
+        ?event_status: String,
+        ?notification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor source_event_metadata: Types::ManagedSourceEventMetadataSummary?
+      attr_accessor message_components: Types::MessageComponentsSummary?
+      attr_accessor event_status: String?
+      attr_accessor notification_type: String?
+    end
+
+    class ManagedSourceEventMetadataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_origin_region: String,
+        ?source: String,
+        ?event_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_origin_region: String?
+      attr_accessor source: String?
+      attr_accessor event_type: String?
+    end
+
+    class MediaElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_id: String,
+        ?type: String,
+        ?url: String,
+        ?caption: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_id: String?
+      attr_accessor type: String?
+      attr_accessor url: String?
+      attr_accessor caption: String?
+    end
+
+    class MessageComponents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?headline: String,
+        ?paragraph_summary: String,
+        ?complete_description: String,
+        ?dimensions: Array[Types::Dimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor headline: String?
+      attr_accessor paragraph_summary: String?
+      attr_accessor complete_description: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+    end
+
+    class MessageComponentsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?headline: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor headline: String?
+    end
+
+    class NotificationConfigurationStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?aggregation_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor aggregation_duration: String?
+    end
+
+    class NotificationEventOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?related_account: String,
+        ?creation_time: Time,
+        ?notification_event: Types::NotificationEventSummary,
+        ?aggregation_event_type: String,
+        ?aggregate_notification_event_arn: String,
+        ?aggregation_summary: Types::AggregationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor related_account: String?
+      attr_accessor creation_time: Time?
+      attr_accessor notification_event: Types::NotificationEventSummary?
+      attr_accessor aggregation_event_type: String?
+      attr_accessor aggregate_notification_event_arn: String?
+      attr_accessor aggregation_summary: Types::AggregationSummary?
+    end
+
+    class NotificationEventSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?id: String,
+        ?source_event_metadata: Types::SourceEventMetadata,
+        ?message_components: Types::MessageComponents,
+        ?source_event_detail_url: String,
+        ?source_event_detail_url_display_text: String,
+        ?notification_type: String,
+        ?event_status: String,
+        ?aggregation_event_type: String,
+        ?aggregate_notification_event_arn: String,
+        ?aggregation_summary: Types::AggregationSummary,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?text_parts: Hash[String, Types::TextPartValue],
+        ?media: Array[Types::MediaElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor id: String?
+      attr_accessor source_event_metadata: Types::SourceEventMetadata?
+      attr_accessor message_components: Types::MessageComponents?
+      attr_accessor source_event_detail_url: String?
+      attr_accessor source_event_detail_url_display_text: String?
+      attr_accessor notification_type: String?
+      attr_accessor event_status: String?
+      attr_accessor aggregation_event_type: String?
+      attr_accessor aggregate_notification_event_arn: String?
+      attr_accessor aggregation_summary: Types::AggregationSummary?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor text_parts: Hash[String, Types::TextPartValue]?
+      attr_accessor media: Array[Types::MediaElement]?
+    end
+
+    class NotificationEventSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: String,
+        ?source_event_metadata: Types::SourceEventMetadataSummary,
+        ?message_components: Types::MessageComponentsSummary,
+        ?event_status: String,
+        ?notification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: String?
+      attr_accessor source_event_metadata: Types::SourceEventMetadataSummary?
+      attr_accessor message_components: Types::MessageComponentsSummary?
+      attr_accessor event_status: String?
+      attr_accessor notification_type: String?
+    end
+
+    class NotificationHubOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hub_region: String,
+        ?status_summary: Types::NotificationHubStatusSummary,
+        ?creation_time: Time,
+        ?last_activation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hub_region: String?
+      attr_accessor status_summary: Types::NotificationHubStatusSummary?
+      attr_accessor creation_time: Time?
+      attr_accessor last_activation_time: Time?
+    end
+
+    class NotificationHubStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    class NotificationsAccessForOrganization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_status: String?
+    end
+
+    class RegisterNotificationHubRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hub_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hub_region: String?
+    end
+
+    class RegisterNotificationHubResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_hub_region: String,
+        ?status_summary: Types::NotificationHubStatusSummary,
+        ?creation_time: Time,
+        ?last_activation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_hub_region: String?
+      attr_accessor status_summary: Types::NotificationHubStatusSummary?
+      attr_accessor creation_time: Time?
+      attr_accessor last_activation_time: Time?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?detail_url: String,
+        ?tags: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor detail_url: String?
+      attr_accessor tags: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SourceEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type_version: String,
+        ?source_event_id: String,
+        ?event_origin_region: String,
+        ?related_account: String,
+        ?source: String,
+        ?event_occurrence_time: Time,
+        ?event_type: String,
+        ?related_resources: Array[Types::Resource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type_version: String?
+      attr_accessor source_event_id: String?
+      attr_accessor event_origin_region: String?
+      attr_accessor related_account: String?
+      attr_accessor source: String?
+      attr_accessor event_occurrence_time: Time?
+      attr_accessor event_type: String?
+      attr_accessor related_resources: Array[Types::Resource]?
+    end
+
+    class SourceEventMetadataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_origin_region: String,
+        ?source: String,
+        ?event_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_origin_region: String?
+      attr_accessor source: String?
+      attr_accessor event_type: String?
+    end
+
+    class SummarizationDimensionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class SummarizationDimensionOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?count: Integer,
+        ?sample_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor count: Integer?
+      attr_accessor sample_values: Array[String]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextPartValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?display_text: String,
+        ?text_by_locale: Hash[String, String],
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor display_text: String?
+      attr_accessor text_by_locale: Hash[String, String]?
+      attr_accessor url: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?event_pattern: String,
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor event_pattern: String?
+      attr_accessor regions: Array[String]?
+    end
+
+    class UpdateEventRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?notification_configuration_arn: String,
+        ?status_summary_by_region: Hash[String, Types::EventRuleStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor status_summary_by_region: Hash[String, Types::EventRuleStatusSummary]?
+    end
+
+    class UpdateNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?aggregation_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aggregation_duration: String?
+    end
+
+    class UpdateNotificationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

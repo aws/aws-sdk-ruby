@@ -1,0 +1,5 @@
+  module Aws
+    module CodeGuruReviewer
+      VERSION: String
+    end
+  end

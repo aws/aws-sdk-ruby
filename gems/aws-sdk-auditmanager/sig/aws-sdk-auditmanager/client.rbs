@@ -1,0 +1,777 @@
+module Aws::AuditManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AuditManager::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAssessmentReportEvidenceFolderResponse
+      include Smithy::Client::_Response[Types::AssociateAssessmentReportEvidenceFolderResponse]
+    end
+    def associate_assessment_report_evidence_folder: (
+      ?assessment_id: String,
+      ?evidence_folder_id: String
+    ) -> _AssociateAssessmentReportEvidenceFolderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAssessmentReportEvidenceFolderResponse
+
+    interface _BatchAssociateAssessmentReportEvidenceResponse
+      include Smithy::Client::_Response[Types::BatchAssociateAssessmentReportEvidenceResponse]
+      def evidence_ids: () -> Array[String]?
+      def errors: () -> Array[Types::AssessmentReportEvidenceError]?
+    end
+    def batch_associate_assessment_report_evidence: (
+      ?assessment_id: String,
+      ?evidence_folder_id: String,
+      ?evidence_ids: Array[String]
+    ) -> _BatchAssociateAssessmentReportEvidenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateAssessmentReportEvidenceResponse
+
+    interface _BatchCreateDelegationByAssessmentResponse
+      include Smithy::Client::_Response[Types::BatchCreateDelegationByAssessmentResponse]
+      def delegations: () -> Array[Types::Delegation]?
+      def errors: () -> Array[Types::BatchCreateDelegationByAssessmentError]?
+    end
+    def batch_create_delegation_by_assessment: (
+      ?create_delegation_requests: Array[
+        {
+          comment: String,
+          control_set_id: String,
+          role_arn: String,
+          role_type: String
+        }
+      ],
+      ?assessment_id: String
+    ) -> _BatchCreateDelegationByAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateDelegationByAssessmentResponse
+
+    interface _BatchDeleteDelegationByAssessmentResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDelegationByAssessmentResponse]
+      def errors: () -> Array[Types::BatchDeleteDelegationByAssessmentError]?
+    end
+    def batch_delete_delegation_by_assessment: (
+      ?delegation_ids: Array[String],
+      ?assessment_id: String
+    ) -> _BatchDeleteDelegationByAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDelegationByAssessmentResponse
+
+    interface _BatchDisassociateAssessmentReportEvidenceResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateAssessmentReportEvidenceResponse]
+      def evidence_ids: () -> Array[String]?
+      def errors: () -> Array[Types::AssessmentReportEvidenceError]?
+    end
+    def batch_disassociate_assessment_report_evidence: (
+      ?assessment_id: String,
+      ?evidence_folder_id: String,
+      ?evidence_ids: Array[String]
+    ) -> _BatchDisassociateAssessmentReportEvidenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateAssessmentReportEvidenceResponse
+
+    interface _BatchImportEvidenceToAssessmentControlResponse
+      include Smithy::Client::_Response[Types::BatchImportEvidenceToAssessmentControlResponse]
+      def errors: () -> Array[Types::BatchImportEvidenceToAssessmentControlError]?
+    end
+    def batch_import_evidence_to_assessment_control: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?control_id: String,
+      ?manual_evidence: Array[
+        {
+          s3_resource_path: String,
+          text_response: String,
+          evidence_file_name: String
+        }
+      ]
+    ) -> _BatchImportEvidenceToAssessmentControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchImportEvidenceToAssessmentControlResponse
+
+    interface _CreateAssessmentResponse
+      include Smithy::Client::_Response[Types::CreateAssessmentResponse]
+      def assessment: () -> Types::Assessment?
+    end
+    def create_assessment: (
+      ?name: String,
+      ?description: String,
+      ?assessment_reports_destination: {
+        destination_type: String,
+        destination: String
+      },
+      ?scope: {
+        aws_accounts: Array[
+          {
+            id: String,
+            email_address: String,
+            name: String
+          }
+        ],
+        aws_services: Array[
+          {
+            service_name: String
+          }
+        ]
+      },
+      ?roles: Array[
+        {
+          role_type: String,
+          role_arn: String
+        }
+      ],
+      ?framework_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssessmentResponse
+
+    interface _CreateAssessmentFrameworkResponse
+      include Smithy::Client::_Response[Types::CreateAssessmentFrameworkResponse]
+      def framework: () -> Types::Framework?
+    end
+    def create_assessment_framework: (
+      ?name: String,
+      ?description: String,
+      ?compliance_type: String,
+      ?control_sets: Array[
+        {
+          name: String,
+          controls: Array[
+            {
+              id: String
+            }
+          ]
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateAssessmentFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssessmentFrameworkResponse
+
+    interface _CreateAssessmentReportResponse
+      include Smithy::Client::_Response[Types::CreateAssessmentReportResponse]
+      def assessment_report: () -> Types::AssessmentReport?
+    end
+    def create_assessment_report: (
+      ?name: String,
+      ?description: String,
+      ?assessment_id: String,
+      ?query_statement: String
+    ) -> _CreateAssessmentReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssessmentReportResponse
+
+    interface _CreateControlResponse
+      include Smithy::Client::_Response[Types::CreateControlResponse]
+      def control: () -> Types::Control?
+    end
+    def create_control: (
+      ?name: String,
+      ?description: String,
+      ?testing_information: String,
+      ?action_plan_title: String,
+      ?action_plan_instructions: String,
+      ?control_mapping_sources: Array[
+        {
+          source_name: String,
+          source_description: String,
+          source_set_up_option: String,
+          source_type: String,
+          source_keyword: {
+            keyword_input_type: String,
+            keyword_value: String
+          },
+          source_frequency: String,
+          troubleshooting_text: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateControlResponse
+
+    interface _DeleteAssessmentResponse
+      include Smithy::Client::_Response[Types::DeleteAssessmentResponse]
+    end
+    def delete_assessment: (
+      ?assessment_id: String
+    ) -> _DeleteAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentResponse
+
+    interface _DeleteAssessmentFrameworkResponse
+      include Smithy::Client::_Response[Types::DeleteAssessmentFrameworkResponse]
+    end
+    def delete_assessment_framework: (
+      ?framework_id: String
+    ) -> _DeleteAssessmentFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentFrameworkResponse
+
+    interface _DeleteAssessmentFrameworkShareResponse
+      include Smithy::Client::_Response[Types::DeleteAssessmentFrameworkShareResponse]
+    end
+    def delete_assessment_framework_share: (
+      ?request_id: String,
+      ?request_type: String
+    ) -> _DeleteAssessmentFrameworkShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentFrameworkShareResponse
+
+    interface _DeleteAssessmentReportResponse
+      include Smithy::Client::_Response[Types::DeleteAssessmentReportResponse]
+    end
+    def delete_assessment_report: (
+      ?assessment_id: String,
+      ?assessment_report_id: String
+    ) -> _DeleteAssessmentReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentReportResponse
+
+    interface _DeleteControlResponse
+      include Smithy::Client::_Response[Types::DeleteControlResponse]
+    end
+    def delete_control: (
+      ?control_id: String
+    ) -> _DeleteControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteControlResponse
+
+    interface _DeregisterAccountResponse
+      include Smithy::Client::_Response[Types::DeregisterAccountResponse]
+      def status: () -> String?
+    end
+    def deregister_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterAccountResponse
+
+    interface _DeregisterOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::DeregisterOrganizationAdminAccountResponse]
+    end
+    def deregister_organization_admin_account: (
+      ?admin_account_id: String
+    ) -> _DeregisterOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterOrganizationAdminAccountResponse
+
+    interface _DisassociateAssessmentReportEvidenceFolderResponse
+      include Smithy::Client::_Response[Types::DisassociateAssessmentReportEvidenceFolderResponse]
+    end
+    def disassociate_assessment_report_evidence_folder: (
+      ?assessment_id: String,
+      ?evidence_folder_id: String
+    ) -> _DisassociateAssessmentReportEvidenceFolderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAssessmentReportEvidenceFolderResponse
+
+    interface _GetAccountStatusResponse
+      include Smithy::Client::_Response[Types::GetAccountStatusResponse]
+      def status: () -> String?
+    end
+    def get_account_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountStatusResponse
+
+    interface _GetAssessmentResponse
+      include Smithy::Client::_Response[Types::GetAssessmentResponse]
+      def assessment: () -> Types::Assessment?
+      def user_role: () -> Types::Role?
+    end
+    def get_assessment: (
+      ?assessment_id: String
+    ) -> _GetAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssessmentResponse
+
+    interface _GetAssessmentFrameworkResponse
+      include Smithy::Client::_Response[Types::GetAssessmentFrameworkResponse]
+      def framework: () -> Types::Framework?
+    end
+    def get_assessment_framework: (
+      ?framework_id: String
+    ) -> _GetAssessmentFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssessmentFrameworkResponse
+
+    interface _GetAssessmentReportUrlResponse
+      include Smithy::Client::_Response[Types::GetAssessmentReportUrlResponse]
+      def pre_signed_url: () -> Types::URL?
+    end
+    def get_assessment_report_url: (
+      ?assessment_report_id: String,
+      ?assessment_id: String
+    ) -> _GetAssessmentReportUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssessmentReportUrlResponse
+
+    interface _GetChangeLogsResponse
+      include Smithy::Client::_Response[Types::GetChangeLogsResponse]
+      def change_logs: () -> Array[Types::ChangeLog]?
+      def next_token: () -> String?
+    end
+    def get_change_logs: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?control_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetChangeLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChangeLogsResponse
+
+    interface _GetControlResponse
+      include Smithy::Client::_Response[Types::GetControlResponse]
+      def control: () -> Types::Control?
+    end
+    def get_control: (
+      ?control_id: String
+    ) -> _GetControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetControlResponse
+
+    interface _GetDelegationsResponse
+      include Smithy::Client::_Response[Types::GetDelegationsResponse]
+      def delegations: () -> Array[Types::DelegationMetadata]?
+      def next_token: () -> String?
+    end
+    def get_delegations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetDelegationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDelegationsResponse
+
+    interface _GetEvidenceResponse
+      include Smithy::Client::_Response[Types::GetEvidenceResponse]
+      def evidence: () -> Types::Evidence?
+    end
+    def get_evidence: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?evidence_folder_id: String,
+      ?evidence_id: String
+    ) -> _GetEvidenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceResponse
+
+    interface _GetEvidenceByEvidenceFolderResponse
+      include Smithy::Client::_Response[Types::GetEvidenceByEvidenceFolderResponse]
+      def evidence: () -> Array[Types::Evidence]?
+      def next_token: () -> String?
+    end
+    def get_evidence_by_evidence_folder: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?evidence_folder_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEvidenceByEvidenceFolderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceByEvidenceFolderResponse
+
+    interface _GetEvidenceFileUploadUrlResponse
+      include Smithy::Client::_Response[Types::GetEvidenceFileUploadUrlResponse]
+      def evidence_file_name: () -> String?
+      def upload_url: () -> String?
+    end
+    def get_evidence_file_upload_url: (
+      ?file_name: String
+    ) -> _GetEvidenceFileUploadUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceFileUploadUrlResponse
+
+    interface _GetEvidenceFolderResponse
+      include Smithy::Client::_Response[Types::GetEvidenceFolderResponse]
+      def evidence_folder: () -> Types::AssessmentEvidenceFolder?
+    end
+    def get_evidence_folder: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?evidence_folder_id: String
+    ) -> _GetEvidenceFolderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceFolderResponse
+
+    interface _GetEvidenceFoldersByAssessmentResponse
+      include Smithy::Client::_Response[Types::GetEvidenceFoldersByAssessmentResponse]
+      def evidence_folders: () -> Array[Types::AssessmentEvidenceFolder]?
+      def next_token: () -> String?
+    end
+    def get_evidence_folders_by_assessment: (
+      ?assessment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEvidenceFoldersByAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceFoldersByAssessmentResponse
+
+    interface _GetEvidenceFoldersByAssessmentControlResponse
+      include Smithy::Client::_Response[Types::GetEvidenceFoldersByAssessmentControlResponse]
+      def evidence_folders: () -> Array[Types::AssessmentEvidenceFolder]?
+      def next_token: () -> String?
+    end
+    def get_evidence_folders_by_assessment_control: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?control_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetEvidenceFoldersByAssessmentControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvidenceFoldersByAssessmentControlResponse
+
+    interface _GetInsightsResponse
+      include Smithy::Client::_Response[Types::GetInsightsResponse]
+      def insights: () -> Types::Insights?
+    end
+    def get_insights: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightsResponse
+
+    interface _GetInsightsByAssessmentResponse
+      include Smithy::Client::_Response[Types::GetInsightsByAssessmentResponse]
+      def insights: () -> Types::InsightsByAssessment?
+    end
+    def get_insights_by_assessment: (
+      ?assessment_id: String
+    ) -> _GetInsightsByAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightsByAssessmentResponse
+
+    interface _GetOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::GetOrganizationAdminAccountResponse]
+      def admin_account_id: () -> String?
+      def organization_id: () -> String?
+    end
+    def get_organization_admin_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationAdminAccountResponse
+
+    interface _GetServicesInScopeResponse
+      include Smithy::Client::_Response[Types::GetServicesInScopeResponse]
+      def service_metadata: () -> Array[Types::ServiceMetadata]?
+    end
+    def get_services_in_scope: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServicesInScopeResponse
+
+    interface _GetSettingsResponse
+      include Smithy::Client::_Response[Types::GetSettingsResponse]
+      def settings: () -> Types::Settings?
+    end
+    def get_settings: (
+      ?attribute: String
+    ) -> _GetSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSettingsResponse
+
+    interface _ListAssessmentControlInsightsByControlDomainResponse
+      include Smithy::Client::_Response[Types::ListAssessmentControlInsightsByControlDomainResponse]
+      def control_insights_by_assessment: () -> Array[Types::ControlInsightsMetadataByAssessmentItem]?
+      def next_token: () -> String?
+    end
+    def list_assessment_control_insights_by_control_domain: (
+      ?control_domain_id: String,
+      ?assessment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentControlInsightsByControlDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentControlInsightsByControlDomainResponse
+
+    interface _ListAssessmentFrameworkShareRequestsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentFrameworkShareRequestsResponse]
+      def assessment_framework_share_requests: () -> Array[Types::AssessmentFrameworkShareRequest]?
+      def next_token: () -> String?
+    end
+    def list_assessment_framework_share_requests: (
+      ?request_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentFrameworkShareRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentFrameworkShareRequestsResponse
+
+    interface _ListAssessmentFrameworksResponse
+      include Smithy::Client::_Response[Types::ListAssessmentFrameworksResponse]
+      def framework_metadata_list: () -> Array[Types::AssessmentFrameworkMetadata]?
+      def next_token: () -> String?
+    end
+    def list_assessment_frameworks: (
+      ?framework_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentFrameworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentFrameworksResponse
+
+    interface _ListAssessmentReportsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentReportsResponse]
+      def assessment_reports: () -> Array[Types::AssessmentReportMetadata]?
+      def next_token: () -> String?
+    end
+    def list_assessment_reports: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentReportsResponse
+
+    interface _ListAssessmentsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentsResponse]
+      def assessment_metadata: () -> Array[Types::AssessmentMetadataItem]?
+      def next_token: () -> String?
+    end
+    def list_assessments: (
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentsResponse
+
+    interface _ListControlDomainInsightsResponse
+      include Smithy::Client::_Response[Types::ListControlDomainInsightsResponse]
+      def control_domain_insights: () -> Array[Types::ControlDomainInsights]?
+      def next_token: () -> String?
+    end
+    def list_control_domain_insights: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListControlDomainInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlDomainInsightsResponse
+
+    interface _ListControlDomainInsightsByAssessmentResponse
+      include Smithy::Client::_Response[Types::ListControlDomainInsightsByAssessmentResponse]
+      def control_domain_insights: () -> Array[Types::ControlDomainInsights]?
+      def next_token: () -> String?
+    end
+    def list_control_domain_insights_by_assessment: (
+      ?assessment_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListControlDomainInsightsByAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlDomainInsightsByAssessmentResponse
+
+    interface _ListControlInsightsByControlDomainResponse
+      include Smithy::Client::_Response[Types::ListControlInsightsByControlDomainResponse]
+      def control_insights_metadata: () -> Array[Types::ControlInsightsMetadataItem]?
+      def next_token: () -> String?
+    end
+    def list_control_insights_by_control_domain: (
+      ?control_domain_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListControlInsightsByControlDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlInsightsByControlDomainResponse
+
+    interface _ListControlsResponse
+      include Smithy::Client::_Response[Types::ListControlsResponse]
+      def control_metadata_list: () -> Array[Types::ControlMetadata]?
+      def next_token: () -> String?
+    end
+    def list_controls: (
+      ?control_type: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?control_catalog_id: String
+    ) -> _ListControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlsResponse
+
+    interface _ListKeywordsForDataSourceResponse
+      include Smithy::Client::_Response[Types::ListKeywordsForDataSourceResponse]
+      def keywords: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_keywords_for_data_source: (
+      ?source: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKeywordsForDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeywordsForDataSourceResponse
+
+    interface _ListNotificationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationsResponse]
+      def notifications: () -> Array[Types::Notification]?
+      def next_token: () -> String?
+    end
+    def list_notifications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterAccountResponse
+      include Smithy::Client::_Response[Types::RegisterAccountResponse]
+      def status: () -> String?
+    end
+    def register_account: (
+      ?kms_key: String,
+      ?delegated_admin_account: String
+    ) -> _RegisterAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAccountResponse
+
+    interface _RegisterOrganizationAdminAccountResponse
+      include Smithy::Client::_Response[Types::RegisterOrganizationAdminAccountResponse]
+      def admin_account_id: () -> String?
+      def organization_id: () -> String?
+    end
+    def register_organization_admin_account: (
+      ?admin_account_id: String
+    ) -> _RegisterOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOrganizationAdminAccountResponse
+
+    interface _StartAssessmentFrameworkShareResponse
+      include Smithy::Client::_Response[Types::StartAssessmentFrameworkShareResponse]
+      def assessment_framework_share_request: () -> Types::AssessmentFrameworkShareRequest?
+    end
+    def start_assessment_framework_share: (
+      ?framework_id: String,
+      ?destination_account: String,
+      ?destination_region: String,
+      ?comment: String
+    ) -> _StartAssessmentFrameworkShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAssessmentFrameworkShareResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAssessmentResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentResponse]
+      def assessment: () -> Types::Assessment?
+    end
+    def update_assessment: (
+      ?assessment_id: String,
+      ?assessment_name: String,
+      ?assessment_description: String,
+      ?scope: {
+        aws_accounts: Array[
+          {
+            id: String,
+            email_address: String,
+            name: String
+          }
+        ],
+        aws_services: Array[
+          {
+            service_name: String
+          }
+        ]
+      },
+      ?assessment_reports_destination: {
+        destination_type: String,
+        destination: String
+      },
+      ?roles: Array[
+        {
+          role_type: String,
+          role_arn: String
+        }
+      ]
+    ) -> _UpdateAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentResponse
+
+    interface _UpdateAssessmentControlResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentControlResponse]
+      def control: () -> Types::AssessmentControl?
+    end
+    def update_assessment_control: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?control_id: String,
+      ?control_status: String,
+      ?comment_body: String
+    ) -> _UpdateAssessmentControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentControlResponse
+
+    interface _UpdateAssessmentControlSetStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentControlSetStatusResponse]
+      def control_set: () -> Types::AssessmentControlSet?
+    end
+    def update_assessment_control_set_status: (
+      ?assessment_id: String,
+      ?control_set_id: String,
+      ?status: String,
+      ?comment: String
+    ) -> _UpdateAssessmentControlSetStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentControlSetStatusResponse
+
+    interface _UpdateAssessmentFrameworkResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentFrameworkResponse]
+      def framework: () -> Types::Framework?
+    end
+    def update_assessment_framework: (
+      ?framework_id: String,
+      ?name: String,
+      ?description: String,
+      ?compliance_type: String,
+      ?control_sets: Array[
+        {
+          id: String,
+          name: untyped,
+          controls: Array[
+            {
+              id: String
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateAssessmentFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentFrameworkResponse
+
+    interface _UpdateAssessmentFrameworkShareResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentFrameworkShareResponse]
+      def assessment_framework_share_request: () -> Types::AssessmentFrameworkShareRequest?
+    end
+    def update_assessment_framework_share: (
+      ?request_id: String,
+      ?request_type: String,
+      ?action: String
+    ) -> _UpdateAssessmentFrameworkShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentFrameworkShareResponse
+
+    interface _UpdateAssessmentStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAssessmentStatusResponse]
+      def assessment: () -> Types::Assessment?
+    end
+    def update_assessment_status: (
+      ?assessment_id: String,
+      ?status: String
+    ) -> _UpdateAssessmentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentStatusResponse
+
+    interface _UpdateControlResponse
+      include Smithy::Client::_Response[Types::UpdateControlResponse]
+      def control: () -> Types::Control?
+    end
+    def update_control: (
+      ?control_id: String,
+      ?name: String,
+      ?description: String,
+      ?testing_information: String,
+      ?action_plan_title: String,
+      ?action_plan_instructions: String,
+      ?control_mapping_sources: Array[
+        {
+          source_id: String,
+          source_name: String,
+          source_description: String,
+          source_set_up_option: String,
+          source_type: String,
+          source_keyword: {
+            keyword_input_type: String,
+            keyword_value: String
+          },
+          source_frequency: String,
+          troubleshooting_text: String
+        }
+      ]
+    ) -> _UpdateControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateControlResponse
+
+    interface _UpdateSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateSettingsResponse]
+      def settings: () -> Types::Settings?
+    end
+    def update_settings: (
+      ?sns_topic: String,
+      ?default_assessment_reports_destination: {
+        destination_type: String,
+        destination: String
+      },
+      ?default_process_owners: Array[
+        {
+          role_type: String,
+          role_arn: String
+        }
+      ],
+      ?kms_key: String,
+      ?evidence_finder_enabled: bool,
+      ?deregistration_policy: {
+        delete_resources: String
+      },
+      ?default_export_destination: {
+        destination_type: String,
+        destination: String
+      }
+    ) -> _UpdateSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSettingsResponse
+
+    interface _ValidateAssessmentReportIntegrityResponse
+      include Smithy::Client::_Response[Types::ValidateAssessmentReportIntegrityResponse]
+      def signature_valid: () -> bool?
+      def signature_algorithm: () -> String?
+      def signature_date_time: () -> String?
+      def signature_key_id: () -> String?
+      def validation_errors: () -> Array[String]?
+    end
+    def validate_assessment_report_integrity: (
+      ?s3_relative_path: String
+    ) -> _ValidateAssessmentReportIntegrityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateAssessmentReportIntegrityResponse
+  end
+end

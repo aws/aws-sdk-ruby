@@ -1,0 +1,5 @@
+module Aws::SSO
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

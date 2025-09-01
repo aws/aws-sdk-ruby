@@ -1,0 +1,490 @@
+module Aws::Textract
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Textract::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AnalyzeDocumentResponse
+      include Smithy::Client::_Response[Types::AnalyzeDocumentResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def blocks: () -> Array[Types::Block]?
+      def human_loop_activation_output: () -> Types::HumanLoopActivationOutput?
+      def analyze_document_model_version: () -> String?
+    end
+    def analyze_document: (
+      ?document: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?feature_types: Array[String],
+      ?human_loop_config: {
+        human_loop_name: String,
+        flow_definition_arn: String,
+        data_attributes: {
+          content_classifiers: Array[String]
+        }
+      },
+      ?queries_config: {
+        queries: Array[
+          {
+            text: String,
+            alias: untyped,
+            pages: Array[String]
+          }
+        ]
+      },
+      ?adapters_config: {
+        adapters: Array[
+          {
+            adapter_id: String,
+            pages: Array[String],
+            version: String
+          }
+        ]
+      }
+    ) -> _AnalyzeDocumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AnalyzeDocumentResponse
+
+    interface _AnalyzeExpenseResponse
+      include Smithy::Client::_Response[Types::AnalyzeExpenseResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def expense_documents: () -> Array[Types::ExpenseDocument]?
+    end
+    def analyze_expense: (
+      ?document: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      }
+    ) -> _AnalyzeExpenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AnalyzeExpenseResponse
+
+    interface _AnalyzeIDResponse
+      include Smithy::Client::_Response[Types::AnalyzeIDResponse]
+      def identity_documents: () -> Array[Types::IdentityDocument]?
+      def document_metadata: () -> Types::DocumentMetadata?
+      def analyze_id_model_version: () -> String?
+    end
+    def analyze_id: (
+      ?document_pages: Array[
+        {
+          bytes: String,
+          s3_object: {
+            bucket: String,
+            name: String,
+            version: String
+          }
+        }
+      ]
+    ) -> _AnalyzeIDResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AnalyzeIDResponse
+
+    interface _CreateAdapterResponse
+      include Smithy::Client::_Response[Types::CreateAdapterResponse]
+      def adapter_id: () -> String?
+    end
+    def create_adapter: (
+      ?adapter_name: String,
+      ?client_request_token: String,
+      ?description: String,
+      ?feature_types: Array[String],
+      ?auto_update: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAdapterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAdapterResponse
+
+    interface _CreateAdapterVersionResponse
+      include Smithy::Client::_Response[Types::CreateAdapterVersionResponse]
+      def adapter_id: () -> String?
+      def adapter_version: () -> String?
+    end
+    def create_adapter_version: (
+      ?adapter_id: String,
+      ?client_request_token: String,
+      ?dataset_config: {
+        manifest_s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?kms_key_id: String,
+      ?output_config: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateAdapterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAdapterVersionResponse
+
+    interface _DeleteAdapterResponse
+      include Smithy::Client::_Response[Types::DeleteAdapterResponse]
+    end
+    def delete_adapter: (
+      ?adapter_id: String
+    ) -> _DeleteAdapterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAdapterResponse
+
+    interface _DeleteAdapterVersionResponse
+      include Smithy::Client::_Response[Types::DeleteAdapterVersionResponse]
+    end
+    def delete_adapter_version: (
+      ?adapter_id: String,
+      ?adapter_version: String
+    ) -> _DeleteAdapterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAdapterVersionResponse
+
+    interface _DetectDocumentTextResponse
+      include Smithy::Client::_Response[Types::DetectDocumentTextResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def blocks: () -> Array[Types::Block]?
+      def detect_document_text_model_version: () -> String?
+    end
+    def detect_document_text: (
+      ?document: {
+        bytes: String,
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      }
+    ) -> _DetectDocumentTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectDocumentTextResponse
+
+    interface _GetAdapterResponse
+      include Smithy::Client::_Response[Types::GetAdapterResponse]
+      def adapter_id: () -> String?
+      def adapter_name: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def feature_types: () -> Array[String]?
+      def auto_update: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_adapter: (
+      ?adapter_id: String
+    ) -> _GetAdapterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdapterResponse
+
+    interface _GetAdapterVersionResponse
+      include Smithy::Client::_Response[Types::GetAdapterVersionResponse]
+      def adapter_id: () -> String?
+      def adapter_version: () -> String?
+      def creation_time: () -> Time?
+      def feature_types: () -> Array[String]?
+      def status: () -> String?
+      def status_message: () -> String?
+      def dataset_config: () -> Types::AdapterVersionDatasetConfig?
+      def kms_key_id: () -> String?
+      def output_config: () -> Types::OutputConfig?
+      def evaluation_metrics: () -> Array[Types::AdapterVersionEvaluationMetric]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_adapter_version: (
+      ?adapter_id: String,
+      ?adapter_version: String
+    ) -> _GetAdapterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdapterVersionResponse
+
+    interface _GetDocumentAnalysisResponse
+      include Smithy::Client::_Response[Types::GetDocumentAnalysisResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def job_status: () -> String?
+      def next_token: () -> String?
+      def blocks: () -> Array[Types::Block]?
+      def warnings: () -> Array[Types::Warning]?
+      def status_message: () -> String?
+      def analyze_document_model_version: () -> String?
+    end
+    def get_document_analysis: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetDocumentAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDocumentAnalysisResponse
+
+    interface _GetDocumentTextDetectionResponse
+      include Smithy::Client::_Response[Types::GetDocumentTextDetectionResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def job_status: () -> String?
+      def next_token: () -> String?
+      def blocks: () -> Array[Types::Block]?
+      def warnings: () -> Array[Types::Warning]?
+      def status_message: () -> String?
+      def detect_document_text_model_version: () -> String?
+    end
+    def get_document_text_detection: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetDocumentTextDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDocumentTextDetectionResponse
+
+    interface _GetExpenseAnalysisResponse
+      include Smithy::Client::_Response[Types::GetExpenseAnalysisResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def job_status: () -> String?
+      def next_token: () -> String?
+      def expense_documents: () -> Array[Types::ExpenseDocument]?
+      def warnings: () -> Array[Types::Warning]?
+      def status_message: () -> String?
+      def analyze_expense_model_version: () -> String?
+    end
+    def get_expense_analysis: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetExpenseAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExpenseAnalysisResponse
+
+    interface _GetLendingAnalysisResponse
+      include Smithy::Client::_Response[Types::GetLendingAnalysisResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def job_status: () -> String?
+      def next_token: () -> String?
+      def results: () -> Array[Types::LendingResult]?
+      def warnings: () -> Array[Types::Warning]?
+      def status_message: () -> String?
+      def analyze_lending_model_version: () -> String?
+    end
+    def get_lending_analysis: (
+      ?job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetLendingAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLendingAnalysisResponse
+
+    interface _GetLendingAnalysisSummaryResponse
+      include Smithy::Client::_Response[Types::GetLendingAnalysisSummaryResponse]
+      def document_metadata: () -> Types::DocumentMetadata?
+      def job_status: () -> String?
+      def summary: () -> Types::LendingSummary?
+      def warnings: () -> Array[Types::Warning]?
+      def status_message: () -> String?
+      def analyze_lending_model_version: () -> String?
+    end
+    def get_lending_analysis_summary: (
+      ?job_id: String
+    ) -> _GetLendingAnalysisSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLendingAnalysisSummaryResponse
+
+    interface _ListAdapterVersionsResponse
+      include Smithy::Client::_Response[Types::ListAdapterVersionsResponse]
+      def adapter_versions: () -> Array[Types::AdapterVersionOverview]?
+      def next_token: () -> String?
+    end
+    def list_adapter_versions: (
+      ?adapter_id: String,
+      ?after_creation_time: Time,
+      ?before_creation_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAdapterVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdapterVersionsResponse
+
+    interface _ListAdaptersResponse
+      include Smithy::Client::_Response[Types::ListAdaptersResponse]
+      def adapters: () -> Array[Types::AdapterOverview]?
+      def next_token: () -> String?
+    end
+    def list_adapters: (
+      ?after_creation_time: Time,
+      ?before_creation_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAdaptersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdaptersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartDocumentAnalysisResponse
+      include Smithy::Client::_Response[Types::StartDocumentAnalysisResponse]
+      def job_id: () -> String?
+    end
+    def start_document_analysis: (
+      ?document_location: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?feature_types: Array[String],
+      ?client_request_token: String,
+      ?job_tag: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?output_config: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?kms_key_id: String,
+      ?queries_config: {
+        queries: Array[
+          {
+            text: String,
+            alias: untyped,
+            pages: Array[String]
+          }
+        ]
+      },
+      ?adapters_config: {
+        adapters: Array[
+          {
+            adapter_id: String,
+            pages: Array[String],
+            version: String
+          }
+        ]
+      }
+    ) -> _StartDocumentAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDocumentAnalysisResponse
+
+    interface _StartDocumentTextDetectionResponse
+      include Smithy::Client::_Response[Types::StartDocumentTextDetectionResponse]
+      def job_id: () -> String?
+    end
+    def start_document_text_detection: (
+      ?document_location: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?job_tag: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?output_config: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?kms_key_id: String
+    ) -> _StartDocumentTextDetectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDocumentTextDetectionResponse
+
+    interface _StartExpenseAnalysisResponse
+      include Smithy::Client::_Response[Types::StartExpenseAnalysisResponse]
+      def job_id: () -> String?
+    end
+    def start_expense_analysis: (
+      ?document_location: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?job_tag: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?output_config: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?kms_key_id: String
+    ) -> _StartExpenseAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExpenseAnalysisResponse
+
+    interface _StartLendingAnalysisResponse
+      include Smithy::Client::_Response[Types::StartLendingAnalysisResponse]
+      def job_id: () -> String?
+    end
+    def start_lending_analysis: (
+      ?document_location: {
+        s3_object: {
+          bucket: String,
+          name: String,
+          version: String
+        }
+      },
+      ?client_request_token: String,
+      ?job_tag: String,
+      ?notification_channel: {
+        sns_topic_arn: String,
+        role_arn: String
+      },
+      ?output_config: {
+        s3_bucket: String,
+        s3_prefix: String
+      },
+      ?kms_key_id: String
+    ) -> _StartLendingAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLendingAnalysisResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAdapterResponse
+      include Smithy::Client::_Response[Types::UpdateAdapterResponse]
+      def adapter_id: () -> String?
+      def adapter_name: () -> String?
+      def creation_time: () -> Time?
+      def description: () -> String?
+      def feature_types: () -> Array[String]?
+      def auto_update: () -> String?
+    end
+    def update_adapter: (
+      ?adapter_id: String,
+      ?description: String,
+      ?adapter_name: String,
+      ?auto_update: String
+    ) -> _UpdateAdapterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAdapterResponse
+  end
+end

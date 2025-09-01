@@ -1,0 +1,585 @@
+module Aws::LexRuntimeService
+  module Types
+
+    class ActiveContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?time_to_live: Types::ActiveContextTimeToLive,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor time_to_live: Types::ActiveContextTimeToLive?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class ActiveContextTimeToLive
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_to_live_in_seconds: Integer,
+        ?turns_to_live: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_to_live_in_seconds: Integer?
+      attr_accessor turns_to_live: Integer?
+    end
+
+    class BadGatewayException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Button
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor value: String?
+    end
+
+    module ConfirmationStatus
+      NONE: String
+      CONFIRMED: String
+      DENIED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContentType
+      GENERIC: String
+    end
+
+    class DeleteSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+    end
+
+    class DeleteSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class DependencyFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DialogAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?intent_name: String,
+        ?slots: Hash[String, String],
+        ?slot_to_elicit: String,
+        ?fulfillment_state: String,
+        ?message: String,
+        ?message_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor intent_name: String?
+      attr_accessor slots: Hash[String, String]?
+      attr_accessor slot_to_elicit: String?
+      attr_accessor fulfillment_state: String?
+      attr_accessor message: String?
+      attr_accessor message_format: String?
+    end
+
+    module DialogActionType
+      ELICIT_INTENT: String
+      CONFIRM_INTENT: String
+      ELICIT_SLOT: String
+      CLOSE: String
+      DELEGATE: String
+    end
+
+    module DialogState
+      ELICIT_INTENT: String
+      CONFIRM_INTENT: String
+      ELICIT_SLOT: String
+      FULFILLED: String
+      READY_FOR_FULFILLMENT: String
+      FAILED: String
+    end
+
+    module FulfillmentState
+      FULFILLED: String
+      FAILED: String
+      READY_FOR_FULFILLMENT: String
+    end
+
+    class GenericAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?sub_title: String,
+        ?attachment_link_url: String,
+        ?image_url: String,
+        ?buttons: Array[Types::Button],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor sub_title: String?
+      attr_accessor attachment_link_url: String?
+      attr_accessor image_url: String?
+      attr_accessor buttons: Array[Types::Button]?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+        ?checkpoint_label_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+      attr_accessor checkpoint_label_filter: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recent_intent_summary_view: Array[Types::IntentSummary],
+        ?session_attributes: Hash[String, String],
+        ?session_id: String,
+        ?dialog_action: Types::DialogAction,
+        ?active_contexts: Array[Types::ActiveContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recent_intent_summary_view: Array[Types::IntentSummary]?
+      attr_accessor session_attributes: Hash[String, String]?
+      attr_accessor session_id: String?
+      attr_accessor dialog_action: Types::DialogAction?
+      attr_accessor active_contexts: Array[Types::ActiveContext]?
+    end
+
+    class IntentConfidence
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: Float?
+    end
+
+    class IntentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_name: String,
+        ?checkpoint_label: String,
+        ?slots: Hash[String, String],
+        ?confirmation_status: String,
+        ?dialog_action_type: String,
+        ?fulfillment_state: String,
+        ?slot_to_elicit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_name: String?
+      attr_accessor checkpoint_label: String?
+      attr_accessor slots: Hash[String, String]?
+      attr_accessor confirmation_status: String?
+      attr_accessor dialog_action_type: String?
+      attr_accessor fulfillment_state: String?
+      attr_accessor slot_to_elicit: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: String?
+      attr_accessor message: String?
+    end
+
+    class LoopDetectedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MessageFormatType
+      PLAIN_TEXT: String
+      CUSTOM_PAYLOAD: String
+      SSML: String
+      COMPOSITE: String
+    end
+
+    class NotAcceptableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PostContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+        ?session_attributes: String,
+        ?request_attributes: String,
+        ?content_type: String,
+        ?accept: String,
+        ?input_stream: String,
+        ?active_contexts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+      attr_accessor session_attributes: String?
+      attr_accessor request_attributes: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor input_stream: String?
+      attr_accessor active_contexts: String?
+    end
+
+    class PostContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?intent_name: String,
+        ?nlu_intent_confidence: String,
+        ?alternative_intents: String,
+        ?slots: String,
+        ?session_attributes: String,
+        ?sentiment_response: String,
+        ?message: String,
+        ?encoded_message: String,
+        ?message_format: String,
+        ?dialog_state: String,
+        ?slot_to_elicit: String,
+        ?input_transcript: String,
+        ?encoded_input_transcript: String,
+        ?audio_stream: String,
+        ?bot_version: String,
+        ?session_id: String,
+        ?active_contexts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor intent_name: String?
+      attr_accessor nlu_intent_confidence: String?
+      attr_accessor alternative_intents: String?
+      attr_accessor slots: String?
+      attr_accessor session_attributes: String?
+      attr_accessor sentiment_response: String?
+      attr_accessor message: String?
+      attr_accessor encoded_message: String?
+      attr_accessor message_format: String?
+      attr_accessor dialog_state: String?
+      attr_accessor slot_to_elicit: String?
+      attr_accessor input_transcript: String?
+      attr_accessor encoded_input_transcript: String?
+      attr_accessor audio_stream: String?
+      attr_accessor bot_version: String?
+      attr_accessor session_id: String?
+      attr_accessor active_contexts: String?
+    end
+
+    class PostTextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+        ?session_attributes: Hash[String, String],
+        ?request_attributes: Hash[String, String],
+        ?input_text: String,
+        ?active_contexts: Array[Types::ActiveContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+      attr_accessor session_attributes: Hash[String, String]?
+      attr_accessor request_attributes: Hash[String, String]?
+      attr_accessor input_text: String?
+      attr_accessor active_contexts: Array[Types::ActiveContext]?
+    end
+
+    class PostTextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_name: String,
+        ?nlu_intent_confidence: Types::IntentConfidence,
+        ?alternative_intents: Array[Types::PredictedIntent],
+        ?slots: Hash[String, String],
+        ?session_attributes: Hash[String, String],
+        ?message: String,
+        ?sentiment_response: Types::SentimentResponse,
+        ?message_format: String,
+        ?dialog_state: String,
+        ?slot_to_elicit: String,
+        ?response_card: Types::ResponseCard,
+        ?session_id: String,
+        ?bot_version: String,
+        ?active_contexts: Array[Types::ActiveContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_name: String?
+      attr_accessor nlu_intent_confidence: Types::IntentConfidence?
+      attr_accessor alternative_intents: Array[Types::PredictedIntent]?
+      attr_accessor slots: Hash[String, String]?
+      attr_accessor session_attributes: Hash[String, String]?
+      attr_accessor message: String?
+      attr_accessor sentiment_response: Types::SentimentResponse?
+      attr_accessor message_format: String?
+      attr_accessor dialog_state: String?
+      attr_accessor slot_to_elicit: String?
+      attr_accessor response_card: Types::ResponseCard?
+      attr_accessor session_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor active_contexts: Array[Types::ActiveContext]?
+    end
+
+    class PredictedIntent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intent_name: String,
+        ?nlu_intent_confidence: Types::IntentConfidence,
+        ?slots: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intent_name: String?
+      attr_accessor nlu_intent_confidence: Types::IntentConfidence?
+      attr_accessor slots: Hash[String, String]?
+    end
+
+    class PutSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_alias: String,
+        ?user_id: String,
+        ?session_attributes: Hash[String, String],
+        ?dialog_action: Types::DialogAction,
+        ?recent_intent_summary_view: Array[Types::IntentSummary],
+        ?accept: String,
+        ?active_contexts: Array[Types::ActiveContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_alias: String?
+      attr_accessor user_id: String?
+      attr_accessor session_attributes: Hash[String, String]?
+      attr_accessor dialog_action: Types::DialogAction?
+      attr_accessor recent_intent_summary_view: Array[Types::IntentSummary]?
+      attr_accessor accept: String?
+      attr_accessor active_contexts: Array[Types::ActiveContext]?
+    end
+
+    class PutSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?intent_name: String,
+        ?slots: String,
+        ?session_attributes: String,
+        ?message: String,
+        ?encoded_message: String,
+        ?message_format: String,
+        ?dialog_state: String,
+        ?slot_to_elicit: String,
+        ?audio_stream: String,
+        ?session_id: String,
+        ?active_contexts: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor intent_name: String?
+      attr_accessor slots: String?
+      attr_accessor session_attributes: String?
+      attr_accessor message: String?
+      attr_accessor encoded_message: String?
+      attr_accessor message_format: String?
+      attr_accessor dialog_state: String?
+      attr_accessor slot_to_elicit: String?
+      attr_accessor audio_stream: String?
+      attr_accessor session_id: String?
+      attr_accessor active_contexts: String?
+    end
+
+    class RequestTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResponseCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?content_type: String,
+        ?generic_attachments: Array[Types::GenericAttachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor content_type: String?
+      attr_accessor generic_attachments: Array[Types::GenericAttachment]?
+    end
+
+    class SentimentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sentiment_label: String,
+        ?sentiment_score: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sentiment_label: String?
+      attr_accessor sentiment_score: String?
+    end
+
+    class UnsupportedMediaTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

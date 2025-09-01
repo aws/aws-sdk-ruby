@@ -1,0 +1,412 @@
+module Aws::Ivs
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Ivs::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetChannelResponse
+      include Smithy::Client::_Response[Types::BatchGetChannelOutput]
+      def channels: () -> Array[Types::Channel]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_get_channel: (
+      ?arns: Array[String]
+    ) -> _BatchGetChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetChannelResponse
+
+    interface _BatchGetStreamKeyResponse
+      include Smithy::Client::_Response[Types::BatchGetStreamKeyOutput]
+      def stream_keys: () -> Array[Types::StreamKey]?
+      def errors: () -> Array[Types::BatchError]?
+    end
+    def batch_get_stream_key: (
+      ?arns: Array[String]
+    ) -> _BatchGetStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetStreamKeyResponse
+
+    interface _BatchStartViewerSessionRevocationResponse
+      include Smithy::Client::_Response[Types::BatchStartViewerSessionRevocationOutput]
+      def errors: () -> Array[Types::BatchStartViewerSessionRevocationError]?
+    end
+    def batch_start_viewer_session_revocation: (
+      ?viewer_sessions: Array[
+        {
+          channel_arn: String,
+          viewer_id: String,
+          viewer_session_versions_less_than_or_equal_to: Integer
+        }
+      ]
+    ) -> _BatchStartViewerSessionRevocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStartViewerSessionRevocationResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelOutput]
+      def channel: () -> Types::Channel?
+      def stream_key: () -> Types::StreamKey?
+    end
+    def create_channel: (
+      ?name: String,
+      ?latency_mode: String,
+      ?type: String,
+      ?authorized: bool,
+      ?recording_configuration_arn: String,
+      ?tags: Hash[String, String],
+      ?insecure_ingest: bool,
+      ?preset: String,
+      ?playback_restriction_policy_arn: String,
+      ?multitrack_input_configuration: {
+        enabled: bool,
+        policy: String,
+        maximum_resolution: String
+      },
+      ?container_format: String
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
+    interface _CreatePlaybackRestrictionPolicyResponse
+      include Smithy::Client::_Response[Types::CreatePlaybackRestrictionPolicyResponse]
+      def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy?
+    end
+    def create_playback_restriction_policy: (
+      ?allowed_countries: Array[String],
+      ?allowed_origins: Array[String],
+      ?enable_strict_origin_enforcement: bool,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePlaybackRestrictionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlaybackRestrictionPolicyResponse
+
+    interface _CreateRecordingConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateRecordingConfigurationOutput]
+      def recording_configuration: () -> Types::RecordingConfiguration?
+    end
+    def create_recording_configuration: (
+      ?name: String,
+      ?destination_configuration: {
+        s3: {
+          bucket_name: String
+        }
+      },
+      ?tags: Hash[String, String],
+      ?thumbnail_configuration: {
+        recording_mode: String,
+        target_interval_seconds: Integer,
+        resolution: String,
+        storage: Array[String]
+      },
+      ?recording_reconnect_window_seconds: Integer,
+      ?rendition_configuration: {
+        rendition_selection: String,
+        renditions: Array[String]
+      }
+    ) -> _CreateRecordingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecordingConfigurationResponse
+
+    interface _CreateStreamKeyResponse
+      include Smithy::Client::_Response[Types::CreateStreamKeyOutput]
+      def stream_key: () -> Types::StreamKey?
+    end
+    def create_stream_key: (
+      ?channel_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamKeyResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel: (
+      ?arn: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
+
+    interface _DeletePlaybackKeyPairResponse
+      include Smithy::Client::_Response[Types::DeletePlaybackKeyPairOutput]
+    end
+    def delete_playback_key_pair: (
+      ?arn: String
+    ) -> _DeletePlaybackKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePlaybackKeyPairResponse
+
+    interface _DeletePlaybackRestrictionPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_playback_restriction_policy: (
+      ?arn: String
+    ) -> _DeletePlaybackRestrictionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePlaybackRestrictionPolicyResponse
+
+    interface _DeleteRecordingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_recording_configuration: (
+      ?arn: String
+    ) -> _DeleteRecordingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecordingConfigurationResponse
+
+    interface _DeleteStreamKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_stream_key: (
+      ?arn: String
+    ) -> _DeleteStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamKeyResponse
+
+    interface _GetChannelResponse
+      include Smithy::Client::_Response[Types::GetChannelOutput]
+      def channel: () -> Types::Channel?
+    end
+    def get_channel: (
+      ?arn: String
+    ) -> _GetChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelResponse
+
+    interface _GetPlaybackKeyPairResponse
+      include Smithy::Client::_Response[Types::GetPlaybackKeyPairOutput]
+      def key_pair: () -> Types::PlaybackKeyPair?
+    end
+    def get_playback_key_pair: (
+      ?arn: String
+    ) -> _GetPlaybackKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlaybackKeyPairResponse
+
+    interface _GetPlaybackRestrictionPolicyResponse
+      include Smithy::Client::_Response[Types::GetPlaybackRestrictionPolicyResponse]
+      def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy?
+    end
+    def get_playback_restriction_policy: (
+      ?arn: String
+    ) -> _GetPlaybackRestrictionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlaybackRestrictionPolicyResponse
+
+    interface _GetRecordingConfigurationResponse
+      include Smithy::Client::_Response[Types::GetRecordingConfigurationOutput]
+      def recording_configuration: () -> Types::RecordingConfiguration?
+    end
+    def get_recording_configuration: (
+      ?arn: String
+    ) -> _GetRecordingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecordingConfigurationResponse
+
+    interface _GetStreamResponse
+      include Smithy::Client::_Response[Types::GetStreamOutput]
+      def stream: () -> Types::Stream?
+    end
+    def get_stream: (
+      ?channel_arn: String
+    ) -> _GetStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamResponse
+
+    interface _GetStreamKeyResponse
+      include Smithy::Client::_Response[Types::GetStreamKeyOutput]
+      def stream_key: () -> Types::StreamKey?
+    end
+    def get_stream_key: (
+      ?arn: String
+    ) -> _GetStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamKeyResponse
+
+    interface _GetStreamSessionResponse
+      include Smithy::Client::_Response[Types::GetStreamSessionOutput]
+      def stream_session: () -> Types::StreamSession?
+    end
+    def get_stream_session: (
+      ?channel_arn: String,
+      ?stream_id: String
+    ) -> _GetStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamSessionResponse
+
+    interface _ImportPlaybackKeyPairResponse
+      include Smithy::Client::_Response[Types::ImportPlaybackKeyPairOutput]
+      def key_pair: () -> Types::PlaybackKeyPair?
+    end
+    def import_playback_key_pair: (
+      ?public_key_material: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _ImportPlaybackKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPlaybackKeyPairResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsOutput]
+      def channels: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?filter_by_name: String,
+      ?filter_by_recording_configuration_arn: String,
+      ?filter_by_playback_restriction_policy_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListPlaybackKeyPairsResponse
+      include Smithy::Client::_Response[Types::ListPlaybackKeyPairsOutput]
+      def key_pairs: () -> Array[Types::PlaybackKeyPairSummary]?
+      def next_token: () -> String?
+    end
+    def list_playback_key_pairs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPlaybackKeyPairsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPlaybackKeyPairsResponse
+
+    interface _ListPlaybackRestrictionPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPlaybackRestrictionPoliciesResponse]
+      def playback_restriction_policies: () -> Array[Types::PlaybackRestrictionPolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_playback_restriction_policies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPlaybackRestrictionPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPlaybackRestrictionPoliciesResponse
+
+    interface _ListRecordingConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListRecordingConfigurationsOutput]
+      def recording_configurations: () -> Array[Types::RecordingConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_recording_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRecordingConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecordingConfigurationsResponse
+
+    interface _ListStreamKeysResponse
+      include Smithy::Client::_Response[Types::ListStreamKeysOutput]
+      def stream_keys: () -> Array[Types::StreamKeySummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_keys: (
+      ?channel_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamKeysResponse
+
+    interface _ListStreamSessionsResponse
+      include Smithy::Client::_Response[Types::ListStreamSessionsOutput]
+      def stream_sessions: () -> Array[Types::StreamSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_sessions: (
+      ?channel_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamSessionsResponse
+
+    interface _ListStreamsResponse
+      include Smithy::Client::_Response[Types::ListStreamsOutput]
+      def streams: () -> Array[Types::StreamSummary]?
+      def next_token: () -> String?
+    end
+    def list_streams: (
+      ?filter_by: {
+        health: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutMetadataResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_metadata: (
+      ?channel_arn: String,
+      ?metadata: String
+    ) -> _PutMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetadataResponse
+
+    interface _StartViewerSessionRevocationResponse
+      include Smithy::Client::_Response[Types::StartViewerSessionRevocationOutput]
+    end
+    def start_viewer_session_revocation: (
+      ?channel_arn: String,
+      ?viewer_id: String,
+      ?viewer_session_versions_less_than_or_equal_to: Integer
+    ) -> _StartViewerSessionRevocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartViewerSessionRevocationResponse
+
+    interface _StopStreamResponse
+      include Smithy::Client::_Response[Types::StopStreamOutput]
+    end
+    def stop_stream: (
+      ?channel_arn: String
+    ) -> _StopStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopStreamResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelOutput]
+      def channel: () -> Types::Channel?
+    end
+    def update_channel: (
+      ?arn: String,
+      ?name: String,
+      ?latency_mode: String,
+      ?type: String,
+      ?authorized: bool,
+      ?recording_configuration_arn: String,
+      ?insecure_ingest: bool,
+      ?preset: String,
+      ?playback_restriction_policy_arn: String,
+      ?multitrack_input_configuration: {
+        enabled: bool,
+        policy: String,
+        maximum_resolution: String
+      },
+      ?container_format: String
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdatePlaybackRestrictionPolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePlaybackRestrictionPolicyResponse]
+      def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy?
+    end
+    def update_playback_restriction_policy: (
+      ?arn: String,
+      ?allowed_countries: Array[String],
+      ?allowed_origins: Array[String],
+      ?enable_strict_origin_enforcement: bool,
+      ?name: String
+    ) -> _UpdatePlaybackRestrictionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePlaybackRestrictionPolicyResponse
+  end
+end

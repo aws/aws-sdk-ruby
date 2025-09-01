@@ -1,0 +1,5388 @@
+module Aws::CodeCommit
+  module Types
+
+    class ActorDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Approval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_arn: String,
+        ?approval_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_arn: String?
+      attr_accessor approval_state: String?
+    end
+
+    class ApprovalRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_id: String,
+        ?approval_rule_name: String,
+        ?approval_rule_content: String,
+        ?rule_content_sha256: String,
+        ?last_modified_date: Time,
+        ?creation_date: Time,
+        ?last_modified_user: String,
+        ?origin_approval_rule_template: Types::OriginApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_id: String?
+      attr_accessor approval_rule_name: String?
+      attr_accessor approval_rule_content: String?
+      attr_accessor rule_content_sha256: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_user: String?
+      attr_accessor origin_approval_rule_template: Types::OriginApprovalRuleTemplate?
+    end
+
+    class ApprovalRuleContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_name: String,
+        ?approval_rule_id: String,
+        ?approval_rule_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_name: String?
+      attr_accessor approval_rule_id: String?
+      attr_accessor approval_rule_content: String?
+    end
+
+    class ApprovalRuleNameAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleOverriddenEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?override_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor override_status: String?
+    end
+
+    class ApprovalRuleTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_id: String,
+        ?approval_rule_template_name: String,
+        ?approval_rule_template_description: String,
+        ?approval_rule_template_content: String,
+        ?rule_content_sha256: String,
+        ?last_modified_date: Time,
+        ?creation_date: Time,
+        ?last_modified_user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_id: String?
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor approval_rule_template_description: String?
+      attr_accessor approval_rule_template_content: String?
+      attr_accessor rule_content_sha256: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_user: String?
+    end
+
+    class ApprovalRuleTemplateContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleTemplateDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleTemplateInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleTemplateNameAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalRuleTemplateNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApprovalState
+      APPROVE: String
+      REVOKE: String
+    end
+
+    class ApprovalStateChangedEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?approval_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor approval_status: String?
+    end
+
+    class ApprovalStateRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateApprovalRuleTemplateWithRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor repository_name: String?
+    end
+
+    class AuthorDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?repository_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor repository_names: Array[String]?
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_repository_names: Array[String],
+        ?errors: Array[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_repository_names: Array[String]?
+      attr_accessor errors: Array[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError]?
+    end
+
+    class BatchDescribeMergeConflictsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?exception_name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor exception_name: String?
+      attr_accessor message: String?
+    end
+
+    class BatchDescribeMergeConflictsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?destination_commit_specifier: String,
+        ?source_commit_specifier: String,
+        ?merge_option: String,
+        ?max_merge_hunks: Integer,
+        ?max_conflict_files: Integer,
+        ?file_paths: Array[String],
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor merge_option: String?
+      attr_accessor max_merge_hunks: Integer?
+      attr_accessor max_conflict_files: Integer?
+      attr_accessor file_paths: Array[String]?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor next_token: String?
+    end
+
+    class BatchDescribeMergeConflictsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conflicts: Array[Types::Conflict],
+        ?next_token: String,
+        ?errors: Array[Types::BatchDescribeMergeConflictsError],
+        ?destination_commit_id: String,
+        ?source_commit_id: String,
+        ?base_commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conflicts: Array[Types::Conflict]?
+      attr_accessor next_token: String?
+      attr_accessor errors: Array[Types::BatchDescribeMergeConflictsError]?
+      attr_accessor destination_commit_id: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor base_commit_id: String?
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?repository_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor repository_names: Array[String]?
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disassociated_repository_names: Array[String],
+        ?errors: Array[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disassociated_repository_names: Array[String]?
+      attr_accessor errors: Array[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError]?
+    end
+
+    class BatchGetCommitsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchGetCommitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_ids: Array[String],
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_ids: Array[String]?
+      attr_accessor repository_name: String?
+    end
+
+    class BatchGetCommitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commits: Array[Types::Commit],
+        ?errors: Array[Types::BatchGetCommitsError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commits: Array[Types::Commit]?
+      attr_accessor errors: Array[Types::BatchGetCommitsError]?
+    end
+
+    class BatchGetRepositoriesError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_id: String,
+        ?repository_name: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module BatchGetRepositoriesErrorCodeEnum
+      ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION: String
+      ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION: String
+      ENCRYPTION_KEY_DISABLED_EXCEPTION: String
+      ENCRYPTION_KEY_NOT_FOUND_EXCEPTION: String
+      ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION: String
+      REPOSITORY_DOES_NOT_EXIST_EXCEPTION: String
+    end
+
+    class BatchGetRepositoriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_names: Array[String]?
+    end
+
+    class BatchGetRepositoriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repositories: Array[Types::RepositoryMetadata],
+        ?repositories_not_found: Array[String],
+        ?errors: Array[Types::BatchGetRepositoriesError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repositories: Array[Types::RepositoryMetadata]?
+      attr_accessor repositories_not_found: Array[String]?
+      attr_accessor errors: Array[Types::BatchGetRepositoriesError]?
+    end
+
+    class BeforeCommitIdAndAfterCommitIdAreSameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlobIdDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlobIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlobMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob_id: String,
+        ?path: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob_id: String?
+      attr_accessor path: String?
+      attr_accessor mode: String?
+    end
+
+    class BranchDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BranchInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch_name: String,
+        ?commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch_name: String?
+      attr_accessor commit_id: String?
+    end
+
+    class BranchNameExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BranchNameIsTagNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BranchNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CannotDeleteApprovalRuleFromTemplateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CannotModifyApprovalRuleFromTemplateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ChangeTypeEnum
+      ADDED: String
+      MODIFIED: String
+      DELETED: String
+    end
+
+    class ClientRequestTokenRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Comment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?content: String,
+        ?in_reply_to: String,
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+        ?author_arn: String,
+        ?deleted: bool,
+        ?client_request_token: String,
+        ?caller_reactions: Array[String],
+        ?reaction_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor content: String?
+      attr_accessor in_reply_to: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor author_arn: String?
+      attr_accessor deleted: bool?
+      attr_accessor client_request_token: String?
+      attr_accessor caller_reactions: Array[String]?
+      attr_accessor reaction_counts: Hash[String, Integer]?
+    end
+
+    class CommentContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentContentSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentDeletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentNotCreatedByCallerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommentsForComparedCommit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?before_blob_id: String,
+        ?after_blob_id: String,
+        ?location: Types::Location,
+        ?comments: Array[Types::Comment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor before_blob_id: String?
+      attr_accessor after_blob_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor comments: Array[Types::Comment]?
+    end
+
+    class CommentsForPullRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?before_blob_id: String,
+        ?after_blob_id: String,
+        ?location: Types::Location,
+        ?comments: Array[Types::Comment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor before_blob_id: String?
+      attr_accessor after_blob_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor comments: Array[Types::Comment]?
+    end
+
+    class Commit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+        ?parents: Array[String],
+        ?message: String,
+        ?author: Types::UserInfo,
+        ?committer: Types::UserInfo,
+        ?additional_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+      attr_accessor parents: Array[String]?
+      attr_accessor message: String?
+      attr_accessor author: Types::UserInfo?
+      attr_accessor committer: Types::UserInfo?
+      attr_accessor additional_data: String?
+    end
+
+    class CommitDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitIdDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitIdsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitIdsListRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitMessageLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentReferenceUpdateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Conflict
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conflict_metadata: Types::ConflictMetadata,
+        ?merge_hunks: Array[Types::MergeHunk],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conflict_metadata: Types::ConflictMetadata?
+      attr_accessor merge_hunks: Array[Types::MergeHunk]?
+    end
+
+    module ConflictDetailLevelTypeEnum
+      FILE_LEVEL: String
+      LINE_LEVEL: String
+    end
+
+    class ConflictMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?file_sizes: Types::FileSizes,
+        ?file_modes: Types::FileModes,
+        ?object_types: Types::ObjectTypes,
+        ?number_of_conflicts: Integer,
+        ?is_binary_file: Types::IsBinaryFile,
+        ?content_conflict: bool,
+        ?file_mode_conflict: bool,
+        ?object_type_conflict: bool,
+        ?merge_operations: Types::MergeOperations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor file_sizes: Types::FileSizes?
+      attr_accessor file_modes: Types::FileModes?
+      attr_accessor object_types: Types::ObjectTypes?
+      attr_accessor number_of_conflicts: Integer?
+      attr_accessor is_binary_file: Types::IsBinaryFile?
+      attr_accessor content_conflict: bool?
+      attr_accessor file_mode_conflict: bool?
+      attr_accessor object_type_conflict: bool?
+      attr_accessor merge_operations: Types::MergeOperations?
+    end
+
+    class ConflictResolution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replace_contents: Array[Types::ReplaceContentEntry],
+        ?delete_files: Array[Types::DeleteFileEntry],
+        ?set_file_modes: Array[Types::SetFileModeEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replace_contents: Array[Types::ReplaceContentEntry]?
+      attr_accessor delete_files: Array[Types::DeleteFileEntry]?
+      attr_accessor set_file_modes: Array[Types::SetFileModeEntry]?
+    end
+
+    module ConflictResolutionStrategyTypeEnum
+      NONE: String
+      ACCEPT_SOURCE: String
+      ACCEPT_DESTINATION: String
+      AUTOMERGE: String
+    end
+
+    class CreateApprovalRuleTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?approval_rule_template_content: String,
+        ?approval_rule_template_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor approval_rule_template_content: String?
+      attr_accessor approval_rule_template_description: String?
+    end
+
+    class CreateApprovalRuleTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template: Types::ApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate?
+    end
+
+    class CreateBranchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+        ?commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+      attr_accessor commit_id: String?
+    end
+
+    class CreateCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+        ?parent_commit_id: String,
+        ?author_name: String,
+        ?email: String,
+        ?commit_message: String,
+        ?keep_empty_folders: bool,
+        ?put_files: Array[Types::PutFileEntry],
+        ?delete_files: Array[Types::DeleteFileEntry],
+        ?set_file_modes: Array[Types::SetFileModeEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+      attr_accessor parent_commit_id: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor commit_message: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor put_files: Array[Types::PutFileEntry]?
+      attr_accessor delete_files: Array[Types::DeleteFileEntry]?
+      attr_accessor set_file_modes: Array[Types::SetFileModeEntry]?
+    end
+
+    class CreateCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+        ?files_added: Array[Types::FileMetadata],
+        ?files_updated: Array[Types::FileMetadata],
+        ?files_deleted: Array[Types::FileMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+      attr_accessor files_added: Array[Types::FileMetadata]?
+      attr_accessor files_updated: Array[Types::FileMetadata]?
+      attr_accessor files_deleted: Array[Types::FileMetadata]?
+    end
+
+    class CreatePullRequestApprovalRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?approval_rule_name: String,
+        ?approval_rule_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor approval_rule_name: String?
+      attr_accessor approval_rule_content: String?
+    end
+
+    class CreatePullRequestApprovalRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule: Types::ApprovalRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule: Types::ApprovalRule?
+    end
+
+    class CreatePullRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?targets: Array[Types::Target],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor targets: Array[Types::Target]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreatePullRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class CreateRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_description: String,
+        ?tags: Hash[String, String],
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_id: String?
+    end
+
+    class CreateRepositoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_metadata: Types::RepositoryMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_metadata: Types::RepositoryMetadata?
+    end
+
+    class CreateUnreferencedMergeCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?merge_option: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?author_name: String,
+        ?email: String,
+        ?commit_message: String,
+        ?keep_empty_folders: bool,
+        ?conflict_resolution: Types::ConflictResolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor merge_option: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor commit_message: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor conflict_resolution: Types::ConflictResolution?
+    end
+
+    class CreateUnreferencedMergeCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+    end
+
+    class DefaultBranchCannotBeDeletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteApprovalRuleTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+    end
+
+    class DeleteApprovalRuleTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_id: String?
+    end
+
+    class DeleteBranchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+    end
+
+    class DeleteBranchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_branch: Types::BranchInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_branch: Types::BranchInfo?
+    end
+
+    class DeleteCommentContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+    end
+
+    class DeleteCommentContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::Comment?
+    end
+
+    class DeleteFileEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+    end
+
+    class DeleteFileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+        ?file_path: String,
+        ?parent_commit_id: String,
+        ?keep_empty_folders: bool,
+        ?commit_message: String,
+        ?name: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+      attr_accessor file_path: String?
+      attr_accessor parent_commit_id: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor commit_message: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+    end
+
+    class DeleteFileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?blob_id: String,
+        ?tree_id: String,
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor blob_id: String?
+      attr_accessor tree_id: String?
+      attr_accessor file_path: String?
+    end
+
+    class DeletePullRequestApprovalRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?approval_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor approval_rule_name: String?
+    end
+
+    class DeletePullRequestApprovalRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_id: String?
+    end
+
+    class DeleteRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+    end
+
+    class DeleteRepositoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_id: String?
+    end
+
+    class DescribeMergeConflictsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?destination_commit_specifier: String,
+        ?source_commit_specifier: String,
+        ?merge_option: String,
+        ?max_merge_hunks: Integer,
+        ?file_path: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor merge_option: String?
+      attr_accessor max_merge_hunks: Integer?
+      attr_accessor file_path: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMergeConflictsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conflict_metadata: Types::ConflictMetadata,
+        ?merge_hunks: Array[Types::MergeHunk],
+        ?next_token: String,
+        ?destination_commit_id: String,
+        ?source_commit_id: String,
+        ?base_commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conflict_metadata: Types::ConflictMetadata?
+      attr_accessor merge_hunks: Array[Types::MergeHunk]?
+      attr_accessor next_token: String?
+      attr_accessor destination_commit_id: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor base_commit_id: String?
+    end
+
+    class DescribePullRequestEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?pull_request_event_type: String,
+        ?actor_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor pull_request_event_type: String?
+      attr_accessor actor_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribePullRequestEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_events: Array[Types::PullRequestEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_events: Array[Types::PullRequestEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class Difference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?before_blob: Types::BlobMetadata,
+        ?after_blob: Types::BlobMetadata,
+        ?change_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor before_blob: Types::BlobMetadata?
+      attr_accessor after_blob: Types::BlobMetadata?
+      attr_accessor change_type: String?
+    end
+
+    class DirectoryNameConflictsWithFileNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisassociateApprovalRuleTemplateFromRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor repository_name: String?
+    end
+
+    class EncryptionIntegrityChecksFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyInvalidIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyInvalidUsageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EncryptionKeyUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EvaluatePullRequestApprovalRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class EvaluatePullRequestApprovalRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluation: Types::Evaluation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluation: Types::Evaluation?
+    end
+
+    class Evaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approved: bool,
+        ?overridden: bool,
+        ?approval_rules_satisfied: Array[String],
+        ?approval_rules_not_satisfied: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approved: bool?
+      attr_accessor overridden: bool?
+      attr_accessor approval_rules_satisfied: Array[String]?
+      attr_accessor approval_rules_not_satisfied: Array[String]?
+    end
+
+    class File
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob_id: String,
+        ?absolute_path: String,
+        ?relative_path: String,
+        ?file_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob_id: String?
+      attr_accessor absolute_path: String?
+      attr_accessor relative_path: String?
+      attr_accessor file_mode: String?
+    end
+
+    class FileContentAndSourceFileSpecifiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileContentSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileEntryRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?absolute_path: String,
+        ?blob_id: String,
+        ?file_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor absolute_path: String?
+      attr_accessor blob_id: String?
+      attr_accessor file_mode: String?
+    end
+
+    class FileModeRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FileModeTypeEnum
+      EXECUTABLE: String
+      NORMAL: String
+      SYMLINK: String
+    end
+
+    class FileModes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?destination: String,
+        ?base: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor destination: String?
+      attr_accessor base: String?
+    end
+
+    class FileNameConflictsWithDirectoryNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FilePathConflictsWithSubmodulePathException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileSizes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Integer,
+        ?destination: Integer,
+        ?base: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Integer?
+      attr_accessor destination: Integer?
+      attr_accessor base: Integer?
+    end
+
+    class FileTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FileVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit: Types::Commit,
+        ?blob_id: String,
+        ?path: String,
+        ?revision_children: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit: Types::Commit?
+      attr_accessor blob_id: String?
+      attr_accessor path: String?
+      attr_accessor revision_children: Array[String]?
+    end
+
+    class Folder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tree_id: String,
+        ?absolute_path: String,
+        ?relative_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tree_id: String?
+      attr_accessor absolute_path: String?
+      attr_accessor relative_path: String?
+    end
+
+    class FolderContentSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FolderDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetApprovalRuleTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+    end
+
+    class GetApprovalRuleTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template: Types::ApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate?
+    end
+
+    class GetBlobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?blob_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor blob_id: String?
+    end
+
+    class GetBlobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+    end
+
+    class GetBranchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+    end
+
+    class GetBranchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branch: Types::BranchInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branch: Types::BranchInfo?
+    end
+
+    class GetCommentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+    end
+
+    class GetCommentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::Comment?
+    end
+
+    class GetCommentReactionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?reaction_user_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor reaction_user_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetCommentReactionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reactions_for_comment: Array[Types::ReactionForComment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reactions_for_comment: Array[Types::ReactionForComment]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCommentsForComparedCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetCommentsForComparedCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comments_for_compared_commit_data: Array[Types::CommentsForComparedCommit],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comments_for_compared_commit_data: Array[Types::CommentsForComparedCommit]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCommentsForPullRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetCommentsForPullRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comments_for_pull_request_data: Array[Types::CommentsForPullRequest],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comments_for_pull_request_data: Array[Types::CommentsForPullRequest]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor commit_id: String?
+    end
+
+    class GetCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit: Types::Commit,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit: Types::Commit?
+    end
+
+    class GetDifferencesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_specifier: String,
+        ?after_commit_specifier: String,
+        ?before_path: String,
+        ?after_path: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_specifier: String?
+      attr_accessor after_commit_specifier: String?
+      attr_accessor before_path: String?
+      attr_accessor after_path: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDifferencesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?differences: Array[Types::Difference],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor differences: Array[Types::Difference]?
+      attr_accessor next_token: String?
+    end
+
+    class GetFileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?commit_specifier: String,
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor commit_specifier: String?
+      attr_accessor file_path: String?
+    end
+
+    class GetFileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?blob_id: String,
+        ?file_path: String,
+        ?file_mode: String,
+        ?file_size: Integer,
+        ?file_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor blob_id: String?
+      attr_accessor file_path: String?
+      attr_accessor file_mode: String?
+      attr_accessor file_size: Integer?
+      attr_accessor file_content: String?
+    end
+
+    class GetFolderInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?commit_specifier: String,
+        ?folder_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor commit_specifier: String?
+      attr_accessor folder_path: String?
+    end
+
+    class GetFolderOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?folder_path: String,
+        ?tree_id: String,
+        ?sub_folders: Array[Types::Folder],
+        ?files: Array[Types::File],
+        ?symbolic_links: Array[Types::SymbolicLink],
+        ?sub_modules: Array[Types::SubModule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor folder_path: String?
+      attr_accessor tree_id: String?
+      attr_accessor sub_folders: Array[Types::Folder]?
+      attr_accessor files: Array[Types::File]?
+      attr_accessor symbolic_links: Array[Types::SymbolicLink]?
+      attr_accessor sub_modules: Array[Types::SubModule]?
+    end
+
+    class GetMergeCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+    end
+
+    class GetMergeCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_commit_id: String,
+        ?destination_commit_id: String,
+        ?base_commit_id: String,
+        ?merged_commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_commit_id: String?
+      attr_accessor destination_commit_id: String?
+      attr_accessor base_commit_id: String?
+      attr_accessor merged_commit_id: String?
+    end
+
+    class GetMergeConflictsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?destination_commit_specifier: String,
+        ?source_commit_specifier: String,
+        ?merge_option: String,
+        ?conflict_detail_level: String,
+        ?max_conflict_files: Integer,
+        ?conflict_resolution_strategy: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor merge_option: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor max_conflict_files: Integer?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetMergeConflictsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mergeable: bool,
+        ?destination_commit_id: String,
+        ?source_commit_id: String,
+        ?base_commit_id: String,
+        ?conflict_metadata_list: Array[Types::ConflictMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mergeable: bool?
+      attr_accessor destination_commit_id: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor base_commit_id: String?
+      attr_accessor conflict_metadata_list: Array[Types::ConflictMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class GetMergeOptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+    end
+
+    class GetMergeOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_options: Array[String],
+        ?source_commit_id: String,
+        ?destination_commit_id: String,
+        ?base_commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_options: Array[String]?
+      attr_accessor source_commit_id: String?
+      attr_accessor destination_commit_id: String?
+      attr_accessor base_commit_id: String?
+    end
+
+    class GetPullRequestApprovalStatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetPullRequestApprovalStatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approvals: Array[Types::Approval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approvals: Array[Types::Approval]?
+    end
+
+    class GetPullRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+    end
+
+    class GetPullRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class GetPullRequestOverrideStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetPullRequestOverrideStateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overridden: bool,
+        ?overrider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overridden: bool?
+      attr_accessor overrider: String?
+    end
+
+    class GetRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+    end
+
+    class GetRepositoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_metadata: Types::RepositoryMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_metadata: Types::RepositoryMetadata?
+    end
+
+    class GetRepositoryTriggersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+    end
+
+    class GetRepositoryTriggersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+        ?triggers: Array[Types::RepositoryTrigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+      attr_accessor triggers: Array[Types::RepositoryTrigger]?
+    end
+
+    class IdempotencyParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidActorArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalRuleContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalRuleNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalRuleTemplateContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalRuleTemplateDescriptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalRuleTemplateNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAuthorArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBlobIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBranchNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidClientRequestTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCommentIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCommitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCommitIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConflictDetailLevelException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConflictResolutionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConflictResolutionStrategyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidContinuationTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeletionParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDescriptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDestinationCommitSpecifierException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEmailException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFileLocationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFileModeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFilePositionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMaxConflictFilesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMaxMergeHunksException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMaxResultsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMergeOptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOrderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOverrideStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParentCommitIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPathException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPullRequestEventTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPullRequestIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPullRequestStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPullRequestStatusUpdateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReactionUserArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReactionValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReferenceNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRelativeFileVersionEnumException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReplacementContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidReplacementTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryDescriptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerBranchNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerCustomDataException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerDestinationArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerEventsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRepositoryTriggerRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRevisionIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRuleContentSha256Exception
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSortByException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSourceCommitSpecifierException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSystemTagUsageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagKeysListException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagsMapException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetBranchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTitleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IsBinaryFile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: bool,
+        ?destination: bool,
+        ?base: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: bool?
+      attr_accessor destination: bool?
+      attr_accessor base: bool?
+    end
+
+    class ListApprovalRuleTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApprovalRuleTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedApprovalRuleTemplatesForRepositoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssociatedApprovalRuleTemplatesForRepositoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBranchesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBranchesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?branches: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor branches: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFileCommitHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?commit_specifier: String,
+        ?file_path: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor commit_specifier: String?
+      attr_accessor file_path: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFileCommitHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_dag: Array[Types::FileVersion],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_dag: Array[Types::FileVersion]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPullRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?author_arn: String,
+        ?pull_request_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor author_arn: String?
+      attr_accessor pull_request_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPullRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesForApprovalRuleTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRepositoriesForApprovalRuleTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sort_by: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sort_by: String?
+      attr_accessor order: String?
+    end
+
+    class ListRepositoriesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repositories: Array[Types::RepositoryNameIdPair],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repositories: Array[Types::RepositoryNameIdPair]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?file_position: Integer,
+        ?relative_file_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor file_position: Integer?
+      attr_accessor relative_file_version: String?
+    end
+
+    class ManualMergeRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumBranchesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumConflictResolutionEntriesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumFileContentToLoadExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumFileEntriesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumItemsToCompareExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumNumberOfApprovalsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumOpenPullRequestsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumRepositoryNamesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumRepositoryTriggersExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaximumRuleTemplatesAssociatedWithRepositoryException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MergeBranchesByFastForwardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?target_branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor target_branch: String?
+    end
+
+    class MergeBranchesByFastForwardOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+    end
+
+    class MergeBranchesBySquashInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?target_branch: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?author_name: String,
+        ?email: String,
+        ?commit_message: String,
+        ?keep_empty_folders: bool,
+        ?conflict_resolution: Types::ConflictResolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor target_branch: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor commit_message: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor conflict_resolution: Types::ConflictResolution?
+    end
+
+    class MergeBranchesBySquashOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+    end
+
+    class MergeBranchesByThreeWayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_specifier: String,
+        ?destination_commit_specifier: String,
+        ?target_branch: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?author_name: String,
+        ?email: String,
+        ?commit_message: String,
+        ?keep_empty_folders: bool,
+        ?conflict_resolution: Types::ConflictResolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_specifier: String?
+      attr_accessor destination_commit_specifier: String?
+      attr_accessor target_branch: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor commit_message: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor conflict_resolution: Types::ConflictResolution?
+    end
+
+    class MergeBranchesByThreeWayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?tree_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor tree_id: String?
+    end
+
+    class MergeHunk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_conflict: bool,
+        ?source: Types::MergeHunkDetail,
+        ?destination: Types::MergeHunkDetail,
+        ?base: Types::MergeHunkDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_conflict: bool?
+      attr_accessor source: Types::MergeHunkDetail?
+      attr_accessor destination: Types::MergeHunkDetail?
+      attr_accessor base: Types::MergeHunkDetail?
+    end
+
+    class MergeHunkDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_line: Integer,
+        ?end_line: Integer,
+        ?hunk_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_line: Integer?
+      attr_accessor end_line: Integer?
+      attr_accessor hunk_content: String?
+    end
+
+    class MergeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_merged: bool,
+        ?merged_by: String,
+        ?merge_commit_id: String,
+        ?merge_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_merged: bool?
+      attr_accessor merged_by: String?
+      attr_accessor merge_commit_id: String?
+      attr_accessor merge_option: String?
+    end
+
+    class MergeOperations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor destination: String?
+    end
+
+    class MergeOptionRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MergeOptionTypeEnum
+      FAST_FORWARD_MERGE: String
+      SQUASH_MERGE: String
+      THREE_WAY_MERGE: String
+    end
+
+    class MergePullRequestByFastForwardInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?source_commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_id: String?
+    end
+
+    class MergePullRequestByFastForwardOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class MergePullRequestBySquashInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?source_commit_id: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?commit_message: String,
+        ?author_name: String,
+        ?email: String,
+        ?keep_empty_folders: bool,
+        ?conflict_resolution: Types::ConflictResolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor commit_message: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor conflict_resolution: Types::ConflictResolution?
+    end
+
+    class MergePullRequestBySquashOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class MergePullRequestByThreeWayInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?source_commit_id: String,
+        ?conflict_detail_level: String,
+        ?conflict_resolution_strategy: String,
+        ?commit_message: String,
+        ?author_name: String,
+        ?email: String,
+        ?keep_empty_folders: bool,
+        ?conflict_resolution: Types::ConflictResolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor conflict_detail_level: String?
+      attr_accessor conflict_resolution_strategy: String?
+      attr_accessor commit_message: String?
+      attr_accessor author_name: String?
+      attr_accessor email: String?
+      attr_accessor keep_empty_folders: bool?
+      attr_accessor conflict_resolution: Types::ConflictResolution?
+    end
+
+    class MergePullRequestByThreeWayOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class MultipleConflictResolutionEntriesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MultipleRepositoriesInPullRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NameLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoChangeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NumberOfRuleTemplatesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NumberOfRulesExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ObjectTypeEnum
+      FILE: String
+      DIRECTORY: String
+      GIT_LINK: String
+      SYMBOLIC_LINK: String
+    end
+
+    class ObjectTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?destination: String,
+        ?base: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor destination: String?
+      attr_accessor base: String?
+    end
+
+    class OperationNotAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OrderEnum
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class OriginApprovalRuleTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_id: String,
+        ?approval_rule_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_id: String?
+      attr_accessor approval_rule_template_name: String?
+    end
+
+    class OverrideAlreadySetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OverridePullRequestApprovalRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?revision_id: String,
+        ?override_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor override_status: String?
+    end
+
+    module OverrideStatus
+      OVERRIDE: String
+      REVOKE: String
+    end
+
+    class OverrideStatusRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ParentCommitDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ParentCommitIdOutdatedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ParentCommitIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PathDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PathRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PostCommentForComparedCommitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?location: Types::Location,
+        ?content: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor content: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class PostCommentForComparedCommitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?before_blob_id: String,
+        ?after_blob_id: String,
+        ?location: Types::Location,
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor before_blob_id: String?
+      attr_accessor after_blob_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor comment: Types::Comment?
+    end
+
+    class PostCommentForPullRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?location: Types::Location,
+        ?content: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor content: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class PostCommentForPullRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?pull_request_id: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?before_blob_id: String,
+        ?after_blob_id: String,
+        ?location: Types::Location,
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor pull_request_id: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor before_blob_id: String?
+      attr_accessor after_blob_id: String?
+      attr_accessor location: Types::Location?
+      attr_accessor comment: Types::Comment?
+    end
+
+    class PostCommentReplyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?in_reply_to: String,
+        ?client_request_token: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor in_reply_to: String?
+      attr_accessor client_request_token: String?
+      attr_accessor content: String?
+    end
+
+    class PostCommentReplyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::Comment?
+    end
+
+    class PullRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?title: String,
+        ?description: String,
+        ?last_activity_date: Time,
+        ?creation_date: Time,
+        ?pull_request_status: String,
+        ?author_arn: String,
+        ?pull_request_targets: Array[Types::PullRequestTarget],
+        ?client_request_token: String,
+        ?revision_id: String,
+        ?approval_rules: Array[Types::ApprovalRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor last_activity_date: Time?
+      attr_accessor creation_date: Time?
+      attr_accessor pull_request_status: String?
+      attr_accessor author_arn: String?
+      attr_accessor pull_request_targets: Array[Types::PullRequestTarget]?
+      attr_accessor client_request_token: String?
+      attr_accessor revision_id: String?
+      attr_accessor approval_rules: Array[Types::ApprovalRule]?
+    end
+
+    class PullRequestAlreadyClosedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestApprovalRulesNotSatisfiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestCannotBeApprovedByAuthorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestCreatedEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_commit_id: String,
+        ?destination_commit_id: String,
+        ?merge_base: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_commit_id: String?
+      attr_accessor destination_commit_id: String?
+      attr_accessor merge_base: String?
+    end
+
+    class PullRequestDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?event_date: Time,
+        ?pull_request_event_type: String,
+        ?actor_arn: String,
+        ?pull_request_created_event_metadata: Types::PullRequestCreatedEventMetadata,
+        ?pull_request_status_changed_event_metadata: Types::PullRequestStatusChangedEventMetadata,
+        ?pull_request_source_reference_updated_event_metadata: Types::PullRequestSourceReferenceUpdatedEventMetadata,
+        ?pull_request_merged_state_changed_event_metadata: Types::PullRequestMergedStateChangedEventMetadata,
+        ?approval_rule_event_metadata: Types::ApprovalRuleEventMetadata,
+        ?approval_state_changed_event_metadata: Types::ApprovalStateChangedEventMetadata,
+        ?approval_rule_overridden_event_metadata: Types::ApprovalRuleOverriddenEventMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor event_date: Time?
+      attr_accessor pull_request_event_type: String?
+      attr_accessor actor_arn: String?
+      attr_accessor pull_request_created_event_metadata: Types::PullRequestCreatedEventMetadata?
+      attr_accessor pull_request_status_changed_event_metadata: Types::PullRequestStatusChangedEventMetadata?
+      attr_accessor pull_request_source_reference_updated_event_metadata: Types::PullRequestSourceReferenceUpdatedEventMetadata?
+      attr_accessor pull_request_merged_state_changed_event_metadata: Types::PullRequestMergedStateChangedEventMetadata?
+      attr_accessor approval_rule_event_metadata: Types::ApprovalRuleEventMetadata?
+      attr_accessor approval_state_changed_event_metadata: Types::ApprovalStateChangedEventMetadata?
+      attr_accessor approval_rule_overridden_event_metadata: Types::ApprovalRuleOverriddenEventMetadata?
+    end
+
+    module PullRequestEventType
+      PULL_REQUEST_CREATED: String
+      PULL_REQUEST_STATUS_CHANGED: String
+      PULL_REQUEST_SOURCE_REFERENCE_UPDATED: String
+      PULL_REQUEST_MERGE_STATE_CHANGED: String
+      PULL_REQUEST_APPROVAL_RULE_CREATED: String
+      PULL_REQUEST_APPROVAL_RULE_UPDATED: String
+      PULL_REQUEST_APPROVAL_RULE_DELETED: String
+      PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN: String
+      PULL_REQUEST_APPROVAL_STATE_CHANGED: String
+    end
+
+    class PullRequestIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestMergedStateChangedEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?destination_reference: String,
+        ?merge_metadata: Types::MergeMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor destination_reference: String?
+      attr_accessor merge_metadata: Types::MergeMetadata?
+    end
+
+    class PullRequestSourceReferenceUpdatedEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?before_commit_id: String,
+        ?after_commit_id: String,
+        ?merge_base: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor before_commit_id: String?
+      attr_accessor after_commit_id: String?
+      attr_accessor merge_base: String?
+    end
+
+    class PullRequestStatusChangedEventMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_status: String?
+    end
+
+    module PullRequestStatusEnum
+      OPEN: String
+      CLOSED: String
+    end
+
+    class PullRequestStatusRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PullRequestTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_reference: String,
+        ?destination_reference: String,
+        ?destination_commit: String,
+        ?source_commit: String,
+        ?merge_base: String,
+        ?merge_metadata: Types::MergeMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_reference: String?
+      attr_accessor destination_reference: String?
+      attr_accessor destination_commit: String?
+      attr_accessor source_commit: String?
+      attr_accessor merge_base: String?
+      attr_accessor merge_metadata: Types::MergeMetadata?
+    end
+
+    class PutCommentReactionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?reaction_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor reaction_value: String?
+    end
+
+    class PutFileEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?file_mode: String,
+        ?file_content: String,
+        ?source_file: Types::SourceFileSpecifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor file_mode: String?
+      attr_accessor file_content: String?
+      attr_accessor source_file: Types::SourceFileSpecifier?
+    end
+
+    class PutFileEntryConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutFileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?branch_name: String,
+        ?file_content: String,
+        ?file_path: String,
+        ?file_mode: String,
+        ?parent_commit_id: String,
+        ?commit_message: String,
+        ?name: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor branch_name: String?
+      attr_accessor file_content: String?
+      attr_accessor file_path: String?
+      attr_accessor file_mode: String?
+      attr_accessor parent_commit_id: String?
+      attr_accessor commit_message: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+    end
+
+    class PutFileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?blob_id: String,
+        ?tree_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor blob_id: String?
+      attr_accessor tree_id: String?
+    end
+
+    class PutRepositoryTriggersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?triggers: Array[Types::RepositoryTrigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor triggers: Array[Types::RepositoryTrigger]?
+    end
+
+    class PutRepositoryTriggersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_id: String?
+    end
+
+    class ReactionForComment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reaction: Types::ReactionValueFormats,
+        ?reaction_users: Array[String],
+        ?reactions_from_deleted_users_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reaction: Types::ReactionValueFormats?
+      attr_accessor reaction_users: Array[String]?
+      attr_accessor reactions_from_deleted_users_count: Integer?
+    end
+
+    class ReactionLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReactionValueFormats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?emoji: String,
+        ?short_code: String,
+        ?unicode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emoji: String?
+      attr_accessor short_code: String?
+      attr_accessor unicode: String?
+    end
+
+    class ReactionValueRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReferenceDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReferenceNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReferenceTypeNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RelativeFileVersionEnum
+      BEFORE: String
+      AFTER: String
+    end
+
+    class ReplaceContentEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?replacement_type: String,
+        ?content: String,
+        ?file_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor replacement_type: String?
+      attr_accessor content: String?
+      attr_accessor file_mode: String?
+    end
+
+    class ReplacementContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ReplacementTypeEnum
+      KEEP_BASE: String
+      KEEP_SOURCE: String
+      KEEP_DESTINATION: String
+      USE_NEW_CONTENT: String
+    end
+
+    class ReplacementTypeRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?repository_id: String,
+        ?repository_name: String,
+        ?repository_description: String,
+        ?default_branch: String,
+        ?last_modified_date: Time,
+        ?creation_date: Time,
+        ?clone_url_http: String,
+        ?clone_url_ssh: String,
+        ?arn: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor repository_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor repository_description: String?
+      attr_accessor default_branch: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor creation_date: Time?
+      attr_accessor clone_url_http: String?
+      attr_accessor clone_url_ssh: String?
+      attr_accessor arn: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class RepositoryNameExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryNameIdPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_id: String?
+    end
+
+    class RepositoryNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryNamesRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryNotAssociatedWithPullRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?destination_arn: String,
+        ?custom_data: String,
+        ?branches: Array[String],
+        ?events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor destination_arn: String?
+      attr_accessor custom_data: String?
+      attr_accessor branches: Array[String]?
+      attr_accessor events: Array[String]?
+    end
+
+    class RepositoryTriggerBranchNameListRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryTriggerDestinationArnRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RepositoryTriggerEventEnum
+      ALL: String
+      UPDATE_REFERENCE: String
+      CREATE_REFERENCE: String
+      DELETE_REFERENCE: String
+    end
+
+    class RepositoryTriggerEventsListRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryTriggerExecutionFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger: String?
+      attr_accessor failure_message: String?
+    end
+
+    class RepositoryTriggerNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RepositoryTriggersListRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceArnRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestrictedSourceFileException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevisionIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevisionNotCurrentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SameFileContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SamePathRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetFileModeEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?file_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor file_mode: String?
+    end
+
+    module SortByEnum
+      REPOSITORY_NAME: String
+      MODIFIED_DATE: String
+    end
+
+    class SourceAndDestinationAreSameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceFileOrContentRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceFileSpecifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?is_move: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor is_move: bool?
+    end
+
+    class SubModule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commit_id: String,
+        ?absolute_path: String,
+        ?relative_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commit_id: String?
+      attr_accessor absolute_path: String?
+      attr_accessor relative_path: String?
+    end
+
+    class SymbolicLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob_id: String,
+        ?absolute_path: String,
+        ?relative_path: String,
+        ?file_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob_id: String?
+      attr_accessor absolute_path: String?
+      attr_accessor relative_path: String?
+      attr_accessor file_mode: String?
+    end
+
+    class TagKeysListRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagsMapRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?source_reference: String,
+        ?destination_reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor source_reference: String?
+      attr_accessor destination_reference: String?
+    end
+
+    class TargetRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TargetsRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TestRepositoryTriggersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?triggers: Array[Types::RepositoryTrigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor triggers: Array[Types::RepositoryTrigger]?
+    end
+
+    class TestRepositoryTriggersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_executions: Array[String],
+        ?failed_executions: Array[Types::RepositoryTriggerExecutionFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_executions: Array[String]?
+      attr_accessor failed_executions: Array[Types::RepositoryTriggerExecutionFailure]?
+    end
+
+    class TipOfSourceReferenceIsDifferentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TipsDivergenceExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TitleRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateApprovalRuleTemplateContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?new_rule_content: String,
+        ?existing_rule_content_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor new_rule_content: String?
+      attr_accessor existing_rule_content_sha256: String?
+    end
+
+    class UpdateApprovalRuleTemplateContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template: Types::ApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate?
+    end
+
+    class UpdateApprovalRuleTemplateDescriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template_name: String,
+        ?approval_rule_template_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template_name: String?
+      attr_accessor approval_rule_template_description: String?
+    end
+
+    class UpdateApprovalRuleTemplateDescriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template: Types::ApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate?
+    end
+
+    class UpdateApprovalRuleTemplateNameInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?old_approval_rule_template_name: String,
+        ?new_approval_rule_template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor old_approval_rule_template_name: String?
+      attr_accessor new_approval_rule_template_name: String?
+    end
+
+    class UpdateApprovalRuleTemplateNameOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule_template: Types::ApprovalRuleTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate?
+    end
+
+    class UpdateCommentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment_id: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment_id: String?
+      attr_accessor content: String?
+    end
+
+    class UpdateCommentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comment: Types::Comment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::Comment?
+    end
+
+    class UpdateDefaultBranchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?default_branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor default_branch_name: String?
+    end
+
+    class UpdatePullRequestApprovalRuleContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?approval_rule_name: String,
+        ?existing_rule_content_sha256: String,
+        ?new_rule_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor approval_rule_name: String?
+      attr_accessor existing_rule_content_sha256: String?
+      attr_accessor new_rule_content: String?
+    end
+
+    class UpdatePullRequestApprovalRuleContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_rule: Types::ApprovalRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_rule: Types::ApprovalRule?
+    end
+
+    class UpdatePullRequestApprovalStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?revision_id: String,
+        ?approval_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor revision_id: String?
+      attr_accessor approval_state: String?
+    end
+
+    class UpdatePullRequestDescriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePullRequestDescriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class UpdatePullRequestStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?pull_request_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor pull_request_status: String?
+    end
+
+    class UpdatePullRequestStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class UpdatePullRequestTitleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request_id: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request_id: String?
+      attr_accessor title: String?
+    end
+
+    class UpdatePullRequestTitleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_request: Types::PullRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_request: Types::PullRequest?
+    end
+
+    class UpdateRepositoryDescriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_description: String?
+    end
+
+    class UpdateRepositoryEncryptionKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class UpdateRepositoryEncryptionKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_id: String,
+        ?kms_key_id: String,
+        ?original_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_id: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor original_kms_key_id: String?
+    end
+
+    class UpdateRepositoryNameInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?old_name: String,
+        ?new_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor old_name: String?
+      attr_accessor new_name: String?
+    end
+
+    class UserInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?email: String,
+        ?date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor email: String?
+      attr_accessor date: String?
+    end
+  end
+end

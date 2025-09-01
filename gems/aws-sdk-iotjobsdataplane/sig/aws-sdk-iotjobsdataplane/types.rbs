@@ -1,0 +1,378 @@
+module Aws::IoTJobsDataPlane
+  module Types
+
+    class CertificateValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommandParameterValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s: String,
+        ?b: bool,
+        ?i: Integer,
+        ?l: Integer,
+        ?d: Float,
+        ?bin: String,
+        ?ul: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s: String?
+      attr_accessor b: bool?
+      attr_accessor i: Integer?
+      attr_accessor l: Integer?
+      attr_accessor d: Float?
+      attr_accessor bin: String?
+      attr_accessor ul: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DescribeJobExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?thing_name: String,
+        ?include_job_document: bool,
+        ?execution_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor thing_name: String?
+      attr_accessor include_job_document: bool?
+      attr_accessor execution_number: Integer?
+    end
+
+    class DescribeJobExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution: Types::JobExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution: Types::JobExecution?
+    end
+
+    class GetPendingJobExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class GetPendingJobExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?in_progress_jobs: Array[Types::JobExecutionSummary],
+        ?queued_jobs: Array[Types::JobExecutionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor in_progress_jobs: Array[Types::JobExecutionSummary]?
+      attr_accessor queued_jobs: Array[Types::JobExecutionSummary]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateTransitionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?thing_name: String,
+        ?status: String,
+        ?status_details: Hash[String, String],
+        ?queued_at: Integer,
+        ?started_at: Integer,
+        ?last_updated_at: Integer,
+        ?approximate_seconds_before_timed_out: Integer,
+        ?version_number: Integer,
+        ?execution_number: Integer,
+        ?job_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor thing_name: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Hash[String, String]?
+      attr_accessor queued_at: Integer?
+      attr_accessor started_at: Integer?
+      attr_accessor last_updated_at: Integer?
+      attr_accessor approximate_seconds_before_timed_out: Integer?
+      attr_accessor version_number: Integer?
+      attr_accessor execution_number: Integer?
+      attr_accessor job_document: String?
+    end
+
+    class JobExecutionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_details: Hash[String, String],
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_details: Hash[String, String]?
+      attr_accessor version_number: Integer?
+    end
+
+    module JobExecutionStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+      REJECTED: String
+      REMOVED: String
+      CANCELED: String
+    end
+
+    class JobExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?queued_at: Integer,
+        ?started_at: Integer,
+        ?last_updated_at: Integer,
+        ?version_number: Integer,
+        ?execution_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor queued_at: Integer?
+      attr_accessor started_at: Integer?
+      attr_accessor last_updated_at: Integer?
+      attr_accessor version_number: Integer?
+      attr_accessor execution_number: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartCommandExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?command_arn: String,
+        ?parameters: Hash[String, Types::CommandParameterValue],
+        ?execution_timeout_seconds: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor command_arn: String?
+      attr_accessor parameters: Hash[String, Types::CommandParameterValue]?
+      attr_accessor execution_timeout_seconds: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class StartCommandExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+    end
+
+    class StartNextPendingJobExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?status_details: Hash[String, String],
+        ?step_timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor status_details: Hash[String, String]?
+      attr_accessor step_timeout_in_minutes: Integer?
+    end
+
+    class StartNextPendingJobExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution: Types::JobExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution: Types::JobExecution?
+    end
+
+    class TerminalStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor payload: String?
+    end
+
+    class UpdateJobExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?thing_name: String,
+        ?status: String,
+        ?status_details: Hash[String, String],
+        ?step_timeout_in_minutes: Integer,
+        ?expected_version: Integer,
+        ?include_job_execution_state: bool,
+        ?include_job_document: bool,
+        ?execution_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor thing_name: String?
+      attr_accessor status: String?
+      attr_accessor status_details: Hash[String, String]?
+      attr_accessor step_timeout_in_minutes: Integer?
+      attr_accessor expected_version: Integer?
+      attr_accessor include_job_execution_state: bool?
+      attr_accessor include_job_document: bool?
+      attr_accessor execution_number: Integer?
+    end
+
+    class UpdateJobExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_state: Types::JobExecutionState,
+        ?job_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_state: Types::JobExecutionState?
+      attr_accessor job_document: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,453 @@
+module Aws::EFS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EFS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccessPointResponse
+      include Smithy::Client::_Response[Types::CreateAccessPointOutput]
+      def client_token: () -> String?
+      def name: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def access_point_id: () -> String?
+      def access_point_arn: () -> String?
+      def file_system_id: () -> String?
+      def posix_user: () -> Types::PosixUser?
+      def root_directory: () -> Types::RootDirectory?
+      def owner_id: () -> String?
+      def life_cycle_state: () -> String?
+    end
+    def create_access_point: (
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_system_id: String,
+      ?posix_user: {
+        uid: Integer,
+        gid: Integer,
+        secondary_gids: Array[Integer]
+      },
+      ?root_directory: {
+        path: String,
+        creation_info: {
+          owner_uid: Integer,
+          owner_gid: Integer,
+          permissions: String
+        }
+      }
+    ) -> _CreateAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPointResponse
+
+    interface _CreateFileSystemResponse
+      include Smithy::Client::_Response[Types::CreateFileSystemOutput]
+      def owner_id: () -> String?
+      def creation_token: () -> String?
+      def file_system_id: () -> String?
+      def file_system_arn: () -> String?
+      def creation_time: () -> Time?
+      def life_cycle_state: () -> String?
+      def name: () -> String?
+      def number_of_mount_targets: () -> Integer?
+      def size_in_bytes: () -> Types::FileSystemSize?
+      def performance_mode: () -> String?
+      def encrypted: () -> bool?
+      def kms_key_id: () -> String?
+      def throughput_mode: () -> String?
+      def provisioned_throughput_in_mibps: () -> Float?
+      def availability_zone_name: () -> String?
+      def availability_zone_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def file_system_protection: () -> Types::FileSystemProtectionDescription?
+    end
+    def create_file_system: (
+      ?creation_token: String,
+      ?performance_mode: String,
+      ?encrypted: bool,
+      ?kms_key_id: String,
+      ?throughput_mode: String,
+      ?provisioned_throughput_in_mibps: Float,
+      ?availability_zone_name: String,
+      ?backup: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFileSystemResponse
+
+    interface _CreateMountTargetResponse
+      include Smithy::Client::_Response[Types::CreateMountTargetOutput]
+      def owner_id: () -> String?
+      def mount_target_id: () -> String?
+      def file_system_id: () -> String?
+      def subnet_id: () -> String?
+      def life_cycle_state: () -> String?
+      def ip_address: () -> String?
+      def ipv6_address: () -> String?
+      def network_interface_id: () -> String?
+      def availability_zone_id: () -> String?
+      def availability_zone_name: () -> String?
+      def vpc_id: () -> String?
+    end
+    def create_mount_target: (
+      ?file_system_id: String,
+      ?subnet_id: String,
+      ?ip_address: String,
+      ?ipv6_address: String,
+      ?ip_address_type: String,
+      ?security_groups: Array[String]
+    ) -> _CreateMountTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMountTargetResponse
+
+    interface _CreateReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateReplicationConfigurationOutput]
+      def source_file_system_id: () -> String?
+      def source_file_system_region: () -> String?
+      def source_file_system_arn: () -> String?
+      def original_source_file_system_arn: () -> String?
+      def creation_time: () -> Time?
+      def destinations: () -> Array[Types::Destination]?
+      def source_file_system_owner_id: () -> String?
+    end
+    def create_replication_configuration: (
+      ?source_file_system_id: String,
+      ?destinations: Array[
+        {
+          region: String,
+          availability_zone_name: String,
+          kms_key_id: String,
+          file_system_id: String,
+          role_arn: String
+        }
+      ]
+    ) -> _CreateReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigurationResponse
+
+    interface _CreateTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_tags: (
+      ?file_system_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTagsResponse
+
+    interface _DeleteAccessPointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point: (
+      ?access_point_id: String
+    ) -> _DeleteAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointResponse
+
+    interface _DeleteFileSystemResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_file_system: (
+      ?file_system_id: String
+    ) -> _DeleteFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileSystemResponse
+
+    interface _DeleteFileSystemPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_file_system_policy: (
+      ?file_system_id: String
+    ) -> _DeleteFileSystemPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFileSystemPolicyResponse
+
+    interface _DeleteMountTargetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_mount_target: (
+      ?mount_target_id: String
+    ) -> _DeleteMountTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMountTargetResponse
+
+    interface _DeleteReplicationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_replication_configuration: (
+      ?source_file_system_id: String,
+      ?deletion_mode: String
+    ) -> _DeleteReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationConfigurationResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_tags: (
+      ?file_system_id: String,
+      ?tag_keys: Array[String]
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DescribeAccessPointsResponse
+      include Smithy::Client::_Response[Types::DescribeAccessPointsResponse]
+      def access_points: () -> Array[Types::AccessPointDescription]?
+      def next_token: () -> String?
+    end
+    def describe_access_points: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?access_point_id: String,
+      ?file_system_id: String
+    ) -> _DescribeAccessPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccessPointsResponse
+
+    interface _DescribeAccountPreferencesResponse
+      include Smithy::Client::_Response[Types::DescribeAccountPreferencesResponse]
+      def resource_id_preference: () -> Types::ResourceIdPreference?
+      def next_token: () -> String?
+    end
+    def describe_account_preferences: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeAccountPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountPreferencesResponse
+
+    interface _DescribeBackupPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeBackupPolicyOutput]
+      def backup_policy: () -> Types::BackupPolicy?
+    end
+    def describe_backup_policy: (
+      ?file_system_id: String
+    ) -> _DescribeBackupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupPolicyResponse
+
+    interface _DescribeFileSystemPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeFileSystemPolicyOutput]
+      def file_system_id: () -> String?
+      def policy: () -> String?
+    end
+    def describe_file_system_policy: (
+      ?file_system_id: String
+    ) -> _DescribeFileSystemPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileSystemPolicyResponse
+
+    interface _DescribeFileSystemsResponse
+      include Smithy::Client::_Response[Types::DescribeFileSystemsResponse]
+      def marker: () -> String?
+      def file_systems: () -> Array[Types::FileSystemDescription]?
+      def next_marker: () -> String?
+    end
+    def describe_file_systems: (
+      ?max_items: Integer,
+      ?marker: String,
+      ?creation_token: String,
+      ?file_system_id: String
+    ) -> _DescribeFileSystemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFileSystemsResponse
+
+    interface _DescribeLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeLifecycleConfigurationOutput]
+      def lifecycle_policies: () -> Array[Types::LifecyclePolicy]?
+    end
+    def describe_lifecycle_configuration: (
+      ?file_system_id: String
+    ) -> _DescribeLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLifecycleConfigurationResponse
+
+    interface _DescribeMountTargetSecurityGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeMountTargetSecurityGroupsResponse]
+      def security_groups: () -> Array[String]?
+    end
+    def describe_mount_target_security_groups: (
+      ?mount_target_id: String
+    ) -> _DescribeMountTargetSecurityGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMountTargetSecurityGroupsResponse
+
+    interface _DescribeMountTargetsResponse
+      include Smithy::Client::_Response[Types::DescribeMountTargetsResponse]
+      def marker: () -> String?
+      def mount_targets: () -> Array[Types::MountTargetDescription]?
+      def next_marker: () -> String?
+    end
+    def describe_mount_targets: (
+      ?max_items: Integer,
+      ?marker: String,
+      ?file_system_id: String,
+      ?mount_target_id: String,
+      ?access_point_id: String
+    ) -> _DescribeMountTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMountTargetsResponse
+
+    interface _DescribeReplicationConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeReplicationConfigurationsResponse]
+      def replications: () -> Array[Types::ReplicationConfigurationDescription]?
+      def next_token: () -> String?
+    end
+    def describe_replication_configurations: (
+      ?file_system_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeReplicationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicationConfigurationsResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsResponse]
+      def marker: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def next_marker: () -> String?
+    end
+    def describe_tags: (
+      ?max_items: Integer,
+      ?marker: String,
+      ?file_system_id: String
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ModifyMountTargetSecurityGroupsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def modify_mount_target_security_groups: (
+      ?mount_target_id: String,
+      ?security_groups: Array[String]
+    ) -> _ModifyMountTargetSecurityGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyMountTargetSecurityGroupsResponse
+
+    interface _PutAccountPreferencesResponse
+      include Smithy::Client::_Response[Types::PutAccountPreferencesResponse]
+      def resource_id_preference: () -> Types::ResourceIdPreference?
+    end
+    def put_account_preferences: (
+      ?resource_id_type: String
+    ) -> _PutAccountPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountPreferencesResponse
+
+    interface _PutBackupPolicyResponse
+      include Smithy::Client::_Response[Types::PutBackupPolicyOutput]
+      def backup_policy: () -> Types::BackupPolicy?
+    end
+    def put_backup_policy: (
+      ?file_system_id: String,
+      ?backup_policy: {
+        status: String
+      }
+    ) -> _PutBackupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBackupPolicyResponse
+
+    interface _PutFileSystemPolicyResponse
+      include Smithy::Client::_Response[Types::PutFileSystemPolicyOutput]
+      def file_system_id: () -> String?
+      def policy: () -> String?
+    end
+    def put_file_system_policy: (
+      ?file_system_id: String,
+      ?policy: String,
+      ?bypass_policy_lockout_safety_check: bool
+    ) -> _PutFileSystemPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFileSystemPolicyResponse
+
+    interface _PutLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Types::PutLifecycleConfigurationOutput]
+      def lifecycle_policies: () -> Array[Types::LifecyclePolicy]?
+    end
+    def put_lifecycle_configuration: (
+      ?file_system_id: String,
+      ?lifecycle_policies: Array[
+        {
+          transition_to_ia: String,
+          transition_to_primary_storage_class: String,
+          transition_to_archive: String
+        }
+      ]
+    ) -> _PutLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLifecycleConfigurationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateFileSystemResponse
+      include Smithy::Client::_Response[Types::UpdateFileSystemOutput]
+      def owner_id: () -> String?
+      def creation_token: () -> String?
+      def file_system_id: () -> String?
+      def file_system_arn: () -> String?
+      def creation_time: () -> Time?
+      def life_cycle_state: () -> String?
+      def name: () -> String?
+      def number_of_mount_targets: () -> Integer?
+      def size_in_bytes: () -> Types::FileSystemSize?
+      def performance_mode: () -> String?
+      def encrypted: () -> bool?
+      def kms_key_id: () -> String?
+      def throughput_mode: () -> String?
+      def provisioned_throughput_in_mibps: () -> Float?
+      def availability_zone_name: () -> String?
+      def availability_zone_id: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def file_system_protection: () -> Types::FileSystemProtectionDescription?
+    end
+    def update_file_system: (
+      ?file_system_id: String,
+      ?throughput_mode: String,
+      ?provisioned_throughput_in_mibps: Float
+    ) -> _UpdateFileSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFileSystemResponse
+
+    interface _UpdateFileSystemProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateFileSystemProtectionOutput]
+      def replication_overwrite_protection: () -> String?
+    end
+    def update_file_system_protection: (
+      ?file_system_id: String,
+      ?replication_overwrite_protection: String
+    ) -> _UpdateFileSystemProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFileSystemProtectionResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Mq
+      VERSION: String
+    end
+  end

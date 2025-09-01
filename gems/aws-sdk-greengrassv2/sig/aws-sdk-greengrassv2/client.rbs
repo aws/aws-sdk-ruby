@@ -1,0 +1,486 @@
+module Aws::GreengrassV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::GreengrassV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateServiceRoleToAccountResponse
+      include Smithy::Client::_Response[Types::AssociateServiceRoleToAccountResponse]
+      def associated_at: () -> String?
+    end
+    def associate_service_role_to_account: (
+      ?role_arn: String
+    ) -> _AssociateServiceRoleToAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateServiceRoleToAccountResponse
+
+    interface _BatchAssociateClientDeviceWithCoreDeviceResponse
+      include Smithy::Client::_Response[Types::BatchAssociateClientDeviceWithCoreDeviceResponse]
+      def error_entries: () -> Array[Types::AssociateClientDeviceWithCoreDeviceErrorEntry]?
+    end
+    def batch_associate_client_device_with_core_device: (
+      ?entries: Array[
+        {
+          thing_name: String
+        }
+      ],
+      ?core_device_thing_name: String
+    ) -> _BatchAssociateClientDeviceWithCoreDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateClientDeviceWithCoreDeviceResponse
+
+    interface _BatchDisassociateClientDeviceFromCoreDeviceResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateClientDeviceFromCoreDeviceResponse]
+      def error_entries: () -> Array[Types::DisassociateClientDeviceFromCoreDeviceErrorEntry]?
+    end
+    def batch_disassociate_client_device_from_core_device: (
+      ?entries: Array[
+        {
+          thing_name: String
+        }
+      ],
+      ?core_device_thing_name: String
+    ) -> _BatchDisassociateClientDeviceFromCoreDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateClientDeviceFromCoreDeviceResponse
+
+    interface _CancelDeploymentResponse
+      include Smithy::Client::_Response[Types::CancelDeploymentResponse]
+      def message: () -> String?
+    end
+    def cancel_deployment: (
+      ?deployment_id: String
+    ) -> _CancelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDeploymentResponse
+
+    interface _CreateComponentVersionResponse
+      include Smithy::Client::_Response[Types::CreateComponentVersionResponse]
+      def arn: () -> String?
+      def component_name: () -> String?
+      def component_version: () -> String?
+      def creation_timestamp: () -> Time?
+      def status: () -> Types::CloudComponentStatus?
+    end
+    def create_component_version: (
+      ?inline_recipe: String,
+      ?lambda_function: {
+        lambda_arn: String,
+        component_name: String,
+        component_version: String,
+        component_platforms: Array[
+          {
+            name: untyped,
+            attributes: Hash[String, String]
+          }
+        ],
+        component_dependencies: Hash[String,
+          {
+            version_requirement: untyped,
+            dependency_type: String
+          }
+        ],
+        component_lambda_parameters: {
+          event_sources: Array[
+            {
+              topic: String,
+              type: String
+            }
+          ],
+          max_queue_size: Integer,
+          max_instances_count: untyped,
+          max_idle_time_in_seconds: untyped,
+          timeout_in_seconds: untyped,
+          status_timeout_in_seconds: untyped,
+          pinned: bool,
+          input_payload_encoding_type: String,
+          exec_args: Array[String],
+          environment_variables: Hash[String, String],
+          linux_process_params: {
+            isolation_mode: String,
+            container_params: {
+              memory_size_in_kb: untyped,
+              mount_ro_sysfs: untyped,
+              volumes: Array[
+                {
+                  source_path: String,
+                  destination_path: untyped,
+                  permission: String,
+                  add_group_owner: untyped
+                }
+              ],
+              devices: Array[
+                {
+                  path: untyped,
+                  permission: untyped,
+                  add_group_owner: untyped
+                }
+              ]
+            }
+          }
+        }
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateComponentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentVersionResponse
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentResponse]
+      def deployment_id: () -> String?
+      def iot_job_id: () -> String?
+      def iot_job_arn: () -> String?
+    end
+    def create_deployment: (
+      ?target_arn: String,
+      ?deployment_name: String,
+      ?components: Hash[String,
+        {
+          component_version: String,
+          configuration_update: {
+            merge: String,
+            reset: Array[String]
+          },
+          run_with: {
+            posix_user: String,
+            system_resource_limits: {
+              memory: Integer,
+              cpus: Float
+            },
+            windows_user: untyped
+          }
+        }
+      ],
+      ?iot_job_configuration: {
+        job_executions_rollout_config: {
+          exponential_rate: {
+            base_rate_per_minute: Integer,
+            increment_factor: Float,
+            rate_increase_criteria: {
+              number_of_notified_things: Integer,
+              number_of_succeeded_things: untyped
+            }
+          },
+          maximum_per_minute: Integer
+        },
+        abort_config: {
+          criteria_list: Array[
+            {
+              failure_type: String,
+              action: String,
+              threshold_percentage: Float,
+              min_number_of_executed_things: Integer
+            }
+          ]
+        },
+        timeout_config: {
+          in_progress_timeout_in_minutes: Integer
+        }
+      },
+      ?deployment_policies: {
+        failure_handling_policy: String,
+        component_update_policy: {
+          timeout_in_seconds: Integer,
+          action: String
+        },
+        configuration_validation_policy: {
+          timeout_in_seconds: untyped
+        }
+      },
+      ?parent_target_arn: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _DeleteComponentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_component: (
+      ?arn: String
+    ) -> _DeleteComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComponentResponse
+
+    interface _DeleteCoreDeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_core_device: (
+      ?core_device_thing_name: String
+    ) -> _DeleteCoreDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreDeviceResponse
+
+    interface _DeleteDeploymentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_deployment: (
+      ?deployment_id: String
+    ) -> _DeleteDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentResponse
+
+    interface _DescribeComponentResponse
+      include Smithy::Client::_Response[Types::DescribeComponentResponse]
+      def arn: () -> String?
+      def component_name: () -> String?
+      def component_version: () -> String?
+      def creation_timestamp: () -> Time?
+      def publisher: () -> String?
+      def description: () -> String?
+      def status: () -> Types::CloudComponentStatus?
+      def platforms: () -> Array[Types::ComponentPlatform]?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_component: (
+      ?arn: String
+    ) -> _DescribeComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComponentResponse
+
+    interface _DisassociateServiceRoleFromAccountResponse
+      include Smithy::Client::_Response[Types::DisassociateServiceRoleFromAccountResponse]
+      def disassociated_at: () -> String?
+    end
+    def disassociate_service_role_from_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateServiceRoleFromAccountResponse
+
+    interface _GetComponentResponse
+      include Smithy::Client::_Response[Types::GetComponentResponse]
+      def recipe_output_format: () -> String?
+      def recipe: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_component: (
+      ?recipe_output_format: String,
+      ?arn: String
+    ) -> _GetComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentResponse
+
+    interface _GetComponentVersionArtifactResponse
+      include Smithy::Client::_Response[Types::GetComponentVersionArtifactResponse]
+      def pre_signed_url: () -> String?
+    end
+    def get_component_version_artifact: (
+      ?arn: String,
+      ?artifact_name: String,
+      ?s3_endpoint_type: String,
+      ?iot_endpoint_type: String
+    ) -> _GetComponentVersionArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentVersionArtifactResponse
+
+    interface _GetConnectivityInfoResponse
+      include Smithy::Client::_Response[Types::GetConnectivityInfoResponse]
+      def connectivity_info: () -> Array[Types::ConnectivityInfo]?
+      def message: () -> String?
+    end
+    def get_connectivity_info: (
+      ?thing_name: String
+    ) -> _GetConnectivityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectivityInfoResponse
+
+    interface _GetCoreDeviceResponse
+      include Smithy::Client::_Response[Types::GetCoreDeviceResponse]
+      def core_device_thing_name: () -> String?
+      def core_version: () -> String?
+      def platform: () -> String?
+      def architecture: () -> String?
+      def runtime: () -> String?
+      def status: () -> String?
+      def last_status_update_timestamp: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_core_device: (
+      ?core_device_thing_name: String
+    ) -> _GetCoreDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreDeviceResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentResponse]
+      def target_arn: () -> String?
+      def revision_id: () -> String?
+      def deployment_id: () -> String?
+      def deployment_name: () -> String?
+      def deployment_status: () -> String?
+      def iot_job_id: () -> String?
+      def iot_job_arn: () -> String?
+      def components: () -> Hash[String, Types::ComponentDeploymentSpecification]?
+      def deployment_policies: () -> Types::DeploymentPolicies?
+      def iot_job_configuration: () -> Types::DeploymentIoTJobConfiguration?
+      def creation_timestamp: () -> Time?
+      def is_latest_for_target: () -> bool?
+      def parent_target_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_deployment: (
+      ?deployment_id: String
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetServiceRoleForAccountResponse
+      include Smithy::Client::_Response[Types::GetServiceRoleForAccountResponse]
+      def associated_at: () -> String?
+      def role_arn: () -> String?
+    end
+    def get_service_role_for_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceRoleForAccountResponse
+
+    interface _ListClientDevicesAssociatedWithCoreDeviceResponse
+      include Smithy::Client::_Response[Types::ListClientDevicesAssociatedWithCoreDeviceResponse]
+      def associated_client_devices: () -> Array[Types::AssociatedClientDevice]?
+      def next_token: () -> String?
+    end
+    def list_client_devices_associated_with_core_device: (
+      ?core_device_thing_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListClientDevicesAssociatedWithCoreDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClientDevicesAssociatedWithCoreDeviceResponse
+
+    interface _ListComponentVersionsResponse
+      include Smithy::Client::_Response[Types::ListComponentVersionsResponse]
+      def component_versions: () -> Array[Types::ComponentVersionListItem]?
+      def next_token: () -> String?
+    end
+    def list_component_versions: (
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListComponentVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentVersionsResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsResponse]
+      def components: () -> Array[Types::Component]?
+      def next_token: () -> String?
+    end
+    def list_components: (
+      ?scope: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListCoreDevicesResponse
+      include Smithy::Client::_Response[Types::ListCoreDevicesResponse]
+      def core_devices: () -> Array[Types::CoreDevice]?
+      def next_token: () -> String?
+    end
+    def list_core_devices: (
+      ?thing_group_arn: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?runtime: String
+    ) -> _ListCoreDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreDevicesResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsResponse]
+      def deployments: () -> Array[Types::Deployment]?
+      def next_token: () -> String?
+    end
+    def list_deployments: (
+      ?target_arn: String,
+      ?history_filter: String,
+      ?parent_target_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListEffectiveDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListEffectiveDeploymentsResponse]
+      def effective_deployments: () -> Array[Types::EffectiveDeployment]?
+      def next_token: () -> String?
+    end
+    def list_effective_deployments: (
+      ?core_device_thing_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEffectiveDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEffectiveDeploymentsResponse
+
+    interface _ListInstalledComponentsResponse
+      include Smithy::Client::_Response[Types::ListInstalledComponentsResponse]
+      def installed_components: () -> Array[Types::InstalledComponent]?
+      def next_token: () -> String?
+    end
+    def list_installed_components: (
+      ?core_device_thing_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?topology_filter: String
+    ) -> _ListInstalledComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstalledComponentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ResolveComponentCandidatesResponse
+      include Smithy::Client::_Response[Types::ResolveComponentCandidatesResponse]
+      def resolved_component_versions: () -> Array[Types::ResolvedComponentVersion]?
+    end
+    def resolve_component_candidates: (
+      ?platform: {
+        name: String,
+        attributes: Hash[String, String]
+      },
+      ?component_candidates: Array[
+        {
+          component_name: String,
+          component_version: String,
+          version_requirements: Hash[String, String]
+        }
+      ]
+    ) -> _ResolveComponentCandidatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveComponentCandidatesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectivityInfoResponse
+      include Smithy::Client::_Response[Types::UpdateConnectivityInfoResponse]
+      def version: () -> String?
+      def message: () -> String?
+    end
+    def update_connectivity_info: (
+      ?thing_name: String,
+      ?connectivity_info: Array[
+        {
+          id: String,
+          host_address: untyped,
+          port_number: Integer,
+          metadata: untyped
+        }
+      ]
+    ) -> _UpdateConnectivityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectivityInfoResponse
+  end
+end

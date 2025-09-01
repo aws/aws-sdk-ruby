@@ -1,0 +1,5 @@
+  module Aws
+    module CodePipeline
+      VERSION: String
+    end
+  end

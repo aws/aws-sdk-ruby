@@ -1,0 +1,45 @@
+module Aws::SageMakerRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    BodyBlob: BlobShape
+    CustomAttributesHeader: StringShape
+    EnableExplanationsHeader: StringShape
+    EndpointName: StringShape
+    ErrorCode: StringShape
+    Header: StringShape
+    InferenceComponentHeader: StringShape
+    InferenceId: StringShape
+    InputLocationHeader: StringShape
+    InternalDependencyException: StructureShape
+    InternalFailure: StructureShape
+    InternalStreamFailure: StructureShape
+    InvocationTimeoutSecondsHeader: IntegerShape
+    InvokeEndpointAsyncInput: StructureShape
+    InvokeEndpointAsyncOutput: StructureShape
+    InvokeEndpointInput: StructureShape
+    InvokeEndpointOutput: StructureShape
+    InvokeEndpointWithResponseStreamInput: StructureShape
+    InvokeEndpointWithResponseStreamOutput: StructureShape
+    LogStreamArn: StringShape
+    Message: StringShape
+    ModelError: StructureShape
+    ModelNotReadyException: StructureShape
+    ModelStreamError: StructureShape
+    NewSessionResponseHeader: StringShape
+    PartBlob: BlobShape
+    PayloadPart: StructureShape
+    RequestTTLSecondsHeader: IntegerShape
+    ResponseStream: UnionShape
+    ServiceUnavailable: StructureShape
+    SessionIdHeader: StringShape
+    SessionIdOrNewSessionConstantHeader: StringShape
+    StatusCode: IntegerShape
+    TargetContainerHostnameHeader: StringShape
+    TargetModelHeader: StringShape
+    TargetVariantHeader: StringShape
+    ValidationError: StructureShape
+
+    AmazonSageMakerRuntime: ServiceShape
+  end
+end

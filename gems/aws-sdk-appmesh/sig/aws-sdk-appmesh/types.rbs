@@ -1,0 +1,3420 @@
+module Aws::AppMesh
+  module Types
+
+    class AccessLog
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::FileAccessLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::FileAccessLog?
+
+      class File < AccessLog
+      end
+      class Unknown < AccessLog
+      end
+    end
+
+    class AwsCloudMapInstanceAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class AwsCloudMapServiceDiscovery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?service_name: String,
+        ?attributes: Array[Types::AwsCloudMapInstanceAttribute],
+        ?ip_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor service_name: String?
+      attr_accessor attributes: Array[Types::AwsCloudMapInstanceAttribute]?
+      attr_accessor ip_preference: String?
+    end
+
+    class Backend
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?virtual_service: Types::VirtualServiceBackend,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::VirtualServiceBackend?
+
+      class VirtualService < Backend
+      end
+      class Unknown < Backend
+      end
+    end
+
+    class BackendDefaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_policy: Types::ClientPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_policy: Types::ClientPolicy?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ClientPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls: Types::ClientPolicyTls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls: Types::ClientPolicyTls?
+    end
+
+    class ClientPolicyTls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enforce: bool,
+        ?ports: Array[Integer],
+        ?certificate: Types::ClientTlsCertificate,
+        ?validation: Types::TlsValidationContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enforce: bool?
+      attr_accessor ports: Array[Integer]?
+      attr_accessor certificate: Types::ClientTlsCertificate?
+      attr_accessor validation: Types::TlsValidationContext?
+    end
+
+    class ClientTlsCertificate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::ListenerTlsFileCertificate,
+        ?sds: Types::ListenerTlsSdsCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::ListenerTlsFileCertificate?
+      attr_accessor sds: Types::ListenerTlsSdsCertificate?
+
+      class File < ClientTlsCertificate
+      end
+      class Sds < ClientTlsCertificate
+      end
+      class Unknown < ClientTlsCertificate
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateGatewayRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route_name: String,
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?spec: Types::GatewayRouteSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor spec: Types::GatewayRouteSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateGatewayRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route: Types::GatewayRouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route: Types::GatewayRouteData?
+    end
+
+    class CreateMeshOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?spec: Types::MeshSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::MeshSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateMeshOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh: Types::MeshData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh: Types::MeshData?
+    end
+
+    class CreateRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_name: String,
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?spec: Types::RouteSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor spec: Types::RouteSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route: Types::RouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route: Types::RouteData?
+    end
+
+    class CreateVirtualGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualGatewaySpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualGatewaySpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateVirtualGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway: Types::VirtualGatewayData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway: Types::VirtualGatewayData?
+    end
+
+    class CreateVirtualNodeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualNodeSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualNodeSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateVirtualNodeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node: Types::VirtualNodeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: Types::VirtualNodeData?
+    end
+
+    class CreateVirtualRouterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualRouterSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualRouterSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateVirtualRouterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router: Types::VirtualRouterData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router: Types::VirtualRouterData?
+    end
+
+    class CreateVirtualServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualServiceSpec,
+        ?tags: Array[Types::TagRef],
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualServiceSpec?
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class CreateVirtualServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service: Types::VirtualServiceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::VirtualServiceData?
+    end
+
+    class DeleteGatewayRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route_name: String,
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteGatewayRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route: Types::GatewayRouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route: Types::GatewayRouteData?
+    end
+
+    class DeleteMeshOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+    end
+
+    class DeleteMeshOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh: Types::MeshData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh: Types::MeshData?
+    end
+
+    class DeleteRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_name: String,
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route: Types::RouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route: Types::RouteData?
+    end
+
+    class DeleteVirtualGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteVirtualGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway: Types::VirtualGatewayData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway: Types::VirtualGatewayData?
+    end
+
+    class DeleteVirtualNodeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteVirtualNodeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node: Types::VirtualNodeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: Types::VirtualNodeData?
+    end
+
+    class DeleteVirtualRouterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteVirtualRouterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router: Types::VirtualRouterData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router: Types::VirtualRouterData?
+    end
+
+    class DeleteVirtualServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DeleteVirtualServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service: Types::VirtualServiceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::VirtualServiceData?
+    end
+
+    class DescribeGatewayRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route_name: String,
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeGatewayRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route: Types::GatewayRouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route: Types::GatewayRouteData?
+    end
+
+    class DescribeMeshOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeMeshOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh: Types::MeshData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh: Types::MeshData?
+    end
+
+    class DescribeRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+        ?virtual_router_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor virtual_router_name: String?
+    end
+
+    class DescribeRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route: Types::RouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route: Types::RouteData?
+    end
+
+    class DescribeVirtualGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeVirtualGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway: Types::VirtualGatewayData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway: Types::VirtualGatewayData?
+    end
+
+    class DescribeVirtualNodeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeVirtualNodeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node: Types::VirtualNodeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: Types::VirtualNodeData?
+    end
+
+    class DescribeVirtualRouterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeVirtualRouterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router: Types::VirtualRouterData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router: Types::VirtualRouterData?
+    end
+
+    class DescribeVirtualServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+        ?mesh_name: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class DescribeVirtualServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service: Types::VirtualServiceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::VirtualServiceData?
+    end
+
+    class DnsServiceDiscovery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?response_type: String,
+        ?ip_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor response_type: String?
+      attr_accessor ip_preference: String?
+    end
+
+    class Duration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor unit: String?
+    end
+
+    class EgressFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class FileAccessLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?format: Types::LoggingFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor format: Types::LoggingFormat?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GatewayRouteData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?gateway_route_name: String,
+        ?virtual_gateway_name: String,
+        ?spec: Types::GatewayRouteSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::GatewayRouteStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor gateway_route_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor spec: Types::GatewayRouteSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::GatewayRouteStatus?
+    end
+
+    class GatewayRouteHostnameMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact: String,
+        ?suffix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor suffix: String?
+    end
+
+    class GatewayRouteHostnameRewrite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_target_hostname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_target_hostname: String?
+    end
+
+    class GatewayRouteRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?gateway_route_name: String,
+        ?virtual_gateway_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor gateway_route_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class GatewayRouteSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority: Integer,
+        ?http_route: Types::HttpGatewayRoute,
+        ?http2_route: Types::HttpGatewayRoute,
+        ?grpc_route: Types::GrpcGatewayRoute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority: Integer?
+      attr_accessor http_route: Types::HttpGatewayRoute?
+      attr_accessor http2_route: Types::HttpGatewayRoute?
+      attr_accessor grpc_route: Types::GrpcGatewayRoute?
+    end
+
+    class GatewayRouteStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GatewayRouteTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service: Types::GatewayRouteVirtualService,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::GatewayRouteVirtualService?
+      attr_accessor port: Integer?
+    end
+
+    class GatewayRouteVirtualService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+    end
+
+    class GrpcGatewayRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match: Types::GrpcGatewayRouteMatch,
+        ?action: Types::GrpcGatewayRouteAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match: Types::GrpcGatewayRouteMatch?
+      attr_accessor action: Types::GrpcGatewayRouteAction?
+    end
+
+    class GrpcGatewayRouteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::GatewayRouteTarget,
+        ?rewrite: Types::GrpcGatewayRouteRewrite,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::GatewayRouteTarget?
+      attr_accessor rewrite: Types::GrpcGatewayRouteRewrite?
+    end
+
+    class GrpcGatewayRouteMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?hostname: Types::GatewayRouteHostnameMatch,
+        ?metadata: Array[Types::GrpcGatewayRouteMetadata],
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor hostname: Types::GatewayRouteHostnameMatch?
+      attr_accessor metadata: Array[Types::GrpcGatewayRouteMetadata]?
+      attr_accessor port: Integer?
+    end
+
+    class GrpcGatewayRouteMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?invert: bool,
+        ?match: Types::GrpcMetadataMatchMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor invert: bool?
+      attr_accessor match: Types::GrpcMetadataMatchMethod?
+    end
+
+    class GrpcGatewayRouteRewrite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: Types::GatewayRouteHostnameRewrite,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: Types::GatewayRouteHostnameRewrite?
+    end
+
+    class GrpcMetadataMatchMethod
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?exact: String,
+        ?regex: String,
+        ?range: Types::MatchRange,
+        ?prefix: String,
+        ?suffix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor regex: String?
+      attr_accessor range: Types::MatchRange?
+      attr_accessor prefix: String?
+      attr_accessor suffix: String?
+
+      class Exact < GrpcMetadataMatchMethod
+      end
+      class Regex < GrpcMetadataMatchMethod
+      end
+      class Range < GrpcMetadataMatchMethod
+      end
+      class Prefix < GrpcMetadataMatchMethod
+      end
+      class Suffix < GrpcMetadataMatchMethod
+      end
+      class Unknown < GrpcMetadataMatchMethod
+      end
+    end
+
+    class GrpcRetryPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_retry_timeout: Types::Duration,
+        ?max_retries: Integer,
+        ?http_retry_events: Array[String],
+        ?tcp_retry_events: Array[String],
+        ?grpc_retry_events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_retry_timeout: Types::Duration?
+      attr_accessor max_retries: Integer?
+      attr_accessor http_retry_events: Array[String]?
+      attr_accessor tcp_retry_events: Array[String]?
+      attr_accessor grpc_retry_events: Array[String]?
+    end
+
+    class GrpcRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::GrpcRouteAction,
+        ?match: Types::GrpcRouteMatch,
+        ?retry_policy: Types::GrpcRetryPolicy,
+        ?timeout: Types::GrpcTimeout,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::GrpcRouteAction?
+      attr_accessor match: Types::GrpcRouteMatch?
+      attr_accessor retry_policy: Types::GrpcRetryPolicy?
+      attr_accessor timeout: Types::GrpcTimeout?
+    end
+
+    class GrpcRouteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weighted_targets: Array[Types::WeightedTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weighted_targets: Array[Types::WeightedTarget]?
+    end
+
+    class GrpcRouteMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?method_name: String,
+        ?metadata: Array[Types::GrpcRouteMetadata],
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor method_name: String?
+      attr_accessor metadata: Array[Types::GrpcRouteMetadata]?
+      attr_accessor port: Integer?
+    end
+
+    class GrpcRouteMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?invert: bool,
+        ?match: Types::GrpcRouteMetadataMatchMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor invert: bool?
+      attr_accessor match: Types::GrpcRouteMetadataMatchMethod?
+    end
+
+    class GrpcRouteMetadataMatchMethod
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?exact: String,
+        ?regex: String,
+        ?range: Types::MatchRange,
+        ?prefix: String,
+        ?suffix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor regex: String?
+      attr_accessor range: Types::MatchRange?
+      attr_accessor prefix: String?
+      attr_accessor suffix: String?
+
+      class Exact < GrpcRouteMetadataMatchMethod
+      end
+      class Regex < GrpcRouteMetadataMatchMethod
+      end
+      class Range < GrpcRouteMetadataMatchMethod
+      end
+      class Prefix < GrpcRouteMetadataMatchMethod
+      end
+      class Suffix < GrpcRouteMetadataMatchMethod
+      end
+      class Unknown < GrpcRouteMetadataMatchMethod
+      end
+    end
+
+    class GrpcTimeout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_request: Types::Duration,
+        ?idle: Types::Duration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_request: Types::Duration?
+      attr_accessor idle: Types::Duration?
+    end
+
+    class HeaderMatchMethod
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?exact: String,
+        ?regex: String,
+        ?range: Types::MatchRange,
+        ?prefix: String,
+        ?suffix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor regex: String?
+      attr_accessor range: Types::MatchRange?
+      attr_accessor prefix: String?
+      attr_accessor suffix: String?
+
+      class Exact < HeaderMatchMethod
+      end
+      class Regex < HeaderMatchMethod
+      end
+      class Range < HeaderMatchMethod
+      end
+      class Prefix < HeaderMatchMethod
+      end
+      class Suffix < HeaderMatchMethod
+      end
+      class Unknown < HeaderMatchMethod
+      end
+    end
+
+    class HealthCheckPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_millis: Integer,
+        ?interval_millis: Integer,
+        ?protocol: String,
+        ?port: Integer,
+        ?path: String,
+        ?healthy_threshold: Integer,
+        ?unhealthy_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_millis: Integer?
+      attr_accessor interval_millis: Integer?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor path: String?
+      attr_accessor healthy_threshold: Integer?
+      attr_accessor unhealthy_threshold: Integer?
+    end
+
+    class HttpGatewayRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match: Types::HttpGatewayRouteMatch,
+        ?action: Types::HttpGatewayRouteAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match: Types::HttpGatewayRouteMatch?
+      attr_accessor action: Types::HttpGatewayRouteAction?
+    end
+
+    class HttpGatewayRouteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: Types::GatewayRouteTarget,
+        ?rewrite: Types::HttpGatewayRouteRewrite,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: Types::GatewayRouteTarget?
+      attr_accessor rewrite: Types::HttpGatewayRouteRewrite?
+    end
+
+    class HttpGatewayRouteHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?invert: bool,
+        ?match: Types::HeaderMatchMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor invert: bool?
+      attr_accessor match: Types::HeaderMatchMethod?
+    end
+
+    class HttpGatewayRouteMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?path: Types::HttpPathMatch,
+        ?query_parameters: Array[Types::HttpQueryParameter],
+        ?method: String,
+        ?hostname: Types::GatewayRouteHostnameMatch,
+        ?headers: Array[Types::HttpGatewayRouteHeader],
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor path: Types::HttpPathMatch?
+      attr_accessor query_parameters: Array[Types::HttpQueryParameter]?
+      attr_accessor method: String?
+      attr_accessor hostname: Types::GatewayRouteHostnameMatch?
+      attr_accessor headers: Array[Types::HttpGatewayRouteHeader]?
+      attr_accessor port: Integer?
+    end
+
+    class HttpGatewayRoutePathRewrite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+    end
+
+    class HttpGatewayRoutePrefixRewrite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_prefix: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_prefix: String?
+      attr_accessor value: String?
+    end
+
+    class HttpGatewayRouteRewrite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: Types::HttpGatewayRoutePrefixRewrite,
+        ?path: Types::HttpGatewayRoutePathRewrite,
+        ?hostname: Types::GatewayRouteHostnameRewrite,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: Types::HttpGatewayRoutePrefixRewrite?
+      attr_accessor path: Types::HttpGatewayRoutePathRewrite?
+      attr_accessor hostname: Types::GatewayRouteHostnameRewrite?
+    end
+
+    class HttpPathMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact: String,
+        ?regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+      attr_accessor regex: String?
+    end
+
+    class HttpQueryParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?match: Types::QueryParameterMatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor match: Types::QueryParameterMatch?
+    end
+
+    class HttpRetryPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_retry_timeout: Types::Duration,
+        ?max_retries: Integer,
+        ?http_retry_events: Array[String],
+        ?tcp_retry_events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_retry_timeout: Types::Duration?
+      attr_accessor max_retries: Integer?
+      attr_accessor http_retry_events: Array[String]?
+      attr_accessor tcp_retry_events: Array[String]?
+    end
+
+    class HttpRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match: Types::HttpRouteMatch,
+        ?action: Types::HttpRouteAction,
+        ?retry_policy: Types::HttpRetryPolicy,
+        ?timeout: Types::HttpTimeout,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match: Types::HttpRouteMatch?
+      attr_accessor action: Types::HttpRouteAction?
+      attr_accessor retry_policy: Types::HttpRetryPolicy?
+      attr_accessor timeout: Types::HttpTimeout?
+    end
+
+    class HttpRouteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weighted_targets: Array[Types::WeightedTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weighted_targets: Array[Types::WeightedTarget]?
+    end
+
+    class HttpRouteHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?invert: bool,
+        ?match: Types::HeaderMatchMethod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor invert: bool?
+      attr_accessor match: Types::HeaderMatchMethod?
+    end
+
+    class HttpRouteMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?path: Types::HttpPathMatch,
+        ?query_parameters: Array[Types::HttpQueryParameter],
+        ?method: String,
+        ?scheme: String,
+        ?headers: Array[Types::HttpRouteHeader],
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor path: Types::HttpPathMatch?
+      attr_accessor query_parameters: Array[Types::HttpQueryParameter]?
+      attr_accessor method: String?
+      attr_accessor scheme: String?
+      attr_accessor headers: Array[Types::HttpRouteHeader]?
+      attr_accessor port: Integer?
+    end
+
+    class HttpTimeout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?per_request: Types::Duration,
+        ?idle: Types::Duration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor per_request: Types::Duration?
+      attr_accessor idle: Types::Duration?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JsonFormatRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListGatewayRoutesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListGatewayRoutesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_routes: Array[Types::GatewayRouteRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_routes: Array[Types::GatewayRouteRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMeshesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListMeshesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meshes: Array[Types::MeshRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meshes: Array[Types::MeshRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoutesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListRoutesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routes: Array[Types::RouteRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routes: Array[Types::RouteRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::TagRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::TagRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualGatewaysOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListVirtualGatewaysOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateways: Array[Types::VirtualGatewayRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateways: Array[Types::VirtualGatewayRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualNodesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListVirtualNodesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_nodes: Array[Types::VirtualNodeRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_nodes: Array[Types::VirtualNodeRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualRoutersOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListVirtualRoutersOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_routers: Array[Types::VirtualRouterRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_routers: Array[Types::VirtualRouterRef]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualServicesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?next_token: String,
+        ?limit: Integer,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+      attr_accessor mesh_owner: String?
+    end
+
+    class ListVirtualServicesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_services: Array[Types::VirtualServiceRef],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_services: Array[Types::VirtualServiceRef]?
+      attr_accessor next_token: String?
+    end
+
+    class Listener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port_mapping: Types::PortMapping,
+        ?tls: Types::ListenerTls,
+        ?health_check: Types::HealthCheckPolicy,
+        ?timeout: Types::ListenerTimeout,
+        ?outlier_detection: Types::OutlierDetection,
+        ?connection_pool: Types::VirtualNodeConnectionPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port_mapping: Types::PortMapping?
+      attr_accessor tls: Types::ListenerTls?
+      attr_accessor health_check: Types::HealthCheckPolicy?
+      attr_accessor timeout: Types::ListenerTimeout?
+      attr_accessor outlier_detection: Types::OutlierDetection?
+      attr_accessor connection_pool: Types::VirtualNodeConnectionPool?
+    end
+
+    class ListenerTimeout
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tcp: Types::TcpTimeout,
+        ?http: Types::HttpTimeout,
+        ?http2: Types::HttpTimeout,
+        ?grpc: Types::GrpcTimeout,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tcp: Types::TcpTimeout?
+      attr_accessor http: Types::HttpTimeout?
+      attr_accessor http2: Types::HttpTimeout?
+      attr_accessor grpc: Types::GrpcTimeout?
+
+      class Tcp < ListenerTimeout
+      end
+      class Http < ListenerTimeout
+      end
+      class Http2 < ListenerTimeout
+      end
+      class Grpc < ListenerTimeout
+      end
+      class Unknown < ListenerTimeout
+      end
+    end
+
+    class ListenerTls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?certificate: Types::ListenerTlsCertificate,
+        ?validation: Types::ListenerTlsValidationContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor certificate: Types::ListenerTlsCertificate?
+      attr_accessor validation: Types::ListenerTlsValidationContext?
+    end
+
+    class ListenerTlsAcmCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class ListenerTlsCertificate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?acm: Types::ListenerTlsAcmCertificate,
+        ?file: Types::ListenerTlsFileCertificate,
+        ?sds: Types::ListenerTlsSdsCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm: Types::ListenerTlsAcmCertificate?
+      attr_accessor file: Types::ListenerTlsFileCertificate?
+      attr_accessor sds: Types::ListenerTlsSdsCertificate?
+
+      class Acm < ListenerTlsCertificate
+      end
+      class File < ListenerTlsCertificate
+      end
+      class Sds < ListenerTlsCertificate
+      end
+      class Unknown < ListenerTlsCertificate
+      end
+    end
+
+    class ListenerTlsFileCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_chain: String,
+        ?private_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_chain: String?
+      attr_accessor private_key: String?
+    end
+
+    class ListenerTlsSdsCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+    end
+
+    class ListenerTlsValidationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust: Types::ListenerTlsValidationContextTrust,
+        ?subject_alternative_names: Types::SubjectAlternativeNames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust: Types::ListenerTlsValidationContextTrust?
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames?
+    end
+
+    class ListenerTlsValidationContextTrust
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::TlsValidationContextFileTrust,
+        ?sds: Types::TlsValidationContextSdsTrust,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::TlsValidationContextFileTrust?
+      attr_accessor sds: Types::TlsValidationContextSdsTrust?
+
+      class File < ListenerTlsValidationContextTrust
+      end
+      class Sds < ListenerTlsValidationContextTrust
+      end
+      class Unknown < ListenerTlsValidationContextTrust
+      end
+    end
+
+    class Logging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log: Types::AccessLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log: Types::AccessLog?
+    end
+
+    class LoggingFormat
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: String,
+        ?json: Array[Types::JsonFormatRef],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor json: Array[Types::JsonFormatRef]?
+
+      class Text < LoggingFormat
+      end
+      class Json < LoggingFormat
+      end
+      class Unknown < LoggingFormat
+      end
+    end
+
+    class MatchRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Integer,
+        ?end: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Integer?
+      attr_accessor end: Integer?
+    end
+
+    class MeshData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?spec: Types::MeshSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::MeshStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::MeshSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::MeshStatus?
+    end
+
+    class MeshRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class MeshServiceDiscovery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_preference: String?
+    end
+
+    class MeshSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_filter: Types::EgressFilter,
+        ?service_discovery: Types::MeshServiceDiscovery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_filter: Types::EgressFilter?
+      attr_accessor service_discovery: Types::MeshServiceDiscovery?
+    end
+
+    class MeshStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OutlierDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_server_errors: Integer,
+        ?interval: Types::Duration,
+        ?base_ejection_duration: Types::Duration,
+        ?max_ejection_percent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_server_errors: Integer?
+      attr_accessor interval: Types::Duration?
+      attr_accessor base_ejection_duration: Types::Duration?
+      attr_accessor max_ejection_percent: Integer?
+    end
+
+    class PortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class QueryParameterMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version: Integer,
+        ?uid: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor uid: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+    end
+
+    class RouteData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?route_name: String,
+        ?spec: Types::RouteSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::RouteStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor route_name: String?
+      attr_accessor spec: Types::RouteSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::RouteStatus?
+    end
+
+    class RouteRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?route_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor route_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class RouteSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority: Integer,
+        ?http_route: Types::HttpRoute,
+        ?tcp_route: Types::TcpRoute,
+        ?http2_route: Types::HttpRoute,
+        ?grpc_route: Types::GrpcRoute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority: Integer?
+      attr_accessor http_route: Types::HttpRoute?
+      attr_accessor tcp_route: Types::TcpRoute?
+      attr_accessor http2_route: Types::HttpRoute?
+      attr_accessor grpc_route: Types::GrpcRoute?
+    end
+
+    class RouteStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ServiceDiscovery
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dns: Types::DnsServiceDiscovery,
+        ?aws_cloud_map: Types::AwsCloudMapServiceDiscovery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns: Types::DnsServiceDiscovery?
+      attr_accessor aws_cloud_map: Types::AwsCloudMapServiceDiscovery?
+
+      class Dns < ServiceDiscovery
+      end
+      class AwsCloudMap < ServiceDiscovery
+      end
+      class Unknown < ServiceDiscovery
+      end
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubjectAlternativeNameMatchers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact: Array[String]?
+    end
+
+    class SubjectAlternativeNames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?match: Types::SubjectAlternativeNameMatchers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match: Types::SubjectAlternativeNameMatchers?
+    end
+
+    class TagRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::TagRef],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::TagRef]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TcpRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::TcpRouteAction,
+        ?timeout: Types::TcpTimeout,
+        ?match: Types::TcpRouteMatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::TcpRouteAction?
+      attr_accessor timeout: Types::TcpTimeout?
+      attr_accessor match: Types::TcpRouteMatch?
+    end
+
+    class TcpRouteAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weighted_targets: Array[Types::WeightedTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weighted_targets: Array[Types::WeightedTarget]?
+    end
+
+    class TcpRouteMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+    end
+
+    class TcpTimeout
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idle: Types::Duration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idle: Types::Duration?
+    end
+
+    class TlsValidationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust: Types::TlsValidationContextTrust,
+        ?subject_alternative_names: Types::SubjectAlternativeNames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust: Types::TlsValidationContextTrust?
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames?
+    end
+
+    class TlsValidationContextAcmTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arns: Array[String]?
+    end
+
+    class TlsValidationContextFileTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_chain: String?
+    end
+
+    class TlsValidationContextSdsTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+    end
+
+    class TlsValidationContextTrust
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?acm: Types::TlsValidationContextAcmTrust,
+        ?file: Types::TlsValidationContextFileTrust,
+        ?sds: Types::TlsValidationContextSdsTrust,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm: Types::TlsValidationContextAcmTrust?
+      attr_accessor file: Types::TlsValidationContextFileTrust?
+      attr_accessor sds: Types::TlsValidationContextSdsTrust?
+
+      class Acm < TlsValidationContextTrust
+      end
+      class File < TlsValidationContextTrust
+      end
+      class Sds < TlsValidationContextTrust
+      end
+      class Unknown < TlsValidationContextTrust
+      end
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGatewayRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route_name: String,
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?spec: Types::GatewayRouteSpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor spec: Types::GatewayRouteSpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateGatewayRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_route: Types::GatewayRouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_route: Types::GatewayRouteData?
+    end
+
+    class UpdateMeshOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?spec: Types::MeshSpec,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::MeshSpec?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateMeshOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh: Types::MeshData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh: Types::MeshData?
+    end
+
+    class UpdateRouteOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_name: String,
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?spec: Types::RouteSpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor spec: Types::RouteSpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateRouteOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route: Types::RouteData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route: Types::RouteData?
+    end
+
+    class UpdateVirtualGatewayOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualGatewaySpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualGatewaySpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateVirtualGatewayOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_gateway: Types::VirtualGatewayData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_gateway: Types::VirtualGatewayData?
+    end
+
+    class UpdateVirtualNodeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualNodeSpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualNodeSpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateVirtualNodeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node: Types::VirtualNodeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: Types::VirtualNodeData?
+    end
+
+    class UpdateVirtualRouterOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualRouterSpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualRouterSpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateVirtualRouterOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router: Types::VirtualRouterData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router: Types::VirtualRouterData?
+    end
+
+    class UpdateVirtualServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+        ?mesh_name: String,
+        ?spec: Types::VirtualServiceSpec,
+        ?client_token: String,
+        ?mesh_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+      attr_accessor mesh_name: String?
+      attr_accessor spec: Types::VirtualServiceSpec?
+      attr_accessor client_token: String?
+      attr_accessor mesh_owner: String?
+    end
+
+    class UpdateVirtualServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service: Types::VirtualServiceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service: Types::VirtualServiceData?
+    end
+
+    class VirtualGatewayAccessLog
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::VirtualGatewayFileAccessLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::VirtualGatewayFileAccessLog?
+
+      class File < VirtualGatewayAccessLog
+      end
+      class Unknown < VirtualGatewayAccessLog
+      end
+    end
+
+    class VirtualGatewayBackendDefaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_policy: Types::VirtualGatewayClientPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_policy: Types::VirtualGatewayClientPolicy?
+    end
+
+    class VirtualGatewayClientPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tls: Types::VirtualGatewayClientPolicyTls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tls: Types::VirtualGatewayClientPolicyTls?
+    end
+
+    class VirtualGatewayClientPolicyTls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enforce: bool,
+        ?ports: Array[Integer],
+        ?certificate: Types::VirtualGatewayClientTlsCertificate,
+        ?validation: Types::VirtualGatewayTlsValidationContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enforce: bool?
+      attr_accessor ports: Array[Integer]?
+      attr_accessor certificate: Types::VirtualGatewayClientTlsCertificate?
+      attr_accessor validation: Types::VirtualGatewayTlsValidationContext?
+    end
+
+    class VirtualGatewayClientTlsCertificate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::VirtualGatewayListenerTlsFileCertificate,
+        ?sds: Types::VirtualGatewayListenerTlsSdsCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::VirtualGatewayListenerTlsFileCertificate?
+      attr_accessor sds: Types::VirtualGatewayListenerTlsSdsCertificate?
+
+      class File < VirtualGatewayClientTlsCertificate
+      end
+      class Sds < VirtualGatewayClientTlsCertificate
+      end
+      class Unknown < VirtualGatewayClientTlsCertificate
+      end
+    end
+
+    class VirtualGatewayConnectionPool
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?http: Types::VirtualGatewayHttpConnectionPool,
+        ?http2: Types::VirtualGatewayHttp2ConnectionPool,
+        ?grpc: Types::VirtualGatewayGrpcConnectionPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http: Types::VirtualGatewayHttpConnectionPool?
+      attr_accessor http2: Types::VirtualGatewayHttp2ConnectionPool?
+      attr_accessor grpc: Types::VirtualGatewayGrpcConnectionPool?
+
+      class Http < VirtualGatewayConnectionPool
+      end
+      class Http2 < VirtualGatewayConnectionPool
+      end
+      class Grpc < VirtualGatewayConnectionPool
+      end
+      class Unknown < VirtualGatewayConnectionPool
+      end
+    end
+
+    class VirtualGatewayData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?spec: Types::VirtualGatewaySpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::VirtualGatewayStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor spec: Types::VirtualGatewaySpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::VirtualGatewayStatus?
+    end
+
+    class VirtualGatewayFileAccessLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?format: Types::LoggingFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor format: Types::LoggingFormat?
+    end
+
+    class VirtualGatewayGrpcConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_requests: Integer?
+    end
+
+    class VirtualGatewayHealthCheckPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_millis: Integer,
+        ?interval_millis: Integer,
+        ?protocol: String,
+        ?port: Integer,
+        ?path: String,
+        ?healthy_threshold: Integer,
+        ?unhealthy_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_millis: Integer?
+      attr_accessor interval_millis: Integer?
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+      attr_accessor path: String?
+      attr_accessor healthy_threshold: Integer?
+      attr_accessor unhealthy_threshold: Integer?
+    end
+
+    class VirtualGatewayHttp2ConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_requests: Integer?
+    end
+
+    class VirtualGatewayHttpConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_connections: Integer,
+        ?max_pending_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_connections: Integer?
+      attr_accessor max_pending_requests: Integer?
+    end
+
+    class VirtualGatewayListener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check: Types::VirtualGatewayHealthCheckPolicy,
+        ?port_mapping: Types::VirtualGatewayPortMapping,
+        ?tls: Types::VirtualGatewayListenerTls,
+        ?connection_pool: Types::VirtualGatewayConnectionPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check: Types::VirtualGatewayHealthCheckPolicy?
+      attr_accessor port_mapping: Types::VirtualGatewayPortMapping?
+      attr_accessor tls: Types::VirtualGatewayListenerTls?
+      attr_accessor connection_pool: Types::VirtualGatewayConnectionPool?
+    end
+
+    class VirtualGatewayListenerTls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?validation: Types::VirtualGatewayListenerTlsValidationContext,
+        ?certificate: Types::VirtualGatewayListenerTlsCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor validation: Types::VirtualGatewayListenerTlsValidationContext?
+      attr_accessor certificate: Types::VirtualGatewayListenerTlsCertificate?
+    end
+
+    class VirtualGatewayListenerTlsAcmCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class VirtualGatewayListenerTlsCertificate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?acm: Types::VirtualGatewayListenerTlsAcmCertificate,
+        ?file: Types::VirtualGatewayListenerTlsFileCertificate,
+        ?sds: Types::VirtualGatewayListenerTlsSdsCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm: Types::VirtualGatewayListenerTlsAcmCertificate?
+      attr_accessor file: Types::VirtualGatewayListenerTlsFileCertificate?
+      attr_accessor sds: Types::VirtualGatewayListenerTlsSdsCertificate?
+
+      class Acm < VirtualGatewayListenerTlsCertificate
+      end
+      class File < VirtualGatewayListenerTlsCertificate
+      end
+      class Sds < VirtualGatewayListenerTlsCertificate
+      end
+      class Unknown < VirtualGatewayListenerTlsCertificate
+      end
+    end
+
+    class VirtualGatewayListenerTlsFileCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_chain: String,
+        ?private_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_chain: String?
+      attr_accessor private_key: String?
+    end
+
+    class VirtualGatewayListenerTlsSdsCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+    end
+
+    class VirtualGatewayListenerTlsValidationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust: Types::VirtualGatewayListenerTlsValidationContextTrust,
+        ?subject_alternative_names: Types::SubjectAlternativeNames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust: Types::VirtualGatewayListenerTlsValidationContextTrust?
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames?
+    end
+
+    class VirtualGatewayListenerTlsValidationContextTrust
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?file: Types::VirtualGatewayTlsValidationContextFileTrust,
+        ?sds: Types::VirtualGatewayTlsValidationContextSdsTrust,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file: Types::VirtualGatewayTlsValidationContextFileTrust?
+      attr_accessor sds: Types::VirtualGatewayTlsValidationContextSdsTrust?
+
+      class File < VirtualGatewayListenerTlsValidationContextTrust
+      end
+      class Sds < VirtualGatewayListenerTlsValidationContextTrust
+      end
+      class Unknown < VirtualGatewayListenerTlsValidationContextTrust
+      end
+    end
+
+    class VirtualGatewayLogging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_log: Types::VirtualGatewayAccessLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_log: Types::VirtualGatewayAccessLog?
+    end
+
+    class VirtualGatewayPortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+    end
+
+    class VirtualGatewayRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_gateway_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_gateway_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class VirtualGatewaySpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backend_defaults: Types::VirtualGatewayBackendDefaults,
+        ?listeners: Array[Types::VirtualGatewayListener],
+        ?logging: Types::VirtualGatewayLogging,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backend_defaults: Types::VirtualGatewayBackendDefaults?
+      attr_accessor listeners: Array[Types::VirtualGatewayListener]?
+      attr_accessor logging: Types::VirtualGatewayLogging?
+    end
+
+    class VirtualGatewayStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class VirtualGatewayTlsValidationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust: Types::VirtualGatewayTlsValidationContextTrust,
+        ?subject_alternative_names: Types::SubjectAlternativeNames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust: Types::VirtualGatewayTlsValidationContextTrust?
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames?
+    end
+
+    class VirtualGatewayTlsValidationContextAcmTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_arns: Array[String]?
+    end
+
+    class VirtualGatewayTlsValidationContextFileTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_chain: String?
+    end
+
+    class VirtualGatewayTlsValidationContextSdsTrust
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_name: String?
+    end
+
+    class VirtualGatewayTlsValidationContextTrust
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?acm: Types::VirtualGatewayTlsValidationContextAcmTrust,
+        ?file: Types::VirtualGatewayTlsValidationContextFileTrust,
+        ?sds: Types::VirtualGatewayTlsValidationContextSdsTrust,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm: Types::VirtualGatewayTlsValidationContextAcmTrust?
+      attr_accessor file: Types::VirtualGatewayTlsValidationContextFileTrust?
+      attr_accessor sds: Types::VirtualGatewayTlsValidationContextSdsTrust?
+
+      class Acm < VirtualGatewayTlsValidationContextTrust
+      end
+      class File < VirtualGatewayTlsValidationContextTrust
+      end
+      class Sds < VirtualGatewayTlsValidationContextTrust
+      end
+      class Unknown < VirtualGatewayTlsValidationContextTrust
+      end
+    end
+
+    class VirtualNodeConnectionPool
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tcp: Types::VirtualNodeTcpConnectionPool,
+        ?http: Types::VirtualNodeHttpConnectionPool,
+        ?http2: Types::VirtualNodeHttp2ConnectionPool,
+        ?grpc: Types::VirtualNodeGrpcConnectionPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tcp: Types::VirtualNodeTcpConnectionPool?
+      attr_accessor http: Types::VirtualNodeHttpConnectionPool?
+      attr_accessor http2: Types::VirtualNodeHttp2ConnectionPool?
+      attr_accessor grpc: Types::VirtualNodeGrpcConnectionPool?
+
+      class Tcp < VirtualNodeConnectionPool
+      end
+      class Http < VirtualNodeConnectionPool
+      end
+      class Http2 < VirtualNodeConnectionPool
+      end
+      class Grpc < VirtualNodeConnectionPool
+      end
+      class Unknown < VirtualNodeConnectionPool
+      end
+    end
+
+    class VirtualNodeData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_node_name: String,
+        ?spec: Types::VirtualNodeSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::VirtualNodeStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_node_name: String?
+      attr_accessor spec: Types::VirtualNodeSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::VirtualNodeStatus?
+    end
+
+    class VirtualNodeGrpcConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_requests: Integer?
+    end
+
+    class VirtualNodeHttp2ConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_requests: Integer?
+    end
+
+    class VirtualNodeHttpConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_connections: Integer,
+        ?max_pending_requests: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_connections: Integer?
+      attr_accessor max_pending_requests: Integer?
+    end
+
+    class VirtualNodeRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_node_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_node_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class VirtualNodeServiceProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node_name: String?
+    end
+
+    class VirtualNodeSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_discovery: Types::ServiceDiscovery,
+        ?listeners: Array[Types::Listener],
+        ?backends: Array[Types::Backend],
+        ?backend_defaults: Types::BackendDefaults,
+        ?logging: Types::Logging,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_discovery: Types::ServiceDiscovery?
+      attr_accessor listeners: Array[Types::Listener]?
+      attr_accessor backends: Array[Types::Backend]?
+      attr_accessor backend_defaults: Types::BackendDefaults?
+      attr_accessor logging: Types::Logging?
+    end
+
+    class VirtualNodeStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class VirtualNodeTcpConnectionPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_connections: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_connections: Integer?
+    end
+
+    class VirtualRouterData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?spec: Types::VirtualRouterSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::VirtualRouterStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor spec: Types::VirtualRouterSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::VirtualRouterStatus?
+    end
+
+    class VirtualRouterListener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port_mapping: Types::PortMapping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port_mapping: Types::PortMapping?
+    end
+
+    class VirtualRouterRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_router_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_router_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class VirtualRouterServiceProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_router_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_router_name: String?
+    end
+
+    class VirtualRouterSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::VirtualRouterListener],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::VirtualRouterListener]?
+    end
+
+    class VirtualRouterStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class VirtualServiceBackend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_service_name: String,
+        ?client_policy: Types::ClientPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_service_name: String?
+      attr_accessor client_policy: Types::ClientPolicy?
+    end
+
+    class VirtualServiceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_service_name: String,
+        ?spec: Types::VirtualServiceSpec,
+        ?metadata: Types::ResourceMetadata,
+        ?status: Types::VirtualServiceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_service_name: String?
+      attr_accessor spec: Types::VirtualServiceSpec?
+      attr_accessor metadata: Types::ResourceMetadata?
+      attr_accessor status: Types::VirtualServiceStatus?
+    end
+
+    class VirtualServiceProvider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?virtual_node: Types::VirtualNodeServiceProvider,
+        ?virtual_router: Types::VirtualRouterServiceProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: Types::VirtualNodeServiceProvider?
+      attr_accessor virtual_router: Types::VirtualRouterServiceProvider?
+
+      class VirtualNode < VirtualServiceProvider
+      end
+      class VirtualRouter < VirtualServiceProvider
+      end
+      class Unknown < VirtualServiceProvider
+      end
+    end
+
+    class VirtualServiceRef
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mesh_name: String,
+        ?virtual_service_name: String,
+        ?mesh_owner: String,
+        ?resource_owner: String,
+        ?arn: String,
+        ?version: Integer,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mesh_name: String?
+      attr_accessor virtual_service_name: String?
+      attr_accessor mesh_owner: String?
+      attr_accessor resource_owner: String?
+      attr_accessor arn: String?
+      attr_accessor version: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class VirtualServiceSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: Types::VirtualServiceProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: Types::VirtualServiceProvider?
+    end
+
+    class VirtualServiceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class WeightedTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_node: String,
+        ?weight: Integer,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_node: String?
+      attr_accessor weight: Integer?
+      attr_accessor port: Integer?
+    end
+  end
+end

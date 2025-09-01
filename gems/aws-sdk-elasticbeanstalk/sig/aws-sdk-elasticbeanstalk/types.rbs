@@ -1,0 +1,2699 @@
+module Aws::ElasticBeanstalk
+  module Types
+
+    class AbortEnvironmentUpdateMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    module ActionHistoryStatus
+      Completed: String
+      Failed: String
+      Unknown: String
+    end
+
+    module ActionStatus
+      Scheduled: String
+      Pending: String
+      Running: String
+      Unknown: String
+    end
+
+    module ActionType
+      InstanceRefresh: String
+      PlatformUpdate: String
+      Unknown: String
+    end
+
+    class ApplicationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?application_name: String,
+        ?description: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?versions: Array[String],
+        ?configuration_templates: Array[String],
+        ?resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor application_name: String?
+      attr_accessor description: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor versions: Array[String]?
+      attr_accessor configuration_templates: Array[String]?
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig?
+    end
+
+    class ApplicationDescriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationDescription]?
+    end
+
+    class ApplicationMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?request_count: Integer,
+        ?status_codes: Types::StatusCodes,
+        ?latency: Types::Latency,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor request_count: Integer?
+      attr_accessor status_codes: Types::StatusCodes?
+      attr_accessor latency: Types::Latency?
+    end
+
+    class ApplicationResourceLifecycleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_role: String,
+        ?version_lifecycle_config: Types::ApplicationVersionLifecycleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_role: String?
+      attr_accessor version_lifecycle_config: Types::ApplicationVersionLifecycleConfig?
+    end
+
+    class ApplicationResourceLifecycleDescriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig?
+    end
+
+    class ApplicationVersionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_version_arn: String,
+        ?application_name: String,
+        ?description: String,
+        ?version_label: String,
+        ?source_build_information: Types::SourceBuildInformation,
+        ?build_arn: String,
+        ?source_bundle: Types::S3Location,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_version_arn: String?
+      attr_accessor application_name: String?
+      attr_accessor description: String?
+      attr_accessor version_label: String?
+      attr_accessor source_build_information: Types::SourceBuildInformation?
+      attr_accessor build_arn: String?
+      attr_accessor source_bundle: Types::S3Location?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor status: String?
+    end
+
+    class ApplicationVersionDescriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_versions: Array[Types::ApplicationVersionDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_versions: Array[Types::ApplicationVersionDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ApplicationVersionLifecycleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_count_rule: Types::MaxCountRule,
+        ?max_age_rule: Types::MaxAgeRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_count_rule: Types::MaxCountRule?
+      attr_accessor max_age_rule: Types::MaxAgeRule?
+    end
+
+    module ApplicationVersionStatus
+      Processed: String
+      Unprocessed: String
+      Failed: String
+      Processing: String
+      Building: String
+    end
+
+    class ApplyEnvironmentManagedActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor action_id: String?
+    end
+
+    class ApplyEnvironmentManagedActionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_description: String,
+        ?action_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_description: String?
+      attr_accessor action_type: String?
+      attr_accessor status: String?
+    end
+
+    class AssociateEnvironmentOperationsRoleMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor operations_role: String?
+    end
+
+    class AutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class BuildConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_name: String,
+        ?code_build_service_role: String,
+        ?compute_type: String,
+        ?image: String,
+        ?timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_name: String?
+      attr_accessor code_build_service_role: String?
+      attr_accessor compute_type: String?
+      attr_accessor image: String?
+      attr_accessor timeout_in_minutes: Integer?
+    end
+
+    class Builder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CPUUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Float,
+        ?nice: Float,
+        ?system: Float,
+        ?idle: Float,
+        ?io_wait: Float,
+        ?irq: Float,
+        ?soft_irq: Float,
+        ?privileged: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Float?
+      attr_accessor nice: Float?
+      attr_accessor system: Float?
+      attr_accessor idle: Float?
+      attr_accessor io_wait: Float?
+      attr_accessor irq: Float?
+      attr_accessor soft_irq: Float?
+      attr_accessor privileged: Float?
+    end
+
+    class CheckDNSAvailabilityMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cname_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cname_prefix: String?
+    end
+
+    class CheckDNSAvailabilityResultMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available: bool,
+        ?fully_qualified_cname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available: bool?
+      attr_accessor fully_qualified_cname: String?
+    end
+
+    class CodeBuildNotInServiceRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ComposeEnvironmentsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?group_name: String,
+        ?version_labels: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor group_name: String?
+      attr_accessor version_labels: Array[String]?
+    end
+
+    class ComposeEnvironmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::EnvironmentDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::EnvironmentDescription]?
+      attr_accessor next_token: String?
+    end
+
+    module ComputeType
+      BUILD_GENERAL1_SMALL: String
+      BUILD_GENERAL1_MEDIUM: String
+      BUILD_GENERAL1_LARGE: String
+    end
+
+    module ConfigurationDeploymentStatus
+      deployed: String
+      pending: String
+      failed: String
+    end
+
+    class ConfigurationOptionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?name: String,
+        ?default_value: String,
+        ?change_severity: String,
+        ?user_defined: bool,
+        ?value_type: String,
+        ?value_options: Array[String],
+        ?min_value: Integer,
+        ?max_value: Integer,
+        ?max_length: Integer,
+        ?regex: Types::OptionRestrictionRegex,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor default_value: String?
+      attr_accessor change_severity: String?
+      attr_accessor user_defined: bool?
+      attr_accessor value_type: String?
+      attr_accessor value_options: Array[String]?
+      attr_accessor min_value: Integer?
+      attr_accessor max_value: Integer?
+      attr_accessor max_length: Integer?
+      attr_accessor regex: Types::OptionRestrictionRegex?
+    end
+
+    class ConfigurationOptionSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?namespace: String,
+        ?option_name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor namespace: String?
+      attr_accessor option_name: String?
+      attr_accessor value: String?
+    end
+
+    module ConfigurationOptionValueType
+      Scalar: String
+      List: String
+    end
+
+    class ConfigurationSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?application_name: String,
+        ?template_name: String,
+        ?description: String,
+        ?environment_name: String,
+        ?deployment_status: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor environment_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+    end
+
+    class CreateApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?description: String,
+        ?resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor description: String?
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::ApplicationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::ApplicationDescription?
+    end
+
+    class CreateApplicationVersionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_label: String,
+        ?description: String,
+        ?source_build_information: Types::SourceBuildInformation,
+        ?source_bundle: Types::S3Location,
+        ?build_configuration: Types::BuildConfiguration,
+        ?auto_create_application: bool,
+        ?process: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor description: String?
+      attr_accessor source_build_information: Types::SourceBuildInformation?
+      attr_accessor source_bundle: Types::S3Location?
+      attr_accessor build_configuration: Types::BuildConfiguration?
+      attr_accessor auto_create_application: bool?
+      attr_accessor process: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateApplicationVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_version: Types::ApplicationVersionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_version: Types::ApplicationVersionDescription?
+    end
+
+    class CreateConfigurationTemplateMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?source_configuration: Types::SourceConfiguration,
+        ?environment_id: String,
+        ?description: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor environment_id: String?
+      attr_accessor description: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?application_name: String,
+        ?template_name: String,
+        ?description: String,
+        ?environment_name: String,
+        ?deployment_status: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor environment_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+    end
+
+    class CreateEnvironmentMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?environment_name: String,
+        ?group_name: String,
+        ?description: String,
+        ?cname_prefix: String,
+        ?tier: Types::EnvironmentTier,
+        ?tags: Array[Types::Tag],
+        ?version_label: String,
+        ?template_name: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+        ?options_to_remove: Array[Types::OptionSpecification],
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor group_name: String?
+      attr_accessor description: String?
+      attr_accessor cname_prefix: String?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor version_label: String?
+      attr_accessor template_name: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+      attr_accessor options_to_remove: Array[Types::OptionSpecification]?
+      attr_accessor operations_role: String?
+    end
+
+    class CreateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?application_name: String,
+        ?version_label: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?template_name: String,
+        ?description: String,
+        ?endpoint_url: String,
+        ?cname: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?status: String,
+        ?abortable_operation_in_progress: bool,
+        ?health: String,
+        ?health_status: String,
+        ?resources: Types::EnvironmentResourcesDescription,
+        ?tier: Types::EnvironmentTier,
+        ?environment_links: Array[Types::EnvironmentLink],
+        ?environment_arn: String,
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor cname: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor status: String?
+      attr_accessor abortable_operation_in_progress: bool?
+      attr_accessor health: String?
+      attr_accessor health_status: String?
+      attr_accessor resources: Types::EnvironmentResourcesDescription?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor environment_links: Array[Types::EnvironmentLink]?
+      attr_accessor environment_arn: String?
+      attr_accessor operations_role: String?
+    end
+
+    class CreatePlatformVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_name: String,
+        ?platform_version: String,
+        ?platform_definition_bundle: Types::S3Location,
+        ?environment_name: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_name: String?
+      attr_accessor platform_version: String?
+      attr_accessor platform_definition_bundle: Types::S3Location?
+      attr_accessor environment_name: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePlatformVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_summary: Types::PlatformSummary,
+        ?builder: Types::Builder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_summary: Types::PlatformSummary?
+      attr_accessor builder: Types::Builder?
+    end
+
+    class CreateStorageLocationResultMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+    end
+
+    class CustomAmi
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtualization_type: String,
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtualization_type: String?
+      attr_accessor image_id: String?
+    end
+
+    class DeleteApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?terminate_env_by_force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor terminate_env_by_force: bool?
+    end
+
+    class DeleteApplicationVersionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_label: String,
+        ?delete_source_bundle: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor delete_source_bundle: bool?
+    end
+
+    class DeleteConfigurationTemplateMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+    end
+
+    class DeleteEnvironmentConfigurationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor environment_name: String?
+    end
+
+    class DeletePlatformVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_arn: String?
+    end
+
+    class DeletePlatformVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_summary: Types::PlatformSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_summary: Types::PlatformSummary?
+    end
+
+    class Deployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_label: String,
+        ?deployment_id: Integer,
+        ?status: String,
+        ?deployment_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_label: String?
+      attr_accessor deployment_id: Integer?
+      attr_accessor status: String?
+      attr_accessor deployment_time: Time?
+    end
+
+    class DescribeAccountAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_quotas: Types::ResourceQuotas,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_quotas: Types::ResourceQuotas?
+    end
+
+    class DescribeApplicationVersionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_labels: Array[String],
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_labels: Array[String]?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_names: Array[String]?
+    end
+
+    class DescribeConfigurationOptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+        ?environment_name: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?options: Array[Types::OptionSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor options: Array[Types::OptionSpecification]?
+    end
+
+    class DescribeConfigurationOptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?options: Array[Types::ConfigurationOptionDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor options: Array[Types::ConfigurationOptionDescription]?
+    end
+
+    class DescribeConfigurationSettingsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor environment_name: String?
+    end
+
+    class DescribeConfigurationSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_settings: Array[Types::ConfigurationSettingsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_settings: Array[Types::ConfigurationSettingsDescription]?
+    end
+
+    class DescribeEnvironmentHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class DescribeEnvironmentHealthResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?health_status: String,
+        ?status: String,
+        ?color: String,
+        ?causes: Array[String],
+        ?application_metrics: Types::ApplicationMetrics,
+        ?instances_health: Types::InstanceHealthSummary,
+        ?refreshed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor health_status: String?
+      attr_accessor status: String?
+      attr_accessor color: String?
+      attr_accessor causes: Array[String]?
+      attr_accessor application_metrics: Types::ApplicationMetrics?
+      attr_accessor instances_health: Types::InstanceHealthSummary?
+      attr_accessor refreshed_at: Time?
+    end
+
+    class DescribeEnvironmentManagedActionHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+        ?next_token: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class DescribeEnvironmentManagedActionHistoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_action_history_items: Array[Types::ManagedActionHistoryItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_action_history_items: Array[Types::ManagedActionHistoryItem]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEnvironmentManagedActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor status: String?
+    end
+
+    class DescribeEnvironmentManagedActionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_actions: Array[Types::ManagedAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_actions: Array[Types::ManagedAction]?
+    end
+
+    class DescribeEnvironmentResourcesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class DescribeEnvironmentsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_label: String,
+        ?environment_ids: Array[String],
+        ?environment_names: Array[String],
+        ?include_deleted: bool,
+        ?included_deleted_back_to: Time,
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor environment_ids: Array[String]?
+      attr_accessor environment_names: Array[String]?
+      attr_accessor include_deleted: bool?
+      attr_accessor included_deleted_back_to: Time?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEnvironmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::EnvironmentDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::EnvironmentDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_label: String,
+        ?template_name: String,
+        ?environment_id: String,
+        ?environment_name: String,
+        ?platform_arn: String,
+        ?request_id: String,
+        ?severity: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor template_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor request_id: String?
+      attr_accessor severity: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeInstancesHealthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?attribute_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor attribute_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeInstancesHealthResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_health_list: Array[Types::SingleInstanceHealth],
+        ?refreshed_at: Time,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_health_list: Array[Types::SingleInstanceHealth]?
+      attr_accessor refreshed_at: Time?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePlatformVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_arn: String?
+    end
+
+    class DescribePlatformVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_description: Types::PlatformDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_description: Types::PlatformDescription?
+    end
+
+    class DisassociateEnvironmentOperationsRoleMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+    end
+
+    class ElasticBeanstalkServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EnvironmentDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?application_name: String,
+        ?version_label: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?template_name: String,
+        ?description: String,
+        ?endpoint_url: String,
+        ?cname: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?status: String,
+        ?abortable_operation_in_progress: bool,
+        ?health: String,
+        ?health_status: String,
+        ?resources: Types::EnvironmentResourcesDescription,
+        ?tier: Types::EnvironmentTier,
+        ?environment_links: Array[Types::EnvironmentLink],
+        ?environment_arn: String,
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor cname: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor status: String?
+      attr_accessor abortable_operation_in_progress: bool?
+      attr_accessor health: String?
+      attr_accessor health_status: String?
+      attr_accessor resources: Types::EnvironmentResourcesDescription?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor environment_links: Array[Types::EnvironmentLink]?
+      attr_accessor environment_arn: String?
+      attr_accessor operations_role: String?
+    end
+
+    module EnvironmentHealth
+      Green: String
+      Yellow: String
+      Red: String
+      Grey: String
+    end
+
+    module EnvironmentHealthAttribute
+      Status: String
+      Color: String
+      Causes: String
+      ApplicationMetrics: String
+      InstancesHealth: String
+      All: String
+      HealthStatus: String
+      RefreshedAt: String
+    end
+
+    module EnvironmentHealthStatus
+      NoData: String
+      Unknown: String
+      Pending: String
+      Ok: String
+      Info: String
+      Warning: String
+      Degraded: String
+      Severe: String
+      Suspended: String
+    end
+
+    class EnvironmentInfoDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?info_type: String,
+        ?ec2_instance_id: String,
+        ?sample_timestamp: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor info_type: String?
+      attr_accessor ec2_instance_id: String?
+      attr_accessor sample_timestamp: Time?
+      attr_accessor message: String?
+    end
+
+    module EnvironmentInfoType
+      tail: String
+      bundle: String
+    end
+
+    class EnvironmentLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_name: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_name: String?
+      attr_accessor environment_name: String?
+    end
+
+    class EnvironmentResourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?auto_scaling_groups: Array[Types::AutoScalingGroup],
+        ?instances: Array[Types::Instance],
+        ?launch_configurations: Array[Types::LaunchConfiguration],
+        ?launch_templates: Array[Types::LaunchTemplate],
+        ?load_balancers: Array[Types::LoadBalancer],
+        ?triggers: Array[Types::Trigger],
+        ?queues: Array[Types::Queue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor auto_scaling_groups: Array[Types::AutoScalingGroup]?
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor launch_configurations: Array[Types::LaunchConfiguration]?
+      attr_accessor launch_templates: Array[Types::LaunchTemplate]?
+      attr_accessor load_balancers: Array[Types::LoadBalancer]?
+      attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor queues: Array[Types::Queue]?
+    end
+
+    class EnvironmentResourceDescriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_resources: Types::EnvironmentResourceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_resources: Types::EnvironmentResourceDescription?
+    end
+
+    class EnvironmentResourcesDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer: Types::LoadBalancerDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer: Types::LoadBalancerDescription?
+    end
+
+    module EnvironmentStatus
+      Aborting: String
+      Launching: String
+      Updating: String
+      LinkingFrom: String
+      LinkingTo: String
+      Ready: String
+      Terminating: String
+      Terminated: String
+    end
+
+    class EnvironmentTier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor version: String?
+    end
+
+    class EventDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_date: Time,
+        ?message: String,
+        ?application_name: String,
+        ?version_label: String,
+        ?template_name: String,
+        ?environment_name: String,
+        ?platform_arn: String,
+        ?request_id: String,
+        ?severity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_date: Time?
+      attr_accessor message: String?
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor template_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor request_id: String?
+      attr_accessor severity: String?
+    end
+
+    class EventDescriptionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::EventDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::EventDescription]?
+      attr_accessor next_token: String?
+    end
+
+    module EventSeverity
+      TRACE: String
+      DEBUG: String
+      INFO: String
+      WARN: String
+      ERROR: String
+      FATAL: String
+    end
+
+    module FailureType
+      UpdateCancelled: String
+      CancellationFailed: String
+      RollbackFailed: String
+      RollbackSuccessful: String
+      InternalFailure: String
+      InvalidEnvironmentState: String
+      PermissionsError: String
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class InstanceHealthSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?no_data: Integer,
+        ?unknown: Integer,
+        ?pending: Integer,
+        ?ok: Integer,
+        ?info: Integer,
+        ?warning: Integer,
+        ?degraded: Integer,
+        ?severe: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor no_data: Integer?
+      attr_accessor unknown: Integer?
+      attr_accessor pending: Integer?
+      attr_accessor ok: Integer?
+      attr_accessor info: Integer?
+      attr_accessor warning: Integer?
+      attr_accessor degraded: Integer?
+      attr_accessor severe: Integer?
+    end
+
+    module InstancesHealthAttribute
+      HealthStatus: String
+      Color: String
+      Causes: String
+      ApplicationMetrics: String
+      RefreshedAt: String
+      LaunchedAt: String
+      System: String
+      Deployment: String
+      AvailabilityZone: String
+      InstanceType: String
+      All: String
+    end
+
+    class InsufficientPrivilegesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Latency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?p999: Float,
+        ?p99: Float,
+        ?p95: Float,
+        ?p90: Float,
+        ?p85: Float,
+        ?p75: Float,
+        ?p50: Float,
+        ?p10: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor p999: Float?
+      attr_accessor p99: Float?
+      attr_accessor p95: Float?
+      attr_accessor p90: Float?
+      attr_accessor p85: Float?
+      attr_accessor p75: Float?
+      attr_accessor p50: Float?
+      attr_accessor p10: Float?
+    end
+
+    class LaunchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class LaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ListAvailableSolutionStacksResultMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stacks: Array[String],
+        ?solution_stack_details: Array[Types::SolutionStackDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stacks: Array[String]?
+      attr_accessor solution_stack_details: Array[Types::SolutionStackDescription]?
+    end
+
+    class ListPlatformBranchesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::SearchFilter],
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::SearchFilter]?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlatformBranchesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_branch_summary_list: Array[Types::PlatformBranchSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_branch_summary_list: Array[Types::PlatformBranchSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlatformVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::PlatformFilter],
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::PlatformFilter]?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlatformVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_summary_list: Array[Types::PlatformSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_summary_list: Array[Types::PlatformSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class Listener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor port: Integer?
+    end
+
+    class LoadBalancer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class LoadBalancerDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_balancer_name: String,
+        ?domain: String,
+        ?listeners: Array[Types::Listener],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_balancer_name: String?
+      attr_accessor domain: String?
+      attr_accessor listeners: Array[Types::Listener]?
+    end
+
+    class ManagedAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_description: String,
+        ?action_type: String,
+        ?status: String,
+        ?window_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_description: String?
+      attr_accessor action_type: String?
+      attr_accessor status: String?
+      attr_accessor window_start_time: Time?
+    end
+
+    class ManagedActionHistoryItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_type: String,
+        ?action_description: String,
+        ?failure_type: String,
+        ?status: String,
+        ?failure_description: String,
+        ?executed_time: Time,
+        ?finished_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_type: String?
+      attr_accessor action_description: String?
+      attr_accessor failure_type: String?
+      attr_accessor status: String?
+      attr_accessor failure_description: String?
+      attr_accessor executed_time: Time?
+      attr_accessor finished_time: Time?
+    end
+
+    class ManagedActionInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxAgeRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?max_age_in_days: Integer,
+        ?delete_source_from_s3: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor max_age_in_days: Integer?
+      attr_accessor delete_source_from_s3: bool?
+    end
+
+    class MaxCountRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?max_count: Integer,
+        ?delete_source_from_s3: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor max_count: Integer?
+      attr_accessor delete_source_from_s3: bool?
+    end
+
+    class OperationInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OptionRestrictionRegex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern: String,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern: String?
+      attr_accessor label: String?
+    end
+
+    class OptionSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_name: String,
+        ?namespace: String,
+        ?option_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_name: String?
+      attr_accessor namespace: String?
+      attr_accessor option_name: String?
+    end
+
+    class PlatformBranchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_name: String,
+        ?branch_name: String,
+        ?lifecycle_state: String,
+        ?branch_order: Integer,
+        ?supported_tier_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_name: String?
+      attr_accessor branch_name: String?
+      attr_accessor lifecycle_state: String?
+      attr_accessor branch_order: Integer?
+      attr_accessor supported_tier_list: Array[String]?
+    end
+
+    class PlatformDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_arn: String,
+        ?platform_owner: String,
+        ?platform_name: String,
+        ?platform_version: String,
+        ?solution_stack_name: String,
+        ?platform_status: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?platform_category: String,
+        ?description: String,
+        ?maintainer: String,
+        ?operating_system_name: String,
+        ?operating_system_version: String,
+        ?programming_languages: Array[Types::PlatformProgrammingLanguage],
+        ?frameworks: Array[Types::PlatformFramework],
+        ?custom_ami_list: Array[Types::CustomAmi],
+        ?supported_tier_list: Array[String],
+        ?supported_addon_list: Array[String],
+        ?platform_lifecycle_state: String,
+        ?platform_branch_name: String,
+        ?platform_branch_lifecycle_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_arn: String?
+      attr_accessor platform_owner: String?
+      attr_accessor platform_name: String?
+      attr_accessor platform_version: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_status: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor platform_category: String?
+      attr_accessor description: String?
+      attr_accessor maintainer: String?
+      attr_accessor operating_system_name: String?
+      attr_accessor operating_system_version: String?
+      attr_accessor programming_languages: Array[Types::PlatformProgrammingLanguage]?
+      attr_accessor frameworks: Array[Types::PlatformFramework]?
+      attr_accessor custom_ami_list: Array[Types::CustomAmi]?
+      attr_accessor supported_tier_list: Array[String]?
+      attr_accessor supported_addon_list: Array[String]?
+      attr_accessor platform_lifecycle_state: String?
+      attr_accessor platform_branch_name: String?
+      attr_accessor platform_branch_lifecycle_state: String?
+    end
+
+    class PlatformFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class PlatformFramework
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    class PlatformProgrammingLanguage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    module PlatformStatus
+      Creating: String
+      Failed: String
+      Ready: String
+      Deleting: String
+      Deleted: String
+    end
+
+    class PlatformSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform_arn: String,
+        ?platform_owner: String,
+        ?platform_status: String,
+        ?platform_category: String,
+        ?operating_system_name: String,
+        ?operating_system_version: String,
+        ?supported_tier_list: Array[String],
+        ?supported_addon_list: Array[String],
+        ?platform_lifecycle_state: String,
+        ?platform_version: String,
+        ?platform_branch_name: String,
+        ?platform_branch_lifecycle_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform_arn: String?
+      attr_accessor platform_owner: String?
+      attr_accessor platform_status: String?
+      attr_accessor platform_category: String?
+      attr_accessor operating_system_name: String?
+      attr_accessor operating_system_version: String?
+      attr_accessor supported_tier_list: Array[String]?
+      attr_accessor supported_addon_list: Array[String]?
+      attr_accessor platform_lifecycle_state: String?
+      attr_accessor platform_version: String?
+      attr_accessor platform_branch_name: String?
+      attr_accessor platform_branch_lifecycle_state: String?
+    end
+
+    class PlatformVersionStillReferencedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Queue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class RebuildEnvironmentMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class RequestEnvironmentInfoMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+        ?info_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor info_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceQuota
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum: Integer?
+    end
+
+    class ResourceQuotas
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_quota: Types::ResourceQuota,
+        ?application_version_quota: Types::ResourceQuota,
+        ?environment_quota: Types::ResourceQuota,
+        ?configuration_template_quota: Types::ResourceQuota,
+        ?custom_platform_quota: Types::ResourceQuota,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_quota: Types::ResourceQuota?
+      attr_accessor application_version_quota: Types::ResourceQuota?
+      attr_accessor environment_quota: Types::ResourceQuota?
+      attr_accessor configuration_template_quota: Types::ResourceQuota?
+      attr_accessor custom_platform_quota: Types::ResourceQuota?
+    end
+
+    class ResourceTagsDescriptionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tags: Array[Types::Tag]?
+    end
+
+    class ResourceTypeNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestartAppServerMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+    end
+
+    class RetrieveEnvironmentInfoMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+        ?info_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor info_type: String?
+    end
+
+    class RetrieveEnvironmentInfoResultMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_info: Array[Types::EnvironmentInfoDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_info: Array[Types::EnvironmentInfoDescription]?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+    end
+
+    class S3LocationNotInServiceRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3SubscriptionRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SearchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SingleInstanceHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?health_status: String,
+        ?color: String,
+        ?causes: Array[String],
+        ?launched_at: Time,
+        ?application_metrics: Types::ApplicationMetrics,
+        ?system: Types::SystemStatus,
+        ?deployment: Types::Deployment,
+        ?availability_zone: String,
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor health_status: String?
+      attr_accessor color: String?
+      attr_accessor causes: Array[String]?
+      attr_accessor launched_at: Time?
+      attr_accessor application_metrics: Types::ApplicationMetrics?
+      attr_accessor system: Types::SystemStatus?
+      attr_accessor deployment: Types::Deployment?
+      attr_accessor availability_zone: String?
+      attr_accessor instance_type: String?
+    end
+
+    class SolutionStackDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stack_name: String,
+        ?permitted_file_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stack_name: String?
+      attr_accessor permitted_file_types: Array[String]?
+    end
+
+    class SourceBuildInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_repository: String,
+        ?source_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_repository: String?
+      attr_accessor source_location: String?
+    end
+
+    class SourceBundleDeletionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+    end
+
+    module SourceRepository
+      CodeCommit: String
+      S3: String
+    end
+
+    module SourceType
+      Git: String
+      Zip: String
+    end
+
+    class StatusCodes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status2xx: Integer,
+        ?status3xx: Integer,
+        ?status4xx: Integer,
+        ?status5xx: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status2xx: Integer?
+      attr_accessor status3xx: Integer?
+      attr_accessor status4xx: Integer?
+      attr_accessor status5xx: Integer?
+    end
+
+    class SwapEnvironmentCNAMEsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_environment_id: String,
+        ?source_environment_name: String,
+        ?destination_environment_id: String,
+        ?destination_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_environment_id: String?
+      attr_accessor source_environment_name: String?
+      attr_accessor destination_environment_id: String?
+      attr_accessor destination_environment_name: String?
+    end
+
+    class SystemStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_utilization: Types::CPUUtilization,
+        ?load_average: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_utilization: Types::CPUUtilization?
+      attr_accessor load_average: Array[Float]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TerminateEnvironmentMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?environment_name: String,
+        ?terminate_resources: bool,
+        ?force_terminate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor terminate_resources: bool?
+      attr_accessor force_terminate: bool?
+    end
+
+    class TerminateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?application_name: String,
+        ?version_label: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?template_name: String,
+        ?description: String,
+        ?endpoint_url: String,
+        ?cname: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?status: String,
+        ?abortable_operation_in_progress: bool,
+        ?health: String,
+        ?health_status: String,
+        ?resources: Types::EnvironmentResourcesDescription,
+        ?tier: Types::EnvironmentTier,
+        ?environment_links: Array[Types::EnvironmentLink],
+        ?environment_arn: String,
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor cname: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor status: String?
+      attr_accessor abortable_operation_in_progress: bool?
+      attr_accessor health: String?
+      attr_accessor health_status: String?
+      attr_accessor resources: Types::EnvironmentResourcesDescription?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor environment_links: Array[Types::EnvironmentLink]?
+      attr_accessor environment_arn: String?
+      attr_accessor operations_role: String?
+    end
+
+    class TooManyApplicationVersionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyApplicationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyBucketsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyConfigurationTemplatesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyEnvironmentsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyPlatformsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Trigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class UpdateApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::ApplicationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::ApplicationDescription?
+    end
+
+    class UpdateApplicationResourceLifecycleMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig?
+    end
+
+    class UpdateApplicationVersionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?version_label: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateApplicationVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_version: Types::ApplicationVersionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_version: Types::ApplicationVersionDescription?
+    end
+
+    class UpdateConfigurationTemplateMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+        ?description: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+        ?options_to_remove: Array[Types::OptionSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+      attr_accessor options_to_remove: Array[Types::OptionSpecification]?
+    end
+
+    class UpdateConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?application_name: String,
+        ?template_name: String,
+        ?description: String,
+        ?environment_name: String,
+        ?deployment_status: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor environment_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+    end
+
+    class UpdateEnvironmentMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?environment_id: String,
+        ?environment_name: String,
+        ?group_name: String,
+        ?description: String,
+        ?tier: Types::EnvironmentTier,
+        ?version_label: String,
+        ?template_name: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+        ?options_to_remove: Array[Types::OptionSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor environment_name: String?
+      attr_accessor group_name: String?
+      attr_accessor description: String?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor version_label: String?
+      attr_accessor template_name: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+      attr_accessor options_to_remove: Array[Types::OptionSpecification]?
+    end
+
+    class UpdateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?environment_id: String,
+        ?application_name: String,
+        ?version_label: String,
+        ?solution_stack_name: String,
+        ?platform_arn: String,
+        ?template_name: String,
+        ?description: String,
+        ?endpoint_url: String,
+        ?cname: String,
+        ?date_created: Time,
+        ?date_updated: Time,
+        ?status: String,
+        ?abortable_operation_in_progress: bool,
+        ?health: String,
+        ?health_status: String,
+        ?resources: Types::EnvironmentResourcesDescription,
+        ?tier: Types::EnvironmentTier,
+        ?environment_links: Array[Types::EnvironmentLink],
+        ?environment_arn: String,
+        ?operations_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_name: String?
+      attr_accessor version_label: String?
+      attr_accessor solution_stack_name: String?
+      attr_accessor platform_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor cname: String?
+      attr_accessor date_created: Time?
+      attr_accessor date_updated: Time?
+      attr_accessor status: String?
+      attr_accessor abortable_operation_in_progress: bool?
+      attr_accessor health: String?
+      attr_accessor health_status: String?
+      attr_accessor resources: Types::EnvironmentResourcesDescription?
+      attr_accessor tier: Types::EnvironmentTier?
+      attr_accessor environment_links: Array[Types::EnvironmentLink]?
+      attr_accessor environment_arn: String?
+      attr_accessor operations_role: String?
+    end
+
+    class UpdateTagsForResourceMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags_to_add: Array[Types::Tag],
+        ?tags_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags_to_add: Array[Types::Tag]?
+      attr_accessor tags_to_remove: Array[String]?
+    end
+
+    class ValidateConfigurationSettingsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?template_name: String,
+        ?environment_name: String,
+        ?option_settings: Array[Types::ConfigurationOptionSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor template_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor option_settings: Array[Types::ConfigurationOptionSetting]?
+    end
+
+    class ValidateConfigurationSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::ValidationMessage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::ValidationMessage]?
+    end
+
+    class ValidationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?severity: String,
+        ?namespace: String,
+        ?option_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor severity: String?
+      attr_accessor namespace: String?
+      attr_accessor option_name: String?
+    end
+
+    module ValidationSeverity
+      error: String
+      warning: String
+    end
+  end
+end
